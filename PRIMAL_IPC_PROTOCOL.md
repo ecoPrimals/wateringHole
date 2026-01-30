@@ -1,9 +1,26 @@
-# 🌍 Primal IPC Protocol Standard v1.0
+# 🌍 Primal IPC Protocol Standard
 
 **Status**: Official Ecosystem Standard  
-**Version**: 1.0.0  
-**Date**: January 19, 2026  
+**Version**: 2.0.0 (Platform-Agnostic Evolution)  
+**v1.0**: January 19, 2026 (Unix-focused)  
+**v2.0**: January 30, 2026 (Platform-agnostic)  
 **Authority**: wateringHole (ecoPrimals Core Standards)
+
+---
+
+## 📢 **v2.0 UPDATE: Platform-Agnostic Transports** (January 30, 2026)
+
+**Evolution**: From Unix-centric to universal platform support
+
+**What Changed:**
+- ✅ Multiple transport support (Unix, abstract, TCP, named pipes, XPC, etc.)
+- ✅ Runtime transport discovery (automatic platform detection)
+- ✅ Graceful fallback (prefer native, fall back to TCP)
+- ✅ Zero platform assumptions (no hardcoded paths)
+
+**Backward Compatibility**: v1.0 behavior (Unix sockets) is v2.0's preferred transport on Linux/macOS
+
+See "Platform-Agnostic Transports (v2.0)" section below for details.
 
 ---
 
@@ -25,14 +42,21 @@ Define a universal, platform-agnostic IPC protocol that enables autonomous prima
 - ✅ Standard protocol enables interoperability
 - ❌ Cross-embedding is prohibited
 
-### **2. Platform Universality**
+### **2. Platform Universality** (Updated v2.0)
 
-> "Write once, run everywhere: Linux, macOS, Windows, RISC-V, embedded."
+> "Write once, run everywhere: Linux, Android, macOS, Windows, iOS, WASM, embedded."
 
-- ✅ Always use Unix socket API (tokio provides this everywhere!)
-- ✅ Standard namespace: `/primal/*`
-- ✅ Platform handled by runtime (tokio, OS)
-- ❌ No `#[cfg(unix)]` or `#[cfg(windows)]` in application code
+**v1.0 Approach (Unix-focused):**
+- ✅ Unix socket API via tokio
+- ⚠️ Assumed Unix sockets available on all platforms
+- ⚠️ Limited to Unix-like systems
+
+**v2.0 Approach (Platform-agnostic):**
+- ✅ Multiple transport support (Unix, abstract, TCP, named pipes, XPC, etc.)
+- ✅ Runtime transport discovery (automatic platform detection)
+- ✅ Graceful fallback (prefer native, fall back to TCP localhost)
+- ✅ Zero platform assumptions (no `#[cfg(unix)]` or hardcoded paths)
+- ✅ Universal: Works on Linux, Android, Windows, macOS, iOS, WASM, embedded
 
 ### **3. Capability-Based Discovery**
 
