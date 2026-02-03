@@ -2,7 +2,7 @@
 
 **Purpose**: Central repository for cross-primal documentation, standards, and shared knowledge  
 **Audience**: All primals in the ecosystem  
-**Last Updated**: January 26, 2026
+**Last Updated**: February 3, 2026
 
 ---
 
@@ -19,26 +19,29 @@ The Watering Hole is where **all primals come to learn, share, and align**. Just
 
 ---
 
-## 🏆 Current Ecosystem Status (Jan 26, 2026)
+## 🏆 Current Ecosystem Status (Feb 3, 2026)
 
-### Tower Atomic PRODUCTION READY ✅
+### NUCLEUS Architecture OPERATIONAL ✅
 
 | Metric | Value |
 |--------|-------|
 | **TLS 1.3 Validation** | 93% (81/87 sites) |
-| **Web Compatibility** | 96% |
-| **Cipher Suites** | 100% (all 3 mandatory) |
-| **Pure Rust** | 100% |
+| **Pure Rust** | 100% (all 6 primals) |
+| **Platform Coverage** | Universal (x86_64, aarch64, Android) |
+| **Deployment Standard** | v1.0 (deterministic) |
 
 ### ecoBin Status
 
-| Primal | Status | Notes |
-|--------|--------|-------|
-| **BearDog** | ✅ ecoBin | SHA-384 complete (`964babd25`) |
-| **Songbird** | ✅ ecoBin | TLS 1.3 + User-Agent (`eaa1dda9d`) |
-| **NestGate** | ✅ ecoBin | Reference implementation |
-| **biomeOS** | ✅ ecoBin | Graph-based deployment |
-| **sourDough** | ✅ ecoBin | Scaffolding primal |
+| Primal | ecoBin | IPC | Notes |
+|--------|--------|-----|-------|
+| **BearDog** | ✅ v2.0 | Isomorphic | Reference implementation |
+| **Songbird** | ✅ v2.0 | Isomorphic | Pure Rust TLS 1.3 |
+| **Toadstool** | ✅ v2.0 | Isomorphic | Compute orchestration |
+| **Squirrel** | ✅ v2.0 | Universal | AI via Tower Atomic |
+| **NestGate** | ⚠️ Partial | Isomorphic | Needs socket-only default |
+| **biomeOS** | ✅ v2.0 | Neural API | Graph-based deployment |
+
+**5/6 primals fully compliant** - See [`biomeOS/docs/handoffs/PRIMAL_EVOLUTION_STATUS_FEB03_2026.md`](../phase2/biomeOS/docs/handoffs/PRIMAL_EVOLUTION_STATUS_FEB03_2026.md)
 
 ---
 
@@ -84,6 +87,31 @@ The Watering Hole is where **all primals come to learn, share, and align**. Just
 - ✅ Platform universal (tokio)
 
 **Status**: ✅ Ecosystem Standard
+
+---
+
+#### **Primal Deployment Standard** (Deployment Standard) - NEW
+
+**Location**: [`biomeOS/specs/PRIMAL_DEPLOYMENT_STANDARD.md`](../phase2/biomeOS/specs/PRIMAL_DEPLOYMENT_STANDARD.md)
+
+**What**: Deterministic primal behavior across all architectures
+
+**Key Concepts**:
+- ✅ 5-tier socket path resolution
+- ✅ Same behavior on x86_64 and aarch64
+- ✅ Unix sockets first, TCP fallback
+- ✅ No HTTP by default (socket-only)
+
+**Socket Resolution Order**:
+```
+1. $PRIMAL_SOCKET           (explicit override)
+2. $XDG_RUNTIME_DIR/biomeos/
+3. /run/user/$UID/biomeos/
+4. /data/local/tmp/biomeos/  (Android)
+5. /tmp/biomeos/             (fallback)
+```
+
+**Status**: ✅ Ecosystem Standard (v1.0 - Feb 3, 2026)
 
 ---
 
@@ -160,9 +188,11 @@ The Watering Hole is where **all primals come to learn, share, and align**. Just
 | **Understand binary architecture** | `UNIBIN_ARCHITECTURE_STANDARD.md` |
 | **Achieve ecoBin compliance** | `ECOBIN_ARCHITECTURE_STANDARD.md` |
 | **Implement IPC** | `PRIMAL_IPC_PROTOCOL.md` |
+| **Deploy across platforms** | `biomeOS/specs/PRIMAL_DEPLOYMENT_STANDARD.md` |
 | **Name methods correctly** | `SEMANTIC_METHOD_NAMING_STANDARD.md` |
 | **Integrate TLS** | `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` |
 | **Use BearDog crypto** | `btsp/BEARDOG_TECHNICAL_STACK.md` |
+| **Understand evolution path** | `biomeOS/specs/EVOLUTION_PATH.md` |
 
 ---
 
@@ -171,11 +201,13 @@ The Watering Hole is where **all primals come to learn, share, and align**. Just
 | Knowledge Area | Status | Last Updated | Coverage |
 |----------------|--------|--------------|----------|
 | UniBin Architecture | ✅ Complete | Jan 16, 2026 | 100% |
-| ecoBin Architecture | ✅ Complete | Jan 24, 2026 | 100% |
+| ecoBin Architecture | ✅ Complete | Jan 30, 2026 | 100% |
 | Primal IPC Protocol | ✅ Complete | Jan 19, 2026 | 100% |
+| **Deployment Standard** | ✅ Complete | Feb 3, 2026 | 100% |
+| **Evolution Path** | ✅ Complete | Feb 3, 2026 | 100% |
 | Semantic Naming | ✅ Complete | Jan 25, 2026 | 100% |
 | BTSP (BearDog) | ✅ Complete | Jan 26, 2026 | 100% |
-| BirdSong Protocol | ✅ Complete | Jan 3, 2026 | 100% |
+| BirdSong Protocol | ✅ Complete | Feb 2, 2026 | 100% |
 | Songbird TLS | ✅ Complete | Jan 26, 2026 | 100% |
 | PetalTongue | ✅ Complete | Jan 3, 2026 | 100% |
 
