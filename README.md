@@ -38,10 +38,10 @@ The Watering Hole is where **all primals come to learn, share, and align**. Just
 | **Songbird** | ✅ v2.0 | Isomorphic | Pure Rust TLS 1.3 |
 | **Toadstool** | ✅ v2.0 | Isomorphic | Compute orchestration |
 | **Squirrel** | ✅ v2.0 | Universal | AI via Tower Atomic |
-| **NestGate** | ⚠️ Partial | Isomorphic | Needs socket-only default |
+| **NestGate** | ✅ v2.0 | Isomorphic | Socket-only default ✓ |
 | **biomeOS** | ✅ v2.0 | Neural API | Graph-based deployment |
 
-**5/6 primals fully compliant** - See [`biomeOS/docs/handoffs/PRIMAL_EVOLUTION_STATUS_FEB03_2026.md`](../phase2/biomeOS/docs/handoffs/PRIMAL_EVOLUTION_STATUS_FEB03_2026.md)
+**6/6 primals fully compliant** - See [`biomeOS/docs/handoffs/PRIMAL_EVOLUTION_STATUS_FEB03_2026.md`](../phase2/biomeOS/docs/handoffs/PRIMAL_EVOLUTION_STATUS_FEB03_2026.md)
 
 ---
 
@@ -86,7 +86,30 @@ The Watering Hole is where **all primals come to learn, share, and align**. Just
 - ✅ Zero cross-embedding
 - ✅ Platform universal (tokio)
 
-**Status**: ✅ Ecosystem Standard
+**Status**: ✅ Ecosystem Standard (v2.0)
+
+---
+
+#### **Universal IPC Standard** (Behavioral Standard) - NEW Feb 3, 2026
+
+**Location**: `UNIVERSAL_IPC_STANDARD_V3.md`
+
+**What**: Behavioral specification for platform-agnostic IPC that each primal implements independently
+
+**Key Concepts**:
+- ✅ Each primal owns their IPC code (NO shared crate)
+- ✅ Standards define WHAT, primals implement HOW
+- ✅ Multi-transport (Unix, Abstract, TCP, Named Pipe)
+- ✅ Runtime transport discovery
+- ✅ Graceful fallback (Tier 1 → Tier 2)
+- ✅ Protocol alignment (JSON-RPC 2.0, optional tarpc)
+
+**Core Principle**: 
+> "Primals are autonomous organisms that communicate via PROTOCOLS, not by embedding each other's code."
+
+**Handoff**: `handoffs/UNIVERSAL_IPC_EVOLUTION_HANDOFF.md`
+
+**Status**: 📝 PROPOSED (Each primal evolves independently)
 
 ---
 
@@ -188,6 +211,7 @@ The Watering Hole is where **all primals come to learn, share, and align**. Just
 | **Understand binary architecture** | `UNIBIN_ARCHITECTURE_STANDARD.md` |
 | **Achieve ecoBin compliance** | `ECOBIN_ARCHITECTURE_STANDARD.md` |
 | **Implement IPC** | `PRIMAL_IPC_PROTOCOL.md` |
+| **Use unified IPC (NEW)** | `UNIVERSAL_IPC_STANDARD_V3.md` |
 | **Deploy across platforms** | `biomeOS/specs/PRIMAL_DEPLOYMENT_STANDARD.md` |
 | **Name methods correctly** | `SEMANTIC_METHOD_NAMING_STANDARD.md` |
 | **Integrate TLS** | `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` |
@@ -203,6 +227,7 @@ The Watering Hole is where **all primals come to learn, share, and align**. Just
 | UniBin Architecture | ✅ Complete | Jan 16, 2026 | 100% |
 | ecoBin Architecture | ✅ Complete | Jan 30, 2026 | 100% |
 | Primal IPC Protocol | ✅ Complete | Jan 19, 2026 | 100% |
+| **Universal IPC v3** | 📝 Proposed | Feb 3, 2026 | Spec complete |
 | **Deployment Standard** | ✅ Complete | Feb 3, 2026 | 100% |
 | **Evolution Path** | ✅ Complete | Feb 3, 2026 | 100% |
 | Semantic Naming | ✅ Complete | Jan 25, 2026 | 100% |
@@ -277,6 +302,7 @@ Squirrel → capability.call("crypto", "sha256") → Neural API → BearDog
 
 ### In Progress ⏳
 
+- **Universal IPC v3** - Each primal evolving toward standard (spec complete)
 - Songbird TLS 1.2 fallback (npm, Jenkins)
 - Terraria testing system
 - Apoptosis graceful shutdown
@@ -289,8 +315,12 @@ Squirrel → capability.call("crypto", "sha256") → Neural API → BearDog
 - **UniBin** → `UNIBIN_ARCHITECTURE_STANDARD.md`
 - **ecoBin** → `ECOBIN_ARCHITECTURE_STANDARD.md`
 - **IPC Protocol** → `PRIMAL_IPC_PROTOCOL.md`
+- **Universal IPC v3** → `UNIVERSAL_IPC_STANDARD_V3.md` (NEW)
 - **Semantic Naming** → `SEMANTIC_METHOD_NAMING_STANDARD.md`
 - **genomeBin** → `GENOMEBIN_ARCHITECTURE_STANDARD.md`
+
+### Handoffs
+- **Universal IPC Evolution** → `handoffs/UNIVERSAL_IPC_EVOLUTION_HANDOFF.md`
 
 ### By Primal
 - **BearDog** → `btsp/BEARDOG_TECHNICAL_STACK.md`
@@ -328,7 +358,7 @@ Historical documents are preserved in `archive/`:
 
 **Status**: 🎊 **PRODUCTION READY** - Tower Atomic 93% TLS Validated  
 **Coverage**: All standards complete (100%)  
-**Pure Rust**: 5/5 core primals ecoBin compliant
+**Pure Rust**: 6/6 primals ecoBin compliant
 
 💧 **Welcome to the Watering Hole - Where Primals Gather to Learn and Grow** 🌸
 
