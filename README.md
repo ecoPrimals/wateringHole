@@ -1,367 +1,316 @@
-# 💧 The Watering Hole - ecoPrimal Knowledge Hub
+# The Watering Hole - ecoPrimals Ecosystem Guidance
 
-**Purpose**: Central repository for cross-primal documentation, standards, and shared knowledge  
-**Audience**: All primals in the ecosystem  
-**Last Updated**: February 3, 2026
-
----
-
-## 🎯 What is the Watering Hole?
-
-The Watering Hole is where **all primals come to learn, share, and align**. Just like animals gather at a watering hole in nature, our primals gather here to:
-
-- **Learn** about other primals' capabilities and APIs
-- **Share** technical specifications and protocols
-- **Align** on shared goals and standards
-- **Reference** authoritative documentation
-
-**Key Principle**: Any primal can read and contribute to the Watering Hole.
+**Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
+**Audience**: Any primal, at any point in its evolution  
+**Last Updated**: February 7, 2026
 
 ---
 
-## 🏆 Current Ecosystem Status (Feb 3, 2026)
+## What is the Watering Hole?
 
-### NUCLEUS Architecture OPERATIONAL ✅
+The Watering Hole is the shared knowledge layer of the ecoPrimals project. Every primal - whether newly conceived or production-hardened - comes here to understand the ecosystem it belongs to: what other primals exist, what standards govern interoperability, how coordination works, and what principles guide evolution.
 
-| Metric | Value |
-|--------|-------|
-| **TLS 1.3 Validation** | 93% (81/87 sites) |
-| **Pure Rust** | 100% (all 6 primals) |
-| **Platform Coverage** | Universal (x86_64, aarch64, Android) |
-| **Deployment Standard** | v1.0 (deterministic) |
-
-### ecoBin Status
-
-| Primal | ecoBin | IPC | Notes |
-|--------|--------|-----|-------|
-| **BearDog** | ✅ v2.0 | Isomorphic | Reference implementation |
-| **Songbird** | ✅ v2.0 | Isomorphic | Pure Rust TLS 1.3 |
-| **Toadstool** | ✅ v2.0 | Isomorphic | Compute orchestration |
-| **Squirrel** | ✅ v2.0 | Universal | AI via Tower Atomic |
-| **NestGate** | ✅ v2.0 | Isomorphic | Socket-only default ✓ |
-| **biomeOS** | ✅ v2.0 | Neural API | Graph-based deployment |
-
-**6/6 primals fully compliant** - See [`biomeOS/docs/handoffs/PRIMAL_EVOLUTION_STATUS_FEB03_2026.md`](../phase2/biomeOS/docs/handoffs/PRIMAL_EVOLUTION_STATUS_FEB03_2026.md)
+This is not documentation about a subdirectory. This is the living reference for the entire project.
 
 ---
 
-## 📚 Knowledge Areas
+## Core Concepts
 
-### 🏗️ Architecture Standards
+### What is a Primal?
 
-#### **UniBin Architecture** (Structure Standard)
+A **primal** is a collection of **primitives** - small, focused capabilities that solve one domain well. Primals are autonomous: each is a self-contained Rust binary that knows only itself. Complexity is never solved by making a primal larger. It is solved through **coordination** - primals composing their primitives together at runtime, orchestrated by biomeOS.
 
-**Location**: `UNIBIN_ARCHITECTURE_STANDARD.md`
+**Key properties of every primal:**
 
-**What**: Single binary per primal with multiple operational modes
+- **Self-knowledge only**: A primal knows what it can do, never what others can do
+- **Capability-based discovery**: Primals find each other at runtime by advertising capabilities
+- **Zero compile-time coupling**: No primal imports another primal's code
+- **Pure Rust**: 100% Rust application code, zero C dependencies
+- **UniBin architecture**: One binary per primal, multiple operational modes
 
-**Status**: ✅ Ecosystem Standard (Adopted Jan 16, 2026)
+### What are Primitives?
 
----
+Primitives are the atomic operations a primal provides. BearDog's primitives include Ed25519 signing, BLAKE3 hashing, and X25519 key exchange. Songbird's primitives include TLS 1.3 handshakes, mDNS discovery, and UDP multicast. A primitive is the smallest unit of capability in the ecosystem.
 
-#### **ecoBin Architecture** (Pure Rust + Portability Standard)
+### How do Primals Coordinate?
 
-**Location**: `ECOBIN_ARCHITECTURE_STANDARD.md`
+Primals communicate via **JSON-RPC 2.0** over platform-agnostic transports (Unix sockets, abstract sockets, TCP, named pipes). They never share memory or embed each other's code. biomeOS discovers primals by their capabilities at runtime and coordinates them into higher-order behaviors.
 
-**What**: UniBin + 100% Pure Rust = Universal cross-compilation
-
-**Key Concepts**:
-- ✅ Zero APPLICATION C dependencies
-- ✅ Pure Rust crypto (RustCrypto suite)
-- ✅ Cross-compile to ANY target
-- ✅ Tower Atomic for HTTP/TLS
-
-**Status**: ✅ Ecosystem Standard (5/5 core primals compliant)
+The result: complex systems **emerge** from simple composition, rather than being engineered monolithically.
 
 ---
 
-#### **Primal IPC Protocol** (Communication Standard)
+## The Primals
 
-**Location**: `PRIMAL_IPC_PROTOCOL.md`
+### Foundation Primals
 
-**What**: JSON-RPC 2.0 over Unix sockets for inter-primal communication
+These primals form the NUCLEUS deployment architecture. They are the bedrock of the ecosystem - production-ready, extensively tested, and required for core ecosystem function.
 
-**Key Concepts**:
-- ✅ Capability-based discovery
-- ✅ Zero cross-embedding
-- ✅ Platform universal (tokio)
+| Primal | Domain | Role | Status |
+|--------|--------|------|--------|
+| **BearDog** | Cryptography | All cryptographic operations: signing, encryption, key exchange, hashing, certificates, genetic lineage | Production (A+ LEGENDARY) |
+| **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
+| **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
+| **ToadStool** | Compute | Universal compute orchestration: CPU, GPU, neuromorphic, WASM, containers. BarraCUDA tensor library | Production (A++ GOLD) |
+| **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
+| **biomeOS** | Orchestration | Ecosystem substrate: Neural API, capability routing, NUCLEUS composition, bonding model, Dark Forest coordination | Production (A, Security A++ LEGENDARY) |
 
-**Status**: ✅ Ecosystem Standard (v2.0)
+### Post-NUCLEUS Primals
 
----
+These primals build emergent behaviors on the NUCLEUS foundation. They compose into higher-order patterns (RootPulse, Memory & Attribution Stack) coordinated by biomeOS via the Neural API. Each is functional and tested, representing the next evolutionary phase.
 
-#### **Universal IPC Standard** (Behavioral Standard) - NEW Feb 3, 2026
+| Primal | Domain | Role | Status |
+|--------|--------|------|--------|
+| **petalTongue** | Representation | Universal UI: visual, audio, terminal, web, headless. Accessibility-first multi-modal rendering | Production (A++) |
+| **rhizoCrypt** | Ephemeral Memory | Content-addressed DAG engine for working memory. Sessions, Merkle trees, real-time streaming | Production (A+) |
+| **sweetGrass** | Attribution | Semantic provenance tracking. W3C PROV-O compliant braids, fair attribution calculation | Production (A+) |
+| **LoamSpine** | Permanence | Immutable linear ledger for selective permanence. Loam Certificates for ownership and transfer | Production (A+) |
+| **skunkBat** | Defense | Defensive network security: threat detection, graduated response, baseline profiling | Production |
 
-**Location**: `UNIVERSAL_IPC_STANDARD_V3.md`
+### Supporting Tools
 
-**What**: Behavioral specification for platform-agnostic IPC that each primal implements independently
-
-**Key Concepts**:
-- ✅ Each primal owns their IPC code (NO shared crate)
-- ✅ Standards define WHAT, primals implement HOW
-- ✅ Multi-transport (Unix, Abstract, TCP, Named Pipe)
-- ✅ Runtime transport discovery
-- ✅ Graceful fallback (Tier 1 → Tier 2)
-- ✅ Protocol alignment (JSON-RPC 2.0, optional tarpc)
-
-**Core Principle**: 
-> "Primals are autonomous organisms that communicate via PROTOCOLS, not by embedding each other's code."
-
-**Handoff**: `handoffs/UNIVERSAL_IPC_EVOLUTION_HANDOFF.md`
-
-**Status**: 📝 PROPOSED (Each primal evolves independently)
+| Tool | Purpose |
+|------|---------|
+| **sourDough** | Starter culture - scaffolding, genomeBin tooling, ecosystem bootstrapping |
 
 ---
 
-#### **Primal Deployment Standard** (Deployment Standard) - NEW
+## Composed Systems
 
-**Location**: [`biomeOS/specs/PRIMAL_DEPLOYMENT_STANDARD.md`](../phase2/biomeOS/specs/PRIMAL_DEPLOYMENT_STANDARD.md)
-
-**What**: Deterministic primal behavior across all architectures
-
-**Key Concepts**:
-- ✅ 5-tier socket path resolution
-- ✅ Same behavior on x86_64 and aarch64
-- ✅ Unix sockets first, TCP fallback
-- ✅ No HTTP by default (socket-only)
-
-**Socket Resolution Order**:
-```
-1. $PRIMAL_SOCKET           (explicit override)
-2. $XDG_RUNTIME_DIR/biomeos/
-3. /run/user/$UID/biomeos/
-4. /data/local/tmp/biomeos/  (Android)
-5. /tmp/biomeos/             (fallback)
-```
-
-**Status**: ✅ Ecosystem Standard (v1.0 - Feb 3, 2026)
-
----
-
-#### **Semantic Method Naming** (API Evolution Standard)
-
-**Location**: `SEMANTIC_METHOD_NAMING_STANDARD.md`
-
-**What**: Method names describe WHAT (semantic intent), not HOW (implementation)
-
-**Key Concepts**:
-- ✅ Domain namespaces (`crypto.*`, `tls.*`, `http.*`)
-- ✅ Neural API translation layer
-- ✅ Isomorphic evolution
-
-**Status**: ✅ Ecosystem Standard (v2.0.0)
-
----
-
-### 🐻 BTSP (BearDog Technical Stack)
-
-**Location**: `btsp/BEARDOG_TECHNICAL_STACK.md`
-
-**What**: BearDog is the genetic lineage keeper and cryptographic foundation
-
-**Current Status**: ✅ Production Ready
-- SHA-384 support complete
-- TLS 1.3 cipher suites (0x1301, 0x1302, 0x1303)
-- Pure Rust (RustCrypto suite)
-
----
-
-### 🎵 BirdSong Protocol
-
-**Location**: `birdsong/BIRDSONG_PROTOCOL.md`
-
-**What**: Encrypted UDP discovery protocol for auto-trust within genetic lineages
-
-**Status**: ✅ Production Ready (v2.0)
-
----
-
-### 🐦 Songbird TLS Integration
-
-**Location**: `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md`
-
-**What**: Guide for Tower Atomic Pure Rust TLS 1.3
-
-**Current Status**: ✅ 93% TLS Validation
-- Pure Rust TLS 1.3
-- Chunked encoding support
-- Adaptive HTTP with User-Agent
-- 87 sites validated
-
----
-
-### 🌸 PetalTongue (UI Primal)
-
-**Location**: `petaltongue/`
-
-**What**: Multi-modal visualization primal
-
-**Key Docs**:
-- `PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md` - TRUE PRIMAL patterns
-- `BIOMEOS_INTEGRATION_HANDOFF.md` - Integration guide
-
----
-
-## 🎓 Quick Reference
-
-### I want to...
-
-| Task | Document |
-|------|----------|
-| **Understand binary architecture** | `UNIBIN_ARCHITECTURE_STANDARD.md` |
-| **Achieve ecoBin compliance** | `ECOBIN_ARCHITECTURE_STANDARD.md` |
-| **Implement IPC** | `PRIMAL_IPC_PROTOCOL.md` |
-| **Use unified IPC (NEW)** | `UNIVERSAL_IPC_STANDARD_V3.md` |
-| **Deploy across platforms** | `biomeOS/specs/PRIMAL_DEPLOYMENT_STANDARD.md` |
-| **Name methods correctly** | `SEMANTIC_METHOD_NAMING_STANDARD.md` |
-| **Integrate TLS** | `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` |
-| **Use BearDog crypto** | `btsp/BEARDOG_TECHNICAL_STACK.md` |
-| **Understand evolution path** | `biomeOS/specs/EVOLUTION_PATH.md` |
-
----
-
-## 📊 Documentation Status
-
-| Knowledge Area | Status | Last Updated | Coverage |
-|----------------|--------|--------------|----------|
-| UniBin Architecture | ✅ Complete | Jan 16, 2026 | 100% |
-| ecoBin Architecture | ✅ Complete | Jan 30, 2026 | 100% |
-| Primal IPC Protocol | ✅ Complete | Jan 19, 2026 | 100% |
-| **Universal IPC v3** | 📝 Proposed | Feb 3, 2026 | Spec complete |
-| **Deployment Standard** | ✅ Complete | Feb 3, 2026 | 100% |
-| **Evolution Path** | ✅ Complete | Feb 3, 2026 | 100% |
-| Semantic Naming | ✅ Complete | Jan 25, 2026 | 100% |
-| BTSP (BearDog) | ✅ Complete | Jan 26, 2026 | 100% |
-| BirdSong Protocol | ✅ Complete | Feb 2, 2026 | 100% |
-| Songbird TLS | ✅ Complete | Jan 26, 2026 | 100% |
-| PetalTongue | ✅ Complete | Jan 3, 2026 | 100% |
-
----
-
-## 🌟 Core Concepts
-
-### Genetic Lineage
-
-**Definition**: A group of primals that share a common `family_seed`, enabling cryptographic auto-trust.
-
-### Auto-Trust
-
-**Definition**: Automatic trust establishment between primals of the same genetic lineage, without manual configuration.
+Primals achieve their greatest power through composition. These are not separate projects - they are coordination patterns that emerge when primals work together.
 
 ### Tower Atomic
 
-**Definition**: BearDog (crypto) + Songbird (HTTP/TLS) = Pure Rust HTTPS
+**What**: BearDog (crypto) + Songbird (TLS/HTTP) = Pure Rust HTTPS
+
+**How**: Songbird implements TLS 1.3 protocol logic. BearDog provides all cryptographic operations via JSON-RPC. Neither embeds the other. The result is a fully Pure Rust HTTPS stack with zero C dependencies.
+
+**Used by**: Any primal that needs external network access routes through Tower Atomic.
+
+### NUCLEUS
+
+**What**: The full primal composition orchestrated by biomeOS.
+
+**Layers**:
+- **Tower Atomic** = BearDog + Songbird (crypto + network)
+- **Node Atomic** = Tower + ToadStool (+ compute)
+- **Nest Atomic** = Tower + NestGate (+ storage)
+- **Full NUCLEUS** = All primals + Squirrel (+ AI)
+
+biomeOS composes these atomics based on what capabilities are available at runtime.
+
+### RootPulse
+
+**What**: Distributed version control that emerges from primal coordination - not a monolithic VCS.
+
+**Composition**:
+- **rhizoCrypt** provides the ephemeral DAG workspace (fast, lock-free, present/future)
+- **LoamSpine** provides the immutable linear history (permanent, cryptographically provable, past)
+- **NestGate** provides content-addressed blob storage
+- **BearDog** provides cryptographic signing and verification
+- **sweetGrass** provides semantic attribution tracking
+- **Songbird** provides discovery and federation
+
+**Coordinator**: biomeOS orchestrates these primals via the Neural API. No primal knows about "version control" - biomeOS composes their primitives into temporal coordination patterns, and version control emerges.
+
+**Core insight**: "RootPulse is what primals DO together, not what they ARE."
+
+### Plasmodium (Over-NUCLEUS Collective)
+
+**What**: The emergent coordination layer formed when 2+ NUCLEUS instances bond covalently.
+
+**Analogy**: Named after the slime mold *Physarum polycephalum* -- no central brain, collective intelligence, pulsing coordination, graceful degradation.
+
+**How**: biomeOS on any gate queries the local Songbird mesh for bonded peers, connects to their NUCLEUS instances, and aggregates capabilities, models, and load into a unified collective view. Workloads route to the best gate based on capability match, resource availability, and model affinity.
+
+**Key properties**:
+- No master node -- any gate can query the collective
+- Gates join and leave dynamically (like slime mold pseudopods)
+- Uses only existing primal primitives (Songbird mesh, BearDog trust, AtomicClient IPC)
+- Security: genetic lineage trust via shared family seed, BearDog Dark Forest verification
+
+**Specification**: `phase2/biomeOS/specs/PLASMODIUM_OVER_NUCLEUS_SPEC.md`  
+**CLI**: `biomeos plasmodium status|gates|models`
+
+### Neural API
+
+**What**: biomeOS's adaptive orchestration layer that routes semantic requests to capable primals.
+
+**How**: A caller requests `capability.call("crypto", "sha256")` and the Neural API discovers which primal provides that capability, routes the request, and returns the result. The caller never needs to know about BearDog specifically.
+
+**Architecture**:
+- Layer 1: Primals (capabilities)
+- Layer 2: biomeOS (orchestration, learning)
+- Layer 3: Niche APIs (domain patterns like RootPulse)
+
+The system learns from usage patterns over time, optimizing coordination automatically.
+
+---
+
+## Architecture Standards
+
+These standards define how every primal is built, packaged, and deployed.
+
+### UniBin - Binary Structure Standard
+
+One binary per primal, multiple operational modes via subcommands. Professional CLI with `--help`, `--version`, and structured error messages. Every primal is a single executable named after itself.
+
+**Specification**: `UNIBIN_ARCHITECTURE_STANDARD.md`  
+**Technical paper**: `whitePaper/technical/UNIBIN_TECHNICAL_SPECIFICATION.md`
+
+### ecoBin - Universal Portability Standard
+
+ecoBin = UniBin + Pure Rust + Cross-Platform. Zero C dependencies in application code, cross-compiles to any Rust target with a single `cargo build` command, platform-agnostic IPC with runtime transport discovery.
+
+**Specification**: `ECOBIN_ARCHITECTURE_STANDARD.md`  
+**Technical paper**: `whitePaper/technical/ECOBIN_TECHNICAL_SPECIFICATION.md`
+
+### genomeBin - Autonomous Deployment Standard
+
+genomeBin = ecoBin + deployment wrapper. Self-extracting archive that auto-detects the system, installs the correct binary, configures services, and validates health. One command installs on any system with zero manual configuration.
+
+**Specification**: `GENOMEBIN_ARCHITECTURE_STANDARD.md`  
+**Technical paper**: `whitePaper/technical/GENOMEBIN_TECHNICAL_SPECIFICATION.md`
+
+### The Evolutionary Ladder
 
 ```
-External HTTPS → Songbird (TLS 1.3) → BearDog (crypto) → Pure Rust
+UniBin   (structure)    → One binary, multiple modes
+  ↓
+ecoBin   (portability)  → + Pure Rust, cross-compilation, platform-agnostic IPC
+  ↓
+genomeBin (deployment)  → + Auto-detection, service integration, health monitoring
 ```
 
-### capability.call
-
-**Definition**: Neural API semantic routing that enables primals to communicate without knowing each other's APIs.
-
-```
-Squirrel → capability.call("crypto", "sha256") → Neural API → BearDog
-```
+All ecoBins are UniBins. All genomeBins are ecoBins. Each stage adds capability without replacing the previous.
 
 ---
 
-## 🔐 Security Principles
+## Communication Standards
 
-### 1. Secure by Default
-- Family seeds never logged
-- Encryption required for discovery
-- Auto-zeroization of sensitive data
+### Primal IPC Protocol
 
-### 2. Pure Rust Only
-- Zero C dependencies in application code
-- RustCrypto suite for all crypto
-- Memory safety guaranteed
+JSON-RPC 2.0 over platform-agnostic transports. Capability-based discovery with zero cross-embedding. Every primal implements its own IPC independently - standards define WHAT, primals implement HOW.
 
-### 3. Zero Trust (Outside Family)
-- No trust without family membership
-- Encrypted payloads unreadable to outsiders
-- Continuous validation
+**Specification**: `PRIMAL_IPC_PROTOCOL.md`
 
-### 4. Auto-Trust (Within Family)
-- Shared genetic lineage enables trust
-- Decryption proves family membership
-- No manual configuration needed
+### Universal IPC Standard (v3.0)
 
----
+Behavioral specification for multi-transport IPC. Each primal discovers the best transport at runtime: Unix sockets on Linux/macOS, abstract sockets on Android, named pipes on Windows, TCP as universal fallback. No shared IPC crate - each primal owns its communication code.
 
-## 🚀 Current Ecosystem Status
+**Specification**: `UNIVERSAL_IPC_STANDARD_V3.md`
 
-### Production Ready ✅
+### BirdSong Protocol
 
-- **Tower Atomic** - 93% TLS validation (81/87 sites)
-- **BearDog** - All cipher suites (0x1301, 0x1302, 0x1303)
-- **Songbird** - Pure Rust TLS 1.3 + HTTP
-- **biomeOS** - Graph-based deployment + capability.call
-- **Neural API** - Semantic translation layer
+Encrypted UDP discovery protocol for auto-trust within genetic lineages. Songbird broadcasts encrypted beacons; only primals sharing the same family seed can decrypt them. Zero metadata leakage.
 
-### In Progress ⏳
+**Specification**: `birdsong/BIRDSONG_PROTOCOL.md`
 
-- **Universal IPC v3** - Each primal evolving toward standard (spec complete)
-- Songbird TLS 1.2 fallback (npm, Jenkins)
-- Terraria testing system
-- Apoptosis graceful shutdown
+### Semantic Method Naming
+
+Method names describe intent, not implementation: `crypto.sign`, `tls.handshake`, `storage.put`. Domain namespaces enable Neural API translation and isomorphic evolution across primals.
+
+**Specification**: `SEMANTIC_METHOD_NAMING_STANDARD.md`
 
 ---
 
-## 📖 Quick Navigation
+## Security Model
 
-### By Standard
-- **UniBin** → `UNIBIN_ARCHITECTURE_STANDARD.md`
-- **ecoBin** → `ECOBIN_ARCHITECTURE_STANDARD.md`
-- **IPC Protocol** → `PRIMAL_IPC_PROTOCOL.md`
-- **Universal IPC v3** → `UNIVERSAL_IPC_STANDARD_V3.md` (NEW)
-- **Semantic Naming** → `SEMANTIC_METHOD_NAMING_STANDARD.md`
-- **genomeBin** → `GENOMEBIN_ARCHITECTURE_STANDARD.md`
+### Genetic Lineage
 
-### Handoffs
-- **Universal IPC Evolution** → `handoffs/UNIVERSAL_IPC_EVOLUTION_HANDOFF.md`
+A group of primals sharing a common `family_seed` - enabling cryptographic auto-trust. BearDog manages lineage seeds (nuclear DNA, for identity/permissions) and beacon seeds (mitochondrial DNA, for Dark Forest discovery).
 
-### By Primal
-- **BearDog** → `btsp/BEARDOG_TECHNICAL_STACK.md`
-- **Songbird** → `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md`
-- **PetalTongue** → `petaltongue/`
-- **biomeOS** → `../biomeOS/START_HERE.md`
+### Auto-Trust Within Family
 
----
+Primals of the same genetic lineage trust each other automatically. Decryption of a BirdSong beacon proves family membership. No manual configuration, no certificate authorities.
 
-## 💡 Contributing to the Watering Hole
+### Zero Trust Outside Family
 
-### Adding Documentation
+No trust without family membership. Encrypted payloads are unreadable to outsiders. Continuous validation. Dark Forest protocol ensures zero metadata leakage - observers cannot even tell that communication is occurring.
 
-1. Create a new knowledge area (e.g., `songbird/`)
-2. Write comprehensive docs following existing patterns
-3. Update this README with links and status
-4. Test all examples before committing
+### Pure Rust Security
 
-### Documentation Standards
-
-- **Comprehensive**: Cover all aspects
-- **Practical**: Include runnable examples
-- **Current**: Keep up-to-date with implementations
-- **Clear**: Write for cross-primal audience
-- **Honest**: Document gaps and technical debt
+Zero C dependencies eliminates entire classes of memory safety vulnerabilities. RustCrypto suite for all cryptographic operations. No openssl, no ring, no C assembly.
 
 ---
 
-## 📁 Archive
+## Primal Interaction Map
 
-Historical documents are preserved in `archive/`:
-- `archive/songbird_jan_2026/` - Old Songbird status files
+### Currently Working
+
+- **Songbird + BearDog**: Encrypted BirdSong discovery (Tower Atomic)
+- **biomeOS + All Primals**: Health monitoring, capability discovery, Neural API routing
+- **biomeOS + petalTongue**: Real-time SSE events for ecosystem visualization
+
+### Under Development
+
+- **rhizoCrypt + LoamSpine**: Dehydration (temporal collapse from DAG to linear)
+- **NestGate + LoamSpine**: Content-addressed storage backing immutable history
+- **sweetGrass + LoamSpine**: Attribution records anchored to permanent timeline
+- **Songbird + Songbird**: Cross-tower federation, multi-family routing
+
+**Detail**: `INTER_PRIMAL_INTERACTIONS.md`
 
 ---
 
-**Status**: 🎊 **PRODUCTION READY** - Tower Atomic 93% TLS Validated  
-**Coverage**: All standards complete (100%)  
-**Pure Rust**: 6/6 primals ecoBin compliant
+## Design Principles
 
-💧 **Welcome to the Watering Hole - Where Primals Gather to Learn and Grow** 🌸
+1. **Single Responsibility**: Each primal does one thing. BearDog only does cryptography. Songbird only does networking. Complexity emerges from coordination, not from expanding scope.
+
+2. **Interface Segregation**: Primals expose narrow, focused interfaces. LoamSpine doesn't know about "commits" - it provides append-only storage. biomeOS composes that into version control.
+
+3. **Dependency Inversion**: Primals depend on abstract capabilities, not concrete implementations. Any storage provider works, not just NestGate.
+
+4. **Message Passing**: Communication via messages over IPC, never shared state. No locks, no race conditions, inherently concurrent.
+
+5. **Emergence Over Engineering**: Don't build a monolithic VCS - coordinate existing primals and let version control emerge. Don't build a monolithic security stack - let BearDog and Songbird compose into Tower Atomic.
 
 ---
 
-*The Watering Hole is maintained by all primals. Contributions welcome!*
+## Document Index
+
+### Architecture Standards
+- `UNIBIN_ARCHITECTURE_STANDARD.md` - Binary structure
+- `ECOBIN_ARCHITECTURE_STANDARD.md` - Universal portability
+- `GENOMEBIN_ARCHITECTURE_STANDARD.md` - Autonomous deployment
+
+### Communication Standards
+- `PRIMAL_IPC_PROTOCOL.md` - Inter-primal communication (v2.0)
+- `UNIVERSAL_IPC_STANDARD_V3.md` - Platform-agnostic IPC behavior
+- `SEMANTIC_METHOD_NAMING_STANDARD.md` - API naming conventions
+
+### Security Standards
+- `DARK_FOREST_BEACON_GENETICS_STANDARD.md` - Two-seed genetic architecture
+
+### Protocol Specifications
+- `birdsong/BIRDSONG_PROTOCOL.md` - Encrypted UDP discovery
+- `btsp/BEARDOG_TECHNICAL_STACK.md` - BearDog cryptographic foundation
+- `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` - Tower Atomic TLS guide
+
+### Coordination
+- `INTER_PRIMAL_INTERACTIONS.md` - Production interaction map and plans
+- `PRIMAL_REGISTRY.md` - Complete primal definitions and primitive catalogs
+
+### Integration Guides
+- `petaltongue/` - petalTongue integration documentation
+- `handoffs/` - Cross-primal evolution handoff documents
+
+---
+
+## For New Primals
+
+If you are a new primal entering the ecosystem:
+
+1. **Read this document** to understand the ecosystem you are joining
+2. **Review PRIMAL_REGISTRY.md** to see what capabilities already exist
+3. **Follow UniBin standard** from day one (single binary, subcommands)
+4. **Target ecoBin** (Pure Rust, zero C deps, cross-compilation)
+5. **Implement IPC** following Universal IPC Standard v3.0
+6. **Advertise capabilities** so biomeOS can discover and coordinate you
+7. **Register your primal** in PRIMAL_REGISTRY.md with your primitives
+
+You do not need to know about other primals. You need to know what you can do, and how to tell the ecosystem about it.
+
+---
+
+**The Watering Hole is maintained by all primals. Every primal's evolution strengthens the whole ecosystem.**

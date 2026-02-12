@@ -724,5 +724,31 @@ async fn commit(biome: &BiomeOS, commit: Commit) {
 
 ---
 
+## Plasmodium: Over-NUCLEUS Collective Coordination (February 2026)
+
+When two or more NUCLEUS instances bond **covalently** (shared `family_seed`, BirdSong mesh, genetic trust), they form a collective organism called **Plasmodium** -- named after the slime mold *Physarum polycephalum*.
+
+Plasmodium is the emergent coordination layer in biomeOS that:
+- Aggregates capabilities across all bonded gates into a **collective view**
+- Routes workloads to the best gate based on **capability, resources, and load**
+- Operates with **no central brain** -- any gate can query the collective
+- Degrades gracefully when gates go offline (**sclerotium** state)
+
+### Relationship to Inter-Primal Interactions
+
+Plasmodium builds on the existing inter-primal coordination primitives:
+- **Songbird** `mesh.peers` / `mesh.status` for gate discovery
+- **BearDog** genetic lineage for trust verification
+- **AtomicClient** JSON-RPC for all IPC
+- **BirdSong** encrypted UDP for heartbeat/pulse coordination
+
+Plasmodium is NOT a new primal -- it is a biomeOS coordination pattern that uses existing primal primitives exclusively.
+
+**Full specification**: `phase2/biomeOS/specs/PLASMODIUM_OVER_NUCLEUS_SPEC.md`  
+**Implementation**: `biomeos-core::plasmodium` module  
+**CLI**: `biomeos plasmodium status|gates|models`
+
+---
+
 *"Primals are the instruments. biomeOS is the composer. Together, they create symphonies."*
 
