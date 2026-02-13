@@ -8,13 +8,56 @@
 # 2. Remote genome fetching via api.nestgate.io
 # 3. Automated update checks
 #
-# Generated: 2026-02-12
-# Version: 1.0.0
+# Updated: 2026-02-13
+# Version: 2.0.0 (Universal Genome Format)
+#
+# EVOLUTION NOTE: All binaries are now PIE-enabled for ASLR compatibility.
+# The segfault on non-PIE binaries (Feb 13, 2026) taught us to verify
+# binary format before distribution.
 
 [manifest]
-version = "1.0.0"
-generated = "2026-02-12T19:00:00Z"
+version = "2.0.0"
+format = "universal"
+generated = "2026-02-13T20:30:00Z"
 checksum_algorithm = "blake3"  # Primary: BLAKE3, Secondary: SHA256
+deploy_script = "deploy.sh"
+
+# =============================================================================
+# PLATFORM SUPPORT
+# =============================================================================
+
+[platforms]
+supported = [
+    "x86_64-linux",
+    "aarch64-linux",
+]
+
+# Future platforms (Wave 2+)
+planned = [
+    "x86_64-darwin",    # macOS Intel
+    "aarch64-darwin",   # macOS Apple Silicon
+    "x86_64-windows",   # Windows
+    "aarch64-android",  # Android/Termux
+    "wasm32",           # Browser fallback
+]
+
+# Deployment fallback order
+fallback_order = ["native", "compatible", "wasm", "beacon"]
+
+# =============================================================================
+# BINARY FORMAT REQUIREMENTS (EVOLUTION FROM FEB 13, 2026)
+# =============================================================================
+
+[binary_requirements]
+# All binaries MUST be PIE (Position Independent Executable)
+# Non-PIE binaries will segfault on ASLR-enabled systems
+pie_required = true
+
+# Verification command: file ./binary | grep "pie executable"
+# If NOT pie executable, do NOT distribute
+
+# Build flags for PIE compliance:
+# RUSTFLAGS="-C relocation-model=pie" cargo build --release
 
 # =============================================================================
 # PRIMALS
@@ -25,55 +68,78 @@ name = "BearDog"
 description = "Security primal - cryptography, trust, genetics, Dark Forest Gate"
 latest = "0.9.0"
 versions = ["0.9.0"]
-architectures = ["x86_64-linux-musl", "aarch64-linux-musl"]
+architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["crypto", "birdsong", "lineage", "hsm", "entropy", "jwt"]
 ecobin_grade = "A++"
+pie_verified = true
 
 [primals.songbird]
 name = "Songbird"
 description = "Network primal - HTTP/TLS, federation, mesh, discovery, NAT traversal"
 latest = "3.33.0"
 versions = ["3.33.0", "0.2.1"]
-architectures = ["x86_64-linux-musl", "aarch64-linux-musl"]
+architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["http", "tls", "mesh", "stun", "relay", "birdsong", "discovery", "onion"]
 ecobin_grade = "A++"
+pie_verified = true
 
 [primals.nestgate]
 name = "NestGate"
 description = "Storage primal - data persistence, provenance, compression"
 latest = "2.1.0"
 versions = ["2.1.0"]
-architectures = ["x86_64-linux-musl", "aarch64-linux-musl"]
+architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["storage", "provenance", "compression"]
 ecobin_grade = "GOLD"
+pie_verified = true  # Fixed Feb 13, 2026 - was non-PIE
 
 [primals.squirrel]
 name = "Squirrel"
 description = "AI primal - model inference, MCP, local/cloud AI bridge"
 latest = "0.1.0"
 versions = ["0.1.0"]
-architectures = ["x86_64-linux-musl", "aarch64-linux-musl"]
+architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["ai", "inference", "mcp"]
 ecobin_grade = "A++"
+pie_verified = true
 
 [primals.toadstool]
 name = "Toadstool"
 description = "Compute primal - GPU/CPU orchestration, WASM, neural compute"
 latest = "0.1.0"
 versions = ["0.1.0"]
-architectures = ["x86_64-linux-musl", "aarch64-linux-musl"]
+architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["compute", "cpu", "gpu", "wasm", "orchestration"]
 ecobin_grade = "A++"
+pie_verified = true
 
 [primals.biomeos]
 name = "biomeOS"
 description = "Neural API orchestrator - graph execution, primal coordination, NUCLEUS deployment"
 latest = "0.1.0"
 versions = ["0.1.0"]
-architectures = ["x86_64-linux-musl", "aarch64-linux-musl"]
+architectures = ["x86_64-linux"]  # aarch64 pending build
 capabilities = ["orchestration", "graph", "deploy", "nucleus", "spore"]
 ecobin_grade = "A++"
 is_orchestrator = true
+pie_verified = true
+
+# =============================================================================
+# DEPLOYMENT TIERS
+# =============================================================================
+
+[tiers]
+# Tier 1: Full NUCLEUS - All primals, full capabilities
+tier1 = { name = "Full NUCLEUS", primals = ["beardog", "songbird", "nestgate", "toadstool", "squirrel", "biomeos"] }
+
+# Tier 2: Node - Core + compute
+tier2 = { name = "Node", primals = ["beardog", "songbird", "nestgate"] }
+
+# Tier 3: Gateway - Network only
+tier3 = { name = "Gateway", primals = ["beardog", "songbird"] }
+
+# Tier 4: Beacon - Discovery only (WASM fallback)
+tier4 = { name = "Beacon", primals = ["songbird"] }
 
 # =============================================================================
 # ATOMICS (Pre-configured Primal Combinations)
@@ -86,14 +152,16 @@ primals = ["beardog", "songbird"]
 latest = "1.0.0"
 versions = ["1.0.0"]
 graph = "tower_atomic_bootstrap.toml"
+tier = 3
 
 [atomics.node]
 name = "Node Atomic"
-description = "Tower + Compute (BearDog + Songbird + Toadstool)"
-primals = ["beardog", "songbird", "toadstool"]
+description = "Tower + Compute (BearDog + Songbird + Toadstool + Squirrel)"
+primals = ["beardog", "songbird", "toadstool", "squirrel"]
 latest = "1.0.0"
 versions = ["1.0.0"]
 graph = "node_atomic.toml"
+tier = 2
 
 [atomics.nest]
 name = "Nest Atomic"
@@ -102,6 +170,7 @@ primals = ["beardog", "songbird", "nestgate"]
 latest = "1.0.0"
 versions = ["1.0.0"]
 graph = "nest_atomic.toml"
+tier = 2
 
 [atomics.full]
 name = "Full NUCLEUS"
@@ -110,6 +179,7 @@ primals = ["beardog", "songbird", "nestgate", "squirrel", "toadstool", "biomeos"
 latest = "1.0.0"
 versions = ["1.0.0"]
 graph = "nucleus_complete.toml"
+tier = 1
 
 # =============================================================================
 # DISTRIBUTION ENDPOINTS
@@ -121,13 +191,15 @@ primary_endpoint = "https://api.nestgate.io/genome"
 # Fallback: Public GitHub releases
 fallback_endpoint = "https://github.com/ecoPrimals/releases/download"
 # Local: For LiveSpore and air-gapped deployments
-local_path = "genomeBin/primals"
+local_path = "primals"
+# Deploy script for universal deployment
+deploy_script = "deploy.sh"
 
 [distribution.authentication]
 # Dark Forest Gate required for primary endpoint
 dark_forest_required = true
 # Public manifest and checksums (no auth needed)
-public_paths = ["/manifest", "/checksum/*"]
+public_paths = ["/manifest", "/checksum/*", "/deploy.sh"]
 # Download requires Dark Forest Token
 protected_paths = ["/{primal}/{version}/{arch}"]
 
@@ -136,11 +208,15 @@ protected_paths = ["/{primal}/{version}/{arch}"]
 # =============================================================================
 
 [architectures]
-x86_64 = { target = "x86_64-unknown-linux-musl", aliases = ["x64", "amd64"] }
-aarch64 = { target = "aarch64-unknown-linux-musl", aliases = ["arm64", "aarch64"] }
-# Future architectures
-# armv7 = { target = "armv7-unknown-linux-musleabihf", aliases = ["arm", "armhf"] }
-# riscv64 = { target = "riscv64gc-unknown-linux-gnu", aliases = ["rv64"] }
+# Simplified naming (removed libc suffix for universal deployment)
+x86_64 = { target = "x86_64-linux", aliases = ["x64", "amd64", "x86_64-linux-gnu", "x86_64-linux-musl"] }
+aarch64 = { target = "aarch64-linux", aliases = ["arm64", "aarch64-linux-gnu", "aarch64-linux-musl"] }
+
+# Future architectures (Wave 2+)
+# x86_64_darwin = { target = "x86_64-darwin", aliases = ["x64-macos", "intel-mac"] }
+# aarch64_darwin = { target = "aarch64-darwin", aliases = ["arm64-macos", "apple-silicon"] }
+# armv7 = { target = "arm32-linux", aliases = ["arm", "armhf", "armv7l"] }
+# riscv64 = { target = "riscv64-linux", aliases = ["rv64"] }
 
 # =============================================================================
 # UPDATE POLICY
@@ -153,4 +229,15 @@ check_interval = 3600  # 1 hour
 auto_update = false  # Require explicit approval
 # Keep N previous versions for rollback
 keep_versions = 3
+# Verify PIE status before applying updates
+verify_pie = true
 
+# =============================================================================
+# EVOLUTION NOTES
+# =============================================================================
+
+# Feb 13, 2026: Discovered non-PIE musl binaries segfault on ASLR systems
+# - NestGate was statically linked without PIE
+# - Replaced with PIE-enabled gnu builds
+# - Added pie_verified flag to all primals
+# - See specs/BINARY_BUILD_TARGETS_SPEC.md for details
