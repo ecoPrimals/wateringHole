@@ -105,12 +105,13 @@ neuralSpring to ToadStool HEAD `5437c170` (10 commits since `d45fdfb3`).
 | neuralSpring → BarraCUDA | Capability-based dispatch pattern | All Springs |
 | hotSpring → BarraCUDA → neuralSpring | Spectral theory stack | neuralSpring validates (17/17) |
 | wetSpring → BarraCUDA → neuralSpring | f64 HMM batch | neuralSpring validates (11/11) |
-| ToadStool → neuralSpring | 4 new bio-op wrappers (S39) | neuralSpring ready to migrate dispatch |
-| ToadStool → neuralSpring | `cpu_conv_pool` pub (S41) | LeNet-5 bC validation |
+| ToadStool → neuralSpring | 4 new bio-op wrappers (S39) | **Benchmarked: 0.97–1.10×** (negligible overhead) |
+| ToadStool → neuralSpring | `cpu_conv_pool` pub (S41) | **LeNet-5 full bC: 13/13 PASS** |
 | ToadStool → neuralSpring | 19 new WGSL shaders (S42) | GPU paths for CPU-only ops |
 
 ---
 
 *25 papers · 5 disciplines · 4 faculty · 1600+ checks · ALL GREEN.
-Session 42: deep audit + ToadStool sync (d45fdfb3 → 5437c170, 10 commits).
-4 new bio-op wrappers acknowledged, `cpu_conv_pool` exposed, 19 new WGSL shaders.*
+Session 42: deep audit + ToadStool sync + rewiring (d45fdfb3 → 5437c170).
+10-kernel upstream parity bench (0.72–1.10×), LeNet-5 full bC (13/13),
+cross-spring lineage documented (hotSpring↔wetSpring↔neuralSpring).*
