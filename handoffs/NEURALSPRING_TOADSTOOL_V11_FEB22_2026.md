@@ -113,5 +113,5 @@ neuralSpring to ToadStool HEAD `5437c170` (10 commits since `d45fdfb3`).
 
 *25 papers · 5 disciplines · 4 faculty · 1600+ checks · ALL GREEN.
 Session 42: deep audit + ToadStool sync + rewiring (d45fdfb3 → 5437c170).
-10-kernel upstream parity bench (0.72–1.10×), LeNet-5 full bC (13/13),
-cross-spring lineage documented (hotSpring↔wetSpring↔neuralSpring).*
+10-kernel upstream parity bench (0.72–1.10×), 10/10 dual-path correctness (9 bit-identical),
+LeNet-5 full bC (13/13), cross-spring lineage documented (hotSpring↔wetSpring↔neuralSpring).*
