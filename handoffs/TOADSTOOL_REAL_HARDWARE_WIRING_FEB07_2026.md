@@ -10,9 +10,9 @@
 
 ## Executive Summary
 
-The ecoPrimals white paper audit of BarraCUDA's showcase benchmarks found a consistent pattern:
+The ecoPrimals white paper audit of BarraCuda's showcase benchmarks found a consistent pattern:
 
-- **BarraCUDA's core ops are real and validated** — NTT, INTT, PolyAdd, FFT, complex arithmetic, MD force kernels all execute on actual GPU hardware via WGSL. Cross-vendor correctness (NVIDIA + AMD) is confirmed.
+- **BarraCuda's core ops are real and validated** — NTT, INTT, PolyAdd, FFT, complex arithmetic, MD force kernels all execute on actual GPU hardware via WGSL. Cross-vendor correctness (NVIDIA + AMD) is confirmed.
 - **Several showcase benchmarks fake NPU execution** — using `tokio::time::sleep()`, CPU busy-loops, or throughput multipliers instead of actual Akida chip execution. Some GPU benchmarks use `thread::sleep()` or `forward_cpu()` while claiming GPU.
 - **FHE scheme-level work (BFV/CKKS, encrypted training) is now pinned to NUCLEUS** — BearDog owns the ciphertext layer. ToadStool should stop investing in FHE scheme implementation and redirect to completing real hardware wiring.
 
@@ -45,8 +45,8 @@ This is consistent with the primal model: BearDog owns cryptography, ToadStool o
 | wgpu/Vulkan executor | Real compute dispatch |
 | MNIST NPU inference | Real `akida_driver::InferenceExecutor::infer()` |
 | K-mer NPU | Real `akida_driver` calls |
-| Cross-platform FHE (CPU+GPU) | TFHE-rs + BarraCUDA |
-| Transformer/Vision/Audio | Real BarraCUDA ops (simplified architectures) |
+| Cross-platform FHE (CPU+GPU) | TFHE-rs + BarraCuda |
+| Transformer/Vision/Audio | Real BarraCuda ops (simplified architectures) |
 
 ### ❌ Faking — Needs Wiring (Action Required)
 
@@ -61,7 +61,7 @@ This is consistent with the primal model: BearDog owns cryptography, ToadStool o
 | `real_cuda_vs_barracuda.rs` | `thread::sleep()` | Your own audit flagged this Jan 12 |
 | `vendor_agnostic_demo.rs` | `forward_cpu()` claiming GPU | Your own audit flagged this Jan 12 |
 | `cross_platform_mlp.rs:92` | "GPU shader integration pending" | CPU fallback |
-| `fhe_operation_validation.rs:194` | "TODO: Replace with actual BarraCUDA" | Not wired |
+| `fhe_operation_validation.rs:194` | "TODO: Replace with actual BarraCuda" | Not wired |
 | `measurement/power.rs:270` | "TODO: Use actual Akida detection" | Hardcoded values |
 | `substrates/gpu.rs:526` | "TODO: Integrate with nvidia-smi" | `Some(150.0)` hardcoded |
 
@@ -106,7 +106,7 @@ Replace `Some(2.0)` with actual Akida SDK power query. This converts all NPU ene
 
 **4. Wire FHE operation validation** — 1 day
 
-Replace TODO at `fhe_operation_validation.rs:194` with actual BarraCUDA calls. The ops exist: `FhePolyAdd::new().execute()`, `FheNtt::new().execute()`, etc.
+Replace TODO at `fhe_operation_validation.rs:194` with actual BarraCuda calls. The ops exist: `FhePolyAdd::new().execute()`, `FheNtt::new().execute()`, etc.
 
 ### Week 3-4: NPU Completion
 
@@ -120,7 +120,7 @@ Replace `throughput * 3.0` multiplier with actual `akida_driver` sparse event pr
 
 **7. Wire cross-platform MLP GPU** — 1 day
 
-`cross_platform_mlp.rs` currently says "GPU shader integration pending." Use `WgpuDevice::new()` + BarraCUDA MatMul (same pattern as `transformer_inference.rs`).
+`cross_platform_mlp.rs` currently says "GPU shader integration pending." Use `WgpuDevice::new()` + BarraCuda MatMul (same pattern as `transformer_inference.rs`).
 
 **8. Wire GPU power measurement** — 2 hours
 
@@ -148,7 +148,7 @@ All ops exist (Conv2D, MaxPool2D, BatchNorm, ReLU). Compose into real MobileNet/
 
 **12. Hybrid raytracing NPU** — 5-7 days
 
-Deploy sparse BVH-traversal SNN to Akida for traversal phase. GPU shading uses real BarraCUDA matmul/texture ops. This is the most complex NPU wiring task. Fine to defer until after 1-11 are done.
+Deploy sparse BVH-traversal SNN to Akida for traversal phase. GPU shading uses real BarraCuda matmul/texture ops. This is the most complex NPU wiring task. Fine to defer until after 1-11 are done.
 
 ---
 
@@ -176,14 +176,14 @@ When this handoff is complete:
 - [ ] Zero throughput multipliers (`* 3.0`, `* 0.6`, `* 5.0`)
 - [ ] Zero CPU busy-loops claiming NPU performance
 - [ ] All NPU benchmarks use `akida_driver::InferenceExecutor::infer()` on real Akida chips
-- [ ] All GPU benchmarks use real BarraCUDA WGSL dispatch
+- [ ] All GPU benchmarks use real BarraCuda WGSL dispatch
 - [ ] Power from hardware telemetry (nvidia-smi, Akida SDK), not datasheets
 - [ ] Fake GPU demos deleted
 - [ ] ML architectures complete (multi-head attention, real FFT STFT, full Conv)
 
 ### The Sentence We're Working Toward
 
-> "BarraCUDA dispatches workloads to CPU, NVIDIA GPU, AMD GPU, and BrainChip Akida NPU from a single Rust codebase. All performance and energy measurements are from actual hardware execution."
+> "BarraCuda dispatches workloads to CPU, NVIDIA GPU, AMD GPU, and BrainChip Akida NPU from a single Rust codebase. All performance and energy measurements are from actual hardware execution."
 
 Every item in this handoff exists to make that sentence true without caveat.
 
@@ -196,7 +196,7 @@ The white paper team has:
 - Corrected `02_HARDWARE_COMPARISON.md` — three-tier evidence classification (Real / Simplified / Modeled)
 - Created `03_TOADSTOOL_WIRING_DIRECTIVE.md` — detailed file-level fix instructions
 - Created `NTT_FFT_EVOLUTION_EVIDENCE.md` — constrained evolution documentation
-- Copied all benchmark data to `ecoPrimals/whitePaper/barraCUDA/data/`
+- Copied all benchmark data to `ecoPrimals/whitePaper/barraCuda/data/`
 
 When you complete this wiring, we regenerate the JSON/CSV data, update the white paper sections, and every claim becomes citable.
 
@@ -216,7 +216,7 @@ When you complete this wiring, we regenerate the JSON/CSV data, update the white
 ---
 
 **Contact**: ecoPrimals white paper team  
-**Detailed directive**: `whitePaper/barraCUDA/sections/03_TOADSTOOL_WIRING_DIRECTIVE.md`  
-**Data location**: `whitePaper/barraCUDA/data/` (local copies of all benchmark JSON/CSV)  
+**Detailed directive**: `whitePaper/barraCuda/sections/03_TOADSTOOL_WIRING_DIRECTIVE.md`  
+**Data location**: `whitePaper/barraCuda/data/` (local copies of all benchmark JSON/CSV)  
 **Status**: Ready for ToadStool team to begin execution
 

@@ -1,8 +1,8 @@
-# wetSpring → ToadStool/BarraCUDA Handoff v8
+# wetSpring → ToadStool/BarraCuda Handoff v8
 
 **Date:** February 22, 2026
 **From:** wetSpring (life science & analytical chemistry biome)
-**To:** ToadStool / BarraCUDA core team
+**To:** ToadStool / BarraCuda core team
 **License:** AGPL-3.0-or-later
 **Context:** Phase 22 — Pure GPU Streaming + Full Validation Proof
 
@@ -278,7 +278,7 @@ All 29 papers in the specs/ queue have been reproduced. The validation chain:
 | Stage | Status | Evidence |
 |-------|--------|----------|
 | Python baseline | 40 scripts, all reproducible | scripts/ |
-| Rust CPU parity | 1,392 checks, 25 domains + 6 ODE flat | 205/205 BarraCUDA CPU |
+| Rust CPU parity | 1,392 checks, 25 domains + 6 ODE flat | 205/205 BarraCuda CPU |
 | GPU parity | 533 checks, 16 GPU domains | Exp064/087/090 |
 | metalForge cross-system | 12 domains, 35+ checks | Exp084/086 |
 | Pure GPU streaming | 80 checks, zero CPU round-trips | Exp090/091 |

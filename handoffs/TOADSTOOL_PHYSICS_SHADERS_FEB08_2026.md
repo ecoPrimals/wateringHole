@@ -12,15 +12,15 @@
 ## Executive Summary
 
 The hotSpring control experiments (81/81 quantitative checks pass) have produced
-a concrete shopping list of BarraCUDA shaders and operations needed to run
+a concrete shopping list of BarraCuda shaders and operations needed to run
 real scientific computing workloads across CPU, GPU, and NPU.
 
 **This is the Phase A → Phase B transition.** Python proved the physics is correct.
-BarraCUDA now needs to prove it can do the same math on any chip.
+BarraCuda now needs to prove it can do the same math on any chip.
 
 The surrogate learning workflow is the first target: we have a working Python
 implementation (9 objectives validated, physics EOS converged in 11 rounds).
-BarraCUDA needs 4 new capabilities to replicate it on GPU, with inference on NPU.
+BarraCuda needs 4 new capabilities to replicate it on GPU, with inference on NPU.
 
 ---
 
@@ -30,7 +30,7 @@ BarraCUDA needs 4 new capabilities to replicate it on GPU, with inference on NPU
 - `force_pp.update()` is **97.2% of runtime** → primary GPU offload target
 - The inner loop is: pairwise distance → force lookup → acceleration accumulate
 - Maps directly to `cdist.wgsl` → force kernel → reduction
-- 5 upstream Python bugs found (silent failures) — BarraCUDA eliminates this class
+- 5 upstream Python bugs found (silent failures) — BarraCuda eliminates this class
 
 ### TTM Control (6/6 checks)
 - Zbar solver needs `scipy.optimize.root` equivalent → requires ODE/rootfinding
@@ -39,7 +39,7 @@ BarraCUDA needs 4 new capabilities to replicate it on GPU, with inference on NPU
 
 ### Surrogate Learning Control (15/15 checks + iterative workflow)
 - RBF surrogate training is the immediately actionable workload
-- 75% of the math already exists in BarraCUDA (cdist, exp, matmul, sum)
+- 75% of the math already exists in BarraCuda (cdist, exp, matmul, sum)
 - 4 new shaders close the gap completely
 
 ---
@@ -48,7 +48,7 @@ BarraCUDA needs 4 new capabilities to replicate it on GPU, with inference on NPU
 
 ### Priority 1: Surrogate Learning Pipeline (4 weeks)
 
-These enable BarraCUDA to train and evaluate RBF surrogates — the same workload
+These enable BarraCuda to train and evaluate RBF surrogates — the same workload
 that Python/SciPy currently does. Once implemented, we can show:
 - Same training data → same surrogate → same predictions
 - GPU training, NPU inference, CPU fallback — identical results
@@ -169,7 +169,7 @@ impl RbfInterpolator {
 
 ### Priority 2: MD Force Pipeline (6 weeks, after Priority 1)
 
-These enable BarraCUDA to reproduce the Sarkas MD inner loop on GPU,
+These enable BarraCuda to reproduce the Sarkas MD inner loop on GPU,
 replacing the 97.2%-of-runtime Numba kernel with a WGSL shader.
 
 #### 2.1 Force Kernels (already designed, see EVOLUTION_CHALLENGE_ACCEPTED.md)
@@ -300,7 +300,7 @@ Week 5-10: [2.1 Forces] → [2.2 Neighbor List] → [2.3 Verlet]
 ## What We Provide (Reference Data for Validation)
 
 All reference data is in `hotSpring/control/` — use these to validate
-BarraCUDA implementations against the Python control:
+BarraCuda implementations against the Python control:
 
 ### Surrogate Learning
 
@@ -336,7 +336,7 @@ BarraCUDA implementations against the Python control:
 
 ## The Pitch
 
-BarraCUDA already has 75% of what surrogate learning needs. The Cholesky
+BarraCuda already has 75% of what surrogate learning needs. The Cholesky
 decomposition and RBF kernel shader close the gap. Once implemented:
 
 1. **Train RBF surrogate on GPU** — same `cdist → kernel → solve` pipeline,
