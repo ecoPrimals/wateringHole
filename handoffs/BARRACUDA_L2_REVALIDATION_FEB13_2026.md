@@ -1,8 +1,8 @@
-# BarraCUDA L2 Revalidation Results — Post-Evolution Rewiring
+# BarraCuda L2 Revalidation Results — Post-Evolution Rewiring
 
 **Date**: February 13, 2026 (afternoon)
 **From**: ecoPrimals Control Team (Eastgate) — hotSpring L2 revalidation
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Status**: **VALIDATED** — all three SCF offset root causes resolved, 1,764× L2 improvement
 
 ---
@@ -19,7 +19,7 @@ After pulling the latest ToadStool Phase 5 evolution and applying three targeted
 | **L2 evals** | 4,022 | **40** | 96 | 100× fewer |
 | **nalgebra dependency** | Required | **Removed** | N/A | Zero external deps |
 
-**BarraCUDA now beats the Python/SciPy reference at L2 by 3.8×** with 2.4× fewer evaluations.
+**BarraCuda now beats the Python/SciPy reference at L2 by 3.8×** with 2.4× fewer evaluations.
 
 ---
 
@@ -117,7 +117,7 @@ W0    =  199.95
 
 ---
 
-## What the BarraCUDA Team Delivered (Acknowledged)
+## What the BarraCuda Team Delivered (Acknowledged)
 
 The Phase 5 evolution included significant new infrastructure that was validated during this revalidation:
 
@@ -172,7 +172,7 @@ The L1→L2 seed pipeline currently allows L1-optimal parameters that have ρ₀
 
 ## Revalidation Verdict
 
-**PASS** — BarraCUDA L2 is now production-quality for nuclear EOS optimization:
+**PASS** — BarraCuda L2 is now production-quality for nuclear EOS optimization:
 - Beats Python/SciPy reference by 3.8× on χ²/datum
 - Uses 2.4× fewer evaluations
 - Zero external dependencies (nalgebra removed)

@@ -129,13 +129,13 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 **Phase**: Foundation  
 **Status**: Production Ready (A++ GOLD STANDARD) — 5,965+ tests, 0 clippy warnings
 
-**Role**: ToadStool enables isomorphic workload execution across any compute substrate - CPU, GPU, neuromorphic hardware, WebAssembly, containers, and edge devices. Its BarraCUDA library provides 593 WGSL shaders (zero orphans) covering tensor ops, scientific computing, bioinformatics, and nuclear physics -- all wired to Rust dispatch with GPU/CPU fallback.
+**Role**: ToadStool enables isomorphic workload execution across any compute substrate - CPU, GPU, neuromorphic hardware, WebAssembly, containers, and edge devices. Its BarraCuda library (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) provides 612 WGSL shaders (zero orphans) covering tensor ops, scientific computing, bioinformatics, and nuclear physics -- all wired to Rust dispatch with GPU/CPU fallback.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
-| **BarraCUDA Core** | 593 WGSL shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
+| **BarraCuda Core** | 612 WGSL shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
 | **Scientific Computing** | Crank-Nicolson PDE, Richards equation, Lennard-Jones/Morse/Born-Mayer MD, Lattice QCD Dirac+CG, Yukawa cell-list, HFB nuclear physics (11 shaders) |
 | **Bioinformatics** | 25 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, pairwise L2, multi-objective fitness, swarm NN, hill gate, batch fitness, ANI, random forest inference |
 | **CNN** | conv2d, batch_norm, max_pool2d, avg_pool2d, elementwise (CPU + WGSL) |
@@ -149,7 +149,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Four-Spring ingestion**: hotSpring (11 HFB physics shaders), neuralSpring (4 bio ML ops), wetSpring (3 bioinformatics ops), airSpring (Richards PDE + moving window stats)
 
-**Participates In**: Node Atomic (with Tower Atomic), NUCLEUS, BarraCUDA compute layer
+**Participates In**: Node Atomic (with Tower Atomic), NUCLEUS, BarraCuda compute layer
 
 ---
 

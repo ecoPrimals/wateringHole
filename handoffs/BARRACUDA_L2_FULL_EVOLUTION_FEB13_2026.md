@@ -1,15 +1,15 @@
-# BarraCUDA L2 Full Evolution Handoff — From 28,450 to Python Parity and Beyond
+# BarraCuda L2 Full Evolution Handoff — From 28,450 to Python Parity and Beyond
 
 **Date**: February 13, 2026
 **From**: ecoPrimals Control Team (Eastgate) — hotSpring L2 validation
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Status**: **L2 VALIDATED** — Python parity exceeded, L3 roadmap ready
 
 ---
 
 ## Executive Summary
 
-Through four rounds of evolution between hotSpring and ToadStool/BarraCUDA, we achieved:
+Through four rounds of evolution between hotSpring and ToadStool/BarraCuda, we achieved:
 
 | Milestone | L2 χ²/datum | vs Python | Key Change |
 |-----------|------------|-----------|------------|
@@ -19,7 +19,7 @@ Through four rounds of evolution between hotSpring and ToadStool/BarraCUDA, we a
 | Evolved pipeline (seed=42, λ=0.1) | **16.11** | **3.8× better** | Confirmed reproducible |
 | Evolved pipeline (seed=123, λ=1.0) | **19.29** | **3.2× better** | **ALL 5 NMP within 2σ!** |
 
-**BarraCUDA is now zero-dependency** — all external math dependencies (nalgebra) removed. The entire HFB solver uses only BarraCUDA native functions.
+**BarraCuda is now zero-dependency** — all external math dependencies (nalgebra) removed. The entire HFB solver uses only BarraCuda native functions.
 
 ---
 
@@ -27,7 +27,7 @@ Through four rounds of evolution between hotSpring and ToadStool/BarraCUDA, we a
 
 ### Functions validated against Python/NumPy/SciPy reference:
 
-| BarraCUDA Function | Reference | Status | Where Validated |
+| BarraCuda Function | Reference | Status | Where Validated |
 |-------------------|-----------|--------|-----------------|
 | `gradient_1d` | `numpy.gradient` | **Fixed & Validated** | 2nd-order boundary stencils match numpy |
 | `eigh_f64` | `numpy.linalg.eigh` | **Validated** | Replaces nalgebra in HFB solver |
@@ -43,7 +43,7 @@ Through four rounds of evolution between hotSpring and ToadStool/BarraCUDA, we a
 
 ### Performance parity:
 
-| Level | BarraCUDA | Python/SciPy | Speedup | Eval Efficiency |
+| Level | BarraCuda | Python/SciPy | Speedup | Eval Efficiency |
 |-------|-----------|-------------|---------|-----------------|
 | **L1** | 0.80 χ²/datum | 6.62 χ²/datum | **8.3× better accuracy** | 16× fewer evals |
 | **L2** | 16.11 χ²/datum | 61.87 χ²/datum | **3.8× better accuracy** | 2.4× fewer evals |
@@ -118,7 +118,7 @@ Deformed HFB Solver (axially symmetric)
 └── Energy surface: E(β₂) for shape coexistence
 ```
 
-### L3 BarraCUDA Requirements
+### L3 BarraCuda Requirements
 
 | Feature | Current Status | L3 Need |
 |---------|---------------|---------|
@@ -232,7 +232,7 @@ An initial L3 deformed HFB solver was built and tested. Key findings:
 
 6. **SCF convergence**: Linear mixing with α=0.3-0.5 may not converge. Need Broyden or DIIS mixing.
 
-### L3 BarraCUDA Needs (for team):
+### L3 BarraCuda Needs (for team):
 
 - `trapz_2d(f, dx, dy)`: 2D numerical integration
 - `gradient_2d(f, dx, dy)`: 2D finite differences on rectangular grid

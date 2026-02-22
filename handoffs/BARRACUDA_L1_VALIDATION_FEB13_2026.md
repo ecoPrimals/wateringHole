@@ -1,23 +1,23 @@
-# BarraCUDA Level 1 Validation — Nuclear EOS (SEMF)
+# BarraCuda Level 1 Validation — Nuclear EOS (SEMF)
 
 **Date**: February 13, 2026
 **From**: ecoPrimals Control Team (Eastgate) — hotSpring L1 validation
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Status**: L1 VALIDATED — ready to proceed to L2
 
 ---
 
 ## Executive Summary
 
-Level 1 validation is **complete and successful**. BarraCUDA's optimization pipeline (DirectSampler + Nelder-Mead) finds physically meaningful Skyrme parameters that reproduce nuclear binding energies comparably to the published SLy4 parametrization, while running **346x faster** than Python/scipy.
+Level 1 validation is **complete and successful**. BarraCuda's optimization pipeline (DirectSampler + Nelder-Mead) finds physically meaningful Skyrme parameters that reproduce nuclear binding energies comparably to the published SLy4 parametrization, while running **346x faster** than Python/scipy.
 
 An initial apparent chi-squared/datum < 1.0 result was identified as **overfitting** — the optimizer exploited unconstrained parameter directions to achieve low chi-squared at the expense of unphysical nuclear matter properties (J = 20 MeV vs. experimental 32 MeV). After implementing UNEDF-style NMP constraints, the physically constrained results are validated.
 
 ### Headline Numbers
 
-| Metric | BarraCUDA (lambda=10) | SLy4 (published) | Python/scipy | Verdict |
+| Metric | BarraCuda (lambda=10) | SLy4 (published) | Python/scipy | Verdict |
 |--------|----------------------|-------------------|-------------|---------|
-| chi2_BE/datum | **5.81** | 4.99 | 6.62 | BarraCUDA competitive with published |
+| chi2_BE/datum | **5.81** | 4.99 | 6.62 | BarraCuda competitive with published |
 | chi2_NMP/datum | **1.08** | 0.63 | n/a | Physical NMP, within 2sigma |
 | J symmetry (MeV) | **30.5** | 30.4 | n/a | Matches SLy4 |
 | Evaluations | **64** | n/a | 1,008 | 16x fewer |
@@ -28,7 +28,7 @@ An initial apparent chi-squared/datum < 1.0 result was identified as **overfitti
 
 ## 1. Validation Suite: 129/129 Tests Pass
 
-Before touching optimization, all BarraCUDA math primitives were validated:
+Before touching optimization, all BarraCuda math primitives were validated:
 
 | Suite | Score | Precision | Notes |
 |-------|-------|-----------|-------|
@@ -173,11 +173,11 @@ Seed → Xoshiro256 PRNG (deterministic)
      → bootstrap_ci (confidence intervals)
 ```
 
-All components are **BarraCUDA native** — zero hotSpring reference code in the evaluation path.
+All components are **BarraCuda native** — zero hotSpring reference code in the evaluation path.
 
 ---
 
-## 7. What Still Needs Evolution in BarraCUDA
+## 7. What Still Needs Evolution in BarraCuda
 
 ### Confirmed working (no changes needed)
 
@@ -196,7 +196,7 @@ All components are **BarraCUDA native** — zero hotSpring reference code in the
 
 2. **LOO-CV hat matrix bug**: Still present in `RBFSurrogate::loo_cv_rmse()` (H_ii = 1.0 always). Reference implementation in hotSpring archive shows correct calculation.
 
-3. **Non-deterministic seed management**: The `--seed` CLI pattern works but BarraCUDA should expose seed management as a first-class API (e.g., `SamplerConfig::with_seed(n)` already exists but documentation should emphasize that same seed = identical results).
+3. **Non-deterministic seed management**: The `--seed` CLI pattern works but BarraCuda should expose seed management as a first-class API (e.g., `SamplerConfig::with_seed(n)` already exists but documentation should emphasize that same seed = identical results).
 
 ---
 
@@ -204,7 +204,7 @@ All components are **BarraCUDA native** — zero hotSpring reference code in the
 
 ### VALIDATED
 
-BarraCUDA's L1 pipeline is validated for production use:
+BarraCuda's L1 pipeline is validated for production use:
 
 - **Math accuracy**: 129/129 tests pass, all within expected precision
 - **Optimization quality**: Matches published SLy4 quality (chi2_BE ~5, J ~30 MeV)
@@ -215,13 +215,13 @@ BarraCUDA's L1 pipeline is validated for production use:
 
 ### Ready for L2
 
-L1 validation confirms all BarraCUDA math primitives, optimizers, and sampling strategies are correct. The identified limitations (SEMF model ceiling at ~25 MeV RMS for heavy nuclei) are physics model limitations, not library limitations.
+L1 validation confirms all BarraCuda math primitives, optimizers, and sampling strategies are correct. The identified limitations (SEMF model ceiling at ~25 MeV RMS for heavy nuclei) are physics model limitations, not library limitations.
 
 L2 validation will test:
 - Spherical HFB solver fidelity (the known chi2/datum = 28,450 gap)
 - L1-seeded warm-start effectiveness
 - Heterogeneous pipeline (NMP cascade + L1 proxy)
-- Whether BarraCUDA's optimization quality extends to the rugged L2 landscape
+- Whether BarraCuda's optimization quality extends to the rugged L2 landscape
 
 ---
 
@@ -239,7 +239,7 @@ L2 validation will test:
 | `validate_optimizers` | 22 optimizer/numerical tests |
 | `validate_md` | 20 MD force/integrator tests |
 
-### Archived (superseded by BarraCUDA native)
+### Archived (superseded by BarraCuda native)
 
 - `src/archive/surrogate.rs` — reference LOO-CV, DirectSampler, PenaltyFilter
 - `src/archive/stats.rs` — reference chi2, bootstrap, convergence

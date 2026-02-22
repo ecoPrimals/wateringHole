@@ -1,8 +1,8 @@
-# BarraCUDA Library Validation — hotSpring Nuclear EOS
+# BarraCuda Library Validation — hotSpring Nuclear EOS
 
 **Date**: February 12, 2026
 **From**: ecoPrimals Control Team (Eastgate) — hotSpring L1+L2 library validation
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Priority**: MEDIUM — SparsitySampler accuracy tuning needed
 **Follows**: BARRACUDA_SCIENTIFIC_COMPUTING_MIDDLEWARE_FEB11_2026.md
 
@@ -10,20 +10,20 @@
 
 ## Executive Summary
 
-We validated the newly-evolved BarraCUDA library modules against the Python control
-and the earlier custom (inline) BarraCUDA implementation. **All requested modules work
+We validated the newly-evolved BarraCuda library modules against the Python control
+and the earlier custom (inline) BarraCuda implementation. **All requested modules work
 correctly**. The SparsitySampler, RBFSurrogate, Nelder-Mead, LHS, bisect, and all
 special functions integrate cleanly. Throughput gains are significant (19-35× vs Python).
 
 **Critical finding**: The SparsitySampler's accuracy for high-dimensional problems (10D
 nuclear EOS) lags behind both the Python mystic implementation and our earlier custom
-BarraCUDA code. The root cause is identified and fixable.
+BarraCuda code. The root cause is identified and fixable.
 
 ---
 
 ## Part 1: What Was Validated
 
-### 1.1 BarraCUDA Modules Used Successfully
+### 1.1 BarraCuda Modules Used Successfully
 
 | Module | Function | Status |
 |--------|----------|--------|
@@ -53,7 +53,7 @@ BarraCUDA code. The root cause is identified and fixable.
 
 ### 2.1 L1 — SEMF (fast physics)
 
-| Metric | Python Control | Old BarraCUDA (custom) | New BarraCUDA (library) |
+| Metric | Python Control | Old BarraCuda (custom) | New BarraCuda (library) |
 |--------|---------------|----------------------|-------------------------|
 | χ²/datum | **1.75** | 2.27 | 5.04 |
 | Total evals | 1008 | 6028 | 1100 |
@@ -70,7 +70,7 @@ BarraCUDA code. The root cause is identified and fixable.
 
 ### 2.2 L2 — Hybrid HFB/SEMF (expensive physics)
 
-| Metric | Python Control | Old BarraCUDA (custom) | New BarraCUDA (library) |
+| Metric | Python Control | Old BarraCuda (custom) | New BarraCuda (library) |
 |--------|---------------|----------------------|-------------------------|
 | χ²/datum | 61.87 | **25.43** | 27266 |
 | Total evals | 96 | 1009 | 700 |
@@ -238,9 +238,9 @@ hybrid true+surrogate evaluation, the accuracy gap should close significantly.
 
 ## Summary
 
-The BarraCUDA team's evolution of the library modules is **excellent**. Every module
+The BarraCuda team's evolution of the library modules is **excellent**. Every module
 we requested works correctly. The speed advantage is significant (19-35× vs Python).
 The remaining accuracy gap is entirely in the SparsitySampler's evaluation strategy,
 which is a tuning issue, not a correctness issue. Once the hybrid evaluation mode is
-added, we expect BarraCUDA to match or exceed the Python control on both L1 and L2.
+added, we expect BarraCuda to match or exceed the Python control on both L1 and L2.
 

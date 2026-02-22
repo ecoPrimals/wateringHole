@@ -1,8 +1,8 @@
-# BarraCUDA L2 Evolution Handoff — SCF Offset, SparsitySampler, and Next Steps
+# BarraCuda L2 Evolution Handoff — SCF Offset, SparsitySampler, and Next Steps
 
 **Date**: February 13, 2026
 **From**: ecoPrimals Control Team (Eastgate) — hotSpring L2 validation
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Priority**: HIGH — contains traced root causes, specific file/line references, and validation criteria
 **Status**: L2 validated (chi2/datum = 91.98), evolution targets identified for closing gap to Python's 1.93
 
@@ -16,7 +16,7 @@ L2 validation achieved a **310x improvement** (28,450 → 91.98 chi2/datum) thro
 2. **SparsitySampler Evaluation Density** — NM runs on surrogate only, not true objective
 3. **External Dependency** — `nalgebra::SymmetricEigen` should be replaced by `barracuda::linalg::eigh_f64`
 
-The BarraCUDA team has already fixed several previously-reported issues (LOO-CV hat matrix, auto_smoothing, PenaltyFilter, warm_start_seeds, Brent root-finding). These need revalidation in hotSpring.
+The BarraCuda team has already fixed several previously-reported issues (LOO-CV hat matrix, auto_smoothing, PenaltyFilter, warm_start_seeds, Brent root-finding). These need revalidation in hotSpring.
 
 ---
 
@@ -32,7 +32,7 @@ When running both the Rust HFB solver and the Python reference on identical SLy4
 
 **The bug**: The docstring claims "Matches numpy.gradient() behavior" but the boundary treatment does NOT match numpy.
 
-**BarraCUDA (1st-order at boundaries)**:
+**BarraCuda (1st-order at boundaries)**:
 ```rust
 // gradient.rs line 55
 grad[0] = (f[1] - f[0]) / dx;                    // 1st-order forward
@@ -93,7 +93,7 @@ The `dR_i/dr` at r[0] (nearest to the nucleus center) is where radial wavefuncti
 
 **The issue**: The HFB solver uses a hand-rolled bisection algorithm (200 iterations, tol=1e-6) for the BCS chemical potential lambda. Python uses `scipy.optimize.brentq` which achieves machine precision (~1e-12) in typically 10-20 iterations.
 
-**BarraCUDA already has Brent**: `barracuda/src/optimize/brent.rs` — a complete Brent root-finder matching scipy.optimize.brentq.
+**BarraCuda already has Brent**: `barracuda/src/optimize/brent.rs` — a complete Brent root-finder matching scipy.optimize.brentq.
 
 **The fix** (in hotSpring hfb.rs):
 ```rust
@@ -114,7 +114,7 @@ let lam = result.root;
 
 **The issue**: The HFB solver uses `nalgebra::SymmetricEigen` (Jacobi algorithm) while Python uses `numpy.linalg.eigh` (LAPACK dsyevd, divide-and-conquer). For matrices with near-degenerate eigenvalues (common in nuclear physics — spin-orbit partners), different algorithms can produce different eigenvector phase conventions and ordering, leading to different density profiles.
 
-**BarraCUDA already has eigh**: `barracuda/src/linalg/eigh.rs` — Jacobi eigenvalue algorithm matching the interface needed.
+**BarraCuda already has eigh**: `barracuda/src/linalg/eigh.rs` — Jacobi eigenvalue algorithm matching the interface needed.
 
 **The fix** (in hotSpring hfb.rs):
 ```rust
@@ -126,7 +126,7 @@ use barracuda::linalg::eigh_f64;
 // (and update the diagonalization call at line 739)
 ```
 
-**Benefit**: Removes the last external dependency (nalgebra) from the HFB solver. May or may not improve the SCF offset, but ensures consistency within the BarraCUDA ecosystem.
+**Benefit**: Removes the last external dependency (nalgebra) from the HFB solver. May or may not improve the SCF offset, but ensures consistency within the BarraCuda ecosystem.
 
 **Impact estimate**: 0-10 MeV change (sign uncertain — could improve or worsen).
 
@@ -143,7 +143,7 @@ use barracuda::linalg::eigh_f64;
 
 ### What's Already Fixed (Needs Revalidation)
 
-The BarraCUDA team has implemented all previously-requested features:
+The BarraCuda team has implemented all previously-requested features:
 
 | Feature | File | Status |
 |---------|------|--------|
@@ -158,7 +158,7 @@ The BarraCUDA team has implemented all previously-requested features:
 All of these need revalidation in hotSpring. The revalidation protocol:
 
 ```bash
-# L1 revalidation with updated BarraCUDA
+# L1 revalidation with updated BarraCuda
 cargo run --release --bin nuclear_eos_l1_ref -- --lambda=10 --seed=42
 
 # L1 with SparsitySampler + auto_smoothing
@@ -174,7 +174,7 @@ cargo run --release --bin nuclear_eos_l2_ref -- --lambda=10 --l1-samples=3000 --
 
 **The problem**: The SparsitySampler runs Nelder-Mead on the SURROGATE (cheap) and only evaluates the TRUE objective at the single best point found. This means each iteration adds only ~8-20 true evaluations (one per NM solver).
 
-**Python's mystic** does ~100-200 true evaluations per round. The Python L2 run did 3,008 total evaluations to reach chi2=1.93. BarraCUDA's SparsitySampler with 5 iterations at ~20 true evals/iter = ~100 total — far fewer.
+**Python's mystic** does ~100-200 true evaluations per round. The Python L2 run did 3,008 total evaluations to reach chi2=1.93. BarraCuda's SparsitySampler with 5 iterations at ~20 true evals/iter = ~100 total — far fewer.
 
 **Current code path** (sparsity.rs:614-626):
 ```rust
@@ -314,7 +314,7 @@ Every bug encountered during L2 validation, with resolution status:
 
 ## Part 5: Revalidation Protocol
 
-When the BarraCUDA team has applied the Tier 1 fixes, hotSpring should revalidate:
+When the BarraCuda team has applied the Tier 1 fixes, hotSpring should revalidate:
 
 ### Step 1: Library Validation (10 min)
 ```bash
@@ -359,7 +359,7 @@ cargo run --release --bin nuclear_eos_l1 -- --auto-smoothing --seed=42
 
 ---
 
-## Part 6: What the BarraCUDA Team Delivered (Acknowledged)
+## Part 6: What the BarraCuda Team Delivered (Acknowledged)
 
 The following features were requested in previous handoffs and have been successfully implemented. The hotSpring team acknowledges this work:
 
@@ -381,7 +381,7 @@ The following features were requested in previous handoffs and have been success
 
 ## Part 7: File Reference
 
-### BarraCUDA Library (needs evolution)
+### BarraCuda Library (needs evolution)
 
 | File | What to change |
 |------|---------------|
@@ -389,7 +389,7 @@ The following features were requested in previous handoffs and have been success
 | `src/sample/sparsity.rs:167` | Default auto_smoothing = true |
 | `src/sample/sparsity.rs:614-626` | Add n_direct_solvers hybrid mode |
 
-### hotSpring (needs rewiring after BarraCUDA evolution)
+### hotSpring (needs rewiring after BarraCuda evolution)
 
 | File | What to change |
 |------|---------------|
@@ -399,7 +399,7 @@ The following features were requested in previous handoffs and have been success
 | `src/physics/hfb.rs:849-860` | Use barracuda::numerical::gradient_1d (after fix) |
 | `Cargo.toml` | Remove nalgebra dependency (after eigh_f64 wiring) |
 
-### Reference implementations (for BarraCUDA team)
+### Reference implementations (for BarraCuda team)
 
 | File | What it demonstrates |
 |------|---------------------|
@@ -425,7 +425,7 @@ The path from chi2/datum = 91.98 to < 30 is:
 Every bug is a test case. Every validation is an evolution step. The loop continues.
 
 ```
-BarraCUDA evolves → hotSpring validates → results committed → next evolution
+BarraCuda evolves → hotSpring validates → results committed → next evolution
 ```
 
 ---

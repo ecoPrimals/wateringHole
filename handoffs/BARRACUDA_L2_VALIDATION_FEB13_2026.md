@@ -1,4 +1,4 @@
-# BarraCUDA L2 Validation — HFB Physics Fix + NMP-Constrained Pipeline
+# BarraCuda L2 Validation — HFB Physics Fix + NMP-Constrained Pipeline
 
 **Date:** February 13, 2026
 **Status:** VALIDATED — chi2/datum = 91.98 (310x improvement over previous 28,450)
@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-The L2 (Hartree-Fock-Bogoliubov) validation completes the BarraCUDA nuclear EOS physics pipeline. Five critical physics features were implemented in the Rust HFB solver, bringing it from a simplified spherical HF to a full HF+BCS solver matching the Python reference architecture. Combined with the NMP-constrained optimization from L1, the pipeline achieves chi2/datum = 91.98 — a **310x improvement** over the previous 28,450 and within 1.5x of the Python reference's 61.87.
+The L2 (Hartree-Fock-Bogoliubov) validation completes the BarraCuda nuclear EOS physics pipeline. Five critical physics features were implemented in the Rust HFB solver, bringing it from a simplified spherical HF to a full HF+BCS solver matching the Python reference architecture. Combined with the NMP-constrained optimization from L1, the pipeline achieves chi2/datum = 91.98 — a **310x improvement** over the previous 28,450 and within 1.5x of the Python reference's 61.87.
 
 ## Physics Improvements Implemented
 
@@ -112,7 +112,7 @@ The discrepancy does NOT prevent effective parameter optimization — the optimi
 | chi2_total/datum | 127.01 |
 | L2 evaluations | 30 |
 | Runtime | 762s |
-| Previous BarraCUDA L2 | 28,450 (310x worse) |
+| Previous BarraCuda L2 | 28,450 (310x worse) |
 | Python/scipy reference | 61.87 (1.49x better) |
 
 ### NMP at Best Parameters
@@ -159,7 +159,7 @@ The 1.49x gap to Python is likely due to:
 
 **Expected improvement path:** Running with 5000+ L1 samples, 20+ NM starts, 200+ evals/start, and 5+ rounds should bring chi2/datum below 80.
 
-## NPU Pre-Screening Design (For BarraCUDA Team)
+## NPU Pre-Screening Design (For BarraCuda Team)
 
 ### Architecture
 
@@ -189,7 +189,7 @@ hotSpring → barracuda → akida-driver → AKD1000 (Akida NPU)
 - **Weight format:** Export classifier weights as quantized int8 for Akida
 - **Expected latency:** ~10us NPU ≈ ~10us CPU (gains come from power efficiency: ~50mW NPU vs ~15W CPU)
 - **Power advantage:** 300x more energy-efficient per inference
-- **Deployment:** The BarraCUDA team should wire `akida-driver` to accept exported weights and perform inference on the AKD1000. The `PreScreenClassifier` is already designed for this — just replace `predict()` with NPU inference.
+- **Deployment:** The BarraCuda team should wire `akida-driver` to accept exported weights and perform inference on the AKD1000. The `PreScreenClassifier` is already designed for this — just replace `predict()` with NPU inference.
 
 ### Pre-screening Bounds (Tightened from L1 Analysis)
 
@@ -217,10 +217,10 @@ NMPConstraints {
 2. **310x improvement** over previous L2 — entirely from physics implementation
 3. **NMP are physical:** J=33.4, K=248, m*/m=0.65 — consistent with nuclear physics
 4. **Within 1.5x of Python** — gap closeable with more optimization budget
-5. **NPU design documented** — ready for BarraCUDA team handoff
+5. **NPU design documented** — ready for BarraCuda team handoff
 6. **Pipeline is practical:** 762s runtime with 24-thread parallelism
 
-## Recommendations for BarraCUDA Evolution
+## Recommendations for BarraCuda Evolution
 
 1. **More L2 optimization budget:** Run with `--l1-samples=10000 --nm-starts=50 --evals=500 --rounds=5` to narrow gap with Python
 2. **Multi-seed variance study:** Run with different `--seed` values to characterize chi2 distribution

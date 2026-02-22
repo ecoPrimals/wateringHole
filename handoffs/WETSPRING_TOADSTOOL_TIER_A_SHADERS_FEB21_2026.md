@@ -2,7 +2,7 @@
 
 **Date:** 2026-02-21
 **From:** wetSpring (life science + analytical chemistry Spring)
-**To:** ToadStool / BarraCUDA core team
+**To:** ToadStool / BarraCuda core team
 **License:** AGPL-3.0-or-later
 **Context:** wetSpring v0.1.0 — 552 tests, 93.5% coverage, 1,501/1,501 checks,
 63 experiments, 15 ToadStool primitives consumed, 9 local WGSL shaders validated

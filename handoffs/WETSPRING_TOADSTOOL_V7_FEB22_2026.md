@@ -1,8 +1,8 @@
-# wetSpring → ToadStool/BarraCUDA: Evolution Handoff v7
+# wetSpring → ToadStool/BarraCuda: Evolution Handoff v7
 
 **Date:** February 22, 2026
 **From:** wetSpring (Life Science & Analytical Chemistry validation)
-**To:** ToadStool/BarraCUDA team
+**To:** ToadStool/BarraCuda team
 **License:** AGPL-3.0-or-later
 **Type:** CROSS-PRIMAL EVOLUTION HANDOFF
 **Supersedes:** v6 (Feb 21) — archived at `archive/handoffs/HANDOFF_V6_FEB_21_2026.md`

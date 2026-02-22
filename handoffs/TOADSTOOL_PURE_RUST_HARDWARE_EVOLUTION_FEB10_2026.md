@@ -2,21 +2,21 @@
 
 **Date**: February 10, 2026
 **From**: ecoPrimals Control Team (Eastgate)
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Priority**: HIGH — Enables full heterogeneous compute pipeline
 
 ---
 
 ## Executive Summary
 
-BarraCUDA already has an extraordinary foundation: **401 WGSL shaders**, a **unified device
+BarraCuda already has an extraordinary foundation: **401 WGSL shaders**, a **unified device
 abstraction** (CPU/GPU/NPU/TPU), and a **pure Rust Akida driver**. This handoff details what
 needs to evolve to achieve a single pure-Rust binary that dispatches computation to the optimal
 hardware — GPU via WGSL shaders, NPU via compiled models, or CPU via native Rust — without
 any C dependencies, Python SDKs, or kernel module maintenance.
 
 **Key Insight**: GPUs, NPUs, and TPUs are fundamentally different compute architectures.
-BarraCUDA should not try to make them all look the same. Instead, it should be **agnostic about
+BarraCuda should not try to make them all look the same. Instead, it should be **agnostic about
 which hardware runs**, but **specific about how each hardware type receives work**.
 
 ---
@@ -79,7 +79,7 @@ DISPATCH MODEL: Submit shader → GPU runs ALL threads in parallel → Read back
 - **Programming**: Write a WGSL shader, dispatch workgroups, read storage buffers
 - **Strengths**: Dense computation, matrix ops, FFT, physics forces, everything that's embarrassingly parallel
 - **Power**: 100-350W (RTX 3090: 350W, RTX 4070: 200W)
-- **What BarraCUDA does today**: ✅ Ships 401 WGSL shaders, dispatches via wgpu
+- **What BarraCuda does today**: ✅ Ships 401 WGSL shaders, dispatches via wgpu
 
 **GPU receives**: Raw math instructions (WGSL shaders)
 **GPU returns**: Raw computed buffers
@@ -95,7 +95,7 @@ DISPATCH MODEL: Load compiled model → Feed input → NPU runs pre-configured n
 - **Programming**: You DON'T write shaders. You train a Keras model → convert with `cnn2snn`/`quantizeml` → compile to binary → load onto NPU
 - **Strengths**: Inference of pre-trained models at 1000x lower energy than GPU. Sparse data (mostly zeros) = mostly zero power
 - **Power**: 1-2W total (!!!)
-- **What BarraCUDA does today**: ✅ Discovers device, loads models, runs inference via pure Rust driver
+- **What BarraCuda does today**: ✅ Discovers device, loads models, runs inference via pure Rust driver
 
 **NPU receives**: Pre-compiled neural network model + quantized input tensor
 **NPU returns**: Classification/regression output vector
@@ -111,7 +111,7 @@ DISPATCH MODEL: Compile TF/JAX graph → TPU executes fused operations → Read 
 - **Programming**: Write in TF/JAX, compiler converts to TPU ops. Coral Edge TPU needs TFLite models
 - **Strengths**: Large matrix multiplications, training, sustained throughput
 - **Power**: 250W (Cloud TPU v4) or 2W (Coral Edge)
-- **What BarraCUDA does today**: ⚠️ Scaffolded but not wired
+- **What BarraCuda does today**: ⚠️ Scaffolded but not wired
 
 **TPU receives**: Compiled computation graph (XLA)
 **TPU returns**: Computed tensors
@@ -124,8 +124,8 @@ NPU:  "Here's a trained model, classify this input"   → PRE-COMPILED INFERENCE
 TPU:  "Here's a computation graph, execute it"         → GRAPH EXECUTION ENGINE
 ```
 
-**BarraCUDA should NOT try to run WGSL shaders on an NPU.** That's like trying to run
-assembly on a calculator. Instead, BarraCUDA should:
+**BarraCuda should NOT try to run WGSL shaders on an NPU.** That's like trying to run
+assembly on a calculator. Instead, BarraCuda should:
 
 1. **Know what each device is good at** (already done: `WorkloadHint`)
 2. **Route workloads to the right device** (already done: `Device::select_for_workload`)
@@ -186,7 +186,7 @@ Keras model → quantizeml (quantize to 4-bit/1-bit) → cnn2snn (convert to SNN
 
 **Target Rust workflow**:
 ```
-BarraCUDA tensor ops → Quantize (Rust) → Model binary format → akida-driver → NPU
+BarraCuda tensor ops → Quantize (Rust) → Model binary format → akida-driver → NPU
 ```
 
 **What ToadStool should build**:
@@ -195,7 +195,7 @@ BarraCUDA tensor ops → Quantize (Rust) → Model binary format → akida-drive
 |-----------|-------------|--------|
 | `npu/quantize.rs` | Quantize f32 weights to 1/2/4-bit using existing `quantize.wgsl` shader | 1 week |
 | `npu/model_format.rs` | Parse/generate Akida model binary format (reverse-engineer `.fbz`) | 2-3 weeks |
-| `npu/compiler.rs` | Map BarraCUDA layers → Akida layer configs (CNP/FNP types) | 2-3 weeks |
+| `npu/compiler.rs` | Map BarraCuda layers → Akida layer configs (CNP/FNP types) | 2-3 weeks |
 | `npu/calibration.rs` | Post-training calibration using representative dataset | 1 week |
 
 **Priority order**: `quantize.rs` first (enables mixed CPU+NPU inference immediately).
@@ -285,7 +285,7 @@ Here's the vision for a single-binary heterogeneous compute pipeline:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                    BarraCUDA Pure Rust Binary                    │
+│                    BarraCuda Pure Rust Binary                    │
 │                                                                 │
 │  ┌──────────────┐  ┌──────────────┐  ┌──────────────────────┐  │
 │  │  WorkloadHint │  │ DeviceRouter │  │  FallbackChain       │  │
@@ -313,14 +313,14 @@ Here's the vision for a single-binary heterogeneous compute pipeline:
 ```
 
 ### GPU Path (WGSL Shaders)
-1. BarraCUDA selects WGSL shader for the operation
+1. BarraCuda selects WGSL shader for the operation
 2. Binds input/output storage buffers
 3. Dispatches compute workgroups via wgpu
 4. Reads results from GPU memory
 5. **Works on ANY GPU**: NVIDIA (Vulkan), AMD (Vulkan), Intel (Vulkan), Apple (Metal)
 
 ### NPU Path (Pre-compiled Models)
-1. BarraCUDA checks if a compiled model exists for this workload
+1. BarraCuda checks if a compiled model exists for this workload
 2. Quantizes input (f32 → uint8) via `EventCodec`
 3. Writes quantized tensor to NPU via VFIO DMA
 4. NPU runs compiled neural network on spiking hardware
@@ -328,7 +328,7 @@ Here's the vision for a single-binary heterogeneous compute pipeline:
 6. **Key**: Only useful for inference of pre-trained models, NOT arbitrary math
 
 ### CPU Path (Native Rust)
-1. BarraCUDA runs the operation directly in Rust
+1. BarraCuda runs the operation directly in Rust
 2. Uses SIMD intrinsics where available (via `packed_simd2` or `std::simd`)
 3. Leverages `rayon` for data parallelism across CPU cores
 4. **Always available as fallback**
@@ -433,7 +433,7 @@ pub struct AkidaExecutor {
 | Model pipeline (NPU) | ❌ Python-only | Rust quantizer + model format | 4-6 |
 | **TOTAL for pure Rust heterogeneous compute** | | | **~15-20 weeks** |
 
-**The architecture is sound.** BarraCUDA already thinks about hardware the right way — it
+**The architecture is sound.** BarraCuda already thinks about hardware the right way — it
 discovers capabilities at runtime, routes workloads by hint, and provides fallback chains.
 The evolution is about deepening each path (GPU: more shaders, NPU: VFIO + model pipeline)
 and connecting them to the scientific computing workflow.

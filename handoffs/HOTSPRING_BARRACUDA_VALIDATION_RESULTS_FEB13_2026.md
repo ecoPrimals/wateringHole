@@ -1,8 +1,8 @@
-# hotSpring × BarraCUDA Validation Results — Full Summary
+# hotSpring × BarraCuda Validation Results — Full Summary
 
 **Date**: February 13, 2026
 **Project**: ecoPrimals/hotSpring — Nuclear EOS Parameter Optimization
-**Library**: BarraCUDA (Hardware-Agnostic Tensor Compute)
+**Library**: BarraCuda (Hardware-Agnostic Tensor Compute)
 **Reference**: Murillo Lab Python/SciPy implementation
 
 ---
@@ -19,7 +19,7 @@ hotSpring Validation Pipeline
 ├── Level 2 (HFB) — Spherical Hartree-Fock-Bogoliubov
 │   ├── Physics: p/n HFB + BCS + Coulomb + T_eff + CM
 │   ├── NMP-constrained objective (χ²_BE + λ·χ²_NMP)
-│   ├── Math: 100% BarraCUDA native (no external deps)
+│   ├── Math: 100% BarraCuda native (no external deps)
 │   └── Optimizer: DirectSampler with L1 warm-start seeds
 │
 └── Level 3 (Deformed HFB) — Axially-deformed [IN DEVELOPMENT]
@@ -32,8 +32,8 @@ hotSpring Validation Pipeline
 
 | Method | χ²/datum | Evals | Time | vs Python |
 |--------|----------|-------|------|-----------|
-| **BarraCUDA DirectSampler** | **0.80** | 64 | 0.44s | **8.3× better** |
-| BarraCUDA SparsitySampler | 40.83 | 300 | 0.67s | 6.2× worse |
+| **BarraCuda DirectSampler** | **0.80** | 64 | 0.44s | **8.3× better** |
+| BarraCuda SparsitySampler | 40.83 | 300 | 0.67s | 6.2× worse |
 | Python/SciPy (mystic) | 6.62 | 1008 | 180s | baseline |
 
 - **Throughput**: 400× faster than Python
@@ -52,7 +52,7 @@ hotSpring Validation Pipeline
 | Time | 3208s |
 | NMP within 2σ | 4/5 (ρ₀ at -3.6σ) |
 | vs Python | **3.8× better** |
-| vs initial BarraCUDA | **1,764× improvement** |
+| vs initial BarraCuda | **1,764× improvement** |
 
 ### Run B: Best Physics (seed=123, λ=1.0)
 
@@ -104,7 +104,7 @@ hotSpring Validation Pipeline
 4. T_eff and spin-orbit in deformed basis
 5. SCF convergence (need Broyden mixing)
 
-## 5. BarraCUDA Math Library Validation
+## 5. BarraCuda Math Library Validation
 
 ### Functions Validated Against Python/NumPy/SciPy:
 
@@ -136,9 +136,9 @@ hotSpring Validation Pipeline
 | +Physics | Added all 5 physics features | ~92 | 309× |
 | +gradient_1d fix | 2nd-order boundary stencils | ~25 | 3.7× |
 | +brent | Replaced bisection with Brent's method | ~18 | 1.4× |
-| +eigh_f64 | Replaced nalgebra with BarraCUDA eigensolver | **16.11** | 1.1× |
+| +eigh_f64 | Replaced nalgebra with BarraCuda eigensolver | **16.11** | 1.1× |
 | Combined | All fixes | **16.11** | **1,764×** |
-| Python ref | SciPy control | 61.87 | BarraCUDA is **3.8× better** |
+| Python ref | SciPy control | 61.87 | BarraCuda is **3.8× better** |
 
 ## 7. Paper Parity Gap Analysis
 
@@ -180,11 +180,11 @@ hotSpring/barracuda/
 
 ## 9. Conclusion
 
-BarraCUDA has achieved **full Python/SciPy parity and beyond** at both L1 and L2 levels:
+BarraCuda has achieved **full Python/SciPy parity and beyond** at both L1 and L2 levels:
 
 - **L1**: 8.3× better accuracy, 400× faster throughput
 - **L2**: 3.8× better accuracy with physical NMP constraints
-- **Zero external dependencies**: All math is BarraCUDA native
+- **Zero external dependencies**: All math is BarraCuda native
 - **L3**: Architecture in place, ready for debugging and evolution
 
 The path to paper parity (10⁻⁶) requires:

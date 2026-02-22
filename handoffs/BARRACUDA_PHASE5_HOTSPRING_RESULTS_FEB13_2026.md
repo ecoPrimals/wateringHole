@@ -1,8 +1,8 @@
-# BarraCUDA & ToadStool — Phase 5 Handoff: What Works, What Doesn't, What's Next
+# BarraCuda & ToadStool — Phase 5 Handoff: What Works, What Doesn't, What's Next
 
 **Date**: February 13, 2026
 **From**: ecoPrimals Control Team (Eastgate) — hotSpring full validation
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Priority**: CRITICAL — contains validated performance data, identified bugs, and evolution specifications
 **Status**: Phase A+B fully validated, reference implementations complete, production gaps identified
 
@@ -10,17 +10,17 @@
 
 ## Executive Summary
 
-After extensive validation of BarraCUDA against Python/scipy controls using hotSpring's nuclear EOS workloads, we have **definitive performance data** showing where BarraCUDA matches or exceeds scipy, and where critical gaps remain.
+After extensive validation of BarraCuda against Python/scipy controls using hotSpring's nuclear EOS workloads, we have **definitive performance data** showing where BarraCuda matches or exceeds scipy, and where critical gaps remain.
 
 ### The Headline Numbers
 
-| Pipeline | BarraCUDA | Python/scipy | Verdict |
+| Pipeline | BarraCuda | Python/scipy | Verdict |
 |----------|-----------|-------------|---------|
-| **L1 (SEMF) Round-Based NM** | **χ²/datum = 1.19** (164 evals, 0.25s) | χ²/datum = 6.62 (1008 evals, ~180s) | **✅ BarraCUDA WINS by 82%, 6× fewer evals, 720× faster** |
-| **L1 (SEMF) SparsitySampler** | χ²/datum = 5.04 (700 evals, 1.1s) | χ²/datum = 6.62 (1008 evals, ~180s) | **✅ BarraCUDA WINS by 24%, 30% fewer evals** |
-| **L2 (HFB) All approaches** | χ²/datum = 28,450 (4022 evals, 743s) | χ²/datum = 25.43 (1009 evals, 2091s) | **❌ BarraCUDA 1000× behind** |
+| **L1 (SEMF) Round-Based NM** | **χ²/datum = 1.19** (164 evals, 0.25s) | χ²/datum = 6.62 (1008 evals, ~180s) | **✅ BarraCuda WINS by 82%, 6× fewer evals, 720× faster** |
+| **L1 (SEMF) SparsitySampler** | χ²/datum = 5.04 (700 evals, 1.1s) | χ²/datum = 6.62 (1008 evals, ~180s) | **✅ BarraCuda WINS by 24%, 30% fewer evals** |
+| **L2 (HFB) All approaches** | χ²/datum = 28,450 (4022 evals, 743s) | χ²/datum = 25.43 (1009 evals, 2091s) | **❌ BarraCuda 1000× behind** |
 
-**Bottom line**: L1 is solved — BarraCUDA significantly outperforms scipy. L2 has a fundamental physics fidelity gap in the HFB solver, not an optimizer or library problem.
+**Bottom line**: L1 is solved — BarraCuda significantly outperforms scipy. L2 has a fundamental physics fidelity gap in the HFB solver, not an optimizer or library problem.
 
 ---
 
@@ -36,22 +36,22 @@ After extensive validation of BarraCUDA against Python/scipy controls using hotS
 | MD Forces & Integrators | **20/20** | Lennard-Jones, Coulomb, Morse, Velocity-Verlet — Newton's 3rd law verified |
 | **TOTAL** | **129/129** | Zero failures across all suites |
 
-Every BarraCUDA math function we tested matches scipy to the expected precision (f64: 1e-10 to 1e-14, f32: 1e-6).
+Every BarraCuda math function we tested matches scipy to the expected precision (f64: 1e-10 to 1e-14, f32: 1e-6).
 
-### 1.2 L1 Nuclear EOS — BarraCUDA Beats scipy
+### 1.2 L1 Nuclear EOS — BarraCuda Beats scipy
 
 **Round-Based Direct Nelder-Mead** (our reference implementation):
 
 ```
   Method                                   χ²/datum      Evals     Time
   ──────────────────────────────────────── ────────── ──────── ────────
-  Round-Based Direct NM (BarraCUDA)            1.1933      164     0.3s
-  SparsitySampler + AutoSmooth (BarraCUDA)    40.8277      150     0.5s
+  Round-Based Direct NM (BarraCuda)            1.1933      164     0.3s
+  SparsitySampler + AutoSmooth (BarraCuda)    40.8277      150     0.5s
   SparsitySampler + smoothing=0.01 (old)       5.0427      700     1.1s
   Python/scipy SparsitySampler (control)       6.6200     1008   ~180s
 ```
 
-**Why BarraCUDA wins L1:**
+**Why BarraCuda wins L1:**
 - `barracuda::optimize::nelder_mead` is fast and correct
 - `barracuda::sample::latin_hypercube` provides good space-filling seeds
 - `barracuda::optimize::multi_start_nelder_mead` with round-based early stopping converges efficiently
@@ -77,7 +77,7 @@ Every BarraCUDA math function we tested matches scipy to the expected precision 
 
 ### 1.3 Throughput Summary
 
-| Operation | BarraCUDA throughput | Python equivalent | Speedup |
+| Operation | BarraCuda throughput | Python equivalent | Speedup |
 |-----------|---------------------|-------------------|---------|
 | L1 (SEMF) eval | **3,998 evals/s** | ~5.6 evals/s | **714×** |
 | L2 (HFB) eval | **5.4 evals/s** | ~0.05 evals/s | **108×** |
@@ -266,7 +266,7 @@ let gamma_val = gamma(n as f64 + l as f64 + 1.5).unwrap();
 
 ---
 
-## Part 3: The L2 Gap — Why It's Not BarraCUDA's Fault
+## Part 3: The L2 Gap — Why It's Not BarraCuda's Fault
 
 ### 3.1 What We Tried
 
@@ -283,21 +283,21 @@ let gamma_val = gamma(n as f64 + l as f64 + 1.5).unwrap();
 
 ### 3.2 Critical Finding: The Gap Is Physics, Not Math
 
-The `χ²/datum = 25.43` result was achieved by running **Python** code orchestrated through toadstool — NOT Rust-native BarraCUDA. All Rust-native L2 attempts produce χ² in the 28,000–60,000 range.
+The `χ²/datum = 25.43` result was achieved by running **Python** code orchestrated through toadstool — NOT Rust-native BarraCuda. All Rust-native L2 attempts produce χ² in the 28,000–60,000 range.
 
 **Where the gap lives**:
-- BarraCUDA's math functions (Nelder-Mead, RBF, LHS) work correctly ✅
-- BarraCUDA's special functions (gamma, laguerre, bessel) match scipy ✅
+- BarraCuda's math functions (Nelder-Mead, RBF, LHS) work correctly ✅
+- BarraCuda's special functions (gamma, laguerre, bessel) match scipy ✅
 - The **HFB solver** in `hotspring_barracuda::physics::hfb` produces binding energies that are **3-4× too large** compared to experiment
 - This is a **spherical-only HFB implementation** — the Murillo group uses deformed HFBTHO
 
 **Evidence**: All 20 L1-seeded NM starts converged to similar L2 solutions (`log(1+χ²) ≈ 10.26`), suggesting the optimizer found the global minimum of the Rust HFB landscape — it's just that this landscape is fundamentally different from the Python HFB landscape.
 
-### 3.3 What This Means for BarraCUDA
+### 3.3 What This Means for BarraCuda
 
-**BarraCUDA does NOT need to fix L2.** The L2 problem is in the physics implementation in `hotspring_barracuda::physics::hfb`, not in the BarraCUDA library itself. The library's optimizers, surrogates, and math functions all work correctly.
+**BarraCuda does NOT need to fix L2.** The L2 problem is in the physics implementation in `hotspring_barracuda::physics::hfb`, not in the BarraCuda library itself. The library's optimizers, surrogates, and math functions all work correctly.
 
-What BarraCUDA CAN do to help L2:
+What BarraCuda CAN do to help L2:
 1. **Fix LOO-CV** (§2.1) so surrogates are usable on rough landscapes
 2. **Add warm-start API** (§2.4) so L1 seeds flow into L2 naturally
 3. **Add penalty filtering** (§2.3) so surrogates aren't corrupted by penalties
@@ -307,11 +307,11 @@ What BarraCUDA CAN do to help L2:
 
 ## Part 4: Reference Implementations Provided
 
-hotSpring has built **reference implementations** in Rust that serve as **executable specifications** for BarraCUDA's evolution. These are proven, tested, and commit-available:
+hotSpring has built **reference implementations** in Rust that serve as **executable specifications** for BarraCuda's evolution. These are proven, tested, and commit-available:
 
 ### 4.1 `hotspring_barracuda::surrogate` — Reference Surrogate Module
 
-| Function | What It Does | BarraCUDA Target |
+| Function | What It Does | BarraCuda Target |
 |----------|-------------|-----------------|
 | `loo_cv_optimal_smoothing()` | Grid search over smoothing values, returns optimal | `SparsitySamplerConfig::auto_smoothing` |
 | `loo_cv_rmse_ref()` | Correct hat matrix LOO-CV implementation | `RBFSurrogate::loo_cv_rmse()` fix |
@@ -326,13 +326,13 @@ hotSpring has built **reference implementations** in Rust that serve as **execut
 
 ### 4.2 `hotspring_barracuda::stats` — Reference Statistics Module
 
-| Function | What It Does | BarraCUDA Target |
+| Function | What It Does | BarraCuda Target |
 |----------|-------------|-----------------|
 | `chi2_decomposed()` | Per-datum chi² with residuals, pulls, worst-N | `barracuda::stats::chi_squared::decomposed()` |
 | `bootstrap_ci()` | Bootstrap confidence intervals for any statistic | `barracuda::stats::bootstrap::confidence_interval()` |
 | `convergence_diagnostics()` | Detect convergence/stagnation in optimization | `barracuda::optimize::diagnostics::convergence()` |
 | `Chi2Result::print_summary()` | Human-readable chi² analysis | Pattern for library reporting |
-| `Chi2Result::p_value()` | Uses `regularized_gamma_q` for chi² CDF | Already uses BarraCUDA ✅ |
+| `Chi2Result::p_value()` | Uses `regularized_gamma_q` for chi² CDF | Already uses BarraCuda ✅ |
 
 **Test coverage**: 3 unit tests passing (`test_chi2_decomposed`, `test_bootstrap_mean`, `test_convergence_improving`)
 
@@ -402,7 +402,7 @@ These improve the overall platform:
 
 ## Part 6: Every Bug Encountered (Chronological)
 
-Every bug found during hotSpring validation is a test case for BarraCUDA's evolution:
+Every bug found during hotSpring validation is a test case for BarraCuda's evolution:
 
 ### Bug 1: `gamma()` Return Type Change
 - **When**: Phase A+B revalidation
@@ -431,13 +431,13 @@ Every bug found during hotSpring validation is a test case for BarraCUDA's evolu
 ### Bug 4: LOO-CV Hat Matrix Returns H_ii = 1.0
 - **When**: Implementing `nuclear_eos_l1_ref.rs` with auto-smoothing
 - **What**: `RBFSurrogate::loo_cv_rmse()` produced `inf` or nonsensical values
-- **Impact**: Could not auto-tune smoothing via BarraCUDA's built-in LOO-CV
+- **Impact**: Could not auto-tune smoothing via BarraCuda's built-in LOO-CV
 - **Fix**: Wrote `loo_cv_rmse_ref()` with correct hat matrix computation
 - **Lesson**: Hat matrix = K_raw · (K_smooth)⁻¹, NOT (K_smooth)⁻¹ · (K_smooth) = I
 - **Status**: ⚠️ Workaround in place, needs library fix
 
 ### Bug 5: SparsitySampler Default Smoothing = 1e-12
-- **When**: L1 revalidation with updated BarraCUDA
+- **When**: L1 revalidation with updated BarraCuda
 - **What**: `SparsitySamplerConfig::smoothing` defaults to `1e-12` → exact interpolation
 - **Impact**: Surrogate RMSE = 0.0000 at training points, terrible out-of-sample prediction
 - **Fix**: Added `--smoothing` CLI arg to L1/L2 binaries, tested with `smoothing=0.01`
@@ -458,7 +458,7 @@ Every bug found during hotSpring validation is a test case for BarraCUDA's evolu
 - **Impact**: 100% of NM starts converged to penalty boundary, not physical solutions
 - **Fix**: L1-seeded starting points (best L1 solutions guaranteed to be NMP-valid)
 - **Lesson**: `with_warm_start()` API is essential for layered optimization
-- **Status**: ✅ Fixed in hotSpring, API specified for BarraCUDA
+- **Status**: ✅ Fixed in hotSpring, API specified for BarraCuda
 
 ### Bug 8: `adapter_name()` Not Found on `WgpuDevice`
 - **When**: Implementing `validate_md.rs`
@@ -472,7 +472,7 @@ Every bug found during hotSpring validation is a test case for BarraCUDA's evolu
 
 ## Part 7: Architecture Patterns Proven by hotSpring
 
-These patterns are proven in production and should be incorporated into BarraCUDA:
+These patterns are proven in production and should be incorporated into BarraCuda:
 
 ### 7.1 The Dual-Precision Strategy ✅ PROVEN
 
@@ -528,7 +528,7 @@ Should be supported by `SparsitySamplerConfig::with_warm_start()`.
 
 ## Part 8: Codebase Statistics
 
-### BarraCUDA Library
+### BarraCuda Library
 
 | Metric | Count |
 |--------|-------|
@@ -561,12 +561,12 @@ Should be supported by `SparsitySamplerConfig::with_warm_start()`.
 
 ### What the Team Delivered
 
-The BarraCUDA team has built an extraordinary scientific computing platform. The Phase A+B evolution (cholesky_f64, eigh_f64, gen_eigh_f64, dispatch, CubicSpline, Newton-Raphson, Brent, chi_squared_*, regularized_gamma_*, EvaluationCache persistence, loo_cv_rmse) was exactly what was requested and all 129 validation tests pass.
+The BarraCuda team has built an extraordinary scientific computing platform. The Phase A+B evolution (cholesky_f64, eigh_f64, gen_eigh_f64, dispatch, CubicSpline, Newton-Raphson, Brent, chi_squared_*, regularized_gamma_*, EvaluationCache persistence, loo_cv_rmse) was exactly what was requested and all 129 validation tests pass.
 
 ### What hotSpring Proved
 
-1. **BarraCUDA BEATS scipy on L1** — 82% better χ²/datum, 720× faster
-2. **BarraCUDA's math is correct** — 129/129 validation tests
+1. **BarraCuda BEATS scipy on L1** — 82% better χ²/datum, 720× faster
+2. **BarraCuda's math is correct** — 129/129 validation tests
 3. **The dual-precision architecture works** — f32 GPU + f64 CPU is optimal
 4. **The surrogate has a fixable bug** — LOO-CV hat matrix
 5. **Round-based direct NM outperforms surrogate-guided** — for smooth landscapes
@@ -586,7 +586,7 @@ The BarraCUDA team has built an extraordinary scientific computing platform. The
 ### The Validation Loop
 
 ```
-BarraCUDA evolves → hotSpring validates → results committed → next evolution
+BarraCuda evolves → hotSpring validates → results committed → next evolution
 ```
 
 Every fix and feature will be validated in hotSpring against the nuclear EOS L1/L2 workloads and the 129-test validation suite. Results are committed as JSON to `hotSpring/control/surrogate/nuclear-eos/results/` for longitudinal tracking.

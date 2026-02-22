@@ -1,8 +1,8 @@
-# BarraCUDA Scientific Computing Middleware Handoff
+# BarraCuda Scientific Computing Middleware Handoff
 
 **Date**: February 11, 2026
 **From**: ecoPrimals Control Team (Eastgate) — hotSpring L1+L2 validation
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Priority**: HIGH — Enables self-contained scientific computing without inline code
 **Depends On**: TOADSTOOL_PHYSICS_SHADERS_FEB08_2026.md, TOADSTOOL_PURE_RUST_HARDWARE_EVOLUTION_FEB10_2026.md
 **Status**: Working code exists in L1/L2 binaries — needs extraction into library
@@ -12,7 +12,7 @@
 ## Executive Summary
 
 We built two complete nuclear physics pipelines — **Level 1** (SEMF) and **Level 2**
-(spherical HF+BCS) — as standalone Rust binaries using BarraCUDA for GPU-accelerated
+(spherical HF+BCS) — as standalone Rust binaries using BarraCuda for GPU-accelerated
 surrogate learning. Both pipelines work. Both validate against the Python control.
 
 **The problem**: ~600 lines of scientific computing code are **duplicated verbatim**
@@ -20,11 +20,11 @@ between `nuclear_eos_l1.rs` and `nuclear_eos_l2.rs`. This code is general-purpos
 mathematical infrastructure — linear solvers, optimizers, RBF surrogates, root-finders,
 numerical integration — that every future scientific workload will need.
 
-**The ask**: Extract this inline code into proper BarraCUDA library modules so the
+**The ask**: Extract this inline code into proper BarraCuda library modules so the
 next primal team doesn't have to re-implement Gauss-Jordan elimination, Nelder-Mead,
 or RBF interpolation from scratch.
 
-**Key insight from validation**: BarraCUDA's 370+ WGSL shader library is extraordinary
+**Key insight from validation**: BarraCuda's 370+ WGSL shader library is extraordinary
 for tensor operations. What's missing is the **middleware layer** that connects raw
 tensor ops to real scientific workflows. The L1/L2 binaries wrote that middleware inline.
 Now it needs to be promoted into the library.
@@ -35,7 +35,7 @@ Now it needs to be promoted into the library.
 
 ### 1.1 L1 Pipeline (SEMF — fast)
 
-| Metric | Python Control | BarraCUDA (Rust) |
+| Metric | Python Control | BarraCuda (Rust) |
 |--------|---------------|------------------|
 | Best χ²/datum | 3.93 | **1.34** |
 | Throughput | 46.1 evals/s | **646.8 evals/s** |
@@ -43,11 +43,11 @@ Now it needs to be promoted into the library.
 | Precision | f64 (PyTorch) | f64 (dual: GPU f32 cdist → CPU f64 LA) |
 | Time (30 rounds) | 129.9s | 9.3s |
 
-**Verdict**: Full parity. BarraCUDA is faster AND finds better optima with more evals.
+**Verdict**: Full parity. BarraCuda is faster AND finds better optima with more evals.
 
 ### 1.2 L2 Pipeline (Spherical HF+BCS — expensive)
 
-| Metric | Python Control | BarraCUDA (Rust) |
+| Metric | Python Control | BarraCuda (Rust) |
 |--------|---------------|------------------|
 | Throughput | 0.28 evals/s | **0.49 evals/s** |
 | Speedup | — | **1.7×** |
@@ -58,12 +58,12 @@ Now it needs to be promoted into the library.
 
 **Verdict**: Throughput parity achieved (1.7× faster per eval). Accuracy gap is
 **sampling strategy**, not physics or compute — Python uses `mystic.SparsitySampler`,
-BarraCUDA uses naive random + single Nelder-Mead. The optimizer is the bottleneck.
+BarraCuda uses naive random + single Nelder-Mead. The optimizer is the bottleneck.
 
 ### 1.3 The Dual-Precision Architecture
 
 Consumer GPUs (RTX 4070) have hardware-gimped f64 at 1/64 f32 rate. We solved this
-with a dual-precision pipeline that should become BarraCUDA's standard scientific pattern:
+with a dual-precision pipeline that should become BarraCuda's standard scientific pattern:
 
 ```
 GPU (f32):  cdist shader → pairwise distance matrix (numerically stable at f32)
@@ -79,7 +79,7 @@ maintaining f64 accuracy where it matters (kernel evaluation, linear algebra).
 The `cdist` matrix for ~5800 training points exceeded wgpu's default 128MB
 `max_storage_buffer_binding_size`. We patched `wgpu_device.rs` to request 1GB and
 capped the optimizer's training set to 2000 best clean points. This is a general
-issue — any O(n²) pairwise computation will hit this. BarraCUDA should document
+issue — any O(n²) pairwise computation will hit this. BarraCuda should document
 and handle this gracefully.
 
 ---
@@ -87,7 +87,7 @@ and handle this gracefully.
 ## Part 2: Code That Must Be Extracted
 
 The following functions are **copy-pasted between L1 and L2**. They are
-general-purpose and belong in the BarraCUDA library.
+general-purpose and belong in the BarraCuda library.
 
 ### 2.1 Linear Algebra (`barracuda::linalg`) — CRITICAL
 
@@ -204,9 +204,9 @@ Bisection root-finder. Replaces `scipy.optimize.brentq`. 15 lines, used in L2.
 
 #### Missing but critical: `latin_hypercube()` and `sparsity_sampler()`
 
-The L1/L2 comparison revealed that **the #1 accuracy gap** between BarraCUDA and
+The L1/L2 comparison revealed that **the #1 accuracy gap** between BarraCuda and
 the Python control is the sampling strategy. Python uses `mystic.SparsitySampler`
-which uses maximin distance criteria to fill gaps in parameter space. BarraCUDA uses
+which uses maximin distance criteria to fill gaps in parameter space. BarraCuda uses
 naive `rand::gen_range()` uniform random sampling.
 
 ```rust
@@ -229,7 +229,7 @@ naive `rand::gen_range()` uniform random sampling.
 
 **Priority note**: Latin hypercube is a weekend implementation. SparsitySampler is
 the real prize — it's what makes the Python control converge to χ²=1.93 with only
-3008 evaluations while BarraCUDA's random sampling produces χ²=87 with 1009 evals.
+3008 evaluations while BarraCuda's random sampling produces χ²=87 with 1009 evals.
 
 ### 2.4 Numerical Methods (`barracuda::numerical`) — MEDIUM
 
@@ -338,7 +338,7 @@ only for matrices ≥ 500×500. Low priority.
 ### 4.1 Dtype-Aware Tensor (Evolution Path)
 
 The current `Tensor` is f32-only. The `to_vec_f64()` method is a read-and-cast,
-not a true f64 tensor. For scientific computing parity, BarraCUDA needs f64 awareness.
+not a true f64 tensor. For scientific computing parity, BarraCuda needs f64 awareness.
 
 **Recommended evolution (incremental, non-breaking)**:
 
@@ -440,23 +440,23 @@ gets RBF interpolation + Nelder-Mead + smart sampling for free. This includes:
 
 ### 5.3 The SparsitySampler Prize
 
-The biggest single improvement to BarraCUDA's scientific computing capability would be
+The biggest single improvement to BarraCuda's scientific computing capability would be
 implementing `sparsity_sampler`. Here's why:
 
 | Sampling | L2 evals | Best χ² | Evals/second |
 |----------|----------|---------|-------------|
 | Python (SparsitySampler) | 3008 | **1.93** | 0.28 |
-| BarraCUDA (random) | 1009 | 87.13 | **0.49** |
-| BarraCUDA (projected with SparsitySampler) | ~1700 | ~2.0 | **0.49** |
+| BarraCuda (random) | 1009 | 87.13 | **0.49** |
+| BarraCuda (projected with SparsitySampler) | ~1700 | ~2.0 | **0.49** |
 
-With 1.7× faster throughput AND smart sampling, BarraCUDA would reach Python's
+With 1.7× faster throughput AND smart sampling, BarraCuda would reach Python's
 accuracy in **60% of the wall-clock time**. Speed × smarts = compounding advantage.
 
 ---
 
 ## Part 6: Immediate Action Items
 
-### For ToadStool/BarraCUDA Team
+### For ToadStool/BarraCuda Team
 
 | # | Task | Source Code | Effort | Priority |
 |---|------|-------------|--------|----------|
@@ -514,9 +514,9 @@ accuracy in **60% of the wall-clock time**. Speed × smarts = compounding advant
 
 | File | Contents |
 |------|---------|
-| `hotSpring/control/surrogate/nuclear-eos/results/nuclear_eos_surrogate_L1_barracuda.json` | BarraCUDA L1: χ²=1.34, 6201 evals, 9.6s |
+| `hotSpring/control/surrogate/nuclear-eos/results/nuclear_eos_surrogate_L1_barracuda.json` | BarraCuda L1: χ²=1.34, 6201 evals, 9.6s |
 | `hotSpring/control/surrogate/nuclear-eos/results/nuclear_eos_surrogate_L1.json` | Python L1: χ²=3.93, 6000 evals, 130s |
-| `hotSpring/control/surrogate/nuclear-eos/results/nuclear_eos_surrogate_L2_barracuda.json` | BarraCUDA L2: χ²=87.13, 1009 evals, 2055s |
+| `hotSpring/control/surrogate/nuclear-eos/results/nuclear_eos_surrogate_L2_barracuda.json` | BarraCuda L2: χ²=87.13, 1009 evals, 2055s |
 | `hotSpring/control/surrogate/nuclear-eos/results/nuclear_eos_surrogate_L2.json` | Python L2: χ²=61.87, 96 evals, 345s |
 
 ### Device Configuration (wgpu buffer limit fix)
@@ -532,7 +532,7 @@ larger training sets.
 
 ## Summary
 
-BarraCUDA proved it can run real nuclear physics. Two pipelines, two levels of
+BarraCuda proved it can run real nuclear physics. Two pipelines, two levels of
 fidelity, validated against Python controls. The 370+ WGSL shaders are the foundation.
 What's needed now is the scientific computing middleware — the 600 lines of duplicated
 Rust code that connects "compute pairwise distance on GPU" to "find optimal Skyrme

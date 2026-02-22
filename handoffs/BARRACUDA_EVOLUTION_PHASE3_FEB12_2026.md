@@ -1,8 +1,8 @@
-# BarraCUDA & ToadStool — Phase 3 Evolution Handoff
+# BarraCuda & ToadStool — Phase 3 Evolution Handoff
 
 **Date**: February 12, 2026
 **From**: ecoPrimals Control Team (Eastgate) — hotSpring validation & evolution analysis
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Priority**: HIGH — Foundational for L3 nuclear physics and all scientific workloads
 **Depends On**: All previous handoffs (validated and incorporated)
 **Context**: hotSpring heterogeneous L2 pipeline complete, 121/121 library validation tests passed
@@ -11,7 +11,7 @@
 
 ## Executive Summary
 
-BarraCUDA has evolved into an extraordinary platform: **436 WGSL shaders**, **540 Rust modules**,
+BarraCuda has evolved into an extraordinary platform: **436 WGSL shaders**, **540 Rust modules**,
 **1,658 tests**, and **~16,800 lines** of scientific computing middleware. The shader-first
 architecture is sound. The ML/DL layer is production-grade. The scientific computing modules
 work correctly — all validation tests pass.
@@ -288,7 +288,7 @@ and `EvaluationCache`. The `serde` dependency already exists in many downstream 
 ### Functions Identified by hotSpring Validation
 
 These are the specific functions that were needed during real workloads but don't
-yet exist in BarraCUDA:
+yet exist in BarraCuda:
 
 #### HIGH Priority (needed for L3 nuclear physics + general science)
 
@@ -350,7 +350,7 @@ Tier 4: Full HFB      (CPU parallel, ~0.2s/eval)  → 8% pass rate
 This pipeline achieved 7.2× speedup over plain SparsitySampler with better accuracy.
 But the orchestration logic was **hand-coded** in hotSpring's `nuclear_eos_l2_hetero.rs`.
 
-### What BarraCUDA Could Provide
+### What BarraCuda Could Provide
 
 A `barracuda::pipeline` module for declarative heterogeneous compute:
 
@@ -524,7 +524,7 @@ Ongoing:  Phase D (workload-driven)
 
 ### How hotSpring Will Validate
 
-Every new BarraCUDA function will be validated in hotSpring using the established
+Every new BarraCuda function will be validated in hotSpring using the established
 pattern:
 
 ```
@@ -546,7 +546,7 @@ New validation binaries will be added as new functions land:
 ### The Control Experiment Pattern
 
 ```
-Python control (scipy/numpy)  ←→  BarraCUDA (Rust/WGSL)
+Python control (scipy/numpy)  ←→  BarraCuda (Rust/WGSL)
          ↓                              ↓
     reference results              candidate results
          ↓                              ↓
@@ -569,7 +569,7 @@ system (Part 3) prevents this from being a recurring issue.
 
 ### 2. The Surrogate Learning Accuracy Gap Is Algorithmic
 
-BarraCUDA's math is correct (121/121 tests). The remaining accuracy gap
+BarraCuda's math is correct (121/121 tests). The remaining accuracy gap
 (L2 χ²=51,713 vs Python's 61.87) comes from:
 - Surrogate learning strategy (how samples are selected)
 - Cascade filter tuning (NMP/SEMF thresholds)
@@ -609,7 +609,7 @@ This pattern (physics-informed surrogate) should be documented as a best practic
 
 ## Summary
 
-BarraCUDA's evolution is at an inflection point. The breadth is extraordinary
+BarraCuda's evolution is at an inflection point. The breadth is extraordinary
 (436 shaders, 15 special functions, 5 MD force kernels, 4 optimizers, full FFT).
 The correctness is proven (121/121 validation tests).
 

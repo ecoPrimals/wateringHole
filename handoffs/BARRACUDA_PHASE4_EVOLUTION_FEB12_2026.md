@@ -1,8 +1,8 @@
-# BarraCUDA & ToadStool — Phase 4 Evolution Handoff
+# BarraCuda & ToadStool — Phase 4 Evolution Handoff
 
 **Date**: February 12, 2026
 **From**: ecoPrimals Control Team (Eastgate) — hotSpring revalidation
-**To**: ToadStool / BarraCUDA Team
+**To**: ToadStool / BarraCuda Team
 **Priority**: Continuing evolution — depth over breadth
 **Status**: Phase A+B ✅ VERIFIED by hotSpring, Phase C awaiting hardware
 
