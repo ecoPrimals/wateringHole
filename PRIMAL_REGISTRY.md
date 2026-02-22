@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: February 7, 2026
+**Last Updated**: February 22, 2026
 
 ---
 
@@ -127,21 +127,27 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Universal compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD)
+**Status**: Production Ready (A++ GOLD STANDARD) — 5,965+ tests, 0 clippy warnings
 
-**Role**: ToadStool enables isomorphic workload execution across any compute substrate - CPU, GPU, neuromorphic hardware, WebAssembly, containers, and edge devices. Its BarraCUDA library provides universal tensor operations that run identically on any hardware.
+**Role**: ToadStool enables isomorphic workload execution across any compute substrate - CPU, GPU, neuromorphic hardware, WebAssembly, containers, and edge devices. Its BarraCUDA library provides 593 WGSL shaders (zero orphans) covering tensor ops, scientific computing, bioinformatics, and nuclear physics -- all wired to Rust dispatch with GPU/CPU fallback.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
-| **BarraCUDA Core** | matmul, relu, softmax, gelu, layer_norm (124/263 operations with WGSL shaders) |
-| **CNN** | conv2d, batch_norm, pooling, elementwise operations |
+| **BarraCUDA Core** | 593 WGSL shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
+| **Scientific Computing** | Crank-Nicolson PDE, Richards equation, Lennard-Jones/Morse/Born-Mayer MD, Lattice QCD Dirac+CG, Yukawa cell-list, HFB nuclear physics (11 shaders) |
+| **Bioinformatics** | 25 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, pairwise L2, multi-objective fitness, swarm NN, hill gate, batch fitness, ANI, random forest inference |
+| **CNN** | conv2d, batch_norm, max_pool2d, avg_pool2d, elementwise (CPU + WGSL) |
 | **Attention** | Scaled Dot-Product, Multi-Head, Causal, Sparse, Rotary, Cross, ALiBi |
 | **Training** | Focal Loss, Contrastive Loss, Huber Loss, BCE, Hinge, KL Divergence, Lovasz, MAE, Smooth L1 |
 | **Optimizers** | SGD, Adam, AdaGrad, RMSprop, AdaDelta |
-| **Neuromorphic** | Pure Rust Akida driver (160 NPUs detected) |
-| **Runtimes** | Native, WASM, Python, Container, GPU, NPU |
+| **Linear Algebra** | GEMM (f32/f64), QR, SVD, LU, sparse eigensolve (Lanczos), matrix inverse |
+| **IoT/Streaming** | Moving window statistics (mean/var/min/max), batched ODE RK4 |
+| **Neuromorphic** | Pure Rust Akida driver (160 NPUs detected), ESN export/import weights |
+| **Runtimes** | Native, WASM, Python, Container, GPU, NPU, Edge (Linux, RPi, ESP32, Arduino) |
+
+**Four-Spring ingestion**: hotSpring (11 HFB physics shaders), neuralSpring (4 bio ML ops), wetSpring (3 bioinformatics ops), airSpring (Richards PDE + moving window stats)
 
 **Participates In**: Node Atomic (with Tower Atomic), NUCLEUS, BarraCUDA compute layer
 
