@@ -127,27 +127,33 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Universal compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — 5,965+ tests, 0 clippy warnings
+**Status**: Production Ready (A++ GOLD STANDARD) — 14,000+ tests, 0 clippy warnings, shader-first architecture complete
 
-**Role**: ToadStool enables isomorphic workload execution across any compute substrate - CPU, GPU, neuromorphic hardware, WebAssembly, containers, and edge devices. Its BarraCuda library (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) provides 612 WGSL shaders (zero orphans) covering tensor ops, scientific computing, bioinformatics, and nuclear physics -- all wired to Rust dispatch with GPU/CPU fallback.
+**Role**: ToadStool enables isomorphic workload execution across any compute substrate - CPU, GPU, neuromorphic hardware, WebAssembly, containers, and edge devices. Its BarraCuda library (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) provides 645+ WGSL f64 shaders (zero orphans) as the **primary math implementation**. All math originates as WGSL shaders at f64 precision -- barracuda does not care about hardware. ToadStool routes to the best substrate at runtime. CPU reference implementations exist only for `#[cfg(test)]` validation. f64 transcendentals (exp, log, pow, sin, cos, gamma, erf) are fully covered by `compile_shader_f64()` polyfill pipeline on every GPU.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
-| **BarraCuda Core** | 612 WGSL shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
-| **Scientific Computing** | Crank-Nicolson PDE, Richards equation, Lennard-Jones/Morse/Born-Mayer MD, Lattice QCD Dirac+CG, Yukawa cell-list, HFB nuclear physics (11 shaders) |
+| **BarraCuda Core** | 645+ WGSL f64 shaders (shader-first, zero CPU-only math): matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
+| **Linear Algebra** | GPU-dispatched: solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
+| **Scientific Computing** | Crank-Nicolson PDE, Richards equation, all MD forces GPU (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics (GPU FFT), HFB nuclear physics (11 shaders) |
+| **Lattice QCD** | 14 GPU shaders + host orchestration: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop, kinetic energy |
+| **Special Functions** | GPU: Bessel (J0/J1/Y0/Y1), Laguerre, Hermite, Legendre, spherical harmonics, digamma, beta, gamma, erf |
+| **Statistics** | GPU: variance, covariance, correlation, kinetic energy, fused map-reduce, weighted dot, cosine similarity |
+| **MD Observables** | GPU: RDF (atomic histogram), MSD, VACF, stress virial, velocity-Verlet integrator, Berendsen thermostat |
+| **Surrogates** | RBF surrogate (GPU cdist + GPU solve), adaptive sampling, sparsity sampling |
 | **Bioinformatics** | 25 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, pairwise L2, multi-objective fitness, swarm NN, hill gate, batch fitness, ANI, random forest inference |
 | **CNN** | conv2d, batch_norm, max_pool2d, avg_pool2d, elementwise (CPU + WGSL) |
 | **Attention** | Scaled Dot-Product, Multi-Head, Causal, Sparse, Rotary, Cross, ALiBi |
 | **Training** | Focal Loss, Contrastive Loss, Huber Loss, BCE, Hinge, KL Divergence, Lovasz, MAE, Smooth L1 |
 | **Optimizers** | SGD, Adam, AdaGrad, RMSprop, AdaDelta |
-| **Linear Algebra** | GEMM (f32/f64), QR, SVD, LU, sparse eigensolve (Lanczos), matrix inverse |
 | **IoT/Streaming** | Moving window statistics (mean/var/min/max), batched ODE RK4 |
 | **Neuromorphic** | Pure Rust Akida driver (160 NPUs detected), ESN export/import weights |
+| **f64 Polyfill** | `compile_shader_f64()`: auto-injects software transcendentals (exp, log, pow, sin, cos, tan, gamma, erf) on drivers without native f64 support (NVK, RADV, Ada) |
 | **Runtimes** | Native, WASM, Python, Container, GPU, NPU, Edge (Linux, RPi, ESP32, Arduino) |
 
-**Four-Spring ingestion**: hotSpring (11 HFB physics shaders), neuralSpring (4 bio ML ops), wetSpring (3 bioinformatics ops), airSpring (Richards PDE + moving window stats)
+**Four-Spring ingestion**: hotSpring (11 HFB physics + heat current), neuralSpring (4 bio ML + PRNG, all f64), wetSpring (5 ODE f64), airSpring (Richards PDE + moving window). All 13 f32 shaders evolved to f64 (S49).
 
 **Participates In**: Node Atomic (with Tower Atomic), NUCLEUS, BarraCuda compute layer
 
