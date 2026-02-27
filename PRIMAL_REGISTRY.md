@@ -352,6 +352,45 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 ---
 
+## Domain Validation Primals (Springs)
+
+These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
+
+### airSpring - Ecological & Agricultural Sciences
+
+**Domain**: Precision agriculture, irrigation science, environmental systems
+**Phase**: Domain Validation
+**Status**: v0.5.2 — 584 lib + 31 forge tests, 55 binaries, 0 clippy warnings
+
+**Role**: airSpring validates agricultural computational methods — FAO-56 ET₀, soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, and ecological diversity — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
+
+**Capabilities**:
+
+| Category | Details |
+|----------|---------|
+| **Experiments** | 45 complete: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, CW2D, 7 ET₀ methods, GDD, pedotransfer, ensemble, bias correction, parity, dispatch, Anderson coupling |
+| **ET₀ Methods** | Penman-Monteith, Priestley-Taylor, Hargreaves-Samani, Makkink, Turc, Hamon, Thornthwaite |
+| **Python Baselines** | 1109/1109 PASS against digitized paper benchmarks |
+| **Rust Validation** | 584 lib + 31 forge tests, 55 binaries, 75/75 cross-validation (tol=1e-5) |
+| **Real Data** | 15,300 station-days Open-Meteo ERA5 (100 Michigan stations), 80yr download active |
+| **GPU Orchestrators** | 11 Tier A + 4 Tier B wired (ops 0-8), seasonal pipeline, atlas stream, MC ET₀ |
+| **Seasonal Pipeline** | ET₀→Kc→WB→Yield chained, 73/73 PASS (12 stations, 4800 crop-year results) |
+| **metalForge** | 18 workloads, 29/29 cross-system routing (GPU+NPU+CPU) |
+| **NPU** | AKD1000 live (3 experiments, 95/95 checks, ~48µs inference) |
+| **CPU Benchmark** | 25.9× faster than Python (8/8 parity, geometric mean) |
+| **GPU Live** | Titan V 24/24 PASS (0.04% seasonal parity), RTX 4070 validated |
+
+**ToadStool Contributions**:
+- TS-001: `pow_f64` fractional exponent fix (discovered during ET₀ atmospheric pressure calc)
+- TS-003: `acos` precision boundary fix
+- TS-004: reduce buffer N≥1024 fix
+- Richards PDE solver absorbed upstream (S40)
+- Stats metrics absorbed upstream (S64)
+
+**Participates In**: Node Atomic (via ToadStool compute), Nest Atomic (via NestGate data), NUCLEUS (via biomeOS deployment graphs), metalForge cross-system dispatch
+
+---
+
 ## Registering a New Primal
 
 To add a new primal to this registry:
