@@ -1,9 +1,9 @@
-# groundSpring — Cross-Spring Shader & Primitive Evolution
+# ecoPrimals — Cross-Spring Shader & Primitive Evolution
 
 > How the ecoPrimals Springs collectively evolved BarraCUDA into the library
 > groundSpring depends on for statistical validation.
 
-**Last Updated**: February 25, 2026
+**Last Updated**: February 27, 2026
 
 ---
 
@@ -83,11 +83,17 @@ infrastructure and spectral diagnostics.
 | `boltzmann_sampling` (Metropolis MCMC) | S56 | Future MC uncertainty propagation |
 | `prng_xoshiro` GPU PRNG | S43 | PRNG alignment target for Phase 2b |
 | `TensorSession` (matmul, relu, softmax) | S20 | ML pipeline infrastructure |
-| 1,560+ validation checks | — | Validates dispatch and spectral infra |
+| 2,480+ validation checks | — | Validates dispatch and spectral infra |
+| 15 sovereign folding df64 WGSL shaders | S88 | df64 core streaming validated for ML workloads |
+| `compile_shader_f64_hybrid` pattern | S88 | Reusable df64 preamble concatenation |
+| Two-tier tolerance discovery (arith vs trans) | S88 | df64 precision characterization |
 
 **Why it matters**: neuralSpring's `domain_ops.rs` dispatch pattern
 (`device: Option<&Arc<WgpuDevice>>`) is the blueprint for how groundSpring's
 6 pending GPU metrics should be wired — `None` for CPU, `Some(device)` for GPU.
+Session 88's df64 core streaming evolution validates that the hotSpring/ToadStool
+df64 pattern generalizes to ML workloads (attention, normalization, activations)
+with consistent precision characteristics.
 
 ---
 
