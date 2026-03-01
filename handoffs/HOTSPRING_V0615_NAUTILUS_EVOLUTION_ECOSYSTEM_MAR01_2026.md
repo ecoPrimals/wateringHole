@@ -63,3 +63,13 @@ primalTools/bingoCube/nautilus/
 - 5 examples run clean (including full_brain_rehearsal end-to-end)
 - Blind Exp 029 prediction: 2.6% CG error (never trained on dynamical data)
 - State persistence: bit-perfect prediction match after save/restore
+
+## Addendum: NPU Parameter Controller (2026-03-01)
+
+Exp 030 revealed NPU parameter suggestions were logged but not applied (dt=0.0032,
+97.5% acceptance). Exp 031 closes the feedback loop: the NPU now controls dt/n_md
+per-beta with mid-beta acceptance-driven adaptation. The ESN trains to target 70%
+acceptance using actual dt_used. The brain architecture now has a complete
+observe → predict → apply → retrain cycle.
+
+See: `hotSpring/wateringHole/handoffs/HOTSPRING_V0615_NPU_PARAM_CONTROL_TOADSTOOL_HANDOFF_MAR01_2026.md`
