@@ -155,7 +155,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Hybrid FP64** | `Fp64Strategy` auto-selects native f64 (compute GPUs) vs DF64 double-float f32-pair (~14 digits on FP32 cores). 12 DF64 WGSL files. |
 | **Runtimes** | Native, WASM, Python, Container, GPU, NPU, Edge (Linux, RPi, ESP32, Arduino) |
 
-**Four-Spring ingestion**: hotSpring (11 HFB physics + heat current), neuralSpring (4 bio ML + PRNG, all f64), wetSpring (5 ODE f64), airSpring (Richards PDE + moving window). All 13 f32 shaders evolved to f64 (S49). **Deep debt resolved**: S62-63 systematically eliminated dead code, refactored large files (coulomb_f64 -39%, morse_f64 -16%), wired unused implementations.
+**Five-Spring ingestion**: hotSpring (62 shaders: lattice QCD, HFB, spectral, transport), neuralSpring (4 bio ML + PRNG, all f64), wetSpring (5 ODE f64), airSpring (Richards PDE + moving window), groundSpring (sensor noise). All f32 shaders evolved to f64 (S49). **Deep debt resolved**: S61-68 systematically eliminated dead code, refactored large files, wired unused implementations, full quality gates passing.
 
 **Participates In**: Node Atomic (with Tower Atomic), NUCLEUS, BarraCuda compute layer
 
@@ -388,6 +388,39 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 - Stats metrics absorbed upstream (S64)
 
 **Participates In**: Node Atomic (via ToadStool compute), Nest Atomic (via NestGate data), NUCLEUS (via biomeOS deployment graphs), metalForge cross-system dispatch
+
+### hotSpring - Computational Physics
+
+**Domain**: Plasma physics, nuclear structure, lattice QCD, transport, spectral theory
+**Phase**: Domain Validation
+**Status**: v0.6.15 — ~700 tests, 84 binaries, 62 WGSL shaders, 39/39 validation suites
+
+**Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC), Stanton-Murillo transport, Anderson localization, and Hofstadter butterfly. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline.
+
+**Capabilities**:
+
+| Category | Details |
+|----------|---------|
+| **Experiments** | 29 complete/active: MD, GPU scaling, parity, lattice QCD, NPU characterization, brain architecture |
+| **Physics Domains** | Yukawa OCP MD, nuclear EOS (SEMF→HFB→deformed), SU(3) gauge + dynamical fermion HMC, Green-Kubo transport, Anderson 1D/2D/3D, Hofstadter butterfly, Abelian Higgs |
+| **GPU Validation** | 62 WGSL shaders, DF64 core streaming (3.24 TFLOPS, 14-digit precision on FP32), GPU-resident CG (15,360× readback reduction) |
+| **NPU Integration** | Live AKD1000 via PCIe, 15-head ESN (11 production + 4 proxy), cross-run learning, concept edge detection |
+| **Brain Architecture** | 4-layer concurrent: RTX 3090 motor + Titan V pre-motor + CPU cortex + NPU cerebellum |
+| **Nautilus Shell** | Evolutionary reservoir computing (bingoCube/nautilus): 5.3% LOO, 540× quenched→dynamical cost reduction |
+| **Production Results** | Deconfinement χ=40.1 at β=5.69 (32⁴, 13.6h, $0.58). Dynamical crossover confirmed (8⁴, 17 β points) |
+
+**ToadStool Contributions**:
+- 62 WGSL shaders evolved via cross-spring absorption (lattice QCD, HFB, transport, spectral)
+- GPU-resident CG solver pattern absorbed upstream
+- DF64 core streaming validated and expanded (S60)
+- NVK dual-GPU deadlock fix (serialize device creation)
+- ESN cross-substrate patterns (GPU WGSL dispatch, NPU int4 quantization)
+
+**primalTools Contributions**:
+- bingoCube/nautilus: evolutionary reservoir computing crate (26 tests, 3 examples)
+- NautilusBrain API for NPU integration, drift monitor, edge seeder
+
+**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment)
 
 ---
 
