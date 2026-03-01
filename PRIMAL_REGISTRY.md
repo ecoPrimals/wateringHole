@@ -401,12 +401,12 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 29 complete/active: MD, GPU scaling, parity, lattice QCD, NPU characterization, brain architecture |
+| **Experiments** | 30 complete/active: MD, GPU scaling, parity, lattice QCD, NPU characterization, brain architecture, adaptive steering |
 | **Physics Domains** | Yukawa OCP MD, nuclear EOS (SEMF→HFB→deformed), SU(3) gauge + dynamical fermion HMC, Green-Kubo transport, Anderson 1D/2D/3D, Hofstadter butterfly, Abelian Higgs |
 | **GPU Validation** | 62 WGSL shaders, DF64 core streaming (3.24 TFLOPS, 14-digit precision on FP32), GPU-resident CG (15,360× readback reduction) |
 | **NPU Integration** | Live AKD1000 via PCIe, 15-head ESN (11 production + 4 proxy), cross-run learning, concept edge detection |
 | **Brain Architecture** | 4-layer concurrent: RTX 3090 motor + Titan V pre-motor + CPU cortex + NPU cerebellum |
-| **Nautilus Shell** | Evolutionary reservoir computing (bingoCube/nautilus): 5.3% LOO, 540× quenched→dynamical cost reduction |
+| **Nautilus Shell** | Evolutionary reservoir computing (bingoCube/nautilus): 5.3% LOO, 2.6% blind Exp 029, 540× quenched→dynamical cost reduction, self-regulating drift + edge seeding, AKD1000 int4 export |
 | **Production Results** | Deconfinement χ=40.1 at β=5.69 (32⁴, 13.6h, $0.58). Dynamical crossover confirmed (8⁴, 17 β points) |
 
 **ToadStool Contributions**:
@@ -417,8 +417,11 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 - ESN cross-substrate patterns (GPU WGSL dispatch, NPU int4 quantization)
 
 **primalTools Contributions**:
-- bingoCube/nautilus: evolutionary reservoir computing crate (26 tests, 3 examples)
-- NautilusBrain API for NPU integration, drift monitor, edge seeder
+- bingoCube/nautilus: evolutionary reservoir computing crate (31 tests, 5 examples)
+- NautilusBrain API for NPU integration, self-regulating drift monitor, integrated edge seeder
+- AKD1000 int4 weight export with quantization validation (MSE=0.004)
+- Full brain rehearsal: save/restore/transfer/merge/AKD1000 end-to-end validated
+- Exp 030: adaptive steering fix (--max-adaptive=12), bootstrapped from 29 data points
 
 **Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment)
 
