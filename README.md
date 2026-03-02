@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: March 1, 2026
+**Last Updated**: March 2, 2026
 
 ---
 
@@ -51,7 +51,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BearDog** | Cryptography | All cryptographic operations: signing, encryption, key exchange, hashing, certificates, genetic lineage | Production (A+ LEGENDARY) |
 | **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
-| **ToadStool** | Compute | Universal compute orchestration: CPU, GPU, neuromorphic, WASM, containers. BarraCuda — 645+ WGSL f64 shaders (shader-first: all math is WGSL, zero CPU-only production math). f64 transcendental polyfills, lattice QCD (14 shaders + HMC/CG), HFB physics, linalg GPU-dispatched, PPPM GPU FFT, RBF surrogate GPU pipeline. All Springs absorbed at f64. | Production (A++ GOLD) |
+| **ToadStool** | Compute | Universal compute orchestration: CPU, GPU, neuromorphic, WASM, containers. Node Atomic for basic computation. BarraCUDA for GPU math (766+ WGSL shaders, FHE NTT, lattice QCD, DF64). **BarraCUDA budding into standalone primal** — see S88 RFC in handoffs/. | Production (A++ GOLD) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
 | **biomeOS** | Orchestration | Ecosystem substrate: Neural API, capability routing, NUCLEUS composition, bonding model, Dark Forest coordination | Production (A, Security A++ LEGENDARY) |
 
@@ -93,9 +93,14 @@ Primals achieve their greatest power through composition. These are not separate
 
 **Layers**:
 - **Tower Atomic** = BearDog + Songbird (crypto + network)
-- **Node Atomic** = Tower + ToadStool (+ compute)
+- **Node Atomic** = Tower + ToadStool (+ orchestration) + BarraCUDA (+ GPU math)
 - **Nest Atomic** = Tower + NestGate (+ storage)
 - **Full NUCLEUS** = All primals + Squirrel (+ AI)
+
+*Note*: BarraCUDA is budding from ToadStool into a standalone primal (S88 RFC).
+Node Atomic evolves from "Tower + ToadStool" to "Tower + ToadStool + BarraCUDA",
+where ToadStool handles orchestration and BarraCUDA handles sovereign math.
+Springs can depend on BarraCUDA directly without pulling ToadStool's runtime.
 
 biomeOS composes these atomics based on what capabilities are available at runtime.
 
