@@ -113,6 +113,16 @@ capabilities = ["compute", "cpu", "gpu", "wasm", "orchestration"]
 ecobin_grade = "A++"
 pie_verified = true
 
+[primals.barracuda]
+name = "barraCuda"
+description = "Compute primal - vendor-agnostic GPU math via WGSL, DF64, FHE, scientific compute"
+latest = "0.2.0"
+versions = ["0.2.0"]
+architectures = ["x86_64-linux", "aarch64-linux"]
+capabilities = ["compute", "gpu", "tensor", "fhe", "linalg", "spectral", "stats", "wgsl"]
+ecobin_grade = "A++"
+pie_verified = false  # Not yet released as standalone binary
+
 [primals.biomeos]
 name = "biomeOS"
 description = "Neural API orchestrator - graph execution, primal coordination, NUCLEUS deployment"
