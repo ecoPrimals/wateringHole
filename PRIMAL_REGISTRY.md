@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: February 25, 2026
+**Last Updated**: March 5, 2026
 
 ---
 
@@ -358,34 +358,39 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 ### airSpring - Ecological & Agricultural Sciences
 
-**Domain**: Precision agriculture, irrigation science, environmental systems
-**Phase**: Domain Validation
-**Status**: v0.5.2 — 584 lib + 31 forge tests, 55 binaries, 0 clippy warnings
+**Domain**: Precision agriculture, irrigation science, environmental systems  
+**Phase**: Domain Validation  
+**Status**: v0.6.9 — 852 lib + 33 integration + 62 forge tests, 86 binaries, 78 experiments, 0 clippy warnings (pedantic+nursery), 95.66% line coverage, zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.1
 
-**Role**: airSpring validates agricultural computational methods — FAO-56 ET₀, soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, and ecological diversity — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
+**Role**: airSpring validates agricultural computational methods — FAO-56 ET₀ (8 methods), soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, ecological diversity, immunological Anderson coupling, and SCS-CN/Green-Ampt hydrology — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
 
 **Capabilities**:
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 45 complete: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, CW2D, 7 ET₀ methods, GDD, pedotransfer, ensemble, bias correction, parity, dispatch, Anderson coupling |
-| **ET₀ Methods** | Penman-Monteith, Priestley-Taylor, Hargreaves-Samani, Makkink, Turc, Hamon, Thornthwaite |
-| **Python Baselines** | 1109/1109 PASS against digitized paper benchmarks |
-| **Rust Validation** | 584 lib + 31 forge tests, 55 binaries, 75/75 cross-validation (tol=1e-5) |
-| **Real Data** | 15,300 station-days Open-Meteo ERA5 (100 Michigan stations), 80yr download active |
-| **GPU Orchestrators** | 11 Tier A + 4 Tier B wired (ops 0-8), seasonal pipeline, atlas stream, MC ET₀ |
-| **Seasonal Pipeline** | ET₀→Kc→WB→Yield chained, 73/73 PASS (12 stations, 4800 crop-year results) |
-| **metalForge** | 18 workloads, 29/29 cross-system routing (GPU+NPU+CPU) |
+| **Experiments** | 78 complete: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, CW2D, 8 ET₀ methods, GDD, pedotransfer, ensemble, bias correction, parity, dispatch, Anderson coupling, SCS-CN, Green-Ampt, VG inverse, seasonal WB, immunological Anderson (tissue/cytokine/barrier/cross-species), f64-canonical GPU, cross-spring evolution |
+| **ET₀ Methods** | Penman-Monteith, Priestley-Taylor, Hargreaves-Samani, Makkink, Turc, Hamon, Blaney-Criddle, Thornthwaite |
+| **Python Baselines** | 1,237/1,237 PASS against digitized paper benchmarks (57 papers) |
+| **Rust Validation** | 852 lib + 33 integration + 62 forge tests, 86 binaries, 75/75 cross-validation (tol=1e-5) |
+| **Real Data** | 15,300 station-days Open-Meteo ERA5 (100 Michigan stations), 1498/1498 atlas checks |
+| **GPU Orchestrators** | 25 Tier A + 6 GPU-universal (ops 0-13 + jackknife/bootstrap/diversity + 6 f64-canonical local ops), seasonal pipeline, atlas stream, MC ET₀ |
+| **Seasonal Pipeline** | ET₀→Kc→WB→Yield chained, GPU stages 1-3, multi-field streaming (57/57), pure GPU end-to-end (46/46) |
+| **Local GPU Compute** | 6 f64-canonical ops via `compile_shader_universal()` — SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle (F64 native on pro GPU, F32 downcast on consumer) |
+| **metalForge** | 27 workloads, 66/66 cross-system routing (GPU+NPU+CPU), 7-stage GPU→NPU PCIe bypass |
 | **NPU** | AKD1000 live (3 experiments, 95/95 checks, ~48µs inference) |
-| **CPU Benchmark** | 25.9× faster than Python (8/8 parity, geometric mean) |
+| **CPU Benchmark** | 14.5× geometric mean speedup vs Python (21/21 parity), 13,000× atlas-scale |
 | **GPU Live** | Titan V 24/24 PASS (0.04% seasonal parity), RTX 4070 validated |
+| **NUCLEUS** | biomeOS primal (30 science capabilities), JSON-RPC, deployment graphs, cross-primal forwarding |
+| **Nautilus** | bingoCube/nautilus evolutionary reservoir computing (AirSpringBrain, drift detection, NPU export) |
 
-**ToadStool Contributions**:
+**ToadStool/BarraCuda Contributions**:
 - TS-001: `pow_f64` fractional exponent fix (discovered during ET₀ atmospheric pressure calc)
 - TS-003: `acos` precision boundary fix
 - TS-004: reduce buffer N≥1024 fix
 - Richards PDE solver absorbed upstream (S40)
 - Stats metrics absorbed upstream (S64)
+- 6 f64-canonical WGSL shader ops (local_elementwise_f64.wgsl) ready for upstream absorption
+- NVK/Mesa f64 reliability finding (10% dispatch failure rate — documented in V069 handoff)
 
 **Participates In**: Node Atomic (via ToadStool compute), Nest Atomic (via NestGate data), NUCLEUS (via biomeOS deployment graphs), metalForge cross-system dispatch
 
