@@ -360,7 +360,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Precision agriculture, irrigation science, environmental systems  
 **Phase**: Domain Validation  
-**Status**: v0.7.0 — 827 lib + 62 forge tests (25 GPU fail: upstream wgpu 28 driver issue), 86 binaries, 78 experiments, 0 clippy warnings (pedantic+nursery), zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.3 (wgpu 28, DF64 precision tier, 3/6 local ops absorbed upstream)
+**Status**: v0.7.0 — 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28 NVK driver issue), 86 binaries, 78 experiments, 381/381 validation, 146/146 evolution, 20.6× CPU speedup (24/24 parity), 0 clippy warnings (pedantic+nursery), zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.3 (wgpu 28, DF64 precision tier, 3/6 local ops absorbed upstream, fused Welford + fused Pearson wired)
 
 **Role**: airSpring validates agricultural computational methods — FAO-56 ET₀ (8 methods), soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, ecological diversity, immunological Anderson coupling, and SCS-CN/Green-Ampt hydrology — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
 
@@ -378,7 +378,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **Local GPU Compute** | 6 f64-canonical ops via `compile_shader_universal()` — SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle (3 absorbed upstream: Makkink→Op14, Turc→Op15, Hamon→Op16; 3 local-only) |
 | **metalForge** | 27 workloads, 66/66 cross-system routing (GPU+NPU+CPU), 7-stage GPU→NPU PCIe bypass |
 | **NPU** | AKD1000 live (3 experiments, 95/95 checks, ~48µs inference) |
-| **CPU Benchmark** | 19.8× geometric mean speedup vs Python (24/24 parity), 13,000× atlas-scale |
+| **CPU Benchmark** | 20.6× geometric mean speedup vs Python (24/24 parity), 13,000× atlas-scale |
 | **GPU Live** | Titan V 24/24 PASS (0.04% seasonal parity), RTX 4070 validated |
 | **NUCLEUS** | biomeOS primal (30 science capabilities), JSON-RPC, deployment graphs, cross-primal forwarding |
 | **Nautilus** | bingoCube/nautilus evolutionary reservoir computing (AirSpringBrain, drift detection, NPU export) |
