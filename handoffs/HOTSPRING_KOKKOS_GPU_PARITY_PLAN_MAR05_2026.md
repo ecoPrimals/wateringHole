@@ -163,27 +163,34 @@ NVT + NVE workflow.
 
 ---
 
-## Estimated Performance Targets
+## Performance Results (Updated March 5, 2026)
 
-| Implementation | Steps/s (N=2000) | Driver | Hardware lock-in |
-|---|---|---|---|
-| Python (Sarkas) | 32 | n/a | None |
-| barraCuda CPU (Rust f64) | ~5,000 | n/a | None |
-| LAMMPS/Kokkos-OpenMP | ~100* | n/a | None |
-| **LAMMPS/Kokkos-CUDA** | **~10,000–50,000** | **nvidia.ko** | **NVIDIA only** |
-| barraCuda GPU native f64 | 29 | NVK | None |
-| **barraCuda GPU DF64** | **~300–900 (est.)** | **NVK** | **None** |
+| Implementation | Steps/s (N=2000) | Driver | Algorithm | Hardware lock-in |
+|---|---|---|---|---|
+| Python (Sarkas) | 32 | n/a | all-pairs | None |
+| barraCuda CPU (Rust f64) | ~5,000 | n/a | all-pairs | None |
+| LAMMPS/Kokkos-OpenMP | ~19 | n/a | neighbor list | None |
+| LAMMPS/Kokkos-CUDA | **730–3,699** | nvidia.ko | **neighbor list** | **NVIDIA only** |
+| barraCuda GPU native f64 | 29 | NVK | all-pairs | None |
+| barraCuda GPU DF64 (all-pairs) | 293–326 | nvidia | all-pairs | nvidia driver |
+| **barraCuda GPU DF64 (Verlet)** | **368–992** | **nvidia** | **Verlet neighbor list** | **nvidia driver** |
 
-*Kokkos-OpenMP estimate with optimal thread count (4-8 threads vs current 64)
+**Gap closed**: 27× → **3.7×** at κ=3 (Verlet 992 vs Kokkos-CUDA 3,699 steps/s).
+9/9 PP Yukawa DSF cases pass with ≤0.004% energy drift.
 
-The gap between barraCuda GPU DF64 (~300–900) and Kokkos-CUDA (~10K–50K) is
-real. Closing it requires:
-1. Cell-list neighbor optimization (reduces O(N²) to O(N))
-2. Workgroup size tuning for NAK
-3. Sovereign SPIR-V with FMA fusion on NVK
+### What Closed the Gap
+1. ✅ DF64 on FP32 cores: 27 → 293 steps/s (11× gain)
+2. ✅ Cell-list O(N): ~1× at N=2000 (overhead matches all-pairs at coarse grid)
+3. ✅ **Verlet neighbor list**: 293 → 992 steps/s (3.4× gain at κ=3)
 
-These are engineering problems, not physics problems. The math is already
-validated.
+### Remaining 3.7× Gap
+The gap is dispatch overhead and GPU occupancy, not algorithm:
+1. Streaming dispatch optimization (~1.5×)
+2. Workgroup size tuning (~1.2×)
+3. Adaptive skin tuning for hot systems (~1.2× for k2_G31)
+
+These are engineering problems, not physics problems. The math and algorithm
+are now at parity with Kokkos/LAMMPS.
 
 ---
 
