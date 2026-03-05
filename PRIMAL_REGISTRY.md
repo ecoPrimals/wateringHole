@@ -371,14 +371,14 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **Experiments** | 78 complete: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, CW2D, 8 ET₀ methods, GDD, pedotransfer, ensemble, bias correction, parity, dispatch, Anderson coupling, SCS-CN, Green-Ampt, VG inverse, seasonal WB, immunological Anderson (tissue/cytokine/barrier/cross-species), f64-canonical GPU, cross-spring evolution |
 | **ET₀ Methods** | Penman-Monteith, Priestley-Taylor, Hargreaves-Samani, Makkink, Turc, Hamon, Blaney-Criddle, Thornthwaite |
 | **Python Baselines** | 1,237/1,237 PASS against digitized paper benchmarks (57 papers) |
-| **Rust Validation** | 827 lib + 62 forge tests (25 GPU fail: upstream wgpu 28), 86 binaries, 75/75 cross-validation (tol=1e-5) |
+| **Rust Validation** | 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28), 381/381 validation checks, 146/146 evolution |
 | **Real Data** | 15,300 station-days Open-Meteo ERA5 (100 Michigan stations), 1498/1498 atlas checks |
 | **GPU Orchestrators** | 25 Tier A + 6 GPU-universal (ops 0-13 + jackknife/bootstrap/diversity + 6 f64-canonical local ops), seasonal pipeline, atlas stream, MC ET₀ |
 | **Seasonal Pipeline** | ET₀→Kc→WB→Yield chained, GPU stages 1-3, multi-field streaming (57/57), pure GPU end-to-end (46/46) |
 | **Local GPU Compute** | 6 f64-canonical ops via `compile_shader_universal()` — SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle (3 absorbed upstream: Makkink→Op14, Turc→Op15, Hamon→Op16; 3 local-only) |
 | **metalForge** | 27 workloads, 66/66 cross-system routing (GPU+NPU+CPU), 7-stage GPU→NPU PCIe bypass |
 | **NPU** | AKD1000 live (3 experiments, 95/95 checks, ~48µs inference) |
-| **CPU Benchmark** | 14.5× geometric mean speedup vs Python (21/21 parity), 13,000× atlas-scale |
+| **CPU Benchmark** | 19.8× geometric mean speedup vs Python (24/24 parity), 13,000× atlas-scale |
 | **GPU Live** | Titan V 24/24 PASS (0.04% seasonal parity), RTX 4070 validated |
 | **NUCLEUS** | biomeOS primal (30 science capabilities), JSON-RPC, deployment graphs, cross-primal forwarding |
 | **Nautilus** | bingoCube/nautilus evolutionary reservoir computing (AirSpringBrain, drift detection, NPU export) |
@@ -389,8 +389,10 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 - TS-004: reduce buffer N≥1024 fix
 - Richards PDE solver absorbed upstream (S40)
 - Stats metrics absorbed upstream (S64)
-- 6 f64-canonical WGSL shader ops (local_elementwise_f64.wgsl) ready for upstream absorption
-- NVK/Mesa f64 reliability finding (10% dispatch failure rate — documented in V069 handoff)
+- 6 f64-canonical WGSL shader ops (3 absorbed: Makkink→Op14, Turc→Op15, Hamon→Op16)
+- Fused Welford `mean_variance_f64.wgsl` wired into SeasonalReducer (hotSpring S58 provenance)
+- Fused Pearson `correlation_full_f64.wgsl` wired into gpu/stats (neuralSpring S69 provenance)
+- NVK/Mesa f64 reliability finding → GPU fallback to CPU Welford documented
 
 **Participates In**: Node Atomic (via ToadStool compute), Nest Atomic (via NestGate data), NUCLEUS (via biomeOS deployment graphs), metalForge cross-system dispatch
 
