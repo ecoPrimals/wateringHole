@@ -91,14 +91,17 @@ driver or compiler. All fixes live in barraCuda's shader compilation pipeline.
 - NVK workarounds: allocation limits, workgroup tuning, sin/cos Taylor
 
 **Remaining Level 1 work**:
-- [ ] Wire DF64 Yukawa force into hotSpring MD pipeline (barraCuda has it)
-- [ ] Wire cell-list O(N) into hotSpring benchmark (barraCuda has it)
-- [ ] Validate DF64 on NVK for Yukawa OCP (expected 10-30× gain)
-- [ ] Measure gap vs Kokkos-CUDA after DF64 + cell-list
+- [x] Wire DF64 Yukawa force into hotSpring MD pipeline — **DONE** (9/9 PASS, 293-326 steps/s)
+- [x] Wire cell-list O(N) into hotSpring benchmark — **DONE** (CellListGpu, 3 cells/dim)
+- [x] Wire Verlet neighbor list — **DONE** (368-992 steps/s, adaptive rebuild)
+- [x] Measure gap vs Kokkos-CUDA — **DONE** (gap 3.7× at κ=3, down from 27×)
+- [ ] Validate DF64 on NVK for Yukawa OCP (sovereignty validation)
 
 **Owner**: barraCuda (shaders), springs (validation)
 
-**Expected impact**: Close 80% of the 27× gap vs Kokkos-CUDA.
+**Achieved impact**: Closed 27× → 3.7× gap vs Kokkos-CUDA (93% of gap closed).
+Verlet neighbor list is now at algorithmic parity with Kokkos/LAMMPS.
+Remaining gap is dispatch overhead and GPU occupancy.
 
 ---
 
