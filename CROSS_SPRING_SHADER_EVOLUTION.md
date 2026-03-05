@@ -191,3 +191,42 @@ groundSpring V7 observed:
 
 The S60-61 `cpu-math` modularization and dead-code elimination across sessions
 reduced barracuda's binary size and startup cost, benefiting all consumer Springs.
+
+---
+
+## barraCuda v0.3.3 Evolution (March 2026)
+
+The standalone extraction (v0.3.0) and subsequent evolution (v0.3.1 → v0.3.3)
+marks a phase shift where cross-spring absorption accelerates:
+
+### What evolved
+
+| Feature | Origin | Consumers |
+|---------|--------|-----------|
+| **wgpu 22 → 28** | barraCuda core | All Springs (Device/Queue no longer Arc-wrapped) |
+| **Fp64Strategy** (Native/Hybrid/Concurrent) | hotSpring DF64 discovery | All Springs — automatic shader selection per GPU |
+| **DF64 fused shaders** (mean_variance, correlation) | hotSpring `df64_core.wgsl` + wetSpring Welford | Consumer GPU users get ~10x throughput |
+| **TensorContext fast path** (15+ ops) | barraCuda refactoring | wetSpring (pooled buffers), groundSpring (stats) |
+| **5-accumulator Pearson** | wetSpring correlation + hotSpring precision | Single dispatch for mean+var+cov+pearson_r |
+| **32 bio ops in `ops/bio/`** | wetSpring (handoff v4-v8) + neuralSpring (metalForge) | All Springs via barraCuda |
+| **Fused chi-squared GPU** | neuralSpring S69 | Available for enrichment analysis |
+| **compile_shader_universal** | airSpring V0.6.9 | Ecosystem-wide: f64→f32 downcast |
+
+### Cross-pollination chains
+
+```
+hotSpring → df64_core.wgsl → neuralSpring (folding), wetSpring (variance, Shannon)
+wetSpring → HMM forward → neuralSpring (+ backward, viterbi) → shared hmm module
+wetSpring → FusedMapReduceF64 → airSpring (ET₀), groundSpring (diversity)
+neuralSpring → EA bio ops → wetSpring bio pipelines (pairwise_*, hill_gate)
+airSpring → compile_shader_universal → all Springs (precision per silicon)
+groundSpring → batched_multinomial → wetSpring (rarefaction GPU)
+```
+
+### Validation at wetSpring V97b
+
+- 1,247 unit tests (1,047 lib + 200 forge): ALL PASS
+- 26 CPU validation binaries: ALL PASS
+- Cross-spring S93 (59/59): provenance audit verified
+- Python vs Rust v3 (35/35): 15 domains bit-identical to SciPy/NumPy
+- ToadStool S70 rewire (42/42): new stats primitives validated
