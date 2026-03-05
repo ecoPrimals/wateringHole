@@ -360,7 +360,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Precision agriculture, irrigation science, environmental systems  
 **Phase**: Domain Validation  
-**Status**: v0.6.9 — 852 lib + 33 integration + 62 forge tests, 86 binaries, 78 experiments, 0 clippy warnings (pedantic+nursery), 95.66% line coverage, zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.1
+**Status**: v0.7.0 — 827 lib + 62 forge tests (25 GPU fail: upstream wgpu 28 driver issue), 86 binaries, 78 experiments, 0 clippy warnings (pedantic+nursery), zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.3 (wgpu 28, DF64 precision tier, 3/6 local ops absorbed upstream)
 
 **Role**: airSpring validates agricultural computational methods — FAO-56 ET₀ (8 methods), soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, ecological diversity, immunological Anderson coupling, and SCS-CN/Green-Ampt hydrology — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
 
@@ -371,11 +371,11 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **Experiments** | 78 complete: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, CW2D, 8 ET₀ methods, GDD, pedotransfer, ensemble, bias correction, parity, dispatch, Anderson coupling, SCS-CN, Green-Ampt, VG inverse, seasonal WB, immunological Anderson (tissue/cytokine/barrier/cross-species), f64-canonical GPU, cross-spring evolution |
 | **ET₀ Methods** | Penman-Monteith, Priestley-Taylor, Hargreaves-Samani, Makkink, Turc, Hamon, Blaney-Criddle, Thornthwaite |
 | **Python Baselines** | 1,237/1,237 PASS against digitized paper benchmarks (57 papers) |
-| **Rust Validation** | 852 lib + 33 integration + 62 forge tests, 86 binaries, 75/75 cross-validation (tol=1e-5) |
+| **Rust Validation** | 827 lib + 62 forge tests (25 GPU fail: upstream wgpu 28), 86 binaries, 75/75 cross-validation (tol=1e-5) |
 | **Real Data** | 15,300 station-days Open-Meteo ERA5 (100 Michigan stations), 1498/1498 atlas checks |
 | **GPU Orchestrators** | 25 Tier A + 6 GPU-universal (ops 0-13 + jackknife/bootstrap/diversity + 6 f64-canonical local ops), seasonal pipeline, atlas stream, MC ET₀ |
 | **Seasonal Pipeline** | ET₀→Kc→WB→Yield chained, GPU stages 1-3, multi-field streaming (57/57), pure GPU end-to-end (46/46) |
-| **Local GPU Compute** | 6 f64-canonical ops via `compile_shader_universal()` — SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle (F64 native on pro GPU, F32 downcast on consumer) |
+| **Local GPU Compute** | 6 f64-canonical ops via `compile_shader_universal()` — SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle (3 absorbed upstream: Makkink→Op14, Turc→Op15, Hamon→Op16; 3 local-only) |
 | **metalForge** | 27 workloads, 66/66 cross-system routing (GPU+NPU+CPU), 7-stage GPU→NPU PCIe bypass |
 | **NPU** | AKD1000 live (3 experiments, 95/95 checks, ~48µs inference) |
 | **CPU Benchmark** | 14.5× geometric mean speedup vs Python (21/21 parity), 13,000× atlas-scale |
