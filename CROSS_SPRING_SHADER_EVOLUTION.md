@@ -3,7 +3,7 @@
 > How the ecoPrimals Springs collectively evolved BarraCUDA into the library
 > groundSpring depends on for statistical validation.
 
-**Last Updated**: February 27, 2026
+**Last Updated**: March 5, 2026
 
 ---
 
@@ -18,10 +18,11 @@ that hardened the shared library.
 hotSpring (nuclear physics)     → f64 precision, spectral theory, DF64
 wetSpring (metagenomics)        → bio-stats, Shannon entropy, log_f64 fix
 neuralSpring (ML/agents)        → spectral diagnostics, dispatch, xoshiro PRNG
+airSpring (agriculture/hydro)   → Richards PDE, stats metrics, f64-canonical local compute
 groundSpring (noise validation) → error handling patterns, validation harness
                                   ↓
-                          BarraCUDA S62 + DF64
-                     14,200+ tests, 650+ WGSL shaders
+                          BarraCUDA S93 + DF64
+                     21,500+ tests, 845+ WGSL shaders
 ```
 
 ---
@@ -94,6 +95,35 @@ infrastructure and spectral diagnostics.
 Session 88's df64 core streaming evolution validates that the hotSpring/ToadStool
 df64 pattern generalizes to ML workloads (attention, normalization, activations)
 with consistent precision characteristics.
+
+---
+
+## airSpring → Agricultural Science & Hydrology Primitives
+
+airSpring's agricultural science work (FAO-56 ET₀, Richards PDE, soil physics,
+coupled hydrology) contributed domain-specific fixes, validated the
+`compile_shader_universal()` pattern for per-silicon precision, and proved
+the Write → Absorb → Lean cycle for ecological systems.
+
+| Contribution | Session | Ecosystem Benefit |
+|-------------|---------|-------------------|
+| Richards PDE solver | S40 | Absorbed upstream — unsaturated flow on GPU |
+| Stats metrics (RMSE, R², MBE, IoA) | S64 | Absorbed upstream — all Springs benefit |
+| `pow_f64` fractional exponent fix | TS-001 | Fixed ET₀ atmospheric pressure calc for all consumers |
+| `acos` precision boundary fix | TS-003 | Fixed solar geometry for neuralSpring and groundSpring |
+| Reduce buffer N≥1024 fix | TS-004 | Fixed fused reduce for wetSpring diversity |
+| 6 f64-canonical local WGSL ops | V0.6.9 | SCS-CN, Stewart, Makkink, Turc, Hamon, Blaney-Criddle — ready for absorption |
+| `compile_shader_universal()` validation | V0.6.9 | Confirmed f64→f32 downcast pattern works for 6 ops across RTX 4070 + Titan V |
+| NVK/Mesa f64 reliability finding | V0.6.9 | 10% dispatch failure rate on Titan V NVK — documented for hardware matrix |
+| `json_f64_required` hotSpring pattern | V0.6.9 | Structured exit(1) for validation binaries — adopted from hotSpring |
+| 852 lib + 33 integration tests | — | Validates agricultural science paths in BarraCuda |
+| 78 experiments, 1237/1237 Python baselines | — | 57 papers reproduced with full provenance |
+
+**Why it matters**: airSpring proved that the `compile_shader_universal()` pattern
+enables a single f64-canonical WGSL shader to run correctly on both pro GPUs
+(Titan V, native f64) and consumer GPUs (RTX 4070, f32 downcast), with
+tolerance-documented precision loss. This validates the BarraCuda promise:
+"Math is universal, precision is silicon."
 
 ---
 
