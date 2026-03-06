@@ -1,8 +1,8 @@
 # Sovereign Compute Evolution — Pure Rust GPU Stack
 
-**Date**: March 5, 2026
+**Date**: March 6, 2026 (updated — Layer 1 complete)
 **From**: hotSpring (validated by Kokkos-CUDA parity testing)
-**To**: All primals — toadStool, barraCuda, springs, groundSpring
+**To**: All primals — toadStool, barraCuda, coralReef, springs
 **Type**: Long-term architecture evolution plan
 **Goal**: Replace every non-Rust dependency in the GPU compute path with
 sovereign Rust implementations, scaffolded off existing open-source systems.
@@ -53,11 +53,12 @@ Hardware becomes interchangeable — the math is sovereign.
 
 | Layer | Component | Owner | Scaffolds From | Status |
 |:---:|---|---|---|---|
-| 6 | Shader math (WGSL f64/DF64) | **barraCuda** | Original | ✅ Production |
-| 6 | Precision strategy (Fp64Strategy) | **barraCuda** | Original | ✅ Production |
+| 6 | Shader math (WGSL f64/DF64) | **barraCuda** | Original | ✅ Production (zero unsafe) |
+| 6 | Precision strategy (Fp64Strategy) | **barraCuda** | Original | ✅ Production (zero unsafe) |
+| 6 | Sovereign compiler (FMA, DCE) | **barraCuda** | naga + original | ✅ Safe WGSL roundtrip (all backends) |
 | 6 | Physics validation | **springs** | Papers | ✅ Production |
-| 5 | WGSL → SPIR-V (naga fork) | **barraCuda** | Mozilla naga | 🔄 Using upstream |
-| 5 | WGSL → ISA direct (bypass SPIR-V) | **barraCuda** | NAK + naga | ⬜ Level 3 |
+| 5 | WGSL ↔ naga IR ↔ WGSL | **barraCuda** | Mozilla naga | ✅ Using upstream (wgsl-in + wgsl-out) |
+| 5 | WGSL → ISA direct (bypass SPIR-V) | **coralReef** | NAK + naga | ⬜ Level 3 |
 | 4 | GPU abstraction (wgpu fork/replace) | **toadStool** | gfx-rs wgpu | 🔄 Using upstream |
 | 4 | Hardware discovery + capability | **toadStool** | wgpu adapters | ✅ GpuAdapterInfo |
 | 4 | Multi-adapter selection | **toadStool** | Original | ✅ TOADSTOOL_GPU_ADAPTER |
@@ -75,9 +76,9 @@ Hardware becomes interchangeable — the math is sovereign.
 
 ## Evolution Levels
 
-### Level 1 — WGSL Polyfills (NOW — days)
+### Level 1 — WGSL Polyfills + Safe Compilation (COMPLETE)
 
-**Status**: ✅ Active, producing results
+**Status**: ✅ Complete — zero unsafe, zero application C deps
 
 **What**: Work around NAK/NVK limitations from WGSL without touching the
 driver or compiler. All fixes live in barraCuda's shader compilation pipeline.
@@ -90,11 +91,15 @@ driver or compiler. All fixes live in barraCuda's shader compilation pipeline.
 - `yukawa_df64.wgsl`: hand-written DF64 force shader
 - NVK workarounds: allocation limits, workgroup tuning, sin/cos Taylor
 
-**Remaining Level 1 work**:
+**Level 1 work**:
 - [x] Wire DF64 Yukawa force into hotSpring MD pipeline — **DONE** (9/9 PASS, 293-326 steps/s)
 - [x] Wire cell-list O(N) into hotSpring benchmark — **DONE** (CellListGpu, 3 cells/dim)
 - [x] Wire Verlet neighbor list — **DONE** (368-992 steps/s, adaptive rebuild)
 - [x] Measure gap vs Kokkos-CUDA — **DONE** (gap 3.7× at κ=3, down from 27×)
+- [x] Eliminate all `unsafe` from barraCuda — **DONE** (7 blocks → 0)
+- [x] Safe WGSL roundtrip (sovereign compiler on all backends) — **DONE**
+- [x] Pipeline cache deferred until wgpu safe API — **DONE**
+- [x] Capability-based discovery (zero hardcoded ports/primals) — **DONE**
 - [ ] Validate DF64 on NVK for Yukawa OCP (sovereignty validation)
 
 **Owner**: barraCuda (shaders), springs (validation)
@@ -105,9 +110,9 @@ Remaining gap is dispatch overhead and GPU occupancy.
 
 ---
 
-### Level 2 — Fork NAK, Fix f64 Backend (weeks)
+### Level 2 — coralReef: Fix f64 Backend + Zero Unsafe (weeks)
 
-**Status**: ⬜ Not started
+**Status**: 🔄 In progress (coralReef Phase 5 complete, 2 unsafe remaining)
 
 **What**: Fork Mesa's NAK shader compiler. Fix the f64 transcendental
 emission directly in the compiler backend instead of polyfilling from WGSL.
@@ -338,6 +343,18 @@ All sovereign compute components use the **coral** prefix:
 
 Coral: grows slowly, builds reefs, provides habitat for the entire ecosystem.
 Sovereign, organic, accumulative.
+
+---
+
+---
+
+## Related Documents
+
+- `wateringHole/PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — cross-primal
+  guidance for coralReef Layer 2-4 evolution (contracts, safe evolution paths)
+- `barraCuda/PURE_RUST_EVOLUTION.md` — barraCuda layer status tracker
+- `barraCuda/specs/REMAINING_WORK.md` — barraCuda remaining work items
+- `barraCuda/WHATS_NEXT.md` — C dependency chain evolution map
 
 ---
 
