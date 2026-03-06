@@ -47,6 +47,13 @@ the f64 precision infrastructure that ALL statistical operations depend on.
 discovery propagated to all barracuda f64 ops, including the `stats::*`
 functions groundSpring delegates to.
 
+**March 2026 update**: hotSpring discovered that GPU f64 arithmetic diverges
+from CPU at ULP level due to FMA fusion and SPIR-V reordering. In algorithms
+with catastrophic cancellation (W(z) = 1 + z·Z(z) for plasma dispersion),
+this amplifies to percent-level errors. Fix: compute small quantities directly
+via asymptotic expansion. See `GPU_F64_NUMERICAL_STABILITY.md` for the full
+writeup and cross-spring impact analysis.
+
 ---
 
 ## wetSpring → Bio-Statistical Primitives
