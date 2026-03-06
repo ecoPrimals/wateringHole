@@ -271,6 +271,53 @@ diversity analysis. This requires:
 
 ---
 
+### ISSUE-006: GPU f64 Catastrophic Cancellation in Special Functions
+
+**Reporter**: hotSpring v0.6.19
+**Affects**: barraCuda (math primitives), coralReef (compiler), ALL springs doing GPU science
+**Priority**: P1 — silent physics errors from ULP amplification
+
+**Problem**: GPU f64 arithmetic produces ULP-level different results from CPU
+due to FMA fusion and operation reordering in SPIR-V. For algorithms with
+catastrophic cancellation (subtraction of nearly-equal values), these small
+differences get amplified 50-1000×, producing visible percent-level errors
+and even sign flips in output quantities.
+
+Discovered during Paper 44 GPU promotion: the plasma dispersion function
+W(z) = 1 + z·Z(z) showed 125% relative error at specific frequencies where
+z·Z(z) ≈ -1.017, amplifying ULP-level GPU/CPU differences through the
+subtraction 1 - 1.017 = -0.017.
+
+This is NOT a precision routing issue — all f64 polyfills were verified
+present and correct. It is a fundamental consequence of heterogeneous IEEE-754
+arithmetic and MUST be addressed algorithmically.
+
+**Proposed fix** (split ownership):
+
+1. **barraCuda (P1)**: Ship numerically stable GPU special function
+   primitives (`special_f64.wgsl`) that avoid cancellation by design.
+   Pattern: compute the small quantity directly via asymptotic expansion
+   instead of as a difference of large values. hotSpring's `plasma_w()`
+   fix is the template — should be absorbed into barraCuda.
+
+2. **coralReef (P2)**: Expose SPIR-V `NoContraction` decoration control
+   to disable FMA fusion when bit-exact CPU parity is required. Add FMA
+   behavior detection to driver profiling. Long-term: coralNak precision
+   manifest with per-operation FMA policy.
+
+3. **Springs (awareness)**: Test GPU special functions with point diagnostics
+   across full input range, not just aggregate statistics. Validate physics
+   properties (conservation laws, positivity, sum rules) rather than CPU
+   bit-parity.
+
+**Evidence**: `wateringHole/GPU_F64_NUMERICAL_STABILITY.md` (full writeup),
+`hotSpring/experiments/044_CHUNA_BGK_DIELECTRIC.md`, validation binary
+`validate_gpu_dielectric` (12/12 checks after fix).
+
+**Status**: OPEN — hotSpring workaround in place; barraCuda absorption pending
+
+---
+
 ## Resolved Issues
 
 *None yet — this document is newly created.*
