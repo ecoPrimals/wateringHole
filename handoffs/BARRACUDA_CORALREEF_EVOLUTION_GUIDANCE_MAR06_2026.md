@@ -44,7 +44,7 @@ hardware-validated compute submission on real GPUs (RTX 3090, RX 6950 XT,
 Titan V).
 
 **Why it matters**: barraCuda has compiled native binaries cached in
-`coral_compiler.rs` (`NATIVE_BINARY_CACHE`) but no dispatch path. The
+`coral_compiler/cache.rs` (`NATIVE_BINARY_CACHE`) but no dispatch path. The
 sovereign pipeline is: `WGSL → coralReef IPC → native binary → cache →
 coralDriver dispatch`. Without coralDriver, cached binaries are unused.
 
@@ -103,18 +103,20 @@ scheduling would allow all shader variants to go through the sovereign path.
 
 ## 6. IPC Contract — What barraCuda Provides
 
-barraCuda's `CoralCompiler` client (`device/coral_compiler.rs`) uses:
+barraCuda's `CoralCompiler` client (`device/coral_compiler/` module — mod.rs, types.rs, discovery.rs, cache.rs, jsonrpc.rs) uses:
 
-| Endpoint | Method | Request | Response |
-|----------|--------|---------|----------|
-| Health | `compiler.health` | `()` | `HealthResponse` |
-| Compile | `compiler.compile` | `CompileRequest` | `CompileResponse` |
-| Archs | `compiler.supported_archs` | `()` | `Vec<String>` |
+| Endpoint | Method (Phase 10) | Legacy Fallback | Request | Response |
+|----------|-------------------|-----------------|---------|----------|
+| Health | `shader.compile.status` | `compiler.health` | `()` | `HealthResponse` |
+| Compile SPIR-V | `shader.compile.spirv` | — | `CompileRequest` | `CompileResponse` |
+| Compile WGSL | `shader.compile.wgsl` | — | `CompileWgslRequest` | `CompileResponse` |
+| Capabilities | `shader.compile.capabilities` | health-response archs | `()` | `Vec<String>` |
 
 **Discovery**: barraCuda probes for coralReef via:
 1. `BARRACUDA_SHADER_COMPILER_ADDR` / `BARRACUDA_SHADER_COMPILER_PORT` env
-2. XDG runtime manifest: `$XDG_RUNTIME_DIR/ecoPrimals/coralReef*.json`
-3. Default fallback: `127.0.0.1:9741`
+2. XDG runtime manifest: `$XDG_RUNTIME_DIR/ecoPrimals/` capability scan for `shader.compile` (Phase 10) then `shader_compiler` (legacy)
+3. Well-known `coralreef-core.json` filename fallback
+4. Default fallback: `127.0.0.1:9741`
 
 **Caching**: Native binaries are cached by `(blake3_hash(shader_source), arch)`.
 The cache persists for the process lifetime. Re-compilation is triggered only
@@ -161,7 +163,7 @@ alongside the NVIDIA path. The IPC contract does not need to change — the
 | `CoralProbe` in test harness | Production |
 | `Fp64Strategy::Sovereign` variant | Production |
 | Native binary cache (`NATIVE_BINARY_CACHE`) | Production |
-| `arch_to_coral()` mapping (GpuArch → sm_xx) | Production |
+| `arch_to_coral()` mapping (GpuArch → sm_xx/gfx_xxxx) | Production |
 | `with_coral()` test gate | Production |
 | Tier 5 coralreef test tier in `test-tiered.sh` | Production |
 | XDG runtime manifest discovery | Production |

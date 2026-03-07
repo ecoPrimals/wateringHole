@@ -87,8 +87,8 @@ registry with evolution dates and dependency matrix.
 
 ### For coralReef
 - 14/27 cross-spring shaders compiling to SM70 SASS as of Phase 10 Iteration 5
-- `compile_wgsl_direct()` and `supported_archs()` are wired in barraCuda's
-  `coral_compiler.rs` — ready for end-to-end validation when coralDriver lands
+- `compile_wgsl_direct()`, `capabilities()`, and AMD arch support are wired in barraCuda's
+  `coral_compiler/` module — ready for end-to-end validation when coralDriver lands
 
 ### For hotSpring
 - `BatchedOdeRK45F64` can replace per-step GPU dispatch in transport calculations
