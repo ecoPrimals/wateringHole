@@ -184,6 +184,31 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 ---
 
+### coralReef - Shader Compiler Primal
+
+**Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
+**Phase**: Foundation  
+**Status**: Phase 10 In Progress (A+) — 856 tests (836 passing, 20 ignored), zero clippy warnings (pedantic + nursery), zero production `unwrap()`/`todo!()`, AGPL-3.0-only
+
+**Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL and SPIR-V compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030). coralDriver provides userspace GPU dispatch via DRM ioctl. coralGpu unifies compilation and dispatch into a single API. Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary.
+
+**Primitives**:
+
+| Category | Primitives |
+|----------|-----------|
+| **IPC** | `shader.compile.spirv`, `shader.compile.wgsl`, `shader.compile.status`, `shader.compile.capabilities` — JSON-RPC 2.0 + tarpc (TCP/Unix socket), zero-copy `bytes::Bytes` payloads, differentiated error codes |
+| **NVIDIA Backend** | SM70-SM89 (Volta through Ada), SASS binary output, f64 transcendentals via Newton-Raphson (sqrt, rcp, exp2, log2, sin, cos) |
+| **AMD Backend** | RDNA2 GFX1030, native `v_fma_f64`/`v_sqrt_f64`/`v_rcp_f64`, 1446 ISA opcodes (Rust-generated from AMD XML) |
+| **Compiler Core** | naga frontend, SSA IR, copy propagation, DCE, register allocation, vendor-specific legalization and encoding |
+| **coralDriver** | AMD DRM ioctl (GEM, PM4, BO list, CS submit, fence sync), NVIDIA nouveau (explicit `Unsupported`) — pure Rust via libc |
+| **coralGpu** | Unified compile + dispatch API — vendor-agnostic `GpuContext` |
+| **f64 Lowering** | Full f64 transcendental suite: sqrt, rcp, exp2, log2, sin, cos, exp, log, pow — NVIDIA (DFMA software) + AMD (native hardware) |
+| **14/27 Cross-Spring Shaders** | Compiles shaders from hotSpring, groundSpring, neuralSpring, wetSpring, airSpring to native SM70 SASS |
+
+**Participates In**: Sovereign Compute Pipeline (barraCuda → toadStool → coralReef → native binary → coralDriver → hardware)
+
+---
+
 ### biomeOS - Ecosystem Orchestrator
 
 **Domain**: Primal orchestration and ecosystem coordination  
