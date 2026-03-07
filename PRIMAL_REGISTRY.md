@@ -127,7 +127,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Universal compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — 2,440+ barracuda tests, 21,599+ workspace tests, 0 clippy warnings, sovereign compiler operational
+**Status**: Production Ready (A++ GOLD STANDARD) — 3,099 barracuda tests, 21,599+ workspace tests, 0 clippy warnings, sovereign compiler operational, zero `too_many_arguments`, builder/struct patterns throughout
 
 **Role**: ToadStool enables isomorphic workload execution across any compute substrate - CPU, GPU, neuromorphic hardware, WebAssembly, containers, and edge devices. Its BarraCuda library (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) provides 687 WGSL f64 shaders (zero orphans) as the **primary math implementation**. All math originates as WGSL shaders at f64 precision -- barracuda does not care about hardware. ToadStool routes to the best substrate at runtime. CPU reference implementations exist only for `#[cfg(test)]` validation. f64 transcendentals (exp, log, pow, sin, cos, gamma, erf) are fully covered by `compile_shader_f64()` polyfill pipeline on every GPU.
 
@@ -135,7 +135,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **BarraCuda Core** | 687 WGSL f64 shaders (shader-first, zero CPU-only math): matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
+| **BarraCuda Core** | 708+ WGSL f64 shaders (shader-first, zero CPU-only math): matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
 | **Linear Algebra** | GPU-dispatched: solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
 | **Scientific Computing** | Crank-Nicolson PDE, Richards equation, all MD forces GPU (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics (GPU FFT), HFB nuclear physics (11 shaders) |
 | **Lattice QCD** | 14 GPU shaders + host orchestration: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop, kinetic energy |
