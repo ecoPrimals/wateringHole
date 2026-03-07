@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 5, 2026
+**Last Updated**: March 7, 2026
 
 ---
 
@@ -123,41 +123,62 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 ---
 
-### ToadStool - Compute Primal
+### ToadStool - Hardware Infrastructure Primal
 
-**Domain**: Universal compute orchestration  
+**Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — 3,099 barracuda tests, 21,599+ workspace tests, 0 clippy warnings, sovereign compiler operational, zero `too_many_arguments`, builder/struct patterns throughout
+**Status**: Production Ready (A++ GOLD STANDARD) — 19,109 workspace tests, 0 clippy warnings, 0 failures, 61+ JSON-RPC methods (dynamically built), capability-based discovery, all files < 1000 lines
 
-**Role**: ToadStool enables isomorphic workload execution across any compute substrate - CPU, GPU, neuromorphic hardware, WebAssembly, containers, and edge devices. Its BarraCuda library (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) provides 687 WGSL f64 shaders (zero orphans) as the **primary math implementation**. All math originates as WGSL shaders at f64 precision -- barracuda does not care about hardware. ToadStool routes to the best substrate at runtime. CPU reference implementations exist only for `#[cfg(test)]` validation. f64 transcendentals (exp, log, pow, sin, cos, gamma, erf) are fully covered by `compile_shader_f64()` polyfill pipeline on every GPU.
+**Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
-| **BarraCuda Core** | 708+ WGSL f64 shaders (shader-first, zero CPU-only math): matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
-| **Linear Algebra** | GPU-dispatched: solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
-| **Scientific Computing** | Crank-Nicolson PDE, Richards equation, all MD forces GPU (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics (GPU FFT), HFB nuclear physics (11 shaders) |
-| **Lattice QCD** | 14 GPU shaders + host orchestration: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop, kinetic energy |
-| **Special Functions** | GPU: Bessel (J0/J1/Y0/Y1), Laguerre, Hermite, Legendre, spherical harmonics, digamma, beta, gamma, erf |
-| **Statistics** | GPU: variance, covariance, correlation, kinetic energy, fused map-reduce, weighted dot, cosine similarity |
-| **MD Observables** | GPU: RDF (atomic histogram), MSD, VACF, stress virial, velocity-Verlet integrator, Berendsen thermostat |
-| **Surrogates** | RBF surrogate (GPU cdist + GPU solve), adaptive sampling, sparsity sampling |
-| **Bioinformatics** | 25 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, pairwise L2, multi-objective fitness, swarm NN, hill gate, batch fitness, ANI, random forest inference |
-| **CNN** | conv2d, batch_norm, max_pool2d, avg_pool2d, elementwise (CPU + WGSL) |
-| **Attention** | Scaled Dot-Product, Multi-Head, Causal, Sparse, Rotary, Cross, ALiBi |
-| **Training** | Focal Loss, Contrastive Loss, Huber Loss, BCE, Hinge, KL Divergence, Lovasz, MAE, Smooth L1 |
-| **Optimizers** | SGD, Adam, AdaGrad, RMSprop, AdaDelta |
-| **IoT/Streaming** | Moving window statistics (mean/var/min/max), batched ODE RK4 |
-| **Neuromorphic** | Pure Rust Akida driver (160 NPUs detected), ESN export/import weights |
-| **f64 Polyfill** | `compile_shader_f64()`: auto-injects software transcendentals (exp, log, pow, sin, cos, tan, gamma, erf) on drivers without native f64 support (NVK, RADV, Ada) |
-| **Sovereign Compiler** | naga-IR optimizer: FMA fusion (~1.3x), dead expression elimination, SPIR-V passthrough — end-to-end Rust GPU compilation |
-| **Hybrid FP64** | `Fp64Strategy` auto-selects native f64 (compute GPUs) vs DF64 double-float f32-pair (~14 digits on FP32 cores). 12 DF64 WGSL files. |
-| **Runtimes** | Native, WASM, Python, Container, GPU, NPU, Edge (Linux, RPi, ESP32, Arduino) |
+| **GPU Discovery** | Multi-adapter selection (`TOADSTOOL_GPU_ADAPTER`), `GpuAdapterInfo` (driver, f64, workgroups, buffer limits), cross-vendor (NVIDIA/AMD/Intel via WGPU/Vulkan) |
+| **NPU Discovery** | Generic `NpuDispatch` trait, `AkidaNpuDispatch` adapter (VFIO/kernel/mmap), `NpuParameterController` trait |
+| **CPU Discovery** | `/proc/cpuinfo` parsing, cache hierarchy (L2/L3/Infinity Cache), SIMD capability probing |
+| **Hardware Transport** | Display (DRM/KMS), Capture (V4L2), Serial (USB) — frame protocol + `TransportRouter` |
+| **GPU Job Queue** | Submit/status/result/cancel/list, cross-gate routing across machines |
+| **Precision Routing** | `PrecisionRoutingAdvice` (F64Native, F64NativeNoSharedMem, Df64Only, F32Only), `precision_routing()` |
+| **Sovereign Pipeline** | `HardwareFingerprint`, `is_sovereign_capable()`, `safe_allocation_limit` (NVK PTE guard), 12-variant `SubstrateCapabilityKind` |
+| **Distributed** | Cross-gate GPU routing, cloud cost estimation, compliance validation, federation |
+| **Ollama Integration** | Model lifecycle (list/load/inference/unload) via JSON-RPC |
+| **Runtimes** | Native, WASM (wasmi), Python, Container (BYOB), GPU, NPU, Edge (Linux, RPi, ESP32, Arduino) |
+| **IPC** | 61+ JSON-RPC 2.0 methods (semantic naming), tarpc typed RPC, Unix socket standard |
 
-**Five-Spring ingestion**: hotSpring (62 shaders: lattice QCD, HFB, spectral, transport), neuralSpring (4 bio ML + PRNG, all f64), wetSpring (5 ODE f64), airSpring (Richards PDE + moving window), groundSpring (sensor noise). All f32 shaders evolved to f64 (S49). **Deep debt resolved**: S61-68 systematically eliminated dead code, refactored large files, wired unused implementations, full quality gates passing.
+**Key principles**: Capability-based discovery (self-knowledge only), ecoBin compliant (pure Rust core), zero hardcoded primal names/ports, all unsafe blocks documented with `// SAFETY:`. Rust 1.82+ MSRV.
 
-**Participates In**: Node Atomic (with Tower Atomic), NUCLEUS, BarraCuda compute layer
+**Participates In**: Node Atomic (with Tower Atomic), NUCLEUS, serves hardware capabilities to BarraCuda
+
+---
+
+### BarraCuda - Math Primal
+
+**Domain**: GPU math dispatch, shaders, and precision strategy  
+**Phase**: Foundation  
+**Status**: Production Ready — budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
+
+**Role**: BarraCuda (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) is the math engine. All math originates as WGSL shaders at f64 precision. BarraCuda does not care about hardware — ToadStool provides hardware capabilities via IPC. f64 transcendentals fully covered by `compile_shader_f64()` polyfill pipeline. Sovereign naga-IR compiler (FMA fusion, DCE).
+
+**Primitives**:
+
+| Category | Primitives |
+|----------|-----------|
+| **Core** | 708+ WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
+| **Linear Algebra** | solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
+| **Scientific Computing** | Crank-Nicolson PDE, Richards equation, MD forces (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics, HFB nuclear physics |
+| **Lattice QCD** | 14 GPU shaders + host: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop |
+| **Special Functions** | Bessel, Laguerre, Hermite, Legendre, spherical harmonics, digamma, beta, gamma, erf |
+| **ML** | Attention (7 variants), Training losses (10 types), Optimizers (5 types), CNN ops |
+| **Bioinformatics** | 25 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, ANI, random forest inference |
+| **f64 Polyfill** | `compile_shader_f64()`: auto-injects software transcendentals on drivers without native f64 |
+| **Sovereign Compiler** | naga-IR optimizer: FMA fusion (~1.3x), dead expression elimination, SPIR-V passthrough |
+| **Hybrid FP64** | `Fp64Strategy` auto-selects native f64 vs DF64 double-float (~14 digits on FP32 cores) |
+
+**Five-Spring ingestion**: hotSpring (lattice QCD, HFB, spectral), neuralSpring (bio ML), wetSpring (ODE), airSpring (Richards PDE), groundSpring (sensor noise). All f32→f64 (S49).
+
+**Participates In**: Node Atomic (via ToadStool), NUCLEUS compute layer
 
 ---
 
