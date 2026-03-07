@@ -127,9 +127,9 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — 19,109 workspace tests, 0 clippy warnings, 0 failures, 61+ JSON-RPC methods (dynamically built), capability-based discovery, all files < 1000 lines
+**Status**: Production Ready (A++ GOLD STANDARD) — 19,140+ workspace tests, 0 clippy warnings, 0 failures, 65+ JSON-RPC methods (dynamically built), capability-based discovery, coralReef shader proxy, cross-spring provenance tracking, all files < 1000 lines
 
-**Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
+**Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
 **Primitives**:
 
@@ -145,7 +145,9 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Distributed** | Cross-gate GPU routing, cloud cost estimation, compliance validation, federation |
 | **Ollama Integration** | Model lifecycle (list/load/inference/unload) via JSON-RPC |
 | **Runtimes** | Native, WASM (wasmi), Python, Container (BYOB), GPU, NPU, Edge (Linux, RPi, ESP32, Arduino) |
-| **IPC** | 61+ JSON-RPC 2.0 methods (semantic naming), tarpc typed RPC, Unix socket standard |
+| **Shader Proxy** | `shader.compile.*` proxy to coralReef with capability-based discovery, naga fallback |
+| **Provenance** | `toadstool.provenance` — cross-spring flow matrix (17+ flows across 5 springs, 9 domains) |
+| **IPC** | 65+ JSON-RPC 2.0 methods (semantic naming), tarpc typed RPC, Unix socket standard |
 
 **Key principles**: Capability-based discovery (self-knowledge only), ecoBin compliant (pure Rust core), zero hardcoded primal names/ports, all unsafe blocks documented with `// SAFETY:`. Rust 1.82+ MSRV.
 
