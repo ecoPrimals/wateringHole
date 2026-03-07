@@ -39,11 +39,14 @@ barraCuda with the new contract.
 - Doc comments updated to reference new method names
 
 ### barraCuda (`ecoPrimals/barraCuda`)
-- `crates/barracuda/src/device/coral_compiler.rs`:
+- `crates/barracuda/src/device/coral_compiler/` (module — mod.rs, types.rs, discovery.rs, cache.rs, jsonrpc.rs):
   - `compile_spirv()`: already on `shader.compile.spirv`
   - `compile_wgsl_direct()`: already on `shader.compile.wgsl`
   - `health()`: already on `shader.compile.status`
-  - `probe_jsonrpc()`: already on `shader.compile.status`, legacy `compiler.health` fallback removed
+  - `capabilities()`: new `shader.compile.capabilities` endpoint for architecture enumeration
+  - `probe_jsonrpc()`: `shader.compile.status` with `compiler.health` backward-compat fallback
+  - `discover_coralreef()`: capability scan checks `shader.compile` (Phase 10) before `shader_compiler` (legacy)
+  - `arch_to_coral()`: expanded AMD support — RDNA2 (`gfx1030`), RDNA3 (`gfx1100`), CDNA2 (`gfx90a`)
   - `spawn_coral_compile()` doc comment updated
 - Module-level IPC contract doc already correct
 
@@ -61,7 +64,7 @@ toadStool (shader.compile.* handler)
 coralReef (JSON-RPC server)
        │ WGSL → naga → SSA IR → optimize → legalize → RA → encode
        ▼
-Native GPU binary (SM70-SM89, GFX1030)
+Native GPU binary (SM70-SM89, GFX1030, GFX1100, GFX90a)
 ```
 
 ## Verification
@@ -74,9 +77,9 @@ Native GPU binary (SM70-SM89, GFX1030)
 ## Breaking Change Note
 
 Pre-Iteration 6 coralReef instances (if any exist) will not respond to
-`shader.compile.*` method names. The legacy `compiler.*` fallback in barraCuda's
-`probe_jsonrpc()` has been removed. All deployments should use coralReef
-Iteration 6+ (`967876f` or later).
+`shader.compile.*` method names. barraCuda's `probe_jsonrpc()` includes a
+backward-compat fallback to `compiler.health` for pre-Phase 10 instances,
+but production deployments should use coralReef Iteration 6+ (`967876f` or later).
 
 ---
 
