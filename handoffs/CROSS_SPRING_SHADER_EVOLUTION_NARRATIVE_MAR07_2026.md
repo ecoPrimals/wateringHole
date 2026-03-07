@@ -17,7 +17,7 @@ pipeline. It serves as the ecosystem-wide narrative of cross-spring evolution.
 Spring domain code (WGSL)
     → barraCuda (ComputeDispatch + PrecisionStrategy)
     → toadStool (shader.compile.* JSON-RPC proxy)
-    → coralReef (compiler.compile / compiler.compile_wgsl)
+    → coralReef (shader.compile.spirv / shader.compile.wgsl)
     → Native GPU binary (SASS/GFX)
 ```
 
