@@ -214,3 +214,60 @@ in barraCuda, evolved organically from five springs:
 | `Fp64Strategy` | S58 | Native vs DF64 routing | Per-hardware selection |
 | `PrecisionRoutingAdvice` | V84-V85 | F64Native / NoSharedMem / Df64 / F32 | groundSpring → toadStool → all |
 | Precision-routed dispatch | V96 | `get_device_f64_safe()` guards | 11 GPU paths hardware-aware |
+
+---
+
+## 7. Absorption and Evolution Guidance
+
+### What groundSpring Has Contributed (for SPRING_ABSORPTION_TRACKER)
+
+| Contribution | Origin | Absorbed Into | Current Status |
+|--------------|--------|---------------|----------------|
+| `PrecisionRoutingAdvice` enum | V84-V85 | barraCuda `device::driver_profile` | Round-tripped back; V96 wires into 11 paths |
+| `f64_shared_memory_reliable` flag | V84-V85 | `GpuAdapterInfo` | Prevents naga `var<workgroup>` f64 zero bug |
+| `sovereign_binary_capable` | V85 | `HardwareFingerprint` | coralDriver readiness flag |
+| 13-tier tolerance architecture | V73 | wateringHole standard | wetSpring adopted 164 tiers; pattern proven |
+| `if let Ok` + CPU fallback | V20+ | wateringHole standard | All springs use this pattern |
+| Three-mode validation | V29+ | wateringHole standard | local/barracuda/barracuda-gpu adopted by all |
+| Shaders (anderson_lyapunov, chi_squared, welford) | V68-V80 | barraCuda ops | Absorbed; metalForge retains 2 reference shaders |
+
+### SPRING_ABSORPTION_TRACKER Update Request
+
+| Field | Current (stale) | Correct (V96) |
+|-------|-----------------|---------------|
+| groundSpring version | V85 | **V96** |
+| Tests | 812 | **925** |
+| Delegations | 87 (51 CPU + 36 GPU) | **102 (61 CPU + 41 GPU)** |
+| barraCuda pin | — | `2a6c072` |
+| New since V85 | — | PrecisionRoutingAdvice wired, Shannon delegation, CorrelationFull API, FFT (Fft1DF64), smart refactoring, Exp 023/024 GPU wired, AutocorrelationF64 consumed |
+
+### Available but Not Yet Consumed
+
+| barraCuda Primitive | groundSpring Status | When to Wire |
+|---------------------|---------------------|--------------|
+| `BatchedOdeRK45F64` | Available | When an experiment needs adaptive ODE stepping |
+| `GpuView<T>` | Available | When ops accept `&GpuView<T>` for zero-readback chains |
+| `mean_variance_to_buffer()` | Available | GPU-resident pipelines (no host readback) |
+| `CorrelationF64::correlation_full_buffer()` | Available | Zero-copy chained dispatch |
+| `LSCFRK` integrators | Not applicable | Lattice QCD gradient flow only |
+
+### Open Evolution Requests (Priority Order)
+
+| Priority | Request | Owner | Detail |
+|----------|---------|-------|--------|
+| **P0** | Fix `Fp64Strategy` in `SumReduceF64`/`VarianceReduceF64` | barraCuda | Hybrid/Native branching should select DF64 shader on Hybrid devices |
+| **P1** | Update SPRING_ABSORPTION_TRACKER | toadStool | groundSpring V85→V96, 87→102 delegations, 812→925 tests |
+| **P1** | Wire `shader.compile.*` IPC to live coralReef | toadStool | Currently returns "not yet available" |
+| **P1** | Add FFT to `SubstrateCapabilityKind` | toadStool | groundSpring uses `Fft1DF64` for spectral reconstruction |
+| **P2** | Ops accepting `&GpuView<T>` | barraCuda | Enables zero-readback chains for pipeline dispatch |
+
+### groundSpring Validation Surface
+
+groundSpring's 35 experiments across 10 scientific domains provide a unique
+validation surface for barraCuda: every experiment has a Python baseline, a
+Rust CPU path, and (for 27/35) a GPU dispatch path — meaning every consumed
+barraCuda primitive is validated against an independent mathematical reference.
+
+Exp 025-027 (WDM) are especially valuable: they prove barraCuda's cross-vendor
+GPU results agree at 1e-12 relative level, and that f32→f64 precision drift
+is quantified at ~28% bias fraction for Green-Kubo integration.
