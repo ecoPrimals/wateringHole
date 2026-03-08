@@ -35,7 +35,7 @@ Generates: 3 WGSL variants       Compiles: whatever WGSL it receives
 ~~The gap: coralReef cannot compile df64 shaders.~~ **RESOLVED** (Iteration 13):
 coralReef now has a built-in df64 preamble (`df64_preamble.wgsl`) that is
 auto-prepended when source uses `Df64`/`df64_*`. 4 of 5 df64 tests pass
-(gelu, sdpa_scores, softmax, layer_norm). sigmoid_f64 blocked by RA SSA tracking.
+(gelu, sdpa_scores, softmax, layer_norm). sigmoid_f64 now compiles (Iteration 20 — SSA dominance repair).
 
 ---
 

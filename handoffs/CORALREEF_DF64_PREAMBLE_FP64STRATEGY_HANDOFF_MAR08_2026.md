@@ -60,8 +60,8 @@ All operations use f32 hardware only — works on every GPU.
 | `corpus_softmax_f64` | **PASS** | df64 softmax (pass 2 of 3-pass SDPA) |
 | `corpus_sdpa_scores_f64` | **PASS** | df64 QK^T/sqrt(d_k) (pass 1 of 3-pass SDPA) |
 | `corpus_kl_divergence_f64` | **PASS** | Fixed `shared` → `wg_scratch` (WGSL reserved keyword) |
-| `corpus_sigmoid_f64` | IGNORED | RA SSA tracking on loop-carried phi in branched exp_df64 |
-| `corpus_local_elementwise_f64` | IGNORED | naga Statement::Switch not yet in IR translator |
+| `corpus_sigmoid_f64` | **PASS** | Fixed Iteration 20 — SSA dominance repair via `fix_entry_live_in` |
+| `corpus_local_elementwise_f64` | IGNORED | Math::Acos not yet implemented |
 
 **Totals**: 991 tests — 960 passing, 31 ignored, 0 failed
 
@@ -141,8 +141,8 @@ let binary = compile_wgsl(f64_wgsl_source, &CompileOptions {
 
 | Gap | Impact | Fix |
 |-----|--------|-----|
-| `sigmoid_f64` RA failure | Branched exp_df64 exceeds RA SSA tracking | Generalized loop-carried phi in RA |
-| `switch` statement | `local_elementwise_f64` can't compile | Add Statement::Switch to IR translator |
+| ~~`sigmoid_f64` RA failure~~ | ~~Branched exp_df64~~ | **Fixed Iteration 20** — SSA dominance repair |
+| ~~`switch` statement~~ | ~~`local_elementwise_f64`~~ | **Fixed Iteration 14** — Statement::Switch lowering |
 | IR-level df64 lowering | barraCuda still needs 2 shader variants | `lower_f64_to_df64.rs` pass |
 | Adaptive precision | Auto-select tier per-operation | Numerical analysis in compiler |
 
