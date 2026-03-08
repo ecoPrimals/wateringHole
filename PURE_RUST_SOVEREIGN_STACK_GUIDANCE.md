@@ -45,7 +45,7 @@ barraCuda achieved this by:
 Transitive C boundaries (wgpu → ash → libvulkan.so, tokio → libc) are
 system-level and evolve via Layers 2-4, not Layer 1.
 
-### Layer 2 — coralReef: Phase 10 Iteration 17, 9 Unsafe Remaining
+### Layer 2 — coralReef: Phase 10 Iteration 18, 9 Unsafe Remaining
 
 coralReef is a sovereign Rust GPU shader compiler. NVIDIA backend (SM70–SM89)
 and AMD backend (RDNA2 GFX1030) operational with E2E dispatch verified.
@@ -55,7 +55,7 @@ for double-float precision. `Fp64Strategy` in `CompileOptions`.
 **9 `unsafe` blocks** remain in `coral-driver` (DRM ioctl, mmap/munmap, clock)
 and `nak-ir-proc` (proc macro). All wrapped in RAII (`MappedRegion`) or
 safe typed wrappers. `#[deny(unsafe_code)]` enforced on 6/8 crates.
-1134 tests, 63% coverage. 47 cross-spring WGSL shaders (32 compiling SM70). tarpc uses bincode for binary IPC.
+1138 tests, 63% coverage. 47 cross-spring WGSL shaders (36 compiling SM70). tarpc uses bincode for binary IPC.
 
 ### Layer 3 — Standalone Compilation: Planned
 
