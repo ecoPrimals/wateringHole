@@ -52,7 +52,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
 | **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 19,109 tests, 61+ JSON-RPC methods. Node Atomic for sovereign compute | Production (A++ GOLD) |
-| **BarraCuda** | Math | GPU math dispatch, 708+ WGSL f64 shaders, sovereign compiler (naga-IR FMA fusion), precision strategy (f64/DF64/f32). Budded from ToadStool (S93) | Production |
+| **BarraCuda** | Math | GPU math dispatch, 786 WGSL f64 shaders, sovereign compiler (naga-IR FMA fusion), precision strategy (f64/DF64/f32), DF64 reduce shaders. Budded from ToadStool (S93) | Production |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
 | **biomeOS** | Orchestration | Ecosystem substrate: Neural API, capability routing, NUCLEUS composition, bonding model, Dark Forest coordination | Production (A, Security A++ LEGENDARY) |
 

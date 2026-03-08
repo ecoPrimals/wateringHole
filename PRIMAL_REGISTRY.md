@@ -159,7 +159,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU math dispatch, shaders, and precision strategy  
 **Phase**: Foundation  
-**Status**: Production Ready (A+) — 3,687 tests, 784 WGSL shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, 27-shader cross-spring provenance registry, PrecisionRoutingAdvice, BatchedOdeRK45F64, `service` subcommand (genomeBin), `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
+**Status**: Production Ready (A+) — 3,100+ tests, 786 WGSL shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, 27-shader cross-spring provenance registry, PrecisionRoutingAdvice, BatchedOdeRK45F64, DF64 reduce shaders for Hybrid devices, `fused_ops_healthy()` canary, `service` subcommand (genomeBin), `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
 
 **Role**: BarraCuda (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) is the math engine. All math originates as WGSL shaders at f64 precision. BarraCuda does not care about hardware — ToadStool provides hardware capabilities via IPC. f64 transcendentals fully covered by `compile_shader_f64()` polyfill pipeline. Sovereign naga-IR compiler (FMA fusion, DCE).
 
@@ -167,13 +167,13 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Core** | 784 WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
+| **Core** | 786 WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce (incl. DF64 variants), broadcast |
 | **Linear Algebra** | solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
 | **Scientific Computing** | Crank-Nicolson PDE, Richards equation, MD forces (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics, HFB nuclear physics |
 | **Lattice QCD** | 14 GPU shaders + host: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop |
 | **Special Functions** | Bessel, Laguerre, Hermite, Legendre, spherical harmonics, digamma, beta, gamma, erf |
 | **ML** | Attention (7 variants), Training losses (10 types), Optimizers (5 types), CNN ops |
-| **Bioinformatics** | 25 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, ANI, random forest inference |
+| **Bioinformatics** | 31 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, ANI, random forest inference, HMM, Dada2, Gillespie, Wright-Fisher |
 | **f64 Polyfill** | `compile_shader_f64()`: auto-injects software transcendentals on drivers without native f64 |
 | **Sovereign Compiler** | naga-IR optimizer: FMA fusion (~1.3x), dead expression elimination, SPIR-V passthrough |
 | **Hybrid FP64** | `Fp64Strategy` auto-selects native f64 vs DF64 double-float (~14 digits on FP32 cores) |
