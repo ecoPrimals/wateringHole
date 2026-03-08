@@ -148,13 +148,23 @@ barraCuda sends one f64 shader. coralReef handles the lowering.
 
 1. **Keep generating df64 WGSL for now** (Phase 1 compatibility)
 2. **Always also generate the clean f64 variant** (needed for Phase 2)
-3. **Send `Fp64Strategy` hint in IPC** even if coralReef ignores it initially
+3. ~~**Send `Fp64Strategy` hint in IPC** even if coralReef ignores it initially~~ **DONE**
+   (March 8, 2026): `CompileWgslRequest.fp64_strategy` now sends `"native"`,
+   `"double_float"`, or `"f32_only"` alongside the legacy `fp64_software` flag.
+   `precision_to_coral_strategy()` maps barraCuda's 3-tier `Precision` enum to
+   coralReef's `Fp64Strategy` string. Phase 1 servers ignore the field (serde skip).
 4. **Do NOT inline coralReef internals** — barraCuda should not know about DFMA,
    Newton-Raphson, or polynomial coefficients. That's compiler territory.
 5. **Treat all hardware-specific code as transitional** — `driver_profile/`, `probe/`,
    `pipeline_cache/`, `wgpu_device/` exist because the sovereign dispatch path
    (coralReef → coralDriver) is not yet integrated. As coralReef dispatch matures,
    these modules migrate to toadStool or become unnecessary.
+6. ~~**Lean out F16 and unused template infrastructure**~~ **DONE**
+   (March 8, 2026): Removed `Precision::F16` (aspirational, zero production callers),
+   `templates.rs` (411-line `{{SCALAR}}` system, zero production callers),
+   `compile_shader_universal`, `compile_op_shader`, `compile_template` (zero callers).
+   barraCuda now has a clean 3-tier model: F32 / F64 / Df64 — directly aligned with
+   coralReef's `Fp64Strategy::F32Only` / `Native` / `DoubleFloat`.
 
 ## What coralReef Should Do
 

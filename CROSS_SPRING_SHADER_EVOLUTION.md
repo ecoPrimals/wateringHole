@@ -217,7 +217,7 @@ marks a phase shift where cross-spring absorption accelerates:
 | **5-accumulator Pearson** | wetSpring correlation + hotSpring precision | Single dispatch for mean+var+cov+pearson_r |
 | **31 bio ops in `ops/bio/`** | wetSpring (handoff v4-v8) + neuralSpring (metalForge) | All Springs via barraCuda |
 | **Fused chi-squared GPU** | neuralSpring S69 | Available for enrichment analysis |
-| **compile_shader_universal** | airSpring V0.6.9 | Ecosystem-wide: f64→f32 downcast |
+| **3-tier precision model** | barraCuda lean-out (Mar 8) | F32/F64/Df64 aligned with coralReef `Fp64Strategy` |
 
 ### Cross-pollination chains
 
@@ -226,7 +226,7 @@ hotSpring → df64_core.wgsl → neuralSpring (folding), wetSpring (variance, Sh
 wetSpring → HMM forward → neuralSpring (+ backward, viterbi) → shared hmm module
 wetSpring → FusedMapReduceF64 → airSpring (ET₀), groundSpring (diversity)
 neuralSpring → EA bio ops → wetSpring bio pipelines (pairwise_*, hill_gate)
-airSpring → compile_shader_universal → all Springs (precision per silicon)
+airSpring → f64-canonical pattern → all Springs (precision per silicon)
 groundSpring → batched_multinomial → wetSpring (rarefaction GPU)
 ```
 
