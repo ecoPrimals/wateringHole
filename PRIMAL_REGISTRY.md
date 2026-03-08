@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 7, 2026
+**Last Updated**: March 8, 2026
 
 ---
 
@@ -188,7 +188,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 12 (A+) — 991 tests (955 passing, 36 ignored), GPR↔Pred coercion + const_tracker + Pred→GPR lower_copy, 6 new math ops (tan, countOneBits, reverseBits, firstLeadingBit, countLeadingZeros, is_signed_int), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired (awaiting Titan V / RTX 3090 validation), zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 6/8 crates, AGPL-3.0-only
+**Status**: Phase 10 Iteration 13 (A+) — 991 tests (960 passing, 31 ignored), `Fp64Strategy` enum (Native/DoubleFloat/F32Only), built-in df64 preamble (Dekker/Knuth pair arithmetic auto-prepended), 5 df64 corpus tests unblocked (gelu, layer_norm, softmax, sdpa_scores, kl_divergence), `enable f64;` directive stripping, GPR↔Pred coercion + const_tracker + Pred→GPR lower_copy, 6 math ops (tan, countOneBits, reverseBits, firstLeadingBit, countLeadingZeros, is_signed_int), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired (awaiting Titan V / RTX 3090 validation), zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 6/8 crates, AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL and SPIR-V compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified — WGSL compile, PM4 dispatch, GPU execution, host readback. coralDriver provides userspace GPU dispatch via DRM ioctl. coralGpu unifies compilation and dispatch into a single API. Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
