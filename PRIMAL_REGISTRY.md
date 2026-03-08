@@ -157,28 +157,30 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 ### BarraCuda - Math Primal
 
-**Domain**: GPU math dispatch, shaders, and precision strategy  
+**Domain**: Pure mathematics — WGSL shaders, precision strategy, naga IR optimisation  
 **Phase**: Foundation  
-**Status**: Production Ready (A+) — v0.3.3 (a898dee) — 3,100+ tests, 786 WGSL shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, 27-shader cross-spring provenance registry, PrecisionRoutingAdvice, BatchedOdeRK45F64, DF64 reduce shaders for Hybrid devices, `fused_ops_healthy()` canary, `service` subcommand (genomeBin), `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
+**Status**: Production Ready (A+) — v0.3.3 (ab74b23) — 3,118+ tests, 712 WGSL f64 shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin); budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
 
-**Role**: BarraCuda (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) is the math engine. All math originates as WGSL shaders at f64 precision. BarraCuda does not care about hardware — ToadStool provides hardware capabilities via IPC. f64 transcendentals fully covered by `compile_shader_f64()` polyfill pipeline. Sovereign naga-IR compiler (FMA fusion, DCE).
+**Role**: BarraCuda is pure math. All math originates as WGSL shaders authored in f64 as the canonical precision. BarraCuda does not care about hardware — it writes the mathematics, coralReef compiles it, toadStool discovers and dispatches it. The precision tier (`Fp64Strategy`: f32 / f64 / df64) is the interface between barraCuda and coralReef. naga-IR optimisation (FMA fusion, DCE) operates on the math, not the hardware. Currently uses wgpu as a transitional dispatch substrate until coralReef's sovereign dispatch pipeline is integrated.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
-| **Core** | 786 WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce (incl. DF64 variants), broadcast |
+| **Core** | 712 WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce (incl. DF64 variants), broadcast |
 | **Linear Algebra** | solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
 | **Scientific Computing** | Crank-Nicolson PDE, Richards equation, MD forces (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics, HFB nuclear physics |
 | **Lattice QCD** | 14 GPU shaders + host: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop |
 | **Special Functions** | Bessel, Laguerre, Hermite, Legendre, spherical harmonics, digamma, beta, gamma, erf |
 | **ML** | Attention (7 variants), Training losses (10 types), Optimizers (5 types), CNN ops |
 | **Bioinformatics** | 31 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, ANI, random forest inference, HMM, Dada2, Gillespie, Wright-Fisher |
-| **f64 Polyfill** | `compile_shader_f64()`: auto-injects software transcendentals on drivers without native f64 |
-| **Sovereign Compiler** | naga-IR optimizer: FMA fusion (~1.3x), dead expression elimination, SPIR-V passthrough |
-| **Hybrid FP64** | `Fp64Strategy` auto-selects native f64 vs DF64 double-float (~14 digits on FP32 cores) |
+| **Kinetics** | Hill activation/repression, Monod saturation, regulatory network primitives |
+| **Precision Strategy** | `Fp64Strategy` (Native / Hybrid / Sovereign / Concurrent), `PrecisionRoutingAdvice` (F64Native / F64NativeNoSharedMem / Df64Only / F32Only) |
+| **Math-level Optimisation** | naga-IR FMA fusion (~1.3x), dead expression elimination — operates on the algebra, not the ISA |
 
-**Five-Spring ingestion**: hotSpring (lattice QCD, HFB, spectral), neuralSpring (bio ML), wetSpring (ODE), airSpring (Richards PDE), groundSpring (sensor noise). All f32→f64 (S49).
+**Boundary**: barraCuda writes the math. coralReef compiles the math. toadStool runs the math. The shaders are the mathematics; the driver is plumbing.
+
+**Five-Spring ingestion**: hotSpring (lattice QCD, HFB, spectral), neuralSpring (bio ML, Hill kinetics), wetSpring (ODE), airSpring (Richards PDE), groundSpring (sensor noise, Ada Lovelace reclassification). All f32→f64 (S49).
 
 **Participates In**: Node Atomic (via ToadStool), NUCLEUS compute layer
 
@@ -415,7 +417,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | neuralSpring | V90/S132 |
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
-| barraCuda | v0.3.3 (a898dee) |
+| barraCuda | v0.3.3 (ab74b23) |
 | coralReef | Phase 10 Iteration 17 |
 
 ### airSpring - Ecological & Agricultural Sciences

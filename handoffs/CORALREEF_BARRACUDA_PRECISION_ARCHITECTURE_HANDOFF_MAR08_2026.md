@@ -151,6 +151,10 @@ barraCuda sends one f64 shader. coralReef handles the lowering.
 3. **Send `Fp64Strategy` hint in IPC** even if coralReef ignores it initially
 4. **Do NOT inline coralReef internals** — barraCuda should not know about DFMA,
    Newton-Raphson, or polynomial coefficients. That's compiler territory.
+5. **Treat all hardware-specific code as transitional** — `driver_profile/`, `probe/`,
+   `pipeline_cache/`, `wgpu_device/` exist because the sovereign dispatch path
+   (coralReef → coralDriver) is not yet integrated. As coralReef dispatch matures,
+   these modules migrate to toadStool or become unnecessary.
 
 ## What coralReef Should Do
 

@@ -52,7 +52,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
 | **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 19,109 tests, 61+ JSON-RPC methods. Node Atomic for sovereign compute | Production (A++ GOLD) |
-| **BarraCuda** | Math | GPU math dispatch, 712 WGSL f64 shaders, sovereign compiler (naga-IR FMA fusion), precision strategy (f64/DF64/f32), f64-native pipeline cache, DF64 reduce shaders. Budded from ToadStool (S93) | Production (A+) |
+| **BarraCuda** | Pure Math | 712 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93) | Production (A+) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
 | **biomeOS** | Orchestration | Ecosystem substrate: Neural API, capability routing, NUCLEUS composition, bonding model, Dark Forest coordination | Production (A, Security A++ LEGENDARY) |
 
@@ -99,8 +99,10 @@ Primals achieve their greatest power through composition. These are not separate
 - **Full NUCLEUS** = All primals + Squirrel (+ AI)
 
 *Note*: BarraCuda budded from ToadStool into a standalone primal (S93).
-ToadStool handles hardware discovery and orchestration; BarraCuda handles sovereign math.
-Springs depend on BarraCuda directly without pulling ToadStool's runtime.
+BarraCuda is pure math — WGSL shaders and precision strategy. coralReef
+compiles the math to native GPU binaries. ToadStool discovers and dispatches
+hardware. Springs depend on BarraCuda directly for math without pulling
+ToadStool's runtime or coralReef's compiler.
 
 biomeOS composes these atomics based on what capabilities are available at runtime.
 
