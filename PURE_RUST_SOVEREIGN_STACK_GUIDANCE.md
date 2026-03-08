@@ -53,7 +53,7 @@ SM20-SM120. JSON-RPC 2.0 + tarpc IPC interface operational.
 **9 `unsafe` blocks** remain in `coral-driver` (DRM ioctl, mmap/munmap, clock)
 and `nak-ir-proc` (proc macro). All wrapped in RAII (`MappedRegion`) or
 safe typed wrappers. `#[deny(unsafe_code)]` enforced on 6/8 crates.
-1116 tests, 63% coverage. tarpc uses bincode for binary IPC.
+1134 tests, 63% coverage. 47 cross-spring WGSL shaders (32 compiling SM70). tarpc uses bincode for binary IPC.
 
 ### Layer 3 — Standalone Compilation: Planned
 
