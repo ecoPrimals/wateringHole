@@ -411,9 +411,9 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S133 |
+| ToadStool | S135 |
 | hotSpring | v0.6.23 |
-| groundSpring | V99 |
+| groundSpring | V100 |
 | neuralSpring | V90/S132 |
 | wetSpring | V99 |
 | airSpring | v0.7.5 |

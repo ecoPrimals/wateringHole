@@ -1,6 +1,6 @@
 # GPU f64 Numerical Stability — Lessons from hotSpring Paper 44
 
-**Date**: March 6, 2026
+**Date**: March 8, 2026
 **Reporter**: hotSpring v0.6.19
 **Affects**: barraCuda (math primitives), coralReef (compiler), ALL springs doing GPU science
 **Type**: Debt discovery + resolution pattern
