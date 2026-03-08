@@ -3,7 +3,7 @@
 > How the ecoPrimals Springs collectively evolved BarraCUDA into the library
 > groundSpring depends on for statistical validation.
 
-**Last Updated**: March 5, 2026
+**Last Updated**: March 7, 2026
 
 ---
 
@@ -230,10 +230,12 @@ airSpring → compile_shader_universal → all Springs (precision per silicon)
 groundSpring → batched_multinomial → wetSpring (rarefaction GPU)
 ```
 
-### Validation at wetSpring V97b
+### Validation at wetSpring V98
 
-- 1,247 unit tests (1,047 lib + 200 forge): ALL PASS
-- 26 CPU validation binaries: ALL PASS
+- 1,347 tests (1,047 lib + 200 forge + 100 doc): ALL PASS
+- 296 validation/benchmark binaries, 8,604+ checks: ALL PASS
+- V98 full chain: Paper Math v5 (32/32) → CPU v24 (67/67) → GPU v13 (25/25) → Streaming v11 (25/25) → metalForge v16 (24/24) = **173/173 PASS**
+- 150+ barraCuda primitives consumed, zero local WGSL, zero unsafe code
+- GPU Hybrid-aware: FusedMapReduceF64 validated on consumer GPU (RTX 4070)
 - Cross-spring S93 (59/59): provenance audit verified
 - Python vs Rust v3 (35/35): 15 domains bit-identical to SciPy/NumPy
-- ToadStool S70 rewire (42/42): new stats primitives validated
