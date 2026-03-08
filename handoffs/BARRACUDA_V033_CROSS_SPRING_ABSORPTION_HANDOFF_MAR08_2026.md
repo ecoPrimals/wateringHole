@@ -96,14 +96,41 @@ All shader absorption targets from neuralSpring confirmed present in barraCuda:
 
 ---
 
+## Phase 3 — Spring Absorption Cycle (Mar 8 evening)
+
+### `hill_activation` / `hill_repression` (neuralSpring absorption)
+
+**Source**: neuralSpring `primitives.rs` — thin wrappers around `barracuda::stats::hill`.
+**Absorbed to**: `barracuda::stats::metrics` — `hill_activation(x, amplitude, k, n)` and
+`hill_repression(x, amplitude, k, n)`. Re-exported at `barracuda::stats::{hill_activation, hill_repression}`.
+9 unit tests including complement property (activation + repression = amplitude).
+
+### Ada Lovelace `F64NativeNoSharedMem` Reclassification (groundSpring P0)
+
+**Problem**: RTX 4000-series on proprietary drivers classified as `Df64Only` (Throttled rate),
+but basic f64 compute works — only shared-memory f64 reductions fail.
+**Fix**: `precision_routing()` now returns `F64NativeNoSharedMem` for Ada + proprietary.
+`f64_zeros_risk()` extended to cover Ada + proprietary.
+4 unit tests (Ada risk, NVK risk, Ampere no-risk, Ada routing).
+
+### `shared_mem_f64` Runtime Probe (groundSpring P1)
+
+**Problem**: Shared-memory f64 reduction failures detectable only by driver/arch heuristics.
+**Fix**: New probe shader dispatches 4 threads writing f64 to `var<workgroup>`, barriers,
+thread 0 sums — expected 10.0, tolerance 1e-14. `F64BuiltinCapabilities.shared_mem_f64` field.
+`precision_routing()` now checks cached probe result via `cached_shared_mem_f64_for_key()`.
+`needs_shared_mem_f64_workaround()` method. Native count 9 → 10.
+Heuristic seed conservatively marks NVK as `shared_mem_f64: false`.
+
+---
+
 ## Quality Gates
 
 - `cargo fmt --check` ✅
-- `cargo clippy --workspace -- -D warnings` ✅
-- `RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps` ✅
-- `cargo nextest run -p barracuda --lib --profile ci` ✅ (3,089 tests, 0 failures)
-- `cargo nextest run -p barracuda-core --profile ci` ✅
-- 786 WGSL shaders (2 new: `sum_reduce_df64.wgsl`, `variance_reduce_df64.wgsl`)
+- `cargo clippy --workspace -- -D warnings` ✅ (zero warnings)
+- `cargo test -p barracuda --lib` ✅ (3,118 tests — 3,104 pass, 1 flaky GPU contention, 13 ignored)
+- `cargo test -p barracuda-core` ✅
+- 712 WGSL shaders
 
 ---
 
@@ -125,8 +152,15 @@ All shader absorption targets from neuralSpring confirmed present in barraCuda:
 
 ## Spring Action Items
 
-- **groundSpring**: Upgrade to HEAD — `SumReduceF64`/`VarianceReduceF64` fix is live
-- **neuralSpring**: Absorb `fused_ops_healthy()` canary from `test_prelude`
+- **ALL SPRINGS**: Update barraCuda pin to HEAD — f64 pipeline fix, Ada reclassification,
+  shared_mem_f64 probe, hill kinetics all available
+- **groundSpring**: Ada Lovelace P0 resolved — `precision_routing()` now returns
+  `F64NativeNoSharedMem`. `shared_mem_f64` probe available for runtime verification.
+  Drop local `tridiag_eigh` once `BatchedTridiagEigh` GPU op lands.
+- **neuralSpring**: Drop local `primitives::hill_activation` / `hill_repression` — use
+  `barracuda::stats::{hill_activation, hill_repression}`. Absorb `fused_ops_healthy()` canary.
+  `chi_squared_f64` and `kl_divergence_f64` ops already absorbed.
 - **wetSpring**: Drop local `dot`/`l2_norm` implementations; use `barracuda::math::{dot, l2_norm}`
 - **wetSpring**: Use `barracuda::Rk45DispatchArgs` for `BatchedOdeRK45F64` adoption
-- **airSpring**: Use `f64_zeros_risk()` for NVK guard in metalForge tests
+- **airSpring**: Use `f64_zeros_risk()` for NVK guard in metalForge tests.
+  Remove orphan `local_elementwise_f64.wgsl` from coralReef corpus.
