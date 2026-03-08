@@ -45,10 +45,12 @@ barraCuda achieved this by:
 Transitive C boundaries (wgpu → ash → libvulkan.so, tokio → libc) are
 system-level and evolve via Layers 2-4, not Layer 1.
 
-### Layer 2 — coralReef: Phase 5 Complete, 2 Unsafe Remaining
+### Layer 2 — coralReef: Phase 10 Iteration 17, 9 Unsafe Remaining
 
-coralReef is a sovereign Rust NVIDIA shader compiler with ISA tables for
-SM20-SM120. JSON-RPC 2.0 + tarpc IPC interface operational.
+coralReef is a sovereign Rust GPU shader compiler. NVIDIA backend (SM70–SM89)
+and AMD backend (RDNA2 GFX1030) operational with E2E dispatch verified.
+JSON-RPC 2.0 + tarpc IPC interface operational. df64 preamble auto-prepend
+for double-float precision. `Fp64Strategy` in `CompileOptions`.
 
 **9 `unsafe` blocks** remain in `coral-driver` (DRM ioctl, mmap/munmap, clock)
 and `nak-ir-proc` (proc macro). All wrapped in RAII (`MappedRegion`) or
@@ -127,8 +129,11 @@ Acceptable if Src/Dst are small and Copy.
 | Item | Status | Notes |
 |------|--------|-------|
 | `nak-ir-proc` unsafe → safe | Remaining | Options A/B/C above |
-| f64 transcendental codegen (DFMA sequences) | Phase 5 | Hardware-speed f64 |
-| SM86 (Ampere) instruction scheduling | Done | ISA tables complete |
+| f64 transcendental codegen (DFMA sequences) | Done (Phase 10) | NVIDIA + AMD |
+| SM70–SM89 instruction scheduling | Done | ISA tables complete |
+| AMD RDNA2 E2E dispatch | Done | GFX1030, PM4, DRM ioctl verified |
+| df64 preamble auto-prepend | Done (Iteration 13) | `Fp64Strategy::DoubleFloat` |
+| IR-level df64 lowering (Phase 2) | Planned | `lower_f64_to_df64.rs` pass |
 | Upstream Mesa NAK contribution | Planned | Goodwill + wider testing |
 
 ---
@@ -289,7 +294,7 @@ improvement in one primal benefits all consumers.
 | Layer | Owner | Estimated Time | Risk | Depends On |
 |:---:|---|---|---|---|
 | 1 | barraCuda | **DONE** | — | — |
-| 2 | coralReef | **2-4 weeks** (unsafe elimination + Phase 6) | Low | — |
+| 2 | coralReef | **Phase 10 complete** — NVIDIA SM70-SM89, AMD RDNA2, df64 preamble, 9 unsafe in driver | Low | — |
 | 3 | coralReef + toadStool | **1-2 months** (standalone crate, multi-arch) | Medium | Layer 2 |
 | 4 | toadStool + groundSpring | **3-6 months** (sovereign driver, DMA) | Medium-High | Layer 3 |
 
