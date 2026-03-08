@@ -32,9 +32,10 @@ Generates: 3 WGSL variants       Compiles: whatever WGSL it receives
   - df64 shader (preamble)         - df64 → ???
 ```
 
-The gap: **coralReef cannot compile df64 shaders** because the df64 preamble
-(`df64_core.wgsl` + `df64_transcendentals.wgsl`) lives in barraCuda. 5 test
-fixtures (gelu, sigmoid, sdpa_scores, softmax, layer_norm) are ignored.
+~~The gap: coralReef cannot compile df64 shaders.~~ **RESOLVED** (Iteration 13):
+coralReef now has a built-in df64 preamble (`df64_preamble.wgsl`) that is
+auto-prepended when source uses `Df64`/`df64_*`. 4 of 5 df64 tests pass
+(gelu, sdpa_scores, softmax, layer_norm). sigmoid_f64 blocked by RA SSA tracking.
 
 ---
 
@@ -55,19 +56,20 @@ to the fastest possible hardware path:
 
 ## Evolution Path
 
-### Phase 1 (Near-term): Preamble Concatenation
+### Phase 1 ~~(Near-term)~~ DONE — Preamble Concatenation
 
-coralReef accepts df64 WGSL as-is. The df64 preamble is just WGSL code — struct
-definitions and arithmetic functions using f32 pairs. coralReef already compiles
-all the f32 ops inside; it just needs the source concatenated.
+**Completed March 8, 2026 (Iteration 13).**
 
-**What to add to coralReef:**
-- `CompileOptions::wgsl_preamble: Option<String>` — prepended to source before naga parse
-- Or: a `compile_wgsl_with_includes(&[&str], main_source, options)` entry point
+coralReef has a built-in `df64_preamble.wgsl` with Dekker/Knuth pair arithmetic.
+The `prepare_wgsl()` function auto-prepends it when source uses `Df64`/`df64_*`
+or `Fp64Strategy::DoubleFloat` is selected. Also strips `enable f64;` directives.
 
-**What this unblocks:** All 5 df64 test fixtures pass immediately.
+**What was added:**
+- `Fp64Strategy` enum (`Native`, `DoubleFloat`, `F32Only`) in `CompileOptions`
+- `prepare_wgsl()` — auto-detects df64 usage, prepends preamble, strips `enable f64;`
+- `df64_preamble.wgsl` — struct, constructors, arithmetic, transcendentals (all f32)
 
-**Effort:** Small — ~20 lines in `lib.rs`. No compiler changes.
+**What this unblocked:** 5 df64 test fixtures pass (4 of original 5 + kl_divergence).
 
 ### Phase 2 (Medium-term): IR-Level df64 Lowering
 
@@ -152,9 +154,9 @@ barraCuda sends one f64 shader. coralReef handles the lowering.
 
 ## What coralReef Should Do
 
-1. **Phase 1 now:** Add preamble concatenation to unblock 5 tests
+1. ~~**Phase 1 now:** Add preamble concatenation to unblock 5 tests~~ **DONE**
 2. **Phase 2 next:** Implement `lower_f64_to_df64` IR pass
-3. **Evolve `CompileOptions`:** `fp64_software: bool` → `fp64_strategy: Fp64Strategy`
+3. ~~**Evolve `CompileOptions`:** `fp64_software: bool` → `fp64_strategy: Fp64Strategy`~~ **DONE**
 4. **Use `has_fast_fp64()`** to auto-select strategy when not specified:
    - Titan V / A100 → `Fp64Strategy::Native` (1:2 rate, true f64 is fast enough)
    - RTX 3090 / RX 6950 XT → `Fp64Strategy::DoubleFloat` (consumer cards need df64)
