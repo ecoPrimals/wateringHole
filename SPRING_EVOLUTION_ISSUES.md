@@ -2,8 +2,8 @@
 
 **Purpose**: Track issues, patterns, and evolution opportunities discovered by Springs
 that require coordination from biomeOS, ToadStool, or cross-primal teams.
-**Last Updated**: February 27, 2026
-**Contributing Springs**: airSpring v0.4.13
+**Last Updated**: March 7, 2026
+**Contributing Springs**: airSpring V0.7.3, neuralSpring V89, wetSpring V97e, groundSpring V96, hotSpring v0.6.19
 
 ---
 
