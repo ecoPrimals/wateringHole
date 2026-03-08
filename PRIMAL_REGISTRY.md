@@ -127,7 +127,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — 19,140+ workspace tests, 0 clippy warnings, 0 failures, 65+ JSON-RPC methods (dynamically built), capability-based discovery, coralReef shader proxy, cross-spring provenance tracking, all files < 1000 lines
+**Status**: Production Ready (A++ GOLD STANDARD) — S133 (March 8, 2026) — 19,140+ workspace tests, 0 clippy warnings, 0 failures, 65+ JSON-RPC methods (dynamically built), capability-based discovery, coralReef shader proxy, cross-spring provenance tracking, all files < 1000 lines
 
 **Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
@@ -159,7 +159,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU math dispatch, shaders, and precision strategy  
 **Phase**: Foundation  
-**Status**: Production Ready (A+) — 3,100+ tests, 786 WGSL shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, 27-shader cross-spring provenance registry, PrecisionRoutingAdvice, BatchedOdeRK45F64, DF64 reduce shaders for Hybrid devices, `fused_ops_healthy()` canary, `service` subcommand (genomeBin), `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
+**Status**: Production Ready (A+) — v0.3.3 (a898dee) — 3,100+ tests, 786 WGSL shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, 27-shader cross-spring provenance registry, PrecisionRoutingAdvice, BatchedOdeRK45F64, DF64 reduce shaders for Hybrid devices, `fused_ops_healthy()` canary, `service` subcommand (genomeBin), `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
 
 **Role**: BarraCuda (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) is the math engine. All math originates as WGSL shaders at f64 precision. BarraCuda does not care about hardware — ToadStool provides hardware capabilities via IPC. f64 transcendentals fully covered by `compile_shader_f64()` polyfill pipeline. Sovereign naga-IR compiler (FMA fusion, DCE).
 
@@ -405,11 +405,24 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
+**Spring Versions (as of March 8, 2026)**:
+
+| Spring | Version |
+|--------|---------|
+| ToadStool | S133 |
+| hotSpring | v0.6.23 |
+| groundSpring | V99 |
+| neuralSpring | V90/S132 |
+| wetSpring | V99 |
+| airSpring | v0.7.5 |
+| barraCuda | v0.3.3 (a898dee) |
+| coralReef | Phase 10 Iteration 12 |
+
 ### airSpring - Ecological & Agricultural Sciences
 
 **Domain**: Precision agriculture, irrigation science, environmental systems  
 **Phase**: Domain Validation  
-**Status**: v0.7.0 — 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28 NVK driver issue), 86 binaries, 78 experiments, 381/381 validation, 146/146 evolution, 20.6× CPU speedup (24/24 parity), 0 clippy warnings (pedantic+nursery), zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.3 (wgpu 28, DF64 precision tier, 3/6 local ops absorbed upstream, fused Welford + fused Pearson wired)
+**Status**: v0.7.5 — 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28 NVK driver issue), 86 binaries, 78 experiments, 381/381 validation, 146/146 evolution, 20.6× CPU speedup (24/24 parity), 0 clippy warnings (pedantic+nursery), zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.3 (a898dee) (wgpu 28, DF64 precision tier, 3/6 local ops absorbed upstream, fused Welford + fused Pearson wired)
 
 **Role**: airSpring validates agricultural computational methods — FAO-56 ET₀ (8 methods), soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, ecological diversity, immunological Anderson coupling, and SCS-CN/Green-Ampt hydrology — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
 
@@ -449,7 +462,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Plasma physics, nuclear structure, lattice QCD, transport, spectral theory
 **Phase**: Domain Validation
-**Status**: v0.6.15 — ~700 tests, 84 binaries, 62 WGSL shaders, 39/39 validation suites
+**Status**: v0.6.23 — ~700 tests, 84 binaries, 62 WGSL shaders, 39/39 validation suites
 
 **Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC), Stanton-Murillo transport, Anderson localization, and Hofstadter butterfly. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline.
 
