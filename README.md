@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: March 7, 2026
+**Last Updated**: March 8, 2026
 
 ---
 
