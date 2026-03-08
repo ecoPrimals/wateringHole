@@ -22,7 +22,7 @@ airSpring (agriculture/hydro)   → Richards PDE, stats metrics, f64-canonical l
 groundSpring (noise validation) → error handling patterns, validation harness
                                   ↓
                           BarraCUDA S93 + DF64
-                     21,500+ tests, 845+ WGSL shaders
+                     3,100+ tests, 786 WGSL shaders
 ```
 
 ---
@@ -215,7 +215,7 @@ marks a phase shift where cross-spring absorption accelerates:
 | **DF64 fused shaders** (mean_variance, correlation) | hotSpring `df64_core.wgsl` + wetSpring Welford | Consumer GPU users get ~10x throughput |
 | **TensorContext fast path** (15+ ops) | barraCuda refactoring | wetSpring (pooled buffers), groundSpring (stats) |
 | **5-accumulator Pearson** | wetSpring correlation + hotSpring precision | Single dispatch for mean+var+cov+pearson_r |
-| **32 bio ops in `ops/bio/`** | wetSpring (handoff v4-v8) + neuralSpring (metalForge) | All Springs via barraCuda |
+| **31 bio ops in `ops/bio/`** | wetSpring (handoff v4-v8) + neuralSpring (metalForge) | All Springs via barraCuda |
 | **Fused chi-squared GPU** | neuralSpring S69 | Available for enrichment analysis |
 | **compile_shader_universal** | airSpring V0.6.9 | Ecosystem-wide: f64→f32 downcast |
 
