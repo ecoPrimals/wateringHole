@@ -59,11 +59,28 @@ coralReef Phase 10 corpus still references `local_elementwise_f64.wgsl` from
 airSpring. This shader was retired in v0.7.2 — all 6 ops now use upstream
 `batched_elementwise_f64.wgsl`. Recommend updating corpus reference.
 
-## Quality Gates
+## biomeOS NUCLEUS Integration (v0.7.5 addendum)
+
+airSpring's `airspring_primal` binary now registers **35 JSON-RPC capabilities**
+(was 30), including 3 new v0.7.5 endpoints:
+
+- `science.spi_drought_index` / `ecology.spi_drought_index`
+- `science.autocorrelation` / `ecology.autocorrelation`
+- `science.gamma_cdf`
+
+Exp 083 (43/43 PASS): NUCLEUS atomic detection (Tower/Node LIVE), SPI/ACF/gamma_cdf
+parity via JSON-RPC, full ecology pipeline, cross-primal discovery (7 primals),
+GPU precision routing (Df64Only/Hybrid). Binary: `validate_nucleus_modern`.
+
+865 lib tests, 91 validation binaries.
+
+## Quality Gates (updated)
 
 | Check | Result |
 |-------|--------|
 | `cargo fmt --check` | PASS |
 | `cargo clippy --all-targets -- -D warnings` | PASS |
-| `cargo test --lib` | 854/854 PASS |
+| `cargo test --lib` | 865/865 PASS |
 | `validate_drought_index` | 20/20 PASS |
+| `validate_cross_spring_modern` | 36/36 PASS |
+| `validate_nucleus_modern` (Exp 083) | 43/43 PASS |
