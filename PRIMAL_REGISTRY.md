@@ -190,7 +190,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 18 (A+) — 1138 tests passing, 29 ignored, 63% line coverage, 47 cross-spring WGSL shaders (36 compiling SM70), tarpc uses bincode for binary IPC, full codebase audit clean (no mocks in production, no hardcoded primal names, pure Rust deps), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired (awaiting Titan V / RTX 3090 validation), zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 6/8 crates, AGPL-3.0-only
+**Status**: Phase 10 Iteration 20 (A+) — 1142 tests passing, 25 ignored, 63% line coverage, 47 cross-spring WGSL shaders (40 compiling SM70), tarpc uses bincode for binary IPC, full codebase audit clean (no mocks in production, no hardcoded primal names, pure Rust deps), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired (awaiting Titan V / RTX 3090 validation), zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 6/8 crates, AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL and SPIR-V compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified — WGSL compile, PM4 dispatch, GPU execution, host readback. coralDriver provides userspace GPU dispatch via DRM ioctl. coralGpu unifies compilation and dispatch into a single API. Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -205,7 +205,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **coralDriver** | AMD DRM ioctl (GEM, PM4, BO list, CS submit, fence sync) — **E2E verified on RX 6950 XT**, NVIDIA nouveau (channel, GEM, pushbuf, QMD) — pure Rust via libc |
 | **coralGpu** | Unified compile + dispatch API — vendor-agnostic `GpuContext` |
 | **f64 Lowering** | Full f64 transcendental suite: sqrt, rcp, exp2, log2, sin, cos, exp, log, pow — NVIDIA (DFMA software) + AMD (native hardware) |
-| **14/27 Cross-Spring Shaders** | Compiles shaders from hotSpring, groundSpring, neuralSpring, wetSpring, airSpring to native SM70 SASS |
+| **40/47 Cross-Spring Shaders** | Compiles shaders from hotSpring, groundSpring, neuralSpring, wetSpring, airSpring to native SM70 SASS |
 | **AMD E2E Pipeline** | WGSL → compile → PM4 dispatch → GPU execution → host readback — verified on RX 6950 XT (RDNA2 GFX1030) |
 
 **Participates In**: Sovereign Compute Pipeline (barraCuda → toadStool → coralReef → native binary → coralDriver → hardware)
@@ -418,7 +418,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
 | barraCuda | v0.3.3 (ab74b23) |
-| coralReef | Phase 10 Iteration 17 |
+| coralReef | Phase 10 Iteration 20 |
 
 ### airSpring - Ecological & Agricultural Sciences
 
