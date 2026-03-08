@@ -110,34 +110,35 @@ Remaining gap is dispatch overhead and GPU occupancy.
 
 ---
 
-### Level 2 — coralReef: Fix f64 Backend + Zero Unsafe (weeks)
+### Level 2 — coralReef: Sovereign GPU Compiler + Minimal Unsafe
 
-**Status**: 🔄 In progress (coralReef Phase 5 complete, 2 unsafe remaining)
+**Status**: ✅ Complete (Phase 10 Iteration 16 — 1116 tests, 63% coverage, 9 unsafe blocks in driver only)
 
-**What**: Fork Mesa's NAK shader compiler. Fix the f64 transcendental
-emission directly in the compiler backend instead of polyfilling from WGSL.
-NAK is already Rust (~35K lines, MIT license).
+**What**: coralReef is a fully sovereign Rust GPU shader compiler evolved
+from Mesa NAK roots. All stubs replaced with pure Rust. f64 transcendentals
+implemented (NVIDIA: Newton-Raphson DFMA, AMD: native hardware). tarpc uses
+bincode for high-performance binary IPC. Capability-based discovery.
+`bytes::Bytes` zero-copy payloads. RAII `MappedRegion` for safe mmap.
 
-**Concrete tasks**:
-- [ ] Fork NAK into `ecoPrimals/coralNak/` (MIT license allows this)
-- [ ] Identify the f64 OpExtInst emission code (exp, log, sin, cos)
-- [ ] Implement proper SM70+ DFMA sequences for f64 transcendentals
-- [ ] Add SM86 (Ampere) instruction scheduling tables
-- [ ] Validate against hotSpring's f64_builtin_test suite
-- [ ] Benchmark: polyfill (Level 1) vs native codegen (Level 2)
-- [ ] Contribute fixes upstream to Mesa NAK (goodwill + wider testing)
+**Completed**:
+- [x] Sovereign compiler — zero C deps, zero FFI, zero `*-sys`
+- [x] f64 transcendentals — sqrt, rcp, exp2, log2, sin, cos, exp, log, pow, tan
+- [x] SM70–SM89 NVIDIA backend + SM20–SM50 legacy encoders tested
+- [x] AMD RDNA2 backend — E2E verified on RX 6950 XT hardware
+- [x] coralDriver — AMD amdgpu + NVIDIA nouveau via DRM ioctl (pure Rust)
+- [x] coralGpu — unified compile + dispatch API
+- [x] `#[deny(unsafe_code)]` on 6/8 crates; remaining 9 unsafe blocks in driver (RAII-wrapped)
+- [x] tarpc + bincode binary IPC; JSON-RPC 2.0 primary
+- [x] 1116 tests, 63% line coverage
 
 **Architecture**:
 ```
-barraCuda WGSL → naga SPIR-V → coralNak (our fork) → NVIDIA ISA
-                                  ↕
-                           upstream Mesa NAK
+barraCuda WGSL → naga → coralReef codegen IR → native GPU binary (SASS/GFX)
+                                ↓
+                        coralDriver (DRM ioctl) → GPU execution
 ```
 
-coralNak diverges where needed, syncs where possible. Upstream
-contributions reduce our maintenance burden.
-
-**Owner**: barraCuda (compiler), toadStool (ISA tables from contrib/mesa-nak)
+**Owner**: coralReef (sovereign primal)
 
 **Expected impact**: Eliminate polyfill overhead. Native f64 transcendentals
 at hardware speed. Closes the remaining ~2-3× driver efficiency gap.

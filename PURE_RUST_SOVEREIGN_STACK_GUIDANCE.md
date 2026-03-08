@@ -50,8 +50,10 @@ system-level and evolve via Layers 2-4, not Layer 1.
 coralReef is a sovereign Rust NVIDIA shader compiler with ISA tables for
 SM20-SM120. JSON-RPC 2.0 + tarpc IPC interface operational.
 
-**2 `unsafe` blocks** remain in `nak-ir-proc` (proc macro for IR struct
-field slicing). See coralReef evolution guidance below.
+**9 `unsafe` blocks** remain in `coral-driver` (DRM ioctl, mmap/munmap, clock)
+and `nak-ir-proc` (proc macro). All wrapped in RAII (`MappedRegion`) or
+safe typed wrappers. `#[deny(unsafe_code)]` enforced on 6/8 crates.
+1116 tests, 63% coverage. tarpc uses bincode for binary IPC.
 
 ### Layer 3 — Standalone Compilation: Planned
 
@@ -236,7 +238,7 @@ barraCuda (Layer 1 — DONE)
   ▼
 coralReef (Layers 2-3 — IN PROGRESS)
   │ SPIR-V/WGSL → native GPU binary (SASS, RDNA ISA)
-  │ 2 unsafe → evolving to zero
+  │ 9 unsafe (driver RAII + proc-macro), #[deny(unsafe_code)] on 6/8 crates
   │ Pure Rust compiler, no GPU FFI
   ▼
 toadStool (Layers 3-4 — PLANNED)
@@ -276,7 +278,7 @@ improvement in one primal benefits all consumers.
 ### All primals guarantee to each other:
 - Primal autonomy: no shared IPC crate, no hardcoded primal names
 - Capability-based discovery at runtime
-- JSON-RPC 2.0 as primary protocol, tarpc as binary secondary
+- JSON-RPC 2.0 as primary protocol, tarpc (bincode) as high-performance binary channel
 - AGPL-3.0 license
 - Zero hardcoded ports, addresses, or primal identifiers
 
