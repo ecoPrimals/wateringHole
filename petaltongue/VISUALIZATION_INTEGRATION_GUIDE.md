@@ -1,8 +1,8 @@
 # Visualization Integration Guide for petalTongue
 
-**Version**: 1.0.0  
-**Date**: March 8, 2026  
-**Audience**: Any primal team that wants petalTongue to visualize their data  
+**Version**: 2.0.0  
+**Date**: March 9, 2026  
+**Audience**: Any primal or spring team that wants petalTongue to visualize their data  
 **Status**: Active Standard
 
 ---
@@ -104,6 +104,130 @@ visualization without recompiling the entire grammar.
 
 For high-throughput streams (> 1000 rows/sec), use tarpc with `bytes::Bytes`
 payloads for zero-copy transfer. See the tarpc section below.
+
+### 4. Send DataBinding Payloads (Springs)
+
+For springs that produce typed chart data (TimeSeries, Distribution, Bar, Gauge,
+Heatmap, Scatter3D, FieldMap, Spectrum), send structured `DataBinding` payloads.
+This is the recommended path for spring-to-petalTongue integration.
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "visualization.render",
+  "params": {
+    "session_id": "healthspring-pkpd-001",
+    "title": "PK/PD Study: Hill Dose-Response",
+    "domain": "health",
+    "bindings": [
+      {
+        "channel_type": "timeseries",
+        "id": "oral-pk-curve",
+        "label": "Oral PK Concentration",
+        "x_label": "Time (hr)",
+        "y_label": "Concentration (mg/L)",
+        "unit": "mg/L",
+        "x_values": [0, 1, 2, 4, 8, 12, 24],
+        "y_values": [0, 8.2, 12.1, 9.8, 5.4, 2.9, 0.7]
+      },
+      {
+        "channel_type": "gauge",
+        "id": "shannon-diversity",
+        "label": "Shannon Diversity Index",
+        "value": 3.2,
+        "min": 0, "max": 5,
+        "unit": "nats",
+        "normal_range": [2.5, 4.5],
+        "warning_range": [1.5, 2.5]
+      },
+      {
+        "channel_type": "heatmap",
+        "id": "attention-weights",
+        "label": "Evoformer Attention",
+        "x_labels": ["Q1", "Q2", "Q3", "Q4"],
+        "y_labels": ["K1", "K2", "K3", "K4"],
+        "values": [0.9, 0.1, 0.0, 0.0, 0.2, 0.7, 0.1, 0.0, 0.0, 0.1, 0.8, 0.1, 0.0, 0.0, 0.2, 0.8],
+        "unit": "weight"
+      }
+    ],
+    "thresholds": [
+      {"label": "Normal", "min": 2.5, "max": 4.5, "status": "normal"},
+      {"label": "Low", "min": 0.0, "max": 2.5, "status": "warning"}
+    ]
+  },
+  "id": 1
+}
+```
+
+**Supported `channel_type` values:**
+
+| Type | Domain Examples | Fields |
+|------|----------------|--------|
+| `timeseries` | PK curves, training loss, soil moisture | x_values, y_values, labels, unit |
+| `distribution` | Population PK, Monte Carlo risks | values, mean, std, comparison_value |
+| `bar` | Genus abundances, categorical comparisons | categories, values, unit |
+| `gauge` | Shannon diversity, SpO2, composite risk | value, min, max, normal_range, warning_range |
+| `heatmap` | Plasma density, attention weights, correlation | x_labels, y_labels, values (row-major), unit |
+| `scatter3d` | PCoA ordination, phase space, latent embeddings | x, y, z, point_labels, unit |
+| `fieldmap` | ET0 maps, Richards PDE, sensor grids | grid_x, grid_y, values (row-major), unit |
+| `spectrum` | FFT, HRV power spectrum, noise analysis | frequencies, amplitudes, unit |
+
+### 5. Stream Incremental Updates
+
+After establishing a session with `visualization.render`, push incremental
+updates without resending the full dataset:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "visualization.render.stream",
+  "params": {
+    "session_id": "healthspring-pkpd-001",
+    "binding_id": "oral-pk-curve",
+    "operation": {
+      "type": "append",
+      "x_values": [36, 48],
+      "y_values": [0.3, 0.1]
+    }
+  },
+  "id": 2
+}
+```
+
+**Stream operation types:**
+
+| Operation | Use Case | Applies To |
+|-----------|----------|------------|
+| `append` | Add new data points | TimeSeries, Spectrum |
+| `set_value` | Update current value | Gauge |
+| `replace` | Replace entire binding | Any type (Heatmap, FieldMap, etc.) |
+
+### Domain Themes
+
+petalTongue applies domain-appropriate color palettes based on the `domain` field:
+
+| Domain | Colors | Springs |
+|--------|--------|---------|
+| `health` / `clinical` | Green/amber/red | healthSpring |
+| `physics` / `plasma` | Purple/orange/cyan | hotSpring |
+| `ecology` / `metagenomics` | Greens/browns | wetSpring |
+| `agriculture` / `atmospheric` | Blues/teals | airSpring |
+| `measurement` / `calibration` | Grays/blue | groundSpring |
+| `ml` / `neural` | Electric blue/magenta | neuralSpring |
+
+### Spring Discovery Pattern
+
+Springs should NOT have compile-time dependencies on petalTongue. Instead:
+
+1. Discover petalTongue socket at runtime:
+   - Check `PETALTONGUE_SOCKET` environment variable
+   - Scan `$XDG_RUNTIME_DIR/petaltongue/*.sock`
+   - Scan `/tmp/petaltongue-*.sock`
+2. Send JSON-RPC over the Unix socket
+3. If petalTongue is not available, fall back to writing JSON files
+
+healthSpring's `barracuda/src/visualization/ipc_push.rs` provides a reference
+implementation of this pattern.
 
 ---
 
@@ -209,6 +333,10 @@ petalTongue resolves capabilities via Songbird discovery. Never hardcode primal 
 | `visualization.validate` | Check grammar without rendering | `GrammarExpr` | `ValidationResult` (Tufte score) |
 | `visualization.capabilities` | What can petalTongue render? | None | `CapabilitySet` |
 | `visualization.dismiss` | Remove a rendered visualization | Panel ID | `Ok` |
+| `visualization.interact.subscribe` | Subscribe to interaction events | `grammar_id?`, `events[]?`, `callback_method` | `SubscriptionId` |
+| `visualization.interact.apply` | Programmatically trigger an interaction | `intent`, `targets[]` | `InteractionResult` |
+| `visualization.interact.perspectives` | List active perspectives | None | `Perspective[]` |
+| `visualization.interact.sync` | Set perspective sync mode | `perspective_id`, `sync_mode` | `Ok` |
 
 ### Methods petalTongue Calls (Your Primal Exposes These)
 
@@ -226,7 +354,9 @@ Follow `SEMANTIC_METHOD_NAMING_STANDARD.md` for all method names.
 
 ### Events petalTongue Emits (Your Primal Subscribes)
 
-When a human interacts with a visualization of your data, petalTongue sends:
+When a human interacts with a visualization of your data, petalTongue sends
+an interaction event carrying `DataObjectId` targets (data-space references,
+not screen coordinates). Any modality or primal can interpret these:
 
 ```json
 {
@@ -234,14 +364,110 @@ When a human interacts with a visualization of your data, petalTongue sends:
   "method": "visualization.interact",
   "params": {
     "event": "select",
-    "source_capability": "health.metrics",
-    "data": {"primal_id": "alpha", "timestamp": "2026-03-08T14:23:00Z"},
-    "grammar_id": "health_overview"
+    "targets": [
+      {"source": "health_metrics", "row_key": {"primal_id": "alpha"}}
+    ],
+    "perspective_id": "user_a_egui",
+    "grammar_id": "health_overview",
+    "timestamp": "2026-03-09T14:23:00Z"
   }
 }
 ```
 
-Event types: `select`, `hover`, `brush` (range selection), `zoom`, `dismiss`.
+Semantic event types (modality-agnostic):
+
+| Event | Meaning | Data Included |
+|-------|---------|---------------|
+| `select` | User selected data object(s) | `targets[]` with DataObjectIds |
+| `focus` | User is hovering/focusing (non-committed) | Single `target` |
+| `inspect` | User requested detail view | `target` + `depth` (summary/detail/raw) |
+| `filter` | User applied a data filter | `variable`, `range` or `predicate` |
+| `navigate` | Viewport or position changed | `viewport` with new bounds |
+| `annotate` | User added an annotation | `target` + `content` |
+| `command` | User issued a free-form command | `verb` + `arguments` |
+| `dismiss` | User dismissed a view | `grammar_id` |
+
+### Subscribing to Interaction Events
+
+Your primal can subscribe to receive interaction events as they happen:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "visualization.interact.subscribe",
+  "params": {
+    "grammar_id": "health_overview",
+    "events": ["select", "focus", "filter"],
+    "callback_method": "my_primal.on_visualization_interact"
+  },
+  "id": 1
+}
+```
+
+petalTongue will call `my_primal.on_visualization_interact` whenever a matching
+interaction occurs. The callback receives the same event payload shown above.
+
+**Subscribe to all grammars** by omitting `grammar_id`. **Subscribe to all
+events** by omitting `events`.
+
+### Programmatically Driving Interactions
+
+Your primal can tell petalTongue to highlight, select, or focus data objects:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "visualization.interact.apply",
+  "params": {
+    "intent": "select",
+    "targets": [
+      {"source": "health_metrics", "row_key": {"primal_id": "alpha"}}
+    ]
+  },
+  "id": 2
+}
+```
+
+This enables patterns like:
+- **Squirrel** detects an anomaly and tells petalTongue to highlight it
+- **biomeOS** selects a primal during orchestration and petalTongue tracks it
+- **healthSpring** marks a critical vital sign and petalTongue focuses the view
+
+The interaction uses `DataObjectId` (data-space), so it works regardless of
+which modality the human is using (GUI, TUI, audio, Braille).
+
+### Listing Active Perspectives
+
+Query which perspectives are currently active:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "visualization.interact.perspectives",
+  "id": 3
+}
+```
+
+Response:
+
+```json
+{
+  "perspectives": [
+    {
+      "id": "user_a_egui",
+      "modalities": ["gui"],
+      "selection": [{"source": "health_metrics", "row_key": {"primal_id": "alpha"}}],
+      "sync_mode": "shared_selection"
+    },
+    {
+      "id": "user_b_tui",
+      "modalities": ["tui", "audio"],
+      "selection": [],
+      "sync_mode": "shared_selection"
+    }
+  ]
+}
+```
 
 ---
 
@@ -459,6 +685,7 @@ And receives your socket path and transport type. No hardcoded names.
 |----------|----------|---------|
 | Grammar of Graphics Architecture | `petalTongue/specs/GRAMMAR_OF_GRAPHICS_ARCHITECTURE.md` | Full grammar type system |
 | Universal Visualization Pipeline | `petalTongue/specs/UNIVERSAL_VISUALIZATION_PIPELINE.md` | End-to-end pipeline spec |
+| Interaction Engine Architecture | `petalTongue/specs/INTERACTION_ENGINE_ARCHITECTURE.md` | Bidirectional interaction, perspectives, multi-user |
 | Tufte Constraint System | `petalTongue/specs/TUFTE_CONSTRAINT_SYSTEM.md` | Visualization quality constraints |
 | Semantic Method Naming | `wateringHole/SEMANTIC_METHOD_NAMING_STANDARD.md` | IPC method names |
 | Universal IPC Standard V3 | `wateringHole/UNIVERSAL_IPC_STANDARD_V3.md` | Transport protocol |
