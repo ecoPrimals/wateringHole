@@ -81,7 +81,7 @@ for double-float precision. `Fp64Strategy` in `CompileOptions`.
 wrapped in RAII (`MappedRegion`) or safe typed wrappers — libc→rustix migration
 path documented. 2 blocks in `nak-ir-proc` (compile-time contiguity proofs).
 `#[deny(unsafe_code)]` enforced on 6/8 crates.
-1190 tests, 63% coverage, 37 DEBT markers tracked. 86 cross-spring WGSL shaders
+1191 tests, 63% coverage, 37 DEBT markers tracked. 86 cross-spring WGSL shaders
 (79 compiling SM70). 11 new math functions (Tanh, Fract, Sign, Dot, Mix, Step,
 SmoothStep, Length, Normalize, Cross, Trunc). GLSL 450 + SPIR-V roundtrip
 frontends. tarpc uses bincode for binary IPC.
