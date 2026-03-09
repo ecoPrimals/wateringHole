@@ -1,6 +1,6 @@
 # Pure Rust Sovereign Stack — Cross-Primal Guidance
 
-**Date**: March 8, 2026
+**Date**: March 9, 2026
 **Type**: Ecosystem Standard (Evolution)
 **From**: barraCuda (Layer 1 complete)
 **To**: coralReef, toadStool, all primals
@@ -28,7 +28,28 @@ and the math runs forever.
 
 ---
 
-## Current Status (March 6, 2026)
+## Current Status (March 9, 2026)
+
+### Layer 0 — Infrastructure C Elimination: toadStool COMPLETE
+
+**Zero sysinfo. Zero direct libc.** toadStool S137 eliminated the largest C
+surface in any primal by replacing `sysinfo` (15 transitive crates → libc FFI)
+with `toadstool-sysmon` — pure Rust `/proc` parsing + `rustix` `statvfs`.
+
+22+ call sites migrated across 18 files. `cargo tree --workspace | grep sysinfo`
+returns nothing. Cross-compilation verified: `cargo check --target aarch64-unknown-linux-gnu`
+succeeds without musl-tools or any C toolchain.
+
+Remaining libc paths are all ecosystem transitive deps (mio, tokio, wgpu-hal) —
+tracked for upstream evolution. toadStool's own code has zero C.
+
+**Pattern**: This follows the same evolution as Ring → RustCrypto (Tower Atomic).
+Where bearDog/songBird eliminated C crypto, toadStool eliminated C system monitoring.
+The pattern is reusable: any crate pulling libc for `/proc` info can be replaced
+with direct parsing.
+
+**Upstream candidate**: `toadstool-sysmon` is being extracted as a standalone
+crate for crates.io contribution. See `UPSTREAM_CONTRIBUTIONS.md`.
 
 ### Layer 1 — barraCuda: COMPLETE
 
