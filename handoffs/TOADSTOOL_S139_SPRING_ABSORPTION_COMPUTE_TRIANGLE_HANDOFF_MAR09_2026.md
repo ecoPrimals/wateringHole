@@ -95,6 +95,14 @@ This is the generalized version of neuralSpring's `metalForge/forge/src/graph.rs
 
 toadStool's side of the compute triangle is now unblocked. The dual-write discovery and GPU descriptor enrichment mean coralReef and barraCuda can discover and use toadStool's GPU information without any changes on their side.
 
+## Doc Cleanup
+
+- All 13 root docs updated from S138 to S139 headers
+- `docs/README.md`, `docs/guides/TESTING.md`, `specs/README.md` updated to S139
+- Pre-progressive showcase directories archived to `ecoPrimals/fossil/toadStool/showcase-hardware-S139/` (neuromorphic, gpu-universal, homomorphic-computing, akida-characterization, barracuda-validation, whitePaper)
+- Showcase README updated to reference archived location
+- Zero stale TODOs in production .rs files (1 TEMPORARY in GPU test code -- active segfault investigation, `#[ignore]`)
+
 ## File Changes
 
 - `crates/server/src/capabilities/mod.rs` -- dual-write announce, GpuDevice enrichment, gpu.dispatch capabilities, DRM helper functions
@@ -102,4 +110,6 @@ toadStool's side of the compute triangle is now unblocked. The dual-write discov
 - `crates/core/toadstool/src/universal/streaming_dispatch.rs` -- NEW (absorbed from hotSpring)
 - `crates/core/toadstool/src/universal/pipeline_graph.rs` -- NEW (absorbed from neuralSpring)
 - `crates/core/toadstool/src/universal/mod.rs` -- module registration and re-exports
+- 13 root docs, 3 subdirectory docs -- session headers updated to S139
+- 6 showcase directories archived to fossil
 - Test files updated for new GpuDevice fields
