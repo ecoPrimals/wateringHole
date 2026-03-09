@@ -186,9 +186,9 @@ Each of groundSpring's 11 delegations has a traceable cross-spring history:
 
 ---
 
-## coralReef Multi-Language Frontend Guidance (Iteration 22)
+## coralReef Multi-Language Frontend Guidance (Iteration 23)
 
-As of Iteration 22, coralReef accepts three shader input languages.
+As of Iteration 23, coralReef accepts three shader input languages.
 All three share the same pipeline: naga IR → codegen SSA IR → optimize →
 legalize → register allocation → encode → native binary.
 
@@ -200,18 +200,44 @@ legalize → register allocation → encode → native binary.
 | **SPIR-V** | `compile()` / `compile_full()` | Binary interchange — pre-compiled modules, cross-tool pipelines |
 | **GLSL 450** | `compile_glsl()` / `compile_glsl_full()` | Compute absorption — existing GPU libraries, CUDA↔GLSL ports |
 
+### Math Function Coverage (Iteration 23)
+
+Iteration 23 added 11 math functions that are critical for GLSL shaders
+(naga's GLSL frontend passes these through as raw MathFunction variants,
+unlike the WGSL frontend which pre-lowers them):
+
+| Function | Status | Notes |
+|----------|--------|-------|
+| `tanh` | ✅ NEW | exp(2x)-based — unblocks ESN reservoir update (neuralSpring) |
+| `fract` | ✅ NEW | `x - floor(x)` |
+| `sign` | ✅ NEW | FSetP + Sel pattern |
+| `dot` | ✅ NEW | FMul + FFma chain for N-component vectors |
+| `mix` | ✅ NEW | `(b-a)*t + a` via FMA |
+| `step` | ✅ NEW | FSetP + Sel |
+| `smoothstep` | ✅ NEW | `t*t*(3-2*t)` with saturate clamp |
+| `length` | ✅ NEW | `sqrt(dot(v,v))` via Rsq + Rcp |
+| `normalize` | ✅ NEW | `v * rsq(dot(v,v))` |
+| `cross` | ✅ NEW | 3-component FMul + FFma pattern |
+| `trunc` | ✅ NEW | FRnd with zero mode (f32) / floor+sign restore (f64) |
+
+**Previously supported**: abs, min, max, clamp, floor, ceil, round,
+sqrt, inverseSqrt, sin, cos, exp, log, exp2, log2, pow, tan, fma,
+countOneBits, reverseBits, firstLeadingBit, countLeadingZeros.
+
 ### Spring-Specific Guidance
 
 **barraCuda**: Continue authoring WGSL as the canonical shader language.
 Use `compile_wgsl()` for all new math. Use `compile_glsl()` only when
 absorbing existing GLSL compute libraries from external sources. The
 df64 preamble is only auto-prepended for WGSL — GLSL shaders must
-include all needed functions inline.
+include all needed functions inline. Tanh is now natively supported
+in the compiler (no preamble needed for f32).
 
-**hotSpring / neuralSpring**: If you have GLSL 450 compute shaders from
-external physics/ML libraries (OpenCL→GLSL ports, legacy CUDA→GLSL
-transliterations), coralReef can now compile them directly. No need to
-manually convert to WGSL first. Place GLSL fixtures in `tests/fixtures/glsl/`.
+**hotSpring / neuralSpring**: GLSL 450 compute shaders from external
+physics/ML libraries now compile with full math coverage (including
+tanh, dot, mix, normalize, cross, length, smoothstep). The ESN
+reservoir update shader (`esn_reservoir_update`) now compiles — tanh
+activation was the blocker. Place GLSL fixtures in `tests/fixtures/glsl/`.
 
 **groundSpring**: The SPIR-V roundtrip path (WGSL → naga → SPIR-V →
 compile) validates binary-level reproducibility. Use this to verify that
