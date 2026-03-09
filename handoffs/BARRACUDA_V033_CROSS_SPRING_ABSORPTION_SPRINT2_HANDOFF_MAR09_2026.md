@@ -114,12 +114,23 @@ barracuda::ops::seed_xoshiro_state(base_seed, n) -> Vec<u32>
 
 ---
 
+## Additional Work Done (same session)
+
+- **Batched f32 logsumexp shader**: `logsumexp_reduce_f32.wgsl` — evolves single-thread
+  whole-array reduction to one-thread-per-row batched pattern matching f64 variant
+- **Smart refactor**: `precision_tests.rs` (844 → 673 LOC) via `precision_tests_cpu.rs` extraction
+- **Orphaned code removal**: `ops/cyclic_reduction_wgsl.rs` (660 LOC, API drift) and
+  `ops/reduce/max_abs_diff_f64.rs` (456 LOC, orphaned duplicate) — 1,116 lines of dead code removed
+- **healthSpring provenance domain**: `SpringDomain::HEALTH_SPRING` added
+- **Dependency audit**: All 15 direct deps confirmed pure Rust (zero C dependencies)
+- **Doc cleanup**: README, STATUS, SPRING_ABSORPTION updated with accurate counts
+
 ## Remaining P1/P2 Absorption Opportunities
 
 | Item | Source | Priority |
 |------|--------|----------|
-| `logsumexp_reduce.wgsl` | neuralSpring | P1 |
-| `rk45_adaptive.wgsl` improvements | neuralSpring | P1 |
+| `logsumexp_reduce.wgsl` | neuralSpring | ~~P1~~ Already in barraCuda (f32+f64 batched) |
+| `rk45_adaptive.wgsl` | neuralSpring | ~~P1~~ Already in barraCuda (f32+f64) |
 | ET₀ GPU ops (ISSUE-008) | airSpring | P1 |
 | `BatchReconcileGpu` | wetSpring | P2 |
 | Visualization `push_replace` | healthSpring | P2 |
