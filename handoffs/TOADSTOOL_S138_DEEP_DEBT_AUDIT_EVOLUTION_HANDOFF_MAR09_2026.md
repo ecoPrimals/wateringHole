@@ -78,6 +78,26 @@ covering all parser modules. Other primals using sysmon can rely on tested parsi
 
 ---
 
+## Progressive Showcase (15 demos, 4 levels)
+
+toadStool now has a mature progressive showcase following ecosystem conventions:
+
+| Level | Demos | Description |
+|-------|-------|-------------|
+| 00 — Local Primal | 5 | hello-compute, hardware-discovery, workload-lifecycle, resource-management, gpu-job-queue |
+| 01 — Shader Pipeline | 3 | naga-fallback, coralreef-compile, compile-status |
+| 02 — Compute Patterns | 4 | capability-discovery, science-dispatch, deploy-graph, **shader-to-gpu** (headline) |
+| 03 — Ecosystem Integration | 3 | songbird-registration, beardog-secured-compute, nestgate-artifact-storage |
+
+**Headline demo** (`02-compute-patterns/04-shader-to-gpu`): Demonstrates the full compute
+triangle — coralReef compiles WGSL shader, toadStool orchestrates dispatch, barraCuda
+executes on GPU. All demos gracefully degrade when optional primals are absent.
+
+Level 03 demos reference songBird, bearDog, and nestGate interaction patterns. Other primals
+can reference these demos when building their own inter-primal showcases.
+
+---
+
 ## No Action Required From Other Primals
 
 This session was internal toadStool debt resolution. The only external-facing change is
