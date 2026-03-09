@@ -186,6 +186,54 @@ Each of groundSpring's 11 delegations has a traceable cross-spring history:
 
 ---
 
+## coralReef Multi-Language Frontend Guidance (Iteration 22)
+
+As of Iteration 22, coralReef accepts three shader input languages.
+All three share the same pipeline: naga IR → codegen SSA IR → optimize →
+legalize → register allocation → encode → native binary.
+
+### Input Languages
+
+| Language | API | Use Case |
+|----------|-----|----------|
+| **WGSL** | `compile_wgsl()` / `compile_wgsl_full()` | Primary — all barraCuda shaders, df64 preamble auto-prepend |
+| **SPIR-V** | `compile()` / `compile_full()` | Binary interchange — pre-compiled modules, cross-tool pipelines |
+| **GLSL 450** | `compile_glsl()` / `compile_glsl_full()` | Compute absorption — existing GPU libraries, CUDA↔GLSL ports |
+
+### Spring-Specific Guidance
+
+**barraCuda**: Continue authoring WGSL as the canonical shader language.
+Use `compile_wgsl()` for all new math. Use `compile_glsl()` only when
+absorbing existing GLSL compute libraries from external sources. The
+df64 preamble is only auto-prepended for WGSL — GLSL shaders must
+include all needed functions inline.
+
+**hotSpring / neuralSpring**: If you have GLSL 450 compute shaders from
+external physics/ML libraries (OpenCL→GLSL ports, legacy CUDA→GLSL
+transliterations), coralReef can now compile them directly. No need to
+manually convert to WGSL first. Place GLSL fixtures in `tests/fixtures/glsl/`.
+
+**groundSpring**: The SPIR-V roundtrip path (WGSL → naga → SPIR-V →
+compile) validates binary-level reproducibility. Use this to verify that
+sovereign compilation produces identical binaries from both text and
+binary input representations.
+
+**All springs**: When importing new shaders for coralReef testing:
+- WGSL corpus snapshots go in `crates/coral-reef/tests/fixtures/wgsl/corpus/`
+- Compiler-owned test shaders stay in `crates/coral-reef/tests/fixtures/wgsl/`
+- GLSL compute fixtures go in `crates/coral-reef/tests/fixtures/glsl/`
+
+### Known SPIR-V Frontend Gaps
+
+| Gap | Effect | Workaround |
+|-----|--------|------------|
+| `Discriminant` expression | Switch-like patterns fail | Use WGSL path (chain-of-comparisons works) |
+| Non-literal constant initializer | Struct/array const init fails | Use WGSL path or runtime initialization |
+
+These are tracked as ignored tests in `spirv_roundtrip.rs`.
+
+---
+
 ## Benchmark: Cross-Spring Evolution Impact
 
 The cross-spring evolution (S50–S62) eliminated the link/init overhead that

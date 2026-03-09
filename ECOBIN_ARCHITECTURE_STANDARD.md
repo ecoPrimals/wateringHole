@@ -1,11 +1,12 @@
 # ecoBin Architecture - Ecosystem Standard
 
-**Status**: 🌟 **ECOSYSTEM STANDARD v2.0** 🌟  
+**Status**: 🌟 **ECOSYSTEM STANDARD v3.0** 🌟  
 **Adopted**: January 17, 2026  
 **Evolved**: January 30, 2026 (Platform-Agnostic v2.0)  
+**Evolved**: March 9, 2026 (Infrastructure C Elimination v3.0)  
 **Authority**: WateringHole Consensus (All Primal Teams)  
 **Compliance**: Mandatory for all new primals, recommended for existing  
-**Reference Implementation**: BearDog (FIRST TRUE ecoBin)
+**Reference Implementation**: BearDog (FIRST TRUE ecoBin), ToadStool (FIRST ecoBin v3.0)
 
 ---
 
@@ -309,7 +310,7 @@ RustCrypto suite           # All crypto primitives in Pure Rust!
 
 ---
 
-### **3. Infrastructure C is Acceptable** (NUANCE)
+### **3. Infrastructure C: Acceptable → Eliminable** (EVOLVED in v3.0)
 
 **Rule**: musl/libc syscall wrapper is acceptable (unavoidable OS interface).
 
@@ -352,9 +353,14 @@ OS interface only, minimal risk
 └─────────────────────────────────────┘
 ```
 
-**Bottom Line**: ecoBin = 100% Pure Rust APPLICATION + musl infrastructure
+**v1.0/v2.0 Position**: ecoBin = 100% Pure Rust APPLICATION + musl infrastructure
 
-**Future**: `rustix` (Pure Rust syscalls) may eliminate musl eventually (2027+)
+**v3.0 Evolution** (March 9, 2026): toadStool proved that `/proc` parsing + `rustix`
+direct syscalls can eliminate libc from application dependencies entirely. musl is
+still acceptable for targets that need it, but v3.0 primals don't require it.
+The long-term trajectory: `rustix` + `linux-raw-sys` → zero C in the entire binary.
+
+**See**: ecoBin v3.0 section below for full details
 
 ---
 
@@ -691,16 +697,25 @@ ldd target/x86_64-unknown-linux-musl/release/beardog
 
 ---
 
+### **ecoBin v3.0 Certified** (Infrastructure C Eliminated)
+
+| Primal | Version | Certified | Validation Date | Notes |
+|--------|---------|-----------|-----------------|-------|
+| **ToadStool** | S137 | ✅ ecoBin v3.0 #1 | Mar 9, 2026 | sysinfo eliminated, `toadstool-sysmon` (pure /proc + rustix), cross-compile CI (aarch64, armv7) |
+
+**Achievement**: First primal to reach ecoBin v3.0 — zero infrastructure C in application code.
+Pattern: `/proc` parsing + `rustix` syscalls replaces libc-based crates entirely.
+
+---
+
 ### **ecoBin Candidates** ⏳ (Close, HTTP cleanup needed)
 
 | Primal | Status | Blockers | ETA |
 |--------|--------|----------|-----|
 | **Squirrel** | UniBin ✅ | HTTP legacy (delegate to Songbird) | ~2 hours |
-| **ToadStool** | UniBin ✅ | Validation pending (likely compliant!) | ~15 min |
 
 **Notes**:
 - Squirrel: Use Songbird for HTTP/TLS (via JSON-RPC) - follow Tower Atomic pattern
-- ToadStool: Test default build (likely already ecoBin!)
 
 ---
 
@@ -1016,24 +1031,125 @@ blake3 = { version = "1.5", features = ["pure"] }  # ✅ Pure Rust!
 
 ---
 
-## 🔬 **Future Evolution: Beyond musl**
+## 🔬 **ecoBin v3.0: Infrastructure C Elimination** (March 9, 2026)
 
-### **rustix - Pure Rust Syscalls**
+### **The Evolution: From "Acceptable C" to Zero C**
 
-**What**: Pure Rust syscall interface (no libc/musl!)
+**v1.0** (Jan 17, 2026): Cross-Architecture — Pure Rust application code, musl infrastructure acceptable  
+**v2.0** (Jan 30, 2026): Cross-Platform — Platform-agnostic IPC, runtime transport discovery  
+**v3.0** (Mar 9, 2026): **Zero Infrastructure C** — Eliminate libc/musl from application dependencies entirely
 
-**Status**: Experimental (2027+ for production)
+**Catalyst**: toadStool S137 proved that the largest C surface in a mature primal
+(sysinfo → 15 transitive crates → libc FFI) can be replaced with pure Rust
+`/proc` parsing + `rustix` direct syscalls. Zero C compilation step. Cross-compile
+with just `rustup target add`.
 
-**Benefit**: 100% Pure Rust (even syscall layer!)
+**The v2.0 position was**: "musl infrastructure C is acceptable — it's just syscall wrappers."
 
-**Timeline**:
-- 2026: Monitor development
-- 2027: Experiment in research branches
-- 2028+: Possible production use
+**The v3.0 evolution**: "We proved we can eliminate even that. `/proc` + `rustix` =
+raw Linux syscalls from pure Rust. No C compiler, no musl-tools, no NDK."
 
-**Current Recommendation**: Ship musl-based ecoBins NOW! 🎯
+### **The Pattern: Proven Across Primals**
 
-**See**: `MUSL_VS_PURE_RUST_NUANCE_JAN_17_2026.md` for detailed analysis
+| Primal | C Eliminated | Pure Rust Replacement | Pattern |
+|--------|-------------|----------------------|---------|
+| **BearDog + Songbird** | Ring (C asm crypto) | RustCrypto suite | Tower Atomic delegation |
+| **barraCuda + coralReef** | Vulkan FFI, SPIR-V tools | naga WGSL roundtrip, sovereign compiler | Layered evolution |
+| **toadStool** | sysinfo (15 crates → libc) | `toadstool-sysmon` (/proc + rustix) | `/proc` parsing |
+| **akida-driver** | libc VFIO ioctls | rustix ioctl wrappers | Direct syscall |
+
+**Each primal that eliminates C teaches the ecosystem a reusable pattern.**
+
+### **The DNA Analogy**
+
+Rust as unified language = DNA.
+`/proc` filesystem as kernel interface = cellular environment.
+No C translation layer = no mRNA intermediate.
+
+This gives:
+- **Cross-arch**: `cargo build --target aarch64-unknown-linux-gnu` without musl-tools/NDK
+- **Reproducible**: Same binary semantics on any Linux kernel (including Android)
+- **Auditable**: One language, one compilation model, one type system
+- **Sovereign**: No vendor toolchains, no C compilers in the build graph
+
+### **ecoBin v3.0 Additional Requirements**
+
+In addition to v2.0 requirements:
+
+- **Zero `sysinfo`/`psutil` crates**: Replace with `/proc` parsing (see `toadstool-sysmon` pattern)
+- **`rustix` over `libc`**: For any direct syscall needs (ioctl, mmap, statvfs)
+- **Feature-gate remaining ecosystem C**: Track mio/tokio/wgpu evolution upstream
+- **Cross-compile CI**: `cargo check --target aarch64-unknown-linux-gnu` in CI (no musl-tools installed)
+
+### **Upstream Contribution Path**
+
+ecoPrimals doesn't just eliminate C for ourselves — we evolve patterns into
+standalone crates the wider Rust community can use:
+
+- `toadstool-sysmon` → candidate for `proc-sysinfo` on crates.io
+- `rustix` ioctl patterns → documented for ecosystem adoption
+- Tower Atomic (crypto delegation) → architectural pattern for any Rust project
+
+**See**: `UPSTREAM_CONTRIBUTIONS.md` for the full upstream strategy.
+
+### **Remaining Infrastructure C (Ecosystem Phase 2)**
+
+These remain as transitive dependencies through ecosystem crates we don't own:
+
+| Crate | Uses libc For | Upstream Status | Our Action |
+|-------|--------------|-----------------|------------|
+| mio | epoll | tokio-rs/mio#1735 (rustix migration) | Track, adopt when ready |
+| tokio | Via mio + signal-hook | Follows mio | Automatic |
+| drm | DRM ioctls | Partial rustix adoption | Track |
+| evdev | Via nix | No rustix alt yet | Consider contributing |
+| wgpu-hal | GPU platform libs | Replaced by coralDriver (long-term) | Sovereign evolution |
+
+When mio adopts rustix and Rust std adopts `linux-raw-sys`, the remaining
+libc paths vanish automatically. Our code is already ready.
+
+### **The v3.0 Mental Model**
+
+```
+┌─────────────────────────────────────┐
+│   YOUR APPLICATION CODE             │  ← 100% Pure Rust ✅
+│   (crypto, logic, algorithms)       │
+├─────────────────────────────────────┤
+│   System Monitoring                 │  ← Pure Rust (/proc) ✅  [NEW in v3.0]
+│   (CPU, memory, disk, network)      │
+├─────────────────────────────────────┤
+│   Syscalls                          │  ← Pure Rust (rustix) ✅  [NEW in v3.0]
+│   (ioctl, mmap, statvfs)           │
+├─────────────────────────────────────┤
+│   Rust Standard Library (std)       │  ← Pure Rust ✅
+│   (collections, threads, async)     │
+├─────────────────────────────────────┤
+│   Ecosystem (mio, tokio)            │  ← Transitioning to rustix ⏳
+│   (event loop, async runtime)       │
+├─────────────────────────────────────┤
+│   Linux Kernel                      │  ← OS (irrelevant)
+└─────────────────────────────────────┘
+```
+
+**v2.0 had C in layers 2-3. v3.0 eliminated it. Layer 4 is ecosystem evolution.**
+
+### **Validation**
+
+```bash
+# Verify zero sysinfo (C surface eliminated):
+cargo tree --workspace | grep sysinfo
+# Expected: nothing
+
+# Verify remaining libc is ecosystem-only:
+cargo tree --workspace --invert libc | head -30
+# Expected: mio, tokio, wgpu — not our code
+
+# Cross-compile without musl-tools:
+cargo check --target aarch64-unknown-linux-gnu
+# Expected: success (no C toolchain needed)
+```
+
+**Status**: ✅ toadStool certified ecoBin v3.0 (March 9, 2026)  
+**Next**: Track ecosystem evolution (mio/tokio rustix adoption)
 
 ---
 
@@ -1106,6 +1222,42 @@ Before declaring a primal ecoBin-compliant:
 ---
 
 ## 🔄 **Version History**
+
+### **v3.0.0** (March 9, 2026)
+
+**Infrastructure C Elimination**
+
+**Author**: toadStool S137 (ecoPrimals ecosystem)  
+**Consensus**: WateringHole Evolution (Proven via toadStool migration)
+
+**Changes**:
+- Established ecoBin v3.0: eliminate infrastructure C (musl/libc), not just application C
+- Documented `/proc` parsing + `rustix` pattern as reusable C elimination strategy
+- Promoted ToadStool to first ecoBin v3.0 certified primal
+- Created upstream contribution pathway for standalone crates from ecoPrimals
+- Added ecosystem Phase 2 tracking (mio/tokio/wgpu rustix migration)
+- Updated mental model: layers 2-3 (monitoring, syscalls) now pure Rust
+
+**Key Achievements**:
+- `sysinfo` (15 transitive crates → libc) → `toadstool-sysmon` (pure Rust, 0 C deps)
+- 22+ call sites migrated across 18 files
+- Cross-compilation CI: aarch64-unknown-linux-gnu, armv7-unknown-linux-gnueabihf
+- Pattern mirrors Ring → RustCrypto (Tower Atomic) but for system monitoring
+
+**The Pattern**:
+```
+Ring C (crypto)     → RustCrypto  (Tower Atomic)    — bearDog/songBird solved it
+sysinfo C (system)  → /proc+rustix (direct parsing) — toadStool solved it
+mio C (event loop)  → rustix      (upstream tracking) — ecosystem evolving
+Rust std (libc)     → linux-raw-sys (language evolution) — Rust project evolving
+```
+
+**Rationale**: The v2.0 "infrastructure C is acceptable" position was pragmatic for
+January 2026. By March 2026, we proved it's eliminable. The goal is a unified
+language system analogous to DNA — one language (Rust), one compilation model,
+compiling for any Linux-based architecture with just `rustup target add`.
+
+---
 
 ### **v1.0.0** (January 17, 2026)
 

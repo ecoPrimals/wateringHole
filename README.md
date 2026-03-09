@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: March 8, 2026
+**Last Updated**: March 9, 2026
 
 ---
 
@@ -51,7 +51,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BearDog** | Cryptography | All cryptographic operations: signing, encryption, key exchange, hashing, certificates, genetic lineage | Production (A+ LEGENDARY) |
 | **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
-| **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 19,840+ tests, 85+ JSON-RPC methods. Node Atomic for sovereign compute. S136 comprehensive audit clean. `deny(unsafe_op_in_unsafe_fn)` on akida-driver. coralReef Iteration 20 tracked | Production (A++ GOLD) |
+| **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 19,840+ tests, 85+ JSON-RPC methods. Node Atomic for sovereign compute. S137 sysinfo eliminated — `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. Cross-compile verified (aarch64, armv7 in CI) | Production (A++ GOLD) |
 | **BarraCuda** | Pure Math | 712 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93) | Production (A+) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
 | **biomeOS** | Orchestration | Ecosystem substrate: Neural API, capability routing, NUCLEUS composition, bonding model, Dark Forest coordination | Production (A, Security A++ LEGENDARY) |
@@ -293,6 +293,11 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `birdsong/BIRDSONG_PROTOCOL.md` - Encrypted UDP discovery
 - `btsp/BEARDOG_TECHNICAL_STACK.md` - BearDog cryptographic foundation
 - `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` - Tower Atomic TLS guide
+
+### Evolution & Upstream
+- `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` - Cross-primal pure Rust compute stack
+- `SOVEREIGN_COMPUTE_EVOLUTION.md` - Long-term sovereign GPU driver plan
+- `UPSTREAM_CONTRIBUTIONS.md` - Standalone crates for crates.io from ecoPrimals
 
 ### Coordination
 - `INTER_PRIMAL_INTERACTIONS.md` - Production interaction map and plans
