@@ -407,12 +407,12 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
-**Spring Versions (as of March 8, 2026)**:
+**Spring Versions (as of March 9, 2026)**:
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S135 |
-| hotSpring | v0.6.23 |
+| ToadStool | S136 |
+| hotSpring | v0.6.24 |
 | groundSpring | V100 |
 | neuralSpring | V90/S132 |
 | wetSpring | V99 |
