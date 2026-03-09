@@ -53,12 +53,16 @@ crate for crates.io contribution. See `UPSTREAM_CONTRIBUTIONS.md`.
 
 ### Layer 1 — barraCuda: COMPLETE
 
-**Zero `unsafe` blocks.** Zero application C dependencies.
+**Zero `unsafe` blocks.** Zero application C dependencies. `GpuBackend` trait abstraction.
 
 barraCuda achieved this by:
 - Evolving SPIR-V passthrough (`unsafe`) to safe WGSL roundtrip via
   naga `wgsl-out`. The sovereign compiler (FMA fusion, dead expression
   elimination) now runs on **all backends** (Vulkan, Metal, DX12, WebGPU).
+- Introducing `GpuBackend` trait (`device::backend`) — backend-agnostic compute
+  interface. `ComputeDispatch<B: GpuBackend>` is generic over backend (defaults
+  to `WgpuDevice`). `CoralReefDevice` scaffold behind `sovereign-dispatch` feature
+  flag, ready for `coral-gpu` crate. See `SOVEREIGN_PIPELINE_TRACKER.md`.
 - Deferring pipeline caching until wgpu provides a safe creation API.
 - Evolving test env manipulation to pure-function testing patterns.
 - Evolving all production `expect`/`unwrap` to `Result` propagation.
