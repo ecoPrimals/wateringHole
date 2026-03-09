@@ -1,7 +1,7 @@
 # hotSpring × coralReef Integration Handoff
 
 **Date:** March 9, 2026
-**hotSpring:** v0.6.24 | **barraCuda:** v0.3.3 (`27011af`) | **coralReef:** Phase 10, Iter 25
+**hotSpring:** v0.6.24 | **barraCuda:** v0.3.3 (`27011af`) | **coralReef:** Phase 10, Iter 26
 **License:** AGPL-3.0-only
 
 ---
@@ -10,8 +10,10 @@
 
 coralReef is now live and integrated with hotSpring via barraCuda's IPC client.
 The full sovereign pipeline — WGSL → native GPU binary — is operational for
-43/46 standalone hotSpring physics shaders across SM70 (Titan V) and SM86 (RTX 3090)
-targets. GPU dispatch awaits coral-driver DRM backend maturation.
+44/46 standalone hotSpring physics shaders across SM70 (Titan V) and SM86 (RTX 3090)
+targets (Iter 26 fixed f64 Min/Max/Abs/Clamp → `batched_hfb_energy_f64` now compiles).
+`ComputeDevice: Send + Sync` resolved — full `GpuBackend` trait implemented via
+`Mutex<GpuContext>`. GPU dispatch awaits coral-driver DRM backend maturation.
 
 ## What Was Done
 
@@ -53,17 +55,25 @@ Sovereign FMA benchmark: 498 FMA fusions across 46 standalone shaders (10.8 avg/
 - `validate_sovereign_compile` binary: compiles 46 hotSpring physics WGSL shaders
   to native SM70/SM86 SASS binaries via coral-gpu (no daemon, no Vulkan, no vendor SDK)
 
-**Compilation results**: 43/46 shaders compile to native binaries per target.
-~207 KB total native binary output per architecture.
+**Compilation results (Iter 26)**: 44/46 shaders compile to native binaries per target.
+~213 KB total native binary output per architecture.
 
-### coralReef Gaps Found (for upstream)
+### Iter 26 Blockers Resolved
 
-1. **f64 `log2` lowering panic**: `lower_f64/poly/log2.rs:21` panics on scalar `log2(f64)`.
-   Affects 2 shaders: `batched_hfb_energy_f64`, `deformed_potentials_f64`.
-2. **`ComputeDevice` not `Send + Sync`**: prevents `CoralReefDevice` from implementing
-   `GpuBackend` trait. Needs upstream evolution in coral-gpu.
-3. **DRM dispatch maturity**:
-   - nouveau: `drm_ioctl returned 22` (EINVAL — kernel compute dispatch support needed)
+1. **f64 Min/Max/Abs/Clamp** — root cause of log2 panic. `Min`, `Max`, `Abs`, `Clamp`
+   were truncating f64 to 1 component. Fixed via `OpDSetP` + per-component `OpSel`.
+   `batched_hfb_energy_f64` now compiles.
+2. **`ComputeDevice: Send + Sync`** — trait bound added in coral-driver. `CoralReefDevice`
+   now holds `Mutex<GpuContext>` and implements full `GpuBackend` trait.
+3. **Nouveau compute subchannel** — `create_channel()` now binds compute engine class
+   based on SM version. Still EINVAL on GV100 — deeper kernel-side NVIF setup needed.
+
+### Remaining coralReef Gaps
+
+1. **`deformed_potentials_f64`** — panics at `func_math_helpers.rs:143` with SSARef
+   index out of bounds. Different code path from the Iter 26 f64 fix.
+2. **DRM dispatch maturity**:
+   - nouveau: compute subchannel bound but channel creation EINVAL on GV100
    - nvidia-drm: UVM integration not implemented for buffer allocation
    - amdgpu: E2E ready (verified in coralReef Phase 10)
 
@@ -92,6 +102,8 @@ Sovereign FMA benchmark: 498 FMA fusions across 46 standalone shaders (10.8 avg/
 | `sovereign-dispatch` feature | **Write** (local) | barraCuda `Cargo.toml` |
 | `CoralReefDevice` impl | **Write** (local) | barraCuda `coral_reef_device.rs` |
 | `coral_gpu` re-export | **Write** (local) | barraCuda `device/mod.rs` |
-| f64 log2 gap | **Filed** | coralReef `lower_f64/poly/log2.rs` |
-| `ComputeDevice: Send + Sync` | **Identified** | coral-gpu `ComputeDevice` trait |
-| DRM dispatch maturity | **Identified** | coral-driver backends |
+| f64 Min/Max/Abs/Clamp | ✅ **Resolved** (Iter 26) | coralReef `func_math.rs` |
+| `ComputeDevice: Send + Sync` | ✅ **Resolved** (Iter 26) | coral-driver `lib.rs` |
+| `CoralReefDevice` full GpuBackend | **Write** (local) | barraCuda `coral_reef_device.rs` |
+| `deformed_potentials_f64` SSARef gap | **Filed** | coralReef `func_math_helpers.rs` |
+| DRM dispatch maturity | **In progress** (upstream) | coral-driver backends |
