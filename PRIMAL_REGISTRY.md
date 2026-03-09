@@ -424,7 +424,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
 | barraCuda | v0.3.3 (ab74b23) |
-| coralReef | Phase 10 Iteration 22 |
+| coralReef | Phase 10 Iteration 23 |
 
 ### airSpring - Ecological & Agricultural Sciences
 

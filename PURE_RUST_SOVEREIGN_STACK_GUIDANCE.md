@@ -70,17 +70,21 @@ barraCuda achieved this by:
 Transitive C boundaries (wgpu → ash → libvulkan.so, tokio → libc) are
 system-level and evolve via Layers 2-4, not Layer 1.
 
-### Layer 2 — coralReef: Phase 10 Iteration 22, 9 Unsafe Remaining
+### Layer 2 — coralReef: Phase 10 Iteration 23, Unsafe Audited
 
 coralReef is a sovereign Rust GPU shader compiler. NVIDIA backend (SM70–SM89)
 and AMD backend (RDNA2 GFX1030) operational with E2E dispatch verified.
 JSON-RPC 2.0 + tarpc IPC interface operational. df64 preamble auto-prepend
 for double-float precision. `Fp64Strategy` in `CompileOptions`.
 
-**9 `unsafe` blocks** remain in `coral-driver` (DRM ioctl, mmap/munmap, clock)
-and `nak-ir-proc` (proc macro). All wrapped in RAII (`MappedRegion`) or
-safe typed wrappers. `#[deny(unsafe_code)]` enforced on 6/8 crates.
-1189 tests, 63% coverage. 86 cross-spring WGSL shaders (79 compiling SM70), GLSL 450 + SPIR-V roundtrip frontends. tarpc uses bincode for binary IPC.
+**Unsafe audited**: 22 blocks in `coral-driver` (DRM ioctl, mmap/munmap, clock)
+wrapped in RAII (`MappedRegion`) or safe typed wrappers — libc→rustix migration
+path documented. 2 blocks in `nak-ir-proc` (compile-time contiguity proofs).
+`#[deny(unsafe_code)]` enforced on 6/8 crates.
+1190 tests, 63% coverage, 37 DEBT markers tracked. 86 cross-spring WGSL shaders
+(79 compiling SM70). 11 new math functions (Tanh, Fract, Sign, Dot, Mix, Step,
+SmoothStep, Length, Normalize, Cross, Trunc). GLSL 450 + SPIR-V roundtrip
+frontends. tarpc uses bincode for binary IPC.
 
 ### Layer 3 — Standalone Compilation: Planned
 
