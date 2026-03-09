@@ -1,7 +1,25 @@
-# 🌸 PetalTongue Integration Guide for BiomeOS
+# PetalTongue Integration Guide for BiomeOS
+
+> **FOSSIL RECORD** -- This document captures the January 13, 2026 integration
+> baseline (v1.3.0). petalTongue has since evolved to v1.4.4 with Grammar of
+> Graphics, scene engine, domain palettes, spring absorption, and JSON-RPC
+> Unix socket IPC replacing the HTTP REST patterns described below.
+>
+> **Current docs**:
+> - [VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md) (v2.0.0)
+> - [README.md](./README.md) (current integration status)
+> - `wateringHole/handoffs/PETALTONGUE_V144_SPRING_ABSORPTION_EVOLUTION_HANDOFF_MAR09_2026.md`
+>
+> **Key changes since this doc**:
+> - Discovery: JSON-RPC 2.0 over Unix sockets replaces HTTP REST
+> - IPC: 15 visualization methods, callback-based interaction subscriptions
+> - Rendering: Grammar of Graphics compiler, 6 domain palettes, scene graph
+> - Springs: healthSpring DataBinding/UiConfig, wetSpring Spectrum, physics bridge
+> - Quality: 1,914 tests, `#![forbid(unsafe_code)]` workspace-wide, zero C deps
+
 **Date**: January 13, 2026  
 **Version**: v1.3.0  
-**Status**: ✅ **READY FOR INTEGRATION**
+**Status**: FOSSIL RECORD (superseded by VISUALIZATION_INTEGRATION_GUIDE v2.0.0)
 
 ---
 

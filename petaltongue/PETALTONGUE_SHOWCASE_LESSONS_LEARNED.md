@@ -1,8 +1,17 @@
-# 🌸 petalTongue Showcase Lessons Learned
+# petalTongue Showcase Lessons Learned
+
+> **FOSSIL RECORD** -- This document captures the January 3, 2026 showcase
+> milestone (50% complete, A+ grade). The showcase has since expanded with
+> 7 new scene engine demos (12-scene-graph through 18-physics-bridge),
+> spring integration showcases (04-spring-integration/), and 28 sandbox
+> scenarios. Principles documented here remain valid and have been further
+> validated through spring absorption work.
+>
+> **Current showcase**: `petalTongue/showcase/` (see `showcase/README.md`)
 
 **Date**: January 3, 2026  
 **Source**: petalTongue Deep Debt Evolution + 50% Showcase Milestone  
-**Status**: Production-Validated with Live Primals  
+**Status**: Fossil Record -- Principles Validated, Metrics Superseded  
 **Audience**: All ecoPrimals developing showcases
 
 ---

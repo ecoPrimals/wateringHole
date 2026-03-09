@@ -2,45 +2,51 @@
 
 Cross-primal integration documentation for petalTongue.
 
-**Updated**: March 8, 2026
+**Updated**: March 9, 2026
 
 ---
 
 ## Integration Status
 
-petalTongue v1.3.0 (17 crates, edition 2024):
-- 1,309 tests passing, 0 failures
-- `#![forbid(unsafe_code)]` on 5 crates (core, telemetry, primitives, animation, headless)
-- JSON-RPC 2.0 over Unix sockets (primary IPC)
+petalTongue v1.4.4 (16 crates, edition 2024):
+- 1,914 tests passing, 0 failures
+- `#![forbid(unsafe_code)]` workspace-wide (core, telemetry, ui, scene, headless, all others)
+- JSON-RPC 2.0 over Unix sockets (primary IPC), 15 visualization methods
 - tarpc binary RPC (secondary, zero-copy `bytes::Bytes`)
 - HTTP fallback for browser/external clients
 - Capability-based discovery via Songbird
-- healthSpring `DataChannel` types (TimeSeries, Distribution, Bar, Gauge)
-- Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, SVG, PNG, headless
+- Grammar of Graphics engine with Tufte constraint validation
+- Domain-aware rendering (6 palettes: health, physics, ecology, agriculture, measurement, neural)
+- Spring IPC: healthSpring callback subscriptions, wetSpring Spectrum, physics bridge
+- Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, SVG, headless
+- Scene graph with Manim-style animation, modality compilers (SVG, audio, description, terminal)
 
-### Grammar of Graphics Evolution (In Progress)
+### Grammar of Graphics Engine (Implemented)
 
-petalTongue is evolving from fixed widgets to a **Grammar of Graphics** engine.
-Any primal can send a grammar expression via JSON-RPC, and petalTongue will render
-it across all available modalities. This replaces per-domain ad-hoc rendering with
+petalTongue has evolved from fixed widgets to a **Grammar of Graphics** engine.
+Any primal can send a grammar expression via JSON-RPC, and petalTongue compiles it
+to the best available output. This replaces per-domain ad-hoc rendering with
 a single composable pipeline.
 
 **If your primal has data that humans need to understand, read
 [VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md).**
 
-Key new capabilities (design phase):
-- Declarative grammar expressions (data → variables → scales → geometry → coordinates)
-- Tufte constraint system (data-ink ratio, lie factor, accessibility checks)
-- barraCuda GPU compute offload for heavy statistics and 3D tessellation
-- Inverse scale pipeline for interactive data exploration
-- Streaming visualization for real-time data
-- Domain-agnostic: same grammar renders molecules, game worlds, ecosystem topology
+Implemented capabilities:
+- Declarative grammar expressions (data -> variables -> scales -> geometry -> coordinates)
+- Tufte constraint system (data-ink ratio, lie factor, chartjunk, accessibility checks)
+- barraCuda GPU compute offload via physics bridge (N-body, molecular dynamics)
+- Domain color palettes resolved at runtime from grammar `domain` field
+- Streaming visualization for real-time data (`visualization.render.stream`)
+- 8 geometry types: Point, Line, Bar, Area, Ribbon, Heatmap, Contour, Text
+- DataBinding payloads: TimeSeries, Distribution, Bar, Gauge, Heatmap, Scatter3D, FieldMap, Spectrum
+- AnimationPlayer for sequenced scene graph animations
+- Scene bridge renderers for both egui (GUI) and ratatui (TUI)
 
 ---
 
 ## For Other Primals
 
-### Visualizing Your Data (New)
+### Visualizing Your Data
 
 The simplest way to get petalTongue to visualize your primal's data:
 
@@ -61,39 +67,38 @@ petalTongue discovers biomeOS via:
 2. `$XDG_RUNTIME_DIR/biomeos/neural-api.sock` (XDG standard)
 3. `/tmp/biomeos-neural-api.sock` (legacy fallback)
 
-API endpoints petalTongue consumes:
-- `GET /api/v1/health` -- Health check
-- `GET /api/v1/primals` -- List discovered primals
-- `GET /api/v1/topology` -- Graph structure (nodes + edges)
-- JSON-RPC 2.0 over Unix socket (9 methods)
-
-See [BIOMEOS_API_SPECIFICATION.md](./BIOMEOS_API_SPECIFICATION.md) for details.
+All communication uses JSON-RPC 2.0 over Unix sockets.
 
 ### healthSpring Integration
 
-petalTongue renders healthSpring diagnostic data via `DataChannel`:
-- `TimeSeries` -- Line charts (PK curves, RR tachograms)
-- `Distribution` -- Histograms with mean/SD/patient markers
-- `Bar` -- Categorical bar charts (microbiome abundances)
-- `Gauge` -- Progress bars with normal/warning ranges
+petalTongue renders healthSpring diagnostic data via `DataChannel` and `DataBinding`:
+- `TimeSeries` -> Line charts (PK curves, RR tachograms)
+- `Distribution` -> Histograms with mean/SD/patient markers
+- `Bar` -> Categorical bar charts (microbiome abundances)
+- `Gauge` -> Progress bars with normal/warning ranges
+- `Heatmap` -> Endocrine correlation matrices
+- `Spectrum` -> Frequency-domain analysis (Pan-Tompkins, biosignal)
 
-These map to grammar geometries: `TimeSeries` → `GeomLine` + `TemporalScale`,
-`Distribution` → `GeomBar` + `StatBin`, `Bar` → `GeomBar` + `CategoricalScale`,
-`Gauge` → `GeomArc` (polar) or `GeomRect` with annotation.
+These map to grammar geometries: `TimeSeries` -> `GeomLine` + `TemporalScale`,
+`Distribution` -> `GeomBar` + `StatBin`, `Bar` -> `GeomBar` + `CategoricalScale`,
+`Gauge` -> `GeomArc` (polar) or `GeomRect` with annotation,
+`Spectrum` -> `GeomArea` + `FrequencyScale`.
+
+Interaction model: callback-based subscriptions (`interaction.subscribe` with
+`callback_method` and `event_filter`), plus poll-based fallback.
 
 ### ToadStool Integration
 
 petalTongue discovers ToadStool display backend via capability-based discovery.
 tarpc binary RPC for high-performance frame transport.
-See [BIOMEOS_INTEGRATION_HANDOFF.md](./BIOMEOS_INTEGRATION_HANDOFF.md).
 
 ### barraCuda Integration
 
 petalTongue offloads heavy visualization computation to barraCuda via capability
 discovery (`math.stat.*`, `math.tessellate.*`, `math.project.*`, `math.physics.*`).
-All payloads use `bytes::Bytes` for zero-copy tarpc transfer. barraCuda does not
-need to know about petalTongue's grammar -- it receives computation requests and
-returns results.
+All payloads use `bytes::Bytes` for zero-copy tarpc transfer. Physics bridge
+(`petal-tongue-ipc/src/physics_bridge.rs`) provides async IPC client for N-body
+simulations with CPU Euler fallback when barraCuda is unavailable.
 
 ---
 
@@ -111,12 +116,20 @@ Legacy: `/tmp/petaltongue.sock`
 
 | Method | Direction | Purpose |
 |--------|-----------|---------|
-| `visualization.render` | Inbound | Render a grammar expression |
-| `visualization.render.stream` | Inbound | Streaming visualization |
-| `visualization.export` | Inbound | Export to SVG/PNG/JSON |
-| `visualization.validate` | Inbound | Tufte-check a grammar expression |
-| `visualization.capabilities` | Inbound | Query supported features |
-| `visualization.interact` | Outbound | User interaction events |
+| `visualization.render` | Inbound | Render a grammar expression or raw data |
+| `visualization.render.stream` | Inbound | Streaming visualization (append/set_value/replace) |
+| `visualization.render.grammar` | Inbound | Render grammar with DataBinding payload |
+| `visualization.export` | Inbound | Export scene to SVG/JSON/description |
+| `visualization.validate` | Inbound | Pre-render Tufte constraint check |
+| `visualization.dismiss` | Inbound | Remove a visualization session |
+| `visualization.capabilities` | Inbound | Query supported features and geometry types |
+| `interaction.subscribe` | Inbound | Subscribe to interaction events (callback or poll) |
+| `interaction.poll` | Inbound | Poll pending interaction events |
+| `interaction.unsubscribe` | Inbound | Remove interaction subscription |
+| `visualization.interact.apply` | Inbound | Programmatic interaction (zoom, filter, select) |
+| `visualization.interact.perspectives` | Inbound | List active perspective views |
+| `motor.*` | Outbound | Motor commands to springs |
+| `visualization.interact` | Outbound | User interaction event notifications |
 
 ---
 
@@ -124,12 +137,12 @@ Legacy: `/tmp/petaltongue.sock`
 
 | Document | Purpose |
 |----------|---------|
-| [VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md) | **How to get petalTongue to visualize your data** |
-| [BIOMEOS_INTEGRATION_HANDOFF.md](./BIOMEOS_INTEGRATION_HANDOFF.md) | biomeOS integration guide |
+| [VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md) | **How to get petalTongue to visualize your data** (v2.0.0) |
+| [BIOMEOS_INTEGRATION_HANDOFF.md](./BIOMEOS_INTEGRATION_HANDOFF.md) | biomeOS integration guide (fossil record, v1.3.0 baseline) |
 | [BIOMEOS_API_SPECIFICATION.md](./BIOMEOS_API_SPECIFICATION.md) | API contract and endpoints |
 | [QUICK_START_FOR_BIOMEOS.md](./QUICK_START_FOR_BIOMEOS.md) | 5-minute quick start |
 | [NEURAL_API_INTEGRATION_RESPONSE.md](./NEURAL_API_INTEGRATION_RESPONSE.md) | Neural API response format |
-| [PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md](./PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md) | Production insights |
+| [PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md](./PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md) | Production insights (fossil record, Jan 3 baseline) |
 
 ---
 
@@ -138,8 +151,8 @@ Legacy: `/tmp/petaltongue.sock`
 | Standard | Status |
 |----------|--------|
 | `UNIBIN_ARCHITECTURE_STANDARD.md` | Compliant (1 binary, 5 modes) |
-| `ECOBIN_ARCHITECTURE_STANDARD.md` | Partial (85% Pure Rust, no genomeBin yet) |
+| `ECOBIN_ARCHITECTURE_STANDARD.md` | Compliant (pure Rust, no C deps, no genomeBin yet) |
 | `UNIVERSAL_IPC_STANDARD_V3.md` | Compliant (JSON-RPC + tarpc + HTTP fallback) |
-| `SEMANTIC_METHOD_NAMING_STANDARD.md` | Compliant (`visualization.*` namespace) |
+| `SEMANTIC_METHOD_NAMING_STANDARD.md` | Compliant (`visualization.*`, `interaction.*` namespaces) |
 | `PRIMAL_IPC_PROTOCOL.md` | Compliant |
 | License | AGPL-3.0-only on all crates |
