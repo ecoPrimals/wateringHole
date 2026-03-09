@@ -241,11 +241,11 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 ### petalTongue - Representation Primal
 
-**Domain**: Universal multi-modal user interface  
+**Domain**: Universal multi-modal user interface and Grammar of Graphics engine  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A++, 99/100)
+**Status**: Production Ready (A+) — v1.3.0, 17 crates, 1,309 tests, edition 2024, `#![forbid(unsafe_code)]` on 5 crates, AGPL-3.0-only, Grammar of Graphics evolution in design phase
 
-**Role**: petalTongue renders ecosystem state across every sensory modality. Sighted users see graph visualizations. Blind users hear sonified health data. Terminal users get rich TUI. Web users get a dashboard. The same primal adapts to whatever representation capability is available.
+**Role**: petalTongue makes data human-understandable across every sensory modality. It is evolving from fixed-widget rendering to a composable **Grammar of Graphics** pipeline: any primal sends a declarative grammar expression (data + variable bindings + scales + geometry + coordinates), and petalTongue compiles it to the best available modality (GUI, TUI, audio sonification, SVG, PNG, JSON API). Tufte constraints (data-ink ratio, lie factor, accessibility) are machine-checked on every render. Heavy computation (statistics, 3D tessellation, physics) is offloaded to barraCuda via capability-based discovery. The grammar is domain-agnostic: the same pipeline renders ecosystem topology, clinical vitals, molecular structures, game worlds, and universe simulations.
 
 **Primitives**:
 
@@ -254,12 +254,18 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 | **Visual Modes** | Desktop GUI (egui/wayland), Terminal UI (ratatui), Web server (axum), Headless rendering (SVG/PNG) |
 | **Audio** | Sonification engine: 5 instruments, health-to-pitch mapping, position-to-stereo panning |
 | **Layout** | 4 graph layout algorithms, pan/zoom/select |
-| **Integration** | Live primal discovery via Songbird, biomeOS SSE event subscription |
+| **Grammar of Graphics** | Declarative grammar expressions (Scale, Geometry, Coordinate, Statistic, Aesthetic, Facet traits), grammar compiler → RenderPlan, modality compilers (egui, ratatui, audio, SVG, PNG, JSON) |
+| **Tufte Constraints** | Data-ink ratio, lie factor, chartjunk detection, small multiples preference, color accessibility, data density, smallest effective difference — auto-correctable |
+| **Interaction** | Inverse scale pipeline (screen coords → data values), brush selection, linked views, cross-primal interaction events via `visualization.interact` |
+| **Integration** | Live primal discovery via Songbird, biomeOS SSE event subscription, barraCuda GPU compute offload (`math.stat.*`, `math.tessellate.*`, `math.project.*`) |
+| **IPC** | `visualization.render`, `visualization.render.stream`, `visualization.export`, `visualization.validate`, `visualization.capabilities`, `visualization.interact` — JSON-RPC 2.0 + tarpc, `bytes::Bytes` zero-copy for binary payloads |
 | **Configuration** | Environment-driven (ENV > File > Defaults), TCP fallback IPC |
 
 **UniBin Modes**: `ui`, `tui`, `web`, `headless`, `status`
 
-**Participates In**: biomeOS ecosystem visualization, real-time health monitoring display
+**Key principle**: Data defines structure. Grammar defines mapping. Modality defines rendering. The human defines interaction. Other primals send grammar expressions or raw data; petalTongue handles the rest. See `wateringHole/petaltongue/VISUALIZATION_INTEGRATION_GUIDE.md`.
+
+**Participates In**: biomeOS ecosystem visualization, real-time health monitoring display, barraCuda compute pipeline (grammar → GPU statistics/tessellation → render), cross-primal interaction events
 
 ---
 
