@@ -420,7 +420,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | ToadStool | S137 (sysinfo→sysmon, ecoBin v3.0) |
 | hotSpring | v0.6.24 |
 | groundSpring | V100 |
-| neuralSpring | V90/S132 |
+| neuralSpring | V91/S135 |
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
 | barraCuda | v0.3.3 (ab74b23) |
