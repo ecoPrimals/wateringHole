@@ -1,286 +1,145 @@
-# 🌸 PetalTongue @ WateringHole
-**Cross-Primal Integration Documentation**
+# petalTongue @ wateringHole
+
+Cross-primal integration documentation for petalTongue.
+
+**Updated**: March 8, 2026
 
 ---
 
-## 📋 DOCUMENTS IN THIS DIRECTORY
+## Integration Status
 
-This directory contains integration documentation for PetalTongue's cross-primal coordination.
+petalTongue v1.3.0 (17 crates, edition 2024):
+- 1,309 tests passing, 0 failures
+- `#![forbid(unsafe_code)]` on 5 crates (core, telemetry, primitives, animation, headless)
+- JSON-RPC 2.0 over Unix sockets (primary IPC)
+- tarpc binary RPC (secondary, zero-copy `bytes::Bytes`)
+- HTTP fallback for browser/external clients
+- Capability-based discovery via Songbird
+- healthSpring `DataChannel` types (TimeSeries, Distribution, Bar, Gauge)
+- Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, SVG, PNG, headless
 
-| Document | Purpose | Audience |
-|----------|---------|----------|
-| **BIOMEOS_INTEGRATION_HANDOFF.md** | Complete integration guide | BiomeOS Team |
-| **BIOMEOS_API_SPECIFICATION.md** | API contract & endpoints | BiomeOS Developers |
-| **QUICK_START_FOR_BIOMEOS.md** | 5-minute quick start | BiomeOS Team |
-| **PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md** | Production insights | All Teams |
+### Grammar of Graphics Evolution (In Progress)
 
----
+petalTongue is evolving from fixed widgets to a **Grammar of Graphics** engine.
+Any primal can send a grammar expression via JSON-RPC, and petalTongue will render
+it across all available modalities. This replaces per-domain ad-hoc rendering with
+a single composable pipeline.
 
-## 🎯 FOR BIOMEOS TEAM
+**If your primal has data that humans need to understand, read
+[VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md).**
 
-**Want to integrate PetalTongue as your UI?**
-
-### Start Here (5 minutes):
-👉 **[QUICK_START_FOR_BIOMEOS.md](QUICK_START_FOR_BIOMEOS.md)**
-
-### Then Read (15 minutes):
-📖 **[BIOMEOS_INTEGRATION_HANDOFF.md](BIOMEOS_INTEGRATION_HANDOFF.md)**
-
-### API Reference (as needed):
-🔌 **[BIOMEOS_API_SPECIFICATION.md](BIOMEOS_API_SPECIFICATION.md)**
-
----
-
-## 📊 INTEGRATION STATUS
-
-**PetalTongue v1.3.0**:
-- ✅ Production-ready binary
-- ✅ BiomeOS client implemented
-- ✅ Runtime discovery working
-- ✅ Mock mode for development
-- ✅ Zero dependencies (100% Rust)
-- ✅ Comprehensive documentation
-
-**What BiomeOS Needs to Implement**:
-1. `GET /api/v1/health` - Health check endpoint
-2. `GET /api/v1/primals` - List discovered primals
-3. `GET /api/v1/topology` - Graph structure (nodes + edges)
-4. (Phase 3) `GET /api/v1/events/stream` - Real-time SSE events
-
-**Minimum Viable Integration**: ~30 lines of code (see Quick Start)
+Key new capabilities (design phase):
+- Declarative grammar expressions (data → variables → scales → geometry → coordinates)
+- Tufte constraint system (data-ink ratio, lie factor, accessibility checks)
+- barraCuda GPU compute offload for heavy statistics and 3D tessellation
+- Inverse scale pipeline for interactive data exploration
+- Streaming visualization for real-time data
+- Domain-agnostic: same grammar renders molecules, game worlds, ecosystem topology
 
 ---
 
-## 🚀 QUICK INTEGRATION TEST
+## For Other Primals
 
-```bash
-# 1. Get PetalTongue
-cd /path/to/ecoPrimals/phase2/petalTongue
-cargo build --release --bin petal-tongue
+### Visualizing Your Data (New)
 
-# 2. Point to BiomeOS
-export BIOMEOS_URL=http://localhost:3000
+The simplest way to get petalTongue to visualize your primal's data:
 
-# 3. Run!
-./target/release/petal-tongue
+1. Announce your data capabilities via Songbird discovery
+2. Expose `{domain}.get` and `{domain}.schema` JSON-RPC methods
+3. Send a `visualization.render` request with a grammar expression (or just raw data)
 
-# Done! PetalTongue visualizes your BiomeOS topology
-```
+petalTongue handles modality selection, accessibility, Tufte compliance, and
+barraCuda compute offload automatically.
 
----
+See **[VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md)** for
+the full grammar reference, domain examples, and sovereignty checklist.
 
-## 🔗 RELATED DOCUMENTATION
+### biomeOS Integration
 
-### In WateringHole
-- `../INTER_PRIMAL_INTERACTIONS.md` - Overall coordination
-- `../LIVESPORE_CROSS_PRIMAL_COORDINATION_JAN_2026.md` - Multi-primal evolution
-- `../birdsong/BIRDSONG_PROTOCOL.md` - Discovery protocol
-- `../btsp/BEARDOG_TECHNICAL_STACK.md` - Security primal
+petalTongue discovers biomeOS via:
+1. `BIOMEOS_NEURAL_API_SOCKET` env var (explicit override)
+2. `$XDG_RUNTIME_DIR/biomeos/neural-api.sock` (XDG standard)
+3. `/tmp/biomeos-neural-api.sock` (legacy fallback)
 
-### In PetalTongue Repository
-- `../../petalTongue/README.md` - Project overview
-- `../../petalTongue/START_HERE.md` - Getting started
-- `../../petalTongue/BUILD_INSTRUCTIONS.md` - Build guide
-- `../../petalTongue/ENV_VARS.md` - Environment variables
-- `../../petalTongue/specs/BIOMEOS_UI_INTEGRATION_ARCHITECTURE.md` - Detailed spec
+API endpoints petalTongue consumes:
+- `GET /api/v1/health` -- Health check
+- `GET /api/v1/primals` -- List discovered primals
+- `GET /api/v1/topology` -- Graph structure (nodes + edges)
+- JSON-RPC 2.0 over Unix socket (9 methods)
 
-### Audit Reports (Quality Assurance)
-- `../../petalTongue/AUDIT_EXECUTIVE_SUMMARY_JAN_13_2026.md` - Executive summary
-- `../../petalTongue/AUDIT_FINDINGS_CHECKLIST_JAN_13_2026.md` - Detailed findings
-- `../../petalTongue/COMPREHENSIVE_AUDIT_REPORT_JAN_13_2026.md` - Full audit
+See [BIOMEOS_API_SPECIFICATION.md](./BIOMEOS_API_SPECIFICATION.md) for details.
 
----
+### healthSpring Integration
 
-## 📈 QUALITY METRICS
+petalTongue renders healthSpring diagnostic data via `DataChannel`:
+- `TimeSeries` -- Line charts (PK curves, RR tachograms)
+- `Distribution` -- Histograms with mean/SD/patient markers
+- `Bar` -- Categorical bar charts (microbiome abundances)
+- `Gauge` -- Progress bars with normal/warning ranges
 
-**Production Readiness**: ✅ **A (92/100)**
+These map to grammar geometries: `TimeSeries` → `GeomLine` + `TemporalScale`,
+`Distribution` → `GeomBar` + `StatBin`, `Bar` → `GeomBar` + `CategoricalScale`,
+`Gauge` → `GeomArc` (polar) or `GeomRect` with annotation.
 
-| Metric | Status |
-|--------|--------|
-| Binary Builds | ✅ Working |
-| Tests | ✅ 195+ passing |
-| Documentation | ✅ Comprehensive |
-| Code Quality | ✅ A grade |
-| Sovereignty | ✅ Zero violations |
-| Mock Isolation | ✅ Perfect |
-| Cross-Platform | ✅ Linux/macOS/Windows |
+### ToadStool Integration
 
-**Recommended for Production**: ✅ **YES**
+petalTongue discovers ToadStool display backend via capability-based discovery.
+tarpc binary RPC for high-performance frame transport.
+See [BIOMEOS_INTEGRATION_HANDOFF.md](./BIOMEOS_INTEGRATION_HANDOFF.md).
 
----
+### barraCuda Integration
 
-## 🎯 INTEGRATION MILESTONES
-
-### Phase 1: Basic Integration (Now)
-- [x] PetalTongue binary available
-- [x] BiomeOS client implemented
-- [ ] BiomeOS implements 3 endpoints
-- [ ] Joint testing complete
-- [ ] Production deployment
-
-### Phase 2: Enhanced Integration (1-2 months)
-- [ ] ToadStool backend (audio/GPU)
-- [ ] Unix socket primary protocol
-- [ ] Performance optimizations
-- [ ] Load testing (100+ primals)
-
-### Phase 3: Real-Time Updates (2-3 months)
-- [ ] SSE `/api/v1/events/stream`
-- [ ] Sub-second UI updates
-- [ ] Advanced topology features
-- [ ] Multi-niche management
+petalTongue offloads heavy visualization computation to barraCuda via capability
+discovery (`math.stat.*`, `math.tessellate.*`, `math.project.*`, `math.physics.*`).
+All payloads use `bytes::Bytes` for zero-copy tarpc transfer. barraCuda does not
+need to know about petalTongue's grammar -- it receives computation requests and
+returns results.
 
 ---
 
-## 💬 COMMUNICATION CHANNELS
+## IPC Protocol
 
-**For BiomeOS Integration**:
-- Primary: Cross-primal coordination meetings (Fridays)
-- Issues: GitHub issues in respective repositories
-- Documentation: This directory (`wateringHole/petaltongue/`)
+petalTongue follows `UNIVERSAL_IPC_STANDARD_V3.md`:
+- **Primary**: JSON-RPC 2.0 over Unix sockets
+- **Secondary**: tarpc (binary, zero-copy `bytes::Bytes`)
+- **Fallback**: HTTP REST (browser/external only)
 
-**Quick Questions**:
-- PetalTongue team: See repository contributors
-- BiomeOS team: See their repository
-- Cross-primal: WateringHole discussions
+Socket path: `$XDG_RUNTIME_DIR/petaltongue/petaltongue.sock`
+Legacy: `/tmp/petaltongue.sock`
 
----
+### Visualization JSON-RPC Methods
 
-## 🧪 TESTING INFRASTRUCTURE
-
-### Mock BiomeOS Server
-A simple Flask server for testing (see Quick Start):
-- `GET /api/v1/health` - Always healthy
-- `GET /api/v1/primals` - Returns 2 mock primals
-- `GET /api/v1/topology` - Returns simple graph
-
-**Code**: Available in QUICK_START_FOR_BIOMEOS.md
-
-### PetalTongue Mock Mode
-Built-in test data:
-```bash
-PETALTONGUE_MOCK_MODE=true ./target/release/petal-tongue
-```
-
-Shows realistic topology without requiring BiomeOS.
+| Method | Direction | Purpose |
+|--------|-----------|---------|
+| `visualization.render` | Inbound | Render a grammar expression |
+| `visualization.render.stream` | Inbound | Streaming visualization |
+| `visualization.export` | Inbound | Export to SVG/PNG/JSON |
+| `visualization.validate` | Inbound | Tufte-check a grammar expression |
+| `visualization.capabilities` | Inbound | Query supported features |
+| `visualization.interact` | Outbound | User interaction events |
 
 ---
 
-## 🔐 SECURITY NOTES
+## Documents
 
-**Current** (Phase 1-2):
-- No authentication (assumes local trust)
-- Unix sockets for access control
-- HTTP localhost-only
-
-**Future** (Phase 3):
-- Token-based authentication
-- HTTPS for remote access
-- mTLS for socket security
-
----
-
-## 📦 DEPLOYMENT OPTIONS
-
-### Option 1: Standalone
-BiomeOS runs headless, PetalTongue provides all visualization
-
-### Option 2: Subcommand
-`biomeos ui` spawns PetalTongue
-
-### Option 3: Library
-Embed PetalTongue rendering in BiomeOS
-
-**Recommended**: Start with Option 1 (clean separation)
+| Document | Purpose |
+|----------|---------|
+| [VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md) | **How to get petalTongue to visualize your data** |
+| [BIOMEOS_INTEGRATION_HANDOFF.md](./BIOMEOS_INTEGRATION_HANDOFF.md) | biomeOS integration guide |
+| [BIOMEOS_API_SPECIFICATION.md](./BIOMEOS_API_SPECIFICATION.md) | API contract and endpoints |
+| [QUICK_START_FOR_BIOMEOS.md](./QUICK_START_FOR_BIOMEOS.md) | 5-minute quick start |
+| [NEURAL_API_INTEGRATION_RESPONSE.md](./NEURAL_API_INTEGRATION_RESPONSE.md) | Neural API response format |
+| [PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md](./PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md) | Production insights |
 
 ---
 
-## 🎊 SUCCESS STORIES
+## Standards Compliance
 
-**What Teams Are Saying**:
-
-> "PetalTongue made our topology visible for the first time. We discovered primals we didn't know existed!" - *Discovery Team*
-
-> "The headless mode over SSH is a game-changer. We can visualize production topology without X11." - *Operations Team*
-
-> "Zero dependencies! Builds on our embedded ARM boards without any hassle." - *IoT Team*
-
----
-
-## 📚 LEARNING PATH
-
-**For BiomeOS Developers New to PetalTongue**:
-
-1. **5 minutes**: Read QUICK_START_FOR_BIOMEOS.md
-2. **15 minutes**: Skim BIOMEOS_INTEGRATION_HANDOFF.md
-3. **30 minutes**: Implement mock endpoints (copy-paste from Quick Start)
-4. **1 hour**: Test with PetalTongue
-5. **1 day**: Implement full API (see BIOMEOS_API_SPECIFICATION.md)
-6. **1 week**: Production integration & testing
-
-**Total Time**: ~2 weeks from zero to production ✅
-
----
-
-## 🔄 MAINTENANCE
-
-**This Directory**:
-- Updated: As integration evolves
-- Owner: PetalTongue Team
-- Reviewers: BiomeOS Team, Cross-Primal Coordination
-
-**Version Control**:
-- All docs versioned in git
-- Breaking changes clearly marked
-- Migration guides provided
-
----
-
-## ✅ QUICK CHECKLIST
-
-**Before Integration**:
-- [ ] Read Quick Start
-- [ ] Build PetalTongue binary
-- [ ] Implement mock endpoints
-- [ ] Test connection
-- [ ] Review API spec
-
-**During Integration**:
-- [ ] Implement health endpoint
-- [ ] Implement primals endpoint
-- [ ] Implement topology endpoint
-- [ ] Test with curl
-- [ ] Test with PetalTongue
-- [ ] Load test
-
-**After Integration**:
-- [ ] Deploy to production
-- [ ] Monitor errors
-- [ ] Gather user feedback
-- [ ] Plan Phase 2 features
-
----
-
-## 🌳 ECOSYSTEM ALIGNMENT
-
-PetalTongue integrations:
-- ✅ **BiomeOS**: Device/primal visualization (this directory)
-- ✅ **Songbird**: Discovery via BirdSong protocol
-- ✅ **BearDog**: Trust & lineage visualization
-- ⏳ **ToadStool**: Audio/GPU rendering (Phase 2)
-- ⏳ **NestGate**: Content storage (Phase 3)
-
-All following TRUE PRIMAL principles:
-- Capability-based discovery
-- Zero hardcoding
-- Graceful degradation
-- Local-first architecture
-
----
-
-**Last Updated**: January 13, 2026  
-**Status**: ✅ **READY FOR INTEGRATION**  
-**Confidence**: **HIGH** 🌸
-
-🌳 **Welcome to the ecoPrimals ecosystem!** 🌸
-
+| Standard | Status |
+|----------|--------|
+| `UNIBIN_ARCHITECTURE_STANDARD.md` | Compliant (1 binary, 5 modes) |
+| `ECOBIN_ARCHITECTURE_STANDARD.md` | Partial (85% Pure Rust, no genomeBin yet) |
+| `UNIVERSAL_IPC_STANDARD_V3.md` | Compliant (JSON-RPC + tarpc + HTTP fallback) |
+| `SEMANTIC_METHOD_NAMING_STANDARD.md` | Compliant (`visualization.*` namespace) |
+| `PRIMAL_IPC_PROTOCOL.md` | Compliant |
+| License | AGPL-3.0-only on all crates |
