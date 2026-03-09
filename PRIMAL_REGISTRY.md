@@ -190,7 +190,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 20 (A+) — 1142 tests passing, 25 ignored, 63% line coverage, 47 cross-spring WGSL shaders (40 compiling SM70), tarpc uses bincode for binary IPC, full codebase audit clean (no mocks in production, no hardcoded primal names, pure Rust deps), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired (awaiting Titan V / RTX 3090 validation), zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 6/8 crates, AGPL-3.0-only
+**Status**: Phase 10 Iteration 22 (A+) — 1189 tests passing, 36 ignored, 63% line coverage, 86 cross-spring WGSL shaders (79 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (4/10 passing), tarpc uses bincode for binary IPC, full codebase audit clean (no mocks in production, no hardcoded primal names, pure Rust deps), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired (awaiting Titan V / RTX 3090 validation), zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 6/8 crates, AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL and SPIR-V compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified — WGSL compile, PM4 dispatch, GPU execution, host readback. coralDriver provides userspace GPU dispatch via DRM ioctl. coralGpu unifies compilation and dispatch into a single API. Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -418,7 +418,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
 | barraCuda | v0.3.3 (ab74b23) |
-| coralReef | Phase 10 Iteration 20 |
+| coralReef | Phase 10 Iteration 22 |
 
 ### airSpring - Ecological & Agricultural Sciences
 
