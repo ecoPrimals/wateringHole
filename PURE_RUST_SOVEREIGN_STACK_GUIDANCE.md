@@ -70,25 +70,57 @@ barraCuda achieved this by:
 Transitive C boundaries (wgpu → ash → libvulkan.so, tokio → libc) are
 system-level and evolve via Layers 2-4, not Layer 1.
 
-### Layer 2 — coralReef: Phase 10 Iteration 23, Unsafe Audited
+### Layer 2 — coralReef: Phase 10 Iteration 24, Multi-GPU Sovereign
 
 coralReef is a sovereign Rust GPU shader compiler. NVIDIA backend (SM70–SM89)
-and AMD backend (RDNA2 GFX1030) operational with E2E dispatch verified.
-JSON-RPC 2.0 + tarpc IPC interface operational. df64 preamble auto-prepend
-for double-float precision. `Fp64Strategy` in `CompileOptions`.
+and AMD backend (RDNA2 GFX1030) operational with E2E dispatch verified on
+both AMD RX 6950 XT and NVIDIA RTX 3090 (via DRM probing).
 
-**Unsafe audited**: 22 blocks in `coral-driver` (DRM ioctl, mmap/munmap, clock)
-wrapped in RAII (`MappedRegion`) or safe typed wrappers — libc→rustix migration
-path documented. 2 blocks in `nak-ir-proc` (compile-time contiguity proofs).
-`#[deny(unsafe_code)]` enforced on 6/8 crates.
-1191 tests, 63% coverage, 37 DEBT markers tracked. 86 cross-spring WGSL shaders
-(79 compiling SM70). 11 new math functions (Tanh, Fract, Sign, Dot, Mix, Step,
-SmoothStep, Length, Normalize, Cross, Trunc). GLSL 450 + SPIR-V roundtrip
-frontends. tarpc uses bincode for binary IPC.
+**Iteration 24 milestone — Hardware Parity & Driver Sovereignty**:
+- **Multi-GPU discovery**: `enumerate_render_nodes()` scans all `/dev/dri/renderD*`
+  nodes, returns `DrmDeviceInfo` per device. `GpuContext::enumerate_all()` creates
+  one context per GPU. Both AMD (amdgpu) and NVIDIA (nvidia-drm, nouveau) detected.
+- **Driver sovereignty**: `DriverPreference` type with sovereign default
+  (`nouveau` > `amdgpu` > `nvidia-drm`). Compile everything, prefer open-source
+  at runtime. Override via `CORALREEF_DRIVER_PREFERENCE` env var.
+- **NVIDIA proprietary compatibility**: `NvDrmDevice` probes `nvidia-drm` DRM
+  module. Compute dispatch pending UVM integration — probing works, dispatch
+  returns explicit "requires UVM" errors (not silent failure).
+- **toadStool discovery integration**: `coralreef-core::discovery` reads ecosystem
+  capability files (`gpu.dispatch`, `gpu-*`). Falls back to direct DRM scan.
+  `GpuContext::from_descriptor()` creates contexts from discovered devices.
+- **Cross-vendor parity tests**: Compilation parity for SM86 vs RDNA2. Known
+  RDNA2 limitations documented (global_invocation_id, VOP2 VSRC1, buffer reads).
+- **Showcase**: 8 progressive demos from hello-compiler through full compute
+  triangle (coralReef → toadStool → barraCuda).
 
-### Layer 3 — Standalone Compilation: Planned
+**Stack**: 1280 tests (0 failed, 52 ignored), 63% coverage, 37 DEBT markers.
+86 cross-spring WGSL shaders (79 compiling SM70). Three input languages
+(WGSL, SPIR-V, GLSL 450). JSON-RPC 2.0 + tarpc (bincode) IPC.
+`#[deny(unsafe_code)]` on 6/8 crates.
 
-### Layer 4 — Sovereign Hardware: Planned
+### Layer 3 — Standalone Compilation: OPERATIONAL
+
+coralReef compiles WGSL/SPIR-V/GLSL to native GPU binaries as a standalone
+primal. `coralreef-core` provides JSON-RPC 2.0 + tarpc servers, capability-based
+self-description (`shader.compile`, `shader.health`), and zero-knowledge startup.
+UniBin CLI: `server`, `compile`, `doctor`. No dependency on toadStool or barraCuda
+for compilation — they are discovered at runtime via capability files.
+
+### Layer 4 — Sovereign Hardware: IN PROGRESS
+
+`coral-driver` provides userspace GPU dispatch via DRM ioctl. AMD amdgpu is
+fully wired (GEM, PM4, CS submit, fence sync) with E2E verified. NVIDIA nouveau
+has full channel/pushbuf/QMD dispatch (pending hardware validation on Titan V).
+NVIDIA `nvidia-drm` probes proprietary driver (UVM integration needed for compute).
+All drivers compile by default, selected at runtime via `DriverPreference`.
+
+**Contrast vs CUDA/Kokkos**: coralReef compiles to the same SASS binary that
+CUDA's `ptxas` produces (SM70–SM89), and the same GCN/RDNA binary that AMD's
+ROCm compiler produces — but in pure Rust, with no vendor SDK, no C toolchain,
+and no runtime library dependency. Where CUDA locks you to NVIDIA and Kokkos
+abstracts over vendor SDKs (still requiring CUDA/ROCm/SYCL underneath),
+coralReef generates native GPU instructions directly from Rust.
 
 ---
 
