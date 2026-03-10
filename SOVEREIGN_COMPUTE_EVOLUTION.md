@@ -1,6 +1,6 @@
 # Sovereign Compute Evolution — Pure Rust GPU Stack
 
-**Date**: March 8, 2026 (updated — Layer 1 complete)
+**Date**: March 10, 2026 (updated — Layers 1-2 complete)
 **From**: hotSpring (validated by Kokkos-CUDA parity testing)
 **To**: All primals — toadStool, barraCuda, coralReef, springs
 **Type**: Long-term architecture evolution plan
@@ -112,7 +112,7 @@ Remaining gap is dispatch overhead and GPU occupancy.
 
 ### Level 2 — coralReef: Sovereign GPU Compiler + Minimal Unsafe
 
-**Status**: ✅ Complete (Phase 10 Iteration 22 — 1189 tests, 63% coverage, 9 unsafe blocks in driver only, WGSL+SPIR-V+GLSL frontends)
+**Status**: ✅ Complete (Phase 10 Iteration 27 — 1401 tests, 63% coverage, 9 unsafe blocks in driver only, WGSL+SPIR-V+GLSL frontends)
 
 **What**: coralReef is a fully sovereign Rust GPU shader compiler evolved
 from Mesa NAK roots. All stubs replaced with pure Rust. f64 transcendentals
@@ -129,7 +129,8 @@ bincode for high-performance binary IPC. Capability-based discovery.
 - [x] coralGpu — unified compile + dispatch API
 - [x] `#[deny(unsafe_code)]` on 6/8 crates; remaining 9 unsafe blocks in driver (RAII-wrapped)
 - [x] tarpc + bincode binary IPC; JSON-RPC 2.0 primary
-- [x] 1189 tests, 63% line coverage, 86 cross-spring WGSL shaders (79 compiling SM70), GLSL 450 + SPIR-V roundtrip
+- [x] 1401 tests, 63% line coverage, 86 cross-spring WGSL shaders (79 compiling SM70), GLSL 450 + SPIR-V roundtrip
+- [x] Multi-GPU sovereignty (Iter 24), math debt elimination (Iter 25), sovereign pipeline unblock (Iter 26), deep debt evolution (Iter 27)
 
 **Architecture**:
 ```

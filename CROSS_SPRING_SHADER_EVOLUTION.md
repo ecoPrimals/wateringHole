@@ -3,7 +3,7 @@
 > How the ecoPrimals Springs collectively evolved BarraCUDA into the library
 > groundSpring depends on for statistical validation.
 
-**Last Updated**: March 9, 2026
+**Last Updated**: March 10, 2026
 
 ---
 
@@ -183,6 +183,47 @@ Each of groundSpring's 11 delegations has a traceable cross-spring history:
 | 9 | `lyapunov_exponent` | `spectral::lyapunov_exponent` | hotSpring S26 (Kachkovskiy) | hotSpring spectral checks |
 | 10 | `lyapunov_averaged` | `spectral::lyapunov_averaged` | hotSpring S26 (Kachkovskiy) | hotSpring + groundSpring |
 | 11 | `analytical_localization_length` | `special::localization_length` | wetSpring S52 (transport) | groundSpring Anderson checks |
+
+---
+
+## Spectral GPU Evolution Status (March 10, 2026)
+
+The `spectral/` module in barraCuda is the most cross-spring validated
+component in the ecosystem: **417+ checks** across 4 springs, reproducing
+11 papers in Kachkovskiy's domain. This section tracks GPU-specific evolution.
+
+### barraCuda `spectral/` WGSL Shaders
+
+| Shader | Precision | Consuming Springs | Status |
+|--------|-----------|-------------------|--------|
+| `anderson_lyapunov_f64.wgsl` | f64 | hotSpring, groundSpring | Deployed |
+| `anderson_lyapunov_f32.wgsl` | f32 | — | Deployed (fallback) |
+| `batch_ipr_f64.wgsl` | f64 | neuralSpring | Deployed |
+| `lanczos_iteration_f64.wgsl` | f64 | hotSpring, groundSpring | Deployed (SpMV only) |
+| `anderson_coupling_f64.wgsl` | f64 | groundSpring | Deployed |
+| `fft_radix2_f64.wgsl` | f64 | — | Deployed |
+
+### GPU Validation Parity (per spring)
+
+| Spring | GPU Checks | Max N Validated | Key Metric |
+|--------|:----------:|:---------------:|------------|
+| hotSpring | 14/14 | N=4096 (SpMV), N=144 (Lanczos) | Parity 1.78e-15 / 1e-15 |
+| groundSpring | Wired (4 experiments) | N varies | 47.4× speedup (Exp 009) |
+| neuralSpring | All tiers pass | Paper 022-023 | 104× vs Python |
+| wetSpring | N/A (application layer) | N ≤ 1000 | CPU sufficient |
+
+### Remaining GPU Gaps
+
+| Gap | Blocking | Priority | Owner |
+|-----|----------|:--------:|-------|
+| Fully GPU-resident Lanczos (dot/axpy/reorthog on GPU) | Large-N performance | P1 | barraCuda |
+| `tridiag_eigh` GPU eigenvectors | groundSpring Exp 012 | P1 | barraCuda |
+| Two-particle Anderson Hamiltonian (L² space) | Kachkovskiy Bourgain paper | P2 | barraCuda + groundSpring |
+| GPU Lanczos at N > 10k | Kachkovskiy demo | P1 | hotSpring + barraCuda |
+| SciPy `eigsh` comparison harness | Benchmark credibility | P0 | hotSpring |
+| Kokkos spectral comparison | Vendor comparison | P2 | barraCuda |
+
+See: `handoffs/SPECTRAL_GPU_CROSS_SPRING_KACHKOVSKIY_EVOLUTION_HANDOFF_MAR10_2026.md`
 
 ---
 

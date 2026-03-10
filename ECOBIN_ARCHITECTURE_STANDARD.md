@@ -701,7 +701,7 @@ ldd target/x86_64-unknown-linux-musl/release/beardog
 
 | Primal | Version | Certified | Validation Date | Notes |
 |--------|---------|-----------|-----------------|-------|
-| **ToadStool** | S137 | ✅ ecoBin v3.0 #1 | Mar 9, 2026 | sysinfo eliminated, `toadstool-sysmon` (pure /proc + rustix), cross-compile CI (aarch64, armv7) |
+| **ToadStool** | S141 | ✅ ecoBin v3.0 #1 | Mar 10, 2026 | sysinfo eliminated, `toadstool-sysmon` (pure /proc + rustix), cross-compile CI (aarch64, armv7), clippy pedantic `--all-targets`, zero-copy GPU payloads |
 
 **Achievement**: First primal to reach ecoBin v3.0 — zero infrastructure C in application code.
 Pattern: `/proc` parsing + `rustix` syscalls replaces libc-based crates entirely.

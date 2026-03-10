@@ -2,8 +2,8 @@
 
 **Purpose**: Track issues, patterns, and evolution opportunities discovered by Springs
 that require coordination from biomeOS, ToadStool, or cross-primal teams.
-**Last Updated**: March 9, 2026
-**Contributing Springs**: airSpring v0.7.5, neuralSpring V90/S132, wetSpring V99, groundSpring V100, hotSpring v0.6.24
+**Last Updated**: March 10, 2026
+**Contributing Springs**: airSpring v0.7.5, neuralSpring V92/S139, wetSpring V103, groundSpring V100, hotSpring v0.6.24, healthSpring V3
 
 ---
 
@@ -271,7 +271,7 @@ diversity analysis. This requires:
 
 ---
 
-### ISSUE-006: GPU f64 Catastrophic Cancellation in Special Functions
+### ISSUE-011: GPU f64 Catastrophic Cancellation in Special Functions
 
 **Reporter**: hotSpring v0.6.19
 **Affects**: barraCuda (math primitives), coralReef (compiler), ALL springs doing GPU science
