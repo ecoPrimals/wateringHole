@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 8, 2026
+**Last Updated**: March 10, 2026
 
 ---
 
@@ -190,7 +190,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 29 (A+) — 1447 tests passing, 76 ignored, 63% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (4/10 passing), multi-GPU path-based open (distinct contexts per render node), SM auto-detection from sysfs, nouveau EINVAL diagnostic suite, buffer lifecycle safety (inflight tracking), UVM RM client proof-of-concept, NVVM poisoning bypass validated (12 tests), `#[deny(unsafe_code)]` on 8/9 crates (17 unsafe blocks in coral-driver only), `ring` eliminated, AMD E2E verified on RX 6950 XT, zero clippy warnings, AGPL-3.0-only
+**Status**: Phase 10 Iteration 30 (A+) — 1487 tests passing, 76 ignored, 63% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (4/10 passing), multi-device compile API (`shader.compile.wgsl.multi` — cross-vendor, up to 64 targets), FMA contraction enforcement (`lower_fma` pass: `Separate` splits FFma→FMul+FAdd, resolves ISSUE-011), FMA hardware capability reporting per architecture, `PCIe` topology awareness (switch grouping for multi-GPU), multi-GPU path-based open (distinct contexts per render node), SM auto-detection from sysfs, NVVM poisoning bypass validated (14 tests), `#[deny(unsafe_code)]` on 8/9 crates (17 unsafe blocks in coral-driver only), `ring` eliminated, AMD E2E verified on RX 6950 XT, zero clippy warnings, AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL and SPIR-V compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified — WGSL compile, PM4 dispatch, GPU execution, host readback. coralDriver provides userspace GPU dispatch via DRM ioctl. coralGpu unifies compilation and dispatch into a single API. Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -198,14 +198,14 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **IPC** | `shader.compile.spirv`, `shader.compile.wgsl`, `shader.compile.status`, `shader.compile.capabilities` — JSON-RPC 2.0 + tarpc (TCP/Unix socket), zero-copy `bytes::Bytes` payloads, differentiated error codes |
+| **IPC** | `shader.compile.spirv`, `shader.compile.wgsl`, `shader.compile.wgsl.multi`, `shader.compile.status`, `shader.compile.capabilities` — JSON-RPC 2.0 + tarpc (TCP/Unix socket), zero-copy `bytes::Bytes` payloads, differentiated error codes, FMA policy control |
 | **NVIDIA Backend** | SM70-SM89 (Volta through Ada), SASS binary output, f64 transcendentals via Newton-Raphson (sqrt, rcp, exp2, log2, sin, cos) |
 | **AMD Backend** | RDNA2 GFX1030, native `v_fma_f64`/`v_sqrt_f64`/`v_rcp_f64`, 1446 ISA opcodes (Rust-generated from AMD XML) |
 | **Compiler Core** | naga frontend, SSA IR, copy propagation, DCE, register allocation, vendor-specific legalization and encoding |
-| **coralDriver** | AMD DRM ioctl (GEM, PM4, BO list, CS submit, fence sync) — **E2E verified on RX 6950 XT**, NVIDIA nouveau (channel, GEM, pushbuf, QMD) — pure Rust via libc |
+| **coralDriver** | AMD DRM ioctl (GEM, PM4, BO list, CS submit, fence sync) — **E2E verified on RX 6950 XT**, NVIDIA nouveau (channel, GEM, pushbuf, QMD) — pure Rust, zero libc |
 | **coralGpu** | Unified compile + dispatch API — vendor-agnostic `GpuContext` |
 | **f64 Lowering** | Full f64 transcendental suite: sqrt, rcp, exp2, log2, sin, cos, exp, log, pow — NVIDIA (DFMA software) + AMD (native hardware) |
-| **40/47 Cross-Spring Shaders** | Compiles shaders from hotSpring, groundSpring, neuralSpring, wetSpring, airSpring to native SM70 SASS |
+| **84/93 Cross-Spring Shaders** | Compiles shaders from hotSpring, groundSpring, neuralSpring, wetSpring, airSpring, healthSpring to native SM70 SASS |
 | **AMD E2E Pipeline** | WGSL → compile → PM4 dispatch → GPU execution → host readback — verified on RX 6950 XT (RDNA2 GFX1030) |
 
 **Participates In**: Sovereign Compute Pipeline (barraCuda → toadStool → coralReef → native binary → coralDriver → hardware)
