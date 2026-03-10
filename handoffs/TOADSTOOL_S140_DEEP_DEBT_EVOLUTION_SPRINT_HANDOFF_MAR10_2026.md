@@ -58,6 +58,17 @@ Absorbed healthSpring V13 `execute_streaming()` callback pattern:
 2. **Spring pins updated** to S140 in `SPRING_ABSORPTION_TRACKER.md`
 3. **healthSpring V13** now tracked as a spring with pin status
 
+### Docs Cleanup & Fossil Archival
+
+- 5 Feb-2026 planning docs → `ecoPrimals/fossil/toadStool/docs-planning-S140/`
+- Resolved debt doc (D-S18-002 cubecl/dirs-sys) → `ecoPrimals/fossil/toadStool/docs-debt-resolved-S140/`
+- Root `UNIDIRECTIONAL_PIPELINE.md` → fossil (content in specs/architecture)
+- `crates/runtime/gpu/run-gpu-tests.sh` → fossil (superseded by `cargo test`)
+- Empty `docs/planning/` and `crates/distributed/proptest-regressions/` directories removed
+- All 8 root docs updated S139 → S140 headers
+- JSON-RPC method count updated 85+ → 88+ across docs
+- Stale `#[ignore]` on `test_dirs_sys_eliminated` resolved (debt is done, test un-ignored)
+
 ## Dependencies
 
 - No new crate dependencies
