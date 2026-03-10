@@ -51,15 +51,15 @@
 
 ### Absorption Queue (P1 — Next Sprint)
 
-| Item | Source | Priority | Notes |
-|------|--------|----------|-------|
-| `seed_extend` GPU op | wetSpring V105 | P1 | BLAST-like seed-and-extend alignment |
-| `profile_alignment` | wetSpring V105 | P1 | Position-weight matrix for MSA |
-| `foce_estimate` / `saem_estimate` | healthSpring V14 | P1 | NLME population PK (per-subject parallelizable) |
-| Smith-Waterman GPU shader | neuralSpring S139 | P1 | Batch bioinformatics alignment |
-| `peak_integrate_batch` | wetSpring V105 | P1 | Fused GPU peak detection + trapezoidal integration |
-| Activate `barracuda::activations::*` | neuralSpring S139 | P1 | Expose scalar sigmoid, relu, gelu |
-| `BatchReconcileGpu` | wetSpring V105 | P1 | Wavefront DP for DTL reconciliation |
+| Item | Source | Priority | Status |
+|------|--------|----------|--------|
+| `seed_extend` GPU op | wetSpring V105 | P2 | Open |
+| `profile_alignment` | wetSpring V105 | P2 | Open |
+| `foce_estimate` / `saem_estimate` | healthSpring V14 | P1 | **✓ Resolved** — `FoceGradientGpu` + `VpcSimulateGpu` |
+| Smith-Waterman GPU shader | neuralSpring S139 | P2 | Open (CPU SW exists) |
+| `peak_integrate_batch` | wetSpring V105 | P2 | Open |
+| Activate `barracuda::activations::*` | neuralSpring S139 | P1 | **✓ Resolved** — public at `barracuda::activations::*` |
+| `BatchReconcileGpu` | wetSpring V105 | P1 | **✓ Resolved** — `BipartitionEncodeGpu` |
 
 ### Absorption Queue (P2 — Future)
 
@@ -80,11 +80,11 @@
 | Issue | Source | Status |
 |-------|--------|--------|
 | Ada Lovelace reclassify as `F64NativeNoSharedMem` | groundSpring V97 | ✓ Addressed (probe-based, not heuristic) |
-| `Fp64Strategy` Hybrid/Native branching in `SumReduceF64` | groundSpring V96 | Open |
+| `Fp64Strategy` Hybrid/Native branching in `SumReduceF64` | groundSpring V96 | **✓ Resolved** — `PrecisionBrain` routing |
 | FFT in `SubstrateCapabilityKind` | groundSpring V95 | Open |
-| Expose scalar activations as public API | neuralSpring V92 | Open (P1) |
-| `ComputeDispatch` BGL builder pattern | wetSpring V105 | Open |
-| `CsrMatrix` from-triplets builder | wetSpring V105 | Open |
+| Expose scalar activations as public API | neuralSpring V92 | **✓ Resolved** — `barracuda::activations::*` |
+| `ComputeDispatch` BGL builder pattern | wetSpring V105 | **✓ Resolved** — `BglBuilder` |
+| `CsrMatrix` from-triplets builder | wetSpring V105 | **✓ Resolved** — `from_triplets_summed()` |
 | coralReef remove `local_elementwise_f64.wgsl` | airSpring v0.7.5 | coralReef action |
 | NVK device probe cache flag | airSpring v0.7.5 | ✓ Addressed (probe cache with `df64_transcendentals_safe`) |
 
