@@ -2,22 +2,25 @@
 
 Cross-primal integration documentation for petalTongue.
 
-**Updated**: March 9, 2026
+**Updated**: March 10, 2026
 
 ---
 
 ## Integration Status
 
-petalTongue v1.4.4 (16 crates, edition 2024):
-- 1,914 tests passing, 0 failures
+petalTongue v1.5.0 (16 crates, edition 2024):
+- 2,011 tests passing, 0 failures
 - `#![forbid(unsafe_code)]` workspace-wide (core, telemetry, ui, scene, headless, all others)
-- JSON-RPC 2.0 over Unix sockets (primary IPC), 15 visualization methods
+- JSON-RPC 2.0 over Unix sockets (primary IPC), 16 visualization methods
 - tarpc binary RPC (secondary, zero-copy `bytes::Bytes`)
 - HTTP fallback for browser/external clients
 - Capability-based discovery via Songbird
 - Grammar of Graphics engine with Tufte constraint validation
+- **DataBinding auto-compiler**: All 8 DataBinding variants (TimeSeries, Distribution, Bar, Gauge, Spectrum, Heatmap, Scatter3D, FieldMap) auto-compile to Grammar of Graphics
+- **Dashboard layout engine**: Multi-panel grid with domain theming and SVG/description export
+- **Scenario loader**: Load healthSpring-style JSON scenarios from disk with `--scenario` CLI flag
 - Domain-aware rendering (6 palettes: health, physics, ecology, agriculture, measurement, neural)
-- Spring IPC: healthSpring callback subscriptions, wetSpring Spectrum, physics bridge
+- Spring IPC: healthSpring DataChannel auto-compile, dashboard render, wetSpring Spectrum, physics bridge
 - Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, SVG, headless
 - Scene graph with Manim-style animation, modality compilers (SVG, audio, description, terminal)
 
@@ -92,13 +95,38 @@ Interaction model: callback-based subscriptions (`interaction.subscribe` with
 petalTongue discovers ToadStool display backend via capability-based discovery.
 tarpc binary RPC for high-performance frame transport.
 
-### barraCuda Integration
+### barraCuda Integration (v0.3.3+ alignment)
 
 petalTongue offloads heavy visualization computation to barraCuda via capability
-discovery (`math.stat.*`, `math.tessellate.*`, `math.project.*`, `math.physics.*`).
+discovery (`gpu.dispatch`, `science.gpu.dispatch`).
 All payloads use `bytes::Bytes` for zero-copy tarpc transfer. Physics bridge
-(`petal-tongue-ipc/src/physics_bridge.rs`) provides async IPC client for N-body
-simulations with CPU Euler fallback when barraCuda is unavailable.
+(`petal-tongue-ipc/src/physics_bridge.rs`) provides async IPC client aligned
+with barraCuda's `barracuda.compute.dispatch` contract (using `op` field).
+
+**Current status**: CPU Euler fallback only. barraCuda's `compute.dispatch`
+currently supports `zeros`, `ones`, `read` ops. `math.physics.nbody` is wired
+in petalTongue but not yet in barraCuda's dispatch table. Physics bridge will
+use GPU automatically when barraCuda adds physics ops.
+
+**Discovery**: Follows toadStool S139 dual-write pattern:
+1. `BARRACUDA_SOCKET` env (explicit)
+2. `$XDG_RUNTIME_DIR/ecoPrimals/discovery/` (ecosystem manifest)
+3. `$XDG_RUNTIME_DIR/barracuda/` (primal-specific)
+4. `/tmp/barracuda.sock` (fallback)
+
+**Precision**: petalTongue is a visualization consumer, not a compute provider.
+Precision routing (`Fp64Strategy`, `PrecisionRoutingAdvice`, `FmaPolicy`)
+lives in barraCuda/coralReef. petalTongue accepts and displays data at
+whatever precision the ecosystem provides.
+
+### coralReef Integration (Phase 10, Iteration 26)
+
+petalTongue does NOT call coralReef directly. Shader compilation flows:
+`barraCuda (WGSL) → coralReef (compile) → toadStool (dispatch)`.
+petalTongue receives computed results via IPC.
+
+If petalTongue ever needs GPU rendering (GpuCompiler modality), it would go
+through barraCuda's `ComputeDispatch::CoralReef` or wgpu, not coralReef directly.
 
 ---
 
@@ -119,6 +147,7 @@ Legacy: `/tmp/petaltongue.sock`
 | `visualization.render` | Inbound | Render a grammar expression or raw data |
 | `visualization.render.stream` | Inbound | Streaming visualization (append/set_value/replace) |
 | `visualization.render.grammar` | Inbound | Render grammar with DataBinding payload |
+| `visualization.render.dashboard` | Inbound | Multi-panel dashboard from DataBindings → SVG |
 | `visualization.export` | Inbound | Export scene to SVG/JSON/description |
 | `visualization.validate` | Inbound | Pre-render Tufte constraint check |
 | `visualization.dismiss` | Inbound | Remove a visualization session |

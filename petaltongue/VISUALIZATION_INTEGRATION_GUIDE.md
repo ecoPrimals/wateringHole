@@ -202,6 +202,51 @@ updates without resending the full dataset:
 | `set_value` | Update current value | Gauge |
 | `replace` | Replace entire binding | Any type (Heatmap, FieldMap, etc.) |
 
+### 6. Render a Multi-Panel Dashboard (NEW in v1.5.0)
+
+Send multiple DataBindings and get back a composed multi-panel dashboard as SVG:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "visualization.render.dashboard",
+  "params": {
+    "session_id": "healthspring-full-study",
+    "title": "Full Clinical Dashboard",
+    "domain": "health",
+    "max_columns": 3,
+    "bindings": [
+      { "channel_type": "timeseries", "id": "pk", "label": "PK Curve", ... },
+      { "channel_type": "gauge", "id": "hr", "label": "Heart Rate", ... },
+      { "channel_type": "bar", "id": "labs", "label": "Lab Panel", ... },
+      { "channel_type": "spectrum", "id": "hrv", "label": "HRV Power", ... },
+      { "channel_type": "heatmap", "id": "corr", "label": "Correlations", ... }
+    ]
+  },
+  "id": 3
+}
+```
+
+Response includes `panel_count`, `columns`, `rows`, and the composed SVG (or description).
+Each binding is auto-compiled through the Grammar of Graphics engine with domain palette.
+The session can then be exported via `visualization.export` to retrieve SVG/description.
+
+**DataBinding auto-compilation** (v1.5.0): When springs call `visualization.render` with
+DataBinding payloads, petalTongue now auto-compiles each binding to a scene graph via
+the Grammar of Graphics pipeline. The compiled scenes are stored and can be exported
+individually via `visualization.export`.
+
+### 7. Load Scenario Files from CLI
+
+petalTongue supports loading scenario JSON files directly:
+
+```bash
+petaltongue ui --scenario path/to/healthspring_scenario.json
+petaltongue tui --scenario path/to/healthspring_scenario.json
+```
+
+Scenario files follow the healthSpring schema with `ecosystem.primals[].data_channels`.
+
 ### Domain Themes
 
 petalTongue applies domain-appropriate color palettes based on the `domain` field:
