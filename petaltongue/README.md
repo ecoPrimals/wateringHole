@@ -43,8 +43,8 @@ Implemented capabilities:
 - barraCuda GPU compute offload via physics bridge (N-body, molecular dynamics)
 - Domain color palettes resolved at runtime from grammar `domain` field
 - Streaming visualization for real-time data (`visualization.render.stream`)
-- 8 geometry types: Point, Line, Bar, Area, Ribbon, Heatmap, Contour, Text
-- DataBinding payloads: TimeSeries, Distribution, Bar, Gauge, Heatmap, Scatter3D, FieldMap, Spectrum
+- 10 geometry types: Point, Line, Bar, Area, Ribbon, Tile, Arc, Heatmap, Contour, Text
+- DataBinding payloads: TimeSeries, Distribution, Bar, Gauge, Heatmap, Scatter, Scatter3D, FieldMap, Spectrum
 - AnimationPlayer for sequenced scene graph animations
 - Scene bridge renderers for both egui (GUI) and ratatui (TUI)
 
