@@ -159,7 +159,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Pure mathematics — WGSL shaders, precision strategy, naga IR optimisation  
 **Phase**: Foundation  
-**Status**: Production Ready (A+) — v0.3.3 — 3,095+ tests, 712 WGSL f64 shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin); budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
+**Status**: Production Ready (A+) — v0.3.3 — 3,220+ tests, 712 WGSL f64 shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin); budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
 
 **Role**: BarraCuda is pure math. All math originates as WGSL shaders authored in f64 as the canonical precision. BarraCuda does not care about hardware — it writes the mathematics, coralReef compiles it, toadStool discovers and dispatches it. The precision tier (`Fp64Strategy`: f32 / f64 / df64) is the interface between barraCuda and coralReef. naga-IR optimisation (FMA fusion, DCE) operates on the math, not the hardware. Currently uses wgpu as a transitional dispatch substrate until coralReef's sovereign dispatch pipeline is integrated.
 
@@ -190,7 +190,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 27 (A+) — 1401 tests passing, 24/24 spring absorption passing, 63% line coverage, 86 cross-spring WGSL shaders (79 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip, tarpc uses bincode for binary IPC, full codebase audit clean (no mocks in production, no hardcoded primal names, pure Rust deps), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired, zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 6/8 crates, multi-GPU sovereignty (Iter 24), math debt elimination (Iter 25), sovereign pipeline unblock (Iter 26), deep debt evolution (Iter 27), AGPL-3.0-only
+**Status**: Phase 10 Iteration 28 (A+) — 1437 tests passing, 93 cross-spring WGSL shaders (6 springs), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip, tarpc uses bincode for binary IPC, full codebase audit clean (no mocks in production, no hardcoded primal names, pure Rust deps), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired, zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 8/9 crates (17 unsafe blocks in coral-driver only — kernel ABI), NVVM poisoning bypass proven (12 tests), `nak-ir-proc` unsafe eliminated (50 Op struct array-field migration), `primal-rpc-client` crate (pure Rust JSON-RPC), multi-GPU sovereignty (Iter 24), math debt (Iter 25), sovereign pipeline (Iter 26), deep debt (Iter 27), unsafe elimination + NVVM bypass (Iter 28), AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL and SPIR-V compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified — WGSL compile, PM4 dispatch, GPU execution, host readback. coralDriver provides userspace GPU dispatch via DRM ioctl. coralGpu unifies compilation and dispatch into a single API. Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -423,8 +423,8 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | neuralSpring | V91/S135 |
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
-| barraCuda | v0.3.3 (ab74b23) |
-| coralReef | Phase 10 Iteration 23 |
+| barraCuda | v0.3.3 (3,220+ tests, AGPL-3.0-only, deep debt audit complete) |
+| coralReef | Phase 10 Iteration 28 (1,437 tests, AGPL-3.0-only, 17 unsafe blocks in coral-driver only, NVVM bypass proven) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
