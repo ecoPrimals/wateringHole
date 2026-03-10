@@ -76,7 +76,7 @@ Each cell describes what the spring validates against barraCuda primitives.
 ### hotSpring — Precision & Conservation Validator
 
 **Owner**: Computational physics team
-**barraCuda pin**: v0.3.3
+**barraCuda pin**: v0.3.4
 **Key responsibility**: Validate that f64 and DF64 arithmetic produce
 physically correct results under the most demanding numerical conditions.
 
@@ -96,7 +96,7 @@ physically correct results under the most demanding numerical conditions.
 ### wetSpring — Statistical & ODE Validator
 
 **Owner**: Metagenomics team
-**barraCuda pin**: v0.3.3
+**barraCuda pin**: v0.3.4
 **Key responsibility**: Validate biological statistics and ODE integrator
 correctness across diverse datasets.
 
@@ -116,7 +116,7 @@ correctness across diverse datasets.
 ### airSpring — PDE & Pipeline Validator
 
 **Owner**: Agriculture/hydrology team
-**barraCuda pin**: v0.3.3
+**barraCuda pin**: v0.3.4
 **Key responsibility**: Validate PDE solvers and multi-stage GPU pipelines
 against published agronomic benchmarks.
 
@@ -136,7 +136,7 @@ against published agronomic benchmarks.
 ### groundSpring — Noise & Tolerance Validator
 
 **Owner**: Condensed matter team
-**barraCuda pin**: v0.3.3
+**barraCuda pin**: v0.3.4
 **Key responsibility**: Validate numerical robustness under adversarial
 conditions and verify the tolerance system itself.
 
@@ -156,7 +156,7 @@ conditions and verify the tolerance system itself.
 ### neuralSpring — ML & Evolution Validator
 
 **Owner**: ML/neuroevolution team
-**barraCuda pin**: v0.3.3
+**barraCuda pin**: v0.3.4
 **Key responsibility**: Validate neural network operations and evolutionary
 algorithms produce convergent results.
 
@@ -176,7 +176,7 @@ algorithms produce convergent results.
 ### healthSpring — Pharmacology Validator
 
 **Owner**: Health/PK-PD team
-**barraCuda pin**: v0.3.3
+**barraCuda pin**: v0.3.4
 **Key responsibility**: Validate pharmacological models and eigensolvers
 against published clinical and mathematical references.
 
@@ -222,4 +222,5 @@ barraCuda release
 
 | Date | Change |
 |------|--------|
+| 2026-03-10 | Spring pins updated to v0.3.4; PCIe topology, VRAM quota, BGL builder added to matrix |
 | 2026-03-10 | Initial spring validation assignments created |
