@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 10, 2026
+**Last Updated**: March 8, 2026
 
 ---
 
@@ -127,7 +127,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — S141 (March 10, 2026) — 19,840+ workspace tests, 0 clippy warnings, 0 failures, 85+ JSON-RPC methods (dynamically built), ~86% line coverage, BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, clippy pedantic `--all-targets` clean (S141), zero-copy GPU binary payloads
+**Status**: Production Ready (A++ GOLD STANDARD) — S135 (March 8, 2026) — 19,840+ workspace tests, 0 clippy warnings, 0 failures, 85+ JSON-RPC methods (dynamically built), ~86% line coverage, BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants
 
 **Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
@@ -159,7 +159,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Pure mathematics — WGSL shaders, precision strategy, naga IR optimisation  
 **Phase**: Foundation  
-**Status**: Production Ready (A+) — v0.3.3 — 3,220+ tests, 712 WGSL f64 shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin); budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
+**Status**: Production Ready (A+) — v0.3.4 — 3,500+ tests, 712 WGSL f64 shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, NVVM device poisoning guard (all proprietary NVIDIA architectures), DF64 safety probing (`df64_arith`, `df64_transcendentals_safe`), `NvvmDf64TranscendentalPoisoning` workaround, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin); budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
 
 **Role**: BarraCuda is pure math. All math originates as WGSL shaders authored in f64 as the canonical precision. BarraCuda does not care about hardware — it writes the mathematics, coralReef compiles it, toadStool discovers and dispatches it. The precision tier (`Fp64Strategy`: f32 / f64 / df64) is the interface between barraCuda and coralReef. naga-IR optimisation (FMA fusion, DCE) operates on the math, not the hardware. Currently uses wgpu as a transitional dispatch substrate until coralReef's sovereign dispatch pipeline is integrated.
 
@@ -190,7 +190,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 28 (A+) — 1437 tests passing, 93 cross-spring WGSL shaders (6 springs), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip, tarpc uses bincode for binary IPC, full codebase audit clean (no mocks in production, no hardcoded primal names, pure Rust deps), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired, zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 8/9 crates (17 unsafe blocks in coral-driver only — kernel ABI), NVVM poisoning bypass proven (12 tests), `nak-ir-proc` unsafe eliminated (50 Op struct array-field migration), `primal-rpc-client` crate (pure Rust JSON-RPC), multi-GPU sovereignty (Iter 24), math debt (Iter 25), sovereign pipeline (Iter 26), deep debt (Iter 27), unsafe elimination + NVVM bypass (Iter 28), AGPL-3.0-only
+**Status**: Phase 10 Iteration 29 (A+) — 1447 tests passing, 76 ignored, 63% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (4/10 passing), multi-GPU path-based open (distinct contexts per render node), SM auto-detection from sysfs, nouveau EINVAL diagnostic suite, buffer lifecycle safety (inflight tracking), UVM RM client proof-of-concept, NVVM poisoning bypass validated (12 tests), `#[deny(unsafe_code)]` on 8/9 crates (17 unsafe blocks in coral-driver only), `ring` eliminated, AMD E2E verified on RX 6950 XT, zero clippy warnings, AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL and SPIR-V compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified — WGSL compile, PM4 dispatch, GPU execution, host readback. coralDriver provides userspace GPU dispatch via DRM ioctl. coralGpu unifies compilation and dispatch into a single API. Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -243,7 +243,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Universal multi-modal user interface and Grammar of Graphics engine  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A+) — v1.6.0, 16 crates, 2,025 tests, edition 2024, `#![forbid(unsafe_code)]` on 5 crates, AGPL-3.0-only, Grammar of Graphics evolution in design phase
+**Status**: Production Ready (A+) — v1.3.0, 17 crates, 1,309 tests, edition 2024, `#![forbid(unsafe_code)]` on 5 crates, AGPL-3.0-only, Grammar of Graphics evolution in design phase
 
 **Role**: petalTongue makes data human-understandable across every sensory modality. It is evolving from fixed-widget rendering to a composable **Grammar of Graphics** pipeline: any primal sends a declarative grammar expression (data + variable bindings + scales + geometry + coordinates), and petalTongue compiles it to the best available modality (GUI, TUI, audio sonification, SVG, PNG, JSON API). Tufte constraints (data-ink ratio, lie factor, accessibility) are machine-checked on every render. Heavy computation (statistics, 3D tessellation, physics) is offloaded to barraCuda via capability-based discovery. The grammar is domain-agnostic: the same pipeline renders ecosystem topology, clinical vitals, molecular structures, game worlds, and universe simulations.
 
@@ -423,8 +423,8 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | neuralSpring | V91/S135 |
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
-| barraCuda | v0.3.3 (3,220+ tests, AGPL-3.0-only, deep debt audit complete) |
-| coralReef | Phase 10 Iteration 28 (1,437 tests, AGPL-3.0-only, 17 unsafe blocks in coral-driver only, NVVM bypass proven) |
+| barraCuda | v0.3.4 (3,500+ tests, AGPL-3.0-only, NVVM poisoning guarded, cross-spring absorption sprint) |
+| coralReef | Phase 10 Iteration 29 |
 
 ### airSpring - Ecological & Agricultural Sciences
 

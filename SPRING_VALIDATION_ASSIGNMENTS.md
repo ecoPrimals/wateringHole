@@ -4,7 +4,7 @@
 compute dispatch pipeline. barraCuda tests the dispatch; springs validate with
 live physics, biology, and domain computation.
 **Last Updated**: March 10, 2026
-**barraCuda**: v0.3.3 (AGPL-3.0-only, 3,220+ tests, 0 clippy, 0 unsafe)
+**barraCuda**: v0.3.4 (AGPL-3.0-only, 3,500+ tests, 0 clippy, 0 unsafe, NVVM poisoning guarded)
 
 ---
 
