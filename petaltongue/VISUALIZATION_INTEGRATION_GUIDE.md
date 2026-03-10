@@ -108,7 +108,7 @@ payloads for zero-copy transfer. See the tarpc section below.
 ### 4. Send DataBinding Payloads (Springs)
 
 For springs that produce typed chart data (TimeSeries, Distribution, Bar, Gauge,
-Heatmap, Scatter3D, FieldMap, Spectrum), send structured `DataBinding` payloads.
+Heatmap, Scatter, Scatter3D, FieldMap, Spectrum), send structured `DataBinding` payloads.
 This is the recommended path for spring-to-petalTongue integration.
 
 ```json
@@ -168,6 +168,7 @@ This is the recommended path for spring-to-petalTongue integration.
 | `bar` | Genus abundances, categorical comparisons | categories, values, unit |
 | `gauge` | Shannon diversity, SpO2, composite risk | value, min, max, normal_range, warning_range |
 | `heatmap` | Plasma density, attention weights, correlation | x_labels, y_labels, values (row-major), unit |
+| `scatter` | 2D scatter (PCoA, UMAP) | x, y, point_labels, x_label, y_label, unit |
 | `scatter3d` | PCoA ordination, phase space, latent embeddings | x, y, z, point_labels, unit |
 | `fieldmap` | ET0 maps, Richards PDE, sensor grids | grid_x, grid_y, values (row-major), unit |
 | `spectrum` | FFT, HRV power spectrum, noise analysis | frequencies, amplitudes, unit |
