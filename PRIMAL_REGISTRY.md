@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 8, 2026
+**Last Updated**: March 10, 2026
 
 ---
 
@@ -127,7 +127,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — S135 (March 8, 2026) — 19,840+ workspace tests, 0 clippy warnings, 0 failures, 85+ JSON-RPC methods (dynamically built), ~86% line coverage, BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants
+**Status**: Production Ready (A++ GOLD STANDARD) — S141 (March 10, 2026) — 19,840+ workspace tests, 0 clippy warnings, 0 failures, 85+ JSON-RPC methods (dynamically built), ~86% line coverage, BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, clippy pedantic `--all-targets` clean (S141), zero-copy GPU binary payloads
 
 **Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
@@ -190,7 +190,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 22 (A+) — 1189 tests passing, 36 ignored, 63% line coverage, 86 cross-spring WGSL shaders (79 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (4/10 passing), tarpc uses bincode for binary IPC, full codebase audit clean (no mocks in production, no hardcoded primal names, pure Rust deps), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired (awaiting Titan V / RTX 3090 validation), zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 6/8 crates, AGPL-3.0-only
+**Status**: Phase 10 Iteration 27 (A+) — 1401 tests passing, 24/24 spring absorption passing, 63% line coverage, 86 cross-spring WGSL shaders (79 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip, tarpc uses bincode for binary IPC, full codebase audit clean (no mocks in production, no hardcoded primal names, pure Rust deps), AMD E2E verified on RX 6950 XT, NVIDIA E2E fully wired, zero clippy warnings, zero production `unwrap()`/`todo!()`, `#[deny(unsafe_code)]` on 6/8 crates, multi-GPU sovereignty (Iter 24), math debt elimination (Iter 25), sovereign pipeline unblock (Iter 26), deep debt evolution (Iter 27), AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL and SPIR-V compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified — WGSL compile, PM4 dispatch, GPU execution, host readback. coralDriver provides userspace GPU dispatch via DRM ioctl. coralGpu unifies compilation and dispatch into a single API. Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 

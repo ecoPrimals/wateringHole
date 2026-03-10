@@ -1,6 +1,6 @@
 # Pure Rust Sovereign Stack — Cross-Primal Guidance
 
-**Date**: March 9, 2026
+**Date**: March 10, 2026
 **Type**: Ecosystem Standard (Evolution)
 **From**: barraCuda (Layer 1 complete)
 **To**: coralReef, toadStool, all primals
@@ -28,11 +28,11 @@ and the math runs forever.
 
 ---
 
-## Current Status (March 9, 2026)
+## Current Status (March 10, 2026)
 
 ### Layer 0 — Infrastructure C Elimination: toadStool COMPLETE
 
-**Zero sysinfo. Zero direct libc.** toadStool S137 eliminated the largest C
+**Zero sysinfo. Zero direct libc.** toadStool S137-S141 eliminated the largest C
 surface in any primal by replacing `sysinfo` (15 transitive crates → libc FFI)
 with `toadstool-sysmon` — pure Rust `/proc` parsing + `rustix` `statvfs`.
 
@@ -70,7 +70,7 @@ barraCuda achieved this by:
 Transitive C boundaries (wgpu → ash → libvulkan.so, tokio → libc) are
 system-level and evolve via Layers 2-4, not Layer 1.
 
-### Layer 2 — coralReef: Phase 10 Iteration 24, Multi-GPU Sovereign
+### Layer 2 — coralReef: Phase 10 Iteration 27, Deep Debt Evolution
 
 coralReef is a sovereign Rust GPU shader compiler. NVIDIA backend (SM70–SM89)
 and AMD backend (RDNA2 GFX1030) operational with E2E dispatch verified on
