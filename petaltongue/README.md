@@ -8,19 +8,22 @@ Cross-primal integration documentation for petalTongue.
 
 ## Integration Status
 
-petalTongue v1.5.0 (16 crates, edition 2024):
-- 2,011 tests passing, 0 failures
+petalTongue v1.6.0 (16 crates, edition 2024):
+- 2,025 tests passing, 0 failures
 - `#![forbid(unsafe_code)]` workspace-wide (core, telemetry, ui, scene, headless, all others)
-- JSON-RPC 2.0 over Unix sockets (primary IPC), 16 visualization methods
+- JSON-RPC 2.0 over Unix sockets (primary IPC), 16+ visualization methods
 - tarpc binary RPC (secondary, zero-copy `bytes::Bytes`)
 - HTTP fallback for browser/external clients
 - Capability-based discovery via Songbird
 - Grammar of Graphics engine with Tufte constraint validation
-- **DataBinding auto-compiler**: All 8 DataBinding variants (TimeSeries, Distribution, Bar, Gauge, Spectrum, Heatmap, Scatter3D, FieldMap) auto-compile to Grammar of Graphics
+- **DataBinding auto-compiler**: All 9 DataBinding variants (TimeSeries, Distribution, Bar, Gauge, Spectrum, Heatmap, Scatter, Scatter3D, FieldMap) auto-compile to Grammar of Graphics
 - **Dashboard layout engine**: Multi-panel grid with domain theming and SVG/description export
 - **Scenario loader**: Load healthSpring-style JSON scenarios from disk with `--scenario` CLI flag
+- **Faceting**: `compile_faceted()` for small multiples (Wrap/Grid layouts)
+- **Threshold coloring**: `compile_with_thresholds()` for normal/warning/critical cell colors in heatmaps
+- **Tile/Arc geometry**: Real heatmap/fieldmap tile rendering, semicircular gauge arcs
 - Domain-aware rendering (6 palettes: health, physics, ecology, agriculture, measurement, neural)
-- Spring IPC: healthSpring DataChannel auto-compile, dashboard render, wetSpring Spectrum, physics bridge
+- Spring IPC: healthSpring DataChannel auto-compile, dashboard render, wetSpring Scatter/Spectrum, physics bridge, interaction method aliases
 - Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, SVG, headless
 - Scene graph with Manim-style animation, modality compilers (SVG, audio, description, terminal)
 
@@ -155,6 +158,9 @@ Legacy: `/tmp/petaltongue.sock`
 | `interaction.subscribe` | Inbound | Subscribe to interaction events (callback or poll) |
 | `interaction.poll` | Inbound | Poll pending interaction events |
 | `interaction.unsubscribe` | Inbound | Remove interaction subscription |
+| `visualization.interact.subscribe` | Inbound | Alias for `interaction.subscribe` (wetSpring compat) |
+| `visualization.interact.poll` | Inbound | Alias for `interaction.poll` (wetSpring compat) |
+| `visualization.interact.unsubscribe` | Inbound | Alias for `interaction.unsubscribe` (wetSpring compat) |
 | `visualization.interact.apply` | Inbound | Programmatic interaction (zoom, filter, select) |
 | `visualization.interact.perspectives` | Inbound | List active perspective views |
 | `motor.*` | Outbound | Motor commands to springs |
