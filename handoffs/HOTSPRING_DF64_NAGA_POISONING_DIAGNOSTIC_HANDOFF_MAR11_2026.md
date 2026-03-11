@@ -133,11 +133,11 @@ the naga bug. Requires upstream barraCuda buffer format changes.
 
 ## Action Items for coralReef
 
-- [x] Add `yukawa_force_df64.wgsl` to sovereign compiler corpus — **DONE** (Iter 33, `nvvm_poisoning_validation.rs`)
-- [ ] Validate sovereign-compiled DF64 Yukawa produces non-zero forces — requires DRM dispatch (hardware)
-- [ ] Investigate whether `df64_preamble.wgsl` (coralReef's simpler impl) avoids the naga bug — hotSpring can test via wgpu path
+- [ ] Add `yukawa_force_df64.wgsl` to sovereign compiler corpus
+- [ ] Validate sovereign-compiled DF64 Yukawa produces non-zero forces
+- [ ] Investigate whether `df64_preamble.wgsl` (coralReef's simpler impl) avoids the naga bug
 - [ ] Consider filing naga bug for mixed f64/f32 SPIR-V codegen
-- [ ] Track DRM dispatch readiness for compute shaders — Nouveau UAPI (Iter 31), nvidia-drm UVM (Iter 31)
+- [ ] Track DRM dispatch readiness for compute shaders
 
 ## Action Items for barraCuda
 
