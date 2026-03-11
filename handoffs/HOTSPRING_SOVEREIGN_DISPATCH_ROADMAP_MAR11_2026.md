@@ -257,7 +257,166 @@ All springs benefit:
 
 ---
 
-## 5. Specific Next Steps (Prioritized)
+## 5. Cooperative GPU Learning — 4070 Teaches Titan V
+
+### The idea
+
+eastgate (wetSpring/neuralSpring dev machine) has **both an RTX 4070 AND
+a Titan V**. The 4070's GSP firmware successfully initializes compute — the
+Titan V's compute is blocked by missing PMU firmware. If we can observe
+what the 4070's GSP does to bring up compute and distill that into a
+replayable sequence, we can teach the Titan V to initialize itself.
+
+This is not just a one-off hack. It's a **cooperative hardware learning
+system** — a software layer that observes working GPUs, extracts
+initialization patterns, and applies them to GPUs that lack firmware.
+
+### Architecture: `nvLearn` — Cross-GPU Initialization Learning
+
+```
+                    ┌─────────────────────────────────────┐
+                    │  nvLearn (Cooperative GPU Learning)  │
+                    └──────────┬──────────────────────────┘
+                               │
+         ┌─────────────────────┼─────────────────────────┐
+         ▼                     ▼                          ▼
+   ┌───────────┐      ┌──────────────┐          ┌──────────────┐
+   │  Observer  │      │  Knowledge   │          │  Applicator  │
+   │  (4070)    │      │  Store       │          │  (Titan V)   │
+   └─────┬─────┘      └──────┬───────┘          └──────┬───────┘
+         │                    │                         │
+    Traces GSP          Stores register           Replays learned
+    init sequence       write sequences           sequences on
+    via MMIO log        per GPU generation        target GPU
+    or ioctl trace      + arch signatures
+```
+
+### How it works
+
+**Phase 1: Observe (on RTX 4070)**
+
+When the 4070 initializes compute via GSP, the kernel performs a series
+of register writes, memory allocations, and engine configurations. We
+capture this by:
+
+1. **MMIO trace**: `nouveau` has `mmiotrace` support in the kernel.
+   Boot with `trace_options=mmiotrace`, initialize compute, capture the
+   register write log.
+2. **GSP RPC log**: nouveau logs GSP RPC commands at debug level.
+   `dmesg` with `nouveau.debug=trace` captures the full RPC sequence.
+3. **ioctl trace**: `strace` on NVK (Mesa Vulkan) to capture the exact
+   ioctl sequence that creates a working compute channel.
+
+**Phase 2: Distill**
+
+The raw traces are noisy (thousands of register writes for display, audio,
+etc.). The learning system:
+
+1. Diff the trace WITH compute vs WITHOUT compute — isolate compute-specific
+   register writes
+2. Classify registers by function (clock, power, engine enable, channel)
+3. Build a minimal "compute initialization recipe" for the GPU architecture
+4. Tag the recipe with generation metadata (SM version, chip family)
+
+**Phase 3: Apply (on Titan V)**
+
+The Titan V shares significant register-level architecture with later
+generations (Volta → Turing → Ampere share the compute engine design).
+The applicator:
+
+1. Maps 4070 (AD104) register addresses to Titan V (GV100) equivalents
+   using public NVIDIA hardware documentation + envytools register database
+2. Applies the minimal compute initialization sequence via MMIO or
+   nouveau debugfs
+3. Attempts `CHANNEL_ALLOC` after initialization
+4. Validates with a simple compute dispatch
+
+### What makes this feasible
+
+- **Register address databases exist**: envytools (nouveau project) has
+  extensive register maps for all NVIDIA generations
+- **Compute engine is architecturally stable**: Volta → Ada share the same
+  fundamental compute engine design (warps, SMs, compute classes)
+- **nouveau already does partial init**: The Titan V gets display working
+  without PMU — only the compute engine init is missing
+- **We have both GPUs on one machine**: eastgate can run observer +
+  applicator simultaneously, comparing behavior in real time
+
+### Cross-spring evolution
+
+This system embodies the ecoPrimals philosophy — primals that learn from
+their environment and evolve. The knowledge flows both ways:
+
+```
+4070 (Ada, GSP)  ──teaches──►  Titan V (Volta, no PMU)
+     │                              │
+     │  "Here's how I init          │  "I'll try those register
+     │   compute engines"           │   writes adapted for GV100"
+     │                              │
+     ▼                              ▼
+Knowledge Store ◄──validates──  Success/failure feedback
+     │
+     ▼
+Can teach ANY GPU missing firmware:
+  - Turing without GSP → learn from Ampere
+  - Ampere without GSP → learn from Ada
+  - Future unknown → learn from working neighbor
+```
+
+### eastgate test plan
+
+**Owner:** wetSpring + neuralSpring teams
+**Hardware:** eastgate — RTX 4070 (AD104) + Titan V (GV100)
+**Kernel:** 6.6+ required (new nouveau UAPI)
+
+```
+Week 1: Observe
+  1. Boot eastgate with both GPUs on nouveau
+  2. Run coralReef diag_ioctl on BOTH GPUs — capture baseline
+  3. If 4070 CHANNEL_ALLOC succeeds:
+     a. Run bench_sovereign_dispatch on 4070
+     b. Capture dmesg GSP RPC log (nouveau.debug=trace)
+     c. Capture mmiotrace of compute initialization
+  4. If 4070 CHANNEL_ALLOC fails:
+     a. Check kernel version (need 6.6+)
+     b. Check GSP firmware loading in dmesg
+     c. Compare with NVK ioctl trace (strace vulkaninfo)
+
+Week 2: Distill
+  5. Diff compute vs no-compute traces
+  6. Identify compute-specific register writes
+  7. Map registers to envytools database
+  8. Build GV100 equivalent register map
+
+Week 3: Apply
+  9. Write register programming tool (Rust, uses nouveau debugfs)
+  10. Apply minimal compute init on Titan V
+  11. Test CHANNEL_ALLOC after init
+  12. If successful: run full hotSpring benchmark
+
+Week 4: Generalize
+  13. Package as nvLearn crate
+  14. Document the learned initialization sequences
+  15. Handoff to toadStool for hardware discovery integration
+```
+
+### Integration with nvPmu
+
+`nvLearn` and `nvPmu` are complementary:
+
+| Tool | Purpose | Scope |
+|------|---------|-------|
+| **nvPmu** | Power/thermal/clock management | All GPUs, immediate |
+| **nvLearn** | Compute init learning from working GPUs | Cross-generation, research |
+
+Both feed into toadStool's hardware capability model and coralReef's
+dispatch routing. Together they form a **sovereign GPU enablement stack**
+that progressively unlocks compute on every NVIDIA card without depending
+on proprietary firmware distribution.
+
+---
+
+## 6. Specific Next Steps (Prioritized)
 
 ### P0 — Immediate (this week)
 
@@ -269,33 +428,60 @@ All springs benefit:
 
 4. **coralReef**: Wire `UVM_REGISTER_GPU` + GPU UUID query
 5. **coralReef**: Implement `RM_ALLOC(AMPERE_COMPUTE_A)` for RTX 3090
-6. **Anyone with RTX 4070**: Test nouveau + `diag_ioctl` on Ada Lovelace
+6. **wetSpring + neuralSpring (eastgate)**: Test nouveau + `diag_ioctl` on
+   RTX 4070 (AD104) — GSP compute validation. eastgate has both 4070 AND
+   Titan V, making it the ideal testbed for cross-GPU learning.
+7. **wetSpring + neuralSpring (eastgate)**: If 4070 works, capture GSP RPC
+   + mmiotrace logs for the nvLearn knowledge store
 
 ### P2 — Medium term (2-3 iterations)
 
-7. **coralReef**: Complete UVM dispatch pipeline (alloc → map → submit → sync)
-8. **toadStool**: Add PMU/GSP firmware probe to hardware discovery
-9. **New crate**: `nvPmu` Phase 1 — power monitoring via hwmon/sysfs
+8. **coralReef**: Complete UVM dispatch pipeline (alloc → map → submit → sync)
+9. **toadStool**: Add PMU/GSP firmware probe to hardware discovery
+10. **New crate**: `nvPmu` Phase 1 — power monitoring via hwmon/sysfs
+11. **wetSpring + neuralSpring (eastgate)**: Begin nvLearn Phase 1 —
+    observe GSP init on 4070, diff against Titan V, build register map
 
 ### P3 — Long term (evolution)
 
-10. **nvPmu**: Phase 2 — GSP compute enablement for Turing+
-11. **nvPmu**: Phase 3 — Volta PMU investigation
-12. **barraCuda**: Integrate `nvPmu`-managed dispatch as fourth backend tier
+12. **nvPmu**: Phase 2 — GSP compute enablement for Turing+
+13. **nvLearn**: Phase 3 — Apply learned init sequences to Titan V on eastgate
+14. **barraCuda**: Integrate `nvPmu`/`nvLearn`-managed dispatch as fourth backend tier
+15. **All springs**: Package nvLearn knowledge store so any ecoPrimals machine
+    with a working GPU can teach its neighbors
 
 ---
 
-## 6. Hardware Test Matrix for Validation
+## 7. Hardware Test Matrix for Validation
 
-To fully validate the sovereign dispatch stack, we need at minimum:
+### Available test rigs
 
-| GPU | Driver | Tests | Purpose |
-|-----|--------|-------|---------|
-| Any AMD (RX 6000+) | amdgpu | Full E2E | Baseline reference |
-| RTX 4070/4080/4090 | nouveau | diag_ioctl + bench | GSP compute validation |
-| RTX 3060/3070/3090 | nvidia-drm | UVM pipeline | Proprietary dispatch |
-| RTX 2070/2080 | nouveau | diag_ioctl | Turing GSP validation |
-| Titan V / V100 | nouveau | diag_ioctl | Volta PMU investigation |
+| Machine | GPUs | Driver Config | Owner |
+|---------|------|--------------|-------|
+| **hotSpring rig** | RTX 3090 (GA102) + Titan V (GV100) | nvidia-drm + nouveau | hotSpring |
+| **eastgate** | RTX 4070 (AD104) + Titan V (GV100) | nouveau + nouveau | wetSpring + neuralSpring |
+
+### Test matrix
+
+| GPU | Machine | Driver | Tests | Purpose |
+|-----|---------|--------|-------|---------|
+| RTX 4070 | eastgate | nouveau | diag_ioctl + bench | **GSP compute (highest priority)** |
+| Titan V | eastgate | nouveau | diag_ioctl + nvLearn | Cross-GPU learning target |
+| RTX 3090 | hotSpring rig | nvidia-drm | UVM pipeline | Proprietary dispatch path |
+| Titan V | hotSpring rig | nouveau | diag_ioctl | PMU investigation baseline |
+| Any AMD | TBD | amdgpu | Full E2E | Baseline reference (already verified) |
+
+### eastgate is the key
+
+eastgate is uniquely positioned: it has a 4070 (GSP-only, Ada Lovelace)
+AND a Titan V (no PMU, Volta) in the same machine. This enables:
+
+1. **Simultaneous testing** — run diag_ioctl on both GPUs in one session
+2. **Cross-GPU tracing** — observe what GSP does on the 4070, apply to Titan V
+3. **Real-time validation** — if learned init works, immediately benchmark
+4. **Two springs developing** — wetSpring (bio compute) and neuralSpring
+   (ML) both benefit from unlocked hardware and can share the workload
 
 The RTX 4070 test is the **highest ROI** — if GSP works on Ada, it
-retroactively proves Turing and Ampere via the same code path.
+retroactively proves Turing and Ampere via the same code path. And with
+the Titan V right next to it, we can immediately test cross-GPU learning.
