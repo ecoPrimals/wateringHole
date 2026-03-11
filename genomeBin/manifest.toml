@@ -113,6 +113,16 @@ capabilities = ["compute", "cpu", "gpu", "wasm", "orchestration"]
 ecobin_grade = "A++"
 pie_verified = true
 
+[primals.coralreef]
+name = "coralReef"
+description = "Sovereign shader compiler - WGSL/SPIR-V/GLSL to native GPU binary, f64 transcendentals"
+latest = "0.1.0"
+versions = ["0.1.0"]
+architectures = ["x86_64-linux"]  # aarch64 pending
+capabilities = ["shader", "spirv", "wgsl", "glsl", "naga", "compile"]
+ecobin_grade = "A+"
+pie_verified = false  # Not yet released as standalone binary
+
 [primals.barracuda]
 name = "barraCuda"
 description = "Compute primal - vendor-agnostic GPU math via WGSL, DF64, FHE, scientific compute"
