@@ -22,7 +22,7 @@ airSpring (agriculture/hydro)   → Richards PDE, stats metrics, f64-canonical l
 groundSpring (noise validation) → error handling patterns, validation harness
                                   ↓
                           BarraCUDA S93 + DF64
-                     3,100+ tests, 786 WGSL shaders
+                     3,348+ tests, 803 WGSL shaders
 ```
 
 ---
@@ -316,9 +316,9 @@ reduced barracuda's binary size and startup cost, benefiting all consumer Spring
 
 ---
 
-## barraCuda v0.3.3 Evolution (March 2026)
+## barraCuda v0.3.5 Evolution (March 2026)
 
-The standalone extraction (v0.3.0) and subsequent evolution (v0.3.1 → v0.3.3)
+The standalone extraction (v0.3.0) and subsequent evolution (v0.3.1 → v0.3.5)
 marks a phase shift where cross-spring absorption accelerates:
 
 ### What evolved

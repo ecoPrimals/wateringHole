@@ -159,7 +159,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Pure mathematics — WGSL shaders, precision strategy, naga IR optimisation  
 **Phase**: Foundation  
-**Status**: Production Ready (A+) — v0.3.4 — 3,500+ tests, 712 WGSL f64 shaders, 1,055 Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, NVVM device poisoning guard (all proprietary NVIDIA architectures), DF64 safety probing (`df64_arith`, `df64_transcendentals_safe`), `NvvmDf64TranscendentalPoisoning` workaround, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin); budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
+**Status**: Production Ready (A+) — v0.3.5 — 3,348+ tests, 803 WGSL shaders, 1,060+ Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, NVVM device poisoning guard (all proprietary NVIDIA architectures), DF64 safety probing (`df64_arith`, `df64_transcendentals_safe`), `NvvmDf64TranscendentalPoisoning` workaround, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin), FMA policy, health module (pkpd, microbiome, biosignal), stable GPU special functions; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
 
 **Role**: BarraCuda is pure math. All math originates as WGSL shaders authored in f64 as the canonical precision. BarraCuda does not care about hardware — it writes the mathematics, coralReef compiles it, toadStool discovers and dispatches it. The precision tier (`Fp64Strategy`: f32 / f64 / df64) is the interface between barraCuda and coralReef. naga-IR optimisation (FMA fusion, DCE) operates on the math, not the hardware. Currently uses wgpu as a transitional dispatch substrate until coralReef's sovereign dispatch pipeline is integrated.
 
@@ -423,14 +423,14 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | neuralSpring | V91/S135 |
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
-| barraCuda | v0.3.4 (3,500+ tests, AGPL-3.0-only, NVVM poisoning guarded, cross-spring absorption sprint) |
+| barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 29 |
 
 ### airSpring - Ecological & Agricultural Sciences
 
 **Domain**: Precision agriculture, irrigation science, environmental systems  
 **Phase**: Domain Validation  
-**Status**: v0.7.5 — 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28 NVK driver issue), 86 binaries, 78 experiments, 381/381 validation, 146/146 evolution, 20.6× CPU speedup (24/24 parity), 0 clippy warnings (pedantic+nursery), zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.3 (a898dee) (wgpu 28, DF64 precision tier, 3/6 local ops absorbed upstream, fused Welford + fused Pearson wired)
+**Status**: v0.7.5 — 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28 NVK driver issue), 86 binaries, 78 experiments, 381/381 validation, 146/146 evolution, 20.6× CPU speedup (24/24 parity), 0 clippy warnings (pedantic+nursery), zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.5 (wgpu 28, DF64 precision tier, 3/6 local ops absorbed upstream, fused Welford + fused Pearson wired)
 
 **Role**: airSpring validates agricultural computational methods — FAO-56 ET₀ (8 methods), soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, ecological diversity, immunological Anderson coupling, and SCS-CN/Green-Ampt hydrology — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
 
