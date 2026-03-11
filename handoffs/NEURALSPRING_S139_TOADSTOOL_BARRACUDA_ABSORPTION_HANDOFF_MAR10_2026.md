@@ -160,7 +160,7 @@ These neuralSpring APIs were documented for absorption but haven't landed in bar
 |-------|--------|
 | `cargo check` | PASS |
 | `cargo test --lib` | 1048/1048 PASS |
-| `cargo clippy --all-targets -- -D warnings` | 0 warnings |
+| `cargo clippy --all-targets --all-features -- -D warnings` | 0 warnings |
 | `cargo doc --no-deps` | 0 warnings |
 | `cargo fmt --check` | clean |
 
