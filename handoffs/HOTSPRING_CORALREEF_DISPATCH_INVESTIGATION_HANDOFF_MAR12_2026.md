@@ -282,4 +282,67 @@ nouveau 0000:4b:00.0: fifo:000000:0002:0002:[...] errored - disabling channel
 
 ---
 
-*Updated by hotSpring dispatch investigation, March 12, 2026*
+## Sovereign BAR0 GR Init — IMPLEMENTED (March 12, later)
+
+**BREAKTHROUGH**: hotSpring implemented sovereign BAR0 MMIO GR init in coralReef,
+bypassing the nouveau kernel driver's broken compute context initialization.
+
+### Architecture
+
+```
+Phase 0: try_bar0_gr_init()        ← NEW: BAR0 PGRAPH register writes
+Phase 1: VM_INIT                   ← existing
+Phase 2: CHANNEL_ALLOC             ← should now find valid GR context
+Phase 3: try_fecs_channel_init()   ← NEW: low-address FECS methods
+Phase 4: dispatch()                ← existing compute dispatch
+```
+
+### Key Discovery: Address-Aware Split
+
+The `split_for_application()` function was routing by category (MethodInit → FECS),
+but the firmware addresses determine the correct destination:
+
+- `offset <= 0x7FFC`: Valid push buffer method (13-bit encoding) → FECS channel
+- `offset > 0x7FFC`: BAR0 register address → sovereign MMIO
+
+| GPU | BAR0 writes | FECS entries | Total |
+|-----|------------|-------------|-------|
+| RTX 3090 (GA102) | 2972 | 0 | 2972 |
+| Titan V (GV100) | 1570 | 927 | 2497 |
+
+GA102 has ZERO push buffer methods — 100% sovereign BAR0.
+GV100 is hybrid: 63% BAR0 + 37% FECS channel methods.
+
+### New Files
+
+- `crates/coral-driver/src/nv/bar0.rs` — BAR0 MMIO access
+- `crates/coral-driver/src/gsp/applicator.rs` — address-aware split (modified)
+- `crates/coral-driver/src/nv/mod.rs` — phased device open (restructured)
+- `crates/coral-driver/tests/hw_nv_nouveau.rs` — sovereign BAR0 diagnostic test
+
+### Three Dispatch Paths
+
+| Path | Description | Status |
+|------|------------|--------|
+| **Sovereign BAR0** | BAR0 MMIO + nouveau channel | IMPLEMENTED, needs sudo validation |
+| **UVM** | nvidia proprietary driver | IMPLEMENTED, needs nvidia module |
+| **Nouveau only** | kernel GR init | Broken on kernel 6.17 (CTXNOTVALID) |
+
+### Validation Commands
+
+```bash
+# Enable BAR0 access
+sudo chmod 666 /sys/class/drm/renderD*/device/resource0
+
+# Run diagnostic
+ARGV0=cargo cargo test --test hw_nv_nouveau --features nouveau -- \
+  --ignored --nocapture nouveau_sovereign_bar0_diagnostic
+
+# Run full dispatch test with BAR0 GR init
+ARGV0=cargo cargo test --test hw_nv_nouveau --features nouveau -- \
+  --ignored --nocapture nouveau_dispatch_diagnostic
+```
+
+---
+
+*Updated by hotSpring sovereign BAR0 implementation, March 12, 2026*

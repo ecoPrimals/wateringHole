@@ -1,7 +1,7 @@
 # Sovereign Compute Evolution — Pure Rust GPU Stack
 
-**Date**: March 12, 2026 (updated — 5 of 6 gaps CLOSED, FECS GR init wired, pipeline nearly complete)
-**From**: hotSpring v0.6.31 (validated by hardware testing on Titan V + RTX 3090)
+**Date**: March 12, 2026 (updated — sovereign BAR0 GR init IMPLEMENTED, address-aware split wired)
+**From**: hotSpring v0.6.31 (sovereign BAR0 path implemented in coralReef)
 **To**: All primals — toadStool, barraCuda, coralReef, springs
 **Type**: Long-term architecture evolution plan
 **Goal**: Replace every non-Rust dependency in the GPU compute path with
@@ -72,11 +72,43 @@ sovereign Rust implementations, scaffolded off existing open-source systems.
 > - These need BAR0 MMIO access (toadStool nvPmu) or kernel-level init
 > - NVK (Mesa Vulkan) likely handles this via a separate PGRAPH init path
 >
-> The fix requires one of:
-> 1. **Kernel patch**: nouveau channel creation binds compute engine context
-> 2. **NVK-style init**: replicate NVK's PGRAPH/compute context setup sequence
-> 3. **BAR0 MMIO**: toadStool nvPmu writes register init sequence (requires root)
-> 4. **UVM path**: use nvidia-drm proprietary driver for compute (Gap 2)
+> **March 12 update (sovereign BAR0 GR init implemented)**:
+> hotSpring implemented the **sovereign BAR0 dispatch path** in coralReef:
+>
+> **New code added:**
+> - `nv/bar0.rs`: Pure Rust BAR0 MMIO via sysfs `resource0` mmap, implements
+>   `RegisterAccess` trait with volatile read/write. Resolves PCI BAR from
+>   DRM render node path. 16 MiB mapping per GPU.
+> - `gsp/applicator.rs`: **Address-aware split** — entries with offsets > 0x7FFC
+>   now correctly route to BAR0 instead of FECS channel. Push buffer method
+>   headers use 13-bit encoding (max 0x7FFC); anything above is a register.
+> - `nv/mod.rs`: `try_bar0_gr_init()` runs BEFORE channel creation (Phase 0),
+>   writing PGRAPH registers via BAR0 MMIO. `try_fecs_channel_init()` (Phase 3)
+>   handles remaining low-address FECS methods after channel creation.
+>
+> **Firmware analysis (address-aware split results):**
+> | GPU | BAR0 writes | FECS entries | Total |
+> |-----|------------|-------------|-------|
+> | RTX 3090 (GA102) | 2972 | 0 | 2972 |
+> | Titan V (GV100) | 1570 | 927 | 2497 |
+>
+> GA102: ALL init is BAR0 register writes — zero push buffer methods.
+> GV100: hybrid — 1570 BAR0 register writes + 927 valid FECS channel methods.
+>
+> **Validation needed**: Run with `sudo` for BAR0 sysfs access:
+> ```
+> sudo chmod 666 /sys/class/drm/renderD*/device/resource0
+> cargo test --test hw_nv_nouveau --features nouveau -- --ignored --nocapture nouveau_sovereign_bar0_diagnostic
+> cargo test --test hw_nv_nouveau --features nouveau -- --ignored --nocapture nouveau_dispatch_diagnostic
+> ```
+>
+> **Three dispatch paths now available:**
+> 1. **Sovereign BAR0 + nouveau** (Path A): BAR0 GR init → channel → dispatch. Needs root.
+> 2. **UVM** (Path B): Full proprietary driver bypass. Needs nvidia module.
+> 3. **Nouveau only** (fallback): Depends on kernel GR init. Current default.
+>
+> The previous list of fixes remains valid for context, but Path A (BAR0) is
+> now the primary sovereign approach — no kernel patch needed.
 
 ---
 
