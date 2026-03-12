@@ -3,7 +3,7 @@
 > How the ecoPrimals Springs collectively evolved BarraCUDA into the library
 > groundSpring depends on for statistical validation.
 
-**Last Updated**: March 10, 2026
+**Last Updated**: March 11, 2026
 
 ---
 
@@ -15,14 +15,14 @@ absorption from **four Springs**, each bringing domain-specific requirements
 that hardened the shared library.
 
 ```
-hotSpring (nuclear physics)     → f64 precision, spectral theory, DF64
-wetSpring (metagenomics)        → bio-stats, Shannon entropy, log_f64 fix
-neuralSpring (ML/agents)        → spectral diagnostics, dispatch, xoshiro PRNG
+hotSpring (nuclear physics)     → f64 precision, spectral theory, DF64, Kokkos parity, sovereign compile 46/46
+wetSpring (metagenomics)        → bio-stats, Shannon entropy, log_f64 fix, O₂-modulated Anderson W, paper extension roadmap
+neuralSpring (ML/agents)        → spectral diagnostics, dispatch, xoshiro PRNG, NUCLEUS GPU dispatch, composition DAG, 25 absorbed workloads
 airSpring (agriculture/hydro)   → Richards PDE, stats metrics, f64-canonical local compute
 groundSpring (noise validation) → error handling patterns, validation harness
                                   ↓
-                          BarraCUDA S93 + DF64
-                     3,348+ tests, 803 WGSL shaders
+                          barraCuda v0.3.5 standalone
+                     719 WGSL shaders, toadStool S146, coralReef Iter 33
 ```
 
 ---
@@ -91,10 +91,16 @@ infrastructure and spectral diagnostics.
 | `boltzmann_sampling` (Metropolis MCMC) | S56 | Future MC uncertainty propagation |
 | `prng_xoshiro` GPU PRNG | S43 | PRNG alignment target for Phase 2b |
 | `TensorSession` (matmul, relu, softmax) | S20 | ML pipeline infrastructure |
-| 2,480+ validation checks | — | Validates dispatch and spectral infra |
+| 4,500+ validation checks | — | Validates dispatch and spectral infra |
 | 15 sovereign folding df64 WGSL shaders | S88 | df64 core streaming validated for ML workloads |
 | `compile_shader_f64_hybrid` pattern | S88 | Reusable df64 preamble concatenation |
 | Two-tier tolerance discovery (arith vs trans) | S88 | df64 precision characterization |
+| `chi_squared_f64.wgsl` → `FusedChiSquaredGpu` | S64→S145 | Round-trip: neuralSpring domain → upstream f64 fused → all springs |
+| `kl_divergence_f64.wgsl` → `FusedKlDivergenceGpu` | S64→S145 | Round-trip: neuralSpring domain → upstream f64 fused → all springs |
+| `PipelineGraph` DAG | S133 | Absorbed by toadStool → orchestration for all springs |
+| NUCLEUS GPU dispatch (eigensolve, attention) | S145 | GPU capability routing for NUCLEUS pipeline |
+| `enable f64;` PTXAS silent-zero fix | S142 | Critical Ada Lovelace workaround for all f64 springs |
+| `composition_pipeline()` mixed-hardware DAG | S145 | GPU+CPU stage interleaving with transfer cost |
 
 **Why it matters**: neuralSpring's `domain_ops.rs` dispatch pattern
 (`device: Option<&Arc<WgpuDevice>>`) is the blueprint for how groundSpring's
