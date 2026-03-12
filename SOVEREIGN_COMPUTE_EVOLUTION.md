@@ -57,10 +57,26 @@ sovereign Rust implementations, scaffolded off existing open-source systems.
 > - barraCuda pin updated: `82ff983` → `7c1fd03a` (deep debt sprints, +340 tests)
 > - toadStool S148-S149 reviewed: SecretString, credential chain, shader handler
 >
-> **Gap status**: 1 CLOSED, 2 partially closed → needs hw test, 3 **WIRED** → needs hw test,
+> **Gap status**: 1 CLOSED, 2 partially closed, 3 WIRED but CTXNOTVALID persists,
 > 4 CLOSED, 5 needs knowledge→init path, 6 needs error recovery.
-> The pipeline is structurally complete. Remaining: hardware validation that
-> FECS init resolves CTXNOTVALID, and the knowledge→init wiring for learned recipes.
+>
+> **March 12 update (CTXNOTVALID root cause)**: Hardware testing reveals
+> CTXNOTVALID on **both** GPUs — RTX 3090 (Ampere/GSP) AND Titan V (Volta).
+> This proves the issue is NOT missing FECS firmware but a **channel setup
+> gap in nouveau on kernel 6.17**: `CHANNEL_ALLOC` creates a channel but
+> doesn't bind the compute engine (PGRAPH) context.
+>
+> Key findings from firmware analysis:
+> - `sw_method_init.bin` entries are ALL BAR0 register addresses (0x00400000+)
+> - Zero entries are valid push buffer methods (max addr for 13-bit encoding: 0x7FFC)
+> - These need BAR0 MMIO access (toadStool nvPmu) or kernel-level init
+> - NVK (Mesa Vulkan) likely handles this via a separate PGRAPH init path
+>
+> The fix requires one of:
+> 1. **Kernel patch**: nouveau channel creation binds compute engine context
+> 2. **NVK-style init**: replicate NVK's PGRAPH/compute context setup sequence
+> 3. **BAR0 MMIO**: toadStool nvPmu writes register init sequence (requires root)
+> 4. **UVM path**: use nvidia-drm proprietary driver for compute (Gap 2)
 
 ---
 
