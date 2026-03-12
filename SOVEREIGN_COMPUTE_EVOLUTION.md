@@ -30,6 +30,20 @@ sovereign Rust implementations, scaffolded off existing open-source systems.
 > Gap 3 (FECS) remains unblocked. hotSpring v0.6.31 absorbs all three
 > primals and wires `sovereign_resolves_poisoning()` into MD precision
 > routing — DF64 transcendentals now available through sovereign bypass.
+>
+> **March 12 update (dispatch investigation)**: hotSpring deep-debugged
+> the dispatch pipeline on both Titan V and RTX 3090. Found and fixed
+> **four critical bugs** in coralReef:
+> 1. QMD field offsets entirely wrong (bit vs word misread of NVIDIA headers)
+> 2. CBUF descriptor indirection missing (shader expects descriptor, got raw VA)
+> 3. QMD version wrong for Volta (v2.1→v2.2) and missing v3.0 selection
+> 4. No sync on new UAPI path (added DRM syncobj create/signal/wait)
+>
+> **Remaining blocker**: `CTXNOTVALID` from PBDMA — the GR engine context
+> is never initialized. `sw_ctx.bin` content is parsed but discarded;
+> FECS method init sequence is built but never submitted. coralReef has
+> the pieces (`gsp/gr_init.rs`, `gsp/applicator.rs`) but needs integration
+> into the dispatch path. See `handoffs/HOTSPRING_CORALREEF_DISPATCH_INVESTIGATION_HANDOFF_MAR12_2026.md`.
 
 ---
 
