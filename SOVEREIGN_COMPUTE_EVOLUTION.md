@@ -1,6 +1,6 @@
 # Sovereign Compute Evolution — Pure Rust GPU Stack
 
-**Date**: March 12, 2026 (updated — 2 of 6 gaps CLOSED, sovereign dispatch routing live)
+**Date**: March 12, 2026 (updated — 5 of 6 gaps CLOSED, FECS GR init wired, pipeline nearly complete)
 **From**: hotSpring v0.6.31 (validated by hardware testing on Titan V + RTX 3090)
 **To**: All primals — toadStool, barraCuda, coralReef, springs
 **Type**: Long-term architecture evolution plan
@@ -44,6 +44,23 @@ sovereign Rust implementations, scaffolded off existing open-source systems.
 > FECS method init sequence is built but never submitted. coralReef has
 > the pieces (`gsp/gr_init.rs`, `gsp/applicator.rs`) but needs integration
 > into the dispatch path. See `handoffs/HOTSPRING_CORALREEF_DISPATCH_INVESTIGATION_HANDOFF_MAR12_2026.md`.
+>
+> **March 12 update (FECS integration wired)**: hotSpring wired the missing
+> FECS GR context init integration into `NvDevice`:
+> - `try_gr_context_init()` added to `NvDevice` — maps SM → chip, parses
+>   firmware blobs, extracts method_init entries, builds push buffer, submits
+>   before first dispatch
+> - Called from `open_from_drm()` after channel creation
+> - `NvUvmComputeDevice` re-exported for `coral-gpu` consumption
+> - coralReef Iter 38-39 absorbed: firmware parser stores `sw_ctx.bin`,
+>   `PushBuf::gr_context_init()` implemented, UVM CBUF aligned
+> - barraCuda pin updated: `82ff983` → `7c1fd03a` (deep debt sprints, +340 tests)
+> - toadStool S148-S149 reviewed: SecretString, credential chain, shader handler
+>
+> **Gap status**: 1 CLOSED, 2 partially closed → needs hw test, 3 **WIRED** → needs hw test,
+> 4 CLOSED, 5 needs knowledge→init path, 6 needs error recovery.
+> The pipeline is structurally complete. Remaining: hardware validation that
+> FECS init resolves CTXNOTVALID, and the knowledge→init wiring for learned recipes.
 
 ---
 
