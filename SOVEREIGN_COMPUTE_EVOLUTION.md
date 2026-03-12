@@ -1,11 +1,15 @@
 # Sovereign Compute Evolution — Pure Rust GPU Stack
 
-**Date**: March 10, 2026 (updated — Layers 1-2 complete)
+**Date**: March 12, 2026 (updated — Layers 1-2 complete, GSP Phase 2 done, wiring gaps identified)
 **From**: hotSpring (validated by Kokkos-CUDA parity testing)
 **To**: All primals — toadStool, barraCuda, coralReef, springs
 **Type**: Long-term architecture evolution plan
 **Goal**: Replace every non-Rust dependency in the GPU compute path with
 sovereign Rust implementations, scaffolded off existing open-source systems.
+
+> **March 12 update**: All components exist. Six wiring gaps remain.
+> See `handoffs/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md`
+> for the detailed gap analysis, ownership matrix, and execution plan.
 
 ---
 
@@ -131,6 +135,10 @@ bincode for high-performance binary IPC. Capability-based discovery.
 - [x] tarpc + bincode binary IPC; JSON-RPC 2.0 primary
 - [x] 1401 tests, 63% line coverage, 86 cross-spring WGSL shaders (79 compiling SM70), GLSL 450 + SPIR-V roundtrip
 - [x] Multi-GPU sovereignty (Iter 24), math debt elimination (Iter 25), sovereign pipeline unblock (Iter 26), deep debt evolution (Iter 27)
+- [x] **Sovereign GSP Phase 2** (March 12): firmware parser (22 chips, legacy + NET_img.bin),
+  cross-architecture knowledge base (address space awareness, register transfer maps),
+  dispatch optimizer (workgroup sizing, FP64 hints), BAR0 applicator (pre-init + verify)
+- [ ] **Remaining**: `dispatch_binary` wiring, FECS channel submission, UVM dispatch path
 
 **Architecture**:
 ```
@@ -152,7 +160,7 @@ the ~35K LOC is tractable in weeks, not months.
 
 ### Level 3 — Standalone coralNak Crate (1-2 months)
 
-**Status**: ⬜ Not started (depends on Level 2)
+**Status**: 🔄 Partially achieved — coralReef already compiles standalone; `coral-gpu` provides clean API
 
 **What**: Extract NAK from Mesa's build system into a standalone Rust crate.
 Make it a first-class barraCuda dependency. Enable WGSL → ISA direct path
@@ -183,7 +191,7 @@ Multi-vendor ISA from one Rust toolchain.
 
 ### Level 4 — Sovereign Compute Runtime (3-6 months)
 
-**Status**: ⬜ Not started (depends on Level 3)
+**Status**: 🔄 Core implemented — coral-driver has AMD + nouveau DRM dispatch; UVM path stubbed; GSP learning system operational
 
 **What**: Replace NVK/Vulkan with a minimal pure-Rust compute runtime.
 Direct GPU memory management, command submission, and kernel dispatch
@@ -354,6 +362,8 @@ Sovereign, organic, accumulative.
 
 - `wateringHole/PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — cross-primal
   guidance for coralReef Layer 2-4 evolution (contracts, safe evolution paths)
+- `wateringHole/handoffs/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md` —
+  detailed gap analysis with ownership, priority, and acceptance criteria
 - `barraCuda/PURE_RUST_EVOLUTION.md` — barraCuda layer status tracker
 - `barraCuda/specs/REMAINING_WORK.md` — barraCuda remaining work items
 - `barraCuda/WHATS_NEXT.md` — C dependency chain evolution map

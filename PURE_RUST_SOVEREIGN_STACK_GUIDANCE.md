@@ -1,10 +1,14 @@
 # Pure Rust Sovereign Stack — Cross-Primal Guidance
 
-**Date**: March 10, 2026
+**Date**: March 12, 2026 (updated)
 **Type**: Ecosystem Standard (Evolution)
 **From**: barraCuda (Layer 1 complete)
 **To**: coralReef, toadStool, all primals
-**Status**: Active — Layer 1 done, Layers 2-4 in progress
+**Status**: Active — Layers 1-2 done, Layer 3 partial, Layer 4 in progress
+
+> **March 12 update**: Sovereign GSP Phase 2 complete. 22 chip firmware
+> parsed, cross-architecture learning operational. Six wiring gaps remain —
+> see `handoffs/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md`.
 
 ---
 
@@ -114,6 +118,18 @@ fully wired (GEM, PM4, CS submit, fence sync) with E2E verified. NVIDIA nouveau
 has full channel/pushbuf/QMD dispatch (pending hardware validation on Titan V).
 NVIDIA `nvidia-drm` probes proprietary driver (UVM integration needed for compute).
 All drivers compile by default, selected at runtime via `DriverPreference`.
+
+**Sovereign GSP** (March 12): `coral-driver::gsp` provides a learned GPU
+initialization system that parses firmware from 22 NVIDIA chips (Maxwell through
+Ampere), builds cross-architecture register transfer maps, and produces dispatch
+hints. The system identified that GV100 (Volta) can be initialized using Pascal
+(gp10b) firmware patterns at 98.2% register coverage. BAR0 pre-init applicator
+is operational (dry-run + verify). FECS channel submission is the remaining gap
+for full Volta bring-up.
+
+**nvPmu + hw-learn** (toadStool): BAR0 MMIO access, thermal watchdog, mmiotrace
+parser, recipe distiller and store are all operational. The `RegisterAccess` trait
+bridge to coral-driver is the remaining integration gap.
 
 **Contrast vs CUDA/Kokkos**: coralReef compiles to the same SASS binary that
 CUDA's `ptxas` produces (SM70–SM89), and the same GCN/RDNA binary that AMD's
@@ -355,9 +371,9 @@ improvement in one primal benefits all consumers.
 | Layer | Owner | Estimated Time | Risk | Depends On |
 |:---:|---|---|---|---|
 | 1 | barraCuda | **DONE** | — | — |
-| 2 | coralReef | **Phase 10 complete** — NVIDIA SM70-SM89, AMD RDNA2, df64 preamble, 9 unsafe in driver | Low | — |
-| 3 | coralReef + toadStool | **1-2 months** (standalone crate, multi-arch) | Medium | Layer 2 |
-| 4 | toadStool + groundSpring | **3-6 months** (sovereign driver, DMA) | Medium-High | Layer 3 |
+| 2 | coralReef | **DONE** — NVIDIA SM70-SM89, AMD RDNA2, 1401 tests, GSP Phase 2 | — | — |
+| 3 | coralReef + barraCuda | **Partial** — coral-gpu API exists; `dispatch_binary` wiring needed | Low | — |
+| 4 | coralReef + toadStool | **In progress** — AMD done, nouveau done, UVM + FECS + RegisterAccess remaining | Medium | Layer 3 |
 
 The key accelerator: we are not writing from scratch. NAK is already Rust.
 NVK has clear Rust-accessible patterns. The AI-dev loop (springs find gaps →
