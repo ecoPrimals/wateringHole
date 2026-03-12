@@ -193,9 +193,9 @@ same thing:
 | `coral_driver::gsp::applicator::RegisterAccess` | `u32` | coral-driver |
 | `nvpmu::bar0::Bar0Access` (concrete impl) | `u64` | nvpmu |
 
-`Bar0Access` has the right methods (`read_u32`, `write_u32`) but doesn't
-implement either trait. nvPmu duplicates hw-learn's applicator logic in
-`init.rs`. coralReef's GSP applicator can't reach nvPmu's BAR0.
+`Bar0Access` now implements `hw_learn::applicator::RegisterAccess` (S147).
+nvPmu still duplicates hw-learn's applicator logic in `init.rs` — needs
+dedup. coralReef's GSP applicator needs a thin adapter to use hw-learn's trait.
 
 **Impact**: Medium. Prevents the sovereign GSP from applying init sequences
 to real hardware via nvPmu.
@@ -204,11 +204,11 @@ to real hardware via nvPmu.
 
 | Task | Owner | Depends On |
 |------|-------|------------|
-| Add `hw-learn` as optional dependency in nvPmu | **toadStool** | — |
-| Implement `hw_learn::applicator::RegisterAccess` for `Bar0Access` | **toadStool** | — |
-| Add thin adapter in coral-driver GSP to accept `hw_learn::RegisterAccess` | **coralReef** | — |
-| Remove duplicated `apply_recipe` from `nvpmu::init` (use hw-learn's) | **toadStool** | RegisterAccess impl |
-| Wire `nvpmu-apply` to use `apply_recipe_safe` (thermal checks) | **toadStool** | — |
+| Add `hw-learn` as optional dependency in nvPmu | **toadStool** | — | **DONE** (S147) |
+| Implement `hw_learn::applicator::RegisterAccess` for `Bar0Access` | **toadStool** | — | **DONE** (S147) |
+| Add thin adapter in coral-driver GSP to accept `hw_learn::RegisterAccess` | **coralReef** | — | Pending |
+| Remove duplicated `apply_recipe` from `nvpmu::init` (use hw-learn's) | **toadStool** | RegisterAccess impl | Pending |
+| Wire `nvpmu-apply` to use `apply_recipe_safe` (thermal checks) | **toadStool** | — | Pending |
 
 **Acceptance**: `coralReef GSP → hw-learn recipe → nvPmu BAR0 → hardware`
 flows without manual format conversion.
