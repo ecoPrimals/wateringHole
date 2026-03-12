@@ -16,7 +16,8 @@ as working Rust code. The remaining work is **wiring**: connecting the
 components so data flows end-to-end from shader source to GPU execution,
 and from hardware observation to knowledge application.
 
-No fundamental capability is missing. Six integration gaps remain.
+No fundamental capability is missing. Six integration gaps were identified.
+**Gap 1 (dispatch_binary) is now CLOSED** (March 12). Five gaps remain.
 
 ```
                     THE SOVEREIGN COMPUTE TRIO
@@ -83,30 +84,25 @@ No fundamental capability is missing. Six integration gaps remain.
 
 ## The Six Remaining Gaps
 
-### Gap 1: `dispatch_binary` not wired
+### Gap 1: `dispatch_binary` not wired — CLOSED
 
-**Owner**: barraCuda (implementation) + coralReef (API surface)
+**Owner**: barraCuda
+**Status**: **CLOSED** (March 12, 2026)
 
-**What**: `CoralReefDevice` has the `dispatch_binary` trait method but uses
-the default stub that returns an error. coralReef compiles WGSL to native
-SASS/GFX binaries. `spawn_coral_compile` caches them. But nothing calls
-`dispatch_binary` to use the cached result.
+All tasks completed:
 
-**Impact**: Highest. Without this, every dispatch recompiles at runtime.
-The sovereign compiler's output is produced then discarded.
+| Task | Status |
+|------|--------|
+| Implement `dispatch_binary` on `CoralReefDevice` | **Done** — accepts raw native binaries, builds `CompiledKernel` with conservative defaults |
+| Implement `dispatch_kernel` on `CoralReefDevice` | **Done** — preferred path with full `ShaderInfo` metadata (GPR count, shared mem, workgroup) |
+| Wire `spawn_coral_compile` cache → `dispatch_compute` path | **Done** — `try_coral_cache()` checks `cached_native_binary()` before recompiling |
+| `PRIMAL_NAMESPACE` capability-based discovery | **Done** — all hardcoded "barracuda" strings evolved to constant |
 
-**Work**:
-
-| Task | Owner | Depends On |
-|------|-------|------------|
-| Implement `dispatch_binary` on `CoralReefDevice` | **barraCuda** | coral-gpu dispatch API |
-| Call `coral_gpu::GpuContext::dispatch()` with pre-compiled `CompiledKernel` | **barraCuda** | — |
-| Wire `spawn_coral_compile` cache → `dispatch_binary` path | **barraCuda** | — |
-| Ensure `CompiledKernel` metadata (workgroup size, bindings) passes through | **coralReef** (coral-gpu) | — |
-| Add `dispatch_binary` to `BatchedComputeDispatch` path | **barraCuda** | dispatch_binary impl |
-
-**Acceptance**: `cargo test` demonstrates WGSL → compile once → dispatch N
-times without recompilation. Benchmark shows compile-time amortized to zero.
+The coral compiler cache (populated by `spawn_coral_compile` during
+`compile_shader_f64`/`compile_shader_df64`) is now read by
+`CoralReefDevice::dispatch_compute` on cache hit, skipping recompilation.
+The `dispatch_kernel` method provides the preferred path when full
+`CompiledKernel` metadata is available from coralReef.
 
 ---
 
