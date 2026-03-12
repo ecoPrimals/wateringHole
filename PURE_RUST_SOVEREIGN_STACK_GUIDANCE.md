@@ -1,14 +1,22 @@
 # Pure Rust Sovereign Stack — Cross-Primal Guidance
 
-**Date**: March 12, 2026 (updated)
+**Date**: March 12, 2026 (updated — sovereign DRM dispatch proven on hardware)
 **Type**: Ecosystem Standard (Evolution)
-**From**: barraCuda (Layer 1 complete)
+**From**: barraCuda (Layer 1 complete) + hotSpring (hardware validation)
 **To**: coralReef, toadStool, all primals
-**Status**: Active — Layers 1-2 done, Layer 3 partial, Layer 4 in progress
+**Status**: Active — Layers 1-2 done, Layer 3 partial, Layer 4 breakthrough
 
-> **March 12 update**: Sovereign GSP Phase 2 complete. 22 chip firmware
-> parsed, cross-architecture learning operational. Six wiring gaps remain —
-> see `handoffs/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md`.
+> **March 12 update (hotSpring hardware validation)**: Three DRM bugs fixed
+> in coral-driver (`eb4b4eb`). The nouveau sovereign pipeline is now
+> **proven on hardware**: VM_INIT → CHANNEL_ALLOC → VM_BIND → GEM alloc →
+> upload → readback all pass on both Titan V and RTX 3090. 9/11 hardware
+> tests pass. The deprecation path for naga, NVK, and wgpu is now open.
+> Root cause: ioctl number off-by-two for CHANNEL_ALLOC (was calling
+> GETPARAM instead). See breakthrough handoff for details.
+>
+> **March 12 update (barraCuda)**: Sovereign GSP Phase 2 complete. 22 chip
+> firmware parsed, cross-architecture learning operational. Six wiring gaps
+> remain — see `handoffs/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md`.
 
 ---
 
@@ -114,9 +122,14 @@ for compilation — they are discovered at runtime via capability files.
 ### Layer 4 — Sovereign Hardware: IN PROGRESS
 
 `coral-driver` provides userspace GPU dispatch via DRM ioctl. AMD amdgpu is
-fully wired (GEM, PM4, CS submit, fence sync) with E2E verified. NVIDIA nouveau
-has full channel/pushbuf/QMD dispatch (pending hardware validation on Titan V).
-NVIDIA `nvidia-drm` probes proprietary driver (UVM integration needed for compute).
+fully wired (GEM, PM4, CS submit, fence sync) with E2E verified. **NVIDIA nouveau
+is now hardware-validated** (`eb4b4eb`): VM_INIT, CHANNEL_ALLOC (all 5 variants),
+GEM alloc, VM_BIND, upload, readback all pass on both Titan V (GV100) and RTX 3090
+(GA102). Three DRM bugs were found and fixed by hotSpring hardware testing:
+ioctl number off-by-two for CHANNEL_ALLOC, VA space collision with kernel-managed
+region, and broken gem_info query. 9/11 hardware tests pass — remaining 2 are
+QMD compute execution tuning (dispatch completes without error, kernel output
+needs field alignment). NVIDIA `nvidia-drm` has UVM infrastructure (Iter 36).
 All drivers compile by default, selected at runtime via `DriverPreference`.
 
 **Sovereign GSP** (March 12): `coral-driver::gsp` provides a learned GPU
