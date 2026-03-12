@@ -105,11 +105,11 @@ pie_verified = true
 
 [primals.toadstool]
 name = "Toadstool"
-description = "Compute primal - GPU/CPU orchestration, WASM, neural compute"
+description = "Compute primal - GPU/CPU orchestration, WASM, hardware learning, firmware inventory, SPIR-V codegen safety"
 latest = "0.1.0"
 versions = ["0.1.0"]
 architectures = ["x86_64-linux", "aarch64-linux"]
-capabilities = ["compute", "cpu", "gpu", "wasm", "orchestration"]
+capabilities = ["compute", "cpu", "gpu", "wasm", "orchestration", "hardware_learning", "firmware_inventory", "spirv_codegen_safety", "precision_brain", "nvk_zero_guard", "provider_registry"]
 ecobin_grade = "A++"
 pie_verified = true
 
