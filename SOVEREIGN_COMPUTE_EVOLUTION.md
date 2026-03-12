@@ -1,7 +1,7 @@
 # Sovereign Compute Evolution — Pure Rust GPU Stack
 
-**Date**: March 12, 2026 (updated — DRM breakthrough, sovereign dispatch pipeline proven)
-**From**: hotSpring (validated by hardware testing on Titan V + RTX 3090)
+**Date**: March 12, 2026 (updated — 2 of 6 gaps CLOSED, sovereign dispatch routing live)
+**From**: hotSpring v0.6.31 (validated by hardware testing on Titan V + RTX 3090)
 **To**: All primals — toadStool, barraCuda, coralReef, springs
 **Type**: Long-term architecture evolution plan
 **Goal**: Replace every non-Rust dependency in the GPU compute path with
@@ -21,6 +21,15 @@ sovereign Rust implementations, scaffolded off existing open-source systems.
 > **March 12 update (barraCuda)**: All components exist. Six wiring gaps remain.
 > See `handoffs/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md`
 > for the detailed gap analysis, ownership matrix, and execution plan.
+>
+> **March 12 update (gap closure)**: Gap 1 (dispatch_binary) **CLOSED** by
+> barraCuda `82ff983` — CoralReefDevice now wires coral cache → dispatch.
+> Gap 4 (RegisterAccess bridge) **CLOSED** by toadStool S147 — nvPmu
+> Bar0Access bridged to hw-learn. Gap 2 (GPFIFO) partially closed by
+> coralReef Iter 37 — USERD doorbell + completion polling implemented.
+> Gap 3 (FECS) remains unblocked. hotSpring v0.6.31 absorbs all three
+> primals and wires `sovereign_resolves_poisoning()` into MD precision
+> routing — DF64 transcendentals now available through sovereign bypass.
 
 ---
 
