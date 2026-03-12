@@ -1,13 +1,24 @@
 # Sovereign Compute Evolution — Pure Rust GPU Stack
 
-**Date**: March 12, 2026 (updated — Layers 1-2 complete, GSP Phase 2 done, wiring gaps identified)
-**From**: hotSpring (validated by Kokkos-CUDA parity testing)
+**Date**: March 12, 2026 (updated — DRM breakthrough, sovereign dispatch pipeline proven)
+**From**: hotSpring (validated by hardware testing on Titan V + RTX 3090)
 **To**: All primals — toadStool, barraCuda, coralReef, springs
 **Type**: Long-term architecture evolution plan
 **Goal**: Replace every non-Rust dependency in the GPU compute path with
 sovereign Rust implementations, scaffolded off existing open-source systems.
 
-> **March 12 update**: All components exist. Six wiring gaps remain.
+> **March 12 update (hotSpring)**: Three critical DRM bugs fixed in
+> coral-driver (`eb4b4eb`). The sovereign nouveau dispatch pipeline
+> (VM_INIT → CHANNEL_ALLOC → VM_BIND → GEM → upload → readback) is now
+> **fully operational on both Titan V (GV100) and RTX 3090 (GA102)**.
+> Channel allocation was blocked by an ioctl number off-by-two since
+> coralReef's inception. 9/11 hardware tests pass. Remaining: QMD compute
+> execution tuning (dispatch runs without error, kernel output needs
+> field alignment). This opens the deprecation path for naga/NVK/wgpu.
+>
+> See `handoffs/CORALREEF_SOVEREIGN_DRM_BREAKTHROUGH_HANDOFF_MAR09_2026.md`
+>
+> **March 12 update (barraCuda)**: All components exist. Six wiring gaps remain.
 > See `handoffs/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md`
 > for the detailed gap analysis, ownership matrix, and execution plan.
 
@@ -191,7 +202,7 @@ Multi-vendor ISA from one Rust toolchain.
 
 ### Level 4 — Sovereign Compute Runtime (3-6 months)
 
-**Status**: 🔄 Core implemented — coral-driver has AMD + nouveau DRM dispatch; UVM path stubbed; GSP learning system operational
+**Status**: 🔄 Core implemented — **nouveau DRM pipeline PROVEN on hardware** (Titan V + RTX 3090, `eb4b4eb`); AMD amdgpu pipeline operational; UVM path stubbed; GSP learning system operational
 
 **What**: Replace NVK/Vulkan with a minimal pure-Rust compute runtime.
 Direct GPU memory management, command submission, and kernel dispatch
