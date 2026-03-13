@@ -1,12 +1,24 @@
 # Sovereign Compute Evolution — Pure Rust GPU Stack
 
-**Date**: March 12, 2026 (updated — BAR0 breakthrough, dual-use architecture, VFIO roadmap)
+**Date**: March 12, 2026 (updated — security posture, VFIO→Kokkos parity, CERN-grade goal)
 **From**: hotSpring v0.6.31 (sovereign BAR0 path implemented in coralReef)
 **To**: All primals — toadStool, barraCuda, coralReef, springs
 **Type**: Long-term architecture evolution plan
 **Goal**: Replace every non-Rust dependency in the GPU compute path with
 sovereign Rust implementations, scaffolded off existing open-source systems.
 The endgame is **dual-use hardware** — the same machine runs gaming and science.
+The validation goal is **CERN-grade reproducible physics at home, scalable to CERN**.
+
+> **March 12 update (security + Kokkos strategy)**: GPU security posture
+> defined — software enclave via BearDog (encryption) + toadStool (VFIO
+> exclusivity) + Rust (memory safety). No MIG needed for trusted workloads.
+> VFIO dispatch path projects **~4,000 steps/s** Yukawa (vs Kokkos 2,630) via
+> DF64 9.9× gain + direct GPFIFO. Precision mix advantage is unique to
+> ecoPrimals — Kokkos can't do it. toadStool tree model enables cross-GPU
+> learning and software-defined GPU partitioning on any PCIe GPU.
+> See `handoffs/GPU_SECURITY_POSTURE_VFIO_KOKKOS_STRATEGY_HANDOFF_MAR12_2026.md`.
+> hotSpring extended goal: `SOVEREIGN_VALIDATION_GOAL.md` — CERN-grade
+> reproducible physics from `cargo build`, scalable from 1 GPU to 1000.
 
 > **March 12 update (hotSpring)**: Three critical DRM bugs fixed in
 > coral-driver (`eb4b4eb`). The sovereign nouveau dispatch pipeline
@@ -515,6 +527,10 @@ for implementation details, scripts, and per-gap ownership.
   detailed gap analysis with ownership, priority, and acceptance criteria
 - `wateringHole/handoffs/SOVEREIGN_COMPUTE_BAR0_BREAKTHROUGH_DUAL_USE_HANDOFF_MAR12_2026.md` —
   BAR0 breakthrough details, dual-use architecture, VFIO roadmap, sudo solutions
+- `wateringHole/handoffs/GPU_SECURITY_POSTURE_VFIO_KOKKOS_STRATEGY_HANDOFF_MAR12_2026.md` —
+  GPU security posture (software enclave), VFIO performance, Kokkos parity strategy
+- `hotSpring/SOVEREIGN_VALIDATION_GOAL.md` — CERN-grade reproducible physics goal,
+  scaling from home to CERN, the extended validation ladder
 - `barraCuda/PURE_RUST_EVOLUTION.md` — barraCuda layer status tracker
 - `barraCuda/specs/REMAINING_WORK.md` — barraCuda remaining work items
 - `barraCuda/WHATS_NEXT.md` — C dependency chain evolution map
