@@ -1,11 +1,12 @@
 # Sovereign Compute Evolution — Pure Rust GPU Stack
 
-**Date**: March 12, 2026 (updated — sovereign BAR0 GR init IMPLEMENTED, address-aware split wired)
+**Date**: March 12, 2026 (updated — BAR0 breakthrough, dual-use architecture, VFIO roadmap)
 **From**: hotSpring v0.6.31 (sovereign BAR0 path implemented in coralReef)
 **To**: All primals — toadStool, barraCuda, coralReef, springs
 **Type**: Long-term architecture evolution plan
 **Goal**: Replace every non-Rust dependency in the GPU compute path with
 sovereign Rust implementations, scaffolded off existing open-source systems.
+The endgame is **dual-use hardware** — the same machine runs gaming and science.
 
 > **March 12 update (hotSpring)**: Three critical DRM bugs fixed in
 > coral-driver (`eb4b4eb`). The sovereign nouveau dispatch pipeline
@@ -457,12 +458,63 @@ Sovereign, organic, accumulative.
 
 ---
 
+## Dual-Use Architecture: Gaming + Science
+
+The endgame isn't "choose between gaming and science." A single machine
+should do both — nvidia proprietary for Steam when you're gaming, VFIO
+sovereign compute when you're not.
+
+```
+                       DUAL-USE GPU
+
+     ┌─────────────────────────────────────────┐
+     │               HARDWARE                   │
+     │         GPU (e.g. RTX 3090)              │
+     └─────────────┬───────────────────────────┘
+                   │
+          ┌────────┴────────┐
+          ▼                 ▼
+    ┌──────────┐      ┌──────────┐
+    │  GAMING  │      │ SCIENCE  │
+    │   MODE   │      │   MODE   │
+    └────┬─────┘      └────┬─────┘
+         │                 │
+    nvidia driver     vfio-pci
+    (proprietary)     (generic)
+         │                 │
+    Steam/Proton     ecoPrimals
+    Vulkan, DLSS     sovereign
+    ray tracing      BAR0 + DMA
+```
+
+**Multi-GPU split**: One GPU stays on nvidia for display + gaming, another
+on VFIO for science. The natural state for research machines with two GPUs.
+
+**Single-GPU dynamic switch**: toadStool manages the transition —
+stop display server, unbind nvidia, bind VFIO, run science, reverse when done.
+toadStool already has the VFIO backend (Akida NPU) and device management
+infrastructure to own this.
+
+**Phase plan**:
+1. Validate sovereign BAR0 + nouveau (code done, needs root test)
+2. Validate UVM path (RTX 3090 with nvidia driver)
+3. Build VFIO GPU backend in coralReef (extend toadStool's Akida VFIO pattern)
+4. Build `ecoprimals-mode` CLI in toadStool for gaming ↔ science switching
+5. Dynamic GPU arbitration — toadStool detects idle GPU, claims for science
+
+See `handoffs/SOVEREIGN_COMPUTE_BAR0_BREAKTHROUGH_DUAL_USE_HANDOFF_MAR12_2026.md`
+for implementation details, scripts, and per-gap ownership.
+
+---
+
 ## Related Documents
 
 - `wateringHole/PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — cross-primal
   guidance for coralReef Layer 2-4 evolution (contracts, safe evolution paths)
 - `wateringHole/handoffs/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md` —
   detailed gap analysis with ownership, priority, and acceptance criteria
+- `wateringHole/handoffs/SOVEREIGN_COMPUTE_BAR0_BREAKTHROUGH_DUAL_USE_HANDOFF_MAR12_2026.md` —
+  BAR0 breakthrough details, dual-use architecture, VFIO roadmap, sudo solutions
 - `barraCuda/PURE_RUST_EVOLUTION.md` — barraCuda layer status tracker
 - `barraCuda/specs/REMAINING_WORK.md` — barraCuda remaining work items
 - `barraCuda/WHATS_NEXT.md` — C dependency chain evolution map
@@ -471,3 +523,4 @@ Sovereign, organic, accumulative.
 
 *The shaders are the mathematics. The driver is plumbing.*
 *We own the mathematics. Now we evolve the plumbing.*
+*The hardware is yours — for gaming, for science, for both.*

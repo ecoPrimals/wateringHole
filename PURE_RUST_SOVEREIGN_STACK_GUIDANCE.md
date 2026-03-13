@@ -411,6 +411,15 @@ Only the infrastructure evolves.
 
 ---
 
+## Dual-Use Vision
+
+The sovereign stack enables **dual-use hardware**: nvidia drivers for gaming,
+VFIO for science, on the same machine, no reboot. toadStool manages the
+GPU mode switch. See `SOVEREIGN_COMPUTE_EVOLUTION.md` and
+`handoffs/SOVEREIGN_COMPUTE_BAR0_BREAKTHROUGH_DUAL_USE_HANDOFF_MAR12_2026.md`.
+
+---
+
 *The shaders are the mathematics. The driver is plumbing.*
 *barraCuda owns the mathematics. coralReef evolves the compiler.*
 *toadStool evolves the hardware. Together: sovereign compute.*
