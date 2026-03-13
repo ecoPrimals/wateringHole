@@ -110,5 +110,5 @@ which primals are available.
 | Primal | Version/Session | Key IPC endpoint |
 |--------|-----------------|------------------|
 | toadStool | S152 | `compute.dispatch.submit`, `compute.hardware.capabilities` |
-| coralReef | Iter 42 | `shader.compile.wgsl`, `shader.compile.capabilities` |
+| coralReef | Iter 43 | `shader.compile.wgsl`, `shader.compile.capabilities` |
 | hotSpring | v0.6.31 | Consumer of barraCuda's precision routing |
