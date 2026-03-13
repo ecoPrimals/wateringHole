@@ -239,7 +239,7 @@ LoamSpine
 
 ### 6. SweetGrass ↔ LoamSpine (Attribution)
 
-**Status**: ⏳ **PLANNED** (SweetGrass v0.5.0 ready!)
+**Status**: ⏳ **PLANNED** (SweetGrass v0.7.0 — JSON-RPC + tarpc + REST, ecoBin compliant)
 
 **Concept** (From RootPulse):
 - **SweetGrass**: Semantic attribution (who contributed what)
@@ -488,7 +488,7 @@ async fn pull_with_merge() {
 
 ### Phase 3.3: SweetGrass Attribution (Semantic)
 
-**Timeline**: 2-3 months (SweetGrass v0.5.0 exists!)
+**Timeline**: 2-3 months (SweetGrass v0.7.0 — 542 tests, UniBin, ecoBin, AGPL-3.0-only)
 
 **Deliverables**:
 1. Semantic analysis

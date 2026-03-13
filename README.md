@@ -65,7 +65,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 |--------|--------|------|--------|
 | **petalTongue** | Representation | Universal UI: visual, audio, terminal, web, headless. Accessibility-first multi-modal rendering | Production (A++) |
 | **rhizoCrypt** | Ephemeral Memory | Content-addressed DAG engine for working memory. Sessions, Merkle trees, real-time streaming | Production (A+) |
-| **sweetGrass** | Attribution | Semantic provenance tracking. W3C PROV-O compliant braids, fair attribution calculation | Production (A+) |
+| **sweetGrass** | Attribution | Semantic provenance (v0.7.0). W3C PROV-O braids, fair attribution, JSON-RPC + tarpc + REST, UniBin, ecoBin, 542 tests | Production |
 | **LoamSpine** | Permanence | Immutable linear ledger for selective permanence. Loam Certificates for ownership and transfer | Production (A+) |
 | **skunkBat** | Defense | Defensive network security: threat detection, graduated response, baseline profiling | Production |
 
