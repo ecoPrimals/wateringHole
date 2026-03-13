@@ -519,6 +519,37 @@ for implementation details, scripts, and per-gap ownership.
 
 ---
 
+## March 13 Update — CUDA-as-Oracle Evolutionary Debugging
+
+> **Breakthrough insight**: After extensive VFIO PFIFO debugging (PDE/PTE
+> encoding, GPFIFO format, PMC enable, PBDMA discovery, memory ordering),
+> the `FenceTimeout` persists. The remaining gap is post-FLR initialization
+> steps that open source docs don't cover.
+>
+> **Strategy**: Bind the Titan V TEMPORARILY to the nvidia driver (same
+> driver already loaded for the 3090), read BAR0 registers to see a
+> healthy Volta PFIFO state, compare register-by-register against our
+> VFIO init, identify every delta, and fix. Then rebind to vfio-pci.
+>
+> **Key finding**: The 3090 (Ampere) cannot serve as reference — it uses
+> GSP firmware for all PFIFO management (registers read as `0xbadf1100`
+> sentinel). We need a Volta reference — i.e., the Titan V itself under
+> nvidia. Same silicon, same architecture, different driver.
+>
+> **Evolutionary insight**: This approach was NOT possible as a one-shot.
+> We needed Phase 1 (open source vocabulary), Phase 2 (Rust reimplementation
+> as fitness test), before Phase 3 (CUDA as calibration oracle) becomes
+> meaningful. Without independent understanding, BAR0 register dumps are
+> meaningless hex. With it, every value tells a story.
+>
+> **Dual-use evolution**: The nvidia ↔ vfio-pci rebind naturally becomes
+> the toadStool `gpu mode` switcher — gaming (nvidia) vs science (vfio)
+> on the same chip, managed by toadStool's process tree.
+>
+> See `handoffs/HOTSPRING_CUDA_ORACLE_EVOLUTIONARY_DEBUGGING_HANDOFF_MAR13_2026.md`
+
+---
+
 ## Related Documents
 
 - `wateringHole/PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — cross-primal
@@ -529,6 +560,8 @@ for implementation details, scripts, and per-gap ownership.
   BAR0 breakthrough details, dual-use architecture, VFIO roadmap, sudo solutions
 - `wateringHole/handoffs/GPU_SECURITY_POSTURE_VFIO_KOKKOS_STRATEGY_HANDOFF_MAR12_2026.md` —
   GPU security posture (software enclave), VFIO performance, Kokkos parity strategy
+- `wateringHole/handoffs/HOTSPRING_CUDA_ORACLE_EVOLUTIONARY_DEBUGGING_HANDOFF_MAR13_2026.md` —
+  CUDA-as-oracle strategy, BAR0 reference capture plan, evolutionary debugging insight
 - `hotSpring/SOVEREIGN_VALIDATION_GOAL.md` — CERN-grade reproducible physics goal,
   scaling from home to CERN, the extended validation ladder
 - `barraCuda/PURE_RUST_EVOLUTION.md` — barraCuda layer status tracker
