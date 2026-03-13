@@ -488,7 +488,7 @@ async fn pull_with_merge() {
 
 ### Phase 3.3: SweetGrass Attribution (Semantic)
 
-**Timeline**: 2-3 months (SweetGrass v0.7.0 — 542 tests, UniBin, ecoBin, AGPL-3.0-only)
+**Timeline**: 2-3 months (SweetGrass v0.7.0 — 553 tests, contribution API ready, ecoBin, AGPL-3.0-only)
 
 **Deliverables**:
 1. Semantic analysis
