@@ -16,8 +16,7 @@ as working Rust code. The remaining work is **wiring**: connecting the
 components so data flows end-to-end from shader source to GPU execution,
 and from hardware observation to knowledge application.
 
-No fundamental capability is missing. Six integration gaps were identified.
-**Gap 1 (dispatch_binary) is now CLOSED** (March 12). Five gaps remain.
+No fundamental capability is missing. Six integration gaps remain.
 
 ```
                     THE SOVEREIGN COMPUTE TRIO
@@ -84,25 +83,30 @@ No fundamental capability is missing. Six integration gaps were identified.
 
 ## The Six Remaining Gaps
 
-### Gap 1: `dispatch_binary` not wired — CLOSED
+### Gap 1: `dispatch_binary` not wired
 
-**Owner**: barraCuda
-**Status**: **CLOSED** (March 12, 2026)
+**Owner**: barraCuda (implementation) + coralReef (API surface)
 
-All tasks completed:
+**What**: `CoralReefDevice` has the `dispatch_binary` trait method but uses
+the default stub that returns an error. coralReef compiles WGSL to native
+SASS/GFX binaries. `spawn_coral_compile` caches them. But nothing calls
+`dispatch_binary` to use the cached result.
 
-| Task | Status |
-|------|--------|
-| Implement `dispatch_binary` on `CoralReefDevice` | **Done** — accepts raw native binaries, builds `CompiledKernel` with conservative defaults |
-| Implement `dispatch_kernel` on `CoralReefDevice` | **Done** — preferred path with full `ShaderInfo` metadata (GPR count, shared mem, workgroup) |
-| Wire `spawn_coral_compile` cache → `dispatch_compute` path | **Done** — `try_coral_cache()` checks `cached_native_binary()` before recompiling |
-| `PRIMAL_NAMESPACE` capability-based discovery | **Done** — all hardcoded "barracuda" strings evolved to constant |
+**Impact**: Highest. Without this, every dispatch recompiles at runtime.
+The sovereign compiler's output is produced then discarded.
 
-The coral compiler cache (populated by `spawn_coral_compile` during
-`compile_shader_f64`/`compile_shader_df64`) is now read by
-`CoralReefDevice::dispatch_compute` on cache hit, skipping recompilation.
-The `dispatch_kernel` method provides the preferred path when full
-`CompiledKernel` metadata is available from coralReef.
+**Work**:
+
+| Task | Owner | Depends On |
+|------|-------|------------|
+| Implement `dispatch_binary` on `CoralReefDevice` | **barraCuda** | coral-gpu dispatch API |
+| Call `coral_gpu::GpuContext::dispatch()` with pre-compiled `CompiledKernel` | **barraCuda** | — |
+| Wire `spawn_coral_compile` cache → `dispatch_binary` path | **barraCuda** | — |
+| Ensure `CompiledKernel` metadata (workgroup size, bindings) passes through | **coralReef** (coral-gpu) | — |
+| Add `dispatch_binary` to `BatchedComputeDispatch` path | **barraCuda** | dispatch_binary impl |
+
+**Acceptance**: `cargo test` demonstrates WGSL → compile once → dispatch N
+times without recompilation. Benchmark shows compile-time amortized to zero.
 
 ---
 
@@ -189,9 +193,9 @@ same thing:
 | `coral_driver::gsp::applicator::RegisterAccess` | `u32` | coral-driver |
 | `nvpmu::bar0::Bar0Access` (concrete impl) | `u64` | nvpmu |
 
-`Bar0Access` now implements `hw_learn::applicator::RegisterAccess` (S147).
-nvPmu still duplicates hw-learn's applicator logic in `init.rs` — needs
-dedup. coralReef's GSP applicator needs a thin adapter to use hw-learn's trait.
+`Bar0Access` has the right methods (`read_u32`, `write_u32`) but doesn't
+implement either trait. nvPmu duplicates hw-learn's applicator logic in
+`init.rs`. coralReef's GSP applicator can't reach nvPmu's BAR0.
 
 **Impact**: Medium. Prevents the sovereign GSP from applying init sequences
 to real hardware via nvPmu.
@@ -200,11 +204,11 @@ to real hardware via nvPmu.
 
 | Task | Owner | Depends On |
 |------|-------|------------|
-| Add `hw-learn` as optional dependency in nvPmu | **toadStool** | — | **DONE** (S147) |
-| Implement `hw_learn::applicator::RegisterAccess` for `Bar0Access` | **toadStool** | — | **DONE** (S147) |
-| Add thin adapter in coral-driver GSP to accept `hw_learn::RegisterAccess` | **coralReef** | — | Pending |
-| Remove duplicated `apply_recipe` from `nvpmu::init` (use hw-learn's) | **toadStool** | RegisterAccess impl | Pending |
-| Wire `nvpmu-apply` to use `apply_recipe_safe` (thermal checks) | **toadStool** | — | Pending |
+| Add `hw-learn` as optional dependency in nvPmu | **toadStool** | — |
+| Implement `hw_learn::applicator::RegisterAccess` for `Bar0Access` | **toadStool** | — |
+| Add thin adapter in coral-driver GSP to accept `hw_learn::RegisterAccess` | **coralReef** | — |
+| Remove duplicated `apply_recipe` from `nvpmu::init` (use hw-learn's) | **toadStool** | RegisterAccess impl |
+| Wire `nvpmu-apply` to use `apply_recipe_safe` (thermal checks) | **toadStool** | — |
 
 **Acceptance**: `coralReef GSP → hw-learn recipe → nvPmu BAR0 → hardware`
 flows without manual format conversion.
