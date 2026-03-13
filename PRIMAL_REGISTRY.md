@@ -303,7 +303,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.0, 553 tests, ecoBin compliant, AGPL-3.0-only)
+**Status**: Production Ready (v0.7.2, 570 tests, ecoBin compliant, AGPL-3.0-only, Tower Atomic enforced)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
