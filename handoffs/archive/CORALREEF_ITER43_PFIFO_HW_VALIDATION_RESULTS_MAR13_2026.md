@@ -166,4 +166,31 @@ is the last 1/7 — a register encoding issue, not a missing feature.
 
 ---
 
+---
+
+## March 13 Addendum: CUDA-as-Oracle Strategy
+
+The recommended debugging approach has evolved. Instead of mmiotrace
+(which would produce GBs of data to parse), hotSpring will:
+
+1. **Bind the Titan V to nvidia** — the 3090 is Ampere/GSP and cannot
+   serve as Volta reference (all PFIFO registers read as `0xbadf1100`)
+2. **Read BAR0 register state** — compare a healthy Volta GPU's PFIFO,
+   PBDMA, PCCSR, USERMODE, and MMU registers against our VFIO init
+3. **Identify the exact delta** — the differences ARE the missing init steps
+4. **Fix and rebind** — apply fixes to `channel.rs`, rebind to vfio-pci
+
+This approach gives surgical precision: instead of thousands of register
+writes to parse, we get a clean snapshot of "what does a working Volta
+look like" vs "what does our VFIO Volta look like."
+
+Key register anomalies already identified:
+- `SCHED_EN` (0x2504) = `0xbad00200` — register doesn't exist on Volta
+- `PCCSR_CHAN[0]` bit 28 = 1 — possible PBDMA_FAULTED flag
+- `PMC_ENABLE` = `0x5fecdff1` — not all engines enabled (some bits 0)
+- PBDMA idle values are static across runs (may be FLR residue)
+
+See `HOTSPRING_CUDA_ORACLE_EVOLUTIONARY_DEBUGGING_HANDOFF_MAR13_2026.md`
+for the full strategy and evolutionary insight.
+
 *Validated on biomeGate, March 13, 2026.*
