@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 12, 2026
+**Last Updated**: March 13, 2026
 
 ---
 
@@ -279,7 +279,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
 **Version**: 0.13.0-dev  
-**Status**: Production Ready (491 tests, clippy pedantic+nursery clean, `#![forbid(unsafe_code)]`, AGPL-3.0-only, UniBin compliant, semantic capability naming)
+**Status**: Production Ready (862 tests, 87.8% coverage, clippy pedantic+nursery clean, `#![forbid(unsafe_code)]`, AGPL-3.0-only, ecoBin compliant, semantic capability naming)
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
@@ -303,7 +303,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.2, 570 tests, ecoBin compliant, AGPL-3.0-only, Tower Atomic enforced)
+**Status**: Production Ready (v0.7.3, 746 tests, 94% coverage, ecoBin compliant, AGPL-3.0-only, Tower Atomic enforced)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
@@ -326,7 +326,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Immutable linear ledger for selective permanence  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.8.0, 549 tests, 90.08% coverage, pure Rust TLS, UniBin, provenance trio coordinated)
+**Status**: Production Ready (v0.8.0, 700 tests, 90.6% coverage, pure Rust TLS, ecoBin, provenance trio coordinated)
 
 **Role**: LoamSpine is the fossil record. Where rhizoCrypt is ephemeral and fast, LoamSpine is permanent and provable. Important events are deliberately committed ("dehydrated") from rhizoCrypt into LoamSpine's append-only ledger. Most data should be temporary; only what matters should be permanent.
 
@@ -383,6 +383,16 @@ Application Layer (Gaming, Scientific, Collaboration)
 ```
 
 **rhizoCrypt** is the engine. **LoamSpine** adds permanence semantics. **sweetGrass** adds attribution semantics. biomeOS coordinates them via the Neural API into RootPulse.
+
+### scyBorg Licensing Role
+
+The provenance trio is the enforcement mechanism for the **scyBorg** triple-copyleft licensing framework (AGPL-3.0 + ORC + CC-BY-SA 4.0):
+
+- **sweetGrass** tracks *who created what* — the BY in CC-BY-SA
+- **rhizoCrypt** tracks *derivation chains* — the SA in CC-BY-SA (share-alike compliance evidence)
+- **loamSpine** issues *immutable license certificates* — proof that terms apply
+
+See `wateringHole/SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` for the evolution path.
 
 ---
 

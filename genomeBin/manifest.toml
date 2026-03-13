@@ -144,6 +144,36 @@ ecobin_grade = "A++"
 is_orchestrator = true
 pie_verified = true
 
+[primals.rhizocrypt]
+name = "rhizoCrypt"
+description = "Ephemeral memory - content-addressed DAG engine, sessions, Merkle trees, dehydration"
+latest = "0.13.0-dev"
+versions = ["0.13.0-dev"]
+architectures = ["x86_64-linux", "aarch64-linux"]
+capabilities = ["dag", "session", "merkle", "dehydration", "slice", "provenance"]
+ecobin_grade = "A++"
+pie_verified = false  # Library crate — not standalone binary
+
+[primals.loamspine]
+name = "LoamSpine"
+description = "Permanence layer - append-only ledger, certificates, DIDs, temporal anchoring"
+latest = "0.8.0"
+versions = ["0.8.0"]
+architectures = ["x86_64-linux", "aarch64-linux"]
+capabilities = ["commit", "certificate", "spine", "anchor", "did", "provenance"]
+ecobin_grade = "A++"
+pie_verified = false  # Library crate — not standalone binary
+
+[primals.sweetgrass]
+name = "sweetGrass"
+description = "Attribution primal - W3C PROV-O, braids, contribution API, radiating attribution"
+latest = "0.7.3"
+versions = ["0.7.3"]
+architectures = ["x86_64-linux", "aarch64-linux"]
+capabilities = ["attribution", "braid", "provo", "contribution", "provenance"]
+ecobin_grade = "A++"
+pie_verified = false  # Library crate — not standalone binary
+
 # =============================================================================
 # DEPLOYMENT TIERS
 # =============================================================================
