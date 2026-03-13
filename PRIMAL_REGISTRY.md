@@ -193,7 +193,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 42 (A+) — 1669+35 tests passing, 64+5 ignored, 64% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + sync), `GpuContext::from_vfio()` convenience API for barraCuda, UVM dispatch pipeline (GPFIFO + USERD doorbell + completion polling), `KernelCacheEntry` + `dispatch_precompiled()`, `#[deny(unsafe_code)]` on 8/9 crates, zero clippy warnings, AGPL-3.0-only
+**Status**: Phase 10 Iteration 43 (A+) — 1693+47 tests passing, 71 ignored, 64% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync), `GpuContext::from_vfio()` convenience API for barraCuda, UVM dispatch pipeline (GPFIFO + USERD doorbell + completion polling), `KernelCacheEntry` + `dispatch_precompiled()`, `#[deny(unsafe_code)]` on 8/9 crates, zero clippy warnings, AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL, SPIR-V, and GLSL compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified. coralDriver provides userspace GPU dispatch via DRM ioctl (AMD amdgpu, NVIDIA nouveau, nvidia-drm/UVM) and VFIO direct BAR0/DMA dispatch (maximum sovereignty). coralGpu unifies compilation and dispatch into a single API with sovereign driver preference (vfio > nouveau > amdgpu > nvidia-drm). Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -248,9 +248,9 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Universal multi-modal user interface and Grammar of Graphics engine  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A+) — v1.3.0, 17 crates, 1,309 tests, edition 2024, `#![forbid(unsafe_code)]` on 5 crates, AGPL-3.0-only, Grammar of Graphics evolution in design phase
+**Status**: Production Ready (A+) — v1.6.3, 16 crates, 3,711 tests, 79.5% line coverage, edition 2024, `#![forbid(unsafe_code)]` on all 16 crates, zero C deps, AGPL-3.0-only, Grammar of Graphics engine complete
 
-**Role**: petalTongue makes data human-understandable across every sensory modality. It is evolving from fixed-widget rendering to a composable **Grammar of Graphics** pipeline: any primal sends a declarative grammar expression (data + variable bindings + scales + geometry + coordinates), and petalTongue compiles it to the best available modality (GUI, TUI, audio sonification, SVG, PNG, JSON API). Tufte constraints (data-ink ratio, lie factor, accessibility) are machine-checked on every render. Heavy computation (statistics, 3D tessellation, physics) is offloaded to barraCuda via capability-based discovery. The grammar is domain-agnostic: the same pipeline renders ecosystem topology, clinical vitals, molecular structures, game worlds, and universe simulations.
+**Role**: petalTongue makes data human-understandable across every sensory modality. It implements a composable **Grammar of Graphics** pipeline: any primal sends a declarative grammar expression (data + variable bindings + scales + geometry + coordinates), and petalTongue compiles it to the best available modality (GUI, TUI, audio sonification, SVG, PNG, JSON API). Tufte constraints (data-ink ratio, lie factor, accessibility) are machine-checked on every render. Heavy computation (statistics, 3D tessellation, physics) is offloaded to barraCuda via capability-based discovery. The grammar is domain-agnostic: the same pipeline renders ecosystem topology, clinical vitals, molecular structures, game worlds, and universe simulations. Live ecosystem wiring enables 60 Hz sensor streaming, interaction broadcast, and Neural API self-registration with biomeOS. Seven Spring absorption patterns ingested (backpressure, telemetry, diverging palettes, pipeline DAGs, provider registry, session health, game channels).
 
 **Primitives**:
 
@@ -431,7 +431,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 42 (VFIO sovereign dispatch + sync, barraCuda from_vfio API, 1669+35 tests) |
+| coralReef | Phase 10 Iteration 43 (PFIFO channel init, V2 MMU page tables, cross-primal rewire, 1693+47 tests) |
 
 ### airSpring - Ecological & Agricultural Sciences
 

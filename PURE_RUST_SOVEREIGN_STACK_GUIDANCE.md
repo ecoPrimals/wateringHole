@@ -106,10 +106,10 @@ both AMD RX 6950 XT and NVIDIA RTX 3090 (via DRM probing).
 - **Showcase**: 8 progressive demos from hello-compiler through full compute
   triangle (coralReef → toadStool → barraCuda).
 
-**Stack**: 1280 tests (0 failed, 52 ignored), 63% coverage, 37 DEBT markers.
-86 cross-spring WGSL shaders (79 compiling SM70). Three input languages
+**Stack**: 1693+47 tests (0 failed, 71 ignored), 64% coverage, 0 DEBT markers.
+93 cross-spring WGSL shaders (84 compiling SM70). Three input languages
 (WGSL, SPIR-V, GLSL 450). JSON-RPC 2.0 + tarpc (bincode) IPC.
-`#[deny(unsafe_code)]` on 6/8 crates.
+`#[deny(unsafe_code)]` on 8/9 crates. VFIO PFIFO channel + V2 MMU page tables.
 
 ### Layer 3 — Standalone Compilation: OPERATIONAL
 
@@ -384,7 +384,7 @@ improvement in one primal benefits all consumers.
 | Layer | Owner | Estimated Time | Risk | Depends On |
 |:---:|---|---|---|---|
 | 1 | barraCuda | **DONE** | — | — |
-| 2 | coralReef | **DONE** — NVIDIA SM70-SM89, AMD RDNA2, 1401 tests, GSP Phase 2 | — | — |
+| 2 | coralReef | **DONE** — NVIDIA SM70-SM89, AMD RDNA2, 1693+47 tests, VFIO PFIFO + V2 MMU | — | — |
 | 3 | coralReef + barraCuda | **Partial** — coral-gpu API exists; `dispatch_binary` wiring needed | Low | — |
 | 4 | coralReef + toadStool | **In progress** — AMD done, nouveau done, UVM + FECS + RegisterAccess remaining | Medium | Layer 3 |
 

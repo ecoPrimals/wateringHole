@@ -2,15 +2,16 @@
 
 Cross-primal integration documentation for petalTongue.
 
-**Updated**: March 10, 2026
+**Updated**: March 13, 2026
 
 ---
 
 ## Integration Status
 
-petalTongue v1.6.0 (16 crates, edition 2024):
-- 2,025 tests passing, 0 failures
-- `#![forbid(unsafe_code)]` workspace-wide (core, telemetry, ui, scene, headless, all others)
+petalTongue v1.6.3 (16 crates, edition 2024):
+- 3,711 tests passing, 0 failures, 5 ignored
+- `#![forbid(unsafe_code)]` on all 16 crates, zero C dependencies
+- 79.5% line coverage, 81.1% function coverage (llvm-cov)
 - JSON-RPC 2.0 over Unix sockets (primary IPC), 16+ visualization methods
 - tarpc binary RPC (secondary, zero-copy `bytes::Bytes`)
 - HTTP fallback for browser/external clients
@@ -22,10 +23,13 @@ petalTongue v1.6.0 (16 crates, edition 2024):
 - **Faceting**: `compile_faceted()` for small multiples (Wrap/Grid layouts)
 - **Threshold coloring**: `compile_with_thresholds()` for normal/warning/critical cell colors in heatmaps
 - **Tile/Arc geometry**: Real heatmap/fieldmap tile rendering, semicircular gauge arcs
-- Domain-aware rendering (6 palettes: health, physics, ecology, agriculture, measurement, neural)
+- Domain-aware rendering (7 palettes: health, physics, ecology, agriculture, measurement, neural, game)
 - Spring IPC: healthSpring DataChannel auto-compile, dashboard render, wetSpring Scatter/Spectrum, physics bridge, interaction method aliases
 - Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, SVG, headless
 - Scene graph with Manim-style animation, modality compilers (SVG, audio, description, terminal)
+- **Spring absorption**: backpressure, JSONL telemetry, diverging palette, pipeline DAG, provider registry
+- **Live ecosystem wiring**: sensor feed, interaction broadcast, Neural API registration, GameDataChannel mapping
+- All files under 1,000 lines; all production stubs evolved to implementations
 
 ### Grammar of Graphics Engine (Implemented)
 
