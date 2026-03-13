@@ -276,20 +276,22 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A+, 96/100, 509/509 tests, 87%+ coverage)
+**Version**: 0.13.0-dev  
+**Status**: Production Ready (491 tests, clippy pedantic+nursery clean, `#![forbid(unsafe_code)]`, AGPL-3.0-only, UniBin compliant, semantic capability naming)
 
-**Role**: rhizoCrypt provides the ephemeral workspace layer - a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free, and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to LoamSpine for permanence.
+**Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
 | **Vertex Operations** | Content-addressed events with BLAKE3 hashing, multi-parent DAG links, nanosecond timestamps |
-| **Session Management** | Scoped workspaces with full lifecycle (active, committed, discarded) |
+| **Session Management** | Scoped workspaces with full lifecycle (active, committed, discarded), lock-free |
 | **Merkle Trees** | Content verification, inclusion proofs, root computation |
-| **Dehydration** | Temporal collapse: commit session state to LoamSpine |
-| **Slice Semantics** | 6 query modes for traversing the DAG |
-| **Attribution** | Embedded sweetGrass metadata, BearDog DID agent identity |
+| **Dehydration** | Temporal collapse: commit session state to permanent storage via JSON-RPC 2.0 |
+| **Slice Semantics** | 6 query modes (Copy, Loan, Consignment, Escrow, Mirror, Provenance) |
+| **Attribution** | Agent DID identity, per-agent event counting, role assignment |
+| **IPC** | JSON-RPC 2.0 (required) + tarpc/bincode (optional), `permanent-storage.*` semantic naming |
 
 **Participates In**: RootPulse (ephemeral workspace layer), Memory & Attribution stack
 
