@@ -9,13 +9,13 @@ Cross-primal integration documentation for petalTongue.
 ## Integration Status
 
 petalTongue v1.6.3 (16 crates, edition 2024):
-- 3,711 tests passing, 0 failures, 5 ignored
-- `#![forbid(unsafe_code)]` on all 16 crates, zero C dependencies
-- 79.5% line coverage, 81.1% function coverage (llvm-cov)
-- JSON-RPC 2.0 over Unix sockets (primary IPC), 16+ visualization methods
-- tarpc binary RPC (secondary, zero-copy `bytes::Bytes`)
+- 3,752 tests passing, 0 failures, 17 ignored
+- `#![forbid(unsafe_code)]` on all 16 crates + UniBin, zero C dependencies
+- 79.8% line coverage, 81.0% function coverage (llvm-cov) -- target 90%
+- tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
+- JSON-RPC 2.0 over Unix sockets (secondary, local IPC and debugging)
 - HTTP fallback for browser/external clients
-- Capability-based discovery via Songbird
+- Capability-based discovery -- zero hardcoded primal names
 - Grammar of Graphics engine with Tufte constraint validation
 - **DataBinding auto-compiler**: All 9 DataBinding variants (TimeSeries, Distribution, Bar, Gauge, Spectrum, Heatmap, Scatter, Scatter3D, FieldMap) auto-compile to Grammar of Graphics
 - **Dashboard layout engine**: Multi-panel grid with domain theming and SVG/description export
