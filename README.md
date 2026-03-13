@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: March 9, 2026
+**Last Updated**: March 12, 2026
 
 ---
 
@@ -51,11 +51,11 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BearDog** | Cryptography | All cryptographic operations: signing, encryption, key exchange, hashing, certificates, genetic lineage | Production (A+ LEGENDARY) |
 | **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
-| **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 19,840+ tests, 85+ JSON-RPC methods. Node Atomic for sovereign compute. S137 sysinfo eliminated — `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. Cross-compile verified (aarch64, armv7 in CI) | Production (A++ GOLD) |
+| **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 20,015+ tests, 85+ JSON-RPC methods. Node Atomic for sovereign compute. `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. Cross-compile verified (aarch64, armv7 in CI) | Production (A++ GOLD) |
 | **BarraCuda** | Pure Math | 712 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93) | Production (A+) |
-| **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. | Production (Phase 10, Iter 25) |
+| **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch, sync/API | Production (Phase 10, Iter 42) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Ecosystem substrate: Neural API, capability routing, NUCLEUS composition, bonding model, Dark Forest coordination | Production (A, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Ecosystem substrate: Neural API (170+ translations, 16 domains), capability routing, NUCLEUS composition, bonding model, Dark Forest coordination, provenance trio wiring | Production (A, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -250,11 +250,14 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **biomeOS + All Primals**: Health monitoring, capability discovery, Neural API routing
 - **biomeOS + petalTongue**: Real-time SSE events for ecosystem visualization
 
+### Wired (biomeOS coordination layer)
+
+- **rhizoCrypt + LoamSpine + sweetGrass**: Provenance trio — `rootpulse_commit` graph orchestrates dehydration → sign → store → commit → attribute
+- **Any Spring + Provenance Trio**: `provenance_pipeline` graph — universal experiment provenance
+- **NestGate + LoamSpine**: Content-addressed storage backing immutable history
+
 ### Under Development
 
-- **rhizoCrypt + LoamSpine**: Dehydration (temporal collapse from DAG to linear)
-- **NestGate + LoamSpine**: Content-addressed storage backing immutable history
-- **sweetGrass + LoamSpine**: Attribution records anchored to permanent timeline
 - **Songbird + Songbird**: Cross-tower federation, multi-family routing
 
 **Detail**: `INTER_PRIMAL_INTERACTIONS.md`
