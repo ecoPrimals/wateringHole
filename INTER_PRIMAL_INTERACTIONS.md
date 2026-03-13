@@ -190,7 +190,7 @@ LoamSpine
 ```
 
 **Required**:
-- LoamSpine implementation (planned)
+- LoamSpine implementation (v0.8.0 -- `session.commit` + `permanent-storage.commitSession` compat)
 - biomeOS dehydration coordinator
 - Protocol specification
 
@@ -227,7 +227,7 @@ LoamSpine
 
 **Required**:
 - NestGate implementation
-- LoamSpine implementation
+- LoamSpine implementation (v0.8.0 -- `entry.append`, `proof.generate_inclusion`)
 - biomeOS commit coordinator
 
 **Design Notes**:
@@ -444,10 +444,11 @@ async fn pull_with_merge() {
 **Timeline**: 2-3 months
 
 **Deliverables**:
-1. LoamSpine implementation
-   - Append-only log
-   - Merkle tree proofs
-   - Immutable storage
+1. LoamSpine implementation (DONE -- v0.8.0)
+   - Append-only log with hash chain
+   - Inclusion proofs
+   - Session commit + braid commit integration
+   - permanent-storage.* compatibility for rhizoCrypt
 
 2. NestGate implementation
    - Content-addressed storage

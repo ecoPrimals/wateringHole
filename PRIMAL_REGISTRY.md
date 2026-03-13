@@ -219,7 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Status**: Production Ready (A, Security A++ LEGENDARY)
+**Version**: v2.32  
+**Status**: Production Ready (A, Security A++ LEGENDARY) — 3,148 tests, 71.47% coverage, 26 deploy graphs, 15 niche templates, 170+ capability translations, 16 capability domains
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -227,14 +228,15 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Neural API** | Semantic routing (`capability.call`), pathway learning, bidirectional feedback |
+| **Neural API** | Semantic routing (`capability.call`), 170+ translations, 16 domains, pathway learning |
 | **Atomics** | Tower Atomic, Node Atomic, Nest Atomic, Full NUCLEUS composition |
-| **Discovery** | Runtime capability matching, primal health monitoring |
+| **Provenance** | `rootpulse_commit` graph, `provenance_pipeline` graph, rhizoCrypt/LoamSpine/sweetGrass domains |
+| **Discovery** | Runtime capability matching, primal health monitoring, prefix resolution |
 | **Deployment** | genomeBin management, graph-based deployment, cross-device federation |
 | **Security** | Dark Forest integration (A++ LEGENDARY), genetic model coordination |
 | **IPC** | Universal IPC v3.0, multi-transport support |
 
-**Participates In**: Coordinates all composed systems (RootPulse, Tower Atomic, NUCLEUS, federation). biomeOS is to the ecosystem what the nervous system is to an organism.
+**Participates In**: Coordinates all composed systems (RootPulse, Tower Atomic, NUCLEUS, federation). Provenance trio (rhizoCrypt + LoamSpine + sweetGrass) wired into Neural API for `dag.*`, `commit.*`, `provenance.*` routing.
 
 ---
 
@@ -324,7 +326,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Immutable linear ledger for selective permanence  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A+, 98/100, 416/416 tests, 77.68% coverage)
+**Status**: Production Ready (v0.8.0, 549 tests, 90.08% coverage, pure Rust TLS, UniBin, provenance trio coordinated)
 
 **Role**: LoamSpine is the fossil record. Where rhizoCrypt is ephemeral and fast, LoamSpine is permanent and provable. Important events are deliberately committed ("dehydrated") from rhizoCrypt into LoamSpine's append-only ledger. Most data should be temporary; only what matters should be permanent.
 
