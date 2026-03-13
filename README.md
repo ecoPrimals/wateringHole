@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: March 12, 2026
+**Last Updated**: March 13, 2026
 
 ---
 
@@ -55,7 +55,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BarraCuda** | Pure Math | 712 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93) | Production (A+) |
 | **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU | Production (Phase 10, Iter 43) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Ecosystem substrate: Neural API (170+ translations, 16 domains), capability routing, NUCLEUS composition, bonding model, Dark Forest coordination, provenance trio wiring | Production (A, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Ecosystem substrate: Neural API (210+ translations, 16 domains, 35 deploy graphs, 20 niche templates), capability routing, NUCLEUS composition, RootPulse branch/merge/diff/federate, provenance trio E2E, cross-spring pipeline coordination | Production (A, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -252,9 +252,11 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Wired (biomeOS coordination layer)
 
-- **rhizoCrypt + LoamSpine + sweetGrass**: Provenance trio — `rootpulse_commit` graph orchestrates dehydration → sign → store → commit → attribute
+- **rhizoCrypt + LoamSpine + sweetGrass**: Provenance trio — `rootpulse_commit` graph orchestrates dehydration → sign → store → commit → attribute; `rootpulse_branch`, `rootpulse_merge`, `rootpulse_diff`, `rootpulse_federate` extend the workflow
 - **Any Spring + Provenance Trio**: `provenance_pipeline` graph — universal experiment provenance
 - **NestGate + LoamSpine**: Content-addressed storage backing immutable history
+- **airSpring + wetSpring**: Cross-spring pipeline — `cross_spring_soil_microbiome` graph connects soil moisture to microbial diversity with provenance attribution
+- **ludoSpring + ContinuousExecutor**: 60Hz game loop — `game_engine_tick` graph with `game.tick_logic` and `game.tick_physics` capability routing
 
 ### Under Development
 
@@ -306,6 +308,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### Coordination
 - `INTER_PRIMAL_INTERACTIONS.md` - Production interaction map and plans
 - `PRIMAL_REGISTRY.md` - Complete primal definitions and primitive catalogs
+- `SPRING_AS_PROVIDER_PATTERN.md` - How Springs register as biomeOS capability providers
+- `SPRING_EVOLUTION_ISSUES.md` - Cross-primal evolution issues and resolutions
 
 ### Integration Guides
 - `petaltongue/` - petalTongue integration documentation

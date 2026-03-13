@@ -2,7 +2,7 @@
 
 **Purpose**: Track issues, patterns, and evolution opportunities discovered by Springs
 that require coordination from biomeOS, ToadStool, or cross-primal teams.
-**Last Updated**: March 10, 2026
+**Last Updated**: March 13, 2026
 **Contributing Springs**: airSpring v0.7.5, neuralSpring V92/S139, wetSpring V103, groundSpring V100, hotSpring v0.6.24, healthSpring V3
 
 ---
@@ -40,7 +40,10 @@ agricultural and environmental capabilities.
 - Pedotransfer functions
 - IoT irrigation scheduling
 
-**Status**: OPEN
+**Status**: RESOLVED (March 13, 2026) — ecology domain with 30+ translations
+added to `capability_registry.toml` (biomeOS v2.33+). Includes all 7 ET₀ methods,
+soil physics, crop/irrigation, drought indices, biodiversity, and statistical
+inference capabilities.
 
 ---
 
@@ -91,7 +94,12 @@ let result = bridge.capability_call("ecology", "et0_pm", &args)?;
 as primary, with format 1 (dotted) as sugar that the handler splits on `.`.
 Document in the semantic naming standard.
 
-**Status**: OPEN
+**Status**: RESOLVED (March 13, 2026) — `CapabilityHandler::call()` now accepts
+all three formats with backward compatibility:
+- Canonical: `{ "capability": "domain", "operation": "method", "args": {...} }`
+- Dotted sugar: `{ "capability": "domain.method", "args": {...} }` (splits on first dot)
+- Params alias: `"params"` accepted as alias for `"args"`
+`NeuralApiCapabilityCaller` updated to emit canonical format.
 
 ---
 
@@ -114,7 +122,11 @@ through biomeOS's graph engine. The graph engine needs to support:
 **Proposed fix**: Deploy on Eastgate tower node and run end-to-end. Create
 a minimal test graph that validates one `capability.call` round-trip.
 
-**Status**: OPEN
+**Status**: RESOLVED (March 13, 2026) — Created `cross_spring_soil_microbiome.toml`
+graph (airSpring → wetSpring → provenance), registered `soil-microbiome` niche
+template, and added `cross_spring_pipeline_e2e.rs` integration tests covering
+capability chain calls and graph execution. Existing `cross_spring_ecology.toml`
+also exercised by the test suite.
 
 ---
 
@@ -185,7 +197,11 @@ documented pattern for a Spring registering as a biomeOS capability provider.
 
 Include example code and a template graph node.
 
-**Status**: OPEN
+**Status**: RESOLVED (March 13, 2026) — Pattern documented in
+`wateringHole/SPRING_AS_PROVIDER_PATTERN.md` with step-by-step guide,
+example Rust code, deploy graph node template, and registry configuration.
+wetSpring, airSpring, ludoSpring, neuralSpring, and healthSpring are
+already registered in `capability_registry.toml`.
 
 ---
 
@@ -320,7 +336,17 @@ arithmetic and MUST be addressed algorithmically.
 
 ## Resolved Issues
 
-*None yet — this document is newly created.*
+### ISSUE-001: Ecology Capability Domain Missing from Registry
+Resolved March 13, 2026. See Open Issues section for details.
+
+### ISSUE-003: `capability.call` Parameter Format Inconsistency
+Resolved March 13, 2026. See Open Issues section for details.
+
+### ISSUE-004: Cross-Primal Pipeline Graph Execution Not Tested End-to-End
+Resolved March 13, 2026. See Open Issues section for details.
+
+### ISSUE-007: Springs as biomeOS Science Providers — Registration Pattern
+Resolved March 13, 2026. See Open Issues section for details.
 
 ---
 

@@ -1,8 +1,8 @@
 # 🔗 Inter-Primal Interactions - Production Implementation Plan
 
 **Based on RootPulse Architecture**  
-**Status**: Phase 1 & 2 Complete → Phase 3 Planning  
-**Date**: January 3, 2026
+**Status**: Phase 1 & 2 Complete — Phase 3 Provenance Trio Validated  
+**Date**: March 13, 2026
 
 ---
 
@@ -165,7 +165,7 @@ PetalTongue
 
 ### 4. rhizoCrypt ↔ LoamSpine (Dehydration)
 
-**Status**: ⏳ **PLANNED** (rhizoCrypt v0.13.0 ready!)
+**Status**: ✅ **VALIDATED** (March 13, 2026 — live trio e2e test)
 
 **Concept** (From RootPulse):
 - **rhizoCrypt**: Fast ephemeral workspace (DAG, present/future)
@@ -189,10 +189,11 @@ LoamSpine
   ↓ Inclusion proofs available
 ```
 
-**Required**:
-- LoamSpine implementation (v0.8.0 -- `session.commit` + `permanent-storage.commitSession` compat)
-- biomeOS dehydration coordinator
-- Protocol specification
+**Validated**:
+- LoamSpine v0.8.0 (`session.commit` + `permanent-storage.commitSession` compat) ✅
+- rhizoCrypt v0.13.0 dehydration produces `DehydrationSummary` ✅
+- Wire format aligned: rhizoCrypt → LoamSpine serde contract validated ✅
+- biomeOS `rootpulse_commit.toml` graph orchestrates the full workflow ✅
 
 **Use Cases**:
 - Version control commits (RootPulse)
@@ -239,7 +240,7 @@ LoamSpine
 
 ### 6. SweetGrass ↔ LoamSpine (Attribution)
 
-**Status**: **READY** (SweetGrass v0.7.3 — `braid.commit` method, BraidId→UUID + ContentHash→[u8;32] type translation, UDS transport, 94% coverage)
+**Status**: ✅ **VALIDATED** (March 13, 2026 — SweetGrass v0.7.3, `braid.commit` + `contribution.recordDehydration`, 746 tests, 94% coverage)
 
 **Concept** (From RootPulse):
 - **SweetGrass**: Semantic attribution (who contributed what)
@@ -266,10 +267,11 @@ SweetGrass
   ↓ with timestamp from LoamSpine
 ```
 
-**Required**:
-- SweetGrass integration with biomeOS
-- Semantic analysis logic
-- Coordination pattern
+**Validated**:
+- `contribution.recordDehydration` accepts rhizoCrypt `DehydrationSummary` ✅
+- `braid.create` with data_hash, mime_type, size ✅
+- sweetGrass accommodates rhizoCrypt output through optional/defaulted fields ✅
+- biomeOS `rootpulse_commit.toml` includes attribution phase ✅
 
 **Benefits**:
 - **Semantic** attribution (not line-based!)
@@ -660,9 +662,9 @@ async fn commit(biome: &BiomeOS, commit: Commit) {
 ### Future (Phase 3)
 
 4. **rhizoCrypt → LoamSpine**
-   - API: Dehydration protocol (TBD)
-   - Protocol: Temporal collapse
-   - Status: ⏳ Planned
+   - API: `dag.dehydrate` → `permanence.commit_session` (JSON-RPC 2.0)
+   - Protocol: Temporal collapse (`DehydrationSummary` wire format)
+   - Status: ✅ Validated (March 13, 2026)
 
 5. **NestGate → LoamSpine**
    - API: Content storage (TBD)
@@ -670,9 +672,9 @@ async fn commit(biome: &BiomeOS, commit: Commit) {
    - Status: ⏳ Planned
 
 6. **SweetGrass → LoamSpine**
-   - API: Attribution recording (TBD)
-   - Protocol: Semantic braids
-   - Status: ⏳ Planned
+   - API: `contribution.recordDehydration`, `braid.create` (JSON-RPC 2.0)
+   - Protocol: W3C PROV-O semantic braids
+   - Status: ✅ Validated (March 13, 2026)
 
 ---
 
@@ -699,27 +701,31 @@ async fn commit(biome: &BiomeOS, commit: Commit) {
 
 ### Immediate (Next Session)
 
-1. **Multi-family validation** - Prove deterministic behavior
-2. **Integration tests** - Comprehensive test suite
-3. **PetalTongue integration** - Connect visualization
+1. **Multi-family validation** - Prove deterministic behavior across families
+2. **PetalTongue integration** - Connect ecosystem visualization to live trio
+3. **ludoSpring continuous coordination** - 60 Hz game engine via ContinuousExecutor
 
 ### Short-term (1-2 months)
 
-1. **LoamSpine MVP** - Basic immutable log
-2. **NestGate MVP** - Content-addressed storage
-3. **biomeOS commit pattern** - First coordination workflow
+1. **NestGate ↔ LoamSpine** - Content-addressed storage backing immutable history
+2. **Cross-Spring provenance** - wetSpring, airSpring consuming provenance_pipeline.toml
+3. **Songbird federation** - Multi-tower discovery and routing
 
-### Medium-term (3-6 months)
+### Completed (March 13, 2026)
 
-1. **rhizoCrypt integration** - Dehydration working
-2. **SweetGrass integration** - Attribution tracking
-3. **Production deployment** - Real-world usage
+1. ✅ **LoamSpine v0.8.0** - Immutable linear history, 700 tests, 90.6% coverage
+2. ✅ **rhizoCrypt ↔ LoamSpine dehydration** - Validated end-to-end with live binaries
+3. ✅ **sweetGrass attribution** - `contribution.recordDehydration` + `braid.create` validated
+4. ✅ **Provenance trio e2e** - Full 6-phase RootPulse commit workflow validated
+5. ✅ **ludoSpring exp052** - Game session provenance via trio (37/37 checks)
+6. ✅ **biomeOS ContinuousExecutor** - 60 Hz tick coordination (15 tests)
 
 ---
 
-**Status**: 🎊 **Phase 1 & 2 Complete - Ready for Phase 3**  
+**Status**: **Phase 3 Provenance Trio Validated (March 13, 2026)**  
 **Foundation**: Production-grade infrastructure ✅  
-**Next**: Emergent coordination patterns 🚀
+**Trio**: rhizoCrypt + LoamSpine + sweetGrass validated end-to-end ✅  
+**Next**: NestGate integration, federation, cross-Spring provenance
 
 🌳 **The ecosystem is ready to evolve!** 🌸
 
