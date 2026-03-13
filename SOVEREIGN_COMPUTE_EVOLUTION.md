@@ -228,7 +228,7 @@ Remaining gap is dispatch overhead and GPU occupancy.
 
 ### Level 2 — coralReef: Sovereign GPU Compiler + Minimal Unsafe
 
-**Status**: ✅ Complete (Phase 10 Iteration 43 — 1693+47 tests, 64% coverage, VFIO PFIFO channel + V2 MMU, WGSL+SPIR-V+GLSL frontends)
+**Status**: ✅ Complete (Phase 10 Iteration 44 — 1669+48 tests, 64% coverage, VFIO PFIFO channel + V2 MMU + USERD_TARGET fix, WGSL+SPIR-V+GLSL frontends)
 
 **What**: coralReef is a fully sovereign Rust GPU shader compiler evolved
 from Mesa NAK roots. All stubs replaced with pure Rust. f64 transcendentals
@@ -245,7 +245,7 @@ bincode for high-performance binary IPC. Capability-based discovery.
 - [x] coralGpu — unified compile + dispatch API
 - [x] `#[deny(unsafe_code)]` on 6/8 crates; remaining 9 unsafe blocks in driver (RAII-wrapped)
 - [x] tarpc + bincode binary IPC; JSON-RPC 2.0 primary
-- [x] 1693+47 tests, 64% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 + SPIR-V roundtrip (10/10)
+- [x] 1669+48 tests, 64% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 + SPIR-V roundtrip (10/10)
 - [x] Multi-GPU sovereignty (Iter 24), math debt elimination (Iter 25), sovereign pipeline unblock (Iter 26), deep debt evolution (Iter 27)
 - [x] **Sovereign GSP Phase 2** (March 12): firmware parser (22 chips, legacy + NET_img.bin),
   cross-architecture knowledge base (address space awareness, register transfer maps),

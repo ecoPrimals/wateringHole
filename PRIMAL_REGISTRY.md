@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 13, 2026
+**Last Updated**: March 12, 2026
 
 ---
 
@@ -193,7 +193,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 43 (A+) — 1693+47 tests passing, 71 ignored, 64% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync), `GpuContext::from_vfio()` convenience API for barraCuda, UVM dispatch pipeline (GPFIFO + USERD doorbell + completion polling), `KernelCacheEntry` + `dispatch_precompiled()`, `#[deny(unsafe_code)]` on 8/9 crates, zero clippy warnings, AGPL-3.0-only
+**Status**: Phase 10 Iteration 44 (A+) — 1669 default + 48 VFIO tests, 0 failed, 74 ignored, 64% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync + USERD_TARGET/INST_TARGET runlist fix), `GpuContext::from_vfio()` convenience API for barraCuda, UVM dispatch pipeline (GPFIFO + USERD doorbell + completion polling), `KernelCacheEntry` + `dispatch_precompiled()`, `#[deny(unsafe_code)]` on 8/9 crates, zero clippy warnings, AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL, SPIR-V, and GLSL compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified. coralDriver provides userspace GPU dispatch via DRM ioctl (AMD amdgpu, NVIDIA nouveau, nvidia-drm/UVM) and VFIO direct BAR0/DMA dispatch (maximum sovereignty). coralGpu unifies compilation and dispatch into a single API with sovereign driver preference (vfio > nouveau > amdgpu > nvidia-drm). Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -279,7 +279,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
 **Version**: 0.13.0-dev  
-**Status**: Production Ready (862 tests, 87.78% coverage, clippy pedantic+nursery clean, `#![forbid(unsafe_code)]`, AGPL-3.0-only, UniBin compliant, ecoBin compliant, semantic capability naming, provenance trio validated end-to-end)
+**Status**: Production Ready (491 tests, clippy pedantic+nursery clean, `#![forbid(unsafe_code)]`, AGPL-3.0-only, UniBin compliant, semantic capability naming)
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
@@ -303,7 +303,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.3, 746 tests, 94% coverage, ecoBin compliant, AGPL-3.0-only, Tower Atomic enforced, provenance trio validated end-to-end)
+**Status**: Production Ready (v0.7.2, 570 tests, ecoBin compliant, AGPL-3.0-only, Tower Atomic enforced)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
@@ -326,7 +326,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Immutable linear ledger for selective permanence  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.8.0, 700 tests, 90.6% coverage, pure Rust TLS, UniBin, provenance trio validated end-to-end)
+**Status**: Production Ready (v0.8.0, 549 tests, 90.08% coverage, pure Rust TLS, UniBin, provenance trio coordinated)
 
 **Role**: LoamSpine is the fossil record. Where rhizoCrypt is ephemeral and fast, LoamSpine is permanent and provable. Important events are deliberately committed ("dehydrated") from rhizoCrypt into LoamSpine's append-only ledger. Most data should be temporary; only what matters should be permanent.
 
@@ -384,16 +384,6 @@ Application Layer (Gaming, Scientific, Collaboration)
 
 **rhizoCrypt** is the engine. **LoamSpine** adds permanence semantics. **sweetGrass** adds attribution semantics. biomeOS coordinates them via the Neural API into RootPulse.
 
-### scyBorg Licensing Role
-
-The provenance trio is the enforcement mechanism for the **scyBorg** triple-copyleft licensing framework (AGPL-3.0 + ORC + CC-BY-SA 4.0):
-
-- **sweetGrass** tracks *who created what* — the BY in CC-BY-SA
-- **rhizoCrypt** tracks *derivation chains* — the SA in CC-BY-SA (share-alike compliance evidence)
-- **loamSpine** issues *immutable license certificates* — proof that terms apply
-
-See `wateringHole/SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` for the evolution path.
-
 ---
 
 ## Primal Coordination Summary
@@ -441,7 +431,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.5 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 43 (PFIFO channel init, V2 MMU page tables, cross-primal rewire, 1693+47 tests) |
+| coralReef | Phase 10 Iteration 44 (USERD_TARGET runlist fix, PFIFO channel + V2 MMU, 1669+48 tests) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
