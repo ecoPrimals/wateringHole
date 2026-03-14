@@ -264,7 +264,7 @@ mechanism. Without the anchor, attribution exists but has no public proof.
    rarity, history summary hash
 2. **Trading protocol** — `CertificateTradeOffer`, `CertificateTradeAccept`,
    `CertificateTradeReject`, `CertificateTradeCancel` entry types (DONE in
-   loam-spine-core v0.8.0, implemented during exp061)
+   loam-spine-core v0.8.2, implemented during exp061)
 3. **Public chain anchor entry type** — `PublicChainAnchor { chain, tx_hash,
    state_hash }` for recording the optional global anchor
 4. **Owner inventory query** — `list_by_owner(did)` for "show me everything
