@@ -26,7 +26,7 @@
 |--------|--------|-------|
 | rhizoCrypt | DONE | redb default since v0.12 |
 | LoamSpine | DONE | redb default, sled optional (sled-storage feature) |
-| sweetGrass | DONE | sweet-grass-store-redb created, sled store still available |
+| sweetGrass | DONE | `sweet-grass-store-redb` crate (42 tests), sled feature-gated (`--features sled`) |
 | biomeOS | DONE | biomeos-graph migrated to redb |
 | Songbird | PENDING | sled in orchestrator, tor-protocol, sovereign-onion |
 | BearDog | PENDING | sled in workspace |
