@@ -2,7 +2,7 @@
 
 **Purpose**: Track issues, patterns, and evolution opportunities discovered by Springs
 that require coordination from biomeOS, ToadStool, or cross-primal teams.
-**Last Updated**: March 13, 2026
+**Last Updated**: March 14, 2026
 **Contributing Springs**: airSpring v0.7.5, neuralSpring V92/S139, wetSpring V103, groundSpring V100, hotSpring v0.6.24, healthSpring V3
 
 ---
@@ -69,7 +69,10 @@ let bridge = NeuralBridge::discover()?; // 4-tier socket resolution
 let result = bridge.capability_call("ecology", "et0_pm", &args)?;
 ```
 
-**Status**: OPEN
+**Status**: RESOLVED (March 14, 2026) — `neural-api-client-sync` crate created in biomeOS
+workspace. Zero-dep sync client using `std::os::unix::net::UnixStream`. 4-tier socket
+discovery, `capability_call()`, `discover_capability()`, `health_check()`. All springs
+can now use Neural API without tokio.
 
 ---
 
@@ -148,7 +151,10 @@ Consider adding this to `biomeos-types::SystemPaths`.
 **Evidence**: airSpring's implementation in `metalForge/forge/src/neural.rs`
 (`uid_from_runtime_dir()`) works on Linux without any `unsafe` blocks.
 
-**Status**: OPEN
+**Status**: RESOLVED (March 14, 2026) — `safe_uid()` function added to
+`biomeos-types::paths`. Reads `/proc/self/status` Uid: line (safe, no libc).
+Falls back to 65534 (nobody). Available as `SystemPaths::safe_uid()` and
+`paths::safe_uid()`.
 
 ---
 
@@ -283,7 +289,9 @@ diversity analysis. This requires:
 }
 ```
 
-**Status**: OPEN
+**Status**: RESOLVED (March 14, 2026) — Standard defined in `CROSS_SPRING_DATA_FLOW_STANDARD.md`.
+Canonical format: `ecoPrimals/time-series/v1` with required fields (schema, variable, unit,
+timestamps, values) and optional source/metadata. ISO 8601 timestamps, f64 values, SI units.
 
 ---
 
@@ -347,6 +355,15 @@ Resolved March 13, 2026. See Open Issues section for details.
 
 ### ISSUE-007: Springs as biomeOS Science Providers — Registration Pattern
 Resolved March 13, 2026. See Open Issues section for details.
+
+### ISSUE-002: Neural API Client Needs Synchronous Alternative
+Resolved March 14, 2026. See Open Issues section for details.
+
+### ISSUE-005: Safe UID Discovery Pattern
+Resolved March 14, 2026. See Open Issues section for details.
+
+### ISSUE-010: Cross-Spring Data Flow — θ(t) → Microbial Diversity
+Resolved March 14, 2026. See Open Issues section for details.
 
 ---
 
