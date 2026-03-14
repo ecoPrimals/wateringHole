@@ -153,6 +153,40 @@ coralReef generates native GPU instructions directly from Rust.
 
 ---
 
+## Dependency Evolution Status (March 14, 2026)
+
+### ring Removal
+| Primal | Status | Notes |
+|--------|--------|-------|
+| biomeOS | REMOVED from production | ureq default-features=false, Songbird delegation |
+| Songbird | EVOLVED — rustls-rustcrypto default | ring still transitive via quinn (QUIC) |
+| BearDog | USES ring via rustls/quinn | BearDog is the crypto provider; ring here is acceptable |
+| rhizoCrypt | FEATURE-GATED | Only via http-clients feature (not default) |
+| loamSpine | FEATURE-GATED | Only via discovery-http feature (not default) |
+| sweetGrass | DEV-DEPS ONLY | testcontainers → ring (not in production) |
+| Squirrel | NEEDS EVOLUTION | sqlx → rustls → ring |
+
+### sled → redb Evolution
+| Primal | Status | Notes |
+|--------|--------|-------|
+| rhizoCrypt | DONE | redb default since v0.12 |
+| LoamSpine | DONE | redb default, sled optional (sled-storage feature) |
+| sweetGrass | DONE | sweet-grass-store-redb created, sled store still available |
+| biomeOS | DONE | biomeos-graph migrated to redb |
+| Songbird | PENDING | sled in orchestrator, tor-protocol, sovereign-onion |
+| BearDog | PENDING | sled in workspace |
+
+### NestGate Unsafe Evolution
+- 6 unsafe blocks replaced with safe alternatives (zero_cost_evolution, safe_ring_buffer, async_optimization)
+- 8 unsafe blocks kept with SAFETY justification (lock-free data structures, FFI, SIMD)
+- pin-project adopted for safe async pin projection
+
+### Production Mock Isolation
+- rhizoCrypt mocks behind `#[cfg(test)]` / testing feature
+- Squirrel mocks isolated to testing modules
+
+---
+
 ## coralReef — Layer 2 Evolution Guidance
 
 ### Eliminating the 2 Remaining Unsafe Blocks
