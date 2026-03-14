@@ -2,16 +2,16 @@
 
 Cross-primal integration documentation for petalTongue.
 
-**Updated**: March 13, 2026
+**Updated**: March 14, 2026
 
 ---
 
 ## Integration Status
 
 petalTongue v1.6.3 (16 crates, edition 2024):
-- 3,752 tests passing, 0 failures, 17 ignored
+- 3,940+ tests passing, 0 failures, 17 ignored
 - `#![forbid(unsafe_code)]` on all 16 crates + UniBin, zero C dependencies
-- 79.8% line coverage, 81.0% function coverage (llvm-cov) -- target 90%
+- ~83% line coverage (llvm-cov) -- target 90%
 - tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
 - JSON-RPC 2.0 over Unix sockets (secondary, local IPC and debugging)
 - HTTP fallback for browser/external clients
