@@ -429,7 +429,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | groundSpring | V100 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
 | wetSpring | V99 |
-| airSpring | v0.7.5 |
+| airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 44 (USERD_TARGET runlist fix, PFIFO channel + V2 MMU, 1669+48 tests) |
 
@@ -437,7 +437,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Precision agriculture, irrigation science, environmental systems  
 **Phase**: Domain Validation  
-**Status**: v0.7.5 — 827 lib + 186 forge tests (27 GPU fail: upstream wgpu 28 NVK driver issue), 86 binaries, 78 experiments, 381/381 validation, 146/146 evolution, 20.6× CPU speedup (24/24 parity), 0 clippy warnings (pedantic+nursery), zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.5 (wgpu 28, DF64 precision tier, 3/6 local ops absorbed upstream, fused Welford + fused Pearson wired)
+**Status**: v0.7.6 — 833 lib + 186 forge tests (1 pre-existing GPU driver issue), 95 binaries, 87 experiments, 381/381 validation, 146/146 evolution, 14.5× CPU speedup (21/21 parity), 0 clippy warnings (pedantic+nursery), zero unsafe code, zero mocks in production, AGPL-3.0-or-later, standalone barraCuda 0.3.5 (wgpu 28, DF64 precision tier). Deep debt: bingocube-nautilus 0.1.0 migration (NautilusBrain), new `data` module (Provider trait), hardcoded path elimination, tolerance provenance complete, CI doc lints + coverage gate
 
 **Role**: airSpring validates agricultural computational methods — FAO-56 ET₀ (8 methods), soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, ecological diversity, immunological Anderson coupling, and SCS-CN/Green-Ampt hydrology — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
 
