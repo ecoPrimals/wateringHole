@@ -228,7 +228,7 @@ LoamSpine
 
 **Required**:
 - NestGate implementation
-- LoamSpine implementation (v0.8.0 -- `entry.append`, `proof.generate_inclusion`)
+- LoamSpine implementation (v0.8.2 -- `entry.append`, `proof.generate_inclusion`)
 - biomeOS commit coordinator
 
 **Design Notes**:
@@ -446,7 +446,7 @@ async fn pull_with_merge() {
 **Timeline**: 2-3 months
 
 **Deliverables**:
-1. LoamSpine implementation (DONE -- v0.8.0)
+1. LoamSpine implementation (DONE -- v0.8.2)
    - Append-only log with hash chain
    - Inclusion proofs
    - Session commit + braid commit integration
