@@ -44,6 +44,24 @@ The validation goal is **CERN-grade reproducible physics at home, scalable to CE
 > primals and wires `sovereign_resolves_poisoning()` into MD precision
 > routing — DF64 transcendentals now available through sovereign bypass.
 >
+> **March 14 update (GPU glow plug + sovereign power management)**:
+> hotSpring discovered that the GPU actively gates its own clock domains
+> within seconds of driver unbind — `PMC_ENABLE` reverts to `0x40000020`,
+> PFIFO returns `0xBAD0DA00`. Built a Rust "glow plug" that writes
+> `PMC_ENABLE=0xFFFFFFFF` via BAR0, warming the GPU in ~50ms with no
+> nouveau dependency. Cold start produces cleaner state than nouveau warm.
+>
+> Desktop Volta has **no PMU firmware** — all power management is pure
+> register writes. Designed a five-state power model for coralReef:
+> Sovereign (~25W, <1ms) → Warm (~20W, <5ms) → Glow (~10W, 50ms) →
+> Sleep (~3W, 100ms) → Off. Sub-unit level clock gating (SLCG) is a
+> hardware default — all 9 sub-units auto-gate. Bus-level CG (0x1C00)
+> is untapped by nouveau — headroom for lower idle power than standard drivers.
+>
+> Hardware: RTX 5060 + 2× Titan V (oracle + VFIO). Trio guidance issued.
+> See `handoffs/HOTSPRING_GLOWPLUG_SOVEREIGN_POWER_TRIO_HANDOFF_MAR14_2026.md`
+> and `hotSpring/experiments/059_CORALREEF_GPU_POWER_MANAGEMENT_DESIGN.md`.
+>
 > **March 12 update (dispatch investigation)**: hotSpring deep-debugged
 > the dispatch pipeline on both Titan V and RTX 3090. Found and fixed
 > **four critical bugs** in coralReef:
@@ -156,6 +174,7 @@ Layer 3  (optional)        Rust     WE OWN    Minimal Vulkan-compatible dispatch
 Layer 2  coralDriver       Rust     WE OWN    Userspace GPU driver (replaces NVK)
 Layer 1  coralNak          Rust     WE OWN    Shader compiler (replaces NAK)
 Layer 0  vfio-pci / kmod   Rust     WE OWN    Userspace DMA or thin kernel module
+Layer -1 coral-power       Rust     WE OWN    GPU power management (glow plug, PMU)
          ─────────────────────────────────────────────────
          ANY GPU hardware  silicon  any       Vulkan-capable or direct-mapped
 ```
@@ -303,7 +322,7 @@ Multi-vendor ISA from one Rust toolchain.
 
 ### Level 4 — Sovereign Compute Runtime (3-6 months)
 
-**Status**: 🔄 Core implemented — **nouveau DRM pipeline PROVEN on hardware** (Titan V + RTX 3090, `eb4b4eb`); AMD amdgpu pipeline operational; UVM path stubbed; GSP learning system operational
+**Status**: 🔄 Core implemented — **VFIO glow plug + PBDMA context load proven** (Titan V, cold start self-warming, no nouveau dependency); nouveau DRM pipeline proven on hardware (Titan V + RTX 3090, `eb4b4eb`); AMD amdgpu operational; sovereign power management designed (5-state model)
 
 **What**: Replace NVK/Vulkan with a minimal pure-Rust compute runtime.
 Direct GPU memory management, command submission, and kernel dispatch
