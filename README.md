@@ -298,6 +298,11 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `btsp/BEARDOG_TECHNICAL_STACK.md` - BearDog cryptographic foundation
 - `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` - Tower Atomic TLS guide
 
+### Strategy & Licensing
+- `LYSOGENY_PROTOCOL.md` - Area denial through open prior art (adoptable by all springs)
+- `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` - **Ecosystem licensing standard** (AGPL + ORC + CC-BY-SA for all primals/springs)
+- `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` - NFT architecture (memory-bound digital objects)
+
 ### Evolution & Upstream
 - `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` - Cross-primal pure Rust compute stack
 - `SOVEREIGN_COMPUTE_EVOLUTION.md` - Long-term sovereign GPU driver plan
