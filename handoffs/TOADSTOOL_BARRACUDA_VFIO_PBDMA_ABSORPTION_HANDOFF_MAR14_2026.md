@@ -319,4 +319,32 @@ complexity.
 
 ---
 
-*March 14, 2026 — The scheduler dispatches. The PBDMA loads. The last mile is DMA.*
+---
+
+## Addendum: GPU Glow Plug (March 14, 2026 — late session)
+
+**See also**: `HOTSPRING_GLOWPLUG_SOVEREIGN_POWER_TRIO_HANDOFF_MAR14_2026.md`
+
+After the PBDMA context load breakthrough, we discovered that the GPU
+actively gates its own clock domains within seconds of driver unbind.
+`PMC_ENABLE` reverts to `0x40000020` and PFIFO returns `0xBAD0DA00`.
+
+**The fix**: Write `0xFFFFFFFF` to `PMC_ENABLE` (0x000200) from Rust. The
+GPU clocks all engines, reads back `0x5fecdff1`. No nouveau needed for
+warming. This "glow plug" is now in `channel.rs` and fires automatically
+when the GPU is cold. Self-warming from cold produces cleaner PFIFO state
+than inheriting nouveau's warm state (2 fewer faults, Experiment M goes
+from FAULT to ok).
+
+**For toadStool**: The warm-state guard in section "Absorption Guidance"
+point 3 should evolve into a full `PowerManager` with state machine
+(Sovereign → Warm → Glow → Sleep → Off). Desktop Volta has no PMU
+firmware — all power management is pure register writes, ideal for Rust.
+
+**For barraCuda**: No changes needed. When dispatch is ready (7/7 pass),
+the glow plug ensures the GPU is warm regardless of how long it's been
+idle. Pre-warm hints can hide the 50ms wake latency behind CPU work.
+
+---
+
+*March 14, 2026 — The scheduler dispatches. The PBDMA loads. The GPU warms itself.*
