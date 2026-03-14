@@ -1,8 +1,8 @@
-# airSpring V0.7.6 — Deep Debt Resolution Handoff to barraCuda / toadStool
+# airSpring V0.7.6 — Deep Debt Resolution + Execution Handoff to barraCuda / toadStool
 
 SPDX-License-Identifier: AGPL-3.0-or-later
 **Date**: March 14, 2026
-**From**: airSpring v0.7.6 (87 experiments, 833 lib + 186 forge tests)
+**From**: airSpring v0.7.6 (87 experiments, 834 lib + 41 integration + 186 forge tests)
 **To**: barraCuda (v0.3.5) + toadStool (S147+)
 **barraCuda Pin**: v0.3.5 (wgpu 28)
 **bingocube-nautilus Pin**: v0.1.0
@@ -11,10 +11,12 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 ## Executive Summary
 
-airSpring completed a deep debt resolution session that synced to barraCuda
-0.3.5 and bingocube-nautilus 0.1.0. This handoff documents API migration
-patterns, a new data provider abstraction, and evolution learnings relevant
-to the barraCuda/toadStool teams.
+airSpring completed two deep debt sessions. Session 1 synced to barraCuda
+0.3.5 / bingocube-nautilus 0.1.0 and introduced the `data` module. Session 2
+executed all audit findings: 4 compilation blockers resolved, 4 validation
+integrity fixes, provenance documentation complete, code quality polish.
+All features now compile (`--all-features` including NPU), all 834 lib +
+41 integration + 186 forge tests pass, zero clippy pedantic+nursery warnings.
 
 ---
 
@@ -132,26 +134,89 @@ const DEFAULT_DOY: i32 = 180;              // June 29 (mid-growing season)
 
 ---
 
-## §4 Current airSpring Status
+## §4 Deep Debt Execution — Upstream Fixes for barraCuda/toadStool
+
+### GPU Stream Smoother Bug (Critical for all springs using MovingWindowStats)
+
+The upstream WGSL shader `barraCuda/crates/barracuda/src/shaders/stats/
+moving_window_f64.wgsl` declared `array<f64>` types for input/output
+buffers and `f64` internal variables, but the Rust `MovingWindowStats` code
+sends and expects `f32` data. `wgpu`/`naga` does not support `f64` storage
+buffers, so the shader was silently producing garbage.
+
+**Fix applied**: All `f64` declarations changed to `f32` in the shader.
+The `_f64` filename is retained for historical continuity but documented
+as a misnomer.
+
+**Action for barraCuda**: Verify this fix is committed upstream. Other
+springs using `MovingWindowStats` (wetSpring S28+) should update their
+GPU integration test tolerances from exact `f64` equality to `f32`-appropriate
+thresholds (`1e-5` for mean, `1e-4` for variance/min/max).
+
+### akida-driver Facade (For toadStool neuromorphic crate)
+
+The `phase1/toadstool/crates/neuromorphic/akida-driver/src/lib.rs` was a
+1-line stub (`// stub for local builds`). airSpring evolved it into a
+complete pure Rust facade defining 14 types:
+
+- `AkidaDevice`, `DeviceManager`, `Capabilities`
+- `InferenceConfig`, `ModelProgram`, `InferenceResult`
+- `InputBuffer`, `OutputBuffer`, `PowerMode`, `PowerStats`
+- `NeuronStatistics`, `DeviceState`
+- `DriverError`, `Result<T>`
+
+This is a **software abstraction**, not a hardware driver. It provides the
+API surface so that `airSpring`'s `npu/mod.rs` compiles with `--features npu`.
+The real hardware interaction should evolve from here — the facade returns
+reasonable defaults and empty device lists.
+
+**Action for toadStool**: Review and adopt this facade. It follows the
+Zero Mocks principle — no mock trait implementations, just a clean API
+surface that can be backed by real hardware when available.
+
+---
+
+## §5 Current airSpring Status
 
 | Metric | Value |
 |--------|-------|
 | Version | 0.7.6 |
 | Experiments | 87 |
 | Python checks | 1,284/1,284 |
-| Lib tests | 833 (1 pre-existing GPU driver issue) |
+| Lib tests | 834 (0 failures) |
+| Integration tests | 41 (21 GPU + 20 stats) |
 | Forge tests | 186 |
 | Validation | 381/381 |
 | Cross-spring evolution | 146/146 |
 | CPU speedup | 14.5× geometric mean (21/21 parity) |
 | barraCuda | v0.3.5 |
-| Clippy | 0 warnings (pedantic+nursery) |
+| Clippy | 0 warnings (`--all-features --all-targets -W pedantic -W nursery -D warnings`) |
 | Unsafe | 0 |
 | Max file size | 815 lines |
+| `cargo check --features npu` | PASS |
+| `cargo doc --no-deps` | PASS |
 
 ---
 
-## §5 Open Items from V075 (Still Valid)
+## §6 Potential Deduplication — Sum-of-Squares via barraCuda
+
+During audit, 3 manual sum-of-squares patterns were found that could use
+`barracuda::stats::correlation::variance` instead of hand-rolled
+`.iter().map(|&xi| (xi - mean).powi(2)).sum()`:
+
+| File | Pattern | Suggestion |
+|------|---------|------------|
+| `eco/isotherm.rs` | `qe.iter().map(\|&qi\| (qi - mean_qe).powi(2)).sum()` | `barracuda::stats::correlation::variance` × (n-1) |
+| `eco/correction.rs` | `y.iter().map(\|&yi\| (yi - mean_y).powi(2)).sum()` | Same |
+| `testutil/stats.rs` | `observed.iter().map(\|o\| (o - mean_obs).powi(2)).sum()` | Same |
+
+These already use `barracuda::stats::mean`. Centralizing variance would
+improve numerical stability (Welford's algorithm in barracuda) and reduce
+code duplication. Low priority — current implementations are correct.
+
+---
+
+## §7 Open Items from V075 (Still Valid)
 
 These items from the V075 handoff remain relevant:
 
