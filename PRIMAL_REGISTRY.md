@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v2.32  
-**Status**: Production Ready (A, Security A++ LEGENDARY) — 3,148 tests, 71.47% coverage, 26 deploy graphs, 15 niche templates, 170+ capability translations, 16 capability domains
+**Version**: v2.35  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 4,275 tests, 75.21% coverage, 30 deploy graphs, 15 niche templates, 205+ capability translations, 16 capability domains, zero-copy `bytes::Bytes`, centralized primal constants, tarpc transport wiring
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -228,7 +228,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Neural API** | Semantic routing (`capability.call`), 170+ translations, 16 domains, pathway learning |
+| **Neural API** | Semantic routing (`capability.call`), 205+ translations, 16 domains, pathway learning |
 | **Atomics** | Tower Atomic, Node Atomic, Nest Atomic, Full NUCLEUS composition |
 | **Provenance** | `rootpulse_commit` graph, `provenance_pipeline` graph, rhizoCrypt/LoamSpine/sweetGrass domains |
 | **Discovery** | Runtime capability matching, primal health monitoring, prefix resolution |

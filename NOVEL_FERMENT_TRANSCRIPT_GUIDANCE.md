@@ -290,9 +290,9 @@ mechanism. Without the anchor, attribution exists but has no public proof.
 
 ---
 
-## 7. Validated in ludoSpring exp061
+## 7. Validated in ludoSpring
 
-The fermenting system (exp061_fermenting) validates the full NFT lifecycle:
+### exp061: Fermenting System (Core NFT Lifecycle)
 
 ```bash
 cargo run -p ludospring-exp061 -- validate   # 89/89 checks
@@ -315,14 +315,44 @@ The trading protocol entry types (`CertificateTradeOffer/Accept/Reject/Cancel`)
 and the object memory API (`ObjectMemory`, `ObjectEvent`) were implemented in
 the provenance trio codebases during this experiment.
 
+### exp062-066: Cross-Spring Provenance Experiments (228 checks)
+
+```bash
+cargo run -p ludospring-exp064                # 39/39 BearDog-signed chain
+cargo run -p ludospring-exp062                # 39/39 Field sample provenance
+cargo run -p ludospring-exp063                # 35/35 Consent-gated medical access
+cargo run -p ludospring-exp065                # 74/74 Cross-domain fraud unification
+cargo run -p ludospring-exp066                # 41/41 Radiating attribution calculator
+```
+
+| Experiment | Checks | What It Proves |
+|-----------|--------|---------------|
+| exp064: BearDog-Signed Chain | 39/39 | Ed25519 signing on every trio operation (vertex, cert, braid). Chain verification detects tamper at exact position. IPC wire format for `crypto.sign_ed25519` / `crypto.verify_ed25519`. |
+| exp062: Field Sample Provenance | 39/39 | wetSpring scaffold — full sample lifecycle (Collect → Publish). 6 fraud types (PhantomSample, DuplicateAccession, BrokenColdChain, UnauthorizedAccess, MislabeledSpecimen, ContaminationGap). DAG isomorphism with extraction shooter exp053. |
+| exp063: Consent-Gated Medical Access | 35/35 | healthSpring scaffold — patient-owned records (loamSpine certs). Consent as scoped lending. 5 fraud types. Zero-knowledge access proofs via BearDog selective disclosure. PROV-O audit trail. |
+| exp065: Cross-Domain Fraud Unification | 74/74 | Same `GenericFraudDetector` code across gaming/science/medical. 5 generic fraud types. >80% structural similarity. The universality claim from Paper 18 is proven computationally. |
+| exp066: Radiating Attribution Calculator | 41/41 | sunCloud value distribution. Walk sweetGrass attribution chain, compute proportional credit. Decay models (linear, exponential). Role weighting (Creator > Contributor > Validator). Conservation: shares sum to 1.0. |
+
+**Total validated: 317 checks across 6 experiments (exp061-066), 0 failures.**
+
+See `whitePaper/gen3/baseCamp/21_sovereign_sample_provenance.md` (Paper 21) and
+`whitePaper/gen3/baseCamp/22_zero_knowledge_medical_provenance.md` (Paper 22).
+
 ---
 
 ## 8. References
 
-- `ludoSpring/experiments/exp061_fermenting/` — working implementation
+- `ludoSpring/experiments/exp061_fermenting/` — core NFT lifecycle
+- `ludoSpring/experiments/exp062_field_sample_provenance/` — wetSpring scaffold
+- `ludoSpring/experiments/exp063_consent_gated_medical/` — healthSpring scaffold
+- `ludoSpring/experiments/exp064_beardog_signed_chain/` — BearDog signing protocol
+- `ludoSpring/experiments/exp065_cross_domain_fraud/` — cross-domain fraud unification
+- `ludoSpring/experiments/exp066_radiating_attribution/` — sunCloud attribution calculator
 - `phase2/biomeOS/graphs/provenance_node_atomic.toml` — deployment graph
 - `wateringHole/SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` — licensing layer
 - `whitePaper/economics/LATENT_VALUE_ECONOMY.md` — latent value economy
 - `whitePaper/economics/SUNCLOUD_ECONOMIC_MODEL.md` — radiating attribution
 - `whitePaper/economics/LOAM_CERTIFICATE_LAYER.md` — certificate mesh
-- `whitePaper/gen3/baseCamp/20_novel_ferment_transcript_economics.md` — gen3 paper
+- `whitePaper/gen3/baseCamp/20_novel_ferment_transcript_economics.md` — NFT economics paper
+- `whitePaper/gen3/baseCamp/21_sovereign_sample_provenance.md` — sample provenance paper
+- `whitePaper/gen3/baseCamp/22_zero_knowledge_medical_provenance.md` — medical provenance paper

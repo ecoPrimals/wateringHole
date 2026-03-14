@@ -1,16 +1,18 @@
-# scyBorg — Provenance Trio Licensing Evolution Guidance
+# scyBorg — ecoPrimals Licensing Standard
 
 **Date**: March 13, 2026
-**From**: ludoSpring (lysogeny strategy) + wateringHole (standards)
-**To**: sweetGrass, rhizoCrypt, loamSpine teams
+**Audience**: All primals, all springs, all derivative works
 **License**: AGPL-3.0-or-later
-**Status**: Guidance — describes target architecture for licensing support
+**Status**: Active — the licensing standard for the entire ecoPrimals ecosystem
 
 ---
 
 ## 1. What Is scyBorg?
 
-scyBorg is the ecoPrimals triple-copyleft licensing framework:
+scyBorg is the ecoPrimals triple-copyleft licensing framework. It is not
+optional guidance. It is the licensing standard applied to every primal,
+every spring, every experiment, every tool, and every derivative work in
+the ecosystem.
 
 ```
 scyBorg = AGPL-3.0 (code) + ORC (game mechanics) + CC-BY-SA 4.0 (creative content)
@@ -23,12 +25,110 @@ scyBorg = AGPL-3.0 (code) + ORC (game mechanics) + CC-BY-SA 4.0 (creative conten
 | Creative | CC-BY-SA 4.0 | Art, worlds, narrative, characters, music, sound, maps | Creative Commons (nonprofit) |
 | Reserved | ORC Reserved Material | Studio-specific branding, trademarks, trade dress | Creator retains |
 
-No single entity can rug-pull any of these licenses. This is structural, not
-contractual.
+No single entity can rug-pull any of these licenses. Each is governed by an
+independent nonprofit. This is structural, not contractual.
 
-### Why the Provenance Trio Matters
+---
 
-The trio IS the enforcement mechanism:
+## 2. Applicability — What scyBorg Covers
+
+scyBorg applies to everything in ecoPrimals. Every primal, spring, and
+derivative work falls under at least one layer.
+
+### All Code: AGPL-3.0-or-later
+
+Every Rust source file, WGSL shader, build script, configuration, test,
+experiment, and tool in every primal and every spring is AGPL-3.0-or-later.
+
+This means:
+- Any derivative must also be AGPL-3.0-or-later
+- Network use triggers the distribution obligation (the "A" in AGPL)
+- Even SaaS wrappers around ecoPrimals code must release their source
+
+Applies to: BearDog, Songbird, NestGate, ToadStool, BarraCuda, coralReef,
+Squirrel, biomeOS, petalTongue, rhizoCrypt, sweetGrass, LoamSpine, skunkBat,
+sourDough, ludoSpring, wetSpring, hotSpring, neuralSpring, airSpring,
+groundSpring, healthSpring, and all future primals and springs.
+
+### Game Mechanics: ORC Licensed Material
+
+Any game rules, stat blocks, progression systems, encounter math, or
+mechanical designs produced by ludoSpring (or any spring producing game
+content) are ORC Licensed Material. ORC is irrevocable and perpetual.
+
+### Creative Content: CC-BY-SA 4.0
+
+Any non-code creative output — documentation, papers, visualizations,
+narrative designs, diagrams, whitePaper content — is CC-BY-SA 4.0.
+Attribution is required. Share-alike propagates to derivatives.
+
+### Reserved Material
+
+Studio-specific branding, trademarks, and trade dress (the ecoPrimals name,
+primal names, logos) remain reserved under ORC Reserved Material. This does
+not restrict the code or mechanics — only the branding.
+
+---
+
+## 3. Why Three Layers
+
+A single license cannot protect all outputs:
+
+- AGPL-3.0 covers code but not game rules or creative writing
+- ORC covers game mechanics but not source code or art
+- CC-BY-SA covers creative works but not software or game systems
+
+scyBorg closes every gap. There is no artifact in the ecosystem that lacks
+copyleft protection.
+
+```
+┌──────────────────────────────────────────────┐
+│                  scyBorg                      │
+│                                              │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
+│  │ AGPL-3.0 │  │   ORC    │  │CC-BY-SA  │  │
+│  │          │  │          │  │  4.0     │  │
+│  │  Code    │  │ Mechanics│  │ Creative │  │
+│  │  Shaders │  │ Rules    │  │ Art      │  │
+│  │  Math    │  │ Stats    │  │ Worlds   │  │
+│  │  Tools   │  │ Systems  │  │ Docs     │  │
+│  │  Infra   │  │ Encounters│ │ Papers   │  │
+│  └──────────┘  └──────────┘  └──────────┘  │
+│                                              │
+│  ┌──────────────────────────────────────┐   │
+│  │  Provenance Trio (Enforcement Layer) │   │
+│  │  sweetGrass + rhizoCrypt + loamSpine │   │
+│  └──────────────────────────────────────┘   │
+└──────────────────────────────────────────────┘
+```
+
+---
+
+## 4. Defense in Depth
+
+scyBorg is one layer in a four-layer defense strategy:
+
+| Layer | Mechanism | What It Protects |
+|-------|-----------|-----------------|
+| **Lysogeny** | Prior art + independent derivation + cross-domain proof | Math and algorithms — can't be patented |
+| **scyBorg** | Triple copyleft (AGPL + ORC + CC-BY-SA) | Code, mechanics, creative work — can't be closed |
+| **Provenance Trio** | Machine-verifiable attribution and derivation chains | Evidence trail — violations are provable |
+| **skunkBat** | Network threat detection, graduated response | Runtime — extraction patterns are hostile |
+
+Lysogeny prevents proprietary claims on the math. scyBorg prevents
+proprietary closure of the implementation. The provenance trio provides the
+evidence chain. skunkBat defends the runtime.
+
+An attacker must defeat all four layers simultaneously. No single layer is
+sufficient alone, but together they create structural resistance to extraction.
+
+See `LYSOGENY_PROTOCOL.md` for the area denial strategy.
+
+---
+
+## 5. The Provenance Trio as Enforcement
+
+The trio IS the enforcement mechanism for scyBorg:
 
 - **sweetGrass** tracks *who created what* (the BY in CC-BY-SA)
 - **rhizoCrypt** tracks *derivation chains* (the SA in CC-BY-SA)
@@ -40,7 +140,7 @@ resistant to license violation.
 
 ---
 
-## 2. Current State Assessment
+## 6. Current State Assessment
 
 ### sweetGrass v0.7.3 (746 tests, 94% coverage)
 
@@ -94,7 +194,7 @@ resistant to license violation.
 
 ---
 
-## 3. Target Architecture
+## 7. Target Architecture
 
 ### Content Categories
 
@@ -174,7 +274,7 @@ This is the BY and SA in CC-BY-SA, automated.
 
 ---
 
-## 4. Evolution Path
+## 8. Evolution Path
 
 ### Phase 1: Schema Definition (No Breaking Changes)
 
@@ -215,7 +315,7 @@ Once the schema is validated through use in ludoSpring experiments:
 
 ---
 
-## 5. Cross-Spring Impact
+## 9. Cross-Spring Impact
 
 scyBorg licensing is not ludoSpring-specific. Every spring produces both
 code and creative content:
@@ -233,7 +333,7 @@ The provenance trio handles ALL of these. The license layer is universal.
 
 ---
 
-## 6. What NOT to Build
+## 10. What NOT to Build
 
 - **Do NOT build license enforcement.** The trio provides *evidence*, not
   *enforcement*. If someone violates CC-BY-SA, the derivation chain in
@@ -250,7 +350,7 @@ The provenance trio handles ALL of these. The license layer is universal.
 
 ---
 
-## 7. Immediate Action Items
+## 11. Immediate Action Items
 
 For each primal team, the minimum viable contribution to scyBorg:
 
@@ -278,11 +378,17 @@ For each primal team, the minimum viable contribution to scyBorg:
 
 ## References
 
+### Internal
+- `wateringHole/LYSOGENY_PROTOCOL.md` — area denial strategy (companion document)
+- `wateringHole/NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture
 - `ludoSpring/specs/LYSOGENY_CATALOG.md` — lysogeny target catalog
 - `whitePaper/economics/LATENT_VALUE_ECONOMY.md` — latent value economy
 - `whitePaper/economics/SUNCLOUD_ECONOMIC_MODEL.md` — radiating attribution
 - `whitePaper/economics/LOAM_CERTIFICATE_LAYER.md` — certificate mesh
 - `whitePaper/gen3/baseCamp/18_rpgpt_sovereign_rpg_engine.md` — ORC for rulesets
+- `whitePaper/gen3/baseCamp/20_novel_ferment_transcript_economics.md` — NFT economics
+
+### External
 - ORC License: https://azoralaw.com/orclicense/
 - CC-BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
 - AGPL-3.0: https://www.gnu.org/licenses/agpl-3.0.html
