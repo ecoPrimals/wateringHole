@@ -157,8 +157,8 @@ pie_verified = false  # Library crate — not standalone binary
 [primals.loamspine]
 name = "LoamSpine"
 description = "Permanence layer - append-only ledger, certificates, DIDs, temporal anchoring"
-latest = "0.8.0"
-versions = ["0.8.0"]
+latest = "0.8.2"
+versions = ["0.8.0", "0.8.1", "0.8.2"]
 architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["commit", "certificate", "spine", "anchor", "did", "provenance"]
 ecobin_grade = "A++"

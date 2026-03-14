@@ -2,7 +2,7 @@
 
 **Based on RootPulse Architecture**  
 **Status**: Phase 1 & 2 Complete — Phase 3 Provenance Trio Validated  
-**Date**: March 13, 2026
+**Date**: March 14, 2026
 
 ---
 
@@ -190,7 +190,7 @@ LoamSpine
 ```
 
 **Validated**:
-- LoamSpine v0.8.0 (`session.commit` + `permanent-storage.commitSession` compat) ✅
+- LoamSpine v0.8.2 (`session.commit` + `permanent-storage.commitSession` compat) ✅
 - rhizoCrypt v0.13.0 dehydration produces `DehydrationSummary` ✅
 - Wire format aligned: rhizoCrypt → LoamSpine serde contract validated ✅
 - biomeOS `rootpulse_commit.toml` graph orchestrates the full workflow ✅
@@ -713,7 +713,7 @@ async fn commit(biome: &BiomeOS, commit: Commit) {
 
 ### Completed (March 13, 2026)
 
-1. ✅ **LoamSpine v0.8.0** - Immutable linear history, 700 tests, 90.6% coverage
+1. ✅ **LoamSpine v0.8.2** - Immutable linear history, 744 tests, ~91% coverage
 2. ✅ **rhizoCrypt ↔ LoamSpine dehydration** - Validated end-to-end with live binaries
 3. ✅ **sweetGrass attribution** - `contribution.recordDehydration` + `braid.create` validated
 4. ✅ **Provenance trio e2e** - Full 6-phase RootPulse commit workflow validated

@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 12, 2026
+**Last Updated**: March 14, 2026
 
 ---
 
@@ -303,7 +303,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.4, 746 tests, 94% line coverage, ecoBin compliant, parking_lot locks, AGPL-3.0-only, Tower Atomic enforced)
+**Status**: Production Ready (v0.7.5, 794 tests, 91% region coverage, ecoBin compliant, parking_lot locks, AGPL-3.0-only, Tower Atomic enforced)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
@@ -326,7 +326,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Immutable linear ledger for selective permanence  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.8.0, 549 tests, 90.08% coverage, pure Rust TLS, UniBin, provenance trio coordinated)
+**Status**: Production Ready (v0.8.2, 744 tests, ~91% coverage, pure Rust TLS, UniBin, provenance trio coordinated)
 
 **Role**: LoamSpine is the fossil record. Where rhizoCrypt is ephemeral and fast, LoamSpine is permanent and provable. Important events are deliberately committed ("dehydrated") from rhizoCrypt into LoamSpine's append-only ledger. Most data should be temporary; only what matters should be permanent.
 
