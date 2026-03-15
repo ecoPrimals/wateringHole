@@ -248,7 +248,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Universal multi-modal user interface and Grammar of Graphics engine  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A+) — v1.6.3, 16 crates, 3,711 tests, 79.5% line coverage, edition 2024, `#![forbid(unsafe_code)]` on all 16 crates, zero C deps, AGPL-3.0-only, Grammar of Graphics engine complete
+**Status**: Production Ready (A+) — v1.6.3, 16 crates, 5,168 tests, ~85% line / ~86% branch coverage, edition 2024, `#![forbid(unsafe_code)]` on all 16 crates, zero C deps, AGPL-3.0-only, Grammar of Graphics engine complete
 
 **Role**: petalTongue makes data human-understandable across every sensory modality. It implements a composable **Grammar of Graphics** pipeline: any primal sends a declarative grammar expression (data + variable bindings + scales + geometry + coordinates), and petalTongue compiles it to the best available modality (GUI, TUI, audio sonification, SVG, PNG, JSON API). Tufte constraints (data-ink ratio, lie factor, accessibility) are machine-checked on every render. Heavy computation (statistics, 3D tessellation, physics) is offloaded to barraCuda via capability-based discovery. The grammar is domain-agnostic: the same pipeline renders ecosystem topology, clinical vitals, molecular structures, game worlds, and universe simulations. Live ecosystem wiring enables 60 Hz sensor streaming, interaction broadcast, and Neural API self-registration with biomeOS. Seven Spring absorption patterns ingested (backpressure, telemetry, diverging palettes, pipeline DAGs, provider registry, session health, game channels).
 
