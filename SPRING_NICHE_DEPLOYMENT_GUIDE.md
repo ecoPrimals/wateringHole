@@ -2,8 +2,8 @@
 
 **How to evolve a spring into a deployable biomeOS niche**
 
-**Date**: March 14, 2026
-**Status**: Reference implementation — groundSpring V102
+**Date**: March 15, 2026
+**Status**: Reference implementations — groundSpring V102, airSpring V081
 **License**: AGPL-3.0-only
 
 ---
@@ -365,14 +365,27 @@ evolve them:
 | Spring | UniBin | Deploy Graph | Niche YAML | Provenance | Status |
 |---|---|---|---|---|---|
 | **groundSpring** | Yes | Yes | Yes | Yes | **Complete** (V102) |
+| **airSpring** | Yes | Yes (4 graphs) | Yes | Yes (auto) | **Complete** (V081) |
 | **wetSpring** | Audit needed | Yes | No | Yes (graph) | Partial |
 | **hotSpring** | Audit needed | No | No | No | Not started |
-| **airSpring** | TBD | TBD | TBD | TBD | Not started |
 | **neuralSpring** | TBD | TBD | TBD | TBD | Not started |
 
-groundSpring serves as the reference implementation. Follow the artifacts in
-`groundSpring/crates/groundspring/src/` for code patterns and
-`groundSpring/graphs/` + `groundSpring/niches/` for deployment patterns.
+groundSpring (V102) and airSpring (V081) serve as reference implementations.
+
+**groundSpring**: First Spring with full niche set. Follow artifacts in
+`groundSpring/crates/groundspring/src/` and `groundSpring/graphs/`.
+
+**airSpring**: First Spring with neuralAPI Pathway Learner integration. Extends
+the groundSpring pattern with structured metrics, operation dependencies, cost
+estimates, and multi-domain registration. Follow artifacts in
+`airSpring/barracuda/src/bin/airspring_primal.rs` and `airSpring/graphs/`.
+Key additions over groundSpring:
+- `emit_metrics()` on every dispatch (neuralAPI Enhancement 1)
+- `operation_dependencies()` and `cost_estimates()` in `capability.list` (Enhancement 2+3)
+- `auto_record_provenance()` makes provenance automatic in dispatch
+- `ecology.experiment` provides single-call experiment orchestration
+- 4 domain registrations (ecology, provenance, data, capability)
+- Heartbeat reports composition status for biomeOS graph rewiring
 
 ---
 
