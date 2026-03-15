@@ -282,6 +282,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Master Index
 - **`STANDARDS_AND_EXPECTATIONS.md`** — **Start here.** Single-document reference for all ecoPrimals standards, expectations, and conventions. Links to every standard below.
+- **`GLOSSARY.md`** — Definitive terminology for the ecoPrimals ecosystem. Gate, primal, spring, atomic, niche, deploy graph, germination, absorption, delegation, fossil record, and every other term.
+- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, and tooling spec for an ecoPrimals gate. Pop!\_OS, Rust toolchain, Cursor, GPU configuration, directory layout, post-install checklist.
 
 ### Architecture Standards
 - `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)

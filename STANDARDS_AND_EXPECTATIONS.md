@@ -7,6 +7,13 @@ spring, contributor, and session.  Read this first, read everything else second.
 
 ---
 
+## Companion Documents
+
+- **`GLOSSARY.md`** — Every term defined (gate, primal, spring, atomic, niche, etc.)
+- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, toolchain, directory layout for a gate
+
+---
+
 ## 1. Language & Toolchain
 
 | Expectation | Detail |
