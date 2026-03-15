@@ -9,7 +9,7 @@ Cross-primal integration documentation for petalTongue.
 ## Integration Status
 
 petalTongue v1.6.3 (16 crates, edition 2024):
-- 5,168 tests passing, 0 failures
+- 5,188 tests passing, 0 failures
 - `#![forbid(unsafe_code)]` on all 16 crates + UniBin, zero C dependencies
 - ~85% line coverage (llvm-cov) -- target 90%
 - tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
