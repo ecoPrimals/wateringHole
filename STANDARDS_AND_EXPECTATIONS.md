@@ -51,8 +51,7 @@ no plugins, no dynamic loading. `cargo build --release` produces one artifact.
 
 | Standard | File | Summary |
 |----------|------|---------|
-| Primal IPC Protocol | `PRIMAL_IPC_PROTOCOL.md` | JSON-RPC 2.0 over platform-agnostic transports |
-| Universal IPC v3.0 | `UNIVERSAL_IPC_STANDARD_V3.md` | Runtime transport discovery (UDS, abstract, named pipe, TCP) |
+| Primal IPC Protocol v3.0 | `PRIMAL_IPC_PROTOCOL.md` | JSON-RPC 2.0 + tarpc, platform-agnostic transports, runtime discovery |
 | Semantic Method Naming | `SEMANTIC_METHOD_NAMING_STANDARD.md` | `domain.verb` method names (`crypto.sign`, `storage.put`) |
 | Cross-Spring Data Flow | `CROSS_SPRING_DATA_FLOW_STANDARD.md` | Time series exchange format via `capability.call` |
 
@@ -64,9 +63,9 @@ IPC crate.
 
 | Standard | File | Summary |
 |----------|------|---------|
-| Dark Forest Beacon Genetics | `DARK_FOREST_BEACON_GENETICS_STANDARD.md` | Two-seed lineage (nuclear + mitochondrial) |
+| Dark Forest Beacon Genetics | `birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` | Two-seed lineage (nuclear + mitochondrial) |
 | BearDog Technical Stack | `btsp/BEARDOG_TECHNICAL_STACK.md` | Ed25519, BLAKE3, X25519 — Pure Rust crypto foundation |
-| Tower Atomic | `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` | BearDog + Songbird = Pure Rust HTTPS |
+| Tower Atomic | `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` | BearDog + Songbird = Pure Rust HTTPS |
 
 **Expectation**: Auto-trust within genetic family, zero trust outside. No certificate
 authorities. Encrypted payloads are unreadable to outsiders. Zero metadata leakage
