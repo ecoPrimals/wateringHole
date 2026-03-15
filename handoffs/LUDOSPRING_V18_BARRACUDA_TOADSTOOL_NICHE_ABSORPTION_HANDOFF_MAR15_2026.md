@@ -155,7 +155,7 @@ unified hardware, SNN, lattice QCD, or any physics-specific primitives.
 |-------|--------|
 | `cargo clippy --features ipc -p ludospring-barracuda` | 0 warnings (pedantic + nursery) |
 | `cargo fmt --check` | 0 diffs |
-| `cargo test --features ipc -p ludospring-barracuda` | 246 tests, 0 failures |
+| `cargo test --features ipc -p ludospring-barracuda` | 244 tests, 0 failures |
 | TODO/FIXME/HACK in source | 0 |
 | `unsafe` blocks | 0 (`#![forbid(unsafe_code)]`) |
 | External C dependencies | 0 (ecoBin compliant) |
