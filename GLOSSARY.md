@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: March 15, 2026
+**Last Updated**: March 16, 2026
 
 ---
 
@@ -61,8 +61,14 @@ Key properties:
 - Pure Rust (no C dependencies in application code)
 - UniBin architecture (one binary, multiple modes via subcommands)
 
-Examples: BearDog (cryptography), Songbird (networking), toadStool (hardware),
+Examples: bearDog (cryptography), songBird (networking), toadStool (hardware),
 barraCuda (math), coralReef (shader compilation), Squirrel (AI coordination).
+
+**Naming convention**: Canonical capitalization is camelCase with firstLast —
+`bearDog`, `songBird`, `toadStool`, `sweetGrass`, `wetSpring`, `hotSpring`.
+In prose, initial caps are common (BearDog, ToadStool) and acceptable.
+The camelCase structure is intentional — even names like songBird and toadStool
+leverage the semantic naming (song+Bird, toad+Stool) for discoverability.
 
 ### Primitive
 
@@ -257,12 +263,24 @@ JSON-RPC methods.
 
 ## The Science Layer
 
+### metalForge
+
+Where a spring is working on **hardware concepts** — GPU vs CPU routing, GPU to
+NPU via PCIe, hardware dispatch architecture. metalForge is the exploratory
+substrate where primals figure out how to talk to novel hardware. The brain
+architecture in hotSpring evolved through metalForge before stabilizing.
+
+metalForge is not a primal — it is an evolution context. When a spring needs to
+push work across compute substrates (CPU → GPU, GPU → NPU) and the path doesn't
+exist yet, that work happens in metalForge.
+
 ### baseCamp
 
-The **cross-spring paper program** that lives in `whitePaper/gen3/baseCamp/`.
-baseCamp papers are where springs meet — each paper draws from multiple springs,
-and the science needs drive spring evolution. baseCamp is the indirect
-coordination layer for the ecosystem's scientific output.
+The transition from **paper validation to real exploration**. baseCamp lives in
+`whitePaper/gen3/baseCamp/` and is where springs move beyond reproducing a single
+paper to mixing larger datasets and systems. QS-Anderson evolved this way — the
+paper parity work validated the pieces, and baseCamp is where those pieces
+combine into something new.
 
 Currently 18 papers (01-18), spanning Anderson-QS, LTEE, bioag, sentinels,
 symbiotic ecology, no-till, WDM, NPU edge, field genomics, dynamical QCD,
@@ -354,6 +372,39 @@ geological record of every evolution session the project has run. Currently
 
 ---
 
+## The Meta Layer
+
+### metaPrimal
+
+A **metaPrimal** is a repository that is conceptual instead of functional — it
+doesn't compile into a binary, but it is an essential organism in the ecosystem.
+metaPrimals follow the same camelCase naming and have their own git repos.
+
+| metaPrimal | Purpose |
+|------------|---------|
+| **wateringHole** | How primals intercommunicate. Standards, IPC protocols, leverage guides, handoffs. The coordination documentation layer. |
+| **whitePaper** | Theses, concepts, and documentation of evolution. The scientific and strategic record — gen2/gen3 paper trails, attsi outreach, baseCamp papers. |
+| **sourDough** | The nascent primal for rapid evolution of new primals. A starter culture for bootstrapping new primal projects. |
+
+### Phase 1 / Phase 2
+
+**Temporal artifacts**, not semantic categories. Phase directories were
+organizational markers used while building between gates — keeping which primals
+were on which gate clear during early development. They correspond loosely to
+`gen2/` and `gen3/` in whitePaper. Not actively meaningful; treat them as
+historical scaffolding if encountered.
+
+### Version Numbers and Session Numbers
+
+Springs and primals independently evolve their own progress markers. Some use
+**session numbers** (e.g., neuralSpring S145), some use **version numbers**
+(e.g., hotSpring v0.6.29, wetSpring V113). This divergence is fully
+intentional — AI-assisted development means each project self-flavors over
+time as its AI iterations accumulate. There is no global numbering standard
+because primal autonomy extends to how they count.
+
+---
+
 ## Licensing & Strategy
 
 ### Lysogeny Protocol
@@ -392,7 +443,9 @@ chains via sweetGrass and permanence via loamSpine.
 | **biomeOS** | The orchestration substrate running on a gate |
 | **NUCLEUS** | Full primal composition (all atomics + Squirrel) |
 | **Plasmodium** | Multi-gate collective (2+ bonded NUCLEUS instances) |
-| **baseCamp** | Cross-spring paper program (18 papers) |
+| **metalForge** | Evolution context where springs work on hardware concepts (GPU/CPU/NPU) |
+| **baseCamp** | Cross-spring paper program — validation to exploration (18 papers) |
+| **metaPrimal** | Conceptual repo (wateringHole, whitePaper, sourDough) — pre-binary, documentaion |
 | **Paper parity** | Spring output matches published figures within named tolerance |
 | **Absorption** | Spring replaces local math with barraCuda canonical version |
 | **Delegation** | Primal routes work to another primal via IPC |
