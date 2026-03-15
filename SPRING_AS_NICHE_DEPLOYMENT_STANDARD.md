@@ -5,7 +5,7 @@
 **Date**: March 11, 2026  
 **Authority**: wateringHole (ecoPrimals Core Standards)  
 **Compliance**: Mandatory for all springs targeting biomeOS deployment  
-**Reference Implementations**: ludoSpring (game science), petalTongue (visualization)
+**Reference Implementations**: ludoSpring (game science), petalTongue (visualization), healthSpring (health science niche)
 
 ---
 
@@ -336,6 +336,7 @@ Springs participating in continuous niches MUST support `tick` or `frame` JSON-R
 | **wetSpring** | Needs audit | TBD | `wetspring_deploy.toml` | Registered | TBD | TBD |
 | **airSpring** | Needs audit | TBD | `airspring_deploy.toml` | Registered | TBD | TBD |
 | **hotSpring** | Needs audit | TBD | TBD | TBD | TBD | TBD |
+| **healthSpring** | `healthspring_primal` | Working (55+ methods) | `healthspring_niche_deploy.toml` | 6 domains | `healthspring_niche.toml` (5 graphs) | — |
 
 ---
 
