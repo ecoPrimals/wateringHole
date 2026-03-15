@@ -426,7 +426,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 |--------|---------|
 | ToadStool | S147 (20,015 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
 | hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
-| groundSpring | V100 |
+| groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
