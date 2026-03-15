@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: March 14, 2026
+**Last Updated**: March 15, 2026
 
 ---
 
@@ -280,46 +280,60 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ## Document Index
 
+### Master Index
+- **`STANDARDS_AND_EXPECTATIONS.md`** — **Start here.** Single-document reference for all ecoPrimals standards, expectations, and conventions. Links to every standard below.
+
 ### Architecture Standards
-- `UNIBIN_ARCHITECTURE_STANDARD.md` - Binary structure
-- `ECOBIN_ARCHITECTURE_STANDARD.md` - Universal portability
-- `GENOMEBIN_ARCHITECTURE_STANDARD.md` - Autonomous deployment
+- `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
+- `ECOBIN_ARCHITECTURE_STANDARD.md` — Universal portability (Pure Rust, cross-compile)
+- `GENOMEBIN_ARCHITECTURE_STANDARD.md` — Autonomous deployment (self-extracting, auto-detect)
+- `SPRING_AS_NICHE_DEPLOYMENT_STANDARD.md` — Springs deploy as biomeOS niches
+- `SPRING_NICHE_DEPLOYMENT_GUIDE.md` — How-to guide for niche deployment
 
 ### Communication Standards
-- `PRIMAL_IPC_PROTOCOL.md` - Inter-primal communication (v2.0)
-- `UNIVERSAL_IPC_STANDARD_V3.md` - Platform-agnostic IPC behavior
-- `SEMANTIC_METHOD_NAMING_STANDARD.md` - API naming conventions
+- `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication
+- `UNIVERSAL_IPC_STANDARD_V3.md` — Platform-agnostic IPC (runtime transport discovery)
+- `SEMANTIC_METHOD_NAMING_STANDARD.md` — `domain.verb` API naming conventions
+- `CROSS_SPRING_DATA_FLOW_STANDARD.md` — Time series exchange format
 
 ### Security Standards
-- `DARK_FOREST_BEACON_GENETICS_STANDARD.md` - Two-seed genetic architecture
+- `DARK_FOREST_BEACON_GENETICS_STANDARD.md` — Two-seed genetic lineage architecture
 
 ### Protocol Specifications
-- `birdsong/BIRDSONG_PROTOCOL.md` - Encrypted UDP discovery
-- `btsp/BEARDOG_TECHNICAL_STACK.md` - BearDog cryptographic foundation
-- `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` - Tower Atomic TLS guide
+- `birdsong/BIRDSONG_PROTOCOL.md` — Encrypted UDP discovery (BirdSong)
+- `btsp/BEARDOG_TECHNICAL_STACK.md` — BearDog cryptographic foundation
+- `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` — Tower Atomic TLS guide
+
+### GPU & Numerical Computing
+- `GPU_F64_NUMERICAL_STABILITY.md` — f64 precision lessons from hotSpring
+- `NUMERICAL_STABILITY_EVOLUTION_PLAN.md` — Fast AND safe math strategy
+- `SOVEREIGN_COMPUTE_EVOLUTION.md` — Pure Rust GPU stack (VFIO, glow plug, power management)
+- `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — Cross-primal sovereign compute guidance
+- `CROSS_SPRING_SHADER_EVOLUTION.md` — How springs evolve barraCuda collectively
+- `SPRING_VALIDATION_ASSIGNMENTS.md` — Each spring validates specific barraCuda primitives
 
 ### Strategy & Licensing
-- `LYSOGENY_PROTOCOL.md` - Area denial through open prior art (adoptable by all springs)
-- `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` - **Ecosystem licensing standard** (AGPL + ORC + CC-BY-SA for all primals/springs)
-- `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` - NFT architecture (memory-bound digital objects)
+- `LYSOGENY_PROTOCOL.md` — Area denial through open prior art
+- `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` — **Ecosystem licensing standard** (AGPL + ORC + CC-BY-SA)
+- `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture (memory-bound digital objects)
+- `UPSTREAM_CONTRIBUTIONS.md` — Standalone crates for crates.io from ecoPrimals
 
-### Evolution & Upstream
-- `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` - Cross-primal pure Rust compute stack
-- `SOVEREIGN_COMPUTE_EVOLUTION.md` - Long-term sovereign GPU driver plan (+ GPU glow plug, power management)
-- `UPSTREAM_CONTRIBUTIONS.md` - Standalone crates for crates.io from ecoPrimals
+### Coordination & Patterns
+- `INTER_PRIMAL_INTERACTIONS.md` — Production interaction map and plans
+- `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
+- `SPRING_AS_PROVIDER_PATTERN.md` — biomeOS capability registration
+- `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Provenance trio integration
+- `SPRING_EVOLUTION_ISSUES.md` — Active issues discovered by springs
 
-### Recent Handoffs (March 14, 2026)
-- `handoffs/HOTSPRING_GLOWPLUG_SOVEREIGN_POWER_TRIO_HANDOFF_MAR14_2026.md` — GPU self-warming + power management work items for trio
-- `handoffs/TOADSTOOL_BARRACUDA_VFIO_PBDMA_ABSORPTION_HANDOFF_MAR14_2026.md` — PBDMA context load + glow plug addendum
-- `handoffs/HOTSPRING_VFIO_PBDMA_CONTEXT_LOAD_BREAKTHROUGH_HANDOFF_MAR14_2026.md` — PFIFO register discoveries
+### Leverage Guides (Per-Primal)
+- `BARRACUDA_LEVERAGE_GUIDE.md`, `BIOMEOS_LEVERAGE_GUIDE.md`, `CORALREEF_LEVERAGE_GUIDE.md`
+- `LOAMSPINE_LEVERAGE_GUIDE.md`, `RHIZOCRYPT_LEVERAGE_GUIDE.md`, `SQUIRREL_LEVERAGE_GUIDE.md`
+- `SWEETGRASS_LEVERAGE_GUIDE.md`, `TOADSTOOL_LEVERAGE_GUIDE.md`
+- `petaltongue/` — petalTongue integration documentation
 
-### Coordination
-- `INTER_PRIMAL_INTERACTIONS.md` - Production interaction map and plans
-- `PRIMAL_REGISTRY.md` - Complete primal definitions and primitive catalogs
-
-### Integration Guides
-- `petaltongue/` - petalTongue integration documentation
-- `handoffs/` - Cross-primal evolution handoff documents
+### Handoffs
+- `handoffs/*.md` — Active session handoffs (last 48 hours)
+- `handoffs/archive/` — Fossil record (354 archived handoffs, Feb 2026 – present)
 
 ---
 
