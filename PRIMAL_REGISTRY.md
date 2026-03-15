@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 14, 2026
+**Last Updated**: March 15, 2026
 
 ---
 
@@ -193,7 +193,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 44 (A+) — 1669 default + 48 VFIO tests, 0 failed, 74 ignored, 64% line coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync + USERD_TARGET/INST_TARGET runlist fix), `GpuContext::from_vfio()` convenience API for barraCuda, UVM dispatch pipeline (GPFIFO + USERD doorbell + completion polling), `KernelCacheEntry` + `dispatch_precompiled()`, `#[deny(unsafe_code)]` on 8/9 crates, zero clippy warnings, AGPL-3.0-only
+**Status**: Phase 10 Iteration 46 (A+) — 1804 tests passed, 61 ignored, 66.43% line coverage, 75.15% function coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync + USERD_TARGET/INST_TARGET runlist fix), `GpuContext::from_vfio()` convenience API for barraCuda, UVM dispatch pipeline (GPFIFO + USERD doorbell + completion polling), `KernelCacheEntry` + `dispatch_precompiled()`, `#[deny(unsafe_code)]` on 8/9 crates, zero clippy warnings, zero files >1000 lines, AGPL-3.0-only
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL, SPIR-V, and GLSL compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified. coralDriver provides userspace GPU dispatch via DRM ioctl (AMD amdgpu, NVIDIA nouveau, nvidia-drm/UVM) and VFIO direct BAR0/DMA dispatch (maximum sovereignty). coralGpu unifies compilation and dispatch into a single API with sovereign driver preference (vfio > nouveau > amdgpu > nvidia-drm). Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -431,7 +431,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 44 (USERD_TARGET runlist fix, PFIFO channel + V2 MMU, 1669+48 tests) |
+| coralReef | Phase 10 Iteration 46 (structural refactor, 1804 tests, zero files >1000 lines) |
 
 ### airSpring - Ecological & Agricultural Sciences
 

@@ -82,7 +82,7 @@ barraCuda achieved this by:
 Transitive C boundaries (wgpu → ash → libvulkan.so, tokio → libc) are
 system-level and evolve via Layers 2-4, not Layer 1.
 
-### Layer 2 — coralReef: Phase 10 Iteration 27, Deep Debt Evolution
+### Layer 2 — coralReef: Phase 10 Iteration 46, Structural Refactor + Coverage
 
 coralReef is a sovereign Rust GPU shader compiler. NVIDIA backend (SM70–SM89)
 and AMD backend (RDNA2 GFX1030) operational with E2E dispatch verified on
@@ -106,7 +106,7 @@ both AMD RX 6950 XT and NVIDIA RTX 3090 (via DRM probing).
 - **Showcase**: 8 progressive demos from hello-compiler through full compute
   triangle (coralReef → toadStool → barraCuda).
 
-**Stack**: 1669+48 tests (0 failed, 74 ignored), 64% coverage, 0 DEBT markers.
+**Stack**: 1804 tests (0 failed, 61 ignored), 66.43% line coverage, 75.15% function coverage, 0 DEBT markers.
 93 cross-spring WGSL shaders (84 compiling SM70). Three input languages
 (WGSL, SPIR-V, GLSL 450). JSON-RPC 2.0 + tarpc (bincode) IPC.
 `#[deny(unsafe_code)]` on 8/9 crates. VFIO PFIFO channel + V2 MMU page tables.
@@ -418,7 +418,7 @@ improvement in one primal benefits all consumers.
 | Layer | Owner | Estimated Time | Risk | Depends On |
 |:---:|---|---|---|---|
 | 1 | barraCuda | **DONE** | — | — |
-| 2 | coralReef | **DONE** — NVIDIA SM70-SM89, AMD RDNA2, 1669+48 tests, VFIO PFIFO + V2 MMU + USERD_TARGET fix | — | — |
+| 2 | coralReef | **DONE** — NVIDIA SM70-SM89, AMD RDNA2, 1804 tests, VFIO PFIFO + V2 MMU + USERD_TARGET fix | — | — |
 | 3 | coralReef + barraCuda | **Partial** — coral-gpu API exists; `dispatch_binary` wiring needed | Low | — |
 | 4 | coralReef + toadStool | **In progress** — AMD done, nouveau done, UVM + FECS + RegisterAccess remaining | Medium | Layer 3 |
 
