@@ -331,7 +331,7 @@ Springs participating in continuous niches MUST support `tick` or `frame` JSON-R
 
 | Spring | Binary | IPC Server | Deploy Graph | Cap Domain | Niche YAML | Chimera |
 |--------|--------|-----------|-------------|-----------|-----------|---------|
-| **ludoSpring** | Needs `[[bin]]` | `ipc` feature | `ludospring_deploy.toml` | `capability_domains.rs` | Planned | gaming-mesh |
+| **ludoSpring** | `ludospring` (UniBin) | `ipc` feature (12 methods) | `ludospring_deploy.toml` + `gaming_niche.toml` | `game` (12 caps, semantic mappings) | `ludospring-game.yaml` | gaming-mesh (planned) |
 | **petalTongue** | `petaltongue` | Working | Needs creation | Needs registration | Planned | Planned |
 | **wetSpring** | Needs audit | TBD | `wetspring_deploy.toml` | Registered | TBD | TBD |
 | **airSpring** | Needs audit | TBD | `airspring_deploy.toml` | Registered | TBD | TBD |

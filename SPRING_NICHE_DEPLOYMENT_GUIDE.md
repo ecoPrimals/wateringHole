@@ -366,11 +366,12 @@ evolve them:
 |---|---|---|---|---|---|
 | **groundSpring** | Yes | Yes | Yes | Yes | **Complete** (V102) |
 | **airSpring** | Yes | Yes (4 graphs) | Yes | Yes (auto) | **Complete** (V081) |
+| **ludoSpring** | Yes | Yes (2 graphs) | Yes | Yes (graph) | **Complete** (V16) |
 | **wetSpring** | Audit needed | Yes | No | Yes (graph) | Partial |
 | **hotSpring** | Audit needed | No | No | No | Not started |
 | **neuralSpring** | TBD | TBD | TBD | TBD | Not started |
 
-groundSpring (V102) and airSpring (V081) serve as reference implementations.
+groundSpring (V102), airSpring (V081), and ludoSpring (V16) serve as reference implementations.
 
 **groundSpring**: First Spring with full niche set. Follow artifacts in
 `groundSpring/crates/groundspring/src/` and `groundSpring/graphs/`.
