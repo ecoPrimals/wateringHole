@@ -127,7 +127,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — S147 (March 12, 2026) — 20,015 workspace tests, 0 clippy warnings, 0 failures, 94+ JSON-RPC methods (dynamically built), ~86% line coverage, BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, hw-learn pipeline (observe/distill/apply/share/status), nvpmu BAR0→RegisterAccess bridge, SPIR-V codegen safety (root-cause rename from nvvm_safety), FirmwareInventory in gpu.info, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph stability
+**Status**: Production Ready (A++ GOLD STANDARD) — S155b (March 15, 2026) — 20,843 workspace tests, clippy pedantic clean, all tests passing, 96+ JSON-RPC methods (dynamically built), ~83% line coverage (182K lines instrumented), BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, hw-learn pipeline (observe/distill/apply/share/status), nvpmu BAR0→RegisterAccess bridge, SPIR-V codegen safety (root-cause rename from nvvm_safety), FirmwareInventory in gpu.info, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph stability. Key recent: +558 net new tests (12 new integration test files), dependency audit (Pure Rust mandate met), unsafe code audit (all hardware-justified), coverage expansion
 
 **Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
@@ -150,7 +150,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Hardware Learning** | `compute.hardware.*` (observe/distill/apply/share_recipe/status), hw-learn pipeline, `RecipeStore`, `RegisterAccess` trait |
 | **Firmware Inventory** | `FirmwareInventory` (probe/compute_viable/compute_blockers/needs_software_pmu) via nvpmu |
 | **SPIR-V Codegen Safety** | `spirv_codegen_safety` module (`PrecisionBrain`, `NvkZeroGuard`, `HardwareCalibration`), root-cause rename from `nvvm_safety` |
-| **IPC** | 94+ JSON-RPC 2.0 methods (semantic naming), tarpc typed RPC, Unix socket standard |
+| **IPC** | 96+ JSON-RPC 2.0 methods (semantic naming), tarpc typed RPC, Unix socket standard |
 
 **Key principles**: Capability-based discovery (self-knowledge only), ecoBin compliant (pure Rust core), zero hardcoded primal names/ports, all unsafe blocks documented with `// SAFETY:`. Rust 1.82+ MSRV.
 
@@ -424,7 +424,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S147 (20,015 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
+| ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
 | hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
 | groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |

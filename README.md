@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: March 15, 2026
+**Last Updated**: March 14, 2026
 
 ---
 
@@ -51,9 +51,9 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BearDog** | Cryptography | All cryptographic operations: signing, encryption, key exchange, hashing, certificates, genetic lineage | Production (A+ LEGENDARY) |
 | **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
-| **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 20,015+ tests, 85+ JSON-RPC methods. Node Atomic for sovereign compute. `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. Cross-compile verified (aarch64, armv7 in CI) | Production (A++ GOLD) |
+| **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 20,843 tests, 96+ JSON-RPC methods. Node Atomic for sovereign compute. `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. Cross-compile verified (aarch64, armv7 in CI) | Production (A++ GOLD) |
 | **BarraCuda** | Pure Math | 712 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93) | Production (A+) |
-| **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. Zero-copy `Bytes`, driver string constants, unsafe evolved. 1819 tests, 66.43% coverage | Production (Phase 10, Iter 47) |
+| **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **GPU glow plug** (self-warming from cold, no driver dependency). Sovereign power management designed (5-state model) | Production (Phase 10, Iter 44+) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
 | **biomeOS** | Orchestration | Ecosystem substrate: Neural API (170+ translations, 16 domains), capability routing, NUCLEUS composition, bonding model, Dark Forest coordination, provenance trio wiring | Production (A, Security A++ LEGENDARY) |
 
@@ -308,9 +308,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `SOVEREIGN_COMPUTE_EVOLUTION.md` - Long-term sovereign GPU driver plan (+ GPU glow plug, power management)
 - `UPSTREAM_CONTRIBUTIONS.md` - Standalone crates for crates.io from ecoPrimals
 
-### Recent Handoffs (March 15, 2026)
-- `handoffs/CORALREEF_PHASE10_ITERATION47_DEEP_DEBT_EVOLUTION_HANDOFF_MAR15_2026.md` — Deep debt evolution: unsafe elimination, zero-copy Bytes, driver constants, 1819 tests
-- `handoffs/CORALREEF_PHASE10_ITERATION46_STRUCTURAL_REFACTOR_COVERAGE_HANDOFF_MAR15_2026.md` — Structural refactor, clippy pedantic, 53+ tests, 1804 tests
+### Recent Handoffs (March 14, 2026)
 - `handoffs/HOTSPRING_GLOWPLUG_SOVEREIGN_POWER_TRIO_HANDOFF_MAR14_2026.md` — GPU self-warming + power management work items for trio
 - `handoffs/TOADSTOOL_BARRACUDA_VFIO_PBDMA_ABSORPTION_HANDOFF_MAR14_2026.md` — PBDMA context load + glow plug addendum
 - `handoffs/HOTSPRING_VFIO_PBDMA_CONTEXT_LOAD_BREAKTHROUGH_HANDOFF_MAR14_2026.md` — PFIFO register discoveries

@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # toadStool Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 14, 2026
-**Primal**: toadStool S154
+**Date**: March 15, 2026
+**Primal**: toadStool S155b
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
