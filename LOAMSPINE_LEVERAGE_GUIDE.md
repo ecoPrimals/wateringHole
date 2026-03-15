@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # LoamSpine Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 14, 2026
-**Primal**: LoamSpine v0.8.3
+**Date**: March 15, 2026
+**Primal**: LoamSpine v0.8.7
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -44,8 +44,15 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 | `certificate.loan` | Loan a certificate with time-limited access and terms |
 | `certificate.return` | Return a loaned certificate (end loan period) |
 | `certificate.get` | Query certificate state and history |
+| `certificate.verify` | Verify certificate integrity and chain of custody |
+| `certificate.lifecycle` | Full ownership and loan history for a certificate |
+| `certificate.hold` | Hold a certificate in escrow with transfer conditions |
+| `certificate.release` | Release a held certificate (conditions met) |
+| `certificate.cancel_escrow` | Cancel an escrow hold (return to previous state) |
 | `slice.anchor` | Anchor borrowed state at a waypoint spine |
 | `slice.checkout` | Check out a slice from a waypoint |
+| `slice.record_operation` | Record an operation within a waypoint |
+| `slice.depart` | Depart from a waypoint (with departure reason) |
 | `proof.generate_inclusion` | Generate a cryptographic inclusion proof for an entry |
 | `proof.verify_inclusion` | Verify an inclusion proof (entry exists in spine) |
 | `commit.session` | Commit a rhizoCrypt dehydration summary permanently |
