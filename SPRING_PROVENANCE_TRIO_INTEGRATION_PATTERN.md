@@ -19,8 +19,8 @@
 │   Your Spring    │
 │                  │
 │  begin_session() ──→ capability.call("dag", "create_session", ...)
-│  record_step()   ──→ capability.call("dag", "append_event", ...)
-│  complete()      ──→ 1. capability.call("dag", "dehydrate", ...)
+│  record_step()   ──→ capability.call("dag", "event.append", ...)
+│  complete()      ──→ 1. capability.call("dag", "dehydration.trigger", ...)
 │                  │   2. capability.call("commit", "session", ...)
 │                  │   3. capability.call("provenance", "create_braid", ...)
 └────────┬─────────┘
@@ -344,8 +344,8 @@ impl ProvenancePipeline for MySpring {
 | Capability | Operation | Primal | JSON-RPC Method |
 |------------|-----------|--------|-----------------|
 | `dag` | `create_session` | rhizoCrypt | `dag.session.create` |
-| `dag` | `append_event` | rhizoCrypt | `dag.session.append` |
-| `dag` | `dehydrate` | rhizoCrypt | `dag.dehydrate` |
+| `dag` | `append_event` | rhizoCrypt | `dag.event.append` |
+| `dag` | `dehydrate` | rhizoCrypt | `dag.dehydration.trigger` |
 | `commit` | `session` | loamSpine | `commit.session` |
 | `provenance` | `create_braid` | sweetGrass | `braid.create` |
 | `provenance` | `record_dehydration` | sweetGrass | `contribution.record_dehydration` |

@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # rhizoCrypt Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 14, 2026
-**Primal**: rhizoCrypt v0.13.0-dev
+**Date**: March 15, 2026
+**Primal**: rhizoCrypt v0.13.0-dev (Edition 2024)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -31,23 +31,32 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 
 | Method | What It Does |
 |--------|-------------|
-| `dag.create_session` | Open a new scoped DAG workspace |
-| `dag.get_session` | Retrieve session metadata |
-| `dag.list_sessions` | List all active sessions |
-| `dag.append_vertex` | Add a content-addressed event (BLAKE3 hash, multi-parent) |
-| `dag.get_vertex` | Retrieve a vertex by hash |
-| `dag.get_frontier` | Get the current DAG tips (latest unresolved vertices) |
-| `dag.get_children` | Get all children of a vertex |
-| `dag.get_session_vertices` | Get all vertices in a session |
-| `dag.resolve_session` | Mark a session as resolved |
-| `dag.merkle_root` | Compute the Merkle root for a session |
-| `dag.merkle_proof` | Generate an inclusion proof for a vertex |
-| `dag.verify_proof` | Verify a Merkle inclusion proof |
-| `dag.dehydrate` | Collapse session into a permanent summary |
-| `dag.slice` | Checkout a snapshot from permanent storage |
-| `dag.status` | Health check |
+| `dag.session.create` | Open a new scoped DAG workspace |
+| `dag.session.get` | Retrieve session metadata |
+| `dag.session.list` | List all active sessions |
+| `dag.session.discard` | Discard and clean up a session |
+| `dag.event.append` | Add a content-addressed event (BLAKE3 hash, multi-parent) |
+| `dag.event.append_batch` | Append multiple vertices in a batch |
+| `dag.vertex.get` | Retrieve a vertex by hash |
+| `dag.vertex.query` | Query vertices with type, agent, limit filters |
+| `dag.vertex.children` | Get all children of a vertex |
+| `dag.frontier.get` | Get the current DAG tips (latest unresolved vertices) |
+| `dag.genesis.get` | Get root vertices of a session |
+| `dag.merkle.root` | Compute the Merkle root for a session |
+| `dag.merkle.proof` | Generate an inclusion proof for a vertex |
+| `dag.merkle.verify` | Verify a Merkle inclusion proof |
+| `dag.slice.checkout` | Checkout a snapshot from permanent storage |
+| `dag.slice.get` | Retrieve slice metadata |
+| `dag.slice.list` | List all active slices |
+| `dag.slice.resolve` | Resolve a slice to underlying session data |
+| `dag.dehydration.trigger` | Collapse session into a permanent summary |
+| `dag.dehydration.status` | Check dehydration operation status |
+| `health.check` | Service health with status, version, uptime |
+| `health.metrics` | Operational metrics (sessions, latency, errors) |
+| `capability.list` | List all capabilities this primal provides |
 
 **Transport**: JSON-RPC 2.0 over HTTP (required), tarpc/bincode (optional).
+**Registry**: `capability_registry.toml` (23 methods, 7 domains).
 
 ---
 
