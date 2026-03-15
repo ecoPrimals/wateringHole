@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # sweetGrass Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 14, 2026
-**Primal**: sweetGrass v0.7.7
+**Date**: March 15, 2026
+**Primal**: sweetGrass v0.7.11
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
