@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # coralReef Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 14, 2026
-**Primal**: coralReef (Phase 10, Iteration 45)
+**Date**: March 15, 2026
+**Primal**: coralReef (Phase 10, Iteration 47)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
