@@ -293,18 +293,15 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `SPRING_NICHE_DEPLOYMENT_GUIDE.md` — How-to guide for niche deployment
 
 ### Communication Standards
-- `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication
-- `UNIVERSAL_IPC_STANDARD_V3.md` — Platform-agnostic IPC (runtime transport discovery)
+- `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.0 — consolidated, includes platform-agnostic transport + dual protocol)
 - `SEMANTIC_METHOD_NAMING_STANDARD.md` — `domain.verb` API naming conventions
 - `CROSS_SPRING_DATA_FLOW_STANDARD.md` — Time series exchange format
 
-### Security Standards
-- `DARK_FOREST_BEACON_GENETICS_STANDARD.md` — Two-seed genetic lineage architecture
-
-### Protocol Specifications
+### Security & Networking (birdsong/)
 - `birdsong/BIRDSONG_PROTOCOL.md` — Encrypted UDP discovery (BirdSong)
+- `birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` — Two-seed genetic lineage architecture
+- `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` — Tower Atomic TLS guide
 - `btsp/BEARDOG_TECHNICAL_STACK.md` — BearDog cryptographic foundation
-- `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` — Tower Atomic TLS guide
 
 ### GPU & Numerical Computing
 - `GPU_F64_NUMERICAL_STABILITY.md` — f64 precision lessons from hotSpring
@@ -330,8 +327,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### Leverage Guides (Per-Primal)
 - `BARRACUDA_LEVERAGE_GUIDE.md`, `BIOMEOS_LEVERAGE_GUIDE.md`, `CORALREEF_LEVERAGE_GUIDE.md`
 - `LOAMSPINE_LEVERAGE_GUIDE.md`, `RHIZOCRYPT_LEVERAGE_GUIDE.md`, `SQUIRREL_LEVERAGE_GUIDE.md`
-- `SWEETGRASS_LEVERAGE_GUIDE.md`, `TOADSTOOL_LEVERAGE_GUIDE.md`
-- `petaltongue/` — petalTongue integration documentation
+- `SWEETGRASS_LEVERAGE_GUIDE.md`, `TOADSTOOL_LEVERAGE_GUIDE.md`, `PETALTONGUE_LEVERAGE_GUIDE.md`
+- `petaltongue/` — petalTongue integration documentation (biomeOS API, quick start, showcase)
 
 ### Handoffs
 - `handoffs/*.md` — Active session handoffs (last 48 hours)
@@ -347,7 +344,7 @@ If you are a new primal entering the ecosystem:
 2. **Review PRIMAL_REGISTRY.md** to see what capabilities already exist
 3. **Follow UniBin standard** from day one (single binary, subcommands)
 4. **Target ecoBin** (Pure Rust, zero C deps, cross-compilation)
-5. **Implement IPC** following Universal IPC Standard v3.0
+5. **Implement IPC** following `PRIMAL_IPC_PROTOCOL.md` v3.0
 6. **Advertise capabilities** so biomeOS can discover and coordinate you
 7. **Register your primal** in PRIMAL_REGISTRY.md with your primitives
 
