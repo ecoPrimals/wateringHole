@@ -1,9 +1,9 @@
-# petalTongue v1.6.6 — UUI Evolution, Coverage & Compliance Handoff
+# petalTongue v1.6.6 — UUI Evolution, Smart Refactoring & Deep Debt Handoff
 
 **Date**: March 16, 2026
 **Version**: 1.6.6
 **Primal**: petalTongue (Universal User Interface)
-**Session**: Universal User Interface language evolution, coverage push, license correction, clippy deep clean, root doc refresh
+**Session**: UUI language evolution, smart refactoring, clone reduction, coverage push, license correction, clippy deep clean, deprecated item evolution
 **Status**: GREEN / COMPLETE
 **Supersedes**: `PETALTONGUE_V163_TYPED_ERRORS_PEDANTIC_LINTS_SMART_REFACTORING_HANDOFF_MAR16_2026.md`
 
@@ -68,6 +68,35 @@ root docs, removed orphaned directories, consolidated spec archives.
 - `needless_collect`: eliminated intermediate allocations
 - `missing_errors_doc`: 68 functions in petal-tongue-core documented
 
+### Smart Refactoring (2 large files decomposed)
+
+| File | Before | After | Modules |
+|------|--------|-------|---------|
+| doom-core/src/lib.rs | 910 | 47 | error, key, state, instance, tests |
+| petal-tongue-tui/src/app.rs | 887 | app/mod (16) | config, tui, render, update, tests |
+
+All public APIs preserved via re-exports. No breakage to external callers.
+
+### Clone Reduction & Idiomatic Rust
+
+- `property_panel.rs`: replaced per-parameter clones with bulk clone, `mem::take` for moves
+- `server.rs`: eliminated redundant clones via variable reuse
+- `interaction/engine.rs`: moved `Vec` by value instead of cloning in `apply_intent`
+- `engine.rs`, `structure.rs`: Arc/test clones verified necessary — no changes
+
+### IPC Coverage Push (19 new tests)
+
+- `json_rpc_client`: fallback method chains (primal.list → discover_primals, topology → get_topology)
+- `socket_path`: edge cases (socket exists, directory, nonexistent, custom parent)
+- `server`: malformed JSON handling, TCP request routing, socket cleanup on drop
+- `client`: error response handling, unexpected response types
+
+### Deprecated Items Evolution
+
+- All deprecated code confirmed behind feature gates (`legacy-toadstool`, `legacy-audio`, `mock`)
+- HTTP provider fallback docs improved with "When to Use" guidance
+- PrimalInfo deprecated fields handled with `#[allow(deprecated)]` in tests
+
 ### Infrastructure Cleanup
 
 - Removed empty orphan directories: `graph_manager/`, `ipc/server/`
@@ -83,10 +112,10 @@ root docs, removed orphaned directories, consolidated spec archives.
 |-------|--------|
 | `cargo fmt --all -- --check` | Clean |
 | `cargo clippy --workspace --all-targets -- -D warnings` | Zero warnings (pedantic + nursery) |
-| `cargo test --workspace` | 5,225 passed, 0 failed |
+| `cargo test --workspace` | 5,244 passed, 0 failed |
 | `cargo doc --workspace --no-deps` | Clean |
-| `cargo llvm-cov --workspace --summary-only` | 85.75% line / 86.99% branch |
-| Files over 1000 lines | None (largest: 876) |
+| `cargo llvm-cov --workspace --summary-only` | 85.76% line / 86.91% branch |
+| Files over 1000 lines | None (largest: 902) |
 | `anyhow` in production | Zero (dev-dependencies only) |
 | TODO/FIXME/HACK in production | Zero |
 | Dead code warnings | Zero |
@@ -96,7 +125,7 @@ root docs, removed orphaned directories, consolidated spec archives.
 
 ## Remaining Work
 
-1. **Coverage**: petal-tongue-ipc 88.8% → 90% (deep async socket paths)
+1. **Coverage**: petal-tongue-ipc ~87% → 90% (deep async socket/timeout paths)
 2. **Coverage**: petal-tongue-ui 75.7% → 90% (requires render/logic separation)
 3. **petal-tongue-ui architectural evolution**: Extract remaining render logic to pure functions
 4. **Incremental doc completion**: Crates with `#![expect(missing_docs)]`

@@ -9,7 +9,7 @@ Cross-primal integration documentation for petalTongue — the **Universal User 
 ## Integration Status
 
 petalTongue v1.6.6 (16 crates, edition 2024, `deny(unwrap/expect)`):
-- 5,225 tests passing, 0 failures
+- 5,244 tests passing, 0 failures
 - `#![forbid(unsafe_code)]` on all 16 crates + UniBin, zero C dependencies
 - ~86% line / ~87% branch coverage (llvm-cov) -- target 90%
 - UUI glossary module (`petal_tongue_core::uui_glossary`) — canonical terminology for modalities, user types, SAME DAVE
