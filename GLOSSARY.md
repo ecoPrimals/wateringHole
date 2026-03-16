@@ -478,6 +478,52 @@ such claim, so the legal uncertainty is everyone else's problem.
 
 See `gen3/about/LICENSING_STRATEGY.md` §8 for the full analysis.
 
+### fieldMouse
+
+The **minimal deployable structure** for the ecoPrimals ecosystem. Where a gate
+runs a full NUCLEUS and a niche composes primals via a deploy graph, a fieldMouse
+is the smallest stripped system — as few as a single atomic or chimera — purpose-built
+for a constrained deployment niche.
+
+fieldMouse is not a primal. It is a **deployment class** — a category of niche
+deployments defined by how they fit their target hardware and environment. A
+fieldMouse might be:
+
+- A Tower Atomic chimera on a RISC-V microcontroller (crypto + network only)
+- A Nest Atomic on a Raspberry Pi (crypto + network + storage)
+- A sensor node streaming data via songBird to a gate
+- A pipette-mounted data acquisition system handling provenance and streaming
+- An environmental monitor (pH, temperature, GPS) publishing to the mesh
+- An Akida NPU edge classifier on a Coral board
+
+fieldMouse deployments share these properties:
+
+| Property | Description |
+|----------|-------------|
+| **Minimal** | Smallest subset of atomics for the niche — no unused primals |
+| **Embedded-first** | Targets RISC-V, ARM (aarch64/armv7), and constrained SoCs |
+| **ecoBin compliant** | Pure Rust, zero C, cross-compiles with `cargo build --target` |
+| **Mesh-native** | Connects to the broader ecosystem via songBird or TCP fallback |
+| **Provenance-aware** | Even the smallest fieldMouse signs data via bearDog |
+
+The evolutionary ladder extends downward:
+
+```
+NUCLEUS     (full primal composition — gate)
+  ↓
+Niche       (biomeOS deploy graph — selected primals)
+  ↓
+fieldMouse  (minimal atomic/chimera — embedded, sensor, edge)
+```
+
+A fieldMouse on a pipette handles data streaming for the instrument — sample ID,
+timestamp, GPS, measurement, provenance signature — and publishes to the mesh.
+A fieldMouse on a soil probe does the same for pH, moisture, temperature. A
+fieldMouse on an Akida board classifies microbial communities in real time from
+MinION streaming data. The primals are the same. The deployment is minimal.
+
+See `FIELDMOUSE_DEPLOYMENT_STANDARD.md` for the specification.
+
 ### Novel Ferment Transcript (NFT)
 
 Memory-bound digital objects using the provenance trio. Not blockchain NFTs —
@@ -515,3 +561,4 @@ chains via sweetGrass and permanence via loamSpine.
 | **Symbiotic exception** | AGPL Section 7 grant to allies based on reciprocal benefit |
 | **Suppression inversion** | Owning nothing makes the project untargetable |
 | **AI authorship paradox** | Copyright uncertainty harms exclusivity claimants, not the commons |
+| **fieldMouse** | Minimal deployable ecoPrimals — smallest atomic/chimera for embedded/sensor/edge niches |
