@@ -8,7 +8,7 @@ Cross-primal integration documentation for petalTongue.
 
 ## Integration Status
 
-petalTongue v1.6.4 (16 crates, edition 2024):
+petalTongue v1.6.5 (16 crates, edition 2024):
 - 5,113 tests passing, 0 failures
 - `#![forbid(unsafe_code)]` on all 16 crates + UniBin, zero C dependencies
 - ~87% line / ~88% branch coverage (llvm-cov) -- target 90%
