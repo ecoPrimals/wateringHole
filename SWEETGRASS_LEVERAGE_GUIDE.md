@@ -32,19 +32,26 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 | Method | What It Does |
 |--------|-------------|
 | `braid.create` | Create a new provenance braid (Activity + Agent + Entity) |
-| `braid.get` | Retrieve a braid by content hash |
-| `braid.get_batch` | Retrieve multiple braids (ordered) |
-| `braid.list` | List braids with pagination |
+| `braid.get` | Retrieve a braid by ID |
+| `braid.get_by_hash` | Retrieve a braid by content hash |
 | `braid.query` | Query braids by agent, activity type, time range |
+| `braid.delete` | Delete a braid by ID |
 | `braid.commit` | Anchor a braid to LoamSpine (BraidId → UUID, ContentHash → `[u8; 32]`) |
+| `anchoring.anchor` | Cryptographically anchor a braid |
+| `anchoring.verify` | Verify an anchor receipt |
+| `provenance.graph` | Export the full provenance graph |
+| `provenance.export_provo` | Export single braid as W3C PROV-O JSON-LD |
+| `provenance.export_graph_provo` | Export full graph as W3C PROV-O JSON-LD |
+| `attribution.chain` | Compute attribution chain for a braid |
+| `attribution.calculate_rewards` | Calculate economic reward distribution |
+| `attribution.top_contributors` | List top contributors by attribution weight |
+| `compression.compress_session` | Compress session braids (0/1/Many) |
+| `compression.create_meta_braid` | Create meta-braid from compressed session |
 | `contribution.record` | Record an inter-primal contribution |
 | `contribution.record_session` | Record a session contribution (session_id, source_primal) |
 | `contribution.record_dehydration` | Record a full rhizoCrypt dehydration as attributed braids |
-| `provenance.graph` | Export the full provenance graph (W3C PROV-O JSON-LD) |
-| `provenance.lineage` | Trace derivation lineage for an entity |
-| `provenance.attribution` | Compute attribution shares for a braid |
-| `compression.analyze` | Analyze session compression opportunities (0/1/Many) |
 | `health.check` | Health check with store backend and uptime |
+| `capability.list` | Advertise capabilities, dependencies, and costs |
 
 **Transport**: JSON-RPC 2.0 over HTTP (primary), tarpc/bincode (high-perf),
 Unix domain sockets (biomeOS IPC), REST (admin/debug).
