@@ -1,9 +1,9 @@
 # petalTongue: Explicit Needs from the Ecosystem
 
-**Version**: v1.6.5 (March 15, 2026)
+**Version**: v1.6.6 (March 16, 2026)
 
-petalTongue is the universal visualization primal. It renders data to humans
-across every modality. This document states what petalTongue **needs** from
+petalTongue is the **Universal User Interface** primal. It translates computational
+universes into any user modality — not just visualization, but the complete sensory bridge. This document states what petalTongue **needs** from
 other primals to deliver complete rendering.
 
 ---
@@ -147,8 +147,12 @@ NestGate storage would enable ecosystem-wide artifact sharing.
 
 ## Summary: What Other Primals Should Know
 
-1. **petalTongue renders anything**: Send us grammar expressions or DataBinding
-   payloads (11 variants) and we compile to the best available modality.
+1. **petalTongue renders anything, for anyone**: Send grammar expressions or DataBinding
+   payloads (11 variants) and we compile to the best available modality. The UUI
+   glossary (`petal_tongue_core::uui_glossary`) defines canonical terminology for
+   modalities (visual, audio, haptic, terminal, braille, JSON API, acoustic, chemical),
+   user types (human-sighted, human-blind, AI-agent, non-human), and the SAME DAVE
+   (Sensory Afferent, Motor Efferent) feedback model.
 
 2. **We need `display.present`**: ToadStool window lifecycle works, but we
    cannot push frames yet.
@@ -165,6 +169,6 @@ NestGate storage would enable ecosystem-wide artifact sharing.
 
 ---
 
-**Last Updated**: March 15, 2026
+**Last Updated**: March 16, 2026
 **Maintainer**: ecoPrimals / petalTongue
-**License**: AGPL-3.0-only
+**License**: AGPL-3.0-or-later

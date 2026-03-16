@@ -1,15 +1,19 @@
 # petalTongue Spring Leverage Guide
 
-**Version**: 1.0.0  
-**Date**: March 14, 2026  
+**Version**: 1.1.0  
+**Date**: March 16, 2026  
 **Audience**: Springs, primals, and ecosystem architects  
-**Purpose**: How to leverage petalTongue — alone, in trios, and in novel cross-primal combinations
+**Purpose**: How to leverage petalTongue — the Universal User Interface primal — alone, in trios, and in novel cross-primal combinations
 
 ---
 
 ## What petalTongue Offers
 
-petalTongue is the **representation primal**. It accepts data through IPC and renders it across every available modality — egui GUI, ratatui TUI, audio sonification, SVG export, terminal character grids, braille tactile grids, haptic command sequences, and GPU command buffers. It also provides interactive features: selection, zoom, pan, perspectives, AI-driven focus (via Squirrel), and provenance tracking that traces every rendered pixel back to its source data.
+petalTongue is the **Universal User Interface** primal. It accepts data through IPC and translates it across every available modality — visual display (egui), terminal display (ratatui TUI), audio sonification, SVG export, terminal character grids, braille tactile grids, haptic command sequences, JSON API, and GPU command buffers. The UUI philosophy: *One Engine, Infinite Representations* — from dolphin to human, paraplegic dev to blind hiker.
+
+petalTongue follows the **SAME DAVE** model (Sensory Afferent, Motor Efferent) — bidirectional feedback loops where every output channel has a corresponding input channel. The canonical terminology lives in `petal_tongue_core::uui_glossary`.
+
+It also provides interactive features: selection, zoom, pan, perspectives, AI-driven focus (via Squirrel), and provenance tracking that traces every rendered pixel back to its source data.
 
 Key capabilities available to any spring or primal via JSON-RPC:
 
@@ -248,7 +252,7 @@ These are capabilities that emerge when springs combine through petalTongue in w
 
 ## Part 4: What petalTongue Needs From You
 
-For petalTongue to visualize your spring's data effectively:
+For petalTongue to render your spring's data across any user interface modality:
 
 1. **Announce capabilities** via Songbird or `provider.register_capability` — petalTongue discovers you automatically
 2. **Send data in any format** — `SpringDataAdapter` normalizes ludoSpring channels, ecoPrimals/time-series/v1, raw DataBindings, and bindings envelopes
@@ -279,3 +283,7 @@ echo '{"jsonrpc":"2.0","method":"visualization.export","params":{"session_id":"m
 ---
 
 *This guide is a living document. As springs discover new edges and capabilities, update this guide at the wateringHole so others can learn from the pattern.*
+
+---
+
+**License**: AGPL-3.0-or-later
