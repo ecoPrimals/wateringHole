@@ -2,7 +2,7 @@
 
 **Date**: March 16, 2026
 **Version**: v1.6.6 (incremental, same version)
-**Scope**: Cross-ecosystem pattern absorption, safe cast evolution, test isolation, UUI doc propagation
+**Scope**: Cross-ecosystem pattern absorption, safe cast evolution, test isolation, UUI doc propagation, root doc cleanup, version alignment, SPDX sweep
 
 ---
 
@@ -77,6 +77,23 @@ Updated ecosystem-facing documents with Universal User Interface language:
 - NestGate `storage.put` → ecosystem-wide artifact sharing
 - barraCuda `math.stat.*`, `math.tessellate.*` → blocked on dispatch table
 - ToadStool `display.present` → blocked on dispatch wiring
+
+### Root Doc Cleanup & Version Alignment
+
+Comprehensive sweep of all project documentation and config files:
+
+| Action | Files |
+|--------|-------|
+| README.md largest-file metric | 876 → 902 lines (corrected) |
+| CHANGELOG test count reconciliation | Removed ambiguous partial count from "Added" section |
+| EVOLUTION_TRACKER license refs | 2 stale `AGPL-3.0-only` → `AGPL-3.0-or-later` |
+| SPDX header sweep | 44 active files updated from `AGPL-3.0-only` to `AGPL-3.0-or-later` |
+| Version alignment (1.6.5 → 1.6.6) | `niche.yaml`, `manifest.toml`, `.docs-manifest.txt`, 3 docs, 1 demo provider, 1 IPC doc comment |
+| `deny.toml` allowed licenses | Added `AGPL-3.0-or-later` to the allow list |
+| Archived superseded doc | `sandbox/SENSORY_BENCHTOP_EVOLUTION.md` → `archive/docs-mar-2026/` |
+| `NEXT_EVOLUTIONS.md` | Added v1.6.6 row to evolution table, updated header metrics |
+
+**Debris scan results**: Zero stale TODO/FIXME/HACK in active code. Zero empty directories. Zero orphan docs. All 5 TODO/FIXME in archive/ are correctly stale fossil-record items.
 
 ---
 
