@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # rhizoCrypt Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 15, 2026
+**Date**: March 16, 2026
 **Primal**: rhizoCrypt v0.13.0-dev (Edition 2024)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
@@ -57,6 +57,42 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 
 **Transport**: JSON-RPC 2.0 over HTTP (required), tarpc/bincode (optional).
 **Registry**: `capability_registry.toml` (23 methods, 7 domains).
+
+### Self-Knowledge (`niche.rs`)
+
+rhizoCrypt follows the ecosystem niche pattern (established by squirrel,
+groundSpring, airSpring). The `niche.rs` module is the single source of
+truth for identity, capabilities, and scheduling hints:
+
+| Constant / Function | Purpose |
+|---------------------|---------|
+| `PRIMAL_ID` | `"rhizocrypt"` — identity for biomeOS registration |
+| `CAPABILITIES` | All 23 exposed methods |
+| `CONSUMED_CAPABILITIES` | What rhizoCrypt calls on other primals |
+| `COST_ESTIMATES` | Per-method latency hints for Pathway Learner scheduling |
+| `operation_dependencies()` | Parallelization DAG for Pathway Learner |
+| `capability_list()` | Enhanced `capability.list` response with per-method cost and deps |
+
+### Enhanced `capability.list` Response
+
+The `capability.list` response includes per-method cost tier and dependency
+information, aligned with loamSpine and sweetGrass:
+
+```json
+{
+  "primal": "rhizocrypt",
+  "version": "0.13.0-dev",
+  "methods": [
+    { "method": "dag.session.create", "domain": "dag", "cost": "low",  "deps": [] },
+    { "method": "dag.event.append",   "domain": "dag", "cost": "low",  "deps": ["dag.session.create"] },
+    { "method": "dag.merkle.root",    "domain": "dag", "cost": "medium", "deps": ["dag.event.append"] },
+    { "method": "dag.dehydration.trigger", "domain": "dag", "cost": "high", "deps": ["dag.session.create", "dag.event.append"] }
+  ]
+}
+```
+
+biomeOS Pathway Learner uses this to optimize graph execution order and
+parallelize independent operations.
 
 ---
 
