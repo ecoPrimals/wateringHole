@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # LoamSpine Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 15, 2026
-**Primal**: LoamSpine v0.8.9
+**Date**: March 16, 2026
+**Primal**: LoamSpine v0.9.2
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
