@@ -1,17 +1,18 @@
 # petalTongue @ wateringHole
 
-Cross-primal integration documentation for petalTongue.
+Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: March 15, 2026
+**Updated**: March 16, 2026
 
 ---
 
 ## Integration Status
 
-petalTongue v1.6.5 (16 crates, edition 2024, `deny(unwrap/expect)`):
-- 5,113 tests passing, 0 failures
+petalTongue v1.6.6 (16 crates, edition 2024, `deny(unwrap/expect)`):
+- 5,225 tests passing, 0 failures
 - `#![forbid(unsafe_code)]` on all 16 crates + UniBin, zero C dependencies
-- ~87% line / ~88% branch coverage (llvm-cov) -- target 90%
+- ~86% line / ~87% branch coverage (llvm-cov) -- target 90%
+- UUI glossary module (`petal_tongue_core::uui_glossary`) — canonical terminology for modalities, user types, SAME DAVE
 - tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
 - JSON-RPC 2.0 over Unix sockets (secondary, local IPC and debugging)
 - HTTP fallback for browser/external clients
@@ -194,9 +195,10 @@ Legacy: `/tmp/petaltongue.sock`
 
 | Standard | Status |
 |----------|--------|
-| `UNIBIN_ARCHITECTURE_STANDARD.md` | Compliant (1 binary, 5 modes) |
+| `UNIBIN_ARCHITECTURE_STANDARD.md` | Compliant (1 binary, 6 modes) |
 | `ECOBIN_ARCHITECTURE_STANDARD.md` | Compliant (pure Rust, no C deps, no genomeBin yet) |
 | `UNIVERSAL_IPC_STANDARD_V3.md` | Compliant (JSON-RPC + tarpc + HTTP fallback) |
 | `SEMANTIC_METHOD_NAMING_STANDARD.md` | Compliant (`visualization.*`, `interaction.*` namespaces) |
 | `PRIMAL_IPC_PROTOCOL.md` | Compliant |
-| License | AGPL-3.0-only on all crates |
+| `UNIVERSAL_USER_INTERFACE_SPEC` | Compliant — UUI glossary, multi-modal, SAME DAVE |
+| License | AGPL-3.0-or-later on all crates |
