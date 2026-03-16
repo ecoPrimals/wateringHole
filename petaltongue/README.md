@@ -29,8 +29,9 @@ petalTongue v1.6.6 (16 crates, edition 2024, `deny(unwrap/expect)`):
 - Spring IPC: healthSpring DataChannel auto-compile, dashboard render, wetSpring Scatter/Spectrum, physics bridge, interaction method aliases
 - Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, SVG, headless
 - Scene graph with Manim-style animation, modality compilers (SVG, audio, description, terminal)
-- **Spring absorption**: backpressure, JSONL telemetry, diverging palette, pipeline DAG, provider registry
+- **Spring absorption**: backpressure, JSONL telemetry, diverging palette, pipeline DAG, provider registry, `temp_env` safe testing, `TryFrom` safe casts, `tempfile` socket isolation
 - **Live ecosystem wiring**: sensor feed, interaction broadcast, Neural API registration, GameDataChannel mapping
+- **Smart refactoring**: doom-core (910→47 lines lib.rs via module decomposition), petal-tongue-tui/app (887→module tree)
 - **Game visualization**: Sprite/Tilemap/GameEntity primitives, GameScene DataBinding for ludoSpring
 - **Soundscape synthesis**: 5 waveforms, stereo panning, fade envelopes, Soundscape DataBinding
 - **JSONL telemetry provider**: File-based hotSpring/groundSpring bridge via `PETALTONGUE_TELEMETRY_DIR`
