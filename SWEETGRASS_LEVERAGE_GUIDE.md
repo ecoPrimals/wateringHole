@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # sweetGrass Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 15, 2026
-**Primal**: sweetGrass v0.7.13
+**Date**: March 16, 2026
+**Primal**: sweetGrass v0.7.15
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -711,3 +711,29 @@ the contribution record.
 **Applications**: Open-source credit (all springs), creative content
 licensing (ludoSpring), dataset licensing (wetSpring, hotSpring),
 model licensing (neuralSpring).
+
+---
+
+## 8. Content Convergence (Proposed — v0.8.x)
+
+When independent agents produce braids with the same content hash via different
+provenance paths, sweetGrass will capture this as **content convergence** rather
+than silently overwriting the earlier index entry.
+
+| Concept | Description |
+|---------|-------------|
+| `ContentConvergence` | Primary braid + all convergent arrivals for a content hash |
+| `ConvergentArrival` | Agent, timestamp, and derivation path for each convergent path |
+| `convergence.query` | New JSON-RPC method to query convergence records |
+| `convergence.agents` | List agents who independently converged on same content |
+| `convergence.statistics` | Aggregate convergence metrics |
+
+**Why it matters for Springs**: Convergence is a reproducibility signal. When your
+Spring and another Spring independently produce the same content hash, sweetGrass
+will record both paths and their intersection — enabling cross-Spring validation
+and reproducibility analysis without additional coordination.
+
+**Participation**: See `CONTENT_CONVERGENCE_EXPERIMENT_GUIDE.md` and ISSUE-013
+in `SPRING_EVOLUTION_ISSUES.md`.
+
+**Full spec**: `sweetGrass/specs/CONTENT_CONVERGENCE.md`

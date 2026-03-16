@@ -2,7 +2,7 @@
 
 **Purpose**: Track issues, patterns, and evolution opportunities discovered by Springs
 that require coordination from biomeOS, ToadStool, or cross-primal teams.
-**Last Updated**: March 14, 2026
+**Last Updated**: March 16, 2026
 **Contributing Springs**: airSpring v0.7.5, neuralSpring S145, wetSpring V113, groundSpring V104, hotSpring v0.6.29, healthSpring V20, ludoSpring V6
 
 ---
@@ -339,6 +339,83 @@ arithmetic and MUST be addressed algorithmically.
 `validate_gpu_dielectric` (12/12 checks after fix).
 
 **Status**: OPEN — hotSpring workaround in place; barraCuda absorption pending
+
+---
+
+### ISSUE-012: Content Similarity Index — Cross-Session Discovery Experiment
+
+**Reporter**: rhizoCrypt (v0.13.0-dev)
+**Affects**: All Springs that produce vertices in rhizoCrypt sessions
+**Priority**: P3 — experimental, no production blocker
+
+**Problem**: rhizoCrypt's DAG stores are session-scoped. Cross-session patterns
+(similar vertices, similar agent behavior, similar event structures) are
+invisible without full-scan analysis. Springs that produce multiple sessions
+have no efficient way to discover structural similarities across them.
+
+**Proposed fix**: A locality-sensitive content index (feature-gated behind
+`content-index`) that creates intentional hash "collisions" for structurally
+similar vertices. This enables O(1) cross-session similarity lookup.
+
+Springs should participate by:
+1. **Phase A (now)**: Audit vertex event types and metadata schemas for consistency
+2. **Phase B**: Normalize event naming to `{domain}.{action}` convention
+3. **Phase C**: Propose domain-specific LSH input features (see guide)
+
+**Evidence**: `rhizoCrypt/specs/CONTENT_INDEX_EXPERIMENT.md` (full spec),
+`wateringHole/CONTENT_SIMILARITY_EXPERIMENT_GUIDE.md` (Spring participation guide).
+
+**Status**: OPEN — spec proposed, awaiting Phase 1 implementation in rhizoCrypt
+
+---
+
+### ISSUE-013: Content Convergence — Provenance Intersection as Data Science
+
+**Reporter**: sweetGrass (v0.7.15)
+**Affects**: All Springs that produce Braids via sweetGrass, rhizoCrypt (related to ISSUE-012)
+**Priority**: P3 — experimental, no production blocker
+
+**Problem**: sweetGrass indexes Braids by `ContentHash` using a 1:1 mapping
+(last-write-wins). When two independent agents produce Braids with the same
+content hash via different provenance paths, the earlier index entry is silently
+overwritten. This "provenance convergence" carries semantic meaning — reproducibility,
+consensus, independent agreement — that the current lossy index discards.
+
+The concept extends a hash collision research insight: instead of resolving
+collisions, examine **what data lies at the collision point**. By modifying
+hash table sizes and hash functions, convergence rates can be controlled,
+opening new data storage and data science techniques.
+
+Additionally, this connects to the historical practice of cross-hatched letters
+(rotating the page and writing over existing text when paper was scarce) — both
+information layers persist. In our context: linear storage (loamSpine-style
+append) and branching provenance (rhizoCrypt-style DAG) coexist at convergence
+points, mirroring biological systems where linear hyphal growth and branching
+anastomosis produce emergent network topology.
+
+**Proposed fix** (split ownership):
+
+1. **sweetGrass (Phase 1)**: Evolve content hash index from `HashMap<ContentHash, BraidId>`
+   to `HashMap<ContentHash, ContentConvergence>`. New `ConvergentArrival` struct captures
+   agent, timestamp, and derivation path for each convergent arrival. New `convergence.query`
+   JSON-RPC method. Full spec: `sweetGrass/specs/CONTENT_CONVERGENCE.md`.
+
+2. **Springs (Phase A — now)**: Audit data production patterns for scenarios where
+   independent processes might produce identical content hashes. Document candidates.
+
+3. **Springs (Phase B)**: After sweetGrass Phase 1, produce convergent Braid pairs
+   via `braid.create` and verify convergence tracking via `convergence.query`.
+
+4. **rhizoCrypt coordination**: Connect to ISSUE-012 (Content Similarity Index).
+   rhizoCrypt LSH operates at the vertex level; sweetGrass convergence operates at
+   the provenance level. Springs can cross-reference: do rhizoCrypt-similar vertices
+   produce sweetGrass-convergent Braids?
+
+**Evidence**: `sweetGrass/specs/CONTENT_CONVERGENCE.md` (full specification),
+`wateringHole/CONTENT_CONVERGENCE_EXPERIMENT_GUIDE.md` (Spring participation guide),
+`sweetGrass/crates/sweet-grass-store/src/memory/indexes.rs` (current lossy index).
+
+**Status**: OPEN — specification proposed, sweetGrass Phase 1 targeted for v0.8.x
 
 ---
 
