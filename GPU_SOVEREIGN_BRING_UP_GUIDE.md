@@ -672,7 +672,95 @@ provides unique advantages for memory management:
 
 ---
 
+## Part 8: D3hot→D0 VRAM Breakthrough and Sovereign Boot Architecture
+
+**Date**: March 16, 2026
+
+### 8.1 The Breakthrough
+
+BIOS POST trains HBM2 at system boot. The training survives PCIe D3hot
+(sleep state). vfio-pci puts GPUs in D3hot, making them look dead, but
+a single sysfs write restores everything:
+
+```bash
+echo "on" > /sys/bus/pci/devices/BDF/power/control
+```
+
+Result: full 12GB HBM2 read/write, 15/18 domains alive, VBIOS readable,
+all from pure Rust via VFIO. **24 of 26 hardware tests pass.**
+
+### 8.2 The Fragility
+
+VFIO close triggers a PM reset that destroys HBM2 training on GV100.
+The card has no FLR support (`FLReset-`) and the PM D3 cycle wipes the
+memory controller state. Only a system reboot restores it.
+
+### 8.3 Sovereign Boot Architecture
+
+The solution: a persistent driver that owns the GPU from boot to shutdown.
+
+**Phase 1 — GlowPlug Daemon** (works today):
+- systemd service starts at boot
+- Binds GPU to vfio-pci, opens VFIO device, forces D0
+- Holds fd open forever (VFIO never closes → HBM2 never dies)
+- Exposes Unix socket for toadStool (fd passing via SCM_RIGHTS)
+
+**Phase 2 — Sovereign Kernel Module** (coral-kmod):
+- Minimal PCI driver that replaces vfio-pci
+- NO device reset on fd close (preserves HBM2)
+- Exposes /dev/coral0 for direct userspace access
+- GPU-aware power management (D3hot only when safe)
+
+**Phase 3 — Sovereign HBM2 Training** (full independence):
+- Trains HBM2 from cold silicon in pure Rust
+- No dependency on vendor BIOS or firmware
+- Uses oracle data + JEDEC JESD235 standard
+- Enables post-FLR recovery and suspend/resume
+
+### 8.4 The Handoff Pattern
+
+```
+coral-kmod / glowplug daemon
+  │  owns GPU from boot
+  │  preserves HBM2 training
+  │  manages power states
+  │
+  ├──→ toadStool (receives warm GPU via fd passing / /dev/coral0)
+  │      │  dispatches compute work
+  │      │  never worries about init
+  │      │
+  │      ├──→ hotSpring (MD simulations)
+  │      ├──→ wetSpring (genomics)
+  │      ├──→ neuralSpring (ML)
+  │      └──→ airSpring (weather)
+  │
+  └──→ GlowPlug health monitor (periodic VRAM check, power watchdog)
+```
+
+### 8.5 GlowPlug as PCIe Device Broker
+
+The architecture evolves further: GlowPlug becomes a **device lifecycle
+broker** that manages hot-swap between driver personalities (VFIO, nouveau,
+CUDA, amdgpu) while preserving hardware state. Key capabilities:
+
+- **Hot-swap protocol**: snapshot → quiesce → unbind → bind → verify
+- **State vault**: register snapshots compressed against oracle baseline
+- **Personality system**: each driver backend is a loadable personality
+- **toadStool integration**: toadStool asks "give me a device that can do X"
+  and GlowPlug handles the hardware details
+- **PCIe transfer coordination**: GPU↔GPU P2P, DMA-buf sharing, topology
+
+This makes toadStool fully hardware-agnostic. Adding a new GPU vendor
+means adding a new Personality variant, not rewriting dispatch logic.
+
+See: `hotSpring/experiments/062_VFIO_D3HOT_VRAM_BREAKTHROUGH.md`
+See: `hotSpring/experiments/063_SOVEREIGN_BOOT_DRIVER_ARCHITECTURE.md`
+See: `hotSpring/experiments/064_GLOWPLUG_DEVICE_BROKER_ARCHITECTURE.md`
+
+---
+
 *March 15, 2026 — Layer by layer, from cold silicon to sovereign dispatch.*
 *Updated: mmiotrace confirms nouveau never POSTs. VBIOS scripts are the path.*
 *Updated: GlowPlug Metal Explorer — vendor-agnostic GPU capability discovery.*
 *Updated: PCLOCK deep probe reveals Volta secure boot barrier. Oracle strategy is the path forward.*
+*Updated: D3hot→D0 breakthrough — VRAM alive without any driver. Sovereign boot architecture planned.*

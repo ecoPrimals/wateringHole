@@ -62,6 +62,20 @@ The validation goal is **CERN-grade reproducible physics at home, scalable to CE
 > See `handoffs/HOTSPRING_GLOWPLUG_SOVEREIGN_POWER_TRIO_HANDOFF_MAR14_2026.md`
 > and `hotSpring/experiments/059_CORALREEF_GPU_POWER_MANAGEMENT_DESIGN.md`.
 >
+> **March 15 update (interpreter probe + bring-up guide)**: Built a 7-layer
+> GPU probe interpreter in pure Rust that discovers capabilities from cold
+> silicon. BAR2 self-warm glow plug achieved full nouveau parity — the
+> nouveau kernel driver is no longer needed for GPU warming. Discovered
+> three critical bugs in runlist submission (wrong register, wrong encoding,
+> wrong architecture variant). Identified the MMU fault buffer as the likely
+> remaining blocker for scheduler activation. Published
+> `GPU_SOVEREIGN_BRING_UP_GUIDE.md` — comprehensive guide for primals
+> covering the 7 gaps between current state and full sovereign dispatch.
+> Largest remaining gap: HBM2/framebuffer controller init (currently relies
+> on nouveau for VRAM training after D3cold).
+> See `GPU_SOVEREIGN_BRING_UP_GUIDE.md` for the full guide, and
+> `handoffs/HOTSPRING_INTERPRETER_BRING_UP_GAPS_HANDOFF_MAR15_2026.md`.
+>
 > **March 12 update (dispatch investigation)**: hotSpring deep-debugged
 > the dispatch pipeline on both Titan V and RTX 3090. Found and fixed
 > **four critical bugs** in coralReef:
