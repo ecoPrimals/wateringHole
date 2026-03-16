@@ -8,16 +8,16 @@ Cross-primal integration documentation for petalTongue.
 
 ## Integration Status
 
-petalTongue v1.6.3 (16 crates, edition 2024):
-- 5,188 tests passing, 0 failures
+petalTongue v1.6.4 (16 crates, edition 2024):
+- 5,113 tests passing, 0 failures
 - `#![forbid(unsafe_code)]` on all 16 crates + UniBin, zero C dependencies
-- ~85% line coverage (llvm-cov) -- target 90%
+- ~87% line / ~88% branch coverage (llvm-cov) -- target 90%
 - tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
 - JSON-RPC 2.0 over Unix sockets (secondary, local IPC and debugging)
 - HTTP fallback for browser/external clients
-- Capability-based discovery -- zero hardcoded primal names
+- Capability-based discovery -- zero hardcoded primal names, 60 centralized constants
 - Grammar of Graphics engine with Tufte constraint validation
-- **DataBinding auto-compiler**: All 9 DataBinding variants (TimeSeries, Distribution, Bar, Gauge, Spectrum, Heatmap, Scatter, Scatter3D, FieldMap) auto-compile to Grammar of Graphics
+- **DataBinding auto-compiler**: All 11 DataBinding variants (TimeSeries, Distribution, Bar, Gauge, Spectrum, Heatmap, Scatter, Scatter3D, FieldMap, GameScene, Soundscape) auto-compile to Grammar of Graphics
 - **Dashboard layout engine**: Multi-panel grid with domain theming and SVG/description export
 - **Scenario loader**: Load healthSpring-style JSON scenarios from disk with `--scenario` CLI flag
 - **Faceting**: `compile_faceted()` for small multiples (Wrap/Grid layouts)
@@ -29,6 +29,9 @@ petalTongue v1.6.3 (16 crates, edition 2024):
 - Scene graph with Manim-style animation, modality compilers (SVG, audio, description, terminal)
 - **Spring absorption**: backpressure, JSONL telemetry, diverging palette, pipeline DAG, provider registry
 - **Live ecosystem wiring**: sensor feed, interaction broadcast, Neural API registration, GameDataChannel mapping
+- **Game visualization**: Sprite/Tilemap/GameEntity primitives, GameScene DataBinding for ludoSpring
+- **Soundscape synthesis**: 5 waveforms, stereo panning, fade envelopes, Soundscape DataBinding
+- **JSONL telemetry provider**: File-based hotSpring/groundSpring bridge via `PETALTONGUE_TELEMETRY_DIR`
 - All files under 1,000 lines; all production stubs evolved to implementations
 
 ### Grammar of Graphics Engine (Implemented)
@@ -48,7 +51,7 @@ Implemented capabilities:
 - Domain color palettes resolved at runtime from grammar `domain` field
 - Streaming visualization for real-time data (`visualization.render.stream`)
 - 10 geometry types: Point, Line, Bar, Area, Ribbon, Tile, Arc, Heatmap, Contour, Text
-- DataBinding payloads: TimeSeries, Distribution, Bar, Gauge, Heatmap, Scatter, Scatter3D, FieldMap, Spectrum
+- DataBinding payloads: TimeSeries, Distribution, Bar, Gauge, Heatmap, Scatter, Scatter3D, FieldMap, Spectrum, GameScene, Soundscape
 - AnimationPlayer for sequenced scene graph animations
 - Scene bridge renderers for both egui (GUI) and ratatui (TUI)
 
