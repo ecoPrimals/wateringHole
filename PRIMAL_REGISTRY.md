@@ -370,6 +370,26 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 ---
 
+### sourDough - Reproducibility Primal
+
+**Domain**: Build reproducibility, hermetic compilation, and binary provenance  
+**Phase**: Post-NUCLEUS  
+**Status**: Early development
+
+**Role**: sourDough ensures bit-for-bit reproducible builds across the ecosystem. It captures the exact toolchain, dependency tree, and build environment for every primal binary — the "starter culture" that guarantees any builder can recreate the same output. Where sweetGrass tracks who created what, sourDough tracks how it was built.
+
+**Primitives**:
+
+| Category | Primitives |
+|----------|-----------|
+| **Build Capture** | Toolchain fingerprint, dependency lockfile hash, environment snapshot |
+| **Verification** | Binary hash comparison, reproducibility attestation |
+| **Provenance** | Build-to-source linkage, dependency audit trail |
+
+**Participates In**: NUCLEUS (build verification), sweetGrass (build provenance), LoamSpine (build certificates)
+
+---
+
 ## The Memory & Attribution Stack
 
 rhizoCrypt, LoamSpine, and sweetGrass form a unified stack with three semantic layers over one DAG engine:
@@ -429,7 +449,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
 | hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
 | groundSpring | V103 |
-| neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
+| neuralSpring | V108/S157 (deep debt, idiomatic Rust, Tower Atomic zero C deps, 1128 tests) |
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |

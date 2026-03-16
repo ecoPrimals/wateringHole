@@ -205,14 +205,39 @@ genomeBin = ecoBin + deployment wrapper. Self-extracting archive that auto-detec
 ### The Evolutionary Ladder
 
 ```
-UniBin   (structure)    → One binary, multiple modes
+UniBin    (structure)    → One binary, multiple modes
   ↓
-ecoBin   (portability)  → + Pure Rust, cross-compilation, platform-agnostic IPC
+ecoBin    (portability)  → + Pure Rust, cross-compilation, platform-agnostic IPC
   ↓
-genomeBin (deployment)  → + Auto-detection, service integration, health monitoring
+genomeBin (deployment)   → + Auto-detection, service integration, health monitoring
 ```
 
 All ecoBins are UniBins. All genomeBins are ecoBins. Each stage adds capability without replacing the previous.
+
+### The Deployment Ladder
+
+The binary ladder above describes how a single primal is built. The deployment
+ladder describes how primals are composed into running systems:
+
+```
+NUCLEUS     (full composition — all atomics + Squirrel, biomeOS orchestrated)
+  ↓
+Niche       (biomeOS deploy graph — selected primals, BYOB composition)
+  ↓
+fieldMouse  (minimal atomic/chimera — embedded, sensor, edge, NO biomeOS)
+```
+
+**fieldMouse** is the smallest deployable structure in the ecosystem. A fieldMouse
+is a static chimera — as few as a single fused atomic — purpose-built for
+constrained hardware and specific deployment niches. No biomeOS, no deploy graph,
+no runtime composition. If biomeOS is running, it's a niche. If not, it's a fieldMouse.
+
+fieldMouse subtypes include sensor nodes (soil, air, water), lab instruments
+(pipette data streaming, sequencer relay), and edge compute (Akida NPU classifiers,
+anomaly detection). All fieldMouse deployments sign data at source via bearDog
+and connect to the mesh via songBird.
+
+**Specification**: `FIELDMOUSE_DEPLOYMENT_STANDARD.md`
 
 ---
 
@@ -313,6 +338,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `GENOMEBIN_ARCHITECTURE_STANDARD.md` — Autonomous deployment (self-extracting, auto-detect)
 - `SPRING_AS_NICHE_DEPLOYMENT_STANDARD.md` — Springs deploy as biomeOS niches
 - `SPRING_NICHE_DEPLOYMENT_GUIDE.md` — How-to guide for niche deployment
+- `FIELDMOUSE_DEPLOYMENT_STANDARD.md` — Minimal deployable structure (embedded, sensor, edge)
 
 ### Communication Standards
 - `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.0 — consolidated, includes platform-agnostic transport + dual protocol)
