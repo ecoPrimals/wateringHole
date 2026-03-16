@@ -193,7 +193,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 47 (A+) — 1819 tests passed, 61 ignored, 66.43% line coverage, 75.15% function coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync + USERD_TARGET/INST_TARGET runlist fix), `GpuContext::from_vfio()` convenience API for barraCuda, UVM dispatch pipeline (GPFIFO + USERD doorbell + completion polling), `KernelCacheEntry` + `dispatch_precompiled()` (zero-copy `Bytes`), driver string constants (`preference.rs`), unsafe from_raw_parts_mut eliminated, production panics evolved (warn + debug_assert), `#[deny(unsafe_code)]` on 8/9 crates, zero clippy warnings, zero files >1000 lines, AGPL-3.0-only
+**Status**: Phase 10 Iteration 50 (A+) — 1992 tests passed, 0 failed, 57.54% line coverage, 67.80% function coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync + USERD_TARGET/INST_TARGET runlist fix), `GpuContext::from_vfio()` convenience API for barraCuda, UVM dispatch pipeline (GPFIFO + USERD doorbell + completion polling), `KernelCacheEntry` + `dispatch_precompiled()` (zero-copy `Bytes`), driver string constants (`preference.rs`), production panics/unwraps evolved (tracing + graceful errors), `#[deny(unsafe_code)]` on 8/9 crates, zero clippy warnings, zero doc warnings, zero fmt drift, all files <1000 lines, AGPL-3.0-only, hardware: 2× Titan V (VFIO) + RTX 5060 (nvidia-drm)
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL, SPIR-V, and GLSL compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified. coralDriver provides userspace GPU dispatch via DRM ioctl (AMD amdgpu, NVIDIA nouveau, nvidia-drm/UVM) and VFIO direct BAR0/DMA dispatch (maximum sovereignty). coralGpu unifies compilation and dispatch into a single API with sovereign driver preference (vfio > nouveau > amdgpu > nvidia-drm). Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -370,26 +370,6 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 ---
 
-### sourDough - Reproducibility Primal
-
-**Domain**: Build reproducibility, hermetic compilation, and binary provenance  
-**Phase**: Post-NUCLEUS  
-**Status**: Early development
-
-**Role**: sourDough ensures bit-for-bit reproducible builds across the ecosystem. It captures the exact toolchain, dependency tree, and build environment for every primal binary — the "starter culture" that guarantees any builder can recreate the same output. Where sweetGrass tracks who created what, sourDough tracks how it was built.
-
-**Primitives**:
-
-| Category | Primitives |
-|----------|-----------|
-| **Build Capture** | Toolchain fingerprint, dependency lockfile hash, environment snapshot |
-| **Verification** | Binary hash comparison, reproducibility attestation |
-| **Provenance** | Build-to-source linkage, dependency audit trail |
-
-**Participates In**: NUCLEUS (build verification), sweetGrass (build provenance), LoamSpine (build certificates)
-
----
-
 ## The Memory & Attribution Stack
 
 rhizoCrypt, LoamSpine, and sweetGrass form a unified stack with three semantic layers over one DAG engine:
@@ -449,11 +429,11 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
 | hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
 | groundSpring | V103 |
-| neuralSpring | V108/S157 (deep debt, idiomatic Rust, Tower Atomic zero C deps, 1128 tests) |
+| neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 47 (deep debt evolution, 1819 tests, zero-copy Bytes, driver constants) |
+| coralReef | Phase 10 Iteration 50 (full audit execution, 1992 tests, zero warnings, all files <1000 LOC) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
