@@ -78,7 +78,25 @@ LoamSpine v0.8.9 absorbs ecosystem patterns from cross-spring analysis:
 - `graphs/loamspine_deploy.toml` (new)
 - `README.md`, `CHANGELOG.md`, `STATUS.md`, `WHATS_NEXT.md`
 - `CONTRIBUTING.md`, `KNOWN_ISSUES.md`, `primal-capabilities.toml`
-- `showcase/00_SHOWCASE_INDEX.md`
+- `showcase/00_SHOWCASE_INDEX.md`, `showcase/00_START_HERE.md`
+- `showcase/QUICK_START.sh` (fixed stale demo path)
+- `rustfmt.toml` (edition 2021 → 2024)
+- `fuzz/Cargo.toml` (edition 2021 → 2024)
+- `specs/SERVICE_LIFECYCLE.md` (version 0.8.6 → 0.8.9)
+- 9 showcase files updated from 0.8.6 → 0.8.9
+- 6 showcase demo.sh scripts updated from edition 2021 → 2024
+
+---
+
+## Doc Cleanup Summary
+
+- Eliminated all version 0.8.6 references outside historical changelog/status sections
+- Eliminated all edition 2021 references outside historical changelog sections
+- Fixed stale test counts (1,092 → 1,132) and source file counts (112/117 → 114)
+- Fixed broken `QUICK_START.sh` demo path (`01-basic-spine` → `01-hello-loamspine`)
+- Added missing `[0.8.9]` compare link to CHANGELOG.md
+- Updated `rustfmt.toml` from edition 2021 → 2024
+- Shortened stale v0.3.0 module removal note in `lib.rs`
 
 ---
 
