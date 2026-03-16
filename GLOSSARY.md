@@ -12,12 +12,21 @@ in any document, handoff, or conversation, its meaning is defined here.
 ### Gate
 
 A **gate** is a physical computer — a deployment target that runs the ecoPrimals
-stack. Gates are named. The project currently operates on two:
+stack. Gates are named using camelCase (`firstLast`) like all ecoPrimals entities.
+The project operates on 10 towers + 4 small form factor nodes:
 
-| Gate | Hardware | Role |
-|------|----------|------|
-| **Eastgate** | RTX 4070, desktop workstation | Primary development, daily driver |
-| **biomeGate** | Threadripper 3970X + RTX 3090 + Titan V | Multi-GPU validation, lattice QCD, HPC workloads |
+| Gate | Display GPU | Work / HBM2 | Role |
+|------|-------------|-------------|------|
+| **northGate** | RTX 5090 | — | Flagship AI/LLM compute |
+| **southGate** | RTX 4060 | swappable | Gaming + heavy compute |
+| **eastGate** | RTX 4070 | — | Utility + neuromorphic (1× Akida) |
+| **strandGate** | — | RTX 3090 + RX 6950 XT | Bioinformatics (1× Akida) |
+| **biomeGate** | RTX 5060 | 2× Titan V + 2× MI50 | HBM2 test bench (1× Akida) |
+| **westGate** | RTX 2070S | — | Cold storage (76 TB ZFS) |
+
+Each gate has a **display tier** (small GPU, permanent) and **PCIe slots for
+swappable work cards**. Every gate is a PCIe-parallelizable system — work cards
+physically move to where the science is.
 
 A gate runs an operating system (Pop!\_OS / Linux), a toolchain (Rust, Cursor),
 and the biomeOS substrate. Gates are sovereign — no cloud, no allocation queue,

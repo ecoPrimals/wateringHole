@@ -2,7 +2,7 @@
 
 **Version**: 1.0.0
 **Status**: Active
-**Last Updated**: March 13, 2026
+**Last Updated**: March 16, 2026
 **Resolves**: SPRING_EVOLUTION_ISSUES ISSUE-007
 
 ---
@@ -213,9 +213,39 @@ capabilities = ["mydomain", "sub_capability_1", "sub_capability_2"]
 | airSpring | `ecology` | 30+ ET₀, soil, crop, drought, biodiversity | Active |
 | ludoSpring | `game` | UI analysis, flow, Fitts, noise, WFC, accessibility | Active |
 | neuralSpring | `science` (shared) | spectral, Anderson, Hessian, training trajectory | Active |
-| healthSpring | `medical` | anatomy, tissue, surgical tools, biosignal, PK | Active |
-| groundSpring | `measurement` | (pending registration) | Planned |
-| hotSpring | `physics` | (pending registration) | Planned |
+| healthSpring | `medical` | anatomy, tissue, surgical tools, biosignal, PK, population health, epidemiology | Active |
+| groundSpring | `measurement` | 21 translations: soil moisture, pH, NPK, water quality, canopy, GPS, calibration | Active (v2.42) |
+| hotSpring | `physics` | 17 translations: molecular dynamics, force fields, thermodynamics, energy | Active (v2.42) |
+
+---
+
+## Streaming Support (v2.43)
+
+Springs that produce data streams (sensor telemetry, FASTQ sequences, compound libraries,
+time series) can participate in **Pipeline coordination graphs**. The transport is NDJSON —
+the same newline-delimited JSON already used for all IPC.
+
+**To support streaming**: Write multiple NDJSON response lines per request:
+
+```
+Client sends:  {"jsonrpc":"2.0","method":"measurement.soil_moisture","params":{...},"id":1}\n
+Spring writes: {"type":"Data","payload":{"sensor":"SM-001","value":42.3}}\n
+Spring writes: {"type":"Data","payload":{"sensor":"SM-002","value":38.1}}\n
+Spring writes: {"type":"End"}\n
+```
+
+The `AtomicClient::call_stream()` on the consumer side reads each line as a `StreamItem`.
+For springs that return a single result, no changes are needed — the standard response
+is automatically wrapped.
+
+**Pipeline graphs** wire springs with bounded `mpsc` channels:
+
+```
+source spring ──[channel]──▶ transform spring ──[channel]──▶ sink
+```
+
+Items flow through as soon as each node produces them. Use `graph.execute_pipeline`
+or let `graph.execute` auto-detect the `pipeline` coordination pattern.
 
 ---
 

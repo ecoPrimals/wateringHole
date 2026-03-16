@@ -2,7 +2,7 @@
 
 **Status**: ECOSYSTEM STANDARD  
 **Version**: 1.0.0  
-**Date**: March 11, 2026  
+**Date**: March 16, 2026  
 **Authority**: wateringHole (ecoPrimals Core Standards)  
 **Compliance**: Mandatory for all springs targeting biomeOS deployment  
 **Reference Implementations**: ludoSpring (game science), petalTongue (visualization), healthSpring (health science niche)
@@ -284,26 +284,96 @@ Response:
 
 ## Coordination Patterns
 
+biomeOS supports five coordination patterns. Choose the one that matches your data flow.
+
 ### Sequential (default)
 
 Standard germination order: security → discovery → dependencies → spring → validate.
-Suitable for most springs.
-
-### Continuous (game engine, real-time)
-
-For springs that participate in tick-based coordination (e.g., 60 Hz game loop):
+Suitable for most springs. Nodes execute one-at-a-time in dependency order.
 
 ```toml
 [graph]
-coordination = "Continuous"
-tick_hz = 60
-
-[[nodes]]
-id = "<spring>_tick"
-coordination_mode = "continuous"
+coordination = "sequential"
 ```
 
-The continuous coordination pattern is specified in the Game Engine Niche Specification.
+### Parallel
+
+Independent nodes execute concurrently. Use when multiple nodes have no
+dependencies on each other (e.g., parallel health checks).
+
+```toml
+[graph]
+coordination = "parallel"
+```
+
+### ConditionalDag
+
+DAG with conditional branching. Nodes can have `condition` or `skip_if` fields
+that evaluate environment variables to decide whether to execute.
+
+```toml
+[graph]
+coordination = "conditiondag"
+
+[[graph.nodes]]
+id = "optional-gpu-step"
+condition = "${HAS_GPU} == true"
+```
+
+### Pipeline (streaming, v2.43)
+
+For springs that produce or consume data streams — ETL, telemetry, FASTQ processing,
+pharmacology screening, sensor data. The PipelineExecutor wires bounded `mpsc` channels
+between nodes. Items flow through as soon as each node produces them.
+
+```toml
+[graph]
+coordination = "pipeline"
+
+[[graph.nodes]]
+id = "data-source"
+capability = "<domain>.fetch"
+required = true
+
+[[graph.nodes]]
+id = "transform"
+capability = "<domain>.process"
+depends_on = ["data-source"]
+required = true
+
+[[graph.nodes]]
+id = "store"
+capability = "storage.store"
+depends_on = ["transform"]
+required = true
+```
+
+**Streaming support**: A primal that produces a stream writes multiple NDJSON response
+lines per request. The `AtomicClient::call_stream()` on the consumer side reads each
+line as a `StreamItem`. For primals that return a single result, no changes are needed.
+
+**Optional nodes**: Use `fallback = "skip"` for expensive enrichment steps that
+should not block the pipeline if they fail or timeout.
+
+### Continuous (game engine, real-time)
+
+For springs that participate in tick-based coordination (e.g., 60 Hz game loop).
+The ContinuousExecutor calls each node every tick, with per-node budgets,
+feedback edges, and graceful degradation.
+
+```toml
+[graph]
+coordination = "continuous"
+
+[graph.tick]
+target_hz = 60
+
+[[graph.nodes]]
+id = "<spring>_tick"
+capability = "<domain>.tick"
+budget_ms = 8.0
+```
+
 Springs participating in continuous niches MUST support `tick` or `frame` JSON-RPC methods.
 
 ---
@@ -324,6 +394,8 @@ Springs participating in continuous niches MUST support `tick` or `frame` JSON-R
 | 10 | AGPL-3.0-only license | |
 | 11 | Neural API registration (`lifecycle.register`) | |
 | 12 | Clean SIGTERM shutdown | |
+| 13 | NDJSON multi-line streaming support (if Pipeline coordination) | |
+| 14 | `tick`/`frame` method (if Continuous coordination) | |
 
 ---
 
@@ -345,13 +417,18 @@ Springs participating in continuous niches MUST support `tick` or `frame` JSON-R
 ```
 1. Spring implements IPC server (JSON-RPC over Unix socket)
 2. Spring registers capability domain in biomeOS
-3. biomeOS deploys spring via graph (atomic deployment)
-4. Spring composes into niche YAML (usable system)
-5. Springs fuse into chimeras (unified APIs)
-6. Niches become BYOB templates (user-customizable biomes)
+3. biomeOS deploys spring via graph (atomic deployment — Sequential)
+4. Spring participates in Pipeline graphs (streaming ETL/telemetry)
+5. Spring participates in Continuous graphs (real-time tick loops)
+6. Spring composes into niche YAML (usable system)
+7. Springs fuse into chimeras (unified APIs)
+8. Niches become BYOB templates (user-customizable biomes)
+9. Emergent systems arise as functions of Neural API (RootPulse, RPGPT, AlphaFold-class)
 ```
 
-Each step is independently valuable. Springs can be deployed atomically (step 3) before niches are defined (step 4).
+Each step is independently valuable. Springs can be deployed atomically (step 3) before
+niches are defined (step 6). Pipeline and Continuous coordination (steps 4-5) are opt-in
+and only required when the spring's data flow demands streaming or real-time tick execution.
 
 ---
 

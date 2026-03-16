@@ -8,14 +8,15 @@ Cross-primal integration documentation for petalTongue.
 
 ## Integration Status
 
-petalTongue v1.6.5 (16 crates, edition 2024):
+petalTongue v1.6.5 (16 crates, edition 2024, `deny(unwrap/expect)`):
 - 5,113 tests passing, 0 failures
 - `#![forbid(unsafe_code)]` on all 16 crates + UniBin, zero C dependencies
 - ~87% line / ~88% branch coverage (llvm-cov) -- target 90%
 - tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
 - JSON-RPC 2.0 over Unix sockets (secondary, local IPC and debugging)
 - HTTP fallback for browser/external clients
-- Capability-based discovery -- zero hardcoded primal names, 60 centralized constants
+- Capability-based discovery -- zero hardcoded primal names, 60+ capability constants, 15 primal identity constants
+- **Enriched `capability.list`**: returns `primal`, `version`, `transport[]`, `methods[]`, `depends_on[]`, `data_bindings`, `geometry_types`
 - Grammar of Graphics engine with Tufte constraint validation
 - **DataBinding auto-compiler**: All 11 DataBinding variants (TimeSeries, Distribution, Bar, Gauge, Spectrum, Heatmap, Scatter, Scatter3D, FieldMap, GameScene, Soundscape) auto-compile to Grammar of Graphics
 - **Dashboard layout engine**: Multi-panel grid with domain theming and SVG/description export
@@ -179,6 +180,7 @@ Legacy: `/tmp/petaltongue.sock`
 
 | Document | Purpose |
 |----------|---------|
+| [PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md](./PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md) | **What petalTongue needs from other primals** (3D pipeline, audio, GPU ops) |
 | [VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md) | **How to get petalTongue to visualize your data** (v2.0.0) |
 | [BIOMEOS_INTEGRATION_HANDOFF.md](./BIOMEOS_INTEGRATION_HANDOFF.md) | biomeOS integration guide (fossil record, v1.3.0 baseline) |
 | [BIOMEOS_API_SPECIFICATION.md](./BIOMEOS_API_SPECIFICATION.md) | API contract and endpoints |
