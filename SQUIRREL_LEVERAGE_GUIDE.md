@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # Squirrel Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 14, 2026
-**Primal**: Squirrel v0.1.0 (gen3)
+**Date**: March 16, 2026
+**Primal**: Squirrel v0.1.0-alpha.6 (gen3)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -36,22 +36,25 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 | `ai.query` | Route a prompt to the best available model and return the response |
 | `ai.complete` | Text completion with model selection and parameter control |
 | `ai.chat` | Multi-turn conversation with managed context window |
-| `ai.inference` | Raw model inference (no routing intelligence) |
-| `ai.text_generation` | Structured text generation with format constraints |
 | `ai.list_providers` | Discover all available AI providers and their capabilities |
 | `capability.announce` | Register AI capabilities with the ecosystem |
 | `capability.discover` | Find primals offering specific AI capabilities |
-| `system.health` | Health check with provider status |
-| `system.metrics` | Performance metrics (latency, token counts, cost) |
-| `system.ping` | Liveness probe |
-| `discovery.peers` | Discover other AI-capable primals |
-| `tool.execute` | Execute a registered MCP tool |
+| `capability.list` | Per-method cost/dependency info for PathwayLearner scheduling |
 | `context.create` | Create a managed context window |
 | `context.update` | Add content to a context window |
 | `context.summarize` | Compress a context window while preserving key information |
+| `discovery.peers` | Discover other AI-capable primals |
+| `lifecycle.register` | Register with biomeOS orchestrator |
+| `lifecycle.status` | Report lifecycle status / heartbeat |
+| `system.health` | Health check with provider status |
+| `system.status` | Detailed system status |
+| `system.metrics` | Performance metrics (latency, token counts, cost) |
+| `system.ping` | Liveness probe |
+| `tool.execute` | Execute a registered MCP tool |
+| `tool.list` | List available MCP tools |
 
-**Transport**: JSON-RPC 2.0 over Unix sockets (required), tarpc/bincode
-(optional, feature-gated for high-performance binary RPC).
+**Transport**: JSON-RPC 2.0 over Unix sockets (required, with batch support),
+tarpc/bincode (optional, feature-gated for high-performance binary RPC).
 
 ---
 
