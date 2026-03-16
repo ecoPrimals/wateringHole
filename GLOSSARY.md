@@ -424,9 +424,59 @@ lysogeny — the viral DNA integrates into the host genome and persists.
 
 ### scyBorg
 
-The **ecosystem licensing standard**: AGPL-3.0-only for code, ORC for
-standards/specs, CC-BY-SA for documentation. All primals and springs follow
-this triple license.
+The **ecosystem licensing standard** — a triple copyleft framework:
+
+- **AGPL-3.0-or-later**: All code, shaders, tools, infrastructure
+- **ORC**: All mechanical interactions (primal coordination, IPC patterns, atomics, game rules)
+- **CC-BY-SA 4.0**: All documentation, papers, methodology, reverse engineering findings
+
+Each layer is governed by an independent nonprofit (FSF, Open RPG Creative
+Foundation, Creative Commons). No single entity can revoke any layer.
+
+scyBorg extends beyond "just code" to cover the entire body of work — the
+papers, the methodology, the evolution trail, the reverse engineering
+documentation. The intent is that everything published is permanently open and
+untargetable.
+
+### Symbiotic Exception
+
+An **additional permission** (AGPL-3.0 Section 7) granted to a named
+organization based on reciprocal benefit. The default scyBorg license applies to
+everyone. Exceptions reduce licensing friction for allies — partners whose
+tools, hardware, or knowledge benefit the ecosystem.
+
+Exceptions are not for sale. They are diplomatic: granted based on symbiotic
+value, revocable if the relationship ends. The public AGPL version is unaffected.
+
+| Tier | Basis |
+|------|-------|
+| **Symbiotic** | Partner provides tools/hardware/knowledge (e.g., RustDesk, BrainChip) |
+| **Reciprocal Open** | Partner publishes their own work under AGPL (e.g., GPU vendor opens architecture docs) |
+
+See `SCYBORG_EXCEPTION_PROTOCOL.md` for the full protocol.
+
+### Suppression Inversion
+
+The strategic principle that by **owning nothing**, the project is untargetable.
+No revenue to disrupt, no corporate entity to sue, no publisher to pressure, no
+platform to suppress. Knowledge that has been published under copyleft cannot be
+un-known. Reverse engineering of owned hardware is legal (*Sega v. Accolade*,
+*Oracle v. Google*). The suppression vectors that companies use against
+threatening work (legal, platform, commercial) all require a target — and
+scyBorg eliminates the target.
+
+### AI Authorship Paradox
+
+All ecoPrimals code and documentation is AI-assisted, and this is disclosed
+openly. Copyright law is unsettled on AI-assisted work. The paradox: if
+AI-assisted work **is** copyrightable, the copyleft licenses apply normally and
+the commons is protected. If AI-assisted work **is not** copyrightable, the
+output enters public domain — an even stronger form of openness. Either outcome
+preserves the commons. The only parties harmed by a negative ruling are those
+claiming exclusive copyright on AI-assisted work for revenue. ecoPrimals has no
+such claim, so the legal uncertainty is everyone else's problem.
+
+See `gen3/about/LICENSING_STRATEGY.md` §8 for the full analysis.
 
 ### Novel Ferment Transcript (NFT)
 
@@ -461,3 +511,7 @@ chains via sweetGrass and permanence via loamSpine.
 | **Handoff** | Session continuity document in wateringHole |
 | **Fossil record** | Archived handoffs — the project's geological history |
 | **Lysogeny** | Area denial through open AGPL prior art |
+| **scyBorg** | Triple copyleft: AGPL-3.0 (code) + ORC (mechanics) + CC-BY-SA (docs) |
+| **Symbiotic exception** | AGPL Section 7 grant to allies based on reciprocal benefit |
+| **Suppression inversion** | Owning nothing makes the project untargetable |
+| **AI authorship paradox** | Copyright uncertainty harms exclusivity claimants, not the commons |
