@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: March 15, 2026
+**Last Updated**: March 16, 2026
 
 ---
 
@@ -55,7 +55,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BarraCuda** | Pure Math | 712 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93) | Production (A+) |
 | **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **GPU glow plug** (self-warming from cold, no driver dependency). Sovereign power management designed (5-state model) | Production (Phase 10, Iter 44+) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Ecosystem substrate: Neural API (170+ translations, 16 domains), capability routing, NUCLEUS composition, bonding model, Dark Forest coordination, provenance trio wiring | Production (A, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Composition primal: Neural API (260+ translations, 19 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring | Production (v2.43, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -147,11 +147,33 @@ biomeOS composes these atomics based on what capabilities are available at runti
 **How**: A caller requests `capability.call("crypto", "sha256")` and the Neural API discovers which primal provides that capability, routes the request, and returns the result. The caller never needs to know about BearDog specifically.
 
 **Architecture**:
-- Layer 1: Primals (capabilities)
-- Layer 2: biomeOS (orchestration, learning)
-- Layer 3: Niche APIs (domain patterns like RootPulse)
+- Layer 1: Primals (capabilities via JSON-RPC)
+- Layer 2: biomeOS (orchestration, routing, learning)
+- Layer 3: Niche APIs (domain patterns like RootPulse, RPGPT)
 
-The system learns from usage patterns over time, optimizing coordination automatically.
+**Five Coordination Patterns** (all driven by TOML graphs):
+
+| Pattern | Method | Description |
+|---------|--------|-------------|
+| Sequential | `graph.execute` | Nodes in dependency order |
+| Parallel | `graph.execute` | Independent nodes concurrently |
+| ConditionalDag | `graph.execute` | DAG with `condition`/`skip_if` branching |
+| Pipeline | `graph.execute_pipeline` | Streaming via bounded mpsc channels — items flow through nodes immediately |
+| Continuous | `graph.start_continuous` | Fixed-timestep tick loop (e.g., 60Hz for game engines) |
+
+**biomeOS as Composition Primal**: biomeOS is functionally the super-service — the
+primal that composes all other primals into systems. While it sits at the same level
+as other primals (sovereign, self-contained, JSON-RPC first), its unique role is
+orchestrating emergent systems: RootPulse (version control), RPGPT (game engines),
+AlphaFold-class (protein folding), and any other system that emerges as a function
+of primal coordination.
+
+**Streaming (v2.43)**: Pipeline graphs use NDJSON streaming — primals write multiple
+response lines per request. The `AtomicClient::call_stream()` reads them as they
+arrive. No new protocol needed. All primals already have streaming transport.
+
+The PathwayLearner analyzes execution metrics and suggests optimizations (parallelization,
+prewarming, batching, caching) that improve over time.
 
 ---
 
