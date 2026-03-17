@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # barraCuda Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 15, 2026
-**Primal**: barraCuda v0.3.5
+**Date**: March 16, 2026
+**Primal**: barraCuda v0.3.5 (Sprint 5)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -174,6 +174,101 @@ Gompertz biogas production, Michaelis-Menten pharmacokinetics, adaptive
 RK45 ODE integration — all as shared primitives. Springs that previously
 duplicated growth model code now delegate to barraCuda.
 
+### 1.8 Typed Error Composition
+
+**For**: Any primal or spring calling barraCuda via IPC or library.
+
+As of Sprint 5, every barraCuda production function returns typed
+`BarracudaError` variants instead of opaque strings. Callers can
+pattern-match on specific failure modes:
+
+```rust
+use barracuda::error::BarracudaError;
+
+match barracuda_result {
+    Err(BarracudaError::DeviceLost { .. }) => {
+        // GPU crashed or was reset — retry on a different device
+        let fallback = gpu_pool.next_device()?;
+        retry_on(&fallback, &workload)?;
+    }
+    Err(BarracudaError::Gpu { .. }) => {
+        // Map/poll failure — likely VRAM exhaustion, reduce batch
+        retry_with_smaller_batch(&workload)?;
+    }
+    Err(BarracudaError::ShaderCompilation { .. }) => {
+        // Shader won't compile on this arch — fall back to CPU
+        compute_cpu_fallback(&workload)?;
+    }
+    Err(e) => return Err(e.into()),
+    Ok(result) => use_result(result),
+}
+```
+
+**Novel pattern — Resilient pipelines**: A spring running a 10,000-step
+MD simulation can catch `DeviceLost` mid-simulation, checkpoint to
+rhizoCrypt (ephemeral DAG), migrate to a different GPU via toadStool,
+and resume — all without human intervention. Previously, `String` errors
+made this impossible to distinguish from shader compilation failures.
+
+**Novel pattern — Precision fallback chain**: If `ShaderCompilation`
+fails (e.g., DF64 shader on a GPU that can't handle it), the spring
+catches the typed error and re-dispatches via `PrecisionBrain` at a
+lower tier. The error variant tells the spring *why* it failed, not
+just *that* it failed.
+
+### 1.9 Concurrent Async Readback
+
+**For**: Springs with pipelined GPU workflows (submit-many, read-many).
+
+`AsyncReadback::poll_until_ready` now takes `&self` (not `&mut self`),
+enabling multiple concurrent readbacks from a single submission:
+
+```rust
+let readback_a = submitter.submit_and_map::<f32>(&shader_a, &params_a).await?;
+let readback_b = submitter.submit_and_map::<f32>(&shader_b, &params_b).await?;
+
+// Poll both concurrently — no &mut exclusion
+let (result_a, result_b) = tokio::join!(
+    readback_a.read_f32(),
+    readback_b.read_f32(),
+);
+```
+
+**Novel pattern — Scatter-gather GPU**: Submit N independent shaders
+(e.g., N lattice QCD configurations), poll all readbacks concurrently,
+aggregate results on CPU. The `&self` change eliminates the serial
+bottleneck where each readback had to complete before the next could
+start polling.
+
+### 1.10 Production-Hardened Genomics
+
+**For**: wetSpring, healthSpring, any spring processing biological sequences.
+
+The genomics module now has 25 tests covering edge cases that real
+bioinformatics pipelines encounter:
+
+```rust
+use barracuda::genomics::{gc_content, find_motifs, quality_filter};
+
+// RNA sequences (uracil treated as thymine)
+let gc = gc_content("AUGCAUGC");
+
+// Mixed case (real FASTA files are often mixed)
+let gc = gc_content("atgcATGC");
+
+// N-heavy sequences flagged by quality filter
+let passed = quality_filter(&seqs, &QualityConfig::default());
+
+// Batch processing (GPU-parallel when available)
+let results = find_motifs_batch(&sequences, &patterns);
+```
+
+**Novel pattern — Field genomics pipeline**: wetSpring collects 16S
+reads from environmental samples → barraCuda runs GPU-parallel motif
+finding and diversity indices → quality filter rejects N-heavy sequences
+before expensive alignment → sweetGrass records provenance braid linking
+results to field sample IDs → loamSpine commits to permanent ledger.
+
 ---
 
 ## 2. Compute Trio (barraCuda + coralReef + toadStool)
@@ -248,7 +343,39 @@ detects that hardware can't run native f64 correctly, it falls back to
 DF64 via the sovereign path. The spring never knows — it just gets
 correct results.
 
-### 2.4 Hardware-Calibrated Compute
+### 2.4 Error-Aware Trio Orchestration
+
+**For**: Any spring using the full compute trio with fault tolerance.
+
+Typed errors enable the trio to self-heal without spring intervention:
+
+```
+Spring → barracuda.compute.dispatch
+  → BarracudaError::ShaderCompilation
+    → barraCuda asks coralReef to recompile at lower precision
+    → coralReef returns new binary
+    → toadStool dispatches on same hardware
+  → BarracudaError::DeviceLost
+    → toadStool discovers alternative GPU
+    → coralReef compiles for new architecture
+    → barraCuda re-dispatches
+  → BarracudaError::Gpu (VRAM exhaustion)
+    → barraCuda halves batch size
+    → toadStool reallocates VRAM quota
+    → re-dispatch at smaller batch
+```
+
+The spring sees a single `compute.dispatch` call. The trio handles the
+failure cascade internally. Previously, `String` errors forced the spring
+to parse error messages to determine the failure mode.
+
+**Novel pattern — Self-healing lattice QCD**: hotSpring runs a 10,000-
+trajectory HMC calculation. At trajectory 4,500, the GPU overheats and
+resets. The trio catches `DeviceLost`, toadStool migrates to a cooler GPU,
+coralReef recompiles, barraCuda resumes from the last checkpoint stored
+in rhizoCrypt. The spring sees 10,000 completed trajectories.
+
+### 2.5 Hardware-Calibrated Compute
 
 **For**: Any spring that needs to know what the hardware can actually do.
 
@@ -554,7 +681,55 @@ When one spring evolves a function (e.g., hotSpring discovers a stable
 BCS formula), it's absorbed into barraCuda and becomes available to all
 springs immediately. No duplication, no drift.
 
-### 6.4 Hardware-Agnostic Science
+### 6.4 Error-Propagation Across Primal Boundaries
+
+Typed errors propagate cleanly across IPC boundaries. When a spring calls
+barraCuda via JSON-RPC, the error variant is serialized in the JSON-RPC
+error response:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "error": {
+    "code": -32000,
+    "message": "GPU device lost during readback poll",
+    "data": { "variant": "DeviceLost", "context": "poll_until_ready" }
+  }
+}
+```
+
+Any primal — biomeOS, squirrel, springs — can inspect the `variant` field
+and route appropriately. biomeOS can trigger toadStool hardware re-discovery.
+squirrel can suggest parameter adjustments. A spring can checkpoint and retry.
+
+This is the foundation for **ecosystem-wide fault tolerance**: errors are
+not strings to log and forget — they are typed signals that trigger
+coordinated recovery across multiple primals.
+
+### 6.5 Concurrent Multi-Domain Pipelines
+
+With `&self` async readback, a spring can run heterogeneous compute
+domains simultaneously on the same GPU:
+
+```
+                    ┌─ shader A (genomics motif find)  ─┐
+Spring → barraCuda ─┤─ shader B (stats bootstrap CI)    ├─→ aggregate
+                    └─ shader C (linalg eigensolve)     ─┘
+```
+
+All three readbacks poll concurrently. The spring gets results as they
+complete (not in submission order). This enables **domain fusion** —
+combining results from different scientific domains in a single
+computation round-trip.
+
+**Novel pattern — Integrated clinical trial analysis**: healthSpring
+submits three concurrent GPU workloads via barraCuda: (1) PK/PD model
+fit, (2) bootstrap confidence intervals on clearance, (3) VPC simulation.
+All three complete in parallel, results merge into a single report.
+Previously each would block serially.
+
+### 6.6 Hardware-Agnostic Science
 
 A spring written against barraCuda runs on any GPU vendor:
 
@@ -566,6 +741,51 @@ A spring written against barraCuda runs on any GPU vendor:
 - Future: NPU, browser (WebGPU)
 
 The science is the same. The hardware is interchangeable.
+
+### 6.7 Cross-Spring Discovery via barraCuda Capabilities
+
+Springs don't know about each other directly, but they share barraCuda
+as a common math substrate. This enables indirect collaboration:
+
+```
+airSpring calls barracuda.compute.dispatch("richards_pde")
+wetSpring calls barracuda.compute.dispatch("diversity_index")
+groundSpring calls barracuda.compute.dispatch("bootstrap_ci")
+
+→ biomeOS sees all three springs using barraCuda
+→ squirrel notices: "soil moisture (airSpring) + microbial diversity
+   (wetSpring) + measurement uncertainty (groundSpring) form a coherent
+   analysis of soil health"
+→ squirrel proposes a combined pipeline via capability routing
+→ No spring needed to know the others existed
+```
+
+**Novel pattern — Emergent multi-spring science**: The math capabilities
+advertised by barraCuda serve as a **lingua franca** for cross-spring
+discovery. squirrel or biomeOS can compose springs that share barraCuda
+domains into novel pipelines that no individual spring was designed for.
+
+### 6.8 Provenance-Tracked GPU Error Recovery
+
+When barraCuda reports a typed error and retries on different hardware,
+the provenance trio can record the full recovery chain:
+
+```
+sweetGrass braid:
+  Activity: "lattice_qcd_hmc"
+  Entity[0]: "trajectory_batch_1-4500" → computed on GPU_A
+  Entity[1]: "device_lost_event" → GPU_A reset at trajectory 4500
+  Entity[2]: "migration_event" → toadStool routed to GPU_B
+  Entity[3]: "trajectory_batch_4501-10000" → computed on GPU_B
+  Entity[4]: "final_result" → merged from Entity[0] + Entity[3]
+  wasGeneratedBy: barraCuda v0.3.5
+  wasAssociatedWith: hotSpring experiment_042
+```
+
+This creates an auditable record of *why* a computation was split across
+hardware — critical for reproducibility in published science. The typed
+error variants (`DeviceLost`, `Gpu`, `ShaderCompilation`) become
+first-class provenance events.
 
 ---
 
@@ -592,8 +812,10 @@ primal that owns that domain. This is the sovereignty principle.
 - `barraCuda/README.md` — Full primal documentation
 - `barraCuda/specs/BARRACUDA_SPECIFICATION.md` — Crate architecture + IPC contract
 - `barraCuda/WHATS_NEXT.md` — Prioritized roadmap
+- `barraCuda/crates/barracuda/src/error.rs` — `BarracudaError` typed error variants
 - `wateringHole/SOVEREIGN_COMPUTE_EVOLUTION.md` — Full sovereign stack plan
 - `wateringHole/INTER_PRIMAL_INTERACTIONS.md` — IPC coordination
 - `wateringHole/SEMANTIC_METHOD_NAMING_STANDARD.md` — Method naming convention
+- `wateringHole/handoffs/BARRACUDA_V035_TYPED_ERRORS_NURSERY_COVERAGE_HANDOFF_MAR16_2026.md` — Sprint 5 handoff
 - `whitePaper/gen3/PRIMAL_CATALOG.md` — Full primal catalogue
 - `whitePaper/gen3/SPRING_CATALOG.md` — Spring catalogue
