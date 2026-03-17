@@ -120,8 +120,8 @@ latest = "0.1.0"
 versions = ["0.1.0"]
 architectures = ["x86_64-linux"]  # aarch64 pending
 capabilities = ["shader", "spirv", "wgsl", "glsl", "naga", "compile"]
-ecobin_grade = "A+"
-pie_verified = false  # Not yet released as standalone binary
+ecobin_grade = "A++"
+pie_verified = true
 
 [primals.barracuda]
 name = "barraCuda"
