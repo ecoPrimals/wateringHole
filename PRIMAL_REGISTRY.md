@@ -433,7 +433,8 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 50 (full audit execution, 1992 tests, zero warnings, all files <1000 LOC) |
+| coralReef | Phase 10 Iteration 52 (ecosystem absorption, 1992 tests, zero warnings, all files <1000 LOC) |
+| primalSpring | v0.1.0 Phase 0 (28 experiments scaffolded, 6 tracks, workspace compiles) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
@@ -510,6 +511,26 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 - Exp 030: adaptive steering fix (--max-adaptive=12), bootstrapped from 29 data points
 
 **Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment)
+
+### primalSpring - Coordination and Composition Validation
+
+**Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
+**Phase**: Phase 0 (scaffolding)  
+**Status**: v0.1.0 — 28 experiments, 6 tracks, workspace compiles, zero C deps
+
+**Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance.
+
+**Capabilities**:
+
+| Category | Details |
+|----------|---------|
+| **Experiments** | 28 scaffolded across 6 tracks: Atomic Composition (6), Graph Execution (6), Emergent Systems (6), Bonding & Plasmodium (5), Cross-Spring Coordination (5) |
+| **Deploy Graphs** | 6: primalspring_deploy.toml, parallel_capability_burst.toml, conditional_fallback.toml, streaming_pipeline.toml, continuous_tick.toml, coralforge_pipeline.toml |
+| **Coordination Domain** | coordination.deploy_atomic, coordination.validate_composition, coordination.bonding_test, composition.nucleus_health, nucleus.start, nucleus.stop |
+| **Emergent Systems Tested** | RootPulse (commit/branch/merge/diff/federate), RPGPT (60Hz tick + provenance), coralForge (neural object Pipeline graph), cross-spring ecology |
+| **coralForge Evolution** | Reconceptualized from neuralSpring module to emergent neural object via biomeOS Pipeline graph. Math stays in neuralSpring. Composition is coralforge_pipeline.toml |
+
+**Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation)
 
 ---
 

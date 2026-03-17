@@ -562,3 +562,4 @@ chains via sweetGrass and permanence via loamSpine.
 | **Suppression inversion** | Owning nothing makes the project untargetable |
 | **AI authorship paradox** | Copyright uncertainty harms exclusivity claimants, not the commons |
 | **fieldMouse** | Minimal deployable ecoPrimals — smallest atomic/chimera for embedded/sensor/edge niches |
+| **primalSpring** | Coordination spring — validates ecosystem composition, graph execution, emergent systems, bonding |

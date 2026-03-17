@@ -669,6 +669,13 @@ VFIO-isolated GPU (toadStool), rendered via DRM display transport
 (toadStool), UI managed by petalTongue, camera input via V4L2
 capture transport (toadStool). Zero vendor SDK in the entire stack.
 
+### 5.8 primalSpring (Coordination Validation)
+
+primalSpring validates ToadStool's role in composition — exp002 (Node
+Atomic) tests compute.execute dispatch via capability routing, and
+exp025 (coralForge pipeline) tests ToadStool as GPU dispatch node in
+the structure prediction Pipeline graph.
+
 ---
 
 ## 6. Emergent Ecosystem Patterns
@@ -976,6 +983,8 @@ airSpring: switch to GPU-quality prediction (higher precision)
 
 The spring never checks battery level. biomeOS sets policy, toadStool
 enforces it at the hardware level, and squirrel adapts routing.
+fieldMouse deployments may include stripped ToadStool chimeras for edge
+compute dispatch.
 
 ### 8.3 toadStool as Hardware Knowledge Broker
 

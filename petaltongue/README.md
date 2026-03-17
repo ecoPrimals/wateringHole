@@ -132,7 +132,7 @@ Precision routing (`Fp64Strategy`, `PrecisionRoutingAdvice`, `FmaPolicy`)
 lives in barraCuda/coralReef. petalTongue accepts and displays data at
 whatever precision the ecosystem provides.
 
-### coralReef Integration (Phase 10, Iteration 27)
+### coralReef Integration (Phase 10, Iteration 52)
 
 petalTongue does NOT call coralReef directly. Shader compilation flows:
 `barraCuda (WGSL) → coralReef (compile) → toadStool (dispatch)`.
