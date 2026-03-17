@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 16, 2026
+**Last Updated**: March 17, 2026
 
 ---
 
@@ -280,7 +280,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
 **Version**: 0.13.0-dev  
-**Status**: Production Ready (1056+ tests, 92.32% line coverage, clippy pedantic+nursery+cargo clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced, `--fail-under-lines 90` CI gate, `niche.rs` self-knowledge with domain introspection, `capability_registry.toml` + deploy graph, CircuitBreaker + RetryPolicy resilience, NDJSON streaming, DispatchOutcome protocol/application error separation)
+**Status**: Production Ready (1102+ tests, 92.32% line coverage, clippy pedantic+nursery+cargo clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (`yanked = "deny"`), `--fail-under-lines 90` CI gate, `niche.rs` self-knowledge with domain introspection, `capability_registry.toml` + deploy graph, CircuitBreaker + RetryPolicy resilience, NDJSON streaming, DispatchOutcome protocol/application error separation, `health.liveness`/`health.readiness` probes, 4-format capability parsing, ValidationSink trait, ChaosEngine framework, 11 proptest property tests)
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
