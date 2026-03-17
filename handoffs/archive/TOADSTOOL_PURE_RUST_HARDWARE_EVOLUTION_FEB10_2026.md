@@ -402,9 +402,9 @@ has 78 neural processors — each one IS a reservoir.
 
 ---
 
-## Part 6: Strandgate Configuration Note
+## Part 6: gate-04 Configuration Note
 
-Strandgate tower has **2× Akida chips** (PCIe slots). The VFIO approach enables:
+gate-04 tower has **2× Akida chips** (PCIe slots). The VFIO approach enables:
 - Both chips accessible without any kernel module
 - Round-robin scheduling via existing `AkidaExecutor` (already supports multi-board!)
 - 160 total neural processors across 2 boards

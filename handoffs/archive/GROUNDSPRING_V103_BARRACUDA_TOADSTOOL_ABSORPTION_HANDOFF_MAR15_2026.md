@@ -30,15 +30,15 @@ the provenance travels with the constant.
 
 | Module | Constant | Value | Provenance |
 |--------|----------|-------|------------|
-| `dispatch.rs` | `DEFAULT_REGULARIZATION` | `1e-4` | Tikhonov α for spectral reconstruction (Bazavov 2025, arXiv 2501.12259) |
+| `dispatch.rs` | `DEFAULT_REGULARIZATION` | `1e-4` | Tikhonov α for spectral reconstruction (published reference (2025), arXiv 2501.12259) |
 | `dispatch.rs` | `DEFAULT_TAU_STEP` | `0.1` | Euclidean-time grid spacing for lattice correlator inversion |
 | `dispatch.rs` | `DEFAULT_OMEGA_STEP` | `0.2` | Spectral-function frequency resolution (MeV scale) |
 | `dispatch.rs` | `DEFAULT_SIGMA` | `1.0` | Default kernel width for spectral reconstruction |
-| `dispatch.rs` | `DEFAULT_T0_LO/HI/STEP` | `100.0/200.0/1.0` | Freeze-out temperature scan range (MeV, Bazavov 2016 PRD 93) |
-| `dispatch.rs` | `DEFAULT_K2_LO/HI/STEP` | `0.001/0.05/0.001` | Freeze-out curvature scan range (Bazavov 2016) |
+| `dispatch.rs` | `DEFAULT_T0_LO/HI/STEP` | `100.0/200.0/1.0` | Freeze-out temperature scan range (MeV, published reference (2016, PRD 93)) |
+| `dispatch.rs` | `DEFAULT_K2_LO/HI/STEP` | `0.001/0.05/0.001` | Freeze-out curvature scan range (published reference (2016)) |
 | `esn/classifier.rs` | `ESN_READOUT_REGULARIZATION` | `1e-6` (f32) | Ridge regularization for ESN readout layer (hotSpring validation) |
 | `lib.rs` | `eps::LOG_FLOOR` | `1e-15` | Near-zero guard for log/entropy calculations |
-| `validate_tissue_anderson.rs` | `MIN_INFLAMED_EVENNESS` | `0.8` | Paper 12 (Gonzales): inflamed dermis evenness threshold |
+| `validate_tissue_anderson.rs` | `MIN_INFLAMED_EVENNESS` | `0.8` | Paper 12 (pharmacology): inflamed dermis evenness threshold |
 | `validate_tissue_anderson.rs` | `MAX_HEALTHY_D_EFF` | `2.5` | Paper 12: effective diffusion barrier limit |
 | `validate_tissue_anderson.rs` | `ANDERSON_3D_W_C` | `16.5` | Anderson 3D critical disorder (Slevin & Ohtsuki 1999) |
 | `validate_tissue_anderson.rs` | `MIN/MAX_BARRIER_TRANSITION` | `0.4/0.8` | Paper 12: barrier regime transition bounds |

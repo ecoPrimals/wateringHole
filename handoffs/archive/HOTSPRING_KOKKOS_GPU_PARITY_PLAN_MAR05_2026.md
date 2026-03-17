@@ -4,7 +4,7 @@
 **From**: hotSpring
 **To**: groundSpring, barraCuda, toadStool
 **Type**: NOTICE — Kokkos GPU Comparison Blocked by Driver
-**Priority**: P0 for Chuna review package
+**Priority**: P0 for faculty review package
 
 ---
 
@@ -82,14 +82,14 @@ Kokkos pair_style yukawa on CUDA is well-benchmarked:
 
 - LAMMPS Kokkos benchmarks: https://docs.lammps.org/Speed_kokkos.html
 - Thompson et al., Comp Phys Comm 271, 108171 (2022) — LAMMPS scaling data
-- Chuna uses LAMMPS/Kokkos-CUDA daily at MSU/ICER — he HAS these numbers
+- collaborator uses LAMMPS/Kokkos-CUDA daily at university HPC — collaborator has these numbers
 
 **Pros**: No driver switching needed, peer-reviewed numbers
 **Cons**: Different hardware, harder to normalize
 
-### Option 3: Ask Chuna to run our cases on his ICER cluster
+### Option 3: Ask collaborator to run our cases on institutional HPC cluster
 
-Chuna has access to NVIDIA V100/A100 at MSU ICER. He could:
+collaborator has access to NVIDIA V100/A100 at university HPC. collaborator could:
 1. Run our 9 LAMMPS input files (already written, in `lammps_results/`)
 2. Report wall times with Kokkos-CUDA backend
 3. We report barraCuda GPU numbers on matching hardware (if available)
@@ -117,8 +117,8 @@ docker run --gpus all lammps-kokkos-cuda ...
 the gap. The Kokkos benchmarks page has pair_style yukawa/kk CUDA numbers.
 Scale to our N and hardware.
 
-**Phase 2 (Chuna collaboration)**: Send him our 9 LAMMPS input files.
-He runs them on ICER with Kokkos-CUDA. We get real numbers.
+**Phase 2 (collaboration)**: Send collaborator our 9 LAMMPS input files.
+collaborator runs them on institutional HPC with Kokkos-CUDA. We get real numbers.
 
 **Phase 3 (when DF64 is fixed)**: barraCuda DF64 on consumer GPU should be
 competitive with Kokkos-CUDA. This is the headline comparison:
@@ -157,7 +157,7 @@ The 9 cases are generated and tested in:
 hotSpring/benchmarks/kokkos-lammps/lammps_results/in.k*
 ```
 
-These can be sent directly to Chuna or run on any LAMMPS installation with
+These can be sent directly to collaborator or run on any LAMMPS installation with
 Kokkos-CUDA enabled. They use `units lj`, `pair_style yukawa`, standard
 NVT + NVE workflow.
 

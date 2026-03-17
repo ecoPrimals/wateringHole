@@ -82,7 +82,7 @@
 | Low | NPU int8 FC layer (AKD1000) | Awaiting hardware |
 | Low | PCIe bus IDs in WgpuDevice | NPU has it; GPU needs wgpu upstream |
 | Low | `from_existing_simple()` | Already deprecated with migration note |
-| Medium | Screened Coulomb (Murillo-Weisheit) | hotSpring plasma physics |
+| Medium | screened Coulomb | hotSpring plasma physics |
 | Medium | Test coverage 65% → 90% | Ongoing |
 | Low | cubecl `dirs-sys` transitive dep | Needs upstream PR |
 

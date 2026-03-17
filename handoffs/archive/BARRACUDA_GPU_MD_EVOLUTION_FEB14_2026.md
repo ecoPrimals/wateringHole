@@ -229,13 +229,13 @@ The 3 Coulomb (κ=0) DSF cases require particle-particle particle-mesh:
 
 This is the gateway to full plasma simulation (not just screened potentials).
 
-### 5.7 MSU HPC Comparison Benchmark (FUTURE)
+### 5.7 University HPC Comparison Benchmark (FUTURE)
 
-Pin a CPU-only baseline at N=10,000+ with 80k production steps on MSU HPCC (iCER).
+Pin a CPU-only baseline at N=10,000+ with 80k production steps on university HPC.
 Run the same physics on consumer GPU. The headline number:
 **HPC cluster vs consumer GPU, same physics, same observables.**
 
-Route: Murillo collaboration or alumni access.
+Route: faculty collaboration (plasma) or alumni access.
 
 ---
 
@@ -333,7 +333,7 @@ Evolution target:
                   ↓
   Add PPPM/Ewald → full plasma simulation on consumer GPU
                   ↓
-  MSU HPC comparison → "same physics, consumer hardware" headline
+  university HPC comparison → "same physics, consumer hardware" headline
 ```
 
 The hotSpring validation proves the physics work. ToadStool's job is to evolve isolated

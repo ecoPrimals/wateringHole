@@ -70,7 +70,7 @@ New module: `numerical/lscfrk.rs`
 |------|-------------|
 | `derive_lscfrk3(c2, c3)` | `const fn` — algebraic derivation of all 3-stage 3rd-order 2N-storage coefficients |
 | `LSCFRK3_W6` | Lüscher (JHEP 2010) — standard lattice QCD |
-| `LSCFRK3_W7` | Bazavov & Chuna (arXiv:2101.05320) — ~2× more efficient for w₀ |
+| `LSCFRK3_W7` | Published authors (arXiv:2101.05320) — ~2× more efficient for w₀ |
 | `LSCFRK4_CK` | Carpenter-Kennedy 4th-order, 5-stage |
 | `find_t0(measurements)` | Linear interpolation for t²⟨E(t)⟩ = 0.3 |
 | `find_w0(measurements)` | W(t) = t d/dt[t²E(t)] = 0.3 → √t_cross |

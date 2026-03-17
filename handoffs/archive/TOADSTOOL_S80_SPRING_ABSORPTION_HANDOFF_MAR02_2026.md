@@ -159,7 +159,7 @@ NVK driver produces imprecise f64 sin/cos (uses MUFU — f32 precision in f64 re
 ## Reproduction
 
 ```bash
-cd /path/to/ecoPrimals/phase1/toadStool
+cd ecoPrimals/phase1/toadStool
 
 # Quality gates
 cargo fmt --all -- --check

@@ -335,7 +335,7 @@ arithmetic and MUST be addressed algorithmically.
    bit-parity.
 
 **Evidence**: `wateringHole/GPU_F64_NUMERICAL_STABILITY.md` (full writeup),
-`hotSpring/experiments/044_CHUNA_BGK_DIELECTRIC.md`, validation binary
+`hotSpring/experiments/044_BGK_DIELECTRIC.md`, validation binary
 `validate_gpu_dielectric` (12/12 checks after fix).
 
 **Status**: OPEN — hotSpring workaround in place; barraCuda absorption pending

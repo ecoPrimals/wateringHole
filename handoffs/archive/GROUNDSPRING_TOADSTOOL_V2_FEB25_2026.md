@@ -190,13 +190,13 @@ through the barracuda API.
 
 | Primitive | Papers | Priority | Notes |
 |-----------|--------|----------|-------|
-| **FFT (real, complex)** | 6, 7 (Bazavov spectral) | **HIGH** | Shared need with hotSpring (PPPM) |
+| **FFT (real, complex)** | 6, 7 (spectral) | **HIGH** | Shared need with hotSpring (PPPM) |
 | **RAWR weighted resampling** | 12, 13 (Liu) | MEDIUM | Embarrassingly parallel |
 | **3D grid dispatch** | 5, 8 (seismic + freeze-out) | MEDIUM | Standard GPU pattern |
 
 ### Papers blocked by missing primitives
 
-- **Papers 6, 7 (Bazavov)**: Blocked by FFT gap. These are the highest-precision
+- **Papers 6, 7 (spectral reconstruction)**: Blocked by FFT gap. These are the highest-precision
   papers in the queue (subpercent lattice QCD). FFT is also needed by hotSpring
   for PPPM electrostatics — **joint priority**.
 - **Papers 4, 20-21**: Blocked by `batched_multinomial` Tier C absorption (above).

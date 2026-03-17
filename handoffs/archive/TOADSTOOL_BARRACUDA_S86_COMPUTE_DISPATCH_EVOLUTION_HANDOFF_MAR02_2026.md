@@ -159,7 +159,7 @@ These are all cohesive domain modules. No further splitting recommended.
 ## Reproduction
 
 ```bash
-cd /path/to/ecoPrimals/phase1/toadStool
+cd ecoPrimals/phase1/toadStool
 cargo check --workspace
 cargo test -p barracuda --lib -- 2>&1 | tail -5
 ```

@@ -3,7 +3,7 @@
 **Date**: February 13, 2026
 **Project**: ecoPrimals/hotSpring — Nuclear EOS Parameter Optimization
 **Library**: BarraCuda (Hardware-Agnostic Tensor Compute)
-**Reference**: Murillo Lab Python/SciPy implementation
+**Reference**: faculty lab (plasma) Python/SciPy implementation
 
 ---
 

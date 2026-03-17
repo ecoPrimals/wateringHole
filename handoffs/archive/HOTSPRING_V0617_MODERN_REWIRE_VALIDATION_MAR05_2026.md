@@ -148,5 +148,5 @@ Gap closed from **137× to 3.7×** (97% for raw physics).
 | P1 | Run brain-sweep with Nautilus persistence | Validate cross-run learning |
 | P2 | NpuParameterController from toadStool S94b | Upstream NPU abstraction |
 | P2 | N-scaling benchmark (500→8000) | Measure scaling with modern stack |
-| P3 | Chuna paper reproductions (43-45) | Gradient flow, dielectric, kinetic-fluid |
+| P3 | gradient flow papers (43-45) | Gradient flow, dielectric, kinetic-fluid |
 | P3 | coralNAK integration | When SPIR-V frontend is ready |

@@ -1,7 +1,7 @@
 # hotSpring → barraCuda / toadStool: Science Ladder Absorption Handoff
 
 **Date:** March 6, 2026
-**From:** hotSpring v0.6.17+ (gradient flow, Chuna reproduction, science ladder)
+**From:** hotSpring v0.6.17+ (gradient flow, gradient flow reproduction, science ladder)
 **To:** barraCuda v0.3.3+, toadStool S94b+, coralReef
 **License:** AGPL-3.0-only
 
@@ -11,7 +11,7 @@
 
 ### 1. Derived LSCFRK Integrators (absorb into barraCuda)
 
-hotSpring discovered that the LSCFRK3 (Lüscher/Chuna) gradient flow integrator
+hotSpring discovered that the LSCFRK3 gradient flow integrator
 coefficients are fully derivable from two free parameters via four algebraic
 order conditions. A `const fn derive_lscfrk3(c2, c3)` now solves these at
 compile time — zero magic numbers.
@@ -20,7 +20,7 @@ compile time — zero magic numbers.
 **What to absorb:**
 - `derive_lscfrk3()` — const fn derivation of 3-stage 3rd-order 2N-storage RK coefficients
 - `Lscfrk` struct — generic coefficient container for any 2N-storage scheme
-- `lscfrk_step()` — generic Lie group integrator (Algorithm 6 from Bazavov & Chuna 2021)
+- `lscfrk_step()` — generic Lie group integrator (Algorithm 6 from published authors (2021))
 - `LSCFRK4CK` — Carpenter-Kennedy 4th-order coefficients (numerical, cannot be derived in closed form)
 - `run_flow()` — Wilson gradient flow with E(t), t²⟨E⟩, t₀, w₀ measurement
 - `find_t0()`, `find_w0()`, `compute_w_function()` — scale setting utilities
@@ -60,7 +60,7 @@ all registered in Cargo.toml. Total: 92 binaries, 716 tests.
 |-------|------|-----------|---------------|
 | 0 | Quenched HMC | ✅ | None |
 | 1 | Gradient flow + scale setting | ✅ | Absorb flow primitives |
-| 2 | Chuna integrator convergence | ✅ | Absorb `derive_lscfrk3` |
+| 2 | LSCFRK3 integrator convergence | ✅ | Absorb `derive_lscfrk3` |
 | 3 | N_f=4 staggered dynamical | ✅ Infra | None (uses existing GPU CG) |
 | 4 | N_f=2 RHMC | Pending | GPU multi-shift CG |
 | 5 | N_f=2+1 | Pending | Mass tuning + GPU RHMC |
