@@ -2,7 +2,7 @@
 # sweetGrass Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
 **Date**: March 16, 2026
-**Primal**: sweetGrass v0.7.18
+**Primal**: sweetGrass v0.7.19
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
