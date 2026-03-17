@@ -165,7 +165,7 @@ neuralSpring exercises **45+ BarraCUDA submodules** across **228 .rs files** wit
 | Phase 0 (Synthetic) | 5 | 48/48 | ✓ | ✓ | **COMPLETE** |
 | Phase 0+ (Scholarly) | 5 | 31/31 | ✓ | ✓ | **COMPLETE** |
 | Phase 0++ (Papers 011-025) | 15 | 127/127 | ✓ | ✓ | **COMPLETE** |
-| Paper 026 (Chuna LSTM) | 1 | 9/9 | ✓ | ✓ | **COMPLETE** |
+| Paper 026 (LSTM) | 1 | 9/9 | ✓ | ✓ | **COMPLETE** |
 | baseCamp (B-01..B-21) | 6 sub-theses | 128/128 | ✓ | ✓ | **COMPLETE** |
 | WDM Surrogates (nW-01..05) | 5 | 33/33 | ✓ | ✓ | **COMPLETE** |
 | coralForge (nF-01..03) | 3 | 87/87 | ✓ | ✓ | **COMPLETE** |

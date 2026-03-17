@@ -210,7 +210,7 @@ MM batch, SCFA batch, and beat classify shaders are validated but not yet wired 
 4. **ESN classifier from neuralSpring**: Echo State Network for attention state prediction
 5. **Tissue Anderson from groundSpring**: 3D Anderson lattice for tissue heterogeneity modeling
 6. **TensorSession integration**: Fused multi-op GPU pipelines via barraCuda's session API
-7. **DD-006 iPSC validation**: Gonzales iPSC skin model readout validation
+7. **DD-006 iPSC validation**: faculty iPSC skin model readout validation
 8. **DD-007 Ellsworth med chem**: Medicinal chemistry lead optimization pipeline
 
 ---

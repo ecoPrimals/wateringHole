@@ -323,7 +323,7 @@ All items from V4 plus:
 
 | Kernel | groundSpring Need | Also Needed By |
 |---|---|---|
-| FFT | Spectral reconstruction (Bazavov) | hotSpring (lattice QCD), wetSpring (signal processing) |
+| FFT | Spectral reconstruction (spectral) | hotSpring (lattice QCD), wetSpring (signal processing) |
 | Monte Carlo | Error propagation | hotSpring (nuclear EOS), neuralSpring (training) |
 | Gillespie | Biological noise | wetSpring (c-di-GMP dynamics) |
 | Bootstrap/RAWR | Confidence estimation | wetSpring (rarefaction), neuralSpring (model uncertainty) |

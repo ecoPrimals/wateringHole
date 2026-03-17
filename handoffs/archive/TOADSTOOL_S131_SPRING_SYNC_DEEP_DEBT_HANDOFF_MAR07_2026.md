@@ -27,7 +27,7 @@ toadStool S131+ completes a full spring sync and deep debt evolution cycle:
 
 | Spring | Previous | Current | Tests | Key Evolution |
 |--------|----------|---------|-------|---------------|
-| hotSpring | v0.6.19→S130+ | v0.6.19→S131+ | 724+19 | DF64 delegation complete, Chuna papers |
+| hotSpring | v0.6.19→S130+ | v0.6.19→S131+ | 724+19 | DF64 delegation complete, gradient flow papers |
 | groundSpring | V95→S130+ | V96→S131+ | 925+390 | PrecisionRoutingAdvice 11 GPU paths |
 | neuralSpring | V87/S129→S130+ | V89/S131→S131+ | 901+43+240 | 89.1% coverage, isomorphic 25/25 |
 | wetSpring | V97d+→S130+ | V97e→S131+ | 1,346+200 | Builder patterns, provenance API |

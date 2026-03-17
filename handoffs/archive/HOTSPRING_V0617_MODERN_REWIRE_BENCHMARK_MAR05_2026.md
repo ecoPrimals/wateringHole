@@ -45,7 +45,7 @@
 | LAMMPS/Kokkos-CUDA (est.) | 730–3,699 | nvidia proprietary | neighbor list |
 
 - **16× faster than Kokkos-OpenMP** (GPU vs CPU)
-- **Est. 2–4× gap vs Kokkos-CUDA** (need Chuna's ICER for real GPU-vs-GPU)
+- **Est. 2–4× gap vs Kokkos-CUDA** (need collaborator's institutional HPC for real GPU-vs-GPU)
 - Kokkos-CUDA cannot run on NVK (open-source Vulkan)
 
 ### What Closed the Gap (27× → ~3×)
@@ -127,9 +127,9 @@ Full provenance documented in `specs/CROSS_SPRING_EVOLUTION.md`:
 - `NpuParameterController` trait — hotSpring implements equivalent in `npu_worker.rs`
 - `NpuDispatch` — hotSpring uses `akida-driver` directly, could adopt unified trait
 
-### For Chuna Review Package
+### For faculty review package
 - 9 LAMMPS input files ready in `lammps_results/`
-- Need Kokkos-CUDA numbers from ICER (V100/A100) for GPU-vs-GPU comparison
+- Need Kokkos-CUDA numbers from institutional HPC (V100/A100) for GPU-vs-GPU comparison
 - Review package: Sarkas reproduction → lattice QCD β-scan → PPPM → DF64 → performance
 
 ---
@@ -137,5 +137,5 @@ Full provenance documented in `specs/CROSS_SPRING_EVOLUTION.md`:
 ## Next Steps
 1. Brain-sweep across 9 cases (validate Nautilus cross-run persistence)
 2. N-scaling benchmark (N=500 → N=10000) to compare vs previous results
-3. Chuna collaboration: send LAMMPS input files for Kokkos-CUDA benchmarks
-4. Papers 43-45 (Chuna): gradient flow integrators, dielectric functions, kinetic-fluid coupling
+3. collaboration: send LAMMPS input files for Kokkos-CUDA benchmarks
+4. P43-45 (gradient flow): gradient flow integrators, dielectric functions, kinetic-fluid coupling

@@ -9,7 +9,7 @@
 
 ## 🎯 EXECUTIVE SUMMARY
 
-**What**: BearDog (security primal) identified that LiveSpore (BiomeOS self-replicating deployment) needs multi-callsign tag support for institutional NAT routing (e.g., MSU, universities).
+**What**: BearDog (security primal) identified that LiveSpore (BiomeOS self-replicating deployment) needs multi-callsign tag support for institutional NAT routing (e.g., universities, research institutions).
 
 **Why**: Enable users to leverage institutional networks instead of cloud services, achieving:
 - Zero cloud costs (use university/institution NAT)
@@ -50,12 +50,12 @@
   "version": 3,
   "tags": [  // ← Multiple public callsigns
     {
-      "tag": "MSU",
+      "tag": "UNIV",
       "purpose": "Institutional",
       "priority": 100
     },
     {
-      "tag": "alice-personal",
+      "tag": "researcher-personal",
       "purpose": "Personal",
       "priority": 90
     }
@@ -77,7 +77,7 @@
   "routing_metadata": {
     "primary_endpoint": "192.0.2.100:8080",  // Private!
     "nat_config": {
-      "traversal_method": "Institutional"  // Use MSU network
+      "traversal_method": "Institutional"  // Use university network
     }
   },
   "identity_attestations": {
@@ -90,7 +90,7 @@
 ### Key Insight: Public Discovery + Private Routing
 
 **Public** (visible to all):
-- Tags: "MSU", "Personal", "Federation"
+- Tags: "UNIV", "Personal", "Federation"
 - Purpose hints (for routing decisions)
 - Priorities (which tag to prefer)
 
@@ -107,14 +107,14 @@
 
 ---
 
-## 📊 USE CASE: MSU Graduate Student
+## USE CASE: University Graduate Student
 
-**User**: Alice, PhD student at MSU with basement HPC
+**User**: Grad student at a research university with basement HPC
 
 **Configuration**:
 ```yaml
 tags:
-  - tag: "MSU"
+  - tag: "UNIV"
     purpose: Institutional
     priority: 100
     routing:
@@ -122,7 +122,7 @@ tags:
       nat_config:
         traversal_method: Institutional
   
-  - tag: "alice-research"
+  - tag: "researcher-lab"
     purpose: Personal
     priority: 90
     routing:
@@ -131,30 +131,30 @@ tags:
 
 **Scenarios**:
 
-1. **Alice's Sibling (Same Genetic Family)**:
-   - Sees tags: ["MSU", "alice-research"]
-   - Decrypts payload with genetic key ✅
+1. **Researcher's Sibling (Same Genetic Family)**:
+   - Sees tags: ["UNIV", "researcher-lab"]
+   - Decrypts payload with genetic key
    - Reads routing: 192.0.2.100:8080
-   - Connects via MSU network (priority 100)
+   - Connects via university network (priority 100)
    - Auto-trusted (same lineage)
 
-2. **Random MSU Student**:
-   - Sees tags: ["MSU", "alice-research"]
+2. **Random University Student**:
+   - Sees tags: ["UNIV", "researcher-lab"]
    - Tries to decrypt with their genetic key ❌
    - Decryption fails (different lineage)
    - Ignores packet
 
 3. **ML Federation Member**:
-   - Alice adds "ML-Federation" tag with different routing
+   - Researcher adds "ML-Federation" tag with different routing
    - Federation member decrypts with federation key ✅
    - Gets limited access (ML service only, not personal HPC)
    - Graduated trust (federation, not family)
 
 **Result**:
-- ✅ Zero cloud costs (uses MSU network)
-- ✅ Full sovereignty (family-only routing)
-- ✅ Multi-identity (institutional + personal + federation)
-- ✅ MSU network sees legitimate "MSU" tag (allowed)
+- Zero cloud costs (uses university network)
+- Full sovereignty (family-only routing)
+- Multi-identity (institutional + personal + federation)
+- University network sees legitimate institutional tag (allowed)
 
 ---
 
@@ -424,13 +424,13 @@ Songbird v3.23.0 production release (Week 6)
 - No institutional network support
 
 **After** (BirdSong v3.0):
-- Multiple callsign tags (MSU + Personal + Federation)
+- Multiple callsign tags (UNIV + Personal + Federation)
 - Institutional NAT routing (zero cloud costs)
 - Auto-configured routing per tag
 - LiveSpore first-boot personalization
 
 **User Story**:
-> "I'm a grad student at MSU with a basement HPC. Before LiveSpore, I had to pay for cloud NAT or manually configure port forwarding. Now, I just add the 'MSU' tag during first boot, and my family can reach my HPC through MSU's network. Zero cloud costs, full privacy (routing encrypted for family only), and MSU's network sees a legitimate 'MSU' tag. Sovereignty achieved!" 🌱
+> "I'm a grad student with a basement HPC. Before LiveSpore, I had to pay for cloud NAT or manually configure port forwarding. Now, I just add the university tag during first boot, and my family can reach my HPC through the university network. Zero cloud costs, full privacy (routing encrypted for family only), and the network sees a legitimate institutional tag. Sovereignty achieved!"
 
 ### For Ecosystem
 

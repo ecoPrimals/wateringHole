@@ -482,7 +482,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 **Phase**: Domain Validation
 **Status**: v0.6.23 — ~700 tests, 84 binaries, 62 WGSL shaders, 39/39 validation suites
 
-**Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC), Stanton-Murillo transport, Anderson localization, and Hofstadter butterfly. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline.
+**Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC), screened Coulomb transport, Anderson localization, and Hofstadter butterfly. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline.
 
 **Capabilities**:
 

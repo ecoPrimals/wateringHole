@@ -117,7 +117,7 @@ evolution is upstream:
 
 ## Part 4: Paper Queue Control Summary
 
-All 52 reproduced papers + 6 Gonzales reproductions use open data exclusively.
+All 52 reproduced papers + 6 pharmacology reproductions use open data exclusively.
 Three-tier validation is complete for all eligible papers.
 
 | Tier | Description | Status |

@@ -1323,16 +1323,16 @@ No Jenkins. No GitHub Actions. Pure primal composition.
 Multiple machines (gates) in the basement HPC, each with different GPUs:
 
 ```
-Northgate: 2× Titan V (SM70) — coralReef instance knows SM70
-Strandgate: RTX 3090 (SM86) — coralReef instance knows SM86
-Eastgate: RX 6950 XT (RDNA2) — coralReef instance knows RDNA2
+gate-01: 2× Titan V (SM70) — coralReef instance knows SM70
+gate-02: RTX 3090 (SM86) — coralReef instance knows SM86
+gate-03: RX 6950 XT (RDNA2) — coralReef instance knows RDNA2
 
 Spring requests: compile yukawa_force for [sm70, sm86, rdna2]
 
 biomeOS routes via Songbird:
-  sm70 request  → Northgate's coralReef (local GPU for validation)
-  sm86 request  → Strandgate's coralReef
-  rdna2 request → Eastgate's coralReef
+  sm70 request  → gate-01's coralReef (local GPU for validation)
+  sm86 request  → gate-02's coralReef
+  rdna2 request → gate-03's coralReef
 
 Each coralReef instance compiles locally, can optionally validate
 by dispatching on its own GPU via coralDriver.

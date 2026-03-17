@@ -289,7 +289,7 @@ The `χ²/datum = 25.43` result was achieved by running **Python** code orchestr
 - BarraCuda's math functions (Nelder-Mead, RBF, LHS) work correctly ✅
 - BarraCuda's special functions (gamma, laguerre, bessel) match scipy ✅
 - The **HFB solver** in `hotspring_barracuda::physics::hfb` produces binding energies that are **3-4× too large** compared to experiment
-- This is a **spherical-only HFB implementation** — the Murillo group uses deformed HFBTHO
+- This is a **spherical-only HFB implementation** — the faculty group (plasma) uses deformed HFBTHO
 
 **Evidence**: All 20 L1-seeded NM starts converged to similar L2 solutions (`log(1+χ²) ≈ 10.26`), suggesting the optimizer found the global minimum of the Rust HFB landscape — it's just that this landscape is fundamentally different from the Python HFB landscape.
 

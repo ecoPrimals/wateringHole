@@ -261,7 +261,7 @@ Rust absorbs both and evolves beyond.**
 ---
 
 *Provenance: groundSpring Kokkos GPU benchmark, RTX 4070, March 4, 2026.
-Follows coffee meeting with Professor Murillo (MSU CMSE) who asked the
+Follows meeting with faculty collaborator (plasma physics) who asked the
 right question: "How do you compare to Kokkos?"*
 
 *This is a cross-spring notice. All springs should acknowledge receipt

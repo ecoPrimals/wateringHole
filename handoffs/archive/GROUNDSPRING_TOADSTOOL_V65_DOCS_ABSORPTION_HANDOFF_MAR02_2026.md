@@ -175,9 +175,9 @@ Every production epsilon guard is now documented with rationale:
 | 016 | Rare Biosphere | R. Anderson 2015 | **12/12** | chao1, diversity | `BatchedMultinomialGpu` | After GPU | PASS |
 | 017 | Quasispecies | Dolson 2023 | **6/6** | error_threshold | WF sim GPU | After GPU | PASS |
 | 018 | Band Edge Structure | Filonov-K 2018 | **10/10** | detect_bands | Brent GPU | After GPU | PASS |
-| 019 | Jackknife | Bazavov 2025 | **9/9** | jackknife | `JackknifeMeanGpu` | After GPU | PASS |
-| 020 | Freeze-Out Inverse | Bazavov 2016 | **8/8** | chi2_analysis | grid dispatch | After GPU | PASS |
-| 021 | Spectral Recon | Bazavov 2025 | **8/8** | tikhonov_solve | Cholesky GPU | After GPU | PASS |
+| 019 | Jackknife | published reference 2025 | **9/9** | jackknife | `JackknifeMeanGpu` | After GPU | PASS |
+| 020 | Freeze-Out Inverse | published reference 2016 | **8/8** | chi2_analysis | grid dispatch | After GPU | PASS |
+| 021 | Spectral Recon | published reference 2025 | **8/8** | tikhonov_solve | Cholesky GPU | After GPU | PASS |
 | 022 | ET₀ → Anderson | cross-spring | **7/7** | fao56 + anderson | spectral GPU | After GPU | PASS |
 | 023 | No-Till Sampling | cross-spring | **7/7** | diversity | multinomial GPU | After GPU | PASS |
 | 024 | Aggregate Stability | cross-spring | **8/8** | stats | spectral GPU | After GPU | PASS |

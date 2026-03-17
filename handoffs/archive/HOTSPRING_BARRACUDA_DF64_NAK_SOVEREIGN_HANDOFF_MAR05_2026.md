@@ -111,7 +111,7 @@ ShaderModule with 'yukawa_force_f64' label is invalid
 
 4. **Bonus**: If the DF64 pipeline validates, measure steps/s for the Yukawa
    force kernel at N=2000. Expected: 300–900 steps/s (vs 29 steps/s native f64).
-   This is the headline number for Chuna.
+   This is the headline number for faculty review.
 
 ### P2: hotSpring should use compile_shader_universal instead of local DF64 code
 

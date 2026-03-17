@@ -54,7 +54,7 @@ All production magic numbers extracted to documented constants:
 | `esn/classifier.rs` | `LYAPUNOV_EXTENDED_THRESHOLD` | Almost-Mathieu λ=0.5 benchmark (Exp 009) |
 | `esn/classifier.rs` | `ESN_RESERVOIR_SIZE`, `ESN_SPECTRAL_RADIUS`, `ESN_CONNECTIVITY`, `ESN_LEAK_RATE` | hotSpring Exp 015/022 validation |
 | `esn/brain.rs` | `SHARP_BOUNDARY_RATIO`, `BOUNDARY_EXPLORE_FACTOR` | Nautilus Shell `constraints.rs` heuristic |
-| `dispatch.rs` | `DEFAULT_ENERGY`, `DEFAULT_CONFIDENCE`, `DEFAULT_ELEVATION_M`, `DEFAULT_RHMAX_PCT`, `DEFAULT_RHMIN_PCT`, `DEFAULT_REGIME_MARGIN` | FAO-56 standard, RMT, Bazavov 2016 |
+| `dispatch.rs` | `DEFAULT_ENERGY`, `DEFAULT_CONFIDENCE`, `DEFAULT_ELEVATION_M`, `DEFAULT_RHMAX_PCT`, `DEFAULT_RHMIN_PCT`, `DEFAULT_REGIME_MARGIN` | FAO-56 standard, RMT, published reference (2016) |
 | `tissue_anderson/drug_scoring.rs` | `MW_BLOCKED_DA` through `PENETRATION_SMALL`, `BIOAVAIL_STRATUM_CORNEUM`, `BARRIER_BLOCK_FACTOR`, `SYSTEMIC_*`, `MIN_REACHABLE_PENETRATION` | Lipinski Rule of Five, topical delivery literature |
 | `freeze_out.rs` | `NM_SIMPLEX_SCALE` | Nelder-Mead simplex perturbation (2σ grid cell) |
 

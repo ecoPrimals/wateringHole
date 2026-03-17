@@ -1,21 +1,21 @@
 # barraCuda v0.3.3 — Plasma Physics Absorption + Deep Debt Evolution
 
 **Date**: March 8, 2026
-**Scope**: hotSpring Chuna P43-45 shader absorption, cross-spring review, deep debt resolution
+**Scope**: hotSpring P43-45 shader absorption, cross-spring review, deep debt resolution
 **Quality gates**: fmt clean, clippy zero warnings, 3,097/3,097 tests pass (13 ignored)
 
 ---
 
 ## Plasma Physics Absorption (hotSpring v0.6.23)
 
-4 WGSL shaders absorbed from hotSpring's Chuna Papers 43-45 into `shaders/science/plasma/`:
+4 WGSL shaders absorbed from hotSpring's gradient flow papers (P43-45) into `shaders/science/plasma/`:
 
 | Shader | Lines | Domain | Source |
 |--------|-------|--------|--------|
-| `dielectric_mermin_f64.wgsl` | 194 | Mermin ε(k,ω) with plasma dispersion W(z) | Chuna P44 |
-| `dielectric_multicomponent_f64.wgsl` | 161 | Multi-species Mermin dielectric | Chuna P44 |
-| `bgk_relaxation_f64.wgsl` | 77 | BGK relaxation (two-pass: moments + relax) | Chuna P45 |
-| `euler_hll_f64.wgsl` | 136 | 1D Euler with HLL Riemann solver | Chuna P45 |
+| `dielectric_mermin_f64.wgsl` | 194 | Mermin ε(k,ω) with plasma dispersion W(z) | P44 |
+| `dielectric_multicomponent_f64.wgsl` | 161 | Multi-species Mermin dielectric | P44 |
+| `bgk_relaxation_f64.wgsl` | 77 | BGK relaxation (two-pass: moments + relax) | P45 |
+| `euler_hll_f64.wgsl` | 136 | 1D Euler with HLL Riemann solver | P45 |
 
 New `PlasmaPhysics` variant added to `ShaderCategory` enum. 4 provenance records added to the cross-spring registry.
 
@@ -43,7 +43,7 @@ All 18 neuralSpring metalForge shaders (15 Evoformer df64 + head_split + head_co
 | airSpring | v0.7.5 | `a898dee` | 0 (fully lean) | 865 tests |
 | groundSpring | V100 | `a898dee` | 2 (reference only) | 936 tests |
 | neuralSpring | S132 | `a898dee` | 41 (all absorbed upstream) | 218/218 |
-| hotSpring | v0.6.23 | `cdd748d` | 84 (4 now absorbed) | Chuna 41/41 |
+| hotSpring | v0.6.23 | `cdd748d` | 84 (4 now absorbed) | 41/41 |
 
 ---
 

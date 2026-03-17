@@ -114,7 +114,7 @@ tarpc activates when both endpoints support it.
 |--------|-------|
 | `PathBuf::from("/tmp")` | `std::env::temp_dir()` |
 | `TowerAtomic::new("eastgate")` | `TowerAtomic::new(&env("GROUNDSPRING_TEST_TOWER", "eastgate"))` |
-| `NodeAtomic::with_inventory("strandgate", inv)` | `NodeAtomic::with_inventory(&env("GROUNDSPRING_TEST_NODE", "strandgate"), inv)` |
+| `NodeAtomic::with_inventory("gate-04", inv)` | `NodeAtomic::with_inventory(&env("GROUNDSPRING_TEST_NODE", "gate-04"), inv)` |
 | `"baseline_commit": "pending"` | `"baseline_commit": git_commit_hash()` |
 
 ### Action for barraCuda / toadStool

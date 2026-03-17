@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-During GPU promotion of Paper 44 (Chuna BGK Dielectric), hotSpring discovered
+During GPU promotion of Paper 44 (BGK Dielectric), hotSpring discovered
 that **f64 GPU arithmetic can silently diverge from CPU f64** in algorithms
 with catastrophic cancellation. The divergence is NOT caused by wrong precision
 routing — all f64 polyfills were correctly injected and verified. The cause is
@@ -304,7 +304,7 @@ See: `wateringHole/NUMERICAL_STABILITY_EVOLUTION_PLAN.md`
 - `hotSpring/barracuda/src/physics/shaders/dielectric_mermin_f64.wgsl` — stable W(z)
 - `hotSpring/barracuda/src/physics/gpu_dielectric.rs` — GPU dispatch + polyfill injection
 - `hotSpring/barracuda/src/bin/validate_gpu_dielectric.rs` — 12/12 physics checks
-- `hotSpring/experiments/044_CHUNA_BGK_DIELECTRIC.md` — full experiment record
+- `hotSpring/experiments/044_BGK_DIELECTRIC.md` — full experiment record
 
 ---
 

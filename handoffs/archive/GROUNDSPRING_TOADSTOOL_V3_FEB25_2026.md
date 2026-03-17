@@ -150,7 +150,7 @@ Post-S62, several papers moved from GPU-Blocked to GPU-Ready:
 | Jitomirskaya-Kachkovskiy (#16) | Pending | **Ready** | Anderson transport (S56) |
 | R. Anderson mBio (#20) | Partial | **Partial+** | NMF (S58), but rarefaction GPU still Tier C |
 
-**Still blocked**: Bazavov (#6-8) on FFT gap; R. Anderson (#20-21) on `batched_multinomial`.
+**Still blocked**: published reference (#6-8) on FFT gap; R. Anderson (#20-21) on `batched_multinomial`.
 
 ---
 

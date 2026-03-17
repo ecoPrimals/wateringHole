@@ -202,7 +202,7 @@ lean back to released versions.
 | WGSL shaders | 84 |
 | clippy warnings | 0 (lib + all bins) |
 | unsafe blocks | 0 |
-| Chuna overnight | 44/44 |
+| overnight | 44/44 |
 | sovereign compile | 44/46 |
 | coralReef sync | Phase 10, Iter 26 |
 | toadStool sync | S138 |

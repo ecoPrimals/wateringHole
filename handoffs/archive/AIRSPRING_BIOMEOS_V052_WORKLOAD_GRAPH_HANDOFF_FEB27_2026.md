@@ -200,7 +200,7 @@ Southgate (Node):
   ToadStool GPU (RTX 3090) → large-batch Richards PDE, kriging
   airSpring → compute-heavy workloads routed here
 
-Strandgate (Heavy Node):
+gate-04 (Heavy Node):
   Dual EPYC + RTX 3090 + 2x AKD1000 → multi-substrate
   metalForge → cross-system dispatch (GPU+NPU+CPU)
 ```

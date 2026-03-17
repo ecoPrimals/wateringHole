@@ -20,7 +20,7 @@ The project operates on 10 towers + 4 small form factor nodes:
 | **northGate** | RTX 5090 | — | Flagship AI/LLM compute |
 | **southGate** | RTX 4060 | swappable | Gaming + heavy compute |
 | **eastGate** | RTX 4070 | — | Utility + neuromorphic (1× Akida) |
-| **strandGate** | — | RTX 3090 + RX 6950 XT | Bioinformatics (1× Akida) |
+| **gate-04** | — | RTX 3090 + RX 6950 XT | Bioinformatics (1× Akida) |
 | **biomeGate** | RTX 5060 | 2× Titan V + 2× MI50 | HBM2 test bench (1× Akida) |
 | **westGate** | RTX 2070S | — | Cold storage (76 TB ZFS) |
 
@@ -319,19 +319,19 @@ science. Faculty anchors are documented in `whitePaper/attsi/`.
 
 | Spring | Faculty Anchor(s) |
 |--------|-------------------|
-| wetSpring | Chris Waters (QS), Younsuk Dong (agriculture) |
-| hotSpring | Michael Murillo (plasma), Alexei Bazavov (lattice QCD), TC Chuna (gradient flow) |
-| groundSpring | Ilya Kachkovskiy (spectral theory) |
-| healthSpring | Andrea Gonzales (pharmacology) |
+| wetSpring | Faculty anchor (quorum sensing), faculty anchor (agriculture) |
+| hotSpring | Faculty anchor (plasma physics), faculty anchor (lattice QCD), faculty anchor (gradient flow) |
+| groundSpring | Faculty anchor (spectral theory) |
+| healthSpring | Faculty anchor (pharmacology) |
 | neuralSpring | (cross-domain — reproduces from all anchors) |
-| airSpring | Younsuk Dong (precision agriculture) |
-| ludoSpring | Csikszentmihalyi (Flow), Fitts, Yannakakis & Togelius |
+| airSpring | Faculty anchor (precision agriculture) |
+| ludoSpring | Published authors (Flow theory, motor control, procedural generation) |
 
 ### attsi
 
 The **faculty outreach program** (`whitePaper/attsi/`). Contains contact
-packages, email drafts, review materials, and outreach strategy for each
-faculty anchor. Named contacts have non-anonymized directories; anonymized
+packages, review materials, and outreach strategy for each faculty anchor.
+Faculty identities are maintained in the non-anonymous whitePaper layer; anonymized
 contacts use hashed identifiers.
 
 ---
