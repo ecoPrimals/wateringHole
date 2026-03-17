@@ -109,6 +109,7 @@ logic are built in.
 | groundSpring | Interpret seismic waveform features, classify calibration anomalies |
 | healthSpring | Summarize PK/PD model fits, generate dosing rationale narratives |
 | ludoSpring | Generate NPC dialogue, balance game mechanics via AI playtesting |
+| primalSpring | Validates Squirrel's AI coordination — exp044 tests multi-MCP routing via Squirrel + biomeOS capability graph. |
 
 ### 1.2 Context Window Management
 
@@ -1008,5 +1009,6 @@ through coordination, not through coupling.
 - `wateringHole/INTER_PRIMAL_INTERACTIONS.md` — RootPulse coordination flows
 - `whitePaper/gen3/PRIMAL_CATALOG.md` — Full primal catalogue
 - `whitePaper/gen3/ECOSYSTEM_ARCHITECTURE.md` — NUCLEUS architecture
+- `wateringHole/BIOMEOS_LEVERAGE_GUIDE.md` — fieldMouse (minimal deployable unit) vs. niche
 - `phase1/squirrel/capability_registry.toml` — Squirrel capability source of truth
 - `phase1/squirrel/crates/main/src/niche.rs` — Niche self-knowledge

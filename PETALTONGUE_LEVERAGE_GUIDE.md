@@ -139,6 +139,10 @@ Each spring can leverage petalTongue independently. No third primal needed — j
 
 **Novel leverage**: ludoSpring is the first spring that can fully exercise petalTongue's 60 Hz sensor stream. Stream `interaction.sensor_stream.subscribe` for real-time player input telemetry. Use `motor.set_panel` and `motor.navigate` to have the game itself drive petalTongue's UI — when a player enters a new zone, the analytics dashboard switches panels automatically. Use Squirrel (AI adapter) to have an AI analyze the engagement curve and auto-focus petalTongue on the anomalous region.
 
+### primalSpring → petalTongue
+
+**Validates**: petalTongue's visualization pipeline — exp043 tests biomeOS SSE events flowing through petalTongue rendering. fieldMouse deployments (minimal edge units) can run petalTongue's TUI mode for edge visualization.
+
 ---
 
 ## Part 1B: Using petalTongue with Foundation Primals

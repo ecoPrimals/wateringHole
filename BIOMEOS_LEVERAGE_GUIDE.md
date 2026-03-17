@@ -122,6 +122,11 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 | `niche.list` | List available niche templates |
 | `niche.deploy` | Deploy a niche from template |
 
+**fieldMouse vs. niche**: fieldMouse is the minimal deployable ecoPrimals
+structure — the smallest functional atomic/chimera for constrained niches
+(RISC-V, Raspberry Pi, edge sensors). It does NOT run biomeOS. *If
+biomeOS is running, it's a niche. If not, it's a fieldMouse.*
+
 **Transport**: JSON-RPC 2.0 over Unix socket (required), HTTP JSON-RPC
 (inter-gate), tarpc/bincode (optional high-performance path).
 
@@ -163,6 +168,7 @@ domains.
 | groundSpring | `capability.call("discovery.find_primals", {})` | Songbird scans the mesh | Auto-discover which compute providers have GPU for tolerance validation |
 | healthSpring | `capability.call("dag.create_session", { name })` | rhizoCrypt opens a workspace | Patient data in ephemeral sessions with automatic expiry |
 | ludoSpring | `capability.call("visualization.render", { grammar })` | petalTongue renders the frame | 60 Hz game analytics dashboard via Continuous graphs |
+| primalSpring | `capability.call("coordination.validate_composition", { pipeline })` | primalSpring validates the graph | Coordination and composition validation — biomeOS is the primary subject under test |
 
 ### 1.2 Graph Orchestration for Pipelines
 
@@ -218,6 +224,7 @@ coordinates primals directly.
 | groundSpring | Sequential | raw → bias correction → uncertainty propagation → validate |
 | healthSpring | ConditionalDag | PK/PD model → if(out-of-range) alert else continue → dose |
 | ludoSpring | Continuous (60 Hz) | input → state update → physics → render → analytics |
+| primalSpring | Sequential | validate → deploy_atomic → bonding_test → nucleus_health |
 
 ### 1.3 Pipeline Streaming (New in v2.43)
 
@@ -265,6 +272,7 @@ Springs subscribe to events rather than polling.
 | hotSpring | 10 Hz | simulation step → field update → visualization push |
 | neuralSpring | variable | training batch → loss calc → gradient update → checkpoint |
 | healthSpring | 2 Hz | vitals read → PK/PD update → alert if out-of-range |
+| primalSpring | on-demand | composition validation, deploy_atomic, bonding_test |
 
 ### 1.5 Runtime Capability Discovery
 
@@ -393,6 +401,7 @@ The spring never handles reconnection.
 | ludoSpring | One session per game match | start, state_update (×N), end, analytics |
 | groundSpring | One session per calibration chain | raw, bias_correct, propagate, validate |
 | airSpring | One session per irrigation cycle | sense, compute_et0, decide, actuate, log |
+| primalSpring | One session per composition validation run | validate_composition, deploy_atomic, bonding_test, nucleus_health |
 
 ### 2.2 biomeOS + LoamSpine: Permanent Commits via Graph
 
@@ -435,6 +444,7 @@ orchestrated pipeline.
 | airSpring | Which sensor network provided the field data |
 | groundSpring | Which calibration standard was used for this measurement |
 | hotSpring | Which nuclear data library parameterized this simulation |
+| primalSpring | Which composition validation runs verified the pipeline topology |
 
 ### 2.4 biomeOS + Full Trio: The RootPulse Pattern
 
@@ -693,6 +703,7 @@ graph.execute("rootpulse_science_pipeline"):
 | groundSpring | Calibration chain (raw → bias correction → uncertainty propagation) |
 | healthSpring | Clinical pipeline (PK/PD model → dosing → outcome prediction) |
 | ludoSpring | Game session replay (inputs → state transitions → DDA adjustments) |
+| primalSpring | Composition validation (deploy_atomic, bonding_test, nucleus_health) |
 
 ### 4.3 Federated Multi-Gate Experiment
 
@@ -1251,6 +1262,12 @@ Four springs, one graph call, zero cross-imports.
 primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction,
 Gating), coralForge protein structure prediction, 25+ paper reproductions.
 
+> **coralForge architectural evolution**: coralForge is now reconceptualized
+> as an emergent neural object — a Layer 3 system composed via biomeOS
+> Pipeline graph over neuralSpring + wetSpring + hotSpring + toadStool +
+> NestGate, validated by primalSpring exp025. The math stays in neuralSpring.
+> The composition is defined by `coralforge_pipeline.toml`.
+
 **What biomeOS adds**: neuralSpring trains models. biomeOS turns training
 into a managed, provenance-backed, cross-spring service that any other
 spring can consume without understanding ML.
@@ -1538,6 +1555,21 @@ Every spring contributes domain expertise. biomeOS orchestrates the
 
 ---
 
+### 7.8 primalSpring — Coordination and Composition Validation
+
+**The problem primalSpring solves alone**: Validates biomeOS pipeline
+compositions, deploy_atomic workflows, bonding tests, and nucleus health.
+Its domain IS coordination — biomeOS is the primary subject under test.
+
+**What biomeOS adds**: primalSpring validates that deploy graphs execute
+correctly across the composed primals. biomeOS provides the pipeline
+topology; primalSpring verifies it.
+
+**Capability domain**: coordination.deploy_atomic, coordination.validate_composition,
+coordination.bonding_test, composition.nucleus_health, nucleus.start, nucleus.stop.
+
+---
+
 ## 8. Emergent Orchestration Patterns
 
 These patterns arise from biomeOS's unique position as the only primal
@@ -1579,9 +1611,12 @@ neuralSpring registers: prediction.surrogate, prediction.classify
 groundSpring registers: measurement.uncertainty, measurement.calibrate
 healthSpring registers: clinical.pk_predict, clinical.gut_model
 ludoSpring registers:   interaction.flow_score, interaction.dda_adjust
+primalSpring registers: coordination.deploy_atomic, coordination.validate_composition,
+                        coordination.bonding_test, composition.nucleus_health,
+                        nucleus.start, nucleus.stop
 ```
 
-biomeOS sees 14+ capability domains from 7 springs + 8 primals = 15
+biomeOS sees 14+ capability domains from 8 springs + 8 primals = 16
 providers. Any new spring that arrives and registers capabilities is
 immediately discoverable by every existing spring. No configuration, no
 imports, no coordination — just `capability.register` at startup and

@@ -97,6 +97,9 @@ shader.compile.wgsl { source, target: "rdna2" }  → AMD GFX binary
 | airSpring | Richards PDE solver, ET₀ models, statistics metrics |
 | healthSpring | PK/PD model solvers, Hill dose-response, population dynamics |
 | ludoSpring | Physics simulation, procedural generation, game telemetry analytics |
+| primalSpring | Indirect validation — coralForge Pipeline graph (exp025) depends on ToadStool GPU dispatch, which uses coralReef for sovereign shader compilation |
+
+> **coralForge evolution**: coralForge is now an emergent neural object composed via Pipeline graph, not a neuralSpring module. The math stays in neuralSpring, the composition is `coralforge_pipeline.toml`, validated by primalSpring exp025.
 
 ### 1.2 Multi-Target Cross-Vendor Compilation
 
@@ -1408,7 +1411,8 @@ NestGate stores:
 
 Any primal that knows the key (source + target + options) can retrieve
 the pre-compiled binary from NestGate without invoking coralReef at all.
-This turns NestGate into a global compilation cache for the ecosystem.
+fieldMouse deployments can use this pattern for edge GPU compute. This
+turns NestGate into a global compilation cache for the ecosystem.
 
 ---
 
@@ -1452,7 +1456,7 @@ This turns NestGate into a global compilation cache for the ecosystem.
 ### Primal Specifications
 
 - `whitePaper/gen3/PRIMAL_CATALOG.md` — Full primal catalogue (14 primals)
-- `whitePaper/gen3/SPRING_CATALOG.md` — Spring catalogue (7 springs)
+- `whitePaper/gen3/SPRING_CATALOG.md` — Spring catalogue (8 springs)
 - `whitePaper/gen3/primals/INTERACTIONS.md` — Interaction matrix and bonding model
 - `whitePaper/gen3/primals/13_coralreef.md` — coralReef primal specification
 - `whitePaper/gen3/primals/14_barracuda.md` — barraCuda primal specification

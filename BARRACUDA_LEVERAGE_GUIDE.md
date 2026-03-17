@@ -73,8 +73,11 @@ Springs get the full library at compile time. No IPC overhead, no
 discovery, no runtime dependency on other primals. This is the simplest
 and fastest integration path.
 
-**Used by**: All 7 springs (hotSpring, airSpring, wetSpring, groundSpring,
-neuralSpring, healthSpring, ludoSpring).
+**Used by**: All 8 springs (hotSpring, airSpring, wetSpring, groundSpring,
+neuralSpring, healthSpring, ludoSpring, primalSpring). primalSpring has
+minimal barraCuda requirements — it validates coordination, not math. Its
+contribution is validating that the coordination layer correctly composes
+the primals that consume barraCuda.
 
 ### 1.2 GPU-Accelerated Statistics
 
@@ -614,7 +617,10 @@ uncertainty with hardware-calibrated error bounds.
 **Novel combo**: neuralSpring + barraCuda + coralReef + songBird =
 distributed neural network training with sovereign shader compilation.
 Each node compiles attention kernels to native ISA via coralReef,
-communicates gradients via songBird, no CUDA/cuDNN dependency.
+communicates gradients via songBird, no CUDA/cuDNN dependency. coralForge
+is reconceptualized as an emergent neural object — a Pipeline graph
+composition rather than a neuralSpring module; barraCuda provides the
+compute primitives for structure prediction.
 
 ### 5.6 healthSpring (Clinical, PK/PD)
 
@@ -739,6 +745,10 @@ A spring written against barraCuda runs on any GPU vendor:
 - Apple (Metal)
 - CPU fallback (llvmpipe)
 - Future: NPU, browser (WebGPU)
+
+**fieldMouse deployments** use ecoBin-compliant chimera binaries built from
+barraCuda-consuming primals, targeting constrained hardware (RISC-V,
+Raspberry Pi, edge sensors).
 
 The science is the same. The hardware is interchangeable.
 

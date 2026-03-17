@@ -113,6 +113,7 @@ entry.get_tip { spine_id }
 | groundSpring | Calibration chain results, seismic event detections, bias corrections |
 | healthSpring | Dosing decisions, PK/PD model publications, consent events |
 | ludoSpring | Game release snapshots, balance patch records, tournament results |
+| primalSpring | Validates LoamSpine's role in RootPulse — exp020 tests commit, exp021 tests branch+merge, exp022 tests diff+federate. |
 
 ### 1.2 Loam Certificates — Memory-Bound Ownership
 
@@ -918,4 +919,5 @@ by biomeOS. Complexity through coordination, not through coupling.
 - `wateringHole/INTER_PRIMAL_INTERACTIONS.md` — RootPulse coordination flows
 - `whitePaper/gen3/PRIMAL_CATALOG.md` — Full primal catalogue
 - `whitePaper/gen3/ECOSYSTEM_ARCHITECTURE.md` — NUCLEUS architecture
+- `wateringHole/BIOMEOS_LEVERAGE_GUIDE.md` — fieldMouse (minimal deployable unit) vs. niche
 - `phase2/loamSpine/specs/` — LoamSpine specification documents

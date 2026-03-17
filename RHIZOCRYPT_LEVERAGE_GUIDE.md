@@ -136,6 +136,7 @@ dag.merkle_root { session_id }
 | groundSpring | Calibration chain: raw measurement → bias correction → uncertainty propagation |
 | healthSpring | Clinical pipeline: PK/PD model → dosing → outcome prediction |
 | ludoSpring | Game session: player input → game state → DDA adjustment → engagement score |
+| primalSpring | Validates rhizoCrypt's role in RootPulse — exp020 tests the full 6-phase commit workflow (health → dehydrate → sign → store → commit → attribute). |
 
 ### 1.2 Multi-Agent Collaboration
 
