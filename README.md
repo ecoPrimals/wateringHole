@@ -1,8 +1,8 @@
 # The Watering Hole - ecoPrimals Ecosystem Guidance
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
-**Audience**: Any primal, at any point in its evolution  
-**Last Updated**: March 16, 2026
+**Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
+**Last Updated**: March 17, 2026
 
 ---
 
@@ -358,12 +358,20 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Provenance trio integration
 - `SPRING_EVOLUTION_ISSUES.md` — Active issues discovered by springs
 
+### Presentation & External Review
+- **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** — **Read before any docs sweep.** Checklist for making a spring/primal independently reviewable by PIs, students, hobbyists, and compliance reviewers. The 5-minute test. Self-assessment template. Common problems and fixes. References `publicRelease/` audience briefs.
+
 ### Leverage Guides (Per-Primal)
 - `BARRACUDA_LEVERAGE_GUIDE.md`, `BIOMEOS_LEVERAGE_GUIDE.md`, `CORALREEF_LEVERAGE_GUIDE.md`
 - `LOAMSPINE_LEVERAGE_GUIDE.md`, `PRIMALSPRING_LEVERAGE_GUIDE.md`, `RHIZOCRYPT_LEVERAGE_GUIDE.md`
 - `SQUIRREL_LEVERAGE_GUIDE.md`, `SWEETGRASS_LEVERAGE_GUIDE.md`, `TOADSTOOL_LEVERAGE_GUIDE.md`
 - `PETALTONGUE_LEVERAGE_GUIDE.md`
+- `WETSPRING_LEVERAGE_GUIDE.md`, `NEURALSPRING_LEVERAGE_GUIDE.md`
 - `petaltongue/` — petalTongue integration documentation (biomeOS API, quick start, showcase)
+
+### Spring Composition Guidance (Per-Spring)
+- `airspring/AIRSPRING_COMPOSITION_GUIDANCE.md` — How airSpring composes with other springs and primals
+- `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
 - `handoffs/*.md` — Active session handoffs (last 48 hours)
@@ -382,8 +390,36 @@ If you are a new primal entering the ecosystem:
 5. **Implement IPC** following `PRIMAL_IPC_PROTOCOL.md` v3.0
 6. **Advertise capabilities** so biomeOS can discover and coordinate you
 7. **Register your primal** in PRIMAL_REGISTRY.md with your primitives
+8. **Get your face together** per `SPRING_PRIMAL_PRESENTATION_STANDARD.md` — your repo should be reviewable by any of the four external audiences in 5 minutes
 
 You do not need to know about other primals. You need to know what you can do, and how to tell the ecosystem about it.
+
+---
+
+## Getting Your Face Together
+
+Every spring and primal should be independently reviewable by outsiders.
+See **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** for the full checklist,
+but the short version is: a reviewer should be able to do this in 5 minutes:
+
+1. Open `README.md` → understand what this does and what it replaces
+2. `cargo test --workspace` → see all tests pass
+3. `cargo run --release --bin validate_<something>` → see explicit PASS/FAIL
+4. Open `CHANGELOG.md` → understand recent evolution
+5. Open `whitePaper/baseCamp/README.md` → see the faculty and science context
+
+Four external audiences will read your repo without context:
+
+| Audience | What They Look For |
+|----------|-------------------|
+| **Faculty / PIs** | What does this replace? How does it compare to commercial tools? Can I verify claims? |
+| **Students / Core Facilities** | How do I build it? How do I run it? Where do I start? |
+| **Hardware Builders / Hobbyists** | What hardware does it need? What can my GPU do? How do I contribute compute? |
+| **Compliance / Institutional Review** | What standards does it meet? What are the dependencies? Is it safe? What's the license? |
+
+The `publicRelease/` documents in `whitePaper/attsi/non-anon/contact/publicRelease/`
+make ecosystem-wide claims. Each spring and primal must ensure its own presentation
+supports those claims.
 
 ---
 
