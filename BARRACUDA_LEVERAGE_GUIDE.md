@@ -2,7 +2,7 @@
 # barraCuda Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
 **Date**: March 16, 2026
-**Primal**: barraCuda v0.3.5 (Sprint 6)
+**Primal**: barraCuda v0.3.5 (Sprint 5)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -817,6 +817,5 @@ primal that owns that domain. This is the sovereignty principle.
 - `wateringHole/INTER_PRIMAL_INTERACTIONS.md` — IPC coordination
 - `wateringHole/SEMANTIC_METHOD_NAMING_STANDARD.md` — Method naming convention
 - `wateringHole/handoffs/BARRACUDA_V035_TYPED_ERRORS_NURSERY_COVERAGE_HANDOFF_MAR16_2026.md` — Sprint 5 handoff
-- `wateringHole/handoffs/BARRACUDA_V035_CROSS_ECOSYSTEM_ABSORPTION_HANDOFF_MAR16_2026.md` — Sprint 6 handoff
 - `whitePaper/gen3/PRIMAL_CATALOG.md` — Full primal catalogue
 - `whitePaper/gen3/SPRING_CATALOG.md` — Spring catalogue
