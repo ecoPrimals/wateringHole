@@ -1,6 +1,6 @@
 # Provenance Trio End-to-End Validation & Whitepaper Completion
 
-> **Archived**: Metrics below reflect state at time of writing. As of Mar 16 2026: rhizoCrypt 1080+ tests / 92.32% cov, sweetGrass 843+ tests, LoamSpine 770+ tests.
+> **Archived**: Metrics below reflect state at time of writing. As of Mar 17 2026: rhizoCrypt 1102+ tests / 92.32% cov, sweetGrass 843+ tests, LoamSpine 770+ tests.
 
 **Date**: March 13, 2026  
 **Scope**: rhizoCrypt v0.13.0-dev + LoamSpine v0.8.0 + sweetGrass v0.7.3 + biomeOS + ludoSpring  
