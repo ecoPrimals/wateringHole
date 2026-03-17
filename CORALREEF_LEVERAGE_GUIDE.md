@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # coralReef Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 15, 2026
-**Primal**: coralReef (Phase 10, Iteration 47)
+**Date**: March 16, 2026
+**Primal**: coralReef (Phase 10, Iteration 51)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -933,17 +933,527 @@ function: source + target + options → binary + metadata.
 
 ---
 
+## 7. Per-Spring Recipe Cards
+
+These are concrete, novel leverage patterns for each spring. Not just
+"compile my shader" — these are compositions where coralReef's unique
+properties (multi-target, f64 lowering, FMA control, compilation metadata,
+zero-vendor-dependency) enable things the spring couldn't do otherwise.
+
+### 7.1 hotSpring — Lattice QCD Compilation Observatory
+
+**Primals**: hotSpring + barraCuda + coralReef + LoamSpine + petalTongue
+
+hotSpring runs the most computationally demanding shaders in the
+ecosystem: lattice QCD HMC with SU(3) gauge updates, Wilson plaquettes,
+and f64 fermion determinants. coralReef is uniquely positioned to provide
+**compilation telemetry** that feeds back into physics optimization.
+
+```
+1. hotSpring requests compilation of su3_gauge_force_f64 for SM70 + SM86 + RDNA2
+2. coralReef returns:
+   - SM70:  binary (12,272 B), GPR: 42, shared_mem: 0, barriers: 0
+   - SM86:  binary (11,840 B), GPR: 36, shared_mem: 0, barriers: 0
+   - RDNA2: binary (10,496 B), GPR: 38, shared_mem: 0, barriers: 0
+
+3. hotSpring observes: SM86 uses 6 fewer GPRs → higher occupancy → better latency hiding
+4. hotSpring + Squirrel: correlate GPR pressure with physics accuracy per architecture
+5. LoamSpine: commit the (shader, arch, GPR, occupancy, physics_result) tuple permanently
+6. petalTongue: render GPR pressure heatmap across the lattice QCD shader corpus
+```
+
+**The novel insight**: Compilation metadata (GPR count, binary size) is
+itself physics data. A shader that uses fewer GPRs achieves higher
+occupancy, which affects the timescale of Monte Carlo thermalisation.
+coralReef doesn't just compile — it produces metadata that becomes input
+to the science.
+
+**Pattern: Compilation-Guided Workgroup Tuning**
+
+```
+for wg_size in [64, 128, 256, 512]:
+    rewrite wgsl with @workgroup_size(wg_size)
+    compile for each target
+    record (wg_size, gpr_count, binary_size, estimated_occupancy)
+select wg_size that maximises occupancy for the target GPU
+```
+
+hotSpring can use coralReef's multi-target compilation to empirically
+discover the optimal workgroup size per GPU architecture — without ever
+dispatching. The compilation metadata is sufficient.
+
+### 7.2 neuralSpring — Evolutionary Shader Optimisation
+
+**Primals**: neuralSpring + barraCuda + coralReef + Squirrel + rhizoCrypt
+
+neuralSpring already uses evolutionary algorithms (genetic, swarm,
+Wright-Fisher). The novel pattern: **evolve the WGSL shader itself**.
+
+```
+1. neuralSpring generates N shader variants (different unroll factors,
+   memory access patterns, loop structures)
+2. coralReef compiles all N variants for the target architecture
+3. Squirrel evaluates fitness: binary_size * gpr_pressure * estimated_latency
+4. neuralSpring selects, mutates, recombines — next generation
+5. rhizoCrypt tracks the exploration DAG (which mutations improved fitness)
+6. After K generations: winning shader is dispatched via toadStool
+```
+
+coralReef is the **fitness evaluator** — compilation metadata is the
+fitness function. The shader evolves without ever touching the GPU.
+Only the winner dispatches.
+
+**Pattern: Architecture-Specific Shader Breeding**
+
+```
+shader_v1 compiled for SM70 → GPR: 42
+shader_v1 compiled for RDNA2 → GPR: 38
+
+neuralSpring breeds two populations:
+  - SM70-optimised lineage (minimise GPR for Volta's 65536 register file)
+  - RDNA2-optimised lineage (minimise VGPR for RDNA2's 1024-per-CU pool)
+
+Different selection pressures → different optimal shaders per architecture.
+```
+
+This is computational speciation: the same algorithm, compiled for
+different hardware, produces architecture-adapted shader variants through
+evolutionary pressure on compilation metadata.
+
+### 7.3 groundSpring — Cross-Vendor Numerical Certification
+
+**Primals**: groundSpring + coralReef + toadStool + LoamSpine + BearDog
+
+groundSpring validates numerical methods. coralReef enables a pattern
+that no vendor toolchain can: **bit-exact cross-vendor certification**.
+
+```
+1. groundSpring authors a calibration shader (known analytical solution)
+2. coralReef compiles for SM70, SM86, SM89, RDNA2
+3. toadStool dispatches each binary on its target hardware
+4. groundSpring compares all 4 results against the analytical solution
+5. groundSpring computes max ULP (Units in Last Place) difference
+   across all vendors
+6. BearDog signs the certification: "this shader produces results within
+   N ULP of the analytical solution across 4 GPU architectures"
+7. LoamSpine commits the signed certificate permanently
+```
+
+**The novel insight**: Because coralReef compiles to native code (not
+PTX or SPIR-V intermediate), the binary IS the final form. There's no
+vendor JIT between coralReef's output and the hardware. The compilation
+is deterministic: same source + same target + same options = same binary.
+This makes cross-vendor numerical certification possible.
+
+### 7.4 wetSpring — Adaptive Diversity Index Pipelines
+
+**Primals**: wetSpring + barraCuda + coralReef + toadStool
+
+wetSpring computes Shannon entropy, Simpson's index, and Bray-Curtis
+dissimilarity on metagenomic datasets. These are embarrassingly parallel
+but precision-sensitive (log₂ in Shannon, division in Simpson's).
+
+```
+1. wetSpring probes hardware: "what GPUs are available?"
+   toadStool responds: [Titan V (SM70, f64 1/2), RTX 5060 (SM89, f64 1/64)]
+
+2. wetSpring decides:
+   - Shannon entropy (log₂ f64): route to Titan V (native f64 throughput)
+   - Simpson's index (f32 sufficient): route to RTX 5060 (more f32 cores)
+
+3. coralReef compiles:
+   - Shannon shader for SM70 with native f64
+   - Simpson shader for SM89 with f32-only
+
+4. toadStool dispatches each to the optimal GPU
+```
+
+**Pattern: Precision-Aware Multi-GPU Routing**
+
+coralReef's `shader.compile.capabilities` + toadStool's hardware
+discovery together enable precision-aware routing: f64-heavy shaders
+go to the GPU with best f64 throughput, f32 shaders go to the GPU with
+most cores. The routing decision is made at compile time based on
+compilation metadata, before any dispatch occurs.
+
+### 7.5 airSpring — Richards PDE Solver with JIT Parameterisation
+
+**Primals**: airSpring + coralReef
+
+airSpring models soil moisture using the Richards equation. The PDE
+parameters (hydraulic conductivity K(θ), retention curve h(θ)) vary by
+soil type. Instead of compiling a generic solver with runtime parameters,
+airSpring can **JIT-compile a specialised solver**.
+
+```
+1. airSpring generates WGSL with soil-specific constants baked in:
+   const K_sat: f32 = 0.0342;   // sandy loam
+   const alpha: f32 = 0.036;
+   const n: f32 = 1.56;
+
+2. coralReef compiles → the constants are folded into immediate operands
+   by the optimizer. No runtime lookup, no CBuf read — the parameters
+   ARE the machine code.
+
+3. When soil type changes (different field), regenerate WGSL and recompile.
+   coralReef's compilation is fast enough for per-field specialisation.
+```
+
+**The novel insight**: Compilation is cheap. Constants baked into WGSL
+become instruction immediates in the native binary — faster than reading
+from a constant buffer. coralReef's compilation speed (<100ms for typical
+shaders) makes JIT specialisation practical for domain-specific PDE solvers.
+
+### 7.6 healthSpring — Certified PK/PD Model Chains
+
+**Primals**: healthSpring + barraCuda + coralReef + LoamSpine + sweetGrass + BearDog
+
+Pharmacokinetic/pharmacodynamic models need regulatory-grade reproducibility.
+The full chain: model parameters → GPU computation → result must be
+auditable and reproducible.
+
+```
+1. healthSpring parameterises a Hill dose-response model
+2. barraCuda provides hill_dose_response_f64.wgsl
+3. coralReef compiles with fma_policy: "separate" (IEEE 754 deterministic rounding)
+4. Compilation metadata committed to LoamSpine:
+   { wgsl_hash, binary_hash, target, fma_policy, compiler_version }
+5. toadStool dispatches and returns results
+6. sweetGrass creates attribution braid:
+   { model_author: healthSpring, compiler: coralReef, dispatcher: toadStool }
+7. BearDog signs the full chain
+8. LoamSpine commits: signed (model → compilation → dispatch → result) certificate
+
+Months later: regulatory reviewer asks "can you reproduce this result?"
+Answer: recompile same WGSL with same options → same binary_hash.
+Dispatch on any SM86 GPU → same result_hash. Proof is in LoamSpine.
+```
+
+### 7.7 ludoSpring — Procedural GPU Shader Generation
+
+**Primals**: ludoSpring + coralReef + toadStool + petalTongue
+
+ludoSpring generates procedural content for games. The novel pattern:
+**procedurally generate the GPU shader itself**, not just the data.
+
+```
+1. ludoSpring's terrain generator produces a noise function specification:
+   { octaves: 6, lacunarity: 2.1, persistence: 0.45, seed: 42 }
+
+2. ludoSpring generates WGSL with the specific noise function baked in:
+   @compute @workgroup_size(256)
+   fn terrain(@builtin(global_invocation_id) gid: vec3<u32>) {
+     let x = f32(gid.x) * 0.01;
+     var height = 0.0;
+     // 6 octaves, unrolled, constants inlined
+     height += noise(x * 1.0) * 1.0;
+     height += noise(x * 2.1) * 0.45;
+     height += noise(x * 4.41) * 0.2025;
+     // ... (fully unrolled by ludoSpring, not the GPU)
+     output[gid.x] = height;
+   }
+
+3. coralReef compiles → constants folded, loops unrolled at IR level
+4. toadStool dispatches → terrain heights computed on GPU
+5. petalTongue renders the terrain
+
+Player changes biome → new noise parameters → new WGSL → recompile.
+```
+
+**Pattern: Shader-as-Content**
+
+The GPU shader IS the procedural content. Every biome, every weather
+system, every physics variant is a different WGSL source. coralReef's
+sub-100ms compilation makes this practical for interactive content.
+ludoSpring + coralReef turns the compiler into a content pipeline.
+
+---
+
+## 8. Cross-Spring Shader Economy
+
+When multiple springs produce and consume compiled shaders, an economy
+emerges. coralReef enables this by producing content-addressable,
+architecture-specific binaries with rich metadata.
+
+### 8.1 Shared Kernel Library
+
+**Primals**: any spring + barraCuda + coralReef + NestGate
+
+Multiple springs need the same math operations: FFT, matrix multiply,
+reduction, scan. Instead of each spring compiling independently:
+
+```
+1. barraCuda publishes 806 WGSL shaders as a kernel library
+2. First spring to need fft_1d compiles via coralReef:
+   shader.compile.wgsl { source: fft_1d, target: "sm86" }
+   → binary_hash_abc123
+
+3. NestGate stores: content_hash(binary) → binary blob
+4. Second spring needs fft_1d for SM86:
+   - Checks NestGate: content_hash(fft_1d, sm86, allow_fusion) → HIT
+   - Skips compilation, uses cached binary
+   - coralReef's dispatch_precompiled() accepts the cached binary directly
+```
+
+**The novel insight**: Compiled GPU binaries are content-addressable. The
+key is `(wgsl_hash, target_arch, fma_policy, compiler_version)`. Any
+spring that needs the same shader for the same target gets the same
+binary — guaranteed by coralReef's deterministic compilation.
+
+### 8.2 Cross-Spring Pipeline Composition
+
+**Primals**: multiple springs + coralReef + toadStool
+
+Springs can compose GPU pipelines where one spring's output is another's
+input, all through compiled binaries on the GPU:
+
+```
+1. wetSpring: Shannon entropy shader → diversity_index buffer (on GPU)
+2. neuralSpring: ESN reservoir update shader → takes diversity_index as input (on GPU)
+3. groundSpring: calibration shader → validates ESN output (on GPU)
+
+All three shaders compiled by coralReef.
+All three dispatched sequentially by toadStool on the same GPU.
+Data stays on GPU memory — zero CPU roundtrip between stages.
+```
+
+**Pattern: Multi-Spring GPU Pipeline**
+
+```
+toadStool allocates GPU buffers: [diversity_in, esn_state, calibration_out]
+toadStool dispatches:
+  shannon_binary(diversity_in)         → diversity_out (same buffer reused)
+  esn_update_binary(diversity_out)     → esn_state
+  calibration_binary(esn_state)        → calibration_out
+toadStool readback: calibration_out → CPU
+```
+
+Three springs, three shaders, one GPU, zero copies between stages.
+coralReef compiles all three; toadStool orchestrates the pipeline.
+Each spring authored its own shader independently — the composition
+emerges from compatible buffer layouts, not from shared code.
+
+### 8.3 Compilation Diff for Shader Evolution
+
+**Primals**: any spring + coralReef + rhizoCrypt
+
+When a spring updates a shader, coralReef can quantify the impact:
+
+```
+shader_v1: compile → { gpr: 28, binary: 8192 B, barriers: 0 }
+shader_v2: compile → { gpr: 24, binary: 7680 B, barriers: 0 }
+
+Compilation diff:
+  GPR pressure: -4 (better occupancy)
+  Binary size: -512 B (smaller instruction footprint)
+  Estimated throughput: +12% (from occupancy improvement)
+```
+
+rhizoCrypt records the evolution: `shader_v1 → shader_v2 → shader_v3`,
+with compilation diffs at each step. Springs can track whether shader
+optimisations actually improve the compiled output — without dispatching.
+
+---
+
+## 9. Wider Primal Compositions
+
+Compositions involving 4+ primals where coralReef plays a non-obvious role.
+
+### 9.1 The Full Compute Provenance Chain
+
+**Primals**: spring + barraCuda + coralReef + toadStool + rhizoCrypt + LoamSpine + sweetGrass + BearDog
+
+The maximal provenance pattern — every step from hypothesis to result
+is captured, attributed, signed, and committed:
+
+```
+rhizoCrypt:  create session → "optimise yukawa kernel for Titan V"
+barraCuda:   author WGSL shader (versioned)
+coralReef:   compile → binary + metadata (GPR, shared_mem, binary_hash)
+rhizoCrypt:  record compilation variant (target, fma_policy, metrics)
+toadStool:   dispatch on Titan V → result
+rhizoCrypt:  record dispatch (device, timing, power)
+spring:      validate result against analytical solution
+sweetGrass:  attribute { author, compiler, dispatcher, validator }
+BearDog:     sign the attribution chain
+LoamSpine:   commit the full provenance record permanently
+rhizoCrypt:  dehydrate session (ephemeral exploration → permanent record)
+```
+
+Every step has a responsible primal. Every transition is over IPC.
+The full chain is auditable: "who wrote this shader?" → barraCuda.
+"Who compiled it?" → coralReef v0.10.51. "What hardware ran it?" →
+Titan V SM70 via toadStool. "Who validated the result?" → hotSpring.
+"Who signed it?" → BearDog with family key.
+
+### 9.2 Sovereign CI/CD for Shader Libraries
+
+**Primals**: barraCuda + coralReef + NestGate + skunkBat + biomeOS
+
+Continuous compilation and validation of the shader corpus:
+
+```
+biomeOS orchestrates nightly:
+  for each of barraCuda's 806 shaders:
+    for each target in [sm70, sm86, sm89, rdna2]:
+      coralReef compiles → binary
+      NestGate stores binary by content hash
+      skunkBat verifies:
+        - binary_hash matches previous (determinism check)
+        - binary_size within 5% of baseline (regression check)
+        - GPR count within expected range (quality check)
+
+skunkBat alerts on:
+  - binary_hash changed for identical source (compiler non-determinism!)
+  - binary_size increased >10% (possible regression)
+  - new shader fails to compile (compiler gap)
+```
+
+coralReef is the build system for GPU binaries. NestGate is the artifact
+store. skunkBat is the quality gate. biomeOS orchestrates the pipeline.
+No Jenkins. No GitHub Actions. Pure primal composition.
+
+### 9.3 Distributed Cross-Gate Compilation
+
+**Primals**: coralReef + Songbird + biomeOS + toadStool
+
+Multiple machines (gates) in the basement HPC, each with different GPUs:
+
+```
+Northgate: 2× Titan V (SM70) — coralReef instance knows SM70
+Strandgate: RTX 3090 (SM86) — coralReef instance knows SM86
+Eastgate: RX 6950 XT (RDNA2) — coralReef instance knows RDNA2
+
+Spring requests: compile yukawa_force for [sm70, sm86, rdna2]
+
+biomeOS routes via Songbird:
+  sm70 request  → Northgate's coralReef (local GPU for validation)
+  sm86 request  → Strandgate's coralReef
+  rdna2 request → Eastgate's coralReef
+
+Each coralReef instance compiles locally, can optionally validate
+by dispatching on its own GPU via coralDriver.
+```
+
+**The novel insight**: Compilation doesn't need the target GPU present.
+coralReef is a cross-compiler — it can produce SM86 binaries on a
+machine that only has an AMD GPU. But when the target GPU IS present,
+coralReef can compile AND dispatch locally for immediate validation.
+Distributed compilation across gates with heterogeneous GPUs leverages
+both capabilities.
+
+### 9.4 sourDough + coralReef: Fermentation Simulation on GPU
+
+**Primals**: sourDough + barraCuda + coralReef + toadStool
+
+sourDough models microbial fermentation: population dynamics, metabolite
+production, pH kinetics. These are systems of ODEs that parallelise
+well on GPU — each simulation instance (different initial conditions,
+different microbial strains) is independent.
+
+```
+1. sourDough parameterises 1000 fermentation simulations
+   (varying inoculation density, temperature, substrate concentration)
+2. barraCuda provides ode_integrator_f64.wgsl
+3. coralReef compiles with fma_policy: "no_contraction"
+   (fermentation models are stiff — numerical stability matters)
+4. toadStool dispatches 1000 instances on GPU in one batch
+5. sourDough collects results: population curves, metabolite profiles
+6. Squirrel analyses: which fermentation conditions produce optimal
+   lactic acid yield? → feeds back into sourDough's recipe database
+```
+
+### 9.5 skunkBat + coralReef: Compilation Anomaly Detection
+
+**Primals**: skunkBat + coralReef
+
+skunkBat monitors the ecosystem for anomalies. coralReef produces a
+unique signal: compilation patterns.
+
+```
+Normal: 50 compilations/hour, all for SM70/SM86/RDNA2, <100ms each
+Anomaly: 5000 compilations/hour for SM120 (unknown architecture!)
+  → skunkBat alert: "unknown target architecture in compilation requests"
+
+Normal: binary_hash stable for same source+target+options
+Anomaly: binary_hash changed without source change
+  → skunkBat alert: "compiler determinism violation — possible tampering"
+
+Normal: compilation latency <200ms
+Anomaly: compilation latency spikes to 30s
+  → skunkBat alert: "compilation resource exhaustion — possible DoS"
+```
+
+coralReef's compilation is deterministic. Any deviation from deterministic
+behaviour is a signal. skunkBat doesn't need to understand shaders — it
+just monitors the invariants.
+
+### 9.6 NestGate + coralReef: Content-Addressed Binary Store
+
+**Primals**: NestGate + coralReef
+
+NestGate's content-addressed storage is a natural fit for compiled
+binaries:
+
+```
+binary_key = blake3(wgsl_source || target || fma_policy || compiler_version)
+
+NestGate stores:
+  binary_key → {
+    binary: <native GPU bytes>,
+    metadata: { gpr_count, shared_mem, binary_size, workgroup, target },
+    provenance: { wgsl_hash, compiler_version, compilation_timestamp }
+  }
+```
+
+Any primal that knows the key (source + target + options) can retrieve
+the pre-compiled binary from NestGate without invoking coralReef at all.
+This turns NestGate into a global compilation cache for the ecosystem.
+
+---
+
+## 10. Anti-Patterns — What NOT to Do with coralReef
+
+| Anti-Pattern | Why It's Wrong | What to Do Instead |
+|-------------|---------------|-------------------|
+| Compiling at dispatch time in a hot loop | Compilation is ~50-200ms; dispatch is ~1ms | Compile once, cache the binary, dispatch many times |
+| Hardcoding coralReef's socket path | Breaks multi-instance, multi-family deployment | Use capability discovery via biomeOS or `$XDG_RUNTIME_DIR/biomeos/` |
+| Sending binary data over JSON-RPC | JSON base64 overhead is 33% | Use tarpc/bincode for binary-heavy paths between Rust primals |
+| Requesting SM120 compilation (not yet supported) | Will return an error | Query `shader.compile.capabilities` first, intersect with available targets |
+| Skipping FMA policy when reproducibility matters | Default is `allow_fusion` which is non-deterministic across runs | Explicitly set `fma_policy: "separate"` for certified computations |
+| Treating coralReef as a runtime library in non-Rust primals | coralReef is a Rust crate; IPC is the cross-language boundary | Use JSON-RPC 2.0 — any language can call it |
+| Compiling the same shader N times for the same target | Deterministic compiler = same output every time | Cache by `(wgsl_hash, target, fma_policy)` via NestGate or local HashMap |
+
+---
+
 ## References
 
-- `wateringHole/LOAMSPINE_LEVERAGE_GUIDE.md` — Companion guide for LoamSpine
-- `wateringHole/RHIZOCRYPT_LEVERAGE_GUIDE.md` — Companion guide for rhizoCrypt
-- `wateringHole/SWEETGRASS_LEVERAGE_GUIDE.md` — Companion guide for sweetGrass
+### Primal Leverage Guides (Companion Recipes)
+
+- `wateringHole/BARRACUDA_LEVERAGE_GUIDE.md` — barraCuda: math engine, 806 WGSL shaders, precision routing
+- `wateringHole/TOADSTOOL_LEVERAGE_GUIDE.md` — toadStool: hardware discovery, dispatch, VFIO, power management
+- `wateringHole/LOAMSPINE_LEVERAGE_GUIDE.md` — LoamSpine: permanent records, provenance chains
+- `wateringHole/RHIZOCRYPT_LEVERAGE_GUIDE.md` — rhizoCrypt: ephemeral DAG, session memory
+- `wateringHole/SWEETGRASS_LEVERAGE_GUIDE.md` — sweetGrass: attribution braids, provenance metadata
+- `wateringHole/BIOMEOS_LEVERAGE_GUIDE.md` — biomeOS: orchestration, Neural API, capability routing
+- `wateringHole/PETALTONGUE_LEVERAGE_GUIDE.md` — petalTongue: visualisation, grammar of graphics
+- `wateringHole/SQUIRREL_LEVERAGE_GUIDE.md` — Squirrel: AI inference, analysis, suggestions
+- `wateringHole/RHIZOCRYPT_LEVERAGE_GUIDE.md` — rhizoCrypt: ephemeral memory, exploration DAGs
+
+### Ecosystem Standards
+
 - `wateringHole/SOVEREIGN_COMPUTE_EVOLUTION.md` — Sovereign GPU stack plan
 - `wateringHole/PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — Trio contracts
 - `wateringHole/SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Provenance integration
 - `wateringHole/CROSS_SPRING_SHADER_EVOLUTION.md` — Spring shader evolution
 - `wateringHole/SEMANTIC_METHOD_NAMING_STANDARD.md` — IPC naming conventions
-- `whitePaper/gen3/PRIMAL_CATALOG.md` — Full primal catalogue
+- `wateringHole/PRIMAL_IPC_PROTOCOL.md` — Socket paths, discovery, transport
+
+### Primal Specifications
+
+- `whitePaper/gen3/PRIMAL_CATALOG.md` — Full primal catalogue (14 primals)
+- `whitePaper/gen3/SPRING_CATALOG.md` — Spring catalogue (7 springs)
+- `whitePaper/gen3/primals/INTERACTIONS.md` — Interaction matrix and bonding model
 - `whitePaper/gen3/primals/13_coralreef.md` — coralReef primal specification
 - `whitePaper/gen3/primals/14_barracuda.md` — barraCuda primal specification
 - `whitePaper/gen3/primals/05_toadstool.md` — toadStool primal specification
