@@ -1,10 +1,10 @@
 # Handoff: hotSpring Pin — Primal Evolution Sprint
 
-**Date:** March 16, 2026
+**Date:** March 16, 2026 (updated March 13, 2026)
 **From:** hotSpring (experiments 001-069)
 **To:** coralReef, toadStool, barraCuda
 **License:** AGPL-3.0-only
-**Covers:** hotSpring v0.6.31, Exp 060-069, coral-glowplug v0.1.0
+**Covers:** hotSpring v0.6.32, Exp 060-069, coral-glowplug v0.1.0
 
 ---
 
@@ -24,102 +24,86 @@ sovereign HBM2 training, AMD MI50 bring-up).
 - Full reproducibility checklist for adding new GPUs
 
 **What hotSpring needs back:**
-- Hardened coral-glowplug with JSON-RPC 2.0, trait-based personalities, SCM_RIGHTS
-- toadStool GlowPlug socket client
-- AMD Vega metal implementation (MI50 readiness)
-- GP_PUT DMA read fix (PFIFO last mile)
+- ~~Hardened coral-glowplug with JSON-RPC 2.0~~ **DELIVERED** (coralReef Iter 51-52)
+- ~~Trait-based personalities~~ **DELIVERED** (`GpuPersonality` trait, Iter 52)
+- AMD Vega metal implementation — **IN PROGRESS** (MI50 registers defined, Iter 52)
+- SCM_RIGHTS fd passing — pending
+- toadStool GlowPlug socket client — **UNBLOCKED** by JSON-RPC delivery, pending impl
+- GP_PUT DMA read fix (PFIFO last mile) — pending
 
 ---
 
 ## Part 1: What Each Primal Should Do
 
-### coralReef — Primary Consumer (Est. 3-4 Weeks of Backlog)
+### coralReef — Primary Consumer
 
-coral-glowplug lives in `coralReef/crates/coral-glowplug/`. It was prototyped
-rapidly during hotSpring's experiment loop. It works but needs hardening.
+coral-glowplug lives in `coralReef/crates/coral-glowplug/`.
 
-**Priority 1 — Socket Protocol (Days)**
+**DELIVERED (Iter 51-52):**
 
-Current: ad-hoc JSON lines over Unix socket.
-Target: JSON-RPC 2.0 (ecosystem standard), matching toadStool and barraCuda IPC.
+- ~~Priority 1 — Socket Protocol~~ **DONE**: JSON-RPC 2.0 with `device.list`,
+  `device.swap`, `device.health`, `health.check`, `daemon.status`, `daemon.shutdown`
+- ~~Priority 3 — Personality Trait System~~ **DONE**: `GpuPersonality` trait,
+  `GpuMetal` for vendor-agnostic init, `PersonalityRegistry`-style dispatch
 
-Methods to implement:
-- `glowplug.device.list` → `[{bdf, name, personality, vram_alive, power, chip}]`
-- `glowplug.device.health` → `{vram, power, domains, pci_link_width}`
-- `glowplug.device.swap` → `{bdf, target_personality}` → `{ok, snapshot_id}`
-- `glowplug.device.resurrect` → `{bdf}` → `{ok, vram_alive}`
-- `glowplug.device.status` → full daemon status
-- `glowplug.shutdown` → graceful stop
+**IN PROGRESS:**
 
-**Priority 2 — SCM_RIGHTS fd Passing (Days)**
+**Priority 1 (was P4) — AMD Vega Metal (`amd_metal.rs`)**
+
+MI50/GFX906 register stubs defined in Iter 52. Still needs full implementation:
+- `power_domains()` → SMC, GRBM, SRBM registers
+- `memory_controllers()` → UMC (HBM2 controller), GC L2 cache
+- `compute_engines()` → GFX, SDMA, VCN
+- `mmio_register_domains()` → BAR0 register map
+- `power_on_sequence()` → register writes for D0 initialization
+
+Sources: `drivers/gpu/drm/amd/amdgpu/` (gfx_v9_0.c, soc15.c, umc_v6_1.c)
+
+**REMAINING:**
+
+**Priority 2 (was P2) — SCM_RIGHTS fd Passing (Days)**
 
 toadStool needs VFIO container file descriptors for sovereign dispatch.
 After `device.swap(bdf, "vfio")`, the socket should pass the VFIO group fd
 via `SCM_RIGHTS` ancillary message. Standard pattern: `sendmsg` with `cmsg`.
 
-**Priority 3 — Personality Trait System (1 Week)**
-
-Current: `enum Personality { Vfio, Nouveau, Amdgpu, NvidiaProprietary, Unbound }`.
-Target: trait-based so new vendors don't require enum modification.
-
-```rust
-pub trait GpuPersonality: Send + Sync {
-    fn name(&self) -> &str;
-    fn bind(&self, bdf: &str) -> Result<()>;
-    fn unbind(&self, bdf: &str) -> Result<()>;
-    fn capabilities(&self) -> DeviceCapabilities;
-    fn health_probe(&self, bar0: &MappedBar) -> DeviceHealth;
-}
-```
-
-Register `VfioPersonality`, `NouveauPersonality`, `AmdgpuPersonality` etc.
-via a `PersonalityRegistry`. New vendors add a struct, not modify an enum.
-
-**Priority 4 — AMD Vega Metal (`amd_metal.rs`) (2-3 Weeks)**
-
-Current: 6 TODO stubs. Target: full register map for MI50/GFX906.
-
-Sources:
-- `drivers/gpu/drm/amd/amdgpu/` in Linux kernel (fully open)
-- `gfx_v9_0.c` for engine topology
-- `soc15.c` for register base addresses
-- `umc_v6_1.c` for HBM2 controller registers
-
-What to implement:
-- `power_domains()` → SMC, GRBM, SRBM registers
-- `memory_controllers()` → UMC (HBM2 controller), GC L2 cache
-- `compute_engines()` → GFX, SDMA, VCN
-- `mmio_register_domains()` → BAR0 register map
-- `bar0_domain_map()` → named regions for health probing
-- `power_on_sequence()` → register writes for D0 initialization
-
-**Priority 5 — GP_PUT DMA Read (Days)**
+**Priority 3 (was P5) — GP_PUT DMA Read (Days)**
 
 Exp 058 handoff documents the fix: USERD_TARGET in the runlist entry must
 point to system memory, not VRAM. The register values are known. This is
 the last step before PFIFO channel dispatch works.
 
-**Priority 6 — Privilege Model (Days)**
-
-Replace `sudo tee` fallback in `sysfs_write()` with proper capabilities:
-- Run daemon with `CAP_SYS_ADMIN` (for VFIO)
-- Use polkit for user-initiated swaps via socket
-- Remove all `Command::new("sudo")` calls
-
-**Priority 7 — DRM Consumer Fence (Hours)**
+**Priority 4 (was P7) — DRM Consumer Fence (Hours)**
 
 In `resurrect_hbm2()`, before binding nouveau:
 1. Check `lsof /dev/dri/renderD*` for open consumers
 2. If any found on the target BDF, abort resurrection with clear error
 3. Only proceed when confirmed safe
 
+**Priority 5 (was P6) — Privilege Model (Days)**
+
+Replace `sudo tee` fallback in `sysfs_write()` with proper capabilities:
+- Run daemon with `CAP_SYS_ADMIN` (for VFIO)
+- Use polkit for user-initiated swaps via socket
+- Remove all `Command::new("sudo")` calls
+
 ---
 
-### toadStool — Integration Consumer (Est. 1-2 Weeks)
+### toadStool — Integration Consumer (UNBLOCKED)
 
-**1. GlowPlug Socket Client Crate**
+coralReef delivered JSON-RPC 2.0 in Iter 51-52. toadStool can now wire up.
+
+**1. GlowPlug Socket Client Crate** — UNBLOCKED
 
 New crate: `toadstool-glowplug` or module in `toadstool-runtime-gpu`.
+
+The JSON-RPC methods are now live:
+- `device.list` → `[{bdf, name, personality, vram_alive, power, chip}]`
+- `device.health` → `{vram, power, domains, pci_link_width}`
+- `device.swap` → `{bdf, target_personality}` → `{ok, snapshot_id}`
+- `health.check` → daemon health
+- `daemon.status` → full daemon status
+- `daemon.shutdown` → graceful stop
 
 ```rust
 pub struct GlowPlugClient {
