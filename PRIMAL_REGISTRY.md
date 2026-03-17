@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 17, 2026
+**Last Updated**: March 15, 2026
 
 ---
 
@@ -280,7 +280,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
 **Version**: 0.13.0-dev  
-**Status**: Production Ready (1102+ tests, 92.32% line coverage, clippy pedantic+nursery+cargo clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (`yanked = "deny"`), `--fail-under-lines 90` CI gate, `niche.rs` self-knowledge with domain introspection, `capability_registry.toml` + deploy graph, CircuitBreaker + RetryPolicy resilience, NDJSON streaming, DispatchOutcome protocol/application error separation, `health.liveness`/`health.readiness` probes, 4-format capability parsing, ValidationSink trait, ChaosEngine framework, 11 proptest property tests)
+**Status**: Production Ready (1188+ tests, 91.47% line coverage, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced, `--fail-under-lines 90` CI gate, `niche.rs` self-knowledge, `capability_registry.toml` + deploy graph with `fallback = "skip"`)
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
@@ -295,7 +295,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 | **Slice Semantics** | 6 query modes (Copy, Loan, Consignment, Escrow, Mirror, Provenance) |
 | **Attribution** | Agent DID identity, per-agent event counting, role assignment |
 | **Niche** | `niche.rs` self-knowledge module with `PRIMAL_ID`, `CAPABILITIES`, `CONSUMED_CAPABILITIES`, `COST_ESTIMATES`, `operation_dependencies()` |
-| **IPC** | JSON-RPC 2.0 (required) + tarpc 0.37/bincode (optional), 23 methods across 7 domains (`dag.*`, `health.*`, `capability.*`), structured `IpcErrorPhase`, `DispatchOutcome`, `extract_rpc_error()`, NDJSON streaming, CircuitBreaker + RetryPolicy resilience |
+| **IPC** | JSON-RPC 2.0 (required) + tarpc/bincode (optional), 23 methods across 7 domains (`dag.*`, `health.*`, `capability.*`), enhanced `capability.list` with per-method cost/deps |
 
 **Participates In**: RootPulse (ephemeral workspace layer), Memory & Attribution stack
 
@@ -429,11 +429,11 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
 | hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
 | groundSpring | V103 |
-| neuralSpring | V113/S162 (cross-ecosystem absorption: 4-format parse_capabilities, discover_primal, DispatchOutcome, resilient_call, safe_cast, zero eprintln workspace-wide, 1133+70+73 tests) |
+| neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 52 (ecosystem absorption, 1992 tests, zero warnings, all files <1000 LOC) |
+| coralReef | Phase 10 Iteration 54 (2364 tests, 59.92% line coverage, zero warnings, zero doc warnings, all files <1000 LOC) |
 | primalSpring | v0.1.0 Phase 0 (28 experiments scaffolded, 6 tracks, workspace compiles) |
 
 ### airSpring - Ecological & Agricultural Sciences
