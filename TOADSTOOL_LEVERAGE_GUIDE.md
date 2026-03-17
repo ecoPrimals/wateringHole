@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # toadStool Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 15, 2026
-**Primal**: toadStool S155b
+**Date**: March 16, 2026
+**Primal**: toadStool S157 (Rust edition 2024, MSRV 1.85, pedantic+nursery)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -733,7 +733,404 @@ and industrial control.
 
 ---
 
-## 7. What toadStool Does NOT Do
+## 7. Novel Spring Recipes — Concrete Workflows
+
+These recipes show how springs can use toadStool in ways that go beyond
+"submit workload, get result." Each recipe produces emergent behavior that
+none of the participants could achieve alone.
+
+### 7.1 hotSpring: GPU-Resident Lattice QCD with Live Register Tuning
+
+**Primals**: toadStool + barraCuda + coralReef
+**Spring**: hotSpring (SU(3) HMC, 32⁴ lattice)
+
+```
+1. hotSpring requests β-scan (12 temperatures, 50 HMC trajectories each)
+2. toadStool: compute.hardware.auto_init → apply best known recipe for this GPU
+3. coralReef: compile SU(3) plaquette + gauge force shaders → VFIO native binary
+4. barraCuda: begin HMC trajectory (GPU-resident CG solver, no CPU readback)
+5. toadStool: compute.hardware.observe → snapshot register state every 100 steps
+6. toadStool: compute.hardware.distill → identify FMA bottleneck → increase SM clock
+7. toadStool: compute.hardware.apply → BAR0 write mid-trajectory (no restart needed)
+8. Next trajectory runs 15% faster. toadStool stores recipe indexed by workload hash.
+9. Future β-scans on ANY machine with same GPU model inherit the tuned recipe.
+```
+
+**Why it matters**: The GPU literally learns how to run lattice QCD better
+over time. The recipe propagates through nestGate or songBird federation.
+A new postdoc's laptop with the same GPU model starts fast from day one.
+
+### 7.2 airSpring: Field Sensor → GPU → Irrigation in Real-Time
+
+**Primals**: toadStool + barraCuda + songBird + squirrel
+**Spring**: airSpring (FAO-56 ET₀, soil moisture, scheduling)
+
+```
+1. Field sensor → toadStool serial transport (USB → /dev/ttyUSB0)
+2. toadStool: transport.discover → find serial device + local GPU
+3. airSpring parses raw sensor frames (temp, humidity, wind, solar radiation)
+4. toadStool: compute.submit → barraCuda batches 100 stations of ET₀ on GPU
+5. squirrel: interpret results → "Field 7 needs 12mm irrigation by 0600"
+6. songBird: route recommendation to field controller via mDNS-discovered gate
+7. toadStool on field controller: serial transport → send valve command
+```
+
+**Why it matters**: The entire pipeline — from soil sensor to valve actuator —
+flows through sovereign infrastructure. No cloud. No vendor API. No internet
+required. The GPU batch processes 100 stations in under 50ms; serial latency
+is the bottleneck, not compute.
+
+### 7.3 wetSpring: Encrypted Metagenomic Assembly on Heterogeneous GPUs
+
+**Primals**: toadStool + barraCuda + bearDog + nestGate + sweetGrass
+**Spring**: wetSpring (Smith-Waterman, 16S rRNA, diversity indices)
+
+```
+1. wetSpring receives 16S sequences from hospital sequencer
+2. bearDog: encrypt at ingest (ChaCha20-Poly1305), provision session key
+3. toadStool: gpu.info → [RTX 3090 (24GB VRAM), RX 6950 XT (16GB)]
+4. toadStool routes Smith-Waterman alignment to RTX 3090 (needs f64 + large VRAM)
+5. toadStool routes Shannon/Simpson diversity to RX 6950 XT (memory-bandwidth-bound)
+6. Both GPUs VFIO-isolated — IOMMU prevents any memory cross-contamination
+7. sweetGrass: record provenance braid (input hash, GPU models, driver versions,
+   VFIO group IDs, IOMMU isolation proof)
+8. nestGate: store result content-addressed (input hash + hardware fingerprint)
+9. loamSpine: commit provenance to permanent ledger
+```
+
+**Why it matters**: Heterogeneous GPU routing is invisible to the spring.
+wetSpring asked for two computations; toadStool decided which GPU gets which.
+The provenance braid includes hardware attestation — a regulatory auditor can
+verify the computation ran on IOMMU-isolated hardware with specific drivers.
+
+### 7.4 groundSpring: Topology-Aware Multi-GPU Lanczos Eigensolve
+
+**Primals**: toadStool + barraCuda + coralReef
+**Spring**: groundSpring (Lanczos, SpMV, spectral analysis)
+
+```
+1. groundSpring requests eigenvalue decomposition of 100K × 100K sparse matrix
+2. toadStool: query PCIe topology → 4× GPUs, 2 pairs on shared PCIe switches
+3. toadStool partitions matrix: pairs 0,1 share Switch A → adjacent rows
+                                pairs 2,3 share Switch B → adjacent rows
+4. Halo exchange (shared rows) between GPUs on same switch → PCIe P2P, no CPU
+5. Cross-switch communication (rare) → CPU bounce, minimal traffic
+6. coralReef: compile SpMV shader per-GPU (SASS for NVIDIA, RDNA2 for AMD)
+7. barraCuda: parallel Lanczos iterations across all 4 GPUs
+8. toadStool: monitor PCIe contention → adjust partition if bandwidth asymmetric
+```
+
+**Why it matters**: Without topology awareness, GPU 0 might exchange halos
+with GPU 3 across the root bridge — 4× slower than same-switch P2P. toadStool's
+topology graph makes the spring's Lanczos iteration 2-4× faster on multi-GPU
+setups without the spring knowing anything about PCIe switches.
+
+### 7.5 neuralSpring: VRAM-Aware Federated Model Sharding
+
+**Primals**: toadStool + squirrel + songBird + barraCuda
+**Spring**: neuralSpring (distributed training, inference)
+
+```
+1. neuralSpring wants to serve a 13B-parameter model (needs ~26GB VRAM)
+2. songBird: discover all toadStool instances in federation
+3. toadStool@machine-A: gpu.info → RTX 3090 (24GB free) — not enough alone
+4. toadStool@machine-B: gpu.info → RTX 4070 (12GB free) — not enough alone
+5. squirrel: shard model — layers 0-20 on machine-A, layers 21-40 on machine-B
+   (24GB + 12GB = 36GB total, 26GB needed → fits with headroom)
+6. toadStool@each: VFIO-isolate GPUs for exclusive inference
+7. Inference request → machine-A processes layers 0-20 → intermediate activations
+   → songBird encrypted transport → machine-B processes layers 21-40 → result
+8. toadStool monitors VRAM pressure on both machines; if A loads another model,
+   squirrel rebalances the shard split dynamically
+```
+
+**Why it matters**: No single machine has enough VRAM for the model. But the
+federation does. toadStool provides per-machine hardware truth; squirrel makes
+the sharding decision; songBird moves tensors. The model "lives" across machines.
+
+### 7.6 healthSpring: Clinical Trial GPU Enclave with Audit Trail
+
+**Primals**: toadStool + bearDog + sweetGrass + loamSpine + rhizoCrypt
+**Spring**: healthSpring (population PK, NLME, dose-response)
+
+```
+1. healthSpring receives 500-patient Phase III PK dataset (HIPAA-regulated)
+2. bearDog: derive session key → encrypt dataset → sign submission
+3. toadStool: bind GPU to VFIO (IOMMU group 14, address 0000:06:00.0)
+4. toadStool: compute.hardware.vfio_devices confirms isolation (no other processes)
+5. barraCuda: run NLME population PK on VFIO-isolated GPU
+6. sweetGrass: record provenance braid:
+   - Agent: "healthSpring clinical trial CT-2026-0042"
+   - Entity: input hash, GPU model, VFIO group, IOMMU status
+   - Activity: "population_pk_nlme", duration, convergence metrics
+7. rhizoCrypt: hold intermediate results in ephemeral DAG (auto-expire 72h)
+8. loamSpine: commit final result + provenance to permanent ledger
+9. After 72h, rhizoCrypt auto-dehydrates — intermediate patient data vanishes
+10. Permanent record contains: result, provenance, hardware attestation, audit trail
+    Intermediate patient data: gone. Unrecoverable.
+```
+
+**Why it matters**: The combination of VFIO isolation (toadStool), encryption
+(bearDog), ephemeral storage (rhizoCrypt), provenance (sweetGrass), and permanent
+ledger (loamSpine) creates a HIPAA/GDPR-compliant computation enclave. An auditor
+can verify the hardware was isolated and the intermediate data is provably gone.
+
+### 7.7 Cross-Spring: The Universal Experiment Pattern
+
+Any spring can run a GPU experiment with full provenance, caching, and
+reproducibility by composing exactly 5 primals:
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Any Spring                           │
+│  "I have data X and want to compute f(X) on GPU"       │
+└────────────────────┬────────────────────────────────────┘
+                     │
+    ┌────────────────▼───────────────┐
+    │  nestGate: check cache         │
+    │  key = hash(X) + hw_fingerprint│──── cache hit → return cached result
+    └────────────────┬───────────────┘
+                     │ cache miss
+    ┌────────────────▼───────────────┐
+    │  toadStool: discover hardware  │
+    │  select best GPU for workload  │
+    │  VFIO-isolate if needed        │
+    └────────────────┬───────────────┘
+                     │
+    ┌────────────────▼───────────────┐
+    │  barraCuda + coralReef:        │
+    │  compile shader → dispatch     │
+    │  → execute → return result     │
+    └────────────────┬───────────────┘
+                     │
+    ┌────────────────▼───────────────┐
+    │  sweetGrass: record provenance │
+    │  (input, hardware, algorithm,  │
+    │   duration, output hash)       │
+    └────────────────┬───────────────┘
+                     │
+    ┌────────────────▼───────────────┐
+    │  nestGate: cache result        │
+    │  key = hash(X) + hw_fingerprint│
+    └────────────────────────────────┘
+```
+
+**Every spring gets this for free.** The spring only submits the workload.
+toadStool + nestGate + sweetGrass + barraCuda + coralReef handle the rest.
+Second run of the same experiment with the same data on the same hardware:
+instant return from cache. Different hardware? Re-computes (different GPU
+may produce different floating-point results) and caches separately.
+
+---
+
+## 8. Creative Cross-Primal Patterns
+
+These patterns show toadStool participating in compositions that might not
+be obvious from its "hardware infrastructure" description.
+
+### 8.1 toadStool as Provenance Witness
+
+toadStool's hardware fingerprinting makes it a **provenance witness** — it
+can attest *where* a computation ran with hardware-level specificity:
+
+```json
+{
+  "witness": "toadstool",
+  "attestation": {
+    "gpu_model": "NVIDIA RTX 3090",
+    "gpu_driver": "NVK 535.129.03",
+    "pcie_slot": "0000:06:00.0",
+    "vfio_isolated": true,
+    "iommu_group": 14,
+    "vram_total_bytes": 25769803776,
+    "f64_native": true,
+    "thermal_at_dispatch": "42°C",
+    "power_at_dispatch": "68W"
+  }
+}
+```
+
+sweetGrass can embed this attestation in any provenance braid. For regulated
+science, this means the computation result is linked to the exact silicon,
+bus slot, and driver version that produced it. If a GPU firmware bug is later
+discovered, every result computed on that firmware version can be identified
+and flagged for re-validation.
+
+### 8.2 toadStool as Power Budget Coordinator
+
+In battery-constrained environments (field stations, clinical devices,
+edge deployments), toadStool's power states compose with biomeOS scheduling:
+
+```
+biomeOS: "Battery at 23%. Restrict to essential compute."
+toadStool: GPU → Eco (reduced clocks)
+toadStool: NPU → Active (2.8μs inference, 0.3W — negligible power)
+squirrel: route inference to NPU instead of GPU (toadStool reported GPU is Eco)
+airSpring: accept NPU-quality prediction (good enough for irrigation timing)
+
+biomeOS: "Plugged in. Full compute."
+toadStool: GPU → Sovereign (full clocks)
+squirrel: route inference back to GPU (toadStool reported GPU is Sovereign)
+airSpring: switch to GPU-quality prediction (higher precision)
+```
+
+The spring never checks battery level. biomeOS sets policy, toadStool
+enforces it at the hardware level, and squirrel adapts routing.
+
+### 8.3 toadStool as Hardware Knowledge Broker
+
+toadStool's hw-learn recipes are shareable knowledge artifacts:
+
+```
+Machine A (Titan V, QCD workload):
+  1. toadStool observes → distills → optimal QCD recipe for Titan V
+  2. nestGate: store recipe (key = "titanv_sm70_qcd_v3")
+  3. songBird: announce recipe availability to federation
+
+Machine B (Titan V, brand new):
+  1. toadStool: compute.hardware.auto_init → queries nestGate for "titanv_sm70"
+  2. Found! Apply "titanv_sm70_qcd_v3" without any local profiling
+  3. Machine B is optimized from its first workload
+
+Machine C (RTX 3090, different architecture):
+  1. toadStool: queries nestGate for "rtx3090_sm86" → no QCD recipe yet
+  2. Falls back to generic sm86 recipe → observes QCD → distills sm86 QCD recipe
+  3. nestGate: store "rtx3090_sm86_qcd_v1" → federation gets another recipe
+```
+
+Over time, the federation accumulates a growing library of workload-specific
+GPU tuning profiles. New hardware joining the federation bootstraps instantly
+for known workload classes. This is collective hardware intelligence — each
+GPU's lessons benefit every other GPU of the same model.
+
+### 8.4 toadStool as Transport Bridge (Camera → GPU → Display → Serial)
+
+toadStool's three hardware transports compose into real-time pipelines:
+
+```
+Scenario: Agricultural drone with camera, GPU, display, and actuator
+
+Camera (V4L2) → toadStool capture transport
+  → TransportRouter → GPU memory (zero-copy DMA)
+    → barraCuda: crop disease detection shader
+  → TransportRouter → Display (DRM) — pilot sees annotated camera feed
+  → TransportRouter → Serial (USB) — actuator adjusts spray nozzle
+
+All three outputs from a single camera frame:
+  1. GPU processes the frame (inference)
+  2. Display shows the annotated frame (visualization)
+  3. Serial sends the control signal (actuation)
+
+Latency budget: <16ms (60fps camera → display roundtrip)
+```
+
+No other primal touches hardware I/O. toadStool is the only primal that
+reads cameras, writes displays, and talks to serial devices. This makes it
+the natural bridge between physical world and compute.
+
+### 8.5 toadStool + sourDough: Hardware-Aware Primal Scaffolding
+
+sourDough scaffolds new primals. toadStool can inform the scaffold:
+
+```
+sourDough: "Scaffolding new spring 'forestSpring' (ecology domain)"
+sourDough queries toadStool: compute.discover_capabilities
+toadStool responds: {
+  "gpu": true, "gpu_f64": true, "npu": true, "vfio": true,
+  "serial_devices": 2, "capture_devices": 1,
+  "optimal_tile_size_bytes": 11534336
+}
+sourDough generates scaffold with:
+  - GPU dispatch boilerplate pre-configured for actual hardware
+  - NPU inference path included (NPU detected)
+  - Serial sensor input template (2 serial devices found)
+  - Camera input template (1 capture device found)
+  - Optimal buffer sizes baked into generated config
+```
+
+The scaffolded spring starts life aware of its actual hardware environment.
+No trial-and-error discovery needed.
+
+### 8.6 Multi-Spring Concurrent Dispatch
+
+toadStool can serve multiple springs simultaneously on different substrates:
+
+```
+Concurrent workloads on a machine with GPU + NPU + CPU:
+
+hotSpring  → toadStool → GPU 0 (VFIO)  → lattice QCD HMC trajectory
+airSpring  → toadStool → NPU (Akida)   → crop disease classifier (2.8μs/step)
+wetSpring  → toadStool → GPU 1 (wgpu)  → Smith-Waterman batch alignment
+squirrel   → toadStool → CPU (Ollama)  → 3B LLM inference (Ollama integration)
+
+All four running in parallel. toadStool manages:
+  - VFIO isolation for GPU 0 (hotSpring gets exclusive access)
+  - NPU routing for airSpring (zero GPU contention)
+  - wgpu dispatch for GPU 1 (wetSpring shares with desktop compositor)
+  - Ollama lifecycle for CPU inference (squirrel gets LLM without GPU)
+  - Power monitoring across all substrates
+  - Thermal throttling if any substrate overheats
+```
+
+**Why it matters**: The springs don't coordinate with each other. They each
+ask toadStool for compute. toadStool routes to the right substrate and
+prevents resource conflicts. This is the fundamental value of a hardware
+primal — it is the single arbiter of who gets what silicon, when.
+
+---
+
+## 9. How Springs Should Consume toadStool
+
+### Minimal Integration (any spring, no other primals)
+
+```rust
+// 1. Discover toadStool via capability
+let socket = get_socket_path_for_capability("compute");
+
+// 2. Check what hardware exists
+let hw = jsonrpc_call(socket, "gpu.info", {});
+
+// 3. Submit workload
+let job_id = jsonrpc_call(socket, "compute.submit", {
+    "shader": "my_kernel.wgsl",
+    "inputs": { "data": base64_encoded_bytes },
+    "workgroup_size": hw.recommended_workgroup_size
+});
+
+// 4. Poll for result
+let result = jsonrpc_call(socket, "compute.result", { "id": job_id });
+```
+
+That's it. Four calls. The spring never imports a GPU library.
+
+### Full Integration (with Compute Trio + Provenance)
+
+```rust
+// Capability-based discovery — works even if primals move or scale
+let compute = discover_capability("compute");      // toadStool
+let shader  = discover_capability("shader");       // coralReef (optional)
+let crypto  = discover_capability("crypto");       // bearDog (optional)
+let storage = discover_capability("storage");      // nestGate (optional)
+let prov    = discover_capability("provenance");   // sweetGrass (optional)
+
+// Each primal is optional. toadStool works standalone.
+// coralReef absent? toadStool falls back to naga.
+// nestGate absent? No caching, still computes.
+// sweetGrass absent? No provenance, still computes.
+```
+
+### What NOT to Do
+
+- **Don't hardcode socket paths** — use `get_socket_path_for_capability()`
+- **Don't import wgpu/vulkan** — toadStool owns the GPU boundary
+- **Don't manage GPU power** — toadStool manages power states
+- **Don't assume GPU exists** — toadStool reports CPU fallback when no GPU
+- **Don't assume VRAM size** — query `gpu.info` at runtime
+- **Don't coordinate GPU access between springs** — toadStool arbitrates
+
+---
+
+## 10. What toadStool Does NOT Do
 
 toadStool is deliberately bounded. It does not:
 
