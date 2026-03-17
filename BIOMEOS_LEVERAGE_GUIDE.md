@@ -2,7 +2,7 @@
 # biomeOS Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
 **Date**: March 16, 2026
-**Primal**: biomeOS v2.46
+**Primal**: biomeOS v2.47
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -996,6 +996,790 @@ fundamental — the conductor does not play the instruments.
 
 ---
 
+## 7. Per-Spring Deep Leverage Recipes
+
+Each recipe below is written from the spring's perspective. The spring
+never imports another primal. Every interaction goes through biomeOS's
+`capability.call` or a deploy graph. biomeOS is invisible infrastructure
+— the spring sees capabilities, not primals.
+
+### 7.1 wetSpring — Sovereign Metagenomics Laboratory
+
+**The problem wetSpring solves alone**: 16S rRNA taxonomy, LC-MS feature
+extraction, PFAS screening — the complete bioinformatics pipeline in
+sovereign Rust with 1 runtime dependency.
+
+**What biomeOS adds**: wetSpring processes samples. biomeOS turns those
+samples into reproducible, attributed, federated science.
+
+#### Solo: Content-Addressed Sample Archive
+
+wetSpring computes BLAKE3 hashes of every intermediate result (filtered
+reads, denoised sequences, OTU tables, diversity indices). biomeOS
+routes `storage.put` to NestGate with the hash as key. Identical samples
+across different runs deduplicate automatically. wetSpring never calls
+NestGate — it calls `storage.put` and biomeOS handles the rest.
+
+```
+wetSpring: dada2_denoise(sample_A) → hash: 0xabc...
+  → capability.call("storage.put", { key: "0xabc...", data })
+  → biomeOS routes to NestGate
+  (later, same sample reprocessed)
+  → capability.call("storage.get", { key: "0xabc..." })
+  → NestGate returns cached result — no recomputation
+```
+
+#### Trio: The Auditable Taxonomy Pipeline
+
+The full 16S pipeline as a provenance-backed graph:
+
+```toml
+[graph]
+name = "wetspring_16s_auditable"
+pattern = "Pipeline"
+
+[[graph.steps]]
+name = "quality_filter"
+capability = "ecology"
+operation = "fastq_quality"
+
+[[graph.steps]]
+name = "denoise"
+capability = "ecology"
+operation = "dada2_denoise"
+depends_on = ["quality_filter"]
+
+[[graph.steps]]
+name = "classify"
+capability = "ecology"
+operation = "taxonomy_classify"
+depends_on = ["denoise"]
+
+[[graph.steps]]
+name = "diversity"
+capability = "ecology"
+operation = "community_diversity"
+depends_on = ["classify"]
+
+[[graph.steps]]
+name = "commit"
+capability = "commit"
+operation = "session"
+depends_on = ["diversity"]
+```
+
+Every step's input/output hash is a vertex in a rhizoCrypt DAG.
+sweetGrass records which researcher submitted the sample, which
+classifier version was used, and which reference database resolved the
+taxonomy. The commit is signed by BearDog and stored permanently in
+LoamSpine. A reviewer can verify the entire chain from raw FASTQ to
+final OTU table — the lab notebook that cannot be retroactively edited.
+
+#### Ecosystem Combo: Cross-Spring Microbiome Intelligence
+
+wetSpring produces diversity indices. healthSpring models gut
+colonization resistance. neuralSpring trains a surrogate that predicts
+dysbiosis from 16S profiles. biomeOS orchestrates the cross-spring
+pipeline without any spring importing any other:
+
+```
+graph.execute("microbiome_intelligence"):
+  1. wetSpring: 16S → diversity indices
+  2. healthSpring: Anderson gut lattice → colonization score
+  3. neuralSpring: surrogate(diversity + colonization) → dysbiosis risk
+  4. petalTongue: render dashboard
+  5. sweetGrass: attribute all contributors
+```
+
+wetSpring provided the biology. healthSpring provided the clinical
+model. neuralSpring provided the ML. None of them know the others exist.
+biomeOS composed them into a clinical decision pipeline.
+
+---
+
+### 7.2 airSpring — Precision Agriculture Decision Engine
+
+**The problem airSpring solves alone**: 8 ET₀ methods, soil moisture,
+Richards PDE, coupled hydrology, yield response — sovereign precision
+agriculture.
+
+**What biomeOS adds**: airSpring computes ET₀. biomeOS turns that
+computation into an autonomous irrigation system that adapts to what's
+available on the network.
+
+#### Solo: Adaptive Method Selection
+
+airSpring implements 8 ET₀ methods (Penman-Monteith, Hargreaves,
+Priestley-Taylor, Turc, Makkink, etc.). Each requires different sensor
+inputs. biomeOS enables runtime method selection based on available data:
+
+```
+capability.discover { domain: "measurement" }
+  → groundSpring available with: temperature, humidity, wind, radiation
+  → biomeOS: full sensor suite → select Penman-Monteith (most accurate)
+
+(next day: radiation sensor offline)
+  → groundSpring available with: temperature, humidity, wind
+  → biomeOS: partial suite → fall back to Hargreaves (temperature only)
+```
+
+The decision graph adapts without code changes. biomeOS discovers what
+sensors are available and selects the best method that the data supports.
+
+#### Trio: Provenance-Backed Irrigation Decisions
+
+Every irrigation decision becomes a signed, attributed record:
+
+```
+graph.execute("irrigation_decision_auditable"):
+  1. groundSpring: read soil moisture (uncertainty: ±0.004 m³/m³)
+  2. airSpring: compute ET₀ (method: Penman-Monteith, inputs from step 1)
+  3. airSpring: water balance → irrigation recommendation
+  4. dag.dehydrate → rhizoCrypt collapses decision chain
+  5. crypto.sign → BearDog signs the recommendation
+  6. commit.session → LoamSpine commits permanently
+  7. provenance.create_braid → sweetGrass records:
+     - groundSpring sensor serial number + calibration date
+     - airSpring method + version + parameter source
+     - weather data provenance (Open-Meteo ERA5 timestamp)
+```
+
+A water district auditor can trace any irrigation decision back to the
+specific sensor reading, calibration standard, and weather data that
+produced it. This is regulatory-grade provenance for water use.
+
+#### Ecosystem Combo: The Self-Calibrating Field
+
+groundSpring quantifies sensor uncertainty. neuralSpring trains a
+surrogate that predicts ET₀ from incomplete data. airSpring uses the
+surrogate when full sensor data is unavailable. biomeOS manages the
+calibration loop:
+
+```
+graph.execute("self_calibrating_field"):
+  1. groundSpring: uncertainty analysis → "humidity sensor drift: 3%/month"
+  2. neuralSpring: train surrogate on historical (full sensor → ET₀) pairs
+  3. airSpring: when humidity sensor drifts beyond threshold →
+     switch to surrogate until recalibrated
+  4. skunkBat: monitor prediction divergence between surrogate and physics
+  5. lifecycle.resurrect: flag sensor for recalibration when divergence > ε
+```
+
+The field autonomously degrades from physics-based to ML-based ET₀ when
+sensors drift, flags the drift for human attention, and recovers when
+sensors are recalibrated. No spring manages this lifecycle — biomeOS does.
+
+---
+
+### 7.3 hotSpring — Sovereign Computational Physics
+
+**The problem hotSpring solves alone**: Yukawa MD, nuclear EOS, lattice
+QCD, spectral theory — first-principles physics on consumer GPUs.
+
+**What biomeOS adds**: hotSpring runs a simulation. biomeOS turns that
+into a reproducible parameter sweep across machines with cryptographic
+provenance for every configuration.
+
+#### Solo: GPU-Aware Parameter Sweeps
+
+hotSpring parameter sweeps (e.g., 2,042 nuclei across the AME2020
+dataset) are embarrassingly parallel. biomeOS discovers GPU availability
+and distributes:
+
+```
+graph.execute("nuclear_eos_sweep"):
+  pattern = "Parallel"
+  steps = [
+    { capability = "compute", operation = "dispatch",
+      params = { shader = "hfb_nuclear", nuclei = batch_1 } },
+    { capability = "compute", operation = "dispatch",
+      params = { shader = "hfb_nuclear", nuclei = batch_2 } },
+    ...
+  ]
+```
+
+biomeOS checks `lifecycle.status` to see which ToadStool instances have
+GPU headroom, routes batches to available GPUs, and collects results.
+If one GPU is busy (ludoSpring running a 60 Hz game loop), biomeOS
+routes around it.
+
+#### Trio: The Reproducible Simulation
+
+Every simulation configuration, random seed, force-field parameter, and
+output observable is captured in a signed provenance chain:
+
+```
+graph.execute("reproducible_yukawa"):
+  1. dag.create_session("yukawa-N10000-kappa3.2-run17")
+  2. hotSpring: configure(N=10000, kappa=3.2, steps=80000, seed=42)
+  3. hotSpring: evolve → production run → observables
+  4. dag.append_vertex("config", { N, kappa, steps, seed })
+  5. dag.append_vertex("observables", { rdf, msd, transport })
+  6. dag.dehydrate → Merkle root of entire simulation
+  7. crypto.sign → BearDog signs the root
+  8. commit.session → permanent record
+```
+
+A reviewer can reproduce the simulation by extracting the config vertex,
+re-running with identical seed, and verifying the Merkle root matches.
+The provenance chain proves no post-hoc parameter tweaking occurred.
+
+#### Ecosystem Combo: Lattice QCD → Uncertainty → Surrogate Pipeline
+
+The canonical hotSpring → groundSpring → neuralSpring pipeline,
+orchestrated as a single graph:
+
+```
+graph.execute("lattice_qcd_full"):
+  1. hotSpring: SU(3) HMC β-scan (32⁴, 12 temperatures)
+  2. groundSpring: jackknife error estimation on plaquette values
+  3. groundSpring: spectral reconstruction (ill-posed inversion)
+  4. neuralSpring: train surrogate on (β, observable) pairs
+  5. neuralSpring: predict observables at unmeasured β values
+  6. hotSpring: validate surrogate predictions at 2 new β values
+  7. commit full pipeline with provenance
+```
+
+GPU simulation → statistical analysis → ML acceleration → validation.
+Four springs, one graph call, zero cross-imports.
+
+---
+
+### 7.4 neuralSpring — Sovereign Machine Learning
+
+**The problem neuralSpring solves alone**: All 6 isomorphic ML
+primitives (GEMM, Attention, Normalization, Nonlinearity, Reduction,
+Gating), coralForge protein structure prediction, 25+ paper reproductions.
+
+**What biomeOS adds**: neuralSpring trains models. biomeOS turns training
+into a managed, provenance-backed, cross-spring service that any other
+spring can consume without understanding ML.
+
+#### Solo: Model-as-a-Capability
+
+neuralSpring registers trained models as capabilities. Other springs
+consume them through biomeOS without knowing ML exists:
+
+```
+neuralSpring registers:
+  capability.register({
+    domain: "prediction",
+    methods: ["et0_surrogate", "dysbiosis_risk", "nuclear_eos_interpolate"],
+    socket: "/run/user/1000/biomeos/neuralspring-family.sock"
+  })
+
+Any spring calls:
+  capability.call("prediction", "et0_surrogate", { temp, humidity, wind })
+  → biomeOS routes to neuralSpring
+  → neuralSpring infers → returns ET₀ estimate
+```
+
+airSpring gets ML-accelerated ET₀ without importing neuralSpring or
+understanding neural networks. If neuralSpring is offline, biomeOS
+returns `MethodNotFound` and airSpring falls back to physics-based
+Penman-Monteith. The degradation is graceful and automatic.
+
+#### Trio: Signed Model Checkpoints
+
+Every training run becomes a provenance-backed artifact:
+
+```
+graph.execute_pipeline("training_with_provenance"):
+  1. dag.create_session("coralforge-evoformer-run-042")
+  2. neuralSpring: data_prep → forward → loss → backprop (streaming)
+  3. Each batch: dag.append_vertex(batch_id, { loss, gradient_norm })
+  4. Checkpoint: storage.put(model_weights, hash)
+  5. crypto.sign(checkpoint_hash) → BearDog
+  6. dag.dehydrate → collapse training history
+  7. commit.session + provenance.create_braid
+```
+
+The braid records: who initiated training, which dataset version was
+used, every batch loss value, and the final checkpoint hash. A
+collaborator can verify the checkpoint wasn't tampered with by checking
+the Merkle proof.
+
+#### Ecosystem Combo: The Isomorphic Surrogate Factory
+
+neuralSpring's isomorphism theorem says all neural architectures share
+6 primitives. biomeOS exploits this by exposing a generic "train
+surrogate" graph that any spring can invoke:
+
+```
+graph.execute("train_surrogate"):
+  params = { source_spring: "hotSpring", target: "nuclear_eos",
+             input_schema: ["beta", "mass", "coupling"],
+             output_schema: ["plaquette", "chiral_condensate"] }
+  1. storage.get → retrieve training data from NestGate
+  2. neuralSpring: auto-select architecture (MLP for tabular, LSTM for
+     time-series, attention for variable-length)
+  3. neuralSpring: train with early stopping
+  4. neuralSpring: capability.register(domain=source_spring, method=target)
+  5. provenance: record the surrogate's lineage to the original data
+```
+
+hotSpring produces simulation data. neuralSpring trains a surrogate.
+biomeOS registers the surrogate as a new capability. Now any spring can
+call `capability.call("nuclear_eos", "predict", { beta: 5.7 })` and get
+an instant prediction instead of a 3-hour simulation. The surrogate's
+provenance braid links back to every simulation that trained it.
+
+---
+
+### 7.5 groundSpring — Universal Uncertainty Layer
+
+**The problem groundSpring solves alone**: Decompose measurement error,
+propagate uncertainty, quantify which inputs dominate output variance.
+
+**What biomeOS adds**: groundSpring quantifies uncertainty for one
+measurement. biomeOS propagates that uncertainty across every spring in
+the ecosystem.
+
+#### Solo: Ecosystem-Wide Uncertainty Budget
+
+groundSpring registers as the `measurement` capability provider. Any
+spring can query uncertainty before using a value:
+
+```
+capability.call("measurement", "uncertainty_budget", {
+  observable: "soil_moisture",
+  sensor: "EC5-north-field",
+  conditions: { temperature: 28.5, soil_type: "clay_loam" }
+})
+→ { total_uncertainty: 0.018, bias: 0.012, random: 0.006,
+    dominant_source: "sensor_calibration", confidence: 0.95 }
+```
+
+airSpring checks uncertainty before computing ET₀. If
+`total_uncertainty > threshold`, airSpring requests recalibration via
+`lifecycle.resurrect` on the sensor primal. biomeOS orchestrates both
+the uncertainty query and the recalibration without either spring
+knowing about the other.
+
+#### Trio: Uncertainty-Aware Provenance
+
+Every measurement committed to LoamSpine carries its uncertainty:
+
+```
+graph.execute("measurement_with_uncertainty"):
+  1. groundSpring: measure + quantify uncertainty
+  2. dag.append_vertex("measurement", {
+       value: 0.342, unit: "m³/m³",
+       uncertainty: { total: 0.018, bias: 0.012, random: 0.006 },
+       calibration_date: "2026-03-01", sensor: "EC5-001"
+     })
+  3. commit with full uncertainty metadata in the braid
+```
+
+A downstream consumer can trace any derived result back to the raw
+measurement AND its uncertainty. If a decision was wrong, the
+uncertainty chain shows whether the sensor was within spec or drifting.
+
+#### Ecosystem Combo: The Uncertainty Propagation Network
+
+groundSpring's uncertainty propagates through every cross-spring
+pipeline:
+
+```
+groundSpring: soil_moisture ± 0.018 m³/m³
+  → airSpring: ET₀ ± 0.3 mm/day (humidity dominates at 66%)
+    → neuralSpring: surrogate prediction ± model_uncertainty
+      → airSpring: irrigation decision ± combined_uncertainty
+        → provenance: full uncertainty chain committed
+```
+
+biomeOS doesn't just route values — it routes values with their
+uncertainty envelopes. Each step in a deploy graph can access the
+uncertainty from previous steps via `input_from`, and groundSpring's
+analysis tells the ecosystem which sensor to upgrade for maximum
+uncertainty reduction.
+
+---
+
+### 7.6 healthSpring — Clinical Decision Support
+
+**The problem healthSpring solves alone**: PK/PD modeling, gut microbiome
+analytics, biosignal processing, endocrinology — validated against
+published clinical data.
+
+**What biomeOS adds**: healthSpring models a patient. biomeOS wraps that
+model in consent-gated, provenance-backed, privacy-preserving
+infrastructure.
+
+#### Solo: Consent-Gated Capability Access
+
+healthSpring registers clinical capabilities. biomeOS enforces access
+control via BearDog lineage verification:
+
+```
+capability.call("clinical", "pk_predict", {
+  patient_session: "session-042",
+  drug: "testosterone_cypionate",
+  dose: { amount: 200, unit: "mg", route: "IM", frequency: "biweekly" }
+})
+→ biomeOS checks: caller lineage verified by BearDog?
+→ caller has "clinical_practitioner" role in sweetGrass?
+→ yes: route to healthSpring, return PK curve
+→ no: reject with structured error
+```
+
+No clinical data leaves the machine without cryptographic authorization.
+
+#### Trio: The Clinical Audit Trail
+
+Every dosing decision is permanently committed with full attribution:
+
+```
+graph.execute("clinical_decision_auditable"):
+  1. healthSpring: PK model → predicted trough level
+  2. healthSpring: dose adjustment recommendation
+  3. dag.append_vertex("clinician_review", { approved_by, timestamp })
+  4. commit + provenance → permanent record with:
+     - model version and parameters
+     - patient identifier (pseudonymized)
+     - clinician who approved the dose change
+     - PK prediction vs. actual outcome (when available)
+```
+
+#### Ecosystem Combo: The Testosterone-Gut Axis Pipeline
+
+healthSpring's cross-track hypothesis (Track 4 endocrinology × Track 2
+microbiome), orchestrated across springs:
+
+```
+graph.execute("testosterone_gut_axis"):
+  1. wetSpring: 16S gut diversity from stool sample
+  2. healthSpring: Shannon/Simpson/Pielou diversity indices
+  3. healthSpring: Anderson gut lattice → colonization resistance
+  4. healthSpring: testosterone PK model → current levels
+  5. neuralSpring: correlate(testosterone_levels, gut_diversity) →
+     dysbiosis risk prediction
+  6. groundSpring: uncertainty propagation across clinical + biological
+  7. petalTongue: render patient dashboard
+  8. commit full pipeline with clinical provenance
+```
+
+Four springs, three scientific domains (endocrinology, microbiology, ML),
+one patient dashboard. The cross-track hypothesis that testosterone
+levels affect gut microbiome diversity becomes a testable, auditable
+pipeline.
+
+---
+
+### 7.7 ludoSpring — Interactive Science & Game Systems
+
+**The problem ludoSpring solves alone**: 13 HCI models, game science,
+procedural generation, real-time interactive systems.
+
+**What biomeOS adds**: ludoSpring builds games. biomeOS turns those games
+into scientific instruments for any spring.
+
+#### Solo: Game Metrics for Scientific Exploration
+
+ludoSpring's HCI models (Flow theory, Fitts's law, DDA) apply to any
+interactive system, not just games. biomeOS exposes them as capabilities:
+
+```
+capability.call("interaction", "flow_score", {
+  challenge: 0.7, skill: 0.65, time_in_state: 300
+})
+→ { flow_ratio: 1.08, zone: "flow", engagement: 0.89 }
+```
+
+Any spring building an interactive tool (wetSpring lab UI, airSpring
+sensor dashboard, healthSpring patient portal) can measure whether its
+users are in flow state — the optimal experience zone — without
+importing ludoSpring or understanding Csikszentmihalyi.
+
+#### Trio: Attributed Game Sessions
+
+Every game session becomes a provenance-backed scientific observation:
+
+```
+graph.start_continuous("game_session_science"):
+  tick_rate = 60 Hz
+  steps = [
+    { capability = "interaction", operation = "game_tick" },
+    { capability = "interaction", operation = "flow_score" },
+    { capability = "interaction", operation = "dda_adjust" },
+    { capability = "dag", operation = "append_vertex" },
+  ]
+```
+
+Each tick is a DAG vertex. At session end, dehydrate + commit produces a
+complete record of the player's interaction with the system —
+every input, every difficulty adjustment, every flow transition.
+Researchers studying DDA have a replay they can analyze frame by frame.
+
+#### Ecosystem Combo: The Anderson QS Explorer
+
+ludoSpring's most novel cross-spring composition — using game mechanics
+to explore scientific phenomena:
+
+```
+graph.start_continuous("anderson_qs_explorer"):
+  1. ludoSpring: Perlin noise → generate disorder landscape
+  2. wetSpring: quorum sensing propagation across the landscape
+  3. hotSpring: Anderson localization physics → localization transition
+  4. ludoSpring: player navigates the landscape, adjusting disorder W
+  5. petalTongue: render combined scene (disorder + propagation + player)
+  6. groundSpring: track uncertainty in the localization threshold W_c
+  7. neuralSpring: track engagement → DDA adjusts difficulty
+```
+
+The player is exploring real physics: quorum sensing signals propagate
+through a disordered lattice, and the player discovers the critical
+disorder W_c where signals localize. It's a game AND a scientific
+experiment. The data from thousands of play sessions could map the
+Anderson transition in biological signaling networks.
+
+Every spring contributes domain expertise. biomeOS orchestrates the
+60 Hz tick loop. No spring knows any other spring exists.
+
+---
+
+## 8. Emergent Orchestration Patterns
+
+These patterns arise from biomeOS's unique position as the only primal
+that sees the full ecosystem topology. They are "combos" in the
+fighting-game sense — sequences of capabilities that produce effects
+greater than the sum of their parts.
+
+### 8.1 Capability Cascading
+
+When one capability call triggers a chain of dependent capabilities,
+biomeOS resolves the full cascade from a single entry point.
+
+```
+caller: capability.call("science", "reproducible_result", { experiment })
+  biomeOS resolves cascade:
+    1. ecology.run_experiment → (wetSpring or airSpring or hotSpring)
+    2. measurement.uncertainty → groundSpring
+    3. dag.create_session → rhizoCrypt
+    4. storage.put → NestGate
+    5. crypto.sign → BearDog
+    6. commit.session → LoamSpine
+    7. provenance.create_braid → sweetGrass
+```
+
+The caller made ONE request. biomeOS resolved it to seven capability
+calls across six primals. This is the conductor pattern: the caller
+describes intent, biomeOS composes the orchestra.
+
+### 8.2 Spring-as-Provider Mesh
+
+Every spring is both a consumer and a provider. As springs register
+capabilities, the ecosystem's capability graph grows organically:
+
+```
+wetSpring registers:    ecology.16s_pipeline, ecology.diversity_indices
+airSpring registers:    ecology.et0_pm, ecology.water_balance
+hotSpring registers:    physics.md_simulate, physics.lattice_qcd
+neuralSpring registers: prediction.surrogate, prediction.classify
+groundSpring registers: measurement.uncertainty, measurement.calibrate
+healthSpring registers: clinical.pk_predict, clinical.gut_model
+ludoSpring registers:   interaction.flow_score, interaction.dda_adjust
+```
+
+biomeOS sees 14+ capability domains from 7 springs + 8 primals = 15
+providers. Any new spring that arrives and registers capabilities is
+immediately discoverable by every existing spring. No configuration, no
+imports, no coordination — just `capability.register` at startup and
+`capability.discover` at runtime.
+
+This is the key architectural difference: in a monolith, adding a
+feature requires updating every consumer. In the biomeOS mesh, adding a
+feature requires registering a capability. Every existing consumer can
+discover it the next time they call `capability.discover`.
+
+### 8.3 The Scientific Method as a Graph
+
+The scientific method itself maps to biomeOS's graph patterns:
+
+```toml
+[graph]
+name = "scientific_method"
+pattern = "ConditionalDag"
+
+[[graph.steps]]
+name = "observe"
+capability = "measurement"
+operation = "read_sensors"
+
+[[graph.steps]]
+name = "hypothesize"
+capability = "ai"
+operation = "generate_hypothesis"
+depends_on = ["observe"]
+
+[[graph.steps]]
+name = "predict"
+capability = "prediction"
+operation = "surrogate"
+depends_on = ["hypothesize"]
+
+[[graph.steps]]
+name = "experiment"
+capability = "physics"
+operation = "md_simulate"
+depends_on = ["predict"]
+
+[[graph.steps]]
+name = "analyze"
+capability = "measurement"
+operation = "uncertainty"
+depends_on = ["experiment"]
+
+[[graph.steps]]
+name = "validate"
+capability = "ai"
+operation = "compare_prediction_vs_result"
+depends_on = ["predict", "analyze"]
+condition = "analyze.p_value < 0.05"
+
+[[graph.steps]]
+name = "commit"
+capability = "commit"
+operation = "session"
+depends_on = ["validate"]
+```
+
+Observe → Hypothesize → Predict → Experiment → Analyze → Validate →
+Commit. Each step is a capability call. biomeOS orchestrates the loop.
+The ConditionalDag pattern handles branching: if validation fails, the
+graph can loop back to hypothesize with updated priors.
+
+### 8.4 Federated Citizen Science
+
+Multiple NUCLEUS instances, each run by a different person, form a
+Plasmodium collective. Each contributes data from their local sensors
+and computes. biomeOS coordinates without a central server:
+
+```
+Gate A (farm):     airSpring + groundSpring + NestGate
+Gate B (lab):      wetSpring + healthSpring + ToadStool (GPU)
+Gate C (basement): hotSpring + neuralSpring + ToadStool (GPU)
+
+graph.execute("federated_soil_microbiome_study"):
+  1. airSpring@A: soil moisture readings (local sensors)
+  2. wetSpring@B: 16S analysis (lab sequencer output)
+  3. neuralSpring@C: train correlation model (GPU)
+  4. groundSpring@A: propagate uncertainty across all sources
+  5. commit@A: permanent record with cross-gate attribution
+```
+
+Each gate contributes what it has. biomeOS routes steps to the gate
+with the required capability. sweetGrass attributes each gate's
+contribution fairly. No gate has all the data or all the compute — the
+collective does. This is the ecoPrimals vision: sovereign computing
+where collaboration doesn't require surrendering control.
+
+### 8.5 Self-Optimizing Graphs
+
+biomeOS's `graph.suggest_optimizations` combines with neuralSpring's
+PathwayLearner to improve graphs over time:
+
+```
+Run 1: graph.execute("irrigation_pipeline")
+  → biomeOS records: step timings, failure rates, resource usage
+  → graph.suggest_optimizations → neuralSpring analyzes:
+    - "Step 2 (soil_moisture) always takes 3× longer than step 1"
+    - "Steps 3 and 4 have no data dependency — parallelize them"
+    - "Step 5 fails 12% of the time — add retry with backoff"
+
+Run 2: graph.execute("irrigation_pipeline_v2") — auto-optimized
+  → 40% faster, 0% failure rate
+```
+
+Graphs evolve. The ecosystem learns from its own execution history.
+biomeOS tracks the metrics; neuralSpring identifies the patterns;
+the next run is better.
+
+### 8.6 Cross-Spring Discovery Chains
+
+A spring can discover what other springs provide and compose ad-hoc
+pipelines at runtime:
+
+```rust
+let domains = client.capability_list().await?;
+// domains: ["ecology", "physics", "prediction", "measurement",
+//           "clinical", "interaction", "crypto", "storage", ...]
+
+let ecology_methods = client.discover_capability("ecology").await?;
+// methods: ["16s_pipeline", "et0_pm", "diversity_indices",
+//           "water_balance", "soil_moisture", ...]
+
+// Build a pipeline from whatever is available
+let has_uncertainty = domains.contains("measurement");
+let has_ml = domains.contains("prediction");
+let has_viz = domains.contains("visualization");
+
+let mut steps = vec![
+    Step::new("collect", "ecology", "soil_moisture"),
+    Step::new("compute", "ecology", "et0_pm"),
+];
+if has_uncertainty {
+    steps.push(Step::new("quantify", "measurement", "uncertainty"));
+}
+if has_ml {
+    steps.push(Step::new("predict", "prediction", "surrogate"));
+}
+if has_viz {
+    steps.push(Step::new("render", "visualization", "render"));
+}
+```
+
+The pipeline adapts to the ecosystem. On a minimal machine with only
+airSpring and biomeOS, it computes ET₀. On a full NUCLEUS with all
+springs, it adds uncertainty quantification, ML prediction, and
+visualization. Same code, different capabilities, different behavior.
+biomeOS makes the ecosystem composable at runtime.
+
+### 8.7 Capability Versioning and Hot-Swap
+
+When a spring updates its methods, it re-registers with biomeOS. Callers
+never notice:
+
+```
+Day 1: wetSpring v86 registers ecology.16s_pipeline (DADA2 v1)
+Day 2: wetSpring v87 registers ecology.16s_pipeline (DADA2 v2, faster)
+  → biomeOS updates the capability routing table
+  → all callers automatically use the new version
+  → sweetGrass records the version change in the provenance braid
+```
+
+If a spring crashes during an update, biomeOS falls back to the previous
+provider (if another instance is running) or returns `MethodNotFound` so
+callers degrade gracefully. Hot-swapping is invisible to consumers.
+
+### 8.8 The Observation Loop
+
+For sciences that require continuous monitoring (ecology, clinical,
+physics), biomeOS's Continuous graph pattern creates a perpetual
+observation loop:
+
+```
+graph.start_continuous("field_station_monitor"):
+  tick_rate = 0.1 Hz  (every 10 seconds)
+  steps = [
+    { capability = "measurement", operation = "read_all_sensors" },
+    { capability = "ecology", operation = "et0_realtime" },
+    { capability = "measurement", operation = "uncertainty" },
+    { capability = "prediction", operation = "anomaly_detect" },
+    { capability = "dag", operation = "append_vertex" },
+  ]
+  on_anomaly = { capability = "interaction", operation = "alert" }
+```
+
+The field station runs indefinitely. Every 10 seconds it reads sensors,
+computes ET₀, quantifies uncertainty, checks for anomalies, and logs
+to the DAG. If an anomaly fires, ludoSpring's engagement model formats
+the alert for maximum human attention. At the end of the day,
+`dag.dehydrate` + `commit.session` produces a permanent, signed,
+attributed record of every observation.
+
+---
+
 ## See Also
 
 - [rhizoCrypt Leverage Guide](./RHIZOCRYPT_LEVERAGE_GUIDE.md) — ephemeral DAG sessions
@@ -1009,6 +1793,8 @@ fundamental — the conductor does not play the instruments.
 - [Semantic Method Naming Standard](./SEMANTIC_METHOD_NAMING_STANDARD.md) — method naming
 - [Primal IPC Protocol](./PRIMAL_IPC_PROTOCOL.md) — transport layer
 - [Primal Registry](./PRIMAL_REGISTRY.md) — full primal catalogue
+- [Spring Catalog](../whitePaper/gen3/SPRING_CATALOG.md) — scientific validation across all springs
+- [Inter-Primal Interactions](./INTER_PRIMAL_INTERACTIONS.md) — coordination patterns
 
 ---
 
