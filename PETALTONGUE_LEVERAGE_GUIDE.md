@@ -1,9 +1,11 @@
-# petalTongue Spring Leverage Guide
+# petalTongue Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Version**: 2.0.0  
+**Version**: 3.0.0  
 **Date**: March 16, 2026  
 **Audience**: Springs, primals, and ecosystem architects  
-**Purpose**: How to leverage petalTongue — the Universal User Interface primal — alone, in duos, in trios, and in novel cross-primal combinations across the full 14-primal ecosystem
+**Purpose**: How to leverage petalTongue — the Universal User Interface primal — alone, in duos, in trios, and in novel cross-primal combinations across the full 21-primal ecosystem
+
+Each primal in the ecosystem produces an equivalent guide. Together, these guides form a combinatorial recipe book for emergent behaviors.
 
 ---
 
@@ -37,9 +39,9 @@ All data formats are accepted: the `SpringDataAdapter` auto-detects ludoSpring g
 
 ---
 
-## Part 1: Using petalTongue Alone
+## Part 1: One Spring + petalTongue
 
-Each spring can leverage petalTongue independently. No other primal needed — just a Unix socket and JSON-RPC.
+Each spring can leverage petalTongue independently. No third primal needed — just a Unix socket and JSON-RPC.
 
 ### healthSpring → petalTongue
 
@@ -503,44 +505,246 @@ These are capabilities that emerge when springs combine through petalTongue in w
 
 ## Part 4: What petalTongue Needs From You
 
-For petalTongue to render your primal's or spring's data across any user interface modality:
-
 ### For Springs (data producers)
 
-1. **Announce capabilities** via Songbird or `provider.register_capability` — petalTongue discovers you automatically
-2. **Send data in any format** — `SpringDataAdapter` normalizes ludoSpring channels, ecoPrimals/time-series/v1, raw DataBindings, and bindings envelopes
-3. **Include a `domain` hint** — petalTongue selects the right color palette (health, physics, ecology, agriculture, measurement, neural, game)
-4. **Use `session_id`** — enables session management, dismissal, and multi-spring dashboards
-5. **Subscribe to interactions** — close the loop by receiving user clicks/hovers back
+1. **Send data in any format** — `SpringDataAdapter` normalizes ludoSpring channels, ecoPrimals/time-series/v1, raw DataBindings, and bindings envelopes
+2. **Include a `domain` hint** — health, physics, ecology, agriculture, measurement, neural, game — petalTongue selects the right palette, accessibility profile, and Tufte constraints
+3. **Use `session_id`** — enables multi-spring dashboards, session management, and provenance tracking
+4. **Subscribe to `interaction.subscribe`** — close the feedback loop; receive user clicks/hovers back for drill-down
 
 ### For Foundation Primals (infrastructure)
 
-1. **Push telemetry**: Send your operational metrics (health, throughput, error rates) as DataBindings — petalTongue renders them in the ecosystem dashboard
-2. **Use `visualization.render.scene`** for topology: If your primal manages a graph (Songbird's discovery topology, biomeOS's NUCLEUS graph, rhizoCrypt's DAG), send it as a SceneGraph for force-directed visualization
-3. **Use `visualization.render.stream`** for live state: If your primal has real-time events (skunkBat threats, BearDog key exchanges, ToadStool dispatch), stream them for animated visualization
-4. **Subscribe to `interaction.subscribe`**: Close the loop — when the operator clicks a node in your topology, you receive the node_id and can trigger primal-specific actions (inspect, migrate, quarantine, heal)
-
-### For All
-
-You do NOT need to know about petalTongue's internals. You do NOT need to import petalTongue as a dependency. Everything flows through capability-based IPC. Send JSON-RPC to the petalTongue Unix socket and it renders for humans across every available modality.
+1. **Push telemetry** as DataBindings — petalTongue renders operational metrics in the ecosystem dashboard
+2. **Use `visualization.render.scene`** for topology — Songbird's discovery graph, biomeOS's NUCLEUS mesh, rhizoCrypt's DAGs
+3. **Use `visualization.render.stream`** for live state — skunkBat threats, BearDog key exchanges, ToadStool dispatches
+4. **Subscribe to `interaction.subscribe`** — when the operator clicks a node, you receive the `node_id` and can trigger primal-specific actions (inspect, migrate, quarantine, heal)
 
 ---
 
-## IPC Quick Reference
+## Part 5: petalTongue Alone — Self-Leverage
+
+Even without any other primal or spring, petalTongue is a complete self-contained tool.
+
+### Standalone Capabilities
+
+| Mode | What You Get | No Dependencies |
+|------|-------------|-----------------|
+| `petaltongue ui` | Desktop visualization workbench with tutorial data, graph editor, panel system | Just a binary |
+| `petaltongue tui` | Terminal dashboard for SSH-only servers | Pure Rust, no display server |
+| `petaltongue web` | Browser-accessible visualization server | axum, no external services |
+| `petaltongue headless` | Batch SVG/PNG/JSON export pipeline | Zero display deps |
+| `petaltongue server` | Unix socket JSON-RPC visualization service | Accepts data from any process |
+| `petaltongue status` | Self-diagnostic: config, socket paths, capabilities | Pure introspection |
+
+### Self-Monitoring
+
+petalTongue can visualize *itself*. The `DataService` graph engine tracks primal topology including petalTongue's own node. Use `visualization.introspect` to query what panels are open, what data is being displayed, and what sessions are active. This self-awareness enables:
+
+- **Tutorial mode**: When no springs are discovered, petalTongue renders its own capabilities as a tutorial dashboard — the user learns the interface without needing any ecosystem
+- **Awakening experience**: A 4-stage self-discovery animation (flower bloom → self-knowledge → ecosystem discovery → interactive tutorial) that runs on first startup
+- **Session persistence**: Sessions survive restarts via local state persistence — no external primal needed
+
+### As a Development Tool
+
+Any developer building a new primal or spring can use petalTongue as a **development visualization server**:
 
 ```bash
-# Render TimeSeries data
-echo '{"jsonrpc":"2.0","method":"visualization.render","params":{"session_id":"my-session","title":"My Data","bindings":[{"channel_type":"timeseries","id":"ts1","label":"Metric","x_label":"Time","y_label":"Value","unit":"units","x_values":[1,2,3],"y_values":[10,20,30]}]},"id":1}' | socat - UNIX-CONNECT:/tmp/petaltongue.sock
-
-# Send a raw SceneGraph
-echo '{"jsonrpc":"2.0","method":"visualization.render.scene","params":{"session_id":"custom","scene":{"nodes":{"root":{"id":"root","transform":{"a":1,"b":0,"tx":0,"c":0,"d":1,"ty":0},"primitives":[],"children":[],"visible":true,"opacity":1.0}},"root_id":"root"}},"id":2}' | socat - UNIX-CONNECT:/tmp/petaltongue.sock
-
-# List active sessions
-echo '{"jsonrpc":"2.0","method":"visualization.session.list","params":{},"id":3}' | socat - UNIX-CONNECT:/tmp/petaltongue.sock
-
-# Export as SVG
-echo '{"jsonrpc":"2.0","method":"visualization.export","params":{"session_id":"my-session","modality":"svg"},"id":4}' | socat - UNIX-CONNECT:/tmp/petaltongue.sock
+petaltongue server &
+echo '{"jsonrpc":"2.0","method":"visualization.render","params":{...},"id":1}' \
+  | socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/biomeos/petaltongue-nat0-default.sock
 ```
+
+Your new primal pushes data via JSON-RPC; petalTongue renders it immediately. No registration, no discovery protocol, no biomeOS — just a socket.
+
+### As a Testing Harness
+
+petalTongue's `visualization.validate` method runs Tufte constraint checks on data before rendering: data-ink ratio, lie factor, chartjunk detection, accessibility compliance. Any spring can use this as a **visualization quality gate** in CI/CD — send proposed bindings, check the validation result, fail the build if constraints are violated.
+
+---
+
+## Part 6: Novel Self-Referential Patterns
+
+These patterns use petalTongue's unique position as the only primal that produces human-perceivable output.
+
+### The Introspection Loop
+
+petalTongue can visualize data *about its own visualization*:
+
+1. A spring sends data → petalTongue renders it
+2. petalTongue emits telemetry about the render (frame time, modality selected, Tufte scores)
+3. That telemetry feeds back as a TimeSeries to petalTongue's own dashboard
+4. The operator sees both the data AND the quality of the rendering in real time
+
+**Why this matters**: A researcher can watch their simulation AND simultaneously see whether the visualization is keeping up (frame drops, data-ink degradation, modality fallback). Meta-visualization.
+
+### The Multi-Modal Bridge
+
+petalTongue is the only primal that can translate between human sensory modalities. This makes it a **universal accessibility adapter**:
+
+- A sighted operator's GUI interactions produce `interaction.subscribe` events
+- Those events are re-rendered as audio descriptions for a blind colleague
+- The blind colleague's voice commands (via Squirrel → AI → motor events) drive the GUI
+- Both humans share the same session, perceiving it through different modalities
+
+No other primal can do this because no other primal understands both sensory input and motor output across modalities.
+
+### The Capability Explorer
+
+petalTongue can discover and render the capabilities of any primal in the ecosystem:
+
+1. Query Songbird for all registered primals
+2. For each primal, call `capability.list` via JSON-RPC
+3. Render the capability graph as an interactive SceneGraph
+4. Clicking a capability node shows which springs use it and which methods expose it
+
+This turns petalTongue into a **live ecosystem documentation tool** — the architecture diagram is always accurate because it's generated from actual runtime state.
+
+---
+
+## Part 7: Emergent Duo Patterns
+
+These two-primal combinations create capabilities neither primal has alone.
+
+### petalTongue + sourDough: Visualizable From Birth
+
+Every primal scaffolded by sourDough gets a `visualization.render` capability template. But the deeper pattern: sourDough can call `visualization.validate` during scaffold testing to verify the new primal's example data produces valid, accessible visualizations before the primal is ever deployed. **Quality-gated scaffolding.**
+
+### petalTongue + skunkBat: The Visible Defense Perimeter
+
+skunkBat detects threats using metadata only. petalTongue renders the threat landscape. Together, they create a **sovereign security operations center** that runs entirely on local hardware. The operator sees live threat animations without any data leaving the machine. skunkBat sends streaming threat events; petalTongue renders them as pulsing topology overlays. Every quarantine decision is visible.
+
+### petalTongue + groundSpring: Uncertainty-Aware Visualization
+
+groundSpring knows the uncertainty of every measurement in the ecosystem. petalTongue renders data. Together: **every chart in the ecosystem can carry error bars derived from actual measurement science**, not guessed confidence intervals. groundSpring annotates petalTongue's data bindings with uncertainty envelopes via `visualization.render.scene` overlay. The Tufte constraint engine validates that uncertainty is always visible — no misleading precision.
+
+### petalTongue + rhizoCrypt: Stateful Sessions
+
+rhizoCrypt is ephemeral working memory. petalTongue produces visualization sessions. Together: **the visualization remembers**. Close your laptop, reopen it tomorrow — rhizoCrypt restores exactly which panels were open, what zoom level, what was selected, what filters were active. The session is a DAG of interaction events that can be replayed, branched, or shared.
+
+### petalTongue + NestGate: Artifact Persistence
+
+NestGate is content-addressed storage. petalTongue exports SVG/PNG/audio. Together: **every visualization ever rendered is addressable by hash**. Export a dashboard → `storage.put` → get back a BLAKE3 content address. Share that address with a colleague → they retrieve the exact same visualization. Immutable, deduplicatable, cacheable.
+
+### petalTongue + biomeOS: The Nervous System's Eyes
+
+biomeOS orchestrates the ecosystem. petalTongue shows humans what's happening. Together: **the operator can see AND act**. Click a struggling primal in the topology → biomeOS receives the click as `lifecycle.heal` intent → the primal is healed → the topology updates → the operator sees it recover. This closes the human-in-the-loop for ecosystem management. biomeOS is the nervous system; petalTongue is the sensory cortex AND the motor cortex.
+
+### petalTongue + Squirrel: AI Co-Pilot for Any Data
+
+Squirrel routes AI queries. petalTongue renders data. Together: **the AI can see what the human sees**. Squirrel subscribes to petalTongue's interaction stream, watches what the human is studying, and proactively highlights anomalies via `ai.highlight`. The human and the AI share visual attention. No separate chat window — the AI's thoughts appear as glow effects on the data itself.
+
+### petalTongue + BearDog: Cryptographically Signed Visualizations
+
+BearDog signs anything. petalTongue exports anything. Together: **a cryptographically signed SVG**. Export a clinical report → BearDog signs the SVG hash with the operator's Ed25519 key → the signed artifact is deposited in NestGate → anyone can verify the visualization hasn't been tampered with. Essential for legal, regulatory, and medical evidence.
+
+---
+
+## Part 8: Emergent Trio and Quartet Patterns
+
+### The Provenance Pipeline: petalTongue + sweetGrass + LoamSpine
+
+Every visualization has attribution AND permanence:
+- petalTongue renders a spring's data
+- sweetGrass records the full attribution chain (who provided the data, how it was transformed, who saw it)
+- LoamSpine commits the rendered artifact as an immutable ledger entry
+
+**The result**: An auditable, attributed, immutable visual record. "This PK/PD chart was rendered from healthSpring patient #42's data at 14:23 UTC, transformed by Grammar rule G7, viewed by Dr. Chen, and committed to ledger entry L-9281." Essential for FDA/EMA compliance.
+
+### The Memory Stack: petalTongue + rhizoCrypt + NestGate + LoamSpine
+
+Three tiers of memory for visualization:
+1. **Working** (rhizoCrypt): Current session state — panels, zoom, selection. Ephemeral. Lost on reboot unless preserved.
+2. **Cached** (NestGate): Exported artifacts — SVGs, audio exports, scene snapshots. Content-addressed. Survives restarts. Garbage-collected when no longer referenced.
+3. **Permanent** (LoamSpine): Finalized records — signed, attributed, immutable. Survives forever.
+
+petalTongue renders the memory tiers themselves as a 3-zone dashboard. Dragging a session from "working" to "permanent" triggers the full provenance pipeline.
+
+### The Sovereign SOC: petalTongue + skunkBat + BearDog + biomeOS
+
+A complete security operations center on a single machine:
+- skunkBat detects → petalTongue renders threat map → operator clicks threat → BearDog verifies identity → biomeOS quarantines
+- All local. No cloud. No telemetry. The entire defense posture is visible and actionable.
+
+### The AI Research Station: petalTongue + neuralSpring + Squirrel + groundSpring
+
+AI-guided, uncertainty-aware research:
+- neuralSpring trains a model → streams loss curves to petalTongue
+- groundSpring annotates curves with uncertainty bounds
+- Squirrel watches the training dashboard → detects convergence stall → auto-adjusts learning rate
+- petalTongue renders the whole process: loss + uncertainty + AI attention + hyperparameter history
+
+The researcher sees training progress, knows the statistical confidence, and has an AI co-pilot watching for problems.
+
+### The Digital Twin: petalTongue + airSpring + hotSpring + ToadStool
+
+Real-time physical simulation with live visualization:
+- hotSpring runs a thermodynamic simulation on ToadStool's GPU
+- airSpring feeds real IoT sensor data as boundary conditions
+- petalTongue renders the evolving simulation state as a live FieldMap
+- The operator adjusts parameters via `motor.*` commands; the simulation responds
+
+This is a **digital twin** — the physical system (a field, a reactor, a climate zone) is simulated live, visualized live, and controlled live, all on sovereign hardware.
+
+### The Accessible Science Lab: petalTongue + Any Spring + Squirrel
+
+Universal accessibility for any scientific domain:
+- Any spring sends data
+- petalTongue renders it across ALL modalities simultaneously
+- A sighted researcher sees charts (egui)
+- A blind colleague hears sonified data (audio modality)
+- A motor-impaired colleague uses voice commands via Squirrel → `motor.*`
+- A remote colleague gets terminal sparklines over SSH (TUI)
+- An AI agent gets JSON API (headless)
+
+The same Grammar of Graphics expression compiles to every modality. Accessibility is not a feature — it is the architecture. **Every spring gets universal accessibility for free through petalTongue.**
+
+---
+
+## Part 9: How Springs Should Use petalTongue
+
+The fastest path from "I have data" to "a human can see it":
+
+### Minimal Integration (5 minutes)
+
+```bash
+# 1. Start petalTongue
+petaltongue server &
+
+# 2. Send data (any format)
+echo '{"jsonrpc":"2.0","method":"visualization.render","params":{
+  "session_id":"my-spring",
+  "title":"My Spring Data",
+  "bindings":[{
+    "channel_type":"timeseries",
+    "id":"metric1",
+    "label":"Temperature",
+    "x_label":"Time (s)",
+    "y_label":"°C",
+    "unit":"celsius",
+    "x_values":[0,1,2,3,4,5],
+    "y_values":[20.1,20.3,20.7,21.2,21.8,22.5]
+  }]
+},"id":1}' | socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/biomeos/petaltongue-nat0-default.sock
+```
+
+That's it. petalTongue auto-detects the data format, selects a domain palette, checks Tufte constraints, and renders to whatever modality is available.
+
+### Full Integration Checklist
+
+1. **Announce capabilities** via Songbird — petalTongue discovers you automatically
+2. **Include `domain` hint** — selects the right color palette (health, physics, ecology, agriculture, measurement, neural, game)
+3. **Use `session_id`** — enables multi-spring dashboards, session management, dismissal
+4. **Subscribe to `interaction.subscribe`** — receive user clicks/hovers back for drill-down
+5. **Stream updates** via `visualization.render.stream` — incremental append for real-time data
+6. **Validate in CI** via `visualization.validate` — Tufte quality gate before deployment
+
+### What You Do NOT Need
+
+- You do NOT import petalTongue as a dependency
+- You do NOT need to know petalTongue's internal types
+- You do NOT need to handle rendering, layout, color, accessibility, or modality
+- You do NOT need to know what display is connected
+- Everything flows through capability-based JSON-RPC
 
 ---
 
