@@ -89,6 +89,27 @@ and cross-primal discovery robustness.
 - `DispatchOutcome` is serde-serializable for wire transport if needed
 - 4-format capability parsing ensures interop with primals at any evolution stage
 
+## Codebase Hygiene Pass (same session)
+
+### Removed
+- Root `benches/` directory (9 orphan benchmark files not wired to any crate)
+- 4 orphan bench files from `crates/main/benches/` (only `ecosystem_benchmarks` is wired)
+- `crates/core/context/src/sync_tests_additional.rs` (orphan, never declared in lib.rs)
+- `crates/core/plugins/src/tests/` (orphan directory, never declared in lib.rs)
+- `crates/core/plugins/src/simple_test.rs` (orphan stub, never referenced)
+- `crates/config/config.example.toml` (stale — described a different project)
+- `crates/tools/ai-tools/src/config.example.toml` (legacy direct-API config)
+
+### Fixed
+- Crate count: 22 → 21 in README.md, CURRENT_STATUS.md (actual workspace members)
+- 8 broken doc links cleaned: removed references to archived/deleted documents
+  (`ERROR_UNIFICATION_STRATEGY.md`, `PRIMAL_COMMUNICATION_ARCHITECTURE.md`,
+  `CAPABILITY_AI_MIGRATION_GUIDE.md`, `WEB_PLUGIN_MIGRATION.md`,
+  `adapter-implementation-guide.md`, etc.)
+- CURRENT_STATUS.md JSON-RPC table: added `health.liveness` + `health.readiness`
+- universal-error README.md: license corrected from `MIT OR Apache-2.0` to `AGPL-3.0-only`
+- Known Issue #10 resolved: orphan benchmark files removed
+
 ## Next Steps (P4)
 
 - Wire `OrExit<T>` into CLI `main()` and doctor subcommand
