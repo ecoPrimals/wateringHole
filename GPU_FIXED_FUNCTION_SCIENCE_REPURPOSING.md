@@ -500,12 +500,27 @@ barraCuda defines the math, toadStool discovers hardware and routes
 dispatch, coralReef compiles to the target. Infrastructure portability
 within the GPU is the same pattern applied one level deeper.
 
-**barraCuda (WHAT)** — Universal math primal. Defines operations as
-abstract mathematical semantics with precision requirements and tolerances.
-`math.pairwise.yukawa` means "compute the Yukawa pair potential to 14-digit
-precision." barraCuda does NOT know about shader cores, tensor cores, RT
-cores, or any hardware. It is hardware-agnostic by design. A spring calls
-barraCuda the same way regardless of what silicon executes the math.
+**barraCuda (WHAT)** — Universal math primal. **Hardware atheistic.** There
+is no silicon, only math. barraCuda defines operations as abstract
+mathematical semantics with precision requirements expressed as tolerances.
+`math.pairwise.yukawa` means "compute the Yukawa pair potential to within
+`YUKAWA_FORCE_TOL` relative error." It does NOT say fp64 or fp32 or
+"use tensor cores." The precision requirement is a mathematical statement
+(`1e-14 relative error`), not a hardware statement (`use fp64`).
+
+barraCuda does not know about shader cores, tensor cores, RT cores, GPUs,
+NPUs, CPUs, or any silicon. It does not know what fp32 is. It knows what
+14 digits of precision is. Conceptually, barraCuda's math should scale
+from fp2 to infinite precision — the abstract operation is the same; only
+the required accuracy changes. Whether that accuracy is delivered by native
+fp64, DF64 on fp32 ALUs, tensor core MMA at TF32, arbitrary-precision
+software arithmetic, or a lookup table on a texture unit — that is entirely
+the business of coralReef and toadStool. barraCuda does not know and does
+not care.
+
+A spring calls barraCuda the same way regardless of what silicon executes
+the math, at what precision the hardware operates, or on what planet the
+computation runs.
 
 **coralReef (HOW)** — Sovereign compiler. Given a mathematical operation
 and a hardware target, coralReef produces the native instruction stream.
@@ -562,27 +577,71 @@ Spring calls: barraCuda.math.pairwise.yukawa(particles, params)
 ```
 
 This separation means:
-- Springs never change. They call `barraCuda.math.pairwise.yukawa`.
-- barraCuda never changes. It defines the math and precision.
-- coralReef learns new compilation targets (tensor MMA, RT BVH, graphics
-  pipeline state) — pure compiler evolution.
-- toadStool learns new routing strategies from spring experiment data —
-  pure orchestration evolution.
+- **Springs never change.** They call `barraCuda.math.pairwise.yukawa`
+  with a tolerance. They do not know what hardware exists.
+- **barraCuda never changes.** It defines the math and the required
+  precision as tolerances. It does not know what hardware exists.
+  It scales from fp2 to infinite precision conceptually — the tolerance
+  is a number, not a data type.
+- **coralReef evolves** by learning new compilation targets (tensor MMA,
+  RT BVH, graphics pipeline state, future accelerators) — pure compiler
+  evolution. It translates precision requirements into hardware-specific
+  precision strategies (native fp64, DF64, TF32, fp16 with error bounds,
+  arbitrary-precision software emulation).
+- **toadStool evolves** by learning new routing strategies from spring
+  experiment data — pure orchestration evolution. It maps
+  `(operation, tolerance)` to `(hardware_unit, precision_mode)` using
+  the measured performance surface.
 
 Each primal evolves independently. A new hardware unit (say, a future
 "graph core" or "sparse core") requires: coralReef learns to emit its
-instructions, toadStool learns to discover and dispatch to it. barraCuda
-and all springs are unchanged.
+instructions, toadStool learns to discover and dispatch to it. barraCuda,
+all springs, and the mathematical definitions are unchanged.
+
+A new precision mode (say, fp8 on a future chip, or 256-bit software
+floats for number theory) requires: coralReef learns to compile for it,
+toadStool learns when to route to it based on the tolerance requirement.
+barraCuda's tolerance `1e-14` is the same whether delivered by fp64,
+DF64, or a 256-bit software emulation. The math does not change. The
+implementation does.
 
 ### Graceful Degradation — Same Pattern as NPU/GPU/CPU
 
-Today: GPU not available → CPU fallback (barraCuda handles this).
+Today: GPU not available → CPU fallback.
 Tomorrow: tensor cores not available → shader cores. RT cores not
 available → compute BVH. TMU not available → compute evaluation.
 
 toadStool's routing always has a fallback. The math is the same; the
-hardware target changes; the precision and correctness are preserved.
-Springs never see the difference except in throughput.
+hardware target changes. What matters is: **does the result meet the
+tolerance?** If tensor cores at FP16 deliver 7 digits and the tolerance
+demands 14, toadStool does not route there. If the tolerance is 1e-2
+(visualization, influence maps, initial estimates), FP16 tensor cores
+are not just acceptable — they are 4x faster and the correct choice.
+
+The precision spectrum is continuous:
+
+| Tolerance | Sufficient precision | Fastest hardware (RTX 3090) | Throughput |
+|-----------|---------------------|----------------------------|-----------|
+| 1e-2 | ~3 digits | FP16 tensor cores | ~142 TFLOPS |
+| 1e-4 | ~5 digits | FP16 tensor cores | ~142 TFLOPS |
+| 1e-7 | ~7 digits | FP32 shader cores | ~35.6 TFLOPS |
+| 1e-10 | ~10 digits | TF32 tensor cores (with accumulation) | ~71 TFLOPS |
+| 1e-14 | ~14 digits | DF64 on FP32 shader cores | ~3.24-8.9 TFLOPS |
+| 1e-16 | ~16 digits | Native FP64 | ~0.33 TFLOPS |
+| 1e-30 | ~30 digits | Software arbitrary precision | ~0.01 TFLOPS |
+
+barraCuda specifies the tolerance. toadStool picks the row. coralReef
+compiles for it. Springs never see the table.
+
+This is why "hardware atheistic" matters. barraCuda's tolerance `1e-14`
+is the same on an RTX 3090 (delivered by DF64 at 3.24 TFLOPS), an MI50
+(delivered by native fp64 at 6.7 TFLOPS), a Titan V (delivered by native
+fp64 at 6.9 TFLOPS), or a future chip with native fp128. The math
+operation is identical. The tolerance is identical. The hardware strategy
+is entirely toadStool and coralReef's problem.
+
+Springs never see the difference except in throughput and cost. The
+math is always correct to the requested tolerance.
 
 ### What No Existing Framework Does
 
