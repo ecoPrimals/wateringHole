@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # Squirrel Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 16, 2026
-**Primal**: Squirrel v0.1.0-alpha.8
+**Date**: March 17, 2026
+**Primal**: Squirrel v0.1.0-alpha.11
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -52,8 +52,16 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 | `discovery.peers` | Scan socket directories for running primals |
 | `tool.execute` | Execute MCP tools (local built-ins + remote announced tools) |
 | `tool.list` | List available tools with JSON Schema input definitions |
+| `health.liveness` | Liveness probe (PRIMAL_IPC_PROTOCOL v3.0) — returns ok if process alive |
+| `health.readiness` | Readiness probe (PRIMAL_IPC_PROTOCOL v3.0) — returns ok if ready for requests |
 | `lifecycle.register` | Register with biomeOS orchestrator |
 | `lifecycle.status` | Heartbeat status report to biomeOS |
+
+**Manifest discovery**: Squirrel writes `$XDG_RUNTIME_DIR/ecoPrimals/squirrel.json`
+at startup for biomeOS manifest-based bootstrap discovery (absorbed from rhizoCrypt v0.13).
+
+**Human dignity**: AI operations pass through `DignityEvaluator` checks for
+discrimination, manipulation, oversight, and explainability (wateringHole standard).
 
 **Transport**: JSON-RPC 2.0 over Unix socket (primary), tarpc/bincode
 (high-perf primal-to-primal), HTTP (feature-gated OFF by default).
@@ -108,8 +116,8 @@ logic are built in.
 | neuralSpring | Suggest hyperparameter tuning strategies, explain training loss curves |
 | groundSpring | Interpret seismic waveform features, classify calibration anomalies |
 | healthSpring | Summarize PK/PD model fits, generate dosing rationale narratives |
-| ludoSpring | Generate NPC dialogue, balance game mechanics via AI playtesting |
-| primalSpring | Validates Squirrel's AI coordination — exp044 tests multi-MCP routing via Squirrel + biomeOS capability graph. |
+| ludoSpring | Generate NPC dialogue, balance game mechanics via AI playtesting; RPGPT composition (ludoSpring logic + Squirrel narration + NestGate + petalTongue + provenance trio) |
+| primalSpring | Validates Squirrel's AI coordination — Track 6 exp044 tests multi-MCP routing via Squirrel + biomeOS capability graph |
 
 ### 1.2 Context Window Management
 

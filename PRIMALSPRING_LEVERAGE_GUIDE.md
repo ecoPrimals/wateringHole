@@ -3,8 +3,8 @@
 # primalSpring Leverage Guide — How Every Primal Can Use Coordination Validation
 #
 # Status: Active
-# Last Updated: March 17, 2026
-# primalSpring Version: v0.1.0 (Phase 1 — Neural API integration, real IPC, server mode)
+# Last Updated: March 18, 2026
+# primalSpring Version: v0.2.0 (Phase 2 — IPC resilience, 4-format capability parsing, health probes, proptest, 132 tests)
 
 ---
 
@@ -57,6 +57,52 @@ capabilities = ["coordination", "composition", "nucleus"]
 
 primalSpring's contribution is validating that the coordination layer correctly
 composes the primals that DO these things.
+
+### 1.4 IPC Resilience Stack (v0.2.0)
+
+primalSpring provides a converged IPC resilience stack adopted across the ecosystem:
+
+| Component | Purpose |
+|-----------|---------|
+| **IpcError** | 8 typed variants: `SocketNotFound`, `ConnectionRefused`, `ConnectionReset`, `Timeout`, `ProtocolError`, `MethodNotFound`, `ApplicationError`, `SerializationError`. Query methods: `is_retriable()`, `is_timeout_likely()`, `is_method_not_found()`, `is_connection_error()` |
+| **CircuitBreaker** | Fail-fast when a primal is down; `failure_threshold`, `recovery_timeout`, `Closed`/`Open`/`HalfOpen` states |
+| **RetryPolicy** | Exponential backoff (`max_retries`, `base_delay`, `max_delay`) |
+| **resilient_call()** | Wraps IPC calls with circuit-breaking and retry; retries only on `is_retriable()` errors |
+
+### 1.5 DispatchOutcome\<T\> and Result Extraction
+
+| Component | Purpose |
+|-----------|---------|
+| **DispatchOutcome\<T\>** | Three-way classification: `Success`, `ProtocolError`, `ApplicationError`. `should_retry()` for retry decisions |
+| **extract_rpc_result\<T\>** | Centralized JSON-RPC result extraction — handles errors, missing results, deserialization |
+| **extract_rpc_dispatch\<T\>** | Preserves protocol vs application error distinction for `should_retry()` |
+
+### 1.6 4-Format Capability Parsing
+
+`extract_capability_names()` handles all ecosystem wire formats:
+
+- **Format A** — flat string array: `["crypto.sign", "crypto.verify"]`
+- **Format B** — object array: `[{"method": "crypto.sign"}]`
+- **Format C** — nested `method_info`: `{"method_info": [{"name": "crypto.sign"}]}`
+- **Format D** — double-nested `semantic_mappings`: `{"semantic_mappings": {"crypto": {"sign": {}}}}`
+
+### 1.7 Health Probes and Self-Knowledge
+
+| Capability | Purpose |
+|------------|---------|
+| **health.liveness** | Kubernetes-style liveness — is the primal process alive? |
+| **health.readiness** | Kubernetes-style readiness — ready to serve? (Neural API + discovered primals) |
+| **PRIMAL_NAME** / **PRIMAL_DOMAIN** | Self-knowledge constants (`primalspring`, `coordination`) |
+| **safe_cast module** | `micros_u64`, `u128_to_u64`, `usize_to_u32`, `f64_to_usize` — safe numeric casts for metrics |
+| **OrExit\<T\> trait** | Clean fatal exit for validation binaries (`.or_exit(msg)`) |
+| **ValidationSink trait** | Pluggable output: `StdoutSink`, `NullSink` for CI/headless runs |
+
+### 1.8 Test and Experiment Evolution
+
+| Metric | v0.1.0 | v0.2.0 |
+|--------|--------|--------|
+| Unit tests | 69 | **132** |
+| Experiments | 38 | **38** (evolved with probe patterns, FAMILY_ID-aware discovery, Neural API health checks, proptest IPC fuzzing) |
 
 ---
 
@@ -222,7 +268,8 @@ prediction. This mirrors RootPulse exactly.
 
 ```
 Phase 0 (done): Scaffolding — 38 experiments, workspace compiles
-Phase 1 (current): Neural API integration, real IPC, server mode, 69 tests
+Phase 1 (done): Neural API integration, real IPC, server mode, 69 tests
+Phase 2 (current): Ecosystem absorption, IPC resilience stack, proptest, 132 tests
 Phase 2: Live primals — Tower Atomic with real BearDog + Songbird IPC
 Phase 3: Full NUCLEUS deployment and health validation
 Phase 4: All 5 graph execution patterns with real primals
