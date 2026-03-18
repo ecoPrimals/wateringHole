@@ -434,7 +434,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 54 (2364 tests, 59.92% line coverage, zero warnings, zero doc warnings, all files <1000 LOC) |
-| primalSpring | v0.1.0 Phase 0→1 (38 experiments, 7 tracks, 55 unit tests, real discovery, honest skip/fail, IPC client, zero warnings, genomeBin pinned) |
+| primalSpring | v0.2.0 Phase 2 (38 experiments, 7 tracks, 157 tests, niche self-knowledge, deploy graph validation, IPC resilience stack, proptest, zero warnings, zero unsafe) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
@@ -515,8 +515,8 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 ### primalSpring - Coordination and Composition Validation
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
-**Phase**: Phase 0→1 (evolved from scaffolding to real discovery)  
-**Status**: v0.1.0 — 38 experiments, 7 tracks, 55 unit tests, zero clippy warnings, zero `#[allow()]`, zero C deps, genomeBin pinned in `plasmidBin/`
+**Phase**: Phase 2 (niche self-knowledge, deploy graph validation, IPC resilience, ecosystem absorption)  
+**Status**: v0.2.0 — 38 experiments, 7 tracks, 157 tests (148 unit + 9 integration), niche self-knowledge (21 capabilities, semantic mappings, cost estimates), deploy graph validation (6 TOMLs), IPC resilience stack (IpcError, CircuitBreaker, RetryPolicy, DispatchOutcome), 4-format capability parsing, proptest IPC fuzzing, zero clippy warnings (pedantic+nursery), zero `#[allow()]`, zero unsafe (workspace forbid), zero C deps, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance.
 
@@ -525,8 +525,10 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | Category | Details |
 |----------|---------|
 | **Experiments** | 38 across 7 tracks: Atomic Composition (6), Graph Execution (6), Emergent Systems (6), Bonding & Plasmodium (5), Cross-Spring Coordination (5), Showcase-Mined (10). All use real `discover_primal()` with honest `check_skip` for live-IPC checks. |
-| **Deploy Graphs** | 6: primalspring_deploy.toml, parallel_capability_burst.toml, conditional_fallback.toml, streaming_pipeline.toml, continuous_tick.toml, coralforge_pipeline.toml |
-| **Coordination Domain** | coordination.deploy_atomic, coordination.validate_composition, coordination.bonding_test, composition.nucleus_health, nucleus.start, nucleus.stop |
+| **Deploy Graphs** | 6: primalspring_deploy.toml, parallel_capability_burst.toml, conditional_fallback.toml, streaming_pipeline.toml, continuous_tick.toml, coralforge_pipeline.toml — all parsed and structurally validated by `deploy.rs` |
+| **Niche Self-Knowledge** | 21 capabilities, semantic mappings (7 domains), operation dependencies, cost estimates, `register_with_target()` for biomeOS BYOB consumption |
+| **RPC Methods** | health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.discovery_sweep, coordination.neural_api_status, graph.list, graph.validate, lifecycle.status |
+| **IPC Resilience** | IpcError (8 typed variants), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
 | **Emergent Systems Tested** | RootPulse (commit/branch/merge/diff/federate), RPGPT (60Hz tick + provenance), coralForge (neural object Pipeline graph), cross-spring ecology |
 | **coralForge Evolution** | Reconceptualized from neuralSpring module to emergent neural object via biomeOS Pipeline graph. Math stays in neuralSpring. Composition is coralforge_pipeline.toml |
 
