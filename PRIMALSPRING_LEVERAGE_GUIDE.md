@@ -3,8 +3,8 @@
 # primalSpring Leverage Guide — How Every Primal Can Use Coordination Validation
 #
 # Status: Active
-# Last Updated: March 2, 2026
-# primalSpring Version: v0.1.0 (Phase 0 — scaffolding)
+# Last Updated: March 17, 2026
+# primalSpring Version: v0.1.0 (Phase 1 — Neural API integration, real IPC, server mode)
 
 ---
 
@@ -221,14 +221,15 @@ prediction. This mirrors RootPulse exactly.
 ## 7. Evolution Path
 
 ```
-Phase 0 (current): Scaffolding — 38 experiments, workspace compiles
-Phase 1: Tower Atomic with real BearDog + Songbird IPC
-Phase 2: Full NUCLEUS deployment and health validation
-Phase 3: All 5 graph execution patterns with real primals
-Phase 4: RootPulse + coralForge emergent system validation
-Phase 5: Plasmodium multi-gate coordination
-Phase 6: Cross-spring ecosystem integration
-Phase 7: Showcase-mined patterns (compute triangle, protocol escalation, federation)
+Phase 0 (done): Scaffolding — 38 experiments, workspace compiles
+Phase 1 (current): Neural API integration, real IPC, server mode, 69 tests
+Phase 2: Live primals — Tower Atomic with real BearDog + Songbird IPC
+Phase 3: Full NUCLEUS deployment and health validation
+Phase 4: All 5 graph execution patterns with real primals
+Phase 5: RootPulse + coralForge emergent system validation
+Phase 6: Plasmodium multi-gate coordination
+Phase 7: Cross-spring ecosystem integration
+Phase 8: Showcase-mined patterns (compute triangle, protocol escalation, federation)
 ```
 
 ---
