@@ -4,7 +4,7 @@
 #
 # Status: Active
 # Last Updated: March 18, 2026
-# primalSpring Version: v0.2.0 (Phase 2 — niche self-knowledge, deploy graph validation, IPC resilience, 157 tests)
+# primalSpring Version: v0.3.0-dev (Phase 3 — capability-first architecture, topological waves, 236 tests)
 
 ---
 
@@ -105,21 +105,38 @@ primalSpring provides a converged IPC resilience stack adopted across the ecosys
 | **register_with_target()** | Registers capabilities with biomeOS for BYOB scheduling |
 | **capabilities.list RPC** | Returns structured niche: capabilities array, semantic mappings, operation deps, cost estimates |
 
-### 1.9 Deploy Graph Validation (v0.2.0)
+### 1.9 Deploy Graph Validation + Topological Ordering (v0.3.0)
 
 | Component | Details |
 |-----------|---------|
-| **deploy.rs** | Parses biomeOS TOML deploy graphs, validates structure and live primals |
+| **deploy.rs** | Parses biomeOS TOML deploy graphs, validates structure, topological ordering, live probing |
+| **topological_waves()** | Kahn's algorithm startup wave computation from graph dependency edges |
+| **graph_required_capabilities()** | Extracts capability roster from `by_capability` fields |
+| **validate_live_by_capability()** | Probes nodes using capability-first discovery |
 | **graph.list RPC** | Structurally validates all graphs in the deploy directory |
 | **graph.validate RPC** | Validates a specific graph (structural or live probing) |
-| **validate_all binary** | Meta-validator that runs all 38 experiments in sequence |
+| **graph.waves RPC** | Returns topological startup wave ordering |
+| **graph.capabilities RPC** | Returns required capabilities from a graph |
+| **Deploy graphs** | 11 TOMLs, all nodes declare `by_capability` (enforced by test) |
 
-### 1.10 Test and Experiment Evolution
+### 1.10 Capability-First Architecture (v0.3.0)
 
-| Metric | v0.1.0 | v0.2.0 |
-|--------|--------|--------|
-| Tests | 69 | **157** (148 unit + 9 integration) |
-| Experiments | 38 | **38** (evolved: probe patterns, niche self-knowledge, deploy graph validation, proptest IPC fuzzing) |
+| Component | Details |
+|-----------|---------|
+| **discover_by_capability()** | Discovers providers by what they offer, not by name |
+| **check_capability_health()** | Capability-based health probe helper for experiments |
+| **validate_composition_by_capability()** | Validates compositions using capability resolution |
+| **IpcErrorPhase** | Phase-aware IPC error context (Connect/Serialize/Send/Receive/Parse) |
+| **discover_remote_tools()** | Cross-spring MCP tool discovery via `mcp.tools.list` |
+
+### 1.11 Test and Experiment Evolution
+
+| Metric | v0.1.0 | v0.2.0 | v0.3.0-dev |
+|--------|--------|--------|------------|
+| Tests | 69 | 157 | **236** (225 unit + 10 integration + 1 doc-test) |
+| RPC endpoints | 8 | 11 | **17** |
+| Deploy graphs | 6 | 6 | **11** (all `by_capability`) |
+| Capability-based experiments | 0 | 0 | **6** (exp001-004, exp006, exp051) |
 
 ---
 
