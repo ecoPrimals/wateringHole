@@ -190,4 +190,4 @@ Based on the ecosystem-wide survey conducted for primalSpring v0.2.0:
 - `primalSpring/wateringHole/PRIMALSPRING_COMPOSITION_GUIDANCE.md` — composition patterns
 - `primalSpring/specs/BARRACUDA_REQUIREMENTS.md` — minimal barraCuda requirements
 - `primalSpring/specs/SHOWCASE_MINING_REPORT.md` — patterns mined from phase1/phase2
-- `wateringHole/BARRACUDA_LEVERAGE_GUIDE.md` — barraCuda capabilities
+- `ecoPrimals/wateringHole/BARRACUDA_LEVERAGE_GUIDE.md` — barraCuda capabilities

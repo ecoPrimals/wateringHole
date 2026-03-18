@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: March 17, 2026
+**Last Updated**: March 18, 2026
 
 ---
 
@@ -375,7 +375,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Handoffs
 - `handoffs/*.md` — Active session handoffs (last 48 hours)
-- `handoffs/archive/` — Fossil record (462 archived handoffs, Feb 2026 – present)
+- `handoffs/archive/` — Fossil record (507 archived handoffs, Feb 2026 – present)
 
 ---
 
