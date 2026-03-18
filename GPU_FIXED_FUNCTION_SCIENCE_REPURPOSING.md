@@ -416,30 +416,158 @@ and coralReef handle the hardware. Springs stay in their science.
 
 ---
 
-## Implications for the Sovereign Stack
+## Infrastructure Portability — The Next Level
 
-This direction has a strategic consequence: **the sovereign compute pipeline
-must eventually support the graphics pipeline, not just compute dispatch.**
+### The Portability Ladder
 
-Currently, coralReef compiles WGSL to native GPU ISA and toadStool dispatches
-compute workloads. To leverage the rasterizer, depth buffer, ROPs, and
-tessellation hardware, the pipeline needs:
+The ecosystem has built four levels of math portability:
 
-1. **Graphics pipeline state objects**: Viewport, scissor, blend mode, depth
-   function, rasterizer state — these are GPU register configurations, not
-   shader code
-2. **Draw commands**: `DRAW(vertex_count)` / `DRAW_INDEXED(index_count)` in
+```
+Level 0: Python baseline           → portable across languages
+Level 1: Rust CPU                  → portable across platforms
+Level 2: WGSL compute shader       → portable across GPU vendors
+Level 3: GPU infrastructure target → portable across hardware ON the card
+Level 4: Silicon type              → portable across CPU / GPU / NPU / FPGA
+```
+
+Levels 0-2 are proven. Level 3 is the next frontier: **the same abstract
+math, compilable to any hardware unit on the GPU die.** Level 4 follows
+naturally (toadStool already orchestrates CPU/GPU/NPU dispatch).
+
+### Why Run Math on the "Wrong" Hardware?
+
+Running tensor cores on math that isn't matrix-shaped, or RT cores on
+problems that aren't spatial, sounds wasteful. It isn't. It's the same
+principle as running Python baselines to establish correctness before GPU
+promotion.
+
+**Running math on every hardware unit maps the performance surface.**
+
+For each `(operation, hardware_unit, precision)` triple, you get a data
+point: throughput, latency, accuracy. After enough experiments across all
+springs, you know the full landscape. Then the compiler places operations
+optimally — not from theory, but from measured data.
+
+| Placement | What you learn |
+|-----------|---------------|
+| Yukawa force on shader cores (DF64) | Baseline throughput at 14-digit precision |
+| Yukawa force on tensor cores (FP16) | Precision loss bounds, throughput ceiling at 4x rate |
+| Yukawa force on tensor cores (TF32) | Precision vs throughput tradeoff at 2x rate |
+| Yukawa force via TMU (potential table) | Lookup throughput when function is precomputable |
+| Force accumulation on ROPs (blend) | Scatter-add throughput without atomics |
+| Neighbor finding on RT cores (BVH) | Spatial query ceiling for particle methods |
+
+Every "wrong" placement constrains the model. The "wrong" placements are
+often the most informative — they find the crossover points and surprise
+advantages.
+
+### Tensor Cores for Science Math
+
+Tensor cores execute one operation: `D = A × B + C` on small matrices
+(4×4 to 16×16). On the RTX 3090:
+
+| Precision | Tensor TFLOPS | Shader TFLOPS | Ratio |
+|-----------|--------------|--------------|-------|
+| FP16 | ~142 | 35.6 | 4.0x |
+| TF32 | ~71 | 35.6 | 2.0x |
+| BF16 | ~142 | 35.6 | 4.0x |
+| INT8 | ~284 TOPS | — | — |
+
+The question: **can your science be expressed as matrix multiplies?**
+
+| Operation | Matrix reformulation | Tensor core viable? |
+|-----------|---------------------|-------------------|
+| CG solver (Ax=b) | Matrix-vector product: `A × x` | Yes — 60-70% of HMC runtime, biggest single win |
+| Pairwise distances | `diag(A^T A) + diag(B^T B) - 2A^T B` | Yes — the O(N²) part of MD |
+| Convolution | Toeplitz matrix × input vector | Yes — spectral analysis, filtering |
+| FFT butterfly | Batched 2×2 rotation matrices | Yes — foundational for spectral methods |
+| Finite differences | Banded matrix × state vector | Yes — PDE stencils |
+| Neural network layers | `W × X + B` | Yes — literally designed for this |
+| Dot products | `A^T × B` (1×N × N×1) | Yes — inner products, projections |
+| Basis transforms | Change-of-basis matrix × coordinates | Yes — coordinate transforms, rotations |
+
+For hotSpring's lattice QCD: the CG solver is pure matrix-vector products.
+At TF32 (71 TFLOPS) vs DF64 on shader cores (3.24 TFLOPS), the solver
+could run **~22x faster** for iterations where TF32 precision is
+acceptable (e.g., pre-conditioning, initial convergence). The final
+refinement uses DF64 for full precision. This mixed-precision CG is a
+known technique in HPC — the hardware portability makes it automatic.
+
+### The Dispatch Router Architecture
+
+The evolution target for barraCuda + coralReef + toadStool:
+
+```
+Spring calls: barraCuda.math.pairwise.yukawa(particles, params)
+                              |
+                     Dispatch Router
+              (operation shape + precision + hardware map)
+                              |
+         ┌──────┬──────┬──────┬──────┬──────┬──────┐
+         ↓      ↓      ↓      ↓      ↓      ↓      ↓
+      Shader  Tensor   RT    TMU    ROP   Raster  CPU
+      cores   cores   cores  fetch  blend  fill  fallback
+      (WGSL)  (MMA)  (BVH)  (tex)  (add)  (tri)  (Rust)
+         |      |      |      |      |      |      |
+         └──────┴──────┴──────┴──────┴──────┴──────┘
+                              |
+                    coralReef compiles each
+                    to native ISA per unit
+                              |
+                    toadStool submits mixed
+                    command stream to GPU
+```
+
+The router can:
+1. **Select the best unit** for a given operation based on measured data
+2. **Split across units** — force MMA on tensor cores + neighbor BVH on RT
+   cores + potential lookup on TMU + accumulation on ROPs, all pipelined
+3. **Fall back gracefully** — no tensor cores? Use shader cores. No RT
+   cores? Use compute BVH. Always works, just at different throughput.
+
+This is the infrastructure-portable equivalent of barraCuda's existing
+CPU fallback. Today: GPU not available → CPU. Tomorrow: tensor cores not
+available → shader cores. RT cores not available → compute BVH. The math
+is the same; the hardware target changes.
+
+### What No Existing Framework Does
+
+- **CUDA**: Shader cores + tensor cores (via wmma). No RT/TMU/ROP/rasterizer
+  for science.
+- **Vulkan**: Shader cores + graphics pipeline. No tensor cores for science.
+  No cross-unit dispatch.
+- **OpenCL**: Shader cores only. No fixed-function access at all.
+- **Kokkos**: Abstracts CPU/GPU. No hardware-unit-level targeting.
+
+None of them offer a single dispatch that places different parts of a
+computation on different hardware units simultaneously. The sovereign
+stack — coralReef compiling to native ISA per unit, toadStool submitting
+mixed command streams — can. This is a unique capability.
+
+### Implications for the Sovereign Stack
+
+This direction requires the sovereign compute pipeline to support more
+than compute dispatch:
+
+1. **Tensor core instructions**: coralReef emits `wmma`/`mma` (NVIDIA SASS)
+   or `v_mfma`/`v_wmma` (AMD GFX) for MMA operations
+2. **Graphics pipeline state objects**: Viewport, scissor, blend mode, depth
+   function, rasterizer state — GPU register configurations, not shader code
+3. **Draw commands**: `DRAW(vertex_count)` / `DRAW_INDEXED(index_count)` in
    the GPU command stream alongside `DISPATCH(groups)`
-3. **Framebuffer management**: Render targets, depth/stencil attachments
+4. **RT pipeline state**: BVH build, ray generation, intersection testing
+5. **Framebuffer management**: Render targets, depth/stencil attachments
+6. **Mixed command streams**: Compute + graphics + RT in a single submission
 
-On AMD (GFX9+), draw commands are PM4 packets just like compute dispatches —
-coralReef already knows how to emit PM4. On NVIDIA, draw commands use
-different GPFIFO classes but the submission mechanism is the same PBDMA
-channel that compute uses.
+On AMD (GFX9+), draw commands and MMA instructions are PM4 packets and ISA
+instructions — coralReef already knows how to emit PM4 and GFX ISA.
+On NVIDIA, draw commands use different GPFIFO classes but the submission
+mechanism is the same PBDMA channel that compute uses. Tensor core MMA
+instructions are part of the SM instruction set.
 
 This is NOT a rewrite. It's an extension of the existing sovereign path.
-The shader cores are the same; only the fixed-function configuration and
-command types differ.
+The shader cores are the same silicon; the instructions and configuration
+differ per target unit.
 
 ---
 
