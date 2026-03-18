@@ -669,13 +669,6 @@ VFIO-isolated GPU (toadStool), rendered via DRM display transport
 (toadStool), UI managed by petalTongue, camera input via V4L2
 capture transport (toadStool). Zero vendor SDK in the entire stack.
 
-### 5.8 primalSpring (Coordination Validation)
-
-primalSpring validates ToadStool's role in composition — exp002 (Node
-Atomic) tests compute.execute dispatch via capability routing, and
-exp025 (coralForge pipeline) tests ToadStool as GPU dispatch node in
-the structure prediction Pipeline graph.
-
 ---
 
 ## 6. Emergent Ecosystem Patterns
@@ -983,8 +976,6 @@ airSpring: switch to GPU-quality prediction (higher precision)
 
 The spring never checks battery level. biomeOS sets policy, toadStool
 enforces it at the hardware level, and squirrel adapts routing.
-fieldMouse deployments may include stripped ToadStool chimeras for edge
-compute dispatch.
 
 ### 8.3 toadStool as Hardware Knowledge Broker
 
@@ -1161,13 +1152,204 @@ sovereignty principle.
 
 ---
 
+## 11. Every Piece of Silicon — toadStool's Evolution Path
+
+*Driven by the ludoSpring V24 GPU Fixed-Function Science Repurposing audit.
+See `wateringHole/GPU_FIXED_FUNCTION_SCIENCE_REPURPOSING.md`.*
+
+The DF64 discovery proved that "graphics hardware" is really "math hardware
+with a graphics API painted on top." A modern GPU die has at least **eight
+distinct hardware units**, each a special-purpose computer. toadStool's
+role is to discover, route to, and dispatch work across ALL of them.
+
+### 11.1 Current Silicon Map (S158)
+
+| Silicon | toadStool Status | Dispatch Path |
+|---------|-----------------|---------------|
+| **GPU Shader Cores** | Implemented | wgpu (default), VFIO sovereign (WIP) |
+| **GPU (OpenCL)** | Implemented | Feature-gated `opencl`, `ocl` crate |
+| **GPU (CUDA)** | Implemented | Feature-gated `cuda`, `cudarc` |
+| **GPU (Vulkan)** | Partial | Feature-gated, recommends wgpu |
+| **NPU (Akida AKD1000/1500)** | Implemented | Kernel, VFIO, Userspace backends |
+| **CPU** | Implemented | rayon, Ollama integration |
+| **GPU Tensor Cores** | Not yet | Needs coralReef MMA emission + toadStool routing |
+| **GPU RT Cores** | Not yet | Needs coralReef BVH build + toadStool routing |
+| **GPU TMUs** | Not yet | Needs graphics pipeline state + texture binding |
+| **GPU ROPs / Alpha Blend** | Not yet | Needs graphics pipeline state + framebuffer mgmt |
+| **GPU Rasterizer** | Not yet | Needs draw command submission |
+| **GPU Tessellator** | Not yet | Needs hull/domain shader pipeline |
+| **GPU Video Enc/Dec** | Not yet | Needs NVENC/VCN dispatch |
+| **Metal** | Stub | Enum variant only |
+| **ROCm** | Stub | Mentioned in docs |
+| **DirectCompute** | Stub | Enum variant only |
+
+### 11.2 What toadStool Must Evolve
+
+**Phase A — Sovereign Compute (current P0)**
+
+The sovereign compute pipeline (VFIO dispatch for shader cores) is the
+prerequisite for everything that follows. All fixed-function unit access
+goes through the same VFIO channel.
+
+| Item | Status | Blocker |
+|------|--------|---------|
+| VFIO device binding + BAR0 | Done | — |
+| DMA allocation | Done | — |
+| Power management (nvpmu) | Done | — |
+| Compute dispatch (PBDMA) | WIP | coralReef USERD_TARGET fix |
+| Buffer readback | Not wired | ~200 LOC plumbing |
+| E2E sovereign test | Blocked | Needs dispatch + readback |
+
+**Phase B — Performance Surface Database (new)**
+
+toadStool needs a measured performance surface — the
+`(operation, hardware_unit, precision, throughput)` tuples from spring
+experiments — to make routing decisions based on real data:
+
+```
+compute.performance_surface.report {
+  "operation": "math.pairwise.yukawa",
+  "hardware_unit": "tensor_core",
+  "precision": "tf32",
+  "throughput_gflops": 71000,
+  "tolerance_achieved": 1e-7,
+  "gpu_model": "RTX 3090",
+  "measured_by": "hotSpring exp076"
+}
+
+compute.performance_surface.query {
+  "operation": "math.pairwise.yukawa",
+  "tolerance_required": 1e-14,
+  "available_units": ["shader_core", "tensor_core", "tmu"]
+}
+→ { "recommended": "shader_core", "mode": "df64", "throughput": 3240 }
+```
+
+This is an extension of hw-learn — from profiling one GPU as a whole
+to profiling each hardware unit on the GPU for each operation class.
+
+**Phase C — Multi-Unit Routing (new)**
+
+Extend the dispatch router from "which GPU" to "which unit ON the GPU":
+
+```
+compute.route {
+  "workload": [
+    { "op": "neighbor_search", "tolerance": 1e-2, "data_size": 1000000 },
+    { "op": "force_eval", "tolerance": 1e-14, "data_size": 1000000 },
+    { "op": "accumulation", "tolerance": 1e-7, "data_size": 1000000 }
+  ]
+}
+→ {
+  "plan": [
+    { "op": "neighbor_search", "unit": "rt_core", "reason": "spatial query, 10x over compute" },
+    { "op": "force_eval", "unit": "shader_core", "mode": "df64", "reason": "14-digit tolerance" },
+    { "op": "accumulation", "unit": "rop_blend", "reason": "additive scatter, 5x over atomics" }
+  ]
+}
+```
+
+Graceful degradation: RT cores unavailable → route neighbor_search to
+shader cores (compute BVH). Tensor cores unavailable → route matrix ops
+to shader cores. The math is the same; the throughput changes.
+
+**Phase D — Mixed Command Stream Submission (new)**
+
+The sovereign VFIO path submits compute dispatches via PBDMA. For
+fixed-function units, toadStool needs to submit mixed command streams:
+
+| Command Type | GPU Mechanism | toadStool Role |
+|--------------|--------------|----------------|
+| Compute dispatch | PBDMA `DISPATCH(groups)` | Current path (Phase A) |
+| Draw (rasterizer) | PBDMA `DRAW(vertices)` | New: vertex buffer + pipeline state |
+| RT trace | PBDMA `TRACE_RAY(...)` | New: BVH + ray generation |
+| Framebuffer ops | ROP config registers | New: blend mode, depth func |
+| Texture binding | TMU descriptor | New: texture handle + sampler |
+| Tensor MMA | SM ISA (`HMMA`/`IMMA`) | New: coralReef emits MMA instructions |
+
+This is NOT a rewrite — it's extending the existing PBDMA submission
+with additional command types. The submission mechanism is identical;
+the payloads differ per hardware unit.
+
+### 11.3 Tolerance-Based Routing — The Key Innovation
+
+The precision spectrum from `GPU_FIXED_FUNCTION_SCIENCE_REPURPOSING.md`:
+
+```
+Tolerance → Precision → Cheapest Hardware (RTX 3090) → Throughput
+1e-2        ~3 digits   FP16 tensor cores               ~142 TFLOPS
+1e-4        ~5 digits   FP16 tensor cores               ~142 TFLOPS
+1e-7        ~7 digits   FP32 shader cores                ~35.6 TFLOPS
+1e-10       ~10 digits  TF32 tensor cores (accumulated)  ~71 TFLOPS
+1e-14       ~14 digits  DF64 on FP32 shader cores        ~3.24-8.9 TFLOPS
+1e-16       ~16 digits  Native FP64                      ~0.33 TFLOPS
+1e-30       ~30 digits  Software arbitrary precision      ~0.01 TFLOPS
+```
+
+**toadStool picks the row. coralReef compiles for it. Springs never see
+the table.** A spring calls `barraCuda.math.pairwise.yukawa(tolerance=1e-14)`
+and toadStool routes to DF64 shader cores on the RTX 3090, native fp64 on
+the Titan V, or software emulation on a Raspberry Pi. The math is identical.
+
+### 11.4 ludoSpring-Specific Silicon Opportunities
+
+ludoSpring's game science experiments (`exp076`) target:
+
+| Experiment | Hardware Unit | Expected Gain |
+|------------|--------------|---------------|
+| Fog of war visibility | Rasterizer | 10-50x over per-tile ray march |
+| Pathfinding heuristic | Z-buffer (depth) | 100x over wavefront BFS |
+| Influence maps | ROPs (blend) | 5-10x over CPU loop |
+| Acoustic ray tracing | RT cores | 1000x over analytical model |
+| Engagement curves | TMUs | 5-20x over analytical eval |
+| DDA raycaster rendering | Shader cores | Closes the render gap |
+
+These discoveries flow upstream: rasterizer visibility → airSpring terrain
+analysis; RT acoustics → airSpring environmental acoustics; Z-buffer
+distance → groundSpring geological Voronoi.
+
+### 11.5 Sovereign Pipeline — What Unlocks What
+
+```
+Phase A (current): VFIO compute dispatch
+  → Every spring gets sovereign shader core compute
+  → hotSpring Kokkos gap closes
+  → neuralSpring coralForge pipeline runs sovereign
+  → ludoSpring game shaders dispatch without Vulkan
+
+Phase B: Performance surface database
+  → toadStool makes data-driven routing decisions
+  → hw-learn evolves from "whole GPU" to "per-unit" profiling
+
+Phase C: Multi-unit routing
+  → Single workload splits across shader + tensor + RT + TMU
+  → Compound throughput: 50-100 effective TFLOPS per RTX 3090
+  → No existing framework does this
+
+Phase D: Mixed command streams
+  → Graphics pipeline state for rasterizer/depth/blend science
+  → RT pipeline state for BVH-accelerated neighbor search
+  → Tensor MMA instructions alongside compute shaders
+  → Single dispatch uses ALL silicon on the die
+```
+
+**Compound effect**: A single RTX 3090 today delivers 0.33 native fp64
+TFLOPS. With DF64: 3.24 TFLOPS. With the full hardware budget — all
+eight units running in parallel on different parts of the problem — the
+effective science throughput could reach 50-100 TFLOPS equivalent. That
+is a small HPC cluster in a single PCIe slot.
+
+---
+
 ## References
 
 - `toadStool/README.md` — Full primal documentation
 - `toadStool/STATUS.md` — Detailed technical status
 - `toadStool/DEBT.md` — Active debt register and evolution paths
 - `toadStool/specs/PRIMAL_CAPABILITY_SYSTEM.md` — Capability system spec
+- `toadStool/specs/SOVEREIGN_COMPUTE_EVOLUTION.md` — Sovereign compute plan
 - `wateringHole/SOVEREIGN_COMPUTE_EVOLUTION.md` — Full sovereign stack plan
+- `wateringHole/GPU_FIXED_FUNCTION_SCIENCE_REPURPOSING.md` — All-silicon targeting
 - `wateringHole/BARRACUDA_LEVERAGE_GUIDE.md` — barraCuda leverage guide
 - `wateringHole/CORALREEF_LEVERAGE_GUIDE.md` — coralReef leverage guide
 - `wateringHole/INTER_PRIMAL_INTERACTIONS.md` — IPC coordination
