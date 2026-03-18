@@ -47,6 +47,23 @@ genomeBin (deployment)  → + Auto-detection, service integration, health monito
 **Expectation**: Every primal is a single self-contained binary. No shared libraries,
 no plugins, no dynamic loading. `cargo build --release` produces one artifact.
 
+### Genome Pinning (`plasmidBin/`)
+
+When a primal or spring reaches a stable release, its genomeBin is pinned to
+`ecoPrimals/plasmidBin/`. This is the ecosystem-wide source of truth for
+production-ready binaries. Springs and biomeOS discover primal binaries from
+this directory via the `$ECOPRIMALS_PLASMID_BIN` discovery chain.
+
+| Layer | Location | Role |
+|-------|----------|------|
+| genomeBin | `wateringHole/genomeBin/` | Distribution manifest, checksums, update policy |
+| biomeOS plasmidBin | `phase2/biomeOS/plasmidBin/` | Local cache for spore creation |
+| Root plasmidBin | `ecoPrimals/plasmidBin/` | Ecosystem-wide stable genomes |
+
+**Standard practice**: After a successful audit or milestone, copy the release
+binary to `plasmidBin/primals/{name}` (for primals) or `plasmidBin/springs/{name}`
+(for springs), and update `plasmidBin/manifest.toml` + `plasmidBin/sources.toml`.
+
 ## 3. Communication (IPC)
 
 | Standard | File | Summary |
