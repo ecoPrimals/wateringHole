@@ -493,56 +493,117 @@ acceptable (e.g., pre-conditioning, initial convergence). The final
 refinement uses DF64 for full precision. This mixed-precision CG is a
 known technique in HPC — the hardware portability makes it automatic.
 
-### The Dispatch Router Architecture
+### The Compute Trio — Same Pattern, Deeper Target
 
-The evolution target for barraCuda + coralReef + toadStool:
+The ecosystem already solves hardware portability for NPU vs GPU vs CPU:
+barraCuda defines the math, toadStool discovers hardware and routes
+dispatch, coralReef compiles to the target. Infrastructure portability
+within the GPU is the same pattern applied one level deeper.
+
+**barraCuda (WHAT)** — Universal math primal. Defines operations as
+abstract mathematical semantics with precision requirements and tolerances.
+`math.pairwise.yukawa` means "compute the Yukawa pair potential to 14-digit
+precision." barraCuda does NOT know about shader cores, tensor cores, RT
+cores, or any hardware. It is hardware-agnostic by design. A spring calls
+barraCuda the same way regardless of what silicon executes the math.
+
+**coralReef (HOW)** — Sovereign compiler. Given a mathematical operation
+and a hardware target, coralReef produces the native instruction stream.
+Today: WGSL → NVIDIA SASS (shader cores) or AMD GFX (shader cores).
+Tomorrow: the same `math.pairwise.yukawa` compiled to:
+- Shader core ISA (SASS `FFMA`/`DFMA`, GFX `v_fma_f32`/`v_fma_f64`)
+- Tensor core MMA instructions (SASS `HMMA`/`IMMA`, GFX `v_mfma_f32`)
+- RT core BVH build + intersection (SASS `RTT`, GFX ray tracing packets)
+- Graphics pipeline state (blend mode, depth function, rasterizer config)
+- CPU fallback (Rust)
+
+coralReef knows instruction sets. It does NOT decide where to dispatch.
+
+**toadStool (WHERE)** — Hardware discovery and dispatch routing. toadStool
+knows what hardware exists, what each unit can do, and where to send work.
+Today: "this machine has an RTX 3090, dispatch compute to it; or an NPU,
+send pre-compiled math there." Tomorrow: "the RTX 3090 has tensor cores
+idle, the CG solver iteration is matrix-shaped, route it to tensor cores;
+the neighbor search is spatial, route it to RT cores; the force evaluation
+needs DF64, route it to shader cores."
+
+toadStool owns the performance surface — the measured
+`(operation, unit, precision, throughput)` data from spring experiments.
+It makes routing decisions based on real measurements, not theory.
 
 ```
 Spring calls: barraCuda.math.pairwise.yukawa(particles, params)
                               |
-                     Dispatch Router
-              (operation shape + precision + hardware map)
+                    barraCuda (WHAT)
+                    "Yukawa pair potential, 14-digit precision"
+                    Pure math. No hardware knowledge.
+                              |
+                    toadStool (WHERE)
+                    "RTX 3090 available. Tensor cores idle.
+                     Performance surface says: distance matrix
+                     → tensor MMA (2x), neighbor list → RT BVH
+                     (10x), potential eval → TMU table (15x),
+                     force accumulation → ROP blend (5x),
+                     integration → shader DF64 (baseline)."
                               |
          ┌──────┬──────┬──────┬──────┬──────┬──────┐
          ↓      ↓      ↓      ↓      ↓      ↓      ↓
       Shader  Tensor   RT    TMU    ROP   Raster  CPU
       cores   cores   cores  fetch  blend  fill  fallback
-      (WGSL)  (MMA)  (BVH)  (tex)  (add)  (tri)  (Rust)
          |      |      |      |      |      |      |
          └──────┴──────┴──────┴──────┴──────┴──────┘
                               |
-                    coralReef compiles each
-                    to native ISA per unit
+                    coralReef (HOW)
+                    Compiles each sub-operation to native
+                    ISA for the target unit selected by
+                    toadStool. Emits mixed command stream.
                               |
-                    toadStool submits mixed
-                    command stream to GPU
+                    toadStool submits to hardware
 ```
 
-The router can:
-1. **Select the best unit** for a given operation based on measured data
-2. **Split across units** — force MMA on tensor cores + neighbor BVH on RT
-   cores + potential lookup on TMU + accumulation on ROPs, all pipelined
-3. **Fall back gracefully** — no tensor cores? Use shader cores. No RT
-   cores? Use compute BVH. Always works, just at different throughput.
+This separation means:
+- Springs never change. They call `barraCuda.math.pairwise.yukawa`.
+- barraCuda never changes. It defines the math and precision.
+- coralReef learns new compilation targets (tensor MMA, RT BVH, graphics
+  pipeline state) — pure compiler evolution.
+- toadStool learns new routing strategies from spring experiment data —
+  pure orchestration evolution.
 
-This is the infrastructure-portable equivalent of barraCuda's existing
-CPU fallback. Today: GPU not available → CPU. Tomorrow: tensor cores not
-available → shader cores. RT cores not available → compute BVH. The math
-is the same; the hardware target changes.
+Each primal evolves independently. A new hardware unit (say, a future
+"graph core" or "sparse core") requires: coralReef learns to emit its
+instructions, toadStool learns to discover and dispatch to it. barraCuda
+and all springs are unchanged.
+
+### Graceful Degradation — Same Pattern as NPU/GPU/CPU
+
+Today: GPU not available → CPU fallback (barraCuda handles this).
+Tomorrow: tensor cores not available → shader cores. RT cores not
+available → compute BVH. TMU not available → compute evaluation.
+
+toadStool's routing always has a fallback. The math is the same; the
+hardware target changes; the precision and correctness are preserved.
+Springs never see the difference except in throughput.
 
 ### What No Existing Framework Does
 
-- **CUDA**: Shader cores + tensor cores (via wmma). No RT/TMU/ROP/rasterizer
-  for science.
-- **Vulkan**: Shader cores + graphics pipeline. No tensor cores for science.
-  No cross-unit dispatch.
-- **OpenCL**: Shader cores only. No fixed-function access at all.
+- **CUDA**: Shader cores + tensor cores (via wmma). No RT/TMU/ROP for
+  science. No unified dispatch abstraction.
+- **Vulkan**: Shader cores + graphics pipeline. No tensor cores for
+  science. No cross-unit routing.
+- **OpenCL**: Shader cores only. No fixed-function access.
 - **Kokkos**: Abstracts CPU/GPU. No hardware-unit-level targeting.
+- **All of them**: The application must choose the hardware target at
+  code-write time. The programmer decides "use tensor cores here."
 
-None of them offer a single dispatch that places different parts of a
-computation on different hardware units simultaneously. The sovereign
-stack — coralReef compiling to native ISA per unit, toadStool submitting
-mixed command streams — can. This is a unique capability.
+The ecoPrimals trio inverts this. The application (spring → barraCuda)
+defines math. The infrastructure (toadStool + coralReef) decides hardware.
+The application developer never writes tensor core code, RT core code,
+or graphics pipeline code. They write math. The primals handle the rest.
+
+This is the same inversion that made GPU compute accessible — CUDA let
+you write C instead of shader assembly. The ecoPrimals trio lets you write
+math instead of hardware-targeted code. But unlike CUDA, the trio targets
+ALL hardware on the die, not just shader cores.
 
 ### Implications for the Sovereign Stack
 
