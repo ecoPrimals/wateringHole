@@ -154,6 +154,36 @@ The validation goal is **CERN-grade reproducible physics at home, scalable to CE
 >
 > The previous list of fixes remains valid for context, but Path A (BAR0) is
 > now the primary sovereign approach — no kernel patch needed.
+>
+> **March 17 update (trio catchup status + handoff cleanup)**:
+> 20 superseded handoffs archived. Current handoff count: 23 (down from 43).
+> Trio catchup guidance issued: `handoffs/SOVEREIGN_COMPUTE_TRIO_CATCHUP_GUIDANCE_MAR17_2026.md`.
+>
+> **Layer status:**
+> - Layers -1 through 1 (power, glow plug, BAR2): **Complete**. coral-glowplug
+>   is production-grade — both Titan V healthy, VFIO-first, boot-persistent.
+> - Layer 2–4 (PFIFO, runlist, GR context): **Blocked**. Four gaps remain in
+>   strict dependency chain: MMU fault buffers → runlist encoding → PBDMA
+>   activation → FECS/GPCCS context. These are the frontier of reverse
+>   engineering work. See `GPU_SOVEREIGN_BRING_UP_GUIDE.md` Parts 3–5.
+> - Layer 5 (shader compilation): **Operational**. coralReef Phase 10 Iter 55,
+>   1992+ tests, WGSL→SASS for SM70 working. AMD targets added (gfx1030/1100/90a).
+> - Layer 6 (math/shaders): **Complete**. barraCuda v0.3.5, 3,772 tests,
+>   zero clippy warnings, forbid(unsafe_code), all quality gates green.
+> - toadStool: **Partial**. S158 audit green. GlowPlug socket client unblocked
+>   by coralReef JSON-RPC delivery but not yet implemented. VFIO sysmon detection
+>   not started. hw-learn health feed not wired.
+>
+> **NVK bridge path** is the interim operational route. hotSpring can run real
+> GPU compute today by swapping a Titan V to nouveau via GlowPlug, running DF64
+> shaders through NVK/Vulkan. Blocked on building Mesa from source (Pop!_OS
+> Mesa 25.1.5 missing `libvulkan_nouveau.so`). GlowPlug swap validation plan
+> (7 steps) documented in `hotSpring/wateringHole/handoffs/`.
+>
+> **Critical path to sovereign dispatch**: coralReef Gaps 2→3→4→5, all P1.
+> Expected timeline: days per gap if focused. Once all four close, hotSpring
+> runs `bench_sovereign_dispatch` for the first wgpu/NVK vs coralReef/DRM
+> math comparison on real Titan V hardware.
 
 ---
 
