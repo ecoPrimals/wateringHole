@@ -4,7 +4,7 @@
 #
 # Status: Active
 # Last Updated: March 18, 2026
-# primalSpring Version: v0.2.0 (Phase 2 — IPC resilience, 4-format capability parsing, health probes, proptest, 132 tests)
+# primalSpring Version: v0.2.0 (Phase 2 — niche self-knowledge, deploy graph validation, IPC resilience, 157 tests)
 
 ---
 
@@ -97,12 +97,29 @@ primalSpring provides a converged IPC resilience stack adopted across the ecosys
 | **OrExit\<T\> trait** | Clean fatal exit for validation binaries (`.or_exit(msg)`) |
 | **ValidationSink trait** | Pluggable output: `StdoutSink`, `NullSink` for CI/headless runs |
 
-### 1.8 Test and Experiment Evolution
+### 1.8 Niche Self-Knowledge (v0.2.0)
+
+| Component | Details |
+|-----------|---------|
+| **niche.rs** | 21 capabilities, 7 semantic domains, operation dependencies, cost estimates |
+| **register_with_target()** | Registers capabilities with biomeOS for BYOB scheduling |
+| **capabilities.list RPC** | Returns structured niche: capabilities array, semantic mappings, operation deps, cost estimates |
+
+### 1.9 Deploy Graph Validation (v0.2.0)
+
+| Component | Details |
+|-----------|---------|
+| **deploy.rs** | Parses biomeOS TOML deploy graphs, validates structure and live primals |
+| **graph.list RPC** | Structurally validates all graphs in the deploy directory |
+| **graph.validate RPC** | Validates a specific graph (structural or live probing) |
+| **validate_all binary** | Meta-validator that runs all 38 experiments in sequence |
+
+### 1.10 Test and Experiment Evolution
 
 | Metric | v0.1.0 | v0.2.0 |
 |--------|--------|--------|
-| Unit tests | 69 | **132** |
-| Experiments | 38 | **38** (evolved with probe patterns, FAMILY_ID-aware discovery, Neural API health checks, proptest IPC fuzzing) |
+| Tests | 69 | **157** (148 unit + 9 integration) |
+| Experiments | 38 | **38** (evolved: probe patterns, niche self-knowledge, deploy graph validation, proptest IPC fuzzing) |
 
 ---
 
@@ -269,8 +286,8 @@ prediction. This mirrors RootPulse exactly.
 ```
 Phase 0 (done): Scaffolding — 38 experiments, workspace compiles
 Phase 1 (done): Neural API integration, real IPC, server mode, 69 tests
-Phase 2 (current): Ecosystem absorption, IPC resilience stack, proptest, 132 tests
-Phase 2: Live primals — Tower Atomic with real BearDog + Songbird IPC
+Phase 2 (current): Ecosystem absorption, niche self-knowledge, deploy graph validation, 157 tests
+Phase 2b: Live primals — Tower Atomic with real BearDog + Songbird IPC
 Phase 3: Full NUCLEUS deployment and health validation
 Phase 4: All 5 graph execution patterns with real primals
 Phase 5: RootPulse + coralForge emergent system validation
