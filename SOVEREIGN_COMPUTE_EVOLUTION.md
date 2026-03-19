@@ -160,8 +160,8 @@ The validation goal is **CERN-grade reproducible physics at home, scalable to CE
 > Trio catchup guidance issued: `handoffs/SOVEREIGN_COMPUTE_TRIO_CATCHUP_GUIDANCE_MAR17_2026.md`.
 >
 > **Layer status:**
-> - Layers -1 through 1 (power, glow plug, BAR2): **Complete**. coral-glowplug
->   is production-grade — both Titan V healthy, VFIO-first, boot-persistent.
+> - Layers -1 through 1 (power, glow plug, BAR2): **Complete + Hardened**. coral-ember
+>   immortal fd holder + coral-glowplug lifecycle broker. DRM isolation. Fail-safe swap.
 > - Layer 2–4 (PFIFO, runlist, GR context): **Blocked**. Four gaps remain in
 >   strict dependency chain: MMU fault buffers → runlist encoding → PBDMA
 >   activation → FECS/GPCCS context. These are the frontier of reverse
@@ -174,15 +174,27 @@ The validation goal is **CERN-grade reproducible physics at home, scalable to CE
 >   by coralReef JSON-RPC delivery but not yet implemented. VFIO sysmon detection
 >   not started. hw-learn health feed not wired.
 >
-> **NVK bridge path** is the interim operational route. hotSpring can run real
-> GPU compute today by swapping a Titan V to nouveau via GlowPlug, running DF64
-> shaders through NVK/Vulkan. Blocked on building Mesa from source (Pop!_OS
-> Mesa 25.1.5 missing `libvulkan_nouveau.so`). GlowPlug swap validation plan
-> (7 steps) documented in `hotSpring/wateringHole/handoffs/`.
+> **March 19 update (Ember architecture + DRM isolation)**:
+> `coral-ember` is now an immortal systemd service holding VFIO fds for both
+> Titan V GPUs. `SCM_RIGHTS` fd passing to `coral-glowplug` is operational.
+> Atomic `swap_device` RPC orchestrates all sysfs driver transitions from
+> within Ember — glowplug never touches sysfs unbind/bind. External fd holder
+> detection prevents deadlocks. DRM isolation (Xorg `AutoAddGPU=false` + udev
+> 61-prefix seat tag removal) prevents display manager disruption during
+> nouveau/nvidia swaps. Preflight check in Ember blocks swaps if isolation
+> configs are missing. Both Titans successfully hot-swap between vfio and
+> nouveau with zero crashes. Exp 070 (dual Titan backend matrix) in progress.
+> Boot scripts version-controlled in `coralReef/scripts/boot/`.
 >
-> **Critical path to sovereign dispatch**: coralReef Gaps 2→3→4→5, all P1.
-> Expected timeline: days per gap if focused. Once all four close, hotSpring
-> runs `bench_sovereign_dispatch` for the first wgpu/NVK vs coralReef/DRM
+> **NVK bridge path** is the interim operational route. hotSpring can run real
+> GPU compute today by swapping a Titan V to nouveau via GlowPlug/Ember,
+> running DF64 shaders through NVK/Vulkan. Driver hot-swap validated on live
+> system (vfio↔nouveau round-trip, zero panics, zero relogs with DRM isolation).
+>
+> **Critical path to sovereign dispatch**: coralReef GP_PUT DMA read (cache
+> flush experiment in Iter 57), then FECS/GPCCS context. Expected timeline:
+> days per gap if focused. Once GP_PUT lands, hotSpring runs
+> `bench_sovereign_dispatch` for the first wgpu/NVK vs coralReef/DRM
 > math comparison on real Titan V hardware.
 
 ---
