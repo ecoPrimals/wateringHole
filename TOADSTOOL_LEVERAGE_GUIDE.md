@@ -1,10 +1,10 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 # toadStool Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 17, 2026
-**Primal**: toadStool S158 (Rust 2024, MSRV 1.85, 56 crates, 21,156+ tests, ecoBin v3.0)
+**Date**: March 18, 2026
+**Primal**: toadStool S159d (Rust 2024, MSRV 1.85, 58 crates, 21,000+ tests, ecoBin v3.0)
 **Audience**: All springs, all primals, biomeOS integrators
-**Status**: Active
+**Status**: Active — Phase B (silicon discovery) COMPLETE, Phase C (multi-unit routing) LANDED
 
 ---
 
@@ -1200,58 +1200,79 @@ goes through the same VFIO channel.
 | Buffer readback | Not wired | ~200 LOC plumbing |
 | E2E sovereign test | Blocked | Needs dispatch + readback |
 
-**Phase B — Performance Surface Database (new)**
+**Phase B — Silicon Discovery + Performance Surface Database** ✅ COMPLETE (S159b-c)
 
-toadStool needs a measured performance surface — the
-`(operation, hardware_unit, precision, throughput)` tuples from spring
-experiments — to make routing decisions based on real data:
+toadStool now auto-discovers all silicon units on every GPU via wgpu
+adapter probing and sysfs PCI device ID tables. Springs report measured
+performance data via JSON-RPC, building a live performance surface.
+
+**Types**: `SiliconUnit` (9 variants), `TensorCoreGen` (Volta→Hopper),
+`RtCoreGen` (Turing→Ada), `SiliconCapabilities`, `PerformanceMeasurement`,
+`PerformanceSurfaceEntry`. Implementation: `crates/toadstool-core/src/silicon.rs`.
+
+**JSON-RPC methods (live)**:
 
 ```
 compute.performance_surface.report {
   "operation": "math.pairwise.yukawa",
-  "hardware_unit": "tensor_core",
-  "precision": "tf32",
-  "throughput_gflops": 71000,
+  "silicon_unit": "rt_core",
+  "precision_mode": "fp32",
+  "throughput_gflops": 5400.0,
   "tolerance_achieved": 1e-7,
   "gpu_model": "RTX 3090",
-  "measured_by": "hotSpring exp076"
+  "measured_by": "hotSpring exp076",
+  "timestamp": 1710000000
 }
 
 compute.performance_surface.query {
   "operation": "math.pairwise.yukawa",
-  "tolerance_required": 1e-14,
-  "available_units": ["shader_core", "tensor_core", "tmu"]
+  "tolerance_required": 1e-14
 }
-→ { "recommended": "shader_core", "mode": "df64", "throughput": 3240 }
+→ { "recommended_unit": "shader_core", "recommended_precision": "df64",
+    "estimated_throughput_gflops": 3240,
+    "fallback_unit": "shader_core", "fallback_throughput_gflops": 3240 }
+
+compute.performance_surface.list {}
+→ { "total_measurements": 42, "operations": [...], "silicon_units": [...] }
 ```
 
-This is an extension of hw-learn — from profiling one GPU as a whole
-to profiling each hardware unit on the GPU for each operation class.
+**Phase C — Multi-Unit Routing Engine** ✅ LANDED (S159d)
 
-**Phase C — Multi-Unit Routing (new)**
-
-Extend the dispatch router from "which GPU" to "which unit ON the GPU":
+`compute.route.multi_unit` takes a compound workload and builds a
+routing plan across all silicon units. Every decision has shader-core
+fallback. When no surface data exists, heuristic routing kicks in.
 
 ```
-compute.route {
+compute.route.multi_unit {
   "workload": [
-    { "op": "neighbor_search", "tolerance": 1e-2, "data_size": 1000000 },
-    { "op": "force_eval", "tolerance": 1e-14, "data_size": 1000000 },
-    { "op": "accumulation", "tolerance": 1e-7, "data_size": 1000000 }
-  ]
+    { "op": "neighbor_search", "tolerance": 1e-2 },
+    { "op": "force_eval", "tolerance": 1e-14 },
+    { "op": "accumulation", "tolerance": 1e-7 }
+  ],
+  "gpu": "RTX 3090"
 }
 → {
-  "plan": [
-    { "op": "neighbor_search", "unit": "rt_core", "reason": "spatial query, 10x over compute" },
-    { "op": "force_eval", "unit": "shader_core", "mode": "df64", "reason": "14-digit tolerance" },
-    { "op": "accumulation", "unit": "rop_blend", "reason": "additive scatter, 5x over atomics" }
-  ]
+  "operations": [
+    { "operation": "neighbor_search", "silicon_unit": "rt_core",
+      "precision_mode": "fp32", "estimated_throughput_gflops": 5400,
+      "reason": "spatial query, 10x over compute",
+      "fallback": { "silicon_unit": "shader_core", ... } },
+    { "operation": "force_eval", "silicon_unit": "shader_core",
+      "precision_mode": "df64", "estimated_throughput_gflops": 3240,
+      "reason": "14-digit tolerance requires DF64" },
+    { "operation": "accumulation", "silicon_unit": "rop",
+      "precision_mode": "fp32", "estimated_throughput_gflops": 2700,
+      "reason": "additive scatter, 5x over atomics",
+      "fallback": { "silicon_unit": "shader_core", ... } }
+  ],
+  "total_estimated_throughput_gflops": 11340,
+  "gpu_target": "RTX 3090"
 }
 ```
 
-Graceful degradation: RT cores unavailable → route neighbor_search to
-shader cores (compute BVH). Tensor cores unavailable → route matrix ops
-to shader cores. The math is the same; the throughput changes.
+Graceful degradation: every routing decision has a fallback. RT cores
+unavailable → compute BVH on shader cores. Tensor cores unavailable →
+shader matmul. The math is the same; the throughput changes.
 
 **Phase D — Mixed Command Stream Submission (new)**
 
@@ -1311,22 +1332,23 @@ distance → groundSpring geological Voronoi.
 ### 11.5 Sovereign Pipeline — What Unlocks What
 
 ```
-Phase A (current): VFIO compute dispatch
-  → Every spring gets sovereign shader core compute
-  → hotSpring Kokkos gap closes
-  → neuralSpring coralForge pipeline runs sovereign
-  → ludoSpring game shaders dispatch without Vulkan
+Phase A (WIP): VFIO compute dispatch
+  → Blocked on coralReef FECS firmware loading
+  → Every spring gets sovereign shader core compute when unblocked
 
-Phase B: Performance surface database
-  → toadStool makes data-driven routing decisions
-  → hw-learn evolves from "whole GPU" to "per-unit" profiling
+Phase B (COMPLETE S159b-c): Silicon discovery + performance surface
+  ✅ SiliconUnit model (9 units), wgpu probe, sysfs PCI ID tables
+  ✅ compute.performance_surface.{report,query,list} JSON-RPC live
+  → toadStool makes data-driven routing decisions from spring experiments
 
-Phase C: Multi-unit routing
-  → Single workload splits across shader + tensor + RT + TMU
+Phase C (LANDED S159d): Multi-unit routing engine
+  ✅ compute.route.multi_unit builds optimal plans across all units
+  ✅ Heuristic fallback when no surface data exists
+  ✅ Every decision has shader-core fallback
   → Compound throughput: 50-100 effective TFLOPS per RTX 3090
-  → No existing framework does this
 
-Phase D: Mixed command streams
+Phase D (planned): Mixed command streams
+  → Requires Phase A (VFIO) + Phase C (routing)
   → Graphics pipeline state for rasterizer/depth/blend science
   → RT pipeline state for BVH-accelerated neighbor search
   → Tensor MMA instructions alongside compute shaders
@@ -1346,10 +1368,13 @@ is a small HPC cluster in a single PCIe slot.
 - `toadStool/README.md` — Full primal documentation
 - `toadStool/STATUS.md` — Detailed technical status
 - `toadStool/DEBT.md` — Active debt register and evolution paths
+- `toadStool/specs/README.md` — Compute trio scope and all-silicon roadmap
+- `toadStool/specs/ALL_SILICON_PIPELINE.md` — All-silicon pipeline specification (Phases A-D)
 - `toadStool/specs/PRIMAL_CAPABILITY_SYSTEM.md` — Capability system spec
-- `toadStool/specs/SOVEREIGN_COMPUTE_EVOLUTION.md` — Sovereign compute plan
+- `toadStool/crates/toadstool-core/src/silicon.rs` — Core silicon types
+- `toadStool/crates/server/src/pure_jsonrpc/handler/silicon.rs` — Performance surface + routing handlers
 - `wateringHole/SOVEREIGN_COMPUTE_EVOLUTION.md` — Full sovereign stack plan
-- `wateringHole/GPU_FIXED_FUNCTION_SCIENCE_REPURPOSING.md` — All-silicon targeting
+- `wateringHole/GPU_FIXED_FUNCTION_SCIENCE_REPURPOSING.md` — All-silicon targeting (ludoSpring V24)
 - `wateringHole/BARRACUDA_LEVERAGE_GUIDE.md` — barraCuda leverage guide
 - `wateringHole/CORALREEF_LEVERAGE_GUIDE.md` — coralReef leverage guide
 - `wateringHole/INTER_PRIMAL_INTERACTIONS.md` — IPC coordination
