@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 # toadStool Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 18, 2026
-**Primal**: toadStool S159d (Rust 2024, MSRV 1.85, 58 crates, 21,000+ tests, ecoBin v3.0)
+**Date**: March 20, 2026
+**Primal**: toadStool S160 (Rust 2024, MSRV 1.85, 58 crates, 21,275 tests, ecoBin v3.0)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active — Phase B (silicon discovery) COMPLETE, Phase C (multi-unit routing) LANDED
 
