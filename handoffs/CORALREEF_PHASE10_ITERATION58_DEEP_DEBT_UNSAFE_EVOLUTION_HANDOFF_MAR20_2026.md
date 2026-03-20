@@ -59,10 +59,27 @@ oversized files, and full CI compliance (fmt, clippy -D warnings, doc
 - `cargo fmt --all -- --check`: PASS
 - `cargo clippy --workspace --all-features --all-targets -- -D warnings`: PASS (0 warnings)
 - `RUSTDOCFLAGS="-D warnings" cargo doc --workspace --all-features --no-deps`: PASS
-- `cargo test --workspace`: 2643 passed, 0 failed
-- All `.rs` files under 1000 lines (max: 929)
-- All 455 `.rs` files have `SPDX-License-Identifier: AGPL-3.0-only`
+- `cargo test --workspace --all-features`: 2680+ passed, 0 failed
+- `cargo llvm-cov`: 60.16% line / 69.03% function / 60.62% region
+- All `.rs` files under 1000 lines
+- All 476 `.rs` files have `SPDX-License-Identifier: AGPL-3.0-only`
 - `.cursor/rules/` created with `coralreef-standards.mdc` and `rust-patterns.mdc`
+
+---
+
+### 7. Audit Hardening (Mar 20 continuation)
+
+- `#[forbid(unsafe_code)]` hardened on coral-ember + coral-glowplug (upgraded from `#[deny]`)
+- `libc` eliminated from direct dev-deps: `ember_client.rs` SCM_RIGHTS migrated to `rustix::net`
+- Hardcoded socket paths evolved: `EMBER_SOCKET` → `ember_socket_path()` with `$CORALREEF_EMBER_SOCKET` env override
+- Stale placeholder comments fixed: AMD GPU arch "placeholder" → "RDNA2/3/4 backend", Intel → "planned — register addresses TBD"
+- 14 `#[allow]` → `#[expect]` across 8 files (vendor_lifecycle, ember.rs, types.rs, page_tables.rs, support.rs, activate.rs, main.rs) — stale suppressions now warn at compile time
+- 5 tarpc Unix socket roundtrip tests: status, health_check, capabilities, wgsl compile, liveness+readiness (coverage 80.84% → 94.88%)
+- 9 vendor_lifecycle tests: description(), settle_secs(), rebind_strategy() for all 6 vendor types
+- 11 IPC Unix error path tests: dispatch errors, blank lines, malformed JSON, invalid JSON-RPC version
+- Unused `SendAncillaryBuffer` import removed from `ember_client.rs`
+- Stale `.analysis-command-output.txt` and `.analysis-rg-output.txt` debris files removed
+- All root docs updated with current metrics (README, CHANGELOG, WHATS_NEXT, STATUS, EVOLUTION, CONTRIBUTING, START_HERE, specs)
 
 ---
 
@@ -70,10 +87,11 @@ oversized files, and full CI compliance (fmt, clippy -D warnings, doc
 
 | Metric | Before (Iter 57) | After (Iter 58) |
 |--------|-------------------|------------------|
-| Tests passing | 2560 | 2643 (+83) |
-| Line coverage | ~64% | ~66% |
-| Region coverage | ~63% | ~65% |
-| Function coverage | ~72% | ~74% |
+| Tests passing | 2560 | 2680+ |
+| Line coverage | 59.98% | 60.16% |
+| Region coverage | 60.44% | 60.62% |
+| Function coverage | 68.73% | 69.03% |
+| tarpc transport coverage | 80.84% | 94.88% |
 | Clippy warnings | 0 | 0 |
 | Doc warnings | 0 | 0 |
 | Fmt drift | 0 | 0 |
@@ -81,6 +99,10 @@ oversized files, and full CI compliance (fmt, clippy -D warnings, doc
 | shader_model.rs clones | 29 | 0 |
 | DeviceSlot.bdf allocs/clone | String (heap) | Arc\<str\> (refcount) |
 | BorrowedFd::borrow_raw sites | ~6 | 0 (all via AsFd) |
+| `#[allow]` → `#[expect]` | 0 | 14 tightened |
+| `#[forbid(unsafe_code)]` crates | 1 (glowplug) | 2 (ember + glowplug) |
+| libc direct deps | 1 (dev-dep) | 0 |
+| SPDX .rs files | 455 | 476 |
 
 ---
 
@@ -94,7 +116,7 @@ oversized files, and full CI compliance (fmt, clippy -D warnings, doc
 
 ## Next Steps (Iteration 59+)
 
-1. **Coverage 66% → 90%**: Continue test expansion on low-coverage modules (GSP dispatch with synthetic knowledge, VFIO channel logic, codegen optimizer passes)
+1. **Coverage 60% → 90%**: Continue test expansion on low-coverage modules (GSP dispatch with synthetic knowledge, VFIO channel logic, codegen optimizer passes, main.rs binary entry point)
 2. **GP_PUT hardware validation**: Test cache flush on live Titan V VFIO (hotSpring Exp 070)
 3. **UVM hardware validation**: RTX 5060 compute dispatch
 4. **Clone audit phase 2**: IR `Src`/`SSARef` clone reduction via helper functions in lower_f64 (newton/trig/exp2/log2)
