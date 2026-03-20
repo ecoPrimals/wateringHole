@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # biomeOS Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 16, 2026
-**Primal**: biomeOS v2.47
+**Date**: March 20, 2026
+**Primal**: biomeOS v2.55
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -32,7 +32,7 @@ provides that capability at runtime.
 
 | Domain | What biomeOS Does | What It Does NOT Do |
 |--------|------------------|---------------------|
-| **Routing** | Translates 260+ semantic methods across 19 domains to the primal that provides them | Implement any capability itself |
+| **Routing** | Translates 285+ semantic methods across 25 domains to the primal that provides them | Implement any capability itself |
 | **Orchestration** | Executes deploy graphs: Sequential, Parallel, ConditionalDag, Pipeline (streaming), Continuous (60 Hz) | Decide what to compute |
 | **Lifecycle** | Starts, monitors, auto-resurrects, gracefully shuts down primals | Store state between runs |
 | **Federation** | Forms Plasmodium collectives across machines via HTTP JSON-RPC | Provide networking |
