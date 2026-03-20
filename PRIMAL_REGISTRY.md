@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 15, 2026
+**Last Updated**: March 20, 2026
 
 ---
 
@@ -193,7 +193,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 50 (A+) — 1992 tests passed, 0 failed, 57.54% line coverage, 67.80% function coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync + USERD_TARGET/INST_TARGET runlist fix), `GpuContext::from_vfio()` convenience API for barraCuda, UVM dispatch pipeline (GPFIFO + USERD doorbell + completion polling), `KernelCacheEntry` + `dispatch_precompiled()` (zero-copy `Bytes`), driver string constants (`preference.rs`), production panics/unwraps evolved (tracing + graceful errors), `#[deny(unsafe_code)]` on 8/9 crates, zero clippy warnings, zero doc warnings, zero fmt drift, all files <1000 lines, AGPL-3.0-only, hardware: 2× Titan V (VFIO) + RTX 5060 (nvidia-drm)
+**Status**: Phase 10 Iteration 58 (A+) — 2643 tests passed, 0 failed, ~66% line coverage, ~74% function coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync), `GpuContext::from_vfio()` convenience API, UVM dispatch pipeline, `KernelCacheEntry` + `dispatch_precompiled()` (zero-copy `Bytes`), SCM_RIGHTS fully safe (rustix AsFd, zero unsafe in ember/ipc), DmaBuffer `Arc<OwnedFd>` (consolidated fd safety), clone audit (shader_model 29→0, bdf `Arc<str>`), `#[forbid(unsafe_code)]` on 8/9 crates, zero clippy warnings (pedantic+nursery -D warnings), zero doc warnings, zero fmt drift, all files <1000 lines, AGPL-3.0-only, `.cursor/rules` with wateringHole standards, cross-primal e2e test, nak-ir-proc trybuild tests, hardware: 2× Titan V (VFIO) + RTX 5060 (nvidia-drm)
 
 **Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL, SPIR-V, and GLSL compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified. coralDriver provides userspace GPU dispatch via DRM ioctl (AMD amdgpu, NVIDIA nouveau, nvidia-drm/UVM) and VFIO direct BAR0/DMA dispatch (maximum sovereignty). coralGpu unifies compilation and dispatch into a single API with sovereign driver preference (vfio > nouveau > amdgpu > nvidia-drm). Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
@@ -208,7 +208,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **coralDriver** | AMD DRM ioctl (GEM, PM4, BO list, CS submit, fence sync) — **E2E verified on RX 6950 XT**, NVIDIA nouveau (channel, GEM, pushbuf, QMD), nvidia-drm/UVM (RM alloc, GPFIFO, USERD), VFIO (BAR0 + DMA + GPFIFO + sync) — pure Rust, zero libc |
 | **coralGpu** | Unified compile + dispatch API — vendor-agnostic `GpuContext` |
 | **f64 Lowering** | Full f64 transcendental suite: sqrt, rcp, exp2, log2, sin, cos, exp, log, pow — NVIDIA (DFMA software) + AMD (native hardware) |
-| **84/93 Cross-Spring Shaders** | Compiles shaders from hotSpring, groundSpring, neuralSpring, wetSpring, airSpring, healthSpring to native SM70 SASS |
+| **93/93 Cross-Spring Shaders** | Compiles shaders from hotSpring, groundSpring, neuralSpring, wetSpring, airSpring, healthSpring to native SM70 SASS (all resolved Iter 31) |
 | **AMD E2E Pipeline** | WGSL → compile → PM4 dispatch → GPU execution → host readback — verified on RX 6950 XT (RDNA2 GFX1030) |
 
 **Participates In**: Sovereign Compute Pipeline (barraCuda → toadStool → coralReef → native binary → coralDriver → hardware)
@@ -433,7 +433,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 54 (2364 tests, 59.92% line coverage, zero warnings, zero doc warnings, all files <1000 LOC) |
+| coralReef | Phase 10 Iteration 58 (2643 tests, ~66% line coverage, zero warnings, zero doc warnings, all files <1000 LOC, SCM_RIGHTS fully safe, clone audit complete) |
 | primalSpring | v0.2.0 Phase 2 (38 experiments, 7 tracks, 157 tests, niche self-knowledge, deploy graph validation, IPC resilience stack, proptest, zero warnings, zero unsafe) |
 
 ### airSpring - Ecological & Agricultural Sciences
