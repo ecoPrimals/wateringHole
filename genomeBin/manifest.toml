@@ -76,8 +76,8 @@ pie_verified = true
 [primals.songbird]
 name = "Songbird"
 description = "Network primal - HTTP/TLS, federation, mesh, discovery, NAT traversal"
-latest = "3.33.0"
-versions = ["3.33.0", "0.2.1"]
+latest = "0.2.1"
+versions = ["0.2.1"]
 architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["http", "tls", "mesh", "stun", "relay", "birdsong", "discovery", "onion"]
 ecobin_grade = "A++"
