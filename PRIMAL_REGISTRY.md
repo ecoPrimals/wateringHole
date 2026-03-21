@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v2.35  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 4,275 tests, 75.21% coverage, 30 deploy graphs, 15 niche templates, 205+ capability translations, 16 capability domains, zero-copy `bytes::Bytes`, centralized primal constants, tarpc transport wiring
+**Version**: v2.60  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 6,998 tests, 90.01% line / 90.95% function coverage (llvm-cov), 26 workspace crates, 30 deploy graphs, 15 niche templates, 205+ capability translations, 16 capability domains, zero-copy `bytes::Bytes`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
