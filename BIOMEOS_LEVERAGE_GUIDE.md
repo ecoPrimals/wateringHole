@@ -2,7 +2,7 @@
 # biomeOS Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
 **Date**: March 20, 2026
-**Primal**: biomeOS v2.58
+**Primal**: biomeOS v2.60
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
