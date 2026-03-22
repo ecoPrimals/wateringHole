@@ -301,7 +301,7 @@ Use these consistently across all repos. Only add tags the repo earns.
 | `immutable-ledger` | LoamSpine |
 | `thermal-simulation`, `molecular-dynamics` | hotSpring |
 | `metagenomics`, `microbiome`, `analytical-chemistry`, `bioinformatics`, `life-science` | wetSpring |
-| `atmospheric-science`, `gas-exchange` | airSpring |
+| `evapotranspiration`, `irrigation`, `soil-physics`, `agriculture` | airSpring |
 | `geochemistry`, `mineral-dissolution` | groundSpring |
 | `neural-networks`, `spiking-networks` | neuralSpring |
 | `gpu-computing` | Springs consuming barraCuda GPU primitives |
@@ -331,7 +331,7 @@ with `[applied]` when done.
 |------|-------------|-------------------|
 | **hotSpring** | Thermal simulation and molecular dynamics validation spring — paper reproduction in pure Rust | `thermal-simulation`, `molecular-dynamics`, `scientific-computing`, `paper-reproduction` |
 | **wetSpring** `[applied]` | Pure Rust metagenomics, analytical chemistry & mathematical biology — 1,500+ tests, 354 validation binaries, GPU via barraCuda | `metagenomics`, `analytical-chemistry`, `bioinformatics`, `microbiome`, `gpu-computing`, `wgsl`, `life-science`, `scientific-computing`, `paper-reproduction`, `agpl-3-0` |
-| **airSpring** | Atmospheric science and gas exchange validation spring in pure Rust | `atmospheric-science`, `gas-exchange`, `scientific-computing`, `paper-reproduction` |
+| **airSpring** `[applied]` | Pure Rust FAO-56 evapotranspiration, Richards equation soil physics & precision irrigation — 950+ lib tests, 61 validation checks, GPU + NPU via barraCuda | `evapotranspiration`, `irrigation`, `soil-physics`, `agriculture`, `gpu-computing`, `wgsl`, `scientific-computing`, `paper-reproduction`, `agpl-3-0` |
 | **groundSpring** | Geochemistry and mineral dissolution validation spring in pure Rust | `geochemistry`, `mineral-dissolution`, `scientific-computing`, `paper-reproduction` |
 | **neuralSpring** | Spiking neural network and neuromorphic computing validation spring in pure Rust | `neural-networks`, `spiking-networks`, `neuromorphic`, `scientific-computing`, `paper-reproduction` |
 | **rustChip** | Clean-room pure Rust driver for BrainChip Akida AKD1000 NPU | `neuromorphic`, `akida`, `npu`, `hardware-driver` |

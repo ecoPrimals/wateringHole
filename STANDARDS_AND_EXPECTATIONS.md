@@ -175,13 +175,27 @@ The archive is the project's geological record.
 | What | Where |
 |------|-------|
 | **Root README** | Every repo has one. States what it is, what it does, current version. |
+| **CONTEXT.md** | AI-ingestible context block at repo root. See `PUBLIC_SURFACE_STANDARD.md`. |
 | **specs/** | Paper review queues, experiment designs, scientific specs. |
 | **CHANGELOG** or session notes | What changed, when, why. |
 | **Handoffs** | Session continuity lives in wateringHole `handoffs/`. |
 | **baseCamp** | Cross-spring papers live in `whitePaper/gen3/baseCamp/`. |
 | **attsi/** | Faculty contact packages and outreach plans. |
 
-## 12. Code Style
+## 12. Public Surface & PII Hygiene
+
+| Expectation | Detail |
+|-------------|--------|
+| **CONTEXT.md** | Every repo root. AI-ingestible context block — what it does, role in ecosystem, technical facts, capabilities. Under 150 lines. |
+| **GitHub description** | One-line repo description applied via `gh repo edit`. Updated on version bumps. |
+| **GitHub topics** | `rust`, `pure-rust`, `json-rpc`, plus domain-specific. Applied via `gh repo edit --add-topic`. |
+| **PII scan** | Mandatory before any visibility change. Run automated scans for emails, paths, IPs, tokens. See `PUBLIC_SURFACE_STANDARD.md` Layer 4. |
+| **Git author audit** | `git log --all --format='%an <%ae>' | sort -u` — project identity only on public repos. |
+| **README footer** | "Part of ecoPrimals" block linking to org and wateringHole. |
+
+**Full standard:** `PUBLIC_SURFACE_STANDARD.md`
+
+## 13. Code Style
 
 | Rule | Detail |
 |------|--------|
@@ -206,3 +220,5 @@ Before pushing, verify:
 - [ ] Named tolerances for all numerical comparisons
 - [ ] Experiment checks counted and reported
 - [ ] Handoff written if session work is incomplete
+- [ ] `CONTEXT.md` test count and coverage are current (see `PUBLIC_SURFACE_STANDARD.md`)
+- [ ] PII scan passes — zero emails, paths, or credentials in committed code
