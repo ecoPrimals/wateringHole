@@ -360,6 +360,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Presentation & External Review
 - **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** — **Read before any docs sweep.** Checklist for making a spring/primal independently reviewable by PIs, students, hobbyists, and compliance reviewers. The 5-minute test. Self-assessment template. Common problems and fixes. References `publicRelease/` audience briefs.
+- **`PUBLIC_SURFACE_STANDARD.md`** — **Read before any public publish.** GitHub repo descriptions, topic tags, PII review checklist, AI-ingestible `CONTEXT.md` template, and the copy-paste task for public surface passes. Defines the five layers: GitHub metadata, README on-ramp, AI context block, PII hygiene, and the reusable surface-pass blurb.
 
 ### Leverage Guides (Per-Primal)
 - `BARRACUDA_LEVERAGE_GUIDE.md`, `BIOMEOS_LEVERAGE_GUIDE.md`, `CORALREEF_LEVERAGE_GUIDE.md`
