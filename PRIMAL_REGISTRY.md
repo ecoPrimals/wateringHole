@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 20, 2026
+**Last Updated**: March 21, 2026
 
 ---
 
@@ -434,7 +434,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.2.0 Phase 2 (38 experiments, 7 tracks, 157 tests, niche self-knowledge, deploy graph validation, IPC resilience stack, proptest, zero warnings, zero unsafe) |
+| primalSpring | v0.5.0 Phase 4 (44 experiments, 8 tracks, 270 tests, Tower FULLY UTILIZED 41/41, songbird 11/12 subsystems UP, petalTongue visualization, 37 capabilities, zero warnings, zero unsafe) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
@@ -518,24 +518,24 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 ### primalSpring - Coordination and Composition Validation
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
-**Phase**: Phase 2 (niche self-knowledge, deploy graph validation, IPC resilience, ecosystem absorption)  
-**Status**: v0.2.0 — 38 experiments, 7 tracks, 157 tests (148 unit + 9 integration), niche self-knowledge (21 capabilities, semantic mappings, cost estimates), deploy graph validation (6 TOMLs), IPC resilience stack (IpcError, CircuitBreaker, RetryPolicy, DispatchOutcome), 4-format capability parsing, proptest IPC fuzzing, zero clippy warnings (pedantic+nursery), zero `#[allow()]`, zero unsafe (workspace forbid), zero C deps, ecoBin compliant
+**Phase**: Phase 4 (Tower FULLY UTILIZED 41/41 gates, Squirrel AI + petalTongue validated)  
+**Status**: v0.5.0 — 44 experiments, 8 tracks, 270 tests (all passing, 19 integration tests run in parallel ~1s), 37 capabilities, Tower Atomic FULLY UTILIZED (41/41 gates: 24 core + 17 full utilization), songbird 11/12 subsystems UP (discovery, STUN, BirdSong, onion, Tor, federation), Squirrel AI composition validated (Tower + Squirrel + Anthropic Claude), petalTongue visualization validated (dashboard + Grammar of Graphics), ephemeral port support (`--port 0`), `extra_args` in LaunchProfile, capability-first architecture, 12 deploy graphs, IPC resilience stack, MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
 
-**Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance.
+**Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
 **Capabilities**:
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 38 across 7 tracks: Atomic Composition (6), Graph Execution (6), Emergent Systems (6), Bonding & Plasmodium (5), Cross-Spring Coordination (5), Showcase-Mined (10). All use real `discover_primal()` with honest `check_skip` for live-IPC checks. |
-| **Deploy Graphs** | 6: primalspring_deploy.toml, parallel_capability_burst.toml, conditional_fallback.toml, streaming_pipeline.toml, continuous_tick.toml, coralforge_pipeline.toml — all parsed and structurally validated by `deploy.rs` |
-| **Niche Self-Knowledge** | 21 capabilities, semantic mappings (7 domains), operation dependencies, cost estimates, `register_with_target()` for biomeOS BYOB consumption |
-| **RPC Methods** | health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.discovery_sweep, coordination.neural_api_status, graph.list, graph.validate, lifecycle.status |
-| **IPC Resilience** | IpcError (8 typed variants), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
+| **Experiments** | 40 across 8 tracks: Atomic Composition (6), Graph Execution (6), Emergent Systems (6), Bonding & Plasmodium (5), Cross-Spring Coordination (5), Showcase-Mined (10), Live Composition (2). All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
+| **Deploy Graphs** | 11: all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). |
+| **Niche Self-Knowledge** | 25 capabilities (including ai.query, ai.health, composition.tower_squirrel_health), semantic mappings (7 domains), operation dependencies, cost estimates |
+| **RPC Methods** | 17 methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.validate_composition_by_capability, coordination.discovery_sweep, coordination.probe_primal, coordination.probe_capability, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |
+| **IPC Resilience** | IpcError (8 typed variants + IpcErrorPhase), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
+| **Live Composition** | Tower STABLE (beardog + songbird + biomeOS, 24/24 gates). Squirrel AI composition (Tower + Squirrel + Anthropic Claude). exp060: biomeOS-orchestrated Tower deploy. exp061: 3-primal AI composition. |
 | **Emergent Systems Tested** | RootPulse (commit/branch/merge/diff/federate), RPGPT (60Hz tick + provenance), coralForge (neural object Pipeline graph), cross-spring ecology |
-| **coralForge Evolution** | Reconceptualized from neuralSpring module to emergent neural object via biomeOS Pipeline graph. Math stays in neuralSpring. Composition is coralforge_pipeline.toml |
 
-**Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation)
+**Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation), Squirrel (live AI composition)
 
 ---
 
