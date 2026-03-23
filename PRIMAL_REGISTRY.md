@@ -435,7 +435,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.5.0 Phase 4 (44 experiments, 8 tracks, 270 tests, Tower FULLY UTILIZED 41/41, songbird 11/12 subsystems UP, petalTongue visualization, 37 capabilities, zero warnings, zero unsafe) |
+| primalSpring | v0.7.0 Phase 12.2 (51 experiments, 9 tracks, 360 tests, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, Transport enum, normalize_method, NdjsonSink, OnceLock probes, deny(missing_docs), zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -521,7 +521,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
 **Phase**: Phase 4 (Tower FULLY UTILIZED 41/41 gates, Squirrel AI + petalTongue validated)  
-**Status**: v0.5.0 — 44 experiments, 8 tracks, 270 tests (all passing, 19 integration tests run in parallel ~1s), 37 capabilities, Tower Atomic FULLY UTILIZED (41/41 gates: 24 core + 17 full utilization), songbird 11/12 subsystems UP (discovery, STUN, BirdSong, onion, Tor, federation), Squirrel AI composition validated (Tower + Squirrel + Anthropic Claude), petalTongue visualization validated (dashboard + Grammar of Graphics), ephemeral port support (`--port 0`), `extra_args` in LaunchProfile, capability-first architecture, 12 deploy graphs, IPC resilience stack, MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
+**Status**: v0.7.0 Phase 12.2 — 51 experiments, 9 tracks, 360 tests (all passing, 42 ignored live), 87/87 gates, 37 capabilities, NUCLEUS VALIDATED (Tower + Nest + Node), Graph Overlays, Squirrel Discovery, Multi-Node Bonding, IPC resilience stack (CircuitBreaker, RetryPolicy, Transport enum, normalize_method, is_recoverable, OnceLock probes), NdjsonSink, check_relative, check_abs_or_rel, primal_names module, provenance trio circuit breaker, validate_release.sh, deny(missing_docs), 22 deploy graphs (18 single-node + 4 multi-node), MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
