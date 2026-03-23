@@ -280,7 +280,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
 **Version**: 0.13.0-dev  
-**Status**: Production Ready (1,330 tests, 92.32% line coverage, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (full 14-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge, `capability_registry.toml` + deploy graph with `fallback = "skip"`, zero cross-primal compile deps — sovereign wire types)
+**Status**: Production Ready (1,412 tests, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (16-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools, `capability_registry.toml` (27 methods, 8 domains) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types)
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
@@ -295,7 +295,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 | **Slice Semantics** | 6 query modes (Copy, Loan, Consignment, Escrow, Mirror, Provenance) |
 | **Attribution** | Agent DID identity, per-agent event counting, role assignment |
 | **Niche** | `niche.rs` self-knowledge module with `PRIMAL_ID`, `CAPABILITIES`, `CONSUMED_CAPABILITIES`, `COST_ESTIMATES`, `operation_dependencies()` |
-| **IPC** | JSON-RPC 2.0 (required) + tarpc/bincode (optional), 23 methods across 7 domains (`dag.*`, `health.*`, `capability.*`), enhanced `capability.list` with per-method cost/deps, `health.liveness` + `health.readiness` probes, 4-format capability parsing, `ValidationSink` pluggable output |
+| **IPC** | JSON-RPC 2.0 (required) + tarpc/bincode (optional), 27 methods across 8 domains (`dag.*`, `health.*`, `capability.*`, `tools.*`), enhanced `capability.list` with per-method cost/deps, `health.liveness` + `health.readiness` probes, `tools.list` + `tools.call` MCP, 4-format capability parsing, `ValidationSink` pluggable output, `normalize_method()` legacy prefix support |
 
 **Participates In**: RootPulse (ephemeral workspace layer), Memory & Attribution stack
 
