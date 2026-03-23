@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 21, 2026
+**Last Updated**: March 23, 2026
 
 ---
 
@@ -44,8 +44,9 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Genetic Crypto** | Lineage-based key derivation, beacon seeds, family seed management |
 | **Dark Forest** | Challenge-response federation protocol |
 
-**IPC Methods**: 72 JSON-RPC methods (69 crypto + 3 introspection)  
-**Dependencies**: Zero C dependencies. 100% RustCrypto suite.
+**IPC Methods**: 91+ JSON-RPC methods (semantic naming, including `capability.list` + `primal.capabilities` aliases)  
+**Dependencies**: Zero C dependencies. 100% RustCrypto suite.  
+**Tests**: 14,161 passing | **Coverage**: 87.0% line (llvm-cov) | **Edition**: 2024 | **MSRV**: 1.93.0
 
 **Participates In**: Tower Atomic (with Songbird), NUCLEUS, RootPulse, BirdSong encryption, Dark Forest Federation
 
