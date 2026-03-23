@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 23, 2026
+**Last Updated**: March 21, 2026
 
 ---
 
@@ -44,9 +44,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Genetic Crypto** | Lineage-based key derivation, beacon seeds, family seed management |
 | **Dark Forest** | Challenge-response federation protocol |
 
-**IPC Methods**: 91+ JSON-RPC methods (semantic naming, including `capability.list` + `primal.capabilities` aliases)  
-**Dependencies**: Zero C dependencies. 100% RustCrypto suite.  
-**Tests**: 14,161 passing | **Coverage**: 87.0% line (llvm-cov) | **Edition**: 2024 | **MSRV**: 1.93.0
+**IPC Methods**: 72 JSON-RPC methods (69 crypto + 3 introspection)  
+**Dependencies**: Zero C dependencies. 100% RustCrypto suite.
 
 **Participates In**: Tower Atomic (with Songbird), NUCLEUS, RootPulse, BirdSong encryption, Dark Forest Federation
 
@@ -281,7 +280,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
 **Version**: 0.13.0-dev  
-**Status**: Production Ready (1,348 tests, 92.96% region / 94.05% line coverage, clippy pedantic+nursery+cast lints clean, `missing_errors_doc = "warn"`, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (full 14-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge, `capability_registry.toml` + deploy graph with `fallback = "skip"`, zero cross-primal compile deps — sovereign wire types, `capabilities.list` ecosystem-standard method naming)
+**Status**: Production Ready (1,330 tests, 92.32% line coverage, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (full 14-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge, `capability_registry.toml` + deploy graph with `fallback = "skip"`, zero cross-primal compile deps — sovereign wire types)
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
@@ -306,7 +305,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.23, 1,099 tests, ecoBin compliant, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-only, pedantic+nursery clean, zero unsafe, zero production unwrap, 27 JSON-RPC methods incl. MCP tools.list/tools.call, 7 benchmarks, 11 proptest strategies, sovereign types — no shared crates)
+**Status**: Production Ready (v0.7.22, 1,077 tests, ecoBin compliant, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-only, pedantic+nursery clean, zero unsafe, zero production unwrap, 24 JSON-RPC methods, 7 benchmarks, 11 proptest strategies, sovereign types — no shared crates)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
@@ -330,7 +329,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Immutable linear ledger for selective permanence  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.9.8, 1,247 tests, 92%+ line / 90%+ region coverage, pure Rust, ecoBin compliant, UniBin, Edition 2024, pedantic+nursery clean, cast lint deny, `#[expect(reason)]` bulk migration, CONTEXT.md per PUBLIC_SURFACE_STANDARD, `capabilities.list` + `health.liveness` per Semantic Method Naming v2.1, tarpc 0.37 (json transport, bincode path eliminated), `DispatchOutcome`/`IpcErrorPhase`/`StreamItem`/`OrExit`/`extract_rpc_result`/`normalize_method` ecosystem patterns, cargo deny 4/4 clean, provenance trio types inlined (no shared crate), `publish = false` on all workspace crates)
+**Status**: Production Ready (v0.9.9, 1,256 tests, 92%+ line / 90%+ region coverage, pure Rust, ecoBin compliant, UniBin, Edition 2024, pedantic+nursery clean, cast lint deny, `#[expect(reason)]` bulk migration, CONTEXT.md per PUBLIC_SURFACE_STANDARD, `capabilities.list` + `health.liveness` + `tools.list` + `tools.call` (MCP) per Semantic Method Naming v2.1, tarpc 0.37 (json transport, bincode path eliminated), `ResilientSyncEngine` (circuit-breaker + retry for federation), `DispatchOutcome`/`IpcErrorPhase`/`StreamItem`/`OrExit`/`extract_rpc_result`/`normalize_method` ecosystem patterns, cargo deny 4/4 clean, provenance trio types inlined (no shared crate), `publish = false` on all workspace crates)
 
 **Role**: LoamSpine is the fossil record. Where rhizoCrypt is ephemeral and fast, LoamSpine is permanent and provable. Important events are deliberately committed ("dehydrated") from rhizoCrypt into LoamSpine's append-only ledger. Most data should be temporary; only what matters should be permanent.
 
@@ -431,7 +430,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
 | hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
 | groundSpring | V103 |
-| neuralSpring | S170 (zero clippy/doc warnings, full public surface, barraCuda v0.3.7 compat, Semantic Method Naming v2.1, 5-tier discovery, 1,205 tests) |
+| neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
