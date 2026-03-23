@@ -1,10 +1,11 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
+# SPDX-License-Identifier: AGPL-3.0-only
 #
 # primalSpring Leverage Guide — How Every Primal Can Use Coordination Validation
 #
 # Status: Active
-# Last Updated: March 18, 2026
+# Last Updated: March 22, 2026
 # primalSpring Version: v0.3.0-dev (Phase 3 — capability-first architecture, topological waves, 236 tests)
+# biomeOS alignment: v2.67 (5-tier centralized discovery, GeneticLineage→BearDog, niche self-knowledge)
 
 ---
 
