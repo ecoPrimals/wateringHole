@@ -329,7 +329,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Immutable linear ledger for selective permanence  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.9.5, 1,226 tests, 90%+ function / 88%+ line coverage, pure Rust, ecoBin compliant, UniBin, Edition 2024, pedantic+nursery clean, `#[expect(reason)]` lint exceptions, tarpc 0.37, `DispatchOutcome`/`StreamItem`/`OrExit` ecosystem patterns, provenance trio coordinated)
+**Status**: Production Ready (v0.9.6, 1,226 tests, 90%+ function / 88%+ line coverage, pure Rust, ecoBin compliant, UniBin, Edition 2024, pedantic+nursery clean, `#[expect(reason)]` bulk migration, CONTEXT.md per PUBLIC_SURFACE_STANDARD, `capabilities.list` + `health.liveness` per Semantic Method Naming v2.1, tarpc 0.37, `DispatchOutcome`/`StreamItem`/`OrExit` ecosystem patterns, provenance trio coordinated)
 
 **Role**: LoamSpine is the fossil record. Where rhizoCrypt is ephemeral and fast, LoamSpine is permanent and provable. Important events are deliberately committed ("dehydrated") from rhizoCrypt into LoamSpine's append-only ledger. Most data should be temporary; only what matters should be permanent.
 
