@@ -167,8 +167,8 @@ pie_verified = false  # UniBin binary, not yet distributed via genomeBin
 [primals.sweetgrass]
 name = "sweetGrass"
 description = "Attribution primal - W3C PROV-O, braids, JSON-RPC + tarpc + MCP tools, sovereign types, redb default"
-latest = "0.7.23"
-versions = ["0.7.23", "0.7.22", "0.7.21"]
+latest = "0.7.25"
+versions = ["0.7.25", "0.7.24", "0.7.23"]
 architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["attribution", "braid", "provo", "contribution", "provenance", "pipeline", "anchoring", "compression", "health"]
 ecobin_grade = "A++"
