@@ -190,7 +190,7 @@ LoamSpine
 ```
 
 **Validated**:
-- LoamSpine v0.9.5 (`session.commit` + `permanent-storage.commitSession` compat, `DispatchOutcome`, `StreamItem` streaming) ✅
+- LoamSpine v0.9.6 (`session.commit` + `permanent-storage.commitSession` compat, `capabilities.list` v2.1, `health.liveness` standardized) ✅
 - rhizoCrypt v0.13.0 dehydration produces `DehydrationSummary` ✅
 - Wire format aligned: rhizoCrypt → LoamSpine serde contract validated ✅
 - biomeOS `rootpulse_commit.toml` graph orchestrates the full workflow ✅
@@ -228,7 +228,7 @@ LoamSpine
 
 **Required**:
 - NestGate implementation
-- LoamSpine implementation (v0.9.5 -- `entry.append`, `proof.generate_inclusion`)
+- LoamSpine implementation (v0.9.6 -- `entry.append`, `proof.generate_inclusion`)
 - biomeOS commit coordinator
 
 **Design Notes**:
@@ -446,7 +446,7 @@ async fn pull_with_merge() {
 **Timeline**: 2-3 months
 
 **Deliverables**:
-1. LoamSpine implementation (DONE -- v0.9.5)
+1. LoamSpine implementation (DONE -- v0.9.6)
    - Append-only log with hash chain
    - Inclusion proofs
    - Session commit + braid commit integration
@@ -713,7 +713,7 @@ async fn commit(biome: &BiomeOS, commit: Commit) {
 
 ### Completed (March 13, 2026)
 
-1. ✅ **LoamSpine v0.9.5** - Immutable linear history, 1,226 tests, 90%+ function coverage, `DispatchOutcome`, `StreamItem` streaming, `OrExit`
+1. ✅ **LoamSpine v0.9.6** - Immutable linear history, 1,226 tests, 90%+ function coverage, PUBLIC_SURFACE compliant, Semantic Method Naming v2.1
 2. ✅ **rhizoCrypt ↔ LoamSpine dehydration** - Validated end-to-end with live binaries
 3. ✅ **sweetGrass attribution** - `contribution.recordDehydration` + `braid.create` validated
 4. ✅ **Provenance trio e2e** - Full 6-phase RootPulse commit workflow validated

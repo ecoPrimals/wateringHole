@@ -174,7 +174,7 @@ resistant to license violation.
 - License metadata on vertices: `license: Option<String>` in metadata
 - Cross-session derivation links (for tracking derivative works across sessions)
 
-### loamSpine v0.9.5 (1,226 tests, 90%+ function coverage)
+### loamSpine v0.9.6 (1,226 tests, 90%+ function coverage)
 
 **Already supports:**
 - Immutable append-only ledger with DID-based ownership
