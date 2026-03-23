@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # LoamSpine Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 17, 2026
-**Primal**: LoamSpine v0.9.6
+**Date**: March 23, 2026
+**Primal**: LoamSpine v0.9.8
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -71,8 +71,9 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 | `permanent-storage.getCommit` | Retrieve a commit as JSON |
 | `permanent-storage.healthCheck` | Health check for rhizoCrypt clients |
 
-**Transport**: JSON-RPC 2.0 over Unix socket (primary), tarpc/bincode
-(high-perf primal-to-primal), HTTP (admin/debug).
+**Transport**: JSON-RPC 2.0 over Unix socket (primary), tarpc/json
+(high-perf primal-to-primal — bincode path eliminated in v0.9.7),
+HTTP (admin/debug).
 
 ---
 

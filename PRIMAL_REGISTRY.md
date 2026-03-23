@@ -281,7 +281,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
 **Version**: 0.13.0-dev  
-**Status**: Production Ready (1,330 tests, 92.43% line coverage, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (full 14-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge, `capability_registry.toml` + deploy graph with `fallback = "skip"`, zero cross-primal compile deps — sovereign wire types, zero dead dependencies)
+**Status**: Production Ready (1,330 tests, 92.32% line coverage, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (full 14-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge, `capability_registry.toml` + deploy graph with `fallback = "skip"`, zero cross-primal compile deps — sovereign wire types)
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
@@ -306,7 +306,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.22, 1,084 tests, 90% coverage, ecoBin compliant, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-only, pedantic+nursery clean, zero unsafe, zero production unwrap, 24 JSON-RPC methods, 7 benchmarks, 11 proptest strategies, sovereign types — no shared crates, cargo-deny clean)
+**Status**: Production Ready (v0.7.22, 1,077 tests, ecoBin compliant, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-only, pedantic+nursery clean, zero unsafe, zero production unwrap, 24 JSON-RPC methods, 7 benchmarks, 11 proptest strategies, sovereign types — no shared crates)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
@@ -330,7 +330,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Immutable linear ledger for selective permanence  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.9.6, 1,226 tests, 90%+ function / 88%+ line coverage, pure Rust, ecoBin compliant, UniBin, Edition 2024, pedantic+nursery clean, `#[expect(reason)]` bulk migration, CONTEXT.md per PUBLIC_SURFACE_STANDARD, `capabilities.list` + `health.liveness` per Semantic Method Naming v2.1, tarpc 0.37, `DispatchOutcome`/`StreamItem`/`OrExit` ecosystem patterns, provenance trio coordinated)
+**Status**: Production Ready (v0.9.8, 1,247 tests, 92%+ line / 90%+ region coverage, pure Rust, ecoBin compliant, UniBin, Edition 2024, pedantic+nursery clean, cast lint deny, `#[expect(reason)]` bulk migration, CONTEXT.md per PUBLIC_SURFACE_STANDARD, `capabilities.list` + `health.liveness` per Semantic Method Naming v2.1, tarpc 0.37 (json transport, bincode path eliminated), `DispatchOutcome`/`IpcErrorPhase`/`StreamItem`/`OrExit`/`extract_rpc_result`/`normalize_method` ecosystem patterns, cargo deny 4/4 clean, provenance trio types inlined (no shared crate), `publish = false` on all workspace crates)
 
 **Role**: LoamSpine is the fossil record. Where rhizoCrypt is ephemeral and fast, LoamSpine is permanent and provable. Important events are deliberately committed ("dehydrated") from rhizoCrypt into LoamSpine's append-only ledger. Most data should be temporary; only what matters should be permanent.
 
