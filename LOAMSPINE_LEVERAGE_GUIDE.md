@@ -2,7 +2,7 @@
 # LoamSpine Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
 **Date**: March 23, 2026
-**Primal**: LoamSpine v0.9.8
+**Primal**: LoamSpine v0.9.9
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
