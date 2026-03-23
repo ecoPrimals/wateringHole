@@ -436,6 +436,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
 | primalSpring | v0.5.0 Phase 4 (44 experiments, 8 tracks, 270 tests, Tower FULLY UTILIZED 41/41, songbird 11/12 subsystems UP, petalTongue visualization, 37 capabilities, zero warnings, zero unsafe) |
+| ludoSpring | V29 (82 experiments, 402+19 tests, 42 Python parity, 80.2% coverage, GpuContext+TensorSession, default-features=false on barraCuda) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
@@ -537,6 +538,35 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **Emergent Systems Tested** | RootPulse (commit/branch/merge/diff/federate), RPGPT (60Hz tick + provenance), coralForge (neural object Pipeline graph), cross-spring ecology |
 
 **Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation), Squirrel (live AI composition)
+
+### ludoSpring - Game Design & Interaction Science
+
+**Domain**: Ludology, HCI, game science, procedural generation, interaction design  
+**Phase**: Domain Validation  
+**Status**: V29 — 82 experiments, 402 barracuda + 19 forge tests, 42 Python parity, 19 proptest. Zero `#[allow()]`, zero `unsafe`, zero clippy warnings (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later, Edition 2024, MSRV 1.87. 80.2% line coverage (80% floor enforced). `GpuContext` + `TensorSession` wired behind `gpu` feature. `default-features = false` on barraCuda v0.3.7. Baselines regenerated with `content_sha256`.
+
+**Role**: ludoSpring validates the ecoPrimals pipeline against 13 foundational HCI/game science models — Fitts's law, Hick's law, Steering law, GOMS, Flow theory, Dynamic Difficulty, Four Keys to Fun, Engagement metrics, Perlin noise, Wave Function Collapse, L-systems, BSP trees, Tufte data-ink — proving faithful port from Python baselines to Rust CPU to GPU WGSL shaders. The validated math builds playable prototypes (Doom terminal, roguelike explorer) and cross-domain applications (field genomics provenance, medical access control, extraction shooter anti-cheat).
+
+**Capabilities**:
+
+| Category | Details |
+|----------|---------|
+| **Game Science** | `game.evaluate_flow`, `game.evaluate_engagement`, `game.evaluate_fun`, `game.evaluate_dda`, `game.evaluate_tufte`, `game.evaluate_interaction_cost`, `game.evaluate_goms`, `game.classify_genre` |
+| **Procedural** | `game.generate_noise`, `game.generate_wfc`, `game.generate_lsystem`, `game.generate_bsp` |
+| **GPU Compute** | 5 WGSL shaders (fog_of_war, tile_lighting, pathfind_wavefront, perlin_2d, dda_raycast), `TensorSession` via `GpuContext` |
+| **Telemetry** | 13-event portable game telemetry protocol (NDJSON), external adapters (Veloren, Fish Folk, A/B Street) |
+| **RPGPT** | Sovereign RPG engine architecture — any open ruleset + any world + AI narration |
+| **Cross-Domain** | Provenance trio integration, extraction shooter fraud detection, field sample lifecycle, consent-gated medical access, cross-domain fraud unification |
+| **Health** | `health.check`, `health.liveness`, `health.readiness` |
+| **Niche** | `capability.list`, `lifecycle.status`, `capability.register`, `capability.deregister` |
+| **Experiments** | 82 across 22 tracks: core game systems, interaction models, PCG, metrics, benchmarks, external control groups, cross-spring (NCBI, NUCLEUS), RPGPT, Games@Home, provenance trio, extraction shooters, composable viz, lysogeny (6 open recreations), cross-spring provenance (5), RPGPT dialogue plane (9), game history revalidation (7) |
+| **Python Baselines** | 7 scripts, `combined_baselines.json` with `content_sha256`, 42 parity tests |
+| **Deployment** | UniBin (server/status/version), deploy graph, niche YAML, Neural API domain registration, 26 capabilities (24 game + 2 health) |
+
+**IPC Methods**: 26 JSON-RPC 2.0 methods (game evaluation, procedural generation, telemetry, health, lifecycle, capability) over Unix sockets  
+**Dependencies**: barraCuda (CPU math, `default-features = false`), wgpu (optional `gpu` feature), serde, uuid. Zero C dependencies in application code.
+
+**Participates In**: RPGPT (game science + session quality), Provenance Trio (rhizoCrypt DAG + loamSpine certs + sweetGrass braids), biomeOS (niche citizen), toadStool (GPU dispatch), coralReef (shader compilation), petalTongue (visualization), Squirrel (AI narration), metalForge (cross-substrate routing)
 
 ---
 
