@@ -152,7 +152,7 @@ versions = ["0.13.0-dev"]
 architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["dag", "session", "merkle", "dehydration", "slice", "provenance"]
 ecobin_grade = "A++"
-pie_verified = false  # Library crate — not standalone binary
+pie_verified = true  # UniBin binary (rhizocrypt: server, status, version, doctor, client)
 
 [primals.loamspine]
 name = "LoamSpine"
