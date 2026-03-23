@@ -1,7 +1,7 @@
 # rhizoCrypt v0.13.0-dev — Deep Debt & Capability Naming Handoff
 
 **Date**: March 23, 2026
-**Scope**: Dead dependency removal, capability-based type naming, handler DRY, coverage verification, doc cleanup
+**Scope**: Dead dependency removal, capability-based type naming, handler DRY, lint evolution, coverage expansion, ecosystem alignment
 
 ---
 
@@ -43,14 +43,14 @@ Core domain type renamed from LoamSpine-specific to provider-agnostic:
 
 ### 6. Coverage Verified via `cargo-llvm-cov`
 
-- **92.43% line coverage** (up from 92.32%)
+- **92.96% line coverage** (up from 92.32%)
 - **93.50% region coverage**
 - **89.49% function coverage**
 - All above the 90% CI gate
 
 ### 7. Doc Cleanup
 
-- Updated coverage: 92.32% → 92.43% in README.md, CONTEXT.md, DEPLOYMENT_CHECKLIST.md
+- Updated coverage: 92.32% → 92.96% in README.md, CONTEXT.md, DEPLOYMENT_CHECKLIST.md
 - Updated sled description from "high-performance" to "deprecated" in deployment checklist
 - Updated deployment checklist date
 
@@ -61,7 +61,7 @@ Core domain type renamed from LoamSpine-specific to provider-agnostic:
 | Metric | Value |
 |--------|-------|
 | Tests | 1330 passing (`--all-features`) |
-| Coverage | 92.43% (`--fail-under-lines 90` CI gate) |
+| Coverage | 92.96% (`--fail-under-lines 90` CI gate) |
 | Clippy | 0 warnings (pedantic + nursery + cargo) |
 | Doc | 0 warnings (`-D warnings`) |
 | Fmt | Clean |
@@ -89,9 +89,63 @@ Core domain type renamed from LoamSpine-specific to provider-agnostic:
 
 ---
 
+### 8. Ecosystem Method Naming Alignment
+
+- Canonical method renamed from `capability.list` → `capabilities.list` (plural, ecosystem standard)
+- Added aliases: `capability.list`, `primal.capabilities` for backward compatibility
+- Updated `CAPABILITY_DOMAINS`, `COST_ESTIMATES`, `SEMANTIC_MAPPINGS`, `capability_registry.toml`
+- Health endpoints also aliased: `health.liveness` ← `ping`/`health`, `health.check` ← `status`/`check`
+
+### 9. Lint Evolution: `missing_errors_doc` allow→warn
+
+- Evolved from `missing_errors_doc = "allow"` to `missing_errors_doc = "warn"`
+- Added `# Errors` documentation to 17 public `Result`-returning APIs across capability clients, adapters, error module
+- Zero warnings after documentation pass
+
+### 10. Cast Safety Lints
+
+- Added `cast_lossless`, `cast_possible_truncation`, `cast_precision_loss`, `cast_sign_loss` = "warn"
+- Zero violations found — codebase has no unsafe casts
+
+### 11. Dead Dependency Removal: `lru`
+
+- `lru = "0.12"` declared in `rhizo-crypt-core/Cargo.toml` but never imported
+- Removed, eliminating unnecessary dependency
+
+### 12. Hardcoding Cleanup
+
+- Generalized doc comments in `unix_socket.rs`, `niche.rs`, `storage.rs` to remove primal name references
+- All remaining primal names are in test data (acceptable) or named adapter modules (e.g., `loamspine_http.rs`)
+
+### 13. Coverage Expansion
+
+- `signing.rs`: 38.33% → **90.55%** (added mock adapter tests for sign/verify/attest/vertex operations)
+- `registry.rs`: 75.46% → **92.27%** (added discovery failure paths, concurrent access, cache tests)
+- Added `clear_discovery_source()` method to `DiscoveryRegistry`
+- **Total**: 1,348 tests, 92.96% region / 94.05% line coverage
+
+---
+
+## Metrics
+
+| Metric | Value |
+|--------|-------|
+| Tests | 1,348 |
+| Region Coverage | 92.96% |
+| Line Coverage | 94.05% |
+| clippy (pedantic+nursery) | Zero warnings |
+| Cast lints | Zero warnings |
+| `missing_errors_doc` | Zero warnings |
+| `cargo doc -D warnings` | Clean |
+| `cargo fmt` | Clean |
+| Dead dependencies | None |
+
 ## For Other Primals
 
 - **`CommitRef` naming pattern**: Other primals using LoamSpine-specific types in their domain models should consider similar capability-agnostic renaming
-- **Dead dependency audit**: `parking_lot` and `anyhow` were declared but unused — worth checking in other primals
+- **Dead dependency audit**: `parking_lot`, `anyhow`, and `lru` were declared but unused — worth checking in other primals
 - **`to_json()` pattern**: Simple helper eliminates repetitive `serde_json::to_value().map_err()` chains in JSON-RPC handlers
 - **Coverage gate**: `cargo llvm-cov --fail-under-lines 90` works well as a CI gate
+- **`capabilities.list` (plural)**: Ecosystem standard method name — other primals should align
+- **Cast lints**: `cast_precision_loss`, `cast_possible_truncation`, `cast_sign_loss`, `cast_lossless` — easy defensive gates
+- **`missing_errors_doc = "warn"`**: Forces `# Errors` documentation on all public `Result` APIs
