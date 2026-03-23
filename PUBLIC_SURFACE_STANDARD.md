@@ -303,6 +303,7 @@ Use these consistently across all repos. Only add tags the repo earns.
 | `metagenomics`, `microbiome`, `analytical-chemistry`, `bioinformatics`, `life-science` | wetSpring |
 | `evapotranspiration`, `irrigation`, `soil-physics`, `agriculture` | airSpring |
 | `geochemistry`, `mineral-dissolution` | groundSpring |
+| `pharmacokinetics`, `microbiome`, `biosignal`, `toxicology` | healthSpring |
 | `neural-networks`, `spiking-networks` | neuralSpring |
 | `gpu-computing` | Springs consuming barraCuda GPU primitives |
 | `scientific-computing` | All springs |
@@ -333,6 +334,7 @@ with `[applied]` when done.
 | **wetSpring** `[applied]` | Pure Rust metagenomics, analytical chemistry & mathematical biology — 1,500+ tests, 354 validation binaries, GPU via barraCuda | `metagenomics`, `analytical-chemistry`, `bioinformatics`, `microbiome`, `gpu-computing`, `wgsl`, `life-science`, `scientific-computing`, `paper-reproduction`, `agpl-3-0` |
 | **airSpring** `[applied]` | Pure Rust FAO-56 evapotranspiration, Richards equation soil physics & precision irrigation — 950+ lib tests, 61 validation checks, GPU + NPU via barraCuda | `evapotranspiration`, `irrigation`, `soil-physics`, `agriculture`, `gpu-computing`, `wgsl`, `scientific-computing`, `paper-reproduction`, `agpl-3-0` |
 | **groundSpring** | Geochemistry and mineral dissolution validation spring in pure Rust | `geochemistry`, `mineral-dissolution`, `scientific-computing`, `paper-reproduction` |
+| **healthSpring** | Pure Rust PK/PD, microbiome, biosignal & toxicology validation spring — 809 tests, 83 experiments, GPU via barraCuda | `pharmacokinetics`, `microbiome`, `biosignal`, `toxicology`, `gpu-computing`, `wgsl`, `scientific-computing`, `paper-reproduction`, `agpl-3-0` |
 | **neuralSpring** | Spiking neural network and neuromorphic computing validation spring in pure Rust | `neural-networks`, `spiking-networks`, `neuromorphic`, `scientific-computing`, `paper-reproduction` |
 | **rustChip** | Clean-room pure Rust driver for BrainChip Akida AKD1000 NPU | `neuromorphic`, `akida`, `npu`, `hardware-driver` |
 
