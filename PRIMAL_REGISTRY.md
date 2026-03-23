@@ -305,7 +305,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.6, 843 tests, 91% region coverage, ecoBin compliant, redb default storage, parking_lot locks, AGPL-3.0-only, Tower Atomic enforced)
+**Status**: Production Ready (v0.7.22, 1,077 tests, ecoBin compliant, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-only, pedantic+nursery clean, zero unsafe, zero production unwrap, 24 JSON-RPC methods, 7 benchmarks, 11 proptest strategies, sovereign types — no shared crates)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
@@ -313,12 +313,13 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 | Category | Primitives |
 |----------|-----------|
-| **Braids** | Content-addressable provenance records, W3C PROV-O / JSON-LD compliant |
+| **Braids** | Content-addressable provenance records, W3C PROV-O / JSON-LD compliant, `Arc<str>` zero-copy identifiers |
 | **Attribution Engine** | 12 role types (Creator, Contributor, Reviewer...), derivation chain analysis, time decay, recursive propagation |
 | **Provenance Graph** | Complete data lineage tracking, DAG queries, "where did this come from?" |
 | **Privacy** | 5 privacy levels, GDPR-inspired data subject rights |
-| **Storage** | Memory, Sled, PostgreSQL backends |
+| **Storage** | Memory, redb (recommended), Sled (legacy), PostgreSQL backends |
 | **Export** | W3C PROV-O JSON-LD standard, ~88% compression with session dedup + zstd |
+| **IPC** | JSON-RPC 2.0 + tarpc + REST + UDS, DispatchOutcome, health probes, OrExit |
 
 **Participates In**: RootPulse (attribution layer), Memory & Attribution stack, Loam Certificate provenance
 
