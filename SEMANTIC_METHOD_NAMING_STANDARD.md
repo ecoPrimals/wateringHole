@@ -1,10 +1,10 @@
 # 🌍 Semantic Method Naming Standard for Primal IPC
 
-**Version**: 2.0.0  
-**Date**: January 25, 2026  
+**Version**: 2.1.0  
+**Date**: March 22, 2026  
 **Status**: Official Ecosystem Standard  
 **Authority**: wateringHole (ecoPrimals Core Standards)  
-**Supersedes**: Primal IPC Protocol v1.0 (method naming section)
+**Supersedes**: v2.0.0 (added cross-cutting health/capabilities canonical names)
 
 ---
 
@@ -169,6 +169,54 @@ v3.0:  "crypto.generate_keypair"             ✅ Fully semantic
 "genetic.mix_entropy"          // Mix entropy sources
 "genetic.verify_lineage"       // Verify genetic proof
 "genetic.generate_proof"       // Generate lineage proof
+```
+
+#### 7. `health.*` - Health and Liveness (Cross-Cutting)
+
+Every primal MUST register these methods. They are the ecosystem's common
+probe surface — primalSpring, biomeOS, and CI all depend on them.
+
+| Canonical Name | Required Aliases | Response |
+|----------------|-----------------|----------|
+| `health.liveness` | `ping`, `health` | `{"status": "alive"}` |
+| `health.readiness` | | `{"status": "ready", ...}` |
+| `health.check` | `status`, `check` | `{"status": "healthy", ...}` |
+
+#### 8. `capabilities.*` - Capability Enumeration (Cross-Cutting)
+
+Every primal MUST register the canonical name AND accept the known aliases.
+Consumers (primalSpring, biomeOS, Squirrel) SHOULD probe all three names
+with fallback on `METHOD_NOT_FOUND`.
+
+| Canonical Name | Required Aliases | Response |
+|----------------|-----------------|----------|
+| `capabilities.list` | `capability.list`, `primal.capabilities` | `[{"name": "...", ...}]` |
+
+**Current ecosystem state** (March 2026):
+
+| Primal | Method Registered | Aligned? |
+|--------|------------------|----------|
+| BearDog v0.9.0 | `capabilities.list` | Canonical |
+| biomeOS v2.67 | `capability.list` | Alias — add `capabilities.list` |
+| Squirrel alpha.17 | `capability.list` | Alias — add `capabilities.list` |
+| Songbird wave60 | `primal.capabilities` | Alias — add `capabilities.list` |
+| primalSpring v0.7.0 | `capabilities.list` (probes all 3 with fallback) | Canonical + tolerant |
+
+**Why `capabilities.list` is canonical**: It follows the `{domain}.{operation}`
+pattern (`capabilities` is the domain, `list` is the operation). The singular
+`capability.list` reads as "list a single capability" which is semantically
+different. BearDog (the most method-rich primal at ~91 crypto methods) already
+uses the canonical form.
+
+**Migration**: Primals should add `capabilities.list` as an alias alongside
+their current name. No need to remove the current name — aliases are cheap
+and prevent integration breakage.
+
+#### 9. `lifecycle.*` - Primal Lifecycle
+
+```json
+"lifecycle.status"             // Current state + version
+"lifecycle.shutdown"           // Graceful shutdown
 ```
 
 ---
@@ -412,15 +460,17 @@ let response = neural_api.call_capability("crypto.generate_keypair", params).awa
 
 ---
 
-## 📊 ADOPTION STATUS
+## 📊 ADOPTION STATUS (Updated March 22, 2026)
 
-| Primal | Version | Status | Notes |
-|--------|---------|--------|-------|
-| **BearDog** | v0.18.0+ | ✅ Adopted | Using `crypto.*` and `tls.*` namespaces |
-| **Songbird** | v5.25.0 | 🔄 In Progress | HTTP client needs update to semantic names |
-| **Squirrel** | v2.x | 🔄 Phase 2 | Semantic names primary, legacy aliases deprecated with warnings |
-| **NestGate** | v2.x | ⏳ Pending | Will adopt in next evolution |
-| **ToadStool** | v1.x | ⏳ Pending | Will adopt in next evolution |
+| Primal | Version | Domain Methods | Cross-Cutting (`health.*`, `capabilities.*`) | Notes |
+|--------|---------|---------------|----------------------------------------------|-------|
+| **BearDog** | v0.9.0 | `crypto.*`, `tls.*`, `genetic.*`, `beacon.*` | `health.liveness` / `health.readiness` / `capabilities.list` — all canonical | Most compliant |
+| **biomeOS** | v2.67 | `capability.*` routing via Neural API | `capability.list` (alias, not canonical) | Add `capabilities.list` alias |
+| **Songbird** | wave60 | Mixed (`songbird.*` legacy + semantic) | `health` / `primal.capabilities` (alias, not canonical) | Add `health.liveness` / `capabilities.list` |
+| **Squirrel** | alpha.17 | `ai.*`, `context.*`, `tool.*`, `capability.*` | `health.liveness` / `capability.list` (alias) | Add `capabilities.list` alias |
+| **NestGate** | v2.1.0 | `storage.*` | Not verified | Needs audit |
+| **ToadStool** | v0.1.0 | `compute.*` | Not verified | Needs audit |
+| **primalSpring** | v0.7.0 | `coordination.*`, `composition.*`, `graph.*` | Canonical + probes all 3 aliases with fallback | Reference implementation |
 
 ---
 
