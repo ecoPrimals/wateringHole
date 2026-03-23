@@ -66,7 +66,7 @@ Files fixed:
 
 | Metric | V39 | V40 | Delta |
 |--------|-----|-----|-------|
-| Tests | 809 | 809 | — |
+| Tests | 809 | 848 | +39 |
 | Clippy warnings (pedantic+nursery) | 0 | 0 | — |
 | `#[allow()]` in library code | 1 | 0 | -1 |
 | Unsafe code | 0 | 0 | — |
