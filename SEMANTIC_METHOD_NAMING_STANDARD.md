@@ -460,11 +460,11 @@ let response = neural_api.call_capability("crypto.generate_keypair", params).awa
 
 ---
 
-## 📊 ADOPTION STATUS (Updated March 22, 2026)
+## 📊 ADOPTION STATUS (Updated March 23, 2026)
 
 | Primal | Version | Domain Methods | Cross-Cutting (`health.*`, `capabilities.*`) | Notes |
 |--------|---------|---------------|----------------------------------------------|-------|
-| **BearDog** | v0.9.0 | `crypto.*`, `tls.*`, `genetic.*`, `beacon.*` | `health.liveness` / `health.readiness` / `capabilities.list` — all canonical | Most compliant |
+| **BearDog** | v0.9.0 | `crypto.*`, `tls.*`, `genetic.*`, `beacon.*` | `health.liveness` / `health.readiness` / `capabilities.list` + `capability.list` + `primal.capabilities` — canonical + aliases | Most compliant (91+ methods, 14,161 tests, 87.0% coverage) |
 | **biomeOS** | v2.67 | `capability.*` routing via Neural API | `capability.list` (alias, not canonical) | Add `capabilities.list` alias |
 | **Songbird** | wave60 | Mixed (`songbird.*` legacy + semantic) | `health` / `primal.capabilities` (alias, not canonical) | Add `health.liveness` / `capabilities.list` |
 | **Squirrel** | alpha.17 | `ai.*`, `context.*`, `tool.*`, `capability.*` | `health.liveness` / `capability.list` (alias) | Add `capabilities.list` alias |
