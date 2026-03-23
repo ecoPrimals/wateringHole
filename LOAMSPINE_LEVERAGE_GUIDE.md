@@ -1,8 +1,8 @@
-<!-- SPDX-License-Identifier: AGPL-3.0-only -->
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 # LoamSpine Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
 **Date**: March 23, 2026
-**Primal**: LoamSpine v0.9.9
+**Primal**: LoamSpine v0.9.11
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -74,6 +74,12 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 **Transport**: JSON-RPC 2.0 over Unix socket (primary), tarpc/json
 (high-perf primal-to-primal — bincode path eliminated in v0.9.7),
 HTTP (admin/debug).
+
+**v0.9.11 Additions**:
+- **MCP `tools.list` / `tools.call`** — AI agents (Squirrel, biomeOS) can discover and invoke all LoamSpine operations via Model Context Protocol (11 tools with full `inputSchema`).
+- **`ResilientAdapter::execute_classified`** — Selective retry with `is_transient` closure; permanent errors fail fast, transient errors trigger exponential backoff.
+- **`dns-srv` feature gate** — DNS SRV discovery is now optional (`--no-default-features` omits `hickory-resolver`), reducing compile time for minimal deployments.
+- **NDJSON streaming** — `read_ndjson_stream` async helper + `NDJSON_PROTOCOL_VERSION` for versioned streaming protocol.
 
 ---
 
