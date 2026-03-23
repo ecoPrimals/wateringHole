@@ -124,6 +124,18 @@ Core domain type renamed from LoamSpine-specific to provider-agnostic:
 - Added `clear_discovery_source()` method to `DiscoveryRegistry`
 - **Total**: 1,348 tests, 92.96% region / 94.05% line coverage
 
+### 14. Documentation Refresh
+
+- Updated metrics across README.md, CONTEXT.md, DEPLOYMENT_CHECKLIST.md, showcase/00_START_HERE.md
+- Corrected test count (1,330 → 1,348) and coverage (92.32% → 92.96% region / 94.05% line)
+- Fixed ban list count (14 → 16 crates in deny.toml)
+- Synchronized dates across all docs to March 23, 2026
+- Hardened `.gitignore` (added .env, IDE dirs, coverage artifacts, Thumbs.db)
+- Documented `.cargo/config.toml` as machine-specific with developer guidance
+- Verified: zero TODOs/FIXMEs/HACKs in production `.rs` code
+- Verified: zero `#[deprecated]`, `#[allow(dead_code)]`, or `unimplemented!()` in production
+- Archive content properly isolated in `specs/archive/`
+
 ---
 
 ## Metrics
