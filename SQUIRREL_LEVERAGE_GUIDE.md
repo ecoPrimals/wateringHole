@@ -1,8 +1,8 @@
-<!-- SPDX-License-Identifier: AGPL-3.0-only -->
+<!-- SPDX-License-Identifier: AGPL-3.0-or-later -->
 # Squirrel Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 17, 2026
-**Primal**: Squirrel v0.1.0-alpha.11
+**Date**: March 24, 2026
+**Primal**: Squirrel v0.1.0-alpha.25
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
