@@ -429,7 +429,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 |--------|---------|
 | ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
 | hotSpring | v0.6.32 (848 tests, Ember/iommufd, Layer 7 ACR boot solver, deep debt cross-vendor) |
-| groundSpring | V122 (cast evolution, eps/tol modules, barraCuda v0.3.7 alignment, MCP absorption from airSpring V0.10) |
+| groundSpring | V123 (cross-ecosystem absorption, provenance registry, upstream contract pins, CastOverflowError, bitwise determinism tests, SECURITY.md, rustfmt.toml, 1020+ tests, 41 modules) |
 | neuralSpring | S174 (~1,385 tests, upstream contract pinning, zero allow, CONTRIBUTING/SECURITY, domain feature gates) |
 | wetSpring | V135 (1,891 tests, 91.20% coverage, NMF delegated upstream, 234 named tolerances, zero allow) |
 | airSpring | v0.10.0 (938 lib + 316 integration + 62 forge = 1,316 total tests, 91 binaries, 87 experiments, 95.66% coverage, barraCuda v0.3.7, three-tier capability discovery, zero unsafe/allow/C-deps) |
