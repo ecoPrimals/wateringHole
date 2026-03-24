@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 21, 2026
+**Last Updated**: March 24, 2026
 
 ---
 
@@ -423,17 +423,17 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
-**Spring Versions (as of March 11, 2026)**:
+**Spring Versions (as of March 24, 2026)**:
 
 | Spring | Version |
 |--------|---------|
 | ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
-| hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
-| groundSpring | V103 |
-| neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
-| wetSpring | V99 |
-| airSpring | v0.7.6 |
-| barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
+| hotSpring | v0.6.32 (848 tests, Ember/iommufd, Layer 7 ACR boot solver, deep debt cross-vendor) |
+| groundSpring | V122 (cast evolution, eps/tol modules, barraCuda v0.3.7 alignment, MCP absorption from airSpring V0.10) |
+| neuralSpring | S174 (~1,385 tests, upstream contract pinning, zero allow, CONTRIBUTING/SECURITY, domain feature gates) |
+| wetSpring | V135 (1,891 tests, 91.20% coverage, NMF delegated upstream, 234 named tolerances, zero allow) |
+| airSpring | v0.10.0 (938 lib + 316 integration + 62 forge = 1,316 total tests, 91 binaries, 87 experiments, 95.66% coverage, barraCuda v0.3.7, three-tier capability discovery, zero unsafe/allow/C-deps) |
+| barraCuda | v0.3.7 (wgpu 28, nursery clippy, normalize_method, resilient GPU tests, AGPL-3.0-or-later) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
 | primalSpring | v0.7.0 Phase 12.2 (51 experiments, 9 tracks, 360 tests, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, Transport enum, normalize_method, NdjsonSink, OnceLock probes, deny(missing_docs), zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
@@ -442,7 +442,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Precision agriculture, irrigation science, environmental systems  
 **Phase**: Domain Validation  
-**Status**: v0.10.0 — 911 lib + 311 integration + 61 forge + 22 property tests, 97 binaries, 87 experiments, 381/381 validation, 146/146 evolution, 14.3× CPU speedup (24/24 parity, 21/21 CPU-GPU), 0 clippy warnings (pedantic+nursery), zero unsafe code (`#![forbid(unsafe_code)]`), zero mocks in production, zero C deps (14 crates banned in `deny.toml`), AGPL-3.0-or-later, standalone barraCuda 0.3.5 (wgpu 28, DF64 precision tier), Edition 2024. 10 MCP tools wired (Squirrel AI). Platform-agnostic IPC (Transport enum: Unix + TCP). 63 provenance baselines. 63 named tolerances (4 submodules). `#[expect(reason)]` Rust 2024 complete. Full validation pipeline green (2026-03-19)
+**Status**: v0.10.0 — 938 lib + 316 integration + 62 forge = 1,316 total tests, 91 binaries (84 validation + 4 bench + 3 operational), 87 experiments, 381/381 validation, 146/146 evolution, 14.3× CPU speedup (24/24 parity, 21/21 CPU-GPU), 0 clippy warnings (pedantic+nursery), zero unsafe code (`#![forbid(unsafe_code)]`), zero mocks in production, zero C deps (14 crates banned in `deny.toml`), AGPL-3.0-or-later, standalone barraCuda 0.3.7 (wgpu 28, DF64 precision tier), Edition 2024 (MSRV 1.92). 10 MCP tools wired (Squirrel AI). Platform-agnostic IPC (Transport enum: Unix + TCP, three-tier capability discovery). 90/90 provenance-annotated validation binaries. 59/59 benchmark JSON with structured provenance. 58 named tolerances (4 submodules). `#[expect(reason)]` Rust 2024 complete. Full validation pipeline green (2026-03-24)
 
 **Role**: airSpring validates agricultural computational methods — FAO-56 ET₀ (8 methods), soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, ecological diversity, immunological Anderson coupling, and SCS-CN/Green-Ampt hydrology — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
 
@@ -453,7 +453,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **Experiments** | 87 complete: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, CW2D, 8 ET₀ methods, GDD, pedotransfer, ensemble, bias correction, parity, dispatch, Anderson coupling, SCS-CN, Green-Ampt, VG inverse, seasonal WB, immunological Anderson (tissue/cytokine/barrier/cross-species), f64-canonical GPU, cross-spring evolution, CPU/GPU parity (21/21), toadStool dispatch (19/19), NUCLEUS mesh (17/17), graph coordination (22/22) |
 | **ET₀ Methods** | Penman-Monteith, Priestley-Taylor, Hargreaves-Samani, Makkink, Turc, Hamon, Blaney-Criddle, Thornthwaite |
 | **Python Baselines** | 1,284/1,284 PASS against digitized paper benchmarks (57 papers), 63 provenance records |
-| **Rust Validation** | 911 lib + 311 integration + 61 forge tests, 381/381 validation checks, 146/146 evolution |
+| **Rust Validation** | 938 lib + 316 integration + 62 forge = 1,316 total tests, 381/381 validation checks, 146/146 evolution |
 | **Real Data** | 15,300 station-days Open-Meteo ERA5 (100 Michigan stations), 1498/1498 atlas checks |
 | **GPU Orchestrators** | 25 Tier A + 6 GPU-universal (ops 0-19 all upstream `BatchedElementwiseF64`), seasonal pipeline, atlas stream, MC ET₀ |
 | **Seasonal Pipeline** | ET₀→Kc→WB→Yield chained, GPU stages 1-3, multi-field streaming (57/57), pure GPU end-to-end (46/46) |
