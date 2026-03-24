@@ -103,23 +103,27 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: AI model coordination and inference  
 **Phase**: Foundation  
-**Status**: Production Hardened (A++, 98/100)
+**Status**: v0.1.0-alpha.25b — 6,839 tests (0 failures, 107 ignored), 86.5% line coverage, 22 workspace crates, 25 exposed capabilities, zero clippy warnings (pedantic+nursery), zero unsafe code (`#![forbid(unsafe_code)]`), zero mocks in production, zero C deps (ecoBin v3.0), AGPL-3.0-or-later, Edition 2024, all files <1,000 lines, `blake3` crypto (XOF keystream + keyed hash), `rand` CSPRNG, `#[expect(reason)]` complete
 
-**Role**: Squirrel provides sovereign AI capabilities through the Model Context Protocol (MCP). It routes AI tasks to appropriate models (local or remote), manages context windows, and coordinates multi-model workflows - all without compile-time coupling to any AI vendor.
+**Role**: Squirrel provides sovereign AI capabilities through the Model Context Protocol (MCP). It routes AI tasks to appropriate models (local or remote), manages context windows, and coordinates multi-model workflows — all without compile-time coupling to any AI vendor. Self-knowledge only; discovers all peers via capability-based runtime discovery.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
-| **Inference** | Model inference routing, multi-provider support (OpenAI, Anthropic, Ollama, local) |
-| **Context** | Advanced context window management, memory optimization |
+| **Inference** | Model inference routing, multi-provider support (OpenAI, Anthropic, Ollama, local), cost/quality/latency selection |
+| **Context** | Context window management (`context.create` / `context.update` / `context.summarize`), DashMap in-memory storage |
 | **Task Routing** | Intelligent routing based on task requirements and model capabilities |
-| **MCP** | Multi-MCP coordination, sovereign operation |
-| **Integration** | Vendor-agnostic AI, zero compile-time coupling |
+| **MCP** | Multi-MCP coordination, sovereign operation, spring tool discovery |
+| **Identity** | `identity.get` (CAPABILITY_BASED_DISCOVERY_STANDARD v1.0), 3-tier health (alive/ready/healthy) |
+| **IPC** | 25 JSON-RPC 2.0 methods (semantic `domain.verb` naming), tarpc typed RPC, Unix socket default, `normalize_method()` for ecosystem compat |
+| **Security** | `blake3` keyed hash + XOF encryption, capability-based authorization, human dignity evaluation (discrimination, manipulation, oversight) |
+| **Resilience** | `CircuitBreaker` + `RetryPolicy` + `ResilientCaller`, env-configurable retry chain (`SQUIRREL_RETRY_*` → `IPC_RETRY_*` → defaults) |
+| **Integration** | Vendor-agnostic AI, zero compile-time coupling, `CapabilityIdentifier` replaces enum |
 
-**Architecture**: TRUE PRIMAL - runtime discovery, isomorphic IPC, multi-protocol (JSON-RPC + tarpc)
+**Architecture**: TRUE PRIMAL — self-knowledge only, runtime discovery, isomorphic IPC, multi-protocol (JSON-RPC 2.0 + tarpc), Unix sockets default, `DispatchOutcome<T>` protocol/application error separation
 
-**Participates In**: Full NUCLEUS (all atomics + AI), RootPulse (intelligent merge resolution)
+**Participates In**: Full NUCLEUS (all atomics + AI), RootPulse (intelligent merge resolution), primalSpring Track 6 (exp044 AI composition)
 
 ---
 
