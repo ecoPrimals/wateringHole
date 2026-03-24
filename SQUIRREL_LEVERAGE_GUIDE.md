@@ -39,23 +39,27 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 | `ai.complete` | Text completion (single-turn inference) |
 | `ai.chat` | Chat completion with message history |
 | `ai.list_providers` | List available AI providers and their status |
+| **`capabilities.list`** | Per-method cost, dependency, and schema info for Pathway Learner (canonical per SEMANTIC_METHOD_NAMING_STANDARD v2.1) |
+| `capability.list` | Alias for `capabilities.list` (ecosystem backward compatibility) |
 | `capability.announce` | Accept capability and tool announcements from remote primals |
 | `capability.discover` | Report own capabilities for socket scanning (niche self-knowledge) |
-| `capability.list` | Per-method cost, dependency, and schema info for Pathway Learner |
+| `identity.get` | Primal self-knowledge: id, domain, version, transport, protocol, license (CAPABILITY_BASED_DISCOVERY_STANDARD v1.0) |
 | `context.create` | Create a new context session (DashMap-backed, versioned) |
 | `context.update` | Update an existing context with new data |
 | `context.summarize` | Summarize a context session (with AI-driven compression) |
-| `system.health` | Health check with uptime, provider count, capability status |
-| `system.status` | System status (UniBin alias for system.health) |
+| `system.health` | Tiered health (alive/ready/healthy) with uptime, provider count, capability status |
+| `system.status` | System status (alias for system.health) |
 | `system.metrics` | Server metrics (total requests, errors, p50/p99 latency) |
 | `system.ping` | Connectivity test (returns pong) |
+| `health.liveness` | Liveness probe (PRIMAL_IPC_PROTOCOL v3.0) — returns ok if process alive |
+| `health.readiness` | Readiness probe (PRIMAL_IPC_PROTOCOL v3.0) — returns ok if ready for requests |
 | `discovery.peers` | Scan socket directories for running primals |
 | `tool.execute` | Execute MCP tools (local built-ins + remote announced tools) |
 | `tool.list` | List available tools with JSON Schema input definitions |
-| `health.liveness` | Liveness probe (PRIMAL_IPC_PROTOCOL v3.0) — returns ok if process alive |
-| `health.readiness` | Readiness probe (PRIMAL_IPC_PROTOCOL v3.0) — returns ok if ready for requests |
 | `lifecycle.register` | Register with biomeOS orchestrator |
 | `lifecycle.status` | Heartbeat status report to biomeOS |
+| `graph.parse` | Parse TOML deploy graph for primalSpring BYOB coordination |
+| `graph.validate` | Validate deploy graph structure and capability requirements |
 
 **Manifest discovery**: Squirrel writes `$XDG_RUNTIME_DIR/ecoPrimals/squirrel.json`
 at startup for biomeOS manifest-based bootstrap discovery (absorbed from rhizoCrypt v0.13).
@@ -66,8 +70,19 @@ discrimination, manipulation, oversight, and explainability (wateringHole standa
 **Transport**: JSON-RPC 2.0 over Unix socket (primary), tarpc/bincode
 (high-perf primal-to-primal), HTTP (feature-gated OFF by default).
 
+**Method prefix normalization**: `squirrel.system.health` and
+`mcp.system.health` both resolve to `system.health` via `normalize_method()`.
+
+**Health tiering**: `system.health` returns a 3-tier `HealthTier` —
+`alive` (process running), `ready` (providers initialized), `healthy`
+(fully operational with served requests).
+
 **JSON-RPC batch support**: Full Section 6 compliance — array of requests
 yields array of responses; notification-only batches yield no response.
+
+**JSON-RPC 2.0 strictness**: `jsonrpc` field validated, `method` must be
+non-empty string, `params` must be object or array when present, standard
+error codes (-32700 through -32099).
 
 ---
 
@@ -204,11 +219,11 @@ as available functions and can compose them into multi-step workflows.
 **For**: Any spring operating under compute or budget constraints.
 
 Squirrel's niche self-knowledge (`niche.rs`) includes per-method cost
-estimates and GPU benefit hints. The `capability.list` response exposes
-these to biomeOS's Pathway Learner for intelligent scheduling:
+estimates and GPU benefit hints. The `capabilities.list` response (canonical)
+exposes these to biomeOS's Pathway Learner for intelligent scheduling:
 
 ```
-capability.list {}
+capabilities.list {}
   → {
     "ai.query":        { latency_ms: 500, cpu: "low", memory_bytes: 8192,  gpu_beneficial: true },
     "ai.chat":         { latency_ms: 800, cpu: "low", memory_bytes: 16384, gpu_beneficial: true },
