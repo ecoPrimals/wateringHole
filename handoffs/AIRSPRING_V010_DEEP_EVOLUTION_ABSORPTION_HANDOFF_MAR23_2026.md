@@ -30,9 +30,9 @@
 
 ### Quality Metrics
 
-- 938 lib unit tests + 316 integration/doc tests = 1,254 barracuda total
+- 947 lib unit tests + 306 integration/doc tests = 1,253 barracuda total
 - 62 forge tests (metalForge)
-- 1,316 total tests, 0 failures
+- 1,314 total tests, 0 failures
 - 91 binaries (84 validation, 4 bench, 3 operational)
 - 87 experiments, 58 named tolerances, 41 capabilities
 - 0 clippy warnings (pedantic + nursery, -D warnings)
@@ -94,7 +94,7 @@ airSpring added TCP fallback alongside Unix sockets. If toadStool standardizes `
 cd airSpring/barracuda
 cargo fmt --check                        # clean
 cargo clippy --all-targets -- -D warnings # 0 warnings
-cargo test                               # 1,254 pass, 0 fail
+cargo test                               # 1,253 pass, 0 fail
 cd ../metalForge/forge
 cargo test                               # 62 pass, 0 fail
 ```
