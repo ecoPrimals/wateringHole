@@ -4,7 +4,7 @@
 #
 # Status: Active
 # Last Updated: March 22, 2026
-# primalSpring Version: v0.3.0-dev (Phase 3 — capability-first architecture, topological waves, 236 tests)
+# primalSpring Version: v0.7.0 (Phase 15 — cross-ecosystem absorption, 361 tests, 53 experiments, 87/87 gates)
 # biomeOS alignment: v2.67 (5-tier centralized discovery, GeneticLineage→BearDog, niche self-knowledge)
 
 ---
@@ -37,17 +37,20 @@ capabilities = ["coordination", "composition", "nucleus"]
 "nucleus.stop" = { provider = "primalspring", method = "nucleus.stop" }
 ```
 
-### 1.2 What It Validates (7 Tracks, 38 Experiments)
+### 1.2 What It Validates (10 Tracks, 53 Experiments)
 
 | Track | What | Validates For |
 |-------|------|--------------|
 | 1 — Atomic Composition | Tower, Node, Nest, Full NUCLEUS | Every primal that participates in atomics |
-| 2 — Graph Execution | All 5 coordination patterns | biomeOS, Neural API, every graph consumer |
+| 2 — Graph Execution | All 5 coordination patterns (3/5 live) | biomeOS, Neural API, every graph consumer |
 | 3 — Emergent Systems | RootPulse, RPGPT, coralForge, ecology | Provenance Trio, ludoSpring, neuralSpring |
 | 4 — Bonding & Plasmodium | Covalent/ionic bonds, multi-gate | Songbird mesh, BearDog trust |
 | 5 — coralForge Redefinition | Neural object Pipeline graph | neuralSpring, wetSpring, hotSpring, ToadStool, NestGate |
 | 6 — Cross-Spring | Data flow, provenance, edge, AI | Every spring, fieldMouse, petalTongue, Squirrel |
 | 7 — Showcase-Mined Patterns | Compute triangle, protocol escalation, federation, supply chain, attribution | All primals — patterns extracted from phase1/phase2 showcases |
+| 8 — Live Composition | Tower + Squirrel AI + Nest + Node + NUCLEUS + Graph Overlays | Live multi-primal with real plasmidBin binaries |
+| 9 — Multi-Node Bonding | BondingPolicy, idle compute, data federation | Songbird mesh, NestGate replication, STUN tiers |
+| 10 — Cross-Gate Deployment | LAN covalent mesh, remote health probing | Gate operators, USB spore deployment |
 
 ### 1.3 What It Does NOT Do
 
@@ -102,7 +105,7 @@ primalSpring provides a converged IPC resilience stack adopted across the ecosys
 
 | Component | Details |
 |-----------|---------|
-| **niche.rs** | 21 capabilities, 7 semantic domains, operation dependencies, cost estimates |
+| **niche.rs** | 37 capabilities, 7+ semantic domains, operation dependencies, cost estimates |
 | **register_with_target()** | Registers capabilities with biomeOS for BYOB scheduling |
 | **capabilities.list RPC** | Returns structured niche: capabilities array, semantic mappings, operation deps, cost estimates |
 
@@ -118,7 +121,7 @@ primalSpring provides a converged IPC resilience stack adopted across the ecosys
 | **graph.validate RPC** | Validates a specific graph (structural or live probing) |
 | **graph.waves RPC** | Returns topological startup wave ordering |
 | **graph.capabilities RPC** | Returns required capabilities from a graph |
-| **Deploy graphs** | 11 TOMLs, all nodes declare `by_capability` (enforced by test) |
+| **Deploy graphs** | 22 TOMLs (18 single-node + 4 multi-node), all nodes declare `by_capability` (enforced by test) |
 
 ### 1.10 Capability-First Architecture (v0.3.0)
 
@@ -132,12 +135,14 @@ primalSpring provides a converged IPC resilience stack adopted across the ecosys
 
 ### 1.11 Test and Experiment Evolution
 
-| Metric | v0.1.0 | v0.2.0 | v0.3.0-dev |
-|--------|--------|--------|------------|
-| Tests | 69 | 157 | **236** (225 unit + 10 integration + 1 doc-test) |
-| RPC endpoints | 8 | 11 | **17** |
-| Deploy graphs | 6 | 6 | **11** (all `by_capability`) |
-| Capability-based experiments | 0 | 0 | **6** (exp001-004, exp006, exp051) |
+| Metric | v0.1.0 | v0.2.0 | v0.3.0 | v0.7.0 (Phase 15) |
+|--------|--------|--------|--------|-------------------|
+| Tests | 69 | 157 | 236 | **361** (343 unit + 10 integration + 4 doc-tests + 4 proptest) |
+| RPC endpoints | 8 | 11 | 17 | **17** |
+| Deploy graphs | 6 | 6 | 11 | **22** (18 single-node + 4 multi-node, all `by_capability`) |
+| Experiments | 38 | 38 | 38 | **53** (10 tracks) |
+| Provenance coverage | 0% | 0% | 0% | **100%** (all 53 experiments via `with_provenance()`) |
+| Gates | 0 | 0 | 0 | **87/87** |
 
 ---
 
@@ -304,14 +309,18 @@ prediction. This mirrors RootPulse exactly.
 ```
 Phase 0 (done): Scaffolding — 38 experiments, workspace compiles
 Phase 1 (done): Neural API integration, real IPC, server mode, 69 tests
-Phase 2 (current): Ecosystem absorption, niche self-knowledge, deploy graph validation, 157 tests
-Phase 2b: Live primals — Tower Atomic with real BearDog + Songbird IPC
-Phase 3: Full NUCLEUS deployment and health validation
-Phase 4: All 5 graph execution patterns with real primals
-Phase 5: RootPulse + coralForge emergent system validation
-Phase 6: Plasmodium multi-gate coordination
-Phase 7: Cross-spring ecosystem integration
-Phase 8: Showcase-mined patterns (compute triangle, protocol escalation, federation)
+Phase 2 (done): Ecosystem absorption, niche self-knowledge, deploy graph validation, 157 tests
+Phase 3 (done): Capability-first architecture, topological waves, 236 tests
+Phase 4 (done): Tower Atomic + Squirrel AI live, 41/41 gates
+Phase 5 (done): Tower Full Utilization, 41/41 gates
+Phase 6 (done): Nest + Node + NUCLEUS, 58/58 gates
+Phase 7-10 (done): Graph overlays, Squirrel discovery, graph execution, provenance readiness
+Phase 11-12 (done): Provenance trio, multi-node bonding, ecosystem absorption waves (360 tests)
+Phase 13 (done): Cross-gate deployment tooling (53 experiments, 10 tracks)
+Phase 14 (done): Deep debt + builder pattern + full provenance (361 tests, 87/87 gates)
+Phase 15 (done): Cross-ecosystem absorption — slug constants, unwrap/expect discipline
+Phase 16 (next): LAN covalent deployment — live multi-gate NUCLEUS
+Phase 17+: Live multi-node, emergent E2E, bonding coordination, cross-spring integration
 ```
 
 ---
