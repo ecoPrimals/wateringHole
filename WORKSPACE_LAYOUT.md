@@ -122,14 +122,14 @@ Each local directory maps to a GitHub org:
 | plasmidBin | ecoPrimals/plasmidBin | public |
 | sporePrint | ecoPrimals/sporePrint | public |
 
-#### sort-after/ (mixed)
+#### sort-after/ (syntheticChemistry — lab tools, in stasis or gifted)
 
-| Repo | GitHub | Visibility |
-|------|--------|------------|
-| agentReagents | syntheticChemistry/agentReagents | private |
-| benchScale | syntheticChemistry/benchScale | private |
-| ionChannel | syntheticChemistry/ionChannel | private |
-| rustChip | syntheticChemistry/rustChip | public |
+| Repo | GitHub | Visibility | Status | Purpose |
+|------|--------|------------|--------|---------|
+| agentReagents | syntheticChemistry/agentReagents | private | Stasis | VM image builder (YAML manifests, cloud-init). Built for local rustdesk testing when Cosmic broke passthrough. Future: syntheticChemistry lab validation tool. |
+| benchScale | syntheticChemistry/benchScale | private | Stasis | VM provisioner (libvirt, CloudInit). Built alongside agentReagents for the same rustdesk testing. Future: syntheticChemistry substrate validation tool. |
+| ionChannel | syntheticChemistry/ionChannel | private | Evolving | Secure connection channel. Started as K-NOME test project solving rustdesk/Cosmic passthrough. May evolve into a gated secure Linux connection point for primals, or remain a science tool for validating other systems. |
+| rustChip | syntheticChemistry/rustChip | public | Active (gift) | NPU/Akida characterization toolkit. Extracted from toadStool's metalForge subsystem, evolves via hotSpring experiments. Public gift to Akida — gives them hardware access without primal dependency. |
 
 ---
 
