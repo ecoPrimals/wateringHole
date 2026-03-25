@@ -1,10 +1,10 @@
 # 🌍 Semantic Method Naming Standard for Primal IPC
 
-**Version**: 2.1.0  
-**Date**: March 22, 2026  
+**Version**: 2.2.0  
+**Date**: March 25, 2026  
 **Status**: Official Ecosystem Standard  
 **Authority**: wateringHole (ecoPrimals Core Standards)  
-**Supersedes**: v2.0.0 (added cross-cutting health/capabilities canonical names)
+**Supersedes**: v2.1.0 (reinforced health.* as non-negotiable, added compliance enforcement note)
 
 ---
 
@@ -171,16 +171,28 @@ v3.0:  "crypto.generate_keypair"             ✅ Fully semantic
 "genetic.generate_proof"       // Generate lineage proof
 ```
 
-#### 7. `health.*` - Health and Liveness (Cross-Cutting)
+#### 7. `health.*` - Health and Liveness (Cross-Cutting, NON-NEGOTIABLE)
 
-Every primal MUST register these methods. They are the ecosystem's common
-probe surface — primalSpring, biomeOS, and CI all depend on them.
+Every primal MUST respond to these method names. They are the ecosystem's
+common probe surface — springs, primalSpring, biomeOS, CI pipelines, and
+orchestrators all depend on them. **This is non-negotiable.**
 
 | Canonical Name | Required Aliases | Response |
 |----------------|-----------------|----------|
 | `health.liveness` | `ping`, `health` | `{"status": "alive"}` |
 | `health.readiness` | | `{"status": "ready", ...}` |
 | `health.check` | `status`, `check` | `{"status": "healthy", ...}` |
+
+**`system.*` is NOT a valid substitute.** Primals that use `system.health`,
+`system.status`, or `system.ping` instead of `health.*` are non-conformant.
+Primals MAY register `system.*` methods as additional endpoints for their own
+tooling, but they MUST also respond to the canonical `health.*` names above.
+
+**Why this matters:** Springs and orchestrators probe primals with
+`health.liveness` to determine availability. A primal that only responds to
+`system.health` appears dead to the ecosystem. This was observed with squirrel
+during esotericWebb's first live composition — Webb's health probe returned
+`METHOD_NOT_FOUND` because squirrel only registered `system.*` methods.
 
 #### 8. `capabilities.*` - Capability Enumeration (Cross-Cutting)
 
@@ -460,17 +472,24 @@ let response = neural_api.call_capability("crypto.generate_keypair", params).awa
 
 ---
 
-## 📊 ADOPTION STATUS (Updated March 23, 2026)
+## 📊 ADOPTION STATUS (Updated March 25, 2026)
 
-| Primal | Version | Domain Methods | Cross-Cutting (`health.*`, `capabilities.*`) | Notes |
-|--------|---------|---------------|----------------------------------------------|-------|
-| **BearDog** | v0.9.0 | `crypto.*`, `tls.*`, `genetic.*`, `beacon.*` | `health.liveness` / `health.readiness` / `capabilities.list` + `capability.list` + `primal.capabilities` — canonical + aliases | Most compliant (91+ methods, 14,161 tests, 87.0% coverage) |
-| **biomeOS** | v2.67 | `capability.*` routing via Neural API | `capability.list` (alias, not canonical) | Add `capabilities.list` alias |
-| **Songbird** | wave60 | Mixed (`songbird.*` legacy + semantic) | `health` / `primal.capabilities` (alias, not canonical) | Add `health.liveness` / `capabilities.list` |
-| **Squirrel** | alpha.17 | `ai.*`, `context.*`, `tool.*`, `capability.*` | `health.liveness` / `capability.list` (alias) | Add `capabilities.list` alias |
+| Primal | Version | Domain Methods | Cross-Cutting (`health.*`, `capabilities.*`) | Status |
+|--------|---------|---------------|----------------------------------------------|--------|
+| **BearDog** | v0.9.0 | `crypto.*`, `tls.*`, `genetic.*`, `beacon.*` | `health.liveness` / `health.readiness` / `capabilities.list` + aliases | Conformant |
+| **biomeOS** | v2.67 | `capability.*` routing via Neural API | `capability.list` (alias only) | Needs `capabilities.list` |
+| **Songbird** | wave60 | Mixed (`songbird.*` legacy + semantic) | `health` / `primal.capabilities` (aliases only) | Needs `health.liveness` / `capabilities.list` |
+| **Squirrel** | alpha.17 | `ai.*`, `context.*`, `tool.*` | `system.health` / `system.status` / `capability.list` | **Non-conformant** — uses `system.*` instead of `health.*` |
 | **NestGate** | v2.1.0 | `storage.*` | Not verified | Needs audit |
 | **ToadStool** | v0.1.0 | `compute.*` | Not verified | Needs audit |
+| **RhizoCrypt** | v0.2.0 | `dag.*`, `provenance.*` | Not verified | Needs audit |
+| **LoamSpine** | v0.1.0 | `mesh.*`, `network.*` | Not verified | Needs audit (crashes on startup) |
+| **SweetGrass** | v0.3.0 | `provenance.*`, `lineage.*` | `health.liveness` responds | Conformant (health) |
+| **PetalTongue** | v0.2.0 | `visualization.*`, `render.*` | Not verified | Needs audit |
+| **CoralReef** | v0.1.0 | `network.*`, `reef.*` | Not verified | Needs audit |
 | **primalSpring** | v0.7.0 | `coordination.*`, `composition.*`, `graph.*` | Canonical + probes all 3 aliases with fallback | Reference implementation |
+
+See `IPC_COMPLIANCE_MATRIX.md` for full per-primal interop status across all dimensions.
 
 ---
 
@@ -486,9 +505,9 @@ let response = neural_api.call_capability("crypto.generate_keypair", params).awa
 
 ---
 
-**Status**: Official Standard (v2.0.0)  
+**Status**: Official Standard (v2.2.0)  
 **Adoption**: Mandatory for new primals, recommended migration for existing  
-**Enforcement**: Neural API translation layer bridges gaps during migration  
+**Enforcement**: Neural API translation layer bridges gaps during migration. `health.*` is non-negotiable.  
 **Questions**: Post in wateringHole discussions
 
 ---

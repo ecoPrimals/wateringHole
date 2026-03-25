@@ -67,7 +67,7 @@ Each primal SHALL provide a **single executable binary** that accepts **subcomma
 
 **Common Optional Modes**:
 - `client`: Client interaction mode
-- `daemon`: Background daemon mode
+- `daemon`: Background daemon mode (alias for `server` is acceptable)
 - `cli`: Interactive CLI mode
 - `doctor`: Health check/diagnostics
 - Custom modes as needed
@@ -78,6 +78,49 @@ nestgate --help           # Show all commands
 nestgate service start    # Start service mode
 nestgate doctor          # Health diagnostics
 ```
+
+### **2a. Server `--port` Convention** (MANDATORY, v1.1)
+
+**Rule**: The `server` subcommand MUST accept `--port <PORT>` to bind a TCP
+JSON-RPC listener using newline-delimited framing (see `PRIMAL_IPC_PROTOCOL.md`
+Wire Framing section).
+
+```bash
+# This MUST work for every primal
+<primal> server --port 9000
+```
+
+`--port` is the universal entry point for orchestration. Springs, deploy graphs,
+and launchers compose primals by calling `{binary} server --port {port}`. If a
+primal uses a different flag name (e.g., `--jsonrpc-port`, `--http-address`,
+`--listen`, `--rpc-bind`), it MUST also accept `--port` as an alias.
+
+**Additional transport flags** are acceptable:
+```bash
+beardog server --port 9000 --uds-path /run/user/1000/biomeos/beardog.sock
+sweetgrass server --port 9100 --http-address 127.0.0.1:9101
+```
+
+**`daemon` as an alias:** Primals that use `daemon` as their long-running
+subcommand SHOULD also accept `server` as an alias for consistency.
+
+### **2b. Standalone Startup** (MANDATORY, v1.1)
+
+**Rule**: Primals MUST start successfully in standalone mode — without other
+primals running and without identity environment variables.
+
+When `FAMILY_ID` or `NODE_ID` are not set, the primal MUST default to
+`standalone` (or `default`) rather than exit with an error. When Songbird or
+Neural API are unreachable, the primal MUST log a warning and continue with
+degraded discovery.
+
+The environment variable precedence for identity:
+1. `{PRIMAL}_FAMILY_ID` / `{PRIMAL}_NODE_ID` (primal-scoped, highest)
+2. `FAMILY_ID` / `NODE_ID` (unscoped fallback)
+3. Default `standalone` / hostname (lowest)
+
+This enables local development, spring-driven composition, and incremental
+deploy graph bringup.
 
 ---
 
@@ -183,6 +226,7 @@ struct Cli {
 enum Commands {
     /// Start BearDog in server mode
     Server {
+        /// TCP port for newline-delimited JSON-RPC (REQUIRED by UniBin v1.1)
         #[arg(long, default_value = "9000")]
         port: u16,
         
@@ -589,6 +633,8 @@ Before declaring a primal UniBin-compliant:
 - [ ] `--help` shows all modes with descriptions
 - [ ] `--version` implemented
 - [ ] At least `server` or `service` mode exists
+- [ ] `server --port <PORT>` binds newline-delimited TCP JSON-RPC (v1.1)
+- [ ] Starts in standalone mode without `FAMILY_ID` / `NODE_ID` (v1.1)
 - [ ] Error messages helpful and actionable
 - [ ] Logging includes mode and version
 - [ ] Signal handling (graceful shutdown)
@@ -607,6 +653,24 @@ Before declaring a primal UniBin-compliant:
 ---
 
 ## 🔄 **Version History**
+
+### **v1.1.0** (March 25, 2026)
+
+**Server Port Convention & Standalone Startup**
+
+**Author**: wateringHole (driven by esotericWebb live composition)
+
+**Changes**:
+- `server --port <PORT>` is now MANDATORY for orchestrator compatibility
+- Standalone startup is MANDATORY (no hard-fail on missing identity env vars)
+- Environment variable precedence defined for `FAMILY_ID` / `NODE_ID`
+- `daemon` recognized as acceptable alias for `server`
+- Compliance checklist updated
+
+**Rationale**:
+- Springs and launchers compose primals via `{binary} server --port {port}` — inconsistent flags break composition
+- Primals that hard-fail without `FAMILY_ID` break local development and incremental bringup
+- Discovered during esotericWebb's first live multi-primal composition
 
 ### **v1.0.0** (January 16, 2026)
 
@@ -674,8 +738,9 @@ A: Yes! Standard only requires minimum modes. Add domain-specific commands as ne
 
 ---
 
-**Standard**: UniBin Architecture v1.0.0  
+**Standard**: UniBin Architecture v1.1.0  
 **Adopted**: January 16, 2026  
+**Updated**: March 25, 2026  
 **Authority**: WateringHole Consensus  
 **Status**: 🌟 **ACTIVE ECOSYSTEM STANDARD** 🌟
 

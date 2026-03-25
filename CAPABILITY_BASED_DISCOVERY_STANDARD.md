@@ -1,7 +1,7 @@
 # Capability-Based Discovery Standard
 
-**Version:** 1.0.0
-**Date:** March 18, 2026
+**Version:** 1.1.0
+**Date:** March 25, 2026 (updated from 1.0.0 March 18, 2026)
 **Status:** Active — all primals and springs SHOULD adopt this
 
 ## Principle
@@ -48,22 +48,54 @@ The caller never knows (or needs to know) that BearDog handles crypto. If tomorr
 |------|--------|--------|
 | 1 | `capability.call` via Neural API | Authoritative — Neural API routes, translates, and forwards |
 | 2 | `discover_by_capability(cap)` → Neural API `capability.discover` | Runtime resolution via biomeOS |
-| 3 | Capability-named socket (`$XDG_RUNTIME_DIR/biomeos/security.sock`) | Filesystem convention |
+| 3 | Capability-named socket (`$XDG_RUNTIME_DIR/biomeos/{domain}.sock`) | Filesystem convention |
 | 4 | Socket registry capability scan | Shared registry file |
 
 ### Identity-Based (legacy fallback)
 
 | Tier | Method | Source |
 |------|--------|--------|
-| 1 | `{PRIMAL}_SOCKET` env var | Explicit override |
-| 2 | `$XDG_RUNTIME_DIR/biomeos/{primal}-{family}.sock` | XDG convention |
-| 3 | `{temp_dir}/biomeos/{primal}-{family}.sock` | Temp fallback |
-| 4 | Primal manifest file | Written on startup |
-| 5 | Socket registry by name | Shared registry file |
+| 1 | `{PRIMAL}_ADDRESS` or `{PRIMAL}_SOCKET` env var | Explicit override |
+| 2 | `$XDG_RUNTIME_DIR/biomeos/{primal}.sock` | XDG convention (no family suffix) |
+| 3 | `$XDG_RUNTIME_DIR/biomeos/{primal}-{family}.sock` | Family-scoped variant |
+| 4 | `{temp_dir}/biomeos/{primal}.sock` | Temp fallback |
+| 5 | Primal manifest file | Written on startup |
+| 6 | Socket registry by name | Shared registry file |
 
 Identity-based discovery remains available for backward compatibility and for
 deploy graphs (which need primal names for binary invocation). But **all runtime
 capability invocation** should use the capability-based path.
+
+### Filesystem Socket Requirements (v1.1)
+
+**All discovery below Tier 2 relies on `readdir()` — the ability to list files
+in `$XDG_RUNTIME_DIR/biomeos/`.** This means:
+
+1. **Filesystem sockets are REQUIRED on Linux.** Primals MUST create a socket
+   file at `$XDG_RUNTIME_DIR/biomeos/<primal>.sock`. Abstract namespace sockets
+   (`@primal`) are invisible to the filesystem and MUST NOT be the only socket.
+
+2. **Capability-domain symlinks are RECOMMENDED.** After binding the primal-named
+   socket, primals SHOULD create a symlink named after their primary capability
+   domain:
+
+   ```
+   $XDG_RUNTIME_DIR/biomeos/ai.sock       -> squirrel.sock
+   $XDG_RUNTIME_DIR/biomeos/security.sock  -> beardog.sock
+   $XDG_RUNTIME_DIR/biomeos/dag.sock       -> rhizocrypt.sock
+   ```
+
+   This enables Tier 3 capability-based discovery without Songbird or Neural API.
+   Springs performing filesystem probing scan for `{domain}.sock` by iterating
+   the known capability domains they require.
+
+3. **Custom socket directories are non-conformant.** Sockets MUST live in
+   `$XDG_RUNTIME_DIR/biomeos/`, not in primal-specific directories. A primal
+   that only creates `/run/user/1000/myprimal/myprimal.sock` is invisible to
+   discovery.
+
+4. **Socket cleanup on shutdown.** Primals MUST remove their socket files
+   (and symlinks) on graceful shutdown. Stale socket files pollute discovery.
 
 ## Neural API `capability.call` — The Loose Standard
 
@@ -133,9 +165,10 @@ Primals register their translations via `capability.register`:
 ## What Primals SHOULD Do
 
 1. **Prefer `capability.call`** over direct socket connections — it handles translation and routing
-2. **Bind capability-named sockets** (e.g. `security.sock`) alongside primal-named ones
+2. **Create capability-domain symlinks** (e.g. `security.sock -> beardog.sock`) alongside primal-named sockets, enabling Tier 3 filesystem discovery
 3. **Degrade gracefully** when the Neural API is unavailable — fall back to filesystem probing
 4. **Use `required_capabilities()`** instead of `required_primals()` for composition validation
+5. **Clean up sockets and symlinks** on graceful shutdown to prevent stale discovery results
 
 ## Where Primal Names ARE Acceptable
 
@@ -168,3 +201,27 @@ primalSpring v0.3.2 demonstrates the full pattern:
 - `coordination/mod.rs`: `required_capabilities()`, `validate_composition_by_capability()`
 - `deploy.rs`: `probe_graph_node()` uses `by_capability` when present
 - Server: `coordination.probe_capability`, `coordination.validate_composition_by_capability`
+
+---
+
+## Version History
+
+### v1.1.0 (March 25, 2026)
+
+**Filesystem Socket & Symlink Clarifications**
+
+- Filesystem sockets in `$XDG_RUNTIME_DIR/biomeos/` are REQUIRED on Linux
+- Abstract namespace sockets alone are insufficient for discovery
+- Capability-domain symlinks formally RECOMMENDED
+- Custom socket directories declared non-conformant
+- Socket cleanup on shutdown added to SHOULD requirements
+- Discovery tier table updated with `{PRIMAL}_ADDRESS` and non-family variants
+
+Driven by esotericWebb's first live composition: squirrel's abstract-only socket
+and petaltongue's custom directory were both invisible to filesystem-based
+discovery probing.
+
+### v1.0.0 (March 18, 2026)
+
+Initial standard. Established capability-based discovery tiers, Neural API
+`capability.call`, semantic method naming integration, and migration guide.
