@@ -68,6 +68,13 @@ All methods follow `{namespace}.{domain}.{operation}` per the
 (high-throughput primal-to-primal), TCP fallback. Capability-based
 discovery via `get_socket_path_for_capability()`.
 
+**Canonical socket paths** (discovery order for springs):
+
+1. `$TOADSTOOL_SOCKET` env var (with `.jsonrpc.sock` extension derivation)
+2. `$XDG_RUNTIME_DIR/biomeos/toadstool.jsonrpc.sock` (toadStool default)
+3. `$XDG_RUNTIME_DIR/toadstool.jsonrpc.sock` (flat layout fallback)
+4. `/tmp/toadstool.jsonrpc.sock` (last resort)
+
 ---
 
 ## 1. toadStool Standalone
