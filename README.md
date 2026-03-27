@@ -1,8 +1,8 @@
 # The Watering Hole - ecoPrimals Ecosystem Guidance
 
-**Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
-**Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: March 23, 2026
+**Purpose**: Authoritative project guidance for the ecoPrimals ecosystem — primals, springs, and gen4 products  
+**Audience**: Any primal, spring, or gen4 product at any point in its evolution — plus external audiences (PIs, students, builders, creatives, compliance)  
+**Last Updated**: March 27, 2026
 
 ---
 
@@ -278,7 +278,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **Any Spring + Provenance Trio**: `provenance_pipeline` graph — universal experiment provenance
 - **NestGate + LoamSpine**: Content-addressed storage backing immutable history
 
-### primalSpring Coordination (ecosystem self-validation)
+### primalSpring Coordination (ecosystem self-validation + gen4 bridge)
 
 - **primalSpring + All NUCLEUS Primals**: Atomic composition testing (Tower, Node, Nest, Full NUCLEUS)
 - **primalSpring + biomeOS**: Graph execution validation — all 5 coordination patterns with real primals
@@ -289,12 +289,81 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **primalSpring + fieldMouse + NestGate + sweetGrass**: Edge data ingestion pipeline
 - **primalSpring + petalTongue**: SSE visualization pipeline
 - **primalSpring + Squirrel**: AI coordination via biomeOS capability graph
+- **primalSpring + esotericWebb**: gen4 composition validation — Webb deploy graphs declare `primalspring_primal` as composition health validator (`composition.webb_*_health` capabilities). primalSpring validates that primal stacks compose correctly for product use.
+- **primalSpring + ludoSpring**: Game science composition — ludoSpring validates game models, primalSpring validates the IPC and composition that makes those models available to gen4 products
 
 ### Under Development
 
 - **Songbird + Songbird**: Cross-tower federation, multi-family routing
 
 **Detail**: `INTER_PRIMAL_INTERACTIONS.md`
+
+---
+
+## The Generational Model
+
+The ecoPrimals ecosystem evolves through four generations, each building on
+the previous:
+
+| Gen | Question | Answer | Artifacts |
+|-----|----------|--------|-----------|
+| **gen1** | Can we build it? | Yes — $11K cluster, fault-tolerant HPC, AI-assisted dev | NestGate, Squirrel, hardware fleet |
+| **gen2** | What should we build? | A sovereign protocol — 8 composable primals, AGPL as trust, BYOAI | biomeOS, BearDog, Songbird, Philosophy of Forgetting |
+| **gen3** | Does it work? | Yes — 12,510+ checks, 70+ papers, 7 springs, 14 primals | Springs, constrained evolution, SPRING/PRIMAL catalogs, thesis |
+| **gen4** | Who uses it? | Creatives, scientists, sovereign builders | sporeGarden products, standalone plasmidBin, creative surface |
+
+### How the Generations Relate
+
+- **Primals** are gen2 entities — they define capabilities and exist as deployable binaries
+- **Springs** are gen3 entities — they validate primals by reproducing published science
+- **Products** (sporeGarden) are gen4 entities — they compose primals into tools people use
+- **plasmidBin** (standalone repo) is the gen4 deployment surface where validated binaries land
+
+Springs have tighter coupling to primals (e.g. hotSpring cracks sovereign GPU
+compiling with coralReef, ludoSpring validates game science models). This is
+expected — springs are the validation layer. Products (gen4) have zero coupling
+to spring source; they consume only deployed binaries via IPC.
+
+### Three Organizations
+
+```
+syntheticChemistry/     — Springs (science validation, gen3)
+ecoPrimals/             — Primals + infrastructure (gen2–gen3)
+sporeGarden/            — Products (creative surface, gen4)
+```
+
+### plasmidBin — Primal Deployment Surface
+
+[github.com/ecoPrimals/plasmidBin](https://github.com/ecoPrimals/plasmidBin) is
+the standalone deployment surface. Primal teams build and harvest binaries →
+`harvest.sh` creates GitHub Releases with checksums → consumers run `fetch.sh`
+to populate their local plasmidBin. All 11 primals available as of v2026.03.25.
+
+The local `ecoPrimals/plasmidBin/` directory is the gen3 embedded version
+(manifest + sources). The standalone repo is the gen4 deployment surface
+(metadata + binaries via GitHub Releases).
+
+### gen4 Products
+
+**esotericWebb** ([sporeGarden/esotericWebb](https://github.com/sporeGarden/esotericWebb))
+is the first gen4 product — a CRPG engine that composes primals into a playable
+game. It consumes 8 primal domains via `PrimalBridge` (JSON-RPC IPC), with
+graceful degradation when primals are absent. 166 tests, 23 bridge methods,
+zero spring imports. Its `EVOLUTION_GAPS.md` feeds gap pressure back to primal
+teams — driving the ecosystem forward.
+
+**helixVision** (planned — sporeGarden) is the second gen4 product pattern — a
+sovereign genomics discovery platform that composes wetSpring (16S pipeline,
+microbiome analytics) and neuralSpring/coralForge (structure prediction) into a
+deployable tool for field biologists, wastewater engineers, and environmental
+scientists. Same PrimalBridge pattern, same deploy graphs, different domain.
+coralForge becomes helixVision's structure prediction module; the gen3 science
+doesn't rename.
+
+### gen4 Documentation
+
+Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
+6 sections: thesis, architecture, products, economics, knome, outreach).
 
 ---
 
@@ -315,9 +384,10 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ## Document Index
 
 ### Master Index
-- **`STANDARDS_AND_EXPECTATIONS.md`** — **Start here.** Single-document reference for all ecoPrimals standards, expectations, and conventions. Links to every standard below.
+- **`GEN4_BRIDGE.md`** — **Start here if you're new to gen4.** How primals become products. The flow from binary harvest to product composition to gap pressure. What every team needs to know.
+- **`STANDARDS_AND_EXPECTATIONS.md`** — Single-document reference for all ecoPrimals standards, expectations, and conventions. Links to every standard below.
 - **`GLOSSARY.md`** — Definitive terminology for the ecoPrimals ecosystem. Gate, primal, spring, atomic, niche, deploy graph, germination, absorption, delegation, fossil record, and every other term.
-- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, and tooling spec for an ecoPrimals gate. Pop!\_OS, Rust toolchain, Cursor, GPU configuration, directory layout, post-install checklist.
+- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, and tooling spec for ecoPrimals gates. Multi-arch (x86_64/aarch64), multi-substrate (desktop, mobile/Android, remote bootstrap). plasmidBin integration, Dark Forest seed distribution, network topology patterns.
 
 ### Architecture Standards
 - `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
@@ -354,6 +424,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### Coordination & Patterns
 - `INTER_PRIMAL_INTERACTIONS.md` — Production interaction map and plans
 - `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
+- `IPC_COMPLIANCE_MATRIX.md` — Per-primal IPC compliance tracking (wire framing, sockets, health, port, standalone, substrate)
 - `SPRING_AS_PROVIDER_PATTERN.md` — biomeOS capability registration
 - `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Provenance trio integration
 - `SPRING_EVOLUTION_ISSUES.md` — Active issues discovered by springs
@@ -375,8 +446,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
-- `handoffs/*.md` — Active session handoffs (last 48 hours)
-- `handoffs/archive/` — Fossil record (507 archived handoffs, Feb 2026 – present)
+- `handoffs/*.md` — Active handoffs (41 current — latest version per primal/spring, cross-deploy substrate evolution)
+- `fossilRecord/` — 689 absorbed handoffs (Feb–Mar 2026) — superseded evolution history, preserved as permanent record
 
 ---
 
@@ -417,6 +488,7 @@ Four external audiences will read your repo without context:
 | **Students / Core Facilities** | How do I build it? How do I run it? Where do I start? |
 | **Hardware Builders / Hobbyists** | What hardware does it need? What can my GPU do? How do I contribute compute? |
 | **Compliance / Institutional Review** | What standards does it meet? What are the dependencies? Is it safe? What's the license? |
+| **Creatives / Game Designers** | What can I make with this? How do I author content? What do I keep? (gen4 audience via sporeGarden) |
 
 The `publicRelease/` documents in `whitePaper/attsi/non-anon/contact/publicRelease/`
 make ecosystem-wide claims. Each spring and primal must ensure its own presentation
@@ -424,4 +496,4 @@ supports those claims.
 
 ---
 
-**The Watering Hole is maintained by all primals. Every primal's evolution strengthens the whole ecosystem.**
+**The Watering Hole is maintained by all primals, springs, and products. Every evolution — from primal binary to spring validation to product composition — strengthens the whole ecosystem. gen4 is where the primals become invisible. The Watering Hole is where they stay visible to each other.**

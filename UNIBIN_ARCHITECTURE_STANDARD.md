@@ -357,21 +357,22 @@ $ nestgate storage configure --backend filesystem
 
 | Primal | Status | Notes |
 |--------|--------|-------|
-| **NestGate** | ✅ Fully Compliant | Reference implementation |
+| **BearDog** | ✅ UniBin name + clap 4 CLI | `beardog server --listen`. Missing: `--port` alias, standalone startup. |
+| **Songbird** | ✅ UniBin name + subcommands | `songbird server --port`. Missing: `--dark-forest` CLI flag. |
+| **Squirrel** | ✅ UniBin name + subcommands | `squirrel server`. Uses `--port + --bind` (should converge to `--listen`). |
+| **ToadStool** | ✅ UniBin name + subcommands | `toadstool server --port`. `--port` flag not wired to implementation. |
 
-### **In Progress** ⏳
+### **Blocked** ❌
 
-| Primal | Current Binary | Target Binary | Priority |
-|--------|----------------|---------------|----------|
-| **ToadStool** | `toadstool-server` | `toadstool` | 🔴 High |
-| **Songbird** | `songbird-orchestrator` | `songbird` | 🔴 High |
-| **BearDog** | `beardog-server` | `beardog` | 🟡 Medium |
+| Primal | Binary | Issue | Priority |
+|--------|--------|-------|----------|
+| **NestGate** | `nestgate` | musl-static binary **segfaults** (exit 139) on `--help`. glibc build works with full clap 4 CLI. ecoBin non-compliant until musl is fixed. `--port` non-functional. `daemon` subcommand (not `server`). | P0 |
 
-### **To Be Verified** ❓
+### **Partial** ⏳
 
-| Primal | Current Binary | Compliance | Action |
-|--------|----------------|------------|--------|
-| **Squirrel** | `squirrel` | ❓ Unknown | Verify if UniBin |
+| Primal | Binary | Status | Notes |
+|--------|--------|--------|-------|
+| **NestGate** | `nestgate` (glibc only) | Structurally UniBin, functionally blocked | Subcommand is `daemon` not `server`. `--port` not wired. Reference implementation claim invalid until musl fixed. |
 
 ---
 
@@ -635,6 +636,9 @@ Before declaring a primal UniBin-compliant:
 - [ ] At least `server` or `service` mode exists
 - [ ] `server --port <PORT>` binds newline-delimited TCP JSON-RPC (v1.1)
 - [ ] Starts in standalone mode without `FAMILY_ID` / `NODE_ID` (v1.1)
+- [ ] musl-static binary works identically to glibc build (v1.2)
+- [ ] No writes to CWD — audit/PID paths configurable via flags or env (v1.2)
+- [ ] `--abstract` flag supported for Android/SELinux substrates (v1.2, if Unix sockets used)
 - [ ] Error messages helpful and actionable
 - [ ] Logging includes mode and version
 - [ ] Signal handling (graceful shutdown)
@@ -653,6 +657,43 @@ Before declaring a primal UniBin-compliant:
 ---
 
 ## 🔄 **Version History**
+
+### **v1.1.0** (March 25, 2026)
+
+**Server Port Convention & Standalone Startup**
+
+**Author**: wateringHole (driven by esotericWebb live composition)
+
+**Changes**:
+- `server --port <PORT>` is now MANDATORY for orchestrator compatibility
+- Standalone startup is MANDATORY (no hard-fail on missing identity env vars)
+- Environment variable precedence defined for `FAMILY_ID` / `NODE_ID`
+- `daemon` recognized as acceptable alias for `server`
+- Compliance checklist updated
+
+**Rationale**:
+- Springs and launchers compose primals via `{binary} server --port {port}` — inconsistent flags break composition
+- Primals that hard-fail without `FAMILY_ID` break local development and incremental bringup
+- Discovered during esotericWebb's first live multi-primal composition
+
+### **v1.2.0** (March 27, 2026)
+
+**Cross-Substrate Deployment & CLI Convergence**
+
+**Author**: wateringHole (driven by plasmidBin cross-hardware deployment testing)
+
+**Changes**:
+- `--listen addr:port` is RECOMMENDED as the canonical TCP bind flag (BearDog pattern). `--port` remains MANDATORY per v1.1; `--listen` provides the full `addr:port` form for deployment scripts.
+- **Substrate-aware output paths**: Primals MUST NOT assume CWD is writable. Audit logs, PID files, and runtime data SHOULD be configurable via `--audit-dir`, `--pid-dir`, or environment variables (`{PRIMAL}_AUDIT_DIR`, `{PRIMAL}_PID_DIR`). Default: `$XDG_RUNTIME_DIR/biomeos/` on Linux, `$TMPDIR` on Android.
+- **Abstract socket support**: Primals that create Unix sockets SHOULD accept `--abstract` to use Linux abstract namespace sockets (prefix `\0` on `AF_UNIX`). Required for Android/SELinux substrates.
+- **musl-static compliance**: ecoBin requires musl-static cross-compilation. The UniBin binary MUST function identically under both glibc and musl libc. Segfaults, panics, or behavioral differences under musl constitute a compliance failure.
+- NestGate reference implementation status revoked until musl segfault is resolved.
+- Compliance table updated with live deployment results.
+
+**Rationale**:
+- Live deployment to Pixel/GrapheneOS (aarch64, Android) revealed primals writing to CWD (crash), using non-abstract sockets (SELinux block), and CLI inconsistency as the #1 deployment friction
+- NestGate musl segfault (exit 139) discovered during plasmidBin binary validation
+- Deploy scripts (`deploy_gate.sh`, `deploy_pixel.sh`, `bootstrap_gate.sh`) maintain 60+ line per-primal case blocks due to CLI divergence
 
 ### **v1.1.0** (March 25, 2026)
 
@@ -738,9 +779,9 @@ A: Yes! Standard only requires minimum modes. Add domain-specific commands as ne
 
 ---
 
-**Standard**: UniBin Architecture v1.1.0  
+**Standard**: UniBin Architecture v1.2.0  
 **Adopted**: January 16, 2026  
-**Updated**: March 25, 2026  
+**Updated**: March 27, 2026  
 **Authority**: WateringHole Consensus  
 **Status**: 🌟 **ACTIVE ECOSYSTEM STANDARD** 🌟
 

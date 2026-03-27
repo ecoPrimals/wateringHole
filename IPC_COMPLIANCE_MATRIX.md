@@ -1,7 +1,7 @@
 # IPC Compliance Matrix
 
-**Version:** 1.0.0
-**Date:** March 25, 2026
+**Version:** 1.1.0
+**Date:** March 27, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 
@@ -11,7 +11,9 @@ v1.1, `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.1, and
 `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
 
 Data sourced from esotericWebb's first live multi-primal composition
-(March 2026) and direct inspection of each primal's source code.
+(March 2026), direct inspection of each primal's source code, and
+**live cross-hardware deployment testing** (March 27, 2026) across
+x86_64 eastgate + aarch64 Pixel/GrapheneOS on iPhone hotspot.
 
 ---
 
@@ -41,7 +43,7 @@ transport (UDS or TCP). See `PRIMAL_IPC_PROTOCOL.md` v3.1 Wire Framing.
 | **beardog** | Newline | Newline | C | Both transports use raw newline framing. |
 | **songbird** | Newline | Newline | C | Standard newline framing on both transports. |
 | **petaltongue** | Newline | -- | **P** | UDS newline-conformant. No TCP listener exposed via `--port`. |
-| **nestgate** | Newline | -- | **P** | Socket-only by default. `--port` exists but is non-functional. |
+| **nestgate** | Newline | -- | **X** | Socket-only by default. `--port` exists but is non-functional. **musl-static binary segfaults (exit 139) on `--help`** — ecoBin non-compliant. glibc dynamic build works. |
 | **toadstool** | Newline | -- | **P** | `--port` exists but is not forwarded to implementation. |
 | **coralreef** | Newline | HTTP (jsonrpsee) | **P** | UDS is newline. TCP uses jsonrpsee HTTP framing. |
 | **biomeOS** | -- | HTTP (multiple modes) | **P** | Not a simple `server --port` primal. Orchestrator, not peer. |
@@ -82,7 +84,7 @@ non-negotiable canonical names. See `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
 | **sweetgrass** | Yes | ? | ? | -- | C | Responds to `health.liveness`. |
 | **squirrel** | **No** | **No** | **No** | `system.health`, `system.status`, `system.ping` | **X** | Uses `system.*` domain exclusively. Non-conformant. |
 | **beardog** | Yes | Yes | -- | -- | C | Canonical names. |
-| **songbird** | `health` alias | -- | -- | `health` (short) | **P** | Responds to `health` but not verified for `health.liveness`. |
+| **songbird** | `health` alias | -- | -- | `health` (short), HTTP `/health` | **P** | Responds to `health` (short name) and HTTP `/health`. Does not expose `health.liveness` by canonical name. Verified live (March 27). |
 | **petaltongue** | ? | ? | ? | ? | ? | Not verified. |
 | **nestgate** | ? | ? | ? | ? | ? | Not verified. |
 | **toadstool** | ? | ? | ? | ? | ? | Not verified. |
@@ -105,7 +107,7 @@ See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **beardog** | `server` | No | `--listen` (addr:port) | **X** | No `--port` flag. Uses `--listen`. |
 | **songbird** | `server` | ? | ? | ? | Not verified. |
 | **petaltongue** | `server` | No | None | **X** | No port option at all. UDS only. |
-| **nestgate** | `daemon` | No (ignored) | `--port` exists but socket-only | **P** | Subcommand is `daemon`, not `server`. `--port` not functional. |
+| **nestgate** | `daemon` | No (ignored) | `--port` exists but socket-only | **X** | Subcommand is `daemon`, not `server`. `--port` not functional. musl binary segfaults before CLI parsing. |
 | **toadstool** | `server` | No (ignored) | `--port` exists but not wired | **X** | Flag present but not forwarded to server implementation. |
 | **coralreef** | `server` | No | `--rpc-bind` | **X** | Uses `--rpc-bind` for jsonrpsee HTTP, not raw newline. |
 | **biomeOS** | `neural-api` / `api` | N/A | N/A | -- | Not a peer primal. |
@@ -144,7 +146,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **beardog** | C | P | C | X | X | Needs work |
 | **songbird** | C | C | P | ? | C | Close |
 | **petaltongue** | P | X | ? | X | C | Needs work |
-| **nestgate** | P | P | ? | P | C | Close |
+| **nestgate** | X | P | ? | X | C | **Blocked** (musl segfault) |
 | **toadstool** | P | ? | ? | X | C | Needs audit |
 | **coralreef** | P | P | ? | X | C | Needs work |
 | **biomeOS** | P | C | C | -- | C | Conformant (orchestrator) |
@@ -176,6 +178,114 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 
 ---
 
+## Health Check Transport Protocol
+
+Standard: Primals should expose health over a consistent protocol. Currently
+three different protocols are in use, forcing multi-protocol probing in
+validation scripts. Verified via live cross-hardware testing (March 27, 2026).
+
+| Primal | Primary Health Protocol | Endpoint | Status | Notes |
+|--------|------------------------|----------|--------|-------|
+| **beardog** | Raw TCP JSON-RPC | `health.liveness` via newline JSON-RPC | C | Clean, standards-compliant |
+| **songbird** | HTTP GET | `/health` (HTTP 200) | **P** | Works, but not JSON-RPC. Short name `health` via RPC. |
+| **squirrel** | HTTP JSON-RPC POST | `system.health` via HTTP POST | **X** | Non-standard method name, HTTP-only |
+| **toadstool** | HTTP GET | `/health` (HTTP 200) | **P** | Not verified via JSON-RPC method name |
+| **nestgate** | Raw TCP JSON-RPC | Not verifiable | **X** | musl binary segfaults; glibc binary uses raw TCP |
+| **rhizocrypt** | HTTP POST (Axum) | Unknown | ? | HTTP-wrapped only |
+| **loamspine** | N/A | Crashes on startup | **X** | Tokio nested runtime panic |
+| **sweetgrass** | UDS JSON-RPC | `health.liveness` | C | |
+| **petaltongue** | UDS JSON-RPC | Unknown | ? | |
+| **coralreef** | HTTP (jsonrpsee) | Unknown | ? | |
+| **biomeOS** | HTTP | `/health`, `health.liveness` | C | Full health suite |
+
+**Recommendation**: All primals should expose `health.liveness` via raw TCP
+newline-delimited JSON-RPC (primary) and optionally HTTP `/health` (convenience).
+Validation tools (`validate_gate.sh`) currently brute-force three protocols; this
+wastes round-trips and makes diagnostics ambiguous.
+
+---
+
+## Substrate Compliance (Cross-Hardware)
+
+Standard: ecoBin v3.0 requires pure Rust, musl-static cross-compilation, and
+platform-agnostic IPC. Live testing (March 27, 2026) on x86_64 Linux and
+aarch64 Android/GrapheneOS revealed substrate-specific compliance gaps.
+
+### musl-static Binary Health
+
+| Primal | x86_64 musl | aarch64 musl | Notes |
+|--------|-------------|-------------|-------|
+| **beardog** | C | C | Works on both. Crypto deterministic cross-arch. |
+| **songbird** | C | C | Works on both. |
+| **squirrel** | C | C | Works on both. |
+| **toadstool** | C | C | Works on both. |
+| **nestgate** | **X** | ? | **Segfaults (exit 139)** on x86_64 musl. aarch64 untested. glibc works. Likely mdns-sd, uzers, or sysinfo musl incompatibility. |
+| **loamspine** | ? | ? | Crashes on startup (Tokio issue, not musl-specific). |
+| **rhizocrypt** | ? | ? | Not tested. |
+| **sweetgrass** | ? | ? | Not tested. |
+| **petaltongue** | ? | ? | Not tested. |
+| **coralreef** | ? | ? | Not tested. |
+
+### Android/GrapheneOS Substrate
+
+Tested on Pixel with GrapheneOS via ADB (aarch64-linux-musl binaries):
+
+| Requirement | Standard | Notes |
+|-------------|----------|-------|
+| **Abstract sockets** | BearDog `--abstract` flag | Flag exists but treats `@name` as filesystem path. Needs fix: actual `AF_UNIX` abstract namespace. |
+| **Writable runtime dir** | `HOME`/`TMPDIR` must point to writable area | Default `/data/local/tmp/plasmidBin/` is read-only for data writes. Fix: set `HOME=/data/local/tmp/biomeos`. |
+| **No systemd** | Primals must not assume systemd for lifecycle | Startup via shell script, not service units. |
+| **PID files** | Directory must be configurable | Songbird writes PID to CWD by default. Needs `--pid-dir` or `SONGBIRD_PID_DIR`. |
+| **Audit logs** | Directory must be configurable | BearDog writes `audit.log` to CWD. Crashes on read-only filesystem. Needs `--audit-dir` or `BEARDOG_AUDIT_DIR`. |
+| **SELinux** | Filesystem UDS may be blocked | Abstract sockets bypass SELinux file label checks. TCP is the reliable fallback. |
+| **ADB port forwarding** | Local port conflicts with running gates | `deploy_pixel.sh --local-port-offset N` offsets forwarded ports. |
+
+### Genetic Crypto Cross-Architecture Determinism
+
+Verified March 27, 2026 — BearDog crypto primitives produce identical results
+on x86_64 and aarch64:
+
+| Primitive | Cross-Arch Deterministic | Notes |
+|-----------|-------------------------|-------|
+| BLAKE3 hash | Yes | Same input produces same hash on both architectures |
+| HMAC-SHA256 | Yes | Keyed MAC deterministic |
+| X25519 key exchange | Yes | Key pairs and shared secrets match |
+| ChaCha20-Poly1305 | Yes (expected) | Not yet tested cross-gate; same algorithm, deterministic |
+
+---
+
+## Priority Actions (Updated March 27, 2026)
+
+### Critical (blocks cross-hardware deployment)
+
+1. **nestgate**: Fix musl-static segfault. Diagnose with `RUST_BACKTRACE=1` on musl build. Likely candidate: `mdns-sd`, `uzers`, or `sysinfo` crate interaction with musl libc. This blocks all NestGate deployment via plasmidBin.
+2. **beardog**: Default `FAMILY_ID` to `standalone` when unset. Current hard-fail breaks standalone startup (UniBin v1.1 mandatory).
+3. **beardog**: Fix `--abstract` flag to use actual Linux abstract sockets (prefix `\0` on `AF_UNIX`). Currently treats as filesystem path, crashing on Android.
+4. **loamspine**: Fix Tokio nested runtime panic in `infant_discovery`. Add `--port` flag.
+5. **rhizocrypt**: Add newline-delimited TCP JSON-RPC listener.
+
+### High (needed for standard compliance and Dark Forest deployment)
+
+6. **beardog**: Add `--audit-dir` / `BEARDOG_AUDIT_DIR` to avoid CWD writes (read-only filesystem crash on Android).
+7. **beardog**: Wire `birdsong.generate_encrypted_beacon` into server RPC handler.
+8. **beardog**: Add `beardog seed generate/export/verify` subcommand.
+9. **songbird**: Add `--dark-forest` CLI flag (env-only today, silent plaintext fallback).
+10. **songbird**: Add `--pid-dir` or `SONGBIRD_PID_DIR` for Android/container substrates.
+11. **petaltongue**: Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`. Add `--port`.
+12. **sweetgrass**: Add `--port` flag.
+13. **coralreef**: Add `--port` flag for raw newline TCP.
+14. **toadstool**: Wire `--port` flag to actual server bind.
+15. **nestgate**: Wire `--port` to actual TCP bind. Accept `server` as alias for `daemon`.
+
+### Recommended (improves ecosystem coherence)
+
+16. All primals: converge on `--listen addr:port` as the canonical TCP bind flag (BearDog pattern).
+17. All primals: expose `health.liveness` via raw TCP newline JSON-RPC.
+18. All primals: report transport protocol in `capabilities.list` response.
+19. **squirrel**: Add filesystem socket alongside abstract. Alias `system.*` to `health.*`.
+
+---
+
 ## Related Standards
 
 - `PRIMAL_IPC_PROTOCOL.md` v3.1 — Wire framing, socket paths, standalone startup
@@ -183,3 +293,29 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 - `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.1 — Socket naming, symlinks, filesystem requirement
 - `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2 — Health method names, capability enumeration
 - `SPRING_INTEROP_LESSONS.md` — Practical learnings from Webb's composition
+- `GATE_DEPLOYMENT_STANDARD.md` — Gate hardware, substrate, and deployment requirements
+- `ECOBIN_ARCHITECTURE_STANDARD.md` v3.0 — Pure Rust, musl-static, cross-compilation
+- `CROSS_DEPLOY_SUBSTRATE_EVOLUTION_HANDOFF_MAR27_2026.md` — Per-primal deployment action items
+
+---
+
+## Version History
+
+### v1.1.0 (March 27, 2026)
+
+**Cross-Hardware Deployment Testing**
+
+- Added Health Check Transport Protocol section
+- Added Substrate Compliance section (musl-static, Android/GrapheneOS)
+- Added Genetic Crypto Cross-Architecture Determinism table
+- Updated NestGate status: musl binary segfaults (X, was P)
+- Updated Songbird health method from live probing
+- Expanded priority actions with deployment-specific items (19 total)
+- Data now includes live testing on x86_64 + aarch64 Pixel/GrapheneOS
+
+### v1.0.0 (March 25, 2026)
+
+**Initial Matrix from esotericWebb Composition**
+
+- Wire framing, socket path, health method, `--port`, standalone compliance
+- Summary scorecard and priority actions
