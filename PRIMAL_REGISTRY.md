@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 24, 2026
+**Last Updated**: March 27, 2026
 
 ---
 
@@ -27,7 +27,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Cryptographic operations and genetic lineage  
 **Phase**: Foundation  
-**Status**: Production Ready (A+ LEGENDARY, 99/100)
+**Status**: Production Ready (A+ LEGENDARY, 99/100)  
+**Cross-Deploy Readiness**: Partial — musl-static works on x86_64 and aarch64, crypto deterministic cross-arch. **Blockers**: Hard-fails without `FAMILY_ID`/`NODE_ID` (UniBin v1.1 violation), `--abstract` flag broken (treats as filesystem path, crashes on Android), no seed lifecycle CLI (`beardog seed generate/export/verify`), `--audit-dir` missing (CWD writes crash on read-only filesystems), `birdsong.generate_encrypted_beacon` RPC not wired to server handler.
 
 **Role**: BearDog is the cryptographic foundation of the ecosystem. Every signing operation, every encryption, every hash, every key exchange in the ecosystem flows through BearDog's primitives. It also manages genetic lineage - the family seed system that enables auto-trust between primals.
 
@@ -55,7 +56,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Network orchestration, discovery, and federation  
 **Phase**: Foundation  
-**Status**: Production Ready (S+, 100% BearDog delegation + Pure Rust Tor, 9,969 tests, ~72% coverage, 30 crates, ecoBin v3.0)
+**Status**: Production Ready (S+, 100% BearDog delegation + Pure Rust Tor, 9,969 tests, ~72% coverage, 30 crates, ecoBin v3.0)  
+**Cross-Deploy Readiness**: Close — musl-static works on x86_64 and aarch64. **Gaps**: Dark Forest is env-only (4-6 vars, silent plaintext fallback, no `--dark-forest` CLI flag), PID file directory hardcoded to CWD (crashes on Android read-only filesystem, needs `--pid-dir`), `health` short name should alias to `health.liveness`.
 
 **Role**: Songbird is the nervous system of the ecosystem. It handles all network communication - TLS, discovery, NAT traversal, and federation. It is the only primal that speaks to the external network directly; all others route through Songbird when external connectivity is needed.
 
@@ -78,7 +80,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Storage and content-addressed data management  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ TOP 1%, 99%)
+**Status**: Production Ready (A++ TOP 1%, 99%) — **NOTE**: glibc dynamic build only. Last substantive commit: March 21, 2026 (Phase 4 sprint). Version inconsistency: README claims v4.1.0-dev, root Cargo.toml says 0.1.0, nestgate-bin Cargo.toml says 2.1.0.  
+**Cross-Deploy Readiness**: **Blocked** — musl-static binary segfaults (exit 139) on `--help`. Confirmed x86_64 musl, aarch64 untested. glibc dynamic build works perfectly (full clap 4 CLI, all subcommands). Likely musl incompatibility in mdns-sd, uzers, or sysinfo crate. This blocks all plasmidBin deployment (ecoBin requires musl-static). Additionally: `--port` flag exists but is non-functional, `daemon` subcommand should accept `server` as alias per UniBin standard.
 
 **Role**: NestGate provides all data persistence for the ecosystem. Content-addressed storage means data is identified by its hash, not its location. NestGate handles blob storage, tree structures, metadata, and quota management. It also provides capability-based service discovery.
 
@@ -103,7 +106,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: AI model coordination and inference  
 **Phase**: Foundation  
-**Status**: v0.1.0-alpha.25b — 6,839 tests (0 failures, 107 ignored), 86.5% line coverage, 22 workspace crates, 25 exposed capabilities, zero clippy warnings (pedantic+nursery), zero unsafe code (`#![forbid(unsafe_code)]`), zero mocks in production, zero C deps (ecoBin v3.0), AGPL-3.0-or-later, Edition 2024, all files <1,000 lines, `blake3` crypto (XOF keystream + keyed hash), `rand` CSPRNG, `#[expect(reason)]` complete
+**Status**: v0.1.0-alpha.25b — 6,839 tests (0 failures, 107 ignored), 86.5% line coverage, 22 workspace crates, 25 exposed capabilities, zero clippy warnings (pedantic+nursery), zero unsafe code (`#![forbid(unsafe_code)]`), zero mocks in production, zero C deps (ecoBin v3.0), AGPL-3.0-or-later, Edition 2024, all files <1,000 lines, `blake3` crypto (XOF keystream + keyed hash), `rand` CSPRNG, `#[expect(reason)]` complete  
+**Cross-Deploy Readiness**: Partial — musl-static works. **Gaps**: Abstract socket only (`@squirrel`) is invisible to `readdir()` (not discoverable by filesystem-based tools), `system.health/status/ping` non-standard names (should alias to `health.liveness/readiness/check`), `--port + --bind` should converge to `--listen addr:port`.
 
 **Role**: Squirrel provides sovereign AI capabilities through the Model Context Protocol (MCP). It routes AI tasks to appropriate models (local or remote), manages context windows, and coordinates multi-model workflows — all without compile-time coupling to any AI vendor. Self-knowledge only; discovers all peers via capability-based runtime discovery.
 
@@ -131,7 +135,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — S155b (March 15, 2026) — 20,843 workspace tests, clippy pedantic clean, all tests passing, 96+ JSON-RPC methods (dynamically built), ~83% line coverage (182K lines instrumented), BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, hw-learn pipeline (observe/distill/apply/share/status), nvpmu BAR0→RegisterAccess bridge, SPIR-V codegen safety (root-cause rename from nvvm_safety), FirmwareInventory in gpu.info, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph stability. Key recent: +558 net new tests (12 new integration test files), dependency audit (Pure Rust mandate met), unsafe code audit (all hardware-justified), coverage expansion
+**Status**: Production Ready (A++ GOLD STANDARD) — S155b (March 15, 2026) — 20,843 workspace tests  
+**Cross-Deploy Readiness**: Close — musl-static works. **Gaps**: `--port` flag exists but not wired to implementation, health method names need verification (`health.liveness`/`health.readiness`/`health.check`)., clippy pedantic clean, all tests passing, 96+ JSON-RPC methods (dynamically built), ~83% line coverage (182K lines instrumented), BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, hw-learn pipeline (observe/distill/apply/share/status), nvpmu BAR0→RegisterAccess bridge, SPIR-V codegen safety (root-cause rename from nvvm_safety), FirmwareInventory in gpu.info, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph stability. Key recent: +558 net new tests (12 new integration test files), dependency audit (Pure Rust mandate met), unsafe code audit (all hardware-justified), coverage expansion
 
 **Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
@@ -224,7 +229,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
 **Version**: v2.62  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — ~5,050 tests, 90.28% region / 91.11% function / 90.02% line coverage (llvm-cov, all 3 metrics above 90%), 25 workspace crates, 40 deploy graphs, 20 niche templates, 285+ capability translations, 25 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant
+**Status**: Production Ready (A++, Security A++ LEGENDARY)  
+**Cross-Deploy Readiness**: Enabler — `biomeos deploy --graph` should consume deploy graph TOMLs for automated multi-node deployment. `deploy_pixel.sh` and `bootstrap_gate.sh` patterns from plasmidBin should evolve into biomeOS subcommands. neural-api-server should be in plasmidBin harvest map. — ~5,050 tests, 90.28% region / 91.11% function / 90.02% line coverage (llvm-cov, all 3 metrics above 90%), 25 workspace crates, 40 deploy graphs, 20 niche templates, 285+ capability translations, 25 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -571,6 +577,27 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 **Dependencies**: barraCuda (CPU math, `default-features = false`), wgpu (optional `gpu` feature), serde, uuid. Zero C dependencies in application code.
 
 **Participates In**: RPGPT (game science + session quality), Provenance Trio (rhizoCrypt DAG + loamSpine certs + sweetGrass braids), biomeOS (niche citizen), toadStool (GPU dispatch), coralReef (shader compilation), petalTongue (visualization), Squirrel (AI narration), metalForge (cross-substrate routing)
+
+---
+
+## Cross-Deploy Readiness Summary (March 27, 2026)
+
+Based on live cross-hardware deployment testing (x86_64 + aarch64 Pixel/GrapheneOS):
+
+| Primal | musl x86_64 | musl aarch64 | Android | Dark Forest | Health Protocol | Overall |
+|--------|------------|-------------|---------|-------------|----------------|---------|
+| **beardog** | Works | Works | Partial (abstract socket bug, audit CWD) | Crypto works, RPC gap | Raw TCP JSON-RPC (C) | **Partial** |
+| **songbird** | Works | Works | PID dir issue | Env-only, no CLI flag | HTTP `/health` (P) | **Close** |
+| **nestgate** | **Segfaults** | Untested | Blocked | Untested | Blocked | **Blocked** |
+| **squirrel** | Works | Works | Abstract-only socket | N/A | HTTP POST (X names) | **Partial** |
+| **toadstool** | Works | Works | Not tested | N/A | HTTP `/health` (P) | **Close** |
+| **biomeOS** | Works | Not tested | N/A | N/A | HTTP (C) | **Enabler** |
+
+Key: C = Conformant, P = Partial, X = Non-conformant
+
+See `IPC_COMPLIANCE_MATRIX.md` for detailed per-dimension compliance and
+`handoffs/CROSS_DEPLOY_SUBSTRATE_EVOLUTION_HANDOFF_MAR27_2026.md` for per-primal
+action items.
 
 ---
 
