@@ -8,7 +8,8 @@ set -euo pipefail
 #   bootstrap.sh [--dry-run] [--fresh]
 #
 # Modes:
-#   (default)   Migrate existing repos from phase1/phase2/ecoSprings layout
+#   (default)   Migrate existing repos from any known historical layout
+#               (phase1/phase2, ecoSprings/, top-level springs, primalTools/)
 #   --fresh     Clone all repos from GitHub into a clean workspace
 #   --dry-run   Print what would happen without doing anything
 
@@ -131,6 +132,34 @@ clone_repo() {
     ((CLONED++)) || true
 }
 
+# Move a plain directory (not necessarily a git repo) to a new location.
+move_dir() {
+    local src="$1"
+    local dst="$2"
+    local label="$3"
+
+    if [[ -d "$dst" ]]; then
+        echo "  SKIP $label (already at $dst)"
+        ((SKIPPED++)) || true
+        return
+    fi
+
+    if [[ -L "$src" ]]; then
+        echo "  SKIP $label (symlink at $src, removing)"
+        run rm -f "$src"
+        return
+    fi
+
+    if [[ ! -d "$src" ]]; then
+        return
+    fi
+
+    echo "  MOVE $src -> $dst"
+    ensure_dir "$(dirname "$dst")"
+    run mv "$src" "$dst"
+    ((MOVED++)) || true
+}
+
 # Scan for Cargo.toml files with relative path deps that may need updating.
 warn_path_deps() {
     local dir="$1"
@@ -170,27 +199,41 @@ if ! $FRESH; then
     move_repo "$ROOT/phase1/toadstool" "$ROOT/primals/toadstool" "toadStool (phase1)"
 
     # phase2/ primals
-    move_repo "$ROOT/phase2/biomeOS"   "$ROOT/primals/biomeOS"   "biomeOS (phase2)"
-    move_repo "$ROOT/phase2/loamSpine" "$ROOT/primals/loamSpine" "loamSpine (phase2)"
-    move_repo "$ROOT/phase2/rhizoCrypt" "$ROOT/primals/rhizoCrypt" "rhizoCrypt (phase2)"
-    move_repo "$ROOT/phase2/sweetGrass" "$ROOT/primals/sweetGrass" "sweetGrass (phase2)"
+    move_repo "$ROOT/phase2/biomeOS"     "$ROOT/primals/biomeOS"     "biomeOS (phase2)"
+    move_repo "$ROOT/phase2/loamSpine"   "$ROOT/primals/loamSpine"   "loamSpine (phase2)"
+    move_repo "$ROOT/phase2/petalTongue" "$ROOT/primals/petalTongue" "petalTongue (phase2)"
+    move_repo "$ROOT/phase2/rhizoCrypt"  "$ROOT/primals/rhizoCrypt"  "rhizoCrypt (phase2)"
+    move_repo "$ROOT/phase2/skunkBat"    "$ROOT/primals/skunkBat"    "skunkBat (phase2)"
+    move_repo "$ROOT/phase2/sourDough"   "$ROOT/primals/sourDough"   "sourDough (phase2)"
+    move_repo "$ROOT/phase2/sweetGrass"  "$ROOT/primals/sweetGrass"  "sweetGrass (phase2)"
 
     # Top-level primals
     move_repo "$ROOT/barraCuda"    "$ROOT/primals/barraCuda"    "barraCuda (top-level)"
     move_repo "$ROOT/coralReef"    "$ROOT/primals/coralReef"    "coralReef (top-level)"
     move_repo "$ROOT/petalTongue"  "$ROOT/primals/petalTongue"  "petalTongue (top-level)"
 
-    # ecoSprings/ -> springs/
-    move_repo "$ROOT/ecoSprings/airSpring"     "$ROOT/springs/airSpring"     "airSpring"
-    move_repo "$ROOT/ecoSprings/groundSpring"  "$ROOT/springs/groundSpring"  "groundSpring"
-    move_repo "$ROOT/ecoSprings/healthSpring"  "$ROOT/springs/healthSpring"  "healthSpring"
-    move_repo "$ROOT/ecoSprings/hotSpring"     "$ROOT/springs/hotSpring"     "hotSpring"
-    move_repo "$ROOT/ecoSprings/ludoSpring"    "$ROOT/springs/ludoSpring"    "ludoSpring"
-    move_repo "$ROOT/ecoSprings/neuralSpring"  "$ROOT/springs/neuralSpring"  "neuralSpring"
-    move_repo "$ROOT/ecoSprings/primalSpring"  "$ROOT/springs/primalSpring"  "primalSpring"
-    move_repo "$ROOT/ecoSprings/wetSpring"     "$ROOT/springs/wetSpring"     "wetSpring"
+    # Top-level springs (some machines have springs at root, not in ecoSprings/).
+    # Try move_repo first (has .git); fall back to move_dir for subtree checkouts.
+    for spring in airSpring groundSpring healthSpring hotSpring ludoSpring \
+                  neuralSpring primalSpring wetSpring; do
+        if [[ -d "$ROOT/$spring/.git" ]]; then
+            move_repo "$ROOT/$spring" "$ROOT/springs/$spring" "$spring (top-level)"
+        else
+            move_dir  "$ROOT/$spring" "$ROOT/springs/$spring" "$spring (top-level, no .git)"
+        fi
+    done
 
-    # ecoSprings/ -> gardens/
+    # ecoSprings/ -> springs/ (older layout variant)
+    move_repo "$ROOT/ecoSprings/airSpring"     "$ROOT/springs/airSpring"     "airSpring (ecoSprings)"
+    move_repo "$ROOT/ecoSprings/groundSpring"  "$ROOT/springs/groundSpring"  "groundSpring (ecoSprings)"
+    move_repo "$ROOT/ecoSprings/healthSpring"  "$ROOT/springs/healthSpring"  "healthSpring (ecoSprings)"
+    move_repo "$ROOT/ecoSprings/hotSpring"     "$ROOT/springs/hotSpring"     "hotSpring (ecoSprings)"
+    move_repo "$ROOT/ecoSprings/ludoSpring"    "$ROOT/springs/ludoSpring"    "ludoSpring (ecoSprings)"
+    move_repo "$ROOT/ecoSprings/neuralSpring"  "$ROOT/springs/neuralSpring"  "neuralSpring (ecoSprings)"
+    move_repo "$ROOT/ecoSprings/primalSpring"  "$ROOT/springs/primalSpring"  "primalSpring (ecoSprings)"
+    move_repo "$ROOT/ecoSprings/wetSpring"     "$ROOT/springs/wetSpring"     "wetSpring (ecoSprings)"
+
+    # ecoSprings/ -> gardens/ (older layout variant)
     move_repo "$ROOT/ecoSprings/esotericWebb" "$ROOT/gardens/esotericWebb" "esotericWebb"
 
     # ecoSprings/barraCuda symlink cleanup
@@ -199,13 +242,47 @@ if ! $FRESH; then
         run rm -f "$ROOT/ecoSprings/barraCuda"
     fi
 
-    # Top-level infra
+    # primalTools/ -> primals/ or sort-after/
+    move_repo "$ROOT/primalTools/bingoCube"     "$ROOT/primals/bingoCube"       "bingoCube (primalTools)"
+    move_repo "$ROOT/primalTools/benchscale"    "$ROOT/sort-after/benchScale"   "benchScale (primalTools)"
+    move_repo "$ROOT/primalTools/agentReagents" "$ROOT/sort-after/agentReagents" "agentReagents (primalTools)"
+
+    # Stale symlinks at root
+    for link in sourDough; do
+        if [[ -L "$ROOT/$link" ]]; then
+            echo "  REMOVE symlink $ROOT/$link"
+            run rm -f "$ROOT/$link"
+        fi
+    done
+
+    # Top-level infra (repos)
     move_repo "$ROOT/wateringHole" "$ROOT/infra/wateringHole" "wateringHole"
     move_repo "$ROOT/whitePaper"   "$ROOT/infra/whitePaper"   "whitePaper"
-    move_repo "$ROOT/plasmidBin"   "$ROOT/infra/plasmidBin"   "plasmidBin"
+
+    # plasmidBin may not be its own git repo — use move_dir as fallback
+    if [[ -d "$ROOT/plasmidBin/.git" ]]; then
+        move_repo "$ROOT/plasmidBin" "$ROOT/infra/plasmidBin" "plasmidBin"
+    else
+        move_dir  "$ROOT/plasmidBin" "$ROOT/infra/plasmidBin" "plasmidBin (dir)"
+    fi
+
+    # Archive phase2 loose docs into infra for historical reference
+    if [[ -d "$ROOT/phase2" ]]; then
+        phase2_docs=()
+        for f in "$ROOT"/phase2/*.md; do
+            [[ -f "$f" ]] && phase2_docs+=("$f")
+        done
+        if [[ ${#phase2_docs[@]} -gt 0 ]]; then
+            ensure_dir "$ROOT/infra/fossilRecord/phase2"
+            echo "  ARCHIVE ${#phase2_docs[@]} phase2 loose docs -> infra/fossilRecord/phase2/"
+            for f in "${phase2_docs[@]}"; do
+                run mv "$f" "$ROOT/infra/fossilRecord/phase2/"
+            done
+        fi
+    fi
 
     # Clean up empty old directories
-    for d in phase1 phase2/archive phase2/rootpulse phase2 ecoSprings; do
+    for d in phase1/archive phase1 phase2/archive phase2/rootpulse phase2/whitePaper_RootPulse phase2 ecoSprings primalTools; do
         if [[ -d "$ROOT/$d" ]]; then
             remaining=$(find "$ROOT/$d" -mindepth 1 -maxdepth 1 -not -name '.*' 2>/dev/null | wc -l)
             if [[ "$remaining" -eq 0 ]]; then
