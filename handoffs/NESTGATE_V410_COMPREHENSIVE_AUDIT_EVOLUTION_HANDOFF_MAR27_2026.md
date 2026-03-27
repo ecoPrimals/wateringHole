@@ -2,7 +2,7 @@
 
 **Date**: March 27, 2026  
 **Primal**: nestGate (storage & discovery)  
-**Sessions**: 2 deep-audit sessions, ~6 hours total
+**Sessions**: 3 deep-audit sessions across full day
 
 ---
 
@@ -12,7 +12,7 @@
 Build:      13/13 crates compiling (0 errors)
 Clippy:     CLEAN (0 errors, 0 warnings under -D warnings)
 Format:     CLEAN (cargo fmt --check passes)
-Tests:      12,274 passing, 0 failures, 472 ignored
+Tests:      12,278 passing, 0 failures, 472 ignored
 Coverage:   69.6% line (79,517/114,202), 70.9% region
 Files:      0 over 1000-line limit (largest: 988)
 Unsafe:     Evolved (most replaced with safe Mutex/RAII alternatives)
@@ -113,6 +113,62 @@ Unwrap:     ZERO in production code
 
 ---
 
+## Session 3: Specs Cleanup, Multi-Filesystem Substrate, Debris Cleanup
+
+### Specs Directory
+
+- 9 dated status/summary docs archived to fossil record (IMPLEMENTATION_STATUS_*, SPECS_SUMMARY_*, etc.)
+- 5 spec headers cleaned (removed marketing language, stale "COMPLETE" claims, old percentages)
+- `specs/README.md` rewritten clean -- organized by category with storage architecture docs
+- 16 active architectural specs remain
+
+### Multi-Filesystem Test Substrate
+
+Installed `btrfs-progs`, `xfsprogs`, `zfsutils-linux`, `zfs-dkms` (ZFS 2.3.5) on Pop!_OS 22.04 with kernel 6.17.9.
+
+Provisioned real hardware substrate for cross-filesystem testing:
+
+```
+Warm tier (NVMe SSD, rotational=0):
+  ext4       /                         1.8 TiB  Samsung 970 EVO Plus
+
+Cold tier (HDD x6, rotational=1):
+  ZFS 2.3.5  /mnt/nestgate/cold/zfs   12.7 TiB  sda+sdb mirror, sdf spare
+  btrfs      /mnt/nestgate/cold/btrfs  12.7 TiB  sdc1
+  xfs        /mnt/nestgate/cold/xfs    12.7 TiB  sdd1
+  ext4       /mnt/nestgate/cold/ext4   12.7 TiB  sde1
+```
+
+ZFS datasets: `nestgate/{data,snapshots,cache,testing}`
+
+### Code Changes
+
+- `SubstrateTiers` + `SubstrateMount` added to `config/storage_paths.rs`
+  - Runtime discovery of fs type (from `/proc/mounts`), rotational flag (`/sys/block/`), capacity (`statvfs`)
+  - Configurable via `NESTGATE_WARM_PATHS`, `NESTGATE_COLD_PATHS` env vars
+  - Auto-discovers from `/mnt/nestgate/{warm,cold}/` base path
+- 4 new unit tests for substrate tier detection
+- `scripts/setup-test-substrate.sh` for reproducible provisioning
+
+### Debris Cleanup (this session)
+
+- `showcase/` (370 files, 3.6MB of Dec 2025 demo content) moved to fossil record
+- 23 docs archived: completed migration plans, duplicates, stale deployment guides
+- 18 historical docs archived: biomeos handoffs, test plans, security plans
+- 6 stale deployment checklist docs archived
+- Empty directories cleaned
+- Root docs updated: README, STATUS, CHANGELOG, CONTRIBUTING, QUICK_REFERENCE, START_HERE, DOCUMENTATION_INDEX
+- All TODO/FIXME markers audited -- all valid (feature-gated dev stubs or forward work)
+
+### Cross-Primal Notes
+
+- NestGate substrate is ready for Songbird network saturation testing (warm/cold cycling)
+- ZFS pool provides snapshot + compression for cold archival
+- btrfs provides CoW subvolume testing (alternative to ZFS)
+- When deployed on NAS, data is prepared and saturated via Songbird connections
+
+---
+
 **Source of truth**: `STATUS.md` in nestgate repo root  
 **Handoff by**: Agent-assisted comprehensive audit  
-**Next session priorities**: musl crash investigation, coverage push, deny.toml
+**Next priorities**: Cross-substrate integration tests, coverage push toward 90%, logic/render separation
