@@ -439,7 +439,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.10.0 (938 lib + 316 integration + 62 forge = 1,316 total tests, 91 binaries, 87 experiments, 95.66% coverage, barraCuda v0.3.10, three-tier capability discovery, zero unsafe/allow/C-deps) |
 | barraCuda | v0.3.10 (FMA-evolved math, 806 WGSL shaders, wgpu 28, nursery clippy, normalize_method, resilient GPU tests, AGPL-3.0-or-later) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.7.0 Phase 12.2 (51 experiments, 9 tracks, 360 tests, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, Transport enum, normalize_method, NdjsonSink, OnceLock probes, deny(missing_docs), zero warnings, zero unsafe) |
+| primalSpring | v0.7.0 Phase 16.1 (53 experiments, 10 tracks, 378 tests, 72.5% coverage, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, centralized tolerances, primal_names module, coverage evolution, zero TODOs, zero warnings, zero unsafe, ecoBin compliant) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -525,7 +525,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
 **Phase**: Phase 4 (Tower FULLY UTILIZED 41/41 gates, Squirrel AI + petalTongue validated)  
-**Status**: v0.7.0 Phase 12.2 — 51 experiments, 9 tracks, 360 tests (all passing, 42 ignored live), 87/87 gates, 37 capabilities, NUCLEUS VALIDATED (Tower + Nest + Node), Graph Overlays, Squirrel Discovery, Multi-Node Bonding, IPC resilience stack (CircuitBreaker, RetryPolicy, Transport enum, normalize_method, is_recoverable, OnceLock probes), NdjsonSink, check_relative, check_abs_or_rel, primal_names module, provenance trio circuit breaker, validate_release.sh, deny(missing_docs), 22 deploy graphs (18 single-node + 4 multi-node), MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
+**Status**: v0.7.0 Phase 16.1 — 53 experiments, 10 tracks, 378 tests (all passing, 42 ignored live), 72.5% library coverage, 87/87 gates, 37 capabilities (sync-tested), NUCLEUS VALIDATED (Tower + Nest + Node), Graph Overlays, Squirrel Discovery, Multi-Node Bonding, IPC resilience stack (CircuitBreaker, RetryPolicy, Transport enum, normalize_method, is_recoverable, OnceLock probes), NdjsonSink, check_relative, check_abs_or_rel, primal_names module (all experiments use centralized constants), provenance trio circuit breaker, validate_release.sh, #![forbid(unsafe_code)], deny(missing_docs), centralized tolerances (IPC + launcher + tick + slack), 22 deploy graphs (18 single-node + 4 multi-node), MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
@@ -533,9 +533,9 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 40 across 8 tracks: Atomic Composition (6), Graph Execution (6), Emergent Systems (6), Bonding & Plasmodium (5), Cross-Spring Coordination (5), Showcase-Mined (10), Live Composition (2). All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
-| **Deploy Graphs** | 11: all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). |
-| **Niche Self-Knowledge** | 25 capabilities (including ai.query, ai.health, composition.tower_squirrel_health), semantic mappings (7 domains), operation dependencies, cost estimates |
+| **Experiments** | 53 across 10 tracks: Atomic Composition (6), Graph Execution (6), Emergent Systems (6), Bonding & Plasmodium (5), Cross-Spring Coordination (5), Showcase-Mined (10), Live Composition (5), Multi-Node (5), Sovereign Compute (3), Cross-Gate Health (2). All use `primal_names::*` constants and `ValidationResult` with provenance. |
+| **Deploy Graphs** | 22 (18 single-node + 4 multi-node): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). |
+| **Niche Self-Knowledge** | 37 capabilities (sync-tested against `config/capability_registry.toml`), semantic mappings (7 domains), operation dependencies, cost estimates |
 | **RPC Methods** | 17 methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.validate_composition_by_capability, coordination.discovery_sweep, coordination.probe_primal, coordination.probe_capability, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |
 | **IPC Resilience** | IpcError (8 typed variants + IpcErrorPhase), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
 | **Live Composition** | Tower STABLE (beardog + songbird + biomeOS, 24/24 gates). Squirrel AI composition (Tower + Squirrel + Anthropic Claude). exp060: biomeOS-orchestrated Tower deploy. exp061: 3-primal AI composition. |
