@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for the ecoPrimals ecosystem — primals, springs, and gen4 products  
 **Audience**: Any primal, spring, or gen4 product at any point in its evolution — plus external audiences (PIs, students, builders, creatives, compliance)  
-**Last Updated**: March 27, 2026
+**Last Updated**: March 28, 2026
 
 ---
 
@@ -55,7 +55,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BarraCuda** | Pure Math | FMA-evolved math, 806 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.10, 3,623+ tests | Production (A+) |
 | **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, VFIO-first boot, graceful shutdown, IOMMU group handling). **coral-ember** immortal VFIO fd holder: `SCM_RIGHTS` fd passing, atomic `swap_device` RPC, DRM isolation preflight, external fd holder deadlock detection. **DRM isolation**: Xorg `AutoAddGPU=false` + udev 61-prefix seat tag removal — compute GPU driver swaps invisible to display manager. **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-070). D3hot→D0 sovereign VRAM recovery. GP_PUT cache flush experiment (Iter 57). Reproducibility checklist for adding new GPUs | Production (Phase 10, Iter 57) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Composition primal: Neural API (290+ translations, 26 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), 5-tier capability discovery, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring, niche self-knowledge, caller-agnostic lineage. 7,135 tests, 90%+ coverage (llvm-cov, all above 90%), zero C deps, ecoBin v3.0, primalSpring-aligned. 0 TODO/FIXME/HACK, 0 unsafe prod, 0 clippy warnings | Production (v2.67, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Composition primal: Neural API (290+ translations, 26 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), 5-tier capability discovery, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring, niche self-knowledge, caller-agnostic lineage. Cross-gate federation (GateRegistry, route.register, forward_to_remote_gate), inference scheduling (VRAM-aware GPU routing). 7,202 tests, 90%+ coverage (llvm-cov, all above 90%), zero C deps, ecoBin v3.0, primalSpring-aligned. 0 TODO/FIXME/HACK, 0 unsafe prod, 0 clippy warnings | Production (v2.76, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -446,7 +446,7 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
-- `handoffs/*.md` — Active handoffs (41 current — latest version per primal/spring, cross-deploy substrate evolution)
+- `handoffs/*.md` — Active handoffs (60 current — latest version per primal/spring, cross-deploy substrate evolution)
 - `fossilRecord/` — 689 absorbed handoffs (Feb–Mar 2026) — superseded evolution history, preserved as permanent record
 
 ---
