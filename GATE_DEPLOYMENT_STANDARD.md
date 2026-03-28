@@ -3,7 +3,7 @@
 **Purpose**: Defines the standard hardware, OS, and tooling configuration for an
 ecoPrimals gate. Any machine matching this spec can run the full ecosystem.
 
-**Last Updated**: March 27, 2026
+**Last Updated**: March 28, 2026
 
 ---
 
@@ -87,7 +87,7 @@ communication. No systemd, no root, no package manager — pure binary deploymen
 | **Eastgate** | x86_64 | Pop!_OS | LAN | Source build | Full NUCLEUS |
 | **biomeGate** | x86_64 | Pop!_OS | LAN | Source build | Full NUCLEUS + multi-GPU |
 | **flockGate** | x86_64 | Ubuntu | WAN (NAT) | Bootstrap script | Tower + compute |
-| **pixelGate** | aarch64 | GrapheneOS | Hotspot/mobile | ADB push | Tower (minimal) |
+| **pixelGate** | aarch64 | GrapheneOS | Hotspot/mobile | ADB push (`deploy_pixel.sh`) | Tower + Squirrel + biomeOS |
 | **friendGate** | x86_64 | Any Linux | WAN (NAT) | Bootstrap script | Tower + compute |
 
 "friendGate" is the generic pattern for any remote machine bootstrapped via
