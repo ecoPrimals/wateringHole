@@ -1659,5 +1659,55 @@ Your primal becomes a TRUE ecoBin v2.0:
 **Impact**: From 80% to 100% platform coverage  
 **Achievement**: TRUE ecoBin - works EVERYWHERE!
 
-🦀🌍✨ **ecoBin v2.0: One Binary, Infinite Platforms!** ✨🌍🦀
+---
+
+## plasmidBin Submission (ecoBin v3.0 Gate)
+
+Every primal that passes ecoBin must submit its binary to `ecoPrimals/infra/plasmidBin/`.
+This is the ecosystem's shared binary distribution surface.
+
+### Self-service submission
+
+```bash
+cd /path/to/your-primal
+
+# 1. Build musl-static for x86_64
+cargo build --release --target x86_64-unknown-linux-musl
+
+# 2. Verify ecoBin compliance
+file target/x86_64-unknown-linux-musl/release/YOUR_PRIMAL
+# Must say: "statically linked" and NOT "not stripped"
+
+# 3. Cross-compile for aarch64 (if .cargo/config.toml is set up)
+cargo build --release --target aarch64-unknown-linux-musl
+
+# 4. Harvest into plasmidBin
+cd /path/to/ecoPrimals/infra/plasmidBin
+./harvest.sh --primal YOUR_PRIMAL --source /path/to/staging/x86_64
+./harvest.sh --primal YOUR_PRIMAL --arch aarch64 --source /path/to/staging/aarch64
+```
+
+### Compliance checklist
+
+- [ ] `file` output says "statically linked" (musl, no glibc)
+- [ ] `file` output does NOT say "not stripped"
+- [ ] `ldd` says "statically linked" or "not a dynamic executable"
+- [ ] Binary runs on Pixel/GrapheneOS via ADB (aarch64)
+- [ ] Binary starts with TCP listener (`--listen` or `--port`)
+- [ ] `health.liveness` responds over TCP JSON-RPC
+- [ ] `b3sum` checksum recorded in `checksums.toml`
+
+### Current inventory (March 28, 2026)
+
+| Primal | x86_64 | aarch64 | ecoBin |
+|--------|--------|---------|--------|
+| beardog | A++ | A++ | Full |
+| songbird | A++ | A++ | Full |
+| nestgate | A++ | pending | x86 only |
+| squirrel | A++ | A++ | Full |
+| toadstool | A++ | A++ | Full |
+| petaltongue | A++ | pending | x86 only |
+| biomeos | A++ | A+ | Full (aarch64 unstripped) |
+
+See `plasmidBin/README.md` for the complete inventory and workflow.
 

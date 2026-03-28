@@ -75,6 +75,24 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 |------|---------|
 | **sourDough** | Starter culture - scaffolding, genomeBin tooling, ecosystem bootstrapping |
 
+### Infrastructure Tools (`ecoPrimals/infra/`)
+
+These tools validate and deploy primal compositions. They don't implement primal behavior — they test that compositions work before reaching real gates. Originally from the syntheticChemistry org, now integrated into ecoPrimals.
+
+| Tool | Domain | Role | Status |
+|------|--------|------|--------|
+| **plasmidBin** | Binary deployment | Harvested primal binaries (x86_64 + aarch64), deploy/fetch/validate scripts, multi-arch gate deployment | Production |
+| **benchScale** | Lab substrate | Pure Rust crate (v3.0.0) + shell lab creation. clap CLI, yaml_serde, capability-based config (env-overridable paths/IPs/OS). Docker/LXD/QEMU backends, YAML topologies, 5 network presets, plasmidBin deploy + health pipeline. 212 tests | Production — v3.0.0 modernized, live-tested Docker labs |
+| **agentReagents** | Artifact supply chain | Cloud-init configs, VM images, ISOs, debs for gate provisioning. Hardened scripts (`set -euo pipefail`), `defaults.env`, SHA256 verification, lint.sh quality gate. 9 active + 9 legacy scripts | Active — hardened, ecoPrimals-branded |
+| **fossilRecord** | Ecosystem archaeology | Historical record of ecosystem evolution, archived handoffs and decisions | Archive |
+| **sporePrint** | Deployment templates | Gate deployment blueprints and patterns | Templates |
+
+**Local validation pipeline** (benchScale + plasmidBin + primalSpring):
+```
+validate_local_lab.sh → create Docker lab → deploy binaries → health check → run experiments → teardown
+```
+One command, ~30 seconds, repeatable on any machine with Docker. Pre-gates remote SSH deploys via `deploy_gate.sh --local-validate`.
+
 ---
 
 ## Composed Systems
@@ -327,7 +345,7 @@ to spring source; they consume only deployed binaries via IPC.
 ### Three Organizations
 
 ```
-syntheticChemistry/     — Springs (science validation, gen3)
+syntheticChemistry/     — Springs (science validation, gen3) + infra tools (benchScale, agentReagents)
 ecoPrimals/             — Primals + infrastructure (gen2–gen3)
 sporeGarden/            — Products (creative surface, gen4)
 ```
@@ -337,11 +355,30 @@ sporeGarden/            — Products (creative surface, gen4)
 [github.com/ecoPrimals/plasmidBin](https://github.com/ecoPrimals/plasmidBin) is
 the standalone deployment surface. Primal teams build and harvest binaries →
 `harvest.sh` creates GitHub Releases with checksums → consumers run `fetch.sh`
-to populate their local plasmidBin. All 11 primals available as of v2026.03.25.
+to populate their local plasmidBin. 7 x86_64 + 5 aarch64 ecoBin-compliant binaries as of v2026.03.28. See `IPC_COMPLIANCE_MATRIX.md` for per-primal transport compliance.
 
 The local `ecoPrimals/plasmidBin/` directory is the gen3 embedded version
 (manifest + sources). The standalone repo is the gen4 deployment surface
 (metadata + binaries via GitHub Releases).
+
+`deploy_gate.sh --local-validate` runs a benchScale Docker lab before SSH-pushing to a real gate.
+
+### benchScale + agentReagents — Validation Substrate
+
+benchScale (`ecoPrimals/infra/benchScale`) creates repeatable multi-node labs from
+YAML topology files. Docker containers, network condition simulation (5 presets from
+basement LAN to satellite), automated binary deployment from plasmidBin. Originally
+a syntheticChemistry project, now wired into primalSpring's `validate_local_lab.sh`.
+
+agentReagents (`ecoPrimals/infra/agentReagents`) is the artifact supply chain for
+gate provisioning: cloud-init configs, VM images, ISOs. Used by benchScale's libvirt
+backend for Tier 2 (VM) validation.
+
+**Live status (March 28)**: 7/8 primals alive in Docker, 2 experiments pass, per-primal
+CLI gaps documented. Both tools modernized: benchScale v3.0.0 (yaml_serde, clap, capability config,
+212 tests), agentReagents hardened (strict bash, defaults.env, SHA256, legacy scripts archived).
+See `BENCHSCALE_AGENTREAGENTS_LOCAL_VALIDATION_SUBSTRATE_HANDOFF_MAR28_2026.md` and
+`BENCHSCALE_AGENTREAGENTS_MODERNIZATION_HANDOFF_MAR28_2026.md`.
 
 ### gen4 Products
 
@@ -446,7 +483,7 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
-- `handoffs/*.md` — Active handoffs (60 current — latest version per primal/spring, cross-deploy substrate evolution)
+- `handoffs/*.md` — Active handoffs (66 current — latest version per primal/spring, cross-deploy substrate evolution)
 - `fossilRecord/` — 689 absorbed handoffs (Feb–Mar 2026) — superseded evolution history, preserved as permanent record
 
 ---

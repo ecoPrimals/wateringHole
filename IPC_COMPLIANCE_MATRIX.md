@@ -1,7 +1,7 @@
 # IPC Compliance Matrix
 
-**Version:** 1.1.0
-**Date:** March 27, 2026
+**Version:** 1.2.0
+**Date:** March 28, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 
@@ -137,19 +137,20 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 
 ## Summary Scorecard
 
-| Primal | Wire Framing | Socket Path | Health Names | `--port` | Standalone | Overall |
-|--------|-------------|-------------|-------------|----------|-----------|---------|
-| **rhizocrypt** | X | P | ? | P | C | Needs work |
-| **loamspine** | C | X | ? | X | X | Blocked (crash) |
-| **sweetgrass** | P | P | C | X | C | Close |
-| **squirrel** | P | X | X | P | C | Needs work |
-| **beardog** | C | P | C | X | X | Needs work |
-| **songbird** | C | C | P | ? | C | Close |
-| **petaltongue** | P | X | ? | X | C | Needs work |
-| **nestgate** | X | P | ? | X | C | **Blocked** (musl segfault) |
-| **toadstool** | P | ? | ? | X | C | Needs audit |
-| **coralreef** | P | P | ? | X | C | Needs work |
-| **biomeOS** | P | C | C | -- | C | Conformant (orchestrator) |
+| Primal | Wire Framing | Socket Path | Health Names | `--port` / `--listen` | Standalone | Mobile | ecoBin | Overall |
+|--------|-------------|-------------|-------------|----------------------|-----------|--------|--------|---------|
+| **beardog** | C | P | C | C (`--listen`) | X (FAMILY_ID) | C (TCP) | A++ | Close |
+| **songbird** | C | C | P | C (`--listen`) | C | C (TCP) | A++ | Close |
+| **squirrel** | P | X | X | C (`--port`) | C | C (abstract+HTTP) | A++ | Close |
+| **toadstool** | P | ? | ? | X (not wired) | C | P (caps only) | A++ | Needs work |
+| **nestgate** | X | P | ? | X (not wired) | C | X (no aarch64) | A++ (x86) | Needs work |
+| **biomeos** | P | C | C | X (forces UDS) | C | X (UDS only) | A++ | Needs TCP mode |
+| **petaltongue** | P | X | ? | X (none) | C | X (no aarch64) | A++ (x86) | Needs work |
+| **sweetgrass** | P | P | C | X | C | ? | ? | Close |
+| **rhizocrypt** | X | P | ? | P | C | ? | ? | Needs work |
+| **loamspine** | C | X | ? | X | X (crash) | ? | ? | Blocked |
+| **coralreef** | P | P | ? | X | C | ? | ? | Needs work |
+| **skunkbat** | ? | ? | ? | ? | ? | ? | ? | Needs audit |
 
 ---
 
@@ -215,30 +216,46 @@ aarch64 Android/GrapheneOS revealed substrate-specific compliance gaps.
 
 | Primal | x86_64 musl | aarch64 musl | Notes |
 |--------|-------------|-------------|-------|
-| **beardog** | C | C | Works on both. Crypto deterministic cross-arch. |
-| **songbird** | C | C | Works on both. |
-| **squirrel** | C | C | Works on both. |
-| **toadstool** | C | C | Works on both. |
-| **nestgate** | **X** | ? | **Segfaults (exit 139)** on x86_64 musl. aarch64 untested. glibc works. Likely mdns-sd, uzers, or sysinfo musl incompatibility. |
+| **beardog** | C | C | Works on both. `--listen` TCP + `--abstract` sockets. Crypto deterministic cross-arch. |
+| **songbird** | C | C | Works on both. `--listen` TCP confirmed functional on Pixel. 14 capabilities match cross-arch. |
+| **squirrel** | C | C | Works on both. Abstract socket `@squirrel` confirmed functional on GrapheneOS. HTTP `--port` works. |
+| **toadstool** | C | C | Works on both. Executes on Pixel but server mode needs `biome.yaml`. |
+| **nestgate** | C | ? | **Fixed March 28** — musl-static binary now works on x86_64 (was segfaulting). aarch64 musl build not yet available. Team evolving cross-compile. |
+| **biomeos** | C | C | **New March 28** — both arches in plasmidBin. aarch64 binary runs on Pixel but `api` mode still forces Unix socket (TCP gap). |
+| **petaltongue** | C | ? | x86_64 musl stripped and functional. aarch64 not yet built (egui headless cross-compile pending). |
 | **loamspine** | ? | ? | Crashes on startup (Tokio issue, not musl-specific). |
 | **rhizocrypt** | ? | ? | Not tested. |
 | **sweetgrass** | ? | ? | Not tested. |
-| **petaltongue** | ? | ? | Not tested. |
 | **coralreef** | ? | ? | Not tested. |
 
 ### Android/GrapheneOS Substrate
 
-Tested on Pixel with GrapheneOS via ADB (aarch64-linux-musl binaries):
+Tested on Pixel 8a with GrapheneOS via ADB (aarch64-linux-musl binaries).
+**Updated March 28** with comprehensive findings from NUCLEUS + cross-gate deployment.
 
-| Requirement | Standard | Notes |
-|-------------|----------|-------|
-| **Abstract sockets** | BearDog `--abstract` flag | Flag exists but treats `@name` as filesystem path. Needs fix: actual `AF_UNIX` abstract namespace. |
-| **Writable runtime dir** | `HOME`/`TMPDIR` must point to writable area | Default `/data/local/tmp/plasmidBin/` is read-only for data writes. Fix: set `HOME=/data/local/tmp/biomeos`. |
-| **No systemd** | Primals must not assume systemd for lifecycle | Startup via shell script, not service units. |
-| **PID files** | Directory must be configurable | Songbird writes PID to CWD by default. Needs `--pid-dir` or `SONGBIRD_PID_DIR`. |
-| **Audit logs** | Directory must be configurable | BearDog writes `audit.log` to CWD. Crashes on read-only filesystem. Needs `--audit-dir` or `BEARDOG_AUDIT_DIR`. |
-| **SELinux** | Filesystem UDS may be blocked | Abstract sockets bypass SELinux file label checks. TCP is the reliable fallback. |
-| **ADB port forwarding** | Local port conflicts with running gates | `deploy_pixel.sh --local-port-offset N` offsets forwarded ports. |
+| Requirement | Standard | Status | Notes |
+|-------------|----------|--------|-------|
+| **TCP listener** | `--listen 0.0.0.0:PORT` | C (BearDog, Songbird) | TCP is the **universal mobile transport**. Every primal MUST support it. |
+| **Abstract sockets** | `--abstract` flag | P (Squirrel C, BearDog P) | Squirrel's `@squirrel` works perfectly on GrapheneOS. BearDog logs filesystem path instead of abstract — functional but buggy. |
+| **Filesystem UDS** | Default socket path | **X (all)** | SELinux on GrapheneOS denies `sock_file create` from `shell` context. Filesystem UDS is NOT viable on Android. |
+| **Writable runtime dir** | `HOME`/`TMPDIR` writable | C | `cd /data/local/tmp/biomeos` before launch. Set `HOME`/`TMPDIR` env vars. |
+| **No systemd** | No systemd assumptions | C | Startup via shell script (`deploy_pixel.sh`). |
+| **Audit/PID files** | Directory configurable | P | BearDog writes `audit.log` to CWD — crashes on read-only fs. Needs `--audit-dir` or `BEARDOG_AUDIT_DIR`. |
+| **SELinux** | Platform-aware IPC | Critical | `adb logcat` confirmed `avc: denied { create } ... tcontext=u:object_r:shell_data_file:s0 tclass=sock_file`. TCP and abstract sockets bypass this. |
+| **ADB port forwarding** | Cross-gate access | C | `deploy_pixel.sh --local-port-offset N` for conflict avoidance. |
+| **biomeOS orchestration** | `biomeos api --port` on mobile | **X** | biomeOS forces Unix socket even when `--port` specified. Needs TCP-only mode for mobile. |
+
+### Per-Primal Mobile Transport Status (March 28, 2026)
+
+| Primal | TCP | Abstract Socket | Filesystem UDS | Mobile Ready? |
+|--------|-----|-----------------|----------------|---------------|
+| **beardog** | C (`--listen`) | P (buggy log) | X (SELinux) | Yes (via TCP) |
+| **songbird** | C (`--listen`) | ? | X (SELinux) | Yes (via TCP) |
+| **squirrel** | C (`--port`) | C (`@squirrel`) | X (SELinux) | Yes (both) |
+| **toadstool** | X (not wired) | ? | X (SELinux) | Partial (caps only) |
+| **nestgate** | X (not wired) | ? | X (SELinux) | No (needs aarch64 build + TCP) |
+| **biomeos** | X (forces UDS) | ? | X (SELinux) | No (needs TCP mode) |
+| **petaltongue** | X (no flag) | ? | X (SELinux) | No (needs aarch64 + TCP) |
 
 ### Genetic Crypto Cross-Architecture Determinism
 
@@ -254,35 +271,36 @@ on x86_64 and aarch64:
 
 ---
 
-## Priority Actions (Updated March 27, 2026)
+## Priority Actions (Updated March 28, 2026)
 
 ### Critical (blocks cross-hardware deployment)
 
-1. **nestgate**: Fix musl-static segfault. Diagnose with `RUST_BACKTRACE=1` on musl build. Likely candidate: `mdns-sd`, `uzers`, or `sysinfo` crate interaction with musl libc. This blocks all NestGate deployment via plasmidBin.
-2. **beardog**: Default `FAMILY_ID` to `standalone` when unset. Current hard-fail breaks standalone startup (UniBin v1.1 mandatory).
-3. **beardog**: Fix `--abstract` flag to use actual Linux abstract sockets (prefix `\0` on `AF_UNIX`). Currently treats as filesystem path, crashing on Android.
-4. **loamspine**: Fix Tokio nested runtime panic in `infant_discovery`. Add `--port` flag.
-5. **rhizocrypt**: Add newline-delimited TCP JSON-RPC listener.
+1. **biomeos**: Implement TCP-only API mode (`biomeos api --port PORT --tcp-only`). Currently forces Unix socket even when `--port` specified. Blocks mobile orchestration.
+2. **biomeos**: Honor `gate` parameter in `capability.call` for cross-gate routing. Currently always routes to local primary endpoint.
+3. **nestgate**: Build aarch64-unknown-linux-musl binary. Wire `--port` to actual TCP bind. Accept `server` as alias for `daemon`.
+4. **beardog**: Default `FAMILY_ID` to `standalone` when unset. Current hard-fail breaks standalone startup.
+5. **beardog**: Fix `--abstract` socket logging — logs filesystem path `@biomeos_beardog_*` instead of confirming abstract namespace bind.
+6. **loamspine**: Fix Tokio nested runtime panic in `infant_discovery`. Add `--port` flag.
+7. **rhizocrypt**: Add newline-delimited TCP JSON-RPC listener.
 
-### High (needed for standard compliance and Dark Forest deployment)
+### High (needed for standard compliance and mobile deployment)
 
-6. **beardog**: Add `--audit-dir` / `BEARDOG_AUDIT_DIR` to avoid CWD writes (read-only filesystem crash on Android).
-7. **beardog**: Wire `birdsong.generate_encrypted_beacon` into server RPC handler.
-8. **beardog**: Add `beardog seed generate/export/verify` subcommand.
-9. **songbird**: Add `--dark-forest` CLI flag (env-only today, silent plaintext fallback).
-10. **songbird**: Add `--pid-dir` or `SONGBIRD_PID_DIR` for Android/container substrates.
-11. **petaltongue**: Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`. Add `--port`.
-12. **sweetgrass**: Add `--port` flag.
-13. **coralreef**: Add `--port` flag for raw newline TCP.
-14. **toadstool**: Wire `--port` flag to actual server bind.
-15. **nestgate**: Wire `--port` to actual TCP bind. Accept `server` as alias for `daemon`.
+8. **beardog**: Add `--audit-dir` / `BEARDOG_AUDIT_DIR` to avoid CWD writes (read-only filesystem crash on Android).
+9. **beardog**: Wire `birdsong.generate_encrypted_beacon` into server RPC handler.
+10. **songbird**: Add `--dark-forest` CLI flag (env-only today, silent plaintext fallback).
+11. **songbird**: Add `--pid-dir` or `SONGBIRD_PID_DIR` for Android/container substrates.
+12. **toadstool**: Wire `--port` flag to actual server bind. Critical for mobile compute sharing.
+13. **petaltongue**: Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`. Add `--port`. Build aarch64 headless.
+14. **sweetgrass**: Add `--port` flag (alias for port portion of `--http-address`).
+15. **coralreef**: Add `--port` flag for raw newline TCP.
 
 ### Recommended (improves ecosystem coherence)
 
-16. All primals: converge on `--listen addr:port` as the canonical TCP bind flag (BearDog pattern).
+16. All primals: converge on `--listen addr:port` as the canonical TCP bind flag (BearDog/Songbird pattern).
 17. All primals: expose `health.liveness` via raw TCP newline JSON-RPC.
 18. All primals: report transport protocol in `capabilities.list` response.
 19. **squirrel**: Add filesystem socket alongside abstract. Alias `system.*` to `health.*`.
+20. All primals: ensure `cargo build --release --target x86_64-unknown-linux-musl` produces ecoBin (static, stripped) and submit to plasmidBin via `harvest.sh`.
 
 ---
 
@@ -300,6 +318,21 @@ on x86_64 and aarch64:
 ---
 
 ## Version History
+
+### v1.2.0 (March 28, 2026)
+
+**Cross-Gate Federation + plasmidBin Overhaul**
+
+- Updated NestGate x86_64 musl status: FIXED (was segfaulting, now ecoBin A++)
+- Added biomeOS to musl-static binary health table (both arches)
+- Added petaltongue x86_64 musl status (functional, stripped)
+- Added Per-Primal Mobile Transport Status table
+- Updated Android/GrapheneOS substrate section with comprehensive findings
+- Confirmed Squirrel abstract socket (`@squirrel`) works on GrapheneOS
+- Identified biomeOS TCP-only mode as critical gap for mobile orchestration
+- Identified biomeOS `capability.call` gate routing as critical for federation
+- Updated all priority actions to reflect March 28 state
+- plasmidBin now contains 7 x86_64 + 5 aarch64 ecoBin-compliant binaries
 
 ### v1.1.0 (March 27, 2026)
 
