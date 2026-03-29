@@ -3,7 +3,7 @@
 **Purpose**: Defines the standard hardware, OS, and tooling configuration for an
 ecoPrimals gate. Any machine matching this spec can run the full ecosystem.
 
-**Last Updated**: March 28, 2026
+**Last Updated**: March 29, 2026
 
 ---
 
@@ -232,38 +232,50 @@ export CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_LINKER="aarch64-linux-gnu-gcc"
 
 ## Directory Structure
 
-Standard layout on a gate:
+Standard layout on a gate (see `WORKSPACE_LAYOUT.md` for the canonical
+definition and full repo inventory):
 
 ```
 ~/Development/
-├── ecoPrimals/           # Main workspace
-│   ├── wateringHole/     # Shared knowledge layer (this repo)
-│   ├── whitePaper/       # gen3/, baseCamp, attsi/, atlasHugged
-│   ├── wetSpring/        # QS, 16S pipeline, Anderson ecology
-│   ├── hotSpring/        # MD, nuclear EOS, lattice QCD
-│   ├── neuralSpring/     # ML, surrogates, reservoir computing
-│   ├── groundSpring/     # Spectral theory, measurement science
-│   ├── airSpring/        # Precision agriculture, hydrology
-│   ├── healthSpring/     # PK/PD, microbiome, biosignal, NLME
-│   ├── ludoSpring/       # Game science, HCI, procedural generation
-│   ├── barraCuda/        # Pure math library (standalone)
-│   ├── coralReef/        # Sovereign shader compiler
-│   ├── phase1/
-│   │   ├── squirrel/     # AI coordination
-│   │   ├── beardog/      # Cryptography
-│   │   ├── songbird/     # Networking
-│   │   └── nestgate/     # Data storage
-│   └── phase2/
-│       ├── biomeOS/      # Orchestration substrate
-│       ├── petalTongue/  # Visualization / UI
-│       ├── rhizoCrypt/   # Ephemeral memory (DAG)
-│       ├── sweetGrass/   # Attribution / provenance
-│       └── loamSpine/    # Immutable ledger
-├── metalForge/           # Cross-substrate dispatch (if separate)
-└── scripts/              # Utility scripts
+└── ecoPrimals/                     # workspace root
+    ├── primals/                    # all primals, flat
+    │   ├── barraCuda/              #   math engine (900+ WGSL shaders)
+    │   ├── bearDog/                #   cryptography
+    │   ├── biomeOS/                #   Neural API orchestrator
+    │   ├── coralReef/              #   sovereign shader compiler
+    │   ├── loamSpine/              #   immutable lineage tracker
+    │   ├── nestGate/               #   sovereign storage
+    │   ├── petalTongue/            #   visualization
+    │   ├── rhizoCrypt/             #   content-addressed DAG
+    │   ├── skunkBat/               #   defensive network security
+    │   ├── songBird/               #   network orchestration
+    │   ├── squirrel/               #   AI coordination
+    │   ├── sweetGrass/             #   attribution protocol
+    │   └── toadStool/              #   sovereign compute hardware
+    ├── springs/                    # science validation
+    │   ├── groundSpring/           #   measurement noise
+    │   ├── healthSpring/           #   PK/PD, microbiome, biosignal
+    │   ├── hotSpring/              #   computational physics
+    │   ├── ludoSpring/             #   game science, HCI, PCG
+    │   ├── neuralSpring/           #   ML primitives, spectral
+    │   ├── primalSpring/           #   composition validation
+    │   └── wetSpring/              #   metagenomics, analytical chemistry
+    ├── gardens/                    # usable systems (creative surface)
+    │   ├── blueFish/               #   data pipeline for PIs
+    │   └── esotericWebb/           #   cross-evolution CRPG
+    └── infra/                      # ecosystem support
+        ├── plasmidBin/             #   binary distribution (local tooling)
+        ├── wateringHole/           #   standards and handoffs
+        └── whitePaper/             #   gen0-gen4 papers
 ```
 
-Each spring and primal is its own git repository. No monorepo.
+Each primal, spring, and garden is its own git repository. No monorepo.
+Primals are under `ecoPrimals` org, springs under `syntheticChemistry`,
+gardens under `sporeGarden`.
+
+A separate clone of `ecoPrimals/plasmidBin` (the public distribution repo) can
+live anywhere — typically at `~/Development/plasmidBin/` or fetched fresh on
+consumer machines.
 
 ---
 
@@ -320,61 +332,108 @@ Gates fetch primal binaries from `plasmidBin` (the ecosystem binary repository)
 rather than building from source. This enables rapid deployment to machines
 without a Rust toolchain.
 
-### Binary Layout
+**plasmidBin has a dual structure**:
+
+| Surface | Repo | Purpose |
+|---------|------|---------|
+| **Public distribution** | `ecoPrimals/plasmidBin` (GitHub) | Consumer-facing: per-primal metadata, `fetch.sh`, `harvest.sh`, `start_primal.sh`, `ports.env`. Binaries in GitHub Releases (not in git). |
+| **Local operator tooling** | `infra/plasmidBin/` (dev workspace) | Operational: `deploy_gate.sh`, `doctor.sh`, actual binaries on disk, deployment scripts for SSH/ADB. |
+
+Consumers clone the public repo. Operators additionally use the local infra
+tooling. This mirrors how primals are sovereign — the public surface is the
+distribution interface; the private tooling is the operational substrate.
+
+### Public Repo Layout (ecoPrimals/plasmidBin)
 
 ```
-plasmidBin/
-├── primals/              # x86_64 musl-static primal binaries
-│   ├── beardog
-│   ├── songbird
-│   ├── squirrel
-│   ├── toadstool
-│   ├── nestgate
-│   └── aarch64/          # aarch64 musl-static primal binaries
-│       ├── beardog
-│       ├── songbird
-│       └── ...
-├── springs/              # Spring binaries (primalSpring only)
-│   └── aarch64/
-├── products/             # sporeGarden products (gitignored)
-├── manifest.toml         # Version, arch, capability metadata
-├── checksums.toml        # BLAKE3 checksums for all binaries
-├── sources.toml          # GitHub repo + release asset patterns
-├── fetch.sh              # Download from GitHub Releases
-├── harvest.sh            # Publish local builds into plasmidBin
-├── update.sh             # Fetch + verify workflow
-├── deploy_gate.sh        # Deploy to remote gate via SSH
-├── deploy_pixel.sh       # Deploy to Pixel/Android via ADB
-├── bootstrap_gate.sh     # Self-contained bootstrap for fresh machines
-├── start_primal.sh       # Unified primal startup wrapper
-├── seed_workflow.sh       # Dark Forest seed lifecycle management
-├── validate_gate.sh      # Single-gate health validation
-├── validate_mesh.sh      # Multi-gate mesh validation
-└── stop_gate.sh          # Graceful primal shutdown
+plasmidBin/                          # clone of ecoPrimals/plasmidBin
+├── beardog/metadata.toml            # per-primal metadata + capabilities
+├── songbird/metadata.toml
+├── squirrel/metadata.toml
+├── toadstool/metadata.toml
+├── nestgate/metadata.toml
+├── biomeos/metadata.toml
+├── rhizocrypt/metadata.toml
+├── loamspine/metadata.toml
+├── sweetgrass/metadata.toml
+├── petaltongue/metadata.toml
+├── coralreef/metadata.toml
+├── ludospring/metadata.toml         # spring primal
+├── groundspring/metadata.toml
+├── healthspring/metadata.toml
+├── neuralspring/metadata.toml
+├── wetspring/metadata.toml
+├── primalspring/metadata.toml
+├── manifest.lock                    # resolved versions for deployment
+├── ports.env                        # canonical TCP port assignments
+├── fetch.sh                         # download from GitHub Releases
+├── harvest.sh                       # build checksums, create GH Release
+├── start_primal.sh                  # unified startup wrapper
+├── .gitignore                       # binaries excluded from git
+└── SOURCE_AVAILABILITY.md           # AGPL compliance
 ```
+
+Each primal directory holds `metadata.toml` with version, domain, capabilities,
+and provenance. Binaries are fetched into `<primal>/<primal>` (e.g.,
+`beardog/beardog`) via `fetch.sh` — they live in GitHub Releases, not in git.
+
+### Local Operator Tooling (infra/plasmidBin/)
+
+The development workspace at `infra/plasmidBin/` additionally contains:
+
+- `deploy_gate.sh` — SSH push deployment to remote gates
+- `deploy_pixel.sh` — ADB push deployment to Android gates
+- `bootstrap_gate.sh` — self-contained bootstrap for fresh machines
+- `doctor.sh` — health check for local primal installation
+- `seed_workflow.sh` — Dark Forest seed lifecycle management
+- `validate_gate.sh` — single-gate health validation
+- `validate_mesh.sh` — multi-gate mesh validation
+- `stop_gate.sh` — graceful primal shutdown
+- Actual primal binaries on disk (for local testing)
 
 ### Fetching Binaries
 
-On a gate with internet access:
+On any gate with internet access:
 ```bash
-cd ~/Development/ecoPrimals/plasmidBin
-./fetch.sh --all                    # Fetch all primals for local arch
-./update.sh --verify-only           # Verify checksums without fetching
+git clone git@github.com:ecoPrimals/plasmidBin.git
+cd plasmidBin
+./fetch.sh                          # fetch latest release
+./fetch.sh --tag v2026.03.28        # fetch specific release
+./fetch.sh --dry-run                # show what would be downloaded
 ```
 
-Architecture is auto-detected. On aarch64 machines, binaries are fetched to
-`primals/aarch64/`.
+`fetch.sh` downloads assets from GitHub Releases, places them in the correct
+primal directory, and verifies SHA-256 checksums against `metadata.toml`.
+
+### Starting Primals
+
+```bash
+source ports.env
+./start_primal.sh beardog           # starts on default port (9100)
+./start_primal.sh biomeos --tcp-port 9800 --socket /tmp/biomeos.sock
+./start_primal.sh squirrel --tcp-port 9500
+```
+
+`start_primal.sh` maps generic flags (`--tcp-port`, `--socket`, `--family-id`)
+to per-primal CLI quirks. It handles `biomeos` (api mode), `petaltongue` (web
+mode), `ludospring` (server mode with env var), and a generic fallback.
 
 ### Harvesting Local Builds
 
-After building from source (development gates):
+After building from source on a development gate:
 ```bash
-./harvest.sh --source /tmp/primalspring-deploy/primals
-./harvest.sh --source /tmp/primalspring-deploy/primals/aarch64 --arch aarch64
+cd plasmidBin
+# Copy built binaries into their directories
+cp /path/to/target/release/beardog beardog/beardog
+# Run harvest to update checksums, metadata, and create a GitHub Release
+./harvest.sh                        # uses today's date as tag
+./harvest.sh --tag v2026.03.28      # specific tag
+./harvest.sh --dry-run              # preview without side effects
 ```
 
-Harvest strips, checksums, and copies binaries into the correct plasmidBin
-directory.
+`harvest.sh` computes SHA-256 checksums, updates `metadata.toml` provenance,
+regenerates `manifest.lock`, and creates a GitHub Release with all binaries
+attached.
 
 ---
 
@@ -621,3 +680,105 @@ is where the performance story lives. coralReef's sovereign path requires NVIDIA
 - [ ] Beacon seed pushed
 - [ ] ADB port forwarding configured
 - [ ] Gate validated (`validate_gate.sh localhost:<forwarded-port>`)
+
+---
+
+## Multi-Machine AI Development Workflow
+
+Development uses **Cursor IDE** (VS Code fork with AI agent) across multiple
+gates simultaneously, connected via **RustDesk** for remote desktop. This
+pattern enables rapid iteration across heterogeneous substrates without leaving
+the development flow.
+
+### Why This Matters
+
+Each gate has different hardware — DDR3 next to DDR5, NVIDIA next to AMD, Akida
+NPUs on some, HBM2 on others. Rather than developing on one machine and
+deploying to others, the development itself is distributed. The AI agent in
+Cursor sees the local filesystem of whichever gate is active, and `plasmidBin`
+ensures consistent binary distribution across all of them.
+
+### Typical Development Session
+
+```
+eastGate (Cursor local)     ← primary development, source builds
+    │
+    ├── RustDesk → biomeGate    ← HBM2 testing (coralReef, hotSpring)
+    ├── RustDesk → strandGate   ← bioinformatics (wetSpring, dual EPYC)
+    ├── RustDesk → flockGate    ← cross-gate validation (family NAT)
+    └── SSH → northGate         ← AI inference (RTX 5090, Squirrel)
+```
+
+Each gate runs its own Cursor instance with `rust-analyzer`. Changes are pushed
+to GitHub from whichever gate they originate on. Other gates pull to stay
+current. `plasmidBin` binaries can be harvested on one gate and fetched on
+others without rebuilding.
+
+### Cross-Substrate Deployment Cycle
+
+1. **Develop** on any gate (Cursor + AI agent, source builds)
+2. **Build** musl-static ecoBin binaries (x86_64 and/or aarch64)
+3. **Harvest** into plasmidBin (`./harvest.sh` → GitHub Release)
+4. **Fetch** on other gates (`./fetch.sh` → verified binaries)
+5. **Start** compositions (`source ports.env && ./start_primal.sh <name>`)
+6. **Validate** via primalSpring experiments or mesh probes
+
+This cycle works identically whether the target is a basement tower, a family
+member's machine, or an external deployment at a university lab.
+
+---
+
+## Binary Distribution & Wave Release Strategy
+
+The ecoPrimals ecosystem uses `plasmidBin` as the binary distribution surface.
+Primal source code lives in private repos (ecoPrimals org); spring source is
+public (syntheticChemistry org). Binaries are released through `plasmidBin`
+regardless of source visibility.
+
+### The Wave Model
+
+Primals are made public in waves, not all at once. Each wave represents a
+maturity and audit milestone:
+
+| Wave | Primals | Criteria |
+|------|---------|----------|
+| **Wave 0** (current) | barraCuda, coralReef, squirrel, toadStool | Already public. Core compute + AI. |
+| **Wave 1** (near) | songBird, petalTongue | Networking + visualization. Low-risk public surface. |
+| **Wave 2** (mid) | nestGate, rhizoCrypt, sweetGrass, loamSpine | Storage + memory + provenance. Ecosystem primitives. |
+| **Wave 3** (later) | bearDog, biomeOS, skunkBat | Security-critical. Requires thorough public audit. |
+
+Springs are already public under syntheticChemistry. Gardens are public under
+sporeGarden. The wave model applies only to primal source repos.
+
+### Binary Availability vs Source Visibility
+
+Even when a primal's source is private, its **binary** is available via
+`plasmidBin`. This means:
+
+- A university lab can `./fetch.sh` and run a full NUCLEUS composition
+  without access to private primal source code
+- Spring developers can validate compositions against real primal binaries
+- External collaborators (PIs, students, creatives) get functional primals
+  while source undergoes internal audit
+
+The `metadata.toml` in each primal directory documents version, capabilities,
+and provenance — enough to integrate without seeing the source.
+
+### Port Assignments (Canonical)
+
+All gates use the same TCP port assignments (defined in `ports.env`):
+
+| Primal | Port | Domain |
+|--------|------|--------|
+| BearDog | 9100 | crypto |
+| Songbird | 9200 | discovery |
+| NestGate | 9300 | storage |
+| ToadStool | 9400 | compute |
+| Squirrel | 9500 | ai |
+| petalTongue | 9600 | visualization |
+| ludoSpring | 9650 | game |
+| biomeOS | 9800 | orchestration |
+
+On the same machine, primals prefer Unix domain sockets (UDS) discovered by
+biomeOS's SocketDiscoveryEngine. TCP ports are for cross-gate communication,
+Docker topologies, firewall rules, and ADB port forwarding.
