@@ -127,20 +127,39 @@ constants. All quality gates green.
   `parse_jsonrpc_response` unit tests (ok/error/missing/invalid), Unix socket preference tests,
   biomeos namespace discovery, constants coverage.
 
+### f64 Transcendental Pipeline Awareness (Sprint 22d)
+
+- **Composite transcendental probes** — two new probe shaders that combine multiple
+  f64 transcendentals in a single shader. RTX 3090 proprietary driver passes individual
+  sqrt/sin/cos/exp/log probes but crashes on composite shaders (NVVM JIT failure).
+  `composite_transcendental` and `exp_log_chain` probes now catch this.
+- **`F64BuiltinCapabilities` evolved** — `has_f64_transcendentals()` requires all individual
+  ops PLUS composite probes to pass. 16 probes total.
+- **`get_test_device_if_f64_transcendentals_available()`** — async-first test gate with
+  full probe suite. Sync wrapper via `tokio_block_on` for `#[test]` contexts.
+- **10 failing tests → 0** — Bessel J₀/K₀, Beta, Digamma, Born-Mayer tests now use
+  transcendental gate. Tests skip gracefully on hardware with broken composite f64.
+- **Sin/cos probes non-trivial arguments** — `sin(9.21...)` / `cos(9.21...)` catch
+  large-argument precision loss.
+- **Per-operation tracing** — adapter name, vendor, driver, per-op pass/fail logged.
+- **coralReef capabilities evolved** — `shader.compile.capabilities` now returns
+  structured `CompileCapabilitiesResponse` with `f64_transcendentals` per-op polyfill
+  availability (sin, cos, sqrt, exp2, log2, rcp, exp, log, composite_lowering).
+
 ## Cross-Primal Pins
 
 | Primal | Version/Session | Status |
 |--------|-----------------|--------|
 | toadStool | S163 | Dependency audit, zero-copy, code quality |
-| coralReef | Phase 10 Iter 69 | Newline-delimited JSON-RPC, capability-domain symlinks, 1000 LOC, sovereign 7/10 |
+| coralReef | Phase 10 Iter 70 | f64 transcendental capabilities reporting, structured CompileCapabilitiesResponse, composite polyfill |
 | hotSpring | v0.6.32 | Multi-shift CG + GPU-resident observables absorbed |
 | groundSpring | — | Lanczos eigenvectors absorbed |
 | ludoSpring | — | f32 Perlin + 32-bit LCG absorbed |
 
 ## Next Steps
 
+- P0: Route transcendental-heavy shaders through coralReef sovereign compiler when `has_f64_transcendentals() == false` (use `fp64_strategy: "software"` in compile requests)
 - P1: DF64 end-to-end NVK hardware verification
-- P1: coralReef sovereign compiler evolution
 - P1: Wire `gpu_multi_shift_cg` into full RHMC HMC trajectory (end-to-end lattice solve)
 - P2: Coverage to 90% (requires f64-capable GPU hardware in CI)
 - P2: `BatchedTridiagEigh` GPU op (groundSpring candidate)
