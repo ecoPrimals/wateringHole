@@ -156,11 +156,26 @@ constants. All quality gates green.
 | groundSpring | — | Lanczos eigenvectors absorbed |
 | ludoSpring | — | f32 Perlin + 32-bit LCG absorbed |
 
+### Probe Test Coverage & GPU Silicon Capability Matrix (Sprint 22e)
+
+- **19 new tests** — 14 probe unit tests (composite gate logic, heuristic pessimism,
+  Display output, PROBES array validation) + 5 DeviceCapabilities tests
+  (has_f64_transcendentals, needs_sqrt_f64_workaround). 4,194 total, 0 failures.
+- **`GPU_SILICON_CAPABILITY_MATRIX.md` spec** — living document mapping FP64 rates
+  by GPU generation (NVIDIA Kepler→Blackwell Ultra, AMD GCN5→CDNA4, Intel Arc→Xe-HPC).
+  Key finding: both vendors deprioritizing FP64 (Blackwell Ultra: 1:64, MI350X: half
+  the FP64 matrix TFLOPS of MI300X). Documents DF64 decomposition strategy (complete
+  library exists, naga blocks transcendentals, coralReef bypasses), toadStool VFIO
+  silicon exposure path (tensor cores, RT cores, TMU via sovereign pipeline).
+
 ## Next Steps
 
 - P0: Route transcendental-heavy shaders through coralReef sovereign compiler when `has_f64_transcendentals() == false` (use `fp64_strategy: "software"` in compile requests)
+- P0: DF64 transcendentals via coralReef sovereign path (bypasses naga poisoning — complete library exists, just needs routing)
+- P1: Tensor core GEMM routing for eigensolvers/preconditioners via toadStool VFIO + coralReef HMMA/WGMMA emission
 - P1: DF64 end-to-end NVK hardware verification
 - P1: Wire `gpu_multi_shift_cg` into full RHMC HMC trajectory (end-to-end lattice solve)
 - P2: Coverage to 90% (requires f64-capable GPU hardware in CI)
 - P2: `BatchedTridiagEigh` GPU op (groundSpring candidate)
 - P3: Multi-GPU dispatch evolution
+- P3: Mixed-precision iterative refinement (tensor core approximate + shader core DF64 residual)
