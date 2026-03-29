@@ -1,0 +1,32 @@
+# Cloudflare Tunnel config for BirdSong Beacon
+# Copy to ~/.cloudflared/config.yml and fill in the placeholders.
+#
+# Prerequisites:
+#   1. cloudflared installed
+#   2. Tunnel credentials JSON in ~/.cloudflared/<TUNNEL_UUID>.json
+#   3. biomeOS running (creates the Unix socket)
+#
+# The socket path includes the family_id derived from .family.seed.
+# It is deterministic: same seed = same socket path on every start.
+#
+# NOTE: Do NOT commit the actual config.yml or credentials JSON.
+#       This template is safe to commit (no secrets).
+
+tunnel: nestgate-api
+credentials-file: ${HOME}/.cloudflared/${TUNNEL_UUID}.json
+
+ingress:
+  # BirdSong beacon API — Dark Forest gated
+  - hostname: api.nestgate.io
+    service: unix:${XDG_RUNTIME_DIR}/biomeos/biomeos-api-${FAMILY_ID}.sock
+
+  # Tower endpoint — primary STUN/NAT rendezvous
+  - hostname: tower.nestgate.io
+    service: unix:${XDG_RUNTIME_DIR}/biomeos/biomeos-api-${FAMILY_ID}.sock
+
+  # Beacon endpoint — future DNS-based beacon advertisement
+  - hostname: beacon.nestgate.io
+    service: unix:${XDG_RUNTIME_DIR}/biomeos/biomeos-api-${FAMILY_ID}.sock
+
+  # Catch-all: reject everything else
+  - service: http_status:404
