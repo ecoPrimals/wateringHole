@@ -1189,7 +1189,7 @@ Multiple springs need the same math operations: FFT, matrix multiply,
 reduction, scan. Instead of each spring compiling independently:
 
 ```
-1. barraCuda publishes 806 WGSL shaders as a kernel library
+1. barraCuda publishes 816 WGSL shaders as a kernel library
 2. First spring to need fft_1d compiles via coralReef:
    shader.compile.wgsl { source: fft_1d, target: "sm86" }
    → binary_hash_abc123
@@ -1437,7 +1437,7 @@ turns NestGate into a global compilation cache for the ecosystem.
 
 ### Primal Leverage Guides (Companion Recipes)
 
-- `wateringHole/BARRACUDA_LEVERAGE_GUIDE.md` — barraCuda: math engine, 806 WGSL shaders, precision routing
+- `wateringHole/BARRACUDA_LEVERAGE_GUIDE.md` — barraCuda: math engine, 816 WGSL shaders, precision routing
 - `wateringHole/TOADSTOOL_LEVERAGE_GUIDE.md` — toadStool: hardware discovery, dispatch, VFIO, power management
 - `wateringHole/LOAMSPINE_LEVERAGE_GUIDE.md` — LoamSpine: permanent records, provenance chains
 - `wateringHole/RHIZOCRYPT_LEVERAGE_GUIDE.md` — rhizoCrypt: ephemeral DAG, session memory

@@ -161,7 +161,7 @@ Every primal must:
 
 **What works**:
 - Pure math library with WGSL shaders
-- 3,623+ tests
+- 4,162+ tests
 
 **Actions**:
 - [ ] Evaluate if a headless CLI binary can be produced as ecoBin (math-only, no GPU runtime)

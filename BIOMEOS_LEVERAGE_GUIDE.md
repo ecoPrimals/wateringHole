@@ -626,7 +626,7 @@ biomeOS SSE → petalTongue subscribes → Grammar of Graphics rendering
 **biomeOS orchestrates the full sovereign GPU stack as a deploy graph.**
 
 ```
-barraCuda (shader authoring, 806 WGSL shaders)
+barraCuda (shader authoring, 816 WGSL shaders)
   → coralReef (WGSL→SPIR-V→native compilation)
   → ToadStool (GPU dispatch via PCIe topology)
   → NestGate (result storage)

@@ -18,7 +18,7 @@ Run `bootstrap.sh` (in this directory) to set up or migrate a machine.
 ```
 ecoPrimals/                     # workspace root
   primals/                      # all primals, flat
-    barraCuda/                  #   math engine (900+ WGSL shaders)
+    barraCuda/                  #   math engine (816 WGSL shaders)
     bearDog/                    #   cryptography
     biomeOS/                    #   Neural API orchestrator
     bingoCube/                  #   human-verifiable commitment
