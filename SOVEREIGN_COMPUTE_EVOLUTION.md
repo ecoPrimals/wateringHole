@@ -625,6 +625,40 @@ for implementation details, scripts, and per-gap ownership.
 
 ---
 
+## Evolution Gap: Root Privilege Dependency
+
+**Status**: Open
+**Severity**: Architectural debt — sovereignty violation
+**Affects**: coralReef (coral-glowplug, coral-ember), hotSpring deploy scripts
+
+Primals should not require `root`, `sudo`, `pkexec`, or kernel-granted
+capabilities to operate. The current stack requires elevated privilege for:
+
+1. **VFIO group access** — `/dev/vfio/*` requires root or udev permission rules
+2. **PCI driver bind/unbind** — sysfs writes to `driver_override`, `bind`, `unbind`
+3. **systemd service management** — glowplug/ember run as root via systemd
+4. **udev rule deployment** — DRM isolation, VFIO permissions
+5. **sudoers file** — grants biomegate passwordless access to specific sysfs paths
+
+Each of these is a point where the primal is tethered to the host kernel's
+permission model. A sovereign primal should operate with minimal kernel
+interaction — ideally from userspace with pre-granted file descriptors.
+
+**Evolution path**:
+- coral-ember's SCM_RIGHTS fd-passing is already a step toward this (glowplug
+  receives VFIO fds without needing to open them itself)
+- agentReagents VM isolation removes the host kernel dependency entirely for
+  hazardous operations
+- Long-term: a minimal VFIO-user or io_uring-based interface where the primal
+  receives pre-opened device handles at startup, never touching sysfs directly
+- The endgame is a primal that needs only a file descriptor and memory — no
+  kernel syscalls beyond read/write/mmap on that fd
+
+This gap should shrink as coralReef evolves. Every `pkexec` or `sudo` in the
+pipeline is technical debt against sovereignty.
+
+---
+
 ## Related Documents
 
 - `wateringHole/PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — cross-primal
