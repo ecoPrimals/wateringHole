@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: March 16, 2026
+**Last Updated**: March 29, 2026
 
 ---
 
@@ -532,6 +532,57 @@ chains via sweetGrass and permanence via loamSpine.
 
 ---
 
+## The Composition Layer
+
+### BYOB (Bring Your Own Binaries)
+
+The deployment model for gen4 products. Products consume pre-built primal binaries
+from `plasmidBin/` via `fetch.sh` — they never compile primal source. This
+enforces zero source coupling between products and primals.
+
+### Niche YAML
+
+A YAML metadata file that declares what a deployment IS — its organisms (primals
+and chimeras), their interactions (capability-call wiring), and customization
+options. The niche YAML is the identity document for a composition; the deploy
+graph is its execution plan.
+
+Example: `esotericWebb/niches/esoteric-webb.yaml` declares 10 organisms, 5
+interaction edges, and 3 customization options.
+
+### Primal Launch Profile
+
+A TOML configuration file that tells a product's launcher how to invoke each
+primal binary: subcommand, port flag, health method, readiness timeout. Launch
+profiles bridge the gap between "binary exists in plasmidBin" and "primal is
+running and healthy."
+
+Example: `esotericWebb/config/primal_launch_profiles.toml`
+
+### sporeGarden Product
+
+A gen4 artifact in the `sporeGarden/` GitHub organization. Products compose
+primals into tools people use — games, science platforms, creative tools. They
+follow the BYOB model, consuming binaries via IPC and defining their composition
+through deploy graphs + niche YAML.
+
+Examples: esotericWebb (CRPG engine), helixVision (genomics platform, planned).
+
+### PrimalBridge
+
+A product-side JSON-RPC client that wraps capability calls to running primals.
+Each product writes its own bridge — `esotericWebb` has a `PrimalBridge` with 23
+methods covering 8 primal domains. The bridge handles graceful degradation when
+optional primals are absent.
+
+### Primal Resolution Order
+
+The 8-step discovery sequence biomeOS uses to find primal sockets at runtime:
+env hint → capability sockets → XDG → abstract → /tmp → socket registry →
+Neural API → TCP fallback. See `COMPOSITION_PATTERNS.md` §4.
+
+---
+
 ## Quick Lookup
 
 | Term | One-Line Definition |
@@ -566,3 +617,9 @@ chains via sweetGrass and permanence via loamSpine.
 | **AI authorship paradox** | Copyright uncertainty harms exclusivity claimants, not the commons |
 | **fieldMouse** | Minimal deployable ecoPrimals — smallest atomic/chimera for embedded/sensor/edge niches |
 | **primalSpring** | Coordination spring — validates ecosystem composition, graph execution, emergent systems, bonding |
+| **BYOB** | Bring Your Own Binaries — gen4 products consume pre-built primal binaries, never source |
+| **Niche YAML** | YAML metadata declaring a composition's organisms, interactions, and customization options |
+| **Primal launch profile** | TOML config for how a product launcher invokes each primal binary |
+| **sporeGarden product** | A gen4 tool composing primals for end users (e.g., esotericWebb, helixVision) |
+| **PrimalBridge** | Product-side JSON-RPC client wrapping capability calls to running primals |
+| **Primal resolution order** | 8-step discovery: env → capability → XDG → abstract → /tmp → registry → Neural API → TCP |
