@@ -61,15 +61,26 @@ ecoPrimals/                     # workspace root
 
 ## GitHub Org Mapping
 
-Each local directory maps to a GitHub org:
+There is no monorepo. Each primal, spring, and garden is a standalone repository
+under its respective GitHub organization — like independent organisms in an
+ecosystem. This aligns with the gen3 whitePaper principle: primals are sovereign
+entities that discover each other at runtime, never at compile time.
 
 | Local Directory | GitHub Org | Role |
 |----------------|------------|------|
-| `primals/` | ecoPrimals | Sovereign infrastructure |
-| `springs/` | syntheticChemistry | Science validation |
+| `primals/` | ecoPrimals | Sovereign infrastructure primals |
+| `springs/` | syntheticChemistry | Science validation springs |
 | `gardens/` | sporeGarden | Usable systems (creative surface) |
-| `infra/` | ecoPrimals | Ecosystem support |
+| `infra/` | ecoPrimals | Ecosystem support (wateringHole, plasmidBin, etc.) |
 | `sort-after/` | mixed (syntheticChemistry mostly) | Temporary parking |
+
+### Organizations
+
+| Org | Purpose | Visibility |
+|-----|---------|------------|
+| **ecoPrimals** | Primals + ecosystem infrastructure | Mix: public infra, private primals |
+| **syntheticChemistry** | Springs (science validation) + lab tools | Public springs, private lab tools |
+| **sporeGarden** | Gardens (creative surface, usable systems) | Public |
 
 ### Full Repo Inventory
 
@@ -115,12 +126,20 @@ Each local directory maps to a GitHub org:
 
 #### infra/ (ecoPrimals org)
 
-| Repo | GitHub | Visibility |
-|------|--------|------------|
-| wateringHole | ecoPrimals/wateringHole | public |
-| whitePaper | ecoPrimals/whitePaper | private |
-| plasmidBin | ecoPrimals/plasmidBin | public |
-| sporePrint | ecoPrimals/sporePrint | public |
+| Repo | GitHub | Visibility | Notes |
+|------|--------|------------|-------|
+| wateringHole | ecoPrimals/wateringHole | public | Ecosystem standards, handoffs, leverage guides |
+| whitePaper | ecoPrimals/whitePaper | private | gen0–gen4 papers |
+| plasmidBin | ecoPrimals/plasmidBin | public | Consumer-facing binary distribution surface |
+| sporePrint | ecoPrimals/sporePrint | public | Public verification portal |
+
+**plasmidBin dual structure**: The public `ecoPrimals/plasmidBin` repo is the
+consumer-facing distribution surface (per-primal directories with `metadata.toml`,
+`fetch.sh`, `harvest.sh`). The local `infra/plasmidBin/` directory in the
+development workspace contains operational tooling (`deploy_gate.sh`,
+`start_primal.sh`, `doctor.sh`, `ports.env`, actual binaries). Consumers clone
+the public repo; operators use the local infra tooling. Binary artifacts live in
+GitHub Releases on the public repo, not in git.
 
 #### sort-after/ (syntheticChemistry — lab tools, in stasis or gifted)
 
