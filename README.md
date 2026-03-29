@@ -323,12 +323,12 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 The ecoPrimals ecosystem evolves through four generations, each building on
 the previous:
 
-| Gen | Question | Answer | Artifacts |
-|-----|----------|--------|-----------|
-| **gen1** | Can we build it? | Yes — $11K cluster, fault-tolerant HPC, AI-assisted dev | NestGate, Squirrel, hardware fleet |
-| **gen2** | What should we build? | A sovereign protocol — 8 composable primals, AGPL as trust, BYOAI | biomeOS, BearDog, Songbird, Philosophy of Forgetting |
-| **gen3** | Does it work? | Yes — 12,510+ checks, 70+ papers, 7 springs, 14 primals | Springs, constrained evolution, SPRING/PRIMAL catalogs, thesis |
-| **gen4** | Who uses it? | Creatives, scientists, sovereign builders | sporeGarden products, standalone plasmidBin, creative surface |
+| Gen | Timeline | Question | Answer | Artifacts |
+|-----|----------|----------|--------|-----------|
+| **gen1** | Feb 2025 | Can we build it? | Yes — $11K cluster, fault-tolerant HPC, AI-assisted dev | NestGate, Squirrel, hardware fleet |
+| **gen2** | Jun 2025 | What should we build? | A sovereign protocol — 8 composable primals, AGPL as trust, BYOAI | biomeOS, BearDog, Songbird, Philosophy of Forgetting |
+| **gen3** | Feb 2026 | Does it work? | Yes — 12,510+ checks, 70+ papers, 7 springs, 14 primals | Springs, constrained evolution, SPRING/PRIMAL catalogs, thesis |
+| **gen4** | Mar 2026 | Who uses it? | Creatives, scientists, sovereign builders | sporeGarden products, standalone plasmidBin, creative surface |
 
 ### How the Generations Relate
 
