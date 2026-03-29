@@ -556,6 +556,9 @@ chains via sweetGrass and permanence via loamSpine.
 | **Delegation** | Primal routes work to another primal via IPC |
 | **Handoff** | Session continuity document in wateringHole |
 | **Fossil record** | Archived handoffs — the project's geological history |
+| **NestGate (primal)** | Data storage primal: content-addressed storage, capability-based service discovery |
+| **nestgate.io (domain)** | BirdSong beacon domain: Dark Forest gated public rendezvous at `api.nestgate.io`, served by biomeOS via Cloudflare Tunnel. See `DOMAIN_INFRASTRUCTURE.md` |
+| **Ancestor beacon** | Generic mito-beacon rendezvous that can host multiple family beacons and guide new nodes to correct genetics |
 | **Lysogeny** | Area denial through open AGPL prior art |
 | **scyBorg** | Triple copyleft: AGPL-3.0 (code) + ORC (mechanics) + CC-BY-SA (docs) |
 | **Symbiotic exception** | AGPL Section 7 grant to allies based on reciprocal benefit |

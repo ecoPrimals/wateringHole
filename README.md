@@ -444,6 +444,9 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` — Tower Atomic TLS guide
 - `btsp/BEARDOG_TECHNICAL_STACK.md` — BearDog cryptographic foundation
 
+### Domain & Beacon Infrastructure
+- `DOMAIN_INFRASTRUCTURE.md` — Domain architecture: nestgate.io (BirdSong beacon via Cloudflare Tunnel), primals.eco (public portal via GitHub Pages), LAN cloud multi-machine resilience, operational procedures
+
 ### GPU & Numerical Computing
 - `GPU_F64_NUMERICAL_STABILITY.md` — f64 precision lessons from hotSpring
 - `NUMERICAL_STABILITY_EVOLUTION_PLAN.md` — Fast AND safe math strategy
