@@ -35,7 +35,7 @@ one compilation model.
 | **caps** | 0.5.6 | Linux capabilities | Consider rustix alternative | P3 |
 | **console** | 0.15 | Terminal detection | is-terminal uses libc | May switch to rustix |
 | **getrandom** | 0.2-0.4 | Entropy source | Uses libc for /dev/urandom | May switch to rustix |
-| **parking_lot** | 0.9 | Futex | libc for syscalls | May switch to rustix |
+| ~~**parking_lot**~~ | ~~0.9~~ | ~~Futex~~ | **REMOVED S166** — replaced with `std::sync::RwLock` in orchestration | **Resolved** |
 | **socket2** | 0.5-0.6 | Socket creation | libc for socket syscalls | Tracks mio |
 | **signal-hook-registry** | 1.4 | Signal handling | libc for sigaction | Tracks tokio |
 | **polling** | 2.8 | Legacy polling backend | Being replaced by mio | N/A |

@@ -9,9 +9,28 @@
 
 ## Summary
 
-Deep debt execution session completing capability-based evolution, production stub completion, smart file refactoring, dependency evolution, and workspace-wide lint cleanup. Net -7200 lines across 123 files.
+Deep debt execution session: capability-based evolution, dependency sovereignty (crypto → BearDog, HTTP → Songbird), production stub completion, smart file refactoring, workspace lint cleanup, and root doc archival. Net -7200 lines across 123 files.
 
 ## Changes
+
+### Dependency Sovereignty (Crypto → BearDog, HTTP → Songbird)
+
+ToadStool no longer performs cryptographic operations or outbound HTTP locally. All such work is delegated to the appropriate primal via JSON-RPC over Unix sockets.
+
+| Dependency | Action | Replacement |
+|------------|--------|-------------|
+| `ed25519-dalek` | Removed from `toadstool` core + `toadstool-cli` | `crypto.sign`, `crypto.verify`, `crypto.public_key` JSON-RPC to BearDog |
+| `regex` | Removed from `toadstool` core | `str::contains()` case-insensitive pattern matching |
+| `parking_lot` | Removed from `toadstool-runtime-orchestration` | `std::sync::RwLock` |
+| `hmac` | Removed from `toadstool-distributed` | Was unused |
+| HTTP transport | Stub → real delegation | `comms.http_forward` JSON-RPC to Songbird coordination socket |
+| `mdns-sd` | Retained, feature-gated (`mdns`) | Appropriate cold-start bootstrap; disabled when Songbird is available |
+
+**`AuthBackend` trait extended** with `sign_payload(&self, payload: &str) -> Result<String>` and `public_key(&self) -> Option<String>`. `BearDogBackend` implements via RPC; `InMemoryAuthBackend` provides test mocks.
+
+**CLI `verify_ed25519_signature`** discovers crypto socket via `get_socket_path_for_capability("crypto")`, calls `crypto.verify`, returns `Ok(false)` when no crypto primal is reachable.
+
+**`HttpTransport::send_message`** discovers coordination socket via `get_socket_path_for_capability("coordination")`, forwards via `comms.http_forward`.
 
 ### Capability-Based Discovery (Breaking Pattern Change)
 - All hardcoded primal names (`beardog`, `songbird`, `nestgate`, `squirrel`) deprecated in favor of capability IDs (`crypto`, `coordination`, `storage`, `routing`)
@@ -45,17 +64,33 @@ All new files under 400 lines. Public API surfaces unchanged (re-exports from mo
 - `md5` crate → `md-5` (RustCrypto family, consistent with existing `sha2` usage)
 - `bollard` aligned to 0.18 workspace-wide (was 0.15 in workspace, 0.16 in container crate)
 
+### Documentation Cleanup
+- 6 root session trackers archived to `ecoPrimals/infra/wateringHole/fossilRecord/toadstool/` with `_S166` suffix: STATUS, EVOLUTION_TRACKER, QUICK_REFERENCE, SOVEREIGN_COMPUTE, SPRING_ABSORPTION_TRACKER, BREAKING_CHANGES
+- Root docs reduced to: README, CHANGELOG, CONTEXT, DOCUMENTATION, DEBT, NEXT_STEPS, LICENSE
+- Stale `[[bench]]` stanzas removed (testing, secure_enclave)
+
 ### Bug Fix
 - `UniversalCloudOrchestrator::analyze_deployment_requirements`: Provider selection now intersects with compliance-allowed providers and sorts deterministically (was HashMap iteration order dependent)
 
 ## Quality Gates
 - `cargo check --workspace --all-targets`: Clean
 - `cargo fmt --all`: Clean
-- `cargo test`: 3,947+ tests verified across modified crates, 0 failures
+- `cargo clippy --workspace --all-targets`: 0 new warnings
+- `cargo test`: all tests passing, 0 failures
 - Net: 123 files changed, +1,145/-8,334 lines
 
 ## Impact on Other Primals
-- **Capability socket names changed**: Other primals discovering toadStool sockets should use `BIOMEOS_*_SOCKET` env vars or capability-based filenames (`crypto.sock`, `coordination.sock`, etc.) instead of primal-named sockets (`beardog.sock`, `songbird.sock`)
+
+### BearDog (Crypto Primal)
+- ToadStool now **calls** BearDog for `crypto.sign`, `crypto.verify`, and `crypto.public_key` — BearDog must serve these methods on its Unix socket
+- Integration tests spanning ToadStool + BearDog should validate the JSON-RPC contract
+
+### Songbird (Network Primal)
+- ToadStool now **calls** Songbird for `comms.http_forward` — Songbird must serve this method on its coordination socket
+- `mdns-sd` retained for cold-start bootstrap when Songbird is not yet available
+
+### Socket Discovery
+- Other primals discovering toadStool sockets should use `BIOMEOS_*_SOCKET` env vars or capability-based filenames (`crypto.sock`, `coordination.sock`, etc.) instead of primal-named sockets
 - Legacy env vars (`BEARDOG_SOCKET`, `SONGBIRD_SOCKET`) still work as fallback
 - `bollard` version bump to 0.18 may affect container-using primals sharing the workspace
 
