@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for the ecoPrimals ecosystem — primals, springs, and gen4 products  
 **Audience**: Any primal, spring, or gen4 product at any point in its evolution — plus external audiences (PIs, students, builders, creatives, compliance)  
-**Last Updated**: March 28, 2026
+**Last Updated**: March 29, 2026
 
 ---
 
@@ -461,6 +461,11 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture (memory-bound digital objects)
 - `UPSTREAM_CONTRIBUTIONS.md` — Standalone crates for crates.io from ecoPrimals
 
+### Composition & Deployment
+- `COMPOSITION_PATTERNS.md` — **Canonical reference** for deploy graphs (`[[graph.node]]` vs `[[nodes]]`), niche YAML, primal launch profiles, and 8-step socket discovery resolution order
+- `SPOREGARDEN_DEPLOYMENT_STANDARD.md` — How gen4 products compose primals: BYOB model, esotericWebb reference implementation, environment contract, quality gates
+- `PRIMALSPRING_COMPOSITION_GUIDANCE.md` — primalSpring's composition validation capabilities
+
 ### Coordination & Patterns
 - `INTER_PRIMAL_INTERACTIONS.md` — Production interaction map and plans
 - `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
@@ -486,7 +491,7 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
-- `handoffs/*.md` — Active handoffs (70 current — latest version per primal/spring, cross-deploy substrate evolution)
+- `handoffs/*.md` — Active handoffs (88 current — latest version per primal/spring, cross-deploy substrate evolution, per-primal team debt handoffs)
 - `fossilRecord/` — 691 absorbed handoffs (Feb–Mar 2026) — superseded evolution history, preserved as permanent record
 
 ---
