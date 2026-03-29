@@ -8,6 +8,18 @@
 
 ---
 
+> **Implementation Note (March 2026):** The live binary distribution surface is
+> [ecoPrimals/plasmidBin](https://github.com/ecoPrimals/plasmidBin). That repo
+> implements the practical subset of this standard — per-primal `metadata.toml`,
+> `manifest.lock`, `fetch.sh` (consumer pull), `harvest.sh` (maintainer publish),
+> `start_primal.sh` (unified startup), and `ports.env` (canonical TCP ports).
+> The `wateringHole/genomeBin/manifest.toml` retains the full capability registry,
+> tier definitions, and architecture mappings as the reference specification.
+> `plasmidBin/` is the operational surface; this document is the architectural
+> standard it implements.
+
+---
+
 ## 📜 **Standard Declaration**
 
 **genomeBin Architecture** is hereby adopted as the official ecosystem standard for **autonomous cross-system deployment**. This standard builds upon ecoBin by adding deployment machinery, enabling **one-command installation** on ANY system with **zero manual configuration**.

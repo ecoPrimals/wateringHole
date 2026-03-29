@@ -3,7 +3,7 @@
 **Purpose**: Single-document reference for what ecoPrimals expects of every primal,
 spring, contributor, and session.  Read this first, read everything else second.
 
-**Last Updated**: March 15, 2026
+**Last Updated**: March 29, 2026
 
 ---
 
@@ -47,22 +47,24 @@ genomeBin (deployment)  → + Auto-detection, service integration, health monito
 **Expectation**: Every primal is a single self-contained binary. No shared libraries,
 no plugins, no dynamic loading. `cargo build --release` produces one artifact.
 
-### Genome Pinning (`plasmidBin/`)
+### Binary Distribution (`plasmidBin/`)
 
-When a primal or spring reaches a stable release, its genomeBin is pinned to
-`ecoPrimals/plasmidBin/`. This is the ecosystem-wide source of truth for
-production-ready binaries. Springs and biomeOS discover primal binaries from
-this directory via the `$ECOPRIMALS_PLASMID_BIN` discovery chain.
+When a primal or spring reaches a stable release, its binary is pinned to
+[ecoPrimals/plasmidBin](https://github.com/ecoPrimals/plasmidBin) — the
+public binary distribution surface. Consumers clone this repo, run `fetch.sh`
+to pull binaries from GitHub Releases, and use `start_primal.sh` to launch
+compositions.
 
-| Layer | Location | Role |
-|-------|----------|------|
-| genomeBin | `wateringHole/genomeBin/` | Distribution manifest, checksums, update policy |
-| biomeOS plasmidBin | `phase2/biomeOS/plasmidBin/` | Local cache for spore creation |
-| Root plasmidBin | `ecoPrimals/plasmidBin/` | Ecosystem-wide stable genomes |
+| Surface | Location | Role |
+|---------|----------|------|
+| Public distribution | `ecoPrimals/plasmidBin` (GitHub) | Per-primal `metadata.toml`, `manifest.lock`, `fetch.sh`, `harvest.sh`, `start_primal.sh`, `ports.env` |
+| Operator tooling | `infra/plasmidBin/` (dev workspace) | `deploy_gate.sh`, `doctor.sh`, actual binaries, SSH/ADB deployment scripts |
+| Registry reference | `wateringHole/genomeBin/manifest.toml` | Detailed capability registry, tier definitions, architecture mappings |
 
 **Standard practice**: After a successful audit or milestone, copy the release
-binary to `plasmidBin/primals/{name}` (for primals) or `plasmidBin/springs/{name}`
-(for springs), and update `plasmidBin/manifest.toml` + `plasmidBin/sources.toml`.
+binary to `plasmidBin/<name>/<name>` and run `harvest.sh` to update checksums,
+`metadata.toml`, `manifest.lock`, and create a GitHub Release with all binaries
+attached. See `plasmidBin/CONTEXT.md` for the full workflow.
 
 ## 3. Communication (IPC)
 
