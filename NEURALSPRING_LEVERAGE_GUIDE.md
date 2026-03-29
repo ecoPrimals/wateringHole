@@ -212,7 +212,7 @@ carry mathematical justification in their doc comments.
 
 ### 2.1 neuralSpring + barraCuda → Validated GPU Science
 
-barraCuda provides 806 WGSL shaders and the Tensor API. neuralSpring
+barraCuda provides 816 WGSL shaders and the Tensor API. neuralSpring
 validates that every GPU primitive produces correct results.
 
 **Pattern**: neuralSpring defines the expected output (from Python
@@ -326,7 +326,7 @@ neuralSpring (Layer 0 — WHAT to prove)
     Expected values, tolerances, provenance
     ↓
 barraCuda (Layer 1 — WHAT to compute)
-    806 WGSL shaders, CPU fallback
+    816 WGSL shaders, CPU fallback
     ↓
 toadStool (Layer 3-4 — WHERE to run)
     Hardware discovery, VFIO dispatch

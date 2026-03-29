@@ -16,7 +16,7 @@ primal in the ecosystem will produce an equivalent guide. Together, these
 guides form a combinatorial recipe book for emergent behaviors.
 
 barraCuda provides **sovereign mathematical computation** — GPU-accelerated
-scientific computing across any vendor's hardware using 806 WGSL shaders
+scientific computing across any vendor's hardware using 816 WGSL shaders
 compiled through wgpu. One source, any GPU, identical results. Pure Rust,
 zero unsafe, zero C application dependencies.
 
@@ -670,7 +670,7 @@ Spring asks → PrecisionBrain recommends → Spring adapts
 
 ### 6.2 Shader Composability
 
-barraCuda's 806 WGSL shaders are composable building blocks. Springs can
+barraCuda's 816 WGSL shaders are composable building blocks. Springs can
 chain them into multi-stage GPU pipelines:
 
 ```

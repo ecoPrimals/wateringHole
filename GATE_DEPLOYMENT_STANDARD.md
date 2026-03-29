@@ -239,7 +239,7 @@ definition and full repo inventory):
 ~/Development/
 └── ecoPrimals/                     # workspace root
     ├── primals/                    # all primals, flat
-    │   ├── barraCuda/              #   math engine (900+ WGSL shaders)
+    │   ├── barraCuda/              #   math engine (816 WGSL shaders)
     │   ├── bearDog/                #   cryptography
     │   ├── biomeOS/                #   Neural API orchestrator
     │   ├── coralReef/              #   sovereign shader compiler

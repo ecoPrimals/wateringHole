@@ -376,7 +376,7 @@ accurately.
 ```
 biomeOS (orchestration)
   ├─ toadStool (compute dispatch)
-  │    └─ barraCuda (806 WGSL shaders, GPU math)
+  │    └─ barraCuda (816 WGSL shaders, GPU math)
   ├─ wetSpring (life science, 23 capabilities)
   │    ├─ NestGate (NCBI data, content-addressed cache)
   │    ├─ petalTongue (live dashboard, 6 scenario types)

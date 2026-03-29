@@ -171,7 +171,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Pure mathematics — WGSL shaders, precision strategy, naga IR optimisation  
 **Phase**: Foundation  
-**Status**: Production Ready (A+) — v0.3.10 — FMA-evolved math — 3,623+ tests, 806 WGSL shaders, 1,060+ Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, NVVM device poisoning guard (all proprietary NVIDIA architectures), DF64 safety probing (`df64_arith`, `df64_transcendentals_safe`), `NvvmDf64TranscendentalPoisoning` workaround, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin), FMA policy, health module (pkpd, microbiome, biosignal), stable GPU special functions; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
+**Status**: Production Ready (A+) — v0.3.11 — FMA-evolved math — 4,162+ tests, 816 WGSL shaders, 1,090+ Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, NVVM device poisoning guard (all proprietary NVIDIA architectures), DF64 safety probing (`df64_arith`, `df64_transcendentals_safe`), `NvvmDf64TranscendentalPoisoning` workaround, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin), FMA policy, health module (pkpd, microbiome, biosignal), stable GPU special functions; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
 
 **Role**: BarraCuda is pure math. All math originates as WGSL shaders authored in f64 as the canonical precision. BarraCuda does not care about hardware — it writes the mathematics, coralReef compiles it, toadStool discovers and dispatches it. The precision tier (`Fp64Strategy`: f32 / f64 / df64) is the interface between barraCuda and coralReef. naga-IR optimisation (FMA fusion, DCE) operates on the math, not the hardware. Currently uses wgpu as a transitional dispatch substrate until coralReef's sovereign dispatch pipeline is integrated.
 
@@ -179,7 +179,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Core** | 806 WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce (incl. DF64 variants), broadcast |
+| **Core** | 816 WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce (incl. DF64 variants), broadcast |
 | **Linear Algebra** | solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
 | **Scientific Computing** | Crank-Nicolson PDE, Richards equation, MD forces (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics, HFB nuclear physics |
 | **Lattice QCD** | 14 GPU shaders + host: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop |
@@ -443,7 +443,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | neuralSpring | S174 (~1,385 tests, upstream contract pinning, zero allow, CONTRIBUTING/SECURITY, domain feature gates) |
 | wetSpring | V135 (1,891 tests, 91.20% coverage, NMF delegated upstream, 234 named tolerances, zero allow) |
 | airSpring | v0.10.0 (938 lib + 316 integration + 62 forge = 1,316 total tests, 91 binaries, 87 experiments, 95.66% coverage, barraCuda v0.3.10, three-tier capability discovery, zero unsafe/allow/C-deps) |
-| barraCuda | v0.3.10 (FMA-evolved math, 806 WGSL shaders, wgpu 28, nursery clippy, normalize_method, resilient GPU tests, AGPL-3.0-or-later) |
+| barraCuda | v0.3.11 (FMA-evolved math, 816 WGSL shaders, wgpu 28, nursery clippy, SovereignDevice capability-based naming, resilient GPU tests, 4,162+ tests, AGPL-3.0-or-later) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
 | primalSpring | v0.7.0 Phase 16.1 (53 experiments, 10 tracks, 378 tests, 72.5% coverage, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, centralized tolerances, primal_names module, coverage evolution, zero TODOs, zero warnings, zero unsafe, ecoBin compliant) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |

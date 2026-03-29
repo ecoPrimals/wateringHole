@@ -4,7 +4,7 @@
 **Date**: 2026-03-29
 **Sprint**: 22
 **Version**: 0.3.11
-**Scope**: hotSpring lattice QCD absorption (multi-shift CG, GPU-resident RHMC observables, fermion force sign fix), cross-spring shader/algorithm absorption (Perlin f32, LCG 32-bit, Lanczos eigenvectors), tolerance registry expansion
+**Scope**: hotSpring lattice QCD absorption (multi-shift CG, GPU-resident RHMC observables, fermion force sign fix), cross-spring shader/algorithm absorption (Perlin f32, LCG 32-bit, Lanczos eigenvectors), tolerance registry expansion, deep debt: CoralReefDevice→SovereignDevice capability-based rename, f64 GPU test evolution, multi-shift CG algorithm fix, coverage expansion, root doc + wateringHole synchronisation
 **Previous**: BARRACUDA_V0310_COMPLIANCE_COVERAGE_VALIDATION_FIRST_HANDOFF_MAR29_2026 (fossilRecord)
 
 ---
@@ -53,6 +53,32 @@ constants. All quality gates green.
 - **Lanczos eigenvector pipeline** (groundSpring): `lanczos_with_basis()` retains Krylov
   basis vectors Q, `lanczos_eigenvectors()` computes Ritz vectors via Q×z back-transform,
   returns top-k eigenpairs sorted by |eigenvalue|.
+
+### Deep Debt Evolution (Sprint 22b)
+
+- **`CoralReefDevice` → `SovereignDevice`**: Capability-based rename. `coral_reef_device.rs`
+  → `sovereign_device.rs`. `CoralBuffer` → `SovereignBuffer`. `TOADSTOOL_ADDR_ENV` →
+  `DISPATCH_ADDR_ENV`. `CORALREEF_ADDR_ENV` → `COMPILER_ADDR_ENV`. All doc comments evolved
+  from primal-name references (coralReef, toadStool) to capability references
+  (shader.compile primal, compute.dispatch primal). Backward-compat `#[deprecated]` type
+  alias preserved in `device/mod.rs`.
+- **f64 GPU test evolution**: 14+ GPU tests across `cubic_spline`, `diversity_fusion`,
+  `batched_multinomial`, `cdist_wgsl`, `seasonal_gpu`, `hargreaves_gpu`, `mc_et0_gpu`,
+  `richards_gpu`, `brent_gpu`, `linsolve_f64`, `inverse_f64`, `histogram` evolved from
+  `test_gpu_device()` / `get_test_device_if_gpu_available()` to `test_f64_device()` —
+  prevents false GPU-zeros failures on llvmpipe (no f64 shader capability).
+- **Multi-shift CG algorithm fix**: `multi_shift_cg_generic()` zeta recurrence corrected
+  to use `beta_prev` and proper `(1.0 - zeta_curr[s] / zeta_prev[s])` ratio in shift term.
+- **Perlin f32 shader assertion fix**: `assert!(!contains("f64"))` → `assert!(!contains("enable f64;"))`
+  to avoid false-positive from f64 in comments.
+- **Histogram test fix**: `get_device()` converted from sync to async, resolving Tokio
+  runtime conflict and enabling proper f64-capable device acquisition.
+- **Coverage expansion**: New unit tests for `cpu_reference::solve_cpu_thomas` (5 tests),
+  `workarounds::detect_workarounds` (8 tests), `quality_filter::QualityConfig` (3 tests).
+- **Root docs + wateringHole synchronised**: All `CoralReefDevice` → `SovereignDevice` in
+  README, CONTRIBUTING, START_HERE, STATUS, WHATS_NEXT, CHANGELOG, SOVEREIGN_PIPELINE_TRACKER,
+  PURE_RUST_EVOLUTION, specs/BARRACUDA_SPECIFICATION, specs/REMAINING_WORK. wateringHole
+  README, PRIMAL_REGISTRY, leverage guides updated to v0.3.11 / 816 shaders / 4,162+ tests.
 
 ### Tolerance Registry
 
