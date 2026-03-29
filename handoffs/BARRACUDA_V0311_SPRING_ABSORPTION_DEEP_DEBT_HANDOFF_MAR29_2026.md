@@ -107,12 +107,32 @@ constants. All quality gates green.
 - **Tolerance constants**: 42
 - **Unsafe code**: Zero in barracuda + barracuda-core; 1 targeted allow in barracuda-spirv
 
+### coralReef IPC Evolution (Sprint 22c)
+
+- **Newline-delimited JSON-RPC framing** (wateringHole v3.1 mandatory) — `jsonrpc_call` now
+  tries ndjson first (one JSON object per line, `\n` delimiter) and falls back to HTTP-wrapped
+  framing for pre-v3.1 endpoints. Aligns with coralReef Iter 69.
+- **Unix socket IPC transport** — `jsonrpc_call` supports `unix:/path/to/socket` addresses via
+  `tokio::net::UnixStream`. Lower latency than TCP for local IPC.
+- **Capability-domain socket discovery** — `discover_shader_compiler()` now scans
+  `$XDG_RUNTIME_DIR/biomeos/shader.sock` (coralReef's capability-domain symlink) before
+  falling back to JSON manifest scan and TCP port probe.
+- **`biomeos` namespace integration** — discovery scans both `ecoPrimals` and `biomeos`
+  directories under `$XDG_RUNTIME_DIR` for JSON manifests, resolving the namespace mismatch.
+- **Unix socket preference in manifests** — `read_jsonrpc_from_value` extracts `"unix"`
+  transport from Phase 10 manifests, preferring it over TCP when the socket exists.
+- **Response parsing factored** — `parse_jsonrpc_response` shared between ndjson, HTTP, and
+  Unix socket paths (DRY).
+- New tests: ndjson TCP roundtrip with mock server, Unix socket roundtrip with mock server,
+  `parse_jsonrpc_response` unit tests (ok/error/missing/invalid), Unix socket preference tests,
+  biomeos namespace discovery, constants coverage.
+
 ## Cross-Primal Pins
 
 | Primal | Version/Session | Status |
 |--------|-----------------|--------|
 | toadStool | S163 | Dependency audit, zero-copy, code quality |
-| coralReef | Phase 10 Iter 62 | Deep audit, coverage, hardcoding evolution |
+| coralReef | Phase 10 Iter 69 | Newline-delimited JSON-RPC, capability-domain symlinks, 1000 LOC, sovereign 7/10 |
 | hotSpring | v0.6.32 | Multi-shift CG + GPU-resident observables absorbed |
 | groundSpring | — | Lanczos eigenvectors absorbed |
 | ludoSpring | — | f32 Perlin + 32-bit LCG absorbed |
