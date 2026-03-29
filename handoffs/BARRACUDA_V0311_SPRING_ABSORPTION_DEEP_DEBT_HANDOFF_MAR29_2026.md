@@ -168,13 +168,31 @@ constants. All quality gates green.
   library exists, naga blocks transcendentals, coralReef bypasses), toadStool VFIO
   silicon exposure path (tensor cores, RT cores, TMU via sovereign pipeline).
 
+### PrecisionBrain-coralReef Integration & Dispatch Metadata (Sprint 22f)
+
+- **PrecisionBrain coralReef-aware routing** — `from_device_with_coral()` accepts
+  coral f64 lowering flag. Routes F64/DF64 tiers as safe when coralReef provides
+  polyfills, even when hardware probes fail. `needs_sovereign_compile()` tells
+  callers when to use coralReef IPC instead of wgpu/naga path.
+- **CoralF64Capabilities + structured capability query** — per-op f64 polyfill
+  availability (sin, cos, sqrt, exp2, log2, rcp, exp, log, composite_lowering).
+  `capabilities_structured()` queries full structured response from coralReef.
+- **PrecisionAdvice in compile requests** — tier, needs_transcendental_lowering,
+  df64_naga_poisoned, domain sent to coralReef for informed compilation decisions.
+- **Dispatch metadata wired** — gpr_count and workgroup sent in dispatch JSON-RPC
+  requests to toadStool (was dead_code, now live).
+- **DF64 sovereign routing** — compile_shader_df64 sends full DF64 source (with
+  transcendentals) to coralReef before stripping for wgpu fallback when naga poisons.
+- **12 new tests** — 4,206 total, 0 failures.
+
 ## Next Steps
 
-- P0: Route transcendental-heavy shaders through coralReef sovereign compiler when `has_f64_transcendentals() == false` (use `fp64_strategy: "software"` in compile requests)
-- P0: DF64 transcendentals via coralReef sovereign path (bypasses naga poisoning — complete library exists, just needs routing)
+- P0 (RESOLVED): Route transcendental-heavy shaders through coralReef sovereign compiler — `PrecisionBrain` coral-aware routing and `needs_sovereign_compile()` now handle this
+- P0 (RESOLVED): DF64 transcendentals via coralReef sovereign path — `compile_shader_df64` now sends full source to coralReef before naga stripping
 - P1: Tensor core GEMM routing for eigensolvers/preconditioners via toadStool VFIO + coralReef HMMA/WGMMA emission
 - P1: DF64 end-to-end NVK hardware verification
 - P1: Wire `gpu_multi_shift_cg` into full RHMC HMC trajectory (end-to-end lattice solve)
+- P1: Integration test: PrecisionBrain → coralReef compile → SovereignDevice dispatch end-to-end
 - P2: Coverage to 90% (requires f64-capable GPU hardware in CI)
 - P2: `BatchedTridiagEigh` GPU op (groundSpring candidate)
 - P3: Multi-GPU dispatch evolution
