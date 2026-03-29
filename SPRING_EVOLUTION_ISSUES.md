@@ -444,6 +444,35 @@ Resolved March 14, 2026. See Open Issues section for details.
 
 ---
 
+### ISSUE-022: Root Privilege Dependency — Sovereignty Violation
+
+**Reporter**: hotSpring (workspace migration 2026-03-28)
+**Affects**: coralReef (coral-glowplug, coral-ember), all springs using GPU hardware
+**Priority**: P2 — architectural debt against sovereignty
+
+**Problem**: coralReef's GPU lifecycle management requires root privilege at
+multiple points: VFIO group access, PCI driver bind/unbind via sysfs, systemd
+service execution, udev rule deployment, and a sudoers file granting specific
+sysfs write access. Every `pkexec`, `sudo`, or `CAP_SYS_ADMIN` requirement is
+a point where the primal is bound to the host kernel's permission model rather
+than operating as a sovereign, self-contained process.
+
+**Proposed fix**: Evolve toward fd-passing architecture. coral-ember's
+SCM_RIGHTS pattern (passing pre-opened VFIO fds to glowplug) is the right
+direction. End state: primals receive pre-opened device handles at startup
+and never touch sysfs or require elevated privilege. Intermediate step: a
+single privileged launcher (thin, auditable) that opens devices and passes
+fds to unprivileged primal processes. agentReagents VM isolation is the
+containment strategy for operations that cannot yet shed root.
+
+**Evidence**: `springs/hotSpring/scripts/boot/coralreef-sudoers`,
+`springs/hotSpring/scripts/deploy_glowplug.sh`,
+`infra/wateringHole/SOVEREIGN_COMPUTE_EVOLUTION.md` (Evolution Gap section).
+
+**Status**: OPEN
+
+---
+
 ## Contributing
 
 Any Spring can add issues. Use the format:

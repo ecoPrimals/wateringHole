@@ -46,13 +46,13 @@ ecoPrimals/                     # workspace root
     blueFish/                   #   data pipeline for PIs
     esotericWebb/               #   cross-evolution CRPG
   infra/                        # ecosystem support
+    agentReagents/              #   VM image builder (cloud-init manifests)
+    benchScale/                 #   VM provisioner (libvirt validation)
     plasmidBin/                 #   binary distribution
     sporePrint/                 #   public verification portal
     wateringHole/               #   standards and handoffs
     whitePaper/                 #   gen0-gen4 papers
   sort-after/                   # unclear placement, revisit later
-    agentReagents/
-    benchScale/
     ionChannel/
     rustChip/
 ```
@@ -124,10 +124,12 @@ entities that discover each other at runtime, never at compile time.
 | esotericWebb | sporeGarden/esotericWebb | public |
 | blueFish | syntheticChemistry/blueFish (pending transfer to sporeGarden) | public |
 
-#### infra/ (ecoPrimals org)
+#### infra/ (ecoPrimals org + syntheticChemistry lab tools)
 
 | Repo | GitHub | Visibility | Notes |
 |------|--------|------------|-------|
+| agentReagents | syntheticChemistry/agentReagents | public | VM image builder, gate templates, reagent storage |
+| benchScale | syntheticChemistry/benchScale | public | VM provisioner, lab substrate, JSON-RPC server |
 | wateringHole | ecoPrimals/wateringHole | public | Ecosystem standards, handoffs, leverage guides |
 | whitePaper | ecoPrimals/whitePaper | private | gen0–gen4 papers |
 | plasmidBin | ecoPrimals/plasmidBin | public | Consumer-facing binary distribution surface |
@@ -145,8 +147,6 @@ GitHub Releases on the public repo, not in git.
 
 | Repo | GitHub | Visibility | Status | Purpose |
 |------|--------|------------|--------|---------|
-| agentReagents | syntheticChemistry/agentReagents | private | Stasis | VM image builder (YAML manifests, cloud-init). Built for local rustdesk testing when Cosmic broke passthrough. Future: syntheticChemistry lab validation tool. |
-| benchScale | syntheticChemistry/benchScale | private | Stasis | VM provisioner (libvirt, CloudInit). Built alongside agentReagents for the same rustdesk testing. Future: syntheticChemistry substrate validation tool. |
 | ionChannel | syntheticChemistry/ionChannel | private | Evolving | Secure connection channel. Started as K-NOME test project solving rustdesk/Cosmic passthrough. May evolve into a gated secure Linux connection point for primals, or remain a science tool for validating other systems. |
 | rustChip | syntheticChemistry/rustChip | public | Active (gift) | NPU/Akida characterization toolkit. Extracted from toadStool's metalForge subsystem, evolves via hotSpring experiments. Public gift to Akida — gives them hardware access without primal dependency. |
 
