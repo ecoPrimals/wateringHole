@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for the ecoPrimals ecosystem — primals, springs, and gen4 products  
 **Audience**: Any primal, spring, or gen4 product at any point in its evolution — plus external audiences (PIs, students, builders, creatives, compliance)  
-**Last Updated**: March 29, 2026
+**Last Updated**: March 30, 2026
 
 ---
 
@@ -491,7 +491,9 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
-- `handoffs/*.md` — Active handoffs (94 current — latest version per primal/spring, cross-deploy substrate evolution, per-primal team debt handoffs)
+- `handoffs/*.md` — Active handoffs (107 current — latest version per primal/spring, cross-deploy substrate evolution, per-primal team debt handoffs)
+- `HOTSPRING_SOVEREIGN_PIPELINE_REGROUP_HANDOFF_MAR30_2026.md` — Sovereign GPU pipeline status, validation matrix, DRM-from-both-sides, upstream integration
+- `CORALREEF_WARM_HANDOFF_LIVEPATCH_HANDOFF_MAR30_2026.md` — Warm handoff code changes (coral-driver/ember/glowplug), kernel livepatch, key bug fixes
 - `fossilRecord/` — 691 absorbed handoffs (Feb–Mar 2026) — superseded evolution history, preserved as permanent record
 
 ---
