@@ -491,7 +491,7 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
-- `handoffs/*.md` — Active handoffs (91 current — latest version per primal/spring, cross-deploy substrate evolution, per-primal team debt handoffs)
+- `handoffs/*.md` — Active handoffs (94 current — latest version per primal/spring, cross-deploy substrate evolution, per-primal team debt handoffs)
 - `fossilRecord/` — 691 absorbed handoffs (Feb–Mar 2026) — superseded evolution history, preserved as permanent record
 
 ---

@@ -123,15 +123,49 @@ Full details: `PRIMALSPRING_V080_GAP_MAP_MAR29_2026.md`
 
 ---
 
+## Phase 23c: NUCLEUS Atomics + biomeOS Substrate
+
+### biomeOS as Orchestration Substrate
+
+biomeOS Neural API is now an explicit substrate in every NUCLEUS composition:
+
+- **`SubstrateHealth`** — new struct in `CompositionResult` tracking Neural API health independently
+- **`AtomicType::substrate_capabilities()`** — returns `["orchestration", "graph.deploy", "graph.status", "graph.rollback", "health.liveness"]`
+- **`AtomicType::substrate_primal()`** — returns `"biomeos"`
+- **`probe_substrate()`** — discovers + health-checks Neural API, populates `CompositionResult.substrate`
+- **`validate_composition()` / `validate_composition_by_capability()`** — `all_healthy` now requires both primal + substrate health
+
+### Canonical Deploy Graph Updates
+
+All 4 canonical NUCLEUS atomic deploy graphs now include a Phase 0 `biomeos_neural_api` node:
+- `tower_atomic_bootstrap.toml` (v0.4.0) — + biomeos node, Tower+biomeOS
+- `node_atomic_compute.toml` (v0.4.0) — + biomeos node, + `args = ["server"]`
+- `nest_deploy.toml` (v0.5.0) — + biomeos node, + squirrel, + `args = ["server"]`
+- `nucleus_complete.toml` (v0.5.0) — + biomeos node, NestGate/ToadStool/Squirrel now `required = true`
+
+### Composition Alignment
+
+- **Nest**: `[beardog, songbird, nestgate]` → `[beardog, songbird, nestgate, squirrel]` (matches biomeOS `nucleus --mode nest`)
+- **Full NUCLEUS**: Core 5 (BearDog, Songbird, NestGate, ToadStool, Squirrel) are `required = true` in graph; provenance trio remains optional
+- **`composition.tower_squirrel_health`**: Now wired in `primalspring_primal` dispatch (was advertised but unimplemented)
+
+### New Validation Graph
+- `nucleus_atomics_validate.toml` — validates all 4 NUCLEUS tiers + Tower+Squirrel overlay + structural graph validation + biomeOS substrate
+
+---
+
 ## Metrics
 
-| Metric | Before (v0.7.0) | After (v0.8.0) |
-|--------|-----------------|-----------------|
+| Metric | Before (v0.7.0) | After (v0.8.0c) |
+|--------|-----------------|------------------|
 | Version | 0.7.0 | 0.8.0 |
 | Experiments | 67 | 67 |
-| Tests | 413 | 413 |
-| Deploy graphs | 59 | 60 |
-| Spring validation graphs | 7 | 8 |
-| wateringHole handoffs (infra) | 85 | 89 |
+| Tests | 413 | 402 |
+| Deploy graphs | 59 | 63 |
+| Spring validation graphs | 7 | 11 |
+| Method constants | 37 | 63 (18 domains) |
+| Capability registry | 37 | 47 |
+| wateringHole handoffs (infra) | 85 | 91 |
 | Upstream fixes delivered | 0 | 6 (3 BearDog, 1 Songbird, 1 biomeOS, 1 primalSpring) |
 | Standards documents created | 0 | 2 |
+| biomeOS substrate nodes | 0 | 4 (all canonical deploy graphs) |
