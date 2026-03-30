@@ -4,7 +4,7 @@
 **From:** ludoSpring V35 (Track 26: Primal Composition Validation)
 **To:** barraCuda, biomeOS, coralReef, toadStool, primalSpring, esotericWebb, Squirrel, petalTongue, all primals
 **Previous:** `LUDOSPRING_V32_COMPREHENSIVE_AUDIT_DEEP_DEBT_HANDOFF_MAR29_2026.md`
-**Status:** Gap discovery complete — 5 composition experiments run against live primals
+**Status:** Gap discovery complete — 5 composition experiments, V35.3 ecosystem evolution review appended
 
 ---
 
@@ -294,3 +294,57 @@ From running live composition against biomeOS:
 | P2 | Nucleus vs runtime graph separation | biomeOS | exp087 | Bundle nucleus, accept runtime via API |
 | P2 | Compile→dispatch E2E chain | coralReef + toadStool | exp085 | Full pipeline with binary handoff |
 | P3 | Neural API `health.liveness` missing | biomeOS | exp087 | Add to health module |
+
+---
+
+## V35.3 Addendum — Ecosystem Evolution Review (March 30, 2026)
+
+### Composition Trajectory
+
+| Version | Pass Rate | Key Advance |
+|---------|-----------|-------------|
+| V35 (initial) | 5/47 (11%) | First live run — most failures were local experiment errors |
+| V35.1 | 21/50 (42%) | barraCuda IPC confirmed (30 methods since Sprint 23), coralReef raw UDS confirmed |
+| V35.2 | **34/50 (68%)** | Local debt resolved: `graph.save` key, capability domain routing, dry-run logic |
+| V35.3 (expected) | **38–46/51 (75–90%)** | biomeOS v2.80 resolves 3/4 remaining gaps |
+
+### Gap Resolution Status (V35.3)
+
+| Original Gap | Status | Resolution | Version |
+|-------------|--------|------------|---------|
+| P0: barraCuda not in plasmidBin | **RESOLVED** | barraCuda built locally; 30 methods on IPC since Sprint 23 | Sprint 23+ |
+| P0: Primals not registered with Neural API | **MOSTLY RESOLVED** | biomeOS v2.80 bootstrap graph has `register_barracuda` (30 method translations) + `register_coralreef`. Auto-discovery improved with `is_known_primal()` filter. **Needs live revalidation** | v2.80 |
+| P1: coralReef HTTP vs raw JSON-RPC on UDS | **RESOLVED** | coralReef Iter 70 uses raw newline-delimited on UDS | Iter 70 |
+| P1: barraCuda math not on JSON-RPC | **RESOLVED** | 30 methods registered: math/tensor/stats/noise/activation/rng | Sprint 23+ |
+| P1: Tensor element-wise ops not on IPC | **RESOLVED** | All ops work: add, scale, clamp, reduce, sigmoid | Sprint 23+ |
+| P2: Continuous executor stub | Open | `graph.start_continuous` still needs node dispatch | — |
+| P2: Nucleus vs runtime graph separation | **RESOLVED** | biomeOS v2.80 bundles bootstrap via `include_str!()`, accepts runtime via `graph.save` with `{"toml": "..."}` | v2.80 |
+| P2: Compile→dispatch E2E chain | Open | Sovereign dispatch readback needs coralReef driver (hardware gap) | — |
+| P3: Neural API `health.liveness` missing | Open | Not yet observed in v2.80 | — |
+
+### Local ludoSpring Fixes (V35.2–V35.3)
+
+These were experiment-side errors, not primal gaps:
+- `graph.save` parameter key: `"graph_toml"` → `"toml"` (biomeOS v2.80 schema)
+- Capability domain routing: `"compute"` → `"tensor"`/`"math"` (biomeOS now has explicit barraCuda domains)
+- Added `capability_call_math` check to exp087 (math → barraCuda routing)
+- barraCuda `for_precision_tier` gated with `#[cfg(feature = "gpu")]` (Sprint 24 regression)
+
+### Remaining Genuine Gaps (V35.3)
+
+| Gap | Owner | What's Needed | Experiment |
+|-----|-------|--------------|------------|
+| Auto-discovery effectiveness | biomeOS | `is_known_primal()` may not match all socket names; needs live test | exp087, exp088 |
+| Sovereign dispatch readback | toadStool + coralReef | coralReef driver for GPU readback (hardware) | exp085 |
+| `graph.execute` end-to-end | biomeOS | capability.call per node in DAG execution | exp087, exp088 |
+| 60Hz composition throughput | biomeOS | <16ms per capability.call hop | exp088 |
+| `ludospring_validate.toml` stale | primalSpring | Update from V32-era to V35.3 composition experiments | — |
+
+### Cross-Primal Overstep Audit
+
+V35.3 conducted a soft audit of all atomic primals for domain overstep. Findings published in `PRIMAL_RESPONSIBILITY_MATRIX.md` (wateringHole root). Key items:
+- **nestGate**: Local crypto (should delegate to bearDog), discovery (should delegate to songBird/biomeOS), full network stack (should delegate to songBird), MCP (should delegate to Squirrel via biomeOS)
+- **toadStool**: Discovery relay, shader compile proxy, AI/Ollama inference, broad security stack
+- **bearDog**: HTTP REST + TCP JSON-RPC server, mDNS/DNS-SD discovery, AI-driven optimization
+- **songBird**: Lingering local crypto (`sha2`, `hmac`, `ed25519-dalek`), embedded `sled` persistence
+- **coralReef/glowplug**: Dispatch boundary deferred — actively in GPU development

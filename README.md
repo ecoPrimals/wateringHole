@@ -469,6 +469,7 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 ### Coordination & Patterns
 - `INTER_PRIMAL_INTERACTIONS.md` — Production interaction map and plans
 - `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
+- `PRIMAL_RESPONSIBILITY_MATRIX.md` — **Cross-primal concern ownership matrix** — which primal OWNS each domain, where OVERSTEP exists, and delegation guidance for deploy graph design. Source: ludoSpring V35.3 ecosystem evolution review.
 - `IPC_COMPLIANCE_MATRIX.md` — Per-primal IPC compliance tracking (wire framing, sockets, health, port, standalone, substrate)
 - `SPRING_AS_PROVIDER_PATTERN.md` — biomeOS capability registration
 - `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Provenance trio integration
