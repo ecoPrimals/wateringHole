@@ -12,8 +12,10 @@
 | Composition | Members | Purpose |
 |-------------|---------|---------|
 | **Tower Atomic** | bearDog + songBird | Security + Network foundation |
+| **Node Atomic** | Tower + toadStool (+ barraCuda for math, coralReef for shader compilation) | Adds compute/hardware dispatch |
 | **Nest Atomic** | Tower + nestGate | Adds storage/permanence |
-| **Meta-tier** | biomeOS, Squirrel, petalTongue | Orchestration, AI, Visualization — interact with and extend all atomics |
+| **NUCLEUS Complete** | Tower + Node + Nest + Squirrel | Full deployment: all 3 atomics + AI |
+| **Meta-tier** | biomeOS, Squirrel, petalTongue | Orchestration, AI, Visualization — interact with and extend all atomics, not bound to any single one |
 
 ---
 
