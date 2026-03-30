@@ -1,9 +1,9 @@
-# hotSpring → coralReef / biomeGate: NVIDIA GPFIFO Pipeline Operational
+# hotSpring → coralReef / biomeGate: NVIDIA Sovereign Compute Fully Operational
 
-**Date:** 2026-03-30
+**Date:** 2026-03-30 (updated — compute dispatch proven, store-42 PASS)
 **From:** hotSpring (strandgate — RTX 3090, RX 6950 XT)
 **To:** coralReef (all teams), biomeGate (Titan V / Tesla K80 GPU cracking)
-**Status:** NVIDIA command submission pipeline fully operational on RTX 3090
+**Status:** NVIDIA sovereign compute dispatch **proven end-to-end** on RTX 3090 (SM86)
 
 ---
 
@@ -85,6 +85,75 @@ Root Client → Device → Subdevice → VOLTA_USERMODE_A (doorbell)
 → Write GP_PUT to USERD → Ring doorbell (USERMODE+0x90 with token)
 ```
 
+### 9. Pushbuf Method Offsets — All 5 Wrong (Kepler→Ampere)
+
+`pushbuf.rs` used Kepler-era method offsets for Ampere. All five corrected:
+
+| Method | Old (Kepler) | New (Ampere) |
+|--------|-------------|--------------|
+| INVALIDATE_SHADER_CACHES | 0x0088 | 0x021C |
+| SET_SHADER_LOCAL_MEMORY_WINDOW_A | 0x077C | 0x07B0 |
+| SET_SHADER_LOCAL_MEMORY_WINDOW_B | 0x0780 | 0x07B4 |
+| SEND_PCAS_A | 0x0D00 | 0x02B4 |
+| SEND_SIGNALING_PCAS_B | 0x0D04 | 0x02BC |
+
+Added `SEND_SIGNALING_PCAS2_B` (0x02C0) for Ampere+.
+
+### 10. SEND_PCAS Protocol
+
+`SEND_PCAS_A` takes `qmd_addr >> 8` (not raw address). `SEND_SIGNALING_PCAS2_B`
+(Ampere+) and `SEND_SIGNALING_PCAS_B` (Volta/Turing) both take `0x3` control flags.
+
+### 11. QMD v3.0 Field Layout (Complete Rewrite)
+
+Ampere QMD v3.0 has fundamentally different bit positions from v2.1 (Volta).
+`build_qmd_v30` was completely rewritten against `NVC6C0_QMDV03_00` to place all
+fields correctly. Added missing fields: `SM_GLOBAL_CACHING_ENABLE`,
+`MIN/MAX/TARGET_SM_CONFIG_SHARED_MEM_SIZE`, `API_VISIBLE_CALL_LIMIT`.
+
+### 12. Subchannel Mismatch — Sub 0 Reserved for GR (0xC797)
+
+RM/GSP pre-binds the GR class (0xC797 AMPERE_B) to subchannel 0. Our compute class
+(0xC7C0) on subchannel 0 triggered `Xid 13: Subchannel Mismatch`. Fix: use
+**subchannel 1** for all compute methods.
+
+### 13. LOCAL_MEM_WINDOW — 32-bit, Not 64-bit
+
+`LOCAL_MEM_WINDOW_VOLTA` was `0xFF00_0000_0000_0000` (64-bit); correct value is
+`0xFF00_0000` (32-bit). SET_SHADER_LOCAL_MEMORY_WINDOW_A takes the high 32 bits
+(always 0), B takes the low 32 bits.
+
+### 14. SPH Header Removal for Compute Shaders — ROOT CAUSE OF FINAL FAILURE
+
+NVIDIA compute shaders launched via QMD do **not** use a Shader Program Header.
+`PROGRAM_ADDRESS` points to the first instruction. The compiler was prepending a
+128-byte SPH, which the GPU executed as invalid instructions → `Xid 13: Illegal
+Instruction Encoding`. Fix: `NvidiaBackend::compile` now skips the SPH for compute
+shaders, matching NAK/NVK behavior.
+
+---
+
+## GPFIFO vs VFIO: Architectural Comparison
+
+Both paths share the same NVIDIA PFIFO hardware mechanism (GPFIFO ring buffer →
+USERD doorbell → PBDMA → GPU engines). The difference is who manages the channel:
+
+| Aspect | GPFIFO (RM/UVM) | VFIO (Sovereign) |
+|--------|-----------------|-------------------|
+| **GPU init** | Proprietary RM + GSP handle it | BAR0 MMIO + firmware blobs + manual PFIFO setup |
+| **Channel setup** | RM ioctls (alloc device/subdevice/vaspace/channel/compute) | VfioChannel: build instance block, runlist, V2 page tables, MMU fault buffers from BAR0 |
+| **Address space** | RM virtual memory + `rm_map_memory_dma` → GPU VA | IOMMU IOVA mapping + software page tables |
+| **Buffer alloc** | RM sysmem alloc + GPU VA mapping + CPU mmap per buffer | DMA buffer with direct CPU access (no RM) |
+| **Doorbell** | Write work_submit_token to VOLTA_USERMODE mmap | Write channel_id to BAR0 offset 0x81_0090 |
+| **Sync** | Poll GP_GET on USERD mmap + error notifier | Poll GP_GET on DMA buffer + MMU fault diagnostics |
+| **GR context** | RM/GSP sets up GR (golden context, FECS methods) | Must run FECS channel methods from firmware blobs |
+| **System needs** | nvidia kernel driver loaded, `/dev/nvidiactl` + `/dev/nvidia-uvm` | VFIO-PCI bound, IOMMU enabled, firmware in `/lib/firmware/nvidia/` |
+
+**Key insight for abstraction:** The QMD, push buffer, and SEND_PCAS protocol are
+**identical** between both paths. The only differences are in channel/memory management.
+This means coralReef's `pushbuf.rs`, `qmd.rs`, and `shader_header.rs` serve both
+paths without modification.
+
 ## Impact on biomeGate (Titan V / Tesla K80)
 
 **This directly unblocks GPU cracking work:**
@@ -129,17 +198,32 @@ coralReef's sovereign compiler also progressed:
 - `src/codegen/naga_translate/expr.rs` — Uniform load ordering
 - `src/codegen/ops/system.rs` — num_workgroups builtin
 
+### coral-driver
+- `src/nv/pushbuf.rs` — Method offsets, PCAS protocol, subchannel 0→1
+- `src/nv/qmd.rs` — Complete v3.0 rewrite with correct bit positions
+- `src/nv/mod.rs` — LOCAL_MEM_WINDOW_VOLTA corrected
+- `src/nv/vfio_compute/mod.rs` — LOCAL_MEM_WINDOW_VOLTA corrected
+
+### coral-reef
+- `src/backend.rs` — Skip SPH for compute shaders (root cause)
+
 ## Test Results
 
-- **350** coral-driver unit tests pass (0 failures)
-- **4/4** NVIDIA E2E tests pass (device open, alloc/free, sync, SM86 compilation)
-- **14/15** hardware-requiring tests pass (1 pre-existing BAR0 issue)
+- **353** coral-driver unit tests pass (0 failures)
+- **1,314** coral-reef unit tests pass (0 failures)
+- **4/4** hardware parity tests pass:
+  - `parity_hw_nvidia_store42_dispatch` — **PASS** (readback = 42)
+  - `parity_hw_amd_store42_dispatch` — **PASS**
+  - `parity_hw_dual_card_store42` — **PASS** (both GPUs)
+  - `parity_hw_dual_card_vecadd` — **PASS** (1024 elements, 0 mismatches)
 - NOP smoke test: GP_GET advances after doorbell ring ✓
+- Compute dispatch: WGSL → SASS → QMD → SEND_PCAS → GPU writes 42 → CPU reads 42 ✓
 
 ## Next Steps
 
-- [ ] biomeGate: Apply channel init sequence to Titan V / K80 path
-- [ ] Dispatch actual compute shaders (not just NOP) on NVIDIA
-- [ ] AMD: Fix EXEC masking for divergent control flow
-- [ ] Wire QCD physics validation through sovereign pipeline (both vendors)
-- [ ] Profile silicon utilization on sovereign path vs wgpu/Vulkan path
+- [ ] biomeGate: Apply channel init sequence + all pushbuf/QMD fixes to Titan V / K80
+- [x] ~~Dispatch actual compute shaders on NVIDIA~~ — DONE (store-42, vecadd)
+- [ ] Run full QCD physics kernels through sovereign pipeline (both vendors)
+- [ ] Profile silicon utilization: tensor cores, RT cores, scheduler occupancy
+- [ ] AMD: Fix EXEC masking for divergent wavefront control flow
+- [ ] Older card abstraction: pushbuf/QMD shared layer is proven, channel mgmt differs
