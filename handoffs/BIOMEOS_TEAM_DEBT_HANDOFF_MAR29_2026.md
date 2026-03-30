@@ -1,157 +1,149 @@
 # biomeOS Team Debt Handoff
 
-**Date:** 2026-03-29
+**Date:** 2026-03-29 (updated: biomeOS v2.78 resolved all blocking debt)
 **From:** primalSpring ecosystem audit
 **To:** Dedicated biomeOS team
 **Scope:** All known debt categorized by severity and type
-**Resolution Status:** All blocking and significant items resolved in v2.78
 
 ---
 
 ## Context
 
 biomeOS is the composition primal — it orchestrates all other primals via the
-Neural API. As of v2.78, all blocking debt items identified in the primalSpring
-audit have been resolved. The Dark Forest gate is real and functional. NUCLEUS
-CLI mode works end-to-end with socket-based health checks. Neural API routing
-table covers 26 domains with 290+ translations.
+Neural API. Its debt profile is different from BearDog/Songbird: most gaps are
+in orchestration features (rollback, remote acquisition, federation manifests)
+rather than core crypto or network protocol.
+
+The Dark Forest gate is real and functional. NUCLEUS CLI mode works end-to-end
+with socket-based health checks. Neural API routing table covers 26 domains
+with 290+ translations.
 
 ---
 
-## Blocking — ALL RESOLVED (v2.78)
+## Blocking — ALL RESOLVED in v2.78
 
-### B-1: Graph Rollback ✅ RESOLVED
+### B-1: Graph Rollback — RESOLVED
 
-Real checkpoint/restore implemented. `rollback()` now:
-1. Gets completed nodes in reverse topological order
-2. Sends `lifecycle.stop` for launch nodes, `capability.unregister` for registration nodes
-3. `save_checkpoint_before_phase()` persists statuses + outputs to `execution_state.json`
-4. `restore_from_checkpoint()` recovers state
+Real checkpoint/restore with reverse topological `lifecycle.stop` + `capability.unregister`.
+**Location:** `crates/biomeos-atomic-deploy/src/neural_executor.rs` — `save_checkpoint_before_phase()`, `restore_from_checkpoint()`, `rollback()`
 
-**Location:** `crates/biomeos-atomic-deploy/src/neural_executor.rs`
+### B-2: DNS-Based Discovery — RESOLVED
 
-### B-2: DNS-Based Discovery ✅ RESOLVED
+mDNS/DNS-SD (RFC 6762) over `_biomeos._tcp.local` with SRV/TXT parsing, health probes, and LAN fallback.
+**Location:** `crates/biomeos-core/src/universal_biomeos_manager/discovery/dns_sd.rs` (663 lines)
 
-mDNS/DNS-SD implemented over UDP multicast (`224.0.0.251:5353`):
-- Queries `_biomeos._tcp.local` PTR records
-- Parses SRV/TXT records with DNS name compression
-- `health.liveness` JSON-RPC probes on discovered endpoints
-- Fallback: loopback, local `/24` subnet probes on port 9100
+### B-3: Remote Primal Acquisition — RESOLVED
 
-**Location:** `crates/biomeos-core/src/universal_biomeos_manager/discovery/dns_sd.rs`
+GitHub releases (curl subprocess) + HTTP downloads (hyper pure Rust) + SHA256 verification + XDG cache.
+**Location:** `crates/biomeos-core/src/primal_registry/remote.rs` (337 lines)
 
-### B-3: Remote Primal Acquisition ✅ RESOLVED
+### B-4: Federation Manifest Deployment — RESOLVED
 
-GitHub releases + HTTP downloads implemented:
-- `curl` subprocess for HTTPS (GitHub API, maintains zero C-dep linking)
-- `hyper` pure Rust for `http://` downloads
-- SHA256 checksum verification, XDG-compliant cache directory
-- Binaries made executable after download
-
-**Location:** `crates/biomeos-core/src/primal_registry/remote.rs`
-
-### B-4: Federation Manifest Deployment ✅ RESOLVED
-
-YAML federation manifests with topology validation:
-- `FederationManifest`, `GateManifest`, `TrustEdge` types
-- Acyclic trust graph validation via DFS
-- Per-gate `federation.configure` + `federation.join` JSON-RPC deployment
-- `federation.health_check` across deployed gates
-
-**Location:** `crates/biomeos-federation/src/modules/manifest.rs`
+YAML manifest parsing, topology validation (acyclic trust graph), per-gate JSON-RPC `federation.configure` + `federation.join`.
+**Location:** `crates/biomeos-federation/src/modules/manifest.rs` (555+ lines)
 
 ---
 
-## Significant — ALL RESOLVED (v2.78)
+## Significant (architecture, ops, or quality)
 
-### S-1: Neural API Handler Depth ✅ AUDITED
+### S-1: Neural API Handler Depth Varies
 
-Route table audited — all routes have real implementations. Thin routes are
-intentional `capability.call` delegation (biomeOS routes, primals execute).
+The routing table in `routing.rs` (~82-212) is comprehensive — graphs, topology,
+niches, lifecycle, protocol, capabilities, inference, MCP, agents, mesh. But some
+routes are thin wrappers around `capability.call` while others have deep
+implementations. A team should audit handler depth per domain.
 
-### S-2: Health Check in Deploy-Graph Path ✅ RESOLVED
+**Location:** `crates/biomeos-atomic-deploy/src/neural_api_server/routing.rs`
+**Action:** Create a coverage matrix: route name -> handler -> depth (full/thin/stub)
 
-`node_health_check_all` now sends `health.liveness` JSON-RPC probes (3s timeout)
-to every discovered socket, replacing socket-existence-only checks.
+### S-2: Superficial Health Check in One Path — RESOLVED in v2.78
+
+Deploy-graph health path evolved from socket-existence to real JSON-RPC
+`health.liveness` probes with 3s timeout.
 
 **Location:** `crates/biomeos-atomic-deploy/src/neural_executor_node_impls.rs`
 
-### S-3: Harvest Tool GitHub Path ✅ RESOLVED
+### S-3: Harvest Tool GitHub Path — RESOLVED in v2.78
 
-GitHub acquisition implemented: curl + asset matching + SHA256 + manifest provenance.
+GitHub acquisition implemented — curl + asset matching + SHA256 checksum + manifest provenance.
 
 **Location:** `tools/harvest/src/main.rs`
 
-### S-4: Large Ignored Test Surface — DOCUMENTED
+### S-4: Large Ignored Test Surface
 
-134 ignored tests requiring specific hardware/environments. Documented as CI
-staging candidates. Not blocking — tests pass when environments are available.
+Clusters of `#[ignore]` tests requiring specific environments:
 
-### S-5: Interactive Mode — DEFERRED
+| Category | Location | Needs |
+|----------|----------|-------|
+| BearDog lineage | `crates/biomeos-federation/tests/genetic_lineage_tests.rs` | Running BearDog |
+| Spring niche E2E | `crates/biomeos-atomic-deploy/tests/spring_niche_deploy_e2e.rs` | Full stack |
+| Tower Atomic E2E | `crates/biomeos-atomic-deploy/tests/tower_atomic_e2e.rs` | BearDog + Songbird |
+| Provenance trio E2E | `crates/biomeos-atomic-deploy/tests/provenance_trio_e2e.rs` | Trio running |
+| Cross-spring pipeline | `crates/biomeos-atomic-deploy/tests/cross_spring_pipeline_e2e.rs` | Multiple springs |
+| Rootfs build | `tests/integration/rootfs_build.rs` | Sudo |
+| Discovery/HTTP | `crates/biomeos-core/tests/*` | Various |
+| Niche integration | `crates/biomeos-manifest/tests/niche_integration_tests.rs` | Graph format updates |
 
-Interactive mode via atomic client deferred. CLI provides full non-interactive
-surface. primalSpring's harness mode covers interactive use cases.
+**Action:** Plan staged CI; document which suites are release gates vs optional
 
-### S-6: Chimera Builder Stubs — BY DESIGN
+### S-5: Interactive Mode Not Supported
 
-Builder generates IPC-forwarding code when `capability` is configured; explicit
-errors when not. This is intentional code generation, not a stub to resolve.
+Universal biomeOS manager interactive mode via atomic client is flagged as
+"not yet supported."
+
+**Location:** `crates/biomeos-core/src/universal_biomeos_manager/runtime.rs` (~299)
+
+### S-6: Chimera Builder Generated Stubs
+
+`biomeos-chimera` generates capability-forwarding stubs with stub errors on miss.
+Intentional pattern but still a "generated surface" maintenance cost.
+
+**Location:** `crates/biomeos-chimera/src/builder.rs`, `fusion.rs`
 
 ---
 
-## Minor — ALL RESOLVED (v2.78)
+## Minor
 
-### M-1: eprintln in Library Code ✅ RESOLVED
+### M-1: eprintln in Library Code
 
-Replaced with `std::io::Write` in `biomeos-types` validation sink (avoiding
-`tracing` dependency in core types crate).
+One `eprintln!` in non-test library code when capability registry config is missing.
 
-### M-2: VM Federation Test Placeholders — DOCUMENTED
+**Location:** `crates/biomeos-atomic-deploy/src/capability_domains.rs` (~780)
+**Action:** Replace with `tracing::warn!` (fixing in this session)
 
-Require VM harness; deferred to CI staging.
+### M-2: VM Federation Test Placeholders
 
-### M-3: Niche Integration Tests — DOCUMENTED
+VM federation tests are explicit placeholders needing a VM harness.
 
-Depend on graph format updates; deferred to CI staging.
+**Location:** `tests/e2e/vm_federation.rs`
 
----
+### M-3: Niche Integration Tests Pending Graph Format Updates
 
-## Additional Evolutions in v2.78
+Tests depend on graph format changes not yet landed.
 
-- **AI module**: Removed embedded intent classifier. AI capabilities route to
-  Squirrel at runtime via `capability.discover { domain: "ai" }`. biomeOS
-  deployable with ecoBins alone.
-- **capability.discover**: Accepts both `capability` and `domain` params
-  (primalSpring compatibility)
-- **capabilities.list**: Canonical route alias added per SEMANTIC_METHOD_NAMING_STANDARD
-- **tokio-process 0.2**: Removed (unused dead dependency)
-- **blake3 pure**: Platypus chimera evolved to `features = ["pure"]`
-- **Smart refactoring**: discovery.rs (1128→467), primal_registry/mod.rs (1150→823). Zero files >1000 LOC.
-- **All `Future:` comments**: Evolved to implementations or documented delegation
-- **`unsafe_code = "deny"`**: Workspace-level lint
-- **SECURITY.md**: Created
+**Location:** `crates/biomeos-manifest/tests/niche_integration_tests.rs`
 
 ---
 
 ## Positive Signals
 
-- Zero `TODO`/`FIXME`/`HACK`/`Future:` markers in crate code
+- Zero `TODO`/`FIXME`/`HACK` markers
 - Zero `unsafe` in production code
-- Zero clippy warnings (pedantic+nursery)
-- Zero files over 1000 LOC
-- Zero blocking debt
-- `CONTEXT.md`, `README.md`, `CHANGELOG.md` current (v2.78)
-- Dark Forest gate is real (not stubbed)
-- NUCLEUS CLI mode works end-to-end
-- Neural API routing covers 26 domains with 290+ translations
-- 7,204 tests, 90%+ llvm-cov coverage
-- primalSpring compatibility verified (both `capability` and `domain` params)
-- Socket discovery 5-tier + DNS-SD mDNS
+- Zero clippy warnings
+- `CONTEXT.md` and `README.md` current
+- Dark Forest gate is real (not stubbed) — `dark_forest_gate.rs` with token verification
+- NUCLEUS CLI mode works end-to-end: socket wait + JSON-RPC health + lifecycle manager
+- Neural API routing covers 26 domains
+- 7,202 tests, 90%+ llvm-cov coverage
+- Socket discovery has a well-documented 5-8 step resolution order
 
 ---
 
-## Remaining Work (non-blocking)
+## Recommended Priority Order (post-v2.78)
 
-1. **S-4/M-2/M-3:** Stage ignored tests in CI with environment provisioning
-2. **S-5:** Interactive mode (low priority — CLI surface is complete)
-3. **Continuous improvement:** Monitor primalSpring experiment results for new expectations
+All blocking and S-2/S-3 items resolved. Remaining priorities:
+
+1. **S-1:** Audit Neural API handler depth per domain (coverage matrix)
+2. **S-4:** Plan staged CI for ignored test suites
+3. **S-5:** Interactive mode support
+4. **M-3:** Niche integration tests pending graph format updates
