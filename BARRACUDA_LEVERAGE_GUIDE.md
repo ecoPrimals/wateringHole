@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # barraCuda Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 16, 2026
-**Primal**: barraCuda v0.3.5 (Sprint 5)
+**Date**: March 30, 2026
+**Primal**: barraCuda v0.3.11 (Sprint 23)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -16,9 +16,10 @@ primal in the ecosystem will produce an equivalent guide. Together, these
 guides form a combinatorial recipe book for emergent behaviors.
 
 barraCuda provides **sovereign mathematical computation** — GPU-accelerated
-scientific computing across any vendor's hardware using 816 WGSL shaders
+scientific computing across any vendor's hardware using 824 WGSL shaders
 compiled through wgpu. One source, any GPU, identical results. Pure Rust,
-zero unsafe, zero C application dependencies.
+zero unsafe, zero C application dependencies. 4,300+ tests, 15-tier
+precision continuum (Binary→DF128), 30 JSON-RPC methods, dual transport.
 
 **Philosophy**: Math is universal. A shader is just math. The execution
 substrate (GPU, CPU, NPU, Android ARM) is a hardware implementation
@@ -29,24 +30,37 @@ other primals own the hardware, the network, the storage, the identity.
 
 ## IPC Methods (Semantic Naming)
 
-All methods follow `{namespace}.{domain}.{operation}` per the
-[Semantic Method Naming Standard](./SEMANTIC_METHOD_NAMING_STANDARD.md).
+All methods follow `{domain}.{operation}` per the
+[Semantic Method Naming Standard](./SEMANTIC_METHOD_NAMING_STANDARD.md) v2.2.0.
 
 | Method | What It Does |
 |--------|-------------|
-| `barracuda.device.list` | List available compute devices (GPU, CPU, NPU) |
-| `barracuda.device.probe` | Probe device capabilities, f64 support, VRAM |
-| `barracuda.health.check` | Health check (name, version, status, capabilities) |
-| `barracuda.tolerances.get` | Numerical tolerances for a named operation |
-| `barracuda.validate.gpu_stack` | GPU validation suite (shader compile + dispatch) |
-| `barracuda.compute.dispatch` | Dispatch a WGSL compute shader with parameters |
-| `barracuda.tensor.create` | Create a GPU-resident tensor |
-| `barracuda.tensor.matmul` | Matrix multiply two tensors |
-| `barracuda.fhe.ntt` | Number Theoretic Transform (FHE lattice crypto) |
-| `barracuda.fhe.pointwise_mul` | Pointwise polynomial multiplication (FHE) |
+| `primal.info` | Primal identity (name, version, protocol, namespace, license) |
+| `primal.capabilities` | Advertise capabilities, methods, hardware state |
+| `capabilities.list` | Ecosystem-standard capability probe |
+| `device.list` | List available compute devices |
+| `device.probe` | Probe device capabilities, f64 support, VRAM |
+| `health.liveness` | Fast liveness probe (aliases: `ping`, `health`) |
+| `health.readiness` | Readiness probe |
+| `health.check` | Full health check (aliases: `status`, `check`) |
+| `tolerances.get` | Numerical tolerances for a named operation |
+| `validate.gpu_stack` | GPU validation suite |
+| `compute.dispatch` | Dispatch a named compute operation |
+| `tensor.create` / `tensor.matmul` | Tensor creation and multiply |
+| `tensor.add/scale/clamp/reduce/sigmoid` | Tensor element-wise ops |
+| `math.sigmoid` / `math.log2` | Math primitives |
+| `stats.mean/std_dev/weighted_mean` | Statistical operations |
+| `noise.perlin2d/perlin3d` | Procedural noise generation |
+| `rng.uniform` | Random number generation |
+| `activation.fitts/hick` | Human-factors activation models |
+| `fhe.ntt` / `fhe.pointwise_mul` | FHE operations |
 
-**Transport**: JSON-RPC 2.0 over TCP/Unix socket (primary), tarpc/bincode
-(high-throughput primal-to-primal), capability-based discovery.
+30 methods total. Legacy `barracuda.{domain}.{operation}` prefix accepted for
+backward compatibility via `normalize_method()`.
+
+**Transport**: JSON-RPC 2.0 over TCP/Unix socket (primary, newline-delimited
+per wateringHole v3.1), tarpc/bincode (high-throughput primal-to-primal),
+capability-based discovery. Dual-transport startup (UDS + TCP).
 
 ---
 
@@ -106,15 +120,32 @@ use barracuda::device::{PrecisionTier, PhysicsDomain, PrecisionBrain};
 let brain = PrecisionBrain::new(&device);
 let tier = brain.recommend(PhysicsDomain::LatticeQcd);
 // tier = F64Precise (lattice QCD needs FMA-separate, bit-exact)
+
+let tier = brain.recommend(PhysicsDomain::Inference);
+// tier = Quantized4 (inference prioritizes throughput)
+
+let tier = brain.recommend(PhysicsDomain::Hashing);
+// tier = Binary (hashing needs only 1-bit)
 ```
 
-barraCuda's `PrecisionBrain` routes physics domains to the correct
-precision tier (F32, DF64, F64, F64Precise) based on runtime hardware
-probing. Springs don't need to know about GPU f64 quirks.
+barraCuda defines a **15-tier precision continuum**:
+
+| Direction | Tiers | Purpose |
+|-----------|-------|---------|
+| Scale-down | Binary → Int2 → Q4 → Q8 → FP8-E5M2 → FP8-E4M3 → BF16 → F16 → TF32 | Throughput (inference, training, hashing) |
+| Baseline | F32 | Universal, all GPUs |
+| Scale-up | DF64 → F64 → F64Precise → QF128 → DF128 | Precision (science, reference) |
+
+`PrecisionBrain` routes 15 `PhysicsDomain` variants (including Inference,
+Training, Hashing) to the optimal tier based on runtime `HardwareCalibration`
+probing. Each tier has per-tier tolerances, `op_preamble` WGSL code, and a
+coralReef compilation strategy string. Springs never touch precision directly.
 
 **Novel pattern**: A spring can ask "what precision can I get on this
-hardware?" and adapt its algorithm — e.g., use stochastic rounding on
-F32-only devices, or full DF64 on capable hardware.
+hardware?" and adapt its algorithm — e.g., use Q4 quantized inference on
+consumer hardware, or full DF128 double-double on compute GPUs. QF128
+(Bailey quad-double on f32) provides ~96-bit mantissa on GPUs with
+**no f64 hardware at all**.
 
 ### 1.4 Deterministic PRNG (CPU–GPU Parity)
 
@@ -181,8 +212,8 @@ duplicated growth model code now delegate to barraCuda.
 
 **For**: Any primal or spring calling barraCuda via IPC or library.
 
-As of Sprint 5, every barraCuda production function returns typed
-`BarracudaError` variants instead of opaque strings. Callers can
+Every barraCuda production function returns typed `BarracudaError`
+variants instead of opaque strings. Callers can
 pattern-match on specific failure modes:
 
 ```rust
@@ -330,9 +361,11 @@ gets near-linear scaling with zero Vulkan driver contention.
 
 **For**: hotSpring (nuclear physics), groundSpring (spectral theory).
 
-DF64 (double-float64) emulates ~104-bit mantissa on f32 hardware. The
-naive wgpu path through naga can poison f64 transcendentals on some NVIDIA
-hardware. The sovereign path through coralReef avoids this entirely:
+DF64 (double-float64) emulates ~48-bit mantissa on f32 hardware. The full
+15-tier continuum extends to DF128 (~104-bit on f64 pairs) and QF128 (~96-bit
+on f32 quad-double, no f64 hardware needed). The naive wgpu path through naga
+can poison f64 transcendentals on some NVIDIA hardware. The sovereign path
+through coralReef avoids this entirely:
 
 ```
 barraCuda DF64 shader
@@ -670,7 +703,7 @@ Spring asks → PrecisionBrain recommends → Spring adapts
 
 ### 6.2 Shader Composability
 
-barraCuda's 816 WGSL shaders are composable building blocks. Springs can
+barraCuda's 824 WGSL shaders are composable building blocks. Springs can
 chain them into multi-stage GPU pipelines:
 
 ```
@@ -788,7 +821,7 @@ sweetGrass braid:
   Entity[2]: "migration_event" → toadStool routed to GPU_B
   Entity[3]: "trajectory_batch_4501-10000" → computed on GPU_B
   Entity[4]: "final_result" → merged from Entity[0] + Entity[3]
-  wasGeneratedBy: barraCuda v0.3.5
+  wasGeneratedBy: barraCuda v0.3.11
   wasAssociatedWith: hotSpring experiment_042
 ```
 
@@ -827,5 +860,6 @@ primal that owns that domain. This is the sovereignty principle.
 - `wateringHole/INTER_PRIMAL_INTERACTIONS.md` — IPC coordination
 - `wateringHole/SEMANTIC_METHOD_NAMING_STANDARD.md` — Method naming convention
 - `wateringHole/handoffs/BARRACUDA_V035_TYPED_ERRORS_NURSERY_COVERAGE_HANDOFF_MAR16_2026.md` — Sprint 5 handoff
+- `barraCuda/specs/PRECISION_TIERS_SPECIFICATION.md` — Full 15-tier precision ladder specification
 - `whitePaper/gen3/PRIMAL_CATALOG.md` — Full primal catalogue
 - `whitePaper/gen3/SPRING_CATALOG.md` — Spring catalogue
