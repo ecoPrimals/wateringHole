@@ -18,7 +18,7 @@ Run `bootstrap.sh` (in this directory) to set up or migrate a machine.
 ```
 ecoPrimals/                     # workspace root
   primals/                      # all primals, flat
-    barraCuda/                  #   math engine (816 WGSL shaders)
+    barraCuda/                  #   math engine (900+ WGSL shaders)
     bearDog/                    #   cryptography
     biomeOS/                    #   Neural API orchestrator
     bingoCube/                  #   human-verifiable commitment
@@ -61,26 +61,15 @@ ecoPrimals/                     # workspace root
 
 ## GitHub Org Mapping
 
-There is no monorepo. Each primal, spring, and garden is a standalone repository
-under its respective GitHub organization — like independent organisms in an
-ecosystem. This aligns with the gen3 whitePaper principle: primals are sovereign
-entities that discover each other at runtime, never at compile time.
+Each local directory maps to a GitHub org:
 
 | Local Directory | GitHub Org | Role |
 |----------------|------------|------|
-| `primals/` | ecoPrimals | Sovereign infrastructure primals |
-| `springs/` | syntheticChemistry | Science validation springs |
+| `primals/` | ecoPrimals | Sovereign infrastructure |
+| `springs/` | syntheticChemistry | Science validation |
 | `gardens/` | sporeGarden | Usable systems (creative surface) |
-| `infra/` | ecoPrimals | Ecosystem support (wateringHole, plasmidBin, etc.) |
+| `infra/` | ecoPrimals | Ecosystem support |
 | `sort-after/` | mixed (syntheticChemistry mostly) | Temporary parking |
-
-### Organizations
-
-| Org | Purpose | Visibility |
-|-----|---------|------------|
-| **ecoPrimals** | Primals + ecosystem infrastructure | Mix: public infra, private primals |
-| **syntheticChemistry** | Springs (science validation) + lab tools | Public springs, private lab tools |
-| **sporeGarden** | Gardens (creative surface, usable systems) | Public |
 
 ### Full Repo Inventory
 
@@ -126,22 +115,14 @@ entities that discover each other at runtime, never at compile time.
 
 #### infra/ (ecoPrimals org + syntheticChemistry lab tools)
 
-| Repo | GitHub | Visibility | Notes |
-|------|--------|------------|-------|
-| agentReagents | syntheticChemistry/agentReagents | public | VM image builder, gate templates, reagent storage |
-| benchScale | syntheticChemistry/benchScale | public | VM provisioner, lab substrate, JSON-RPC server |
-| wateringHole | ecoPrimals/wateringHole | public | Ecosystem standards, handoffs, leverage guides |
-| whitePaper | ecoPrimals/whitePaper | private | gen0–gen4 papers |
-| plasmidBin | ecoPrimals/plasmidBin | public | Consumer-facing binary distribution surface |
+| Repo | GitHub | Visibility | Purpose |
+|------|--------|------------|---------|
+| agentReagents | syntheticChemistry/agentReagents | private | VM image builder (YAML manifests, cloud-init). Reagent storage for hazardous kernel/driver ops. |
+| benchScale | syntheticChemistry/benchScale | private | VM provisioner (libvirt, CloudInit). Substrate validation tool. |
+| wateringHole | ecoPrimals/wateringHole | public | Standards and handoffs |
+| whitePaper | ecoPrimals/whitePaper | private | gen0-gen4 papers |
+| plasmidBin | ecoPrimals/plasmidBin | public | Binary distribution |
 | sporePrint | ecoPrimals/sporePrint | public | Public verification portal |
-
-**plasmidBin dual structure**: The public `ecoPrimals/plasmidBin` repo is the
-consumer-facing distribution surface (per-primal directories with `metadata.toml`,
-`fetch.sh`, `harvest.sh`). The local `infra/plasmidBin/` directory in the
-development workspace contains operational tooling (`deploy_gate.sh`,
-`start_primal.sh`, `doctor.sh`, `ports.env`, actual binaries). Consumers clone
-the public repo; operators use the local infra tooling. Binary artifacts live in
-GitHub Releases on the public repo, not in git.
 
 #### sort-after/ (syntheticChemistry — lab tools, in stasis or gifted)
 
