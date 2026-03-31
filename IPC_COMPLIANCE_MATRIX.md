@@ -1,7 +1,7 @@
 # IPC Compliance Matrix
 
-**Version:** 1.2.0
-**Date:** March 28, 2026
+**Version:** 1.3.0
+**Date:** March 31, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 
@@ -42,7 +42,7 @@ transport (UDS or TCP). See `PRIMAL_IPC_PROTOCOL.md` v3.1 Wire Framing.
 | **squirrel** | Newline (abstract) | -- | **P** | Newline framing correct, but socket is abstract-namespace only (see Discovery). No TCP listener. |
 | **beardog** | Newline | Newline | C | Both transports use raw newline framing. |
 | **songbird** | Newline | Newline | C | Standard newline framing on both transports. |
-| **petaltongue** | Newline | -- | **P** | UDS newline-conformant. No TCP listener exposed via `--port`. |
+| **petaltongue** | Newline | Newline | C | UDS newline-conformant. TCP via `server --port <N>` (March 31). |
 | **nestgate** | Newline | -- | **X** | Socket-only by default. `--port` exists but is non-functional. **musl-static binary segfaults (exit 139) on `--help`** — ecoBin non-compliant. glibc dynamic build works. |
 | **toadstool** | Newline | -- | **P** | `--port` exists but is not forwarded to implementation. |
 | **coralreef** | Newline | HTTP (jsonrpsee) | **P** | UDS is newline. TCP uses jsonrpsee HTTP framing. |
@@ -64,7 +64,7 @@ See `PRIMAL_IPC_PROTOCOL.md` Socket Path Convention and
 | **squirrel** | `@squirrel` (abstract) | **No** | No | No | **X** | Abstract namespace only. Invisible to `readdir()`. Not discoverable. |
 | **beardog** | `/run/user/1000/biomeos/beardog.sock` | Yes | Yes | No | **P** | Conformant path, no family suffix. Missing domain symlink. |
 | **songbird** | `/run/user/1000/biomeos/songbird.sock` | Yes | Yes | No | C | Registry primal, domain symlink not required. |
-| **petaltongue** | `/run/user/1000/petaltongue/petaltongue-nat0-default.sock` | Yes | **No** | No | **X** | Custom directory, not in `biomeos/`. Non-discoverable. |
+| **petaltongue** | `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock` | Yes | Yes | No | C | Conformant `biomeos/` path (March 31). |
 | **nestgate** | `/run/user/1000/biomeos/nestgate.sock` | Yes | Yes | No | **P** | Conformant path. Missing domain symlink. |
 | **toadstool** | ? | ? | ? | -- | ? | Not verified. |
 | **coralreef** | `/run/user/1000/biomeos/coralreef.sock` + custom UDS | Yes | Yes | No | **P** | Conformant for primary. Missing domain symlink. |
@@ -85,7 +85,7 @@ non-negotiable canonical names. See `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
 | **squirrel** | **No** | **No** | **No** | `system.health`, `system.status`, `system.ping` | **X** | Uses `system.*` domain exclusively. Non-conformant. |
 | **beardog** | Yes | Yes | -- | -- | C | Canonical names. |
 | **songbird** | `health` alias | -- | -- | `health` (short), HTTP `/health` | **P** | Responds to `health` (short name) and HTTP `/health`. Does not expose `health.liveness` by canonical name. Verified live (March 27). |
-| **petaltongue** | ? | ? | ? | ? | ? | Not verified. |
+| **petaltongue** | Yes | Yes | Yes | `ping`, `health`, `status`, `check` aliases | C | Full health triad + aliases (March 31). |
 | **nestgate** | ? | ? | ? | ? | ? | Not verified. |
 | **toadstool** | ? | ? | ? | ? | ? | Not verified. |
 | **coralreef** | ? | ? | ? | ? | ? | Not verified. |
@@ -106,7 +106,7 @@ See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **squirrel** | `server` | Yes (ignored) | `--port` exists but UDS is primary | **P** | `--port` accepted but TCP not used when UDS is available. |
 | **beardog** | `server` | No | `--listen` (addr:port) | **X** | No `--port` flag. Uses `--listen`. |
 | **songbird** | `server` | ? | ? | ? | Not verified. |
-| **petaltongue** | `server` | No | None | **X** | No port option at all. UDS only. |
+| **petaltongue** | `server` | Yes | `--port <PORT>` | C | `server --port <N>` binds newline TCP JSON-RPC (March 31). |
 | **nestgate** | `daemon` | No (ignored) | `--port` exists but socket-only | **X** | Subcommand is `daemon`, not `server`. `--port` not functional. musl binary segfaults before CLI parsing. |
 | **toadstool** | `server` | No (ignored) | `--port` exists but not wired | **X** | Flag present but not forwarded to server implementation. |
 | **coralreef** | `server` | No | `--rpc-bind` | **X** | Uses `--rpc-bind` for jsonrpsee HTTP, not raw newline. |
@@ -145,7 +145,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **toadstool** | P | ? | ? | X (not wired) | C | P (caps only) | A++ | Needs work |
 | **nestgate** | X | P | ? | X (not wired) | C | X (no aarch64) | A++ (x86) | Needs work |
 | **biomeos** | P | C | C | X (forces UDS) | C | X (UDS only) | A++ | Needs TCP mode |
-| **petaltongue** | P | X | ? | X (none) | C | X (no aarch64) | A++ (x86) | Needs work |
+| **petaltongue** | C | C | C | C (`--port`) | C | X (no aarch64) | A++ (x86) | Near-complete |
 | **sweetgrass** | P | P | C | X | C | ? | ? | Close |
 | **rhizocrypt** | C | C | C | C | C | ? | C | Conformant |
 | **loamspine** | C | X | ? | X | X (crash) | ? | ? | Blocked |
@@ -165,7 +165,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 
 ### High (needed for standard compliance)
 
-5. **petaltongue**: Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`. Add `--port` flag.
+5. ~~**petaltongue**: Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`. Add `--port` flag.~~ **RESOLVED March 31** — socket at `biomeos/petaltongue.sock`, `server --port` wired, full health triad.
 6. **sweetgrass**: Add `--port` flag (alias for port portion of `--http-address`).
 7. **coralreef**: Add `--port` flag for raw newline TCP (alongside jsonrpsee HTTP).
 8. **toadstool**: Wire `--port` flag to actual server bind.
@@ -195,7 +195,7 @@ validation scripts. Verified via live cross-hardware testing (March 27, 2026).
 | **rhizocrypt** | Dual-mode TCP (newline + HTTP) + UDS | `health.liveness`, `health.readiness`, `health.check` | C | Dual-mode auto-detection. Fixed in v0.14.0-dev session 23. |
 | **loamspine** | N/A | Crashes on startup | **X** | Tokio nested runtime panic |
 | **sweetgrass** | UDS JSON-RPC | `health.liveness` | C | |
-| **petaltongue** | UDS JSON-RPC | Unknown | ? | |
+| **petaltongue** | UDS JSON-RPC (+ optional TCP) | `health.liveness`, `health.readiness`, `health.check` | C | Full health triad + aliases (March 31). |
 | **coralreef** | HTTP (jsonrpsee) | Unknown | ? | |
 | **biomeOS** | HTTP | `/health`, `health.liveness` | C | Full health suite |
 
@@ -255,7 +255,7 @@ Tested on Pixel 8a with GrapheneOS via ADB (aarch64-linux-musl binaries).
 | **toadstool** | X (not wired) | ? | X (SELinux) | Partial (caps only) |
 | **nestgate** | X (not wired) | ? | X (SELinux) | No (needs aarch64 build + TCP) |
 | **biomeos** | X (forces UDS) | ? | X (SELinux) | No (needs TCP mode) |
-| **petaltongue** | X (no flag) | ? | X (SELinux) | No (needs aarch64 + TCP) |
+| **petaltongue** | C (`--port`) | ? | X (SELinux) | Partial (x86_64 TCP ready, aarch64 pending) |
 
 ### Genetic Crypto Cross-Architecture Determinism
 
@@ -290,7 +290,7 @@ on x86_64 and aarch64:
 10. **songbird**: Add `--dark-forest` CLI flag (env-only today, silent plaintext fallback).
 11. **songbird**: Add `--pid-dir` or `SONGBIRD_PID_DIR` for Android/container substrates.
 12. **toadstool**: Wire `--port` flag to actual server bind. Critical for mobile compute sharing.
-13. **petaltongue**: Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`. Add `--port`. Build aarch64 headless.
+13. ~~**petaltongue**: Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`. Add `--port`.~~ **RESOLVED March 31.** Build aarch64 headless still pending.
 14. **sweetgrass**: Add `--port` flag (alias for port portion of `--http-address`).
 15. **coralreef**: Add `--port` flag for raw newline TCP.
 
@@ -318,6 +318,20 @@ on x86_64 and aarch64:
 ---
 
 ## Version History
+
+### v1.3.0 (March 31, 2026)
+
+**petaltongue IPC Compliance Refresh**
+
+- petaltongue socket path: X → C (`$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`)
+- petaltongue wire framing: P → C (newline TCP via `server --port`)
+- petaltongue health methods: ? → C (full `health.liveness` / `health.readiness` / `health.check` + aliases)
+- petaltongue `--port`: X → C (`server --port <N>` binds newline TCP JSON-RPC)
+- petaltongue health transport: ? → C (UDS + optional TCP)
+- petaltongue mobile transport: X → C for TCP (`--port`); aarch64 build still pending
+- petaltongue `capabilities.list`: expanded to 41 methods matching full RPC dispatch surface
+- Marked petaltongue priority action items 5 and 13 as RESOLVED
+- Updated summary scorecard and per-primal mobile transport table
 
 ### v1.2.0 (March 28, 2026)
 
