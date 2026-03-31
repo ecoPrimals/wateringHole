@@ -1,9 +1,10 @@
 # loamSpine — Startup Panic (Runtime Nesting)
 
 **Date**: March 31, 2026
-**Priority**: P1 — CRITICAL
+**Priority**: P1 — CRITICAL → **RESOLVED** (v0.9.15)
 **Reporter**: ludoSpring V37.1 live validation
 **Cross-reference**: primalSpring `docs/PRIMAL_GAPS.md` LS-03
+**Resolution**: `LOAMSPINE_V0915_DEEP_DEBT_EVOLUTION_LS03_FIX_HANDOFF_MAR31_2026.md`
 
 ---
 
