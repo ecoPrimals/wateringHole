@@ -1,8 +1,8 @@
 # 🔗 Inter-Primal Interactions - Production Implementation Plan
 
 **Based on RootPulse Architecture**  
-**Status**: Phase 1 & 2 Complete — Phase 3 Provenance Trio Validated  
-**Date**: March 14, 2026
+**Status**: Phase 1 & 2 Complete — Phase 3 Provenance Trio Validated — Phase 4 Composition Decomposition (March 31, 2026)  
+**Date**: March 31, 2026 (updated from March 14, 2026)
 
 ---
 
@@ -754,6 +754,64 @@ Plasmodium is NOT a new primal -- it is a biomeOS coordination pattern that uses
 **Full specification**: `phase2/biomeOS/specs/PLASMODIUM_OVER_NUCLEUS_SPEC.md`  
 **Implementation**: `biomeos-core::plasmodium` module  
 **CLI**: `biomeos plasmodium status|gates|models`
+
+---
+
+---
+
+## Phase 4: Composition Decomposition (March 31, 2026)
+
+### Status: Active — primalSpring Phase 23f
+
+primalSpring has decomposed the monolithic interactive gateway into 7 independently deployable compositions, each validating a specific subsystem:
+
+| ID | Composition | Primals | Status |
+|----|------------|---------|--------|
+| C1 | Render Standalone | biomeOS + petalTongue | Partial (dashboard renders, export works, scene stores) |
+| C2 | Narration AI | biomeOS + Squirrel | Partial (query works, Ollama routing needs wiring) |
+| C3 | Session | biomeOS + Tower + esotericWebb | Pass (full lifecycle validated) |
+| C4 | Game Science | biomeOS + Tower + ludoSpring | Pass (flow, Fitts, WFC, engagement validated) |
+| C5 | Persistence | biomeOS + Tower + NestGate | Partial (store/retrieve work, listing needs fix) |
+| C6 | Proprioception | biomeOS + petalTongue | Partial (subscribe works, poll/apply need IPC evolution) |
+| C7 | Full Interactive | All NUCLEUS + all subsystems | Partial (blocked by BM-04 capability registration) |
+
+### Critical Interaction Gaps Identified
+
+| Gap | Interaction | Impact |
+|-----|------------|--------|
+| **BM-04** | biomeOS → All Primals (capability discovery) | Primals starting after biomeOS are invisible to Neural API. Blocks capability routing in all multi-primal graphs. |
+| **RC-01** | rhizoCrypt → biomeOS (registration) | TCP-only transport, no UDS socket. Cannot participate in standard compositions. |
+| **LS-03** | loamSpine → biomeOS (startup) | Tokio nested runtime panic. Cannot start. Blocks all Provenance Trio interactions. |
+| **PT-01** | petalTongue → biomeOS (discovery) | Socket not in standard `biomeos/` directory. Not discoverable by biomeOS scan. |
+| **SQ-01** | Squirrel → biomeOS (discovery) | Abstract socket only. Invisible to `readdir()`. Not discoverable by filesystem scan. |
+
+### toadStool S169 Overstep Resolution Impact
+
+toadStool's S169 cleanup removed 30+ overstepping JSON-RPC methods that were
+proxying concerns belonging to Squirrel (AI), coralReef (shader compile),
+biomeOS (discovery/deploy), and songBird (HTTP). This cleanup:
+
+- **Clarified deploy graphs**: Springs must now route AI to Squirrel, shader compile to coralReef directly
+- **Reduced toadStool to its core**: hardware inventory + compute dispatch (`shader.dispatch`, `compute.*`)
+- **Exposed hidden couplings**: Some springs may have been routing through toadStool as a "convenience hub" — they must now use proper capability routing
+
+See `wateringHole/handoffs/TOADSTOOL_S169_OVERSTEP_CLEANUP_DEEP_DEBT_HANDOFF_MAR31_2026.md` for full details.
+
+### ludoSpring V37.1 Validation Results
+
+ludoSpring's live plasmidBin validation (experiments 084-098) achieved 95/141 checks (67.4%):
+
+- **barraCuda math pipeline**: 42/42 (tensor, activation, stats) — but Fitts/Hick formulas diverge from Python baselines
+- **NUCLEUS game session**: Working at 60Hz tick cycle
+- **Session provenance**: Blocked by RC-01 (rhizoCrypt UDS) and LS-03 (loamSpine panic)
+- **Projected with fixes**: 130/141 (92.2%)
+
+### Related Documents
+
+- `primalSpring/docs/PRIMAL_GAPS.md` — 32-gap registry with severity, impact, and fix paths
+- `wateringHole/PRIMAL_RESPONSIBILITY_MATRIX.md` V2 — Tiered evolution actions
+- `wateringHole/IPC_COMPLIANCE_MATRIX.md` v1.3 — Capability registration compliance
+- `wateringHole/SPRING_EVOLUTION_ISSUES.md` — ISSUE-011 through ISSUE-015
 
 ---
 

@@ -11,9 +11,12 @@ v1.1, `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.1, and
 `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
 
 Data sourced from esotericWebb's first live multi-primal composition
-(March 2026), direct inspection of each primal's source code, and
+(March 2026), direct inspection of each primal's source code,
 **live cross-hardware deployment testing** (March 27, 2026) across
-x86_64 eastgate + aarch64 Pixel/GrapheneOS on iPhone hotspot.
+x86_64 eastgate + aarch64 Pixel/GrapheneOS on iPhone hotspot,
+**primalSpring Phase 23f** composition decomposition (7 subsystems,
+89 deploy graphs, 32 gaps), and **ludoSpring V37.1** plasmidBin live
+gap matrix (95/141 checks, experiments 084-098).
 
 ---
 
@@ -62,7 +65,7 @@ See `PRIMAL_IPC_PROTOCOL.md` Socket Path Convention and
 | **loamspine** | Not reached (crash) | ? | ? | -- | **X** | Crashes before socket bind (Tokio nested runtime). |
 | **sweetgrass** | `/run/user/1000/biomeos/sweetgrass.sock` | Yes | Yes | No | **P** | Conformant path, no family suffix. Missing domain symlink. |
 | **squirrel** | `@squirrel` (abstract) | **No** | No | No | **X** | Abstract namespace only. Invisible to `readdir()`. Not discoverable. |
-| **beardog** | `/run/user/1000/biomeos/beardog.sock` | Yes | Yes | No | **P** | Conformant path, no family suffix. Missing domain symlink. |
+| **beardog** | `/run/user/1000/biomeos/beardog.sock` | Yes | Yes | `crypto.sock` | C | Conformant path. Domain symlink `crypto.sock` → `beardog.sock` created at bind, cleaned on shutdown. |
 | **songbird** | `/run/user/1000/biomeos/songbird.sock` | Yes | Yes | No | C | Registry primal, domain symlink not required. |
 | **petaltongue** | `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock` | Yes | Yes | No | C | Conformant `biomeos/` path (March 31). |
 | **nestgate** | `/run/user/1000/biomeos/nestgate.sock` | Yes | Yes | No | **P** | Conformant path. Missing domain symlink. |
@@ -83,7 +86,7 @@ non-negotiable canonical names. See `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
 | **loamspine** | ? | ? | ? | ? | ? | Crashes on startup. |
 | **sweetgrass** | Yes | ? | ? | -- | C | Responds to `health.liveness`. |
 | **squirrel** | **No** | **No** | **No** | `system.health`, `system.status`, `system.ping` | **X** | Uses `system.*` domain exclusively. Non-conformant. |
-| **beardog** | Yes | Yes | -- | -- | C | Canonical names. |
+| **beardog** | Yes | Yes | Yes | -- | C | Full canonical health suite: `health.liveness`, `health.readiness`, `health.check`. |
 | **songbird** | `health` alias | -- | -- | `health` (short), HTTP `/health` | **P** | Responds to `health` (short name) and HTTP `/health`. Does not expose `health.liveness` by canonical name. Verified live (March 27). |
 | **petaltongue** | Yes | Yes | Yes | `ping`, `health`, `status`, `check` aliases | C | Full health triad + aliases (March 31). |
 | **nestgate** | ? | ? | ? | ? | ? | Not verified. |
@@ -104,7 +107,7 @@ See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **loamspine** | `server` | No | `--jsonrpc-port` | **X** | No `--port` flag. Uses `--jsonrpc-port`. |
 | **sweetgrass** | `server` | No | `--http-address` (addr:port) | **X** | No `--port` flag. Takes full address, not just port. |
 | **squirrel** | `server` | Yes (ignored) | `--port` exists but UDS is primary | **P** | `--port` accepted but TCP not used when UDS is available. |
-| **beardog** | `server` | No | `--listen` (addr:port) | **X** | No `--port` flag. Uses `--listen`. |
+| **beardog** | `server` | Yes | `--port` (alias), `--listen` (addr:port) | C | `--port PORT` binds `0.0.0.0:PORT`. `--listen addr:port` for full control. Both use newline JSON-RPC. |
 | **songbird** | `server` | ? | ? | ? | Not verified. |
 | **petaltongue** | `server` | Yes | `--port <PORT>` | C | `server --port <N>` binds newline TCP JSON-RPC (March 31). |
 | **nestgate** | `daemon` | No (ignored) | `--port` exists but socket-only | **X** | Subcommand is `daemon`, not `server`. `--port` not functional. musl binary segfaults before CLI parsing. |
@@ -125,7 +128,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **loamspine** | No (crash) | N/A | **X** | Tokio nested runtime panic in `infant_discovery`. |
 | **sweetgrass** | Yes | Standalone | C | |
 | **squirrel** | Yes | Standalone | C | |
-| **beardog** | **No** | Hard-fails | **X** | Exits with error if `FAMILY_ID` and `NODE_ID` not set. |
+| **beardog** | Yes | `standalone` / `default` | C | `PrimalIdentity::from_env()` defaults `FAMILY_ID` to `standalone` and `NODE_ID` to `default` when unset. |
 | **songbird** | Yes | Standalone | C | |
 | **petaltongue** | Yes | Standalone | C | |
 | **nestgate** | Yes | Standalone | C | |
@@ -139,7 +142,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 
 | Primal | Wire Framing | Socket Path | Health Names | `--port` / `--listen` | Standalone | Mobile | ecoBin | Overall |
 |--------|-------------|-------------|-------------|----------------------|-----------|--------|--------|---------|
-| **beardog** | C | P | C | C (`--listen`) | X (FAMILY_ID) | C (TCP) | A++ | Close |
+| **beardog** | C | C | C | C (`--port` + `--listen`) | C (standalone) | C (TCP + abstract) | A++ | **Conformant** |
 | **songbird** | C | C | P | C (`--listen`) | C | C (TCP) | A++ | Close |
 | **squirrel** | P | X | X | C (`--port`) | C | C (abstract+HTTP) | A++ | Close |
 | **toadstool** | P | ? | ? | X (not wired) | C | P (caps only) | A++ | Needs work |
@@ -159,7 +162,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 ### Critical (blocks inter-primal composition)
 
 1. **squirrel**: Add filesystem socket in `$XDG_RUNTIME_DIR/biomeos/squirrel.sock` alongside abstract socket. Add `health.liveness` / `health.readiness` / `health.check` method handlers.
-2. **beardog**: Accept `--port` (alias for `--listen`, port-only). Default `FAMILY_ID` to `standalone` when unset.
+2. ~~**beardog**: Accept `--port` (alias for `--listen`, port-only). Default `FAMILY_ID` to `standalone` when unset.~~ **RESOLVED** (Wave 25+29: `--port` implemented, standalone defaults in `PrimalIdentity::from_env()`).
 3. **loamspine**: Fix Tokio nested runtime panic in `infant_discovery`. Add `--port` flag (alias for `--jsonrpc-port`).
 4. ~~**rhizocrypt**: Add newline-delimited TCP JSON-RPC listener (alongside HTTP Axum server).~~ **RESOLVED** — v0.14.0-dev session 23 (March 31, 2026).
 
@@ -206,6 +209,42 @@ wastes round-trips and makes diagnostics ambiguous.
 
 ---
 
+## Capability Registration Compliance
+
+Standard: Primals register capabilities at startup via biomeOS Neural API
+(`capability.register`) or are discovered by biomeOS's `discover_and_register_primals()`.
+See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.1.
+
+**CRITICAL GAP (BM-04)**: biomeOS `discover_and_register_primals()` runs ONCE
+at startup with a 500ms timeout. Primals starting after biomeOS (typical in
+graph deployments) miss this window. `capability.list` only returns 5 biomeOS
+self-capabilities, omitting all external primal capabilities.
+
+| Primal | Self-Registers? | Discovered by biomeOS? | Visible in `capability.list`? | Status | Notes |
+|--------|----------------|----------------------|------------------------------|--------|-------|
+| **beardog** | No | Race condition | **No** (starts after biomeOS) | **X** | Needs biomeOS rescan or self-registration |
+| **songbird** | No | Race condition | **No** (starts after biomeOS) | **X** | Same timing issue |
+| **squirrel** | No | Not discoverable | **No** (abstract socket) | **X** | Abstract socket invisible to filesystem scan |
+| **petaltongue** | No | Not discoverable | **No** (wrong directory) | **X** | Socket not in `$XDG_RUNTIME_DIR/biomeos/` |
+| **nestgate** | No | Race condition | Intermittent | **P** | Sometimes starts fast enough to be caught |
+| **toadstool** | No | Race condition | Intermittent | **P** | Same timing issue |
+| **sweetgrass** | No | Race condition | Intermittent | **P** | Same timing issue |
+| **rhizocrypt** | N/A | N/A | **No** (TCP only, no UDS) | **X** | No socket to discover (RC-01) |
+| **loamspine** | N/A | N/A | **No** (crashes) | **X** | Panics before any registration (LS-03) |
+| **coralreef** | No | Race condition | Intermittent | **P** | Same timing issue |
+| **barraCuda** | No | Race condition | Intermittent | **P** | Same timing issue |
+| **biomeOS** | Self | N/A | **Yes** (5 methods) | C | Only biomeOS's own capabilities reliably visible |
+
+**Fix options** (any one would resolve BM-04):
+1. `topology.rescan` JSON-RPC method — trigger a re-scan of the socket directory on demand
+2. Lazy discovery on `capability.call` miss — if a `capability.call` targets an unregistered method, scan and retry
+3. Primal self-registration — primals call `capability.register` on startup (requires SDK change)
+
+**Impact**: Resolving BM-04 unblocks 3 composition checks and enables reliable
+multi-primal capability routing for all 7 decomposed compositions.
+
+---
+
 ## Substrate Compliance (Cross-Hardware)
 
 Standard: ecoBin v3.0 requires pure Rust, musl-static cross-compilation, and
@@ -236,11 +275,11 @@ Tested on Pixel 8a with GrapheneOS via ADB (aarch64-linux-musl binaries).
 | Requirement | Standard | Status | Notes |
 |-------------|----------|--------|-------|
 | **TCP listener** | `--listen 0.0.0.0:PORT` | C (BearDog, Songbird) | TCP is the **universal mobile transport**. Every primal MUST support it. |
-| **Abstract sockets** | `--abstract` flag | P (Squirrel C, BearDog P) | Squirrel's `@squirrel` works perfectly on GrapheneOS. BearDog logs filesystem path instead of abstract — functional but buggy. |
+| **Abstract sockets** | `--abstract` flag | C (Squirrel C, BearDog C) | Squirrel's `@squirrel` works on GrapheneOS. BearDog abstract logging fixed (Wave 30). |
 | **Filesystem UDS** | Default socket path | **X (all)** | SELinux on GrapheneOS denies `sock_file create` from `shell` context. Filesystem UDS is NOT viable on Android. |
 | **Writable runtime dir** | `HOME`/`TMPDIR` writable | C | `cd /data/local/tmp/biomeos` before launch. Set `HOME`/`TMPDIR` env vars. |
 | **No systemd** | No systemd assumptions | C | Startup via shell script (`deploy_pixel.sh`). |
-| **Audit/PID files** | Directory configurable | P | BearDog writes `audit.log` to CWD — crashes on read-only fs. Needs `--audit-dir` or `BEARDOG_AUDIT_DIR`. |
+| **Audit/PID files** | Directory configurable | C | BearDog `--audit-dir` / `BEARDOG_AUDIT_DIR` (Wave 26). Falls back to `$TMPDIR/beardog` when unset. |
 | **SELinux** | Platform-aware IPC | Critical | `adb logcat` confirmed `avc: denied { create } ... tcontext=u:object_r:shell_data_file:s0 tclass=sock_file`. TCP and abstract sockets bypass this. |
 | **ADB port forwarding** | Cross-gate access | C | `deploy_pixel.sh --local-port-offset N` for conflict avoidance. |
 | **biomeOS orchestration** | `biomeos api --port` on mobile | **X** | biomeOS forces Unix socket even when `--port` specified. Needs TCP-only mode for mobile. |
@@ -249,7 +288,7 @@ Tested on Pixel 8a with GrapheneOS via ADB (aarch64-linux-musl binaries).
 
 | Primal | TCP | Abstract Socket | Filesystem UDS | Mobile Ready? |
 |--------|-----|-----------------|----------------|---------------|
-| **beardog** | C (`--listen`) | P (buggy log) | X (SELinux) | Yes (via TCP) |
+| **beardog** | C (`--port` / `--listen`) | C (`--abstract`, fixed logging) | X (SELinux) | Yes (TCP + abstract) |
 | **songbird** | C (`--listen`) | ? | X (SELinux) | Yes (via TCP) |
 | **squirrel** | C (`--port`) | C (`@squirrel`) | X (SELinux) | Yes (both) |
 | **toadstool** | X (not wired) | ? | X (SELinux) | Partial (caps only) |
@@ -278,15 +317,15 @@ on x86_64 and aarch64:
 1. **biomeos**: Implement TCP-only API mode (`biomeos api --port PORT --tcp-only`). Currently forces Unix socket even when `--port` specified. Blocks mobile orchestration.
 2. **biomeos**: Honor `gate` parameter in `capability.call` for cross-gate routing. Currently always routes to local primary endpoint.
 3. **nestgate**: Build aarch64-unknown-linux-musl binary. Wire `--port` to actual TCP bind. Accept `server` as alias for `daemon`.
-4. **beardog**: Default `FAMILY_ID` to `standalone` when unset. Current hard-fail breaks standalone startup.
-5. **beardog**: Fix `--abstract` socket logging — logs filesystem path `@biomeos_beardog_*` instead of confirming abstract namespace bind.
+4. ~~**beardog**: Default `FAMILY_ID` to `standalone` when unset.~~ **RESOLVED** (Wave 25: `PrimalIdentity::from_env()` defaults).
+5. ~~**beardog**: Fix `--abstract` socket logging.~~ **RESOLVED** (Wave 30: logs `abstract_name` with `"bound to abstract namespace"` message).
 6. **loamspine**: Fix Tokio nested runtime panic in `infant_discovery`. Add `--port` flag.
 7. ~~**rhizocrypt**: Add newline-delimited TCP JSON-RPC listener.~~ **RESOLVED** — v0.14.0-dev session 23 (March 31, 2026).
 
 ### High (needed for standard compliance and mobile deployment)
 
-8. **beardog**: Add `--audit-dir` / `BEARDOG_AUDIT_DIR` to avoid CWD writes (read-only filesystem crash on Android).
-9. **beardog**: Wire `birdsong.generate_encrypted_beacon` into server RPC handler.
+8. ~~**beardog**: Add `--audit-dir` / `BEARDOG_AUDIT_DIR` to avoid CWD writes.~~ **RESOLVED** (Wave 26: `--audit-dir` CLI flag + `BEARDOG_AUDIT_DIR` env var, falls back to `$TMPDIR/beardog`).
+9. ~~**beardog**: Wire `birdsong.generate_encrypted_beacon` into server RPC handler.~~ **RESOLVED** (Wave 26: `SecurityHandler` exposes `birdsong.generate_encrypted_beacon` JSON-RPC method).
 10. **songbird**: Add `--dark-forest` CLI flag (env-only today, silent plaintext fallback).
 11. **songbird**: Add `--pid-dir` or `SONGBIRD_PID_DIR` for Android/container substrates.
 12. **toadstool**: Wire `--port` flag to actual server bind. Critical for mobile compute sharing.
@@ -321,7 +360,7 @@ on x86_64 and aarch64:
 
 ### v1.3.0 (March 31, 2026)
 
-**petaltongue IPC Compliance Refresh**
+**petaltongue IPC Compliance Refresh + Composition Decomposition + ludoSpring V37.1 Gap Alignment**
 
 - petaltongue socket path: X → C (`$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`)
 - petaltongue wire framing: P → C (newline TCP via `server --port`)
@@ -332,6 +371,13 @@ on x86_64 and aarch64:
 - petaltongue `capabilities.list`: expanded to 41 methods matching full RPC dispatch surface
 - Marked petaltongue priority action items 5 and 13 as RESOLVED
 - Updated summary scorecard and per-primal mobile transport table
+- Added Capability Registration Compliance section (BM-04: biomeOS discovery timing)
+- Added all 12 primals to capability registration table
+- Documented 3 fix options for biomeOS capability discovery
+- Integrated primalSpring Phase 23f findings (32 gaps across 7 compositions)
+- Integrated ludoSpring V37.1 live plasmidBin gap matrix (95/141 = 67.4%)
+- Cross-references PRIMAL_RESPONSIBILITY_MATRIX.md V2 tiered evolution actions
+- Updated data source header with primalSpring and ludoSpring validation rounds
 
 ### v1.2.0 (March 28, 2026)
 
