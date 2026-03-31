@@ -417,7 +417,7 @@ let response = neural_api.call_capability("crypto.generate_keypair", params).awa
 | Primal | Version | Status | Notes |
 |--------|---------|--------|-------|
 | **BearDog** | v0.18.0+ | ✅ Adopted | Using `crypto.*` and `tls.*` namespaces |
-| **Songbird** | v5.25.0 | 🔄 In Progress | HTTP client needs update to semantic names |
+| **Songbird** | v0.2.1 | ✅ Adopted | `health.liveness/readiness/check`, `capabilities.list`, `crypto.*` delegation, typed `JsonRpcMethod` enum dispatch |
 | **Squirrel** | v2.x | 🔄 Phase 2 | Semantic names primary, legacy aliases deprecated with warnings |
 | **NestGate** | v2.x | ⏳ Pending | Will adopt in next evolution |
 | **ToadStool** | v1.x | ⏳ Pending | Will adopt in next evolution |
