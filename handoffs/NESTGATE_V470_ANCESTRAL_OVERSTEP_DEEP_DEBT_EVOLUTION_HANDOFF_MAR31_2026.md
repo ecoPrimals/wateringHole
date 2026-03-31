@@ -75,16 +75,18 @@ Full audit of NestGate's accumulated functionality that belongs to dedicated pri
 
 ## Current Measured State
 
+**NOTE**: Superseded by `NESTGATE_V470_RING_ELIMINATION_CAPABILITY_SYMLINK_DOC_CLEANUP_HANDOFF_MAR31_2026.md`
+
 ```
-Build:       25/25 workspace members, 0 errors
-Clippy:      ZERO warnings (cargo clippy --workspace --lib)
+Build:       24/24 workspace members, 0 errors
+Clippy:      ZERO warnings (cargo clippy --workspace --all-features --all-targets)
 Format:      CLEAN (cargo fmt --check)
-Tests:       8,384 lib tests passing, 0 failures
+Tests:       8,376 lib tests passing, 0 failures
 Docs:        ZERO warnings (cargo doc --workspace --no-deps)
 Coverage:    80.95% line (llvm-cov)
-Prod files:  ALL under 800 lines
-TLS crypto:  ring provider (aws-lc-rs eliminated — ecoBin compliant)
-Discovery:   Env vars + songBird IPC (mDNS/mdns-sd removed)
+Max file:    879 lines
+TLS/crypto:  Delegated to bearDog IPC; installer uses system curl (ring/rustls/reqwest ELIMINATED)
+Discovery:   Env vars + songBird IPC (mDNS feature-gated)
 MCP:         Removed from workspace (delegated to biomeOS capability.call)
 ```
 
