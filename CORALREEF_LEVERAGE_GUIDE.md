@@ -2,7 +2,7 @@
 # coralReef Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
 **Date**: March 30, 2026
-**Primal**: coralReef (Phase 10, Iteration 70f)
+**Primal**: coralReef (Phase 10, Iteration 70h)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -20,8 +20,10 @@ and GLSL 450 compute shaders compiled to native GPU binaries (NVIDIA
 SASS SM70–SM89, AMD GFX1030+) with full f64 transcendental support.
 coralDriver provides userspace GPU dispatch via DRM ioctl (amdgpu,
 nouveau, nvidia-drm, VFIO). coralGpu unifies compilation and dispatch
-into a single vendor-agnostic API. Zero C dependencies, zero FFI, zero
-vendor SDK.
+into a single vendor-agnostic API. Zero C dependencies, zero vendor SDK.
+coral-driver uses `rustix` for kernel ioctl (not libc FFI) and is the
+only crate with `unsafe` (hardware MMIO, DMA, VFIO ioctls — each block
+has a `SAFETY` comment).
 
 **Philosophy**: The compiler is sovereign infrastructure. Any primal or
 spring that needs GPU computation can compile and dispatch without

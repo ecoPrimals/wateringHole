@@ -218,7 +218,7 @@ Deploy graphs should **never** route a concern to a primal that is listed as OVE
 | **bearDog** | Shed HTTP REST, standardize UDS JSON-RPC, shed mDNS discovery → biomeOS, shed AI optimization → Squirrel | Transport nodes should use songBird for HTTP. |
 | **songBird** | ✅ App crypto delegated to bearDog (JWT, checkpoint, discovery, rendezvous, TLS record); ✅ `health.liveness/readiness/check` canonical names wired; ⏳ sled → nestGate pending nestGate API. | Minimal graph impact — songBird's network role is correct; lowest debt primal. |
 | **sweetGrass** | Add `--port` flag (alias for port portion of `--http-address`). Add domain symlink. | Low impact — already conformant on UDS. |
-| **coralReef** | (deferred) Clarify compile-vs-dispatch boundary with toadStool. Add `--port` for raw newline TCP. | Deferred until GPU stabilization. |
+| **coralReef** | ~~Add `--port` for raw newline TCP~~ **RESOLVED** (Iter 70h). ~~Domain symlinks~~ **RESOLVED** (`shader.sock` + `device.sock`). Compile-vs-dispatch boundary documented (`DISPATCH_BOUNDARY.md`); `device.dispatch` marked transitional in `capabilities.list`. | GPU development ongoing; dispatch handoff to toadStool deferred. |
 
 ---
 

@@ -1697,7 +1697,7 @@ cd /path/to/ecoPrimals/infra/plasmidBin
 - [ ] `health.liveness` responds over TCP JSON-RPC
 - [ ] `b3sum` checksum recorded in `checksums.toml`
 
-### Current inventory (March 28, 2026)
+### Current inventory (March 31, 2026)
 
 | Primal | x86_64 | aarch64 | ecoBin |
 |--------|--------|---------|--------|
@@ -1708,6 +1708,7 @@ cd /path/to/ecoPrimals/infra/plasmidBin
 | toadstool | A++ | A++ | Full |
 | petaltongue | A++ | pending | x86 only |
 | biomeos | A++ | A+ | Full (aarch64 unstripped) |
+| coralreef | A++ | pending | x86 only (coralreef-core, coralctl; aarch64 build pending GPU driver evolution) |
 
 See `plasmidBin/README.md` for the complete inventory and workflow.
 
