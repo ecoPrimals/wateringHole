@@ -48,7 +48,7 @@ transport (UDS or TCP). See `PRIMAL_IPC_PROTOCOL.md` v3.1 Wire Framing.
 | **petaltongue** | Newline | Newline | C | UDS newline-conformant. TCP via `server --port <N>` (March 31). |
 | **nestgate** | Newline | -- | **X** | Socket-only by default. `--port` exists but is non-functional. **musl-static binary segfaults (exit 139) on `--help`** — ecoBin non-compliant. glibc dynamic build works. |
 | **toadstool** | Newline | -- | **P** | `--port` exists but is not forwarded to implementation. |
-| **coralreef** | Newline | HTTP (jsonrpsee) | **P** | UDS is newline. TCP uses jsonrpsee HTTP framing. |
+| **coralreef** | Newline | Newline + HTTP (dual-mode) | **C** | UDS is newline. `--port` binds raw newline TCP. `--rpc-bind` for jsonrpsee HTTP (separate). Both coralreef-core and glowplug support `--port`. |
 | **biomeOS** | -- | HTTP (multiple modes) | **P** | Not a simple `server --port` primal. Orchestrator, not peer. |
 
 ---
@@ -70,7 +70,7 @@ See `PRIMAL_IPC_PROTOCOL.md` Socket Path Convention and
 | **petaltongue** | `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock` | Yes | Yes | No | C | Conformant `biomeos/` path (March 31). |
 | **nestgate** | `/run/user/1000/biomeos/nestgate.sock` | Yes | Yes | No | **P** | Conformant path. Missing domain symlink. |
 | **toadstool** | ? | ? | ? | -- | ? | Not verified. |
-| **coralreef** | `/run/user/1000/biomeos/coralreef.sock` + custom UDS | Yes | Yes | No | **P** | Conformant for primary. Missing domain symlink. |
+| **coralreef** | `/run/user/1000/biomeos/coralreef-core-{family}.sock` | Yes | Yes | `shader.sock`, `device.sock` | **C** | coralreef-core creates `shader.sock` symlink; glowplug creates `device.sock` symlink. |
 | **biomeOS** | Multiple sockets | Yes | Yes | -- | C | Orchestrator, different pattern. |
 
 ---
@@ -91,7 +91,7 @@ non-negotiable canonical names. See `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
 | **petaltongue** | Yes | Yes | Yes | `ping`, `health`, `status`, `check` aliases | C | Full health triad + aliases (March 31). |
 | **nestgate** | ? | ? | ? | ? | ? | Not verified. |
 | **toadstool** | ? | ? | ? | ? | ? | Not verified. |
-| **coralreef** | ? | ? | ? | ? | ? | Not verified. |
+| **coralreef** | Yes | Yes | Yes | `capabilities.list` | **C** | Canonical health methods on coralreef-core, glowplug, and ember. |
 | **biomeOS** | Yes | Yes | Yes | -- | C | Full health suite. |
 
 ---
@@ -112,7 +112,7 @@ See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **petaltongue** | `server` | Yes | `--port <PORT>` | C | `server --port <N>` binds newline TCP JSON-RPC (March 31). |
 | **nestgate** | `daemon` | No (ignored) | `--port` exists but socket-only | **X** | Subcommand is `daemon`, not `server`. `--port` not functional. musl binary segfaults before CLI parsing. |
 | **toadstool** | `server` | No (ignored) | `--port` exists but not wired | **X** | Flag present but not forwarded to server implementation. |
-| **coralreef** | `server` | No | `--rpc-bind` | **X** | Uses `--rpc-bind` for jsonrpsee HTTP, not raw newline. |
+| **coralreef** | `server` | Yes | `--port` (newline TCP), `--rpc-bind` (HTTP) | **C** | coralreef-core: `server --port` for newline TCP; glowplug: `--port` for newline TCP. `--rpc-bind` is separate HTTP endpoint. |
 | **biomeOS** | `neural-api` / `api` | N/A | N/A | -- | Not a peer primal. |
 
 ---
@@ -152,7 +152,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **sweetgrass** | P | P | C | X | C | ? | ? | Close |
 | **rhizocrypt** | C | C | C | C | C | ? | C | Conformant |
 | **loamspine** | C | X | ? | X | X (crash) | ? | ? | Blocked |
-| **coralreef** | P | P | ? | X | C | ? | ? | Needs work |
+| **coralreef** | C | C | C | C | C | ? | ? | **Conformant** |
 | **skunkbat** | ? | ? | ? | ? | ? | ? | ? | Needs audit |
 
 ---
@@ -170,7 +170,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 
 5. ~~**petaltongue**: Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`. Add `--port` flag.~~ **RESOLVED March 31** — socket at `biomeos/petaltongue.sock`, `server --port` wired, full health triad.
 6. **sweetgrass**: Add `--port` flag (alias for port portion of `--http-address`).
-7. **coralreef**: Add `--port` flag for raw newline TCP (alongside jsonrpsee HTTP).
+7. ~~**coralreef**: Add `--port` flag for raw newline TCP (alongside jsonrpsee HTTP).~~ **RESOLVED** — Iter 70h (March 31, 2026). coralreef-core `server --port` and glowplug `--port` both bind newline TCP. Domain symlinks `shader.sock` + `device.sock` installed.
 8. **toadstool**: Wire `--port` flag to actual server bind.
 9. **nestgate**: Wire `--port` to actual TCP bind. Accept `server` as alias for `daemon`.
 
@@ -199,7 +199,7 @@ validation scripts. Verified via live cross-hardware testing (March 27, 2026).
 | **loamspine** | N/A | Crashes on startup | **X** | Tokio nested runtime panic |
 | **sweetgrass** | UDS JSON-RPC | `health.liveness` | C | |
 | **petaltongue** | UDS JSON-RPC (+ optional TCP) | `health.liveness`, `health.readiness`, `health.check` | C | Full health triad + aliases (March 31). |
-| **coralreef** | HTTP (jsonrpsee) | Unknown | ? | |
+| **coralreef** | Newline TCP + HTTP (jsonrpsee) + UDS | `health.liveness`, `health.readiness`, `health.check` | **C** | All three canonical methods on all components. `--port` for newline TCP, `--rpc-bind` for HTTP. |
 | **biomeOS** | HTTP | `/health`, `health.liveness` | C | Full health suite |
 
 **Recommendation**: All primals should expose `health.liveness` via raw TCP
@@ -331,7 +331,7 @@ on x86_64 and aarch64:
 12. **toadstool**: Wire `--port` flag to actual server bind. Critical for mobile compute sharing.
 13. ~~**petaltongue**: Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`. Add `--port`.~~ **RESOLVED March 31.** Build aarch64 headless still pending.
 14. **sweetgrass**: Add `--port` flag (alias for port portion of `--http-address`).
-15. **coralreef**: Add `--port` flag for raw newline TCP.
+15. ~~**coralreef**: Add `--port` flag for raw newline TCP.~~ **RESOLVED** — Iter 70h (March 31, 2026).
 
 ### Recommended (improves ecosystem coherence)
 
@@ -360,7 +360,7 @@ on x86_64 and aarch64:
 
 ### v1.3.0 (March 31, 2026)
 
-**petaltongue IPC Compliance Refresh + Composition Decomposition + ludoSpring V37.1 Gap Alignment**
+**petaltongue IPC Compliance Refresh + coralReef IPC Compliance + Composition Decomposition + ludoSpring V37.1 Gap Alignment**
 
 - petaltongue socket path: X → C (`$XDG_RUNTIME_DIR/biomeos/petaltongue.sock`)
 - petaltongue wire framing: P → C (newline TCP via `server --port`)
@@ -370,6 +370,13 @@ on x86_64 and aarch64:
 - petaltongue mobile transport: X → C for TCP (`--port`); aarch64 build still pending
 - petaltongue `capabilities.list`: expanded to 41 methods matching full RPC dispatch surface
 - Marked petaltongue priority action items 5 and 13 as RESOLVED
+- coralReef Wire Framing: P → C — `--port` binds raw newline TCP on coralreef-core and glowplug
+- coralReef Socket Path: P → C — `shader.sock` + `device.sock` domain symlinks installed
+- coralReef Health Methods: ? → C — all three canonical methods on all components
+- coralReef `--port` Support: X → C — coralreef-core `server --port` and glowplug `--port`
+- coralReef Summary Scorecard: Conformant (was Needs work)
+- coralReef Health Transport: newline TCP + HTTP + UDS, all canonical methods
+- Resolved priority actions #7 and #15 (coralReef `--port`)
 - Updated summary scorecard and per-primal mobile transport table
 - Added Capability Registration Compliance section (BM-04: biomeOS discovery timing)
 - Added all 12 primals to capability registration table
@@ -378,7 +385,6 @@ on x86_64 and aarch64:
 - Integrated ludoSpring V37.1 live plasmidBin gap matrix (95/141 = 67.4%)
 - Cross-references PRIMAL_RESPONSIBILITY_MATRIX.md V2 tiered evolution actions
 - Updated data source header with primalSpring and ludoSpring validation rounds
-
 ### v1.2.0 (March 28, 2026)
 
 **Cross-Gate Federation + plasmidBin Overhaul**
