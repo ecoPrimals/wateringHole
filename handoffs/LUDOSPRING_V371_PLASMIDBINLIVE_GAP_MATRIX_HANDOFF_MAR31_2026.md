@@ -24,7 +24,7 @@ Documentation: CC-BY-SA-4.0
 | NestGate | plasmidBin | `/run/user/1000/biomeos/nestgate.sock` | RUNNING (requires manual JWT) |
 | Songbird | plasmidBin | `/run/user/1000/biomeos/songbird.sock` | RUNNING |
 | sweetGrass | plasmidBin | `/run/user/1000/biomeos/sweetgrass.sock` | RUNNING |
-| rhizoCrypt | plasmidBin | TCP:9401 only | **NO UDS** |
+| rhizoCrypt | plasmidBin | TCP:9401 (dual-mode) + `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock` | **UDS FIXED** (s23) |
 | loamSpine | plasmidBin | — | **PANIC on startup** |
 | Squirrel | plasmidBin | not started | available |
 | petalTongue | plasmidBin | not started | available |
@@ -57,7 +57,7 @@ Documentation: CC-BY-SA-4.0
 
 ## Gap Matrix — Per-Primal Evolution Targets
 
-### rhizoCrypt (CRITICAL — blocks 4 experiments)
+### rhizoCrypt (~~CRITICAL~~ RESOLVED — v0.14.0-dev session 23, March 31, 2026)
 
 **Gap:** TCP-only transport. Binds `0.0.0.0:9401` for JSON-RPC but does not create a Unix domain socket.
 

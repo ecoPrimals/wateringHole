@@ -2,6 +2,7 @@
 
 **Date**: March 31, 2026
 **Priority**: P1 — CRITICAL
+**Status**: **RESOLVED** — v0.14.0-dev session 23 (March 31, 2026)
 **Reporter**: ludoSpring V37.1 live validation
 **Cross-reference**: primalSpring `docs/PRIMAL_GAPS.md` RC-01
 

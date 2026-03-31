@@ -36,7 +36,7 @@ transport (UDS or TCP). See `PRIMAL_IPC_PROTOCOL.md` v3.1 Wire Framing.
 
 | Primal | UDS Framing | TCP Framing | Status | Notes |
 |--------|-------------|-------------|--------|-------|
-| **rhizocrypt** | -- | HTTP POST (Axum) | **X** | TCP JSON-RPC is HTTP-wrapped only. Webb's raw newline client gets 400 Bad Request. Needs raw newline TCP listener. |
+| **rhizocrypt** | Newline | Newline + HTTP POST (dual-mode, first-byte peek) | **C** | Dual-mode TCP auto-detects raw newline vs HTTP POST per connection. UDS uses newline framing. Fixed in v0.14.0-dev session 23. |
 | **loamspine** | Newline | Newline | C | Accepts both raw newline and HTTP POST on JSON-RPC port. |
 | **sweetgrass** | Newline | HTTP POST (Axum) | **P** | UDS is newline-conformant. TCP is HTTP-only. Sufficient for UDS composition. |
 | **squirrel** | Newline (abstract) | -- | **P** | Newline framing correct, but socket is abstract-namespace only (see Discovery). No TCP listener. |
@@ -58,7 +58,7 @@ See `PRIMAL_IPC_PROTOCOL.md` Socket Path Convention and
 
 | Primal | Socket Path | Filesystem? | In biomeos/? | Domain Symlink | Status | Notes |
 |--------|-------------|-------------|-------------|----------------|--------|-------|
-| **rhizocrypt** | Calculated from tarpc port | N/A (TCP) | -- | -- | **P** | No UDS socket at all. TCP only. |
+| **rhizocrypt** | `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock` | Yes | Yes | -- | **C** | `--unix [PATH]` flag; default ecosystem standard path. Fixed in v0.14.0-dev session 23. |
 | **loamspine** | Not reached (crash) | ? | ? | -- | **X** | Crashes before socket bind (Tokio nested runtime). |
 | **sweetgrass** | `/run/user/1000/biomeos/sweetgrass.sock` | Yes | Yes | No | **P** | Conformant path, no family suffix. Missing domain symlink. |
 | **squirrel** | `@squirrel` (abstract) | **No** | No | No | **X** | Abstract namespace only. Invisible to `readdir()`. Not discoverable. |
@@ -79,7 +79,7 @@ non-negotiable canonical names. See `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
 
 | Primal | `health.liveness` | `health.readiness` | `health.check` | Other Health | Status | Notes |
 |--------|-------------------|-------------------|-----------------|--------------|--------|-------|
-| **rhizocrypt** | ? | ? | ? | ? | ? | Not reachable via raw newline (HTTP-only). |
+| **rhizocrypt** | Yes | Yes | Yes | `health.metrics` | C | Reachable via both raw newline TCP and UDS. Fixed in v0.14.0-dev session 23. |
 | **loamspine** | ? | ? | ? | ? | ? | Crashes on startup. |
 | **sweetgrass** | Yes | ? | ? | -- | C | Responds to `health.liveness`. |
 | **squirrel** | **No** | **No** | **No** | `system.health`, `system.status`, `system.ping` | **X** | Uses `system.*` domain exclusively. Non-conformant. |
@@ -100,7 +100,7 @@ See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 
 | Primal | Subcommand | `--port` Works? | Actual Flag | Status | Notes |
 |--------|-----------|-----------------|-------------|--------|-------|
-| **rhizocrypt** | `server` | Yes | `--port` (tarpc), JSON-RPC on calculated port | **P** | `--port` is tarpc, not JSON-RPC. JSON-RPC port is derived (port + offset). |
+| **rhizocrypt** | `server` | Yes | `--port` (tarpc), `--unix [PATH]` (UDS), JSON-RPC on calculated port | **C** | `--port` for tarpc, JSON-RPC derived (port + offset). `--unix` for UDS. |
 | **loamspine** | `server` | No | `--jsonrpc-port` | **X** | No `--port` flag. Uses `--jsonrpc-port`. |
 | **sweetgrass** | `server` | No | `--http-address` (addr:port) | **X** | No `--port` flag. Takes full address, not just port. |
 | **squirrel** | `server` | Yes (ignored) | `--port` exists but UDS is primary | **P** | `--port` accepted but TCP not used when UDS is available. |
@@ -147,7 +147,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **biomeos** | P | C | C | X (forces UDS) | C | X (UDS only) | A++ | Needs TCP mode |
 | **petaltongue** | P | X | ? | X (none) | C | X (no aarch64) | A++ (x86) | Needs work |
 | **sweetgrass** | P | P | C | X | C | ? | ? | Close |
-| **rhizocrypt** | X | P | ? | P | C | ? | ? | Needs work |
+| **rhizocrypt** | C | C | C | C | C | ? | C | Conformant |
 | **loamspine** | C | X | ? | X | X (crash) | ? | ? | Blocked |
 | **coralreef** | P | P | ? | X | C | ? | ? | Needs work |
 | **skunkbat** | ? | ? | ? | ? | ? | ? | ? | Needs audit |
@@ -161,7 +161,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 1. **squirrel**: Add filesystem socket in `$XDG_RUNTIME_DIR/biomeos/squirrel.sock` alongside abstract socket. Add `health.liveness` / `health.readiness` / `health.check` method handlers.
 2. **beardog**: Accept `--port` (alias for `--listen`, port-only). Default `FAMILY_ID` to `standalone` when unset.
 3. **loamspine**: Fix Tokio nested runtime panic in `infant_discovery`. Add `--port` flag (alias for `--jsonrpc-port`).
-4. **rhizocrypt**: Add newline-delimited TCP JSON-RPC listener (alongside HTTP Axum server).
+4. ~~**rhizocrypt**: Add newline-delimited TCP JSON-RPC listener (alongside HTTP Axum server).~~ **RESOLVED** — v0.14.0-dev session 23 (March 31, 2026).
 
 ### High (needed for standard compliance)
 
@@ -192,7 +192,7 @@ validation scripts. Verified via live cross-hardware testing (March 27, 2026).
 | **squirrel** | HTTP JSON-RPC POST | `system.health` via HTTP POST | **X** | Non-standard method name, HTTP-only |
 | **toadstool** | HTTP GET | `/health` (HTTP 200) | **P** | Not verified via JSON-RPC method name |
 | **nestgate** | Raw TCP JSON-RPC | Not verifiable | **X** | musl binary segfaults; glibc binary uses raw TCP |
-| **rhizocrypt** | HTTP POST (Axum) | Unknown | ? | HTTP-wrapped only |
+| **rhizocrypt** | Dual-mode TCP (newline + HTTP) + UDS | `health.liveness`, `health.readiness`, `health.check` | C | Dual-mode auto-detection. Fixed in v0.14.0-dev session 23. |
 | **loamspine** | N/A | Crashes on startup | **X** | Tokio nested runtime panic |
 | **sweetgrass** | UDS JSON-RPC | `health.liveness` | C | |
 | **petaltongue** | UDS JSON-RPC | Unknown | ? | |
@@ -224,7 +224,7 @@ aarch64 Android/GrapheneOS revealed substrate-specific compliance gaps.
 | **biomeos** | C | C | **New March 28** — both arches in plasmidBin. aarch64 binary runs on Pixel but `api` mode still forces Unix socket (TCP gap). |
 | **petaltongue** | C | ? | x86_64 musl stripped and functional. aarch64 not yet built (egui headless cross-compile pending). |
 | **loamspine** | ? | ? | Crashes on startup (Tokio issue, not musl-specific). |
-| **rhizocrypt** | ? | ? | Not tested. |
+| **rhizocrypt** | CI (cross-compile job) | CI (cross-compile job) | musl cross-compile CI for x86_64 + aarch64. |
 | **sweetgrass** | ? | ? | Not tested. |
 | **coralreef** | ? | ? | Not tested. |
 
@@ -281,7 +281,7 @@ on x86_64 and aarch64:
 4. **beardog**: Default `FAMILY_ID` to `standalone` when unset. Current hard-fail breaks standalone startup.
 5. **beardog**: Fix `--abstract` socket logging — logs filesystem path `@biomeos_beardog_*` instead of confirming abstract namespace bind.
 6. **loamspine**: Fix Tokio nested runtime panic in `infant_discovery`. Add `--port` flag.
-7. **rhizocrypt**: Add newline-delimited TCP JSON-RPC listener.
+7. ~~**rhizocrypt**: Add newline-delimited TCP JSON-RPC listener.~~ **RESOLVED** — v0.14.0-dev session 23 (March 31, 2026).
 
 ### High (needed for standard compliance and mobile deployment)
 
