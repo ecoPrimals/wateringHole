@@ -1,10 +1,10 @@
 # 🌍 Semantic Method Naming Standard for Primal IPC
 
-**Version**: 2.2.0  
-**Date**: March 25, 2026  
+**Version**: 2.0.0  
+**Date**: January 25, 2026  
 **Status**: Official Ecosystem Standard  
 **Authority**: wateringHole (ecoPrimals Core Standards)  
-**Supersedes**: v2.1.0 (reinforced health.* as non-negotiable, added compliance enforcement note)
+**Supersedes**: Primal IPC Protocol v1.0 (method naming section)
 
 ---
 
@@ -169,66 +169,6 @@ v3.0:  "crypto.generate_keypair"             ✅ Fully semantic
 "genetic.mix_entropy"          // Mix entropy sources
 "genetic.verify_lineage"       // Verify genetic proof
 "genetic.generate_proof"       // Generate lineage proof
-```
-
-#### 7. `health.*` - Health and Liveness (Cross-Cutting, NON-NEGOTIABLE)
-
-Every primal MUST respond to these method names. They are the ecosystem's
-common probe surface — springs, primalSpring, biomeOS, CI pipelines, and
-orchestrators all depend on them. **This is non-negotiable.**
-
-| Canonical Name | Required Aliases | Response |
-|----------------|-----------------|----------|
-| `health.liveness` | `ping`, `health` | `{"status": "alive"}` |
-| `health.readiness` | | `{"status": "ready", ...}` |
-| `health.check` | `status`, `check` | `{"status": "healthy", ...}` |
-
-**`system.*` is NOT a valid substitute.** Primals that use `system.health`,
-`system.status`, or `system.ping` instead of `health.*` are non-conformant.
-Primals MAY register `system.*` methods as additional endpoints for their own
-tooling, but they MUST also respond to the canonical `health.*` names above.
-
-**Why this matters:** Springs and orchestrators probe primals with
-`health.liveness` to determine availability. A primal that only responds to
-`system.health` appears dead to the ecosystem. This was observed with squirrel
-during esotericWebb's first live composition — Webb's health probe returned
-`METHOD_NOT_FOUND` because squirrel only registered `system.*` methods.
-
-#### 8. `capabilities.*` - Capability Enumeration (Cross-Cutting)
-
-Every primal MUST register the canonical name AND accept the known aliases.
-Consumers (primalSpring, biomeOS, Squirrel) SHOULD probe all three names
-with fallback on `METHOD_NOT_FOUND`.
-
-| Canonical Name | Required Aliases | Response |
-|----------------|-----------------|----------|
-| `capabilities.list` | `capability.list`, `primal.capabilities` | `[{"name": "...", ...}]` |
-
-**Current ecosystem state** (March 2026):
-
-| Primal | Method Registered | Aligned? |
-|--------|------------------|----------|
-| BearDog v0.9.0 | `capabilities.list` | Canonical |
-| biomeOS v2.67 | `capability.list` | Alias — add `capabilities.list` |
-| Squirrel alpha.17 | `capability.list` | Alias — add `capabilities.list` |
-| Songbird wave60 | `primal.capabilities` | Alias — add `capabilities.list` |
-| primalSpring v0.7.0 | `capabilities.list` (probes all 3 with fallback) | Canonical + tolerant |
-
-**Why `capabilities.list` is canonical**: It follows the `{domain}.{operation}`
-pattern (`capabilities` is the domain, `list` is the operation). The singular
-`capability.list` reads as "list a single capability" which is semantically
-different. BearDog (the most method-rich primal at ~91 crypto methods) already
-uses the canonical form.
-
-**Migration**: Primals should add `capabilities.list` as an alias alongside
-their current name. No need to remove the current name — aliases are cheap
-and prevent integration breakage.
-
-#### 9. `lifecycle.*` - Primal Lifecycle
-
-```json
-"lifecycle.status"             // Current state + version
-"lifecycle.shutdown"           // Graceful shutdown
 ```
 
 ---
@@ -472,24 +412,15 @@ let response = neural_api.call_capability("crypto.generate_keypair", params).awa
 
 ---
 
-## 📊 ADOPTION STATUS (Updated March 25, 2026)
+## 📊 ADOPTION STATUS
 
-| Primal | Version | Domain Methods | Cross-Cutting (`health.*`, `capabilities.*`) | Status |
-|--------|---------|---------------|----------------------------------------------|--------|
-| **BearDog** | v0.9.0 | `crypto.*`, `tls.*`, `genetic.*`, `beacon.*` | `health.liveness` / `health.readiness` / `capabilities.list` + aliases | Conformant |
-| **biomeOS** | v2.67 | `capability.*` routing via Neural API | `capability.list` (alias only) | Needs `capabilities.list` |
-| **Songbird** | wave60 | Mixed (`songbird.*` legacy + semantic) | `health` / `primal.capabilities` (aliases only) | Needs `health.liveness` / `capabilities.list` |
-| **Squirrel** | alpha.17 | `ai.*`, `context.*`, `tool.*` | `system.health` / `system.status` / `capability.list` | **Non-conformant** — uses `system.*` instead of `health.*` |
-| **NestGate** | v2.1.0 | `storage.*` | Not verified | Needs audit |
-| **ToadStool** | v0.1.0 | `compute.*` | Not verified | Needs audit |
-| **RhizoCrypt** | v0.2.0 | `dag.*`, `provenance.*` | Not verified | Needs audit |
-| **LoamSpine** | v0.1.0 | `mesh.*`, `network.*` | Not verified | Needs audit (crashes on startup) |
-| **SweetGrass** | v0.3.0 | `provenance.*`, `lineage.*` | `health.liveness` responds | Conformant (health) |
-| **PetalTongue** | v0.2.0 | `visualization.*`, `render.*` | Not verified | Needs audit |
-| **CoralReef** | v0.1.0 | `network.*`, `reef.*` | Not verified | Needs audit |
-| **primalSpring** | v0.7.0 | `coordination.*`, `composition.*`, `graph.*` | Canonical + probes all 3 aliases with fallback | Reference implementation |
-
-See `IPC_COMPLIANCE_MATRIX.md` for full per-primal interop status across all dimensions.
+| Primal | Version | Status | Notes |
+|--------|---------|--------|-------|
+| **BearDog** | v0.18.0+ | ✅ Adopted | Using `crypto.*` and `tls.*` namespaces |
+| **Songbird** | v5.25.0 | 🔄 In Progress | HTTP client needs update to semantic names |
+| **Squirrel** | v2.x | 🔄 Phase 2 | Semantic names primary, legacy aliases deprecated with warnings |
+| **NestGate** | v2.x | ⏳ Pending | Will adopt in next evolution |
+| **ToadStool** | v1.x | ⏳ Pending | Will adopt in next evolution |
 
 ---
 
@@ -505,9 +436,9 @@ See `IPC_COMPLIANCE_MATRIX.md` for full per-primal interop status across all dim
 
 ---
 
-**Status**: Official Standard (v2.2.0)  
+**Status**: Official Standard (v2.0.0)  
 **Adoption**: Mandatory for new primals, recommended migration for existing  
-**Enforcement**: Neural API translation layer bridges gaps during migration. `health.*` is non-negotiable.  
+**Enforcement**: Neural API translation layer bridges gaps during migration  
 **Questions**: Post in wateringHole discussions
 
 ---

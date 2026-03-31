@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # biomeOS Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 22, 2026
-**Primal**: biomeOS v2.67
+**Date**: March 16, 2026
+**Primal**: biomeOS v2.47
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -32,11 +32,11 @@ provides that capability at runtime.
 
 | Domain | What biomeOS Does | What It Does NOT Do |
 |--------|------------------|---------------------|
-| **Routing** | Translates 285+ semantic methods across 26 domains to the primal that provides them | Implement any capability itself |
+| **Routing** | Translates 260+ semantic methods across 19 domains to the primal that provides them | Implement any capability itself |
 | **Orchestration** | Executes deploy graphs: Sequential, Parallel, ConditionalDag, Pipeline (streaming), Continuous (60 Hz) | Decide what to compute |
 | **Lifecycle** | Starts, monitors, auto-resurrects, gracefully shuts down primals | Store state between runs |
 | **Federation** | Forms Plasmodium collectives across machines via HTTP JSON-RPC | Provide networking |
-| **Discovery** | 5-tier capability-first resolution: env override → identity env → XDG probe → /tmp fallback → socket-registry.json | Announce itself on the network |
+| **Discovery** | Resolves capabilities at runtime; env → socket scan → XDG → taxonomy fallback | Announce itself on the network |
 | **Typed SDK** | `CapabilityClient` with domain-specific methods for primal-to-primal IPC | Replace raw JSON-RPC (it wraps it) |
 
 ### IPC Methods (Semantic Naming)
@@ -154,8 +154,8 @@ Application → capability.call("crypto.sign", { message: "..." })
   → biomeOS returns signature
 ```
 
-This works for all 285+ semantic translations across 26 capability
-domains (including genetic/lineage added in v2.66).
+This works for all 260+ semantic translations across 19 capability
+domains.
 
 **Per-spring leverage**:
 
@@ -1815,127 +1815,6 @@ attributed record of every observation.
 
 ---
 
-## 9. v2.66–v2.67 Evolution: What's New for Consumers
-
-### 9.1 Centralized 5-Tier Capability Discovery (v2.66)
-
-biomeOS now provides a single discovery function that all primals and
-springs should use. The function is in `biomeos_types::capability_discovery`
-and implements a 5-tier resolution protocol:
-
-```
-Tier 1: {CAPABILITY}_PROVIDER_SOCKET env var (explicit override)
-Tier 2: {PRIMAL}_SOCKET env var (identity-based, via taxonomy)
-Tier 3: $XDG_RUNTIME_DIR/biomeos/{name}.sock (filesystem probe)
-Tier 4: /tmp/biomeos/{name}.sock (fallback)
-Tier 5: socket-registry.json (file-based registry)
-```
-
-**How primals should use it**: Instead of implementing your own socket
-discovery logic, call:
-
-```rust
-use biomeos_types::capability_discovery::{discover_capability_socket, std_env};
-
-let socket = discover_capability_socket("encryption", &std_env);
-```
-
-This replaces per-primal `discover_beardog_socket()` / `discover_songbird_socket()`
-functions. The centralized function is capability-first (asks "who provides
-encryption?" not "where is BearDog?").
-
-**How primalSpring should use it**: primalSpring's validation experiments
-(especially exp060 socket readiness) can rely on the Neural API socket
-being available immediately after process start. The `serve()` method now
-binds the socket **before** bootstrap/translation loading, so health
-probes see the socket within milliseconds of process start.
-
-### 9.2 Capability Taxonomy as Single Source of Truth (v2.66)
-
-`biomeos_types::capability_taxonomy` is the canonical mapping from
-capabilities to primals and back. Key functions:
-
-```rust
-use biomeos_types::capability_taxonomy;
-
-// Which primal provides a capability?
-let primal = capability_taxonomy::default_primal_for("encryption");
-// → Some("beardog")
-
-// What capabilities does a primal provide?
-let caps = capability_taxonomy::capabilities_for_primal("beardog");
-// → ["encryption", "signing", "tls", "jwt", ...]
-
-// Flexible string parsing (aliases, snake_case, etc.)
-let cap = CapabilityTaxonomy::from_str_flexible("genetic");
-// → Some(GeneticLineage)
-```
-
-**Taxonomy update in v2.66**: `GeneticLineage` moved from biomeOS to
-BearDog. BearDog owns HKDF derivation, lineage proofs, and sibling
-verification. This means `genetic.*` capability calls route to BearDog,
-not biomeOS. Springs that need genetic operations should use
-`capability.call("genetic.derive", ...)` and biomeOS routes to BearDog.
-
-### 9.3 Niche Self-Knowledge (v2.66)
-
-biomeOS now declares its own capabilities via
-`BIOMEOS_SELF_CAPABILITIES` in `primal_names.rs`:
-
-```rust
-pub const BIOMEOS_SELF_CAPABILITIES: &[&str] = &[
-    "primal.germination",
-    "primal.terraria",
-    "ecosystem.coordination",
-    "ecosystem.nucleation",
-    "graph.execution",
-];
-```
-
-Other primals should follow this pattern — declare a
-`{PRIMAL}_SELF_CAPABILITIES` constant so the ecosystem knows what each
-primal provides at compile time (in addition to runtime registration).
-
-### 9.4 Caller-Agnostic Lineage (v2.67)
-
-`load_lineage()` and `has_lineage()` are now free functions in
-`biomeos_spore::beacon_genetics`. Callers no longer need a phantom type
-parameter to check lineage status:
-
-```rust
-// Before (required phantom type):
-LineageDeriver::<DirectBeardogCaller>::load_lineage(&path)?;
-
-// After (caller-agnostic):
-use biomeos_spore::beacon_genetics::load_lineage;
-load_lineage(&path)?;
-```
-
-### 9.5 What primalSpring Can Validate Now
-
-With v2.66-v2.67, primalSpring can validate:
-
-| Experiment | What It Tests |
-|-----------|---------------|
-| exp060 (socket readiness) | Neural API socket binds before bootstrap — should pass immediately |
-| exp025 (composition) | Pipeline graph execution across primals |
-| exp061 (socket timeout) | 5-tier discovery resolves sockets in <100ms |
-| taxonomy alignment | `GeneticLineage` → BearDog, all aliases resolve |
-| niche self-knowledge | biomeOS declares `BIOMEOS_SELF_CAPABILITIES` |
-| cross-primal discovery | All 5 core primals discoverable via centralized function |
-
-### 9.6 What Other Primals Should Adopt
-
-Based on biomeOS v2.67's patterns, other primals should:
-
-1. **Register health endpoints**: `health.liveness`, `health.readiness`, `capabilities.list`
-2. **Use centralized discovery**: Replace per-primal socket resolution with `discover_capability_socket()`
-3. **Drop identity-based socket tiers**: Use `{CAPABILITY}_PROVIDER_SOCKET` env vars, not `{PRIMAL}_SOCKET`
-4. **Declare self-capabilities**: Add `{PRIMAL}_SELF_CAPABILITIES` constant to niche definition
-5. **Use canonical constants**: Import primal names from `biomeos_types::primal_names` instead of inline strings
-
----
-
 ## See Also
 
 - [rhizoCrypt Leverage Guide](./RHIZOCRYPT_LEVERAGE_GUIDE.md) — ephemeral DAG sessions
@@ -1954,4 +1833,4 @@ Based on biomeOS v2.67's patterns, other primals should:
 
 ---
 
-**License**: scyBorg triple-copyleft (AGPL-3.0-only + ORC + CC-BY-SA 4.0)
+**License**: AGPL-3.0-or-later

@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # coralReef Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 19, 2026
-**Primal**: coralReef (Phase 10, Iteration 57)
+**Date**: March 17, 2026
+**Primal**: coralReef (Phase 10, Iteration 54)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -21,10 +21,7 @@ SASS SM70–SM89, AMD GFX1030+) with full f64 transcendental support.
 coralDriver provides userspace GPU dispatch via DRM ioctl (amdgpu,
 nouveau, nvidia-drm, VFIO). coralGpu unifies compilation and dispatch
 into a single vendor-agnostic API. Zero C dependencies, zero FFI, zero
-vendor SDK. **coral-ember** provides immortal VFIO fd holding with
-`SCM_RIGHTS` fd passing, atomic driver swap orchestration, and DRM
-isolation preflight — enabling safe runtime driver hot-swapping
-between vfio/nouveau/nvidia without display manager disruption.
+vendor SDK.
 
 **Philosophy**: The compiler is sovereign infrastructure. Any primal or
 spring that needs GPU computation can compile and dispatch without

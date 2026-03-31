@@ -1,8 +1,8 @@
 # The Watering Hole - ecoPrimals Ecosystem Guidance
 
-**Purpose**: Authoritative project guidance for the ecoPrimals ecosystem — primals, springs, and gen4 products  
-**Audience**: Any primal, spring, or gen4 product at any point in its evolution — plus external audiences (PIs, students, builders, creatives, compliance)  
-**Last Updated**: March 30, 2026
+**Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
+**Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
+**Last Updated**: March 18, 2026
 
 ---
 
@@ -52,10 +52,10 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
 | **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 20,843 tests, 96+ JSON-RPC methods. Node Atomic for sovereign compute. `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. Cross-compile verified (aarch64, armv7 in CI) | Production (A++ GOLD) |
-| **BarraCuda** | Pure Math | FMA-evolved math, 816 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.11, 4,162+ tests | Production (A+) |
-| **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, VFIO-first boot, graceful shutdown, IOMMU group handling). **coral-ember** immortal VFIO fd holder: `SCM_RIGHTS` fd passing, atomic `swap_device` RPC, DRM isolation preflight, external fd holder deadlock detection. **DRM isolation**: Xorg `AutoAddGPU=false` + udev 61-prefix seat tag removal — compute GPU driver swaps invisible to display manager. **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-070). D3hot→D0 sovereign VRAM recovery. GP_PUT cache flush experiment (Iter 57). Reproducibility checklist for adding new GPUs | Production (Phase 10, Iter 57) |
+| **BarraCuda** | Pure Math | 806 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.5, 3,400+ tests | Production (A+) |
+| **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, auto-D0 recovery, VFIO-first boot, graceful shutdown, DRM render node fencing, IOMMU group handling). **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-069). D3hot→D0 sovereign VRAM recovery. Sovereign power management designed (5-state model). Reproducibility checklist for adding new GPUs | Production (Phase 10, Iter 52) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Composition primal: Neural API (290+ translations, 26 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), 5-tier capability discovery, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring, niche self-knowledge, caller-agnostic lineage. Cross-gate federation (GateRegistry, route.register, forward_to_remote_gate), inference scheduling (VRAM-aware GPU routing). 7,202 tests, 90%+ coverage (llvm-cov, all above 90%), zero C deps, ecoBin v3.0, primalSpring-aligned. 0 TODO/FIXME/HACK, 0 unsafe prod, 0 clippy warnings | Production (v2.76, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Composition primal: Neural API (260+ translations, 19 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring | Production (v2.49, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -65,7 +65,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 |--------|--------|------|--------|
 | **petalTongue** | Representation | Universal UI: visual, audio, terminal, web, headless. Accessibility-first multi-modal rendering | Production (A++) |
 | **rhizoCrypt** | Ephemeral Memory | Content-addressed DAG engine for working memory. Sessions, Merkle trees, real-time streaming | Production (A+) |
-| **sweetGrass** | Attribution | Semantic provenance (v0.7.22). W3C PROV-O braids, fair attribution, 24 JSON-RPC methods + tarpc 0.37 + REST + UDS, UniBin, ecoBin, 1,077 tests, Edition 2024, zero unsafe, sovereign types (no shared crates), Arc<str> zero-copy identifiers, IpcErrorPhase w/ Timeout, DispatchOutcome, OrExit, proptest, parking_lot locks, Provenance Trio coordination via JSON-RPC, Tower Atomic enforced, provenance-trio-types banned in deny.toml | Production |
+| **sweetGrass** | Attribution | Semantic provenance (v0.7.20). W3C PROV-O braids, fair attribution, 24 JSON-RPC methods + tarpc 0.37 + REST + UDS, UniBin, ecoBin, 1,049 tests, Edition 2024, IpcErrorPhase w/ Timeout, extract_rpc_error, extract_capabilities, DispatchOutcome, OrExit, proptest, parking_lot locks, Provenance Trio coordination, Tower Atomic enforced | Production |
 | **LoamSpine** | Permanence | Immutable linear ledger for selective permanence. Loam Certificates for ownership and transfer | Production (A+) |
 | **skunkBat** | Defense | Defensive network security: threat detection, graduated response, baseline profiling | Production |
 
@@ -74,24 +74,6 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 | Tool | Purpose |
 |------|---------|
 | **sourDough** | Starter culture - scaffolding, genomeBin tooling, ecosystem bootstrapping |
-
-### Infrastructure Tools (`ecoPrimals/infra/`)
-
-These tools validate and deploy primal compositions. They don't implement primal behavior — they test that compositions work before reaching real gates. Originally from the syntheticChemistry org, now integrated into ecoPrimals.
-
-| Tool | Domain | Role | Status |
-|------|--------|------|--------|
-| **plasmidBin** | Binary deployment | Harvested primal binaries (x86_64 + aarch64), deploy/fetch/validate scripts, multi-arch gate deployment | Production |
-| **benchScale** | Lab substrate | Pure Rust crate (v3.0.0) + shell lab creation. clap CLI, yaml_serde, capability-based config (env-overridable paths/IPs/OS). Docker/LXD/QEMU backends, YAML topologies, 5 network presets, plasmidBin deploy + health pipeline. 212 tests | Production — v3.0.0 modernized, live-tested Docker labs |
-| **agentReagents** | Artifact supply chain | Cloud-init configs, VM images, ISOs, debs for gate provisioning. Hardened scripts (`set -euo pipefail`), `defaults.env`, SHA256 verification, lint.sh quality gate. 9 active + 9 legacy scripts | Active — hardened, ecoPrimals-branded |
-| **fossilRecord** | Ecosystem archaeology | Historical record of ecosystem evolution, archived handoffs and decisions | Archive |
-| **sporePrint** | Deployment templates | Gate deployment blueprints and patterns | Templates |
-
-**Local validation pipeline** (benchScale + plasmidBin + primalSpring):
-```
-validate_local_lab.sh → create Docker lab → deploy binaries → health check → run experiments → teardown
-```
-One command, ~30 seconds, repeatable on any machine with Docker. Pre-gates remote SSH deploys via `deploy_gate.sh --local-validate`.
 
 ---
 
@@ -296,7 +278,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **Any Spring + Provenance Trio**: `provenance_pipeline` graph — universal experiment provenance
 - **NestGate + LoamSpine**: Content-addressed storage backing immutable history
 
-### primalSpring Coordination (ecosystem self-validation + gen4 bridge)
+### primalSpring Coordination (ecosystem self-validation)
 
 - **primalSpring + All NUCLEUS Primals**: Atomic composition testing (Tower, Node, Nest, Full NUCLEUS)
 - **primalSpring + biomeOS**: Graph execution validation — all 5 coordination patterns with real primals
@@ -307,100 +289,12 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **primalSpring + fieldMouse + NestGate + sweetGrass**: Edge data ingestion pipeline
 - **primalSpring + petalTongue**: SSE visualization pipeline
 - **primalSpring + Squirrel**: AI coordination via biomeOS capability graph
-- **primalSpring + esotericWebb**: gen4 composition validation — Webb deploy graphs declare `primalspring_primal` as composition health validator (`composition.webb_*_health` capabilities). primalSpring validates that primal stacks compose correctly for product use.
-- **primalSpring + ludoSpring**: Game science composition — ludoSpring validates game models, primalSpring validates the IPC and composition that makes those models available to gen4 products
 
 ### Under Development
 
 - **Songbird + Songbird**: Cross-tower federation, multi-family routing
 
 **Detail**: `INTER_PRIMAL_INTERACTIONS.md`
-
----
-
-## The Generational Model
-
-The ecoPrimals ecosystem evolves through four generations, each building on
-the previous:
-
-| Gen | Question | Answer | Artifacts |
-|-----|----------|--------|-----------|
-| **gen1** | Can we build it? | Yes — $11K cluster, fault-tolerant HPC, AI-assisted dev | NestGate, Squirrel, hardware fleet |
-| **gen2** | What should we build? | A sovereign protocol — 8 composable primals, AGPL as trust, BYOAI | biomeOS, BearDog, Songbird, Philosophy of Forgetting |
-| **gen3** | Does it work? | Yes — 12,510+ checks, 70+ papers, 7 springs, 14 primals | Springs, constrained evolution, SPRING/PRIMAL catalogs, thesis |
-| **gen4** | Who uses it? | Creatives, scientists, sovereign builders | sporeGarden products, standalone plasmidBin, creative surface |
-
-### How the Generations Relate
-
-- **Primals** are gen2 entities — they define capabilities and exist as deployable binaries
-- **Springs** are gen3 entities — they validate primals by reproducing published science
-- **Products** (sporeGarden) are gen4 entities — they compose primals into tools people use
-- **plasmidBin** (standalone repo) is the gen4 deployment surface where validated binaries land
-
-Springs have tighter coupling to primals (e.g. hotSpring cracks sovereign GPU
-compiling with coralReef, ludoSpring validates game science models). This is
-expected — springs are the validation layer. Products (gen4) have zero coupling
-to spring source; they consume only deployed binaries via IPC.
-
-### Three Organizations
-
-```
-syntheticChemistry/     — Springs (science validation, gen3) + infra tools (benchScale, agentReagents)
-ecoPrimals/             — Primals + infrastructure (gen2–gen3)
-sporeGarden/            — Products (creative surface, gen4)
-```
-
-### plasmidBin — Primal Deployment Surface
-
-[github.com/ecoPrimals/plasmidBin](https://github.com/ecoPrimals/plasmidBin) is
-the standalone deployment surface. Primal teams build and harvest binaries →
-`harvest.sh` creates GitHub Releases with checksums → consumers run `fetch.sh`
-to populate their local plasmidBin. 7 x86_64 + 5 aarch64 ecoBin-compliant binaries as of v2026.03.28. See `IPC_COMPLIANCE_MATRIX.md` for per-primal transport compliance.
-
-The local `ecoPrimals/plasmidBin/` directory is the gen3 embedded version
-(manifest + sources). The standalone repo is the gen4 deployment surface
-(metadata + binaries via GitHub Releases).
-
-`deploy_gate.sh --local-validate` runs a benchScale Docker lab before SSH-pushing to a real gate.
-
-### benchScale + agentReagents — Validation Substrate
-
-benchScale (`ecoPrimals/infra/benchScale`) creates repeatable multi-node labs from
-YAML topology files. Docker containers, network condition simulation (5 presets from
-basement LAN to satellite), automated binary deployment from plasmidBin. Originally
-a syntheticChemistry project, now wired into primalSpring's `validate_local_lab.sh`.
-
-agentReagents (`ecoPrimals/infra/agentReagents`) is the artifact supply chain for
-gate provisioning: cloud-init configs, VM images, ISOs. Used by benchScale's libvirt
-backend for Tier 2 (VM) validation.
-
-**Live status (March 28)**: 7/8 primals alive in Docker, 2 experiments pass, per-primal
-CLI gaps documented. Both tools modernized: benchScale v3.0.0 (yaml_serde, clap, capability config,
-212 tests), agentReagents hardened (strict bash, defaults.env, SHA256, legacy scripts archived).
-See `BENCHSCALE_AGENTREAGENTS_LOCAL_VALIDATION_SUBSTRATE_HANDOFF_MAR28_2026.md` and
-`BENCHSCALE_AGENTREAGENTS_MODERNIZATION_HANDOFF_MAR28_2026.md`.
-
-### gen4 Products
-
-**esotericWebb** ([sporeGarden/esotericWebb](https://github.com/sporeGarden/esotericWebb))
-is the first gen4 product — a CRPG engine that composes primals into a playable
-game. It consumes 8 primal domains via `PrimalBridge` (JSON-RPC IPC), with
-graceful degradation when primals are absent. 166 tests, 23 bridge methods,
-zero spring imports. Its `EVOLUTION_GAPS.md` feeds gap pressure back to primal
-teams — driving the ecosystem forward.
-
-**helixVision** (planned — sporeGarden) is the second gen4 product pattern — a
-sovereign genomics discovery platform that composes wetSpring (16S pipeline,
-microbiome analytics) and neuralSpring/coralForge (structure prediction) into a
-deployable tool for field biologists, wastewater engineers, and environmental
-scientists. Same PrimalBridge pattern, same deploy graphs, different domain.
-coralForge becomes helixVision's structure prediction module; the gen3 science
-doesn't rename.
-
-### gen4 Documentation
-
-Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
-6 sections: thesis, architecture, products, economics, knome, outreach).
 
 ---
 
@@ -421,10 +315,9 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 ## Document Index
 
 ### Master Index
-- **`GEN4_BRIDGE.md`** — **Start here if you're new to gen4.** How primals become products. The flow from binary harvest to product composition to gap pressure. What every team needs to know.
-- **`STANDARDS_AND_EXPECTATIONS.md`** — Single-document reference for all ecoPrimals standards, expectations, and conventions. Links to every standard below.
+- **`STANDARDS_AND_EXPECTATIONS.md`** — **Start here.** Single-document reference for all ecoPrimals standards, expectations, and conventions. Links to every standard below.
 - **`GLOSSARY.md`** — Definitive terminology for the ecoPrimals ecosystem. Gate, primal, spring, atomic, niche, deploy graph, germination, absorption, delegation, fossil record, and every other term.
-- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, and tooling spec for ecoPrimals gates. Multi-arch (x86_64/aarch64), multi-substrate (desktop, mobile/Android, remote bootstrap). plasmidBin integration, Dark Forest seed distribution, network topology patterns.
+- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, and tooling spec for an ecoPrimals gate. Pop!\_OS, Rust toolchain, Cursor, GPU configuration, directory layout, post-install checklist.
 
 ### Architecture Standards
 - `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
@@ -444,9 +337,6 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` — Tower Atomic TLS guide
 - `btsp/BEARDOG_TECHNICAL_STACK.md` — BearDog cryptographic foundation
 
-### Domain & Beacon Infrastructure
-- `DOMAIN_INFRASTRUCTURE.md` — Domain architecture: nestgate.io (BirdSong beacon via Cloudflare Tunnel), primals.eco (public portal via GitHub Pages), LAN cloud multi-machine resilience, operational procedures
-
 ### GPU & Numerical Computing
 - `GPU_F64_NUMERICAL_STABILITY.md` — f64 precision lessons from hotSpring
 - `NUMERICAL_STABILITY_EVOLUTION_PLAN.md` — Fast AND safe math strategy
@@ -461,11 +351,6 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture (memory-bound digital objects)
 - `UPSTREAM_CONTRIBUTIONS.md` — Standalone crates for crates.io from ecoPrimals
 
-### Composition & Deployment
-- `COMPOSITION_PATTERNS.md` — **Canonical reference** for deploy graphs (`[[graph.node]]` vs `[[nodes]]`), niche YAML, primal launch profiles, and 8-step socket discovery resolution order
-- `SPOREGARDEN_DEPLOYMENT_STANDARD.md` — How gen4 products compose primals: BYOB model, esotericWebb reference implementation, environment contract, quality gates
-- `PRIMALSPRING_COMPOSITION_GUIDANCE.md` — primalSpring's composition validation capabilities
-
 ### Coordination & Patterns
 - `INTER_PRIMAL_INTERACTIONS.md` — Production interaction map and plans
 - `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
@@ -477,7 +362,6 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 
 ### Presentation & External Review
 - **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** — **Read before any docs sweep.** Checklist for making a spring/primal independently reviewable by PIs, students, hobbyists, and compliance reviewers. The 5-minute test. Self-assessment template. Common problems and fixes. References `publicRelease/` audience briefs.
-- **`PUBLIC_SURFACE_STANDARD.md`** — **Read before any public publish.** GitHub repo descriptions, topic tags, PII review checklist, AI-ingestible `CONTEXT.md` template, and the copy-paste task for public surface passes. Defines the five layers: GitHub metadata, README on-ramp, AI context block, PII hygiene, and the reusable surface-pass blurb.
 
 ### Leverage Guides (Per-Primal)
 - `BARRACUDA_LEVERAGE_GUIDE.md`, `BIOMEOS_LEVERAGE_GUIDE.md`, `CORALREEF_LEVERAGE_GUIDE.md`
@@ -492,10 +376,8 @@ Full gen4 documentation lives in `whitePaper/gen4/` (21 working papers across
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
-- `handoffs/*.md` — Active handoffs (107 current — latest version per primal/spring, cross-deploy substrate evolution, per-primal team debt handoffs)
-- `HOTSPRING_SOVEREIGN_PIPELINE_REGROUP_HANDOFF_MAR30_2026.md` — Sovereign GPU pipeline status, validation matrix, DRM-from-both-sides, upstream integration
-- `CORALREEF_WARM_HANDOFF_LIVEPATCH_HANDOFF_MAR30_2026.md` — Warm handoff code changes (coral-driver/ember/glowplug), kernel livepatch, key bug fixes
-- `fossilRecord/` — 691 absorbed handoffs (Feb–Mar 2026) — superseded evolution history, preserved as permanent record
+- `handoffs/*.md` — Active session handoffs (last 48 hours)
+- `handoffs/archive/` — Fossil record (507 archived handoffs, Feb 2026 – present)
 
 ---
 
@@ -536,7 +418,6 @@ Four external audiences will read your repo without context:
 | **Students / Core Facilities** | How do I build it? How do I run it? Where do I start? |
 | **Hardware Builders / Hobbyists** | What hardware does it need? What can my GPU do? How do I contribute compute? |
 | **Compliance / Institutional Review** | What standards does it meet? What are the dependencies? Is it safe? What's the license? |
-| **Creatives / Game Designers** | What can I make with this? How do I author content? What do I keep? (gen4 audience via sporeGarden) |
 
 The `publicRelease/` documents in `whitePaper/attsi/non-anon/contact/publicRelease/`
 make ecosystem-wide claims. Each spring and primal must ensure its own presentation
@@ -544,4 +425,4 @@ supports those claims.
 
 ---
 
-**The Watering Hole is maintained by all primals, springs, and products. Every evolution — from primal binary to spring validation to product composition — strengthens the whole ecosystem. gen4 is where the primals become invisible. The Watering Hole is where they stay visible to each other.**
+**The Watering Hole is maintained by all primals. Every primal's evolution strengthens the whole ecosystem.**
