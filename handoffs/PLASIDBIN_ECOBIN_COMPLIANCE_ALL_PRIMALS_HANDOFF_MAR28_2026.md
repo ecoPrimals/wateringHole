@@ -204,7 +204,7 @@ Every primal must:
 
 ---
 
-### rhizoCrypt — NEEDS WORK
+### rhizoCrypt — RESOLVED (wire framing + UDS fixed March 31, 2026)
 
 **plasmidBin status**: Not in plasmidBin
 
@@ -256,7 +256,7 @@ Every primal must:
 | coralreef | -- | -- | X | ? | C | Build-from-source |
 | sourdough | MISSING | MISSING | ? | ? | ? | Not yet |
 | sweetgrass | MISSING | MISSING | X | C | C | Not yet |
-| rhizocrypt | MISSING | MISSING | X | ? | C | Not yet |
+| rhizocrypt | MISSING | MISSING | C | C | C | Wire + UDS fixed s23 |
 | loamspine | MISSING | MISSING | X | ? | X (crash) | Blocked |
 | skunkbat | MISSING | MISSING | ? | ? | ? | Not yet |
 

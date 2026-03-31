@@ -107,7 +107,7 @@ cargo llvm-cov                 ✓ 90.90% region / 89.58% line
 
 ## Blocking On
 
-- **rhizoCrypt** (RC-01): No UDS socket yet — blocks provenance trio compositions
+- ~~**rhizoCrypt** (RC-01): No UDS socket yet — blocks provenance trio compositions~~ **RESOLVED** (v0.14.0-dev session 23, March 31, 2026)
 - **loamSpine** (LS-03): Startup panic — blocks anchoring pipeline
 
 Once both fix, sweetGrass is ready for provenance pipeline, session provenance,
