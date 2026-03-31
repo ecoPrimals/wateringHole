@@ -3,9 +3,9 @@
 # primalSpring Leverage Guide — How Every Primal Can Use Coordination Validation
 #
 # Status: Active
-# Last Updated: March 22, 2026
-# primalSpring Version: v0.7.0 (Phase 15 — cross-ecosystem absorption, 361 tests, 53 experiments, 87/87 gates)
-# biomeOS alignment: v2.67 (5-tier centralized discovery, GeneticLineage→BearDog, niche self-knowledge)
+# Last Updated: March 23, 2026
+# primalSpring Version: v0.7.0 (Phase 14 — deep debt + builder pattern + full provenance, 53 experiments, 10 tracks, 361 tests, 87/87 gates)
+# biomeOS alignment: v2.67+ (5-tier centralized discovery, GeneticLineage→BearDog, niche self-knowledge)
 
 ---
 
@@ -42,15 +42,15 @@ capabilities = ["coordination", "composition", "nucleus"]
 | Track | What | Validates For |
 |-------|------|--------------|
 | 1 — Atomic Composition | Tower, Node, Nest, Full NUCLEUS | Every primal that participates in atomics |
-| 2 — Graph Execution | All 5 coordination patterns (3/5 live) | biomeOS, Neural API, every graph consumer |
+| 2 — Graph Execution | All 5 coordination patterns | biomeOS, Neural API, every graph consumer |
 | 3 — Emergent Systems | RootPulse, RPGPT, coralForge, ecology | Provenance Trio, ludoSpring, neuralSpring |
 | 4 — Bonding & Plasmodium | Covalent/ionic bonds, multi-gate | Songbird mesh, BearDog trust |
 | 5 — coralForge Redefinition | Neural object Pipeline graph | neuralSpring, wetSpring, hotSpring, ToadStool, NestGate |
 | 6 — Cross-Spring | Data flow, provenance, edge, AI | Every spring, fieldMouse, petalTongue, Squirrel |
 | 7 — Showcase-Mined Patterns | Compute triangle, protocol escalation, federation, supply chain, attribution | All primals — patterns extracted from phase1/phase2 showcases |
-| 8 — Live Composition | Tower + Squirrel AI + Nest + Node + NUCLEUS + Graph Overlays | Live multi-primal with real plasmidBin binaries |
-| 9 — Multi-Node Bonding | BondingPolicy, idle compute, data federation | Songbird mesh, NestGate replication, STUN tiers |
-| 10 — Cross-Gate Deployment | LAN covalent mesh, remote health probing | Gate operators, USB spore deployment |
+| 8 — Live Composition | Tower + Squirrel AI + Nest + Node + NUCLEUS + Graph Overlays + Cross-Primal Discovery | All NUCLEUS primals, Squirrel, petalTongue |
+| 9 — Multi-Node Bonding | Bonding policy, data federation, graph metadata | Songbird, NestGate, Provenance Trio |
+| 10 — Cross-Gate Deployment | LAN covalent mesh, remote NUCLEUS health via TCP | All gate primals |
 
 ### 1.3 What It Does NOT Do
 
@@ -105,7 +105,7 @@ primalSpring provides a converged IPC resilience stack adopted across the ecosys
 
 | Component | Details |
 |-----------|---------|
-| **niche.rs** | 37 capabilities, 7+ semantic domains, operation dependencies, cost estimates |
+| **niche.rs** | 21 capabilities, 7 semantic domains, operation dependencies, cost estimates |
 | **register_with_target()** | Registers capabilities with biomeOS for BYOB scheduling |
 | **capabilities.list RPC** | Returns structured niche: capabilities array, semantic mappings, operation deps, cost estimates |
 
@@ -135,14 +135,13 @@ primalSpring provides a converged IPC resilience stack adopted across the ecosys
 
 ### 1.11 Test and Experiment Evolution
 
-| Metric | v0.1.0 | v0.2.0 | v0.3.0 | v0.7.0 (Phase 15) |
-|--------|--------|--------|--------|-------------------|
+| Metric | v0.1.0 | v0.2.0 | v0.3.0 | v0.7.0 (Phase 14) |
+|--------|--------|--------|--------|---------------------|
 | Tests | 69 | 157 | 236 | **361** (343 unit + 10 integration + 4 doc-tests + 4 proptest) |
 | RPC endpoints | 8 | 11 | 17 | **17** |
-| Deploy graphs | 6 | 6 | 11 | **22** (18 single-node + 4 multi-node, all `by_capability`) |
+| Deploy graphs | 6 | 6 | 11 | **22** (18 single + 4 multi-node) |
 | Experiments | 38 | 38 | 38 | **53** (10 tracks) |
-| Provenance coverage | 0% | 0% | 0% | **100%** (all 53 experiments via `with_provenance()`) |
-| Gates | 0 | 0 | 0 | **87/87** |
+| Provenance coverage | 0% | 0% | 8% | **100%** (all 53 experiments) |
 
 ---
 
@@ -307,20 +306,20 @@ prediction. This mirrors RootPulse exactly.
 ## 7. Evolution Path
 
 ```
-Phase 0 (done): Scaffolding — 38 experiments, workspace compiles
-Phase 1 (done): Neural API integration, real IPC, server mode, 69 tests
-Phase 2 (done): Ecosystem absorption, niche self-knowledge, deploy graph validation, 157 tests
-Phase 3 (done): Capability-first architecture, topological waves, 236 tests
-Phase 4 (done): Tower Atomic + Squirrel AI live, 41/41 gates
-Phase 5 (done): Tower Full Utilization, 41/41 gates
-Phase 6 (done): Nest + Node + NUCLEUS, 58/58 gates
-Phase 7-10 (done): Graph overlays, Squirrel discovery, graph execution, provenance readiness
-Phase 11-12 (done): Provenance trio, multi-node bonding, ecosystem absorption waves (360 tests)
-Phase 13 (done): Cross-gate deployment tooling (53 experiments, 10 tracks)
-Phase 14 (done): Deep debt + builder pattern + full provenance (361 tests, 87/87 gates)
-Phase 15 (done): Cross-ecosystem absorption — slug constants, unwrap/expect discipline
-Phase 16 (next): LAN covalent deployment — live multi-gate NUCLEUS
-Phase 17+: Live multi-node, emergent E2E, bonding coordination, cross-spring integration
+Phase 0 (done):  Scaffolding — 38 experiments, workspace compiles
+Phase 1 (done):  Neural API integration, real IPC, server mode, 69 tests
+Phase 2 (done):  Ecosystem absorption, niche self-knowledge, deploy graph validation, 157 tests
+Phase 3 (done):  Capability-first architecture, 236 tests
+Phase 4 (done):  Tower Atomic + Squirrel AI live, 264 tests
+Phase 5 (done):  Tower Full Utilization, 270 tests
+Phase 6 (done):  Nest + Node + NUCLEUS, 282 tests
+Phase 7 (done):  Graph Overlays + Squirrel Discovery + Graph Execution, 253+ tests
+Phase 8-10 (done): Provenance Trio, Multi-Node Bonding, Ecosystem Absorption, 303 tests
+Phase 11-12 (done): Deep Absorption + Cross-Gate Deployment, 360 tests
+Phase 13 (done): Cross-Gate Deployment Tooling, 53 experiments
+Phase 14 (done): Deep Debt + Builder Pattern + Full Provenance, 361 tests
+Phase 15 (next): LAN Covalent Deployment — live multi-gate NUCLEUS
+Phase 16+:       Emergent E2E, live multi-node, bonding coordination
 ```
 
 ---
@@ -332,9 +331,11 @@ Phase 17+: Live multi-node, emergent E2E, bonding coordination, cross-spring int
 - `primalSpring/specs/CROSS_SPRING_EVOLUTION.md` — evolution path and cross-spring touchpoints
 - `primalSpring/specs/BARRACUDA_REQUIREMENTS.md` — minimal barraCuda needs
 - `primalSpring/specs/PAPER_REVIEW_QUEUE.md` — coordination pattern review queue
-- `whitePaper/gen3/baseCamp/23_primal_coordination.md` — baseCamp paper
+- `whitePaper/gen3/baseCamp/23_mass_energy_information_equivalence.md` — baseCamp paper 23
 - `whitePaper/gen3/baseCamp/10_coralforge.md` — coralForge architectural evolution
 - `whitePaper/gen3/SPRING_CATALOG.md` — spring catalog (section 1.8)
 - `wateringHole/PRIMAL_REGISTRY.md` — primalSpring registry entry
 - `wateringHole/BIOMEOS_LEVERAGE_GUIDE.md` — biomeOS perspective on primalSpring
 - `wateringHole/FIELDMOUSE_DEPLOYMENT_STANDARD.md` — fieldMouse deployment class
+- `primalSpring/wateringHole/PRIMALSPRING_COMPOSITION_GUIDANCE.md` — composition guidance
+- `primalSpring/wateringHole/PRIMALSPRING_ECOSYSTEM_LEVERAGE_GUIDE.md` — internal leverage guide

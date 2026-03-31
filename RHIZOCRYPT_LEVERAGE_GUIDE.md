@@ -55,15 +55,8 @@ All methods follow `{domain}.{operation}[.{variant}]` per the
 | `health.metrics` | Operational metrics (sessions, latency, errors) |
 | `capability.list` | List all capabilities this primal provides |
 
-| `health.liveness` | Kubernetes-compatible liveness probe (`{"status": "alive"}`) |
-| `health.readiness` | Readiness probe (`{"status": "ready" | "not_ready"}`) |
-| `tools.list` | MCP tool catalog with JSON Schema definitions |
-| `tools.call` | Dynamic MCP tool invocation (routes to internal methods) |
-
 **Transport**: JSON-RPC 2.0 over HTTP (required), tarpc/bincode (optional).
-**Aliases**: `mcp.tools.list`, `mcp.tools.call` (ecosystem compat).
-**Legacy prefixes**: `rhizocrypt.*`, `rhizo_crypt.*` normalized automatically.
-**Registry**: `capability_registry.toml` (27 methods, 8 domains incl. `tools`).
+**Registry**: `capability_registry.toml` (23 methods, 7 domains).
 
 ### Self-Knowledge (`niche.rs`)
 
@@ -74,13 +67,11 @@ truth for identity, capabilities, and scheduling hints:
 | Constant / Function | Purpose |
 |---------------------|---------|
 | `PRIMAL_ID` | `"rhizocrypt"` — identity for biomeOS registration |
-| `CAPABILITIES` | All 27 exposed methods (8 domains) |
+| `CAPABILITIES` | All 23 exposed methods |
 | `CONSUMED_CAPABILITIES` | What rhizoCrypt calls on other primals |
 | `COST_ESTIMATES` | Per-method latency hints for Pathway Learner scheduling |
 | `operation_dependencies()` | Parallelization DAG for Pathway Learner |
 | `capability_list()` | Enhanced `capability.list` response with per-method cost and deps |
-| `mcp_tools()` | MCP tool definitions with JSON Schema for AI agent coordination |
-| `normalize_method()` | Legacy prefix normalization (`rhizocrypt.*`, `rhizo_crypt.*`) |
 
 ### Enhanced `capability.list` Response
 

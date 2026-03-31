@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # neuralSpring Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 24, 2026
-**Spring**: neuralSpring V124/S174 (Rust edition 2024, pedantic+nursery, MSRV 1.87)
+**Date**: March 17, 2026
+**Spring**: neuralSpring V113/S162 (Rust edition 2024, pedantic+nursery)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -18,14 +18,10 @@ these guides form a combinatorial recipe book for emergent behaviors.
 neuralSpring is the **ML and spectral analysis validation harness** for
 the ecoPrimals stack. It proves that Python ML baselines can be faithfully
 ported to sovereign Rust+GPU compute using barraCuda, then exposes those
-validated capabilities as JSON-RPC services. 16 science capabilities,
-68 public modules, 232+ named tolerance constants, 261 validation
-binaries, ~1,400 tests (1,211 lib + 73 forge + 80 playGround + 9 integration
-+ 25 tokio). Pure Rust, zero unsafe, zero C application dependencies
-(ecoBin v3.0). `#![forbid(unsafe_code)]` workspace-wide, zero `#[allow()]`,
-cast lints denied. `ValidationSink` for machine-readable CI output (JSON,
-NDJSON). Provenance integrity tests for all 49 Python baselines. barraCuda
-v0.3.7, `default-features = false`.
+validated capabilities as JSON-RPC services. 15 science capabilities,
+60+ public modules, 130+ named tolerance constants, 260+ validation
+binaries, 1133+ tests. Pure Rust, zero unsafe, zero C application
+dependencies (ecoBin v3.0).
 
 **Philosophy**: ML and spectral analysis are validated science, not black
 boxes. Every neural network inference, every eigendecomposition, every

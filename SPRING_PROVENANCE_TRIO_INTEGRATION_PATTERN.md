@@ -5,9 +5,9 @@
 
 ## Status
 
-- **Version**: 1.1
+- **Version**: 1.0
 - **Derived from**: ludoSpring V15 (`barracuda/src/ipc/provenance.rs`)
-- **Wire types**: Each primal owns its own types — no shared `provenance-trio-types` crate (archived per sovereignty standard, Mar 2026)
+- **Canonical types**: `provenance-trio-types` v0.1.0 (`phase2/provenance-trio-types/`)
 - **Validated by**: biomeOS E2E (`provenance_trio_e2e.rs`), ludoSpring exp052-066
 
 ---
@@ -43,21 +43,17 @@ which provides:
 
 ---
 
-## Wire Types
+## Core Types
 
-Each primal defines its own wire types. JSON is the contract. The shared
-`provenance-trio-types` crate has been **archived** — primals must not take
-compile-time dependencies on other primals' types.
+All wire types come from `provenance-trio-types`:
 
-| Wire type | Producer | Consumer | Contract |
-|-----------|----------|----------|----------|
-| `DehydrationSummary` | rhizoCrypt | loamSpine, sweetGrass | JSON-RPC payload (unknown fields silently ignored) |
-| `PipelineRequest` | biomeOS graph | sweetGrass | JSON-RPC `pipeline.attribute` params |
-| `PipelineResult` | sweetGrass | biomeOS graph | JSON-RPC `pipeline.attribute` result |
-
-Springs define their own local structs with `serde::Deserialize` / `serde::Serialize`
-and `#[serde(default)]` for forward compatibility. No `From` impls needed — JSON
-is the canonical representation.
+| Type | Purpose |
+|------|---------|
+| `DehydrationSummary` | rhizoCrypt → loamSpine + sweetGrass |
+| `PipelineRequest` | biomeOS graph input parameters |
+| `PipelineResult` | biomeOS graph output (merkle_root + commit_ref + braid_ref) |
+| `ProvenancePipeline` | Trait for springs that produce provenance sessions |
+| `SimpleProvenancePipeline` | Simpler stateless variant |
 
 ---
 
@@ -309,44 +305,27 @@ fn handle_begin_experiment(req: &JsonRpcRequest) -> HandlerResult {
 
 ---
 
-## ProvenancePipeline Pattern (Optional)
+## ProvenancePipeline Trait (Optional)
 
 For springs that want tighter biomeOS integration (e.g., continuous sessions,
-auto-dehydration), define your own pipeline trait locally:
+auto-dehydration), implement `ProvenancePipeline` from `provenance-trio-types`:
 
 ```rust
-/// Define locally — no shared crate import.
-#[derive(serde::Serialize)]
-struct PipelineRequest {
-    session_id: String,
-    agent_did: String,
-    #[serde(skip_serializing_if = "Option::is_none")]
-    niche: Option<String>,
-    #[serde(default)]
-    agent_summaries: Vec<serde_json::Value>,
-}
-
-/// Result from pipeline.attribute.
-#[derive(serde::Deserialize)]
-struct PipelineResult {
-    #[serde(default)]
-    braid_ref: Option<String>,
-    #[serde(default)]
-    commit_ref: String,
-    #[serde(default)]
-    dehydration_merkle_root: String,
-}
+use provenance_trio_types::{ProvenancePipeline, PipelineRequest, PipelineResult};
 
 struct MySpring { session_id: Option<String> }
 
-impl MySpring {
+impl ProvenancePipeline for MySpring {
+    type SessionId = String;
     fn producer_name(&self) -> &str { "my-spring" }
-    fn active_session(&self) -> Option<&str> { self.session_id.as_deref() }
+    fn active_session(&self) -> Option<String> { self.session_id.clone() }
 
     fn dehydrate_params(&self) -> Option<PipelineRequest> {
         self.session_id.as_ref().map(|sid| PipelineRequest {
             session_id: sid.clone(),
             agent_did: "did:key:my-spring".to_string(),
+            family_id: String::new(),
+            experiment_id: None,
             niche: Some("my-niche".to_string()),
             agent_summaries: Vec::new(),
         })
@@ -380,6 +359,6 @@ impl MySpring {
 - [ ] Wire `begin`/`record`/`complete` into your JSON-RPC handler dispatch
 - [ ] Return provenance availability status in handler responses
 - [ ] Ensure domain logic never fails when provenance is unavailable
-- [ ] Define local wire types with `#[serde(default)]` for forward compatibility
+- [ ] Add `provenance-trio-types` dependency for `ProvenancePipeline` trait (optional)
 - [ ] Test with `NEURAL_API_SOCKET` unset (degradation path)
 - [ ] Test with biomeOS running (happy path)

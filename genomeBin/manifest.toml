@@ -76,8 +76,8 @@ pie_verified = true
 [primals.songbird]
 name = "Songbird"
 description = "Network primal - HTTP/TLS, federation, mesh, discovery, NAT traversal"
-latest = "0.2.1"
-versions = ["0.2.1"]
+latest = "3.33.0"
+versions = ["3.33.0", "0.2.1"]
 architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["http", "tls", "mesh", "stun", "relay", "birdsong", "discovery", "onion"]
 ecobin_grade = "A++"
@@ -126,8 +126,8 @@ pie_verified = true
 [primals.barracuda]
 name = "barraCuda"
 description = "Compute primal - vendor-agnostic GPU math via WGSL, DF64, FHE, scientific compute"
-latest = "0.3.6"
-versions = ["0.3.6", "0.3.5", "0.3.4", "0.3.3", "0.2.0"]
+latest = "0.3.5"
+versions = ["0.3.5", "0.3.4", "0.3.3", "0.2.0"]
 architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["compute", "gpu", "tensor", "fhe", "linalg", "spectral", "stats", "wgsl"]
 ecobin_grade = "A++"
@@ -152,27 +152,27 @@ versions = ["0.13.0-dev"]
 architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["dag", "session", "merkle", "dehydration", "slice", "provenance"]
 ecobin_grade = "A++"
-pie_verified = true  # UniBin binary (rhizocrypt: server, status, version, doctor, client)
+pie_verified = false  # Library crate — not standalone binary
 
 [primals.loamspine]
 name = "LoamSpine"
-description = "Permanence layer - append-only ledger, certificates, DIDs, temporal anchoring, streaming sync, MCP tools, resilient federation"
-latest = "0.9.11"
-versions = ["0.9.11", "0.9.10", "0.9.9", "0.9.8", "0.9.7", "0.9.6", "0.9.5", "0.9.4", "0.9.3", "0.9.2", "0.9.1", "0.9.0"]
+description = "Permanence layer - append-only ledger, certificates, DIDs, temporal anchoring, streaming sync"
+latest = "0.9.5"
+versions = ["0.9.5", "0.9.4", "0.9.3", "0.9.2", "0.9.1", "0.9.0"]
 architectures = ["x86_64-linux", "aarch64-linux"]
-capabilities = ["commit", "certificate", "spine", "anchor", "did", "provenance", "streaming", "dispatch", "resilient-sync", "mcp-tools"]
+capabilities = ["commit", "certificate", "spine", "anchor", "did", "provenance", "streaming", "dispatch"]
 ecobin_grade = "A++"
 pie_verified = false  # UniBin binary, not yet distributed via genomeBin
 
 [primals.sweetgrass]
 name = "sweetGrass"
-description = "Attribution primal - W3C PROV-O, braids, JSON-RPC + tarpc, sovereign types, redb default"
-latest = "0.7.22"
-versions = ["0.7.22", "0.7.21", "0.7.20"]
+description = "Attribution primal - W3C PROV-O, braids, contribution API, radiating attribution"
+latest = "0.7.3"
+versions = ["0.7.3"]
 architectures = ["x86_64-linux", "aarch64-linux"]
-capabilities = ["attribution", "braid", "provo", "contribution", "provenance", "pipeline", "anchoring", "compression", "health"]
+capabilities = ["attribution", "braid", "provo", "contribution", "provenance"]
 ecobin_grade = "A++"
-pie_verified = false  # UniBin binary, not yet distributed via genomeBin
+pie_verified = false  # Library crate — not standalone binary
 
 # =============================================================================
 # DEPLOYMENT TIERS
