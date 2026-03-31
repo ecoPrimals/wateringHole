@@ -3,7 +3,7 @@
 **Purpose**: Track issues, patterns, and evolution opportunities discovered by Springs
 that require coordination from biomeOS, ToadStool, or cross-primal teams.
 **Last Updated**: March 16, 2026
-**Contributing Springs**: airSpring v0.7.5, neuralSpring S145, wetSpring V113, groundSpring V104, hotSpring v0.6.29, healthSpring V20, ludoSpring V6
+**Contributing Springs**: airSpring v0.7.5, neuralSpring S145, wetSpring V113, groundSpring V104, hotSpring v0.6.29, healthSpring V20, ludoSpring V37.1
 
 ---
 
@@ -468,6 +468,111 @@ containment strategy for operations that cannot yet shed root.
 **Evidence**: `springs/hotSpring/scripts/boot/coralreef-sudoers`,
 `springs/hotSpring/scripts/deploy_glowplug.sh`,
 `infra/wateringHole/SOVEREIGN_COMPUTE_EVOLUTION.md` (Evolution Gap section).
+
+**Status**: OPEN
+
+---
+
+### ISSUE-011: rhizoCrypt Has No Unix Domain Socket Transport
+
+**Reporter**: ludoSpring (V37.1)
+**Affects**: rhizoCrypt, all compositions requiring provenance
+**Priority**: P1 — blocks 4 ludoSpring experiments (+9 checks), blocks any Trio composition via UDS
+
+**Problem**: rhizoCrypt only binds TCP (port 9401). It does not create a Unix domain socket.
+All other ecoBin primals (BearDog, NestGate, sweetGrass, barraCuda, etc.) follow the
+`$XDG_RUNTIME_DIR/biomeos/{primal}.sock` convention. `start_primal.sh` passes `--socket`
+but rhizoCrypt ignores it.
+
+**Proposed fix**: Add `--unix [PATH]` CLI flag, default to `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock`.
+Follow barraCuda's pattern (`--unix` defaults to XDG, overridable).
+
+**Evidence**: `ludoSpring/experiments/exp094_session_lifecycle/`, `exp095_content_ownership/`,
+`exp096_npc_dialogue_composition/`, `exp098_nucleus_game_session/`.
+Handoff: `LUDOSPRING_V371_PLASMIDBINLIVE_GAP_MATRIX_HANDOFF_MAR31_2026.md`
+
+**Status**: OPEN
+
+---
+
+### ISSUE-012: loamSpine Panics on Startup (Runtime Nesting)
+
+**Reporter**: ludoSpring (V37.1)
+**Affects**: loamSpine, all compositions requiring certificates
+**Priority**: P1 — loamSpine cannot start, blocks exp095 (+6 checks)
+
+**Problem**: `loamspine server` panics at `crates/loam-spine-core/src/service/infant_discovery.rs:233`
+with "Cannot start a runtime from within a runtime". This is a Tokio anti-pattern where
+`block_on()` is called inside an already-running async runtime.
+
+**Proposed fix**: Replace `block_on()` with `spawn` or restructure infant discovery to avoid
+nesting runtimes. The async context already exists when `block_on` is invoked.
+
+**Evidence**: `/tmp/loamspine.log` from ludoSpring V37.1 live run.
+Handoff: `LUDOSPRING_V371_PLASMIDBINLIVE_GAP_MATRIX_HANDOFF_MAR31_2026.md`
+
+**Status**: OPEN
+
+---
+
+### ISSUE-013: barraCuda Fitts/Hick Formula Mismatch vs Python Baselines
+
+**Reporter**: ludoSpring (V37.1)
+**Affects**: barraCuda `activation.fitts`, `activation.hick`
+**Priority**: P2 — 4 checks fail in exp089
+
+**Problem**:
+- `activation.fitts(d=256, w=32, a=200, b=150)` → 800 (barraCuda) vs 708.85 (Python).
+  barraCuda uses Welford `log2(D/W)`, Python uses Shannon `log2(2D/W + 1)`.
+- `activation.hick(n=8, a=200, b=150)` → 675.49 (barraCuda) vs 650 (Python).
+  barraCuda uses `log2(n+1)`, Python uses `log2(n)`.
+
+**Proposed fix**: Add a `variant` parameter (default: "shannon" for Fitts, "standard" for Hick)
+or align defaults to the most-cited formulations.
+
+**Evidence**: `ludoSpring/experiments/exp089_psychomotor_composition/` — live IPC results.
+
+**Status**: OPEN
+
+---
+
+### ISSUE-014: biomeOS Neural API Not Registering Primal Capabilities
+
+**Reporter**: ludoSpring (V37.1)
+**Affects**: biomeOS Neural API `capability.call`, all capability-routed experiments
+**Priority**: P2 — 14 checks fail across exp084/087/088
+
+**Problem**: Running primals (barraCuda, BearDog, NestGate, etc.) are alive on sockets but
+the Neural API only shows 5 capabilities: `primal.germination`, `primal.terraria`,
+`ecosystem.nucleation`, `graph.execution`, `ecosystem.coordination`. Missing: `math`,
+`tensor`, `compute`, `noise`, `stats`, `activation`, `dag`, `visualization`, `crypto`,
+`security`, `storage`. The v2.80 bootstrap graph has `register_barracuda` but it doesn't
+appear to populate the capability registry for `capability.call` routing.
+
+**Proposed fix**: Either (a) primals self-register on startup via `lifecycle.register` +
+`capability.register`, or (b) biomeOS probes known sockets and populates the registry
+from `capabilities.list` responses.
+
+**Evidence**: `ludoSpring/experiments/exp087_neural_api_pipeline/`, `exp088_continuous_game_loop/`.
+
+**Status**: OPEN
+
+---
+
+### ISSUE-015: plasmidBin start_primal.sh JWT Secret Too Short for NestGate
+
+**Reporter**: ludoSpring (V37.1)
+**Affects**: plasmidBin, NestGate
+**Priority**: P3 — startup workaround available
+
+**Problem**: The NestGate case block in `start_primal.sh` generates
+`NESTGATE_JWT_SECRET="plasmidbin-${NODE_ID:-gate}-$FAMILY_ID"` = 25 bytes.
+NestGate requires a minimum of 32 bytes and refuses to start.
+
+**Proposed fix**: Use `openssl rand -base64 48` in the NestGate case block, or
+persist a generated secret to a local config file.
+
+**Evidence**: `/tmp/nestgate.log` from ludoSpring V37.1 live run.
 
 **Status**: OPEN
 

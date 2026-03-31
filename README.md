@@ -377,6 +377,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Handoffs
 - `handoffs/*.md` — Active session handoffs (last 48 hours)
+- `handoffs/LUDOSPRING_V371_PLASMIDBINLIVE_GAP_MATRIX_HANDOFF_MAR31_2026.md` — **Live validation gap matrix**: 95/141 (67.4%) composition checks against plasmidBin primals. Per-primal evolution targets with projected impact.
 - `handoffs/archive/` — Fossil record (507 archived handoffs, Feb 2026 – present)
 
 ---
