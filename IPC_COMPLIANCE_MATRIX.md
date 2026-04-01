@@ -1,7 +1,7 @@
 # IPC Compliance Matrix
 
-**Version:** 1.3.0
-**Date:** March 31, 2026
+**Version:** 1.3.2
+**Date:** April 1, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 
@@ -40,7 +40,7 @@ transport (UDS or TCP). See `PRIMAL_IPC_PROTOCOL.md` v3.1 Wire Framing.
 | Primal | UDS Framing | TCP Framing | Status | Notes |
 |--------|-------------|-------------|--------|-------|
 | **rhizocrypt** | Newline | Newline + HTTP POST (dual-mode, first-byte peek) | **C** | Dual-mode TCP auto-detects raw newline vs HTTP POST per connection. UDS uses newline framing. Fixed in v0.14.0-dev session 23. |
-| **loamspine** | Newline | Newline | C | Accepts both raw newline and HTTP POST on JSON-RPC port. |
+| **loamspine** | Newline | Newline | C | UDS newline-conformant (verified April 1). TCP JSON-RPC dual-mode. v0.9.15 starts cleanly. |
 | **sweetgrass** | Newline | HTTP POST (Axum) | **P** | UDS is newline-conformant. TCP is HTTP-only. Sufficient for UDS composition. |
 | **squirrel** | Newline (abstract) | -- | **P** | Newline framing correct, but socket is abstract-namespace only (see Discovery). No TCP listener. |
 | **beardog** | Newline | Newline | C | Both transports use raw newline framing. |
@@ -62,14 +62,14 @@ See `PRIMAL_IPC_PROTOCOL.md` Socket Path Convention and
 | Primal | Socket Path | Filesystem? | In biomeos/? | Domain Symlink | Status | Notes |
 |--------|-------------|-------------|-------------|----------------|--------|-------|
 | **rhizocrypt** | `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock` | Yes | Yes | -- | **C** | `--unix [PATH]` flag; default ecosystem standard path. Fixed in v0.14.0-dev session 23. |
-| **loamspine** | Not reached (crash) | ? | ? | -- | **X** | Crashes before socket bind (Tokio nested runtime). |
+| **loamspine** | `/run/user/1000/biomeos/loamspine.sock` | Yes | Yes | No | **C** | **LS-03 RESOLVED** (v0.9.15). Conformant `biomeos/` path. Infant discovery fails gracefully. |
 | **sweetgrass** | `/run/user/1000/biomeos/sweetgrass.sock` | Yes | Yes | No | **P** | Conformant path, no family suffix. Missing domain symlink. |
 | **squirrel** | `$XDG_RUNTIME_DIR/biomeos/squirrel.sock` + `@squirrel` (abstract) | Yes | Yes | No | **C** | `UniversalListener` (alpha.25b): abstract → filesystem → TCP fallback. Filesystem socket now discoverable. |
 | **beardog** | `/run/user/1000/biomeos/beardog.sock` | Yes | Yes | `crypto.sock` | C | Conformant path. Domain symlink `crypto.sock` → `beardog.sock` created at bind, cleaned on shutdown. |
 | **songbird** | `/run/user/1000/biomeos/songbird.sock` | Yes | Yes | No | C | Registry primal, domain symlink not required. |
 | **petaltongue** | `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock` | Yes | Yes | No | C | Conformant `biomeos/` path (March 31). |
 | **nestgate** | `/run/user/1000/biomeos/nestgate.sock` | Yes | Yes | No | **P** | Conformant path. Missing domain symlink. |
-| **toadstool** | ? | ? | ? | -- | ? | Not verified. |
+| **toadstool** | `/run/user/1000/biomeos/toadstool.sock` + `.jsonrpc.sock` | Yes | Yes | No | **P** | Socket created at conformant path, but responds "Method not found" to all methods (S168 binary). |
 | **coralreef** | `/run/user/1000/biomeos/coralreef-core-{family}.sock` | Yes | Yes | `shader.sock`, `device.sock` | **C** | coralreef-core creates `shader.sock` symlink; glowplug creates `device.sock` symlink. |
 | **biomeOS** | Multiple sockets | Yes | Yes | -- | C | Orchestrator, different pattern. |
 
@@ -83,14 +83,14 @@ non-negotiable canonical names. See `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
 | Primal | `health.liveness` | `health.readiness` | `health.check` | Other Health | Status | Notes |
 |--------|-------------------|-------------------|-----------------|--------------|--------|-------|
 | **rhizocrypt** | Yes | Yes | Yes | `health.metrics` | C | Reachable via both raw newline TCP and UDS. Fixed in v0.14.0-dev session 23. |
-| **loamspine** | ? | ? | ? | ? | ? | Crashes on startup. |
+| **loamspine** | Yes | ? | ? | -- | **C** | `health.liveness` confirmed via UDS (April 1). |
 | **sweetgrass** | Yes | ? | ? | -- | C | Responds to `health.liveness`. |
 | **squirrel** | Yes | Yes | ? | `system.health` (legacy alias) | **C** | `health.liveness` + `health.readiness` added (alpha.25b). Legacy `system.*` kept as aliases. |
 | **beardog** | Yes | Yes | Yes | -- | C | Full canonical health suite: `health.liveness`, `health.readiness`, `health.check`. |
 | **songbird** | Yes | ? | ? | `health` (short alias), HTTP `/health` | **C** | `health.liveness` canonical name added (wave89-90) via `json_rpc_method.rs` normalization. |
 | **petaltongue** | Yes | Yes | Yes | `ping`, `health`, `status`, `check` aliases | C | Full health triad + aliases (March 31). |
-| **nestgate** | ? | ? | ? | ? | ? | Not verified. |
-| **toadstool** | ? | ? | ? | ? | ? | Not verified. |
+| **nestgate** | ? | ? | ? | `health` (short) | **P** | `health` responds OK. Canonical `health.liveness` not verified. 25 capabilities via `discover_capabilities`. |
+| **toadstool** | No | No | No | -- | **X** | S168 binary: `health.liveness` → "Method not found". 0 capabilities. Needs S169 rebuild. |
 | **coralreef** | Yes | Yes | Yes | `capabilities.list` | **C** | Canonical health methods on coralreef-core, glowplug, and ember. |
 | **biomeOS** | Yes | Yes | Yes | -- | C | Full health suite. |
 
@@ -125,7 +125,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | Primal | Starts Without Identity? | Defaults | Status | Notes |
 |--------|-------------------------|----------|--------|-------|
 | **rhizocrypt** | Yes | Standalone | C | |
-| **loamspine** | No (crash) | N/A | **X** | Tokio nested runtime panic in `infant_discovery`. |
+| **loamspine** | Yes | Standalone | **C** | **LS-03 RESOLVED** (v0.9.15). Infant discovery fails gracefully, continues without. |
 | **sweetgrass** | Yes | Standalone | C | |
 | **squirrel** | Yes | Standalone | C | |
 | **beardog** | Yes | `standalone` / `default` | C | `PrimalIdentity::from_env()` defaults `FAMILY_ID` to `standalone` and `NODE_ID` to `default` when unset. |
@@ -145,13 +145,13 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **beardog** | C | C | C | C (`--port` + `--listen`) | C (standalone) | C (TCP + abstract) | A++ | **Conformant** |
 | **songbird** | C | C | C | C (`--listen`) | C | C (TCP) | A++ | **Conformant** |
 | **squirrel** | P | C | C | C (`--port`) | C | C (abstract+filesystem+HTTP) | A++ | **Close** |
-| **toadstool** | P | ? | ? | X (not wired) | C | P (caps only) | A++ | Needs work |
+| **toadstool** | P | P | X (S168) | X (not wired) | C | P (caps only) | A++ | Needs S169 rebuild |
 | **nestgate** | X | P | ? | X (not wired) | C | X (no aarch64) | A++ (x86) | Needs work |
 | **biomeos** | P | C | C | C (`--tcp-only`) | C | P (TCP mode new) | A++ | **Near-complete** |
 | **petaltongue** | C | C | C | C (`--port`) | C | X (no aarch64) | A++ (x86) | Near-complete |
 | **sweetgrass** | P | P | C | X | C | ? | ? | Close |
 | **rhizocrypt** | C | C | C | C | C | ? | C | Conformant |
-| **loamspine** | C | X | ? | X | X (crash) | ? | ? | Blocked |
+| **loamspine** | C | C | C | X (`--jsonrpc-port`) | C | ? | ? | **Close** |
 | **coralreef** | C | C | C | C | C | ? | ? | **Conformant** |
 | **skunkbat** | ? | ? | ? | ? | ? | ? | ? | Needs audit |
 
@@ -163,7 +163,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 
 1. **squirrel**: Add filesystem socket in `$XDG_RUNTIME_DIR/biomeos/squirrel.sock` alongside abstract socket. Add `health.liveness` / `health.readiness` / `health.check` method handlers.
 2. ~~**beardog**: Accept `--port` (alias for `--listen`, port-only). Default `FAMILY_ID` to `standalone` when unset.~~ **RESOLVED** (Wave 25+29: `--port` implemented, standalone defaults in `PrimalIdentity::from_env()`).
-3. **loamspine**: Fix Tokio nested runtime panic in `infant_discovery`. Add `--port` flag (alias for `--jsonrpc-port`).
+3. ~~**loamspine**: Fix Tokio nested runtime panic in `infant_discovery`.~~ **RESOLVED** (v0.9.15: infant discovery fails gracefully). Remaining: Add `--port` flag (alias for `--jsonrpc-port`).
 4. ~~**rhizocrypt**: Add newline-delimited TCP JSON-RPC listener (alongside HTTP Axum server).~~ **RESOLVED** — v0.14.0-dev session 23 (March 31, 2026).
 
 ### High (needed for standard compliance)
@@ -194,9 +194,9 @@ validation scripts. Verified via live cross-hardware testing (March 27, 2026).
 | **songbird** | HTTP GET | `/health` (HTTP 200) | **P** | Works, but not JSON-RPC. Short name `health` via RPC. |
 | **squirrel** | UDS JSON-RPC | `health.liveness` via UDS | **C** | Canonical names (alpha.25b). Filesystem socket via `UniversalListener`. |
 | **toadstool** | HTTP GET | `/health` (HTTP 200) | **P** | Not verified via JSON-RPC method name |
-| **nestgate** | Raw TCP JSON-RPC | Not verifiable | **X** | musl binary segfaults; glibc binary uses raw TCP |
+| **nestgate** | UDS JSON-RPC | `health` (short), 25 capabilities via `discover_capabilities` | **P** | Socket at `biomeos/nestgate.sock`. `storage.list` works. |
 | **rhizocrypt** | Dual-mode TCP (newline + HTTP) + UDS | `health.liveness`, `health.readiness`, `health.check` | C | Dual-mode auto-detection. Fixed in v0.14.0-dev session 23. |
-| **loamspine** | N/A | Crashes on startup | **X** | Tokio nested runtime panic |
+| **loamspine** | UDS JSON-RPC | `health.liveness` | **C** | **LS-03 RESOLVED** (v0.9.15). 19 capabilities. |
 | **sweetgrass** | UDS JSON-RPC | `health.liveness` | C | |
 | **petaltongue** | UDS JSON-RPC (+ optional TCP) | `health.liveness`, `health.readiness`, `health.check` | C | Full health triad + aliases (March 31). |
 | **coralreef** | Newline TCP + HTTP (jsonrpsee) + UDS | `health.liveness`, `health.readiness`, `health.check` | **C** | All three canonical methods on all components. `--port` for newline TCP, `--rpc-bind` for HTTP. |
@@ -230,7 +230,7 @@ self-capabilities, omitting all external primal capabilities.
 | **toadstool** | No | Race condition | Intermittent | **P** | Same timing issue |
 | **sweetgrass** | No | Race condition | Intermittent | **P** | Same timing issue |
 | **rhizocrypt** | N/A | N/A | **No** (TCP only, no UDS) | **X** | No socket to discover (RC-01) |
-| **loamspine** | N/A | N/A | **No** (crashes) | **X** | Panics before any registration (LS-03) |
+| **loamspine** | No | Discoverable (UDS) | **Pending rescan** | **P** | **LS-03 RESOLVED** (v0.9.15). Socket at `biomeos/loamspine.sock`. Needs biomeOS rescan to register. |
 | **coralreef** | No | Race condition | Intermittent | **P** | Same timing issue |
 | **barraCuda** | No | Race condition | Intermittent | **P** | Same timing issue |
 | **biomeOS** | Self | N/A | **Yes** (all via rescan) | **C** | v2.81: `topology.rescan` + lazy discovery on miss. All primal capabilities now discoverable. |
@@ -262,7 +262,7 @@ aarch64 Android/GrapheneOS revealed substrate-specific compliance gaps.
 | **nestgate** | C | ? | **Fixed March 28** — musl-static binary now works on x86_64 (was segfaulting). aarch64 musl build not yet available. Team evolving cross-compile. |
 | **biomeos** | C | C | **New March 28** — both arches in plasmidBin. aarch64 binary runs on Pixel but `api` mode still forces Unix socket (TCP gap). |
 | **petaltongue** | C | ? | x86_64 musl stripped and functional. aarch64 not yet built (egui headless cross-compile pending). |
-| **loamspine** | ? | ? | Crashes on startup (Tokio issue, not musl-specific). |
+| **loamspine** | C | ? | **LS-03 RESOLVED** (v0.9.15). Starts cleanly. Source-built binary verified. |
 | **rhizocrypt** | CI (cross-compile job) | CI (cross-compile job) | musl cross-compile CI for x86_64 + aarch64. |
 | **sweetgrass** | ? | ? | Not tested. |
 | **coralreef** | ? | ? | Not tested. |
@@ -319,7 +319,7 @@ on x86_64 and aarch64:
 3. **nestgate**: Build aarch64-unknown-linux-musl binary. Wire `--port` to actual TCP bind. Accept `server` as alias for `daemon`.
 4. ~~**beardog**: Default `FAMILY_ID` to `standalone` when unset.~~ **RESOLVED** (Wave 25: `PrimalIdentity::from_env()` defaults).
 5. ~~**beardog**: Fix `--abstract` socket logging.~~ **RESOLVED** (Wave 30: logs `abstract_name` with `"bound to abstract namespace"` message).
-6. **loamspine**: Fix Tokio nested runtime panic in `infant_discovery`. Add `--port` flag.
+6. ~~**loamspine**: Fix Tokio nested runtime panic in `infant_discovery`.~~ **RESOLVED** (v0.9.15). Add `--port` flag.
 7. ~~**rhizocrypt**: Add newline-delimited TCP JSON-RPC listener.~~ **RESOLVED** — v0.14.0-dev session 23 (March 31, 2026).
 
 ### High (needed for standard compliance and mobile deployment)
@@ -357,6 +357,22 @@ on x86_64 and aarch64:
 ---
 
 ## Version History
+
+### v1.3.2 (April 1, 2026)
+
+**Deep Per-Primal Validation — LS-03 RESOLVED, 11 Gaps Total Resolved**
+
+- loamSpine LS-03 RESOLVED (v0.9.15): infant discovery now fails gracefully, UDS at `biomeos/loamspine.sock`, `health.liveness` ✅, 19 capabilities
+- loamSpine scorecard: Blocked → Close (wire C, socket C, health C, standalone C, only `--port` alias missing)
+- toadStool socket verified: creates `biomeos/toadstool.sock` + `.jsonrpc.sock` but S168 binary returns "Method not found" for all methods, 0 capabilities
+- NestGate health verified: `health` responds OK, 25 capabilities via `discover_capabilities`, `storage.list` works with `family_id` param
+- bearDog: `capabilities.list` returns empty (0 methods) — needs audit; `crypto.hash` requires base64 input
+- petalTongue: `capabilities.list` returns empty (0 methods) — older binary; `identity.get`/`lifecycle.status` not found
+- biomeOS: `topology.rescan` → "Method not found" (running v2.80 binary, not v2.81); but `capability.discover` routes correctly to all primals (crypto→bearDog, storage→nestGate, viz→petalTongue, ai→Squirrel, game→ludoSpring)
+- Squirrel: `ai_router: false` in readiness, 0 providers, socket at `/squirrel/squirrel.sock` not `biomeos/`
+- rhizoCrypt RC-01 confirmed: dual-mode TCP works (raw newline + HTTP), 4 domains/26 methods, but still NO UDS socket
+- Updated capability registration: loamSpine X → P (discoverable after LS-03 fix)
+- 1 critical blocker remains: RC-01 (rhizoCrypt UDS)
 
 ### v1.3.1 (March 31, 2026)
 

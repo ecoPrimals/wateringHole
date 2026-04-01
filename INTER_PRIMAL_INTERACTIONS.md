@@ -779,11 +779,11 @@ primalSpring has decomposed the monolithic interactive gateway into 7 independen
 
 | Gap | Interaction | Impact |
 |-----|------------|--------|
-| **BM-04** | biomeOS → All Primals (capability discovery) | Primals starting after biomeOS are invisible to Neural API. Blocks capability routing in all multi-primal graphs. |
-| **RC-01** | rhizoCrypt → biomeOS (registration) | TCP-only transport, no UDS socket. Cannot participate in standard compositions. |
-| **LS-03** | loamSpine → biomeOS (startup) | Tokio nested runtime panic. Cannot start. Blocks all Provenance Trio interactions. |
-| **PT-01** | petalTongue → biomeOS (discovery) | Socket not in standard `biomeos/` directory. Not discoverable by biomeOS scan. |
-| **SQ-01** | Squirrel → biomeOS (discovery) | Abstract socket only. Invisible to `readdir()`. Not discoverable by filesystem scan. |
+| ~~**BM-04**~~ | ~~biomeOS → All Primals (capability discovery)~~ | **RESOLVED** (v2.81): `topology.rescan` + lazy discovery on miss. `capability.discover` routes to all primals (verified April 1). |
+| **RC-01** | rhizoCrypt → biomeOS (registration) | TCP-only transport, no UDS socket. Cannot participate in standard compositions. **SOLE REMAINING CRITICAL BLOCKER.** |
+| ~~**LS-03**~~ | ~~loamSpine → biomeOS (startup)~~ | **RESOLVED** (v0.9.15): Infant discovery fails gracefully. UDS at `biomeos/loamspine.sock`. 19 capabilities. |
+| ~~**PT-01**~~ | ~~petalTongue → biomeOS (discovery)~~ | **RESOLVED**: Socket at `biomeos/petaltongue-ipc.sock`. Discoverable by biomeOS scan. |
+| ~~**SQ-01**~~ | ~~Squirrel → biomeOS (discovery)~~ | **RESOLVED** (alpha.25b): Filesystem socket via `UniversalListener`. Discoverable. |
 
 ### toadStool S169 Overstep Resolution Impact
 
@@ -801,10 +801,10 @@ See `wateringHole/handoffs/TOADSTOOL_S169_OVERSTEP_CLEANUP_DEEP_DEBT_HANDOFF_MAR
 
 ludoSpring's live plasmidBin validation (experiments 084-098) achieved 95/141 checks (67.4%):
 
-- **barraCuda math pipeline**: 42/42 (tensor, activation, stats) — but Fitts/Hick formulas diverge from Python baselines
+- **barraCuda math pipeline**: 42/42 (tensor, activation, stats) — Fitts/Hick formulas fixed in Sprint 25 (BC-01/02/03 RESOLVED)
 - **NUCLEUS game session**: Working at 60Hz tick cycle
-- **Session provenance**: Blocked by RC-01 (rhizoCrypt UDS) and LS-03 (loamSpine panic)
-- **Projected with fixes**: 130/141 (92.2%)
+- **Session provenance**: ~~Blocked by RC-01 and LS-03~~ LS-03 RESOLVED. Only RC-01 (rhizoCrypt UDS) remains.
+- **Projected with fixes**: 67.4% → 87.9% (LS-03 resolved) → 95.0% (with RC-01 + Tier 2)
 
 ### Related Documents
 
