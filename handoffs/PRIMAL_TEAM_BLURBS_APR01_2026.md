@@ -12,7 +12,7 @@ Clean primals (zero gaps): **biomeOS**, **bearDog**, **rhizoCrypt**, **loamSpine
 
 ## petalTongue
 
-PT-05 (Medium): `visualization.showing` returns false when `RenderingAwareness` is not initialized — initialize a default on startup. PT-06 (Low): `callback_method` is stored but never invoked; proprioception is poll-only — implement callback dispatch. PT-07 (Low): No external event source in server mode — wire capability discovery into `DataService`. PT-04 (Low): No HTML export modality — accept SVG-in-HTML as sufficient for now. Deferred: `EguiShapes` variant for full native desktop UI. `capabilities.list` currently returns empty from the running binary — audit and wire. `identity.get` and `lifecycle.status` return Method not found — wire or remove from docs.
+**All primalSpring gaps resolved** (PT-04, PT-05, PT-06, PT-07, capabilities.list, identity.get, lifecycle.status). Deep debt evolution completed Apr 1: zero-copy IPC (serde_json::to_vec on all 7 hot paths), blake3 provenance hash (pure Rust), centralized discovery timeouts (12 constants), hardcoded primal names → capability_names constants (7 files), TUI devices wired to real PrimalInfo, songbird/paint/graph deduplication, 12 docs reconciled to tarpc-primary. Deferred: EguiShapes variant, full Cow<str> IPC evolution, aarch64 CI. Quality: 5,845+ tests, 0 failures, clippy clean (pedantic+nursery), cargo deny clean.
 
 ---
 
