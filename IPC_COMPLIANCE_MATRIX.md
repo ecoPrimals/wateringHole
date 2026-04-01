@@ -64,7 +64,7 @@ See `PRIMAL_IPC_PROTOCOL.md` Socket Path Convention and
 | **rhizocrypt** | `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock` | Yes | Yes | -- | **C** | `--unix [PATH]` flag; default ecosystem standard path. Fixed in v0.14.0-dev session 23. |
 | **loamspine** | Not reached (crash) | ? | ? | -- | **X** | Crashes before socket bind (Tokio nested runtime). |
 | **sweetgrass** | `/run/user/1000/biomeos/sweetgrass.sock` | Yes | Yes | No | **P** | Conformant path, no family suffix. Missing domain symlink. |
-| **squirrel** | `@squirrel` (abstract) | **No** | No | No | **X** | Abstract namespace only. Invisible to `readdir()`. Not discoverable. |
+| **squirrel** | `$XDG_RUNTIME_DIR/biomeos/squirrel.sock` + `@squirrel` (abstract) | Yes | Yes | No | **C** | `UniversalListener` (alpha.25b): abstract → filesystem → TCP fallback. Filesystem socket now discoverable. |
 | **beardog** | `/run/user/1000/biomeos/beardog.sock` | Yes | Yes | `crypto.sock` | C | Conformant path. Domain symlink `crypto.sock` → `beardog.sock` created at bind, cleaned on shutdown. |
 | **songbird** | `/run/user/1000/biomeos/songbird.sock` | Yes | Yes | No | C | Registry primal, domain symlink not required. |
 | **petaltongue** | `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock` | Yes | Yes | No | C | Conformant `biomeos/` path (March 31). |
@@ -85,9 +85,9 @@ non-negotiable canonical names. See `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
 | **rhizocrypt** | Yes | Yes | Yes | `health.metrics` | C | Reachable via both raw newline TCP and UDS. Fixed in v0.14.0-dev session 23. |
 | **loamspine** | ? | ? | ? | ? | ? | Crashes on startup. |
 | **sweetgrass** | Yes | ? | ? | -- | C | Responds to `health.liveness`. |
-| **squirrel** | **No** | **No** | **No** | `system.health`, `system.status`, `system.ping` | **X** | Uses `system.*` domain exclusively. Non-conformant. |
+| **squirrel** | Yes | Yes | ? | `system.health` (legacy alias) | **C** | `health.liveness` + `health.readiness` added (alpha.25b). Legacy `system.*` kept as aliases. |
 | **beardog** | Yes | Yes | Yes | -- | C | Full canonical health suite: `health.liveness`, `health.readiness`, `health.check`. |
-| **songbird** | `health` alias | -- | -- | `health` (short), HTTP `/health` | **P** | Responds to `health` (short name) and HTTP `/health`. Does not expose `health.liveness` by canonical name. Verified live (March 27). |
+| **songbird** | Yes | ? | ? | `health` (short alias), HTTP `/health` | **C** | `health.liveness` canonical name added (wave89-90) via `json_rpc_method.rs` normalization. |
 | **petaltongue** | Yes | Yes | Yes | `ping`, `health`, `status`, `check` aliases | C | Full health triad + aliases (March 31). |
 | **nestgate** | ? | ? | ? | ? | ? | Not verified. |
 | **toadstool** | ? | ? | ? | ? | ? | Not verified. |
@@ -143,11 +143,11 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | Primal | Wire Framing | Socket Path | Health Names | `--port` / `--listen` | Standalone | Mobile | ecoBin | Overall |
 |--------|-------------|-------------|-------------|----------------------|-----------|--------|--------|---------|
 | **beardog** | C | C | C | C (`--port` + `--listen`) | C (standalone) | C (TCP + abstract) | A++ | **Conformant** |
-| **songbird** | C | C | P | C (`--listen`) | C | C (TCP) | A++ | Close |
-| **squirrel** | P | X | X | C (`--port`) | C | C (abstract+HTTP) | A++ | Close |
+| **songbird** | C | C | C | C (`--listen`) | C | C (TCP) | A++ | **Conformant** |
+| **squirrel** | P | C | C | C (`--port`) | C | C (abstract+filesystem+HTTP) | A++ | **Close** |
 | **toadstool** | P | ? | ? | X (not wired) | C | P (caps only) | A++ | Needs work |
 | **nestgate** | X | P | ? | X (not wired) | C | X (no aarch64) | A++ (x86) | Needs work |
-| **biomeos** | P | C | C | X (forces UDS) | C | X (UDS only) | A++ | Needs TCP mode |
+| **biomeos** | P | C | C | C (`--tcp-only`) | C | P (TCP mode new) | A++ | **Near-complete** |
 | **petaltongue** | C | C | C | C (`--port`) | C | X (no aarch64) | A++ (x86) | Near-complete |
 | **sweetgrass** | P | P | C | X | C | ? | ? | Close |
 | **rhizocrypt** | C | C | C | C | C | ? | C | Conformant |
@@ -192,7 +192,7 @@ validation scripts. Verified via live cross-hardware testing (March 27, 2026).
 |--------|------------------------|----------|--------|-------|
 | **beardog** | Raw TCP JSON-RPC | `health.liveness` via newline JSON-RPC | C | Clean, standards-compliant |
 | **songbird** | HTTP GET | `/health` (HTTP 200) | **P** | Works, but not JSON-RPC. Short name `health` via RPC. |
-| **squirrel** | HTTP JSON-RPC POST | `system.health` via HTTP POST | **X** | Non-standard method name, HTTP-only |
+| **squirrel** | UDS JSON-RPC | `health.liveness` via UDS | **C** | Canonical names (alpha.25b). Filesystem socket via `UniversalListener`. |
 | **toadstool** | HTTP GET | `/health` (HTTP 200) | **P** | Not verified via JSON-RPC method name |
 | **nestgate** | Raw TCP JSON-RPC | Not verifiable | **X** | musl binary segfaults; glibc binary uses raw TCP |
 | **rhizocrypt** | Dual-mode TCP (newline + HTTP) + UDS | `health.liveness`, `health.readiness`, `health.check` | C | Dual-mode auto-detection. Fixed in v0.14.0-dev session 23. |
@@ -224,8 +224,8 @@ self-capabilities, omitting all external primal capabilities.
 |--------|----------------|----------------------|------------------------------|--------|-------|
 | **beardog** | No | Race condition | **No** (starts after biomeOS) | **X** | Needs biomeOS rescan or self-registration |
 | **songbird** | No | Race condition | **No** (starts after biomeOS) | **X** | Same timing issue |
-| **squirrel** | No | Not discoverable | **No** (abstract socket) | **X** | Abstract socket invisible to filesystem scan |
-| **petaltongue** | No | Not discoverable | **No** (wrong directory) | **X** | Socket not in `$XDG_RUNTIME_DIR/biomeos/` |
+| **squirrel** | No | Discoverable (filesystem) | **Pending rescan** | **P** | `UniversalListener` now creates filesystem socket (alpha.25b). Needs biomeOS rescan to register. |
+| **petaltongue** | No | Discoverable | **Pending rescan** | **P** | Socket now at `biomeos/petaltongue.sock`. Needs biomeOS rescan to register. |
 | **nestgate** | No | Race condition | Intermittent | **P** | Sometimes starts fast enough to be caught |
 | **toadstool** | No | Race condition | Intermittent | **P** | Same timing issue |
 | **sweetgrass** | No | Race condition | Intermittent | **P** | Same timing issue |
@@ -233,7 +233,7 @@ self-capabilities, omitting all external primal capabilities.
 | **loamspine** | N/A | N/A | **No** (crashes) | **X** | Panics before any registration (LS-03) |
 | **coralreef** | No | Race condition | Intermittent | **P** | Same timing issue |
 | **barraCuda** | No | Race condition | Intermittent | **P** | Same timing issue |
-| **biomeOS** | Self | N/A | **Yes** (5 methods) | C | Only biomeOS's own capabilities reliably visible |
+| **biomeOS** | Self | N/A | **Yes** (all via rescan) | **C** | v2.81: `topology.rescan` + lazy discovery on miss. All primal capabilities now discoverable. |
 
 **Fix options** (any one would resolve BM-04):
 1. `topology.rescan` JSON-RPC method — trigger a re-scan of the socket directory on demand
@@ -357,6 +357,19 @@ on x86_64 and aarch64:
 ---
 
 ## Version History
+
+### v1.3.1 (March 31, 2026)
+
+**Post Full-Ecosystem Pull — 10 Gaps Resolved**
+
+- biomeOS v2.81: BM-04 RESOLVED (topology.rescan + lazy discovery on miss), BM-05 RESOLVED (multi-shape probe), TCP-only CLI (`--tcp-only`), cross-gate capability.call routing, 7,212 tests
+- squirrel alpha.25b: SQ-01 RESOLVED (filesystem socket via UniversalListener), health.liveness/readiness canonical names
+- songbird wave89-90: health.liveness canonical name added via json_rpc_method.rs normalization, QUIC crypto delegation to BearDog
+- barraCuda Sprint 25 / v0.3.11: BC-01/02/03 RESOLVED (Fitts/Hick variant params, Perlin3D lattice fix)
+- Updated summary scorecard: beardog + songbird Conformant, squirrel Close, biomeOS Near-complete
+- Updated capability registration table: biomeOS C, squirrel P, petalTongue P
+- Projected validation: 67.4% → 83.7% current, 95.0% with RC-01 + LS-03
+- 2 critical blockers remain: rhizoCrypt RC-01 (TCP-only) and loamSpine LS-03 (startup panic)
 
 ### v1.3.0 (March 31, 2026)
 

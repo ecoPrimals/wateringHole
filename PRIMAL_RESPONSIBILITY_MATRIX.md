@@ -45,7 +45,7 @@ Legend:
 | **DAG / Provenance** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | **OWNS** | N/A | N/A |
 | **Ledger / History** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | **OWNS** | N/A |
 | **Attribution** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | **OWNS** |
-| **Capability Registration** | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | **OWNS** | DELEGATES | DELEGATES | **GAP** (RC-01) | **GAP** (LS-03) | DELEGATES |
+| **Capability Registration** | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | **OWNS** ✅ (v2.81) | DELEGATES | DELEGATES | **GAP** (RC-01) | **GAP** (LS-03) | DELEGATES |
 
 ---
 
@@ -198,7 +198,7 @@ Deploy graphs should **never** route a concern to a primal that is listed as OVE
 |--------|--------|------------------------|
 | **rhizoCrypt** | Add `--unix` UDS socket (RC-01). Add raw newline TCP framing. | Unblocks provenance_pipeline.toml, session_provenance.toml, 4 ludoSpring experiments (+9 checks). |
 | **loamSpine** | Fix `block_on()` startup panic (LS-03). Ensure standard socket path. | Unblocks provenance_pipeline.toml, exp095/096 (+6 checks). Must start before session graphs can deploy. |
-| **biomeOS** | Fix capability registration timing (BM-04): `capability.list` only shows 5 self-capabilities, misses all external primals. Add `topology.rescan` or lazy discovery on `capability.call` miss. Fix probe response format (BM-05). | Unblocks 3 checks. Critical for all multi-primal composition graphs — currently primals starting after biomeOS are invisible to Neural API routing. |
+| ~~**biomeOS**~~ | ~~Fix capability registration timing (BM-04)~~ **RESOLVED in v2.81**: `topology.rescan` + lazy discovery on miss + multi-shape probe (BM-05). Also: TCP-only CLI, cross-gate routing, 7,212 tests. | ~~Unblocks 3 checks~~ **+14 checks gained**. All multi-primal composition graphs now viable. |
 | **bearDog** | Default `FAMILY_ID` to `standalone` when unset. Add `--port` alias for `--listen`. | Blocks standalone startup in any graph without env setup. |
 
 ### Tier 2 — High (needed for full composition validation)
@@ -206,10 +206,10 @@ Deploy graphs should **never** route a concern to a primal that is listed as OVE
 | Primal | Action | Impact on Deploy Graphs |
 |--------|--------|------------------------|
 | **nestGate** | Shed crypto → bearDog IPC, shed discovery → biomeOS, shed network → songBird, shed MCP → Squirrel, fix `aws-lc-rs` C dep. Wire `--port` to TCP bind. | Graphs currently routing storage through nestGate are fine; crypto/discovery/network nodes need rerouting. |
-| **barraCuda** | Fix Fitts formula (BC-01, add `variant` param), Hick formula (BC-02, add `include_no_choice` param), Perlin3D lattice (BC-03), publish ecoBin to plasmidBin (BC-04). | Fixes 4 ludoSpring checks. Needed for accurate game science validation. |
+| ~~**barraCuda**~~ | ~~Fix Fitts/Hick/Perlin3D~~ **RESOLVED in Sprint 25 / v0.3.11**: `variant` param on Fitts (Shannon default), `include_no_choice` on Hick, proper gradient interpolation on Perlin3D. BC-04: binary ready, needs plasmidBin harvest. | **+5 checks gained**. Game science validation now accurate. |
 | **toadStool** | Fix coralReef discovery (TS-01): stop using hardcoded URL, use socket scan or `capability.discover`. Wire `--port` to server bind. | S169 resolved major overstep. Remaining items are discovery + TCP. |
-| **petalTongue** | Move socket to `$XDG_RUNTIME_DIR/biomeos/petaltongue.sock` (PT-01). Add `--port` flag. Add WebSocket push for real-time dashboard. | Blocks standard discovery of render subsystem. Current non-standard path requires custom socket resolution. |
-| **Squirrel** | Add filesystem socket alongside abstract (SQ-01). Add `health.liveness`/`health.readiness`/`health.check`. Wire Ollama provider routing. | Abstract-only socket invisible to `readdir()`. Blocks standard composition discovery. |
+| ~~**petalTongue**~~ | ~~Move socket, add --port, add push~~ **RESOLVED**: Socket at `biomeos/petaltongue.sock` (PT-01), `--port` TCP flag, SSE `/api/events` push (PT-02), `motor_tx` wired (PT-03), health triad. Remaining: EguiShapes deferred, proprioception events (PT-05/06). | **+3 checks gained**. Render subsystem now discoverable and push-capable. |
+| ~~**Squirrel**~~ | ~~Add filesystem socket, health methods~~ **RESOLVED**: `UniversalListener` with filesystem socket (SQ-01), `health.liveness`/`readiness` canonical names. Remaining: SQ-02 `LOCAL_AI_ENDPOINT` → `AiRouter` wiring for Ollama. | **+1 check gained**. Discoverable. Ollama routing is last AI blocker. |
 
 ### Tier 3 — Medium (improves ecosystem coherence)
 
@@ -239,12 +239,23 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full 32-gap registry.
 | Game Science | barraCuda formulas (BC-01/02/03) | BC-01, BC-02, BC-03 |
 | Session Provenance | RC-01, LS-03 | RC-01, LS-03 |
 
-### Projected Composition Health After Resolution
+### Projected Composition Health (revised post-evolution)
 
-If Tier 1 + Tier 2 gaps are resolved:
-- **67.4% → 92.2%** (ludoSpring live validation: 95/141 → ~130/141)
-- **Compositions C1-C7**: All 7 compositions reach full pass
-- **Provenance trio**: Unblocked for session provenance and RootPulse workflows
+**10 gaps resolved this cycle** (biomeOS v2.81, barraCuda v0.3.11, petalTongue IPC, Squirrel alpha.25b, songBird wave89-90):
+
+| Status | Checks | % |
+|--------|--------|---|
+| **Previous baseline** (pre-evolution) | 34/43 | 79% |
+| **Live revalidation** (March 31, post-pull) | **41/44** | **93%** |
+| + SQ-02 (Ollama wiring) | 42/44 | 95% |
+| + NG-01 (`storage.list` fix) | 43/44 | 98% |
+| + Squirrel socket in `biomeos/` | 44/44 | 100% |
+
+**C1-C7 composition suite**: 4 compositions at full pass (C1 Render, C3 Session, C4 Game Science, C6 Proprioception). 3 at partial (C2 Narration, C5 Persistence, C7 Full Interactive).
+
+**Remaining 2 critical blockers for ludoSpring 141-check matrix**: RC-01 (rhizoCrypt) and LS-03 (loamSpine) — both are Provenance Trio blockers.
+
+**Full 141-check projected**: 67.4% → 95.0% with all Tier 1+2 fixes.
 
 ---
 
@@ -254,3 +265,4 @@ This matrix will be updated as primals evolve and shed overstep. Each update sho
 
 - **V1 (March 30, 2026)**: Initial matrix from ludoSpring V35.3 ecosystem evolution review
 - **V2 (March 31, 2026)**: Expanded with primalSpring Phase 23f composition findings (32 gaps), ludoSpring V37.1 plasmidBin gap matrix, toadStool S169 overstep resolution, added rhizoCrypt/loamSpine/sweetGrass/barraCuda sections, tiered evolution actions, composition cross-references
+- **V2.1 (March 31, 2026)**: Post full-ecosystem pull — marked 10 gaps resolved (biomeOS v2.81 BM-04/05, barraCuda v0.3.11 BC-01/02/03, petalTongue PT-01/02/03, Squirrel SQ-01, songBird SB-01). Revised projected health 67.4% → 83.7% current, 95.0% with remaining Tier 1 fixes. Added nestgate NG-04/05 (aws-lc-rs C dep, CryptoDelegate WIP). 2 critical blockers remain: RC-01 + LS-03.
