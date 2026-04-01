@@ -780,7 +780,7 @@ primalSpring has decomposed the monolithic interactive gateway into 7 independen
 | Gap | Interaction | Impact |
 |-----|------------|--------|
 | ~~**BM-04**~~ | ~~biomeOS → All Primals (capability discovery)~~ | **RESOLVED** (v2.81): `topology.rescan` + lazy discovery on miss. `capability.discover` routes to all primals (verified April 1). |
-| **RC-01** | rhizoCrypt → biomeOS (registration) | TCP-only transport, no UDS socket. Cannot participate in standard compositions. **SOLE REMAINING CRITICAL BLOCKER.** |
+| ~~**RC-01**~~ | ~~rhizoCrypt → biomeOS (registration)~~ | **RESOLVED** (v0.14.0-dev s23): `--unix [PATH]` CLI flag, UDS at `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock`. Live verified April 1. **ZERO CRITICAL BLOCKERS REMAIN.** |
 | ~~**LS-03**~~ | ~~loamSpine → biomeOS (startup)~~ | **RESOLVED** (v0.9.15): Infant discovery fails gracefully. UDS at `biomeos/loamspine.sock`. 19 capabilities. |
 | ~~**PT-01**~~ | ~~petalTongue → biomeOS (discovery)~~ | **RESOLVED**: Socket at `biomeos/petaltongue-ipc.sock`. Discoverable by biomeOS scan. |
 | ~~**SQ-01**~~ | ~~Squirrel → biomeOS (discovery)~~ | **RESOLVED** (alpha.25b): Filesystem socket via `UniversalListener`. Discoverable. |
@@ -803,8 +803,8 @@ ludoSpring's live plasmidBin validation (experiments 084-098) achieved 95/141 ch
 
 - **barraCuda math pipeline**: 42/42 (tensor, activation, stats) — Fitts/Hick formulas fixed in Sprint 25 (BC-01/02/03 RESOLVED)
 - **NUCLEUS game session**: Working at 60Hz tick cycle
-- **Session provenance**: ~~Blocked by RC-01 and LS-03~~ LS-03 RESOLVED. Only RC-01 (rhizoCrypt UDS) remains.
-- **Projected with fixes**: 67.4% → 87.9% (LS-03 resolved) → 95.0% (with RC-01 + Tier 2)
+- **Session provenance**: ~~Blocked by RC-01 and LS-03~~ **Both RESOLVED.** Provenance trio unblocked.
+- **Projected with fixes**: 67.4% → 94.3% (RC-01 + LS-03 resolved) → 95.0% (with toadStool S169) → 97.9% (all remaining)
 
 ### Related Documents
 

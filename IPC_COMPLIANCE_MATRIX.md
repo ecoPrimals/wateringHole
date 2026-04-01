@@ -61,7 +61,7 @@ See `PRIMAL_IPC_PROTOCOL.md` Socket Path Convention and
 
 | Primal | Socket Path | Filesystem? | In biomeos/? | Domain Symlink | Status | Notes |
 |--------|-------------|-------------|-------------|----------------|--------|-------|
-| **rhizocrypt** | `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock` | Yes | Yes | -- | **C** | `--unix [PATH]` flag; default ecosystem standard path. Fixed in v0.14.0-dev session 23. |
+| **rhizocrypt** | `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock` | Yes | Yes | -- | **C** | `--unix [PATH]` flag; default ecosystem standard path. **RC-01 RESOLVED** (v0.14.0-dev s23). Live verified April 1. |
 | **loamspine** | `/run/user/1000/biomeos/loamspine.sock` | Yes | Yes | No | **C** | **LS-03 RESOLVED** (v0.9.15). Conformant `biomeos/` path. Infant discovery fails gracefully. |
 | **sweetgrass** | `/run/user/1000/biomeos/sweetgrass.sock` | Yes | Yes | No | **P** | Conformant path, no family suffix. Missing domain symlink. |
 | **squirrel** | `$XDG_RUNTIME_DIR/biomeos/squirrel.sock` + `@squirrel` (abstract) | Yes | Yes | No | **C** | `UniversalListener` (alpha.25b): abstract → filesystem → TCP fallback. Filesystem socket now discoverable. |
@@ -229,7 +229,7 @@ self-capabilities, omitting all external primal capabilities.
 | **nestgate** | No | Race condition | Intermittent | **P** | Sometimes starts fast enough to be caught |
 | **toadstool** | No | Race condition | Intermittent | **P** | Same timing issue |
 | **sweetgrass** | No | Race condition | Intermittent | **P** | Same timing issue |
-| **rhizocrypt** | N/A | N/A | **No** (TCP only, no UDS) | **X** | No socket to discover (RC-01) |
+| **rhizocrypt** | No | Discoverable (UDS) | **Pending rescan** | **P** | **RC-01 RESOLVED** (v0.14.0-dev s23). Socket at `biomeos/rhizocrypt.sock` with `--unix`. Needs biomeOS rescan to register. |
 | **loamspine** | No | Discoverable (UDS) | **Pending rescan** | **P** | **LS-03 RESOLVED** (v0.9.15). Socket at `biomeos/loamspine.sock`. Needs biomeOS rescan to register. |
 | **coralreef** | No | Race condition | Intermittent | **P** | Same timing issue |
 | **barraCuda** | No | Race condition | Intermittent | **P** | Same timing issue |

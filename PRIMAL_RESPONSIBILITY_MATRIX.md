@@ -45,7 +45,7 @@ Legend:
 | **DAG / Provenance** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | **OWNS** | N/A | N/A |
 | **Ledger / History** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | **OWNS** | N/A |
 | **Attribution** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | **OWNS** |
-| **Capability Registration** | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | **OWNS** ✅ (v2.81) | DELEGATES | DELEGATES | **GAP** (RC-01) | DELEGATES ✅ (v0.9.15) | DELEGATES |
+| **Capability Registration** | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | **OWNS** ✅ (v2.81) | DELEGATES | DELEGATES | DELEGATES ✅ (v0.14.0-dev s23) | DELEGATES ✅ (v0.9.15) | DELEGATES |
 
 ---
 
@@ -117,16 +117,18 @@ The following overstep areas are now **RESOLVED**:
 
 **Priority:** Low — S169 resolved the major overstep. Only coralReef discovery (TS-01) and sandbox boundary remain.
 
-### rhizoCrypt (CRITICAL gaps)
+### rhizoCrypt (formerly CRITICAL — now RESOLVED)
 
 **Core domain**: DAG provenance — ephemeral workspace, session-scoped directed acyclic graphs, Merkle proofs.
 
-| Gap | Severity | Impact | Fix Path |
-|-----|----------|--------|----------|
-| **RC-01: TCP-only transport** | CRITICAL | Blocks all Trio compositions via UDS. biomeOS cannot discover rhizoCrypt (no socket in `biomeos/`). | Add `--unix [PATH]` CLI flag, default `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock`. Follow BearDog/sweetGrass pattern. |
-| ~~Non-conformant wire framing~~ | ~~High~~ | ~~HTTP-wrapped JSON-RPC only~~ | **RESOLVED** — dual-mode TCP (raw newline + HTTP POST) auto-detected per connection. | **RESOLVED** (v0.14.0-dev) |
+| Gap | Severity | Impact | Fix Path | Status |
+|-----|----------|--------|----------|--------|
+| ~~**RC-01: TCP-only transport**~~ | ~~CRITICAL~~ | ~~Blocks all Trio compositions~~ | Session 23: `--unix [PATH]` CLI flag, `UdsJsonRpcServer`, default `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock`. | **RESOLVED** (v0.14.0-dev s23) |
+| ~~Non-conformant wire framing~~ | ~~High~~ | ~~HTTP-only~~ | Dual-mode TCP (raw newline + HTTP POST). | **RESOLVED** (v0.14.0-dev s23) |
+| ~~`ecoPrimals/` path~~ | ~~Medium~~ | ~~Non-standard socket dir~~ | `safe_env::get_socket_path()` now uses `constants::BIOMEOS_SOCKET_SUBDIR`. | **RESOLVED** (v0.14.0-dev s23) |
+| plasmidBin binary outdated | Medium | plasmidBin binary lacks UDS | Harvest source-built binary to plasmidBin | Open |
 
-**Live validation (April 1)**: v0.14.0-dev starts, dual-mode TCP (ports 9400 tarpc + 9401 JSON-RPC). Raw newline socat test passes. Full health triad (`health.liveness`, `health.readiness`, `health.check`, `health.metrics`). 4 capability domains with 26 methods (DAG, health, capabilities, tools). **NO UDS socket** — RC-01 confirmed as the sole remaining CRITICAL blocker.
+**Live validation (April 1, source-built v0.14.0-dev s24)**: Starts with `--unix`, binds UDS at `/run/user/1000/biomeos/rhizocrypt.sock` + dual TCP (9400 tarpc + 9401 JSON-RPC). Full health triad via UDS ✅. `dag.session.create` + `dag.session.list` via UDS ✅. 1,423 tests, zero unsafe, lock-free CircuitBreaker, zero-sleep testing, 94.60% coverage.
 
 **No overstep identified** — rhizoCrypt is focused on its DAG domain.
 
@@ -201,7 +203,7 @@ Deploy graphs should **never** route a concern to a primal that is listed as OVE
 
 | Primal | Action | Impact on Deploy Graphs |
 |--------|--------|------------------------|
-| **rhizoCrypt** | Add `--unix` UDS socket (RC-01). Add raw newline TCP framing. | Unblocks provenance_pipeline.toml, session_provenance.toml, 4 ludoSpring experiments (+9 checks). |
+| ~~**rhizoCrypt**~~ | ~~Add `--unix` UDS socket (RC-01)~~ **RESOLVED in v0.14.0-dev s23**: `--unix [PATH]` CLI flag, `UdsJsonRpcServer`, `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock` default. Dual-mode TCP (HTTP + newline). `ecoPrimals/` → `biomeos/` path migration. 1,423 tests. | **+9 checks gained**. Provenance trio compositions unblocked. |
 | ~~**loamSpine**~~ | ~~Fix `block_on()` startup panic (LS-03)~~ **RESOLVED in v0.9.15**: Infant discovery fails gracefully, UDS at `biomeos/loamspine.sock`, 19 capabilities, `health.liveness` conformant. Remaining: add `--port` alias. | **+6 checks gained**. Provenance pipeline unblocked (pending RC-01). |
 | ~~**biomeOS**~~ | ~~Fix capability registration timing (BM-04)~~ **RESOLVED in v2.81**: `topology.rescan` + lazy discovery on miss + multi-shape probe (BM-05). Also: TCP-only CLI, cross-gate routing, 7,212 tests. | ~~Unblocks 3 checks~~ **+14 checks gained**. All multi-primal composition graphs now viable. |
 | **bearDog** | Default `FAMILY_ID` to `standalone` when unset. Add `--port` alias for `--listen`. | Blocks standalone startup in any graph without env setup. |
@@ -240,9 +242,9 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full 32-gap registry.
 | C5: Persistence | nestGate overstep (crypto/network shed) | — |
 | C6: Proprioception | petalTongue proprioception events | PT-05 |
 | C7: Full Interactive | biomeOS capability registration (BM-04) | BM-04 |
-| Provenance Pipeline | rhizoCrypt UDS (RC-01), ~~loamSpine panic (LS-03)~~ **RESOLVED** | RC-01 |
+| Provenance Pipeline | ~~rhizoCrypt UDS (RC-01)~~ **RESOLVED**, ~~loamSpine panic (LS-03)~~ **RESOLVED** | — (unblocked) |
 | Game Science | ~~barraCuda formulas (BC-01/02/03)~~ **RESOLVED** | — |
-| Session Provenance | RC-01, ~~LS-03~~ **RESOLVED** | RC-01 |
+| Session Provenance | ~~RC-01~~ **RESOLVED**, ~~LS-03~~ **RESOLVED** | — (unblocked) |
 
 ### Projected Composition Health (revised post-evolution)
 
@@ -258,9 +260,11 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full 32-gap registry.
 
 **C1-C7 composition suite**: 4 compositions at full pass (C1 Render, C3 Session, C4 Game Science, C6 Proprioception). 3 at partial (C2 Narration, C5 Persistence, C7 Full Interactive).
 
-**Remaining 1 critical blocker for ludoSpring 141-check matrix**: RC-01 (rhizoCrypt) — the sole Provenance Trio blocker. LS-03 is **RESOLVED**.
+**ZERO CRITICAL BLOCKERS.** Both RC-01 (rhizoCrypt) and LS-03 (loamSpine) are **RESOLVED**. The Provenance Trio (rhizoCrypt + loamSpine + sweetGrass) is now unblocked for composition.
 
-**Full 141-check projected**: 67.4% → 87.9% with LS-03 resolved → 95.0% with RC-01 + remaining Tier 2 fixes.
+**Full 141-check projected**: 67.4% → 94.3% with RC-01 + LS-03 resolved → 95.0% with toadStool S169 rebuild → 97.9% with SQ-02 + remaining.
+
+Note: rhizoCrypt RC-01 fix is in source code (v0.14.0-dev s23/s24). The plasmidBin binary needs harvesting to propagate the fix to binary deployments.
 
 ---
 
