@@ -1,7 +1,7 @@
 # Primal Responsibility Matrix — Cross-Primal Concern Ownership
 
-**Date:** March 31, 2026
-**Source:** ludoSpring V35.3 ecosystem evolution review + soft overstep audit; **V37.1 live plasmidBin gap matrix** (95/141 = 67.4%); primalSpring Phase 23f composition decomposition (7 subsystems, 32 gaps); toadStool S169 overstep cleanup (-10,659 lines)
+**Date:** April 1, 2026
+**Source:** ludoSpring V35.3 ecosystem evolution review + soft overstep audit; **V37.1 live plasmidBin gap matrix** (95/141 = 67.4%); primalSpring Phase 23f/23g composition decomposition (7 subsystems, 32 gaps → 21 open); toadStool S169 overstep cleanup (-10,659 lines); **deep per-primal validation** (April 1: 11 gaps resolved, LS-03 RESOLVED, 1 critical blocker remains: RC-01)
 **Purpose:** Define which primal OWNS each concern domain, which primals should DELEGATE, and where OVERSTEP has been identified. This matrix governs boundary evolution and informs deploy graph design.
 **Note:** coralReef/glowplug dispatch boundary is deferred — actively in GPU development. toadStool S169 removed 30+ overstepping methods (Squirrel AI, coralReef shader compile, biomeOS discovery/deploy, songBird HTTP).
 
@@ -45,7 +45,7 @@ Legend:
 | **DAG / Provenance** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | **OWNS** | N/A | N/A |
 | **Ledger / History** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | **OWNS** | N/A |
 | **Attribution** | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A | **OWNS** |
-| **Capability Registration** | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | **OWNS** ✅ (v2.81) | DELEGATES | DELEGATES | **GAP** (RC-01) | **GAP** (LS-03) | DELEGATES |
+| **Capability Registration** | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | DELEGATES | **OWNS** ✅ (v2.81) | DELEGATES | DELEGATES | **GAP** (RC-01) | DELEGATES ✅ (v0.9.15) | DELEGATES |
 
 ---
 
@@ -123,19 +123,24 @@ The following overstep areas are now **RESOLVED**:
 
 | Gap | Severity | Impact | Fix Path |
 |-----|----------|--------|----------|
-| **RC-01: TCP-only transport** | CRITICAL | Blocks 4 ludoSpring experiments (+9 checks), blocks all Trio compositions via UDS | Add `--unix [PATH]` CLI flag, default `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock`. Follow BearDog/sweetGrass pattern. |
-| Non-conformant wire framing | High | HTTP-wrapped JSON-RPC only (Axum). Raw newline client gets 400. | Add raw newline TCP JSON-RPC listener alongside Axum. |
+| **RC-01: TCP-only transport** | CRITICAL | Blocks all Trio compositions via UDS. biomeOS cannot discover rhizoCrypt (no socket in `biomeos/`). | Add `--unix [PATH]` CLI flag, default `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock`. Follow BearDog/sweetGrass pattern. |
+| ~~Non-conformant wire framing~~ | ~~High~~ | ~~HTTP-wrapped JSON-RPC only~~ | **RESOLVED** — dual-mode TCP (raw newline + HTTP POST) auto-detected per connection. | **RESOLVED** (v0.14.0-dev) |
+
+**Live validation (April 1)**: v0.14.0-dev starts, dual-mode TCP (ports 9400 tarpc + 9401 JSON-RPC). Raw newline socat test passes. Full health triad (`health.liveness`, `health.readiness`, `health.check`, `health.metrics`). 4 capability domains with 26 methods (DAG, health, capabilities, tools). **NO UDS socket** — RC-01 confirmed as the sole remaining CRITICAL blocker.
 
 **No overstep identified** — rhizoCrypt is focused on its DAG domain.
 
-### loamSpine (CRITICAL gap)
+### loamSpine (formerly CRITICAL — now RESOLVED)
 
 **Core domain**: Immutable linear history — append-only ledger, inclusion proofs, certificates.
 
-| Gap | Severity | Impact | Fix Path |
-|-----|----------|--------|----------|
-| **LS-03: Startup panic** | CRITICAL | Cannot start at all. Blocks exp095 (+6 checks), blocks all Trio compositions. | Replace `block_on()` with `spawn` in `infant_discovery.rs:233`. The async context already exists. |
-| Socket path unknown | High | Crashes before socket bind, so path conformance untested. | Once panic is fixed, ensure `$XDG_RUNTIME_DIR/biomeos/loamspine.sock`. |
+| Gap | Severity | Impact | Fix Path | Status |
+|-----|----------|--------|----------|--------|
+| ~~**LS-03: Startup panic**~~ | ~~CRITICAL~~ | ~~Blocks exp095 (+6 checks)~~ | Infant discovery now fails gracefully ("No discovery service found") instead of panicking. | **RESOLVED** (v0.9.15) |
+| Socket path | Conformant | Binds at `$XDG_RUNTIME_DIR/biomeos/loamspine.sock` | — | **RESOLVED** |
+| Missing `--port` alias | Low | Uses `--jsonrpc-port` instead of `--port` | Add `--port` alias | Open |
+
+**Live validation (April 1)**: v0.9.15 starts cleanly, UDS at `/run/user/1000/biomeos/loamspine.sock`, `health.liveness` ✅, 19 capabilities. `entry.append` requires `spine_id` param. TCP JSON-RPC on configurable port. tarpc on port 9001.
 
 **No overstep identified** — loamSpine is focused on its ledger domain.
 
@@ -197,7 +202,7 @@ Deploy graphs should **never** route a concern to a primal that is listed as OVE
 | Primal | Action | Impact on Deploy Graphs |
 |--------|--------|------------------------|
 | **rhizoCrypt** | Add `--unix` UDS socket (RC-01). Add raw newline TCP framing. | Unblocks provenance_pipeline.toml, session_provenance.toml, 4 ludoSpring experiments (+9 checks). |
-| **loamSpine** | Fix `block_on()` startup panic (LS-03). Ensure standard socket path. | Unblocks provenance_pipeline.toml, exp095/096 (+6 checks). Must start before session graphs can deploy. |
+| ~~**loamSpine**~~ | ~~Fix `block_on()` startup panic (LS-03)~~ **RESOLVED in v0.9.15**: Infant discovery fails gracefully, UDS at `biomeos/loamspine.sock`, 19 capabilities, `health.liveness` conformant. Remaining: add `--port` alias. | **+6 checks gained**. Provenance pipeline unblocked (pending RC-01). |
 | ~~**biomeOS**~~ | ~~Fix capability registration timing (BM-04)~~ **RESOLVED in v2.81**: `topology.rescan` + lazy discovery on miss + multi-shape probe (BM-05). Also: TCP-only CLI, cross-gate routing, 7,212 tests. | ~~Unblocks 3 checks~~ **+14 checks gained**. All multi-primal composition graphs now viable. |
 | **bearDog** | Default `FAMILY_ID` to `standalone` when unset. Add `--port` alias for `--listen`. | Blocks standalone startup in any graph without env setup. |
 
@@ -235,13 +240,13 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full 32-gap registry.
 | C5: Persistence | nestGate overstep (crypto/network shed) | — |
 | C6: Proprioception | petalTongue proprioception events | PT-05 |
 | C7: Full Interactive | biomeOS capability registration (BM-04) | BM-04 |
-| Provenance Pipeline | rhizoCrypt UDS (RC-01), loamSpine panic (LS-03) | RC-01, LS-03 |
-| Game Science | barraCuda formulas (BC-01/02/03) | BC-01, BC-02, BC-03 |
-| Session Provenance | RC-01, LS-03 | RC-01, LS-03 |
+| Provenance Pipeline | rhizoCrypt UDS (RC-01), ~~loamSpine panic (LS-03)~~ **RESOLVED** | RC-01 |
+| Game Science | ~~barraCuda formulas (BC-01/02/03)~~ **RESOLVED** | — |
+| Session Provenance | RC-01, ~~LS-03~~ **RESOLVED** | RC-01 |
 
 ### Projected Composition Health (revised post-evolution)
 
-**10 gaps resolved this cycle** (biomeOS v2.81, barraCuda v0.3.11, petalTongue IPC, Squirrel alpha.25b, songBird wave89-90):
+**11 gaps resolved this cycle** (biomeOS v2.81, barraCuda v0.3.11, petalTongue IPC, Squirrel alpha.25b, songBird wave89-90, **loamSpine v0.9.15**):
 
 | Status | Checks | % |
 |--------|--------|---|
@@ -253,9 +258,9 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full 32-gap registry.
 
 **C1-C7 composition suite**: 4 compositions at full pass (C1 Render, C3 Session, C4 Game Science, C6 Proprioception). 3 at partial (C2 Narration, C5 Persistence, C7 Full Interactive).
 
-**Remaining 2 critical blockers for ludoSpring 141-check matrix**: RC-01 (rhizoCrypt) and LS-03 (loamSpine) — both are Provenance Trio blockers.
+**Remaining 1 critical blocker for ludoSpring 141-check matrix**: RC-01 (rhizoCrypt) — the sole Provenance Trio blocker. LS-03 is **RESOLVED**.
 
-**Full 141-check projected**: 67.4% → 95.0% with all Tier 1+2 fixes.
+**Full 141-check projected**: 67.4% → 87.9% with LS-03 resolved → 95.0% with RC-01 + remaining Tier 2 fixes.
 
 ---
 
@@ -265,4 +270,5 @@ This matrix will be updated as primals evolve and shed overstep. Each update sho
 
 - **V1 (March 30, 2026)**: Initial matrix from ludoSpring V35.3 ecosystem evolution review
 - **V2 (March 31, 2026)**: Expanded with primalSpring Phase 23f composition findings (32 gaps), ludoSpring V37.1 plasmidBin gap matrix, toadStool S169 overstep resolution, added rhizoCrypt/loamSpine/sweetGrass/barraCuda sections, tiered evolution actions, composition cross-references
+- **V2.2 (April 1, 2026)**: Deep per-primal validation. **LS-03 RESOLVED** (loamSpine v0.9.15: starts cleanly, UDS conformant, 19 capabilities, health.liveness ✅). Updated loamSpine from CRITICAL/Blocked to RESOLVED/Close. rhizoCrypt RC-01 confirmed sole remaining CRITICAL blocker (dual-mode TCP works, but NO UDS). toadStool S168 binary confirmed outdated (0 capabilities, Method not found). NestGate: 25 capabilities, `storage.list` works. 11 total gaps resolved. 1 critical blocker remaining.
 - **V2.1 (March 31, 2026)**: Post full-ecosystem pull — marked 10 gaps resolved (biomeOS v2.81 BM-04/05, barraCuda v0.3.11 BC-01/02/03, petalTongue PT-01/02/03, Squirrel SQ-01, songBird SB-01). Revised projected health 67.4% → 83.7% current, 95.0% with remaining Tier 1 fixes. Added nestgate NG-04/05 (aws-lc-rs C dep, CryptoDelegate WIP). 2 critical blockers remain: RC-01 + LS-03.
