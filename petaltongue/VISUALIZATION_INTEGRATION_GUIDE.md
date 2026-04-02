@@ -1,7 +1,7 @@
 # Visualization Integration Guide for petalTongue
 
-**Version**: 2.0.0  
-**Date**: March 9, 2026  
+**Version**: 2.1.0  
+**Date**: April 2, 2026  
 **Audience**: Any primal or spring team that wants petalTongue to visualize their data  
 **Status**: Active Standard
 
@@ -172,6 +172,10 @@ This is the recommended path for spring-to-petalTongue integration.
 | `scatter3d` | PCoA ordination, phase space, latent embeddings | x, y, z, point_labels, unit |
 | `fieldmap` | ET0 maps, Richards PDE, sensor grids | grid_x, grid_y, values (row-major), unit |
 | `spectrum` | FFT, HRV power spectrum, noise analysis | frequencies, amplitudes, unit |
+| `game_scene` | 2D tilemaps, CRPG narratives, combat grids | scene (JSON: tilemap/sprites/entities or description/npcs/choices) |
+| `soundscape` | Ambient audio, game audio, sonification | definition (JSON: layers with waveform/frequency/amplitude/pan) |
+
+See `SCENE_FORMAT_REFERENCE.md` for full GameScene and Soundscape JSON schemas.
 
 ### 5. Stream Incremental Updates
 
@@ -383,6 +387,8 @@ petalTongue resolves capabilities via Songbird discovery. Never hardcode primal 
 | `visualization.interact.apply` | Programmatically trigger an interaction | `intent`, `targets[]` | `InteractionResult` |
 | `visualization.interact.perspectives` | List active perspectives | None | `Perspective[]` |
 | `visualization.interact.sync` | Set perspective sync mode | `perspective_id`, `sync_mode` | `Ok` |
+| `visualization.render.scene` | Render a scene (game/narrative) | DataBinding payloads | `RenderResult` |
+| `audio.synthesize` | Synthesize soundscape to PCM/WAV | `definition`, `format?` | Metadata + optional `wav_base64` |
 
 ### Methods petalTongue Calls (Your Primal Exposes These)
 
@@ -665,6 +671,87 @@ is enabled (default).
 }
 ```
 
+### ludoSpring: RPGPT Dialogue Scene
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "visualization.render.scene",
+  "params": {
+    "session_id": "ludospring-campaign-01",
+    "bindings": [{
+      "channel_type": "game_scene",
+      "id": "tavern_entrance",
+      "label": "The Rusty Anchor",
+      "scene": {
+        "scene_type": "dialogue_tree",
+        "node": "tavern_1",
+        "description": "You push open the heavy oak door. Warm light and roasting meat greet you.",
+        "npcs": [
+          {"name": "Innkeeper", "status": "friendly", "health": 1.0},
+          {"name": "Wounded Guard", "status": "friendly", "health": 0.4}
+        ],
+        "choices": ["Talk to the innkeeper", "Help the wounded guard", "Order a drink"],
+        "turn": 3,
+        "is_ending": false
+      }
+    }]
+  },
+  "id": 1
+}
+```
+
+### esotericWebb: Narrative Game Scene
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "visualization.render.scene",
+  "params": {
+    "bindings": [{
+      "channel_type": "game_scene",
+      "id": "forest_path",
+      "label": "Forest Crossroads",
+      "scene": {
+        "node": "scene_7",
+        "description": "The forest path splits ahead. An old hermit sits on a moss-covered stone.",
+        "npcs": [{"name": "Old Hermit", "status": "friendly"}],
+        "choices": ["Take the left path", "Take the right path", "Ask the hermit for directions"],
+        "turn": 5,
+        "is_ending": false
+      }
+    }]
+  },
+  "id": 1
+}
+```
+
+### ludoSpring: Game Audio Soundscape
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "visualization.render",
+  "params": {
+    "bindings": [{
+      "channel_type": "soundscape",
+      "id": "dungeon_ambient",
+      "label": "Dungeon Ambience",
+      "definition": {
+        "name": "Deep Dungeon",
+        "duration_secs": 60.0,
+        "layers": [
+          {"id": "drip", "waveform": "sine", "frequency": 300.0, "amplitude": 0.2, "duration_secs": 60.0, "pan": -0.6},
+          {"id": "rumble", "waveform": "white_noise", "frequency": 80.0, "amplitude": 0.15, "duration_secs": 60.0, "pan": 0.0, "fade_in_secs": 5.0}
+        ],
+        "master_amplitude": 0.7
+      }
+    }]
+  },
+  "id": 1
+}
+```
+
 ### Molecular Visualization (Future)
 
 ```json
@@ -725,10 +812,45 @@ And receives your socket path and transport type. No hardcoded names.
 
 ---
 
+## Sensory Capability Negotiation
+
+Before rendering, consumer primals can query what the user can do:
+
+```json
+{"jsonrpc": "2.0", "method": "capabilities.sensory", "params": {}, "id": 1}
+```
+
+Returns a `SensoryCapabilityMatrix` with input/output capability flags,
+validated interaction paths, and recommended modality. Use this to adapt
+your visualization requests to the user's abilities.
+
+For agentic AI sessions (Squirrel), pass `"agent": true` to get an API-only matrix.
+
+For explicit capability overrides (e.g. from NestGate user preferences):
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "capabilities.sensory.negotiate",
+  "params": {
+    "input": { "keyboard": true, "switch_input": true },
+    "output": { "audio": true, "description": true }
+  },
+  "id": 2
+}
+```
+
+See `wateringHole/petaltongue/SENSORY_CAPABILITY_MATRIX.md` for the full matrix specification.
+
+---
+
 ## Related Documents
 
 | Document | Location | Purpose |
 |----------|----------|---------|
+| Sensory Capability Matrix | `wateringHole/petaltongue/SENSORY_CAPABILITY_MATRIX.md` | Input x output capability negotiation |
+| Toadstool Sensor Contract | `wateringHole/TOADSTOOL_SENSOR_CONTRACT.md` | Hardware sensor event IPC protocol |
+| Scene Format Reference | `wateringHole/petaltongue/SCENE_FORMAT_REFERENCE.md` | GameScene, Soundscape, narrative JSON schemas |
 | Grammar of Graphics Architecture | `petalTongue/specs/GRAMMAR_OF_GRAPHICS_ARCHITECTURE.md` | Full grammar type system |
 | Universal Visualization Pipeline | `petalTongue/specs/UNIVERSAL_VISUALIZATION_PIPELINE.md` | End-to-end pipeline spec |
 | Interaction Engine Architecture | `petalTongue/specs/INTERACTION_ENGINE_ARCHITECTURE.md` | Bidirectional interaction, perspectives, multi-user |

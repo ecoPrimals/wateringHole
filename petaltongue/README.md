@@ -2,22 +2,24 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: April 2, 2026
+**Updated**: April 2, 2026 (sensory matrix, scene rendering, accessibility adapters)
 
 ---
 
 ## Integration Status
 
 petalTongue v1.6.6 (16 crates, edition 2024, `deny(unwrap/expect)`):
-- 180+ tests passing, 0 failures (workspace; crate-level tests run in CI)
+- 5,952+ tests passing, 0 failures (1 pre-existing CLI test excluded)
 - `#![forbid(unsafe_code)]` unconditional on all 16 crates + UniBin, zero C dependencies
 - ~90% line coverage (llvm-cov) — threshold enforced via `llvm-cov.toml`
 - UUI glossary module (`petal_tongue_core::uui_glossary`) — canonical terminology for modalities, user types, SAME DAVE
 - tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
 - JSON-RPC 2.0 over Unix sockets (secondary, local IPC and debugging)
 - HTTP fallback for browser/external clients
-- Capability-based discovery -- zero hardcoded primal names, 60+ capability constants, 15 primal identity constants
+- Capability-based discovery -- zero hardcoded primal names, 62+ capability constants, 15 primal identity constants
 - **Enriched `capability.list`**: returns `primal`, `version`, `transport[]`, `methods[]`, `depends_on[]`, `data_bindings`, `geometry_types`
+- **Sensory Capability Matrix**: `capabilities.sensory` and `capabilities.sensory.negotiate` IPC methods for input×output negotiation
+- **Accessibility adapters**: SwitchInputAdapter, AudioInversePipeline, AgentInputAdapter for motor-impaired, blind, and AI users
 - Grammar of Graphics engine with Tufte constraint validation
 - **DataBinding auto-compiler**: All 11 DataBinding variants (TimeSeries, Distribution, Bar, Gauge, Spectrum, Heatmap, Scatter, Scatter3D, FieldMap, GameScene, Soundscape) auto-compile to Grammar of Graphics
 - **Dashboard layout engine**: Multi-panel grid with domain theming and SVG/description export
@@ -27,7 +29,7 @@ petalTongue v1.6.6 (16 crates, edition 2024, `deny(unwrap/expect)`):
 - **Tile/Arc geometry**: Real heatmap/fieldmap tile rendering, semicircular gauge arcs
 - Domain-aware rendering (7 palettes: health, physics, ecology, agriculture, measurement, neural, game)
 - Spring IPC: healthSpring DataChannel auto-compile, dashboard render, wetSpring Scatter/Spectrum, physics bridge, interaction method aliases
-- Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, SVG, headless
+- Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, haptic, braille, description, SVG, headless
 - Scene graph with Manim-style animation, modality compilers (SVG, audio, description, terminal)
 - **Spring absorption**: backpressure, JSONL telemetry, diverging palette, pipeline DAG, provider registry, `temp_env` safe testing, `TryFrom` safe casts, `tempfile` socket isolation
 - **Live ecosystem wiring**: sensor feed, interaction broadcast, Neural API registration, GameDataChannel mapping
@@ -173,6 +175,10 @@ Legacy: `/tmp/petaltongue.sock`
 | `visualization.interact.unsubscribe` | Inbound | Alias for `interaction.unsubscribe` (wetSpring compat) |
 | `visualization.interact.apply` | Inbound | Programmatic interaction (zoom, filter, select) |
 | `visualization.interact.perspectives` | Inbound | List active perspective views |
+| `capabilities.sensory` | Inbound | Query sensory capability matrix (runtime discovery or agent) |
+| `capabilities.sensory.negotiate` | Inbound | Negotiate tailored matrix with explicit input/output caps |
+| `audio.synthesize` | Inbound | On-demand soundscape synthesis (returns WAV metadata) |
+| `visualization.render.scene` | Inbound | Direct SceneGraph submission |
 | `motor.*` | Outbound | Motor commands to springs |
 | `visualization.interact` | Outbound | User interaction event notifications |
 
@@ -183,7 +189,9 @@ Legacy: `/tmp/petaltongue.sock`
 | Document | Purpose |
 |----------|---------|
 | [PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md](./PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md) | **What petalTongue needs from other primals** (3D pipeline, audio, GPU ops) |
-| [VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md) | **How to get petalTongue to visualize your data** (v2.0.0) |
+| [VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md) | **How to get petalTongue to visualize your data** (v2.1.0) |
+| [SENSORY_CAPABILITY_MATRIX.md](./SENSORY_CAPABILITY_MATRIX.md) | **Input×output capability negotiation protocol** for consumer primals |
+| [SCENE_FORMAT_REFERENCE.md](./SCENE_FORMAT_REFERENCE.md) | **GameScene, Soundscape, narrative JSON schemas** for ludoSpring, esotericWebb |
 | [BIOMEOS_INTEGRATION_HANDOFF.md](./BIOMEOS_INTEGRATION_HANDOFF.md) | biomeOS integration guide (fossil record, v1.3.0 baseline) |
 | [BIOMEOS_API_SPECIFICATION.md](./BIOMEOS_API_SPECIFICATION.md) | API contract and endpoints |
 | [QUICK_START_FOR_BIOMEOS.md](./QUICK_START_FOR_BIOMEOS.md) | 5-minute quick start |
