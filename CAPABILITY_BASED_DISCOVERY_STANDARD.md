@@ -1,8 +1,8 @@
 # Capability-Based Discovery Standard
 
-**Version:** 1.1.0
-**Date:** March 25, 2026 (updated from 1.0.0 March 18, 2026)
-**Status:** Active — all primals and springs SHOULD adopt this
+**Version:** 1.2.0
+**Date:** April 2, 2026 (updated from 1.1.0 March 25, 2026)
+**Status:** Active — all primals and springs MUST adopt this
 
 ## Principle
 
@@ -204,7 +204,63 @@ primalSpring v0.3.2 demonstrates the full pattern:
 
 ---
 
+## Compliance Audit Checklist
+
+When auditing a primal for capability-based discovery compliance, check:
+
+### MUST NOT appear in production code (outside tests/logging/deploy graphs):
+
+1. **Hardcoded primal names in discovery**: `discover_primal("beardog")`, `discover_toadstool()`, `SongbirdClient`
+2. **Primal-specific env vars for routing**: `TOADSTOOL_PORT`, `BARRACUDA_SOCKET`, `SONGBIRD_SOCKET`
+3. **Primal names in method namespaces**: `barracuda.compute.dispatch` (use `compute.dispatch` — the caller doesn't know who provides it)
+4. **Primal-named structs for generic roles**: `ToadstoolCompute`, `SongbirdClient` (use `ComputeProvider`, `DiscoveryClient`)
+5. **Primal-named socket roles**: `socket_roles::PHYSICS_COMPUTE = "barracuda"` (use capability domain names)
+6. **Primal-specific port constants**: `DEFAULT_TOADSTOOL_PORT = 9001`
+
+### MAY appear:
+
+1. **`primal_names` module for logging context** — never in routing
+2. **Test fixtures with primal names** — intentional integration tests
+3. **Deploy graph `binary`/`name` fields** — needed for binary invocation
+4. **Registration payloads** — telling biomeOS who you are
+
+### Audit pattern (grep):
+
+```bash
+# Find identity-based routing violations (exclude tests, docs)
+rg 'TOADSTOOL_|BARRACUDA_|SONGBIRD_|BEARDOG_|NESTGATE_|SQUIRREL_' \
+   --type rust crates/ -g '!**/tests/**' -g '!**/test*'
+
+# Find primal-named structs used for generic roles
+rg 'Toadstool|Songbird|BarraCuda|BearDog|NestGate|Squirrel' \
+   --type rust crates/ -g '!**/tests/**' | grep -i 'struct\|fn\|impl'
+
+# Find hardcoded primal method namespaces
+rg '"barracuda\.|"songbird\.|"toadstool\.|"beardog\.|"nestgate\.|"squirrel\.' \
+   --type rust crates/ -g '!**/tests/**'
+```
+
+### April 2026 audit findings:
+
+**petalTongue** has correct infrastructure (`BiomeOsBackend`, `CapabilityDiscovery`) but bypasses it:
+`SongbirdClient`, `discover_toadstool()`, `TOADSTOOL_PORT/URL`, `BARRACUDA_SOCKET`,
+`barracuda.compute.dispatch`, `ToadstoolCompute/Display/AudioProvider`. The `toadstool_v2.rs`
+display backend correctly uses `CapabilityDiscovery` — all other cross-primal paths need rewiring.
+
+---
+
 ## Version History
+
+### v1.2.0 (April 2, 2026)
+
+**Compliance Audit & Enforcement**
+
+- Added Compliance Audit Checklist with grep patterns for detecting violations
+- Upgraded status from SHOULD to MUST — standard maturity warrants mandatory adoption
+- April 2026 audit findings: 6/10 primals non-compliant (Songbird, Squirrel, toadStool,
+  biomeOS, petalTongue, NestGate). Provenance trio + BearDog fully compliant
+- primalSpring Phase 23k audit identified specific violations per primal with counts
+- Cross-referenced with `IPC_COMPLIANCE_MATRIX.md` v1.4.0
 
 ### v1.1.0 (March 25, 2026)
 
