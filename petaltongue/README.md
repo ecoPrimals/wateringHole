@@ -2,16 +2,16 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: March 16, 2026
+**Updated**: April 2, 2026
 
 ---
 
 ## Integration Status
 
 petalTongue v1.6.6 (16 crates, edition 2024, `deny(unwrap/expect)`):
-- 5,244 tests passing, 0 failures
-- `#![forbid(unsafe_code)]` on all 16 crates + UniBin, zero C dependencies
-- ~86% line / ~87% branch coverage (llvm-cov) -- target 90%
+- 180+ tests passing, 0 failures (workspace; crate-level tests run in CI)
+- `#![forbid(unsafe_code)]` unconditional on all 16 crates + UniBin, zero C dependencies
+- ~90% line coverage (llvm-cov) — threshold enforced via `llvm-cov.toml`
 - UUI glossary module (`petal_tongue_core::uui_glossary`) — canonical terminology for modalities, user types, SAME DAVE
 - tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
 - JSON-RPC 2.0 over Unix sockets (secondary, local IPC and debugging)
