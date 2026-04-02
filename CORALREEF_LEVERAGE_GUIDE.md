@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: AGPL-3.0-only -->
 # coralReef Leverage Guide — Standalone, Trio, and Ecosystem Compositions
 
-**Date**: March 30, 2026
-**Primal**: coralReef (Phase 10, Iteration 70h)
+**Date**: March 17, 2026
+**Primal**: coralReef (Phase 10, Iteration 54)
 **Audience**: All springs, all primals, biomeOS integrators
 **Status**: Active
 
@@ -20,10 +20,8 @@ and GLSL 450 compute shaders compiled to native GPU binaries (NVIDIA
 SASS SM70–SM89, AMD GFX1030+) with full f64 transcendental support.
 coralDriver provides userspace GPU dispatch via DRM ioctl (amdgpu,
 nouveau, nvidia-drm, VFIO). coralGpu unifies compilation and dispatch
-into a single vendor-agnostic API. Zero C dependencies, zero vendor SDK.
-coral-driver uses `rustix` for kernel ioctl (not libc FFI) and is the
-only crate with `unsafe` (hardware MMIO, DMA, VFIO ioctls — each block
-has a `SAFETY` comment).
+into a single vendor-agnostic API. Zero C dependencies, zero FFI, zero
+vendor SDK.
 
 **Philosophy**: The compiler is sovereign infrastructure. Any primal or
 spring that needs GPU computation can compile and dispatch without
@@ -1188,7 +1186,7 @@ Multiple springs need the same math operations: FFT, matrix multiply,
 reduction, scan. Instead of each spring compiling independently:
 
 ```
-1. barraCuda publishes 816 WGSL shaders as a kernel library
+1. barraCuda publishes 806 WGSL shaders as a kernel library
 2. First spring to need fft_1d compiles via coralReef:
    shader.compile.wgsl { source: fft_1d, target: "sm86" }
    → binary_hash_abc123
@@ -1436,7 +1434,7 @@ turns NestGate into a global compilation cache for the ecosystem.
 
 ### Primal Leverage Guides (Companion Recipes)
 
-- `wateringHole/BARRACUDA_LEVERAGE_GUIDE.md` — barraCuda: math engine, 816 WGSL shaders, precision routing
+- `wateringHole/BARRACUDA_LEVERAGE_GUIDE.md` — barraCuda: math engine, 806 WGSL shaders, precision routing
 - `wateringHole/TOADSTOOL_LEVERAGE_GUIDE.md` — toadStool: hardware discovery, dispatch, VFIO, power management
 - `wateringHole/LOAMSPINE_LEVERAGE_GUIDE.md` — LoamSpine: permanent records, provenance chains
 - `wateringHole/RHIZOCRYPT_LEVERAGE_GUIDE.md` — rhizoCrypt: ephemeral DAG, session memory
