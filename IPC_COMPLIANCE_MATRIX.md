@@ -1,7 +1,7 @@
 # IPC Compliance Matrix
 
-**Version:** 1.3.2
-**Date:** April 1, 2026
+**Version:** 1.4.0
+**Date:** April 2, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 
@@ -154,6 +154,37 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **loamspine** | C | C | C | X (`--jsonrpc-port`) | C | ? | ? | **Close** |
 | **coralreef** | C | C | C | C | C | ? | ? | **Conformant** |
 | **skunkbat** | ? | ? | ? | ? | ? | ? | ? | Needs audit |
+
+---
+
+## Capability-Based Discovery Compliance (April 2, 2026)
+
+Standard: Primals discover and invoke each other by **capability domain**, not
+by name. No primal-specific env vars, socket names, or method namespaces in
+production routing code. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.1.
+
+| Primal | Foreign Names in Routing | Method Namespace Violations | Primal-Specific Env Vars | Status | Notes |
+|--------|--------------------------|----------------------------|-------------------------|--------|-------|
+| **beardog** | 0 | 0 | 0 | **C** | Self-refs only. Anti-pattern documented in `self_knowledge.rs` for illustration. |
+| **songbird** | ~56 (`discover_beardog*`) | Low | `BEARDOG_*` socket maps | **X** | Widespread `discover_beardog` across crypto-provider, http-client, tls, orchestrator. Mixed: `CanonicalPrimalType::Security` (capability-ish) coexists with direct name-based discovery. |
+| **nestgate** | 4 (docs/tests) | 0 | `NESTGATE_BEARDOG_URL`, `SONGBIRD_HOST/PORT` | **P** | Residual legacy env key names in test/doc code. Production routing mostly clean. |
+| **toadstool** | ~105 (DNS defaults, integration) | ~16 (doc/test patterns) | `BEARDOG_SOCKET` in integration | **X** | DNS hostnames `songbird.{base}`, `beardog.{base}` etc. `integration/protocols/bear_dog/` hardcoded socket. Legacy method illustrations. |
+| **squirrel** | ~129 (`SONGBIRD_*`) | 0 | `SONGBIRD_*` across tree | **X** | `pub use songbird::discover_socket as discover_songbird_socket` in capabilities/mod.rs — tight coupling to Songbird by name. |
+| **biomeos** | ~127 | ~108 (`beardog.health`, etc.) | `discover_songbird_socket`, `discover_beardog_socket` | **X** | Orchestrator has legitimate primal identity knowledge for routing table construction, but many paths bypass `CapabilityTranslationRegistry` in favor of direct name-based socket discovery. Most impactful migration target. |
+| **petaltongue** | ~34 | 4 (`barracuda.compute.dispatch`) | `TOADSTOOL_PORT/URL`, `BARRACUDA_SOCKET`, `SONGBIRD_SOCKET` | **X** | Has correct `CapabilityDiscovery` + `BiomeOsBackend` infra but bypasses it. `toadstool_v2.rs` display backend is the correct exemplar. |
+| **rhizocrypt** | 0 | 0 | 0 | **C** | No foreign primal references in production code. |
+| **loamspine** | 0 | 0 | 0 | **C** | No foreign primal references in production code. |
+| **sweetgrass** | 0 | 0 | 0 | **C** | No foreign primal references in production code. |
+| **coralreef** | ? | ? | ? | ? | Not audited this cycle. |
+
+### Discovery Compliance Priority
+
+1. **biomeOS** — Most impactful. Orchestrator should route through its own `CapabilityTranslationRegistry`, not `discover_beardog_socket()`.
+2. **Songbird** — ~56 `discover_beardog` calls. Should use `discover_by_capability("security")`.
+3. **Squirrel** — `discover_songbird_socket` export. Should use `discover_by_capability("discovery")`.
+4. **petalTongue** — Has the infra, just needs rewiring. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` audit findings.
+5. **toadStool** — DNS defaults and integration modules hardcode primal hostnames.
+6. **NestGate** — Mostly clean. Legacy env names in tests.
 
 ---
 
