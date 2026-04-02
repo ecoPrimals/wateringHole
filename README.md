@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: April 2, 2026
+**Last Updated**: March 18, 2026
 
 ---
 
@@ -53,7 +53,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
 | **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 20,843 tests, 96+ JSON-RPC methods. Node Atomic for sovereign compute. `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. Cross-compile verified (aarch64, armv7 in CI) | Production (A++ GOLD) |
 | **BarraCuda** | Pure Math | 806 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.5, 3,400+ tests | Production (A+) |
-| **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). CoralIR SSA interpreter + Cranelift JIT (validate-then-deploy). JSON-RPC IPC via XDG discovery (`shader.sock`, `device.sock`). AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, auto-D0 recovery, VFIO-first boot, graceful shutdown, DRM render node fencing, IOMMU group handling). **coral-ember** immortal VFIO fd holder. **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-069). D3hot→D0 sovereign VRAM recovery. 22 validated barraCuda math shaders (shared memory, tiled matmul, layer norm). Full IPC compliance (UDS + newline TCP + domain symlinks + capabilities.list) | Production (Phase 10, Iter 70h) |
+| **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, auto-D0 recovery, VFIO-first boot, graceful shutdown, DRM render node fencing, IOMMU group handling). **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-069). D3hot→D0 sovereign VRAM recovery. Sovereign power management designed (5-state model). Reproducibility checklist for adding new GPUs | Production (Phase 10, Iter 52) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
 | **biomeOS** | Orchestration | Composition primal: Neural API (260+ translations, 19 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring | Production (v2.49, Security A++ LEGENDARY) |
 
@@ -354,7 +354,6 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### Coordination & Patterns
 - `INTER_PRIMAL_INTERACTIONS.md` — Production interaction map and plans
 - `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
-- `IPC_COMPLIANCE_MATRIX.md` — Per-primal IPC compliance tracking (wire framing, sockets, health, port, standalone, substrate)
 - `SPRING_AS_PROVIDER_PATTERN.md` — biomeOS capability registration
 - `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Provenance trio integration
 - `SPRING_EVOLUTION_ISSUES.md` — Active issues discovered by springs
@@ -376,7 +375,6 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Handoffs
 - `handoffs/*.md` — Active session handoffs (last 48 hours)
-- `handoffs/LUDOSPRING_V371_PLASMIDBINLIVE_GAP_MATRIX_HANDOFF_MAR31_2026.md` — **Live validation gap matrix**: 95/141 (67.4%) composition checks against plasmidBin primals. Per-primal evolution targets with projected impact.
 - `handoffs/archive/` — Fossil record (507 archived handoffs, Feb 2026 – present)
 
 ---
