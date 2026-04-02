@@ -1,7 +1,7 @@
 # 🐻 BearDog Technical Stack & Plans (BTSP)
 
-**Version**: 0.15.0 (BirdSong v2 API Complete)  
-**Last Updated**: January 3, 2026  
+**Version**: 0.9.0 (Wave 26 — Deep Debt Evolution)  
+**Last Updated**: April 2, 2026  
 **Status**: Production Ready
 
 ---
