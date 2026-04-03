@@ -1,7 +1,7 @@
 # NestGate v4.7.0-dev — Deep Debt, Overstep Deletion & Stub Evolution
 
 **Date**: April 3, 2026 (Session 20)  
-**Commit**: Pending  
+**Commit**: 178d989a (code), + doc cleanup commit  
 **Tests**: 12,240 passed, 0 failed, 471 ignored  
 **Clippy**: `cargo clippy --workspace --all-targets --all-features -- -D warnings` — PASS  
 **Format**: Clean
@@ -62,6 +62,20 @@ Regressions: 0
 | `nestgate-security` | Legitimate local use (cert parsing, fingerprinting); core crypto delegated via `CryptoDelegate` |
 | `nestgate-mcp` | Removed from workspace (prior session) |
 | `nestgate-automation` | `network-integration` feature removed (prior session) |
+
+---
+
+## Doc Cleanup (follow-up commit)
+
+| Item | Action |
+|------|--------|
+| `compliance_new/` (554 lines) | Deleted — dead module, zero references in crate graph |
+| `nestgate-zfs/{data,config}` | Empty directories removed |
+| `tests/README.md` | Rewritten: 11,707→12,240 tests, 74%→80% coverage, directory tree corrected |
+| `STATUS.md` | Fixed serial-test contradiction in Quick Metrics |
+| `docs/guides/TESTING.md` | Updated header to ARCHIVED with pointer to current docs |
+| `specs/README.md` | Date refreshed to April 3, 2026 |
+| Root docs test counts | All updated to ~12,240 |
 
 ---
 
