@@ -6,17 +6,17 @@
 **Authority:** wateringHole (ecoPrimals Core Standards)
 
 Practical learnings from the first live multi-primal composition using
-esotericWebb as the consumer spring. This document is for spring developers
-who want to compose primals into working applications.
+esotericWebb as the first garden to attempt live composition. These lessons
+apply to both springs and gardens composing primals into working systems.
 
 ---
 
 ## Context
 
-esotericWebb is a narrative game engine that consumes capabilities from across
-the primal ecosystem: AI (squirrel), visualization (petaltongue), provenance
-(sweetgrass, rhizocrypt), security (beardog), storage (nestgate), and mesh
-networking (loamspine). It was the first spring to attempt live composition
+esotericWebb is a narrative game engine (garden, gen4) that consumes capabilities
+from across the primal ecosystem: AI (squirrel), visualization (petaltongue),
+provenance (sweetgrass, rhizocrypt), security (beardog), storage (nestgate), and
+mesh networking (loamspine). It was the first garden to attempt live composition
 with all plasmidBin primals simultaneously.
 
 The composition succeeded partially — Webb connected to sweetgrass and

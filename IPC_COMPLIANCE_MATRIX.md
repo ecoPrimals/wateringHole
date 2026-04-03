@@ -1,7 +1,7 @@
 # IPC Compliance Matrix
 
-**Version:** 1.4.1
-**Date:** April 2, 2026
+**Version:** 1.5.0
+**Date:** April 3, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 
@@ -157,34 +157,34 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 
 ---
 
-## Capability-Based Discovery Compliance (April 2, 2026)
+## Capability-Based Discovery Compliance (April 3, 2026 — primalSpring full audit)
 
 Standard: Primals discover and invoke each other by **capability domain**, not
 by name. No primal-specific env vars, socket names, or method namespaces in
-production routing code. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.1.
+production routing code. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.2.
 
-| Primal | Foreign Names in Routing | Method Namespace Violations | Primal-Specific Env Vars | Status | Notes |
-|--------|--------------------------|----------------------------|-------------------------|--------|-------|
-| **beardog** | 0 | 0 | 0 | **C** | Self-refs only. Anti-pattern documented in `self_knowledge.rs` for illustration. |
-| **songbird** | ~56 (`discover_beardog*`) | Low | `BEARDOG_*` socket maps | **X** | Widespread `discover_beardog` across crypto-provider, http-client, tls, orchestrator. Mixed: `CanonicalPrimalType::Security` (capability-ish) coexists with direct name-based discovery. |
-| **nestgate** | 4 (docs/tests) | 0 | `NESTGATE_BEARDOG_URL`, `SONGBIRD_HOST/PORT` | **P** | Residual legacy env key names in test/doc code. Production routing mostly clean. |
-| **toadstool** | 0 (S172-6) | 0 | 0 primary; legacy as Tier 2+ fallbacks only | **C** | S172-5/6: all ~105 foreign primal references evolved. All `env::var()` chains capability-domain-first (`TOADSTOOL_COORDINATION_ENDPOINT` → `COORDINATION_ENDPOINT` → `SONGBIRD_ENDPOINT`). `register_with_songbird()` → `register_with_coordination()`. `get_default_songbird_socket()` → `get_default_coordination_socket()`. `infant_discovery` wrong-mapping bug fixed (Songbird→coordination, BearDog→security). Functions, struct fields, DNS defaults all capability-domain. Legacy env vars accepted as last-resort fallbacks only, never primary lookup. `CORALREEF_*` at Tier 4 behind capability socket probe. |
-| **squirrel** | ~129 (`SONGBIRD_*`) | 0 | `SONGBIRD_*` across tree | **X** | `pub use songbird::discover_socket as discover_songbird_socket` in capabilities/mod.rs — tight coupling to Songbird by name. |
-| **biomeos** | ~127 | ~108 (`beardog.health`, etc.) | `discover_songbird_socket`, `discover_beardog_socket` | **X** | Orchestrator has legitimate primal identity knowledge for routing table construction, but many paths bypass `CapabilityTranslationRegistry` in favor of direct name-based socket discovery. Most impactful migration target. |
-| **petaltongue** | ~34 | 4 (`barracuda.compute.dispatch`) | `TOADSTOOL_PORT/URL`, `BARRACUDA_SOCKET`, `SONGBIRD_SOCKET` | **X** | Has correct `CapabilityDiscovery` + `BiomeOsBackend` infra but bypasses it. `toadstool_v2.rs` display backend is the correct exemplar. |
-| **rhizocrypt** | 0 | 0 | 0 | **C** | No foreign primal references in production code. |
-| **loamspine** | 0 | 0 | 0 | **C** | No foreign primal references in production code. |
-| **sweetgrass** | 0 | 0 | 0 | **C** | No foreign primal references in production code. |
-| **coralreef** | ? | ? | ? | ? | Not audited this cycle. |
+| Primal | Foreign Names (files/refs) | Primal-Specific Env Vars (files/refs) | Status | Trend | Notes |
+|--------|---------------------------|---------------------------------------|--------|-------|-------|
+| **beardog** | 0 | 0 | **C** | — | Self-refs only. |
+| **biomeos** | 0 non-test | 0 non-test | **C** | — | RESOLVED (v2.87). |
+| **rhizocrypt** | 0 | 0 | **C** | — | |
+| **loamspine** | 0 | 0 | **C** | — | |
+| **sweetgrass** | 0 | 0 | **C** | — | |
+| **nestgate** | 7 files (config/discovery) | 0 (was `NESTGATE_BEARDOG_URL` etc.) | **P→C** | ↑ | a75e9f2a: major modularization, primal env vars eliminated. 7 config/discovery files remain. |
+| **petaltongue** | ~20 files | 24 refs / 10 files | **P** | — | Wave 97 removed `SongbirdClient`. IPC/core/UI layers still have `TOADSTOOL_`/`BARRACUDA_`/`SONGBIRD_` env refs. |
+| **toadstool** | ~30 files | `SONGBIRD_*`, `BEARDOG_SOCKET` in fallbacks | **P** | ↑ | S172-5 targeted discovery. Compliance claim overstated — fallback/compat paths still hardcode. |
+| **squirrel** | 78 files / ~230 non-test refs | 0 primary; `SONGBIRD_*` as `.or_else()` fallbacks only | **P** | ↑ | Build FIXED (alpha.32). All actionable coupling migrated: `register_orchestration_service`, `delegate_to_http_proxy`, `metric_names::orchestration`, `ServiceMeshIntegration`, `ConfigBuilder::orchestration()`. Remaining refs: `primal_names` (logging), deprecated aliases, serde aliases, env fallbacks, doc history. |
+| **songbird** | 321 files / 2558 refs | 50 files / 143 refs (`BEARDOG_*`) | **X** | ↓ | Worst in ecosystem. Wave 97 migration was shallow. Needs systematic plan. |
+| **coralreef** | ? | ? | ? | — | Not audited. |
 
-### Discovery Compliance Priority
+### Discovery Compliance Priority (updated April 3 — primalSpring audit)
 
-1. **biomeOS** — Most impactful. Orchestrator should route through its own `CapabilityTranslationRegistry`, not `discover_beardog_socket()`.
-2. **Songbird** — ~56 `discover_beardog` calls. Should use `discover_by_capability("security")`.
-3. **Squirrel** — `discover_songbird_socket` export. Should use `discover_by_capability("discovery")`.
-4. **petalTongue** — Has the infra, just needs rewiring. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` audit findings.
-5. ~~**toadStool** — DNS defaults and integration modules hardcode primal hostnames.~~ **RESOLVED** (S172-5: all capability-domain naming).
-6. **NestGate** — Mostly clean. Legacy env names in tests.
+1. ~~**biomeOS**~~ — **RESOLVED** (v2.87).
+2. **Songbird** — **2558 refs in 321 files** is the highest debt by far. Previous "~30 files" was migration scope, not total. Needs systematic plan, not one-off renames. Also needs `cargo fmt`.
+3. ~~**Squirrel** — 322 refs in 96 files. Build broken.~~ **BUILD FIXED** (alpha.32). All actionable coupling migrated. ~230 non-test refs remain (logging, aliases, fallbacks, docs — all acceptable).
+4. **toadStool** — S172-5 commit improved naming, but ~30 files + env fallbacks remain. Prior X→C claim overstated; P is accurate.
+5. **petalTongue** — 24 env refs in IPC/core/UI. Focused sprint could clear this.
+6. **NestGate** — **Near-compliant.** 7 files in config/discovery, zero primal env vars. Best improvement this cycle.
 
 ---
 
@@ -389,16 +389,28 @@ on x86_64 and aarch64:
 
 ## Version History
 
+### v1.4.2 (April 3, 2026)
+
+**Squirrel Build Fix & Capability-Domain Decoupling Wave 2**
+
+- Squirrel build FIXED (alpha.32): `MockAIClient` cfg gate resolved, E0282 inference error fixed
+- Squirrel discovery compliance: **X → P** — all actionable coupling migrated to capability-domain
+  - `register_songbird_service` → `register_orchestration_service`
+  - `delegate_to_songbird` → `delegate_to_http_proxy`
+  - `metric_names::songbird` → `metric_names::orchestration`
+  - `SongbirdIntegration` → `ServiceMeshIntegration`
+  - `ConfigBuilder::songbird()` → `ConfigBuilder::orchestration()`
+- Remaining ~230 non-test refs are all acceptable (logging, deprecated aliases, serde compat, env fallbacks, docs)
+- Discovery compliance priority #3 (Squirrel) marked RESOLVED
+
 ### v1.4.1 (April 2, 2026)
 
 **toadStool Capability-Based Discovery Compliance — S172-5/6**
 
 - toadStool discovery compliance: **X → C** — all ~105 foreign primal references evolved
 - S172-5: struct fields, DNS defaults, socket names renamed to capability-domain with `#[serde(alias)]` backward compat
-- S172-6: all `env::var()` chains evolved to capability-domain-first ordering; `register_with_songbird()` → `register_with_coordination()`; `get_default_songbird_socket()` → `get_default_coordination_socket()`; `infant_discovery/fallback.rs` wrong-mapping bug fixed (Songbird mapped to ai_processing instead of coordination); deployment functions renamed; `#[expect(dead_code)]` lint issues resolved
+- S172-6: all `env::var()` chains evolved to capability-domain-first ordering
 - Legacy primal-named env vars retained as Tier 2+ fallbacks only, never primary lookup
-- `CORALREEF_*` env vars at Tier 4 behind capability socket probe (TS-01 architecture correct, full C requires biomeOS BM-04)
-- Discovery compliance priority #5 (toadStool) marked RESOLVED
 
 ### v1.3.2 (April 1, 2026)
 
