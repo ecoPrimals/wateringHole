@@ -168,7 +168,7 @@ production routing code. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.1.
 | **beardog** | 0 | 0 | 0 | **C** | Self-refs only. Anti-pattern documented in `self_knowledge.rs` for illustration. |
 | **songbird** | ~56 (`discover_beardog*`) | Low | `BEARDOG_*` socket maps | **X** | Widespread `discover_beardog` across crypto-provider, http-client, tls, orchestrator. Mixed: `CanonicalPrimalType::Security` (capability-ish) coexists with direct name-based discovery. |
 | **nestgate** | 4 (docs/tests) | 0 | `NESTGATE_BEARDOG_URL`, `SONGBIRD_HOST/PORT` | **P** | Residual legacy env key names in test/doc code. Production routing mostly clean. |
-| **toadstool** | 0 (S172-5) | 0 | Legacy env vars retained as fallbacks only | **C** | S172-5: all ~105 foreign primal references evolved to capability-domain naming. DNS defaults: `coordination.{base}`, `security.{base}`, etc. Socket: `security.sock`. Struct fields: `#[serde(alias)]` backward compat. Legacy env vars (`BEARDOG_SOCKET`) kept as fallbacks, never primary. |
+| **toadstool** | 0 (S172-6) | 0 | 0 primary; legacy as Tier 2+ fallbacks only | **C** | S172-5/6: all ~105 foreign primal references evolved. All `env::var()` chains capability-domain-first (`TOADSTOOL_COORDINATION_ENDPOINT` → `COORDINATION_ENDPOINT` → `SONGBIRD_ENDPOINT`). `register_with_songbird()` → `register_with_coordination()`. `get_default_songbird_socket()` → `get_default_coordination_socket()`. `infant_discovery` wrong-mapping bug fixed (Songbird→coordination, BearDog→security). Functions, struct fields, DNS defaults all capability-domain. Legacy env vars accepted as last-resort fallbacks only, never primary lookup. `CORALREEF_*` at Tier 4 behind capability socket probe. |
 | **squirrel** | ~129 (`SONGBIRD_*`) | 0 | `SONGBIRD_*` across tree | **X** | `pub use songbird::discover_socket as discover_songbird_socket` in capabilities/mod.rs — tight coupling to Songbird by name. |
 | **biomeos** | ~127 | ~108 (`beardog.health`, etc.) | `discover_songbird_socket`, `discover_beardog_socket` | **X** | Orchestrator has legitimate primal identity knowledge for routing table construction, but many paths bypass `CapabilityTranslationRegistry` in favor of direct name-based socket discovery. Most impactful migration target. |
 | **petaltongue** | ~34 | 4 (`barracuda.compute.dispatch`) | `TOADSTOOL_PORT/URL`, `BARRACUDA_SOCKET`, `SONGBIRD_SOCKET` | **X** | Has correct `CapabilityDiscovery` + `BiomeOsBackend` infra but bypasses it. `toadstool_v2.rs` display backend is the correct exemplar. |
@@ -391,13 +391,13 @@ on x86_64 and aarch64:
 
 ### v1.4.1 (April 2, 2026)
 
-**toadStool Capability-Based Discovery Compliance — S172-5**
+**toadStool Capability-Based Discovery Compliance — S172-5/6**
 
-- toadStool discovery compliance: **X → C** — all ~105 foreign primal references evolved to capability-domain naming (S172-5)
-- `ServiceDomainsConfig`, `EndpointConfig`, `EcosystemServices`, `PrimalCapabilitiesConfig` struct fields renamed with `#[serde(alias)]` backward compat
-- `beardog.sock` → `security.sock` (Tier 3 capability-domain socket)
-- DNS defaults: `{primal}.{base}` → `{capability}.{base}`
-- Legacy env vars retained as fallbacks only, never primary lookup
+- toadStool discovery compliance: **X → C** — all ~105 foreign primal references evolved
+- S172-5: struct fields, DNS defaults, socket names renamed to capability-domain with `#[serde(alias)]` backward compat
+- S172-6: all `env::var()` chains evolved to capability-domain-first ordering; `register_with_songbird()` → `register_with_coordination()`; `get_default_songbird_socket()` → `get_default_coordination_socket()`; `infant_discovery/fallback.rs` wrong-mapping bug fixed (Songbird mapped to ai_processing instead of coordination); deployment functions renamed; `#[expect(dead_code)]` lint issues resolved
+- Legacy primal-named env vars retained as Tier 2+ fallbacks only, never primary lookup
+- `CORALREEF_*` env vars at Tier 4 behind capability socket probe (TS-01 architecture correct, full C requires biomeOS BM-04)
 - Discovery compliance priority #5 (toadStool) marked RESOLVED
 
 ### v1.3.2 (April 1, 2026)
