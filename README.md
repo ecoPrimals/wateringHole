@@ -14,6 +14,23 @@ This is not documentation about a subdirectory. This is the living reference for
 
 ---
 
+## The Three Layers
+
+The ecoPrimals ecosystem is organized into three layers with distinct roles:
+
+| Layer | Role | Examples |
+|-------|------|----------|
+| **Primals** (gen2) | Self-contained Rust binaries providing domain capabilities via IPC | BearDog, Songbird, barraCuda, biomeOS |
+| **Springs** (gen3) | Validation environments: compose primals, validate science, surface gaps | ludoSpring, hotSpring, wetSpring, primalSpring |
+| **Gardens** (gen4) | User-facing products: compose primals into tools people use | esotericWebb, helixVision |
+
+Primals provide. Springs validate. Gardens compose for users. Gaps flow back
+through wateringHole handoffs, driving co-evolution. See
+**`PRIMAL_SPRING_GARDEN_TAXONOMY.md`** for the full taxonomy and interaction
+contracts.
+
+---
+
 ## Core Concepts
 
 ### What is a Primal?
@@ -316,7 +333,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Master Index
 - **`STANDARDS_AND_EXPECTATIONS.md`** — **Start here.** Single-document reference for all ecoPrimals standards, expectations, and conventions. Links to every standard below.
-- **`GLOSSARY.md`** — Definitive terminology for the ecoPrimals ecosystem. Gate, primal, spring, atomic, niche, deploy graph, germination, absorption, delegation, fossil record, and every other term.
+- **`GLOSSARY.md`** — Definitive terminology for the ecoPrimals ecosystem. Gate, primal, spring, garden, atomic, niche, deploy graph, germination, absorption, delegation, fossil record, and every other term.
+- **`PRIMAL_SPRING_GARDEN_TAXONOMY.md`** — **The three layers.** Authoritative reference for primals (gen2), springs (gen3), and gardens (gen4): roles, ownership boundaries, interaction contracts, and the co-evolution loop.
 - **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, and tooling spec for an ecoPrimals gate. Pop!\_OS, Rust toolchain, Cursor, GPU configuration, directory layout, post-install checklist.
 
 ### Architecture Standards

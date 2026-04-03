@@ -89,25 +89,47 @@ primal can do.
 
 ### Spring
 
-A **spring** is a science primal — a Rust binary that reproduces published
-scientific papers and validates computational methods against known results.
-Springs are named after natural water sources: wetSpring, hotSpring, airSpring,
-neuralSpring, groundSpring, healthSpring, ludoSpring.
+A **spring** is a validation and evolution environment — a Rust workspace that
+composes primals and validates that their composition solves real scientific or
+engineering problems. Springs are not primals; they consume primals via IPC and
+prove correctness through numbered experiments. Springs are named after natural
+water sources: wetSpring, hotSpring, airSpring, neuralSpring, groundSpring,
+healthSpring, ludoSpring.
 
 Springs evolve through a defined pipeline:
 
 ```
-Python baseline → Rust validation → GPU acceleration → sovereign pipeline → niche deployment
+Python baseline → Rust validation → GPU acceleration → sovereign pipeline
+→ primal composition → ecosystem co-evolution
 ```
 
 Each spring has:
 - Its own git repository
 - A `specs/PAPER_REVIEW_QUEUE.md` tracking papers to reproduce
-- Numbered experiments with counted checks
+- Numbered experiments with counted checks (pass/fail/skip exit codes)
+- Deploy graphs (TOML) for the primal compositions it validates
 - A faculty anchor (a professor whose publications drive the science)
+- Gap discovery and wateringHole handoff authorship
 
-Springs are the first niches being built. They were sketched and validated as
-standalone binaries before the evolution step to biomeOS graph deployments.
+Springs are the gen3 layer (see `PRIMAL_SPRING_GARDEN_TAXONOMY.md`). They
+were initially standalone binaries validating science; they now compose FROM
+primals and validate that the composition works for their domain.
+
+### Garden
+
+A **garden** is a user-facing product that composes primals into tools people
+actually use. Gardens follow the BYOB model (Bring Your Own Binaries),
+consuming pre-built primal binaries from plasmidBin via IPC. Gardens are the
+gen4 layer — they take the capabilities that primals provide and springs
+validate, and turn them into products.
+
+Gardens live in the `gardens/` directory. They own user experience, graceful
+degradation when optional primals are absent, and product-level deploy graphs.
+
+Examples: esotericWebb (CRPG engine), helixVision (genomics platform, planned).
+
+See `PRIMAL_SPRING_GARDEN_TAXONOMY.md` for the full taxonomy and co-evolution
+contract between primals, springs, and gardens.
 
 ### Atomics
 
@@ -590,7 +612,8 @@ Neural API → TCP fallback. See `COMPOSITION_PATTERNS.md` §4.
 | **Gate** | A physical computer running the ecoPrimals stack |
 | **Primal** | A self-contained Rust binary providing domain primitives |
 | **Primitive** | The atomic unit of capability a primal provides |
-| **Spring** | A science primal reproducing published papers |
+| **Spring** | A validation environment that composes primals and validates science (gen3) |
+| **Garden** | A user-facing product composing primals via BYOB (gen4, e.g. esotericWebb) |
 | **Atomic** | A named primal composition pattern (Tower, Node, Nest, NUCLEUS) |
 | **Niche** | A biomeOS BYOB deployment — primals composed via deploy graph |
 | **Deploy graph** | TOML DAG defining germination order and capability wiring |
