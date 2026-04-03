@@ -61,6 +61,23 @@ Seven production modules evolved from hardcoded `"localhost"`/`"127.0.0.1"` to
 | Clone patterns | Top-5 clone-heavy files are idiomatic Arc/String clones for async task movement |
 | `println!` | All 17 instances in main.rs/doctor.rs are intentional CLI output |
 
+### 6. Doc & Comment Cleanup (Session E)
+
+- **Root docs synced**: CONTEXT.md test count, CURRENT_STATUS.md coverage numbers,
+  CONTRIBUTING.md architecture claims and test paths, README lifecycle row
+- **Songbird → discovery-first language**: 15+ production files generalized from
+  Songbird-specific to capability-based language (main.rs, federation/service.rs,
+  discovery.rs, capability_ai.rs, neural_http.rs, ecosystem integration, etc.)
+- **Stale comments removed**: Phase 2 labels on shipped modules, tarpc version (0.34→0.37),
+  non-existent MCP_CLIPPY_CLEANUP_PLAN.md reference, mid-migration health/mod.rs comments
+- **Cargo.toml cleaned**: Misleading "REMOVED" comments for axum/tower (which are declared
+  later in the file as optional deps)
+- **Debris removed**: vis_test/vis_test2 from .gitignore, stale reqwest 0.11 mention in
+  CRYPTO_MIGRATION.md, ORIGIN.md thesis path and test count updated
+- **Songbird references down from ~129 (audit) to 211 in .rs files** — remaining are
+  legitimate: primal name constants (logging), consumed capability lists, ecosystem type
+  enums, deprecated adapter modules (feature-gated)
+
 ## Remaining Debt (Tracked)
 
 1. Coverage at 85.3% — ~5% gap to 90% target in demo binaries, IPC/network code, binary entry points
