@@ -188,7 +188,7 @@ production routing code. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.2.
 1. ~~**biomeOS**~~ — **RESOLVED** (v2.87).
 2. **Songbird** — **1472 refs in 230 files** (was 2558/321 — 42% reduction in wave 102). Key renames: `beardog_*`→`security_*`, `squirrel_*`→`coordination_*`, `nestgate`→`storage_provider`, `toadstool`→`compute_provider`. fmt PASS. Still highest debt but trajectory is strong. Remaining: 805 beardog refs (171 files), 130 toadstool (47), 96 squirrel (39), 53 nestgate (20).
 3. ~~**Squirrel** — 322 refs in 96 files. Build broken.~~ **BUILD FIXED** (alpha.32). All actionable coupling migrated. ~230 non-test refs remain (logging, aliases, fallbacks, docs — all acceptable).
-4. **toadStool** — S173 deep debt execution: 8 large files smart-refactored, DMA unsafe consolidated into hw-safe (101→89 blocks), hardcoded literals eliminated, deployment stubs→capability socket verification, +79 tests. S172-5/6 addressed naming; S173 addressed structural debt. Status: **P→C** (capability-first discovery in all paths; legacy env vars retained as Tier 2+ fallbacks only).
+4. ~~**toadStool**~~ — **COMPLIANT** (S173-2). All env var lookups use capability-domain names as primary (`TOADSTOOL_COORDINATION_ENDPOINT`, `SECURITY_URL`, etc.) with primal-name fallbacks. TS-01 resolved: `coral_reef_client` now uses Tier 1 coordination-plane `capability.discover("shader")` before filesystem probing. Workspace `unsafe_code` policy documented. S173: 8 files refactored, DMA unsafe consolidated (101→89), +79 tests.
 5. **petalTongue** — 24 env refs in IPC/core/UI. Focused sprint could clear this.
 6. **NestGate** — **Near-compliant.** 7 files in config/discovery, zero primal env vars. Best improvement this cycle.
 
