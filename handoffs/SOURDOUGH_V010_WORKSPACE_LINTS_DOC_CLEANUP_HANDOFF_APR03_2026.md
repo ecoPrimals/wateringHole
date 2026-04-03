@@ -1,7 +1,44 @@
-# sourDough v0.1.0 — Workspace Lints + Smart Refactoring + Doc Cleanup
+# sourDough v0.1.0 — Supply Chain + Workspace Lints + Smart Refactoring + Doc Cleanup
 
 **Date**: April 3, 2026
-**Status**: COMPLETE — workspace lints, scaffold refactor, 96%+ coverage, all docs current
+**Status**: COMPLETE — cargo-deny passing, workspace lints, scaffold refactor, 96%+ coverage, all docs current
+
+---
+
+## primalSpring Audit Resolution
+
+### SD-01: `deny.toml` (RESOLVED)
+
+Created `deny.toml` with ecoBin v3.0 C-sys ban list (16 crates). Configured
+advisory ignores for tarpc 0.34 transitives (bincode v1, opentelemetry_sdk 0.18,
+opentelemetry_api merged). `cargo deny check` passes: advisories ok, bans ok,
+licenses ok, sources ok.
+
+### SD-02: musl cross-compile (DEFERRED — stretch goal)
+
+Not addressed this session. Remains as stretch for v0.2.0.
+
+### SD-03: genomeBin signing (DEFERRED — stretch goal)
+
+Not addressed this session. Blocked on sequoia-openpgp integration.
+
+### Discovery Grade: C → A
+
+Removed the sole "BearDog" primal name reference from `genomebin.rs` sign error
+message. Replaced with capability-agnostic "identity services via capability
+discovery". Zero primal name references now exist in any `.rs` file.
+
+### blake3 `pure` Feature
+
+Changed `blake3 = "1.5"` to `blake3 = { version = "1.5", default-features = false,
+features = ["pure"] }`. This eliminates `cc` as an application build dependency
+(blake3 still lists it in its graph but the `pure` feature prevents C compilation).
+`deny.toml` wraps `cc` via `["blake3", "iana-time-zone-haiku"]` for graph safety.
+
+### tar Security Update
+
+Updated `tar` 0.4.44 → 0.4.45, resolving RUSTSEC-2026-0067 (symlink chmod) and
+RUSTSEC-2026-0068 (PAX size header).
 
 ---
 
@@ -143,12 +180,11 @@ check using `sourdough_genomebin::Platform::detect()`. Reports on:
 
 ## Remaining Gaps
 
-| Gap | Priority | Notes |
-|-----|----------|-------|
-| Cross-compilation (musl) | Medium | Needs CI target validation |
-| genomeBin signing | Medium | Pure Rust via sequoia-openpgp |
-| EphemeralOwner<T> | Low | Spec exists; deferred to v0.3.0 |
-| Archive cleanup decision | Low | `archive/` in sourDough vs ecoPrimals fossil record |
+| Gap | Audit ID | Priority | Notes |
+|-----|----------|----------|-------|
+| Cross-compilation (musl) | SD-02 | Low (stretch) | Needs CI target validation |
+| genomeBin signing | SD-03 | Low (stretch) | Pure Rust via sequoia-openpgp |
+| EphemeralOwner<T> | — | Low | Spec exists; deferred to v0.3.0 |
 
 ---
 
@@ -156,7 +192,9 @@ check using `sourdough_genomebin::Platform::detect()`. Reports on:
 
 | File | Change |
 |------|--------|
-| `Cargo.toml` | `[workspace.lints]`, `[profile.release]` |
+| `deny.toml` | New: ecoBin v3.0 supply chain auditing |
+| `Cargo.toml` | `[workspace.lints]`, `[profile.release]`, blake3 `pure` feature |
+| `Cargo.lock` | tar 0.4.44 → 0.4.45 security update |
 | `crates/sourdough/Cargo.toml` | `[lints] workspace = true` |
 | `crates/sourdough-core/Cargo.toml` | `[lints] workspace = true` |
 | `crates/sourdough-genomebin/Cargo.toml` | `[lints] workspace = true`, workspace metadata |

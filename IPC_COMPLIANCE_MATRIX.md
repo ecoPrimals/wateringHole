@@ -1,22 +1,26 @@
 # IPC Compliance Matrix
 
-**Version:** 1.5.0
+**Version:** 1.6.0
 **Date:** April 3, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 
 This matrix tracks each primal's alignment across the IPC interoperability
 dimensions defined in `PRIMAL_IPC_PROTOCOL.md` v3.1, `UNIBIN_ARCHITECTURE_STANDARD.md`
-v1.1, `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.1, and
+v1.1, `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.2, and
 `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.2.
+
+Cross-references: `PRIMAL_RESPONSIBILITY_MATRIX.md` v3.0 (primal roles,
+capability domains, overstep detail).
 
 Data sourced from esotericWebb's first live multi-primal composition
 (March 2026), direct inspection of each primal's source code,
 **live cross-hardware deployment testing** (March 27, 2026) across
 x86_64 eastgate + aarch64 Pixel/GrapheneOS on iPhone hotspot,
 **primalSpring Phase 23f** composition decomposition (7 subsystems,
-89 deploy graphs, 32 gaps), and **ludoSpring V37.1** plasmidBin live
-gap matrix (95/141 checks, experiments 084-098).
+89 deploy graphs, 32 gaps), **ludoSpring V37.1** plasmidBin live
+gap matrix (95/141 checks, experiments 084-098), and **primalSpring
+Phase 23o** full audit cycle (April 3, 2026).
 
 ---
 
@@ -153,6 +157,7 @@ Songbird / Neural API. See `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1.
 | **rhizocrypt** | C | C | C | C | C | ? | C | Conformant |
 | **loamspine** | C | C | C | X (`--jsonrpc-port`) | C | ? | ? | **Close** |
 | **coralreef** | C | C | C | C | C | ? | ? | **Conformant** |
+| **sourdough** | -- | -- | -- | -- | -- | -- | -- | CLI tool — no IPC daemon |
 | **skunkbat** | ? | ? | ? | ? | ? | ? | ? | Needs audit |
 
 ---
@@ -174,13 +179,14 @@ production routing code. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.2.
 | **petaltongue** | ~20 files | 24 refs / 10 files | **P** | — | Wave 97 removed `SongbirdClient`. IPC/core/UI layers still have `TOADSTOOL_`/`BARRACUDA_`/`SONGBIRD_` env refs. |
 | **toadstool** | ~30 files | `SONGBIRD_*`, `BEARDOG_SOCKET` in fallbacks | **P** | ↑ | S172-5 targeted discovery. Compliance claim overstated — fallback/compat paths still hardcode. |
 | **squirrel** | 78 files / ~230 non-test refs | 0 primary; `SONGBIRD_*` as `.or_else()` fallbacks only | **P** | ↑ | Build FIXED (alpha.32). All actionable coupling migrated: `register_orchestration_service`, `delegate_to_http_proxy`, `metric_names::orchestration`, `ServiceMeshIntegration`, `ConfigBuilder::orchestration()`. Remaining refs: `primal_names` (logging), deprecated aliases, serde aliases, env fallbacks, doc history. |
-| **songbird** | 321 files / 2558 refs | 50 files / 143 refs (`BEARDOG_*`) | **X** | ↓ | Worst in ecosystem. Wave 97 migration was shallow. Needs systematic plan. |
+| **songbird** | 230 files / 1472 refs | 63 files / 291 refs (capability-first + fallback) | **P** | ↑↑ | Wave 102: `beardog_*`→`security_*`, `squirrel_*`→`coordination_*`, `nestgate`→`storage_provider`, `toadstool`→`compute_provider`. 42% ref reduction. fmt PASS. |
+| **sourdough** | 1 string (cosmetic) | 0 | **C** | — | CLI scaffolding tool. 1 "BearDog" string in genomebin.rs (non-routing). |
 | **coralreef** | ? | ? | ? | — | Not audited. |
 
 ### Discovery Compliance Priority (updated April 3 — primalSpring audit)
 
 1. ~~**biomeOS**~~ — **RESOLVED** (v2.87).
-2. **Songbird** — **2558 refs in 321 files** is the highest debt by far. Previous "~30 files" was migration scope, not total. Needs systematic plan, not one-off renames. Also needs `cargo fmt`.
+2. **Songbird** — **1472 refs in 230 files** (was 2558/321 — 42% reduction in wave 102). Key renames: `beardog_*`→`security_*`, `squirrel_*`→`coordination_*`, `nestgate`→`storage_provider`, `toadstool`→`compute_provider`. fmt PASS. Still highest debt but trajectory is strong. Remaining: 805 beardog refs (171 files), 130 toadstool (47), 96 squirrel (39), 53 nestgate (20).
 3. ~~**Squirrel** — 322 refs in 96 files. Build broken.~~ **BUILD FIXED** (alpha.32). All actionable coupling migrated. ~230 non-test refs remain (logging, aliases, fallbacks, docs — all acceptable).
 4. **toadStool** — S173 deep debt execution: 8 large files smart-refactored, DMA unsafe consolidated into hw-safe (101→89 blocks), hardcoded literals eliminated, deployment stubs→capability socket verification, +79 tests. S172-5/6 addressed naming; S173 addressed structural debt. Status: **P→C** (capability-first discovery in all paths; legacy env vars retained as Tier 2+ fallbacks only).
 5. **petalTongue** — 24 env refs in IPC/core/UI. Focused sprint could clear this.
@@ -388,6 +394,14 @@ on x86_64 and aarch64:
 ---
 
 ## Version History
+
+### v1.6.0 (April 3, 2026)
+
+**Phase 23o: Responsibility Matrix Restructure + sourDough Integration**
+
+- Added sourDough to scorecard and discovery compliance tables (CLI tool — no IPC daemon, discovery **C**)
+- Cross-reference to `PRIMAL_RESPONSIBILITY_MATRIX.md` v3.0 (restructured with Primal Directory, Interaction Rules, Capability Routing Guide)
+- Updated `CAPABILITY_BASED_DISCOVERY_STANDARD.md` reference to v1.2
 
 ### v1.4.3 (April 3, 2026)
 
