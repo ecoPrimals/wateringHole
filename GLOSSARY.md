@@ -45,9 +45,11 @@ The project operates on 10 towers + 4 small form factor nodes:
 | **northGate** | RTX 5090 | — | Flagship AI/LLM compute |
 | **southGate** | RTX 4060 | swappable | Gaming + heavy compute |
 | **eastGate** | RTX 4070 | — | Utility + neuromorphic (1× Akida) |
-| **gate-04** | — | RTX 3090 + RX 6950 XT | Bioinformatics (1× Akida) |
-| **biomeGate** | RTX 5060 | 2× Titan V + 2× MI50 | HBM2 test bench (1× Akida) |
+| **strandGate** | — | RTX 3090 + RX 6950 XT | Bioinformatics (1× Akida) |
+| **biomeGate** | RTX 5060 | 1× Titan V + 1× Tesla K80 † | HBM2 test bench (1× Akida) |
 | **westGate** | RTX 2070S | — | Cold storage (76 TB ZFS) |
+
+† biomeGate has 3-card limit. Float pool: 1× Titan V, 2× MI50, 1× RTX 3090.
 
 Each gate has a **display tier** (small GPU, permanent) and **PCIe slots for
 swappable work cards**. Every gate is a PCIe-parallelizable system — work cards
