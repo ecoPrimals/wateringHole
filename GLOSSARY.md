@@ -3,7 +3,32 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: March 29, 2026
+**Last Updated**: April 3, 2026
+
+---
+
+## The Three Organizations
+
+The ecosystem is distributed across three GitHub organizations, each with a
+distinct role:
+
+| Organization | Role | What Lives Here |
+|-------------|------|----------------|
+| **[ecoPrimals](https://github.com/ecoPrimals)** | Infrastructure primals | barraCuda, toadStool, coralReef, biomeOS, BearDog, NestGate, Songbird, sweetGrass, rhizoCrypt, loamSpine, petalTongue, Squirrel, bingoCube. Also infrastructure repos: sporePrint, wateringHole, whitePaper, plasmidBin, benchScale. |
+| **[syntheticChemistry](https://github.com/syntheticChemistry)** | Science validation springs | wetSpring, hotSpring, airSpring, neuralSpring, groundSpring, healthSpring, ludoSpring, primalSpring. Springs validate that primals produce correct science. |
+| **[sporeGarden](https://github.com/sporeGarden)** | User-facing products (gen4) | esotericWebb (CRPG engine), helixVision (genomics platform, planned). Products compose primals into tools for scientists, creatives, educators, and others. |
+
+**Why three?** Primals build capabilities. Springs validate those capabilities
+against published science. Products deliver validated capabilities to users.
+The organizations mirror this separation: infrastructure, validation, delivery.
+
+When linking to repos, always use the correct organization:
+- Springs: `github.com/syntheticChemistry/<spring>`
+- Primals: `github.com/ecoPrimals/<primal>`
+- Products: `github.com/sporeGarden/<product>`
+- Site: `primals.eco`
+
+See `LINK_INTEGRITY_STANDARD.md` for the full URL convention standard.
 
 ---
 
