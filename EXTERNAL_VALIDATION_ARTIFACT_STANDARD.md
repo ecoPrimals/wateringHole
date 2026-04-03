@@ -1,7 +1,7 @@
 # External Validation Artifact Standard
 
-**Status**: Ecosystem Standard v1.0
-**Adopted**: March 31, 2026
+**Status**: Ecosystem Standard v1.1
+**Adopted**: March 31, 2026 (updated April 3, 2026: container deployment, cross-OS, cross-arch)
 **Authority**: WateringHole Consensus
 **Compliance**: Required for all springs, recommended for primals
 **License**: AGPL-3.0-or-later
@@ -23,13 +23,27 @@ failed.
 
 ## The Artifact
 
+### Unified Layout (v2 — arch-first)
+
 ```
 validation/
-├── run                     # Entry point. One command. (shell script, executable)
+├── hotspring               # Single entry point. Subcommands. (genomeBin-style)
+├── _lib.sh                 # Shared functions (integrity, arch, GPU probe)
+├── run                     # Backward compat → ./hotspring validate
+├── benchmark               # Backward compat → ./hotspring benchmark
 ├── README                  # Plain text, 80 columns, no markdown renderer needed
 ├── bin/
-│   ├── validate-x86_64     # Static musl ELF, x86_64
-│   └── validate-aarch64    # Static musl ELF, aarch64
+│   ├── x86_64/
+│   │   ├── static/         # Static musl ELFs — CPU-only, works everywhere
+│   │   │   ├── validate
+│   │   │   └── ...
+│   │   └── gpu/            # Glibc ELFs — GPU-capable via Vulkan dlopen
+│   │       ├── validate
+│   │       └── ...
+│   └── aarch64/
+│       └── static/         # Static musl ELFs — CPU-only (no GPU cross-compile)
+│           ├── validate
+│           └── ...
 ├── shaders/                # WGSL source (human-auditable, the actual math)
 │   └── *.wgsl
 ├── expected/               # Reference results from known-good hardware
@@ -39,42 +53,54 @@ validation/
 └── LICENSE                 # AGPL-3.0-or-later
 ```
 
-Total size: under 50 MB. Fits on any USB stick ever made.
+Total size: under 100 MB with dual-binary, under 50 MB static-only.
+
+The `./hotspring` entry point detects architecture via `uname -m`, probes for
+glibc + Vulkan to decide GPU vs static binary, and dispatches. The user runs
+`./hotspring validate` and the right binary is selected automatically.
+
+### Legacy Layout (v1 — still supported)
+
+```
+validation/
+├── run                     # Entry point. One command.
+├── bin/
+│   ├── validate-x86_64     # Static musl ELF, x86_64
+│   └── validate-aarch64    # Static musl ELF, aarch64
+└── ...
+```
+
+The v1 layout with flat `bin/<name>-<arch>` is still generated as backward-
+compatible symlinks. Existing scripts and benchScale consumers work unchanged.
 
 ---
 
-## `run`
+## `hotspring` (unified entry point)
 
 ```bash
-#!/bin/sh
-set -eu
-
-cd "$(dirname "$0")"
-
-# Integrity
-sha256sum -c CHECKSUMS --quiet 2>/dev/null || shasum -a 256 -c CHECKSUMS --quiet || {
-    echo "INTEGRITY FAILED — files may be corrupted or tampered with"
-    exit 1
-}
-
-# Architecture
-ARCH=$(uname -m)
-case "$ARCH" in
-    x86_64|amd64)   BIN=bin/validate-x86_64 ;;
-    aarch64|arm64)   BIN=bin/validate-aarch64 ;;
-    *)               echo "Unsupported architecture: $ARCH"; exit 1 ;;
-esac
-
-if [ ! -x "$BIN" ]; then
-    chmod +x "$BIN" 2>/dev/null || true
-fi
-
-# Run. The binary auto-detects GPU. No flags needed.
-exec "$BIN" --expected expected/ --output results/
+./hotspring validate          # physics validation suite
+./hotspring benchmark         # hardware profiling
+./hotspring generate          # ILDG config generation
+./hotspring deploy            # NUCLEUS deployment
+./hotspring help              # all commands
 ```
 
-That's it. `./run` on a laptop. `./run` on ICER. `./run` at CERN. Same
-command. Same output. The binary detects what's available and uses it.
+The entry point sources `_lib.sh` which provides:
+
+- `integrity_check()` — SHA-256 via sha256sum or shasum
+- `detect_arch()` — `uname -m` → `ARCH_TAG` (x86_64 or aarch64)
+- `detect_gpu()` — probes glibc linker + Vulkan loader → `GPU_MODE`
+- `resolve_binary(name)` — finds `bin/<arch>/gpu/<name>` or `bin/<arch>/static/<name>`
+
+Override environment: `HOTSPRING_NO_GPU=1` forces CPU-only,
+`HOTSPRING_FORCE_GPU=1` forces GPU binary selection.
+
+Backward compatibility: `./run` → `./hotspring validate`, `./benchmark` →
+`./hotspring benchmark`, etc. These are thin 2-line forwarding scripts.
+
+That's it. `./hotspring validate` on a laptop. `./hotspring validate` on ICER.
+`./hotspring validate` at CERN. Same command. Same output. The binary detects
+what's available and uses it.
 
 ---
 
@@ -167,7 +193,8 @@ The JSON is the peer review artifact — not the binary, not the code, the
 | Property | How |
 |----------|-----|
 | **One directory** | Copy the whole thing. Don't pick files. |
-| **Two architectures, one layout** | x86_64 and aarch64 binaries side by side. `run` picks the right one. |
+| **Two architectures, one layout** | x86_64 and aarch64 in `bin/<arch>/`. Entry point picks the right one. |
+| **Dual binary** | Static musl (CPU, universal) + dynamic glibc (GPU via Vulkan). Auto-detected. |
 | **No network** | Everything needed is in the directory. No downloads, no package managers. |
 | **No sudo** | Runs in user space. Writes only to its own `results/` directory. |
 | **No GPU required** | CPU-only is the default when no GPU is detected. Same math. |
@@ -267,22 +294,100 @@ One artifact. Three continents. Five substrates. Same math.
 
 ---
 
+## Container Deployment (v1.1)
+
+For non-Linux hosts or environments where native binaries cannot execute
+(restricted HPC, macOS, Windows without WSL2), the artifact includes an
+OCI container image.
+
+### Container Layout
+
+```
+validation/
+├── container/
+│   └── hotspring-guidestone.tar   # OCI image (Docker/Podman)
+├── hotspring.bat                  # Windows launcher
+└── Dockerfile                     # (at project root, for rebuilding)
+```
+
+### Container Image
+
+- **Base**: Ubuntu 22.04
+- **Deps**: `libvulkan1`, `mesa-vulkan-drivers`
+- **Contents**: Full `validation/` artifact mounted at `/opt/validation`
+- **Entry**: `./hotspring` (same unified entry point)
+- **Size**: ~150 MB compressed tarball
+
+### Container Usage
+
+```bash
+docker load < container/hotspring-guidestone.tar
+docker run --rm hotspring-guidestone:v0.7.0 validate
+docker run --rm --device /dev/dri hotspring-guidestone:v0.7.0 validate
+```
+
+### Cross-OS Entry Points
+
+| OS | Entry Point | How It Works |
+|----|-------------|-------------|
+| Linux | `./hotspring` | Native binary dispatch (arch + GPU auto-detect) |
+| macOS | `sh ./hotspring` | Auto-detects non-Linux, dispatches to Docker/Podman |
+| Windows | `hotspring.bat` | Checks WSL2 first, then Docker Desktop |
+
+### Filesystem Compatibility
+
+The `_lib.sh` `resolve_binary()` function handles non-executable filesystems:
+
+1. Attempt `chmod +x` on the resolved binary
+2. If that fails (exFAT, NTFS, NFS noexec), copy to `$TMPDIR` and chmod there
+3. Execution proceeds transparently from the tmpdir copy
+
+This makes the artifact deployable on exFAT-formatted USB drives (readable
+on all OSes) without requiring ext4.
+
+---
+
 ## Compliance Checklist
 
 ```
 ## Validation Artifact — <Spring/Primal> <Version>
 
-- [ ] ./run works on a fresh x86_64 Linux with no GPU, no sudo, no internet
-- [ ] ./run works on a fresh aarch64 Linux with no GPU, no sudo, no internet
-- [ ] Binary has zero dynamic library dependencies (ldd reports "not a dynamic executable")
+Entry Point:
+- [ ] ./hotspring validate works (or ./run as backward compat)
+- [ ] Single entry point with subcommands (ecoBin UniBin pattern)
+
+Cross-Platform:
+- [ ] Works on a fresh x86_64 Linux with no GPU, no sudo, no internet
+- [ ] Works on a fresh aarch64 Linux with no GPU, no sudo, no internet (if --cross built)
+- [ ] Static musl binary has zero dynamic library dependencies
+- [ ] GPU binary only requires libc + libvulkan (no other runtime deps)
+- [ ] GPU detection is automatic (glibc + Vulkan probe), no user flags needed
+
+Cross-OS (v1.1):
+- [ ] OCI container image included in container/ (optional but recommended)
+- [ ] Windows launcher (hotspring.bat) delegates to WSL2 or Docker (optional)
+- [ ] macOS auto-dispatch to Docker/Podman in entry point (optional)
+- [ ] exFAT tmpdir fallback in resolve_binary() (required if USB deployment)
+- [ ] OS detection (detect_os()) for non-Linux dispatch (required if container shipped)
+
+Validation:
 - [ ] CPU-only validation covers the full check suite (not a subset)
 - [ ] Every check has: name, paper reference, measured value, threshold, justification
 - [ ] JSON output written to results/ with substrate and engine metadata
 - [ ] Reference data in expected/ with provenance
-- [ ] CHECKSUMS verified before execution
+
+Layout:
+- [ ] Arch-first bin layout: bin/<arch>/{static,gpu}/<name>
+- [ ] Legacy symlinks: bin/{static,gpu}/<name>-<arch> (backward compat)
+- [ ] CHECKSUMS covers all binaries, scripts, and reference data
 - [ ] README is plain ASCII, 80 columns, readable with cat
-- [ ] Total artifact size < 50 MB
+- [ ] Total artifact size < 100 MB (dual binary), < 50 MB (static only)
 - [ ] LICENSE file present (AGPL-3.0-or-later)
+
+benchScale Validation:
+- [ ] Passes 4-substrate Docker test (CPU Ubuntu, NVIDIA, AMD, Alpine)
+- [ ] aarch64 via qemu-user substrate: ✅ validated (40/40 bit-identical)
+- [ ] Optional: agentReagents VM template passes verification
 ```
 
 ---
@@ -295,3 +400,5 @@ One artifact. Three continents. Five substrates. Same math.
 | Spring Presentation | The 5-Minute Test now has a binary-only path: `./run` |
 | plasmidBin | Artifact binaries are harvested to plasmidBin; artifact tarballs to GitHub Releases |
 | scyBorg licensing | The artifact is AGPL-3.0 — anyone who receives it can use, modify, redistribute |
+| liveSpore ColdSpore | USB deployments use ext4 or exFAT + dual binaries (static + GPU); see `LIVESPORE_DEPLOYMENT_REVIEW.md` |
+| OCI container | Universal fallback for non-Linux or restricted environments; see `UNIFIED_ARTIFACT_EVOLUTION.md` |

@@ -546,6 +546,46 @@ MinION streaming data. The primals are the same. The deployment is minimal.
 
 See `FIELDMOUSE_DEPLOYMENT_STANDARD.md` for the specification.
 
+### guideStone
+
+The **verification class** for ecoBins that produce reproducible, self-proving
+output. Where the binary ladder describes structure (UniBin → ecoBin → genomeBin)
+and deployment classes describe context (NUCLEUS → Niche → fieldMouse),
+guideStone describes **what the output means** — that the computation's results
+are their own proof of correctness.
+
+guideStone is not a primal. It is not a binary type. It is a **quality
+certification** — an orthogonal dimension that any ecoBin can carry when its
+output satisfies five properties:
+
+| Property | Requirement |
+|----------|-------------|
+| **Deterministic** | Same input, same binary, any hardware → same output within named tolerances |
+| **Reference-traceable** | Every numeric claim traces to a paper, standard, constant, or mathematical proof |
+| **Self-verifying** | Checksums, CRC, hashes, or signatures validate integrity without trusting the channel |
+| **Environment-agnostic** | ecoBin compliant, no external dependencies, no sudo, CPU-only path covers full output |
+| **Tolerance-documented** | Every threshold has a physical or mathematical derivation — no magic numbers |
+
+Any primal, spring, or composition can have a guideStone edition:
+
+- A **spring guideStone** is the validation artifact with derived (not tuned) tolerances
+- A **primal guideStone** is the reference edition — pinned, fully auditable, validated
+  against external test vectors (e.g., bearDog's Ed25519 against NIST/RFC vectors)
+- A **composition guideStone** certifies an end-to-end pipeline (e.g., Chuna Engine
+  producing ILDG gauge configurations, helixVision producing reproducible variant calls)
+
+guideStone is complementary to the provenance trio. guideStone certifies the
+computation (reproducible output). The trio certifies the event (who, when, where,
+attribution). Both together produce a Novel Ferment Transcript — the highest-grade
+digital artifact in the ecosystem.
+
+The name pairs with **guidePost** (the planned philosophy/ethics repository):
+guidePost points the way in human terms; guideStone is the demonstrable proof
+in computational terms.
+
+See `GUIDESTONE_STANDARD.md` for the specification.
+See `whitePaper/gen4/architecture/GUIDESTONE.md` for the concept paper.
+
 ### Novel Ferment Transcript (NFT)
 
 Memory-bound digital objects using the provenance trio. Not blockchain NFTs —
@@ -639,6 +679,7 @@ Neural API → TCP fallback. See `COMPOSITION_PATTERNS.md` §4.
 | **Suppression inversion** | Owning nothing makes the project untargetable |
 | **AI authorship paradox** | Copyright uncertainty harms exclusivity claimants, not the commons |
 | **fieldMouse** | Minimal deployable ecoPrimals — smallest atomic/chimera for embedded/sensor/edge niches |
+| **guideStone** | Verification class — ecoBin quality grade certifying reproducible, self-proving, reference-traceable output |
 | **primalSpring** | Coordination spring — validates ecosystem composition, graph execution, emergent systems, bonding |
 | **BYOB** | Bring Your Own Binaries — gen4 products consume pre-built primal binaries, never source |
 | **Niche YAML** | YAML metadata declaring a composition's organisms, interactions, and customization options |
