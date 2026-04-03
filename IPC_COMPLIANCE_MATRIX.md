@@ -182,7 +182,7 @@ production routing code. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.2.
 1. ~~**biomeOS**~~ — **RESOLVED** (v2.87).
 2. **Songbird** — **2558 refs in 321 files** is the highest debt by far. Previous "~30 files" was migration scope, not total. Needs systematic plan, not one-off renames. Also needs `cargo fmt`.
 3. ~~**Squirrel** — 322 refs in 96 files. Build broken.~~ **BUILD FIXED** (alpha.32). All actionable coupling migrated. ~230 non-test refs remain (logging, aliases, fallbacks, docs — all acceptable).
-4. **toadStool** — S172-5 commit improved naming, but ~30 files + env fallbacks remain. Prior X→C claim overstated; P is accurate.
+4. **toadStool** — S173 deep debt execution: 8 large files smart-refactored, DMA unsafe consolidated into hw-safe (101→89 blocks), hardcoded literals eliminated, deployment stubs→capability socket verification, +79 tests. S172-5/6 addressed naming; S173 addressed structural debt. Status: **P→C** (capability-first discovery in all paths; legacy env vars retained as Tier 2+ fallbacks only).
 5. **petalTongue** — 24 env refs in IPC/core/UI. Focused sprint could clear this.
 6. **NestGate** — **Near-compliant.** 7 files in config/discovery, zero primal env vars. Best improvement this cycle.
 
@@ -388,6 +388,18 @@ on x86_64 and aarch64:
 ---
 
 ## Version History
+
+### v1.4.3 (April 3, 2026)
+
+**toadStool S173 Deep Debt Execution**
+
+- toadStool discovery compliance: **P → C** — S173 completed structural debt beyond S172-5/6 naming
+- 8 production files >650 LOC smart-refactored into cohesive submodules
+- Unsafe consolidated: akida-driver/nvpmu DMA → hw-safe LockedMemory + vfio_dma (101→89 blocks)
+- Hardcoded literals eliminated: `"0.0.0.0"` → constant, `"/dev/dri/card0"` → constant, `"coralreef"` scan → capability-first `"shader"` scan
+- Deployment no-ops → capability socket verification (`$XDG_RUNTIME_DIR/biomeos/{capability}.sock`)
+- +79 tests across 5 modules; `config` 0.14→0.15 (eliminated base64 duplication)
+- All quality gates green: clippy, fmt, doc, tests
 
 ### v1.4.2 (April 3, 2026)
 
