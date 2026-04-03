@@ -3,7 +3,7 @@
 **Purpose**: Defines the standard hardware, OS, and tooling configuration for an
 ecoPrimals gate. Any machine matching this spec can run the full ecosystem.
 
-**Last Updated**: March 29, 2026
+**Last Updated**: April 3, 2026
 
 ---
 
@@ -11,7 +11,7 @@ ecoPrimals gate. Any machine matching this spec can run the full ecosystem.
 
 A gate is any device that runs the ecoPrimals stack. The name comes from the
 project's naming convention: **Eastgate** (primary), **biomeGate** (HPC),
-**flockGate** (family tower), **pixelGate** (mobile). A gate is sovereign — you
+**flockGate** (covalent mesh tower), **pixelGate** (mobile). A gate is sovereign — you
 own it, you control it, no cloud dependency. Gates span architectures (x86_64,
 aarch64), substrates (desktop Linux, Android/GrapheneOS, headless server), and
 network topologies (LAN, hotspot, WAN behind NAT).
@@ -36,8 +36,10 @@ network topologies (LAN, hotspot, WAN behind NAT).
 | Component | Spec |
 |-----------|------|
 | **CPU** | AMD Threadripper 3970X (32C/64T) |
-| **GPU 1** | NVIDIA RTX 3090 (Ampere, SM86) — proprietary driver |
-| **GPU 2** | NVIDIA Titan V (Volta, SM70) — NVK open-source driver |
+| **Display GPU** | NVIDIA RTX 5060 |
+| **Work GPU 1** | NVIDIA Titan V (Volta, SM70) |
+| **Work GPU 2** | NVIDIA Tesla K80 (Kepler, GK210) |
+| **Note** | 3-card slot limit. Float pool includes 2nd Titan V and 2× MI50. |
 | **RAM** | 128 GB |
 | **Storage** | NVMe SSD |
 | **OS** | Pop!\_OS 22.04 LTS |
@@ -46,9 +48,10 @@ network topologies (LAN, hotspot, WAN behind NAT).
 
 biomeGate was built specifically to extend hotSpring beyond what Eastgate's
 single RTX 4070 could do — lattice QCD at 8⁴ and above, dual-GPU cooperative
-dispatch, VFIO sovereign compute.
+dispatch, VFIO sovereign compute, and Tesla K80 (Kepler GK210) for Kepler
+architecture coverage.
 
-### flockGate (Family Tower — Remote)
+### flockGate (Covalent Mesh Compute Tower — Remote)
 
 | Component | Spec |
 |-----------|------|
@@ -57,12 +60,12 @@ dispatch, VFIO sovereign compute.
 | **RAM** | 32 GB |
 | **Storage** | NVMe SSD |
 | **OS** | Ubuntu 24.04.3 LTS |
-| **Role** | Family compute tower, idle compute utilization, remote cross-deployment |
+| **Role** | Covalent mesh compute tower, idle compute utilization, remote cross-deployment |
 | **Access** | RustDesk remote, SSH (when port-forwarded), behind residential NAT |
 
-flockGate demonstrates the "gamer friend" deployment pattern: a capable machine
-owned by a trusted family member, provisioned via bootstrap script over remote
-desktop, contributing idle compute to the family mesh.
+flockGate demonstrates the "gamer friend" deployment pattern: a capable remote
+node provisioned via bootstrap script over remote desktop, contributing idle
+compute to the covalent mesh.
 
 ### pixelGate (Mobile — aarch64)
 
