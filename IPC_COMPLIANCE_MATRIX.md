@@ -178,10 +178,10 @@ production routing code. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.2.
 | **nestgate** | 7 files (config/discovery) | 0 (was `NESTGATE_BEARDOG_URL` etc.) | **P→C** | ↑ | a75e9f2a: major modularization, primal env vars eliminated. 7 config/discovery files remain. |
 | **petaltongue** | ~20 files | 24 refs / 10 files | **P** | — | Wave 97 removed `SongbirdClient`. IPC/core/UI layers still have `TOADSTOOL_`/`BARRACUDA_`/`SONGBIRD_` env refs. |
 | **toadstool** | ~30 files | `SONGBIRD_*`, `BEARDOG_SOCKET` in fallbacks | **P** | ↑ | S172-5 targeted discovery. Compliance claim overstated — fallback/compat paths still hardcode. |
-| **squirrel** | 78 files / ~230 non-test refs | 0 primary; `SONGBIRD_*` as `.or_else()` fallbacks only | **P** | ↑ | Build FIXED (alpha.32). All actionable coupling migrated: `register_orchestration_service`, `delegate_to_http_proxy`, `metric_names::orchestration`, `ServiceMeshIntegration`, `ConfigBuilder::orchestration()`. Remaining refs: `primal_names` (logging), deprecated aliases, serde aliases, env fallbacks, doc history. |
-| **songbird** | 230 files / 1472 refs | 63 files / 291 refs (capability-first + fallback) | **P** | ↑↑ | Wave 102: `beardog_*`→`security_*`, `squirrel_*`→`coordination_*`, `nestgate`→`storage_provider`, `toadstool`→`compute_provider`. 42% ref reduction. fmt PASS. |
+| **squirrel** | 215 files / 1789 refs (full scan) | 38 files / 225 refs | **P** | ↑↑ | Build FIXED (alpha.36). Clippy CLEAN, 6,856 tests PASS. 65K lines dead code removed (alpha.33). Full-scan count higher than previous narrow scan but actionable coupling migrated. |
+| **songbird** | 178 files / 935 refs | 68 files / 285 refs (capability-first + fallback) | **P→C** | ↑↑↑ | Wave 109: 63% total reduction (2558→935). Final primal-name cleanup wave. 8,938 tests. |
 | **sourdough** | 1 string (cosmetic) | 0 | **C** | — | CLI scaffolding tool. 1 "BearDog" string in genomebin.rs (non-routing). |
-| **coralreef** | ? | ? | ? | — | Not audited. |
+| **coralreef** | 2 (doc/attribution comments) | 0 (`BIOMEOS_*` only — standard) | **C** | — | First audit (Iter 72): 4,257 tests, clippy CLEAN. Zero routing violations. |
 
 ### Discovery Compliance Priority (updated April 3 — primalSpring audit)
 
