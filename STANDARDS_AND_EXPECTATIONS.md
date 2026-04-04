@@ -24,7 +24,7 @@ spring, contributor, and session.  Read this first, read everything else second.
 | **Unsafe** | `#![forbid(unsafe_code)]` on all crate roots unless hardware-touching (coralReef VFIO, toadStool sysmon). Justify every exception. |
 | **Dependencies** | Minimize. Prefer `no_std`-capable crates. No openssl, no ring, no vendor SDKs. Pure Rust cryptography (RustCrypto suite). |
 | **Documentation** | `#![warn(missing_docs)]` on library crates. Doctests count as tests. |
-| **License** | AGPL-3.0-only for all primals and springs. See `LICENSING_AND_COPYLEFT.md` for full licensing standard. |
+| **License** | `AGPL-3.0-or-later` for all primals and springs. Pinning to `-only` means not trusting the nonprofit stewards who fight the legal battles; `-or-later` is the scyBorg standard. See `LICENSING_AND_COPYLEFT.md`. |
 
 ## 2. Binary Architecture
 
