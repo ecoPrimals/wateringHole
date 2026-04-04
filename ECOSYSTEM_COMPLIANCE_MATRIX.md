@@ -61,7 +61,7 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 | **Songbird** | B | B | B | D | B | B | A | C | A | **C** |
 | **NestGate** | B | D | C | C | B | B | A | A | D | **C** |
 | **ToadStool** | D | C | C | D | D | B | A | D | C | **D** |
-| **barraCuda** | F | -- | -- | -- | -- | A | A | C | -- | **D** |
+| **barraCuda** | A | -- | -- | -- | -- | A | A | A | -- | **A** |
 | **coralReef** | C | A | A | B | A | A | A | B | C | **B** |
 | **Squirrel** | B | C | C | D | B | C | A | B | A | **C** |
 | **biomeOS** | B | C | B | A | A | B | A | B | C | **B** |
@@ -76,10 +76,10 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 
 | Grade | Count | Primals |
 |-------|-------|---------|
-| A | 1 | rhizoCrypt |
+| A | 2 | rhizoCrypt, barraCuda |
 | B | 7 | BearDog, coralReef, biomeOS, petalTongue, sweetGrass, LoamSpine, sourDough |
 | C | 3 | Songbird, NestGate, Squirrel |
-| D | 2 | ToadStool, barraCuda |
+| D | 1 | ToadStool |
 | F | 1 | bingoCube |
 
 ---
@@ -111,7 +111,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 - **Songbird**: 28 commented-out code lines. License needs `-or-later`.
 - **NestGate**: 1 file fmt deviation (`migration.rs:189`). License needs `-or-later`. `deny(unsafe_code)` at workspace + `forbid` per-crate in `code/crates/`.
 - **ToadStool**: ~1,899 lines of fmt diff. Clippy: `manual_let_else` + deprecated `GenericArray::from_slice`. 485 `#[allow(` vs 126 `#[expect(`. License needs `-or-later`.
-- **barraCuda**: **Compile failure** in `barracuda-naga-exec` (E0061 missing arg to `eval_math`). Blocks all tests. `executor.rs` at 1,097 lines (limit 1,000). 1 unfulfilled lint expectation.
+- **barraCuda**: All T1 issues resolved (Sprint 29): `eval_math` decomposed into 4 focused functions (E0061 fixed), `executor.rs` 1,097→932 lines (vector ops extracted), unfulfilled lint expectation resolved. Clippy pedantic+nursery clean, `cargo fmt` clean, 3,815 lib + 16 naga-exec tests pass.
 - **coralReef**: Clippy: 7 errors (`items_after_statements`, `doc_markdown` in `coral-gpu` tests). 17 commented-out lines. License needs `-or-later`.
 - **Squirrel**: 19 commented-out code lines. `unsafe_code = "forbid"` via workspace lints. `missing_docs = "warn"` via workspace lints. 5 `#[allow(` vs 289 `#[expect(`.
 - **biomeOS**: `tools/` sub-crate still on edition 2021. 5 commented-out lines. License needs `-or-later`. `deny` workspace + `forbid` per-crate.
@@ -325,7 +325,7 @@ Source: `PUBLIC_SURFACE_STANDARD.md`, `SPRING_PRIMAL_PRESENTATION_STANDARD.md`
 - **Songbird**: CONTEXT.md present (78 lines). 393 `#[allow(` vs 406 `#[expect(` — nearly 50/50 ratio. PII hits in 6 test files.
 - **NestGate**: CONTEXT.md present (82 lines). Zero `#[allow(` (0/0). No PII hits. `deny.toml` present.
 - **ToadStool**: CONTEXT.md present (36 lines). **485 `#[allow(`** vs 126 `#[expect(` — 79% `allow`. PII hits in 9 test files.
-- **barraCuda**: No CONTEXT.md. Zero `#[allow(` — 100% `#[expect(` (0/102). No PII hits.
+- **barraCuda**: CONTEXT.md present (89 lines). Zero `#[allow(` — 100% `#[expect(` (0/102). No PII hits.
 - **coralReef**: No CONTEXT.md. 4 `#[allow(` vs 168 `#[expect(` (98% `expect`). No PII hits.
 - **Squirrel**: CONTEXT.md present (89 lines). 5 `#[allow(` vs 289 `#[expect(` (98% `expect`). PII hits in 3 files.
 - **biomeOS**: CONTEXT.md present (75 lines). 4 `#[allow(` vs 361 `#[expect(` (99% `expect`). PII hits in 5 test files.
@@ -382,7 +382,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **Songbird** | Discovery: 935 primal-name refs | License → `-or-later` | 393 `#[allow(` → `#[expect(` |
 | **NestGate** | `--port` not functional | License → `-or-later` | aarch64 musl not built |
 | **ToadStool** | ~1,899 lines fmt debt | Discovery: 2,998 primal-name refs | 485 `#[allow(` → `#[expect(` |
-| **barraCuda** | Compile failure (E0061) | `executor.rs` >1,000 lines | No CONTEXT.md |
+| **barraCuda** | — | — | — |
 | **coralReef** | 7 clippy errors in tests | License → `-or-later` | No CONTEXT.md |
 | **Squirrel** | Discovery: 1,789 primal-name refs | Overstep: sled/sqlx/ed25519 beyond domain | 19 commented-out code lines |
 | **biomeOS** | License → `-or-later` | `--port` forces UDS (TCP-only needed) | `tools/` edition 2021 |
