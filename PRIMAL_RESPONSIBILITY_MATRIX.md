@@ -230,6 +230,16 @@ Deploy graphs should **never** route a concern to a primal listed as OVERSTEP. U
 
 ---
 
+## Related Standards
+
+- **`PRIMAL_SELF_KNOWLEDGE_STANDARD.md` v1.0.0** — Defines the
+  self-knowledge boundary, capability domain registry (mirrors this
+  matrix's primal directory), and concrete code patterns for how primals
+  organize for capability-based interaction. The canonical reference for
+  socket naming, env var conventions, and migration phasing.
+
+---
+
 ## Version History
 
 - **V1.0** (March 30, 2026): Initial matrix from ludoSpring V35.3 ecosystem review
