@@ -249,6 +249,16 @@ display backend correctly uses `CapabilityDiscovery` — all other cross-primal 
 
 ---
 
+## Related Standards
+
+- **`PRIMAL_SELF_KNOWLEDGE_STANDARD.md` v1.0.0** — Extends this standard
+  with concrete code patterns, env var naming conventions, socket naming
+  rules, and a phased migration path. If this document says *what* to
+  discover, the self-knowledge standard says *how to organize your code*
+  to do it.
+
+---
+
 ## Version History
 
 ### v1.2.0 (April 2, 2026)
