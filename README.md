@@ -348,7 +348,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `CAPABILITY_BASED_DISCOVERY_STANDARD.md` — Discover by capability domain, not primal name
 - `PRIMAL_SELF_KNOWLEDGE_STANDARD.md` — Self-knowledge boundaries, socket/env conventions
 - `PRIMAL_RESPONSIBILITY_MATRIX.md` — Ownership, domains, overstep boundaries
-- `IPC_COMPLIANCE_MATRIX.md` — Per-primal IPC/capability alignment
+- `ECOSYSTEM_COMPLIANCE_MATRIX.md` — Per-primal compliance across 9 tiers (A–F grades)
 
 ### Security & Networking (birdsong/)
 - `birdsong/BIRDSONG_PROTOCOL.md` — Encrypted UDP discovery (BirdSong)
