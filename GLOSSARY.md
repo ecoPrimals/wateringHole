@@ -158,6 +158,23 @@ Examples: esotericWebb (CRPG engine), helixVision (genomics platform, planned).
 See `PRIMAL_SPRING_GARDEN_TAXONOMY.md` for the full taxonomy and co-evolution
 contract between primals, springs, and gardens.
 
+### Tool
+
+A **tool** (gen2.5) is a standalone Rust crate or binary consumed by primals, springs,
+or other ecosystem components. Tools solve bounded problem domains without the full
+IPC/discovery/health surface that primals carry — they are not long-running daemons
+and do not register capabilities with biomeOS. They are not end-user products (that's
+a garden).
+
+Tools live in `primals/` (when consumed as crate deps by primals), `infra/` (when
+infrastructure-only), or `sort-after/` (pending canonical location).
+
+Examples: bingoCube (crypto commitment), benchScale (lab substrate), agentReagents
+(VM image builder), rustChip (NPU characterization), sourDough (scaffolding).
+
+See `PRIMAL_SPRING_GARDEN_TAXONOMY.md` § Tools (gen2.5) for the full definition,
+applicable compliance tiers, and ownership boundaries.
+
 ### Atomics
 
 **Atomics** are the core primal interaction patterns — the named compositions

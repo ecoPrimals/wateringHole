@@ -191,6 +191,51 @@ layer's code.
 
 ---
 
+## Tools (gen2.5)
+
+Between primals and gardens, the ecosystem has a class of entities that are
+**standalone Rust crates or binaries consumed by primals, springs, or infrastructure**.
+They are not long-running IPC services (no sockets, no health endpoints, no capability
+registration) and they are not end-user products. They solve bounded problem domains
+without the full IPC/discovery surface that primals carry.
+
+```
+gen2:   Primals — capability providers (IPC daemons)
+gen2.5: Tools   — domain crates / CLIs consumed by other layers
+gen3:   Springs — validation environments
+gen4:   Gardens — user-facing products
+```
+
+| Tool | Location | Domain | Role |
+|------|----------|--------|------|
+| **bingoCube** | `primals/` | Crypto commitment | Human-verifiable visual/audio patterns from BLAKE3 + ChaCha20 boards. Nautilus reservoir computing. |
+| **benchScale** | `infra/` | Lab substrate | Pure Rust VM provisioning and distributed system testing harness. |
+| **agentReagents** | `infra/` | VM image builder | Template-driven VM images for gate provisioning. Depends on benchScale. |
+| **rustChip** | `sort-after/` | NPU characterization | BrainChip Akida register-level driver, models, and benchmarks. Extracted from toadStool metalForge. |
+| **sourDough** | `primals/` | Scaffolding / Meta | Scaffolds new primals with ecosystem DNA. CLI tool, not a daemon. |
+
+**What applies to tools:** Tier 1 (Build Quality), Tier 6 (Responsibility), Tier 7 (Workspace
+Dependencies), Tier 8 (Presentation). Same code quality bar as primals.
+
+**What does not apply:** Tier 2 (UniBin — no daemon), Tier 3 (IPC — no sockets), Tier 4
+(Discovery — no registration), Tier 5 (Semantic Naming — no RPC methods), Tier 9
+(Deployment/Mobile — no binary distribution).
+
+**Where they live:** `primals/` when consumed as Rust crate deps by primals; `infra/` when
+infrastructure-only. The boundary is grey and evolves with the ecosystem.
+
+**Tools own:**
+- A bounded domain implementation (math, hardware interface, template engine, etc.)
+- Their own test suite and quality gates
+- README, CHANGELOG, CONTEXT.md, deny.toml (same surface as primals)
+
+**Tools do NOT own:**
+- IPC surface or health protocols
+- Capability registration with biomeOS
+- User experience or product interfaces
+
+---
+
 ## Key Distinctions
 
 | Aspect | Springs | Gardens |

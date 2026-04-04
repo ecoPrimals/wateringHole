@@ -50,9 +50,17 @@ Neural API capability discovery — never by hardcoded primal names.
 
 ### Tooling
 
-| Primal | Domain | Capability Namespace | Role |
-|--------|--------|---------------------|------|
-| **sourDough** | Scaffolding / Meta | N/A (CLI tool, not a long-running service) | The starter culture. Scaffolds new primals with inlined DNA (traits, workspace, standards). Validates primal structure. Packages genomeBin artifacts. Reference implementation for UniBin, ecoBin, JSON-RPC IPC. Generated primals have no runtime dependency on sourDough. |
+Ecosystem tools (gen2.5) — standalone crates or CLIs consumed by primals, springs, or
+infrastructure. Not long-running IPC services. See `PRIMAL_SPRING_GARDEN_TAXONOMY.md`
+for the full taxonomy.
+
+| Tool | Domain | Location | Role |
+|------|--------|----------|------|
+| **sourDough** | Scaffolding / Meta | `primals/` | The starter culture. Scaffolds new primals with inlined DNA (traits, workspace, standards). Validates primal structure. Packages genomeBin artifacts. Reference implementation for UniBin, ecoBin, JSON-RPC IPC. Generated primals have no runtime dependency on sourDough. |
+| **bingoCube** | Crypto Commitment | `primals/` | Human-verifiable cryptographic commitment system. BLAKE3 two-board cross-binding with progressive reveal. Nautilus evolutionary reservoir computing. Consumed by BearDog (identity), Songbird (peer trust), NestGate (content fingerprinting), ToadStool (computation proofs). |
+| **benchScale** | Lab Substrate | `infra/` | Pure Rust laboratory substrate for distributed system testing. VM provisioning, topology management, network simulation. v3.0.0 production. 22K lines. |
+| **agentReagents** | VM Image Builder | `infra/` | Template-driven VM image builder for gate provisioning. Depends on benchScale for the underlying substrate. Cloud-init, PCI passthrough, COSMIC desktop templates. |
+| **rustChip** | NPU Characterization | `sort-after/` | BrainChip Akida NPU register-level driver, model format parser, benchmarks. Extracted from toadStool metalForge, evolves via hotSpring. Pure Rust, no C++ SDK. Symbiotic exception with BrainChip. |
 
 ### Nascent
 

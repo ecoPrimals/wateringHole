@@ -69,18 +69,18 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 | **rhizoCrypt** | A | B | A | B | A | A | A | A | C | **A** |
 | **sweetGrass** | B | C | C | B | B | A | A | A | D | **B** |
 | **LoamSpine** | A | C | B | B | B | A | A | A | C | **B** |
-| **bingoCube** | F | -- | -- | -- | -- | B | A | F | -- | **F** |
+| **bingoCube** | A | -- | -- | -- | -- | A | A | A | -- | **A** |
 | **sourDough** | B | -- | -- | -- | -- | A | A | C | -- | **B** |
 
 ### Grade Distribution
 
 | Grade | Count | Primals |
 |-------|-------|---------|
-| A | 2 | rhizoCrypt, barraCuda |
+| A | 3 | rhizoCrypt, barraCuda, bingoCube |
 | B | 7 | BearDog, coralReef, biomeOS, petalTongue, sweetGrass, LoamSpine, sourDough |
 | C | 3 | Songbird, NestGate, Squirrel |
 | D | 1 | ToadStool |
-| F | 1 | bingoCube |
+| F | 0 | — |
 
 ---
 
@@ -90,18 +90,18 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 
 | Check | BD | SB | NG | TS | BC | CR | SQ | bOS | PT | RC | SG | LS | BiC | SD |
 |-------|----|----|----|----|----|----|----|----|----|----|----|----|-----|-----|
-| `cargo fmt` | PASS | PASS | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | PASS |
-| `cargo clippy -D warnings` | PASS | PASS | PASS | DEBT | DEBT | DEBT | PASS | PASS | PASS | DEBT | DEBT | PASS | DEBT | PASS |
-| `cargo test --all-features` | DEBT | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | PASS |
-| `cargo doc --no-deps` | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | PASS |
-| Edition 2024 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | PASS |
-| `forbid(unsafe_code)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | PASS |
-| `warn(missing_docs)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | PASS |
-| No TODO/FIXME/HACK | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | PASS |
+| `cargo fmt` | PASS | PASS | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| `cargo clippy -D warnings` | PASS | PASS | PASS | DEBT | DEBT | DEBT | PASS | PASS | PASS | DEBT | DEBT | PASS | PASS | PASS |
+| `cargo test --all-features` | DEBT | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| `cargo doc --no-deps` | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| Edition 2024 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| `forbid(unsafe_code)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| `warn(missing_docs)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| No TODO/FIXME/HACK | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No files >1000 lines | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| No `.unwrap()` in lib | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | PASS |
+| No `.unwrap()` in lib | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No commented-out code | DEBT | DEBT | PASS | DEBT | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS |
-| License `AGPL-3.0-or-later` | DEBT | DEBT | DEBT | DEBT | PASS | DEBT | PASS | DEBT | PASS | PASS | DEBT | PASS | DEBT | PASS |
+| License `AGPL-3.0-or-later` | DEBT | DEBT | DEBT | DEBT | PASS | DEBT | PASS | DEBT | PASS | PASS | DEBT | PASS | PASS | PASS |
 | SPDX header on sources | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | DEBT |
 | **Grade** | **C** | **B** | **B** | **D** | **F** | **C** | **B** | **B** | **A** | **A** | **B** | **A** | **F** | **B** |
 
@@ -119,7 +119,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 - **rhizoCrypt**: Clippy: 5 `doc_markdown` in test file only. `deny(unsafe_code)` + `cfg_attr(not(test), forbid)`.
 - **sweetGrass**: Clippy: 1 unused import in `tcp_jsonrpc.rs:123`. License needs `-or-later`. `.cargo/config.toml` target-dir issue.
 - **LoamSpine**: Clean across all items. `forbid(unsafe_code)` at workspace level.
-- **bingoCube**: Edition 2021. No `forbid(unsafe_code)`. No `warn(missing_docs)`. 15 clippy cast errors. No SPDX headers. License bare `AGPL-3.0`. No `deny.toml`.
+- **bingoCube**: v0.1.1 — All Tier 1 checks pass. Edition 2024, `AGPL-3.0-or-later`, `forbid(unsafe_code)`, clippy pedantic+nursery clean, 54 tests, SPDX on all files.
 - **sourDough**: No SPDX headers in source files. `forbid(unsafe_code)` + `missing_docs = "warn"` via workspace lints. `deny.toml` missing.
 
 ---
@@ -273,7 +273,7 @@ Source: `PRIMAL_RESPONSIBILITY_MATRIX.md`
 | No implementation outside owned domain | DEBT | DEBT | DEBT | PASS | PASS | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Correct delegation | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No C deps in default build | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| **Grade** | **B** | **B** | **B** | **B** | **A** | **A** | **C** | **B** | **A** | **A** | **A** | **A** | **B** | **A** |
+| **Grade** | **B** | **B** | **B** | **B** | **A** | **A** | **C** | **B** | **A** | **A** | **A** | **A** | **A** | **A** |
 
 ### Tier 6 Detail
 
@@ -282,7 +282,7 @@ Source: `PRIMAL_RESPONSIBILITY_MATRIX.md`
 - **NestGate**: Crypto, discovery, network, MCP, orchestration — all documented in matrix. Crypto delegated to BearDog (NG-05 resolved). Overstep shedding accelerating.
 - **Squirrel**: `sled`/`sqlx` persistence, `ed25519-dalek`/TLS — documented. Broader than "cache only" boundary.
 - **biomeOS**: `redb` in `biomeos-graph` (metrics storage) — borderline operational state vs NestGate domain.
-- **bingoCube**: Within domain (entropy/game math). No overstep detected.
+- **bingoCube**: Strictly within domain (crypto commitment, entropy, reservoir computing). No overstep. No code imports from other primals.
 
 ---
 
@@ -312,12 +312,12 @@ Source: `PUBLIC_SURFACE_STANDARD.md`, `SPRING_PRIMAL_PRESENTATION_STANDARD.md`
 | Check | BD | SB | NG | TS | BC | CR | SQ | bOS | PT | RC | SG | LS | BiC | SD |
 |-------|----|----|----|----|----|----|----|----|----|----|----|----|-----|-----|
 | README.md | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| CHANGELOG.md | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | PASS |
-| CONTEXT.md (<150 lines) | PASS | PASS | PASS | PASS | DEBT | DEBT | PASS | PASS | DEBT | PASS | PASS | PASS | DEBT | DEBT |
+| CHANGELOG.md | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| CONTEXT.md (<150 lines) | PASS | PASS | PASS | PASS | DEBT | DEBT | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | DEBT |
 | PII scan clean | DEBT | DEBT | PASS | DEBT | PASS | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS |
-| `deny.toml` present | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | DEBT |
-| `#[expect(reason)]` not `#[allow()]` | DEBT | DEBT | PASS | DEBT | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | N/A | PASS |
-| **Grade** | **C** | **C** | **A** | **D** | **C** | **B** | **B** | **B** | **C** | **A** | **A** | **A** | **F** | **C** |
+| `deny.toml` present | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT |
+| `#[expect(reason)]` not `#[allow()]` | DEBT | DEBT | PASS | DEBT | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS |
+| **Grade** | **C** | **C** | **A** | **D** | **C** | **B** | **B** | **B** | **C** | **A** | **A** | **A** | **A** | **C** |
 
 ### Tier 8 Detail
 
@@ -333,7 +333,7 @@ Source: `PUBLIC_SURFACE_STANDARD.md`, `SPRING_PRIMAL_PRESENTATION_STANDARD.md`
 - **rhizoCrypt**: CONTEXT.md present (94 lines). Zero `#[allow(` (0/47). No PII hits.
 - **sweetGrass**: CONTEXT.md present (76 lines). 2 `#[allow(` vs 51 `#[expect(` (96% `expect`). No PII hits.
 - **LoamSpine**: CONTEXT.md present (70 lines). 1 `#[allow(` vs 58 `#[expect(` (98% `expect`). No PII hits.
-- **bingoCube**: No CHANGELOG.md. No CONTEXT.md. No `deny.toml`. No lint attributes at all (0/0).
+- **bingoCube**: v0.1.1 — CHANGELOG, CONTEXT.md, `deny.toml` all present. Edition 2024. `forbid(unsafe_code)`, `warn(missing_docs)`, clippy pedantic+nursery clean. SPDX headers on all 20 files. 54 tests passing. 0 `#[allow(` / uses `#[expect(` throughout.
 - **sourDough**: No CONTEXT.md. No `deny.toml`. Zero `#[allow(` (0/6). No PII hits.
 
 ### PII Scan Notes
@@ -390,7 +390,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **rhizoCrypt** | musl binary is glibc (needs musl-static) | No domain symlink | 5 clippy `doc_markdown` in tests |
 | **sweetGrass** | No `--port` (HTTP-only TCP) | License → `-or-later` | musl-static not tested |
 | **LoamSpine** | No `--port` (uses `--jsonrpc-port`) | musl binary is glibc | No domain symlink |
-| **bingoCube** | Edition 2021 + no `forbid(unsafe)` | No CHANGELOG / CONTEXT / deny.toml | 15 clippy cast errors |
+| **bingoCube** | — (all debt resolved) | — | — |
 | **sourDough** | No SPDX headers | No CONTEXT.md | No `deny.toml` |
 
 ---
@@ -403,11 +403,55 @@ interoperability respectively. An F in any critical tier (T1, T2, T3) caps the r
 
 ---
 
+## Ecosystem Tools
+
+Ecosystem tools (gen2.5) are audited against Tiers 1, 6, 7, and 8 only — IPC, discovery,
+semantic naming, and deployment tiers are N/A (tools are not long-running daemons). See
+`PRIMAL_SPRING_GARDEN_TAXONOMY.md` § Tools for the formal definition.
+
+### Tool Summary Table
+
+| Tool | Location | Lines | T1 Build | T6 Responsibility | T7 Workspace | T8 Presentation | Rollup |
+|------|----------|-------|----------|--------------------|--------------|-----------------|--------|
+| **bingoCube** | `primals/` | 6,567 | A | A | A | A | **A** |
+| **benchScale** | `infra/` | 22,868 | D | A | A | C | **C** |
+| **agentReagents** | `infra/` | 6,288 | D | A | A | D | **D** |
+| **rustChip** | `sort-after/` | 21,591 | D | A | A | C | **C** |
+
+### Tool Detail
+
+**bingoCube** (v0.1.1 — compliance sprint complete):
+- T1: Edition 2024, `AGPL-3.0-or-later`, `forbid(unsafe_code)`, clippy pedantic+nursery clean, 54 tests passing, SPDX on all 20 files.
+- T8: CHANGELOG, CONTEXT.md, `deny.toml`, README updated with nautilus. 0 `#[allow(` uses.
+
+**benchScale** (v3.0.0 — 67 files, 22K lines):
+- T1: Edition 2024. `AGPL-3.0-only` (DEBT: needs `-or-later`). `deny(unsafe_code)` + `warn(missing_docs)` in lib.rs. fmt FAIL (shebang in example). clippy FAIL (78 `missing_docs` errors). Tests FAIL (compile error). SPDX present (`-only`).
+- T8: README, CHANGELOG, CONTEXT.md present. No `deny.toml`. 7 `#[allow(` / 0 `#[expect(`. PII: benign `rustdesk` test strings.
+
+**agentReagents**:
+- T1: Edition 2024. `AGPL-3.0-only` (DEBT: needs `-or-later`). `forbid(unsafe_code)` + `warn(missing_docs)` in lib.rs. fmt FAIL. clippy FAIL (6 `unwrap_used` in tests). Tests FAIL (example compile error — missing struct fields). SPDX present (`-only`).
+- T8: README + CONTEXT.md present. No CHANGELOG. No `deny.toml`. 7 `#[allow(` / 0 `#[expect(`. PII clean.
+
+**rustChip** (5-crate workspace, 80 files, 21K lines):
+- T1: Edition 2021 (DEBT: needs 2024). `AGPL-3.0-or-later` (correct). `forbid(unsafe_code)` in 3/5 crates. `warn(missing_docs)` in 3/5 crates. fmt PASS. clippy FAIL (54 `missing_docs` in `akida-chip` regs.rs). Tests PASS (but 0 test functions — test harness compiled, no assertions). SPDX present (correct).
+- T8: README + CHANGELOG present. No CONTEXT.md. No `deny.toml`. 34 `#[allow(` / 0 `#[expect(`. PII clean.
+
+### Tool Debt Summary
+
+| Tool | Top Debt Items |
+|------|---------------|
+| **benchScale** | 1. License `-only` → `-or-later`. 2. Fix 78 clippy `missing_docs`. 3. Fix example shebang for `cargo fmt`. 4. Add `deny.toml`. 5. Migrate 7 `#[allow(` → `#[expect(`. |
+| **agentReagents** | 1. License `-only` → `-or-later`. 2. Fix example compile error (missing struct fields). 3. Add CHANGELOG.md. 4. Add `deny.toml`. 5. Migrate 7 `#[allow(` → `#[expect(`. |
+| **rustChip** | 1. Edition 2021 → 2024 (`gen` keyword migration). 2. Add docs to `akida-chip` regs.rs (54 items). 3. Add `forbid(unsafe)` to 2 remaining crates. 4. Add CONTEXT.md + `deny.toml`. 5. Migrate 34 `#[allow(` → `#[expect(`. |
+
+---
+
 ## Cross-References
 
 - `STANDARDS_AND_EXPECTATIONS.md` — primary standards index
 - `PRIMAL_GAPS.md` (primalSpring) — per-primal gap registry with fix paths
 - `PRIMAL_RESPONSIBILITY_MATRIX.md` — primal roles and domain boundaries
+- `PRIMAL_SPRING_GARDEN_TAXONOMY.md` — primal/spring/garden/tool taxonomy
 - `CAPABILITY_BASED_DISCOVERY_STANDARD.md` — capability-first routing
 - `PRIMAL_SELF_KNOWLEDGE_STANDARD.md` — self-knowledge boundaries
 - `UNIBIN_ARCHITECTURE_STANDARD.md` — binary architecture
@@ -421,6 +465,17 @@ interoperability respectively. An F in any critical tier (T1, T2, T3) caps the r
 
 ## Version History
 
+### v1.1.0 (April 4, 2026)
+
+**Tool Taxonomy + bingoCube Compliance Sprint**
+
+- bingoCube: F → A (edition 2024, license `-or-later`, `forbid(unsafe)`, clippy pedantic+nursery clean, 54 tests, SPDX, CHANGELOG, CONTEXT.md, `deny.toml`)
+- Added Ecosystem Tools section with 4 tools: bingoCube, benchScale, agentReagents, rustChip
+- Tier 1/6/7/8 audit data for all 4 tools
+- Tool debt summary with specific action items
+- Grade distribution updated: 3 A, 7 B, 3 C, 1 D, 0 F (was 2/7/3/1/1)
+- Cross-references updated with `PRIMAL_SPRING_GARDEN_TAXONOMY.md`
+
 ### v1.0.0 (April 4, 2026)
 
 **Initial Comprehensive Matrix — 9 Tiers, 14 Primals, 40+ Dimensions**
@@ -430,6 +485,6 @@ interoperability respectively. An F in any critical tier (T1, T2, T3) caps the r
 - Incorporated April 4 ecosystem audit (fmt, clippy, tests, edition, license)
 - Phase 2 checks: `forbid(unsafe)`, `warn(missing_docs)`, CONTEXT.md, `allow` vs `expect`,
   PII scan, workspace dependencies, commented-out code, SPDX headers, C deps via `cargo tree`
-- Grade distribution: 1 A, 7 B, 3 C, 2 D, 1 F
+- Grade distribution: 2 A, 7 B, 3 C, 1 D, 1 F
 - Top ecosystem gaps: discovery debt (5 primals), license alignment (8 primals),
   `#[allow(` migration (4 primals), domain symlinks (8 primals)
