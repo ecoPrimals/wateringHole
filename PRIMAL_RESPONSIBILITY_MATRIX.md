@@ -213,17 +213,17 @@ Deploy graphs should **never** route a concern to a primal listed as OVERSTEP. U
 |--------|--------|-----|-------|-----------|----------|
 | biomeOS | CLEAN | PASS | PASS | **C** | — |
 | BearDog | CLEAN | PASS | PASS (14.4K) | **C** | Overstep: HTTP, mDNS, AI tree (feature-gated) |
-| Songbird | CLEAN | **PASS** | PASS (7K+) | **P** (1472 refs) | Wave 102: fmt fixed, 42% discovery ref reduction |
-| NestGate | CLEAN | PASS | PASS (1.4K) | **P→C** | Most overstep modules (crypto/net/AI/orch) |
-| toadStool | 2 warn | PASS | PASS (21.5K) | **P** | ~30 discovery files; TS-01 coralReef |
-| petalTongue | CLEAN | PASS | PASS (176) | **P** | 24 env-var refs |
-| Squirrel | **FAIL** | PASS | **FAIL** | **P** | ai-tools build error; sled/crypto overstep |
+| Songbird | CLEAN | PASS | PASS (8.9K) | **P→C** (935 refs) | Wave 109: 63% total discovery reduction (2558→935) |
+| NestGate | CLEAN | PASS | PASS (11.3K) | **P→C** | EnvSource injection, automation+network deprecated, -15K lines |
+| toadStool | **FAIL** | PASS | PASS (6.5K) | **P** | TS-01 RESOLVED; clippy regression (aes_gcm deprecated) |
+| petalTongue | CLEAN | PASS | PASS (6K) | **P→C** | PT-04/06 resolved; discovery renames landed |
+| Squirrel | CLEAN | PASS | PASS (6.9K) | **P** | Build FIXED (alpha.36); sled/crypto overstep |
 | rhizoCrypt | CLEAN | PASS | PASS | **C** | — |
 | loamSpine | CLEAN | PASS | PASS | **C** | Missing `--port` alias |
 | sweetGrass | 1 warn | PASS | PASS | **C** | Missing `--port` alias |
-| barraCuda | CLEAN | PASS | **SIGSEGV** | n/a | fault_injection crash |
+| barraCuda | 1 lint | PASS | PASS (3.8K) | n/a | SIGSEGV resolved; unfulfilled lint expectation |
 | sourDough | CLEAN | PASS | PASS (239) | **C** | Missing `deny.toml`; musl/signing |
-| coralReef | n/c | n/c | n/c | ? | GPU dev ongoing |
+| coralReef | CLEAN | PASS | PASS (4.3K) | **C** | First audit — zero discovery violations |
 | skunkBat | n/c | n/c | n/c | n/c | Nascent — spec only |
 
 **Discovery legend**: **C** = compliant, **P** = partial, **X** = non-compliant
