@@ -9,7 +9,7 @@
 ## Summary
 
 Comprehensive documentation hygiene pass across 15+ files. All root docs now
-reflect current measured state: 11,685 tests passing, 463 ignored, 0 failures;
+reflect current measured state: 11,821 tests passing, 463 ignored, 0 failures;
 20 code/crates in workspace (23 total members); `#![forbid(unsafe_code)]` on
 ALL crate roots with zero exceptions.
 
@@ -48,7 +48,7 @@ ALL crate roots with zero exceptions.
 - Zero orphaned JSON fixtures
 - Zero TODO/FIXME/HACK markers in crate sources
 - `nestgate-automation`, `nestgate-network`, `nestgate-mcp` — fossil on disk, not workspace members
-- 79 `#[deprecated]` markers — legitimate API deprecation surface
+- 188 `#[deprecated]` markers — legitimate API deprecation surface (23 dead-caller functions removed in follow-up session)
 - `scripts/setup-test-substrate.sh`, `.pre-commit-config.sh` — legitimate
 
 ---
@@ -58,7 +58,7 @@ ALL crate roots with zero exceptions.
 1. **Unsafe code**: "except env-process-shim" → "zero exceptions". The shim uses
    edition 2021 where `set_var`/`remove_var` are safe; it has `#![forbid(unsafe_code)]`.
 2. **Crate count**: 21 code/crates → 20 (nestgate-network shed in Session 29).
-3. **Test count**: 12,088 → 11,685 passing (reduction from nestgate-network removal).
+3. **Test count**: 12,088 → 11,821 passing (reduction from nestgate-network removal, increase from `--all-features` coverage).
 
 ---
 
@@ -66,7 +66,7 @@ ALL crate roots with zero exceptions.
 
 ```
 Build:    PASS (clippy, fmt, check — 2026-04-05)
-Tests:    11,685 passing, 0 failures, 463 ignored
+Tests:    11,821 passing, 0 failures, 463 ignored
 Coverage: ~80% line
 Unsafe:   #![forbid(unsafe_code)] ALL crate roots
 Serial:   5 total (4 env-process-shim, 1 CLI tracing)
