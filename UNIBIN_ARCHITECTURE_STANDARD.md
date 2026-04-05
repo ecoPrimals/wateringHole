@@ -572,7 +572,7 @@ Running server...
 
 ### **Full UniBin Example**
 
-See `/path/to/ecoPrimals/phase2/biomeOS/UNIBIN_DEBT_ELIMINATION_JAN_16_2026.md` for comprehensive implementation guide.
+See biomeOS `UNIBIN_DEBT_ELIMINATION_JAN_16_2026.md` for comprehensive implementation guide.
 
 ---
 

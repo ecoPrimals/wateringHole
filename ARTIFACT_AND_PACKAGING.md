@@ -92,6 +92,35 @@ Primals listed as genomeBin-ready in the original standard included BearDog, Nes
 
 **Related:** `UNIBIN_ARCHITECTURE_STANDARD.md`, `ECOBIN_ARCHITECTURE_STANDARD.md`.
 
+### Build cleanliness for public binaries
+
+Development builds embed host-specific paths (panic messages, debug info, proc-macro expansions). Public genomeBin releases MUST strip these.
+
+**Required `.cargo/config.toml`:**
+
+```toml
+[build]
+rustflags = [
+    "--remap-path-prefix", "/home/builder=build",
+    "--remap-path-prefix", "/rustc/=rustc/",
+]
+
+[profile.release]
+strip = true
+lto = true
+```
+
+**Verification (before publishing to plasmidBin):**
+
+```bash
+strings <binary> | grep -i '/home/'     # must be empty
+strings <binary> | grep '192\.168\.'    # must be empty (unless intentional LAN default)
+```
+
+**CI builds preferred:** Ephemeral containers with generic paths eliminate host leakage at source. When building locally, `--remap-path-prefix` covers panic/debug paths; `strip = true` removes DWARF sections.
+
+**Full standard:** `SECRETS_AND_SEEDS_STANDARD.md` § Build Cleanliness.
+
 ---
 
 ## guideStone Verification
