@@ -179,6 +179,21 @@ The archive is the project's geological record.
 
 ---
 
+## 13. Secrets, Seeds & Publication Hygiene
+
+| Standard | File | Summary |
+|----------|------|---------|
+| Secrets & Seeds | `SECRETS_AND_SEEDS_STANDARD.md` | No static secrets in repos; seeds generated at init/build time; lineage validation |
+| Build Cleanliness | `ARTIFACT_AND_PACKAGING.md` § Build Cleanliness | Strip host paths from binaries; `--remap-path-prefix`; verify with `strings` |
+| Publication Identity | `SECRETS_AND_SEEDS_STANDARD.md` § Publication Identity | ecoPrimals org: `ecoPrimal <ecoPrimal@pm.me>` only |
+
+**Expectation**: No private keys, API tokens, passwords, or production seeds in any
+repository. Tutorial seeds are generated at init time, not committed. Released binaries
+carry build-derived lineage seeds (non-secret, verifiable via guideStone). All
+ecoPrimals org repos use canonical `ecoPrimal` identity in git metadata.
+
+---
+
 ## Quick Reference: "Is my work ready?"
 
 Before pushing, verify:
@@ -191,3 +206,5 @@ Before pushing, verify:
 - [ ] Named tolerances for all numerical comparisons
 - [ ] Experiment checks counted and reported
 - [ ] Handoff written if session work is incomplete
+- [ ] No secrets or personal paths in committed code (see `SECRETS_AND_SEEDS_STANDARD.md`)
+- [ ] Git author is `ecoPrimal <ecoPrimal@pm.me>` for ecoPrimals org repos

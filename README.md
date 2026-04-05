@@ -379,6 +379,9 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** — Checklist for making a spring/primal independently reviewable.
 - `PUBLIC_SURFACE_STANDARD.md` — GitHub metadata, PII hygiene, AI discoverability
 
+### Secrets & Publication Hygiene
+- `SECRETS_AND_SEEDS_STANDARD.md` — No static secrets in repos, seed generation patterns, build cleanliness, publication identity standard
+
 ### Other Standards
 - `LINK_INTEGRITY_STANDARD.md` — No dead links on public surfaces
 - `PRIMAL_EMOJI_STANDARD.md` — Canonical 2-emoji identities
