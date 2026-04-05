@@ -50,7 +50,7 @@ Removed 3 stale `#[expect(deprecated)]` suppressions from callers.
 
 ### Root docs updated
 
-- Test counts: ~11,685 → ~11,821 (reflects `--all-features` runs)
+- Test counts: ~11,685 → ~11,812 (reflects `--all-features` runs)
 - Deprecated API description updated (188 markers, 0 dead callers)
 - STATUS.md, README.md, QUICK_REFERENCE.md aligned
 
@@ -78,7 +78,7 @@ Removed 3 stale `#[expect(deprecated)]` suppressions from callers.
 cargo fmt --all -- --check       PASS
 cargo clippy --all-features --workspace -- -D warnings   PASS (0 warnings)
 cargo check --all-features --workspace   PASS
-cargo test --all-features --workspace    11,821 passed, 0 failed, 463 ignored
+cargo test --all-features --workspace    11,812 passed, 0 failed, 463 ignored
 ```
 
 ---
