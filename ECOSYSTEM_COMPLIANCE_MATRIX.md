@@ -1,6 +1,6 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 2.0.0
+**Version:** 2.2.0
 **Date:** April 5, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
@@ -55,30 +55,30 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 
 ## Summary Table
 
-| Primal | T1 Build | T2 UniBin | T3 IPC | T4 Discovery | T5 Naming | T6 Responsibility | T7 Workspace | T8 Presentation | T9 Deploy | Rollup |
-|--------|----------|-----------|--------|--------------|-----------|-------------------|--------------|-----------------|-----------|--------|
-| **BearDog** | C | A | A | B | B | B | A | C | A | **B** |
-| **Songbird** | B | B | B | D | B | B | A | C | A | **C** |
-| **NestGate** | B | D | C | C | B | B | A | A | D | **C** |
-| **ToadStool** | D | C | C | D | D | B | A | D | C | **D** |
-| **barraCuda** | A | -- | -- | -- | -- | A | A | A | -- | **A** |
-| **coralReef** | C | A | A | B | A | A | A | B | C | **B** |
-| **Squirrel** | B | C | C | D | B | C | A | B | A | **C** |
-| **biomeOS** | B | C | B | A | A | B | A | B | C | **B** |
-| **petalTongue** | A | B | B | C | A | A | A | C | C | **B** |
-| **rhizoCrypt** | A | B | A | B | A | A | A | A | C | **A** |
-| **sweetGrass** | B | C | C | B | B | A | A | A | D | **B** |
-| **LoamSpine** | A | C | B | B | B | A | A | A | C | **B** |
-| **bingoCube** | A | -- | -- | -- | -- | A | A | A | -- | **A** |
-| **sourDough** | B | -- | -- | -- | -- | A | A | C | -- | **B** |
+| Primal | T1 Build | T2 UniBin | T3 IPC | T4 Discovery | T5 Naming | T6 Resp | T7 Workspace | T8 Present | T9 Deploy | T10 Live | Rollup |
+|--------|----------|-----------|--------|--------------|-----------|---------|--------------|------------|-----------|----------|--------|
+| **BearDog** | C | A | A | B | B | B | A | C | A | B | **B** |
+| **Songbird** | B | B | B | D | B | B | A | C | A | B | **C** |
+| **NestGate** | B | D | C | C | B | B | A | A | D | N/T | **C** |
+| **ToadStool** | D | C | C | D | D | B | A | D | C | D | **D** |
+| **barraCuda** | A | -- | -- | -- | -- | A | A | A | -- | -- | **A** |
+| **coralReef** | C | A | A | B | A | A | A | B | C | N/T | **B** |
+| **Squirrel** | B | C | C | D | B | C | A | B | A | C | **C** |
+| **biomeOS** | B | C | B | A | A | B | A | B | C | N/T | **B** |
+| **petalTongue** | A | B | B | C | A | A | A | C | C | N/T | **B** |
+| **rhizoCrypt** | A | B | A | B | A | A | A | A | C | D | **B** |
+| **sweetGrass** | B | C | C | B | B | A | A | A | D | C | **B** |
+| **LoamSpine** | A | C | B | B | B | A | A | A | C | F | **C** |
+| **bingoCube** | A | -- | -- | -- | -- | A | A | A | -- | -- | **A** |
+| **sourDough** | B | -- | -- | -- | -- | A | A | C | -- | -- | **B** |
 
 ### Grade Distribution
 
 | Grade | Count | Primals |
 |-------|-------|---------|
-| A | 3 | rhizoCrypt, barraCuda, bingoCube |
-| B | 7 | BearDog, coralReef, biomeOS, petalTongue, sweetGrass, LoamSpine, sourDough |
-| C | 3 | Songbird, NestGate, Squirrel |
+| A | 2 | barraCuda, bingoCube |
+| B | 7 | BearDog, coralReef, biomeOS, petalTongue, rhizoCrypt, sweetGrass, sourDough |
+| C | 4 | Songbird, NestGate, Squirrel, LoamSpine |
 | D | 1 | ToadStool |
 | F | 0 | — |
 
@@ -387,9 +387,9 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **Squirrel** | Discovery: 1,789 primal-name refs | Overstep: sled/sqlx/ed25519 beyond domain | 19 commented-out code lines |
 | **biomeOS** | License → `-or-later` | `--port` forces UDS (TCP-only needed) | `tools/` edition 2021 |
 | **petalTongue** | Discovery: 982 primal-name refs | No CONTEXT.md | 32 `#[allow(` → `#[expect(` |
-| **rhizoCrypt** | musl binary is glibc (needs musl-static) | No domain symlink | 5 clippy `doc_markdown` in tests |
-| **sweetGrass** | No `--port` (HTTP-only TCP) | License → `-or-later` | musl-static not tested |
-| **LoamSpine** | No `--port` (uses `--jsonrpc-port`) | musl binary is glibc | No domain symlink |
+| **rhizoCrypt** | Health triad missing on live binary | musl binary is glibc (needs musl-static) | No domain symlink |
+| **sweetGrass** | No `--port` (HTTP-only TCP) | Health triad HTTP-only (not newline) | License → `-or-later` |
+| **LoamSpine** | **tokio runtime crash** (blocks deployment) | No `--port` (uses `--jsonrpc-port`) | musl binary is glibc |
 | **bingoCube** | — (all debt resolved) | — | — |
 | **sourDough** | No SPDX headers | No CONTEXT.md | No `deny.toml` |
 
@@ -456,6 +456,61 @@ semantic naming, and deployment tiers are N/A (tools are not long-running daemon
 
 ---
 
+## Tier 10: Live Deployment (plasmidBin)
+
+Source: `DEPLOYMENT_VALIDATION_STANDARD.md`, plasmidBin v2026.03.25 validation (April 5, 2026)
+
+Live runtime validation: binaries fetched from GitHub Releases via `fetch.sh`,
+started via `start_primal.sh`, probed via `benchscale validate ipc` and direct
+JSON-RPC over UDS/TCP/abstract sockets.
+
+N/A for library primals (barraCuda, bingoCube, sourDough — no server mode).
+
+| Check | BD | SB | NG | TS | CR | SQ | bOS | PT | RC | SG | LS |
+|-------|----|----|----|----|----|----|-----|----|----|----|----|
+| fetch.sh checksum verified | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| start_primal.sh launches | PASS | PASS | N/T | PASS | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
+| health.liveness responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | DEBT | PASS | DEBT |
+| health.readiness responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | DEBT | PASS | DEBT |
+| health.check responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | DEBT | PASS | DEBT |
+| benchscale validate ipc COMPLIANT | PASS | N/A | N/T | DEBT | N/T | N/A | N/T | N/T | DEBT | N/A | DEBT |
+| Standalone startup (no NODE_ID) | DEBT | PASS | N/T | PASS | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
+| Filesystem socket created | DEBT | PASS | N/T | PASS | N/T | DEBT | N/T | N/T | N/T | PASS | DEBT |
+| `--port` binds newline TCP JSON-RPC | PASS | DEBT | N/T | DEBT | N/T | DEBT | N/T | N/T | DEBT | DEBT | DEBT |
+| **Grade** | **B** | **B** | **N/T** | **D** | **N/T** | **C** | **N/T** | **N/T** | **D** | **C** | **F** |
+
+**N/T** = Not Tested (binary not started in this validation run).
+**N/A** = Not Applicable (transport mismatch — benchscale uses TCP, primal is UDS-only).
+
+### Tier 10 Detail
+
+- **BearDog**: Gold standard for TCP JSON-RPC compliance. `benchscale validate ipc` reports COMPLIANT on all 3 health methods (0ms each). **Standalone blocked**: hard-fails on missing `NODE_ID` (`NODE_ID or BEARDOG_NODE_ID must be set`). UDS socket not found at expected family-scoped path despite log claiming creation.
+- **Songbird**: Health triad fully responsive on UDS (`songbird.sock`). TCP 9200 is HTTP discovery (federation/beacons), not JSON-RPC — so benchscale TCP probe fails. This is by design: songbird's TCP is for LAN discovery, not IPC. Needs `--port` to also bind newline JSON-RPC for composition testing.
+- **ToadStool**: Starts and creates `.jsonrpc.sock` UDS. `health.liveness` → "Method not found". Uses `toadstool.health` and `compute.capabilities` instead. Standard triad not implemented.
+- **Squirrel**: Healthy on abstract socket `@squirrel`. No filesystem socket created — invisible to `readdir()` discovery. `health.liveness` returns `{"alive":true}` via abstract socket.
+- **rhizoCrypt**: Starts on TCP 9700 (tarpc) + 9701 (HTTP JSON-RPC). Standard health triad not exposed on either. tarpc is binary protocol, HTTP requires HTTP framing (not newline). Needs newline JSON-RPC surface with health triad.
+- **sweetGrass**: HTTP REST `/health` and `POST /jsonrpc` both respond. Health triad accessible via HTTP but not via newline-delimited TCP. Needs `--port` alias and newline framing option.
+- **LoamSpine**: **CRASH** — tokio runtime nesting bug in `infant_discovery.rs:233` (`block_on` inside existing runtime). Source fix required before deployment validation can proceed. CLI also uses `--jsonrpc-port` instead of `--port`.
+
+### Transport Diversity (Live Observed)
+
+```
+beardog:     TCP newline JSON-RPC ← only one conforming to benchscale validate ipc
+songbird:    UDS newline JSON-RPC + HTTP TCP (discovery)
+toadstool:   UDS newline JSON-RPC (custom methods) + tarpc UDS
+squirrel:    Abstract socket newline JSON-RPC
+rhizocrypt:  tarpc TCP + HTTP JSON-RPC TCP
+sweetgrass:  HTTP REST + HTTP JSON-RPC + tarpc + UDS
+loamspine:   (crashed — tarpc + JSON-RPC planned)
+```
+
+Five distinct transport patterns across 7 tested primals. Standards require
+newline-delimited JSON-RPC on at least one transport — only bearDog, songBird,
+toadStool, and squirrel satisfy this (songBird and squirrel on UDS/abstract,
+not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
+
+---
+
 ## Cross-References
 
 - `STANDARDS_AND_EXPECTATIONS.md` — primary standards index
@@ -470,10 +525,24 @@ semantic naming, and deployment tiers are N/A (tools are not long-running daemon
 - `SEMANTIC_METHOD_NAMING_STANDARD.md` — method naming
 - `WORKSPACE_DEPENDENCY_STANDARD.md` — dependency management
 - `PUBLIC_SURFACE_STANDARD.md` — presentation requirements
+- `DEPLOYMENT_VALIDATION_STANDARD.md` — runtime deployment contract
 
 ---
 
 ## Version History
+
+### v2.2.0 (April 5, 2026)
+
+**Tier 10: Live Deployment — plasmidBin runtime validation**
+
+- Added Tier 10: Live Deployment tier sourced from `DEPLOYMENT_VALIDATION_STANDARD.md`
+- Data from plasmidBin v2026.03.25 end-to-end validation (fetch → start → probe)
+- 10 binaries fetched, 7 started, 5 healthy, 1 partial (rhizoCrypt), 1 crash (LoamSpine)
+- Transport diversity documented: 5 distinct patterns across 7 tested primals
+- Only BearDog fully passes `benchscale validate ipc` on TCP
+- LoamSpine F: tokio runtime nesting crash blocks all deployment validation
+- Summary table expanded from 9 to 10 tiers
+- Rollup adjusted: rhizoCrypt A → B (health triad missing on live binary), LoamSpine B → C (crash)
 
 ### v2.1.0 (April 5, 2026)
 
