@@ -382,6 +382,9 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### Secrets & Publication Hygiene
 - `SECRETS_AND_SEEDS_STANDARD.md` — No static secrets in repos, seed generation patterns, build cleanliness, publication identity standard
 
+### Deployment Validation
+- `DEPLOYMENT_VALIDATION_STANDARD.md` — Runtime deployment contract: health triad, transport requirements, CLI convergence, per-primal fix paths. Driven by plasmidBin live validation.
+
 ### Other Standards
 - `LINK_INTEGRITY_STANDARD.md` — No dead links on public surfaces
 - `PRIMAL_EMOJI_STANDARD.md` — Canonical 2-emoji identities
