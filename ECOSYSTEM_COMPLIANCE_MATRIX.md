@@ -1,7 +1,7 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 1.0.0
-**Date:** April 4, 2026
+**Version:** 2.0.0
+**Date:** April 5, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 **Supersedes:** `IPC_COMPLIANCE_MATRIX.md` v1.6.0 (archived to `fossilRecord/`)
@@ -411,39 +411,48 @@ semantic naming, and deployment tiers are N/A (tools are not long-running daemon
 
 ### Tool Summary Table
 
-| Tool | Location | Lines | T1 Build | T6 Responsibility | T7 Workspace | T8 Presentation | Rollup |
-|------|----------|-------|----------|--------------------|--------------|-----------------|--------|
-| **bingoCube** | `primals/` | 6,567 | A | A | A | A | **A** |
-| **benchScale** | `infra/` | 22,868 | B | A | A | B | **B** |
-| **agentReagents** | `infra/` | 6,288 | B | A | A | B | **B** |
-| **rustChip** | `sort-after/` | 21,591 | B | A | A | B | **B** |
+| Tool | Location | Lines | T1 Build | T6 Responsibility | T7 Workspace | T8 Presentation | Coverage | Rollup |
+|------|----------|-------|----------|--------------------|--------------|-----------------|----------|--------|
+| **bingoCube** | `primals/` | 6,567 | A | A | A | A | 83.4% | **A** |
+| **benchScale** | `infra/` | 22,868 | A | A | A | A | 61.9% | **A** |
+| **agentReagents** | `infra/` | 6,288 | A | A | A | A | 60.2% | **A** |
+| **rustChip** | `sort-after/` | 21,591 | B | A | A | B | -- | **B** |
 
 ### Tool Detail
 
-**bingoCube** (v0.1.1 — compliance sprint complete):
-- T1: Edition 2024, `AGPL-3.0-or-later`, `forbid(unsafe_code)`, clippy pedantic+nursery clean, 54 tests passing, SPDX on all 20 files.
-- T8: CHANGELOG, CONTEXT.md, `deny.toml`, README updated with nautilus. 0 `#[allow(` uses.
+**bingoCube** (v0.1.1 — deep debt sprint complete):
+- T1: Edition 2024, `AGPL-3.0-or-later`, `forbid(unsafe_code)`, clippy pedantic+nursery clean, 73 tests passing, SPDX on all files. **83.4% line coverage.**
+- T8: CHANGELOG, CONTEXT.md, `deny.toml`, README with accurate AGPL wording. Internal docs removed. No `/home/` paths. `tarpaulin.toml` with `fail-under = 60.0`.
+- Refactored: `shell.rs` split into `shell.rs` (789) + `snapshot.rs` (147) + `evolve.rs` (112).
+- Public-ready: internal docs deleted, home paths scrubbed, path dep made optional, whitePaper license aligned, broken links fixed.
 
-**benchScale** (v3.0.0 — compliance sprint complete):
-- T1: Edition 2024. `AGPL-3.0-or-later`. `deny(unsafe_code)` + `warn(missing_docs)` in lib.rs. fmt PASS. clippy PASS (0 hard errors). Tests PASS (401 passed, 32 ignored). SPDX `-or-later` on all .rs files. Shebangs removed from examples.
-- T8: README, CHANGELOG, CONTEXT.md, `deny.toml` all present. `missing_docs` remains as warnings (22K lines — gradual doc effort). PII: benign `rustdesk` test strings only.
+**benchScale** (v3.0.0 — deep debt sprint complete):
+- T1: Edition 2024. `AGPL-3.0-or-later`. `deny(unsafe_code)` + `warn(missing_docs)`. fmt PASS. clippy PASS. Tests PASS (343 passed, 7 ignored). SPDX `-or-later` on all .rs files. `thiserror` upgraded to 2.0. **61.9% line coverage.**
+- T8: README (license aligned), CHANGELOG, CONTEXT.md, `deny.toml` (C deps documented). All `#[allow(` → `#[expect(`. `tarpaulin.toml`.
+- Unsafe evolution: `EnvGuard` RAII for env var tests, `LeaseList` safe abstraction for libvirt FFI, `libc::kill` → `nix::sys::signal::kill`.
+- Refactored: `vm_lifecycle.rs` → `vm_state.rs` (83 lines extracted), `pipeline.rs` → `stages.rs` (731 lines extracted), `config_legacy.rs` → `config/legacy.rs`.
+- Public-ready: archive paths scrubbed, license aligned, SPDX consistent, git authors verified.
 
-**agentReagents** (compliance sprint complete):
-- T1: Edition 2024. `AGPL-3.0-or-later`. `forbid(unsafe_code)` + `warn(missing_docs)` in lib.rs. fmt PASS. clippy PASS (0 errors). Tests PASS (52 passed, 5 ignored). SPDX `-or-later` on all .rs files.
-- T8: README, CONTEXT.md, CHANGELOG, `deny.toml` all present. PII clean.
+**agentReagents** (deep debt sprint complete):
+- T1: Edition 2024. `AGPL-3.0-or-later`. `forbid(unsafe_code)` + `warn(missing_docs)`. fmt PASS. clippy PASS. Tests PASS (89 passed). SPDX `-or-later`. **60.2% line coverage.**
+- T8: README (license aligned, build requirements documented, security note for template passwords), CONTEXT.md, CHANGELOG, `deny.toml` (C deps documented). All `#[allow(` → `#[expect(`. `tarpaulin.toml`.
+- Hardcoding evolution: `RegistrationSettings` capability-based pattern replaces hardcoded Songbird registration.
+- Public-ready: archive paths scrubbed, path dep documented, template passwords documented.
 
-**rustChip** (5-crate workspace — compliance sprint complete):
-- T1: Edition 2024. `AGPL-3.0-or-later`. `forbid(unsafe_code)` via workspace lints (akida-driver excepted for VFIO/DMA). `warn(missing_docs)` workspace-wide. fmt PASS. clippy PASS (0 errors). Tests PASS. SPDX `-or-later`.
-- T8: README, CHANGELOG, CONTEXT.md, `deny.toml` all present. All `#[allow(` → `#[expect(` migrated. PII clean.
+**rustChip** (5-crate workspace — deep debt sprint complete):
+- T1: Edition 2024. `AGPL-3.0-or-later`. `forbid(unsafe_code)` via workspace lints (akida-driver excepted for VFIO/DMA). `warn(missing_docs)` workspace-wide. fmt PASS. clippy PASS. Tests PASS. SPDX `-or-later`. `deny(unsafe_op_in_unsafe_fn)` enforced.
+- T8: README, CHANGELOG, CONTEXT.md, `deny.toml` (C deps documented). All `#[allow(` → `#[expect(`. 31 unsafe blocks with `// SAFETY:` docs.
+- Refactored: `vfio/mod.rs` split into `ioctls.rs` (273) + `container.rs` (116), `hybrid/mod.rs` → `software.rs` (79).
+- Mock evolution: `create_stub_model` → `create_reference_model`, `SoftSystemBackend` → `SoftwareBackend`, cross-primal refs documented as ecosystem context.
 
 ### Tool Debt Summary
 
 | Tool | Remaining Debt |
 |------|---------------|
-| **bingoCube** | No remaining debt — all tiers A. |
-| **benchScale** | `missing_docs` warnings (22K lines — gradual effort). Clippy pedantic/nursery warnings under `-D warnings`. PII benign but present. |
-| **agentReagents** | `missing_docs` warnings. Some `#[allow(deprecated)]` in examples. |
-| **rustChip** | `missing_docs` warnings in `akida-chip` regs.rs. `akida-driver` needs crate-local unsafe policy (VFIO/DMA). 0 test functions (test harness compiles but no assertions). |
+| **bingoCube** | No remaining debt — all tiers A. Coverage 83.4%. Public-ready. |
+| **benchScale** | `missing_docs` warnings (22K lines — gradual effort). Coverage 61.9% — aim for 90%. Public-ready. |
+| **agentReagents** | `missing_docs` warnings. Path dep on benchScale (documented). Coverage 60.2% — aim for 90%. Public-ready (requires benchScale sibling). |
+| **rustChip** | `missing_docs` warnings in `akida-chip` regs.rs. `akida-driver` legitimate unsafe (VFIO/DMA) — documented with SAFETY comments. Coverage measurement pending. |
 
 ---
 
@@ -465,6 +474,18 @@ semantic naming, and deployment tiers are N/A (tools are not long-running daemon
 ---
 
 ## Version History
+
+### v2.0.0 (April 5, 2026)
+
+**Deep Debt Resolution + Public Readiness Sprint**
+
+- bingoCube: A (maintained) — public-readiness scrub, 83.4% coverage, shell.rs refactored, internal docs removed
+- benchScale: B → A — public-readiness scrub, 61.9% coverage (was 35.5%), unsafe evolution (EnvGuard, LeaseList, nix kill), thiserror 2.0, large file refactoring, all #[allow( → #[expect(
+- agentReagents: B → A — public-readiness scrub, 60.2% coverage (was 7.1%), capability-based RegistrationSettings, all #[allow( → #[expect(
+- rustChip: B (maintained) — 31 unsafe SAFETY docs, deny(unsafe_op_in_unsafe_fn), large file refactoring, mock/stub renaming
+- All 3 public-bound tools (bingoCube, benchScale, agentReagents) now at Grade A with >=60% test coverage
+- tarpaulin.toml fail-under=60.0 added to all 3 public-bound repos
+- C dependencies documented in deny.toml across all tools
 
 ### v1.1.0 (April 4, 2026)
 
