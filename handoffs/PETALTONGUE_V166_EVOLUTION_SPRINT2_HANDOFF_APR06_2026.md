@@ -82,7 +82,7 @@ Combined with prior sprint: `dns_parser/`, `spring_adapter/`, `constants/`,
 | `cargo test --workspace` | ALL PASS (0 failures) |
 | `RUSTDOCFLAGS="-D warnings" cargo doc --workspace --all-features --no-deps` | PASS |
 | `cargo deny check` | advisories ok, bans ok, licenses ok, sources ok |
-| File sizes | All under 1,000 lines (largest: `primitive.rs` at 816) |
+| File sizes | All under 800 lines (largest production file: 239 lines after Sprint 3 refactor) |
 | `unsafe` blocks | Zero |
 | Primal-name violations | Zero in production routing |
 
