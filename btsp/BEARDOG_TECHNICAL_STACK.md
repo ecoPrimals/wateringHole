@@ -1,441 +1,250 @@
-# 🐻 BearDog Technical Stack & Plans (BTSP)
+# BearDog Technical Stack & Plans (BTSP)
 
-**Version**: 0.9.0 (Wave 26 — Deep Debt Evolution)  
-**Last Updated**: April 2, 2026  
+**Version**: 0.9.0 (Wave 28 — Deep Debt Evolution)
+**Last Updated**: April 2, 2026
 **Status**: Production Ready
 
 ---
 
-## 🎯 Purpose
+## Purpose
 
-BearDog is the **genetic lineage keeper** and **cryptographic foundation** of the ecoPrimal ecosystem. It provides:
+BearDog is the **sovereign genetic cryptography primal** for the ecoPrimals ecosystem. It provides:
 
-1. **Family Seed Management** - Secure storage and access to genetic lineage
-2. **BirdSong Encryption/Decryption** - Cryptographic services for encrypted discovery
-3. **Identity Attestation** - Family membership verification
-4. **Trust Evaluation** - Genetic lineage validation
+1. **Cryptographic Operations** — Ed25519, X25519, ChaCha20-Poly1305, AES-GCM, BLAKE3, SHA-256/384/512, SHA3-256, HMAC, HKDF, TLS key derivation, Tor onion/ntor/cell crypto, post-quantum (ML-KEM, ML-DSA, SPHINCS+)
+2. **Identity & Lineage** — Family seed management, lineage key derivation, genetic entropy, trust evaluation
+3. **Hardware Security** — HSM abstraction (RustCrypto software, PKCS#11, Android StrongBox, TPM Phase 2)
+4. **Secret Storage** — Encrypted secrets with family-scoped ChaCha20-Poly1305 keys
+5. **Dark Forest Beacon** — Zero metadata leakage discovery protocol
 
----
-
-## 🏗️ Architecture
-
-### Core Components
-
-```
-BearDog v0.15.0
-├── Family Seed Storage (secure, encrypted)
-├── BirdSong v2 API
-│   ├── /api/v2/birdsong/encrypt
-│   └── /api/v2/birdsong/decrypt
-├── BirdSong v1 API (legacy, deprecated)
-│   ├── /api/v1/birdsong/encrypt
-│   └── /api/v1/birdsong/decrypt
-├── Identity API
-│   ├── /api/v1/identity
-│   └── /api/v1/health
-└── Trust Evaluation Engine
-```
-
-### Technology Stack
-
-- **Language**: Rust (edition 2021)
-- **Crypto**: ChaCha20-Poly1305 (AEAD)
-- **Serialization**: serde_json, base64
-- **API**: HTTP REST endpoints
-- **Storage**: Encrypted local storage
-- **Port**: 9000 (default, configurable via `HTTP_PORT`)
+All primals delegate crypto to BearDog via the **Tower Atomic Pattern** (JSON-RPC 2.0 over NDJSON), keeping a single auditable crypto codebase across the ecosystem.
 
 ---
 
-## 🔐 BirdSong API Specification
+## Technology Stack
 
-### Version 2 (v2) - Current Standard
-
-#### Encrypt Endpoint
-
-```http
-POST /api/v2/birdsong/encrypt
-Content-Type: application/json
-
-{
-  "plaintext": "<base64-encoded-binary-data>",
-  "family_id": "your-family-id"
-}
-```
-
-**Response**:
-```json
-{
-  "success": true,
-  "data": {
-    "ciphertext": "<base64-encoded-encrypted-data>",
-    "family_id": "your-family-id",
-    "nonce": "<base64-encoded-nonce>"
-  }
-}
-```
-
-**Note**: `plaintext` and `ciphertext` MUST be base64-encoded `Vec<u8>`, not raw strings.
-
-#### Decrypt Endpoint
-
-```http
-POST /api/v2/birdsong/decrypt
-Content-Type: application/json
-
-{
-  "ciphertext": "<base64-encoded-encrypted-data>",
-  "family_id": "your-family-id",
-  "nonce": "<base64-encoded-nonce>"
-}
-```
-
-**Response**:
-```json
-{
-  "success": true,
-  "data": {
-    "plaintext": "<base64-encoded-decrypted-data>",
-    "family_id": "your-family-id"
-  }
-}
-```
-
-### Version 1 (v1) - Legacy (Deprecated)
-
-Same endpoints at `/api/v1/birdsong/encrypt` and `/api/v1/birdsong/decrypt`.
-
-**Differences**:
-- v1: Returns `"encrypted"` field
-- v2: Returns `"ciphertext"` field
-- v1: No response wrapper
-- v2: Wrapped in `{"success": true, "data": {...}}`
-
-**Migration**: Use adaptive client pattern (see biomeOS adaptive_client.rs)
+| Component | Technology |
+|-----------|-----------|
+| **Language** | Rust (edition 2024, MSRV 1.93.0, `rust-toolchain.toml` pinned) |
+| **Crypto** | RustCrypto suite (100% pure Rust, zero C dependencies) |
+| **IPC** | JSON-RPC 2.0 over NDJSON (Unix sockets / TCP / named pipes / abstract sockets) |
+| **Optional IPC** | tarpc (feature-gated, Rust-to-Rust high-performance) |
+| **Serialization** | serde_json (wire), postcard (binary), serde_yaml (config) |
+| **Binary** | UniBin architecture — single `beardog` binary with subcommands |
+| **License** | AGPL-3.0-or-later (SPDX headers on all source files) |
 
 ---
 
-## 🔑 Family Seed Management
+## Architecture
 
-### Environment Variables (Secure Method)
+### Crate Organization (29 workspace crates)
+
+**Core Runtime**: `beardog` (binary), `beardog-core`, `beardog-tunnel`, `beardog-ipc`, `beardog-cli`, `beardog-client`
+
+**Type System**: `beardog-types`, `beardog-config`, `beardog-errors`, `beardog-traits`
+
+**Security**: `beardog-security`, `beardog-genetics`, `beardog-hid`, `beardog-auth`, `beardog-threat`
+
+**Infrastructure**: `beardog-monitoring`, `beardog-workflows`, `beardog-adapters`, `beardog-capabilities`, `beardog-discovery`, `beardog-utils`
+
+**Deployment**: `beardog-production`, `beardog-installer`, `beardog-compliance`, `beardog-node-registry`, `beardog-tower-atomic`, `beardog-integration-tests`
+
+**Excluded from workspace**: `beardog-integration` (HTTP overstep), `beardog-deploy` (tooling exception)
+
+### Wire Protocol
+
+All transports use **NDJSON** (newline-delimited JSON-RPC 2.0). Each request is a single JSON object terminated by `\n`. Idle connections time out after 30 seconds.
+
+```
+┌─────────────┐                    ┌─────────────┐
+│  Any Primal │ ←─ JSON-RPC ────→ │  BearDog    │
+│ (Protocol)  │  NDJSON framing    │  (Crypto)   │
+└─────────────┘                    └─────────────┘
+     Zero crypto code                 93 crypto methods
+```
+
+### JSON-RPC Method Domains (93 methods)
+
+```
+crypto.*       - Hash, sign, verify, encrypt, decrypt, key exchange
+tls.*          - TLS 1.2/1.3 key derivation and handshake
+tor.*          - Onion identity, ntor, cell crypto
+genetic.*      - Lineage keys, beacon, challenge-response
+secrets.*      - Store, retrieve, list, delete encrypted secrets
+relay.*        - Lineage-gated relay authorization (coordinated punch)
+beacon.*       - Dark Forest beacon generation, encryption, meeting exchange
+btsp.*         - Secure tunnel configuration
+quantum.*      - Post-quantum cryptographic operations
+```
+
+Introspection: `discover_capabilities`, `primal.info`, `rpc.methods`
+
+Canonical names use `domain.operation` form. Legacy flat aliases (`ping`, `capabilities`, `health`, `identity`) are deprecated.
+
+### HSM Abstraction
+
+```
+HsmKeyProvider (beardog-traits::hsm)
+├── RustSoftwareHsm         (RustCrypto, always available)
+├── AndroidStrongBoxHsm     (JNI bridge, cfg(target_os = "android"))
+├── Pkcs11Provider           (Phase 2: pure Rust pkcs11 crate)
+└── TpmProvider              (Phase 2: pure Rust tss-esapi)
+
+HsmProviderRegistry → discover() → select(PreferHardware | RequireHardware | SoftwareOnly)
+```
+
+### Multi-Family Isolation
 
 ```bash
-# Required for encryption/decryption
-export BEARDOG_FAMILY_ID="your-family-id"
-export BEARDOG_FAMILY_SEED="<base64-encoded-seed>"
-
-# Optional
-export HTTP_PORT=9000
-export RUST_LOG=beardog=debug
-```
-
-### Security Requirements
-
-1. **Never log family seeds** - Always redact in logs
-2. **Encrypt at rest** - Store seeds encrypted on disk
-3. **Zero-copy when possible** - Minimize seed exposure in memory
-4. **Auto-zeroize** - Clear sensitive data from memory on drop
-5. **Restrict access** - File permissions 600 for seed files
-
-### Current Implementation
-
-**Status**: ⚠️ **NEEDS IMPROVEMENT**
-
-Current gaps identified (Jan 3, 2026):
-- ✅ Environment variable support working
-- ⚠️ Plaintext seed in USB config (needs encryption)
-- ⚠️ No auto-zeroization (should use `zeroize` crate)
-- ⚠️ Seeds may be logged in debug mode
-
-**Recommendation**: Adopt biomeOS `FamilyCredentials` pattern
-- Uses `zeroize` crate for auto-zeroization
-- Never logs seed data (debug prints `[REDACTED]`)
-- Secure by default
-
-See: `biomeOS/crates/biomeos-core/src/family_credentials.rs`
-
----
-
-## 🚀 Deployment
-
-### Starting BearDog
-
-```bash
-# With environment variables (recommended)
-export BEARDOG_FAMILY_ID="your-family-id"
-export BEARDOG_FAMILY_SEED="your-base64-seed"
-export HTTP_PORT=9000
-
-./beardog-server-v0.15.0-with-v2-api
-```
-
-### Startup Script
-
-```bash
-#!/bin/bash
-# start-beardog-server.sh
-
-export BEARDOG_FAMILY_ID="${FAMILY_ID}"
-export BEARDOG_FAMILY_SEED="${FAMILY_SEED}"
-export HTTP_PORT="${BEARDOG_PORT:-9000}"
-export RUST_LOG="beardog=info,tower=info"
-
-exec ./beardog-server-v0.15.0-with-v2-api
-```
-
-### Health Check
-
-```bash
-curl http://localhost:9000/api/v1/health
-```
-
-Expected response:
-```json
-{
-  "status": "healthy",
-  "family_id": "your-family-id",
-  "version": "0.15.0"
-}
+./beardog server --family-id alpha   # beardog-alpha.sock, own key material
+./beardog server --family-id bravo   # beardog-bravo.sock, fully isolated
 ```
 
 ---
 
-## 🧪 Testing
+## Platform Support
 
-### Manual Test (Encrypt)
-
-```bash
-# Prepare test data
-echo -n "test message" | base64  # dGVzdCBtZXNzYWdl
-
-# Call encrypt API
-curl -X POST http://localhost:9000/api/v2/birdsong/encrypt \
-  -H "Content-Type: application/json" \
-  -d '{
-    "plaintext": "dGVzdCBtZXNzYWdl",
-    "family_id": "your-family-id"
-  }'
-```
-
-### Manual Test (Decrypt)
-
-```bash
-# Use ciphertext from encrypt response
-curl -X POST http://localhost:9000/api/v2/birdsong/decrypt \
-  -H "Content-Type: application/json" \
-  -d '{
-    "ciphertext": "<encrypted-data>",
-    "family_id": "your-family-id",
-    "nonce": "<nonce-from-encrypt>"
-  }'
-```
-
-### Integration with Songbird
-
-**Status**: ✅ Working (Songbird v3.6)
-
-Songbird v3.6 successfully:
-- Calls BearDog encryption API
-- Uses correct base64 serialization
-- Handles response wrapper
-- Sends encrypted BirdSongPackets
+| Platform | Transport | Status |
+|----------|-----------|--------|
+| Linux (x86_64, ARM64) | Unix sockets | Production |
+| macOS (Intel, M-series) | Unix sockets | Production |
+| Android (ARM64) | Abstract sockets + TCP | Production |
+| Windows (x86_64, ARM64) | Named pipes + TCP | Ready |
+| iOS (ARM64) | TCP | Ready |
 
 ---
 
-## 📋 Technical Debt & Roadmap
+## Quality Metrics
 
-### High Priority (Security)
-
-1. **Encrypted Family Seed Storage** ⚠️
-   - Current: Plaintext in USB config
-   - Needed: Encrypted file with password/key derivation
-   - Effort: 2-3 days
-   - Impact: Critical for production
-
-2. **Auto-Zeroizing Credentials** ⚠️
-   - Current: Seeds may persist in memory
-   - Needed: `zeroize` crate integration
-   - Effort: 1 day
-   - Impact: High security improvement
-
-3. **Audit Logging** ⚠️
-   - Current: May log sensitive data
-   - Needed: Structured logging with redaction
-   - Effort: 1-2 days
-   - Impact: High for compliance
-
-### Medium Priority (Scaling)
-
-4. **Dynamic Port Allocation**
-   - Current: Hardcoded port 9000
-   - Needed: `HTTP_PORT=0` support for OS allocation
-   - Effort: 1 day
-   - Impact: Enables fractal scaling
-
-5. **Multi-Family Support**
-   - Current: Single family per instance
-   - Needed: Multiple families with isolation
-   - Effort: 3-5 days
-   - Impact: Enables federation
-
-### Low Priority (Features)
-
-6. **Key Rotation**
-   - Current: Static family seed
-   - Needed: Periodic key rotation support
-   - Effort: 5-7 days
-   - Impact: Enhanced security posture
-
-7. **HSM Integration**
-   - Current: Software-only crypto
-   - Needed: Hardware security module support
-   - Effort: 7-10 days
-   - Impact: Enterprise-grade security
+| Metric | Value |
+|--------|-------|
+| **Build** | Clean, 0 errors |
+| **Clippy** | 0 warnings (pedantic + nursery + all cast lints + `doc_markdown` + `missing_errors_doc` + unwrap/expect warn) |
+| **Missing Docs** | 0 warnings |
+| **Pure Rust** | 100% — zero C dependencies |
+| **Unsafe Code** | 0 production blocks (`forbid(unsafe_code)` workspace-wide) |
+| **Format** | `cargo fmt` clean |
+| **Tests** | 14,366+ (concurrent; 35 `#[serial]` in `beardog-production`) |
+| **Coverage** | 90.16% line (llvm-cov workspace) |
+| **cargo deny** | 4/4 pass (1 advisory ignore: RSA Marvin, 15 transitive version-skips) |
+| **License** | AGPL-3.0-or-later (SPDX headers on all .rs files) |
+| **Files > 1000 LOC** | 0 (production) |
+| **TODO/FIXME** | 0 |
 
 ---
 
-## 🔗 Integration Patterns
+## Security Posture
 
-### For Songbird (Discovery)
+- **Zero unsafe code** — `forbid(unsafe_code)` workspace-wide
+- **Zero panic paths** — No `unwrap()` in production; `expect()` only on documented invariants
+- **Constant-time** — `subtle::ConstantTimeEq` for secrets
+- **Zeroize** — Sensitive memory cleared on drop
+- **Typed errors** — `BearDogError` throughout; no `Box<dyn Error>` in public APIs
+- **Self-knowledge only** — BearDog discovers peers at runtime via capability registry; no hardcoded primal names
+- **Dependency injection** — Pure `Default`, `from_env()` at boundaries
 
-```rust
-// Songbird calls BearDog to encrypt discovery packets
-let client = BirdSongClient::new("http://localhost:9000");
-let encrypted = client.encrypt(packet_data, family_id).await?;
+### Known Advisory
 
-// Send encrypted packet over UDP
-send_birdsong_packet(encrypted);
-```
-
-### For biomeOS (Orchestration)
-
-```rust
-// biomeOS discovers BearDog via HTTP
-let beardog_info = http_discovery
-    .discover("http://localhost:9000")
-    .await?;
-
-// Check family membership
-if beardog_info.family_id == expected_family {
-    // Establish trust
-}
-```
-
-### For PetalTongue (Visualization)
-
-```
-GET /api/v1/identity
-→ Display BearDog as genetic lineage keeper
-→ Show family_id and trust status
-```
+**RSA Timing Sidechannel (RUSTSEC-2023-0071)**: Acknowledged, monitoring for upstream fix. RSA operations use random blinding.
 
 ---
 
-## 🌍 Ecosystem Role
-
-### As Genetic Lineage Keeper
-
-- **Provides**: Cryptographic foundation for family trust
-- **Validates**: Family membership via shared secrets
-- **Enables**: Auto-trust within genetic lineage
-- **Protects**: Family seed from unauthorized access
-
-### Interaction with Other Primals
-
-```
-BearDog (Genetic Keeper)
-  ↓ Encryption API
-Songbird (Discovery) → Encrypted BirdSongPackets → Other Towers
-  ↓ Discovery Results
-biomeOS (Orchestration) → Trust Evaluation → Ecosystem Graph
-  ↓ Real-time Events
-PetalTongue (Visualization) → User Interface
-```
-
----
-
-## 📊 Current Status
-
-### Production Readiness
-
-| Component | Status | Notes |
-|-----------|--------|-------|
-| BirdSong v2 API | ✅ Working | Verified with Songbird v3.6 |
-| Encryption | ✅ Working | ChaCha20-Poly1305 |
-| Decryption | ✅ Working | Roundtrip verified |
-| Identity API | ✅ Working | Returns family_id |
-| Health Check | ✅ Working | HTTP endpoint |
-| Family Seed Storage | ⚠️ Needs Work | Plaintext, no zeroization |
-| Dynamic Ports | ❌ Not Supported | Hardcoded port 9000 |
-| Multi-Family | ❌ Not Supported | Single family per instance |
-
-**Overall**: **75% Production Ready**
-
----
-
-## 🎓 For Developers
+## Deployment
 
 ### Quick Start
 
-1. Set environment variables (family_id, seed)
-2. Start BearDog server
-3. Verify health endpoint
-4. Test encrypt/decrypt roundtrip
-5. Integrate with your primal
+```bash
+# Build
+cargo build --release
 
-### Code References
+# Run (auto-detects platform transport)
+./beardog server
 
-**BearDog v0.15.0**:
-- Binary: `ecoPrimals/phase1/beardog/primalBins/beardog-server-v0.15.0-with-v2-api`
-- Startup: `ecoPrimals/phase1/beardog/start-beardog-server.sh`
+# With family isolation
+./beardog server --family-id alpha
 
-**Adaptive Client (biomeOS)**:
-- Implementation: `biomeOS/crates/biomeos-core/src/adaptive_client.rs`
-- Usage: Handles both v1 and v2 API versions
+# Custom socket path
+./beardog server --socket /custom/path.sock
 
-**Secure Credentials (biomeOS)**:
-- Implementation: `biomeOS/crates/biomeos-core/src/family_credentials.rs`
-- Pattern: Auto-zeroizing, never logs secrets
+# TCP transport
+./beardog server --listen 0.0.0.0:9900
+```
 
-### Common Issues
+### Binary Targets
 
-**Issue**: "No family_id available from encryption provider"
-- **Cause**: BearDog not receiving environment variables
-- **Fix**: Export `BEARDOG_FAMILY_ID` and `BEARDOG_FAMILY_SEED` before starting
+| Binary | Purpose |
+|--------|---------|
+| `beardog` | Primary UniBin (server, client, key ops, doctor, capabilities) |
+| `beardog-installer` | Tooling exception: deployment and validation on target devices |
+| `deploy-pixel8` | Tooling exception: Android adb-based deployment helper |
 
-**Issue**: "Invalid byte 95, offset 4" (Base64 error)
-- **Cause**: Sending string instead of base64-encoded binary
-- **Fix**: Encode as base64 before sending to API
+### Docker
 
-**Issue**: Port conflict
-- **Cause**: Another process using port 9000
-- **Fix**: Change `HTTP_PORT` or kill conflicting process
+```bash
+docker build -t beardog .
+docker run -e PRIMAL_NAME=beardog beardog server
+```
 
----
+### Environment Variables
 
-## 💡 Best Practices
-
-### For Primal Developers
-
-1. **Always use base64** for binary data in API calls
-2. **Handle both v1 and v2** APIs (use adaptive client pattern)
-3. **Never log family seeds** in any context
-4. **Verify health endpoint** before making crypto calls
-5. **Cache BearDog endpoint** after discovery
-
-### For Operators
-
-1. **Secure family seeds** with file permissions 600
-2. **Use environment variables** over config files
-3. **Monitor health endpoint** for availability
-4. **Rotate logs** to prevent seed leakage
-5. **Restrict network access** to trusted primals only
+| Variable | Purpose | Default |
+|----------|---------|---------|
+| `PRIMAL_NAME` | Primal identity | `beardog` |
+| `FAMILY_ID` | Family identifier | (none) |
+| `NODE_ID` | Node identifier | (random) |
+| `BEARDOG_SOCKET` | Socket path override | auto-detected |
+| `BEARDOG_PORT` | Listening port | OS-assigned |
+| `BEARDOG_HSM_MODE` | HSM backend selection | `software` |
 
 ---
 
-**Status**: ✅ **PRODUCTION READY FOR SINGLE-FAMILY USE**  
-**Next**: Address security gaps (encrypted storage, zeroization)  
-**Goal**: Enable secure multi-family auto-trust federation
+## Architectural Compliance
 
-🐻 **BearDog: The Genetic Foundation of ecoPrimals** 🔐
+| Standard | Status |
+|----------|--------|
+| UniBin/ecoBin | Single binary, standalone identity fallback, cross-compilation ready |
+| JSON-RPC 2.0 | Primary IPC with NDJSON framing and batch support |
+| tarpc | Optional behind feature gate in `beardog-ipc` |
+| Pure Rust | Zero C dependencies; `blake3` pure feature; ecoBin compliant |
+| Self-Knowledge | Primals discover peers at runtime via capability registry |
+| Zero Hardcoding | Named constants + env override + capability discovery |
+| `forbid(unsafe_code)` | Workspace level + every crate `lib.rs` |
+| Workspace Lints | Centralized clippy pedantic + nursery + all cast lints |
+| AGPL-3.0-or-later | SPDX headers on all source files |
 
+---
+
+## Recent Evolution (April 2, 2026)
+
+### Wave 28: Self-Knowledge, Error Typing, Hardcoding
+
+- Removed deprecated `SongbirdClient` type alias; genericized cross-primal references
+- `Box<dyn Error>` → `BearDogError` in AI hybrid intelligence public APIs
+- Feature flag `advanced-nestgate` → `advanced-registry`
+
+### Wave 27: License, Lint Migration, Deprecation
+
+- License migrated from `AGPL-3.0-only` to `AGPL-3.0-or-later` across all files
+- `#[allow()]` → `#[expect(reason)]` migration (49 non-test attributes)
+- Legacy flat method aliases documented as deprecated
+
+### Wave 26: Stub Completion, Dependency Alignment
+
+- `handle_key_info` and client JSON-RPC dispatch evolved from stubs to real implementations
+- Orphaned entropy modules compiled and fixed
+- AI tree (11.9K LOC) feature-gated behind `ai` Cargo feature
+- `deny.toml` skip-list reduced from 30 to 15
+
+---
+
+## Future Work
+
+These are enhancements — nothing blocks production use.
+
+- **Secret Storage Evolution** — Persistent NestGate-backed storage via capability discovery (pattern already implemented)
+- **Graph Security Phase 2-3** — Public key infrastructure, signature verification chains
+- **Semantic Method Naming Phase 3** — Generic `crypto.encrypt` + algorithm parameter (ecosystem coordination)
+- **PKCS#11 / TPM Phase 2** — Full hardware crypto via pure Rust crates (`pkcs11`, `tss-esapi`)
+
+---
+
+**Status**: PRODUCTION READY
