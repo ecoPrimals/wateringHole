@@ -227,7 +227,7 @@ Deploy graphs should **never** route a concern to a primal listed as OVERSTEP. U
 | petalTongue | CLEAN | PASS | PASS (6K) | **P→C** | PT-04/06 resolved; discovery renames landed |
 | Squirrel | CLEAN | PASS | PASS (6.9K) | **P** | Build FIXED (alpha.36); sled/crypto overstep |
 | rhizoCrypt | CLEAN | PASS | PASS | **C** | — |
-| loamSpine | CLEAN | PASS | PASS | **C** | Missing `--port` alias |
+| loamSpine | CLEAN | PASS | PASS | **C** | `--port` alias shipped (v0.9.15); public chain anchor (v0.9.16) |
 | sweetGrass | 1 warn | PASS | PASS | **C** | Missing `--port` alias |
 | barraCuda | 1 lint | PASS | PASS (3.8K) | n/a | SIGSEGV resolved; unfulfilled lint expectation |
 | sourDough | CLEAN | PASS | PASS (239) | **C** | Missing `deny.toml`; musl/signing |

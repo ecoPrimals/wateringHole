@@ -389,7 +389,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **petalTongue** | Discovery: 982 primal-name refs | No CONTEXT.md | 32 `#[allow(` → `#[expect(` |
 | **rhizoCrypt** | Health triad missing on live binary | musl binary is glibc (needs musl-static) | No domain symlink |
 | **sweetGrass** | No `--port` (HTTP-only TCP) | Health triad HTTP-only (not newline) | License → `-or-later` |
-| **LoamSpine** | **tokio runtime crash** (blocks deployment) | No `--port` (uses `--jsonrpc-port`) | musl binary is glibc |
+| **LoamSpine** | — (LS-03 resolved v0.9.15) | `--port` alias shipped (v0.9.15) | musl binary is glibc |
 | **bingoCube** | — (all debt resolved) | — | — |
 | **sourDough** | No SPDX headers | No CONTEXT.md | No `deny.toml` |
 
@@ -490,7 +490,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough — no server mode).
 - **Squirrel**: Healthy on abstract socket `@squirrel`. No filesystem socket created — invisible to `readdir()` discovery. `health.liveness` returns `{"alive":true}` via abstract socket.
 - **rhizoCrypt**: Starts on TCP 9700 (tarpc) + 9701 (HTTP JSON-RPC). Standard health triad not exposed on either. tarpc is binary protocol, HTTP requires HTTP framing (not newline). Needs newline JSON-RPC surface with health triad.
 - **sweetGrass**: HTTP REST `/health` and `POST /jsonrpc` both respond. Health triad accessible via HTTP but not via newline-delimited TCP. Needs `--port` alias and newline framing option.
-- **LoamSpine**: **CRASH** — tokio runtime nesting bug in `infant_discovery.rs:233` (`block_on` inside existing runtime). Source fix required before deployment validation can proceed. CLI also uses `--jsonrpc-port` instead of `--port`.
+- **LoamSpine**: **FIXED** (v0.9.15) — tokio runtime nesting resolved (`block_on` → `tokio::spawn`). `--port` alias shipped. Startup graceful degradation confirmed. Re-validation needed for deployment tier.
 
 ### Transport Diversity (Live Observed)
 
@@ -501,7 +501,7 @@ toadstool:   UDS newline JSON-RPC (custom methods) + tarpc UDS
 squirrel:    Abstract socket newline JSON-RPC
 rhizocrypt:  tarpc TCP + HTTP JSON-RPC TCP
 sweetgrass:  HTTP REST + HTTP JSON-RPC + tarpc + UDS
-loamspine:   (crashed — tarpc + JSON-RPC planned)
+loamspine:   tarpc TCP + JSON-RPC TCP (LS-03 fixed v0.9.15)
 ```
 
 Five distinct transport patterns across 7 tested primals. Standards require
@@ -537,12 +537,12 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 
 - Added Tier 10: Live Deployment tier sourced from `DEPLOYMENT_VALIDATION_STANDARD.md`
 - Data from plasmidBin v2026.03.25 end-to-end validation (fetch → start → probe)
-- 10 binaries fetched, 7 started, 5 healthy, 1 partial (rhizoCrypt), 1 crash (LoamSpine)
+- 10 binaries fetched, 7 started, 5 healthy, 1 partial (rhizoCrypt), 1 crash (LoamSpine — resolved v0.9.15)
 - Transport diversity documented: 5 distinct patterns across 7 tested primals
 - Only BearDog fully passes `benchscale validate ipc` on TCP
-- LoamSpine F: tokio runtime nesting crash blocks all deployment validation
+- LoamSpine F → resolved: tokio nesting crash fixed in v0.9.15; re-validation pending
 - Summary table expanded from 9 to 10 tiers
-- Rollup adjusted: rhizoCrypt A → B (health triad missing on live binary), LoamSpine B → C (crash)
+- Rollup adjusted: rhizoCrypt A → B (health triad missing on live binary), LoamSpine B → C (crash — now resolved, pending re-validation)
 
 ### v2.1.0 (April 5, 2026)
 

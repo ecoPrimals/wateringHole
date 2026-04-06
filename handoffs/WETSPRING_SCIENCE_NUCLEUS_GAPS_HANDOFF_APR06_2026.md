@@ -92,14 +92,15 @@ This is the first spring to attempt the full NUCLEUS pattern against real scienc
 
 ---
 
-## Gap 4: Public Chain Anchor for Provenance
+## Gap 4: Public Chain Anchor for Provenance — **CLOSED**
 
-**Owner:** loamSpine team (Paper 20 Section 6 — marked "Needed")
-**Priority:** MEDIUM — blocks external verification
+**Owner:** loamSpine team (Paper 20 Section 6 — marked "Needed")  
+**Priority:** ~~MEDIUM — blocks external verification~~ **RESOLVED** (loamSpine v0.9.16)  
+**Resolution:** See `LOAMSPINE_V0916_PUBLIC_CHAIN_ANCHOR_HANDOFF_APR06_2026.md`
 
 **Problem:** The provenance trio produces rhizoCrypt DAG sessions, loamSpine ledger commits, and sweetGrass semantic braids. These are verifiable within the ecosystem trust boundary. Without a public anchor (timestamp service, blockchain, etc.), external parties must trust the ecosystem's own ledger.
 
-**Request:** loamSpine team to define the public anchoring mechanism. wetSpring's `verify_url` pattern in Tier 3 provenance is ready to link to it.
+**Resolution detail:** loamSpine v0.9.16 implements `anchor.publish` / `anchor.verify` (JSON-RPC + tarpc). `PublicChainAnchor` entry type records receipts from any append-only ledger. Chain submission is delegated to a capability-discovered `"chain-anchor"` primal. wetSpring Tier 3 `verify_url` can now link to `anchor.verify`.
 
 ---
 

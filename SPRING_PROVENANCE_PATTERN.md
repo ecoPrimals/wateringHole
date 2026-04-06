@@ -49,7 +49,7 @@ When full provenance export is available:
 
 - PROV-O export via `capability_call("attribution", "export_provo", ...)`
 - `verify_url` — public verification endpoint
-- Optional: public chain anchor when loamSpine supports it
+- Public chain anchor: loamSpine v0.9.16 `anchor.publish` / `anchor.verify` — records receipts from external ledgers; chain submission via capability-discovered `"chain-anchor"` primal
 
 ## Graceful degradation contract
 
