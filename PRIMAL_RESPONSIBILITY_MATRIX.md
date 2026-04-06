@@ -231,7 +231,7 @@ Deploy graphs should **never** route a concern to a primal listed as OVERSTEP. U
 | sweetGrass | 1 warn | PASS | PASS | **C** | Missing `--port` alias |
 | barraCuda | 1 lint | PASS | PASS (3.8K) | n/a | SIGSEGV resolved; unfulfilled lint expectation |
 | sourDough | CLEAN | PASS | PASS (239) | **C** | Missing `deny.toml`; musl/signing |
-| coralReef | CLEAN | PASS | PASS (4.3K) | **C** | First audit — zero discovery violations |
+| coralReef | CLEAN | PASS | PASS (4.4K) | **C** | Iter 76 — license AGPL-3.0-or-later, `unsafe_code = "deny"`, smart refactoring, zero discovery violations |
 | skunkBat | n/c | n/c | n/c | n/c | Nascent — spec only |
 
 **Discovery legend**: **C** = compliant, **P** = partial, **X** = non-compliant
