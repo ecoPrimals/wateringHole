@@ -28,5 +28,9 @@ ingress:
   - hostname: beacon.nestgate.io
     service: unix:${XDG_RUNTIME_DIR}/biomeos/biomeos-api-${FAMILY_ID}.sock
 
+  # primals.eco live science facade — Dark Forest gated at the facade process
+  - hostname: lab.primals.eco
+    service: http://127.0.0.1:3100
+
   # Catch-all: reject everything else
   - service: http_status:404
