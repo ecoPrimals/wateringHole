@@ -98,7 +98,7 @@ The Toadstool-specific `.jsonrpc.sock` health check is now convention-based: any
 
 | Metric | Value |
 |--------|-------|
-| Tests passing | 7,654 (0 failures) |
+| Tests passing | 7,658 (0 failures) |
 | Clippy warnings | 0 (pedantic + nursery) |
 | Unsafe code | 0 (`#![forbid(unsafe_code)]` all crates) |
 | Files > 1000 LOC | 0 |

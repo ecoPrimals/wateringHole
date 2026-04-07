@@ -4,7 +4,7 @@
 **Date**: April 6, 2026
 **From**: SweetGrass
 **To**: All Springs, All Primals, biomeOS
-**Status**: Complete — 1,190 tests, 90.90% region coverage, all checks green
+**Status**: Complete — 1,190+ tests, 90.90% region coverage, GAP-MATRIX-05 RESOLVED, all checks green
 
 **Supersedes**: `SWEETGRASS_V0727_DEEP_DEBT_EVOLUTION_HANDOFF_MAR31_2026.md` (archived)
 
@@ -196,6 +196,34 @@ strengthened error path coverage, cleaned zero-allocation witness vocabulary.
 | **Dep hygiene** | `serial_test` removed from service (unused) |
 
 **Metrics**: 1,190 tests (was 1,181), 151 .rs files (42,161 LOC), proptest in 5 crates
+
+---
+
+## Phase 8 — GAP-MATRIX-05 Live Validation (April 7, 2026)
+
+sweetGrass live-tested through UDS JSON-RPC per primalSpring v0.9.3 gap matrix.
+
+### Validation Results
+
+| Probe | Socket | Result |
+|-------|--------|--------|
+| `identity.get` | `sweetgrass.sock` | `{"name":"sweetgrass","version":"0.7.27"}` |
+| `health.liveness` | `sweetgrass.sock` | `{"alive":true}` |
+| `health.readiness` | `sweetgrass.sock` | `{"ready":true}` |
+| `health.check` | `sweetgrass.sock` | `{"status":"healthy","store_status":"ok","braid_count":0,"version":"0.7.27"}` |
+| `capabilities.list` | `sweetgrass.sock` | 28 methods, 12 domains |
+| `capability.list` | `sweetgrass.sock` | 28 methods (alias confirmed) |
+| `identity.get` | `provenance.sock` | Same (capability symlink validated) |
+
+### Changes
+
+- **Added `identity.get`** — new JSON-RPC method returning primal name + version for biomeOS Neural API observability. biomeOS probes this alongside `capabilities.list` for routing table construction.
+- **28 methods** in dispatch table (was 27): added `identity.get` to METHODS table, niche CAPABILITIES, operation_dependencies, cost_estimates, and semantic_mappings.
+- **Wire format**: `capabilities.list` result contains `methods` and `capabilities` as flat string arrays (Format A data in structured envelope), plus `domains` (grouped map). biomeOS's 5-format parser extracts from `result.methods` / `result.capabilities`.
+- **No CLI flags needed**: UDS listener starts automatically with `sweetgrass server`. Socket path controlled by `SWEETGRASS_SOCKET` env var (or falls back to `BIOMEOS_SOCKET_DIR`, `XDG_RUNTIME_DIR`, `TMPDIR`).
+- **Capability symlink**: `provenance.sock -> sweetgrass.sock` created automatically per `CAPABILITY_BASED_DISCOVERY_STANDARD v1.1`.
+
+### GAP-MATRIX-05 Status: RESOLVED for sweetGrass
 
 ---
 
