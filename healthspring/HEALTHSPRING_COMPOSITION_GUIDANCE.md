@@ -1,7 +1,7 @@
 # healthSpring — Composition Guidance for Springs and Primals
 
-**Date**: March 17, 2026
-**From**: healthSpring V34
+**Date**: April 7, 2026
+**From**: healthSpring V47
 **License**: AGPL-3.0-or-later
 
 ---
@@ -19,23 +19,28 @@ Each primal in the ecosystem should write an equivalent document. No primal know
 
 ## 1. healthSpring Solo — Self-Knowledge Capabilities
 
-healthSpring is a health science compute primal. It owns the `health` domain and advertises 79 capabilities across 8 categories.
+healthSpring is a health science compute primal. It owns the `health` domain and advertises 58 science capabilities across 10 domains, plus infrastructure and composition health.
 
 ### Science Capabilities (What We Compute)
 
-| Domain | Capabilities | Use Cases |
-|--------|-------------|-----------|
-| **PK/PD** | `science.pkpd.hill_dose_response`, `one_compartment_pk`, `two_compartment_pk`, `pbpk_simulate`, `population_pk`, `michaelis_menten_nonlinear`, `allometric_scale`, `auc_trapezoidal`, `nlme_foce`, `nlme_saem`, `nca_analysis`, `cwres_diagnostics`, `vpc_simulate`, `gof_compute` | Drug dosing, pharmacokinetic simulation, population modeling, nonlinear mixed-effects, visual predictive checks |
-| **Microbiome** | `science.microbiome.shannon_index`, `simpson_index`, `pielou_evenness`, `chao1`, `anderson_gut`, `colonization_resistance`, `fmt_blend`, `bray_curtis`, `antibiotic_perturbation`, `scfa_production`, `gut_brain_serotonin`, `qs_gene_profile`, `qs_effective_disorder` | Gut diversity, C. difficile resistance, FMT optimization, quorum sensing, short-chain fatty acid modeling |
-| **Biosignal** | `science.biosignal.pan_tompkins`, `hrv_metrics`, `ppg_spo2`, `eda_analysis`, `eda_stress_detection`, `arrhythmia_classification`, `fuse_channels`, `wfdb_decode` | ECG QRS detection, heart rate variability, pulse oximetry, electrodermal stress, multi-channel fusion |
-| **Endocrine** | `science.endocrine.testosterone_pk`, `trt_outcomes`, `population_trt`, `hrv_trt_response`, `cardiac_risk` | TRT pharmacokinetics, population outcomes, cardiac risk modeling |
-| **Diagnostic** | `science.diagnostic.assess_patient`, `population_montecarlo`, `composite_risk` | Multi-track patient assessment, Monte Carlo population simulation, integrated risk scoring |
-| **Clinical** | `science.clinical.trt_scenario`, `patient_parameterize`, `risk_annotate` | Clinical decision support, scenario generation |
+| Domain | Count | Capabilities | Use Cases |
+|--------|-------|-------------|-----------|
+| **PK/PD** | 14 | `science.pkpd.hill_dose_response`, `one_compartment_pk`, `two_compartment_pk`, `pbpk_simulate`, `population_pk`, `michaelis_menten_nonlinear`, `allometric_scale`, `auc_trapezoidal`, `nlme_foce`, `nlme_saem`, `nca_analysis`, `cwres_diagnostics`, `vpc_simulate`, `gof_compute` | Drug dosing, pharmacokinetic simulation, population modeling, nonlinear mixed-effects, visual predictive checks |
+| **Microbiome** | 13 | `science.microbiome.shannon_index`, `simpson_index`, `pielou_evenness`, `chao1`, `anderson_gut`, `colonization_resistance`, `fmt_blend`, `bray_curtis`, `antibiotic_perturbation`, `scfa_production`, `gut_brain_serotonin`, `qs_gene_profile`, `qs_effective_disorder` | Gut diversity, C. difficile resistance, FMT optimization, quorum sensing, short-chain fatty acid modeling |
+| **Biosignal** | 8 | `science.biosignal.pan_tompkins`, `hrv_metrics`, `ppg_spo2`, `eda_analysis`, `eda_stress_detection`, `arrhythmia_classification`, `fuse_channels`, `wfdb_decode` | ECG QRS detection, heart rate variability, pulse oximetry, electrodermal stress, multi-channel fusion |
+| **Endocrine** | 5 | `science.endocrine.testosterone_pk`, `trt_outcomes`, `population_trt`, `hrv_trt_response`, `cardiac_risk` | TRT pharmacokinetics, population outcomes, cardiac risk modeling |
+| **Diagnostic** | 3 | `science.diagnostic.assess_patient`, `population_montecarlo`, `composite_risk` | Multi-track patient assessment, Monte Carlo population simulation, integrated risk scoring |
+| **Clinical** | 3 | `science.clinical.trt_scenario`, `patient_parameterize`, `risk_annotate` | Clinical decision support, scenario generation |
+| **Comparative** | 3 | `science.comparative.cross_species_pk`, `canine_il31`, `canine_jak1` | Cross-species pharmacokinetics, veterinary dermatology (IL-31/JAK1 inhibitors) |
+| **Discovery** | 4 | `science.discovery.matrix_score`, `hts_analysis`, `compound_library`, `fibrosis_pathway` | Drug discovery screening, HTS hit triage, compound library analytics, fibrosis pathway modeling |
+| **Toxicology** | 3 | `science.toxicology.biphasic_dose_response`, `toxicity_landscape`, `hormetic_optimum` | Hormesis biphasic response, toxicity landscape mapping, hormetic zone optimization |
+| **Simulation** | 2 | `science.simulation.mechanistic_fitness`, `ecosystem_simulate` | Mechanistic population fitness, ecosystem dynamics simulation |
 
 ### Infrastructure Capabilities (How We Coordinate)
 
 | Capability | Description |
 |-----------|-------------|
+| `composition.health_health` | Composition health per `COMPOSITION_HEALTH_STANDARD.md` (returns `healthy`, `deploy_graph`, `subsystems`) |
 | `capability.list` | Advertise all capabilities with operation dependencies and cost estimates |
 | `compute.offload` | Delegate GPU-eligible work to toadStool via Node Atomic |
 | `compute.shader_compile` | Coordinate shader compilation via coralReef |
@@ -43,7 +48,7 @@ healthSpring is a health science compute primal. It owns the `health` domain and
 | `data.fetch` | Resolve datasets through NestGate three-tier fetch |
 | `primal.forward` | Forward cross-domain requests to discovered primals |
 | `primal.discover` | Runtime capability-based discovery of peer primals |
-| `health.liveness` / `health.readiness` | Health probes for biomeOS orchestration |
+| `health.check` / `health.liveness` / `health.readiness` | Health triad per `DEPLOYMENT_VALIDATION_STANDARD.md` |
 | `provenance.begin/record/complete/status` | Session-scoped provenance tracking |
 
 ### Solo Leverage Patterns
