@@ -122,7 +122,7 @@ cargo test --all-features --workspace                       ✓ 1,181 passed, 0 
 | Version | v0.7.27 |
 | Tests | 1,181 |
 | Coverage | 90.90% region (llvm-cov) |
-| .rs files | 154 (41,735 LOC) |
+| .rs files | 154 (41,804 LOC) |
 | Max file | 734 lines (limit: 1000) |
 | Unsafe blocks | 0 (`#![forbid(unsafe_code)]` workspace-level) |
 | License | AGPL-3.0-or-later (scyBorg standard) |
@@ -168,3 +168,5 @@ Trio glibc debt resolved for sweetGrass. Binary now builds musl-static.
 - **`QueryError::NotFound(ContentHash)`**: Downstream match on `NotFound(String)` needs updating to `NotFound(ContentHash)`
 - **Attribution now walks derivations**: `attribution.chain` JSON-RPC results now include inherited contributors from parent braids; consumers expecting single-braid-only results should account for additional contributors
 - **17 deps removed**: Crates depending on sweetGrass transitives may see resolved version changes in lockfile
+- **`Attestation` → `Witness`**: Dehydration type renamed; `WireAttestationRef` is now `WireWitnessRef` with `witnessed_at` field. Trio partners must update wire type references.
+- **musl-static ready**: sweetGrass binary is now `statically linked` (4.5 MB); trio glibc deployment debt resolved for sweetGrass. rhizoCrypt and loamSpine still need musl treatment.
