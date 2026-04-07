@@ -399,7 +399,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **Squirrel** | Discovery: 1,789 primal-name refs | Overstep: sled/sqlx/ed25519 beyond domain | 19 commented-out code lines |
 | **biomeOS** | License → `-or-later` | `--port` forces UDS (TCP-only needed) | `tools/` edition 2021 |
 | **petalTongue** | Discovery: 982 primal-name refs | No CONTEXT.md | 32 `#[allow(` → `#[expect(` |
-| **rhizoCrypt** | Health triad missing on live binary | ~~musl binary is glibc~~ → musl-static shipped | No domain symlink |
+| **rhizoCrypt** | ~~Health triad missing on live binary~~ → implemented (pending re-validation) | ~~musl binary is glibc~~ → musl-static shipped | No domain symlink |
 | **sweetGrass** | No `--port` (HTTP-only TCP) | Health triad HTTP-only (not newline) | License → `-or-later` |
 | **LoamSpine** | — (LS-03 resolved v0.9.15) | `--port` alias shipped (v0.9.15) | musl binary is glibc |
 | **bingoCube** | — (all debt resolved) | — | — |
@@ -500,7 +500,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough — no server mode).
 - **Songbird**: Health triad fully responsive on UDS (`songbird.sock`). TCP 9200 is HTTP discovery (federation/beacons), not JSON-RPC — so benchscale TCP probe fails. This is by design: songbird's TCP is for LAN discovery, not IPC. Needs `--port` to also bind newline JSON-RPC for composition testing.
 - **ToadStool**: Starts and creates `.jsonrpc.sock` UDS. `health.liveness` → "Method not found". Uses `toadstool.health` and `compute.capabilities` instead. Standard triad not implemented.
 - **Squirrel**: Healthy on abstract socket `@squirrel`. No filesystem socket created — invisible to `readdir()` discovery. `health.liveness` returns `{"alive":true}` via abstract socket.
-- **rhizoCrypt**: Starts on TCP 9700 (tarpc) + 9701 (HTTP JSON-RPC). Standard health triad not exposed on either. tarpc is binary protocol, HTTP requires HTTP framing (not newline). Needs newline JSON-RPC surface with health triad.
+- **rhizoCrypt**: TCP 9700 (tarpc) + 9401 (HTTP JSON-RPC) + newline TCP + UDS (`rhizocrypt.sock`). Health triad (`health.check`, `health.liveness`, `health.readiness`) implemented on HTTP and newline transports. UDS shipped session 23, newline transport shared handler. Pending live `benchscale validate ipc` re-validation against current musl-static binary.
 - **sweetGrass**: HTTP REST `/health` and `POST /jsonrpc` both respond. Health triad accessible via HTTP but not via newline-delimited TCP. Needs `--port` alias and newline framing option.
 - **LoamSpine**: **FIXED** (v0.9.15) — tokio runtime nesting resolved (`block_on` → `tokio::spawn`). `--port` alias shipped. Startup graceful degradation confirmed. Re-validation needed for deployment tier.
 
@@ -554,7 +554,7 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 - Only BearDog fully passes `benchscale validate ipc` on TCP
 - LoamSpine F → resolved: tokio nesting crash fixed in v0.9.15; re-validation pending
 - Summary table expanded from 9 to 10 tiers
-- Rollup adjusted: rhizoCrypt A → B (health triad missing on live binary), LoamSpine B → C (crash — now resolved, pending re-validation)
+- Rollup adjusted: rhizoCrypt A → B (health triad missing on live binary — implementation shipped, pending re-validation), LoamSpine B → C (crash — now resolved, pending re-validation)
 
 ### v2.1.0 (April 5, 2026)
 
