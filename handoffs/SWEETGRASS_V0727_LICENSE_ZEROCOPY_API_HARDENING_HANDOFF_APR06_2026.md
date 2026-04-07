@@ -130,9 +130,30 @@ cargo test --all-features --workspace                       ✓ 1,181 passed, 0 
 
 ---
 
+## Phase 5 — musl-static Deployment (ecoBin / plasmidBin)
+
+Trio glibc debt resolved for sweetGrass. Binary now builds musl-static.
+
+| Artifact | Value |
+|----------|-------|
+| Target | `x86_64-unknown-linux-musl` |
+| Profile | `release-static` (LTO fat, strip, codegen-units 1, opt-level z) |
+| Binary size | 4.5 MB |
+| `file` | `static-pie linked, stripped` |
+| `ldd` | `statically linked` |
+| Smoke test | `sweetgrass capabilities` — 27 methods |
+
+- `.cargo/config.toml`: musl target profiles, aarch64 cross-linker, cargo aliases
+- `deploy.sh`: defaults to musl-static; `SWEETGRASS_TARGET` env var override
+- CI: `musl-static` job (build, verify linkage, smoke test)
+- `DEVELOPMENT.md`: musl build instructions
+
+---
+
 ## Remaining Debt (None Blocking)
 
 - **Radiating attribution across ionic bonds** — Phase 4 / LOW; derivation chain attribution is live, but cross-NUCLEUS traversal requires ionic bonding protocol (primalSpring Track 4)
+- **aarch64 musl**: Target profile configured but not CI-verified (needs cross-linker in CI runner)
 - **Coverage gap**: Postgres store tests require Docker runtime; excluded from llvm-cov
 - **`sled` backend**: Optional, unmaintained upstream; `skip-tree` in `deny.toml`; redb is primary
 - **`testcontainers` dev chain**: Pulls `bollard` → `rustls` → `ring` (C/ASM); dev-only, wrappered in `deny.toml`
