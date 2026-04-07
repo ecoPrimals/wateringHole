@@ -5,7 +5,7 @@
 **Date:** April 6, 2026
 **From:** wetSpring (science facade + full NUCLEUS deployment)
 **To:** primalSpring, biomeOS, RootPulse, loamSpine, petalTongue, plasmidBin
-**Status:** 2 of 7 gaps RESOLVED, 1 PARTIALLY RESOLVED, 1 CLOSED, 3 OPEN (reconciled April 6)
+**Status:** 2 of 7 gaps RESOLVED, 1 PARTIALLY RESOLVED, 1 CLOSED, 1 REFRAMED, 2 OPEN (reconciled April 6)
 
 ---
 
@@ -78,19 +78,34 @@ See `PRIMALSPRING_V081_WETSPRING_NUCLEUS_ELEVATION_DEBT_RESOLUTION_HANDOFF_APR06
 
 ---
 
-## Gap 3: Cross-Spring Data Exchange via RootPulse
+## Gap 3: Cross-Spring Provenance Continuity via Neural API — **REFRAMED**
 
-**Owner:** RootPulse team
-**Priority:** HIGH — blocks data sharing between springs
+**Owner:** biomeOS (Neural API graph execution) + provenance trio
+**Priority:** MEDIUM — blocks provenance chain continuity across springs
 
-**Problem:** NestGate stores data locally. The `data.fetch.*` handlers hash and provenance-wrap fetched data. The `vault.*` handlers provide consent-gated storage. But there is no protocol for another spring's NUCLEUS to pull provenance-wrapped data subsets.
+**Correction (April 6):** RootPulse is not a primal or team — it is an emergent
+niche built from the provenance trio (rhizoCrypt, loamSpine, sweetGrass) orchestrated
+by biomeOS Neural API via TOML workflow graphs (`rootpulse_commit.toml`, etc.).
+The trio already has the methods for cross-spring data exchange:
 
-**Specific missing pieces:**
-- Remote NestGate query (how does spring B ask spring A's NestGate for a key?)
-- Provenance chain continuity across the pull (spring B's braid must reference spring A's braid)
-- Differential sync (fetch only what changed, not full re-fetch)
+- rhizoCrypt: `dag.dehydrate` produces `DehydrationWireSummary` with `niche` tags
+- sweetGrass: `contribution.record_dehydration` + `pipeline.attribute` for attribution
+- loamSpine: `session.commit` + `anchor.publish/verify` for permanence
 
-**Request:** RootPulse team to define the cross-spring data exchange protocol. wetSpring's NestGate integration is ready to be the test case.
+**What works today:**
+- Each spring's NUCLEUS can independently use the provenance trio
+- Neural API routes `provenance.*`, `dag.*`, `attribution.*` calls to the trio
+- Wire types (`DehydrationWireSummary`, `PipelineRequest`) support `niche` / `session_type` metadata
+
+**What's actually missing:**
+- biomeOS graph composition for **cross-spring provenance chains**: spring B's braid
+  referencing spring A's braid requires a workflow graph that spans both NUCLEUS instances
+- `session_type` / `niche` tagging convention for spring-to-spring lineage continuity
+- No E2E test of two springs sharing a provenance trio instance
+
+**Path forward:** This is a biomeOS Neural API graph design problem, not a missing primal.
+The existing `rootpulse_commit.toml` pattern can be extended to cross-spring workflows.
+wetSpring can be the first test case.
 
 ---
 
@@ -168,7 +183,7 @@ wetSpring is the first spring to deploy the full NUCLEUS composition pattern aga
 **Status (April 6 reconciliation):**
 - **Gap 1** (Neural API): **RESOLVED** — biomeOS v2.90 semantic routing
 - **Gap 2** (Ionic negotiation): **PARTIALLY RESOLVED** — types + handlers in primalSpring v0.8.1; crypto pending BearDog
-- **Gap 3** (RootPulse cross-spring): **OPEN** — no protocol defined yet
+- **Gap 3** (Cross-spring provenance): **REFRAMED** — not a missing primal; biomeOS Neural API graph design problem over existing provenance trio
 - **Gap 4** (Public chain anchor): **CLOSED** — loamSpine v0.9.16
 - **Gap 5** (plasmidBin reproduction): **OPEN** — needs E2E validation
 - **Gap 6** (petalTongue WASM): **LOW** — mitigated by Plotly.js fallback; `petal-tongue-wasm` crate exists
