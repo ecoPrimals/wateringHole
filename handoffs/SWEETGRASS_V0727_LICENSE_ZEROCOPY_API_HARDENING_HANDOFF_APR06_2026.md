@@ -4,7 +4,7 @@
 **Date**: April 6, 2026
 **From**: SweetGrass
 **To**: All Springs, All Primals, biomeOS
-**Status**: Complete — 1,181 tests, 90.90% region coverage, all checks green
+**Status**: Complete — 1,190 tests, 90.90% region coverage, all checks green
 
 **Supersedes**: `SWEETGRASS_V0727_DEEP_DEBT_EVOLUTION_HANDOFF_MAR31_2026.md` (archived)
 
@@ -116,19 +116,19 @@ cargo clippy --all-features --all-targets -- -D warnings   ✓ 0 warnings
 cargo fmt --all -- --check                                  ✓ clean
 cargo deny check                                            ✓ advisories ok, bans ok, licenses ok, sources ok
 cargo doc --all-features --no-deps                          ✓ clean
-cargo test --all-features --workspace                       ✓ 1,181 passed, 0 failed
+cargo test --all-features --workspace                       ✓ 1,190 passed, 0 failed
 ```
 
 | Metric | Value |
 |--------|-------|
 | Version | v0.7.27 |
-| Tests | 1,181 |
+| Tests | 1,190 |
 | Coverage | 90.90% region (llvm-cov) |
-| .rs files | 154 (41,804 LOC) |
-| Max file | 734 lines (limit: 1000) |
+| .rs files | 151 (42,161 LOC) |
+| Max file | 766 lines (limit: 1000) |
 | Unsafe blocks | 0 (`#![forbid(unsafe_code)]` workspace-level) |
 | License | AGPL-3.0-or-later (scyBorg standard) |
-| SPDX headers | 154/154 |
+| SPDX headers | 151/151 |
 
 ---
 
@@ -177,6 +177,25 @@ Braid top-level proof field evolved from W3C LD-Proof `BraidSignature`
 - Postgres JSONB: fallback deserializer converts old rows losslessly
 - `SigningClient::sign()` returns `Witness` instead of `BraidSignature`
 - Mock signing client updated to produce `Witness` instances
+
+---
+
+## Phase 7 — Constant Unification, Proptest Expansion, Test Coverage (April 7)
+
+Deep debt sweep: centralized shared constants, expanded property-based testing,
+strengthened error path coverage, cleaned zero-allocation witness vocabulary.
+
+| Category | Changes |
+|----------|---------|
+| **Constant unification** | `DEFAULT_MAX_PROVENANCE_DEPTH` single source in `sweet-grass-core::config`; replaced 3 independent `10` constants in query engine, attribution calculator, traversal builder |
+| **Graph metadata** | `ProvenanceGraph.has_cycles` field — cycle detection recorded at traversal time instead of silently skipping |
+| **Witness vocabulary** | 8 named `&'static str` constants (`WITNESS_KIND_SIGNATURE`, `WITNESS_ENCODING_BASE64`, `WITNESS_ALGORITHM_ED25519`, `WITNESS_TIER_LOCAL`, etc.) replace magic strings in constructors and Postgres legacy deserializer |
+| **Contribution defaults** | `DEFAULT_CONTRIBUTION_MIME` constant for serde default mime type |
+| **Proptest expansion** | Added to `sweet-grass-query` (graph entity count, serialization roundtrip) and `sweet-grass-compression` (vertex count, roots, tips, max depth) — 6 new property tests |
+| **Error path tests** | `MissingTarpcAddress` coverage for signer, anchor, listener `from_primal()` |
+| **Dep hygiene** | `serial_test` removed from service (unused) |
+
+**Metrics**: 1,190 tests (was 1,181), 151 .rs files (42,161 LOC), proptest in 5 crates
 
 ---
 
