@@ -91,6 +91,49 @@ GAP-017 unblocks:
 
 ---
 
+## GAP-019: `discover_capability` lacks domain prefix matching (LOW)
+
+**Source**: primalSpring capability routing audit, April 7, 2026
+
+**Issue**: `NeuralRouter::discover_capability(capability)` uses exact key
+lookup in the `capability_registry` HashMap. When primals register individual
+methods (e.g., `"dag.session.create"`, `"dag.event.append"`), a domain-only
+query like `"dag"` fails unless `"dag"` is also explicitly registered.
+
+**Current workaround**: Deploy graphs now include bare domain names in the
+`capabilities` array alongside full method names:
+```toml
+capabilities = ["dag", "dag.session.create", "dag.event.append", ...]
+```
+This works because `load_translations_from_graph` registers every entry in
+`capabilities` as a key. Graph-loaded primals are now discoverable by domain.
+
+**Why this is still a gap**: Primals that join late via lazy socket rescan
+(`probe_primal_capabilities_standalone`) only register the methods from their
+`capabilities.list` response — they do NOT register synthetic domain aliases.
+If a trio primal restarts after initial graph loading, `discover_capability("dag")`
+fails until the next `topology.rescan`.
+
+**Proposed fix** (one of):
+1. **Prefix matching fallback** in `try_registry_lookup`: If exact key miss,
+   scan for keys starting with `"{capability}."` — returns any primal whose
+   methods start with the domain.
+2. **Leverage `capability_domains.rs` at call time**: The fallback table
+   already maps `"dag"` → `"rhizocrypt"`. Use it in `discover_capability`
+   as a last resort before erroring.
+3. **Auto-register domain aliases in lazy rescan**: When registering
+   `"dag.session.create"` for a primal, also register `"dag"`.
+
+Option 1 is simplest (5-10 LOC) and preserves the existing architecture.
+The `discover_by_capability_category` match arms should also be extended
+to include trio domains (`"dag"`, `"spine"`, `"entry"`, `"session"`,
+`"braid"`, `"attribution"`, `"provenance"`, `"anchoring"`, `"certificate"`).
+
+**Priority**: LOW — graph-loading workaround covers all normal deploy flows.
+Only affects late-joining or restarted primals.
+
+---
+
 ## Related context
 
 - Trio witness evolution complete — `WireWitnessRef` standardized across
