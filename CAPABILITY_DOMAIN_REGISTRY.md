@@ -11,6 +11,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
 
 Deploy graphs use `by_capability` to route discovery at graph execution time. biomeOS resolves each capability domain name to the primal that implements that surface. This registry fixes the canonical string for each primal so springs and graphs do not drift.
 
+**Companion artifact**: `capability_registry.toml` (this directory) is the method-level registry listing every `domain.operation` method, its description, domain, and canonical provider. It is sync-tested against `primalSpring/niche.rs` in CI.
+
 ## Canonical domains
 
 | Domain | Primal | Description | Capabilities (examples) |
