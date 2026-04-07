@@ -166,13 +166,14 @@ pie_verified = false  # UniBin binary, not yet distributed via genomeBin
 
 [primals.sweetgrass]
 name = "sweetGrass"
-description = "Attribution primal - W3C PROV-O, braids, contribution API, radiating attribution"
-latest = "0.7.3"
-versions = ["0.7.3"]
+description = "Attribution primal - W3C PROV-O, braids, WireWitnessRef, contribution API, radiating attribution"
+latest = "0.7.27"
+versions = ["0.7.3", "0.7.27"]
 architectures = ["x86_64-linux", "aarch64-linux"]
-capabilities = ["attribution", "braid", "provo", "contribution", "provenance"]
+capabilities = ["attribution", "braid", "provo", "contribution", "provenance", "compression", "anchoring", "pipeline"]
 ecobin_grade = "A++"
-pie_verified = false  # Library crate — not standalone binary
+musl_static = true
+pie_verified = false
 
 # =============================================================================
 # DEPLOYMENT TIERS
