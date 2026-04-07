@@ -147,12 +147,12 @@ pie_verified = true
 [primals.rhizocrypt]
 name = "rhizoCrypt"
 description = "Ephemeral memory - content-addressed DAG engine, sessions, Merkle trees, dehydration"
-latest = "0.13.0-dev"
-versions = ["0.13.0-dev"]
+latest = "0.14.0-dev"
+versions = ["0.14.0-dev", "0.13.0-dev"]
 architectures = ["x86_64-linux", "aarch64-linux"]
 capabilities = ["dag", "session", "merkle", "dehydration", "slice", "provenance"]
 ecobin_grade = "A++"
-pie_verified = false  # Library crate — not standalone binary
+pie_verified = true
 
 [primals.loamspine]
 name = "LoamSpine"
