@@ -5,7 +5,7 @@
 **Date:** April 6, 2026
 **From:** wetSpring (science facade + full NUCLEUS deployment)
 **To:** primalSpring, biomeOS, RootPulse, loamSpine, petalTongue, plasmidBin
-**Status:** Gaps documented — requesting evolution time from owning teams
+**Status:** 2 of 7 gaps RESOLVED, 1 PARTIALLY RESOLVED, 1 CLOSED, 3 OPEN (reconciled April 6)
 
 ---
 
@@ -37,27 +37,25 @@ This is the first spring to attempt the full NUCLEUS pattern against real scienc
 
 ---
 
-## Gap 1: Neural API Method Name Alignment
+## Gap 1: Neural API Method Name Alignment — **RESOLVED**
 
 **Owner:** biomeOS
-**Priority:** HIGH — blocks Tier 2/3 provenance, Dark Forest, and NestGate caching
+**Priority:** ~~HIGH~~ **RESOLVED** (biomeOS v2.90)
 
 **Problem:** The facade calls top-level JSON-RPC methods (`provenance.begin`, `provenance.record`, `provenance.complete`, `birdsong.decrypt`) on the Neural API socket. The `NeuralApiServer` route table in biomeOS does not register these as top-level methods — they need to go through `capability.call` with the appropriate capability + operation shape.
 
-**Evidence:** `$XDG_RUNTIME_DIR/biomeos/` contains 237 primal sockets (`cycle-primal-*`, `storm-primal-*`, `ta-*`) but **zero `neural-api-*.sock`** sockets. No biomeOS processes running. No systemd user units loaded.
+**Resolution:** biomeOS v2.90 implements **universal semantic routing fallback**. Any `domain.operation` method auto-routes through `capability.call`. 32 new provenance trio translations. 9 composition health aliases. Springs need no code changes — both direct `domain.operation` calls and explicit `capability.call` work. See `BIOMEOS_V290_NEURAL_API_SEMANTIC_ROUTING_PROVENANCE_TRIO_HANDOFF_APR06_2026.md`.
 
-**Options:**
-1. biomeOS adds `provenance.begin`, `provenance.record`, `provenance.complete`, `birdsong.decrypt` as top-level route sugar in the Neural API (preferred — simpler client code)
-2. wetSpring rewrites facade to use `capability.call` wrappers (works but verbose)
+primalSpring v0.8.1 verified compatibility: `NeuralBridge::capability_call()` path works. DEBT-03 closed.
 
-**Request:** biomeOS team to decide on approach and document the canonical pattern for springs consuming Neural API. Every spring facade will hit this same friction.
+**Remaining operational note:** biomeOS process must be running and `neural-api.sock` present for live calls. The API shape problem is fully resolved.
 
 ---
 
-## Gap 2: Ionic Contract Negotiation Protocol
+## Gap 2: Ionic Contract Negotiation Protocol — **PARTIALLY RESOLVED**
 
 **Owner:** primalSpring Track 4 (`BondingConstraint + BondingPolicy`)
-**Priority:** HIGH — blocks external researcher collaboration
+**Priority:** ~~HIGH~~ **MEDIUM** — protocol defined, crypto handshake pending BearDog
 
 **Problem:** wetSpring declares bonding metadata (`bonding_metadata.json`) and exposes it via `GET /api/v1/system/composition`. But there is no protocol for:
 
@@ -66,13 +64,17 @@ This is the first spring to attempt the full NUCLEUS pattern against real scienc
 - Terminating with a final provenance seal
 - Validating bond status during request dispatch
 
-**What wetSpring has scaffolded:**
-- `Covalent` (LAN mesh, GeneticLineage trust) and `Ionic` (cloudflared, Contractual trust) bond types declared
-- Capability scopes per bond type enumerated
-- Trust model requirements documented
-- Contract fields spec'd: `collaborator_identity`, `capability_scope`, `duration`, `attribution_requirements`, `data_return_policy`
+**What primalSpring v0.8.1 resolved (DEBT-06):**
+- `bonding.propose` JSON-RPC handler: deserializes and validates `IonicProposal` (proposer identity, requested capabilities, trust model, duration, attribution requirements). Returns structured validation result or rejection.
+- `bonding.status` JSON-RPC handler: queries contract by ID (currently returns `not_found` — contract store pending).
+- Full Rust type system: `BondType` (5 variants), `TrustModel` (4 variants), `BondingConstraint` (glob allow/deny, bandwidth, concurrency), `BondingPolicy` with validation, `IonicProposal`, `ContractState` FSM, `IonicContract`, `ProvenanceSeal`. All `Serialize + Deserialize`.
 
-**Request:** primalSpring to define the concrete negotiation protocol. wetSpring will be the first consumer/validator.
+**What remains:**
+- **Runtime contract store** — needs BearDog `crypto.sign_contract` + `crypto.verify_contract` for propose→accept→seal handshake
+- **Shared type crate** — bonding types ready for extraction to `ecoPrimals-contracts` (wateringHole governance)
+- **Scope modification** and **provenance seal on termination** — additive once store exists
+
+See `PRIMALSPRING_V081_WETSPRING_NUCLEUS_ELEVATION_DEBT_RESOLUTION_HANDOFF_APR06_2026.md`.
 
 ---
 
@@ -159,6 +161,15 @@ All scaffolding is committed in `springs/wetSpring/`:
 
 ---
 
-## Summary for primalSpring
+## Summary
 
-wetSpring is the first spring to deploy the full NUCLEUS composition pattern against real science. The architecture is proven (compiles, routes wired, provenance emitted). The gaps found are **ecosystem-wide** — every spring will hit the same Neural API alignment, ionic negotiation, and cross-spring data exchange issues. Resolving these for wetSpring resolves them for the entire garden.
+wetSpring is the first spring to deploy the full NUCLEUS composition pattern against real science. The architecture is proven (compiles, routes wired, provenance emitted). The gaps found are **ecosystem-wide** — every spring will hit the same Neural API alignment, ionic negotiation, and cross-spring data exchange issues.
+
+**Status (April 6 reconciliation):**
+- **Gap 1** (Neural API): **RESOLVED** — biomeOS v2.90 semantic routing
+- **Gap 2** (Ionic negotiation): **PARTIALLY RESOLVED** — types + handlers in primalSpring v0.8.1; crypto pending BearDog
+- **Gap 3** (RootPulse cross-spring): **OPEN** — no protocol defined yet
+- **Gap 4** (Public chain anchor): **CLOSED** — loamSpine v0.9.16
+- **Gap 5** (plasmidBin reproduction): **OPEN** — needs E2E validation
+- **Gap 6** (petalTongue WASM): **LOW** — mitigated by Plotly.js fallback; `petal-tongue-wasm` crate exists
+- **Gap 7** (Radiating attribution): **LOW** — blocked on ionic protocol completion
