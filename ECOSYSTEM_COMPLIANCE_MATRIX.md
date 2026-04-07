@@ -399,7 +399,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **Squirrel** | Discovery: 1,789 primal-name refs | Overstep: sled/sqlx/ed25519 beyond domain | 19 commented-out code lines |
 | **biomeOS** | License → `-or-later` | `--port` forces UDS (TCP-only needed) | `tools/` edition 2021 |
 | **petalTongue** | Discovery: 982 primal-name refs | No CONTEXT.md | 32 `#[allow(` → `#[expect(` |
-| **rhizoCrypt** | ~~Health triad missing on live binary~~ → implemented (pending re-validation) | ~~musl binary is glibc~~ → musl-static shipped | No domain symlink |
+| **rhizoCrypt** | ~~Health triad missing~~ → **live-validated PASS** | ~~musl binary is glibc~~ → musl-static shipped | No domain symlink |
 | **sweetGrass** | No `--port` (HTTP-only TCP) | Health triad HTTP-only (not newline) | License → `-or-later` |
 | **LoamSpine** | — (LS-03 resolved v0.9.15) | `--port` alias shipped (v0.9.15) | musl binary is glibc |
 | **bingoCube** | — (all debt resolved) | — | — |
@@ -482,14 +482,14 @@ N/A for library primals (barraCuda, bingoCube, sourDough — no server mode).
 |-------|----|----|----|----|----|----|-----|----|----|----|----|
 | fetch.sh checksum verified | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | start_primal.sh launches | PASS | PASS | N/T | PASS | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
-| health.liveness responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | DEBT | PASS | DEBT |
-| health.readiness responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | DEBT | PASS | DEBT |
-| health.check responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | DEBT | PASS | DEBT |
-| benchscale validate ipc COMPLIANT | PASS | N/A | N/T | DEBT | N/T | N/A | N/T | N/T | DEBT | N/A | DEBT |
+| health.liveness responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
+| health.readiness responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
+| health.check responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
+| benchscale validate ipc COMPLIANT | PASS | N/A | N/T | DEBT | N/T | N/A | N/T | N/T | PASS | N/A | DEBT |
 | Standalone startup (no NODE_ID) | DEBT | PASS | N/T | PASS | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
-| Filesystem socket created | DEBT | PASS | N/T | PASS | N/T | DEBT | N/T | N/T | N/T | PASS | DEBT |
-| `--port` binds newline TCP JSON-RPC | PASS | DEBT | N/T | DEBT | N/T | DEBT | N/T | N/T | DEBT | DEBT | DEBT |
-| **Grade** | **B** | **B** | **N/T** | **D** | **N/T** | **C** | **N/T** | **N/T** | **D** | **C** | **F** |
+| Filesystem socket created | DEBT | PASS | N/T | PASS | N/T | DEBT | N/T | N/T | PASS | PASS | DEBT |
+| `--port` binds newline TCP JSON-RPC | PASS | DEBT | N/T | DEBT | N/T | DEBT | N/T | N/T | PASS | DEBT | DEBT |
+| **Grade** | **B** | **B** | **N/T** | **D** | **N/T** | **C** | **N/T** | **N/T** | **A** | **C** | **F** |
 
 **N/T** = Not Tested (binary not started in this validation run).
 **N/A** = Not Applicable (transport mismatch — benchscale uses TCP, primal is UDS-only).
@@ -500,7 +500,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough — no server mode).
 - **Songbird**: Health triad fully responsive on UDS (`songbird.sock`). TCP 9200 is HTTP discovery (federation/beacons), not JSON-RPC — so benchscale TCP probe fails. This is by design: songbird's TCP is for LAN discovery, not IPC. Needs `--port` to also bind newline JSON-RPC for composition testing.
 - **ToadStool**: Starts and creates `.jsonrpc.sock` UDS. `health.liveness` → "Method not found". Uses `toadstool.health` and `compute.capabilities` instead. Standard triad not implemented.
 - **Squirrel**: Healthy on abstract socket `@squirrel`. No filesystem socket created — invisible to `readdir()` discovery. `health.liveness` returns `{"alive":true}` via abstract socket.
-- **rhizoCrypt**: TCP 9700 (tarpc) + 9401 (HTTP JSON-RPC) + newline TCP + UDS (`rhizocrypt.sock`). Health triad (`health.check`, `health.liveness`, `health.readiness`) implemented on HTTP and newline transports. UDS shipped session 23, newline transport shared handler. Pending live `benchscale validate ipc` re-validation against current musl-static binary.
+- **rhizoCrypt**: TCP 9400 (tarpc) + 9401 (dual-mode HTTP + newline JSON-RPC) + UDS (`rhizocrypt.sock`). **Live-validated April 2026**: `identity.get` returns primal/version/domain, `health.liveness` returns `{"status":"alive"}`, `health.check`/`health.readiness` respond correctly, `capabilities.list` returns biomeOS Format E (`provided_capabilities`) with 5 domains and 28 methods. All probes verified on TCP newline and UDS transports. **Grade A**: full health triad + identity + Format E capabilities + filesystem socket + newline TCP.
 - **sweetGrass**: HTTP REST `/health` and `POST /jsonrpc` both respond. Health triad accessible via HTTP but not via newline-delimited TCP. Needs `--port` alias and newline framing option.
 - **LoamSpine**: **FIXED** (v0.9.15) — tokio runtime nesting resolved (`block_on` → `tokio::spawn`). `--port` alias shipped. Startup graceful degradation confirmed. Re-validation needed for deployment tier.
 
@@ -554,7 +554,7 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 - Only BearDog fully passes `benchscale validate ipc` on TCP
 - LoamSpine F → resolved: tokio nesting crash fixed in v0.9.15; re-validation pending
 - Summary table expanded from 9 to 10 tiers
-- Rollup adjusted: rhizoCrypt A → B (health triad missing on live binary — implementation shipped, pending re-validation), LoamSpine B → C (crash — now resolved, pending re-validation)
+- Rollup adjusted: ~~rhizoCrypt A → B~~ → **A** (live-validated: identity.get + Format E capabilities + health triad + UDS + newline TCP), LoamSpine B → C (crash — now resolved, pending re-validation)
 
 ### v2.1.0 (April 5, 2026)
 

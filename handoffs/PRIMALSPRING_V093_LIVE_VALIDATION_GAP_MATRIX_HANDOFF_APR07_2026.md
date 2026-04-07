@@ -136,13 +136,21 @@ Option 1 is preferred for ecosystem consistency.
 
 ## Provenance Trio Teams — GAP-MATRIX-05 (Medium)
 
-### rhizoCrypt, loamSpine, sweetGrass Not Live-Tested
+### ~~rhizoCrypt~~ RESOLVED + loamSpine, sweetGrass Not Live-Tested
 
-**Problem**: These primals were not running during the live validation matrix.
-Their L0 routing through Neural API and L1 composition patterns are
-structural-only (validated by primalSpring Rust code, not live IPC).
+**rhizoCrypt — GAP-MATRIX-05 RESOLVED (April 2026)**:
 
-**Work**:
+Live-validated on release binary with `--unix` flag:
+1. ✅ Socket created at `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock`
+2. ✅ `health.liveness` → `{"status":"alive"}` (TCP newline + UDS)
+3. ✅ `health.check` → `{"healthy":true,"state":"running",...}` (TCP newline)
+4. ✅ `health.readiness` → `{"status":"ready","primal":"rhizocrypt",...}` (TCP newline)
+5. ✅ `identity.get` → `{"primal":"rhizocrypt","version":"0.14.0-dev","domain":"dag",...}` (TCP newline + UDS) — **NEW**: was missing, now implemented
+6. ✅ `capabilities.list` → biomeOS Format E (`provided_capabilities`) with 5 domains, 28 methods (TCP newline + UDS) — **FIXED**: was non-standard array format, now Format E wrapper
+
+**CLI**: `rhizocrypt server --unix [--port 9400]` — tarpc 9400, JSON-RPC 9401 (dual HTTP + newline), UDS at biomeos path.
+
+**loamSpine, sweetGrass** remain untested. Original work items apply:
 1. Confirm each primal starts and creates a socket
 2. Verify `health.liveness` responds correctly
 3. Verify `capabilities.list` returns capabilities in a format biomeOS can parse
