@@ -158,34 +158,6 @@ Neural API registered itself as a capability provider ~20s after startup because
 
 ---
 
-## v2.94 Addendum: GAP-MATRIX Second Wave (same day)
-
-### GAP-MATRIX-07b (Medium) — Proxy Error Propagation
-
-Primal JSON-RPC errors (e.g. `-32601 Method not found`) were being swallowed as generic `-32603 Internal error: Failed to forward...`. Callers could not distinguish "primal rejected the request" from "primal is unreachable."
-
-**Fix**: `forward_request()` now uses `try_call()` and propagates `IpcError::JsonRpcError` without wrapping. `dispatch()` extracts the original error code via `downcast_ref::<IpcError>()`.
-
-**Impact for primal teams**: When a primal returns a JSON-RPC error (e.g. unknown method), the caller now receives the exact error code and message from the primal, not a generic internal error.
-
-### GAP-MATRIX-08 (Low) — Self-Discovery Pollution
-
-Neural API registered itself as a capability provider ~20s after startup because `lazy_rescan_sockets()` didn't filter its own socket. The initial scan in `discover_and_register_primals()` already excluded `self.socket_path`, but the lazy rescan path (triggered on first capability miss) did not.
-
-**Fix**: `NeuralRouter` now stores its own socket path via `set_self_socket_path()`. `lazy_rescan_sockets()` skips that path, matching the initial-scan filter.
-
-**Impact**: No more duplicate `neural @` routing entries. Capability routing is clean from first miss onward.
-
-### GAP-MATRIX-02b (Medium, partial) — graph.list Unified with DeploymentGraph
-
-`graph.list` returned empty for `tower_atomic_bootstrap.toml` because the `neural_graph::Graph` parser failed on certain TOML structures. The `DeploymentGraph` loader (fixed in v2.93) could parse them, but `graph.list` only used the `neural_graph` parser.
-
-**Fix**: `graph.list` now falls back to `biomeos_graph::GraphLoader::from_file()` when `Graph::from_toml_file()` fails. This extracts `id`, `version`, `description`, `node_count`, and `coordination` from `GraphDefinition` for the listing.
-
-**Impact for primal teams**: All valid TOML graphs — both `neural_graph` and `DeploymentGraph` formats — now appear in `graph.list` results.
-
----
-
 ## Remaining Known Items
 
 1. **Primal-specific env vars** (`BEARDOG_SOCKET`, `SONGBIRD_SOCKET`, etc.) remain as Tier 1/2 discovery configuration surface — these are the correct bootstrap mechanism, not routing violations.
