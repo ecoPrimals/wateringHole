@@ -91,7 +91,7 @@ GAP-017 unblocks:
 
 ---
 
-## GAP-019: `discover_capability` lacks domain prefix matching (LOW)
+## GAP-019: `discover_capability` lacks domain prefix matching — **RESOLVED**
 
 **Source**: primalSpring capability routing audit, April 7, 2026
 
@@ -129,8 +129,15 @@ The `discover_by_capability_category` match arms should also be extended
 to include trio domains (`"dag"`, `"spine"`, `"entry"`, `"session"`,
 `"braid"`, `"attribution"`, `"provenance"`, `"anchoring"`, `"certificate"`).
 
-**Priority**: LOW — graph-loading workaround covers all normal deploy flows.
-Only affects late-joining or restarted primals.
+**Fix applied** (biomeOS v2.92): Added `try_prefix_lookup` step in
+`discover_capability` that scans the registry for keys starting with
+`"{domain}."`. Also added `capability_to_provider_fallback` as last resort
+before erroring. Resolution order is now:
+1. Exact key → 2. Lazy rescan → 3. Prefix match → 4. Composite atomics →
+5. Category discovery → 6. Domain table fallback.
+
+4 new tests cover prefix matching. Deploy graphs retain bare domain aliases
+as belt-and-suspenders.
 
 ---
 
