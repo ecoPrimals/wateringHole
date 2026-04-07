@@ -70,7 +70,7 @@ $ ls -lh target/x86_64-unknown-linux-musl/release/loamspine
 | Primal | musl-static | Owner |
 |--------|------------|-------|
 | **loamSpine** | DONE | loamSpine team |
-| rhizoCrypt | Pending — CI has `cross` musl job, needs `.cargo/config.toml` musl targets + Dockerfile conversion | rhizoCrypt team |
+| rhizoCrypt | **DONE** — musl-static x86_64 shipped (5.4M, Alpine runtime), plasmidBin updated (April 2026) | rhizoCrypt team |
 | sweetGrass | Pending — partial `.cargo/config.toml` (missing `link-arg=-static`, `relocation-model=static`, `linker`), no CI cross-compile job, no Dockerfile | sweetGrass team |
 
 ---

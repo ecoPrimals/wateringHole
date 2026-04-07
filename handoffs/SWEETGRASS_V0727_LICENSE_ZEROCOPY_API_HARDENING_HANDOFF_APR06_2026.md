@@ -201,4 +201,4 @@ Braid top-level proof field evolved from W3C LD-Proof `BraidSignature`
 - **17 deps removed**: Crates depending on sweetGrass transitives may see resolved version changes in lockfile
 - **`Attestation` → `Witness`**: Dehydration type renamed; `WireAttestationRef` is now `WireWitnessRef` with `witnessed_at` field. Trio partners must update wire type references.
 - **`Braid.signature` → `Braid.witness`**: Top-level proof block now uses `WireWitnessRef` vocabulary. Wire consumers expecting `"signature": {"type": ..., "proofValue": ...}` should update to `"witness": {"kind": ..., "evidence": ...}`. `#[serde(alias = "signature")]` provides read-path backward compatibility.
-- **musl-static ready**: sweetGrass binary is now `statically linked` (4.5 MB); trio glibc deployment debt resolved for sweetGrass. rhizoCrypt and loamSpine still need musl treatment.
+- **musl-static ready**: sweetGrass binary is now `statically linked` (4.5 MB); trio glibc deployment debt resolved for sweetGrass. rhizoCrypt musl-static also shipped (April 2026). loamSpine musl-static also shipped (April 2026).

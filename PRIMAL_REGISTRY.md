@@ -279,8 +279,8 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
-**Version**: 0.13.0-dev  
-**Status**: Production Ready (1,412 tests, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (16-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools, `capability_registry.toml` (27 methods, 8 domains) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types)
+**Version**: 0.14.0-dev  
+**Status**: Production Ready (1,424 tests, 94.34% llvm-cov, clippy pedantic+nursery enforced (`doc_markdown`, `must_use_candidate`, etc.), Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` blocks, AGPL-3.0-or-later, UniBin compliant, musl-static x86_64 shipped in plasmidBin (5.4M), cargo-deny enforced (16-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools, `capability_registry.toml` (27 methods, 8 domains) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types, `dag.dehydrate` alias)
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
