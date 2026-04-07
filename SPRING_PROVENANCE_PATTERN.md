@@ -82,3 +82,12 @@ Wrap the payload returned to clients:
 ```
 
 Set `provenance.tier` to the integer `1`, `2`, or `3`. Use `"trio": null` at Tier 1; populate `trio` when Tier 2+ fields are present.
+
+## Witnesses
+
+Session witnesses carried by the trio are **self-describing**: each witness
+carries `kind`, `encoding`, `algorithm`, and `tier` metadata alongside the
+opaque evidence payload. Witnesses may be cryptographic signatures, hash
+observations, checkpoints, markers, or bare timestamps — the trio is
+agnostic. See `ATTESTATION_ENCODING_STANDARD.md` for the full `WireWitnessRef`
+specification.
