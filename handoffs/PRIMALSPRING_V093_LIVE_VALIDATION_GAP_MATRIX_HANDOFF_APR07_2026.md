@@ -9,60 +9,72 @@
 
 ## Context
 
-primalSpring ran its first systematic live validation matrix against Eastgate,
-probing each primal through direct JSON-RPC IPC and through the biomeOS Neural
-API. The particle model (Tower=electron, Node=proton, Nest=neutron) provides
-the compositional framework. Six gap items were identified, documented in
-`specs/CROSS_SPRING_EVOLUTION.md` and `specs/NUCLEUS_VALIDATION_MATRIX.md`.
+primalSpring ran three live validation runs against Eastgate, probing each primal
+through direct JSON-RPC IPC and through the biomeOS Neural API. The particle
+model (Tower=electron, Node=proton, Nest=neutron) provides the compositional
+framework. Three runs tracked biomeOS evolution from v2.81 → v2.92 → v2.93.
 
-This handoff assigns work to each primal team based on the gaps found.
+**Run 3 (biomeOS v2.93)**: 52 capabilities auto-discovered from 2 primals.
+7 of 9 capability.call methods forwarded end-to-end through Neural API.
+GAP-MATRIX-01, 01b, 07 all RESOLVED. New medium/low issues identified.
 
----
-
-## biomeOS Team — GAP-MATRIX-01 + GAP-MATRIX-02 (Critical + Medium)
-
-### GAP-MATRIX-01: Neural API Capability Registration (CRITICAL)
-
-**Problem**: Neural API v2 detects primal sockets and confirms them "healthy"
-but reports `0 capabilities` for each. BearDog advertises 9 capability groups
-via `capabilities.list` (Format A: string array). biomeOS's internal
-`probe_primal_capabilities_standalone` does not extract capabilities from the
-response.
-
-**Evidence**:
-```
-biomeOS log: "beardog healthy with 0 capabilities"
-biomeOS log: "songbird healthy with 0 capabilities"
-Direct probe: BearDog capabilities.list → 9 groups (security, crypto, beacon, ...)
-```
-
-**Impact**: All `capability.call` routing fails. Direct IPC works. This blocks
-the Neural API routing path that all springs and products rely on.
-
-**Recommended Fix**: Align the capability probe in `neural_router/discovery.rs`
-with the 4 wire formats primals actually use:
-- Format A: `["security", "crypto", "beacon", ...]` (BearDog, Songbird)
-- Format B: `[{"name": "...", "methods": [...]}]` (primalSpring)
-- Format C: `{"method_info": {"group": [...]}}` (some primals)
-- Format D: `{"semantic_mappings": {...}}` (semantic-aware primals)
-
-primalSpring already has a 4-format parser in `ipc/discover.rs` → `extract_capability_names()`.
-
-### GAP-MATRIX-02: Graph Parser (Medium)
-
-**Problem**: biomeOS rejects `tower_atomic_bootstrap.toml` with "Failed to
-parse TOML". The file is valid TOML (Python parser confirms). biomeOS may
-require specific fields (e.g., `id`) or a different node structure than
-`[[graph.nodes]]`.
-
-**Recommended Fix**: Document the exact biomeOS internal TOML schema. Accept
-the `[[graph.nodes]]` format or provide a migration guide.
+This handoff assigns remaining work to each primal team based on the gaps found.
 
 ---
 
-## Songbird Team — GAP-MATRIX-03 (Low)
+## biomeOS Team — GAP-MATRIX-07b + GAP-MATRIX-08 + GAP-MATRIX-02 (Medium + Low)
 
-### TLS 1.3 Cipher Suite Compatibility
+### ~~GAP-MATRIX-01~~ RESOLVED (v2.93) + ~~GAP-MATRIX-01b~~ RESOLVED (v2.93) + ~~GAP-MATRIX-07~~ RESOLVED (v2.93)
+
+biomeOS v2.93 (commit `13ca2328`) resolved all three critical/medium gaps:
+- **Format E parser** added for BearDog's `provided_capabilities` wire format → 38 BearDog capabilities now registered
+- **`unix://` URI scheme** handled in `TransportEndpoint::parse()` → proxy forwarding works end-to-end
+- Combined: **52 capabilities from 2 primals**, 7/9 capability.call tests pass
+
+### GAP-MATRIX-07b (Medium, NEW): Proxy Error Propagation
+
+**Problem**: When a primal returns a JSON-RPC error response (e.g., parameter
+validation `-32601`), biomeOS reports "Failed to forward" instead of propagating
+the primal's actual error back. The proxy conflates transport failure with
+application-level errors.
+
+**Evidence**: `crypto.verify_ed25519` with wrong params → BearDog returns
+`-32601: Missing required parameter: public_key` → Neural API returns
+`Failed to forward crypto.verify_ed25519 to unix:///...`
+
+**Impact**: Callers cannot distinguish between primal being unreachable vs
+primal rejecting the request. Methods with correct params work fine.
+
+**Recommended Fix**: In the forwarding path, check if the primal socket returned
+a valid JSON-RPC response (even if it's an error response). Only report "Failed
+to forward" for transport-level failures (connection refused, timeout).
+
+### GAP-MATRIX-08 (Low, NEW): Self-Discovery Routing Pollution
+
+**Problem**: Neural API discovers its own socket ~20s after startup during a
+re-scan sweep, registering itself as a capability provider for all domains.
+
+**Impact**: Routing table has duplicate `neural @` entries. No functional
+breakage — correct primal is still `primary_endpoint`.
+
+**Recommended Fix**: Exclude the Neural API's own socket path from
+auto-discovery scans.
+
+### GAP-MATRIX-02: Graph Parser (Medium, PARTIAL)
+
+biomeOS v2.93 added `#[serde(default)]` to `GraphDefinition.name/version`.
+The graph loader path now parses TOML successfully (confirmed via debug logs).
+However, the bootstrap code path still fails on `tower_atomic_bootstrap.toml`
+and `graph.list` returns empty despite parsing success.
+
+**Remaining**: Unify bootstrap parser with graph loader, or surface parsed
+graphs in the `graph.list` endpoint.
+
+---
+
+## Songbird Team — GAP-MATRIX-03 (Low) + Capability Method Gap
+
+### TLS 1.3 Cipher Suite Compatibility (GAP-MATRIX-03)
 
 **Problem**: Some HTTPS targets fail TLS handshake through Songbird (httpbin.org)
 while others succeed (ifconfig.me). The custom TLS 1.3 stack may not support
@@ -79,7 +91,26 @@ httpbin.org → TLS handshake failure ✗
 - `TLS_AES_256_GCM_SHA384`
 - `TLS_CHACHA20_POLY1305_SHA256`
 
-The recent TLS 1.3 CSPRNG fix (rebased April 7) may be related.
+### Capability Advertisement vs Method Implementation
+
+**Problem**: Songbird lists domain descriptors in `capabilities.list` (e.g.,
+`network.discovery`, `network.federation`, `ipc.jsonrpc`) but returns "unknown
+JSON-RPC method" when these are called directly. These are capability markers,
+not method endpoints.
+
+**Evidence**:
+```
+capabilities.list → ["network.discovery", "ipc.jsonrpc", ...]  ✓
+method: "network.discovery" → "unknown JSON-RPC method"  ✗
+```
+
+**Impact**: biomeOS forwards the exact capability name as a JSON-RPC method.
+Songbird rejects it because it doesn't implement that method.
+
+**Options**:
+1. Implement advertised capability names as callable JSON-RPC methods
+2. Extend `capabilities.list` response to include actual method names
+3. Provide a `method_info` response format so biomeOS can map names
 
 ---
 
@@ -151,16 +182,17 @@ in this validation run.
 
 ## BearDog Team — Maintenance Only
 
-BearDog passed all live probes. No action items from GAP-MATRIX.
+BearDog passed all live probes through Neural API (biomeOS v2.93). No action items.
 
-**Validated**:
+**Validated end-to-end through Neural API**:
 - `health.liveness` ✓ (v0.9.0)
-- `crypto.sign_ed25519` ✓
-- `crypto.blake3_hash` ✓
-- `capabilities.list` ✓ (9 groups: security, crypto, beacon, mito, genetic, federation, secrets, hash, key)
-
-The only work is ensuring the capability wire format is documented so biomeOS
-can parse it (see GAP-MATRIX-01 — biomeOS team owns this fix).
+- `crypto.sign_ed25519` ✓ (Neural API → BearDog → signature)
+- `crypto.blake3_hash` ✓ (Neural API → BearDog → hash)
+- `crypto.hmac_sha256` ✓ (Neural API → BearDog → HMAC)
+- `security.evaluate` ✓ (Neural API → BearDog → trust evaluation)
+- `trust.evaluate` ✓ (Neural API → BearDog → trust evaluation)
+- `tls.derive_secrets` ✓ (Neural API → BearDog → key derivation)
+- `capabilities.list` ✓ (38 capabilities parsed via Format E)
 
 ---
 
@@ -194,8 +226,9 @@ For all teams, primalSpring now provides:
 1. **Particle model** (`specs/MIXED_COMPOSITION_PATTERNS.md`) — compositional reasoning framework
 2. **17 sketch graphs** (`graphs/sketches/`) — generic patterns for springs to specialize
 3. **Validation matrix** (`specs/NUCLEUS_VALIDATION_MATRIX.md`) — systematic capability assessment
-4. **4-format capability parser** (`ipc/discover.rs`) — reference implementation for biomeOS
+4. **5-format capability parser** (`ipc/discover.rs`) — reference implementation (Formats A-E)
 5. **Live probe methodology** — reproducible JSON-RPC probing via `socat` against UDS
+6. **Run 3 baseline** — 52 capabilities, 7/9 capability.call PASS, biomeOS v2.93 validated
 
 ---
 
