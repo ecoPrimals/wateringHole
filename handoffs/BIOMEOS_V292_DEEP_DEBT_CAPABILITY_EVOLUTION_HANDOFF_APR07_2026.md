@@ -52,7 +52,7 @@
 
 ### Capability Parser Alignment
 
-biomeOS now implements the same 4-format parser documented in primalSpring's `ipc/discover.rs → extract_capability_names()`. The canonical implementation lives at:
+biomeOS now implements a 5-format parser (superset of primalSpring's `ipc/discover.rs → extract_capability_names()`). The canonical implementation lives at:
 - `biomeos-core/src/socket_discovery/cap_probe.rs` — `extract_capabilities_from_response()`
 - `biomeos-graph/src/ai_advisor.rs` — inline replica (no cross-crate dep)
 
@@ -98,13 +98,35 @@ The Toadstool-specific `.jsonrpc.sock` health check is now convention-based: any
 
 | Metric | Value |
 |--------|-------|
-| Tests passing | 7,649 (0 failures) |
+| Tests passing | 7,654 (0 failures) |
 | Clippy warnings | 0 (pedantic + nursery) |
 | Unsafe code | 0 (`#![forbid(unsafe_code)]` all crates) |
 | Files > 1000 LOC | 0 |
 | TODO/FIXME/HACK | 0 |
 | Production mocks | 0 |
 | C FFI dependencies | 0 |
+
+---
+
+## v2.93 Addendum: GAP-MATRIX Resolution (same day)
+
+### GAP-MATRIX-07 (Critical) — Proxy Forwarding Fixed
+
+`TransportEndpoint::parse()` now handles the `unix://` URI scheme. Previously, any `unix:///path` string — from `display_string()` round-trips or external `capability.register` calls — contained `:` and was misrouted to TCP parsing. The fallback then created a literal `PathBuf("unix:///run/...")` which can't connect to any socket. **All `capability.call` forwarding now works end-to-end.**
+
+**Impact for primal teams**: If your code sends `capability.register` with `socket: "unix:///run/biomeos/..."`, it now parses correctly. Bare paths (`/run/biomeos/...`) continue to work as before.
+
+### GAP-MATRIX-01b (Medium) — BearDog Format E Recognized
+
+Added Format E to the capability parser: `result.provided_capabilities: [{type: "security", methods: ["sign", ...]}]`. This is BearDog's native wire format. The parser now emits:
+- Group type as a capability: `"security"`, `"crypto"`, `"beacon"`, etc.
+- Qualified methods: `"security.sign"`, `"security.verify"`, `"crypto.blake3_hash"`, etc.
+
+BearDog's 9 capability groups are now fully registered in the Neural API capability registry.
+
+### GAP-MATRIX-02 (Medium) — TOML Parser Tolerant
+
+`GraphDefinition.name` and `.version` are now optional (`#[serde(default)]`). `tower_atomic_bootstrap.toml` — which intentionally omits both — now parses through the `DeploymentGraph` serde path in addition to the `neural_graph::Graph` path.
 
 ---
 
