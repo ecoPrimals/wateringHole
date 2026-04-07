@@ -1,7 +1,7 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 2.2.0
-**Date:** April 5, 2026
+**Version:** 2.3.0
+**Date:** April 6, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 **Supersedes:** `IPC_COMPLIANCE_MATRIX.md` v1.6.0 (archived to `fossilRecord/`)
@@ -10,10 +10,16 @@ This matrix tracks every primal's alignment across all auditable dimensions
 defined in the 31 active wateringHole standards. Each primal receives a letter
 grade per tier (A–F) and a rollup grade across all applicable tiers.
 
-Data sourced from: April 4, 2026 full ecosystem audit (14 primals),
+Data sourced from: April 6, 2026 full ecosystem re-audit (15 primals),
 `IPC_COMPLIANCE_MATRIX.md` v1.6.0, `PRIMAL_GAPS.md` live tracking,
 esotericWebb and ludoSpring compositions (March–April 2026), and direct
 source inspection via `rg`, `cargo`, and manual review.
+
+**v2.3.0 changes**: Full re-audit with `cargo fmt/clippy/test` across all 15 primals.
+License alignment **COMPLETE** (all `-or-later`). 10 build/test debt items resolved.
+toadStool clippy CLEAN (was FAIL), fmt 1 diff (was 1,899). bingoCube edition 2024
+(was 2021), clippy CLEAN (was 15 errors). coralReef/rhizoCrypt/sweetGrass clippy CLEAN.
+barraCuda E0061 FIXED. Discovery compliance re-scanned with broader methodology.
 
 ---
 
@@ -57,28 +63,29 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 
 | Primal | T1 Build | T2 UniBin | T3 IPC | T4 Discovery | T5 Naming | T6 Resp | T7 Workspace | T8 Present | T9 Deploy | T10 Live | Rollup |
 |--------|----------|-----------|--------|--------------|-----------|---------|--------------|------------|-----------|----------|--------|
-| **BearDog** | C | A | A | B | B | B | A | C | A | B | **B** |
-| **Songbird** | B | B | B | D | B | B | A | C | A | B | **C** |
-| **NestGate** | B | D | C | C | B | B | A | A | D | N/T | **C** |
-| **ToadStool** | D | C | C | D | D | B | A | D | C | D | **D** |
+| **BearDog** | B ↑ | A | A | B | B | B | A | C | A | B | **B** |
+| **Songbird** | B | B | B | C ↑ | B | B | A | C | A | B | **B** ↑ |
+| **NestGate** | A ↑ | D | C | C | B | B | A | A | D | N/T | **C** |
+| **ToadStool** | B ↑↑ | C | C | D | D | B | A | C ↑ | C | D | **C** ↑ |
 | **barraCuda** | A | -- | -- | -- | -- | A | A | A | -- | -- | **A** |
-| **coralReef** | C | A | A | B | A | A | A | B | C | N/T | **B** |
-| **Squirrel** | B | C | C | D | B | C | A | B | A | C | **C** |
-| **biomeOS** | B | C | B | A | A | B | A | B | C | N/T | **B** |
+| **coralReef** | A ↑ | A | A | B | A | A | A | B | C | N/T | **A** ↑ |
+| **Squirrel** | A ↑ | C | C | D | B | C | A | B | A | C | **C** |
+| **biomeOS** | A ↑ | C | B | A | A | B | A | B | C | N/T | **B** |
 | **petalTongue** | A | B | B | C | A | A | A | C | C | N/T | **B** |
 | **rhizoCrypt** | A | B | A | B | A | A | A | A | C | D | **B** |
-| **sweetGrass** | B | C | C | B | B | A | A | A | D | C | **B** |
-| **LoamSpine** | A | C | B | B | B | A | A | A | C | F | **C** |
-| **bingoCube** | A | -- | -- | -- | -- | A | A | A | -- | -- | **A** |
-| **sourDough** | B | -- | -- | -- | -- | A | A | C | -- | -- | **B** |
+| **sweetGrass** | A ↑ | C | C | B | B | A | A | A | D | C | **B** |
+| **LoamSpine** | A | C | B | B | B | A | A | A | C | C ↑ | **B** ↑ |
+| **bingoCube** | A | -- | -- | -- | -- | A | A | A ↑ | -- | -- | **A** |
+| **sourDough** | A ↑ | -- | -- | -- | -- | A | A | B ↑ | -- | -- | **B** |
+| **skunkBat** | A | -- | -- | -- | -- | A | A | B | -- | -- | **A** |
 
 ### Grade Distribution
 
 | Grade | Count | Primals |
 |-------|-------|---------|
-| A | 2 | barraCuda, bingoCube |
-| B | 7 | BearDog, coralReef, biomeOS, petalTongue, rhizoCrypt, sweetGrass, sourDough |
-| C | 4 | Songbird, NestGate, Squirrel, LoamSpine |
+| A | 4 ↑ | barraCuda, bingoCube, coralReef, skunkBat |
+| B | 7 | BearDog, Songbird, biomeOS, petalTongue, rhizoCrypt, sweetGrass, LoamSpine, sourDough |
+| C | 3 ↓ | NestGate, ToadStool, Squirrel |
 | D | 1 | ToadStool |
 | F | 0 | — |
 
@@ -90,37 +97,37 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 
 | Check | BD | SB | NG | TS | BC | CR | SQ | bOS | PT | RC | SG | LS | BiC | SD |
 |-------|----|----|----|----|----|----|----|----|----|----|----|----|-----|-----|
-| `cargo fmt` | PASS | PASS | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| `cargo clippy -D warnings` | PASS | PASS | PASS | DEBT | DEBT | DEBT | PASS | PASS | PASS | DEBT | DEBT | PASS | PASS | PASS |
-| `cargo test --all-features` | DEBT | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| `cargo doc --no-deps` | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| Edition 2024 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| `cargo fmt` | 1 diff | 2 diffs | PASS | 1 diff ↑↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS | PASS |
+| `cargo clippy -D warnings` | PASS | PASS | PASS | PASS ↑↑ | PASS | PASS ↑ | PASS | PASS | PASS | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS |
+| `cargo test --all-features` | PASS (14.4K) | PASS | PASS (11.7K) | PASS | PASS (3.9K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS | PASS | PASS (29) | PASS | PASS |
+| `cargo doc --no-deps` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| Edition 2024 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS |
 | `forbid(unsafe_code)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | `warn(missing_docs)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No TODO/FIXME/HACK | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| No files >1000 lines | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| No files >1000 lines | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No `.unwrap()` in lib | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No commented-out code | DEBT | DEBT | PASS | DEBT | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS |
-| License `AGPL-3.0-or-later` | DEBT | DEBT | DEBT | DEBT | PASS | DEBT | PASS | DEBT | PASS | PASS | DEBT | PASS | PASS | PASS |
-| SPDX header on sources | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT | DEBT |
-| **Grade** | **C** | **B** | **B** | **D** | **F** | **C** | **B** | **B** | **A** | **A** | **B** | **A** | **F** | **B** |
+| License `AGPL-3.0-or-later` | PASS ↑ | PASS ↑ | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS | PASS ↑ | PASS | PASS | PASS ↑ | PASS | PASS ↑ | PASS |
+| SPDX header on sources | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT |
+| **Grade** | **B** ↑ | **B** | **A** ↑ | **B** ↑↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** | **A** | **A** ↑ | **A** | **A** ↑ | **A** ↑ |
 
-### Tier 1 Detail
+### Tier 1 Detail (April 6 re-audit)
 
-- **BearDog**: 1 env-dependent test failure (`dispatch_doctor_comprehensive` needs live primals). 71 commented-out code lines. License needs `-or-later`. SPDX says `-only`.
-- **Songbird**: 28 commented-out code lines. License needs `-or-later`.
-- **NestGate**: 1 file fmt deviation (`migration.rs:189`). License needs `-or-later`. `deny(unsafe_code)` at workspace + `forbid` per-crate in `code/crates/`.
-- **ToadStool**: ~1,899 lines of fmt diff. Clippy: `manual_let_else` + deprecated `GenericArray::from_slice`. 485 `#[allow(` vs 126 `#[expect(`. License needs `-or-later`.
-- **barraCuda**: All T1 issues resolved (Sprint 29): `eval_math` decomposed into 4 focused functions (E0061 fixed), `executor.rs` 1,097→932 lines (vector ops extracted), unfulfilled lint expectation resolved. Clippy pedantic+nursery clean, `cargo fmt` clean, 3,815 lib + 16 naga-exec tests pass.
-- **coralReef**: Clippy: 7 errors (`items_after_statements`, `doc_markdown` in `coral-gpu` tests). 17 commented-out lines. License needs `-or-later`.
-- **Squirrel**: 19 commented-out code lines. `unsafe_code = "forbid"` via workspace lints. `missing_docs = "warn"` via workspace lints. 5 `#[allow(` vs 289 `#[expect(`.
-- **biomeOS**: `tools/` sub-crate still on edition 2021. 5 commented-out lines. License needs `-or-later`. `deny` workspace + `forbid` per-crate.
-- **petalTongue**: Near-perfect. 1 commented-out line (negligible). License already `-or-later`.
-- **rhizoCrypt**: Clippy: 5 `doc_markdown` in test file only. `deny(unsafe_code)` + `cfg_attr(not(test), forbid)`.
-- **sweetGrass**: Clippy: 1 unused import in `tcp_jsonrpc.rs:123`. License needs `-or-later`. `.cargo/config.toml` target-dir issue.
-- **LoamSpine**: Clean across all items. `forbid(unsafe_code)` at workspace level.
-- **bingoCube**: v0.1.1 — All Tier 1 checks pass. Edition 2024, `AGPL-3.0-or-later`, `forbid(unsafe_code)`, clippy pedantic+nursery clean, 54 tests, SPDX on all files.
-- **sourDough**: No SPDX headers in source files. `forbid(unsafe_code)` + `missing_docs = "warn"` via workspace lints. `deny.toml` missing.
+- **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. 1 fmt diff. 14,366 tests pass.
+- **Songbird**: 48 clippy warnings resolved. License updated to `-or-later`. 2 fmt diffs. Large test suite (>120s).
+- **NestGate**: Fmt **PASS** (was 1 diff). License updated to `-or-later`. Clippy CLEAN. 11,661 tests pass.
+- **ToadStool**: **Major turnaround.** Clippy **CLEAN** (was 2 errors). Fmt **1 diff** (was ~1,899). License updated to `-or-later`. `tar` dep updated.
+- **barraCuda**: E0061 **FIXED** (Sprint 29). `executor.rs` under 1,000 lines. Clippy clean. 3,899 tests pass. SIGSEGV test thread cap added.
+- **coralReef**: Clippy **CLEAN** (was 7 errors). 8 warnings resolved in `coral-gpu` tests. License updated to `-or-later`.
+- **Squirrel**: Clippy CLEAN. fmt PASS. 6,868 tests pass. Commented-out code remains minor residual.
+- **biomeOS**: v2.91 — License updated to `-or-later`. 7,638 tests. Large file refactoring complete. 27 new targeted tests.
+- **petalTongue**: All clean. 1 flaky test (`test_resolve_instance_id_error_message_invalid` — passes on retry).
+- **rhizoCrypt**: Clippy **CLEAN** (39 `doc_markdown` warnings resolved). All clean.
+- **sweetGrass**: Clippy **CLEAN** (unused import fixed). License updated to `-or-later`. `.cargo/config.toml` target-dir still points to `/home/southgate/` (non-blocking).
+- **LoamSpine**: Fmt **PASS** (was failing). v0.9.16 public chain anchor. All clean.
+- **bingoCube**: Edition **2024** (was 2021). Clippy **CLEAN** (was 15 errors). `deny.toml` added. License updated to `-or-later`.
+- **sourDough**: `deny.toml` **added** (was missing). All clean except SPDX on source files.
 
 ---
 

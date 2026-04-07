@@ -1,10 +1,83 @@
 # Deployment and Composition — Architecture Patterns
 
-**Version:** 1.0.0  
-**Date:** April 4, 2026  
+**Version:** 1.1.0  
+**Date:** April 6, 2026  
 **Status:** Active  
 
 This document consolidates: `COMPOSITION_PATTERNS.md`, `NEURAL_API_GRAPH_DEPLOYMENT_STANDARD.md`, `BYOB_DEPLOY_GRAPH_SCHEMA.md`, `SPRING_AS_NICHE_DEPLOYMENT_STANDARD.md`, `SPRING_NICHE_DEPLOYMENT_GUIDE.md`, `GEN4_BRIDGE.md`, `SPOREGARDEN_DEPLOYMENT_STANDARD.md`, `FIELDMOUSE_DEPLOYMENT_STANDARD.md`, `GATE_DEPLOYMENT_STANDARD.md`, `WORKSPACE_LAYOUT.md`.
+
+---
+
+## The Composition Principle
+
+**Complex functions emerge from composing base primals. You never build a new primal
+to achieve a higher-order capability — you compose existing ones via Neural API graphs.**
+
+Primals are atoms. Each primal owns one responsibility domain and exposes it as
+JSON-RPC capabilities. biomeOS's Neural API is the composition mechanism: TOML
+workflow graphs declare sequences of capability calls over autonomous primals.
+The graph is the program; the primals are the instruction set.
+
+### Emergent niches from base primals
+
+| Emergent Function | Graph | Base Primals | What Emerges |
+|-------------------|-------|--------------|--------------|
+| **RootPulse** (version control) | `rootpulse_commit.toml` | rhizoCrypt + loamSpine + sweetGrass + BearDog | Sovereign VCS: session → dehydrate → sign → commit → attribute |
+| **NUCLEUS science** | `wetspring_science_nucleus.toml` | Tower + Node + Nest + Provenance Trio + petalTongue | Full science pipeline with provenance, visualization, auth |
+| **Game engine** | `game_engine_tick.toml` | ludoSpring + Squirrel + petalTongue + Provenance Trio | 60 Hz continuous game loop with AI and attribution |
+| **Protein folding** | *(future)* | neuralSpring + hotSpring + wetSpring + barraCuda | Pipeline graph over science springs |
+
+RootPulse is not a primal. It is a `biomeos rootpulse` CLI mode that sends
+`graph.execute("rootpulse_commit")` to the Neural API. The Neural API executes
+the graph over the provenance trio. The trio primals (rhizoCrypt, loamSpine,
+sweetGrass) are the compositional units — they know nothing about "RootPulse."
+
+### The three-layer model
+
+```
+Layer 3: Emergent Systems (RootPulse, RPGPT, science pipelines, surgical VR)
+         Defined by: TOML workflow graphs
+         |
+Layer 2: biomeOS Neural API (graph execution + capability routing + learning)
+         Protocol: JSON-RPC 2.0, capability_call, graph.execute
+         |
+Layer 1: Primals & Springs (autonomous, self-describing, capability-bearing)
+         Contract: niche.rs self-knowledge, health.check, capability.list
+```
+
+Layer 1 primals have **only self-knowledge** — they know their own capabilities,
+not how they will be composed. Layer 2 routes and orchestrates. Layer 3 emerges
+from graph definitions, never from new code in the primals.
+
+### Implications for springs
+
+Springs are Layer 1 primals that validate science domains. A spring achieves
+complex behavior by declaring a deploy graph that composes other primals:
+
+1. **Don't build what exists.** If a primal exposes the capability you need,
+   call it via `capability_call`. Don't reimplement.
+2. **Compose, don't import.** Springs never import other primal source code.
+   All coordination is IPC over JSON-RPC.
+3. **Graphs are the architecture.** Your deploy graph IS your system architecture.
+   Read it as a blueprint: nodes are primals, edges are data dependencies.
+4. **Provenance is composition.** The provenance trio is not a monolith — it is
+   three primals composed by a graph. Springs get provenance by including trio
+   nodes in their deploy graph with `fallback = "skip"` for graceful degradation.
+5. **New functions = new graphs, not new primals.** Cross-spring data sharing,
+   federated provenance, multi-pipeline orchestration — all are graph design
+   problems in Layer 2, not new primals to build.
+
+### Implications for primalSpring
+
+primalSpring validates that compositions work. It is:
+- **Upstream of springs** — defines proto graphs and coordination patterns
+- **Downstream of primals** — validates primal compositions via plasmidBin deployments
+- **Gap resolver** — when a spring exposes a composition failure, primalSpring
+  determines whether the fix belongs in the graph, the primal, or the standard
+
+primalSpring does NOT export client libraries. Each spring wires its own IPC
+using `capability_call` on the Neural API. primalSpring publishes the patterns
+(via wateringHole) and validates them (via experiments).
 
 ---
 
@@ -713,6 +786,7 @@ ecoPrimals/
 
 | Version | Date | Notes |
 |---------|------|-------|
+| 1.1.0 | 2026-04-06 | Added Composition Principle: complex functions emerge from composing base primals via Neural API graphs. Three-layer model. Emergent niche table. Implications for springs and primalSpring. |
 | 1.0.0 | 2026-04-04 | Consolidated deployment and composition standards listed in header. |
 
 **Sources consolidated:** `BYOB_DEPLOY_GRAPH_SCHEMA.md`, `COMPOSITION_PATTERNS.md`, `NEURAL_API_GRAPH_DEPLOYMENT_STANDARD.md`, `SPRING_AS_NICHE_DEPLOYMENT_STANDARD.md`, `SPRING_NICHE_DEPLOYMENT_GUIDE.md`, `GEN4_BRIDGE.md`, `SPOREGARDEN_DEPLOYMENT_STANDARD.md`, `FIELDMOUSE_DEPLOYMENT_STANDARD.md`, `GATE_DEPLOYMENT_STANDARD.md`, `WORKSPACE_LAYOUT.md`.
