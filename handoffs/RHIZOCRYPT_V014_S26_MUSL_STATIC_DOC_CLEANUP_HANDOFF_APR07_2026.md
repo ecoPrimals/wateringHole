@@ -55,7 +55,16 @@ runtime. Cleaned stale documentation across rhizoCrypt and wateringHole.
 - Evolved test mock IDs from primal names (`mock-beardog-1`, `toadstool.example.com`) to capability-neutral (`mock-signing-1`, `compute.example.com`) across 4 test files
 - Extracted `beardog_http.rs` inline tests (330 lines) to `beardog_http_tests.rs` using `#[path]` pattern
 
-### 7. wateringHole Updates
+### 7. GAP-MATRIX-05: Live IPC Validation (RESOLVED)
+
+- Implemented `identity.get` method — biomeOS uses this for primal discovery
+- Changed `capabilities.list` wire format to biomeOS Format E (`provided_capabilities` wrapper)
+- Live-validated all probes on release binary: `identity.get`, full health triad, `capabilities.list` — all PASS on TCP newline (9401) and UDS
+- ECOSYSTEM_COMPLIANCE_MATRIX Tier 10 grade: D → A
+- GAP-MATRIX-05 for rhizoCrypt: RESOLVED
+- New test: `test_identity_get`
+
+### 8. wateringHole Updates
 
 - `ECOSYSTEM_COMPLIANCE_MATRIX.md`: rhizoCrypt musl DEBT → PASS (Tier 2, Tier 9 x86_64), grade B in Tier 9, detail text updated
 - `PRIMAL_REGISTRY.md`: rhizoCrypt 0.13.0-dev → 0.14.0-dev, 1,412 → 1,424 tests, musl-static shipped
@@ -75,7 +84,7 @@ runtime. Cleaned stale documentation across rhizoCrypt and wateringHole.
 
 - `cargo fmt` — clean
 - `cargo clippy --workspace --all-features` — 0 warnings
-- `cargo test --workspace --all-features` — 1,424 tests, 0 failures
+- `cargo test --workspace --all-features` — 1,425 tests, 0 failures
 - `cargo llvm-cov` — 94.34% lines (CI gate: 90%)
 - Musl-static binary verified (file, ldd, BLAKE3)
 - All `.rs` files under 1000 lines (max: 928)
