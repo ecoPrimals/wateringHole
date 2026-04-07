@@ -534,7 +534,7 @@ Spring → `barraCuda.compute.dispatch` → preamble/tier → coralReef compile 
 | ISSUE-012 (rhizoCrypt) | P3 | Content similarity index — LSH; spring participation phases A–C |
 | ISSUE-013 (sweetGrass) | P3 | Content convergence / provenance intersection — `ContentConvergence`; coordinate with ISSUE-012 |
 | ISSUE-022 | P2 | Root privilege in coralReef GPU lifecycle — fd-passing / thin privileged launcher |
-| ISSUE-011 (ludo) | P1 | rhizoCrypt no UDS — add `--unix`, default `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock` |
+| ~~ISSUE-011 (ludo)~~ | ~~P1~~ | ~~rhizoCrypt no UDS~~ — RESOLVED (session 23): `--unix` shipped, dual-mode TCP+UDS, `biomeos/rhizocrypt.sock` |
 | ISSUE-012 (ludo) | P1 | loamSpine runtime nesting panic — fix `block_on` in async |
 | ISSUE-013 (ludo) | P2 | Fitts/Hick formula mismatch vs Python — `variant` param or align defaults |
 | ISSUE-014 | P2 | Neural API not registering many primal capabilities — self-register or probe `capabilities.list` |

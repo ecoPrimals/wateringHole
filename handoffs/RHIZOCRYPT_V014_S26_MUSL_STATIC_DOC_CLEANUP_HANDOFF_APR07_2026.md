@@ -2,7 +2,7 @@
 
 **Date**: April 7, 2026
 **Session**: 26
-**Focus**: Musl-static deployment, Dockerfile evolution, documentation cleanup
+**Focus**: Musl-static deployment, Dockerfile evolution, sovereignty cleanup, documentation refresh
 
 ---
 
@@ -38,10 +38,36 @@ runtime. Cleaned stale documentation across rhizoCrypt and wateringHole.
 - `crates/rhizocrypt-service/README.md`: Docker example evolved from `rust:1.85` + `debian:bookworm-slim` to musl-static + Alpine pattern
 - `docs/DEPLOYMENT_CHECKLIST.md`: Session reference updated (24 → 26), musl-static deployment note added
 
-### 4. wateringHole Updates
+### 4. Blocking Fix: `dag.dehydrate` Alias
+
+- Added `"dag.dehydrate"` alias for `"dag.dehydration.trigger"` in JSON-RPC handler dispatch and MCP `tools.call` dispatch
+- Springs calling `capability.call("dag", "dehydrate")` via biomeOS prefix matching now reach the correct handler
+- New test: `test_dehydrate_alias_routes_to_trigger`
+
+### 5. Internal Vocabulary: `attested_at` → `witnessed_at`
+
+- Renamed `Attestation.attested_at` to `witnessed_at` across 6 files to align with `WireWitnessRef` wire vocabulary
+
+### 6. Sovereignty Cleanup
+
+- Evolved 14 doc comments from primal-specific names to capability-neutral language across `service.rs`, `client.rs`, `handler.rs`, `mod.rs`, `uds.rs`, `dehydration_wire.rs`
+- Removed misleading "LEGACY: Primal-Specific Traits" section from `integration/mod.rs`
+- Evolved test mock IDs from primal names (`mock-beardog-1`, `toadstool.example.com`) to capability-neutral (`mock-signing-1`, `compute.example.com`) across 4 test files
+- Extracted `beardog_http.rs` inline tests (330 lines) to `beardog_http_tests.rs` using `#[path]` pattern
+
+### 7. wateringHole Updates
 
 - `ECOSYSTEM_COMPLIANCE_MATRIX.md`: rhizoCrypt musl DEBT → PASS (Tier 2, Tier 9 x86_64), grade B in Tier 9, detail text updated
-- `PRIMALSPRING_TRIO_WITNESS_HARVEST_HANDOFF_APR07_2026.md`: plasmidBin status updated to reflect rhizoCrypt musl-static shipped
+- `PRIMAL_REGISTRY.md`: rhizoCrypt 0.13.0-dev → 0.14.0-dev, 1,412 → 1,424 tests, musl-static shipped
+- Cleaned stale musl-pending references in loamSpine and sweetGrass handoffs
+- `PRIMALSPRING_TRIO_WITNESS_HARVEST_HANDOFF_APR07_2026.md`: plasmidBin status updated
+
+### 8. Documentation Refresh
+
+- `docs/DEPLOYMENT_CHECKLIST.md`: 1,424 tests, 130 `.rs` files, April 7 date
+- `docs/ENV_VARS.md`: Last Updated → April 7, 2026
+- `showcase/00_START_HERE.md`: 1,424 tests, 94.34% coverage, April 7 date
+- `showcase/ENVIRONMENT_VARIABLES.md`: Clarified `SONGBIRD_TOWER` as showcase-only
 
 ---
 
@@ -49,7 +75,7 @@ runtime. Cleaned stale documentation across rhizoCrypt and wateringHole.
 
 - `cargo fmt` — clean
 - `cargo clippy --workspace --all-features` — 0 warnings
-- `cargo test --workspace --all-features` — 1,423 tests, 0 failures
+- `cargo test --workspace --all-features` — 1,424 tests, 0 failures
 - `cargo llvm-cov` — 94.34% lines (CI gate: 90%)
 - Musl-static binary verified (file, ldd, BLAKE3)
 - All `.rs` files under 1000 lines (max: 928)
@@ -69,3 +95,5 @@ runtime. Cleaned stale documentation across rhizoCrypt and wateringHole.
 
 - benchScale can now deploy rhizoCrypt via container (musl-static, no glibc dependency)
 - loamSpine and sweetGrass remain blocked for container deployment until their musl-static builds are completed
+- Springs can now call `dag.dehydrate` without 404 (blocking alias fix)
+- rhizoCrypt production code has zero primal-specific doc comments in non-adapter modules
