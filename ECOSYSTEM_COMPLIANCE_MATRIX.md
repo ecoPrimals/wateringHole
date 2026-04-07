@@ -1,7 +1,7 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 2.3.0
-**Date:** April 6, 2026
+**Version:** 2.4.0
+**Date:** April 7, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 **Supersedes:** `IPC_COMPLIANCE_MATRIX.md` v1.6.0 (archived to `fossilRecord/`)
@@ -14,6 +14,11 @@ Data sourced from: April 6, 2026 full ecosystem re-audit (15 primals),
 `IPC_COMPLIANCE_MATRIX.md` v1.6.0, `PRIMAL_GAPS.md` live tracking,
 esotericWebb and ludoSpring compositions (March–April 2026), and direct
 source inspection via `rg`, `cargo`, and manual review.
+
+**v2.4.0 changes**: Fmt debt cleared — BearDog, Songbird, toadStool now PASS `cargo fmt --check`.
+All 15 primals pass fmt. benchScale GAP-017 RESOLVED (biomeOS deploy script fixed:
+`--graphs-dir`, `--port`, `--family-id` now passed; health check upgraded to 15s + 3 retries).
+Trio witness evolution (WireWitnessRef) harvested to plasmidBin. barraCuda executor.rs split.
 
 **v2.3.0 changes**: Full re-audit with `cargo fmt/clippy/test` across all 15 primals.
 License alignment **COMPLETE** (all `-or-later`). 10 build/test debt items resolved.
@@ -63,7 +68,7 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 
 | Primal | T1 Build | T2 UniBin | T3 IPC | T4 Discovery | T5 Naming | T6 Resp | T7 Workspace | T8 Present | T9 Deploy | T10 Live | Rollup |
 |--------|----------|-----------|--------|--------------|-----------|---------|--------------|------------|-----------|----------|--------|
-| **BearDog** | B ↑ | A | A | B | B | B | A | C | A | B | **B** |
+| **BearDog** | A ↑ | A | A | B | B | B | A | C | A | B | **B** |
 | **Songbird** | B | B | B | C ↑ | B | B | A | C | A | B | **B** ↑ |
 | **NestGate** | A ↑ | D | C | C | B | B | A | A | D | N/T | **C** |
 | **ToadStool** | B ↑↑ | C | C | D | D | B | A | C ↑ | C | D | **C** ↑ |
@@ -114,8 +119,8 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 
 ### Tier 1 Detail (April 6 re-audit)
 
-- **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. 1 fmt diff. 14,366 tests pass.
-- **Songbird**: 48 clippy warnings resolved. License updated to `-or-later`. 2 fmt diffs. Large test suite (>120s).
+- **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. Fmt **CLEAN** ↑ (was 1 diff). 14,366 tests pass.
+- **Songbird**: 48 clippy warnings resolved. License updated to `-or-later`. Fmt **CLEAN** ↑ (was 2 diffs). Large test suite (>120s).
 - **NestGate**: Fmt **PASS** (was 1 diff). License updated to `-or-later`. Clippy CLEAN. 11,661 tests pass.
 - **ToadStool**: **Major turnaround.** Clippy **CLEAN** (was 2 errors). Fmt **1 diff** (was ~1,899). License updated to `-or-later`. `tar` dep updated.
 - **barraCuda**: E0061 **FIXED** (Sprint 29). `executor.rs` under 1,000 lines. Clippy clean. 3,899 tests pass. SIGSEGV test thread cap added.
@@ -388,7 +393,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **BearDog** | License → `-or-later` | 193 `#[allow(` → `#[expect(` | 71 commented-out code lines |
 | **Songbird** | Discovery: 935 primal-name refs | License → `-or-later` | 393 `#[allow(` → `#[expect(` |
 | **NestGate** | `--port` not functional | License → `-or-later` | aarch64 musl not built |
-| **ToadStool** | ~1,899 lines fmt debt | Discovery: 2,998 primal-name refs | 485 `#[allow(` → `#[expect(` |
+| **ToadStool** | ~~1,899 fmt~~ → **CLEAN** | Discovery: 2,998 primal-name refs | 485 `#[allow(` → `#[expect(` |
 | **barraCuda** | — | — | — |
 | **coralReef** | 7 clippy errors in tests | License → `-or-later` | No CONTEXT.md |
 | **Squirrel** | Discovery: 1,789 primal-name refs | Overstep: sled/sqlx/ed25519 beyond domain | 19 commented-out code lines |

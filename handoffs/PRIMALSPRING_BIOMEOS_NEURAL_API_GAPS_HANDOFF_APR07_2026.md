@@ -15,32 +15,28 @@ These are the highest priority primal evolutions for garden readiness.
 
 ---
 
-## GAP-017: neural-api fails to start in benchScale (CRITICAL)
+## GAP-017: neural-api fails to start in benchScale — **RESOLVED**
 
 **Source**: esotericWebb `EVOLUTION_GAPS.md` GAP-017
 
-**Evidence**: In a benchScale `tower-2node` live run, BearDog and Songbird
-come up `LIVE`, but biomeOS `neural-api` is `ZOMBIE` (fails health check
-after startup). This blocks the "biomeOS-orchestrated composition" use case
-where graphs are submitted to neural-api and routed to primals.
+**Root cause** (diagnosed April 7): The bug was in `benchScale/scripts/deploy-ecoprimals.sh`,
+not in biomeOS code. The `build_launch_cmd` for biomeos was:
+```
+BIOMEOS_HTTP_PORT=$port $DEPLOY_DIR/bin/biomeos neural-api
+```
+Three defects:
+1. `BIOMEOS_HTTP_PORT` env var is **not read** by the `biomeos` binary — it uses `--port`
+2. Without `--graphs-dir`, biomeOS defaults to `./graphs` (relative, doesn't exist in container)
+3. Without `--family-id`, auto-discovery fails in container context
 
-**Impact**: All consumers (Webb, wetSpring, ludoSpring) that want to use
-`graph.execute` or `capability.call` routing fall back to direct primal IPC.
-Webb works around this via `PrimalBridge` direct discovery, but loses the
-composition graph execution model. wetSpring's provenance trio calls via
-`capability.call` degrade gracefully but miss the Neural API orchestration
-layer.
+biomeOS's `health.liveness` handler is trivial (returns `{"status": "alive"}` with no deps),
+but the server never reached the accept loop because startup stalled without graphs.
 
-**Expected**: biomeOS neural-api starts healthy in benchScale topologies and
-responds to `health.liveness` within the configured timeout.
-
-**Current workaround**: Gardens and springs compose directly to primals via
-their own discovery + bridge, bypassing biomeOS orchestration entirely.
-
-**Ask**: Investigate the benchScale startup sequence. Is neural-api failing
-on a missing dependency (NestGate? Songbird mesh?)? Is the health check
-timeout too aggressive for the startup ordering? A fix here unblocks all
-graph-based composition for gardens.
+**Fix applied**: Deploy script now emits:
+```
+$DEPLOY_DIR/bin/biomeos neural-api --graphs-dir $DEPLOY_DIR/graphs --port $port --family-id '$family_id'
+```
+Health check upgraded from 5s single-shot to 15s initial grace + 3 retries at 10s intervals.
 
 ---
 
