@@ -153,7 +153,7 @@ N/A for library primals without IPC daemons (barraCuda, bingoCube, sourDough).
 | Graceful degradation | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Signal handling | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Zero application C deps | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| musl-static cross-compile | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | DEBT | DEBT | DEBT | DEBT |
+| musl-static cross-compile | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | DEBT | PASS | DEBT | DEBT |
 | No hardcoded paths | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | **Grade** | **A** | **B** | **D** | **C** | **A** | **C** | **C** | **B** | **B** | **C** | **C** |
 
@@ -167,7 +167,7 @@ N/A for library primals without IPC daemons (barraCuda, bingoCube, sourDough).
 - **Squirrel**: `--port` accepted but TCP not primary transport (UDS preferred). musl-static both arches.
 - **biomeOS**: Orchestrator pattern — `neural-api`/`api` subcommand, not `server`. `--port` forces UDS in some modes.
 - **petalTongue**: `server --port` functional. x86_64 musl works; aarch64 egui headless cross-compile pending.
-- **rhizoCrypt**: `server` subcommand with `--port` (tarpc) and `--unix` (UDS). musl via CI cross-compile jobs.
+- **rhizoCrypt**: `server` subcommand with `--port` (tarpc) and `--unix` (UDS). musl-static x86_64 shipped (5.4M, Alpine runtime). aarch64 via CI cross-compile.
 - **sweetGrass**: No `--port` flag (uses `--http-address` for full address). musl-static not tested.
 - **LoamSpine**: No `--port` flag (uses `--jsonrpc-port`). Source-built binary verified; musl not yet.
 
@@ -363,12 +363,12 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 
 | Check | BD | SB | NG | TS | CR | SQ | bOS | PT | RC | SG | LS |
 |-------|----|----|----|----|----|----|-----|----|----|----|----|
-| musl-static x86_64 | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | DEBT | DEBT | DEBT |
+| musl-static x86_64 | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | DEBT | DEBT |
 | musl-static aarch64 | PASS | PASS | DEBT | PASS | DEBT | PASS | PASS | DEBT | DEBT | DEBT | DEBT |
 | TCP listener for mobile | PASS | PASS | DEBT | DEBT | PASS | PASS | DEBT | PASS | PASS | DEBT | PASS |
 | Abstract socket support | PASS | DEBT | DEBT | DEBT | PASS | PASS | DEBT | DEBT | DEBT | DEBT | DEBT |
 | plasmidBin submission | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS |
-| **Grade** | **A** | **A** | **D** | **C** | **C** | **A** | **C** | **C** | **C** | **D** | **C** |
+| **Grade** | **A** | **A** | **D** | **C** | **C** | **A** | **C** | **C** | **B** | **D** | **C** |
 
 ### Tier 9 Detail
 
@@ -380,7 +380,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 - **Squirrel**: Both arches. TCP + abstract. `@squirrel` confirmed on GrapheneOS. In plasmidBin (5.8M).
 - **biomeOS**: Both arches. Forces UDS even when `--port` specified (TCP-only mode needed). In plasmidBin (12M).
 - **petalTongue**: x86_64 musl works. aarch64 egui headless pending. TCP via `--port`. In plasmidBin (30M).
-- **rhizoCrypt**: musl CI jobs for both arches. TCP works (dual-mode). In plasmidBin (5.4M glibc — needs musl).
+- **rhizoCrypt**: x86_64 musl-static shipped (5.4M, Alpine runtime). aarch64 via CI cross-compile. TCP works (dual-mode). In plasmidBin (musl-static).
 - **sweetGrass**: musl not tested. No TCP (HTTP-only). In plasmidBin (8.8M glibc — needs musl).
 - **LoamSpine**: x86_64 source-built verified. aarch64 not tested. TCP works. In plasmidBin (6.9M glibc — needs musl).
 
@@ -399,7 +399,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **Squirrel** | Discovery: 1,789 primal-name refs | Overstep: sled/sqlx/ed25519 beyond domain | 19 commented-out code lines |
 | **biomeOS** | License → `-or-later` | `--port` forces UDS (TCP-only needed) | `tools/` edition 2021 |
 | **petalTongue** | Discovery: 982 primal-name refs | No CONTEXT.md | 32 `#[allow(` → `#[expect(` |
-| **rhizoCrypt** | Health triad missing on live binary | musl binary is glibc (needs musl-static) | No domain symlink |
+| **rhizoCrypt** | Health triad missing on live binary | ~~musl binary is glibc~~ → musl-static shipped | No domain symlink |
 | **sweetGrass** | No `--port` (HTTP-only TCP) | Health triad HTTP-only (not newline) | License → `-or-later` |
 | **LoamSpine** | — (LS-03 resolved v0.9.15) | `--port` alias shipped (v0.9.15) | musl binary is glibc |
 | **bingoCube** | — (all debt resolved) | — | — |
