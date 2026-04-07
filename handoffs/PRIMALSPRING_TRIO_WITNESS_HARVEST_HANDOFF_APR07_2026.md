@@ -154,10 +154,11 @@ reproducible science pipelines.
 
 ## plasmidBin status
 
-Trio binaries harvested to `infra/plasmidBin/primals/` (x86_64-linux-gnu).
-Checksums updated in `checksums.toml`. Manifest versions bumped. Doctor
-script verifies trio checksums. Musl-static builds are tracked but not yet
-available.
+Trio binaries harvested to `infra/plasmidBin/primals/` (x86_64-linux-gnu for
+loamSpine/sweetGrass, x86_64-linux-musl for rhizoCrypt). Checksums updated in
+`checksums.toml`. Manifest versions bumped. Doctor script verifies trio
+checksums. rhizoCrypt musl-static shipped (April 2026); loamSpine and sweetGrass
+musl-static builds tracked but not yet available.
 
 ### Validation
 
