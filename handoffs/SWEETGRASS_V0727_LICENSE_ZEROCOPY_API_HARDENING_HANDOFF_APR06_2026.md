@@ -12,13 +12,15 @@
 
 ## Summary
 
-Four-phase deep evolution session addressing primalSpring downstream audit
+Six-phase deep evolution session addressing primalSpring downstream audit
 findings and remaining deep debt. License evolved to AGPL-3.0-or-later per
 wateringHole/LICENSING_AND_COPYLEFT.md scyBorg standard. Zero-copy
 improvements on hot paths. API hardened with `#[non_exhaustive]` on all
 public enums. `deny.toml` tightened against protobuf codegen crates.
 17 unused dependencies removed. Attribution API now derivation-aware
-(Phase 4 radiating attribution prep).
+(Phase 4 radiating attribution prep). musl-static builds verified.
+Braid proof block evolved from LD-Proof `BraidSignature` to
+`WireWitnessRef`-aligned `Witness` type, unifying trio output format.
 
 ---
 
@@ -150,6 +152,34 @@ Trio glibc debt resolved for sweetGrass. Binary now builds musl-static.
 
 ---
 
+## Phase 6 — `BraidSignature` → `Witness` (WireWitnessRef alignment)
+
+Braid top-level proof field evolved from W3C LD-Proof `BraidSignature`
+(`sig_type` / `proof_value` / `proof_purpose`) to the ecosystem
+`WireWitnessRef`-aligned `Witness` type (`kind` / `evidence` / `encoding`
+/ `algorithm` / `tier`).
+
+| Before (LD-Proof) | After (WireWitnessRef) |
+|--------------------|------------------------|
+| `Braid.signature: BraidSignature` | `Braid.witness: Witness` |
+| `sig_type: "Ed25519Signature2020"` | `kind: "signature"`, `algorithm: Some("ed25519")` |
+| `proof_value` (base64) | `evidence` (base64), `encoding: "base64"` |
+| `proof_purpose: "assertionMethod"` | (implicit — not in WireWitnessRef) |
+| `verification_method: "did:key:...#keys-1"` | `agent: Did` |
+| `created` (ns timestamp) | `witnessed_at` (ns timestamp) |
+| N/A | `tier: Some("local")` for crypto, `Some("open")` for unsigned |
+
+**Files changed**: 16 Rust source files + 3 spec files
+
+- `Witness::unsigned()` and `Witness::from_ed25519()` constructors added
+- `BraidSignature` deprecated (`#[deprecated(since = "0.7.28")]`), retained for one release cycle
+- `#[serde(alias = "signature")]` on `Braid.witness` for backward compat
+- Postgres JSONB: fallback deserializer converts old rows losslessly
+- `SigningClient::sign()` returns `Witness` instead of `BraidSignature`
+- Mock signing client updated to produce `Witness` instances
+
+---
+
 ## Remaining Debt (None Blocking)
 
 - **Radiating attribution across ionic bonds** — Phase 4 / LOW; derivation chain attribution is live, but cross-NUCLEUS traversal requires ionic bonding protocol (primalSpring Track 4)
@@ -157,6 +187,7 @@ Trio glibc debt resolved for sweetGrass. Binary now builds musl-static.
 - **Coverage gap**: Postgres store tests require Docker runtime; excluded from llvm-cov
 - **`sled` backend**: Optional, unmaintained upstream; `skip-tree` in `deny.toml`; redb is primary
 - **`testcontainers` dev chain**: Pulls `bollard` → `rustls` → `ring` (C/ASM); dev-only, wrappered in `deny.toml`
+- **Remove `BraidSignature` (v0.7.29)**: Currently deprecated; remove after one release cycle once no Postgres rows use the old format
 
 ---
 
@@ -169,4 +200,5 @@ Trio glibc debt resolved for sweetGrass. Binary now builds musl-static.
 - **Attribution now walks derivations**: `attribution.chain` JSON-RPC results now include inherited contributors from parent braids; consumers expecting single-braid-only results should account for additional contributors
 - **17 deps removed**: Crates depending on sweetGrass transitives may see resolved version changes in lockfile
 - **`Attestation` → `Witness`**: Dehydration type renamed; `WireAttestationRef` is now `WireWitnessRef` with `witnessed_at` field. Trio partners must update wire type references.
+- **`Braid.signature` → `Braid.witness`**: Top-level proof block now uses `WireWitnessRef` vocabulary. Wire consumers expecting `"signature": {"type": ..., "proofValue": ...}` should update to `"witness": {"kind": ..., "evidence": ...}`. `#[serde(alias = "signature")]` provides read-path backward compatibility.
 - **musl-static ready**: sweetGrass binary is now `statically linked` (4.5 MB); trio glibc deployment debt resolved for sweetGrass. rhizoCrypt and loamSpine still need musl treatment.
