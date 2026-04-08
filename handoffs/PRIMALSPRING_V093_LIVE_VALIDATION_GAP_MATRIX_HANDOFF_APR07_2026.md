@@ -22,7 +22,7 @@ This handoff assigns remaining work to each primal team based on the gaps found.
 
 ---
 
-## biomeOS Team — GAP-MATRIX-07b + GAP-MATRIX-08 + GAP-MATRIX-02 (Medium + Low)
+## biomeOS Team — Remaining: GAP-MATRIX-02 (Medium, partial) + GAP-MATRIX-09 (Low)
 
 ### ~~GAP-MATRIX-01~~ RESOLVED (v2.93) + ~~GAP-MATRIX-01b~~ RESOLVED (v2.93) + ~~GAP-MATRIX-07~~ RESOLVED (v2.93)
 
@@ -31,31 +31,13 @@ biomeOS v2.93 (commit `13ca2328`) resolved all three critical/medium gaps:
 - **`unix://` URI scheme** handled in `TransportEndpoint::parse()` → proxy forwarding works end-to-end
 - Combined: **52 capabilities from 2 primals**, 7/9 capability.call tests pass
 
-### GAP-MATRIX-07b (Medium, NEW): Proxy Error Propagation
+### ~~GAP-MATRIX-07b~~ RESOLVED (v2.94) + ~~GAP-MATRIX-08~~ RESOLVED (v2.94) + ~~GAP-MATRIX-02b~~ RESOLVED (v2.94)
 
-**Problem**: When a primal returns a JSON-RPC error response (e.g., parameter
-validation `-32601`), biomeOS reports "Failed to forward" instead of propagating
-the primal's actual error back. The proxy conflates transport failure with
-application-level errors.
-
-**Evidence**: `crypto.verify_ed25519` with wrong params → BearDog returns
-`-32601: Missing required parameter: public_key` → Neural API returns
-`Failed to forward crypto.verify_ed25519 to unix:///...`
-
-**Impact**: Callers cannot distinguish between primal being unreachable vs
-primal rejecting the request. Methods with correct params work fine.
-
-**Recommended Fix**: In the forwarding path, check if the primal socket returned
-a valid JSON-RPC response (even if it's an error response). Only report "Failed
-to forward" for transport-level failures (connection refused, timeout).
-
-### GAP-MATRIX-08 (Low, NEW): Self-Discovery Routing Pollution
-
-**Problem**: Neural API discovers its own socket ~20s after startup during a
-re-scan sweep, registering itself as a capability provider for all domains.
-
-**Impact**: Routing table has duplicate `neural @` entries. No functional
-breakage — correct primal is still `primary_endpoint`.
+biomeOS v2.94 (commit `f67097d8`) resolved the second wave:
+- **GAP-07b**: `forward_request()` preserves primal JSON-RPC error codes via `try_call()` + downcast. No more swallowed `-32601`/`-32602`.
+- **GAP-08**: `NeuralRouter.self_socket_path` excludes own socket from `lazy_rescan_sockets()`, eliminating self-registration pollution.
+- **GAP-02b**: `graph.list` falls back to `biomeos_graph::GraphLoader` when neural parser fails, so `DeploymentGraph`-format TOMLs appear in listings.
+- 4 new tests, 7,658 total (0 failures), clippy PASS.
 
 **Recommended Fix**: Exclude the Neural API's own socket path from
 auto-discovery scans.
@@ -233,10 +215,37 @@ For all teams, primalSpring now provides:
 
 1. **Particle model** (`specs/MIXED_COMPOSITION_PATTERNS.md`) — compositional reasoning framework
 2. **17 sketch graphs** (`graphs/sketches/`) — generic patterns for springs to specialize
-3. **Validation matrix** (`specs/NUCLEUS_VALIDATION_MATRIX.md`) — systematic capability assessment
+3. **Validation matrix** (`specs/NUCLEUS_VALIDATION_MATRIX.md`) — systematic capability assessment (columns A-P)
 4. **5-format capability parser** (`ipc/discover.rs`) — reference implementation (Formats A-E)
 5. **Live probe methodology** — reproducible JSON-RPC probing via `socat` against UDS
-6. **Run 3 baseline** — 52 capabilities, 7/9 capability.call PASS, biomeOS v2.93 validated
+6. **Run 4 baseline** — 162 capabilities, 12/14 capability.call PASS, biomeOS v2.94 validated
+7. **Capability Wire Standard v1.0** (`infra/whitePaper/technical/CAPABILITY_WIRE_STANDARD.md`) — formal IPC self-advertisement spec with 3 compliance levels and audit checklist
+
+---
+
+## Capability Wire Standard — All Primal Teams
+
+**Spec**: `infra/whitePaper/technical/CAPABILITY_WIRE_STANDARD.md`
+
+All primals MUST evolve toward Level 2 compliance. This is now part of the NUCLEUS validation matrix (column P) and will be checked in every future deep-debt audit and cross-spring evolution review.
+
+### Level 2 Target (Standard) — per-primal migration
+
+| Primal | Current | To reach Level 2 |
+|--------|---------|-------------------|
+| sweetGrass | Near-L2 | Add `provided_capabilities` grouping → L3 ready |
+| rhizoCrypt | Near-L2 | Add flat `methods` array at top level |
+| loamSpine | Partial-L2 | Promote nested `methods` to top level, add `identity.get` |
+| BearDog | Partial-L2 | Add flat `methods` array, add `identity.get` |
+| Songbird | L1 only | Wrap bare array in `{primal, version, methods}` envelope, add `identity.get`, remove non-callable entries |
+
+### Tier 1 Migration (non-breaking, immediate)
+
+Every primal: add `"methods": [...]` flat array + `"primal"` + `"version"` to `capabilities.list` result alongside existing fields. Existing biomeOS parser handles both old and new format.
+
+### Audit Protocol
+
+Every primalSpring deep-debt audit MUST run the Level 2 checklist from the spec against each primal in the composition. Column P in the NUCLEUS Validation Matrix tracks per-spring Wire Standard compliance.
 
 ---
 
