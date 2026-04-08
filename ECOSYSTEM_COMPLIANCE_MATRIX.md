@@ -543,6 +543,12 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 
 ## Version History
 
+### v2.5.3 (April 8, 2026)
+
+**barraCuda Sprint 35: Deep Debt — Typed Errors, thiserror & Transport Refactor**
+
+- barraCuda: `validate_insecure_guard` evolved from `Result<(), String>` to typed `BarracudaCoreError::Lifecycle` (last production `Result<_, String>` eliminated). `PppmError` evolved to `#[derive(thiserror::Error)]`. `transport.rs` smart-refactored (866→490 LOC via test extraction). 12-axis deep debt audit: clean bill. All production files under 800 lines. 4,207 tests, all quality gates green.
+
 ### v2.5.2 (April 8, 2026)
 
 **barraCuda BTSP Phase 1 + GAP-MATRIX Resolution**
