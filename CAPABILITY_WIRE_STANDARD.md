@@ -210,7 +210,7 @@ When `result.methods` is present, biomeOS skips format detection entirely. Legac
 
 | Primal | Level 1 | Level 2 | Level 3 | Gap |
 |--------|---------|---------|---------|-----|
-| BearDog | ✓ | Partial | — | Needs `methods` flat array, `identity.get` |
+| BearDog | ✓ | ✓ | — | L2 complete (April 8, 2026): `methods` flat array in `capabilities.list`, `identity.get` returning `{primal, version, domain, license}` |
 | Songbird | ✓ | Partial | — | Has `capabilities.methods` token→method map (Wave 123); needs `{primal, version, methods}` envelope, `identity.get` |
 | rhizoCrypt | ✓ | ✓ | ✓ | Full L3: `methods`, `consumed_capabilities`, `cost_estimates`, `operation_dependencies` |
 | loamSpine | ✓ | Partial | Partial | Needs top-level `methods`, `identity.get` |
