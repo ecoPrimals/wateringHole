@@ -543,6 +543,12 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 
 ## Version History
 
+### v2.5.4 (April 8, 2026)
+
+**barraCuda Sprint 36: Domain-Based Socket Naming & Flaky Test Serialization**
+
+- barraCuda: Socket naming evolved from `barracuda.sock` to `math.sock` per `PRIMAL_SELF_KNOWLEDGE_STANDARD.md` §3 (domain stem, not primal name). Legacy symlink for backward compat. Domain field in `identity.get`: `"compute"` → `"math"`. `three_springs_tests` serialized in gpu-serial nextest group (Mesa llvmpipe SIGSEGV). BTSP Phase 2 blocked on BearDog session RPC completion. 4,207 tests, all quality gates green.
+
 ### v2.5.3 (April 8, 2026)
 
 **barraCuda Sprint 35: Deep Debt — Typed Errors, thiserror & Transport Refactor**
