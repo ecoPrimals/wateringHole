@@ -215,6 +215,7 @@ When `result.methods` is present, biomeOS skips format detection entirely. Legac
 | rhizoCrypt | ✓ | ✓ | ✓ | Full L3: `methods`, `consumed_capabilities`, `cost_estimates`, `operation_dependencies` |
 | loamSpine | ✓ | Partial | Partial | Needs top-level `methods`, `identity.get` |
 | sweetGrass | ✓ | ✓ | ✓ | Full L3 compliance (April 8, 2026) |
+| NestGate | ✓ | ✓ | ✓ | Full L3: `{primal, version, methods}` envelope, `identity.get` with domain/license, `provided_capabilities` (9 groups), `consumed_capabilities`, `protocol`, `transport`. 57 methods advertised. (April 8, 2026) |
 
 ---
 
