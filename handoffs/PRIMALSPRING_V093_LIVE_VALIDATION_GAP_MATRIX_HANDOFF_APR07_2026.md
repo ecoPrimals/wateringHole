@@ -219,13 +219,13 @@ For all teams, primalSpring now provides:
 4. **5-format capability parser** (`ipc/discover.rs`) — reference implementation (Formats A-E)
 5. **Live probe methodology** — reproducible JSON-RPC probing via `socat` against UDS
 6. **Run 4 baseline** — 162 capabilities, 12/14 capability.call PASS, biomeOS v2.94 validated
-7. **Capability Wire Standard v1.0** (`infra/whitePaper/technical/CAPABILITY_WIRE_STANDARD.md`) — formal IPC self-advertisement spec with 3 compliance levels and audit checklist
+7. **Capability Wire Standard v1.0** (`infra/wateringHole/CAPABILITY_WIRE_STANDARD.md`) — formal IPC self-advertisement spec with 3 compliance levels and audit checklist
 
 ---
 
 ## Capability Wire Standard — All Primal Teams
 
-**Spec**: `infra/whitePaper/technical/CAPABILITY_WIRE_STANDARD.md`
+**Spec**: `infra/wateringHole/CAPABILITY_WIRE_STANDARD.md`
 
 All primals MUST evolve toward Level 2 compliance. This is now part of the NUCLEUS validation matrix (column P) and will be checked in every future deep-debt audit and cross-spring evolution review.
 
