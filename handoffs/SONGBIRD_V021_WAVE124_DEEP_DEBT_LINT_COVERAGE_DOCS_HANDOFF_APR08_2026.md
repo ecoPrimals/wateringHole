@@ -121,7 +121,18 @@ Replaced hardcoded `/tmp/beardog.sock` in test constructors and doc examples wit
 
 ## Files Changed
 
-~45 files across 12 crates + root docs + this handoff.
+~88 files across 12 crates + root docs + deployment + specs + CHANGELOG + this handoff (in two commits: Wave 124 core + Wave 124b doc/debris cleanup).
+
+### Wave 124b: Doc Accuracy & Debris Cleanup
+
+- Root docs (README, REMAINING_WORK, CONTEXT, CONTRIBUTING): production `unreachable!()` claim corrected (0 → 2 QUIC VarInt arms), test count synchronized (12,860), dates standardized (Apr 8), file size limit aligned (800L), `expect()` policy clarified, tower_atomic metrics corrected
+- CHANGELOG.md: Waves 119-124 entries added
+- 11 crate `Cargo.toml` descriptions: "BearDog" → "security provider"
+- `deployment/config/songbird.toml.example`: `[beardog]` → `[security-provider]`
+- `deployment/systemd/songbird.service`: URL casing fixed
+- `specs/` archive links: 4 files updated to point at `fossilRecord/consolidated-apr2026/`
+- `tests/README.md`: rewritten to reflect current layout and metrics
+- 2 test file commented-out code blocks cleaned
 
 ---
 
