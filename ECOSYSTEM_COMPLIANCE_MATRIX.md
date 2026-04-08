@@ -543,6 +543,12 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 
 ## Version History
 
+### v2.5.2 (April 8, 2026)
+
+**barraCuda BTSP Phase 1 + GAP-MATRIX Resolution**
+
+- barraCuda: BTSP Phase 1 socket naming complete — `FAMILY_ID` socket scoping (3-tier env precedence), `BIOMEOS_SOCKET_DIR` support, `BIOMEOS_INSECURE` guard. Resolves GAP-MATRIX-12. plasmidBin metadata updated to v0.3.11 (resolves GAP-MATRIX-06). 4,207 tests (was 4,187). BTSP Phase 2+ pending BearDog `btsp.session.*`.
+
 ### v2.5.1 (April 8, 2026)
 
 **Wire Standard L2 Adoptions**
