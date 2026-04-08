@@ -543,6 +543,12 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 
 ## Version History
 
+### v2.5.1 (April 8, 2026)
+
+**Wire Standard L2 Adoptions**
+
+- barraCuda: Wire Standard L2 compliant — `capabilities.list` returns `{primal, version, methods}` envelope with `provided_capabilities`, `consumed_capabilities`, `protocol`, `transport`. `identity.get` implemented. 31 methods (was 30). Both JSON-RPC and tarpc wired. (Library primal — matrix IPC tiers remain N/A but server mode is L2 compliant.)
+
 ### v2.2.0 (April 5, 2026)
 
 **Tier 10: Live Deployment — plasmidBin runtime validation**
