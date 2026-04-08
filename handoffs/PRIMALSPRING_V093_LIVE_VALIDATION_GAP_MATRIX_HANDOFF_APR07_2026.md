@@ -234,7 +234,7 @@ All primals MUST evolve toward Level 2 compliance. This is now part of the NUCLE
 | Primal | Current | To reach Level 2 |
 |--------|---------|-------------------|
 | sweetGrass | Near-L2 | Add `provided_capabilities` grouping → L3 ready |
-| rhizoCrypt | Near-L2 | Add flat `methods` array at top level |
+| rhizoCrypt | ✅ Full L3 | Completed S27–S29: flat `methods`, `consumed_capabilities`, `cost_estimates`, `identity.get` |
 | loamSpine | Partial-L2 | Promote nested `methods` to top level, add `identity.get` |
 | BearDog | Partial-L2 | Add flat `methods` array, add `identity.get` |
 | Songbird | L1 only | Wrap bare array in `{primal, version, methods}` envelope, add `identity.get`, remove non-callable entries |

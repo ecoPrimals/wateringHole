@@ -56,7 +56,7 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 | SQ | Squirrel | AI / Coordination |
 | bOS | biomeOS | Orchestrator / Neural API |
 | PT | petalTongue | Visualization |
-| RC | rhizoCrypt | Encrypted Storage |
+| RC | rhizoCrypt | Ephemeral DAG / Working Memory |
 | SG | sweetGrass | Data / Indexing |
 | LS | LoamSpine | Mesh Networking |
 | BiC | bingoCube | Entropy / Game Math |
@@ -88,8 +88,8 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 
 | Grade | Count | Primals |
 |-------|-------|---------|
-| A | 4 ↑ | barraCuda, bingoCube, coralReef, skunkBat |
-| B | 7 | BearDog, Songbird, biomeOS, petalTongue, rhizoCrypt, sweetGrass, LoamSpine, sourDough |
+| A | 5 ↑ | barraCuda, bingoCube, coralReef, skunkBat, rhizoCrypt |
+| B | 7 | BearDog, Songbird, biomeOS, petalTongue, sweetGrass, LoamSpine, sourDough |
 | C | 3 ↓ | NestGate, ToadStool, Squirrel |
 | D | 1 | ToadStool |
 | F | 0 | — |
@@ -104,7 +104,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 |-------|----|----|----|----|----|----|----|----|----|----|----|----|-----|-----|
 | `cargo fmt` | 1 diff | 2 diffs | PASS | 1 diff ↑↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS | PASS |
 | `cargo clippy -D warnings` | PASS | PASS | PASS | PASS ↑↑ | PASS | PASS ↑ | PASS | PASS | PASS | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS |
-| `cargo test --all-features` | PASS (14.4K) | PASS | PASS (11.7K) | PASS | PASS (3.9K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS | PASS | PASS (29) | PASS | PASS |
+| `cargo test --all-features` | PASS (14.4K) | PASS | PASS (11.7K) | PASS | PASS (3.9K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (29) | PASS | PASS |
 | `cargo doc --no-deps` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Edition 2024 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS |
 | `forbid(unsafe_code)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
@@ -561,7 +561,7 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 
 - Added Tier 10: Live Deployment tier sourced from `DEPLOYMENT_VALIDATION_STANDARD.md`
 - Data from plasmidBin v2026.03.25 end-to-end validation (fetch → start → probe)
-- 10 binaries fetched, 7 started, 5 healthy, 1 partial (rhizoCrypt), 1 crash (LoamSpine — resolved v0.9.15)
+- 10 binaries fetched, 7 started, 5 healthy, 1 partial (rhizoCrypt — since promoted to A via S28–S30 deep debt/BTSP work), 1 crash (LoamSpine — resolved v0.9.15)
 - Transport diversity documented: 5 distinct patterns across 7 tested primals
 - Only BearDog fully passes `benchscale validate ipc` on TCP
 - LoamSpine F → resolved: tokio nesting crash fixed in v0.9.15; re-validation pending
