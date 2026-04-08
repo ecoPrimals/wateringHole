@@ -41,17 +41,17 @@ biomeOS ignores everything except method names. The rich metadata (cost estimate
 |-------|---------|----------|------------|-----------|------------|
 | `primal` (name) | ✓ | — | ✓ | ✓ | ✓ |
 | `version` | ✓ | — | ✓ | ✓ | ✓ |
-| `methods` (flat array) | — | ✓ (is result) | — | — | ✓ |
+| `methods` (flat array) | — | ✓ (is result) | ✓ | — | ✓ |
 | `provided_capabilities` | ✓ | — | ✓ | — | — |
 | `capabilities` (flat) | — | — | — | ✓ | ✓ |
 | `domains` (grouped) | — | — | — | — | ✓ |
 | `descriptors` (rich) | — | — | ✓ | — | — |
 | `cost_estimates` | — | — | ✓ (per method) | ✓ (structured) | ✓ (per domain) |
 | `deps` / `depends_on` | — | — | ✓ | ✓ | ✓ |
-| `consumed_capabilities` | — | — | — | — | ✓ |
-| `operation_dependencies` | — | — | — | ✓ | ✓ |
+| `consumed_capabilities` | — | — | ✓ | — | ✓ |
+| `operation_dependencies` | — | — | ✓ | ✓ | ✓ |
 | `description` | ✓ (per group) | — | — | — | ✓ |
-| `protocol` / `transport` | ✓ | — | — | — | ✓ |
+| `protocol` / `transport` | ✓ | — | ✓ | — | ✓ |
 | `family_id` / `node_id` | ✓ | — | — | — | — |
 
 ### What Worked in Live Validation
@@ -171,7 +171,7 @@ Add `methods` flat array to existing responses. Every primal already knows its m
 |--------|------|
 | BearDog | Add `methods` array alongside existing `provided_capabilities` |
 | Songbird | Wrap existing flat array in `{primal, version, methods}` envelope |
-| rhizoCrypt | Already has both `provided_capabilities` and `descriptors` — add flat `methods` |
+| rhizoCrypt | ✅ Full L3 — flat `methods`, `provided_capabilities`, `consumed_capabilities`, `cost_estimates`, `operation_dependencies`, `protocol`, `transport` (completed S27) |
 | loamSpine | Already has `methods` array in response — add `primal` field, promote `methods` to top level |
 | sweetGrass | Already has `methods` array — already compliant after adding `primal` (has it) |
 

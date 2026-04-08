@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 21, 2026
+**Last Updated**: April 8, 2026
 
 ---
 
@@ -280,7 +280,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
 **Version**: 0.14.0-dev  
-**Status**: Production Ready (1,441 tests, 94.34% llvm-cov, clippy pedantic+nursery enforced (`doc_markdown`, `must_use_candidate`, etc.), Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` blocks, AGPL-3.0-or-later, UniBin compliant, musl-static x86_64 shipped in plasmidBin (5.4M), cargo-deny enforced (18-crate ecoBin ban list incl. reqwest + ring), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools, `capability_registry.toml` (28 methods, 5 domains) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types, `dag.dehydrate` alias, `identity.get` implemented, biomeOS Format E wire compatibility, GAP-MATRIX-05 live-validated, reqwest eliminated — hyper/tower pure Rust, **BTSP Phase 1** — FAMILY_ID socket scoping + BIOMEOS_INSECURE guard)
+**Status**: Production Ready (1,441 tests, 94.34% llvm-cov, clippy pedantic+nursery enforced (`doc_markdown`, `must_use_candidate`, etc.), Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` blocks, AGPL-3.0-or-later, UniBin compliant, musl-static x86_64 shipped in plasmidBin (5.4M), cargo-deny enforced (18-crate ecoBin ban list incl. reqwest + ring), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools, `niche.rs` runtime: 28 methods (5 domains) — 24 in `capability_registry.toml` + 4 implicit (`health.readiness`, `identity.get`, `tools.list`, `tools.call`) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types, `dag.dehydrate` alias, `identity.get` implemented, biomeOS Format E wire compatibility, GAP-MATRIX-05 live-validated, reqwest eliminated — hyper/tower pure Rust, **BTSP Phase 1** — FAMILY_ID socket scoping + BIOMEOS_INSECURE guard)
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
