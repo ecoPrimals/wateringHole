@@ -280,9 +280,24 @@ sweetGrass now passes the full `CAPABILITY_WIRE_STANDARD.md` v1.0 L3 (Composable
 - Zero mocks in production (all `cfg(test)` / `feature = "test"` gated)
 - Zero hardcoded primal names in code logic (comments/docs only)
 - Zero banned dependencies (`cargo deny` clean)
-- All files under 1000 lines (max: 766)
+- All files under 1000 lines (max: 782)
 - All `#[allow(clippy::*)]` migrated to `#[expect(...)]` (except deprecated items)
 - Deprecated items properly annotated: `BraidSignature` (0.7.28), `SledStore` (0.7.26)
+
+---
+
+## Phase 11 — Dependency Centralization & Cleanup (April 8, 2026)
+
+### Metrics
+- **1,218 tests passing** (unchanged)
+- 0 clippy warnings, 0 unsafe, `cargo deny` clean
+- 151 .rs files, 42,684 LOC
+
+### Changes
+- **Workspace dependency centralization**: Moved `async-trait`, `clap`, `tempfile`, `axum-test`, `testcontainers`, `testcontainers-modules` into `[workspace.dependencies]`. All 7 affected member crates now use `{ workspace = true }` — single source of truth for versions.
+- **Removed unused workspace deps**: `tower` (zero member usage), `serial_test` (zero member usage) dropped from root `Cargo.toml`.
+- **Cleaned stale advisory**: `RUSTSEC-2026-0049` (rustls-webpki) removed from `deny.toml` ignore list (resolved by prior `cargo update`).
+- **Deep debt audit**: `#[expect(deprecated)]` with reasons and removal timelines, `#[must_use]` on builder constructors, `const fn` numeric helpers, `.to_owned()` replacing `.to_string()` on literals, hardcoded test fixture strings replaced with generic values.
 
 ---
 
