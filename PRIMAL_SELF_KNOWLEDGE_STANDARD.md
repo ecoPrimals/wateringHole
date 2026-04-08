@@ -1,7 +1,7 @@
 # Primal Self-Knowledge Standard
 
-**Version:** 1.0.0
-**Date:** April 4, 2026
+**Version:** 1.1.0
+**Date:** April 8, 2026
 **Status:** Active — all primals and springs MUST adopt this
 **Authority:** wateringHole (ecoPrimals Core Standards)
 **Purpose:** Define the self-knowledge boundary for primals — what a primal
@@ -121,13 +121,41 @@ Where `BIOMEOS_SOCKET_DIR` defaults to `$XDG_RUNTIME_DIR/biomeos`.
 | Songbird | `$XDG_RUNTIME_DIR/biomeos/network.sock` |
 | biomeOS | `$XDG_RUNTIME_DIR/biomeos/biomeos.sock` |
 
-### Family-scoped variant
+### Family-scoped variant (production mode)
 
-When running multiple families (e.g., sporeGarden multi-tenancy):
+When `FAMILY_ID` is set (and not `"default"`), the socket MUST be
+family-scoped:
 
 ```
 $BIOMEOS_SOCKET_DIR/{domain}-${FAMILY_ID}.sock
 ```
+
+This is **production mode**. The family-scoped socket name serves as the
+BTSP activation signal: when `FAMILY_ID` is set, all incoming connections
+MUST authenticate via the BTSP handshake before any JSON-RPC methods are
+exposed. See `BTSP_PROTOCOL_STANDARD.md` for the full protocol.
+
+**Security invariant:** Hostile until proven otherwise. A connection to a
+family-scoped socket that does not complete the BTSP handshake is refused.
+Plaintext JSON-RPC is only available as a negotiated cipher suite
+(`BTSP_NULL`) after successful authentication, when the `BondingPolicy`
+allows it.
+
+### Development mode
+
+When `FAMILY_ID` is not set (or is `"default"`) and `BIOMEOS_INSECURE=1`:
+
+```
+$BIOMEOS_SOCKET_DIR/{domain}.sock
+```
+
+Raw cleartext JSON-RPC. No BTSP handshake. No authentication. This is
+intended only for `cargo test`, local development, and primalSpring
+experiments. Not deployable.
+
+**Guard:** If both `FAMILY_ID` (non-default) and `BIOMEOS_INSECURE=1` are
+set, the primal MUST refuse to start. You cannot claim a family AND skip
+authentication.
 
 ### Legacy compatibility (deprecation path)
 
@@ -501,6 +529,7 @@ This standard extends and unifies guidance from:
 |----------|-------------|
 | `CAPABILITY_BASED_DISCOVERY_STANDARD.md` v1.2.0 | Extended: this standard adds concrete code patterns, env var conventions, and socket naming rules that the discovery standard references but does not define in detail. |
 | `PRIMAL_IPC_PROTOCOL.md` v3.1.0 | Extended: socket path conventions and transport rules are preserved here with the addition of domain-based naming as primary. |
+| `BTSP_PROTOCOL_STANDARD.md` v1.0.0 | Extended: FAMILY_ID → BTSP production mode convention defined here (§3), full protocol spec in BTSP standard. |
 | `PRIMAL_RESPONSIBILITY_MATRIX.md` v3.0.0 | Aligned: the capability domain registry (Section 2) mirrors the matrix's primal directory and capability namespaces. |
 | `SEMANTIC_METHOD_NAMING_STANDARD.md` v2.0.0 | Aligned: the `{domain}.{operation}` method naming convention is how capability domains manifest on the wire. |
 | `UNIBIN_ARCHITECTURE_STANDARD.md` | Extended: identity env var precedence (`{PRIMAL}_FAMILY_ID` -> `FAMILY_ID` -> default) is documented here in the self-config section. |
@@ -509,6 +538,16 @@ This standard extends and unifies guidance from:
 ---
 
 ## Version History
+
+### v1.1.0 (April 8, 2026)
+
+**Secure Socket Architecture.** Added BTSP production mode to socket naming
+convention (§3). When `FAMILY_ID` is set, sockets are family-scoped and BTSP
+authentication is mandatory. Added `BIOMEOS_INSECURE` guard (refuse to start
+when both `FAMILY_ID` and `BIOMEOS_INSECURE` are set). Added cross-reference
+to `BTSP_PROTOCOL_STANDARD.md`. Driven by primalSpring Phase 26 — Secure
+Socket Architecture plan, resolving GAP-MATRIX-11 and establishing
+zero-knowledge local IPC foundation.
 
 ### v1.0.0 (April 4, 2026)
 
