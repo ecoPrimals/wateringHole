@@ -543,6 +543,12 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 
 ## Version History
 
+### v2.5.5 (April 8, 2026)
+
+**barraCuda Sprint 37: Deep Debt — Test Module Refactor & Code Cleanup**
+
+- barraCuda: `methods_tests.rs` (951L) smart-refactored into 6 domain-focused test modules (largest 193L). `buffer_test.rs` println removed. `nadam_gpu.rs` stale comment removed. `force_interpolation.rs` indexed loop → iterator. 12-axis deep debt audit: clean bill on all axes. Zero files >800 lines. 4,207 tests, all quality gates green.
+
 ### v2.5.4 (April 8, 2026)
 
 **barraCuda Sprint 36: Domain-Based Socket Naming & Flaky Test Serialization**
