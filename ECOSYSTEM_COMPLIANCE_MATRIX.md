@@ -230,7 +230,7 @@ Discovery debt is the largest cross-ecosystem gap. All non-biomeOS primals depen
 `discover_and_register_primals()` race condition (BM-04 resolved via `topology.rescan` + lazy discovery,
 but primals still do not self-register).
 
-- **BearDog**: Zero primal-name refs in routing. Zero primal-specific env vars. `capability.list` returns empty — needs method implementation. Discovery: **C** (compliant).
+- **BearDog**: Zero primal-name refs in routing. Zero primal-specific env vars. `capability.list` returns full `methods` array + `provided_capabilities` (Wire L2 complete, Wave 30). `identity.get` implemented. BTSP handshake enforcement live (Wave 31). Discovery: **C** (compliant).
 - **Songbird**: 935 refs / 178 files (was 2,558 — 63% reduction). 285 env refs / 68 files. Strongest improvement trajectory but still highest absolute debt. Discovery: **P→C**.
 - **NestGate**: 192 refs / 22 files. 32 env refs / 9 files. Near-compliant — all primal-specific env vars eliminated. 7 config/discovery files remain. Discovery: **P→C**.
 - **ToadStool**: 2,998 refs / 384 files. 168 env refs / 52 files. `health.liveness` returns "Method not found" on S168 binary. 0 capabilities visible. Discovery: **P** (improving).
@@ -553,7 +553,7 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 
 **barraCuda BTSP Phase 1 + GAP-MATRIX Resolution**
 
-- barraCuda: BTSP Phase 1 socket naming complete — `FAMILY_ID` socket scoping (3-tier env precedence), `BIOMEOS_SOCKET_DIR` support, `BIOMEOS_INSECURE` guard. Resolves GAP-MATRIX-12. plasmidBin metadata updated to v0.3.11 (resolves GAP-MATRIX-06). 4,207 tests (was 4,187). BTSP Phase 2+ pending BearDog `btsp.session.*`.
+- barraCuda: BTSP Phase 1 socket naming complete — `FAMILY_ID` socket scoping (3-tier env precedence), `BIOMEOS_SOCKET_DIR` support, `BIOMEOS_INSECURE` guard. Resolves GAP-MATRIX-12. plasmidBin metadata updated to v0.3.11 (resolves GAP-MATRIX-06). 4,207 tests (was 4,187). BTSP Phase 2+: BearDog `btsp.session.*` now available (Wave 31) — integrate handshake in barraCuda listener.
 
 ### v2.5.1 (April 8, 2026)
 

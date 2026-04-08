@@ -1,7 +1,7 @@
 # BearDog Technical Stack & Plans (BTSP)
 
-**Version**: 0.9.0 (Wave 28 — Deep Debt Evolution)
-**Last Updated**: April 2, 2026
+**Version**: 0.9.0 (Wave 32 — Deep Debt Sweep II)
+**Last Updated**: April 8, 2026
 **Status**: Production Ready
 
 ---
@@ -59,10 +59,10 @@ All transports use **NDJSON** (newline-delimited JSON-RPC 2.0). Each request is 
 │  Any Primal │ ←─ JSON-RPC ────→ │  BearDog    │
 │ (Protocol)  │  NDJSON framing    │  (Crypto)   │
 └─────────────┘                    └─────────────┘
-     Zero crypto code                 93 crypto methods
+     Zero crypto code                 96 crypto methods
 ```
 
-### JSON-RPC Method Domains (93 methods)
+### JSON-RPC Method Domains (96 methods)
 
 ```
 crypto.*       - Hash, sign, verify, encrypt, decrypt, key exchange
@@ -72,11 +72,11 @@ genetic.*      - Lineage keys, beacon, challenge-response
 secrets.*      - Store, retrieve, list, delete encrypted secrets
 relay.*        - Lineage-gated relay authorization (coordinated punch)
 beacon.*       - Dark Forest beacon generation, encryption, meeting exchange
-btsp.*         - Secure tunnel configuration
+btsp.*         - Secure tunnel config + session handshake-as-a-service
 quantum.*      - Post-quantum cryptographic operations
 ```
 
-Introspection: `discover_capabilities`, `primal.info`, `rpc.methods`
+Introspection: `discover_capabilities`, `primal.info`, `rpc.methods`, `capabilities.list`, `identity.get`
 
 Canonical names use `domain.operation` form. Legacy flat aliases (`ping`, `capabilities`, `health`, `identity`) are deprecated.
 
