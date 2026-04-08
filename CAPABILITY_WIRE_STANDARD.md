@@ -214,7 +214,7 @@ When `result.methods` is present, biomeOS skips format detection entirely. Legac
 | Songbird | ✓ | Partial | — | Has `capabilities.methods` token→method map (Wave 123); needs `{primal, version, methods}` envelope, `identity.get` |
 | rhizoCrypt | ✓ | ✓ | ✓ | Full L3: `methods`, `consumed_capabilities`, `cost_estimates`, `operation_dependencies` |
 | loamSpine | ✓ | Partial | Partial | Needs top-level `methods`, `identity.get` |
-| sweetGrass | ✓ | ✓ | Partial | Needs `provided_capabilities` grouping |
+| sweetGrass | ✓ | ✓ | ✓ | Full L3 compliance (April 8, 2026) |
 
 ---
 

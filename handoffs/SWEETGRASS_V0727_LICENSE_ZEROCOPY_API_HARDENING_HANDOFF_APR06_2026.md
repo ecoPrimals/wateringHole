@@ -227,6 +227,36 @@ sweetGrass live-tested through UDS JSON-RPC per primalSpring v0.9.3 gap matrix.
 
 ---
 
+## Phase 9 — Wire Standard L3 Compliance (April 8, 2026)
+
+sweetGrass now passes the full `CAPABILITY_WIRE_STANDARD.md` v1.0 L3 (Composable) audit checklist.
+
+### Wire Standard L3 Checklist
+
+| Requirement | Status |
+|-------------|--------|
+| L1: `capabilities.list` parseable | ✓ |
+| L1: `health.liveness` responds | ✓ `{"alive":true}` |
+| L2: `{primal, version, methods}` envelope | ✓ |
+| L2: `identity.get` with `{primal, version, domain, license}` | ✓ |
+| L2: All 28 `methods` callable (no method-not-found) | ✓ |
+| L3: `provided_capabilities` grouping | ✓ 12 groups with type, methods, version, description |
+| L3: `consumed_capabilities` declared | ✓ 8 cross-primal dependencies |
+| L3: `cost_estimates` per-method `{cpu, latency_ms}` | ✓ all 28 methods |
+| L3: `operation_dependencies` flat map | ✓ 13 prerequisite chains |
+
+### Changes
+
+- **`provided_capabilities`**: 12 domain groups (braid, anchoring, provenance, attribution, compression, contribution, pipeline, health, identity, capabilities, capability, tools) with `type`, `methods[]`, `version`, and `description`. biomeOS registers both group type and qualified `type.method` names.
+- **`cost_estimates`**: Per-method `{cpu: "low"|"medium"|"high", latency_ms: N}` for all 28 methods. High-cost methods: `anchoring.anchor` (50ms), `attribution.chain` (50ms), `attribution.calculate_rewards` (60ms), `compression.compress_session` (40ms), `provenance.export_graph_provo` (30ms).
+- **`operation_dependencies`**: Flat `{method: [prerequisites]}` map for 13 methods with dependencies. Enables AI-assisted execution planning (Squirrel).
+- **`identity.get` upgraded**: Now returns `{primal, version, domain, license}` per Wire Standard §4. `domain: "attribution"`, `license: "AGPL-3.0-or-later"`.
+- **Backward-compatible**: Legacy `capabilities`, `domains`, and `operations` fields retained in the response for pre-Wire Standard consumers.
+
+### sweetGrass Wire Standard Status: Level 3 (Composable) — FULL COMPLIANCE
+
+---
+
 ## Remaining Debt (None Blocking)
 
 - **Radiating attribution across ionic bonds** — Phase 4 / LOW; derivation chain attribution is live, but cross-NUCLEUS traversal requires ionic bonding protocol (primalSpring Track 4)
