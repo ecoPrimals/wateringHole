@@ -104,7 +104,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 |-------|----|----|----|----|----|----|----|----|----|----|----|----|-----|-----|
 | `cargo fmt` | 1 diff | 2 diffs | PASS | 1 diff ↑↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS | PASS |
 | `cargo clippy -D warnings` | PASS | PASS | PASS | PASS ↑↑ | PASS | PASS ↑ | PASS | PASS | PASS | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS |
-| `cargo test --all-features` | PASS (14.4K) | PASS | PASS (11.7K) | PASS | PASS (3.9K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (29) | PASS | PASS |
+| `cargo test --all-features` | PASS (14.4K) | PASS | PASS (11.7K) | PASS | PASS (4.2K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (29) | PASS | PASS |
 | `cargo doc --no-deps` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Edition 2024 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS |
 | `forbid(unsafe_code)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
@@ -123,7 +123,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 - **Songbird**: 48 clippy warnings resolved. License updated to `-or-later`. Fmt **CLEAN** ↑ (was 2 diffs). Large test suite (>120s).
 - **NestGate**: Fmt **PASS** (was 1 diff). License updated to `-or-later`. Clippy CLEAN. 11,661 tests pass.
 - **ToadStool**: **Major turnaround.** Clippy **CLEAN** (was 2 errors). Fmt **1 diff** (was ~1,899). License updated to `-or-later`. `tar` dep updated.
-- **barraCuda**: E0061 **FIXED** (Sprint 29). `executor.rs` under 1,000 lines. Clippy clean. 3,899 tests pass. SIGSEGV test thread cap added.
+- **barraCuda**: E0061 **FIXED** (Sprint 29). All files under 800 lines. Clippy clean. 4,207 tests pass. Domain-based socket naming (math.sock). 12-axis deep debt: clean bill.
 - **coralReef**: Clippy **CLEAN** (was 7 errors). 8 warnings resolved in `coral-gpu` tests. License updated to `-or-later`.
 - **Squirrel**: Clippy CLEAN. fmt PASS. 6,868 tests pass. Commented-out code remains minor residual.
 - **biomeOS**: v2.99 — 7,695 tests. 3 cycles of large file refactoring complete (0 files >850 LOC). `#[forbid(unsafe_code)]` all binaries. All `#[allow]` → `#[expect]`. BTSP security posture wired. Zero-debt audit: 0 unsafe, 0 production mocks, 0 TODO/FIXME, 0 hardcoded primal names.
