@@ -404,22 +404,25 @@ Framing (Phase 2+):
 
 ## Implementation Phases
 
-### Phase 1: Socket Naming Alignment (current)
+### Phase 1: Socket Naming Alignment (complete)
 
 - All primals honor `FAMILY_ID` for socket naming
 - `BIOMEOS_INSECURE` guard prevents conflicting configuration
 - biomeOS routing works immediately (already expects this pattern)
 
-### Phase 2: BTSP Handshake
+### Phase 2: BTSP Handshake (BearDog complete — Wave 31)
 
-- BearDog implements `btsp.session.create`, `btsp.session.verify`
-- Primals wrap socket listeners in BTSP handshake when `FAMILY_ID` is set
+- BearDog implements `btsp.session.create`, `btsp.session.verify`, `btsp.session.negotiate`
+- BearDog socket listener enforces 4-step handshake (X25519 + HMAC-SHA256 challenge-response) when `FAMILY_ID` is set
 - Handshake failure → connection refused
+- Consumer primals: wrap socket listeners using BearDog's handshake-as-a-service RPC
 
-### Phase 3: Cipher Negotiation + Encryption
+### Phase 3: Cipher Negotiation + Encryption (BearDog complete — Wave 31)
 
-- BearDog implements `btsp.negotiate`, `btsp.encrypt`, `btsp.decrypt`
-- biomeOS Neural API adds BTSP client for encrypted relay
+- BearDog implements encrypted framing: ChaCha20-Poly1305, HMAC-plain, null cipher suites
+- Length-prefixed (4-byte BE) frames replace NDJSON in production mode
+- Session key derivation: HKDF-SHA256 from X25519 shared secret with directional keys
+- biomeOS Neural API: BTSP client for encrypted relay (pending)
 - `BondingPolicy` → cipher suite mapping enforced
 
 ### Phase 4: Ecosystem-Wide Secure Nucleation
