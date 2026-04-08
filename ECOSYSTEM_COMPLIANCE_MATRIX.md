@@ -126,7 +126,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 - **barraCuda**: E0061 **FIXED** (Sprint 29). `executor.rs` under 1,000 lines. Clippy clean. 3,899 tests pass. SIGSEGV test thread cap added.
 - **coralReef**: Clippy **CLEAN** (was 7 errors). 8 warnings resolved in `coral-gpu` tests. License updated to `-or-later`.
 - **Squirrel**: Clippy CLEAN. fmt PASS. 6,868 tests pass. Commented-out code remains minor residual.
-- **biomeOS**: v2.91 — License updated to `-or-later`. 7,638 tests. Large file refactoring complete. 27 new targeted tests.
+- **biomeOS**: v2.99 — 7,695 tests. 3 cycles of large file refactoring complete (0 files >850 LOC). `#[forbid(unsafe_code)]` all binaries. All `#[allow]` → `#[expect]`. BTSP security posture wired. Zero-debt audit: 0 unsafe, 0 production mocks, 0 TODO/FIXME, 0 hardcoded primal names.
 - **petalTongue**: All clean. 1 flaky test (`test_resolve_instance_id_error_message_invalid` — passes on retry).
 - **rhizoCrypt**: Clippy **CLEAN** (39 `doc_markdown` warnings resolved). All clean.
 - **sweetGrass**: Clippy **CLEAN** (unused import fixed). License updated to `-or-later`. `.cargo/config.toml` target-dir still points to `/home/southgate/` (non-blocking).
