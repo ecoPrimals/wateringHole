@@ -260,11 +260,12 @@ sweetGrass now passes the full `CAPABILITY_WIRE_STANDARD.md` v1.0 L3 (Composable
 ## Phase 10 — Comprehensive Coverage Expansion (April 8, 2026)
 
 ### Metrics
-- **1,213 tests passing** (up from 1,190)
+- **1,218 tests passing** (up from 1,213)
 - 0 clippy warnings, 0 unsafe, `cargo deny` clean
-- 151 .rs files, 42,543 LOC
+- 151 .rs files, 42,676 LOC
 
 ### Changes
+- **BTSP Phase 1 compliance (GAP-MATRIX-12)**: `validate_insecure_guard()` enforces `BTSP_PROTOCOL_STANDARD` §Security Model — refuses startup when `FAMILY_ID` (non-default) + `BIOMEOS_INSECURE=1`. Family ID chain: `SWEETGRASS_FAMILY_ID` → `BIOMEOS_FAMILY_ID` → `FAMILY_ID`. 5 DI-based unit tests.
 - **`identity.get` dispatch test**: Added to completeness list + Wire Standard L2 response validation (primal, version, domain, license)
 - **Wire Standard L3 tests**: `provided_capabilities` grouping, per-method `cost_estimates`, `operation_dependencies` flat map — all asserted structurally
 - **`RegistryError` variant coverage**: Display for `NotFound`, `RegistrationFailed`, `Internal` + serialization roundtrip
