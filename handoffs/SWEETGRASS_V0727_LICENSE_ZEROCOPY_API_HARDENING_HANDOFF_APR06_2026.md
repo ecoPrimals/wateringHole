@@ -257,6 +257,34 @@ sweetGrass now passes the full `CAPABILITY_WIRE_STANDARD.md` v1.0 L3 (Composable
 
 ---
 
+## Phase 10 — Comprehensive Coverage Expansion (April 8, 2026)
+
+### Metrics
+- **1,213 tests passing** (up from 1,190)
+- 0 clippy warnings, 0 unsafe, `cargo deny` clean
+- 151 .rs files, 42,543 LOC
+
+### Changes
+- **`identity.get` dispatch test**: Added to completeness list + Wire Standard L2 response validation (primal, version, domain, license)
+- **Wire Standard L3 tests**: `provided_capabilities` grouping, per-method `cost_estimates`, `operation_dependencies` flat map — all asserted structurally
+- **`RegistryError` variant coverage**: Display for `NotFound`, `RegistrationFailed`, `Internal` + serialization roundtrip
+- **`IntegrationError` full sweep**: All 17+ variant Display tests + `From<Store>`, `From<Core>`, `From<Compression>` conversions
+- **Compression/Factory/Query error gaps filled**: `NoCommittedVertices`, `Factory`, `Core`, `Store` variants all tested
+- **`ServiceError` IntoResponse expansion**: `Query`, `Factory`, `Compression`, `Core` HTTP status mapping tests
+- **Router test expansion**: 2 → 4 tests (construction + parity)
+
+### Audit Summary (Clean)
+- Zero unsafe code (forbidden workspace-level + all 11 crate roots)
+- Zero production unwraps/expects (denied)
+- Zero mocks in production (all `cfg(test)` / `feature = "test"` gated)
+- Zero hardcoded primal names in code logic (comments/docs only)
+- Zero banned dependencies (`cargo deny` clean)
+- All files under 1000 lines (max: 766)
+- All `#[allow(clippy::*)]` migrated to `#[expect(...)]` (except deprecated items)
+- Deprecated items properly annotated: `BraidSignature` (0.7.28), `SledStore` (0.7.26)
+
+---
+
 ## Remaining Debt (None Blocking)
 
 - **Radiating attribution across ionic bonds** — Phase 4 / LOW; derivation chain attribution is live, but cross-NUCLEUS traversal requires ionic bonding protocol (primalSpring Track 4)
