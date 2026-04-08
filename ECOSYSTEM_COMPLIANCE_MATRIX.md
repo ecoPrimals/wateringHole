@@ -1,7 +1,7 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 2.4.0
-**Date:** April 7, 2026
+**Version:** 2.5.0
+**Date:** April 8, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 **Supersedes:** `IPC_COMPLIANCE_MATRIX.md` v1.6.0 (archived to `fossilRecord/`)
@@ -77,7 +77,7 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 | **Squirrel** | A ↑ | C | C | D | B | C | A | B | A | C | **C** |
 | **biomeOS** | A ↑ | C | B | A | A | B | A | B | C | N/T | **B** |
 | **petalTongue** | A | B | B | C | A | A | A | C | C | N/T | **B** |
-| **rhizoCrypt** | A | B | A | B | A | A | A | A | C | D | **B** |
+| **rhizoCrypt** | A | B | A | B | A | A | A | A | C | A ↑↑ | **A** ↑ |
 | **sweetGrass** | A ↑ | C | C | B | B | A | A | A | D | C | **B** |
 | **LoamSpine** | A | C | B | B | B | A | A | A | C | C ↑ | **B** ↑ |
 | **bingoCube** | A | -- | -- | -- | -- | A | A | A ↑ | -- | -- | **A** |
@@ -342,7 +342,7 @@ Source: `PUBLIC_SURFACE_STANDARD.md`, `SPRING_PRIMAL_PRESENTATION_STANDARD.md`
 - **Squirrel**: CONTEXT.md present (89 lines). 5 `#[allow(` vs 289 `#[expect(` (98% `expect`). PII hits in 3 files.
 - **biomeOS**: CONTEXT.md present (75 lines). 4 `#[allow(` vs 361 `#[expect(` (99% `expect`). PII hits in 5 test files.
 - **petalTongue**: No CONTEXT.md. 32 `#[allow(` vs 273 `#[expect(` (89% `expect`). PII hit in 1 file.
-- **rhizoCrypt**: CONTEXT.md present (94 lines). Zero `#[allow(` (0/47). No PII hits.
+- **rhizoCrypt**: CONTEXT.md present (95 lines). Zero `#[allow(` (0/47). No PII hits. reqwest eliminated (session 28).
 - **sweetGrass**: CONTEXT.md present (76 lines). 2 `#[allow(` vs 51 `#[expect(` (96% `expect`). No PII hits.
 - **LoamSpine**: CONTEXT.md present (70 lines). 1 `#[allow(` vs 58 `#[expect(` (98% `expect`). No PII hits.
 - **bingoCube**: v0.1.1 — CHANGELOG, CONTEXT.md, `deny.toml` all present. Edition 2024. `forbid(unsafe_code)`, `warn(missing_docs)`, clippy pedantic+nursery clean. SPDX headers on all 20 files. 54 tests passing. 0 `#[allow(` / uses `#[expect(` throughout.
@@ -399,7 +399,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **Squirrel** | Discovery: 1,789 primal-name refs | Overstep: sled/sqlx/ed25519 beyond domain | 19 commented-out code lines |
 | **biomeOS** | License → `-or-later` | `--port` forces UDS (TCP-only needed) | `tools/` edition 2021 |
 | **petalTongue** | Discovery: 982 primal-name refs | No CONTEXT.md | 32 `#[allow(` → `#[expect(` |
-| **rhizoCrypt** | ~~Health triad missing~~ → **live-validated PASS** | ~~musl binary is glibc~~ → musl-static shipped | No domain symlink |
+| **rhizoCrypt** | ~~Health triad missing~~ → **live-validated PASS** | ~~musl binary is glibc~~ → musl-static shipped | ~~reqwest~~ → hyper/tower (session 28) |
 | **sweetGrass** | No `--port` (HTTP-only TCP) | Health triad HTTP-only (not newline) | License → `-or-later` |
 | **LoamSpine** | — (LS-03 resolved v0.9.15) | `--port` alias shipped (v0.9.15) | musl binary is glibc |
 | **bingoCube** | — (all debt resolved) | — | — |
