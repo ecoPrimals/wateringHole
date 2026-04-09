@@ -78,7 +78,7 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 | Primal | T1 Build | T2 UniBin | T3 IPC | T4 Discovery | T5 Naming | T6 Resp | T7 Workspace | T8 Present | T9 Deploy | T10 Live | Rollup |
 |--------|----------|-----------|--------|--------------|-----------|---------|--------------|------------|-----------|----------|--------|
 | **BearDog** | A ↑ | A | A | B | B | B | A | C | A | B | **B** |
-| **Songbird** | B | B | B | C ↑ | B | B | A | C | A | B | **B** ↑ |
+| **Songbird** | A ↑↑ | B | A ↑ | C ↑↑ | B | B | A | B ↑ | A | B | **A** ↑↑ |
 | **NestGate** | A ↑ | D | C | C | B | B | A | A | D | N/T | **C** |
 | **ToadStool** | B ↑↑ | C | C | D | D | B | A | C ↑ | C | D | **C** ↑ |
 | **barraCuda** | A | -- | -- | -- | -- | A | A | A | -- | -- | **A** |
@@ -97,8 +97,8 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 
 | Grade | Count | Primals |
 |-------|-------|---------|
-| A | 5 ↑ | barraCuda, bingoCube, coralReef, skunkBat, rhizoCrypt |
-| B | 7 | BearDog, Songbird, biomeOS, petalTongue, sweetGrass, LoamSpine, sourDough |
+| A | 6 ↑ | barraCuda, bingoCube, coralReef, skunkBat, rhizoCrypt, Songbird |
+| B | 6 | BearDog, biomeOS, petalTongue, sweetGrass, LoamSpine, sourDough |
 | C | 3 ↓ | NestGate, ToadStool, Squirrel |
 | D | 1 | ToadStool |
 | F | 0 | — |
@@ -111,7 +111,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 
 | Check | BD | SB | NG | TS | BC | CR | SQ | bOS | PT | RC | SG | LS | BiC | SD |
 |-------|----|----|----|----|----|----|----|----|----|----|----|----|-----|-----|
-| `cargo fmt` | 1 diff | 2 diffs | PASS | 1 diff ↑↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS | PASS |
+| `cargo fmt` | 1 diff | PASS ↑ | PASS | 1 diff ↑↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS | PASS |
 | `cargo clippy -D warnings` | PASS | PASS | PASS | PASS ↑↑ | PASS | PASS ↑ | PASS | PASS | PASS | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS |
 | `cargo test --all-features` | PASS (14.4K) | PASS | PASS (11.7K) | PASS | PASS (4.2K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (29) | PASS | PASS |
 | `cargo doc --no-deps` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
@@ -121,15 +121,15 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 | No TODO/FIXME/HACK | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No files >1000 lines | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No `.unwrap()` in lib | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| No commented-out code | DEBT | DEBT | PASS | DEBT | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS |
+| No commented-out code | DEBT | PASS ↑ | PASS | DEBT | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS |
 | License `AGPL-3.0-or-later` | PASS ↑ | PASS ↑ | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS | PASS ↑ | PASS | PASS | PASS ↑ | PASS | PASS ↑ | PASS |
 | SPDX header on sources | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT |
-| **Grade** | **B** ↑ | **B** | **A** ↑ | **B** ↑↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** | **A** | **A** ↑ | **A** | **A** ↑ | **A** ↑ |
+| **Grade** | **B** ↑ | **A** ↑↑ | **A** ↑ | **B** ↑↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** | **A** | **A** ↑ | **A** | **A** ↑ | **A** ↑ |
 
-### Tier 1 Detail (April 6 re-audit)
+### Tier 1 Detail (April 6 re-audit, Songbird updated April 9)
 
 - **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. Fmt **CLEAN** ↑ (was 1 diff). 14,366 tests pass.
-- **Songbird**: 48 clippy warnings resolved. License updated to `-or-later`. Fmt **CLEAN** ↑ (was 2 diffs). Large test suite (>120s).
+- **Songbird**: Fmt **CLEAN** ↑ (was 2 diffs). Commented-out code **CLEAN** ↑ (Wave 124 scrub). 7,265+ lib tests, 0 failed. All 30 crates clippy pedantic+nursery zero warnings. 4 largest files smart-refactored (Wave 133). BTSP Phase 2 complete (Wave 132).
 - **NestGate**: Fmt **PASS**. Clippy CLEAN. License `-or-later`. 11,856+ tests pass. BTSP Phase 2 wired. NG-01/NG-03 resolved. `uzers` → `rustix`. 81 hardcoded strings fixed. Zero TODO/FIXME.
 - **ToadStool**: **Major turnaround.** Clippy **CLEAN** (was 2 errors). Fmt **1 diff** (was ~1,899). License updated to `-or-later`. `tar` dep updated.
 - **barraCuda**: E0061 **FIXED** (Sprint 29). All files under 800 lines. Clippy clean. 4,207 tests pass. Domain-based socket naming (math.sock). 12-axis deep debt: clean bill.
@@ -194,15 +194,15 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | Newline JSON-RPC on TCP | PASS | PASS | DEBT | DEBT | PASS | DEBT | DEBT | PASS | PASS | DEBT | PASS |
 | Socket at `biomeos/<primal>.sock` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No abstract-only sockets | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| Domain symlink | PASS | DEBT | DEBT | DEBT | PASS | DEBT | N/A | DEBT | DEBT | DEBT | DEBT |
+| Domain symlink | PASS | PASS ↑ | DEBT | DEBT | PASS | DEBT | N/A | DEBT | DEBT | DEBT | DEBT |
 | No shared IPC crate | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Socket cleanup on shutdown | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| **Grade** | **A** | **B** | **C** | **C** | **A** | **C** | **B** | **B** | **A** | **C** | **B** |
+| **Grade** | **A** | **A** ↑ | **C** | **C** | **A** | **C** | **B** | **B** | **A** | **C** | **B** |
 
 ### Tier 3 Detail
 
 - **BearDog**: Full compliance. `crypto.sock` → `beardog.sock` symlink. Both transports newline-framed.
-- **Songbird**: Registry primal — domain symlink not strictly required but standard says create one. Missing.
+- **Songbird**: Domain symlink **PASS** ↑ (Wave 133): `network.sock` → `songbird.sock` created on bind, removed on shutdown. BTSP Phase 2 handshake on UDS accept when `FAMILY_ID` set (Wave 132). All 7 checks pass.
 - **NestGate**: TCP not functional (`--port` not wired). No domain symlink.
 - **ToadStool**: TCP not wired. No domain symlink. Socket responds "Method not found" on S168 binary.
 - **coralReef**: `shader.sock` + `device.sock` domain symlinks. Both transports. Dual-mode TCP.
@@ -230,8 +230,8 @@ N/A for library primals without IPC (barraCuda, bingoCube, sourDough as CLI — 
 | Zero hardcoded primal names in routing | PASS | DEBT | DEBT | DEBT | PASS | DEBT | PASS | DEBT | PASS | PASS | PASS |
 | Zero primal-specific env vars for routing | PASS | DEBT | DEBT | DEBT | PASS | DEBT | PASS | DEBT | PASS | PASS | PASS |
 | Capability-domain env vars | PASS | DEBT | PASS | DEBT | PASS | DEBT | PASS | DEBT | PASS | PASS | PASS |
-| Socket naming (domain stem primary) | PASS | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | DEBT | DEBT | DEBT |
-| **Grade** | **B** | **D** | **C** | **D** | **B** | **D** | **A** | **C** | **B** | **B** | **B** |
+| Socket naming (domain stem primary) | PASS | PASS ↑ | DEBT | DEBT | PASS | PASS | PASS | PASS | DEBT | DEBT | DEBT |
+| **Grade** | **B** | **C** ↑ | **C** | **D** | **B** | **D** | **A** | **C** | **B** | **B** | **B** |
 
 ### Tier 4 Detail
 
@@ -240,7 +240,7 @@ Discovery debt is the largest cross-ecosystem gap. All non-biomeOS primals depen
 but primals still do not self-register).
 
 - **BearDog**: Zero primal-name refs in routing. Zero primal-specific env vars. `capability.list` returns full `methods` array + `provided_capabilities` (Wire L2 complete, Wave 30). `identity.get` implemented. BTSP handshake enforcement live (Wave 31). Discovery: **C** (compliant).
-- **Songbird**: 935 refs / 178 files (was 2,558 — 63% reduction). 285 env refs / 68 files. Strongest improvement trajectory but still highest absolute debt. Discovery: **P→C**.
+- **Songbird**: 935 refs / 178 files (was 2,558 — 63% reduction). 285 env refs / 68 files. Socket naming now domain-stem primary (`network.sock` with `songbird.sock` legacy symlink). Strongest improvement trajectory. Discovery: **P→C**.
 - **NestGate**: 192 refs / 22 files. 32 env refs / 9 files. Near-compliant — all primal-specific env vars eliminated. 7 config/discovery files remain. Discovery: **P→C**.
 - **ToadStool**: 2,998 refs / 384 files. 168 env refs / 52 files. `health.liveness` returns "Method not found" on S168 binary. 0 capabilities visible. Discovery: **P** (improving).
 - **coralReef**: 2 doc/attribution comments only. Zero routing violations. `shader.sock` + `device.sock` domain symlinks. Discovery: **C** (compliant).
@@ -335,15 +335,15 @@ Source: `PUBLIC_SURFACE_STANDARD.md`, `SPRING_PRIMAL_PRESENTATION_STANDARD.md`
 | README.md | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | CHANGELOG.md | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | CONTEXT.md (<150 lines) | PASS | PASS | PASS | PASS | DEBT | DEBT | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | DEBT |
-| PII scan clean | DEBT | DEBT | PASS | DEBT | PASS | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS |
+| PII scan clean | DEBT | PASS ↑ | PASS | DEBT | PASS | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS |
 | `deny.toml` present | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT |
 | `#[expect(reason)]` not `#[allow()]` | DEBT | DEBT | PASS | DEBT | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS |
-| **Grade** | **C** | **C** | **A** | **D** | **C** | **B** | **B** | **B** | **C** | **A** | **A** | **A** | **A** | **C** |
+| **Grade** | **C** | **B** ↑ | **A** | **D** | **C** | **B** | **B** | **B** | **C** | **A** | **A** | **A** | **A** | **C** |
 
 ### Tier 8 Detail
 
 - **BearDog**: CONTEXT.md present (56 lines). 193 `#[allow(` vs 361 `#[expect(` — high allow count. PII hits in 2 test files (path patterns, not real secrets).
-- **Songbird**: CONTEXT.md present (78 lines). 393 `#[allow(` vs 406 `#[expect(` — nearly 50/50 ratio. PII hits in 6 test files.
+- **Songbird**: CONTEXT.md present (81 lines). PII scan **PASS** ↑ (Wave 133: 88 hits audited — all domain terms: email enum, password config, crypto keys; documented false positives). `#[expect(` migration ongoing: production code uses `#[expect(reason)]`, crate-root `#[allow]` blocks remain where `expect` causes unfulfilled-expectation. CHANGELOG updated through Wave 133.
 - **NestGate**: CONTEXT.md present (82 lines). Zero `#[allow(` (0/0). No PII hits. `deny.toml` present.
 - **ToadStool**: CONTEXT.md present (36 lines). **485 `#[allow(`** vs 126 `#[expect(` — 79% `allow`. PII hits in 9 test files.
 - **barraCuda**: CONTEXT.md present (89 lines). Zero `#[allow(` — 100% `#[expect(` (0/102). No PII hits.
@@ -400,7 +400,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | Primal | #1 | #2 | #3 |
 |--------|----|----|-----|
 | **BearDog** | License → `-or-later` | 193 `#[allow(` → `#[expect(` | 71 commented-out code lines |
-| **Songbird** | Discovery: 935 primal-name refs | License → `-or-later` | 393 `#[allow(` → `#[expect(` |
+| **Songbird** | Discovery: 935 primal-name refs | ~~License → `-or-later`~~ **DONE** | `#[allow(` migration (crate-root blocks remain by design) |
 | **NestGate** | `--port` not functional | aarch64 musl not built | Coverage 80% → 90% target pending |
 | **ToadStool** | ~~1,899 fmt~~ → **CLEAN** | Discovery: 2,998 primal-name refs | 485 `#[allow(` → `#[expect(` |
 | **barraCuda** | — | — | — |
@@ -551,6 +551,16 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 ---
 
 ## Version History
+
+### v2.6.0 (April 9, 2026)
+
+**Songbird Waves 131–133: BTSP Phase 2, Deep Debt Sweep, Compliance Uplift**
+
+- Songbird: T1 B→**A** (fmt CLEAN, commented-out code CLEAN). T3 B→**A** (domain symlink `network.sock` → `songbird.sock` on bind/shutdown). T4 D→**C** (socket naming PASS). T8 C→**B** (PII scan: 88 hits audited, all false positives documented). Rollup B→**A**.
+- BTSP Phase 2 complete: `perform_server_handshake` wired into UDS accept path when `FAMILY_ID` set. Crypto delegated to security provider via `btsp.session.create/verify/negotiate`.
+- SB-02 (ring ghost) resolved: lockfile-only via optional `k8s` feature. SB-03 (sled) confirmed resolved: feature-gated non-default.
+- 4 largest production files smart-refactored: `ipc/types.rs` 778→7 modules, `env_config.rs` 764→9 modules, `tarpc_server.rs` 702→3 modules, `manager.rs` 711→6 modules. All under 400L.
+- `parking_lot` removed, `colored` 2→3.1. `#[allow(`→`#[expect(` migration for production lints. 7,265+ lib tests, 0 failed.
 
 ### v2.5.5 (April 8, 2026)
 
