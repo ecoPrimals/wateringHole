@@ -1,7 +1,7 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 2.5.0
-**Date:** April 8, 2026
+**Version:** 2.6.0
+**Date:** April 9, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 **Supersedes:** `IPC_COMPLIANCE_MATRIX.md` v1.6.0 (archived to `fossilRecord/`)
@@ -14,6 +14,15 @@ Data sourced from: April 6, 2026 full ecosystem re-audit (15 primals),
 `IPC_COMPLIANCE_MATRIX.md` v1.6.0, `PRIMAL_GAPS.md` live tracking,
 esotericWebb and ludoSpring compositions (March–April 2026), and direct
 source inspection via `rg`, `cargo`, and manual review.
+
+**v2.6.0 changes**: NestGate deep debt Session 40 — primalSpring gap resolution:
+NG-01 RESOLVED (FileMetadataBackend enforced in production), NG-03 RESOLVED (data.* wildcard
+delegation, hardcoded NCBI/NOAA/IRIS removed), BTSP Phase 2 RESOLVED (server handshake wired
+into both UDS listeners). `uzers` dep removed (→ rustix). 81 hardcoded `self.base_url` strings
+eliminated. `tarpc_server` smart-refactored to directory module. Zero TODO/FIXME in production code.
+Production stubs audit: clean, zero leakage.
+
+**v2.5.0 changes**: primalSpring v0.9.3 live validation gap matrix harvested.
 
 **v2.4.0 changes**: Fmt debt cleared — BearDog, Songbird, toadStool now PASS `cargo fmt --check`.
 All 15 primals pass fmt. benchScale GAP-017 RESOLVED (biomeOS deploy script fixed:
@@ -121,7 +130,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 
 - **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. Fmt **CLEAN** ↑ (was 1 diff). 14,366 tests pass.
 - **Songbird**: 48 clippy warnings resolved. License updated to `-or-later`. Fmt **CLEAN** ↑ (was 2 diffs). Large test suite (>120s).
-- **NestGate**: Fmt **PASS** (was 1 diff). License updated to `-or-later`. Clippy CLEAN. 11,661 tests pass.
+- **NestGate**: Fmt **PASS**. Clippy CLEAN. License `-or-later`. 11,856+ tests pass. BTSP Phase 2 wired. NG-01/NG-03 resolved. `uzers` → `rustix`. 81 hardcoded strings fixed. Zero TODO/FIXME.
 - **ToadStool**: **Major turnaround.** Clippy **CLEAN** (was 2 errors). Fmt **1 diff** (was ~1,899). License updated to `-or-later`. `tar` dep updated.
 - **barraCuda**: E0061 **FIXED** (Sprint 29). All files under 800 lines. Clippy clean. 4,207 tests pass. Domain-based socket naming (math.sock). 12-axis deep debt: clean bill.
 - **coralReef**: Clippy **CLEAN** (was 7 errors). 8 warnings resolved in `coral-gpu` tests. License updated to `-or-later`.
@@ -291,7 +300,7 @@ Source: `PRIMAL_RESPONSIBILITY_MATRIX.md`
 
 - **BearDog**: AI/neural tree (~36 files, 11.9K LOC) feature-gated behind `ai` feature per responsibility matrix. `axum` in integration crate.
 - **Songbird**: `sled` persistence in orchestrator/sovereign-onion (SB-03, now feature-gated). Pending NestGate storage API.
-- **NestGate**: Crypto, discovery, network, MCP, orchestration — all documented in matrix. Crypto delegated to BearDog (NG-05 resolved). Overstep shedding accelerating.
+- **NestGate**: Crypto, discovery, network, MCP, orchestration — all documented in matrix. Crypto delegated to BearDog (NG-05 resolved). Overstep shedding accelerating. NG-01 (metadata persistence) and NG-03 (data.* stubs) both resolved. BTSP Phase 2 handshake wired.
 - **Squirrel**: `sled`/`sqlx` persistence, `ed25519-dalek`/TLS — documented. Broader than "cache only" boundary.
 - **biomeOS**: `redb` in `biomeos-graph` (metrics storage) — borderline operational state vs NestGate domain.
 - **bingoCube**: Strictly within domain (crypto commitment, entropy, reservoir computing). No overstep. No code imports from other primals.
@@ -392,7 +401,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 |--------|----|----|-----|
 | **BearDog** | License → `-or-later` | 193 `#[allow(` → `#[expect(` | 71 commented-out code lines |
 | **Songbird** | Discovery: 935 primal-name refs | License → `-or-later` | 393 `#[allow(` → `#[expect(` |
-| **NestGate** | `--port` not functional | License → `-or-later` | aarch64 musl not built |
+| **NestGate** | `--port` not functional | aarch64 musl not built | Coverage 80% → 90% target pending |
 | **ToadStool** | ~~1,899 fmt~~ → **CLEAN** | Discovery: 2,998 primal-name refs | 485 `#[allow(` → `#[expect(` |
 | **barraCuda** | — | — | — |
 | **coralReef** | 7 clippy errors in tests | License → `-or-later` | No CONTEXT.md |
