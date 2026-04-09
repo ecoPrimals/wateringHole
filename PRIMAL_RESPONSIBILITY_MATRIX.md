@@ -62,11 +62,11 @@ for the full taxonomy.
 | **agentReagents** | VM Image Builder | `infra/` | Template-driven VM image builder for gate provisioning. Depends on benchScale for the underlying substrate. Cloud-init, PCI passthrough, COSMIC desktop templates. |
 | **rustChip** | NPU Characterization | `sort-after/` | BrainChip Akida NPU register-level driver, model format parser, benchmarks. Extracted from toadStool metalForge, evolves via hotSpring. Pure Rust, no C++ SDK. Symbiotic exception with BrainChip. |
 
-### Nascent
+### Defense
 
 | Primal | Domain | Capability Namespace | Role |
 |--------|--------|---------------------|------|
-| **skunkBat** | Thymus / Immune | TBD | Planned immune-system primal for ecosystem health monitoring. Mostly spec — specialized scope for later. |
+| **skunkBat** | Thymus / Immune | `security` | Defensive network security primal. Reconnaissance, threat detection (5 types), graduated defense, security observability. JSON-RPC IPC server with BTSP Phase 1, Wire Standard L2/L3. Metadata-only, no content inspection. |
 
 ---
 
@@ -232,7 +232,7 @@ Deploy graphs should **never** route a concern to a primal listed as OVERSTEP. U
 | barraCuda | 1 lint | PASS | PASS (3.8K) | n/a | SIGSEGV resolved; unfulfilled lint expectation |
 | sourDough | CLEAN | PASS | PASS (239) | **C** | Missing `deny.toml`; musl/signing |
 | coralReef | CLEAN | PASS | PASS (4.4K) | **C** | Iter 76 — license AGPL-3.0-or-later, `unsafe_code = "deny"`, smart refactoring, zero discovery violations |
-| skunkBat | n/c | n/c | n/c | n/c | Nascent — spec only |
+| skunkBat | CLEAN | PASS | PASS (124) | **C** | IPC server, BTSP Phase 1, Wire L2/L3. Zero hardcoded primal names. |
 
 **Discovery legend**: **C** = compliant, **P** = partial, **X** = non-compliant
 
