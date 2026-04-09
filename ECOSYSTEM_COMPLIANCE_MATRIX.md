@@ -87,7 +87,7 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 
 | Primal | T1 Build | T2 UniBin | T3 IPC | T4 Discovery | T5 Naming | T6 Resp | T7 Workspace | T8 Present | T9 Deploy | T10 Live | Rollup |
 |--------|----------|-----------|--------|--------------|-----------|---------|--------------|------------|-----------|----------|--------|
-| **BearDog** | A ↑ | A | A | B | B | B | A | C | A | B | **B** |
+| **BearDog** | A ↑ | A | A | B | B | B | A | B | A | B | **B** |
 | **Songbird** | A ↑↑ | B | A ↑ | C ↑↑ | B | B | A | B ↑ | A | B | **A** ↑↑ |
 | **NestGate** | A ↑ | D | C | C | B | B | A | A | D | N/T | **C** |
 | **ToadStool** | B ↑↑ | C | C | D | D | B | A | C ↑ | C | D | **C** ↑ |
@@ -123,7 +123,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 |-------|----|----|----|----|----|----|----|----|----|----|----|----|-----|-----|
 | `cargo fmt` | 1 diff | PASS ↑ | PASS | 1 diff ↑↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS | PASS |
 | `cargo clippy -D warnings` | PASS | PASS | PASS | PASS ↑↑ | PASS | PASS ↑ | PASS | PASS | PASS | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS |
-| `cargo test --all-features` | PASS (14.4K) | PASS | PASS (11.7K) | PASS | PASS (4.2K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (29) | PASS | PASS |
+| `cargo test --all-features` | PASS (14,593+) | PASS | PASS (11.7K) | PASS | PASS (4.2K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (29) | PASS | PASS |
 | `cargo doc --no-deps` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Edition 2024 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS |
 | `forbid(unsafe_code)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
@@ -131,14 +131,14 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 | No TODO/FIXME/HACK | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No files >1000 lines | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | No `.unwrap()` in lib | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| No commented-out code | DEBT | PASS ↑ | PASS | DEBT | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS |
+| No commented-out code | PASS | PASS ↑ | PASS | DEBT | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS |
 | License `AGPL-3.0-or-later` | PASS ↑ | PASS ↑ | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS | PASS ↑ | PASS | PASS | PASS ↑ | PASS | PASS ↑ | PASS |
 | SPDX header on sources | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT |
 | **Grade** | **B** ↑ | **A** ↑↑ | **A** ↑ | **B** ↑↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** | **A** | **A** ↑ | **A** | **A** ↑ | **A** ↑ |
 
 ### Tier 1 Detail (April 6 re-audit, Songbird updated April 9)
 
-- **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. Fmt **CLEAN** ↑ (was 1 diff). 14,366 tests pass.
+- **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. Fmt **CLEAN** ↑ (was 1 diff). 14,593+ tests pass. **90.51%** line coverage.
 - **Songbird**: Fmt **CLEAN** ↑ (was 2 diffs). Commented-out code **CLEAN** ↑ (Wave 124 scrub). 7,265+ lib tests, 0 failed. All 30 crates clippy pedantic+nursery zero warnings. 4 largest files smart-refactored (Wave 133). BTSP Phase 2 complete (Wave 132).
 - **NestGate**: Fmt **PASS**. Clippy CLEAN. License `-or-later`. 11,856+ tests pass. BTSP Phase 2 wired. NG-01/NG-03 resolved. `uzers` → `rustix`. 81 hardcoded strings fixed. Zero TODO/FIXME.
 - **ToadStool**: **Major turnaround.** Clippy **CLEAN** (was 2 errors). Fmt **1 diff** (was ~1,899). License updated to `-or-later`. `tar` dep updated.
@@ -233,7 +233,7 @@ N/A for library primals without IPC (barraCuda, bingoCube, sourDough as CLI — 
 
 | Check | BD | SB | NG | TS | CR | SQ | bOS | PT | RC | SG | LS |
 |-------|----|----|----|----|----|----|-----|----|----|----|----|
-| `capability.register` / discoverable | DEBT | DEBT | DEBT | DEBT | DEBT | DEBT | PASS | DEBT | DEBT | DEBT | DEBT |
+| `capability.register` / discoverable | PASS | DEBT | DEBT | DEBT | DEBT | DEBT | PASS | DEBT | DEBT | DEBT | DEBT |
 | `capability.list` implemented | DEBT | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | `identity.get` implemented | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Health triad (`liveness`/`readiness`/`check`) | PASS | PASS | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
@@ -249,7 +249,7 @@ Discovery debt is the largest cross-ecosystem gap. All non-biomeOS primals depen
 `discover_and_register_primals()` race condition (BM-04 resolved via `topology.rescan` + lazy discovery,
 but primals still do not self-register).
 
-- **BearDog**: Zero primal-name refs in routing. Zero primal-specific env vars. `capability.list` returns full `methods` array + `provided_capabilities` (Wire L2 complete, Wave 30). `identity.get` implemented. BTSP handshake enforcement live (Wave 31). Discovery: **C** (compliant).
+- **BearDog**: Zero primal-name refs in routing. Zero primal-specific env vars. `capability.register` **implemented** — dynamic `ipc.register` with Songbird on startup. `capability.list` returns full `methods` array + `provided_capabilities` (Wire L2 complete, Wave 30). `identity.get` implemented. BTSP handshake enforcement live (Wave 31). BD-01 **resolved** (per-field encoding hints + semantic aliases). Discovery: **C** (compliant).
 - **Songbird**: 935 refs / 178 files (was 2,558 — 63% reduction). 285 env refs / 68 files. Socket naming now domain-stem primary (`network.sock` with `songbird.sock` legacy symlink). Strongest improvement trajectory. Discovery: **P→C**.
 - **NestGate**: 192 refs / 22 files. 32 env refs / 9 files. Near-compliant — all primal-specific env vars eliminated. 7 config/discovery files remain. Discovery: **P→C**.
 - **ToadStool**: 2,998 refs / 384 files. 168 env refs / 52 files. `health.liveness` returns "Method not found" on S168 binary. 0 capabilities visible. Discovery: **P** (improving).
@@ -345,14 +345,14 @@ Source: `PUBLIC_SURFACE_STANDARD.md`, `SPRING_PRIMAL_PRESENTATION_STANDARD.md`
 | README.md | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | CHANGELOG.md | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | CONTEXT.md (<150 lines) | PASS | PASS | PASS | PASS | DEBT | DEBT | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | DEBT |
-| PII scan clean | DEBT | PASS ↑ | PASS | DEBT | PASS | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS |
+| PII scan clean | PASS | PASS ↑ | PASS | DEBT | PASS | DEBT | DEBT | DEBT | DEBT | PASS | PASS | PASS | PASS | PASS |
 | `deny.toml` present | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | DEBT |
 | `#[expect(reason)]` not `#[allow()]` | DEBT | DEBT | PASS | DEBT | PASS | PASS | PASS | PASS | DEBT | PASS | PASS | PASS | PASS | PASS |
 | **Grade** | **C** | **B** ↑ | **A** | **D** | **C** | **B** | **B** | **B** | **C** | **A** | **A** | **A** | **A** | **C** |
 
 ### Tier 8 Detail
 
-- **BearDog**: CONTEXT.md present (56 lines). 193 `#[allow(` vs 361 `#[expect(` — high allow count. PII hits in 2 test files (path patterns, not real secrets).
+- **BearDog**: CONTEXT.md present (56 lines). 75 `#[allow(` vs 476 `#[expect(` — allow count reduced (193→75). PII scan **clean** (0 test files with PII patterns).
 - **Songbird**: CONTEXT.md present (81 lines). PII scan **PASS** ↑ (Wave 133: 88 hits audited — all domain terms: email enum, password config, crypto keys; documented false positives). `#[expect(` migration ongoing: production code uses `#[expect(reason)]`, crate-root `#[allow]` blocks remain where `expect` causes unfulfilled-expectation. CHANGELOG updated through Wave 133.
 - **NestGate**: CONTEXT.md present (82 lines). Zero `#[allow(` (0/0). No PII hits. `deny.toml` present.
 - **ToadStool**: CONTEXT.md present (36 lines). **485 `#[allow(`** vs 126 `#[expect(` — 79% `allow`. PII hits in 9 test files.
@@ -409,7 +409,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 
 | Primal | #1 | #2 | #3 |
 |--------|----|----|-----|
-| **BearDog** | License → `-or-later` | 193 `#[allow(` → `#[expect(` | 71 commented-out code lines |
+| **BearDog** | 75 `#[allow(` → `#[expect(` | `capability.list` Wire L3 polish | Tier 10: filesystem socket at expected family-scoped path |
 | **Songbird** | Discovery: 935 primal-name refs | ~~License → `-or-later`~~ **DONE** | `#[allow(` migration (crate-root blocks remain by design) |
 | **NestGate** | `--port` not functional | aarch64 musl not built | Coverage 80% → 90% target pending |
 | **ToadStool** | ~~1,899 fmt~~ → **CLEAN** | Discovery: 2,998 primal-name refs | 485 `#[allow(` → `#[expect(` |
@@ -515,7 +515,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough — no server mode).
 
 ### Tier 10 Detail
 
-- **BearDog**: Gold standard for TCP JSON-RPC compliance. `benchscale validate ipc` reports COMPLIANT on all 3 health methods (0ms each). **Standalone blocked**: hard-fails on missing `NODE_ID` (`NODE_ID or BEARDOG_NODE_ID must be set`). UDS socket not found at expected family-scoped path despite log claiming creation.
+- **BearDog**: Gold standard for TCP JSON-RPC compliance. `benchscale validate ipc` reports COMPLIANT on all 3 health methods (0ms each). **Standalone fixed**: ephemeral `standalone-{uuid}` when `NODE_ID` / `BEARDOG_NODE_ID` unset — no longer hard-fails. UDS socket not found at expected family-scoped path despite log claiming creation (remaining Tier 10 DEBT).
 - **Songbird**: Health triad fully responsive on UDS (`songbird.sock`). TCP 9200 is HTTP discovery (federation/beacons), not JSON-RPC — so benchscale TCP probe fails. This is by design: songbird's TCP is for LAN discovery, not IPC. Needs `--port` to also bind newline JSON-RPC for composition testing.
 - **ToadStool**: Starts and creates `.jsonrpc.sock` UDS. `health.liveness` → "Method not found". Uses `toadstool.health` and `compute.capabilities` instead. Standard triad not implemented.
 - **Squirrel**: Healthy on abstract socket `@squirrel`. No filesystem socket created — invisible to `readdir()` discovery. `health.liveness` returns `{"alive":true}` via abstract socket.
