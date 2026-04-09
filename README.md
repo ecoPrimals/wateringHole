@@ -84,7 +84,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 | **rhizoCrypt** | Ephemeral Memory | Content-addressed DAG engine for working memory. Sessions, Merkle trees, real-time streaming | Production (A+) |
 | **sweetGrass** | Attribution | Semantic provenance (v0.7.20). W3C PROV-O braids, fair attribution, 24 JSON-RPC methods + tarpc 0.37 + REST + UDS, UniBin, ecoBin, 1,049 tests, Edition 2024, IpcErrorPhase w/ Timeout, extract_rpc_error, extract_capabilities, DispatchOutcome, OrExit, proptest, parking_lot locks, Provenance Trio coordination, Tower Atomic enforced | Production |
 | **LoamSpine** | Permanence | Immutable linear ledger for selective permanence. Loam Certificates for ownership and transfer | Production (A+) |
-| **skunkBat** | Defense | Defensive network security: threat detection, graduated response, baseline profiling | Production |
+| **skunkBat** | Defense | Defensive network security: threat detection (5 types), graduated response, baseline profiling. JSON-RPC IPC server (TCP + UDS), BTSP Phase 1, Wire Standard L2/L3, capability-based discovery. 124+ tests, Edition 2024 | Production |
 
 ### Supporting Tools
 

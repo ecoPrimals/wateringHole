@@ -349,11 +349,11 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 ### skunkBat - Defense Primal
 
-**Domain**: Defensive network security  
-**Phase**: Post-NUCLEUS  
-**Status**: Production Ready (87.37% coverage, core modules 90-100%)
+**Domain**: Defensive network security
+**Phase**: Post-NUCLEUS
+**Status**: Production Ready — v0.1.0, 124+ tests, clippy pedantic+nursery clean
 
-**Role**: skunkBat protects sovereign computing environments through threat detection and graduated response. It is strictly defensive - reconnaissance, not surveillance. It learns your network's normal baseline and detects deviations. It never inspects content, only metadata.
+**Role**: skunkBat protects sovereign computing environments through threat detection and graduated response. JSON-RPC 2.0 IPC server on TCP + UDS with BTSP Phase 1 socket naming and Wire Standard L2/L3 compliance. Strictly defensive — reconnaissance, not surveillance. Learns your network's normal baseline and detects deviations. Never inspects content, only metadata.
 
 **Primitives**:
 
@@ -361,13 +361,14 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 |----------|-----------|
 | **Threat Detection** | Genetic (unknown lineage), Topology (layer-hopping), Behavioral (statistical anomalies), Intrusion (attack signatures), Resource (DoS, exhaustion) |
 | **Defense Actions** | Monitor + Alert (low), Quarantine (isolate), Block (deny, operator decision) |
-| **Baseline** | Statistical profiling of normal network patterns |
+| **Baseline** | Statistical profiling via `VecDeque` rolling window, `/proc/loadavg` system load |
 | **Reconnaissance** | Network intelligence (metadata-only, no content) |
-| **Integration** | Trait-based ecosystem integration (BearDog, ToadStool, Songbird, NestGate) |
+| **IPC** | JSON-RPC 2.0 (TCP + UDS), BTSP Phase 1, Wire Standard L2/L3, `security.sock` domain symlink |
+| **Integration** | Capability-based runtime discovery (ToadStool, Songbird, BearDog via JSON-RPC) |
 
 **Principles**: Defensive only, user authority required, privacy by architecture
 
-**Participates In**: Ecosystem security layer, Dark Forest defense coordination
+**Participates In**: Ecosystem security layer, Dark Forest defense coordination, NUCLEUS compositions
 
 ---
 

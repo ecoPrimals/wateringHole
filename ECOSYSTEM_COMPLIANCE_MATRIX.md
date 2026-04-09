@@ -1,6 +1,6 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 2.6.0
+**Version:** 2.7.0
 **Date:** April 9, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
@@ -14,6 +14,16 @@ Data sourced from: April 6, 2026 full ecosystem re-audit (15 primals),
 `IPC_COMPLIANCE_MATRIX.md` v1.6.0, `PRIMAL_GAPS.md` live tracking,
 esotericWebb and ludoSpring compositions (March–April 2026), and direct
 source inspection via `rg`, `cargo`, and manual review.
+
+**v2.7.0 changes**: skunkBat deep debt evolution — IPC surface established:
+JSON-RPC 2.0 server on TCP + UDS (skunk-bat-server UniBin with `server`/`health`/`scan`/`detect`
+subcommands). BTSP Phase 1 complete (socket naming, `FAMILY_ID` scoping, `BIOMEOS_INSECURE` guard).
+Wire Standard L2/L3 (`capabilities.list` + `identity.get`). Real JSON-RPC client for
+ToadStool discovery and Songbird federation (UDS-first, TCP-fallback, capability-based).
+Hardcoded primal names/ports eliminated. Production stubs evolved to complete implementations.
+`VecDeque` rolling profiler, `/proc/loadavg` system load, `dispatch` smart-refactored.
+Unused deps removed (toml, anyhow, chrono). 124+ tests, 0 warnings, 0 TODO/FIXME.
+11 stale root docs archived to `fossilRecord/skunkBat/`. Root docs rewritten for current state.
 
 **v2.6.0 changes**: NestGate deep debt Session 40 — primalSpring gap resolution:
 NG-01 RESOLVED (FileMetadataBackend enforced in production), NG-03 RESOLVED (data.* wildcard
@@ -91,7 +101,7 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 | **LoamSpine** | A | C | B | B | B | A | A | A | C | C ↑ | **B** ↑ |
 | **bingoCube** | A | -- | -- | -- | -- | A | A | A ↑ | -- | -- | **A** |
 | **sourDough** | A ↑ | -- | -- | -- | -- | A | A | B ↑ | -- | -- | **B** |
-| **skunkBat** | A | -- | -- | -- | -- | A | A | B | -- | -- | **A** |
+| **skunkBat** | A ↑ | A ↑ | A ↑ | B ↑ | A ↑ | A | A | A ↑ | -- | -- | **A** ↑ |
 
 ### Grade Distribution
 
@@ -551,6 +561,21 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 ---
 
 ## Version History
+
+### v2.7.0 (April 9, 2026)
+
+**skunkBat Deep Debt Evolution — IPC Surface Established**
+
+- skunkBat: All `--` tiers promoted. T1 A (fmt/clippy/test/doc/deny PASS, Edition 2024, `forbid(unsafe_code)`, SPDX, zero TODO/FIXME, all files <1000L). T2 **A** (UniBin: `server`/`health`/`scan`/`detect` subcommands, `--port`, standalone, graceful degradation, signal handling, zero C deps). T3 **A** (newline JSON-RPC on TCP + UDS, `security.sock` domain symlink, socket cleanup on shutdown). T4 **B** (`capabilities.list` + `identity.get` implemented, health triad, zero hardcoded primal names, capability-domain env vars; `capability.register` not yet self-registering). T5 **A** (`domain.verb` naming throughout). T8 **A** (README rewritten, CONTEXT.md current, `deny.toml`, zero PII, zero `#[allow(`). Rollup: **A**.
+- BTSP Phase 1 complete: `FAMILY_ID` socket scoping, `BIOMEOS_SOCKET_DIR` + `XDG_RUNTIME_DIR` fallback, `BIOMEOS_INSECURE` guard.
+- Wire Standard L2/L3: `capabilities.list` returns primal/version/methods envelope with `provided_capabilities` and `protocol`/`transport`. `identity.get` returns primal/version/domain/capabilities.
+- JSON-RPC client (`rpc.rs`): UDS-first, TCP-fallback, shared by ToadStool discovery + Songbird federation.
+- Hardcoding eliminated: `SKUNKBAT_PORT` env var, capability-domain symlinks (`discovery.sock`, `federation.sock`), `DISCOVERY_ENDPOINT`/`FEDERATION_ENDPOINT` env vars.
+- Production stubs evolved: `toadstool.rs` and `songbird.rs` rewritten from placeholders to real JSON-RPC IPC clients with graceful degradation.
+- Smart refactoring: `dispatch.rs` extracted `try_serialize`/`serialize`/`dispatch_respond` helpers. `VecDeque` rolling window profiler. `/proc/loadavg` system load normalized by CPU count.
+- Unused deps removed: `toml`, `anyhow`, `chrono`. `async-trait` retained (justified: dyn-dispatch async).
+- 11 stale Dec 2025 root docs archived to `fossilRecord/skunkBat/dec-2025-root-docs/`. README, CONTEXT.md, specs index rewritten.
+- 124+ tests, 12 examples, 0 clippy warnings, `cargo deny check` PASS.
 
 ### v2.6.0 (April 9, 2026)
 
