@@ -19,8 +19,8 @@ Tier 2: Rust → GPU           (128 WGSL shaders, full lean on barraCuda)
 Tier 3: Rust+Python → NUCLEUS (4 composition binaries, 3 science probes, capability routing)
 ```
 
-964 lib tests, 140 binaries, 128 WGSL shaders. Zero clippy warnings (lib).
-Zero unsafe in application code. AGPL-3.0-or-later. ecoBin in `infra/plasmidBin/hotspring/`.
+985 lib tests, 140 binaries, 128 WGSL shaders. Zero clippy errors (`--all-targets`).
+Zero rustdoc warnings. Zero unsafe in application code. AGPL-3.0-or-later. ecoBin in `infra/plasmidBin/hotspring/`.
 
 ## For barraCuda Team
 
@@ -125,7 +125,21 @@ validation target is the IPC-composed primal stack.
 | GAP-HS-005 | IONIC-RUNTIME cross-family GPU lease | Medium | BearDog/primalSpring |
 | GAP-HS-006 | BTSP session crypto for barraCuda IPC | Medium | barraCuda/BearDog |
 | GAP-HS-007 | TensorSession adoption | Low | barraCuda |
-| GAP-HS-010 | Inline threshold migration (~33 bins) | Low | hotSpring |
+
+### Gaps Resolved in Wave 1-3 (April 11, 2026)
+
+| ID | What | How |
+|----|------|-----|
+| GAP-HS-010 | Inline validation thresholds | Cost estimate literals extracted to `tolerances::cost` module |
+| GAP-HS-017 | Flat CAPABILITIES array | Split to `LOCAL_CAPABILITIES` (21) + `ROUTED_CAPABILITIES` (26) |
+| GAP-HS-018 | No biomeOS registration | `register_with_target()` — `lifecycle.register` + `capability.register` |
+| GAP-HS-019 | plasmidBin metadata incomplete | Full schema: `[provenance]`, `[compatibility]`, `[builds.*]`, `[genomeBin]` |
+| GAP-HS-020 | Missing Skip/NDJSON in validation | `CompositionResult` with `check_skip`, `exit_code_skip_aware` (0/1/2), sinks |
+| GAP-HS-021 | No OrExit trait | `OrExit<T>` on `Result<T,E>` and `Option<T>` |
+| GAP-HS-022 | No capability registry TOML | `config/capability_registry.toml` with bidirectional sync test |
+| GAP-HS-023 | No standalone mode | `HOTSPRING_NO_NUCLEUS=1` env var |
+| GAP-HS-024 | Clippy errors in test/bin targets | `#[allow]` on test modules; clean `--all-targets` |
+| GAP-HS-025 | 13+ rustdoc warnings | Fixed all; `cargo doc --lib --no-deps` clean |
 
 See `hotSpring/docs/PRIMAL_GAPS.md` for full details and resolution history.
 
@@ -245,7 +259,93 @@ cd barracuda
 
 ---
 
+## Wave 1-3 Composition Patterns (for primalSpring + spring teams)
+
+These patterns were absorbed from primalSpring into hotSpring and validated.
+They are now battle-tested against 985 lib tests and should be adopted by all springs.
+
+### Pattern 1: LOCAL vs ROUTED Capability Split
+
+```rust
+pub const LOCAL_CAPABILITIES: &[&str] = &[ /* served here */ ];
+pub const ROUTED_CAPABILITIES: &[(&str, &str)] = &[ /* (method, canonical_provider) */ ];
+```
+
+Test contract: sets must be disjoint, no duplicates, all follow `domain.operation` naming.
+`all_capabilities()` combines both for `capability.list` responses.
+
+### Pattern 2: biomeOS Registration (graceful degradation)
+
+```rust
+pub fn register_with_target(our_socket: &Path) { /* ... */ }
+```
+
+Sends `lifecycle.register` + per-capability `capability.register` over JSON-RPC.
+Degrades gracefully if biomeOS socket not found. `HOTSPRING_NO_NUCLEUS=1` skips entirely.
+
+### Pattern 3: Capability Registry TOML
+
+`config/capability_registry.toml` — TOML file listing every capability with
+`method`, `served` (local/routed), `provider`, `domain`. Bidirectional sync test
+ensures code and TOML stay in lockstep. Springs add capabilities in both places.
+
+### Pattern 4: CompositionResult + Skip-Aware Exit Codes
+
+```rust
+pub struct CompositionResult { passed, failed, skipped, ... }
+pub fn exit_code_skip_aware(&self) -> i32 { 0=pass, 1=fail, 2=all-skipped }
+```
+
+Complements the physics `ValidationHarness`. Honest skips for missing primals.
+CI can distinguish "nothing to test" (exit 2) from "tests failed" (exit 1).
+
+### Pattern 5: ValidationSink + NdjsonSink
+
+Pluggable output: `StdoutSink` (human), `NdjsonSink<W>` (machine), `NullSink` (tests).
+All composition validators can stream JSON to log aggregation.
+
+### Pattern 6: OrExit Trait
+
+```rust
+pub trait OrExit<T> { fn or_exit(self, msg: &str) -> T; }
+```
+
+Replaces `unwrap()`/`expect()` in binary targets. Prints error + exits cleanly.
+Library code keeps `#![deny(clippy::expect_used)]`; binaries use `.or_exit()`.
+
+### Pattern 7: Named Cost Constants
+
+`tolerances::cost` module — no magic numbers in `cost_estimates()`.
+Constants named after capability (`LATTICE_QCD_MS`, `LATTICE_QCD_BYTES`, etc.).
+
+### Pattern 8: Standalone Mode
+
+`HOTSPRING_NO_NUCLEUS=1` — run all physics locally without biomeOS or NUCLEUS primals.
+Registration skipped, IPC calls return `None`, composition checks emit honest skips.
+
+## Deployment via Neural API from biomeOS
+
+The complete deployment flow:
+
+1. **biomeOS reads proto-nucleate** (`hotspring_qcd_proto_nucleate.toml`) — discovers 10 primals
+2. **Spawns primals** in germination order (security → discovery → compute → math → storage → provenance → AI)
+3. **hotspring_primal starts** → `register_with_target()` sends lifecycle + capability registration
+4. **biomeOS confirms** capabilities → routes incoming `physics.*` requests to hotspring socket
+5. **Composition validators** run: `validate_nucleus_composition` tests all 4 atomic tiers
+6. **Science probes** verify IPC-composed results match direct Rust execution
+7. **Neural API** exposes hotSpring capabilities to other springs and clients via semantic routing
+
+Key JSON-RPC methods exposed:
+- `health.liveness`, `health.readiness`, `health.check`
+- `composition.health` (atomic tier health report)
+- `capability.list` (LOCAL + ROUTED capabilities)
+- `mcp.tools.list` (5 MCP tool definitions)
+- `physics.*` (9 physics operations)
+- `compute.*` (4 compute primitives)
+
+---
+
 *hotSpring v0.6.32 — Python validates Rust. Rust validates NUCLEUS.
-964 tests, 140 binaries, 128 WGSL shaders. The scarcity was artificial.
+985 tests, 140 binaries, 128 WGSL shaders. The scarcity was artificial.
 Peer-reviewed science runs on consumer hardware, composed via sovereign
 primal IPC. The pattern is proven. The ecosystem evolves.*
