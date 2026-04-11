@@ -1,7 +1,7 @@
-# NUCLEUS Spring Alignment — Phase 34
+# NUCLEUS Spring Alignment — Phase 35
 
 **Date**: April 11, 2026
-**From**: primalSpring v0.9.9
+**From**: primalSpring v1.0.0
 **For**: All springs, primals, and gardens
 **License**: AGPL-3.0-or-later
 
@@ -33,17 +33,35 @@ Bonding policies document how atomics bind within cross-atomic compositions.
 Every science spring now has a proto-nucleate graph in
 `primalSpring/graphs/downstream/` that defines its target NUCLEUS composition.
 
-| Spring | Version | Tests | Primary Atomics | Proto-Nucleate | Particle Profile |
-|--------|---------|-------|-----------------|----------------|------------------|
-| **hotSpring** | 0.6.32 | ~870 | **Node** (proton-heavy) + Nest | `hotspring_qcd_proto_nucleate` | proton_heavy |
-| **neuralSpring** | 0.1.0 | 1,403 | **Node** + Meta | `neuralspring_inference_proto_nucleate` | balanced |
-| **wetSpring** | 0.1.0 | 1,902 | Node + **Nest** + Meta | `wetspring_lifescience_proto_nucleate` | balanced |
-| **airSpring** | 0.10.0 | 986 | Node + **Nest** | `airspring_ecology_proto_nucleate` | balanced |
-| **groundSpring** | 0.1.0 | 1,050+ | Node + **Nest** | `groundspring_geoscience_proto_nucleate` | balanced |
-| **healthSpring** | 0.1.0 | 928 | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_proto_nucleate` | neutron_heavy |
-| **ludoSpring** | 0.1.0 | 222 | Node + **Meta** | `ludospring_proto_nucleate` | balanced |
+Evolution ladder: **paper → python → rust → ipc → composing → composed**
+
+| Spring | Version | Evolution | Tests | barraCuda | Primary Atomics | Proto-Nucleate |
+|--------|---------|-----------|-------|-----------|-----------------|----------------|
+| **hotSpring** | 0.6.32 | **composing** | 1,040 | composing | **Node** (proton-heavy) + Nest | `hotspring_qcd_proto_nucleate` |
+| **neuralSpring** | 0.1.0 | **composing** | 1,403 | composing | **Node** + Meta | `neuralspring_inference_proto_nucleate` |
+| **wetSpring** | 0.3.0 | **composed** | 1,902 | composing | Node + **Nest** + Meta | `wetspring_lifescience_proto_nucleate` |
+| **airSpring** | 0.10.0 | **composed** | 1,364 | composing | Node + **Nest** | `airspring_ecology_proto_nucleate` |
+| **groundSpring** | 0.1.0 | **composing** | 1,050 | calling | Node + **Nest** | `groundspring_geoscience_proto_nucleate` |
+| **healthSpring** | 0.1.0 | **composing** | 940 | composing | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_proto_nucleate` |
+| **ludoSpring** | 0.1.0 | **composing** | 222 | composing | Node + **Meta** | `ludospring_proto_nucleate` |
 
 Also: **esotericWebb** (garden) → `esotericwebb_proto_nucleate` — full NUCLEUS + Meta, pure composition.
+
+### plasmidBin Niche Validation
+
+Each spring can validate its primal requirements with:
+```bash
+./validate_composition.sh niche-<spring>   # e.g. niche-hotspring
+```
+
+### Acceleration Effect
+
+As each spring completes its niche, it unlocks capabilities for siblings:
+- **wetSpring** + **airSpring** (composed) → proved the full ladder, template for all
+- **hotSpring** → GPU patterns drove barraCuda + coralReef evolution
+- **neuralSpring** → `inference.*` wire standard benefits ALL springs needing AI
+- **healthSpring** → ionic bond + dual-tower enclave applies to any sensitive data
+- **ludoSpring** → pure composition proof: graph-as-product for gardens
 
 ---
 
