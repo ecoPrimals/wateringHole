@@ -1114,18 +1114,17 @@ These remain as transitive dependencies through ecosystem crates we don't own:
 | evdev | Via nix | No rustix alt yet | Consider contributing |
 | wgpu-hal | GPU platform libs (`libloading` → `dlopen`) | Replaced by coralReef sovereign compiler (long-term) | Node Atomic delegation (BC-07) |
 | ash | Vulkan FFI (`libloading` → `dlopen`) | Transitive via wgpu-hal | Same — eliminated by sovereign path |
-| ring | C/ASM crypto (via rustls default crypto provider) | NestGate NG-08: live in production despite ban | Switch to `rustls-rustcrypto` provider |
+| ~~ring~~ | ~~C/ASM crypto (via rustls default crypto provider)~~ | ~~NestGate NG-08~~ | **RESOLVED** (April 11) — `reqwest` → `ureq` + `rustls-rustcrypto` |
 
 When mio adopts rustix and Rust std adopts `linux-raw-sys`, the remaining
 libc paths vanish automatically. Our code is already ready.
 
-> **NestGate ring leak (April 11, 2026)**: `cargo tree -i ring --edges normal`
-> confirms `ring` v0.17.14 resolves in NestGate's production build via
-> `rustls` → `reqwest` → `nestgate-rpc`. NG-04 claimed "ring eliminated" but the
-> default `rustls` crypto provider still pulls `ring`. `deny.toml` bans it but the
-> ban is not enforced in CI. This is the same pattern that blocked Songbird
-> cross-compile before Wave 93. Fix: explicit `rustls-rustcrypto` provider selection.
-> See `PORTABILITY_DEBT_AND_NODE_DELEGATION.md` for full Class 3 audit.
+> **NestGate ring leak — RESOLVED (April 11, 2026)**: `ring` v0.17.14 was present
+> via `rustls` → `reqwest` → `nestgate-rpc`. Fix applied: `reqwest` replaced with
+> `ureq` 3.3 + `rustls-rustcrypto` (pure Rust). `cargo tree -i ring` now returns
+> "did not match any packages". `cargo deny check bans` PASS. NestGate ecoBin
+> certification reconfirmed — zero C/ASM crypto in production binary.
+> See `PORTABILITY_DEBT_AND_NODE_DELEGATION.md` for full resolution details.
 
 ### **The v3.0 Mental Model**
 
