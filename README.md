@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: April 5, 2026
+**Last Updated**: April 11, 2026
 
 ---
 
@@ -393,7 +393,10 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `CONTENT_CONVERGENCE_EXPERIMENT_GUIDE.md` — sweetGrass content convergence experiment
 - `CONTENT_SIMILARITY_EXPERIMENT_GUIDE.md` — sweetGrass content similarity experiment
 
-### Spring Composition Guidance (Per-Spring)
+### Spring Composition & Evolution
+- `SPRING_COMPOSITION_PATTERNS.md` — **Standardized patterns** extracted from all 7 springs: method normalization, capability registration, tiered discovery, graph validation, niche identity
+- `NUCLEUS_SPRING_ALIGNMENT.md` — **Spring × Atomic alignment matrix**, composition readiness status, neuralSpring AI provider role, cross-pollination network
+- `SPRING_AUDIT_PROMPT.md` — **Canonical audit prompt** for spinning up spring sessions (includes primal composition validation layer)
 - `airspring/AIRSPRING_COMPOSITION_GUIDANCE.md` — How airSpring composes
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes
 

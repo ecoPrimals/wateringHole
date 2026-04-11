@@ -1,6 +1,6 @@
-# NUCLEUS Spring Alignment — Phase 33
+# NUCLEUS Spring Alignment — Phase 34
 
-**Date**: April 10, 2026
+**Date**: April 11, 2026
 **From**: primalSpring v0.9.9
 **For**: All springs, primals, and gardens
 **License**: AGPL-3.0-or-later
@@ -197,6 +197,38 @@ proof (graph-as-product), AI latency testing, session lifecycle.
 
 ---
 
+## Composition Readiness Status
+
+Each spring is evolving toward its proto-nucleate target. This table shows
+where each spring currently stands in the **primal composition** maturity
+ladder (see `SPRING_COMPOSITION_PATTERNS.md` for the standardized patterns).
+
+| Spring | Method Norm | Capability Reg | Socket Discovery | Dispatch Routing | Graph Validation | biomeOS Gate | Provenance Graceful | Niche Identity |
+|--------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| **healthSpring** | YES | YES (science+infra, cost, deps) | YES (6-tier) | YES (two-tier) | — | — | YES | YES |
+| **neuralSpring** | YES | YES (TOML + tarpc) | YES (5-tier) | partial | — | — | — | YES |
+| **wetSpring** | YES (iterative) | partial | YES | YES | — | — | YES | YES |
+| **hotSpring** | YES | partial | YES (NucleusContext) | partial | — | — | — | YES |
+| **airSpring** | partial | partial | YES | partial | — | — | YES | YES |
+| **groundSpring** | partial | partial | YES (metalForge) | — | — | YES | — | YES |
+| **ludoSpring** | — | — | partial | — | YES (recipe.rs) | — | — | partial |
+
+**Key**: YES = pattern adopted, partial = incomplete or needs update, — = not yet started
+
+### What Each Spring Needs Next
+
+| Spring | Next Step |
+|--------|-----------|
+| **healthSpring** | Deploy graph validation against proto-nucleate; biomeOS feature gate |
+| **neuralSpring** | Complete dispatch routing (two-tier); register as Squirrel inference provider |
+| **wetSpring** | Capability registration with cost/deps; deploy graph validation |
+| **hotSpring** | Create `graphs/` directory with deploy TOMLs; full capability registration |
+| **airSpring** | Method normalization in all paths; capability registration with cost/deps |
+| **groundSpring** | Method normalization; dispatch routing; provenance graceful degradation |
+| **ludoSpring** | Method normalization; capability registration; socket discovery (tiered) |
+
+---
+
 ## Cross-Pollination Network
 
 ```
@@ -254,11 +286,12 @@ Handoffs go to `infra/wateringHole/handoffs/`.
 
 1. **Read your proto-nucleate**: `primalSpring/graphs/downstream/{yourspring}_*_proto_nucleate.toml`
 2. **Check atomics**: which fragments does your proto-nucleate declare?
-3. **Wire IPC**: call primals by capability, not identity
-4. **Validate**: run primalSpring experiments for your composition
-5. **Evolve**: push domain-specific WGSL through coralReef, compute through toadStool
-6. **Add Squirrel**: when ready for AI, add `squirrel` to your composition — neuralSpring's inference is immediately available
-7. **Hand back**: document gaps and patterns → primalSpring → primal teams → `infra/wateringHole/handoffs/`
+3. **Adopt composition patterns**: follow `infra/wateringHole/SPRING_COMPOSITION_PATTERNS.md` — method normalization, capability registration, tiered discovery, niche identity
+4. **Wire IPC**: call primals by capability, not identity
+5. **Validate composition**: run primalSpring experiments for your composition (Level 5-6 maturity)
+6. **Evolve**: push domain-specific WGSL through coralReef, compute through toadStool
+7. **Add Squirrel**: when ready for AI, add `squirrel` to your composition — neuralSpring's inference is immediately available
+8. **Hand back**: document gaps and patterns → primalSpring → primal teams → `infra/wateringHole/handoffs/`
 
 ---
 
