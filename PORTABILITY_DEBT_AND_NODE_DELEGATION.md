@@ -138,22 +138,20 @@ Tier 4: CpuExecutor + naga-exec (pure Rust)      ← NEW: BC-08
 
 ### Active Gaps (require action)
 
-**NG-08: NestGate `ring` transitive leak** (High severity)
+**NG-08: NestGate `ring` transitive leak** — **RESOLVED** (April 11, 2026)
 
-`ring` v0.17.14 resolves in NestGate's production build despite `deny.toml` ban:
+`ring` v0.17.14 was present in NestGate's production build via
 `ring` → `rustls` → `hyper-rustls` → `reqwest` → `nestgate-rpc` → binary.
 
-NG-04 claimed "ring eliminated" — this is incorrect. The `deny.toml` ban exists
-but `cargo deny check bans` is either not run in CI, or `ring` enters through
-`rustls`'s default crypto provider selection which `deny` may not catch as a
-"wrapper" dependency.
-
-**Fix options** (NestGate team):
-1. Switch to `rustls = { default-features = false, features = ["std"] }` +
-   `rustls-rustcrypto` as crypto provider (Songbird pattern)
-2. Replace `reqwest` with `ureq` (pure Rust HTTP, no TLS needed for local IPC)
-3. If TLS is needed for remote federation, use `reqwest` with explicit
-   `rustls-rustcrypto` crypto provider
+**Fix applied**: Option 2 — `reqwest` replaced with `ureq` 3.3 (`rustls-no-provider` +
+`rustls-webpki-roots`) + `rustls-rustcrypto` 0.0.2-alpha as explicit crypto provider.
+`fetch_external.rs` refactored: synchronous `ureq` agent wrapped in
+`tokio::task::spawn_blocking` for async compatibility. Verified:
+- `cargo tree -i ring --edges normal` → "did not match any packages"
+- `cargo tree -i aws-lc-rs` → no matches
+- `cargo tree -i openssl` → no matches
+- `cargo deny check bans` → PASS
+- All `nestgate-rpc` tests pass
 
 **CR-01: coralReef missing `deny.toml` C/FFI ban list** (Medium severity)
 
@@ -206,7 +204,7 @@ cargo tree --workspace | grep -i 'libloading\|dlopen'
 | Phase | What | Owner | When |
 |-------|------|-------|------|
 | 1 | Document debt (this doc + PRIMAL_GAPS.md) | primalSpring | **Done** (April 11) |
-| 2 | NG-08 ring elimination | NestGate team | Next sprint |
+| 2 | NG-08 ring elimination | NestGate team | **Done** (April 11) — `reqwest` → `ureq` + `rustls-rustcrypto` |
 | 3 | CR-01 deny.toml alignment | coralReef team | Next sprint |
 | 4 | BC-08 cpu-shader default-on | barraCuda team | Next sprint |
 | 5 | BC-07 SovereignDevice fallback wiring | barraCuda team | Sprint+1 |
