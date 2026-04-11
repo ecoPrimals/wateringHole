@@ -1,6 +1,6 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 2.8.0
+**Version:** 2.9.0
 **Date:** April 11, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
@@ -145,7 +145,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 - **barraCuda**: E0061 **FIXED** (Sprint 29). All files under 800 lines. Clippy clean. 4,207 tests pass. Domain-based socket naming (math.sock). 12-axis deep debt: clean bill.
 - **coralReef**: Clippy **CLEAN** (was 7 errors). 8 warnings resolved in `coral-gpu` tests. License updated to `-or-later`.
 - **Squirrel**: Clippy CLEAN. fmt PASS. 6,868 tests pass. Commented-out code remains minor residual.
-- **biomeOS**: v3.01 — 7,726 tests. `capability.resolve` single-step routing, `lifecycle.composition` for dashboards, deploy-time `consumed_capabilities` validation, `discovery.find_by_capability` canonical alias. Hardcoded `/tmp`→XDG `SystemPaths`, `8.8.8.8`→RFC 5737 sovereignty fix, `BiomeOSStandardAPI` `Box<dyn Error>`→`anyhow::Result`, deprecated HTTP port/socket params removed. 0 files >1000 LOC. `#[forbid(unsafe_code)]` all binaries. Zero-debt audit: 0 unsafe, 0 production mocks, 0 TODO/FIXME, 0 hardcoded primal names.
+- **biomeOS**: v3.02 — 7,749 tests. `capability.resolve` now metrics-instrumented for spring consumption monitoring. `inference.register_provider` wire method live (neuralSpring→Squirrel registration). Canonical `inference.*` namespace expanded: `inference.complete`/`embed`/`models`/`providers` (7 total `inference.*` routes). All BM-01 through BM-11 RESOLVED. 0 files >1000 LOC. `#[forbid(unsafe_code)]` all binaries. Zero-debt audit: 0 unsafe, 0 production mocks, 0 TODO/FIXME, 0 hardcoded primal names.
 - **petalTongue**: All clean. 1 flaky test (`test_resolve_instance_id_error_message_invalid` — passes on retry).
 - **rhizoCrypt**: Clippy **CLEAN** (39 `doc_markdown` warnings resolved). All clean.
 - **sweetGrass**: Clippy **CLEAN** (unused import fixed). License updated to `-or-later`. `.cargo/config.toml` target-dir still points to `/home/southgate/` (non-blocking).
