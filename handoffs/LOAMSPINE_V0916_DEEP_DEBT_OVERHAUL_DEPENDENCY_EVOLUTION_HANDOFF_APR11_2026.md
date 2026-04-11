@@ -5,7 +5,7 @@
 **Date**: April 11, 2026  
 **Primal**: loamSpine  
 **Version**: 0.9.16  
-**Tests**: 1,504 (all concurrent, ~3s, zero flaky)  
+**Tests**: 1,505 (all concurrent, ~3s, zero flaky)  
 **Coverage**: 92% line / 89% region / 93% function  
 **Source Files**: 169 `.rs` (+ 3 fuzz targets)
 
@@ -132,20 +132,49 @@ cargo test --workspace --all-features  # 3 consecutive runs, 1,504 pass each
 
 | Gap | Status | Notes |
 |-----|--------|-------|
-| GAP-07 (loamSpine startup panic) | **RESOLVED** (v0.9.15) | LS-03 fixed; 1,504 tests confirm stability |
+| GAP-07 (loamSpine startup panic) | **RESOLVED** (v0.9.15) | LS-03 fixed; 1,505 tests confirm stability |
 | BTSP challenge placeholder | **RESOLVED** (v0.9.16) | blake3+uuid entropy, not timestamp |
 | Storage test flakiness | **RESOLVED** (v0.9.16) | Zero flaky across sled/SQLite/redb |
 | btsp.rs >500 lines | **RESOLVED** (v0.9.16) | 5 submodules, all <200 lines |
+| TRIO-IPC flush-on-write | **RESOLVED** (v0.9.16) | flush() on all IPC paths (already present), TCP_NODELAY added |
+| TRIO-IPC concurrent load | **RESOLVED** (v0.9.16) | 8×5 concurrent UDS load test (sweetGrass pattern) |
+
+---
+
+## Trio IPC Stability (primalSpring Audit Response)
+
+### flush-on-write (already present)
+All production socket write paths already call `flush().await` after writes:
+- JSON-RPC server (NDJSON + HTTP responses)
+- BTSP `write_frame` (length-prefixed frames)
+- BearDog client (UDS JSON-RPC)
+- Sync federation (TCP length+JSON)
+- Discovery attestation (TCP JSON-RPC)
+- NeuralAPI (UDS length-prefixed)
+
+### TCP_NODELAY (newly added)
+Nagle's algorithm disabled on all TCP sockets:
+- **Server accept**: `stream.set_nodelay(true)` in JSON-RPC TCP accept loop
+- **Sync client**: `set_nodelay(true)` after `TcpStream::connect` in federation sync
+- **Discovery client**: `set_nodelay(true)` after `TcpStream::connect` for attestation
+
+tarpc manages its own transport layer (we don't access the raw `TcpStream`).
+
+### Concurrent UDS load test
+New test: `uds_concurrent_load_8x5` — 8 clients × 5 requests over persistent connections. Matches sweetGrass v0.7.27 pattern. All responses verified (correct id, correct result).
 
 ---
 
 ## Actions for Downstream
 
 ### For ludoSpring (GAP-07)
-- LoamSpine IPC is stable. GAP-07 can be closed. `permanence.sock` available for UDS, TCP JSON-RPC on `--port`. SignalHandler handles SIGTERM/SIGINT graceful shutdown. UDS backpressure limited to 256 concurrent connections.
+- LoamSpine IPC is stable. GAP-07 can be closed. `permanence.sock` available for UDS, TCP JSON-RPC on `--port`. SignalHandler handles SIGTERM/SIGINT graceful shutdown. UDS backpressure limited to 256 concurrent connections. TCP_NODELAY on all TCP sockets.
 
 ### For wetSpring (Provenance Trio IPC)
-- LoamSpine endpoints are stable: `session.commit`, `braid.commit`, `entry.append` all tested. Persistent UDS connections supported (no reconnect per request). `--socket` flag available for explicit socket path override.
+- LoamSpine endpoints are stable: `session.commit`, `braid.commit`, `entry.append` all tested. Persistent UDS connections supported (no reconnect per request). `--socket` flag available for explicit socket path override. Concurrent 8×5 UDS load verified.
+
+### For sweetGrass / rhizoCrypt (Trio IPC parity)
+- flush-on-write pattern confirmed present on all paths (predates sweetGrass handoff callout). TCP_NODELAY now added. Concurrent load test pattern adopted.
 
 ### For primalSpring (Re-validation)
-- Tier 10 re-validation can proceed. `health.liveness`, `capabilities.list`, `identity.get` all respond correctly. 36 JSON-RPC methods available.
+- Tier 10 re-validation can proceed. `health.liveness`, `capabilities.list`, `identity.get` all respond correctly. 36 JSON-RPC methods available. IPC stability: flush + TCP_NODELAY + concurrent UDS load tested.
