@@ -1054,11 +1054,20 @@ raw Linux syscalls from pure Rust. No C compiler, no musl-tools, no NDK."
 | Primal | C Eliminated | Pure Rust Replacement | Pattern |
 |--------|-------------|----------------------|---------|
 | **BearDog + Songbird** | Ring (C asm crypto) | RustCrypto suite | Tower Atomic delegation |
-| **barraCuda + coralReef** | Vulkan FFI, SPIR-V tools | naga WGSL roundtrip, sovereign compiler | Layered evolution |
+| **barraCuda + coralReef** | Vulkan FFI, SPIR-V tools | naga WGSL roundtrip, sovereign compiler | Node Atomic delegation (in progress) |
 | **toadStool** | sysinfo (15 crates → libc) | `toadstool-sysmon` (/proc + rustix) | `/proc` parsing |
 | **akida-driver** | libc VFIO ioctls | rustix ioctl wrappers | Direct syscall |
 
 **Each primal that eliminates C teaches the ecosystem a reusable pattern.**
+
+> **Node Atomic Delegation (April 11, 2026)**: The barraCuda + coralReef row is
+> the same class of problem as BearDog + Songbird. wgpu's transitive chain
+> (`wgpu` → `wgpu-hal` → `ash` → `libloading` → `dlopen(libvulkan.so.1)`)
+> prevents musl-static binaries from accessing GPU hardware. The resolution
+> mirrors Tower Atomic: barraCuda delegates GPU dispatch to toadStool (hardware)
+> + coralReef (compiler) via IPC, with pure-Rust CPU fallback (`cpu-shader` /
+> `naga-exec` + scalar Rust) when no peers are available. See
+> `PORTABILITY_DEBT_AND_NODE_DELEGATION.md` for the full pattern and gap registry.
 
 ### **The DNA Analogy**
 
@@ -1089,6 +1098,7 @@ standalone crates the wider Rust community can use:
 - `toadstool-sysmon` → candidate for `proc-sysinfo` on crates.io
 - `rustix` ioctl patterns → documented for ecosystem adoption
 - Tower Atomic (crypto delegation) → architectural pattern for any Rust project
+- Node Atomic (compute delegation) → IPC-first GPU dispatch without dlopen coupling
 
 **See**: `UPSTREAM_CONTRIBUTIONS.md` for the full upstream strategy.
 
@@ -1102,10 +1112,20 @@ These remain as transitive dependencies through ecosystem crates we don't own:
 | tokio | Via mio + signal-hook | Follows mio | Automatic |
 | drm | DRM ioctls | Partial rustix adoption | Track |
 | evdev | Via nix | No rustix alt yet | Consider contributing |
-| wgpu-hal | GPU platform libs | Replaced by coralDriver (long-term) | Sovereign evolution |
+| wgpu-hal | GPU platform libs (`libloading` → `dlopen`) | Replaced by coralReef sovereign compiler (long-term) | Node Atomic delegation (BC-07) |
+| ash | Vulkan FFI (`libloading` → `dlopen`) | Transitive via wgpu-hal | Same — eliminated by sovereign path |
+| ring | C/ASM crypto (via rustls default crypto provider) | NestGate NG-08: live in production despite ban | Switch to `rustls-rustcrypto` provider |
 
 When mio adopts rustix and Rust std adopts `linux-raw-sys`, the remaining
 libc paths vanish automatically. Our code is already ready.
+
+> **NestGate ring leak (April 11, 2026)**: `cargo tree -i ring --edges normal`
+> confirms `ring` v0.17.14 resolves in NestGate's production build via
+> `rustls` → `reqwest` → `nestgate-rpc`. NG-04 claimed "ring eliminated" but the
+> default `rustls` crypto provider still pulls `ring`. `deny.toml` bans it but the
+> ban is not enforced in CI. This is the same pattern that blocked Songbird
+> cross-compile before Wave 93. Fix: explicit `rustls-rustcrypto` provider selection.
+> See `PORTABILITY_DEBT_AND_NODE_DELEGATION.md` for full Class 3 audit.
 
 ### **The v3.0 Mental Model**
 
