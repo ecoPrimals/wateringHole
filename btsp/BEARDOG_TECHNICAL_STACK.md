@@ -1,7 +1,7 @@
 # BearDog Technical Stack & Plans (BTSP)
 
-**Version**: 0.9.0 (Wave 32 — Deep Debt Sweep II)
-**Last Updated**: April 8, 2026
+**Version**: 0.9.0 (Wave 34 — Deep Debt Evolution)
+**Last Updated**: April 11, 2026
 **Status**: Production Ready
 
 ---
@@ -62,7 +62,7 @@ All transports use **NDJSON** (newline-delimited JSON-RPC 2.0). Each request is 
      Zero crypto code                 96 crypto methods
 ```
 
-### JSON-RPC Method Domains (96 methods)
+### JSON-RPC Method Domains (95 methods)
 
 ```
 crypto.*       - Hash, sign, verify, encrypt, decrypt, key exchange
@@ -123,8 +123,8 @@ HsmProviderRegistry → discover() → select(PreferHardware | RequireHardware |
 | **Pure Rust** | 100% — zero C dependencies |
 | **Unsafe Code** | 0 production blocks (`forbid(unsafe_code)` workspace-wide) |
 | **Format** | `cargo fmt` clean |
-| **Tests** | 14,366+ (concurrent; 35 `#[serial]` in `beardog-production`) |
-| **Coverage** | 90.16% line (llvm-cov workspace) |
+| **Tests** | 14,756+ (concurrent; 35 `#[serial]` in `beardog-production`) |
+| **Coverage** | 90.51% line (llvm-cov workspace) |
 | **cargo deny** | 4/4 pass (1 advisory ignore: RSA Marvin, 15 transitive version-skips) |
 | **License** | AGPL-3.0-or-later (SPDX headers on all .rs files) |
 | **Files > 1000 LOC** | 0 (production) |
