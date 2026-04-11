@@ -284,6 +284,33 @@ method = "bonding.status"
 description = "Query ionic bond contract status"
 domain = "bonding"
 
+[[capabilities]]
+method = "bonding.ledger.store"
+description = "Persist an ionic bond record (proposal/active/seal) — NestGate storage backend"
+domain = "bonding"
+
+[[capabilities]]
+method = "bonding.ledger.retrieve"
+description = "Retrieve an ionic bond record by contract ID and record type"
+domain = "bonding"
+
+[[capabilities]]
+method = "bonding.ledger.list"
+description = "List all ionic bond contracts for a family"
+domain = "bonding"
+
+# ── Cross-spring storage (NestGate streaming) ──
+
+[[capabilities]]
+method = "storage.retrieve_range"
+description = "Byte-range read of stored object (chunked streaming for large tensors/datasets)"
+domain = "storage"
+
+[[capabilities]]
+method = "storage.object.size"
+description = "Get object size without reading content (pre-flight for streaming)"
+domain = "storage"
+
 # ── Visualization capabilities (petalTongue) ──
 
 [[capabilities]]

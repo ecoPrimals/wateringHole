@@ -205,6 +205,7 @@ cargo tree --workspace | grep -i 'libloading\|dlopen'
 |-------|------|-------|------|
 | 1 | Document debt (this doc + PRIMAL_GAPS.md) | primalSpring | **Done** (April 11) |
 | 2 | NG-08 ring elimination | NestGate team | **Done** (April 11) — `reqwest` → `ureq` + `rustls-rustcrypto` |
+| 2b | Cross-spring storage IPC + ionic bond ledger | NestGate team | **Done** (April 11) — `storage.retrieve_range`, `storage.object.size`, `bonding.ledger.{store,retrieve,list}` |
 | 3 | CR-01 deny.toml alignment | coralReef team | Next sprint |
 | 4 | BC-08 cpu-shader default-on | barraCuda team | Next sprint |
 | 5 | BC-07 SovereignDevice fallback wiring | barraCuda team | Sprint+1 |
