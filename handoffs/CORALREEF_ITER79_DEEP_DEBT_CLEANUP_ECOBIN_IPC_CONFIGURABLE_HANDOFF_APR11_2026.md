@@ -110,29 +110,60 @@ fn ecosystem_namespace() -> &'static str {
 `env!("CARGO_PKG_NAME")` and `env!("CARGO_PKG_VERSION")` in health responses means the
 binary always reports its true crate identity without hardcoded strings that drift.
 
+### Typed Error Wave 4 — Completing the Migration
+
+Wave 4 resolved the final two `Result<_, String>` sites in coral-driver:
+- `BootTrace::from_mmiotrace` → `Result<Self, ChannelError>` (reuses existing `ResourceIo` variant
+  since boot_follower lives in `vfio::channel::diagnostic`)
+- `ChannelAllocDiag.result` → `Result<u32, DriverError>` (preserves ioctl error context that was
+  previously discarded by `format!("{e}")`)
+
+**Zero `Result<_, String>` remaining in coral-driver production code** — the typed error migration
+that began in Iter 78 Wave 1 is now complete.
+
+### Dead Code Hygiene
+
+`cpu_exec.rs` (366 LOC) was a Phase 3 CPU interpreter stub that was never wired:
+- No `mod cpu_exec` in `service/mod.rs` → not compiled
+- Referenced types (`CompileCpuRequest`, etc.) not defined in `service/types.rs`
+- Required `naga` (dev-dep only) and `base64` (not a dependency at all)
+- Removed rather than kept as misleading dead code
+
 ---
 
 ## Part 4: Compliance Matrix Update
 
 | Tier | Before | After | Notes |
 |------|--------|-------|-------|
-| T1 Build | A+ | A+ | ecoBin v3 deny.toml bans active |
+| T1 Build | A+ | A+ | ecoBin v3 deny.toml bans active; zero `Result<_, String>` in coral-driver |
 | T2 UniBin | A | A | No change |
 | T3 IPC | A | A+ | compile_latency + multi_stage_ml in capability metadata |
 | T4 Discovery | B | B | No change (BTSP Phase 2 awaits BearDog e2e) |
 | T5 Naming | A | A | No change |
-| T6 Responsibility | A | A | No change |
+| T6 Responsibility | A | A+ | Dead code (cpu_exec.rs) removed; no orphaned stubs |
 | T7 Workspace | A | A | No change |
 | T8 Presentation | A | A+ | Root docs synchronized to Iter 79; IPC composition guide |
 | T9 Deploy | C | C | musl-static not yet verified |
 | T10 Live | N/T | N/T | Not deployed |
-| **Rollup** | **A+** | **A+** | T3 + T8 elevated |
+| **Rollup** | **A+** | **A+** | T3 + T6 + T8 elevated |
+
+---
+
+## primalSpring Debt Status
+
+| Item | Status | Notes |
+|------|--------|-------|
+| CR-01: deny.toml C/FFI bans | **Resolved** (Iter 79) | Full ecoBin v3 bans |
+| CR-03: BTSP Phase 2 | **Resolved** (Iter 77-78) | guard_connection() in all 3 crates |
+| CR-04: Typed errors incomplete | **Resolved** (Iter 79) | Wave 4 complete — zero `Result<_, String>` |
+| CR-05: cpu_exec.rs dead code | **Resolved** (Iter 79) | Orphaned stub removed |
+| libc canary | **Documented** | Transitive only (tokio→mio); ban deferred until mio#1735 |
+| Multi-shader batch API | **Future** | Documented in IPC_COMPOSITION_AND_LATENCY.md; not blocking |
 
 ---
 
 ## Remaining Work
 
-- **coral-driver `Result<_, String>` wave 4+**: ~20 remaining functions in deep hardware interaction code
 - **musl-static verification (T9)**: Cross-compile both x86_64 and aarch64
 - **plasmidBin submission (T9/T10)**: Requires musl-static builds
 - **Coverage push**: Target 90% via `cargo llvm-cov`; hardware tests need local GPU
@@ -141,13 +172,18 @@ binary always reports its true crate identity without hardcoded strings that dri
 
 ---
 
-## Files Changed (15 files, +180 / -35)
+## Files Changed (18 files, +200 / -380)
+
+### Removed files
+- `crates/coralreef-core/src/service/cpu_exec.rs` — orphaned Phase 3 CPU interpreter stub
 
 ### New files
 - `docs/IPC_COMPOSITION_AND_LATENCY.md` — IPC composition patterns and latency budgets
 
 ### Key modified files
 - `deny.toml` — ecoBin v3 C/FFI ban list
+- `crates/coral-driver/src/vfio/channel/diagnostic/boot_follower.rs` — `Result<_, String>` → `ChannelError`
+- `crates/coral-driver/src/nv/ioctl/diag.rs` — `Result<u32, String>` → `Result<u32, DriverError>`
 - `crates/coralreef-core/src/capability.rs` — compile_latency + multi_stage_ml metadata
 - `crates/coralreef-core/src/ecosystem.rs` — configurable heartbeat interval
 - `crates/coral-ember/src/vendor_lifecycle/intel.rs` — IntelXeLifecycle configurable constructor
@@ -157,3 +193,4 @@ binary always reports its true crate identity without hardcoded strings that dri
 - `crates/coral-glowplug/src/socket/handlers/device_ops.rs` — CARGO_PKG_NAME in health
 - `crates/coral-glowplug/src/socket/btsp.rs` — ecosystem_namespace() from env
 - `crates/coral-reef/src/codegen/mod.rs` — #[expect] → #[allow] for conditional lints
+- `STATUS.md` — libc canary corrected, CR-04/CR-05 documented
