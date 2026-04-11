@@ -123,7 +123,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 |-------|----|----|----|----|----|----|----|----|----|----|----|----|-----|-----|
 | `cargo fmt` | 1 diff | PASS ↑ | PASS | 1 diff ↑↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS | PASS |
 | `cargo clippy -D warnings` | PASS | PASS | PASS | PASS ↑↑ | PASS | PASS ↑ | PASS | PASS | PASS | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS |
-| `cargo test --all-features` | PASS (14,593+) | PASS | PASS (11.7K) | PASS | PASS (4.2K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (1,504) | PASS | PASS |
+| `cargo test --all-features` | PASS (14,593+) | PASS | PASS (11.7K) | PASS | PASS (4.2K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (1,507) | PASS | PASS |
 | `cargo doc --no-deps` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Edition 2024 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS |
 | `forbid(unsafe_code)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
@@ -149,7 +149,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 - **petalTongue**: All clean. 1 flaky test (`test_resolve_instance_id_error_message_invalid` — passes on retry).
 - **rhizoCrypt**: Clippy **CLEAN** (39 `doc_markdown` warnings resolved). All clean.
 - **sweetGrass**: Clippy **CLEAN** (unused import fixed). License updated to `-or-later`. `.cargo/config.toml` target-dir still points to `/home/southgate/` (non-blocking).
-- **LoamSpine**: Fmt **PASS**. v0.9.16 deep debt overhaul. 1,504 tests (zero flaky). BTSP challenge blake3+uuid entropy. btsp.rs smart-refactored (5 submodules). Storage test isolation fixed. Workspace deps centralized. All clean.
+- **LoamSpine**: Fmt **PASS**. v0.9.16 deep debt overhaul. 1,507 tests (zero flaky). BTSP challenge blake3+uuid entropy. btsp.rs smart-refactored (5 submodules). Storage test isolation fixed. Workspace deps centralized. Registry paths centralized. BTSP provider socket constant. jsonrpc/server.rs split (TCP + UDS). TCP_NODELAY on all TCP sockets. 8×5 concurrent UDS load test. All clean.
 - **bingoCube**: Edition **2024** (was 2021). Clippy **CLEAN** (was 15 errors). `deny.toml` added. License updated to `-or-later`.
 - **sourDough**: `deny.toml` **added** (was missing). All clean except SPDX on source files.
 

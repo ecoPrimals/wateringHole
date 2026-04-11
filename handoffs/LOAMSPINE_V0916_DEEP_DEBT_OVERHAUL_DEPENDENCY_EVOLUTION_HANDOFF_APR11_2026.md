@@ -5,15 +5,15 @@
 **Date**: April 11, 2026  
 **Primal**: loamSpine  
 **Version**: 0.9.16  
-**Tests**: 1,505 (all concurrent, ~3s, zero flaky)  
+**Tests**: 1,507 (all concurrent, ~3s, zero flaky)  
 **Coverage**: 92% line / 89% region / 93% function  
-**Source Files**: 169 `.rs` (+ 3 fuzz targets)
+**Source Files**: 170 `.rs` (+ 3 fuzz targets)
 
 ---
 
 ## Summary
 
-Final deep debt pass for v0.9.16. Focuses on BTSP security hardening, module architecture, dependency hygiene, and storage test reliability. All changes verified through 3 consecutive full parallel test runs with zero failures.
+Final deep debt pass for v0.9.16. Focuses on BTSP security hardening, module architecture, dependency hygiene, storage test reliability, hardcoding evolution, and transport refactoring. All changes verified through full parallel test runs with zero failures.
 
 ---
 
@@ -62,7 +62,7 @@ All production modules now under 581 lines (max: `discovery_client/mod.rs`).
 - **SQLite**: `open_connection()` now enables `PRAGMA journal_mode=WAL` + `PRAGMA busy_timeout=5000` for concurrent access resilience.
 - **redb**: Migrated from manual `remove_dir_all` to `tempfile::tempdir()` lifecycle. Added explicit `drop(storage)` before re-open assertions. 5 tests updated.
 
-**Verified**: 3 consecutive `cargo test --workspace --all-features` runs — 1,504 tests, 0 failures each.
+**Verified**: `cargo test --workspace --all-features` — 1,507 tests, 0 failures.
 
 ### 5. Lint Audit
 
@@ -70,15 +70,30 @@ All production modules now under 581 lines (max: `discovery_client/mod.rs`).
 - 2× `clippy::wildcard_imports` — tarpc `service!` macro requires wildcard import; `#[expect]` fails with `unfulfilled-lint-expectations` in all-features test builds
 - 2× `clippy::unused_async` — functions are synchronous without `dns-srv`/`mdns` features but async with them; `#[expect]` fails in `--all-features` builds
 
+### 6. Registry Path Centralization (Hardcoding Evolution)
+
+**Before**: `/health`, `/discover`, `/register`, `/heartbeat`, `/deregister` as inline string fragments in `discovery_client/mod.rs` and `transport/mock.rs`.  
+**After**: `constants::registry` module with `DISCOVER_PATH`, `REGISTER_PATH`, `HEARTBEAT_PATH`, `DEREGISTER_PATH` constants. All registry HTTP paths now reference centralized constants.
+
+### 7. BTSP Provider Socket Naming (Hardcoding Evolution)
+
+**Before**: `"beardog"` hardcoded as string literals in socket name construction.  
+**After**: `BTSP_PROVIDER_PREFIX` constant in `btsp/config.rs` with documentation explaining it's a BTSP protocol convention, not a primal dependency.
+
+### 8. Smart Refactor: jsonrpc/server.rs → server.rs + uds.rs
+
+**Before**: Single `server.rs` (529 lines) mixing TCP server, HTTP parsing, UDS server, and BTSP gating.  
+**After**: TCP transport in `server.rs` (362 lines), UDS transport + BTSP gating in `uds.rs` (172 lines). Clean domain boundary between TCP/HTTP and UDS transports. Shared `handle_stream` dispatch stays in `server.rs`.
+
 ---
 
 ## Metrics
 
 | Metric | Before | After |
 |--------|--------|-------|
-| Tests | 1,373 | 1,504 |
-| Source files | 167 | 169 |
-| Max production file | 696 (btsp.rs) | 581 (discovery_client/mod.rs) |
+| Tests | 1,373 | 1,507 |
+| Source files | 167 | 170 |
+| Max production file | 696 (btsp.rs) | 605 (discovery_client/mod.rs) |
 | Flaky storage tests | 7 | 0 |
 | Unused dependencies | 1 (serde_bytes) | 0 |
 | Workspace-centralized deps | partial | 100% shared deps |
@@ -93,7 +108,7 @@ cargo fmt --all -- --check
 cargo clippy --workspace --all-features --all-targets -- -D warnings
 RUSTDOCFLAGS="-D warnings" cargo doc --workspace --all-features --no-deps
 cargo deny check licenses bans sources
-cargo test --workspace --all-features  # 3 consecutive runs, 1,504 pass each
+cargo test --workspace --all-features  # 1,507 pass
 ```
 
 ---
@@ -107,6 +122,7 @@ cargo test --workspace --all-features  # 3 consecutive runs, 1,504 pass each
 - `crates/loam-spine-core/src/btsp/frame.rs`
 - `crates/loam-spine-core/src/btsp/beardog_client.rs`
 - `crates/loam-spine-core/src/btsp/handshake.rs`
+- `crates/loam-spine-api/src/jsonrpc/uds.rs` (UDS transport extracted from server.rs)
 
 ### Deleted
 - `crates/loam-spine-core/src/btsp.rs` (replaced by btsp/ directory)
@@ -125,6 +141,11 @@ cargo test --workspace --all-features  # 3 consecutive runs, 1,504 pass each
 - `crates/loam-spine-core/src/btsp_tests.rs` (imports updated, challenge test evolved)
 - `crates/loam-spine-api/src/tarpc_server.rs` (#[allow] audit)
 - `crates/loam-spine-api/src/service/mod.rs` (#[allow] audit)
+- `crates/loam-spine-core/src/constants.rs` (registry path constants)
+- `crates/loam-spine-core/src/discovery_client/mod.rs` (registry paths → constants)
+- `crates/loam-spine-core/src/transport/mock.rs` (registry path → constant)
+- `crates/loam-spine-api/src/jsonrpc/server.rs` (UDS extracted to uds.rs)
+- `crates/loam-spine-api/src/jsonrpc/mod.rs` (uds module added)
 
 ---
 
@@ -132,7 +153,7 @@ cargo test --workspace --all-features  # 3 consecutive runs, 1,504 pass each
 
 | Gap | Status | Notes |
 |-----|--------|-------|
-| GAP-07 (loamSpine startup panic) | **RESOLVED** (v0.9.15) | LS-03 fixed; 1,505 tests confirm stability |
+| GAP-07 (loamSpine startup panic) | **RESOLVED** (v0.9.15) | LS-03 fixed; 1,507 tests confirm stability |
 | BTSP challenge placeholder | **RESOLVED** (v0.9.16) | blake3+uuid entropy, not timestamp |
 | Storage test flakiness | **RESOLVED** (v0.9.16) | Zero flaky across sled/SQLite/redb |
 | btsp.rs >500 lines | **RESOLVED** (v0.9.16) | 5 submodules, all <200 lines |
