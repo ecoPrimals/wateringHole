@@ -171,6 +171,41 @@ v3.0:  "crypto.generate_keypair"             ✅ Fully semantic
 "genetic.generate_proof"       // Generate lineage proof
 ```
 
+#### 7. `inference.*` - AI/ML Inference Operations (Canonical)
+
+**Canonical namespace**: `inference.*` is the standard domain for all AI/ML
+inference operations. `model.*` and `ai.*` are **aliases** that route through
+the semantic fallback to the same providers via `CapabilityTranslationRegistry`.
+
+Springs MUST use `inference.*` as their primary method namespace. `model.*` is
+acceptable for model-management operations (register, locate, metadata). `ai.*`
+is a legacy alias and SHOULD NOT be used in new code.
+
+```json
+// Inference operations (canonical)
+"inference.schedule"           // Schedule inference across gates
+"inference.gates"              // List available inference gates
+"inference.run"                // Execute single inference
+"inference.batch"              // Batch inference requests
+"inference.status"             // Check inference job status
+"inference.cancel"             // Cancel running inference
+
+// Model management (acceptable alias)
+"model.register"               // Register model with registry
+"model.locate"                 // Find model by ID
+"model.metadata"               // Get model metadata
+"model.exists"                 // Check model availability
+
+// Legacy (do not use in new code)
+"ai.query"                     // Use inference.run instead
+"ai.suggest"                   // Use inference.run instead
+```
+
+**Decision rationale**: `inference.*` was chosen over `ai.*` and `model.*`
+because it describes the **operation** (running inference), not the **thing**
+(a model) or the **field** (AI). This follows the semantic naming principle:
+methods describe WHAT (intent), not WHAT-WITH (implementation).
+
 ---
 
 ## 🔧 IMPLEMENTATION GUIDELINES

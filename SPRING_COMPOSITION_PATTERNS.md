@@ -297,6 +297,45 @@ and makes capability-based discovery self-documenting.
 
 ---
 
+## 12. Dependency Governance (`deny.toml`) (MUST)
+
+**Source**: biomeOS `deny.toml`, primalSpring CI-01 audit
+
+Every spring and primal MUST have a `deny.toml` at its workspace root that
+enforces ecoBin compliance. Without this, dependency bans exist on paper but
+nobody verifies them.
+
+**Minimum viable `deny.toml`:**
+
+```toml
+[advisories]
+vulnerability = "deny"
+unmaintained = "warn"
+
+[bans]
+multiple-versions = "warn"
+deny = [
+    { name = "openssl-sys", wrappers = [] },
+    { name = "ring", wrappers = [] },
+    { name = "aws-lc-sys", wrappers = [] },
+    { name = "native-tls", wrappers = [] },
+]
+
+[licenses]
+allow = ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC", "Zlib",
+         "Unicode-3.0", "Unicode-DFS-2016", "MPL-2.0", "AGPL-3.0-or-later",
+         "OpenSSL", "BSL-1.0", "CC0-1.0"]
+```
+
+**CI enforcement**: `cargo deny check` MUST be a CI step. biomeOS has this as
+Job 6 in its pipeline. Without CI enforcement, the `deny.toml` is decorative.
+
+**Spring-specific additions**: Springs using compute (toadStool, coralReef) may
+need additional bans for GPU vendor SDKs. Science springs should ban any
+non-reproducible dependency sources.
+
+---
+
 ## Pattern Adoption Checklist
 
 When starting a composition evolution session on any spring:
@@ -311,6 +350,8 @@ When starting a composition evolution session on any spring:
 - [ ] Capability-based compute dispatch (not name-based)
 - [ ] Niche identity with dependencies
 - [ ] Standalone mode support (no-primal fallback)
+- [ ] `deny.toml` with C/FFI bans + CI enforcement (`cargo deny check`)
+- [ ] Inference methods use `inference.*` namespace (not `ai.*`)
 
 ---
 

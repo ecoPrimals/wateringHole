@@ -102,6 +102,11 @@ infra/wateringHole/SPRING_COMPOSITION_PATTERNS.md:
   the live NUCLEUS mesh?
 - biomeOS feature gate: Is orchestration code behind #[cfg(feature = "biomeos")]
   so lightweight builds stay fast?
+- Dependency governance: Does the spring have a `deny.toml` that bans C/FFI
+  deps (openssl-sys, ring, aws-lc-sys, native-tls)? Is `cargo deny check`
+  enforced in CI?
+- Inference namespace: Do IPC methods use `inference.*` (canonical) rather than
+  `ai.*` or `model.*` for inference operations?
 Rate each pattern: YES / partial / not started.
 
 TEST COVERAGE:
