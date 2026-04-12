@@ -4,7 +4,7 @@
 
 **Date**: April 12, 2026
 **Version**: 0.9.16
-**Tests**: 1,382 (0 failures)
+**Tests**: 1,383 (0 failures)
 **Source files**: 175 `.rs` (+ 3 fuzz targets)
 **Coverage**: 90.92% line / 89.09% branch / 92.92% region
 
@@ -19,6 +19,25 @@ name coupling, and inline test sprawl.
 ---
 
 ## Changes
+
+### LD-09: TCP Opt-In (Port 8080 Crash Fix)
+
+**Root cause**: `loamspine server` unconditionally bound `0.0.0.0:8080` for
+HTTP JSON-RPC on startup. Port 8080 is commonly occupied in NUCLEUS
+deployments, causing an immediate fatal crash that also prevented the UDS
+socket from reaching readiness.
+
+**Fix**: TCP transports (tarpc + JSON-RPC TCP) are now opt-in. They only start
+when explicitly requested via `--port`/`--tarpc-port` CLI flags or
+`LOAMSPINE_JSONRPC_PORT`/`LOAMSPINE_TARPC_PORT`/`USE_OS_ASSIGNED_PORTS`
+environment variables. UDS socket is always the primary transport and starts
+regardless of TCP configuration. Follows ToadStool/barraCuda pattern.
+
+**New function**: `has_explicit_tcp_config()` in `constants::env_resolution`
+detects whether any TCP-related env var is set.
+
+**Test**: `has_explicit_tcp_config_default_without_env` verifies default
+behavior returns false.
 
 ### Connection-Close Bug Fixed (primalSpring Audit Item)
 
@@ -83,7 +102,7 @@ primal.
 | `cargo fmt --all -- --check` | PASS |
 | `cargo clippy --all-targets --all-features -- -D warnings` | PASS (0 warnings) |
 | `cargo doc --no-deps` | PASS (0 warnings) |
-| `cargo test --workspace` | PASS (1,382 tests, 0 failures) |
+| `cargo test --workspace` | PASS (1,383 tests, 0 failures) |
 | `cargo deny check` | PASS (advisories, bans, licenses, sources ok) |
 
 ---
@@ -98,6 +117,9 @@ primal.
   similar) without code changes.
 - **Compliance Matrix**: Tier 10 re-validation now possible — the LS-03
   connection stability issue that blocked composition checks is resolved.
+- **NUCLEUS Deployments**: LD-09 resolved — `loamspine server` no longer crashes
+  on port 8080 contention. UDS-only mode is the default; TCP is explicitly
+  opted into when needed. All NUCLEUS deployments can run without TCP binding.
 
 ---
 
@@ -118,7 +140,9 @@ primal.
 - `crates/loam-spine-core/src/btsp/mod.rs` — Re-export updates
 - `crates/loam-spine-core/src/btsp_tests.rs` — Updated for new APIs
 - `crates/loam-spine-api/src/jsonrpc/uds.rs` — `provider_socket` field
-- `bin/loamspine-service/main.rs` — Provider log message
+- `bin/loamspine-service/main.rs` — TCP opt-in refactor (LD-09), provider log
+- `crates/loam-spine-core/src/constants/env_resolution.rs` — `has_explicit_tcp_config()`
+- `crates/loam-spine-core/src/constants/network.rs` — Re-export
 - 5 new test files (streaming, health, service_mod, config, lib)
 - 7 production files with Songbird doc cleanup
 - 5 root markdown docs reconciled
