@@ -3,7 +3,7 @@
 **Date**: April 12, 2026
 **Sprint**: 42
 **Version**: 0.3.12
-**Tests**: 4,303 passed (14 skipped), 0 failures
+**Tests**: 4,305 passed (14 skipped), 0 failures
 **IPC Methods**: 32 registered
 **Quality Gates**: fmt ✓ clippy ✓ doc (zero warnings) ✓ deny ✓
 
@@ -21,10 +21,14 @@
    wrapping `TensorSession`. Springs run "matmul then softmax then readback" as a single
    composition call. Wire contract: `specs/TENSOR_WIRE_CONTRACT.md`.
 
-### Phase 2: LD-05 Resolution
+### Phase 2: LD-05 Full Resolution
 
-3. **TCP sidecar graceful degradation** — `try_bind_tcp` validates bind BEFORE writing
-   discovery file. On `AddrInUse`, degrades to UDS-only (no phantom TCP endpoints).
+3. **TCP sidecar eliminated in UDS mode** — Phase 1: `try_bind_tcp` validates bind BEFORE
+   writing discovery file. Phase 2: UDS mode no longer attempts TCP sidecar from
+   `BARRACUDA_PORT` env var — only explicit `--port`/`--bind` CLI triggers TCP bind.
+   Eliminates the entire class of co-deployment port collisions. `serve_tarpc` also
+   gracefully degrades on `AddrInUse` (returns `Ok(())` instead of fatal error).
+   TCP-only fallback now uses `try_bind_tcp` + `serve_tcp_listener` pattern.
    Unblocks Node Atomic co-deployment with ToadStool.
 
 ### Phase 3: Deep Debt Cleanup & Evolution
@@ -76,8 +80,10 @@
 - `primal.device()` returns `Arc<WgpuDevice>` — remove any `Arc::new(dev)` wrapping
 
 ### toadStool
-- LD-05 resolved — barraCuda starts cleanly alongside ToadStool
+- LD-05 fully resolved — barraCuda starts cleanly alongside ToadStool
+- UDS mode does not attempt any TCP bind from env vars (only explicit CLI)
 - Discovery file only advertises functional transports
+- `serve_tarpc` also degrades gracefully on port collisions
 
 ### coralReef
 - No impact on compilation IPC — `shader.compile.*` methods unchanged
