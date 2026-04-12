@@ -110,11 +110,16 @@ Full production clone audit confirmed all `.clone()` calls are either `Arc`-base
 O(1) reference counting or structurally necessary for owned captures in
 `spawn_blocking`/retry closures. No unnecessary heap allocations in hot paths.
 
-### Doc Infrastructure
+### Doc Infrastructure & Cleanup
 
 - Broken `read_ndjson_stream_with` intra-doc link → `read_ndjson_stream_bounded`
-- Root docs (README, CONTEXT, CONTRIBUTING) reconciled with STATUS.md metrics
-- WHATS_NEXT.md updated with latest pass
+- Root docs (README, CONTEXT, CONTRIBUTING) reconciled with STATUS.md metrics (1,383 tests, 176 source files)
+- WHATS_NEXT.md updated with deep debt pass 3 entry
+- Showcase stale Songbird references cleaned: capability table → "Capability discovery", tarpc description → "Structured RPC (JSON-over-TCP)"
+- `QUICK_REFERENCE.md` date bumped to April 12, 2026
+- `SHOWCASE_PRINCIPLES.md` date bumped, "Songbird service discovery" → "Capability-based service discovery"
+- `00_START_HERE.md` conceptual Songbird refs → capability-based language (binary name refs preserved)
+- Full debris sweep: zero empty files, zero build artifacts, zero stale TODOs, `.gitignore` covers all artifact patterns
 
 ---
 
