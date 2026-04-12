@@ -3,7 +3,7 @@
 **Date**: April 12, 2026
 **Sprint**: 42
 **Version**: 0.3.12
-**Tests**: 4,305 passed (14 skipped), 0 failures
+**Tests**: 4,341 passed (14 skipped), 0 failures
 **IPC Methods**: 32 registered
 **Quality Gates**: fmt ✓ clippy ✓ doc (zero warnings) ✓ deny ✓
 
@@ -57,6 +57,28 @@
 11. **Idiomatic Rust evolution** — Lanczos index loops → iterators, `unwrap_or_default()`,
     broken intra-doc link fixed.
 
+### Phase 3 Continued: Smart Refactoring & Coverage Expansion
+
+12. **naga-exec memory extraction** — `invocation.rs` 754→445 lines. Memory operations
+    (load/store/atomic/buffer access) extracted to `memory.rs` (330 lines). Indexed loop
+    in `load_pointer` evolved to iterator.
+
+13. **wgpu submission pipeline extraction** — `wgpu_device/mod.rs` 729→518 lines.
+    Submit/poll infrastructure (poll_safe, submit_commands, poll_nonblocking, panic
+    handling, submit_and_poll) extracted to `submission.rs` (213 lines). All production
+    files now under 600 lines.
+
+14. **`as usize` cast evolved** — `batch.rs` `feature_size` cast from bare `as usize`
+    to `usize::try_from` with typed `BatchError` on overflow.
+
+15. **36 new tests** — math/stats handler coverage (sigmoid, log2, mean, std_dev,
+    weighted_mean), noise/rng (perlin2d, perlin3d, rng_uniform), activation handlers
+    (fitts shannon/original/variants, hick), batch validation (layer_norm, reshape,
+    softmax, gelu, matmul).
+
+16. **Pre-existing clippy debt resolved** — `LN_2` approximation → `f32::consts::LN_2`,
+    shared test helpers get `#![allow(dead_code)]` for cross-binary compilation.
+
 ### Comprehensive Audit Results (CLEAN)
 
 - Zero TODO/FIXME/HACK/todo!/unimplemented! markers
@@ -68,7 +90,7 @@
 - Zero `.expect()` in IPC handlers
 - Single `unsafe` site: barracuda-spirv SPIR-V passthrough (documented, wgpu#4854)
 - All deps pure Rust (blake3=pure, no build.rs, no C/FFI)
-- All production files under 800 lines
+- All production files under 600 lines
 
 ---
 
@@ -98,10 +120,12 @@
 
 ### New files
 - `crates/barracuda-core/src/ipc/methods/batch.rs` — `tensor.batch.submit` handler
-- `crates/barracuda-core/src/ipc/methods_tests/batch_tests.rs` — 16 tests
+- `crates/barracuda-core/src/ipc/methods_tests/batch_tests.rs` — 22 tests
 - `crates/barracuda/src/device/sovereign_discovery.rs` — capability-based discovery
 - `crates/barracuda/src/unified_hardware/pcie_probe.rs` — Linux sysfs PCIe probing
 - `crates/barracuda/src/shaders/precision/preambles.rs` — WGSL preamble constants
+- `crates/barracuda-naga-exec/src/memory.rs` — naga IR memory operations (load/store/atomic/buffer)
+- `crates/barracuda/src/device/wgpu_device/submission.rs` — GPU submission pipeline (submit/poll/panic)
 - `specs/TENSOR_WIRE_CONTRACT.md` — wire contract documentation
 
 ### Modified files (key)
