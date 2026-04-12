@@ -5,7 +5,7 @@
 **Date**: April 12, 2026
 **Version**: 0.9.16
 **Tests**: 1,383 (0 failures)
-**Source files**: 175 `.rs` (+ 3 fuzz targets)
+**Source files**: 176 `.rs` (+ 3 fuzz targets)
 **Coverage**: 90.92% line / 89.09% branch / 92.92% region
 
 ---
@@ -87,6 +87,29 @@ evolved to generic capability-based language across 7 files. Transport docs now
 describe "capability-discovered HTTP provider" instead of coupling to a specific
 primal.
 
+### Additional Test Extraction
+
+| File | Before → After | Extracted to |
+|------|---------------|-------------|
+| `traits/mod.rs` | 446 → 279 | `traits/mod_tests.rs` |
+
+### Magic Number Timeouts Named
+
+Bare `Duration::from_secs(N)` literals in production code replaced with named constants:
+
+| File | Constant | Value |
+|------|----------|-------|
+| `transport/http.rs` | `CONNECT_TIMEOUT` | 5s |
+| `transport/http.rs` | `READ_TIMEOUT` | 30s |
+| `infant_discovery/mod.rs` | `DNS_SRV_TIMEOUT` | 2s |
+| `infant_discovery/backends.rs` | `MDNS_TIMEOUT` | 2s |
+
+### Clone Audit
+
+Full production clone audit confirmed all `.clone()` calls are either `Arc`-based
+O(1) reference counting or structurally necessary for owned captures in
+`spawn_blocking`/retry closures. No unnecessary heap allocations in hot paths.
+
 ### Doc Infrastructure
 
 - Broken `read_ndjson_stream_with` intra-doc link → `read_ndjson_stream_bounded`
@@ -143,7 +166,12 @@ primal.
 - `bin/loamspine-service/main.rs` — TCP opt-in refactor (LD-09), provider log
 - `crates/loam-spine-core/src/constants/env_resolution.rs` — `has_explicit_tcp_config()`
 - `crates/loam-spine-core/src/constants/network.rs` — Re-export
-- 5 new test files (streaming, health, service_mod, config, lib)
+- `crates/loam-spine-core/src/traits/mod.rs` — Test extraction
+- `crates/loam-spine-core/src/traits/mod_tests.rs` — New extracted test file
+- `crates/loam-spine-core/src/transport/http.rs` — Named timeout constants
+- `crates/loam-spine-core/src/infant_discovery/mod.rs` — Named DNS SRV timeout
+- `crates/loam-spine-core/src/infant_discovery/backends.rs` — Named mDNS timeout
+- 5 earlier test files (streaming, health, service_mod, config, lib)
 - 7 production files with Songbird doc cleanup
 - 5 root markdown docs reconciled
 - `STATUS.md` — Updated metrics and changelog
