@@ -281,6 +281,35 @@ A composition's capability surface = union of all `methods` minus all `consumed_
 
 ---
 
+## Parameter Encoding (LD-01)
+
+Binary data in JSON-RPC parameters uses **standard Base64** (RFC 4648 §4,
+`+/=` alphabet) unless an explicit per-field encoding hint is provided.
+
+### BearDog Crypto Methods
+
+| Method | `data` / input param | Output | Notes |
+|--------|---------------------|--------|-------|
+| `crypto.hash` | Base64 | Base64 | BLAKE3; raw UTF-8/hex yields incorrect hashes |
+| `crypto.hash_for_cipher` | Base64 | Base64 | Algorithm varies by cipher suite |
+| `crypto.hmac` | Base64 (`data` + `key`) | Base64 | HMAC-SHA256 / HMAC-BLAKE3 |
+| `crypto.sign_ed25519` | Per-field encoding hints | Per-field | `message_encoding`, `signature_encoding`, `public_key_encoding` (BD-01) |
+| `crypto.verify_ed25519` | Per-field encoding hints | — | Same per-field hints as sign |
+| `crypto.sign_contract` | JSON (`terms` object) | Hex (hash), Hex (sig, pk) | Canonical JSON → SHA-256 → Ed25519 |
+| `crypto.verify_contract` | Hex (all fields) | — | Validates Ed25519 over terms hash |
+
+### Encoding Hints (BD-01, Wave 33)
+
+Ed25519 sign/verify methods accept per-field encoding overrides:
+- `"base64"` (default), `"hex"`, `"base64url"`, `"utf8"`, `"none"`
+
+When no hint is present, Base64 is assumed.
+
+**Primals calling `crypto.hash`**: Encode your raw bytes as standard Base64
+before sending. The response `hash` field is also Base64.
+
+---
+
 ## Relationship to Other Standards
 
 | Standard | Scope | Relationship |
