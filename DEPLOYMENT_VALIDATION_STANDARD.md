@@ -121,7 +121,7 @@ primals support UDS with newline-delimited JSON-RPC**. 19/19 exp094 PASS.
 
 | Primal | Newline TCP | HTTP TCP | UDS (filesystem) | UDS (abstract) | tarpc | Methods |
 |--------|------------|----------|------------------|----------------|-------|---------|
-| bearDog | 9100 ✓ | — | ✓ beardog-{family}.sock | — | — | 185 |
+| bearDog | 9100 ✓ | — | ✓ beardog-{family}.sock | — | — | 100 |
 | songBird | — | 9200 (HTTP discovery) | ✓ songbird-{family}.sock | — | — | 79 |
 | toadStool | — | — | ✓ toadstool-{family}.sock (BTSP auto-detect) | — | ✓ | 163 |
 | barraCuda | — | — | ✓ math-{family}.sock (JSON-RPC via BTSP guard) | — | ✓ | 32 |

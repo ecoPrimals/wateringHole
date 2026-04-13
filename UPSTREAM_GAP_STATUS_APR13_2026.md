@@ -24,7 +24,7 @@
 
 ---
 
-## Remaining Open (12 items — zero high priority)
+## Remaining Open (11 items — zero high priority)
 
 ### Medium
 
@@ -46,7 +46,7 @@
 | RAWR GPU kernel (CPU-only) | barraCuda | groundSpring-specific |
 | Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific |
 | IPC timing for `shader.compile` | coralReef | Deployment timing |
-| Signed capability announcements | BearDog | neuralSpring ask |
+| ~~Signed capability announcements~~ | BearDog | **RESOLVED** Wave 45 (SA-01, unified Ed25519 identity, schema_version 2) |
 
 ---
 
@@ -55,7 +55,7 @@
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
 | barraCuda | Sprint 42 Phase 6 | 3,834 pass (15 env-sensitive) | READY |
-| BearDog | Wave 44 | 37 pass | READY |
+| BearDog | Wave 46 | 14,784 pass | READY |
 | coralReef | Iter 80 | 169 pass (1 env-sensitive) | READY |
 | loamSpine | deep debt pass 6 | 1,034 pass | READY |
 | rhizoCrypt | S42 | 35 pass | READY |

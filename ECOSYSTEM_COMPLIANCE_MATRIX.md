@@ -135,7 +135,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 |-------|----|----|----|----|----|----|----|----|----|----|----|----|-----|-----|
 | `cargo fmt` | 1 diff | PASS ↑ | PASS | 1 diff ↑↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS | PASS |
 | `cargo clippy -D warnings` | PASS | PASS | PASS | PASS ↑↑ | PASS | PASS ↑ | PASS | PASS | PASS | PASS ↑ | PASS ↑ | PASS | PASS ↑ | PASS |
-| `cargo test --all-features` | PASS (14,593+) | PASS | PASS (11.7K) | PASS | PASS (4.4K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (1,507) | PASS | PASS |
+| `cargo test --all-features` | PASS (14,784+) | PASS | PASS (11.7K) | PASS | PASS (4.4K) | PASS | PASS (6.9K) | PASS (7.6K) | PASS | PASS (1.4K) | PASS | PASS (1,507) | PASS | PASS |
 | `cargo doc --no-deps` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
 | Edition 2024 | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS |
 | `forbid(unsafe_code)` | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
@@ -150,7 +150,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 
 ### Tier 1 Detail (April 6 re-audit, Songbird updated April 9)
 
-- **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. Fmt **CLEAN** ↑ (was 1 diff). 14,593+ tests pass. **90.51%** line coverage.
+- **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. Fmt **CLEAN** ↑ (was 1 diff). 14,784+ tests pass. **90.51%** line coverage.
 - **Songbird**: Fmt **CLEAN** ↑ (was 2 diffs). Commented-out code **CLEAN** ↑ (Wave 124 scrub). 7,265+ lib tests, 0 failed. All 30 crates clippy pedantic+nursery zero warnings. 4 largest files smart-refactored (Wave 133). BTSP Phase 2 complete (Wave 132).
 - **NestGate**: Fmt **PASS**. Clippy CLEAN. License `-or-later`. 11,856+ tests pass. BTSP Phase 2 wired. NG-01/NG-03 resolved. `uzers` → `rustix`. 81 hardcoded strings fixed. Zero TODO/FIXME.
 - **ToadStool**: **Major turnaround.** Clippy **CLEAN** (was 2 errors). Fmt **1 diff** (was ~1,899). License updated to `-or-later`. `tar` dep updated.
@@ -527,7 +527,7 @@ returns endpoints for all 9 core NUCLEUS primals.
 
 All 12 primals started via `nucleus_launcher.sh`, health-checked, and validated with exp094.
 
-- **BearDog** v0.9.0: 185 methods. UDS at `beardog-{family}.sock`. TCP JSON-RPC gold standard. exp094: crypto.hash parity, base64 deterministic. **Grade A.**
+- **BearDog** v0.9.0: 100 methods. UDS at `beardog-{family}.sock`. TCP JSON-RPC gold standard. exp094: crypto.hash parity, base64 deterministic. **Grade A.**
 - **Songbird** v0.2.1: 79 methods. `ipc.resolve` returns `native_endpoint`/`virtual_endpoint` for all 9 NUCLEUS primals (Phase 5 seeding). exp094: resolve_security/compute/storage/method_catalog all PASS. **Grade A.**
 - **NestGate** v0.1.0: 30 methods. Persistent UDS connections (LD-02/LD-03 resolved). exp094: storage.store/storage.retrieve roundtrip PASS. **Grade A** ↑.
 - **ToadStool** v0.1.0: 163 methods. BTSP auto-detect on all transports (LD-04 resolved). `health.liveness` now responds correctly. exp094: compute_dispatch_alive PASS. **Grade A** ↑↑.

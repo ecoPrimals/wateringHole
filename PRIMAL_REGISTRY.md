@@ -44,7 +44,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Genetic Crypto** | Lineage-based key derivation, beacon seeds, family seed management |
 | **Dark Forest** | Challenge-response federation protocol |
 
-**IPC Methods**: 185 JSON-RPC methods including beacon, crypto, BTSP, health, capabilities, identity  
+**IPC Methods**: 100 JSON-RPC methods including beacon, crypto, BTSP, health, capabilities, identity  
 **Dependencies**: Zero C dependencies. 100% RustCrypto suite.
 
 **Participates In**: Tower Atomic (with Songbird), NUCLEUS, RootPulse, BirdSong encryption, Dark Forest Federation

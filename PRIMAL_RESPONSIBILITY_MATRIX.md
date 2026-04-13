@@ -220,7 +220,7 @@ Deploy graphs should **never** route a concern to a primal listed as OVERSTEP. U
 | Primal | Clippy | Fmt | Tests | Discovery | Key Debt |
 |--------|--------|-----|-------|-----------|----------|
 | biomeOS | CLEAN | PASS | PASS | **C** | — |
-| BearDog | CLEAN | PASS | PASS (14.4K) | **C** | Overstep: HTTP, mDNS, AI tree (feature-gated) |
+| BearDog | CLEAN | PASS | PASS (14.8K) | **C** | Overstep: HTTP, mDNS, AI tree (feature-gated) |
 | Songbird | CLEAN | PASS | PASS (8.9K) | **P→C** (935 refs) | Wave 109: 63% total discovery reduction (2558→935) |
 | NestGate | CLEAN | PASS | PASS (11.3K) | **P→C** | EnvSource injection, automation+network deprecated, -15K lines |
 | toadStool | **FAIL** | PASS | PASS (6.5K) | **P** | TS-01 RESOLVED; clippy regression (aes_gcm deprecated) |
