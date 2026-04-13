@@ -143,6 +143,10 @@ Comprehensive audit confirmed the codebase is clean:
 | coral-driver | `nv/uvm_compute/types.rs` | Feature-gate fix: inline `CLFLUSH`/no-op instead of `vfio` import |
 | coral-reef | `codegen/ir/op_float/f64_ops.rs` | "placeholder" → "pseudo-op" (6 ops) |
 | coral-reef | `codegen/ir/op.rs`, `opt_instr_sched_common.rs` | "placeholder" → "pseudo-op" |
+| coral-driver | `vfio/channel/mmu_oracle/engine_regs.rs` | **New** — extracted engine register capture tables (static data arrays + shared `read_regs()` helper) |
+| coral-driver | `vfio/channel/mmu_oracle/capture.rs` | 825→654 LOC: engine register data moved to `engine_regs.rs` |
+| coral-driver | `nv/vfio_compute/acr_boot/.../boot_config.rs` | `Display` impl: inlined `write!` instead of allocating via `label()` → `format!()` |
+| coralreef-core | `service/compile.rs` | `#[must_use]` on `parse_target`, `handle_compile_spirv`, `handle_compile`, `handle_compile_wgsl`, `handle_compile_wgsl_multi` |
 | docs/ | `SHADER_COMPILE_WIRE_CONTRACT.md` | **New** — authoritative wire contract |
 | docs/ | `IPC_COMPOSITION_AND_LATENCY.md` | Wire contract reference, info fields in diagrams |
 
