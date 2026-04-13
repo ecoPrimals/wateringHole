@@ -210,7 +210,7 @@ When `result.methods` is present, biomeOS skips format detection entirely. Legac
 
 | Primal | Level 1 | Level 2 | Level 3 | Gap |
 |--------|---------|---------|---------|-----|
-| BearDog | ✓ | ✓ | — | L2 complete (April 8, 2026): `methods` flat array in `capabilities.list`, `identity.get` returning `{primal, version, domain, license}` |
+| BearDog | ✓ | ✓ | — | L2 complete + signed announcements (SA-01, Wave 45): unified Ed25519 identity, `signed_announcement` in `capabilities.list` and `discover_capabilities`, neural registration attestation |
 | Songbird | ✓ | Partial | — | Has `capabilities.methods` token→method map (Wave 123); needs `{primal, version, methods}` envelope, `identity.get` |
 | rhizoCrypt | ✓ | ✓ | ✓ | Full L3: `methods`, `consumed_capabilities`, `cost_estimates`, `operation_dependencies` |
 | loamSpine | ✓ | ✓ | ✓ | Full L3: `methods` (flat), `identity.get`, `provided_capabilities` (9 groups), `consumed_capabilities`, `cost_estimates`, `operation_dependencies`. Domain symlink `ledger.sock`. (April 12, 2026) |
@@ -307,6 +307,83 @@ When no hint is present, Base64 is assumed.
 
 **Primals calling `crypto.hash`**: Encode your raw bytes as standard Base64
 before sending. The response `hash` field is also Base64.
+
+---
+
+## Signed Capability Announcements (SA-01, Wave 45)
+
+For cross-family federations where socket-level access control (owner-only 0600 permissions) is insufficient, primals MAY include a cryptographic attestation in their capability responses so that Songbird discovery and Neural API can verify advertisement authenticity.
+
+### Wire Format
+
+The `signed_announcement` field appears in `capabilities.list` and `discover_capabilities` responses:
+
+```json
+{
+  "result": {
+    "primal": "beardog",
+    "version": "0.9.0",
+    "methods": ["crypto.sign_ed25519", ...],
+    "signed_announcement": {
+      "schema_version": 2,
+      "algorithm": "ed25519",
+      "public_key": "<hex-encoded Ed25519 verifying key>",
+      "signature": "<hex-encoded Ed25519 signature>",
+      "signed_fields": ["primal", "version", "methods"]
+    }
+  }
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `schema_version` | Integer | Canonical message format version (currently `2`) |
+| `algorithm` | String | Always `"ed25519"` |
+| `public_key` | String | Hex-encoded 32-byte Ed25519 verifying key |
+| `signature` | String | Hex-encoded 64-byte Ed25519 signature |
+| `signed_fields` | String[] | Which response fields are covered by the signature |
+
+### Canonical Signed Message (schema_version 2)
+
+The signed payload is `SHA-256(primal ":" version ":" sorted_methods)`:
+
+```
+message = SHA-256(
+    primal_name_bytes
+    || b":"
+    || version_bytes
+    || b":"
+    || for each method in sorted(methods):
+        method_bytes || b","
+)
+```
+
+The signature is `Ed25519.sign(signing_key, message)` where `message` is the 32-byte SHA-256 digest. Methods MUST be lexicographically sorted before hashing to ensure determinism regardless of registry enumeration order.
+
+### Identity Key Derivation
+
+Each primal instance derives a single Ed25519 keypair from its runtime identity:
+
+```
+seed = SHA-256("primal-identity-key:" || primal_name || ":" || node_id)
+signing_key = Ed25519.from_seed(seed)
+```
+
+The same key MUST be used for capability announcements, ionic bond signing, contract signing, and neural registration attestation. This gives each primal instance one verifiable public identity.
+
+### Neural API Registration Attestation
+
+When registering via `capability.register`, primals MAY include a `signed_attestation` field in the registration payload. Neural API stores the public key for downstream verification by Songbird and other discovery consumers.
+
+### Verification
+
+Verifiers reconstruct the canonical message from the response's `primal`, `version`, and `methods` fields, compute SHA-256, and verify the Ed25519 signature against the announced `public_key`. If the primal's public key is already known (e.g., from a prior ionic bond or BTSP session), the verifier can confirm identity continuity.
+
+### Implementation Status (April 13, 2026)
+
+| Primal | `signed_announcement` in `capabilities.list` | `signed_announcement` in `discover_capabilities` | Neural Registration Attestation |
+|--------|----------------------------------------------|--------------------------------------------------|-------------------------------|
+| BearDog | ✓ (schema_version 2, unified key) | ✓ | ✓ |
 
 ---
 
