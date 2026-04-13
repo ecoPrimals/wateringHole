@@ -3,7 +3,7 @@
 **Date**: April 12, 2026
 **Sprint**: 42
 **Version**: 0.3.12
-**Tests**: 4,371 passed (14 skipped), 0 failures
+**Tests**: 4,377 passed (14 skipped), 0 failures
 **IPC Methods**: 32 registered
 **Quality Gates**: fmt ✓ clippy ✓ doc (zero warnings) ✓ deny ✓
 
@@ -157,11 +157,30 @@
 - `crates/barracuda/src/ops/bio/*.rs` — `with_device` constructors (4 files)
 - `crates/barracuda/src/spectral/lanczos.rs` — iterator evolution
 
+### Phase 5–9: Deep Debt Evolution (Apr 12–13 2026)
+
+18. **Numeric safety** — `u32` overflow in naga-exec workgroup dispatch replaced with
+    `u64::checked_mul` chain + `NagaExecError::Overflow`. FHE degree overflow
+    validated in JSON-RPC + tarpc layers. `batch.rs` `as u64` replaced with `u64::try_from`.
+19. **Visibility tightening** — `REGISTERED_METHODS`, `normalize_method`,
+    `provided_capability_groups` narrowed to `pub(crate)`. `DEFAULT_BIND_HOST` promoted
+    to `pub` as single source of truth for binary.
+20. **Batch pre-validation** — `scale` (`scalar`), `layer_norm` (`feature_size`),
+    `reshape` (`shape`) validated in `validate_batch_ops` before device checks.
+21. **Dead code removal** — 5 functions removed from `WgpuDevice` (`quota_deallocate`,
+    `new_calibrated`, `submit_and_poll`, `dispatch_semaphore_timeout`,
+    `try_acquire_timeout`) and 1 error variant (`NagaExecError::NotCompute`).
+22. **Coverage expansion** — 27 new GPU-free tests across phases 5–9 covering
+    tensor parameter validation, FHE degree overflow, batch pre-validation,
+    std_dev edge cases, perlin3d missing params, compute dispatch non-string
+    tensor_id + empty op, whitespace batch, and more.
+23. **4,377 tests pass**, all quality gates green.
+
 ---
 
 ## Remaining Debt (LOW, not blocking composition)
 
 - Sovereign pipeline readback validation (hardware-dependent)
 - DF64 NVK verification (hardware-dependent)
-- Coverage 80→90% target (requires real GPU hardware)
+- Coverage ~85→90% target (requires real GPU hardware for full coverage)
 - BufReader lifetime edge-case in handshake relay
