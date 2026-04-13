@@ -184,7 +184,7 @@ stronger. This is not parallel development — it's compound evolution.
 | Priority | What | Blocked By |
 |----------|------|------------|
 | 1 | Tower atomic composition parity (BearDog + Songbird via IPC) | Nothing — ready now |
-| 2 | Node atomic composition parity (+ barraCuda + coralReef + toadStool) | barraCuda tensor.* response schema standardization |
+| 2 | Node atomic composition parity (+ barraCuda + coralReef + toadStool) | ~~barraCuda tensor.* response schema standardization~~ RESOLVED (Sprint 42) |
 | 3 | Nest atomic composition parity (+ NestGate + provenance trio) | Nothing — storage IPC stable |
 | 4 | Full NUCLEUS composition parity | Depends on 1-3 |
 | 5 | Chimera compositions via biomeOS | biomeOS graph execution maturity |
@@ -193,7 +193,7 @@ stronger. This is not parallel development — it's compound evolution.
 
 | Primal | Sprint | What Enables Composition | Status |
 |--------|--------|------------------------|--------|
-| barraCuda | 42+ | Standardize `tensor.*` response schema: `{"result": {"value": N}}` | **OPEN** |
+| barraCuda | 42+ | Standardize `tensor.*` response schema: `{"result": {"value": N}}` | **RESOLVED** (Sprint 42) |
 | coralReef | 80+ | Standardize `shader.compile` response format | **OPEN** |
 | toadStool | 203+ | Standardize `compute.dispatch` result shape | **OPEN** |
 | BearDog | 36+ | Already composable (crypto.sign, btsp.session — stable schemas) | **READY** |
