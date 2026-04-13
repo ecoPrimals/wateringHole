@@ -95,13 +95,32 @@
 
 ---
 
+## NUCLEUS Launcher Fix
+
+**Issue**: petalTongue not starting in NUCLEUS — `nucleus_launcher.sh` passes
+`server --socket /path/to/sock` but `--socket` flag did not exist.
+
+**Fix**: Added `--socket` CLI flag on `Server` subcommand, wired through
+`UnixSocketServer::new_with_socket()` builder. No unsafe env mutation
+(Rust 2024 edition compliance). plasmidBin `metadata.toml` and
+`start_primal.sh` updated with `socket_flag` and `--socket` passthrough.
+
+**Deployment Validation Compliance**:
+- Health triad: PASS (health.liveness, health.readiness, health.check)
+- Socket-first: PASS (XDG default, `--socket` override, family-scoped)
+- CLI convergence: PASS (`server --port` + `server --socket`)
+- Standalone startup: PASS (no FAMILY_ID required)
+- Capability advertisement: PASS (`capabilities.list`)
+
+---
+
 ## Verification Gates (all green)
 
 ```
 cargo fmt --check                                    ✅
 cargo clippy --workspace --all-features -D warnings  ✅ (0 warnings)
 cargo doc --workspace --all-features -D warnings     ✅
-cargo test --workspace --all-features                ✅ (6,087 passed, 0 failures)
+cargo test --workspace --all-features                ✅ (6,090+ passed, 0 failures)
 cargo deny check                                     ✅ (advisories, bans, licenses, sources ok)
 ```
 
