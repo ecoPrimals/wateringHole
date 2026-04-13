@@ -213,7 +213,7 @@ When `result.methods` is present, biomeOS skips format detection entirely. Legac
 | BearDog | ✓ | ✓ | — | L2 complete (April 8, 2026): `methods` flat array in `capabilities.list`, `identity.get` returning `{primal, version, domain, license}` |
 | Songbird | ✓ | Partial | — | Has `capabilities.methods` token→method map (Wave 123); needs `{primal, version, methods}` envelope, `identity.get` |
 | rhizoCrypt | ✓ | ✓ | ✓ | Full L3: `methods`, `consumed_capabilities`, `cost_estimates`, `operation_dependencies` |
-| loamSpine | ✓ | Partial | Partial | Needs top-level `methods`, `identity.get` |
+| loamSpine | ✓ | ✓ | ✓ | Full L3: `methods` (flat), `identity.get`, `provided_capabilities` (9 groups), `consumed_capabilities`, `cost_estimates`, `operation_dependencies`. Domain symlink `ledger.sock`. (April 12, 2026) |
 | sweetGrass | ✓ | ✓ | ✓ | Full L3 compliance (April 8, 2026) |
 | NestGate | ✓ | ✓ | ✓ | Full L3: `{primal, version, methods}` envelope, `identity.get` with domain/license, `provided_capabilities` (9 groups), `consumed_capabilities`, `protocol`, `transport`. 57 methods advertised. (April 8, 2026) |
 

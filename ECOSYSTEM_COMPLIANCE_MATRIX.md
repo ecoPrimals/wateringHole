@@ -235,7 +235,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 - **petalTongue**: Both transports work. No domain symlink.
 - **rhizoCrypt**: Dual-mode TCP auto-detects newline vs HTTP. UDS at `biomeos/rhizocrypt.sock`. No domain symlink.
 - **sweetGrass**: UDS newline-conformant. TCP is HTTP-only (Axum), not newline JSON-RPC. No domain symlink.
-- **LoamSpine**: Both transports work. No domain symlink.
+- **LoamSpine**: Both transports work. Domain symlink **PASS** (v0.9.16): `ledger.sock` → `permanence.sock` created on bind, removed on shutdown. Legacy `loamspine.sock` symlink maintained. TCP opt-in via `--port`, UDS unconditional.
 
 ---
 
@@ -273,7 +273,7 @@ but primals still do not self-register).
 - **petalTongue**: 982 refs / 125 files. 77 env refs / 15 files. Major renames landed. `capabilities.list` returns 41 methods. Discovery: **P→C** (improving).
 - **rhizoCrypt**: Zero primal-name refs. Zero primal-specific env vars. Dual-mode TCP + UDS. No domain symlink. Discovery: **C**.
 - **sweetGrass**: Zero primal-name refs. Zero primal-specific env vars. No domain symlink. Discovery: **C**.
-- **LoamSpine**: Zero primal-name refs. Zero primal-specific env vars. 19 capabilities. No domain symlink. Discovery: **C**.
+- **LoamSpine**: Zero primal-name refs. Zero primal-specific env vars. 19 capabilities. Domain symlink `ledger.sock`. Wire L2+L3 complete (`methods`, `identity.get`, `provided_capabilities`, `consumed_capabilities`, `cost_estimates`, `operation_dependencies`). Discovery: **C** (compliant).
 
 ### Discovery Debt by Volume
 
@@ -544,7 +544,7 @@ toadstool:   UDS newline JSON-RPC (custom methods) + tarpc UDS
 squirrel:    Abstract socket newline JSON-RPC
 rhizocrypt:  tarpc TCP + HTTP JSON-RPC TCP
 sweetgrass:  HTTP REST + HTTP JSON-RPC + tarpc + UDS
-loamspine:   tarpc TCP + JSON-RPC TCP (LS-03 fixed v0.9.15)
+loamspine:   tarpc TCP + JSON-RPC TCP/HTTP + UDS (LD-09 TCP opt-in v0.9.16, domain symlink, Wire L2+L3)
 ```
 
 Five distinct transport patterns across 7 tested primals. Standards require
