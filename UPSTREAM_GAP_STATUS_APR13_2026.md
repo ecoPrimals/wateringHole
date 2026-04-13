@@ -5,7 +5,7 @@
 
 ---
 
-## Resolved This Sprint (11 items)
+## Resolved This Sprint (12 items)
 
 | Gap | Primal | Version | How |
 |-----|--------|---------|-----|
@@ -20,16 +20,11 @@
 | biomeOS DOWN during testing | biomeOS | v3.05 | Neural API co-launch in Nucleus Full |
 | LD-10 BTSP guard line consumed | barraCuda | Sprint 42 | Replay consumed line |
 | LD-05 TCP AddrInUse | barraCuda | Sprint 42 | Eliminated TCP sidecar in UDS mode |
+| NG-08: Eliminate `ring` from production | NestGate | Session 43 | reqwest→ureq 3.3 + rustls-rustcrypto, pure Rust TLS |
 
 ---
 
-## Remaining Open (13 items)
-
-### High
-
-| Gap | Owner | Notes |
-|-----|-------|-------|
-| **NG-08**: Eliminate `ring` from production build | NestGate | C/ASM violates ecoBin. NestGate needs more time. |
+## Remaining Open (12 items — zero high priority)
 
 ### Medium
 
@@ -37,10 +32,10 @@
 |-----|-------|-------|
 | BC-07: `SovereignDevice` into `Auto::new()` fallback | barraCuda | Possibly resolved Sprint 41 — needs verification |
 | BC-08: `cpu-shader` default-on | barraCuda | Feature flag required, most compositions CPU-only |
-| ~~CR-01: `deny.toml` C/FFI ban list~~ | coralReef | **RESOLVED (Iter 79)** — 16-crate C/FFI ban list, `cargo deny check` passes |
-| Multi-stage ML pipeline `shader.compile.wgsl` | coralReef | Wire contract delivered, pipeline composition tests added (Iter 80) |
-| `storage.retrieve` for large/streaming tensors | NestGate | Needs more time |
-| Cross-spring persistent storage IPC | NestGate | Needs more time |
+| CR-01: `deny.toml` C/FFI ban list | coralReef | Most likely to pull GPU C deps |
+| Multi-stage ML pipeline `shader.compile.wgsl` | coralReef | Wire contract delivered, pipeline untested |
+| `storage.retrieve` for large/streaming tensors | NestGate | OPEN |
+| Cross-spring persistent storage IPC | NestGate | OPEN |
 
 ### Low
 
@@ -50,7 +45,7 @@
 | 29 shader absorption candidates | barraCuda | neuralSpring pipeline |
 | RAWR GPU kernel (CPU-only) | barraCuda | groundSpring-specific |
 | Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific |
-| IPC timing for `shader.compile` | coralReef | Deployment timing (deferred — latency budgets documented in `IPC_COMPOSITION_AND_LATENCY.md`) |
+| IPC timing for `shader.compile` | coralReef | Deployment timing |
 | Signed capability announcements | BearDog | neuralSpring ask |
 
 ---
@@ -65,7 +60,7 @@
 | loamSpine | deep debt pass 6 | 1,034 pass | READY |
 | rhizoCrypt | S42 | 35 pass | READY |
 | Songbird | Wave 137 | up to date | READY |
-| NestGate | Session 43 | up to date | NEEDS TIME (NG-08) |
+| NestGate | Session 43g | 291 pass (26 ignored) | READY (NG-08 resolved) |
 | petalTongue | current | up to date | READY |
 | Squirrel | alpha.51 | 735 pass | READY |
 | sweetGrass | current | up to date | READY |
