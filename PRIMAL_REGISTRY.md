@@ -170,7 +170,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Core** | 712 WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce (incl. DF64 variants), broadcast |
+| **Core** | 826 WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce (incl. DF64 variants), broadcast |
 | **Linear Algebra** | solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
 | **Scientific Computing** | Crank-Nicolson PDE, Richards equation, MD forces (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics, HFB nuclear physics |
 | **Lattice QCD** | 14 GPU shaders + host: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop |
@@ -434,7 +434,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
-| barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
+| barraCuda | v0.3.12 (4,358+ tests, 826 shaders, AGPL-3.0-or-later, 32 IPC methods, LD-05/LD-10 resolved, BTSP Phase 2, all production files <600 lines) |
 | coralReef | Phase 10 Iteration 80 (4,467 tests, ~65% line / ~82% non-hw coverage, 11 GPU archs, wire contract documented, CompilationInfo IPC, BTSP Phase 2, ecoBin v3 deny.toml, zero warnings, all files <1000 LOC) |
 | primalSpring | v0.7.0 Phase 13 (53 experiments, 10 tracks, 360 tests, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, cross-gate deployment tooling: build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health, LAN deployment guide, zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
