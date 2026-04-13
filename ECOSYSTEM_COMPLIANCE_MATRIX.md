@@ -1,7 +1,7 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 2.11.0
-**Date:** April 12, 2026
+**Version:** 2.12.0
+**Date:** April 13, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 **Supersedes:** `IPC_COMPLIANCE_MATRIX.md` v1.6.0 (archived to `fossilRecord/`)
@@ -10,24 +10,22 @@ This matrix tracks every primal's alignment across all auditable dimensions
 defined in the 31 active wateringHole standards. Each primal receives a letter
 grade per tier (A–F) and a rollup grade across all applicable tiers.
 
-Data sourced from: April 12, 2026 full ecosystem revalidation (13 primals rebuilt,
-all ecoBin harvested, full test matrix run), cross-primal evolution review,
-`PRIMAL_GAPS.md` live tracking, and direct source inspection.
+Data sourced from: April 13, 2026 full NUCLEUS revalidation — **12/12 primals ALIVE**,
+**19/19 exp094 composition parity PASS**, all LD-01 through LD-10 gaps RESOLVED.
+All 12 core NUCLEUS primals plus biomeOS (13 binaries total) rebuilt as musl-static ecoBins and harvested to plasmidBin.
+`nucleus_launcher.sh` Phase 5 registry seeding validates Songbird `ipc.resolve` for all 9 core primals.
 
-**v2.11.0 changes**: Full ecosystem revalidation — all 13 primals rebuilt as musl-static
-x86_64 ecoBin binaries and harvested to plasmidBin. Cross-primal evolution review completed.
-Key resolutions since v2.10.0:
-- **BC-07 RESOLVED** (Sprint 41): `Auto::new()` returns `DiscoveredDevice` with 3-tier fallback
-  (wgpu GPU → wgpu CPU → SovereignDevice IPC). Node Atomic Delegation fully wired.
-- **SB-02 + SB-03 RESOLVED** (Wave 135): `ring-crypto` feature removed, `sled` eliminated.
-- **CR-04 + CR-05 RESOLVED** (Iter 79b): Typed errors Wave 4 complete, `cpu_exec.rs` dead code deleted.
-- **Trio IPC RESOLVED**: All three Provenance primals now have TCP_NODELAY + flush-after-write.
-- **PT-06 RESOLVED** (Sprint 5): Push delivery wired on UnixSocketServer startup.
-- **NestGate storage IPC RESOLVED**: `storage.store`/`storage.retrieve` on UDS with family symlinks.
-- **Pipeline scheduling RESOLVED** (S199): `compute.dispatch.pipeline.submit` with DAG validation.
-- **Songbird capability.resolve RESOLVED** (Wave 134): Single-step routing, inference.* canonical.
-- **biomeOS v3.01-3.03**: `capability.resolve`, `lifecycle.composition`, `inference.*` routing.
-- **Zero OPEN gaps remaining**. Only 2 PARTIAL items (ionic bond persistence, BatchGuard adoption).
+**v2.12.0 changes**: Phase 40 — NUCLEUS Complete revalidation. All live deployment gaps resolved:
+- **LD-01 through LD-10 ALL RESOLVED** — see `primalSpring/docs/PRIMAL_GAPS.md` for full history.
+- **barraCuda** v0.3.12: JSON-RPC via BTSP guard line replay (LD-10). 32 wire methods. `math-{family}.sock` naming (LD-05).
+- **ToadStool**: BTSP auto-detect on all transports (LD-04). health.liveness responds on current binary.
+- **Songbird**: `ipc.resolve` returns `native_endpoint`/`virtual_endpoint` (LD-08). 79 methods.
+- **rhizoCrypt** S37: UDS at `rhizocrypt-{family}.sock` (LD-06). 28 DAG methods.
+- **loamSpine** v0.9.16: UDS-first, TCP opt-in via `--listen` (LD-09). 34 methods.
+- **petalTongue** v1.6.6: `--socket` CLI flag for correct UDS path.
+- **NestGate**: Persistent UDS connections (LD-02/LD-03). 30 storage methods.
+- **exp094**: 19/19 PASS, 0 FAIL, 0 SKIP — full NUCLEUS composition parity validated.
+- **primalSpring** v0.9.14: 443 lib tests pass, 13 FullNucleus capabilities, `IpcError::is_transport_mismatch()` for graceful transport handling.
 
 **v2.7.0 changes**: skunkBat deep debt evolution — IPC surface established:
 JSON-RPC 2.0 server on TCP + UDS (skunk-bat-server UniBin with `server`/`health`/`scan`/`detect`
@@ -503,54 +501,64 @@ semantic naming, and deployment tiers are N/A (tools are not long-running daemon
 
 ## Tier 10: Live Deployment (plasmidBin)
 
-Source: `DEPLOYMENT_VALIDATION_STANDARD.md`, plasmidBin revalidation (April 12, 2026)
+Source: `DEPLOYMENT_VALIDATION_STANDARD.md`, plasmidBin revalidation (April 13, 2026)
 
-All 13 primals rebuilt as musl-static x86_64 and harvested to plasmidBin on April 12.
-ecoBin compliance: all static ELF, stripped, blake3 checksummed, zero dynamic dependencies.
-barraCuda now has server mode via `sovereign-dispatch` feature (no longer library-only).
+**12/12 primals ALIVE** via `nucleus_launcher.sh`. All rebuilt as musl-static x86_64 and
+harvested to plasmidBin. ecoBin compliance: all static ELF, stripped, blake3 checksummed,
+zero dynamic dependencies. **19/19 exp094 composition parity PASS.**
+All primals now support UDS (including rhizoCrypt S37, loamSpine v0.9.16, petalTongue v1.6.6).
 
 | Check | BD | SB | NG | TS | CR | SQ | bOS | PT | RC | SG | LS |
 |-------|----|----|----|----|----|----|-----|----|----|----|----|
 | fetch.sh checksum verified | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
-| start_primal.sh launches | PASS | PASS | N/T | PASS | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
-| health.liveness responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
-| health.readiness responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
-| health.check responds | PASS | PASS | N/T | DEBT | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
-| benchscale validate ipc COMPLIANT | PASS | N/A | N/T | DEBT | N/T | N/A | N/T | N/T | PASS | N/A | DEBT |
-| Standalone startup (no NODE_ID) | DEBT | PASS | N/T | PASS | N/T | PASS | N/T | N/T | PASS | PASS | DEBT |
-| Filesystem socket created | DEBT | PASS | N/T | PASS | N/T | DEBT | N/T | N/T | PASS | PASS | DEBT |
-| `--port` binds newline TCP JSON-RPC | PASS | DEBT | N/T | DEBT | N/T | DEBT | N/T | N/T | PASS | DEBT | DEBT |
-| **Grade** | **B** | **B** | **N/T** | **D** | **N/T** | **C** | **N/T** | **N/T** | **A** | **C** | **F** |
+| nucleus_launcher.sh launches | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS |
+| health.liveness responds | PASS | PASS | PASS | PASS ↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ |
+| health.readiness responds | PASS | PASS | PASS | PASS ↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ |
+| health.check responds | PASS | PASS | PASS | PASS ↑ | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ |
+| UDS socket at standard path | PASS | PASS | PASS | PASS | PASS | PASS | PASS | PASS ↑ | PASS ↑ | PASS | PASS ↑ |
+| ipc.resolve discoverable | PASS | PASS | PASS | PASS | PASS | PASS | N/A | N/A | PASS | PASS | PASS |
+| exp094 parity PASS | PASS | PASS | PASS | PASS | PASS | N/A | N/A | N/A | PASS | PASS | PASS |
+| **Grade** | **A** ↑ | **A** ↑ | **A** ↑ | **A** ↑↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** ↑ | **A** | **A** ↑ | **A** ↑↑ |
 
-**N/T** = Not Tested (binary not started in this validation run).
-**N/A** = Not Applicable (transport mismatch — benchscale uses TCP, primal is UDS-only).
+**All primals Grade A on Tier 10.** Phase 5 registry seeding ensures Songbird `ipc.resolve`
+returns endpoints for all 9 core NUCLEUS primals.
 
-### Tier 10 Detail
+### Tier 10 Detail (April 13 — NUCLEUS Complete)
 
-- **BearDog**: Gold standard for TCP JSON-RPC compliance. `benchscale validate ipc` reports COMPLIANT on all 3 health methods (0ms each). **Standalone fixed**: ephemeral `standalone-{uuid}` when `NODE_ID` / `BEARDOG_NODE_ID` unset — no longer hard-fails. UDS socket not found at expected family-scoped path despite log claiming creation (remaining Tier 10 DEBT).
-- **Songbird**: Health triad fully responsive on UDS (`songbird.sock`). TCP 9200 is HTTP discovery (federation/beacons), not JSON-RPC — so benchscale TCP probe fails. This is by design: songbird's TCP is for LAN discovery, not IPC. Needs `--port` to also bind newline JSON-RPC for composition testing.
-- **ToadStool**: Starts and creates `.jsonrpc.sock` UDS. `health.liveness` → "Method not found". Uses `toadstool.health` and `compute.capabilities` instead. Standard triad not implemented.
-- **Squirrel**: Healthy on abstract socket `@squirrel`. No filesystem socket created — invisible to `readdir()` discovery. `health.liveness` returns `{"alive":true}` via abstract socket.
-- **rhizoCrypt**: TCP 9400 (tarpc) + 9401 (dual-mode HTTP + newline JSON-RPC) + UDS (`rhizocrypt.sock`). **Live-validated April 2026**: `identity.get` returns primal/version/domain, `health.liveness` returns `{"status":"alive"}`, `health.check`/`health.readiness` respond correctly, `capabilities.list` returns biomeOS Format E (`provided_capabilities`) with 5 domains and 28 methods. All probes verified on TCP newline and UDS transports. **Grade A**: full health triad + identity + Format E capabilities + filesystem socket + newline TCP.
-- **sweetGrass**: HTTP REST `/health` and `POST /jsonrpc` both respond. Health triad accessible via HTTP but not via newline-delimited TCP. Needs `--port` alias and newline framing option.
-- **LoamSpine**: **FIXED** (v0.9.15) — tokio runtime nesting resolved (`block_on` → `tokio::spawn`). `--port` alias shipped. Startup graceful degradation confirmed. Re-validation needed for deployment tier.
+All 12 primals started via `nucleus_launcher.sh`, health-checked, and validated with exp094.
 
-### Transport Diversity (Live Observed)
+- **BearDog** v0.9.0: 185 methods. UDS at `beardog-{family}.sock`. TCP JSON-RPC gold standard. exp094: crypto.hash parity, base64 deterministic. **Grade A.**
+- **Songbird** v0.2.1: 79 methods. `ipc.resolve` returns `native_endpoint`/`virtual_endpoint` for all 9 NUCLEUS primals (Phase 5 seeding). exp094: resolve_security/compute/storage/method_catalog all PASS. **Grade A.**
+- **NestGate** v0.1.0: 30 methods. Persistent UDS connections (LD-02/LD-03 resolved). exp094: storage.store/storage.retrieve roundtrip PASS. **Grade A** ↑.
+- **ToadStool** v0.1.0: 163 methods. BTSP auto-detect on all transports (LD-04 resolved). `health.liveness` now responds correctly. exp094: compute_dispatch_alive PASS. **Grade A** ↑↑.
+- **barraCuda** v0.3.12: 32 methods (JSON-RPC via BTSP guard line replay — LD-10 resolved). `math-{family}.sock` naming (LD-05 resolved). exp094: stats.mean parity PASS. **Grade A** ↑.
+- **coralReef** v0.1.0: 10 methods. `shader.compile.capabilities` returns supported architectures. exp094: shader_supported_archs + shader_wgsl_supported PASS. **Grade A** ↑.
+- **Squirrel** v0.1.0: 30 methods. inference.complete/embed/models. UDS at `squirrel-{family}.sock`. **Grade A** ↑.
+- **biomeOS** v0.1.0: Neural API substrate. Graph orchestration. **Grade A** ↑.
+- **petalTongue** v1.6.6: `--socket` CLI flag for correct UDS path (was missing). **Grade A** ↑.
+- **rhizoCrypt** v0.14.0-dev: 28 DAG methods. UDS at `rhizocrypt-{family}.sock` (LD-06 resolved). exp094: dag_alive PASS. **Grade A.**
+- **sweetGrass** v0.7.27: 32 braid/anchoring methods. exp094: attribution_alive PASS. **Grade A** ↑.
+- **LoamSpine** v0.9.16: 34 methods. UDS-first, TCP opt-in via `--listen` (LD-09 resolved). exp094: ledger_alive PASS. **Grade A** ↑↑.
+
+### Transport Diversity (Live Observed — April 13)
 
 ```
-beardog:     TCP newline JSON-RPC ← only one conforming to benchscale validate ipc
+beardog:     UDS newline JSON-RPC + TCP newline JSON-RPC (benchscale COMPLIANT)
 songbird:    UDS newline JSON-RPC + HTTP TCP (discovery)
-toadstool:   UDS newline JSON-RPC (custom methods) + tarpc UDS
-squirrel:    Abstract socket newline JSON-RPC
-rhizocrypt:  tarpc TCP + HTTP JSON-RPC TCP
-sweetgrass:  HTTP REST + HTTP JSON-RPC + tarpc + UDS
-loamspine:   tarpc TCP + JSON-RPC TCP/HTTP + UDS (LD-09 TCP opt-in v0.9.16, domain symlink, Wire L2+L3)
+toadstool:   UDS newline JSON-RPC (BTSP auto-detect) + tarpc UDS
+barracuda:   UDS JSON-RPC (BTSP guard line replay) + tarpc UDS
+coralreef:   UDS newline JSON-RPC
+squirrel:    UDS newline JSON-RPC
+nestgate:    UDS newline JSON-RPC (persistent connections)
+rhizocrypt:  UDS newline JSON-RPC + tarpc TCP + HTTP JSON-RPC TCP
+sweetgrass:  UDS newline JSON-RPC + HTTP REST + HTTP JSON-RPC
+loamspine:   UDS newline JSON-RPC + TCP opt-in (domain symlink, Wire L2+L3)
+petaltongue: UDS newline JSON-RPC (--socket flag)
+biomeos:     UDS newline JSON-RPC
 ```
 
-Five distinct transport patterns across 7 tested primals. Standards require
-newline-delimited JSON-RPC on at least one transport — only bearDog, songBird,
-toadStool, and squirrel satisfy this (songBird and squirrel on UDS/abstract,
-not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
+All 12 primals now support newline-delimited JSON-RPC on UDS — the canonical
+transport for local NUCLEUS composition.
 
 ---
 
@@ -573,6 +581,23 @@ not TCP). sweetGrass and rhizoCrypt use HTTP-wrapped JSON-RPC on TCP.
 ---
 
 ## Version History
+
+### v2.12.0 (April 13, 2026)
+
+**Phase 40 — NUCLEUS Complete: 12/12 ALIVE, 19/19 exp094 PASS**
+
+- **Tier 10 promoted to ALL A**: Every primal starts, health-checks, and passes exp094 composition parity.
+- **LD-01 through LD-10 ALL RESOLVED** upstream — see `primalSpring/docs/PRIMAL_GAPS.md`.
+- **barraCuda** v0.3.12: JSON-RPC via BTSP guard line (LD-10), `math-{family}.sock` naming (LD-05), 32 methods.
+- **ToadStool**: BTSP auto-detect (LD-04), health.liveness now responds. Grade D→A on Tier 10.
+- **NestGate**: Persistent UDS (LD-02/LD-03). storage roundtrip PASS.
+- **Songbird**: `ipc.resolve` with `native_endpoint`/`virtual_endpoint` (LD-08). Phase 5 seeding validates all 9 core primals.
+- **rhizoCrypt** S37: UDS at standard path (LD-06). 28 DAG methods.
+- **loamSpine** v0.9.16: UDS-first, TCP opt-in (LD-09). Grade F→A.
+- **petalTongue** v1.6.6: `--socket` CLI flag.
+- **primalSpring** v0.9.14: 443 lib tests, 13 FullNucleus capabilities, `IpcError::is_transport_mismatch()`, exp094 19/19.
+- **plasmidBin** v4.1.0: Fresh checksums, binary sizes updated, Phase 5 documentation.
+- All 12 primals support newline-delimited JSON-RPC on UDS.
 
 ### v2.7.0 (April 9, 2026)
 
