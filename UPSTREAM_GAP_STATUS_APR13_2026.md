@@ -37,8 +37,8 @@
 |-----|-------|-------|
 | BC-07: `SovereignDevice` into `Auto::new()` fallback | barraCuda | Possibly resolved Sprint 41 — needs verification |
 | BC-08: `cpu-shader` default-on | barraCuda | Feature flag required, most compositions CPU-only |
-| CR-01: `deny.toml` C/FFI ban list | coralReef | Most likely to pull GPU C deps |
-| Multi-stage ML pipeline `shader.compile.wgsl` | coralReef | Wire contract delivered, pipeline untested |
+| ~~CR-01: `deny.toml` C/FFI ban list~~ | coralReef | **RESOLVED (Iter 79)** — 16-crate C/FFI ban list, `cargo deny check` passes |
+| Multi-stage ML pipeline `shader.compile.wgsl` | coralReef | Wire contract delivered, pipeline composition tests added (Iter 80) |
 | `storage.retrieve` for large/streaming tensors | NestGate | Needs more time |
 | Cross-spring persistent storage IPC | NestGate | Needs more time |
 
@@ -50,7 +50,7 @@
 | 29 shader absorption candidates | barraCuda | neuralSpring pipeline |
 | RAWR GPU kernel (CPU-only) | barraCuda | groundSpring-specific |
 | Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific |
-| IPC timing for `shader.compile` | coralReef | Deployment timing |
+| IPC timing for `shader.compile` | coralReef | Deployment timing (deferred — latency budgets documented in `IPC_COMPOSITION_AND_LATENCY.md`) |
 | Signed capability announcements | BearDog | neuralSpring ask |
 
 ---
