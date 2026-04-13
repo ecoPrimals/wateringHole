@@ -157,7 +157,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 - **barraCuda**: E0061 **FIXED** (Sprint 29). All files under 600 lines. Clippy clean. 4,371 tests pass. 32 IPC methods. Domain-based socket naming (math.sock). LD-05/LD-10 resolved. BTSP Phase 2. 12-axis deep debt: clean bill.
 - **coralReef**: Clippy **CLEAN** (was 7 errors). 8 warnings resolved in `coral-gpu` tests. License updated to `-or-later`.
 - **Squirrel**: Clippy CLEAN. fmt PASS. 6,868 tests pass. Commented-out code remains minor residual.
-- **biomeOS**: v3.03 — 7,749 tests. `Box<dyn Error>` → `anyhow` evolution (topology, boot). 119 test files `#[allow(` → `#[expect(reason)]`. Hot-path dispatch clone elimination. `capability.resolve` metrics-instrumented. `inference.*` namespace (7 routes). All BM-01 through BM-11 RESOLVED. 0 files >1000 LOC. `#[forbid(unsafe_code)]` all binaries. Zero-debt: 0 unsafe, 0 production mocks, 0 TODO/FIXME, 0 hardcoded primal names, 0 `#[allow(` in production.
+- **biomeOS**: v3.07 — 7,784 tests. All BM-01 through BM-11 RESOLVED. `graph.execute` cross-gate validation enforced (no silent local fallback). Songbird mesh state probing in `composition.health`. `PrimalOperationExecutor` migrated to native RPITIT async fn. `async-trait` removed from biomeos-types, moved to dev-deps in biomeos-api. Test extraction: 8 files >800 LOC → sibling test pattern (all <835 LOC). `--port` honored in api/nucleus modes (TCP+UDS). Zero-debt: 0 unsafe, 0 production mocks, 0 TODO/FIXME, 0 hardcoded primal names, 0 `#[allow(` in production.
 - **petalTongue**: All clean. 1 flaky test (`test_resolve_instance_id_error_message_invalid` — passes on retry).
 - **rhizoCrypt**: Clippy **CLEAN** (39 `doc_markdown` warnings resolved). All clean.
 - **sweetGrass**: Clippy **CLEAN** (unused import fixed). License updated to `-or-later`. `.cargo/config.toml` target-dir still points to `/home/southgate/` (non-blocking).
@@ -196,7 +196,7 @@ N/A for library primals without IPC daemons (barraCuda, bingoCube, sourDough).
 - **ToadStool**: `--port` exists but not wired to server bind. musl-static both arches.
 - **coralReef**: `server --port` on coralreef-core and glowplug. Zero C deps. musl-static not yet verified.
 - **Squirrel**: `--port` accepted but TCP not primary transport (UDS preferred). musl-static both arches.
-- **biomeOS**: Orchestrator pattern — `neural-api`/`api` subcommand, not `server`. `--port` forces UDS in some modes.
+- **biomeOS**: Orchestrator pattern — `neural-api`/`api`/`nucleus` subcommands. `--port` binds TCP alongside UDS (v3.05+), `--tcp-only` for pure TCP mode.
 - **petalTongue**: `server --port` functional. x86_64 musl works; aarch64 egui headless cross-compile pending.
 - **rhizoCrypt**: `server` subcommand with `--port` (tarpc) and `--unix` (UDS). musl-static x86_64 shipped (5.4M, Alpine runtime). aarch64 via CI cross-compile.
 - **sweetGrass**: No `--port` flag (uses `--http-address` for full address). musl-static not tested.
@@ -409,7 +409,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 - **ToadStool**: Both arches. TCP not wired. In plasmidBin (16M musl-static, S168).
 - **coralReef**: musl-static not verified for either arch (low priority — GPU primal). TCP works (--port). `genomebin/manifest.toml` current (Iter 80). `deny.toml` enforced (16-crate C/FFI ban). ecoBin ~6.5M.
 - **Squirrel**: Both arches. TCP + abstract. `@squirrel` confirmed on GrapheneOS. In plasmidBin (5.8M).
-- **biomeOS**: Both arches. Forces UDS even when `--port` specified (TCP-only mode needed). In plasmidBin (12M).
+- **biomeOS**: Both arches. `--port` binds TCP alongside UDS (v3.05+), `--tcp-only` for mobile/Android. In plasmidBin (13M).
 - **petalTongue**: x86_64 musl works. aarch64 egui headless pending. TCP via `--port`. In plasmidBin (30M).
 - **rhizoCrypt**: x86_64 musl-static shipped (5.4M, Alpine runtime). aarch64 via CI cross-compile. TCP works (dual-mode). In plasmidBin (musl-static).
 - **sweetGrass**: musl not tested. No TCP (HTTP-only). In plasmidBin (8.8M glibc — needs musl).
@@ -428,7 +428,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **barraCuda** | — | — | — |
 | **coralReef** | 7 clippy errors in tests | License → `-or-later` | No CONTEXT.md |
 | **Squirrel** | Discovery: 1,789 primal-name refs | Overstep: sled/sqlx/ed25519 beyond domain | 19 commented-out code lines |
-| **biomeOS** | License → `-or-later` | `--port` forces UDS (TCP-only needed) | `tools/` edition 2021 |
+| **biomeOS** | 71 `#[async_trait]` blocked by dyn dispatch | `tools/` edition 2021 | — |
 | **petalTongue** | Discovery: 982 primal-name refs | No CONTEXT.md | 32 `#[allow(` → `#[expect(` |
 | **rhizoCrypt** | ~~Health triad missing~~ → **live-validated PASS** | ~~musl binary is glibc~~ → musl-static shipped | ~~reqwest~~ → hyper/tower (session 28) |
 | **sweetGrass** | No `--port` (HTTP-only TCP) | Health triad HTTP-only (not newline) | License → `-or-later` |
@@ -554,7 +554,7 @@ rhizocrypt:  UDS newline JSON-RPC + tarpc TCP + HTTP JSON-RPC TCP
 sweetgrass:  UDS newline JSON-RPC + HTTP REST + HTTP JSON-RPC
 loamspine:   UDS newline JSON-RPC + TCP opt-in (domain symlink, Wire L2+L3)
 petaltongue: UDS newline JSON-RPC (--socket flag)
-biomeos:     UDS newline JSON-RPC
+biomeos:     UDS newline JSON-RPC + TCP (--port) + HTTP JSON-RPC (cross-gate)
 ```
 
 All 12 primals now support newline-delimited JSON-RPC on UDS — the canonical
