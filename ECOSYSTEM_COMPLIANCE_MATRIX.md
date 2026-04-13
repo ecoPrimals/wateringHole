@@ -407,7 +407,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 - **Songbird**: Both arches. TCP confirmed on Pixel. In plasmidBin (16M musl-static).
 - **NestGate**: x86_64 musl works. aarch64 not built. TCP not wired. In plasmidBin (4.9M musl-static).
 - **ToadStool**: Both arches. TCP not wired. In plasmidBin (16M musl-static, S168).
-- **coralReef**: musl-static not verified for either arch. TCP works (--port). Not yet in plasmidBin.
+- **coralReef**: musl-static not verified for either arch (low priority — GPU primal). TCP works (--port). `genomebin/manifest.toml` current (Iter 80). `deny.toml` enforced (16-crate C/FFI ban). ecoBin ~6.5M.
 - **Squirrel**: Both arches. TCP + abstract. `@squirrel` confirmed on GrapheneOS. In plasmidBin (5.8M).
 - **biomeOS**: Both arches. Forces UDS even when `--port` specified (TCP-only mode needed). In plasmidBin (12M).
 - **petalTongue**: x86_64 musl works. aarch64 egui headless pending. TCP via `--port`. In plasmidBin (30M).

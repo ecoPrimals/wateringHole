@@ -178,7 +178,7 @@ Major overstep resolved in S169 (-10,659 lines). Remaining:
 
 | Area | Module | Delegate To | Status |
 |------|--------|-------------|--------|
-| coralReef discovery | Hardcoded URL | `capability.discover` | Open (TS-01) |
+| coralReef discovery | `capability.discover("shader")` | Songbird ecosystem registration | **RESOLVED** (TS-01, Iter 65+) |
 | Security sandbox | `toadstool-security-sandbox` | BearDog or OS sandbox | Open |
 
 ### Squirrel

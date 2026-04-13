@@ -352,7 +352,7 @@ upstream blockers** that primal teams need to close:
 | Primal | Gap | Impact | Proposed Fix |
 |--------|-----|--------|-------------|
 | barraCuda | `tensor.*` methods return varying result keys (`"value"`, `"result"`, `"output"`) | Springs must guess the extraction key in `validate_parity()` | Standardize on `{"result": <value>}` for all math methods |
-| coralReef | `shader.compile` has no documented response format | No typed extraction possible | Define `{"result": {"binary_hash": "...", "compile_time_ms": N}}` |
+| coralReef | ~~`shader.compile` has no documented response format~~ **RESOLVED** (Iter 80) | Wire contract in `SHADER_COMPILE_WIRE_CONTRACT.md`; `CompilationInfo` in responses | `{"result": {"binary": "...", "size": N, "arch": "...", "info": {...}}}` |
 | toadStool | `compute.dispatch` result shape varies by dispatch type | Springs can't write generic composition validators | Uniform `{"result": {"values": [...], "elapsed_ms": N}}` wrapper |
 
 ### IPC Wire Contracts
