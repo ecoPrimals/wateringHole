@@ -119,11 +119,11 @@ Tier 4: CpuExecutor + naga-exec (pure Rust)      ← NEW: BC-08
 
 | Gap | Owner | Change | Effort |
 |-----|-------|--------|--------|
-| BC-07 | barraCuda team | Wire `SovereignDevice::with_auto_device()` into `Auto::new()` fallback between Tier 2 and Tier 4. The trait, impl, and IPC wiring already exist — they're just not connected in the failure path | Small — plumbing only |
-| BC-08 | barraCuda team | Make `cpu-shader` feature default-on in `crates/barracuda/Cargo.toml`. All batch ops already have `#[cfg(feature = "cpu-shader")]` paths with scalar Rust fallbacks | Small — feature flag flip + CI validation |
-| BC-06 | Documentation | Architectural constraint, not a code fix. Document that ecoBin musl-static = CPU-only for wgpu. The fix IS Tiers 3 and 4 | None (doc only) |
+| BC-07 | barraCuda team | ~~Wire `SovereignDevice::with_auto_device()` into `Auto::new()` fallback between Tier 2 and Tier 4~~ **RESOLVED** Sprint 41 — `Auto::new()` returns `DiscoveredDevice` enum with 3-tier fallback (wgpu GPU → wgpu CPU → SovereignDevice IPC → Err) | ~~Small~~ Done |
+| BC-08 | barraCuda team | ~~Make `cpu-shader` feature default-on~~ **RESOLVED** Sprint 40 — `cpu-shader` is in `default = ["gpu", "domain-models", "cpu-shader"]` | ~~Small~~ Done |
+| BC-06 | Documentation | ~~Architectural constraint, not a code fix~~ **RESOLVED** Sprint 41 — documented in README + CONTEXT | ~~None~~ Done |
 | CR-01 | coralReef team | ~~Add `ring`/`openssl`/`aws-lc-sys` ban list to `deny.toml`~~ **RESOLVED** Iter 79 — 14-crate C/FFI ban list enforced, `cargo deny check` passes | ~~Small~~ Done |
-| NG-08 | NestGate team | Switch `rustls` to explicit `rustls-rustcrypto` provider (like Songbird) or replace `reqwest` with `ureq` for IPC HTTP. `ring` v0.17.14 is live in production despite `deny.toml` ban | Medium — dependency surgery |
+| NG-08 | NestGate team | ~~Switch `rustls` to explicit `rustls-rustcrypto` provider~~ **RESOLVED** April 11 — `reqwest` replaced with `ureq` + `rustls-rustcrypto` | ~~Medium~~ Done |
 
 ### The Ring Parallel (Side by Side)
 
@@ -212,6 +212,6 @@ cargo tree --workspace | grep -i 'libloading\|dlopen'
 | 2 | NG-08 ring elimination | NestGate team | **Done** (April 11) — `reqwest` → `ureq` + `rustls-rustcrypto` |
 | 2b | Cross-spring storage IPC + ionic bond ledger | NestGate team | **Done** (April 11) — `storage.retrieve_range`, `storage.object.size`, `bonding.ledger.{store,retrieve,list}` |
 | 3 | CR-01 deny.toml alignment | coralReef team | **Done** (Iter 79, April 11) |
-| 4 | BC-08 cpu-shader default-on | barraCuda team | Next sprint |
-| 5 | BC-07 SovereignDevice fallback wiring | barraCuda team | Sprint+1 |
+| 4 | BC-08 cpu-shader default-on | barraCuda team | **Done** (Sprint 40, April 11) |
+| 5 | BC-07 SovereignDevice fallback wiring | barraCuda team | **Done** (Sprint 41, April 11) |
 | 6 | Ecosystem `cargo deny check` CI enforcement | primalSpring (infra) | Sprint+2 |

@@ -194,7 +194,7 @@ stronger. This is not parallel development — it's compound evolution.
 | Primal | Sprint | What Enables Composition | Status |
 |--------|--------|------------------------|--------|
 | barraCuda | 42+ | Standardize `tensor.*` response schema: `{"result": {"value": N}}` | **RESOLVED** (Sprint 42) |
-| coralReef | 80+ | Standardize `shader.compile` response format | **OPEN** |
+| coralReef | 80 | Standardize `shader.compile` response format — `SHADER_COMPILE_WIRE_CONTRACT.md` | **RESOLVED** (Iter 80) |
 | toadStool | 203+ | Standardize `compute.dispatch` result shape | **OPEN** |
 | BearDog | 36+ | Already composable (crypto.sign, btsp.session — stable schemas) | **READY** |
 | Songbird | 134+ | Already composable (discovery.*, capability.* — stable schemas) | **READY** |
