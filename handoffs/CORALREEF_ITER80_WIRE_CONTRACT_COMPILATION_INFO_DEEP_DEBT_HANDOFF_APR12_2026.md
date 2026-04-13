@@ -2,7 +2,7 @@
 
 **From:** coralReef  
 **To:** All primal teams, all spring teams  
-**Status:** 4,477 tests passing. Wire contract documented. CompilationInfo in IPC. Socket alignment complete. Hot-path IPC allocations eliminated. Feature-gate fix for non-workspace builds. Deep debt audit clean.
+**Status:** 4,504 tests passing. Wire contract documented. CompilationInfo in IPC. Socket alignment complete. Hot-path IPC allocations eliminated. Feature-gate fix for non-workspace builds. VFIO constructors feature-gated. MMU oracle unit-tested. Deep debt audit clean.
 
 ---
 
@@ -118,7 +118,7 @@ Comprehensive audit confirmed the codebase is clean:
 | `cargo clippy --all-features -- -D warnings` | PASS (0 warnings) |
 | `RUSTDOCFLAGS="-D warnings" cargo doc --all-features --no-deps` | PASS |
 | `cargo deny check` | PASS (advisories ok, bans ok, licenses ok, sources ok) |
-| `cargo test --all-features` | **4,477 tests**, 0 failed, 153 ignored |
+| `cargo test --all-features` | **4,504 tests**, 0 failed, 153 ignored |
 | Files >1000 LOC | 0 |
 | TODO/FIXME/HACK in .rs | 0 |
 

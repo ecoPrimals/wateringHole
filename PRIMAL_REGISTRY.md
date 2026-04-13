@@ -436,7 +436,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.12 (4,368+ tests, 826 shaders, AGPL-3.0-or-later, 32 IPC methods, LD-05/LD-10 resolved, BTSP Phase 2, all production files <600 lines) |
-| coralReef | Phase 10 Iteration 80 (4,467 tests, ~65% line / ~82% non-hw coverage, 11 GPU archs, wire contract documented, CompilationInfo IPC, BTSP Phase 2, ecoBin v3 deny.toml, zero warnings, all files <1000 LOC) |
+| coralReef | Phase 10 Iteration 80 (4,504 tests, ~65% line / ~82% non-hw coverage, 11 GPU archs, wire contract documented, CompilationInfo IPC, BTSP Phase 2, ecoBin v3 deny.toml, zero warnings, all files <1000 LOC) |
 | primalSpring | v0.9.14 Phase 41 (443 lib tests, 13 FullNucleus capabilities, 19/19 exp094 PASS, NUCLEUS VALIDATED, Phase 5 registry seeding, cross-gate deployment tooling: build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health, LAN deployment guide, zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
