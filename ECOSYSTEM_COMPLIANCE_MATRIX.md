@@ -1,7 +1,7 @@
 # Ecosystem Compliance Matrix
 
-**Version:** 2.10.0
-**Date:** April 11, 2026
+**Version:** 2.11.0
+**Date:** April 12, 2026
 **Status:** Living document — updated as primals evolve
 **Authority:** wateringHole (ecoPrimals Core Standards)
 **Supersedes:** `IPC_COMPLIANCE_MATRIX.md` v1.6.0 (archived to `fossilRecord/`)
@@ -10,10 +10,24 @@ This matrix tracks every primal's alignment across all auditable dimensions
 defined in the 31 active wateringHole standards. Each primal receives a letter
 grade per tier (A–F) and a rollup grade across all applicable tiers.
 
-Data sourced from: April 6, 2026 full ecosystem re-audit (15 primals),
-`IPC_COMPLIANCE_MATRIX.md` v1.6.0, `PRIMAL_GAPS.md` live tracking,
-esotericWebb and ludoSpring compositions (March–April 2026), and direct
-source inspection via `rg`, `cargo`, and manual review.
+Data sourced from: April 12, 2026 full ecosystem revalidation (13 primals rebuilt,
+all ecoBin harvested, full test matrix run), cross-primal evolution review,
+`PRIMAL_GAPS.md` live tracking, and direct source inspection.
+
+**v2.11.0 changes**: Full ecosystem revalidation — all 13 primals rebuilt as musl-static
+x86_64 ecoBin binaries and harvested to plasmidBin. Cross-primal evolution review completed.
+Key resolutions since v2.10.0:
+- **BC-07 RESOLVED** (Sprint 41): `Auto::new()` returns `DiscoveredDevice` with 3-tier fallback
+  (wgpu GPU → wgpu CPU → SovereignDevice IPC). Node Atomic Delegation fully wired.
+- **SB-02 + SB-03 RESOLVED** (Wave 135): `ring-crypto` feature removed, `sled` eliminated.
+- **CR-04 + CR-05 RESOLVED** (Iter 79b): Typed errors Wave 4 complete, `cpu_exec.rs` dead code deleted.
+- **Trio IPC RESOLVED**: All three Provenance primals now have TCP_NODELAY + flush-after-write.
+- **PT-06 RESOLVED** (Sprint 5): Push delivery wired on UnixSocketServer startup.
+- **NestGate storage IPC RESOLVED**: `storage.store`/`storage.retrieve` on UDS with family symlinks.
+- **Pipeline scheduling RESOLVED** (S199): `compute.dispatch.pipeline.submit` with DAG validation.
+- **Songbird capability.resolve RESOLVED** (Wave 134): Single-step routing, inference.* canonical.
+- **biomeOS v3.01-3.03**: `capability.resolve`, `lifecycle.composition`, `inference.*` routing.
+- **Zero OPEN gaps remaining**. Only 2 PARTIAL items (ionic bond persistence, BatchGuard adoption).
 
 **v2.7.0 changes**: skunkBat deep debt evolution — IPC surface established:
 JSON-RPC 2.0 server on TCP + UDS (skunk-bat-server UniBin with `server`/`health`/`scan`/`detect`
@@ -489,13 +503,11 @@ semantic naming, and deployment tiers are N/A (tools are not long-running daemon
 
 ## Tier 10: Live Deployment (plasmidBin)
 
-Source: `DEPLOYMENT_VALIDATION_STANDARD.md`, plasmidBin v2026.03.25 validation (April 5, 2026)
+Source: `DEPLOYMENT_VALIDATION_STANDARD.md`, plasmidBin revalidation (April 12, 2026)
 
-Live runtime validation: binaries fetched from GitHub Releases via `fetch.sh`,
-started via `start_primal.sh`, probed via `benchscale validate ipc` and direct
-JSON-RPC over UDS/TCP/abstract sockets.
-
-N/A for library primals (barraCuda, bingoCube, sourDough — no server mode).
+All 13 primals rebuilt as musl-static x86_64 and harvested to plasmidBin on April 12.
+ecoBin compliance: all static ELF, stripped, blake3 checksummed, zero dynamic dependencies.
+barraCuda now has server mode via `sovereign-dispatch` feature (no longer library-only).
 
 | Check | BD | SB | NG | TS | CR | SQ | bOS | PT | RC | SG | LS |
 |-------|----|----|----|----|----|----|-----|----|----|----|----|

@@ -1,7 +1,7 @@
 # Spring Composition Patterns — Absorbed Best Practices
 
-**Date**: April 10, 2026
-**From**: primalSpring v0.9.9 review of all 7 springs
+**Date**: April 12, 2026
+**From**: primalSpring v1.1.0 review of all 7 springs
 **For**: All springs evolving toward primal composition
 **License**: AGPL-3.0-or-later
 
@@ -336,6 +336,130 @@ non-reproducible dependency sources.
 
 ---
 
+## 13. Composition Parity Validation (SHOULD)
+
+**Source**: primalSpring `composition/mod.rs` (v0.8.0+), ludoSpring `exp068`, hotSpring `validate_nucleus_composition`
+
+The final validation layer: prove that **primal compositions** (NUCLEUS primals
+orchestrated by biomeOS) produce the same results as the spring's original
+Python baselines. At this level, the spring has **no local math** — all
+computation is delegated to primals via IPC. The spring's Rust code
+(Levels 2-4) already evolved the primals and is now fossil record.
+
+**The library** (`primalspring::composition`):
+
+```rust
+use primalspring::composition::{CompositionContext, validate_parity};
+use primalspring::tolerances;
+use primalspring::validation::ValidationResult;
+
+// Discover whatever NUCLEUS primals are running
+let mut ctx = CompositionContext::from_live_discovery();
+let mut v = ValidationResult::new("mySpring Composition Parity");
+
+// Expected value from PYTHON BASELINE (documented provenance).
+// The spring's own Rust math has retired — primals own it now.
+let python_baseline = 42.0_f64;
+
+// Does the primal composition produce the same result?
+validate_parity(
+    &mut ctx, &mut v,
+    "my_computation",
+    "tensor",                    // capability (not primal name)
+    "tensor.matmul",             // JSON-RPC method
+    serde_json::json!({...}),    // params
+    "value",                     // result key in response
+    python_baseline,             // from documented Python run
+    tolerances::CPU_GPU_PARITY_TOL,
+);
+
+v.finish_and_exit();
+```
+
+**Key properties**:
+- **Capability-based**: call by capability ("tensor"), not primal name ("barracuda")
+- **Graceful**: if the primal isn't running, the check records SKIP, not FAIL
+- **Named tolerances**: 7 documented tolerance constants covering exact parity through stochastic algorithms
+- **No primal imports**: springs never `cargo add barracuda` — they call through the composition layer
+
+**Named tolerance ladder** (`primalspring::tolerances`):
+
+| Constant | Value | Use Case |
+|----------|-------|----------|
+| `EXACT_PARITY_TOL` | 0.0 | Deterministic integer math |
+| `DETERMINISTIC_FLOAT_TOL` | 1e-15 | Pure CPU f64, same operation order |
+| `DF64_PARITY_TOL` | 1e-14 | barraCuda df64 emulated precision |
+| `CPU_GPU_PARITY_TOL` | 1e-10 | CPU f64 vs GPU WGSL (FMA/rounding divergence) |
+| `IPC_ROUND_TRIP_TOL` | 1e-10 | JSON serialization edge cases |
+| `WGSL_SHADER_TOL` | 1e-6 | f32 shader output vs f64 baseline |
+| `STOCHASTIC_SEED_TOL` | 1e-6 | Seeded PRNG algorithms (Monte Carlo, HMC) |
+
+**Update (April 12, 2026)**: Wire contracts now exist for tensor (barraCuda Sprint 42),
+shader (coralReef Iter 80), and dispatch (toadStool S203). Remaining gap: crypto,
+storage, and discovery response schemas.
+
+---
+
+## §14: NUCLEUS Composition Parity Experiment (SHOULD)
+
+After absorbing a proto-nucleate graph, each spring should create a composition
+parity experiment. This is the **next layer of validation** — proving that the
+same science works when composed from NUCLEUS primals rather than local Rust math.
+
+**Reference implementation**: `primalSpring/experiments/exp094_composition_parity/`
+
+**Pattern**:
+
+```rust
+use primalspring::composition::{CompositionContext, validate_parity};
+use primalspring::tolerances;
+use primalspring::validation::ValidationResult;
+
+fn main() {
+    ValidationResult::new("mySpring — NUCLEUS Composition Parity")
+        .with_provenance("myspring_composition", "2026-04-12")
+        .run("mySpring: NUCLEUS parity", |v| {
+            let mut ctx = CompositionContext::from_live_discovery();
+
+            // Tower: verify trust boundary
+            v.section("Tower");
+            tower_alive(&mut ctx, v);
+
+            // Niche: your domain-specific composition checks
+            v.section("Niche");
+            validate_parity(
+                &mut ctx, v,
+                "my_computation",
+                "tensor",
+                "tensor.matmul",
+                serde_json::json!({"a": my_a, "b": my_b}),
+                "value",
+                python_baseline,
+                tolerances::CPU_GPU_PARITY_TOL,
+            );
+        });
+}
+```
+
+**Live deployment tested** (April 12, 2026): exp094 discovered 8 capabilities
+from a running NUCLEUS (security, discovery, compute, storage, shader, ai,
+commit, provenance). Results: 7 PASS, 5 FAIL (wire format gaps), 7 SKIP
+(barraCuda/rhizoCrypt not yet wired). All failures are upstream protocol gaps
+being tracked in `primalSpring/docs/PRIMAL_GAPS.md`.
+
+**Key findings for springs**:
+- Health format varies: `{"alive":true}` vs `{"status":"alive"}` — handle both
+- BearDog returns base64-encoded hashes (not hex)
+- Songbird uses `ipc.resolve` (not `capability.resolve`)
+- NestGate/ToadStool may close UDS after one response — reconnect pattern needed
+- coralReef reports 11 GPU architectures via `shader.compile.capabilities`
+
+**Niche starter patterns**: See `primalSpring/graphs/downstream/NICHE_STARTER_PATTERNS.md`
+for domain-specific examples (hotSpring QCD, neuralSpring ML, healthSpring enclaves,
+wetSpring genomics).
+
+---
+
 ## Pattern Adoption Checklist
 
 When starting a composition evolution session on any spring:
@@ -352,6 +476,9 @@ When starting a composition evolution session on any spring:
 - [ ] Standalone mode support (no-primal fallback)
 - [ ] `deny.toml` with C/FFI bans + CI enforcement (`cargo deny check`)
 - [ ] Inference methods use `inference.*` namespace (not `ai.*`)
+- [ ] Composition parity validation (§13) using `primalspring::composition`
+- [ ] **NUCLEUS composition experiment (§14)** — live deployment parity test
+- [ ] Hand back gaps to primalSpring via wateringHole handoff
 
 ---
 
