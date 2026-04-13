@@ -191,25 +191,25 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 ### coralReef - Shader Compiler Primal
 
-**Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
+**Domain**: GPU shader compilation — WGSL/SPIR-V/GLSL to native GPU binary  
 **Phase**: Foundation  
-**Status**: Phase 10 Iteration 59 (A+) — 3038 tests passed, 0 failed, 65.8% line coverage (79.6% non-hardware), 72.9% function coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync), `GpuContext::from_vfio()` convenience API, UVM dispatch pipeline, `KernelCacheEntry` + `dispatch_precompiled()` (zero-copy `Bytes`), SCM_RIGHTS fully safe (rustix AsFd, zero unsafe in ember/ipc), DmaBuffer `Arc<OwnedFd>` (consolidated fd safety), clone audit (shader_model 29→0, bdf `Arc<str>`, lower_f64/naga_translate SSARef refs), `#[forbid(unsafe_code)]` on 8/9 crates, zero clippy warnings (pedantic+nursery -D warnings), zero doc warnings, zero fmt drift, all files <1000 lines, AGPL-3.0-only, `.cursor/rules` with wateringHole standards, cross-primal e2e test, nak-ir-proc trybuild tests, hardware: 2× Titan V (VFIO) + RTX 5060 (nvidia-drm)
+**Status**: Phase 10 Iteration 80 (A+) — 4,467 tests passed, 0 failed, ~65% line coverage (~82% non-hardware), 11 GPU architectures (NVIDIA SM35-SM120 + AMD GCN5/RDNA2-4), wire contract documented (`SHADER_COMPILE_WIRE_CONTRACT.md`), `CompilationInfo` in IPC responses, BTSP Phase 2 complete, ecoBin v3 `deny.toml` enforced (ring/openssl/C-sys banned), zero `Result<_, String>` in production, zero `.unwrap()` in library code, zero TODO/FIXME/HACK, `#[forbid(unsafe_code)]` on 10/11 crate roots, zero clippy warnings (pedantic+nursery), zero doc warnings, all files <1000 lines, AGPL-3.0-or-later, hardware: 2× Titan V (VFIO) + RTX 4070 (nvidia-drm)
 
-**Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL, SPIR-V, and GLSL compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM70-SM89). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified. coralDriver provides userspace GPU dispatch via DRM ioctl (AMD amdgpu, NVIDIA nouveau, nvidia-drm/UVM) and VFIO direct BAR0/DMA dispatch (maximum sovereignty). coralGpu unifies compilation and dispatch into a single API with sovereign driver preference (vfio > nouveau > amdgpu > nvidia-drm). Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
+**Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL, SPIR-V, and GLSL compute shaders to native GPU binaries with full f64 transcendental support. NVIDIA backend complete (SM35–SM120: Kepler through Blackwell). AMD backend operational (GCN5/GFX906, RDNA2/GFX1030 — MI50 and RX 6950 XT E2E verified). coralDriver provides userspace GPU dispatch via DRM ioctl (AMD amdgpu, NVIDIA nouveau, nvidia-drm/UVM) and VFIO direct BAR0/DMA dispatch (maximum sovereignty). coralGpu unifies compilation and dispatch into a single API with sovereign driver preference (vfio > nouveau > amdgpu > nvidia-drm). Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
-| **IPC** | `shader.compile.spirv`, `shader.compile.wgsl`, `shader.compile.wgsl.multi`, `shader.compile.status`, `shader.compile.capabilities` — JSON-RPC 2.0 + tarpc (TCP/Unix socket), zero-copy `bytes::Bytes` payloads, differentiated error codes, FMA policy control |
-| **NVIDIA Backend** | SM70-SM89 (Volta through Ada), SASS binary output, f64 transcendentals via Newton-Raphson (sqrt, rcp, exp2, log2, sin, cos) |
-| **AMD Backend** | RDNA2 GFX1030, native `v_fma_f64`/`v_sqrt_f64`/`v_rcp_f64`, 1446 ISA opcodes (Rust-generated from AMD XML) |
-| **Compiler Core** | naga frontend, SSA IR, copy propagation, DCE, register allocation, vendor-specific legalization and encoding |
-| **coralDriver** | AMD DRM ioctl (GEM, PM4, BO list, CS submit, fence sync) — **E2E verified on RX 6950 XT**, NVIDIA nouveau (channel, GEM, pushbuf, QMD), nvidia-drm/UVM (RM alloc, GPFIFO, USERD), VFIO (BAR0 + DMA + GPFIFO + sync) — pure Rust, zero libc |
-| **coralGpu** | Unified compile + dispatch API — vendor-agnostic `GpuContext` |
-| **f64 Lowering** | Full f64 transcendental suite: sqrt, rcp, exp2, log2, sin, cos, exp, log, pow — NVIDIA (DFMA software) + AMD (native hardware) |
-| **93/93 Cross-Spring Shaders** | Compiles shaders from hotSpring, groundSpring, neuralSpring, wetSpring, airSpring, healthSpring to native SM70 SASS (all resolved Iter 31) |
-| **AMD E2E Pipeline** | WGSL → compile → PM4 dispatch → GPU execution → host readback — verified on RX 6950 XT (RDNA2 GFX1030) |
+| **IPC** | `shader.compile.wgsl`, `shader.compile.spirv`, `shader.compile.wgsl.multi`, `shader.compile.status`, `shader.compile.capabilities`, `health.check`, `health.liveness`, `health.readiness`, `identity.get`, `capability.list`, `capability.register`, `ipc.heartbeat` — JSON-RPC 2.0 + tarpc (TCP/Unix socket), zero-copy `bytes::Bytes` payloads, differentiated error codes, `CompilationInfoResponse` (GPR count, instruction count, shared mem, barriers, workgroup size), FMA policy control |
+| **NVIDIA Backend** | SM35–SM120 (Kepler through Blackwell), SASS binary output, f64 transcendentals via Newton-Raphson (sqrt, rcp, exp2, log2, sin, cos, exp, log, pow, tan, atan, asin, acos, sinh, cosh, tanh) |
+| **AMD Backend** | GCN5 (MI50) + RDNA2–RDNA4, native `v_fma_f64`/`v_sqrt_f64`/`v_rcp_f64`, 1,446 ISA opcodes (Rust-generated from AMD XML) |
+| **Compiler Core** | naga frontend, SSA IR, copy propagation, DCE, instruction scheduling, register allocation, vendor-specific legalization and encoding |
+| **coralDriver** | AMD DRM ioctl (GEM, PM4, BO list, CS submit, fence sync) — **E2E verified on RX 6950 XT + MI50**, NVIDIA nouveau (sovereign + new UAPI), nvidia-drm/UVM (RM alloc, GPFIFO, USERD), VFIO (BAR0 + DMA + GPFIFO + sync, staged sovereign init) — pure Rust, zero libc |
+| **coralGpu** | Unified compile + dispatch API — vendor-agnostic `GpuContext`, multi-GPU auto-detect |
+| **f64 Lowering** | Full f64 transcendental suite: sqrt, rcp, exp2, log2, sin, cos, exp, log, pow, tan, atan, asin, acos, sinh, cosh, tanh, Complex64 — NVIDIA (DFMA software) + AMD (native hardware) |
+| **Wire Contract** | `docs/SHADER_COMPILE_WIRE_CONTRACT.md` — authoritative JSON-RPC/tarpc schemas, error codes, multi-stage ML pipeline composition patterns |
+| **Security** | BTSP Phase 2 (BearDog delegation), `deny.toml` C/FFI bans, `#[forbid(unsafe_code)]` on all non-driver crates, env-configurable socket/heartbeat/namespace, zero hardcoded primal names |
 
 **Participates In**: Sovereign Compute Pipeline (barraCuda → toadStool → coralReef → native binary → coralDriver → hardware)
 
@@ -435,7 +435,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
+| coralReef | Phase 10 Iteration 80 (4,467 tests, ~65% line / ~82% non-hw coverage, 11 GPU archs, wire contract documented, CompilationInfo IPC, BTSP Phase 2, ecoBin v3 deny.toml, zero warnings, all files <1000 LOC) |
 | primalSpring | v0.7.0 Phase 13 (53 experiments, 10 tracks, 360 tests, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, cross-gate deployment tooling: build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health, LAN deployment guide, zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
