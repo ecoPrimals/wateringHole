@@ -88,3 +88,13 @@ All registered in `capability_registry.toml` and advertised via `capabilities.li
 - **wetSpring / neuralSpring**: Can now use `storage.retrieve_range` for large PDE grids and training checkpoints
 - **healthSpring / wetSpring**: Can use `namespace` parameter for cross-spring data sharing via `"shared"` namespace, or isolated storage via their own namespace
 - **All springs**: Backward compatible — existing callers that omit `namespace` get `"shared"` (same as previous flat behavior)
+
+---
+
+## Follow-up: Session 43i — Final Sovereignty Cleanup
+
+Removed the last 3 hardcoded primal names from production `.rs` files:
+- `model_cache_handlers.rs`: "BearDog" and "Songbird" in `consumed_capabilities` JSON reason strings replaced with capability-generic wording
+- `atomic/mod.rs`: "primalSpring" in doc header replaced with neutral "Audit Compliance Note"
+
+**Result**: Zero primal names in production Rust code. Zero TODO/FIXME/HACK markers. Zero stale debris.
