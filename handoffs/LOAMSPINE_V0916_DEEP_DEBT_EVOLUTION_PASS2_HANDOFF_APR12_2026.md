@@ -244,6 +244,42 @@ and `health_check_null_params_defaults_include_details_false`.
 workaround. All consumers can call `health.check` with `{}`, `null`, or
 omitted params.
 
+### Pass 6: Deep Debt — Constants, Test Refactoring, Arc<str>, Modernization
+
+**Discovery string literal → named constants:**
+- `discovered_via` field values (`"environment"`, `"dns-srv"`, `"mdns"`) moved to
+  `constants::discovery_method` module. DNS SRV metadata keys (`"priority"`,
+  `"weight"`, `"target"`, `"port"`) moved to `constants::srv_metadata`.
+- Eliminates scattered string literals across `infant_discovery/mod.rs` and
+  `backends.rs`, enabling compile-time typo detection.
+- 3 new tests: lowercase-ascii validation, distinctness, and SRV key validation.
+
+**Witness default constants:**
+- `DEFAULT_WITNESS_KIND` ("signature") and `DEFAULT_WITNESS_ENCODING` ("hex")
+  extracted as public constants in `trio_types`. Serde default functions now
+  reference the constants, ensuring the canonical values are documented.
+- 2 new tests verify deserialized defaults match constants.
+
+**Test file smart-refactoring (>800 lines):**
+- `tests_protocol.rs` (956L) → `tests_protocol_transport.rs` (~430L) +
+  `tests_protocol_wire.rs` (~500L). Split by cohesive concern: transport
+  lifecycle vs wire-format conformance.
+- `discovery/tests.rs` (899L) → `tests_registry.rs` (~330L) +
+  `tests_attestation.rs` (~570L). Split by domain: capability registry vs
+  attestation providers + TCP integration.
+- 4 remaining test files (806-885L) are borderline and test-only — left as-is.
+
+**Arc<str> for async retry closures:**
+- `ResilientDiscoveryClient::discover_capability` and `advertise_self` evolved
+  from `String` cloning (`capability.to_string()` + `.clone()` per retry) to
+  `Arc<str>` — O(1) clone per retry iteration.
+
+**`.into()` modernization:**
+- Error constructors across `resilience.rs`, `sync/mod.rs`, `error.rs`, and
+  `jsonrpc/mod.rs` updated from `"literal".to_string()` to `"literal".into()`.
+
+**All gates green:** 1,395 tests, 0 failures, 0 clippy warnings, 0 doc warnings.
+
 ---
 
 ## Remaining Debt (LOW)
@@ -285,13 +321,27 @@ omitted params.
 - `ECOSYSTEM_COMPLIANCE_MATRIX.md` — loamSpine transport/discovery/transport-line entries
 - `plasmidBin/loamspine/metadata.toml` — Version, domain, capabilities, sockets
 - `plasmidBin/manifest.lock` — Version, domain, tcp_opt_in
-- 5 root markdown docs (README, STATUS, CONTEXT, CONTRIBUTING, WHATS_NEXT) — Metrics to 1,390
+- 5 root markdown docs (README, STATUS, CONTEXT, CONTRIBUTING, WHATS_NEXT) — Metrics to 1,395
 - `crates/loam-spine-core/src/config.rs` — DiscoveryConfig::default() uses env_resolution
-- `crates/loam-spine-core/src/discovery_client/mod.rs` — Port fallbacks use env_resolution
+- `crates/loam-spine-core/src/discovery_client/mod.rs` — Port fallbacks use env_resolution, Arc<str> for retry closures
 - `showcase/SHOWCASE_QUICK_REFERENCE_CARD.md` — Deleted (duplicate of QUICK_REFERENCE.md)
 - `showcase/00_START_HERE.md` — References updated
 - `showcase/00_SHOWCASE_INDEX.md` — References updated
 - `.gitignore` — Hardened with IDE/coverage patterns
 - `crates/loam-spine-api/src/types/mod.rs` — `#[serde(default)]` on `HealthCheckRequest.include_details`
-- `crates/loam-spine-api/src/jsonrpc/mod.rs` — `deser()` null→{} normalization
+- `crates/loam-spine-api/src/jsonrpc/mod.rs` — `deser()` null→{} normalization, `.into()` for wire error
 - `crates/loam-spine-api/src/jsonrpc/tests_validation.rs` — 2 new health.check param tests
+- `crates/loam-spine-core/src/constants.rs` — `discovery_method::*` and `srv_metadata::*` constant modules + 3 tests
+- `crates/loam-spine-core/src/infant_discovery/mod.rs` — Uses discovery_method/srv_metadata constants
+- `crates/loam-spine-core/src/infant_discovery/backends.rs` — Uses discovery_method::MDNS constant
+- `crates/loam-spine-core/src/trio_types.rs` — `DEFAULT_WITNESS_KIND`/`DEFAULT_WITNESS_ENCODING` constants
+- `crates/loam-spine-core/src/trio_types_tests.rs` — 2 new witness constant tests
+- `crates/loam-spine-api/src/jsonrpc/tests_protocol.rs` — Deleted, replaced by two split files
+- `crates/loam-spine-api/src/jsonrpc/tests_protocol_transport.rs` — New: UDS/TCP/HTTP/concurrent load tests
+- `crates/loam-spine-api/src/jsonrpc/tests_protocol_wire.rs` — New: Wire-format/dispatch/notification/batch tests
+- `crates/loam-spine-core/src/discovery/tests.rs` — Deleted, replaced by two split files
+- `crates/loam-spine-core/src/discovery/tests_registry.rs` — New: Capability registry tests
+- `crates/loam-spine-core/src/discovery/tests_attestation.rs` — New: Attestation provider + TCP integration tests
+- `crates/loam-spine-core/src/resilience.rs` — `.into()` for error string literals
+- `crates/loam-spine-core/src/sync/mod.rs` — `.into()` for error string literals
+- `crates/loam-spine-api/src/error.rs` — `.into()` for error string literals
