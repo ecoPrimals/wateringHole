@@ -3,7 +3,7 @@
 **Date**: April 12, 2026
 **Sprint**: 42
 **Version**: 0.3.12
-**Tests**: 4,341 passed (14 skipped), 0 failures
+**Tests**: 4,343 passed (14 skipped), 0 failures
 **IPC Methods**: 32 registered
 **Quality Gates**: fmt ✓ clippy ✓ doc (zero warnings) ✓ deny ✓
 
@@ -79,6 +79,22 @@
 16. **Pre-existing clippy debt resolved** — `LN_2` approximation → `f32::consts::LN_2`,
     shared test helpers get `#![allow(dead_code)]` for cross-binary compilation.
 
+### Phase 4: LD-10 Resolution (BTSP Legacy Client Request Drop)
+
+17. **LD-10 resolved** — BTSP handshake guard consumed the first NDJSON line from legacy
+    (non-BTSP) JSON-RPC clients when `FAMILY_ID` was set, silently dropping the request.
+    `BtspOutcome::Degraded` now carries the consumed line. `handle_connection` replays it
+    before entering the normal read loop. `dispatch_line` helper extracted for DRY dispatch
+    logic. Both UDS and TCP accept loops updated.
+
+18. **Malformed-JSON first line** — When the BTSP guard reads a non-JSON first line, it
+    now returns `ClientLegacy` (was `Protocol`) with the consumed line for proper `-32700`
+    parse error response instead of silent drop.
+
+19. **2 new tests** — `btsp_outcome_degraded_with_consumed_line` validates consumed line
+    round-trip. `handle_connection_replay_consumed_line` validates replay produces response
+    for both replayed and subsequent stream requests.
+
 ### Comprehensive Audit Results (CLEAN)
 
 - Zero TODO/FIXME/HACK/todo!/unimplemented! markers
@@ -91,6 +107,7 @@
 - Single `unsafe` site: barracuda-spirv SPIR-V passthrough (documented, wgpu#4854)
 - All deps pure Rust (blake3=pure, no build.rs, no C/FFI)
 - All production files under 600 lines
+- LD-10 resolved: legacy JSON-RPC clients work correctly when `FAMILY_ID` is set
 
 ---
 
@@ -103,6 +120,7 @@
 
 ### toadStool
 - LD-05 fully resolved — barraCuda starts cleanly alongside ToadStool
+- LD-10 resolved — legacy JSON-RPC clients work correctly when `FAMILY_ID` is set
 - UDS mode does not attempt any TCP bind from env vars (only explicit CLI)
 - Discovery file only advertises functional transports
 - `serve_tarpc` also degrades gracefully on port collisions
