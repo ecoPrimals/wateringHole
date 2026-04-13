@@ -65,7 +65,7 @@
 | Squirrel | alpha.51 | 735 pass | READY |
 | sweetGrass | current | up to date | READY |
 | toadStool | S203 | up to date | READY |
-| biomeOS | v3.07 | 72 pass (1 env-sensitive) | READY |
+| biomeOS | v3.08 | 72 pass (1 env-sensitive) | READY — zero C deps |
 
 **None of the remaining gaps block local primalSpring work or benchScale integration.**
 
