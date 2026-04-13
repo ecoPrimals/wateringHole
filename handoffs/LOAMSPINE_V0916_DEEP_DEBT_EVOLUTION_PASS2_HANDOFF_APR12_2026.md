@@ -4,7 +4,7 @@
 
 **Date**: April 12, 2026
 **Version**: 0.9.16
-**Tests**: 1,383 (0 failures)
+**Tests**: 1,388 (0 failures)
 **Source files**: 176 `.rs` (+ 3 fuzz targets)
 **Coverage**: 90.92% line / 89.09% branch / 92.92% region
 
@@ -133,6 +133,50 @@ O(1) reference counting or structurally necessary for owned captures in
 | `cargo test --workspace` | PASS (1,383 tests, 0 failures) |
 | `cargo deny check` | PASS (advisories, bans, licenses, sources ok) |
 
+### Capability-Domain Symlink (Ecosystem Validation Pass)
+
+**Gap identified**: `ECOSYSTEM_COMPLIANCE_MATRIX.md` flagged loamSpine as "No domain
+symlink". Other primals (BearDog `crypto.sock`, Songbird `network.sock`,
+coralReef `shader.sock`/`device.sock`) already have capability-domain symlinks
+for biomeOS routing.
+
+**Fix**: New `ledger.sock → permanence.sock` symlink created on bind, cleaned
+up on graceful shutdown. Follows `PRIMAL_SELF_KNOWLEDGE_STANDARD.md` Phase 2
+pattern. Socket naming now three-tier:
+- **Primary**: `permanence.sock` (domain-based)
+- **Capability**: `ledger.sock` (biomeOS `by_capability = "ledger"` routing)
+- **Legacy**: `loamspine.sock` (backward compat)
+
+New code:
+- `primal_names.rs`: `CAPABILITY_DOMAIN = "ledger"` constant
+- `socket.rs`: `capability_domain_socket_name()`, `resolve_capability_symlink_path()`
+- `main.rs`: Symlink creation/cleanup wired alongside legacy symlink
+- 5 new tests (3 socket naming + 2 primal_names constants)
+
+### Wire Standard Promotion
+
+`CAPABILITY_WIRE_STANDARD.md` loamSpine row updated from "Partial / Partial —
+Needs top-level `methods`, `identity.get`" to "✓ / ✓ — Full L3" with complete
+attribute list. This was **stale** — loamSpine shipped `methods`, `identity.get`,
+`provided_capabilities`, `consumed_capabilities`, `cost_estimates`, and
+`operation_dependencies` in the v0.9.16 neural_api evolution.
+
+### plasmidBin Metadata Reconciled
+
+`plasmidBin/loamspine/metadata.toml`:
+- Version: 0.9.13 → **0.9.16**
+- Domain: `lineage` → **`permanence`**
+- Capabilities: 6 stale entries → **22 live methods** matching `niche.rs`
+- TCP opt-in documented, socket naming section added
+- `manifest.lock` updated (version, domain, default_port 0, tcp_opt_in)
+
+### Compliance Matrix Updated
+
+`ECOSYSTEM_COMPLIANCE_MATRIX.md` loamSpine entries corrected:
+- Transport: Added domain symlink PASS, TCP opt-in, UDS unconditional
+- Discovery: Wire L2+L3 complete, domain symlink `ledger.sock`
+- Transport line: Updated to reflect full transport suite
+
 ---
 
 ## Ecosystem Impact
@@ -180,3 +224,13 @@ O(1) reference counting or structurally necessary for owned captures in
 - 7 production files with Songbird doc cleanup
 - 5 root markdown docs reconciled
 - `STATUS.md` — Updated metrics and changelog
+- `crates/loam-spine-core/src/primal_names.rs` — `CAPABILITY_DOMAIN` constant + 2 tests
+- `crates/loam-spine-core/src/neural_api/socket.rs` — Capability-domain symlink functions
+- `crates/loam-spine-core/src/neural_api/mod.rs` — Re-export new socket functions
+- `crates/loam-spine-core/src/neural_api/tests.rs` — 3 capability-domain socket tests
+- `bin/loamspine-service/main.rs` — Capability symlink creation + shutdown cleanup
+- `CAPABILITY_WIRE_STANDARD.md` — loamSpine row L2 ✓ L3 ✓
+- `ECOSYSTEM_COMPLIANCE_MATRIX.md` — loamSpine transport/discovery/transport-line entries
+- `plasmidBin/loamspine/metadata.toml` — Version, domain, capabilities, sockets
+- `plasmidBin/manifest.lock` — Version, domain, tcp_opt_in
+- 5 root markdown docs (README, STATUS, CONTEXT, CONTRIBUTING, WHATS_NEXT) — Metrics to 1,388
