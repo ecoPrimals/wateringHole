@@ -5,7 +5,7 @@
 
 ---
 
-## Resolved This Sprint (12 items)
+## Resolved This Sprint (19 items)
 
 | Gap | Primal | Version | How |
 |-----|--------|---------|-----|
@@ -21,32 +21,32 @@
 | LD-10 BTSP guard line consumed | barraCuda | Sprint 42 | Replay consumed line |
 | LD-05 TCP AddrInUse | barraCuda | Sprint 42 | Eliminated TCP sidecar in UDS mode |
 | NG-08: Eliminate `ring` from production | NestGate | Session 43 | reqwest→ureq 3.3 + rustls-rustcrypto, pure Rust TLS |
+| BC-07: `SovereignDevice` `Auto::new()` fallback | barraCuda | Sprint 41 | 3-tier: wgpu GPU → CPU → SovereignDevice IPC |
+| BC-08: `cpu-shader` default-on | barraCuda | Sprint 40 | Default feature, ecoBin computes without wgpu |
+| CR-01: `deny.toml` C/FFI ban list | coralReef | Iter 79 | ecoBin v3 ban, cudarc behind feature gate |
+| Multi-stage ML pipeline `shader.compile.wgsl` | coralReef | Iter 80+ | 6 end-to-end tests, CompilationInfo IPC |
+| Signed capability announcements (SA-01) | BearDog | Wave 45 | Ed25519 signed attestation on discover + register |
+| `plasma_dispersion` feature-gate bug | barraCuda | Sprint 40 | Corrected to dual feature gate |
 
 ---
 
-## Remaining Open (11 items — zero high priority)
+## Remaining Open (6 items — zero high priority)
 
 ### Medium
 
 | Gap | Owner | Notes |
 |-----|-------|-------|
-| BC-07: `SovereignDevice` into `Auto::new()` fallback | barraCuda | Possibly resolved Sprint 41 — needs verification |
-| BC-08: `cpu-shader` default-on | barraCuda | Feature flag required, most compositions CPU-only |
-| CR-01: `deny.toml` C/FFI ban list | coralReef | Most likely to pull GPU C deps |
-| Multi-stage ML pipeline `shader.compile.wgsl` | coralReef | Wire contract delivered, pipeline untested |
 | `storage.retrieve` for large/streaming tensors | NestGate | OPEN |
 | Cross-spring persistent storage IPC | NestGate | OPEN |
+| `TensorSession`/`BatchGuard` adoption by springs | barraCuda | Sprint 40 renamed, migration guide pending |
 
 ### Low
 
 | Gap | Owner | Notes |
 |-----|-------|-------|
-| `plasma_dispersion` feature-gate bug | barraCuda | neuralSpring-specific |
 | 29 shader absorption candidates | barraCuda | neuralSpring pipeline |
 | RAWR GPU kernel (CPU-only) | barraCuda | groundSpring-specific |
 | Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific |
-| IPC timing for `shader.compile` | coralReef | Deployment timing |
-| ~~Signed capability announcements~~ | BearDog | **RESOLVED** Wave 45 (SA-01, unified Ed25519 identity, schema_version 2) |
 
 ---
 
@@ -54,9 +54,9 @@
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 42 Phase 6 | 3,834 pass (15 env-sensitive) | READY |
-| BearDog | Wave 46 | 14,784 pass | READY |
-| coralReef | Iter 80 | 169 pass (1 env-sensitive) | READY |
+| barraCuda | Sprint 42 Phase 7 | 3,834 pass (15 env-sensitive) | READY |
+| BearDog | Wave 47 | 37 pass | READY |
+| coralReef | Iter 80+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | deep debt pass 6 | 1,034 pass | READY |
 | rhizoCrypt | S42 | 35 pass | READY |
 | Songbird | Wave 137 | up to date | READY |
