@@ -4,8 +4,8 @@
 
 **Date**: April 12, 2026
 **Version**: 0.9.16
-**Tests**: 1,390 (0 failures)
-**Source files**: 176 `.rs` (+ 3 fuzz targets)
+**Tests**: 1,395 (0 failures)
+**Source files**: 178 `.rs` (+ 3 fuzz targets)
 **Coverage**: 90.92% line / 89.09% branch / 92.92% region
 
 ---
@@ -295,7 +295,8 @@ omitted params.
 ## Files Changed
 
 - `crates/loam-spine-api/src/jsonrpc/server.rs` — HTTP/1.1 keep-alive loop
-- `crates/loam-spine-api/src/jsonrpc/tests_protocol.rs` — 2 new HTTP tests
+- `crates/loam-spine-api/src/jsonrpc/tests_protocol_transport.rs` — UDS/TCP/HTTP transport tests (split from tests_protocol.rs)
+- `crates/loam-spine-api/src/jsonrpc/tests_protocol_wire.rs` — Wire-format/dispatch tests (split from tests_protocol.rs)
 - `crates/loam-spine-core/src/btsp/config.rs` — Provider-agnostic naming
 - `crates/loam-spine-core/src/btsp/mod.rs` — Re-export updates
 - `crates/loam-spine-core/src/btsp_tests.rs` — Updated for new APIs
@@ -345,3 +346,21 @@ omitted params.
 - `crates/loam-spine-core/src/resilience.rs` — `.into()` for error string literals
 - `crates/loam-spine-core/src/sync/mod.rs` — `.into()` for error string literals
 - `crates/loam-spine-api/src/error.rs` — `.into()` for error string literals
+
+### Pass 7: Doc Reconciliation & Debris Cleanup
+
+- **Root doc metrics aligned** across README, STATUS, CONTEXT, CONTRIBUTING, CHANGELOG
+  - Source files: 176 → **178** (all docs)
+  - Test badge: 1,383 → **1,395** (README)
+  - JSON-RPC method count reconciled to **32** (STATUS, CONTRIBUTING matched to `niche.rs` METHODS)
+  - Showcase file count: 55 → **54** (README)
+  - CHANGELOG 0.9.16 metrics corrected from stale intermediate snapshot
+- **Stale `phase1/` cross-repo links fixed** — 8 references across 5 files:
+  - `specs/00_SPECIFICATIONS_INDEX.md` — BearDog, Songbird, NestGate links + Architecture link
+  - `specs/LOAMSPINE_SPECIFICATION.md` — BearDog link
+  - `specs/INTEGRATION_SPECIFICATION.md` — BearDog, Songbird links
+  - `specs/PURE_RUST_RPC.md` — Songbird tarpc spec link (both inline and reference)
+  - `showcase/00_SHOWCASE_INDEX.md` — 5 primal showcase links (also fixed casing: songbird→songBird, toadstool→toadStool, etc.)
+- **Build artifacts cleaned**: `cargo clean` removed 9,847 files / 6.4 GiB
+- **No stale scripts, tracked artifacts, TODO/FIXME markers, or secrets found**
+- **Handoff header updated**: test count 1,390→1,395, source files 176→178
