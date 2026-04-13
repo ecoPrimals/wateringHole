@@ -4,7 +4,7 @@
 
 **Date**: April 12, 2026
 **Version**: 0.9.16
-**Tests**: 1,388 (0 failures)
+**Tests**: 1,390 (0 failures)
 **Source files**: 176 `.rs` (+ 3 fuzz targets)
 **Coverage**: 90.92% line / 89.09% branch / 92.92% region
 
@@ -223,6 +223,27 @@ entry point references updated.
 **`.gitignore` hardened:** Added `.vscode/`, `.idea/`, `coverage/`, `htmlcov/`,
 `*.lcov`, `*.rs.bk`.
 
+### Pass 5: primalSpring Audit — `health.check` Empty Params Fix
+
+**Issue (primalSpring Phase 39-41 audit):** `health.check` required
+`{"include_details": true}` or it errored. Calling with `{}` or null params
+broke deserialization. primalSpring auto-injected the param as a workaround,
+but any other consumer calling `health.check` with empty params would fail.
+
+**Fix (two-part):**
+1. `HealthCheckRequest.include_details` → `#[serde(default)]`. Defaults to
+   `false` when absent, so `{}` deserializes cleanly.
+2. JSON-RPC `deser()` function now normalizes `null` params to `{}` per
+   JSON-RPC 2.0 §4.2 ("omitted or null params means no arguments"). This
+   handles the case where `params` is `null` or completely absent.
+
+**Tests:** 2 new tests — `health_check_empty_params_defaults_include_details_false`
+and `health_check_null_params_defaults_include_details_false`.
+
+**Impact:** primalSpring can remove its `include_details` auto-injection
+workaround. All consumers can call `health.check` with `{}`, `null`, or
+omitted params.
+
 ---
 
 ## Remaining Debt (LOW)
@@ -264,10 +285,13 @@ entry point references updated.
 - `ECOSYSTEM_COMPLIANCE_MATRIX.md` — loamSpine transport/discovery/transport-line entries
 - `plasmidBin/loamspine/metadata.toml` — Version, domain, capabilities, sockets
 - `plasmidBin/manifest.lock` — Version, domain, tcp_opt_in
-- 5 root markdown docs (README, STATUS, CONTEXT, CONTRIBUTING, WHATS_NEXT) — Metrics to 1,388
+- 5 root markdown docs (README, STATUS, CONTEXT, CONTRIBUTING, WHATS_NEXT) — Metrics to 1,390
 - `crates/loam-spine-core/src/config.rs` — DiscoveryConfig::default() uses env_resolution
 - `crates/loam-spine-core/src/discovery_client/mod.rs` — Port fallbacks use env_resolution
 - `showcase/SHOWCASE_QUICK_REFERENCE_CARD.md` — Deleted (duplicate of QUICK_REFERENCE.md)
 - `showcase/00_START_HERE.md` — References updated
 - `showcase/00_SHOWCASE_INDEX.md` — References updated
 - `.gitignore` — Hardened with IDE/coverage patterns
+- `crates/loam-spine-api/src/types/mod.rs` — `#[serde(default)]` on `HealthCheckRequest.include_details`
+- `crates/loam-spine-api/src/jsonrpc/mod.rs` — `deser()` null→{} normalization
+- `crates/loam-spine-api/src/jsonrpc/tests_validation.rs` — 2 new health.check param tests
