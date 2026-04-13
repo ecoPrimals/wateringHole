@@ -1,7 +1,7 @@
 # Spring Audit Prompt — Canonical
 
 **Date**: April 13, 2026
-**Version**: v2.2 (Phase 36 — adds evolution cycle, seasonal context)
+**Version**: v2.3 (Phase 40 — adds Level 5 Composition Validation, NUCLEUS Complete)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -46,10 +46,10 @@ THE WATER CYCLE (see ECOSYSTEM_EVOLUTION_CYCLE.md for full detail):
 The ecosystem evolves like a water cycle. Primals are mountains — their
 capabilities melt down as IPC endpoints. primalSpring validates compositions.
 Domain springs (delta) absorb validated patterns and discover gaps. Gaps
-evaporate back up through primalSpring to primal teams. The current season
-is MOUNTAIN → SPRING transition: primals are stabilizing response schemas,
-primalSpring is proving composition parity, and domain springs should be
-preparing to elevate from Rust math to primal composition validation.
+evaporate back up through primalSpring to primal teams. As of April 13, 2026, NUCLEUS is COMPLETE: 12/12 primals ALIVE, 19/19
+exp094 composition parity PASS, all LD gaps RESOLVED. The current season
+is SPRING: domain springs should now elevate from Rust math to primal
+composition validation using primalspring::composition.
 
 The maturity cycle for local GPU code is:
 
@@ -128,6 +128,37 @@ infra/wateringHole/SPRING_COMPOSITION_PATTERNS.md:
   that domain math produces the same results via primal IPC as it does locally?
   Does it use named tolerances from primalspring::tolerances?
 Rate each pattern: YES / partial / not started.
+
+LEVEL 5: COMPOSITION VALIDATION (new — Phase 40):
+NUCLEUS is now complete. 12/12 primals are ALIVE with stable wire contracts.
+Springs can now validate that primal-orchestrated IPC produces the same
+results as local Rust math. This is the final maturity level.
+
+- CompositionContext: Does the spring create a CompositionContext via
+  `CompositionContext::from_live_discovery()`? This discovers all running
+  NUCLEUS primals by scanning UDS sockets.
+- validate_parity: Does the spring call `validate_parity()` with:
+  - capability-based addressing (e.g. "tensor", not "barracuda")
+  - actual wire methods (stats.mean, storage.store, crypto.hash — NOT
+    aspirational methods like tensor.attention)
+  - named tolerances from primalspring::tolerances
+  - Python baseline values with documented provenance
+- Wire method awareness: Does the spring use actual live wire methods?
+  Key methods: stats.mean (barraCuda), storage.store/storage.retrieve
+  (NestGate), crypto.hash (BearDog, returns base64), ipc.resolve
+  (Songbird, returns native_endpoint/virtual_endpoint),
+  shader.compile.capabilities (coralReef).
+  Note: tensor.matmul requires session-based tensor IDs (tensor.create
+  first) — use stats.mean for inline-data parity checks.
+- Transport mismatch handling: Does the spring handle
+  IpcError::is_transport_mismatch() gracefully (SKIP, not FAIL)?
+  Some primals use tarpc on their UDS sockets alongside JSON-RPC.
+- Phase 5 registry seeding: Does the spring's launcher seed Songbird's
+  registry via ipc.register for its primals? Does it use ipc.resolve
+  for capability-based endpoint discovery?
+- exp094 reference: Has the spring created its own composition parity
+  experiment modeled on primalSpring/experiments/exp094_composition_parity/?
+  The 19 check pattern (Tower + Node + Nest + Cross-Atomic) is the template.
 
 TEST COVERAGE:
 Target 90%+ line coverage (llvm-cov). Do we have: unit tests (analytical

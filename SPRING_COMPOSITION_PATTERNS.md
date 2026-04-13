@@ -1,7 +1,7 @@
 # Spring Composition Patterns — Absorbed Best Practices
 
-**Date**: April 12, 2026
-**From**: primalSpring v1.1.0 review of all 7 springs
+**Date**: April 13, 2026
+**From**: primalSpring v0.9.13 — Phase 40: NUCLEUS Complete (12/12 ALIVE, 19/19 exp094 PASS)
 **For**: All springs evolving toward primal composition
 **License**: AGPL-3.0-or-later
 
@@ -362,15 +362,17 @@ let mut v = ValidationResult::new("mySpring Composition Parity");
 let python_baseline = 42.0_f64;
 
 // Does the primal composition produce the same result?
+// Note: tensor.matmul requires session-based tensor IDs (tensor.create first).
+// Use stats.mean / stats.std_dev for inline-data parity checks.
 validate_parity(
     &mut ctx, &mut v,
-    "my_computation",
+    "my_mean_computation",
     "tensor",                    // capability (not primal name)
-    "tensor.matmul",             // JSON-RPC method
-    serde_json::json!({...}),    // params
-    "value",                     // result key in response
-    python_baseline,             // from documented Python run
-    tolerances::CPU_GPU_PARITY_TOL,
+    "stats.mean",                // JSON-RPC method
+    serde_json::json!({"data": [1.0, 2.0, 3.0]}),
+    "result",                    // result key in response
+    2.0_f64,                     // from documented Python run
+    tolerances::EXACT_PARITY_TOL,
 );
 
 v.finish_and_exit();
@@ -394,9 +396,12 @@ v.finish_and_exit();
 | `WGSL_SHADER_TOL` | 1e-6 | f32 shader output vs f64 baseline |
 | `STOCHASTIC_SEED_TOL` | 1e-6 | Seeded PRNG algorithms (Monte Carlo, HMC) |
 
-**Update (April 12, 2026)**: Wire contracts now exist for tensor (barraCuda Sprint 42),
-shader (coralReef Iter 80), and dispatch (toadStool S203). Remaining gap: crypto,
-storage, and discovery response schemas.
+**Update (April 13, 2026)**: All wire contracts validated live — 19/19 exp094 PASS.
+Wire methods confirmed: `stats.mean` (barraCuda), `storage.store`/`storage.retrieve`
+(NestGate), `crypto.hash` (BearDog, base64), `ipc.resolve` (Songbird, returns
+`native_endpoint`/`virtual_endpoint`), `shader.compile.capabilities` (coralReef).
+All 12 primals support UDS. `tensor.matmul` requires session-based tensor IDs
+(`tensor.create` first) — use `stats.mean` for inline-data parity checks.
 
 ---
 
@@ -429,30 +434,31 @@ fn main() {
             v.section("Niche");
             validate_parity(
                 &mut ctx, v,
-                "my_computation",
+                "my_mean_check",
                 "tensor",
-                "tensor.matmul",
-                serde_json::json!({"a": my_a, "b": my_b}),
-                "value",
-                python_baseline,
-                tolerances::CPU_GPU_PARITY_TOL,
+                "stats.mean",
+                serde_json::json!({"data": [1.0, 2.0, 3.0]}),
+                "result",
+                2.0_f64,
+                tolerances::EXACT_PARITY_TOL,
             );
         });
 }
 ```
 
-**Live deployment tested** (April 12, 2026): exp094 discovered 8 capabilities
-from a running NUCLEUS (security, discovery, compute, storage, shader, ai,
-commit, provenance). Results: 7 PASS, 5 FAIL (wire format gaps), 7 SKIP
-(barraCuda/rhizoCrypt not yet wired). All failures are upstream protocol gaps
-being tracked in `primalSpring/docs/PRIMAL_GAPS.md`.
+**Live deployment validated** (April 13, 2026): exp094 achieves **19/19 PASS, 0 FAIL,
+0 SKIP** against a running NUCLEUS (12/12 primals ALIVE). All previously identified
+gaps (LD-01 through LD-10) are RESOLVED upstream.
 
 **Key findings for springs**:
-- Health format varies: `{"alive":true}` vs `{"status":"alive"}` — handle both
-- BearDog returns base64-encoded hashes (not hex)
-- Songbird uses `ipc.resolve` (not `capability.resolve`)
-- NestGate/ToadStool may close UDS after one response — reconnect pattern needed
-- coralReef reports 11 GPU architectures via `shader.compile.capabilities`
+- Health format: all primals now respond to `health.liveness` on UDS
+- BearDog returns base64-encoded hashes (not hex) — `crypto.hash` deterministic
+- Songbird uses `ipc.resolve` with `native_endpoint`/`virtual_endpoint` response
+- NestGate/ToadStool have persistent UDS connections (no reconnect needed)
+- coralReef reports GPU architectures via `shader.compile.capabilities`
+- barraCuda: use `stats.mean` for inline-data checks; `tensor.matmul` needs session IDs
+- Phase 5 registry seeding: `nucleus_launcher.sh` seeds Songbird with all 9 core primals
+- `IpcError::is_transport_mismatch()`: gracefully handles tarpc sockets receiving JSON-RPC
 
 **Niche starter patterns**: See `primalSpring/graphs/downstream/NICHE_STARTER_PATTERNS.md`
 for domain-specific examples (hotSpring QCD, neuralSpring ML, healthSpring enclaves,

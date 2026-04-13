@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: April 12, 2026
+**Last Updated**: April 13, 2026 (Phase 41 — Pre-Downstream Gap Resolution, 12/12 ALIVE, 19/19 exp094 PASS)
 
 ---
 
@@ -44,7 +44,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Genetic Crypto** | Lineage-based key derivation, beacon seeds, family seed management |
 | **Dark Forest** | Challenge-response federation protocol |
 
-**IPC Methods**: 95 JSON-RPC methods (92 crypto + 3 introspection)  
+**IPC Methods**: 185 JSON-RPC methods including beacon, crypto, BTSP, health, capabilities, identity  
 **Dependencies**: Zero C dependencies. 100% RustCrypto suite.
 
 **Participates In**: Tower Atomic (with Songbird), NUCLEUS, RootPulse, BirdSong encryption, Dark Forest Federation
@@ -55,7 +55,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Network orchestration, discovery, and federation  
 **Phase**: Foundation  
-**Status**: Production Ready (S+, 100% security provider delegation + Pure Rust Tor, 7,265+ lib tests / ~13K total, ~72% coverage, 30 crates, ecoBin v3.0, BTSP Phase 2 complete, Wire Standard L3)
+**Status**: Production Ready (S+, 79 wire methods, 100% security provider delegation + Pure Rust Tor, 7,265+ lib tests / ~13K total, ~72% coverage, 30 crates, ecoBin v3.0, BTSP Phase 2 complete, Wire Standard L3, `ipc.resolve` returns `native_endpoint`/`virtual_endpoint`, Phase 5 registry seeding for all 9 NUCLEUS primals)
 
 **Role**: Songbird is the nervous system of the ecosystem. It handles all network communication - TLS, discovery, NAT traversal, and federation. It is the only primal that speaks to the external network directly; all others route through Songbird when external connectivity is needed.
 
@@ -86,10 +86,11 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Storage** | `storage.put`, `storage.get`, `storage.delete`, `storage.list`, `storage.exists`, `storage.metadata`, `storage.copy`, `storage.move`, `storage.quota` |
-| **Discovery** | `discovery.announce`, `discovery.query`, `discovery.list`, `discovery.metadata`, `discovery.capabilities` |
-| **Metadata** | `metadata.store`, `metadata.retrieve`, `metadata.update`, `metadata.search` |
-| **Health** | `health.check`, `health.metrics`, `health.ready`, `health.alive` |
+| **Storage** | `storage.store`, `storage.retrieve`, `storage.delete`, `storage.list`, `storage.exists`, `storage.stats`, `storage.store_blob`, `storage.retrieve_blob`, `storage.fetch_external` |
+| **Model** | `model.register`, `model.exists`, `model.locate`, `model.metadata` |
+| **Templates** | `templates.store`, `templates.retrieve`, `templates.list`, `templates.community_top` |
+| **Beacon** | `beacon.store`, `beacon.retrieve`, `beacon.list`, `beacon.delete` |
+| **Health** | `health.check`, `health.liveness`, `health.readiness`, `health` |
 
 **Storage Backends**: Filesystem, ZFS, object storage  
 **Content Addressing**: BLAKE3 hashes  
@@ -127,7 +128,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — S155b (March 15, 2026) — 20,843 workspace tests, clippy pedantic clean, all tests passing, 96+ JSON-RPC methods (dynamically built), ~83% line coverage (182K lines instrumented), BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, hw-learn pipeline (observe/distill/apply/share/status), nvpmu BAR0→RegisterAccess bridge, SPIR-V codegen safety (root-cause rename from nvvm_safety), FirmwareInventory in gpu.info, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph stability. Key recent: +558 net new tests (12 new integration test files), dependency audit (Pure Rust mandate met), unsafe code audit (all hardware-justified), coverage expansion
+**Status**: Production Ready (A++ GOLD STANDARD) — 163 JSON-RPC methods, BTSP auto-detect on all transports (LD-04 resolved), `health.liveness` fully operational, 20,843+ workspace tests, clippy pedantic clean, ~83% line coverage (182K lines instrumented), BearDog crypto delegation enforced (Node Atomic), capability-based discovery, all files < 1000 lines, hw-learn pipeline, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing
 
 **Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
@@ -424,7 +425,7 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
-**Spring Versions (as of March 11, 2026)**:
+**Spring Versions (as of April 13, 2026)**:
 
 | Spring | Version |
 |--------|---------|
@@ -436,7 +437,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.12 (4,358+ tests, 826 shaders, AGPL-3.0-or-later, 32 IPC methods, LD-05/LD-10 resolved, BTSP Phase 2, all production files <600 lines) |
 | coralReef | Phase 10 Iteration 80 (4,467 tests, ~65% line / ~82% non-hw coverage, 11 GPU archs, wire contract documented, CompilationInfo IPC, BTSP Phase 2, ecoBin v3 deny.toml, zero warnings, all files <1000 LOC) |
-| primalSpring | v0.7.0 Phase 13 (53 experiments, 10 tracks, 360 tests, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, cross-gate deployment tooling: build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health, LAN deployment guide, zero warnings, zero unsafe) |
+| primalSpring | v0.9.14 Phase 41 (443 lib tests, 13 FullNucleus capabilities, 19/19 exp094 PASS, NUCLEUS VALIDATED, Phase 5 registry seeding, cross-gate deployment tooling: build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health, LAN deployment guide, zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -521,8 +522,8 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 ### primalSpring - Coordination and Composition Validation
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
-**Phase**: Phase 13 (Cross-Gate Deployment Tooling, 87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.7.0 Phase 13 — 53 experiments, 10 tracks, 360 tests (all passing, 42 ignored live), 87/87 gates, 37 capabilities, NUCLEUS VALIDATED (Tower + Nest + Node), Graph Overlays, Squirrel Discovery, Multi-Node Bonding, cross-gate deployment (build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health), IPC resilience stack (CircuitBreaker, RetryPolicy, Transport enum, normalize_method, is_recoverable, OnceLock probes), NdjsonSink, check_relative, check_abs_or_rel, primal_names module, provenance trio circuit breaker, validate_release.sh, deny(missing_docs), 22 deploy graphs (18 single-node + 4 multi-node), MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
+**Phase**: Phase 41 (Pre-Downstream Gap Resolution — 12/12 ALIVE, 19/19 exp094 PASS)  
+**Status**: v0.9.14 Phase 41 — 443 lib tests (all passing), 53+ experiments, 19/19 exp094 composition parity PASS (0 FAIL, 0 SKIP), all LD-01 through LD-10 gaps RESOLVED, `IpcError::is_transport_mismatch()` for graceful transport handling, `CompositionContext::from_live_discovery()`, `validate_parity` with `stats.mean`/`storage.store`/`crypto.hash` wire methods, `nucleus_launcher.sh` Phase 5 registry seeding, 67+ TOML graphs across 9 subdirectories, cross-gate deployment tooling, IPC resilience stack, MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 

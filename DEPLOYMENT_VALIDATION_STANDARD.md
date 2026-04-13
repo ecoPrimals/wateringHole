@@ -1,8 +1,8 @@
 # Deployment Validation Standard
 
 **Status**: Ecosystem Standard
-**Version**: 1.0.0
-**Date**: April 5, 2026
+**Version**: v1.1.0
+**Date**: April 13, 2026
 **Authority**: wateringHole (ecoPrimals Core Standards)
 **Driven by**: plasmidBin v2026.03.25 live validation, benchScale IPC compliance testing
 
@@ -116,30 +116,33 @@ the running primal confirms them.
 
 ## Transport Discovery Matrix
 
-Live validation (April 5, 2026) revealed 5 distinct transport patterns.
-This table documents what each primal actually provides at runtime:
+Live validation (April 13, 2026 — Phase 40 NUCLEUS Complete) confirmed **ALL 12
+primals support UDS with newline-delimited JSON-RPC**. 19/19 exp094 PASS.
 
-| Primal | Newline TCP | HTTP TCP | UDS (filesystem) | UDS (abstract) | tarpc |
-|--------|------------|----------|------------------|----------------|-------|
-| bearDog | 9100 ✓ | — | ✓ (family-scoped) | — | — |
-| songBird | — | 9200 (HTTP discovery) | ✓ | — | — |
-| toadStool | — | — | ✓ (.jsonrpc.sock) | — | ✓ |
-| squirrel | — | — | — | @squirrel ✓ | — |
-| rhizoCrypt | — | 9701 (HTTP JSON-RPC) | ✓ | — | 9700 ✓ |
-| sweetGrass | — | 9720 (REST + /jsonrpc) | ✓ | — | ✓ |
-| loamSpine | — | — | — | — | ✓ |
-| nestGate | — | — | ✓ | — | — |
-| biomeOS | — | ✓ (API mode) | ✓ | — | — |
-| petalTongue | — | ✓ (web mode) | ✓ | — | — |
+| Primal | Newline TCP | HTTP TCP | UDS (filesystem) | UDS (abstract) | tarpc | Methods |
+|--------|------------|----------|------------------|----------------|-------|---------|
+| bearDog | 9100 ✓ | — | ✓ beardog-{family}.sock | — | — | 185 |
+| songBird | — | 9200 (HTTP discovery) | ✓ songbird-{family}.sock | — | — | 79 |
+| toadStool | — | — | ✓ toadstool-{family}.sock (BTSP auto-detect) | — | ✓ | 163 |
+| barraCuda | — | — | ✓ math-{family}.sock (JSON-RPC via BTSP guard) | — | ✓ | 32 |
+| coralReef | — | — | ✓ shader.sock | — | — | 10 |
+| squirrel | — | — | ✓ squirrel-{family}.sock | @squirrel | — | 30 |
+| nestGate | — | — | ✓ nestgate-{family}.sock | — | — | 30 |
+| rhizoCrypt | — | 9701 (HTTP JSON-RPC) | ✓ rhizocrypt-{family}.sock | — | 9700 ✓ | 28 |
+| sweetGrass | — | 9720 (REST + /jsonrpc) | ✓ sweetgrass-{family}.sock | — | ✓ | 32 |
+| loamSpine | — (TCP opt-in via --listen) | — | ✓ loamspine-{family}.sock | — | ✓ | 34 |
+| petalTongue | — | ✓ (web mode) | ✓ petaltongue-{family}.sock (--socket flag) | — | — | — |
+| biomeOS | — | ✓ (API mode) | ✓ biomeos.sock | — | — | — |
 
 **Standard requirement:** Every primal MUST have newline-delimited JSON-RPC
 on at least one of: filesystem UDS or TCP. HTTP-wrapped JSON-RPC does not
 satisfy this (it requires HTTP framing, breaking raw stream clients).
 
-**Current compliance:**
-- PASS: bearDog, songBird, toadStool, nestGate, petalTongue, loamSpine (UDS)
-- PARTIAL: rhizoCrypt (HTTP on TCP, not newline), sweetGrass (HTTP on TCP)
-- FAIL: squirrel (abstract-only, no filesystem socket)
+**Current compliance (April 13, 2026):**
+- PASS: **ALL 12 primals** now have UDS filesystem sockets with JSON-RPC support.
+- Key resolutions: rhizoCrypt UDS (LD-06, S37), loamSpine UDS-first (LD-09, v0.9.16),
+  petalTongue `--socket` flag (v1.6.6), barraCuda JSON-RPC via BTSP guard line (LD-10),
+  ToadStool BTSP auto-detect (LD-04), squirrel filesystem socket alongside abstract.
 
 ---
 

@@ -1,23 +1,25 @@
-# NUCLEUS Spring Alignment — Phase 36
+# NUCLEUS Spring Alignment — Phase 40 (NUCLEUS Complete)
 
 **Date**: April 13, 2026
-**From**: primalSpring v1.1.0
+**From**: primalSpring v0.9.13
 **For**: All springs, primals, and gardens
 **License**: AGPL-3.0-or-later
 
 ---
 
-## Current Season: Mountain → Spring Transition
+## Current Season: Spring (Composition Elevation)
 
-The ecosystem is transitioning from mountain season (primals stabilizing)
-to spring season (composition elevation). See `ECOSYSTEM_EVOLUTION_CYCLE.md`
-for the full water-cycle model.
+**NUCLEUS is complete.** 12/12 primals ALIVE, 19/19 exp094 composition
+parity PASS, all LD-01 through LD-10 gaps RESOLVED. The ecosystem has
+crossed from mountain (primals stabilizing) to spring (composition elevation).
 
-**What this means for springs**: Primals are closing debt and stabilizing
-response schemas. primalSpring is building composition parity tests.
-Domain springs should prepare to elevate from local Rust math to primal
-composition validation. Your proto-nucleate graph below defines what
-primals you compose — next step is proving parity through IPC.
+**What this means for springs**: All NUCLEUS primals are live with stable
+wire contracts on UDS. Springs can now run the full 12-primal stack locally
+via `nucleus_launcher.sh` and validate composition parity using
+`primalspring::composition`. Proto-nucleate graphs in
+`primalSpring/graphs/downstream/` are hardened with actual wire capabilities.
+Domain springs should now **elevate to composition validation** — proving
+that primal-orchestrated IPC produces the same results as local Rust math.
 
 ---
 
@@ -235,33 +237,41 @@ proof (graph-as-product), AI latency testing, session lifecycle.
 
 ## Composition Readiness Status
 
-Each spring is evolving toward its proto-nucleate target. This table shows
-where each spring currently stands in the **primal composition** maturity
-ladder (see `SPRING_COMPOSITION_PATTERNS.md` for the standardized patterns).
+**NUCLEUS is now fully operational** (12/12 ALIVE, 19/19 exp094 PASS). Each
+spring is evolving toward its proto-nucleate target. This table shows where
+each spring currently stands in the **primal composition** maturity ladder
+(see `SPRING_COMPOSITION_PATTERNS.md` for the standardized patterns).
 
-| Spring | Method Norm | Capability Reg | Socket Discovery | Dispatch Routing | Graph Validation | biomeOS Gate | Provenance Graceful | Niche Identity |
-|--------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| **healthSpring** | YES | YES (science+infra, cost, deps) | YES (6-tier) | YES (two-tier) | — | — | YES | YES |
-| **neuralSpring** | YES | YES (TOML + tarpc) | YES (5-tier) | partial | — | — | — | YES |
-| **wetSpring** | YES (iterative) | partial | YES | YES | — | — | YES | YES |
-| **hotSpring** | YES | partial | YES (NucleusContext) | partial | — | — | — | YES |
-| **airSpring** | partial | partial | YES | partial | — | — | YES | YES |
-| **groundSpring** | partial | partial | YES (metalForge) | — | — | YES | — | YES |
-| **ludoSpring** | — | — | partial | — | YES (recipe.rs) | — | — | partial |
+All proto-nucleate graphs have been updated with actual wire capabilities
+(April 13, 2026). Springs can now validate against live NUCLEUS.
+
+| Spring | Method Norm | Capability Reg | Socket Discovery | Dispatch Routing | Graph Validation | biomeOS Gate | Provenance Graceful | Composition Parity | Niche Identity |
+|--------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| **healthSpring** | YES | YES (science+infra, cost, deps) | YES (6-tier) | YES (two-tier) | — | — | YES | — | YES |
+| **neuralSpring** | YES | YES (TOML + tarpc) | YES (5-tier) | partial | — | — | — | — | YES |
+| **wetSpring** | YES (iterative) | partial | YES | YES | — | — | YES | — | YES |
+| **hotSpring** | YES | partial | YES (NucleusContext) | partial | — | — | — | — | YES |
+| **airSpring** | partial | partial | YES | partial | — | — | YES | — | YES |
+| **groundSpring** | partial | partial | YES (metalForge) | — | — | YES | — | — | YES |
+| **ludoSpring** | — | — | partial | — | YES (recipe.rs) | — | — | — | partial |
+| **primalSpring** | YES | YES | YES | YES | YES | N/A | YES | **19/19 PASS** | YES |
 
 **Key**: YES = pattern adopted, partial = incomplete or needs update, — = not yet started
 
 ### What Each Spring Needs Next
 
+Now that NUCLEUS is validated, each spring's priority shifts to **composition parity** — proving
+that primal-orchestrated IPC produces the same results as local Rust math.
+
 | Spring | Next Step |
 |--------|-----------|
-| **healthSpring** | Deploy graph validation against proto-nucleate; biomeOS feature gate |
-| **neuralSpring** | Complete dispatch routing (two-tier); register as Squirrel inference provider |
-| **wetSpring** | Capability registration with cost/deps; deploy graph validation |
-| **hotSpring** | Create `graphs/` directory with deploy TOMLs; full capability registration |
-| **airSpring** | Method normalization in all paths; capability registration with cost/deps |
-| **groundSpring** | Method normalization; dispatch routing; provenance graceful degradation |
-| **ludoSpring** | Method normalization; capability registration; socket discovery (tiered) |
+| **healthSpring** | Create composition parity experiment; validate `storage.store`/`storage.retrieve` + `crypto.hash` via IPC |
+| **neuralSpring** | Complete dispatch routing (two-tier); register as Squirrel inference provider; composition parity for `inference.*` |
+| **wetSpring** | Composition parity experiment with `stats.mean` + `storage.store`/`storage.retrieve` + provenance |
+| **hotSpring** | Composition parity for barraCuda `stats.*`/`tensor.*` via IPC; deploy graph in `graphs/` |
+| **airSpring** | Method normalization in all paths; composition parity for weather/soil compute |
+| **groundSpring** | Method normalization; dispatch routing; composition parity for sensor/calibration |
+| **ludoSpring** | Method normalization; capability registration; composition parity for game math |
 
 ---
 
