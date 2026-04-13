@@ -2,7 +2,7 @@
 
 **From:** coralReef  
 **To:** All primal teams, all spring teams  
-**Status:** 4467 tests passing. Wire contract documented. CompilationInfo in IPC. Socket alignment complete. Deep debt audit clean.
+**Status:** 4,477 tests passing. Wire contract documented. CompilationInfo in IPC. Socket alignment complete. Hot-path IPC allocations eliminated. Feature-gate fix for non-workspace builds. Deep debt audit clean.
 
 ---
 
@@ -118,7 +118,7 @@ Comprehensive audit confirmed the codebase is clean:
 | `cargo clippy --all-features -- -D warnings` | PASS (0 warnings) |
 | `RUSTDOCFLAGS="-D warnings" cargo doc --all-features --no-deps` | PASS |
 | `cargo deny check` | PASS (advisories ok, bans ok, licenses ok, sources ok) |
-| `cargo test --all-features` | **4467 tests**, 0 failed, 153 ignored |
+| `cargo test --all-features` | **4,477 tests**, 0 failed, 153 ignored |
 | Files >1000 LOC | 0 |
 | TODO/FIXME/HACK in .rs | 0 |
 
@@ -137,6 +137,12 @@ Comprehensive audit confirmed the codebase is clean:
 | coral-ember | `config.rs` | New `resolve_socket_dir()` |
 | coral-ember | `btsp.rs` | Delegates to centralized config |
 | primal-rpc-client | `transport.rs` | Socket-name-derived UDS Host header |
+| coralreef-core | `ipc/newline_jsonrpc.rs` | Hot-path alloc: eliminated `format!` copy and per-line `trim().to_owned()`; `#[must_use]` on `make_response` |
+| coralreef-core | `service/compile.rs` | `STATUS_SUCCESS` constant; `#[must_use]` on `parse_fma_policy` |
+| coralreef-core | `service/tests.rs` | 5 new wire contract serde roundtrip tests |
+| coral-driver | `nv/uvm_compute/types.rs` | Feature-gate fix: inline `CLFLUSH`/no-op instead of `vfio` import |
+| coral-reef | `codegen/ir/op_float/f64_ops.rs` | "placeholder" → "pseudo-op" (6 ops) |
+| coral-reef | `codegen/ir/op.rs`, `opt_instr_sched_common.rs` | "placeholder" → "pseudo-op" |
 | docs/ | `SHADER_COMPILE_WIRE_CONTRACT.md` | **New** — authoritative wire contract |
 | docs/ | `IPC_COMPOSITION_AND_LATENCY.md` | Wire contract reference, info fields in diagrams |
 

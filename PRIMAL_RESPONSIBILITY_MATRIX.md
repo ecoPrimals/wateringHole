@@ -231,7 +231,7 @@ Deploy graphs should **never** route a concern to a primal listed as OVERSTEP. U
 | sweetGrass | 1 warn | PASS | PASS | **C** | Missing `--port` alias |
 | barraCuda | 1 lint | PASS | PASS (3.8K) | n/a | SIGSEGV resolved; unfulfilled lint expectation |
 | sourDough | CLEAN | PASS | PASS (239) | **C** | Missing `deny.toml`; musl/signing |
-| coralReef | CLEAN | PASS | PASS (4.4K) | **C** | Iter 76 — license AGPL-3.0-or-later, `unsafe_code = "deny"`, smart refactoring, zero discovery violations |
+| coralReef | CLEAN | PASS | PASS (4.5K) | **C** | Iter 80 — 4,477 tests, wire contract documented, CompilationInfo IPC, BTSP Phase 2, deny.toml enforced, zero clippy/doc warnings |
 | skunkBat | CLEAN | PASS | PASS (124) | **C** | IPC server, BTSP Phase 1, Wire L2/L3. Zero hardcoded primal names. |
 
 **Discovery legend**: **C** = compliant, **P** = partial, **X** = non-compliant

@@ -122,7 +122,7 @@ Tier 4: CpuExecutor + naga-exec (pure Rust)      ← NEW: BC-08
 | BC-07 | barraCuda team | Wire `SovereignDevice::with_auto_device()` into `Auto::new()` fallback between Tier 2 and Tier 4. The trait, impl, and IPC wiring already exist — they're just not connected in the failure path | Small — plumbing only |
 | BC-08 | barraCuda team | Make `cpu-shader` feature default-on in `crates/barracuda/Cargo.toml`. All batch ops already have `#[cfg(feature = "cpu-shader")]` paths with scalar Rust fallbacks | Small — feature flag flip + CI validation |
 | BC-06 | Documentation | Architectural constraint, not a code fix. Document that ecoBin musl-static = CPU-only for wgpu. The fix IS Tiers 3 and 4 | None (doc only) |
-| CR-01 | coralReef team | Add `ring`/`openssl`/`aws-lc-sys` ban list to `deny.toml` matching the ecosystem standard | Small — policy alignment |
+| CR-01 | coralReef team | ~~Add `ring`/`openssl`/`aws-lc-sys` ban list to `deny.toml`~~ **RESOLVED** Iter 79 — 14-crate C/FFI ban list enforced, `cargo deny check` passes | ~~Small~~ Done |
 | NG-08 | NestGate team | Switch `rustls` to explicit `rustls-rustcrypto` provider (like Songbird) or replace `reqwest` with `ureq` for IPC HTTP. `ring` v0.17.14 is live in production despite `deny.toml` ban | Medium — dependency surgery |
 
 ### The Ring Parallel (Side by Side)
@@ -158,12 +158,12 @@ Tier 4: CpuExecutor + naga-exec (pure Rust)      ← NEW: BC-08
 - `cargo deny check bans` → PASS
 - All `nestgate-rpc` tests pass
 
-**CR-01: coralReef missing `deny.toml` C/FFI ban list** (Medium severity)
+**CR-01: coralReef `deny.toml` C/FFI ban list** — **RESOLVED** (Iter 79, April 11 2026)
 
-coralReef's `deny.toml` contains only license and advisory checks — no ban list
-for `ring`, `openssl`, `native-tls`, or other C/FFI crates. Every other primal
-in the ecosystem has this ban list. This is a policy gap that could allow C
-dependencies to enter coralReef undetected.
+coralReef's `deny.toml` now enforces a 14-crate C/FFI ban list matching the
+ecosystem standard: `ring`, `openssl-sys`, `aws-lc-sys`, `native-tls`, `cmake`,
+`pkg-config`, `bindgen`, `vcpkg`, `bzip2-sys`, `curl-sys`, `libz-sys`,
+`zstd-sys`, `lz4-sys`, `libsqlite3-sys`. `cargo deny check` passes.
 
 **Fix**: Add the standard ecoBin v3 ban block matching barraCuda/NestGate/Songbird.
 
@@ -211,7 +211,7 @@ cargo tree --workspace | grep -i 'libloading\|dlopen'
 | 1 | Document debt (this doc + PRIMAL_GAPS.md) | primalSpring | **Done** (April 11) |
 | 2 | NG-08 ring elimination | NestGate team | **Done** (April 11) — `reqwest` → `ureq` + `rustls-rustcrypto` |
 | 2b | Cross-spring storage IPC + ionic bond ledger | NestGate team | **Done** (April 11) — `storage.retrieve_range`, `storage.object.size`, `bonding.ledger.{store,retrieve,list}` |
-| 3 | CR-01 deny.toml alignment | coralReef team | Next sprint |
+| 3 | CR-01 deny.toml alignment | coralReef team | **Done** (Iter 79, April 11) |
 | 4 | BC-08 cpu-shader default-on | barraCuda team | Next sprint |
 | 5 | BC-07 SovereignDevice fallback wiring | barraCuda team | Sprint+1 |
 | 6 | Ecosystem `cargo deny check` CI enforcement | primalSpring (infra) | Sprint+2 |
