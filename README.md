@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: April 11, 2026
+**Last Updated**: April 13, 2026
 
 ---
 
@@ -27,7 +27,9 @@ The ecoPrimals ecosystem is organized into three layers with distinct roles:
 Primals provide. Springs validate. Gardens compose for users. Gaps flow back
 through wateringHole handoffs, driving co-evolution. See
 **`PRIMAL_SPRING_GARDEN_TAXONOMY.md`** for the full taxonomy and interaction
-contracts.
+contracts, and **`ECOSYSTEM_EVOLUTION_CYCLE.md`** for the water-cycle model
+that governs how capabilities flow between layers and what "season" the
+ecosystem is in.
 
 ---
 
@@ -392,6 +394,9 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `TOADSTOOL_SENSOR_CONTRACT.md` — `SensorEvent` IPC for petalTongue input
 - `CONTENT_CONVERGENCE_EXPERIMENT_GUIDE.md` — sweetGrass content convergence experiment
 - `CONTENT_SIMILARITY_EXPERIMENT_GUIDE.md` — sweetGrass content similarity experiment
+
+### Ecosystem Evolution
+- `ECOSYSTEM_EVOLUTION_CYCLE.md` — **The water cycle**: how capabilities flow from primals → primalSpring → springs → gardens, seasonal phases, acceleration effect, current composition elevation priorities
 
 ### Spring Composition & Evolution
 - `SPRING_COMPOSITION_PATTERNS.md` — **Standardized patterns** extracted from all 7 springs: method normalization, capability registration, tiered discovery, graph validation, niche identity

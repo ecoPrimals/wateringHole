@@ -1,7 +1,7 @@
 # Spring Audit Prompt — Canonical
 
-**Date**: April 11, 2026
-**Version**: v2.0 (Phase 34 — adds primal composition validation layer)
+**Date**: April 13, 2026
+**Version**: v2.2 (Phase 36 — adds evolution cycle, seasonal context)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -13,9 +13,10 @@ Use this prompt when spinning up a spring session. Copy the block below.
 ```
 Review this Spring's codebase, specs/, docs, and the ecosystem standards at
 ecoPrimals/infra/wateringHole/ (especially README.md,
-PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md, SCYBORG_PROVENANCE_TRIO_GUIDANCE.md,
-ECOBIN_ARCHITECTURE_STANDARD.md, PRIMAL_REGISTRY.md,
-SPRING_COMPOSITION_PATTERNS.md, and NUCLEUS_SPRING_ALIGNMENT.md).
+ECOSYSTEM_EVOLUTION_CYCLE.md, PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md,
+SCYBORG_PROVENANCE_TRIO_GUIDANCE.md, ECOBIN_ARCHITECTURE_STANDARD.md,
+PRIMAL_REGISTRY.md, SPRING_COMPOSITION_PATTERNS.md,
+NUCLEUS_SPRING_ALIGNMENT.md, and SPRING_AUDIT_PROMPT.md).
 Also review sibling springs for handoff patterns and cross-spring conventions.
 
 A Spring is a niche validation domain that proves scientific Python baselines
@@ -31,9 +32,24 @@ handoffs and shared barraCuda primitives.
 
 The evolution path is:
 
-  Python baseline → Rust validation → barraCuda CPU → barraCuda GPU →
-  fused TensorSession pipeline → sovereign dispatch (coralReef native) →
-  primal composition (NUCLEUS atomic validation)
+  Paper → Python baseline → Rust validation → barraCuda CPU → barraCuda GPU →
+  (spring Rust math evolves upstream primals, then retires as fossil record) →
+  primal composition (NUCLEUS atomic validation via IPC — no spring binary)
+
+At each stage, the spring's local code drives primal evolution. Once primals
+absorb the math, the spring validates via composition: call primals through
+IPC, compare results against original Python baselines. Springs do NOT ship
+binaries at the composition level. Gardens (esotericWebb) are the final
+downstream — pure compositions of primals via biomeOS, graph-as-product.
+
+THE WATER CYCLE (see ECOSYSTEM_EVOLUTION_CYCLE.md for full detail):
+The ecosystem evolves like a water cycle. Primals are mountains — their
+capabilities melt down as IPC endpoints. primalSpring validates compositions.
+Domain springs (delta) absorb validated patterns and discover gaps. Gaps
+evaporate back up through primalSpring to primal teams. The current season
+is MOUNTAIN → SPRING transition: primals are stabilizing response schemas,
+primalSpring is proving composition parity, and domain springs should be
+preparing to elevate from Rust math to primal composition validation.
 
 The maturity cycle for local GPU code is:
 
@@ -42,6 +58,7 @@ The maturity cycle for local GPU code is:
 The maturity cycle for primal composition is:
 
   Wire IPC → Capability discovery → Compose by capability (not name) →
+  Validate parity (primalspring::composition::validate_parity) →
   Validate against proto-nucleate graph → Hand back patterns to primalSpring
 
 Audit against all of the following:
@@ -107,6 +124,9 @@ infra/wateringHole/SPRING_COMPOSITION_PATTERNS.md:
   enforced in CI?
 - Inference namespace: Do IPC methods use `inference.*` (canonical) rather than
   `ai.*` or `model.*` for inference operations?
+- Composition parity: Does the spring use primalspring::composition to validate
+  that domain math produces the same results via primal IPC as it does locally?
+  Does it use named tolerances from primalspring::tolerances?
 Rate each pattern: YES / partial / not started.
 
 TEST COVERAGE:

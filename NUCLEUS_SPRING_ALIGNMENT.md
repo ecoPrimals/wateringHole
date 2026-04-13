@@ -1,9 +1,23 @@
-# NUCLEUS Spring Alignment — Phase 35
+# NUCLEUS Spring Alignment — Phase 36
 
-**Date**: April 11, 2026
-**From**: primalSpring v1.0.0
+**Date**: April 13, 2026
+**From**: primalSpring v1.1.0
 **For**: All springs, primals, and gardens
 **License**: AGPL-3.0-or-later
+
+---
+
+## Current Season: Mountain → Spring Transition
+
+The ecosystem is transitioning from mountain season (primals stabilizing)
+to spring season (composition elevation). See `ECOSYSTEM_EVOLUTION_CYCLE.md`
+for the full water-cycle model.
+
+**What this means for springs**: Primals are closing debt and stabilizing
+response schemas. primalSpring is building composition parity tests.
+Domain springs should prepare to elevate from local Rust math to primal
+composition validation. Your proto-nucleate graph below defines what
+primals you compose — next step is proving parity through IPC.
 
 ---
 
@@ -33,7 +47,11 @@ Bonding policies document how atomics bind within cross-atomic compositions.
 Every science spring now has a proto-nucleate graph in
 `primalSpring/graphs/downstream/` that defines its target NUCLEUS composition.
 
-Evolution ladder: **paper → python → rust → ipc → composing → composed**
+Evolution ladder: **paper → python → rust → (evolves primals) → ipc composition → composed**
+
+At each stage, the spring's local code drives primal evolution upstream. Once primals
+absorb the math, the spring retires its local Rust math and validates through composition
+only (IPC calls to NUCLEUS). There are no spring binaries at the composition level.
 
 | Spring | Version | Evolution | Tests | barraCuda | Primary Atomics | Proto-Nucleate |
 |--------|---------|-----------|-------|-----------|-----------------|----------------|
@@ -306,10 +324,47 @@ Handoffs go to `infra/wateringHole/handoffs/`.
 2. **Check atomics**: which fragments does your proto-nucleate declare?
 3. **Adopt composition patterns**: follow `infra/wateringHole/SPRING_COMPOSITION_PATTERNS.md` — method normalization, capability registration, tiered discovery, niche identity
 4. **Wire IPC**: call primals by capability, not identity
-5. **Validate composition**: run primalSpring experiments for your composition (Level 5-6 maturity)
+5. **Validate composition parity**: use `primalspring::composition::validate_parity()` to confirm your Rust math matches when executed through primal IPC (Level 5 maturity)
 6. **Evolve**: push domain-specific WGSL through coralReef, compute through toadStool
 7. **Add Squirrel**: when ready for AI, add `squirrel` to your composition — neuralSpring's inference is immediately available
-8. **Hand back**: document gaps and patterns → primalSpring → primal teams → `infra/wateringHole/handoffs/`
+8. **Hand back**: document gaps and patterns (especially response schema issues) → primalSpring → primal teams → `infra/wateringHole/handoffs/`
+
+---
+
+## Upstream Gaps That Springs Expose for Primals (April 12, 2026)
+
+As springs evolve toward Level 5 (composition parity validation), they surface
+concrete gaps in primal APIs that block full validation. These are the **active
+upstream blockers** that primal teams need to close:
+
+### Response Schema Standardization
+
+| Primal | Gap | Impact | Proposed Fix |
+|--------|-----|--------|-------------|
+| barraCuda | `tensor.*` methods return varying result keys (`"value"`, `"result"`, `"output"`) | Springs must guess the extraction key in `validate_parity()` | Standardize on `{"result": <value>}` for all math methods |
+| coralReef | `shader.compile` has no documented response format | No typed extraction possible | Define `{"result": {"binary_hash": "...", "compile_time_ms": N}}` |
+| toadStool | `compute.dispatch` result shape varies by dispatch type | Springs can't write generic composition validators | Uniform `{"result": {"values": [...], "elapsed_ms": N}}` wrapper |
+
+### IPC Wire Contracts
+
+| Gap | Owner | What Springs Need |
+|-----|-------|-------------------|
+| BatchGuard IPC wire | barraCuda | Fused multi-op pipeline results via single IPC call (not N individual calls) |
+| Method catalog with schemas | all primals | Machine-readable catalog: method name → request schema → response schema |
+| Error code standardization | all primals | Standardized JSON-RPC error codes so `IpcError` can classify without string parsing |
+
+### What This Means for Primal Teams
+
+When a spring calls `validate_parity("tensor", "tensor.matmul", ...)` and the
+result key doesn't match, the check degrades to SKIP. That's honest, but it
+means composition validation coverage stalls until the primal standardizes its
+response format. The faster primals converge on response schemas, the faster
+springs can prove their compositions work end-to-end.
+
+Primal teams should:
+1. Document their JSON-RPC response schemas in their `wateringHole/` docs
+2. Use consistent top-level keys (`result` for success, `error` for failure)
+3. Register response schemas in `infra/wateringHole/capability_registry.toml`
 
 ---
 

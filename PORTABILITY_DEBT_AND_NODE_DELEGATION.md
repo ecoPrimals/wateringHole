@@ -1,17 +1,22 @@
 # Portability Debt and Node Atomic Delegation
 
-> **Version**: v1.0.0 (April 11, 2026)
+> **Version**: v1.1.0 (April 12, 2026)
 > **Owner**: primalSpring (upstream gap registry)
 > **Audience**: All primal teams, especially barraCuda, coralReef, toadStool, NestGate
 > **See also**: `ECOBIN_ARCHITECTURE_STANDARD.md`, `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md`
 
 ## Summary
 
-ecoPrimals has three classes of non-portable external dependency. Class 1 (C crypto)
-was solved by the Tower Atomic delegation pattern (BearDog + RustCrypto + IPC).
-Class 2 (GPU/Vulkan dynamic linking) is the same category of problem and requires
-the same category of solution: **Node Atomic delegation**. Class 3 (remaining C
-surfaces) contains a mix of policy gaps and acceptable feature-gated exceptions.
+ecoPrimals had three classes of non-portable external dependency. **All three are
+now resolved or documented as acceptable**:
+- **Class 1 (C crypto)**: RESOLVED — Tower Atomic delegation (BearDog + RustCrypto + IPC).
+  13/13 primals ring-free. NestGate NG-08 was the last, fixed April 11.
+- **Class 2 (GPU/Vulkan dynamic linking)**: RESOLVED — Node Atomic delegation.
+  barraCuda Sprint 41 wired `SovereignDevice` as tier 3 in `Auto::new()`. Full
+  3-tier fallback: wgpu GPU → wgpu CPU → SovereignDevice IPC. cpu-shader default-on.
+- **Class 3 (remaining C surfaces)**: RESOLVED/ACCEPTABLE — deny.toml enforced across
+  ecosystem (CR-01 Iter 79), typed errors complete (CR-04 Wave 4), dead code removed
+  (CR-05). Transitive `libc` via tokio/mio deferred until upstream mio→rustix (mio#1735).
 
 This document defines the Node Atomic delegation pattern, maps the resolution path,
 and assigns ownership to primal teams.
