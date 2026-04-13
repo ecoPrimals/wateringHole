@@ -38,14 +38,14 @@
 |-----|-------|-------|
 | `storage.retrieve` for large/streaming tensors | NestGate | OPEN |
 | Cross-spring persistent storage IPC | NestGate | OPEN |
-| `TensorSession`/`BatchGuard` adoption by springs | barraCuda | Sprint 40 renamed, migration guide pending |
+| ~~`TensorSession`/`BatchGuard` adoption by springs~~ | ~~barraCuda~~ | **RESOLVED** — Sprint 40 renamed, migration guide in BREAKING_CHANGES.md, Sprint 42 `tensor.batch.submit` IPC |
 
 ### Low
 
 | Gap | Owner | Notes |
 |-----|-------|-------|
 | 29 shader absorption candidates | barraCuda | neuralSpring pipeline |
-| RAWR GPU kernel (CPU-only) | barraCuda | groundSpring-specific |
+| ~~RAWR GPU kernel (CPU-only)~~ | ~~barraCuda~~ | **RESOLVED** — GPU shader `rawr_weighted_mean_f64.wgsl` + `RawrWeightedMeanGpu` exist |
 | Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific |
 
 ---
@@ -54,7 +54,7 @@
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 42 Phase 7 | 3,834 pass (15 env-sensitive) | READY |
+| barraCuda | Sprint 42 Phase 7 | 4,368 pass (14 skipped) | READY |
 | BearDog | Wave 47 | 37 pass | READY |
 | coralReef | Iter 80+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | deep debt pass 6 | 1,034 pass | READY |
