@@ -193,6 +193,36 @@ attribute list. This was **stale** — loamSpine shipped `methods`, `identity.ge
   on port 8080 contention. UDS-only mode is the default; TCP is explicitly
   opted into when needed. All NUCLEUS deployments can run without TCP binding.
 
+### Pass 4: Port Decoupling & Debris Cleanup
+
+**Hardcoded port constants decoupled from production callers.**
+
+`DiscoveryConfig::default()` was building fallback endpoints as
+`http://0.0.0.0:{DEFAULT_TARPC_PORT}` and `http://0.0.0.0:{DEFAULT_JSONRPC_PORT}`
+using raw constants. Now routes through `env_resolution` module (reads
+`LOAMSPINE_*_PORT` > `*_PORT` > default). `discovery_client::advertise_self()`
+port fallback similarly evolved. Constants remain only in doc examples and the
+cfg-gated `debug_assertions` dev fallback.
+
+**Full 11-dimension debt audit — all clean:**
+- Zero unsafe code (`#![forbid(unsafe_code)]` all 3 crate roots)
+- Zero `.unwrap()` / `.expect()` in production (denied by clippy)
+- Zero `TODO` / `FIXME` / `HACK` markers in all source files
+- Zero production mocks (all `#[cfg(test)]` gated)
+- Zero hardcoded primal names (BTSP default env-configurable)
+- Zero files over 1000 lines (max Rust: 956 lines)
+- Zero archive directories, IDE debris, stale scripts, build artifacts
+- 4 production `#[allow(]` — all justified with reason strings
+- Dependencies: all advisories tracked in `deny.toml`, evolution paths in
+  `specs/DEPENDENCY_EVOLUTION.md`
+
+**Showcase consolidation:** Redundant `SHOWCASE_QUICK_REFERENCE_CARD.md` (126
+lines) removed. `QUICK_REFERENCE.md` (306 lines) is canonical. Index and
+entry point references updated.
+
+**`.gitignore` hardened:** Added `.vscode/`, `.idea/`, `coverage/`, `htmlcov/`,
+`*.lcov`, `*.rs.bk`.
+
 ---
 
 ## Remaining Debt (LOW)
@@ -201,6 +231,7 @@ attribute list. This was **stale** — loamSpine shipped `methods`, `identity.ge
 - Witness chain validation under NUCLEUS mesh (composition-level, low urgency)
 - `bincode v1 → v2` migration (tracked in `specs/DEPENDENCY_EVOLUTION.md`)
 - `mdns` crate evolution (`async-std` advisories; feature-gated, optional)
+- `tarpc 0.37` opentelemetry advisory (waiting on upstream)
 
 ---
 
@@ -234,3 +265,9 @@ attribute list. This was **stale** — loamSpine shipped `methods`, `identity.ge
 - `plasmidBin/loamspine/metadata.toml` — Version, domain, capabilities, sockets
 - `plasmidBin/manifest.lock` — Version, domain, tcp_opt_in
 - 5 root markdown docs (README, STATUS, CONTEXT, CONTRIBUTING, WHATS_NEXT) — Metrics to 1,388
+- `crates/loam-spine-core/src/config.rs` — DiscoveryConfig::default() uses env_resolution
+- `crates/loam-spine-core/src/discovery_client/mod.rs` — Port fallbacks use env_resolution
+- `showcase/SHOWCASE_QUICK_REFERENCE_CARD.md` — Deleted (duplicate of QUICK_REFERENCE.md)
+- `showcase/00_START_HERE.md` — References updated
+- `showcase/00_SHOWCASE_INDEX.md` — References updated
+- `.gitignore` — Hardened with IDE/coverage patterns
