@@ -147,6 +147,11 @@ Comprehensive audit confirmed the codebase is clean:
 | coral-driver | `vfio/channel/mmu_oracle/capture.rs` | 825→654 LOC: engine register data moved to `engine_regs.rs` |
 | coral-driver | `nv/vfio_compute/acr_boot/.../boot_config.rs` | `Display` impl: inlined `write!` instead of allocating via `label()` → `format!()` |
 | coralreef-core | `service/compile.rs` | `#[must_use]` on `parse_target`, `handle_compile_spirv`, `handle_compile`, `handle_compile_wgsl`, `handle_compile_wgsl_multi` |
+| coralreef-core | `service/tests.rs` | 6 multi-stage ML pipeline composition tests (sequential 3-stage, workgroup, cross-vendor, occupancy, independence, serde roundtrip) |
+| coralreef-core | `ipc/newline_jsonrpc.rs` | `#[must_use]` on `dispatch_jsonrpc` |
+| coral-driver | `error.rs` | `#[cfg(feature = "vfio")]` on `sysfs_io`, `vbios_resource_io`, `resource_io` constructors + tests — eliminates dead_code on default builds |
+| coral-driver | `vfio/channel/mmu_oracle/capture.rs` | 11 new pure-Rust unit tests: `decode_entry_addr` (4), `EntryFlags` decode (5), serde roundtrips (2) |
+| coral-driver | `vfio/channel/mmu_oracle/engine_regs.rs` | 4 new unit tests: serde roundtrip, unique register names, unique offsets, non-empty tables |
 | docs/ | `SHADER_COMPILE_WIRE_CONTRACT.md` | **New** — authoritative wire contract |
 | docs/ | `IPC_COMPOSITION_AND_LATENCY.md` | Wire contract reference, info fields in diagrams |
 
