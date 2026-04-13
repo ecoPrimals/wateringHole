@@ -58,7 +58,7 @@ Springs focus on validation of what exists, surfacing gaps, tightening.
 - barraCuda Sprint 41: BC-07/BC-08 resolved, 3-tier GPU fallback wired
 - coralReef Iter 80: wire contract, CompilationInfo IPC, hot-path alloc eliminated, VFIO feature-gated, mmu_oracle tested, 4,504 tests
 - NestGate Session 42: ring eliminated, storage IPC stable
-- BearDog Wave 35: real Ed25519 ionic bonds, deep debt clean
+- BearDog Wave 46: signed capability announcements, deep debt sweep, 14,784+ tests
 - biomeOS v3.03: capability.resolve, inference routing, anyhow migration
 
 primalSpring is tightening: inference module archived, stale graphs removed,
