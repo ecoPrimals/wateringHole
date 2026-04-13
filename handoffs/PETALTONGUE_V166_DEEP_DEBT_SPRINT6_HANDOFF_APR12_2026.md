@@ -126,6 +126,48 @@ cargo deny check                                     ✅ (advisories, bans, lice
 
 ---
 
+## Sprint 6 Batch 2 — Dependency Evolution & Lint Graduation
+
+### Dead Dependency Removal
+
+| Crate | Dependency | Reason |
+|-------|-----------|--------|
+| `petal-tongue-entropy` | `nokhwa` + `mozjpeg-sys` | C compiler dep, video feature never wired |
+| `petal-tongue-ui` | `softbuffer`, `pixels` | `software-rendering` feature never used in code |
+| `petal-tongue-ui` | `wasm-bindgen`, `wasm-bindgen-futures`, `web-sys` | `compute-wasm` feature never used |
+| `petal-tongue-core` | `crossterm` (optional) | Never activated |
+
+**3 dead features removed**: `software-rendering`, `compute-wasm`, `video`.
+
+### Lint Graduation
+
+- **4 crates graduated** from `#![allow(missing_docs)]` → `#![warn(missing_docs)]`:
+  `petal-tongue-tui`, `petal-tongue-cli`, `petal-tongue-api`, `petal-tongue-ui-core`
+  (docs verified complete — `expect` was unfulfilled, confirming full coverage).
+- **5 conditional `#[allow(dead_code)]`** → `#[expect(dead_code, reason = "...")]`:
+  `data_service.rs`, `cache.rs`, `error.rs`, `visual_flower.rs` (2 instances).
+- **5 more `format!("{}", x)`** → `.to_string()` in `axes.rs`, `discovery_service_provider.rs`.
+
+### 6 More Test Modules Extracted
+
+| File | Before | After (prod) |
+|------|--------|-------------|
+| `output_verification.rs` | ~640 | ~400 |
+| `multimodal_stream.rs` | ~600 | ~393 |
+| `biomeos_ui_manager.rs` | ~550 | ~411 |
+| `discovered_display.rs` | ~544 | ~418 |
+| `accessibility.rs` | ~486 | ~374 |
+| `universal_discovery.rs` | ~515 | ~409 |
+
+**Total: 32 test modules extracted across sprints. Zero production files over 680 LOC.**
+
+### ~25 More Doc Comments Evolved
+
+Capability-based language across 12+ production files (traits, errors, adapters,
+mod.rs, lib.rs, Cargo.toml comments).
+
+---
+
 ## Remaining Backlog
 
 - **BTSP Phase 2**: Full handshake protocol — dedicated sprint (low urgency)
