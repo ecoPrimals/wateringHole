@@ -378,3 +378,13 @@ omitted params.
 - **`.into()` modernization**: 4 production `.to_string()` on string literals converted.
 - **Full audit**: Zero remaining hardcoded primal names in production code. `DEFAULT_BTSP_PROVIDER_PREFIX = "beardog"` remains as the protocol-standard socket prefix (what the provider actually writes), overridable via `BTSP_PROVIDER` env var.
 - **Tests**: **1,396**. All gates green.
+
+### Pass 10: Doc Reconciliation & Debris Cleanup (April 14, 2026)
+
+- **README architecture tree**: `beardog_client` → `provider_client` in btsp module listing
+- **README RPC table**: Merged `session.commit` + `commit.session` duplicate rows into single row with aliases noted (`commit.session`, `provenance.commit`)
+- **README**: "Where is BearDog?" → "Where is a specific primal?" (capability-based philosophy statement)
+- **CONTEXT**: Removed hardcoded primal names from ecosystem description, genericized crypto delegation wording. Added missing `certificate.get` to capabilities list.
+- **CONTRIBUTING**: Anti-pattern example `BearDogSigner` → `HardcodedSigner` (generic)
+- **Build artifacts cleaned**: `cargo clean` removed 10,256 files / 5.8 GiB
+- **Tests**: **1,396**. All gates green.
