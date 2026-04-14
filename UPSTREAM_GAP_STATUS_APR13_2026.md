@@ -28,6 +28,7 @@
 | Multi-stage ML pipeline `shader.compile.wgsl` | coralReef | Iter 80+ | 6 end-to-end tests, CompilationInfo IPC |
 | Signed capability announcements (SA-01) | BearDog | Wave 45 | Ed25519 signed attestation on discover + register |
 | `plasma_dispersion` feature-gate bug | barraCuda | Sprint 40 | Corrected to dual feature gate |
+| CR-02: CLI bind gap (`--bind` / `CORALREEF_IPC_HOST`) | coralReef | Iter 80 | `--bind` flag + `CORALREEF_IPC_HOST` env var; `0.0.0.0` for Docker/benchScale |
 
 ---
 
@@ -57,7 +58,7 @@
 |--------|---------|-------|--------|
 | barraCuda | Sprint 42 Phase 8 | 4,393 pass (14 skipped) | READY |
 | BearDog | Wave 47 | 37 pass | READY |
-| coralReef | Iter 80+ | 856 pass (2 env-sensitive) | READY |
+| coralReef | Iter 80 | 4,506 pass (153 hw-gated) | READY — `--bind` flag for benchScale |
 | loamSpine | deep debt pass 6 | 1,034 pass | READY |
 | rhizoCrypt | S42 | 35 pass | READY |
 | Songbird | Wave 137 | up to date | READY |
