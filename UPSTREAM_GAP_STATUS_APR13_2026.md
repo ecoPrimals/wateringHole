@@ -5,7 +5,7 @@
 
 ---
 
-## Resolved This Sprint (19 items)
+## Resolved This Sprint (20 items)
 
 | Gap | Primal | Version | How |
 |-----|--------|---------|-----|
@@ -29,6 +29,7 @@
 | Signed capability announcements (SA-01) | BearDog | Wave 45 | Ed25519 signed attestation on discover + register |
 | `plasma_dispersion` feature-gate bug | barraCuda | Sprint 40 | Corrected to dual feature gate |
 | CR-02: CLI bind gap (`--bind` / `CORALREEF_IPC_HOST`) | coralReef | Iter 80 | `--bind` flag + `CORALREEF_IPC_HOST` env var; `0.0.0.0` for Docker/benchScale |
+| SQ-04: `--port` TCP bind hardcoded to 127.0.0.1 | Squirrel | alpha.52 | `--bind` CLI flag + `SQUIRREL_BIND`/`SQUIRREL_IPC_HOST` env vars. Docker: `--bind 0.0.0.0` |
 
 ---
 
@@ -64,7 +65,7 @@
 | Songbird | Wave 137 | up to date | READY |
 | NestGate | Session 43g | 291 pass (26 ignored) | READY (NG-08 resolved) |
 | petalTongue | current | up to date | READY |
-| Squirrel | alpha.51 | 735 pass | READY |
+| Squirrel | alpha.52 | 7,003 pass | READY — SQ-04 resolved (`--bind` flag for Docker TCP); 9 files smart-refactored, hardcoding eliminated |
 | sweetGrass | current | up to date | READY |
 | toadStool | S203 | up to date | READY |
 | biomeOS | v3.13 | 7,000+ pass | READY — deep debt evolution: hardcoding→capability-based, deprecated removal, live probes |
