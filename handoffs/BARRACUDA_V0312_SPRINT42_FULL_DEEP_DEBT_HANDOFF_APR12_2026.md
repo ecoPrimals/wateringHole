@@ -174,7 +174,15 @@
     tensor parameter validation, FHE degree overflow, batch pre-validation,
     std_dev edge cases, perlin3d missing params, compute dispatch non-string
     tensor_id + empty op, whitespace batch, and more.
-23. **4,377 tests pass**, all quality gates green.
+23. **4,377 tests pass** (Phase 5–9), all quality gates green.
+
+### Phase 10: BC-09 Docker TCP Bind (Apr 13 2026)
+
+24. **BC-09 resolved** — `--port` previously hardcoded `127.0.0.1`, bypassing
+    `BARRACUDA_IPC_HOST` env var. New `resolve_bind_host()` function checks the
+    env var first, falling back to `127.0.0.1`. Docker containers can set
+    `BARRACUDA_IPC_HOST=0.0.0.0` for cross-container TCP probes. Secure default
+    preserved. 2 new tests. **4,379 tests pass**.
 
 ---
 

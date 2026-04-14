@@ -23,6 +23,7 @@
 | NG-08: Eliminate `ring` from production | NestGate | Session 43 | reqwest→ureq 3.3 + rustls-rustcrypto, pure Rust TLS |
 | BC-07: `SovereignDevice` `Auto::new()` fallback | barraCuda | Sprint 41 | 3-tier: wgpu GPU → CPU → SovereignDevice IPC |
 | BC-08: `cpu-shader` default-on | barraCuda | Sprint 40 | Default feature, ecoBin computes without wgpu |
+| BC-09: `--port` Docker TCP bind | barraCuda | Sprint 42 | `resolve_bind_host()` respects `BARRACUDA_IPC_HOST` for cross-container TCP |
 | CR-01: `deny.toml` C/FFI ban list | coralReef | Iter 79 | ecoBin v3 ban, cudarc behind feature gate |
 | Multi-stage ML pipeline `shader.compile.wgsl` | coralReef | Iter 80+ | 6 end-to-end tests, CompilationInfo IPC |
 | Signed capability announcements (SA-01) | BearDog | Wave 45 | Ed25519 signed attestation on discover + register |
@@ -54,7 +55,7 @@
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 42 Phase 8 | 4,377 pass (14 skipped) | READY |
+| barraCuda | Sprint 42 Phase 8 | 4,379 pass (14 skipped) | READY |
 | BearDog | Wave 47 | 37 pass | READY |
 | coralReef | Iter 80+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | deep debt pass 6 | 1,034 pass | READY |

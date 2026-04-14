@@ -154,10 +154,10 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 - **Songbird**: Fmt **CLEAN** ↑ (was 2 diffs). Commented-out code **CLEAN** ↑ (Wave 124 scrub). 7,265+ lib tests, 0 failed. All 30 crates clippy pedantic+nursery zero warnings. 4 largest files smart-refactored (Wave 133). BTSP Phase 2 complete (Wave 132).
 - **NestGate**: Fmt **PASS**. Clippy CLEAN. License `-or-later`. 11,856+ tests pass. BTSP Phase 2 wired. NG-01/NG-03 resolved. `uzers` → `rustix`. 81 hardcoded strings fixed. Zero TODO/FIXME.
 - **ToadStool**: **Major turnaround.** Clippy **CLEAN** (was 2 errors). Fmt **1 diff** (was ~1,899). License updated to `-or-later`. `tar` dep updated.
-- **barraCuda**: E0061 **FIXED** (Sprint 29). All files under 600 lines. Clippy clean. 4,371 tests pass. 32 IPC methods. Domain-based socket naming (math.sock). LD-05/LD-10 resolved. BTSP Phase 2. 12-axis deep debt: clean bill.
+- **barraCuda**: E0061 **FIXED** (Sprint 29). All files under 600 lines. Clippy clean. 4,379 tests pass. 32 IPC methods. Domain-based socket naming (math.sock). LD-05/LD-10 resolved. BTSP Phase 2. 12-axis deep debt: clean bill.
 - **coralReef**: Clippy **CLEAN** (was 7 errors). 8 warnings resolved in `coral-gpu` tests. License updated to `-or-later`.
 - **Squirrel**: Clippy CLEAN. fmt PASS. 6,868 tests pass. Commented-out code remains minor residual.
-- **biomeOS**: v3.08 — 7,784 tests. All BM-01 through BM-11 RESOLVED. Zero C/FFI dependencies (gethostname → rustix::system::uname()). `graph.execute` cross-gate validation enforced (no silent local fallback). Songbird mesh state probing in `composition.health`. `PrimalOperationExecutor` migrated to native RPITIT async fn. `async-trait` removed from biomeos-types, moved to dev-deps in biomeos-api. Test extraction: 8 files >800 LOC → sibling test pattern (all <835 LOC). `--port` honored in api/nucleus modes (TCP+UDS). Zero-debt: 0 unsafe, 0 production mocks, 0 TODO/FIXME, 0 hardcoded primal names, 0 C deps, 0 `#[allow(` in production.
+- **biomeOS**: v3.07 — 7,784 tests. All BM-01 through BM-11 RESOLVED. `graph.execute` cross-gate validation enforced (no silent local fallback). Songbird mesh state probing in `composition.health`. `PrimalOperationExecutor` migrated to native RPITIT async fn. `async-trait` removed from biomeos-types, moved to dev-deps in biomeos-api. Test extraction: 8 files >800 LOC → sibling test pattern (all <835 LOC). `--port` honored in api/nucleus modes (TCP+UDS). Zero-debt: 0 unsafe, 0 production mocks, 0 TODO/FIXME, 0 hardcoded primal names, 0 `#[allow(` in production.
 - **petalTongue**: All clean. 1 flaky test (`test_resolve_instance_id_error_message_invalid` — passes on retry).
 - **rhizoCrypt**: Clippy **CLEAN** (39 `doc_markdown` warnings resolved). All clean.
 - **sweetGrass**: Clippy **CLEAN** (unused import fixed). License updated to `-or-later`. `.cargo/config.toml` target-dir still points to `/home/southgate/` (non-blocking).
@@ -428,7 +428,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **barraCuda** | — | — | — |
 | **coralReef** | 7 clippy errors in tests | License → `-or-later` | No CONTEXT.md |
 | **Squirrel** | Discovery: 1,789 primal-name refs | Overstep: sled/sqlx/ed25519 beyond domain | 19 commented-out code lines |
-| **biomeOS** | 71 `#[async_trait]` blocked by dyn dispatch (1 migrated to RPITIT) | `tools/` edition 2021 | Zero C deps (v3.08) |
+| **biomeOS** | 71 `#[async_trait]` blocked by dyn dispatch | `tools/` edition 2021 | — |
 | **petalTongue** | Discovery: 982 primal-name refs | No CONTEXT.md | 32 `#[allow(` → `#[expect(` |
 | **rhizoCrypt** | ~~Health triad missing~~ → **live-validated PASS** | ~~musl binary is glibc~~ → musl-static shipped | ~~reqwest~~ → hyper/tower (session 28) |
 | **sweetGrass** | No `--port` (HTTP-only TCP) | Health triad HTTP-only (not newline) | License → `-or-later` |
