@@ -67,7 +67,7 @@
 | Squirrel | alpha.51 | 735 pass | READY |
 | sweetGrass | current | up to date | READY |
 | toadStool | S203 | up to date | READY |
-| biomeOS | v3.11 | 7,000+ pass | READY — zero C deps, capability-based resolution, TCP-only bootstrap fixed |
+| biomeOS | v3.12 | 7,000+ pass | READY — Tower Atomic relay forwarding, recursive graph.list, benchScale validated |
 
 **None of the remaining gaps block local primalSpring work or benchScale integration.**
 
