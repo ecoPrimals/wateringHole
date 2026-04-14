@@ -371,3 +371,10 @@ omitted params.
 - **Fix**: Added `"provenance.commit"` to `normalize_method()` alias table, mapping to `"session.commit"`. Same pattern as existing `"commit.session"` alias.
 - **Test**: 1 new integration test `provenance_commit_alias_dispatches_to_session_commit` — creates a spine, commits via `provenance.commit`, verifies successful dispatch through the full JSON-RPC path.
 - **Tests**: 1,395 → **1,396** (+1). All gates green.
+
+### Pass 9: BTSP Provider Decoupling & Modernization (April 14, 2026)
+
+- **BTSP provider decoupling**: `beardog_client.rs` renamed to `provider_client.rs`. All internal identifiers (`beardog_call`, `beardog_socket`, `beardog_roundtrip`, etc.) renamed to provider-agnostic equivalents. "BearDog" in error messages/doc comments evolved to "BTSP provider". `BEARDOG_SOCKET` env var superseded by `BTSP_PROVIDER_SOCKET` (backward compat preserved). Unused `beardog_socket()` accessor removed.
+- **`.into()` modernization**: 4 production `.to_string()` on string literals converted.
+- **Full audit**: Zero remaining hardcoded primal names in production code. `DEFAULT_BTSP_PROVIDER_PREFIX = "beardog"` remains as the protocol-standard socket prefix (what the provider actually writes), overridable via `BTSP_PROVIDER` env var.
+- **Tests**: **1,396**. All gates green.
