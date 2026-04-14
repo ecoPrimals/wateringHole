@@ -57,7 +57,7 @@
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
 | barraCuda | Sprint 42 Phase 8 | 4,393 pass (14 skipped) | READY |
-| BearDog | Wave 47 | 37 pass | READY |
+| BearDog | Wave 49 | 14,784 pass | READY |
 | coralReef | Iter 80 | 4,506 pass (153 hw-gated) | READY — `--bind` flag for benchScale |
 | loamSpine | deep debt pass 6 | 1,034 pass | READY |
 | rhizoCrypt | S42 | 35 pass | READY |
