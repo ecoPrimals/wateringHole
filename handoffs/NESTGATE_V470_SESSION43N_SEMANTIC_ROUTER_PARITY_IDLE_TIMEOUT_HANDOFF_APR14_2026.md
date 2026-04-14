@@ -33,23 +33,29 @@ UDS implementation behavior (base64 encoding, `_blobs/` path layout, 4 MiB max c
 underscore-prefix filtering for namespaces). Updated `semantic_router/capabilities.rs`
 to advertise all 5 methods.
 
-### Finding 2: Idle timeout — half-open connections stay alive indefinitely
+### Finding 2: Half-open connections stay alive indefinitely → event-driven lifecycle
 
-**Root cause**: All 3 keep-alive read loops (`json_rpc_keep_alive_loop` in isomorphic
-server, `json_rpc_loop` in legacy server, `handle_tcp_connection` in TCP fallback)
-performed bare `reader.read_until(b'\n', ...)` with no timeout. A client that connects
-and stops sending data holds the connection open forever.
+**Root cause**: All 3 keep-alive read loops performed bare `reader.read_until(b'\n', ...)`
+with no idle detection. A client that connects and stops sending data holds the
+connection open forever.
 
-**Fix**: Wrapped all 3 read operations with `tokio::time::timeout(Duration::from_secs(300))`.
-Connections idle for 5 minutes are automatically closed with a debug log. The 300s timeout
-is generous enough for legitimate interactive sessions while preventing resource exhaustion
-from abandoned connections.
+**Fix (evolved)**: Replaced brute-force `tokio::time::timeout()` wrapping with proper
+`tokio::select!`-based event loops. This is fundamentally different:
 
-| Server Path | Timeout | Location |
-|------------|---------|----------|
-| Isomorphic UDS | 300s | `isomorphic_ipc/server.rs::IDLE_TIMEOUT` |
-| Legacy `JsonRpcUnixServer` | 300s | `unix_socket_server/mod.rs::IDLE_TIMEOUT` |
-| TCP fallback | 300s | `isomorphic_ipc/tcp_fallback.rs::TCP_IDLE_TIMEOUT` |
+- **`tokio::select!`** multiplexes I/O readiness and idle detection as discrete events
+- **Resettable idle timer** via `pin!(sleep)` + `.reset()` — models "time since last
+  activity" as explicit connection state, resets on every request
+- **Graceful close**: before disconnecting, the server sends a `connection.closing`
+  JSON-RPC notification with `reason`, `idle_timeout_secs`, and `requests_served`,
+  giving clients the opportunity to reconnect or flush pending work
+- **Extensible**: adding shutdown channels or rate-limit events is a single `select!`
+  arm addition — no restructuring needed
+
+| Server Path | Idle Limit | Pattern | Location |
+|------------|-----------|---------|----------|
+| Isomorphic UDS | 300s | `select!` + `pin!(sleep)` | `isomorphic_ipc/server.rs::CONNECTION_IDLE_LIMIT` |
+| Legacy `JsonRpcUnixServer` | 300s | `select!` + `pin!(sleep)` | `unix_socket_server/mod.rs::CONNECTION_IDLE_LIMIT` |
+| TCP fallback | 300s | `select!` + `pin!(sleep)` | `isomorphic_ipc/tcp_fallback.rs::CONNECTION_IDLE_LIMIT` |
 
 ---
 
@@ -59,8 +65,10 @@ from abandoned connections.
    `storage.namespaces.list` should now return valid results via semantic router path.
    Re-run validation against NestGate at this commit.
 
-2. **exp082 (idle timeout)**: Half-open connections will now close after 5 minutes.
-   Verify with a connect-then-idle test pattern.
+2. **exp082 (idle timeout)**: Connections now receive a `connection.closing` JSON-RPC
+   notification before teardown after 5 minutes idle. Clients can listen for this
+   notification to distinguish idle-close from network failure. Verify with a
+   connect-then-idle test pattern.
 
 3. **PRIMAL_GAPS.md**: Remove "streaming methods not registered" and "idle timeout"
    from NestGate findings. Remaining tracked items: coverage 80→90%, 187 deprecated
