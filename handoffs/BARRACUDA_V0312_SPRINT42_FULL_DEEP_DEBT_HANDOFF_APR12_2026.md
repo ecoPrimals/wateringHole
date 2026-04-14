@@ -182,7 +182,17 @@
     `BARRACUDA_IPC_HOST` env var. New `resolve_bind_host()` function checks the
     env var first, falling back to `127.0.0.1`. Docker containers can set
     `BARRACUDA_IPC_HOST=0.0.0.0` for cross-container TCP probes. Secure default
-    preserved. 2 new tests. **4,379 tests pass**.
+    preserved. 2 new tests. 4,379 tests pass.
+
+### Phase 11: Runtime Extraction & Coverage (Apr 13 2026)
+
+25. **`tokio_block_on` extracted** from `device::test_pool` to `crate::runtime` —
+    production code (pppm FFT, dispatch config, benchmark) no longer depends on
+    test infrastructure. `test_pool` delegates for backward compat.
+26. **14 new GPU-free type validation tests** — non-string tensor IDs, non-array
+    shapes, wrong-type FHE params, math data types, rng n=0, hick float n_choices,
+    batch non-array ops.
+27. **4,393 tests pass**, all quality gates green.
 
 ---
 
