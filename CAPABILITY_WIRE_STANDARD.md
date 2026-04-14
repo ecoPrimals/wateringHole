@@ -387,6 +387,67 @@ Verifiers reconstruct the canonical message from the response's `primal`, `versi
 
 ---
 
+## Transport Security Advertisement (TS-01, Wave 48)
+
+Primals that use BTSP SHOULD include a `transport_security` object in their
+`capabilities.list` and `discover_capabilities` responses. This lets consumers
+(biomeOS, primalSpring, Songbird) determine whether a BTSP handshake is required
+**before** attempting a connection, preventing silent rejection on family-scoped
+sockets.
+
+### Wire Format
+
+```json
+{
+  "transport_security": {
+    "btsp_required": true,
+    "btsp_version": "2.0",
+    "btsp_server_available": true,
+    "cleartext_available": false,
+    "note": "Family-scoped socket: BTSP handshake required before JSON-RPC."
+  }
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `btsp_required` | Boolean | Whether a BTSP handshake is mandatory before JSON-RPC traffic is accepted. `true` on family-scoped sockets, `false` on dev/standalone. |
+| `btsp_version` | String | BTSP protocol version supported (e.g., `"2.0"`). |
+| `btsp_server_available` | Boolean | Whether this primal exposes `btsp.server.*` methods for handshake-as-a-service. |
+| `cleartext_available` | Boolean | Whether plaintext JSON-RPC is accepted. Inverse of `btsp_required` in most cases. |
+| `note` | String | Human-readable guidance for debugging. Optional. |
+
+### Rejection Behavior (TS-01 Companion)
+
+When a non-BTSP connection arrives on a family-scoped socket, the primal SHOULD
+send a JSON-RPC error response before dropping:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "error": {
+    "code": -32600,
+    "message": "BTSP handshake required",
+    "data": {
+      "reason": "This socket is family-scoped and requires a BTSP handshake before JSON-RPC traffic.",
+      "btsp_version": "2.0"
+    }
+  },
+  "id": null
+}
+```
+
+This replaces silent connection drops, giving forwarding proxies (biomeOS) and
+test harnesses (primalSpring AtomicHarness) a clear signal to initiate BTSP.
+
+### Implementation Status (April 14, 2026)
+
+| Primal | `transport_security` in response | Rejection JSON-RPC |
+|--------|----------------------------------|-------------------|
+| BearDog | ✓ (Wave 48) | ✓ (Wave 48) |
+
+---
+
 ## Relationship to Other Standards
 
 | Standard | Scope | Relationship |
