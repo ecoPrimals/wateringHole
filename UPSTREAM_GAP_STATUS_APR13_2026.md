@@ -68,7 +68,7 @@
 | Squirrel | alpha.52 | 7,003 pass | READY — SQ-04 resolved (`--bind` flag for Docker TCP); 9 files smart-refactored, hardcoding eliminated |
 | sweetGrass | current | up to date | READY |
 | toadStool | S203 | up to date | READY |
-| biomeOS | v3.13 | 7,000+ pass | READY — deep debt evolution: hardcoding→capability-based, deprecated removal, live probes |
+| biomeOS | v3.14 | 7,000+ pass | READY — TCP cross-arch composition: endpoint propagation, env substitution, bootstrap inheritance, tcp-only cascade |
 
 **None of the remaining gaps block local primalSpring work or benchScale integration.**
 
