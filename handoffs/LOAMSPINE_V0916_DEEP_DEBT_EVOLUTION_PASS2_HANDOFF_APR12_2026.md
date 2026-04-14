@@ -2,9 +2,9 @@
 
 # LoamSpine v0.9.16 — Deep Debt & Evolution Pass 2 Handoff
 
-**Date**: April 12, 2026
+**Date**: April 14, 2026
 **Version**: 0.9.16
-**Tests**: 1,395 (0 failures)
+**Tests**: 1,396 (0 failures)
 **Source files**: 178 `.rs` (+ 3 fuzz targets)
 **Coverage**: 90.92% line / 89.09% branch / 92.92% region
 
@@ -364,3 +364,10 @@ omitted params.
 - **Build artifacts cleaned**: `cargo clean` removed 9,847 files / 6.4 GiB
 - **No stale scripts, tracked artifacts, TODO/FIXME markers, or secrets found**
 - **Handoff header updated**: test count 1,390→1,395, source files 176→178
+
+### Pass 8: primalSpring benchScale — `provenance.commit` Alias (April 14, 2026)
+
+- **Root cause**: primalSpring exp084 (provenance adversarial / benchScale) calls `provenance.commit` against loamSpine for replay attack validation. This is a composition-level method name used by the provenance trio abstraction. LoamSpine's canonical method is `session.commit` — no alias existed for the `provenance.*` namespace, so the call returned `-32601 Method not found`.
+- **Fix**: Added `"provenance.commit"` to `normalize_method()` alias table, mapping to `"session.commit"`. Same pattern as existing `"commit.session"` alias.
+- **Test**: 1 new integration test `provenance_commit_alias_dispatches_to_session_commit` — creates a spine, commits via `provenance.commit`, verifies successful dispatch through the full JSON-RPC path.
+- **Tests**: 1,395 → **1,396** (+1). All gates green.
