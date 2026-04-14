@@ -2,7 +2,7 @@
 
 **From:** coralReef  
 **To:** All primal teams, all spring teams  
-**Status:** 4,504 tests passing. Wire contract documented. CompilationInfo in IPC. Socket alignment complete. Hot-path IPC allocations eliminated. Feature-gate fix for non-workspace builds. VFIO constructors feature-gated. MMU oracle unit-tested. Deep debt audit clean.
+**Status:** 4,506 tests passing. Wire contract documented. CompilationInfo in IPC. Socket alignment complete. Hot-path IPC allocations eliminated. Feature-gate fix for non-workspace builds. VFIO constructors feature-gated. MMU oracle unit-tested. Deep debt audit clean.
 
 ---
 
@@ -118,7 +118,7 @@ Comprehensive audit confirmed the codebase is clean:
 | `cargo clippy --all-features -- -D warnings` | PASS (0 warnings) |
 | `RUSTDOCFLAGS="-D warnings" cargo doc --all-features --no-deps` | PASS |
 | `cargo deny check` | PASS (advisories ok, bans ok, licenses ok, sources ok) |
-| `cargo test --all-features` | **4,504 tests**, 0 failed, 153 ignored |
+| `cargo test --all-features` | **4,506 tests**, 0 failed, 153 ignored |
 | Files >1000 LOC | 0 |
 | TODO/FIXME/HACK in .rs | 0 |
 
@@ -152,6 +152,8 @@ Comprehensive audit confirmed the codebase is clean:
 | coral-driver | `error.rs` | `#[cfg(feature = "vfio")]` on `sysfs_io`, `vbios_resource_io`, `resource_io` constructors + tests — eliminates dead_code on default builds |
 | coral-driver | `vfio/channel/mmu_oracle/capture.rs` | 11 new pure-Rust unit tests: `decode_entry_addr` (4), `EntryFlags` decode (5), serde roundtrips (2) |
 | coral-driver | `vfio/channel/mmu_oracle/engine_regs.rs` | 4 new unit tests: serde roundtrip, unique register names, unique offsets, non-empty tables |
+| coralreef-core | `main.rs` | `--bind` flag + `CORALREEF_IPC_HOST` env var for benchScale/Docker network-facing deployments (CR-02) |
+| coral-driver | `nv/uvm_compute/types.rs` | `# Safety` doc on non-x86_64 `uvm_cache_line_flush` stub |
 | docs/ | `SHADER_COMPILE_WIRE_CONTRACT.md` | **New** — authoritative wire contract |
 | docs/ | `IPC_COMPOSITION_AND_LATENCY.md` | Wire contract reference, info fields in diagrams |
 
