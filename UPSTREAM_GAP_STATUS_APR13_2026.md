@@ -57,7 +57,7 @@
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
 | barraCuda | Sprint 42 Phase 8 | 4,393 pass (14 skipped) | READY |
-| BearDog | Wave 49 | 14,784 pass | READY |
+| BearDog | Wave 47 | 37 pass | READY |
 | coralReef | Iter 80 | 4,506 pass (153 hw-gated) | READY — `--bind` flag for benchScale |
 | loamSpine | deep debt pass 6 | 1,034 pass | READY |
 | rhizoCrypt | S42 | 35 pass | READY |
@@ -67,7 +67,7 @@
 | Squirrel | alpha.51 | 735 pass | READY |
 | sweetGrass | current | up to date | READY |
 | toadStool | S203 | up to date | READY |
-| biomeOS | v3.12 | 7,000+ pass | READY — Tower Atomic relay forwarding, recursive graph.list, benchScale validated |
+| biomeOS | v3.13 | 7,000+ pass | READY — deep debt evolution: hardcoding→capability-based, deprecated removal, live probes |
 
 **None of the remaining gaps block local primalSpring work or benchScale integration.**
 
