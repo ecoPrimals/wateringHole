@@ -47,9 +47,9 @@
 
 | Gap | Owner | Notes |
 |-----|-------|-------|
-| 29 shader absorption candidates | barraCuda | neuralSpring pipeline |
+| ~~29 shader absorption candidates~~ | ~~barraCuda~~ | **RESOLVED** — 18/18 barraCuda candidates confirmed upstream (per-shader audit in `SPRING_ABSORPTION.md`); remaining 11 are neuralSpring-specific (protein folding/MSA) |
 | ~~RAWR GPU kernel (CPU-only)~~ | ~~barraCuda~~ | **RESOLVED** — GPU shader `rawr_weighted_mean_f64.wgsl` + `RawrWeightedMeanGpu` exist |
-| Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific |
+| Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific, low priority |
 
 ---
 
