@@ -43,7 +43,9 @@
 
 7. **primalSpring audit items resolved**:
    - plasma_dispersion feature-gate verified (Sprint 40 dual gate `gpu+domain-lattice`)
-   - 17/17 neuralSpring V131 shader absorption candidates confirmed upstream
+   - 18/18 neuralSpring V131 shader absorption candidates confirmed upstream
+     (per-shader audit table in `SPRING_ABSORPTION.md`; 29 total = 18 candidates
+     + 6 neuralSpring-specific + wildcard expansion)
    - Provenance registry path fixed for `batch_ipr` (`special/` → `spectral/`)
 
 ### Sprint 43b: Deep Debt Evolution
@@ -108,7 +110,7 @@
 All 4 primalSpring audit items from the post-Phase 43 blurb are resolved:
 1. ✅ BTSP Phase 3 stream encryption — operational with all 3 cipher suites
 2. ✅ `plasma_dispersion` feature-gate — verified correct (Sprint 40)
-3. ✅ 17/17 neuralSpring shader absorption — confirmed upstream
+3. ✅ 18/18 neuralSpring shader absorption — per-shader audit in `SPRING_ABSORPTION.md`
 4. ✅ `BufReader` lifetime edge-case — fixed (single instance + `get_mut()`)
 
 ## For BearDog
