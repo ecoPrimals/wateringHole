@@ -27,6 +27,15 @@ All 12 core NUCLEUS primals plus biomeOS (13 binaries total) rebuilt as musl-sta
 - **exp094**: 19/19 PASS, 0 FAIL, 0 SKIP — full NUCLEUS composition parity validated.
 - **primalSpring** v0.9.14: 443 lib tests pass, 13 FullNucleus capabilities, `IpcError::is_transport_mismatch()` for graceful transport handling.
 
+**v2.7.1 changes**: skunkBat BearDog v0.9.0 alignment — BTSP handshake parameters
+aligned with canonical `btsp.server.{create_session,verify,negotiate}` method names and
+`SessionCreateParams`/`SessionVerifyParams`/`SessionNegotiateParams` type shapes. Challenge
+generation delegated to BearDog (removed `rand_u128`). `consumed_capabilities` updated to
+`btsp.server.verify`, `genetic.verify_lineage`, `capabilities.list`. Mock UDS provider tests
+for full handshake path (`btsp.rs` 51% → 90%). Specs evolved: thymic selection, composable
+primitives, threat detection all reference correct BearDog method names. Integration tests
+wired for live BearDog binary. 171 tests, 89.6% line coverage, 28 files, 7,288 lines.
+
 **v2.7.0 changes**: skunkBat deep debt evolution — IPC surface established:
 JSON-RPC 2.0 server on TCP + UDS (skunk-bat-server UniBin with `server`/`health`/`scan`/`detect`
 subcommands). BTSP Phase 1 complete (socket naming, `FAMILY_ID` scoping, `BIOMEOS_INSECURE` guard).
