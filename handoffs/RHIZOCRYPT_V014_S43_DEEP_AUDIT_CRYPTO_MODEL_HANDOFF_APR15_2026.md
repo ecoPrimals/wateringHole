@@ -136,6 +136,12 @@ All binary data on the wire is now standard base64, matching BD-01.
 - **`async-trait` dependency removed** — 6 direct usages → manual `BoxFuture` desugaring; `ProtocolAdapter` + `ProtocolAdapterExt` + 4 impls (HTTP, UDS, tarpc, mock) converted; `async-trait` remains only as transitive dep via axum
 - **DID → `public_key` gap RESOLVED** — `did:key:` strings are the canonical wire format; BearDog resolves `did:key:` → raw Ed25519 internally; formally closed in `CRYPTO_MODEL.md` §DID as Public Key Identifier
 
+### S43.4 Addendum: Final Debt Sweep (April 16)
+
+- **tarpc one-way observability** — fire-and-forget `let _ = client.call(…)` in `TarpcAdapter::call_oneway_json` evolved to structured `tracing::debug!` on failure; production error paths no longer silently discard
+- **`deny.toml` wildcard policy** — `wildcards = "warn"` → `"allow"` for path deps (monorepo false-positive); advisory/ban/license/source checks all passing
+- **Full audit clean**: 0 `#[allow(` in production code, 0 TODO/FIXME, 0 production unwrap/expect, 0 panic!, 0 unsafe, mocks behind `#[cfg(test)]` or `test-utils` feature only, no hardcoded primal names outside adapter/test code
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
