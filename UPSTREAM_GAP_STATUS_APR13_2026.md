@@ -77,7 +77,7 @@
 | barraCuda | Sprint 42 Phase 9 | 4,377 pass | READY — 32 JSON-RPC methods, 80.5% coverage |
 | BearDog | Wave 47 | 37 pass | READY |
 | coralReef | Iter 80+ | 856 pass (2 env-sensitive) | READY |
-| loamSpine | deep debt pass 6 | 1,034 pass | READY |
+| loamSpine | 0.9.16+ (stadial gate Apr 16) | 1,442 pass | READY — **stadial gate cleared**; sled + sqlite/rusqlite storage removed; **hickory-resolver** 0.26; upstream **hickory-net** `async-trait` only |
 | rhizoCrypt | S42 | 35 pass | READY |
 | Songbird | Wave 137 | up to date | READY |
 | NestGate | Session 43k | 11,816 pass (451 ignored) | READY — 47 UDS methods, 80% coverage, zero async-trait, zero Box<dyn Error> |
