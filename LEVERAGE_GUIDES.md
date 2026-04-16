@@ -327,6 +327,24 @@ Features: `nestgate`, `sovereign-dispatch` (WGSL → coralReef → native).
 
 ---
 
+## skunkBat
+
+**What it provides:** Composable anomaly detection — five primitive domains (baseline profiling, metadata analysis, graduated response, lineage challenge, health sensing) that work standalone and compose with every primal. Thymic selection model (design phase) for self/non-self discrimination via BearDog lineage. Metadata-only by architectural guarantee.
+
+**IPC:** `baseline.observe` / `query` / `anomaly` / `reset`, `metadata.classify` / `fingerprint`, `response.evaluate` / `escalate` / `deescalate` / `status`, `lineage.challenge` / `verify`, `health.system` / `network` / `resource` / `check`, `capability.list`, `identity.get`. JSON-RPC 2.0 over TCP + UDS, BTSP Phase 2 with first-byte peek.
+
+**Security Trio:** skunkBat + BearDog + Songbird — thymic detection (self/non-self via lineage) + genetic crypto + federation metadata.
+
+**+ others:** ToadStool (compute resource guardian); NestGate (storage exfiltration detection); coralReef (compiler sensing — compilation time/ratio anomalies); barraCuda (kernel execution guardian); rhizoCrypt (DAG session anomaly monitoring); LoamSpine (ledger integrity sentinel); sweetGrass (anomaly markers in attribution braids); Squirrel (AI behavior profiling); petalTongue (anomaly dashboards); biomeOS (alert routing, response coordination).
+
+**Trios:** Security Trio; sovereign integrity (+ sweetGrass + LoamSpine — anomaly + provenance + permanence); defended inference (+ Squirrel + BearDog); sovereign compute integrity (+ barraCuda + coralReef + ToadStool + sweetGrass).
+
+**Spring recipe cards:** Any spring can feed metrics into `baseline.observe` — compile times, iteration durations, inference rates, sensor frequencies, commit rates. Per-spring patterns in full leverage guide.
+
+**Does not:** crypto, storage, networking, compute dispatch, shader compile, permanence, attribution authoring, visualization, orchestration, content inspection (structurally impossible).
+
+---
+
 ## sweetGrass
 
 **What it provides:** W3C PROV-O braids — attribution shares, derivation chains, privacy levels, session compression (0/1/Many), PROV-O export, scyBorg license metadata. Proposed: content convergence (v0.8.x).
