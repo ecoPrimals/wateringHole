@@ -131,8 +131,12 @@ All binary data on the wire is now standard base64, matching BD-01.
 - **Doc metrics refresh** — `DEPLOYMENT_CHECKLIST.md` (76→65 demos, 9→10 specs), `RHIZOCRYPT_SPECIFICATION.md` (27→28 methods, coverage checkbox resolved), `00_SPECIFICATIONS_INDEX.md` date
 - **Metrics**: 1,507 tests, 170 `.rs` files, ~48,620 lines, 724 max file
 
+### S43.3 Addendum: async-trait Removal + DID Semantic Closure (April 16)
+
+- **`async-trait` dependency removed** — 6 direct usages → manual `BoxFuture` desugaring; `ProtocolAdapter` + `ProtocolAdapterExt` + 4 impls (HTTP, UDS, tarpc, mock) converted; `async-trait` remains only as transitive dep via axum
+- **DID → `public_key` gap RESOLVED** — `did:key:` strings are the canonical wire format; BearDog resolves `did:key:` → raw Ed25519 internally; formally closed in `CRYPTO_MODEL.md` §DID as Public Key Identifier
+
 ### Remaining (Not Blocking)
 
-- **DID → public key resolution** for `crypto.verify_ed25519` (`public_key`
-  field receives DID string; needs BearDog DID resolution or explicit key)
 - `Arc<str>` hot-path evolution — intentional roadmap item
+- **BTSP Phase 3** — per-frame AEAD using derived session keys
