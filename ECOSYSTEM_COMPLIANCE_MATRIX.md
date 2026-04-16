@@ -159,7 +159,7 @@ Source: `STANDARDS_AND_EXPECTATIONS.md`, `LICENSING_AND_COPYLEFT.md`
 
 ### Tier 1 Detail (April 6 re-audit, Songbird updated April 9)
 
-- **BearDog**: 344 clippy warnings resolved (pedantic+nursery clean). License updated to `-or-later`. Fmt **CLEAN** ↑ (was 1 diff). 14,787+ tests pass. **90.51%** line coverage. Unused `async-trait` removed from 5 crates (`syn` proc-macro surface reduced); 3 production files smart-refactored by domain under 800 LOC (Wave 52). `ring` eliminated (Wave 51).
+- **BearDog**: **STADIAL PARITY GATE CLEARED** (Wave 53). All `#[async_trait]` eliminated (was ~49). `async-trait` removed from all 17 Cargo.toml files. 18 enum dispatch types replace all finite-implementor `dyn Trait`. Zero `ring`/`sled`/`openssl` in lockfile. 14,786+ tests, 0 failures, **90.51%** coverage. Clippy + rustdoc clean (`-D warnings`). Edition 2024.
 - **Songbird**: Fmt **CLEAN** ↑ (was 2 diffs). Commented-out code **CLEAN** ↑ (Wave 124 scrub). 7,265+ lib tests, 0 failed. All 30 crates clippy pedantic+nursery zero warnings. 4 largest files smart-refactored (Wave 133). BTSP Phase 2 complete (Wave 132).
 - **NestGate**: Fmt **PASS**. Clippy CLEAN. License `-or-later`. 11,856+ tests pass. BTSP Phase 2 wired. NG-01/NG-03 resolved. `uzers` → `rustix`. 81 hardcoded strings fixed. Zero TODO/FIXME.
 - **ToadStool**: **Major turnaround.** Clippy **CLEAN** (was 2 errors). Fmt **1 diff** (was ~1,899). License updated to `-or-later`. `tar` dep updated.
