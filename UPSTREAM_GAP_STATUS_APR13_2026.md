@@ -60,7 +60,7 @@
 | barraCuda | Sprint 42 Phase 8 | 4,393 pass (14 skipped) | READY |
 | BearDog | Wave 47 | 37 pass | READY |
 | coralReef | Iter 80 | 4,506 pass (153 hw-gated) | READY — `--bind` flag for benchScale |
-| loamSpine | deep debt pass 8 | 1,434 pass | READY — Full L3, 37 methods, bond-ledger, self-knowledge compliant |
+| loamSpine | deep debt pass 8 | 1,442 pass | READY — Full L3, 37 methods, bond-ledger, self-knowledge compliant |
 | rhizoCrypt | S42 | 35 pass | READY |
 | Songbird | Wave 137 | up to date | READY |
 | NestGate | Session 43g | 291 pass (26 ignored) | READY (NG-08 resolved) |
