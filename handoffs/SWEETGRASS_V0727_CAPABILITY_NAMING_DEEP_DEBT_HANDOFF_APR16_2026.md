@@ -48,11 +48,15 @@ All renames include `#[serde(alias = "old_name")]` for backward deserialization.
 
 **Doc fixes**: `agent.rs`, `braid/braid_type.rs`, `entity.rs` (3 `rustdoc::private_intra_doc_links` errors fixed)
 
-### Test File Refactor
+### Test File Refactors
 
 `store-nestgate/src/store/tests.rs` (876 lines) → split by concern:
 - `tests/mod.rs` (~460L): Mock infrastructure, CRUD, config, error, client, index tests
 - `tests/queries.rs` (~370L): Query, filter, ordering, pagination, relationship tests
+
+`entity.rs` (803 lines) → split by concern:
+- `entity/mod.rs` (483L): Production code only
+- `entity/tests.rs` (334L): Bincode roundtrips, constructors, inline data, serialization, errors
 
 ### Lockfile
 
@@ -67,8 +71,8 @@ Regenerated. Stale phantom `libsqlite3-sys` entry confirmed never-compiled
 |--------|-------|
 | Tests | 1,560 (1,502 local + 58 Docker CI) |
 | Coverage | 90.4% without Docker / 91.7% with Postgres |
-| Max file | 803 lines (`entity.rs` — 481 prod + 322 test) |
-| .rs files | 190 (51,328 LOC) |
+| Max file | 726 lines (`agent.rs`) |
+| .rs files | 191 (51,355 LOC) |
 | Clippy | 0 warnings (pedantic + nursery) |
 | Rustdoc | 0 warnings (`-D warnings`) |
 | Unsafe | 0 blocks |
