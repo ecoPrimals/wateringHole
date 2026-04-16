@@ -129,7 +129,7 @@ All binary data on the wire is now standard base64, matching BD-01.
 - **Showcase binary names** — `songbird-cli`/`songbird-rendezvous` → `songbird` (canonical UniBin), `toadstool-cli` → `toadstool`
 - **`showcase/README.md`** — `../bins/` path → `primalBins` (matches `showcase-env.sh`)
 - **Doc metrics refresh** — `DEPLOYMENT_CHECKLIST.md` (76→65 demos, 9→10 specs), `RHIZOCRYPT_SPECIFICATION.md` (27→28 methods, coverage checkbox resolved), `00_SPECIFICATIONS_INDEX.md` date
-- **Metrics**: 1,507 tests, 170 `.rs` files, ~48,620 lines, 724 max file
+- **Metrics**: 1,507 tests, 170 `.rs` files, ~48,700 lines, 724 max file
 
 ### S43.3 Addendum: async-trait Removal + DID Semantic Closure (April 16)
 
