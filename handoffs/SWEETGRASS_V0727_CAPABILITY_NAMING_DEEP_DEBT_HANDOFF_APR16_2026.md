@@ -38,7 +38,7 @@ All renames include `#[serde(alias = "old_name")]` for backward deserialization.
 ### Files Changed
 
 **Core types**: `activity/mod.rs`, `braid/types.rs`, `braid/mod.rs`,
-`contribution.rs`, `entity.rs`
+`contribution.rs`, `entity/mod.rs`
 
 **Factory**: `factory/mod.rs`, `factory/contribution.rs`, `factory/tests.rs`
 
@@ -46,7 +46,7 @@ All renames include `#[serde(alias = "old_name")]` for backward deserialization.
 
 **Compression**: `engine/mod.rs`, `engine/tests.rs`
 
-**Doc fixes**: `agent.rs`, `braid/braid_type.rs`, `entity.rs` (3 `rustdoc::private_intra_doc_links` errors fixed)
+**Doc fixes**: `agent.rs`, `braid/braid_type.rs`, `entity/mod.rs` (3 `rustdoc::private_intra_doc_links` errors fixed)
 
 ### Test File Refactors
 
