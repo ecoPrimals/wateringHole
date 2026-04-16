@@ -105,9 +105,24 @@ cargo llvm-cov           ✅ 93.88% (gate: 90%)
 - **`DiscoveryRegistry`** is now properly shared — endpoint registration
   at service startup propagates to all internal consumers.
 
+### S43 Addendum: `SigningClient` Wire Alignment (April 16)
+
+**RESOLVED** — `SigningClient` adapter now uses BearDog-aligned wire DTOs:
+
+| Method | Wire name | Fields |
+|--------|-----------|--------|
+| `sign` | `crypto.sign_ed25519` | `message` (base64), `key_id` (DID) |
+| `verify` | `crypto.verify_ed25519` | `message`, `signature` (base64), `public_key` (DID) |
+| `request_attestation` | `crypto.sign_contract` | `signer`, `terms` (JSON), response → `Attestation` |
+| `verify_did` | (stub — no BearDog equivalent) | Unchanged |
+
+`base64` promoted to non-optional dep (pure Rust, needed for wire encoding).
+All binary data on the wire is now standard base64, matching BD-01.
+1,507 tests passing, clippy clean.
+
 ### Remaining (Not Blocking)
 
-- Wire format alignment between `SigningClient` and BearDog's actual
-  `crypto.*` method shapes (documented in `CRYPTO_MODEL.md` evolution gaps)
+- **DID → public key resolution** for `crypto.verify_ed25519` (`public_key`
+  field receives DID string; needs BearDog DID resolution or explicit key)
 - `specs/RHIZOCRYPT_SPECIFICATION.md` Phase 7 items: 90%+ CI-gated
   coverage and `Arc<str>` hot-path evolution — intentional roadmap
