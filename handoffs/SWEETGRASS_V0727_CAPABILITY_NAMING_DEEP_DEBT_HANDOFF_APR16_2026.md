@@ -95,26 +95,14 @@ Regenerated. Stale phantom `libsqlite3-sys` entry confirmed never-compiled
 
 ---
 
-## async-trait Audit (April 16, 2026)
+## async-trait Status (April 16, 2026)
 
-**22 total `#[async_trait]` annotations**: 5 trait definitions + 17 impl blocks.
-All are **object-safety constrained** — every trait is used as `dyn Trait`.
+**RESOLVED** — All 22 `#[async_trait]` attributes and `async-trait` crate eliminated.
+All 6 traits converted to native RPITIT with enum dispatch backends
+(`BraidBackend`, `SigningBackend`, `AnchoringBackend`, `SessionEventsBackend`,
+`SessionEventStreamBackend`, `DiscoveryBackend`). ~130 `Arc<dyn Trait>` → 0.
 
-| Trait | `dyn` usage | Impls |
-|-------|-------------|-------|
-| `BraidStore` | `Arc<dyn BraidStore>` | 7 (Memory, Redb, Postgres, NestGate, Sled, FaultyStore, FailingStore) |
-| `SigningClient` | `Arc<dyn SigningClient>` | 2 (Tarpc, Mock) |
-| `SessionEventsClient` | `Arc<dyn SessionEventsClient>` | 2 (Tarpc, Mock) |
-| `SessionEventStream` | `Box<dyn SessionEventStream>` | 2 (Tarpc, Mock) |
-| `AnchoringClient` | `Arc<dyn AnchoringClient>` | 2 (Tarpc, Mock) |
-
-**Already migrated to native async** (no `dyn` dispatch needed):
-- `IndexStore` — `impl Future<Output = ...> + Send`
-- `Signer` — `impl Future<Output = ...> + Send`
-
-**Conclusion**: Terminal state. Zero migratable uses remain. All 5 dyn-dispatched
-traits document why `#[async_trait]` is required. Will migrate when Rust stabilizes
-`dyn`-compatible async fn in trait (tracking: rust-lang/rust#133119).
+See `SWEETGRASS_STADIAL_PARITY_HANDOFF_APR16_2026.md` for full resolution details.
 
 ---
 
