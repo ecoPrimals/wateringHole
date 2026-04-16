@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: April 13, 2026 (Phase 41 — Pre-Downstream Gap Resolution, 12/12 ALIVE, 19/19 exp094 PASS)
+**Last Updated**: April 16, 2026 (Stadial parity gate — sweetGrass async-trait/dyn eliminated)
 
 ---
 
@@ -306,7 +306,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.27, 1,218 tests, 90.90% region coverage, Wire Standard L3 FULL COMPLIANCE, BTSP Phase 1 compliant (GAP-MATRIX-12 RESOLVED), GAP-MATRIX-05 RESOLVED, ecoBin compliant, musl-static ready, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-or-later, pedantic+nursery clean, zero unsafe, zero production unwrap, 28 JSON-RPC methods incl. `identity.get`, 7 benchmarks, 17 proptest strategies across 5 crates, `Braid.witness` (WireWitnessRef aligned), sovereign types — no shared crates, UDS live-validated via socat, BIOMEOS_INSECURE guard enforced)
+**Status**: Production Ready (v0.7.27, 1,502 tests, 90%+ line coverage, Wire Standard L3 FULL COMPLIANCE, BTSP Phase 2, ecoBin compliant, musl-static ready, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-or-later, pedantic+nursery clean, zero unsafe, zero production unwrap, 32 JSON-RPC methods, 7 benchmarks, 20+ proptest strategies across 6 crates, **stadial parity cleared** — zero `#[async_trait]`, zero `Arc<dyn Trait>` (enum dispatch: `BraidBackend`, `SigningBackend`, `AnchoringBackend`, `SessionEventsBackend`, `SessionEventStreamBackend`, `DiscoveryBackend`), `QueryEngine<S: BraidStore>` generic, sovereign types — no shared crates, UDS live-validated, BIOMEOS_INSECURE guard enforced)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
