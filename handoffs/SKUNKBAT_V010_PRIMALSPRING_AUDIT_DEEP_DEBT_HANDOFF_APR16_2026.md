@@ -10,18 +10,19 @@
 ## Session Summary
 
 Comprehensive primalSpring audit and deep debt execution across the full skunkBat
-codebase. Two phases: (1) audit of specs, code, docs, and wateringHole compliance;
+codebase. Three phases: (1) audit of specs, code, docs, and wateringHole compliance;
 (2) systematic execution on all findings — clippy pedantic/nursery cleanup,
 `#[allow]` → `#[expect(reason)]` migration, magic number elimination, JSON-RPC
 batch + notification support, large function refactoring, cross-platform evolution,
-test coverage expansion, and showcase/documentation cleanup.
+test coverage expansion, and showcase/documentation cleanup; (3) BTSP Phase 2
+first-byte peek on UDS, resolving the `SKUNKBAT-BTSP-P2` primalSpring gap.
 
 ## Build
 
 | Metric | Value |
 |--------|-------|
-| Tests | 149 passing / 0 failures / 14 ignored (external-primal-gated) |
-| Coverage | 81.9% line (cargo-llvm-cov; target: 90%) |
+| Tests | 153 passing / 0 failures / 14 ignored (external-primal-gated) |
+| Coverage | 82.0% line (cargo-llvm-cov; target: 90%) |
 | Clippy | CLEAN — pedantic + nursery, `-D warnings`, zero warnings |
 | Format | PASS |
 | Docs | PASS — zero warnings |
@@ -32,6 +33,19 @@ test coverage expansion, and showcase/documentation cleanup.
 | License | AGPL-3.0-or-later (scyBorg triple-copyleft) |
 
 ## Changes
+
+### BTSP Phase 2 — First-Byte Peek on UDS (resolves SKUNKBAT-BTSP-P2)
+
+UDS accept now auto-detects protocol via first-byte peek, matching TCP behavior.
+`tokio::net::UnixStream` lacks native `peek()`, so a `PeekedStream` wrapper reads
+one byte destructively and replays it transparently through `AsyncRead`/`AsyncWrite`
+delegation. First byte `{` → plain JSON-RPC (biomeOS composition bypass); anything
+else → full 6-step BTSP handshake via BearDog `btsp.session.create/verify/negotiate`.
+
+This aligns skunkBat with the cross-primal UDS peek standardization requirement
+from `UPSTREAM_CROSSTALK_AND_DOWNSTREAM_ABSORPTION.md`. Pure safe Rust, no new
+dependencies, `PeekedStream` tested with 4 dedicated tests (replay, JSON detection,
+write passthrough, BTSP frame reconstruction).
 
 ### JSON-RPC 2.0 Full Spec Compliance
 
@@ -156,8 +170,10 @@ to activate when peer primals come online.
 - **No capability registry changes** — `capabilities.list` and `identity.get`
   responses unchanged.
 - **No new dependencies** — workspace dep set unchanged (Tokio features trimmed).
-- **BTSP Phase 2 handshake framework** ready for BearDog delegation when
-  BearDog exposes challenge-response over `crypto.sock`.
+- **BTSP Phase 2 COMPLETE on both TCP and UDS** — BearDog-delegated handshake
+  with first-byte peek for biomeOS composition bypass. `PeekedStream` pattern
+  available for other primals needing UDS peek without native `peek()`.
+- **primalSpring gap `SKUNKBAT-BTSP-P2`** — RESOLVED. Can be moved to resolved history.
 
 ## Verification
 
