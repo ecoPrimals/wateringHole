@@ -1,7 +1,7 @@
-# Songbird v0.2.1 Wave 145 — Complete async-trait Elimination
+# Songbird v0.2.1 Wave 145+146 — Complete async-trait Elimination + Stadial Parity Gate
 
 **Date**: April 16, 2026
-**Commit**: `d237c9c2`
+**Commit**: `5099ecd1` (Wave 146), `d237c9c2` (Wave 145)
 **Branch**: `main`
 
 ## Summary
@@ -57,9 +57,21 @@ and the workspace `Cargo.toml`. SB-06 tracking item resolved.
 
 ## Verification
 
-- Tests: 7,359 passed, 0 failures
+- Tests: 7,377 passed, 0 failures
 - Clippy: zero warnings (`-D warnings`)
 - Cargo deny: clean
 - Format: clean
 - Files >800L: 0
 - Unsafe blocks: 0
+
+## Wave 146 — Stadial Parity Gate (commit `5099ecd1`)
+
+### dyn Audit (376 usages classified)
+- **19 finite-implementor dyn eliminated**: AsyncStream → enum (http-client), OnionStorageBackend → enum (sovereign-onion), DiscoveryProvider + ProviderFactory → enums (discovery)
+- **Remaining ~350 are stadial-compliant**: dyn Error (~195), dyn Future/Stream (~18), dyn Fn (~3), dyn Any (~10), test code (~165), doc comments (~95), open plugin (2), external (1)
+
+### ring Lockfile Analysis
+- `cargo tree -i ring --edges normal` = empty (NOT in dependency graph)
+- `cargo deny check bans` = passes (ring banned, not compiled)
+- Cargo.lock stanza is a Cargo resolver artifact (optional dep version locking)
+- Upstream blocked: `rustls-rustcrypto` git master drops webpki 0.102 but uses incompatible pre-release crypto; no crates.io release
