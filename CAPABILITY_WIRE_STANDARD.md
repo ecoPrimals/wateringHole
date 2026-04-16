@@ -213,7 +213,7 @@ When `result.methods` is present, biomeOS skips format detection entirely. Legac
 | BearDog | ✓ | ✓ | — | L2 complete + signed announcements (SA-01, Wave 45): unified Ed25519 identity, `signed_announcement` in `capabilities.list` and `discover_capabilities`, neural registration attestation |
 | Songbird | ✓ | Partial | — | Has `capabilities.methods` token→method map (Wave 123); needs `{primal, version, methods}` envelope, `identity.get` |
 | rhizoCrypt | ✓ | ✓ | ✓ | Full L3: `methods`, `consumed_capabilities`, `cost_estimates`, `operation_dependencies` |
-| loamSpine | ✓ | ✓ | ✓ | Full L3: `methods` (flat, 37), `identity.get`, `provided_capabilities` (10 groups incl. bond-ledger), `consumed_capabilities`, `cost_estimates`, `operation_dependencies`. Domain symlink `ledger.sock`. Self-knowledge compliant (zero hardcoded primal names). 1,442 tests. (April 16, 2026) |
+| loamSpine | ✓ | ✓ | ✓ | Full L3: `methods` (flat, 37), `identity.get`, `provided_capabilities` (10 groups incl. bond-ledger), `consumed_capabilities`, `cost_estimates`, `operation_dependencies`. Domain symlink `ledger.sock`. Self-knowledge compliant (zero hardcoded primal names). **178** source files, **1,442** tests, **stadial-gate compliant**. (April 16, 2026) |
 | sweetGrass | ✓ | ✓ | ✓ | Full L3 compliance (April 8, 2026) |
 | NestGate | ✓ | ✓ | ✓ | Full L3: `{primal, version, methods}` envelope, `identity.get` with domain/license, `provided_capabilities` (9 groups), `consumed_capabilities`, `protocol`, `transport`. 57 methods advertised. (April 8, 2026) |
 
