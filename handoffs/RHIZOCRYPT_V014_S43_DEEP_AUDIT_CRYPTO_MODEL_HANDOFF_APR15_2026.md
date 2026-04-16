@@ -4,7 +4,7 @@
 
 **Date**: 2026-04-15
 **Branch**: main
-**Tests**: 1,506 passing (0 failures)
+**Tests**: 1,507 passing (0 failures)
 **Coverage**: 93.88% lines (CI gate: 90%)
 
 ---
@@ -88,7 +88,7 @@ File reduced from 654 → 404 lines.
 ```
 cargo fmt --check        ✅
 cargo clippy -D warnings ✅ (0 warnings)
-cargo test               ✅ 1,506 passed
+cargo test               ✅ 1,507 passed
 cargo deny check         ✅
 cargo llvm-cov           ✅ 93.88% (gate: 90%)
 ```
@@ -120,9 +120,19 @@ cargo llvm-cov           ✅ 93.88% (gate: 90%)
 All binary data on the wire is now standard base64, matching BD-01.
 1,507 tests passing, clippy clean.
 
+### S43.2 Addendum: Dependency Hygiene + Doc Sweep (April 16)
+
+- **`cargo update`** — all deps to latest compatible semver; **RUSTSEC-2026-0007** (`opentelemetry_sdk` via tarpc) resolved
+- **`deny.toml`** — removed stale advisory ignore; only RUSTSEC-2025-0141 (bincode v1 via tarpc) remains
+- **`#[allow]` → `#[expect]`** in `metrics.rs` (lint policy alignment)
+- **`cargo fmt`** — corrected formatting drift in 6 files from S43 compact style
+- **Showcase binary names** — `songbird-cli`/`songbird-rendezvous` → `songbird` (canonical UniBin), `toadstool-cli` → `toadstool`
+- **`showcase/README.md`** — `../bins/` path → `primalBins` (matches `showcase-env.sh`)
+- **Doc metrics refresh** — `DEPLOYMENT_CHECKLIST.md` (76→65 demos, 9→10 specs), `RHIZOCRYPT_SPECIFICATION.md` (27→28 methods, coverage checkbox resolved), `00_SPECIFICATIONS_INDEX.md` date
+- **Metrics**: 1,507 tests, 170 `.rs` files, ~48,620 lines, 724 max file
+
 ### Remaining (Not Blocking)
 
 - **DID → public key resolution** for `crypto.verify_ed25519` (`public_key`
   field receives DID string; needs BearDog DID resolution or explicit key)
-- `specs/RHIZOCRYPT_SPECIFICATION.md` Phase 7 items: 90%+ CI-gated
-  coverage and `Arc<str>` hot-path evolution — intentional roadmap
+- `Arc<str>` hot-path evolution — intentional roadmap item
