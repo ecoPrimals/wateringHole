@@ -210,7 +210,8 @@ resolved in parallel with composition schema work.
 
 | Severity | Primals | Debt |
 |----------|---------|------|
-| **HEAVY** | toadStool, BearDog, Squirrel | 100+ `#[async_trait]` each, heavy `dyn` dispatch |
+| **HEAVY** | BearDog, Squirrel | 100+ `#[async_trait]` each, heavy `dyn` dispatch |
+| **RESOLVED** | toadStool | 0 `#[async_trait]` (S203r), enum dispatch + RPITIT (S203s), all active debt evolved (S203t), 7,784 tests |
 | **RESOLVED** | Songbird | 0 `#[async_trait]`, 0 `dyn` dispatch, 0 production mocks, 0 bare `#[allow]`, 0 raw IPs — Wave 147 |
 | **MEDIUM** | biomeOS, NestGate, petalTongue | Partial migration or `Box<dyn Error>` dominant |
 | **LOW/CLEAN** | barraCuda, coralReef, loamSpine, rhizoCrypt | Already modern or minimal debt |

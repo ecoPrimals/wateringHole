@@ -84,7 +84,7 @@
 | petalTongue | current | up to date | READY |
 | Squirrel | alpha.51 | 735 pass | READY |
 | sweetGrass | current | up to date | READY |
-| toadStool | S203 | up to date | READY |
+| toadStool | S203t | 7,784 lib pass | READY — stadial gate cleared, all active debt evolved, 49 unsafe (hw containment only) |
 | biomeOS | v3.08 | 7,784 pass | READY — zero C deps, 33 capabilities, TCP+UDS, gate routing |
 
 **The primary architectural gap is biomeOS's forwarding model.** biomeOS does its own
