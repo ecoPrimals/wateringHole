@@ -85,23 +85,20 @@ would eliminate `ring` but add `openssl-sys` — not acceptable per ecosystem
 standards. The current state (dev-dep only, not in ecoBin) is the correct
 holding pattern.
 
-### `libsqlite3-sys` — lockfile phantom
+### `libsqlite3-sys` — **ELIMINATED** (April 16, 2026)
+
+`sqlx` dependency updated to `default-features = false` with explicit feature
+list `["runtime-tokio", "postgres", "chrono", "uuid", "json", "migrate"]`.
+This removes `sqlx-sqlite`, `sqlx-mysql`, and `libsqlite3-sys` from the
+resolved build graph entirely. Verified:
 
 ```
 cargo tree -i libsqlite3-sys → "warning: nothing to print"
 cargo tree -i libsqlite3-sys --target all → "warning: nothing to print"
 ```
 
-`libsqlite3-sys` appears in `Cargo.lock` because the `sqlx` crate declares
-`sqlx-sqlite` as an optional dependency. Cargo's lockfile pins all optional deps
-regardless of feature selection. Our `sqlx` features are `["runtime-tokio",
-"postgres", "chrono", "uuid", "json"]` — no `sqlite`. The crate is **never
-compiled, never linked, not in the dependency tree**.
-
-**Resolution**: No action needed. This is standard Cargo lockfile behavior.
-If ecosystem policy requires zero lockfile stanzas for banned crates, the only
-fix is for upstream `sqlx` to split `sqlx-sqlite` into a separate crate (already
-requested: https://github.com/launchbadge/sqlx/issues).
+Lockfile metadata entries may persist (Cargo v4 artifact) but are never
+compiled or linked.
 
 ### `sled` — **ELIMINATED** (April 16, 2026)
 
@@ -129,7 +126,7 @@ internally. Clears when testcontainers updates.
 ## Verification
 
 ```
-cargo test --all-features       → 1,423 pass, 0 fail
+cargo test --all-features       → 1,430 pass, 0 fail
 cargo clippy --all-features --tests -- -D warnings → 0 warnings
 cargo fmt --check               → 0 issues
 cargo deny check                → advisories ok, bans ok, licenses ok, sources ok
