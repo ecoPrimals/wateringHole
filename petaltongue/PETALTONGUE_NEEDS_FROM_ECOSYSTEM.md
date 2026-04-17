@@ -1,6 +1,6 @@
 # petalTongue: Explicit Needs from the Ecosystem
 
-**Version**: v1.6.6 (March 16, 2026)
+**Version**: v1.6.7 (April 17, 2026)
 
 petalTongue is the **Universal User Interface** primal. It translates computational
 universes into any user modality — not just visualization, but the complete sensory bridge. This document states what petalTongue **needs** from
@@ -75,29 +75,26 @@ petalTongue synthesizes audio (5 waveforms, stereo panning, fade envelopes)
 in `petal-tongue-scene/src/soundscape.rs`. However, **there is no ecosystem
 audio output path**.
 
-### Current Gap
+### petalTongue Side (Wired)
+
+As of April 17, petalTongue has a **Tier 1 `NetworkBackend`** in `AudioManager`
+that discovers `audio` capability providers via `CapabilityDiscovery<BiomeOsBackend>`
+and delegates playback via `audio.play` over JSON-RPC/UDS. It falls back
+gracefully to software synthesis / silent when no provider is found.
+
+### Ecosystem Gap
 
 | Component | Audio Status |
 |-----------|-------------|
-| ToadStool | No `audio.*` methods, `transport.*` is for display/capture/serial only |
+| ToadStool | No `audio.*` methods yet — `transport.*` is for display/capture/serial only |
 | barraCuda | Has audio WGSL shaders (mel_scale, conv1d) but no audio I/O |
 | coralReef | Shader compiler only, no audio |
 
-### What We Need
+### What We Need From Ecosystem
 
-**Option A (preferred)**: ToadStool adds `audio.play` and `audio.stream`
-JSON-RPC methods, with ALSA/PulseAudio/PipeWire backend. petalTongue sends
-PCM samples via `audio.play { samples: [...], sample_rate: 44100 }`.
-
-**Option B**: A new `audioSpring` primal handles audio I/O. petalTongue
-sends synthesized PCM via JSON-RPC.
-
-**Option C (current fallback)**: petalTongue uses `cpal`/`rodio` directly
-for local audio output, bypassing the ecosystem. This works for single-machine
-deployment but breaks the primal separation model.
-
-**Interim**: petalTongue exports WAV files and soundscape definitions as JSON.
-ludoSpring and other consumers can render locally.
+**Preferred**: ToadStool (or another primal) exposes `audio.play` and
+`audio.stream` JSON-RPC methods over UDS. petalTongue's `NetworkBackend`
+is already wired to discover and call them via capability discovery.
 
 ---
 
@@ -155,13 +152,18 @@ NestGate storage would enable ecosystem-wide artifact sharing.
    (Sensory Afferent, Motor Efferent) feedback model.
 
 2. **We need `display.present`**: ToadStool window lifecycle works, but we
-   cannot push frames yet.
+   cannot push frames yet. petalTongue V2 display backend now discovers via
+   capability discovery and sends frames over JSON-RPC/UDS — just needs
+   ToadStool to wire the `display.present` dispatch handler.
 
-3. **We need audio output**: No ecosystem path exists for synthesized audio.
-   ToadStool `audio.*` methods would be ideal.
+3. **We need audio output**: petalTongue Tier 1 `NetworkBackend` is wired
+   and will auto-discover any primal that registers `audio` capability.
+   ToadStool `audio.play` / `audio.stream` methods would complete the path.
 
 4. **We need more GPU ops**: barraCuda has 3 ops; we need statistics,
    tessellation, and projection for offloading visualization computation.
+   petalTongue now discovers compute providers via `CapabilityDiscovery`
+   (biomeOS Neural API) rather than ad-hoc env/filesystem scanning.
 
 5. **ludoSpring**: We support `GameScene` and `Soundscape` DataBindings.
    Send `channel_type: "game_scene"` or `channel_type: "soundscape"` via
@@ -169,6 +171,6 @@ NestGate storage would enable ecosystem-wide artifact sharing.
 
 ---
 
-**Last Updated**: March 16, 2026
+**Last Updated**: April 17, 2026
 **Maintainer**: ecoPrimals / petalTongue
 **License**: AGPL-3.0-or-later
