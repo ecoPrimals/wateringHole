@@ -103,22 +103,14 @@ If ecosystem policy requires zero lockfile stanzas for banned crates, the only
 fix is for upstream `sqlx` to split `sqlx-sqlite` into a separate crate (already
 requested: https://github.com/launchbadge/sqlx/issues).
 
-### `sled` — feature-gated, deprecated
+### `sled` — **ELIMINATED** (April 16, 2026)
 
-```
-sled v0.34.7
-└── sweet-grass-store-sled v0.7.27
-    [feature: sled]
-    └── sweet-grass-service v0.7.27
-```
-
-`sled` is **not in default features**. It only compiles when
-`--features sled` is explicitly passed. `SledStore` is `#[deprecated(since =
-"0.7.26")]` with migration docs pointing to redb. The `sweet-grass-store-sled`
-crate exists for backward compatibility during migration.
-
-**Resolution path**: Remove `sweet-grass-store-sled` crate entirely once all
-deployments have migrated to redb or nestgate backends.
+`sweet-grass-store-sled` removed from workspace members, archived to
+`archive/sweet-grass-store-sled/`. `sled` (0.34.7) and all its transitive deps
+(`parking_lot 0.11`, `fxhash`, `crc32fast`, `fs2`, old `hashbrown`) purged from
+`Cargo.lock`. `BraidBackend::Sled` variant, factory codepath, CLI arg, and
+`DEFAULT_SLED_PATH` constant all removed. 79 sled tests archived (not deleted).
+Lockfile now has **zero** `sled` entries.
 
 ### `async-trait` — transitive dev-dependency only
 
@@ -137,10 +129,11 @@ internally. Clears when testcontainers updates.
 ## Verification
 
 ```
-cargo test --all-features       → 1,504 pass, 0 fail
+cargo test --all-features       → 1,423 pass, 0 fail
 cargo clippy --all-features --tests -- -D warnings → 0 warnings
 cargo fmt --check               → 0 issues
-cargo deny check bans           → pass
+cargo deny check                → advisories ok, bans ok, licenses ok, sources ok
+RUSTDOCFLAGS="-D warnings" cargo doc --all-features --no-deps → 0 warnings
 ```
 
 ---
@@ -152,7 +145,7 @@ sweetGrass row in `STADIAL_PARITY_GATE_APR16_2026.md` should update to:
 | sweetGrass | **No** | 0 | 2 | **INTERSTADIAL-READY** |
 
 Lockfile ghosts (`ring`, `libsqlite3-sys`) are dev-dep / phantom only.
-`sled` is feature-gated, not in defaults.
+`sled` is **eliminated** (crate archived, zero lockfile entries).
 
 ---
 
