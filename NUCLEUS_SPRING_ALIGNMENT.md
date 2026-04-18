@@ -1,7 +1,7 @@
 # NUCLEUS Spring Alignment — Phase 40 (NUCLEUS Complete)
 
 **Date**: April 18, 2026
-**From**: primalSpring v0.9.13
+**From**: primalSpring v0.9.15
 **For**: All springs, primals, and gardens
 **License**: AGPL-3.0-or-later
 
@@ -63,7 +63,7 @@ only (IPC calls to NUCLEUS). There are no spring binaries at the composition lev
 | **airSpring** | 0.10.0 | **composed** | 1,364 | composing | Node + **Nest** | `airspring_ecology_proto_nucleate` |
 | **groundSpring** | 0.1.0 | **composing** | 1,050 | calling | Node + **Nest** | `groundspring_geoscience_proto_nucleate` |
 | **healthSpring** | 0.1.0 | **composing** | 940 | composing | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_proto_nucleate` |
-| **ludoSpring** | V43 | **composing** | 790+ | composing | Node + **Meta** + Nest | `ludospring_proto_nucleate` |
+| **ludoSpring** | V44 | **composing** | 790+ | composing | Node + **Meta** + Nest | `ludospring_proto_nucleate` |
 
 Also: **esotericWebb** (garden, V7) → `esotericwebb_proto_nucleate` — full NUCLEUS + Meta, pure composition. 342 tests, ~91% coverage, 7 primal domains, zero spring dependencies. Three-generation validation: Python→Rust→IPC (proven by ludoSpring) → garden composition (proven by Webb).
 

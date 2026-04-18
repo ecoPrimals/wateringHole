@@ -62,6 +62,7 @@ evolving toward self-validating NUCLEUS deployments:
 - **primalSpring v0.9.15**: guideStone composition standard, fragment-first graphs, 570 tests
 - **guideStone pattern**: Self-validating NUCLEUS node (5 properties: deterministic, traceable, self-verifying, env-agnostic, tolerance-documented). Proven by hotSpring-guideStone-v0.7.0. Extracted as ecosystem standard in `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md`.
 - **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V53 (guideStone Level 1), neuralSpring V133 (guideStone Level 1), wetSpring V145 (guideStone Level 1)
+- **primalSpring guideStone**: `primalspring_guidestone` binary — 6-layer base composition certification (bare properties, discovery, health, capability parity, cross-atomic pipeline, bonding, BTSP/crypto). Base layer that domain guideStones inherit.
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
 - **Composing springs**: ludoSpring V44 (guideStone Level 1, four-layer validation)
 
@@ -248,7 +249,7 @@ Four springs have entered active NUCLEUS composition testing:
 | Spring | Status | Composition Evidence |
 |--------|--------|---------------------|
 | **hotSpring** v0.6.32 | **Delta** — Level 5 primal proof | 63/63 suites; `validate_primal_proof` calls barraCuda/BearDog over IPC; 13 LOCAL_CAPABILITIES dispatched |
-| **healthSpring** V53 | **Delta** — Level 5 in progress | exp122 IPC parity; `math_dispatch.rs` feature-gated IPC/lib routing; niche.rs; dual-tower ionic |
+| **healthSpring** V53 | **Delta** — Level 5 in progress (guideStone readiness: Level 1) | exp122 IPC parity; `math_dispatch.rs` feature-gated IPC/lib routing; niche.rs; dual-tower ionic |
 | **neuralSpring** V133 | **Delta** — Level 5 primal proof | `IpcMathClient` (9 methods); `validate_proto_nucleate_capabilities` (7 caps, exit 0/1/2); `deny.toml` stadial bans; 18 barraCuda surface gaps handed back |
 | **wetSpring** V145 | **Delta** — Level 5 primal proof | Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES in niche.rs |
 | **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
