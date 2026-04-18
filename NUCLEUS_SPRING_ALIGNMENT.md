@@ -58,7 +58,7 @@ only (IPC calls to NUCLEUS). There are no spring binaries at the composition lev
 | Spring | Version | Evolution | Tests | barraCuda | Primary Atomics | Proto-Nucleate |
 |--------|---------|-----------|-------|-----------|-----------------|----------------|
 | **hotSpring** | 0.6.32 | **composing** | 985 | composing | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` |
-| **neuralSpring** | V132 (0.1.0) | **composing** | 1,403 | composing | **Node** + Meta | `neuralspring_inference_proto_nucleate` |
+| **neuralSpring** | V133 (0.1.0) | **composing** | 1,403 | composing | **Node** + Meta | `neuralspring_inference_proto_nucleate` |
 | **wetSpring** | 0.3.0 | **composed** | 1,902 | composing | Node + **Nest** + Meta | `wetspring_lifescience_proto_nucleate` |
 | **airSpring** | 0.10.0 | **composed** | 1,364 | composing | Node + **Nest** | `airspring_ecology_proto_nucleate` |
 | **groundSpring** | 0.1.0 | **composing** | 1,050 | calling | Node + **Nest** | `groundspring_geoscience_proto_nucleate` |
@@ -372,7 +372,7 @@ etc.). The gap is that springs still link barraCuda as a **Rust library dependen
 |--------|------------|------------------------|---------------|
 | hotSpring v0.6.32 | git rev | `validate_primal_proof` (9 probes) | **Level 5** — 10 capabilities consumed over IPC (`tensor.create`, `tensor.matmul`, `tensor.scale`, `tensor.add`, `stats.mean`, `stats.std_dev`, `compute.dispatch`, `crypto.hash`, `tolerances.get`, `validate.gpu_stack`) |
 | healthSpring V53 | path dep | `math_dispatch.rs` + exp122 | **Rewiring** — feature-gated `primal-proof` routes `stats.mean`/`stats.std_dev` through IPC; exp122 validates parity |
-| neuralSpring V132 | path dep | json_rpc_call exists | **Not rewired** — science self-contained; proto-nucleate aligned |
+| neuralSpring V133 | path dep | `IpcMathClient` (9 methods wired) | **Level 5** — `validate_proto_nucleate_capabilities` exercises 7 caps; 18 barraCuda library calls still need IPC surface (eigh, Pearson, chi-squared, etc.) |
 | wetSpring V145 | path dep | Exp403 `validate_primal_parity_v1` | **Level 5** — calls 5 primals (barraCuda, NestGate, Squirrel, BearDog, toadStool) over UDS; 22 CONSUMED_CAPABILITIES in niche.rs |
 | ludoSpring V44 | git rev | `validate_primal_proof` binary | **Level 5** — four-layer validation (Python→Rust→IPC→primal proof) |
 

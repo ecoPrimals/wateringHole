@@ -432,7 +432,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | ToadStool | S203t | 7,784 lib | Stadial cleared; all 11 DEBT.md items resolved; RPITIT + enum dispatch |
 | hotSpring | v0.6.32 | 985 lib / 63 suites | **Level 5** — `validate_primal_proof` (9 IPC probes); PRIMAL_PROOF_IPC_MAPPING.md; 13 LOCAL_CAPABILITIES |
 | healthSpring | V53 | 936+ lib | **Level 5 in progress** — exp122 IPC parity; `math_dispatch.rs` feature-gated routing; dual-tower ionic |
-| neuralSpring | V132 | ~1,230 lib | **Active** — validate_science_composition; proto-nucleate aligned; primal proof handoff |
+| neuralSpring | V133 | 1,234 lib | **Level 5** — `IpcMathClient` (9 methods); `validate_proto_nucleate_capabilities` (7 caps); `deny.toml` stadial bans |
 | wetSpring | V145 | 1,600+ lib | **Level 5** — Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES |
 | groundSpring | V124 | 1,050+ | Pre-composition; 92% coverage; tolerance hardening |
 | airSpring | v0.10.0 | 986 lib / 1,364 total | Pre-composition; 90.56% coverage; deny.toml clean |
