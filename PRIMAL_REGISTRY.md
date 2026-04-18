@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: April 16, 2026 (Stadial parity gate — sweetGrass async-trait/dyn eliminated)
+**Last Updated**: April 17, 2026 (Post-stadial — all 13 primals cleared; 4 springs in active NUCLEUS composition)
 
 ---
 
@@ -249,7 +249,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Universal User Interface — any computational universe → any modality → any user type  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A+) — v1.6.6, 16 crates, 5,244 tests, ~86% / ~87% coverage, edition 2024, `#![forbid(unsafe_code)]` + `deny(unwrap/expect)`, zero C deps, AGPL-3.0-or-later, 11 DataBinding variants, UUI glossary module, SAME DAVE model, `#[expect]` migration. See [PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md](petaltongue/PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md) for integration gaps
+**Status**: Production Ready (A+) — v1.6.7, 16 crates, 5,244+ tests, ~86% / ~87% coverage, edition 2024, `#![forbid(unsafe_code)]` + `deny(unwrap/expect)`, zero C deps, AGPL-3.0-or-later, 11 DataBinding variants, UUI glossary module, SAME DAVE model, `#[expect]` migration, **stadial cleared** — reqwest+ring+hyper-rustls+rustls eliminated (LocalHttpClient via hyper), UUI boundary cleanup, DiscoveredDisplayBackendV2 JSON-RPC/UDS. See [PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md](petaltongue/PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md) for integration gaps
 
 **Role**: petalTongue is the Universal User Interface — translating any computational universe into any modality for any user type. It implements a composable **Grammar of Graphics** pipeline: any primal sends a declarative grammar expression (data + variable bindings + scales + geometry + coordinates), and petalTongue compiles it to the best available representation (desktop display, terminal, audio sonification, SVG, PNG, JSON API, haptic, braille). Tufte constraints (data-ink ratio, lie factor, accessibility) are machine-checked on every render. The **SAME DAVE** cognitive model (Sensory Afferent / Motor Efferent) provides bidirectional feedback loops. Heavy computation (statistics, 3D tessellation, physics) is offloaded to barraCuda via capability-based discovery. The grammar is domain-agnostic: the same pipeline renders ecosystem topology, clinical vitals, molecular structures, game worlds, and universe simulations. Accessibility is not a feature — it is the architecture: every modality is a first-class compilation target, serving sighted humans, blind hikers, paraplegic developers, AI agents, and beyond. Live ecosystem wiring enables 60 Hz sensor streaming, interaction broadcast, and Neural API self-registration with biomeOS.
 
@@ -425,20 +425,21 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
-**Spring Versions (as of April 13, 2026)**:
+**Spring Versions (as of April 17, 2026)**:
 
-| Spring | Version |
-|--------|---------|
-| ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
-| hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
-| groundSpring | V103 |
-| neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
-| wetSpring | V99 |
-| airSpring | v0.7.6 |
-| barraCuda | v0.3.12 (4,393+ tests, 826 shaders, AGPL-3.0-or-later, 32 IPC methods, LD-05/LD-10 resolved, BTSP Phase 2, all production files <600 lines) |
-| coralReef | Phase 10 Iteration 80 (4,506 tests, ~65% line / ~82% non-hw coverage, 11 GPU archs, wire contract documented, CompilationInfo IPC, BTSP Phase 2, ecoBin v3 deny.toml, zero warnings, all files <1000 LOC) |
-| primalSpring | v0.9.14 Phase 41 (443 lib tests, 13 FullNucleus capabilities, 19/19 exp094 PASS, NUCLEUS VALIDATED, Phase 5 registry seeding, cross-gate deployment tooling: build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health, LAN deployment guide, zero warnings, zero unsafe) |
-| ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
+| Spring | Version | Tests | NUCLEUS Composition Status |
+|--------|---------|-------|---------------------------|
+| ToadStool | S203t | 7,784 lib | Stadial cleared; all 11 DEBT.md items resolved; RPITIT + enum dispatch |
+| hotSpring | v0.6.32 | 985 lib / 62 suites | **Active** — Tier 3 composition validators; 13 LOCAL_CAPABILITIES dispatched |
+| healthSpring | V53 | 936+ lib | **Active** — exp119/120/121 composition parity; niche.rs; dual-tower ionic bridge |
+| neuralSpring | V131 | ~1,229 lib | **Active** — validate_science_composition; cross-team absorption handoff |
+| wetSpring | V144 | 1,592 lib / 18 IPC | **Active** — Exp401 (43/43), Exp402 (63/63); provenance registry |
+| groundSpring | V124 | 1,050+ | Pre-composition; 92% coverage; tolerance hardening |
+| airSpring | v0.10.0 | 986 lib / 1,364 total | Pre-composition; 90.56% coverage; deny.toml clean |
+| barraCuda | v0.3.12 | 4,393+ | 826 shaders; 32 IPC methods; LD-05/LD-10 resolved; BTSP Phase 2 |
+| coralReef | Phase 10 Iter 80 | 4,506 | 11 GPU archs; wire contract documented; CompilationInfo IPC |
+| primalSpring | v0.9.15 | 592 (570 lib) | 75 experiments; 56 deploy graphs; fragment-first composition |
+| ludoSpring | V30 | 675+19 | Pre-composition; 82 experiments; 91.27% coverage |
 
 ### airSpring - Ecological & Agricultural Sciences
 
@@ -487,7 +488,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Plasma physics, nuclear structure, lattice QCD, transport, spectral theory
 **Phase**: Domain Validation
-**Status**: v0.6.23 — ~700 tests, 84 binaries, 62 WGSL shaders, 39/39 validation suites
+**Status**: v0.6.32 — 985 tests, 140 binaries, 62 WGSL shaders, 62/62 validation suites, Tier 3 NUCLEUS composition validators, deny.toml (async-trait banned), #[expect] migration, niche.rs proto-nucleate → downstream_manifest.toml, dyn eliminated (ValidationSink enum, RegisterMap enum)
 
 **Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC), screened Coulomb transport, Anderson localization, and Hofstadter butterfly. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline.
 
@@ -495,7 +496,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 30 complete/active: MD, GPU scaling, parity, lattice QCD, NPU characterization, brain architecture, adaptive steering |
+| **Experiments** | 37+ complete/active: MD, GPU scaling, parity, lattice QCD, NPU characterization, brain architecture, adaptive steering, NUCLEUS composition (3), Chuna papers, gradient flow, sovereign dispatch |
 | **Physics Domains** | Yukawa OCP MD, nuclear EOS (SEMF→HFB→deformed), SU(3) gauge + dynamical fermion HMC, Green-Kubo transport, Anderson 1D/2D/3D, Hofstadter butterfly, Abelian Higgs |
 | **GPU Validation** | 62 WGSL shaders, DF64 core streaming (3.24 TFLOPS, 14-digit precision on FP32), GPU-resident CG (15,360× readback reduction) |
 | **NPU Integration** | Live AKD1000 via PCIe, 15-head ESN (11 production + 4 proxy), cross-run learning, concept edge detection |
@@ -522,8 +523,8 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 ### primalSpring - Coordination and Composition Validation
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
-**Phase**: Phase 41 (Pre-Downstream Gap Resolution — 12/12 ALIVE, 19/19 exp094 PASS)  
-**Status**: v0.9.14 Phase 41 — 443 lib tests (all passing), 53+ experiments, 19/19 exp094 composition parity PASS (0 FAIL, 0 SKIP), all LD-01 through LD-10 gaps RESOLVED, `IpcError::is_transport_mismatch()` for graceful transport handling, `CompositionContext::from_live_discovery()`, `validate_parity` with `stats.mean`/`storage.store`/`crypto.hash` wire methods, `nucleus_launcher.sh` Phase 5 registry seeding, 67+ TOML graphs across 9 subdirectories, cross-gate deployment tooling, IPC resilience stack, MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
+**Phase**: Phase 43+ (Stadial gate cleared — all primals + primalSpring; graph consolidation complete; 4 springs in active NUCLEUS composition)  
+**Status**: v0.9.15 — 570 lib tests (592 total), 75 experiments (17 tracks), 56 deploy graph TOMLs (fragment-first composition with resolve = true), 19/19 exp094 parity PASS, 12/12 exp091 routing PASS, 14/15 exp096 cross-arch PASS, stadial parity (zero dyn, zero async-trait, Edition 2024, #[expect] everywhere), graph consolidation 78→56 (template+manifest + fragment resolution), cross-gate deployment tooling, IPC resilience stack, MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 

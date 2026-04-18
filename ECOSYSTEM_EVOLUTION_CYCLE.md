@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: April 12, 2026
-**Version**: v1.0.0
+**Date**: April 17, 2026
+**Version**: v1.1.0
 **License**: AGPL-3.0-or-later
 
 ---
@@ -54,15 +54,17 @@ Upstream primals absorb math, shaders, and IPC patterns from springs.
 Downstream gets less "snow melt" — fewer new capabilities flowing down.
 Springs focus on validation of what exists, surfacing gaps, tightening.
 
-**Current state (April 2026)**: Mountain season. Primals are closing debt:
-- barraCuda Sprint 41: BC-07/BC-08 resolved, 3-tier GPU fallback wired
-- coralReef Iter 80: wire contract, CompilationInfo IPC, hot-path alloc eliminated, VFIO feature-gated, mmu_oracle tested, 4,506 tests
-- NestGate Session 42: ring eliminated, storage IPC stable
-- BearDog Wave 49: transport security (TS-01), workspace dep alignment, large file refactor, 14,784+ tests
-- biomeOS v3.03: capability.resolve, inference routing, anyhow migration
+**Current state (April 2026)**: Spring → Delta transition. Stadial parity gate
+cleared across all 13 primals + primalSpring. Four domain springs have entered
+active NUCLEUS composition testing. The ecosystem is no longer in mountain
+season — it has crossed into delta season for the leading springs:
+- **Stadial gate cleared**: BearDog W56, Songbird W147, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
+- **primalSpring v0.9.15**: Graph consolidation (78→56 TOMLs), fragment-first composition, 570 tests
+- **Active delta springs**: hotSpring v0.6.32 (62/62 suites), healthSpring V53 (exp119-121), neuralSpring V131 (science composition), wetSpring V144 (Exp401/402)
+- **Pre-composition springs**: airSpring v0.10.0, groundSpring V124, ludoSpring V30
 
-primalSpring is tightening: inference module archived, stale graphs removed,
-composition validation library built. Ready for composition elevation.
+Mountain season work continues for cross-primal protocols: ionic bond
+negotiation, BTSP Phase 3, compute.dispatch standardization.
 
 ### Spring Season (composition elevation)
 
@@ -210,11 +212,15 @@ resolved in parallel with composition schema work.
 
 | Severity | Primals | Debt |
 |----------|---------|------|
-| **HEAVY** | BearDog, Squirrel | 100+ `#[async_trait]` each, heavy `dyn` dispatch |
-| **RESOLVED** | toadStool | 0 `#[async_trait]` (S203r), enum dispatch + RPITIT (S203s), all active debt evolved (S203t), 7,784 tests |
-| **RESOLVED** | Songbird | 0 `#[async_trait]`, 0 `dyn` dispatch, 0 production mocks, 0 bare `#[allow]`, 0 raw IPs — Wave 147 |
-| **MEDIUM** | biomeOS, NestGate, petalTongue | Partial migration or `Box<dyn Error>` dominant |
-| **LOW/CLEAN** | barraCuda, coralReef, loamSpine, rhizoCrypt | Already modern or minimal debt |
+| **RESOLVED** | BearDog | 0 `#[async_trait]`, 0 `Box<dyn Error>` in production (W56), serde_yaml eliminated, 14,786+ tests |
+| **RESOLVED** | Songbird | 0 `#[async_trait]`, 0 finite `dyn`, 0 production mocks, 0 bare `#[allow]` — Wave 147, 7,377 tests |
+| **RESOLVED** | ToadStool | RPITIT + enum dispatch (S203s), all 11 DEBT.md items resolved (S203t), 7,784 tests |
+| **RESOLVED** | NestGate | ring eliminated, deprecated markers 114→0 (43w), 8,695 tests |
+| **RESOLVED** | petalTongue | reqwest+ring+rustls eliminated (v1.6.7), LocalHttpClient via hyper, UUI boundary cleanup |
+| **RESOLVED** | sweetGrass | 6 traits → RPITIT, sled eliminated, async-trait removed from direct deps |
+| **RESOLVED** | biomeOS | RPITIT (`PrimalOperationExecutor`), async-trait removed from types/api production (v3.07) |
+| **WIP** | Squirrel | async-trait reduction ongoing; core AI routing operational |
+| **CLEAN** | barraCuda, coralReef, loamSpine, rhizoCrypt | Already modern or minimal debt |
 
 **Resolution**: native `async fn` in traits (rustc 1.75+), enum dispatch where
 trait objects have finite implementors, `thiserror`/`anyhow` instead of
@@ -223,11 +229,29 @@ trait objects have finite implementors, `thiserror`/`anyhow` instead of
 See `primalSpring/docs/PRIMAL_GAPS.md` § "Class 4: Pre-Modern Async Rust"
 for the full per-primal matrix.
 
-### Downstream Springs (waiting for composition elevation)
+### Downstream Springs — Composition Status
 
-All springs are at "composing" stage. They need primalSpring to prove
-composition parity before they can elevate from Rust math to primal
-composition. See `NUCLEUS_SPRING_ALIGNMENT.md` for the per-spring matrix.
+Four springs have entered active NUCLEUS composition testing:
+
+| Spring | Status | Composition Evidence |
+|--------|--------|---------------------|
+| **hotSpring** v0.6.32 | **Delta** — Tier 3 NUCLEUS validators | 62/62 suites; 13 LOCAL_CAPABILITIES dispatched; IPC wiring with honest skip |
+| **healthSpring** V53 | **Delta** — Live IPC parity | exp119 (parity), exp120 (provenance), exp121 (health); niche.rs; dual-tower ionic |
+| **neuralSpring** V131 | **Delta** — Science composition | validate_science_composition (spectral, IPR, Hessian, disorder sweep); cross-team handoff |
+| **wetSpring** V144 | **Delta** — Full tier validation | Exp401 (43/43), Exp402 (63/63); 18 IPC roundtrip tests; provenance registry |
+| **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
+| **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
+| **ludoSpring** V30 | **Pre-delta** | Pure composition product; awaits biomeOS deploy |
+
+**Common ecosystem blockers** across active delta springs:
+- Ionic bond negotiation (BearDog `crypto.sign_contract`) — hotSpring, healthSpring, wetSpring
+- BTSP Phase 3 server (encrypted channel) — hotSpring, healthSpring
+- toadStool `compute.dispatch` standardization — hotSpring, wetSpring, neuralSpring
+- Squirrel provider registration — neuralSpring, healthSpring, wetSpring
+- NestGate `storage.fetch_external` for cross-spring — wetSpring, healthSpring
+- barraCuda IPC migration (path dep → capability IPC) — neuralSpring, all implicit
+
+See `NUCLEUS_SPRING_ALIGNMENT.md` and `primalSpring/wateringHole/GRAPH_CONSOLIDATION_AND_NUCLEUS_DEPLOYMENT_HANDOFF_APR16_2026.md`.
 
 ---
 
