@@ -268,7 +268,7 @@ that primal-orchestrated IPC produces the same results as local Rust math.
 | **healthSpring** | Create composition parity experiment; validate `storage.store`/`storage.retrieve` + `crypto.hash` via IPC |
 | **neuralSpring** | Complete dispatch routing (two-tier); register as Squirrel inference provider; composition parity for `inference.*` |
 | **wetSpring** | Composition parity experiment with `stats.mean` + `storage.store`/`storage.retrieve` + provenance |
-| **hotSpring** | **Level 5 primal proof**: `validate_primal_proof` calls barraCuda/BearDog over IPC (tensor.matmul, stats.mean, crypto.hash, etc.); deploy graph in `graphs/`; IPC mapping in `docs/PRIMAL_PROOF_IPC_MAPPING.md` |
+| **hotSpring** | **guideStone Level 5 CERTIFIED** (reference implementation): all 5 properties, `validate_primal_proof` (9 probes, 10 capabilities), `validation/` artifact (59/59 × 5 substrates), IPC mapping in `docs/PRIMAL_PROOF_IPC_MAPPING.md`, deploy graph in `graphs/` |
 | **airSpring** | Method normalization in all paths; composition parity for weather/soil compute |
 | **groundSpring** | Method normalization; dispatch routing; composition parity for sensor/calibration |
 | **ludoSpring** | Method normalization; capability registration; composition parity for game math |

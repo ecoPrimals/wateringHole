@@ -248,7 +248,7 @@ Four springs have entered active NUCLEUS composition testing:
 
 | Spring | Status | Composition Evidence |
 |--------|--------|---------------------|
-| **hotSpring** v0.6.32 | **Delta** — Level 5 primal proof | 63/63 suites; `validate_primal_proof` calls barraCuda/BearDog over IPC; 13 LOCAL_CAPABILITIES dispatched |
+| **hotSpring** v0.6.32 | **guideStone Level 5 CERTIFIED** | 63/63 suites; all 5 guideStone properties; `validate_primal_proof` (9 probes, 10 caps); 13 LOCAL_CAPABILITIES dispatched |
 | **healthSpring** V53 | **Delta** — Level 5 in progress (guideStone readiness: Level 1) | exp122 IPC parity; `math_dispatch.rs` feature-gated IPC/lib routing; niche.rs; dual-tower ionic |
 | **neuralSpring** V133 | **Delta** — Level 5 primal proof | `IpcMathClient` (9 methods); `validate_proto_nucleate_capabilities` (7 caps, exit 0/1/2); `deny.toml` stadial bans; 18 barraCuda surface gaps handed back |
 | **wetSpring** V145 | **Delta** — Level 5 primal proof | Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES in niche.rs |
