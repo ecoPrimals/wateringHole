@@ -425,17 +425,20 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
-**Spring Versions (as of April 17, 2026)**:
+**Spring Versions (as of April 18, 2026)**:
 
-| Spring | Version | Tests | NUCLEUS Composition Status |
-|--------|---------|-------|---------------------------|
-| ToadStool | S203t | 7,784 lib | Stadial cleared; all 11 DEBT.md items resolved; RPITIT + enum dispatch |
-| hotSpring | v0.6.32 | 985 lib / 63 suites | **Level 5** — `validate_primal_proof` (9 IPC probes); PRIMAL_PROOF_IPC_MAPPING.md; 13 LOCAL_CAPABILITIES |
-| healthSpring | V53 | 936+ lib | **Level 5 in progress** — exp122 IPC parity; `math_dispatch.rs` feature-gated routing; dual-tower ionic |
-| neuralSpring | V133 | 1,234 lib | **Level 5** — `IpcMathClient` (9 methods); `validate_proto_nucleate_capabilities` (7 caps); `deny.toml` stadial bans |
-| wetSpring | V145 | 1,600+ lib | **Level 5** — Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES |
-| groundSpring | V124 | 1,050+ | Pre-composition; 92% coverage; tolerance hardening |
-| airSpring | v0.10.0 | 986 lib / 1,364 total | Pre-composition; 90.56% coverage; deny.toml clean |
+guideStone readiness: 0=not started, 1=validation exists, 2=properties documented,
+3=bare works, 4=NUCLEUS works, 5=certified. See `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md`.
+
+| Spring | Version | Tests | guideStone | NUCLEUS Composition Status |
+|--------|---------|-------|-----------|---------------------------|
+| ToadStool | S203t | 7,784 lib | N/A (primal) | Stadial cleared; all 11 DEBT.md items resolved |
+| hotSpring | v0.6.32 | 985 lib / 63 suites | **5 — Certified** | guideStone-v0.7.0: all 5 properties, cross-substrate, NUCLEUS additive |
+| healthSpring | V53 | 936+ lib | **1** | exp122 IPC parity; `math_dispatch.rs`; dual-tower ionic |
+| neuralSpring | V133 | 1,234 lib | **1** | `IpcMathClient` (9 methods); 7 caps harness; `deny.toml` stadial bans |
+| wetSpring | V145 | 1,600+ lib | **1** | Exp403 (5 primals over IPC); 22 CONSUMED_CAPABILITIES |
+| groundSpring | V124 | 1,050+ | **0** | Pre-composition; 92% coverage; tolerance hardening |
+| airSpring | v0.10.0 | 986 lib / 1,364 total | **0** | Pre-composition; 90.56% coverage; deny.toml clean |
 | barraCuda | v0.3.12 | 4,393+ | 826 shaders; 32 IPC methods; LD-05/LD-10 resolved; BTSP Phase 2 |
 | coralReef | Phase 10 Iter 80 | 4,506 | 11 GPU archs; wire contract documented; CompilationInfo IPC |
 | primalSpring | v0.9.15 | 592 (570 lib) | 75 experiments; 56 deploy graphs; fragment-first composition |
