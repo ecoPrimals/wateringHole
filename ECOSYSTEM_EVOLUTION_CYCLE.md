@@ -54,15 +54,16 @@ Upstream primals absorb math, shaders, and IPC patterns from springs.
 Downstream gets less "snow melt" — fewer new capabilities flowing down.
 Springs focus on validation of what exists, surfacing gaps, tightening.
 
-**Current state (April 2026)**: Spring → Delta transition. Stadial parity gate
-cleared across all 13 primals + primalSpring. Four domain springs have entered
-active NUCLEUS composition testing. The ecosystem is no longer in mountain
-season — it has crossed into delta season for the leading springs:
+**Current state (April 2026)**: Spring → Delta transition with **guideStone pattern**
+emerging as the universal composition model. Stadial parity gate cleared across all
+13 primals + primalSpring. The ecosystem is in delta season for leading springs,
+evolving toward self-validating NUCLEUS deployments:
 - **Stadial gate cleared**: BearDog W56, Songbird W147, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
-- **primalSpring v0.9.15**: Graph consolidation (78→56 TOMLs), fragment-first composition, 570 tests
-- **Active delta springs**: hotSpring v0.6.32 (63/63 suites, Level 5 primal proof), healthSpring V53 (exp122 IPC parity, math_dispatch.rs), neuralSpring V133 (IpcMathClient, 7 caps harness, deny.toml stadial bans), wetSpring V145 (Exp403 primal parity, 5 primals over IPC)
+- **primalSpring v0.9.15**: guideStone composition standard, fragment-first graphs, 570 tests
+- **guideStone pattern**: Self-validating NUCLEUS node (5 properties: deterministic, traceable, self-verifying, env-agnostic, tolerance-documented). Proven by hotSpring-guideStone-v0.7.0. Extracted as ecosystem standard in `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md`.
+- **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V53 (guideStone Level 1), neuralSpring V133 (guideStone Level 1), wetSpring V145 (guideStone Level 1)
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
-- **Composing springs**: ludoSpring V44 (four-layer validation: Python→Rust→IPC composition→primal proof; `validate_primal_proof` Level 5)
+- **Composing springs**: ludoSpring V44 (guideStone Level 1, four-layer validation)
 
 Mountain season work continues for cross-primal protocols: ionic bond
 negotiation, BTSP Phase 3, compute.dispatch standardization.
