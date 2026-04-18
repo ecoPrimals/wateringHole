@@ -62,7 +62,7 @@ season — it has crossed into delta season for the leading springs:
 - **primalSpring v0.9.15**: Graph consolidation (78→56 TOMLs), fragment-first composition, 570 tests
 - **Active delta springs**: hotSpring v0.6.32 (62/62 suites), healthSpring V53 (exp119-121), neuralSpring V132 (science composition, proto-nucleate aligned), wetSpring V144 (Exp401/402)
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
-- **Composing springs**: ludoSpring V43 (three-layer validation: Python→Rust→IPC golden chain)
+- **Composing springs**: ludoSpring V44 (four-layer validation: Python→Rust→IPC composition→primal proof; `validate_primal_proof` Level 5)
 
 Mountain season work continues for cross-primal protocols: ionic bond
 negotiation, BTSP Phase 3, compute.dispatch standardization.
@@ -252,7 +252,7 @@ Four springs have entered active NUCLEUS composition testing:
 | **wetSpring** V144 | **Delta** — Full tier validation | Exp401 (43/43), Exp402 (63/63); 18 IPC roundtrip tests; provenance registry |
 | **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
 | **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
-| **ludoSpring** V43 | **Delta** | Three-layer validation (Python→Rust→IPC); validate_composition binary; 790+ tests; plasmidBin v0.10.0 |
+| **ludoSpring** V44 | **Delta** | Four-layer validation (Python→Rust→IPC→primal proof); `validate_primal_proof` binary (Level 5); 790+ tests; plasmidBin v0.10.0 |
 
 **Common ecosystem blockers** across active delta springs:
 - Ionic bond negotiation (BearDog `crypto.sign_contract`) — hotSpring, healthSpring, wetSpring
