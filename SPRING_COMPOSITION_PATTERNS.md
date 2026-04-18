@@ -1,7 +1,7 @@
 # Spring Composition Patterns — Absorbed Best Practices
 
 **Date**: April 13, 2026
-**From**: primalSpring v0.9.13 — Phase 40: NUCLEUS Complete (12/12 ALIVE, 19/19 exp094 PASS)
+**From**: primalSpring v0.9.15 — Phase 43+: NUCLEUS Complete (12/12 ALIVE, 19/19 exp094 PASS), guideStone composition certification
 **For**: All springs evolving toward primal composition
 **License**: AGPL-3.0-or-later
 
