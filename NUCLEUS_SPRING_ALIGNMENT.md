@@ -57,7 +57,7 @@ only (IPC calls to NUCLEUS). There are no spring binaries at the composition lev
 
 | Spring | Version | Evolution | Tests | barraCuda | Primary Atomics | Proto-Nucleate |
 |--------|---------|-----------|-------|-----------|-----------------|----------------|
-| **hotSpring** | 0.6.32 | **composing** | 1,040 | composing | **Node** (proton-heavy) + Nest | `hotspring_qcd_proto_nucleate` |
+| **hotSpring** | 0.6.32 | **composing** | 985 | composing | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` |
 | **neuralSpring** | 0.1.0 | **composing** | 1,403 | composing | **Node** + Meta | `neuralspring_inference_proto_nucleate` |
 | **wetSpring** | 0.3.0 | **composed** | 1,902 | composing | Node + **Nest** + Meta | `wetspring_lifescience_proto_nucleate` |
 | **airSpring** | 0.10.0 | **composed** | 1,364 | composing | Node + **Nest** | `airspring_ecology_proto_nucleate` |
