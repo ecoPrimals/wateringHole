@@ -370,11 +370,11 @@ etc.). The gap is that springs still link barraCuda as a **Rust library dependen
 
 | Spring | Library Dep | IPC Client to barraCuda | Rewire Status |
 |--------|------------|------------------------|---------------|
-| hotSpring v0.6.32 | git rev | NucleusContext + validate_primal_proof | **Level 5 harness ready** — calls primals over IPC, physics local for speed but IPC-validated for parity |
-| healthSpring V53 | path dep | PrimalClient exists | **Not rewired** — math in-process |
-| neuralSpring V132 | path dep | json_rpc_call exists | **Not rewired** — science self-contained |
-| wetSpring V144 | path dep | dispatch exists | **Not rewired** — embeds barraCuda |
-| ludoSpring V43 | git rev | call_primal exists | **Closest** — IPC parity experiments exist |
+| hotSpring v0.6.32 | git rev | `validate_primal_proof` (9 probes) | **Level 5** — 10 capabilities consumed over IPC (`tensor.create`, `tensor.matmul`, `tensor.scale`, `tensor.add`, `stats.mean`, `stats.std_dev`, `compute.dispatch`, `crypto.hash`, `tolerances.get`, `validate.gpu_stack`) |
+| healthSpring V53 | path dep | `math_dispatch.rs` + exp122 | **Rewiring** — feature-gated `primal-proof` routes `stats.mean`/`stats.std_dev` through IPC; exp122 validates parity |
+| neuralSpring V132 | path dep | json_rpc_call exists | **Not rewired** — science self-contained; proto-nucleate aligned |
+| wetSpring V145 | path dep | Exp403 `validate_primal_parity_v1` | **Level 5** — calls 5 primals (barraCuda, NestGate, Squirrel, BearDog, toadStool) over UDS; 22 CONSUMED_CAPABILITIES in niche.rs |
+| ludoSpring V44 | git rev | `validate_primal_proof` binary | **Level 5** — four-layer validation (Python→Rust→IPC→primal proof) |
 
 ### Remaining IPC Wire Contracts
 
