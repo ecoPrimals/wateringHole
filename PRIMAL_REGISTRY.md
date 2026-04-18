@@ -439,7 +439,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | barraCuda | v0.3.12 | 4,393+ | 826 shaders; 32 IPC methods; LD-05/LD-10 resolved; BTSP Phase 2 |
 | coralReef | Phase 10 Iter 80 | 4,506 | 11 GPU archs; wire contract documented; CompilationInfo IPC |
 | primalSpring | v0.9.15 | 592 (570 lib) | 75 experiments; 56 deploy graphs; fragment-first composition |
-| ludoSpring | V30 | 675+19 | Pre-composition; 82 experiments; 91.27% coverage |
+| ludoSpring | V43 | 790+ | Composing; 100 experiments; three-layer validation (Python→Rust→IPC); plasmidBin v0.10.0 |
 
 ### airSpring - Ecological & Agricultural Sciences
 
@@ -545,8 +545,8 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 ### ludoSpring - Game Design & Interaction Science
 
 **Domain**: Ludology, HCI, game science, procedural generation, interaction design  
-**Phase**: Domain Validation  
-**Status**: V30 — 82 experiments, 675 barracuda + 19 forge tests, 42 Python parity, 19 proptest, 11 IPC integration. Zero `#[allow()]`, zero `unsafe`, zero clippy warnings (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple: AGPL + ORC + CC-BY-SA-4.0), Edition 2024, MSRV 1.87. 91.27% line coverage (85% floor enforced). `thiserror` 2.x on all error types. MCP `tools.list`/`tools.call` (8 science tools). Optional `tarpc-ipc` feature. Handlers split into 5 domain submodules. UniBin 7 subcommands. CI pipeline. Deploy graph fragment. `GpuContext` + `TensorSession` wired behind `gpu` feature. `default-features = false` on barraCuda v0.3.7.
+**Phase**: Composition Validation (Delta)  
+**Status**: V43 — 100 experiments, 790+ workspace tests (741 barracuda + 26 forge + 23 integration), 48 Python parity, 6 composition parity, 12 proptest. Three-layer validation: Python→Rust→IPC golden chain. `validate_composition` binary (Layer 3 IPC parity). `composition_targets.json` golden values (7 method groups). Zero `#[allow()]` in production, zero `unsafe`, zero clippy warnings (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple: AGPL + ORC + CC-BY-SA-4.0), Edition 2024, MSRV 1.87. 90%+ line coverage (CI enforced). `deny.toml` ecoBin compliant (8 C-dep bans). MCP `tools.list`/`tools.call` (13 tool descriptors). UniBin 7 subcommands. `lifecycle.composition` handler. `TensorSession` sigmoid wired. plasmidBin v0.10.0. barraCuda v0.3.11 (`default-features = false`).
 
 **Role**: ludoSpring validates the ecoPrimals pipeline against 13 foundational HCI/game science models — Fitts's law, Hick's law, Steering law, GOMS, Flow theory, Dynamic Difficulty, Four Keys to Fun, Engagement metrics, Perlin noise, Wave Function Collapse, L-systems, BSP trees, Tufte data-ink — proving faithful port from Python baselines to Rust CPU to GPU WGSL shaders. The validated math builds playable prototypes (Doom terminal, roguelike explorer) and cross-domain applications (field genomics provenance, medical access control, extraction shooter anti-cheat).
 
@@ -562,9 +562,10 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **Cross-Domain** | Provenance trio integration, extraction shooter fraud detection, field sample lifecycle, consent-gated medical access, cross-domain fraud unification |
 | **Health** | `health.check`, `health.liveness`, `health.readiness` |
 | **Niche** | `capability.list`, `lifecycle.status`, `capability.register`, `capability.deregister` |
-| **Experiments** | 82 across 22 tracks: core game systems, interaction models, PCG, metrics, benchmarks, external control groups, cross-spring (NCBI, NUCLEUS), RPGPT, Games@Home, provenance trio, extraction shooters, composable viz, lysogeny (6 open recreations), cross-spring provenance (5), RPGPT dialogue plane (9), game history revalidation (7) |
-| **Python Baselines** | 7 scripts, `combined_baselines.json` with `content_sha256`, 42 parity tests |
-| **Deployment** | UniBin (server/status/version), deploy graph, niche YAML, Neural API domain registration, 26 capabilities (24 game + 2 health) |
+| **Experiments** | 100 across 30 tracks: core game systems, interaction models, PCG, metrics, benchmarks, external control groups, cross-spring (NCBI, NUCLEUS), RPGPT, Games@Home, provenance trio, extraction shooters, composable viz, lysogeny (6 open recreations), cross-spring provenance (5), RPGPT dialogue plane (9), game history revalidation (7), NUCLEUS composition parity (2), session lifecycle (2), content ownership (1), NPC dialogue composition (1) |
+| **Python Baselines** | 9 scripts, `combined_baselines.json` with `content_sha256`, 48 parity tests, `check_drift.py` |
+| **Composition Targets** | `composition_targets.json` (7 method groups), `check_composition_drift` (CI), `composition_parity.rs` (6 Layer 2.5 tests) |
+| **Deployment** | UniBin (server/status/version), deploy graph, niche YAML, Neural API domain registration, 27 capabilities (24 game + 3 infrastructure), `lifecycle.composition` handler, plasmidBin v0.10.0 |
 
 **IPC Methods**: 26 JSON-RPC 2.0 methods (game evaluation, procedural generation, telemetry, health, lifecycle, capability) over Unix sockets  
 **Dependencies**: barraCuda (CPU math, `default-features = false`), wgpu (optional `gpu` feature), serde, uuid. Zero C dependencies in application code.
