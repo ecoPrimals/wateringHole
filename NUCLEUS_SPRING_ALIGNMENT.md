@@ -65,7 +65,7 @@ only (IPC calls to NUCLEUS). There are no spring binaries at the composition lev
 | **healthSpring** | 0.1.0 | **composing** | 940 | composing | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_proto_nucleate` |
 | **ludoSpring** | V43 | **composing** | 790+ | composing | Node + **Meta** + Nest | `ludospring_proto_nucleate` |
 
-Also: **esotericWebb** (garden) → `esotericwebb_proto_nucleate` — full NUCLEUS + Meta, pure composition.
+Also: **esotericWebb** (garden, V7) → `esotericwebb_proto_nucleate` — full NUCLEUS + Meta, pure composition. 342 tests, ~91% coverage, 7 primal domains, zero spring dependencies. Three-generation validation: Python→Rust→IPC (proven by ludoSpring) → garden composition (proven by Webb).
 
 ### plasmidBin Niche Validation
 
@@ -108,7 +108,7 @@ Every spring with Squirrel in its composition gets AI
 | **groundSpring** | `inference.complete` | AI-guided calibration, inverse problem parameter estimation |
 | **healthSpring** | `inference.complete` + `inference.embed` | Clinical decision support, drug interaction classification |
 | **ludoSpring** | `inference.complete` | AI Dungeon Master narration, NPC dialogue |
-| **esotericWebb** | `inference.complete` | Narrative generation, AI-driven world building |
+| **esotericWebb** | `inference.complete` + `inference.embed` | Narrative generation, NPC dialogue, AI-driven world building (V7: ai.query, ai.suggest, ai.analyze) |
 
 ### Inference Evolution Path
 

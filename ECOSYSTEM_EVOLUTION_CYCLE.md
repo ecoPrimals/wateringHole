@@ -153,8 +153,16 @@ You compose proven capabilities into products.
 **Your job**: Define your niche composition graph. biomeOS executes it.
 Your validation is that the product works for users.
 
-**Current priority**: Wait for delta season. When springs confirm
-composition parity, gardens can trust the composition layer.
+**Current state**: esotericWebb V7 demonstrates the pattern. 342 tests, ~91%
+coverage, 7 primal domains consumed via PrimalBridge, all degrading gracefully.
+Deploy graphs compose from NUCLEUS fragments (`tower_atomic`, `node_atomic`,
+`nest_atomic`, `meta_tier`). Game science absorbed locally — no spring runtime
+dependencies. Neural API fallback provides transparent AI evolution.
+
+**Current priority**: Exercise composition end-to-end as springs confirm
+composition parity. File capability gaps back through wateringHole handoffs.
+See `ESOTERICWEBB_V7_COMPOSITION_PATTERNS_HANDOFF_APR17_2026.md` for the
+per-primal gap matrix and composition patterns.
 
 ---
 
