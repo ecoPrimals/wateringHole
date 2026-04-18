@@ -82,11 +82,18 @@ barraCuda achieved this by:
 Transitive C boundaries (wgpu → ash → libvulkan.so, tokio → libc) are
 system-level and evolve via Layers 2-4, not Layer 1.
 
-### Layer 2 — coralReef: Phase 10 Iteration 46, Structural Refactor + Coverage
+### Layer 2 — coralReef: Phase 10+, Sovereign Compile Parity
 
-coralReef is a sovereign Rust GPU shader compiler. NVIDIA backend (SM70–SM89)
+coralReef is a sovereign Rust GPU shader compiler. NVIDIA backend (SM35–SM120)
 and AMD backend (RDNA2 GFX1030) operational with E2E dispatch verified on
 both AMD RX 6950 XT and NVIDIA RTX 3090 (via DRM probing).
+
+> **April 18, 2026 update (hotSpring Exp 176)**: Full HMC pipeline (10 QCD
+> shaders) compiles to native SASS on SM35 (Kepler), SM70 (Volta), SM120
+> (Blackwell). f64 transcendental lowering fixed for all NVIDIA generations —
+> MUFU seed + Newton-Raphson sequences now emit SM-aware ops (IAdd2/OpShl
+> for SM32, IAdd3/OpShf for SM70+). QMD v5.0 implemented for Blackwell.
+> `compile_ir()` Naga bypass operational. 1,314 coral-reef tests pass.
 
 **Iteration 24 milestone — Hardware Parity & Driver Sovereignty**:
 - **Multi-GPU discovery**: `enumerate_render_nodes()` scans all `/dev/dri/renderD*`
@@ -145,7 +152,7 @@ parser, recipe distiller and store are all operational. The `RegisterAccess` tra
 bridge to coral-driver is the remaining integration gap.
 
 **Contrast vs CUDA/Kokkos**: coralReef compiles to the same SASS binary that
-CUDA's `ptxas` produces (SM70–SM89), and the same GCN/RDNA binary that AMD's
+CUDA's `ptxas` produces (SM35–SM120), and the same GCN/RDNA binary that AMD's
 ROCm compiler produces — but in pure Rust, with no vendor SDK, no C toolchain,
 and no runtime library dependency. Where CUDA locks you to NVIDIA and Kokkos
 abstracts over vendor SDKs (still requiring CUDA/ROCm/SYCL underneath),
@@ -274,7 +281,7 @@ barraCuda WGSL
   → naga IR (pure Rust, we use upstream or fork)
     → coralReef compile(spirv, target_arch) → native binary
       Targets:
-        NVIDIA: SM70 (Volta), SM75 (Turing), SM80/86 (Ampere), SM89 (Ada)
+        NVIDIA: SM35 (Kepler), SM70 (Volta), SM75 (Turing), SM80/86 (Ampere), SM89 (Ada), SM120 (Blackwell)
         AMD: GFX10 (RDNA1), GFX10.3 (RDNA2), GFX11 (RDNA3)  [future]
         Intel: Xe (DG2)  [future]
 ```
@@ -418,7 +425,7 @@ improvement in one primal benefits all consumers.
 | Layer | Owner | Estimated Time | Risk | Depends On |
 |:---:|---|---|---|---|
 | 1 | barraCuda | **DONE** | — | — |
-| 2 | coralReef | **DONE** — NVIDIA SM70-SM89, AMD RDNA2, 1804 tests, VFIO PFIFO + V2 MMU + USERD_TARGET fix | — | — |
+| 2 | coralReef | **DONE** — NVIDIA SM35-SM120 (Kepler→Blackwell), AMD RDNA2, 1314+ coral-reef tests, VFIO PFIFO + V2 MMU + QMD v5.0 | — | — |
 | 3 | coralReef + barraCuda | **Partial** — coral-gpu API exists; `dispatch_binary` wiring needed | Low | — |
 | 4 | coralReef + toadStool | **In progress** — AMD done, nouveau done, UVM + FECS + RegisterAccess remaining | Medium | Layer 3 |
 

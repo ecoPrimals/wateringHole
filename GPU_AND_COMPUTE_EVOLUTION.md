@@ -68,7 +68,7 @@ Every layer pure Rust in the target; hardware interchangeable; math sovereign.
 | Level | Scope | Status |
 |-------|--------|--------|
 | **1** | WGSL polyfills, `compile_shader_f64`/`df64`, Fp64Strategy, NVK workarounds | Complete; gap vs Kokkos-CUDA closed **27× → 3.7×** (93%); Verlet/cell-list wired |
-| **2** | coralReef sovereign compiler (NAK roots), DRM, coralGpu, tarpc/bincode | Complete (Phase 10 Iter 52+); remaining: dispatch wiring, FECS path per handoffs |
+| **2** | coralReef sovereign compiler (NAK roots), DRM, coralGpu, tarpc/bincode | Complete — SM35/SM70/SM120 compile parity, QMD v5.0, f64 lowering all gens; remaining: dispatch wiring (GAP-HS-031), FECS path |
 | **3** | Standalone coralNak, WGSL → ISA direct, multi-arch | Partial |
 | **4** | coralDriver, coralMem, coralQueue, vfio backend, thin kmod | Core: VFIO glow plug + PBDMA context load proven; full runtime 3–6 mo class |
 
@@ -78,7 +78,7 @@ Estimated scaffolding: Level 1 days; Level 2 2–4 weeks; Level 3 1–2 months; 
 
 - **Layers -1–1** (power, glow plug, BAR2): Complete; coral-glowplug production-grade; VFIO-first; boot-persistent.
 - **Layers 2–4** (PFIFO, runlist, GR context): Blocked — MMU fault buffers → runlist encoding → PBDMA activation → FECS/GPCCS context (see Bring-Up Guide).
-- **Layer 5** (shader compilation): Operational — coralReef Phase 10 Iter 55, 1992+ tests, WGSL→SASS SM70, AMD gfx1030/1100/90a.
+- **Layer 5** (shader compilation): Operational — coralReef 1314+ coral-reef tests, WGSL→SASS SM35/SM70/SM120 (Kepler→Blackwell), AMD gfx1030/1100/90a. f64 transcendental lowering fixed for all NVIDIA generations. QMD v5.0 for Blackwell. 10/10 HMC pipeline shaders compile on all 3 GPU generations (hotSpring Exp 176).
 - **Layer 6** (math/shaders): barraCuda v0.3.5 class, large test counts per source.
 - **toadStool**: Partial — GlowPlug socket client, VFIO sysmon, hw-learn feed gaps per source.
 
