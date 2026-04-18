@@ -442,7 +442,7 @@ guideStone readiness: 0=not started, 1=validation exists, 2=properties documente
 | barraCuda | v0.3.12 | 4,393+ | 826 shaders; 32 IPC methods; LD-05/LD-10 resolved; BTSP Phase 2 |
 | coralReef | Phase 10 Iter 80 | 4,506 | 11 GPU archs; wire contract documented; CompilationInfo IPC |
 | primalSpring | v0.9.15 | 592 (570 lib) | 75 experiments; 56 deploy graphs; fragment-first composition |
-| ludoSpring | V44 | 790+ | Composing; 100 experiments; four-layer validation (Python→Rust→IPC→primal proof); `validate_primal_proof` (Level 5); plasmidBin v0.10.0 |
+| ludoSpring | V45 | 790+ | Composing; 100 experiments; five-layer validation; `ludospring_guidestone` (Level 5 guideStone); plasmidBin v0.10.0 |
 
 ### airSpring - Ecological & Agricultural Sciences
 
@@ -549,7 +549,7 @@ guideStone readiness: 0=not started, 1=validation exists, 2=properties documente
 
 **Domain**: Ludology, HCI, game science, procedural generation, interaction design  
 **Phase**: Composition Validation (Delta)  
-**Status**: V44 — 100 experiments, 790+ workspace tests (741 barracuda + 26 forge + 23 integration), 48 Python parity, 6 composition parity, 12 proptest. Four-layer validation: Python→Rust→IPC composition→primal proof. `validate_primal_proof` binary (Level 5: calls 10 barraCuda IPC methods against Python golden values). `validate_composition` binary (Layer 3 IPC parity). `composition_targets.json` golden values (7 method groups). Zero `#[allow()]` in production, zero `unsafe`, zero clippy warnings (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple: AGPL + ORC + CC-BY-SA-4.0), Edition 2024, MSRV 1.87. 90%+ line coverage (CI enforced). `deny.toml` ecoBin compliant (8 C-dep bans). MCP `tools.list`/`tools.call` (13 tool descriptors). UniBin 7 subcommands. `lifecycle.composition` handler. `TensorSession` sigmoid wired. plasmidBin v0.10.0. barraCuda v0.3.11 (`default-features = false`).
+**Status**: V45 — 100 experiments, 790+ workspace tests (741 barracuda + 26 forge + 23 integration), 48 Python parity, 6 composition parity, 12 proptest. Five-layer validation + guideStone (Python→Rust→IPC composition→`ludospring_guidestone` binary, Level 5 guideStone: calls 10 barraCuda IPC methods against Python golden values). `validate_composition` binary (Layer 3 IPC parity). `composition_targets.json` golden values (7 method groups). Zero `#[allow()]` in production, zero `unsafe`, zero clippy warnings (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple: AGPL + ORC + CC-BY-SA-4.0), Edition 2024, MSRV 1.87. 90%+ line coverage (CI enforced). `deny.toml` ecoBin compliant (8 C-dep bans). MCP `tools.list`/`tools.call` (13 tool descriptors). UniBin 7 subcommands. `lifecycle.composition` handler. `TensorSession` sigmoid wired. plasmidBin v0.10.0. barraCuda v0.3.11 (`default-features = false`).
 
 **Role**: ludoSpring validates the ecoPrimals pipeline against 13 foundational HCI/game science models — Fitts's law, Hick's law, Steering law, GOMS, Flow theory, Dynamic Difficulty, Four Keys to Fun, Engagement metrics, Perlin noise, Wave Function Collapse, L-systems, BSP trees, Tufte data-ink — proving faithful port from Python baselines to Rust CPU to GPU WGSL shaders. The validated math builds playable prototypes (Doom terminal, roguelike explorer) and cross-domain applications (field genomics provenance, medical access control, extraction shooter anti-cheat).
 
