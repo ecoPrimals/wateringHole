@@ -60,7 +60,7 @@ active NUCLEUS composition testing. The ecosystem is no longer in mountain
 season — it has crossed into delta season for the leading springs:
 - **Stadial gate cleared**: BearDog W56, Songbird W147, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
 - **primalSpring v0.9.15**: Graph consolidation (78→56 TOMLs), fragment-first composition, 570 tests
-- **Active delta springs**: hotSpring v0.6.32 (62/62 suites), healthSpring V53 (exp119-121), neuralSpring V131 (science composition), wetSpring V144 (Exp401/402)
+- **Active delta springs**: hotSpring v0.6.32 (62/62 suites), healthSpring V53 (exp119-121), neuralSpring V132 (science composition, proto-nucleate aligned), wetSpring V144 (Exp401/402)
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
 - **Composing springs**: ludoSpring V43 (three-layer validation: Python→Rust→IPC golden chain)
 
@@ -111,9 +111,10 @@ capability, that's snowpack that will melt when primalSpring validates it.
 response schemas, and make your IPC surface composable. The faster you
 stabilize, the faster springs can elevate to composition.
 
-**Current priority**: Response schema standardization. Springs need consistent
-result keys (`"result"` not varying across methods) so composition parity
-extraction works without guessing.
+**Current priority**: Response schemas are standardized (Sprint 42+). Springs
+need to rewire from library deps to IPC calls against your ecobin primal.
+Ensure your JSON-RPC surface is discoverable and your capability strings
+match the downstream manifest.
 
 ### If You're primalSpring
 
@@ -125,8 +126,9 @@ that downstream springs absorb.
 FullNucleus). Surface upstream gaps. Provide the `composition` validation
 library so springs can test parity.
 
-**Current priority**: Composition elevation — prove that NUCLEUS atomics
-produce correct math results via IPC, move from SKIP to PASS.
+**Current priority**: Guide spring IPC rewiring. Primals are ready (all 12 ALIVE,
+32 barraCuda methods, UDS everywhere). Springs need to drop library deps from
+primal binaries and call ecobin primals over IPC for the primal proof.
 
 ### If You're a Domain Spring (hotSpring, wetSpring, etc.)
 
@@ -190,7 +192,7 @@ stronger. This is not parallel development — it's compound evolution.
 
 ## Current Composition Elevation Priorities
 
-### primalSpring (Phase 34 target)
+### primalSpring (Phase 43+ — stadial cleared)
 
 | Priority | What | Blocked By |
 |----------|------|------------|
@@ -246,7 +248,7 @@ Four springs have entered active NUCLEUS composition testing:
 |--------|--------|---------------------|
 | **hotSpring** v0.6.32 | **Delta** — Tier 3 NUCLEUS validators | 62/62 suites; 13 LOCAL_CAPABILITIES dispatched; IPC wiring with honest skip |
 | **healthSpring** V53 | **Delta** — Live IPC parity | exp119 (parity), exp120 (provenance), exp121 (health); niche.rs; dual-tower ionic |
-| **neuralSpring** V131 | **Delta** — Science composition | validate_science_composition (spectral, IPR, Hessian, disorder sweep); cross-team handoff |
+| **neuralSpring** V132 | **Delta** — Science composition | validate_science_composition (spectral, IPR, Hessian, disorder sweep); proto-nucleate aligned |
 | **wetSpring** V144 | **Delta** — Full tier validation | Exp401 (43/43), Exp402 (63/63); 18 IPC roundtrip tests; provenance registry |
 | **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
 | **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
@@ -258,7 +260,7 @@ Four springs have entered active NUCLEUS composition testing:
 - toadStool `compute.dispatch` standardization — hotSpring, wetSpring, neuralSpring
 - Squirrel provider registration — neuralSpring, healthSpring, wetSpring
 - NestGate `storage.fetch_external` for cross-spring — wetSpring, healthSpring
-- barraCuda IPC migration (path dep → capability IPC) — neuralSpring, all implicit
+- barraCuda IPC rewiring — **spring-side gap** (barraCuda ecobin already exposes 32 JSON-RPC methods; springs must drop library dep and call over IPC) — all delta springs
 
 See `NUCLEUS_SPRING_ALIGNMENT.md` and `primalSpring/wateringHole/GRAPH_CONSOLIDATION_AND_NUCLEUS_DEPLOYMENT_HANDOFF_APR16_2026.md`.
 

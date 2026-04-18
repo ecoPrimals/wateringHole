@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: April 13, 2026
+**Last Updated**: April 18, 2026
 
 ---
 
@@ -114,7 +114,7 @@ Primals achieve their greatest power through composition. These are not separate
 
 **Layers**:
 - **Tower Atomic** = BearDog + Songbird (crypto + network)
-- **Node Atomic** = Tower + ToadStool (hardware) + BarraCuda (math)
+- **Node Atomic** = Tower + ToadStool (dispatch) + BarraCuda (math) + coralReef (compile)
 - **Nest Atomic** = Tower + NestGate (+ storage)
 - **Full NUCLEUS** = All primals + Squirrel (+ AI)
 

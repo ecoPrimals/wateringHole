@@ -1,6 +1,6 @@
 # NUCLEUS Spring Alignment — Phase 40 (NUCLEUS Complete)
 
-**Date**: April 13, 2026
+**Date**: April 18, 2026
 **From**: primalSpring v0.9.13
 **For**: All springs, primals, and gardens
 **License**: AGPL-3.0-or-later
@@ -58,7 +58,7 @@ only (IPC calls to NUCLEUS). There are no spring binaries at the composition lev
 | Spring | Version | Evolution | Tests | barraCuda | Primary Atomics | Proto-Nucleate |
 |--------|---------|-----------|-------|-----------|-----------------|----------------|
 | **hotSpring** | 0.6.32 | **composing** | 985 | composing | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` |
-| **neuralSpring** | 0.1.0 | **composing** | 1,403 | composing | **Node** + Meta | `neuralspring_inference_proto_nucleate` |
+| **neuralSpring** | V132 (0.1.0) | **composing** | 1,403 | composing | **Node** + Meta | `neuralspring_inference_proto_nucleate` |
 | **wetSpring** | 0.3.0 | **composed** | 1,902 | composing | Node + **Nest** + Meta | `wetspring_lifescience_proto_nucleate` |
 | **airSpring** | 0.10.0 | **composed** | 1,364 | composing | Node + **Nest** | `airspring_ecology_proto_nucleate` |
 | **groundSpring** | 0.1.0 | **composing** | 1,050 | calling | Node + **Nest** | `groundspring_geoscience_proto_nucleate` |
@@ -341,40 +341,48 @@ Handoffs go to `infra/wateringHole/handoffs/`.
 
 ---
 
-## Upstream Gaps That Springs Expose for Primals (April 12, 2026)
+## Upstream Gaps and Spring-Side Rewiring (Updated April 18, 2026)
 
-As springs evolve toward Level 5 (composition parity validation), they surface
-concrete gaps in primal APIs that block full validation. These are the **active
-upstream blockers** that primal teams need to close:
+As springs evolve toward Level 5 (composition parity validation), the upstream
+primal IPC surfaces are now largely ready. **The remaining gap is spring-side**:
+springs must rewire from barraCuda library imports to IPC calls against ecobin
+primals.
 
-### Response Schema Standardization
+### Response Schema Standardization — RESOLVED
 
-| Primal | Gap | Impact | Proposed Fix |
-|--------|-----|--------|-------------|
-| barraCuda | `tensor.*` methods return varying result keys (`"value"`, `"result"`, `"output"`) | Springs must guess the extraction key in `validate_parity()` | Standardize on `{"result": <value>}` for all math methods |
-| coralReef | ~~`shader.compile` has no documented response format~~ **RESOLVED** (Iter 80) | Wire contract in `SHADER_COMPILE_WIRE_CONTRACT.md`; `CompilationInfo` in responses | `{"result": {"binary": "...", "size": N, "arch": "...", "info": {...}}}` |
-| toadStool | `compute.dispatch` result shape varies by dispatch type | Springs can't write generic composition validators | Uniform `{"result": {"values": [...], "elapsed_ms": N}}` wrapper |
+| Primal | Gap | Status |
+|--------|-----|--------|
+| barraCuda | `tensor.*` response key standardization | **RESOLVED** (Sprint 42) — 32 JSON-RPC methods with consistent schemas |
+| coralReef | `shader.compile` response format | **RESOLVED** (Iter 80) — `SHADER_COMPILE_WIRE_CONTRACT.md` |
+| toadStool | `compute.dispatch` result shape | **OPEN** — spring-side adoption of `DISPATCH_WIRE_CONTRACT.md` incomplete |
 
-### IPC Wire Contracts
+### The Primal Proof Gap — Spring-Side IPC Rewiring
+
+All ecobin primals expose their capabilities over UDS JSON-RPC. barraCuda alone
+has 32 methods (`tensor.matmul`, `tensor.create`, `stats.mean`, `compute.dispatch`,
+etc.). The gap is that springs still link barraCuda as a **Rust library dependency**
+(path or git) and call math in-process. For the primal proof, springs must:
+
+1. **Drop barraCuda library dep from primal binaries** (keep in test harnesses for Rust-proof comparison)
+2. **Add IPC clients** that discover the barraCuda ecobin socket and call methods over JSON-RPC
+3. **Wire domain science through IPC** instead of `barracuda::stats::mean()` library calls
+4. **Validate IPC results match library results** (composition parity)
+
+| Spring | Library Dep | IPC Client to barraCuda | Rewire Status |
+|--------|------------|------------------------|---------------|
+| hotSpring v0.6.32 | git rev | NucleusContext exists | **Not rewired** — physics still local |
+| healthSpring V53 | path dep | PrimalClient exists | **Not rewired** — math in-process |
+| neuralSpring V132 | path dep | json_rpc_call exists | **Not rewired** — science self-contained |
+| wetSpring V144 | path dep | dispatch exists | **Not rewired** — embeds barraCuda |
+| ludoSpring V43 | git rev | call_primal exists | **Closest** — IPC parity experiments exist |
+
+### Remaining IPC Wire Contracts
 
 | Gap | Owner | What Springs Need |
 |-----|-------|-------------------|
 | BatchGuard IPC wire | barraCuda | Fused multi-op pipeline results via single IPC call (not N individual calls) |
 | Method catalog with schemas | all primals | Machine-readable catalog: method name → request schema → response schema |
 | Error code standardization | all primals | Standardized JSON-RPC error codes so `IpcError` can classify without string parsing |
-
-### What This Means for Primal Teams
-
-When a spring calls `validate_parity("tensor", "tensor.matmul", ...)` and the
-result key doesn't match, the check degrades to SKIP. That's honest, but it
-means composition validation coverage stalls until the primal standardizes its
-response format. The faster primals converge on response schemas, the faster
-springs can prove their compositions work end-to-end.
-
-Primal teams should:
-1. Document their JSON-RPC response schemas in their `wateringHole/` docs
-2. Use consistent top-level keys (`result` for success, `error` for failure)
-3. Register response schemas in `infra/wateringHole/capability_registry.toml`
 
 ---
 
