@@ -60,7 +60,7 @@ active NUCLEUS composition testing. The ecosystem is no longer in mountain
 season — it has crossed into delta season for the leading springs:
 - **Stadial gate cleared**: BearDog W56, Songbird W147, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
 - **primalSpring v0.9.15**: Graph consolidation (78→56 TOMLs), fragment-first composition, 570 tests
-- **Active delta springs**: hotSpring v0.6.32 (62/62 suites), healthSpring V53 (exp119-121), neuralSpring V132 (science composition, proto-nucleate aligned), wetSpring V144 (Exp401/402)
+- **Active delta springs**: hotSpring v0.6.32 (63/63 suites, Level 5 primal proof), healthSpring V53 (exp119-121), neuralSpring V132 (science composition, proto-nucleate aligned), wetSpring V144 (Exp401/402)
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
 - **Composing springs**: ludoSpring V44 (four-layer validation: Python→Rust→IPC composition→primal proof; `validate_primal_proof` Level 5)
 
@@ -246,7 +246,7 @@ Four springs have entered active NUCLEUS composition testing:
 
 | Spring | Status | Composition Evidence |
 |--------|--------|---------------------|
-| **hotSpring** v0.6.32 | **Delta** — Tier 3 NUCLEUS validators | 62/62 suites; 13 LOCAL_CAPABILITIES dispatched; IPC wiring with honest skip |
+| **hotSpring** v0.6.32 | **Delta** — Level 5 primal proof | 63/63 suites; `validate_primal_proof` calls barraCuda/BearDog over IPC; 13 LOCAL_CAPABILITIES dispatched |
 | **healthSpring** V53 | **Delta** — Live IPC parity | exp119 (parity), exp120 (provenance), exp121 (health); niche.rs; dual-tower ionic |
 | **neuralSpring** V132 | **Delta** — Science composition | validate_science_composition (spectral, IPR, Hessian, disorder sweep); proto-nucleate aligned |
 | **wetSpring** V144 | **Delta** — Full tier validation | Exp401 (43/43), Exp402 (63/63); 18 IPC roundtrip tests; provenance registry |
