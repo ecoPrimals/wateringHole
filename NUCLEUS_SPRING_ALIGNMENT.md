@@ -63,7 +63,7 @@ only (IPC calls to NUCLEUS). There are no spring binaries at the composition lev
 | **airSpring** | 0.10.0 | **composed** | 1,364 | composing | Node + **Nest** | `airspring_ecology_proto_nucleate` |
 | **groundSpring** | 0.1.0 | **composing** | 1,050 | calling | Node + **Nest** | `groundspring_geoscience_proto_nucleate` |
 | **healthSpring** | 0.1.0 | **composing** | 940 | composing | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_proto_nucleate` |
-| **ludoSpring** | 0.1.0 | **composing** | 222 | composing | Node + **Meta** | `ludospring_proto_nucleate` |
+| **ludoSpring** | V43 | **composing** | 790+ | composing | Node + **Meta** + Nest | `ludospring_proto_nucleate` |
 
 Also: **esotericWebb** (garden) → `esotericwebb_proto_nucleate` — full NUCLEUS + Meta, pure composition.
 
