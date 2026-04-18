@@ -60,7 +60,7 @@ active NUCLEUS composition testing. The ecosystem is no longer in mountain
 season — it has crossed into delta season for the leading springs:
 - **Stadial gate cleared**: BearDog W56, Songbird W147, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
 - **primalSpring v0.9.15**: Graph consolidation (78→56 TOMLs), fragment-first composition, 570 tests
-- **Active delta springs**: hotSpring v0.6.32 (63/63 suites, Level 5 primal proof), healthSpring V53 (exp122 IPC parity, math_dispatch.rs), neuralSpring V132 (science composition, proto-nucleate aligned), wetSpring V145 (Exp403 primal parity, 5 primals over IPC)
+- **Active delta springs**: hotSpring v0.6.32 (63/63 suites, Level 5 primal proof), healthSpring V53 (exp122 IPC parity, math_dispatch.rs), neuralSpring V133 (IpcMathClient, 7 caps harness, deny.toml stadial bans), wetSpring V145 (Exp403 primal parity, 5 primals over IPC)
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
 - **Composing springs**: ludoSpring V44 (four-layer validation: Python→Rust→IPC composition→primal proof; `validate_primal_proof` Level 5)
 
@@ -248,7 +248,7 @@ Four springs have entered active NUCLEUS composition testing:
 |--------|--------|---------------------|
 | **hotSpring** v0.6.32 | **Delta** — Level 5 primal proof | 63/63 suites; `validate_primal_proof` calls barraCuda/BearDog over IPC; 13 LOCAL_CAPABILITIES dispatched |
 | **healthSpring** V53 | **Delta** — Level 5 in progress | exp122 IPC parity; `math_dispatch.rs` feature-gated IPC/lib routing; niche.rs; dual-tower ionic |
-| **neuralSpring** V132 | **Delta** — Science composition | validate_science_composition (spectral, IPR, Hessian, disorder sweep); proto-nucleate aligned |
+| **neuralSpring** V133 | **Delta** — Level 5 primal proof | `IpcMathClient` (9 methods); `validate_proto_nucleate_capabilities` (7 caps, exit 0/1/2); `deny.toml` stadial bans; 18 barraCuda surface gaps handed back |
 | **wetSpring** V145 | **Delta** — Level 5 primal proof | Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES in niche.rs |
 | **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
 | **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
