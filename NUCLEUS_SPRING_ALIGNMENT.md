@@ -1,25 +1,33 @@
-# NUCLEUS Spring Alignment — Phase 40 (NUCLEUS Complete)
+# NUCLEUS Spring Alignment — Phase 44 (guideStone Level 4 + plasmidBin Depot)
 
-**Date**: April 18, 2026
-**From**: primalSpring v0.9.15
+**Date**: April 20, 2026
+**From**: primalSpring v0.9.16
 **For**: All springs, primals, and gardens
 **License**: AGPL-3.0-or-later
 
 ---
 
-## Current Season: Spring (Composition Elevation)
+## Current Season: Delta (Live NUCLEUS Deployments)
 
-**NUCLEUS is complete.** 12/12 primals ALIVE, 19/19 exp094 composition
-parity PASS, all LD-01 through LD-10 gaps RESOLVED. The ecosystem has
-crossed from mountain (primals stabilizing) to spring (composition elevation).
+**guideStone Level 4 achieved.** 67/67 ALL PASS against live 12-primal NUCLEUS
+deployed from plasmidBin. BLAKE3 checksums (P3 self-verifying). The ecosystem
+has crossed from spring (composition elevation) to delta (live deployments).
 
-**What this means for springs**: All NUCLEUS primals are live with stable
-wire contracts on UDS. Springs can now run the full 12-primal stack locally
-via `nucleus_launcher.sh` and validate composition parity using
-`primalspring::composition`. Proto-nucleate graphs in
-`primalSpring/graphs/downstream/` are hardened with actual wire capabilities.
-Domain springs should now **elevate to composition validation** — proving
-that primal-orchestrated IPC produces the same results as local Rust math.
+**What this means for springs**: The full NUCLEUS stack is deployable from
+`plasmidBin` as pre-built musl-static ecoBin binaries. Springs can now:
+1. Pull `plasmidBin` binaries (or clone the depot)
+2. Deploy a live NUCLEUS via `nucleus_launcher.sh`
+3. Run their `guideStone` binary externally against it
+4. Validate primal proof (Level 5) — same science via IPC
+
+**plasmidBin depot pattern**: See `primalSpring/wateringHole/PLASMINBIN_DEPOT_PATTERN.md`
+for the full depot workflow. This replaces the prior local-build-everything model
+with a remote binary depot that any spring can consume immediately.
+
+**primalSpring guideStone certifies the base**: The `primalspring_guidestone`
+binary validates composition health (discovery, liveness, capability parity,
+cross-atomic pipelines, bonding, crypto boundaries). Domain guideStones
+inherit this base layer and add domain-specific science validation on top.
 
 ---
 
@@ -55,15 +63,16 @@ At each stage, the spring's local code drives primal evolution upstream. Once pr
 absorb the math, the spring retires its local Rust math and validates through composition
 only (IPC calls to NUCLEUS). There are no spring binaries at the composition level.
 
-| Spring | Version | Evolution | Tests | barraCuda | Primary Atomics | Proto-Nucleate |
+| Spring | Version | Evolution | Tests | guideStone | Primary Atomics | Proto-Nucleate |
 |--------|---------|-----------|-------|-----------|-----------------|----------------|
-| **hotSpring** | 0.6.32 | **composing** | 985 | composing | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` |
-| **neuralSpring** | V133 (0.1.0) | **composing** | 1,403 | composing | **Node** + Meta | `neuralspring_inference_proto_nucleate` |
-| **wetSpring** | 0.3.0 | **composed** | 1,902 | composing | Node + **Nest** + Meta | `wetspring_lifescience_proto_nucleate` |
-| **airSpring** | 0.10.0 | **composed** | 1,364 | composing | Node + **Nest** | `airspring_ecology_proto_nucleate` |
-| **groundSpring** | 0.1.0 | **composing** | 1,050 | calling | Node + **Nest** | `groundspring_geoscience_proto_nucleate` |
-| **healthSpring** | 0.1.0 | **composing** | 940 | composing | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_proto_nucleate` |
-| **ludoSpring** | V44 | **composing** | 790+ | composing | Node + **Meta** + Nest | `ludospring_proto_nucleate` |
+| **primalSpring** | 0.9.16 | **certified** | 570 | gS **4** | **All** (composition domain) | base layer — certifies NUCLEUS |
+| **hotSpring** | 0.6.32 | **composing** | 985 | gS **5** | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` |
+| **neuralSpring** | V134 | **composing** | 1,403+ | gS **2** | **Node** + Meta | `downstream_manifest.toml` (neuralspring) |
+| **wetSpring** | V147 | **composing** | 1,902+ | gS **3** | Node + **Nest** + Meta | `downstream_manifest.toml` (wetspring) |
+| **airSpring** | 0.10.0 | **composed** | 1,364 | gS 0 | Node + **Nest** | `downstream_manifest.toml` (airspring) |
+| **groundSpring** | V124 | **composing** | 1,050+ | gS 0 | Node + **Nest** | `downstream_manifest.toml` (groundspring) |
+| **healthSpring** | V54 | **composing** | 940+ | gS **2** | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_proto_nucleate` |
+| **ludoSpring** | V45 | **composing** | 790+ | gS **3** | Node + **Meta** + Nest | `downstream_manifest.toml` (ludospring) |
 
 Also: **esotericWebb** (garden, V7) → `esotericwebb_proto_nucleate` — full NUCLEUS + Meta, pure composition. 342 tests, ~91% coverage, 7 primal domains, zero spring dependencies. Three-generation validation: Python→Rust→IPC (proven by ludoSpring) → garden composition (proven by Webb).
 

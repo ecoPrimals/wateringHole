@@ -1,6 +1,6 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: April 17, 2026
+**Date**: April 19, 2026
 **Version**: v1.1.0
 **License**: AGPL-3.0-or-later
 
@@ -54,15 +54,16 @@ Upstream primals absorb math, shaders, and IPC patterns from springs.
 Downstream gets less "snow melt" — fewer new capabilities flowing down.
 Springs focus on validation of what exists, surfacing gaps, tightening.
 
-**Current state (April 2026)**: Spring → Delta transition with **guideStone pattern**
-emerging as the universal composition model. Stadial parity gate cleared across all
-13 primals + primalSpring. The ecosystem is in delta season for leading springs,
-evolving toward self-validating NUCLEUS deployments:
+**Current state (April 2026)**: Delta season — **guideStone Level 4 achieved** for
+primalSpring. Live NUCLEUS deployed from plasmidBin as binary depot. Stadial parity
+gate cleared across all 13 primals + primalSpring. Springs evolving to self-validating
+NUCLEUS deployments via the plasmidBin depot pattern:
 - **Stadial gate cleared**: BearDog W56, Songbird W147, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
-- **primalSpring v0.9.15**: guideStone composition standard, fragment-first graphs, 570 tests
-- **guideStone pattern**: Self-validating NUCLEUS node (5 properties: deterministic, traceable, self-verifying, env-agnostic, tolerance-documented). Proven by hotSpring-guideStone-v0.7.0. Extracted as ecosystem standard in `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md`.
-- **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V53 (guideStone Level 1), neuralSpring V133 (guideStone Level 1), wetSpring V145 (guideStone Level 1)
-- **primalSpring guideStone**: `primalspring_guidestone` binary — 6-layer base composition certification (bare properties, discovery, health, capability parity, cross-atomic pipeline, bonding, BTSP/crypto). Base layer that domain guideStones inherit.
+- **primalSpring v0.9.16**: guideStone Level 4 (67/67 live NUCLEUS, 41/41 bare, BLAKE3 P3), fragment-first graphs, 570 tests, plasmidBin depot documented
+- **guideStone pattern**: Self-validating NUCLEUS composition (5 properties: deterministic, traceable, self-verifying, env-agnostic, tolerance-documented). Proven by hotSpring-guideStone-v0.7.0. primalSpring guideStone now validates base composition for all downstream. Standard at `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md` v1.1.0.
+- **plasmidBin depot**: Pre-built musl-static ecoBin binaries (14 primals). Springs pull, deploy NUCLEUS, validate externally. See `primalSpring/wateringHole/PLASMINBIN_DEPOT_PATTERN.md`.
+- **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V54 (guideStone Level 2), neuralSpring V134 (guideStone Level 2), wetSpring V147 (guideStone Level 3 — bare works)
+- **primalSpring guideStone**: `primalspring_guidestone` binary — 6-layer base composition certification. 67/67 ALL PASS against live 12-primal NUCLEUS. Base layer that domain guideStones inherit.
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
 - **Composing springs**: ludoSpring V45 (guideStone readiness 3 — bare mode passes, 15 bare + 15 IPC checks, `ludospring_guidestone`)
 
