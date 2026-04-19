@@ -526,8 +526,8 @@ guideStone readiness: 0=not started, 1=validation exists, 2=properties documente
 ### primalSpring - Coordination and Composition Validation
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
-**Phase**: Phase 43+ (Stadial gate cleared — all primals + primalSpring; graph consolidation complete; 4 springs in active NUCLEUS composition)  
-**Status**: v0.9.15 — 570 lib tests (592 total), 75 experiments (17 tracks), 56 deploy graph TOMLs (fragment-first composition with resolve = true), 19/19 exp094 parity PASS, 12/12 exp091 routing PASS, 14/15 exp096 cross-arch PASS, stadial parity (zero dyn, zero async-trait, Edition 2024, #[expect] everywhere), graph consolidation 78→56 (template+manifest + fragment resolution), cross-gate deployment tooling, IPC resilience stack, MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
+**Phase**: Phase 44 (Stadial gate cleared April 16, 2026; genomeBin cross-architecture depot April 19, 2026)  
+**Status**: v0.9.17 — 601 tests, 75 experiments (17 tracks), 56 deploy graphs (fragment-first), genomeBin v5.0 (42 binaries / 6 targets), guideStone Level 4 (67/67 NUCLEUS, 41/41 bare, BLAKE3 P3), 19/19 exp094 parity PASS, 12/12 exp091 routing PASS, 14/15 exp096 cross-arch PASS, deep debt evolution (zero hardcoded primal names, `primal_names::` constants, centralized tolerances), zero clippy warnings, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
@@ -535,8 +535,8 @@ guideStone readiness: 0=not started, 1=validation exists, 2=properties documente
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 53 across 10 tracks: Atomic Composition (6), Graph Execution (6), Emergent Systems (6), Bonding & Plasmodium (5), Cross-Spring Coordination (5), Showcase-Mined (10), Live Composition (11), Multi-Node Bonding (2), Cross-Gate Deployment (2). All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
-| **Deploy Graphs** | 22 (18 single-node + 4 multi-node): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). |
+| **Experiments** | 75 across 17 tracks: Atomic Composition, Graph Execution, Emergent Systems, Bonding, Cross-Spring Coordination, Showcase-Mined, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, Genetics Identity, BTSP Crypto, Cross-Arch, Content Distribution, Composition Parity, Routing Matrix, Federation, plus extension tracks. All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
+| **Deploy Graphs** | 56 TOMLs (fragment-first composition with `resolve = true`): 9 profiles + 6 fragments + 5 multi-node + 4 spring validation + 2 spring deploy + 3 downstream + 5 bonding + 2 chaos + 2 cross-spring + 4 patterns + 1 federation + ~11 root. |
 | **Niche Self-Knowledge** | 37 capabilities (including ai.query, ai.health, composition.tower_squirrel_health), semantic mappings (7 domains), operation dependencies, cost estimates |
 | **RPC Methods** | 17 methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.validate_composition_by_capability, coordination.discovery_sweep, coordination.probe_primal, coordination.probe_capability, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |
 | **IPC Resilience** | IpcError (8 typed variants + IpcErrorPhase), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
