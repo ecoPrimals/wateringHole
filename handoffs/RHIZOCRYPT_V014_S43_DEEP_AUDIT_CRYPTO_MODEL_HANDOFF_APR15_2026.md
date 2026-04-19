@@ -4,7 +4,7 @@
 
 **Date**: 2026-04-15
 **Branch**: main
-**Tests**: 1,507 passing (0 failures)
+**Tests**: 1,508 passing (0 failures)
 **Coverage**: 93.88% lines (CI gate: 90%)
 
 ---
@@ -118,7 +118,7 @@ cargo llvm-cov           ✅ 93.88% (gate: 90%)
 
 `base64` promoted to non-optional dep (pure Rust, needed for wire encoding).
 All binary data on the wire is now standard base64, matching BD-01.
-1,507 tests passing, clippy clean.
+1,508 tests passing, clippy clean.
 
 ### S43.2 Addendum: Dependency Hygiene + Doc Sweep (April 16)
 
@@ -129,7 +129,7 @@ All binary data on the wire is now standard base64, matching BD-01.
 - **Showcase binary names** — `songbird-cli`/`songbird-rendezvous` → `songbird` (canonical UniBin), `toadstool-cli` → `toadstool`
 - **`showcase/README.md`** — `../bins/` path → `primalBins` (matches `showcase-env.sh`)
 - **Doc metrics refresh** — `DEPLOYMENT_CHECKLIST.md` (76→65 demos, 9→10 specs), `RHIZOCRYPT_SPECIFICATION.md` (27→28 methods, coverage checkbox resolved), `00_SPECIFICATIONS_INDEX.md` date
-- **Metrics**: 1,507 tests, 170 `.rs` files, ~48,800 lines, 724 max file
+- **Metrics**: 1,508 tests, 170 `.rs` files, ~48,800 lines, 724 max file
 
 ### S43.3 Addendum: async-trait Removal + DID Semantic Closure (April 16)
 
@@ -167,7 +167,7 @@ Example `rhizocrypt doctor` output now includes:
 - **Doctor TCP alignment** — transport message lists all 3 opt-in env vars (`RHIZOCRYPT_PORT`, `RHIZOCRYPT_RPC_PORT`, `RHIZOCRYPT_JSONRPC_PORT`)
 - **Showcase binary names** — remaining `songbird-rendezvous` → `songbird`, `../../../bins/` → `${PRIMAL_BINS:-../../../primalBins}`
 - **Full deep-debt audit clean**: 0 files >800L, 0 `#[allow(` in production, 0 TODO/FIXME, 0 unsafe, 0 production mocks, no hardcoded primals outside adapters/tests, no mandatory splits among 600L+ files
-- **Metrics**: 1,507 tests, 170 `.rs` files, ~48,800 lines, 724 max file
+- **Metrics**: 1,508 tests, 170 `.rs` files, ~48,800 lines, 724 max file
 
 ### S43.7 Addendum: Manifest-Based Discovery — PG-32 Resolution (April 20)
 
@@ -188,6 +188,13 @@ Example `rhizocrypt doctor` output now includes:
 - `unpublish_manifest()` called on every shutdown path (clean exit)
 
 **For ludoSpring / springs teams**: `discover_by_capability("dag")` will now return rhizoCrypt's manifest with the UDS socket path. Re-run composition experiments exp094–096, exp098.
+
+### S43.8 Addendum: TCP Dedup + Doctor Manifest + Integration Test (April 20)
+
+- **`resolve_bind_addr` dedup** — TCP address resolved once, passed to both manifest publication and `serve_with_tcp()`; eliminates `.ok()` vs `?` inconsistency
+- **Doctor manifest presence** — `check_transport()` now reports `Discovery: manifest` pass/warn based on `rhizocrypt.json` existence
+- **Manifest lifecycle integration test** — validates publish → discover → unpublish round-trip
+- **Metrics**: 1,508 tests (was 1,507), all passing, 0 clippy warnings, 0 fmt diffs
 
 ### Remaining (Not Blocking)
 
