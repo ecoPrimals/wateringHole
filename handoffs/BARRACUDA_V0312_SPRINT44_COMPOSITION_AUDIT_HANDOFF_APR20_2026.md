@@ -67,6 +67,24 @@ Springs can uniformly extract `response["result"]` for any method.
 - `crates/barracuda-core/src/discovery.rs` — linalg/spectral domain descriptions
 - `crates/barracuda-core/src/ipc/methods_tests/registry_tests.rs` — count 32→39
 
+## Deep Debt Audit (Sprint 44b — Apr 20)
+
+12-axis deep debt audit post-Sprint 44 — all axes green:
+- Files >800L: zero (largest 783L test file, `math.rs` at 483L)
+- TODO/FIXME/HACK/XXX: zero
+- `#[allow(`: zero (all `#[expect(`)
+- `async-trait`: zero
+- `Box<dyn Error>` prod: zero (doc-only)
+- `Result<T, String>` prod: zero (test-only)
+- `println!/eprintln!` lib: zero (binary CLI only)
+- Mocks prod: zero (test/doc only)
+- `unsafe` prod: zero (test-only env var manipulation)
+- Hardcoded primal names prod: zero (env-overridable defaults)
+- External C/FFI deps: zero (all pure Rust, blake3 `pure`)
+- `unwrap()/expect()` prod: zero (test/doc only)
+
+Quality gates: `cargo fmt` ✓, `clippy -D warnings` ✓, `RUSTDOCFLAGS="-D warnings" cargo doc` ✓
+
 ## Remaining
 
 - `OdeRK45F64` batching for Richards PDE (airSpring-specific, low priority)
