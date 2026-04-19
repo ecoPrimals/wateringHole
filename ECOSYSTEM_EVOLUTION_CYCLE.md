@@ -211,7 +211,7 @@ stronger. This is not parallel development — it's compound evolution.
 |--------|--------|------------------------|--------|
 | barraCuda | 42+ | Standardize `tensor.*` response schema: `{"result": {"value": N}}` | **RESOLVED** (Sprint 42) |
 | coralReef | 80 | Standardize `shader.compile` response format — `SHADER_COMPILE_WIRE_CONTRACT.md` | **RESOLVED** (Iter 80) |
-| toadStool | 203+ | Standardize `compute.dispatch` result shape | **OPEN** |
+| toadStool | 203+ | Standardize `compute.dispatch` result shape | **RESOLVED** (S203 — `specs/DISPATCH_WIRE_CONTRACT.md`, canonical envelope) |
 | BearDog | 36+ | Already composable (crypto.sign, btsp.session — stable schemas) | **READY** |
 | Songbird | 134+ | Already composable (discovery.*, capability.* — stable schemas) | **READY** |
 | NestGate | 43+ | Already composable (storage.store, storage.retrieve — stable on UDS) | **READY** |
@@ -260,7 +260,7 @@ Four springs have entered active NUCLEUS composition testing:
 **Common ecosystem blockers** across active delta springs:
 - Ionic bond negotiation (BearDog `crypto.sign_contract`) — hotSpring, healthSpring, wetSpring
 - BTSP Phase 3 server (encrypted channel) — hotSpring, healthSpring
-- toadStool `compute.dispatch` standardization — hotSpring, wetSpring, neuralSpring
+- ~~toadStool `compute.dispatch` standardization~~ **RESOLVED** S203 — hotSpring, wetSpring, neuralSpring
 - Squirrel provider registration — neuralSpring, healthSpring, wetSpring
 - NestGate `storage.fetch_external` for cross-spring — wetSpring, healthSpring
 - barraCuda IPC rewiring — **spring-side gap** (barraCuda ecobin already exposes 32 JSON-RPC methods; springs must drop library dep and call over IPC) — all delta springs
