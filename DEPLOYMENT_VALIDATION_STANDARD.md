@@ -213,7 +213,7 @@ Based on live validation April 5, 2026 (plasmidBin v2026.03.25):
 | squirrel | ✓ Abstract HEALTHY | Create filesystem socket alongside abstract `@squirrel`. |
 | sweetGrass | ✓ HTTP HEALTHY | Add `--port` alias. Add newline JSON-RPC on TCP (currently HTTP-only). |
 | rhizoCrypt | ⚠ tarpc REACHABLE | Add `--port` alias (currently `--tarpc-port`). Expose health triad on JSON-RPC 9701. |
-| loamSpine | ✗ CRASH | Fix tokio runtime nesting in `infant_discovery`. Add `--port` alias. |
+| loamSpine | ✓ UDS HEALTHY | ~~Runtime nesting crash~~ **RESOLVED** (v0.9.16 — `mdns-sd`). `--port` alias implemented. |
 | nestGate | — (not started) | Wire `--port` to TCP listener. Add `server` alias for `daemon`. |
 | biomeOS | — (not started) | Add TCP-only mode (currently forces UDS when port specified). |
 | petalTongue | — (not started) | Verify health triad on all transports. |
