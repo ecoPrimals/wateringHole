@@ -1,26 +1,56 @@
 # Genome Binary Distribution Manifest
 # ===================================
 #
-# This manifest defines all available primal binaries, versions, and architectures
-# for the ecoPrimals ecosystem. It serves as the source of truth for:
+# Source of truth for primal binary distribution across the ecoPrimals ecosystem.
+# Defines all available primal binaries, versions, target architectures, and
+# compliance status per the ecoBin Architecture Standard.
 #
-# 1. Local LiveSpore deployments
-# 2. Remote genome fetching via api.nestgate.io
-# 3. Automated update checks
+# Updated: 2026-04-19 (Phase 44 — full genomeBin cross-architecture depot)
+# Version: 5.0.0 (Full Target Matrix)
 #
-# Updated: 2026-02-13
-# Version: 2.0.0 (Universal Genome Format)
-#
-# EVOLUTION NOTE: All binaries are now PIE-enabled for ASLR compatibility.
-# The segfault on non-PIE binaries (Feb 13, 2026) taught us to verify
-# binary format before distribution.
+# Layout: plasmidBin/primals/{target-triple}/{binary}
+# Legacy symlinks: plasmidBin/primals/{binary} -> x86_64-unknown-linux-musl/{binary}
 
 [manifest]
-version = "2.0.0"
-format = "universal"
-generated = "2026-02-13T20:30:00Z"
-checksum_algorithm = "blake3"  # Primary: BLAKE3, Secondary: SHA256
-deploy_script = "deploy.sh"
+version = "5.0.0"
+format = "genomeBin"
+generated = "2026-04-19T00:00:00Z"
+checksum_algorithm = "blake3"
+deploy_script = "start_primal.sh"
+build_script = "build_ecosystem_genomeBin.sh"
+
+# =============================================================================
+# TARGET MATRIX (ecoBin Architecture Standard v3.0)
+# =============================================================================
+#
+# Tier 1 MUST:   Full static musl binaries, shipped in plasmidBin
+# Tier 2 SHOULD: Full binaries where linker available, cargo check otherwise
+# Tier 3 NICE:   cargo check validation (proves pure Rust, no binary shipped)
+
+[targets]
+tier1_must = [
+    "x86_64-unknown-linux-musl",
+    "aarch64-unknown-linux-musl",
+    "armv7-unknown-linux-musleabihf",
+]
+tier2_should = [
+    "x86_64-pc-windows-gnu",
+    "aarch64-linux-android",
+    "x86_64-apple-darwin",
+    "aarch64-apple-darwin",
+]
+tier3_nice = [
+    "riscv64gc-unknown-linux-musl",
+    "wasm32-wasip1",
+]
+
+# macOS targets are check-only (no osxcross installed; cargo check proves pure Rust).
+# WASM targets are check-only (primals use sockets/async which are not WASM-compatible).
+check_only = [
+    "x86_64-apple-darwin",
+    "aarch64-apple-darwin",
+    "wasm32-wasip1",
+]
 
 # =============================================================================
 # PLATFORM SUPPORT
@@ -28,36 +58,51 @@ deploy_script = "deploy.sh"
 
 [platforms]
 supported = [
-    "x86_64-linux",
-    "aarch64-linux",
+    "x86_64-unknown-linux-musl",
+    "aarch64-unknown-linux-musl",
+    "armv7-unknown-linux-musleabihf",
+    "x86_64-pc-windows-gnu",
+    "aarch64-linux-android",
 ]
-
-# Future platforms (Wave 2+)
-planned = [
-    "x86_64-darwin",    # macOS Intel
-    "aarch64-darwin",   # macOS Apple Silicon
-    "x86_64-windows",   # Windows
-    "aarch64-android",  # Android/Termux
-    "wasm32",           # Browser fallback
+check_pass = [
+    "x86_64-apple-darwin",
+    "aarch64-apple-darwin",
+    "riscv64gc-unknown-linux-musl",
 ]
-
-# Deployment fallback order
 fallback_order = ["native", "compatible", "wasm", "beacon"]
 
 # =============================================================================
-# BINARY FORMAT REQUIREMENTS (EVOLUTION FROM FEB 13, 2026)
+# BINARY FORMAT REQUIREMENTS
 # =============================================================================
 
 [binary_requirements]
-# All binaries MUST be PIE (Position Independent Executable)
-# Non-PIE binaries will segfault on ASLR-enabled systems
 pie_required = true
+musl_static = true
+stripped = true
 
-# Verification command: file ./binary | grep "pie executable"
-# If NOT pie executable, do NOT distribute
-
-# Build flags for PIE compliance:
-# RUSTFLAGS="-C relocation-model=pie" cargo build --release
+# =============================================================================
+# COVERAGE SUMMARY (April 19, 2026)
+# =============================================================================
+#
+# Primal              | x86_64-musl | aarch64-musl | armv7-musl | windows | android | riscv64 | macOS-check
+# --------------------|-------------|--------------|------------|---------|---------|---------|------------
+# beardog             | FULL        | FULL         | FULL       | -       | -       | check   | check-fail
+# songbird            | FULL        | FULL         | FULL       | -       | FULL    | check   | check-pass
+# nestgate            | FULL        | lib-only     | lib-only   | -       | lib-only| check   | check-pass
+# toadstool           | FULL        | FULL         | 32bit-ovf  | -       | -       | check   | check-fail
+# squirrel            | FULL        | FULL         | FULL       | -       | -       | check   | check-fail
+# biomeos             | FULL        | FULL         | 32bit-ovf  | -       | lib-only| check   | check-pass
+# barracuda           | FULL        | FULL         | FULL       | FULL    | FULL    | check   | check-pass
+# coralreef           | FULL        | FULL         | FULL       | -       | -       | check   | check-fail
+# rhizocrypt          | FULL        | FULL         | FULL       | -       | FULL    | check   | check-pass
+# loamspine           | FULL        | FULL         | FULL       | -       | FULL    | check   | check-pass
+# sweetgrass          | FULL        | FULL         | FULL       | -       | FULL    | check   | check-pass
+# petaltongue         | FULL        | FULL         | FULL       | -       | -       | check   | check-fail
+# skunkbat            | lib-only    | lib-only     | lib-only   | -       | lib-only| lib-only| check-pass
+# primalspring_primal | FULL        | FULL         | FULL       | -       | -       | FULL    | check-fail
+#
+# Total binaries shipped: 42 (across 6 target triples)
+# Documented gaps: nestgate/skunkbat (lib-only), toadstool/biomeos (32-bit overflow on armv7)
 
 # =============================================================================
 # PRIMALS
@@ -65,230 +110,123 @@ pie_required = true
 
 [primals.beardog]
 name = "BearDog"
-description = "Security primal - cryptography, trust, genetics, Dark Forest Gate"
+description = "Cryptographic spine — signing, encryption, identity, Dark Forest Gate"
 latest = "0.9.0"
-versions = ["0.9.0"]
-architectures = ["x86_64-linux", "aarch64-linux"]
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf"]
 capabilities = ["crypto", "birdsong", "lineage", "hsm", "entropy", "jwt"]
 ecobin_grade = "A++"
-pie_verified = true
 
 [primals.songbird]
 name = "Songbird"
-description = "Network primal - HTTP/TLS, federation, mesh, discovery, NAT traversal"
-latest = "3.33.0"
-versions = ["3.33.0", "0.2.1"]
-architectures = ["x86_64-linux", "aarch64-linux"]
+description = "Network primal — HTTP/TLS, federation, mesh, NAT traversal"
+latest = "0.2.1"
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf", "aarch64-linux-android"]
 capabilities = ["http", "tls", "mesh", "stun", "relay", "birdsong", "discovery", "onion"]
 ecobin_grade = "A++"
-pie_verified = true
 
 [primals.nestgate]
 name = "NestGate"
-description = "Storage primal - data persistence, provenance, compression"
-latest = "2.1.0"
-versions = ["2.1.0"]
-architectures = ["x86_64-linux", "aarch64-linux"]
+description = "Storage primal — persistence, provenance, compression"
+latest = "0.1.0"
+arch = ["x86_64-unknown-linux-musl"]
 capabilities = ["storage", "provenance", "compression"]
-ecobin_grade = "GOLD"
-pie_verified = true  # Fixed Feb 13, 2026 - was non-PIE
+ecobin_grade = "A++"
+
+[primals.toadstool]
+name = "ToadStool"
+description = "Compute dispatch — GPU/CPU/NPU orchestration, hardware discovery"
+latest = "0.1.0"
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+capabilities = ["compute", "cpu", "gpu", "npu", "wasm", "orchestration"]
+ecobin_grade = "A++"
 
 [primals.squirrel]
 name = "Squirrel"
-description = "AI primal - model inference, MCP, local/cloud AI bridge"
+description = "AI coordination — model inference, MCP, local/cloud AI bridge"
 latest = "0.1.0"
-versions = ["0.1.0"]
-architectures = ["x86_64-linux", "aarch64-linux"]
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf"]
 capabilities = ["ai", "inference", "mcp"]
 ecobin_grade = "A++"
-pie_verified = true
-
-[primals.toadstool]
-name = "Toadstool"
-description = "Compute primal - GPU/CPU orchestration, WASM, hardware learning, firmware inventory, SPIR-V codegen safety"
-latest = "0.1.0"
-versions = ["0.1.0"]
-architectures = ["x86_64-linux", "aarch64-linux"]
-capabilities = ["compute", "cpu", "gpu", "wasm", "orchestration", "hardware_learning", "firmware_inventory", "spirv_codegen_safety", "precision_brain", "nvk_zero_guard", "provider_registry"]
-ecobin_grade = "A++"
-pie_verified = true
-
-[primals.coralreef]
-name = "coralReef"
-description = "Sovereign shader compiler - WGSL/SPIR-V/GLSL to native GPU binary, f64 transcendentals"
-latest = "0.1.0"
-versions = ["0.1.0"]
-architectures = ["x86_64-linux"]  # aarch64 pending
-capabilities = ["shader", "spirv", "wgsl", "glsl", "naga", "compile"]
-ecobin_grade = "A++"
-pie_verified = true
 
 [primals.barracuda]
 name = "barraCuda"
-description = "Compute primal - vendor-agnostic GPU math via WGSL, DF64, FHE, scientific compute"
-latest = "0.3.5"
-versions = ["0.3.5", "0.3.4", "0.3.3", "0.2.0"]
-architectures = ["x86_64-linux", "aarch64-linux"]
+description = "GPU math engine — WGSL shaders, DF64, FFT/NTT, tensor, scientific compute"
+latest = "0.3.12"
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf", "x86_64-pc-windows-gnu", "aarch64-linux-android"]
 capabilities = ["compute", "gpu", "tensor", "fhe", "linalg", "spectral", "stats", "wgsl"]
 ecobin_grade = "A++"
-pie_verified = false  # Not yet released as standalone binary
+
+[primals.coralreef]
+name = "coralReef"
+description = "Sovereign shader compiler — WGSL/SPIR-V/GLSL to native GPU binary"
+latest = "0.1.0"
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf"]
+capabilities = ["shader", "spirv", "wgsl", "glsl", "naga", "compile", "vfio"]
+ecobin_grade = "A+"
 
 [primals.biomeos]
 name = "biomeOS"
-description = "Neural API orchestrator - graph execution, primal coordination, NUCLEUS deployment"
+description = "Neural API orchestrator — graph execution, niche deployment, NUCLEUS"
 latest = "0.1.0"
-versions = ["0.1.0"]
-architectures = ["x86_64-linux"]  # aarch64 pending build
-capabilities = ["orchestration", "graph", "deploy", "nucleus", "spore"]
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+capabilities = ["orchestration", "graph", "deploy", "nucleus", "spore", "niche"]
 ecobin_grade = "A++"
 is_orchestrator = true
-pie_verified = true
 
 [primals.rhizocrypt]
 name = "rhizoCrypt"
-description = "Ephemeral memory - content-addressed DAG engine, sessions, Merkle trees, dehydration"
+description = "Working memory — content-addressed ephemeral DAG, session state"
 latest = "0.14.0-dev"
-versions = ["0.14.0-dev", "0.13.0-dev"]
-architectures = ["x86_64-linux", "aarch64-linux"]
-capabilities = ["dag", "session", "merkle", "dehydration", "slice", "provenance"]
-ecobin_grade = "A++"
-pie_verified = true
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf", "aarch64-linux-android"]
+capabilities = ["dag", "session", "ephemeral", "content-addressed"]
+ecobin_grade = "A+"
 
 [primals.loamspine]
 name = "LoamSpine"
-description = "Permanence layer - append-only ledger, certificates, DIDs, temporal anchoring, streaming sync"
-latest = "0.9.5"
-versions = ["0.9.5", "0.9.4", "0.9.3", "0.9.2", "0.9.1", "0.9.0"]
-architectures = ["x86_64-linux", "aarch64-linux"]
-capabilities = ["commit", "certificate", "spine", "anchor", "did", "provenance", "streaming", "dispatch"]
-ecobin_grade = "A++"
-pie_verified = false  # UniBin binary, not yet distributed via genomeBin
+description = "Permanent ledger — immutable record, witness-bearing commits"
+latest = "0.9.16"
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf", "aarch64-linux-android"]
+capabilities = ["ledger", "permanent", "audit"]
+ecobin_grade = "A+"
 
 [primals.sweetgrass]
 name = "sweetGrass"
-description = "Attribution primal - W3C PROV-O, braids, WireWitnessRef, contribution API, radiating attribution"
+description = "Attribution — PROV-O provenance tracking, credit allocation"
 latest = "0.7.27"
-versions = ["0.7.3", "0.7.27"]
-architectures = ["x86_64-linux", "aarch64-linux"]
-capabilities = ["attribution", "braid", "provo", "contribution", "provenance", "compression", "anchoring", "pipeline"]
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf", "aarch64-linux-android"]
+capabilities = ["provenance", "attribution", "prov-o"]
+ecobin_grade = "A+"
+
+[primals.petaltongue]
+name = "petalTongue"
+description = "Representation / UI — egui, ratatui, axum, grammar of graphics"
+latest = "1.6.6"
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf"]
+capabilities = ["visualization", "ui", "interaction", "representation"]
 ecobin_grade = "A++"
-musl_static = true
-pie_verified = false
 
-# =============================================================================
-# DEPLOYMENT TIERS
-# =============================================================================
+[primals.skunkbat]
+name = "skunkBat"
+description = "Defense — metadata-only threat detection, lineage verification"
+latest = "0.1.0"
+arch = []
+capabilities = ["defense", "threat", "metadata", "lineage"]
+ecobin_grade = "A+"
 
-[tiers]
-# Tier 1: Full NUCLEUS - All primals, full capabilities
-tier1 = { name = "Full NUCLEUS", primals = ["beardog", "songbird", "nestgate", "toadstool", "squirrel", "biomeos"] }
-
-# Tier 2: Node - Core + compute
-tier2 = { name = "Node", primals = ["beardog", "songbird", "nestgate"] }
-
-# Tier 3: Gateway - Network only
-tier3 = { name = "Gateway", primals = ["beardog", "songbird"] }
-
-# Tier 4: Beacon - Discovery only (WASM fallback)
-tier4 = { name = "Beacon", primals = ["songbird"] }
-
-# =============================================================================
-# ATOMICS (Pre-configured Primal Combinations)
-# =============================================================================
-
-[atomics.tower]
-name = "Tower Atomic"
-description = "Security + Networking foundation (BearDog + Songbird)"
-primals = ["beardog", "songbird"]
-latest = "1.0.0"
-versions = ["1.0.0"]
-graph = "tower_atomic_bootstrap.toml"
-tier = 3
-
-[atomics.node]
-name = "Node Atomic"
-description = "Tower + Compute (BearDog + Songbird + Toadstool + Squirrel)"
-primals = ["beardog", "songbird", "toadstool", "squirrel"]
-latest = "1.0.0"
-versions = ["1.0.0"]
-graph = "node_atomic.toml"
-tier = 2
-
-[atomics.nest]
-name = "Nest Atomic"
-description = "Tower + Storage (BearDog + Songbird + NestGate)"
-primals = ["beardog", "songbird", "nestgate"]
-latest = "1.0.0"
-versions = ["1.0.0"]
-graph = "nest_atomic.toml"
-tier = 2
-
-[atomics.full]
-name = "Full NUCLEUS"
-description = "Complete ecosystem (All 6 components: 5 primals + orchestrator)"
-primals = ["beardog", "songbird", "nestgate", "squirrel", "toadstool", "biomeos"]
-latest = "1.0.0"
-versions = ["1.0.0"]
-graph = "nucleus_complete.toml"
-tier = 1
+[primals.primalspring_primal]
+name = "primalSpring coordination primal"
+description = "Validates composition itself — ecosystem coordination"
+latest = "0.9.16"
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl", "armv7-unknown-linux-musleabihf", "riscv64gc-unknown-linux-musl"]
+capabilities = ["composition", "validation", "coordination"]
+ecobin_grade = "A++"
 
 # =============================================================================
 # DISTRIBUTION ENDPOINTS
 # =============================================================================
 
 [distribution]
-# Primary: Family-verified access via nestgate.io
 primary_endpoint = "https://api.nestgate.io/genome"
-# Fallback: Public GitHub releases
 fallback_endpoint = "https://github.com/ecoPrimals/releases/download"
-# Local: For LiveSpore and air-gapped deployments
 local_path = "primals"
-# Deploy script for universal deployment
-deploy_script = "deploy.sh"
-
-[distribution.authentication]
-# Dark Forest Gate required for primary endpoint
-dark_forest_required = true
-# Public manifest and checksums (no auth needed)
-public_paths = ["/manifest", "/checksum/*", "/deploy.sh"]
-# Download requires Dark Forest Token
-protected_paths = ["/{primal}/{version}/{arch}"]
-
-# =============================================================================
-# ARCHITECTURE MAPPINGS
-# =============================================================================
-
-[architectures]
-# Simplified naming (removed libc suffix for universal deployment)
-x86_64 = { target = "x86_64-linux", aliases = ["x64", "amd64", "x86_64-linux-gnu", "x86_64-linux-musl"] }
-aarch64 = { target = "aarch64-linux", aliases = ["arm64", "aarch64-linux-gnu", "aarch64-linux-musl"] }
-
-# Future architectures (Wave 2+)
-# x86_64_darwin = { target = "x86_64-darwin", aliases = ["x64-macos", "intel-mac"] }
-# aarch64_darwin = { target = "aarch64-darwin", aliases = ["arm64-macos", "apple-silicon"] }
-# armv7 = { target = "arm32-linux", aliases = ["arm", "armhf", "armv7l"] }
-# riscv64 = { target = "riscv64-linux", aliases = ["rv64"] }
-
-# =============================================================================
-# UPDATE POLICY
-# =============================================================================
-
-[updates]
-# How often nodes should check for updates (seconds)
-check_interval = 3600  # 1 hour
-# Automatic update behavior
-auto_update = false  # Require explicit approval
-# Keep N previous versions for rollback
-keep_versions = 3
-# Verify PIE status before applying updates
-verify_pie = true
-
-# =============================================================================
-# EVOLUTION NOTES
-# =============================================================================
-
-# Feb 13, 2026: Discovered non-PIE musl binaries segfault on ASLR systems
-# - NestGate was statically linked without PIE
-# - Replaced with PIE-enabled gnu builds
-# - Added pie_verified flag to all primals
-# - See specs/BINARY_BUILD_TARGETS_SPEC.md for details
+deploy_script = "start_primal.sh"
