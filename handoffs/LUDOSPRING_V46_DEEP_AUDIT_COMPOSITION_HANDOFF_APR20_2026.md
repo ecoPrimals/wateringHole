@@ -46,7 +46,7 @@ we learned, and exactly what each primal/spring team should absorb.
 | **Squirrel** | ai | `ai.query`, `ai.analyze`, `ai.suggest` | NPC dialogue, narration | Working |
 | **biomeOS** | orchestration | `lifecycle.register`, `capability.register`, `health.*` | Deploy graph, Neural API | Working (auto-reg gap) |
 | **rhizoCrypt** | provenance | `dag.session.create`, `dag.event.append` | Provenance pipeline | TCP-only (GAP-06) |
-| **loamSpine** | provenance | Provenance discovery | — | Startup panic (GAP-07) |
+| **loamSpine** | provenance | Provenance discovery | — | ~~Startup panic (GAP-07)~~ **RESOLVED** |
 | **sweetGrass** | provenance | Provenance attestation | — | Blocked by GAP-06/07 |
 
 ### What ludoSpring validates in guideStone
@@ -193,7 +193,7 @@ Operators can grep guideStone output by tier.
 
 | # | Issue | Severity | Action |
 |---|-------|----------|--------|
-| GAP-07 | Startup panic (`block_on` inside async runtime) | CRITICAL | `infant_discovery.rs:233` nests `block_on` in existing Tokio runtime. Use `spawn_blocking` or restructure. |
+| GAP-07 | Startup panic (`block_on` inside async runtime) | CRITICAL | **RESOLVED** (v0.9.16, April 20 2026): mDNS discovery moved from `spawn_blocking` to isolated `std::thread::spawn` + `tokio::sync::oneshot`. `async-std` no longer sees tokio's thread-local Handle. |
 
 ### BearDog team
 
