@@ -169,7 +169,7 @@ validation-critical files.
 
 | Issue | Severity | Impact |
 |-------|----------|--------|
-| Startup panic (`block_on` inside async runtime) | CRITICAL | Blocks exp095 |
+| ~~Startup panic (`block_on` inside async runtime)~~ | ~~CRITICAL~~ | **RESOLVED** v0.9.16 — `mdns-sd` migration eliminates runtime nesting. exp095 unblocked. |
 
 ### For BearDog
 

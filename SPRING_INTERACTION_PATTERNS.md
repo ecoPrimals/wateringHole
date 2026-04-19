@@ -303,7 +303,7 @@ Use `check_skip` when dependencies absent — no fake passes.
 | Inconsistent CLI | `--port` vs `--jsonrpc-port`, etc. | `UNIBIN_ARCHITECTURE` v1.1: `{binary} server --port {port}` universal |
 | Missing env | beardog exits without `FAMILY_ID` | Standalone defaults: `FAMILY_ID=standalone`, `NODE_ID=local` |
 | Health names | squirrel `system.health` vs `health.liveness` | `SEMANTIC_METHOD_NAMING` v2.2: `health.*` required; may fallback with warning |
-| Tokio nested runtime | loamspine panic | Primal bug; degrade gracefully; compliance matrix |
+| Tokio nested runtime | ~~loamspine panic~~ **RESOLVED** (v0.9.16) | Was primal bug; fixed via `mdns-sd` migration (no `async-std` / `block_on`). |
 
 ### Sterile transfer surface
 
@@ -535,7 +535,7 @@ Spring → `barraCuda.compute.dispatch` → preamble/tier → coralReef compile 
 | ISSUE-013 (sweetGrass) | P3 | Content convergence / provenance intersection — `ContentConvergence`; coordinate with ISSUE-012 |
 | ISSUE-022 | P2 | Root privilege in coralReef GPU lifecycle — fd-passing / thin privileged launcher |
 | ~~ISSUE-011 (ludo)~~ | ~~P1~~ | ~~rhizoCrypt no UDS~~ — RESOLVED (session 23): `--unix` shipped, dual-mode TCP+UDS, `biomeos/rhizocrypt.sock` |
-| ISSUE-012 (ludo) | P1 | loamSpine runtime nesting panic — fix `block_on` in async |
+| ~~ISSUE-012 (ludo)~~ | ~~P1~~ | ~~loamSpine runtime nesting panic~~ — RESOLVED (v0.9.16): `mdns` 3.0 → `mdns-sd` 0.19; no `block_on`, no `async-std` |
 | ISSUE-013 (ludo) | P2 | Fitts/Hick formula mismatch vs Python — `variant` param or align defaults |
 | ISSUE-014 | P2 | Neural API not registering many primal capabilities — self-register or probe `capabilities.list` |
 | ISSUE-015 | P3 | NestGate JWT secret length in `start_primal.sh` — use longer secret |
