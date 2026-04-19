@@ -65,7 +65,7 @@ NUCLEUS deployments via the plasmidBin depot pattern:
 - **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V54 (guideStone Level 2), neuralSpring V134 (guideStone Level 2), wetSpring V147 (guideStone Level 3 — bare works)
 - **primalSpring guideStone**: `primalspring_guidestone` binary — 6-layer base composition certification. 67/67 ALL PASS against live 12-primal NUCLEUS. Base layer that domain guideStones inherit.
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
-- **Composing springs**: ludoSpring V45 (guideStone readiness 3 — bare mode passes, 15 bare + 15 IPC checks, `ludospring_guidestone`)
+- **Composing springs**: ludoSpring V46 (guideStone readiness 4 — three-tier: 20 bare + 15 IPC + 8 NUCLEUS cross-atomic, `ludospring_guidestone`)
 
 Mountain season work continues for cross-primal protocols: ionic bond
 negotiation, BTSP Phase 3, compute.dispatch standardization.
@@ -255,7 +255,7 @@ Four springs have entered active NUCLEUS composition testing:
 | **wetSpring** V145 | **Delta** — Level 5 primal proof | Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES in niche.rs |
 | **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
 | **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
-| **ludoSpring** V45 | **Delta** — guideStone readiness 3 | Five-layer validation + guideStone (Python→Rust→IPC→composition→`ludospring_guidestone`, readiness 3: 15 bare + 15 IPC checks); 790+ tests; plasmidBin v0.10.0 |
+| **ludoSpring** V46 | **Delta** — guideStone readiness 4 | Three-tier `ludospring_guidestone` (readiness 4: 20 bare + 15 IPC + 8 NUCLEUS cross-atomic). BLAKE3 Property 3, protocol tolerance; 790+ tests; plasmidBin v0.10.0 |
 
 **Common ecosystem blockers** across active delta springs:
 - Ionic bond negotiation (BearDog `crypto.sign_contract`) — hotSpring, healthSpring, wetSpring
