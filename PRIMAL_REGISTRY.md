@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: April 17, 2026 (Post-stadial — all 13 primals cleared; 4 springs in active NUCLEUS composition)
+**Last Updated**: April 20, 2026 (Post-stadial — all 13 primals cleared; primalSpring guideStone Level 4 (67/67 live NUCLEUS); plasmidBin depot operational; 5 springs with guideStone binaries, 3 at readiness 3+)
 
 ---
 
@@ -434,9 +434,9 @@ guideStone readiness: 0=not started, 1=validation exists, 2=properties documente
 |--------|---------|-------|-----------|---------------------------|
 | ToadStool | S203t | 7,784 lib | N/A (primal) | Stadial cleared; all 11 DEBT.md items resolved |
 | hotSpring | v0.6.32 | 985 lib / 63 suites | **5 — Certified** | guideStone-v0.7.0: all 5 properties, cross-substrate, NUCLEUS additive |
-| healthSpring | V53 | 936+ lib | **1** | exp122 IPC parity; `math_dispatch.rs`; dual-tower ionic |
-| neuralSpring | V133 | 1,234 lib | **1** | `IpcMathClient` (9 methods); 7 caps harness; `deny.toml` stadial bans |
-| wetSpring | V145 | 1,600+ lib | **1** | Exp403 (5 primals over IPC); 22 CONSUMED_CAPABILITIES |
+| healthSpring | V54 | 940+ lib | **2** | `healthspring_guidestone` (bare.rs/domain.rs); P1/P2/P4/P5 validated; feature-gated |
+| neuralSpring | V134 | 1,403+ lib | **2** | `neuralspring_guidestone` (4-phase); `GUIDESTONE_PROPERTIES.md`; feature-gated |
+| wetSpring | V147 | 1,902+ lib | **3** | `wetspring_guidestone` (B0/B1+N0–N3); strict exit 2; expanded N2 (linalg/spectral/stats) |
 | groundSpring | V124 | 1,050+ | **0** | Pre-composition; 92% coverage; tolerance hardening |
 | airSpring | v0.10.0 | 986 lib / 1,364 total | **0** | Pre-composition; 90.56% coverage; deny.toml clean |
 | barraCuda | v0.3.12 | 4,393+ | 826 shaders; 32 IPC methods; LD-05/LD-10 resolved; BTSP Phase 2 |
