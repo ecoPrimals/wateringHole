@@ -84,7 +84,7 @@
 | petalTongue | current | up to date | READY |
 | Squirrel | alpha.51 | 735 pass | READY |
 | sweetGrass | current | up to date | READY |
-| toadStool | S173 | 7,124 lib pass | READY — edge compilation fixed, 3 large files smart-refactored, lint attributes evolved, 49 unsafe (hw containment only) |
+| toadStool | S174 | 7,818 lib pass | READY — edge clippy clean (231→0), server tests fixed, lint/stub evolution, 49 unsafe (hw containment only) |
 | biomeOS | v3.08 | 7,784 pass | READY — zero C deps, 33 capabilities, TCP+UDS, gate routing |
 
 **The primary architectural gap is biomeOS's forwarding model.** biomeOS does its own
