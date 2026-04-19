@@ -441,7 +441,7 @@ guideStone readiness: 0=not started, 1=validation exists, 2=properties documente
 | airSpring | v0.10.0 | 986 lib / 1,364 total | **0** | Pre-composition; 90.56% coverage; deny.toml clean |
 | barraCuda | v0.3.12 | 4,393+ | 826 shaders; 32 IPC methods; LD-05/LD-10 resolved; BTSP Phase 2 |
 | coralReef | Phase 10 Iter 80 | 4,506 | 11 GPU archs; wire contract documented; CompilationInfo IPC |
-| primalSpring | v0.9.15 | 592 (570 lib) | 75 experiments; 56 deploy graphs; fragment-first composition |
+| primalSpring | v0.9.16 | 601 | **4** — guideStone Level 4 (67/67 NUCLEUS, 41/41 bare, BLAKE3 P3); 75 experiments; 56 deploy graphs; capability-based discovery; plasmidBin depot; zero hardcoded primal names |
 | ludoSpring | V46 | 791 | **4** | Composing; 100 experiments; `ludospring_guidestone` three-tier (readiness 4: 20 bare + 15 IPC + 8 NUCLEUS cross-atomic). BLAKE3 P3 via `validation/CHECKSUMS`, protocol tolerance; plasmidBin v0.10.0 |
 
 ### airSpring - Ecological & Agricultural Sciences
