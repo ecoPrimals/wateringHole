@@ -196,6 +196,15 @@ Example `rhizocrypt doctor` output now includes:
 - **Manifest lifecycle integration test** — validates publish → discover → unpublish round-trip
 - **Metrics**: 1,508 tests (was 1,507), all passing, 0 clippy warnings, 0 fmt diffs
 
+### S43.8b Addendum: Doc Reconciliation + Spec Modernization (April 20)
+
+- **Test count alignment** — README, CONTEXT, CHANGELOG metrics all updated to 1,508
+- **Spec count** — CONTEXT now correctly reports 12 specification documents (was 11)
+- **`async-trait` removal from specs** — `STORAGE_BACKENDS.md`, `DATA_MODEL.md`, `INTEGRATION_SPECIFICATION_V2.md` updated to native async syntax (RPITIT), matching S43.3 codebase removal
+- **Spec dates** — three specs updated from Dec 2025 / March 2026 to April 2026
+- **Discovery language** — integration spec now references manifest-based discovery alongside Songbird
+- **Debris audit** — zero TODOs/FIXMEs in crates/, no temp files, no stale binaries, no .env, no orphan scripts; `specs/archive/` retained as fossil record
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
