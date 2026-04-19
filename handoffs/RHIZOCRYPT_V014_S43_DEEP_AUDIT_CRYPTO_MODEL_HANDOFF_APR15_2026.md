@@ -169,6 +169,26 @@ Example `rhizocrypt doctor` output now includes:
 - **Full deep-debt audit clean**: 0 files >800L, 0 `#[allow(` in production, 0 TODO/FIXME, 0 unsafe, 0 production mocks, no hardcoded primals outside adapters/tests, no mandatory splits among 600L+ files
 - **Metrics**: 1,507 tests, 170 `.rs` files, ~48,800 lines, 724 max file
 
+### S43.7 Addendum: Manifest-Based Discovery — PG-32 Resolution (April 20)
+
+**PG-32 root cause**: UDS listener was binding correctly (since S23), but **no manifest file was published**. Springs calling `discover_by_capability("dag")` scanned `$XDG_RUNTIME_DIR/biomeos/*.json` and found no `rhizocrypt.json`. The UDS socket existed but was invisible to capability-based discovery.
+
+**Fix**: Server startup now publishes `$XDG_RUNTIME_DIR/biomeos/rhizocrypt.json`:
+```json
+{
+  "primal": "rhizocrypt",
+  "version": "0.14.0-dev",
+  "socket": "/run/user/1000/biomeos/rhizocrypt.sock",
+  "capabilities": ["dag.session.create", "dag.event.append", "health.check", ...]
+}
+```
+- Published after UDS listener binds, before TCP decision
+- Includes optional `address` field when TCP is active
+- All 28 capabilities from `METHOD_CATALOG` listed
+- `unpublish_manifest()` called on every shutdown path (clean exit)
+
+**For ludoSpring / springs teams**: `discover_by_capability("dag")` will now return rhizoCrypt's manifest with the UDS socket path. Re-run composition experiments exp094–096, exp098.
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
