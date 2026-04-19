@@ -129,7 +129,7 @@ All binary data on the wire is now standard base64, matching BD-01.
 - **Showcase binary names** — `songbird-cli`/`songbird-rendezvous` → `songbird` (canonical UniBin), `toadstool-cli` → `toadstool`
 - **`showcase/README.md`** — `../bins/` path → `primalBins` (matches `showcase-env.sh`)
 - **Doc metrics refresh** — `DEPLOYMENT_CHECKLIST.md` (76→65 demos, 9→10 specs), `RHIZOCRYPT_SPECIFICATION.md` (27→28 methods, coverage checkbox resolved), `00_SPECIFICATIONS_INDEX.md` date
-- **Metrics**: 1,507 tests, 170 `.rs` files, ~48,700 lines, 724 max file
+- **Metrics**: 1,507 tests, 170 `.rs` files, ~48,800 lines, 724 max file
 
 ### S43.3 Addendum: async-trait Removal + DID Semantic Closure (April 16)
 
@@ -161,6 +161,13 @@ Example `rhizocrypt doctor` output now includes:
 ```
 
 **For ludoSpring / springs teams**: Please re-validate with the current binary. `rhizocrypt server` binds UDS unconditionally without any flags. If BTSP handshake enforcement is the issue (FAMILY_ID set), ensure springs clients implement the BTSP Phase 2 handshake or use `BIOMEOS_INSECURE=1` for development validation.
+
+### S43.6 Addendum: Doc Reconciliation + Final Sweep (April 20)
+
+- **Doctor TCP alignment** — transport message lists all 3 opt-in env vars (`RHIZOCRYPT_PORT`, `RHIZOCRYPT_RPC_PORT`, `RHIZOCRYPT_JSONRPC_PORT`)
+- **Showcase binary names** — remaining `songbird-rendezvous` → `songbird`, `../../../bins/` → `${PRIMAL_BINS:-../../../primalBins}`
+- **Full deep-debt audit clean**: 0 files >800L, 0 `#[allow(` in production, 0 TODO/FIXME, 0 unsafe, 0 production mocks, no hardcoded primals outside adapters/tests, no mandatory splits among 600L+ files
+- **Metrics**: 1,507 tests, 170 `.rs` files, ~48,800 lines, 724 max file
 
 ### Remaining (Not Blocking)
 
