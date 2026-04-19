@@ -49,7 +49,7 @@
 |------|--------|
 | **bincode v1 → rmp-serde** | Replaced unmaintained `bincode` (RUSTSEC-2025-0141) with `rmp-serde` (MessagePack, pure Rust). `bincode`, `postcard`, `bitcode`, `heapless`, `atomic-polyfill` all absent from lockfile. Advisory ignore removed from `deny.toml`. |
 | **biomeOS doc genericization** | 29 literal `biomeOS` references in production doc comments → 0. Replaced with "orchestration layer", "ecosystem pipeline", etc. Self-knowledge compliance: primal code references only `BIOMEOS` IPC protocol constants, not peer names. |
-| **PG-33 / GAP-07 startup panic** | mDNS discovery `async_std::task::block_on` moved from `tokio::task::spawn_blocking` to fully isolated `std::thread::spawn` + `tokio::sync::oneshot`. Eliminates "block_on inside async runtime" panic reported by ludoSpring V46. Unblocks exp095. |
+| **PG-33 / GAP-07 startup panic** | **Structurally eliminated**: `mdns` 3.0 (async-std) replaced with `mdns-sd` 0.19 (pure Rust, own daemon thread). No `block_on`, no runtime nesting. `async-std`, `net2`, `proc-macro-error` gone; 3 RUSTSEC advisories removed. Unblocks ludoSpring exp095. |
 
 ---
 
