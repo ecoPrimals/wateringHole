@@ -142,6 +142,26 @@ All binary data on the wire is now standard base64, matching BD-01.
 - **`deny.toml` wildcard policy** — `wildcards = "warn"` → `"allow"` for path deps (monorepo false-positive); advisory/ban/license/source checks all passing
 - **Full audit clean**: 0 `#[allow(` in production code, 0 TODO/FIXME, 0 production unwrap/expect, 0 panic!, 0 unsafe, mocks behind `#[cfg(test)]` or `test-utils` feature only, no hardcoded primal names outside adapter/test code
 
+### S43.5 Addendum: Transport Diagnostics — ludoSpring GAP-06 Response (April 20)
+
+**Context**: ludoSpring V46 audit reports rhizoCrypt as "TCP-only, no UDS" (GAP-06), blocking 4+ composition experiments. This finding is **stale** — UDS has been unconditional on Unix since S23 (March 31) and formalized as "UDS unconditional, TCP opt-in" in S37 (April 12). The `LD-06` item was resolved in the S37 handoff and IPC compliance matrix.
+
+**Root cause of confusion**: The `rhizocrypt doctor` command had **no transport diagnostics**. It reported DAG, storage, config (port/host), and discovery — but nothing about UDS. Springs teams running `doctor` saw TCP port info and no UDS mention, leading to the "TCP-only" conclusion.
+
+**Fix**: Added `check_transport()` to `doctor.rs` — now reports:
+- **Transport: UDS** — unconditional status, full socket path (`$XDG_RUNTIME_DIR/biomeos/rhizocrypt[-{family_id}].sock`)
+- **Transport: TCP** — opt-in status (enabled/disabled, how to enable)
+- **Transport: BTSP** — enforcement mode (required / dev bypass / not required)
+
+Example `rhizocrypt doctor` output now includes:
+```
+[✓] Transport: UDS (unconditional, path=/run/user/1000/biomeos/rhizocrypt.sock)
+[✓] Transport: TCP (disabled — opt-in: pass --port or set RHIZOCRYPT_PORT)
+[✓] Transport: BTSP (not required — no FAMILY_ID set, raw JSON-RPC)
+```
+
+**For ludoSpring / springs teams**: Please re-validate with the current binary. `rhizocrypt server` binds UDS unconditionally without any flags. If BTSP handshake enforcement is the issue (FAMILY_ID set), ensure springs clients implement the BTSP Phase 2 handshake or use `BIOMEOS_INSECURE=1` for development validation.
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
