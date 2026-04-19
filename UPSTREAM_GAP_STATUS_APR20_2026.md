@@ -1,7 +1,7 @@
-# Upstream Gap Status — April 13, 2026 (Updated)
+# Upstream Gap Status — April 20, 2026 (Updated)
 
 **Source**: primalSpring Phase 41+ gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Post-pull review of barraCuda (Sprint 42 Ph9), NestGate (Session 43k), biomeOS (v3.08).
+**Context**: Post-pull review of barraCuda (Sprint 44), NestGate (Session 43k), biomeOS (v3.08).
 
 ---
 
@@ -56,7 +56,7 @@
 |-----|-------|-------|
 | `nucleus_complete.toml` missing NestGate streaming ops | biomeOS | Need `store_blob`, `retrieve_range`, `object.size`, `namespaces.list` (Session 43) |
 | `nucleus_complete.toml` missing barraCuda/coralReef as separate nodes | biomeOS | Only registered in `tower_atomic_bootstrap.toml` optional section; no `tensor.batch.submit` |
-| `capability_registry.toml` has no `[translations.tensor]` | biomeOS | barraCuda's 32 JSON-RPC methods have no translation entries |
+| `capability_registry.toml` has no `[translations.tensor]` | biomeOS | barraCuda's 39 JSON-RPC methods (Sprint 44: +7 linalg/spectral/stats/tensor) have no translation entries |
 | `BatchGuard` migration guide | primalSpring | **DONE** — `docs/BATCHGUARD_MIGRATION_GUIDE.md` written; springs can adopt |
 | Graph `transport` metadata: no TCP/Tower fallback | biomeOS | Graphs say `uds_only` with no acknowledgment of Docker/TCP deployment mode |
 
@@ -64,17 +64,17 @@
 
 | Gap | Owner | Notes |
 |-----|-------|-------|
-| 29 shader absorption candidates | barraCuda | neuralSpring pipeline |
-| RAWR GPU kernel (CPU-only) | barraCuda | groundSpring-specific |
-| Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific |
+| ~~29 shader absorption candidates~~ | barraCuda | **RESOLVED** (Sprint 43) — 18/18 barraCuda candidates confirmed upstream |
+| ~~RAWR GPU kernel~~ | barraCuda | **RESOLVED** (Sprint 40) — `RawrWeightedMeanGpu` already exists |
+| Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific, low priority |
 
 ---
 
-## Primal Health Summary (April 13, 2026 — Updated)
+## Primal Health Summary (April 20, 2026 — Updated)
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 42 Phase 9 | 4,377 pass | READY — 32 JSON-RPC methods, 80.5% coverage |
+| barraCuda | Sprint 44 | 4,393+ pass | READY — 39 JSON-RPC methods, 80.5% coverage, 12-axis deep debt clean |
 | BearDog | Wave 47 | 37 pass | READY |
 | coralReef | Iter 80+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | 0.9.16+ (stadial gate Apr 16) | 1,442 pass | READY — **stadial gate cleared**; sled + sqlite removed; **hickory-resolver** 0.26; `bincode` → `rmp-serde` (RUSTSEC-2025-0141 eliminated); biomeOS doc refs 29→0; upstream **hickory-net** `async-trait` only |
