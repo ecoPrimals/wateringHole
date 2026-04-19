@@ -249,13 +249,13 @@ Four springs have entered active NUCLEUS composition testing:
 
 | Spring | Status | Composition Evidence |
 |--------|--------|---------------------|
-| **hotSpring** v0.6.32 | **guideStone Level 5 CERTIFIED** | 64/64 suites; all 5 guideStone properties; `hotspring_guidestone` (BLAKE3 P3, protocol tolerance, family discovery via primalSpring v0.9.16); 13 LOCAL_CAPABILITIES dispatched; bare verified 14/14 PASS; `validate-primal-proof.sh` deployment script |
+| **hotSpring** v0.6.32 | **guideStone Level 5 CERTIFIED** | 64/64 suites; all 5 guideStone properties; `hotspring_guidestone` (BLAKE3 P3, protocol tolerance, family discovery via primalSpring v0.9.16); 13 LOCAL_CAPABILITIES dispatched |
 | **healthSpring** V53 | **Delta** — Level 5 in progress (guideStone readiness: Level 1) | exp122 IPC parity; `math_dispatch.rs` feature-gated IPC/lib routing; niche.rs; dual-tower ionic |
 | **neuralSpring** V133 | **Delta** — Level 5 primal proof | `IpcMathClient` (9 methods); `validate_proto_nucleate_capabilities` (7 caps, exit 0/1/2); `deny.toml` stadial bans; 18 barraCuda surface gaps handed back |
 | **wetSpring** V145 | **Delta** — Level 5 primal proof | Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES in niche.rs |
 | **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
 | **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
-| **ludoSpring** V46 | **Delta** — guideStone readiness 4 | Three-tier `ludospring_guidestone` (readiness 4: 20 bare + 15 IPC + 8 NUCLEUS cross-atomic). BLAKE3 Property 3, protocol tolerance; 790+ tests; plasmidBin v0.10.0 |
+| **ludoSpring** V46 | **Delta** — guideStone readiness 4 | Three-tier `ludospring_guidestone` (readiness 4: 20 bare + 15 IPC + 8 NUCLEUS cross-atomic). BLAKE3 Property 3 via `validation/CHECKSUMS`, protocol tolerance; 791 tests; plasmidBin v0.10.0 |
 
 **Common ecosystem blockers** across active delta springs:
 - Ionic bond negotiation (BearDog `crypto.sign_contract`) — hotSpring, healthSpring, wetSpring
