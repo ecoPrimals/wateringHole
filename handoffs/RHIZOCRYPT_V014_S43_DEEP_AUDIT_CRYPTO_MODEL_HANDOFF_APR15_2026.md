@@ -221,6 +221,12 @@ Example `rhizocrypt doctor` output now includes:
 
 **Metrics**: 1,512 tests (was 1,508), 0 clippy warnings, 0 fmt diffs
 
+### S45.1b Addendum: Doc Reconciliation (April 20)
+
+- **Test count alignment** — all docs updated to 1,512: CHANGELOG (3 stale refs), showcase/README (2 refs), docs/DEPLOYMENT_CHECKLIST (2 refs), specs/RHIZOCRYPT_SPECIFICATION (1 ref)
+- **Line count** — CONTEXT, CHANGELOG updated from ~48,800 to ~48,600 (measured 48,604)
+- **Debris audit** — zero artifacts, temp files, empty dirs, .env, stale paths; `specs/archive/` retained as fossil record; `showcase/04-sessions/Cargo.lock` is intentional (nested demo crate)
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item

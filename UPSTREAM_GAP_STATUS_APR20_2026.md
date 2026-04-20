@@ -75,7 +75,7 @@
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 44c | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, 80.5% coverage, 12-axis deep debt clean |
+| barraCuda | Sprint 44d | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, magic numbers evolved, 80.5% coverage, 12-axis deep debt clean |
 | BearDog | Wave 47 | 37 pass | READY |
 | coralReef | Iter 80+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | 0.9.16+ (stadial gate Apr 16) | 1,442 pass | READY — **stadial gate cleared**; sled + sqlite removed; **hickory-resolver** 0.26; `bincode` → `rmp-serde` (RUSTSEC-2025-0141 eliminated); biomeOS doc refs 29→0; upstream **hickory-net** `async-trait` only |
