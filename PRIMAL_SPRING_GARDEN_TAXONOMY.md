@@ -4,7 +4,7 @@
 ecosystem — their roles, ownership boundaries, interaction contracts, and the
 co-evolution loop that drives ecosystem progress.
 
-**Last Updated:** April 3, 2026
+**Last Updated:** April 20, 2026 (Validated: NUCLEUS → Spring → Garden pipeline proven)
 
 ---
 
@@ -246,6 +246,37 @@ infrastructure-only. The boundary is grey and evolves with the ecosystem.
 | **Gap type discovered** | Correctness bugs, protocol mismatches, missing capabilities | Usability gaps, UX issues, missing convenience methods |
 | **Binary consumption** | Compile-time library link + IPC probe | BYOB from plasmidBin (pure IPC) |
 | **Science** | Reproduces published papers, baseline parity | Exercises composed science in product context |
+
+---
+
+## Validated Pipeline (April 20, 2026)
+
+The full NUCLEUS → Spring → Garden pipeline has been validated end-to-end:
+
+```
+NUCLEUS certification (primalSpring)
+  guidestone: 84/86 (6 layers, 12 primals, 11 capabilities)
+  exp094:     15/18 composition parity
+  graphs:     17/17 deploy graphs parse clean
+          ↓
+Spring science validation (ludoSpring)
+  Tier 1:     152/152 local math (no IPC)
+  Tier 2:     18/19 tower, 3/6 barraCuda composition
+  Tier 3:     30/31 full NUCLEUS composition, 11/11 pipeline
+  Structural: 14/14 deploy graph tests
+          ↓
+Garden composition (esotericWebb)
+  Product graphs: 8/8 valid TOML (Webb)
+  Proto sketches: 7/7 valid (ludoSpring → Webb)
+  IPC flows:      game.* ✓, visualization.* ✓, compute.* ✓
+```
+
+Each spring may produce its own garden. For example:
+- ludoSpring → esotericWebb (CRPG composition)
+- hotSpring → MILC results garden for physicists
+- wetSpring → environmental sensor dashboard
+
+The pattern is standard; the domain science differs.
 
 ---
 

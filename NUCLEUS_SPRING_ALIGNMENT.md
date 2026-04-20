@@ -1,42 +1,20 @@
-# NUCLEUS Spring Alignment — Phase 45 (Deployment Validation + genomeBin v5.1)
+# NUCLEUS Spring Alignment — Phase 45
+
+> This is the **canonical** inter-spring reference.
+> Local copies exist in `primalSpring/wateringHole/` for spring context.
 
 **Date**: April 20, 2026
-**From**: primalSpring v0.9.17
-**For**: All springs, primals, and gardens
+**From**: primalSpring v0.9.17 (Phase 45)
 **License**: AGPL-3.0-or-later
-
----
-
-## Current Season: Delta (Live NUCLEUS Deployments)
-
-**guideStone Level 4 achieved.** 67/67 ALL PASS against live 12-primal NUCLEUS
-deployed from plasmidBin. BLAKE3 checksums (P3 self-verifying). The ecosystem
-has crossed from spring (composition elevation) to delta (live deployments).
-
-**What this means for springs**: The full NUCLEUS stack is deployable from
-`plasmidBin` as pre-built musl-static ecoBin binaries. Springs can now:
-1. Pull `plasmidBin` binaries (or clone the depot)
-2. Deploy a live NUCLEUS via `nucleus_launcher.sh`
-3. Run their `guideStone` binary externally against it
-4. Validate primal proof (Level 5) — same science via IPC
-
-**plasmidBin depot pattern**: See `primalSpring/wateringHole/PLASMINBIN_DEPOT_PATTERN.md`
-for the full depot workflow. This replaces the prior local-build-everything model
-with a remote binary depot that any spring can consume immediately.
-
-**primalSpring guideStone certifies the base**: The `primalspring_guidestone`
-binary validates composition health (discovery, liveness, capability parity,
-cross-atomic pipelines, bonding, crypto boundaries). Domain guideStones
-inherit this base layer and add domain-specific science validation on top.
 
 ---
 
 ## The Atomic Model
 
-Every spring composes from the same NUCLEUS atomics. Each spring stresses
-different portions based on its domain. As springs evolve, they harden the
-primals they depend on — and those improvements propagate to every other
-spring in the ecosystem.
+Every spring composes from the same NUCLEUS atomics. Each spring
+stresses different portions based on its domain. As springs evolve,
+they harden the primals they depend on — and those improvements
+propagate to every other spring in the ecosystem.
 
 | Atomic | Particle | Primals | Fragment |
 |--------|----------|---------|----------|
@@ -46,58 +24,53 @@ spring in the ecosystem.
 | NUCLEUS | Atom | Tower + Node + Nest (9 unique primals) | `nucleus` |
 | Meta-tier | — | biomeOS + Squirrel + petalTongue | `meta_tier` |
 
-Fragments are canonical patterns defined in `primalSpring/graphs/fragments/`.
-Deploy graphs declare their atomics via `fragments = [...]` metadata.
-Bonding policies document how atomics bind within cross-atomic compositions.
+### Genetics Layer
+
+Each atomic inherits a genetics posture from the three-tier identity model:
+
+| Tier | Type | Role | Cloneable | Bond Minimum |
+|------|------|------|-----------|--------------|
+| 1 | Mito-Beacon | Discovery, NAT, metadata | Yes | Metallic, Ionic |
+| 2 | Nuclear | Permissions, auth, sessions | No (spawn fresh) | Covalent |
+| 3 | Tag | Open channels (deprecated FAMILY_SEED) | Yes | — |
+
+All covalent bonds (same-family, same-trust) require **NuclearLineage** trust —
+nuclear genetics must be spawned fresh per generation, never copied. Ionic and
+metallic bonds require at minimum **MitoBeaconFamily** trust — mito-beacon
+membership for discovery without sharing nuclear credentials. The two-phase
+BTSP model (Phase 1: mito-beacon tunnel, Phase 2: nuclear session) ensures
+discovery never exposes authorization material.
 
 ---
 
 ## Spring × Atomic Alignment Matrix
 
-Every science spring now has a proto-nucleate graph in
-`primalSpring/graphs/downstream/` that defines its target NUCLEUS composition.
+Each spring's proto-nucleate graph is parameterized via `graphs/downstream/downstream_manifest.toml`
+using `proto_nucleate_template.toml`. The one exception is `healthspring_enclave_proto_nucleate.toml`,
+which has a unique dual-tower ionic bridge pattern and is kept as a standalone graph.
 
-Evolution ladder: **paper → python → rust → (evolves primals) → ipc composition → composed**
+| Spring | Version | gS | Tests | Primary Atomics | Proto-Nucleate | Status |
+|--------|---------|------|-------|-----------------|----------------|--------|
+| **hotSpring** | 0.6.32 | **5** | ~985 | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` | **Pinned** — certified |
+| **neuralSpring** | V134 | **2** | 1,403+ | **Node** + Meta | `downstream_manifest.toml` | **Pinned** — scaffold |
+| **wetSpring** | V147 | **3** | 1,902+ | Node + **Nest** + Meta | `downstream_manifest.toml` | **Pinned** — bare works |
+| **airSpring** | 0.10.0 | 0 | 1,364 | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
+| **groundSpring** | V124 | 0 | 1,050+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
+| **healthSpring** | V54 | **2** | 940+ | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_*` | **Pinned** — scaffold |
+| **ludoSpring** | V46 | **4** | 791 | Node + **Meta** + Nest | `downstream_manifest.toml` | **Active** — evolution partner |
 
-At each stage, the spring's local code drives primal evolution upstream. Once primals
-absorb the math, the spring retires its local Rust math and validates through composition
-only (IPC calls to NUCLEUS). There are no spring binaries at the composition level.
+### Key
 
-| Spring | Version | Evolution | Tests | guideStone | Primary Atomics | Proto-Nucleate |
-|--------|---------|-----------|-------|-----------|-----------------|----------------|
-| **primalSpring** | 0.9.16 | **certified** | 570 | gS **4** | **All** (composition domain) | base layer — certifies NUCLEUS |
-| **hotSpring** | 0.6.32 | **certified** | 990 | gS **5** | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` |
-| **neuralSpring** | V134 | **composing** | 1,403+ | gS **2** | **Node** + Meta | `downstream_manifest.toml` (neuralspring) |
-| **wetSpring** | V147 | **composing** | 1,902+ | gS **3** | Node + **Nest** + Meta | `downstream_manifest.toml` (wetspring) |
-| **airSpring** | 0.10.0 | **composed** | 1,364 | gS 0 | Node + **Nest** | `downstream_manifest.toml` (airspring) |
-| **groundSpring** | V124 | **composing** | 1,050+ | gS 0 | Node + **Nest** | `downstream_manifest.toml` (groundspring) |
-| **healthSpring** | V54 | **composing** | 940+ | gS **2** | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_proto_nucleate` |
-| **ludoSpring** | V45 | **composing** | 790+ | gS **3** | Node + **Meta** + Nest | `downstream_manifest.toml` (ludospring) |
-
-Also: **esotericWebb** (garden, V7) → `esotericwebb_proto_nucleate` — full NUCLEUS + Meta, pure composition. 342 tests, ~91% coverage, 7 primal domains, zero spring dependencies. Three-generation validation: Python→Rust→IPC (proven by ludoSpring) → garden composition (proven by Webb).
-
-### plasmidBin Niche Validation
-
-Each spring can validate its primal requirements with:
-```bash
-./validate_composition.sh niche-<spring>   # e.g. niche-hotspring
-```
-
-### Acceleration Effect
-
-As each spring completes its niche, it unlocks capabilities for siblings:
-- **wetSpring** + **airSpring** (composed) → proved the full ladder, template for all
-- **hotSpring** → GPU patterns drove barraCuda + coralReef evolution
-- **neuralSpring** → `inference.*` wire standard benefits ALL springs needing AI
-- **healthSpring** → ionic bond + dual-tower enclave applies to any sensitive data
-- **ludoSpring** → pure composition proof: graph-as-product for gardens
+- **Bold atomic** = primary domain stress point
+- **Pinned** = at current guideStone level; science evolution continues independently; composition patterns absorb primalSpring v0.9.17 when ready
+- **Active** = focused evolution bandwidth with primalSpring + esotericWebb
 
 ---
 
 ## neuralSpring: AI Provider for the Ecosystem
 
-neuralSpring has a unique cross-cutting role. As it evolves WGSL shader
-ML inference, **every other spring gains AI capabilities** through Squirrel.
+neuralSpring has a unique cross-cutting role: as it evolves the WGSL shader
+composition for ML inference, **every other spring gains AI capabilities**.
 
 ```
 neuralSpring evolves inference.complete / inference.embed / inference.models
@@ -107,19 +80,19 @@ Squirrel discovers neuralSpring (or falls back to Ollama)
 Every spring with Squirrel in its composition gets AI
 ```
 
-### What Each Spring Gains
+### What Each Spring Gains from neuralSpring
 
 | Spring | AI Capability | Use Case |
 |--------|--------------|----------|
-| **hotSpring** | `inference.complete` | AI-guided simulation parameter selection, anomaly detection in QCD |
-| **wetSpring** | `inference.complete` + `inference.embed` | AI sample triage, specimen classification, sensor anomaly detection |
-| **airSpring** | `inference.complete` + `inference.embed` | Ecological prediction, crop stress classification |
+| **hotSpring** | `inference.complete` | AI-guided simulation parameter selection, anomaly detection in QCD measurements |
+| **wetSpring** | `inference.complete` + `inference.embed` | AI sample triage, specimen classification, anomaly detection in sensor streams |
+| **airSpring** | `inference.complete` + `inference.embed` | Ecological prediction, sensor anomaly detection, crop stress classification |
 | **groundSpring** | `inference.complete` | AI-guided calibration, inverse problem parameter estimation |
-| **healthSpring** | `inference.complete` + `inference.embed` | Clinical decision support, drug interaction classification |
-| **ludoSpring** | `inference.complete` | AI Dungeon Master narration, NPC dialogue |
-| **esotericWebb** | `inference.complete` + `inference.embed` | Narrative generation, NPC dialogue, AI-driven world building (V7: ai.query, ai.suggest, ai.analyze) |
+| **healthSpring** | `inference.complete` + `inference.embed` | Clinical decision support, drug interaction classification, biosignal analysis |
+| **ludoSpring** | `inference.complete` | AI Dungeon Master narration, NPC dialogue, game-science optimization |
+| **esotericWebb** | `inference.complete` | Narrative generation, session context, AI-driven world building |
 
-### Inference Evolution Path
+### The Inference Evolution Path
 
 ```
 Phase 1 (now):   Squirrel → Ollama (external vendor, HTTP)
@@ -129,158 +102,165 @@ Phase 3 (later): Squirrel → neuralSpring → domain-specific models
                  (each spring contributes domain training data)
 ```
 
-No spring needs to change code to benefit from neuralSpring's evolution.
+Every spring that adds Squirrel to its composition immediately benefits
+from neuralSpring's inference evolution — without any code changes.
 
 ---
 
-## Per-Spring Composition Detail
+## Per-Spring NUCLEUS Composition Detail
 
 ### hotSpring — Lattice QCD / HPC Physics
 
 **Atomics**: Tower + **Node** (proton-heavy) + Nest
 
-| Primal | Role in hotSpring |
-|--------|-------------------|
-| coralReef | Compile QCD-specific WGSL (gauge update, Wilson/Dirac, HMC) |
-| toadStool | Metallic GPU fleet dispatch (lattice partitioning) |
-| barraCuda | df64 tensor shaders (SU(3) matmul, FFT, CG solver) |
-| NestGate | Gauge configuration cache |
-| Provenance trio | Reproducibility witness per configuration |
+```
+hotSpring domain layer
+    ├── coralReef: QCD-specific WGSL (gauge update, Wilson/Dirac, HMC)
+    ├── toadStool: metallic GPU fleet dispatch (lattice partitioning)
+    ├── barraCuda: df64 tensor shaders (SU(3) matmul, FFT, CG solver)
+    ├── NestGate: gauge configuration cache
+    └── Provenance trio: reproducibility witness per configuration
+```
 
-**Evolves for ecosystem**: df64 GPU precision, multi-GPU fleet dispatch,
-shader pipeline scaling, HPC deployment patterns.
+**What hotSpring evolves for the ecosystem**:
+- df64 double-precision GPU emulation → benefits any spring needing high precision
+- Multi-GPU metallic dispatch → benefits any spring needing fleet compute
+- Shader pipeline scaling → benefits neuralSpring's multi-stage inference
+- HPC deployment patterns → benefits CERN/cloud-scale compositions
+
+---
 
 ### neuralSpring — ML / AI Inference
 
 **Atomics**: Tower + **Node** + Meta (Squirrel)
 
-| Primal | Role in neuralSpring |
-|--------|---------------------|
-| coralReef | Compile ML-specific WGSL (tokenizer, attention, KV-cache) |
-| toadStool | Inference pipeline scheduling |
-| barraCuda | Transformer shaders (matmul, attention, softmax, gelu) |
-| Squirrel | Inference routing (registers as provider) |
-| NestGate | Model weight cache (optional) |
+```
+neuralSpring domain layer
+    ├── coralReef: ML-specific WGSL (tokenizer, attention, KV-cache)
+    ├── toadStool: inference pipeline scheduling
+    ├── barraCuda: transformer shaders (matmul, attention, softmax, gelu)
+    ├── Squirrel: inference routing (registers as provider)
+    └── NestGate (optional): model weight cache
+```
 
-**Evolves for ecosystem**: WGSL tokenization, native inference without
-Ollama/CUDA, `inference.*` wire standard, model routing.
+**What neuralSpring evolves for the ecosystem**:
+- Tokenization as WGSL shader → vendor-free tokenization for all springs
+- Attention/FFN forward pass → native inference without Ollama/CUDA
+- `inference.*` wire standard → unified AI interface for all compositions
+- Model routing → Squirrel discovers best provider per-request
+
+---
 
 ### wetSpring — Life Science & Analytical Chemistry
 
 **Atomics**: Tower + Node + **Nest** + Meta (Squirrel + petalTongue)
 
-| Primal | Role in wetSpring |
-|--------|-------------------|
-| coralReef | Domain WGSL (spectral deconvolution, phylogenetics) |
-| toadStool | GPU/NPU dispatch (Akida edge classification) |
-| barraCuda | Spectral analysis, peak detection, statistical clustering |
-| NestGate | Specimen/sensor time-series storage |
-| Provenance trio | Sample chain-of-custody |
-| Squirrel | AI-driven triage and anomaly detection |
-| petalTongue | Real-time lab monitoring dashboards |
+```
+wetSpring domain layer
+    ├── coralReef: domain WGSL (spectral deconvolution, phylogenetics)
+    ├── toadStool: GPU/NPU dispatch (Akida edge classification)
+    ├── barraCuda: spectral analysis, peak detection, statistical clustering
+    ├── NestGate: specimen/sensor time-series storage
+    ├── Provenance trio: sample chain-of-custody
+    ├── Squirrel: AI-driven triage and anomaly detection
+    └── petalTongue: real-time lab monitoring dashboards
+```
 
-**Evolves for ecosystem**: Time-series storage, streaming pipelines,
-NPU/edge dispatch, biodiversity attribution.
+**What wetSpring evolves for the ecosystem**:
+- Time-series storage patterns → benefits any spring with sensor data
+- Streaming pipeline composition → benefits real-time processing springs
+- NPU/edge dispatch (Akida) → benefits fieldMouse deployments
+- Biodiversity attribution → enriches provenance trio patterns
+
+---
 
 ### airSpring — Ecological & Agricultural Science
 
 **Atomics**: Tower + Node + **Nest**
 
-| Primal | Role in airSpring |
-|--------|-------------------|
-| coralReef | Ecology WGSL (ET₀, soil moisture, canopy resistance) |
-| toadStool | GPU/NPU dispatch (edge sensor nodes) |
-| barraCuda | PDE solvers, FFT, statistical analysis |
-| NestGate | IoT sensor time-series + model outputs |
-| Provenance trio | Measurement attribution for compliance |
+```
+airSpring domain layer
+    ├── coralReef: ecology WGSL (ET₀, soil moisture, canopy resistance)
+    ├── toadStool: GPU/NPU dispatch (edge sensor nodes)
+    ├── barraCuda: PDE solvers, FFT, statistical analysis
+    ├── NestGate: IoT sensor time-series + model outputs
+    └── Provenance trio: measurement attribution for compliance
+```
 
-**Evolves for ecosystem**: PDE solver shaders, IoT ingestion patterns,
-NPU edge dispatch, environmental compliance attribution.
+**What airSpring evolves for the ecosystem**:
+- PDE solver shaders → benefits physics and biology springs
+- IoT sensor ingestion patterns → benefits fieldMouse and edge deployments
+- NPU dispatch for edge → validates Akida/Coral composition paths
+- Environmental compliance attribution → enriches provenance patterns
+
+---
 
 ### groundSpring — Geoscience & Measurement Science
 
 **Atomics**: Tower + Node + **Nest**
 
-| Primal | Role in groundSpring |
-|--------|---------------------|
-| coralReef | Geology WGSL (noise filters, inverse solvers) |
-| toadStool | Compute dispatch |
-| barraCuda | FFT, matrix decomposition, Anderson-Darling, WDM |
-| NestGate | Geospatial data + calibration records |
-| Provenance trio | Calibration audit trails |
+```
+groundSpring domain layer
+    ├── coralReef: geology WGSL (noise filters, inverse solvers)
+    ├── toadStool: compute dispatch
+    ├── barraCuda: FFT, matrix decomposition, Anderson-Darling, WDM
+    ├── NestGate: geospatial data + calibration records
+    └── Provenance trio: calibration audit trails
+```
 
-**Evolves for ecosystem**: Statistical shader library, inverse problem
-solvers, long-duration storage, calibration traceability.
+**What groundSpring evolves for the ecosystem**:
+- Statistical shader library → benefits any spring needing data quality checks
+- Inverse problem solvers → benefits physics and signal processing
+- Long-duration storage patterns → benefits any spring with archival needs
+- Calibration traceability → enriches provenance trio for metrology
+
+---
 
 ### healthSpring — Clinical / Compliance
 
 **Atomics**: **Tower** (dual-tower) + **Nest** (neutron-heavy) + Meta
 
-| Component | Role in healthSpring |
-|-----------|---------------------|
-| Tower A (FAMILY_A) | Patient data enclave: NestGate-A + Provenance Trio A |
-| Tower B (FAMILY_B) | Analytics: Squirrel + NestGate-B (model cache) |
-| Ionic bridge | De-identified aggregates only cross the fence |
-| BearDog | Cross-family ionic bond enforcement |
+```
+healthSpring domain layer
+    ├── Tower A (data custody): NestGate-A + Provenance Trio A
+    │   └── ionic fence: data cannot leave Tower A as raw
+    ├── Tower B (analytics): Squirrel + NestGate-B (model cache)
+    │   └── ionic bridge: receives only de-identified aggregates
+    └── BearDog: cross-family ionic bond enforcement
+```
 
-**Evolves for ecosystem**: Ionic bond runtime, data egress fences,
-dual-tower enclave pattern, `crypto.sign_contract`, HIPAA audit trails.
+**What healthSpring evolves for the ecosystem**:
+- Ionic bond runtime enforcement (MitoBeaconFamily trust across towers) → benefits any spring with trust boundaries
+- Data egress fences → benefits any composition handling sensitive data
+- Dual-tower enclave pattern (separate nuclear lineages per tower, shared mito-beacon for discovery) → benefits financial, regulatory, government
+- `crypto.sign_contract` capability → enables metered capability sharing
+- HIPAA audit trail patterns → enriches provenance trio for compliance
+- Nuclear genetics isolation proof → validates that Tier 2 credentials never cross ionic boundaries
+
+---
 
 ### ludoSpring — Game Science / HCI
 
 **Atomics**: Tower + Node + **Meta** (Squirrel + petalTongue)
 
-| Primal | Role in ludoSpring |
-|--------|-------------------|
-| coralReef | Game WGSL (Fitts, Perlin, WFC) |
-| toadStool | 60Hz tick-budget dispatch |
-| barraCuda | Game math shaders (noise, procedural, physics) |
-| Squirrel | AI Dungeon Master (narration, NPC dialogue) |
-| petalTongue | Scene rendering, TUI |
-| NestGate | Session persistence |
+```
+ludoSpring composition (pure — ludospring ecoBin)
+    ├── coralReef: game WGSL (Fitts, Perlin, WFC)
+    ├── toadStool: 60Hz tick-budget dispatch
+    ├── barraCuda: game math shaders (noise, procedural, physics)
+    ├── Squirrel: AI Dungeon Master (narration, NPC dialogue)
+    ├── petalTongue: scene rendering, TUI
+    ├── NestGate: session persistence
+    └── Three-layer validation: Python→Rust→composition parity
+```
 
-**Evolves for ecosystem**: 60Hz composition budget, pure composition
-proof (graph-as-product), AI latency testing, session lifecycle.
-
----
-
-## Composition Readiness Status
-
-**NUCLEUS is now fully operational** (12/12 ALIVE, 19/19 exp094 PASS). Each
-spring is evolving toward its proto-nucleate target. This table shows where
-each spring currently stands in the **primal composition** maturity ladder
-(see `SPRING_COMPOSITION_PATTERNS.md` for the standardized patterns).
-
-All proto-nucleate graphs have been updated with actual wire capabilities
-(April 13, 2026). Springs can now validate against live NUCLEUS.
-
-| Spring | Method Norm | Capability Reg | Socket Discovery | Dispatch Routing | Graph Validation | biomeOS Gate | Provenance Graceful | Composition Parity | Niche Identity |
-|--------|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
-| **healthSpring** | YES | YES (science+infra, cost, deps) | YES (6-tier) | YES (two-tier) | — | — | YES | — | YES |
-| **neuralSpring** | YES | YES (TOML + tarpc) | YES (5-tier) | partial | — | — | — | — | YES |
-| **wetSpring** | YES (iterative) | partial | YES | YES | — | — | YES | — | YES |
-| **hotSpring** | YES | partial | YES (NucleusContext) | partial | — | — | — | — | YES |
-| **airSpring** | partial | partial | YES | partial | — | — | YES | — | YES |
-| **groundSpring** | partial | partial | YES (metalForge) | — | — | YES | — | — | YES |
-| **ludoSpring** | — | — | partial | — | YES (recipe.rs) | — | — | — | partial |
-| **primalSpring** | YES | YES | YES | YES | YES | N/A | YES | **19/19 PASS** | YES |
-
-**Key**: YES = pattern adopted, partial = incomplete or needs update, — = not yet started
-
-### What Each Spring Needs Next
-
-Now that NUCLEUS is validated, each spring's priority shifts to **composition parity** — proving
-that primal-orchestrated IPC produces the same results as local Rust math.
-
-| Spring | Next Step |
-|--------|-----------|
-| **healthSpring** | Create composition parity experiment; validate `storage.store`/`storage.retrieve` + `crypto.hash` via IPC |
-| **neuralSpring** | Complete dispatch routing (two-tier); register as Squirrel inference provider; composition parity for `inference.*` |
-| **wetSpring** | Composition parity experiment with `stats.mean` + `storage.store`/`storage.retrieve` + provenance |
-| **hotSpring** | **guideStone Level 5 CERTIFIED** (reference implementation, guideStone v1.2.0, primalSpring v0.9.17): all 5 properties, `hotspring_guidestone` binary (BLAKE3 P3 via `primalspring::checksums::verify_manifest()` — 15 source files hashed, protocol tolerance via `is_protocol_error()`, family-aware discovery), `validate_primal_proof` (9 probes, 10 capabilities), `validation/` artifact (59/59 × 5 substrates), deploy graph in `graphs/`. Absorbed primalSpring v0.9.17 (genomeBin v5.1). **Bare mode: 30/30 PASS** (3 SKIP = expected NUCLEUS liveness). 990 lib tests. `scripts/validate-primal-proof.sh` wraps bare + NUCLEUS workflow (builds from barracuda/, runs from root, auto-sets BEARDOG_FAMILY_SEED, SONGBIRD_SECURITY_PROVIDER, NESTGATE_JWT_SECRET). |
-| **airSpring** | Method normalization in all paths; composition parity for weather/soil compute |
-| **groundSpring** | Method normalization; dispatch routing; composition parity for sensor/calibration |
-| **ludoSpring** | Method normalization; capability registration; composition parity for game math |
+**What ludoSpring evolves for the ecosystem**:
+- 60Hz composition budget → tests graph execution latency limits
+- Five-layer validation + guideStone → canonical Python→Rust→IPC composition→`ludospring_guidestone`
+- guideStone readiness 4 (V46): `ludospring_guidestone` three-tier — 20 bare + 15 IPC + 8 NUCLEUS cross-atomic (BearDog crypto, NestGate roundtrip, pipeline). BLAKE3 Property 3, protocol tolerance
+- AI narration under latency → tests Squirrel real-time performance
+- Session lifecycle (create/save/restore/fork) → benefits any stateful composition
+- Composition drift detection → `composition_targets.json` golden chain
 
 ---
 
@@ -303,95 +283,54 @@ hotSpring ──df64/GPU fleet──→ barraCuda/coralReef ←──ML shaders�
                      audit, storage, attribution)
 ```
 
----
-
-## Feedback Protocol
-
-When a spring discovers a gap or pattern:
-
-1. **Document the gap** — what capability is missing, what the workaround is
-2. **Propose the wire** — what JSON-RPC method signature would close the gap
-3. **Build validation** — a primalSpring experiment or graph that tests the gap
-4. **Hand back** — PR to primalSpring `docs/PRIMAL_GAPS.md` + graph in
-   `graphs/downstream/`
-
-primalSpring triages, refines, and routes gaps to the responsible primal team.
-Handoffs go to `infra/wateringHole/handoffs/`.
+Each arrow represents a pattern that flows from one spring's domain work
+to harden a shared primal. The network is not hierarchical — it's a
+feedback web where every spring solving its problem makes every other
+spring's composition more capable.
 
 ---
 
-## Evolution Priority by Primal
+## Spring Pinning (April 20, 2026)
 
-| Primal | Primary Spring Drivers | Key Evolution |
-|--------|----------------------|---------------|
-| **barraCuda** | hotSpring, neuralSpring, ludoSpring | df64 precision, ML shaders, tick-budget dispatch |
-| **coralReef** | hotSpring, neuralSpring | Domain-specific shader compilation, pipeline optimization |
-| **toadStool** | hotSpring, ludoSpring | Multi-GPU dispatch, tick-budget scheduling, federation |
-| **NestGate** | healthSpring, wetSpring, groundSpring | Egress fences, time-series storage, geospatial indexing |
-| **BearDog** | healthSpring | Ionic bond contracts, cross-family trust, regulatory crypto |
-| **Songbird** | all (federation) | NAT traversal, mesh scaling, relay protocols |
-| **Provenance trio** | healthSpring, wetSpring | Audit trails, attribution granularity, federation |
-| **Squirrel** | neuralSpring, ludoSpring | Inference routing, model discovery, real-time AI |
-| **petalTongue** | ludoSpring, esotericWebb | Scene rendering, dashboard patterns, TUI push |
-| **biomeOS** | all (orchestration) | Graph execution performance, tick-loop scheduling |
+hotSpring, neuralSpring, wetSpring, airSpring, groundSpring, and healthSpring
+are pinned at their current guideStone levels. This means:
+
+- **Their science evolution continues independently** — they keep building experiments
+- **They absorb primalSpring v0.9.17 patterns when ready** — no urgency
+- **Path dependency fixes from Phase 45 are already applied** (airSpring, groundSpring, healthSpring, wetSpring, hotSpring)
+- **Evolution bandwidth is focused on**: primalSpring (NUCLEUS certification) + ludoSpring (game science) + esotericWebb (garden composition)
+
+Each pinned spring can unpause at any time by:
+1. Pulling latest primalSpring and plasmidBin
+2. Building their guidestone against a live NUCLEUS
+3. Advancing their gS level with the validated composition patterns
+
+### Garden Potential
+
+Each spring may produce its own garden when its science is certified:
+
+| Spring | Potential Garden | Product |
+|--------|-----------------|---------|
+| hotSpring | milcGarden | MILC results dashboard for physicists |
+| wetSpring | labGarden | Environmental sensor monitoring |
+| airSpring | fieldGarden | Agricultural decision support |
+| groundSpring | geoGarden | Geoscience data browser |
+| healthSpring | clinicGarden | Clinical decision support (ionic-fenced) |
+| neuralSpring | inferenceGarden | AI model serving dashboard |
+| ludoSpring | **esotericWebb** | CRPG composition (**active**) |
 
 ---
 
 ## Getting Started (for any spring)
 
-1. **Read your proto-nucleate**: `primalSpring/graphs/downstream/{yourspring}_*_proto_nucleate.toml`
-2. **Check atomics**: which fragments does your proto-nucleate declare?
-3. **Adopt composition patterns**: follow `infra/wateringHole/SPRING_COMPOSITION_PATTERNS.md` — method normalization, capability registration, tiered discovery, niche identity
-4. **Wire IPC**: call primals by capability, not identity
-5. **Validate composition parity**: use `primalspring::composition::validate_parity()` to confirm your Rust math matches when executed through primal IPC (Level 5 maturity)
-6. **Evolve**: push domain-specific WGSL through coralReef, compute through toadStool
-7. **Add Squirrel**: when ready for AI, add `squirrel` to your composition — neuralSpring's inference is immediately available
-8. **Hand back**: document gaps and patterns (especially response schema issues) → primalSpring → primal teams → `infra/wateringHole/handoffs/`
-
----
-
-## Upstream Gaps and Spring-Side Rewiring (Updated April 18, 2026)
-
-As springs evolve toward Level 5 (composition parity validation), the upstream
-primal IPC surfaces are now largely ready. **The remaining gap is spring-side**:
-springs must rewire from barraCuda library imports to IPC calls against ecobin
-primals.
-
-### Response Schema Standardization — RESOLVED
-
-| Primal | Gap | Status |
-|--------|-----|--------|
-| barraCuda | `tensor.*` response key standardization | **RESOLVED** (Sprint 42) — 32 JSON-RPC methods with consistent schemas |
-| coralReef | `shader.compile` response format | **RESOLVED** (Iter 80) — `SHADER_COMPILE_WIRE_CONTRACT.md` |
-| toadStool | `compute.dispatch` result shape | **OPEN** — spring-side adoption of `DISPATCH_WIRE_CONTRACT.md` incomplete |
-
-### The Primal Proof Gap — Spring-Side IPC Rewiring
-
-All ecobin primals expose their capabilities over UDS JSON-RPC. barraCuda alone
-has 32 methods (`tensor.matmul`, `tensor.create`, `stats.mean`, `compute.dispatch`,
-etc.). The gap is that springs still link barraCuda as a **Rust library dependency**
-(path or git) and call math in-process. For the primal proof, springs must:
-
-1. **Drop barraCuda library dep from primal binaries** (keep in test harnesses for Rust-proof comparison)
-2. **Add IPC clients** that discover the barraCuda ecobin socket and call methods over JSON-RPC
-3. **Wire domain science through IPC** instead of `barracuda::stats::mean()` library calls
-4. **Validate IPC results match library results** (composition parity)
-
-| Spring | Library Dep | IPC Client to barraCuda | Rewire Status |
-|--------|------------|------------------------|---------------|
-| hotSpring v0.6.32 | git rev | `validate_primal_proof` (9 probes) | **Level 5** — 10 capabilities consumed over IPC (`tensor.create`, `tensor.matmul`, `tensor.scale`, `tensor.add`, `stats.mean`, `stats.std_dev`, `compute.dispatch`, `crypto.hash`, `tolerances.get`, `validate.gpu_stack`) |
-| healthSpring V53 | path dep | `math_dispatch.rs` + exp122 | **Rewiring** — feature-gated `primal-proof` routes `stats.mean`/`stats.std_dev` through IPC; exp122 validates parity |
-| neuralSpring V133 | path dep | `IpcMathClient` (9 methods wired) | **Level 5** — `validate_proto_nucleate_capabilities` exercises 7 caps; 18 barraCuda library calls still need IPC surface (eigh, Pearson, chi-squared, etc.) |
-| wetSpring V145 | path dep | Exp403 `validate_primal_parity_v1` | **Level 5** — calls 5 primals (barraCuda, NestGate, Squirrel, BearDog, toadStool) over UDS; 22 CONSUMED_CAPABILITIES in niche.rs |
-| ludoSpring V44 | git rev | `validate_primal_proof` binary | **Level 5** — four-layer validation (Python→Rust→IPC→primal proof) |
-
-### Remaining IPC Wire Contracts
-
-| Gap | Owner | What Springs Need |
-|-----|-------|-------------------|
-| BatchGuard IPC wire | barraCuda | Fused multi-op pipeline results via single IPC call (not N individual calls) |
-| Method catalog with schemas | all primals | Machine-readable catalog: method name → request schema → response schema |
-| Error code standardization | all primals | Standardized JSON-RPC error codes so `IpcError` can classify without string parsing |
+1. **Read your manifest entry**: `graphs/downstream/downstream_manifest.toml` or standalone graph
+2. **Build your guideStone**: `<spring>_guidestone` binary using `primalspring::composition` API
+3. **Validate bare**: confirm P1–P5 properties without any primals running (exit 2)
+4. **Deploy NUCLEUS**: `biomeos deploy --graph <your_proto_nucleate>`
+5. **Validate NUCLEUS**: guideStone discovers primals, validates IPC parity, exit 0
+6. **Use `primalspring::checksums`**: generate and verify CHECKSUMS manifest for P3
+7. **Add Squirrel**: when ready for AI, add `squirrel` to your composition
+8. **Hand back**: document gaps and patterns → primalSpring → primal teams
 
 ---
 
