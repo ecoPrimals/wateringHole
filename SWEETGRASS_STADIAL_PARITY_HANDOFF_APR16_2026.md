@@ -126,12 +126,33 @@ internally. Clears when testcontainers updates.
 ## Verification
 
 ```
-cargo test --all-features       → 1,430 pass, 0 fail
+cargo test --all-features       → 1,436 pass, 0 fail
 cargo clippy --all-features --tests -- -D warnings → 0 warnings
 cargo fmt --check               → 0 issues
 cargo deny check                → advisories ok, bans ok, licenses ok, sources ok
 RUSTDOCFLAGS="-D warnings" cargo doc --all-features --no-deps → 0 warnings
 ```
+
+---
+
+## BTSP First-Byte Auto-Detection — April 20, 2026
+
+Resolved primalSpring Phase 45 audit item: plain `health.check` probes
+were rejected with EPIPE/ECONNRESET when BTSP was required. The server
+now peeks the first byte on every connection when BTSP mode is active:
+
+- `{` (0x7B) → raw newline-delimited JSON-RPC (health probes, biomeOS, springs)
+- anything else → BTSP 4-byte length-prefixed handshake
+
+Implementation:
+- `PeekedStream<S>` wrapper (`peek.rs`) — zero-copy first-byte re-presentation
+- UDS: reads 1 byte, wraps in `PeekedStream`, routes to handler
+- TCP: uses `TcpStream::peek()` (non-consuming), routes directly
+- Handlers now generic: `impl AsyncRead + AsyncWrite + Unpin + Send`
+- 6 new tests (PeekedStream unit, UDS auto-detect roundtrip/sequential/concurrent)
+
+Matches `BearDog` (PG-35) and `Squirrel` (PG-30) ecosystem pattern per
+`PRIMALSPRING_V0917_PHASE45_PRIMAL_EVOLUTION_HANDOFF_APR2026.md`.
 
 ---
 
