@@ -205,6 +205,22 @@ Example `rhizocrypt doctor` output now includes:
 - **Discovery language** — integration spec now references manifest-based discovery alongside Songbird
 - **Debris audit** — zero TODOs/FIXMEs in crates/, no temp files, no stale binaries, no .env, no orphan scripts; `specs/archive/` retained as fossil record
 
+### S45.1: BTSP Liveness Passthrough — First-Byte Auto-Detect (April 20)
+
+**Resolves primalSpring Phase 45 audit item #3**: plain `health.check` probes on BTSP-enforced UDS sockets no longer fail with EPIPE/ECONNRESET.
+
+**Root cause**: UDS handler always entered BTSP length-prefix framing. Plain JSON-RPC `{...}` first byte was interpreted as a u32 frame length (~1.5 billion), exceeding MAX_FRAME_SIZE, causing immediate connection drop.
+
+**Fix**: First-byte auto-detect in `handle_uds_connection`:
+- `{` or `[` → liveness-only JSON-RPC (health.check, capability.list, identity.get, etc.)
+- Anything else → BTSP handshake, then full JSON-RPC
+- Data methods (`dag.*`, etc.) return `-32000 FORBIDDEN` with a hint to use BTSP
+- `UNAUTHENTICATED_METHODS` allowlist: single source of truth for bypass-eligible methods
+
+**For springs teams**: `health.check` over raw UDS now works on BTSP-enforced sockets. Remove any `check_skip()` workarounds for rhizoCrypt health probes.
+
+**Metrics**: 1,512 tests (was 1,508), 0 clippy warnings, 0 fmt diffs
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
