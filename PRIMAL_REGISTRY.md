@@ -305,7 +305,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.27, 1,436 tests + 56 Docker CI, 90%+ coverage, Wire Standard L3 FULL COMPLIANCE, BTSP Phase 2 auto-detect (first-byte `{` multiplexing on UDS+TCP — matches BearDog PG-35/Squirrel PG-30), ecoBin compliant, musl-static ready, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-or-later, pedantic+nursery clean, zero unsafe, zero production unwrap, 28 JSON-RPC methods, sled eliminated, libsqlite3-sys eliminated, async-trait zero, dyn dispatch zero, PeekedStream protocol multiplexer)
+**Status**: Production Ready (v0.7.27, 1,436 tests + 56 Docker CI, 91.7% coverage, Wire Standard L3 FULL COMPLIANCE, BTSP Phase 2 auto-detect (first-byte `{` multiplexing on UDS+TCP — matches BearDog PG-35/Squirrel PG-30), ecoBin compliant, musl-static ready, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-or-later, pedantic+nursery clean, zero unsafe, zero production unwrap, 32 JSON-RPC methods, sled eliminated, libsqlite3-sys eliminated, async-trait zero, dyn dispatch zero, PeekedStream protocol multiplexer, shared ecosystem path constants)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
@@ -317,7 +317,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 | **Attribution Engine** | 12 role types (Creator, Contributor, Reviewer...), derivation chain analysis, time decay, recursive propagation |
 | **Provenance Graph** | Complete data lineage tracking, DAG queries, "where did this come from?" |
 | **Privacy** | 5 privacy levels, GDPR-inspired data subject rights |
-| **Storage** | Memory, redb (recommended), Sled (legacy), PostgreSQL backends |
+| **Storage** | Memory, redb (recommended), PostgreSQL, NestGate backends (sled archived) |
 | **Export** | W3C PROV-O JSON-LD standard, ~88% compression with session dedup + zstd |
 | **IPC** | JSON-RPC 2.0 + tarpc + REST + UDS, DispatchOutcome, health probes, OrExit |
 

@@ -158,12 +158,17 @@ Matches `BearDog` (PG-35) and `Squirrel` (PG-30) ecosystem pattern per
 
 ## For primalSpring Gap Registry
 
-sweetGrass row in `STADIAL_PARITY_GATE_APR16_2026.md` should update to:
-
-| sweetGrass | **No** | 0 | 2 | **INTERSTADIAL-READY** |
+sweetGrass row in `STADIAL_PARITY_GATE_APR16_2026.md` updated to **COMPLETE**
+(confirmed in primalSpring's gate doc: `| sweetGrass | **No** | 0 | BraidBackend enum, RPITIT | **COMPLETE** |`).
 
 Lockfile ghosts (`ring`, `libsqlite3-sys`) are dev-dep / phantom only.
 `sled` is **eliminated** (crate archived, zero lockfile entries).
+
+Post-gate evolution (April 2026):
+- BTSP first-byte auto-detect (`PeekedStream`, PG-35/PG-30 pattern)
+- Shared ecosystem path constants (`primal_names::paths`, `primal_names::env_vars`)
+- All `#[expect]` carry `reason` strings
+- 185 .rs files, 50,053 LOC, 1,436 tests, 91.7% coverage
 
 ---
 
