@@ -178,7 +178,7 @@ coralReef generates native GPU instructions directly from Rust.
 |--------|--------|-------|
 | rhizoCrypt | DONE | redb default since v0.12 |
 | LoamSpine | DONE | redb default, sled optional (sled-storage feature) |
-| sweetGrass | DONE | sweet-grass-store-redb created, sled store still available |
+| sweetGrass | DONE | redb default, sled **eliminated** (crate archived, zero lockfile entries) |
 | biomeOS | DONE | biomeos-graph migrated to redb |
 | Songbird | PENDING | sled in orchestrator, tor-protocol, sovereign-onion |
 | BearDog | PENDING | sled in workspace |
