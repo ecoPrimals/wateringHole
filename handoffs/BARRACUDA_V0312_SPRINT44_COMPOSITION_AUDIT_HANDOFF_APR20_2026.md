@@ -131,6 +131,22 @@ Resolves **primalSpring Phase 45 gap #6**: `tensor.create` / `tensor.matmul`
 - `crates/barracuda-core/src/ipc/methods_tests/mod.rs` — tensor fn imports added
 - `specs/TENSOR_WIRE_CONTRACT.md` — CPU fallback, namespace guide, socket naming
 
+## Sprint 44d: Deep Debt — Magic Number Evolution (Apr 20)
+
+**12 production files** evolved from bare `256u32`/`128u32`/`64u32` workgroup size
+literals to named constants (`WORKGROUP_SIZE_1D`/`WORKGROUP_SIZE_MEDIUM`/`WORKGROUP_SIZE_COMPACT`):
+
+- `add.rs`, `mul.rs`, `fma.rs` — elementwise ops workgroup tier selection
+- `sparse_matmul_quantized.rs` — quantized sparse matmul dispatch
+- `fhe_ntt/compute.rs`, `fhe_intt/compute.rs` — FHE transform dispatch
+- `fused_kl_divergence_f64.rs`, `fused_chi_squared_f64.rs` — fused stat dispatch
+- `cumprod_f64.rs` — cumulative product dispatch
+
+New `WORKGROUP_SIZE_MEDIUM = 128` constant added for integrated GPU tier.
+`chi_squared.rs` bisection bracket evolved to `BISECTION_LOWER_BRACKET` named constant.
+
+12-axis deep debt audit clean. All quality gates green.
+
 ## Remaining
 
 - `OdeRK45F64` batching for Richards PDE (airSpring-specific, low priority)
