@@ -65,7 +65,7 @@ NUCLEUS deployments via the plasmidBin depot pattern:
 - **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V54 (guideStone Level 2), neuralSpring V134 (guideStone Level 2), wetSpring V147 (guideStone Level 3 — bare works)
 - **primalSpring guideStone**: `primalspring_guidestone` binary — 6-layer base composition certification. 67/67 ALL PASS against live 12-primal NUCLEUS. Base layer that domain guideStones inherit.
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
-- **Composing springs**: ludoSpring V47 (guideStone readiness 4 — three-tier: 20 bare + 15 IPC + 8 NUCLEUS cross-atomic, guideStone standard v1.2.0, genomeBin v5.1)
+- **Composing springs**: ludoSpring V47 (guideStone readiness 4 — **live NUCLEUS validated: 54/54 checks exit 0**, three-tier: 31 bare + 15 IPC + 8 NUCLEUS cross-atomic, guideStone standard v1.2.0, genomeBin v5.1, GAP-11 documented)
 
 Mountain season work continues for cross-primal protocols: ionic bond
 negotiation, BTSP Phase 3, compute.dispatch standardization.
@@ -255,7 +255,7 @@ Four springs have entered active NUCLEUS composition testing:
 | **wetSpring** V145 | **Delta** — Level 5 primal proof | Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES in niche.rs |
 | **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
 | **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
-| **ludoSpring** V47 | **Delta** — guideStone readiness 4 | Three-tier `ludospring_guidestone` (readiness 4: 20 bare + 15 IPC + 8 NUCLEUS cross-atomic). guideStone standard v1.2.0, upstream `call_or_skip`/`is_skip_error`, v1.2.0 tolerance ordering, BLAKE3 Property 3, genomeBin v5.1; 791 tests; all blockers resolved |
+| **ludoSpring** V47 | **Delta** — guideStone readiness 4, live NUCLEUS validated | Three-tier `ludospring_guidestone` (**54/54 checks, exit 0**: 31 bare + 15 IPC + 8 NUCLEUS cross-atomic). guideStone standard v1.2.0, upstream `call_or_skip`/`is_skip_error`, v1.2.0 tolerance ordering, BLAKE3 Property 3, genomeBin v5.1; 791 tests; GAP-11 (barraCuda formulation divergence) documented |
 
 **Common ecosystem blockers** across active delta springs:
 - Ionic bond negotiation (BearDog `crypto.sign_contract`) — hotSpring, healthSpring, wetSpring
