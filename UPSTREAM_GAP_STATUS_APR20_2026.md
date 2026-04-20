@@ -1,7 +1,7 @@
 # Upstream Gap Status — April 20, 2026 (Updated)
 
 **Source**: primalSpring Phase 41+ gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Post-pull review of barraCuda (Sprint 44), NestGate (Session 43k), biomeOS (v3.08).
+**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved.
 
 ---
 
@@ -66,6 +66,7 @@
 |-----|-------|-------|
 | ~~29 shader absorption candidates~~ | barraCuda | **RESOLVED** (Sprint 43) — 18/18 barraCuda candidates confirmed upstream |
 | ~~RAWR GPU kernel~~ | barraCuda | **RESOLVED** (Sprint 40) — `RawrWeightedMeanGpu` already exists |
+| ~~Phase 45 gap #6: tensor.create/matmul GPU-only~~ | barraCuda | **RESOLVED** (Sprint 44c) — CPU fallback for all 7 handle-based tensor ops via `CpuTensor` store |
 | Batched `OdeRK45F64` for Richards PDE | barraCuda | airSpring-specific, low priority |
 
 ---
@@ -74,7 +75,7 @@
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 44 | 4,393+ pass | READY — 39 JSON-RPC methods, 80.5% coverage, 12-axis deep debt clean |
+| barraCuda | Sprint 44c | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, 80.5% coverage, 12-axis deep debt clean |
 | BearDog | Wave 47 | 37 pass | READY |
 | coralReef | Iter 80+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | 0.9.16+ (stadial gate Apr 16) | 1,442 pass | READY — **stadial gate cleared**; sled + sqlite removed; **hickory-resolver** 0.26; `bincode` → `rmp-serde` (RUSTSEC-2025-0141 eliminated); biomeOS doc refs 29→0; upstream **hickory-net** `async-trait` only |
