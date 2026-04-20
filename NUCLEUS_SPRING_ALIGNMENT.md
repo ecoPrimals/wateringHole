@@ -66,7 +66,7 @@ only (IPC calls to NUCLEUS). There are no spring binaries at the composition lev
 | Spring | Version | Evolution | Tests | guideStone | Primary Atomics | Proto-Nucleate |
 |--------|---------|-----------|-------|-----------|-----------------|----------------|
 | **primalSpring** | 0.9.16 | **certified** | 570 | gS **4** | **All** (composition domain) | base layer — certifies NUCLEUS |
-| **hotSpring** | 0.6.32 | **composing** | 985 | gS **5** | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` |
+| **hotSpring** | 0.6.32 | **certified** | 990 | gS **5** | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` |
 | **neuralSpring** | V134 | **composing** | 1,403+ | gS **2** | **Node** + Meta | `downstream_manifest.toml` (neuralspring) |
 | **wetSpring** | V147 | **composing** | 1,902+ | gS **3** | Node + **Nest** + Meta | `downstream_manifest.toml` (wetspring) |
 | **airSpring** | 0.10.0 | **composed** | 1,364 | gS 0 | Node + **Nest** | `downstream_manifest.toml` (airspring) |
@@ -277,7 +277,7 @@ that primal-orchestrated IPC produces the same results as local Rust math.
 | **healthSpring** | Create composition parity experiment; validate `storage.store`/`storage.retrieve` + `crypto.hash` via IPC |
 | **neuralSpring** | Complete dispatch routing (two-tier); register as Squirrel inference provider; composition parity for `inference.*` |
 | **wetSpring** | Composition parity experiment with `stats.mean` + `storage.store`/`storage.retrieve` + provenance |
-| **hotSpring** | **guideStone Level 5 CERTIFIED** (reference implementation, guideStone v1.2.0): all 5 properties, `hotspring_guidestone` binary (BLAKE3 P3 via `primalspring::checksums`, protocol tolerance via `is_protocol_error()`, family-aware discovery), `validate_primal_proof` (9 probes, 10 capabilities), `validation/` artifact (59/59 × 5 substrates), deploy graph in `graphs/`. Absorbed primalSpring v0.9.17 (genomeBin v5.1). Bare mode verified: 14/14 PASS (4 SKIP). `scripts/validate-primal-proof.sh` wraps bare + NUCLEUS workflow with auto-set env vars (BEARDOG_FAMILY_SEED, SONGBIRD_SECURITY_PROVIDER, NESTGATE_JWT_SECRET). |
+| **hotSpring** | **guideStone Level 5 CERTIFIED** (reference implementation, guideStone v1.2.0, primalSpring v0.9.17): all 5 properties, `hotspring_guidestone` binary (BLAKE3 P3 via `primalspring::checksums::verify_manifest()` — 15 source files hashed, protocol tolerance via `is_protocol_error()`, family-aware discovery), `validate_primal_proof` (9 probes, 10 capabilities), `validation/` artifact (59/59 × 5 substrates), deploy graph in `graphs/`. Absorbed primalSpring v0.9.17 (genomeBin v5.1). **Bare mode: 30/30 PASS** (3 SKIP = expected NUCLEUS liveness). 990 lib tests. `scripts/validate-primal-proof.sh` wraps bare + NUCLEUS workflow (builds from barracuda/, runs from root, auto-sets BEARDOG_FAMILY_SEED, SONGBIRD_SECURITY_PROVIDER, NESTGATE_JWT_SECRET). |
 | **airSpring** | Method normalization in all paths; composition parity for weather/soil compute |
 | **groundSpring** | Method normalization; dispatch routing; composition parity for sensor/calibration |
 | **ludoSpring** | Method normalization; capability registration; composition parity for game math |
