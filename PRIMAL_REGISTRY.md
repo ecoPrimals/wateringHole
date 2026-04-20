@@ -435,8 +435,8 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | wetSpring | V99 |
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.7.0 Phase 13 (53 experiments, 10 tracks, 360 tests, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, cross-gate deployment tooling: build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health, LAN deployment guide, zero warnings, zero unsafe) |
+| coralReef | Phase 10 Iteration 84 (4529 tests, zero warnings, ecoBin cross-arch (cfg-gated Linux modules), Blackwell sovereign dispatch, QMD v5.0, f64 lowering all NVIDIA gens, Edition 2024) |
+| primalSpring | v0.9.17 Phase 45 (75 experiments, 17 tracks, 631 tests, 87/87 gates, guideStone Level 4, genomeBin v5.1 — 46 cross-arch binaries (6 targets, Tier 1 39/39), BTSP Phase 1–3, capability-based discovery, fragment-first composition, Edition 2024, zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences

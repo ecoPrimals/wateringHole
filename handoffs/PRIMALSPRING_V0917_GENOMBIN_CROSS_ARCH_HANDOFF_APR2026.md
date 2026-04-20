@@ -3,7 +3,7 @@
 **From**: primalSpring (syntheticChemistry/primalSpring)
 **To**: All primal teams and spring teams
 **Date**: April 19, 2026
-**Trigger**: plasmidBin evolved to full genomeBin depot — 42 binaries across 6 target triples
+**Trigger**: plasmidBin evolved to full genomeBin depot — 46 binaries across 6 target triples (Tier 1: 39/39)
 
 ---
 
@@ -19,7 +19,7 @@ Rust target, not just x86_64.
 - Build script: `build_ecosystem_musl.sh` (x86_64 + aarch64 only)
 
 ### After (v0.9.17)
-- **42 binaries across 6 target triples**
+- **46 binaries across 6 target triples (Tier 1: 39/39 — all gaps closed)**
 - genomeBin layout: `primals/{target-triple}/{binary}`
 - Backward-compat symlinks: `primals/{binary}` → `x86_64-unknown-linux-musl/{binary}`
 - Build script: `build_ecosystem_genomeBin.sh` (9 targets, 3 tiers)
