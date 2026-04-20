@@ -4,7 +4,7 @@
 
 **Date**: 2026-04-15
 **Branch**: main
-**Tests**: 1,508 passing (0 failures)
+**Tests**: 1,512 passing (0 failures)
 **Coverage**: 93.88% lines (CI gate: 90%)
 
 ---
