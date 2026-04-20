@@ -437,7 +437,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 84 (4529 tests, zero warnings, ecoBin cross-arch (cfg-gated Linux modules), Blackwell sovereign dispatch, QMD v5.0, f64 lowering all NVIDIA gens, Edition 2024) |
 | primalSpring | v0.9.17 Phase 45 (75 experiments, 17 tracks, 631 tests, 87/87 gates, guideStone Level 4, genomeBin v5.1 — 46 cross-arch binaries (6 targets, Tier 1 39/39), BTSP Phase 1–3, capability-based discovery, fragment-first composition, Edition 2024, zero warnings, zero unsafe) |
-| ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
+| ludoSpring | V47 (100 experiments, 791 tests, guideStone readiness 4, guideStone standard v1.2.0, three-tier: 20 bare + 15 IPC + 8 NUCLEUS cross-atomic, BLAKE3 Property 3, upstream `call_or_skip`/`is_skip_error`, v1.2.0 tolerance ordering, genomeBin v5.1, all blockers resolved) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
