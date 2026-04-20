@@ -10,12 +10,11 @@
 
 ## Summary
 
-ludoSpring V47 absorbs primalSpring v0.9.17 and guideStone Composition Standard
-v1.2.0. Key evolution: V46 patterns (`call_or_skip`, `is_skip_error`) absorbed
-ecosystem-wide into `primalspring::composition` — V47 replaces local copies with
-upstream imports. Tolerance validation now covers full v1.2.0 ordering invariant
-(7 named constants). Deployment references align to genomeBin v5.1 (46 binaries,
-6 target triples). All upstream blockers resolved.
+ludoSpring V47 is the first live NUCLEUS validation: **54/54 guideStone checks
+passed (2 expected skips), exit 0** against 12 deployed primals. Absorbs
+primalSpring v0.9.17 and guideStone Composition Standard v1.2.0. V46 patterns
+absorbed upstream. IPC formulation divergence with barraCuda documented (GAP-11).
+Deployment references align to genomeBin v5.1.
 
 ---
 
@@ -23,13 +22,16 @@ upstream imports. Tolerance validation now covers full v1.2.0 ordering invariant
 
 | Change | Detail |
 |--------|--------|
+| **Live NUCLEUS validated** | **54/54 checks pass, exit 0** — 12 primals from genomeBin |
 | Upstream `call_or_skip` | Local removed → `primalspring::composition::call_or_skip` |
 | Upstream `is_skip_error` | Local removed → `primalspring::composition::is_skip_error` |
 | v1.2.0 tolerance ordering | 7-constant invariant (was 3) |
 | `guidestone_properties` | All 5 properties = true in manifest |
-| NUCLEUS env vars | Documented: `BEARDOG_FAMILY_SEED`, `SONGBIRD_SECURITY_PROVIDER`, `NESTGATE_JWT_SECRET` |
+| GAP-11 formulation divergence | Fitts, Hick, variance: barraCuda vs Python formulations documented |
+| tensor.matmul | Multi-step create→matmul with tensor IDs |
+| BearDog crypto.hash | Base64 payload, base64 hash response |
+| NUCLEUS env vars | `BEARDOG_FAMILY_SEED`, `BEARDOG_NODE_ID`, `SONGBIRD_SECURITY_PROVIDER`, `NESTGATE_JWT_SECRET` |
 | genomeBin v5.1 | All plasmidBin references updated |
-| BLAKE3 CHECKSUMS | Regenerated for updated source |
 | Blockers | rhizoCrypt PG-32, barraCuda Sprint 44, loamSpine — all resolved |
 
 ## guideStone Architecture
