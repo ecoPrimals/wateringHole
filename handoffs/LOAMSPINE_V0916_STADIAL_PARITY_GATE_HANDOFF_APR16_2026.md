@@ -74,9 +74,22 @@
 
 ---
 
+## Post-gate deep debt sweep (April 20, 2026)
+
+| Area | Detail |
+|------|--------|
+| **Socket naming aligned** | Primary socket `permanence.sock` → `loamspine.sock` per `{primal}-{FAMILY_ID}.sock` ecosystem convention. `ledger.sock` capability symlink, `permanence.sock` legacy backward-compat symlink. `"ledger"` added to CAPABILITIES — fixes `discover_by_capability("ledger")` failure (primalSpring Phase 45 item 4). |
+| **mdns-sd `ResolvedService` API** | `resolved_to_discovered` and `mdns_discover_service_impl` updated to `ResolvedService` field access (`.port`, `.addresses`) instead of `ServiceInfo` getters — fixes compile error with `--all-features`. |
+| **`ServerError::Bind` structured** | Evolved from `Bind(String)` to `Bind { context, #[source] source: io::Error }` — preserves underlying I/O error for introspection. All call sites in jsonrpc/uds.rs, jsonrpc/server.rs, tarpc_server.rs updated. |
+| **`bond_ops.rs` error propagation** | Replaced `.map_err(\|e\| ApiError::Internal(e.to_string()))` with `?` via existing `From<LoamSpineError> for ApiError` impl. |
+| **`deny.toml` license cleanup** | Removed 5 stale license allowances with no matching dependencies. |
+| **Orphan bench wired** | `crates/loam-spine-core/benches/storage_ops.rs` wired into Cargo.toml `[[bench]]`. |
+
+---
+
 ## Status
 
-**loamSpine clears the stadial gate** for **`sled`** and **`libsqlite3-sys`**, and **eliminates** the `bincode` RUSTSEC advisory via migration to `rmp-serde`. Transitive **`async-trait`** via **hickory-net** is **not under our control**; tracked as upstream-only.
+**loamSpine clears the stadial gate** for **`sled`** and **`libsqlite3-sys`**, and **eliminates** the `bincode` RUSTSEC advisory via migration to `rmp-serde`. Transitive **`async-trait`** via **hickory-net** is **not under our control**; tracked as upstream-only. Post-gate deep debt sweep (April 20) resolved primalSpring Phase 45 socket naming gap and additional error quality improvements.
 
 ---
 
