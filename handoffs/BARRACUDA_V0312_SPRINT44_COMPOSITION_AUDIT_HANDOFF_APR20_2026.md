@@ -85,6 +85,52 @@ Springs can uniformly extract `response["result"]` for any method.
 
 Quality gates: `cargo fmt` ✓, `clippy -D warnings` ✓, `RUSTDOCFLAGS="-D warnings" cargo doc` ✓
 
+## Sprint 44c: Phase 45 Audit — CPU Tensor Fallback (Apr 20)
+
+Resolves **primalSpring Phase 45 gap #6**: `tensor.create` / `tensor.matmul`
+(handle-based) returned "No GPU device available" on headless hosts.
+
+### What changed
+
+- **`CpuTensor` store** added to `BarraCudaPrimal` — parallel to existing GPU
+  tensor store, holds `Vec<f32>` + shape for CPU-resident tensors.
+- All 7 handle-based tensor ops (`tensor.create`, `tensor.matmul`, `tensor.add`,
+  `tensor.scale`, `tensor.clamp`, `tensor.reduce`, `tensor.sigmoid`) now
+  automatically fall back to CPU when `primal.device()` returns `None`.
+- GPU path is **always preferred** — CPU fallback is transparent to callers.
+- `tensor.create` response includes `"backend": "cpu"` when CPU path is used.
+- `cpu_matmul` implements row-major matrix multiplication with `mul_add` FMA.
+- CPU sigmoid uses `1/(1+exp(-x))` on f32.
+- 2 new roundtrip tests: create→matmul→reduce (verifies 2×3 × 3×2 = 415 sum),
+  add/scale/clamp/sigmoid on CPU tensors.
+- 113 IPC method tests pass (was 111; 2 updated from error→success assertions,
+  2 new CPU roundtrip tests).
+
+### Wire contract update (v1.1.0)
+
+- CPU fallback section in `specs/TENSOR_WIRE_CONTRACT.md`
+- IPC namespace guide: 9 namespaces documented (`tensor`, `stats`, `activation`,
+  `linalg`, `spectral`, `noise`, `fhe`, `math`, `compute`)
+- Socket naming: authoritative `math.sock` / `math-{fid}.sock` vs legacy
+  `barracuda.sock` symlink clarified
+
+### Deep debt scan (Sprint 44c)
+
+12-axis deep debt scan — all axes green (same result as Sprint 44b).
+
+### Files changed
+
+- `crates/barracuda-core/src/lib.rs` — `CpuTensor` struct, `store_cpu_tensor`,
+  `get_cpu_tensor` methods, updated `tensor_count` to include CPU tensors
+- `crates/barracuda-core/src/ipc/methods/tensor.rs` — CPU fallback in all 7
+  handle-based ops, `cpu_matmul` + `cpu_tensor_result` helpers
+- `crates/barracuda-core/src/ipc/methods_tests/tensor_fhe_tests.rs` — 2 new
+  tests, 1 test updated (no-GPU → CPU fallback assertion)
+- `crates/barracuda-core/src/ipc/methods_tests/comprehensive_tests.rs` — 1 test
+  updated (tensor.create CPU fallback assertion)
+- `crates/barracuda-core/src/ipc/methods_tests/mod.rs` — tensor fn imports added
+- `specs/TENSOR_WIRE_CONTRACT.md` — CPU fallback, namespace guide, socket naming
+
 ## Remaining
 
 - `OdeRK45F64` batching for Richards PDE (airSpring-specific, low priority)
