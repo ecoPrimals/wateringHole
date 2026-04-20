@@ -5,8 +5,8 @@
 # Defines all available primal binaries, versions, target architectures, and
 # compliance status per the ecoBin Architecture Standard.
 #
-# Updated: 2026-04-19 (Phase 44 — full genomeBin cross-architecture depot)
-# Version: 5.0.0 (Full Target Matrix)
+# Updated: 2026-04-20 (Phase 45 — deployment validated, 46 binaries)
+# Version: 5.1.0 (Full Target Matrix, Tier 1 39/39)
 #
 # Layout: plasmidBin/primals/{target-triple}/{binary}
 # Legacy symlinks: plasmidBin/primals/{binary} -> x86_64-unknown-linux-musl/{binary}
