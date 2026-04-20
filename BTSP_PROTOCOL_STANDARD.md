@@ -362,7 +362,7 @@ suffix.
 | NestGate | `nestgate.sock` | `nestgate-{fid}.sock` |
 | ToadStool | `toadstool.sock` | `toadstool-{fid}.sock` |
 | rhizoCrypt | `rhizocrypt.sock` | `rhizocrypt-{fid}.sock` |
-| loamSpine | `permanence.sock` (legacy symlink: `loamspine.sock`) | `permanence-{fid}.sock` |
+| loamSpine | `loamspine.sock` (capability: `ledger.sock`, legacy: `permanence.sock`) | `loamspine-{fid}.sock` |
 | sweetGrass | `sweetgrass.sock` | `sweetgrass-{fid}.sock` |
 | biomeOS | `biomeos.sock` | `biomeos-{fid}.sock` |
 

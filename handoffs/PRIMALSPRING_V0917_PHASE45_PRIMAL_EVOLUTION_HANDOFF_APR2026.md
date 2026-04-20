@@ -214,10 +214,10 @@ orchestrator, not a peer primal.
 - Server mode operational
 
 **Upstream evolution recommended:**
-- Socket naming doesn't follow the `{primal}-{FAMILY_ID}.sock` convention.
-  Discovery can't find loamSpine by the `capability:ledger` query.
-  Fix: use family-qualified naming, or let `start_primal.sh` create the
-  `ledger.sock` symlink (which we now do automatically).
+- ~~Socket naming doesn't follow the `{primal}-{FAMILY_ID}.sock` convention.~~
+  **RESOLVED** — Primary socket changed to `loamspine.sock` / `loamspine-{fid}.sock`
+  (ecosystem convention). `ledger.sock` capability symlink, `permanence.sock` legacy
+  symlink. `"ledger"` added to CAPABILITIES for `discover_by_capability("ledger")` support.
 
 ---
 
