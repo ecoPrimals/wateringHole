@@ -15,8 +15,8 @@ every pattern learned during the evolution from Python baselines through Rust
 validation to NUCLEUS primal composition — patterns that should be absorbed by
 primals teams and adopted by sibling springs.
 
-**Key numbers:** 985 lib tests, 166 binaries, 64/64 validation suites, 128 WGSL
-shaders, 176+ experiments. Bare guideStone: 14/14 PASS (4 expected SKIP).
+**Key numbers:** 990 lib tests, 166 binaries, 64/64 validation suites, 128 WGSL
+shaders, 176+ experiments. Bare guideStone: 30/30 PASS (3 SKIP = expected NUCLEUS liveness).
 plasmidBin ecoBin: `hotspring_primal` (v0.6.32, x86_64 musl-static).
 
 ---
@@ -33,11 +33,11 @@ Tier 1: Python baselines (L1)
   │ Tolerance: published reference ± sigma
   ▼
 Tier 2: Rust proof (L2)
-  │ 985 lib tests, 166 binaries, 64/64 suites
+  │ 990 lib tests, 166 binaries, 64/64 suites
   │ Tolerance: EXACT (f64 bit-identity) or documented
   ▼
 Tier 3: NUCLEUS primal composition (L5)
-  │ hotspring_guidestone: 14/14 checks (bare)
+  │ hotspring_guidestone: 30/30 checks (bare, Property 3 BLAKE3 CHECKSUMS verified)
   │ IPC parity: Rust baseline == primal IPC result ± tolerance
   │ Tolerance: IPC_ROUND_TRIP_TOL (1e-10) or domain-specific
   ▼

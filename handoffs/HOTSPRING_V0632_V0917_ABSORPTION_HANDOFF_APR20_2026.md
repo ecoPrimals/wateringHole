@@ -24,7 +24,7 @@ enhanced to auto-set all required NUCLEUS deployment env vars.
 `hotspring_guidestone` compiles clean against v0.9.17. All APIs used by
 hotSpring (`CompositionContext`, `validate_liveness`, `validate_parity`,
 `checksums::verify_manifest`, `tolerances`, `IpcError::is_protocol_error`,
-`IpcError::is_connection_error`) are unchanged. Bare mode: 14/14 PASS.
+`IpcError::is_connection_error`) are unchanged. Bare mode: 30/30 PASS (with BLAKE3 CHECKSUMS manifest covering 15 source files).
 
 ### 2. guideStone Binary Module Doc
 
