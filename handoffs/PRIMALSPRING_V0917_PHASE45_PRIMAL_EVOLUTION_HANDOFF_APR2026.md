@@ -2,7 +2,7 @@
 
 ## From: primalSpring Phase 45 + ludoSpring V46
 ## For: All primal teams
-## Date: April 20, 2026
+## Date: April 20, 2026 (Updated April 21 — all upstream gaps resolved)
 
 ---
 
@@ -14,9 +14,10 @@ all local gaps (base64 encoding, tensor API, capability symlinks, discovery),
 and validated ludoSpring's game science parity against the live stack.
 Three new `game.*` methods were wired for esotericWebb garden absorption.
 
-This handoff documents what we learned about each primal's IPC surface,
-the gaps we hit, the fixes we made locally, and the evolution we recommend
-upstream.
+**Update (April 21):** All 7 primal repos pulled and audited. Every upstream
+gap flagged below has been **RESOLVED** by the primal teams. Zero open debt.
+The "Upstream evolution recommended" sections below are preserved as fossil
+record of what was found and how each team resolved it.
 
 ---
 
@@ -53,9 +54,9 @@ biomeOS serves as the Neural API substrate: it reads deploy graph TOMLs,
 resolves fragments, computes topological startup ordering, and manages the
 primal lifecycle. Gardens submit their graphs to biomeOS for deployment.
 
-biomeOS itself speaks HTTP over UDS (not raw JSON-RPC). This is expected
-behavior and documented as a SKIP in JSON-RPC probes. biomeOS is the
-orchestrator, not a peer primal.
+biomeOS previously spoke HTTP-only over UDS. As of v3.22, it now supports
+**dual-protocol auto-detect** on UDS: first byte `{` routes to NDJSON
+JSON-RPC, otherwise HTTP/axum. JSON-RPC probes now get proper responses.
 
 ---
 
@@ -75,13 +76,9 @@ orchestrator, not a peer primal.
 - guidestone now base64-encodes raw message before `crypto.sign`
   (BearDog parses message as base64 bytes, rejects raw strings with `_`)
 
-**Upstream evolution recommended:**
-- `crypto.sign` returns `key_id: "default_signing_key"` but no `public_key`.
-  `crypto.verify` requires `public_key`. **Sign→verify roundtrip is broken.**
-  Fix: include `public_key` in sign response, or add `crypto.default_public_key` method.
-- BearDog sometimes returns URL-safe base64 (uses `_` and `-`). Consumers
-  must tolerate both URL-safe and standard base64. Recommend standardizing
-  on one encoding.
+**Upstream evolution recommended:** ~~RESOLVED~~
+- ~~`crypto.sign` returns `key_id: "default_signing_key"` but no `public_key`.~~ **RESOLVED** — Wave 62 (BD-PG-01): `public_key` (standard base64) now included in sign response. Roundtrip test added in `asymmetric_tests.rs`.
+- ~~BearDog sometimes returns URL-safe base64.~~ **RESOLVED** — Wave 62 (BD-PG-02): Ed25519 outputs standardized to standard base64. Verify still accepts legacy encodings for backward compat.
 
 ---
 
@@ -91,11 +88,8 @@ orchestrator, not a peer primal.
 - `health.check` — returns status + version
 - Discovery routing by capability
 
-**Upstream evolution recommended:**
-- `Songbird.resolve("beardog")` fails — Songbird routes by **capability**,
-  not by primal name. This is correct behavior but underdocumented.
-  Document that `resolve("security")` is the correct call, not `resolve("beardog")`.
-- Consider adding `resolve_by_name()` as a convenience alias.
+**Upstream evolution recommended:** ~~RESOLVED~~
+- ~~Songbird routes by capability, not primal name.~~ **RESOLVED** — Wave 151 (PG-37): `ipc.resolve` does capability-first with primal-name fallback. `ipc.resolve_by_name` alias added.
 
 ---
 
@@ -132,16 +126,13 @@ orchestrator, not a peer primal.
   returns nested 2D arrays. Fixed `validate_parity_vec` to flatten nested arrays.
   Also switched to `tensor.matmul_inline` (correct method for inline data).
 
-**Upstream evolution recommended:**
-- `tensor.create` / `tensor.matmul` (handle-based) require GPU. On headless
-  hosts they return "No GPU device available". Consider CPU fallback for
-  small tensors, or document the GPU requirement clearly.
+**Upstream evolution recommended:** ~~GPU item RESOLVED~~
+- ~~`tensor.create` / `tensor.matmul` (handle-based) require GPU.~~ **RESOLVED** — Sprint 44c: CPU fallback for all 7 handle-based ops. Returns `"backend": "cpu"` on headless hosts. Wire contract updated in `TENSOR_WIRE_CONTRACT.md`.
 - The `math.*` namespace is mostly empty (`math.sigmoid`, `math.log2` only).
   All numeric operations are under `stats.*`, `activation.*`, `linalg.*`.
   Consider documenting which namespace to use for what.
 - Socket naming: barraCuda creates `math-{FAMILY_ID}.sock`, not
-  `barracuda-{FAMILY_ID}.sock` for its IPC socket. The `barracuda-*.sock`
-  exists but may not be the IPC socket. Document which socket is authoritative.
+  `barracuda-{FAMILY_ID}.sock` for its IPC socket. Document which socket is authoritative.
 
 ---
 
@@ -188,11 +179,8 @@ orchestrator, not a peer primal.
 - Server mode via `--unix` flag
 - DAG storage capabilities
 
-**Upstream evolution recommended:**
-- rhizoCrypt resets connections without BTSP handshake — plain
-  `health.check` probes fail with EPIPE/ECONNRESET.
-  Accept unauthenticated `health.check` (liveness only) before
-  requiring BTSP for data operations.
+**Upstream evolution recommended:** ~~RESOLVED~~
+- ~~rhizoCrypt resets connections without BTSP handshake.~~ **RESOLVED** — S45.1: First-byte `{` auto-detect on UDS. `UNAUTHENTICATED_METHODS` allowlist for `health.check`. Matches BearDog/Squirrel pattern.
 
 ---
 
@@ -202,9 +190,8 @@ orchestrator, not a peer primal.
 - Server mode with family-qualified sockets
 - Attribution and provenance tracking
 
-**Upstream evolution recommended:**
-- Same BTSP-first behavior as rhizoCrypt — plain health probes rejected.
-  Same fix: allow unauthenticated `health.check`.
+**Upstream evolution recommended:** ~~RESOLVED~~
+- ~~Same BTSP-first behavior as rhizoCrypt.~~ **RESOLVED** — `PeekedStream` first-byte auto-detect on UDS + TCP. Dedicated `autodetect.rs` test suite.
 
 ---
 
@@ -213,11 +200,8 @@ orchestrator, not a peer primal.
 **What works:**
 - Server mode operational
 
-**Upstream evolution recommended:**
-- ~~Socket naming doesn't follow the `{primal}-{FAMILY_ID}.sock` convention.~~
-  **RESOLVED** — Primary socket changed to `loamspine.sock` / `loamspine-{fid}.sock`
-  (ecosystem convention). `ledger.sock` capability symlink, `permanence.sock` legacy
-  symlink. `"ledger"` added to CAPABILITIES for `discover_by_capability("ledger")` support.
+**Upstream evolution recommended:** ~~RESOLVED~~
+- ~~Socket naming doesn't follow convention.~~ **RESOLVED** — v0.9.16 (GAP-MATRIX-12): `{primal}-{family}.sock` adopted. `loamspine.sock` / `loamspine-{fid}.sock` primary socket. `ledger.sock` capability symlink at runtime. `permanence.sock` legacy symlink. `"ledger"` in CAPABILITIES registry.
 
 ---
 

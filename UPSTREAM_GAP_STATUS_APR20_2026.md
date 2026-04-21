@@ -71,22 +71,22 @@
 
 ---
 
-## Primal Health Summary (April 20, 2026 — Updated)
+## Primal Health Summary (April 21, 2026 — Post Phase 45 Audit)
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 44d | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, magic numbers evolved, 80.5% coverage, 12-axis deep debt clean |
-| BearDog | Wave 47 | 37 pass | READY |
-| coralReef | Iter 80+ | 856 pass (2 env-sensitive) | READY |
-| loamSpine | 0.9.16+ (stadial gate Apr 16) | 1,442 pass | READY — **stadial gate cleared**; sled + sqlite removed; **hickory-resolver** 0.26; `bincode` → `rmp-serde` (RUSTSEC-2025-0141 eliminated); biomeOS doc refs 29→0; upstream **hickory-net** `async-trait` only |
-| rhizoCrypt | S42 | 35 pass | READY |
-| Songbird | Wave 137 | up to date | READY |
-| NestGate | Session 43k | 11,816 pass (451 ignored) | READY — 47 UDS methods, 80% coverage, zero async-trait, zero Box<dyn Error> |
+| barraCuda | Sprint 44d | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, wire contract updated |
+| BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
+| coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
+| loamSpine | 0.9.16 | 1,442 pass | READY — family-qualified socket naming, `ledger.sock` capability symlink, stadial gate cleared |
+| rhizoCrypt | S45.1 | 35 pass | READY — first-byte `{` auto-detect, BTSP liveness passthrough |
+| Songbird | Wave 151 | up to date | READY — `ipc.resolve` capability-first with primal-name fallback, `ipc.resolve_by_name` alias |
+| NestGate | Session 43k | 11,816 pass (451 ignored) | READY — 47 UDS methods, 80% coverage, zero async-trait |
 | petalTongue | current | up to date | READY |
 | Squirrel | alpha.51 | 735 pass | READY |
-| sweetGrass | current | up to date | READY |
-| toadStool | S175 | 7,818 lib pass | READY — crypto errors capability-based, eprintln→tracing, lint attr evolution, armv7 clean, 49 unsafe (hw containment only) |
-| biomeOS | v3.08 | 7,784 pass | READY — zero C deps, 33 capabilities, TCP+UDS, gate routing |
+| sweetGrass | current | up to date | READY — `PeekedStream` first-byte auto-detect on UDS + TCP |
+| toadStool | S175 | 7,818 lib pass | READY |
+| biomeOS | v3.22 | 7,784 pass | READY — dual-protocol auto-detect on UDS (HTTP + JSON-RPC), zero C deps |
 
 **The primary architectural gap is biomeOS's forwarding model.** biomeOS does its own
 socket forwarding and method name translation instead of routing through Tower Atomic.
