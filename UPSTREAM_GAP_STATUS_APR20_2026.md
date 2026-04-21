@@ -1,7 +1,7 @@
-# Upstream Gap Status — April 20, 2026 (Updated)
+# Upstream Gap Status — April 2026 (Updated)
 
-**Source**: primalSpring Phase 41+ gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved.
+**Source**: primalSpring Phase 45 gap registry (`docs/PRIMAL_GAPS.md`)
+**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45b**: BTSP escalation exposed 5 new upstream gaps — primals lack server-side BTSP handshake. Guidestone 161/166 (5 expected FAIL).
 
 ---
 
@@ -42,13 +42,40 @@
 
 ---
 
-## Remaining Open (8 items)
+## Remaining Open (13 items)
+
+### Critical — BTSP Server Handshake Gaps (NEW — April 2026)
+
+primalSpring's incremental BTSP escalation (Layer 1.5) exposed that 5 primals
+do not implement the 4-step BTSP server handshake (ClientHello → ServerHello →
+ChallengeResponse → HandshakeComplete) on their primary JSON-RPC sockets.
+These primals **pass cleartext validation** and **seed fingerprint verification** —
+their binaries are authentic. The gap is wire-level encrypted channel support.
+
+| Gap | Owner | Behavior | Impact |
+|-----|-------|----------|--------|
+| **BTSP server on security socket** | BearDog | Treats `ClientHello` as invalid JSON-RPC → Parse error → connection close | Tower security not BTSP-authenticated |
+| **BTSP server on discovery socket** | Songbird | HTTP-framed UDS, no BTSP listener | Tower discovery not BTSP-authenticated |
+| **BTSP server on DAG socket** | rhizoCrypt | No BTSP server implementation | Provenance DAG not BTSP-authenticated |
+| **BTSP server on commit socket** | sweetGrass | No BTSP server implementation | Provenance commit not BTSP-authenticated |
+| **BTSP server on provenance socket** | loamSpine | No BTSP server implementation | Provenance attestation not BTSP-authenticated |
+
+**What upstream needs to do**: Implement the 4-step handshake protocol as a pre-JSON-RPC
+negotiation layer. See `primalSpring/ecoPrimal/src/btsp/` for the client-side reference
+implementation. The handshake uses HMAC-SHA256 with `FAMILY_SEED` key derivation, followed
+by optional ChaCha20-Poly1305 encrypted channel. The simplest approach: detect first byte
+`{` with `"type":"ClientHello"` and branch to BTSP before JSON-RPC dispatch.
+
+**primalSpring workaround**: `upgrade_btsp_clients()` uses a reactive two-pass strategy —
+cleartext probe first, BTSP escalation only for capabilities that reject cleartext.
+Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
 
 ### High — Architectural
 
 | Gap | Owner | Notes |
 |-----|-------|-------|
 | **biomeOS must route through Tower Atomic** | biomeOS | biomeOS does its own socket forwarding + method translation. Should delegate to Songbird mesh relay + BearDog BTSP. Any HTTP outside Tower pulls in C deps. See: `BIOMEOS_DOCKER_SOCKET_ALIGNMENT_GUIDANCE_APR13_2026.md` |
+| **biomeOS needs its own Tower Atomic** | biomeOS | For biomeOS to participate in encrypted NUCLEUS, it needs BTSP client/server capability — currently starts with `BIOMEOS_BTSP_ENFORCE=0` (cleartext bootstrap). Long-term: biomeOS evolves its own Tower or delegates all transport to Songbird/BearDog. |
 
 ### Medium — Graph / Registry Updates
 
