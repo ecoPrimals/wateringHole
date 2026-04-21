@@ -139,20 +139,21 @@ RUSTDOCFLAGS="-D warnings" cargo doc --all-features --no-deps → 0 warnings
 
 Resolved primalSpring Phase 45 audit item: plain `health.check` probes
 were rejected with EPIPE/ECONNRESET when BTSP was required. The server
-now peeks the first byte on every connection when BTSP mode is active:
+now reads the first line on every connection when BTSP mode is active:
 
-- `{` (0x7B) → raw newline-delimited JSON-RPC (health probes, biomeOS, springs)
-- anything else → BTSP 4-byte length-prefixed handshake
+- First byte not `{` → length-prefixed BTSP handshake (canonical wire format)
+- `{"protocol":"btsp",...}` → JSON-line BTSP handshake (primalSpring-compatible)
+- `{"jsonrpc":"2.0",...}` → raw JSON-RPC (health probes, biomeOS, springs)
 
 Implementation:
-- `PeekedStream<S>` wrapper (`peek.rs`) — zero-copy first-byte re-presentation
-- UDS: reads 1 byte, wraps in `PeekedStream`, routes to handler
-- TCP: uses `TcpStream::peek()` (non-consuming), routes directly
-- Handlers now generic: `impl AsyncRead + AsyncWrite + Unpin + Send`
-- 6 new tests (PeekedStream unit, UDS auto-detect roundtrip/sequential/concurrent)
+- `detect_protocol()` in `peek.rs` — reads first line, returns `DetectedProtocol` enum
+- `PeekedStream<S>` wrapper for length-prefixed BTSP (single byte re-presentation)
+- `read_jsonline` / `write_jsonline` for primalSpring-compatible handshake
+- `perform_server_handshake_jsonline` — 4-step JSON-line handshake with BearDog delegation
+- 13 total auto-detect tests (7 new for first-line + 6 existing updated)
 
-Matches `BearDog` (PG-35) and `Squirrel` (PG-30) ecosystem pattern per
-`PRIMALSPRING_V0917_PHASE45_PRIMAL_EVOLUTION_HANDOFF_APR2026.md`.
+Resolves Phase 45b BTSP wire-format alignment — primalSpring's `ClientHello`
+(`{"protocol":"btsp",...}`) no longer misclassified as invalid JSON-RPC.
 
 ---
 
