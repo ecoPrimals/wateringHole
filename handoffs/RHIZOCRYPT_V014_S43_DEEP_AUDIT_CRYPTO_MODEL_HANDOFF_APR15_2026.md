@@ -4,7 +4,7 @@
 
 **Date**: 2026-04-15
 **Branch**: main
-**Tests**: 1,512 passing (0 failures)
+**Tests**: 1,527 passing (0 failures)
 **Coverage**: 93.88% lines (CI gate: 90%)
 
 ---
@@ -226,6 +226,27 @@ Example `rhizocrypt doctor` output now includes:
 - **Test count alignment** — all docs updated to 1,512: CHANGELOG (3 stale refs), showcase/README (2 refs), docs/DEPLOYMENT_CHECKLIST (2 refs), specs/RHIZOCRYPT_SPECIFICATION (1 ref)
 - **Line count** — CONTEXT, CHANGELOG updated from ~48,800 to ~48,600 (measured 48,604)
 - **Debris audit** — zero artifacts, temp files, empty dirs, .env, stale paths; `specs/archive/` retained as fossil record; `showcase/04-sessions/Cargo.lock` is intentional (nested demo crate)
+
+### S45.2: BTSP Wire-Format Alignment — JSON-Line Interop (April 21)
+
+**Resolves primalSpring Phase 45b BTSP escalation**: `{"protocol":"btsp","version":1,...}\n` from primalSpring was misclassified as invalid JSON-RPC by the S45.1 first-byte auto-detect.
+
+**Root cause**: Three wire-format mismatches between rhizoCrypt (length-prefixed binary, `[u8; 32]` arrays) and primalSpring (newline-delimited JSON, base64 strings, `protocol` discriminator field).
+
+**Fix**: Three-way auto-detect in `handle_uds_connection`:
+- First byte `{` + `"protocol":"btsp"` → JSON-line BTSP handshake (`accept_handshake_jsonline`), then full JSON-RPC
+- First byte `{` + `"jsonrpc"` → liveness-only JSON-RPC (S45.1 path)
+- Non-`{` first byte → length-prefixed BTSP handshake (internal path)
+
+**New code**:
+- `btsp/framing.rs`: `read_json_line` / `write_json_line` — byte-by-byte newline framing
+- `btsp/types.rs`: `ClientHelloWire`, `ServerHelloWire`, `ChallengeResponseWire`, `HandshakeCompleteWire`, `HandshakeErrorWire` — base64 string fields for primalSpring interop
+- `btsp/server.rs`: `accept_handshake_jsonline` — same X25519 + HMAC-SHA256 crypto, JSON-line framing
+- `jsonrpc/uds.rs`: updated routing to read first line and detect `"protocol":"btsp"` vs `"jsonrpc"`
+
+**For springs teams**: primalSpring BTSP ClientHello (`{"protocol":"btsp","version":1,"client_ephemeral_pub":"<base64>"}\n`) is now correctly routed to the BTSP handshake path. Remove any `check_skip()` workarounds for BTSP probes against rhizoCrypt.
+
+**Metrics**: 1,527 tests (was 1,512), 0 clippy warnings, 0 fmt diffs
 
 ### Remaining (Not Blocking)
 

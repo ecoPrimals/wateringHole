@@ -1,7 +1,7 @@
 # Upstream Gap Status — April 2026 (Updated)
 
 **Source**: primalSpring Phase 45 gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45b**: BTSP escalation exposed 5 new upstream gaps — primals lack server-side BTSP handshake. Guidestone 161/166 (5 expected FAIL).
+**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45b**: BTSP escalation exposed 5 new upstream gaps — primals lack server-side BTSP handshake. **loamSpine BTSP gap RESOLVED (April 21).** Guidestone 162/166 (4 expected FAIL).
 
 ---
 
@@ -58,7 +58,7 @@ their binaries are authentic. The gap is wire-level encrypted channel support.
 | **BTSP server on discovery socket** | Songbird | HTTP-framed UDS, no BTSP listener | Tower discovery not BTSP-authenticated |
 | **BTSP server on DAG socket** | rhizoCrypt | No BTSP server implementation | Provenance DAG not BTSP-authenticated |
 | **BTSP server on commit socket** | sweetGrass | No BTSP server implementation | Provenance commit not BTSP-authenticated |
-| **BTSP server on provenance socket** | loamSpine | No BTSP server implementation | Provenance attestation not BTSP-authenticated |
+| ~~**BTSP server on provenance socket**~~ | loamSpine | **RESOLVED** — NDJSON auto-detect in UDS accept loop; `perform_ndjson_server_handshake` compatible with primalSpring wire format. Provider-delegated crypto. | ~~Provenance attestation not BTSP-authenticated~~ |
 
 **What upstream needs to do**: Implement the 4-step handshake protocol as a pre-JSON-RPC
 negotiation layer. See `primalSpring/ecoPrimal/src/btsp/` for the client-side reference
@@ -105,7 +105,7 @@ Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
 | barraCuda | Sprint 44d | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, wire contract updated |
 | BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
 | coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
-| loamSpine | 0.9.16 | 1,442 pass | READY — family-qualified socket naming, `ledger.sock` capability symlink, stadial gate cleared |
+| loamSpine | 0.9.16 | 1,454 pass | READY — BTSP NDJSON wire-format aligned (Phase 45b), family-qualified socket naming, stadial gate cleared |
 | rhizoCrypt | S45.1 | 35 pass | READY — first-byte `{` auto-detect, BTSP liveness passthrough |
 | Songbird | Wave 151 | up to date | READY — `ipc.resolve` capability-first with primal-name fallback, `ipc.resolve_by_name` alias |
 | NestGate | Session 43k | 11,816 pass (451 ignored) | READY — 47 UDS methods, 80% coverage, zero async-trait |

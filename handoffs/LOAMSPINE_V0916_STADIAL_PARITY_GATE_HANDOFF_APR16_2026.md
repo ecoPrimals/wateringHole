@@ -84,12 +84,13 @@
 | **`bond_ops.rs` error propagation** | Replaced `.map_err(\|e\| ApiError::Internal(e.to_string()))` with `?` via existing `From<LoamSpineError> for ApiError` impl. |
 | **`deny.toml` license cleanup** | Removed 5 stale license allowances with no matching dependencies. |
 | **Orphan bench wired** | `crates/loam-spine-core/benches/storage_ops.rs` wired into Cargo.toml `[[bench]]`. |
+| **BTSP NDJSON wire-format aligned** | UDS accept loop auto-detects primalSpring-style BTSP (`{"protocol":"btsp",...}\n`) and routes to `perform_ndjson_server_handshake` (newline-delimited JSON, `session_id` in ServerHello). Resolves primalSpring Phase 45b BTSP escalation gap. 12 new tests (1,454 total). |
 
 ---
 
 ## Status
 
-**loamSpine clears the stadial gate** for **`sled`** and **`libsqlite3-sys`**, and **eliminates** the `bincode` RUSTSEC advisory via migration to `rmp-serde`. Transitive **`async-trait`** via **hickory-net** is **not under our control**; tracked as upstream-only. Post-gate deep debt sweep (April 20) resolved primalSpring Phase 45 socket naming gap and additional error quality improvements.
+**loamSpine clears the stadial gate** for **`sled`** and **`libsqlite3-sys`**, and **eliminates** the `bincode` RUSTSEC advisory via migration to `rmp-serde`. Transitive **`async-trait`** via **hickory-net** is **not under our control**; tracked as upstream-only. Post-gate deep debt sweep (April 20–21) resolved primalSpring Phase 45 socket naming gap, Phase 45b BTSP wire-format alignment, and additional error quality improvements.
 
 ---
 

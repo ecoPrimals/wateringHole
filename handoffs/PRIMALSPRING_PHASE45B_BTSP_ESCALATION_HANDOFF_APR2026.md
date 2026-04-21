@@ -91,12 +91,14 @@ the connection to the encrypted channel post-handshake.
 **Fix**: sweetGrass has `PeekedStream` first-byte auto-detect on UDS + TCP.
 Extend to recognize BTSP `ClientHello` alongside JSON-RPC `{`.
 
-### loamSpine (Provenance — provenance)
+### loamSpine (Provenance — provenance) — **RESOLVED**
 
-**Gap**: No BTSP server on provenance socket.
+~~**Gap**: No BTSP server on provenance socket.~~
 
-**Fix**: Same pattern. loamSpine already normalizes empty params — add BTSP
-handshake detection before JSON-RPC dispatch.
+**RESOLVED** — UDS accept loop now auto-detects primalSpring-style NDJSON BTSP
+(`{"protocol":"btsp","version":1,...}\n`). Routes to `perform_ndjson_server_handshake`
+(newline-delimited JSON with `session_id` in `ServerHello`). Provider-delegated crypto
+unchanged. Existing length-prefixed BTSP path preserved for Phase 2 clients. 12 new tests.
 
 ### biomeOS (Substrate)
 
