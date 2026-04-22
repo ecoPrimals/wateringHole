@@ -126,7 +126,7 @@ internally. Clears when testcontainers updates.
 ## Verification
 
 ```
-cargo test --all-features       → 1,448 pass, 0 fail
+cargo test --all-features       → 1,446 pass, 0 fail
 cargo clippy --all-features --tests -- -D warnings → 0 warnings
 cargo fmt --check               → 0 issues
 cargo deny check                → advisories ok, bans ok, licenses ok, sources ok
@@ -169,7 +169,7 @@ Post-gate evolution (April 2026):
 - BTSP first-line auto-detect (`detect_protocol`, three-way: length-prefixed + JSON-line + JSON-RPC)
 - Shared ecosystem path constants (`primal_names::paths`, `primal_names::env_vars`)
 - All `#[expect]` carry `reason` strings
-- 194 .rs files, 53,148 LOC, 1,448 tests, 91.7% coverage
+- 194 .rs files, 53,062 LOC, 1,446 tests, 91.7% coverage
 
 ---
 
