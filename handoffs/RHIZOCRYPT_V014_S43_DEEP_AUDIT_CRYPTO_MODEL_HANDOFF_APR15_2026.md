@@ -256,6 +256,30 @@ Example `rhizocrypt doctor` output now includes:
 - **Debris audit** — zero build artifacts, temp files, .env, empty dirs; `specs/archive/` retained as fossil record; `showcase/04-sessions/Cargo.lock` is intentional nested demo crate
 - **Zero TODOs/FIXMEs** in any markdown doc
 
+### S46: BTSP Handshake Robustness — Error Reporting + UDS Integration Tests (April 22)
+
+**Resolves primalSpring Phase 46 audit item**: "BTSP enforced but relay incomplete — connections get `Connection reset by peer`".
+
+**Root cause analysis**: The audit's "relay to BearDog via `BTSP_PROVIDER_SOCKET`" is a **loamSpine/sweetGrass pattern** (provider delegation). rhizoCrypt is self-sovereign — its BTSP is entirely local (HKDF/X25519/HMAC-SHA256, no BearDog delegation). primalSpring's own `PRIMAL_GAPS.md` confirms: "rhizoCrypt: BTSP Phase 2 COMPLETE — Local crypto (self-sovereign)". The "relay incomplete" diagnosis was incorrect for this primal.
+
+**Actual bug found**: On handshake failure (invalid key length, version mismatch, etc.), the error path was:
+1. Sending a generic error `{"error":"handshake_failed","reason":"family_verification"}` regardless of actual cause
+2. Dropping the writer immediately without explicit `shutdown()`, causing OS-level RST before the error response reached the client
+3. Client saw `ECONNRESET` instead of the error JSON line
+
+**Fix** (3 changes):
+- `btsp/server.rs`: `send_handshake_error_jsonline` now accepts a `reason: &str` parameter — the actual `HandshakeError` message flows to the client
+- `jsonrpc/uds.rs` (JSON-line error path): passes `e.to_string()` as reason, explicit `writer.shutdown().await` after sending error
+- `jsonrpc/uds.rs` (length-prefixed error path): matching `writer.shutdown()` for consistency
+
+**New tests** (2):
+- `test_btsp_jsonline_handshake_over_uds` — full 4-step handshake over real `UnixStream::pair()`: ClientHello → ServerHello → ChallengeResponse → HandshakeComplete → post-handshake JSON-RPC `health.check` round-trip
+- `test_btsp_jsonline_invalid_key_returns_error` — sends the audit's socat test (`dGVzdA==` = 4-byte key), verifies client receives structured error JSON (not ECONNRESET) with key-length diagnostic
+
+**For springs teams**: rhizoCrypt does NOT relay BTSP to BearDog. The `BTSP_PROVIDER_SOCKET` / `create_session` relay pattern applies to loamSpine and sweetGrass only. rhizoCrypt's BTSP handshake is end-to-end verified over real Unix sockets.
+
+**Metrics**: 1,529 tests (was 1,527), 0 clippy warnings, 0 fmt diffs
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
