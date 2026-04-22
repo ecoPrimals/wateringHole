@@ -248,6 +248,14 @@ Example `rhizocrypt doctor` output now includes:
 
 **Metrics**: 1,527 tests (was 1,512), 0 clippy warnings, 0 fmt diffs
 
+### S45.2b Addendum: Doc Reconciliation + Debris Audit (April 21)
+
+- **Test count alignment** — 6 stale references to 1,512 updated to 1,527: `docs/DEPLOYMENT_CHECKLIST.md` (2), `specs/RHIZOCRYPT_SPECIFICATION.md` (1), `showcase/README.md` (2), `stop-songbird.sh` comment (1 "Rendezvous" → removed)
+- **Source metrics** — `.rs` file count corrected from 170 to 166; total lines updated from ~48,600 to ~49,200 (measured 49,237)
+- **Spec date** — `RHIZOCRYPT_SPECIFICATION.md` updated from March 2026 to April 2026
+- **Debris audit** — zero build artifacts, temp files, .env, empty dirs; `specs/archive/` retained as fossil record; `showcase/04-sessions/Cargo.lock` is intentional nested demo crate
+- **Zero TODOs/FIXMEs** in any markdown doc
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
