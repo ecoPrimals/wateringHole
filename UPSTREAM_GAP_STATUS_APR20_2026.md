@@ -57,7 +57,7 @@ their binaries are authentic. The gap is wire-level encrypted channel support.
 | **BTSP server on security socket** | BearDog | Treats `ClientHello` as invalid JSON-RPC → Parse error → connection close | Tower security not BTSP-authenticated |
 | **BTSP server on discovery socket** | Songbird | HTTP-framed UDS, no BTSP listener | Tower discovery not BTSP-authenticated |
 | **BTSP server on DAG socket** | rhizoCrypt | No BTSP server implementation | Provenance DAG not BTSP-authenticated |
-| ~~**BTSP server on commit socket**~~ | sweetGrass | **RESOLVED** — first-line auto-detect: length-prefixed BTSP + JSON-line BTSP (primalSpring-compatible) + JSON-RPC three-way multiplexing. `perform_server_handshake_jsonline` with BearDog delegation. | ~~Provenance commit not BTSP-authenticated~~ |
+| ~~**BTSP server on commit socket**~~ | sweetGrass | **RESOLVED** — first-line auto-detect: length-prefixed BTSP + JSON-line BTSP (primalSpring-compatible) + JSON-RPC three-way multiplexing. `perform_server_handshake_jsonline` with BearDog delegation. Step 3→4 relay fix: `btsp.session.negotiate` method name + `ServerHello.session_id` for primalSpring wire compat. | ~~Provenance commit not BTSP-authenticated~~ |
 | ~~**BTSP server on provenance socket**~~ | loamSpine | **RESOLVED** — NDJSON auto-detect in UDS accept loop; `perform_ndjson_server_handshake` compatible with primalSpring wire format. Provider-delegated crypto. | ~~Provenance attestation not BTSP-authenticated~~ |
 
 **What upstream needs to do**: Implement the 4-step handshake protocol as a pre-JSON-RPC
