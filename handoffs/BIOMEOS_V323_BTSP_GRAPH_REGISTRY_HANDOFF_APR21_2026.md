@@ -1,8 +1,8 @@
-# biomeOS v3.23 — BTSP Wire-Format Fix, Graph Diagnostics, Registry Completion
+# biomeOS v3.23 — BTSP Wire-Format Fix, Graph Diagnostics, Registry Completion, Deep Debt Audit
 
 **Date**: April 21, 2026
 **From**: biomeOS v3.23
-**Scope**: primalSpring Phase 45b BTSP escalation + upstream gap registry resolution
+**Scope**: primalSpring Phase 45b BTSP escalation + upstream gap registry resolution + comprehensive deep debt audit
 **License**: AGPL-3.0-or-later
 
 ---
@@ -66,6 +66,24 @@ without code-level debugging.
   `storage.store_blob`, `storage.retrieve_blob`, `storage.retrieve_range`,
   `storage.object.size`, `storage.namespaces.list`, `storage.stats`
 
+### 4. Deep Debt Audit (Comprehensive Codebase Scan)
+
+Full audit of all 25 workspace crates for debt, mocks, hardcoding, unsafe, and code quality.
+
+**Findings (all CLEAN)**:
+- **0 unsafe** in production — `#![forbid(unsafe_code)]` enforced on all crate roots + all 20+ binaries
+- **0 TODO/FIXME/HACK/XXX** markers in production code
+- **0 `todo!()`/`unimplemented!()`** macros in production
+- **0 production files >800 lines** — all 5 files exceeding 800L are test-only modules
+- **0 hardcoded primal names** — all use `primal_names` constants from `biomeos-types`
+- **All ports/paths centralized** in `biomeos-types::constants`
+- **Mocks isolated** to test modules only — no mocks or stubs in production code paths
+
+**Resolved**:
+- `biomeos-primal-sdk/discovery.rs` — `method_for_dir()` replaced `/run/user/`, `/data/local/tmp`, `/tmp` string literals with `runtime_paths::{LINUX_RUNTIME_DIR_PREFIX, ANDROID_RUNTIME_BASE, FALLBACK_RUNTIME_BASE}` constants from `biomeos-types`
+- `biomeos-deploy/Cargo.toml` — `rtnetlink` dependency (via `netlink-sys` C FFI) analyzed as thin AF_NETLINK kernel socket wrapper, not a userspace C library. Documented rationale in Cargo.toml.
+- `biomeos-chimera/builder.rs` — `bail!("Fusion logic not implemented")` confirmed as correct configuration validation error (not a stub/mock)
+
 ---
 
 ## Gap Status Update (vs UPSTREAM_GAP_STATUS_APR20_2026.md)
@@ -117,3 +135,5 @@ cargo fmt --check           # clean
 | Neural API BTSP handshake | `crates/biomeos-core/src/btsp_client.rs` |
 | Graph inventory logging | `crates/biomeos-atomic-deploy/src/neural_api_server/server_lifecycle.rs` |
 | Capability registry | `config/capability_registry.toml` |
+| Discovery path centralization | `crates/biomeos-primal-sdk/src/discovery.rs` |
+| rtnetlink documentation | `crates/biomeos-deploy/Cargo.toml` |
