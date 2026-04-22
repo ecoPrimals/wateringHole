@@ -95,10 +95,16 @@ Extend to recognize BTSP `ClientHello` alongside JSON-RPC `{`.
 
 ~~**Gap**: No BTSP server on provenance socket.~~
 
-**RESOLVED** — UDS accept loop now auto-detects primalSpring-style NDJSON BTSP
+**RESOLVED** (April 21 + 22) — UDS accept loop auto-detects primalSpring-style NDJSON BTSP
 (`{"protocol":"btsp","version":1,...}\n`). Routes to `perform_ndjson_server_handshake`
 (newline-delimited JSON with `session_id` in `ServerHello`). Provider-delegated crypto
-unchanged. Existing length-prefixed BTSP path preserved for Phase 2 clients. 12 new tests.
+unchanged. Existing length-prefixed BTSP path preserved for Phase 2 clients. 12 + 2 tests.
+
+**Provider socket wiring** (April 22): Static BTSP mode (`btsp_config` is `Some`) now
+peeks first byte via `BufReader::fill_buf()` instead of bypassing NDJSON detection.
+Provider socket resolved from `btsp_config` first, falling back to env vars. JSON-RPC
+connections pass through auto-detect even when BTSP is configured.
+`perform_server_handshake` refactored to split reader/writer for BufReader compatibility.
 
 ### biomeOS (Substrate)
 
