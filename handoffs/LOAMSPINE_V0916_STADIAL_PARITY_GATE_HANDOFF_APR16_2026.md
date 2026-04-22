@@ -88,12 +88,13 @@
 | **Capability/path constant unification** | `"permanence"`/`"ledger"` literals in `neural_api/mod.rs` → `primal_names::LEGACY_DOMAIN`/`CAPABILITY_DOMAIN`. `"biomeos"` path segment in `network.rs` → `primal_names::BIOMEOS_SOCKET_DIR`. Single source of truth for all identity/path constants. |
 | **`specs/ARCHITECTURE.md` updated** | Stale SQLite/sled/RocksDB storage layer references replaced with current redb + in-memory backends. Code examples updated. |
 | **Deep debt audit clean** | Zero files >800L (max 783 test, 605 prod). Zero `unsafe`. Zero `todo!`/`FIXME`/`HACK`. Zero hardcoded primal names in production. All mocks `#[cfg(test)]` gated. `cargo deny check` clean. 4 `#[allow]` all justified with documented reasons. |
+| **BTSP provider socket wired** | Static BTSP mode (`btsp_config = Some`) now peeks first byte via `BufReader::fill_buf()` and auto-detects NDJSON vs binary. Previously, NDJSON connections were misrouted to length-prefixed handshake. `perform_server_handshake` refactored to split reader/writer. 2 new integration tests (1,499 total). |
 
 ---
 
 ## Status
 
-**loamSpine clears the stadial gate** for **`sled`** and **`libsqlite3-sys`**, and **eliminates** the `bincode` RUSTSEC advisory via migration to `rmp-serde`. Transitive **`async-trait`** via **hickory-net** is **not under our control**; tracked as upstream-only. Post-gate deep debt sweep (April 20–21) resolved primalSpring Phase 45 socket naming gap, Phase 45b BTSP wire-format alignment, and additional error quality improvements.
+**loamSpine clears the stadial gate** for **`sled`** and **`libsqlite3-sys`**, and **eliminates** the `bincode` RUSTSEC advisory via migration to `rmp-serde`. Transitive **`async-trait`** via **hickory-net** is **not under our control**; tracked as upstream-only. Post-gate deep debt sweep (April 20–22) resolved primalSpring Phase 45 socket naming gap, Phase 45b BTSP wire-format alignment, BTSP provider socket wiring, and additional error quality improvements.
 
 ---
 

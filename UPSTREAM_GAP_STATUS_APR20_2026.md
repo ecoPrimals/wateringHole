@@ -1,7 +1,7 @@
 # Upstream Gap Status — April 2026 (Updated)
 
 **Source**: primalSpring Phase 45 gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45b**: BTSP escalation exposed 5 new upstream gaps — primals lack server-side BTSP handshake. **loamSpine BTSP gap RESOLVED (April 21).** Guidestone 162/166 (4 expected FAIL).
+**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45b**: BTSP escalation exposed 5 new upstream gaps — primals lack server-side BTSP handshake. **loamSpine BTSP gap RESOLVED (April 21); provider socket wiring fix (April 22).** Guidestone 162/166 (4 expected FAIL).
 
 ---
 
@@ -111,7 +111,7 @@ Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
 | NestGate | Session 43k | 11,816 pass (451 ignored) | READY — 47 UDS methods, 80% coverage, zero async-trait |
 | petalTongue | current | up to date | READY |
 | Squirrel | alpha.51 | 735 pass | READY |
-| sweetGrass | current | 1,443 pass | READY — `detect_protocol` first-line auto-detect (length-prefixed + JSON-line BTSP + JSON-RPC), Phase 45b wire-format aligned |
+| sweetGrass | current | 1,448 pass | READY — `detect_protocol` first-line auto-detect + `family_seed` relay fix (base64 seed, `session_token` extraction, verify/negotiate param alignment with `beardog_types`) |
 | toadStool | S175 | 7,818 lib pass | READY |
 | biomeOS | v3.22 | 7,784 pass | READY — dual-protocol auto-detect on UDS (HTTP + JSON-RPC), zero C deps |
 
