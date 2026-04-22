@@ -301,6 +301,20 @@ Full deep-debt audit across all requested dimensions:
 - `showcase/04-sessions/Cargo.lock` confirmed intentional (standalone nested demo crate)
 - `specs/archive/INTEGRATION_SPECIFICATION.md` retained as fossil record
 
+### S47: FAMILY_SEED Encoding Alignment — Cross-Primal BTSP Compatibility (April 22)
+
+**Resolves primalSpring audit**: "rhizoCrypt step 3→4 fails with no HandshakeComplete".
+
+**Root cause**: Seed encoding mismatch between primalSpring and rhizoCrypt. primalSpring's `raw_family_seed_from_env()` has a 3-step encoding pipeline: (1) hex string → raw UTF-8 bytes, (2) valid base64 → decoded bytes, (3) anything else → raw UTF-8 bytes. rhizoCrypt always used raw UTF-8 bytes (step 3 only), skipping step 2. When the harness generates a seed that passes base64 decode, primalSpring decodes it while rhizoCrypt uses the raw string — producing different HKDF inputs and mismatched HMAC challenge responses.
+
+**Fix**: `read_family_seed` → `normalize_seed_bytes` with the same 3-step pipeline as primalSpring. `is_hex_seed` checks `len >= 32 && even && all hex digits`. HKDF parameters confirmed matching: `salt=b"btsp-v1"`, `info=b"handshake"`, HMAC order `challenge||client_pub||server_pub`.
+
+**New tests** (6): hex seed normalization, base64 seed decode, plain string passthrough, short-hex edge case, cross-primal HKDF compatibility, cross-primal base64 seed compatibility.
+
+**For springs teams**: rhizoCrypt now interprets `FAMILY_SEED` identically to primalSpring. The full 4-step JSON-line BTSP handshake (ClientHello → ServerHello → ChallengeResponse → HandshakeComplete) should complete for all seed encodings.
+
+**Metrics**: 1,535 tests (was 1,529), 0 clippy warnings, 0 fmt diffs
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
