@@ -87,7 +87,7 @@
 | **BTSP NDJSON wire-format aligned** | UDS accept loop auto-detects primalSpring-style BTSP (`{"protocol":"btsp",...}\n`) and routes to `perform_ndjson_server_handshake` (newline-delimited JSON, `session_id` in ServerHello). Resolves primalSpring Phase 45b BTSP escalation gap. 12 new tests (1,454 total). |
 | **Capability/path constant unification** | `"permanence"`/`"ledger"` literals in `neural_api/mod.rs` → `primal_names::LEGACY_DOMAIN`/`CAPABILITY_DOMAIN`. `"biomeos"` path segment in `network.rs` → `primal_names::BIOMEOS_SOCKET_DIR`. Single source of truth for all identity/path constants. |
 | **`specs/ARCHITECTURE.md` updated** | Stale SQLite/sled/RocksDB storage layer references replaced with current redb + in-memory backends. Code examples updated. |
-| **Deep debt audit clean** | Zero files >800L (max 783 test, 605 prod). Zero `unsafe`. Zero `todo!`/`FIXME`/`HACK`. Zero hardcoded primal names in production. All mocks `#[cfg(test)]` gated. `cargo deny check` clean. 4 `#[allow]` all justified with documented reasons. |
+| **Deep debt audit clean** | Zero files >800L (max 783 test, 605 prod). Zero `unsafe`. Zero `todo!`/`FIXME`/`HACK`. Zero hardcoded primal names in production. All mocks `#[cfg(test)]` gated. `cargo deny check` clean. 2 `#[allow]` justified (feature-conditional async). All `#[expect]` have `reason` strings. Lockfile refreshed. |
 | **BTSP provider socket wired** | Static BTSP mode (`btsp_config = Some`) now peeks first byte via `BufReader::fill_buf()` and auto-detects NDJSON vs binary. Previously, NDJSON connections were misrouted to length-prefixed handshake. `perform_server_handshake` refactored to split reader/writer. 2 new integration tests (1,499 total). |
 
 ---
