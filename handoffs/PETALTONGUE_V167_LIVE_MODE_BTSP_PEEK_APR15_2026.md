@@ -1,6 +1,6 @@
 # petalTongue v1.6.7 — `live` Mode + BTSP Wire-Format Fix
 
-**Date**: April 15, 2026
+**Date**: April 21, 2026
 **From**: petalTongue team
 **Ref**: primalSpring Phase 45b audit
 
