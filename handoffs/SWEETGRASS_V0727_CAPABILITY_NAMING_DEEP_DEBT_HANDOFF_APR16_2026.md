@@ -69,10 +69,10 @@ Regenerated. Stale phantom `libsqlite3-sys` entry confirmed never-compiled
 
 | Metric | Value |
 |--------|-------|
-| Tests | 1,560 (1,502 local + 58 Docker CI) |
+| Tests | 1,446 local + 56 Docker CI |
 | Coverage | 90.4% without Docker / 91.7% with Postgres |
-| Max file | 726 lines (`agent.rs`) |
-| .rs files | 191 (51,355 LOC) |
+| Max file | 768 lines |
+| .rs files | 194 (53,062 LOC) |
 | Clippy | 0 warnings (pedantic + nursery) |
 | Rustdoc | 0 warnings (`-D warnings`) |
 | Unsafe | 0 blocks |
