@@ -280,6 +280,27 @@ Example `rhizocrypt doctor` output now includes:
 
 **Metrics**: 1,529 tests (was 1,527), 0 clippy warnings, 0 fmt diffs
 
+### S46b Addendum: Clippy Pedantic Clean + Deep Debt Audit (April 22)
+
+Full deep-debt audit across all requested dimensions:
+
+| Dimension | Result |
+|---|---|
+| Files >800 lines | **None** — max 724L |
+| Unsafe code | `forbid(unsafe_code)` on all crates, zero blocks |
+| External/C deps | Pure Rust, `deny.toml` bans openssl/ring/aws-lc |
+| TODO/FIXME/unimplemented! | **Zero** in code and non-changelog docs |
+| Mocks in production | All `Mock*` behind `#[cfg(any(test, feature = "test-utils"))]` |
+| Hardcoded primal names | **Fixed**: "BearDog/Squirrel" → ecosystem-generic in `newline.rs` |
+| Clippy pedantic+nursery | **Zero warnings** — sole `similar_names` fixed (`peek`→`probe`) |
+| Clone discipline | All justified (DashMap guards, Arc, HashMap keys, retry) |
+
+- **Debris audit** — zero temp files, empty dirs, stale artifacts, .env, orphan scripts
+- **Line count** — CONTEXT.md updated from ~49,200 to ~49,400 (measured 49,410)
+- **CHANGELOG** — S46 + S46b entries added, S45.2 test count corrected (1,527, not 1,529)
+- `showcase/04-sessions/Cargo.lock` confirmed intentional (standalone nested demo crate)
+- `specs/archive/INTEGRATION_SPECIFICATION.md` retained as fossil record
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
