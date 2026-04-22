@@ -108,7 +108,8 @@ hardcoded socket names.
 ## BTSP (BirdSong Trust and Security Protocol)
 
 - Export `BEARDOG_FAMILY_SEED` before launching BearDog
-- rhizoCrypt and sweetGrass enforce BTSP on UDS — plain JSON-RPC probes are rejected
+- rhizoCrypt enforces BTSP on UDS — plain JSON-RPC probes are rejected
+- sweetGrass auto-detects protocol on UDS (`detect_protocol` three-way: JSON-RPC, JSON-line BTSP, length-prefixed BTSP)
 - biomeOS speaks HTTP on UDS — classify as reachable-but-incompatible (SKIP, not FAIL)
 - Use `is_protocol_error()` / `is_transport_mismatch()` for protocol tolerance
 
