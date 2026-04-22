@@ -85,6 +85,9 @@
 | **`deny.toml` license cleanup** | Removed 5 stale license allowances with no matching dependencies. |
 | **Orphan bench wired** | `crates/loam-spine-core/benches/storage_ops.rs` wired into Cargo.toml `[[bench]]`. |
 | **BTSP NDJSON wire-format aligned** | UDS accept loop auto-detects primalSpring-style BTSP (`{"protocol":"btsp",...}\n`) and routes to `perform_ndjson_server_handshake` (newline-delimited JSON, `session_id` in ServerHello). Resolves primalSpring Phase 45b BTSP escalation gap. 12 new tests (1,454 total). |
+| **Capability/path constant unification** | `"permanence"`/`"ledger"` literals in `neural_api/mod.rs` → `primal_names::LEGACY_DOMAIN`/`CAPABILITY_DOMAIN`. `"biomeos"` path segment in `network.rs` → `primal_names::BIOMEOS_SOCKET_DIR`. Single source of truth for all identity/path constants. |
+| **`specs/ARCHITECTURE.md` updated** | Stale SQLite/sled/RocksDB storage layer references replaced with current redb + in-memory backends. Code examples updated. |
+| **Deep debt audit clean** | Zero files >800L (max 783 test, 605 prod). Zero `unsafe`. Zero `todo!`/`FIXME`/`HACK`. Zero hardcoded primal names in production. All mocks `#[cfg(test)]` gated. `cargo deny check` clean. 4 `#[allow]` all justified with documented reasons. |
 
 ---
 
