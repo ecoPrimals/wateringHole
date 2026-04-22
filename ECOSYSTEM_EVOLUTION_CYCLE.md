@@ -1,6 +1,6 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: April 15, 2026
+**Date**: April 22, 2026
 **Version**: v1.1.0
 **License**: AGPL-3.0-or-later
 
@@ -58,7 +58,7 @@ Springs focus on validation of what exists, surfacing gaps, tightening.
 primalSpring. Live NUCLEUS deployed from plasmidBin as binary depot. Stadial parity
 gate cleared across all 13 primals + primalSpring. Springs evolving to self-validating
 NUCLEUS deployments via the plasmidBin depot pattern:
-- **Stadial gate cleared**: BearDog W56, Songbird W155, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
+- **Stadial gate cleared**: BearDog W56, Songbird W156, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
 - **primalSpring v0.9.17**: guideStone Level 4 (161/166 live NUCLEUS — 5 FAIL upstream BTSP gaps, 41/41 bare, BLAKE3 P3, seed provenance Layer 0.5, BTSP escalation Layer 1.5, biomeOS substrate validated), fragment-first graphs, 631 tests, plasmidBin depot documented, deep debt evolution (capability-based discovery, zero hardcoded primal names, all files under 800 LOC)
 - **guideStone pattern**: Self-validating NUCLEUS composition (5 properties: deterministic, traceable, self-verifying, env-agnostic, tolerance-documented). Proven by hotSpring-guideStone-v0.7.0. primalSpring guideStone now validates base composition for all downstream. Standard at `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md` v1.1.0.
 - **plasmidBin genomeBin depot**: Full cross-architecture binary depot (46 binaries, 6 target triples, Tier 1 39/39). `build_ecosystem_genomeBin.sh` replaces musl-only script with 9-target matrix (Tier 1 MUST / Tier 2 SHOULD / Tier 3 NICE per ecoBin Architecture Standard). All upstream armv7/nestgate gaps closed Phase 45. Springs pull, deploy NUCLEUS, validate externally. See `primalSpring/wateringHole/PLASMINBIN_DEPOT_PATTERN.md`.
@@ -227,7 +227,7 @@ resolved in parallel with composition schema work.
 | Severity | Primals | Debt |
 |----------|---------|------|
 | **RESOLVED** | BearDog | 0 `#[async_trait]`, 0 `Box<dyn Error>` in production (W56), serde_yaml eliminated, 14,786+ tests |
-| **RESOLVED** | Songbird | 0 `#[async_trait]`, 0 finite `dyn` (W155: 6 sites eliminated; remaining architectural: `dyn Stream`/`dyn SerialPort`/`dyn Fn` test injection), 0 production mocks (stubs gated W154), 0 bare `#[allow]`, 0 blanket lint suppress, persistent NDJSON, mock features standardized, capability-first routing (PG-37), dead deps removed, 2 `regex` deps removed (W154), yaml stripped, env-test fixed — Wave 155, 7,385 tests |
+| **RESOLVED** | Songbird | 0 `#[async_trait]`, 0 finite `dyn` (W155: 6 sites eliminated; remaining architectural: `dyn Stream`/`dyn SerialPort`/`dyn Fn` test injection), 0 production mocks (stubs gated W154), 0 bare `#[allow]`, 0 blanket lint suppress, persistent NDJSON, mock features standardized, capability-first routing (PG-37), dead deps removed, startup resilience (W156: graceful crypto fallback, NDJSON handshake timeout, Neural API timeout 100ms→5s, 2 pre-existing test failures fixed) — Wave 156, 7,387 tests, 0 failures |
 | **RESOLVED** | ToadStool | RPITIT + enum dispatch (S203s), all 11 DEBT.md items resolved (S203t), edge compilation fixed + smart refactoring (S173), edge clippy clean 231→0 (S174), 7,818 lib tests |
 | **RESOLVED** | NestGate | ring eliminated, deprecated markers 114→0 (43w), 8,695 tests |
 | **RESOLVED** | petalTongue | reqwest+ring+rustls eliminated (v1.6.7), LocalHttpClient via hyper, UUI boundary cleanup |
