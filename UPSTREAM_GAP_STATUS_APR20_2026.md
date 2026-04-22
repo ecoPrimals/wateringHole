@@ -105,13 +105,13 @@ Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
 | barraCuda | Sprint 44d | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, wire contract updated |
 | BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
 | coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
-| loamSpine | 0.9.16 | 1,454 pass | READY — BTSP NDJSON wire-format aligned (Phase 45b), family-qualified socket naming, stadial gate cleared |
+| loamSpine | 0.9.16 | 1,499 pass | READY — BTSP NDJSON + provider socket wired (Phase 45b), family-qualified socket naming, stadial gate cleared, deep debt audit clean |
 | rhizoCrypt | S45.1 | 35 pass | READY — first-byte `{` auto-detect, BTSP liveness passthrough |
 | Songbird | Wave 151 | up to date | READY — `ipc.resolve` capability-first with primal-name fallback, `ipc.resolve_by_name` alias |
 | NestGate | Session 43k | 11,816 pass (451 ignored) | READY — 47 UDS methods, 80% coverage, zero async-trait |
 | petalTongue | current | up to date | READY |
 | Squirrel | alpha.51 | 735 pass | READY |
-| sweetGrass | current | 1,446 pass | READY — `detect_protocol` first-line auto-detect, `family_seed` relay aligned with `beardog_types`, `BraidSignature` removed (v0.7.29 target), env vars fully centralized |
+| sweetGrass | current | 1,443 pass | READY — `detect_protocol` first-line auto-detect (length-prefixed + JSON-line BTSP + JSON-RPC), Phase 45b wire-format aligned |
 | toadStool | S175 | 7,818 lib pass | READY |
 | biomeOS | v3.22 | 7,784 pass | READY — dual-protocol auto-detect on UDS (HTTP + JSON-RPC), zero C deps |
 
