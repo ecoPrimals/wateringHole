@@ -315,6 +315,14 @@ Full deep-debt audit across all requested dimensions:
 
 **Metrics**: 1,535 tests (was 1,529), 0 clippy warnings, 0 fmt diffs
 
+### S47b Addendum: Doc Reconciliation + Debris Audit (April 22)
+
+- **Line count** — CONTEXT.md updated from ~49,400 to ~49,500 (measured 49,537)
+- **Test count** — 1,535 confirmed across all 6 primary docs (README, CONTEXT, CHANGELOG, DEPLOYMENT_CHECKLIST, RHIZOCRYPT_SPECIFICATION, showcase/README)
+- **Deep debt re-scan** — zero `unwrap()`/`expect()` in production code (all hits in `#[test]` or `#[cfg(test)]`), zero `async-trait` macro usage (native async with explicit desugaring), zero `Arc<Mutex>` (DashMap/RwLock), zero `Box<dyn Error>` in production, edition 2024
+- **`v0.13.0` in `INTEGRATION_SPECIFICATION_V2.md`** — correct spec content (migration timeline), not stale
+- **Debris audit** — zero temp files, empty dirs, stale artifacts, .env, outdated TODOs in non-changelog docs; `specs/archive/` retained as fossil record; `showcase/04-sessions/Cargo.lock` intentional
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
