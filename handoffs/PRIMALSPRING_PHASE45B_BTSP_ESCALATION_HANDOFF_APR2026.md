@@ -106,6 +106,11 @@ Provider socket resolved from `btsp_config` first, falling back to env vars. JSO
 connections pass through auto-detect even when BTSP is configured.
 `perform_server_handshake` refactored to split reader/writer for BufReader compatibility.
 
+**HandshakeComplete wire fix** (April 15): `HandshakeComplete` was missing
+`"status":"ok"` discriminator field. primalSpring uses this field to identify the
+message type. Without it, clients timed out. Fixed in both framed and NDJSON paths.
+Resolves Phase 45c "incomplete handshake" gap. 1 new test (1,503 total).
+
 **Step 3→4 verification relay** (April 23): All three BearDog relay calls aligned with
 `beardog_types::btsp::rpc` contract. `btsp.session.create` sends `family_seed` (base64
 from `FAMILY_SEED`/`BEARDOG_FAMILY_SEED` env) instead of `family_seed_ref`. Challenge

@@ -19,7 +19,7 @@ The base composition is more secure — your compositions inherit this.
 | guidestone checks | 162/166 | 163/168 |
 | BTSP authenticated | 5/13 | **11/13** |
 | BTSP policy | tower_delegated OK | **cleartext = FAIL** |
-| Remaining upstream | 5 primals | **2 primals** (petalTongue, loamSpine) |
+| Remaining upstream | 5 primals | **1 primal** (petalTongue) — loamSpine RESOLVED |
 
 ### What This Means for You
 
@@ -182,7 +182,7 @@ feed back into game science validation.
 |-------|------------|
 | BearDog requires BEARDOG_FAMILY_SEED env | Export before launch (see Step 2) |
 | petalTongue has no BTSP | Use Tier 1 plaintext for visualization |
-| loamSpine incomplete handshake | `ledger` capability BTSP will FAIL |
+| ~~loamSpine incomplete handshake~~ | **RESOLVED** — `HandshakeComplete` now includes `"status":"ok"` discriminator |
 | 5 seed fingerprint mismatches | Expected — reharvest to plasmidBin resolves |
 
 ---
