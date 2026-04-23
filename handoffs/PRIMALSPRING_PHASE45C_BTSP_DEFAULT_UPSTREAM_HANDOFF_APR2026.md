@@ -87,12 +87,16 @@ If first byte is `{`, read full line, check for `"protocol":"btsp"`.
 Route to a `relay_json_line_handshake()` function that calls BearDog
 for session create/verify. Same pattern as the 5 primals above.
 
-### loamSpine — Incomplete Handshake
+### loamSpine — ~~Incomplete Handshake~~ **RESOLVED**
 
-**Behavior**: Initiates BTSP handshake (sends ServerHello) but does not send
-the final HandshakeComplete message, causing primalSpring to timeout.
-**Fix path**: Ensure the NDJSON handshake flow completes all 4 steps.
-After `btsp.session.verify` succeeds, write `HandshakeComplete` as a JSON line.
+~~**Behavior**: Initiates BTSP handshake (sends ServerHello) but does not send
+the final HandshakeComplete message, causing primalSpring to timeout.~~
+
+**RESOLVED** (April 15): `HandshakeComplete` was being sent, but was missing
+the `"status":"ok"` discriminator field that primalSpring uses to identify
+the message. Wire was `{"cipher":"...","session_id":"..."}` instead of the
+expected `{"status":"ok","session_id":"...","cipher":"..."}`. Fixed in both
+length-prefixed and NDJSON paths. 1 new wire-format test (1,503 total).
 
 ---
 
