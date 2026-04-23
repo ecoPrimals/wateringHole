@@ -112,7 +112,7 @@ Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
 | petalTongue | current | up to date | READY |
 | Squirrel | alpha.51 | 735 pass | READY |
 | sweetGrass | current | 1,446 pass | READY — `detect_protocol` first-line auto-detect, `family_seed` relay aligned with `beardog_types`, `BraidSignature` removed (Witness-only), env vars fully centralized |
-| toadStool | S175 | 7,818 lib pass | READY |
+| toadStool | S176 | 7,809 lib pass | READY — BTSP JSON-line relay (Phase 45c), family seed loading, security socket discovery |
 | biomeOS | v3.22 | 7,784 pass | READY — dual-protocol auto-detect on UDS (HTTP + JSON-RPC), zero C deps |
 
 **The primary architectural gap is biomeOS's forwarding model.** biomeOS does its own
