@@ -1,7 +1,7 @@
 # Upstream Gap Status — April 2026 (Updated)
 
 **Source**: primalSpring Phase 45 gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45b**: BTSP escalation exposed 5 new upstream gaps — primals lack server-side BTSP handshake. **loamSpine BTSP gap RESOLVED (April 21); provider socket wiring (April 22); Step 3→4 relay fixed (April 23).** Guidestone 162/166 (4 expected FAIL).
+**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45c**: BTSP default on all tiers — 11/13 capabilities authenticated after JSON-line relay fixes in ToadStool, barraCuda, coralReef, NestGate, Squirrel. Remaining 2 upstream: petalTongue (no BTSP server), loamSpine (incomplete handshake). Guidestone 163/168.
 
 ---
 
