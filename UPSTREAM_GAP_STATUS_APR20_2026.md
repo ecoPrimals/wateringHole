@@ -102,7 +102,7 @@ Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 44e | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, BTSP relay aligned (Phase 45c), wire contract v1.1.0 |
+| barraCuda | Sprint 44f | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, BTSP relay aligned, zero files >800L, 12-axis clean |
 | BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
 | coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | 0.9.16 | 1,503 pass | READY — BTSP HandshakeComplete wire fix (status:ok), Step 3→4 relay fixed, NDJSON + provider socket wired, stadial gate cleared |
