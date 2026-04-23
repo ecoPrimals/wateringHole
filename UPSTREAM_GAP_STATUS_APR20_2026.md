@@ -1,7 +1,7 @@
 # Upstream Gap Status — April 2026 (Updated)
 
 **Source**: primalSpring Phase 45 gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Post-pull review of barraCuda (Sprint 44c), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45c**: BTSP default on all tiers — 11/13 capabilities authenticated after JSON-line relay fixes in ToadStool, barraCuda, coralReef, NestGate, Squirrel. Remaining 2 upstream: petalTongue (no BTSP server), loamSpine (incomplete handshake). Guidestone 163/168.
+**Context**: Post-pull review of barraCuda (Sprint 44e), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45c**: BTSP default on all tiers — 11/13 capabilities authenticated after JSON-line relay fixes in ToadStool, barraCuda, coralReef, NestGate, Squirrel. barraCuda BTSP relay aligned (Sprint 44e). Remaining 2 upstream: petalTongue (no BTSP server), loamSpine (incomplete handshake). Guidestone 163/168.
 
 ---
 
@@ -102,7 +102,7 @@ Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 44d | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, wire contract updated |
+| barraCuda | Sprint 44e | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, BTSP relay aligned (Phase 45c), wire contract v1.1.0 |
 | BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
 | coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | 0.9.16 | 1,503 pass | READY — BTSP HandshakeComplete wire fix (status:ok), Step 3→4 relay fixed, NDJSON + provider socket wired, stadial gate cleared |
