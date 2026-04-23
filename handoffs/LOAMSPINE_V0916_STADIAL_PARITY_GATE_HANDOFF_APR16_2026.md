@@ -96,7 +96,7 @@
 
 ## Status
 
-**loamSpine clears the stadial gate** for **`sled`** and **`libsqlite3-sys`**, and **eliminates** the `bincode` RUSTSEC advisory via migration to `rmp-serde`. Transitive **`async-trait`** via **hickory-net** is **not under our control**; tracked as upstream-only. Post-gate deep debt sweep (April 20–22) resolved primalSpring Phase 45 socket naming gap, Phase 45b BTSP wire-format alignment, BTSP provider socket wiring, and additional error quality improvements.
+**loamSpine clears the stadial gate** for **`sled`** and **`libsqlite3-sys`**, and **eliminates** the `bincode` RUSTSEC advisory via migration to `rmp-serde`. Transitive **`async-trait`** via **hickory-net** is **not under our control**; tracked as upstream-only. Post-gate deep debt sweep (April 20–23) resolved primalSpring Phase 45 socket naming gap, Phase 45b BTSP wire-format alignment, BTSP provider socket wiring, BTSP Step 3→4 verification relay, and Phase 45c HandshakeComplete wire fix (`status:ok` discriminator). 1,503 tests, all BTSP capabilities authenticated.
 
 ---
 
