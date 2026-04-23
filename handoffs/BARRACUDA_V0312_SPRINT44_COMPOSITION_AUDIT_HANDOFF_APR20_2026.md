@@ -167,6 +167,21 @@ Per primalSpring Phase 45c audit — fixed 5 BTSP handshake relay issues:
 - `crates/barracuda-core/src/ipc/btsp.rs` — all 5 BTSP fixes + 7 new tests
 - `crates/barracuda/src/device/sovereign_device.rs` — clippy + fmt
 
+## Sprint 44f: Deep Debt — Smart Refactoring + 12-Axis Clean (Apr 20)
+
+12-axis deep debt audit confirmed clean (zero TODO/FIXME, zero production
+unwrap, zero async-trait/Box\<dyn Error\>/Result\<T,String\>, zero println in lib,
+zero mocks in production, all deps pure Rust, all `#[expect(reason)]`).
+
+Two files over 800L — smart refactored:
+
+- **`sovereign_device.rs`** (924→773L): `query_dispatch_arch()` extracted to
+  `sovereign_discovery.rs` (natural domain boundary). Test module extracted
+  to `sovereign_device_tests.rs`.
+- **`btsp.rs`** (815→678L): Test module extracted to `btsp_tests.rs`.
+
+Zero production `.rs` files over 800 lines across entire codebase.
+
 ## Remaining
 
 - `OdeRK45F64` batching for Richards PDE (airSpring-specific, low priority)
