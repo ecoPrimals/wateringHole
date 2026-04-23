@@ -147,6 +147,26 @@ New `WORKGROUP_SIZE_MEDIUM = 128` constant added for integrated GPU tier.
 
 12-axis deep debt audit clean. All quality gates green.
 
+## Sprint 44e: Phase 45c BTSP Relay Alignment (Apr 20)
+
+Per primalSpring Phase 45c audit — fixed 5 BTSP handshake relay issues:
+
+1. **ClientHello detection**: `is_btsp_client_hello()` accepts both
+   `{"type":"ClientHello"}` and `{"protocol":"btsp"}` (JSON-line format)
+2. **`session_create_rpc`**: sends base64-encoded `family_seed` to BearDog
+   via `resolve_family_seed_b64()` (reads `BEARDOG_FAMILY_SEED`/`FAMILY_SEED` env)
+3. **`session_verify_rpc`**: passes `client_ephemeral_pub` + `preferred_cipher`
+4. **Field alignment**: `session_token` (not `session_id`), `response` (not `hmac`)
+   with backward-compatible fallbacks
+5. **Upstream clippy**: `sovereign_device.rs` redundant closures evolved
+
+7 new tests. All quality gates green (clippy, doc, 33 BTSP tests pass).
+
+### Files Modified
+
+- `crates/barracuda-core/src/ipc/btsp.rs` — all 5 BTSP fixes + 7 new tests
+- `crates/barracuda/src/device/sovereign_device.rs` — clippy + fmt
+
 ## Remaining
 
 - `OdeRK45F64` batching for Richards PDE (airSpring-specific, low priority)
