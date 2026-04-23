@@ -58,12 +58,12 @@ Springs focus on validation of what exists, surfacing gaps, tightening.
 primalSpring. Live NUCLEUS deployed from plasmidBin as binary depot. Stadial parity
 gate cleared across all 13 primals + primalSpring. Springs evolving to self-validating
 NUCLEUS deployments via the plasmidBin depot pattern:
-- **Stadial gate cleared**: BearDog W56, Songbird W159, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
-- **primalSpring v0.9.17**: guideStone Level 4 (163/168 live NUCLEUS — 11/13 BTSP authenticated, 41/41 bare, BLAKE3 P3, seed provenance Layer 0.5, BTSP default all tiers Layer 1.5, biomeOS substrate validated), fragment-first graphs, 631 tests, plasmidBin depot documented, deep debt evolution (capability-based discovery, zero hardcoded primal names, all files under 800 LOC)
+- **Stadial gate cleared**: BearDog W56, Songbird W160, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
+- **primalSpring v0.9.17**: guideStone Level 4 (161/166 live NUCLEUS — 5 FAIL upstream BTSP gaps, 41/41 bare, BLAKE3 P3, seed provenance Layer 0.5, BTSP escalation Layer 1.5, biomeOS substrate validated), fragment-first graphs, 631 tests, plasmidBin depot documented, deep debt evolution (capability-based discovery, zero hardcoded primal names, all files under 800 LOC)
 - **guideStone pattern**: Self-validating NUCLEUS composition (5 properties: deterministic, traceable, self-verifying, env-agnostic, tolerance-documented). Proven by hotSpring-guideStone-v0.7.0. primalSpring guideStone now validates base composition for all downstream. Standard at `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md` v1.1.0.
 - **plasmidBin genomeBin depot**: Full cross-architecture binary depot (46 binaries, 6 target triples, Tier 1 39/39). `build_ecosystem_genomeBin.sh` replaces musl-only script with 9-target matrix (Tier 1 MUST / Tier 2 SHOULD / Tier 3 NICE per ecoBin Architecture Standard). All upstream armv7/nestgate gaps closed Phase 45. Springs pull, deploy NUCLEUS, validate externally. See `primalSpring/wateringHole/PLASMINBIN_DEPOT_PATTERN.md`.
 - **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V54 (guideStone Level 2), neuralSpring V134 (guideStone Level 2), wetSpring V147 (guideStone Level 3 — bare works)
-- **primalSpring guideStone**: `primalspring_guidestone` binary — 9-layer base composition certification (including seed provenance L0.5 and BTSP default L1.5). 163/168 PASS against live 12-primal NUCLEUS (11/13 BTSP authenticated). Base layer that domain guideStones inherit.
+- **primalSpring guideStone**: `primalspring_guidestone` binary — 9-layer base composition certification (including seed provenance L0.5 and BTSP escalation L1.5). 161/166 PASS against live 12-primal NUCLEUS (5 FAIL = upstream BTSP server gaps). Base layer that domain guideStones inherit.
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
 - **Composing springs**: ludoSpring V47 (guideStone readiness 4 — **live NUCLEUS validated: 54/54 checks exit 0**, three-tier: 31 bare + 15 IPC + 8 NUCLEUS cross-atomic, guideStone standard v1.2.0, genomeBin v5.1, GAP-11 documented)
 
@@ -227,7 +227,7 @@ resolved in parallel with composition schema work.
 | Severity | Primals | Debt |
 |----------|---------|------|
 | **RESOLVED** | BearDog | 0 `#[async_trait]`, 0 `Box<dyn Error>` in production (W56), serde_yaml eliminated, 14,786+ tests |
-| **RESOLVED** | Songbird | 0 `#[async_trait]`, 0 finite `dyn`, 0 production mocks, 0 bare `#[allow]`, 0 blanket lint suppress, 0 hardcoded IPs/ports (W157), 0 unused deps, 0 `Box<dyn Error>` in production. BTSP relay wire-protocol aligned (W158). W159: 12 deprecated port constants removed (zero consumers), 4 scattered port duplicates centralized, 3 stale feature flags removed, `DEFAULT_ORCHESTRATOR_PORT` aligned 8000→8080, config network constants replaced with canonical re-exports — Wave 159, 7,387+ tests, 0 failures |
+| **RESOLVED** | Songbird | 0 `#[async_trait]`, 0 finite `dyn`, 0 production mocks, 0 bare `#[allow]`, 0 blanket lint suppress, 0 hardcoded IPs/ports (W157), 0 unused deps, 0 `Box<dyn Error>` in production. BTSP relay wire-protocol aligned (W158). W159: deprecated constants/features/ports centralized. W160: BTSP NDJSON auto-detect wired into both Unix+TCP server accept loops (Phase 45c), `btsp.session.*` semantic mappings added — Wave 160, 7,387+ tests, 0 failures |
 | **RESOLVED** | ToadStool | RPITIT + enum dispatch (S203s), all 11 DEBT.md items resolved (S203t), edge compilation fixed + smart refactoring (S173), edge clippy clean 231→0 (S174), 7,818 lib tests |
 | **RESOLVED** | NestGate | ring eliminated, deprecated markers 114→0 (43w), 8,695 tests |
 | **RESOLVED** | petalTongue | reqwest+ring+rustls eliminated (v1.6.7), LocalHttpClient via hyper, UUI boundary cleanup |
