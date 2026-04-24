@@ -1,7 +1,7 @@
-# Upstream Gap Status — April 2026 (Updated)
+# Upstream Gap Status — April 2026 (Updated April 24)
 
-**Source**: primalSpring Phase 45 gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Post-pull review of barraCuda (Sprint 44g), NestGate (Session 43k), biomeOS (v3.08). Phase 45 gap #6 resolved. **Phase 45c**: BTSP default on all tiers — 12/13 capabilities authenticated after JSON-line relay fixes in ToadStool, barraCuda, coralReef, NestGate, Squirrel + loamSpine HandshakeComplete wire fix. barraCuda BTSP relay aligned (Sprint 44e) + wire fix (Sprint 44g: shutdown→flush). **Remaining 1 upstream: petalTongue (no BTSP server).** loamSpine BTSP RESOLVED (April 15 — `status:ok` discriminator). Guidestone 164/168.
+**Source**: primalSpring Phase 45c gap registry (`docs/PRIMAL_GAPS.md`)
+**Context**: Full NUCLEUS 12/12 alive, guidestone 167/171, **9/13 BTSP authenticated** (7/13 with clean seed). 6 primals fully converged on BTSP relay. 4 converging (Songbird, ToadStool, barraCuda, NestGate — all shipped fixes, residual relay verification mismatch). petalTongue and loamSpine RESOLVED. See `SOURDOUGH_BTSP_RELAY_PATTERN.md` for the extracted convergence standard.
 
 ---
 
@@ -102,7 +102,7 @@ Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 44g | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, BTSP wire fix (shutdown→flush), zero files >800L, 12-axis clean |
+| barraCuda | Sprint 44f | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, BTSP relay aligned, zero files >800L, 12-axis clean |
 | BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
 | coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | 0.9.16 | 1,503 pass | READY — BTSP HandshakeComplete wire fix (status:ok), Step 3→4 relay fixed, NDJSON + provider socket wired, stadial gate cleared |
