@@ -1,58 +1,47 @@
-# petalTongue — BTSP family_seed SOURDOUGH Alignment
+# petalTongue — BTSP family_seed Base64 Encoding Fix
 
 **Date:** April 24, 2026
-**From:** primalSpring Phase 45c audit finding
-**Status:** Resolved — root cause was misleading doc + missing trim, not encoding
+**From:** primalSpring Phase 45c audit finding (two rounds)
+**Status:** Resolved — base64 encoding now applied per corrected SOURDOUGH standard
 
 ---
 
 ## Audit Finding
 
-primalSpring reported `load_family_seed()` should base64-encode the raw
-hex `FAMILY_SEED` before sending to BearDog. Guidestone error: "BTSP
-verification failed: unknown."
+primalSpring reported `load_family_seed()` must base64-encode the raw hex
+`FAMILY_SEED` before sending to BearDog. BearDog's `btsp.session.create`
+handler explicitly base64-decodes the `family_seed` parameter. Sending raw
+hex caused HMAC mismatch (guidestone error: "BTSP verification failed: unknown").
 
-## Investigation
+## Resolution (Two Commits)
 
-Cross-referenced against two canonical documents:
+### Commit af2b2e8 (first pass — trim only)
+Initial investigation found a contradicting SOURDOUGH doc that said "pass raw,
+do NOT base64-encode." Applied trim fix and doc comment correction only.
 
-1. **SOURDOUGH_BTSP_RELAY_PATTERN.md** (v1.0.0, April 24, 2026):
-   > `FAMILY_SEED` from the environment is a hex string. Pass it to
-   > BearDog as-is. Do NOT hex-decode or base64-encode it. Just `trim()`
-   > whitespace and send the string.
-
-2. **BTSP_WIRE_CONVERGENCE_APR24_2026.md**:
-   > The `family_seed` parameter is the raw hex string from the
-   > `FAMILY_SEED` environment variable — NOT base64-encoded bytes.
-   > petalTongue — BearDog field alignment (Phase 45c). **PASS**
-
-Both barraCuda (Sprint 44h) and Songbird (Wave 167) **removed** base64
-encoding to converge. Adding it to petalTongue would break the standard.
-
-## Root Cause
-
-Two issues found in `load_family_seed()`:
-
-1. **Misleading doc comment** said "Load the base64-encoded family seed"
-   but the function returns the raw env string (which is correct per
-   SOURDOUGH). Comment was causing confusion in audit.
-
-2. **Missing trim()** — the function used `s.trim()` for the emptiness
-   check but returned the untrimmed string. When `FAMILY_SEED` is set
-   via shell command substitution (`export FAMILY_SEED=$(cmd)`), trailing
-   newlines can survive and cause HMAC byte mismatches.
+### Commit 96ae4b3 (second pass — base64 encoding)
+primalSpring confirmed the SOURDOUGH doc guidance was stale and has been
+corrected. BearDog explicitly base64-decodes the param. All 4 other relay
+primals (ToadStool, NestGate, barraCuda, Songbird) and all passing primals
+(Squirrel, coralReef, sweetGrass) base64-encode. Applied the encoding fix.
 
 ## Fix Applied
 
-- Doc comment updated: "Load the raw family seed string from environment"
-  with SOURDOUGH reference
-- Added `.map(|s| s.trim().to_owned())` before the emptiness filter
-- 3 new tests: raw hex passthrough, whitespace trimming, empty-after-trim
+`load_family_seed()` in `crates/petal-tongue-ipc/src/btsp/types.rs`:
+1. Read `BEARDOG_FAMILY_SEED` > `FAMILY_SEED` from env
+2. Trim whitespace
+3. Base64-encode the trimmed bytes via `base64::engine::general_purpose::STANDARD`
+4. Return the encoded string
 
-## Note for primalSpring
+6 tests updated to use raw string inputs and verify base64 output:
+- Priority: BEARDOG_FAMILY_SEED preferred over FAMILY_SEED
+- Fallback: FAMILY_SEED used when BEARDOG_FAMILY_SEED absent
+- Encoding: raw hex → correct base64 output
+- Trim: whitespace removed before encoding
+- Edge cases: empty-after-trim returns None, unset returns None
 
-The audit finding to base64-encode contradicts the SOURDOUGH standard and
-the convergence status of 9 primals. The "unknown" guidestone error may
-stem from whitespace in the env var (now fixed by trim) or from a
-different environmental factor. petalTongue does NOT base64-encode — this
-aligns with barraCuda, Songbird, coralReef, and all other converged primals.
+## Verification
+
+- `cargo clippy --workspace --all-targets --all-features -- -D warnings` → 0
+- `cargo test -p petal-tongue-ipc --all-features` → all 6 seed tests pass
+- `cargo check --target x86_64-apple-darwin` → pass
