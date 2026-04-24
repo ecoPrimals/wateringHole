@@ -37,7 +37,7 @@ These primals complete the full 4-step handshake through BearDog relay:
 - **Squirrel** — JSON-line BTSP relay, fast fallback.
 - **rhizoCrypt** — Full BTSP with key derivation.
 - **sweetGrass** — `session_id` in ServerHello, clean relay.
-- **loamSpine** — `status:ok` added to HandshakeComplete (Phase 45c).
+- **loamSpine** — `status:ok` added to HandshakeComplete (Phase 45c). Connection lifecycle fixed: persistent `ProviderConn`, no `shutdown()`, 10s read timeout (April 24).
 - **petalTongue** — BearDog field alignment (Phase 45c).
 - **BearDog** — Direct (no relay needed).
 

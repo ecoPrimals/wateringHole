@@ -105,7 +105,7 @@ Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
 | barraCuda | Sprint 44f | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, BTSP relay aligned, zero files >800L, 12-axis clean |
 | BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
 | coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
-| loamSpine | 0.9.16 | 1,503 pass | READY — BTSP HandshakeComplete wire fix (status:ok), Step 3→4 relay fixed, NDJSON + provider socket wired, stadial gate cleared |
+| loamSpine | 0.9.16 | 1,503 pass | READY — BTSP connection lifecycle fix (persistent conn, no shutdown, read timeout), HandshakeComplete wire fix (status:ok), Step 3→4 relay fixed, NDJSON + provider socket wired, stadial gate cleared |
 | rhizoCrypt | S45.1 | 35 pass | READY — first-byte `{` auto-detect, BTSP liveness passthrough |
 | Songbird | Wave 151 | up to date | READY — `ipc.resolve` capability-first with primal-name fallback, `ipc.resolve_by_name` alias |
 | NestGate | Session 43k | 11,816 pass (451 ignored) | READY — 47 UDS methods, 80% coverage, zero async-trait |
