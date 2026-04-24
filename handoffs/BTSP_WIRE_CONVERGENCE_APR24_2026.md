@@ -48,9 +48,14 @@ complete through BearDog. Each team has shipped fixes addressing the
 originally diagnosed issue — the residual failure is in the relay
 verification step.
 
-**Songbird** (Wave 165): Fixed `read_to_end()` → `read_json_response()`
-chunked reads. ServerHello still not reaching the client — likely a
-secondary issue in the SecurityRpcClient BearDog call path.
+**Songbird** (Wave 167): Three bugs fixed: (1) `resolve_family_seed_b64()` was
+base64-encoding the hex seed — BearDog expects raw hex per SOURDOUGH standard;
+(2) only checked `FAMILY_SEED` env var — added `BEARDOG_FAMILY_SEED` /
+`BIOMEOS_FAMILY_SEED` fallbacks; (3) when BearDog relay or seed resolution
+failed, error propagated via `?` without writing an error frame — client saw
+zero bytes. Now sends `{"error":"handshake_failed","reason":"..."}` for all
+failure modes. Previous fixes: W164 `read_to_end()` → `read_json_response()`,
+W162 `stream.shutdown()` removal.
 
 **ToadStool** (Session 177): Fixed `verified` bool check (was `status`
 string). Sends valid ServerHello with challenge. Full handshake
