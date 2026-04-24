@@ -182,6 +182,24 @@ Two files over 800L — smart refactored:
 
 Zero production `.rs` files over 800 lines across entire codebase.
 
+## Sprint 44g: BTSP Wire Fix + 12-Axis Deep Debt Audit (Apr 24)
+
+**BTSP wire fix**: `security_provider_rpc()` `writer.shutdown()` → `writer.flush()`.
+Shutdown sent TCP FIN to BearDog, killing the connection before the response
+arrived. `btsp.session.create` could succeed (race) but `btsp.session.verify`
+response was always lost, stalling handshakes after ChallengeResponse. Per
+`BTSP_WIRE_CONVERGENCE_APR24_2026.md` handoff from primalSpring Phase 45c.
+
+**12-axis deep debt audit clean**: zero files >800L (largest 775L), zero
+`.unwrap()` in production, 8 documented `.expect()` (2 runtime.rs + 6 ownership
+invariant Deref/Drop), 1 guarded unsafe (spirv passthrough), zero async-trait /
+Box\<dyn Error\> / Result\<T,String\>, all deps pure Rust, zero mocks/hardcoding
+in production, all quality gates green.
+
+### Files Modified
+
+- `crates/barracuda-core/src/ipc/btsp.rs` — `writer.shutdown()` → `writer.flush()`
+
 ## Remaining
 
 - `OdeRK45F64` batching for Richards PDE (airSpring-specific, low priority)
