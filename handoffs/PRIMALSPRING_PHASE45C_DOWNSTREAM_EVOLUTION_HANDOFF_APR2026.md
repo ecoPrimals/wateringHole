@@ -182,7 +182,7 @@ feed back into game science validation.
 |-------|------------|
 | BearDog requires BEARDOG_FAMILY_SEED env | Export before launch (see Step 2) |
 | petalTongue has no BTSP | Use Tier 1 plaintext for visualization |
-| ~~loamSpine incomplete handshake~~ | **RESOLVED** — `HandshakeComplete` now includes `"status":"ok"` discriminator |
+| ~~loamSpine incomplete handshake~~ | **RESOLVED** — `HandshakeComplete` now includes `"status":"ok"` discriminator. Connection lifecycle fixed: persistent `ProviderConn`, no `shutdown()`, 10s read timeout (April 24). |
 | 5 seed fingerprint mismatches | Expected — reharvest to plasmidBin resolves |
 
 ---
