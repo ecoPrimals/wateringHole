@@ -2,7 +2,7 @@
 
 **From:** primalSpring Phase 45c validation  
 **For:** songbird, toadStool, barraCuda, nestgate teams  
-**Status:** 164/168 guidestone (7/13 BTSP authenticated). 4 failures = upstream wire mismatches  
+**Status:** 164/168 guidestone (7/13 BTSP authenticated). 4 failures = upstream wire mismatches. **barraCuda RESOLVED** (Apr 24).  
 
 ## Context
 
@@ -76,7 +76,7 @@ echo '{"protocol":"btsp","version":1,"client_ephemeral_pub":"dGVzdA=="}' \
 
 ---
 
-### barraCuda — same `writer.shutdown()` issue
+### barraCuda — same `writer.shutdown()` issue — RESOLVED (Apr 24)
 
 **Error:** `BTSP: server closed connection (no HandshakeComplete)`
 
@@ -85,14 +85,12 @@ echo '{"protocol":"btsp","version":1,"client_ephemeral_pub":"dGVzdA=="}' \
 after sending each BearDog RPC. The `btsp.session.create` call may succeed
 (race condition) but `btsp.session.verify` response is lost.
 
-**Fix:** Remove `writer.shutdown().await` from `security_provider_rpc()`.
-The connection is already per-request (connect → write → read → drop), so
-shutdown is unnecessary:
+**Fix applied:** Replaced `writer.shutdown().await` with `writer.flush().await`
+in `security_provider_rpc()`. Flush ensures bytes reach BearDog without sending
+TCP FIN. Connection drops naturally when the function returns (after reading the
+response). Commit: barraCuda Sprint 44g.
 
-```rust
-// REMOVE:
-writer.shutdown().await.map_err(|e| { ... })?;
-```
+**Verified:** `cargo clippy -D warnings` clean, 28 btsp unit + 5 integration tests pass.
 
 ---
 
