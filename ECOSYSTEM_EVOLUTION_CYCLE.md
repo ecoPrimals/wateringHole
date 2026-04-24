@@ -227,7 +227,7 @@ resolved in parallel with composition schema work.
 | Severity | Primals | Debt |
 |----------|---------|------|
 | **RESOLVED** | BearDog | 0 `#[async_trait]`, 0 `Box<dyn Error>` in production (W56), serde_yaml eliminated, 14,786+ tests |
-| **RESOLVED** | Songbird | 0 `#[async_trait]`, 0 finite `dyn`, 0 production mocks, 0 bare `#[allow]`, 0 blanket lint suppress, 0 hardcoded IPs/ports, 0 unused deps, 0 `Box<dyn Error>` in production. W164: BTSP relay silent-fail fix. W165: `serde_yaml` → `serde_yaml_ng`, `hostname` consolidated to `gethostname` (5 crates), `futures` → `futures-util`, 7 zero-caller deprecated items removed, hardcoded bind addresses eliminated — Wave 165, 497+ tests, 0 failures |
+| **RESOLVED** | Songbird | 0 `#[async_trait]`, 0 finite `dyn`, 0 production mocks, 0 bare `#[allow]`, 0 blanket lint suppress, 0 hardcoded IPs/ports, 0 unused deps, 0 `Box<dyn Error>` in production. W164: BTSP relay silent-fail fix. W165: `serde_yaml` → `serde_yaml_ng`, `hostname` consolidated to `gethostname` (5 crates), `futures` → `futures-util`, 7 zero-caller deprecated items removed, hardcoded bind addresses eliminated. W166: root doc reconciliation (test count fix, dep status updated) — 7,387 lib tests, 0 failures |
 | **RESOLVED** | ToadStool | RPITIT + enum dispatch (S203s), all 11 DEBT.md items resolved (S203t), edge compilation fixed + smart refactoring (S173), edge clippy clean 231→0 (S174), 7,818 lib tests |
 | **RESOLVED** | NestGate | ring eliminated, deprecated markers 114→0 (43w), 8,695 tests |
 | **RESOLVED** | petalTongue | reqwest+ring+rustls eliminated (v1.6.7), LocalHttpClient via hyper, UUI boundary cleanup |
