@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: April 18, 2026
+**Last Updated**: April 24, 2026
 
 ---
 
@@ -92,7 +92,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 | Tool | Purpose |
 |------|---------|
-| **sourDough** | Starter culture - scaffolding, genomeBin tooling, ecosystem bootstrapping |
+| **sourDough** | Starter culture — the nascent primal. Absorbs converged patterns (BTSP relay, auto-detect, JSON-RPC, ecoBin) so future primals get them correct on first compile. Not dictated — extracted from what evolved primals converge on |
 
 ---
 
@@ -357,6 +357,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` — Two-seed genetic lineage architecture
 - `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` — Tower Atomic TLS guide
 - `btsp/BEARDOG_TECHNICAL_STACK.md` — BearDog cryptographic foundation
+- `BTSP_PROTOCOL_STANDARD.md` — BTSP handshake specification (v1.0)
+- `SOURDOUGH_BTSP_RELAY_PATTERN.md` — **Converged BTSP relay pattern** extracted from working primals. The standard sourDough will absorb for future primals
 
 ### Deployment & Composition (consolidated)
 - `DEPLOYMENT_AND_COMPOSITION.md` — Composition patterns, BYOB schema, niche deployment, gate/fieldMouse/sporeGarden classes, gen4 bridge, workspace layout
@@ -405,9 +407,15 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `airspring/AIRSPRING_COMPOSITION_GUIDANCE.md` — How airSpring composes
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes
 
+### BTSP Convergence
+- `SOURDOUGH_BTSP_RELAY_PATTERN.md` — **Start here for BTSP.** The relay pattern extracted from 9 converged primals
+- `BTSP_PROTOCOL_STANDARD.md` — Full protocol specification (v1.0)
+- `UPSTREAM_GAP_STATUS_APR20_2026.md` — Current upstream gap tracker (updated April 24)
+- `handoffs/BTSP_WIRE_CONVERGENCE_APR24_2026.md` — Per-primal convergence status and scoreboard
+
 ### Handoffs
 - `handoffs/*.md` — Active session handoffs (last 48 hours)
-- `handoffs/archive/` — Fossil record
+- `handoffs/archive/` — Fossil record (584 archived handoffs)
 
 ### Fossil Record
 - `fossilRecord/consolidated-apr2026/` — 49 original documents consolidated April 4, 2026

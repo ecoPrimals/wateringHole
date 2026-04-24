@@ -1,18 +1,67 @@
-# BTSP Wire Convergence — April 24, 2026
+# BTSP Wire Convergence — April 24, 2026 (Updated)
 
-**From:** primalSpring Phase 45c validation  
-**For:** songbird, toadStool, barraCuda, nestgate teams  
-**Status:** 164/168 guidestone (7/13 BTSP authenticated). 4 failures = upstream wire mismatches. **barraCuda RESOLVED** (Apr 24).  
+**From:** primalSpring Phase 45c validation
+**For:** All primal teams
+**Status:** 167/171 guidestone, 7/13 BTSP authenticated → target 13/13
 
-## Context
+## Current State
 
-primalSpring guidestone validates BTSP handshakes against all 13 NUCLEUS
-capabilities. After this round of upstream evolution, **7/13 authenticate
-correctly**. The remaining 4 fail due to specific wire-format issues in
-each primal's BearDog relay code.
+After two rounds of upstream evolution, **7 of 13** NUCLEUS capabilities
+authenticate via BTSP. The remaining 4 represent wire-format mismatches
+in the BearDog relay path, not missing implementations. All 4 teams have
+shipped fixes — the gap is narrowing through natural convergence.
 
-**Working reference implementation:** coralReef (`crates/coralreef-core/src/ipc/btsp.rs`)
-uses the correct BearDog wire format for `btsp.session.create` and `btsp.session.verify`.
+### BTSP Scoreboard
+
+| Capability | Primal | BTSP | Notes |
+|---|---|---|---|
+| security | BearDog | **PASS** | Direct connection (no relay) |
+| discovery | Songbird | FAIL | Silent-fail relay (Wave 165 shipped, residual issue) |
+| compute | ToadStool | FAIL | ServerHello works, full handshake incomplete |
+| tensor | barraCuda | FAIL | ServerHello works, full handshake incomplete |
+| shader | coralReef | **PASS** | Reference implementation |
+| storage | NestGate | FAIL | Error frames work (Session 45c), relay verification fails |
+| ai | Squirrel | **PASS** | Converged |
+| dag | rhizoCrypt | **PASS** | Converged |
+| commit | sweetGrass | **PASS** | Converged |
+| provenance | rhizoCrypt | **PASS** | Converged |
+| visualization | petalTongue | **PASS** | Converged |
+| ledger | loamSpine | **PASS** | Converged |
+| attribution | sweetGrass | **PASS** | Converged |
+
+### What Converged (9 of 13)
+
+These primals complete the full 4-step handshake through BearDog relay:
+
+- **coralReef** — Reference implementation. Earliest correct relay.
+- **Squirrel** — JSON-line BTSP relay, fast fallback.
+- **rhizoCrypt** — Full BTSP with key derivation.
+- **sweetGrass** — `session_id` in ServerHello, clean relay.
+- **loamSpine** — `status:ok` added to HandshakeComplete (Phase 45c).
+- **petalTongue** — BearDog field alignment (Phase 45c).
+- **BearDog** — Direct (no relay needed).
+
+### What's Still Converging (4 of 13)
+
+These primals send valid ServerHello but the full handshake doesn't
+complete through BearDog. Each team has shipped fixes addressing the
+originally diagnosed issue — the residual failure is in the relay
+verification step.
+
+**Songbird** (Wave 165): Fixed `read_to_end()` → `read_json_response()`
+chunked reads. ServerHello still not reaching the client — likely a
+secondary issue in the SecurityRpcClient BearDog call path.
+
+**ToadStool** (Session 177): Fixed `verified` bool check (was `status`
+string). Sends valid ServerHello with challenge. Full handshake
+fails intermittently during BearDog relay verification.
+
+**barraCuda** (Sprint 44g): Fixed `writer.shutdown()` → `flush()`. Sends
+valid ServerHello with challenge. Same relay verification pattern.
+
+**NestGate** (Session 45c): Fixed `family_seed_ref` → actual `family_seed`,
+added mode-aware error frames. Sends valid ServerHello, then returns
+"connection closed before complete line" during verification step.
 
 ## BearDog Wire Contract (ground truth)
 
@@ -20,13 +69,17 @@ uses the correct BearDog wire format for `btsp.session.create` and `btsp.session
 
 **Request:**
 ```json
-{"jsonrpc":"2.0","method":"btsp.session.create","params":{"family_seed":"<base64>"},"id":1}
+{"jsonrpc":"2.0","method":"btsp.session.create","params":{"family_seed":"<hex-string>"},"id":1}
 ```
 
 **Response:**
 ```json
 {"jsonrpc":"2.0","result":{"challenge":"<base64>","server_ephemeral_pub":"<base64>","session_token":"<uuid>"},"id":1}
 ```
+
+Note: `session_token` is the canonical field name. Some versions also
+accept `session_id`. The `family_seed` parameter is the raw hex string
+from the `FAMILY_SEED` environment variable — NOT base64-encoded bytes.
 
 ### `btsp.session.verify`
 
@@ -40,132 +93,66 @@ uses the correct BearDog wire format for `btsp.session.create` and `btsp.session
 {"jsonrpc":"2.0","result":{"verified":true,"session_id":"<uuid>","cipher":"null"},"id":2}
 ```
 
-**Response (failure):**
-```json
-{"jsonrpc":"2.0","result":{"verified":false,"error":"..."},"id":2}
-```
-
 Key: `verified` is a **bool**, not a string. There is no `status` field.
 
-## Per-Primal Issues and Fixes
+## Pattern to Converge On
 
-### Songbird — `writer.shutdown()` kills connection
+The working primals share a common relay pattern. See
+`SOURDOUGH_BTSP_RELAY_PATTERN.md` for the extracted standard.
 
-**Error:** `BTSP: server closed connection (no ServerHello)`
+**Key properties of a working relay:**
 
-**Root cause:** `SecurityRpcClient::call_direct()` in
-`crates/songbird-http-client/src/security_rpc_client/rpc.rs` calls
-`stream.shutdown().await` after writing the request to BearDog. This sends
-TCP FIN which causes BearDog to close the connection before responding.
+1. **First-line auto-detect**: Peek first byte of incoming connection.
+   `0x7B` (`{`) → read full line → check for `"protocol":"btsp"` →
+   route to handshake path. Otherwise → plain JSON-RPC.
 
-**Fix:** Remove `stream.shutdown().await` from `call_direct()`. Use a read
-timeout instead of write-half shutdown to signal "done writing":
+2. **BearDog relay is a function call, not a new connection per step.**
+   Connect to BearDog socket once, call `btsp.session.create`, read
+   response, call `btsp.session.verify`, read response. Do NOT
+   `shutdown()` or `close()` between calls.
 
-```rust
-// REMOVE this line:
-stream.shutdown().await?;
-// KEEP the read:
-stream.read_to_end(&mut buffer).await?;
-```
+3. **family_seed from env as raw string.** Read `FAMILY_SEED` env var,
+   pass it to BearDog as-is. Do NOT hex-decode or base64-encode it.
+   BearDog handles the encoding internally.
 
-**Verify:** After fix, `socat` test should return ServerHello:
-```
-echo '{"protocol":"btsp","version":1,"client_ephemeral_pub":"dGVzdA=="}' \
-  | socat - UNIX-CONNECT:$SOCKET
-```
+4. **JSON-aware socket reads.** BearDog keeps sockets open for multiple
+   requests. Use chunked reads that break on complete JSON — never
+   `read_to_end()` (hangs forever) or `stream.shutdown()` (kills the
+   connection).
 
----
-
-### barraCuda — same `writer.shutdown()` issue — RESOLVED (Apr 24)
-
-**Error:** `BTSP: server closed connection (no HandshakeComplete)`
-
-**Root cause:** `security_provider_rpc()` in
-`crates/barracuda-core/src/ipc/btsp.rs` calls `writer.shutdown().await`
-after sending each BearDog RPC. The `btsp.session.create` call may succeed
-(race condition) but `btsp.session.verify` response is lost.
-
-**Fix applied:** Replaced `writer.shutdown().await` with `writer.flush().await`
-in `security_provider_rpc()`. Flush ensures bytes reach BearDog without sending
-TCP FIN. Connection drops naturally when the function returns (after reading the
-response). Commit: barraCuda Sprint 44g.
-
-**Verified:** `cargo clippy -D warnings` clean, 28 btsp unit + 5 integration tests pass.
-
----
-
-### toadStool — expects `status` field instead of `verified`
-
-**Error:** `BTSP JSON-line protocol: missing string field status`
-
-**Root cause:** `accept_json_line_handshake()` in
-`crates/core/common/src/btsp/json_line.rs` line 310 reads:
-```rust
-let status = require_str_line(stream, verify_obj, "status").await?;
-```
-
-BearDog returns `{"verified": true, "session_id": "...", "cipher": "..."}`.
-There is no `status` field.
-
-**Fix:** Replace `status` check with `verified` check:
-```rust
-let verified = verify_obj.get("verified")
-    .and_then(|v| v.as_bool())
-    .unwrap_or(false);
-if !verified {
-    let reason = verify_obj.get("error")
-        .and_then(|v| v.as_str())
-        .unwrap_or("unknown");
-    let msg = format!("verify failed: {reason}");
-    let _ = send_error_line(stream, &msg).await;
-    return Err(BtspJsonLineError::Protocol(msg));
-}
-```
-
----
-
-### NestGate — `family_seed_ref` instead of `family_seed`
-
-**Error:** `BTSP: server closed connection (no ServerHello)`
-
-**Root cause:** `btsp_server_handshake/mod.rs` line 304 sends:
-```json
-{"family_seed_ref": "env:FAMILY_SEED", ...}
-```
-
-BearDog expects `family_seed` (actual base64 bytes), not `family_seed_ref`.
-BearDog's `btsp.session.create` fails silently when the required param is
-missing.
-
-**Fix:** Replace `family_seed_ref` with actual base64-encoded seed:
-```rust
-let family_seed = resolve_family_seed()?;  // base64-encoded
-json!({
-    "family_seed": family_seed,
-})
-```
-
-Also remove the extra `client_ephemeral_pub` and `challenge` params from
-the create call — BearDog generates those server-side.
-
----
+5. **Error frames match client framing.** If the client sent JSON-line,
+   errors must be JSON-line. If length-prefixed, errors must be
+   length-prefixed. Silent drops are never acceptable.
 
 ## Verification
 
-After fixing, each primal should pass this `socat` test (NUCLEUS running
-with `FAMILY_SEED` set):
+Each primal's BTSP relay should pass this socat test (NUCLEUS running):
 
 ```bash
 echo '{"protocol":"btsp","version":1,"client_ephemeral_pub":"dGVzdA=="}' \
-  | socat - UNIX-CONNECT:/run/user/$(id -u)/biomeos/${PRIMAL}-${FAMILY_ID}.sock
+  | socat -t3 - UNIX-CONNECT:/run/user/$(id -u)/biomeos/${PRIMAL}-${FAMILY_ID}.sock
 ```
 
-Expected: JSON line with `challenge`, `server_ephemeral_pub`, `version`.
-If empty or JSON-RPC error → fix not applied correctly.
+**Expected**: JSON line with `challenge`, `server_ephemeral_pub`, `version`.
+If empty → auto-detect not triggering. If error frame → BearDog relay failing.
 
-## Reference
+Full validation: `primalspring_guidestone` reports `BTSP authenticated` for
+the capability.
 
-- CoralReef BTSP relay: `crates/coralreef-core/src/ipc/btsp.rs`
-- primalSpring client handshake: `ecoPrimal/src/ipc/btsp_handshake.rs`
-- BearDog API: `btsp.session.create`, `btsp.session.verify`, `btsp.negotiate`
-- Previous handoff: `PRIMALSPRING_PHASE45C_BTSP_DEFAULT_UPSTREAM_HANDOFF_APR2026.md`
+## Reference Implementations
+
+| Implementation | Path | Status |
+|---|---|---|
+| coralReef relay | `crates/coralreef-core/src/ipc/btsp.rs` | Reference (earliest correct) |
+| sweetGrass relay | `crates/sweetgrass-ipc/src/btsp/` | Clean, includes session_id |
+| squirrel relay | `crates/squirrel-core/src/btsp/` | Converged |
+| primalSpring client | `ecoPrimal/src/ipc/btsp_handshake.rs` | Client-side reference |
+| BearDog API | `btsp.session.create`, `btsp.session.verify` | Ground truth |
+
+## Evolution Philosophy
+
+These primals are evolving toward convergence — not being dictated to.
+Each team identified and fixed their specific wire issues independently.
+The converged pattern (documented in `SOURDOUGH_BTSP_RELAY_PATTERN.md`)
+is extracted from what works, not prescribed in advance. Future primals
+(sourDough) will absorb this pattern as starter culture.
