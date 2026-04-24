@@ -315,7 +315,7 @@ primalspring_guidestone  # should show "BTSP authenticated" for your capability
 | petalTongue | yes | yes | yes | **converged** |
 | Songbird | yes | partial | no | converging (Wave 165) |
 | ToadStool | yes | partial | yes | converging (Session 177) |
-| barraCuda | yes | partial | yes | converging (Sprint 44g) |
+| barraCuda | yes | yes | yes | **converged** (Sprint 44h — single connection + raw seed) |
 | NestGate | yes | yes | yes | converging (Session 45c) |
 
 "Partial" relay means ServerHello succeeds but the verify round-trip

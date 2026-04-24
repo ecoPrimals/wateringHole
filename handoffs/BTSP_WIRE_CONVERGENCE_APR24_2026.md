@@ -18,7 +18,7 @@ shipped fixes — the gap is narrowing through natural convergence.
 | security | BearDog | **PASS** | Direct connection (no relay) |
 | discovery | Songbird | FAIL | Silent-fail relay (Wave 165 shipped, residual issue) |
 | compute | ToadStool | FAIL | ServerHello works, full handshake incomplete |
-| tensor | barraCuda | FAIL | ServerHello works, full handshake incomplete |
+| tensor | barraCuda | **PASS** | Sprint 44h: single BearDog connection + raw family_seed |
 | shader | coralReef | **PASS** | Reference implementation |
 | storage | NestGate | FAIL | Error frames work (Session 45c), relay verification fails |
 | ai | Squirrel | **PASS** | Converged |
@@ -56,8 +56,12 @@ secondary issue in the SecurityRpcClient BearDog call path.
 string). Sends valid ServerHello with challenge. Full handshake
 fails intermittently during BearDog relay verification.
 
-**barraCuda** (Sprint 44g): Fixed `writer.shutdown()` → `flush()`. Sends
-valid ServerHello with challenge. Same relay verification pattern.
+**barraCuda** (Sprint 44h): **CONVERGED.** Two root causes fixed: (1) per-call
+BearDog connections replaced with single persistent connection for both
+session.create and session.verify (BearDog associates session state with
+the socket). (2) `resolve_family_seed_b64()` was hex-decoding then base64-
+encoding the FAMILY_SEED — BearDog expects raw string. Replaced with
+`resolve_family_seed_raw()`. Sprint 44g (flush fix) was also necessary.
 
 **NestGate** (Session 45c): Fixed `family_seed_ref` → actual `family_seed`,
 added mode-aware error frames. Sends valid ServerHello, then returns
