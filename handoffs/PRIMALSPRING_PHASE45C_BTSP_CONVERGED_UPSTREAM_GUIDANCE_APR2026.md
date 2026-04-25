@@ -2,7 +2,7 @@
 
 **From**: primalSpring v0.9.17 (Phase 45c)
 **Date**: April 25, 2026
-**Status**: 171/171 guidestone ALL PASS, 13/13 BTSP authenticated
+**Status**: 187/187 guidestone ALL PASS, 13/13 BTSP authenticated, 8 cellular graphs BTSP-enforced. biomeOS v3.25 absorbed.
 
 ---
 
@@ -38,28 +38,24 @@ updated to reflect this as the permanent default posture.
 
 ## What Each Team Needs to Do
 
-### biomeOS — 2 remaining architectural gaps
+### biomeOS — ALL RESOLVED (v3.25, April 25, 2026)
 
-**1. Graph bootstrapping in UDS mode**
-biomeOS `graph.list` returns `[]` even with `--graphs-dir`. Without loaded graphs,
-the route table is empty — biomeOS can't resolve capabilities or route BTSP calls.
-**Fix**: auto-scan TOML files on startup, or wire `graph.load` as a local handler
-(not forwarded through the neural-api UDS). primalSpring workaround: `CompositionContext`
-bypasses biomeOS with direct routes.
+**1. Graph bootstrapping in UDS mode** — **RESOLVED**
+biomeOS v3.25 added `register_capabilities_from_graphs()`: scans all `.toml` graphs
+at startup (step 4c), extracts node capabilities and primal names, pre-registers
+expected socket paths in the NeuralRouter. `capability.call` now resolves primals
+even before live socket discovery runs.
 
-**2. biomeOS Tower Atomic participation**
-biomeOS starts with `BIOMEOS_BTSP_ENFORCE=0` (cleartext bootstrap) because it
-launches before BearDog. For biomeOS to participate in fully encrypted NUCLEUS:
-- Option A: biomeOS evolves BTSP client/server using BearDog delegation (same
-  pattern as all other primals — see `SOURDOUGH_BTSP_RELAY_PATTERN.md`)
-- Option B: biomeOS delegates all transport to Songbird mesh relay + BearDog BTSP
-- Either way, biomeOS needs to accept a post-Tower-ready signal to escalate from
-  cleartext to BTSP
+**2. BTSP runtime escalation** — **RESOLVED**
+biomeOS v3.25 added `btsp.escalate` JSON-RPC method: sets a runtime `AtomicBool`
+flag making all subsequent UDS connections require BTSP. One-way transition
+(cleartext → enforced). Called after Tower health is confirmed. `btsp.status`
+reports current enforcement state. `accept_connections` checks both static
+`btsp_enforce()` and runtime `btsp_escalated` on each accept.
 
-**3. `capability_registry.toml` tensor translations**
-barraCuda's 39 JSON-RPC methods have no `[translations.tensor]` entries. biomeOS
-needs these for `capability.call` routing of tensor operations. See
-`docs/BATCHGUARD_MIGRATION_GUIDE.md` for the full method catalog.
+**3. `capability_registry.toml` tensor translations** — **RESOLVED**
+Already present in v3.24: `[domains.tensor]` + `[translations.tensor]` with 33
+entries covering all barraCuda Sprint 44 methods.
 
 ### All primal teams — verify your BTSP posture
 

@@ -16,7 +16,7 @@ full NUCLEUS convergence achieved. The base composition is fully encrypted.
 
 | Metric | Phase 45 | Phase 45c (converged) |
 |--------|----------|-----------|
-| guidestone checks | 162/166 | **171/171 ALL PASS** |
+| guidestone checks | 162/166 | **187/187 ALL PASS** |
 | BTSP authenticated | 5/13 | **13/13** |
 | BTSP policy | tower_delegated OK | **cleartext = FAIL** |
 | Remaining upstream | 5 primals | **0** — all converged |
@@ -165,7 +165,7 @@ feed back into game science validation.
 
 | Spring | gS Level | Next Step |
 |--------|----------|-----------|
-| primalSpring | 4 (**171/171 live, 13/13 BTSP**) | Certifying base for all |
+| primalSpring | 4 (**187/187 live, 13/13 BTSP**) | Certifying base for all |
 | hotSpring | 5 (certified) | Template for others |
 | wetSpring | 3 (bare works) | Deploy NUCLEUS, begin Tier 2 |
 | ludoSpring | 3 (bare works) | Deploy NUCLEUS, begin Tier 2, petalTongue UI |
