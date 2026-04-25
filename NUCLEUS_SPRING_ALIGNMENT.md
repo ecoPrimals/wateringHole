@@ -57,7 +57,7 @@ which has a unique dual-tower ionic bridge pattern and is kept as a standalone g
 | **airSpring** | 0.10.0 | 0 | 1,364 | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
 | **groundSpring** | V124 | 0 | 1,050+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
 | **healthSpring** | V54 | **2** | 940+ | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_*` | **Pinned** — scaffold |
-| **ludoSpring** | V46 | **4** | 791 | Node + **Meta** + Nest | `downstream_manifest.toml` | **Active** — evolution partner |
+| **ludoSpring** | V53 | **4** | 817 | Node + **Meta** + Nest | `ludospring_cell.toml` (12-node pure composition) | **Active** — evolution partner |
 
 ### Key
 
@@ -257,7 +257,7 @@ ludoSpring composition (pure — ludospring ecoBin)
 **What ludoSpring evolves for the ecosystem**:
 - 60Hz composition budget → tests graph execution latency limits
 - Five-layer validation + guideStone → canonical Python→Rust→IPC composition→`ludospring_guidestone`
-- guideStone readiness 4 (V46): `ludospring_guidestone` three-tier — 20 bare + 15 IPC + 8 NUCLEUS cross-atomic (BearDog crypto, NestGate roundtrip, pipeline). BLAKE3 Property 3, protocol tolerance
+- guideStone readiness 4 (V53): `ludospring_guidestone` three-tier — 20 bare + 15 IPC + 8 NUCLEUS cross-atomic (BearDog crypto, NestGate roundtrip, pipeline). BLAKE3 Property 3, protocol tolerance. GAP-10 resolved: pure composition model
 - AI narration under latency → tests Squirrel real-time performance
 - Session lifecycle (create/save/restore/fork) → benefits any stateful composition
 - Composition drift detection → `composition_targets.json` golden chain

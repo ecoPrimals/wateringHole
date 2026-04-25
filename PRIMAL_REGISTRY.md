@@ -437,7 +437,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 84 (4529 tests, zero warnings, ecoBin cross-arch (cfg-gated Linux modules), Blackwell sovereign dispatch, QMD v5.0, f64 lowering all NVIDIA gens, Edition 2024) |
 | primalSpring | v0.9.17 Phase 45 (75 experiments, 17 tracks, 631 tests, 87/87 gates, guideStone Level 4, genomeBin v5.1 — 46 cross-arch binaries (6 targets, Tier 1 39/39), BTSP Phase 1–3, capability-based discovery, fragment-first composition, Edition 2024, zero warnings, zero unsafe) |
-| ludoSpring | V49 (100 experiments, 799 tests, guideStone readiness 4, live NUCLEUS validated: 54/54, deep debt resolved: capability-based discovery, MCP 15/15, typed IpcError in BTSP, base64 dep removed, handler tests extracted, cell graph ready, guideStone standard v1.2.0, genomeBin v5.1) |
+| ludoSpring | V53 (100 experiments, 817 tests, guideStone readiness 4, binary-to-composition evolution: spring binary removed from plasmidBin, game science via primal composition (12-node cell graph), GAP-10 resolved, 30 capabilities, MCP 15/15, typed IpcError, `is_skip_error` degradation, guideStone standard v1.2.0, genomeBin v5.1) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
@@ -545,7 +545,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Ludology, HCI, game science, procedural generation, interaction design  
 **Phase**: Domain Validation  
-**Status**: V30 — 82 experiments, 675 barracuda + 19 forge tests, 42 Python parity, 19 proptest, 11 IPC integration. Zero `#[allow()]`, zero `unsafe`, zero clippy warnings (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple: AGPL + ORC + CC-BY-SA-4.0), Edition 2024, MSRV 1.87. 91.27% line coverage (85% floor enforced). `thiserror` 2.x on all error types. MCP `tools.list`/`tools.call` (8 science tools). Optional `tarpc-ipc` feature. Handlers split into 5 domain submodules. UniBin 7 subcommands. CI pipeline. Deploy graph fragment. `GpuContext` + `TensorSession` wired behind `gpu` feature. `default-features = false` on barraCuda v0.3.7.
+**Status**: V53 — 100 experiments, 817 workspace tests, guideStone readiness 4. Binary-to-composition evolution: spring binary removed from plasmidBin (springs are NOT primals); game science served by composing primals via NUCLEUS cell graph (12 nodes, pure composition). 30 JSON-RPC capabilities. `game.tick` composite handler, `game.subscribe_interaction`, `game.poll_interaction` with `is_skip_error` graceful degradation. GAP-10 resolved. Zero `#[allow()]`, zero `unsafe`, zero clippy (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple), Edition 2024, MSRV 1.87. 91.27% line coverage (90% floor). `thiserror` 2.x. MCP 15/15 tools. Optional `tarpc-ipc` feature. `GpuContext` + `TensorSession` behind `gpu` feature. `default-features = false` on barraCuda v0.3.11.
 
 **Role**: ludoSpring validates the ecoPrimals pipeline against 13 foundational HCI/game science models — Fitts's law, Hick's law, Steering law, GOMS, Flow theory, Dynamic Difficulty, Four Keys to Fun, Engagement metrics, Perlin noise, Wave Function Collapse, L-systems, BSP trees, Tufte data-ink — proving faithful port from Python baselines to Rust CPU to GPU WGSL shaders. The validated math builds playable prototypes (Doom terminal, roguelike explorer) and cross-domain applications (field genomics provenance, medical access control, extraction shooter anti-cheat).
 
@@ -561,12 +561,13 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **Cross-Domain** | Provenance trio integration, extraction shooter fraud detection, field sample lifecycle, consent-gated medical access, cross-domain fraud unification |
 | **Health** | `health.check`, `health.liveness`, `health.readiness` |
 | **Niche** | `capability.list`, `lifecycle.status`, `capability.register`, `capability.deregister` |
-| **Experiments** | 82 across 22 tracks: core game systems, interaction models, PCG, metrics, benchmarks, external control groups, cross-spring (NCBI, NUCLEUS), RPGPT, Games@Home, provenance trio, extraction shooters, composable viz, lysogeny (6 open recreations), cross-spring provenance (5), RPGPT dialogue plane (9), game history revalidation (7) |
+| **Experiments** | 100 across 22+ tracks: core game systems, interaction models, PCG, metrics, benchmarks, external control groups, cross-spring (NCBI, NUCLEUS), RPGPT, Games@Home, provenance trio, extraction shooters, composable viz, lysogeny, cross-spring provenance, RPGPT dialogue plane, game history revalidation, NUCLEUS composition parity |
 | **Python Baselines** | 7 scripts, `combined_baselines.json` with `content_sha256`, 42 parity tests |
-| **Deployment** | UniBin (server/status/version), deploy graph, niche YAML, Neural API domain registration, 26 capabilities (24 game + 2 health) |
+| **Deployment** | Composition manifest in plasmidBin (no spring binary); 12-node `ludospring_cell.toml` cell graph; niche YAML; 30 capabilities (27 game + 3 infrastructure) served by composed primals |
 
-**IPC Methods**: 26 JSON-RPC 2.0 methods (game evaluation, procedural generation, telemetry, health, lifecycle, capability) over Unix sockets  
-**Dependencies**: barraCuda (CPU math, `default-features = false`), wgpu (optional `gpu` feature), serde, uuid. Zero C dependencies in application code.
+**IPC Methods**: 30 JSON-RPC 2.0 methods (game evaluation, procedural generation, telemetry, health, lifecycle, capability, game tick, interaction) over Unix sockets  
+**Dependencies**: barraCuda v0.3.11 (CPU math, `default-features = false`), wgpu (optional `gpu` feature), serde, uuid. Zero C dependencies in application code.
+**3-Tier Validation**: Python baselines → Rust port (spring binary, tier 2) → Primal composition (NUCLEUS cell graph, tier 3)
 
 **Participates In**: RPGPT (game science + session quality), Provenance Trio (rhizoCrypt DAG + loamSpine certs + sweetGrass braids), biomeOS (niche citizen), toadStool (GPU dispatch), coralReef (shader compilation), petalTongue (visualization), Squirrel (AI narration), metalForge (cross-substrate routing)
 
