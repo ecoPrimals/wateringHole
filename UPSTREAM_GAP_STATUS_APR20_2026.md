@@ -1,7 +1,7 @@
 # Upstream Gap Status — April 2026 (Updated April 24)
 
 **Source**: primalSpring Phase 45c gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Full NUCLEUS 12/12 alive, guidestone **171/171 ALL PASS**, **13/13 BTSP authenticated**.
+**Context**: Full NUCLEUS 12/12 alive, guidestone **187/187 ALL PASS**, **13/13 BTSP authenticated**, 8 cellular graphs BTSP-enforced. biomeOS v3.25 absorbed.
 All primals fully converged on BTSP relay. Zero upstream BTSP debt remaining.
 See `SOURDOUGH_BTSP_RELAY_PATTERN.md` for the extracted convergence standard.
 
@@ -55,7 +55,7 @@ See `SOURDOUGH_BTSP_RELAY_PATTERN.md` for the extracted convergence standard.
 ### ~~Critical — BTSP Server Handshake Gaps~~ — ALL RESOLVED (April 24, 2026)
 
 All primals now implement the 4-step BTSP server handshake. **13/13 capabilities
-BTSP-authenticated, 171/171 guidestone checks ALL PASS.**
+BTSP-authenticated, 187/187 guidestone checks ALL PASS.**
 
 | Gap | Owner | Resolution |
 |-----|-------|------------|
