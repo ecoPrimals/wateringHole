@@ -65,7 +65,7 @@ NUCLEUS deployments via the plasmidBin depot pattern:
 - **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V54 (guideStone Level 2), neuralSpring V134 (guideStone Level 2), wetSpring V147 (guideStone Level 3 — bare works)
 - **primalSpring guideStone**: `primalspring_guidestone` binary — 9-layer base composition certification (including seed provenance L0.5, BTSP escalation L1.5, cellular deployment L7). **187/187 ALL PASS** against live 12-primal NUCLEUS (**13/13 BTSP authenticated**, 8 cellular graphs BTSP-enforced). Base layer that domain guideStones inherit.
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
-- **Composing springs**: ludoSpring V48 (guideStone readiness 4 — live NUCLEUS validated: 54/54, **BTSP relay wired**, `interaction.poll` wired, cell graph ready, 798 tests, genomeBin v5.1)
+- **Composing springs**: ludoSpring V49 (guideStone readiness 4 — deep debt resolved: capability-based discovery, MCP 15/15, typed IpcError, base64 dep removed, 799 tests, genomeBin v5.1)
 
 Mountain season work continues for cross-primal protocols: ionic bond
 negotiation, BTSP Phase 3, compute.dispatch standardization.
@@ -255,7 +255,7 @@ Four springs have entered active NUCLEUS composition testing:
 | **wetSpring** V145 | **Delta** — Level 5 primal proof | Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES in niche.rs |
 | **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
 | **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
-| **ludoSpring** V48 | **Delta** — guideStone readiness 4, BTSP relay + cell graph | BTSP relay wired (`ipc/btsp.rs`), `interaction.poll` wired (petalTongue feedback loop), honest `push_scene`, cell graph ready (`ludospring_cell.toml`); 798 tests; live NUCLEUS validated (54/54); genomeBin v5.1 |
+| **ludoSpring** V49 | **Delta** — deep debt resolved, idiomatic Rust evolution | Handler tests extracted (mod.rs 818→169L), capability-based discovery, MCP 15/15, base64 dep removed (inline encoder), typed IpcError in btsp.rs, named constants; 799 tests; zero clippy; cell graph ready |
 
 **Common ecosystem blockers** across active delta springs:
 - Ionic bond negotiation (BearDog `crypto.sign_contract`) — hotSpring, healthSpring, wetSpring
