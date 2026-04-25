@@ -81,8 +81,8 @@ BTSP-authenticated, 171/171 guidestone checks ALL PASS.**
 
 | Gap | Owner | Notes |
 |-----|-------|-------|
-| `nucleus_complete.toml` missing NestGate streaming ops | biomeOS | Need `store_blob`, `retrieve_range`, `object.size`, `namespaces.list` (Session 43) |
-| `nucleus_complete.toml` missing barraCuda/coralReef as separate nodes | biomeOS | Only registered in `tower_atomic_bootstrap.toml` optional section; no `tensor.batch.submit` |
+| ~~`nucleus_complete.toml` missing NestGate streaming ops~~ | primalSpring | **RESOLVED** — Added `store_blob`, `retrieve_blob`, `retrieve_range`, `object.size`, `namespaces.list` |
+| ~~`nucleus_complete.toml` missing barraCuda/coralReef as separate nodes~~ | primalSpring | **RESOLVED** — Added `barracuda` (tensor) and `coralreef` (shader) as explicit graph nodes with `security_model = "btsp"` |
 | `capability_registry.toml` has no `[translations.tensor]` | biomeOS | barraCuda's 39 JSON-RPC methods (Sprint 44: +7 linalg/spectral/stats/tensor) have no translation entries |
 | `BatchGuard` migration guide | primalSpring | **DONE** — `docs/BATCHGUARD_MIGRATION_GUIDE.md` written; springs can adopt |
 | Graph `transport` metadata: no TCP/Tower fallback | biomeOS | Graphs say `uds_only` with no acknowledgment of Docker/TCP deployment mode |
