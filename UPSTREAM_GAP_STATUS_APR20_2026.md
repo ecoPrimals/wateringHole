@@ -1,7 +1,15 @@
 # Upstream Gap Status — April 2026 (Updated April 24)
 
 **Source**: primalSpring Phase 45c gap registry (`docs/PRIMAL_GAPS.md`)
-**Context**: Full NUCLEUS 12/12 alive, guidestone 167/171, **9/13 BTSP authenticated** (7/13 with clean seed). 6 primals fully converged on BTSP relay. 4 converging (Songbird, ToadStool, barraCuda, NestGate — all shipped fixes, residual relay verification mismatch). petalTongue and loamSpine RESOLVED. See `SOURDOUGH_BTSP_RELAY_PATTERN.md` for the extracted convergence standard.
+**Context**: Full NUCLEUS 12/12 alive, guidestone **171/171 ALL PASS**, **13/13 BTSP authenticated**.
+All primals fully converged on BTSP relay. Zero upstream BTSP debt remaining.
+See `SOURDOUGH_BTSP_RELAY_PATTERN.md` for the extracted convergence standard.
+
+> **April 24, 2026 — Full Convergence**: Final fixes resolved all remaining BTSP gaps:
+> Songbird Wave 169 (`SecurityRpcClient::new_direct()`), ToadStool post-handshake
+> connection persistence, loamSpine `btsp.negotiate` non-fatal fallback, petalTongue
+> BearDog field alignment. primalSpring `upgrade_btsp_clients()` two-pass strategy
+> covers BTSP-enforcing primals that reject cleartext probes.
 
 ---
 
@@ -44,31 +52,23 @@
 
 ## Remaining Open (13 items)
 
-### Critical — BTSP Server Handshake Gaps (NEW — April 2026)
+### ~~Critical — BTSP Server Handshake Gaps~~ — ALL RESOLVED (April 24, 2026)
 
-primalSpring's incremental BTSP escalation (Layer 1.5) exposed that 5 primals
-do not implement the 4-step BTSP server handshake (ClientHello → ServerHello →
-ChallengeResponse → HandshakeComplete) on their primary JSON-RPC sockets.
-These primals **pass cleartext validation** and **seed fingerprint verification** —
-their binaries are authentic. The gap is wire-level encrypted channel support.
+All primals now implement the 4-step BTSP server handshake. **13/13 capabilities
+BTSP-authenticated, 171/171 guidestone checks ALL PASS.**
 
-| Gap | Owner | Behavior | Impact |
-|-----|-------|----------|--------|
-| **BTSP server on security socket** | BearDog | Treats `ClientHello` as invalid JSON-RPC → Parse error → connection close | Tower security not BTSP-authenticated |
-| **BTSP server on discovery socket** | Songbird | HTTP-framed UDS, no BTSP listener | Tower discovery not BTSP-authenticated |
-| **BTSP server on DAG socket** | rhizoCrypt | No BTSP server implementation | Provenance DAG not BTSP-authenticated |
-| ~~**BTSP server on commit socket**~~ | sweetGrass | **RESOLVED** — first-line auto-detect: length-prefixed BTSP + JSON-line BTSP (primalSpring-compatible) + JSON-RPC three-way multiplexing. `perform_server_handshake_jsonline` with BearDog delegation. Step 3→4 relay fix: `btsp.session.negotiate` method name + `ServerHello.session_id` for primalSpring wire compat. | ~~Provenance commit not BTSP-authenticated~~ |
-| ~~**BTSP server on provenance socket**~~ | loamSpine | **RESOLVED** — NDJSON auto-detect in UDS accept loop; `perform_ndjson_server_handshake` compatible with primalSpring wire format. Provider-delegated crypto. | ~~Provenance attestation not BTSP-authenticated~~ |
-
-**What upstream needs to do**: Implement the 4-step handshake protocol as a pre-JSON-RPC
-negotiation layer. See `primalSpring/ecoPrimal/src/btsp/` for the client-side reference
-implementation. The handshake uses HMAC-SHA256 with `FAMILY_SEED` key derivation, followed
-by optional ChaCha20-Poly1305 encrypted channel. The simplest approach: detect first byte
-`{` with `"type":"ClientHello"` and branch to BTSP before JSON-RPC dispatch.
-
-**primalSpring workaround**: `upgrade_btsp_clients()` uses a reactive two-pass strategy —
-cleartext probe first, BTSP escalation only for capabilities that reject cleartext.
-Guidestone Layer 1.5 reports these as expected FAILs (5/166 checks).
+| Gap | Owner | Resolution |
+|-----|-------|------------|
+| ~~BTSP server on security socket~~ | BearDog | **RESOLVED** — direct BTSP connection (no relay needed) |
+| ~~BTSP server on discovery socket~~ | Songbird | **RESOLVED** — Wave 169: `SecurityRpcClient::new_direct()` in `bin_interface/server.rs` |
+| ~~BTSP server on DAG socket~~ | rhizoCrypt | **RESOLVED** — first-byte auto-detect, BTSP liveness passthrough |
+| ~~BTSP server on commit socket~~ | sweetGrass | **RESOLVED** — three-way multiplexing, `perform_server_handshake_jsonline` |
+| ~~BTSP server on provenance socket~~ | loamSpine | **RESOLVED** — NDJSON auto-detect, `btsp.negotiate` non-fatal fallback |
+| ~~BTSP server on compute socket~~ | ToadStool | **RESOLVED** — post-handshake connection persistence for NDJSON RPC |
+| ~~BTSP server on tensor socket~~ | barraCuda | **RESOLVED** — `writer.flush()` instead of `shutdown()`, full relay |
+| ~~BTSP server on storage socket~~ | NestGate | **RESOLVED** — `family_seed` base64 encoding, mode-aware error frames |
+| ~~BTSP server on shader socket~~ | coralReef | Reference implementation (earliest correct relay) |
+| ~~BTSP server on visualization socket~~ | petalTongue | **RESOLVED** — BearDog field alignment |
 
 ### High — Architectural
 

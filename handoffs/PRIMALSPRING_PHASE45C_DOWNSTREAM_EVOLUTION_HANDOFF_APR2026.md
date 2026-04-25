@@ -9,17 +9,17 @@
 ## What Changed Since Phase 45
 
 primalSpring's guidestone now expects **BTSP authentication on every capability**,
-not just Tower and Provenance tiers. 11/13 capabilities are BTSP-authenticated.
-The base composition is more secure — your compositions inherit this.
+not just Tower and Provenance tiers. **13/13 capabilities are BTSP-authenticated** —
+full NUCLEUS convergence achieved. The base composition is fully encrypted.
 
 ### Key Numbers
 
-| Metric | Phase 45 | Phase 45c |
+| Metric | Phase 45 | Phase 45c (converged) |
 |--------|----------|-----------|
-| guidestone checks | 162/166 | 163/168 |
-| BTSP authenticated | 5/13 | **11/13** |
+| guidestone checks | 162/166 | **171/171 ALL PASS** |
+| BTSP authenticated | 5/13 | **13/13** |
 | BTSP policy | tower_delegated OK | **cleartext = FAIL** |
-| Remaining upstream | 5 primals | **1 primal** (petalTongue) — loamSpine RESOLVED |
+| Remaining upstream | 5 primals | **0** — all converged |
 
 ### What This Means for You
 
@@ -165,7 +165,7 @@ feed back into game science validation.
 
 | Spring | gS Level | Next Step |
 |--------|----------|-----------|
-| primalSpring | 4 (163/168 live, 11/13 BTSP) | Certifying base for all |
+| primalSpring | 4 (**171/171 live, 13/13 BTSP**) | Certifying base for all |
 | hotSpring | 5 (certified) | Template for others |
 | wetSpring | 3 (bare works) | Deploy NUCLEUS, begin Tier 2 |
 | ludoSpring | 3 (bare works) | Deploy NUCLEUS, begin Tier 2, petalTongue UI |

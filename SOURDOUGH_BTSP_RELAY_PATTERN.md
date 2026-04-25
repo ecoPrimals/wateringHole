@@ -254,15 +254,27 @@ stream.shutdown().await?;
 stream.flush().await?;
 ```
 
-### family_seed as raw string
+### family_seed: base64-encode the raw env string
 
 `FAMILY_SEED` from the environment is a hex string (e.g.,
-`e06c1785c14c45983e...`). Pass it to BearDog as-is. Do NOT:
-- Hex-decode it to bytes
-- Base64-encode it
-- Add or strip encoding
+`e06c1785c14c45983e...`). BearDog's `btsp.session.create` API expects
+this value **base64-encoded**. BearDog base64-decodes the param to
+recover the original hex string bytes, then derives the handshake key
+from those bytes (matching what primalSpring's client does directly).
 
-Just `trim()` whitespace and send the string.
+```rust
+let raw = std::env::var("FAMILY_SEED")?;
+let family_seed_for_beardog = BASE64.encode(raw.trim().as_bytes());
+// Send family_seed_for_beardog in the btsp.session.create params
+```
+
+Do NOT:
+- Send the raw hex string without base64 encoding (HMAC will mismatch)
+- Hex-decode to 32 bytes then base64-encode (wrong input bytes)
+- Double-encode
+
+The encoding chain: `hex_string.as_bytes()` → `base64_encode()` → BearDog
+→ `base64_decode()` → same bytes → `HKDF` → handshake key.
 
 ### Error frames must match client framing
 
@@ -303,25 +315,24 @@ primalspring_guidestone  # should show "BTSP authenticated" for your capability
 
 ---
 
-## Convergence Status
+## Convergence Status (ALL CONVERGED — April 24, 2026)
 
 | Primal | Auto-Detect | BearDog Relay | Error Frames | Full Handshake |
 |---|---|---|---|---|
-| coralReef | yes | yes | yes | **converged** |
+| coralReef | yes | yes | yes | **converged** (reference) |
 | Squirrel | yes | yes | yes | **converged** |
 | rhizoCrypt | yes | yes | yes | **converged** |
 | sweetGrass | yes | yes | yes | **converged** |
-| loamSpine | yes | yes | yes | **converged** |
+| loamSpine | yes | yes | yes | **converged** (`btsp.negotiate` non-fatal) |
 | petalTongue | yes | yes | yes | **converged** |
-| Songbird | yes | partial | no | converging (Wave 165) |
-| ToadStool | yes | partial | yes | converging (Session 177) |
-| barraCuda | yes | yes | yes | **converged** (Sprint 44h — single connection + raw seed) |
-| NestGate | yes | yes | yes | converging (Session 45c) |
+| Songbird | yes | yes | yes | **converged** (Wave 169: `new_direct()`) |
+| ToadStool | yes | yes | yes | **converged** (post-handshake persistence) |
+| barraCuda | yes | yes | yes | **converged** (`flush()` not `shutdown()`) |
+| NestGate | yes | yes | yes | **converged** (Session 45c: base64 seed) |
 
-"Partial" relay means ServerHello succeeds but the verify round-trip
-to BearDog doesn't complete. The pattern above documents the full
-path — compare against the reference implementations to find the
-remaining mismatch.
+**13/13 capabilities BTSP-authenticated.** All primals now implement the
+full 4-step handshake through BearDog relay. The pattern documented above
+is the converged ecosystem standard.
 
 ---
 

@@ -1,75 +1,58 @@
-# BTSP Wire Convergence — April 24, 2026 (Updated)
+# BTSP Wire Convergence — April 24, 2026 (CONVERGED)
 
 **From:** primalSpring Phase 45c validation
 **For:** All primal teams
-**Status:** 167/171 guidestone, 7/13 BTSP authenticated → target 13/13
+**Status:** **171/171 guidestone ALL PASS, 13/13 BTSP authenticated — CONVERGED**
 
 ## Current State
 
-After two rounds of upstream evolution, **7 of 13** NUCLEUS capabilities
-authenticate via BTSP. The remaining 4 represent wire-format mismatches
-in the BearDog relay path, not missing implementations. All 4 teams have
-shipped fixes — the gap is narrowing through natural convergence.
+**Full NUCLEUS BTSP convergence achieved.** All 13 capabilities authenticate
+via BTSP. Every primal implements the 4-step handshake protocol through
+BearDog relay (or direct connection for BearDog itself). This represents
+the completion of the Phase 45c BTSP-default-everywhere goal.
 
-### BTSP Scoreboard
+### BTSP Scoreboard (Final)
 
-| Capability | Primal | BTSP | Notes |
+| Capability | Primal | BTSP | Resolution |
 |---|---|---|---|
 | security | BearDog | **PASS** | Direct connection (no relay) |
-| discovery | Songbird | FAIL | Silent-fail relay (Wave 165 shipped, residual issue) |
-| compute | ToadStool | FAIL | ServerHello works, full handshake incomplete |
-| tensor | barraCuda | **PASS** | Sprint 44h: single BearDog connection + raw family_seed |
+| discovery | Songbird | **PASS** | Wave 169: `SecurityRpcClient::new_direct()` |
+| compute | ToadStool | **PASS** | Post-handshake connection persistence |
+| tensor | barraCuda | **PASS** | `writer.flush()` instead of `shutdown()` |
 | shader | coralReef | **PASS** | Reference implementation |
-| storage | NestGate | FAIL | Error frames work (Session 45c), relay verification fails |
-| ai | Squirrel | **PASS** | Converged |
-| dag | rhizoCrypt | **PASS** | Converged |
-| commit | sweetGrass | **PASS** | Converged |
-| provenance | rhizoCrypt | **PASS** | Converged |
-| visualization | petalTongue | **PASS** | Converged |
-| ledger | loamSpine | **PASS** | Converged |
-| attribution | sweetGrass | **PASS** | Converged |
+| storage | NestGate | **PASS** | `family_seed` base64, mode-aware error frames |
+| ai | Squirrel | **PASS** | JSON-line BTSP relay |
+| dag | rhizoCrypt | **PASS** | First-byte auto-detect, key derivation |
+| commit | sweetGrass | **PASS** | Three-way multiplexing |
+| provenance | rhizoCrypt | **PASS** | BTSP liveness passthrough |
+| visualization | petalTongue | **PASS** | BearDog field alignment |
+| ledger | loamSpine | **PASS** | `btsp.negotiate` non-fatal fallback |
+| attribution | sweetGrass | **PASS** | `session_id` in ServerHello |
 
-### What Converged (9 of 13)
+### Convergence Timeline
 
-These primals complete the full 4-step handshake through BearDog relay:
+- **Phase 45c start**: 5/13 BTSP authenticated
+- **Round 1** (coralReef, Squirrel, rhizoCrypt, sweetGrass, BearDog): 7/13 → reference implementations
+- **Round 2** (loamSpine, petalTongue): 9/13 → `status:ok` in HandshakeComplete, BearDog field alignment
+- **Round 3** (Songbird Wave 169, ToadStool, barraCuda, NestGate): **13/13** → final wire-format fixes
 
-- **coralReef** — Reference implementation. Earliest correct relay.
-- **Squirrel** — JSON-line BTSP relay, fast fallback.
-- **rhizoCrypt** — Full BTSP with key derivation.
-- **sweetGrass** — `session_id` in ServerHello, clean relay.
-- **loamSpine** — `status:ok` added to HandshakeComplete (Phase 45c). Connection lifecycle fixed: persistent `ProviderConn`, no `shutdown()`, 10s read timeout (April 24).
-- **petalTongue** — BearDog field alignment (Phase 45c).
-- **BearDog** — Direct (no relay needed).
+### Key Fixes in Final Round
 
-### What's Still Converging (4 of 13)
+**Songbird** (Wave 169): Root cause was `SecurityRpcClient::new()` defaulting
+to Neural API mode — `btsp.session.create` was routed through `capability.call`
+which BearDog rejects. Fix: `SecurityRpcClient::new_direct()` at two call sites
+in `bin_interface/server.rs`.
 
-These primals send valid ServerHello but the full handshake doesn't
-complete through BearDog. Each team has shipped fixes addressing the
-originally diagnosed issue — the residual failure is in the relay
-verification step.
+**ToadStool**: Post-handshake connection was being dropped instead of kept alive
+for subsequent NDJSON RPC traffic. Fix: restructured control flow in
+`jsonrpc_server.rs` and `pure_jsonrpc/connection/unix.rs` to maintain connection.
 
-**Songbird** (Wave 168): Two root causes fixed: (1) `SecurityRpcClient::new()`
-defaulted to Neural API mode, wrapping `btsp.session.create` in `capability.call`
-— BearDog returned "Method not found". Changed to `new_direct()` since the
-crypto socket IS the BearDog socket. (2) `resolve_family_seed()` now base64-
-encodes the raw env string — BearDog base64-decodes `family_seed` internally.
-Previous: W167 error frames + env fallbacks, W164 chunked reads, W162
-`stream.shutdown()` removal.
+**loamSpine**: BearDog does not implement `btsp.negotiate` — loamSpine was treating
+"Method not found" as fatal and silently dropping the connection. Fix: non-fatal
+fallback to client's `preferred_cipher` in `handshake.rs`.
 
-**ToadStool** (Session 177): Fixed `verified` bool check (was `status`
-string). Sends valid ServerHello with challenge. Full handshake
-fails intermittently during BearDog relay verification.
-
-**barraCuda** (Sprint 44h): **CONVERGED.** Two root causes fixed: (1) per-call
-BearDog connections replaced with single persistent connection for both
-session.create and session.verify (BearDog associates session state with
-the socket). (2) `resolve_family_seed_b64()` was hex-decoding then base64-
-encoding the FAMILY_SEED — BearDog expects raw string. Replaced with
-`resolve_family_seed_raw()`. Sprint 44g (flush fix) was also necessary.
-
-**NestGate** (Session 45c): Fixed `family_seed_ref` → actual `family_seed`,
-added mode-aware error frames. Sends valid ServerHello, then returns
-"connection closed before complete line" during verification step.
+**NestGate** (Session 45c): `family_seed` base64 encoding aligned with BearDog wire
+contract. Mode-aware error frames ensure JSON-line errors for JSON-line clients.
 
 ## BearDog Wire Contract (ground truth)
 
@@ -86,8 +69,11 @@ added mode-aware error frames. Sends valid ServerHello, then returns
 ```
 
 Note: `session_token` is the canonical field name. Some versions also
-accept `session_id`. The `family_seed` parameter is the raw hex string
-from the `FAMILY_SEED` environment variable — NOT base64-encoded bytes.
+accept `session_id`. The `family_seed` parameter must be the
+**base64-encoded** raw hex string from the `FAMILY_SEED` environment
+variable: `BASE64.encode(env_var.trim().as_bytes())`. BearDog
+base64-decodes this to recover the hex bytes, then derives the
+handshake key from those bytes.
 
 ### `btsp.session.verify`
 
@@ -119,9 +105,12 @@ The working primals share a common relay pattern. See
    response, call `btsp.session.verify`, read response. Do NOT
    `shutdown()` or `close()` between calls.
 
-3. **family_seed from env as raw string.** Read `FAMILY_SEED` env var,
-   pass it to BearDog as-is. Do NOT hex-decode or base64-encode it.
-   BearDog handles the encoding internally.
+3. **family_seed: base64-encode the raw env string.** Read `FAMILY_SEED`
+   env var, `trim()` whitespace, then **base64-encode the raw bytes**
+   (`BASE64.encode(raw.as_bytes())`). BearDog base64-decodes this
+   parameter to recover the hex string bytes for HKDF. All passing
+   primals (Squirrel, coralReef, sweetGrass, rhizoCrypt) do this.
+   Sending the raw hex without base64 causes HMAC mismatch.
 
 4. **JSON-aware socket reads.** BearDog keeps sockets open for multiple
    requests. Use chunked reads that break on complete JSON — never
