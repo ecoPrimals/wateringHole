@@ -250,12 +250,52 @@ push_scene → poll_interaction → evaluate_flow → record_action → tick_hea
 
 ---
 
+## Part 6: Post-Absorption Findings (April 26)
+
+### Graph Schema Gap (report to biomeOS + primalSpring)
+
+primalSpring v2.0 cell graphs use `[[graph.nodes]]` with `name`, `binary`,
+`by_capability`. biomeOS deploy parser expects `[[nodes]]` with `id`,
+`[nodes.primal]`, `[nodes.operation]`. These are incompatible schemas:
+
+- biomeOS rejects `[[graph.nodes]]` ("missing field `id`")
+- primalSpring graphs don't have `[nodes.primal]` or `[nodes.operation]`
+- Graph `id` must use hyphens (no underscores), `coordination` must be lowercase
+
+**Resolution:** ludoSpring maintains biomeOS-compatible cell graph with `[[nodes]]`
+format alongside the primalSpring reference. Upstream should align on a single schema.
+
+### nucleus_launcher.sh CLI Fixes (3 patches applied to plasmidBin copy)
+
+1. **BearDog** needs `NODE_ID` and `BEARDOG_NODE_ID` env vars — added to launcher
+2. **Songbird** expects `--beardog-socket` (not `--security-socket`) — fixed
+3. **petalTongue** `server` mode doesn't accept `--socket` flag — use `PETALTONGUE_SOCKET` env var
+
+### PG-38 Verified Live
+
+- `activation.fitts(200, 40)` → Shannon ID=3.32 (default)
+- `activation.fitts(200, 40, variant: "fitts")` → Classic ID=3.32, MT=0.515s
+- `activation.hick(8)` → 3.0 bits (default log₂(n))
+- `activation.hick(8, include_no_choice: true)` → 3.17 bits (textbook log₂(n+1))
+
+### Live Composition Results
+
+- **18/20** capabilities verified through deployed primals
+- **0.6ms** for 5 barraCuda science calls (200x headroom under 60Hz)
+- `interaction.subscribe` + `interaction.poll` working on petalTongue
+- 7/12 primals with live UDS sockets via nucleus_launcher
+- `tensor.matmul` needs handle-based API (PG-29: use `tensor.matmul_inline`)
+- NestGate uses different health method than `health.liveness`
+
+---
+
 ## Validation
 
 - **817** workspace tests (Rust tier validation)
 - **100** experiments across 22+ tracks
-- **10/12** primals confirmed live in full NUCLEUS
+- **18/20** capabilities verified live through deployed primals
 - **guideStone readiness 4** (three-tier: bare + IPC + NUCLEUS)
 - **Zero** clippy warnings (pedantic + nursery)
 - **Zero** unsafe code
 - **Zero** TODO/FIXME in application code
+- **GAP-07** RESOLVED (loamSpine PG-33), **GAP-10** RESOLVED, **GAP-11** RESOLVED (PG-38)
