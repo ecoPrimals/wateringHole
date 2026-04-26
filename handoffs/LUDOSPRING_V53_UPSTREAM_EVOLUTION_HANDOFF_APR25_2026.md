@@ -268,7 +268,7 @@ format alongside the primalSpring reference. Upstream should align on a single s
 ### nucleus_launcher.sh CLI Fixes (3 patches applied to plasmidBin copy)
 
 1. **BearDog** needs `NODE_ID` and `BEARDOG_NODE_ID` env vars — added to launcher
-2. **Songbird** expects `--beardog-socket` (not `--security-socket`) — fixed
+2. **Songbird** accepts both `--security-socket` (canonical) and `--beardog-socket` (alias) — either works. `nucleus_launcher.sh` already passes `--security-socket` correctly
 3. **petalTongue** `server` mode doesn't accept `--socket` flag — use `PETALTONGUE_SOCKET` env var
 
 ### PG-38 Verified Live
