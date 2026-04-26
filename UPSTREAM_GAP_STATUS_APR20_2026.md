@@ -102,7 +102,7 @@ BTSP-authenticated, 187/187 guidestone checks ALL PASS.**
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 44f | 4,393+ pass | READY — 39 JSON-RPC methods, CPU tensor fallback, BTSP relay aligned, zero files >800L, 12-axis clean |
+| barraCuda | Sprint 44i | 4,393+ pass | LIVE — 39 JSON-RPC methods, BTSP 13/13 converged, primalSpring live-validated (fitts/hick/sigmoid/perlin confirmed Apr 26), zero open gaps |
 | BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
 | coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | 0.9.16 | 1,503 pass | READY — BTSP connection lifecycle fix (persistent conn, no shutdown, read timeout), HandshakeComplete wire fix (status:ok), Step 3→4 relay fixed, NDJSON + provider socket wired, stadial gate cleared |
