@@ -338,6 +338,33 @@ Full deep-debt audit across all requested dimensions:
 
 **Metrics**: 1,537 tests (was 1,535), ~49,600 lines, 0 clippy warnings, 0 fmt diffs
 
+### S48b Addendum: Deep Debt Audit + Clippy Clean (April 26)
+
+- **9 clippy warnings resolved** — `map_or`→`is_some_and`, borrowed expression deref, `doc_markdown` backticks on BTSP handshake types
+- **Hardcoded primal name removed** — "Squirrel AI coordination" → "AI coordination layer" in `niche.rs`
+- **Full audit across all dimensions** — confirms zero debt:
+
+| Dimension | Result |
+|-----------|--------|
+| Files >800L | **Zero** (largest: 724L) |
+| Unsafe code | **Zero** blocks, fns, impls |
+| TODO/FIXME/unimplemented! | **Zero** |
+| async-trait | **Zero** (native async) |
+| Arc\<Mutex\> | **Zero** (DashMap/RwLock) |
+| Box\<dyn Error\> in production | **Zero** |
+| unwrap/expect in production | **Zero** (all in `#[cfg(test)]`) |
+| Mocks in production | **Zero** (all behind `cfg(any(test, feature="test-utils"))`) |
+| External C deps | **Zero** (all pure Rust, `deny.toml` enforced) |
+| Hardcoded primal names | **Zero** (adapter modules correctly named) |
+| Lockfile ghosts (ring/sled/aws-lc/openssl) | **Zero** |
+
+- **Debris audit**: zero empty dirs, temp files, `.env`, stale scripts, orphan artifacts
+- `specs/archive/INTEGRATION_SPECIFICATION.md` retained as fossil record
+- `showcase/00-local-primal/04-sessions/Cargo.lock` confirmed intentional (standalone demo crate)
+- `graphs/rhizocrypt_deploy.toml` confirmed current (v0.14.0-dev, capability-based)
+
+**Metrics**: 1,537 tests, ~49,600 lines, 0 clippy warnings, 0 fmt diffs
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
