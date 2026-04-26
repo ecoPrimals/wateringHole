@@ -323,6 +323,21 @@ Full deep-debt audit across all requested dimensions:
 - **`v0.13.0` in `INTEGRATION_SPECIFICATION_V2.md`** — correct spec content (migration timeline), not stale
 - **Debris audit** — zero temp files, empty dirs, stale artifacts, .env, outdated TODOs in non-changelog docs; `specs/archive/` retained as fossil record; `showcase/04-sessions/Cargo.lock` intentional
 
+### S48: DID vs Raw Public Key Semantic Alignment (April 26)
+
+**Resolves primalSpring audit**: "DID vs raw `public_key` semantic alignment — currently uses raw keys where DID would be more portable" (Provenance Trio Minor Polish).
+
+**Findings**: Domain layer already well-aligned — `Did` newtype used consistently for `agent`, `owner`, `holder` across vertices, sessions, slices, events, and `SigningClient` public API. `CRYPTO_MODEL.md` §Wire Format Alignment already documented the gap as RESOLVED. Remaining edges were type-level enforcement and test hygiene.
+
+**Fixes**:
+- `Did::is_well_formed()` — validates `did:<method>:<id>` URI format at runtime
+- `Did::new()` `debug_assert` — catches non-`did:` strings in dev/test builds
+- Wire DTO tests updated to use `did:key:` format (was raw hex in `CryptoSignContractResponse` tests)
+- `request_attestation` now trace-logs the provider's `public_key` response for operational diagnostics
+- Lockfile audit: zero `ring`, `sled`, `aws-lc`, `openssl` ghost stanzas
+
+**Metrics**: 1,537 tests (was 1,535), ~49,600 lines, 0 clippy warnings, 0 fmt diffs
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
