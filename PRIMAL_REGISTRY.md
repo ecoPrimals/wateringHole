@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: April 24, 2026
+**Last Updated**: April 26, 2026
 
 ---
 
@@ -437,7 +437,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 84 (4529 tests, zero warnings, ecoBin cross-arch (cfg-gated Linux modules), Blackwell sovereign dispatch, QMD v5.0, f64 lowering all NVIDIA gens, Edition 2024) |
 | primalSpring | v0.9.17 Phase 45 (75 experiments, 17 tracks, 631 tests, 87/87 gates, guideStone Level 4, genomeBin v5.1 — 46 cross-arch binaries (6 targets, Tier 1 39/39), BTSP Phase 1–3, capability-based discovery, fragment-first composition, Edition 2024, zero warnings, zero unsafe) |
-| ludoSpring | V53 (100 experiments, 817 tests, guideStone readiness 4, binary-to-composition evolution: spring binary removed from plasmidBin, game science via primal composition (12-node cell graph), GAP-10 resolved, 30 capabilities, MCP 15/15, typed IpcError, `is_skip_error` degradation, guideStone standard v1.2.0, genomeBin v5.1) |
+| ludoSpring | V53 (100 experiments, 817 tests, guideStone readiness 4. Binary-to-composition + upstream absorption: cell graph v2.0, `cell_launcher.sh`, GAP-07/10/11 resolved (PG-33/PG-38), 18/20 capabilities live, game.tick 0.6ms. 30 capabilities, MCP 15/15, typed IpcError, `is_skip_error` degradation, guideStone v1.2.0, genomeBin v5.1) |
 
 ### airSpring - Ecological & Agricultural Sciences
 
@@ -545,7 +545,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Ludology, HCI, game science, procedural generation, interaction design  
 **Phase**: Domain Validation  
-**Status**: V53 — 100 experiments, 817 workspace tests, guideStone readiness 4. Binary-to-composition evolution: spring binary removed from plasmidBin (springs are NOT primals); game science served by composing primals via NUCLEUS cell graph (12 nodes, pure composition). 30 JSON-RPC capabilities. `game.tick` composite handler, `game.subscribe_interaction`, `game.poll_interaction` with `is_skip_error` graceful degradation. GAP-10 resolved. Zero `#[allow()]`, zero `unsafe`, zero clippy (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple), Edition 2024, MSRV 1.87. 91.27% line coverage (90% floor). `thiserror` 2.x. MCP 15/15 tools. Optional `tarpc-ipc` feature. `GpuContext` + `TensorSession` behind `gpu` feature. `default-features = false` on barraCuda v0.3.11.
+**Status**: V53 — 100 experiments, 817 workspace tests, guideStone readiness 4. Binary-to-composition + upstream absorption: cell graph v2.0 (synced from primalSpring 8bb90fb), `cell_launcher.sh` portable deployment, GAP-07 RESOLVED (loamSpine PG-33), GAP-10 RESOLVED, GAP-11 RESOLVED (PG-38 Fitts/Hick variant params). Live composition verified: 18/20 capabilities, game.tick in 0.6ms. 30 JSON-RPC capabilities. `game.tick` composite handler with `is_skip_error` graceful degradation. Zero `#[allow()]`, zero `unsafe`, zero clippy (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple), Edition 2024, MSRV 1.87. 91.27% line coverage (90% floor). `thiserror` 2.x. MCP 15/15 tools. barraCuda v0.3.11 (`default-features = false`).
 
 **Role**: ludoSpring validates the ecoPrimals pipeline against 13 foundational HCI/game science models — Fitts's law, Hick's law, Steering law, GOMS, Flow theory, Dynamic Difficulty, Four Keys to Fun, Engagement metrics, Perlin noise, Wave Function Collapse, L-systems, BSP trees, Tufte data-ink — proving faithful port from Python baselines to Rust CPU to GPU WGSL shaders. The validated math builds playable prototypes (Doom terminal, roguelike explorer) and cross-domain applications (field genomics provenance, medical access control, extraction shooter anti-cheat).
 

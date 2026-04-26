@@ -244,10 +244,10 @@ healthSpring domain layer
 **Atomics**: Tower + Node + **Meta** (Squirrel + petalTongue)
 
 ```
-ludoSpring composition (pure — ludospring ecoBin)
+ludoSpring composition (pure — no spring binary, 12-node cell graph v2.0)
     ├── coralReef: game WGSL (Fitts, Perlin, WFC)
     ├── toadStool: 60Hz tick-budget dispatch
-    ├── barraCuda: game math shaders (noise, procedural, physics)
+    ├── barraCuda: game math (Fitts/Hick PG-38 variant params, noise, physics)
     ├── Squirrel: AI Dungeon Master (narration, NPC dialogue)
     ├── petalTongue: scene rendering, TUI
     ├── NestGate: session persistence
@@ -257,7 +257,7 @@ ludoSpring composition (pure — ludospring ecoBin)
 **What ludoSpring evolves for the ecosystem**:
 - 60Hz composition budget → tests graph execution latency limits
 - Five-layer validation + guideStone → canonical Python→Rust→IPC composition→`ludospring_guidestone`
-- guideStone readiness 4 (V53): `ludospring_guidestone` three-tier — 20 bare + 15 IPC + 8 NUCLEUS cross-atomic (BearDog crypto, NestGate roundtrip, pipeline). BLAKE3 Property 3, protocol tolerance. GAP-10 resolved: pure composition model
+- guideStone readiness 4 (V53): `ludospring_guidestone` three-tier — 20 bare + 15 IPC + 8 NUCLEUS cross-atomic. GAP-07/10/11 resolved. Live: 18/20 capabilities, game.tick 0.6ms. `cell_launcher.sh` portable deployment
 - AI narration under latency → tests Squirrel real-time performance
 - Session lifecycle (create/save/restore/fork) → benefits any stateful composition
 - Composition drift detection → `composition_targets.json` golden chain
