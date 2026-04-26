@@ -410,7 +410,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### BTSP Convergence
 - `SOURDOUGH_BTSP_RELAY_PATTERN.md` — **Start here for BTSP.** The relay pattern extracted from 9 converged primals
 - `BTSP_PROTOCOL_STANDARD.md` — Full protocol specification (v1.0)
-- `UPSTREAM_GAP_STATUS_APR20_2026.md` — Current upstream gap tracker (updated April 24)
+- `fossilRecord/UPSTREAM_GAP_STATUS_APR20_2026.md` — Upstream gap tracker (biomeOS v3.28 absorbed, April 26)
 - `handoffs/BTSP_WIRE_CONVERGENCE_APR24_2026.md` — Per-primal convergence status and scoreboard
 
 ### Handoffs
