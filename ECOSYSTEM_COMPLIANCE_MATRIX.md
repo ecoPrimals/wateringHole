@@ -97,7 +97,7 @@ Per-item detail uses: **PASS** / **DEBT** / **N/A**.
 | bOS | biomeOS | Orchestrator / Neural API |
 | PT | petalTongue | Visualization |
 | RC | rhizoCrypt | Ephemeral DAG / Working Memory |
-| SG | sweetGrass | Data / Indexing |
+| SG | sweetGrass | Attribution / Provenance |
 | LS | LoamSpine | Mesh Networking |
 | BiC | bingoCube | Entropy / Game Math |
 | SD | sourDough | CLI Scaffolding |
