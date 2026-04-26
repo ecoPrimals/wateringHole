@@ -7,7 +7,7 @@
 [meta]
 primal = "primalspring"
 domain = "coordination"
-version = "0.8.0"
+version = "0.9.17"
 
 [[capabilities]]
 method = "coordination.validate_composition"
@@ -284,34 +284,25 @@ method = "bonding.status"
 description = "Query ionic bond contract status"
 domain = "bonding"
 
-[[capabilities]]
-method = "bonding.ledger.store"
-description = "Persist an ionic bond record (proposal/active/seal) — NestGate storage backend"
-domain = "bonding"
-
-[[capabilities]]
-method = "bonding.ledger.retrieve"
-description = "Retrieve an ionic bond record by contract ID and record type"
-domain = "bonding"
-
-[[capabilities]]
-method = "bonding.ledger.list"
-description = "List all ionic bond contracts for a family"
-domain = "bonding"
-
-# ── Cross-spring storage (NestGate streaming) ──
-
-[[capabilities]]
-method = "storage.retrieve_range"
-description = "Byte-range read of stored object (chunked streaming for large tensors/datasets)"
-domain = "storage"
-
-[[capabilities]]
-method = "storage.object.size"
-description = "Get object size without reading content (pre-flight for streaming)"
-domain = "storage"
-
 # ── Visualization capabilities (petalTongue) ──
+
+[[capabilities]]
+method = "visualization.render"
+description = "Top-level render dispatch to petalTongue"
+domain = "visualization"
+provider = "petaltongue"
+
+[[capabilities]]
+method = "visualization.render.scene"
+description = "Push a game/domain scene for live rendering"
+domain = "visualization"
+provider = "petaltongue"
+
+[[capabilities]]
+method = "visualization.render.stream"
+description = "Push streaming metric updates for live display"
+domain = "visualization"
+provider = "petaltongue"
 
 [[capabilities]]
 method = "visualization.render.dashboard"
@@ -323,6 +314,20 @@ provider = "petaltongue"
 method = "visualization.render.grammar"
 description = "Render a Grammar-of-Graphics expression via petalTongue"
 domain = "visualization"
+provider = "petaltongue"
+
+# ── Interaction capabilities (petalTongue) ──
+
+[[capabilities]]
+method = "interaction.subscribe"
+description = "Subscribe to user interaction events from petalTongue"
+domain = "interaction"
+provider = "petaltongue"
+
+[[capabilities]]
+method = "interaction.poll"
+description = "Poll for pending user interaction events"
+domain = "interaction"
 provider = "petaltongue"
 
 # ── Provenance trio (rhizoCrypt + loamSpine + sweetGrass) ──
@@ -400,7 +405,7 @@ domain = "dag"
 provider = "rhizocrypt"
 
 [[capabilities]]
-method = "dag.dehydrate"
+method = "dag.dehydration.trigger"
 description = "Dehydrate a session — produces wire summary with Merkle root and witnesses"
 domain = "dag"
 provider = "rhizocrypt"
