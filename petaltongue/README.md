@@ -2,7 +2,7 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: April 2, 2026 (sensory matrix, scene rendering, accessibility adapters)
+**Updated**: April 26, 2026 (PG-40 winit fix, live mode, texture/overlay roadmap, graphics node handoff)
 
 ---
 
