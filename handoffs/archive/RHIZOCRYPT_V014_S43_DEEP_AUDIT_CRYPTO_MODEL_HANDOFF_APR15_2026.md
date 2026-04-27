@@ -407,6 +407,19 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Metrics**: 1,367 tests, ~49,700 lines, 0 clippy warnings, 0 fmt diffs
 
+### S51: FAMILY_SEED Documentation + EOF Wire Format Test (April 27)
+
+**Requested by primalSpring convergence validation**: downstream teams hit "no family seed" BTSP rejection when using family-scoped sockets without `FAMILY_SEED` env var.
+
+**Documentation**:
+- `FAMILY_SEED` / `RHIZOCRYPT_FAMILY_SEED` documented in `docs/ENV_VARS.md` with encoding details (hex, base64, plain UTF-8)
+- Wire format note: `\n`-terminated requests required for newline-delimited JSON-RPC over UDS
+- Examples for `socat` and programmatic callers
+
+**New test**: `test_newline_eof_without_trailing_newline` — confirms EOF-without-`\n` still delivers response when caller shuts down write half (validates trio integration guide finding).
+
+**Metrics**: 1,368 tests (default), 1,541 (all-features), ~49,700 lines, 0 clippy warnings
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
