@@ -387,6 +387,26 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Metrics**: 1,540 tests (was 1,537), ~49,700 lines, 0 clippy warnings, 0 fmt diffs
 
+### S50: Deep Debt — UDS Test Extraction + Agnostic Service IDs (April 27)
+
+**Refactoring**: Extracted `uds.rs` test module (472 lines) to standalone `uds_tests.rs` via `#[path]`. Production code now 330 lines (was 802, the only file above the 800L threshold).
+
+**Hardcoded primal names cleaned in test fixtures**:
+- `bearDog1`/`bearDog2` → `signer-primary`/`signer-fallback` in `resolution.rs`
+- `beardog.sock` → `signing.sock` in `adapters/mod.rs`
+- Signing tracing message made agnostic (no provider name in logs)
+- `niche.rs` "Squirrel AI" → "AI coordination layer"
+- `loamspine_rpc.rs` section comment made agnostic
+
+**Full deep debt audit confirms** (post-S49 re-scan):
+- 0 files >800L (production), 0 unsafe, 0 TODO/FIXME, 0 async-trait, 0 Arc\<Mutex\>
+- 0 Box\<dyn Error\> in production, 0 clippy warnings
+- All mocks behind `cfg(any(test, feature="test-utils"))`
+- All `.clone()` hotspots in test code only
+- All deps pure Rust
+
+**Metrics**: 1,367 tests, ~49,700 lines, 0 clippy warnings, 0 fmt diffs
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
