@@ -1,7 +1,7 @@
 # Spring Composition Patterns — Absorbed Best Practices
 
-**Date**: April 13, 2026
-**From**: primalSpring v0.9.15 — Phase 43+: NUCLEUS Complete (12/12 ALIVE, 19/19 exp094 PASS), guideStone composition certification
+**Date**: April 27, 2026 (updated from April 13, 2026)
+**From**: primalSpring v0.9.17 — Phase 46: 187/187 ALL PASS, 13/13 BTSP authenticated, plasmidBin depot, cross-spring convergence analysis
 **For**: All springs evolving toward primal composition
 **License**: AGPL-3.0-or-later
 
@@ -466,6 +466,101 @@ wetSpring genomics).
 
 ---
 
+## §15: Cross-Spring Convergent Evolution Patterns (April 27, 2026)
+
+Analysis of all seven springs reveals patterns that emerged independently in
+multiple springs — confirming them as ecosystem-level truths, not local
+accidents.
+
+### Convergent Discovery: UDS Transport Portability
+
+**Discovered by**: hotSpring, wetSpring, healthSpring, neuralSpring (independently)
+
+All four delta springs hit the same issue: `socat` not installed on fresh
+systems blocks JSON-RPC over UDS. primalSpring resolved this with the
+`_uds_send()` fallback chain in `nucleus_composition_lib.sh`:
+
+```
+socat → python3 socket → nc (netcat)
+```
+
+**Absorbed by**: primalSpring `nucleus_composition_lib.sh` (PG-49 fix).
+All springs using the composition library inherit the fix.
+
+### Convergent Discovery: Missing Default Primals
+
+**Discovered by**: healthSpring, neuralSpring (independently)
+
+Both springs reported that `nestgate` and `squirrel` were missing from the
+default `PRIMAL_LIST` in `composition_nucleus.sh`. Their compositions failed
+on first run because storage and AI weren't started.
+
+**Absorbed by**: primalSpring `composition_nucleus.sh` — `nestgate` and
+`squirrel` added to defaults, plus `EXTRA_PRIMALS` env var for spring-specific
+additions (PG-50 fix).
+
+### Convergent Discovery: Temporal Heterogeneity
+
+**Discovered by**: ludoSpring (60Hz ticks), hotSpring (convergence), airSpring (seasonal)
+
+Three springs independently evolved different temporal models for their
+compositions. ludoSpring needs fixed-timestep game ticks. hotSpring needs
+convergence-driven iteration. airSpring uses seasonal time steps.
+
+**Absorbed by**: `COMPOSITION_TICK_MODEL_STANDARD.md` — standardizes five
+temporal classes (continuous, convergence, event, batch, seasonal) with
+deploy graph declarations.
+
+### Convergent Discovery: Cross-Spring Validation
+
+**Discovered by**: healthSpring (five-way bridge), neuralSpring (`cross_spring_*` methods)
+
+Two springs independently evolved cross-spring coordination — healthSpring
+as a routing hub, neuralSpring as explicit RPC methods. Both prove the
+same need: springs must validate across domain boundaries.
+
+**Absorbed by**: `CROSS_SPRING_COORDINATION_STANDARD.md` — standardizes
+`science.cross_spring_*` namespace, shared baselines, precision routing.
+
+### Convergent Discovery: Deploy Graph Schema Divergence
+
+**Discovered by**: ludoSpring (Format A: `[[graph.nodes]]`), primalSpring (Format A: `[[graph.node]]`)
+
+ludoSpring independently implemented deploy graph parsing without importing
+primalSpring. The `[[graph.nodes]]` vs `[[graph.node]]` divergence is a
+symptom of evolution without coupling — both are correct implementations
+of the same concept. biomeOS must accept both.
+
+**Status**: Documented in `DEPLOYMENT_AND_COMPOSITION.md` §BYOB. biomeOS
+ingestion handles both formats.
+
+### Spring Unique Contributions Matrix
+
+Each spring discovered something that only its domain could teach:
+
+| Spring | Unique Discovery | Ecosystem Impact |
+|--------|-----------------|-----------------|
+| **hotSpring** | guideStone Level 5 certification (308 named tolerances) | Tolerance discipline absorbed by all springs |
+| **wetSpring** | Largest validation surface (5,900+ checks, 44 GPU modules) | Scale-testing patterns for CI/CD |
+| **neuralSpring** | `science.cross_spring_*` RPC methods, provenance as RPC | Cross-spring coordination standard |
+| **healthSpring** | Five-way cross-spring bridge (84 IPC capabilities) | Multi-domain routing pattern |
+| **ludoSpring** | Session lifecycle IPC, deploy recipe without importing primalSpring | Garden composition independence |
+| **groundSpring** | `measurement.*` API surface, labeled dirty-data baselines | Uncertainty as a consumable service |
+| **airSpring** | ET₀ 8-method ensemble, proptest invariants on physical quantities | Systems validation (not just equations) |
+
+### Composition Absorption Status
+
+| Status | Springs |
+|--------|---------|
+| **Absorbed `nucleus_composition_lib.sh` + have `*_composition.sh`** | hotSpring, wetSpring, neuralSpring, healthSpring |
+| **Pre-absorption (pinned or needs more time)** | airSpring, groundSpring, ludoSpring |
+
+airSpring and groundSpring are pre-delta — they have high coverage (90%+)
+but no NUCLEUS wiring yet. ludoSpring evolved independently and has its own
+composition model (pure composition, 12-node cell graph, 60Hz tick).
+
+---
+
 ## Pattern Adoption Checklist
 
 When starting a composition evolution session on any spring:
@@ -484,7 +579,19 @@ When starting a composition evolution session on any spring:
 - [ ] Inference methods use `inference.*` namespace (not `ai.*`)
 - [ ] Composition parity validation (§13) using `primalspring::composition`
 - [ ] **NUCLEUS composition experiment (§14)** — live deployment parity test
+- [ ] Cross-spring coordination methods (§15) where domain-appropriate
+- [ ] Temporal model declaration in deploy graphs (`COMPOSITION_TICK_MODEL_STANDARD.md`)
 - [ ] Hand back gaps to primalSpring via wateringHole handoff
+
+---
+
+## Related Documents (added April 27, 2026)
+
+- `CROSS_SPRING_COORDINATION_STANDARD.md` — Cross-spring RPC patterns
+- `COMPOSITION_TICK_MODEL_STANDARD.md` — Heterogeneous temporal requirements
+- `INTERACTION_EVENT_TAXONOMY.md` — Unified interaction event taxonomy
+- `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — Trio wiring guide
+- `GARDEN_COMPOSITION_ONRAMP.md` — Garden product onramp
 
 ---
 

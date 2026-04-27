@@ -204,7 +204,7 @@ These standards define how every primal is built, packaged, and deployed.
 
 One binary per primal, multiple operational modes via subcommands. Professional CLI with `--help`, `--version`, and structured error messages. Every primal is a single executable named after itself.
 
-**Specification**: `UNIBIN_ARCHITECTURE_STANDARD.md`  
+**Specification**: `fossilRecord/UNIBIN_ARCHITECTURE_STANDARD.md` (ecoBin supersedes for new primals)
 **Technical paper**: `whitePaper/technical/UNIBIN_TECHNICAL_SPECIFICATION.md`
 
 ### ecoBin - Universal Portability Standard
@@ -218,7 +218,8 @@ ecoBin = UniBin + Pure Rust + Cross-Platform. Zero C dependencies in application
 
 genomeBin = ecoBin + deployment wrapper. Self-extracting archive that auto-detects the system, installs the correct binary, configures services, and validates health. One command installs on any system with zero manual configuration.
 
-**Specification**: `GENOMEBIN_ARCHITECTURE_STANDARD.md`  
+**Specification**: `fossilRecord/consolidated-apr2026/GENOMEBIN_ARCHITECTURE_STANDARD.md`
+**See also**: `ARTIFACT_AND_PACKAGING.md` (consolidated)
 **Technical paper**: `whitePaper/technical/GENOMEBIN_TECHNICAL_SPECIFICATION.md`
 
 ### The Evolutionary Ladder
@@ -243,11 +244,12 @@ JSON-RPC 2.0 over platform-agnostic transports. Capability-based discovery with 
 
 **Specification**: `PRIMAL_IPC_PROTOCOL.md`
 
-### Universal IPC Standard (v3.0)
+### Universal IPC Standard (v3.1 — consolidated)
 
 Behavioral specification for multi-transport IPC. Each primal discovers the best transport at runtime: Unix sockets on Linux/macOS, abstract sockets on Android, named pipes on Windows, TCP as universal fallback. No shared IPC crate - each primal owns its communication code.
 
-**Specification**: `UNIVERSAL_IPC_STANDARD_V3.md`
+**Specification**: `PRIMAL_IPC_PROTOCOL.md` (v3.1, consolidates prior Universal IPC v3)
+**Archived**: `archive/standards_v2/UNIVERSAL_IPC_STANDARD_V3.md`
 
 ### BirdSong Protocol
 
@@ -313,7 +315,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 - **Songbird + Songbird**: Cross-tower federation, multi-family routing
 
-**Detail**: `INTER_PRIMAL_INTERACTIONS.md`
+**Detail**: `fossilRecord/consolidated-apr2026/INTER_PRIMAL_INTERACTIONS.md`
 
 ---
 
@@ -340,14 +342,15 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **`PRIMAL_REGISTRY.md`** — Complete primal definitions and primitive catalogs.
 
 ### Architecture & Binary Standards
-- `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
 - `ECOBIN_ARCHITECTURE_STANDARD.md` — Universal portability (Pure Rust, cross-compile)
 - `ARTIFACT_AND_PACKAGING.md` — genomeBin, guideStone, validation artifacts, domain infrastructure
+- `fossilRecord/UNIBIN_ARCHITECTURE_STANDARD.md` — UniBin binary structure (archived — ecoBin supersedes)
 
 ### Communication & Discovery Standards
-- `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.0)
+- `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.1, consolidates Universal IPC v3)
 - `SEMANTIC_METHOD_NAMING_STANDARD.md` — `domain.verb` API naming conventions
 - `CAPABILITY_BASED_DISCOVERY_STANDARD.md` — Discover by capability domain, not primal name
+- `CAPABILITY_WIRE_STANDARD.md` — Wire format for `capabilities.list` / `identity.get` responses
 - `PRIMAL_SELF_KNOWLEDGE_STANDARD.md` — Self-knowledge boundaries, socket/env conventions
 - `PRIMAL_RESPONSIBILITY_MATRIX.md` — Ownership, domains, overstep boundaries
 - `ECOSYSTEM_COMPLIANCE_MATRIX.md` — Per-primal compliance across 9 tiers (A–F grades)
@@ -369,12 +372,14 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Strategy & Licensing (consolidated)
 - `LICENSING_AND_COPYLEFT.md` — Lysogeny protocol, scyBorg framework (AGPL + ORC + CC-BY-SA), symbiotic exceptions
-- `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture (memory-bound digital objects)
 - `UPSTREAM_CONTRIBUTIONS.md` — Standalone crates for crates.io from ecoPrimals
+- `fossilRecord/NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture (archived — see `whitePaper/gen4/economics/`)
+- `fossilRecord/consolidated-apr2026/SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` — scyBorg licensing via trio (archived — see `PROVENANCE_TRIO_INTEGRATION_GUIDE.md`)
 
 ### Spring Patterns (consolidated)
 - `SPRING_INTERACTION_PATTERNS.md` — Cross-evolution, interop, data flow, shader evolution, compute trio
-- `SPRING_COORDINATION_AND_VALIDATION.md` — Handoffs, provenance trio, validation assignments, inter-primal interactions
+- `SPRING_COORDINATION_AND_VALIDATION.md` — Handoffs, provenance trio, validation assignments
+- `CROSS_SPRING_COORDINATION_STANDARD.md` — **Cross-spring RPC patterns**: shared baselines, five-way bridge, precision routing, attribution flow, inter-primal interactions
 
 ### Leverage Guides (consolidated)
 - `LEVERAGE_GUIDES.md` — All 13 per-entity leverage patterns in one document
@@ -389,13 +394,23 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### Deployment Validation
 - `DEPLOYMENT_VALIDATION_STANDARD.md` — Runtime deployment contract: health triad, transport requirements, CLI convergence, per-primal fix paths. Driven by plasmidBin live validation.
 
+### Temporal & Interaction Models
+- `COMPOSITION_TICK_MODEL_STANDARD.md` — **Heterogeneous temporal requirements**: continuous (60Hz), convergence, event, batch, seasonal — how domains declare tick needs and biomeOS schedules them
+- `INTERACTION_EVENT_TAXONOMY.md` — **Unified interaction event taxonomy**: sensor → interaction → intent layers, modality-agnostic intents, accessibility-first design
+- `TOADSTOOL_SENSOR_CONTRACT.md` — `SensorEvent` IPC for petalTongue input (Layer 1 of interaction taxonomy)
+
+### Provenance & Attribution
+- `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — **Operational guide**: wiring rhizoCrypt + loamSpine + sweetGrass, commit flow, graceful degradation, known issues (PG-52), cross-spring provenance
+
+### Garden Onramp (gen4 Products)
+- `GARDEN_COMPOSITION_ONRAMP.md` — **Start here for gardens.** Binary fetch, deploy graphs, PrimalBridge, niche YAML, degradation, gap filing
+
 ### Other Standards
 - `LINK_INTEGRITY_STANDARD.md` — No dead links on public surfaces
 - `PRIMAL_EMOJI_STANDARD.md` — Canonical 2-emoji identities
 - `WORKSPACE_DEPENDENCY_STANDARD.md` — Workspace-root dependency pins
-- `TOADSTOOL_SENSOR_CONTRACT.md` — `SensorEvent` IPC for petalTongue input
-- `CONTENT_CONVERGENCE_EXPERIMENT_GUIDE.md` — sweetGrass content convergence experiment
-- `CONTENT_SIMILARITY_EXPERIMENT_GUIDE.md` — sweetGrass content similarity experiment
+- `fossilRecord/CONTENT_CONVERGENCE_EXPERIMENT_GUIDE.md` — sweetGrass content convergence experiment (archived)
+- `fossilRecord/CONTENT_SIMILARITY_EXPERIMENT_GUIDE.md` — sweetGrass content similarity experiment (archived)
 
 ### Ecosystem Evolution
 - `ECOSYSTEM_EVOLUTION_CYCLE.md` — **The water cycle**: how capabilities flow from primals → primalSpring → springs → gardens, seasonal phases, acceleration effect, current composition elevation priorities
