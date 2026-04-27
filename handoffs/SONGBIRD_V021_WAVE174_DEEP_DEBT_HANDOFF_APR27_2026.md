@@ -41,13 +41,13 @@ Replaced bare `"0.0.0.0:0"`, `"127.0.0.1"`, `"localhost"` string literals across
 
 - `cargo fmt --all` — clean
 - `cargo clippy --workspace -- -D warnings` — 0 warnings
-- `cargo test --workspace --lib` — 497 passed, 0 failed
+- `cargo test --workspace --lib` — 7,683 passed, 0 failed
 - `cargo check --workspace` — 0 errors
 
 ## Known Pre-existing Issues (NOT addressed)
 
 - Integration tests in `songbird-universal/tests/` reference `futures` crate (not `futures-util`) — pre-existing compilation errors in test-only integration test files
-- Test count is 497 lib (workspace `--lib`); full count including per-crate tests is higher
+- Test count is 7,683 across all crate lib test binaries (`cargo test --workspace --lib`)
 
 ## Files Modified
 
