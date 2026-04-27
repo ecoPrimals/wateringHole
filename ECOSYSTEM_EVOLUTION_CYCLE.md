@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
 **Date**: April 22, 2026
-**Version**: v1.1.0
+**Version**: v1.2.0
 **License**: AGPL-3.0-or-later
 
 ---
@@ -266,6 +266,89 @@ Four springs have entered active NUCLEUS composition testing:
 - barraCuda IPC rewiring — **spring-side gap** (barraCuda ecobin already exposes 32 JSON-RPC methods; springs must drop library dep and call over IPC) — all delta springs
 
 See `NUCLEUS_SPRING_ALIGNMENT.md` and `primalSpring/wateringHole/GRAPH_CONSOLIDATION_AND_NUCLEUS_DEPLOYMENT_HANDOFF_APR16_2026.md`.
+
+---
+
+---
+
+## Convergent Evolution Evidence (April 27, 2026)
+
+The seven springs' independent evolution produced convergent discoveries —
+patterns that emerged in multiple springs without coordination. This is
+strong evidence that the constrained evolution model (no shared crates,
+capability-based discovery, AGPL) is producing genuine fitness, not
+accidental similarity.
+
+### Confirmed Convergences
+
+| Pattern | Discovered By | Ecosystem Impact |
+|---------|---------------|-----------------|
+| UDS transport portability (socat fallback) | hotSpring, wetSpring, healthSpring, neuralSpring | `nucleus_composition_lib.sh` PG-49 fix |
+| Missing default primals (nestgate, squirrel) | healthSpring, neuralSpring | `composition_nucleus.sh` PG-50 fix |
+| Temporal heterogeneity (tick vs convergence vs seasonal) | ludoSpring, hotSpring, airSpring | `COMPOSITION_TICK_MODEL_STANDARD.md` |
+| Cross-spring validation patterns | healthSpring, neuralSpring | `CROSS_SPRING_COORDINATION_STANDARD.md` |
+| Deploy graph schema divergence | ludoSpring, primalSpring | biomeOS dual-format ingestion |
+
+### What This Proves
+
+The constrained evolution model produces compound returns:
+
+1. **Independent discovery validates patterns** — when two springs independently
+   evolve the same solution, the solution is correct for the ecosystem, not just
+   one domain.
+
+2. **Constraints drive convergence** — no shared crates forces each spring to
+   solve IPC independently, but the JSON-RPC + UDS + capability model ensures
+   they converge on composable solutions.
+
+3. **The water cycle works** — gaps discovered in springs (delta season) evaporate
+   up to primalSpring (spring season), which absorbs them into shared patterns
+   that flow back down. Each cycle is faster than the last.
+
+### Current Season Assessment
+
+**Delta season with evaporation peaks.** Four springs are actively composing
+(hotSpring, wetSpring, neuralSpring, healthSpring). ludoSpring has evolved
+independently into a pure composition model. airSpring and groundSpring are
+pre-delta with high coverage. The first garden (esotericWebb) is consuming
+compositions.
+
+The ecosystem is approaching the **garden season** — when enough primal
+compositions are proven that gen4 products can be built purely from IPC
+composition without spring-level validation. The `GARDEN_COMPOSITION_ONRAMP.md`
+standard is the bridge.
+
+---
+
+## Future Trajectory
+
+### Near Term (Weeks)
+
+- PG-52 provenance trio UDS empty response fix (upstream)
+- PG-48 petalTongue musl threading fix (upstream)
+- airSpring and groundSpring begin delta absorption
+- ludoSpring convergence with primalSpring graph schema
+
+### Short Term (Months)
+
+- `esotericWebb` ships as first garden product from composition
+- Cross-spring provenance braids in production
+- biomeOS adaptive tick scheduling (PathwayLearner observing frame budgets)
+- guideStone certification propagation: hotSpring L5 → all springs L4+
+
+### Medium Term (Quarters)
+
+- guideStone artifacts for all springs (deployable, self-validating binaries)
+- Gonzales drug repurposing pipeline operational (wetSpring → ADDRC screening)
+- Faculty network densification (Chuna lattice QCD, Gonzales pharmacology)
+- biomeOS cellular deployment as standard for all compositions
+
+### Longer Term (Years)
+
+- biomeOS evolves into sovereign OS substrate
+- Citizen Colossus: federated consumer compute via sunCloud economics
+- Novel Ferment Transcripts as economic primitives
+- Mobility edge crossed: isolated sovereign nodes begin to conduct
 
 ---
 
