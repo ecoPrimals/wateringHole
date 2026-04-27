@@ -30,7 +30,7 @@ gaps remain for primal teams.
 | **toadStool** | `compute.capabilities`, compute dispatch | **Validated** — 16 cores, distributed coordinator |
 | **petalTongue** | Scene push, interaction subscribe, sensor stream | **Validated** — works in server mode, proprioception limited |
 | **songbird** | Discovery, capability announcement | **Failed** — crypto provider discovery error (Gap 24) |
-| **rhizoCrypt** | `dag.session.create`, `dag.event.append` | **Degraded** — accepts UDS, returns empty (Gap 23) |
+| **rhizoCrypt** | `dag.session.create`, `dag.event.append` | **Resolved** (S49) — full JSON-RPC on UDS operational |
 | **loamSpine** | `spine.create`, `commit.*` | **Degraded** — same empty response pattern (Gap 23) |
 | **sweetGrass** | `braid.create`, `braid.commit` | **Resolved** — EOF-resilient `detect_protocol` + error responses on detection failure (v0.7.27, PG-52) |
 | **primalSpring** | Composition framework, guideStone standard, transport, discovery | **Core dependency** — v0.9.17 |
@@ -126,12 +126,12 @@ PATH="$(pwd)/tools:$PATH" ./tools/healthspring_composition_headless.sh
    `primalspring`-based client connects to non-BTSP primals. Transport
    should probe for BTSP capability before attempting handshake.
 
-2. **Provenance trio — shell composition UDS gap**: rhizoCrypt and
-   loamSpine still return empty (Gap 23 open). sweetGrass resolved:
-   `detect_protocol` EOF resilience + JSON-RPC error on detection failure
-   (PG-52). Shell callers must send `\n`-terminated requests and use
-   >=10s read timeouts for domain methods. Domain logic must still
-   degrade gracefully for unresolved primals.
+2. **Provenance trio — shell composition UDS gap**: **rhizoCrypt resolved**
+   (S49: full JSON-RPC on UDS). **sweetGrass resolved** (PG-52: EOF-resilient
+   detection). loamSpine still returns empty (Gap 23 open). Shell callers
+   must send `\n`-terminated requests and use >=10s read timeouts for
+   domain methods. Domain logic must still degrade gracefully for
+   unresolved primals.
 
 3. **socat is not universal**: Use `nc -q 1 -U` as fallback. healthSpring
    provides a shim script.

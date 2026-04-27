@@ -64,11 +64,11 @@ Discrete event types are now properly isolated:
 
 | Primal | Role | Status |
 |--------|------|--------|
-| rhizoCrypt | DAG working memory | UDS responds but `dag.session.create` returns empty (PG-06) |
+| rhizoCrypt | DAG working memory | PG-06/PG-52 **resolved** (S49) — `dag.session.create` and all data methods work on UDS; BTSP authenticated |
 | loamSpine | Permanent ledger | create/append/seal cycle works reliably |
 | sweetGrass | Provenance braids | braid recording works; PROV-O documents attach to state transitions; PG-52 UDS gap resolved (EOF-resilient detection, error responses) |
 
-Compositions degrade gracefully when rhizoCrypt is non-responsive.
+Compositions no longer degrade for DAG operations — rhizoCrypt UDS is fully operational.
 
 ### 6. petalTongue as Interactive Surface
 
@@ -120,11 +120,11 @@ provider registration hardening, orphan cleanup.
 **Request**: Agentic composition patterns for model-as-player scenarios.
 `inference.complete` reliability across provider chains.
 
-### rhizoCrypt (DAG) — Latest
-**What's working**: BTSP authenticated, UDS responds to health checks.
-**CRITICAL GAP (PG-06)**: `dag.session.create` returns empty response on UDS.
-Compositions degrade gracefully but lose DAG functionality.
-**Request**: Fix the session creation response format for UDS transport.
+### rhizoCrypt (DAG) — Latest (S50)
+**What's working**: BTSP authenticated, full JSON-RPC on UDS (all `dag.*` methods),
+capability discovery, deep debt clean (0 clippy, 0 unsafe, 167 `.rs` files, 1,540 tests).
+**PG-06/PG-52 RESOLVED** (S49): UDS now routes plain JSON-RPC to the full handler.
+UDS is filesystem-authenticated; BTSP Phase 2 handshake only for explicit clients.
 
 ### loamSpine (Ledger) — Latest
 **What's working**: BTSP authenticated, spine create/append/seal cycle,
@@ -207,7 +207,7 @@ cell_graph.toml → biomeOS deploy → Neural API → primals auto-discovered
 1. **Graph schema alignment**: primalSpring `[[graph.nodes]]` ↔ biomeOS `[[nodes]]`
 2. **Tick event relay**: `graph.tick_status` for continuous compositions
 3. **BTSP Phase 3**: Post-handshake encrypted channels (ChaCha20-Poly1305)
-4. **rhizoCrypt UDS**: PG-06 fix for DAG session creation
+4. ~~**rhizoCrypt UDS**: PG-06 fix for DAG session creation~~ **RESOLVED** (S49)
 
 ---
 
