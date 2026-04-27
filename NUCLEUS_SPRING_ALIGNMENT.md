@@ -1,10 +1,10 @@
-# NUCLEUS Spring Alignment — Phase 45
+# NUCLEUS Spring Alignment — Phase 46
 
 > This is the **canonical** inter-spring reference.
 > Local copies exist in `primalSpring/wateringHole/` for spring context.
 
-**Date**: April 20, 2026
-**From**: primalSpring v0.9.17 (Phase 45)
+**Date**: April 27, 2026
+**From**: primalSpring v0.9.17+ (Phase 46 — Composition Template)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -51,7 +51,7 @@ which has a unique dual-tower ionic bridge pattern and is kept as a standalone g
 
 | Spring | Version | gS | Tests | Primary Atomics | Proto-Nucleate | Status |
 |--------|---------|------|-------|-----------------|----------------|--------|
-| **hotSpring** | 0.6.32 | **5** | ~985 | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` | **Pinned** — certified |
+| **hotSpring** | 0.6.32 | **5** | 993 | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt complete |
 | **neuralSpring** | V134 | **2** | 1,403+ | **Node** + Meta | `downstream_manifest.toml` | **Pinned** — scaffold |
 | **wetSpring** | V147 | **3** | 1,902+ | Node + **Nest** + Meta | `downstream_manifest.toml` | **Pinned** — bare works |
 | **airSpring** | 0.10.0 | 0 | 1,364 | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
@@ -62,8 +62,8 @@ which has a unique dual-tower ionic bridge pattern and is kept as a standalone g
 ### Key
 
 - **Bold atomic** = primary domain stress point
-- **Pinned** = at current guideStone level; science evolution continues independently; composition patterns absorb primalSpring v0.9.17 when ready
-- **Active** = focused evolution bandwidth with primalSpring + esotericWebb
+- **Pinned** = at current guideStone level; science evolution continues independently
+- **Active** = focused evolution bandwidth; Phase 46 composition patterns absorbed
 
 ---
 
@@ -290,15 +290,41 @@ spring's composition more capable.
 
 ---
 
-## Spring Pinning (April 20, 2026)
+## Phase 46 Composition Evolution (April 27, 2026)
 
-hotSpring, neuralSpring, wetSpring, airSpring, groundSpring, and healthSpring
-are pinned at their current guideStone levels. This means:
+primalSpring extracted a reusable NUCLEUS composition library (`tools/nucleus_composition_lib.sh`, 41 functions).
+Each spring receives a lane assignment for domain-specific exploration:
+
+| Spring | Lane | Template Script | Status |
+|--------|------|----------------|--------|
+| **hotSpring** | Event-Driven Computation + DAG Memoization | `tools/hotspring_composition.sh` | **ABSORBED** — 5 domain hooks, async tick, DAG, braids, compute dispatch |
+| **healthSpring** | Ionic-Fenced Clinical Composition | `tools/healthspring_composition.sh` | Absorbed |
+| primalSpring | Composition Template Author | `tools/composition_template.sh` | Reference implementation |
+| Other springs | Per-lane assignment | Copy template, fill hooks | Available |
+
+### hotSpring Deep Debt Evolution (April 27, 2026)
+
+Alongside Phase 46, hotSpring completed a deep debt cleanup targeting modern idiomatic Rust:
+
+- **Capability-based primal discovery**: `composition.rs` derives all primal requirements from `niche::DEPENDENCIES` (single source of truth). Hardcoded name→domain maps eliminated.
+- **Deprecated named accessors**: `primal_bridge.rs` named methods (`toadstool()`, `beardog()`, etc.) deprecated with `#[deprecated]`; all 8 production call sites migrated to `by_domain()`.
+- **Data-driven aliases**: `PRIMAL_ALIASES` constant replaces hardcoded fallback checks.
+- **Smart file refactoring**: `rhmc.rs` (989L) → `rhmc/mod.rs` (802L) + `rhmc/remez.rs` (190L). `nuclear_eos_helpers.rs` (978L) → `mod.rs` (824L) + `objectives.rs` (174L).
+- **Pre-existing compile fixes**: `DiscoveredDevice` API migration in `nuclear_eos_l2_*` binaries.
+- **Result**: 993/993 lib tests pass, zero compilation errors, zero `dyn` dispatch on production paths.
+
+---
+
+## Spring Pinning (April 27, 2026)
+
+neuralSpring, wetSpring, airSpring, groundSpring, and healthSpring
+are pinned at their current guideStone levels. hotSpring is **active**.
 
 - **Their science evolution continues independently** — they keep building experiments
-- **They absorb primalSpring v0.9.17 patterns when ready** — no urgency
+- **Phase 46 composition template is available for all springs** — copy template, fill domain hooks
 - **Path dependency fixes from Phase 45 are already applied** (airSpring, groundSpring, healthSpring, wetSpring, hotSpring)
-- **Evolution bandwidth is focused on**: primalSpring (NUCLEUS certification) + ludoSpring (game science) + esotericWebb (garden composition)
+- **hotSpring has completed Phase 46 absorption + deep debt** — patterns documented for sibling adoption
+- **Evolution bandwidth is focused on**: primalSpring (NUCLEUS certification) + ludoSpring (game science) + esotericWebb (garden composition) + hotSpring (event-driven computation)
 
 Each pinned spring can unpause at any time by:
 1. Pulling latest primalSpring and plasmidBin
