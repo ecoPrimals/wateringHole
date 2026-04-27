@@ -88,7 +88,7 @@ Each lane is complementary — discoveries in one inform all others.
 ### Known Upstream Gaps (Composition-Discovered)
 | Gap | Primal | Impact | Status |
 |-----|--------|--------|--------|
-| PG-06 | rhizoCrypt | `dag.session.create` returns empty on UDS | Composition degrades gracefully |
+| PG-06 | rhizoCrypt | ~~`dag.session.create` returns empty on UDS~~ **RESOLVED** (S49) | Full JSON-RPC on UDS operational |
 | PG-40 | petalTongue | winit requires main thread for live GUI | Workaround: `composition_nucleus.sh` starts petal in live mode |
 | — | petalTongue | `xdotool` synthetic events don't propagate through egui/winit | Real user input works; test automation limited |
 | — | biomeOS | Graph schema diverges from primalSpring `[[graph.nodes]]` | ludoSpring maintains compatible cell graph |

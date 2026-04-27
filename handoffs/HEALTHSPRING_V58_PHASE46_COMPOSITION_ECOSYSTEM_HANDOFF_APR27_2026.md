@@ -32,7 +32,7 @@ using locally-built binaries via `composition_nucleus.sh`. Results:
 
 | Component | Issue | Impact |
 |-----------|-------|--------|
-| **Provenance trio** (rhizoCrypt, loamSpine, sweetGrass) | Accept UDS connections, return empty JSON-RPC responses | DAG, ledger, braid offline for compositions. **sweetGrass resolved** (PG-52: EOF-resilient detection, error responses). rhizoCrypt/loamSpine still open |
+| **Provenance trio** (rhizoCrypt, loamSpine, sweetGrass) | Accept UDS connections, return empty JSON-RPC responses | **rhizoCrypt resolved** (S49: PG-06/PG-52 — full JSON-RPC on UDS). **sweetGrass resolved** (PG-52). loamSpine still open |
 | **Songbird** | `Failed to discover crypto provider` — can't find beardog | No dynamic discovery (symlink fallback works) |
 | **petalTongue proprioception** | No frame_rate in server mode | Monitoring degraded in headless |
 | **socat** | Not installed; lib requires it | Created `nc -U` shim |
@@ -42,10 +42,10 @@ using locally-built binaries via `composition_nucleus.sh`. Results:
 ## Upstream Asks
 
 ### For primalSpring
-1. **Provenance trio startup**: Investigate why rhizoCrypt and loamSpine
-   accept UDS but don't respond to JSON-RPC. **sweetGrass resolved** (PG-52:
-   EOF-resilient `detect_protocol`, error responses on failure). rhizoCrypt
-   and loamSpine remain open — possible causes: BTSP negotiation, nestgate
+1. **Provenance trio startup**: **rhizoCrypt resolved** (S49: routed plain
+   JSON-RPC to full handler on UDS). **sweetGrass resolved** (PG-52:
+   EOF-resilient `detect_protocol`, error responses on failure). loamSpine
+   remains open — possible causes: BTSP negotiation, nestgate
    dependency, different server subcommand, or startup delay.
 2. **socat fallback**: Add `nc -U` detection to `nucleus_composition_lib.sh`
    or document socat as a required dependency.
@@ -117,7 +117,7 @@ healthspring_composition_headless.sh
       ├── Tier 2: petalTongue scene push (1/1)
       ├── Tier 2: bearDog crypto.sign (1/1)
       ├── Tier 2: toadStool compute (1/1)
-      ├── Tier 2: provenance trio (1/3 — sweetGrass resolved PG-52; rhizoCrypt + loamSpine open)
+      ├── Tier 2: provenance trio (2/3 — sweetGrass + rhizoCrypt resolved; loamSpine open)
       ├── Tier 2: proprioception (0/1 — no frame_rate)
       └── composition_teardown
 ```
