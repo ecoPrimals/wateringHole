@@ -66,7 +66,7 @@ Discrete event types are now properly isolated:
 |--------|------|--------|
 | rhizoCrypt | DAG working memory | UDS responds but `dag.session.create` returns empty (PG-06) |
 | loamSpine | Permanent ledger | create/append/seal cycle works reliably |
-| sweetGrass | Provenance braids | braid recording works; PROV-O documents attach to state transitions |
+| sweetGrass | Provenance braids | braid recording works; PROV-O documents attach to state transitions; PG-52 UDS gap resolved (EOF-resilient detection, error responses) |
 
 Compositions degrade gracefully when rhizoCrypt is non-responsive.
 

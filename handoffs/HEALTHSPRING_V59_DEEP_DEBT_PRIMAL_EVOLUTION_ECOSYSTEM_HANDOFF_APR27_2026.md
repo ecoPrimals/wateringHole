@@ -32,7 +32,7 @@ gaps remain for primal teams.
 | **songbird** | Discovery, capability announcement | **Failed** — crypto provider discovery error (Gap 24) |
 | **rhizoCrypt** | `dag.session.create`, `dag.event.append` | **Degraded** — accepts UDS, returns empty (Gap 23) |
 | **loamSpine** | `spine.create`, `commit.*` | **Degraded** — same empty response pattern (Gap 23) |
-| **sweetGrass** | `braid.create`, `braid.commit` | **Degraded** — same empty response pattern (Gap 23) |
+| **sweetGrass** | `braid.create`, `braid.commit` | **Resolved** — EOF-resilient `detect_protocol` + error responses on detection failure (v0.7.27, PG-52) |
 | **primalSpring** | Composition framework, guideStone standard, transport, discovery | **Core dependency** — v0.9.17 |
 
 ### Evolution Arc
@@ -126,9 +126,12 @@ PATH="$(pwd)/tools:$PATH" ./tools/healthspring_composition_headless.sh
    `primalspring`-based client connects to non-BTSP primals. Transport
    should probe for BTSP capability before attempting handshake.
 
-2. **Provenance trio is offline for shell compositions**: rhizoCrypt,
-   loamSpine, sweetGrass accept UDS but return empty. Domain logic must
-   degrade gracefully.
+2. **Provenance trio — shell composition UDS gap**: rhizoCrypt and
+   loamSpine still return empty (Gap 23 open). sweetGrass resolved:
+   `detect_protocol` EOF resilience + JSON-RPC error on detection failure
+   (PG-52). Shell callers must send `\n`-terminated requests and use
+   >=10s read timeouts for domain methods. Domain logic must still
+   degrade gracefully for unresolved primals.
 
 3. **socat is not universal**: Use `nc -q 1 -U` as fallback. healthSpring
    provides a shim script.
