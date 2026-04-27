@@ -62,7 +62,7 @@ NUCLEUS deployments via the plasmidBin depot pattern:
 - **primalSpring v0.9.17**: guideStone Level 4 (**187/187 live NUCLEUS ALL PASS — 13/13 BTSP authenticated, 8 cellular graphs BTSP-enforced**, 41/41 bare, BLAKE3 P3, seed provenance Layer 0.5, BTSP escalation Layer 1.5, cellular deployment Layer 7, biomeOS v3.28 absorbed), fragment-first graphs, 631 tests, plasmidBin depot documented, deep debt evolution (capability-based discovery, zero hardcoded primal names, all files under 800 LOC)
 - **guideStone pattern**: Self-validating NUCLEUS composition (5 properties: deterministic, traceable, self-verifying, env-agnostic, tolerance-documented). Proven by hotSpring-guideStone-v0.7.0. primalSpring guideStone now validates base composition for all downstream. Standard at `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md` v1.1.0.
 - **plasmidBin genomeBin depot**: Full cross-architecture binary depot (46 binaries, 6 target triples, Tier 1 39/39). `build_ecosystem_genomeBin.sh` replaces musl-only script with 9-target matrix (Tier 1 MUST / Tier 2 SHOULD / Tier 3 NICE per ecoBin Architecture Standard). All upstream armv7/nestgate gaps closed Phase 45. Springs pull, deploy NUCLEUS, validate externally. See `primalSpring/wateringHole/PLASMINBIN_DEPOT_PATTERN.md`.
-- **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V54 (guideStone Level 2), neuralSpring V134 (guideStone Level 2), wetSpring V147 (guideStone Level 3 — bare works)
+- **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V59 (guideStone Level 5), neuralSpring V138 (guideStone Level 3), wetSpring V151 (guideStone Level 4+)
 - **primalSpring guideStone**: `primalspring_guidestone` binary — 9-layer base composition certification (including seed provenance L0.5, BTSP escalation L1.5, cellular deployment L7). **187/187 ALL PASS** against live 12-primal NUCLEUS (**13/13 BTSP authenticated**, 8 cellular graphs BTSP-enforced). Base layer that domain guideStones inherit.
 - **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
 - **Composing springs**: ludoSpring V53 (pure composition — no spring binary deploys, 12-node cell graph, 30 capabilities, BTSP-enforced, 60Hz tick, 817 tests)
@@ -250,9 +250,9 @@ Four springs have entered active NUCLEUS composition testing:
 | Spring | Status | Composition Evidence |
 |--------|--------|---------------------|
 | **hotSpring** v0.6.32 | **guideStone Level 5 CERTIFIED** (v1.2.0) | 64/64 suites; all 5 guideStone properties; `hotspring_guidestone` (BLAKE3 P3, protocol tolerance, family discovery via primalSpring v0.9.17); 13 LOCAL_CAPABILITIES dispatched; genomeBin v5.1 absorbed; `validate-primal-proof.sh` auto-sets NUCLEUS env vars |
-| **healthSpring** V53 | **Delta** — Level 5 in progress (guideStone readiness: Level 1) | exp122 IPC parity; `math_dispatch.rs` feature-gated IPC/lib routing; niche.rs; dual-tower ionic |
-| **neuralSpring** V133 | **Delta** — Level 5 primal proof | `IpcMathClient` (9 methods); `validate_proto_nucleate_capabilities` (7 caps, exit 0/1/2); `deny.toml` stadial bans; 18 barraCuda surface gaps handed back |
-| **wetSpring** V145 | **Delta** — Level 5 primal proof | Exp403 `validate_primal_parity_v1` (5 primals over IPC); 22 CONSUMED_CAPABILITIES in niche.rs |
+| **healthSpring** V59 | **Delta** — Level 5, Phase 46 absorbed (18/24) | Deep debt, `healthspring_composition.sh`, dual-tower ionic |
+| **neuralSpring** V138 | **Delta** — Level 3, Phase 46 absorbed, 6 smart refactors | `neural_composition.sh`, `deny.toml` stadial bans; inference wiring |
+| **wetSpring** V151 | **Delta** — Level 4+, Phase 46 absorbed, deep debt complete | `wetspring_composition.sh`, 22 CONSUMED_CAPABILITIES in niche.rs |
 | **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
 | **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
 | **ludoSpring** V53 | **Delta** — pure composition, BTSP-enforced | 12-node cell graph, 30 capabilities, pure composition model, 60Hz tick, provenance trio, 817 tests; zero clippy; esotericWebb bridge |
@@ -283,7 +283,7 @@ accidental similarity.
 
 | Pattern | Discovered By | Ecosystem Impact |
 |---------|---------------|-----------------|
-| UDS transport portability (socat fallback) | hotSpring, wetSpring, healthSpring, neuralSpring | `nucleus_composition_lib.sh` PG-49 fix |
+| UDS transport portability (socat → python3 → nc) | hotSpring, wetSpring, healthSpring, neuralSpring | `nucleus_composition_lib.sh` PG-49 RESOLVED |
 | Missing default primals (nestgate, squirrel) | healthSpring, neuralSpring | `composition_nucleus.sh` PG-50 fix |
 | Temporal heterogeneity (tick vs convergence vs seasonal) | ludoSpring, hotSpring, airSpring | `COMPOSITION_TICK_MODEL_STANDARD.md` |
 | Cross-spring validation patterns | healthSpring, neuralSpring | `CROSS_SPRING_COORDINATION_STANDARD.md` |
@@ -324,8 +324,8 @@ standard is the bridge.
 
 ### Near Term (Weeks)
 
-- PG-52 provenance trio UDS empty response fix (upstream)
-- PG-48 petalTongue musl threading fix (upstream)
+- ~~PG-52 provenance trio UDS empty response~~ **RESOLVED** (April 27 — all three primals fixed + rebuilt)
+- ~~PG-48 petalTongue musl threading~~ **ADDRESSED** (April 27 — `any_thread` fix, rebuilt)
 - airSpring and groundSpring begin delta absorption
 - ludoSpring convergence with primalSpring graph schema
 
