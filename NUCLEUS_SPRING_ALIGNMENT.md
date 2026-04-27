@@ -52,12 +52,12 @@ which has a unique dual-tower ionic bridge pattern and is kept as a standalone g
 | Spring | Version | gS | Tests | Primary Atomics | Proto-Nucleate | Status |
 |--------|---------|------|-------|-----------------|----------------|--------|
 | **hotSpring** | 0.6.32 | **5** | 993 | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt complete |
-| **neuralSpring** | V134 | **2** | 1,403+ | **Node** + Meta | `downstream_manifest.toml` | **Pinned** — scaffold |
-| **wetSpring** | V147 | **3** | 1,902+ | Node + **Nest** + Meta | `downstream_manifest.toml` | **Pinned** — bare works |
+| **neuralSpring** | V138 | **3** | 1,234 | **Node** + Meta | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, 6 smart refactors, `neural_composition.sh` |
+| **wetSpring** | V151 | **4+** | 1,209 | Node + **Nest** + Meta | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt, `wetspring_composition.sh` |
 | **airSpring** | 0.10.0 | 0 | 1,364 | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
 | **groundSpring** | V124 | 0 | 1,050+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
-| **healthSpring** | V54 | **2** | 940+ | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_*` | **Pinned** — scaffold |
-| **ludoSpring** | V53 | **4** | 817 | Node + **Meta** + Nest | `ludospring_cell.toml` (12-node pure composition) | **Active** — evolution partner |
+| **healthSpring** | V59 | **5** | 892 | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_*` | **Active** — Phase 46 absorbed (18/24), deep debt, `healthspring_composition.sh` |
+| **ludoSpring** | V53+ | **4** | 817 | Node + **Meta** + Nest | `ludospring_cell.toml` (12-node pure composition) | **Active** — evolution partner, needs more time |
 
 ### Key
 
