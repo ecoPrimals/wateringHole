@@ -12,8 +12,9 @@
 
 The provenance trio — **rhizoCrypt** (ephemeral DAG), **loamSpine**
 (immutable ledger), and **sweetGrass** (semantic attribution) — is the most
-referenced subsystem across all springs. It is also the most common blocker
-(PG-52: UDS empty responses from all three).
+referenced subsystem across all springs. As of April 27, 2026, PG-52 (UDS empty
+responses) is **resolved upstream** — all three primals now respond to JSON-RPC
+over UDS after rebuilds from current source.
 
 This document provides the operational integration guide: how to wire the trio
 into a composition, what to expect from each primal, known failure modes, and
@@ -229,68 +230,57 @@ so trio wiring works on any system with at least one transport tool.
 
 ## Known Issues and Workarounds
 
-### PG-52: UDS Empty Responses (OPEN — upstream)
+### PG-52: UDS Empty Responses — RESOLVED (April 27, 2026)
 
-**Problem**: rhizoCrypt, loamSpine, and sweetGrass sometimes return empty
-responses to JSON-RPC calls over UDS. The socket connects, the payload sends,
-but the response is zero bytes.
+**Problem** (historical): rhizoCrypt, loamSpine, and sweetGrass returned empty
+responses to JSON-RPC calls over UDS. Four springs reported independently.
 
-**Severity**: High — blocks provenance recording for all springs.
+**Root causes** (identified and fixed by primal teams):
+- **rhizoCrypt (S49)**: Liveness gate routed all `{`-prefixed JSON to a
+  liveness-only handler. Fix: plain JSON-RPC on UDS routes to the full
+  `handle_newline_connection` handler.
+- **loamSpine**: Double-`BufReader` on post-BTSP paths caused empty reads.
+  Fix: removed duplicate buffering.
+- **sweetGrass**: EOF without trailing `\n` treated as I/O error in protocol
+  auto-detection. Fix: EOF is valid line-end; unknown protocol returns JSON-RPC
+  error instead of silent close.
 
-**Affected**: All three trio primals.
+**Caller requirements**:
+- Send `\n`-terminated JSON-RPC requests
+- Use >=10s read timeout (sweetGrass is slower to respond)
+- Pass `FAMILY_SEED` env var to rhizoCrypt when using family-scoped sockets
+  (without it, BTSP gate rejects all connections)
 
-**Workaround**: Retry with backoff. The shell composition library implements
-this:
+**Validated**: Live NUCLEUS composition with all three returning valid JSON-RPC:
+`dag.session.create` → session ID, `spine.create` → spine_id + genesis_hash,
+`braid.create` → full JSON-LD provenance record.
 
-```bash
-trio_call_with_retry() {
-    local sock="$1" method="$2" params="$3" retries="${4:-3}"
-    local attempt=0
-    while [ $attempt -lt $retries ]; do
-        local resp
-        resp=$(send_rpc "$sock" "$method" "$params")
-        if [ -n "$resp" ] && [ "$resp" != "null" ]; then
-            echo "$resp"
-            return 0
-        fi
-        attempt=$((attempt + 1))
-        sleep 0.5
-    done
-    warn "trio call failed after $retries attempts: $method"
-    return 1
-}
-```
+**Tracking**: `primalSpring/docs/PRIMAL_GAPS.md` PG-52 RESOLVED.
 
-**Root cause**: Suspected race between socket accept and handler readiness
-in the trio primals' async runtime. Under investigation by primal teams.
+### PG-48: petalTongue musl Binary Threading Panic — ADDRESSED (April 27, 2026)
 
-**Tracking**: `primalSpring/docs/PRIMAL_GAPS.md` PG-52.
+**Problem** (historical): petalTongue's musl binary panicked on `winit` thread
+creation in desktop mode.
 
-### PG-48: petalTongue musl Binary Threading Panic
+**Fix**: petalTongue now uses `EventLoopBuilderExtX11::with_any_thread(true)` on
+Linux, with a shared `native_options_with_any_thread()` helper. Musl builds with
+`--features ui` should work on X11.
 
-**Problem**: petalTongue's musl binary panics on `winit` thread creation
-in desktop mode.
+**Status**: Rebuilt musl binary harvested to plasmidBin. Verify on your target
+display.
 
-**Relevance**: If your garden uses petalTongue for desktop rendering, you
-need glibc builds or headless mode.
+**Tracking**: `primalSpring/docs/PRIMAL_GAPS.md` PG-48 ADDRESSED.
 
-**Workaround**: Use `petaltongue server --headless` for non-desktop, or
-build petalTongue with glibc target (`x86_64-unknown-linux-gnu`).
+### PG-53: Incomplete `proprioception.get` in Server Mode — RESOLVED (April 27, 2026)
 
-**Tracking**: `primalSpring/docs/PRIMAL_GAPS.md` PG-48.
+**Problem** (historical): petalTongue's `proprioception.get` returned incomplete
+data in `server` mode.
 
-### PG-53: Incomplete `proprioception.get` in Server Mode
+**Fix**: New `system/proprioception.rs` handler always returns complete JSON
+including `frame_rate`, `active_scenes`, `total_frames`, `user_interactivity`,
+`mode`, `uptime_secs`, and `window` fields. Dispatched via `dispatch.rs`.
 
-**Problem**: petalTongue's `proprioception.get` returns incomplete data
-when running in `server` mode vs desktop mode.
-
-**Relevance**: Gardens querying petalTongue's self-knowledge may get
-incomplete capability lists in headless deployments.
-
-**Workaround**: Use `capabilities.list` instead of `proprioception.get`
-for capability discovery.
-
-**Tracking**: `primalSpring/docs/PRIMAL_GAPS.md` PG-53.
+**Tracking**: `primalSpring/docs/PRIMAL_GAPS.md` PG-53 RESOLVED.
 
 ---
 
@@ -346,19 +336,22 @@ economic model.
 
 ## Evolution Path
 
-### Current (April 2026)
+### Current (April 27, 2026)
 
-- Trio primals operational, UDS IPC functional (with PG-52 caveat)
-- All delta springs have graceful degradation wired
-- Shell composition library supports trio
+- Trio primals operational, UDS IPC **fully functional** (PG-52 resolved)
+- All science springs have graceful degradation wired
+- Shell composition library supports trio with `_uds_send` fallback chain
 - `rootpulse_commit` graph validated end-to-end
+- Live NUCLEUS: `dag.session.create`, `spine.create`, `braid.create` all return
+  valid JSON-RPC responses over UDS
+- `FAMILY_SEED` env var required for rhizoCrypt with family-scoped sockets
 
 ### Near Term
 
-- PG-52 UDS empty response fix (upstream primal teams)
 - First-class `provenance.*` JSON-RPC surface in rhizoCrypt
 - License metadata in trio (scyBorg Phase 1 — schema in existing metadata maps)
 - Cross-spring provenance braids in production compositions
+- plasmidBin binary rebuild cadence for trio fixes
 
 ### Medium Term
 
@@ -375,7 +368,7 @@ economic model.
 - `DEPLOYMENT_AND_COMPOSITION.md` — Deploy graph patterns
 - `SPRING_COMPOSITION_PATTERNS.md` §7 — Graceful degradation pattern
 - `GARDEN_COMPOSITION_ONRAMP.md` — Garden product integration
-- `primalSpring/docs/PRIMAL_GAPS.md` — PG-52 and related gaps
+- `primalSpring/docs/PRIMAL_GAPS.md` — gap registry (PG-52 resolved, PG-53 resolved)
 - `whitePaper/gen4/economics/NOVEL_FERMENT_TRANSCRIPTS.md` — NFT economics
 - `whitePaper/economics/SUNCLOUD_ECONOMIC_MODEL.md` — Radiating attribution
 

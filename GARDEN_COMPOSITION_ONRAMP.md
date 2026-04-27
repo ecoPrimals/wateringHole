@@ -133,6 +133,9 @@ capabilities = ["inference.query", "inference.models"]
 fallback = "skip"
 
 # Provenance trio (optional — record when available)
+# IMPORTANT: rhizoCrypt requires FAMILY_SEED env var when using family-scoped
+# sockets, or BTSP gate rejects all connections. composition_nucleus.sh handles
+# this automatically from BEARDOG_FAMILY_SEED.
 [[graph.node]]
 name = "rhizocrypt"
 binary = "rhizocrypt"
@@ -290,9 +293,16 @@ source plasmidBin/ports.env
 ./plasmidBin/start_primal.sh songbird
 ./plasmidBin/start_primal.sh petaltongue
 
-# Or use the composition launcher
+# Or use the composition launcher (full NUCLEUS by default: 10 primals)
+COMPOSITION_NAME="mygarden" \
+BEARDOG_FAMILY_SEED="$(head -c 32 /dev/urandom | xxd -p)" \
+  bash primalSpring/tools/composition_nucleus.sh start
+
+# For a minimal launch (subset of primals):
+COMPOSITION_NAME="mygarden" \
 PRIMAL_LIST="beardog songbird petaltongue" \
-  bash primalSpring/tools/composition_nucleus.sh
+BEARDOG_FAMILY_SEED="$(head -c 32 /dev/urandom | xxd -p)" \
+  bash primalSpring/tools/composition_nucleus.sh start
 
 # Deploy your graph via biomeOS
 biomeos deploy --graph graphs/mygarden_deploy.toml
