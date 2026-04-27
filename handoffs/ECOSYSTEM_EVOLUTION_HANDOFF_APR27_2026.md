@@ -81,17 +81,17 @@ Godot bridge via shared-memory texture upload provides external engine integrati
 
 ## Per-Primal Evolution Status and Requests
 
-### BearDog (Security) — v0.9.0+ Wave 69
+### BearDog (Security) — v0.9.0+ Wave 70
 **What's working**: BTSP handshake provider, Ed25519 sign/verify, BLAKE3 hash,
 `FAMILY_SEED` entropy hierarchy (mito tier), capability wire standard L2.
 **Request**: Nuclear tier entropy (human-mixed, non-clonable identity).
 Three-tier genetic awareness in session management.
 
-### Songbird (Discovery/Network) — v0.2.1 Wave 170
+### Songbird (Discovery/Network) — v0.2.1 Wave 174
 **What's working**: BTSP relay, mesh discovery, STUN NAT traversal, TLS 1.3,
-BirdSong beacons, `--beardog-socket` flag alignment.
-**Request**: `SecurityRpcClient` pattern for direct BearDog calls should be
-the standard pattern for all TCP federation scenarios.
+BirdSong beacons, CLI flag alignment, PG-51 socket discovery fix, deep debt
+(hardcoded IP/port elimination, flaky test fix, dep hygiene, +18 tests).
+**Status**: 7,683 lib tests, 0 clippy warnings, 0 failures.
 
 ### ToadStool (Compute) — Display Phase 2
 **What's working**: BTSP relay, JSON-RPC on UDS, tarpc dual-protocol,
