@@ -365,6 +365,28 @@ Full deep-debt audit across all requested dimensions:
 
 **Metrics**: 1,537 tests, ~49,600 lines, 0 clippy warnings, 0 fmt diffs
 
+### S49: PG-52 — UDS Data Methods Blocked by Liveness Gate (April 27)
+
+**Resolves primalSpring audit PG-52 (HIGH)**: 4 springs (hotSpring, wetSpring, neuralSpring, healthSpring) independently reported `dag.session.create` returns empty/reset on UDS. Single most common ecosystem blocker.
+
+**Root cause**: S45.1 (PG-35 fix) introduced first-byte auto-detect that routed ALL non-BTSP JSON-RPC arriving on UDS to `handle_liveness_connection`. This handler only allows probe methods (`health.check`, `capability.list`); all `dag.*` methods were rejected with FORBIDDEN (-32000). The springs send plain JSON-RPC over UDS without a BTSP handshake, so every data method was blocked.
+
+**Fix**: UDS now routes plain JSON-RPC (first byte `{` or `[`) to the full `handle_newline_connection` handler. Rationale:
+- UDS connections are already filesystem-authenticated (only same-machine processes with socket access)
+- Socket path is family-scoped (BTSP Phase 1: `rhizocrypt-{family_id}.sock`)
+- BTSP Phase 2 handshake was designed for cross-network trust, not local IPC
+- BTSP handshake path remains intact for clients that choose to perform it
+
+**For springs teams**: Plain JSON-RPC over UDS now works for ALL methods including `dag.session.create`, `dag.event.append`, `dag.vertex.children`, `dag.frontier.get`, `dag.merkle.root`, and batch requests. No client-side changes needed. Repro:
+```
+echo '{"jsonrpc":"2.0","method":"dag.session.create","params":{"description":"test","session_type":"General"},"id":1}' | socat - UNIX-CONNECT:/tmp/biomeos/rhizocrypt-{fid}.sock
+```
+Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
+
+**New tests** (3): PG-52 exact repro, multi-method suite, batch request with data methods.
+
+**Metrics**: 1,540 tests (was 1,537), ~49,700 lines, 0 clippy warnings, 0 fmt diffs
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
