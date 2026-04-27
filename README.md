@@ -411,7 +411,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `SOURDOUGH_BTSP_RELAY_PATTERN.md` — **Start here for BTSP.** The relay pattern extracted from 9 converged primals
 - `BTSP_PROTOCOL_STANDARD.md` — Full protocol specification (v1.0)
 - `fossilRecord/UPSTREAM_GAP_STATUS_APR20_2026.md` — Upstream gap tracker (biomeOS v3.28 absorbed, April 26)
-- `handoffs/BTSP_WIRE_CONVERGENCE_APR24_2026.md` — Per-primal convergence status and scoreboard
+- `handoffs/archive/BTSP_WIRE_CONVERGENCE_APR24_2026.md` — Per-primal convergence status and scoreboard
 
 ### Interactive Composition
 - `primalSpring/tools/nucleus_composition_lib.sh` — 41-function reusable NUCLEUS wiring library
@@ -420,8 +420,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `primalSpring/wateringHole/DOWNSTREAM_COMPOSITION_EXPLORER_GUIDE.md` — Per-spring exploration lanes
 
 ### Handoffs
-- `handoffs/*.md` — 17 active session handoffs (April 26–27, 2026)
-- `handoffs/archive/` — Fossil record (641 archived handoffs)
+- `handoffs/*.md` — 24 active session handoffs (April 26–27, 2026)
+- `handoffs/archive/` — Fossil record (648 archived handoffs)
 
 ### Fossil Record
 - `fossilRecord/consolidated-apr2026/` — 49 original documents consolidated April 4, 2026
