@@ -1,6 +1,6 @@
-# NestGate Session 46 — Streaming Storage, BTSP Relay Fixes, Deep Debt Elimination
+# NestGate Session 46 — Composition UDS, Streaming Storage, BTSP Relay, Deep Debt
 
-**Date**: April 26, 2026  
+**Date**: April 26–27, 2026  
 **Version**: 4.7.0-dev  
 **Primal**: NestGate (storage & discovery)
 
@@ -44,7 +44,20 @@ annotations have been cleaned.
 - **Blob path fallback**: `retrieve_stream_begin` checks namespaced path first, falls
   back to flat blob path for cross-method interop (`store_blob` ↔ `retrieve_stream`)
 
-### 4. Deep Debt Cleanup
+### 4. Composition UDS Integration (primalSpring convergence validation)
+
+- `service start` now detects `FAMILY_ID` (ecosystem standard env var set by
+  `composition_nucleus.sh`) in addition to `NESTGATE_FAMILY_ID` and
+  `NESTGATE_SOCKET` — enters UDS JSON-RPC mode instead of HTTP-only
+- Propagates `FAMILY_ID` → `NESTGATE_FAMILY_ID` so `SocketConfig` resolves
+  consistently (creates `nestgate-{fid}.sock` + `storage-{fid}.sock` symlink)
+- When `--port` is given alongside composition env vars, TCP JSON-RPC now runs
+  *alongside* UDS (same newline-delimited protocol) instead of replacing it
+- Musl static build verified: 7.4 MB x86_64, `ELF 64-bit ... statically linked`
+- This resolves "NestGate is the only primal that doesn't participate in UDS
+  composition" — the code was already there, just not reachable via `service start`
+
+### 5. Deep Debt Cleanup
 
 - **Hardcoded port elimination**: added `JSONRPC` constant (8092) to
   `runtime_fallback_ports`; wired into `JsonRpcConfig::default()`; named
@@ -83,6 +96,7 @@ Hardcoded ports: 0 (all named constants)
 | Coverage 84% → 90% | ~6 pp gap; ZFS (needs real ZFS), installer (platform), binary entrypoints |
 | Vendored `rustls-rustcrypto` | Track upstream for `rustls-webpki` 0.103.12+ — drop `vendor/` when published |
 | Cross-arch CI | aarch64/armv7/riscv64 musl builds pass `cargo check`; CI pipeline not yet wired |
+| plasmidBin deploy | musl binary built and verified; needs depot copy for composition_nucleus.sh |
 
 ---
 
