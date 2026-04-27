@@ -32,7 +32,7 @@ using locally-built binaries via `composition_nucleus.sh`. Results:
 
 | Component | Issue | Impact |
 |-----------|-------|--------|
-| **Provenance trio** (rhizoCrypt, loamSpine, sweetGrass) | Accept UDS connections, return empty JSON-RPC responses | DAG, ledger, braid all offline for compositions |
+| **Provenance trio** (rhizoCrypt, loamSpine, sweetGrass) | Accept UDS connections, return empty JSON-RPC responses | DAG, ledger, braid offline for compositions. **sweetGrass resolved** (PG-52: EOF-resilient detection, error responses). rhizoCrypt/loamSpine still open |
 | **Songbird** | `Failed to discover crypto provider` — can't find beardog | No dynamic discovery (symlink fallback works) |
 | **petalTongue proprioception** | No frame_rate in server mode | Monitoring degraded in headless |
 | **socat** | Not installed; lib requires it | Created `nc -U` shim |
