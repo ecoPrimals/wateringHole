@@ -93,10 +93,39 @@ Verified via `petaltongue server --help` — flag shows with env source.
 
 ---
 
+## PG-53 Follow-up: rendering_awareness Server Mode Bug — RESOLVED
+
+### Problem
+
+primalSpring convergence validation found that `rendering_awareness` was
+unconditionally set to `Some(...)` in `UnixSocketServer::new_with_socket`,
+so even headless `server` mode had a `RenderingAwareness` instance. This
+caused `proprioception.get` to falsely report `frame_rate: 60.0`,
+`mode: "live"`, `window: { present: true }` in server mode.
+
+### Fix
+
+- Removed unconditional `rendering_awareness = Some(...)` from
+  `UnixSocketServer::new_with_socket`. `RpcHandlers::new()` already
+  defaults to `None`.
+- Only `live_mode.rs` now explicitly wires `rendering_awareness` via
+  the existing `with_rendering_awareness()` builder method.
+- Updated two integration tests to assert correct server-mode behavior
+  (graceful degradation, not false positive awareness).
+
+### Verification
+
+- `proprioception_get_server_mode_returns_zero_fps`: confirmed 0 FPS, "server" mode, null window
+- `test_showing_without_awareness_returns_false`: graceful degradation
+- `test_introspect_without_awareness_returns_error`: correct error in headless
+- 0 clippy warnings, all tests pass
+
+---
+
 ## For primalSpring Gap Registry
 
 | Gap | Status | Commit |
 |-----|--------|--------|
 | PG-48 | **RESOLVED** — `with_any_thread(true)` bypasses musl thread-ID mismatch | `78b3fec` |
-| PG-53 | **RESOLVED** — `proprioception.get` returns synthetic snapshot | `78b3fec` |
+| PG-53 | **RESOLVED** — handler + server-mode awareness fix | `78b3fec` + follow-up |
 | `--socket` | **ALREADY RESOLVED** (PT-10) — reconfirmed functional | N/A |
