@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: April 26, 2026
+**Last Updated**: April 27, 2026
 
 ---
 
@@ -413,9 +413,15 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `fossilRecord/UPSTREAM_GAP_STATUS_APR20_2026.md` — Upstream gap tracker (biomeOS v3.28 absorbed, April 26)
 - `handoffs/BTSP_WIRE_CONVERGENCE_APR24_2026.md` — Per-primal convergence status and scoreboard
 
+### Interactive Composition
+- `primalSpring/tools/nucleus_composition_lib.sh` — 41-function reusable NUCLEUS wiring library
+- `primalSpring/tools/composition_template.sh` — Minimal starter skeleton for spring compositions
+- `primalSpring/tools/composition_nucleus.sh` — Parameterized NUCLEUS launcher
+- `primalSpring/wateringHole/DOWNSTREAM_COMPOSITION_EXPLORER_GUIDE.md` — Per-spring exploration lanes
+
 ### Handoffs
-- `handoffs/*.md` — Active session handoffs (last 48 hours)
-- `handoffs/archive/` — Fossil record (584 archived handoffs)
+- `handoffs/*.md` — 17 active session handoffs (April 26–27, 2026)
+- `handoffs/archive/` — Fossil record (641 archived handoffs)
 
 ### Fossil Record
 - `fossilRecord/consolidated-apr2026/` — 49 original documents consolidated April 4, 2026
