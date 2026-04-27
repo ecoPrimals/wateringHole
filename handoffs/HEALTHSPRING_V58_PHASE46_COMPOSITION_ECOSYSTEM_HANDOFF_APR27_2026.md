@@ -42,9 +42,10 @@ using locally-built binaries via `composition_nucleus.sh`. Results:
 ## Upstream Asks
 
 ### For primalSpring
-1. **Provenance trio startup**: Investigate why rhizoCrypt, loamSpine, and
-   sweetGrass accept UDS but don't respond to JSON-RPC. This extends PG-45
-   to the full trio. Possible causes: missing BTSP negotiation, nestgate
+1. **Provenance trio startup**: Investigate why rhizoCrypt and loamSpine
+   accept UDS but don't respond to JSON-RPC. **sweetGrass resolved** (PG-52:
+   EOF-resilient `detect_protocol`, error responses on failure). rhizoCrypt
+   and loamSpine remain open — possible causes: BTSP negotiation, nestgate
    dependency, different server subcommand, or startup delay.
 2. **socat fallback**: Add `nc -U` detection to `nucleus_composition_lib.sh`
    or document socat as a required dependency.
@@ -116,7 +117,7 @@ healthspring_composition_headless.sh
       ├── Tier 2: petalTongue scene push (1/1)
       ├── Tier 2: bearDog crypto.sign (1/1)
       ├── Tier 2: toadStool compute (1/1)
-      ├── Tier 2: provenance trio (0/3 — empty responses)
+      ├── Tier 2: provenance trio (1/3 — sweetGrass resolved PG-52; rhizoCrypt + loamSpine open)
       ├── Tier 2: proprioception (0/1 — no frame_rate)
       └── composition_teardown
 ```
