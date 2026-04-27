@@ -17,7 +17,7 @@
 | Deploy graphs | 67 TOMLs (10 cell graphs for spring/garden deployment) |
 | Shell composition library | 41 functions, 1 template, 1 reference implementation |
 | plasmidBin | 46 cross-arch binaries, 6 targets, Tier 1 39/39 |
-| Handoffs | 17 active, 641 archived |
+| Handoffs | 24 active, 648 archived |
 
 ---
 
