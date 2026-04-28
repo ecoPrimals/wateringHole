@@ -1,9 +1,9 @@
-# barraCuda v0.3.12 — Sprint 46 Handoff (NUCLEUS Env Var Wiring)
+# barraCuda v0.3.12 — Sprint 46/46b Handoff (NUCLEUS Env Wiring + Deep Debt)
 
 **Date**: April 28, 2026
-**Sprint**: 46 (Phase 55 alignment — NUCLEUS two-tier crypto model env vars)
+**Sprint**: 46/46b (Phase 55 alignment + role-based naming + 12-axis audit)
 **Version**: 0.3.12
-**Tests**: 268+ non-GPU pass, 29 BTSP tests pass, 0 failures
+**Tests**: 269+ non-GPU pass, 29 BTSP tests pass, 0 failures
 **IPC Methods**: 50 registered
 **Quality Gates**: fmt ✓ clippy (pedantic+nursery) ✓ doc (zero warnings) ✓ deny ✓
 **Supersedes**: `BARRACUDA_V0312_SPRINT45_JSONRPC_EXPANSION_HANDOFF_APR26_2026.md`
@@ -80,6 +80,12 @@ Per `NUCLEUS_TWO_TIER_CRYPTO_MODEL.md`, barraCuda's purpose is `tensor` with
 use case "encrypt tensor data in transit." This is explicitly rated as
 **low priority** by primalSpring Phase 55. Tracked in `WHATS_NEXT.md` under P2.
 Crypto deps already present (`chacha20poly1305`, `hmac`, `sha2`).
+
+### Sprint 46b: Role-Based Naming + 12-Axis Audit
+
+- Refactored `btsp.rs` internal identifiers from primal-specific (`beardog_stream`, `beardog`, `beardog_rpc`) to role-based (`provider_stream`, `provider`, `security_provider_rpc`) — zero hardcoded sibling primal names in runtime code
+- Ecosystem-standard env var names (`BEARDOG_SOCKET`, etc.) preserved as wire contract
+- 12-axis deep debt audit clean bill across all axes (file size, unsafe, unwrap, expect, TODO, deps, hardcoding, mocks, println, #[allow(, Box<dyn Error>, async-trait)
 
 ### Zero Open Gaps
 
