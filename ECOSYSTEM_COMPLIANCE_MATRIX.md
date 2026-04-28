@@ -383,7 +383,7 @@ Source: `PUBLIC_SURFACE_STANDARD.md`, `SPRING_PRIMAL_PRESENTATION_STANDARD.md`
 - **biomeOS**: CONTEXT.md present (75 lines). 4 `#[allow(` vs 361 `#[expect(` (99% `expect`). PII hits in 5 test files.
 - **petalTongue**: No CONTEXT.md. 32 `#[allow(` vs 273 `#[expect(` (89% `expect`). PII hit in 1 file.
 - **rhizoCrypt**: CONTEXT.md present (95 lines). Zero `#[allow(` (0/47). No PII hits. reqwest eliminated (session 28).
-- **sweetGrass**: CONTEXT.md present (76 lines). 2 `#[allow(` vs 51 `#[expect(` (96% `expect`). No PII hits.
+- **sweetGrass**: CONTEXT.md present (86 lines). 0 `#[allow(` (100% `#[expect(`). No PII hits. BearDog `crypto.sign` delegation live (v0.7.28).
 - **LoamSpine**: CONTEXT.md present (70 lines). 1 `#[allow(` vs 58 `#[expect(` (98% `expect`). No PII hits.
 - **bingoCube**: v0.1.1 — CHANGELOG, CONTEXT.md, `deny.toml` all present. Edition 2024. `forbid(unsafe_code)`, `warn(missing_docs)`, clippy pedantic+nursery clean. SPDX headers on all 20 files. 54 tests passing. 0 `#[allow(` / uses `#[expect(` throughout.
 - **sourDough**: No CONTEXT.md. No `deny.toml`. Zero `#[allow(` (0/6). No PII hits.
@@ -546,7 +546,7 @@ All 12 primals started via `nucleus_launcher.sh`, health-checked, and validated 
 - **biomeOS** v0.1.0: Neural API substrate. Graph orchestration. **Grade A** ↑.
 - **petalTongue** v1.6.6: `--socket` CLI flag for correct UDS path (was missing). **Grade A** ↑.
 - **rhizoCrypt** v0.14.0-dev: 28 DAG methods. UDS at `rhizocrypt-{family}.sock` (LD-06 resolved). exp094: dag_alive PASS. **Grade A.**
-- **sweetGrass** v0.7.27: 32 braid/anchoring methods. exp094: attribution_alive PASS. **Grade A** ↑.
+- **sweetGrass** v0.7.28: 32 braid/anchoring methods. BearDog `crypto.sign` delegation. exp094: attribution_alive PASS. **Grade A** ↑.
 - **LoamSpine** v0.9.16: 34 methods. UDS-first, TCP opt-in via `--listen` (LD-09 resolved). exp094: ledger_alive PASS. **Grade A** ↑↑.
 
 ### Transport Diversity (Live Observed — April 13)
