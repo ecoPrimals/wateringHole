@@ -54,9 +54,33 @@ Transitive duplication identified but not controllable in petalTongue:
 `hashbrown` (5 versions), `windows-sys` (4), `getrandom` (3), `thiserror`
 (1.0/2.0), `syn` (1/2), `tower` (0.4/0.5), `rustix` (0.38/1.x).
 
+## Pass 2: Dependency Consolidation + Discovery Evolution (April 27)
+
+### Dependency Consolidation
+
+| Crate | Dep | Before | After |
+|-------|-----|--------|-------|
+| petal-tongue-core | `toml` | `"0.8"` | `{ workspace = true }` |
+| petal-tongue-tui | `tokio-util` | `"0.7"` | `{ workspace = true }` (gains `codec`) |
+| petal-tongue-core | `rustix` | `"0.38"` per-crate | `{ workspace = true, features = [...] }` |
+| petal-tongue-ui | `rustix` | `"0.38"` per-crate | `{ workspace = true, features = [...] }` |
+| root dev-dep | `tempfile` | `"3.10"` | `{ workspace = true }` |
+
+### Stale Feature Removal
+
+- `external-display` feature alias in `petal-tongue-ui`: zero `cfg` references in `.rs` files.
+  Removed.
+
+### Discovery Evolution
+
+- `universal_discovery.rs`: socket search paths now include `XDG_RUNTIME_DIR`
+  (`/run/user/{uid}`) as priority-1, matching `unix_socket_provider.rs` pattern.
+  Previously only searched `/tmp` and `/var/run`, missing the standard biomeOS
+  socket location.
+
 ## Verification
 
 - 0 clippy warnings (workspace, all-features)
-- 6,024+ tests passing, 0 failures
+- 6,156+ tests passing, 0 failures
 - macOS aarch64 cross-check clean
 - Edition 2024, stable toolchain
