@@ -438,8 +438,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `primalSpring/wateringHole/DOWNSTREAM_COMPOSITION_EXPLORER_GUIDE.md` — Per-spring exploration lanes
 
 ### Handoffs
-- `handoffs/*.md` — 24 active session handoffs (April 26–27, 2026)
-- `handoffs/archive/` — Fossil record (648 archived handoffs)
+- `handoffs/*.md` — 27 active session handoffs (April 26–28, 2026)
+- `handoffs/archive/` — Fossil record (663 archived handoffs)
 
 ### Fossil Record
 - `fossilRecord/consolidated-apr2026/` — 49 original documents consolidated April 4, 2026
