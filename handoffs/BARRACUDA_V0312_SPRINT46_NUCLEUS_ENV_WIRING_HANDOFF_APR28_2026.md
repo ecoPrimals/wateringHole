@@ -1,9 +1,9 @@
-# barraCuda v0.3.12 — Sprint 46/46b Handoff (NUCLEUS Env Wiring + Deep Debt)
+# barraCuda v0.3.12 — Sprint 47 Handoff (NUCLEUS + Songbird Self-Registration)
 
 **Date**: April 28, 2026
-**Sprint**: 46/46b (Phase 55 alignment + role-based naming + 12-axis audit)
+**Sprint**: 47 (Phase 55b — Songbird self-registration + env wiring + deep debt)
 **Version**: 0.3.12
-**Tests**: 269+ non-GPU pass, 29 BTSP tests pass, 0 failures
+**Tests**: 272+ non-GPU pass, 29 BTSP tests pass, 0 failures
 **IPC Methods**: 50 registered
 **Quality Gates**: fmt ✓ clippy (pedantic+nursery) ✓ doc (zero warnings) ✓ deny ✓
 **Supersedes**: `BARRACUDA_V0312_SPRINT45_JSONRPC_EXPANSION_HANDOFF_APR26_2026.md`
@@ -87,9 +87,17 @@ Crypto deps already present (`chacha20poly1305`, `hmac`, `sha2`).
 - Ecosystem-standard env var names (`BEARDOG_SOCKET`, etc.) preserved as wire contract
 - 12-axis deep debt audit clean bill across all axes (file size, unsafe, unwrap, expect, TODO, deps, hardcoding, mocks, println, #[allow(, Box<dyn Error>, async-trait)
 
+### Sprint 47: Songbird Self-Registration (Phase 55b)
+
+- **`register_with_songbird()`** in `transport.rs` — `ipc.register` RPC to Songbird at startup
+- **`songbird_capability_domains()`** in `discovery.rs` — 11 semantic capability tags derived from `REGISTERED_METHODS`: `tensor`, `math`, `stats`, `linalg`, `ml`, `spectral`, `activation`, `noise`, `rng`, `fhe`, `device`
+- Wired into all startup paths (UDS server, TCP-only, service mode)
+- Fire-and-forget: graceful degradation if Songbird absent
+- NDJSON wire format, same pattern as `resolve_via_discovery_socket()`
+
 ### Zero Open Gaps
 
-barraCuda has zero open gaps. All Phase 55 env var requirements are now wired.
+barraCuda has zero open gaps. All Phase 55/55b requirements are now wired.
 
 ---
 
