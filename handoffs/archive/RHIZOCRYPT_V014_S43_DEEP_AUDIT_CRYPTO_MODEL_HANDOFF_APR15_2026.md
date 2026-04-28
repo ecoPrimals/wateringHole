@@ -458,6 +458,24 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Metrics**: 1,546 tests (all-features), ~49,800 lines, 0 clippy warnings
 
+### S53: Documentation Reconciliation + Debris Audit (April 28)
+
+**Comprehensive documentation and debris pass** across rhizoCrypt root docs and wateringHole handoffs:
+
+**Root docs reconciled**:
+- `CONTEXT.md` source line count: ~49,700 → ~49,900 (actual: 49,914)
+- `showcase/README.md` test count: 1,540 → 1,546
+- `DEPLOYMENT_CHECKLIST.md` date and session references updated
+
+**wateringHole handoffs reconciled**:
+- `PRIMAL_REGISTRY.md` — rhizoCrypt test count 1,441 → 1,546, BTSP Phase 1 → Phase 2, delegated vertex signing (S52) noted
+- `NUCLEUS_TWO_TIER_CRYPTO_MODEL.md` — rhizoCrypt section updated from "no delegation" to reflect S52 (Ed25519 vertex signing via crypto provider, graceful degradation)
+- `PRIMALSPRING_V0920_PHASE55_CRYPTO_COMPOSITION_HANDOFF_APR28_2026.md` — rhizoCrypt gap marked RESOLVED (S52)
+
+**Debris audit result**: Clean — no orphan files, no stale scripts, no empty files, no tracked build artifacts, no TODO/FIXME markers. Showcase 65 demos intact, `specs/archive/` properly labeled.
+
+**Metrics**: 1,546 tests (all-features), 167 `.rs` files, ~49,900 lines, 0 clippy warnings
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
