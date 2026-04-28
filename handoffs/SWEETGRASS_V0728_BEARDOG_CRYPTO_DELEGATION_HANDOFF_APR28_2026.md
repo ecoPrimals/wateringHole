@@ -83,9 +83,16 @@ benefit to delegation. The Ed25519 signature IS the audit trail. If BearDog
 ships `crypto.sha256.hash` and there is a concrete audit requirement, it
 can be added later as a one-line change.
 
+## Dependency Evolution
+
+- `hostname` crate removed — replaced with pure Rust `/etc/hostname` file read
+  in `resolve_advertise_host`; eliminates direct C-wrapper dependency
+- Fallback chain: `PRIMAL_ADVERTISE_ADDRESS` env → `/etc/hostname` → `"localhost"`
+
 ## Metrics
 
-- `.rs` files: 187
+- `.rs` files: 187 (52,166 LOC)
 - Tests: 1,462 (was 1,454)
 - Clippy: zero warnings (`pedantic` + `nursery`)
 - `unsafe`: none
+- `cargo deny check`: advisories ok, bans ok, licenses ok, sources ok

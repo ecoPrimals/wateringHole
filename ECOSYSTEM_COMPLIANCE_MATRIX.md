@@ -208,7 +208,7 @@ N/A for library primals without IPC daemons (barraCuda, bingoCube, sourDough).
 - **biomeOS**: Orchestrator pattern — `neural-api`/`api`/`nucleus` subcommands. `--port` binds TCP alongside UDS (v3.05+), `--tcp-only` for pure TCP mode.
 - **petalTongue**: `server --port` functional. x86_64 musl works; aarch64 egui headless cross-compile pending.
 - **rhizoCrypt**: `server` subcommand with `--port` (tarpc) and `--unix` (UDS). musl-static x86_64 shipped (5.4M, Alpine runtime). aarch64 via CI cross-compile.
-- **sweetGrass**: No `--port` flag (uses `--http-address` for full address). musl-static not tested.
+- **sweetGrass**: `--port` TCP JSON-RPC (UniBin standard v1.1), `--http-address` for REST + HTTP JSON-RPC. musl-static not tested.
 - **LoamSpine**: No `--port` flag (uses `--jsonrpc-port`). Source-built binary verified; musl not yet.
 
 ---
@@ -241,7 +241,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 - **biomeOS**: Orchestrator — multiple sockets, different pattern. TCP forces UDS in API mode.
 - **petalTongue**: Both transports work. No domain symlink.
 - **rhizoCrypt**: Dual-mode TCP auto-detects newline vs HTTP. UDS at `biomeos/rhizocrypt.sock`. No domain symlink.
-- **sweetGrass**: UDS newline-conformant. TCP is HTTP-only (Axum), not newline JSON-RPC. No domain symlink.
+- **sweetGrass**: UDS newline-conformant. TCP newline JSON-RPC via `--port` (UniBin standard). HTTP JSON-RPC via Axum. Capability-domain symlink: `provenance.sock → sweetgrass.sock`. `hostname` crate eliminated (pure Rust `/etc/hostname`).
 - **LoamSpine**: Both transports work. Domain symlink **PASS** (v0.9.16): `ledger.sock` → `permanence.sock` created on bind, removed on shutdown. Legacy `loamspine.sock` symlink maintained. TCP opt-in via `--port`, UDS unconditional.
 
 ---
@@ -421,7 +421,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 - **biomeOS**: Both arches. `--port` binds TCP alongside UDS (v3.05+), `--tcp-only` for mobile/Android. In plasmidBin (13M).
 - **petalTongue**: x86_64 musl works. aarch64 egui headless pending. TCP via `--port`. In plasmidBin (30M).
 - **rhizoCrypt**: x86_64 musl-static shipped (5.4M, Alpine runtime). aarch64 via CI cross-compile. TCP works (dual-mode). In plasmidBin (musl-static).
-- **sweetGrass**: musl not tested. No TCP (HTTP-only). In plasmidBin (8.8M glibc — needs musl).
+- **sweetGrass**: musl not tested. TCP via `--port` (UniBin standard). In plasmidBin (8.8M glibc — needs musl).
 - **LoamSpine**: x86_64 source-built verified. aarch64 not tested. TCP works. In plasmidBin (6.9M glibc — needs musl).
 
 ---
@@ -440,7 +440,7 @@ N/A for library primals (barraCuda, bingoCube, sourDough).
 | **biomeOS** | 71 `#[async_trait]` blocked by dyn dispatch | `tools/` edition 2021 | — |
 | **petalTongue** | Discovery: 982 primal-name refs | No CONTEXT.md | 32 `#[allow(` → `#[expect(` |
 | **rhizoCrypt** | ~~Health triad missing~~ → **live-validated PASS** | ~~musl binary is glibc~~ → musl-static shipped | ~~reqwest~~ → hyper/tower (session 28) |
-| **sweetGrass** | No `--port` (HTTP-only TCP) | Health triad HTTP-only (not newline) | License → `-or-later` |
+| **sweetGrass** | `--port` shipped (TCP JSON-RPC) | `hostname` crate eliminated | BearDog `crypto.sign` delegation |
 | **LoamSpine** | — (LS-03 resolved v0.9.15) | `--port` alias shipped (v0.9.15) | musl binary is glibc |
 | **bingoCube** | — (all debt resolved) | — | — |
 | **sourDough** | No SPDX headers | No CONTEXT.md | No `deny.toml` |
@@ -560,7 +560,7 @@ coralreef:   UDS newline JSON-RPC
 squirrel:    UDS newline JSON-RPC
 nestgate:    UDS newline JSON-RPC (persistent connections)
 rhizocrypt:  UDS newline JSON-RPC + tarpc TCP + HTTP JSON-RPC TCP
-sweetgrass:  UDS newline JSON-RPC + HTTP REST + HTTP JSON-RPC
+sweetgrass:  UDS newline JSON-RPC + TCP newline JSON-RPC + HTTP REST + HTTP JSON-RPC
 loamspine:   UDS newline JSON-RPC + TCP opt-in (domain symlink, Wire L2+L3)
 petaltongue: UDS newline JSON-RPC (--socket flag)
 biomeos:     UDS newline JSON-RPC + TCP (--port) + HTTP JSON-RPC (cross-gate)
