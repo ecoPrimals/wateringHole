@@ -67,9 +67,25 @@ witnesses when BearDog is unavailable.
 {"jsonrpc":"2.0","id":1,"result":{"signature":"<base64>","algorithm":"ed25519","public_key":"<base64>"}}
 ```
 
+## Anchor Signing (Phase 55b)
+
+Per primalSpring v0.9.21 Phase 55b, `anchoring.anchor` now also delegates
+signing to BearDog. Anchor preparation responses carry Tower-signed Ed25519
+witnesses bound to the `(braid, spine)` pair via `compute_anchor_preimage`.
+Same graceful degradation as `braid.create`.
+
+### Hash Delegation — Deferred
+
+`crypto.hash` in the BearDog wire standard is BLAKE3, not SHA-256.
+Delegating would change the hash algorithm, breaking backward compatibility.
+The signing preimage is deterministic (no secret material) — no security
+benefit to delegation. The Ed25519 signature IS the audit trail. If BearDog
+ships `crypto.sha256.hash` and there is a concrete audit requirement, it
+can be added later as a one-line change.
+
 ## Metrics
 
 - `.rs` files: 187
-- Tests: 1,461 (was 1,454)
+- Tests: 1,462 (was 1,454)
 - Clippy: zero warnings (`pedantic` + `nursery`)
 - `unsafe`: none
