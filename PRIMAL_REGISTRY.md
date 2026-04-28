@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: April 26, 2026
+**Last Updated**: April 27, 2026
 
 ---
 
@@ -424,19 +424,20 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
-**Spring Versions (as of March 11, 2026)**:
+**Spring Versions (as of April 27, 2026)**:
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
-| hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
-| groundSpring | V103 |
-| neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
-| wetSpring | V99 |
-| airSpring | v0.7.6 |
-| barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 84 (4529 tests, zero warnings, ecoBin cross-arch (cfg-gated Linux modules), Blackwell sovereign dispatch, QMD v5.0, f64 lowering all NVIDIA gens, Edition 2024) |
-| primalSpring | v0.9.17 Phase 45 (75 experiments, 17 tracks, 631 tests, 87/87 gates, guideStone Level 4, genomeBin v5.1 — 46 cross-arch binaries (6 targets, Tier 1 39/39), BTSP Phase 1–3, capability-based discovery, fragment-first composition, Edition 2024, zero warnings, zero unsafe) |
+| ToadStool | S175 (hw discovery, VFIO sysmon, GlowPlug socket client, shader compilation proxy to coralReef) |
+| hotSpring | v0.6.32 (990 tests, 176 experiments, 166 binaries, 128 WGSL shaders, guideStone 30/30, GPU solve tighten/refactor complete) |
+| groundSpring | V124 (1,050+ tests) |
+| neuralSpring | V134 (1,403+ tests) |
+| wetSpring | V147 (1,902+ tests, 355 binaries, 242 named tolerances, 91.20% coverage) |
+| airSpring | v0.10.0 (1,364 tests, 97 binaries, 87 experiments, 381/381 validation, 146/146 evolution) |
+| healthSpring | V54 (940+ tests) |
+| barraCuda | v0.3.12 (precision brain, hardware calibration, sovereign compile, 803+ shaders) |
+| coralReef | Phase 10 Iter 85+ (WGSL→SASS SM35/SM70/SM120, RTX 5060 sovereign dispatch live, coral-driver init.rs modularized into 11 modules, QMD v5.0, f64 lowering all gens, Edition 2024) |
+| primalSpring | v0.9.17 Phase 45 (75 experiments, 17 tracks, 631 tests, 87/87 gates, guideStone Level 4, genomeBin v5.1 — 46 cross-arch binaries, BTSP Phase 1–3, capability-based discovery, fragment-first composition, Edition 2024, zero warnings, zero unsafe) |
 | ludoSpring | V53 (100 experiments, 817 tests, guideStone readiness 4. Binary-to-composition + upstream absorption: cell graph v2.0, `cell_launcher.sh`, GAP-07/10/11 resolved (PG-33/PG-38), 18/20 capabilities live, game.tick 0.6ms. 30 capabilities, MCP 15/15, typed IpcError, `is_skip_error` degradation, guideStone v1.2.0, genomeBin v5.1) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -484,45 +485,46 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 ### hotSpring - Computational Physics
 
-**Domain**: Plasma physics, nuclear structure, lattice QCD, transport, spectral theory
-**Phase**: Domain Validation
-**Status**: v0.6.23 — ~700 tests, 84 binaries, 62 WGSL shaders, 39/39 validation suites
+**Domain**: Plasma physics, nuclear structure, lattice QCD, transport, spectral theory, sovereign GPU validation
+**Phase**: Domain Validation + GPU Solve
+**Status**: v0.6.32 — 990 tests, 166 binaries, 128 WGSL shaders, 176 experiments, 64/64 validation suites, guideStone 30/30 (Property 3 BLAKE3 CHECKSUMS), ~$0.30 total science cost
 
-**Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC), screened Coulomb transport, Anderson localization, and Hofstadter butterfly. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline.
+**Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC + Abelian Higgs), screened Coulomb transport, Anderson localization, Hofstadter butterfly, and Stanton-Murillo transport. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline. Primary GPU solve validation spring for RTX 5060 (SM120), Titan V (SM70), Tesla K80 (SM37).
 
 **Capabilities**:
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 30 complete/active: MD, GPU scaling, parity, lattice QCD, NPU characterization, brain architecture, adaptive steering |
-| **Physics Domains** | Yukawa OCP MD, nuclear EOS (SEMF→HFB→deformed), SU(3) gauge + dynamical fermion HMC, Green-Kubo transport, Anderson 1D/2D/3D, Hofstadter butterfly, Abelian Higgs |
-| **GPU Validation** | 62 WGSL shaders, DF64 core streaming (3.24 TFLOPS, 14-digit precision on FP32), GPU-resident CG (15,360× readback reduction) |
+| **Experiments** | 176 complete: MD, GPU scaling, parity, lattice QCD, NPU, brain architecture, nuclear EOS full-scale, HFB pipeline, transport, RHMC, Abelian Higgs, Hofstadter, N-scaling, paper-parity long runs, sovereign GPU compile validation |
+| **Physics Domains** | Yukawa OCP MD, nuclear EOS (SEMF→HFB→deformed, AME2020), SU(3) gauge + dynamical fermion HMC, Green-Kubo transport (D*/η*/λ*), Anderson 1D/2D/3D, Hofstadter butterfly, Abelian Higgs (U(1)+Higgs HMC), Stanton-Murillo transport, screened Coulomb (Sturm bisection) |
+| **GPU Validation** | 128 WGSL shaders, DF64 core streaming (3.24 TFLOPS, 14-digit precision on FP32), GPU-resident CG (15,360× readback reduction). Sovereign dispatch: RTX 5060 live (April 16), Titan V + K80 active. |
+| **GPU Solve Hardware** | RTX 5060 (SM120/Blackwell) SOLVED, Titan V (SM70/Volta) active SEC2/ACR, Tesla K80 (SM37/Kepler GK210) active FECS internal firmware |
 | **NPU Integration** | Live AKD1000 via PCIe, 15-head ESN (11 production + 4 proxy), cross-run learning, concept edge detection |
-| **Brain Architecture** | 4-layer concurrent: RTX 3090 motor + Titan V pre-motor + CPU cortex + NPU cerebellum |
-| **Nautilus Shell** | Evolutionary reservoir computing (bingoCube/nautilus): 5.3% LOO, 2.6% blind Exp 029, 540× quenched→dynamical cost reduction, self-regulating drift + edge seeding, AKD1000 int4 export |
-| **Production Results** | Deconfinement χ=40.1 at β=5.69 (32⁴, 13.6h, $0.58). Dynamical crossover confirmed (8⁴, 17 β points) |
+| **Brain Architecture** | 4-layer concurrent: RTX 5060 motor + Titan V pre-motor + CPU cortex + NPU cerebellum |
+| **Nautilus Shell** | Evolutionary reservoir computing (bingoCube/nautilus): 5.3% LOO, 2.6% blind, 540× quenched→dynamical cost reduction |
+| **Production Results** | Deconfinement χ=40.1 at β=5.69 (32⁴, 13.6h, $0.58). Dynamical crossover confirmed (8⁴, 17 β points). PP Yukawa 9/9 (N=10k, 80k steps, 0.000-0.002% drift, 3.66 hrs, $0.044). |
 
-**ToadStool Contributions**:
-- 62 WGSL shaders evolved via cross-spring absorption (lattice QCD, HFB, transport, spectral)
+**coralReef Contributions**:
+- coral-driver VFIO sovereign dispatch (BAR0 + DMA + GPFIFO + PFIFO + V2 MMU + sync)
+- RTX 5060: f64 div/sqrt MUFU polyfills, `@builtin(num_workgroups)` LDC fix, semaphore fence ordering, UVM write access, QMD v5.0
+- K80: Internal firmware protocol (gf100_gr_init_ctxctl_int), FECS/GPCCS IMEM/DMEM capture, csdata loading, PGOB disable, PRI ring init, clock recipe capture
+- Titan V: SEC2/ACR pipeline, SBR hot reset via VFIO ioctl
+- init.rs (5466 LOC) split into 11 focused modules (April 27)
+
+**barraCuda Contributions**:
+- 128 WGSL shaders (lattice QCD, HFB, transport, spectral)
 - GPU-resident CG solver pattern absorbed upstream
-- DF64 core streaming validated and expanded (S60)
-- NVK dual-GPU deadlock fix (serialize device creation)
-- ESN cross-substrate patterns (GPU WGSL dispatch, NPU int4 quantization)
+- DF64 core streaming validated and expanded
+- Precision brain + hardware calibration + sovereign compile integration
+- IPC deduplicated (shared jsonrpc_request envelope)
 
-**primalTools Contributions**:
-- bingoCube/nautilus: evolutionary reservoir computing crate (31 tests, 5 examples)
-- NautilusBrain API for NPU integration, self-regulating drift monitor, integrated edge seeder
-- AKD1000 int4 weight export with quantization validation (MSE=0.004)
-- Full brain rehearsal: save/restore/transfer/merge/AKD1000 end-to-end validated
-- Exp 030: adaptive steering fix (--max-adaptive=12), bootstrapped from 29 data points
-
-**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment)
+**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment), Sovereign Compute Pipeline (barraCuda → toadStool → coralReef → hardware)
 
 ### primalSpring - Coordination and Composition Validation
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
 **Phase**: Phase 45 (Deployment Validation + Upstream Absorption)  
-**Status**: v0.9.17 Phase 45c — 75 experiments (17 tracks), 631 tests (585 passed + 46 ignored), 46 cross-arch binaries (6 target triples, Tier 1 39/39), genomeBin v5.1, guideStone Level 4 (**187/187 live NUCLEUS ALL PASS — 13/13 BTSP authenticated, 8 cellular graphs BTSP-enforced**), 41/41 bare, seed provenance (Layer 0.5), BTSP default all tiers (Layer 1.5), cellular deployment (Layer 7), 47 capabilities, NUCLEUS VALIDATED (Tower + Nest + Node + full 12-primal deployment + biomeOS substrate), biomeOS v3.28 absorbed (graph bootstrap + BTSP escalation + cellular deploy + tick loop + deep debt cleanup), `build_ecosystem_genomeBin.sh` (9-target matrix), 56 deploy graphs (fragment-first `resolve = true`), MCP tools (8 typed), zero clippy warnings (pedantic+nursery), deny(unsafe_code), ecoBin compliant, all `primal_names::` constants, centralized `tolerances::`, capability-based discovery (6-tier + Neural API)
+**Status**: v0.9.17 Phase 45 — 75 experiments (17 tracks), 631 tests (585 passed + 46 ignored), 46 cross-arch binaries (6 target triples, Tier 1 39/39), genomeBin v5.1, guideStone Level 4 (161/166 live NUCLEUS — 5 expected FAIL upstream BTSP gaps, 41/41 bare), seed provenance (Layer 0.5), BTSP escalation (Layer 1.5), 47 capabilities, NUCLEUS VALIDATED (Tower + Nest + Node + full 12-primal deployment + biomeOS substrate), `build_ecosystem_genomeBin.sh` (9-target matrix), 56 deploy graphs (fragment-first `resolve = true`), MCP tools (8 typed), zero clippy warnings (pedantic+nursery), deny(unsafe_code), ecoBin compliant, all `primal_names::` constants, centralized `tolerances::`, capability-based discovery (6-tier + Neural API)
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, multi-primal coordination with real IPC, and cross-architecture deployment to 6 target triples.
 
@@ -545,7 +547,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Ludology, HCI, game science, procedural generation, interaction design  
 **Phase**: Domain Validation  
-**Status**: V53 — 100 experiments, 817 workspace tests, guideStone readiness 4. Binary-to-composition + upstream absorption: cell graph v2.0 (synced from primalSpring 8bb90fb), `cell_launcher.sh` portable deployment, GAP-07 RESOLVED (loamSpine PG-33), GAP-10 RESOLVED, GAP-11 RESOLVED (PG-38 Fitts/Hick variant params). Live composition verified: 18/20 capabilities, game.tick in 0.6ms. 30 JSON-RPC capabilities. `game.tick` composite handler with `is_skip_error` graceful degradation. Zero `#[allow()]`, zero `unsafe`, zero clippy (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple), Edition 2024, MSRV 1.87. 91.27% line coverage (90% floor). `thiserror` 2.x. MCP 15/15 tools. barraCuda v0.3.11 (`default-features = false`).
+**Status**: V30 — 82 experiments, 675 barracuda + 19 forge tests, 42 Python parity, 19 proptest, 11 IPC integration. Zero `#[allow()]`, zero `unsafe`, zero clippy warnings (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple: AGPL + ORC + CC-BY-SA-4.0), Edition 2024, MSRV 1.87. 91.27% line coverage (85% floor enforced). `thiserror` 2.x on all error types. MCP `tools.list`/`tools.call` (8 science tools). Optional `tarpc-ipc` feature. Handlers split into 5 domain submodules. UniBin 7 subcommands. CI pipeline. Deploy graph fragment. `GpuContext` + `TensorSession` wired behind `gpu` feature. `default-features = false` on barraCuda v0.3.7.
 
 **Role**: ludoSpring validates the ecoPrimals pipeline against 13 foundational HCI/game science models — Fitts's law, Hick's law, Steering law, GOMS, Flow theory, Dynamic Difficulty, Four Keys to Fun, Engagement metrics, Perlin noise, Wave Function Collapse, L-systems, BSP trees, Tufte data-ink — proving faithful port from Python baselines to Rust CPU to GPU WGSL shaders. The validated math builds playable prototypes (Doom terminal, roguelike explorer) and cross-domain applications (field genomics provenance, medical access control, extraction shooter anti-cheat).
 
@@ -561,13 +563,12 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **Cross-Domain** | Provenance trio integration, extraction shooter fraud detection, field sample lifecycle, consent-gated medical access, cross-domain fraud unification |
 | **Health** | `health.check`, `health.liveness`, `health.readiness` |
 | **Niche** | `capability.list`, `lifecycle.status`, `capability.register`, `capability.deregister` |
-| **Experiments** | 100 across 22+ tracks: core game systems, interaction models, PCG, metrics, benchmarks, external control groups, cross-spring (NCBI, NUCLEUS), RPGPT, Games@Home, provenance trio, extraction shooters, composable viz, lysogeny, cross-spring provenance, RPGPT dialogue plane, game history revalidation, NUCLEUS composition parity |
+| **Experiments** | 82 across 22 tracks: core game systems, interaction models, PCG, metrics, benchmarks, external control groups, cross-spring (NCBI, NUCLEUS), RPGPT, Games@Home, provenance trio, extraction shooters, composable viz, lysogeny (6 open recreations), cross-spring provenance (5), RPGPT dialogue plane (9), game history revalidation (7) |
 | **Python Baselines** | 7 scripts, `combined_baselines.json` with `content_sha256`, 42 parity tests |
-| **Deployment** | Composition manifest in plasmidBin (no spring binary); 12-node `ludospring_cell.toml` cell graph; niche YAML; 30 capabilities (27 game + 3 infrastructure) served by composed primals |
+| **Deployment** | UniBin (server/status/version), deploy graph, niche YAML, Neural API domain registration, 26 capabilities (24 game + 2 health) |
 
-**IPC Methods**: 30 JSON-RPC 2.0 methods (game evaluation, procedural generation, telemetry, health, lifecycle, capability, game tick, interaction) over Unix sockets  
-**Dependencies**: barraCuda v0.3.11 (CPU math, `default-features = false`), wgpu (optional `gpu` feature), serde, uuid. Zero C dependencies in application code.
-**3-Tier Validation**: Python baselines → Rust port (spring binary, tier 2) → Primal composition (NUCLEUS cell graph, tier 3)
+**IPC Methods**: 26 JSON-RPC 2.0 methods (game evaluation, procedural generation, telemetry, health, lifecycle, capability) over Unix sockets  
+**Dependencies**: barraCuda (CPU math, `default-features = false`), wgpu (optional `gpu` feature), serde, uuid. Zero C dependencies in application code.
 
 **Participates In**: RPGPT (game science + session quality), Provenance Trio (rhizoCrypt DAG + loamSpine certs + sweetGrass braids), biomeOS (niche citizen), toadStool (GPU dispatch), coralReef (shader compilation), petalTongue (visualization), Squirrel (AI narration), metalForge (cross-substrate routing)
 

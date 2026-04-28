@@ -2,8 +2,8 @@
 
 | Field | Value |
 |-------|-------|
-| **Version** | 1.0.0 |
-| **Date** | April 4, 2026 |
+| **Version** | 1.1.0 |
+| **Date** | April 27, 2026 |
 | **Status** | Active |
 
 ---
@@ -59,30 +59,37 @@ Every layer pure Rust in the target; hardware interchangeable; math sovereign.
 | 5 | WGSL ↔ naga | barraCuda | Upstream naga |
 | 5 | WGSL → ISA direct | coralReef | Level 3 roadmap |
 | 4 | wgpu fork, hardware discovery | toadStool | Partial |
-| 2 | Userspace driver | groundSpring | Level 4 |
-| 1 | SPIR-V → ISA, f64 polyfills | barraCuda / coralNak | Mixed |
-| 0 | VFIO, thin kmod | toadStool / groundSpring | In progress |
+| 2 | Userspace driver (coral-driver) | coralReef | SM120 live, SM70/SM37 active |
+| 1 | SPIR-V → ISA, f64 polyfills | barraCuda / coralNak | SM35/SM70/SM120 compile parity |
+| 0 | VFIO, thin kmod, glow plug | coralReef / toadStool | SM120 live, SM70/SM37 active |
 
 ### Evolution levels (condensed)
 
 | Level | Scope | Status |
 |-------|--------|--------|
 | **1** | WGSL polyfills, `compile_shader_f64`/`df64`, Fp64Strategy, NVK workarounds | Complete; gap vs Kokkos-CUDA closed **27× → 3.7×** (93%); Verlet/cell-list wired |
-| **2** | coralReef sovereign compiler (NAK roots), DRM, coralGpu, tarpc/bincode | Complete — SM35/SM70/SM120 compile parity, QMD v5.0, f64 lowering all gens; remaining: dispatch wiring (GAP-HS-031), FECS path |
+| **2** | coralReef sovereign compiler (NAK roots), DRM, coralGpu, tarpc/bincode | Complete — SM35/SM70/SM120 compile parity, QMD v5.0, f64 lowering all gens |
 | **3** | Standalone coralNak, WGSL → ISA direct, multi-arch | Partial |
-| **4** | coralDriver, coralMem, coralQueue, vfio backend, thin kmod | Core: VFIO glow plug + PBDMA context load proven; full runtime 3–6 mo class |
+| **4** | coralDriver, coralMem, coralQueue, vfio backend, thin kmod | RTX 5060 SOLVED (full dispatch); Titan V active (SEC2/ACR); K80 active (FECS internal fw). init.rs monolith split into 11 modules. |
 
 Estimated scaffolding: Level 1 days; Level 2 2–4 weeks; Level 3 1–2 months; Level 4 3–6 months (from source doc).
 
-### Layer status (March 17 catchup)
+### Layer status (April 27, 2026)
 
 - **Layers -1–1** (power, glow plug, BAR2): Complete; coral-glowplug production-grade; VFIO-first; boot-persistent.
-- **Layers 2–4** (PFIFO, runlist, GR context): Blocked — MMU fault buffers → runlist encoding → PBDMA activation → FECS/GPCCS context (see Bring-Up Guide).
-- **Layer 5** (shader compilation): Operational — coralReef 1314+ coral-reef tests, WGSL→SASS SM35/SM70/SM120 (Kepler→Blackwell), AMD gfx1030/1100/90a. f64 transcendental lowering fixed for all NVIDIA generations. QMD v5.0 for Blackwell. 10/10 HMC pipeline shaders compile on all 3 GPU generations (hotSpring Exp 176).
-- **Layer 6** (math/shaders): barraCuda v0.3.5 class, large test counts per source.
-- **toadStool**: Partial — GlowPlug socket client, VFIO sysmon, hw-learn feed gaps per source.
+- **Layers 2–4** (PFIFO, runlist, GR context, FECS boot):
+  - **RTX 5060 (SM120/Blackwell)**: SOLVED — full sovereign VFIO dispatch live (April 16). f64 div/sqrt polyfills, semaphore fence, QMD v5.0, UVM write access all proven.
+  - **Titan V (SM70/Volta)**: ACTIVE — SEC2/ACR boot path under investigation. Warm FECS path blocked by HS mode (STARTCPU rejected when falcon in secure mode). SBR hot reset via VFIO ioctl implemented.
+  - **Tesla K80 (SM37/Kepler GK210)**: ACTIVE — internal firmware protocol (gf100_gr_init_ctxctl_int) implemented. FECS IMEM/DMEM capture from Nouveau, csdata loading (5 register packs), PGOB disable, PRI ring init (VBIOS cmd 0x03), clock recipe capture all proven. Last blocker: truncated internal firmware replaced with full 4096-byte capture.
+- **Layer 5** (shader compilation): Operational — coralReef 1314+ coral-reef tests, WGSL→SASS SM35/SM70/SM120 (Kepler→Blackwell), AMD gfx1030/1100/90a. f64 transcendental lowering for all NVIDIA generations. QMD v5.0 for Blackwell.
+- **Layer 6** (math/shaders): barraCuda v0.3.12, precision brain + hardware calibration + sovereign compile integration.
+- **toadStool**: GlowPlug socket client, VFIO sysmon, hardware discovery IPC.
 
-**Critical path**: coralReef Gaps 2→3→4→5 (P1); NVK bridge interim (Mesa build / `libvulkan_nouveau.so` on some distros).
+**Critical path**: K80 FECS boot completion → Titan V SEC2/ACR → three-generation sovereign dispatch pipeline.
+
+### Code health (April 27, 2026)
+
+coral-driver `vfio_compute/init.rs` (5466 LOC monolith) split into 11 focused modules. Dead code removed. Shared abstractions extracted (hub station params, PGOB power steps). hotSpring IPC deduplicated, GPU constructors DRYed, experiment bins use `HOTSPRING_BDF` env var. Both repos pass `cargo fmt` + `cargo clippy --pedantic --nursery`.
 
 ### Cross-primal cycle
 
