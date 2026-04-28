@@ -74,7 +74,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BarraCuda** | Pure Math | 826 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.12, 4,393+ tests, 32 IPC methods, BTSP Phase 2 | Production (A+) |
 | **coralReef** | Shader Compilation | Sovereign WGSL/SPIR-V/GLSL→native shader compiler. 11 GPU architectures (NVIDIA SM35–SM120 + AMD GCN5/RDNA2–RDNA4). Wire contract documented. CompilationInfo in IPC. f64 transcendental lowering (Newton-Raphson, Horner). BTSP Phase 2. ecoBin v3 deny.toml enforced. coral-gpu unified compute abstraction. VFIO dispatch + DRM nvidia-drm UVM. **coral-glowplug** boot-persistent PCIe device lifecycle broker. **coral-ember** ring-keeper with VFIO fd persistence. 4,504 tests, zero warnings | Production (Phase 10, Iter 80) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Composition primal: Neural API (320+ translations, 27 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring, BTSP security posture, cellular deploy via neural-api, tick loop event relay | Production (v3.28, 7,814+ tests, zero C deps, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Composition primal: Neural API (320+ translations, 27 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring, BTSP security posture, cellular deploy via neural-api, tick loop event relay, graph signing (BLAKE3+Ed25519), coordination key caching | Production (v3.29, 7,814+ tests, zero C deps, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -424,7 +424,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### BTSP Convergence
 - `SOURDOUGH_BTSP_RELAY_PATTERN.md` — **Start here for BTSP.** The relay pattern extracted from 9 converged primals
 - `BTSP_PROTOCOL_STANDARD.md` — Full protocol specification (v1.0)
-- `fossilRecord/UPSTREAM_GAP_STATUS_APR20_2026.md` — Upstream gap tracker (biomeOS v3.28 absorbed, April 26)
+- `fossilRecord/UPSTREAM_GAP_STATUS_APR20_2026.md` — Upstream gap tracker (biomeOS v3.29 absorbed, April 28)
 - `handoffs/archive/BTSP_WIRE_CONVERGENCE_APR24_2026.md` — Per-primal convergence status and scoreboard
 
 ### Interactive Composition
