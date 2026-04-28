@@ -420,7 +420,27 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Metrics**: 1,368 tests (default), 1,541 (all-features), ~49,700 lines, 0 clippy warnings
 
+### S52: Delegated Vertex Signing on Append (April 28)
+
+**Requested by primalSpring v0.9.20 (Phase 55)**: DAG integrity is self-asserted — hashes are computed locally inside rhizoCrypt. To make branching state trees (game trees, chemistry, physics) independently verifiable, primalSpring requested delegating vertex signing to the crypto provider.
+
+**Implementation**:
+- `RhizoCrypt::signing_client()` — lazily resolves `Capability::Signing` from the discovery registry via `tokio::sync::OnceCell`. Caches for the primal's lifetime. Returns `None` in standalone mode.
+- `sign_vertex_if_available()` — service-layer helper in `service.rs` that signs vertices via `crypto.sign_ed25519` before `append_vertex`. Wired into both `append_event` and `append_batch`.
+- Graceful degradation: vertices without an `agent` DID or without a signing provider remain unsigned.
+- `specs/CRYPTO_MODEL.md` updated with vertex signing flow diagram and delegated operations table.
+
+**New tests** (5):
+- `test_signing_client_none_without_provider` — lazy resolution returns None without provider
+- `test_signing_client_cached_after_first_call` — OnceCell caching verified
+- `test_vertex_unsigned_without_signing_provider` — core append preserves unsigned vertices
+- `test_append_event_unsigned_without_provider` — RPC append gracefully degrades
+- `test_append_batch_unsigned_without_provider` — batch append gracefully degrades
+
+**Metrics**: 1,373 tests (default), 1,546 (all-features), ~49,800 lines, 0 clippy warnings
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
 - **BTSP Phase 3** — per-frame AEAD using derived session keys
+- **Vertex signature verification on retrieval** — optional verification of stored signatures when reading from DAG or computing Merkle roots
