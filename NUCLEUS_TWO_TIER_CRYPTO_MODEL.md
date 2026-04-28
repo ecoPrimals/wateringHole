@@ -218,14 +218,14 @@ The bootstrap script:
 - **Evolution**: Add optional signature verification when reading vertices from DAG or computing Merkle roots
 
 ### loamSpine (Nest)
-- **Status**: Declares BTSP as consumed but no active channels
-- **Gap**: Ledger entries are not signed by Tower
-- **Evolution**: Sign each `entry.append` via `crypto.sign`, store signature in entry metadata
+- **Status**: **Tower-signed ledger entries** (v0.9.16) — `entry.append` and `session.commit` sign via `crypto.sign_ed25519` when crypto provider is available. Signature stored in entry metadata (`tower_signature`, `tower_signature_alg`). BLAKE3 chain hashing remains local.
+- **Gap**: BTSP **encrypted tunnels** not yet active (no primal in the ecosystem pioneers persistent tunnels yet)
+- **Evolution**: Establish BTSP tunnel at startup for encrypted ledger replication when a pioneer emerges
 
 ### sweetGrass (Nest)
-- **Status**: Local hashing for braid provenance
-- **Gap**: Braid integrity not cryptographically signed
-- **Evolution**: Same as rhizoCrypt — delegate signing to Tower for verifiable provenance
+- **Status**: **Tower-delegated braid signing** (v0.7.28) — `braid.create` delegates to `crypto.sign` Ed25519 via `CryptoDelegate` when crypto provider is available. Tower-tier witnesses (`tier: "tower"`) with `did:key:` agent DID. SHA-256 signing hash remains local.
+- **Gap**: `anchoring.anchor` still uses local signing (incremental — `CryptoDelegate` already exists)
+- **Evolution**: Delegate anchor signing to Tower for ecosystem-wide trust
 
 ### ToadStool (Node)
 - **Status**: Was missing `BEARDOG_SOCKET` and `BTSP_PROVIDER_SOCKET` entirely — **FIXED** in composition_nucleus.sh

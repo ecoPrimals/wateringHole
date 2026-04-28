@@ -49,39 +49,31 @@ derivation check in `secrets.retrieve` + purpose parameter in encrypt/decrypt.
 
 ---
 
-## rhizoCrypt — Tower Crypto Delegation (P2)
+## rhizoCrypt — Tower Crypto Delegation (P2) — **RESOLVED (S52/S54)**
 
-**Latest**: S53 — stale metrics reconciled, delegation status updated.
-Tests, coverage, and debt unknown from current handoff.
+**Latest**: S54 — 1,546 tests (all-features), 93.88% coverage, 0 clippy warnings,
+167 `.rs` files, ~49,900 lines. Deep debt audit clean across 8 categories.
 
-**What's needed**: rhizoCrypt hashes DAG events locally (BLAKE3 in-process).
-When operating within a NUCLEUS composition, delegate hashing to the Tower
-so BearDog has a complete audit trail of all content-addressed operations.
+**Signing delegation already shipped (S52)**: `sign_vertex_if_available()` calls
+`crypto.sign_ed25519` via capability-discovered signing provider on every
+`dag.event.append`. Lazy discovery, graceful degradation. This is the **same
+pattern** loamSpine uses for `entry.append` and sweetGrass uses for `braid.create`.
 
-**Pattern** (same as loamSpine v0.9.16 and sweetGrass v0.7.28 already use):
+**Hash delegation declined (S54)**: BLAKE3 is deterministic (no key material) —
+delegating it adds zero cryptographic value while imposing a 1000x+ IPC penalty
+on the hottest path (~80ns local → ~100-500μs over UDS). The audit trail concern
+is already addressed: Ed25519 vertex signatures attest to the content (including
+its BLAKE3 hash). Neither loamSpine nor sweetGrass delegates hashing — both
+delegate only signing. See `specs/CRYPTO_MODEL.md` for the canonical two-tier
+model: local hashing for data integrity, delegated signing for attestation.
 
-```rust
-if let Ok(socket) = std::env::var("BEARDOG_SOCKET") {
-    // Tower delegation
-    let hash = rpc_call(&socket, "crypto.blake3_hash", json!({"data": b64_data}));
-} else {
-    // Standalone fallback
-    let hash = blake3::hash(data);
-}
-```
+**DAG payload encryption**: Valid future item, but low priority — rhizoCrypt is
+ephemeral by design (data discarded by default). Noted in roadmap.
 
-loamSpine already does this for ledger entry signing (`crypto.sign_ed25519`).
-sweetGrass already does this for braid signing (`crypto.sign`). rhizoCrypt is
-the last Nest primal without Tower crypto delegation.
-
-**Also consider**: Encrypting DAG event payloads using `crypto.encrypt` with
-purpose `"dag"` when `FAMILY_ID` is present. This gives data-at-rest
-encryption for the working memory layer without depending on NestGate's
-encrypt-at-rest (rhizoCrypt manages its own storage).
-
-**Effort estimate**: Small — follow the loamSpine/sweetGrass pattern. Socket
-resolution is the same 4-step chain. The `BEARDOG_SOCKET` env var is already
-injected by the composition launcher.
+**Correction**: The original blurb stated "rhizoCrypt is the last Nest primal
+without Tower crypto delegation" — this was inaccurate. S52 (April 28) shipped
+vertex signing delegation before Phase 55b was published. All three Nest primals
+now delegate signing identically.
 
 ---
 
@@ -276,7 +268,7 @@ BearDog purpose-key RPC (P1) for end-to-end wiring.
 | Primal | Debt | Priority | Effort |
 |--------|------|----------|--------|
 | BearDog | Purpose-key lazy derivation + encrypt/decrypt with purpose | P1 | Small |
-| rhizoCrypt | Tower crypto delegation (hash + optional encrypt) | P2 | Small |
+| rhizoCrypt | **RESOLVED** — vertex signing delegated (S52); hash delegation declined | P2 → Done | — |
 | sweetGrass | Anchor signing + hash delegation (incremental) | P3 | Trivial |
 | loamSpine | BTSP encrypted channels (ecosystem frontier) | P4 | Medium (new ground) |
 | ToadStool | DISCOVERY_SOCKET self-registration | P5 | Trivial |

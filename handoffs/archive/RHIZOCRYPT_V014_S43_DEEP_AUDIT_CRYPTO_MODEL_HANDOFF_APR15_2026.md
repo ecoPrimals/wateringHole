@@ -476,8 +476,20 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Metrics**: 1,546 tests (all-features), 167 `.rs` files, ~49,900 lines, 0 clippy warnings
 
+### S54: Phase 55b Audit Response — Hash Delegation Declined (April 28)
+
+**primalSpring Phase 55b** requested delegating BLAKE3 hashing to `crypto.blake3_hash` via Tower IPC, claiming rhizoCrypt is "the last Nest primal without Tower crypto delegation."
+
+**Response**:
+- **Signing delegation already shipped (S52)** — `sign_vertex_if_available()` calls `crypto.sign_ed25519` on every vertex append. This is identical to loamSpine's `entry.append` signing and sweetGrass's `braid.create` signing.
+- **Hash delegation declined** — BLAKE3 is deterministic (no key material), adds zero cryptographic value, imposes 1000x+ IPC cost on hot path. Neither loamSpine nor sweetGrass delegates hashing.
+- **Audit conflation corrected** — the Phase 55b blurb said "loamSpine already does this for ledger entry signing" and "sweetGrass already does this for braid signing" — both statements describe **signing** delegation, not hashing, which is exactly what rhizoCrypt already does.
+
+**wateringHole handoffs updated**: `UPSTREAM_EVOLUTION_BLURBS_PHASE55B`, `PRIMALSPRING_V0921_PHASE55B_UPSTREAM_GUIDANCE` (rhizoCrypt section rewritten with technical rationale), `NUCLEUS_TWO_TIER_CRYPTO_MODEL` (all three Nest primal sections reconciled — loamSpine and sweetGrass also updated to reflect shipped signing delegation).
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
 - **BTSP Phase 3** — per-frame AEAD using derived session keys
 - **Vertex signature verification on retrieval** — optional verification of stored signatures when reading from DAG or computing Merkle roots
+- **DAG payload encryption** — `crypto.encrypt` with purpose `"dag"` when `FAMILY_ID` is present (low priority — ephemeral data)
