@@ -5,14 +5,17 @@ validation. Each blurb is self-contained — forward it to the primal team.
 
 ---
 
-## BearDog — Purpose-Key RPC (P1, blocks end-to-end encryption)
+## BearDog — RESOLVED (W74 shipped P1)
 
-**Latest**: W72 — `crypto.derive_purpose_key` + `crypto.sign_registration` shipped.
-14,928+ tests, zero warnings.
+**Latest**: W74 — lazy purpose-key derivation in `secrets.retrieve` +
+`crypto.encrypt`/`crypto.decrypt` with `purpose` param. W72 shipped
+`crypto.derive_purpose_key` + `crypto.sign_registration`.
 
-**What you shipped that works**: `crypto.derive_purpose_key` lets the bootstrap
-script replace HMAC chains with a single call. `crypto.sign_registration`
-enables Songbird to verify authentic registrations. Both are absorbed.
+**What shipped (W74)**: Exactly what was asked. `secrets.retrieve` with
+`nucleus:{family}:purpose:{name}` auto-derives and caches keys from
+`FAMILY_SEED`. `crypto.encrypt`/`crypto.decrypt` accept `purpose` param,
+resolve the key, return NUCLEUS standard envelope. Compatible with NestGate
+encrypt-at-rest and Squirrel inference encryption.
 
 **What's still needed**: Two consumers — NestGate and Squirrel — have client
 stubs ready for purpose-key encrypted storage and inference payloads. They call:
@@ -166,33 +169,13 @@ for ToadStool is the reverse direction — *announcing* capabilities to Songbird
 
 ---
 
-## barraCuda — Self-Registration via DISCOVERY_SOCKET (P5)
+## barraCuda — RESOLVED (Sprint 47 shipped self-registration)
 
-**Latest**: v0.3.12 Sprint 46/46b — All NUCLEUS env vars wired (`BEARDOG_SOCKET`,
-`BTSP_PROVIDER_SOCKET`, `DISCOVERY_SOCKET`, `FAMILY_SEED`). Role-based naming.
-12-axis deep debt audit clean. Zero open gaps. 269+ tests.
-
-**What you shipped that works**: All Phase 55 env var requirements are wired.
-`resolve_via_discovery_socket()` resolves capabilities through Songbird.
-Sprint 46b role-based naming removes all hardcoded sibling primal names.
-Absorbed and documented.
-
-**What's still useful (incremental)**: Self-register capabilities with Songbird
-at startup, same pattern as ToadStool above:
-
-```rust
-if let Ok(socket) = std::env::var("DISCOVERY_SOCKET") {
-    let _ = rpc_call(&socket, "ipc.register", json!({
-        "primal_id": "barracuda",
-        "capabilities": ["tensor", "math", "stats", "linalg", "ml", "spectral",
-                         "activation", "noise", "rng", "fhe", "device"],
-        "endpoint": format!("unix://{}", own_socket_path)
-    }));
-}
-```
-
-**Effort estimate**: Trivial — you already have the Songbird resolution code.
-Self-registration is the reverse direction.
+**Latest**: v0.3.12 Sprint 47 — Songbird self-registration shipped.
+`register_with_songbird()` sends `ipc.register` with 11 capability tags
+(`tensor`, `math`, `stats`, `linalg`, `ml`, `spectral`, `activation`,
+`noise`, `rng`, `fhe`, `device`) on all startup paths. Fire-and-forget,
+graceful degradation. 272+ tests.
 
 ---
 
@@ -267,12 +250,12 @@ BearDog purpose-key RPC (P1) for end-to-end wiring.
 
 | Primal | Debt | Priority | Effort |
 |--------|------|----------|--------|
-| BearDog | Purpose-key lazy derivation + encrypt/decrypt with purpose | P1 | Small |
+| BearDog | **RESOLVED** W74 — lazy purpose-key derivation + purpose encrypt/decrypt shipped | P1 → Done | — |
 | rhizoCrypt | **RESOLVED** — vertex signing delegated (S52); hash delegation declined | P2 → Done | — |
 | sweetGrass | Anchor signing + hash delegation (incremental) | P3 | Trivial |
 | loamSpine | BTSP encrypted channels (ecosystem frontier) | P4 | Medium (new ground) |
 | ToadStool | DISCOVERY_SOCKET self-registration | P5 | Trivial |
-| barraCuda | DISCOVERY_SOCKET self-registration | P5 | Trivial |
+| barraCuda | **RESOLVED** Sprint 47 — Songbird self-registration shipped | P5 → Done | — |
 | coralReef | None | — | — |
 | petalTongue | None | — | — |
 | Songbird | None | — | — |

@@ -64,54 +64,22 @@ Once BearDog ships this:
 
 ---
 
-## Priority 2: rhizoCrypt — Tower Crypto Delegation — ALREADY RESOLVED (S52)
+## ~~Priority 2: rhizoCrypt — Tower Crypto Delegation~~ RESOLVED
 
-> **rhizoCrypt response (S54)**: The signing delegation ask is **already implemented**.
-> The hash delegation ask is **architecturally inappropriate** and is declined.
+rhizoCrypt S52 already ships vertex signing delegation to `crypto.sign_ed25519`
+on every `dag.event.append` — the same pattern loamSpine and sweetGrass use.
 
-### What's Already Shipped (S52)
+The original ask to delegate BLAKE3 hash computation was **incorrect** and has
+been withdrawn. BLAKE3 is deterministic and keyless — delegation adds zero
+cryptographic value while imposing a 1000x+ latency penalty on the hot path
+(~80ns local vs ~100-500us IPC). The Ed25519 vertex signature already covers
+the canonical bytes including the hash.
 
-rhizoCrypt delegates **vertex signing** to the crypto provider since S52:
+**Correct model**: Local hashing for data integrity, delegated signing for
+attestation. All three Nest primals now implement this identically.
 
-- `sign_vertex_if_available()` calls `crypto.sign_ed25519` via capability-discovered
-  signing provider on every `dag.event.append` and `dag.event.append_batch`
-- Lazy discovery via `tokio::sync::OnceCell` — zero cost in standalone mode
-- Graceful degradation when no provider is present
-- 5 tests covering signing, caching, and graceful degradation
-- Documented in `specs/CRYPTO_MODEL.md` with architecture diagram
-
-This is the **same pattern** loamSpine uses for `entry.append` signing and
-sweetGrass uses for `braid.create` signing.
-
-### Why Hash Delegation Is Declined
-
-The ask to delegate BLAKE3 hashing to `crypto.blake3_hash` is declined because:
-
-1. **BLAKE3 is deterministic** — same input → same hash, no key material. Delegation
-   adds zero cryptographic value. Anyone can independently verify a BLAKE3 hash.
-
-2. **1000x+ performance regression** — BLAKE3 is on rhizoCrypt's hottest path
-   (~80ns local). IPC round-trip over UDS is ~100-500μs. This would destroy
-   vertex creation throughput (1.4M/sec → ~2K/sec).
-
-3. **The audit trail is already solved** — S52's vertex signing means the crypto
-   provider signs every vertex's canonical bytes (which include the BLAKE3 hash).
-   The Ed25519 signature IS the audit trail. Delegating the hash adds nothing.
-
-4. **Neither sibling delegates hashing** — loamSpine delegates `crypto.sign_ed25519`
-   (signing, not hashing). sweetGrass delegates `crypto.sign` (signing, not hashing).
-   No Nest primal delegates deterministic hashing to the Tower.
-
-5. **`CRYPTO_MODEL.md` explicitly documents this two-tier model**: local hashing for
-   data integrity, delegated signing for attestation. This is by design.
-
-### DAG Payload Encryption (Future — Not Urgent)
-
-Encrypting DAG event payloads via `crypto.encrypt` with purpose `"dag"` is a valid
-future item, but low priority: rhizoCrypt is ephemeral by design (data discarded by
-default). Active sessions are protected by filesystem permissions (UDS) and BTSP
-handshake. Dehydrated data goes to permanent storage (NestGate encrypt-at-rest).
-Noted in roadmap, not blocking.
+DAG payload encryption (`crypto.encrypt` with purpose `"dag"`) is accepted as
+a low-priority future item by the rhizoCrypt team.
 
 ---
 
@@ -172,16 +140,16 @@ central launcher.
 
 | Primal | Last Handoff | Key Ask | Priority |
 |--------|-------------|---------|----------|
-| **BearDog** | W72 (signed registration) | Purpose-key RPC (`secrets.retrieve` + `crypto.encrypt`/`decrypt` with purpose) | P1 — blocks end-to-end encryption |
-| **rhizoCrypt** | S54 | **RESOLVED** — vertex signing delegated (S52); hash delegation declined (deterministic, 1000x perf cost, no crypto value); DAG encryption roadmapped | P2 → Done |
-| **sweetGrass** | v0.7.28 | Tower crypto delegation (hash + anchor signing) | P3 |
-| **loamSpine** | v0.9.16 | BTSP active channels at startup | P4 |
+| **BearDog** | W74 | **RESOLVED** — lazy purpose-key derivation + purpose encrypt/decrypt | Done |
+| **rhizoCrypt** | S54 | **RESOLVED** — signing delegation shipped (S52), hash delegation withdrawn | Done |
+| **sweetGrass** | v0.7.28 | Anchor signing via Tower (incremental, non-blocking) | P3 |
+| **loamSpine** | v0.9.16 | BTSP encrypted channels (ecosystem frontier) | P4 |
 | **ToadStool** | Display Phase 2 | `DISCOVERY_SOCKET` self-registration | P5 |
-| **barraCuda** | Sprint 46 | `DISCOVERY_SOCKET` self-registration | P5 |
-| **NestGate** | S48 | RESOLVED (encrypt-at-rest + auth bypass shipped) | Done |
-| **Squirrel** | AN | RESOLVED (HTTP providers + discovery + crypto foundation) | Done |
-| **Songbird** | W178 | RESOLVED (anyhow migration, error honesty) | Done |
-| **biomeOS** | v3.30 | RESOLVED (deep debt cleanup, JWT hardening) | Done |
+| **barraCuda** | Sprint 47 | **RESOLVED** — Songbird self-registration shipped | Done |
+| **NestGate** | S48 | **RESOLVED** (encrypt-at-rest + auth bypass shipped) | Done |
+| **Squirrel** | AN | **RESOLVED** (HTTP providers + discovery + crypto foundation) | Done |
+| **Songbird** | W178 | **RESOLVED** (anyhow migration, error honesty) | Done |
+| **biomeOS** | v3.30 | **RESOLVED** (deep debt cleanup, JWT hardening) | Done |
 | **petalTongue** | Phase 55 | Current (awakening, signing, sensor) | Tracking |
 | **coralReef** | Iter 86 | Current (deep debt, smart refactoring) | Tracking |
 
