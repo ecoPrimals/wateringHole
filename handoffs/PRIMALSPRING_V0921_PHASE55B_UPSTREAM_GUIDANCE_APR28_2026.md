@@ -64,28 +64,54 @@ Once BearDog ships this:
 
 ---
 
-## Priority 2: rhizoCrypt — Tower Crypto Delegation
+## Priority 2: rhizoCrypt — Tower Crypto Delegation — ALREADY RESOLVED (S52)
 
-**Current**: rhizoCrypt hashes DAG events locally (BLAKE3 in-process).
+> **rhizoCrypt response (S54)**: The signing delegation ask is **already implemented**.
+> The hash delegation ask is **architecturally inappropriate** and is declined.
 
-**Ask**: When operating within a NUCLEUS composition (detected by `BEARDOG_SOCKET`
-or `BTSP_PROVIDER_SOCKET` presence), delegate hashing to the Tower via
-`crypto.blake3_hash` or `crypto.sign`. This gives the Tower a complete audit
-trail of all content-addressed operations.
+### What's Already Shipped (S52)
 
-**Pattern**:
-```
-if BEARDOG_SOCKET is set:
-    hash = rpc_call(beardog, "crypto.blake3_hash", {data: ...})
-else:
-    hash = local_blake3(data)  // standalone fallback
-```
+rhizoCrypt delegates **vertex signing** to the crypto provider since S52:
 
-This is the same capability-first pattern Squirrel uses for discovery resolution:
-try Tower, fall through to local.
+- `sign_vertex_if_available()` calls `crypto.sign_ed25519` via capability-discovered
+  signing provider on every `dag.event.append` and `dag.event.append_batch`
+- Lazy discovery via `tokio::sync::OnceCell` — zero cost in standalone mode
+- Graceful degradation when no provider is present
+- 5 tests covering signing, caching, and graceful degradation
+- Documented in `specs/CRYPTO_MODEL.md` with architecture diagram
 
-**Also**: Consider encrypting DAG event payloads using `crypto.encrypt` with
-purpose `"dag"` when a FAMILY_ID is present.
+This is the **same pattern** loamSpine uses for `entry.append` signing and
+sweetGrass uses for `braid.create` signing.
+
+### Why Hash Delegation Is Declined
+
+The ask to delegate BLAKE3 hashing to `crypto.blake3_hash` is declined because:
+
+1. **BLAKE3 is deterministic** — same input → same hash, no key material. Delegation
+   adds zero cryptographic value. Anyone can independently verify a BLAKE3 hash.
+
+2. **1000x+ performance regression** — BLAKE3 is on rhizoCrypt's hottest path
+   (~80ns local). IPC round-trip over UDS is ~100-500μs. This would destroy
+   vertex creation throughput (1.4M/sec → ~2K/sec).
+
+3. **The audit trail is already solved** — S52's vertex signing means the crypto
+   provider signs every vertex's canonical bytes (which include the BLAKE3 hash).
+   The Ed25519 signature IS the audit trail. Delegating the hash adds nothing.
+
+4. **Neither sibling delegates hashing** — loamSpine delegates `crypto.sign_ed25519`
+   (signing, not hashing). sweetGrass delegates `crypto.sign` (signing, not hashing).
+   No Nest primal delegates deterministic hashing to the Tower.
+
+5. **`CRYPTO_MODEL.md` explicitly documents this two-tier model**: local hashing for
+   data integrity, delegated signing for attestation. This is by design.
+
+### DAG Payload Encryption (Future — Not Urgent)
+
+Encrypting DAG event payloads via `crypto.encrypt` with purpose `"dag"` is a valid
+future item, but low priority: rhizoCrypt is ephemeral by design (data discarded by
+default). Active sessions are protected by filesystem permissions (UDS) and BTSP
+handshake. Dehydrated data goes to permanent storage (NestGate encrypt-at-rest).
+Noted in roadmap, not blocking.
 
 ---
 
@@ -147,7 +173,7 @@ central launcher.
 | Primal | Last Handoff | Key Ask | Priority |
 |--------|-------------|---------|----------|
 | **BearDog** | W72 (signed registration) | Purpose-key RPC (`secrets.retrieve` + `crypto.encrypt`/`decrypt` with purpose) | P1 — blocks end-to-end encryption |
-| **rhizoCrypt** | S53 | Tower crypto delegation (hash + optional encrypt) | P2 |
+| **rhizoCrypt** | S54 | **RESOLVED** — vertex signing delegated (S52); hash delegation declined (deterministic, 1000x perf cost, no crypto value); DAG encryption roadmapped | P2 → Done |
 | **sweetGrass** | v0.7.28 | Tower crypto delegation (hash + anchor signing) | P3 |
 | **loamSpine** | v0.9.16 | BTSP active channels at startup | P4 |
 | **ToadStool** | Display Phase 2 | `DISCOVERY_SOCKET` self-registration | P5 |
