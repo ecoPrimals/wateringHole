@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: April 27, 2026
+**Last Updated**: April 28, 2026
 
 ---
 
@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v2.99  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,695 tests (0 failures), 90%+ region / function / line coverage (llvm-cov), 26 workspace crates, 40 deploy graphs, 20 niche templates, 290+ capability translations, 26 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant, `#[forbid(unsafe_code)]` all crate roots + all 20+ binaries, BTSP security posture wired
+**Version**: v3.30  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,814+ tests (0 failures), 90%+ region / function / line coverage (llvm-cov), 25 workspace crates, 42 deploy graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant, `#[forbid(unsafe_code)]` all crate roots + all 20+ binaries, BTSP security posture wired, graph signing (BLAKE3+Ed25519), coordination key caching
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -228,7 +228,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Neural API** | Semantic routing (`capability.call`), 290+ translations, 26 domains, pathway learning |
+| **Neural API** | Semantic routing (`capability.call`), 320+ translations, 27 domains, pathway learning |
 | **Atomics** | Tower Atomic, Node Atomic, Nest Atomic, Full NUCLEUS composition |
 | **Provenance** | `rootpulse_commit` graph, `provenance_pipeline` graph, rhizoCrypt/LoamSpine/sweetGrass domains |
 | **Discovery** | Runtime capability matching, primal health monitoring, prefix resolution |
