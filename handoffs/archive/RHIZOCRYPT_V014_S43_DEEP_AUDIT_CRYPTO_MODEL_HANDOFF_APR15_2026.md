@@ -439,6 +439,25 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Metrics**: 1,373 tests (default), 1,546 (all-features), ~49,800 lines, 0 clippy warnings
 
+### S52b: Deep Debt Audit — Agnostic Test Fixtures (April 28)
+
+**Comprehensive 8-category audit** across all 167 `.rs` files:
+
+| Category | Finding |
+|----------|---------|
+| Files >800L | **None** (max 724L, test file) |
+| Unsafe code | **Zero** — `forbid(unsafe_code)` on all production crates |
+| External deps | **All pure Rust** — blake3 confirmed `CARGO_FEATURE_PURE` |
+| unwrap/expect in production | **Zero** — workspace-level `deny` |
+| async-trait macro | **None** — manual `BoxFuture` desugaring |
+| `Box<dyn Error>` | **Only in docs** — `thiserror` throughout |
+| TODO/FIXME/HACK/XXX | **None** |
+| Mocks in production | **All cfg-gated** |
+
+**Cleanup**: All remaining hardcoded primal names in test fixtures replaced with capability-agnostic service IDs across 8 files. Only remaining primal-name references: guardrail deny-list test (intentional) and vendor-specific HTTP client types (legitimate API surface).
+
+**Metrics**: 1,546 tests (all-features), ~49,800 lines, 0 clippy warnings
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
