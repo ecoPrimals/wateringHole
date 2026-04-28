@@ -85,6 +85,20 @@ in `sensor_feed.rs`. Total: 9 discrete event types.
 
 ---
 
+## 4. Deep Debt: Workspace Dependency Consolidation (same day)
+
+15 crates consolidated from per-crate version pins to `{ workspace = true }`:
+`futures-util`, `crossterm`, `terminal_size`, `tiny-skia`, `epaint`, `png`, `svg`,
+`indexmap`, `colored`, `socket2`, `dashmap`, `lru`, `ron`, `ratatui`, `symphonia`.
+
+Telemetry fallback path `/tmp/petaltongue-telemetry` extracted to
+`DEFAULT_TELEMETRY_FALLBACK_DIR` constant.
+
+Full audit confirmed: zero unsafe, zero dyn in prod, zero TODO/FIXME/HACK,
+zero `#[allow(` in prod, all mocks gated, unwrap only in tests.
+
+---
+
 ## Verification
 
 - **Clippy**: 0 warnings (all targets)
