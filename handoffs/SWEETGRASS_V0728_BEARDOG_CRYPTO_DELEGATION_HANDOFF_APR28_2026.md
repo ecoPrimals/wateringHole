@@ -69,7 +69,7 @@ witnesses when BearDog is unavailable.
 
 ## Metrics
 
-- `.rs` files: 82
+- `.rs` files: 187
 - Tests: 1,461 (was 1,454)
 - Clippy: zero warnings (`pedantic` + `nursery`)
 - `unsafe`: none
