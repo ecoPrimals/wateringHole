@@ -1,10 +1,10 @@
-# NUCLEUS Spring Alignment — Phase 46
+# NUCLEUS Spring Alignment — Phase 47
 
 > This is the **canonical** inter-spring reference.
 > Local copies exist in `primalSpring/wateringHole/` for spring context.
 
-**Date**: April 27, 2026
-**From**: primalSpring v0.9.17+ (Phase 46 — Composition Template)
+**Date**: April 28, 2026
+**From**: primalSpring v0.9.17+ (Phase 47 — Desktop NUCLEUS Composition)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -22,7 +22,8 @@ propagate to every other spring in the ecosystem.
 | Node | Proton | Tower + ToadStool + barraCuda + coralReef | `node_atomic` |
 | Nest | Neutron | Tower + NestGate + rhizoCrypt + loamSpine + sweetGrass | `nest_atomic` |
 | NUCLEUS | Atom | Tower + Node + Nest (9 unique primals) | `nucleus` |
-| Meta-tier | — | biomeOS + Squirrel + petalTongue | `meta_tier` |
+| Meta-tier | Cross-atomic | biomeOS + Squirrel + petalTongue | `meta_tier` |
+| **Desktop NUCLEUS** | Full 12 | All atomics + meta, petalTongue `live` | `nucleus_desktop_cell` |
 
 ### Genetics Layer
 

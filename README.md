@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: April 27, 2026
+**Last Updated**: April 28, 2026
 
 ---
 
@@ -110,19 +110,17 @@ Primals achieve their greatest power through composition. These are not separate
 
 ### NUCLEUS
 
-**What**: The full primal composition orchestrated by biomeOS.
+**What**: Exactly **12 primals** orchestrated by biomeOS (the coordinator primal). All deploy from plasmidBin as musl-static binaries.
 
-**Layers**:
-- **Tower Atomic** = BearDog + Songbird (crypto + network)
-- **Node Atomic** = Tower + ToadStool (dispatch) + BarraCuda (math) + coralReef (compile)
-- **Nest Atomic** = Tower + NestGate (+ storage)
-- **Full NUCLEUS** = All primals + Squirrel (+ AI)
+**Layers** (atomics):
+- **Tower Atomic** (electron) = BearDog + Songbird — trust boundary, mediates all inter-atomic bonding
+- **Node Atomic** (proton) = Tower + ToadStool (dispatch) + barraCuda (math) + coralReef (compile)
+- **Nest Atomic** (neutron) = Tower + NestGate (storage) + rhizoCrypt (DAG) + loamSpine (ledger) + sweetGrass (attribution)
+- **Meta Tier** (cross-atomic) = biomeOS (coordinator) + Squirrel (AI) + petalTongue (visualization/UI)
 
-*Note*: BarraCuda budded from ToadStool into a standalone primal (S93).
-BarraCuda is pure math — WGSL shaders and precision strategy. coralReef
-compiles the math to native GPU binaries. ToadStool discovers and dispatches
-hardware. Springs depend on BarraCuda directly for math without pulling
-ToadStool's runtime or coralReef's compiler.
+**Desktop NUCLEUS** = Full NUCLEUS with petalTongue in `live` mode (native egui desktop window). Deploy via `tools/desktop_nucleus.sh`. See `DESKTOP_NUCLEUS_DEPLOYMENT.md`.
+
+**What is NOT a primal**: `primalspring_primal` and `primalspring_guidestone` are dev validation artifacts. Spring binaries are Rust science validation. None are NUCLEUS composition nodes. A spring IS a composition of the 12 primals, defined by a cell graph.
 
 biomeOS composes these atomics based on what capabilities are available at runtime.
 
@@ -364,6 +362,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `SOURDOUGH_BTSP_RELAY_PATTERN.md` — **Converged BTSP relay pattern** extracted from working primals. The standard sourDough will absorb for future primals
 
 ### Deployment & Composition (consolidated)
+- **`DESKTOP_NUCLEUS_DEPLOYMENT.md`** — **Start here for desktop deployment.** 12-primal NUCLEUS from plasmidBin, petalTongue live UI, spring overlay pattern, capability reference
 - `DEPLOYMENT_AND_COMPOSITION.md` — Composition patterns, BYOB schema, niche deployment, gate/fieldMouse/sporeGarden classes, gen4 bridge, workspace layout
 
 ### GPU & Compute (consolidated)
@@ -429,9 +428,13 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `handoffs/archive/BTSP_WIRE_CONVERGENCE_APR24_2026.md` — Per-primal convergence status and scoreboard
 
 ### Interactive Composition
-- `primalSpring/tools/nucleus_composition_lib.sh` — 41-function reusable NUCLEUS wiring library
+- `LIVE_GUI_COMPOSITION_PATTERN.md` — petalTongue live mode interaction loop (scene → render → input → loop)
+- `primalSpring/tools/nucleus_composition_lib.sh` — 41-function reusable NUCLEUS wiring library (+ biomeOS integration helpers)
+- `primalSpring/tools/desktop_nucleus.sh` — Desktop NUCLEUS launcher (12-primal deployment)
+- `primalSpring/tools/composition_nucleus.sh` — Parameterized NUCLEUS launcher (shell-managed)
 - `primalSpring/tools/composition_template.sh` — Minimal starter skeleton for spring compositions
-- `primalSpring/tools/composition_nucleus.sh` — Parameterized NUCLEUS launcher
+- `primalSpring/graphs/cells/nucleus_desktop_cell.toml` — Canonical 12-primal desktop cell graph
+- `primalSpring/graphs/cells/nucleus_desktop_overlay_template.toml` — Template for spring domain overlays
 - `primalSpring/wateringHole/DOWNSTREAM_COMPOSITION_EXPLORER_GUIDE.md` — Per-spring exploration lanes
 
 ### Handoffs
