@@ -73,9 +73,9 @@ Envelope format: `{"v":1,"ct":"<b64>","n":"<b64>","alg":"chacha20-poly1305"}`
   5. Accept `NESTGATE_ENCRYPTION_KEY` env var as bootstrap override
 
 ### rhizoCrypt (Nest)
-- **Working**: DAG sessions, event append, merkle roots, slices
-- **Gap**: computes hashes locally, not delegating to BearDog `crypto.sign`
-- **Request**: Delegate `dag.event.append` hashing to `crypto.sign` via BearDog for verifiable integrity
+- **Working**: DAG sessions, event append, merkle roots, slices, frontier
+- **RESOLVED (S52)**: Vertex signing delegated to crypto provider — `sign_vertex_if_available` calls `crypto.sign_ed25519` via capability-discovered signing provider. BLAKE3 content hashing remains local (content addressing). Graceful degradation when no provider is present. 5 new tests, 1,546 total (all-features).
+- **Remaining**: Vertex signature verification on retrieval (read-path optional check)
 
 ### loamSpine (Nest)
 - **Working**: spine create, entry append, seal

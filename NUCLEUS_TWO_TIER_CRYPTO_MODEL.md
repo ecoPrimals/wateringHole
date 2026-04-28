@@ -213,9 +213,9 @@ The bootstrap script:
   5. Accept `NESTGATE_ENCRYPTION_KEY` env var as bootstrap override
 
 ### rhizoCrypt (Nest)
-- **Status**: Computes hashes locally on `dag.event.append` — not delegated to BearDog
-- **Gap**: DAG integrity is self-asserted, not cryptographically signed by Tower
-- **Evolution**: Delegate `dag.event.append` hashing to `crypto.sign` via BearDog, verifiable by any party with the public key
+- **Status**: BLAKE3 content hashing remains local (content addressing); **Ed25519 vertex signing delegated to crypto provider** (S52) — `sign_vertex_if_available` calls `crypto.sign_ed25519` via discovered signing provider. Graceful degradation when no provider is present.
+- **Gap**: Vertex signature **verification on retrieval** not yet implemented (read-path optional check)
+- **Evolution**: Add optional signature verification when reading vertices from DAG or computing Merkle roots
 
 ### loamSpine (Nest)
 - **Status**: Declares BTSP as consumed but no active channels
