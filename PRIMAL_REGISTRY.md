@@ -78,7 +78,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Storage and content-addressed data management  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ TOP 1%, 99%)
+**Version**: v0.4.70 (Session 48)  
+**Status**: Production Ready (A++ TOP 1%, 99%) — 8,840 tests, 0 failures, 0 clippy warnings, 0 unsafe, 0 emoji in production
 
 **Role**: NestGate provides all data persistence for the ecosystem. Content-addressed storage means data is identified by its hash, not its location. NestGate handles blob storage, tree structures, metadata, and quota management. It also provides capability-based service discovery.
 
@@ -91,6 +92,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Metadata** | `metadata.store`, `metadata.retrieve`, `metadata.update`, `metadata.search` |
 | **Health** | `health.check`, `health.metrics`, `health.ready`, `health.alive` |
 
+**Encrypt-at-rest** (S48): Native ChaCha20-Poly1305 encryption on `storage.store`/`retrieve`/`store_blob`/`retrieve_blob`. Key via `NESTGATE_ENCRYPTION_KEY` or BearDog `secrets.retrieve`. Migration-safe (detects unencrypted data).  
+**Auth bypass** (S48): `NESTGATE_AUTH_MODE=beardog` delegates auth to BearDog within NUCLEUS compositions.  
 **Storage Backends**: Filesystem, ZFS, object storage  
 **Content Addressing**: BLAKE3 hashes  
 **Optimization**: Entropy-based compression routing, zero-copy I/O with SIMD
@@ -103,7 +106,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: AI model coordination and inference  
 **Phase**: Foundation  
-**Status**: Production Hardened (A++, 98/100)
+**Version**: v0.1.0  
+**Status**: Production Hardened (A++, 98/100) — 7,182 tests, 90.1% coverage, 0 clippy warnings, 0 unsafe, 0 C deps, 0 TODO/FIXME, `#[expect(reason)]` policy
 
 **Role**: Squirrel provides sovereign AI capabilities through the Model Context Protocol (MCP). It routes AI tasks to appropriate models (local or remote), manages context windows, and coordinates multi-model workflows - all without compile-time coupling to any AI vendor.
 
@@ -111,11 +115,13 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Inference** | Model inference routing, multi-provider support (OpenAI, Anthropic, Ollama, local) |
+| **Inference** | Model inference routing, multi-provider support (OpenAI, Anthropic, Ollama, local), HTTP + UDS transports, `inference.register_provider` with `endpoint` param for HTTP |
 | **Context** | Advanced context window management, memory optimization |
 | **Task Routing** | Intelligent routing based on task requirements and model capabilities |
 | **MCP** | Multi-MCP coordination, sovereign operation |
-| **Integration** | Vendor-agnostic AI, zero compile-time coupling |
+| **Discovery** | `DISCOVERY_SOCKET` capability resolution via `discovery.find_provider` (Method 2) |
+| **Crypto** | Purpose-key encryption foundation (`encrypt_with_purpose`, `decrypt_with_purpose`) — awaiting BearDog server-side |
+| **Integration** | Vendor-agnostic AI, zero compile-time coupling, capability-first (all primal names evolved to capability-based) |
 
 **Architecture**: TRUE PRIMAL - runtime discovery, isomorphic IPC, multi-protocol (JSON-RPC + tarpc)
 
