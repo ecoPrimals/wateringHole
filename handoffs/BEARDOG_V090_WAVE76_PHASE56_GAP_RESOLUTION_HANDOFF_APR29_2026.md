@@ -118,16 +118,64 @@ The signature covers the hex-encoded SHA-256 hash, not the raw JSON bytes.
 
 ---
 
+## GAP-23 Reclassification — Exhaustive UDS Accept Path Audit
+
+**Verdict: Zero path-dependent behavior. GAP-23 should be reclassified to primalSpring.**
+
+Matching rhizoCrypt's GAP-22 audit methodology, BearDog performed an exhaustive
+UDS accept path audit. Results:
+
+### Evidence
+
+| Check | Finding | Source |
+|-------|---------|--------|
+| `listener.accept()` | Peer address **discarded** (`_addr`) | `platform/unix.rs:81` |
+| `handle_connection()` signature | Takes only `Box<dyn PlatformStream>` — no path arg | `server.rs:314` |
+| BTSP handshake wire types | `ClientHello` contains `{version, client_ephemeral_pub}` only — **no socket path** | `btsp_handshake/types.rs:12-19` |
+| BTSP handshake verification | Uses `family_seed` for HMAC key derivation — **no path** | `btsp_handshake/handshake.rs:35-109` |
+| First-byte auto-detect | Branches on `0x7B` (JSON) vs length-prefixed (BTSP) — **no path** | `server.rs:320-341` |
+| `HandlerRegistry::route()` | Signature: `(method, params, btsp_provider)` — **no path** | `handlers/mod.rs:302-327` |
+| `MethodHandler::handle()` | Signature: `(method, params, btsp_provider)` — **no path** | `handlers/mod.rs:114-119` |
+| `route_jsonrpc()` | Calls `handler_registry.route(method, params, btsp_provider)` — **no path** | `server.rs:516-522` |
+| `FAMILY_ID` usage in handlers | From `PrimalIdentity` or RPC params — **never** from socket path | `capabilities.rs`, `relay.rs`, `secrets.rs` |
+| Socket name validation | **None** — no handler inspects the connecting path or inode |
+
+### Same three hypotheses apply (matching rhizoCrypt GAP-22)
+
+1. **Startup ordering** — symlink created before BearDog finishes binding
+   → dangling symlink → connection refused (not an RPC error)
+2. **Stale binary** — pre-Wave-74 binary may lack improved error messages
+   → check binary version in plasmidBin
+3. **Proxy layer** — something else listening on `crypto-*` socket
+   (not a symlink but a separate listener) → different errors
+
+### Diagnostic for primalSpring
+
+Capture the exact JSON-RPC error response from `crypto-{family}.sock`:
+- Connection refused → symlink target doesn't exist at connect time (hypothesis 1)
+- `-32600 Invalid Request` or parameter error → stale binary or wrong params (hypothesis 2)
+- Other error → something else is listening on that path (hypothesis 3)
+
+### Conclusion
+
+A symlink produces the exact same `UnixStream` at the kernel level — BearDog
+never sees which pathname the client used to `connect()`. Behavior is keyed
+entirely off bytes on the wire, `security_mode`/`family_seed`, and RPC content.
+
+BearDog confirms the same "no path-dependent behavior" as rhizoCrypt.
+**GAP-23 should be reclassified to primalSpring**, same class as GAP-22.
+
+---
+
 ## Capability Socket Model (context for GAP-17/18/19/22/23)
 
 BearDog is agnostic to socket naming. Whether a client connects via
 `beardog-desktop-nucleus.sock` or `crypto-desktop-nucleus.sock` (symlink),
 BearDog receives identical JSON-RPC and applies identical routing.
 
-All "error on capability socket" gaps (GAP-22, GAP-23) in the Phase 56 report
-are **parameter encoding issues on the caller side**, not socket-routing
-differences. The symlink model is correct — the fix belongs in the caller's
-parameter serialization.
+Wave 76 improved error messages in `crypto.blake3_hash` and `crypto.hmac_sha256`
+to explicitly guide callers on expected parameter format:
+`{"data": "<standard-base64>"}` with RFC 4648 (+/=) alphabet.
 
 The long-term target (per the audit) is Neural API `capability.resolve` RPC
 replacing filesystem symlinks. BearDog is ready for this — it advertises
