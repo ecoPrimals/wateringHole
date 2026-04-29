@@ -487,6 +487,24 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **wateringHole handoffs updated**: `UPSTREAM_EVOLUTION_BLURBS_PHASE55B`, `PRIMALSPRING_V0921_PHASE55B_UPSTREAM_GUIDANCE` (rhizoCrypt section rewritten with technical rationale), `NUCLEUS_TWO_TIER_CRYPTO_MODEL` (all three Nest primal sections reconciled — loamSpine and sweetGrass also updated to reflect shipped signing delegation).
 
+### S55: Phase 56 GAP-22 Investigation — Capability Socket Symlinks (April 29)
+
+**primalSpring Phase 56** reported GAP-22 (P2): `dag.session.create` returns error on `dag-{family}.sock` (a filesystem symlink to `rhizocrypt-{family}.sock`) but works on the direct primal socket.
+
+**Investigation**: Exhaustive code audit of rhizoCrypt's UDS accept path confirms **zero path-dependent behavior**:
+- `listener.accept()` discards the peer address (`_addr` — `uds.rs` L106)
+- BTSP handshake wire types carry no socket path or filename (`btsp/server.rs`)
+- Three-way auto-detect branches on first byte only, not socket name (`uds.rs` L190-291)
+- `FAMILY_ID` is used solely for bind-path construction + BTSP enforcement (`transport.rs`)
+- No `readlink`, `canonicalize`, `SO_PEERCRED`, or socket-name validation exists
+
+**Root cause is external to rhizoCrypt.** Three hypotheses:
+1. **Startup ordering** — symlink created before rhizoCrypt binds; client connects to dangling symlink
+2. **Restart race** — `prepare_socket_path` removes bind target before re-bind; symlink dangles during window
+3. **Stale binary** — if the deployed binary predates S49 (PG-52 fix), UDS routes through `handle_liveness_connection` which returns FORBIDDEN (-32000) for `dag.*` methods
+
+**Recommendation for composition layer**: Verify the exact JSON-RPC error code returned. If `-32000` with "BTSP authentication required", the binary is pre-S49. If connection refused / empty, the symlink target doesn't exist at connect time. Consider creating symlinks AFTER primal startup confirmation (health probe).
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
