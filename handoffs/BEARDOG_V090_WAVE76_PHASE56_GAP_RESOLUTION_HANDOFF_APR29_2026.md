@@ -183,6 +183,17 @@ replacing filesystem symlinks. BearDog is ready for this — it advertises
 
 ---
 
+## Documentation & Debris Cleanup (Wave 76b cont.)
+
+- **Root docs updated**: README, STATUS, ROADMAP, ARCHITECTURE, CONTEXT, START_HERE — dates to April 29, test counts to 15,000+, Wave 76/76b entries added to STATUS "Recent Improvements" and ROADMAP "Recently Completed".
+- **STATUS.md**: `DNS-SD` → `mDNS` in beardog-discovery coverage row (feature gate removed Wave 75), Architecture Compliance heading updated to April 2026.
+- **ROADMAP.md**: CryptoHandler method count corrected (99 → 101, matching Wave 72).
+- **Orphan benchmark files deleted**: `benchmarks/src/types.rs` + `benchmarks/src/handlers.rs` (never wired in `lib.rs`, malformed derive macros, never compiled).
+- **`beardog-client/README.md` rewritten**: Was stale HTTP/localhost:9000 references; now documents Tower Atomic / Unix socket / JSON-RPC transport matching `lib.rs`.
+- **Stale doc comment clarified**: `beardog-types/.../testing.rs` "Previously Scattered Locations" list now notes originals were deleted.
+
+---
+
 ## CI Status
 
 | Gate | Status |
