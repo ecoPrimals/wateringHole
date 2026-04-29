@@ -83,56 +83,36 @@ a low-priority future item by the rhizoCrypt team.
 
 ---
 
-## Priority 3: sweetGrass — Tower Crypto Delegation
+## ~~Priority 3: sweetGrass — Tower Crypto Delegation~~ RESOLVED
 
-Same pattern as rhizoCrypt. sweetGrass currently hashes braid entries locally.
-
-**Ask**: Delegate to `crypto.blake3_hash` or `crypto.sign` when Tower is available.
-This ensures the provenance chain is Tower-auditable.
-
-**Also**: The `anchoring.anchor` operation should delegate signing to
-`crypto.sign` (Ed25519 via BearDog) when available, rather than using
-local signing. This gives anchors ecosystem-wide trust via BearDog's key
-hierarchy.
+sweetGrass v0.7.28 shipped braid signing delegation (`braid.create` → BearDog
+`crypto.sign` Ed25519 via `CryptoDelegate` module) and anchor signing delegation
+(`anchoring.anchor`). Tower-level `Witness::from_tower_ed25519` witnesses with
+`tier: "tower"` and `did:key:z6Mk...` agent DID. Graceful degradation to unsigned.
+Also eliminated `hostname` crate for pure Rust. 1,462 tests.
 
 ---
 
-## Priority 4: loamSpine — BTSP Active Channels
+## ~~Priority 4: loamSpine — BTSP Active Channels + Signing Delegation~~ RESOLVED
 
-**Current**: loamSpine declares BTSP support but doesn't establish active
-encrypted channels.
-
-**Ask**: On startup, if `BTSP_PROVIDER_SOCKET` is present, establish a BTSP
-session via `btsp.session.create` / `btsp.session.negotiate`. Once established,
-spine entries should flow through the encrypted channel.
-
-This is the last Nest primal without active BTSP — rhizoCrypt and sweetGrass
-both establish sessions.
+loamSpine shipped Tower-signed ledger entries (Apr 28): `entry.append` and
+`session.commit` sign via BearDog `crypto.sign_ed25519` with `tower_signature`
+in entry metadata. `prepare_entry()` + `append_prepared_entry()` split for signing
+between creation and chain append. BTSP tunnel consumption documented as next
+frontier (no primal actively uses tunnels yet). 1,509 tests.
 
 ---
 
-## Priority 5: ToadStool + barraCuda — Self-Registration via DISCOVERY_SOCKET
+## ~~Priority 5: ToadStool + barraCuda — Self-Registration via DISCOVERY_SOCKET~~ RESOLVED
 
-Squirrel now resolves capabilities via `DISCOVERY_SOCKET` (Method 2 in
-`discover_capability()`). For this to be fully useful, primals need to
-self-register at startup.
+Both primals now self-register at startup:
+- **barraCuda Sprint 47**: `register_with_discovery()` with 11 capability tags
+- **ToadStool S207**: `register_with_discovery()` with `["compute.dispatch","compute.capabilities"]`
 
-**Ask for both ToadStool and barraCuda**: At startup:
-1. Check for `DISCOVERY_SOCKET` env var
-2. If present, send `ipc.register` with capabilities and endpoint
-3. If absent, continue in standalone mode (no failure)
-
-```json
-{"jsonrpc":"2.0","method":"ipc.register","params":{
-  "primal_id":"toadstool",
-  "capabilities":["compute.dispatch","compute.capabilities"],
-  "endpoint":"unix:///run/user/1000/biomeos/toadstool-{family}.sock"
-},"id":1}
-```
-
-Currently the composition launcher handles registration on behalf of primals.
-Self-registration means primals can join a NUCLEUS dynamically without a
-central launcher.
+ToadStool also shipped encrypted compute dispatch (S205): purpose-key retrieval
+via BearDog `secrets.retrieve`, payload encrypt/decrypt via `crypto.encrypt`/`crypto.decrypt`.
+Deep debt clean across S206-S208 (lint evolution, dep unification, stale features removed,
+`expect`→`Result`, 49 unsafe blocks SAFETY-documented). 7,842 tests.
 
 ---
 
@@ -142,9 +122,9 @@ central launcher.
 |--------|-------------|---------|----------|
 | **BearDog** | W74 | **RESOLVED** — lazy purpose-key derivation + purpose encrypt/decrypt | Done |
 | **rhizoCrypt** | S54 | **RESOLVED** — signing delegation shipped (S52), hash delegation withdrawn | Done |
-| **sweetGrass** | v0.7.28 | Anchor signing via Tower (incremental, non-blocking) | P3 |
-| **loamSpine** | v0.9.16 | BTSP encrypted channels (ecosystem frontier) | P4 |
-| **ToadStool** | Display Phase 2 | `DISCOVERY_SOCKET` self-registration | P5 |
+| **sweetGrass** | v0.7.28 | **RESOLVED** — braid + anchor signing delegation shipped | Done |
+| **loamSpine** | v0.9.16 (Apr 28) | **RESOLVED** — Tower-signed entries via `crypto.sign_ed25519` | Done |
+| **ToadStool** | S205–S208 | **RESOLVED** — encrypted dispatch + self-registration + deep debt | Done |
 | **barraCuda** | Sprint 47 | **RESOLVED** — Songbird self-registration shipped | Done |
 | **NestGate** | S48 | **RESOLVED** (encrypt-at-rest + auth bypass shipped) | Done |
 | **Squirrel** | AN | **RESOLVED** (HTTP providers + discovery + crypto foundation) | Done |
