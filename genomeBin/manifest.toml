@@ -98,11 +98,11 @@ stripped = true
 # loamspine           | FULL        | FULL         | FULL       | -       | FULL    | check   | check-pass
 # sweetgrass          | FULL        | FULL         | FULL       | -       | FULL    | check   | check-pass
 # petaltongue         | FULL        | FULL         | FULL       | -       | -       | check   | check-fail
-# skunkbat            | lib-only    | lib-only     | lib-only   | -       | lib-only| lib-only| check-pass
+# skunkbat            | FULL        | FULL         | -          | -       | -       | FULL    | check-pass
 # primalspring_primal | FULL        | FULL         | FULL       | -       | -       | FULL    | check-fail
 #
 # Total binaries shipped: 42 (across 6 target triples)
-# Documented gaps: nestgate/skunkbat (lib-only), toadstool/biomeos (32-bit overflow on armv7)
+# Documented gaps: nestgate (lib-only), toadstool/biomeos (32-bit overflow on armv7)
 
 # =============================================================================
 # PRIMALS
@@ -208,9 +208,11 @@ ecobin_grade = "A++"
 [primals.skunkbat]
 name = "skunkBat"
 description = "Defense — metadata-only threat detection, lineage verification"
-latest = "0.1.0"
-arch = []
-capabilities = ["defense", "threat", "metadata", "lineage"]
+latest = "0.2.0-dev"
+binary = "skunkbat"
+build_package = "skunk-bat-server"
+arch = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+capabilities = ["defense", "threat", "metadata", "lineage", "reconnaissance"]
 ecobin_grade = "A+"
 
 [primals.primalspring_primal]
