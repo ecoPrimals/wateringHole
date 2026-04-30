@@ -1,4 +1,4 @@
-# skunkBat v0.2.0-dev — Coverage + CI + Deep Debt Evolution
+# skunkBat v0.2.0-dev — Complete Deep Debt + Coverage + Integration Evolution
 
 **Date**: April 30, 2026
 **From**: skunkBat team
@@ -8,56 +8,78 @@
 
 ## Summary
 
-Follow-up evolution pass addressing primalSpring Phase 56c audit items for skunkBat.
-All actionable local debt resolved. External blockers remain (BearDog IPC, biomeOS Neural API).
+Multi-pass evolution addressing primalSpring Phase 56c audit (April 30, 2026).
+All actionable local debt resolved. Full integration surface for BearDog lineage
+verification implemented. External blockers remain (BearDog IPC not yet exposed,
+biomeOS Neural API registration).
 
 ---
 
-## Changes
+## Changes (This Session)
 
-### Coverage Improvement (205 → 217 tests)
+### 1. Coverage Evolution (205 → 225 tests)
 
-| Metric | Before | After |
-|--------|--------|-------|
-| Total tests | 205 | 217 |
-| Function coverage | ~88% | **90.1%** |
-| Line coverage | ~86.5% | **88.3%** overall / **93.2%** testable code |
+| Metric | Start | End |
+|--------|-------|-----|
+| Total tests | 205 | **225** |
+| Function coverage | ~88% | **90.6%** |
+| Line coverage | ~86.5% | **89%** overall / **93%+** testable |
 | threats/mod.rs | 89.7% | 95.0% |
+| dispatch.rs | ~93% | 97.3% |
 | songbird.rs | 88.4% | 91.7% |
 | toadstool.rs | 67.8% | 82.0% |
 
-**Note**: The 88.3% → 90% line gap is entirely due to 364 lines of untestable server
-entry points (`main.rs`, `ipc/mod.rs`, `transport/mod.rs`) at 0% — these require
-integration test infrastructure (live TCP/UDS servers) and cannot be covered via
-`--lib --bins`. All testable library code exceeds 93%.
+Remaining line gap (89% vs 90%) is entirely 364 lines of untestable server entry points
+(`main.rs`, `ipc/mod.rs`, `transport/mod.rs`) at 0% — these require integration test
+infrastructure with live TCP/UDS servers.
 
-### CI Node.js 24 Migration
+### 2. BearDog Lineage Integration (`beardog.rs`)
 
-- `actions/checkout@v4` → `actions/checkout@v5` (Node 24 compatible, ahead of June 2 deadline)
-- `peter-evans/repository-dispatch@v3` already compatible
-- `Swatinem/rust-cache@v2` and `dtolnay/rust-toolchain@stable` — composite actions, no Node dependency
+New `skunk-bat-integrations::beardog` module with `RemoteLineageVerifier`:
+- Implements `LineageVerifier` trait via JSON-RPC
+- Methods: `lineage.verify` (family check) + `lineage.list` (chain)
+- Transport: `lineage-verification.sock` UDS or `LINEAGE_ENDPOINT` TCP
+- Graceful degradation: conservative deny when provider unreachable
+- 6 tests included
 
-### New Tests Added
+### 3. CI Node.js 24 Migration
 
-- `threats/mod.rs`: Behavioral anomaly triggering (spike detection), disabled detector path, start-disabled, verifier access
-- `toadstool.rs`: Client builder, TCP endpoint resolution, from_env, discover_all unreachable, convert_to_nodes, serde, capability discovery by cap graceful
-- `songbird.rs`: ThreatIntelligence serde roundtrip, TCP endpoint empty/present, create_intel all fields
-- `rpc.rs`: http/https prefix stripping, malformed JSON response handling
-- `lib.rs`: Degraded health status, config access, primal constants
-- `reconnaissance/types.rs`: Full type coverage (NetworkScan, Node, Connection, NetworkScope, all status variants)
+- `actions/checkout@v4` → `actions/checkout@v5` (ahead of June 2 deadline)
+- Other actions already Node 24 compatible
 
-### Local Debt Audit Result
+### 4. Idiomatic Rust Evolution
 
-| Check | Status |
-|-------|--------|
-| TODOs/FIXMEs | **Zero** in production code |
-| Hardcoded values | None — all configurable via env or constants |
-| File sizes | Max 672 lines (limit 1000) |
-| Clippy | CLEAN — pedantic + nursery |
-| Format | CLEAN |
-| Docs | CLEAN — zero warnings |
-| Deny | CLEAN — supply chain verified |
-| unsafe | `forbid(unsafe_code)` workspace-wide |
+- `.to_string()` on `&str` → `.to_owned()` (defense, reconnaissance, transport)
+- `.to_string_lossy().to_string()` → `.into_owned()` (transport symlinks)
+- `consumed_capabilities` inline JSON → named `CONSUMED_CAPABILITIES` constant
+- `Cargo.lock` now committed (binary project — reproducible builds)
+
+### 5. Documentation Alignment
+
+- `README.md`: version, integrations table, consumed capabilities, metrics all updated
+- `CONTEXT.md`: file count, test count, coverage metrics, beardog integration noted
+- `showcase/99-gaps-analysis/README.md`: all metrics updated, beardog integration added
+- Stale `genetic.verify_lineage` references → `lineage.verify` + `lineage.list`
+
+### 6. Cleanup
+
+- `cargo clean` — 2.6 GiB build artifacts removed
+- `.gitignore` fixed — `Cargo.lock` no longer ignored
+- Zero debris files (no `.bak`, `.orig`, `.tmp`, archive dirs)
+- Zero `TODO`/`FIXME`/`HACK` in production code or docs
+
+---
+
+## Quality Gates (All Pass)
+
+| Gate | Status |
+|------|--------|
+| `cargo clippy --workspace --all-targets -- -D warnings` | CLEAN |
+| `cargo fmt --all -- --check` | CLEAN |
+| `cargo doc --workspace --no-deps` (RUSTDOCFLAGS="-D warnings") | CLEAN |
+| `cargo deny check` | CLEAN |
+| `cargo test --workspace --lib --bins` | 225 pass, 0 fail |
+| `forbid(unsafe_code)` | Workspace-wide |
 
 ---
 
@@ -65,16 +87,17 @@ integration test infrastructure (live TCP/UDS servers) and cannot be covered via
 
 | Item | Blocked On | Priority |
 |------|-----------|----------|
-| Thymic selection impl | BearDog `lineage.list` + `btsp.session.verify` IPC | Medium |
+| Thymic selection activation | BearDog `lineage.list` + `btsp.session.verify` IPC | Medium |
 | Composable primitives IPC registration | biomeOS Neural API registration | Medium |
-| Integration test infrastructure | Live server harness for 0% entry points | Low |
+| Integration test infra for 0% entry points | Live server test harness | Low |
 
 ---
 
 ## Metrics
 
-- **37** source files, **8,102** total lines, max **672** lines/file
-- **217** tests passing, 15 ignored (external-primal-gated)
-- **90.1%** function coverage, **93.2%** testable line coverage
+- **38** source files, **8,317** total lines, max **672** lines/file
+- **225** tests passing, 15 ignored (external-primal-gated)
+- **90.6%** function coverage, **89%** line coverage (93%+ testable)
 - Zero cross-repo path dependencies
 - Edition 2024, `async-trait` eliminated and banned
+- Pure Rust, no C dependencies
