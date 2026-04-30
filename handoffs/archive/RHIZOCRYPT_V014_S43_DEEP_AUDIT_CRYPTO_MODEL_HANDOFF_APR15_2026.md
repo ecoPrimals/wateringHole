@@ -525,6 +525,16 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Proactive debt scan**: Zero `async-trait` macro, zero TODO/FIXME, zero production mocks outside `cfg(test)`, all deps pure Rust. Clean.
 
+### S57: Deep Debt Audit — Final Cleanup (April 30)
+
+**8-category audit** — all clean: no files >800L (max 724), zero `unsafe`, zero TODO/FIXME, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero dead code allows, zero mocks in production, all deps pure Rust.
+
+**Fixes**:
+- `compute.rs` test fixtures: `"toadstool-1/2/gpu"` → `"compute-primary/secondary/gpu"` (missed in S52b)
+- `btsp/mod.rs` doc comment: "every connection must handshake" → accurate three-way auto-detect description (inaccurate since S49)
+
+**Stadial gate**: 1,546 tests (0 failures), 0 clippy warnings, 0 fmt diffs, cargo deny clean, cargo doc clean.
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
