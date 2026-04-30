@@ -505,6 +505,26 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Recommendation for composition layer**: Verify the exact JSON-RPC error code returned. If `-32000` with "BTSP authentication required", the binary is pre-S49. If connection refused / empty, the symlink target doesn't exist at connect time. Consider creating symlinks AFTER primal startup confirmation (health probe).
 
+### S56: Stadial Gate Validation + CI Node 24 Migration (April 30)
+
+**Phase 56c stadial convergence**: primalSpring confirms rhizoCrypt is **clean** — not listed in remaining items across the 13-primal NUCLEUS.
+
+**Full stadial gate validation**:
+- 1,546 tests (all-features), 0 failures
+- 0 clippy warnings (pedantic + nursery + cargo + cast lints)
+- 0 fmt diffs
+- `cargo deny` clean (advisories, bans, licenses, sources)
+- `cargo doc -D warnings` clean (fixed `private-intra-doc-links` in `handle_liveness_connection`)
+- 167 `.rs` files, ~49,900 lines, max file 724L
+
+**CI Actions Node 24 migration** (ahead of June 2, 2026 deadline):
+- `actions/checkout` v4 → v5
+- `actions/cache` v4 → v5
+- `codecov/codecov-action` v4 → v6
+- `rustsec/audit-check` v1 → v2
+
+**Proactive debt scan**: Zero `async-trait` macro, zero TODO/FIXME, zero production mocks outside `cfg(test)`, all deps pure Rust. Clean.
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
