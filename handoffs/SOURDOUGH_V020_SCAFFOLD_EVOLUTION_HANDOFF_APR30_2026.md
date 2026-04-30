@@ -123,13 +123,38 @@ Largest file in codebase: `ipc.rs` at 637 lines (well under 800L threshold).
 - Binary artifacts (6MB tar.gz) removed from `archive/` directory
 - `.gitignore` updated to prevent future binary artifact creep
 
+### 11. tarpc Dependency Removed (Major)
+
+The `tarpc` crate (v0.34) was only used for a `#[tarpc::service]` proc macro annotation
+on the `PrimalRpc` trait. The generated tarpc code was never consumed — the client/server
+modules were custom implementations. This removal:
+
+- Eliminates 40 unique transitive deps (211 → 171 total)
+- Removes deprecated `opentelemetry v0.18`, `tracing-opentelemetry v0.18`, `thiserror v1.x`, `rand v0.8`
+- Clears 3 advisory ignores from `deny.toml` (RUSTSEC-2025-0141, RUSTSEC-2026-0007, RUSTSEC-2024-0387)
+- Also removed unused dev-deps: `tokio-serde`, `bincode`, `tokio-util`
+
+`PrimalRpc` is now a standard transport-agnostic async trait using `impl Future` return
+position (Rust 2024 edition feature). Any binary framing implementation can satisfy it.
+
+### 12. bytes 1.11.1 Security Patch
+
+`bytes` updated from 1.11.0 to 1.11.1 resolving RUSTSEC-2026-0007 (integer overflow in
+`BytesMut::reserve`).
+
+### 13. PrimalRpcClient Typed Error
+
+`PrimalRpcClient::connect` now returns `std::io::Result` instead of
+`Box<dyn Error + Send + Sync>` — proper typed error handling.
+
 ### Verification (post-cleanup)
 
 - `cargo fmt --all -- --check` — clean
 - `cargo clippy --workspace --all-targets` — zero warnings
 - `cargo test --workspace` — 247 tests passing
-- `cargo deny check` — passing
+- `cargo deny check` — passing (zero advisory ignores, zero suppression)
 - `RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps` — zero warnings
+- Total dependencies: 171 (down from 211)
 
 ## Remaining Gaps (v0.2.0+)
 
