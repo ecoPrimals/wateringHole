@@ -93,6 +93,44 @@ was missing, so workspace pedantic/nursery lints weren't being inherited.
 └── CONVENTIONS.md                ecoPrimals coding standards
 ```
 
+## Deep Debt Cleanup (April 30, 2026 — Session 2)
+
+### 7. Template Module Refactored
+
+Monolithic `templates.rs` (862 lines) refactored into domain-organized module:
+- `templates/core.rs` (440L) — Core crate templates
+- `templates/server.rs` (319L) — Server crate templates
+- `templates/infra.rs` (110L) — CI/CD + deny.toml templates
+- `templates/mod.rs` (18L) — Module orchestration
+
+Largest file in codebase: `ipc.rs` at 637 lines (well under 800L threshold).
+
+### 8. Hardcoding Removed
+
+- CLI help examples: `rhizoCrypt` → `myPrimal` (generic)
+- Discovery doc examples: `rhizocrypt`, `loamspine` → `my-primal`, `another-primal`
+- Discovery grade: A (zero hardcoded primal names in crate code)
+
+### 9. Dependency Alignment
+
+- `chrono` and `tempfile` in sourdough/sourdough-core aligned to `workspace = true`
+- Eliminates version drift between workspace-defined and locally-pinned deps
+
+### 10. Documentation Refresh
+
+- All root docs updated to 0.2.0-dev: README, STATUS, WHATS_NEXT, ROADMAP, ARCHITECTURE, START_HERE
+- Broken `DEVELOPMENT.md` link in sourdough-genomebin README fixed → `CONVENTIONS.md`
+- Binary artifacts (6MB tar.gz) removed from `archive/` directory
+- `.gitignore` updated to prevent future binary artifact creep
+
+### Verification (post-cleanup)
+
+- `cargo fmt --all -- --check` — clean
+- `cargo clippy --workspace --all-targets` — zero warnings
+- `cargo test --workspace` — 247 tests passing
+- `cargo deny check` — passing
+- `RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps` — zero warnings
+
 ## Remaining Gaps (v0.2.0+)
 
 | Item | Status | Notes |
