@@ -89,9 +89,17 @@ can be added later as a one-line change.
   in `resolve_advertise_host`; eliminates direct C-wrapper dependency
 - Fallback chain: `PRIMAL_ADVERTISE_ADDRESS` env → `/etc/hostname` → `"localhost"`
 
+## Idiomatic Rust (April 30)
+
+- Eliminated 3 unnecessary `.clone().into()` patterns (move owned values or
+  construct `Arc<str>` directly from `&str` instead of cloning `String`)
+- `Vec<&String>` → `Vec<&str>` return types in `ProvenanceGraph` API
+- CI: lean single-job `ci.yml`, `cargo deny check` CI-enforced,
+  `notify-plasmidbin.yml` auto-dispatch
+
 ## Metrics
 
-- `.rs` files: 187 (52,166 LOC)
+- `.rs` files: 187 (52,167 LOC)
 - Tests: 1,462 (was 1,454)
 - Clippy: zero warnings (`pedantic` + `nursery`)
 - `unsafe`: none
