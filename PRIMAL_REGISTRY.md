@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: April 28, 2026
+**Last Updated**: April 30, 2026
 
 ---
 
@@ -225,8 +225,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v3.33  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,814+ tests (0 failures), 90%+ region / function / line coverage (llvm-cov), 25 workspace crates, 42 deploy graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant, `#[forbid(unsafe_code)]` all crate roots + all 20+ binaries, BTSP security posture wired, graph signing (BLAKE3+Ed25519), coordination key caching, zero files >800L
+**Version**: v3.35  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 8,064+ tests (0 failures), 90%+ region / function / line coverage (llvm-cov), 25 workspace crates, 42 deploy graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant, `#[forbid(unsafe_code)]` all crate roots + all 20+ binaries, BTSP security posture wired, `--btsp-optional` flag, graph signing (BLAKE3+Ed25519), coordination key caching, zero hardcoded paths, zero files >800L
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
