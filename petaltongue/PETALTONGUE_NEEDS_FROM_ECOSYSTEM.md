@@ -1,6 +1,6 @@
 # petalTongue: Explicit Needs from the Ecosystem
 
-**Version**: v1.6.7 (April 17, 2026)
+**Version**: v1.6.6 (May 1, 2026)
 
 petalTongue is the **Universal User Interface** primal. It translates computational
 universes into any user modality — not just visualization, but the complete sensory bridge. This document states what petalTongue **needs** from
@@ -171,6 +171,6 @@ NestGate storage would enable ecosystem-wide artifact sharing.
 
 ---
 
-**Last Updated**: April 17, 2026
+**Last Updated**: May 1, 2026
 **Maintainer**: ecoPrimals / petalTongue
 **License**: AGPL-3.0-or-later

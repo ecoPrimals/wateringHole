@@ -2,15 +2,15 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: April 26, 2026 (PG-40 winit fix, live mode, texture/overlay roadmap, graphics node handoff)
+**Updated**: May 1, 2026 (PG-48 musl resolved, GAP-12 dashboard docs, BTSP Phase 2 operational, deny.toml async-trait guard, primalSpring Phase 56 audit response)
 
 ---
 
 ## Integration Status
 
-petalTongue v1.6.6 (16 crates, edition 2024, `deny(unwrap/expect)`):
-- 5,952+ tests passing, 0 failures (1 pre-existing CLI test excluded)
-- `#![forbid(unsafe_code)]` unconditional on all 16 crates + UniBin, zero C dependencies
+petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
+- 6,191+ tests passing, 0 failures
+- `#![forbid(unsafe_code)]` unconditional on all 18 crates + UniBin, zero C dependencies
 - ~90% line coverage (llvm-cov) — threshold enforced via `llvm-cov.toml`
 - UUI glossary module (`petal_tongue_core::uui_glossary`) — canonical terminology for modalities, user types, SAME DAVE
 - tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
@@ -38,6 +38,12 @@ petalTongue v1.6.6 (16 crates, edition 2024, `deny(unwrap/expect)`):
 - **Soundscape synthesis**: 5 waveforms, stereo panning, fade envelopes, Soundscape DataBinding
 - **JSONL telemetry provider**: File-based hotSpring/groundSpring bridge via `PETALTONGUE_TELEMETRY_DIR`
 - All files under 1,000 lines; all production stubs evolved to implementations
+- **BTSP Phase 2**: Typed `BtspHandshakeError` enum, BearDog provider delegation, NULL cipher handshake operational
+- **Zero-copy textures**: `TextureEntry.data` uses `bytes::Bytes` for refcounted sharing
+- **Typed render errors**: `RenderError` struct with machine-readable codes replaces `Option<String>`
+- **Dashboard param schema**: Wire-level JSON-RPC docs for `visualization.render.dashboard` (`session_id` + `bindings` required)
+- **`deny.toml` hardened**: `async-trait` banned with wrappers for transitive deps (axum, opentelemetry)
+- **`cargo deny check bans`**: Passes clean (interstadial quality gate)
 
 ### Grammar of Graphics Engine (Implemented)
 
