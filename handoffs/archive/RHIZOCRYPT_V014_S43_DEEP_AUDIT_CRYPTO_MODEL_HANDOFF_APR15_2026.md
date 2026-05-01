@@ -535,6 +535,19 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Stadial gate**: 1,546 tests (0 failures), 0 clippy warnings, 0 fmt diffs, cargo deny clean, cargo doc clean.
 
+### S58: Phase 56 PG-45/GAP-06 Response — Already Resolved (May 1)
+
+**primalSpring Phase 56** re-raised PG-45/GAP-06: "UDS socket accepts connections but returns no JSON-RPC response." Investigation confirms this is **PG-52 (resolved in S49)**.
+
+**Evidence**:
+- `uds.rs` routes all plain JSON-RPC (`{`/`[`) to `handle_newline_connection` (full handler) — `handle_liveness_connection` is not called from any UDS path
+- `test_plain_jsonrpc_data_methods_on_btsp_uds` explicitly validates `dag.session.create` succeeds on BTSP-enforced UDS
+- primalSpring's own `PRIMAL_GAPS.md` PG-52 entry (line 1998) states "This also resolves PG-06 and PG-45"
+
+**Root cause**: stale plasmidBin binary predating S49. Rebuilding from current source resolves it.
+
+**Doc fix**: `btsp/mod.rs` and `newline.rs` `handle_liveness_connection` doc comments described pre-S49 behavior. Updated to match post-S49 routing.
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
