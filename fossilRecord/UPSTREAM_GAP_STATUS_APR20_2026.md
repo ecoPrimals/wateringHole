@@ -83,7 +83,7 @@ BTSP-authenticated, 187/187 guidestone checks ALL PASS.**
 |-----|-------|-------|
 | ~~`nucleus_complete.toml` missing NestGate streaming ops~~ | primalSpring | **RESOLVED** — Added `store_blob`, `retrieve_blob`, `retrieve_range`, `object.size`, `namespaces.list` |
 | ~~`nucleus_complete.toml` missing barraCuda/coralReef as separate nodes~~ | primalSpring | **RESOLVED** — Added `barracuda` (tensor) and `coralreef` (shader) as explicit graph nodes with `security_model = "btsp"` |
-| `capability_registry.toml` has no `[translations.tensor]` | biomeOS | barraCuda's 56 JSON-RPC methods (Sprint 49: +6 shannon/covariance/spearman/fit_linear/spectral_density/graph_laplacian) have no translation entries |
+| `capability_registry.toml` has no `[translations.tensor]` | biomeOS | barraCuda's 58 JSON-RPC methods (Sprint 50: +stats.entropy alias, +graph.belief_propagation) have no translation entries |
 | `BatchGuard` migration guide | primalSpring | **DONE** — `docs/BATCHGUARD_MIGRATION_GUIDE.md` written; springs can adopt |
 | Graph `transport` metadata: no TCP/Tower fallback | biomeOS | Graphs say `uds_only` with no acknowledgment of Docker/TCP deployment mode |
 
@@ -102,7 +102,7 @@ BTSP-authenticated, 187/187 guidestone checks ALL PASS.**
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 49 | 4,422+ pass | LIVE — 56 JSON-RPC methods (+6: shannon, covariance, spearman, fit_linear, empirical_spectral_density, graph_laplacian; eigh now returns eigenvectors), discovery self-registration, NUCLEUS env wiring, BTSP 13/13 converged, tarpc cipher enforcement, 26 BTSP compliance tests, 12-axis audit clean, Phase 56c GAP-11 10/18 resolved |
+| barraCuda | Sprint 50 | 4,422+ pass | LIVE — 58 JSON-RPC methods (+2 Sprint 50: stats.entropy alias, graph.belief_propagation; PG-47 resolved), discovery self-registration, NUCLEUS env wiring, BTSP Phase 3 server-side ready (ChaCha20-Poly1305 framing wired), tarpc cipher enforcement, 26 BTSP compliance tests, 12-axis audit clean, Phase 56 GAP-11 14/18 resolved |
 | BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
 | coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | 0.9.16 | 1,503 pass | READY — BTSP connection lifecycle fix (persistent conn, no shutdown, read timeout), HandshakeComplete wire fix (status:ok), Step 3→4 relay fixed, NDJSON + provider socket wired, stadial gate cleared |
