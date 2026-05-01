@@ -62,6 +62,16 @@ Returns: `{ distributions: [[f64]], n_layers: int }`
 **Summary**: barraCuda is Phase 3 ready as a **server/relay**. Client-side BTSP
 (for connecting to other primals over encrypted channels) awaits sourDough scaffold.
 
+## Sprint 50b: 12-Axis Deep Debt Audit + cargo update
+
+- 12-axis audit confirmed clean: zero TODO/FIXME, zero unsafe outside barracuda-spirv,
+  zero async-trait, zero Box<dyn Error> in production, zero println in library code,
+  zero mocks in production, zero hardcoded sibling names in runtime, all files <800L
+- `barracuda-core` tempfile dev-dep normalized to workspace version
+- `cargo update` applied: tokio 1.50→1.52, clap 4.6.0→4.6.1, blake3 1.8.3→1.8.5,
+  rayon 1.11→1.12, proptest 1.10→1.11, rand 0.9.2→0.9.4
+- All quality gates green post-update (fmt, clippy, doc, deny bans+licenses, 1537+ tests)
+
 ## Remaining IPC Surface Gaps (GAP-11)
 
 From the original 18 gaps (neuralSpring V133), **14 resolved** (11 prior + belief_propagation + stats.entropy alias).
