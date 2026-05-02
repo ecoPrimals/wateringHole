@@ -91,7 +91,7 @@ Coverage expansion: `StatisticalProfiler` (rolling window, anomaly detection, th
 | `cargo fmt --all -- --check` | CLEAN |
 | `cargo doc --workspace --no-deps -D warnings` | CLEAN |
 | `cargo deny check` | CLEAN |
-| `cargo test --workspace --lib --bins` | 287 pass |
+| `cargo test --workspace --lib --bins` | 301 pass |
 
 ---
 
@@ -113,8 +113,8 @@ Coverage expansion: `StatisticalProfiler` (rolling window, anomaly detection, th
 
 ## Metrics
 
-- **39** source files, **9,586** total lines, max **672** lines/file
-- **290** tests, 0 failures
+- **39** source files, **9,723** total lines, max **735** lines/file
+- **301** tests, 0 failures
 - Pure Rust, `forbid(unsafe_code)`, Edition 2024
 - `Cargo.lock` committed (reproducible builds)
 - Crypto pipeline fully tested (HKDF c2s/s2c + AEAD roundtrip)
