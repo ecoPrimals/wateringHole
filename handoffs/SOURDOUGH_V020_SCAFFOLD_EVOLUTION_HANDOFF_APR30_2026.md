@@ -156,12 +156,28 @@ position (Rust 2024 edition feature). Any binary framing implementation can sati
 - `RUSTDOCFLAGS="-D warnings" cargo doc --workspace --no-deps` — zero warnings
 - Total dependencies: 171 (down from 211)
 
+### 14. BTSP Phase 3 Scaffold (May 2, 2026)
+
+Scaffolded primals now generate a `btsp.negotiate` JSON-RPC method handler that
+returns `{"cipher":"null","server_nonce":null}` — the graceful NULL cipher fallback.
+This makes new primals immediately compatible with primalSpring Phase 3 encrypted
+channel negotiation (ChaCha20-Poly1305 client-side) without implementing actual crypto.
+
+Teams can evolve to real AEAD by replacing the NULL response with:
+1. Generate 12-byte server_nonce
+2. Derive keys via HKDF-SHA256(handshake_key, client_nonce || server_nonce)
+3. Return `{"cipher":"chacha20-poly1305","server_nonce":"<hex>"}`
+4. Switch to encrypted framing
+
+Reference: petalTongue `crates/petal-tongue-ipc/src/btsp/json_line.rs`
+
 ## Remaining Gaps (v0.2.0+)
 
 | Item | Status | Notes |
 |------|--------|-------|
 | SD-02: musl cross-compilation | Open | sourDough binary not wired for plasmidBin yet |
 | SD-03: genomeBin signing | Open | sequoia-openpgp stretch goal |
+| BTSP Phase 3 real crypto | Future | Scaffold provides NULL fallback; real ChaCha20 is per-team |
 | `sourdough harvest` command | Planned (v0.4.0) | Interface with plasmidBin sources.toml |
 | Ephemeral primal scaffolding | Planned (v0.3.0) | EphemeralOwner<T>, session-as-primal |
 | sourdough validate ecobin in CI | Future | Static binary verification in generated CI |
