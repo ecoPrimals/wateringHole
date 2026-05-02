@@ -95,7 +95,8 @@ Server uses `s2c_key` to encrypt, `c2s_key` to decrypt (reversed on client).
 ## Metrics
 
 - Tests: 1,482 pass (20 new Phase 3 unit tests)
-- Source files: 197 `.rs` (55,365 LOC)
+- Source files: 193 `.rs` (53,299 LOC), max 757 lines
+- Transport refactor: `btsp/transport.rs` extracted, `tcp_jsonrpc/tests.rs` extracted
 - Clippy: 0 warnings (`pedantic` + `nursery`)
 - `cargo deny check`: advisories ok, bans ok, licenses ok, sources ok
 
