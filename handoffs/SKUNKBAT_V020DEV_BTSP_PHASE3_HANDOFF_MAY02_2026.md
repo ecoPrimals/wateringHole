@@ -44,25 +44,40 @@ Added to workspace (all RustCrypto / pure Rust, pass `cargo deny`):
 - `rand` 0.8
 - `hex` 0.4
 
-### 4. Cipher Selection Logic
+### 4. Cipher Selection Logic (with minimum enforcement)
 
 ```
 if !has_session_key → CipherSuite::Null (no key material = can't encrypt)
-if has_session_key  → honor client's preferred_cipher
+if has_session_key  → max(client's preferred_cipher, bond_type minimum)
 ```
+
+Bond-type minimum enforcement:
+- `Covalent` → any cipher (including Null)
+- `Metallic` → minimum HMAC-SHA256
+- `Ionic` → minimum ChaCha20-Poly1305
 
 Currently: session keys are never stored (BearDog's `btsp.session.verify` response
 doesn't propagate them through our handshake pipeline yet). So all negotiations
 return `"null"` — which is the correct, spec-compliant fallback.
 
-### 5. Tests (14 new, 239 total)
+### 5. Full Crypto Pipeline (`negotiate.rs`)
 
-- `cipher_suite_roundtrip`, `bond_type_minimum_cipher`, `bond_type_parsing`
-- `session_registry_lifecycle`, `session_registry_with_key`
-- `negotiate_missing_params`, `negotiate_empty_session_id`, `negotiate_unknown_session`
-- `negotiate_null_fallback_no_key`, `negotiate_chacha_with_key`
-- `select_cipher_no_key_always_null`, `select_cipher_with_key_honors_request`
-- `test_btsp_negotiate_no_session`, `test_btsp_negotiate_with_session`
+- `derive_session_keys`: HKDF-SHA256 key derivation (handshake_key + nonces → 64B split)
+- `encrypt_frame`: ChaCha20-Poly1305 AEAD with frame counter nonce
+- `decrypt_frame`: ChaCha20-Poly1305 decryption with authentication
+- `cipher_strength`: Ordinal comparison for minimum enforcement
+
+All exercised in tests — ready to activate on key propagation.
+
+### 6. Tests (48 new since last handoff, 287 total)
+
+Crypto pipeline: `derive_session_keys_deterministic`, `derive_session_keys_different_nonces`,
+`encrypt_decrypt_roundtrip`, `decrypt_wrong_counter_fails`, `decrypt_wrong_key_fails`,
+`decrypt_tampered_ciphertext_fails`, `select_cipher_enforces_minimum`, `cipher_strength_ordering`
+
+Coverage expansion: `StatisticalProfiler` (rolling window, anomaly detection, thresholds),
+`LayerTopologyValidator` (bypass detection, empty paths), `LocalLineageVerifier` (conservative deny),
+`ThreatType/Severity` (serde roundtrip, ordering), JSON-RPC types (request/response/notification)
 
 ---
 
@@ -72,9 +87,9 @@ return `"null"` — which is the correct, spec-compliant fallback.
 |------|--------|
 | `cargo clippy --workspace --all-targets -- -D warnings` | CLEAN |
 | `cargo fmt --all -- --check` | CLEAN |
-| `cargo doc --workspace --no-deps` | CLEAN |
+| `cargo doc --workspace --no-deps -D warnings` | CLEAN |
 | `cargo deny check` | CLEAN |
-| `cargo test --workspace --lib --bins` | 239 pass |
+| `cargo test --workspace --lib --bins` | 287 pass |
 
 ---
 
@@ -96,7 +111,10 @@ return `"null"` — which is the correct, spec-compliant fallback.
 
 ## Metrics
 
-- **39** source files, **8,852** total lines, max **672** lines/file
-- **239** tests, 0 failures
+- **39** source files, **9,540** total lines, max **672** lines/file
+- **287** tests, 0 failures
 - Pure Rust, `forbid(unsafe_code)`, Edition 2024
 - `Cargo.lock` committed (reproducible builds)
+- Crypto pipeline fully tested (key derivation + AEAD roundtrip)
+- Bond-type minimum cipher enforcement operational
+- Idiomatic: `.to_owned()` over `.to_string()`, `.into_owned()`, `mul_add`
