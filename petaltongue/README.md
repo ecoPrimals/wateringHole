@@ -2,7 +2,7 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: May 1, 2026 (PG-48 musl resolved, GAP-12 dashboard docs, BTSP Phase 2 operational, deny.toml async-trait guard, primalSpring Phase 56 audit response)
+**Updated**: May 2, 2026 (String error elimination — zero `Result<_, String>` in production, typed errors across 13 modules, PG-48 musl resolved, GAP-12 dashboard docs, BTSP Phase 2 operational, deny.toml async-trait guard)
 
 ---
 
@@ -44,6 +44,7 @@ petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
 - **Dashboard param schema**: Wire-level JSON-RPC docs for `visualization.render.dashboard` (`session_id` + `bindings` required)
 - **`deny.toml` hardened**: `async-trait` banned with wrappers for transitive deps (axum, opentelemetry)
 - **`cargo deny check bans`**: Passes clean (interstadial quality gate)
+- **Typed error evolution**: Zero `Result<_, String>` in production — 13 modules evolved to `thiserror` enums (provenance, physics bridge, audio, graph builder, event bus, capability taxonomy, biomeOS discovery, status reporter, startup audio, data source, sandbox, network audio, tool integration)
 
 ### Grammar of Graphics Engine (Implemented)
 
