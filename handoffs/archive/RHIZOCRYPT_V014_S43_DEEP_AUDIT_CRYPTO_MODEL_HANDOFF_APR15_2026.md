@@ -548,9 +548,23 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 
 **Doc fix**: `btsp/mod.rs` and `newline.rs` `handle_liveness_connection` doc comments described pre-S49 behavior. Updated to match post-S49 routing.
 
+### S59: BTSP Phase 3 — Encrypted Channel (May 2)
+
+**BTSP Phase 3 implemented**: `btsp.negotiate` server handler per primalSpring v0.9.24+ spec. After a successful Phase 1/2 handshake, the client can negotiate a **ChaCha20-Poly1305 encrypted channel**.
+
+**What was added**:
+- New `btsp/phase3.rs` module: `Phase3Keys` (HKDF-SHA256 key derivation with labels `btsp-session-v1-c2s`/`btsp-session-v1-s2c` matching primalSpring), ChaCha20-Poly1305 encrypt/decrypt, negotiate types, and async handler
+- Post-handshake UDS flow redesign: `serve_after_handshake` checks for `btsp.negotiate` → encrypted mode vs. plaintext fallback
+- `handle_encrypted_connection`: length-prefixed encrypted framing (`[4B BE u32][12B nonce][ciphertext + tag]`)
+- `BtspSession.handshake_key` preserved for Phase 3 key derivation
+- New dependency: `chacha20poly1305 = "0.10"` (pure Rust, ecoBin-compliant)
+- 16 new tests: key derivation, encrypt/decrypt, negotiate handler, full round-trip
+- Fully backward-compatible: clients that don't negotiate stay on plaintext
+
+**Stadial gate**: 1,562 tests (0 failures), 0 clippy warnings, 0 fmt diffs, cargo deny clean, cargo doc clean. 168 `.rs` files, ~50,610 lines.
+
 ### Remaining (Not Blocking)
 
 - `Arc<str>` hot-path evolution — intentional roadmap item
-- **BTSP Phase 3** — per-frame AEAD using derived session keys
 - **Vertex signature verification on retrieval** — optional verification of stored signatures when reading from DAG or computing Merkle roots
 - **DAG payload encryption** — `crypto.encrypt` with purpose `"dag"` when `FAMILY_ID` is present (low priority — ephemeral data)
