@@ -311,7 +311,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.27, 1,446 tests + 56 Docker CI, 91.7% coverage, Wire Standard L3 FULL COMPLIANCE, BTSP Phase 2 first-line auto-detect + crypto relay aligned with `beardog_types`, `BraidSignature` removed (Witness-only), env vars fully centralized, ecoBin compliant, musl-static ready, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-or-later, pedantic+nursery clean, zero unsafe, zero production unwrap, zero TODO/FIXME, 32 JSON-RPC methods, sled eliminated, libsqlite3-sys eliminated, async-trait zero, dyn dispatch zero, `detect_protocol` three-way multiplexer)
+**Status**: Production Ready (v0.7.29, 1,482 tests + 56 Docker CI, 91.7% coverage, Wire Standard L3 FULL COMPLIANCE, BTSP Phase 3 `btsp.negotiate` + ChaCha20-Poly1305 AEAD encrypted framing + HKDF-SHA256 directional session keys + NULL cipher fallback, BearDog `crypto.sign` delegation for braids + anchors, `detect_protocol` three-way multiplexer (EOF-resilient, PG-52), env vars fully centralized, ecoBin compliant, musl-static ready, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-or-later, pedantic+nursery clean, zero unsafe, zero production unwrap, zero TODO/FIXME, 32 JSON-RPC methods, sled eliminated, libsqlite3-sys eliminated, async-trait zero, dyn dispatch zero)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
