@@ -225,8 +225,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v3.38  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — v3.38, 8,076+ tests (0 failures), 90%+ region / function / line coverage (llvm-cov), 25 workspace crates, 42 deploy graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant, `#[forbid(unsafe_code)]` all crate roots + all 20+ binaries, **BTSP Phase 3 FULL** (`btsp.negotiate` ChaCha20-Poly1305 encrypted framing + HKDF-SHA256 directional session keys + base64 nonces + Zeroize + NULL fallback), `--btsp-optional` flag, graph signing (BLAKE3+Ed25519), coordination key caching, zero hardcoded paths, zero files >800L, zero stale lint expectations
+**Version**: v3.39  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — v3.39, 8,076+ tests (0 failures), 90%+ region / function / line coverage (llvm-cov), 25 workspace crates, 42 deploy graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant, `#[forbid(unsafe_code)]` all crate roots + all 20+ binaries, **BTSP Phase 3 FULL** (`btsp.negotiate` ChaCha20-Poly1305 encrypted framing + HKDF-SHA256 directional session keys + base64 nonces + Zeroize + NULL fallback), `--btsp-optional` flag, graph signing (BLAKE3+Ed25519), coordination key caching, **capability-based identity** (zero hardcoded primal names in production), zero files >800L, zero stale lint expectations
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
