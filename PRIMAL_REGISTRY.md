@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 2, 2026
+**Last Updated**: February 27, 2026
 
 ---
 
@@ -44,7 +44,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Genetic Crypto** | Lineage-based key derivation, beacon seeds, family seed management |
 | **Dark Forest** | Challenge-response federation protocol |
 
-**IPC Methods**: 95 JSON-RPC methods (92 crypto + 3 introspection)  
+**IPC Methods**: 72 JSON-RPC methods (69 crypto + 3 introspection)  
 **Dependencies**: Zero C dependencies. 100% RustCrypto suite.
 
 **Participates In**: Tower Atomic (with Songbird), NUCLEUS, RootPulse, BirdSong encryption, Dark Forest Federation
@@ -55,7 +55,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Network orchestration, discovery, and federation  
 **Phase**: Foundation  
-**Status**: Production Ready (S+, 100% security provider delegation + Pure Rust Tor, 7,803+ lib tests / ~13K total, ~72% coverage, 30 crates, ecoBin v3.0, BTSP Phase 3 FULL — all transport paths, Wire Standard L3)
+**Status**: Production Ready (S+, 100% BearDog delegation + Pure Rust Tor)
 
 **Role**: Songbird is the nervous system of the ecosystem. It handles all network communication - TLS, discovery, NAT traversal, and federation. It is the only primal that speaks to the external network directly; all others route through Songbird when external connectivity is needed.
 
@@ -78,8 +78,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Storage and content-addressed data management  
 **Phase**: Foundation  
-**Version**: v0.4.70 (Session 48)  
-**Status**: Production Ready (A++ TOP 1%, 99%) — 8,840 tests, 0 failures, 0 clippy warnings, 0 unsafe, 0 emoji in production
+**Status**: Production Ready (A++ TOP 1%, 99%)
 
 **Role**: NestGate provides all data persistence for the ecosystem. Content-addressed storage means data is identified by its hash, not its location. NestGate handles blob storage, tree structures, metadata, and quota management. It also provides capability-based service discovery.
 
@@ -92,8 +91,6 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Metadata** | `metadata.store`, `metadata.retrieve`, `metadata.update`, `metadata.search` |
 | **Health** | `health.check`, `health.metrics`, `health.ready`, `health.alive` |
 
-**Encrypt-at-rest** (S48): Native ChaCha20-Poly1305 encryption on `storage.store`/`retrieve`/`store_blob`/`retrieve_blob`. Key via `NESTGATE_ENCRYPTION_KEY` or BearDog `secrets.retrieve`. Migration-safe (detects unencrypted data).  
-**Auth bypass** (S48): `NESTGATE_AUTH_MODE=beardog` delegates auth to BearDog within NUCLEUS compositions.  
 **Storage Backends**: Filesystem, ZFS, object storage  
 **Content Addressing**: BLAKE3 hashes  
 **Optimization**: Entropy-based compression routing, zero-copy I/O with SIMD
@@ -106,8 +103,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: AI model coordination and inference  
 **Phase**: Foundation  
-**Version**: v0.1.0  
-**Status**: Production Hardened (A++, 98/100) — 7,182 tests, 90.1% coverage, 0 clippy warnings, 0 unsafe, 0 C deps, 0 TODO/FIXME, `#[expect(reason)]` policy
+**Status**: Production Hardened (A++, 98/100)
 
 **Role**: Squirrel provides sovereign AI capabilities through the Model Context Protocol (MCP). It routes AI tasks to appropriate models (local or remote), manages context windows, and coordinates multi-model workflows - all without compile-time coupling to any AI vendor.
 
@@ -115,13 +111,11 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Inference** | Model inference routing, multi-provider support (OpenAI, Anthropic, Ollama, local), HTTP + UDS transports, `inference.register_provider` with `endpoint` param for HTTP |
+| **Inference** | Model inference routing, multi-provider support (OpenAI, Anthropic, Ollama, local) |
 | **Context** | Advanced context window management, memory optimization |
 | **Task Routing** | Intelligent routing based on task requirements and model capabilities |
 | **MCP** | Multi-MCP coordination, sovereign operation |
-| **Discovery** | `DISCOVERY_SOCKET` capability resolution via `discovery.find_provider` (Method 2) |
-| **Crypto** | Purpose-key encryption foundation (`encrypt_with_purpose`, `decrypt_with_purpose`) — awaiting BearDog server-side |
-| **Integration** | Vendor-agnostic AI, zero compile-time coupling, capability-first (all primal names evolved to capability-based) |
+| **Integration** | Vendor-agnostic AI, zero compile-time coupling |
 
 **Architecture**: TRUE PRIMAL - runtime discovery, isomorphic IPC, multi-protocol (JSON-RPC + tarpc)
 
@@ -129,95 +123,45 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 ---
 
-### ToadStool - Hardware Infrastructure Primal
+### ToadStool - Compute Primal
 
-**Domain**: Hardware discovery, capability probing, and compute orchestration  
+**Domain**: Universal compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — S155b (March 15, 2026) — 20,843 workspace tests, clippy pedantic clean, all tests passing, 96+ JSON-RPC methods (dynamically built), ~83% line coverage (182K lines instrumented), BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, hw-learn pipeline (observe/distill/apply/share/status), nvpmu BAR0→RegisterAccess bridge, SPIR-V codegen safety (root-cause rename from nvvm_safety), FirmwareInventory in gpu.info, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph stability. Key recent: +558 net new tests (12 new integration test files), dependency audit (Pure Rust mandate met), unsafe code audit (all hardware-justified), coverage expansion
+**Status**: Production Ready (A++ GOLD STANDARD) — 2,546+ barracuda tests, 21,599+ workspace tests, 0 clippy warnings, sovereign compiler operational
 
-**Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
+**Role**: ToadStool enables isomorphic workload execution across any compute substrate - CPU, GPU, neuromorphic hardware, WebAssembly, containers, and edge devices. Its BarraCuda library (Barrier-free Rust-Abstracted Computationally Unified Dimensionalized Algebra) provides 643+ WGSL f64 shaders (zero orphans) as the **primary math implementation**. All math originates as WGSL shaders at f64 precision -- barracuda does not care about hardware. ToadStool routes to the best substrate at runtime. CPU reference implementations exist only for `#[cfg(test)]` validation. f64 transcendentals (exp, log, pow, sin, cos, gamma, erf) are fully covered by `compile_shader_f64()` polyfill pipeline on every GPU. Runtime f64 probe catches NAK/NVVM drivers that advertise `SHADER_F64` but cannot compile f64 WGSL, auto-falling back to DF64.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
-| **GPU Discovery** | Multi-adapter selection (`TOADSTOOL_GPU_ADAPTER`), `GpuAdapterInfo` (driver, f64, workgroups, buffer limits), cross-vendor (NVIDIA/AMD/Intel via WGPU/Vulkan) |
-| **NPU Discovery** | Generic `NpuDispatch` trait, `AkidaNpuDispatch` adapter (VFIO/kernel/mmap), `NpuParameterController` trait |
-| **CPU Discovery** | `/proc/cpuinfo` parsing, cache hierarchy (L2/L3/Infinity Cache), SIMD capability probing |
-| **Hardware Transport** | Display (DRM/KMS), Capture (V4L2), Serial (USB) — frame protocol + `TransportRouter` |
-| **GPU Job Queue** | Submit/status/result/cancel/list, cross-gate routing across machines |
-| **Precision Routing** | `PrecisionRoutingAdvice` (F64Native, F64NativeNoSharedMem, Df64Only, F32Only), `precision_routing()` |
-| **Sovereign Pipeline** | `HardwareFingerprint`, `is_sovereign_capable()`, `safe_allocation_limit` (NVK PTE guard), 12-variant `SubstrateCapabilityKind` |
-| **Distributed** | Cross-gate GPU routing, cloud cost estimation, compliance validation, federation |
-| **Ollama Integration** | Model lifecycle (list/load/inference/unload) via JSON-RPC |
-| **Runtimes** | Native, WASM (wasmi), Python, Container (BYOB), GPU, NPU, Edge (Linux, RPi, ESP32, Arduino) |
-| **Shader Proxy** | `shader.compile.*` proxy to coralReef with capability-based discovery, naga fallback |
-| **Provenance** | `toadstool.provenance` — cross-spring flow matrix (19+ flows across 6 springs, 19 domains) |
-| **Hardware Learning** | `compute.hardware.*` (observe/distill/apply/share_recipe/status), hw-learn pipeline, `RecipeStore`, `RegisterAccess` trait |
-| **Firmware Inventory** | `FirmwareInventory` (probe/compute_viable/compute_blockers/needs_software_pmu) via nvpmu |
-| **SPIR-V Codegen Safety** | `spirv_codegen_safety` module (`PrecisionBrain`, `NvkZeroGuard`, `HardwareCalibration`), root-cause rename from `nvvm_safety` |
-| **IPC** | 96+ JSON-RPC 2.0 methods (semantic naming), tarpc typed RPC, Unix socket standard |
+| **BarraCuda Core** | 643+ WGSL f64 shaders (shader-first, zero CPU-only math): matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce, broadcast |
+| **Linear Algebra** | GPU-dispatched: solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
+| **Scientific Computing** | Crank-Nicolson PDE, Richards equation, all MD forces GPU (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics (GPU FFT), HFB nuclear physics (11 shaders) |
+| **Lattice QCD** | 14 GPU shaders + host orchestration: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop, kinetic energy |
+| **Special Functions** | GPU: Bessel (J0/J1/Y0/Y1), Laguerre, Hermite, Legendre, spherical harmonics, digamma, beta, gamma, erf |
+| **Statistics** | GPU: variance, covariance, correlation, kinetic energy, fused map-reduce, weighted dot, cosine similarity |
+| **MD Observables** | GPU: RDF (atomic histogram), MSD, VACF, stress virial, velocity-Verlet integrator, Berendsen thermostat |
+| **Surrogates** | RBF surrogate (GPU cdist + GPU solve), adaptive sampling, sparsity sampling |
+| **Bioinformatics** | 25 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, pairwise L2, multi-objective fitness, swarm NN, hill gate, batch fitness, ANI, random forest inference |
+| **CNN** | conv2d, batch_norm, max_pool2d, avg_pool2d, elementwise (CPU + WGSL) |
+| **AlphaFold2** | 8 Evoformer shaders: triangle_mul (outgoing/incoming), triangle_attention, msa_row_attention_scores, msa_col_attention_scores, ipa_scores (SE(3)-equivariant), backbone_update (quaternion), torsion_angles |
+| **Attention** | Scaled Dot-Product, Multi-Head, Causal, Sparse, Rotary, Cross, ALiBi |
+| **Training** | Focal Loss, Contrastive Loss, Huber Loss, BCE, Hinge, KL Divergence, Lovasz, MAE, Smooth L1 |
+| **Optimizers** | SGD, Adam, AdaGrad, RMSprop, AdaDelta |
+| **Grid Search** | GPU grid_fit_2d, grid_search_3d, band_edges_parallel (ComputeDispatch builder pattern) |
+| **HMM** | GPU forward, backward (log-domain), Viterbi decoding |
+| **ODE** | Batched RK4 with universal precision (Scalar/op_* for f16/f32/f64/DF64 routing) |
+| **IoT/Streaming** | Moving window statistics (mean/var/min/max) |
+| **Neuromorphic** | Pure Rust Akida driver (160 NPUs detected), ESN export/import weights, 11-head multi-target ESN |
+| **f64 Polyfill** | `compile_shader_f64()`: auto-injects software transcendentals (exp, log, pow, sin, cos, tan, gamma, erf) on drivers without native f64 support (NVK, RADV, Ada) |
+| **Sovereign Compiler** | naga-IR optimizer: FMA fusion (~1.3x), dead expression elimination, SPIR-V passthrough — end-to-end Rust GPU compilation |
+| **Hybrid FP64** | `Fp64Strategy` auto-selects native f64 (compute GPUs) vs DF64 double-float f32-pair (~14 digits on FP32 cores). 12 DF64 WGSL files. Runtime f64 probe (basic_f64 compile test) catches NAK/NVVM failures. |
+| **Runtimes** | Native, WASM, Python, Container, GPU, NPU, Edge (Linux, RPi, ESP32, Arduino) |
 
-**Key principles**: Capability-based discovery (self-knowledge only), ecoBin compliant (pure Rust core), zero hardcoded primal names/ports, all unsafe blocks documented with `// SAFETY:`. Rust 1.82+ MSRV.
+**Five-Spring ingestion (S69)**: hotSpring (11 HFB physics + heat current + f32 buffers + ESN 11-head), neuralSpring (8 AlphaFold2 Evoformer + 4 HMM/stats + chi²/KL shaders, all f64), wetSpring (5 ODE f64 + universal precision ODE), airSpring (Richards PDE + moving window + Anderson coupling), groundSpring (3 grid search shaders + runtime f64 probe + ComputeDispatch builder). All 13 f32 shaders evolved to f64 (S49). 16 new shaders added in S69. **Deep debt resolved**: S62-63 systematically eliminated dead code, refactored large files (coulomb_f64 -39%, morse_f64 -16%), wired unused implementations. S69 added runtime f64 probe, probe-informed Fp64Strategy, and universal precision ODE framework.
 
-**Participates In**: Node Atomic (with Tower Atomic), NUCLEUS, serves hardware capabilities to BarraCuda
-
----
-
-### BarraCuda - Math Primal
-
-**Domain**: Pure mathematics — WGSL shaders, precision strategy, naga IR optimisation  
-**Phase**: Foundation  
-**Status**: Production Ready (A+) — v0.3.5 — 3,348+ tests, 803 WGSL shaders, 1,060+ Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, NVVM device poisoning guard (all proprietary NVIDIA architectures), DF64 safety probing (`df64_arith`, `df64_transcendentals_safe`), `NvvmDf64TranscendentalPoisoning` workaround, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin), FMA policy, health module (pkpd, microbiome, biosignal), stable GPU special functions; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
-
-**Role**: BarraCuda is pure math. All math originates as WGSL shaders authored in f64 as the canonical precision. BarraCuda does not care about hardware — it writes the mathematics, coralReef compiles it, toadStool discovers and dispatches it. The precision tier (`Fp64Strategy`: f32 / f64 / df64) is the interface between barraCuda and coralReef. naga-IR optimisation (FMA fusion, DCE) operates on the math, not the hardware. Currently uses wgpu as a transitional dispatch substrate until coralReef's sovereign dispatch pipeline is integrated.
-
-**Primitives**:
-
-| Category | Primitives |
-|----------|-----------|
-| **Core** | 712 WGSL f64 shaders: matmul, relu, softmax, gelu, layer_norm, transpose, elementwise, reduce (incl. DF64 variants), broadcast |
-| **Linear Algebra** | solve, cholesky, QR, SVD, LU, sparse eigensolve (Lanczos), GEMM f64, matrix inverse |
-| **Scientific Computing** | Crank-Nicolson PDE, Richards equation, MD forces (Coulomb, Morse, Born-Mayer, Yukawa), PPPM electrostatics, HFB nuclear physics |
-| **Lattice QCD** | 14 GPU shaders + host: Wilson action, HMC leapfrog, Dirac, CG solver, pseudofermion, polyakov loop |
-| **Special Functions** | Bessel, Laguerre, Hermite, Legendre, spherical harmonics, digamma, beta, gamma, erf |
-| **ML** | Attention (7 variants), Training losses (10 types), Optimizers (5 types), CNN ops |
-| **Bioinformatics** | 31 GPU bio ops: kmer histogram, taxonomy FC, UniFrac, ANI, random forest inference, HMM, Dada2, Gillespie, Wright-Fisher |
-| **Kinetics** | Hill activation/repression, Monod saturation, regulatory network primitives |
-| **Precision Strategy** | `Fp64Strategy` (Native / Hybrid / Sovereign / Concurrent), `PrecisionRoutingAdvice` (F64Native / F64NativeNoSharedMem / Df64Only / F32Only) |
-| **Math-level Optimisation** | naga-IR FMA fusion (~1.3x), dead expression elimination — operates on the algebra, not the ISA |
-
-**Boundary**: barraCuda writes the math. coralReef compiles the math. toadStool runs the math. The shaders are the mathematics; the driver is plumbing.
-
-**Five-Spring ingestion**: hotSpring (lattice QCD, HFB, spectral), neuralSpring (bio ML, Hill kinetics), wetSpring (ODE), airSpring (Richards PDE), groundSpring (sensor noise, Ada Lovelace reclassification). All f32→f64 (S49).
-
-**Participates In**: Node Atomic (via ToadStool), NUCLEUS compute layer
-
----
-
-### coralReef - Shader Compiler Primal
-
-**Domain**: GPU shader compilation — WGSL/SPIR-V to native GPU binary  
-**Phase**: Foundation  
-**Status**: Phase 10 Iteration 59 (A+) — 3038 tests passed, 0 failed, 65.8% line coverage (79.6% non-hardware), 72.9% function coverage, 93 cross-spring WGSL shaders (84 compiling SM70), GLSL 450 frontend (5/5 passing), SPIR-V roundtrip (10/10 passing), multi-device compile API, FMA contraction enforcement, VFIO sovereign GPU dispatch (BAR0 + DMA + GPFIFO + PFIFO channel + V2 MMU + sync), `GpuContext::from_vfio()` convenience API, UVM dispatch pipeline, `KernelCacheEntry` + `dispatch_precompiled()` (zero-copy `Bytes`), SCM_RIGHTS fully safe (rustix AsFd, zero unsafe in ember/ipc), DmaBuffer `Arc<OwnedFd>` (consolidated fd safety), clone audit (shader_model 29→0, bdf `Arc<str>`, lower_f64/naga_translate SSARef refs), `#[forbid(unsafe_code)]` on 8/9 crates, zero clippy warnings (pedantic+nursery -D warnings), zero doc warnings, zero fmt drift, all files <1000 lines, AGPL-3.0-only, `.cursor/rules` with wateringHole standards, cross-primal e2e test, nak-ir-proc trybuild tests, hardware: 2× Titan V (VFIO) + RTX 5060 (nvidia-drm)
-
-**Role**: coralReef is the sovereign Rust GPU shader compiler. It compiles WGSL, SPIR-V, and GLSL compute shaders to native GPU binaries with full f64 transcendental support on all NVIDIA generations (SM35–SM120, Kepler through Blackwell). AMD backend operational (RDNA2/GFX1030) with E2E dispatch verified. coralDriver provides userspace GPU dispatch via DRM ioctl (AMD amdgpu, NVIDIA nouveau, nvidia-drm/UVM) and VFIO direct BAR0/DMA dispatch (maximum sovereignty). coralGpu unifies compilation and dispatch into a single API with sovereign driver preference (vfio > nouveau > amdgpu > nvidia-drm). `compile_ir()` accepts pre-built Shader IR for Naga bypass. Zero C dependencies, zero vendor lock-in, zero FFI. Part of the sovereign compute pipeline: barraCuda generates WGSL shaders, toadStool proxies `shader.compile.*` requests, coralReef compiles to native binary, coralDriver dispatches on hardware.
-
-**Primitives**:
-
-| Category | Primitives |
-|----------|-----------|
-| **IPC** | `shader.compile.spirv`, `shader.compile.wgsl`, `shader.compile.wgsl.multi`, `shader.compile.status`, `shader.compile.capabilities` — JSON-RPC 2.0 + tarpc (TCP/Unix socket), zero-copy `bytes::Bytes` payloads, differentiated error codes, FMA policy control |
-| **NVIDIA Backend** | SM35-SM120 (Kepler through Blackwell), SASS binary output, f64 transcendentals via MUFU seed + Newton-Raphson on all gens (sqrt, rcp, exp2, log2, sin, cos), QMD v5.0 for Blackwell |
-| **AMD Backend** | RDNA2 GFX1030, native `v_fma_f64`/`v_sqrt_f64`/`v_rcp_f64`, 1446 ISA opcodes (Rust-generated from AMD XML) |
-| **Compiler Core** | naga frontend, SSA IR, copy propagation, DCE, register allocation, vendor-specific legalization and encoding |
-| **coralDriver** | AMD DRM ioctl (GEM, PM4, BO list, CS submit, fence sync) — **E2E verified on RX 6950 XT**, NVIDIA nouveau (channel, GEM, pushbuf, QMD), nvidia-drm/UVM (RM alloc, GPFIFO, USERD), VFIO (BAR0 + DMA + GPFIFO + sync) — pure Rust, zero libc |
-| **coralGpu** | Unified compile + dispatch API — vendor-agnostic `GpuContext` |
-| **f64 Lowering** | Full f64 transcendental suite: sqrt, rcp, exp2, log2, sin, cos, exp, log, pow — NVIDIA (DFMA software) + AMD (native hardware) |
-| **93/93 Cross-Spring Shaders** | Compiles shaders from hotSpring, groundSpring, neuralSpring, wetSpring, airSpring, healthSpring to native SM70 SASS (all resolved Iter 31) |
-| **AMD E2E Pipeline** | WGSL → compile → PM4 dispatch → GPU execution → host readback — verified on RX 6950 XT (RDNA2 GFX1030) |
-
-**Participates In**: Sovereign Compute Pipeline (barraCuda → toadStool → coralReef → native binary → coralDriver → hardware)
+**Participates In**: Node Atomic (with Tower Atomic), NUCLEUS, BarraCuda compute layer
 
 ---
 
@@ -225,8 +169,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v3.39  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — v3.39, 8,076+ tests (0 failures), 90%+ region / function / line coverage (llvm-cov), 25 workspace crates, 42 deploy graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant, `#[forbid(unsafe_code)]` all crate roots + all 20+ binaries, **BTSP Phase 3 FULL** (`btsp.negotiate` ChaCha20-Poly1305 encrypted framing + HKDF-SHA256 directional session keys + base64 nonces + Zeroize + NULL fallback), `--btsp-optional` flag, graph signing (BLAKE3+Ed25519), coordination key caching, **capability-based identity** (zero hardcoded primal names in production), zero files >800L, zero stale lint expectations
+**Status**: Production Ready (A, Security A++ LEGENDARY)
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -234,15 +177,14 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Neural API** | Semantic routing (`capability.call`), 320+ translations, 27 domains, pathway learning |
+| **Neural API** | Semantic routing (`capability.call`), pathway learning, bidirectional feedback |
 | **Atomics** | Tower Atomic, Node Atomic, Nest Atomic, Full NUCLEUS composition |
-| **Provenance** | `rootpulse_commit` graph, `provenance_pipeline` graph, rhizoCrypt/LoamSpine/sweetGrass domains |
-| **Discovery** | Runtime capability matching, primal health monitoring, prefix resolution |
+| **Discovery** | Runtime capability matching, primal health monitoring |
 | **Deployment** | genomeBin management, graph-based deployment, cross-device federation |
 | **Security** | Dark Forest integration (A++ LEGENDARY), genetic model coordination |
 | **IPC** | Universal IPC v3.0, multi-transport support |
 
-**Participates In**: Coordinates all composed systems (RootPulse, Tower Atomic, NUCLEUS, federation). Provenance trio (rhizoCrypt + LoamSpine + sweetGrass) wired into Neural API for `dag.*`, `commit.*`, `provenance.*` routing.
+**Participates In**: Coordinates all composed systems (RootPulse, Tower Atomic, NUCLEUS, federation). biomeOS is to the ecosystem what the nervous system is to an organism.
 
 ---
 
@@ -250,34 +192,27 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 These primals build emergent behaviors on the NUCLEUS foundation. They compose into higher-order patterns (RootPulse, Memory & Attribution Stack) coordinated by biomeOS via the Neural API. Each is functional, tested, and has its own showcase demonstrations. They represent the next evolutionary phase - building emergent capabilities on the foundation that the primals above provide.
 
-### petalTongue - Universal User Interface Primal
+### petalTongue - Representation Primal
 
-**Domain**: Universal User Interface — any computational universe → any modality → any user type  
+**Domain**: Universal multi-modal user interface  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A+) — v1.6.6, 18 crates, 6,191+ tests, ~90% coverage, edition 2024, `#![forbid(unsafe_code)]` + `deny(unwrap/expect)`, zero C deps, AGPL-3.0-or-later, 11 DataBinding variants, UUI glossary module, SAME DAVE model, `#[expect]` migration, BTSP Phase 2 operational, `cargo deny check bans` clean, `async-trait` banned, zero `Result<_, String>` in production (typed errors across 13 modules). See [PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md](petaltongue/PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md) for integration gaps
+**Status**: Production Ready (A++, 99/100)
 
-**Role**: petalTongue is the Universal User Interface — translating any computational universe into any modality for any user type. It implements a composable **Grammar of Graphics** pipeline: any primal sends a declarative grammar expression (data + variable bindings + scales + geometry + coordinates), and petalTongue compiles it to the best available representation (desktop display, terminal, audio sonification, SVG, PNG, JSON API, haptic, braille). Tufte constraints (data-ink ratio, lie factor, accessibility) are machine-checked on every render. The **SAME DAVE** cognitive model (Sensory Afferent / Motor Efferent) provides bidirectional feedback loops. Heavy computation (statistics, 3D tessellation, physics) is offloaded to barraCuda via capability-based discovery. The grammar is domain-agnostic: the same pipeline renders ecosystem topology, clinical vitals, molecular structures, game worlds, and universe simulations. Accessibility is not a feature — it is the architecture: every modality is a first-class compilation target, serving sighted humans, blind hikers, paraplegic developers, AI agents, and beyond. Live ecosystem wiring enables 60 Hz sensor streaming, interaction broadcast, and Neural API self-registration with biomeOS.
+**Role**: petalTongue renders ecosystem state across every sensory modality. Sighted users see graph visualizations. Blind users hear sonified health data. Terminal users get rich TUI. Web users get a dashboard. The same primal adapts to whatever representation capability is available.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
-| **Display Modes** | Desktop display (egui/wayland), Terminal display (ratatui), Web interface (axum), Headless rendering (SVG/PNG) |
+| **Visual Modes** | Desktop GUI (egui/wayland), Terminal UI (ratatui), Web server (axum), Headless rendering (SVG/PNG) |
 | **Audio** | Sonification engine: 5 instruments, health-to-pitch mapping, position-to-stereo panning |
-| **UUI** | Canonical glossary (`uui_glossary`), modality names, user types, SAME DAVE model constants |
 | **Layout** | 4 graph layout algorithms, pan/zoom/select |
-| **Grammar of Graphics** | Declarative grammar expressions (Scale, Geometry, Coordinate, Statistic, Aesthetic, Facet traits), grammar compiler → RenderPlan, modality compilers (egui, ratatui, audio, SVG, PNG, JSON) |
-| **Tufte Constraints** | Data-ink ratio, lie factor, chartjunk detection, small multiples preference, color accessibility, data density, smallest effective difference — auto-correctable |
-| **Interaction** | Inverse scale pipeline (display coords → data values), brush selection, linked views, cross-primal interaction events via `visualization.interact` |
-| **Integration** | Live primal discovery via Songbird, biomeOS SSE event subscription, barraCuda GPU compute offload (`math.stat.*`, `math.tessellate.*`, `math.project.*`) |
-| **IPC** | `visualization.render`, `visualization.render.stream`, `visualization.export`, `visualization.validate`, `visualization.capabilities`, `visualization.interact` — JSON-RPC 2.0 + tarpc, `bytes::Bytes` zero-copy for binary payloads |
+| **Integration** | Live primal discovery via Songbird, biomeOS SSE event subscription |
 | **Configuration** | Environment-driven (ENV > File > Defaults), TCP fallback IPC |
 
-**UniBin Modes**: `ui`, `tui`, `web`, `headless`, `server`, `status`
+**UniBin Modes**: `ui`, `tui`, `web`, `headless`, `status`
 
-**Key principle**: One Engine, Infinite Representations. Data defines structure. Grammar defines mapping. Modality defines rendering. The user defines interaction. Other primals send grammar expressions or raw data; petalTongue handles the rest. See `wateringHole/petaltongue/VISUALIZATION_INTEGRATION_GUIDE.md`.
-
-**Participates In**: biomeOS ecosystem visualization, real-time health monitoring display, barraCuda compute pipeline (grammar → GPU statistics/tessellation → render), cross-primal interaction events
+**Participates In**: biomeOS ecosystem visualization, real-time health monitoring display
 
 ---
 
@@ -285,23 +220,20 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
-**Version**: 0.14.0-dev  
-**Status**: Production Ready (1,546 tests all-features, 93.88% llvm-cov, clippy pedantic+nursery enforced (`doc_markdown`, `must_use_candidate`, etc.), Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` blocks, AGPL-3.0-or-later, UniBin compliant, musl-static x86_64 shipped in plasmidBin (5.4M), cargo-deny enforced (18-crate ecoBin ban list incl. reqwest + ring), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools, `niche.rs` runtime: 28 methods (5 domains) — 24 in `capability_registry.toml` + 4 implicit (`health.readiness`, `identity.get`, `tools.list`, `tools.call`) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types, `dag.dehydrate` alias, `identity.get` implemented, biomeOS Format E wire compatibility, GAP-MATRIX-05 live-validated, reqwest eliminated — hyper/tower pure Rust, **BTSP Phase 2** — X25519+HMAC-SHA256 handshake on UDS, FAMILY_ID socket scoping + BIOMEOS_INSECURE guard, delegated vertex signing via crypto provider (S52))
+**Status**: Production Ready (A+, 96/100, 509/509 tests, 87%+ coverage)
 
-**Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
+**Role**: rhizoCrypt provides the ephemeral workspace layer - a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free, and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to LoamSpine for permanence.
 
 **Primitives**:
 
 | Category | Primitives |
 |----------|-----------|
 | **Vertex Operations** | Content-addressed events with BLAKE3 hashing, multi-parent DAG links, nanosecond timestamps |
-| **Session Management** | Scoped workspaces with full lifecycle (active, committed, discarded), lock-free |
+| **Session Management** | Scoped workspaces with full lifecycle (active, committed, discarded) |
 | **Merkle Trees** | Content verification, inclusion proofs, root computation |
-| **Dehydration** | Temporal collapse: commit session state to permanent storage via JSON-RPC 2.0 |
-| **Slice Semantics** | 6 query modes (Copy, Loan, Consignment, Escrow, Mirror, Provenance) |
-| **Attribution** | Agent DID identity, per-agent event counting, role assignment |
-| **Niche** | `niche.rs` self-knowledge module with `PRIMAL_ID`, `CAPABILITIES`, `CONSUMED_CAPABILITIES`, `COST_ESTIMATES`, `operation_dependencies()` |
-| **IPC** | JSON-RPC 2.0 (required) + tarpc/bincode (optional), 28 methods across 5 domains (`dag.*`, `health.*`, `capabilities.*`, `identity.*`, `tools.*`), enhanced `capabilities.list` with per-method cost/deps, `health.liveness` + `health.readiness` probes, `tools.list` + `tools.call` MCP, 4-format capability parsing, `ValidationSink` pluggable output, `normalize_method()` legacy prefix support |
+| **Dehydration** | Temporal collapse: commit session state to LoamSpine |
+| **Slice Semantics** | 6 query modes for traversing the DAG |
+| **Attribution** | Embedded sweetGrass metadata, BearDog DID agent identity |
 
 **Participates In**: RootPulse (ephemeral workspace layer), Memory & Attribution stack
 
@@ -311,7 +243,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.29, 1,482 tests + 56 Docker CI, 91.7% coverage, Wire Standard L3 FULL COMPLIANCE, BTSP Phase 3 `btsp.negotiate` + ChaCha20-Poly1305 AEAD encrypted framing + HKDF-SHA256 directional session keys + NULL cipher fallback, BearDog `crypto.sign` delegation for braids + anchors, `detect_protocol` three-way multiplexer (EOF-resilient, PG-52), env vars fully centralized, ecoBin compliant, musl-static ready, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-or-later, pedantic+nursery clean, zero unsafe, zero production unwrap, zero TODO/FIXME, 32 JSON-RPC methods, sled eliminated, libsqlite3-sys eliminated, async-trait zero, dyn dispatch zero)
+**Status**: Production Ready (A+, 98/100, 381/381 tests, 86% coverage)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
@@ -319,13 +251,12 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 | Category | Primitives |
 |----------|-----------|
-| **Braids** | Content-addressable provenance records, W3C PROV-O / JSON-LD compliant, `Arc<str>` zero-copy identifiers |
+| **Braids** | Content-addressable provenance records, W3C PROV-O / JSON-LD compliant |
 | **Attribution Engine** | 12 role types (Creator, Contributor, Reviewer...), derivation chain analysis, time decay, recursive propagation |
 | **Provenance Graph** | Complete data lineage tracking, DAG queries, "where did this come from?" |
 | **Privacy** | 5 privacy levels, GDPR-inspired data subject rights |
-| **Storage** | Memory, redb (recommended), PostgreSQL, NestGate backends (sled archived) |
+| **Storage** | Memory, Sled, PostgreSQL backends |
 | **Export** | W3C PROV-O JSON-LD standard, ~88% compression with session dedup + zstd |
-| **IPC** | JSON-RPC 2.0 + tarpc + REST + UDS, DispatchOutcome, health probes, OrExit |
 
 **Participates In**: RootPulse (attribution layer), Memory & Attribution stack, Loam Certificate provenance
 
@@ -335,7 +266,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Immutable linear ledger for selective permanence  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.9.16, 1,507 tests, 92%+ line / 89%+ region coverage, pure Rust, ecoBin compliant, UniBin, Edition 2024, pedantic+nursery clean, cast lint deny, `#[expect(reason)]` bulk migration, CONTEXT.md per PUBLIC_SURFACE_STANDARD, `capabilities.list` + `health.liveness` + `tools.list` + `tools.call` (MCP) per Semantic Method Naming v2.1, tarpc 0.37 (json transport, bincode path eliminated), `ResilientSyncEngine` (circuit-breaker + retry for federation), `DispatchOutcome`/`IpcErrorPhase`/`StreamItem`/`OrExit`/`extract_rpc_result`/`normalize_method` ecosystem patterns, cargo deny 4/4 clean, provenance trio types inlined (no shared crate), `publish = false` on all workspace crates, BTSP Phase 2 handshake (blake3+uuid challenge entropy, 5-submodule architecture), domain-based socket naming (`permanence.sock`), `--socket`/`--port` CLI flags, SignalHandler (SIGTERM/SIGINT graceful shutdown), UDS backpressure semaphore (256 max concurrent), workspace dependency centralization, zero flaky storage tests, registry path constants centralized, BTSP provider socket constant, jsonrpc TCP/UDS transport split, TCP_NODELAY on all TCP sockets, 8×5 concurrent UDS load test)
+**Status**: Production Ready (A+, 98/100, 416/416 tests, 77.68% coverage)
 
 **Role**: LoamSpine is the fossil record. Where rhizoCrypt is ephemeral and fast, LoamSpine is permanent and provable. Important events are deliberately committed ("dehydrated") from rhizoCrypt into LoamSpine's append-only ledger. Most data should be temporary; only what matters should be permanent.
 
@@ -355,11 +286,11 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 ### skunkBat - Defense Primal
 
-**Domain**: Defensive network security
-**Phase**: Post-NUCLEUS
-**Status**: Production Ready — v0.1.0, 124+ tests, clippy pedantic+nursery clean
+**Domain**: Defensive network security  
+**Phase**: Post-NUCLEUS  
+**Status**: Production Ready (87.37% coverage, core modules 90-100%)
 
-**Role**: skunkBat protects sovereign computing environments through threat detection and graduated response. JSON-RPC 2.0 IPC server on TCP + UDS with BTSP Phase 1 socket naming and Wire Standard L2/L3 compliance. Strictly defensive — reconnaissance, not surveillance. Learns your network's normal baseline and detects deviations. Never inspects content, only metadata.
+**Role**: skunkBat protects sovereign computing environments through threat detection and graduated response. It is strictly defensive - reconnaissance, not surveillance. It learns your network's normal baseline and detects deviations. It never inspects content, only metadata.
 
 **Primitives**:
 
@@ -367,14 +298,13 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 |----------|-----------|
 | **Threat Detection** | Genetic (unknown lineage), Topology (layer-hopping), Behavioral (statistical anomalies), Intrusion (attack signatures), Resource (DoS, exhaustion) |
 | **Defense Actions** | Monitor + Alert (low), Quarantine (isolate), Block (deny, operator decision) |
-| **Baseline** | Statistical profiling via `VecDeque` rolling window, `/proc/loadavg` system load |
+| **Baseline** | Statistical profiling of normal network patterns |
 | **Reconnaissance** | Network intelligence (metadata-only, no content) |
-| **IPC** | JSON-RPC 2.0 (TCP + UDS), BTSP Phase 1, Wire Standard L2/L3, `security.sock` domain symlink |
-| **Integration** | Capability-based runtime discovery (ToadStool, Songbird, BearDog via JSON-RPC) |
+| **Integration** | Trait-based ecosystem integration (BearDog, ToadStool, Songbird, NestGate) |
 
 **Principles**: Defensive only, user authority required, privacy by architecture
 
-**Participates In**: Ecosystem security layer, Dark Forest defense coordination, NUCLEUS compositions
+**Participates In**: Ecosystem security layer, Dark Forest defense coordination
 
 ---
 
@@ -430,153 +360,38 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
-**Spring Versions (as of April 27, 2026)**:
-
-| Spring | Version |
-|--------|---------|
-| ToadStool | S175 (hw discovery, VFIO sysmon, GlowPlug socket client, shader compilation proxy to coralReef) |
-| hotSpring | v0.6.32 (990 tests, 176 experiments, 166 binaries, 128 WGSL shaders, guideStone 30/30, GPU solve tighten/refactor complete) |
-| groundSpring | V124 (1,050+ tests) |
-| neuralSpring | V134 (1,403+ tests) |
-| wetSpring | V147 (1,902+ tests, 355 binaries, 242 named tolerances, 91.20% coverage) |
-| airSpring | v0.10.0 (1,364 tests, 97 binaries, 87 experiments, 381/381 validation, 146/146 evolution) |
-| healthSpring | V54 (940+ tests) |
-| barraCuda | v0.3.12 (precision brain, hardware calibration, sovereign compile, 803+ shaders) |
-| coralReef | Phase 10 Iter 85+ (WGSL→SASS SM35/SM70/SM120, RTX 5060 sovereign dispatch live, coral-driver init.rs modularized into 11 modules, QMD v5.0, f64 lowering all gens, Edition 2024) |
-| primalSpring | v0.9.17 Phase 45 (75 experiments, 17 tracks, 631 tests, 87/87 gates, guideStone Level 4, genomeBin v5.1 — 46 cross-arch binaries, BTSP Phase 1–3, capability-based discovery, fragment-first composition, Edition 2024, zero warnings, zero unsafe) |
-| ludoSpring | V53 (100 experiments, 817 tests, guideStone readiness 4. Binary-to-composition + upstream absorption: cell graph v2.0, `cell_launcher.sh`, GAP-07/10/11 resolved (PG-33/PG-38), 18/20 capabilities live, game.tick 0.6ms. 30 capabilities, MCP 15/15, typed IpcError, `is_skip_error` degradation, guideStone v1.2.0, genomeBin v5.1) |
-
 ### airSpring - Ecological & Agricultural Sciences
 
-**Domain**: Precision agriculture, irrigation science, environmental systems  
-**Phase**: Domain Validation  
-**Status**: v0.10.0 — 911 lib + 311 integration + 61 forge + 22 property tests, 97 binaries, 87 experiments, 381/381 validation, 146/146 evolution, 14.3× CPU speedup (24/24 parity, 21/21 CPU-GPU), 0 clippy warnings (pedantic+nursery), zero unsafe code (`#![forbid(unsafe_code)]`), zero mocks in production, zero C deps (14 crates banned in `deny.toml`), AGPL-3.0-or-later, standalone barraCuda 0.3.5 (wgpu 28, DF64 precision tier), Edition 2024. 10 MCP tools wired (Squirrel AI). Platform-agnostic IPC (Transport enum: Unix + TCP). 63 provenance baselines. 63 named tolerances (4 submodules). `#[expect(reason)]` Rust 2024 complete. Full validation pipeline green (2026-03-19)
+**Domain**: Precision agriculture, irrigation science, environmental systems
+**Phase**: Domain Validation
+**Status**: v0.5.2 — 584 lib + 31 forge tests, 55 binaries, 0 clippy warnings
 
-**Role**: airSpring validates agricultural computational methods — FAO-56 ET₀ (8 methods), soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, ecological diversity, immunological Anderson coupling, and SCS-CN/Green-Ampt hydrology — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
+**Role**: airSpring validates agricultural computational methods — FAO-56 ET₀, soil sensor calibration, IoT irrigation, water balance, dual crop coefficient, Richards equation, yield response, and ecological diversity — proving the full ecoPrimals pipeline from paper reproduction to GPU-accelerated sovereign computation on consumer hardware.
 
 **Capabilities**:
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 87 complete: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, CW2D, 8 ET₀ methods, GDD, pedotransfer, ensemble, bias correction, parity, dispatch, Anderson coupling, SCS-CN, Green-Ampt, VG inverse, seasonal WB, immunological Anderson (tissue/cytokine/barrier/cross-species), f64-canonical GPU, cross-spring evolution, CPU/GPU parity (21/21), toadStool dispatch (19/19), NUCLEUS mesh (17/17), graph coordination (22/22) |
-| **ET₀ Methods** | Penman-Monteith, Priestley-Taylor, Hargreaves-Samani, Makkink, Turc, Hamon, Blaney-Criddle, Thornthwaite |
-| **Python Baselines** | 1,284/1,284 PASS against digitized paper benchmarks (57 papers), 63 provenance records |
-| **Rust Validation** | 911 lib + 311 integration + 61 forge tests, 381/381 validation checks, 146/146 evolution |
-| **Real Data** | 15,300 station-days Open-Meteo ERA5 (100 Michigan stations), 1498/1498 atlas checks |
-| **GPU Orchestrators** | 25 Tier A + 6 GPU-universal (ops 0-19 all upstream `BatchedElementwiseF64`), seasonal pipeline, atlas stream, MC ET₀ |
-| **Seasonal Pipeline** | ET₀→Kc→WB→Yield chained, GPU stages 1-3, multi-field streaming (57/57), pure GPU end-to-end (46/46) |
-| **metalForge** | 27 workloads, 66/66 cross-system routing (GPU+NPU+CPU), 7-stage GPU→NPU PCIe bypass |
+| **Experiments** | 45 complete: FAO-56, soil, IoT, WB, dual Kc, Richards, biochar, yield, CW2D, 7 ET₀ methods, GDD, pedotransfer, ensemble, bias correction, parity, dispatch, Anderson coupling |
+| **ET₀ Methods** | Penman-Monteith, Priestley-Taylor, Hargreaves-Samani, Makkink, Turc, Hamon, Thornthwaite |
+| **Python Baselines** | 1109/1109 PASS against digitized paper benchmarks |
+| **Rust Validation** | 584 lib + 31 forge tests, 55 binaries, 75/75 cross-validation (tol=1e-5) |
+| **Real Data** | 15,300 station-days Open-Meteo ERA5 (100 Michigan stations), 80yr download active |
+| **GPU Orchestrators** | 11 Tier A + 4 Tier B wired (ops 0-8), seasonal pipeline, atlas stream, MC ET₀ |
+| **Seasonal Pipeline** | ET₀→Kc→WB→Yield chained, 73/73 PASS (12 stations, 4800 crop-year results) |
+| **metalForge** | 18 workloads, 29/29 cross-system routing (GPU+NPU+CPU) |
 | **NPU** | AKD1000 live (3 experiments, 95/95 checks, ~48µs inference) |
-| **CPU Benchmark** | 14.3× geometric mean speedup vs Python (24/24 parity), 13,000× atlas-scale |
+| **CPU Benchmark** | 25.9× faster than Python (8/8 parity, geometric mean) |
 | **GPU Live** | Titan V 24/24 PASS (0.04% seasonal parity), RTX 4070 validated |
-| **NUCLEUS** | biomeOS primal (41 capabilities), JSON-RPC 2.0, 4 deploy graphs, cross-primal forwarding |
-| **Nautilus** | bingoCube/nautilus evolutionary reservoir computing (AirSpringBrain, drift detection, NPU export) |
-| **MCP Tools** | 10 ecology tools (Squirrel AI): et0, hargreaves, water_balance, soil_moisture, dual_kc, richards, yield_response, spi_drought, diversity, pedotransfer |
-| **IPC** | Platform-agnostic Transport (Unix + TCP), 3-tier discovery, health probes, circuit breaker |
 
-**ToadStool/BarraCuda Contributions**:
+**ToadStool Contributions**:
 - TS-001: `pow_f64` fractional exponent fix (discovered during ET₀ atmospheric pressure calc)
 - TS-003: `acos` precision boundary fix
 - TS-004: reduce buffer N≥1024 fix
 - Richards PDE solver absorbed upstream (S40)
 - Stats metrics absorbed upstream (S64)
-- 6 f64-canonical WGSL shader ops (3 absorbed: Makkink→Op14, Turc→Op15, Hamon→Op16)
-- Fused Welford `mean_variance_f64.wgsl` wired into SeasonalReducer (hotSpring S58 provenance)
-- Fused Pearson `correlation_full_f64.wgsl` wired into gpu/stats (neuralSpring S69 provenance)
-- NVK/Mesa f64 reliability finding → GPU fallback to CPU Welford documented
-- Transport enum + resolve_transport() pattern (upstream absorption candidate)
-- MCP tool dispatch pattern (tools/list + tools/call in primal dispatch)
 
 **Participates In**: Node Atomic (via ToadStool compute), Nest Atomic (via NestGate data), NUCLEUS (via biomeOS deployment graphs), metalForge cross-system dispatch
-
-### hotSpring - Computational Physics
-
-**Domain**: Plasma physics, nuclear structure, lattice QCD, transport, spectral theory, sovereign GPU validation
-**Phase**: Domain Validation + GPU Solve
-**Status**: v0.6.32 — 990 tests, 166 binaries, 128 WGSL shaders, 176 experiments, 64/64 validation suites, guideStone 30/30 (Property 3 BLAKE3 CHECKSUMS), ~$0.30 total science cost
-
-**Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC + Abelian Higgs), screened Coulomb transport, Anderson localization, Hofstadter butterfly, and Stanton-Murillo transport. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline. Primary GPU solve validation spring for RTX 5060 (SM120), Titan V (SM70), Tesla K80 (SM37).
-
-**Capabilities**:
-
-| Category | Details |
-|----------|---------|
-| **Experiments** | 176 complete: MD, GPU scaling, parity, lattice QCD, NPU, brain architecture, nuclear EOS full-scale, HFB pipeline, transport, RHMC, Abelian Higgs, Hofstadter, N-scaling, paper-parity long runs, sovereign GPU compile validation |
-| **Physics Domains** | Yukawa OCP MD, nuclear EOS (SEMF→HFB→deformed, AME2020), SU(3) gauge + dynamical fermion HMC, Green-Kubo transport (D*/η*/λ*), Anderson 1D/2D/3D, Hofstadter butterfly, Abelian Higgs (U(1)+Higgs HMC), Stanton-Murillo transport, screened Coulomb (Sturm bisection) |
-| **GPU Validation** | 128 WGSL shaders, DF64 core streaming (3.24 TFLOPS, 14-digit precision on FP32), GPU-resident CG (15,360× readback reduction). Sovereign dispatch: RTX 5060 live (April 16), Titan V + K80 active. |
-| **GPU Solve Hardware** | RTX 5060 (SM120/Blackwell) SOLVED, Titan V (SM70/Volta) active SEC2/ACR, Tesla K80 (SM37/Kepler GK210) active FECS internal firmware |
-| **NPU Integration** | Live AKD1000 via PCIe, 15-head ESN (11 production + 4 proxy), cross-run learning, concept edge detection |
-| **Brain Architecture** | 4-layer concurrent: RTX 5060 motor + Titan V pre-motor + CPU cortex + NPU cerebellum |
-| **Nautilus Shell** | Evolutionary reservoir computing (bingoCube/nautilus): 5.3% LOO, 2.6% blind, 540× quenched→dynamical cost reduction |
-| **Production Results** | Deconfinement χ=40.1 at β=5.69 (32⁴, 13.6h, $0.58). Dynamical crossover confirmed (8⁴, 17 β points). PP Yukawa 9/9 (N=10k, 80k steps, 0.000-0.002% drift, 3.66 hrs, $0.044). |
-
-**coralReef Contributions**:
-- coral-driver VFIO sovereign dispatch (BAR0 + DMA + GPFIFO + PFIFO + V2 MMU + sync)
-- RTX 5060: f64 div/sqrt MUFU polyfills, `@builtin(num_workgroups)` LDC fix, semaphore fence ordering, UVM write access, QMD v5.0
-- K80: Internal firmware protocol (gf100_gr_init_ctxctl_int), FECS/GPCCS IMEM/DMEM capture, csdata loading, PGOB disable, PRI ring init, clock recipe capture
-- Titan V: SEC2/ACR pipeline, SBR hot reset via VFIO ioctl
-- init.rs (5466 LOC) split into 11 focused modules (April 27)
-
-**barraCuda Contributions**:
-- 128 WGSL shaders (lattice QCD, HFB, transport, spectral)
-- GPU-resident CG solver pattern absorbed upstream
-- DF64 core streaming validated and expanded
-- Precision brain + hardware calibration + sovereign compile integration
-- IPC deduplicated (shared jsonrpc_request envelope)
-
-**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment), Sovereign Compute Pipeline (barraCuda → toadStool → coralReef → hardware)
-
-### primalSpring - Coordination and Composition Validation
-
-**Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
-**Phase**: Phase 45 (Deployment Validation + Upstream Absorption)  
-**Status**: v0.9.17 Phase 45 — 75 experiments (17 tracks), 631 tests (585 passed + 46 ignored), 46 cross-arch binaries (6 target triples, Tier 1 39/39), genomeBin v5.1, guideStone Level 4 (161/166 live NUCLEUS — 5 expected FAIL upstream BTSP gaps, 41/41 bare), seed provenance (Layer 0.5), BTSP escalation (Layer 1.5), 47 capabilities, NUCLEUS VALIDATED (Tower + Nest + Node + full 12-primal deployment + biomeOS substrate), `build_ecosystem_genomeBin.sh` (9-target matrix), 56 deploy graphs (fragment-first `resolve = true`), MCP tools (8 typed), zero clippy warnings (pedantic+nursery), deny(unsafe_code), ecoBin compliant, all `primal_names::` constants, centralized `tolerances::`, capability-based discovery (6-tier + Neural API)
-
-**Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, multi-primal coordination with real IPC, and cross-architecture deployment to 6 target triples.
-
-**Capabilities**:
-
-| Category | Details |
-|----------|---------|
-| **Experiments** | 75 across 17 tracks: Atomic Composition, Graph Execution, Emergent Systems, Bonding & Plasmodium, Cross-Spring Coordination, Showcase-Mined, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, Composition Parity, Cross-Architecture Deployment. All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
-| **Deploy Graphs** | 56 TOMLs (6 fragments + 9 profiles + 5 multi-node + 4 spring validation + 2 spring deploy + 3 downstream + 5 bonding + 2 chaos + 2 cross-spring + 4 patterns + 1 federation + root): fragment-first `resolve = true`, all topologically sorted via `topological_waves()` (Kahn's algorithm). |
-| **Cross-Arch Binaries** | 46 binaries across 6 targets (x86_64-unknown-linux-musl, aarch64-unknown-linux-musl, armv7-unknown-linux-musleabihf, x86_64-pc-windows-gnu, aarch64-linux-android, riscv64gc-unknown-linux-musl). `build_ecosystem_genomeBin.sh` 3-tier matrix. |
-| **Niche Self-Knowledge** | 47 capabilities, semantic mappings (7 domains), operation dependencies, cost estimates |
-| **RPC Methods** | 17 methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.validate_composition_by_capability, coordination.discovery_sweep, coordination.probe_primal, coordination.probe_capability, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |
-| **IPC Resilience** | IpcError (8 typed variants + IpcErrorPhase), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
-| **Live Composition** | Tower STABLE (beardog + songbird + biomeOS). Full NUCLEUS 12/12 alive (local + benchScale Docker). Remote fetch sim 13/13 checksums verified. Pixel aarch64 payload staged. |
-| **Deployment Validation** | Local x86_64: 12/12 primals. benchScale Docker: 12/12 primals. Remote fetch: 13/13 BLAKE3 match. Pixel: 13 aarch64 binaries validated (ELF 64-bit ARM, static, stripped). |
-
-**Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation), Squirrel (live AI composition)
-
-### ludoSpring - Game Design & Interaction Science
-
-**Domain**: Ludology, HCI, game science, procedural generation, interaction design  
-**Phase**: Domain Validation  
-**Status**: V30 — 82 experiments, 675 barracuda + 19 forge tests, 42 Python parity, 19 proptest, 11 IPC integration. Zero `#[allow()]`, zero `unsafe`, zero clippy warnings (pedantic+nursery), zero TODO/FIXME. `#![forbid(unsafe_code)]`, AGPL-3.0-or-later (scyBorg triple: AGPL + ORC + CC-BY-SA-4.0), Edition 2024, MSRV 1.87. 91.27% line coverage (85% floor enforced). `thiserror` 2.x on all error types. MCP `tools.list`/`tools.call` (8 science tools). Optional `tarpc-ipc` feature. Handlers split into 5 domain submodules. UniBin 7 subcommands. CI pipeline. Deploy graph fragment. `GpuContext` + `TensorSession` wired behind `gpu` feature. `default-features = false` on barraCuda v0.3.7.
-
-**Role**: ludoSpring validates the ecoPrimals pipeline against 13 foundational HCI/game science models — Fitts's law, Hick's law, Steering law, GOMS, Flow theory, Dynamic Difficulty, Four Keys to Fun, Engagement metrics, Perlin noise, Wave Function Collapse, L-systems, BSP trees, Tufte data-ink — proving faithful port from Python baselines to Rust CPU to GPU WGSL shaders. The validated math builds playable prototypes (Doom terminal, roguelike explorer) and cross-domain applications (field genomics provenance, medical access control, extraction shooter anti-cheat).
-
-**Capabilities**:
-
-| Category | Details |
-|----------|---------|
-| **Game Science** | `game.evaluate_flow`, `game.evaluate_engagement`, `game.evaluate_fun`, `game.evaluate_dda`, `game.evaluate_tufte`, `game.evaluate_interaction_cost`, `game.evaluate_goms`, `game.classify_genre` |
-| **Procedural** | `game.generate_noise`, `game.generate_wfc`, `game.generate_lsystem`, `game.generate_bsp` |
-| **GPU Compute** | 5 WGSL shaders (fog_of_war, tile_lighting, pathfind_wavefront, perlin_2d, dda_raycast), `TensorSession` via `GpuContext` |
-| **Telemetry** | 13-event portable game telemetry protocol (NDJSON), external adapters (Veloren, Fish Folk, A/B Street) |
-| **RPGPT** | Sovereign RPG engine architecture — any open ruleset + any world + AI narration |
-| **Cross-Domain** | Provenance trio integration, extraction shooter fraud detection, field sample lifecycle, consent-gated medical access, cross-domain fraud unification |
-| **Health** | `health.check`, `health.liveness`, `health.readiness` |
-| **Niche** | `capability.list`, `lifecycle.status`, `capability.register`, `capability.deregister` |
-| **Experiments** | 82 across 22 tracks: core game systems, interaction models, PCG, metrics, benchmarks, external control groups, cross-spring (NCBI, NUCLEUS), RPGPT, Games@Home, provenance trio, extraction shooters, composable viz, lysogeny (6 open recreations), cross-spring provenance (5), RPGPT dialogue plane (9), game history revalidation (7) |
-| **Python Baselines** | 7 scripts, `combined_baselines.json` with `content_sha256`, 42 parity tests |
-| **Deployment** | UniBin (server/status/version), deploy graph, niche YAML, Neural API domain registration, 26 capabilities (24 game + 2 health) |
-
-**IPC Methods**: 26 JSON-RPC 2.0 methods (game evaluation, procedural generation, telemetry, health, lifecycle, capability) over Unix sockets  
-**Dependencies**: barraCuda (CPU math, `default-features = false`), wgpu (optional `gpu` feature), serde, uuid. Zero C dependencies in application code.
-
-**Participates In**: RPGPT (game science + session quality), Provenance Trio (rhizoCrypt DAG + loamSpine certs + sweetGrass braids), biomeOS (niche citizen), toadStool (GPU dispatch), coralReef (shader compilation), petalTongue (visualization), Squirrel (AI narration), metalForge (cross-substrate routing)
 
 ---
 
