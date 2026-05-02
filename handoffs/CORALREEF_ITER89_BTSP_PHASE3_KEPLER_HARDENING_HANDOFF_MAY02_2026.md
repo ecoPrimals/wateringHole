@@ -12,17 +12,21 @@
 
 BTSP Phase 3 convergence (9th of 13 primals), Kepler SCHED_ERROR resolution from hotSpring downstream, and comprehensive deep audit confirmation.
 
-## BTSP Phase 3 — `btsp.negotiate` Server Handler
+## BTSP Phase 3 — Full AEAD Upgrade
 
-coralReef now implements `btsp.negotiate` per the Phase 3 spec:
+coralReef now implements `btsp.negotiate` with **real ChaCha20-Poly1305 AEAD**:
 
-- **Session registry**: Tracks `session_id`s from Phase 2 BTSP authentications
-- **Validation**: Rejects empty session_id, validates against live sessions, rejects empty client_nonce
-- **Nonce generation**: 24-byte random server nonce (base64-encoded)
-- **Cipher**: Returns `"null"` — real ChaCha20-Poly1305 requires BearDog `btsp.session.key_export`
+- **Key extraction**: `create_btsp_session` extracts `handshake_key` from BearDog's `btsp.session.create` response (per BTSP_PROTOCOL_STANDARD v1.0)
+- **HKDF derivation**: `SessionKeys::derive(handshake_key, client_nonce || server_nonce)` with info strings `btsp-session-v1-c2s`/`btsp-session-v1-s2c`
+- **Cipher response**: Returns `"chacha20-poly1305"` when handshake key available; graceful `"null"` fallback when absent
+- **SessionKeys**: `Zeroize + ZeroizeOnDrop`, ChaCha20-Poly1305 encrypt/decrypt with random 12-byte nonces
+- **Transport API**: `take_negotiated_keys(session_id)` for the encrypted frame loop
+- **Session registry**: `HashMap<String, SessionEntry>` with per-session handshake key
+- **Validation**: base64-decoded client_nonce (>= 12 bytes), session_id against registry
 - **Capability**: `btsp.negotiate` advertised in `capability.list`
+- **Module split**: `btsp.rs` (Phase 2 guard, 461L) + `btsp_negotiate.rs` (Phase 3, 619L)
 
-primalSpring detects the upgrade automatically. NULL cipher fallback means no behavioral change for existing compositions.
+primalSpring detects the cipher upgrade automatically. Null cipher fallback means no breakage for compositions where BearDog hasn't exposed key material yet.
 
 ## Kepler SCHED_ERROR Resolution (hotSpring downstream)
 
@@ -49,7 +53,8 @@ Two commits from hotSpring resolved the Kepler CONTEXT_RELOAD_TIMEOUT:
 
 ## Test Results
 
-- 4645+ passing, 0 failures, ~177 ignored (hardware-gated)
+- 4632 passing, 0 failures, 160 ignored (hardware-gated)
+- 21 BTSP Phase 3 crypto tests (negotiate, HKDF, encrypt/decrypt, tamper, wrong-key)
 - Zero clippy warnings (pedantic + nursery)
 
 ## Downstream Impact
@@ -60,7 +65,12 @@ Two commits from hotSpring resolved the Kepler CONTEXT_RELOAD_TIMEOUT:
 
 ## Dependencies Added
 
-- `rand` 0.9 (nonce generation)
-- `base64` 0.22 (nonce encoding)
+- `hkdf` 0.12 (HKDF-SHA256 key derivation)
+- `sha2` 0.10 (SHA-256 for HKDF)
+- `chacha20poly1305` 0.10 (AEAD encrypt/decrypt)
+- `getrandom` 0.3 (cryptographic random nonces)
+- `zeroize` 1 (secure key erasure)
+- `rand` 0.9 (server nonce generation)
+- `base64` 0.22 (nonce encoding/decoding)
 
-Both pure Rust, no transitive C.
+All pure Rust (RustCrypto ecosystem), no transitive C.
