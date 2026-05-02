@@ -1,18 +1,20 @@
-# skunkBat v0.2.0-dev — BTSP Phase 3 `btsp.negotiate` Server Handler
+# skunkBat v0.2.0-dev — BTSP Phase 3 `btsp.negotiate` (BearDog-Aligned)
 
-**Date**: May 2, 2026
+**Date**: May 2, 2026 (updated)
 **From**: skunkBat team
 **To**: primalSpring, BearDog, ecosystem
-**Triggered by**: primalSpring Phase 3 downstream audit
+**Triggered by**: primalSpring Phase 56c + May 2 evolution audit
 
 ---
 
 ## Summary
 
-Implemented `btsp.negotiate` JSON-RPC server handler per BTSP Protocol Standard.
-primalSpring can now detect Phase 3 capability when connecting to skunkBat.
-Currently returns `{"cipher":"null"}` (graceful fallback) — full ChaCha20-Poly1305
-encrypted framing will activate once BearDog propagates session key material.
+Implemented `btsp.negotiate` JSON-RPC server handler aligned with `BearDog` reference
+implementation (`crates/beardog-tunnel/src/unix_socket_ipc/handlers/btsp/negotiation.rs`).
+Accepts `client_nonce` (base64), returns `server_nonce` (base64, 32 bytes), derives
+directional session keys via HKDF-SHA256 with `btsp-session-v1-c2s`/`s2c` info strings.
+Returns `{"cipher":"chacha20-poly1305","server_nonce":"<b64>"}` when handshake key is
+available, otherwise graceful `{"cipher":"null","server_nonce":""}` fallback.
 
 ---
 
@@ -111,10 +113,10 @@ Coverage expansion: `StatisticalProfiler` (rolling window, anomaly detection, th
 
 ## Metrics
 
-- **39** source files, **9,540** total lines, max **672** lines/file
-- **287** tests, 0 failures
+- **39** source files, **9,586** total lines, max **672** lines/file
+- **290** tests, 0 failures
 - Pure Rust, `forbid(unsafe_code)`, Edition 2024
 - `Cargo.lock` committed (reproducible builds)
-- Crypto pipeline fully tested (key derivation + AEAD roundtrip)
-- Bond-type minimum cipher enforcement operational
-- Idiomatic: `.to_owned()` over `.to_string()`, `.into_owned()`, `mul_add`
+- Crypto pipeline fully tested (HKDF c2s/s2c + AEAD roundtrip)
+- Aligned with BearDog reference: base64 nonces, `ciphers` array, directional keys
+- `select_best_cipher` matches ecosystem preference (chacha20-poly1305 > hmac-plain > null)
