@@ -124,9 +124,16 @@ clone_repo() {
         echo "  [dry-run] gh repo clone $org/$repo $dst"
     else
         if ! gh repo clone "$org/$repo" "$dst" 2>/dev/null; then
-            echo "  WARN: failed to clone $org/$repo (may not have access)"
-            WARNINGS+=("Failed to clone $org/$repo")
-            return
+            # gh clone failed — fall back to SSH (handles private repos
+            # when SSH keys are configured but gh auth is not, or when
+            # gh suppresses errors for private repos).
+            if git clone "git@github.com:$org/$repo.git" "$dst" 2>/dev/null; then
+                echo "  (cloned via SSH fallback)"
+            else
+                echo "  WARN: failed to clone $org/$repo (tried gh + SSH)"
+                WARNINGS+=("Failed to clone $org/$repo")
+                return
+            fi
         fi
     fi
     ((CLONED++)) || true
