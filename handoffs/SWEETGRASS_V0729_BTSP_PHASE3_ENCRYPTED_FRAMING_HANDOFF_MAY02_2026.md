@@ -94,9 +94,10 @@ Server uses `s2c_key` to encrypt, `c2s_key` to decrypt (reversed on client).
 
 ## Metrics
 
-- Tests: 1,482 pass (20 new Phase 3 unit tests)
-- Source files: 193 `.rs` (53,299 LOC), max 757 lines
+- Tests: 1,492 pass (20 Phase 3 unit tests + 10 transport switch verification tests)
+- Source files: 199 `.rs` (55,829 LOC), max 757 lines
 - Transport refactor: `btsp/transport.rs` extracted, `tcp_jsonrpc/tests.rs` extracted
+- Phase 3 transport switch verified: 10 integration tests proving negotiate → encrypted frame loop roundtrip (single, sequential, tamper rejection, full negotiate-then-encrypt flow)
 - Clippy: 0 warnings (`pedantic` + `nursery`)
 - `cargo deny check`: advisories ok, bans ok, licenses ok, sources ok
 
