@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-# coralReef — Iteration 89: BTSP Phase 3, Kepler Hardening, Deep Audit
+# coralReef — Iteration 89: BTSP Phase 3 Complete, Kepler Hardening, Deep Audit
 
 **Date**: May 2, 2026
 **From**: coralReef team
@@ -10,21 +10,23 @@
 
 ## Summary
 
-BTSP Phase 3 convergence (9th of 13 primals), Kepler SCHED_ERROR resolution from hotSpring downstream, and comprehensive deep audit confirmation.
+BTSP Phase 3 fully wired (9th of 13 primals) — negotiate handler + encrypted wire transport. Kepler SCHED_ERROR resolution from hotSpring downstream. Comprehensive deep audit: zero bare `#[allow]`, zero debt markers.
 
-## BTSP Phase 3 — Full AEAD Upgrade
+## BTSP Phase 3 — Full AEAD + Wire Transport
 
-coralReef now implements `btsp.negotiate` with **real ChaCha20-Poly1305 AEAD**:
+coralReef now implements `btsp.negotiate` with **real ChaCha20-Poly1305 AEAD** and the **encrypted frame loop**:
 
 - **Key extraction**: `create_btsp_session` extracts `handshake_key` from BearDog's `btsp.session.create` response (per BTSP_PROTOCOL_STANDARD v1.0)
 - **HKDF derivation**: `SessionKeys::derive(handshake_key, client_nonce || server_nonce)` with info strings `btsp-session-v1-c2s`/`btsp-session-v1-s2c`
 - **Cipher response**: Returns `"chacha20-poly1305"` when handshake key available; graceful `"null"` fallback when absent
 - **SessionKeys**: `Zeroize + ZeroizeOnDrop`, ChaCha20-Poly1305 encrypt/decrypt with random 12-byte nonces
-- **Transport API**: `take_negotiated_keys(session_id)` for the encrypted frame loop
+- **Wire transport**: After `btsp.negotiate` returns `chacha20-poly1305`, `unix_jsonrpc.rs` calls `take_negotiated_keys(session_id)` and switches to encrypted frame loop: `[4B BE u32 len][nonce||ciphertext+tag]` → decrypt → dispatch → encrypt → write
+- **Fallback**: Null cipher or non-negotiate first messages fall through to plaintext newline-delimited handler
+- **`BtspOutcome::session_id()`**: Accessor for transport layer to extract session ID from Phase 2
 - **Session registry**: `HashMap<String, SessionEntry>` with per-session handshake key
-- **Validation**: base64-decoded client_nonce (>= 12 bytes), session_id against registry
 - **Capability**: `btsp.negotiate` advertised in `capability.list`
 - **Module split**: `btsp.rs` (Phase 2 guard, 461L) + `btsp_negotiate.rs` (Phase 3, 619L)
+- **Dead code removed**: `encrypt`/`decrypt`/`take_negotiated_keys` are live production paths
 
 primalSpring detects the cipher upgrade automatically. Null cipher fallback means no breakage for compositions where BearDog hasn't exposed key material yet.
 
@@ -59,9 +61,9 @@ Two commits from hotSpring resolved the Kepler CONTEXT_RELOAD_TIMEOUT:
 
 ## Downstream Impact
 
-- **primalSpring**: Auto-detects `btsp.negotiate` in capability.list
+- **primalSpring**: Auto-detects `btsp.negotiate` in capability.list; encrypted framing active when BearDog provides key material
 - **hotSpring**: Kepler PFIFO pipeline now functional (SCHED_ERROR resolved)
-- **compositions**: No behavioral change (NULL cipher = same as before)
+- **compositions**: Encrypted channel active when BearDog `btsp.session.create` returns `handshake_key`; null cipher fallback otherwise (backward compatible)
 
 ## Dependencies Added
 
