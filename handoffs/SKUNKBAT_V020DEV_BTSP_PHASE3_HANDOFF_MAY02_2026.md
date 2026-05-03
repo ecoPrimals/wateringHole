@@ -118,12 +118,14 @@ Crypto pipeline: `derive_session_keys_deterministic`, `encrypt_decrypt_roundtrip
 
 ## Metrics
 
-- **39** source files, max **780** lines/file (production; test-inclusive max 891)
+- **40** source files, max **780** lines/file (production; test-inclusive max 944)
 - **309** tests, 0 failures
 - Pure Rust, `forbid(unsafe_code)`, Edition 2024
 - `Cargo.lock` committed (reproducible builds)
 - Unused `hex` dependency removed (was never imported)
 - `.to_string()` on string literals evolved to `.to_owned()` in production code
+- All `Result<_, String>` evolved to typed enums: `TransportError` (server), `RpcError` (integrations)
+- `btsp.negotiate` inside batch arrays rejected with explicit error (transport upgrade semantics)
 - Full end-to-end encrypted frame loop tested (multi-message, batch, notifications, plaintext rejection)
 - Aligned with BearDog reference: base64 nonces, `ciphers` array, directional keys
 - Handshake key plumbed from Phase 2 into registry
