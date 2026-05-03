@@ -48,9 +48,16 @@ New integration test `test_btsp_phase3_encrypted_frame_loop_reachable`:
 
 This proves the entire chain is exercised end-to-end.
 
+## Deep Debt Pass
+
+- `compile_file()` evolved to typed `CompileFileError` (was `Result<_, (ExitStatus, String)>`)
+- Ember socket rustdoc corrected to XDG-based resolution
+- GFX909 comment: "placeholder" → "Raven Ridge APU"
+- Full audit confirmed zero remaining debt in all dimensions
+
 ## Test Results
 
-- 4633 passing, 0 failures, 160 ignored (hardware-gated)
+- 4634 passing, 0 failures, 160 ignored (hardware-gated)
 - Zero clippy warnings (pedantic + nursery)
 
 ## Downstream Impact
