@@ -130,10 +130,11 @@ These are patterns or code that may become upstream contributions as they mature
 | Candidate | Origin | Status | Notes |
 |-----------|--------|--------|-------|
 | `proc-sysinfo` | toadStool sysmon | Ready for extraction | First candidate |
+| **`wgsl-precision`** | **barraCuda DF64 + toadStool PrecisionBrain** | **Production — priority extraction** | **DF64 + precision routing for Dimforge/wgmath and Rust GPU community. 1,145 shaders, 88K WGSL lines validate the approach. See `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md`** |
+| **`wgsl-compose`** | **coralReef `prepare_wgsl`** | **Production — priority extraction** | **Preamble composition solving WGSL module system gap Dimforge documented** |
 | Capability-based service discovery | biomeOS + songBird | Under development | JSON-RPC capability advertising protocol |
 | Pure Rust DRM ioctl wrappers | coralReef coral-driver | In progress | `rustix`-based, no `nix`/`libc` |
 | Genetic lineage trust model | bearDog | Conceptual | Family-seed auto-trust without CA |
-| WGSL f64 polyfill library | barraCuda | Production | 712 shaders, precision strategy |
 
 ---
 
@@ -211,10 +212,13 @@ ecoPrimals joining this pattern with `proc-sysinfo` continues a proud tradition.
 - [ ] Publish v0.1.0 to crates.io
 
 **Q2 2026**:
-- [ ] Community feedback incorporated
+- [ ] Community feedback on `proc-sysinfo` incorporated
 - [ ] v0.2.0 with any API improvements
 - [ ] Blog post on r/rust about the /proc-first pattern
-- [ ] Identify next upstream candidate (DRM wrappers? WGSL polyfills?)
+- [ ] **Extract `wgsl-precision` standalone crate (DF64 + PrecisionBrain)**
+- [ ] **Extract `wgsl-compose` standalone crate (preamble composition)**
+- [ ] **Peer engagement with Dimforge/wgmath — proof of work, not pitch**
+- [ ] See `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md` for full scope
 
 **Q3 2026**:
 - [ ] If adoption sufficient, depend on upstream `proc-sysinfo`
