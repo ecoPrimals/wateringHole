@@ -3,7 +3,7 @@
 **Date**: May 3, 2026 (updated)
 **From**: skunkBat team
 **To**: primalSpring, BearDog, ecosystem
-**Triggered by**: primalSpring Phase 56c + May 2–3 evolution audit
+**Triggered by**: primalSpring Phase 56c + May 2–3 evolution audit + batch-negotiate edge case
 
 ---
 
@@ -69,7 +69,14 @@ Added to workspace (all RustCrypto / pure Rust, pass `cargo deny`):
 - `decrypt_frame`: Extracts nonce from first 12 bytes, authenticates + decrypts
 - `select_best_cipher`: Ecosystem preference order (chacha20-poly1305 > hmac-plain > null)
 
-### 6. Tests (308 total)
+### 6. Batch Negotiate Rejection
+
+`btsp.negotiate` inside a JSON-RPC batch array is now explicitly rejected with
+`invalid-request` error ("must be sent as a standalone request"). Transport upgrades
+are incompatible with batch semantics — wire format changes mid-response are undefined.
+Other batch members still process normally.
+
+### 7. Tests (309 total)
 
 End-to-end:
 - `test_btsp_negotiate_upgrade_to_encrypted` — full NDJSON negotiate → encrypted frame → dispatch → response → decrypt
@@ -92,7 +99,7 @@ Crypto pipeline: `derive_session_keys_deterministic`, `encrypt_decrypt_roundtrip
 | `cargo fmt --all -- --check` | CLEAN |
 | `cargo doc --workspace --no-deps -D warnings` | CLEAN |
 | `cargo deny check` | CLEAN |
-| `cargo test --workspace --lib --bins` | 308 pass |
+| `cargo test --workspace --lib --bins` | 309 pass |
 
 ---
 
@@ -112,7 +119,7 @@ Crypto pipeline: `derive_session_keys_deterministic`, `encrypt_decrypt_roundtrip
 ## Metrics
 
 - **39** source files, max **780** lines/file (production; test-inclusive max 891)
-- **308** tests, 0 failures
+- **309** tests, 0 failures
 - Pure Rust, `forbid(unsafe_code)`, Edition 2024
 - `Cargo.lock` committed (reproducible builds)
 - Unused `hex` dependency removed (was never imported)
