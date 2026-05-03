@@ -107,11 +107,13 @@ Crypto pipeline: `derive_session_keys_deterministic`, `encrypt_decrypt_roundtrip
 
 ## Metrics
 
-- **39** source files, **10,026** total lines, max **780** lines/file
-- **303** tests, 0 failures
+- **39** source files, max **780** lines/file
+- **306** tests, 0 failures
 - Pure Rust, `forbid(unsafe_code)`, Edition 2024
 - `Cargo.lock` committed (reproducible builds)
-- Full end-to-end encrypted frame loop tested
+- Full end-to-end encrypted frame loop tested (multi-message + plaintext rejection)
 - Aligned with BearDog reference: base64 nonces, `ciphers` array, directional keys
 - Handshake key plumbed from Phase 2 into registry
 - Connection auto-upgrades from NDJSON to encrypted framing post-negotiate
+- `NegotiateAction` enum prevents duplicate responses on null-cipher negotiation
+- BufReader buffer preserved during transport switch (no data loss on upgrade)
