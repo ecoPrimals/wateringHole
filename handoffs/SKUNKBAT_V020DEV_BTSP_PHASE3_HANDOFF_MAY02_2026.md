@@ -1,9 +1,9 @@
 # skunkBat v0.2.0-dev — BTSP Phase 3 Fully Wired (Encrypted Framing)
 
-**Date**: May 2, 2026 (updated)
+**Date**: May 3, 2026 (updated)
 **From**: skunkBat team
 **To**: primalSpring, BearDog, ecosystem
-**Triggered by**: primalSpring Phase 56c + May 2 evolution audit
+**Triggered by**: primalSpring Phase 56c + May 2–3 evolution audit
 
 ---
 
@@ -61,7 +61,6 @@ Added to workspace (all RustCrypto / pure Rust, pass `cargo deny`):
 - `hkdf` 0.12
 - `sha2` 0.10
 - `rand` 0.8
-- `hex` 0.4
 
 ### 5. Crypto Pipeline (`negotiate.rs`)
 
@@ -70,10 +69,15 @@ Added to workspace (all RustCrypto / pure Rust, pass `cargo deny`):
 - `decrypt_frame`: Extracts nonce from first 12 bytes, authenticates + decrypts
 - `select_best_cipher`: Ecosystem preference order (chacha20-poly1305 > hmac-plain > null)
 
-### 6. Tests (303 total)
+### 6. Tests (308 total)
 
-End-to-end: `test_btsp_negotiate_upgrade_to_encrypted` — exercises full NDJSON negotiate →
-encrypted frame → dispatch → encrypted response → decrypt path.
+End-to-end:
+- `test_btsp_negotiate_upgrade_to_encrypted` — full NDJSON negotiate → encrypted frame → dispatch → response → decrypt
+- `test_encrypted_loop_multiple_messages` — sequential encrypted requests in frame loop
+- `test_plaintext_rejected_after_upgrade` — raw NDJSON rejected after cipher upgrade
+- `test_null_cipher_stays_ndjson` — null cipher negotiation keeps NDJSON mode
+- `test_encrypted_batch_request` — JSON array batch dispatch through encrypted framing
+- `test_encrypted_notification_no_response` — id-less notification produces no frame response
 
 Crypto pipeline: `derive_session_keys_deterministic`, `encrypt_decrypt_roundtrip`,
 `decrypt_wrong_key_fails`, `decrypt_tampered_ciphertext_fails`, `directional_keys_encrypt_decrypt`
@@ -88,7 +92,7 @@ Crypto pipeline: `derive_session_keys_deterministic`, `encrypt_decrypt_roundtrip
 | `cargo fmt --all -- --check` | CLEAN |
 | `cargo doc --workspace --no-deps -D warnings` | CLEAN |
 | `cargo deny check` | CLEAN |
-| `cargo test --workspace --lib --bins` | 303 pass |
+| `cargo test --workspace --lib --bins` | 308 pass |
 
 ---
 
@@ -107,11 +111,13 @@ Crypto pipeline: `derive_session_keys_deterministic`, `encrypt_decrypt_roundtrip
 
 ## Metrics
 
-- **39** source files, max **780** lines/file
-- **306** tests, 0 failures
+- **39** source files, max **780** lines/file (production; test-inclusive max 891)
+- **308** tests, 0 failures
 - Pure Rust, `forbid(unsafe_code)`, Edition 2024
 - `Cargo.lock` committed (reproducible builds)
-- Full end-to-end encrypted frame loop tested (multi-message + plaintext rejection)
+- Unused `hex` dependency removed (was never imported)
+- `.to_string()` on string literals evolved to `.to_owned()` in production code
+- Full end-to-end encrypted frame loop tested (multi-message, batch, notifications, plaintext rejection)
 - Aligned with BearDog reference: base64 nonces, `ciphers` array, directional keys
 - Handshake key plumbed from Phase 2 into registry
 - Connection auto-upgrades from NDJSON to encrypted framing post-negotiate
