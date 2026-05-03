@@ -259,7 +259,7 @@ Four springs have entered active NUCLEUS composition testing:
 
 **Common ecosystem blockers** across active delta springs:
 - Ionic bond negotiation (BearDog `crypto.sign_contract`) — hotSpring, healthSpring, wetSpring
-- BTSP Phase 3 server (encrypted channel) — hotSpring, healthSpring
+- ~~BTSP Phase 3 server (encrypted channel)~~ **RESOLVED** — 13/13 primals FULL AEAD (May 2, 2026)
 - ~~toadStool `compute.dispatch` standardization~~ **RESOLVED** S203 — hotSpring, wetSpring, neuralSpring
 - Squirrel provider registration — neuralSpring, healthSpring, wetSpring
 - NestGate `storage.fetch_external` for cross-spring — wetSpring, healthSpring
