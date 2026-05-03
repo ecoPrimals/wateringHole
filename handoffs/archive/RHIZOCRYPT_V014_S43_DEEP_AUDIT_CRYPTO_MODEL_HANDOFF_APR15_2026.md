@@ -568,3 +568,18 @@ Expected: `{"jsonrpc":"2.0","result":"<session_id>","id":1}`
 - `Arc<str>` hot-path evolution — intentional roadmap item
 - **Vertex signature verification on retrieval** — optional verification of stored signatures when reading from DAG or computing Merkle roots
 - **DAG payload encryption** — `crypto.encrypt` with purpose `"dag"` when `FAMILY_ID` is present (low priority — ephemeral data)
+
+### S59b: Guidestone 157/170 — Transport Switch Integration Test (May 3)
+
+primalSpring NUCLEUS validation (guidestone 157/170) asked to verify that after `btsp.negotiate` returns `cipher: "chacha20-poly1305"`, subsequent frames go through encrypted framing. Code audit confirmed logic is correct — `serve_after_handshake` moves the stream into `handle_encrypted_connection` on `Ok(Some(keys))` with no path back to cleartext.
+
+**New integration test** `test_btsp_phase3_encrypted_transport_over_uds`: full end-to-end over real `UnixStream` pair — Phase 2 handshake → `btsp.negotiate(chacha20-poly1305)` → two encrypted JSON-RPC round-trips (`health.check` + `dag.session.create`).
+
+### S59c: CI Gate Alignment (May 3)
+
+Deep debt audit found CI didn't match documented standards:
+- Added `cargo deny check bans` step (was documented as enforced but never ran in CI)
+- Added `--all-features` to clippy and test (feature-gated code was unchecked)
+- Broadened test scope from `--lib` to full workspace
+
+**Stadial gate**: 1,563 tests, 0 clippy warnings, 0 fmt diffs, cargo deny clean. CI now matches documented standards.
