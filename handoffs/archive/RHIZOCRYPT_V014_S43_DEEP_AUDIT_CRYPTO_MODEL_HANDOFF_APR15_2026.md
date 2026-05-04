@@ -583,3 +583,15 @@ Deep debt audit found CI didn't match documented standards:
 - Broadened test scope from `--lib` to full workspace
 
 **Stadial gate**: 1,563 tests, 0 clippy warnings, 0 fmt diffs, cargo deny clean. CI now matches documented standards.
+
+### S59d: DID Semantic Tightening — `ProvenanceChain.agents` (May 3)
+
+primalSpring Phase 58 raised DID vs raw `public_key` semantic gap (LOW). Investigation confirmed the gap was **already resolved in S48** (`CRYPTO_MODEL.md` "DID as Public Key Identifier — RESOLVED"). One type-looseness fix applied: `ProvenanceChain.agents` changed from `HashSet<String>` to `HashSet<Did>` to enforce DID semantics at the type level. Wire-level types intentionally remain `String` for cross-primal serde compatibility.
+
+Phase 3 transport encryption (HIGH) from the same audit was a **stale finding** — fully implemented in S59, integration-tested in S59b, CI-hardened in S59c.
+
+### S59e: Deep Debt Audit — Idiomatic Rust Pass (May 4)
+
+Comprehensive 8-category deep debt audit — all clean. One idiom fix: `start_uds_listener` parameter changed from `Option<&String>` to `Option<&str>`. `BoxFuture` pattern confirmed correct for dyn-safe `ProtocolAdapter` trait. Feature matrix clean. All error types use `thiserror`. Zero stale tracing messages.
+
+**Stadial gate**: 1,563 tests, 0 clippy warnings, 0 fmt diffs. 168 `.rs` files, ~50,790 lines.
