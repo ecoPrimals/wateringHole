@@ -63,6 +63,22 @@ RPC client — no new dependencies.
 
 ---
 
+## Deep Debt Evolution (same session)
+
+| Item | Before | After |
+|------|--------|-------|
+| `server.rs` | 945 lines (tests inline) | **322L** prod + **478L** extracted `server_tests.rs` (DRY helpers) |
+| `derive_session_keys` | `.expect()` panics | `Result<_, TransportError::Crypto>` — zero panics |
+| Provider hardcoding | `"beardog"` literal default | `"btsp"` capability-based (agnostic) |
+| `handle_negotiate` | 107 lines (clippy violation) | Under 100 via `negotiate_error()` helper |
+| Threat type counts | Mixed 4/5 across showcase | **5** everywhere (Intrusion added) |
+| Demo counts | 16/22 (stale) | **21** (actual `demo.sh` count) |
+| Stale references | `docs/DEPLOYMENT.md`, `--features beardog-integration` | Removed/fixed |
+| Workspace version | `0.1.0` vs `0.2.0-dev` narrative | **0.2.0-dev** unified |
+| Spec versions | "0.1.0 (Draft)" | **0.2.0-dev** (implemented specs) |
+
+---
+
 ## Build Health
 
 | Metric | Value |
@@ -73,8 +89,9 @@ RPC client — no new dependencies.
 | Format | CLEAN |
 | Docs | CLEAN |
 | Deny | CLEAN |
-| Source files | 41 |
-| Max file | 780 lines |
+| Source files | 42 |
+| Max file | 790 lines (`negotiate.rs`, test-inclusive) |
+| Version | 0.2.0-dev |
 
 ---
 
