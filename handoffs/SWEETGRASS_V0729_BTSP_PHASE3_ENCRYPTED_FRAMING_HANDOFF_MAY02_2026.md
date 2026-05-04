@@ -32,9 +32,11 @@ channel. NULL cipher fallback ensures zero breakage for existing clients.
 ### New Handler: `try_phase3_negotiate()`
 - Shared by UDS and TCP paths
 - Inspects first post-handshake message for `method: "btsp.negotiate"`
-- If negotiate: validates params, selects cipher, generates server nonce,
-  derives `SessionKeys`, responds, returns keys for encrypted loop
-- If not negotiate: returns `None`, caller falls through to plaintext
+- Returns `NegotiateOutcome` enum: `NotNegotiate` (dispatch normally),
+  `NullCipher` (response sent, continue plaintext), or `Encrypted(keys)`
+  (switch to AEAD framing)
+- Eliminates prior double-response bug where null-cipher negotiate caused
+  a second `METHOD_NOT_FOUND` response
 
 ### New Transport Loops
 - `run_encrypted_frame_loop()` — `read_frame` → decrypt → process → encrypt → `write_frame`
@@ -94,11 +96,12 @@ Server uses `s2c_key` to encrypt, `c2s_key` to decrypt (reversed on client).
 
 ## Metrics
 
-- Tests: 1,492 pass (20 Phase 3 unit tests + 10 transport switch verification tests)
-- Source files: 199 `.rs` (55,829 LOC), max 757 lines
+- Tests: 1,493 pass (20 Phase 3 unit tests + 10 transport switch verification + 1 null-cipher regression)
+- Source files: 199 `.rs` (55,915 LOC), max 763 lines
 - Transport refactor: `btsp/transport.rs` extracted, `tcp_jsonrpc/tests.rs` extracted
 - Phase 3 transport switch verified: 10 integration tests proving negotiate → encrypted frame loop roundtrip (single, sequential, tamper rejection, full negotiate-then-encrypt flow)
-- Clippy: 0 warnings (`pedantic` + `nursery`)
+- Double-response fix: `NegotiateOutcome` enum prevents null-cipher negotiate from emitting a second `METHOD_NOT_FOUND` on all 4 connection paths
+- Clippy: 0 warnings (`pedantic` + `nursery`) — 10 pre-existing warnings resolved
 - `cargo deny check`: advisories ok, bans ok, licenses ok, sources ok
 
 ## Validation
