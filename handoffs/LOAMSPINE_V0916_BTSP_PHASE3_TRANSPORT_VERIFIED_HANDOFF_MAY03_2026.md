@@ -121,5 +121,16 @@ All Phase 3 crypto primitives from the May 2 handoff remain unchanged:
 
 ---
 
+## primalSpring Phase 58 Audit Response (May 4, 2026)
+
+| Audit Item | Priority | Resolution |
+|-----------|----------|------------|
+| Phase 3 transport encryption | HIGH | **VERIFIED** — transport switch wired in `45de0cd` (May 3). After `negotiate_btsp` returns `chacha20-poly1305`, UDS accept loop enters `handle_encrypted_stream` using `read_encrypted_frame`/`write_encrypted_frame`. 4 integration tests confirm. Doc comment fixed (8→16 MiB guard alignment with `MAX_FRAME_SIZE`). |
+| `ring` lockfile ghost | LOW | **COSMETIC ONLY** — `cargo tree -i ring` returns nothing. `ring` is an optional dep of `hickory-proto` (DNSSEC feature, not activated). `cargo deny check` passes (`bans ok`). Cannot be removed from `Cargo.lock` without upstream `hickory` changes. |
+| `sled` lockfile ghost | LOW | **FALSE POSITIVE** — `sled` is NOT in `Cargo.lock`. `sled` was removed during stadial compliance (memory + redb only). |
+| 178 source files | LOW | **NO ACTION NEEDED** — actual count is 182: 97 production `src/`, 73 test, 10 examples, 2 benches. Zero production files under 30 lines. Smallest is 35L (`storage_ext.rs`). No consolidation candidates. |
+
+---
+
 *Ref: `archive/LOAMSPINE_V0916_BTSP_PHASE3_FULL_CHACHA20_HANDOFF_MAY02_2026.md` for Phase 3 crypto implementation details*
 *Ref: `wateringHole/CRYPTO_CONSUMPTION_HIERARCHY.md` for the ecosystem cipher standard*
