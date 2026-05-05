@@ -1,10 +1,10 @@
-# NUCLEUS Spring Alignment — Phase 47
+# NUCLEUS Spring Alignment — Phase 58+
 
 > This is the **canonical** inter-spring reference.
 > Local copies exist in `primalSpring/wateringHole/` for spring context.
 
-**Date**: April 28, 2026
-**From**: primalSpring v0.9.17+ (Phase 47 — Desktop NUCLEUS Composition)
+**Date**: May 5, 2026
+**From**: primalSpring v0.9.21+ (Phase 58 — Spring NUCLEUS Composition Audit)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -54,17 +54,72 @@ which has a unique dual-tower ionic bridge pattern and is kept as a standalone g
 |--------|---------|------|-------|-----------------|----------------|--------|
 | **hotSpring** | 0.6.32 | **5** | 993 | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt complete |
 | **neuralSpring** | V138 | **3** | 1,234 | **Node** + Meta | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, 6 smart refactors, `neural_composition.sh` |
-| **wetSpring** | V151 | **4+** | 1,209 | Node + **Nest** + Meta | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt, `wetspring_composition.sh` |
+| **wetSpring** | V151 | **4+** | 1,594 | Node + **Nest** + Meta | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt, `wetspring_composition.sh` |
 | **airSpring** | 0.10.0 | 0 | 1,364 | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
-| **groundSpring** | V124 | 0 | 1,050+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
-| **healthSpring** | V59 | **5** | 892 | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_*` | **Active** — Phase 46 absorbed (18/24), deep debt, `healthspring_composition.sh` |
-| **ludoSpring** | V53+ | **4** | 817 | Node + **Meta** + Nest | `ludospring_cell.toml` (12-node pure composition) | **Active** — evolution partner, needs more time |
+| **groundSpring** | V124 | 0 | 1,020+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
+| **healthSpring** | V59 | **5** | 948 | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_*` | **Active** — Phase 46 absorbed (18/24), deep debt, `healthspring_composition.sh` |
+| **ludoSpring** | V53+ | **4** | 820 | Node + **Meta** + Nest | `ludospring_cell.toml` (12-node pure composition) | **Active** — evolution partner, needs more time |
 
 ### Key
 
 - **Bold atomic** = primary domain stress point
 - **Pinned** = at current guideStone level; science evolution continues independently
 - **Active** = focused evolution bandwidth; Phase 46 composition patterns absorbed
+
+---
+
+## Library-to-Binary Rewiring Status (Phase 58 Audit)
+
+During earlier evolution, springs were the laboratories where primal math was
+developed. Work started local (hotSpring built precision mixing and df64, wetSpring
+evolved spectral analysis), then upstream primals pulled, reviewed, and absorbed.
+The spring-local `barracuda/` and `ecoPrimal/` directories are artifacts of this
+process. `metalForge/` is architecturally distinct — it is the spring's hardware
+abstraction layer (GPU/CPU/NPU) that informs toadStool dispatch and stays local.
+
+| Spring | Rewiring Tier | Local Crate | IPC% | `src/ipc/` | petalTongue | sweetGrass |
+|--------|---------------|-------------|------|-----------|-------------|------------|
+| primalSpring | **4** (binary-only) | `primalspring` (no barraCuda) | ~100% | Full | — | — |
+| **ludoSpring** | **3** | `ludospring-barracuda` | ~40-60% | Full + provenance/ | `game_scene` | Session braids |
+| **healthSpring** | **3** | `healthspring-barracuda` | ~30-50% | Full + dispatch/ | DataChannel | Partial |
+| **airSpring** | **2** | `airspring-barracuda` | ~25-40% | Full + rpc/ | Not wired | Not wired |
+| **wetSpring** | **2** | `wetspring-barracuda` | ~10-20% | Full + handlers/ | Partial | Partial |
+| **hotSpring** | **2** | `hotspring-barracuda` | ~5-15% | Scattered | Not wired | Not wired |
+| **neuralSpring** | **2** | direct `barracuda` dep | ~5-10% | `ipc_dispatch.rs` only | Not wired | Not wired |
+| **groundSpring** | **1** | `groundspring` (optional feature) | ~1-5% | `ipc.rs` only | Not wired | Not wired |
+
+### Rewiring Tiers
+
+- **Tier 1**: Minimal IPC surface; barraCuda is optional or library-only
+- **Tier 2**: IPC routing exists; bulk science still links barraCuda library
+- **Tier 3**: IPC parity validation active; library and IPC lanes run side-by-side
+- **Tier 4**: Library dep dropped; all compute through IPC to ecobin primals
+
+### Standardization Patterns (cross-spring adoption targets)
+
+| Pattern | Origin | Adopt By |
+|---------|--------|----------|
+| Per-trio-primal IPC modules (`ipc/provenance/{rhizocrypt,loamspine,sweetgrass}.rs`) | ludoSpring | All springs |
+| Multi-primal IPC wrappers (`ipc/{coralreef,toadstool,nestgate}.rs`) | ludoSpring | All springs |
+| `primal-proof` Cargo feature flag (library vs IPC compilation) | healthSpring | All springs |
+| `composition.rs` dual-lane validation model | hotSpring | All springs |
+| `PRIMAL_PROOF_IPC_MAPPING.md` method-by-method IPC surface | hotSpring | All springs |
+| `primal_bridge.rs` socket scan + `NucleusContext` | hotSpring | All springs |
+| Optional `barracuda` feature gate | groundSpring | Tier 1-2 springs |
+| Rich handler dispatch tree (`ipc/handlers/`) | wetSpring | All springs |
+| Deploy graph per science pipeline (`composition/*.toml`) | ludoSpring | All springs |
+
+### Rewiring Priority
+
+1. **ludoSpring** (3→4) — pure composition model, cleanest test case
+2. **healthSpring** (3→4) — `primal-proof` feature already gates compilation
+3. **hotSpring** (2→3) — biggest barraCuda contributor validating its own absorption
+4. **wetSpring** (2→3) — rich IPC handlers, route compute through ecobin
+5. **airSpring** (2→3) — good IPC foundation despite pre-delta
+6. **neuralSpring** (2→3) — needs `src/ipc/` dir; latency-sensitive
+7. **groundSpring** (1→2) — expand `ipc.rs` into `src/ipc/` tree
+
+See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for the full per-spring rewiring inventory.
 
 ---
 
@@ -316,21 +371,30 @@ Alongside Phase 46, hotSpring completed a deep debt cleanup targeting modern idi
 
 ---
 
-## Spring Pinning (April 27, 2026)
+## Spring Pinning and Evolution Status (May 2026)
 
-neuralSpring, wetSpring, airSpring, groundSpring, and healthSpring
-are pinned at their current guideStone levels. hotSpring is **active**.
+**Phase 58 update**: primalSpring has absorbed projectNUCLEUS work. The ecosystem
+enters a convergence phase where all springs begin evolving toward full NUCLEUS
+compositions for their science papers, with library-to-binary rewiring as the
+primary task.
 
-- **Their science evolution continues independently** — they keep building experiments
+- **Active composition evolution**: ludoSpring, healthSpring, hotSpring
+- **Active science with partial composition**: wetSpring, neuralSpring
+- **Pre-delta (ready to unpause)**: airSpring, groundSpring
 - **Phase 46 composition template is available for all springs** — copy template, fill domain hooks
-- **Path dependency fixes from Phase 45 are already applied** (airSpring, groundSpring, healthSpring, wetSpring, hotSpring)
-- **hotSpring has completed Phase 46 absorption + deep debt** — patterns documented for sibling adoption
-- **Evolution bandwidth is focused on**: primalSpring (NUCLEUS certification) + ludoSpring (game science) + esotericWebb (garden composition) + hotSpring (event-driven computation)
+- **Path dependency fixes from Phase 45 are already applied** (all springs)
+- **projectNUCLEUS absorption**: primalSpring has absorbed provenance pipeline
+  validation (Nest Atomic, 9 primals). Patterns flow downstream.
 
-Each pinned spring can unpause at any time by:
-1. Pulling latest primalSpring and plasmidBin
-2. Building their guidestone against a live NUCLEUS
-3. Advancing their gS level with the validated composition patterns
+Each spring's evolution path:
+1. Pull latest primalSpring and plasmidBin
+2. Adopt `src/ipc/` directory structure (ludoSpring reference)
+3. Create `PRIMAL_PROOF_IPC_MAPPING.md` for domain methods (hotSpring reference)
+4. Add `primal-proof` Cargo feature (healthSpring reference)
+5. Expand IPC parity validation (Tier 2→3→4)
+6. Wire petalTongue DataBinding channels for science outputs
+7. Wire sweetGrass braids for experiment attribution
+8. Express science papers as end-to-end NUCLEUS composition graphs
 
 ### Garden Potential
 

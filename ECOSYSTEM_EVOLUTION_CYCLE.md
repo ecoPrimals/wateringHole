@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: May 2, 2026
-**Version**: v1.3.0
+**Date**: May 5, 2026
+**Version**: v1.4.0
 **License**: AGPL-3.0-or-later
 
 ---
@@ -54,9 +54,11 @@ Upstream primals absorb math, shaders, and IPC patterns from springs.
 Downstream gets less "snow melt" — fewer new capabilities flowing down.
 Springs focus on validation of what exists, surfacing gaps, tightening.
 
-**Current state (April 2026)**: Delta season — **guideStone Level 4 achieved** for
+**Current state (May 2026)**: Delta season with convergence phase — **guideStone Level 4 achieved** for
 primalSpring. Live NUCLEUS deployed from plasmidBin as binary depot. Stadial parity
-gate cleared across all 13 primals + primalSpring. Springs evolving to self-validating
+gate cleared across all 13 primals + primalSpring. projectNUCLEUS absorbed by primalSpring.
+**Library-to-binary rewiring** is now the primary delta season task — springs evolving from
+library imports to binary-only IPC calls against ecobin primals. Springs evolving to self-validating
 NUCLEUS deployments via the plasmidBin depot pattern:
 - **Stadial gate cleared**: BearDog W56, Songbird W188, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
 - **primalSpring v0.9.21 Phase 55b**: guideStone Level 4 (**187/187 live NUCLEUS ALL PASS — 13/13 BTSP authenticated, 8 cellular graphs BTSP-enforced**, 41/41 bare, BLAKE3 P3, seed provenance Layer 0.5, BTSP escalation Layer 1.5, cellular deployment Layer 7, biomeOS v3.36 absorbed (+ v3.36: BTSP Phase 3 `btsp.negotiate` ChaCha20-Poly1305 + NULL fallback, 14 stale EVOLVED comments purged), NestGate v0.4.70 S48 absorbed (native encrypt-at-rest + auth bypass), Squirrel AN absorbed (HTTP providers + DISCOVERY_SOCKET + crypto foundation), Songbird W178 absorbed (anyhow migration)), fragment-first graphs, 631 tests, two-tier crypto architecture, plasmidBin depot. **Upstream gaps narrowed**: NestGate encrypt-at-rest RESOLVED, Squirrel discovery RESOLVED. Remaining: BearDog purpose-key RPC, rhizoCrypt/sweetGrass Tower delegation, loamSpine BTSP activation
@@ -245,27 +247,78 @@ for the full per-primal matrix.
 
 ### Downstream Springs — Composition Status
 
-Four springs have entered active NUCLEUS composition testing:
+Five springs are in active delta composition. Two are pre-delta:
 
-| Spring | Status | Composition Evidence |
-|--------|--------|---------------------|
-| **hotSpring** v0.6.32 | **guideStone Level 5 CERTIFIED** (v1.2.0) | 64/64 suites; all 5 guideStone properties; `hotspring_guidestone` (BLAKE3 P3, protocol tolerance, family discovery via primalSpring v0.9.17); 13 LOCAL_CAPABILITIES dispatched; genomeBin v5.1 absorbed; `validate-primal-proof.sh` auto-sets NUCLEUS env vars |
-| **healthSpring** V59 | **Delta** — Level 5, Phase 46 absorbed (18/24) | Deep debt, `healthspring_composition.sh`, dual-tower ionic |
-| **neuralSpring** V138 | **Delta** — Level 3, Phase 46 absorbed, 6 smart refactors | `neural_composition.sh`, `deny.toml` stadial bans; inference wiring |
-| **wetSpring** V151 | **Delta** — Level 4+, Phase 46 absorbed, deep debt complete | `wetspring_composition.sh`, 22 CONSUMED_CAPABILITIES in niche.rs |
-| **airSpring** v0.10.0 | **Pre-delta** | 90.56% coverage; no NUCLEUS wiring yet |
-| **groundSpring** V124 | **Pre-delta** | 92% coverage; no NUCLEUS wiring yet |
-| **ludoSpring** V53 | **Delta** — pure composition, BTSP-enforced | 12-node cell graph, 30 capabilities, pure composition model, 60Hz tick, provenance trio, 817 tests; zero clippy; esotericWebb bridge |
+| Spring | Status | Rewiring Tier | Composition Evidence |
+|--------|--------|---------------|---------------------|
+| **hotSpring** v0.6.32 | **gS 5 CERTIFIED** | Tier 2 | 993 tests; `composition.rs` dual-lane, `primal_bridge.rs`, `PRIMAL_PROOF_IPC_MAPPING.md`; bulk physics still library-linked |
+| **healthSpring** V59 | **gS 5** | Tier 3 | 948 tests; `primal-proof` feature flag, full `src/ipc/`, dual-tower ionic |
+| **neuralSpring** V138 | **gS 3** | Tier 2 | 1,234 tests; `ipc_dispatch.rs` only, no `src/ipc/` dir |
+| **wetSpring** V151 | **gS 4+** | Tier 2 | 1,594 tests; full `src/ipc/` + 15 handlers, provenance wiring; bulk math library-linked |
+| **ludoSpring** V53 | **gS 4** | Tier 3 | 820 tests; pure composition, per-trio-primal IPC modules, 13 deploy graphs |
+| **airSpring** v0.10.0 | **Pre-delta** | Tier 2 | 1,364 tests; full `src/ipc/` + `src/rpc/`; no guideStone |
+| **groundSpring** V124 | **Pre-delta** | Tier 1 | 1,020 tests; optional barraCuda feature; minimal IPC |
 
-**Common ecosystem blockers** across active delta springs:
+### Library-to-Binary Rewiring (Phase 58 — Primary Delta Task)
+
+The central evolution task for all delta springs: replace library imports of
+barraCuda with binary-only IPC calls to ecobin-deployed primals. barraCuda
+ecobin already exposes 32+ JSON-RPC methods — springs must rewire to use them.
+
+During earlier evolution, springs were the laboratories where primal math was
+developed. hotSpring built precision mixing and df64, wetSpring evolved spectral
+analysis, ludoSpring proved game math under tick-budget constraints. Primals
+absorbed this work. The spring-local `barracuda/` and `ecoPrimal/` directories
+are artifacts of that process. `metalForge/` is distinct — it is the hardware
+abstraction layer (GPU/CPU/NPU) informing toadStool and stays spring-local.
+
+**Rewiring tiers**:
+- **Tier 1**: Minimal IPC; barraCuda optional or library-only
+- **Tier 2**: IPC routing exists; bulk science still links library
+- **Tier 3**: IPC parity validation active; library and IPC lanes side-by-side
+- **Tier 4**: Library dep dropped; all compute through IPC (target)
+
+**Rewiring priority** (from `SPRING_NUCLEUS_AUDIT_MAY2026.md`):
+1. ludoSpring (3→4) — pure composition, cleanest test case
+2. healthSpring (3→4) — `primal-proof` feature already gates compilation
+3. hotSpring (2→3) — biggest barraCuda contributor validating absorption
+4. wetSpring (2→3) — rich IPC handlers, route compute through ecobin
+5. airSpring (2→3) — good IPC foundation despite pre-delta
+6. neuralSpring (2→3) — needs `src/ipc/` dir; latency-sensitive
+7. groundSpring (1→2) — expand `ipc.rs` into `src/ipc/` tree
+
+**Cross-spring standardization patterns** (see `NUCLEUS_SPRING_ALIGNMENT.md` Phase 58):
+- Per-trio-primal IPC modules (from ludoSpring)
+- `primal-proof` Cargo feature flag (from healthSpring)
+- `composition.rs` dual-lane validation (from hotSpring)
+- `PRIMAL_PROOF_IPC_MAPPING.md` per spring (from hotSpring)
+- Deploy graph per science pipeline (from ludoSpring)
+
+### petalTongue and sweetGrass Subtasks
+
+Alongside rewiring, two subtasks drive convergence:
+
+**petalTongue visualization**: Every spring's science output maps to existing
+DataBinding channel types (`timeseries`, `heatmap`, `spectrum`, `scatter`,
+`gauge`, `bar`, `fieldmap`, `scatter3d`, `distribution`, `game_scene`,
+`soundscape`). When springs rewire to IPC, the JSON-RPC result payloads become
+direct DataBinding inputs — the computation presents itself. healthSpring is
+the reference exemplar. See `PETALTONGUE_SPRING_SCIENCE_MAP.md`.
+
+**sweetGrass braiding**: Each spring's experiments should produce attribution
+braids linking agents, activities, and entities into W3C PROV-O documents.
+ludoSpring is the reference implementation with per-trio-primal modules.
+See `SWEETGRASS_SPRING_BRAID_PATTERNS.md`.
+
+**Common blockers** across delta springs:
 - Ionic bond negotiation (BearDog `crypto.sign_contract`) — hotSpring, healthSpring, wetSpring
 - ~~BTSP Phase 3 server (encrypted channel)~~ **RESOLVED** — 13/13 primals FULL AEAD (May 2, 2026)
-- ~~toadStool `compute.dispatch` standardization~~ **RESOLVED** S203 — hotSpring, wetSpring, neuralSpring
+- ~~toadStool `compute.dispatch` standardization~~ **RESOLVED** S203
 - Squirrel provider registration — neuralSpring, healthSpring, wetSpring
 - NestGate `storage.fetch_external` for cross-spring — wetSpring, healthSpring
-- barraCuda IPC rewiring — **spring-side gap** (barraCuda ecobin already exposes 32 JSON-RPC methods; springs must drop library dep and call over IPC) — all delta springs
+- ~~barraCuda IPC rewiring~~ **ACTIVE** — primary delta task (Phase 58+)
 
-See `NUCLEUS_SPRING_ALIGNMENT.md` and `primalSpring/wateringHole/GRAPH_CONSOLIDATION_AND_NUCLEUS_DEPLOYMENT_HANDOFF_APR16_2026.md`.
+See `NUCLEUS_SPRING_ALIGNMENT.md`, `SPRING_NUCLEUS_AUDIT_MAY2026.md`.
 
 ---
 
@@ -307,16 +360,49 @@ The constrained evolution model produces compound returns:
 
 ### Current Season Assessment
 
-**Delta season with evaporation peaks.** Four springs are actively composing
-(hotSpring, wetSpring, neuralSpring, healthSpring). ludoSpring has evolved
-independently into a pure composition model. airSpring and groundSpring are
-pre-delta with high coverage. The first garden (esotericWebb) is consuming
-compositions.
+**Delta season — convergence phase.** Five springs are actively composing
+(hotSpring, wetSpring, neuralSpring, healthSpring, ludoSpring). airSpring and
+groundSpring are pre-delta with high coverage and ready to unpause.
+
+The primary delta task is **library-to-binary rewiring** — replacing spring-local
+barraCuda library imports with IPC calls to ecobin primals. This is not just
+a technical cleanup; it is the structural transformation that makes every spring's
+science composable, visualizable (via petalTongue), and attributable (via
+sweetGrass). When a spring rewires to IPC:
+- Its compute results are JSON-serialized → directly streamable to petalTongue
+- Its computation is routed through ecobin primals → provenance-trackable
+- Its science is expressed as NUCLEUS compositions → reproducible by anyone
 
 The ecosystem is approaching the **garden season** — when enough primal
 compositions are proven that gen4 products can be built purely from IPC
 composition without spring-level validation. The `GARDEN_COMPOSITION_ONRAMP.md`
-standard is the bridge.
+standard is the bridge. esotericWebb (ludoSpring's garden) is the first
+consumer.
+
+### Convergence Trajectory
+
+```
+Phase 58 (now):    Springs audit rewiring status
+                   Standardization patterns identified
+                   (ludoSpring IPC, healthSpring feature flag,
+                    hotSpring composition model)
+
+Phase 59 (next):   ludoSpring + healthSpring reach Tier 4
+                   hotSpring + wetSpring reach Tier 3
+                   petalTongue DataBindings wired for top 4 springs
+                   sweetGrass braids operational for ludoSpring
+
+Phase 60 (after):  All active springs at Tier 3+
+                   airSpring + groundSpring begin delta absorption
+                   Cross-spring provenance braids in production
+                   Science papers expressed as NUCLEUS composition graphs
+
+Garden season:     Springs reach Tier 4
+                   Every paper has a NUCLEUS composition
+                   Every result has a provenance braid
+                   Every output is a petalTongue presentation
+                   Gardens compose from proven binary-only IPC
+```
 
 ---
 
@@ -324,24 +410,34 @@ standard is the bridge.
 
 ### Near Term (Weeks)
 
-- ~~PG-52 provenance trio UDS empty response~~ **RESOLVED** (April 27 — all three primals fixed + rebuilt)
-- ~~PG-48 petalTongue musl threading~~ **ADDRESSED** (April 27 — `any_thread` fix, rebuilt)
-- airSpring and groundSpring begin delta absorption
-- ludoSpring convergence with primalSpring graph schema
+- ~~PG-52 provenance trio UDS empty response~~ **RESOLVED** (April 27)
+- ~~PG-48 petalTongue musl threading~~ **ADDRESSED** (April 27)
+- ~~BTSP Phase 3 full AEAD~~ **RESOLVED** — 13/13 primals (May 2)
+- ludoSpring + healthSpring advance to Tier 4 (binary-only)
+- hotSpring creates `src/ipc/` directory, expands Tier 3 coverage
+- petalTongue DataBinding wiring for healthSpring (exemplar), ludoSpring, wetSpring
+- sweetGrass braid adoption in ludoSpring (reference for siblings)
 
 ### Short Term (Months)
 
+- All active springs at Tier 3+ rewiring status
+- airSpring and groundSpring begin delta absorption
 - `esotericWebb` ships as first garden product from composition
 - Cross-spring provenance braids in production
+- Each spring has a `PRIMAL_PROOF_IPC_MAPPING.md` for its domain
 - biomeOS adaptive tick scheduling (PathwayLearner observing frame budgets)
 - guideStone certification propagation: hotSpring L5 → all springs L4+
+- ABG collaboration workflows expressed as NUCLEUS compositions
 
 ### Medium Term (Quarters)
 
+- All springs at Tier 4 (binary-only IPC, no library deps)
 - guideStone artifacts for all springs (deployable, self-validating binaries)
+- Every baseCamp paper has a corresponding NUCLEUS composition graph
 - Gonzales drug repurposing pipeline operational (wetSpring → ADDRC screening)
 - Faculty network densification (Chuna lattice QCD, Gonzales pharmacology)
 - biomeOS cellular deployment as standard for all compositions
+- metalForge → toadStool dispatch contract refined across all springs
 
 ### Longer Term (Years)
 
@@ -349,6 +445,8 @@ standard is the bridge.
 - Citizen Colossus: federated consumer compute via sunCloud economics
 - Novel Ferment Transcripts as economic primitives
 - Mobility edge crossed: isolated sovereign nodes begin to conduct
+- Every computation is its own presentation (petalTongue universal surface)
+- Every result is its own reproducibility proof (sweetGrass universal braiding)
 
 ---
 
