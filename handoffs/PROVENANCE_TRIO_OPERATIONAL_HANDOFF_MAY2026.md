@@ -20,13 +20,13 @@ Integration used **direct JSON-RPC over TCP/HTTP** (not Neural API routing). Thi
 |--------|------|----------|--------|
 | rhizoCrypt | 9600 (tarpc), **9601** (JSON-RPC) | Newline-delimited JSON-RPC on TCP | `/tmp/biomeos/biomeos/rhizocrypt.sock` |
 | loamSpine | 9001 (tarpc), **9700** (JSON-RPC) | HTTP JSON-RPC | `/tmp/biomeos/biomeos/loamspine.sock` |
-| sweetGrass | dynamic (tarpc), **39085** (HTTP) | HTTP JSON-RPC at `/jsonrpc` | `/tmp/biomeos/biomeos/sweetgrass-9b32f3a8.sock` |
+| sweetGrass | dynamic (tarpc), **`--http-port`** (HTTP, v0.7.30+) | HTTP JSON-RPC at `/jsonrpc` | `/tmp/biomeos/biomeos/sweetgrass-{family}.sock` |
 
 Startup commands used:
 ```bash
 rhizocrypt server --port 9600
 loamspine server --port 9700
-sweetgrass server --port 9800   # 9800 = TCP with BTSP; HTTP on dynamic 39085
+sweetgrass server --port 9850 --http-port 8080   # TCP 9850 (avoids biomeOS 9800); HTTP on 8080
 ```
 
 ---
@@ -144,17 +144,17 @@ bytes.fromhex("292ebbcf8f02...") → [41, 46, 187, ...]
 
 `SessionCommit` requires `committer` both inside the struct variant AND as a top-level `entry.append` param. The inner `committer` should be sufficient, or the outer one should be inherited.
 
-### 3. sweetGrass TCP Requires BTSP Handshake
+### 3. sweetGrass TCP Requires BTSP Handshake — RESOLVED (v0.7.30)
 
-The `--port 9800` TCP port requires a BTSP frame handshake before accepting JSON-RPC. Plain JSON-RPC fails with "BTSP frame too large." The HTTP endpoint (dynamic port 39085) works without handshake.
+~~The `--port 9800` TCP port requires a BTSP frame handshake before accepting JSON-RPC.~~
 
-**Recommendation**: Either make BTSP optional on configured TCP (`--no-btsp-tcp`), or expose the HTTP port as a stable `--http-port` flag.
+**Resolved in v0.7.30**: `detect_protocol` now skips leading ASCII whitespace before classifying connections. Clients sending `\n{"jsonrpc":"2.0",...}` are correctly routed to JSON-RPC. TCP port recommendation changed to **9850** to avoid biomeOS conflict at 9800.
 
-### 4. sweetGrass HTTP Port is Dynamic
+### 4. sweetGrass HTTP Port is Dynamic — RESOLVED (v0.7.30)
 
-The HTTP port (39085) is not configurable via the `--port` flag (which controls TCP). Integration scripts must parse startup logs to find it.
+~~The HTTP port is not configurable via the `--port` flag.~~
 
-**Recommendation**: Add `--http-port` flag or log the HTTP port prominently.
+**Resolved in v0.7.30**: New `--http-port` / `SWEETGRASS_HTTP_PORT` flag for direct HTTP port configuration. HTTP is documented as the primary integration surface. Example: `sweetgrass server --http-port 8080`.
 
 ### 5. Event Type Discovery
 
