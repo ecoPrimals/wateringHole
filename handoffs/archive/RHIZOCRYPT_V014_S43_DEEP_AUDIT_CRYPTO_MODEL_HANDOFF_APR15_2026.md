@@ -603,3 +603,11 @@ primalSpring audit identified provenance trio interop gap: `dag.merkle.root` ret
 Port 9601/9600 on ironGate confirmed as operator config, not rhizoCrypt defaults (9400/9401). Discovery escalation hierarchy: rhizoCrypt supports tiers 3-5 natively, tier 1 via Songbird registration when TCP enabled.
 
 **Stadial gate**: 1,573 tests, 0 clippy warnings, 0 fmt diffs. 168 `.rs` files, ~50,920 lines.
+
+### S60 Deep Debt Audit (May 5)
+
+Comprehensive audit across all categories — all clean: zero files >800L (max 724), zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero `.unwrap()`/`.expect()` in production, zero `todo!()`/`unimplemented!()`, zero TODO/FIXME/HACK, zero `&Vec<`/`&String` params, zero mocks in production (all cfg-gated), all deps pure Rust, no hardcoded primal names in runtime paths.
+
+One cleanup: removed duplicate `tempfile` entry from `rhizocrypt-service` `[dev-dependencies]` (already in `[dependencies]` for `doctor.rs`).
+
+**Stadial gate**: 1,573 tests, 0 clippy warnings, 0 fmt diffs. 168 `.rs` files, ~50,920 lines.
