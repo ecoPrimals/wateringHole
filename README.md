@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: February 27, 2026
+**Last Updated**: May 5, 2026 (Phase 58 — Spring NUCLEUS Composition Audit)
 
 ---
 
@@ -242,14 +242,19 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **biomeOS + All Primals**: Health monitoring, capability discovery, Neural API routing
 - **biomeOS + petalTongue**: Real-time SSE events for ecosystem visualization
 
+### Operational (May 2026)
+
+- **rhizoCrypt + LoamSpine**: Dehydration (temporal collapse from DAG to linear) — validated via projectNUCLEUS
+- **NestGate + LoamSpine**: Content-addressed storage backing immutable history — validated
+- **sweetGrass + LoamSpine**: Attribution braids anchored to permanent timeline — validated
+- **Provenance trio (rhizoCrypt + LoamSpine + sweetGrass)**: Full pipeline exercised on ironGate (Nest Atomic, 9 primals)
+
 ### Under Development
 
-- **rhizoCrypt + LoamSpine**: Dehydration (temporal collapse from DAG to linear)
-- **NestGate + LoamSpine**: Content-addressed storage backing immutable history
-- **sweetGrass + LoamSpine**: Attribution records anchored to permanent timeline
 - **Songbird + Songbird**: Cross-tower federation, multi-family routing
-
-**Detail**: `INTER_PRIMAL_INTERACTIONS.md`
+- **Spring library-to-binary rewiring**: Springs replacing local barraCuda imports with ecobin IPC
+- **petalTongue DataBinding per spring**: Science outputs as live presentations
+- **sweetGrass braids per spring**: Experiment attribution as structural artifacts
 
 ---
 
@@ -269,31 +274,64 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ## Document Index
 
-### Architecture Standards
-- `UNIBIN_ARCHITECTURE_STANDARD.md` - Binary structure
-- `ECOBIN_ARCHITECTURE_STANDARD.md` - Universal portability
-- `GENOMEBIN_ARCHITECTURE_STANDARD.md` - Autonomous deployment
+### Living Documents (updated regularly)
+- `ECOSYSTEM_EVOLUTION_CYCLE.md` — The water cycle model; current season assessment, convergence trajectory (v1.4.0)
+- `NUCLEUS_SPRING_ALIGNMENT.md` — Canonical spring × atomic alignment matrix (Phase 58)
+- `SPRING_NUCLEUS_AUDIT_MAY2026.md` — 7-dimension audit of all 8 springs, per-spring evolution blurbs
+- `DOWNSTREAM_EVOLUTION_MAY2026.md` — Team communication blurb for spring teams
+- `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
 
-### Communication Standards
-- `PRIMAL_IPC_PROTOCOL.md` - Inter-primal communication (v2.0)
-- `UNIVERSAL_IPC_STANDARD_V3.md` - Platform-agnostic IPC behavior
-- `SEMANTIC_METHOD_NAMING_STANDARD.md` - API naming conventions
+### Active Standards
+- `BTSP_PROTOCOL_STANDARD.md` — BearDog Transport Security Protocol (Phase 3 complete, 13/13 AEAD)
+- `CAPABILITY_BASED_DISCOVERY_STANDARD.md` — Runtime capability discovery
+- `CAPABILITY_WIRE_STANDARD.md` — Wire format for capability calls
+- `CAPABILITY_DOMAIN_REGISTRY.md` — Domain namespace registry
+- `COMPOSITION_HEALTH_STANDARD.md` — Health check patterns for compositions
+- `COMPOSITION_TICK_MODEL_STANDARD.md` — Tick budget model for real-time compositions
+- `CROSS_SPRING_COORDINATION_STANDARD.md` — Cross-spring validation patterns
+- `DEPLOYMENT_VALIDATION_STANDARD.md` — Deployment validation procedures
+- `DESKTOP_NUCLEUS_DEPLOYMENT.md` — Desktop NUCLEUS deployment guide
+- `ECOBIN_ARCHITECTURE_STANDARD.md` — Universal portability standard
+- `GARDEN_COMPOSITION_ONRAMP.md` — Garden product composition onramp
+- `NUCLEUS_TWO_TIER_CRYPTO_MODEL.md` — Two-tier crypto architecture
+- `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — Pure Rust sovereignty guidance
+- `SECRETS_AND_SEEDS_STANDARD.md` — Seed management and secret handling
+- `SEMANTIC_METHOD_NAMING_STANDARD.md` — API naming conventions
+- `WORKSPACE_DEPENDENCY_STANDARD.md` — Cargo workspace dependency rules
+- `STANDARDS_AND_EXPECTATIONS.md` — Meta-standard: what standards are and how they evolve
 
-### Security Standards
-- `DARK_FOREST_BEACON_GENETICS_STANDARD.md` - Two-seed genetic architecture
+### Visualization and Attribution
+- `SWEETGRASS_SPRING_BRAID_PATTERNS.md` — Per-spring attribution braid patterns
+- `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — Provenance trio integration for springs
+- `petaltongue/VISUALIZATION_INTEGRATION_GUIDE.md` — petalTongue DataBinding spec
+- `petaltongue/PETALTONGUE_SPRING_SCIENCE_MAP.md` — Per-spring visualization channel mapping
 
-### Protocol Specifications
-- `birdsong/BIRDSONG_PROTOCOL.md` - Encrypted UDP discovery
-- `btsp/BEARDOG_TECHNICAL_STACK.md` - BearDog cryptographic foundation
-- `SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` - Tower Atomic TLS guide
+### Reference
+- `GLOSSARY.md` — Ecosystem terminology
+- `LICENSING_AND_COPYLEFT.md` — AGPL-3.0 licensing guidance
+- `PRIMAL_SPRING_GARDEN_TAXONOMY.md` — Primal/spring/garden layer taxonomy
+- `UPSTREAM_CONTRIBUTIONS.md` — Contributions to upstream Rust ecosystem
+- `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md` — External validation strategy
 
-### Coordination
-- `INTER_PRIMAL_INTERACTIONS.md` - Production interaction map and plans
-- `PRIMAL_REGISTRY.md` - Complete primal definitions and primitive catalogs
+### Subdirectories
+- `handoffs/` — Cross-primal evolution handoff documents (~44 active, 758 archived)
+- `petaltongue/` — petalTongue integration documentation
+- `compute-sharing/` — Sovereign compute sharing validation
+- `healthspring/` — healthSpring-specific guidance
+- `airspring/` — airSpring-specific guidance
+- `birdsong/` — BirdSong protocol specification
+- `btsp/` — BTSP protocol details
+- `genomeBin/` — genomeBin tooling
+- `fossilRecord/` — Archived documents from previous consolidation waves
+- `scripts/` — Utility scripts
+- `templates/` — Templates for new primals/springs
 
-### Integration Guides
-- `petaltongue/` - petalTongue integration documentation
-- `handoffs/` - Cross-primal evolution handoff documents
+### Fossil Record
+Documents superseded by newer standards or absorbed into living documents are
+preserved in `fossilRecord/`. Two consolidation waves:
+
+- `fossilRecord/consolidated-apr2026/` — 56 documents from March-April 2026
+- `fossilRecord/consolidated-may2026/` — 24 documents superseded by Phase 58 audit
 
 ---
 
@@ -310,6 +348,20 @@ If you are a new primal entering the ecosystem:
 7. **Register your primal** in PRIMAL_REGISTRY.md with your primitives
 
 You do not need to know about other primals. You need to know what you can do, and how to tell the ecosystem about it.
+
+---
+
+## Current Ecosystem State (May 2026)
+
+- **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing)
+- **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
+- **primalSpring v0.9.21** — guideStone Level 4, 187/187 live NUCLEUS ALL PASS
+- **8 springs** evolving toward full NUCLEUS compositions (library-to-binary rewiring)
+- **1 garden** active (esotericWebb from ludoSpring)
+- **projectNUCLEUS** — Nest Atomic (9 primals) provenance pipeline validated on ironGate
+
+See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative and
+`SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring status.
 
 ---
 
