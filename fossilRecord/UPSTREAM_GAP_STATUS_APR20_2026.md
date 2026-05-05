@@ -102,7 +102,7 @@ BTSP-authenticated, 187/187 guidestone checks ALL PASS.**
 
 | Primal | Version | Tests | Status |
 |--------|---------|-------|--------|
-| barraCuda | Sprint 51b | 4,422+ pass | LIVE — 59 JSON-RPC methods, BTSP Phase 3 negotiate handler + transport switch verified (Sprint 51b: BufReader data-loss fix, client_nonce HKDF, 4 live-validation tests), discovery self-registration, NUCLEUS env wiring, Phase 56 GAP-11 14/18 resolved |
+| barraCuda | Sprint 53 | 4,422+ pass | LIVE — 59 JSON-RPC methods, BTSP Phase 3 negotiate handler + transport switch verified, discovery self-registration (Tiers 1/3/4/5), `submit_and_poll`→`submit_and_map` breaking change documented (Sprint 53), NUCLEUS env wiring, Phase 56 GAP-11 14/18 resolved |
 | BearDog | Wave 62 | 37 pass | READY — `crypto.sign` returns `public_key`, Ed25519 standardized to standard base64 |
 | coralReef | Iter 84+ | 856 pass (2 env-sensitive) | READY |
 | loamSpine | 0.9.16 | 1,503 pass | READY — BTSP connection lifecycle fix (persistent conn, no shutdown, read timeout), HandshakeComplete wire fix (status:ok), Step 3→4 relay fixed, NDJSON + provider socket wired, stadial gate cleared |
