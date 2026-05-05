@@ -595,3 +595,11 @@ Phase 3 transport encryption (HIGH) from the same audit was a **stale finding** 
 Comprehensive 8-category deep debt audit — all clean. One idiom fix: `start_uds_listener` parameter changed from `Option<&String>` to `Option<&str>`. `BoxFuture` pattern confirmed correct for dyn-safe `ProtocolAdapter` trait. Feature matrix clean. All error types use `thiserror`. Zero stale tracing messages.
 
 **Stadial gate**: 1,563 tests, 0 clippy warnings, 0 fmt diffs. 168 `.rs` files, ~50,790 lines.
+
+### S60: Gap 9 — Dual-Format Hash Acceptance (May 5)
+
+primalSpring audit identified provenance trio interop gap: `dag.merkle.root` returns hex strings, but loamSpine/sweetGrass send `[u8; 32]` byte arrays. Added `parse_hash32` helper that accepts both hex strings and JSON byte arrays. All JSON-RPC hash input points updated (`merkle.verify` root, `vertex.get`/`vertex.children`/`merkle.proof` vertex_id, `slice.checkout` checkout_vertex, `event.append` parents). 10 new tests. Backward-compatible — existing hex-string callers unchanged.
+
+Port 9601/9600 on ironGate confirmed as operator config, not rhizoCrypt defaults (9400/9401). Discovery escalation hierarchy: rhizoCrypt supports tiers 3-5 natively, tier 1 via Songbird registration when TCP enabled.
+
+**Stadial gate**: 1,573 tests, 0 clippy warnings, 0 fmt diffs. 168 `.rs` files, ~50,920 lines.
