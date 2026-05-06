@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 5, 2026 (Phase 58 — Spring NUCLEUS Composition Audit)
+**Last Updated**: May 6, 2026 (Phase 59 — Foundation Integration + Sediment Layer Model)
 
 ---
 
@@ -300,6 +300,10 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `WORKSPACE_DEPENDENCY_STANDARD.md` — Cargo workspace dependency rules
 - `STANDARDS_AND_EXPECTATIONS.md` — Meta-standard: what standards are and how they evolve
 
+### Foundation and Sediment
+- `FOUNDATION_INTEGRATION_GUIDE.md` — How springs, primals, and gardens integrate with `sporeGarden/foundation`
+- `SEDIMENT_LAYER_MODEL.md` — The geological model: how validated results accumulate as load-bearing layers
+
 ### Visualization and Attribution
 - `SWEETGRASS_SPRING_BRAID_PATTERNS.md` — Per-spring attribution braid patterns
 - `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — Provenance trio integration for springs
@@ -359,6 +363,17 @@ You do not need to know about other primals. You need to know what you can do, a
 - **8 springs** evolving toward full NUCLEUS compositions (library-to-binary rewiring)
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — Nest Atomic (9 primals) provenance pipeline validated on ironGate
+- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets, operational fetch + validate pipeline. Real NCBI data successfully fetched and BLAKE3-anchored.
+
+### Next Layer: Foundation → Spring → Sediment
+
+The ecosystem is entering its **geological phase**. Foundation declares
+what to validate and where the data lives. Springs run computations
+through NUCLEUS and deposit validated results as provenance-wrapped
+sediment layers. Products consume the accumulated sediment.
+
+See `FOUNDATION_INTEGRATION_GUIDE.md` for spring integration and
+`SEDIMENT_LAYER_MODEL.md` for the geological accumulation model.
 
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative and
 `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring status.
