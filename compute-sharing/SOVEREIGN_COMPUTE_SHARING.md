@@ -283,7 +283,20 @@ and structure prediction. They were told to use Google Colab.
 
 **Phase 0 (active)**: Tamison runs jobs manually for ABG members.
 
-**Phase 1 (validated 2026-05-04)**: JupyterHub + Nest Atomic + ToadStool (9 primals) on ironGate. Pre-installed: scanpy, pydeseq2, QIIME2, Seurat, DESeq2. 235+ wetSpring checks passing through toadStool dispatch, real NCBI data (PRJNA488170, 11.9M reads) processed, full provenance pipeline operational (BLAKE3 → rhizoCrypt DAG → loamSpine ledger → sweetGrass braid). See `COMPOSITION_VALIDATION_LOG.md` and `projectNUCLEUS/validation/` for details.
+**Phase 1 (validated 2026-05-04)**: JupyterHub + Full NUCLEUS (13 primals) on ironGate. Pre-installed: scanpy, pydeseq2, QIIME2, Seurat, DESeq2. 235+ wetSpring checks passing through toadStool dispatch, real NCBI data (PRJNA488170, 11.9M reads) processed, full provenance pipeline operational (BLAKE3 → rhizoCrypt DAG → loamSpine ledger → sweetGrass braid). See `COMPOSITION_VALIDATION_LOG.md` and `projectNUCLEUS/validation/` for details.
+
+**Phase 2a (validated 2026-05-06)**: Cloudflare Tunnel baseline captured (270ms p50 latency, 15/15 external checks). Three-layer pen testing completed. ABG tiered access operational:
+
+| Tier | Group | Resources | Workspace Access |
+|------|-------|-----------|-----------------|
+| admin | `abg-admin` | 48G / 16c | Full — create projects, manage showcase/ |
+| compute | `abg-compute` | 32G / 8c | commons/, projects/ — read + write + execute |
+| observer | `abg-observer` | 8G / 4c | All — read only |
+| reviewer | `abg-reviewer` | 4G / 2c | showcase/ only — for PIs and HPC admins |
+
+**Shared workspace** (`/home/irongate/shared/abg/`): Google Doc model — all work visible to all members. No hidden files. commons/ for scratch, projects/ for organized work, showcase/ for polished results ready for external review. Templates and starter notebooks provided. See `projectNUCLEUS/specs/SHARED_WORKSPACE.md`.
+
+**sporePrint integration**: Lab section at primals.eco/lab — public read-only view of validated results. `render_notebooks.sh` converts showcase notebooks to static HTML for Zola. Members can point a PI at primals.eco/lab to demonstrate what they want to run on larger systems.
 
 **Domain-specific validation targets**:
 - scRNA-seq outputs → wetSpring / neuralSpring
