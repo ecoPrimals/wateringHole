@@ -1,6 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
 
-# coralReef — Iteration 92: Wire Standard L3 Alignment
+# coralReef — Iteration 92: Wire Standard L3 + Deep Debt Pass
 
 **Date**: May 6, 2026
 **From**: coralReef team
@@ -10,7 +10,7 @@
 
 ## Summary
 
-`capabilities.list` response upgraded from Wire Standard L2 to L3 shape by adding `protocol` and `transport` fields. Cross-cutting BufReader post-negotiate audit confirmed correct. Whitespace-tolerant TCP detection assessed and determined unnecessary for our ecosystem.
+Wire Standard L3 alignment (`capabilities.list` gets `protocol` + `transport` fields). Deep debt pass: `coral_probe.rs` typed errors (zero `Result<_, String>` remaining anywhere in production), all hardcoded kernel device paths now env-overridable. Cross-cutting BufReader/TCP audits verified.
 
 ## Wire Standard L3
 
@@ -45,9 +45,31 @@
 - Zero clippy warnings (`clippy::pedantic` + `clippy::nursery`)
 - Test `capability_list_wire_standard_l2` → renamed to `capability_list_wire_standard_l3` with L3 assertions
 
+## Deep Debt — Typed Errors
+
+`coral_probe.rs` (the fork-isolated GPU diagnostic binary):
+- All `Result<_, String>` → `ProbeError` enum with `thiserror`
+- Variants: `ResourceOpen`, `Mmap`, `Timeout`, `BatchTimeout`, `ChildFailed`, `BatchChildFailed`, `Fork`, `HexParse`
+- Zero `Result<_, String>` remaining in any production code (binary or library)
+
+## Deep Debt — Env-Overridable Device Paths
+
+All hardcoded kernel device paths now have `OnceLock`-based env var overrides:
+
+| Path | Env Override | Default |
+|------|-------------|---------|
+| coral-kmod device | `CORALREEF_CORAL_RM_PATH` | `/dev/coral-rm` |
+| NVIDIA control | `CORALREEF_NV_CTL_PATH` | `/dev/nvidiactl` |
+| NVIDIA UVM | `CORALREEF_NV_UVM_PATH` | `/dev/nvidia-uvm` |
+| GPU device prefix | `CORALREEF_NV_GPU_PATH_PREFIX` | `/dev/nvidia` |
+| DRM render prefix | `CORALREEF_DRI_RENDER_PREFIX` | `/dev/dri/renderD` |
+| kmod sysfs | `CORALREEF_KMOD_SYSFS_PATH` | `/sys/module/coral_kmod` |
+
+Enables container testing and non-standard deployments without recompilation.
+
 ## Downstream Impact
 
-- No breaking changes (additive fields only)
+- No breaking changes (additive fields only on capabilities.list)
 - primalSpring and composition tooling can now read L3 envelope from coralReef
 - Discovery escalation hierarchy: coralReef discoverable at tiers 3-5 (UDS/registry/TCP); tier-1 Songbird registration deferred
 
@@ -58,3 +80,5 @@
 | Wire Standard L3 on `capabilities.list` | **RESOLVED** (this iteration) |
 | BufReader post-negotiate correctness | **VERIFIED** (no action needed) |
 | Whitespace-tolerant TCP detection | **ASSESSED** — not applicable |
+| `Result<_, String>` in production code | **RESOLVED** — zero remaining |
+| Hardcoded paths without env override | **RESOLVED** — all device paths env-overridable |
