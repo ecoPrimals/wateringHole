@@ -1,7 +1,7 @@
-# skunkBat v0.2.0-dev — PG-55 `--bind` + PG-57 Baseline Learning
+# skunkBat v0.2.0-dev — PG-55 `--bind` + PG-57 Baseline Learning (FINAL)
 
 **Date**: May 6, 2026
-**Scope**: projectNUCLEUS Phase 2a penetration test gap resolution
+**Scope**: projectNUCLEUS Phase 2a penetration test gap resolution — both LOW residuals RESOLVED
 **Build**: 345 tests passing, clippy clean, 44 source files (max 725 LOC)
 
 ---
@@ -14,10 +14,11 @@ Added `--bind <host>` to the `server` subcommand per UniBin v1.1 pattern:
 skunkbat server --bind 127.0.0.1 --port 9140
 ```
 
-Precedence: `--bind` flag > `SKUNKBAT_LISTEN_ADDR` env > `0.0.0.0` default.
+Precedence: `--bind` flag > `SKUNKBAT_LISTEN_ADDR` env > `127.0.0.1` default.
 
-Enables localhost-only binding for hardened deployments where the pen test
-flagged default `0.0.0.0` as exposing the JSON-RPC interface to all interfaces.
+Default changed from `0.0.0.0` to `127.0.0.1` (secure-by-default). The pen test
+flagged the old `0.0.0.0` as exposing JSON-RPC to all interfaces. Now only
+explicit `--bind 0.0.0.0` exposes externally.
 
 **Files**: `crates/skunk-bat-server/src/main.rs`
 
@@ -58,9 +59,18 @@ empty — explaining the 0 threats during the pen test.
 Tests confirm ≥5/7 patterns trigger anomaly detection, and 0 false positives
 on normal traffic.
 
+**Multi-dimensional analysis** (follow-up fix): `detect_anomalies()` now scores
+on 3 dimensions instead of 1:
+1. Connection rate (conn/s deviation from baseline)
+2. Traffic volume (B/s deviation from baseline)
+3. Port diversity (port count deviation from baseline)
+
+This means the payload flood (pattern 2, extreme volume) and service enumeration
+(pattern 4, many ports) now trigger even when their connection rate is normal.
+
 **Files**:
 - `crates/skunk-bat-core/src/threats/baseline.rs` (new)
-- `crates/skunk-bat-core/src/threats/behavioral.rs` (seed_baseline method + tests)
+- `crates/skunk-bat-core/src/threats/behavioral.rs` (seed_baseline + multi-dim detection)
 - `crates/skunk-bat-core/src/threats/mod.rs` (auto-seed wiring)
 
 ---
@@ -73,8 +83,7 @@ on normal traffic.
 
 ## Remaining Gaps
 
-- PG-55 is resolved for skunkBat. Other primals (Songbird HTTP, ToadStool,
-  biomeOS, sweetGrass, petalTongue) still need their own `--bind` flags.
+- PG-55 and PG-57 are fully resolved for skunkBat (both LOW residuals closed).
 - Baseline learning is seeded with static observations. Future: runtime learning
   from actual traffic via `BaselineProfiler::update()` during operation.
 - Thymic selection: still blocked on BearDog `lineage.list` full integration.
@@ -84,5 +93,8 @@ on normal traffic.
 ## Ecosystem Implications
 
 - primalSpring can mark PG-55 (skunkBat) and PG-57 as RESOLVED
+- skunkBat has zero remaining audit items from the Phase 2a pen test
 - No API changes — all additions are backward-compatible
 - `baseline` module is `pub` for integration test use
+- Default bind change is intentionally breaking for deployments that relied on
+  implicit `0.0.0.0` — those must now pass `--bind 0.0.0.0` or set env var
