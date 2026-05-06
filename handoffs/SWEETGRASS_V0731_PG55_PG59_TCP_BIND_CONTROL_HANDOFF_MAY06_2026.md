@@ -20,12 +20,13 @@ PG-59.
 **Before**: `--port 9850` always bound `0.0.0.0:9850` (all interfaces).
 
 **After**: `--port` accepts two formats:
-- **Bare port** (backward compatible): `--port 9850` → binds `0.0.0.0:9850`
-- **`host:port`**: `--port 127.0.0.1:9850` → binds localhost only
+- **Bare port** (security-hardened default): `--port 9850` → binds `127.0.0.1:9850` (localhost-only)
+- **`host:port`** (explicit): `--port 0.0.0.0:9850` → binds all interfaces
 - **IPv6**: `--port [::1]:9850` → binds IPv6 localhost
 
 **Docker/production**: Use `--port 0.0.0.0:9850` for all-interface binding.
-**Security**: Use `--port 127.0.0.1:9850` for localhost-only binding.
+**Default**: Bare port numbers now bind `127.0.0.1` (localhost), matching
+Squirrel (`--bind` default `127.0.0.1`) and barraCuda (`resolve_bind_host()`).
 
 Internal API: `start_tcp_jsonrpc_listener` now takes `std::net::SocketAddr` instead of
 `u16`, giving callers full control over the bind address.
@@ -40,12 +41,12 @@ CLI `--help` for `--http-address` now documents:
 
 ### Tests
 
-5 new `parse_tcp_port_arg` tests covering bare port, zero, host:port, IPv6, and
-invalid input.
+6 new `parse_tcp_port_arg` tests covering bare port (localhost assert), zero
+(loopback assert), all-interfaces explicit, host:port, IPv6, and invalid input.
 
 ## Metrics
 
-- Tests: 1,500 pass, 0 failures
+- Tests: 1,501 pass, 0 failures
 - Clippy: 0 warnings (pedantic + nursery)
 - `cargo deny check`: clean
 
@@ -53,7 +54,7 @@ invalid input.
 
 | Transport | Flag | Default | Recommended |
 |-----------|------|---------|-------------|
-| TCP JSON-RPC | `--port` | disabled (UDS-only) | `127.0.0.1:9850` or `9850` |
+| TCP JSON-RPC | `--port` | disabled (UDS-only) | `9850` (localhost) or `0.0.0.0:9850` (all) |
 | HTTP REST+JSON-RPC | `--http-port` / `--http-address` | `0.0.0.0:0` (ephemeral) | `--http-port 8080` |
 | tarpc | `--tarpc-address` | `0.0.0.0:0` (ephemeral) | default |
 | UDS | `--socket` | auto-resolved | default |
