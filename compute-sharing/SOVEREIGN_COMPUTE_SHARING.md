@@ -327,6 +327,39 @@ validation targets change; the pattern doesn't.
 
 ---
 
+---
+
+## sporePrint Auto-Refresh
+
+Springs and primals can push their own metric updates to sporePrint
+(primals.eco) via the same `repository_dispatch` pattern used by plasmidBin.
+
+**Pattern**: Source repo pushes to main → `notify-sporeprint.yml` fires
+`repository_dispatch` → sporePrint `auto-refresh.yml` clones the source,
+runs `spore-validate refresh --write`, commits updated `config.toml` →
+`deploy.yml` rebuilds the site.
+
+**Two tiers**:
+- **Metrics** (LOC, tests, files, crates, version): auto-committed directly
+  to main. Safe — mechanical numbers validated by `spore-validate`.
+- **Content** (lab pages, validation summaries): opened as PR for review.
+  Source repos can include a `sporeprint/` directory with markdown fragments.
+
+**Secrets**: `SPOREPRINT_DISPATCH_TOKEN` on source repos (fires dispatch),
+`SPOREPRINT_REFRESH_PAT` on sporePrint (clones sources including private,
+pushes metrics commits, creates content PRs).
+
+**Template**: `plasmidBin/templates/notify-sporeprint.yml` — copy to
+`.github/workflows/` in any spring or primal repo.
+
+**Source map**: `sporePrint/sources.toml` — maps entity IDs to GitHub repos.
+Same structure as `plasmidBin/sources.toml` but includes springs.
+
+This ensures primals.eco always reflects the current state of the ecosystem
+without manual metric maintenance.
+
+---
+
 *This document is a living pattern. Update after each phase transition
 with observed friction points, security learnings, and primal evolution
 triggered by external use.*
