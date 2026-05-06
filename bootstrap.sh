@@ -332,6 +332,7 @@ done
 
 # Gardens (sporeGarden org, plus blueFish from syntheticChemistry pending transfer)
 clone_repo "sporeGarden" "esotericWebb" "$ROOT/gardens/esotericWebb"
+clone_repo "sporeGarden" "foundation" "$ROOT/gardens/foundation"
 clone_repo "syntheticChemistry" "blueFish" "$ROOT/gardens/blueFish"
 
 # Infra (ecoPrimals org)
