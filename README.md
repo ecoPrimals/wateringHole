@@ -359,7 +359,7 @@ You do not need to know about other primals. You need to know what you can do, a
 
 - **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing)
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
-- **primalSpring v0.9.21** — guideStone Level 4, 187/187 live NUCLEUS ALL PASS
+- **primalSpring v0.9.24** — guideStone Level 4, foundation absorption, 85 experiments, 661 tests, discovery escalation hierarchy
 - **8 springs** evolving toward full NUCLEUS compositions (library-to-binary rewiring)
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — Nest Atomic (9 primals) provenance pipeline validated on ironGate
