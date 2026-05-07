@@ -621,3 +621,11 @@ primalSpring audit (PG-60) + hotSpring V0.6.32: silent timeout on UDS connect. W
 New error code `NOT_READY = -32002` in server error range. `HandlerError::NotReady` variant added. 5 new tests: handler-level readiness gate (DAG rejection, health allowlist, running pass-through) + JSON-RPC response-level (`-32002` code, liveness bypass).
 
 **Stadial gate**: 1,578 tests, 0 clippy warnings, 0 fmt diffs. 172 `.rs` files, ~51,620 lines.
+
+### S61 Deep Debt Audit (May 7)
+
+Comprehensive audit across all categories — all clean: zero files >800L (max 794, test file), zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero `.unwrap()`/`.expect()` in production, zero `todo!()`/`unimplemented!()`/`unreachable!()`, zero TODO/FIXME/HACK, zero `&Vec<`/`&String` params, zero `#[allow(dead_code)]` in production, zero production mocks (all cfg-gated behind `#[cfg(any(test, feature = "test-utils"))]`), all deps pure Rust (blake3 `pure` feature, no ring/openssl/libsodium), `BoxFuture` justified for dyn-safe `ProtocolAdapter` trait. Feature flags clean, no circular deps. Clippy pedantic+nursery with `unwrap_used`/`expect_used`/`unsafe_code` deny. CI runs `-D warnings`.
+
+One debris fix: `test-all-demos.sh` header corrected from stale "Batch Polish Script / Updates all demos" to "Batch Test Runner" (script actually runs demos with timeout and reports counts).
+
+**Stadial gate**: 1,578 tests, 0 clippy warnings, 0 fmt diffs. 172 `.rs` files, ~51,620 lines.
