@@ -87,11 +87,12 @@ This lets ToadStool dispatch your validation on any gate running NUCLEUS.
 ### 3. Create Public Notebooks
 
 Create a `notebooks/` directory in your spring repository with public-facing
-science notebooks. **wetSpring is the exemplar** — see
-[wetSpring/notebooks/NOTEBOOK_PATTERN.md](https://github.com/syntheticChemistry/wetSpring/blob/main/notebooks/NOTEBOOK_PATTERN.md)
-for the full pattern.
+science notebooks. Three exemplars exist:
+- **wetSpring** (domain science) — [NOTEBOOK_PATTERN.md](https://github.com/syntheticChemistry/wetSpring/blob/main/notebooks/NOTEBOOK_PATTERN.md)
+- **primalSpring** (meta-validation) — [NOTEBOOK_PATTERN.md](https://github.com/syntheticChemistry/primalSpring/blob/main/notebooks/NOTEBOOK_PATTERN.md)
+- **hotSpring** (paper notebooks) — [PAPER_NOTEBOOK_GUIDE.md](https://github.com/syntheticChemistry/hotSpring/blob/main/notebooks/PAPER_NOTEBOOK_GUIDE.md)
 
-The recommended set (adapt from wetSpring):
+The recommended set (adapt from the exemplars):
 
 1. **01-domain-validation.ipynb** — your flagship validation story
 2. **02-benchmark-comparison.ipynb** — Python vs Rust vs GPU timing
@@ -101,7 +102,8 @@ The recommended set (adapt from wetSpring):
 
 Key conventions:
 - Load frozen data from `../experiments/results/*.json` (no live primals needed)
-- Use `matplotlib` with `Agg` backend for headless rendering
+- Use `matplotlib` for charts — do NOT set `matplotlib.use('Agg')` (breaks inline rendering
+  in JupyterHub and nbconvert CI; see CONTENT_GUIDE.md)
 - Include a "for other springs" adaptation note in each title cell
 - End with a provenance/summary cell linking to primals.eco
 
