@@ -83,51 +83,72 @@ NestGate uses **newline-delimited JSON-RPC** on TCP (not HTTP). Calls use `print
 
 ---
 
-## Gaps and Suggestions
+## Gaps and Resolutions
 
-### Gap 1: Values are Flat Strings (Medium)
+### Gap 1: Values are Flat Strings (Medium) — RESOLVED (Session 57)
 
-Currently `storage.store` accepts a flat string `value`. The pipeline stores metadata as a formatted string: `"blake3:<hash> size:<bytes>"`. There's no structured metadata.
+`content.put` now accepts raw content, computes BLAKE3 automatically, stores
+with hash-as-key, and returns the hash. Metadata (size, content type,
+timestamps) stored in `.meta.json` sidecars. The KV `storage.store` API remains
+flat-string for backward compatibility; content-addressed workflows should use
+the `content.*` methods.
 
-**Suggestion**: Support structured `value` as JSON object:
-```json
-{"method": "storage.store", "params": {
-    "key": "ncbi:SRR7760408:R1",
-    "value": {
-        "blake3": "6250f200...",
-        "size": 2223544784,
-        "source": "ncbi",
-        "accession": "SRR7760408",
-        "read": "R1"
-    }
-}}
-```
+### Gap 2: No `storage.get` Exercised (Low) — RESOLVED (Session 57)
 
-This would enable NestGate to serve as a proper metadata catalog, not just a key-value store.
+`content.get` retrieves by BLAKE3 hash with metadata. Integrity verification is
+inherent: the hash *is* the key, so retrieval by hash guarantees content
+integrity. Round-trip tests (`content.put` → `content.get` → verify) in
+`content_handler_tests.rs`.
 
-### Gap 2: No `storage.get` Exercised (Low)
+### Gap 3: No Blob Storage (Medium) — RESOLVED (Sessions 55-57)
 
-The pipeline stores artifacts but never retrieves them. The verification path (`storage.get` → compare BLAKE3 → confirm integrity) was not tested.
+`storage.store_blob` / `storage.retrieve_blob` implemented (Session 55+).
+`storage.list_blobs` / `storage.blob_exists` added (Session 57) to close the
+namespace visibility gap. For content-addressed blob workflows, `content.put`
+accepts binary (base64-encoded) content and computes BLAKE3 automatically.
 
-**Suggestion**: Verify `storage.get` returns exactly what was stored. Add a `storage.verify` method that re-hashes stored content and compares.
+### Gap 4: Key Namespace Convention (Low) — PARTIALLY RESOLVED (Session 56)
 
-### Gap 3: No Blob Storage (Medium)
+All storage methods accept an optional `namespace` parameter for scoping:
+`{family}/{namespace}/{key}`. The `content.*` methods use BLAKE3 hashes as keys,
+providing implicit namespacing by content identity. Formal domain-level key
+schema (`{domain}:{identifier}:{qualifier}`) remains a convention, not enforced.
 
-Currently only **metadata references** are stored (hash + size as strings). The actual FASTQ files (2+ GB each) remain on the filesystem. NestGate should support storing actual file content with automatic BLAKE3 verification.
+---
 
-**Suggestion**: Add `storage.store_blob` that:
-1. Accepts a file path or streamed bytes
-2. Computes BLAKE3 hash automatically
-3. Stores content in the configured storage backend (ZFS, local FS, etc.)
-4. Returns the content hash as the storage key
+## Current Storage Surface (as of Session 58)
 
-This is the natural evolution toward the `[data.inputs]` TOML pattern where toadStool resolves content-addressed data from NestGate before execution.
+### Content-Addressed Methods (Session 57)
+| Method | Purpose |
+|--------|---------|
+| `content.put` | Store content, compute BLAKE3, return hash |
+| `content.get` | Retrieve by BLAKE3 hash |
+| `content.exists` | Check existence by hash |
+| `content.list` | Enumerate stored hashes |
+| `content.publish` | Create versioned manifest (path → hash) |
+| `content.resolve` | Resolve path in manifest to content |
+| `content.promote` | Set alias (e.g., `latest`) for a version |
+| `content.collections` | List collections and versions |
 
-### Gap 4: Key Namespace Convention (Low)
+### Blob Methods
+| Method | Purpose |
+|--------|---------|
+| `storage.store_blob` | Store binary blob (param: `blob`, base64) |
+| `storage.retrieve_blob` | Retrieve blob by key |
+| `storage.list_blobs` | Enumerate blob keys |
+| `storage.blob_exists` | Check blob existence |
+| `storage.fetch_external` | Fetch URL, compute BLAKE3, cache (param: `cache_key`) |
 
-The pipeline used ad-hoc key patterns (`ncbi:SRR7760408:R1`, `workload:name:output`). No formal namespace convention exists.
+### Streaming Methods
+| Method | Purpose |
+|--------|---------|
+| `storage.store_stream` | Chunked upload (4 MiB max per chunk) |
+| `storage.retrieve_stream` | Chunked download with offset/total_size |
 
-**Suggestion**: Document a key schema: `{domain}:{identifier}:{qualifier}` where domain is one of `ncbi`, `workload`, `pipeline`, `artifact`, etc.
+### Parameter Naming (documented in `capability_registry.toml`)
+- `storage.store_blob` uses `blob` (not `data`)
+- `storage.fetch_external` uses `cache_key` (not `key`)
+- `content.*` methods use `hash` for BLAKE3 references
 
 ---
 
