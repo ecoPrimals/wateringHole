@@ -84,17 +84,29 @@ isolation_level = "None"
 
 This lets ToadStool dispatch your validation on any gate running NUCLEUS.
 
-### 3. Add a Notebook
+### 3. Create Public Notebooks
 
-Copy `projectNUCLEUS/notebooks/spring-validation-template.ipynb` and
-customize for your spring:
+Create a `notebooks/` directory in your spring repository with public-facing
+science notebooks. **wetSpring is the exemplar** — see
+[wetSpring/notebooks/NOTEBOOK_PATTERN.md](https://github.com/syntheticChemistry/wetSpring/blob/main/notebooks/NOTEBOOK_PATTERN.md)
+for the full pattern.
 
-1. Change `SPRING = 'yourspring'` in Cell 2
-2. Update the visualization in Cell 5 for your domain
-3. Add domain-specific analysis cells
+The recommended set (adapt from wetSpring):
 
-The template already handles health-checking, workload dispatch, output
-parsing, and provenance inspection.
+1. **01-domain-validation.ipynb** — your flagship validation story
+2. **02-benchmark-comparison.ipynb** — Python vs Rust vs GPU timing
+3. **03-paper-reproductions.ipynb** — per-researcher evidence map
+4. **04-cross-spring-connections.ipynb** — ecosystem flows and discoveries
+5. **05-domain-deep-dive.ipynb** — your most compelling cross-domain insight
+
+Key conventions:
+- Load frozen data from `../experiments/results/*.json` (no live primals needed)
+- Use `matplotlib` with `Agg` backend for headless rendering
+- Include a "for other springs" adaptation note in each title cell
+- End with a provenance/summary cell linking to primals.eco
+
+For live-dispatch notebooks, also use `projectNUCLEUS/notebooks/spring-validation-template.ipynb`
+which handles health-checking, workload dispatch, and ToadStool integration.
 
 ### 4. Trigger Auto-Refresh
 
