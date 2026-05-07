@@ -114,10 +114,15 @@ your-spring/notebooks/*.ipynb     ← frozen data, matplotlib charts
         └─ primals.eco/lab/notebooks/<slug>.md  ← live on the public site
 ```
 
-### Creating Notebooks (follow the wetSpring pattern)
+### Creating Notebooks (follow the exemplar pattern)
+
+Three springs now have live notebooks — use any as a reference:
+- **wetSpring** (5 notebooks) — domain science (16S, LC-MS, diversity)
+- **primalSpring** (5 notebooks) — meta-validation (compositions, BTSP, cross-spring)
+- **hotSpring** (17 notebooks) — paper reproductions (22 QCD papers)
 
 1. Create `notebooks/` directory in your spring repository
-2. Copy wetSpring's `NOTEBOOK_PATTERN.md` for the convention
+2. Copy `NOTEBOOK_PATTERN.md` from wetSpring or primalSpring
 3. Load frozen data from `../experiments/results/*.json` (relative paths)
 4. Use `matplotlib` for charts — **do NOT set `matplotlib.use('Agg')`** (breaks inline rendering)
 5. End each notebook with a provenance summary linking to primals.eco

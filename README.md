@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 6, 2026 (Phase 59 — Foundation Integration + Sediment Layer Model)
+**Last Updated**: May 7, 2026 (Phase 59 — sporePrint exemplars: wetSpring + primalSpring + hotSpring notebooks live)
 
 ---
 
