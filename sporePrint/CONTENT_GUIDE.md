@@ -94,14 +94,68 @@ The taxonomy pages (`/primals/barracuda/`, `/springs/wetspring/`) automatically 
 
 ---
 
-## Notebook Content
+## Notebook Content — Full Pipeline
 
-To publish Jupyter notebooks:
+Jupyter notebooks are the primary science visibility mechanism. The full
+pipeline from notebook to live public page is:
 
-1. Place `.ipynb` files in the shared workspace (`/shared/abg/showcase/`) or your repo's `sporeprint/` directory
-2. The `render_notebooks.sh` pipeline converts them to static HTML
-3. Rendered content goes under `/lab/` on primals.eco
-4. Provenance metadata is preserved in the rendered output
+```
+your-spring/notebooks/*.ipynb     ← frozen data, matplotlib charts
+        │
+        ├─ git push to main
+        │       └─ notify-sporeprint.yml fires (content: "true")
+        │
+        ├─ sporePrint auto-refresh.yml (CI)
+        │       ├─ clones your repo
+        │       ├─ pip install jupyter nbconvert matplotlib numpy
+        │       ├─ jupyter nbconvert --execute (runs all cells)
+        │       └─ wraps output HTML in Zola front matter
+        │
+        └─ primals.eco/lab/notebooks/<slug>.md  ← live on the public site
+```
+
+### Creating Notebooks (follow the wetSpring pattern)
+
+1. Create `notebooks/` directory in your spring repository
+2. Copy wetSpring's `NOTEBOOK_PATTERN.md` for the convention
+3. Load frozen data from `../experiments/results/*.json` (relative paths)
+4. Use `matplotlib` for charts — **do NOT set `matplotlib.use('Agg')`** (breaks inline rendering)
+5. End each notebook with a provenance summary linking to primals.eco
+
+The recommended set (5 notebooks):
+- `01-domain-validation.ipynb` — flagship validation story
+- `02-benchmark-comparison.ipynb` — Python vs Rust vs GPU
+- `03-paper-reproductions.ipynb` — per-researcher evidence
+- `04-cross-spring-connections.ipynb` — ecosystem flows
+- `05-domain-deep-dive.ipynb` — your most compelling discovery
+
+### Local Rendering
+
+```bash
+cd infra/sporePrint
+bash scripts/render_notebooks.sh --notebook /path/to/notebook.ipynb
+```
+
+### Automated Rendering (CI)
+
+When your dispatch payload includes `"content": "true"`, the auto-refresh
+CI will:
+1. Clone your repo
+2. Install jupyter/matplotlib
+3. Execute and render all `notebooks/*.ipynb`
+4. Create a PR with the rendered pages
+
+Rendered notebooks appear at `primals.eco/lab/notebooks/<slug>/` with
+embedded PNG charts, data tables, and cross-references.
+
+### Live Example
+
+wetSpring's 5 notebooks are live at:
+- [16S Pipeline Validation](https://primals.eco/lab/notebooks/01-16s-pipeline-validation/)
+- [Python vs Rust vs GPU](https://primals.eco/lab/notebooks/02-benchmark-python-vs-rust/)
+- [Paper Reproductions](https://primals.eco/lab/notebooks/03-paper-reproductions/)
+- [Cross-Spring Connections](https://primals.eco/lab/notebooks/04-cross-spring-connections/)
+- [Soil Anderson Deep Dive](https://primals.eco/lab/notebooks/05-soil-anderson-deep-dive/)
 
 ---
 
@@ -110,11 +164,12 @@ To publish Jupyter notebooks:
 ```
 your-repo/
   sporeprint/
-    README.md           ← optional: describes what's being published
-    validation.md       ← validation results page
-    benchmarks.md       ← performance benchmarks
-    notebooks/          ← Jupyter notebooks for rendering
-      analysis.ipynb
+    README.md           ← describes what's being published
+    validation-summary.md ← validation results page
+  notebooks/
+    NOTEBOOK_PATTERN.md ← convention docs
+    01-validation.ipynb ← loads ../experiments/results/*.json
+    02-benchmarks.ipynb
 ```
 
 Files are placed in sporePrint at paths determined by the auto-refresh CI. The PR created for review lets maintainers adjust placement.
