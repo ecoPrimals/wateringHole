@@ -611,3 +611,13 @@ Comprehensive audit across all categories — all clean: zero files >800L (max 7
 One cleanup: removed duplicate `tempfile` entry from `rhizocrypt-service` `[dev-dependencies]` (already in `[dependencies]` for `doctor.rs`).
 
 **Stadial gate**: 1,573 tests, 0 clippy warnings, 0 fmt diffs. 168 `.rs` files, ~50,920 lines.
+
+### S61: PG-60 — Readiness Gate on JSON-RPC Accept Path (May 7)
+
+primalSpring audit (PG-60) + hotSpring V0.6.32: silent timeout on UDS connect. When rhizoCrypt's DAG subsystem isn't ready, the server accepts the socket but requests hang indefinitely — downstream validators (hotSpring provenance trio, primalSpring exp107) stall without feedback.
+
+**Fix**: All JSON-RPC methods requiring the DAG subsystem are now gated behind `primal.state().is_running()` in `handle_request`. If the primal isn't running, the handler returns `{"error": {"code": -32002, "message": "not ready"}}` immediately. Health probes (`health.liveness`, `health.check`, `health.readiness`, `ping`, `health`, `health.metrics`), `identity.get`, `capabilities.list`, and `tools.list` bypass the gate — callers can always introspect liveness during startup. Rejected requests emit `warn!` with method and state for operator visibility.
+
+New error code `NOT_READY = -32002` in server error range. `HandlerError::NotReady` variant added. 5 new tests: handler-level readiness gate (DAG rejection, health allowlist, running pass-through) + JSON-RPC response-level (`-32002` code, liveness bypass).
+
+**Stadial gate**: 1,578 tests, 0 clippy warnings, 0 fmt diffs. 172 `.rs` files, ~51,620 lines.
