@@ -80,7 +80,7 @@ lack `by_capability`. UDS discovery requires `by_capability` to find sockets.
 8 profile graphs have `security_model = "btsp"` but no `[graph.bonding_policy]`.
 guidestone flags as structural inconsistency. Templates, so low blast radius.
 
-### U5: sweetGrass TCP port confusion (39085 vs 9850)
+### U5: sweetGrass TCP port confusion (39085 vs 9850) — **RESOLVED**
 
 **Severity**: Low
 **Owner**: sweetGrass team
@@ -88,6 +88,13 @@ guidestone flags as structural inconsistency. Templates, so low blast radius.
 Historical HTTP endpoint was 39085, canonical BTSP TCP port is 9850.
 projectNUCLEUS has aligned to 9850. Upstream docs and integration scripts
 may still reference 39085.
+
+**Resolution (sweetGrass v0.7.32, May 8 2026)**: sweetGrass codebase has zero
+references to port 39085. Canonical TCP port 9850 documented in `CONTEXT.md`,
+CLI help, and all handoffs since v0.7.30. `--port` accepts `host:port` with
+localhost-secure default (PG-55). Remaining 39085 references in
+`wateringHole/compute-sharing/` are historical validation logs (fossil records)
+that correctly reflect the port at the time of those tests.
 
 ---
 
