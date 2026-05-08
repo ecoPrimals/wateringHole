@@ -318,7 +318,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md` — External validation strategy
 
 ### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (~44 active, 758 archived)
+- `handoffs/` — Cross-primal evolution handoff documents (~38 active, 831 archived)
 - `petaltongue/` — petalTongue integration documentation
 - `compute-sharing/` — Sovereign compute sharing validation
 - `healthspring/` — healthSpring-specific guidance
