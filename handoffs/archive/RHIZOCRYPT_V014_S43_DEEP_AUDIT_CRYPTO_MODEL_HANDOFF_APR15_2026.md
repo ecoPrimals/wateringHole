@@ -629,3 +629,57 @@ Comprehensive audit across all categories — all clean: zero files >800L (max 7
 One debris fix: `test-all-demos.sh` header corrected from stale "Batch Polish Script / Updates all demos" to "Batch Test Runner" (script actually runs demos with timeout and reports counts).
 
 **Stadial gate**: 1,578 tests, 0 clippy warnings, 0 fmt diffs. 172 `.rs` files, ~51,620 lines.
+
+---
+
+## Addendum: S62 — JH-0 Method Gate Pre-Dispatch Authorization (May 8, 2026)
+
+### Context
+
+primalSpring v0.9.25 shipped JH-0 (Critical) — a pre-dispatch capability authorization gate addressing the projectNUCLEUS multi-user hardening pentest finding that any localhost process could call any JSON-RPC method. 7/13 primals adopted. rhizoCrypt was not yet among them.
+
+### What Changed
+
+rhizoCrypt now implements the ecosystem-standard `MethodGate` pattern, matching the reference implementation in `primalSpring/ecoPrimal/src/ipc/method_gate.rs`.
+
+**New module: `rhizo-crypt-rpc/src/jsonrpc/method_gate.rs`**
+
+- `MethodGate` — pre-dispatch check, `Permissive` (default) or `Enforced`
+- `CallerContext` — bearer token, `ConnectionOrigin` (Unix/Loopback/Remote)
+- `classify_method()` — Public/Protected classification
+- `EnforcementMode` — reads `RHIZOCRYPT_AUTH_MODE` env var
+- `GateRejection` — returned on enforced-mode rejection
+
+**Method classification:**
+
+| Level | Methods |
+|-------|---------|
+| Public | `health.*`, `ping`, `status`, `check`, `identity.get`, `capabilities.list`, `capability.list`, `primal.capabilities`, `lifecycle.status`, `auth.check`, `auth.mode`, `auth.peer_info`, `tools.list`, `mcp.tools.list` |
+| Protected | `dag.*`, `tools.call`, `mcp.tools.call`, everything else |
+
+**New auth methods:**
+
+| Method | Returns |
+|--------|---------|
+| `auth.check` | `{ authenticated: bool, enforcement: "permissive"/"enforced" }` |
+| `auth.mode` | `{ mode: "permissive"/"enforced" }` |
+| `auth.peer_info` | `{ origin: "Unix"/"Loopback"/"Remote", has_token: bool }` |
+
+**Error codes:**
+
+| Code | Name | When |
+|------|------|------|
+| `-32001` | `PERMISSION_DENIED` | Token missing, enforced mode |
+| `-32000` | `UNAUTHORIZED` | Identity could not be established (renamed from `FORBIDDEN`) |
+| `-32002` | `NOT_READY` | Primal still initializing (unchanged) |
+
+**Two-gate architecture in `handle_request`:**
+
+1. Readiness gate (S61/PG-60) — public methods bypass, protected methods return `-32002` if not running
+2. Method gate (S62/JH-0) — public methods bypass, protected methods without token: permissive logs+allows, enforced rejects with `-32001`
+
+**Transport wiring:** gate and caller context threaded through all transport paths (Axum HTTP, UDS newline, BTSP encrypted, TCP auto-detect).
+
+**23 new tests**: 15 unit tests (classification, enforcement modes, gate check, auth responses) + 8 handler integration tests (auth method responses, enforced rejection, public bypass, token pass-through, auth during cold start).
+
+**Stadial gate**: 1,602 tests, 0 clippy warnings, 0 fmt diffs. 169 `.rs` files, ~51,730 lines.
