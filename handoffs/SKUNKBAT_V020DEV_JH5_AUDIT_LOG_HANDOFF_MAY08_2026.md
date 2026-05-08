@@ -1,9 +1,9 @@
 # skunkBat JH-5 Audit Log Implementation — May 8 2026
 
-**Status**: Phase 1 COMPLETE — local audit pipeline live
+**Status**: Phase 2 COMPLETE — all event kinds emitted from live code + L3 capabilities drift fixed
 **Priority**: Medium (JH-5)
-**Registry**: 382 methods (added `security.audit_log`)
-**Commit context**: primalSpring `eb0f73f`, Phase 60
+**Registry**: 389 methods (registered in ecosystem)
+**Commit context**: primalSpring `0d7841b`, Phase 60
 
 ---
 
@@ -57,28 +57,50 @@ Cursor-based pagination: pass `latest_seq` as next `since_seq` for polling.
 
 ---
 
-## Remaining (Phase 2 — pending external deps)
+## Phase 2 — Event Instrumentation (May 8)
 
-- **rhizoCrypt DAG forwarding**: Push events to `rhizoCrypt.event.record` via JSON-RPC IPC when rhizoCrypt is discoverable
-- **sweetGrass provenance braiding**: Forward security attestations as provenance entries
+All `EventKind` variants are now emitted from live code paths:
+
+| EventKind | Emission Site | Trigger |
+|-----------|--------------|---------|
+| `GateRejection` | `dispatch()` | Enforced mode rejects protected call |
+| `GatePermissiveAllow` | `dispatch()` | Permissive mode allows unauthenticated protected call |
+| `ThreatDetected` | `security.detect` dispatch | Each detected threat |
+| `DefenseAction` | `security.respond` dispatch | Successful defense response |
+| `BtspNegotiate` | `try_negotiate_upgrade()` | Negotiate success or failure |
+| `BtspDecryptFailure` | `run_encrypted_frame_loop()` | AEAD decrypt error |
+| `LifecycleTransition` | `PrimalLifecycle::start/stop` | State transitions |
+
+### L3 Wire Compliance Fix
+
+`capabilities.list` security methods now includes `"audit_log"` (was missing in Phase 1).
+
+---
+
+## Remaining (Phase 3 — pending external deps)
+
+- **rhizoCrypt DAG forwarding**: Push events to `provenance.create` / `provenance.attribute` via IPC
+- **sweetGrass provenance braiding**: Forward security attestations via `braid.create` / `braid.anchor`
 - **Heterogeneous source ingestion**: systemd journal adapter, tunnel log parser
-- **Ionic token gating**: `security.audit_log` should require valid ionic token in enforced mode (pending JH-1 BearDog ionic tokens)
+- **Ionic token gating**: `security.audit_log` should require valid ionic token in enforced mode
 
 ---
 
 ## Test Coverage
 
-- 6 new tests in `audit_log.rs`: record/query, cursor pagination, ring buffer eviction, seq tracking, correlation IDs, serialization roundtrip
-- Total: 362 passing (up from 356)
+- 7 tests in `audit_log.rs` + 1 dispatch integration test for `security.audit_log`
+- Total: 363 passing (up from 356 pre-JH-5)
 - Clippy: 0 warnings, `cargo fmt`: clean
 
 ---
 
 ## For primalSpring
 
-JH-5 Phase 1 is now live. The `security.audit_log` RPC method provides the structured event feed that rhizoCrypt and sweetGrass can poll. The gate rejection events emitted by JH-0 are the primary signal — these are now captured in the audit trail rather than only existing as ephemeral tracing output.
+JH-5 Phases 1–2 are complete. All event kinds are emitted from live code. The audit trail is
+fully functional for local observability. `security.audit_log` is the stable IPC interface for
+downstream consumers (rhizoCrypt, sweetGrass) to poll security events.
 
-Phase 2 (DAG forwarding, external source ingestion) is blocked on:
-1. rhizoCrypt providing `event.record` IPC method (or equivalent)
-2. sweetGrass providing provenance entry API
-3. BearDog shipping ionic tokens (JH-1) for token-gated access to the audit log
+Phase 3 (DAG forwarding, external source ingestion) is blocked on:
+1. rhizoCrypt providing `provenance.create` / `provenance.attribute` IPC methods
+2. sweetGrass providing `braid.create` / `braid.anchor` IPC methods
+3. BearDog shipping ionic tokens (JH-1) for authenticated cross-primal IPC
