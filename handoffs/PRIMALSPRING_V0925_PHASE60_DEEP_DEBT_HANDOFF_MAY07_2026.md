@@ -10,7 +10,7 @@
 
 primalSpring Phase 60 completed a 9-task deep debt evolution plan and absorbed
 all 14 upstream sovereignty gap responses. The capability registry grew from
-290 to 366 methods. Graph validator rewritten with spring-domain exclusion.
+290 to 369 methods. Graph validator rewritten with spring-domain exclusion.
 Zero primal drift. Ready for downstream handoff.
 
 ## Upstream Gap Status — ALL 14 RESOLVED
@@ -33,8 +33,8 @@ in the projectNUCLEUS sovereignty audit has been closed:
 
 | Priority | Item | Owner |
 |----------|------|-------|
-| P2 | PT-13: NestGate backend for petalTongue web mode | petalTongue |
-| P2 | PT-09: BTSP Phase 2 enforcement (stub, logs but doesn't enforce) | petalTongue |
+| ~~P2~~ | ~~PT-13: NestGate backend for petalTongue web mode~~ | **RESOLVED** (May 7, v1.6.6) |
+| ~~P2~~ | ~~PT-09: BTSP Phase 2 enforcement~~ | **RESOLVED** (May 7, v1.6.6) |
 | P3 | SD-02: sourDough musl cross-compilation | sourDough |
 | P3 | SD-03: genomeBin signing (sequoia-openpgp) | sourDough |
 | P3 | Squirrel E2E inference parity | Squirrel + neuralSpring |
@@ -72,9 +72,9 @@ None of these block downstream evolution or NUCLEUS deployment.
 | Metric | Value |
 |--------|-------|
 | Version | 0.9.25 |
-| Tests | 662 (614 passed + 48 ignored) |
+| Tests | 666 (618 passed + 48 ignored) |
 | Clippy | 0 warnings |
-| Registered methods | 366 |
+| Registered methods | 369 |
 | Source method strings | 208/208 validated |
 | Graph refs | 353 checked, 0 primal drift |
 | Experiments | 85 (19 tracks) |
