@@ -683,3 +683,29 @@ rhizoCrypt now implements the ecosystem-standard `MethodGate` pattern, matching 
 **23 new tests**: 15 unit tests (classification, enforcement modes, gate check, auth responses) + 8 handler integration tests (auth method responses, enforced rejection, public bypass, token pass-through, auth during cold start).
 
 **Stadial gate**: 1,602 tests, 0 clippy warnings, 0 fmt diffs. 169 `.rs` files, ~51,730 lines.
+
+---
+
+## Addendum: S63 — DID Semantic Alignment + Deep Debt Audit (May 8, 2026)
+
+### Context
+
+primalSpring Phase 60 noted a Low-priority semantic gap: some DAG entries reference raw Ed25519 public keys while BearDog now ships `crypto.did_from_key`. Investigation requested.
+
+### Findings
+
+rhizoCrypt's DAG model is **already DID-first**: `Vertex.agent` is typed as `Did` (transparent `Arc<str>` newtype), all signing APIs use DID strings (`key_id`, `signer`), and no raw Ed25519 public keys are stored on DAG nodes. The gap is limited to two internal Rust field names that used `public_key` while semantically carrying DID strings.
+
+### What Changed
+
+- `CryptoVerifyRequest.public_key` → `signer_did` (with `#[serde(rename = "public_key")]` for wire compat)
+- `CryptoSignContractResponse.public_key` → `attester_did` (same serde rename)
+- Doc comments updated to clarify DID-first posture
+
+Wire format unchanged — JSON still uses `"public_key"` for BearDog compatibility.
+
+### Deep Debt Audit
+
+12-category scan: all clean. Zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero unwrap/expect in production, zero todo/unimplemented/unreachable, zero TODO/FIXME/HACK, zero `&Vec<`/`&String`, zero `allow(dead_code)` in src, all deps pure Rust, all mocks cfg-gated. Max production file 675 lines.
+
+**Stadial gate**: 1,602 tests, 0 clippy warnings, 0 fmt diffs. 169 `.rs` files, ~51,740 lines.
