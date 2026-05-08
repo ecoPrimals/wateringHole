@@ -709,3 +709,27 @@ Wire format unchanged — JSON still uses `"public_key"` for BearDog compatibili
 12-category scan: all clean. Zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero unwrap/expect in production, zero todo/unimplemented/unreachable, zero TODO/FIXME/HACK, zero `&Vec<`/`&String`, zero `allow(dead_code)` in src, all deps pure Rust, all mocks cfg-gated. Max production file 675 lines.
 
 **Stadial gate**: 1,602 tests, 0 clippy warnings, 0 fmt diffs. 169 `.rs` files, ~51,740 lines.
+
+---
+
+## Addendum: S64 — Capability Naming Clarification (U4) + Registry Update (May 8, 2026)
+
+### Context
+
+primalSpring Phase 60 noted an informational item (U4): rhizoCrypt was referenced as both `by_capability = "dag"` and `"provenance"` in external deploy graphs. primalSpring and projectNUCLEUS have standardized on `"dag"`. No runtime breakage due to routing alias, but documentation should be explicit.
+
+### Findings
+
+rhizoCrypt's canonical capability domain is `"dag"` (`DOMAIN = "dag"` in `niche.rs`, `by_capability = "dag"` in `rhizocrypt_deploy.toml`). The `"provenance"` domain belongs to sweetGrass — rhizoCrypt *consumes* provenance capabilities (`provenance.create_braid`, `provenance.lineage`) but does not *provide* them. No stale `by_capability = "provenance"` references exist in rhizoCrypt's own files.
+
+### What Changed
+
+- **README**: Added explicit canonical capability documentation — deploy graphs should use `by_capability = "dag"` when targeting rhizoCrypt
+- **`capability_registry.toml`**: Added 3 `auth.*` methods from S62 JH-0 (`auth.check`, `auth.mode`, `auth.peer_info`). Registry now has 31 methods across 6 domains
+- **Clippy lint fix**: Removed unfulfilled `clippy::expect_used` expectation in `method_gate.rs` test module
+
+### Deep Debt Audit
+
+12-category scan: all clean. Zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero unwrap/expect in production, zero todo/unimplemented/unreachable, zero TODO/FIXME/HACK, zero `&Vec<`/`&String`, zero `allow(dead_code)` in src, all deps pure Rust, all mocks cfg-gated. Max production file 675 lines.
+
+**Stadial gate**: 1,602 tests, 0 clippy warnings, 0 fmt diffs. 169 `.rs` files, ~51,744 lines.
