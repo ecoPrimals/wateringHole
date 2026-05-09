@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 9, 2026 (Phase 60+ INTERSTADIAL — primalSpring eukaryotic UniBin, primordial extinction wave targeting delta springs)
+**Last Updated**: May 9, 2026 (Phase 60+ POST-INTERSTADIAL — 8/8 springs eukaryotic UniBin, primordial extinction wave COMPLETE)
 
 ---
 
@@ -321,7 +321,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Dual-hosted primals.eco, DNS metadata leak closure, upstream sovereignty gaps
 
 ### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (~39 active, 831 archived)
+- `handoffs/` — Cross-primal evolution handoff documents (~40 active, 880+ archived)
 - `petaltongue/` — petalTongue integration documentation
 - `compute-sharing/` — Sovereign compute sharing validation
 - `healthspring/` — healthSpring-specific guidance
@@ -363,26 +363,27 @@ You do not need to know about other primals. You need to know what you can do, a
 - **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing)
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
 - **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 680 tests, two-tier validation (Rust + Live), `CompositionContext` throughout, zero debt
-- **8 springs** undergoing primordial extinction toward eukaryotic UniBin pattern (library-to-binary rewiring + UniBin consolidation)
+- **8 springs** completed primordial extinction — all at eukaryotic UniBin (certification organelle, scenario registry, fossil record, zero debt/clippy)
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — Nest Atomic (9 primals) provenance pipeline validated, sovereign hosting live (primals.eco served from gate via tunnel, DNS-over-TLS, API-managed DNS switching)
 - **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets, operational fetch + validate pipeline. Real NCBI data successfully fetched and BLAKE3-anchored.
 
-### Current Phase: INTERSTADIAL — Primordial Extinction Wave
+### Current Phase: POST-INTERSTADIAL — Primordial Extinction COMPLETE
 
-primalSpring has completed its eukaryotic evolution (single UniBin, certification
-engine absorbed, 20 validation scenarios, two-tier Rust/Live validation, full
-`CompositionContext` migration, deprecated harness fossilized). Delta springs
-must now absorb these patterns and undergo the same evolutionary pressure:
+All 8 springs have completed the primordial extinction (May 9, 2026):
+- **8/8 UniBin** — single binary per spring with `certify`/`validate`/`status`/`version`
+- **8/8 Certification organelle** — guidestone layers absorbed as library modules
+- **8/8 Scenario registry** — `validation/scenarios/` with `ScenarioMeta`
+- **8/8 Fossil record** — `fossilRecord/` with dated provenance
+- **8/8 Zero debt** — zero TODO/FIXME/HACK, zero clippy warnings, zero bare `#[allow]`
+- **9,317+ tests** across the river delta
 
-1. **UniBin consolidation** — absorb experiment bins into single binary per spring
-2. **Guidestone absorption** — certification layers as library organelles
-3. **`CompositionContext` migration** — replace all deprecated spawn/probe patterns
-4. **primalSpring v0.9.25 pin** — for UniBin and two-tier validation support
-5. **Fossil record** — snapshot pre-extinction patterns before evolving
+**Next stadial gate**: JH-11 (cross-primal token federation) blocks Tier 4 rewiring.
+Remaining coordination targets: `CompositionContext` full migration, barraCuda
+IPC-first defaults, registry cross-sync CI, barraCuda version alignment.
 
-See `INTERSTADIAL_WAVE_EVOLUTION_HANDOFF_MAY09_2026.md` for the full wave handoff.
-See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring current status.
+See `INTERSTADIAL_WAVE_EVOLUTION_HANDOFF_MAY09_2026.md` for the wave handoff.
+See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring audit.
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
 
 ---
