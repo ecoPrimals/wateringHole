@@ -9,10 +9,11 @@
 
 ## What This Is
 
-primalSpring has completed its eukaryotic evolution. This handoff defines the
+primalSpring has completed its eukaryotic evolution. This handoff defined the
 **primordial extinction wave** — the evolutionary pressure that delta springs
-must absorb over the next few days. The patterns are proven, the exemplar is
-clean, and the fossil record is complete. Your turn.
+absorbed. All 8/8 springs completed primordial extinction (9,317+ tests).
+See `handoffs/DOWNSTREAM_POST_INTERSTADIAL_HANDOFF_MAY09_2026.md` for the
+completion status and remaining open gaps.
 
 ---
 

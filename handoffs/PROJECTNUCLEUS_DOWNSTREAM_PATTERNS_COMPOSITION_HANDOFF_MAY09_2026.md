@@ -111,8 +111,8 @@ self-hosting, institutional lab deployments, conference demos.
 is decoupled from active editing.
 
 **Implementation**:
-- Source: `/home/irongate/shared/abg/{commons,showcase,data,pilot,validation}/`
-- Destination: `/home/irongate/shared/abg/public/` (managed copies)
+- Source: `$ABG_SHARED/{commons,showcase,data,pilot,validation}/`
+- Destination: `$ABG_SHARED/public/` (managed copies)
 - Gate: pappusCast validates before copying (Light/Medium/Heavy tiers)
 
 **Absorb if**: You run any system where live content could break the public view.
