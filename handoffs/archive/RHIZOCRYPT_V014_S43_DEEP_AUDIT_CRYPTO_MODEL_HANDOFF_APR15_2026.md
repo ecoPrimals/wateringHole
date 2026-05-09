@@ -733,3 +733,29 @@ rhizoCrypt's canonical capability domain is `"dag"` (`DOMAIN = "dag"` in `niche.
 12-category scan: all clean. Zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero unwrap/expect in production, zero todo/unimplemented/unreachable, zero TODO/FIXME/HACK, zero `&Vec<`/`&String`, zero `allow(dead_code)` in src, all deps pure Rust, all mocks cfg-gated. Max production file 675 lines.
 
 **Stadial gate**: 1,602 tests, 0 clippy warnings, 0 fmt diffs. 169 `.rs` files, ~51,744 lines.
+
+---
+
+## Addendum: S65 — JH-1 Token Verification Framework + Scope Enforcement (May 9, 2026)
+
+### Context
+
+primalSpring Phase 60+ later-term evolution audit identified patterns for all primals to absorb: `TokenVerifier` trait abstraction, `_bearer_token` per-request extraction from JSON-RPC params, `scope_permits_method()` enforcement, and enriched `auth.check` response.
+
+### What Changed
+
+- **`TokenVerifier` trait**: Abstraction over token validation with `verify(token) -> Option<VerifiedClaims>`. `NoopVerifier` for tests (wildcard scope), `BearDogVerifier` for production (presence-only until JH-11 key distribution). `MethodGate` now owns a `Box<dyn TokenVerifier>`.
+- **Per-request `_bearer_token` extraction**: `process_single_request` extracts `_bearer_token` from JSON-RPC `params`, verifies via the gate's verifier, and builds a per-request `CallerContext` with `VerifiedClaims` (subject, scopes, expires_in). The `_bearer_token` field is stripped before dispatch.
+- **`scope_permits_method()`**: Glob matching (`*`, `domain.*`, exact). The gate enforces scope — a token with `crypto.*` cannot call `dag.session.create`.
+- **Three-tier gate check**: (1) public bypass, (2) verified token + scope match → allow, (3) no token → permissive/enforced decision. Unverified tokens and scope mismatches are always rejected regardless of enforcement mode.
+- **Enriched `auth.check`**: Returns `{ authenticated, verified, enforcement, scopes?, subject?, expires_in? }`. Claims fields appear only when a verified token provides them.
+
+### Wire Compatibility
+
+No wire format changes. `_bearer_token` is an optional field in params — callers that don't send it see the same behavior as before. The enriched `auth.check` response adds new fields but preserves `authenticated` and `enforcement`.
+
+### Deep Debt Audit
+
+12-category scan: all clean. Zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero unwrap/expect in production, zero todo/unimplemented/unreachable, zero TODO/FIXME/HACK, zero `&Vec<`/`&String`, zero `allow(dead_code)` in src, all deps pure Rust, all mocks cfg-gated. Max production file 675 lines.
+
+**Stadial gate**: 1,622 tests (+20), 0 clippy warnings, 0 fmt diffs. 169 `.rs` files, ~52,186 lines.
