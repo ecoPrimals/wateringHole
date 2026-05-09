@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: April 3, 2026
+**Last Updated**: May 9, 2026
 
 ---
 
@@ -689,6 +689,59 @@ Neural API → TCP fallback. See `COMPOSITION_PATTERNS.md` §4.
 
 ---
 
+## The Propagation Layer
+
+### pappusCast
+
+The **auto-propagation daemon** for projectNUCLEUS. Named for the dandelion
+pappus — the parachute structure that carries seeds to new ground. Each
+validated notebook is a seed; pappusCast disperses them from the compute
+workspace to the public observer surface.
+
+Self-pollination (auto-validation within workspace) and cross-pollination
+(propagation to public surface) mirror the dandelion's reproductive strategy.
+Micro-species (per-notebook variants) and endemic species (gate-specific
+content) map naturally to the botanic model.
+
+Key properties:
+- **Tiered validation**: Light (on-change: JSON valid, kernel, title), Medium
+  (periodic: execute + check errors), Heavy (~6h: diff, changelog, regression)
+- **Adaptive rate limiting**: Publish interval scales with active JupyterHub
+  users — `min(BASE_MINUTES * max(1, active_users), MAX_MINUTES)`
+- **Snapshot architecture**: Public surface holds managed copies, not live
+  symlinks — validated, stable, decoupled from live edits
+- **Quarantine**: Notebooks that fail validation are moved aside, not published
+- **Evolution path**: Python (now) → Rust binary → pappusCast primal
+
+pappusCast is not a primal (yet). It is a Python daemon in the projectNUCLEUS
+deployment tooling. When evolved to Rust, it will follow the UniBin/ecoBin
+pattern and integrate with biomeOS composition for multi-gate propagation.
+
+### tunnelKeeper
+
+A **Rust crate** in the projectNUCLEUS validation tree for programmatic
+Cloudflare tunnel health checks, DNS resolution, and config file parsing.
+tunnelKeeper is the first step toward Rust-native Cloudflare interaction,
+replacing shell-based health probes with structured Rust types.
+
+tunnelKeeper is not a primal. It is a validation tool that may eventually
+absorb into songBird or become a standalone tunnel management binary as the
+sovereignty evolution progresses (Cloudflare → WireGuard → Songbird NAT).
+
+### darkforest
+
+The **pure Rust security validator** for NUCLEUS deployments. A 939KB modular
+binary with zero runtime dependencies. Performs pen testing (3 threat actors),
+protocol fuzzing (13 primals + JupyterHub), and cryptographic strength
+validation (13 checks). Produces structured JSON reports for auditable
+security posture tracking.
+
+darkforest embodies the Dark Forest security posture: reveal nothing to probes,
+fail closed, log everything, trust nothing external. The name is intentional —
+the validator assumes the network is hostile.
+
+---
+
 ## Quick Lookup
 
 | Term | One-Line Definition |
@@ -731,3 +784,8 @@ Neural API → TCP fallback. See `COMPOSITION_PATTERNS.md` §4.
 | **sporeGarden product** | A gen4 tool composing primals for end users (e.g., esotericWebb, helixVision) |
 | **PrimalBridge** | Product-side JSON-RPC client wrapping capability calls to running primals |
 | **Primal resolution order** | 8-step discovery: env → capability → XDG → abstract → /tmp → registry → Neural API → TCP |
+| **pappusCast** | Auto-propagation daemon — dandelion-seed dispersal from workspace to observer surface |
+| **tunnelKeeper** | Rust crate for Cloudflare tunnel health, DNS resolution, config parsing |
+| **darkforest** | Pure Rust security validator — pen test + fuzz + crypto strength (939KB, zero deps) |
+| **Snapshot architecture** | Public surface holds managed copies, not live symlinks — stable observer view |
+| **Tiered validation** | Light (structural) → Medium (execution) → Heavy (regression) validation pipeline |
