@@ -60,7 +60,7 @@ Rust result (known-good)  <->  IPC composition result (being validated)
 
 | Spring | Version | gS | Tests | Rewiring Tier | IPC% | Deploy Graphs | Provenance | petalTongue | sweetGrass | Papers |
 |--------|---------|-----|-------|---------------|------|---------------|------------|-------------|------------|--------|
-| **primalSpring** | v0.9.21 | 4 | 631 | **4** (no barraCuda link) | ~100% | 71 TOMLs | Trio E2E | — (coordinator) | — (coordinator) | Coordination |
+| **primalSpring** | v0.9.25 | 8 | 680 | **4** (eukaryotic UniBin) | ~100% | 74 TOMLs | Trio E2E | — (coordinator) | — (coordinator) | Coordination |
 | **ludoSpring** | V53 | 4 | 820 | **3** | ~40-60% | 13 TOMLs | Dedicated `ipc/provenance/` | `game_scene` wired | Session braids | 15+ baseCamp |
 | **healthSpring** | V59 | 5 | 948 | **3** | ~30-50% | 7 TOMLs | Via `ecoPrimal/src/ipc/` | DataChannel wired | Partial | 8+ baseCamp |
 | **airSpring** | v0.10.0 | 0 | 1,364 | **2** | ~25-40% | 4 TOMLs | `ipc/provenance.rs` | Not wired | Not wired | 11 baseCamp |
@@ -75,7 +75,7 @@ Rust result (known-good)  <->  IPC composition result (being validated)
 
 ---
 
-### 1. primalSpring (v0.9.21 — guideStone Level 4)
+### 1. primalSpring (v0.9.25 — guideStone Level 8, Eukaryotic UniBin)
 
 **Role**: Coordination hub. Validates compositions, provides `composition` library,
 surfaces gaps. Does not own domain science.

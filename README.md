@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 8, 2026 (Phase 59 — sporePrint exemplars: wetSpring + primalSpring + hotSpring notebooks live)
+**Last Updated**: May 9, 2026 (Phase 60+ INTERSTADIAL — primalSpring eukaryotic UniBin, primordial extinction wave targeting delta springs)
 
 ---
 
@@ -359,24 +359,28 @@ You do not need to know about other primals. You need to know what you can do, a
 
 - **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing)
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
-- **primalSpring v0.9.24** — guideStone Level 4, foundation absorption, 85 experiments, 661 tests, discovery escalation hierarchy
-- **8 springs** evolving toward full NUCLEUS compositions (library-to-binary rewiring)
+- **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 680 tests, two-tier validation (Rust + Live), `CompositionContext` throughout, zero debt
+- **8 springs** undergoing primordial extinction toward eukaryotic UniBin pattern (library-to-binary rewiring + UniBin consolidation)
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — Nest Atomic (9 primals) provenance pipeline validated on ironGate
 - **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets, operational fetch + validate pipeline. Real NCBI data successfully fetched and BLAKE3-anchored.
 
-### Next Layer: Foundation → Spring → Sediment
+### Current Phase: INTERSTADIAL — Primordial Extinction Wave
 
-The ecosystem is entering its **geological phase**. Foundation declares
-what to validate and where the data lives. Springs run computations
-through NUCLEUS and deposit validated results as provenance-wrapped
-sediment layers. Products consume the accumulated sediment.
+primalSpring has completed its eukaryotic evolution (single UniBin, certification
+engine absorbed, 20 validation scenarios, two-tier Rust/Live validation, full
+`CompositionContext` migration, deprecated harness fossilized). Delta springs
+must now absorb these patterns and undergo the same evolutionary pressure:
 
-See `FOUNDATION_INTEGRATION_GUIDE.md` for spring integration and
-`SEDIMENT_LAYER_MODEL.md` for the geological accumulation model.
+1. **UniBin consolidation** — absorb experiment bins into single binary per spring
+2. **Guidestone absorption** — certification layers as library organelles
+3. **`CompositionContext` migration** — replace all deprecated spawn/probe patterns
+4. **primalSpring v0.9.25 pin** — for UniBin and two-tier validation support
+5. **Fossil record** — snapshot pre-extinction patterns before evolving
 
-See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative and
-`SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring status.
+See `INTERSTADIAL_WAVE_EVOLUTION_HANDOFF_MAY09_2026.md` for the full wave handoff.
+See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring current status.
+See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
 
 ---
 

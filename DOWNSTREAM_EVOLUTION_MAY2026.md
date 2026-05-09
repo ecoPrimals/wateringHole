@@ -1,10 +1,10 @@
 ---
 
-**ecoPrimals Downstream Evolution — May 5, 2026**
-**From**: primalSpring v0.9.21 (Phase 58 — Spring NUCLEUS Composition Audit)
+**ecoPrimals Downstream Evolution — May 9, 2026 (Updated)**
+**From**: primalSpring v0.9.25 (Phase 60+ INTERSTADIAL — Eukaryotic UniBin Evolution)
 **For**: All spring teams
 
-**What happened**: primalSpring absorbed projectNUCLEUS (Nest Atomic, 9-primal provenance pipeline, 235+ composition checks). BTSP Phase 3 is complete — 13/13 primals with full AEAD encrypted framing. The Spring NUCLEUS Composition Audit mapped every spring's library-to-binary rewiring status, petalTongue visualization channels, and sweetGrass braid patterns. The ecosystem enters a convergence phase: springs evolve from library imports to binary-only IPC calls against ecobin primals, wire their science as live petalTongue presentations, and produce sweetGrass attribution braids for reproducibility. Your turn.
+**What happened**: primalSpring completed its eukaryotic evolution — single UniBin binary absorbing guidestone certification (L0-L8), 20 validation scenarios (9 tracks, Rust/Live tiers), and IPC server. All 89 experiments rewired to `CompositionContext`. All deprecated patterns (`AtomicHarness`, `PrimalClient`, `spawn_primal`, old probes) fossilized with reasons. 680 tests, zero clippy warnings, zero unsafe, zero bare `#[allow]`. BTSP Phase 3 13/13. 13/13 primals at zero debt. The primordial extinction wave now targets delta springs: absorb UniBin pattern, pin v0.9.25, undergo the same evolutionary pressure primalSpring completed.
 
 **Pull primalSpring, infra/wateringHole, and infra/plasmidBin before starting and all primals/ repos.**
 
@@ -66,7 +66,7 @@ Any primal that misbehaves, returns unexpected formats, or is missing a capabili
 
 | Spring | gS | Tests | Rewiring Tier | Next Step |
 |--------|-----|-------|---------------|-----------|
-| primalSpring | **4** | 631 | **4** (binary-only) | Certifying base for all |
+| primalSpring | **8** | 680 | **4** (eukaryotic UniBin) | Exemplar complete — absorb this pattern |
 | hotSpring | **5** | 993 | **2** | Create `src/ipc/` dir, expand Tier 3. You pioneered `composition.rs` — now consolidate |
 | healthSpring | **5** | 948 | **3** | Expand `primal-proof` coverage to full library surface, flip default to IPC |
 | wetSpring | **4+** | 1,594 | **2** | Route handler compute through ecobin. You have 15 IPC handlers — make them IPC-first |
