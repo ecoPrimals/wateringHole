@@ -61,13 +61,13 @@ Rust result (known-good)  <->  IPC composition result (being validated)
 | Spring | Version | gS | Tests | Rewiring Tier | IPC% | Deploy Graphs | Provenance | petalTongue | sweetGrass | Papers |
 |--------|---------|-----|-------|---------------|------|---------------|------------|-------------|------------|--------|
 | **primalSpring** | v0.9.25 | 8 | 680 | **4** (eukaryotic UniBin) | ~100% | 74 TOMLs | Trio E2E | — (coordinator) | — (coordinator) | Coordination |
-| **ludoSpring** | V53 | 4 | 820 | **3** | ~40-60% | 13 TOMLs | Dedicated `ipc/provenance/` | `game_scene` wired | Session braids | 15+ baseCamp |
-| **healthSpring** | V59 | 5 | 948 | **3** | ~30-50% | 7 TOMLs | Via `ecoPrimal/src/ipc/` | DataChannel wired | Partial | 8+ baseCamp |
-| **airSpring** | v0.10.0 | 0 | 1,364 | **2** | ~25-40% | 4 TOMLs | `ipc/provenance.rs` | Not wired | Not wired | 11 baseCamp |
-| **wetSpring** | V151 | 4+ | 1,594 | **2** | ~10-20% | 7 TOMLs | `ipc/provenance.rs` + `sweetgrass.rs` | Partial | Partial | 15+ baseCamp |
-| **hotSpring** | v0.6.32 | 5 | 993 | **2** | ~5-15% | 1 TOML | Via `composition.rs` | Not wired | Not wired | 15+ baseCamp |
-| **neuralSpring** | V138 | 3 | 1,234 | **2** | ~5-10% | 1 TOML | Via `ipc_dispatch.rs` | Not wired | Not wired | 15+ baseCamp |
-| **groundSpring** | V124 | 0 | 1,020 | **1** | ~1-5% | 6 TOMLs | Minimal | Not wired | Not wired | 8 baseCamp |
+| **ludoSpring** | V58 | 4 | 665+ | **3** (eukaryotic UniBin) | ~40-60% | 12 TOMLs | Dedicated `ipc/provenance/` | `game_scene` wired | Session braids | 15+ baseCamp |
+| **healthSpring** | V61 | 5 | 999+ | **3** (eukaryotic UniBin) | ~30-50% | 7 TOMLs | Via `ecoPrimal/src/ipc/` | DataChannel wired | Partial | 8+ baseCamp |
+| **airSpring** | v0.10.0 | 2 | 1,364 | **2** (eukaryotic UniBin) | ~25-40% | 4 TOMLs | `ipc/provenance.rs` | Not wired | Not wired | 11 baseCamp |
+| **wetSpring** | V155 | 4 | 1,209 | **2** (eukaryotic UniBin) | ~10-20% | 7 TOMLs | `ipc/provenance.rs` + `sweetgrass.rs` | Partial | Partial | 15+ baseCamp |
+| **hotSpring** | latest | 5 | 1,002 | **2** (eukaryotic UniBin) | ~5-15% | 5 TOMLs | Via `composition.rs` | Not wired | Not wired | 15+ baseCamp |
+| **neuralSpring** | S195 | 3 | 1,432 | **2** (eukaryotic UniBin) | ~5-10% | 4 TOMLs | Via per-primal modules | Not wired | Not wired | 15+ baseCamp |
+| **groundSpring** | V127 | 4 | 965+ | **1** (eukaryotic UniBin) | ~1-5% | 6 TOMLs | Minimal | Not wired | Not wired | 34 baseCamp |
 
 ---
 
