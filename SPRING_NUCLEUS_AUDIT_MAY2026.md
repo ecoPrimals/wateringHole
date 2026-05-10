@@ -3,7 +3,7 @@
 > Comprehensive 7-dimension audit of all 8 springs for NUCLEUS composition
 > completeness, led by library-to-binary rewiring inventory.
 
-**Date**: May 5, 2026
+**Date**: May 5, 2026 (updated May 10, 2026 — zero open upstream gaps)
 **From**: Ecosystem guidance (wateringHole)
 **License**: AGPL-3.0-or-later
 
