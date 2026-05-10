@@ -27,7 +27,7 @@ gap-tracking portions of the May 9 handoffs (now archived in
 | GAP-03 | Cell graph live deploy not tested | biomeOS v3.51 `composition.deploy` route alias for `graph.execute` |
 | GAP-06 | No UDS transport (rhizoCrypt) | rhizoCrypt S66 confirms UDS operational since S23, provenance trio integration test added |
 | GAP-09 | Neural API registration endpoint | biomeOS v3.51 `method.register` endpoint for spring method registration |
-| GAP-12 | ludoSpring IPC method registration | 18 `game.*` methods registered in primalSpring canonical registry (403 total, zero drift) |
+| GAP-12 | ludoSpring IPC method registration | 28 `game.*` methods registered in primalSpring canonical registry (413 total, zero drift) |
 | U1 | Stale CHECKSUMS | Regenerated with 25 tracked files, BLAKE3, `2026-05-10` |
 | U2 | Doctest failure in scenarios | `ScenarioRegistry::new()` + `scenario.meta.id` fix, all 11 doctests pass |
 | U3 | Scenario registry docs stale | Updated to reflect instance-method API |
@@ -81,7 +81,7 @@ primalspring (UniBin)
 | Tests | 680 (632 passed + 48 ignored) |
 | Clippy warnings | 0 |
 | TODO/FIXME/HACK | 0 |
-| Registered methods | 403 (canonical, zero drift) |
+| Registered methods | 413 (canonical, zero drift) |
 | Deploy graphs | 74 (TOML DAG format) |
 | Experiments | 89 across 20 tracks |
 | Certification layers | 8 (bare → cellular deployment) |
@@ -157,7 +157,7 @@ should wire skunkBat into their deploy graphs now.
 
 | Spring | Status | Key metric |
 |--------|--------|-----------|
-| primalSpring | v0.9.25, 680 tests, 403 methods, exemplar | Reference implementation |
+| primalSpring | v0.9.25, 680 tests, 413 methods, exemplar | Reference implementation |
 | hotSpring | v0.6.32, 999+ tests, interstadial complete | Precision mixing validated |
 | ludoSpring | v0.58, game math stable, 18 `game.*` registered | Tier 4 targeting |
 | groundSpring | v0.58+, 16 MCP + 6 sync tests | MCP reference |
@@ -173,7 +173,7 @@ should wire skunkBat into their deploy graphs now.
 3. **Target Tier 4 rewiring** — JH-11 is resolved; begin IPC-first migration
 4. **Wire skunkBat audit logging** — prepare for JH-5 forwarding
 5. **CI cross-sync** — validate local capability methods against primalSpring
-   canonical 403 (`config/capability_registry.toml`)
+   canonical 413 (`config/capability_registry.toml`)
 
 ### For airSpring specifically
 
@@ -268,7 +268,7 @@ interstadial goals.
 
 | What | Path |
 |------|------|
-| Canonical method registry | `primalSpring/config/capability_registry.toml` (403 methods) |
+| Canonical method registry | `primalSpring/config/capability_registry.toml` (413 methods) |
 | Gap tracker (all resolved) | `primalSpring/docs/PRIMAL_GAPS.md` |
 | Cross-spring scorecard | `primalSpring/docs/CROSS_SPRING_PARITY_SCORECARD.md` |
 | Deploy graph fragments | `primalSpring/graphs/fragments/*.toml` |
