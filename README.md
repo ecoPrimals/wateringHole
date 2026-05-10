@@ -321,7 +321,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Dual-hosted primals.eco, DNS metadata leak closure, upstream sovereignty gaps
 
 ### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (~40 active, 880+ archived)
+- `handoffs/` — Cross-primal evolution handoff documents (9 active, 900+ archived including 19 post-interstadial closures)
 - `petaltongue/` — petalTongue integration documentation
 - `compute-sharing/` — Sovereign compute sharing validation
 - `healthspring/` — healthSpring-specific guidance
@@ -383,9 +383,9 @@ Tier 4 rewiring and JH-5 audit forwarding now unblocked. Sovereignty Horizon 2
 advancing: bearDog TLS (H2-10/H2-11), songbird NAT traversal (H2-13–H2-16),
 petalTongue PT-1–PT-5 all shipped. Zero open upstream gaps.
 
-See `INTERSTADIAL_WAVE_EVOLUTION_HANDOFF_MAY09_2026.md` for the wave handoff.
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring audit.
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
+See `handoffs/archive/post_interstadial_may2026/` for the 19 archived closure handoffs from this wave.
 
 ---
 
