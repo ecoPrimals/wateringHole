@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 10, 2026 (Phase 60+ POST-INTERSTADIAL — zero upstream gaps, sovereignty horizon advancing)
+**Last Updated**: May 10, 2026 (Phase 60+ POST-INTERSTADIAL — zero upstream gaps, 413 canonical methods, 8/8 springs evolved, sovereignty horizons advancing)
 
 ---
 
@@ -364,32 +364,67 @@ You do not need to know about other primals. You need to know what you can do, a
 
 ## Current Ecosystem State (May 2026)
 
-- **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing)
+- **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing), zero debt
+- **413 registered capability methods** (primalSpring canonical, zero drift)
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
 - **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 680 tests, two-tier validation (Rust + Live), `CompositionContext` throughout, zero debt
 - **8 springs** completed primordial extinction — all at eukaryotic UniBin (certification organelle, scenario registry, fossil record, zero debt/clippy)
+- **11,000+ tests** across the river delta (wetSpring 1,594 · neuralSpring 1,450 · airSpring 1,386 · groundSpring 1,386 · hotSpring 1,019 · healthSpring 999 · ludoSpring 815 · primalSpring 680)
 - **1 garden** active (esotericWebb from ludoSpring)
-- **projectNUCLEUS** — Full NUCLEUS (13 primals) provenance pipeline validated, cell membrane architecture (primals.eco on CDN extracellular, lab/git.primals.eco via tunnel membrane, sovereign compute intracellular)
-- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets, operational fetch + validate pipeline. Real NCBI data successfully fetched and BLAKE3-anchored.
+- **projectNUCLEUS** — 13-primal Full NUCLEUS on active gate, cell membrane architecture (primals.eco on CDN extracellular, lab/git.primals.eco via tunnel membrane, sovereign compute intracellular), darkforest v0.2.1 Rust validator, static observer surface, 267+ security PASS
+- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets
 
-### Current Phase: POST-INTERSTADIAL — Primordial Extinction COMPLETE
+### Current Phase: POST-INTERSTADIAL — Evolution Wave Complete
 
-All 8 springs have completed the primordial extinction (May 9, 2026):
+All 8 springs completed eukaryotic evolution + post-interstadial targets (May 10):
 - **8/8 UniBin** — single binary per spring with `certify`/`validate`/`status`/`version`
 - **8/8 Certification organelle** — guidestone layers absorbed as library modules
 - **8/8 Scenario registry** — `validation/scenarios/` with `ScenarioMeta`
-- **8/8 Fossil record** — `fossilRecord/` with dated provenance
-- **8/8 Zero debt** — zero TODO/FIXME/HACK, zero clippy warnings, zero bare `#[allow]`
-- **9,317+ tests** across the river delta
+- **8/8 CI cross-sync** — validate local methods against canonical 413
+- **6/8 skunkBat Rust wiring** — wetSpring, neuralSpring, healthSpring fully wired; hotSpring, groundSpring, airSpring partial (graphs only)
+- **7/8 `method.register`** — all except airSpring
+- **8/8 `composition.status`** — all springs absorbing biomeOS v3.51
+- **Zero open upstream gaps** — JH-11, GAP-03/06/09/12, U1-U3, all Tier 3 items resolved
 
-**JH-11 RESOLVED** (May 10, 2026): bearDog `auth.public_key` + biomeOS `BearDogVerifier`.
-Tier 4 rewiring and JH-5 audit forwarding now unblocked. Sovereignty Horizon 2
-advancing: bearDog TLS (H2-10/H2-11), songbird NAT traversal (H2-13–H2-16),
-petalTongue PT-1–PT-5 all shipped. Zero open upstream gaps.
+### Upcoming Horizons
 
-See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring audit.
+**Tier 4 Rewiring** (now unblocked by JH-11):
+- IPC-first defaults for all inter-primal communication
+- `barracuda` as `optional = true` with feature-gated library imports
+- `CompositionContext` for all cross-primal calls
+
+**JH-5 Audit Forwarding** (now unblocked by skunkBat Phase 2):
+- Cross-primal audit events → rhizoCrypt DAG + sweetGrass braid
+- Springs wire skunkBat into deploy graphs (6/8 have graph nodes)
+
+**NUCLEUS Sovereignty Horizons**:
+- H2 Step 2b: BTSP auth for JupyterHub (replaces PAM)
+- H2 Step 3a: NestGate + petalTongue content pipeline (sovereign extracellular)
+- H2 Step 3b: BearDog TLS shadow run on port 8443 (upstream shipped)
+- H2 Step 3c: Songbird NAT + VPS relay integration (upstream shipped)
+- H2 Step 4: Sovereign DNS (knot-dns authoritative, BTSP direct resolution)
+- H3: Primal-only (JupyterHub → petalTongue, GitHub → Forgejo, plasmidBin → NestGate)
+
+**Spring → plasmidBin Deployment**:
+- Springs produce UniBin release binaries → plasmidBin GitHub Releases
+- projectNUCLEUS workload TOMLs reference fetched binaries for science validation
+- 7/8 springs have workload TOMLs (ludoSpring, groundSpring, neuralSpring added May 10)
+
+### Remaining Spring Gaps
+
+| Spring | Gap | Severity |
+|--------|-----|----------|
+| ludoSpring | No Rust skunkBat wiring (graphs only) | Low |
+| groundSpring | No Rust skunkBat wiring (graphs only) | Low |
+| airSpring | `method.register` not wired, `CONTEXT.md` stale | Low |
+| airSpring | Workspace-root `deny.toml` missing (`aws-lc-sys` ban) | Low |
+| healthSpring | Deploy graphs missing skunkBat node | Low |
+| hotSpring | 19 pre-existing `dead_code` warnings | Low |
+| wetSpring | 15 open primal gaps (PG-01–PG-22) | Medium |
+
+See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring 7-dimension audit.
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
-See `handoffs/archive/post_interstadial_may2026/` for the 19 archived closure handoffs from this wave.
+See `handoffs/archive/post_interstadial_may2026/` for 19 archived closure handoffs.
 
 ---
 
