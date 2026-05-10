@@ -62,4 +62,4 @@ All pass with zero warnings/failures:
 - `cargo build --no-default-features --features ipc` (IPC-only)
 - `cargo fmt --check`
 - `cargo clippy --workspace --all-targets`
-- `cargo test --workspace --lib --tests` (665+ tests)
+- `cargo test --workspace --lib --tests` (815+ tests)

@@ -134,17 +134,17 @@ for petalTongue to serve.
 **Concrete ask**: `content.put` method, collection/directory concept, content-type
 metadata, blob listing for manifest generation.
 
-### Existing upstream gaps (unchanged)
+### Existing upstream gaps (all resolved — post-interstadial May 10)
 
 | ID | What | Owner | Status |
 |----|------|-------|--------|
-| DF-2 | toadstool `TOADSTOOL_AUTH_MODE` env var mapping | toadStool | Open |
-| DF-3 | songbird/squirrel silent on `auth.mode` TCP | Each team | Open |
-| U1 | primalSpring `CHECKSUMS` stale | primalSpring | Open |
-| U2 | 5 deploy graphs missing `by_capability` | primalSpring | Open |
-| U3 | 8 profile graphs missing `bonding_policy` | primalSpring | Open |
-| U5 | sweetGrass port 39085 vs 9850 | sweetGrass | Resolved (v0.7.32) |
-| JH-11 | Cross-primal token federation | biomeOS/primalSpring | Deferred (Tier 4) |
+| DF-2 | toadstool `TOADSTOOL_AUTH_MODE` env var mapping | toadStool | **Resolved** |
+| DF-3 | songbird/squirrel silent on `auth.mode` TCP | Each team | **Resolved** |
+| U1 | primalSpring `CHECKSUMS` stale | primalSpring | **Resolved** |
+| U2 | 5 deploy graphs missing `by_capability` | primalSpring | **Resolved** |
+| U3 | 8 profile graphs missing `bonding_policy` | primalSpring | **Resolved** |
+| U5 | sweetGrass port 39085 vs 9850 | sweetGrass | **Resolved** (v0.7.32) |
+| JH-11 | Cross-primal token federation | biomeOS/primalSpring | **Resolved** (bearDog `auth.public_key` + biomeOS `BearDogVerifier`) |
 
 ---
 
@@ -172,12 +172,38 @@ metadata, blob listing for manifest generation.
 
 ---
 
+## 6. Addendum: Cell Membrane Architecture (2026-05-10)
+
+The dual-hosted model above has evolved. After experiencing external failover
+gaps, projectNUCLEUS adopted a **cell membrane architecture** that inverts the
+hosting model:
+
+- **Extracellular** (GitHub Pages + Cloudflare CDN): `primals.eco` permanently
+  served externally. The public site is no longer routed through the gate tunnel.
+- **Membrane** (Cloudflare Tunnel replicas): `lab.primals.eco` + `git.primals.eco`
+  routed through tunnel replicas with sub-second failover across gates.
+- **Intracellular** (sovereign compute): primals, JupyterHub, pappusCast, data — 
+  total control inside the gate.
+
+**Key insight**: accept that the extracellular world (CDN, DNS) is outside our
+control; inside the membrane, total sovereign control. The boundary is a clean
+delineation for skunkBat audit data and future ionic/weak atomic bonding patterns.
+
+**Changes from the original handoff**:
+- `sporeprint_dns.sh` is now emergency-only (not the normal switching path)
+- `sporeprint-local.service` demoted to dev/preview tool
+- `primals.eco` DNS permanently set to GitHub Pages A records
+- Tunnel ingress rules removed for `primals.eco` (only lab/git routed)
+- `gate_provision.sh` provisions membrane replicas (tunnel-only gates)
+- `gate_watchdog.sh` monitors membrane health (no DNS swapping)
+
 ## References
 
+- `projectNUCLEUS/specs/GATE_PORTABILITY.md` — cell membrane architecture spec (v0.3.0)
+- `projectNUCLEUS/specs/TUNNEL_EVOLUTION.md` — membrane replacement plan
 - `projectNUCLEUS/specs/EVOLUTION_GAPS.md` — full sovereignty roadmap
-- `projectNUCLEUS/specs/TUNNEL_EVOLUTION.md` — tunnel replacement plan
 - `projectNUCLEUS/specs/SOVEREIGNTY_VALIDATION_PROTOCOL.md` — calibrate/shadow/cutover
-- `projectNUCLEUS/specs/GATE_PORTABILITY.md` — gate-portable architecture
-- `projectNUCLEUS/deploy/sporeprint_dns.sh` — DNS switching script
-- `projectNUCLEUS/deploy/sporeprint_local.sh` — build/serve script
-- `projectNUCLEUS/deploy/sporeprint_verify.sh` — dual-origin verification
+- `projectNUCLEUS/deploy/gate_provision.sh` — membrane replica provisioning
+- `projectNUCLEUS/deploy/gate_watchdog.sh` — membrane health monitor
+- `projectNUCLEUS/deploy/sporeprint_dns.sh` — DNS switching script (emergency use)
+- `projectNUCLEUS/deploy/sporeprint_local.sh` — build/serve script (dev/preview)

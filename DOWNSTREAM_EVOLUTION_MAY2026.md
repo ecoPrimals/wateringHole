@@ -1,10 +1,19 @@
 ---
 
-**ecoPrimals Downstream Evolution — May 9, 2026 (Updated)**
-**From**: primalSpring v0.9.25 (Phase 60+ INTERSTADIAL — Eukaryotic UniBin Evolution)
+**ecoPrimals Downstream Evolution — May 10, 2026 (Post-Interstadial)**
+**From**: primalSpring v0.9.25 (Phase 60+ POST-INTERSTADIAL — Zero Open Upstream Gaps)
 **For**: All spring teams
 
-**What happened**: primalSpring completed its eukaryotic evolution — single UniBin binary absorbing guidestone certification (L0-L8), 20 validation scenarios (9 tracks, Rust/Live tiers), and IPC server. All 89 experiments rewired to `CompositionContext`. All deprecated patterns (`AtomicHarness`, `PrimalClient`, `spawn_primal`, old probes) fossilized with reasons. 680 tests, zero clippy warnings, zero unsafe, zero bare `#[allow]`. BTSP Phase 3 13/13. 13/13 primals at zero debt. The primordial extinction wave now targets delta springs: absorb UniBin pattern, pin v0.9.25, undergo the same evolutionary pressure primalSpring completed.
+**What happened**: The primordial extinction is **complete** — all 8/8 springs
+now have eukaryotic UniBin binaries. All 11 upstream gaps resolved by primal
+teams. JH-11 (token federation), GAP-03/06/09/12 all closed. Sovereignty
+horizons shipped: bearDog TLS + rate limiting, songbird full NAT chain,
+petalTongue web sovereignty, biomeOS `composition.status` + `method.register`.
+JH-5 audit forwarding and Tier 4 rewiring are now unblocked.
+
+**Spring UniBin binaries are now tractable for plasmidBin deployment** — each
+spring produces a single binary with `certify`/`validate`/`serve`/`status`/`version`
+subcommands. See `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md`.
 
 **Pull primalSpring, infra/wateringHole, and infra/plasmidBin before starting and all primals/ repos.**
 
@@ -62,18 +71,21 @@ ludoSpring's `ipc/provenance/{rhizocrypt.rs, loamspine.rs, sweetgrass.rs}` is th
 
 Any primal that misbehaves, returns unexpected formats, or is missing a capability — document it and hand back to primalSpring via `docs/PRIMAL_GAPS.md`.
 
-## WHERE EVERYONE STANDS (Phase 58 Audit)
+## WHERE EVERYONE STANDS (Post-Interstadial, May 10)
 
-| Spring | gS | Tests | Rewiring Tier | Next Step |
-|--------|-----|-------|---------------|-----------|
-| primalSpring | **8** | 680 | **4** (eukaryotic UniBin) | Exemplar complete — absorb this pattern |
-| hotSpring | **5** | 993 | **2** | Create `src/ipc/` dir, expand Tier 3. You pioneered `composition.rs` — now consolidate |
-| healthSpring | **5** | 948 | **3** | Expand `primal-proof` coverage to full library surface, flip default to IPC |
-| wetSpring | **4+** | 1,594 | **2** | Route handler compute through ecobin. You have 15 IPC handlers — make them IPC-first |
-| neuralSpring | **3** | 1,234 | **2** | Graduate `ipc_dispatch.rs` to full `src/ipc/` tree. Mind inference latency |
-| ludoSpring | **4** | 820 | **3** | Close remaining `barracuda::` calls, make `ipc` default. Verify 60Hz budget |
-| airSpring | **0** | 1,364 | **2** | Unpause delta. Build guideStone against live NUCLEUS. Good IPC foundation already |
-| groundSpring | **0** | 1,020 | **1** | Expand `ipc.rs` into `src/ipc/` tree. Optional barraCuda feature is a head start |
+All 8/8 springs completed primordial extinction — eukaryotic UniBin, zero debt.
+Spring UniBin binaries are ready for plasmidBin tracking.
+
+| Spring | gS | Tests | Rewiring Tier | UniBin | Next Step |
+|--------|-----|-------|---------------|:------:|-----------|
+| primalSpring | **8** | 680 | **4** (exemplar) | Yes | Reference complete |
+| hotSpring | **5** | 1,002 | **2** | Yes | Tier 3: IPC parity for all domain methods |
+| healthSpring | **5** | 999+ | **3** | Yes | Tier 4: flip `primal-proof` to IPC default |
+| wetSpring | **4** | 1,209 | **2** | Yes | Tier 3: route handler compute through ecobin |
+| neuralSpring | **3** | 1,432 | **2** | Yes | Tier 3: `src/ipc/` tree, latency-aware |
+| ludoSpring | **4** | 665+ | **3** | Yes | Tier 4: close remaining `barracuda::` calls |
+| airSpring | **2** | 1,364 | **2** | Yes | Tier 3: `aws-lc-sys` ban, guideStone L4 |
+| groundSpring | **4** | 965+ | **1** | Yes | Tier 2: expand `ipc.rs` into `src/ipc/` tree |
 
 ### Rewiring Priority
 
@@ -85,15 +97,17 @@ Any primal that misbehaves, returns unexpected formats, or is missing a capabili
 6. **neuralSpring** (2→3) — needs `src/ipc/` dir; latency-sensitive inference
 7. **groundSpring** (1→2) — minimal IPC, but optional feature gate is a start
 
-## WHAT'S NEW SINCE PHASE 45
+## WHAT'S NEW (Post-Interstadial, May 10)
 
-- **BTSP Phase 3 complete**: 13/13 primals FULL AEAD (ChaCha20-Poly1305, May 2). Encrypted channels are the default.
-- **projectNUCLEUS absorbed**: Nest Atomic (9 primals), full provenance pipeline (rhizoCrypt DAG → loamSpine commit → sweetGrass braid) validated via RPC on ironGate.
-- **primalSpring v0.9.21 Phase 55b**: guideStone Level 4, 187/187 live NUCLEUS ALL PASS, 13/13 BTSP authenticated, 8 cellular graphs BTSP-enforced.
-- **Spring NUCLEUS Audit**: 7-dimension audit of all 8 springs. Library-to-binary rewiring inventoried per spring. petalTongue DataBinding channel types mapped. sweetGrass braid patterns defined.
-- **Standardization patterns identified**: `primal-proof` feature (healthSpring), `src/ipc/` tree (ludoSpring), `PRIMAL_PROOF_IPC_MAPPING.md` (hotSpring), `composition.rs` dual-lane (hotSpring), deploy graph per pipeline (ludoSpring).
-- **petalTongue science map**: Every spring's science output maps to existing DataBinding channels. No new channel types needed.
-- **sweetGrass braid patterns**: Per-spring agent/activity/entity definitions. ludoSpring is reference implementation.
+- **Primordial extinction complete**: 8/8 springs have eukaryotic UniBin binaries. Zero TODO/FIXME/HACK/clippy across all springs.
+- **Zero open upstream gaps**: All 11 gaps resolved (JH-11, GAP-03/06/09/12, U1-U3, DF-2/3, U5). See `handoffs/PRIMALSPRING_POST_INTERSTADIAL_DOWNSTREAM_HANDOFF_MAY10_2026.md`.
+- **Spring UniBin → plasmidBin**: Single binary per spring makes tracked deployment tractable for the first time. See `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md`.
+- **Sovereignty horizons shipped upstream**: bearDog TLS + rate limiting (H2-10/11), songbird full NAT chain (H2-13-16), petalTongue web sovereignty (PT-1-PT-5), biomeOS `composition.status` + `method.register`.
+- **JH-5 audit forwarding unblocked**: skunkBat Phase 2 complete (7 event kinds). Phase 3 (cross-primal forwarding) ready.
+- **Tier 4 rewiring unblocked**: JH-11 token federation live. `CompositionContext` is the canonical API.
+- **`method.register` live**: biomeOS v3.51 — springs can register methods dynamically (no manual config).
+- **projectNUCLEUS static observer**: Pre-rendered HTML, centralized dark theme, Rust-validated (darkforest v0.2.1).
+- **403 canonical methods**: primalSpring registry (zero drift). CI cross-sync available for all springs.
 
 ## KNOWN ISSUES (SO YOU DON'T HIT THEM)
 
@@ -113,6 +127,8 @@ Any primal that misbehaves, returns unexpected formats, or is missing a capabili
 | Topic | Location |
 |-------|----------|
 | **Spring NUCLEUS Audit** | `infra/wateringHole/SPRING_NUCLEUS_AUDIT_MAY2026.md` |
+| **UniBin plasmidBin readiness** | `infra/wateringHole/handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` |
+| **Post-interstadial downstream** | `infra/wateringHole/handoffs/PRIMALSPRING_POST_INTERSTADIAL_DOWNSTREAM_HANDOFF_MAY10_2026.md` |
 | **petalTongue Science Map** | `infra/wateringHole/petaltongue/PETALTONGUE_SPRING_SCIENCE_MAP.md` |
 | **sweetGrass Braid Patterns** | `infra/wateringHole/SWEETGRASS_SPRING_BRAID_PATTERNS.md` |
 | Ecosystem alignment (Phase 58) | `infra/wateringHole/NUCLEUS_SPRING_ALIGNMENT.md` |

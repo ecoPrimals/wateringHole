@@ -317,11 +317,15 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `UPSTREAM_CONTRIBUTIONS.md` — Contributions to upstream Rust ecosystem
 - `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md` — External validation strategy
 
-### Sovereign Hosting & DNS
-- `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Dual-hosted primals.eco, DNS metadata leak closure, upstream sovereignty gaps
+### Sovereign Hosting & Cell Membrane
+- `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Hosting evolution, DNS metadata closure, cell membrane addendum
+- `handoffs/PROJECTNUCLEUS_CELL_MEMBRANE_COMPOSITION_HANDOFF_MAY10_2026.md` — Cell membrane architecture, NUCLEUS composition patterns, neuralAPI deployment, per-team absorption targets
+
+### Post-Interstadial
+- `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` — NUCLEUS findings, spring UniBin → plasmidBin readiness, static observer, darkforest v0.2.1
 
 ### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (9 active, 900+ archived including 19 post-interstadial closures)
+- `handoffs/` — Cross-primal evolution handoff documents (13 active, 900+ archived including 19 post-interstadial closures)
 - `petaltongue/` — petalTongue integration documentation
 - `compute-sharing/` — Sovereign compute sharing validation
 - `healthspring/` — healthSpring-specific guidance
@@ -365,7 +369,7 @@ You do not need to know about other primals. You need to know what you can do, a
 - **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 680 tests, two-tier validation (Rust + Live), `CompositionContext` throughout, zero debt
 - **8 springs** completed primordial extinction — all at eukaryotic UniBin (certification organelle, scenario registry, fossil record, zero debt/clippy)
 - **1 garden** active (esotericWebb from ludoSpring)
-- **projectNUCLEUS** — Nest Atomic (9 primals) provenance pipeline validated, sovereign hosting live (primals.eco served from gate via tunnel, DNS-over-TLS, API-managed DNS switching)
+- **projectNUCLEUS** — Full NUCLEUS (13 primals) provenance pipeline validated, cell membrane architecture (primals.eco on CDN extracellular, lab/git.primals.eco via tunnel membrane, sovereign compute intracellular)
 - **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets, operational fetch + validate pipeline. Real NCBI data successfully fetched and BLAKE3-anchored.
 
 ### Current Phase: POST-INTERSTADIAL — Primordial Extinction COMPLETE
