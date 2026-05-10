@@ -759,3 +759,41 @@ No wire format changes. `_bearer_token` is an optional field in params — calle
 12-category scan: all clean. Zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero unwrap/expect in production, zero todo/unimplemented/unreachable, zero TODO/FIXME/HACK, zero `&Vec<`/`&String`, zero `allow(dead_code)` in src, all deps pure Rust, all mocks cfg-gated. Max production file 675 lines.
 
 **Stadial gate**: 1,622 tests (+20), 0 clippy warnings, 0 fmt diffs. 169 `.rs` files, ~52,186 lines.
+
+### S66 Addendum: GAP-06 UDS Transport — Confirmed Resolved (May 10)
+
+primalSpring May 9 interstadial coordination re-raised GAP-06: "UDS Transport (MEDIUM) — blocks the provenance trio in 4 ludoSpring experiments." This gap has been resolved since **S23 (March 31, 2026)** — UDS has been unconditional on Unix across all subsequent sessions. Previous resolutions:
+
+- **S43.5**: Added transport diagnostics to `doctor.rs` showing UDS path/status
+- **S58**: Re-confirmed PG-45/GAP-06 resolved via PG-52 (handler routing fix)
+
+The gap persists in tracker state because ludoSpring's original V46 probe (April 20) ran against a deployment using `--port` (TCP opt-in) and the doctor command at that time didn't show UDS. Both issues were fixed in S43.5.
+
+### What Changed
+
+- **New integration test**: `test_uds_provenance_trio_dag_workflow` — validates the exact ludoSpring workflow: `dag.session.create` → `dag.event.append` (GameEvent with chess move data) over UDS. Full request/response round-trip over newline-delimited JSON-RPC on Unix domain socket.
+- **README transport model section**: Added "Transport Model (GAP-06 resolved)" section with socat-style verification command for downstream springs to validate UDS without inspecting source.
+
+### Verification for Downstream
+
+```bash
+# Start (UDS is unconditional, no flags needed):
+rhizocrypt server
+
+# Verify socket exists:
+ls $XDG_RUNTIME_DIR/biomeos/rhizocrypt*.sock
+
+# socat-style JSON-RPC:
+echo '{"jsonrpc":"2.0","method":"health.liveness","id":1}' | \
+  socat - UNIX-CONNECT:$XDG_RUNTIME_DIR/biomeos/rhizocrypt.sock
+
+# Doctor transport check:
+rhizocrypt doctor
+# → Transport: UDS  [PASS]  unconditional, path=...
+```
+
+### Deep Debt Audit
+
+12-category scan: all clean. Zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero unwrap/expect in production, zero TODO/FIXME/HACK, all deps pure Rust, all mocks cfg-gated.
+
+**Stadial gate**: 1,623 tests (+1), 0 clippy warnings, 0 fmt diffs. 173 `.rs` files, ~52,774 lines.
