@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 9, 2026 (Phase 60+ POST-INTERSTADIAL — 8/8 springs eukaryotic UniBin, primordial extinction wave COMPLETE)
+**Last Updated**: May 10, 2026 (Phase 60+ POST-INTERSTADIAL — zero upstream gaps, sovereignty horizon advancing)
 
 ---
 
@@ -378,9 +378,10 @@ All 8 springs have completed the primordial extinction (May 9, 2026):
 - **8/8 Zero debt** — zero TODO/FIXME/HACK, zero clippy warnings, zero bare `#[allow]`
 - **9,317+ tests** across the river delta
 
-**Next stadial gate**: JH-11 (cross-primal token federation) blocks Tier 4 rewiring.
-Remaining coordination targets: `CompositionContext` full migration, barraCuda
-IPC-first defaults, registry cross-sync CI, barraCuda version alignment.
+**JH-11 RESOLVED** (May 10, 2026): bearDog `auth.public_key` + biomeOS `BearDogVerifier`.
+Tier 4 rewiring and JH-5 audit forwarding now unblocked. Sovereignty Horizon 2
+advancing: bearDog TLS (H2-10/H2-11), songbird NAT traversal (H2-13–H2-16),
+petalTongue PT-1–PT-5 all shipped. Zero open upstream gaps.
 
 See `INTERSTADIAL_WAVE_EVOLUTION_HANDOFF_MAY09_2026.md` for the wave handoff.
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring audit.
