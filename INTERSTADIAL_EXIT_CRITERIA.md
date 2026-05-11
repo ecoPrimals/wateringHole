@@ -37,26 +37,41 @@ INTERSTADIAL (current)                    STADIAL (next)
 
 ## Five Pillars
 
-### Pillar 1: Primal Sovereignty Capabilities
+### Pillar 1: Primal Sovereignty Capabilities (Sentinel-Stadial)
 
-Upstream primals shipped all required capabilities. Remaining work is
-integration and operational wiring on projectNUCLEUS gates.
+Primals are **sentinels** — the least composed, most climate-responsive entities.
+They have already shipped their capabilities and are in their own stadial cycle,
+with primalSpring as their validation gate. The remaining items here split into
+two categories: **upstream debt** (primal code gaps at the gate) and
+**downstream absorption** (L3/L4 integration work using shipped capabilities).
 
-| # | Capability | Primal | Shipped | Integration Needed (Interstadial) |
-|---|-----------|--------|---------|-----------------------------------|
-| 1a | TLS termination + rate limits | BearDog | Yes (Wave 100) | H2-3b: shadow on :8443, `btsp_tls_parity.sh` |
-| 1b | NAT chain (STUN/TURN) | Songbird | Yes | H2-3c: VPS relay (~$5/mo), integration test |
-| 1c | Content pipeline (`content.put`) | NestGate | Partial | H2-3a: publish pipeline, collection manifests |
-| 1d | Web mode (`--docroot`) | petalTongue | Partial | H2-3a: NestGate-backed static + DataBinding |
-| 1e | BTSP authenticator | BearDog | Ready | H2-2b: JupyterHub plugin + 7-day dual-auth shadow |
-| 1f | `composition.deploy(graph)` | biomeOS | API exists | Gate wiring, membrane transition signals |
-| 1g | Audit forwarding (JH-5) | skunkBat | Phase 2 | Wire deploy graphs: skunkBat → rhizoCrypt → sweetGrass |
-| 1h | Cross-primal tokens (JH-11) | BearDog | Done | CompositionContext wiring in springs (L3) |
-| 1i | MethodGate parity | toadStool, Squirrel | 11/13 | Ship MethodGate for last 2 primals |
-| 1j | Sovereign DNS | Songbird/BearDog | DoT intermediate | H2-4: knot-dns authoritative (can defer to stadial) |
+**Upstream debt (blocked at the primalSpring gate):**
 
-**Exit gate**: Items 1a–1i completed or in active shadow-run state. 1j (full
-sovereign DNS) may defer to stadial — DoT is sufficient for exit.
+| # | Gap | Primal | Status | What's Missing |
+|---|-----|--------|--------|----------------|
+| 1i | MethodGate pre-dispatch (JH-0) | Squirrel | **12/13** | No `method_gate.rs`, no `classify_method`, no `MethodVisibility`. toadStool done (full JH-0 + JH-2, 14 tests). |
+
+This is the **only true upstream primal debt**. All other primals pass the
+primalSpring gate: 413-method registry (zero drift), BTSP Phase 3 (13/13
+AEAD), Edition 2024, deny.toml, plasmidBin, MethodGate (12/13).
+
+**Downstream absorption (L3/L4 integration — shipped capabilities awaiting wiring):**
+
+| # | Capability | Primal | Shipped | Absorption Owner |
+|---|-----------|--------|---------|-----------------|
+| 1a | TLS termination + rate limits | BearDog | Yes (Wave 100) | L4 (NUCLEUS): H2-3b shadow on :8443 |
+| 1b | NAT chain (STUN/TURN) | Songbird | Yes (Waves 196-197) | L4 (NUCLEUS): H2-3c VPS relay |
+| 1c | Content pipeline (`content.put`) | NestGate | Partial | L4 (NUCLEUS): H2-3a publish pipeline |
+| 1d | Web mode (`--docroot`) | petalTongue | Partial | L4 (NUCLEUS): H2-3a NestGate-backed static |
+| 1e | BTSP authenticator | BearDog | Ready | L4 (NUCLEUS): H2-2b JupyterHub plugin |
+| 1f | `composition.deploy(graph)` | biomeOS | API exists | L4 (NUCLEUS): gate wiring, membrane signals |
+| 1g | Audit forwarding (JH-5) | skunkBat | Phase 2 | L3/L4: wire deploy graphs |
+| 1h | Cross-primal tokens (JH-11) | BearDog | Done | L3 (Springs): CompositionContext wiring |
+| 1j | Sovereign DNS | Songbird/BearDog | DoT intermediate | L4 (NUCLEUS): H2-4 knot-dns (can defer to stadial) |
+
+**Exit gate**: squirrel ships MethodGate (13/13 at the primalSpring gate) AND
+downstream absorption items 1a–1h are in active shadow-run or wiring state.
+1j (full sovereign DNS) may defer to stadial — DoT is sufficient for exit.
 
 ### Pillar 2: projectNUCLEUS Deployments
 
@@ -125,7 +140,7 @@ seeded with sources/targets.
 [ ] Pillar 1: petalTongue web mode operational
 [ ] Pillar 1: BTSP auth dual-auth shadow running
 [ ] Pillar 1: JH-5 audit forwarding wired in deploy graphs
-[ ] Pillar 1: MethodGate 13/13 (toadStool + Squirrel)
+[ ] Pillar 1: MethodGate 13/13 (squirrel remaining — toadStool done)
 [ ] Pillar 2: H2-2b/3a/3b/3c all in shadow-run state
 [ ] Pillar 2: Foundation Threads 4+7 workloads running
 [ ] Pillar 3: Thread 1 WCM compositions through provenance trio
