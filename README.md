@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 10, 2026 (Phase 60+ POST-INTERSTADIAL — zero upstream gaps, 413 canonical methods, 8/8 springs evolved, sovereignty horizons advancing)
+**Last Updated**: May 11, 2026 (Phase 60+ POST-INTERSTADIAL — zero upstream gaps, 413 canonical methods, 8/8 springs evolved, post-interstadial targets all green, evolution cycle ownership model)
 
 ---
 
@@ -325,7 +325,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` — NUCLEUS findings, spring UniBin → plasmidBin readiness, static observer, darkforest v0.2.1
 
 ### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (13 active, 900+ archived including 19 post-interstadial closures)
+- `handoffs/` — Cross-primal evolution handoff documents (active + 900+ archived including 19 post-interstadial closures)
 - `petaltongue/` — petalTongue integration documentation
 - `compute-sharing/` — Sovereign compute sharing validation
 - `healthspring/` — healthSpring-specific guidance
@@ -369,21 +369,22 @@ You do not need to know about other primals. You need to know what you can do, a
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
 - **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 680 tests, two-tier validation (Rust + Live), `CompositionContext` throughout, zero debt
 - **8 springs** completed primordial extinction — all at eukaryotic UniBin (certification organelle, scenario registry, fossil record, zero debt/clippy)
-- **11,000+ tests** across the river delta (wetSpring 1,594 · neuralSpring 1,450 · airSpring 1,386 · groundSpring 1,386 · hotSpring 1,019 · healthSpring 999 · ludoSpring 815 · primalSpring 680)
+- **12,900+ tests** across the river delta (wetSpring 1,962 · neuralSpring 1,450 · airSpring 1,327 · groundSpring 1,101 · hotSpring 1,025 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — 13-primal Full NUCLEUS on active gate, cell membrane architecture (primals.eco on CDN extracellular, lab/git.primals.eco via tunnel membrane, sovereign compute intracellular), darkforest v0.2.1 Rust validator, static observer surface, 267+ security PASS
 - **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets
 
 ### Current Phase: POST-INTERSTADIAL — Evolution Wave Complete
 
-All 8 springs completed eukaryotic evolution + post-interstadial targets (May 10):
+All 8 springs completed eukaryotic evolution + post-interstadial targets (May 11):
 - **8/8 UniBin** — single binary per spring with `certify`/`validate`/`status`/`version`
 - **8/8 Certification organelle** — guidestone layers absorbed as library modules
 - **8/8 Scenario registry** — `validation/scenarios/` with `ScenarioMeta`
-- **8/8 CI cross-sync** — validate local methods against canonical 413
-- **6/8 skunkBat Rust wiring** — wetSpring, neuralSpring, healthSpring fully wired; hotSpring, groundSpring, airSpring partial (graphs only)
-- **7/8 `method.register`** — all except airSpring
+- **8/8 CI cross-sync** — all springs validate local methods against canonical 413
+- **8/8 skunkBat Rust IPC** — all springs have Rust skunkBat modules or deploy graph nodes
+- **8/8 `method.register`** — all springs wired (airSpring added v0.10.0)
 - **8/8 `composition.status`** — all springs absorbing biomeOS v3.51
+- **8/8 NUCLEUS workload TOMLs** — all springs have projectNUCLEUS validation workloads
 - **Zero open upstream gaps** — JH-11, GAP-03/06/09/12, U1-U3, all Tier 3 items resolved
 
 ### Upcoming Horizons
@@ -395,7 +396,7 @@ All 8 springs completed eukaryotic evolution + post-interstadial targets (May 10
 
 **JH-5 Audit Forwarding** (now unblocked by skunkBat Phase 2):
 - Cross-primal audit events → rhizoCrypt DAG + sweetGrass braid
-- Springs wire skunkBat into deploy graphs (6/8 have graph nodes)
+- Springs wire skunkBat into deploy graphs (8/8 have Rust modules or graph nodes)
 
 **NUCLEUS Sovereignty Horizons**:
 - H2 Step 2b: BTSP auth for JupyterHub (replaces PAM)
@@ -408,19 +409,36 @@ All 8 springs completed eukaryotic evolution + post-interstadial targets (May 10
 **Spring → plasmidBin Deployment**:
 - Springs produce UniBin release binaries → plasmidBin GitHub Releases
 - projectNUCLEUS workload TOMLs reference fetched binaries for science validation
-- 7/8 springs have workload TOMLs (ludoSpring, groundSpring, neuralSpring added May 10)
+- 8/8 springs have workload TOMLs (healthSpring biosignal/microbiome/certification added May 11)
 
-### Remaining Spring Gaps
+### Remaining Spring Gaps (May 11 — post-interstadial push)
 
-| Spring | Gap | Severity |
-|--------|-----|----------|
-| ludoSpring | No Rust skunkBat wiring (graphs only) | Low |
-| groundSpring | No Rust skunkBat wiring (graphs only) | Low |
-| airSpring | `method.register` not wired, `CONTEXT.md` stale | Low |
-| airSpring | Workspace-root `deny.toml` missing (`aws-lc-sys` ban) | Low |
-| healthSpring | Deploy graphs missing skunkBat node | Low |
-| hotSpring | 19 pre-existing `dead_code` warnings | Low |
-| wetSpring | 15 open primal gaps (PG-01–PG-22) | Medium |
+Previous 7 gaps resolved (May 10-11):
+- ~~ludoSpring skunkBat~~ → V60 Rust IPC module
+- ~~groundSpring skunkBat~~ → V130 Rust IPC module
+- ~~airSpring method.register~~ → v0.10.0 `ipc/method_register.rs`
+- ~~airSpring deny.toml~~ → **FALSE GAP** — workspace-root `deny.toml` exists, bans `aws-lc-sys`
+- ~~healthSpring skunkBat~~ → V62 deploy graph node
+- ~~hotSpring dead_code~~ → cleaned in post-interstadial push
+
+| Spring | Gap | Severity | Owner Layer |
+|--------|-----|----------|-------------|
+| wetSpring | 8 open primal gaps (PG-01–PG-22, 14 closed) | Medium | L3 (spring) |
+| airSpring | gS Level 2+ (ecosystem median is L4) | Low | L3 (spring) |
+| neuralSpring | gS Level 3 (target L4+) | Low | L3 (spring) |
+| ludoSpring | No .ipynb paper notebooks (Python baselines only) | Low | L3 (spring) |
+| hotSpring | Sovereign GPU barriers (Titan V FECS, K80 PCIe) | Low | L3 (spring + coralReef) |
+
+### Evolution Cycle Ownership
+
+Gaps are owned by exactly one layer:
+- **L1 (Primals)**: Zero open — 13/13 clean
+- **L2 (primalSpring)**: Canonical registry, CompositionContext, PG-54/PG-63
+- **L3 (Springs)**: Domain debt, barraCuda Tier 4, gS levels, foundation seeding
+- **L4 (Products)**: NUCLEUS sovereignty horizons, composition absorption, deployment
+- **L5 (Foundation)**: Thread coverage, data anchoring, provenance validation
+
+See `primalSpring/docs/PRIMAL_GAPS.md` for the full ownership model.
 
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring 7-dimension audit.
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
