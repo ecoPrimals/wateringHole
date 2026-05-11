@@ -406,15 +406,36 @@ Garden season:     Springs reach Tier 4
 
 ---
 
-## Interstadial Exit Criteria (May 11, 2026)
+## Sentinel-Stadial Model (May 11, 2026)
+
+Not all layers are in the same season. Primals are **sentinels** — the least
+composed, most climate-responsive entities. They feel shifts first and respond
+first. They are already in their own **stadial cycle**, with primalSpring as
+their external validation gate.
+
+```
+Layer         Phase          Gate / Pressure
+─────         ─────          ───────────────
+L1 Primals    STADIAL        primalSpring (413 registry, MethodGate, graphs)
+L2 primalSpring  GATE        validates L1, patterns flow to L3/L4
+L3 Springs    INTERSTADIAL   absorbing primal capabilities
+L4 Products   INTERSTADIAL   pre-wiring sovereignty, shadow runs pending
+L5 Foundation INTERSTADIAL   thread coverage, data anchoring
+```
+
+**Upstream primal debt (at the gate)**: squirrel is the only primal not
+passing the primalSpring gate — missing MethodGate (JH-0). All other primals:
+12/13 MethodGate, 13/13 BTSP Phase 3 AEAD, 413 methods (zero drift).
+
+## Interstadial Exit Criteria (5 Pillars)
 
 The interstadial is the warm period where the ecosystem pre-wires sovereignty
 capabilities. It ends when the plumbing exists and shadow runs can begin. Five
 pillars define the exit gate:
 
-1. **Primal Sovereignty Pre-Wire**: BearDog TLS shadow on :8443, Songbird NAT
-   + VPS relay, NestGate content pipeline, petalTongue web mode, BTSP auth
-   dual-auth shadow, JH-5 audit forwarding wired, MethodGate 13/13
+1. **Primal Sovereignty (sentinel-stadial)**: squirrel ships MethodGate (12/13
+   → 13/13). All other capabilities shipped — downstream absorption (TLS shadow,
+   NAT relay, content pipeline) is L4 work, not primal debt.
 2. **NUCLEUS Deployments**: H2 sub-steps 2b/3a/3b/3c in shadow-run state,
    Foundation Threads 4+7 workloads running
 3. **ABG Hosting**: Thread 1 WCM compositions through provenance trio
@@ -445,7 +466,7 @@ ends when shadow runs prove parity and external deployments succeed.
 - NestGate + petalTongue content pipeline (H2-3a — partial)
 - BTSP JupyterHub authenticator dual-auth shadow (H2-2b — ready)
 - JH-5 audit forwarding wired: skunkBat → rhizoCrypt → sweetGrass
-- MethodGate for toadStool + Squirrel (11/13 → 13/13)
+- squirrel MethodGate (12/13 → 13/13 — toadStool done, only upstream gap at gate)
 - lithoSpore: groundSpring B2 reproduction → first module PASS
 - River delta: airSpring + groundSpring → `optional=true`
 - Foundation: seed Threads 3 (immuno) and 5 (LTEE) sources/targets
