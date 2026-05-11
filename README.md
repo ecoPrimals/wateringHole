@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 11, 2026 (Phase 60+ POST-INTERSTADIAL — zero upstream gaps, 413 canonical methods, 8/8 springs evolved, post-interstadial targets all green, evolution cycle ownership model)
+**Last Updated**: May 11, 2026 (Phase 60+ POST-INTERSTADIAL — zero upstream gaps, 413 canonical methods, 8/8 springs evolved, post-interstadial targets all green, evolution cycle ownership model, LTEE Targeted GuideStone subsystem)
 
 ---
 
@@ -297,6 +297,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — Pure Rust sovereignty guidance
 - `SECRETS_AND_SEEDS_STANDARD.md` — Seed management and secret handling
 - `SEMANTIC_METHOD_NAMING_STANDARD.md` — API naming conventions
+- `TARGETED_GUIDESTONE_STANDARD.md` — How composed subsystems bud into portable, deployable artifacts (scope graph, data manifest, binary bundle, validation harness, provenance chain, liveSpore tracking)
 - `WORKSPACE_DEPENDENCY_STANDARD.md` — Cargo workspace dependency rules
 - `STANDARDS_AND_EXPECTATIONS.md` — Meta-standard: what standards are and how they evolve
 
@@ -323,6 +324,10 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Post-Interstadial
 - `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` — NUCLEUS findings, spring UniBin → plasmidBin readiness, static observer, darkforest v0.2.1
+
+### Targeted GuideStone (LTEE)
+- `TARGETED_GUIDESTONE_STANDARD.md` — Standard for how composed subsystems bud into portable artifacts (budding model, 5 components, cross-platform via ecoBin/genomeBin, liveSpore tracking, data freshness protocol)
+- `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem: first Targeted GuideStone artifact (Barrick Lab), 7 science modules, 36 paper-spring assignments across 6 springs, three-tier architecture, projectNUCLEUS deployment subsystem
 
 ### Subdirectories
 - `handoffs/` — Cross-primal evolution handoff documents (active + 900+ archived including 19 post-interstadial closures)
@@ -373,6 +378,7 @@ You do not need to know about other primals. You need to know what you can do, a
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — 13-primal Full NUCLEUS on active gate, cell membrane architecture (primals.eco on CDN extracellular, lab/git.primals.eco via tunnel membrane, sovereign compute intracellular), darkforest v0.2.1 Rust validator, static observer surface, 267+ security PASS
 - **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets
+- **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules, 36 paper-spring assignments, three-tier deployment (Python → Rust ecoBin → Primal), USB-deployable to Barrick Lab
 
 ### Current Phase: POST-INTERSTADIAL — Evolution Wave Complete
 
@@ -410,6 +416,15 @@ All 8 springs completed eukaryotic evolution + post-interstadial targets (May 11
 - Springs produce UniBin release binaries → plasmidBin GitHub Releases
 - projectNUCLEUS workload TOMLs reference fetched binaries for science validation
 - 8/8 springs have workload TOMLs (healthSpring biosignal/microbiome/certification added May 11)
+
+**LTEE Targeted GuideStone** (projectNUCLEUS subsystem):
+- First artifact that buds from the ecosystem into a portable, self-contained deployment
+- USB-deployable: 7 science modules reproducing Barrick/Lenski LTEE papers + new Anderson-QS predictions
+- Three-tier: Python (universal) → Rust ecoBin (Linux) → Primal composition (NUCLEUS)
+- No containers — ecoBin/genomeBin binaries, primals self-container via genomeBin if needed
+- 36 paper-spring assignments seeded across 6 springs (wetSpring, neuralSpring, groundSpring, hotSpring, healthSpring, airSpring)
+- liveSpore.json tracks deployment provenance; data freshness protocol for source URI re-fetch
+- Standard: `TARGETED_GUIDESTONE_STANDARD.md`; subsystem handoff: `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md`
 
 ### Remaining Spring Gaps (May 11 — post-interstadial push)
 
