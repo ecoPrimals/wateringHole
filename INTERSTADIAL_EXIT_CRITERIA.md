@@ -47,13 +47,11 @@ two categories: **upstream debt** (primal code gaps at the gate) and
 
 **Upstream debt (blocked at the primalSpring gate):**
 
-| # | Gap | Primal | Status | What's Missing |
-|---|-----|--------|--------|----------------|
-| 1i | MethodGate pre-dispatch (JH-0) | Squirrel | **12/13** | No `method_gate.rs`, no `classify_method`, no `MethodVisibility`. toadStool done (full JH-0 + JH-2, 14 tests). |
-
-This is the **only true upstream primal debt**. All other primals pass the
-primalSpring gate: 413-method registry (zero drift), BTSP Phase 3 (13/13
-AEAD), Edition 2024, deny.toml, plasmidBin, MethodGate (12/13).
+None. **13/13 primals pass the primalSpring gate** (May 11, 2026):
+- MethodGate (JH-0 + JH-2): **13/13** — squirrel shipped `method_gate.rs`
+- BTSP Phase 3 AEAD: **13/13**
+- 413-method registry: zero drift
+- Edition 2024, deny.toml (ring + openssl), plasmidBin: **13/13**
 
 **Downstream absorption (L3/L4 integration — shipped capabilities awaiting wiring):**
 
@@ -69,8 +67,8 @@ AEAD), Edition 2024, deny.toml, plasmidBin, MethodGate (12/13).
 | 1h | Cross-primal tokens (JH-11) | BearDog | Done | L3 (Springs): CompositionContext wiring |
 | 1j | Sovereign DNS | Songbird/BearDog | DoT intermediate | L4 (NUCLEUS): H2-4 knot-dns (can defer to stadial) |
 
-**Exit gate**: squirrel ships MethodGate (13/13 at the primalSpring gate) AND
-downstream absorption items 1a–1h are in active shadow-run or wiring state.
+**Exit gate**: MethodGate **13/13 DONE**. Remaining: downstream absorption items
+1a–1h in active shadow-run or wiring state.
 1j (full sovereign DNS) may defer to stadial — DoT is sufficient for exit.
 
 ### Pillar 2: projectNUCLEUS Deployments
@@ -140,7 +138,7 @@ seeded with sources/targets.
 [ ] Pillar 1: petalTongue web mode operational
 [ ] Pillar 1: BTSP auth dual-auth shadow running
 [ ] Pillar 1: JH-5 audit forwarding wired in deploy graphs
-[ ] Pillar 1: MethodGate 13/13 (squirrel remaining — toadStool done)
+[x] Pillar 1: MethodGate 13/13 (squirrel shipped May 11)
 [ ] Pillar 2: H2-2b/3a/3b/3c all in shadow-run state
 [ ] Pillar 2: Foundation Threads 4+7 workloads running
 [ ] Pillar 3: Thread 1 WCM compositions through provenance trio
