@@ -189,7 +189,7 @@ These are the tasks the local team (hotSpring hardware lab) continues to wire:
 
 ## References
 
-- `infra/wateringHole/GPU_AND_COMPUTE_EVOLUTION.md` — full layer status tables
+- `infra/wateringHole/fossilRecord/consolidated-may2026/GPU_AND_COMPUTE_EVOLUTION.md` — full layer status tables
 - `infra/wateringHole/PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — cross-primal guidance
 - `springs/hotSpring/wateringHole/handoffs/HOTSPRING_SOVEREIGN_RUST_EVOLUTION_HANDOFF_MAY11_2026.md` — local lab handoff
 - `springs/hotSpring/experiments/README.md` — Experiment 190 milestone details

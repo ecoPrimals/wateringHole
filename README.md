@@ -439,16 +439,19 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 - JH-5 audit forwarding: skunkBat → rhizoCrypt → sweetGrass (Phase 3)
 
 **Downstream-surfaced per-primal debt** (composition gaps exposed by projectNUCLEUS):
-- toadStool: CLI expands `${VAR}` but JSON-RPC `compute.execute` path does not — IPC callers see no expansion
-- squirrel: `LocalProcessProvider` is intentional dev stub (errors) — but capability-based delegation to toadStool **not wired**
-- barraCuda: embedded crypto (`chacha20poly1305`, `hkdf`, `hmac`) → should delegate to bearDog IPC (dedup)
-- loamSpine: `session.commit` API exists (+ aliases) — graph spec uses wrong method name or param shape (contract mismatch)
+- toadStool: ~~CLI expands `${VAR}` but JSON-RPC `compute.execute` path does not~~ **RESOLVED** — S234 documents IPC contract as pre-resolved only
+- squirrel: ~~`LocalProcessProvider` dev stub, delegation not wired~~ **RESOLVED** — `RemoteComputeProvider` for toadStool IPC delegation shipped
+- barraCuda: ~~embedded crypto~~ **RESOLVED** — bearDog Wave 101 shipped `crypto.hkdf_sha256` + `crypto.hmac_verify` IPC surface
+- loamSpine: ~~`session.commit` API contract mismatch~~ **RESOLVED** — method aliases (`commit.session`, `provenance.commit`) + hex hash acceptance
+- skunkBat: ~~JH-5 Phase 3 audit forwarding~~ **RESOLVED** — cross-primal forwarding to rhizoCrypt + sweetGrass shipped
+- **NestGate: `content.*` transport parity — OPEN (critical path)**
 
-**primalSpring validation gap** (why this wasn't caught upstream):
-- `content` not in `ALL_CAPS` routing table — `CompositionContext.call("content", ...)` fails
-- Zero `content.*` scenarios, tests, or graph steps — only `storage.*` exercised
-- 413-method registry lists `content.*` but drift check only verifies string presence, not semantic correctness
-- **Wave 7** (contract testing) added to primalSpring to close this gap class permanently
+**primalSpring validation gap** (closed by Wave 7 + Wave 8):
+- ~~`content` not in `ALL_CAPS` routing table~~ **FIXED** (W7-01)
+- ~~Zero `content.*` scenarios, tests, or graph steps~~ **FIXED** (W7-02/03/04)
+- ~~413-method registry unchecked semantically~~ **FIXED** — inverse drift detection (W7-06)
+- **Wave 7** (contract testing): content domain semantic gates shipped
+- **Wave 8** (compute trio): Node atomic sovereign dispatch contracts shipped — see `handoffs/COMPUTE_TRIO_WAVE8_NODE_ATOMIC_EVOLUTION_MAY11_2026.md`
 
 **Pillar 2 — NUCLEUS Deployments:**
 - Shadow-run state for H2-2b/3a/3b/3c
