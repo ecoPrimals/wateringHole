@@ -406,38 +406,72 @@ Garden season:     Springs reach Tier 4
 
 ---
 
+## Interstadial Exit Criteria (May 11, 2026)
+
+The interstadial is the warm period where the ecosystem pre-wires sovereignty
+capabilities. It ends when the plumbing exists and shadow runs can begin. Five
+pillars define the exit gate:
+
+1. **Primal Sovereignty Pre-Wire**: BearDog TLS shadow on :8443, Songbird NAT
+   + VPS relay, NestGate content pipeline, petalTongue web mode, BTSP auth
+   dual-auth shadow, JH-5 audit forwarding wired, MethodGate 13/13
+2. **NUCLEUS Deployments**: H2 sub-steps 2b/3a/3b/3c in shadow-run state,
+   Foundation Threads 4+7 workloads running
+3. **ABG Hosting**: Thread 1 WCM compositions through provenance trio
+4. **lithoSpore**: 2+ modules PASS at Tier 1 with real NCBI/Dryad data
+5. **River Delta**: 4+ springs at `optional=true`, wetSpring < 5 PG gaps,
+   airSpring + neuralSpring at gS L4, 2+ new foundation threads seeded
+
+Full details: `INTERSTADIAL_EXIT_CRITERIA.md`
+
+### Stadial Boundary
+
+The stadial is driven by **external selective pressure**: Cloudflare baselines
+(BearDog TLS parity), upstream crate contributions (wgsl-precision,
+proc-sysinfo), community engagement (Dimforge, burn, wgpu), lithoSpore USB
+to Barrick Lab, and framework parity benchmarks (Kokkos, LAMMPS, SciPy).
+
+The stadial does not start until the interstadial exit gate is cleared. It
+ends when shadow runs prove parity and external deployments succeed.
+
+---
+
 ## Future Trajectory
 
-### Near Term (Weeks)
+### Interstadial Remaining (Weeks — sovereignty pre-wire)
 
-- ~~PG-52 provenance trio UDS empty response~~ **RESOLVED** (April 27)
-- ~~PG-48 petalTongue musl threading~~ **ADDRESSED** (April 27)
-- ~~BTSP Phase 3 full AEAD~~ **RESOLVED** — 13/13 primals (May 2)
-- ludoSpring + healthSpring advance to Tier 4 (binary-only)
-- hotSpring creates `src/ipc/` directory, expands Tier 3 coverage
-- petalTongue DataBinding wiring for healthSpring (exemplar), ludoSpring, wetSpring
-- sweetGrass braid adoption in ludoSpring (reference for siblings)
+- BearDog TLS shadow run on :8443 (H2-3b — upstream shipped)
+- Songbird NAT + VPS relay integration (H2-3c — upstream shipped)
+- NestGate + petalTongue content pipeline (H2-3a — partial)
+- BTSP JupyterHub authenticator dual-auth shadow (H2-2b — ready)
+- JH-5 audit forwarding wired: skunkBat → rhizoCrypt → sweetGrass
+- MethodGate for toadStool + Squirrel (11/13 → 13/13)
+- lithoSpore: groundSpring B2 reproduction → first module PASS
+- River delta: airSpring + groundSpring → `optional=true`
+- Foundation: seed Threads 3 (immuno) and 5 (LTEE) sources/targets
+- ABG: exercise Thread 1 WCM compositions through provenance trio
 
-### Short Term (Months)
+### Stadial (Months — external validation drives evolution)
 
-- All active springs at Tier 3+ rewiring status
-- airSpring and groundSpring begin delta absorption
-- `esotericWebb` ships as first garden product from composition
-- Cross-spring provenance braids in production
-- Each spring has a `PRIMAL_PROOF_IPC_MAPPING.md` for its domain
-- biomeOS adaptive tick scheduling (PathwayLearner observing frame budgets)
-- guideStone certification propagation: hotSpring L5 → all springs L4+
-- ABG collaboration workflows expressed as NUCLEUS compositions
+- Shadow runs vs Cloudflare: BearDog TLS parity → cutover
+- Songbird NAT replaces cloudflared: relay parity → cutover
+- NestGate replaces GitHub Pages: content parity → cutover
+- Upstream crate extraction: wgsl-precision, proc-sysinfo → crates.io
+- Dimforge/wgmath proof-of-work engagement
+- lithoSpore USB to Barrick Lab (Phase 5)
+- ABG users running science on sovereign infrastructure
+- Framework parity benchmarks: per-spring vs Kokkos/LAMMPS/SciPy
 
-### Medium Term (Quarters)
+### Post-Stadial (Quarters — Horizon 3)
 
+- JupyterHub → petalTongue (H3-01)
+- GitHub → Forgejo as primary (H3-03/04)
+- plasmidBin → NestGate distribution (H3-02)
 - All springs at Tier 4 (binary-only IPC, no library deps)
-- guideStone artifacts for all springs (deployable, self-validating binaries)
-- Every baseCamp paper has a corresponding NUCLEUS composition graph
-- Gonzales drug repurposing pipeline operational (wetSpring → ADDRC screening)
-- Faculty network densification (Chuna lattice QCD, Gonzales pharmacology)
-- biomeOS cellular deployment as standard for all compositions
-- metalForge → toadStool dispatch contract refined across all springs
+- guideStone artifacts for all springs (deployable, self-validating)
+- Every baseCamp paper has a NUCLEUS composition graph
+- Gonzales drug repurposing pipeline (wetSpring → ADDRC)
+- Faculty network densification
 
 ### Longer Term (Years)
 
