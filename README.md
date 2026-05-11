@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 11, 2026 (Phase 60+ POST-INTERSTADIAL — zero upstream gaps, 413 canonical methods, 8/8 springs evolved, post-interstadial targets all green, evolution cycle ownership model, LTEE Targeted GuideStone subsystem)
+**Last Updated**: May 11, 2026 (Interstadial exit criteria defined — 5 pillars, sovereignty pre-wire, stadial boundary mapped, LTEE Targeted GuideStone, lithoSpore scaffolded)
 
 ---
 
@@ -322,7 +322,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Hosting evolution, DNS metadata closure, cell membrane addendum
 - `handoffs/PROJECTNUCLEUS_CELL_MEMBRANE_COMPOSITION_HANDOFF_MAY10_2026.md` — Cell membrane architecture, NUCLEUS composition patterns, neuralAPI deployment, per-team absorption targets
 
-### Post-Interstadial
+### Interstadial Exit & Stadial Boundary
+- `INTERSTADIAL_EXIT_CRITERIA.md` — Authoritative exit criteria: 5 pillars, gate conditions, stadial boundary definition, external validation drivers
 - `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` — NUCLEUS findings, spring UniBin → plasmidBin readiness, static observer, darkforest v0.2.1
 
 ### Targeted GuideStone (LTEE)
@@ -385,51 +386,74 @@ You do not need to know about other primals. You need to know what you can do, a
 - **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets
 - **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules, 36 paper-spring assignments, three-tier deployment (Python → Rust ecoBin → Primal), USB-deployable to Barrick Lab
 
-### Current Phase: POST-INTERSTADIAL — Evolution Wave Complete
+### Current Phase: INTERSTADIAL — Sovereignty Pre-Wire
 
-All 8 springs completed eukaryotic evolution + post-interstadial targets (May 11):
-- **8/8 UniBin** — single binary per spring with `certify`/`validate`/`status`/`version`
-- **8/8 Certification organelle** — guidestone layers absorbed as library modules
-- **8/8 Scenario registry** — `validation/scenarios/` with `ScenarioMeta`
-- **8/8 CI cross-sync** — all springs validate local methods against canonical 413
-- **8/8 skunkBat Rust IPC** — all springs have Rust skunkBat modules or deploy graph nodes
-- **8/8 `method.register`** — all springs wired (airSpring added v0.10.0)
-- **8/8 `composition.status`** — all springs absorbing biomeOS v3.51
-- **8/8 NUCLEUS workload TOMLs** — all springs have projectNUCLEUS validation workloads
-- **Zero open upstream gaps** — JH-11, GAP-03/06/09/12, U1-U3, all Tier 3 items resolved
+All 8 springs completed eukaryotic evolution. The ecosystem is now pre-wiring
+sovereignty capabilities to enable the stadial (external validation) phase.
 
-### Upcoming Horizons
+**Completed (post-interstadial green):**
+- 8/8 UniBin, certification organelle, scenario registry, CI cross-sync
+- 8/8 skunkBat Rust IPC, `method.register`, `composition.status`, NUCLEUS workloads
+- Zero open upstream gaps — all primals shipped, all L1 debt resolved
+- lithoSpore scaffolded (sporeGarden/lithoSpore): 9 crates, 7 science modules
 
-**Tier 4 Rewiring** (now unblocked by JH-11):
-- IPC-first defaults for all inter-primal communication
-- `barracuda` as `optional = true` with feature-gated library imports
-- `CompositionContext` for all cross-primal calls
+**Interstadial Exit Gate** (5 pillars — full details: `INTERSTADIAL_EXIT_CRITERIA.md`):
 
-**JH-5 Audit Forwarding** (now unblocked by skunkBat Phase 2):
-- Cross-primal audit events → rhizoCrypt DAG + sweetGrass braid
-- Springs wire skunkBat into deploy graphs (8/8 have Rust modules or graph nodes)
+| Pillar | Gate Condition | Status |
+|--------|---------------|--------|
+| 1. Primal Sovereignty | BearDog TLS shadow :8443, Songbird NAT + VPS, NestGate pipeline, BTSP auth, MethodGate 13/13 | Integration remaining (upstream shipped) |
+| 2. NUCLEUS Deployments | H2-2b/3a/3b/3c in shadow-run state | Not yet running |
+| 3. ABG Hosting | Thread 1 WCM compositions via provenance trio | Mapped, not all exercised |
+| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | All SKIP (awaiting spring reproductions) |
+| 5. River Delta | 4+ springs `optional=true`, wetSpring < 5 PG, air/neural gS L4 | 3/4+ springs, 8 PG open |
 
-**NUCLEUS Sovereignty Horizons**:
-- H2 Step 2b: BTSP auth for JupyterHub (replaces PAM)
-- H2 Step 3a: NestGate + petalTongue content pipeline (sovereign extracellular)
-- H2 Step 3b: BearDog TLS shadow run on port 8443 (upstream shipped)
-- H2 Step 3c: Songbird NAT + VPS relay integration (upstream shipped)
-- H2 Step 4: Sovereign DNS (knot-dns authoritative, BTSP direct resolution)
-- H3: Primal-only (JupyterHub → petalTongue, GitHub → Forgejo, plasmidBin → NestGate)
+### Stadial Preview — External Validation Drives Evolution
 
-**Spring → plasmidBin Deployment**:
-- Springs produce UniBin release binaries → plasmidBin GitHub Releases
-- projectNUCLEUS workload TOMLs reference fetched binaries for science validation
-- 8/8 springs have workload TOMLs (healthSpring biosignal/microbiome/certification added May 11)
+The stadial begins when the exit gate clears. External pressure drives evolution:
+
+| External Driver | Validates | Target |
+|----------------|-----------|--------|
+| Cloudflare baselines | BearDog TLS + Songbird NAT parity | H2-3b/3c shadow → cutover |
+| GitHub → Forgejo | CI, plasmidBin, repo sovereignty | H3-02/03/04 |
+| Barrick Lab USB | lithoSpore artifact end-to-end | Phase 5 deployment |
+| Upstream crates | Community acceptance | wgsl-precision, proc-sysinfo |
+| Dimforge/wgmath | Peer WGSL validation | Proof-of-work engagement |
+| Framework parity | Computational correctness | Kokkos, LAMMPS, SciPy |
+| ABG users | Real science on sovereign infra | Foundation Thread 1 |
+
+### Interstadial Remaining Work
+
+**Pillar 1 — Primal Sovereignty Pre-Wire:**
+- BearDog TLS shadow on :8443 (H2-3b)
+- Songbird NAT + VPS relay (H2-3c)
+- NestGate + petalTongue content pipeline (H2-3a)
+- BTSP JupyterHub authenticator dual-auth (H2-2b)
+- JH-5 audit forwarding: skunkBat → rhizoCrypt → sweetGrass
+- MethodGate for toadStool + Squirrel (11/13 → 13/13)
+
+**Pillar 2 — NUCLEUS Deployments:**
+- Shadow-run state for H2-2b/3a/3b/3c
+- Foundation Threads 4+7 workloads running
+
+**Pillar 3 — ABG Hosting:**
+- Thread 1 WCM compositions through provenance trio
+
+**Pillar 4 — lithoSpore:**
+- groundSpring B2 reproduction → ltee-fitness module
+- Fetch real data from Dryad/NCBI
+- 2+ modules PASS at Tier 1 (Python)
+
+**Pillar 5 — River Delta:**
+- airSpring + groundSpring → `optional=true` (Tier 4)
+- wetSpring: close 4+ of 8 PG gaps
+- airSpring/neuralSpring → gS L4
+- Foundation: seed Threads 3, 5, 8, 10
 
 **LTEE Targeted GuideStone** (projectNUCLEUS subsystem):
-- First artifact that buds from the ecosystem into a portable, self-contained deployment
-- USB-deployable: 7 science modules reproducing Barrick/Lenski LTEE papers + new Anderson-QS predictions
-- Three-tier: Python (universal) → Rust ecoBin (Linux) → Primal composition (NUCLEUS)
-- No containers — ecoBin/genomeBin binaries, primals self-container via genomeBin if needed
-- 36 paper-spring assignments seeded across 6 springs (wetSpring, neuralSpring, groundSpring, hotSpring, healthSpring, airSpring)
-- liveSpore.json tracks deployment provenance; data freshness protocol for source URI re-fetch
-- Standard: `TARGETED_GUIDESTONE_STANDARD.md`; subsystem handoff: `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md`
+- First artifact budding from ecosystem into portable deployment
+- 7 science modules, 36 paper-spring assignments across 6 springs
+- Three-tier: Python → Rust ecoBin → Primal composition
+- Standard: `TARGETED_GUIDESTONE_STANDARD.md`; handoff: `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md`
 
 ### Remaining Spring Gaps (May 11 — post-interstadial push)
 
