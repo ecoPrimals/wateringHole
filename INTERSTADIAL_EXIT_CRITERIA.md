@@ -47,28 +47,50 @@ two categories: **upstream debt** (primal code gaps at the gate) and
 
 **Upstream debt (blocked at the primalSpring gate):**
 
-None. **13/13 primals pass the primalSpring gate** (May 11, 2026):
+**One critical gap exposed by downstream composition** (May 11, 2026):
+
+- **NestGate `content.put` transport parity**: NestGate **does implement**
+  `content.put/get/list/resolve/publish/collections` in `content_handlers.rs`
+  on the **primary unix_socket_server dispatch path**. However, `content.*` methods
+  are **NOT routed** through SemanticRouter, isomorphic IPC, or the HTTP API handler.
+  Callers hitting those transport paths get "Method not found." This is a
+  **transport/router parity gap**, not a missing implementation.
+  **Blocks H2-05–09 — NestGate must wire `content.*` through all transport paths.**
+  `publish_sporeprint.sh` + `nestgate_content_parity.sh` ready to validate.
+
+All other primals pass the gate:
 - MethodGate (JH-0 + JH-2): **13/13** — squirrel shipped `method_gate.rs`
 - BTSP Phase 3 AEAD: **13/13**
 - 413-method registry: zero drift
 - Edition 2024, deny.toml (ring + openssl), plasmidBin: **13/13**
 
-**Downstream absorption (L3/L4 integration — shipped capabilities awaiting wiring):**
+**Downstream-surfaced per-primal debt (composition gaps, not gate-blocking):**
+
+| # | Primal | Finding | Severity |
+|---|--------|---------|----------|
+| D1 | toadStool | No env-var expansion in workload TOMLs (absolute paths only) | Medium |
+| D2 | squirrel | `LocalProcessProvider` spawns directly — should delegate to toadStool IPC | Medium |
+| D3 | barraCuda | Embeds own crypto (`chacha20poly1305`, `hkdf`) — should delegate to bearDog IPC | Low |
+| D4 | loamSpine | `session.commit` method/param mismatch — RootPulse Phase 5 80% executable | Medium |
+| D5 | petalTongue | Web mode needs NestGate backend + catch-all route + config schema | Blocked on NestGate |
+
+**Downstream absorption (shipped capabilities awaiting wiring):**
 
 | # | Capability | Primal | Shipped | Absorption Owner |
 |---|-----------|--------|---------|-----------------|
 | 1a | TLS termination + rate limits | BearDog | Yes (Wave 100) | L4 (NUCLEUS): H2-3b shadow on :8443 |
 | 1b | NAT chain (STUN/TURN) | Songbird | Yes (Waves 196-197) | L4 (NUCLEUS): H2-3c VPS relay |
-| 1c | Content pipeline (`content.put`) | NestGate | Partial | L4 (NUCLEUS): H2-3a publish pipeline |
-| 1d | Web mode (`--docroot`) | petalTongue | Partial | L4 (NUCLEUS): H2-3a NestGate-backed static |
+| 1c | Content pipeline (`content.put`) | NestGate | **NOT IMPLEMENTED** | **L1 (NestGate): ship `content.put/get/list` + collections** |
+| 1d | Web mode (`--docroot`) | petalTongue | Partial (blocked on 1c) | L4 (NUCLEUS): H2-3a NestGate-backed static |
 | 1e | BTSP authenticator | BearDog | Ready | L4 (NUCLEUS): H2-2b JupyterHub plugin |
 | 1f | `composition.deploy(graph)` | biomeOS | API exists | L4 (NUCLEUS): gate wiring, membrane signals |
 | 1g | Audit forwarding (JH-5) | skunkBat | Phase 2 | L3/L4: wire deploy graphs |
 | 1h | Cross-primal tokens (JH-11) | BearDog | Done | L3 (Springs): CompositionContext wiring |
 | 1j | Sovereign DNS | Songbird/BearDog | DoT intermediate | L4 (NUCLEUS): H2-4 knot-dns (can defer to stadial) |
 
-**Exit gate**: MethodGate **13/13 DONE**. Remaining: downstream absorption items
-1a–1h in active shadow-run or wiring state.
+**Exit gate**: MethodGate **13/13 DONE**. **NestGate `content.put` is the critical
+path** — this is upstream debt (L1) that blocks downstream absorption (1c → 1d → H2-05–09).
+Remaining items 1a, 1b, 1e–1h are L4 absorption work.
 1j (full sovereign DNS) may defer to stadial — DoT is sufficient for exit.
 
 ### Pillar 2: projectNUCLEUS Deployments
@@ -102,40 +124,46 @@ graphs (Nest + Node atomics) with provenance trio producing verifiable output.
 
 | # | Target | Current State | Interstadial Remaining |
 |---|--------|---------------|----------------------|
-| 4a | Spring LTEE paper queue started | 36 items queued in 6 springs | Springs begin B1/B2/B3 reproductions |
-| 4b | At least 2 modules functional | All 7 modules SKIP | groundSpring B2 → ltee-fitness (critical path) |
+| 4a | Spring LTEE paper queue started | **ACTIVE** — 4 springs reproducing | Continue B3+ reproductions |
+| 4b | At least 2 modules functional | groundSpring B2+B1 **COMPLETE** (Python+Rust) | Integrate into lithoSpore ltee-fitness + ltee-mutation |
 | 4c | Data fetched and hashed | Templates in data.toml | Fetch Wiser 2013, Barrick 2009 from Dryad/NCBI |
-| 4d | Python Tier 1 baselines running | Scaffold only | Implement modules 1+2 with real data |
+| 4d | Python Tier 1 baselines running | groundSpring `control/ltee_*` + `validate` bins | Wire into lithoSpore module structure with real data |
+
+LTEE reproduction status (May 11):
+- **groundSpring**: B2 (Wiser 2013) Python 9/9 + Rust 10/10 PASS; B1 (Barrick 2009) Python 8/8 + Rust 8/8 PASS
+- **hotSpring**: B2 (Anderson fitness) STARTED — Exp 189, notebook shipped
+- **wetSpring**: B7 (Tenaillon 2016) STARTED — 264 NCBI genomes, mutation accumulation
+- **neuralSpring**: B1 (Barrick 2009) STARTED — Python baseline 8/8 PASS
 
 **Exit gate**: At least 2 modules producing PASS at Tier 1 (Python) with real
-data fetched and BLAKE3-hashed. groundSpring is the critical path — it
-contributes statistical methods to all 7 modules.
+data fetched and BLAKE3-hashed. **groundSpring B2+B1 reproductions are complete** —
+remaining work is integration into lithoSpore module structure and data fetching.
 
-### Pillar 5: River Delta (Springs)
+### Pillar 5: River Delta (Springs) — **GATE MET** (May 11, 2026)
 
-| # | Target | Current State | Interstadial Remaining |
-|---|--------|---------------|----------------------|
-| 5a | Tier 4: 4+ springs `optional=true` | 3 (ludoSpring, wetSpring, neuralSpring) | airSpring, groundSpring, healthSpring, or hotSpring |
-| 5b | wetSpring PG gaps | 8 open (PG-02,03,04,05,06,10,17,18) | Close at least 4 of 8 |
-| 5c | guidestone convergence | airSpring L2+, neuralSpring L3 | Both → gS L4 |
-| 5d | Foundation seeding | 5/10 threads active | Threads 3, 5, 8, 10 need sources/targets |
-| 5e | plasmidBin: all springs staged | 6/8 staged | ludoSpring (composed), primalSpring (special) |
-| 5f | LTEE paper queue progress | 36 items queued | Begin reproductions (feeds Pillar 4) |
-| 5g | CompositionContext wiring | PrimalClient encapsulated (L2 design) | L2 coordination pass |
+| # | Target | Current State | Status |
+|---|--------|---------------|--------|
+| 5a | Tier 4: 4+ springs `optional=true` | **8/8** — all springs IPC-first (`default = []`) | **DONE** |
+| 5b | wetSpring PG gaps below 5 | **4 open** (PG-02, PG-03, PG-04, PG-05 — all external) | **DONE** |
+| 5c | guidestone convergence | airSpring **L4**, neuralSpring **L5** | **EXCEEDED** |
+| 5d | Foundation seeding | **7/10** threads with spring seeds (2, 3, 5, 6, 7, 9, 10) | **DONE** |
+| 5e | plasmidBin: all springs staged | 6/8 staged (ludoSpring composed, primalSpring special) | On track |
+| 5f | LTEE paper queue progress | **4 springs reproducing** (groundSpring B2+B1 DONE, hotSpring B2, wetSpring B7, neuralSpring B1) | **DONE** |
+| 5g | CompositionContext wiring | PrimalClient encapsulated (L2 design) | L2 coordination pass pending |
 
-**Exit gate**: 4+ springs at `optional=true`, wetSpring below 5 open PG gaps,
-airSpring and neuralSpring at gS L4, at least 2 foundation threads newly
-seeded with sources/targets.
+**Exit gate**: **ALL conditions met.** 8/8 Tier 4, wetSpring at 4 PG (below 5),
+airSpring L4, neuralSpring L5 (exceeded L4 target), 7/10 foundation threads seeded,
+LTEE reproductions active across 4 springs.
 
 ---
 
 ## Interstadial Exit Gate — Summary Checklist
 
 ```
+[ ] Pillar 1: NestGate `content.put/get` implemented — **CRITICAL PATH** (blocks H2-05–09)
 [ ] Pillar 1: BearDog TLS shadow running on :8443
 [ ] Pillar 1: Songbird NAT + VPS relay operational
-[ ] Pillar 1: NestGate content pipeline serving content
-[ ] Pillar 1: petalTongue web mode operational
+[ ] Pillar 1: petalTongue web mode + NestGate backend operational
 [ ] Pillar 1: BTSP auth dual-auth shadow running
 [ ] Pillar 1: JH-5 audit forwarding wired in deploy graphs
 [x] Pillar 1: MethodGate 13/13 (squirrel shipped May 11)
@@ -144,10 +172,10 @@ seeded with sources/targets.
 [ ] Pillar 3: Thread 1 WCM compositions through provenance trio
 [ ] Pillar 4: 2+ lithoSpore modules PASS at Tier 1
 [ ] Pillar 4: Real data fetched from Dryad/NCBI
-[ ] Pillar 5: 4+ springs at barraCuda optional=true
-[ ] Pillar 5: wetSpring < 5 open PG gaps
-[ ] Pillar 5: airSpring + neuralSpring at gS L4
-[ ] Pillar 5: 2+ new foundation threads seeded
+[x] Pillar 5: 8/8 springs at barraCuda optional=true (exceeded 4+ target)
+[x] Pillar 5: wetSpring 4 open PG gaps (all external — below 5 threshold)
+[x] Pillar 5: airSpring gS L4, neuralSpring gS L5 (exceeded L4 target)
+[x] Pillar 5: 7/10 foundation threads seeded (exceeded 2+ new target)
 ```
 
 When all items are checked, the interstadial is complete and the stadial
