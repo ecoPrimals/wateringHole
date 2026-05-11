@@ -64,10 +64,9 @@ NUCLEUS deployments via the plasmidBin depot pattern:
 - **primalSpring v0.9.21 Phase 55b**: guideStone Level 4 (**187/187 live NUCLEUS ALL PASS — 13/13 BTSP authenticated, 8 cellular graphs BTSP-enforced**, 41/41 bare, BLAKE3 P3, seed provenance Layer 0.5, BTSP escalation Layer 1.5, cellular deployment Layer 7, biomeOS v3.36 absorbed (+ v3.36: BTSP Phase 3 `btsp.negotiate` ChaCha20-Poly1305 + NULL fallback, 14 stale EVOLVED comments purged), NestGate v0.4.70 S48 absorbed (native encrypt-at-rest + auth bypass), Squirrel AN absorbed (HTTP providers + DISCOVERY_SOCKET + crypto foundation), Songbird W178 absorbed (anyhow migration)), fragment-first graphs, 631 tests, two-tier crypto architecture, plasmidBin depot. **Upstream gaps narrowed**: NestGate encrypt-at-rest RESOLVED, Squirrel discovery RESOLVED. Remaining: BearDog purpose-key RPC, rhizoCrypt/sweetGrass Tower delegation, loamSpine BTSP activation
 - **guideStone pattern**: Self-validating NUCLEUS composition (5 properties: deterministic, traceable, self-verifying, env-agnostic, tolerance-documented). Proven by hotSpring-guideStone-v0.7.0. primalSpring guideStone now validates base composition for all downstream. Standard at `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md` v1.1.0.
 - **plasmidBin genomeBin depot**: Full cross-architecture binary depot (46 binaries, 6 target triples, Tier 1 39/39). `build_ecosystem_genomeBin.sh` replaces musl-only script with 9-target matrix (Tier 1 MUST / Tier 2 SHOULD / Tier 3 NICE per ecoBin Architecture Standard). All upstream armv7/nestgate gaps closed Phase 45. Springs pull, deploy NUCLEUS, validate externally. See `primalSpring/wateringHole/PLASMINBIN_DEPOT_PATTERN.md`.
-- **Active delta springs**: hotSpring v0.6.32 (guideStone Level 5 — certified), healthSpring V59 (guideStone Level 5), neuralSpring V138 (guideStone Level 3), wetSpring V151 (guideStone Level 4+)
-- **primalSpring guideStone**: `primalspring_guidestone` binary — 9-layer base composition certification (including seed provenance L0.5, BTSP escalation L1.5, cellular deployment L7). **187/187 ALL PASS** against live 12-primal NUCLEUS (**13/13 BTSP authenticated**, 8 cellular graphs BTSP-enforced). Base layer that domain guideStones inherit.
-- **Pre-composition springs**: airSpring v0.10.0, groundSpring V124
-- **Composing springs**: ludoSpring V53 (pure composition — no spring binary deploys, 12-node cell graph, 30 capabilities, BTSP-enforced, 60Hz tick, 817 tests)
+- **Active delta springs (May 11, 2026 — all Tier 4 IPC-first)**: hotSpring v0.6.32 (gS L6 certified, LTEE B2, 3-GPU sovereign), healthSpring V63 (gS L5, Thread 3 seeded), neuralSpring S201b (gS L5, LTEE B1), wetSpring V163 (gS L4, LTEE B7, unified discovery), airSpring v0.10.0 (gS L4, barraCuda 0.3.13), groundSpring V135 (gS L4, LTEE B2+B1 COMPLETE), ludoSpring V63 (gS L4, SPDX, 854 tests)
+- **primalSpring guideStone**: `primalspring_guidestone` binary — 9-layer base composition certification. Base layer that domain guideStones inherit.
+- **Library-to-binary rewiring COMPLETE**: 8/8 springs at Tier 4 (`default = []`, barracuda optional). All springs now IPC-first for NUCLEUS deployments.
 
 Mountain season work continues for cross-primal protocols: ionic bond
 negotiation, BTSP Phase 3, compute.dispatch standardization.
@@ -440,8 +439,9 @@ pillars define the exit gate:
    Foundation Threads 4+7 workloads running
 3. **ABG Hosting**: Thread 1 WCM compositions through provenance trio
 4. **lithoSpore**: 2+ modules PASS at Tier 1 with real NCBI/Dryad data
-5. **River Delta**: 4+ springs at `optional=true`, wetSpring < 5 PG gaps,
-   airSpring + neuralSpring at gS L4, 2+ new foundation threads seeded
+5. **River Delta**: ~~4+ springs at `optional=true`~~ **DONE — 8/8 Tier 4**,
+   ~~wetSpring < 5 PG~~ **DONE — 4 open**, ~~air/neural gS L4~~ **DONE — L4/L5**,
+   7/10 foundation threads seeded — **PILLAR 5 GATE MET**
 
 Full details: `INTERSTADIAL_EXIT_CRITERIA.md`
 
@@ -467,9 +467,9 @@ ends when shadow runs prove parity and external deployments succeed.
 - BTSP JupyterHub authenticator dual-auth shadow (H2-2b — ready)
 - JH-5 audit forwarding wired: skunkBat → rhizoCrypt → sweetGrass
 - ~~squirrel MethodGate~~ **RESOLVED** — 13/13 at gate (May 11)
-- lithoSpore: groundSpring B2 reproduction → first module PASS
-- River delta: airSpring + groundSpring → `optional=true`
-- Foundation: seed Threads 3 (immuno) and 5 (LTEE) sources/targets
+- lithoSpore: ~~groundSpring B2 reproduction~~ **DONE** (B2+B1 PASS) → integrate into lithoSpore modules
+- ~~River delta: airSpring + groundSpring → `optional=true`~~ **DONE** — 8/8 Tier 4
+- ~~Foundation: seed Threads 3 + 5~~ **DONE** — 7/10 threads seeded (2, 3, 5, 6, 7, 9, 10)
 - ABG: exercise Thread 1 WCM compositions through provenance trio
 
 ### Stadial (Months — external validation drives evolution)

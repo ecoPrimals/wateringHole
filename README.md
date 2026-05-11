@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 11, 2026 (Interstadial exit criteria defined — 5 pillars, sovereignty pre-wire, stadial boundary mapped, LTEE Targeted GuideStone, lithoSpore scaffolded)
+**Last Updated**: May 11, 2026 (River delta Tier 4 complete — 8/8 IPC-first, LTEE reproductions active, guideStone convergence, infra GPU sovereignty)
 
 ---
 
@@ -375,16 +375,18 @@ You do not need to know about other primals. You need to know what you can do, a
 
 ## Current Ecosystem State (May 2026)
 
-- **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing), zero debt
+- **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing), MethodGate 13/13. **One critical gap**: NestGate `content.*` transport parity (implemented on primary dispatch, not routed on SemanticRouter/IPC/HTTP — blocks Pillars 1-3)
 - **413 registered capability methods** (primalSpring canonical, zero drift)
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
 - **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 680 tests, two-tier validation (Rust + Live), `CompositionContext` throughout, zero debt
-- **8 springs** completed primordial extinction — all at eukaryotic UniBin (certification organelle, scenario registry, fossil record, zero debt/clippy)
-- **12,900+ tests** across the river delta (wetSpring 1,962 · neuralSpring 1,450 · airSpring 1,327 · groundSpring 1,101 · hotSpring 1,025 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
+- **8 springs** — all Tier 4 IPC-first (`default = []`, barracuda optional), all eukaryotic UniBin, LTEE reproductions active
+- **13,100+ tests** across the river delta (wetSpring 1,613 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,125 · hotSpring 1,025 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
 - **1 garden** active (esotericWebb from ludoSpring)
-- **projectNUCLEUS** — 13-primal Full NUCLEUS on active gate, cell membrane architecture, deep debt evolution sweep complete (pappusCast modular, zero hardcoded paths, gate-agnostic systemd, specs reconciled). MethodGate 11/13 (toadStool/squirrel upstream handback delivered). **Next priority: NestGate content pipeline for full data/compute chains**
-- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets
-- **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules, 36 paper-spring assignments, three-tier deployment (Python → Rust ecoBin → Primal), USB-deployable to Barrick Lab
+- **projectNUCLEUS** — 13-primal Full NUCLEUS on active gate, cell membrane architecture, deep debt evolution sweep complete, MethodGate **13/13**. Per-primal composition debt surfaced (NestGate, toadStool, squirrel, barraCuda, loamSpine). **Next priority: NestGate `content.put` for sovereign data/compute chains**
+- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets; 7/10 threads with spring seeds (Threads 2, 3, 5, 6, 7, 9, 10)
+- **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules, 36 paper-spring assignments, active reproductions (groundSpring B2+B1 COMPLETE, hotSpring B2 STARTED, wetSpring B7 STARTED, neuralSpring B1 STARTED)
+- **benchScale** — GPU lifecycle automation (VFIO/IOMMU), pure-Rust SSH + NoCloud ISO, libvirt VM orchestration
+- **agentReagents** — GPU sovereign VM builder: K80 tooling, Titan V patches, verification modules
 
 ### Current Phase: INTERSTADIAL — Sovereignty Pre-Wire
 
@@ -394,18 +396,22 @@ sovereignty capabilities to enable the stadial (external validation) phase.
 **Completed (post-interstadial green):**
 - 8/8 UniBin, certification organelle, scenario registry, CI cross-sync
 - 8/8 skunkBat Rust IPC, `method.register`, `composition.status`, NUCLEUS workloads
-- Zero open upstream gaps — all primals shipped, all L1 debt resolved
+- **8/8 Tier 4 IPC-first** — every spring `default = []`, barracuda optional
+- Zero open upstream gaps — 13/13 MethodGate, 13/13 BTSP AEAD, all L1 debt resolved
 - lithoSpore scaffolded (sporeGarden/lithoSpore): 9 crates, 7 science modules
+- LTEE reproductions active: groundSpring B2+B1 COMPLETE, hotSpring B2, wetSpring B7, neuralSpring B1
+- GuideStone convergence: hotSpring L6, neuralSpring/healthSpring L5, wetSpring/groundSpring/ludoSpring/airSpring L4
+- benchScale GPU lifecycle + agentReagents K80/Titan V sovereign tooling operational
 
 **Interstadial Exit Gate** (5 pillars — full details: `INTERSTADIAL_EXIT_CRITERIA.md`):
 
 | Pillar | Gate Condition | Status |
 |--------|---------------|--------|
-| 1. Primal Sovereignty | BearDog TLS shadow :8443, Songbird NAT + VPS, NestGate pipeline, BTSP auth, MethodGate 13/13 | Integration remaining (upstream shipped) |
+| 1. Primal Sovereignty | NestGate `content.put`, BearDog TLS shadow, Songbird NAT, BTSP auth | **MethodGate DONE**; **NestGate `content.put` CRITICAL PATH** |
 | 2. NUCLEUS Deployments | H2-2b/3a/3b/3c in shadow-run state | Not yet running |
 | 3. ABG Hosting | Thread 1 WCM compositions via provenance trio | Mapped, not all exercised |
-| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | All SKIP (awaiting spring reproductions) |
-| 5. River Delta | 4+ springs `optional=true`, wetSpring < 5 PG, air/neural gS L4 | 3/4+ springs, 8 PG open |
+| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | **ACTIVE** — groundSpring B2+B1 complete, data integration next |
+| 5. River Delta | 4+ springs `optional=true`, wetSpring < 5 PG, air/neural gS L4 | **GATE MET** — 8/8 Tier 4, 4 PG open, air L4, neural L5 |
 
 ### Stadial Preview — External Validation Drives Evolution
 
@@ -424,12 +430,25 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 ### Interstadial Remaining Work
 
 **Pillar 1 — Primal Sovereignty Pre-Wire:**
-- BearDog TLS shadow on :8443 (H2-3b)
-- Songbird NAT + VPS relay (H2-3c)
-- NestGate + petalTongue content pipeline (H2-3a)
-- BTSP JupyterHub authenticator dual-auth (H2-2b)
-- JH-5 audit forwarding: skunkBat → rhizoCrypt → sweetGrass
-- MethodGate for toadStool + Squirrel (11/13 → 13/13)
+- ~~MethodGate for toadStool + Squirrel (11/13 → 13/13)~~ **DONE** — 13/13
+- **NestGate `content.*` transport parity — CRITICAL PATH.** NestGate **has implemented** `content.put/get/list/resolve/publish/collections` on the primary unix_socket_server dispatch. BUT: `content.*` is **not routed** through SemanticRouter, isomorphic IPC adapter, or HTTP API handler — callers on those paths get "Method not found." This is a **transport/router parity gap**. Blocks H2-05–09, petalTongue sovereign serving, plasmidBin hosting, foundation layers. `publish_sporeprint.sh` + `nestgate_content_parity.sh` ready to validate. **NestGate must wire `content.*` through all transport paths.**
+- BearDog TLS shadow on :8443 (H2-3b) — L4 absorption (upstream shipped)
+- Songbird NAT + VPS relay (H2-3c) — L4 absorption (upstream shipped)
+- petalTongue web mode + NestGate backend (H2-3a) — blocked on NestGate
+- BTSP JupyterHub authenticator dual-auth (H2-2b) — L4 absorption (upstream ready)
+- JH-5 audit forwarding: skunkBat → rhizoCrypt → sweetGrass (Phase 3)
+
+**Downstream-surfaced per-primal debt** (composition gaps exposed by projectNUCLEUS):
+- toadStool: CLI expands `${VAR}` but JSON-RPC `compute.execute` path does not — IPC callers see no expansion
+- squirrel: `LocalProcessProvider` is intentional dev stub (errors) — but capability-based delegation to toadStool **not wired**
+- barraCuda: embedded crypto (`chacha20poly1305`, `hkdf`, `hmac`) → should delegate to bearDog IPC (dedup)
+- loamSpine: `session.commit` API exists (+ aliases) — graph spec uses wrong method name or param shape (contract mismatch)
+
+**primalSpring validation gap** (why this wasn't caught upstream):
+- `content` not in `ALL_CAPS` routing table — `CompositionContext.call("content", ...)` fails
+- Zero `content.*` scenarios, tests, or graph steps — only `storage.*` exercised
+- 413-method registry lists `content.*` but drift check only verifies string presence, not semantic correctness
+- **Wave 7** (contract testing) added to primalSpring to close this gap class permanently
 
 **Pillar 2 — NUCLEUS Deployments:**
 - Shadow-run state for H2-2b/3a/3b/3c
@@ -439,48 +458,46 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 - Thread 1 WCM compositions through provenance trio
 
 **Pillar 4 — lithoSpore:**
-- groundSpring B2 reproduction → ltee-fitness module
-- Fetch real data from Dryad/NCBI
-- 2+ modules PASS at Tier 1 (Python)
+- ~~groundSpring B2 reproduction~~ **DONE** — Python 9/9 + Rust 10/10 PASS (Wiser 2013 fitness dynamics)
+- ~~groundSpring B1 reproduction~~ **DONE** — Python 8/8 + Rust 8/8 PASS (Barrick 2009 neutral mutation)
+- Integrate groundSpring reproductions into lithoSpore ltee-fitness + ltee-mutation modules
+- Fetch real data from Dryad/NCBI, BLAKE3-hash
+- 2+ modules PASS at Tier 1 (Python) — **now achievable** with groundSpring data
 
-**Pillar 5 — River Delta:**
-- airSpring + groundSpring → `optional=true` (Tier 4)
-- wetSpring: close 4+ of 8 PG gaps
-- airSpring/neuralSpring → gS L4
-- Foundation: seed Threads 3, 5, 8, 10
+**Pillar 5 — River Delta:** **GATE CONDITIONS MET** (May 11, 2026)
+- ~~airSpring + groundSpring → `optional=true` (Tier 4)~~ **DONE** — **8/8 springs Tier 4**
+- ~~wetSpring: close 4+ of 8 PG gaps~~ **DONE** — 4 closed (PG-06, PG-10, PG-17, PG-18), 4 remain (all external)
+- ~~airSpring/neuralSpring → gS L4~~ **DONE** — airSpring L4, neuralSpring **L5**
+- Foundation seeding: 7/10 threads with spring seeds (Threads 2, 3, 5, 6, 7, 9, 10)
+- Remaining: LTEE reproductions continue (feeds Pillar 4), foundation Thread 8 seed
 
 **LTEE Targeted GuideStone** (projectNUCLEUS subsystem):
 - First artifact budding from ecosystem into portable deployment
 - 7 science modules, 36 paper-spring assignments across 6 springs
-- Three-tier: Python → Rust ecoBin → Primal composition
+- Active reproductions: groundSpring B2+B1 **COMPLETE**, hotSpring B2, wetSpring B7, neuralSpring B1
 - Standard: `TARGETED_GUIDESTONE_STANDARD.md`; handoff: `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md`
 
-### Remaining Spring Gaps (May 11 — post-interstadial push)
+### Remaining Spring Gaps (May 11 — river delta Tier 4 complete)
 
-Previous 7 gaps resolved (May 10-11):
-- ~~ludoSpring skunkBat~~ → V60 Rust IPC module
-- ~~groundSpring skunkBat~~ → V130 Rust IPC module
-- ~~airSpring method.register~~ → v0.10.0 `ipc/method_register.rs`
-- ~~airSpring deny.toml~~ → **FALSE GAP** — workspace-root `deny.toml` exists, bans `aws-lc-sys`
-- ~~healthSpring skunkBat~~ → V62 deploy graph node
-- ~~hotSpring dead_code~~ → cleaned in post-interstadial push
-
-| Spring | Gap | Severity | Owner Layer |
-|--------|-----|----------|-------------|
-| wetSpring | 8 open primal gaps (PG-01–PG-22, 14 closed) | Medium | L3 (spring) |
-| airSpring | gS Level 2+ (ecosystem median is L4) | Low | L3 (spring) |
-| neuralSpring | gS Level 3 (target L4+) | Low | L3 (spring) |
-| ludoSpring | No .ipynb paper notebooks (Python baselines only) | Low | L3 (spring) |
-| hotSpring | Sovereign GPU barriers (Titan V FECS, K80 PCIe) | Low | L3 (spring + coralReef) |
+| Spring | Version | Tests | gS | Tier 4 | LTEE | Remaining Gaps |
+|--------|---------|------:|:--:|:------:|------|----------------|
+| wetSpring | V163 | 1,613 | L4 | Done | B7 started | 4 external PG gaps (PG-02 provenance, PG-03 capability, PG-04 NestGate, PG-05 toadStool) |
+| neuralSpring | S201b | 1,453 | L5 | Done | B1 started | Gap 11 (18 RPC methods), NestGate weights, inference.rs untracked |
+| hotSpring | v0.6.32 | 1,025 | L6 | Done | B2 started | Titan V FECS (GAP-HS-073), K80 livepatch (GAP-HS-076) |
+| healthSpring | V63 | 999 | L5 | Done | B5/E2/E4 queued | Thread 3 seeded (6/10→7+), ionic bridge blocked upstream |
+| airSpring | v0.10.0 | 1,389 | L4 | Done | E3 queued | AG-001 manifest read, NestGate/Squirrel wiring |
+| groundSpring | V135 | 1,125 | L4 | Done | **B2+B1 DONE** | coralReef IPC, PRNG GPU alignment deferred |
+| ludoSpring | V63 | 854 | L4 | Done | N/A | coralReef IPC (GAP-01), barraCuda domain parity (GAP-02) |
+| primalSpring | v0.9.25 | 680 | L8 | N/A | N/A | PG-54 tick model (LOW), PG-63 Agg docs (LOW) |
 
 ### Evolution Cycle Ownership
 
 Gaps are owned by exactly one layer:
-- **L1 (Primals)**: Zero open — 13/13 clean
+- **L1 (Primals)**: **NestGate `content.*` transport parity CRITICAL** — implemented but not routed on all transports; blocks Pillars 1-3. All other primals clean (13/13 structural)
 - **L2 (primalSpring)**: Canonical registry, CompositionContext, PG-54/PG-63
-- **L3 (Springs)**: Domain debt, barraCuda Tier 4, gS levels, foundation seeding
-- **L4 (Products)**: NUCLEUS sovereignty horizons, composition absorption, deployment
-- **L5 (Foundation)**: Thread coverage, data anchoring, provenance validation
+- **L3 (Springs)**: LTEE reproductions, remaining PG gaps (external), primal composition wiring
+- **L4 (Products)**: NUCLEUS sovereignty horizons H2 shadow runs, NestGate content pipeline, lithoSpore integration
+- **L5 (Foundation)**: Thread coverage (7/10 → 10/10), LTEE data anchoring, provenance validation
 
 See `primalSpring/docs/PRIMAL_GAPS.md` for the full ownership model.
 
