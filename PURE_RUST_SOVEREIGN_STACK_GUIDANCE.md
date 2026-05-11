@@ -1,10 +1,10 @@
 # Pure Rust Sovereign Stack — Cross-Primal Guidance
 
-**Date**: March 12, 2026 (updated — sovereign DRM dispatch proven on hardware)
+**Date**: May 11, 2026 (updated — ALL 3 GPUs sovereign via warm-catch, pure Rust pipeline)
 **Type**: Ecosystem Standard (Evolution)
-**From**: barraCuda (Layer 1 complete) + hotSpring (hardware validation)
+**From**: barraCuda (Layer 1 complete) + hotSpring (hardware validation) + coralReef (warm-catch)
 **To**: coralReef, toadStool, all primals
-**Status**: Active — Layers 1-2 done, Layer 3 partial, Layer 4 breakthrough
+**Status**: Active — Layers 1-2 done, Layer 3 partial, **Layer 4 ALL 3 GPUs sovereign**
 
 > **March 12 update (hotSpring hardware validation)**: Three DRM bugs fixed
 > in coral-driver (`eb4b4eb`). The nouveau sovereign pipeline is now
@@ -336,17 +336,60 @@ layer that talks directly to the GPU driver (or coralDriver).
 | Skip validation layers | Production compute doesn't need Vulkan validation overhead |
 | Feature-gate in wgpu | toadStool could provide a wgpu backend that uses coralDriver instead of Vulkan |
 
-### Layer 4: Sovereign GPU Driver (coralDriver)
+### Layer 4: Sovereign GPU Driver (coralDriver) — ALL 3 GPUs SOVEREIGN (May 2026)
 
-The big evolution. Replace NVK/RADV with pure-Rust GPU drivers.
+> **May 11, 2026 update**: ALL 3 local GPUs (RTX 5060 SM120, Titan V SM70,
+> Tesla K80 SM37) are now sovereign via warm-catch pipeline. VFIO dispatch
+> infrastructure implemented (`VfioChannel::create_warm`). Hardware E2E tests
+> exist (`vfio_warm_write_42_readback`). The dispatch *gap* is now wiring
+> (shader compile → sovereign dispatch → readback on warm GPUs), not hardware
+> bring-up. Pure Rust `coralctl warm-catch` CLI replaces shell scripts.
 
-| Component | Scaffolds From | Language | Notes |
-|-----------|----------------|----------|-------|
-| **coralDriver** | NVK (Mesa) | Rust (target) | Userspace GPU driver: memory alloc, cmd buffers, fences |
-| **coralMem** | NVK + nouveau | Rust (target) | Buffer create/map/copy, staging pool, zero-copy |
-| **coralQueue** | NVK cmd submit | Rust (target) | Compute queue, async dispatch with Rust futures |
-| **vfio backend** | Linux vfio-pci | Rust | Userspace DMA, IOMMU isolation, no kernel driver |
-| **thin kmod** | nouveau | Rust | Minimal kernel module for display-attached GPUs |
+The evolution from "replace NVK/RADV" to "sovereign hardware across 3 GPU
+generations" is now complete at the hardware level:
+
+| Component | Status | Notes |
+|-----------|--------|-------|
+| **coralDriver** | Operational | SM35/SM70/SM120 dispatch, DRM + VFIO backends, ELF patcher |
+| **coralMem** | Operational | Buffer create/map/copy across all 3 GPUs |
+| **coralQueue** | Operational | GPFIFO/pushbuf submission, semaphore fence |
+| **vfio backend** | Proven | RTX 5060 full dispatch, warm-catch on Titan V + K80 |
+| **warm-catch** | Pure Rust | ELF patcher + ember orchestrator + `coralctl warm-catch` CLI |
+
+### What's Sovereign vs What's Still External (May 2026)
+
+**Sovereign (we own, pure Rust):**
+
+| Component | Status |
+|-----------|--------|
+| coral-reef SASS encoders (SM35/SM70/SM120) | Operational, 1314+ tests |
+| coral-reef AMD GFX10/GFX11/GFX9 encoders | Operational |
+| coral-driver DRM/VFIO dispatch | Operational, hardware-proven |
+| ELF patcher (kernel module binary patching) | Operational, `object` crate |
+| Warm-catch pipeline (orchestrator + CLI) | Operational, pure Rust |
+| AMD PM4 dispatch path | Operational |
+| coral-ember lifecycle + coral-glowplug fleet | Production-grade, 664+ tests |
+
+**Still external (not yet sovereign):**
+
+| Dependency | Owner | Path to Sovereignty |
+|------------|-------|---------------------|
+| naga (WGSL parser) | Mozilla / gfx-rs | Separate coral team owns IR-to-IR stability validation loop. Local team does not own. |
+| wgpu (GPU compute in barracuda/toadStool) | gfx-rs | toadStool team evolves; `sovereign-dispatch` feature bypasses wgpu. |
+| PTX for SM120 (requires `ptxas`) | NVIDIA | coralReef compiler team building native SM120 SASS encoder to eliminate. |
+| cudarc (optional feature) | Rust CUDA community | Removed after sovereign dispatch is default path. |
+| `coral-kmod` C kernel modules | coralReef | coralReef kernel team evolving to pure Rust. |
+
+**Upstream-owned evolution (not local team responsibility):**
+
+| Work | Owner Team |
+|------|-----------|
+| naga WGSL parser evolution, IR-to-IR stability | coral naga team |
+| wgpu elimination from default path | toadStool team |
+| coral-ember/glowplug absorption into toadStool | toadStool team |
+| coral-driver hardware access absorption into toadStool | toadStool team |
+| SM120 native SASS encoder (replacing PTX emitter) | coralReef compiler team |
+| `coral-kmod` C → Rust evolution | coralReef kernel team |
 
 ### toadStool Layer 4 — What This Enables
 
@@ -427,7 +470,7 @@ improvement in one primal benefits all consumers.
 | 1 | barraCuda | **DONE** | — | — |
 | 2 | coralReef | **DONE** — NVIDIA SM35-SM120 (Kepler→Blackwell), AMD RDNA2, 1314+ coral-reef tests, VFIO PFIFO + V2 MMU + QMD v5.0 | — | — |
 | 3 | coralReef + barraCuda | **Partial** — coral-gpu API exists; `dispatch_binary` wiring needed | Low | — |
-| 4 | coralReef + toadStool | **In progress** — AMD done, nouveau done, UVM + FECS + RegisterAccess remaining | Medium | Layer 3 |
+| 4 | coralReef + toadStool | **ALL 3 GPUs sovereign** — AMD done, nouveau done, warm-catch proven. Remaining: dispatch validation on warm GPUs, toadStool absorption of coral-driver hardware layer. | Low | Layer 3 |
 
 The key accelerator: we are not writing from scratch. NAK is already Rust.
 NVK has clear Rust-accessible patterns. The AI-dev loop (springs find gaps →

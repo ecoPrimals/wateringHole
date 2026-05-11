@@ -41,7 +41,7 @@ Replace every non-Rust dependency in the GPU compute path with sovereign Rust im
 | Layer | Component | Notes |
 |-------|-----------|--------|
 | 6 | barraCuda | Math, shaders, precision |
-| 5 | naga (fork) | WGSL → SPIR-V + direct ISA |
+| 5 | naga (fork) | WGSL → SPIR-V + direct ISA. Separate coral team owns IR-to-IR stability validation loop; local team does not own naga evolution. |
 | 4 | wgpu / coralGpu | WE OWN |
 | 3 | (optional) | Minimal Vulkan-compatible dispatch |
 | 2 | coralDriver | WE OWN (replaces NVK) |
@@ -70,22 +70,59 @@ Every layer pure Rust in the target; hardware interchangeable; math sovereign.
 | **1** | WGSL polyfills, `compile_shader_f64`/`df64`, Fp64Strategy, NVK workarounds | Complete; gap vs Kokkos-CUDA closed **27× → 3.7×** (93%); Verlet/cell-list wired |
 | **2** | coralReef sovereign compiler (NAK roots), DRM, coralGpu, tarpc/bincode | Complete — SM35/SM70/SM120 compile parity, QMD v5.0, f64 lowering all gens |
 | **3** | Standalone coralNak, WGSL → ISA direct, multi-arch | Partial |
-| **4** | coralDriver, coralMem, coralQueue, vfio backend, thin kmod | RTX 5060 SOLVED (full dispatch); Titan V active (SEC2/ACR); K80 active (FECS internal fw). init.rs monolith split into 11 modules. |
+| **4** | coralDriver, coralMem, coralQueue, vfio backend, thin kmod | **ALL 3 GPUs sovereign (Exp 190).** RTX 5060 full dispatch. Titan V FECS RUNNING via warm-catch (GAP-HS-073 RESOLVED). K80 GDDR5 trained + GPCs active via warm-catch (GAP-HS-076 RESOLVED). Pure Rust warm-catch pipeline (`coralctl warm-catch`). |
 
 Estimated scaffolding: Level 1 days; Level 2 2–4 weeks; Level 3 1–2 months; Level 4 3–6 months (from source doc).
 
-### Layer status (April 27, 2026)
+### Layer status (May 11, 2026)
 
 - **Layers -1–1** (power, glow plug, BAR2): Complete; coral-glowplug production-grade; VFIO-first; boot-persistent.
 - **Layers 2–4** (PFIFO, runlist, GR context, FECS boot):
   - **RTX 5060 (SM120/Blackwell)**: SOLVED — full sovereign VFIO dispatch live (April 16). f64 div/sqrt polyfills, semaphore fence, QMD v5.0, UVM write access all proven.
-  - **Titan V (SM70/Volta)**: ACTIVE — SEC2/ACR boot path under investigation. Warm FECS path blocked by HS mode (STARTCPU rejected when falcon in secure mode). SBR hot reset via VFIO ioctl implemented.
-  - **Tesla K80 (SM37/Kepler GK210)**: ACTIVE — internal firmware protocol (gf100_gr_init_ctxctl_int) implemented. FECS IMEM/DMEM capture from Nouveau, csdata loading (5 register packs), PGOB disable, PRI ring init (VBIOS cmd 0x03), clock recipe capture all proven. Last blocker: truncated internal firmware replaced with full 4096-byte capture.
-- **Layer 5** (shader compilation): Operational — coralReef 1314+ coral-reef tests, WGSL→SASS SM35/SM70/SM120 (Kepler→Blackwell), AMD gfx1030/1100/90a. f64 transcendental lowering for all NVIDIA generations. QMD v5.0 for Blackwell.
+  - **Titan V (SM70/Volta)**: **SOVEREIGN** — FECS RUNNING via binary-patched nouveau warm-catch (GAP-HS-073 RESOLVED). ACR/SEC2 firmware loads FECS natively. FECS_MC = 0x0c060006, PGRAPH enabled, 1 GPC active. PMU absence non-fatal.
+  - **Tesla K80 (SM37/Kepler GK210)**: **SOVEREIGN** — GDDR5 trained (12 GiB), 5 GPCs active via binary-patched nouveau warm-catch (GAP-HS-076 RESOLVED). PMC_ENABLE = 0xfc37b1ef (pop=22), FECS_MC = 0x00060005 (running). Requires upstream `case 0x0f2` one-line patch for nouveau GK210 recognition.
+- **Layer 5** (shader compilation): Operational — coralReef 1314+ coral-reef tests, WGSL→SASS SM35/SM70/SM120 (Kepler→Blackwell), AMD gfx1030/1100/90a. f64 transcendental lowering for all NVIDIA generations. QMD v5.0 for Blackwell. naga WGSL frontend evolution handled by separate coral team (IR-to-IR stability validation loop).
 - **Layer 6** (math/shaders): barraCuda v0.3.12, precision brain + hardware calibration + sovereign compile integration.
-- **toadStool**: GlowPlug socket client, VFIO sysmon, hardware discovery IPC.
+- **toadStool**: GlowPlug socket client, VFIO sysmon, hardware discovery IPC. Ember/glowplug trait surface ready for coral implementation absorption. 22,580 tests.
 
-**Critical path**: K80 FECS boot completion → Titan V SEC2/ACR → three-generation sovereign dispatch pipeline.
+**Critical path**: Sovereign dispatch validation on warm-caught Titan V / K80 → toadStool absorbs coral-ember/glowplug + coral-driver hardware layer → barracuda `sovereign-dispatch` feature default → IPC bridge (`by_domain("compute")` → toadStool dispatches, `by_domain("shader")` → coralReef compiles).
+
+### Warm-Catch Pipeline — Pure Rust (May 2026)
+
+The SEC2/ACR and FECS firmware barriers on Titan V and K80 were bypassed via a
+different strategy: temporarily load a binary-patched `nouveau.ko` with 4
+teardown functions NOP'd at machine-code level, allow nouveau to train memory
+and initialize FECS/GPCs, then swap back to `vfio-pci` before teardown.
+
+The pipeline was initially proven via shell scripts and Python ("jelly strings"),
+then elevated to pure Rust in coralReef:
+
+| Component | Path | Role |
+|-----------|------|------|
+| ELF patcher | `coral-driver/src/tools/elf_patcher.rs` | Pure Rust `nouveau.ko` binary patching via `object` crate |
+| Warm probe | `coral-driver/src/vfio/warm_probe.rs` | Standalone `WarmStateSnapshot` (PMC, PRAMIN, FECS, GPC) |
+| Orchestrator | `coral-ember/src/ipc/handlers_warm_catch.rs` | `ember.warm_catch` RPC: patch → swap → settle → probe → swap back |
+| Pre-check | `coral-driver/src/vfio/sovereign_init.rs` | `warm_catch_pre_check()` detects cold GPU + available warm-catch |
+| CLI | `coralctl warm-catch <BDF>` | Entry point: `--memory-type gddr5\|hbm2\|gddr6`, `--dry-run` |
+
+Era-aware settle: GDDR5=10s (K80), HBM2=12s (Titan V), GDDR6=8s. RAII
+`ModuleCleanupGuard` ensures stock `nouveau.ko` restored even on panic.
+
+### Primal Domain Split — Nest Atomic Pattern (May 2026)
+
+The current `coral-driver` mixes compiler domain (SASS encoding, QMD layout) with
+hardware domain (BAR0, VFIO, GPFIFO, DRM ioctls). Following the Nest atomic pattern
+(NestGate does not embed BearDog's crypto — it calls `crypto.sign` via IPC):
+
+| Domain | Owner | Capability |
+|--------|-------|-----------|
+| Compilation (HOW) | coralReef | `shader.compile.wgsl`, `shader.compile.spirv` |
+| Hardware access (WHERE) | toadStool | `compute.dispatch.execute`, `device.*`, `mmio.*` |
+| Math / workloads (WHAT) | barraCuda | Physics simulations, WGSL shaders |
+
+coralReef should not embed toadStool's hardware access. toadStool should not embed
+coralReef's compiler. They discover each other via `by_domain()` and compose via
+JSON-RPC, just as Songbird discovers BearDog for crypto.
 
 ### Code health (April 27, 2026)
 
