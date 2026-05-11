@@ -797,3 +797,36 @@ rhizocrypt doctor
 12-category scan: all clean. Zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero unwrap/expect in production, zero TODO/FIXME/HACK, all deps pure Rust, all mocks cfg-gated.
 
 **Stadial gate**: 1,623 tests (+1), 0 clippy warnings, 0 fmt diffs. 173 `.rs` files, ~52,774 lines.
+
+### S67 Addendum: Composition Readiness — `payload_ref` Fix + Pipeline Tests (May 11)
+
+primalSpring stadial gate audit (May 11): "rhizoCrypt — MEDIUM (provenance trio pipeline untested in composition). Ensure `dag.event.append` accepts forwarded events from skunkBat (JH-5 Phase 3). Validate that `dag.session.complete` produces a Merkle root that loamSpine can dehydrate."
+
+### Investigation Findings
+
+1. **`payload_ref` silently dropped**: `append_event` and `append_batch` in `service.rs` parsed `payload_ref` from JSON-RPC params into `AppendEventRequest` but never called `VertexBuilder::with_payload()`. Downstream callers sending `payload_ref` got it silently ignored. **Fixed**.
+
+2. **`dag.session.complete` does not exist**: The audit references this method but rhizoCrypt uses `dag.dehydration.trigger` (alias `dag.dehydrate`). Returns Merkle root as 64-char hex — directly compatible with loamSpine's `session_hash` (which accepts hex since its dual-format update). **No code change needed** — the method name mismatch is in the audit's framing.
+
+3. **skunkBat JH-5 Phase 3 event format**: `EventType::Custom { domain: "security", event_name: "..." }` is the correct extension point. The `Custom` variant accepts arbitrary domain strings. Metadata carries severity/source/correlation_id. **Already supported, now tested**.
+
+### What Changed
+
+- **`parse_payload_ref` helper**: Converts `payload_ref` string to `PayloadRef`. 64-char hex → decode as content hash (size=0). Otherwise → Blake3 hash of reference bytes.
+- **`append_event` / `append_batch`**: Now call `builder.with_payload()` when `payload_ref` is present.
+- **8 new composition tests**: skunkBat security event forwarding (single + batch), provenance trio full pipeline (3 vertices → Merkle root → vertex count), hex/URI payload_ref applied to vertex, dehydrate-loamSpine compatibility.
+
+### Composition Interface Summary
+
+| Caller | Method | `event_type` | Notes |
+|--------|--------|-------------|-------|
+| skunkBat JH-5 | `dag.event.append` | `{"Custom": {"domain": "security", "event_name": "gate_rejection"}}` | + `agent` DID, `metadata` for severity/source |
+| RootPulse graph | `dag.event.append` | Any variant | + `payload_ref`, `parents` for DAG structure |
+| Orchestrator | `dag.dehydration.trigger` | — | Returns 64-char hex root for loamSpine `session_hash` |
+| loamSpine | (consumes root) | — | `session_hash` accepts hex; needs `vertex_count` from `dag.session.get` |
+
+### Deep Debt Audit
+
+12-category scan: all clean. Zero `unsafe`, zero `async-trait`, zero `Arc<Mutex>`, zero `Box<dyn Error>` in production, zero unwrap/expect in production, zero TODO/FIXME/HACK, all deps pure Rust, all mocks cfg-gated.
+
+**Stadial gate**: 1,631 tests (+8), 0 clippy warnings, 0 fmt diffs. 173 `.rs` files, ~53,150 lines.
