@@ -82,7 +82,7 @@ The next evolution target is **Tier 2 convergence** (JSON-RPC via `toadstool.val
 | Spring | gS | Tests | Tier | LTEE | Next Step |
 |--------|---:|------:|:----:|:----:|-----------|
 | primalSpring | L8 | 602 | 4 | coord | Shadow run validation, CompositionContext L2 pass |
-| hotSpring | L6 | 1,025 | 4 | B2 | Trio rewire, sovereign dispatch on warm GPUs |
+| hotSpring | L6 | 1,036 | 4 | B2 | Tier 4 IPC-first; 9/12 scenarios; GAP-HS-092 call_by_capability |
 | healthSpring | L5 | 999 | 4 | B5 | BTSP FAMILY_SEED interop, ionic bridge |
 | neuralSpring | L5 | 892 (IPC-first) | 4 | B1 | Tier 2 wired (`toadstool.validate` + `list_workloads`), NestGate wired, CapabilityRouter IPC, deep debt audit all-clear, B1 NUCLEUS workload TOML, Thread 5 ML_SURROGATES wired. V154. |
 | wetSpring | L4 | 1,613 | 4 | B7 | 4 PGs (trio live, `capability.resolve`, NestGate, sovereignty) |
