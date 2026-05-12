@@ -86,10 +86,12 @@ shadow run execution is the remaining gate. Phase 32 atomic model evolution comp
 - **plasmidBin genomeBin depot**: 46 cross-architecture binaries, 6 targets, Tier 1 39/39.
 - **guideStone pattern**: absorbed into UniBin as certification organelle (L8).
 
-Mountain season work continues for: toadStool Phase C integration (batches 1-4
-landed S245-S249, cylinder crate 415 tests; remaining: VFIO channels, sovereign
-init, NvDevice, Phase D local dispatch), Songbird VPS relay, ionic bond runtime,
-`toadstool.validate` Tier 2 science API. `toadstool.list_workloads` is now **WIRED**.
+Mountain season accelerating: toadStool Phase C **COMPLETE** (S245-S250, 7 batches,
+520 cylinder tests, 8,809 workspace), Phase D plumbing in, `toadstool.validate`
+**IMPLEMENTED** (S250). `barracuda.precision.route` **IMPLEMENTED** (precision.rs
++ 649 tests). Songbird TURN server shipped (836 lines, VPS relay progressing).
+coralReef FECS boot sequence + ISA latency shipped. Remaining mountain work:
+Songbird VPS relay completion, coralReef FECS/GPCCS stability, ionic bond runtime.
 
 ### Spring Season (composition elevation)
 
@@ -509,18 +511,19 @@ ends when shadow runs prove parity and external deployments succeed.
 - lithoSpore Tier 1: integrate groundSpring B2+B1 into modules, fetch real data
 - NestGate content pipeline: wire `publish_sporeprint.sh` (Session 60 unblocked)
 
-**Pass 12 — Upstream Sentinel (escalated)**:
-- toadStool Phase C integration (batches 1-4 LANDED S245-S249, cylinder 415 tests; remaining: VFIO channels, sovereign init, NvDevice, Phase D)
-- Songbird VPS relay (blocks NAT shadow → NestGate extracellular)
-- coralReef timeout/FECS stability
+**Pass 12 — Upstream Sentinel (escalated)** — toadStool **RESOLVED**:
+- ~~toadStool Phase C~~ **COMPLETE** (S245-S250, 520 cylinder tests). Phase D plumbing in. `toadstool.validate` IMPLEMENTED.
+- Songbird VPS relay — TURN server shipped, relay progressing (blocks NAT shadow)
+- coralReef — FECS boot sequence shipped, stability progressing
 
 **Pass 13 — Gate Composition**:
 - BTSP JupyterHub dual-auth shadow (H2-2b — ready)
 - ABG: Thread 1 WCM compositions through provenance trio
 - Foundation Threads 3, 4, 8, 9, 10 expressions + seeding
 
-**Pass 14 — Convergence**:
-- Tier 2 Science API (`toadstool.validate` — `list_workloads` already WIRED S245+)
+**Pass 14 — Convergence** — toadStool + barraCuda **RESOLVED**:
+- ~~Tier 2 Science API~~ `toadstool.validate` **IMPLEMENTED** (S250), `list_workloads` WIRED (S245+)
+- ~~`barracuda.precision.route`~~ **IMPLEMENTED** (precision.rs + 649 tests)
 - Ionic runtime live, CompositionContext L2 coordination pass
 - skunkBat E2E operational audit validation
 
