@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
 **Date**: May 12, 2026
-**Version**: v1.5.0 (Phase 32 atomic model alignment)
+**Version**: v1.6.0 (Phase C complete, Tier 2 unblocked, ecosystem wave sync)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -82,7 +82,7 @@ shadow run execution is the remaining gate. Phase 32 atomic model evolution comp
 | groundSpring | L4 | 1,125 | LTEE B2+B1 COMPLETE |
 | ludoSpring | L4 | 854 | SPDX, composition-only |
 
-- **Interstadial gate**: Pillar 5 met. Pillars 1-4 structurally wired — transition now requires **shadow run execution**, not more code. See `INTERSTADIAL_EXIT_CRITERIA.md` for pass schedule.
+- **Interstadial gate**: Pillar 5 met. Tier 2 UNBLOCKED. lithoSpore Module 1+2 integrating real data (Pillar 4 progressing). All 7 springs wiring Tier 2. Songbird VPS relay progressing (`songbird relay` CLI + TURN data plane). coralReef FECS error hardening shipped. Transition now requires **shadow run execution + lithoSpore PASS + Songbird relay ops deployment**. See `INTERSTADIAL_EXIT_CRITERIA.md` v1.4.
 - **plasmidBin genomeBin depot**: 46 cross-architecture binaries, 6 targets, Tier 1 39/39.
 - **guideStone pattern**: absorbed into UniBin as certification organelle (L8).
 
@@ -176,10 +176,11 @@ that downstream springs absorb.
 FullNucleus). Surface upstream gaps. Provide the `composition` validation
 library so springs can test parity.
 
-**Current priority**: IPC rewiring is **complete** (8/8 Tier 4). Focus shifts to
-shadow run execution (BearDog TLS, lithoSpore Tier 1), Tier 2 science API
-wiring (`toadstool.validate`), and CompositionContext L2 coordination pass.
-All 13 primals at zero gate debt.
+**Current priority**: IPC rewiring is **complete** (8/8 Tier 4). Tier 2 Science API
+is **UNBLOCKED** (`toadstool.validate` IMPLEMENTED, `barracuda.precision.route`
+IMPLEMENTED). All 7 springs wiring Tier 2. Focus shifts to shadow run execution
+(BearDog TLS, lithoSpore Tier 1), primalSpring gate tests for Tier 2 methods,
+and CompositionContext L2 coordination pass. All 13 primals at zero gate debt.
 
 ### If You're a Domain Spring (hotSpring, wetSpring, etc.)
 
