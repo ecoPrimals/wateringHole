@@ -22,7 +22,7 @@ pushed evolution that collapsed the pass schedule forward significantly.
 | **Phase D plumbing** | 12 | toadStool | `LocalDeviceFactory`, `try_local_dispatch()`, server depends on cylinder. Default still forwards to coralReef — factory hook-up is stadial. |
 | **`barracuda.precision.route`** | 14 | barraCuda | **IMPLEMENTED** — `precision.rs` + 242 unit tests + 407 trio E2E tests |
 | **Songbird TURN server** | 12 | Songbird | 836-line TURN server shipped. MethodGate modularized (944L monolith → 5 focused files). 5 dead examples removed. |
-| **coralReef FECS boot** | 12 | coralReef | `boot_sequence.rs` for FECS init, ISA latency tables, SPH header parsing, PTX SM120 subgroup scans, `naga::Module` direct ingest groundwork |
+| **coralReef FECS boot** | 12 | coralReef | **STABILITY PROOF SHIPPED** (Sprint 7) — `boot_gr_falcons_with_recovery()` (3× retry + PMC GR reset), structured `GrBootOutcome`, all boot/ACR/sovereign paths recovery-aware. Sprint 5-6: ISA latency tables, SPH header parsing, PTX SM120 subgroup scans, `naga::Module` direct ingest, error hardening. |
 
 ### Spring Evolution (same day)
 
@@ -55,7 +55,7 @@ pushed evolution that collapsed the pass schedule forward significantly.
 | Pass | Status | Remaining |
 |------|--------|-----------|
 | **11** | **ACTIVE** | Shadow runs (BearDog TLS, lithoSpore Tier 1, NestGate content) — no blockers, L4 work |
-| **12** | **2/3 RESOLVED** | ~~toadStool Phase C~~ DONE. Songbird VPS relay progressing (TURN shipped). coralReef FECS progressing. |
+| **12** | **3/3 RESOLVED** | ~~toadStool Phase C~~ DONE. Songbird VPS relay progressing (TURN shipped). ~~coralReef FECS~~ **STABILITY PROOF SHIPPED** (Sprint 7). |
 | **13** | Pending | BTSP dual-auth, ABG WCM, foundation threads — L3/L4 composition |
 | **14** | **2/5 RESOLVED** | ~~`toadstool.validate`~~ DONE. ~~`barracuda.precision.route`~~ DONE. Remaining: ionic runtime, skunkBat E2E, Songbird `capability.resolve`. |
 
@@ -64,7 +64,7 @@ pushed evolution that collapsed the pass schedule forward significantly.
 | Primal | What | Status |
 |--------|------|--------|
 | **Songbird** | VPS relay server | TURN foundation shipped — relay implementation in progress |
-| **coralReef** | FECS/GPCCS cold silicon stability | Boot sequence shipped — FECS completion in progress |
+| **coralReef** | FECS/GPCCS cold silicon stability | **SHIPPED** — `boot_gr_falcons_with_recovery()` (3× retry + PMC GR reset), structured `GrBootOutcome`, all boot paths recovery-aware (Sprint 7) |
 
 Everything else on the interstadial exit path is L3/L4 composition and
 shadow run work — not sentinel blockers.
