@@ -47,18 +47,15 @@ two categories: **upstream debt** (primal code gaps at the gate) and
 
 **Upstream debt (blocked at the primalSpring gate):**
 
-**One critical gap exposed by downstream composition** (May 11, 2026):
+~~One critical gap exposed by downstream composition~~ **RESOLVED** (May 11, 2026):
 
-- **NestGate `content.put` transport parity**: NestGate **does implement**
-  `content.put/get/list/resolve/publish/collections` in `content_handlers.rs`
-  on the **primary unix_socket_server dispatch path**. However, `content.*` methods
-  are **NOT routed** through SemanticRouter, isomorphic IPC, or the HTTP API handler.
-  Callers hitting those transport paths get "Method not found." This is a
-  **transport/router parity gap**, not a missing implementation.
-  **Blocks H2-05–09 — NestGate must wire `content.*` through all transport paths.**
-  `publish_sporeprint.sh` + `nestgate_content_parity.sh` ready to validate.
+- ~~NestGate `content.put` transport parity~~ **RESOLVED** (Session 60) — all 8
+  `content.*` methods (`put`, `get`, `exists`, `list`, `publish`, `resolve`,
+  `promote`, `collections`) now wired on all 4 transport surfaces (primary
+  dispatch, SemanticRouter, isomorphic IPC, HTTP API). `lifecycle.status` also
+  added. See `handoffs/NESTGATE_SESSION60_TRANSPORT_PARITY_HANDOFF_MAY11_2026.md`.
 
-All other primals pass the gate:
+**All** primals pass the gate:
 - MethodGate (JH-0 + JH-2): **13/13** — squirrel shipped `method_gate.rs`
 - BTSP Phase 3 AEAD: **13/13**
 - 413-method registry: zero drift
@@ -66,13 +63,13 @@ All other primals pass the gate:
 
 **Downstream-surfaced per-primal debt (composition gaps, not gate-blocking):**
 
-| # | Primal | Finding | Severity |
-|---|--------|---------|----------|
-| D1 | toadStool | No env-var expansion in workload TOMLs (absolute paths only) | Medium |
-| D2 | squirrel | `LocalProcessProvider` spawns directly — should delegate to toadStool IPC | Medium |
-| D3 | barraCuda | Embeds own crypto (`chacha20poly1305`, `hkdf`) — should delegate to bearDog IPC | Low |
-| D4 | loamSpine | `session.commit` method/param mismatch — RootPulse Phase 5 80% executable | Medium |
-| D5 | petalTongue | Web mode needs NestGate backend + catch-all route + config schema | Blocked on NestGate |
+| # | Primal | Finding | Status |
+|---|--------|---------|--------|
+| D1 | toadStool | ~~No env-var expansion~~ — S234 documents IPC contract as pre-resolved only | **RESOLVED** |
+| D2 | squirrel | ~~`LocalProcessProvider` spawns directly~~ — `RemoteComputeProvider` for toadStool IPC shipped | **RESOLVED** |
+| D3 | barraCuda | ~~Embeds own crypto~~ — bearDog Wave 101 shipped `crypto.hkdf_sha256` + `crypto.hmac_verify` IPC | **RESOLVED** |
+| D4 | loamSpine | ~~`session.commit` mismatch~~ — method aliases + hex hash acceptance | **RESOLVED** |
+| D5 | petalTongue | ~~Web mode blocked on NestGate~~ — SPA + CORS shipped, NestGate transport parity shipped | **RESOLVED** |
 
 **Downstream absorption (shipped capabilities awaiting wiring):**
 
@@ -80,18 +77,18 @@ All other primals pass the gate:
 |---|-----------|--------|---------|-----------------|
 | 1a | TLS termination + rate limits | BearDog | Yes (Wave 100) | L4 (NUCLEUS): H2-3b shadow on :8443 |
 | 1b | NAT chain (STUN/TURN) | Songbird | Yes (Waves 196-197) | L4 (NUCLEUS): H2-3c VPS relay |
-| 1c | Content pipeline (`content.put`) | NestGate | **NOT IMPLEMENTED** | **L1 (NestGate): ship `content.put/get/list` + collections** |
-| 1d | Web mode (`--docroot`) | petalTongue | Partial (blocked on 1c) | L4 (NUCLEUS): H2-3a NestGate-backed static |
+| 1c | Content pipeline (`content.put`) | NestGate | **RESOLVED** (Session 60) | ~~L1 debt~~ → L4 absorption: wire `publish_sporeprint.sh` |
+| 1d | Web mode (`--docroot`) | petalTongue | **UNBLOCKED** (SPA+CORS shipped, NestGate transport parity shipped) | L4 (NUCLEUS): H2-3a NestGate-backed static |
 | 1e | BTSP authenticator | BearDog | Ready | L4 (NUCLEUS): H2-2b JupyterHub plugin |
 | 1f | `composition.deploy(graph)` | biomeOS | API exists | L4 (NUCLEUS): gate wiring, membrane signals |
-| 1g | Audit forwarding (JH-5) | skunkBat | Phase 2 | L3/L4: wire deploy graphs |
+| 1g | Audit forwarding (JH-5) | skunkBat | **Phase 3 shipped** | ~~L3/L4~~ → L4 absorption: deploy graph integration |
 | 1h | Cross-primal tokens (JH-11) | BearDog | Done | L3 (Springs): CompositionContext wiring |
 | 1j | Sovereign DNS | Songbird/BearDog | DoT intermediate | L4 (NUCLEUS): H2-4 knot-dns (can defer to stadial) |
 
-**Exit gate**: MethodGate **13/13 DONE**. **NestGate `content.put` is the critical
-path** — this is upstream debt (L1) that blocks downstream absorption (1c → 1d → H2-05–09).
-Remaining items 1a, 1b, 1e–1h are L4 absorption work.
-1j (full sovereign DNS) may defer to stadial — DoT is sufficient for exit.
+**Exit gate**: MethodGate **13/13 DONE**. NestGate transport parity **RESOLVED**
+(Session 60). **Zero L1 upstream debt remains.** All Pillar 1 items are now either
+resolved or L4 absorption work (BearDog TLS shadow, Songbird NAT relay, BTSP
+dual-auth, deploy graph wiring). 1j (full sovereign DNS) may defer to stadial.
 
 ### Pillar 2: projectNUCLEUS Deployments
 
@@ -160,12 +157,12 @@ LTEE reproductions active across 4 springs.
 ## Interstadial Exit Gate — Summary Checklist
 
 ```
-[ ] Pillar 1: NestGate `content.put/get` implemented — **CRITICAL PATH** (blocks H2-05–09)
+[x] Pillar 1: NestGate `content.*` transport parity (Session 60, May 11) — all 8 methods on all 4 surfaces
 [ ] Pillar 1: BearDog TLS shadow running on :8443
 [ ] Pillar 1: Songbird NAT + VPS relay operational
-[ ] Pillar 1: petalTongue web mode + NestGate backend operational
+[x] Pillar 1: petalTongue web mode + NestGate backend — UNBLOCKED (SPA+CORS shipped, NestGate transport parity shipped)
 [ ] Pillar 1: BTSP auth dual-auth shadow running
-[ ] Pillar 1: JH-5 audit forwarding wired in deploy graphs
+[x] Pillar 1: JH-5 audit forwarding wired — skunkBat Phase 3 shipped (rhizoCrypt + sweetGrass forwarding)
 [x] Pillar 1: MethodGate 13/13 (squirrel shipped May 11)
 [ ] Pillar 2: H2-2b/3a/3b/3c all in shadow-run state
 [ ] Pillar 2: Foundation Threads 4+7 workloads running
