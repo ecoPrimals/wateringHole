@@ -92,9 +92,9 @@ The next evolution target is **Tier 2 convergence** (JSON-RPC via `toadstool.val
 
 ### Convergence Priority (Tier 2 — next frontier)
 
-Tier 2 convergence requires `toadstool.validate` + `toadstool.list_workloads`
-upstream (specified in `primalSpring/docs/LIVE_SCIENCE_API.md`, not yet
-implemented). Until that lands, springs focus on:
+Tier 2 convergence is **UNBLOCKED** — `toadstool.validate` IMPLEMENTED (S250),
+`toadstool.list_workloads` WIRED (S245+), `barracuda.precision.route` IMPLEMENTED.
+Wire contract: `primalSpring/docs/LIVE_SCIENCE_API.md`. Springs now focus on:
 
 1. **lithoSpore integration** — groundSpring B2+B1, neuralSpring B1 Rust binaries ready (V154 handoff shipped, LTEE B1 README + NUCLEUS workload TOML for lithoSpore team)
 2. **Foundation thread seeding** — Threads 3, 4, 8, 9, 10 need expressions/targets
@@ -114,7 +114,7 @@ implemented). Until that lands, springs focus on:
 - **lithoSpore Pillar 4 PASS** (May 12): Module 1+2 at Tier 1+2 with BLAKE3 provenance. 27 unit tests, CI wired.
 - **Foundation 10/10 threads active**: All expressions authored. `toadstool.validate` dispatch wired. Graceful health degradation.
 - **413 canonical methods** (301 exercised, 72%): primalSpring registry. Zero drift.
-- **plasmidBin checksum desync**: Songbird + coralReef binaries updated but `checksums.toml` not synced. 11/13 primals verified, 2 removed. Fix pending.
+- ~~**plasmidBin checksum desync**~~: **RESOLVED** (May 12). Pipeline hardened: consolidate fails on harvest error, post-harvest BLAKE3 validation, idempotent harvest (hash-match skip), `update.sh` arch key aligned to full target triples. Standard: `PLASMIDBIN_PUSH_AUTOMATION_STANDARD.md`.
 
 **Previous milestones (May 10-11)**:
 - Primordial extinction: 8/8 UniBin, zero debt markers.
