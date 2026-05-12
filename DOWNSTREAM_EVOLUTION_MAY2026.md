@@ -109,11 +109,14 @@ implemented). Until that lands, springs focus on:
 - **NestGate Session 60**: `content.*` transport parity — all 8 methods on all 4 surfaces. Last L1 upstream debt cleared.
 - **skunkBat JH-5 Phase 3 shipped**: Cross-primal audit forwarding wired (rhizoCrypt + sweetGrass).
 - **Temporal ecosystem review**: Full audit at `primalSpring/docs/TEMPORAL_ECOSYSTEM_REVIEW_MAY12_2026.md`.
-- **Live Science API specified**: `primalSpring/docs/LIVE_SCIENCE_API.md` — Tier 2 wire contract for `toadstool.validate`, `toadstool.list_workloads` (NOT YET IMPLEMENTED upstream).
+- **Live Science API ACTIVE**: `primalSpring/docs/LIVE_SCIENCE_API.md` — `toadstool.validate` IMPLEMENTED (S250), `toadstool.list_workloads` WIRED (S245+), `barracuda.precision.route` IMPLEMENTED. Tier 2 UNBLOCKED.
+- **ALL SENTINELS RESOLVED** (May 12): Songbird Wave 202 VPS relay ops-ready. coralReef Sprint 7 FECS stability proof shipped. Zero upstream code blockers.
+- **lithoSpore Pillar 4 PASS** (May 12): Module 1+2 at Tier 1+2 with BLAKE3 provenance. 27 unit tests, CI wired.
+- **Foundation 10/10 threads active**: All expressions authored. `toadstool.validate` dispatch wired. Graceful health degradation.
 - **413 canonical methods** (301 exercised, 72%): primalSpring registry. Zero drift.
-- **Wave 10 complete**: Phase 32 atomic evolution, compute trio temporal shift, scorecard updated.
+- **plasmidBin checksum desync**: Songbird + coralReef binaries updated but `checksums.toml` not synced. 11/13 primals verified, 2 removed. Fix pending.
 
-**Previous milestones (May 10)**:
+**Previous milestones (May 10-11)**:
 - Primordial extinction: 8/8 UniBin, zero debt markers.
 - All 11 upstream gaps resolved (JH-11, GAP-03/06/09/12, etc.).
 - Sovereignty horizons: bearDog TLS, songbird NAT, petalTongue web, biomeOS `composition.status`.
