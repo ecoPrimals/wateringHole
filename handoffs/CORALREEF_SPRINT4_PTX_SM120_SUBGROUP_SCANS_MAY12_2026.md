@@ -10,7 +10,7 @@
 
 ## Summary
 
-PTX emitter evolved for SM120/Blackwell readiness: subgroup inclusive/exclusive prefix scans implemented via `shfl.sync.up` butterfly accumulation, silent statement catch-all replaced with explicit error reporting, and expression evaluator extended for subgroup operation results. `coral-reef-isa` API expanded with `IsaTarget` methods and `Hash` derive. Coverage pushed to 4784 tests (+19).
+PTX emitter evolved for SM120/Blackwell readiness: subgroup inclusive/exclusive prefix scans implemented via `shfl.sync.up` butterfly accumulation, silent statement catch-all replaced with explicit error reporting, and expression evaluator extended for subgroup operation results. `coral-reef-isa` API expanded with `IsaTarget` methods and `Hash` derive. Coverage pushed to 4784 tests (+19). Comprehensive deep debt pass: 6 hardcoded sysfs/procfs paths evolved to `linux_paths` helpers with env var overrides. All root docs synchronized to Sprint 4 state.
 
 ## Changes
 
@@ -36,6 +36,19 @@ PTX emitter evolved for SM120/Blackwell readiness: subgroup inclusive/exclusive 
 
 - `IsaTarget`: Added `Hash` derive, `ALL` constant, `sm_version()`, `has_independent_thread_scheduling()`, `has_uniform_datapath()`
 - Latency and SPH test coverage expanded (edge cases, max values, format validation)
+
+### Deep Debt — Hardcoded Path Evolution
+
+- 6 hardcoded `/sys/` and `/proc/` paths in `coral-gpu/pcie.rs`, `nvidia_drm.rs`, `vfio_compute/pri.rs`, `mmu_oracle/capture.rs`, `intel/ioctl.rs`, `bin/coral_probe.rs` evolved to `sysfs_root()`/`proc_root()`/`dri_render_prefix()` helpers
+- `dri_render_prefix()` promoted to `pub(crate)` for cross-module reuse
+- All `#[allow]` attributes given reason strings
+
+### Documentation Synchronization
+
+- Batch update across all root docs: README, STATUS, CHANGELOG, CONTEXT, EVOLUTION, WHATS_NEXT, START_HERE, CONTRIBUTING, ABSORPTION, specs, genomebin/manifest.toml
+- Test count 4765 → 4784 everywhere; EVOLUTION.md expression/statement checklists updated for Sprint 4 PTX work
+- STATUS Sovereignty row updated (all 9 non-driver crates `#![forbid(unsafe_code)]`, sysfs helpers)
+- CONTEXT 800/1000 LOC inconsistency resolved
 
 ## Quality Gates
 
