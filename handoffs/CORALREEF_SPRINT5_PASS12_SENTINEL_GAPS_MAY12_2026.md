@@ -33,6 +33,27 @@ Three Pass 12 sentinel escalation items resolved: `naga::Module` direct ingest A
 - Graceful fallback: clear tracing diagnostic when firmware missing or ACR/SEC2 required
 - `firmware_available()` respects `CORALREEF_NVIDIA_FIRMWARE_ROOT` env var (aligns with GSP firmware parser)
 
+### Deep Debt: Firmware Path Centralization (`linux_paths.rs`, 8 sites)
+
+- New `nvidia_firmware_root()` / `nvidia_firmware_path(chip, tail)` in `linux_paths.rs` — single source of truth for `CORALREEF_NVIDIA_FIRMWARE_ROOT`
+- 8 firmware loading sites migrated from hardcoded `/lib/firmware/nvidia/` to `linux_paths::nvidia_firmware_path()`:
+  - `fecs_boot.rs` (FecsFirmware::load, GpccsFirmware::load, firmware_available)
+  - `pri.rs` (apply_sw_nonctx)
+  - `acr_boot/firmware.rs` (AcrFirmwareSet::load)
+  - `sovereign_stages.rs` (gr init firmware load)
+  - `kepler_fecs_boot/firmware.rs` (gk210-system search path)
+  - `identity/firmware.rs` (firmware_inventory, check_nouveau_firmware)
+  - `gsp/firmware_source.rs` (nvidia_firmware_base fallback)
+  - `gsp/firmware_parser.rs` (delegated to linux_paths, removed redundant OnceLock)
+
+### Deep Debt: ICE Consistency (11 sites)
+
+- 11 `unreachable!()` in production codegen evolved to `ice!()`: register allocator, SM32 mem/tex encoders, SM20 integer ALU, surface addressing
+
+### Deep Debt: `#[allow]` Reasons
+
+- All bare `#[allow(deprecated)]` in coral-glowplug and coral-ember annotated with `reason = "..."`
+
 ## Quality Gates
 
 - `cargo clippy --all-features -- -D warnings`: **0 warnings**
