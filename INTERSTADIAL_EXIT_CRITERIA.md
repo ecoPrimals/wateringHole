@@ -203,8 +203,8 @@ Remaining chain: projectNUCLEUS deploys relay → NestGate extracellular → con
 All shadow runs are independently startable. **Zero upstream code blockers remain.**
 
 **Highest leverage action**: Start BearDog TLS shadow + deploy Songbird relay to VPS
-in parallel. lithoSpore Tier 1 is **DONE**. plasmidBin checksum desync for Songbird +
-coralReef needs resolution for clean NUCLEUS composition.
+in parallel. lithoSpore Tier 1 is **DONE**. ~~plasmidBin checksum desync~~ **RESOLVED**
+(May 12 — pipeline hardened, idempotent harvest, post-harvest validation).
 
 ---
 
