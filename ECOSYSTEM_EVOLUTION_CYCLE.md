@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
 **Date**: May 12, 2026
-**Version**: v1.6.0 (Phase C complete, Tier 2 unblocked, ecosystem wave sync)
+**Version**: v1.7.0 (ALL SENTINELS RESOLVED, Pillar 4 PASS, zero upstream blockers)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -82,16 +82,17 @@ shadow run execution is the remaining gate. Phase 32 atomic model evolution comp
 | groundSpring | L4 | 1,125 | LTEE B2+B1 COMPLETE |
 | ludoSpring | L4 | 854 | SPDX, composition-only |
 
-- **Interstadial gate**: Pillar 5 met. Tier 2 UNBLOCKED. lithoSpore Module 1+2 integrating real data (Pillar 4 progressing). All 7 springs wiring Tier 2. Songbird VPS relay progressing (`songbird relay` CLI + TURN data plane). **coralReef FECS stability proof SHIPPED** (Sprint 7 — retry with PMC GR reset, structured `GrBootOutcome`). Transition now requires **shadow run execution + lithoSpore PASS + Songbird relay ops deployment**. See `INTERSTADIAL_EXIT_CRITERIA.md` v1.4.
+- **Interstadial gate**: Pillars 4+5 **MET**. Tier 2 UNBLOCKED. **ALL SENTINELS RESOLVED** — Songbird Wave 202 ops-ready (systemd + credentials + deployment guide), coralReef Sprint 7 stability proof shipped, lithoSpore Module 1+2 PASS at Tier 1+2 with BLAKE3. Foundation 10/10 threads active. All 7 springs wiring Tier 2. **Zero upstream code blockers remain.** Transition now requires **shadow run execution** (projectNUCLEUS owns). See `INTERSTADIAL_EXIT_CRITERIA.md` v1.5.
 - **plasmidBin genomeBin depot**: 46 cross-architecture binaries, 6 targets, Tier 1 39/39.
 - **guideStone pattern**: absorbed into UniBin as certification organelle (L8).
 
-Mountain season accelerating: toadStool Phase C **COMPLETE** (S245-S250, 7 batches,
-520 cylinder tests, 8,809 workspace), Phase D plumbing in, `toadstool.validate`
-**IMPLEMENTED** (S250). `barracuda.precision.route` **IMPLEMENTED** (precision.rs
-+ 649 tests). Songbird TURN server shipped (836 lines, VPS relay progressing).
-coralReef FECS/GPCCS **stability proof SHIPPED** (Sprint 7). Remaining mountain work:
-Songbird VPS relay completion, ionic bond runtime.
+Mountain season **COMPLETE**: All upstream sentinels resolved. toadStool Phase C
+COMPLETE (S250, 8,809 tests), `toadstool.validate` + `list_workloads` IMPLEMENTED,
+`barracuda.precision.route` IMPLEMENTED (649 tests). Songbird VPS relay OPS-READY
+(Wave 202 — systemd + credentials + deployment guide). coralReef FECS/GPCCS stability
+proof SHIPPED (Sprint 7 — 4,790 tests). lithoSpore Pillar 4 PASS (Module 1+2 Tier 1+2
+with BLAKE3). Foundation 10/10 threads active, `toadstool.validate` dispatch wired.
+Remaining mountain work: ionic bond runtime, plasmidBin checksum sync.
 
 ### Spring Season (composition elevation)
 
