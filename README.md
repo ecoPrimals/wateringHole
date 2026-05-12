@@ -378,7 +378,7 @@ You do not need to know about other primals. You need to know what you can do, a
 - **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing), MethodGate 13/13. **Zero critical gaps** — NestGate `content.*` transport parity resolved (Session 60)
 - **413 registered capability methods** (primalSpring canonical, zero drift)
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
-- **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 687 tests, two-tier validation (Rust + Live), `CompositionContext` throughout, zero critical debt
+- **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 689+ tests, two-tier validation (Rust + Live), `CompositionContext` throughout, **zero debt** (all LOW/deferred resolved in Wave 9)
 - **8 springs** — all Tier 4 IPC-first (`default = []`, barracuda optional), all eukaryotic UniBin, LTEE reproductions active
 - **13,100+ tests** across the river delta (wetSpring 1,613 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,125 · hotSpring 1,025 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
 - **1 garden** active (esotericWebb from ludoSpring)
@@ -491,13 +491,13 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 | airSpring | v0.10.0 | 1,389 | L4 | Done | E3 queued | AG-001 manifest read, NestGate/Squirrel wiring |
 | groundSpring | V135 | 1,125 | L4 | Done | **B2+B1 DONE** | coralReef IPC, PRNG GPU alignment deferred |
 | ludoSpring | V63 | 854 | L4 | Done | N/A | coralReef IPC (GAP-01), barraCuda domain parity (GAP-02) |
-| primalSpring | v0.9.25 | 687 | L8 | N/A | N/A | PG-54 tick model (LOW), PG-63 Agg docs (LOW) |
+| primalSpring | v0.9.25 | 689+ | L8 | N/A | N/A | **Zero debt** — PG-54 DONE, PG-63 DONE, Wave 9 domain sweep shipped |
 
 ### Evolution Cycle Ownership
 
 Gaps are owned by exactly one layer:
 - **L1 (Primals)**: **CLEAN** — 13/13 structural + semantic. NestGate transport parity resolved (Session 60). All downstream-surfaced debt closed
-- **L2 (primalSpring)**: Canonical registry, CompositionContext, PG-54/PG-63
+- **L2 (primalSpring)**: **CLEAN** — canonical registry, CompositionContext, 22 scenarios, 77 graphs, 72% method coverage. ~~PG-54/PG-63~~ DONE
 - **L3 (Springs)**: LTEE reproductions, remaining PG gaps (external), primal composition wiring
 - **L4 (Products)**: NUCLEUS sovereignty horizons H2 shadow runs, NestGate content pipeline, lithoSpore integration
 - **L5 (Foundation)**: Thread coverage (7/10 → 10/10), LTEE data anchoring, provenance validation
