@@ -86,8 +86,10 @@ shadow run execution is the remaining gate. Phase 32 atomic model evolution comp
 - **plasmidBin genomeBin depot**: 46 cross-architecture binaries, 6 targets, Tier 1 39/39.
 - **guideStone pattern**: absorbed into UniBin as certification organelle (L8).
 
-Mountain season work continues for: toadStool Phase C (coral-driver), Songbird
-VPS relay, ionic bond runtime, `toadstool.validate` Tier 2 science API.
+Mountain season work continues for: toadStool Phase C integration (batches 1-4
+landed S245-S249, cylinder crate 415 tests; remaining: VFIO channels, sovereign
+init, NvDevice, Phase D local dispatch), Songbird VPS relay, ionic bond runtime,
+`toadstool.validate` Tier 2 science API. `toadstool.list_workloads` is now **WIRED**.
 
 ### Spring Season (composition elevation)
 
@@ -508,7 +510,7 @@ ends when shadow runs prove parity and external deployments succeed.
 - NestGate content pipeline: wire `publish_sporeprint.sh` (Session 60 unblocked)
 
 **Pass 12 — Upstream Sentinel (escalated)**:
-- toadStool Phase C (coral-driver: VFIO, DRM, device abstraction)
+- toadStool Phase C integration (batches 1-4 LANDED S245-S249, cylinder 415 tests; remaining: VFIO channels, sovereign init, NvDevice, Phase D)
 - Songbird VPS relay (blocks NAT shadow → NestGate extracellular)
 - coralReef timeout/FECS stability
 
@@ -518,7 +520,7 @@ ends when shadow runs prove parity and external deployments succeed.
 - Foundation Threads 3, 4, 8, 9, 10 expressions + seeding
 
 **Pass 14 — Convergence**:
-- Tier 2 Science API (`toadstool.validate`, `toadstool.list_workloads`)
+- Tier 2 Science API (`toadstool.validate` — `list_workloads` already WIRED S245+)
 - Ionic runtime live, CompositionContext L2 coordination pass
 - skunkBat E2E operational audit validation
 

@@ -80,33 +80,56 @@ with existing GitHub Pages content.
 Pass 11 runs in parallel with no blockers. While shadow runs execute,
 the ecosystem advances through:
 
-- **Pass 12** (Upstream Sentinel): toadStool Phase C (coral-driver),
-  Songbird VPS relay, coralReef stability — these are escalated because
-  upstream issues cascade to all downstream. toadStool team is actively
-  working Phase C; we will pull their evolution and may amend this blurb
-  with updated contracts as they ship.
+- **Pass 12** (Upstream Sentinel): toadStool Phase C integration
+  (batches 1-4 landed — remaining: VFIO channels, sovereign init, NvDevice,
+  Phase D), Songbird VPS relay, coralReef stability — these are escalated
+  because upstream issues cascade to all downstream.
 - **Pass 13** (Gate Composition): BTSP dual-auth, ABG WCM through
   provenance trio, foundation thread seeding (3, 4, 8, 9, 10)
-- **Pass 14** (Convergence): Tier 2 Science API (`toadstool.validate`),
-  ionic runtime, skunkBat E2E audit, CompositionContext L2 pass
+- **Pass 14** (Convergence): Tier 2 Science API (`toadstool.validate` —
+  `list_workloads` already wired), ionic runtime, skunkBat E2E audit,
+  CompositionContext L2 pass
 
 ---
 
-## toadStool Note
+## toadStool Update (amended — S245-S249 landed)
 
-toadStool is actively working Phase C (coral-driver absorption: VFIO, DRM,
-device abstraction). This is the highest-leverage upstream work — it
-unblocks `toadstool.validate` + `toadstool.list_workloads` which in turn
-unblocks all 8 springs' Tier 2 convergence.
+toadStool just shipped Phase C batches 1-4 (S245-S249, +20,090 lines).
+The new `toadstool-cylinder` crate absorbs the coral-driver hardware layer:
 
-**For toadStool team**: your Phase C work is Pass 12 priority. Continue
-async — we will pull your evolution after this blurb lands and issue an
-amended handoff with updated IPC contracts if the `compute.dispatch.execute`
-surface changes. The `COMPUTE_TRIO_EVOLUTION.md` in primalSpring documents
-the current contract expectations (Phases A+B done, Phase C pending).
+| Session | What Landed | Tests |
+|---------|-------------|------:|
+| S245 | Cylinder foundation: DRM, linux_paths, hardware, error, ComputeDevice | 60 |
+| S246 | MMIO + full AMD path (ioctl, PM4, GEM, generation, shader_binary) | 141 |
+| S247 | NVIDIA non-GSP (identity, generation, pushbuf, ioctl, QMD) | 294 |
+| S248 | VFIO foundation (types, ioctl, DMA, PCI discovery, BAR cartography, vendor metal) | 415 |
+| S249 | Deep debt: ~55 Duration constants, 3 dead deprecated attrs, audit clean | 415 |
+
+**Key facts**:
+- `toadstool.list_workloads` is **WIRED** — already implemented upstream
+- `toadstool.validate` is still **NOT IMPLEMENTED** — remains the Tier 2 blocker
+- `CORALREEF_*` env vars migrated to `TOADSTOOL_*` (legacy fallback retained)
+- No IPC contract changes — `compute.dispatch.submit` unchanged
+- Workspace: 8,704 lib tests, 0 clippy warnings
+
+**Remaining Phase C** (narrowed scope):
+- VFIO channel orchestration (devinit, glowplug, HBM2, diagnostics)
+- Sovereign init / stages
+- NVIDIA: bar0, probe, FECS-adjacent (gsp/firmware boundary)
+- `nv/vfio_compute` + full NvDevice orchestration
+- `pcie.rs` GpuTarget adapter
+
+**Phase D** (post-C): wire local dispatch — stop forwarding to coralReef's
+`compute.dispatch.execute`. This is the final cutover to sovereign compute.
+
+**For toadStool team**: Phase C batches 1-4 are a major milestone.
+Remaining integration (VFIO channels, NvDevice) and Phase D are the final
+items before `toadstool.validate` can be wired. Pass 12 scope is narrower
+than before your push.
 
 **For everyone else**: toadStool Phase C does NOT block Pass 11. Start
-your shadow runs now. Phase C blocks Pass 14 (Tier 2 API), not Pass 11.
+your shadow runs now. The remaining toadStool work blocks Pass 14
+(`toadstool.validate` only — `list_workloads` is already live).
 
 ---
 
