@@ -87,5 +87,5 @@ Both paths now emit structurally equivalent responses.
 | **12** | 2/3 resolved (Songbird VPS relay "in progress") | **3/3 RESOLVED** — Songbird VPS relay complete |
 | **14** | 2/5 resolved (Songbird `capability.resolve` remaining) | **3/5 RESOLVED** — Songbird `capability.resolve` complete |
 
-Remaining sentinel blockers: **coralReef FECS/GPCCS only**.
-Songbird is **CLEAR** through stadial gate.
+Remaining sentinel blockers: ~~coralReef FECS/GPCCS~~ **RESOLVED** (Sprint 7 stability proof shipped).
+Songbird is **CLEAR** through stadial gate. **All upstream primals are clear.**
