@@ -19,7 +19,7 @@ for users.
 
 | Atomic | Particle | Primals | Role |
 |--------|----------|---------|------|
-| **Tower** | electron | BearDog + Songbird | Trust boundary, crypto, discovery |
+| **Tower** | electron | BearDog + Songbird + skunkBat | Trust boundary, crypto, discovery, defense |
 | **Node** | proton | ToadStool + barraCuda + coralReef | Compute, tensor math, shader compile |
 | **Nest** | neutron | NestGate + rhizoCrypt + loamSpine + sweetGrass | Storage, DAG, ledger, attribution |
 | **Meta** | cross-atomic | biomeOS + Squirrel + petalTongue | Coordinator, AI, desktop UI |

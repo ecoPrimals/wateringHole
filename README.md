@@ -92,7 +92,7 @@ Primals achieve their greatest power through composition. These are not separate
 **What**: The full primal composition orchestrated by biomeOS.
 
 **Layers**:
-- **Tower Atomic** = BearDog + Songbird (crypto + network)
+- **Tower Atomic** = BearDog + Songbird + skunkBat (crypto + discovery + defense)
 - **Node Atomic** = Tower + ToadStool (+ compute)
 - **Nest Atomic** = Tower + NestGate (+ storage)
 - **Full NUCLEUS** = All primals + Squirrel (+ AI)
