@@ -54,6 +54,14 @@ Three Pass 12 sentinel escalation items resolved: `naga::Module` direct ingest A
 
 - All bare `#[allow(deprecated)]` in coral-glowplug and coral-ember annotated with `reason = "..."`
 
+### Sprint 6: Ecosystem Wave Sync — Phase D Markers, FECS Stability (May 12, 2026)
+
+- **FECS stability**: `falcon_boot()` now returns `Err` on timeout/halt (was silently `Ok`)
+- **Phase D markers**: Updated `context.rs`, `discovery.rs`, `coral-driver/lib.rs`, `qmd/mod.rs` — toadStool Phase C is COMPLETE (S245-S250)
+- **IPC method name**: Aligned to `compute.dispatch.execute` (upstream contract)
+- **Ember/glowplug**: Deprecation language updated from "until Phase C" to "Phase C COMPLETE — removal gated on Phase D"
+- **coral-driver**: Added Phase D status module doc — hardware modules remain for backward compatibility
+
 ## Quality Gates
 
 - `cargo clippy --all-features -- -D warnings`: **0 warnings**
