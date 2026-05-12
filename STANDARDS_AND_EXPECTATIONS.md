@@ -138,9 +138,9 @@ Session handoffs live in `handoffs/`. They are the working memory between sessio
 what was done, what's next, what broke, what was discovered.
 
 - **Active**: `handoffs/*.md` — current work items
-- **Fossil record**: `fossilRecord/` — completed work, preserved for provenance (1,561+ documents)
+- **Fossil record**: `github.com/ecoPrimals/fossilRecord` — completed work, preserved for provenance (3,831+ documents)
 
-Handoffs are archived to `fossilRecord/` when superseded. They are never deleted.
+Handoffs are archived to the fossilRecord repository when superseded. They are never deleted.
 
 ## 10. Testing Expectations
 

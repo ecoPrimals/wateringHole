@@ -339,16 +339,17 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `birdsong/` — BirdSong protocol specification
 - `btsp/` — BTSP protocol details
 - `genomeBin/` — genomeBin tooling
-- `fossilRecord/` — Archived documents from previous consolidation waves
 - `scripts/` — Utility scripts
 - `templates/` — Templates for new primals/springs
 
-### Fossil Record
-Documents superseded by newer standards or absorbed into living documents are
-preserved in `fossilRecord/`. Two consolidation waves:
+### Fossil Record — Canonical Repository
+All superseded documents are archived in the dedicated **fossilRecord** repository:
 
-- `fossilRecord/consolidated-apr2026/` — 56 documents from March-April 2026
-- `fossilRecord/consolidated-may2026/` — 24 documents superseded by Phase 58 audit
+**https://github.com/ecoPrimals/fossilRecord**
+
+The local `fossilRecord/` directory contains only a redirect pointer. The canonical
+repository consolidates 3,831+ documents from 10 ecosystem sources with provenance-
+preserving subdirectories (`wateringHole/`, `springs/primalSpring/`, etc.).
 
 ---
 

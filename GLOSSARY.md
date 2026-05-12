@@ -436,14 +436,16 @@ improved.
 
 A **session handoff** document in `wateringHole/handoffs/`. Records what was
 done, what's next, what broke, what was discovered. Handoffs are the working
-memory between sessions. After resolution they are archived to
-`fossilRecord/`.
+memory between sessions. After resolution they are archived to the
+fossilRecord repository.
 
 ### Fossil Record
 
-The `fossilRecord/` directory. Never deleted, only accumulated. The
-geological record of every evolution session the project has run. Currently
-1,561+ documents spanning February 4, 2026 – present.
+The canonical archive repository at `github.com/ecoPrimals/fossilRecord`.
+Never deleted, only accumulated. The geological record of every evolution
+session the project has run. 3,831+ documents spanning February 4, 2026 –
+present, consolidated from 10 ecosystem sources with provenance-preserving
+subdirectory structure.
 
 ---
 
