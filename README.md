@@ -375,14 +375,14 @@ You do not need to know about other primals. You need to know what you can do, a
 
 ## Current Ecosystem State (May 2026)
 
-- **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing), MethodGate 13/13. **One critical gap**: NestGate `content.*` transport parity (implemented on primary dispatch, not routed on SemanticRouter/IPC/HTTP — blocks Pillars 1-3)
+- **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing), MethodGate 13/13. **Zero critical gaps** — NestGate `content.*` transport parity resolved (Session 60)
 - **413 registered capability methods** (primalSpring canonical, zero drift)
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
-- **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 680 tests, two-tier validation (Rust + Live), `CompositionContext` throughout, zero debt
+- **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 687 tests, two-tier validation (Rust + Live), `CompositionContext` throughout, zero critical debt
 - **8 springs** — all Tier 4 IPC-first (`default = []`, barracuda optional), all eukaryotic UniBin, LTEE reproductions active
 - **13,100+ tests** across the river delta (wetSpring 1,613 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,125 · hotSpring 1,025 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
 - **1 garden** active (esotericWebb from ludoSpring)
-- **projectNUCLEUS** — 13-primal Full NUCLEUS on active gate, cell membrane architecture, deep debt evolution sweep complete, MethodGate **13/13**. Per-primal composition debt surfaced (NestGate, toadStool, squirrel, barraCuda, loamSpine). **Next priority: NestGate `content.put` for sovereign data/compute chains**
+- **projectNUCLEUS** — 13-primal Full NUCLEUS on active gate, cell membrane architecture, deep debt evolution sweep complete, MethodGate **13/13**. Per-primal composition debt **fully resolved** (NestGate Session 60 transport parity, toadStool S234, squirrel RemoteComputeProvider, barraCuda crypto IPC, loamSpine aliases, skunkBat JH-5 P3). **Ready for downstream re-ingestion**
 - **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets; 7/10 threads with spring seeds (Threads 2, 3, 5, 6, 7, 9, 10)
 - **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules, 36 paper-spring assignments, active reproductions (groundSpring B2+B1 COMPLETE, hotSpring B2 STARTED, wetSpring B7 STARTED, neuralSpring B1 STARTED)
 - **benchScale** — GPU lifecycle automation (VFIO/IOMMU), pure-Rust SSH + NoCloud ISO, libvirt VM orchestration
@@ -397,7 +397,7 @@ sovereignty capabilities to enable the stadial (external validation) phase.
 - 8/8 UniBin, certification organelle, scenario registry, CI cross-sync
 - 8/8 skunkBat Rust IPC, `method.register`, `composition.status`, NUCLEUS workloads
 - **8/8 Tier 4 IPC-first** — every spring `default = []`, barracuda optional
-- Zero open upstream gaps — 13/13 MethodGate, 13/13 BTSP AEAD, all L1 debt resolved
+- Zero open upstream gaps — 13/13 MethodGate, 13/13 BTSP AEAD, all L1 debt resolved (NestGate Session 60 closes final transport parity gap)
 - lithoSpore scaffolded (sporeGarden/lithoSpore): 9 crates, 7 science modules
 - LTEE reproductions active: groundSpring B2+B1 COMPLETE, hotSpring B2, wetSpring B7, neuralSpring B1
 - GuideStone convergence: hotSpring L6, neuralSpring/healthSpring L5, wetSpring/groundSpring/ludoSpring/airSpring L4
@@ -407,7 +407,7 @@ sovereignty capabilities to enable the stadial (external validation) phase.
 
 | Pillar | Gate Condition | Status |
 |--------|---------------|--------|
-| 1. Primal Sovereignty | NestGate `content.put`, BearDog TLS shadow, Songbird NAT, BTSP auth | **MethodGate DONE**; **NestGate `content.put` CRITICAL PATH** |
+| 1. Primal Sovereignty | NestGate `content.put`, BearDog TLS shadow, Songbird NAT, BTSP auth | **GATE MET** — MethodGate 13/13, NestGate transport parity resolved (Session 60), BearDog/Songbird shipped |
 | 2. NUCLEUS Deployments | H2-2b/3a/3b/3c in shadow-run state | Not yet running |
 | 3. ABG Hosting | Thread 1 WCM compositions via provenance trio | Mapped, not all exercised |
 | 4. lithoSpore | 2+ modules PASS Tier 1 with real data | **ACTIVE** — groundSpring B2+B1 complete, data integration next |
@@ -431,10 +431,10 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 
 **Pillar 1 — Primal Sovereignty Pre-Wire:**
 - ~~MethodGate for toadStool + Squirrel (11/13 → 13/13)~~ **DONE** — 13/13
-- **NestGate `content.*` transport parity — CRITICAL PATH.** NestGate **has implemented** `content.put/get/list/resolve/publish/collections` on the primary unix_socket_server dispatch. BUT: `content.*` is **not routed** through SemanticRouter, isomorphic IPC adapter, or HTTP API handler — callers on those paths get "Method not found." This is a **transport/router parity gap**. Blocks H2-05–09, petalTongue sovereign serving, plasmidBin hosting, foundation layers. `publish_sporeprint.sh` + `nestgate_content_parity.sh` ready to validate. **NestGate must wire `content.*` through all transport paths.**
+- ~~NestGate `content.*` transport parity~~ **RESOLVED** (Session 60, May 11) — all 8 `content.*` methods wired on all 4 transport surfaces (primary dispatch, SemanticRouter, isomorphic IPC, HTTP API). `lifecycle.status` also added. Unblocks H2-05–09, petalTongue sovereign serving, plasmidBin hosting, foundation layers. See `handoffs/NESTGATE_SESSION60_TRANSPORT_PARITY_HANDOFF_MAY11_2026.md`
 - BearDog TLS shadow on :8443 (H2-3b) — L4 absorption (upstream shipped)
 - Songbird NAT + VPS relay (H2-3c) — L4 absorption (upstream shipped)
-- petalTongue web mode + NestGate backend (H2-3a) — blocked on NestGate
+- petalTongue web mode + NestGate backend (H2-3a) — **UNBLOCKED** (NestGate transport parity shipped)
 - BTSP JupyterHub authenticator dual-auth (H2-2b) — L4 absorption (upstream ready)
 - JH-5 audit forwarding: skunkBat → rhizoCrypt → sweetGrass (Phase 3)
 
@@ -444,7 +444,7 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 - barraCuda: ~~embedded crypto~~ **RESOLVED** — bearDog Wave 101 shipped `crypto.hkdf_sha256` + `crypto.hmac_verify` IPC surface
 - loamSpine: ~~`session.commit` API contract mismatch~~ **RESOLVED** — method aliases (`commit.session`, `provenance.commit`) + hex hash acceptance
 - skunkBat: ~~JH-5 Phase 3 audit forwarding~~ **RESOLVED** — cross-primal forwarding to rhizoCrypt + sweetGrass shipped
-- **NestGate: `content.*` transport parity — OPEN (critical path)**
+- ~~NestGate: `content.*` transport parity~~ **RESOLVED** (Session 60)
 
 **primalSpring validation gap** (closed by Wave 7 + Wave 8):
 - ~~`content` not in `ALL_CAPS` routing table~~ **FIXED** (W7-01)
@@ -491,12 +491,12 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 | airSpring | v0.10.0 | 1,389 | L4 | Done | E3 queued | AG-001 manifest read, NestGate/Squirrel wiring |
 | groundSpring | V135 | 1,125 | L4 | Done | **B2+B1 DONE** | coralReef IPC, PRNG GPU alignment deferred |
 | ludoSpring | V63 | 854 | L4 | Done | N/A | coralReef IPC (GAP-01), barraCuda domain parity (GAP-02) |
-| primalSpring | v0.9.25 | 680 | L8 | N/A | N/A | PG-54 tick model (LOW), PG-63 Agg docs (LOW) |
+| primalSpring | v0.9.25 | 687 | L8 | N/A | N/A | PG-54 tick model (LOW), PG-63 Agg docs (LOW) |
 
 ### Evolution Cycle Ownership
 
 Gaps are owned by exactly one layer:
-- **L1 (Primals)**: **NestGate `content.*` transport parity CRITICAL** — implemented but not routed on all transports; blocks Pillars 1-3. All other primals clean (13/13 structural)
+- **L1 (Primals)**: **CLEAN** — 13/13 structural + semantic. NestGate transport parity resolved (Session 60). All downstream-surfaced debt closed
 - **L2 (primalSpring)**: Canonical registry, CompositionContext, PG-54/PG-63
 - **L3 (Springs)**: LTEE reproductions, remaining PG gaps (external), primal composition wiring
 - **L4 (Products)**: NUCLEUS sovereignty horizons H2 shadow runs, NestGate content pipeline, lithoSpore integration
