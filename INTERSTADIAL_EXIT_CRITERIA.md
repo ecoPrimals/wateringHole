@@ -232,7 +232,7 @@ primals that must evolve before the stadial cold advance.
 |--------|-------|-------|---------------|
 | ~~**toadStool Phase C**~~ — **COMPLETE** (S245-S250, 7 batches, 520 cylinder tests). Phase D plumbing in. `toadstool.validate` **IMPLEMENTED**. | toadStool | L1 | **RESOLVED** — Tier 2 Science API unblocked. E2E sovereign dispatch (factory + VFIO PBDMA) is stadial. |
 | **Songbird VPS relay** — TURN server shipped (836 lines), VPS relay infra progressing | Songbird | L1 | Still blocks NAT shadow → NestGate extracellular |
-| **coralReef timeout/FECS/GPCCS** — boot_sequence + ISA latency shipped, FECS progressing | coralReef | L1 | Still blocks sovereign dispatch proof for hotSpring |
+| ~~**coralReef timeout/FECS/GPCCS**~~ — **STABILITY PROOF SHIPPED** (Sprint 7): `boot_gr_falcons_with_recovery` (3× retry + PMC GR reset), structured `GrBootOutcome`, all boot paths recovery-aware. 4790 tests, zero debt. | coralReef | L1 | **RESOLVED** — sovereign dispatch proof unblocked for hotSpring. |
 
 ### Pass 13: Gate Composition (L3/L4 — wiring shipped capabilities)
 

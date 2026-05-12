@@ -33,13 +33,13 @@ upstream — not your problem to solve. `toadstool.list_workloads` is already wi
 | Priority | What | Status |
 |----------|------|--------|
 | 1 | **LTEE B2 completion** — Anderson/Wiser fitness into lithoSpore `ltee-anderson` module | Tier 1+2 DONE, ready for lithoSpore handoff |
-| 2 | **Titan V FECS + K80 livepatch** — sovereign GPU validation (blocked on coralReef FECS stability, Pass 12) | Waiting on upstream |
+| 2 | **Titan V FECS + K80 livepatch** — sovereign GPU validation (coralReef FECS stability **SHIPPED** Sprint 7) | **UNBLOCKED** — ready for hardware validation |
 | 3 | **Thread 2** (plasma physics/QCD) — continue seeding foundation | ACTIVE |
 | 4 | **3-tier ladder pattern** — document as reference for other springs | Shipped |
 
 **Your highest leverage**: LTEE B2 is done — hand the `expected_values.json` +
 Rust binary to lithoSpore team when they come asking. Titan V depends on
-coralReef (Pass 12) so don't block on it.
+coralReef (Pass 12) — **now RESOLVED** (Sprint 7 stability proof shipped).
 
 ### wetSpring — gS L4, 4 external PGs
 
@@ -198,7 +198,7 @@ Tier 2 depends on toadStool (Pass 14). **You do not need to wait** — build
 | Pass | What | Spring Role |
 |------|------|-------------|
 | **11** | Shadow runs (BearDog TLS, lithoSpore Tier 1, NestGate content) | No spring action — L4 absorption |
-| **12** | Upstream sentinel (toadStool, Songbird, coralReef) | Watch for coralReef stability (hotSpring GPU validation) |
+| **12** | Upstream sentinel (toadStool ~~DONE~~, Songbird progressing, ~~coralReef~~ **DONE**) | coralReef stability proof shipped; hotSpring GPU validation **UNBLOCKED** |
 | **13** | Gate composition (BTSP dual-auth, ABG WCM, **foundation threads**) | **Threads 3, 4, 8, 9, 10 expressions due** |
 | **14** | Convergence (`toadstool.validate`, ionic runtime) | Wire `--format json`, Tier 2 readiness |
 

@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 12, 2026 (Compute trio Phase C complete, barraCuda v0.4.0 stadial gate, Passes 11-14 in progress, 11 active ecosystem handoffs)
+**Last Updated**: May 12, 2026 (Compute trio Phase C/D transition, coralReef FECS stability proof SHIPPED, barraCuda v0.4.0, Passes 11-14 converging — only Songbird VPS relay remains as sentinel blocker, 11 active ecosystem handoffs)
 
 ---
 

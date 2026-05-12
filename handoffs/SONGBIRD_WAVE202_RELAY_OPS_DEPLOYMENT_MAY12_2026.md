@@ -94,6 +94,8 @@ Per the primalSpring Ecosystem Wave Sync (May 12, 2026):
 > "Songbird and coralReef sentinel items are the only upstream blockers to
 > interstadial exit."
 
+**Update**: coralReef sentinel is also **RESOLVED** (Sprint 7 — FECS stability proof shipped).
+
 With Wave 202, Songbird's sentinel item is **fully resolved**:
 - Code: complete (TURN server + bidirectional relay + CLI)
 - Ops: complete (systemd + credentials + firewall + deployment guide)

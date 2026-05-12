@@ -96,10 +96,10 @@ ludoSpring's `ipc/toadstool.rs` demonstrates the full toadStool surface:
 
 ## For coralReef
 
-### What We Need (GAP-01 — WIRED, blocked upstream)
+### What We Need (GAP-01 — WIRED, **UNBLOCKED** — coralReef Sprint 7 shipped)
 - `shader.compile` for sovereign WGSL compilation
-- FECS boot sequence completion enables our `try_coralreef_compile` GPU path
-- When available: ludoSpring has Perlin/fBm/raycaster shaders ready for sovereign dispatch
+- FECS stability proof **SHIPPED** — `try_coralreef_compile` GPU path is now viable
+- ludoSpring Perlin/fBm/raycaster shaders ready for sovereign dispatch
 
 ### What's Ready on Our Side
 - `ipc/coralreef.rs` — typed client with `try_coralreef_compile()` function
@@ -160,7 +160,7 @@ projectNUCLEUS workload TOMLs reference this schema.
 ### Gaps Remaining (all blocked upstream)
 | GAP | Blocked On | Notes |
 |-----|-----------|-------|
-| GAP-01 | coralReef FECS | SM rebuild → sovereign shader compilation |
+| ~~GAP-01~~ | ~~coralReef FECS~~ **RESOLVED** (Sprint 7) | SM rebuild → sovereign shader compilation **UNBLOCKED** |
 | GAP-04 | rhizoCrypt | Deterministic replay not yet validated |
 | GAP-05 | sweetGrass | Braid verification not yet validated |
 | GAP-14 | skunkBat E2E | Low priority — IPC module exists |
@@ -191,7 +191,7 @@ projectNUCLEUS workload TOMLs reference this schema.
 ludoSpring has reached its evolutionary ceiling for local work. All remaining
 evolution depends on upstream:
 
-1. **coralReef** ships FECS → we exercise sovereign shader compilation
+1. ~~**coralReef** ships FECS~~ → **SHIPPED** (Sprint 7) — exercise sovereign shader compilation
 2. **toadStool** deploys to plasmidBin → we exercise live Tier 2 validation
 3. **Provenance trio** ships stable binaries → we exercise live DAG/braid
 4. **skunkBat** ships E2E → we exercise cross-primal audit logging
