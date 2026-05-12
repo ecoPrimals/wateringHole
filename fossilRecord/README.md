@@ -1,53 +1,13 @@
-# fossilRecord/ — Absorbed Evolution History
+# fossilRecord — Moved to Dedicated Repository
 
-**Purpose**: Archive of superseded handoff documents. These represent completed
-evolution steps — patterns absorbed, debt resolved, versions surpassed. They are
-preserved as geological record, not as active guidance.
+All fossilRecord content has been consolidated into the canonical repository:
 
-## What lives here
+**https://github.com/ecoPrimals/fossilRecord**
 
-- **1,561+ documents** — full evolution history from Feb 2026–present across
-  all primals, springs, and ecosystem coordination
-- Consolidated from former `handoffs/archive/`, active handoffs, and
-  per-wave closure sweeps
+The wateringHole content lives under `wateringHole/` in that repository.
 
-## Why this exists
-
-The ecoPrimals ecosystem evolves through constrained evolution — each primal
-and spring produces handoff documents as it matures. Once a newer version
-absorbs the patterns from an older version, the older handoff is fossilized.
-
-The fossilRecord is the stratigraphic column of the ecosystem's development.
-It answers "how did we get here?" without cluttering the active guidance that
-answers "where are we going?"
-
-## Naming convention
-
-Files retain their original names. The filename encodes:
-- Primal/spring name (e.g. `BEARDOG`, `WETSPRING`)
-- Version at time of handoff (e.g. `V090`, `V137`)
-- Evolution theme (e.g. `DEEP_DEBT`, `ECOSYSTEM_ABSORPTION`)
-- Date (e.g. `MAR24_2026`)
-
-## Searching
-
-```bash
-# Find all evolution history for a specific primal
-ls fossilRecord/ | grep -i beardog
-
-# Find all deep-debt resolutions
-ls fossilRecord/ | grep -i deep_debt
-
-# Find everything from a specific date
-ls fossilRecord/ | grep MAR18_2026
-```
-
-## Policy
-
-- **Do not delete** — these are permanent records
-- **Do not edit** — they are historical snapshots
-- **Do reference** — when understanding why a pattern exists, trace it here
+To clone: `git clone git@github.com:ecoPrimals/fossilRecord.git`
 
 ---
 
-*The fossil record is not debris. It is evidence.*
+*Consolidated May 12, 2026. 3,231 documents moved.*
