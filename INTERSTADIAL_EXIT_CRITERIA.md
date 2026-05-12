@@ -2,7 +2,7 @@
 
 # Interstadial Exit Criteria — Full Sovereignty Pre-Wire
 
-**Version**: 1.3 — May 12, 2026 (toadStool Phase C batches 1-4 landed, list_workloads wired)
+**Version**: 1.4 — May 12, 2026 (Phase C COMPLETE, toadstool.validate IMPLEMENTED, barracuda.precision.route WIRED, Songbird TURN server shipped)
 **Status**: Active
 **Phase**: Interstadial (entered April 16, 2026; exit gate defined here)
 
@@ -230,9 +230,9 @@ primals that must evolve before the stadial cold advance.
 
 | Action | Owner | Level | Why Escalated |
 |--------|-------|-------|---------------|
-| **toadStool Phase C** — batches 1-4 **LANDED** (S245-S249, cylinder 415 tests). Remaining: VFIO channels, sovereign init, NvDevice, pcie.rs + Phase D | toadStool | L1 | Remaining integration blocks `toadstool.validate` → blocks Tier 2. `list_workloads` already WIRED. |
-| **Songbird VPS relay** | Songbird | L1 | Blocks NAT shadow → NestGate extracellular → content sovereignty |
-| **coralReef timeout/FECS/GPCCS** + `naga::Module` stability | coralReef | L1 | Blocks sovereign dispatch proof for hotSpring GPU validation |
+| ~~**toadStool Phase C**~~ — **COMPLETE** (S245-S250, 7 batches, 520 cylinder tests). Phase D plumbing in. `toadstool.validate` **IMPLEMENTED**. | toadStool | L1 | **RESOLVED** — Tier 2 Science API unblocked. E2E sovereign dispatch (factory + VFIO PBDMA) is stadial. |
+| **Songbird VPS relay** — TURN server shipped (836 lines), VPS relay infra progressing | Songbird | L1 | Still blocks NAT shadow → NestGate extracellular |
+| **coralReef timeout/FECS/GPCCS** — boot_sequence + ISA latency shipped, FECS progressing | coralReef | L1 | Still blocks sovereign dispatch proof for hotSpring |
 
 ### Pass 13: Gate Composition (L3/L4 — wiring shipped capabilities)
 
@@ -250,8 +250,8 @@ primals that must evolve before the stadial cold advance.
 
 | Action | Owner | Level | Dependency |
 |--------|-------|-------|------------|
-| Tier 2 Science API (`toadstool.validate`) — `list_workloads` **WIRED** (S245+) | toadStool + primalSpring | L1/L2 | Phase C integration (Pass 12) |
-| `barracuda.precision.route` wired | barraCuda + primalSpring | L1/L2 | hotSpring precision story |
+| ~~Tier 2 Science API (`toadstool.validate`)~~ — **IMPLEMENTED** (S250). `list_workloads` WIRED (S245+). | toadStool + primalSpring | L1/L2 | **RESOLVED** |
+| ~~`barracuda.precision.route` wired~~ — **IMPLEMENTED** (precision.rs + 242 tests + 407 trio E2E tests) | barraCuda + primalSpring | L1/L2 | **RESOLVED** |
 | Ionic runtime live (cross-spring RPC) | primalSpring + healthSpring | L2 | CompositionContext wiring |
 | skunkBat E2E operational audit validation | skunkBat + primalSpring | L2 | JH-5 Phase 3 shipped |
 | `capability.resolve` name-based discovery | Songbird | L1 | Unblocks discovery debt |
