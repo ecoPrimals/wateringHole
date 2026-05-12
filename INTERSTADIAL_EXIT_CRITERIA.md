@@ -53,7 +53,7 @@ two categories: **upstream debt** (primal code gaps at the gate) and
   `content.*` methods (`put`, `get`, `exists`, `list`, `publish`, `resolve`,
   `promote`, `collections`) now wired on all 4 transport surfaces (primary
   dispatch, SemanticRouter, isomorphic IPC, HTTP API). `lifecycle.status` also
-  added. See `handoffs/NESTGATE_SESSION60_TRANSPORT_PARITY_HANDOFF_MAY11_2026.md`.
+  added. See `fossilRecord/handoffs-may11-2026-wave9-closure/NESTGATE_SESSION60_TRANSPORT_PARITY_HANDOFF_MAY11_2026.md`.
 
 **All** primals pass the gate:
 - MethodGate (JH-0 + JH-2): **13/13** — squirrel shipped `method_gate.rs`
