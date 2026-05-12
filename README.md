@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 12, 2026 (Compute trio Phase C complete, barraCuda v0.4.0 stadial gate, Passes 11-14 in progress, 5 active ecosystem handoffs)
+**Last Updated**: May 12, 2026 (Compute trio Phase C complete, barraCuda v0.4.0 stadial gate, Passes 11-14 in progress, 6 active ecosystem handoffs)
 
 ---
 
@@ -319,8 +319,9 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md` — External validation strategy
 
 ### Sovereign Hosting & Cell Membrane
-- `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Hosting evolution, DNS metadata closure, cell membrane addendum
-- `handoffs/PROJECTNUCLEUS_CELL_MEMBRANE_COMPOSITION_HANDOFF_MAY10_2026.md` — Cell membrane architecture, NUCLEUS composition patterns, neuralAPI deployment, per-team absorption targets
+- *(Archived to fossilRecord repository — May 12, 2026)*
+- Hosting evolution, DNS metadata closure, cell membrane addendum
+- Cell membrane architecture, NUCLEUS composition patterns, neuralAPI deployment, per-team absorption targets
 
 ### Interstadial Exit & Stadial Boundary
 - `INTERSTADIAL_EXIT_CRITERIA.md` — Authoritative exit criteria: 5 pillars, gate conditions, stadial boundary definition, external validation drivers
@@ -331,7 +332,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `fossilRecord/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem definition (archived — active work in lithoSpore)
 
 ### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (currently empty — all resolved to `fossilRecord/`)
+- `handoffs/` — Cross-primal evolution handoff documents (6 active: Pass 11-14 ecosystem handoffs, Songbird Wave 199, coralReef Sprint 5; 2 archived in `handoffs/archive/`)
 - `petaltongue/` — petalTongue integration documentation
 - `compute-sharing/` — Sovereign compute sharing validation
 - `healthspring/` — healthSpring-specific guidance
@@ -502,7 +503,7 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full ownership model.
 
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring 7-dimension audit.
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
-All resolved handoffs archived to `fossilRecord/` (1,561 items). Zero active ecosystem handoffs.
+Pre-May-12 handoffs archived to `fossilRecord/` repository (3,231 items). 6 active ecosystem handoffs in `handoffs/` (Passes 11-14, primalSpring Phase 32, river delta evolution, Songbird Wave 199, coralReef Sprint 5).
 Per-primal handoffs live in each primal's own `infra/wateringHole/handoffs/`.
 
 ---
