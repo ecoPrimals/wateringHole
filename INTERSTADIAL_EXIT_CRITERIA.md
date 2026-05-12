@@ -2,7 +2,7 @@
 
 # Interstadial Exit Criteria — Full Sovereignty Pre-Wire
 
-**Version**: 1.1 — May 12, 2026 (Phase 32 atomic model update)
+**Version**: 1.2 — May 12, 2026 (evolution pass schedule + sentinel escalation)
 **Status**: Active
 **Phase**: Interstadial (entered April 16, 2026; exit gate defined here)
 
@@ -200,6 +200,65 @@ full content sovereignty. All other shadow runs are independently startable.
 
 **Highest leverage action**: Start the BearDog TLS shadow (no blockers) and
 the lithoSpore Tier 1 integration (groundSpring data ready) in parallel.
+
+---
+
+## Evolution Pass Schedule
+
+Four passes to reach interstadial exit. Ordered by the sentinel model:
+downstream surfaces gaps, upstream owns fixes, primalSpring validates closure.
+Upstream issues are escalated because primals (sentinels) are most sensitive
+to the glacial shift — they must be stable before the stadial cold advance.
+
+### Pass 11: Parallel Shadow Starts (no blockers — start immediately)
+
+These shadow runs have zero dependencies on each other and all upstream work
+is shipped. **Highest-leverage pass** — shadow runs are the literal exit gate.
+
+| Action | Owner | Level | Upstream Ready? |
+|--------|-------|-------|:-:|
+| BearDog TLS shadow on :8443 — deploy script, measure vs Cloudflare | projectNUCLEUS | L4 absorption | YES |
+| lithoSpore Tier 1 — groundSpring B2+B1 into modules, fetch Dryad/NCBI | lithoSpore | L4 integration | YES |
+| NestGate content pipeline — wire `publish_sporeprint.sh` | projectNUCLEUS | L4 absorption | YES (S60) |
+
+**Validates**: Pillars 1 (TLS shadow), 2 (H2-2b), 4 (2+ modules PASS)
+
+### Pass 12: Upstream Sentinel (escalated — primals most climate-sensitive)
+
+Upstream issues block downstream chains. These are sentinel priorities —
+primals that must evolve before the stadial cold advance.
+
+| Action | Owner | Level | Why Escalated |
+|--------|-------|-------|---------------|
+| **toadStool Phase C** (coral-driver: VFIO, DRM, device abstraction) | toadStool | L1 | Blocks `toadstool.validate` → blocks all 8 springs' Tier 2 |
+| **Songbird VPS relay** | Songbird | L1 | Blocks NAT shadow → NestGate extracellular → content sovereignty |
+| **coralReef timeout/FECS/GPCCS** + `naga::Module` stability | coralReef | L1 | Blocks sovereign dispatch proof for hotSpring GPU validation |
+
+### Pass 13: Gate Composition (L3/L4 — wiring shipped capabilities)
+
+| Action | Owner | Level | Dependency |
+|--------|-------|-------|------------|
+| BTSP dual-auth shadow (JupyterHub PAM plugin) | projectNUCLEUS | L4 | BearDog authenticator ready |
+| ABG WCM via deploy graphs + provenance trio | projectNUCLEUS + ABG | L4 | Thread 1 operational |
+| Foundation Threads 3, 4, 8 expressions | healthSpring (3,8), wetSpring+airSpring (4) | L3 | Seeding infra ready |
+| Foundation Threads 9, 10 full seeding | ludoSpring (9), ludoSpring+primalSpring (10) | L3 | Expression+data+targets |
+| healthSpring BTSP FAMILY_SEED interop | healthSpring + primalSpring | L3 | Root cause documented |
+
+**Validates**: Pillars 2 (H2 shadow state), 3 (WCM through provenance)
+
+### Pass 14: Convergence (stadial-ready)
+
+| Action | Owner | Level | Dependency |
+|--------|-------|-------|------------|
+| Tier 2 Science API (`toadstool.validate` + `list_workloads`) | toadStool + primalSpring | L1/L2 | Phase C (Pass 12) |
+| `barracuda.precision.route` wired | barraCuda + primalSpring | L1/L2 | hotSpring precision story |
+| Ionic runtime live (cross-spring RPC) | primalSpring + healthSpring | L2 | CompositionContext wiring |
+| skunkBat E2E operational audit validation | skunkBat + primalSpring | L2 | JH-5 Phase 3 shipped |
+| `capability.resolve` name-based discovery | Songbird | L1 | Unblocks discovery debt |
+| CompositionContext L2 coordination pass | primalSpring | L2 | All shadows running |
+
+**Exit condition**: All checklist items above checked. Shadow runs producing
+comparison data. Stadial can begin.
 
 ---
 
