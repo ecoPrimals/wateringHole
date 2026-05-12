@@ -122,9 +122,9 @@ graphs (Nest + Node atomics) with provenance trio producing verifiable output.
 | # | Target | Current State | Interstadial Remaining |
 |---|--------|---------------|----------------------|
 | 4a | Spring LTEE paper queue started | **ACTIVE** — 4 springs reproducing | Continue B3+ reproductions |
-| 4b | At least 2 modules functional | groundSpring B2+B1 **COMPLETE** (Python+Rust) | Integrate into lithoSpore ltee-fitness + ltee-mutation |
-| 4c | Data fetched and hashed | Templates in data.toml | Fetch Wiser 2013, Barrick 2009 from Dryad/NCBI |
-| 4d | Python Tier 1 baselines running | groundSpring `control/ltee_*` + `validate` bins | Wire into lithoSpore module structure with real data |
+| 4b | At least 2 modules functional | **ACTIVE** — ltee-fitness (Module 1) + ltee-mutations (Module 2) integrating groundSpring B2+B1 | Validate PASS at Tier 1 |
+| 4c | Data fetched and hashed | **ACTIVE** — `fetch_wiser_2013.sh` + `fetch_barrick_2009.sh` shipped, `fitness_data.csv` + `mutation_parameters.json` in tree | BLAKE3-hash into NestGate |
+| 4d | Python Tier 1 baselines running | **ACTIVE** — `power_law_fitness.py` (244L) + `mutation_accumulation.py` (210L) expanded, `expected/module1_fitness.json` + `module2_mutations.json` shipped | Run validation, confirm PASS |
 
 LTEE reproduction status (May 11):
 - **groundSpring**: B2 (Wiser 2013) Python 9/9 + Rust 10/10 PASS; B1 (Barrick 2009) Python 8/8 + Rust 8/8 PASS
@@ -167,8 +167,8 @@ LTEE reproductions active across 4 springs.
 [ ] Pillar 2: H2-2b/3a/3b/3c all in shadow-run state
 [ ] Pillar 2: Foundation Threads 4+7 workloads running
 [ ] Pillar 3: Thread 1 WCM compositions through provenance trio
-[ ] Pillar 4: 2+ lithoSpore modules PASS at Tier 1
-[ ] Pillar 4: Real data fetched from Dryad/NCBI
+[~] Pillar 4: 2+ lithoSpore modules PASS at Tier 1 — ACTIVE (Module 1+2 integrating, validation pending)
+[x] Pillar 4: Real data fetched from Dryad/NCBI — Wiser 2013 + Barrick 2009 in tree
 [x] Pillar 5: 8/8 springs at barraCuda optional=true (exceeded 4+ target)
 [x] Pillar 5: wetSpring 4 open PG gaps (all external — below 5 threshold)
 [x] Pillar 5: airSpring gS L4, neuralSpring gS L5 (exceeded L4 target)
@@ -189,10 +189,10 @@ data that proves parity before cutover.
 | Shadow Run | Upstream Ready? | Absorption Owner | Status |
 |-----------|:--------------:|-----------------|--------|
 | **BearDog TLS on :8443** | YES (Wave 100) | projectNUCLEUS | **NOT STARTED** — needs deploy script + Cloudflare baseline metrics |
-| **Songbird NAT + VPS relay** | PARTIAL (STUN/TURN shipped, VPS relay pending) | projectNUCLEUS | **BLOCKED** — needs Songbird VPS relay implementation |
+| **Songbird NAT + VPS relay** | PROGRESSING (TURN server + `songbird relay` CLI + bidirectional data plane) | projectNUCLEUS | **PROGRESSING** — listener wired, relay ops deployment remaining |
 | **BTSP dual-auth** | YES (BearDog authenticator) | projectNUCLEUS | **NOT STARTED** — needs JupyterHub PAM plugin + shadow period |
 | **NestGate content serving** | YES (Session 60) | projectNUCLEUS | **UNBLOCKED** — `publish_sporeprint.sh` ready to wire |
-| **lithoSpore Tier 1** | YES (groundSpring B2+B1 PASS) | lithoSpore | **NOT STARTED** — needs module integration + real data fetch |
+| **lithoSpore Tier 1** | YES (groundSpring B2+B1 PASS) | lithoSpore | **ACTIVE** — Module 1+2 integrating real data (Wiser 2013 + Barrick 2009 fetched), Python notebooks + Rust validation expanded |
 | **ABG WCM composition** | PARTIAL (Thread 1 operational) | projectNUCLEUS | **PARTIAL** — needs provenance trio in deploy graph |
 
 **Blocking dependency chain**: Songbird VPS relay → NestGate extracellular →
