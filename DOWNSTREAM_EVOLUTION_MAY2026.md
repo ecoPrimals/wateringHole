@@ -84,7 +84,7 @@ The next evolution target is **Tier 2 convergence** (JSON-RPC via `toadstool.val
 | primalSpring | L8 | 602 | 4 | coord | Shadow run validation, CompositionContext L2 pass |
 | hotSpring | L6 | 1,025 | 4 | B2 | Trio rewire, sovereign dispatch on warm GPUs |
 | healthSpring | L5 | 999 | 4 | B5 | BTSP FAMILY_SEED interop, ionic bridge |
-| neuralSpring | L5 | 1,453 | 4 | B1 | lithoSpore ML module integration |
+| neuralSpring | L5 | 888 (IPC-first) | 4 | B1 | NestGate wired, CapabilityRouter IPC, lithoSpore ML module ready, Thread 5 expression authored |
 | wetSpring | L4 | 1,613 | 4 | B7 | 4 PGs (trio live, `capability.resolve`, NestGate, sovereignty) |
 | airSpring | L4 | 1,389 | 4 | — | AG-005–012 (Squirrel, coralReef, dispatch, toadStool API) |
 | groundSpring | L4 | 1,125 | 4 | B1-B3 | lithoSpore module integration (B2+B1 COMPLETE) |
@@ -96,7 +96,7 @@ Tier 2 convergence requires `toadstool.validate` + `toadstool.list_workloads`
 upstream (specified in `primalSpring/docs/LIVE_SCIENCE_API.md`, not yet
 implemented). Until that lands, springs focus on:
 
-1. **lithoSpore integration** — groundSpring B2+B1, neuralSpring B1 Rust binaries ready
+1. **lithoSpore integration** — groundSpring B2+B1, neuralSpring B1 Rust binaries ready (V153 handoff shipped, LTEE B1 README for lithoSpore team)
 2. **Foundation thread seeding** — Threads 3, 4, 8, 9, 10 need expressions/targets
 3. **Shadow run participation** — BearDog TLS, NestGate content pipeline
 4. **Domain-specific composition depth** — provenance trio, ionic bonds, petalTongue
