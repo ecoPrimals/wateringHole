@@ -431,7 +431,7 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 
 **Pillar 1 — Primal Sovereignty Pre-Wire:**
 - ~~MethodGate for toadStool + Squirrel (11/13 → 13/13)~~ **DONE** — 13/13
-- ~~NestGate `content.*` transport parity~~ **RESOLVED** (Session 60, May 11) — all 8 `content.*` methods wired on all 4 transport surfaces (primary dispatch, SemanticRouter, isomorphic IPC, HTTP API). `lifecycle.status` also added. Unblocks H2-05–09, petalTongue sovereign serving, plasmidBin hosting, foundation layers. See `handoffs/NESTGATE_SESSION60_TRANSPORT_PARITY_HANDOFF_MAY11_2026.md`
+- ~~NestGate `content.*` transport parity~~ **RESOLVED** (Session 60, May 11) — all 8 `content.*` methods wired on all 4 transport surfaces (primary dispatch, SemanticRouter, isomorphic IPC, HTTP API). `lifecycle.status` also added. Unblocks H2-05–09, petalTongue sovereign serving, plasmidBin hosting, foundation layers. See `fossilRecord/handoffs-may11-2026-wave9-closure/NESTGATE_SESSION60_TRANSPORT_PARITY_HANDOFF_MAY11_2026.md`
 - BearDog TLS shadow on :8443 (H2-3b) — L4 absorption (upstream shipped)
 - Songbird NAT + VPS relay (H2-3c) — L4 absorption (upstream shipped)
 - petalTongue web mode + NestGate backend (H2-3a) — **UNBLOCKED** (NestGate transport parity shipped)
@@ -507,6 +507,9 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full ownership model.
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring 7-dimension audit.
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
 See `handoffs/archive/post_interstadial_may2026/` for 19 archived closure handoffs.
+See `fossilRecord/handoffs-may11-2026-wave9-closure/` for 34 archived handoffs from the Wave 9 debt closure cycle.
+
+**Active handoffs (5):** Compute trio Wave 8 evolution, LTEE guideStone, sovereign compute warm-catch, projectNUCLEUS UniBin/patterns.
 
 ---
 
