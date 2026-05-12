@@ -8,9 +8,8 @@
 springs are IPC-first (`default = []`, barraCuda optional). Phase 32 evolves the
 atomic model: skunkBat joins Tower (3 primals), Nest reconciled with provenance
 trio (7 primals). All 13 primals at zero gate debt. Pillar 5 (river delta) MET.
-**Tier 2 is UNBLOCKED** — `toadstool.validate` IMPLEMENTED (S250),
-`toadstool.list_workloads` WIRED (S245+), `barracuda.precision.route` IMPLEMENTED.
-All 7 delta springs are actively wiring Tier 2. Shadow runs launching (Pass 11).
+The next frontier is **shadow run execution** and **Tier 2 convergence**
+(`toadstool.validate`, `toadstool.list_workloads` via JSON-RPC).
 
 **Spring UniBin binaries are now tractable for plasmidBin deployment** — each
 spring produces a single binary with `certify`/`validate`/`serve`/`status`/`version`
@@ -77,14 +76,13 @@ Any primal that misbehaves, returns unexpected formats, or is missing a capabili
 ## WHERE EVERYONE STANDS (Phase 32, May 12)
 
 All 8/8 springs at **Tier 4 IPC-first** — rewiring COMPLETE. 13,100+ total tests.
-**Tier 2 is UNBLOCKED.** `toadstool.validate` IMPLEMENTED (S250),
-`toadstool.list_workloads` WIRED (S245+), `barracuda.precision.route` IMPLEMENTED.
-All 7 springs are actively wiring Tier 2 IPC modules.
+The next evolution target is **Tier 2 convergence** (JSON-RPC via `toadstool.validate`
++ `toadstool.list_workloads`), blocked on upstream Tier 2 Science API.
 
 | Spring | gS | Tests | Tier | LTEE | Next Step |
 |--------|---:|------:|:----:|:----:|-----------|
 | primalSpring | L8 | 602 | 4 | coord | Shadow run validation, CompositionContext L2 pass |
-| hotSpring | L6 | 1,036 | 4 | B2 | Tier 4 IPC-first; 9/12 scenarios; GAP-HS-092 call_by_capability |
+| hotSpring | L6 | 1,025 | 4 | B2 | Trio rewire, sovereign dispatch on warm GPUs |
 | healthSpring | L5 | 999 | 4 | B5 | BTSP FAMILY_SEED interop, ionic bridge |
 | neuralSpring | L5 | 892 (IPC-first) | 4 | B1 | Tier 2 wired (`toadstool.validate` + `list_workloads`), NestGate wired, CapabilityRouter IPC, deep debt audit all-clear, B1 NUCLEUS workload TOML, Thread 5 ML_SURROGATES wired. V154. |
 | wetSpring | L4 | 1,613 | 4 | B7 | 4 PGs (trio live, `capability.resolve`, NestGate, sovereignty) |
@@ -92,27 +90,16 @@ All 7 springs are actively wiring Tier 2 IPC modules.
 | groundSpring | L4 | 1,125 | 4 | B1-B3 | lithoSpore module integration (B2+B1 COMPLETE) |
 | ludoSpring | L4 | 854 | 4 | — | Composition-only niche, notebooks, Thread 9+10 |
 
-### Convergence Priority (Tier 2 — ACTIVE)
+### Convergence Priority (Tier 2 — next frontier)
 
-**Tier 2 is UNBLOCKED.** All upstream methods are live:
-- `toadstool.validate` — **IMPLEMENTED** (S250)
-- `toadstool.list_workloads` — **WIRED** (S245+)
-- `barracuda.precision.route` — **IMPLEMENTED** (precision.rs + 649 tests)
+Tier 2 convergence requires `toadstool.validate` + `toadstool.list_workloads`
+upstream (specified in `primalSpring/docs/LIVE_SCIENCE_API.md`, not yet
+implemented). Until that lands, springs focus on:
 
-**All 7 springs are wiring Tier 2** (same-day ecosystem response):
-- hotSpring: `ipc/tier2.rs` (232L) — validate + precision.route
-- wetSpring: `ipc/precision_route.rs` (182L) + `ipc/toadstool_validate.rs` (313L)
-- neuralSpring: `ipc/toadstool.rs` expanded (132L+)
-- healthSpring: `ipc/barracuda_client.rs` (49L) + `ipc/compute_dispatch.rs` (104L)
-- ludoSpring: `ipc/toadstool.rs` (231L) + `s_tier2_convergence.rs` scenario
-- groundSpring: V139 Tier 2 wiring (local)
-- airSpring: Tier 2 IPC wiring (local)
-
-**Parallel priorities**:
-1. **Complete Tier 2 wiring** — `--format json` + validate + precision.route
-2. **lithoSpore integration** — Module 1+2 actively integrating real data
-3. **Foundation thread expressions** — Threads 3, 4, 8, 9, 10 still need expressions
-4. **Shadow run participation** — BearDog TLS, NestGate content pipeline
+1. **lithoSpore integration** — groundSpring B2+B1, neuralSpring B1 Rust binaries ready (V154 handoff shipped, LTEE B1 README + NUCLEUS workload TOML for lithoSpore team)
+2. **Foundation thread seeding** — Threads 3, 4, 8, 9, 10 need expressions/targets
+3. **Shadow run participation** — BearDog TLS, NestGate content pipeline
+4. **Domain-specific composition depth** — provenance trio, ionic bonds, petalTongue
 
 ## WHAT'S NEW (Phase 32, May 12)
 
@@ -122,7 +109,7 @@ All 7 springs are actively wiring Tier 2 IPC modules.
 - **NestGate Session 60**: `content.*` transport parity — all 8 methods on all 4 surfaces. Last L1 upstream debt cleared.
 - **skunkBat JH-5 Phase 3 shipped**: Cross-primal audit forwarding wired (rhizoCrypt + sweetGrass).
 - **Temporal ecosystem review**: Full audit at `primalSpring/docs/TEMPORAL_ECOSYSTEM_REVIEW_MAY12_2026.md`.
-- **Live Science API ACTIVE**: `primalSpring/docs/LIVE_SCIENCE_API.md` — `toadstool.validate` IMPLEMENTED (S250), `toadstool.list_workloads` WIRED (S245+), `barracuda.precision.route` IMPLEMENTED. Tier 2 UNBLOCKED.
+- **Live Science API specified**: `primalSpring/docs/LIVE_SCIENCE_API.md` — Tier 2 wire contract for `toadstool.validate`, `toadstool.list_workloads` (NOT YET IMPLEMENTED upstream).
 - **413 canonical methods** (301 exercised, 72%): primalSpring registry. Zero drift.
 - **Wave 10 complete**: Phase 32 atomic evolution, compute trio temporal shift, scorecard updated.
 
