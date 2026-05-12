@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: May 5, 2026
-**Version**: v1.4.0
+**Date**: May 12, 2026
+**Version**: v1.5.0 (Phase 32 atomic model alignment)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -54,22 +54,40 @@ Upstream primals absorb math, shaders, and IPC patterns from springs.
 Downstream gets less "snow melt" — fewer new capabilities flowing down.
 Springs focus on validation of what exists, surfacing gaps, tightening.
 
-**Current state (May 2026)**: Delta season with convergence phase — **guideStone Level 4 achieved** for
-primalSpring. Live NUCLEUS deployed from plasmidBin as binary depot. Stadial parity
-gate cleared across all 13 primals + primalSpring. projectNUCLEUS absorbed by primalSpring.
-**Library-to-binary rewiring** is now the primary delta season task — springs evolving from
-library imports to binary-only IPC calls against ecobin primals. Springs evolving to self-validating
-NUCLEUS deployments via the plasmidBin depot pattern:
-- **Stadial gate cleared**: BearDog W56, Songbird W192, NestGate 43w, ToadStool S203t, petalTongue v1.6.7, sweetGrass stadial — zero async-trait, zero finite dyn, Edition 2024
-- **primalSpring v0.9.21 Phase 55b**: guideStone Level 4 (**187/187 live NUCLEUS ALL PASS — 13/13 BTSP authenticated, 8 cellular graphs BTSP-enforced**, 41/41 bare, BLAKE3 P3, seed provenance Layer 0.5, BTSP escalation Layer 1.5, cellular deployment Layer 7, biomeOS v3.36 absorbed (+ v3.36: BTSP Phase 3 `btsp.negotiate` ChaCha20-Poly1305 + NULL fallback, 14 stale EVOLVED comments purged), NestGate v0.4.70 S48 absorbed (native encrypt-at-rest + auth bypass), Squirrel AN absorbed (HTTP providers + DISCOVERY_SOCKET + crypto foundation), Songbird W178 absorbed (anyhow migration)), fragment-first graphs, 631 tests, two-tier crypto architecture, plasmidBin depot. **Upstream gaps narrowed**: NestGate encrypt-at-rest RESOLVED, Squirrel discovery RESOLVED. Remaining: BearDog purpose-key RPC, rhizoCrypt/sweetGrass Tower delegation, loamSpine BTSP activation
-- **guideStone pattern**: Self-validating NUCLEUS composition (5 properties: deterministic, traceable, self-verifying, env-agnostic, tolerance-documented). Proven by hotSpring-guideStone-v0.7.0. primalSpring guideStone now validates base composition for all downstream. Standard at `primalSpring/wateringHole/GUIDESTONE_COMPOSITION_STANDARD.md` v1.1.0.
-- **plasmidBin genomeBin depot**: Full cross-architecture binary depot (46 binaries, 6 target triples, Tier 1 39/39). `build_ecosystem_genomeBin.sh` replaces musl-only script with 9-target matrix (Tier 1 MUST / Tier 2 SHOULD / Tier 3 NICE per ecoBin Architecture Standard). All upstream armv7/nestgate gaps closed Phase 45. Springs pull, deploy NUCLEUS, validate externally. See `primalSpring/wateringHole/PLASMINBIN_DEPOT_PATTERN.md`.
-- **Active delta springs (May 11, 2026 — all Tier 4 IPC-first)**: hotSpring v0.6.32 (gS L6 certified, LTEE B2, 3-GPU sovereign), healthSpring V63 (gS L5, Thread 3 seeded), neuralSpring S201b (gS L5, LTEE B1), wetSpring V163 (gS L4, LTEE B7, unified discovery), airSpring v0.10.0 (gS L4, barraCuda 0.3.13), groundSpring V135 (gS L4, LTEE B2+B1 COMPLETE), ludoSpring V63 (gS L4, SPDX, 854 tests)
-- **primalSpring guideStone**: `primalspring_guidestone` binary — 9-layer base composition certification. Base layer that domain guideStones inherit.
-- **Library-to-binary rewiring COMPLETE**: 8/8 springs at Tier 4 (`default = []`, barracuda optional). All springs now IPC-first for NUCLEUS deployments.
+**Current state (May 12, 2026)**: Interstadial convergence — **Pillar 5 (river delta) MET**,
+shadow run execution is the remaining gate. Phase 32 atomic model evolution complete.
 
-Mountain season work continues for cross-primal protocols: ionic bond
-negotiation, BTSP Phase 3, compute.dispatch standardization.
+**Phase 32 Atomic Model** (May 12):
+
+| Atomic | Particle | Primals | Count |
+|--------|----------|---------|------:|
+| **Tower** | Electron | bearDog + songbird + skunkBat | 3 |
+| **Node** | Proton | Tower + toadStool + barraCuda + coralReef | 6 |
+| **Nest** | Neutron | Tower + nestGate + provenance trio | 7 |
+| **NUCLEUS** | Atom | Tower + Node + Nest (deduplicated) + meta-tier | 10+3=13 |
+
+- **13/13 primals at zero gate debt**: MethodGate, BTSP AEAD Phase 3, Edition 2024, deny.toml — all clean.
+- **primalSpring v0.9.25**: guideStone **Level 8** (absorbed certification engine), 602 library tests, 77 deploy graphs, 413 registered methods (301 exercised, 72%), fragment-based composition v3.0.0.
+- **Library-to-binary rewiring COMPLETE**: 8/8 springs at **Tier 4** (`default = []`, barraCuda optional). All springs now IPC-first for NUCLEUS deployments.
+- **Active delta springs (May 12, all Tier 4 IPC-first)**:
+
+| Spring | gS | Tests | Key Status |
+|--------|---:|------:|------------|
+| primalSpring | L8 | 602 | Coordinator — 413 methods, 77 graphs |
+| hotSpring | L6 | 1,025 | LTEE B2, 3-GPU sovereign |
+| healthSpring | L5 | 999 | Thread 3 seeded |
+| neuralSpring | L5 | 1,453 | LTEE B1 Py+Rust done |
+| wetSpring | L4 | 1,613 | LTEE B7 started, 4 PGs open |
+| airSpring | L4 | 1,389 | barraCuda 0.3.13 |
+| groundSpring | L4 | 1,125 | LTEE B2+B1 COMPLETE |
+| ludoSpring | L4 | 854 | SPDX, composition-only |
+
+- **Interstadial gate**: Pillar 5 met. Pillars 1-4 structurally wired — transition now requires **shadow run execution**, not more code. See `INTERSTADIAL_EXIT_CRITERIA.md` for pass schedule.
+- **plasmidBin genomeBin depot**: 46 cross-architecture binaries, 6 targets, Tier 1 39/39.
+- **guideStone pattern**: absorbed into UniBin as certification organelle (L8).
+
+Mountain season work continues for: toadStool Phase C (coral-driver), Songbird
+VPS relay, ionic bond runtime, `toadstool.validate` Tier 2 science API.
 
 ### Spring Season (composition elevation)
 
@@ -101,6 +119,30 @@ back up through primalSpring to the primal teams.
 **The cycle repeats**: Primals absorb, capabilities improve, meltwater
 flows, springs validate, gardens compose, gaps evaporate.
 
+### Sentinel Escalation Model
+
+Primals are **sentinels** — the least composed entities, most directly exposed
+to the glacial shift between interstadial and stadial. Like alpine species
+that respond first to climate change, primals are the earliest to feel schema
+pressure, IPC contract drift, and capability regressions.
+
+The escalation rule follows from this:
+
+1. **Downstream surfaces the gap** — springs and products discover composition
+   failures (e.g. "toadStool returns unexpected shape for `compute.dispatch.submit`")
+2. **Upstream owns the fix** — primal teams resolve at the source. The fix
+   flows downhill as meltwater.
+3. **primalSpring validates closure** — gate tests confirm the fix composes
+   correctly across atomics.
+4. **Escalation priority**: upstream issues are always higher priority than
+   downstream. A primal regression cascades to all 8 springs; a spring gap
+   affects only that spring. Sentinel sensitivity means primal fixes are
+   treated as urgent even when the downstream impact appears small.
+
+This model inverts the usual "closer to user = higher priority" pattern.
+In an ecosystem where correctness flows downhill, the source must be
+pristine for the delta to be trustworthy.
+
 ---
 
 ## How Each Layer Reads the Cycle
@@ -130,9 +172,10 @@ that downstream springs absorb.
 FullNucleus). Surface upstream gaps. Provide the `composition` validation
 library so springs can test parity.
 
-**Current priority**: Guide spring IPC rewiring. Primals are ready (all 12 ALIVE,
-32 barraCuda methods, UDS everywhere). Springs need to drop library deps from
-primal binaries and call ecobin primals over IPC for the primal proof.
+**Current priority**: IPC rewiring is **complete** (8/8 Tier 4). Focus shifts to
+shadow run execution (BearDog TLS, lithoSpore Tier 1), Tier 2 science API
+wiring (`toadstool.validate`), and CompositionContext L2 coordination pass.
+All 13 primals at zero gate debt.
 
 ### If You're a Domain Spring (hotSpring, wetSpring, etc.)
 
@@ -434,14 +477,12 @@ pillars define the exit gate:
 
 1. **Primal Sovereignty (sentinel-stadial)**: **13/13 at the gate** — zero
    upstream debt. Downstream absorption (TLS shadow, NAT relay, content
-   pipeline) is L4 work.
-2. **NUCLEUS Deployments**: H2 sub-steps 2b/3a/3b/3c in shadow-run state,
-   Foundation Threads 4+7 workloads running
-3. **ABG Hosting**: Thread 1 WCM compositions through provenance trio
-4. **lithoSpore**: 2+ modules PASS at Tier 1 with real NCBI/Dryad data
-5. **River Delta**: ~~4+ springs at `optional=true`~~ **DONE — 8/8 Tier 4**,
-   ~~wetSpring < 5 PG~~ **DONE — 4 open**, ~~air/neural gS L4~~ **DONE — L4/L5**,
-   7/10 foundation threads seeded — **PILLAR 5 GATE MET**
+   pipeline) is L4 work. **Structural: MET. Shadow execution: pending.**
+2. **NUCLEUS Deployments**: H2 sub-steps 2b/3a/3b/3c need shadow-run state,
+   Foundation Threads 4+7 workloads running — **Pass 11/13 work**
+3. **ABG Hosting**: Thread 1 WCM through provenance trio — **Pass 13 work**
+4. **lithoSpore**: 2+ modules PASS at Tier 1 with real NCBI/Dryad data — **Pass 11 work**
+5. **River Delta**: **PILLAR 5 GATE MET** (May 11) — 8/8 Tier 4, 4 PGs, L4/L5, 7/10 seeded
 
 Full details: `INTERSTADIAL_EXIT_CRITERIA.md`
 
@@ -459,18 +500,35 @@ ends when shadow runs prove parity and external deployments succeed.
 
 ## Future Trajectory
 
-### Interstadial Remaining (Weeks — sovereignty pre-wire)
+### Interstadial Remaining (organized as evolution passes — see `INTERSTADIAL_EXIT_CRITERIA.md`)
 
+**Pass 11 — Parallel Shadow Starts (no blockers, start immediately)**:
 - BearDog TLS shadow run on :8443 (H2-3b — upstream shipped)
-- Songbird NAT + VPS relay integration (H2-3c — upstream shipped)
-- NestGate + petalTongue content pipeline (H2-3a — partial)
-- BTSP JupyterHub authenticator dual-auth shadow (H2-2b — ready)
-- JH-5 audit forwarding wired: skunkBat → rhizoCrypt → sweetGrass
+- lithoSpore Tier 1: integrate groundSpring B2+B1 into modules, fetch real data
+- NestGate content pipeline: wire `publish_sporeprint.sh` (Session 60 unblocked)
+
+**Pass 12 — Upstream Sentinel (escalated)**:
+- toadStool Phase C (coral-driver: VFIO, DRM, device abstraction)
+- Songbird VPS relay (blocks NAT shadow → NestGate extracellular)
+- coralReef timeout/FECS stability
+
+**Pass 13 — Gate Composition**:
+- BTSP JupyterHub dual-auth shadow (H2-2b — ready)
+- ABG: Thread 1 WCM compositions through provenance trio
+- Foundation Threads 3, 4, 8, 9, 10 expressions + seeding
+
+**Pass 14 — Convergence**:
+- Tier 2 Science API (`toadstool.validate`, `toadstool.list_workloads`)
+- Ionic runtime live, CompositionContext L2 coordination pass
+- skunkBat E2E operational audit validation
+
+**Previously resolved**:
 - ~~squirrel MethodGate~~ **RESOLVED** — 13/13 at gate (May 11)
-- lithoSpore: ~~groundSpring B2 reproduction~~ **DONE** (B2+B1 PASS) → integrate into lithoSpore modules
+- ~~groundSpring B2 reproduction~~ **DONE** (B2+B1 PASS)
 - ~~River delta: airSpring + groundSpring → `optional=true`~~ **DONE** — 8/8 Tier 4
-- ~~Foundation: seed Threads 3 + 5~~ **DONE** — 7/10 threads seeded (2, 3, 5, 6, 7, 9, 10)
-- ABG: exercise Thread 1 WCM compositions through provenance trio
+- ~~Foundation: seed Threads 3 + 5~~ **DONE** — 7/10 threads seeded
+- ~~JH-5 audit forwarding~~ **DONE** — skunkBat Phase 3 shipped
+- ~~NestGate content.put transport parity~~ **RESOLVED** — Session 60
 
 ### Stadial (Months — external validation drives evolution)
 
