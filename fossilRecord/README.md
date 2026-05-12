@@ -6,10 +6,10 @@ preserved as geological record, not as active guidance.
 
 ## What lives here
 
-- **635 files** from the former `handoffs/archive/` — full evolution history
-  from Feb–Mar 2026 across all primals and springs
-- **42 files** from active handoffs where a newer version of the same
-  primal/spring superseded the earlier document
+- **1,561+ documents** — full evolution history from Feb 2026–present across
+  all primals, springs, and ecosystem coordination
+- Consolidated from former `handoffs/archive/`, active handoffs, and
+  per-wave closure sweeps
 
 ## Why this exists
 

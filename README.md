@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 11, 2026 (River delta Tier 4 complete — 8/8 IPC-first, LTEE reproductions active, guideStone convergence, infra GPU sovereignty)
+**Last Updated**: May 12, 2026 (Compute trio Phase B complete, barraCuda v0.4.0 stadial gate, zero active ecosystem handoffs)
 
 ---
 
@@ -324,19 +324,14 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Interstadial Exit & Stadial Boundary
 - `INTERSTADIAL_EXIT_CRITERIA.md` — Authoritative exit criteria: 5 pillars, gate conditions, stadial boundary definition, external validation drivers
-- `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` — NUCLEUS findings, spring UniBin → plasmidBin readiness, static observer, darkforest v0.2.1
+- `fossilRecord/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` — NUCLEUS findings, spring UniBin → plasmidBin readiness
 
 ### Targeted GuideStone (LTEE)
 - `TARGETED_GUIDESTONE_STANDARD.md` — Standard for how composed subsystems bud into portable artifacts (budding model, 5 components, cross-platform via ecoBin/genomeBin, liveSpore tracking, data freshness protocol)
-- `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem: first Targeted GuideStone artifact (Barrick Lab), 7 science modules, 36 paper-spring assignments across 6 springs, three-tier architecture, projectNUCLEUS deployment subsystem
-
-### Deep Debt & Upstream Handbacks
-- `handoffs/PROJECTNUCLEUS_CROSS_ECOSYSTEM_AUDIT_MAY11_2026.md` — Cross-ecosystem audit findings, MethodGate parity, spring skunkBat wiring, barraCuda version skew
-- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_UPSTREAM_HANDBACK_MAY11_2026.md` — Upstream handback: toadStool/squirrel MethodGate, barraCuda crypto delegation, squirrel LocalProcessProvider
-- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_EVOLUTION_SWEEP_HANDOFF_MAY11_2026.md` — Full sweep handoff: composition patterns, NestGate priority, lessons for all teams, what's next for data/compute chains
+- `fossilRecord/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem definition (archived — active work in lithoSpore)
 
 ### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (active + 900+ archived including 19 post-interstadial closures)
+- `handoffs/` — Cross-primal evolution handoff documents (currently empty — all resolved to `fossilRecord/`)
 - `petaltongue/` — petalTongue integration documentation
 - `compute-sharing/` — Sovereign compute sharing validation
 - `healthspring/` — healthSpring-specific guidance
@@ -451,7 +446,7 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 - ~~Zero `content.*` scenarios, tests, or graph steps~~ **FIXED** (W7-02/03/04)
 - ~~413-method registry unchecked semantically~~ **FIXED** — inverse drift detection (W7-06)
 - **Wave 7** (contract testing): content domain semantic gates shipped
-- **Wave 8** (compute trio): Node atomic sovereign dispatch contracts shipped — see `handoffs/COMPUTE_TRIO_WAVE8_NODE_ATOMIC_EVOLUTION_MAY11_2026.md`
+- **Wave 8** (compute trio): Node atomic sovereign dispatch contracts shipped — Phase B complete, Phase C in progress
 
 **Pillar 2 — NUCLEUS Deployments:**
 - Shadow-run state for H2-2b/3a/3b/3c
@@ -478,7 +473,7 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 - First artifact budding from ecosystem into portable deployment
 - 7 science modules, 36 paper-spring assignments across 6 springs
 - Active reproductions: groundSpring B2+B1 **COMPLETE**, hotSpring B2, wetSpring B7, neuralSpring B1
-- Standard: `TARGETED_GUIDESTONE_STANDARD.md`; handoff: `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md`
+- Standard: `TARGETED_GUIDESTONE_STANDARD.md`; active work in lithoSpore
 
 ### Remaining Spring Gaps (May 11 — river delta Tier 4 complete)
 
@@ -506,10 +501,8 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full ownership model.
 
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring 7-dimension audit.
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
-See `handoffs/archive/post_interstadial_may2026/` for 19 archived closure handoffs.
-See `fossilRecord/handoffs-may11-2026-wave9-closure/` for 34 archived handoffs from the Wave 9 debt closure cycle.
-
-**Active handoffs (5):** Compute trio Wave 8 evolution, LTEE guideStone, sovereign compute warm-catch, projectNUCLEUS UniBin/patterns.
+All resolved handoffs archived to `fossilRecord/` (1,561 items). Zero active ecosystem handoffs.
+Per-primal handoffs live in each primal's own `infra/wateringHole/handoffs/`.
 
 ---
 

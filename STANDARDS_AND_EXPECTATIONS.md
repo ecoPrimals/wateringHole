@@ -137,11 +137,10 @@ All per-entity leverage patterns are consolidated in a single reference:
 Session handoffs live in `handoffs/`. They are the working memory between sessions —
 what was done, what's next, what broke, what was discovered.
 
-- **Active**: `handoffs/*.md` — current work items (last 48 hours)
-- **Fossil record**: `handoffs/archive/` — completed work, preserved for provenance
+- **Active**: `handoffs/*.md` — current work items
+- **Fossil record**: `fossilRecord/` — completed work, preserved for provenance (1,561+ documents)
 
-Handoffs are archived after ~48 hours or when superseded. They are never deleted.
-The archive is the project's geological record.
+Handoffs are archived to `fossilRecord/` when superseded. They are never deleted.
 
 ## 10. Testing Expectations
 
