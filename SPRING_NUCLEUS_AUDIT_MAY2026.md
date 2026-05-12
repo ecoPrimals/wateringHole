@@ -66,7 +66,7 @@ Rust result (known-good)  <->  IPC composition result (being validated)
 | **airSpring** | v0.10.0 | 2 | 1,364 | **2** (eukaryotic UniBin) | ~25-40% | 4 TOMLs | `ipc/provenance.rs` | Not wired | Not wired | 11 baseCamp |
 | **wetSpring** | V155 | 4 | 1,209 | **2** (eukaryotic UniBin) | ~10-20% | 7 TOMLs | `ipc/provenance.rs` + `sweetgrass.rs` | Partial | Partial | 15+ baseCamp |
 | **hotSpring** | latest | 5 | 1,002 | **2** (eukaryotic UniBin) | ~5-15% | 5 TOMLs | Via `composition.rs` | Not wired | Not wired | 15+ baseCamp |
-| **neuralSpring** | S195 | 3 | 1,432 | **2** (eukaryotic UniBin) | ~5-10% | 4 TOMLs | Via per-primal modules | Not wired | Not wired | 15+ baseCamp |
+| **neuralSpring** | S202b | 5 | 888 (IPC-first) | **4** (IPC-first, NestGate) | 0% direct | 4 TOMLs | Via 7 per-primal IPC modules (CapabilityRouter) | Wired (deploy graphs) | Wired (composition.status) | 15+ baseCamp |
 | **groundSpring** | V127 | 4 | 965+ | **1** (eukaryotic UniBin) | ~1-5% | 6 TOMLs | Minimal | Not wired | Not wired | 34 baseCamp |
 
 ---
@@ -270,36 +270,34 @@ already tie to specific papers (anderson_atlas, gonzales_exploration).
 
 ---
 
-### 4. neuralSpring (V138 — guideStone Level 3)
+### 4. neuralSpring (V153 — guideStone Level 5)
 
 **Domain**: ML/AI inference, transformer architecture, WGSL shader composition.
 
-#### Dimension 1: Library-to-Binary Rewiring — Tier 2
+#### Dimension 1: Library-to-Binary Rewiring — Tier 4 (IPC-first)
 
-- **Local primal dirs**: No local `barracuda/` directory — main package directly
-  depends on `barracuda` from primals. `metalForge/forge/`, `playGround/`.
-- **barraCuda coupling**: **Heavy**. Direct `barracuda` dep with rich feature set.
-  `barracuda::` pervasive across `src/` and `validate_barracuda_*` binaries.
-- **IPC surface**: No `src/ipc/` directory. IPC in `ipc_dispatch.rs` (Level 5
-  JSON-RPC over UDS to barraCuda/toadStool/BearDog/Squirrel) and binary RPC
-  (`src/bin/neuralspring_primal/`). Optional `primalspring::` for composition proofs.
-- **niche.rs**: Yes — JSON-RPC transitional server, NUCLEUS bonding policy
+- **Local primal dirs**: `metalForge/forge/`, `playGround/`. No local `barracuda/`.
+- **barraCuda coupling**: **Optional** (`default = []`). 11 modules feature-gated
+  behind `barracuda`. All science paths have CPU fallbacks.
+- **IPC surface**: `src/ipc/` tree with 7 per-primal modules (barracuda, toadstool,
+  beardog, squirrel, coralreef, skunkbat, nestgate). `CapabilityRouter` discovery
+  maps capabilities to primal sockets at runtime. `IpcMathClient` facade.
+  NestGate `content.put/get/exists` wired (S202b). `ipc_dispatch.rs` removed (S201b).
+- **niche.rs**: Yes — JSON-RPC transitional server, NUCLEUS bonding policy.
 
-**Rewiring path**: neuralSpring needs a proper `src/ipc/` directory. The
-`ipc_dispatch.rs` module is the seed. Unique challenge: inference pipeline
-is latency-sensitive (attention, KV-cache, token generation) so IPC overhead
-matters more than in science-batch springs.
+**Status**: IPC-first rewiring COMPLETE. `CapabilityRouter` resolves all primal
+interactions dynamically. Gap 11 (18 barraCuda surface gaps) RESOLVED (12 RPC,
+4 composable, 5 CPU fallback). `--format json` on all validation binaries for
+Tier 2 projectNUCLEUS ingestion.
 
-#### Dimension 2: Deploy Graphs — 1 TOML
+#### Dimension 2: Deploy Graphs — 4 TOMLs
 
-`graphs/neuralspring_deploy.toml`
+`graphs/neuralspring_deploy.toml` + 3 additional composition graphs.
 
-**Gap**: Only one deploy graph. Needs inference pipeline, training loop, and
-model-serving composition graphs.
+#### Dimension 3: Provenance — Via IPC tree + composition.status
 
-#### Dimension 3: Provenance — Via ipc_dispatch.rs
-
-Referenced in composition capabilities, but no dedicated provenance module.
+Provenance wired through 7 IPC modules, `composition.status` capability,
+`PROVENANCE_REGISTRY` (49 records, 12 tests).
 
 #### Dimension 4: petalTongue — Not wired
 
@@ -659,8 +657,8 @@ recipe, BYOB schema.
 5. **airSpring** (Tier 2 -> 3): Good IPC foundation despite pre-delta. Expand
    to cover all domain math.
 
-6. **neuralSpring** (Tier 2 -> 3): Needs `src/ipc/` directory. Latency-sensitive
-   inference pipeline is the unique challenge.
+6. **neuralSpring** (Tier 4 — COMPLETE): `src/ipc/` tree with 7 modules,
+   CapabilityRouter discovery, NestGate wired. guideStone L5. V153 handoff shipped.
 
 7. **groundSpring** (Tier 1 -> 2): Expand `ipc.rs` into `src/ipc/` tree. Optional
    barraCuda feature is a good starting point.
@@ -733,28 +731,25 @@ is the template for springs with diverse domain science.
 
 ---
 
-### neuralSpring — Begin: Create `src/ipc/` directory
+### neuralSpring — COMPLETE (Tier 4 IPC-first, guideStone L5, V153)
 
-Your IPC surface is a single `ipc_dispatch.rs` file. It needs to become a
-proper directory with per-primal modules.
+All original action items resolved:
 
-**Immediate steps**:
-1. Create `src/ipc/` directory. Move `ipc_dispatch.rs` logic into `ipc/mod.rs`.
-   Add per-primal modules: `ipc/barracuda.rs`, `ipc/toadstool.rs`,
-   `ipc/squirrel.rs`, `ipc/coralreef.rs`.
-2. Create `ipc/provenance/` with per-trio modules.
-3. Add a `primal-proof` Cargo feature. Unique challenge: inference pipeline is
-   latency-sensitive — attention, KV-cache, token generation. IPC overhead
-   matters more here than in science-batch springs. Consider batched IPC calls
-   (send full layer computation as one `tensor.matmul` rather than individual ops).
-4. Create `PRIMAL_PROOF_IPC_MAPPING.md` mapping transformer ops (matmul,
-   attention, softmax, gelu, tokenization) to barraCuda JSON-RPC methods.
-5. Wire petalTongue: `heatmap` for attention weights is the highest-visibility
-   channel. The attention pattern IS the interpretability figure.
-6. Create deploy graphs beyond `neuralspring_deploy.toml` — inference pipeline,
-   training loop, and model-serving compositions.
+1. **`src/ipc/` directory** — DONE. 7 per-primal modules (barracuda, toadstool,
+   beardog, squirrel, coralreef, skunkbat, nestgate). `CapabilityRouter` maps
+   capabilities to discovered sockets at runtime. `IpcMathClient` facade.
+2. **IPC-first** — DONE. `default = []`, barraCuda optional. 11 modules feature-gated.
+   CPU fallbacks for all science paths.
+3. **NestGate content-addressed storage** — WIRED (S202b). `content.put/get/exists`.
+4. **Deploy graphs** — 4 TOMLs. Inference pipeline, composition, NUCLEUS workloads.
+5. **`--format json`** — All validation binaries support structured JSON output for
+   Tier 2 projectNUCLEUS ingestion via `ValidationHarness`.
+6. **guideStone Level 5** — 19 certification tests ALL PASS (L0–L5).
+7. **Foundation Thread 5** — Expression authored (`ML_SURROGATES.md`).
+8. **LTEE B1** — Python + Rust binary shipped, lithoSpore README created.
+9. **Gap 11** — RESOLVED (12 RPC, 4 composable, 5 CPU fallback). Flagged upstream drift.
 
-**What you give siblings**: Your Squirrel provider registration pattern gives
+**What you give siblings**: Squirrel provider registration pattern gives
 every spring AI capabilities. neuralSpring's inference evolution is the
 cross-cutting win.
 
@@ -872,12 +867,12 @@ implementation for NUCLEUS spring composition.
 
 | Gap | Springs Affected | Blocked By |
 |-----|-----------------|------------|
-| No standard `src/ipc/` directory structure | hotSpring, neuralSpring, groundSpring | Adoption of ludoSpring/wetSpring pattern |
+| No standard `src/ipc/` directory structure | hotSpring, groundSpring | Adoption of ludoSpring/wetSpring pattern (neuralSpring DONE — 7 modules) |
 | No `primal-proof` feature flag | All except healthSpring | Cargo.toml evolution |
 | No per-method IPC mapping doc | All except hotSpring | `PRIMAL_PROOF_IPC_MAPPING.md` adoption |
-| Deploy graphs don't cover all science pipelines | hotSpring (1), neuralSpring (1) | Graph authoring |
-| petalTongue DataBinding not wired | hotSpring, neuralSpring, airSpring, groundSpring | Channel type mapping + IPC |
-| sweetGrass braids not wired to experiments | hotSpring, neuralSpring, airSpring, groundSpring | Provenance module adoption |
+| Deploy graphs don't cover all science pipelines | hotSpring (1) | Graph authoring (neuralSpring DONE — 4 graphs) |
+| petalTongue DataBinding not wired | hotSpring, airSpring, groundSpring | Channel type mapping + IPC (neuralSpring: composition.status wired) |
+| sweetGrass braids not wired to experiments | hotSpring, airSpring, groundSpring | Provenance module adoption (neuralSpring: PROVENANCE_REGISTRY 49 records) |
 | metalForge -> toadStool capability profiles | All springs with metalForge | toadStool dispatch contract refinement |
 
 ---
