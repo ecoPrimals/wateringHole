@@ -183,7 +183,7 @@ what happens when specific primals coordinate.
 
 | Atomic | Composition | What Emerges |
 |--------|-------------|-------------|
-| **Tower Atomic** | BearDog + Songbird | Pure Rust HTTPS (crypto + TLS + network) |
+| **Tower Atomic** | BearDog + Songbird + skunkBat | Trust boundary (crypto + discovery + defense) |
 | **Node Atomic** | Tower + toadStool + barraCuda | Hardware-aware compute (+ GPU math) |
 | **Nest Atomic** | Tower + NestGate | Secure content-addressed storage |
 | **Full NUCLEUS** | All foundation primals + Squirrel | Complete AI-coordinated ecosystem |
@@ -265,8 +265,8 @@ binary — it is the emergent state when all foundation primals are running and
 coordinated on a gate.
 
 ```
-Tower Atomic (BearDog + Songbird)
-  + Node Atomic (+ toadStool + barraCuda)
+Tower Atomic (BearDog + Songbird + skunkBat)
+  + Node Atomic (+ toadStool + barraCuda + coralReef)
   + Nest Atomic (+ NestGate)
   + Squirrel (AI)
   = Full NUCLEUS

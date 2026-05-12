@@ -18,7 +18,7 @@ propagate to every other spring in the ecosystem.
 
 | Atomic | Particle | Primals | Fragment |
 |--------|----------|---------|----------|
-| Tower | Electron | BearDog + Songbird | `tower_atomic` |
+| Tower | Electron | BearDog + Songbird + skunkBat | `tower_atomic` |
 | Node | Proton | Tower + ToadStool + barraCuda + coralReef | `node_atomic` |
 | Nest | Neutron | Tower + NestGate + rhizoCrypt + loamSpine + sweetGrass | `nest_atomic` |
 | NUCLEUS | Atom | Tower + Node + Nest (9 unique primals) | `nucleus` |

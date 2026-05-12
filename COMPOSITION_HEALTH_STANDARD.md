@@ -20,7 +20,7 @@ These methods apply to the shared NUCLEUS stack. Implementations may live in pri
 
 | Method | Stack | Provider | Required |
 |--------|-------|----------|----------|
-| `composition.tower_health` | BearDog + Songbird | primalSpring or biomeOS | Yes |
+| `composition.tower_health` | BearDog + Songbird + skunkBat | primalSpring or biomeOS | Yes |
 | `composition.node_health` | Tower + ToadStool | primalSpring or biomeOS | If node present |
 | `composition.nest_health` | Tower + NestGate | primalSpring or biomeOS | If nest present |
 | `composition.nucleus_health` | Full NUCLEUS | primalSpring | If full NUCLEUS |

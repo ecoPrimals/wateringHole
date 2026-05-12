@@ -2,7 +2,7 @@
 
 # Interstadial Exit Criteria — Full Sovereignty Pre-Wire
 
-**Version**: 1.0 — May 11, 2026
+**Version**: 1.1 — May 12, 2026 (Phase 32 atomic model update)
 **Status**: Active
 **Phase**: Interstadial (entered April 16, 2026; exit gate defined here)
 
@@ -180,6 +180,29 @@ can begin.
 
 ---
 
+## Shadow Run Readiness Tracker (May 12, 2026)
+
+Shadow runs are the interstadial-to-stadial bridge: sovereign infrastructure
+running in parallel with the existing external services, producing comparison
+data that proves parity before cutover.
+
+| Shadow Run | Upstream Ready? | Absorption Owner | Status |
+|-----------|:--------------:|-----------------|--------|
+| **BearDog TLS on :8443** | YES (Wave 100) | projectNUCLEUS | **NOT STARTED** — needs deploy script + Cloudflare baseline metrics |
+| **Songbird NAT + VPS relay** | PARTIAL (STUN/TURN shipped, VPS relay pending) | projectNUCLEUS | **BLOCKED** — needs Songbird VPS relay implementation |
+| **BTSP dual-auth** | YES (BearDog authenticator) | projectNUCLEUS | **NOT STARTED** — needs JupyterHub PAM plugin + shadow period |
+| **NestGate content serving** | YES (Session 60) | projectNUCLEUS | **UNBLOCKED** — `publish_sporeprint.sh` ready to wire |
+| **lithoSpore Tier 1** | YES (groundSpring B2+B1 PASS) | lithoSpore | **NOT STARTED** — needs module integration + real data fetch |
+| **ABG WCM composition** | PARTIAL (Thread 1 operational) | projectNUCLEUS | **PARTIAL** — needs provenance trio in deploy graph |
+
+**Blocking dependency chain**: Songbird VPS relay → NestGate extracellular →
+full content sovereignty. All other shadow runs are independently startable.
+
+**Highest leverage action**: Start the BearDog TLS shadow (no blockers) and
+the lithoSpore Tier 1 integration (groundSpring data ready) in parallel.
+
+---
+
 ## Stadial: External Validation Drives Evolution
 
 The stadial is not a maintenance phase — it is an **advance** driven by
@@ -215,8 +238,11 @@ NestGate) may span multiple stadial cycles.
 ## Cross-References
 
 - `ECOSYSTEM_EVOLUTION_CYCLE.md` — water cycle model, season definitions
-- `primalSpring/docs/PRIMAL_GAPS.md` — L1–L5 gap ownership model
-- `primalSpring/docs/CROSS_SPRING_PARITY_SCORECARD.md` — per-spring metrics
+- `primalSpring/docs/PRIMAL_GAPS.md` — L1–L5 gap ownership model, Wave 8/9/10 tracking
+- `primalSpring/docs/CROSS_SPRING_PARITY_SCORECARD.md` — per-spring metrics, Phase 32 gap sweep
+- `primalSpring/docs/TEMPORAL_ECOSYSTEM_REVIEW_MAY12_2026.md` — full ecosystem temporal review
+- `primalSpring/docs/LIVE_SCIENCE_API.md` — Tier 2 wire contract for downstream
+- `primalSpring/docs/DOWNSTREAM_PATTERN_GUIDE.md` — spring-to-product pattern handoff
 - `projectNUCLEUS/specs/EVOLUTION_GAPS.md` — H1/H2/H3 horizon tracker
 - `lithoSpore/docs/UPSTREAM_GAPS.md` — per-module spring dependency analysis
 - `TARGETED_GUIDESTONE_STANDARD.md` — Targeted GuideStone budding pattern

@@ -84,7 +84,7 @@ IPC crate.
 |----------|------|---------|
 | Dark Forest Beacon Genetics | `birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` | Two-seed lineage (nuclear + mitochondrial) |
 | BearDog Technical Stack | `btsp/BEARDOG_TECHNICAL_STACK.md` | Ed25519, BLAKE3, X25519 — Pure Rust crypto foundation |
-| Tower Atomic | `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` | BearDog + Songbird = Pure Rust HTTPS |
+| Tower Atomic | `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` | BearDog + Songbird + skunkBat = trust boundary |
 
 **Expectation**: Auto-trust within genetic family, zero trust outside. No certificate
 authorities. Encrypted payloads are unreadable to outsiders. Zero metadata leakage
