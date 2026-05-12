@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 12, 2026 (Compute trio Phase B complete, barraCuda v0.4.0 stadial gate, zero active ecosystem handoffs)
+**Last Updated**: May 12, 2026 (Compute trio Phase C complete, barraCuda v0.4.0 stadial gate, Passes 11-14 in progress, 5 active ecosystem handoffs)
 
 ---
 
