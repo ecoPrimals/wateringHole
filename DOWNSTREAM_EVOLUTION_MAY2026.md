@@ -13,7 +13,7 @@ JH-5 audit forwarding and Tier 4 rewiring are now unblocked.
 
 **Spring UniBin binaries are now tractable for plasmidBin deployment** — each
 spring produces a single binary with `certify`/`validate`/`serve`/`status`/`version`
-subcommands. See `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md`.
+subcommands. See `fossilRecord/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md`.
 
 **Pull primalSpring, infra/wateringHole, and infra/plasmidBin before starting and all primals/ repos.**
 
@@ -101,7 +101,7 @@ Spring UniBin binaries are ready for plasmidBin tracking.
 
 - **Primordial extinction complete**: 8/8 springs have eukaryotic UniBin binaries. Zero TODO/FIXME/HACK/clippy across all springs.
 - **Zero open upstream gaps**: All 11 gaps resolved (JH-11, GAP-03/06/09/12, U1-U3, DF-2/3, U5). See `handoffs/PRIMALSPRING_POST_INTERSTADIAL_DOWNSTREAM_HANDOFF_MAY10_2026.md`.
-- **Spring UniBin → plasmidBin**: Single binary per spring makes tracked deployment tractable for the first time. See `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md`.
+- **Spring UniBin → plasmidBin**: Single binary per spring makes tracked deployment tractable for the first time. See `fossilRecord/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md`.
 - **Sovereignty horizons shipped upstream**: bearDog TLS + rate limiting (H2-10/11), songbird full NAT chain (H2-13-16), petalTongue web sovereignty (PT-1-PT-5), biomeOS `composition.status` + `method.register`.
 - **JH-5 audit forwarding unblocked**: skunkBat Phase 2 complete (7 event kinds). Phase 3 (cross-primal forwarding) ready.
 - **Tier 4 rewiring unblocked**: JH-11 token federation live. `CompositionContext` is the canonical API.
@@ -127,7 +127,7 @@ Spring UniBin binaries are ready for plasmidBin tracking.
 | Topic | Location |
 |-------|----------|
 | **Spring NUCLEUS Audit** | `infra/wateringHole/SPRING_NUCLEUS_AUDIT_MAY2026.md` |
-| **UniBin plasmidBin readiness** | `infra/wateringHole/handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` |
+| **UniBin plasmidBin readiness** | `infra/wateringHole/fossilRecord/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` |
 | **Post-interstadial downstream** | `infra/wateringHole/handoffs/PRIMALSPRING_POST_INTERSTADIAL_DOWNSTREAM_HANDOFF_MAY10_2026.md` |
 | **petalTongue Science Map** | `infra/wateringHole/petaltongue/PETALTONGUE_SPRING_SCIENCE_MAP.md` |
 | **sweetGrass Braid Patterns** | `infra/wateringHole/SWEETGRASS_SPRING_BRAID_PATTERNS.md` |

@@ -16,7 +16,7 @@
 >
 > **March 12 update (barraCuda)**: Sovereign GSP Phase 2 complete. 22 chip
 > firmware parsed, cross-architecture learning operational. Six wiring gaps
-> remain — see `handoffs/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md`.
+> remain — see `fossilRecord/SOVEREIGN_COMPUTE_TRIO_WIRING_GAPS_HANDOFF_MAR12_2026.md`.
 
 ---
 
@@ -500,7 +500,7 @@ Only the infrastructure evolves.
 The sovereign stack enables **dual-use hardware**: nvidia drivers for gaming,
 VFIO for science, on the same machine, no reboot. toadStool manages the
 GPU mode switch. See `SOVEREIGN_COMPUTE_EVOLUTION.md` and
-`handoffs/SOVEREIGN_COMPUTE_BAR0_BREAKTHROUGH_DUAL_USE_HANDOFF_MAR12_2026.md`.
+`fossilRecord/SOVEREIGN_COMPUTE_BAR0_BREAKTHROUGH_DUAL_USE_HANDOFF_MAR12_2026.md`.
 
 ---
 

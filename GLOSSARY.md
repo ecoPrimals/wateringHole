@@ -436,14 +436,14 @@ improved.
 
 A **session handoff** document in `wateringHole/handoffs/`. Records what was
 done, what's next, what broke, what was discovered. Handoffs are the working
-memory between sessions. After ~48 hours they are archived to
-`handoffs/archive/` (the fossil record).
+memory between sessions. After resolution they are archived to
+`fossilRecord/`.
 
 ### Fossil Record
 
-The `handoffs/archive/` directory. Never deleted, only accumulated. The
+The `fossilRecord/` directory. Never deleted, only accumulated. The
 geological record of every evolution session the project has run. Currently
-354+ documents spanning February 4 – March 15, 2026.
+1,561+ documents spanning February 4, 2026 – present.
 
 ---
 
