@@ -4,7 +4,7 @@
 ecosystem — their roles, ownership boundaries, interaction contracts, and the
 co-evolution loop that drives ecosystem progress.
 
-**Last Updated:** April 20, 2026 (Validated: NUCLEUS → Spring → Garden pipeline proven)
+**Last Updated:** May 12, 2026 (Added fossilRecord as ecosystem memory layer)
 
 ---
 
@@ -15,16 +15,18 @@ distinct role, and the boundaries between them are enforced by convention and
 tooling (zero compile-time coupling, JSON-RPC IPC, wateringHole handoffs).
 
 ```
-gen2: Primals  — capability providers (what the ecosystem CAN do)
-gen3: Springs  — validation and evolution environments (proving it WORKS)
-gen4: Gardens  — user-facing products (making it USEFUL)
+gen2: Primals        — capability providers (what the ecosystem CAN do)
+gen3: Springs        — validation and evolution environments (proving it WORKS)
+gen4: Gardens        — user-facing products (making it USEFUL)
+     fossilRecord   — geological archive (HOW we got here)
 ```
 
-| Layer | Directory | Role | Examples |
-|-------|-----------|------|----------|
+| Layer | Directory / Repo | Role | Examples |
+|-------|-----------------|------|----------|
 | **Primal** (gen2) | `primals/` | Self-contained Rust binary providing domain primitives via IPC | BearDog, Songbird, barraCuda, biomeOS |
 | **Spring** (gen3) | `springs/` | Validation environment: composes primals, validates science, surfaces gaps | ludoSpring, hotSpring, wetSpring, primalSpring |
 | **Garden** (gen4) | `gardens/` | User-facing product: composes primals into tools people use | esotericWebb, helixVision |
+| **fossilRecord** | `ecoPrimals/fossilRecord` | Canonical archive: superseded handoffs, closed audits, evolution history | 3,831+ documents from 10 sources |
 
 ---
 
