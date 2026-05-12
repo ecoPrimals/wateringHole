@@ -2,7 +2,7 @@
 
 # Interstadial Exit Criteria — Full Sovereignty Pre-Wire
 
-**Version**: 1.2 — May 12, 2026 (evolution pass schedule + sentinel escalation)
+**Version**: 1.3 — May 12, 2026 (toadStool Phase C batches 1-4 landed, list_workloads wired)
 **Status**: Active
 **Phase**: Interstadial (entered April 16, 2026; exit gate defined here)
 
@@ -230,7 +230,7 @@ primals that must evolve before the stadial cold advance.
 
 | Action | Owner | Level | Why Escalated |
 |--------|-------|-------|---------------|
-| **toadStool Phase C** (coral-driver: VFIO, DRM, device abstraction) | toadStool | L1 | Blocks `toadstool.validate` → blocks all 8 springs' Tier 2 |
+| **toadStool Phase C** — batches 1-4 **LANDED** (S245-S249, cylinder 415 tests). Remaining: VFIO channels, sovereign init, NvDevice, pcie.rs + Phase D | toadStool | L1 | Remaining integration blocks `toadstool.validate` → blocks Tier 2. `list_workloads` already WIRED. |
 | **Songbird VPS relay** | Songbird | L1 | Blocks NAT shadow → NestGate extracellular → content sovereignty |
 | **coralReef timeout/FECS/GPCCS** + `naga::Module` stability | coralReef | L1 | Blocks sovereign dispatch proof for hotSpring GPU validation |
 
@@ -250,7 +250,7 @@ primals that must evolve before the stadial cold advance.
 
 | Action | Owner | Level | Dependency |
 |--------|-------|-------|------------|
-| Tier 2 Science API (`toadstool.validate` + `list_workloads`) | toadStool + primalSpring | L1/L2 | Phase C (Pass 12) |
+| Tier 2 Science API (`toadstool.validate`) — `list_workloads` **WIRED** (S245+) | toadStool + primalSpring | L1/L2 | Phase C integration (Pass 12) |
 | `barracuda.precision.route` wired | barraCuda + primalSpring | L1/L2 | hotSpring precision story |
 | Ionic runtime live (cross-spring RPC) | primalSpring + healthSpring | L2 | CompositionContext wiring |
 | skunkBat E2E operational audit validation | skunkBat + primalSpring | L2 | JH-5 Phase 3 shipped |
