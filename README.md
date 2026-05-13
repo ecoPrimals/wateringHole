@@ -330,13 +330,10 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `TARGETED_GUIDESTONE_STANDARD.md` — Standard for how composed subsystems bud into portable artifacts (budding model, 5 components, cross-platform via ecoBin/genomeBin, liveSpore tracking, data freshness protocol)
 - `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem: first Targeted GuideStone artifact (Barrick Lab), 7 science modules, 36 paper-spring assignments across 6 springs, three-tier architecture, projectNUCLEUS deployment subsystem
 
-### Deep Debt & Upstream Handbacks
-- `handoffs/PROJECTNUCLEUS_CROSS_ECOSYSTEM_AUDIT_MAY11_2026.md` — Cross-ecosystem audit findings, MethodGate parity, spring skunkBat wiring, barraCuda version skew
-- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_UPSTREAM_HANDBACK_MAY11_2026.md` — Upstream handback: toadStool/squirrel MethodGate, barraCuda crypto delegation, squirrel LocalProcessProvider
-- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_EVOLUTION_SWEEP_HANDOFF_MAY11_2026.md` — Full sweep handoff: composition patterns, NestGate priority, lessons for all teams, what's next for data/compute chains
-- `handoffs/PROJECTNUCLEUS_TRIO_DEEP_DEBT_COMPLETION_HANDOFF_MAY11_2026.md` — Trio completion: Rust modernization (darkforest submodules, tunnelKeeper clone opt, Tier 2 Nelder-Mead), foundation 10/10 threads + TOML-driven scripts, lithoSpore liveSpore wired, zero hardcoded paths, all stale refs reconciled
-- `handoffs/PROJECTNUCLEUS_ATOMIC_DEPLOYMENT_ABSORPTION_MAY13_2026.md` — Atomic deployment phase absorption: composition.deploy.shadow wired, 12 workloads Tier 2, DoT parity scenario, lithoSpore 6/7 modules live, plasmidBin v5.3.0
-- `handoffs/PROJECTNUCLEUS_SHADOW_RUN_EXECUTION_MAY13_2026.md` — Shadow run execution: DoT/tunnel baseline fixes, BearDog TLS shadow LIVE on :8443, proposed API methods resolved, lithoSpore 5/7 PASS 46/46 checks
+### projectNUCLEUS Handbacks (active)
+- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_RESOLUTION_MAY13_2026.md` — Deep debt: hardcoded path elimination, doc drift fixes, barraCuda registry count flag
+- `handoffs/PROJECTNUCLEUS_ATOMIC_DEPLOYMENT_ABSORPTION_MAY13_2026.md` — Atomic deployment phase: composition.deploy.shadow wired, 12 workloads Tier 2, DoT parity scenario
+- `handoffs/PROJECTNUCLEUS_SHADOW_RUN_EXECUTION_MAY13_2026.md` — Shadow run execution: DoT/tunnel baseline fixes, BearDog TLS shadow LIVE on :8443, API methods resolved
 - `handoffs/PROJECTNUCLEUS_INTERSTADIAL_EXIT_EXECUTION_MAY13_2026.md` — Interstadial exit: 3 gate items executed (Songbird OPS-READY, BTSP dual-auth BUILT, provenance trio reconciled), lithoSpore 6/7 PASS, biomeos.spring_status IMPLEMENTED
 
 ### Subdirectories
@@ -513,7 +510,7 @@ See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
 See `handoffs/archive/post_interstadial_may2026/` for 19 archived closure handoffs.
 See `fossilRecord/handoffs-may11-2026-wave9-closure/` for 34 archived handoffs from the Wave 9 debt closure cycle.
 
-**Active handoffs (33):** See `handoffs/` directory listing. Covers all primals, springs, and products from the May 12-13 atomic deployment phase. 8 superseded handoffs moved to `handoffs/archive/`.
+**Active handoffs (35):** See `handoffs/` directory listing. Covers all primals, springs, and products from the May 12-13 interstadial exit execution phase. 8 superseded handoffs moved to `handoffs/archive/`.
 
 ---
 
