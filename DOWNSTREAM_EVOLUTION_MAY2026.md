@@ -82,7 +82,7 @@ Spring UniBin binaries are ready for plasmidBin tracking.
 | hotSpring | **6** | 1,036 | **4** | Yes | Tier 4 IPC-first complete; 9/12 scenarios; `--format json`; GAP-HS-092 `call_by_capability` proliferation |
 | healthSpring | **5** | 999+ | **3** | Yes | Tier 4: flip `primal-proof` to IPC default |
 | wetSpring | **4** | 1,209 | **2** | Yes | Tier 3: route handler compute through ecobin |
-| neuralSpring | **3** | 1,453 | **2** | Yes | Tier 3→4: `src/ipc/` tree (7 modules, 20 hints, 37 caps), NestGate weights wired (S205), Squirrel inference pipeline complete, 910 IPC-first tests |
+| neuralSpring | **3** | 910 (IPC-first) | **2** | Yes | Tier 3→4: `src/ipc/` tree (7 modules, 20 hints, 37 caps), NestGate weights wired, Squirrel inference pipeline complete, deep debt zero-debt (4 audits), V158 |
 | ludoSpring | **4** | 665+ | **3** | Yes | Tier 4: close remaining `barracuda::` calls |
 | airSpring | **2** | 1,364 | **2** | Yes | Tier 3: `aws-lc-sys` ban, guideStone L4 |
 | groundSpring | **4** | 965+ | **1** | Yes | Tier 2: expand `ipc.rs` into `src/ipc/` tree |
