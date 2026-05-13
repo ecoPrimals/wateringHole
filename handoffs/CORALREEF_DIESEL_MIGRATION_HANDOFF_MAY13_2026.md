@@ -199,12 +199,47 @@ Comprehensive deep debt audit and resolution:
 - **`ECOSYSTEM_AUTH_MODE`** env var added as primary for method gate enforcement; `PRIMALSPRING_AUTH_MODE` retained as legacy fallback; `CORALREEF_AUTH_MODE` is primal-specific override.
 - **Verified clean**: Zero `unsafe` in production (all `#![forbid(unsafe_code)]`), zero `.unwrap()` in library code, zero `TODO`/`FIXME`/`HACK`, zero `todo!()`/`unimplemented!()`, zero C dependencies, zero production mocks. `coral-reef-stubs` confirmed as real pure-Rust implementations (not mocks).
 
+### IPC wire-compat aliases — IMPLEMENTED (May 13, 2026)
+
+hotSpring caught `"source"` vs `"wgsl_source"` mismatch on `shader.compile.wgsl`.
+Resolved with serde aliases:
+
+- `CompileWgslRequest::wgsl_source`: accepts `"source"` alias
+- `MultiDeviceCompileRequest::wgsl_source`: accepts `"source"` alias
+- `CompileResponse::binary`: serializes as `"binary_b64"`, accepts `"binary"` alias
+- `CompileResponse::info`: serializes as `"shader_info"`, accepts `"info"` alias
+
+Callers using either old or new field names will deserialize correctly.
+3 new serde roundtrip tests validate both canonical and alias paths.
+
+### Texture format coverage expanded — IMPLEMENTED (May 13, 2026)
+
+`TexelFormat` enum expanded from 4 to 10 variants covering all practical
+naga `StorageFormat` categories:
+
+- Added: `R8`, `R16`, `Rg8`, `Rg16`, `Rg32`, `Bgra8`
+- Existing: `R32`, `Rgba8`, `Rgba16`, `Rgba32`
+- `emitter.rs` format classifier now explicitly handles all naga variants instead
+  of silently lumping unrecognized formats into Rgba32
+- 5 new texture format tests (rg32float, r32uint, rgba16float, r32float, bgra8unorm)
+
+Remaining texture gaps: `ImageSample` (sampled textures) and `ImageQuery`
+(dimension queries) are not yet in the PTX emitter.
+
+### HMMA codegen status note — WGSL→HMMA automatic lowering
+
+`compile_gemm()` API is the practical HMMA path. WGSL→HMMA automatic lowering
+(detecting matmul patterns in arbitrary WGSL and replacing with tensor-core ops)
+is not currently feasible: WGSL lacks cooperative matrix primitives, and naga
+does not expose `OpCooperativeMatrixMulAdd`. Pattern detection in IR is
+research-level. barraCuda's GEMM router should target `compile_gemm` directly.
+
 ### Live compile→dispatch CI test — shared toadStool Phase C blocker
 
 Not actionable until toadStool Phase C lands. coralReef compile path is
 ready (`shader.compile.*` IPC surface operational).
 
-Total test count: 3143.
+Total test count: 3154.
 
 ---
 
