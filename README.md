@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 13, 2026 (River delta Tier 4 complete — 8/8 IPC-first, LTEE reproductions active, guideStone convergence, infra GPU sovereignty; barraCuda Sprint 66: GAP-HS-027 TensorSession sub/negate for lattice HMC + GAP-HS-041 confirmed resolved; Sprint 65: 12-axis deep debt zero; Sprint 64: sovereign dispatch_path + GEMM routing + OOM recovery)
+**Last Updated**: May 13, 2026 (barraCuda Sprint 68: TENSOR_WIRE_CONTRACT.md aligned — batch ops table + IPC namespace coverage updated for sub/negate; GEMM routing stable, awaiting coralReef HMMA codegen; Sprint 67: 12-axis deep debt zero confirmed; Sprint 66: GAP-HS-027 TensorSession sub/negate for lattice HMC + GAP-HS-041 resolved)
 
 ---
 
