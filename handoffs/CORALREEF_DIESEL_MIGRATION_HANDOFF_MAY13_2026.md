@@ -74,11 +74,13 @@ barracuda can point env vars at toadStool sockets without code changes.
 
 - Compiler pipeline: `coral-reef/` (WGSL/SPIR-V/GLSL → native GPU binary)
 - ISA tables, stubs, bitview: `coral-reef-isa/`, `coral-reef-stubs/`, `coral-reef-bitview/`
-- Compile-side GPU API: `coral-gpu/` (compile + dispatch facade)
-- GSP firmware handling: `coral-driver/src/gsp/`
 - `naga::Module` direct ingest: `coral-reef/src/lib.rs` (`compile_module`/`compile_module_full`)
-- FECS cold silicon recovery: `coral-driver/src/nv/vfio_compute/fecs_boot.rs`
-- Linux path helpers: `coral-driver/src/linux_paths.rs`
+- IPC service: `coralreef-core/` (JSON-RPC + tarpc `shader.compile.*`)
+- RPC client: `primal-rpc-client/`
+
+**Note**: Items previously listed here (`coral-gpu/`, `coral-driver/src/gsp/`,
+`fecs_boot.rs`, `linux_paths.rs`) were included in the Sprint 9 excision below.
+They exist only in git history. toadStool owns all hardware-facing code.
 
 ## Excision Complete (Sprint 9, May 13 2026)
 
@@ -104,7 +106,7 @@ operational for `shader.compile.wgsl/spirv`. One gap identified and resolved:
   discovery JSON when determining available GPU targets for compilation.
 - **Requires declaration updated**: `gpu.dispatch` → `compute.dispatch` with
   `legacy_id` metadata for backward compatibility.
-- **3117 tests passing**, including 2 new tests for toadStool-style discovery JSON.
+- **3117 tests passing** at time of this fix, including 2 new tests for toadStool-style discovery JSON. (Current total: 3130.)
 
 No remaining coralReef action items from the hotSpring audit.
 
