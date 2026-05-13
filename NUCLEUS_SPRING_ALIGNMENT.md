@@ -53,7 +53,7 @@ which has a unique dual-tower ionic bridge pattern and is kept as a standalone g
 | Spring | Version | gS | Tests | Primary Atomics | Proto-Nucleate | Status |
 |--------|---------|------|-------|-----------------|----------------|--------|
 | **hotSpring** | 0.6.32 | **5** | 993 | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt complete |
-| **neuralSpring** | V154 | **5** | 892 (IPC-first) | **Node** + Meta | `downstream_manifest.toml` | **Active** — S202c: Tier 2 wired (`toadstool.validate` + `list_workloads`), deep debt audit all-clear, 36 capabilities, 7 IPC modules, B1 NUCLEUS workload |
+| **neuralSpring** | V155 | **5** | 907 (IPC-first) | **Node** + Meta | `downstream_manifest.toml` | **Active** — S203: Tier 2 COMPLETE (`toadstool.validate` + `list_workloads` + `barracuda.precision.route`), deep debt all-clear, 37 capabilities, 7 IPC modules, B1 NUCLEUS workload + tolerances |
 | **wetSpring** | V151 | **4+** | 1,594 | Node + **Nest** + Meta | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt, `wetspring_composition.sh` |
 | **airSpring** | 0.10.0 | 0 | 1,364 | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
 | **groundSpring** | V124 | 0 | 1,020+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
@@ -116,7 +116,7 @@ abstraction layer (GPU/CPU/NPU) that informs toadStool dispatch and stays local.
 3. **hotSpring** (2→3) — biggest barraCuda contributor validating its own absorption
 4. **wetSpring** (2→3) — rich IPC handlers, route compute through ecobin
 5. **airSpring** (2→3) — good IPC foundation despite pre-delta
-6. **neuralSpring** (5) — `src/ipc/` tree complete (7 modules), CapabilityRouter discovery (36 capabilities), NestGate wired, Tier 2 `toadstool.validate` wired, deep debt all-clear (V154)
+6. **neuralSpring** (5) — `src/ipc/` tree complete (7 modules), CapabilityRouter discovery (37 capabilities, 20 hints), NestGate wired, Tier 2 COMPLETE (all 3 methods), deep debt all-clear (V155, barraCuda v0.4.0)
 7. **groundSpring** (1→2) — expand `ipc.rs` into `src/ipc/` tree
 
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for the full per-spring rewiring inventory.
