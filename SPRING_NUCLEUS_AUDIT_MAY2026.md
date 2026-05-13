@@ -66,7 +66,7 @@ Rust result (known-good)  <->  IPC composition result (being validated)
 | **airSpring** | v0.10.0 | 2 | 1,364 | **2** (eukaryotic UniBin) | ~25-40% | 4 TOMLs | `ipc/provenance.rs` | Not wired | Not wired | 11 baseCamp |
 | **wetSpring** | V155 | 4 | 1,209 | **2** (eukaryotic UniBin) | ~10-20% | 7 TOMLs | `ipc/provenance.rs` + `sweetgrass.rs` | Partial | Partial | 15+ baseCamp |
 | **hotSpring** | latest | 5 | 1,002 | **2** (eukaryotic UniBin) | ~5-15% | 5 TOMLs | Via `composition.rs` | Not wired | Not wired | 15+ baseCamp |
-| **neuralSpring** | S205/V157 | 5 | 910 (IPC-first) | **4** (IPC-first, NestGate weights wired, Tier 2 COMPLETE, Squirrel pipeline complete) | 0% direct | 4 TOMLs | Via 7 per-primal IPC modules (CapabilityRouter, 37 caps, 20 hints) | Wired (deploy graphs) | Wired (composition.status) | 15+ baseCamp |
+| **neuralSpring** | S205b/V158 | 5 | 910 (IPC-first) | **4** (IPC-first, NestGate weights wired, Tier 2 COMPLETE, Squirrel pipeline complete) | 0% direct | 4 TOMLs | Via 7 per-primal IPC modules (CapabilityRouter, 37 caps, 20 hints) | Wired (deploy graphs) | Wired (composition.status) | 15+ baseCamp |
 | **groundSpring** | V127 | 4 | 965+ | **1** (eukaryotic UniBin) | ~1-5% | 6 TOMLs | Minimal | Not wired | Not wired | 34 baseCamp |
 
 ---
@@ -270,7 +270,7 @@ already tie to specific papers (anderson_atlas, gonzales_exploration).
 
 ---
 
-### 4. neuralSpring (V155 — guideStone Level 5)
+### 4. neuralSpring (V158 — guideStone Level 5)
 
 **Domain**: ML/AI inference, transformer architecture, WGSL shader composition.
 
@@ -658,7 +658,7 @@ recipe, BYOB schema.
    to cover all domain math.
 
 6. **neuralSpring** (Tier 4 — COMPLETE): `src/ipc/` tree with 7 modules,
-   CapabilityRouter discovery (36 caps), NestGate wired, Tier 2 `toadstool.validate` wired. guideStone L5. Deep debt audit all-clear. V154 handoff shipped.
+   CapabilityRouter discovery (37 caps), NestGate weight persistence wired, Squirrel inference pipeline complete, Tier 2 COMPLETE. guideStone L5. Deep debt zero-debt (4 audits). V158 handoff shipped.
 
 7. **groundSpring** (Tier 1 -> 2): Expand `ipc.rs` into `src/ipc/` tree. Optional
    barraCuda feature is a good starting point.
@@ -731,7 +731,7 @@ is the template for springs with diverse domain science.
 
 ---
 
-### neuralSpring — COMPLETE (Tier 4 IPC-first, guideStone L5, V155)
+### neuralSpring — COMPLETE (Tier 4 IPC-first, guideStone L5, V158)
 
 All original action items resolved:
 
