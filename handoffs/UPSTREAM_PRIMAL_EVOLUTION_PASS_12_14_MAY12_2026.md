@@ -97,6 +97,43 @@ on real silicon. Diesel engine handoff (`CORALREEF_DIESEL_MIGRATION_HANDOFF_MAY1
 
 ---
 
+## Pass 12 Addendum — hotSpring Hardware Validation + Post-Excision (May 13, 2026)
+
+hotSpring ran sovereign compute experiments on the local compute trio and
+surfaced specific findings. Full details in
+`infra/wateringHole/handoffs/HOTSPRING_SOVEREIGN_COMPUTE_EVOLUTION_PASS_MAY13_2026.md`.
+
+**Critical update**: coralReef Sprint 9 **excised** the entire diesel engine
+stack (coral-ember, coral-glowplug, coral-gpu, coral-driver source). coralReef
+is now a **pure compiler primal** (7 crates). toadStool Phase C is the sole
+critical path for sovereign hardware lifecycle. There is no coralReef fallback.
+
+### toadStool — Phase C is now CRITICAL PATH (no fallback)
+
+hotSpring audited the toadStool daemon against the (now excised) coral-glowplug
+diesel engine and mapped 8 parity gaps (device.swap RPC, warm_catch RPC,
+cylinder subprocess, VFIO fd holding, warm pipeline, SwapOrchestrator, CLI
+commands, systemd service). A concrete 7-item execution plan (C1–C7) exists.
+S237–S243 absorbed ember/glowplug types+traits (Phase A/B). S245–S249 landed
+cylinder foundation. **Remaining work: daemon runtime + coral-driver absorption.**
+
+toadStool's own `PHASE_C_CORAL_DRIVER_SPLIT_PLAN.md` documents the boundary.
+FECS recovery code (Sprint 5–7) exists in coralReef git history for reference.
+
+**Action**: Complete Phase C. hotSpring validates on hardware as each C-item lands.
+
+### coralReef — COMPLETE (pure compiler, no remaining hardware work)
+
+1. Sprint 8: Feature freeze + handoff documentation for diesel crates
+2. Sprint 9: Full excision — coral-ember, coral-glowplug, coral-gpu, coral-driver src deleted
+3. FECS cold silicon work shipped (Sprint 5–7) — patterns in git history for toadStool
+4. Compiler domain clean: PTX/SM120, naga::Module ingest, compile deadline
+
+**Action**: None for hardware lifecycle. Continue compiler evolution.
+hotSpring `coral-gpu` dependency commented out — will rewire to toadStool post-Phase C.
+
+---
+
 ## Pass 14 — Convergence (3 primals)
 
 These items are lower urgency — they refine capabilities that are structurally
