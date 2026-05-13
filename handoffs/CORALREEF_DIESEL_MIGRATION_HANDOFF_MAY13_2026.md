@@ -173,12 +173,38 @@ This is purely driver-side (PBDMA runlist DW0 bits [3:2]). Was in excised
 `coral-driver`. Moves entirely with toadStool absorption. Zero compiler
 component.
 
+### HMMA codegen for tensor-core GEMM — IMPLEMENTED (May 13, 2026)
+
+hotSpring's second Compute Trio audit listed "HMMA codegen" as the remaining
+coralReef-side item. Now shipped:
+
+- `compile_gemm()` public API: generates PTX `mma.sync.aligned` kernels for SM80+
+- Precision modes: `F16` (f16→f16), `F16F32` (f16→f32 mixed-precision), `Tf32` (TF32→f32)
+- MMA tile shapes: `m16n8k16` (f16/f16f32), `m16n8k8` (TF32)
+- K-loop unrolling with accumulator zeroing, fragment load/store
+- New types: `GemmShape`, `GemmPrecision`
+- New module: `codegen/nv/ptx_emit/gemm.rs`
+- 12 new tests (5 unit + 7 integration): SM80 f16f32, SM120 Blackwell, pre-SM80
+  rejection, AMD rejection, misaligned K, zero dimensions, TF32 K-alignment
+
+hotSpring's `bench_sovereign_parity` can now consume tensor-core GEMM output once
+toadStool FECS context init ships.
+
+### Deep debt cleanup — COMPLETE (May 13, 2026)
+
+Comprehensive deep debt audit and resolution:
+
+- **Large file refactoring**: `lib.rs` 868→630 lines (GEMM→`gemm.rs`, preamble→`preamble.rs`). `newton.rs` 849→568 lines (tests→`newton_tests.rs`). Zero production files >800 lines.
+- **Hardcoded primal names eliminated**: `service/types.rs` (removed "coralDriver", "barraCuda, toadStool"), `shader_model.rs`, `func_builtins.rs`, `discovery.rs` — all genericized to capability-based references.
+- **`ECOSYSTEM_AUTH_MODE`** env var added as primary for method gate enforcement; `PRIMALSPRING_AUTH_MODE` retained as legacy fallback; `CORALREEF_AUTH_MODE` is primal-specific override.
+- **Verified clean**: Zero `unsafe` in production (all `#![forbid(unsafe_code)]`), zero `.unwrap()` in library code, zero `TODO`/`FIXME`/`HACK`, zero `todo!()`/`unimplemented!()`, zero C dependencies, zero production mocks. `coral-reef-stubs` confirmed as real pure-Rust implementations (not mocks).
+
 ### Live compile→dispatch CI test — shared toadStool Phase C blocker
 
 Not actionable until toadStool Phase C lands. coralReef compile path is
 ready (`shader.compile.*` IPC surface operational).
 
-Total test count: 3130.
+Total test count: 3143.
 
 ---
 
