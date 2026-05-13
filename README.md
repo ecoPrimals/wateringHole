@@ -335,6 +335,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `handoffs/PROJECTNUCLEUS_DEEP_DEBT_UPSTREAM_HANDBACK_MAY11_2026.md` — Upstream handback: toadStool/squirrel MethodGate, barraCuda crypto delegation, squirrel LocalProcessProvider
 - `handoffs/PROJECTNUCLEUS_DEEP_DEBT_EVOLUTION_SWEEP_HANDOFF_MAY11_2026.md` — Full sweep handoff: composition patterns, NestGate priority, lessons for all teams, what's next for data/compute chains
 - `handoffs/PROJECTNUCLEUS_TRIO_DEEP_DEBT_COMPLETION_HANDOFF_MAY11_2026.md` — Trio completion: Rust modernization (darkforest submodules, tunnelKeeper clone opt, Tier 2 Nelder-Mead), foundation 10/10 threads + TOML-driven scripts, lithoSpore liveSpore wired, zero hardcoded paths, all stale refs reconciled
+- `handoffs/PROJECTNUCLEUS_ATOMIC_DEPLOYMENT_ABSORPTION_MAY13_2026.md` — Atomic deployment phase absorption: composition.deploy.shadow wired, 12 workloads Tier 2, DoT parity scenario, lithoSpore 6/7 modules live, plasmidBin v5.3.0
 
 ### Subdirectories
 - `handoffs/` — Cross-primal evolution handoff documents (active + 900+ archived including 19 post-interstadial closures)
