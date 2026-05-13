@@ -80,21 +80,18 @@ Songbird VPS relay → NAT shadow run → NestGate extracellular → content sov
 
 **Reference**: `projectNUCLEUS/specs/EVOLUTION_GAPS.md` (H2-3c)
 
-### coralReef — Stability + Silicon Init
+### coralReef — Stability + Silicon Init — **ALL RESOLVED (Sprint 8)**
 
-**Status**: Compiler domain clean. WGSL → SASS/ISA pipeline operational.
-coral-ember/glowplug soft-deprecated. RDNA2 atomics fix shipped.
+**Status**: All 3 sentinel items shipped. Diesel engine migration feature freeze active (Sprint 8). coral-ember/glowplug/driver hardware runtime feature-frozen for toadStool cutover.
 
-**Remaining work**:
-1. **`bind_stat` timeout** — cold-path timeout handling for shader compilation
-2. **FECS / GPCCS cold silicon init** — firmware command sequencing for
-   sovereign GPU init (affects hotSpring Titan V / K80 validation)
-3. **`naga::Module` direct ingest** — accept naga IR directly without
-   round-tripping through WGSL text (performance + fidelity)
+**Resolved**:
+1. ~~**`bind_stat` timeout**~~ — **SHIPPED** (Sprint 5): `CORALREEF_COMPILE_TIMEOUT_SECS` (120s default) on all IPC handlers
+2. ~~**FECS / GPCCS cold silicon init**~~ — **SHIPPED** (Sprint 7): `boot_gr_falcons_with_recovery()` — 3× retry + PMC GR reset, structured `GrBootOutcome`
+3. ~~**`naga::Module` direct ingest**~~ — **SHIPPED** (Sprint 5): `compile_module()`/`compile_module_full()` + `emit_compute_ptx_module()` public APIs
 
-**What this unblocks downstream**: hotSpring sovereign GPU dispatch proof —
+**What this unblocked downstream**: hotSpring sovereign GPU dispatch proof —
 the hardware validation path that proves the compute trio works end-to-end
-on real silicon.
+on real silicon. Diesel engine handoff (`CORALREEF_DIESEL_MIGRATION_HANDOFF_MAY13_2026.md`) provides toadStool with E1/E2 reference patterns.
 
 **Reference**: `primalSpring/docs/COMPUTE_TRIO_EVOLUTION.md` (coralReef section)
 

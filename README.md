@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 12, 2026 (Compute trio Phase C/D transition, coralReef FECS stability proof SHIPPED, barraCuda v0.4.0, Passes 11-14 converging — only Songbird VPS relay remains as sentinel blocker, 11 active ecosystem handoffs)
+**Last Updated**: May 13, 2026 (Diesel engine migration: coralReef Sprint 8 feature freeze, toadStool Phase C COMPLETE, barraCuda cutover path defined. coralReef E1/E2/E3 all resolved. 12 active ecosystem handoffs)
 
 ---
 
@@ -332,7 +332,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `fossilRecord/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem definition (archived — active work in lithoSpore)
 
 ### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (11 active: Pass 11-14, ecosystem wave sync, primalSpring Phase 32, river delta, Songbird Waves 199-202, coralReef Sprint 5, ludoSpring V67; 2 archived in `handoffs/archive/`)
+- `handoffs/` — Cross-primal evolution handoff documents (12 active: Pass 11-14, ecosystem wave sync, primalSpring Phase 32, river delta, Songbird Waves 199-202, ludoSpring V67, lithospore foundation ×2, projectNUCLEUS deep debt, coralReef diesel migration; 3 archived in `handoffs/archive/`)
 - `petaltongue/` — petalTongue integration documentation
 - `compute-sharing/` — Sovereign compute sharing validation
 - `healthspring/` — healthSpring-specific guidance
@@ -503,7 +503,7 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full ownership model.
 
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring 7-dimension audit.
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
-Pre-May-12 handoffs archived to `fossilRecord/` repository (3,231 items). 11 active ecosystem handoffs in `handoffs/` (Passes 11-14, primalSpring Phase 32, river delta, ecosystem wave sync, Songbird Waves 199-202, coralReef Sprint 5, ludoSpring V67).
+Pre-May-12 handoffs archived to `fossilRecord/` repository (3,231 items). 12 active ecosystem handoffs in `handoffs/` (Passes 11-14, primalSpring Phase 32, river delta, ecosystem wave sync, Songbird Waves 199-202, ludoSpring V67, lithospore foundation ×2, projectNUCLEUS deep debt, coralReef diesel migration). 3 archived locally in `handoffs/archive/` (coralReef Sprint 3, Sprint 4, Sprint 5).
 Per-primal handoffs live in each primal's own `infra/wateringHole/handoffs/`.
 
 ---
