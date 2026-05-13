@@ -66,7 +66,7 @@ Rust result (known-good)  <->  IPC composition result (being validated)
 | **airSpring** | v0.10.0 | 2 | 1,364 | **2** (eukaryotic UniBin) | ~25-40% | 4 TOMLs | `ipc/provenance.rs` | Not wired | Not wired | 11 baseCamp |
 | **wetSpring** | V155 | 4 | 1,209 | **2** (eukaryotic UniBin) | ~10-20% | 7 TOMLs | `ipc/provenance.rs` + `sweetgrass.rs` | Partial | Partial | 15+ baseCamp |
 | **hotSpring** | latest | 5 | 1,002 | **2** (eukaryotic UniBin) | ~5-15% | 5 TOMLs | Via `composition.rs` | Not wired | Not wired | 15+ baseCamp |
-| **neuralSpring** | S203 | 5 | 907 (IPC-first) | **4** (IPC-first, NestGate, Tier 2 COMPLETE) | 0% direct | 4 TOMLs | Via 7 per-primal IPC modules (CapabilityRouter, 37 caps, 20 hints) | Wired (deploy graphs) | Wired (composition.status) | 15+ baseCamp |
+| **neuralSpring** | S205/V157 | 5 | 910 (IPC-first) | **4** (IPC-first, NestGate weights wired, Tier 2 COMPLETE, Squirrel pipeline complete) | 0% direct | 4 TOMLs | Via 7 per-primal IPC modules (CapabilityRouter, 37 caps, 20 hints) | Wired (deploy graphs) | Wired (composition.status) | 15+ baseCamp |
 | **groundSpring** | V127 | 4 | 965+ | **1** (eukaryotic UniBin) | ~1-5% | 6 TOMLs | Minimal | Not wired | Not wired | 34 baseCamp |
 
 ---
