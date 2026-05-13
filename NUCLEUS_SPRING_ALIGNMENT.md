@@ -53,7 +53,7 @@ which has a unique dual-tower ionic bridge pattern and is kept as a standalone g
 | Spring | Version | gS | Tests | Primary Atomics | Proto-Nucleate | Status |
 |--------|---------|------|-------|-----------------|----------------|--------|
 | **hotSpring** | 0.6.32 | **5** | 993 | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt complete |
-| **neuralSpring** | V155 | **5** | 907 (IPC-first) | **Node** + Meta | `downstream_manifest.toml` | **Active** — S203: Tier 2 COMPLETE (`toadstool.validate` + `list_workloads` + `barracuda.precision.route`), deep debt all-clear, 37 capabilities, 7 IPC modules, B1 NUCLEUS workload + tolerances |
+| **neuralSpring** | V157 | **5** | 910 (IPC-first) | **Node** + Meta | `downstream_manifest.toml` | **Active** — S205: NestGate weight persistence wired, Squirrel inference pipeline complete, 37 capabilities, 7 IPC modules, wire hygiene verified, plasmidBin ready |
 | **wetSpring** | V151 | **4+** | 1,594 | Node + **Nest** + Meta | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt, `wetspring_composition.sh` |
 | **airSpring** | 0.10.0 | 0 | 1,364 | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
 | **groundSpring** | V124 | 0 | 1,020+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
@@ -85,7 +85,7 @@ abstraction layer (GPU/CPU/NPU) that informs toadStool dispatch and stays local.
 | **airSpring** | **2** | `airspring-barracuda` | ~25-40% | Full + rpc/ | Not wired | Not wired |
 | **wetSpring** | **2** | `wetspring-barracuda` | ~10-20% | Full + handlers/ | Partial | Partial |
 | **hotSpring** | **2** | `hotspring-barracuda` | ~5-15% | Scattered | Not wired | Not wired |
-| **neuralSpring** | **5** | optional `barracuda` (IPC-first, `default = []`) | 0% direct | `src/ipc/` tree (7 modules, CapabilityRouter, 36 caps) | Wired (deploy graphs) | Wired (composition.status) |
+| **neuralSpring** | **5** | optional `barracuda` (IPC-first, `default = []`) | 0% direct | `src/ipc/` tree (7 modules, CapabilityRouter, 37 caps) | Wired (deploy graphs) | Wired (composition.status) |
 | **groundSpring** | **1** | `groundspring` (optional feature) | ~1-5% | `ipc.rs` only | Not wired | Not wired |
 
 ### Rewiring Tiers
@@ -116,7 +116,7 @@ abstraction layer (GPU/CPU/NPU) that informs toadStool dispatch and stays local.
 3. **hotSpring** (2→3) — biggest barraCuda contributor validating its own absorption
 4. **wetSpring** (2→3) — rich IPC handlers, route compute through ecobin
 5. **airSpring** (2→3) — good IPC foundation despite pre-delta
-6. **neuralSpring** (5) — `src/ipc/` tree complete (7 modules), CapabilityRouter discovery (37 capabilities, 20 hints), NestGate wired, Tier 2 COMPLETE (all 3 methods), deep debt all-clear (V155, barraCuda v0.4.0)
+6. **neuralSpring** (5) — `src/ipc/` tree complete (7 modules), CapabilityRouter discovery (37 capabilities, 20 hints), NestGate weight persistence wired (S205), Squirrel inference pipeline complete, Tier 2 COMPLETE, deep debt zero (V157, 910 tests)
 7. **groundSpring** (1→2) — expand `ipc.rs` into `src/ipc/` tree
 
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for the full per-spring rewiring inventory.
