@@ -108,6 +108,41 @@ operational for `shader.compile.wgsl/spirv`. One gap identified and resolved:
 
 No remaining coralReef action items from the hotSpring audit.
 
+## Glacial Debt Escalation — H2 Resolution (primalSpring audit response)
+
+primalSpring's "Upstream Primal Evolution — Glacial Debt Escalation" (May 13, 2026)
+listed two remaining coralReef niche tasks. Both are now resolved:
+
+### `naga::Module` direct ingest (H2) — RESOLVED
+
+The `compile_module` / `compile_module_full` APIs now support:
+
+1. **Entry point selection** — `CompileOptions::entry_point: Option<String>` allows
+   callers to target a specific entry point by name. When `None` (default), the first
+   compute-stage entry point is selected automatically. Error messages list available
+   entry points on mismatch.
+2. **Module validation** — `CompileOptions::validate: bool` (default `true`) runs
+   `naga::valid::Validator` on the module before compilation, catching malformed IR
+   with clear diagnostics before it reaches codegen. Can be disabled for trusted
+   modules where validation overhead is unwanted.
+3. **PTX path integration** — Entry point selection propagates through the SM100+
+   PTX emit path (`emit_compute_ptx_module`).
+4. **8 new tests** covering entry point selection, missing EP errors, compute-stage
+   preference, validation rejection of corrupted modules, and validation bypass.
+
+Total test count: 3129 (up from 3121).
+
+### `bind_stat` timeout — RESOLVED (since Sprint 5)
+
+All `shader.compile.*` methods are wrapped in `tokio::time::timeout`:
+- Default: 120 seconds
+- Override: `CORALREEF_COMPILE_TIMEOUT_SECS` environment variable
+- Applied to both JSON-RPC and tarpc transport handlers
+- Compile tasks run on `spawn_blocking` to avoid blocking the IPC reactor
+- Panics in compile tasks are caught and returned as `CompileError::Internal`
+
+No code changes needed — this was shipped in Sprint 5 and remains fully operational.
+
 ---
 
 ## References
