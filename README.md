@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 11, 2026 (River delta Tier 4 complete — 8/8 IPC-first, LTEE reproductions active, guideStone convergence, infra GPU sovereignty)
+**Last Updated**: May 12, 2026 (Pillar 4 GATE MET — 4/7 lithoSpore modules PASS Tier 2, plasmidBin pipeline hardened, all sentinels resolved)
 
 ---
 
@@ -384,8 +384,8 @@ You do not need to know about other primals. You need to know what you can do, a
 - **13,117+ tests** across the river delta (wetSpring 1,613 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,125 · hotSpring 1,042 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — **Stadial-ready**. 13-primal Full NUCLEUS, cell membrane operational, zero upstream debt. NestGate Session 60 absorbed (H2-05 DONE, H2-06/08/09 UNBLOCKED). All per-primal debt closed (L1 CLEAN). `publish_sporeprint.sh` ready, `nestgate_content_parity.sh` ready. Next: shadow runs (content parity, BearDog TLS, Songbird NAT) + `composition.deploy(graph)` + lithoSpore Tier 1
-- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets; 7/10 threads with spring seeds (Threads 2, 3, 5, 6, 7, 9, 10)
-- **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules, 36 paper-spring assignments, active reproductions (groundSpring B2+B1 COMPLETE, hotSpring B2 STARTED, wetSpring B7 STARTED, neuralSpring B1 STARTED)
+- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads (all active, all expressions authored), 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets; `toadstool.validate` dispatch wired, provenance trio operational, 8-phase validation pipeline with graceful health degradation
+- **LTEE guideStone** — First Targeted GuideStone: **4/7 modules PASS at Tier 2** (28/28 checks). groundSpring B2+B1 COMPLETE, hotSpring B2 Anderson INTEGRATED (5/5 PASS), wetSpring B7 Tenaillon INTEGRATED (8/8 PASS). BLAKE3 provenance on all fetched data. 27 unit tests, CI wired.
 - **benchScale** — GPU lifecycle automation (VFIO/IOMMU), pure-Rust SSH + NoCloud ISO, libvirt VM orchestration
 - **agentReagents** — GPU sovereign VM builder: K80 tooling, Titan V patches, verification modules
 
@@ -399,8 +399,8 @@ sovereignty capabilities to enable the stadial (external validation) phase.
 - 8/8 skunkBat Rust IPC, `method.register`, `composition.status`, NUCLEUS workloads
 - **8/8 Tier 4 IPC-first** — every spring `default = []`, barracuda optional
 - Zero open upstream gaps — 13/13 MethodGate, 13/13 BTSP AEAD, all L1 debt resolved (NestGate Session 60 closes final transport parity gap)
-- lithoSpore scaffolded (sporeGarden/lithoSpore): 9 crates, 7 science modules
-- LTEE reproductions active: groundSpring B2+B1 COMPLETE, hotSpring B2, wetSpring B7, neuralSpring B1
+- lithoSpore operational (sporeGarden/lithoSpore): 9 crates, 7 science modules, **4 PASS** Tier 2
+- LTEE reproductions: groundSpring B2+B1 COMPLETE, hotSpring B2 **INTEGRATED**, wetSpring B7 **INTEGRATED**, neuralSpring B1 active
 - GuideStone convergence: hotSpring L6 (compute trio wired), neuralSpring/healthSpring L5, wetSpring/groundSpring/ludoSpring/airSpring L4
 - benchScale GPU lifecycle + agentReagents K80/Titan V sovereign tooling operational
 
@@ -411,7 +411,7 @@ sovereignty capabilities to enable the stadial (external validation) phase.
 | 1. Primal Sovereignty | NestGate `content.put`, BearDog TLS shadow, Songbird NAT, BTSP auth | **GATE MET** — MethodGate 13/13, NestGate transport parity resolved (Session 60), BearDog/Songbird shipped |
 | 2. NUCLEUS Deployments | H2-2b/3a/3b/3c in shadow-run state | Not yet running |
 | 3. ABG Hosting | Thread 1 WCM compositions via provenance trio | Mapped, not all exercised |
-| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | **ACTIVE** — groundSpring B2+B1 complete, data integration next |
+| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | **GATE MET** — 4/7 modules PASS Tier 2 (28/28 checks), BLAKE3 provenance |
 | 5. River Delta | 4+ springs `optional=true`, wetSpring < 5 PG, air/neural gS L4 | **GATE MET** — 8/8 Tier 4, 4 PG open, air L4, neural L5 |
 
 ### Stadial Preview — External Validation Drives Evolution
@@ -461,24 +461,27 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 **Pillar 3 — ABG Hosting:**
 - Thread 1 WCM compositions through provenance trio
 
-**Pillar 4 — lithoSpore:**
-- ~~groundSpring B2 reproduction~~ **DONE** — Python 9/9 + Rust 10/10 PASS (Wiser 2013 fitness dynamics)
-- ~~groundSpring B1 reproduction~~ **DONE** — Python 8/8 + Rust 8/8 PASS (Barrick 2009 neutral mutation)
-- Integrate groundSpring reproductions into lithoSpore ltee-fitness + ltee-mutation modules
-- Fetch real data from Dryad/NCBI, BLAKE3-hash
-- 2+ modules PASS at Tier 1 (Python) — **now achievable** with groundSpring data
+**Pillar 4 — lithoSpore: GATE MET (May 12, 2026)**
+- ~~groundSpring B2 reproduction~~ **DONE** — Python 8/8 + Rust 8/8 PASS (Wiser 2013 fitness dynamics)
+- ~~groundSpring B1 reproduction~~ **DONE** — Python 7/7 + Rust 7/7 PASS (Barrick 2009 neutral mutation)
+- ~~Integrate groundSpring reproductions~~ **DONE** — ltee-fitness + ltee-mutations validated end-to-end
+- ~~Fetch real data from Dryad/NCBI, BLAKE3-hash~~ **DONE** — Wiser `e5189448…` + Barrick `ee14abb2…`
+- ~~2+ modules PASS~~ **EXCEEDED** — 4/7 modules PASS at Tier 2 (28/28 checks total)
+- hotSpring B2 Anderson: 5/5 PASS (Module 7 — GOE/Poisson level spacing)
+- wetSpring B7 Tenaillon: 8/8 PASS (Module 6 — 264-genome mutation accumulation)
+- Infrastructure: `litho-core` crate, 27+ unit tests, CI wired, liveSpore provenance chain
 
 **Pillar 5 — River Delta:** **GATE CONDITIONS MET** (May 11, 2026)
 - ~~airSpring + groundSpring → `optional=true` (Tier 4)~~ **DONE** — **8/8 springs Tier 4**
 - ~~wetSpring: close 4+ of 8 PG gaps~~ **DONE** — 4 closed (PG-06, PG-10, PG-17, PG-18), 4 remain (all external)
 - ~~airSpring/neuralSpring → gS L4~~ **DONE** — airSpring L4, neuralSpring **L5**
-- Foundation seeding: 7/10 threads with spring seeds (Threads 2, 3, 5, 6, 7, 9, 10)
-- Remaining: LTEE reproductions continue (feeds Pillar 4), foundation Thread 8 seed
+- Foundation: 10/10 threads active, all expressions authored, `toadstool.validate` wired
+- Remaining: Threads 4+7 through full deploy graphs with provenance trio
 
 **LTEE Targeted GuideStone** (projectNUCLEUS subsystem):
 - First artifact budding from ecosystem into portable deployment
 - 7 science modules, 36 paper-spring assignments across 6 springs
-- Active reproductions: groundSpring B2+B1 **COMPLETE**, hotSpring B2, wetSpring B7, neuralSpring B1
+- Active reproductions: groundSpring B2+B1 **COMPLETE**, hotSpring B2 **INTEGRATED**, wetSpring B7 **INTEGRATED**, neuralSpring B1 active
 - Standard: `TARGETED_GUIDESTONE_STANDARD.md`; handoff: `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md`
 
 ### Remaining Spring Gaps (May 11 — river delta Tier 4 complete)
