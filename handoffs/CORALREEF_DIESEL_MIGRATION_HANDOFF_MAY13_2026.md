@@ -143,6 +143,41 @@ All `shader.compile.*` methods are wrapped in `tokio::time::timeout`:
 
 No code changes needed — this was shipped in Sprint 5 and remains fully operational.
 
+## hotSpring Compute Trio Audit — Resolution (May 13, 2026)
+
+hotSpring audited coralReef's compile path and surfaced remaining items.
+All resolved:
+
+### PTX SM120/Blackwell texture ops — IMPLEMENTED
+
+The PTX emitter (`codegen/nv/ptx_emit/`) now supports:
+- `ImageStore` → `sust.b.{1d,2d,3d}.{format}.zero` (surface store)
+- `ImageLoad` → `suld.b.{1d,2d,3d}.{format}.zero` (surface load)
+- Surface binding detection from `AddressSpace::Handle` + `TypeInner::Image`
+- `.surfref` declarations in PTX output
+- Format classification: rgba8/rgba16/rgba32/r32
+
+2 new tests: `ptx_image_store_2d_rgba8`, `ptx_image_load_2d_rgba32`.
+
+### `EVOLUTION.md` narrative — WRITTEN
+
+Sprint 9 excision narrative added. "Current Position" rewritten to reflect
+pure compiler status. Historical sections (Titan V, iterations 37-80)
+annotated as fossil record.
+
+### USERD_TARGET encoding fix — toadStool domain (no coralReef action)
+
+This is purely driver-side (PBDMA runlist DW0 bits [3:2]). Was in excised
+`coral-driver`. Moves entirely with toadStool absorption. Zero compiler
+component.
+
+### Live compile→dispatch CI test — shared toadStool Phase C blocker
+
+Not actionable until toadStool Phase C lands. coralReef compile path is
+ready (`shader.compile.*` IPC surface operational).
+
+Total test count: 3130.
+
 ---
 
 ## References
