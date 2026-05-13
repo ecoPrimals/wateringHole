@@ -80,16 +80,18 @@ barracuda can point env vars at toadStool sockets without code changes.
 - FECS cold silicon recovery: `coral-driver/src/nv/vfio_compute/fecs_boot.rs`
 - Linux path helpers: `coral-driver/src/linux_paths.rs`
 
-## What Gets Removed After toadStool Phase D Cutover
+## Excision Complete (Sprint 9, May 13 2026)
 
+The following were **deleted** from coralReef in Sprint 9:
 - `coral-ember` crate (52 .rs files)
 - `coral-glowplug` crate (70 .rs files)
-- `coral-driver` hardware runtime modules (DRM/VFIO/nouveau — not compiler-adjacent modules)
+- `coral-driver` crate (367 .rs files — entire crate, including compiler-adjacent modules)
+- `coral-gpu` crate (unified compile+dispatch)
+- `showcase/` directory (hardware dispatch demos)
 
-Removal is gated on:
-1. toadStool `compute.dispatch.execute` IPC validated end-to-end
-2. barracuda rewired to toadStool socket paths
-3. Hardware validation on Titan V / K80 / RTX 5060
+Total: 153K lines deleted. coralReef is now a pure compiler primal with zero unsafe.
+toadStool should reference this handoff for E1/E2 patterns before the code was excised.
+Git history preserves the full implementation for reference (`git log --all -- crates/coral-driver/`).
 
 ---
 
