@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 13, 2026 (River delta Tier 4 complete — 8/8 IPC-first, LTEE reproductions active, guideStone convergence, infra GPU sovereignty; barraCuda Sprint 64: hotSpring trio audit — sovereign dispatch_path + tensor-core GEMM routing + multi-GPU OOM recovery)
+**Last Updated**: May 13, 2026 (River delta Tier 4 complete — 8/8 IPC-first, LTEE reproductions active, guideStone convergence, infra GPU sovereignty; barraCuda Sprint 65: 12-axis deep debt zero + doc hygiene pass; Sprint 64: hotSpring trio audit — sovereign dispatch_path + tensor-core GEMM routing + multi-GPU OOM recovery)
 
 ---
 
