@@ -1,24 +1,19 @@
 ---
 
-**ecoPrimals Downstream Evolution — May 13, 2026 (Phase 32 — Tier 2 DONE)**
-**From**: primalSpring v0.9.25 (Phase 32 — Tower=3, Nest=provenance trio, 13 primals)
+**ecoPrimals Downstream Evolution — May 10, 2026 (Post-Interstadial)**
+**From**: primalSpring v0.9.25 (Phase 60+ POST-INTERSTADIAL — Zero Open Upstream Gaps)
 **For**: All spring teams
 
-**What happened**: **Tier 2 convergence is COMPLETE** — all 7 delta springs have
-wired `toadstool.validate` and `barracuda.precision.route` via JSON-RPC IPC.
-Combined with Tier 4 (all 8/8 IPC-first), the delta is fully wired for NUCLEUS
-deployment. Phase 32 atomic model: skunkBat in Tower (3 primals), Nest
-reconciled with provenance trio (7 primals). All 13 primals at zero gate debt.
-Pillars 1, 4, and 5 MET. **Atomic niche assignments formalized** — each spring
-owns a specific composition tier for stress-testing before downstream handoff.
-See `SPRING_ATOMIC_NICHE_ASSIGNMENTS.md`.
-
-**hotSpring operates as a thermal niche** — own cadence on GPU hardware with
-the compute trio. All other springs target the standard IPC pipeline.
+**What happened**: The primordial extinction is **complete** — all 8/8 springs
+now have eukaryotic UniBin binaries. All 11 upstream gaps resolved by primal
+teams. JH-11 (token federation), GAP-03/06/09/12 all closed. Sovereignty
+horizons shipped: bearDog TLS + rate limiting, songbird full NAT chain,
+petalTongue web sovereignty, biomeOS `composition.status` + `method.register`.
+JH-5 audit forwarding and Tier 4 rewiring are now unblocked.
 
 **Spring UniBin binaries are now tractable for plasmidBin deployment** — each
 spring produces a single binary with `certify`/`validate`/`serve`/`status`/`version`
-subcommands. See `fossilRecord/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md`.
+subcommands. See `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md`.
 
 **Pull primalSpring, infra/wateringHole, and infra/plasmidBin before starting and all primals/ repos.**
 
@@ -26,18 +21,16 @@ subcommands. See `fossilRecord/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_
 
 The Phase 45 deployment pipeline you absorbed is still your foundation — 46 pre-built genomeBin binaries across 6 target triples, live NUCLEUS deployable from plasmidBin. What's new is the **rewiring imperative**: your spring-local `barracuda/` and `ecoPrimal/` directories still link barraCuda as a library. That was correct during mountain season when you were evolving the math. Now that primals have absorbed it, you rewire to binary-only IPC. The computation flowing through ecobin primals is simultaneously visualizable by petalTongue and provenance-trackable by sweetGrass — rewiring, visualization, and attribution converge.
 
-## YOUR NEXT STEP — SHADOW RUNS AND TIER 2
+## YOUR NEXT STEP — LIBRARY TO BINARY
 
-Library-to-binary rewiring is **DONE** (all 8 springs at Tier 4). The next
-evolution target is interstadial exit — shadow runs executing, lithoSpore
-integration, and Tier 2 science API convergence.
+Your primal proof proved science runs through NUCLEUS primals via IPC. Now the scope expands: move your entire domain math off the library and onto IPC.
 
 ```
-Python baseline (L1) → Rust proof (L2) → guideStone bare (L3) → NUCLEUS validated (L4) → Tier 4 IPC-first
+Python baseline (L1) → Rust proof (L2) → guideStone bare (L3) → NUCLEUS validated (L4) → primal proof (L5)
                                                                                              YOU ARE HERE
                                                                                                   ↓
-                                              Shadow runs → lithoSpore integration → Tier 2 (toadstool.validate)
-                                                                                                 GO HERE
+                                                          Tier 2 (IPC routing) → Tier 3 (parity) → Tier 4 (binary-only)
+                                                                                                      GO HERE
 ```
 
 ### Rewiring Tier Model
@@ -78,53 +71,43 @@ ludoSpring's `ipc/provenance/{rhizocrypt.rs, loamspine.rs, sweetgrass.rs}` is th
 
 Any primal that misbehaves, returns unexpected formats, or is missing a capability — document it and hand back to primalSpring via `docs/PRIMAL_GAPS.md`.
 
-## WHERE EVERYONE STANDS (Phase 32, May 13)
+## WHERE EVERYONE STANDS (Post-Interstadial, May 10)
 
-All 8/8 springs at **Tier 4 IPC-first** + **Tier 2 converged** — 14,000+ total tests.
-Every delta spring has wired `toadstool.validate` and `barracuda.precision.route`.
-**Atomic niche assignments** formalized (see `SPRING_ATOMIC_NICHE_ASSIGNMENTS.md`).
+All 8/8 springs completed primordial extinction — eukaryotic UniBin, zero debt.
+Spring UniBin binaries are ready for plasmidBin tracking.
 
-| Spring | gS | Tests | Tier | Atomic Niche | Next Step |
-|--------|---:|------:|:----:|:-------------|-----------|
-| primalSpring | L8 | 618 | 4+2 | Coordinator (all compositions) | Shadow run validation, CompositionContext L2 pass |
-| hotSpring | L6 | 1,025 | 4+2 | **Node** (thermal niche — GPU sovereign) | Compute trio sovereignty, own cadence |
-| healthSpring | L5 | 1,014 | 4+2 | **Nest** (provenance trio) | Ionic bridge, BTSP FAMILY_SEED interop |
-| neuralSpring | L5 | 907 | 4+2 | **Meta-tier** (AI inference) | NestGate weight IPC, B1 lithoSpore module |
-| wetSpring | L4 | 2,077 | 4+2 | **Full NUCLEUS** (all atomics) | 4 PGs (trio live, `capability.resolve`) |
-| airSpring | L4 | 1,413 | 4+2 | **Tower+Node** (sensor→compute) | LTEE E3 lithoSpore packaging |
-| groundSpring | L4 | 1,123 | 4+2 | **Tower+Nest** (data provenance) | lithoSpore module integration |
-| ludoSpring | L4 | 858 | 4+2 | **Tower** (interactive trust) | Composition-only niche, Thread 9+10 |
+| Spring | gS | Tests | Rewiring Tier | UniBin | Next Step |
+|--------|-----|-------|---------------|:------:|-----------|
+| primalSpring | **8** | 680 | **4** (exemplar) | Yes | Reference complete |
+| hotSpring | **6** | 1,036 | **4** | Yes | Tier 4 IPC-first complete; 9/12 scenarios; `--format json`; GAP-HS-092 `call_by_capability` proliferation |
+| healthSpring | **5** | 999+ | **3** | Yes | Tier 4: flip `primal-proof` to IPC default |
+| wetSpring | **4** | 1,209 | **2** | Yes | Tier 3: route handler compute through ecobin |
+| neuralSpring | **3** | 1,432 | **2** | Yes | Tier 3: `src/ipc/` tree, latency-aware |
+| ludoSpring | **4** | 665+ | **3** | Yes | Tier 4: close remaining `barracuda::` calls |
+| airSpring | **2** | 1,364 | **2** | Yes | Tier 3: `aws-lc-sys` ban, guideStone L4 |
+| groundSpring | **4** | 965+ | **1** | Yes | Tier 2: expand `ipc.rs` into `src/ipc/` tree |
 
-### Convergence Priority (Niche Depth + Downstream Handoff)
+### Rewiring Priority
 
-Tier 2 convergence is **DONE** — all springs have wired `toadstool.validate`,
-`toadstool.list_workloads`, and `barracuda.precision.route`. The next frontier
-is **niche depth** and **downstream handoff** to sporeGarden products:
+1. **ludoSpring** (3→4) — pure composition, cleanest test case
+2. **healthSpring** (3→4) — `primal-proof` feature already gates compilation
+3. **hotSpring** (4 — done) — Tier 4 IPC-first, capability discovery complete, LTEE B2 shipped
+4. **wetSpring** (2→3) — richest IPC handler surface, route compute through ecobin
+5. **airSpring** (2→3) — good foundation despite pre-delta
+6. **neuralSpring** (2→3) — needs `src/ipc/` dir; latency-sensitive inference
+7. **groundSpring** (1→2) — minimal IPC, but optional feature gate is a start
 
-1. **Atomic niche stress-testing** — each spring validates its assigned composition tier (see `SPRING_ATOMIC_NICHE_ASSIGNMENTS.md`)
-2. **lithoSpore module integration** — groundSpring B2+B1, neuralSpring B1 ready, wetSpring B7, healthSpring B5 packaging
-3. **Shadow run participation** — BearDog TLS, NestGate content pipeline (projectNUCLEUS owns)
-4. **Domain-specific composition depth** — provenance trio, ionic bonds, petalTongue
+## WHAT'S NEW (Post-Interstadial, May 10)
 
-## WHAT'S NEW (Phase 32, May 13)
-
-- **Tier 2 convergence COMPLETE**: All 7 delta springs wired `toadstool.validate` + `barracuda.precision.route`. 14,000+ total tests.
-- **Atomic niche assignments formalized**: Each spring owns a composition tier for stress-testing (`SPRING_ATOMIC_NICHE_ASSIGNMENTS.md`).
-- **hotSpring thermal niche**: Own cadence on GPU hardware. Compute trio sovereignty delegated to hotSpring on biomeGate.
-- **primalSpring local debt swept**: Zero clippy warnings, docs reconciled, fossilRecord references updated, stale specs bannered.
-- **plasmidBin automation hardened**: Idempotent harvest, post-harvest BLAKE3 validation, error propagation.
-- **All sentinels RESOLVED**: toadStool Phase C COMPLETE (S250), Songbird VPS relay OPS-READY (W202), coralReef FECS STABILITY PROOF (Sprint 7).
-- **lithoSpore Pillar 4 PASS**: Module 1+2 Tier 1+2 with BLAKE3 provenance. Now 4/7 modules passing.
-
-**Previous milestones (May 12)**:
-- Tier 4 rewiring COMPLETE: 8/8 springs IPC-first. Pillars 1, 4, 5 MET.
-- Phase 32 atomic model: skunkBat in Tower, Nest reconciled. 13 primals at zero gate debt.
-- 413 canonical methods (301 exercised, 72%). Wave 10 complete.
-
-**Previous milestones (May 10)**:
-- Primordial extinction: 8/8 UniBin, zero debt markers.
-- All 11 upstream gaps resolved (JH-11, GAP-03/06/09/12, etc.).
-- Sovereignty horizons: bearDog TLS, songbird NAT, petalTongue web, biomeOS `composition.status`.
+- **Primordial extinction complete**: 8/8 springs have eukaryotic UniBin binaries. Zero TODO/FIXME/HACK/clippy across all springs.
+- **Zero open upstream gaps**: All 11 gaps resolved (JH-11, GAP-03/06/09/12, U1-U3, DF-2/3, U5). See `handoffs/PRIMALSPRING_POST_INTERSTADIAL_DOWNSTREAM_HANDOFF_MAY10_2026.md`.
+- **Spring UniBin → plasmidBin**: Single binary per spring makes tracked deployment tractable for the first time. See `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md`.
+- **Sovereignty horizons shipped upstream**: bearDog TLS + rate limiting (H2-10/11), songbird full NAT chain (H2-13-16), petalTongue web sovereignty (PT-1-PT-5), biomeOS `composition.status` + `method.register`.
+- **JH-5 audit forwarding unblocked**: skunkBat Phase 2 complete (7 event kinds). Phase 3 (cross-primal forwarding) ready.
+- **Tier 4 rewiring unblocked**: JH-11 token federation live. `CompositionContext` is the canonical API.
+- **`method.register` live**: biomeOS v3.51 — springs can register methods dynamically (no manual config).
+- **projectNUCLEUS static observer**: Pre-rendered HTML, centralized dark theme, Rust-validated (darkforest v0.2.1).
+- **403 canonical methods**: primalSpring registry (zero drift). CI cross-sync available for all springs.
 
 ## KNOWN ISSUES (SO YOU DON'T HIT THEM)
 
@@ -144,7 +127,7 @@ is **niche depth** and **downstream handoff** to sporeGarden products:
 | Topic | Location |
 |-------|----------|
 | **Spring NUCLEUS Audit** | `infra/wateringHole/SPRING_NUCLEUS_AUDIT_MAY2026.md` |
-| **UniBin plasmidBin readiness** | `infra/wateringHole/fossilRecord/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` |
+| **UniBin plasmidBin readiness** | `infra/wateringHole/handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` |
 | **Post-interstadial downstream** | `infra/wateringHole/handoffs/PRIMALSPRING_POST_INTERSTADIAL_DOWNSTREAM_HANDOFF_MAY10_2026.md` |
 | **petalTongue Science Map** | `infra/wateringHole/petaltongue/PETALTONGUE_SPRING_SCIENCE_MAP.md` |
 | **sweetGrass Braid Patterns** | `infra/wateringHole/SWEETGRASS_SPRING_BRAID_PATTERNS.md` |
