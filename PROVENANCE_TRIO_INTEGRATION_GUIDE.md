@@ -1,7 +1,7 @@
 # Provenance Trio Integration Guide
 
-**Version:** 1.0.0
-**Date:** April 27, 2026
+**Version:** 2.0.0
+**Date:** May 13, 2026 (wire names reconciled per GAP-36)
 **Audience:** Springs, gardens, and any composition wiring rhizoCrypt + loamSpine + sweetGrass
 **Status:** Active
 **License:** AGPL-3.0-or-later
@@ -85,7 +85,7 @@ required = false
 depends_on = ["beardog"]
 health_method = "health.liveness"
 by_capability = "attribution"
-capabilities = ["attribution.create_braid", "attribution.add_contribution", "attribution.calculate"]
+capabilities = ["braid.create", "contribution.record", "attribution.chain"]
 fallback = "skip"
 ```
 
@@ -103,25 +103,26 @@ The standard provenance commit flow composes all three primals in sequence.
 biomeOS orchestrates this as the `rootpulse_commit` graph.
 
 ```
-1. rhizoCrypt.dag.create_session(name)
+1. rhizoCrypt: dag.session.create({"name": "..."})
    → session_id
 
-2. [Your work happens — add vertices to the DAG]
-   rhizoCrypt.dag.add_vertex(session_id, content, parents)
-   → vertex_id (content-addressed)
+2. [Your work happens — add events to the DAG]
+   rhizoCrypt: dag.event.append({"session_id": "...", "event_type": {...}, "data": {...}})
+   → vertex hash (content-addressed)
 
-3. sweetGrass.attribution.create_braid(artifact_id)
-   sweetGrass.attribution.add_contribution(braid_id, agent, role, weight)
-   → braid with contributor records
+3. sweetGrass: braid.create({"data_hash": "...", "mime_type": "...", "size": N,
+      "name": "...", "description": "...", "source_session": "<session_id>"})
+   sweetGrass: contribution.record({"hash": "...", "agent": "...", "role": "Creator"})
+   → braid with contributor records and urn:braid: identifier
 
-4. rhizoCrypt.dag.dehydrate(session_id)
-   → transfers session state to loamSpine
+4. rhizoCrypt: dag.merkle.root({"session_id": "..."})
+   → Merkle root hash
 
-5. loamSpine.ledger.commit(dehydrated_state, signature)
+5. loamSpine: entry.append({"spine_id": "...", "entry_type": {...}, "committer": "..."})
    → immutable ledger entry with temporal anchor
 
-6. sweetGrass.attribution.seal(braid_id, ledger_ref)
-   → braid sealed with loamSpine reference
+6. sweetGrass: braid.commit({"braid_id": "urn:braid:...", "spine_id": "..."})
+   → braid packaged for loamSpine anchoring
 ```
 
 **The result**: An immutable record that says WHO did WHAT, WHEN, with
@@ -154,14 +155,29 @@ cryptographic proof from BearDog and a permanent ledger entry from loamSpine.
 
 ### sweetGrass (capability: `attribution`)
 
+sweetGrass v0.7.35 exposes 37 canonical methods + 10 wire-name aliases.
+The table below shows the primary methods used in composition. For the
+full surface, see `sweetGrass/CONTEXT.md` or call `capabilities.list`.
+
 | Method | Params | Response | Notes |
 |--------|--------|----------|-------|
 | `health.liveness` | `{}` | `{"status": "alive", "name": "sweetgrass"}` | Standard health probe |
-| `attribution.create_braid` | `{"artifact_id": "..."}` | `{"braid_id": "..."}` | Create attribution braid for an artifact |
-| `attribution.add_contribution` | `{"braid_id": "...", "agent": "...", "role": "Creator", "weight": 0.5}` | `{"contribution_id": "..."}` | Add contributor to braid |
-| `attribution.calculate` | `{"braid_id": "..."}` | `{"contributions": [...], "total_weight": 1.0}` | Calculate attribution distribution |
-| `attribution.seal` | `{"braid_id": "...", "ledger_ref": "..."}` | `{"sealed": true}` | Seal braid with loamSpine reference |
-| `attribution.export_prov` | `{"braid_id": "..."}` | `{"prov_o": {...}}` | Export as W3C PROV-O JSON-LD |
+| `braid.create` | `{"data_hash": "...", "mime_type": "...", "size": N}` | Full W3C PROV-O JSON-LD with `@id: "urn:braid:..."` | Also accepts flattened `name`, `description`, `tags`, `source_session`, `source_merkle_root` |
+| `contribution.record` | `{"hash": "...", "agent": "did:...", "role": "Creator"}` | `{"contribution_id": "..."}` | Record a contributor to a braid |
+| `attribution.chain` | `{"hash": "..."}` | `{"contributors": [...]}` | Get attribution chain for a content hash |
+| `attribution.calculate_rewards` | `{"hash": "...", "value": N}` | `[{"agent": "...", "share": 0.5, "amount": N}]` | Calculate value distribution |
+| `braid.commit` | `{"braid_id": "urn:braid:...", "spine_id": "..."}` | `{"braid_id": "...", "data_hash_bytes": "..."}` | Package braid for loamSpine anchoring |
+| `provenance.graph` | `{"entity": {"data_hash": "..."}}` | `{...}` | Provenance graph for an entity |
+| `provenance.export_provo` | `{"hash": "..."}` | W3C PROV-O JSON-LD | Export as PROV-O |
+| `attribution.witness` | `{"hash": "...", "witness_agent": "did:...", "event_type": "..."}` | `{"witnessed_at": "..."}` | JH-5 audit attestation |
+| `lifecycle.status` | `{}` | `{"status": "running", "version": "..."}` | Primal lifecycle state |
+
+**Wire-name aliases** (for backward compatibility — use canonical names above):
+`attribution.create_braid` → `braid.create`, `attribution.add_contribution` → `contribution.record`,
+`attribution.calculate` → `attribution.calculate_rewards`, `attribution.seal` → `braid.commit`,
+`attribution.export_prov` → `provenance.export_provo`, `provenance.lineage` → `attribution.chain`,
+`provenance.create_braid` → `braid.create`, `attribution.braid` → `braid.create`,
+`attribution.anchor` → `anchoring.anchor`, `braid.attribution.create` → `braid.create`.
 
 ---
 
@@ -291,12 +307,12 @@ including `frame_rate`, `active_scenes`, `total_frames`, `user_interactivity`,
 Every science experiment can record its lineage:
 
 ```
-1. Create DAG session: "wetspring_exp403_primal_parity"
-2. Add vertex: Python baseline (content hash of expected values)
-3. Add vertex: Rust computation result (content hash of output)
-4. Add vertex: Parity comparison (depends on both above)
-5. Create braid: attribute the experiment to spring + operator
-6. Dehydrate → commit → seal
+1. dag.session.create: "wetspring_exp403_primal_parity"
+2. dag.event.append: Python baseline (content hash of expected values)
+3. dag.event.append: Rust computation result (content hash of output)
+4. dag.event.append: Parity comparison (depends on both above)
+5. braid.create: attribute the experiment to spring + operator
+6. dag.merkle.root → entry.append → braid.commit
 ```
 
 ### Cross-Spring Attribution
@@ -336,9 +352,16 @@ economic model.
 
 ## Evolution Path
 
-### Current (April 27, 2026)
+### Current (May 13, 2026)
 
 - Trio primals operational, UDS IPC **fully functional** (PG-52 resolved)
+- **GAP-36 wire-name reconciliation** — sweetGrass v0.7.35 resolves 10
+  downstream method name variants transparently (use canonical names above)
+- sweetGrass `braid.create` accepts flattened convenience fields for
+  composition callers (`name`, `description`, `tags`, `source_session`,
+  `source_merkle_root`)
+- NFT seal round-trip verified: `braid.create` → Ed25519 witness → `braid.commit`
+- `attribution.witness` accepts JH-5 Phase 3 audit events from skunkBat pipeline
 - All science springs have graceful degradation wired
 - Shell composition library supports trio with `_uds_send` fallback chain
 - `rootpulse_commit` graph validated end-to-end
