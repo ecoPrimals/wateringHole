@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 12, 2026 (Pillar 4 GATE MET — 4/7 lithoSpore modules PASS Tier 2, plasmidBin pipeline hardened, all sentinels resolved)
+**Last Updated**: May 12, 2026 (Compute trio Phase C/D transition, coralReef FECS stability proof SHIPPED, barraCuda v0.4.0, Passes 11-14 converging — only Songbird VPS relay remains as sentinel blocker, 11 active ecosystem handoffs)
 
 ---
 
@@ -92,7 +92,7 @@ Primals achieve their greatest power through composition. These are not separate
 **What**: The full primal composition orchestrated by biomeOS.
 
 **Layers**:
-- **Tower Atomic** = BearDog + Songbird (crypto + network)
+- **Tower Atomic** = BearDog + Songbird + skunkBat (crypto + discovery + defense)
 - **Node Atomic** = Tower + ToadStool (+ compute)
 - **Nest Atomic** = Tower + NestGate (+ storage)
 - **Full NUCLEUS** = All primals + Squirrel (+ AI)
@@ -319,26 +319,20 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md` — External validation strategy
 
 ### Sovereign Hosting & Cell Membrane
-- `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Hosting evolution, DNS metadata closure, cell membrane addendum
-- `handoffs/PROJECTNUCLEUS_CELL_MEMBRANE_COMPOSITION_HANDOFF_MAY10_2026.md` — Cell membrane architecture, NUCLEUS composition patterns, neuralAPI deployment, per-team absorption targets
+- *(Archived to fossilRecord repository — May 12, 2026)*
+- Hosting evolution, DNS metadata closure, cell membrane addendum
+- Cell membrane architecture, NUCLEUS composition patterns, neuralAPI deployment, per-team absorption targets
 
 ### Interstadial Exit & Stadial Boundary
 - `INTERSTADIAL_EXIT_CRITERIA.md` — Authoritative exit criteria: 5 pillars, gate conditions, stadial boundary definition, external validation drivers
-- `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` — NUCLEUS findings, spring UniBin → plasmidBin readiness, static observer, darkforest v0.2.1
+- `fossilRecord/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` — NUCLEUS findings, spring UniBin → plasmidBin readiness
 
 ### Targeted GuideStone (LTEE)
 - `TARGETED_GUIDESTONE_STANDARD.md` — Standard for how composed subsystems bud into portable artifacts (budding model, 5 components, cross-platform via ecoBin/genomeBin, liveSpore tracking, data freshness protocol)
-- `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem: first Targeted GuideStone artifact (Barrick Lab), 7 science modules, 36 paper-spring assignments across 6 springs, three-tier architecture, projectNUCLEUS deployment subsystem
-
-### Deep Debt & Upstream Handbacks
-- `handoffs/PROJECTNUCLEUS_CROSS_ECOSYSTEM_AUDIT_MAY11_2026.md` — Cross-ecosystem audit findings, MethodGate parity, spring skunkBat wiring, barraCuda version skew
-- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_UPSTREAM_HANDBACK_MAY11_2026.md` — Upstream handback: toadStool/squirrel MethodGate, barraCuda crypto delegation, squirrel LocalProcessProvider
-- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_EVOLUTION_SWEEP_HANDOFF_MAY11_2026.md` — Full sweep handoff: composition patterns, NestGate priority, lessons for all teams, what's next for data/compute chains
-- `handoffs/PROJECTNUCLEUS_TRIO_DEEP_DEBT_COMPLETION_HANDOFF_MAY11_2026.md` — Trio completion: Rust modernization (darkforest submodules, tunnelKeeper clone opt, Tier 2 Nelder-Mead), foundation 10/10 threads + TOML-driven scripts, lithoSpore liveSpore wired, zero hardcoded paths, all stale refs reconciled
-- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_RESOLUTION_MAY13_2026.md` — Hardcoded path elimination (7 workloads + 1 deploy script), doc reconciliation (lithoSpore 2/7→4/7, foundation count fixes, stale EVOLUTION_GAPS replaced), barraCuda registry count drift flagged (71→72)
+- `fossilRecord/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem definition (archived — active work in lithoSpore)
 
 ### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (active + 900+ archived including 19 post-interstadial closures)
+- `handoffs/` — Cross-primal evolution handoff documents (11 active: Pass 11-14, ecosystem wave sync, primalSpring Phase 32, river delta, Songbird Waves 199-202, coralReef Sprint 5, ludoSpring V67; 2 archived in `handoffs/archive/`)
 - `petaltongue/` — petalTongue integration documentation
 - `compute-sharing/` — Sovereign compute sharing validation
 - `healthspring/` — healthSpring-specific guidance
@@ -346,16 +340,17 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `birdsong/` — BirdSong protocol specification
 - `btsp/` — BTSP protocol details
 - `genomeBin/` — genomeBin tooling
-- `fossilRecord/` — Archived documents from previous consolidation waves
 - `scripts/` — Utility scripts
 - `templates/` — Templates for new primals/springs
 
-### Fossil Record
-Documents superseded by newer standards or absorbed into living documents are
-preserved in `fossilRecord/`. Two consolidation waves:
+### Fossil Record — Canonical Repository
+All superseded documents are archived in the dedicated **fossilRecord** repository:
 
-- `fossilRecord/consolidated-apr2026/` — 56 documents from March-April 2026
-- `fossilRecord/consolidated-may2026/` — 24 documents superseded by Phase 58 audit
+**https://github.com/ecoPrimals/fossilRecord**
+
+The local `fossilRecord/` directory contains only a redirect pointer. The canonical
+repository consolidates 3,831+ documents from 10 ecosystem sources with provenance-
+preserving subdirectories (`wateringHole/`, `springs/primalSpring/`, etc.).
 
 ---
 
@@ -382,11 +377,11 @@ You do not need to know about other primals. You need to know what you can do, a
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
 - **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 689+ tests, two-tier validation (Rust + Live), `CompositionContext` throughout, **zero debt** (all LOW/deferred resolved in Wave 9)
 - **8 springs** — all Tier 4 IPC-first (`default = []`, barracuda optional), all eukaryotic UniBin, LTEE reproductions active
-- **13,117+ tests** across the river delta (wetSpring 1,613 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,125 · hotSpring 1,042 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
+- **13,111+ tests** across the river delta (wetSpring 1,613 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,125 · hotSpring 1,036 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — **Stadial-ready**. 13-primal Full NUCLEUS, cell membrane operational, zero upstream debt. NestGate Session 60 absorbed (H2-05 DONE, H2-06/08/09 UNBLOCKED). All per-primal debt closed (L1 CLEAN). `publish_sporeprint.sh` ready, `nestgate_content_parity.sh` ready. Next: shadow runs (content parity, BearDog TLS, Songbird NAT) + `composition.deploy(graph)` + lithoSpore Tier 1
-- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads (all active, all expressions authored), 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets; `toadstool.validate` dispatch wired, provenance trio operational, 8-phase validation pipeline with graceful health degradation
-- **LTEE guideStone** — First Targeted GuideStone: **4/7 modules PASS at Tier 2** (28/28 checks). groundSpring B2+B1 COMPLETE, hotSpring B2 Anderson INTEGRATED (5/5 PASS), wetSpring B7 Tenaillon INTEGRATED (8/8 PASS). BLAKE3 provenance on all fetched data. 27 unit tests, CI wired.
+- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets; 7/10 threads with spring seeds (Threads 2, 3, 5, 6, 7, 9, 10)
+- **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules, 36 paper-spring assignments, active reproductions (groundSpring B2+B1 COMPLETE, hotSpring B2 STARTED, wetSpring B7 STARTED, neuralSpring B1 STARTED)
 - **benchScale** — GPU lifecycle automation (VFIO/IOMMU), pure-Rust SSH + NoCloud ISO, libvirt VM orchestration
 - **agentReagents** — GPU sovereign VM builder: K80 tooling, Titan V patches, verification modules
 
@@ -400,9 +395,9 @@ sovereignty capabilities to enable the stadial (external validation) phase.
 - 8/8 skunkBat Rust IPC, `method.register`, `composition.status`, NUCLEUS workloads
 - **8/8 Tier 4 IPC-first** — every spring `default = []`, barracuda optional
 - Zero open upstream gaps — 13/13 MethodGate, 13/13 BTSP AEAD, all L1 debt resolved (NestGate Session 60 closes final transport parity gap)
-- lithoSpore operational (sporeGarden/lithoSpore): 9 crates, 7 science modules, **4 PASS** Tier 2
-- LTEE reproductions: groundSpring B2+B1 COMPLETE, hotSpring B2 **INTEGRATED**, wetSpring B7 **INTEGRATED**, neuralSpring B1 active
-- GuideStone convergence: hotSpring L6 (compute trio wired), neuralSpring/healthSpring L5, wetSpring/groundSpring/ludoSpring/airSpring L4
+- lithoSpore scaffolded (sporeGarden/lithoSpore): 9 crates, 7 science modules
+- LTEE reproductions active: groundSpring B2+B1 COMPLETE, hotSpring B2, wetSpring B7, neuralSpring B1
+- GuideStone convergence: hotSpring L6, neuralSpring/healthSpring L5, wetSpring/groundSpring/ludoSpring/airSpring L4
 - benchScale GPU lifecycle + agentReagents K80/Titan V sovereign tooling operational
 
 **Interstadial Exit Gate** (5 pillars — full details: `INTERSTADIAL_EXIT_CRITERIA.md`):
@@ -412,7 +407,7 @@ sovereignty capabilities to enable the stadial (external validation) phase.
 | 1. Primal Sovereignty | NestGate `content.put`, BearDog TLS shadow, Songbird NAT, BTSP auth | **GATE MET** — MethodGate 13/13, NestGate transport parity resolved (Session 60), BearDog/Songbird shipped |
 | 2. NUCLEUS Deployments | H2-2b/3a/3b/3c in shadow-run state | Not yet running |
 | 3. ABG Hosting | Thread 1 WCM compositions via provenance trio | Mapped, not all exercised |
-| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | **GATE MET** — 4/7 modules PASS Tier 2 (28/28 checks), BLAKE3 provenance |
+| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | **ACTIVE** — groundSpring B2+B1 complete, data integration next |
 | 5. River Delta | 4+ springs `optional=true`, wetSpring < 5 PG, air/neural gS L4 | **GATE MET** — 8/8 Tier 4, 4 PG open, air L4, neural L5 |
 
 ### Stadial Preview — External Validation Drives Evolution
@@ -453,7 +448,7 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 - ~~Zero `content.*` scenarios, tests, or graph steps~~ **FIXED** (W7-02/03/04)
 - ~~413-method registry unchecked semantically~~ **FIXED** — inverse drift detection (W7-06)
 - **Wave 7** (contract testing): content domain semantic gates shipped
-- **Wave 8** (compute trio): Node atomic sovereign dispatch contracts shipped — see `handoffs/COMPUTE_TRIO_WAVE8_NODE_ATOMIC_EVOLUTION_MAY11_2026.md`
+- **Wave 8** (compute trio): Node atomic sovereign dispatch contracts shipped — Phase B complete, Phase C in progress
 
 **Pillar 2 — NUCLEUS Deployments:**
 - Shadow-run state for H2-2b/3a/3b/3c
@@ -462,28 +457,25 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 **Pillar 3 — ABG Hosting:**
 - Thread 1 WCM compositions through provenance trio
 
-**Pillar 4 — lithoSpore: GATE MET (May 12, 2026)**
-- ~~groundSpring B2 reproduction~~ **DONE** — Python 8/8 + Rust 8/8 PASS (Wiser 2013 fitness dynamics)
-- ~~groundSpring B1 reproduction~~ **DONE** — Python 7/7 + Rust 7/7 PASS (Barrick 2009 neutral mutation)
-- ~~Integrate groundSpring reproductions~~ **DONE** — ltee-fitness + ltee-mutations validated end-to-end
-- ~~Fetch real data from Dryad/NCBI, BLAKE3-hash~~ **DONE** — Wiser `e5189448…` + Barrick `ee14abb2…`
-- ~~2+ modules PASS~~ **EXCEEDED** — 4/7 modules PASS at Tier 2 (28/28 checks total)
-- hotSpring B2 Anderson: 5/5 PASS (Module 7 — GOE/Poisson level spacing)
-- wetSpring B7 Tenaillon: 8/8 PASS (Module 6 — 264-genome mutation accumulation)
-- Infrastructure: `litho-core` crate, 27+ unit tests, CI wired, liveSpore provenance chain
+**Pillar 4 — lithoSpore:**
+- ~~groundSpring B2 reproduction~~ **DONE** — Python 9/9 + Rust 10/10 PASS (Wiser 2013 fitness dynamics)
+- ~~groundSpring B1 reproduction~~ **DONE** — Python 8/8 + Rust 8/8 PASS (Barrick 2009 neutral mutation)
+- Integrate groundSpring reproductions into lithoSpore ltee-fitness + ltee-mutation modules
+- Fetch real data from Dryad/NCBI, BLAKE3-hash
+- 2+ modules PASS at Tier 1 (Python) — **now achievable** with groundSpring data
 
 **Pillar 5 — River Delta:** **GATE CONDITIONS MET** (May 11, 2026)
 - ~~airSpring + groundSpring → `optional=true` (Tier 4)~~ **DONE** — **8/8 springs Tier 4**
 - ~~wetSpring: close 4+ of 8 PG gaps~~ **DONE** — 4 closed (PG-06, PG-10, PG-17, PG-18), 4 remain (all external)
 - ~~airSpring/neuralSpring → gS L4~~ **DONE** — airSpring L4, neuralSpring **L5**
-- Foundation: 10/10 threads active, all expressions authored, `toadstool.validate` wired
-- Remaining: Threads 4+7 through full deploy graphs with provenance trio
+- Foundation seeding: 7/10 threads with spring seeds (Threads 2, 3, 5, 6, 7, 9, 10)
+- Remaining: LTEE reproductions continue (feeds Pillar 4), foundation Thread 8 seed
 
 **LTEE Targeted GuideStone** (projectNUCLEUS subsystem):
 - First artifact budding from ecosystem into portable deployment
 - 7 science modules, 36 paper-spring assignments across 6 springs
-- Active reproductions: groundSpring B2+B1 **COMPLETE**, hotSpring B2 **INTEGRATED**, wetSpring B7 **INTEGRATED**, neuralSpring B1 active
-- Standard: `TARGETED_GUIDESTONE_STANDARD.md`; handoff: `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md`
+- Active reproductions: groundSpring B2+B1 **COMPLETE**, hotSpring B2, wetSpring B7, neuralSpring B1
+- Standard: `TARGETED_GUIDESTONE_STANDARD.md`; active work in lithoSpore
 
 ### Remaining Spring Gaps (May 11 — river delta Tier 4 complete)
 
@@ -491,7 +483,7 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 |--------|---------|------:|:--:|:------:|------|----------------|
 | wetSpring | V163 | 1,613 | L4 | Done | B7 started | 4 external PG gaps (PG-02 provenance, PG-03 capability, PG-04 NestGate, PG-05 toadStool) |
 | neuralSpring | S201b | 1,453 | L5 | Done | B1 started | Gap 11 (18 RPC methods), NestGate weights, inference.rs untracked |
-| hotSpring | v0.6.32 | 1,042 | L6 | Done | **B2 DONE** | GAP-HS-094 compute trio pipeline wired; Titan V/K80 dispatch blocked on wgpu VFIO adapter; B9 queued |
+| hotSpring | v0.6.32 | 1,036 | L6 | Done | **B2 DONE** | Titan V FECS (GAP-HS-073), K80 livepatch (GAP-HS-076); B9 queued; GAP-HS-092 call_by_capability proliferation |
 | healthSpring | V63 | 999 | L5 | Done | B5/E2/E4 queued | Thread 3 seeded (6/10→7+), ionic bridge blocked upstream |
 | airSpring | v0.10.0 | 1,389 | L4 | Done | E3 queued | AG-001 manifest read, NestGate/Squirrel wiring |
 | groundSpring | V135 | 1,125 | L4 | Done | **B2+B1 DONE** | coralReef IPC, PRNG GPU alignment deferred |
@@ -511,10 +503,8 @@ See `primalSpring/docs/PRIMAL_GAPS.md` for the full ownership model.
 
 See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring 7-dimension audit.
 See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
-See `handoffs/archive/post_interstadial_may2026/` for 19 archived closure handoffs.
-See `fossilRecord/handoffs-may11-2026-wave9-closure/` for 34 archived handoffs from the Wave 9 debt closure cycle.
-
-**Active handoffs (8):** Compute trio Wave 8 evolution, LTEE guideStone, sovereign compute warm-catch, projectNUCLEUS UniBin/patterns, hotSpring v0.6.32 deep debt consolidation, coralReef iter 101 deep debt, ludoSpring V65 downstream seeding, hotSpring compute trio capability evolution.
+Pre-May-12 handoffs archived to `fossilRecord/` repository (3,231 items). 11 active ecosystem handoffs in `handoffs/` (Passes 11-14, primalSpring Phase 32, river delta, ecosystem wave sync, Songbird Waves 199-202, coralReef Sprint 5, ludoSpring V67).
+Per-primal handoffs live in each primal's own `infra/wateringHole/handoffs/`.
 
 ---
 
