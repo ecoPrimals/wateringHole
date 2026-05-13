@@ -70,10 +70,33 @@ echo '{"jsonrpc":"2.0","method":"provenance.event.append","params":{"session_id"
 - `test_provenance_dehydrate_alias`
 - `test_provenance_full_pipeline_via_aliases` (full session lifecycle via `provenance.*`)
 
+### Enriched `dag.session.get` — `dag_summary` proposal (projectNUCLEUS)
+
+projectNUCLEUS proposed `rhizocrypt.dag_summary` for lithoSpore provenance
+chains. `dag.session.get` now serves this role — `SessionInfo` enriched with:
+
+- `agents: Vec<Did>` — all participant DIDs
+- `genesis: Vec<VertexId>` — root vertex IDs (no parents)
+- `frontier: Vec<VertexId>` — tip vertex IDs (no children)
+
+New fields use `#[serde(default)]` — existing JSON consumers are unaffected.
+No new method needed; `dag.session.get` is the canonical session summary.
+
+## Tests
+
+7 new tests:
+- `normalize_method_maps_provenance_to_dag` (17 alias assertions)
+- `normalize_method_preserves_non_aliased` (3 assertions)
+- `test_provenance_session_create_alias`
+- `test_provenance_event_append_alias`
+- `test_provenance_dehydrate_alias`
+- `test_provenance_full_pipeline_via_aliases` (full session lifecycle via `provenance.*`)
+- `test_session_get_returns_summary_fields` (agents, genesis, frontier verified)
+
 ## Stats
 
-- 1,637 tests passing (all features)
-- 173 `.rs` files, ~53,496 lines
+- 1,638 tests passing (all features)
+- 173 `.rs` files, ~53,396 lines
 - 0 clippy warnings, 0 fmt diffs
 - Deep debt: 12-category audit clean
 
@@ -81,4 +104,5 @@ echo '{"jsonrpc":"2.0","method":"provenance.event.append","params":{"session_id"
 
 - **No breaking changes** — `dag.*` methods continue to work exactly as before
 - `provenance.*` methods now resolve instead of returning `MethodNotFound`
+- `SessionInfo` new fields omitted by old callers default to empty (backward-compatible)
 - Callers using either naming convention are fully supported
