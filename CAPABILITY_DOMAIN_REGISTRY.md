@@ -28,7 +28,7 @@ Deploy graphs use `by_capability` to route discovery at graph execution time. bi
 | `visualization` | petalTongue | Grammar-based rendering | `visualization.render.dashboard`, `visualization.render.scene` |
 | `provenance` | rhizoCrypt | Ephemeral DAG (present time) | `dag.create_session`, `dag.append_event`, `dag.dehydrate` |
 | `ledger` | loamSpine | Immutable permanence (past time) | `commit.session`, `commit.entry`, `entry.verify` |
-| `attribution` | sweetGrass | Semantic braids (PROV-O) | `provenance.create_braid`, `provenance.lineage` |
+| `attribution` | sweetGrass | Semantic braids (PROV-O) | `braid.create`, `attribution.chain`, `braid.commit`, `provenance.graph` |
 | `coordination` | primalSpring | Composition validation + deploy | `coordination.validate_composition`, `composition.nucleus_health` |
 
 ## Spring-specific capability domains
