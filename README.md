@@ -337,6 +337,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `handoffs/PROJECTNUCLEUS_TRIO_DEEP_DEBT_COMPLETION_HANDOFF_MAY11_2026.md` — Trio completion: Rust modernization (darkforest submodules, tunnelKeeper clone opt, Tier 2 Nelder-Mead), foundation 10/10 threads + TOML-driven scripts, lithoSpore liveSpore wired, zero hardcoded paths, all stale refs reconciled
 - `handoffs/PROJECTNUCLEUS_ATOMIC_DEPLOYMENT_ABSORPTION_MAY13_2026.md` — Atomic deployment phase absorption: composition.deploy.shadow wired, 12 workloads Tier 2, DoT parity scenario, lithoSpore 6/7 modules live, plasmidBin v5.3.0
 - `handoffs/PROJECTNUCLEUS_SHADOW_RUN_EXECUTION_MAY13_2026.md` — Shadow run execution: DoT/tunnel baseline fixes, BearDog TLS shadow LIVE on :8443, proposed API methods resolved, lithoSpore 5/7 PASS 46/46 checks
+- `handoffs/PROJECTNUCLEUS_INTERSTADIAL_EXIT_EXECUTION_MAY13_2026.md` — Interstadial exit: 3 gate items executed (Songbird OPS-READY, BTSP dual-auth BUILT, provenance trio reconciled), lithoSpore 6/7 PASS, biomeos.spring_status IMPLEMENTED
 
 ### Subdirectories
 - `handoffs/` — Cross-primal evolution handoff documents (active + archived in `archive/` and `fossilRecord/`)
