@@ -84,7 +84,7 @@ The next evolution target is **Tier 2 convergence** (JSON-RPC via `toadstool.val
 | primalSpring | L8 | 602 | 4 | coord | Shadow run validation, CompositionContext L2 pass |
 | hotSpring | L6 | 1,025 | 4 | B2 | Trio rewire, sovereign dispatch on warm GPUs |
 | healthSpring | L5 | 999 | 4 | B5 | BTSP FAMILY_SEED interop, ionic bridge |
-| neuralSpring | L5 | 892 (IPC-first) | 4 | B1 | Tier 2 wired (`toadstool.validate` + `list_workloads`), NestGate wired, CapabilityRouter IPC, deep debt audit all-clear, B1 NUCLEUS workload TOML, Thread 5 ML_SURROGATES wired. V154. |
+| neuralSpring | L5 | 907 (IPC-first) | 4 | B1 | Tier 2 COMPLETE (`toadstool.validate` + `list_workloads` + `barracuda.precision.route`), NestGate wired, CapabilityRouter IPC (20 hints, 37 caps), deep debt all-clear (S203b: 0 unfulfilled lint expects), B1 NUCLEUS workload + tolerances.toml, Thread 5 ML_SURROGATES wired. barraCuda v0.4.0. V155. |
 | wetSpring | L4 | 1,613 | 4 | B7 | 4 PGs (trio live, `capability.resolve`, NestGate, sovereignty) |
 | airSpring | L4 | 1,389 | 4 | — | AG-005–012 (Squirrel, coralReef, dispatch, toadStool API) |
 | groundSpring | L4 | 1,125 | 4 | B1-B3 | lithoSpore module integration (B2+B1 COMPLETE) |
@@ -92,11 +92,11 @@ The next evolution target is **Tier 2 convergence** (JSON-RPC via `toadstool.val
 
 ### Convergence Priority (Tier 2 — next frontier)
 
-Tier 2 convergence is **UNBLOCKED** — `toadstool.validate` IMPLEMENTED (S250),
-`toadstool.list_workloads` WIRED (S245+), `barracuda.precision.route` IMPLEMENTED.
-Wire contract: `primalSpring/docs/LIVE_SCIENCE_API.md`. Springs now focus on:
+Tier 2 convergence requires `toadstool.validate` + `toadstool.list_workloads`
+upstream (specified in `primalSpring/docs/LIVE_SCIENCE_API.md`, not yet
+implemented). Until that lands, springs focus on:
 
-1. **lithoSpore integration** — groundSpring B2+B1, neuralSpring B1 Rust binaries ready (V154 handoff shipped, LTEE B1 README + NUCLEUS workload TOML for lithoSpore team)
+1. **lithoSpore integration** — groundSpring B2+B1, neuralSpring B1 Rust binaries ready (V155 handoff shipped, LTEE B1 full module package: README + NUCLEUS workload TOML + tolerances.toml for lithoSpore team)
 2. **Foundation thread seeding** — Threads 3, 4, 8, 9, 10 need expressions/targets
 3. **Shadow run participation** — BearDog TLS, NestGate content pipeline
 4. **Domain-specific composition depth** — provenance trio, ionic bonds, petalTongue
@@ -109,14 +109,11 @@ Wire contract: `primalSpring/docs/LIVE_SCIENCE_API.md`. Springs now focus on:
 - **NestGate Session 60**: `content.*` transport parity — all 8 methods on all 4 surfaces. Last L1 upstream debt cleared.
 - **skunkBat JH-5 Phase 3 shipped**: Cross-primal audit forwarding wired (rhizoCrypt + sweetGrass).
 - **Temporal ecosystem review**: Full audit at `primalSpring/docs/TEMPORAL_ECOSYSTEM_REVIEW_MAY12_2026.md`.
-- **Live Science API ACTIVE**: `primalSpring/docs/LIVE_SCIENCE_API.md` — `toadstool.validate` IMPLEMENTED (S250), `toadstool.list_workloads` WIRED (S245+), `barracuda.precision.route` IMPLEMENTED. Tier 2 UNBLOCKED.
-- **ALL SENTINELS RESOLVED** (May 12): Songbird Wave 202 VPS relay ops-ready. coralReef Sprint 7 FECS stability proof shipped. Zero upstream code blockers.
-- **lithoSpore Pillar 4 PASS** (May 12): Module 1+2 at Tier 1+2 with BLAKE3 provenance. 27 unit tests, CI wired.
-- **Foundation 10/10 threads active**: All expressions authored. `toadstool.validate` dispatch wired. Graceful health degradation.
+- **Live Science API specified**: `primalSpring/docs/LIVE_SCIENCE_API.md` — Tier 2 wire contract for `toadstool.validate`, `toadstool.list_workloads` (NOT YET IMPLEMENTED upstream).
 - **413 canonical methods** (301 exercised, 72%): primalSpring registry. Zero drift.
-- ~~**plasmidBin checksum desync**~~: **RESOLVED** (May 12). Pipeline hardened: consolidate fails on harvest error, post-harvest BLAKE3 validation, idempotent harvest (hash-match skip), `update.sh` arch key aligned to full target triples. Standard: `PLASMIDBIN_PUSH_AUTOMATION_STANDARD.md`.
+- **Wave 10 complete**: Phase 32 atomic evolution, compute trio temporal shift, scorecard updated.
 
-**Previous milestones (May 10-11)**:
+**Previous milestones (May 10)**:
 - Primordial extinction: 8/8 UniBin, zero debt markers.
 - All 11 upstream gaps resolved (JH-11, GAP-03/06/09/12, etc.).
 - Sovereignty horizons: bearDog TLS, songbird NAT, petalTongue web, biomeOS `composition.status`.
