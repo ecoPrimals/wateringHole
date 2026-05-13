@@ -82,7 +82,7 @@ shadow run execution is the remaining gate. Phase 32 atomic model evolution comp
 | groundSpring | L4 | 1,125 | LTEE B2+B1 COMPLETE |
 | ludoSpring | L4 | 854 | SPDX, composition-only |
 
-- **Interstadial gate**: Pillar 5 met. Tier 2 UNBLOCKED. lithoSpore Module 1+2 integrating real data (Pillar 4 progressing). All 7 springs wiring Tier 2. Songbird VPS relay progressing (`songbird relay` CLI + TURN data plane). **coralReef diesel engine migration feature freeze** (Sprint 8 — E1/E2/E3 all resolved, toadStool cutover handoff created). Transition now requires **shadow run execution + lithoSpore PASS + Songbird relay ops deployment**. See `INTERSTADIAL_EXIT_CRITERIA.md` v1.4.
+- **Interstadial gate**: Pillar 5 met. Tier 2 UNBLOCKED. lithoSpore Module 1+2 integrating real data (Pillar 4 progressing). All 7 springs wiring Tier 2. Songbird VPS relay progressing (`songbird relay` CLI + TURN data plane). **coralReef diesel engine excised** (Sprint 9 — coral-ember/glowplug/driver/gpu deleted, pure compiler primal). Transition now requires **shadow run execution + lithoSpore PASS + Songbird relay ops deployment**. See `INTERSTADIAL_EXIT_CRITERIA.md` v1.4.
 - **plasmidBin genomeBin depot**: 46 cross-architecture binaries, 6 targets, Tier 1 39/39.
 - **guideStone pattern**: absorbed into UniBin as certification organelle (L8).
 
@@ -90,7 +90,7 @@ Mountain season accelerating: toadStool Phase C **COMPLETE** (S245-S250, 7 batch
 520 cylinder tests, 8,809 workspace), Phase D plumbing in, `toadstool.validate`
 **IMPLEMENTED** (S250). `barracuda.precision.route` **IMPLEMENTED** (precision.rs
 + 649 tests). Songbird TURN server shipped (836 lines, VPS relay progressing).
-coralReef diesel engine migration **feature freeze** (Sprint 8 — E1/E2/E3 resolved, toadStool cutover handoff shipped). Remaining mountain work:
+coralReef diesel engine **excised** (Sprint 9 — 153K lines deleted, pure compiler primal). Remaining mountain work:
 Songbird VPS relay completion, ionic bond runtime. toadStool Phase D cutover (barracuda rewires file-by-file).
 
 ### Spring Season (composition elevation)

@@ -82,7 +82,7 @@ Songbird VPS relay → NAT shadow run → NestGate extracellular → content sov
 
 ### coralReef — Stability + Silicon Init — **ALL RESOLVED (Sprint 8)**
 
-**Status**: All 3 sentinel items shipped. Diesel engine migration feature freeze active (Sprint 8). coral-ember/glowplug/driver hardware runtime feature-frozen for toadStool cutover.
+**Status**: All 3 sentinel items shipped. Diesel engine **excised** (Sprint 9). coral-ember/glowplug/driver/gpu deleted — coralReef is a pure compiler primal.
 
 **Resolved**:
 1. ~~**`bind_stat` timeout**~~ — **SHIPPED** (Sprint 5): `CORALREEF_COMPILE_TIMEOUT_SECS` (120s default) on all IPC handlers
