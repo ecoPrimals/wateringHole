@@ -93,6 +93,21 @@ Total: 153K lines deleted. coralReef is now a pure compiler primal with zero uns
 toadStool should reference this handoff for E1/E2 patterns before the code was excised.
 Git history preserves the full implementation for reference (`git log --all -- crates/coral-driver/`).
 
+## Post-Excision Capability Alignment (hotSpring audit response)
+
+hotSpring's post-excision trio alignment (May 13, 2026) confirmed coralReef is
+operational for `shader.compile.wgsl/spirv`. One gap identified and resolved:
+
+- **Discovery filter evolved**: coralReef's ecosystem discovery now matches
+  toadStool's capability names (`compute.dispatch.*`, `gpu.*`, `compute.hardware.*`)
+  in addition to legacy `gpu.dispatch`. This ensures coralReef finds toadStool's
+  discovery JSON when determining available GPU targets for compilation.
+- **Requires declaration updated**: `gpu.dispatch` → `compute.dispatch` with
+  `legacy_id` metadata for backward compatibility.
+- **3117 tests passing**, including 2 new tests for toadStool-style discovery JSON.
+
+No remaining coralReef action items from the hotSpring audit.
+
 ---
 
 ## References
@@ -100,6 +115,7 @@ Git history preserves the full implementation for reference (`git log --all -- c
 | Topic | Location |
 |-------|----------|
 | Diesel engine audit (hotSpring) | primalSpring downstream audit, May 13 2026 |
+| Post-excision trio alignment (hotSpring) | hotSpring post-excision audit, May 13 2026 |
 | Phase C completion | `handoffs/ECOSYSTEM_WAVE_SYNC_MAY12_2026.md` |
 | FECS stability proof | `handoffs/ECOSYSTEM_WAVE_SYNC_MAY12_2026.md` (Sprint 7) |
 | Interstadial exit criteria | `INTERSTADIAL_EXIT_CRITERIA.md` v1.4 |
