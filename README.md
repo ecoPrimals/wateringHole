@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 13, 2026 (Diesel engine migration: coralReef Sprint 8 feature freeze, toadStool Phase C COMPLETE, barraCuda cutover path defined + forward-compat landed (Sprint 61). coralReef E1/E2/E3 all resolved. 14 active ecosystem handoffs)
+**Last Updated**: May 13, 2026 (Diesel engine excision: coralReef Sprint 9 — coral-ember/glowplug/driver/gpu deleted (153K lines), pure compiler primal. toadStool Phase C COMPLETE, barraCuda forward-compat (Sprint 61). 14 active ecosystem handoffs)
 
 ---
 
