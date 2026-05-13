@@ -1,15 +1,20 @@
 ---
 
-**ecoPrimals Downstream Evolution — May 12, 2026 (Phase 32 Atomic Model)**
+**ecoPrimals Downstream Evolution — May 13, 2026 (Phase 32 — Tier 2 DONE)**
 **From**: primalSpring v0.9.25 (Phase 32 — Tower=3, Nest=provenance trio, 13 primals)
 **For**: All spring teams
 
-**What happened**: Tier 4 library-to-binary rewiring is **COMPLETE** — all 8/8
-springs are IPC-first (`default = []`, barraCuda optional). Phase 32 evolves the
-atomic model: skunkBat joins Tower (3 primals), Nest reconciled with provenance
-trio (7 primals). All 13 primals at zero gate debt. Pillar 5 (river delta) MET.
-The next frontier is **shadow run execution** and **Tier 2 convergence**
-(`toadstool.validate`, `toadstool.list_workloads` via JSON-RPC).
+**What happened**: **Tier 2 convergence is COMPLETE** — all 7 delta springs have
+wired `toadstool.validate` and `barracuda.precision.route` via JSON-RPC IPC.
+Combined with Tier 4 (all 8/8 IPC-first), the delta is fully wired for NUCLEUS
+deployment. Phase 32 atomic model: skunkBat in Tower (3 primals), Nest
+reconciled with provenance trio (7 primals). All 13 primals at zero gate debt.
+Pillars 1, 4, and 5 MET. **Atomic niche assignments formalized** — each spring
+owns a specific composition tier for stress-testing before downstream handoff.
+See `SPRING_ATOMIC_NICHE_ASSIGNMENTS.md`.
+
+**hotSpring operates as a thermal niche** — own cadence on GPU hardware with
+the compute trio. All other springs target the standard IPC pipeline.
 
 **Spring UniBin binaries are now tractable for plasmidBin deployment** — each
 spring produces a single binary with `certify`/`validate`/`serve`/`status`/`version`
@@ -73,45 +78,48 @@ ludoSpring's `ipc/provenance/{rhizocrypt.rs, loamspine.rs, sweetgrass.rs}` is th
 
 Any primal that misbehaves, returns unexpected formats, or is missing a capability — document it and hand back to primalSpring via `docs/PRIMAL_GAPS.md`.
 
-## WHERE EVERYONE STANDS (Phase 32, May 12)
+## WHERE EVERYONE STANDS (Phase 32, May 13)
 
-All 8/8 springs at **Tier 4 IPC-first** — rewiring COMPLETE. 13,100+ total tests.
-The next evolution target is **Tier 2 convergence** (JSON-RPC via `toadstool.validate`
-+ `toadstool.list_workloads`), blocked on upstream Tier 2 Science API.
+All 8/8 springs at **Tier 4 IPC-first** + **Tier 2 converged** — 14,000+ total tests.
+Every delta spring has wired `toadstool.validate` and `barracuda.precision.route`.
+**Atomic niche assignments** formalized (see `SPRING_ATOMIC_NICHE_ASSIGNMENTS.md`).
 
-| Spring | gS | Tests | Tier | LTEE | Next Step |
-|--------|---:|------:|:----:|:----:|-----------|
-| primalSpring | L8 | 602 | 4 | coord | Shadow run validation, CompositionContext L2 pass |
-| hotSpring | L6 | 1,025 | 4 | B2 | Trio rewire, sovereign dispatch on warm GPUs |
-| healthSpring | L5 | 999 | 4 | B5 | BTSP FAMILY_SEED interop, ionic bridge |
-| neuralSpring | L5 | 907 (IPC-first) | 4 | B1 | Tier 2 COMPLETE (`toadstool.validate` + `list_workloads` + `barracuda.precision.route`), NestGate wired, CapabilityRouter IPC (20 hints, 37 caps), deep debt all-clear (S203b: 0 unfulfilled lint expects), B1 NUCLEUS workload + tolerances.toml, Thread 5 ML_SURROGATES wired. barraCuda v0.4.0. V155. |
-| wetSpring | L4 | 1,613 | 4 | B7 | 4 PGs (trio live, `capability.resolve`, NestGate, sovereignty) |
-| airSpring | L4 | 1,389 | 4 | — | AG-005–012 (Squirrel, coralReef, dispatch, toadStool API) |
-| groundSpring | L4 | 1,125 | 4 | B1-B3 | lithoSpore module integration (B2+B1 COMPLETE) |
-| ludoSpring | L4 | 854 | 4 | — | Composition-only niche, notebooks, Thread 9+10 |
+| Spring | gS | Tests | Tier | Atomic Niche | Next Step |
+|--------|---:|------:|:----:|:-------------|-----------|
+| primalSpring | L8 | 618 | 4+2 | Coordinator (all compositions) | Shadow run validation, CompositionContext L2 pass |
+| hotSpring | L6 | 1,025 | 4+2 | **Node** (thermal niche — GPU sovereign) | Compute trio sovereignty, own cadence |
+| healthSpring | L5 | 1,014 | 4+2 | **Nest** (provenance trio) | Ionic bridge, BTSP FAMILY_SEED interop |
+| neuralSpring | L5 | 907 | 4+2 | **Meta-tier** (AI inference) | NestGate weight IPC, B1 lithoSpore module |
+| wetSpring | L4 | 2,077 | 4+2 | **Full NUCLEUS** (all atomics) | 4 PGs (trio live, `capability.resolve`) |
+| airSpring | L4 | 1,413 | 4+2 | **Tower+Node** (sensor→compute) | LTEE E3 lithoSpore packaging |
+| groundSpring | L4 | 1,123 | 4+2 | **Tower+Nest** (data provenance) | lithoSpore module integration |
+| ludoSpring | L4 | 858 | 4+2 | **Tower** (interactive trust) | Composition-only niche, Thread 9+10 |
 
-### Convergence Priority (Tier 2 — next frontier)
+### Convergence Priority (Niche Depth + Downstream Handoff)
 
-Tier 2 convergence requires `toadstool.validate` + `toadstool.list_workloads`
-upstream (specified in `primalSpring/docs/LIVE_SCIENCE_API.md`, not yet
-implemented). Until that lands, springs focus on:
+Tier 2 convergence is **DONE** — all springs have wired `toadstool.validate`,
+`toadstool.list_workloads`, and `barracuda.precision.route`. The next frontier
+is **niche depth** and **downstream handoff** to sporeGarden products:
 
-1. **lithoSpore integration** — groundSpring B2+B1, neuralSpring B1 Rust binaries ready (V155 handoff shipped, LTEE B1 full module package: README + NUCLEUS workload TOML + tolerances.toml for lithoSpore team)
-2. **Foundation thread seeding** — Threads 3, 4, 8, 9, 10 need expressions/targets
-3. **Shadow run participation** — BearDog TLS, NestGate content pipeline
+1. **Atomic niche stress-testing** — each spring validates its assigned composition tier (see `SPRING_ATOMIC_NICHE_ASSIGNMENTS.md`)
+2. **lithoSpore module integration** — groundSpring B2+B1, neuralSpring B1 ready, wetSpring B7, healthSpring B5 packaging
+3. **Shadow run participation** — BearDog TLS, NestGate content pipeline (projectNUCLEUS owns)
 4. **Domain-specific composition depth** — provenance trio, ionic bonds, petalTongue
 
-## WHAT'S NEW (Phase 32, May 12)
+## WHAT'S NEW (Phase 32, May 13)
 
-- **Tier 4 rewiring COMPLETE**: 8/8 springs at `default = []`, barraCuda optional, IPC-first. The rewiring imperative from May 10 is **done**.
-- **Phase 32 atomic model**: skunkBat in Tower (3 primals), Nest reconciled with provenance trio (7 primals), NUCLEUS = 10 core + 3 meta = 13 total. Fragment versions 3.0.0.
-- **Pillar 5 (river delta) MET**: All exit conditions satisfied (May 11).
-- **NestGate Session 60**: `content.*` transport parity — all 8 methods on all 4 surfaces. Last L1 upstream debt cleared.
-- **skunkBat JH-5 Phase 3 shipped**: Cross-primal audit forwarding wired (rhizoCrypt + sweetGrass).
-- **Temporal ecosystem review**: Full audit at `primalSpring/docs/TEMPORAL_ECOSYSTEM_REVIEW_MAY12_2026.md`.
-- **Live Science API specified**: `primalSpring/docs/LIVE_SCIENCE_API.md` — Tier 2 wire contract for `toadstool.validate`, `toadstool.list_workloads` (NOT YET IMPLEMENTED upstream).
-- **413 canonical methods** (301 exercised, 72%): primalSpring registry. Zero drift.
-- **Wave 10 complete**: Phase 32 atomic evolution, compute trio temporal shift, scorecard updated.
+- **Tier 2 convergence COMPLETE**: All 7 delta springs wired `toadstool.validate` + `barracuda.precision.route`. 14,000+ total tests.
+- **Atomic niche assignments formalized**: Each spring owns a composition tier for stress-testing (`SPRING_ATOMIC_NICHE_ASSIGNMENTS.md`).
+- **hotSpring thermal niche**: Own cadence on GPU hardware. Compute trio sovereignty delegated to hotSpring on biomeGate.
+- **primalSpring local debt swept**: Zero clippy warnings, docs reconciled, fossilRecord references updated, stale specs bannered.
+- **plasmidBin automation hardened**: Idempotent harvest, post-harvest BLAKE3 validation, error propagation.
+- **All sentinels RESOLVED**: toadStool Phase C COMPLETE (S250), Songbird VPS relay OPS-READY (W202), coralReef FECS STABILITY PROOF (Sprint 7).
+- **lithoSpore Pillar 4 PASS**: Module 1+2 Tier 1+2 with BLAKE3 provenance. Now 4/7 modules passing.
+
+**Previous milestones (May 12)**:
+- Tier 4 rewiring COMPLETE: 8/8 springs IPC-first. Pillars 1, 4, 5 MET.
+- Phase 32 atomic model: skunkBat in Tower, Nest reconciled. 13 primals at zero gate debt.
+- 413 canonical methods (301 exercised, 72%). Wave 10 complete.
 
 **Previous milestones (May 10)**:
 - Primordial extinction: 8/8 UniBin, zero debt markers.
