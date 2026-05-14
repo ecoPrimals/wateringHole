@@ -234,12 +234,45 @@ is not currently feasible: WGSL lacks cooperative matrix primitives, and naga
 does not expose `OpCooperativeMatrixMulAdd`. Pattern detection in IR is
 research-level. barraCuda's GEMM router should target `compile_gemm` directly.
 
+### Subgroup operations — hotSpring barrier shader compilation
+
+**RESOLVED** (May 13, 2026). WGSL subgroup ops (`subgroupAdd`, `subgroupBroadcast`,
+`subgroupBallot`) now compile through `naga_translate` for SM70+ targets.
+
+Root cause: `naga_translate/func.rs` had no handlers for naga `SubgroupBallot`,
+`SubgroupCollectiveOperation`, or `SubgroupGather` statements — they fell to
+the catch-all `_ => NotImplemented(Discriminant(20))`.
+
+Fix: Added full statement handling mapping to existing coral IR ops:
+- `SubgroupBallot` → `OpVote` (ballot instruction)
+- `SubgroupCollectiveOperation/Reduce` → `OpRedux` (SM73+) or butterfly
+  `OpShfl` chain (SM70 fallback — `redux` instruction requires SM73)
+- `SubgroupCollectiveOperation/Scan` → iterated `shfl.up` with predicated
+  accumulation (works on all SM70+ targets)
+- `SubgroupGather` → `OpShfl` with appropriate mode (Idx/Up/Down/Bfly)
+
+Also: `enable subgroups;` directive stripped during preprocessing (naga 28
+recognizes but rejects it — subgroup builtins work without the directive).
+
+### f64 type resolution at function call boundaries
+
+**RESOLVED** (May 13, 2026). Math functions (`sqrt`, `pow`, `exp`) applied to
+f64 return values from user-defined functions now correctly use the f64 path.
+
+Root cause: `resolve_expr_type_handle` in `expr.rs` had no explicit handler for
+`CallResult` expressions. They fell to `_ => any_type_handle()` which returned
+the first type in the module arena (almost never f64). This caused `is_f64_expr`
+to return `false` for f64 function results, routing them through the f32 math path.
+
+Fix: Added `CallResult(func_handle) → module.functions[func_handle].result.ty`
+resolution so the return type is correctly identified.
+
 ### Live compile→dispatch CI test — shared toadStool Phase C blocker
 
 Not actionable until toadStool Phase C lands. coralReef compile path is
 ready (`shader.compile.*` IPC surface operational).
 
-Total test count: 3154.
+Total test count: 3159.
 
 ---
 
