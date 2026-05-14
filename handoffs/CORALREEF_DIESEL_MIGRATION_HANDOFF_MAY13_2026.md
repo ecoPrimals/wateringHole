@@ -313,7 +313,20 @@ tile shapes, pointer ABI). Ready for barraCuda integration.
 Not actionable until toadStool Phase C lands. coralReef compile path is
 ready (`shader.compile.*` IPC surface operational, including `shader.compile.gemm`).
 
-Total test count: 3160.
+Total test count: 3165 (as of Sprint 10, May 15 2026).
+
+### Sprint 10 — hotSpring Audit Resolutions (May 15, 2026)
+
+**SubgroupSize/NumSubgroups builtins (naga_translate)**:
+`func_builtins.rs` `resolve_builtin()` now handles `SubgroupSize` (constant 32),
+`NumSubgroups` (compile-time `ceil(flat_workgroup_size / 32)`), `WorkGroupSize`
+(compile-time constants), and `SubgroupId` (runtime `local_index >> 5`). Unblocks
+hotSpring's `sum_reduce_subgroup_f64.wgsl` shader.
+
+**`deformed_wavefunction_f64.wgsl` type error**: Already resolved in Sprint 9
+(f64 nested struct member fix + CallResult type resolution). Test
+`deformed_wavefunction_f64_sm70` passes. hotSpring failure is plasmidBin harvest
+lag — once ecoBin updates, their 9/9 shader barrier will be green.
 
 ---
 
