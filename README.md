@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 14, 2026 (barraCuda Sprint 69: `health.version` standalone RPC for trio-consistent version probes — 73 methods; Sprint 68: TENSOR_WIRE_CONTRACT.md aligned; GEMM routing stable, awaiting coralReef HMMA codegen)
+**Last Updated**: May 14, 2026 (glacial shift doc cleanup: cellMembrane VPS operational with Songbird relay + RustDesk + multi-gate SSH, lithoSpore 6/7 Tier 2 LIVE, Foundation 10/10, 23 scenarios; barraCuda Sprint 69 health.version standalone RPC — 73 methods)
 
 ---
 
@@ -386,8 +386,8 @@ You do not need to know about other primals. You need to know what you can do, a
 - **8 springs** — all Tier 4 IPC-first (`default = []`, barracuda optional), all eukaryotic UniBin, LTEE reproductions active
 - **13,117+ tests** across the river delta (wetSpring 1,613 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,125 · hotSpring 1,042 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
 - **1 garden** active (esotericWebb from ludoSpring)
-- **projectNUCLEUS** — **Stadial-ready, shadow runs executing**. 13-primal Full NUCLEUS, cell membrane operational, zero upstream debt. BearDog TLS shadow LIVE on :8443 (H2-12, 10ms vs 120ms Cloudflare). DoT baseline captured (ACTIVE, 3-8ms). Tunnel baseline captured (100% reachable). `composition.deploy.shadow` validated (10/14 primals VALID). lithoSpore 5/7 modules PASS Tier 2 (46/46 checks). Proposed API methods resolved
-- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets; 7/10 threads with spring seeds (Threads 2, 3, 5, 6, 7, 9, 10)
+- **projectNUCLEUS** — **Stadial-ready, shadow runs executing**. 13-primal Full NUCLEUS, cellMembrane VPS operational (Songbird relay + RustDesk, multi-gate SSH), zero upstream debt. BearDog TLS shadow LIVE on :8443 (H2-12, 10ms vs 120ms Cloudflare). DoT baseline captured (ACTIVE, 3-8ms). Tunnel baseline captured (100% reachable). `composition.deploy.shadow` validated (10/14 primals VALID). lithoSpore 6/7 modules PASS Tier 2, ecoBin compliant. Proposed API methods resolved
+- **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets; 10/10 threads with spring seeds (all threads active — EXCEEDED)
 - **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules, 36 paper-spring assignments, active reproductions (groundSpring B2+B1 COMPLETE, hotSpring B2 STARTED, wetSpring B7 STARTED, neuralSpring B1 STARTED)
 - **benchScale** — GPU lifecycle automation (VFIO/IOMMU), pure-Rust SSH + NoCloud ISO, libvirt VM orchestration
 - **agentReagents** — GPU sovereign VM builder: K80 tooling, Titan V patches, verification modules
@@ -414,7 +414,7 @@ sovereignty capabilities to enable the stadial (external validation) phase.
 | 1. Primal Sovereignty | NestGate `content.put`, BearDog TLS shadow, Songbird NAT, BTSP auth | **GATE MET** — MethodGate 13/13, NestGate transport parity resolved (Session 60), BearDog/Songbird shipped |
 | 2. NUCLEUS Deployments | H2-2b/3a/3b/3c in shadow-run state | Not yet running |
 | 3. ABG Hosting | Thread 1 WCM compositions via provenance trio | Mapped, not all exercised |
-| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | **EXCEEDED** — 5/7 modules PASS Tier 2 (46/46 checks), Rust validation live |
+| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | **EXCEEDED** — 6/7 modules PASS Tier 2, ecoBin compliant, Rust validation live |
 | 5. River Delta | 4+ springs `optional=true`, wetSpring < 5 PG, air/neural gS L4 | **GATE MET** — 8/8 Tier 4, 4 PG open, air L4, neural L5 |
 
 ### Stadial Preview — External Validation Drives Evolution
@@ -475,7 +475,7 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 - ~~airSpring + groundSpring → `optional=true` (Tier 4)~~ **DONE** — **8/8 springs Tier 4**
 - ~~wetSpring: close 4+ of 8 PG gaps~~ **DONE** — 4 closed (PG-06, PG-10, PG-17, PG-18), 4 remain (all external)
 - ~~airSpring/neuralSpring → gS L4~~ **DONE** — airSpring L4, neuralSpring **L5**
-- Foundation seeding: 7/10 threads with spring seeds (Threads 2, 3, 5, 6, 7, 9, 10)
+- Foundation seeding: 10/10 threads with spring seeds (all threads active — EXCEEDED)
 - Remaining: LTEE reproductions continue (feeds Pillar 4), foundation Thread 8 seed
 
 **LTEE Targeted GuideStone** (projectNUCLEUS subsystem):
@@ -501,10 +501,10 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 
 Gaps are owned by exactly one layer:
 - **L1 (Primals)**: **CLEAN** — 13/13 structural + semantic. NestGate transport parity resolved (Session 60). All downstream-surfaced debt closed
-- **L2 (primalSpring)**: **CLEAN** — canonical registry, CompositionContext, 22 scenarios, 77 graphs, 72% method coverage. ~~PG-54/PG-63~~ DONE
+- **L2 (primalSpring)**: **CLEAN** — canonical registry, CompositionContext, 23 scenarios, 77 graphs, 72% method coverage. ~~PG-54/PG-63~~ DONE
 - **L3 (Springs)**: LTEE reproductions, remaining PG gaps (external), primal composition wiring
 - **L4 (Products)**: NUCLEUS sovereignty horizons H2 shadow runs, NestGate content pipeline, lithoSpore integration
-- **L5 (Foundation)**: Thread coverage (7/10 → 10/10), LTEE data anchoring, provenance validation
+- **L5 (Foundation)**: Thread coverage 10/10 (EXCEEDED), LTEE data anchoring, provenance validation
 
 See `primalSpring/docs/PRIMAL_GAPS.md` for the full ownership model.
 
@@ -513,7 +513,7 @@ See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
 See `handoffs/archive/post_interstadial_may2026/` for 19 archived closure handoffs.
 See `fossilRecord/handoffs-may11-2026-wave9-closure/` for 34 archived handoffs from the Wave 9 debt closure cycle.
 
-**Active handoffs (37):** See `handoffs/` directory listing. Covers all primals, springs, and products from the May 12-13 atomic deployment phase. 8 superseded handoffs moved to `handoffs/archive/`.
+**Active handoffs (34):** See `handoffs/` directory listing. Covers all primals, springs, and products from the May 12-14 atomic deployment and cellMembrane phases. 16 superseded handoffs moved to `handoffs/archive/`.
 
 ---
 
