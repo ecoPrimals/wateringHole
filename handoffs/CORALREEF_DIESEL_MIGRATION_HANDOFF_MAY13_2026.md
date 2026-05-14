@@ -313,7 +313,26 @@ tile shapes, pointer ABI). Ready for barraCuda integration.
 Not actionable until toadStool Phase C lands. coralReef compile path is
 ready (`shader.compile.*` IPC surface operational, including `shader.compile.gemm`).
 
-Total test count: 3165 (as of Sprint 10, May 15 2026).
+Total test count: 3165 (as of Sprint 11, May 14 2026).
+
+### Sprint 11 — hotSpring Audit Resolutions (May 14, 2026)
+
+**`shader.compile.gemm` on tarpc transport**: The `ShaderCompileTarpc` trait now
+exposes the `gemm(GemmCompileRequest)` method. tarpc consumers (bincode-over-TCP
+and bincode-over-Unix-socket) can now invoke tensor-core GEMM compilation without
+falling back to JSON-RPC. Includes deadline timeout and spawn-blocking panic recovery
+matching all other compile endpoints.
+
+**Subgroup multiply reduction documented**: The `subgroup_op_to_redux` function
+now returns an explicit error stating "no redux hardware op (SM70-SM120)". NVIDIA's
+`redux.sync` instruction supports `.add`, `.min`, `.max`, `.and`, `.or`, `.xor` but
+not `.mul`. No SM generation from SM70 through SM120 provides a hardware multiply
+reduction. A shfl-based emulation is theoretically possible but non-trivial for
+overflow-correct integer multiply — callers should decompose manually.
+
+**`ImageSample` PTX emission**: Tracked as next evolution focus (WHATS_NEXT). This
+is the next frontier operation after `ImageQuery`/`suq` and requires `.texref`
+texture descriptor + `tex.*` sampled-texture instructions.
 
 ### Sprint 10 — hotSpring Audit Resolutions (May 15, 2026)
 
