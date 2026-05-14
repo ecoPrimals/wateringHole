@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 14, 2026 (glacial shift doc cleanup: cellMembrane VPS operational with Songbird relay + RustDesk + multi-gate SSH, lithoSpore 6/7 Tier 2 LIVE, Foundation 10/10, 23 scenarios; barraCuda Sprint 69 health.version standalone RPC — 73 methods)
+**Last Updated**: May 14, 2026 (Wave 13 ecosystem reconciliation: all springs pulled to HEAD — 13,750+ total tests. wetSpring V168 composed, healthSpring V64n Tower atomic, ludoSpring V71 compute trio cells, groundSpring V142 GS-015/16/17. plasmidBin v5.4.0. 419 methods. Deep debt sweep complete)
 
 ---
 
@@ -81,7 +81,7 @@ Primals achieve their greatest power through composition. These are not separate
 
 ### Tower Atomic
 
-**What**: BearDog (crypto) + Songbird (TLS/HTTP) = Pure Rust HTTPS
+**What**: BearDog (crypto) + Songbird (TLS/HTTP) + skunkBat (defense) = Pure Rust HTTPS + trust boundary
 
 **How**: Songbird implements TLS 1.3 protocol logic. BearDog provides all cryptographic operations via JSON-RPC. Neither embeds the other. The result is a fully Pure Rust HTTPS stack with zero C dependencies.
 
@@ -92,10 +92,10 @@ Primals achieve their greatest power through composition. These are not separate
 **What**: The full primal composition orchestrated by biomeOS.
 
 **Layers**:
-- **Tower Atomic** = BearDog + Songbird (crypto + network)
-- **Node Atomic** = Tower + ToadStool (+ compute)
-- **Nest Atomic** = Tower + NestGate (+ storage)
-- **Full NUCLEUS** = All primals + Squirrel (+ AI)
+- **Tower Atomic** (electron) = BearDog + Songbird + skunkBat (crypto + network + defense)
+- **Node Atomic** (proton) = Tower + ToadStool + barraCuda + coralReef (+ compute)
+- **Nest Atomic** (neutron) = Tower + NestGate + rhizoCrypt + loamSpine + sweetGrass (+ storage + provenance)
+- **Full NUCLEUS** (atom) = Tower + Node + Nest = 10 core primals + 3 meta-tier
 
 biomeOS composes these atomics based on what capabilities are available at runtime.
 
@@ -380,11 +380,11 @@ You do not need to know about other primals. You need to know what you can do, a
 ## Current Ecosystem State (May 2026)
 
 - **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing), MethodGate 13/13. **Zero critical gaps** — NestGate `content.*` transport parity resolved (Session 60)
-- **418 registered capability methods** (primalSpring canonical, zero drift)
-- **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
-- **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 689+ tests, two-tier validation (Rust + Live), `CompositionContext` throughout, **zero debt** (all LOW/deferred resolved in Wave 9)
+- **419 registered capability methods** (primalSpring canonical, zero drift)
+- **46 cross-architecture binaries** in plasmidBin v5.4.0 (6 target triples, Tier 1 39/39)
+- **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 641 tests, 27 scenarios, two-tier validation (Rust + Live), `CompositionContext` throughout, **zero debt** (Waves 1-12 complete, deep debt sweep done)
 - **8 springs** — all Tier 4 IPC-first (`default = []`, barracuda optional), all eukaryotic UniBin, LTEE reproductions active
-- **13,117+ tests** across the river delta (wetSpring 1,613 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,125 · hotSpring 1,042 · healthSpring 999 · ludoSpring 854 · primalSpring 680 + metalForge/integration/Python suites)
+- **13,750+ tests** across the river delta (wetSpring 1,962 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,123 · hotSpring 1,042 · healthSpring 1,018 · ludoSpring 862 · primalSpring 641 + metalForge/integration/Python suites)
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — **Stadial-ready, shadow runs executing**. 13-primal Full NUCLEUS, cellMembrane VPS operational (Songbird relay + RustDesk, multi-gate SSH), zero upstream debt. BearDog TLS shadow LIVE on :8443 (H2-12, 10ms vs 120ms Cloudflare). DoT baseline captured (ACTIVE, 3-8ms). Tunnel baseline captured (100% reachable). `composition.deploy.shadow` validated (10/14 primals VALID). lithoSpore 6/7 modules PASS Tier 2, ecoBin compliant. Proposed API methods resolved
 - **sporeGarden/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 36 validation targets; 10/10 threads with spring seeds (all threads active — EXCEEDED)
@@ -484,24 +484,24 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 - Active reproductions: groundSpring B2+B1 **COMPLETE**, hotSpring B2, wetSpring B7, neuralSpring B1
 - Standard: `TARGETED_GUIDESTONE_STANDARD.md`; handoff: `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md`
 
-### Remaining Spring Gaps (May 11 — river delta Tier 4 complete)
+### Remaining Spring Gaps (May 14 — ecosystem Wave 13 reconciliation)
 
 | Spring | Version | Tests | gS | Tier 4 | LTEE | Remaining Gaps |
 |--------|---------|------:|:--:|:------:|------|----------------|
-| wetSpring | V163 | 1,613 | L4 | Done | B7 started | 4 external PG gaps (PG-02 provenance, PG-03 capability, PG-04 NestGate, PG-05 toadStool) |
-| neuralSpring | S201b | 1,453 | L5 | Done | B1 started | Gap 11 (18 RPC methods), NestGate weights, inference.rs untracked |
-| hotSpring | v0.6.32 | 1,042 | L6 | Done | **B2 DONE** | **Post-excision aligned**: coral-gpu dep removed (coralReef Sprint 9 excised diesel stack), 590/590 tests pass, sovereign-dispatch feature stubbed pending toadStool Phase C, barraCuda v0.4.0 dispatch wire adopted, evolution pass updated; B9 queued |
-| healthSpring | V63 | 999 | L5 | Done | B5/E2/E4 queued | Thread 3 seeded (6/10→7+), ionic bridge blocked upstream |
-| airSpring | v0.10.0 | 1,389 | L4 | Done | E3 queued | AG-001 manifest read, NestGate/Squirrel wiring |
-| groundSpring | V135 | 1,125 | L4 | Done | **B2+B1 DONE** | coralReef IPC, PRNG GPU alignment deferred |
-| ludoSpring | V63 | 854 | L4 | Done | N/A | coralReef IPC (GAP-01), barraCuda domain parity (GAP-02) |
-| primalSpring | v0.9.25 | 689+ | L8 | N/A | N/A | **Zero debt** — PG-54 DONE, PG-63 DONE, Wave 9 domain sweep shipped |
+| wetSpring | V168 | 1,962 | L4 | Done | B7 active | barraCuda 0.4.0 absorbed, coralReef v0.1.0 declared |
+| neuralSpring | V160 | 1,453 | L5 | Done | B1 started | Triple-first Tower + skunkBat, coralReef universal compile routing |
+| hotSpring | V168+ | 1,042 | L6 | Done | **B2 DONE** | Compute trio rewire: compile-then-dispatch, circuit breaker, `wgsl_source` param |
+| healthSpring | V64n | 1,018 | L5 | Done | B5/E2/E4 queued | Tower atomic in all graphs (+ skunkBat), capability renames canonical |
+| airSpring | v0.10.0 | 1,389 | L4 | Done | E3 queued | Zero actionable debt, 10 scenarios, 49 capabilities |
+| groundSpring | V142 | 1,123 | L4 | Done | **B3+B4 DONE** | Compute trio deepened (20 IPC methods), GS-015/16/17 filed |
+| ludoSpring | V71 | 862 | L4 | Done | N/A | Compute trio in cells, Foundation T9+T10, coralReef/barraCuda GAPs |
+| primalSpring | v0.9.25 | 641 | L8 | N/A | N/A | **Zero debt** — Waves 1-12, deep debt sweep, 27 scenarios, 419 methods |
 
 ### Evolution Cycle Ownership
 
 Gaps are owned by exactly one layer:
 - **L1 (Primals)**: **CLEAN** — 13/13 structural + semantic. NestGate transport parity resolved (Session 60). All downstream-surfaced debt closed
-- **L2 (primalSpring)**: **CLEAN** — canonical registry, CompositionContext, 23 scenarios, 77 graphs, 72% method coverage. ~~PG-54/PG-63~~ DONE
+- **L2 (primalSpring)**: **CLEAN** — canonical 419-method registry, CompositionContext, 27 scenarios, 77 graphs, 73.3% method coverage, deep debt sweep complete (Waves 1-12)
 - **L3 (Springs)**: LTEE reproductions, remaining PG gaps (external), primal composition wiring
 - **L4 (Products)**: NUCLEUS sovereignty horizons H2 shadow runs, NestGate content pipeline, lithoSpore integration
 - **L5 (Foundation)**: Thread coverage 10/10 (EXCEEDED), LTEE data anchoring, provenance validation
