@@ -2,7 +2,7 @@
 
 # Interstadial Exit Criteria — Full Sovereignty Pre-Wire
 
-**Version**: 1.5 — May 13, 2026 (418 methods. Tower LIVE 6/6. H2-12 TLS shadow LIVE. lithoSpore 6/7 Tier 2. Wire routing fixed: 76 misroutes resolved, base64 encoding, routing consistency scenario)
+**Version**: 1.6 — May 14, 2026 (13/13 primals LIVE, BTSP dual-auth ACTIVE, provenance pipeline 6/12 PASS, BearDog TLS 2ms vs 102ms Cloudflare)
 **Status**: Active
 **Phase**: Interstadial (entered April 16, 2026; exit gate defined here)
 
@@ -94,7 +94,7 @@ dual-auth, deploy graph wiring). 1j (full sovereign DNS) may defer to stadial.
 
 | # | Target | Current State | Interstadial Remaining |
 |---|--------|---------------|----------------------|
-| 2a | BTSP auth live (dual-auth period) | **CODE BUILT** (jupyterhub_btsp_auth.py + deploy script) | Start shadow period |
+| 2a | BTSP auth live (dual-auth period) | **SHADOW ACTIVE** (jupyterhub_btsp_auth.py live on JupyterHub, PAM fallback, auth events accumulating) | Measure auth event metrics |
 | 2b | BearDog TLS on :8443 | **SHADOW LIVE** (H2-12) | Measure parity vs Cloudflare |
 | 2c | Songbird NAT operational | **cellMembrane VPS OPERATIONAL** — Songbird relay + RustDesk deployed, multi-gate SSH, hardened (fail2ban, droplet-agent purged) | Measure parity vs cloudflared |
 | 2d | NestGate extracellular | GitHub Pages | Content pipeline serving `primals.eco` |
@@ -119,10 +119,12 @@ data accruing.
 | 3a | ABG workspace on gate | Live (membrane + JupyterHub) | Maintenance |
 | 3b | Foundation Thread 1 validation | Operational (genome/proteome/KEGG) | Expand to full Karr 2012 composition pipeline |
 | 3c | ABG tier enforcement | Validated (darkforest pentest) | Maintenance |
-| 3d | WCM compositions via NUCLEUS | Mapped in `ABG_WHOLE_CELL_REBUILD.md` | Exercise through deploy graphs with provenance trio |
+| 3d | WCM compositions via NUCLEUS | **6/12 wetspring workloads PASS** through provenance pipeline (BLAKE3 → DAG → spine → braid). Full trio operational. | Complete remaining 6/12 workloads (env issues, not pipeline) |
 
 **Exit gate**: Thread 1 WCM compositions exercised through NUCLEUS deploy
 graphs (Nest + Node atomics) with provenance trio producing verifiable output.
+**PARTIALLY MET** (May 14): 6/12 wetspring workloads produce verifiable Merkle root
++ ed25519 witness braid. Cross-primal auth (H3-07) temporarily permissive for pipeline.
 
 ### Pillar 4: lithoSpore
 
