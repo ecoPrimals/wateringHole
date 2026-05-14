@@ -241,11 +241,21 @@ Phase 3: BingoCube challenge
   └── No credential files exist — only commitment proofs
   └── ironGate verifies via progressive reveal
 
+Phase 3.5: SoloKey hardware attestation
+  └── BearDog FIDO2/CTAP2 integration for physical-presence auth
+  └── Gate identity includes hardware attestation signal
+  └── liveSpore.json provenance includes SoloKey witness signature
+
 Phase 4: Full autonomy
   └── cellMembrane BearDog rotates credentials autonomously
   └── Operator's only role: initial FAMILY_SEED + domain registration
   └── biomeOS on ironGate auto-provisions membrane channels
+  └── SoloKey as first-class identity primitive in BTSP Phase 4
 ```
+
+**Hardware security**: SoloKey 2 devices are plugged into both ironGate
+and eastGate. Currently detected but software-only (exp096 Phase 4).
+BearDog FIDO2/CTAP2 integration is the enabler for Phases 3.5+.
 
 ---
 
@@ -272,11 +282,13 @@ fieldMouse-cellMembrane
 
 ## Cross-References
 
-- `MEMBRANE_CHANNEL_ARCHITECTURE.md` — full three-channel architecture
+- `MEMBRANE_CHANNEL_ARCHITECTURE.md` — full three-channel architecture, BTSP phases, SoloKey evolution
+- `LITHOSPORE_USB_DEPLOYMENT.md` — lithoSpore USB as hypogeal cotyledon, geo-delocalized validation
 - `GLOSSARY.md` — fieldMouse definition
 - `birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` — mitobeacon / Dark Forest encryption
-- `plasmidBin/deploy_membrane.sh` — deployment script (supports `--composition tower`)
+- `plasmidBin/deploy_membrane.sh` — deployment script (supports `--composition relay|rustdesk|tower`, `keys` management)
 - `plasmidBin/membrane/share_credentials.sh` — `age`-based credential sharing
-- `plasmidBin/membrane/*.service` — systemd unit templates
+- `plasmidBin/membrane/*.service` — systemd unit templates (Songbird, RustDesk, Tower primals)
 - `handoffs/PROJECTNUCLEUS_MEMBRANE_VPS_HANDOFF_MAY14_2026.md` — ownership handoff
 - `benchScale/topologies/ecoprimals-fieldmouse-chimera.yaml` — reference topology
+- `primalSpring/experiments/exp096_pixel_cross_arch_bonding/` — SoloKey/HSM probing (Phase 4)
