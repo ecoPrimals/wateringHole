@@ -6,7 +6,7 @@
 **Status**: Active
 **Authority**: WateringHole Consensus
 **Deployment Class**: fieldMouse
-**Composition**: Tower (BearDog + Songbird + SkunkBat)
+**Composition**: Tower (BearDog + Songbird + SkunkBat) + RustDesk (hbbs + hbbr)
 **Substrate**: DigitalOcean VPS (external, non-family)
 
 ---
@@ -50,12 +50,13 @@ the beacon genetics (FAMILY_SEED) required to decrypt anything meaningful.
 
 | Category | On disk | Provider observes |
 |----------|---------|-------------------|
-| Binaries | `/opt/membrane/beardog`, `songbird`, `skunkbat` | Stripped static ELFs — public, published in plasmidBin |
+| Binaries | `/opt/membrane/beardog`, `songbird`, `skunkbat`, `hbbs`, `hbbr` | Stripped static ELFs — public (plasmidBin / RustDesk GitHub) |
 | systemd units | `/etc/systemd/system/*.service` | Service definitions — public templates |
-| Firewall | UFW rules | Port list — standard TURN relay + SSH |
+| Firewall | UFW rules | Port list — TURN relay + RustDesk + SSH |
 | TURN credentials | `/etc/songbird/relay-credentials` | HMAC shared secret — **to be encrypted at rest** |
 | Tower identity | `/opt/membrane/tower.env` | FAMILY_SEED, GATE_ID — **encrypted at rest** |
-| Network traffic | Relay bytes on :3478 | BTSP-encrypted opaque bytes — noise |
+| RustDesk keys | `/opt/membrane/rustdesk/id_ed25519*` | Server identity keypair — public key distributed to clients |
+| Network traffic | Relay bytes on :3478, RustDesk on :21116-21117 | BTSP/RustDesk-encrypted opaque bytes — noise |
 | Logs | journald | Operational metadata — no inner secrets |
 
 ### Encryption-at-rest roadmap
@@ -74,11 +75,13 @@ cellMembrane runs the **Tower atomic** — the same three primals that handle
 trust, discovery, and defense inside NUCLEUS, turned outward to face the
 public internet.
 
-| Primal | Role | systemd unit | Socket/Port |
-|--------|------|-------------|-------------|
+| Component | Role | systemd unit | Socket/Port |
+|-----------|------|-------------|-------------|
 | BearDog | BTSP handshake, crypto identity, secrets delegation | `beardog-membrane.service` | `/run/membrane/beardog.sock` |
 | Songbird | TURN relay (Channel 2), discovery | `songbird-relay.service` | `:3478` (UDP/TCP) |
 | SkunkBat | Defense audit, threat assessment | `skunkbat-membrane.service` | `/run/membrane/skunkbat.sock` |
+| hbbs | RustDesk rendezvous — ID registration, NAT hole-punch | `hbbs-membrane.service` | `:21115` (TCP), `:21116` (TCP+UDP) |
+| hbbr | RustDesk relay — remote desktop traffic relay | `hbbr-membrane.service` | `:21117` (TCP) |
 
 ### Why Tower (not Node, not Nest)
 
@@ -87,6 +90,21 @@ crypto identity, and perimeter defense. It does not store data (Nest) and
 does not dispatch compute (Node). If a future cellMembrane needs data
 persistence (e.g., NestGate for content serving on Channel 3), the Nest
 atomic can be added without restructuring.
+
+### RustDesk Co-Hosting
+
+RustDesk (`hbbs` + `hbbr`) is a **symbiotic partner** (AGPL-3.0, same
+license family) that provides sovereign remote desktop relay for
+geo-delocalized gates. It shares the cellMembrane VPS because:
+
+- Same principle: relay sees only opaque encrypted bytes (Dark Forest)
+- Same resource class: ~20-30MB combined, fits the minimal footprint
+- Same architectural role as Songbird: NAT traversal, but for remote
+  desktop instead of primal IPC
+
+The RustDesk server generates its own `id_ed25519` keypair. Only clients
+configured with the matching public key can use the relay. The VPS
+provider sees encrypted RustDesk traffic — noise.
 
 ### Deployment ordering
 
@@ -114,15 +132,19 @@ Only ports required by active channels are open:
 |------|----------|---------|
 | 22 | TCP | SSH management (key-only, fail2ban protected) |
 | 3478 | TCP + UDP | Channel 2: Relay (TURN) |
+| 21115 | TCP | RustDesk: NAT type test |
+| 21116 | TCP + UDP | RustDesk: ID registration + hole punching |
+| 21117 | TCP | RustDesk: relay |
 
 Ports 53, 80, 443 are **closed** until Channels 1 and 3 are deployed.
+Ports 21118, 21119 (RustDesk web client) are **closed** — not needed.
 
 ### Services removed
 
 | Service | Reason |
 |---------|--------|
 | exim4 | Mail server running as root with no purpose — purged |
-| droplet-agent | DigitalOcean monitoring agent — opaque root-level software (optional removal) |
+| droplet-agent | DigitalOcean monitoring agent — opaque root-level software — **purged** |
 
 ### Services added
 
@@ -141,6 +163,38 @@ All primal services run with:
 - `ReadWritePaths=/run/membrane` (sockets only)
 - `ReadOnlyPaths=/opt/membrane` (binaries + config)
 - `MemoryMax` / `CPUQuota` resource limits
+
+---
+
+## Multi-Gate SSH Key Management
+
+As the cellMembrane evolves from a single-operator system to a
+geo-delocalized rendezvous for multiple gates, SSH key management
+becomes critical. The `deploy_membrane.sh keys` subcommand provides
+managed `authorized_keys` with an audit trail:
+
+```bash
+./deploy_membrane.sh keys add root@157.230.3.183 --name "irongate@pop-os" --pubkey "ssh-ed25519 AAAA..."
+./deploy_membrane.sh keys list root@157.230.3.183
+./deploy_membrane.sh keys revoke root@157.230.3.183 --name "irongate@pop-os"
+```
+
+Each key is tagged with the gate name and add date (`# gate:<name> added:<date>`)
+for auditability. When BearDog Vault ships, `keys add` can be replaced
+by BTSP identity proof — no operator involvement for key authorization.
+
+### Geo-Delocalized Gate Architecture
+
+Gates at friends' and family's houses connect back to NUCLEUS through
+the cellMembrane. Each remote gate is a fieldMouse that uses:
+
+- **Songbird TURN** (`:3478/udp`) — for BTSP-encrypted primal IPC across NAT
+- **RustDesk** (`:21116-21117`) — for human remote desktop access to the gate
+
+The cellMembrane is the **rendezvous, not the data plane**. It never stores
+your data or runs your compute. It brokers connections. All relay traffic
+is encrypted end-to-end (BTSP for IPC, RustDesk for desktop). The provider
+sees only opaque bytes — Dark Forest extended to geo-delocalized gates.
 
 ---
 
@@ -166,10 +220,14 @@ holds the preimage. Neither alone is useful to the substrate provider.
 
 ```
 Phase 0: Relay only (Songbird on :3478)
-  └── Current operational state
   └── TURN credentials in plaintext on disk (to be encrypted)
 
-Phase 1: Tower composition (BearDog + Songbird + SkunkBat)
+Phase 0.5: Relay + RustDesk (current operational state)
+  └── Songbird TURN + RustDesk hbbs/hbbr co-hosted
+  └── Multi-gate SSH key management via deploy_membrane.sh keys
+  └── droplet-agent purged, geo-delocalized gates supported
+
+Phase 1: Tower composition (BearDog + Songbird + SkunkBat + RustDesk)
   └── Adds crypto identity, defense audit
   └── deploy_membrane.sh --composition tower
 
@@ -202,8 +260,11 @@ fieldMouse-cellMembrane
 │   ├── BearDog  — crypto, BTSP, secrets
 │   ├── Songbird — relay, discovery
 │   └── SkunkBat — defense, audit
+├── Symbiotic partners
+│   ├── hbbs — RustDesk rendezvous (ID, NAT)
+│   └── hbbr — RustDesk relay (remote desktop)
 ├── Substrate: DigitalOcean VPS (nyc1)
-├── Channels: 2 active (Relay), 1+3 future
+├── Channels: 2 active (Relay + RustDesk), 1+3 future
 └── Owner: projectNUCLEUS (ops), primalSpring (tooling)
 ```
 

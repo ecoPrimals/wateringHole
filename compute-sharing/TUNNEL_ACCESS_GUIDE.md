@@ -194,6 +194,53 @@ Friend accesses: `http://10.0.0.1:8000`
 
 ---
 
+## Option D: RustDesk via cellMembrane (Sovereign Relay)
+
+Self-hosted RustDesk server on the cellMembrane VPS provides remote
+desktop access to any gate without third-party dependencies. RustDesk
+handles NAT traversal, encryption, and relay — same architecture as
+Songbird but for human desktop sessions.
+
+### Gate Setup (one-time)
+
+```bash
+# Install RustDesk client (Debian/Ubuntu)
+wget https://github.com/rustdesk/rustdesk/releases/latest/download/rustdesk-<ver>-x86_64.deb
+sudo dpkg -i rustdesk-*.deb
+
+# Configure to use cellMembrane as rendezvous/relay
+# In RustDesk client settings:
+#   ID Server:    157.230.3.183
+#   Relay Server: 157.230.3.183
+#   Key:          YxLlA1Nb6mlH5FmcCQod6kDD6bIcXT5R3ex1CAFogMU=
+```
+
+### Friend / Remote Gate Connects
+
+Install RustDesk on their machine with the same server and key config.
+Enter the gate's RustDesk ID to connect. All traffic routes through
+the cellMembrane relay, encrypted end-to-end.
+
+### Pros
+- Fully sovereign — self-hosted rendezvous and relay on cellMembrane
+- Encrypted end-to-end (RustDesk encryption + server keypair verification)
+- No third-party control plane
+- Works across NAT (hole-punching via hbbs, relay via hbbr)
+- GUI remote desktop, not just terminal access
+
+### Cons
+- Requires RustDesk client on both ends
+- Relay traffic traverses cellMembrane VPS (bandwidth-limited)
+- Server keypair must be distributed to each client
+
+### Relationship to Other Options
+- **Tailscale** (Option A): Third-party control plane, zero-config but not sovereign
+- **SSH** (Option B): Terminal only, requires port forwarding
+- **WireGuard** (Option C): Sovereign but manual key management, no GUI
+- **RustDesk** (Option D): Sovereign GUI remote desktop via cellMembrane relay
+
+---
+
 ## Recommendation for Phase 1
 
 **Use Tailscale** for the first ABG connection. It's zero-config, free,
@@ -208,6 +255,7 @@ Each phase replaces a third-party dependency with sovereign infrastructure:
 | Phase | Tunnel | External Dependency |
 |-------|--------|---------------------|
 | 1 | Tailscale | Tailscale control plane |
+| 1.5 | RustDesk via cellMembrane | Self-hosted (VPS only) — sovereign GUI remote desktop |
 | 2 | WireGuard (manual keys) | None (but manual key management) |
 | 3 | songBird NAT traversal | STUN/TURN relay (can self-host) |
 | 4 | Full BTSP tunnel | **Zero** — bearDog keys, songBird transport, no externals |
