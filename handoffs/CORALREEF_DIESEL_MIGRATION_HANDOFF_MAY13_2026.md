@@ -286,12 +286,34 @@ Legacy env vars evolved to deprecation path:
 - `BEARDOG_SOCKET` → `#[deprecated]`, runtime `tracing::warn`, canonical `BTSP_PROVIDER_SOCKET`
 - `PRIMALSPRING_AUTH_MODE` → runtime `tracing::warn`, canonical `ECOSYSTEM_AUTH_MODE`
 
+### May 14, 2026 — hotSpring audit resolutions
+
+**f64 nested struct member type error** (`deformed_wavefunction_f64.wgsl`):
+RESOLVED. `is_f64_expr` for `AccessIndex`/`Access` expressions was using
+`element_scalar(base)` which has no `Struct` arm — f64 struct member accesses
+were misclassified as non-f64, routing through the f32 lowering path. Fix:
+use `resolve_expr_type_handle(handle)` directly (same path as other expression
+types). Dead `element_scalar` helper removed. Same fix applied to `is_float_expr`
+and `is_signed_int_expr`. All 9/9 hotSpring barrier shaders should now compile.
+
+**`health.version` RPC**: Implemented. Returns `{ session, build_hash, version,
+name }`. Build hash injected via `CORALREEF_BUILD_HASH` env var at compile time.
+Session via `CORALREEF_SESSION`. Both fall back to version/`"dev"` for local builds.
+
+**`shader.compile.gemm` IPC wiring**: The `compile_gemm` library API is now
+exposed as JSON-RPC endpoint with `GemmCompileRequest` type (`{ m, n, k,
+precision, arch }`). Dispatched through blocking pool with compile timeout.
+
+**HMMA GEMM tensor layout constraints documented**: Wire contract updated with
+full constraint table (row-major A, col-major B, K alignment, precision modes,
+tile shapes, pointer ABI). Ready for barraCuda integration.
+
 ### Live compile→dispatch CI test — shared toadStool Phase C blocker
 
 Not actionable until toadStool Phase C lands. coralReef compile path is
-ready (`shader.compile.*` IPC surface operational).
+ready (`shader.compile.*` IPC surface operational, including `shader.compile.gemm`).
 
-Total test count: 3159.
+Total test count: 3160.
 
 ---
 
