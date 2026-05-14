@@ -267,6 +267,25 @@ to return `false` for f64 function results, routing them through the f32 math pa
 Fix: Added `CallResult(func_handle) → module.functions[func_handle].result.ty`
 resolution so the return type is correctly identified.
 
+### Deep debt audit — all categories clear (May 13, 2026)
+
+Full ecosystem debt sweep completed. Results:
+
+| Category | Status |
+|----------|--------|
+| Files >800L (production) | 3 only — all generated ISA tables (data, not logic) |
+| Unsafe code | Zero in production. `#![forbid(unsafe_code)]` all crate roots |
+| External deps | All pure Rust. `libc` only transitive via Tokio/Mio |
+| Mocks in production | None. `coral-reef-stubs` is complete implementations |
+| Cross-primal knowledge | Deprecated with runtime warnings. No `use` imports |
+| TODO/FIXME/HACK | Zero in committed `.rs` code |
+| Empty/temp files | Zero |
+| Commented-out code | Zero |
+
+Legacy env vars evolved to deprecation path:
+- `BEARDOG_SOCKET` → `#[deprecated]`, runtime `tracing::warn`, canonical `BTSP_PROVIDER_SOCKET`
+- `PRIMALSPRING_AUTH_MODE` → runtime `tracing::warn`, canonical `ECOSYSTEM_AUTH_MODE`
+
 ### Live compile→dispatch CI test — shared toadStool Phase C blocker
 
 Not actionable until toadStool Phase C lands. coralReef compile path is
