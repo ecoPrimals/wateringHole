@@ -100,6 +100,31 @@ cloudflared relays traffic through Cloudflare's infrastructure —
 they operate the relay, see connection metadata, and control the
 control plane. Songbird relay eliminates all of that.
 
+### Channel 2b: Remote Desktop (RustDesk)
+
+**Purpose**: Sovereign remote desktop access to geo-delocalized gates.
+
+| Property | Value |
+|----------|-------|
+| **Access** | RustDesk-encrypted, server public key required |
+| **Trust level** | Medium — relay sees only opaque encrypted desktop traffic |
+| **What flows** | RustDesk-encrypted remote desktop sessions |
+| **What cannot flow** | Plaintext content, DNS queries, BTSP IPC, credentials |
+| **Ports** | 21115 (TCP, NAT test), 21116 (TCP+UDP, ID/hole-punch), 21117 (TCP, relay) |
+| **Software** | RustDesk `hbbs` + `hbbr` (AGPL-3.0 symbiotic partner) |
+| **VPS process** | `hbbs` (rendezvous) + `hbbr` (relay) — two lightweight Rust binaries |
+
+**Relationship to Channel 2**: RustDesk complements Songbird. Both are
+relay services on the cellMembrane that see only encrypted opaque bytes.
+Songbird relays BTSP-encrypted primal IPC; RustDesk relays encrypted
+remote desktop sessions. Together they provide the full NAT traversal
+surface for both programmatic and human access to remote gates.
+
+**Sovereignty**: The RustDesk server is self-hosted — no third-party
+rendezvous or relay. The server generates its own `id_ed25519` keypair;
+only clients configured with the matching public key can connect. The
+VPS provider sees encrypted traffic — noise.
+
 ### Channel 3: Surface (TLS + Content)
 
 **Purpose**: Browser-accessible HTTPS surface for `primals.eco` and API endpoints.
@@ -147,6 +172,7 @@ compromise of one channel does not grant access to another.
 |----------|-------------|
 | Channel 1 cannot read relay traffic | Separate process, different port, no relay credentials |
 | Channel 2 cannot serve content | No TLS keys, no content store, no HTTP listener |
+| Channel 2b cannot access TURN | Separate process, different port, no TURN credentials |
 | Channel 3 cannot resolve DNS | No knot-dns zone files, different process |
 | No channel can reach internal NUCLEUS | VPS has no LAN access; relay forwards opaque bytes only |
 
@@ -163,6 +189,12 @@ active composition, not a static full-channel list.
 # Channel 2: Relay — open when relay or tower composition is active
 -A INPUT -p udp --dport 3478 -j ACCEPT
 -A INPUT -p tcp --dport 3478 -j ACCEPT
+
+# Channel 2b: RustDesk — open when rustdesk or tower composition is active
+-A INPUT -p tcp --dport 21115 -j ACCEPT   # NAT type test
+-A INPUT -p tcp --dport 21116 -j ACCEPT   # ID registration
+-A INPUT -p udp --dport 21116 -j ACCEPT   # Hole punching
+-A INPUT -p tcp --dport 21117 -j ACCEPT   # Relay
 
 # Channel 1: Signal — open only when DNS channel is deployed
 -A INPUT -p udp --dport 53 -j ACCEPT
@@ -193,11 +225,12 @@ separated by port and process, not by machine.
 
 ```
 VPS (one public IP)
-  :53   → knot-dns process       [Channel 1: Signal]
-  :3478 → songbird relay         [Channel 2: Relay]
-  :443  → beardog-tls + nestgate [Channel 3: Surface]
-  :80   → ACME challenge only    [Channel 3: Surface]
-  :22   → SSH (operator only)    [Management]
+  :53          → knot-dns process       [Channel 1: Signal]
+  :3478        → songbird relay         [Channel 2: Relay]
+  :21115-21117 → hbbs + hbbr           [Channel 2b: RustDesk]
+  :443         → beardog-tls + nestgate [Channel 3: Surface]
+  :80          → ACME challenge only    [Channel 3: Surface]
+  :22          → SSH (operator only)    [Management]
 ```
 
 All binaries are static musl ELFs from plasmidBin. No runtime
@@ -531,7 +564,7 @@ substrate.
 | Property | Value |
 |----------|-------|
 | **Deployment class** | fieldMouse |
-| **Composition** | Tower atomic (BearDog + Songbird + SkunkBat) |
+| **Composition** | Tower atomic (BearDog + Songbird + SkunkBat) + RustDesk (hbbs + hbbr) |
 | **Substrate** | External (DigitalOcean VPS, nyc1) |
 | **biomeOS** | None — static composition, no deploy graph |
 | **Topology** | `ecoprimals-fieldmouse-chimera.yaml` (benchScale) |
@@ -550,12 +583,16 @@ open. With relay-only composition (current state):
 |------|----------|---------|--------|
 | 22 | TCP | SSH management (key-only, fail2ban) | Open |
 | 3478 | TCP + UDP | Channel 2: Relay (TURN) | Open |
+| 21115 | TCP | Channel 2b: RustDesk NAT test | Open |
+| 21116 | TCP + UDP | Channel 2b: RustDesk ID/hole-punch | Open |
+| 21117 | TCP | Channel 2b: RustDesk relay | Open |
 | 53 | UDP + TCP | Channel 1: Signal (DNS) | **Closed** (no listener) |
 | 80 | TCP | Channel 3: ACME challenge | **Closed** (no listener) |
 | 443 | TCP | Channel 3: Surface (HTTPS) | **Closed** (no listener) |
 
-Services purged: `exim4` (unnecessary mail server). Services added:
-`fail2ban` (SSH brute-force protection, systemd backend).
+Services purged: `exim4` (unnecessary mail server), `droplet-agent`
+(opaque DO monitoring). Services added: `fail2ban` (SSH brute-force
+protection), `hbbs-membrane` + `hbbr-membrane` (RustDesk relay).
 
 See `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` for the full fieldMouse
 specification, escalation ladder, and BingoCube verification roadmap.
@@ -566,29 +603,35 @@ specification, escalation ladder, and BingoCube verification roadmap.
 
 ### `plasmidBin/deploy_membrane.sh`
 
-Provisions and deploys membrane channels to a VPS. Four modes, two
+Provisions and deploys membrane channels to a VPS. Five modes, three
 compositions:
 
 ```bash
-./deploy_membrane.sh provision --region nyc1              # Create droplet + deploy (relay)
-./deploy_membrane.sh deploy root@<ip>                     # Deploy relay to existing VPS
-./deploy_membrane.sh deploy root@<ip> --composition tower # Deploy full Tower atomic
-./deploy_membrane.sh status root@<ip>                     # Health check
-./deploy_membrane.sh teardown --name membrane-relay       # Destroy droplet
+./deploy_membrane.sh provision --region nyc1                  # Create droplet + deploy (relay)
+./deploy_membrane.sh deploy root@<ip>                         # Deploy relay to existing VPS
+./deploy_membrane.sh deploy root@<ip> --composition rustdesk  # Relay + RustDesk
+./deploy_membrane.sh deploy root@<ip> --composition tower     # Full Tower + RustDesk
+./deploy_membrane.sh keys add root@<ip> --name "gate" --pubkey "ssh-ed25519 ..."
+./deploy_membrane.sh keys list root@<ip>
+./deploy_membrane.sh status root@<ip>                         # Health check
+./deploy_membrane.sh teardown --name membrane-relay           # Destroy droplet
 ```
 
 All modes support `--dry-run` for plan-only inspection.
 
-| Composition | Primals | Use case |
-|-------------|---------|----------|
+| Composition | Components | Use case |
+|-------------|------------|----------|
 | `relay` (default) | Songbird only | Channel 2 relay, minimal footprint |
-| `tower` | BearDog + Songbird + SkunkBat | Full Tower atomic, enables BTSP credential delegation |
+| `rustdesk` | Songbird + hbbs/hbbr | Relay + remote desktop for geo-delocalized gates |
+| `tower` | BearDog + Songbird + SkunkBat + hbbs/hbbr | Full Tower atomic + RustDesk |
 
 ### `plasmidBin/membrane/` — unit templates and tooling
 
 | File | Purpose | Status |
 |------|---------|--------|
 | `songbird-relay.service` | Channel 2: Relay (:3478) | **Active** |
+| `hbbs-membrane.service` | Channel 2b: RustDesk rendezvous (:21116) | **Active** |
+| `hbbr-membrane.service` | Channel 2b: RustDesk relay (:21117) | **Active** |
 | `beardog-membrane.service` | Tower: BTSP + crypto identity | **Ready** (deploy with `--composition tower`) |
 | `skunkbat-membrane.service` | Tower: Defense + audit | **Ready** (deploy with `--composition tower`) |
 | `share_credentials.sh` | `age`-based credential sharing between gates | **Active** |
@@ -634,8 +677,10 @@ internals.
 - `INTERSTADIAL_EXIT_CRITERIA.md` — Pillar 2 deployment targets map to membrane channels
 - `compute-sharing/SOVEREIGN_COMPUTE_SHARING.md` — NUC intake pattern is Channel 3 surface
 - `compute-sharing/TUNNEL_ACCESS_GUIDE.md` — Tunnel evolution phases map to Channel 2
-- `plasmidBin/deploy_membrane.sh` — Agentic provisioning and deployment script (supports `--composition tower`)
+- `plasmidBin/deploy_membrane.sh` — Agentic provisioning and deployment script (supports `--composition relay|rustdesk|tower`, `keys` management)
 - `plasmidBin/membrane/songbird-relay.service` — Channel 2 systemd unit template
+- `plasmidBin/membrane/hbbs-membrane.service` — Channel 2b RustDesk rendezvous unit template
+- `plasmidBin/membrane/hbbr-membrane.service` — Channel 2b RustDesk relay unit template
 - `plasmidBin/membrane/beardog-membrane.service` — Tower BearDog systemd unit template
 - `plasmidBin/membrane/skunkbat-membrane.service` — Tower SkunkBat systemd unit template
 - `plasmidBin/membrane/share_credentials.sh` — `age`-based credential sharing between gates
