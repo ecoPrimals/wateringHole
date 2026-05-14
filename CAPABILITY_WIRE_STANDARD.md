@@ -463,4 +463,132 @@ The runtime ladder: **health.liveness → capabilities.list (Level 1) → Standa
 
 ---
 
+## Socket Permissions Convention (SP-01, Wave 259)
+
+All primals SHOULD support a `{PRIMAL}_SOCKET_MODE` environment variable
+that sets Unix socket file permissions as an octal string.
+
+### Convention
+
+| Env Var | Default | Description |
+|---------|---------|-------------|
+| `{PRIMAL}_SOCKET_MODE` | `0600` | Octal permission mode for the primal's UDS |
+
+Where `{PRIMAL}` is the uppercase canonical primal name: `TOADSTOOL_SOCKET_MODE`,
+`BARRACUDA_SOCKET_MODE`, `CORALREEF_SOCKET_MODE`, etc.
+
+### Recommended Values
+
+| Deployment | Mode | Rationale |
+|------------|------|-----------|
+| User-mode (dev) | `0600` | Owner-only, default umask behavior |
+| Group-accessible (systemd) | `0660` | biomeOS/primalSpring in same group |
+| World-accessible (testing) | `0666` | Never in production |
+
+### Implementation Status
+
+| Primal | `{PRIMAL}_SOCKET_MODE` | Notes |
+|--------|------------------------|-------|
+| toadStool | **Done** (S259) | First adopter, reads `TOADSTOOL_SOCKET_MODE` |
+| barraCuda | Pending | Creates at user umask |
+| coralReef | Pending | Creates at user umask |
+| Others | Pending | Adopt as socket-based IPC is enabled |
+
+### Implementation Pattern
+
+```rust
+fn socket_mode() -> u32 {
+    std::env::var("{PRIMAL}_SOCKET_MODE")
+        .ok()
+        .and_then(|s| u32::from_str_radix(&s, 8).ok())
+        .unwrap_or(0o600)
+}
+```
+
+---
+
+## Graceful Drain Convention (GD-01, Wave 259)
+
+All primals that accept long-running work SHOULD implement `health.drain`
+and `health.version` for zero-downtime upgrades.
+
+### health.drain
+
+Stops accepting new work, waits for in-flight dispatches to complete
+(with configurable timeout), and returns when the primal is safe to stop.
+
+**Request:**
+```json
+{"jsonrpc": "2.0", "id": 1, "method": "health.drain", "params": {"timeout_ms": 30000}}
+```
+
+**Response (drained):**
+```json
+{"jsonrpc": "2.0", "id": 1, "result": {"status": "drained", "in_flight": 0, "drained_at": "2026-05-14T11:15:00Z"}}
+```
+
+**Response (timeout, still draining):**
+```json
+{"jsonrpc": "2.0", "id": 1, "result": {"status": "draining", "in_flight": 3, "timeout_ms": 30000}}
+```
+
+After returning `"drained"`, the primal rejects all new work with error code
+`-32000` ("Service draining") until restarted. This allows upgrade scripts to:
+1. `health.drain` → wait for clean stop
+2. Replace binary
+3. Start new process
+4. `health.version` → verify new binary is running
+
+### health.version
+
+Returns build metadata so upgrade scripts can verify the correct binary is
+running after restart.
+
+**Request:**
+```json
+{"jsonrpc": "2.0", "id": 1, "method": "health.version"}
+```
+
+**Response:**
+```json
+{
+  "jsonrpc": "2.0", "id": 1,
+  "result": {
+    "version": "0.2.1",
+    "build_hash": "abc123def",
+    "session": "S259",
+    "compiled_at": "2026-05-12T19:21:00Z",
+    "rust_version": "1.87.0"
+  }
+}
+```
+
+### Upgrade Sequence (reference)
+
+```bash
+# 1. Drain
+echo '{"jsonrpc":"2.0","id":1,"method":"health.drain","params":{"timeout_ms":30000}}' \
+  | socat - UNIX-CONNECT:/primal/toadstool
+
+# 2. Stop + swap binary
+systemctl stop toadstool
+cp /opt/plasmidBin/primals/x86_64-unknown-linux-musl/toadstool /primal/bin/toadstool
+
+# 3. Start + verify
+systemctl start toadstool
+echo '{"jsonrpc":"2.0","id":1,"method":"health.version"}' \
+  | socat - UNIX-CONNECT:/primal/toadstool
+```
+
+### Implementation Status
+
+| Primal | health.drain | health.version | Notes |
+|--------|-------------|----------------|-------|
+| toadStool | Proposed | Proposed | Primary target (long-running compute) |
+| barraCuda | Proposed | Proposed | GPU dispatches need drain |
+| coralReef | Proposed | Proposed | Shader compilation has in-flight work |
+| All others | Optional | Recommended | Short-lived RPC primals can implement trivially |
+
+---
+
 **License**: AGPL-3.0-or-later

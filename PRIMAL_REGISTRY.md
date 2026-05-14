@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: February 27, 2026
+**Last Updated**: May 13, 2026 (418 methods, Phase 32 atomics, wire routing fixed, all graph fragments validated)
 
 ---
 
@@ -47,7 +47,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 **IPC Methods**: 72 JSON-RPC methods (69 crypto + 3 introspection)  
 **Dependencies**: Zero C dependencies. 100% RustCrypto suite.
 
-**Participates In**: Tower Atomic (with Songbird), NUCLEUS, RootPulse, BirdSong encryption, Dark Forest Federation
+**Participates In**: Tower Atomic (with Songbird + skunkBat), NUCLEUS, RootPulse, BirdSong encryption, Dark Forest Federation
 
 ---
 
@@ -70,7 +70,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Dark Forest** | Zero metadata leakage discovery, encrypted beacons |
 | **Transport** | Multi-transport IPC (Unix sockets, abstract sockets, TCP) |
 
-**Participates In**: Tower Atomic (with BearDog), NUCLEUS, RootPulse (discovery/federation), BirdSong protocol
+**Participates In**: Tower Atomic (with BearDog + skunkBat), NUCLEUS, RootPulse (discovery/federation), BirdSong protocol
 
 ---
 
@@ -336,9 +336,9 @@ biomeOS (orchestrator)
   +-- Neural API routes capability.call requests
   |
   +-- Composes atomics:
-  |     Tower Atomic  = BearDog + Songbird
-  |     Node Atomic   = Tower + ToadStool
-  |     Nest Atomic   = Tower + NestGate
+  |     Tower Atomic  = BearDog + Songbird + skunkBat
+  |     Node Atomic   = Tower + ToadStool + barraCuda + coralReef
+  |     Nest Atomic   = Tower + NestGate + rhizoCrypt + loamSpine + sweetGrass
   |     Full NUCLEUS  = All + Squirrel
   |
   +-- Coordinates RootPulse:

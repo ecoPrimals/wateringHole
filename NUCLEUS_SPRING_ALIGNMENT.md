@@ -1,10 +1,10 @@
-# NUCLEUS Spring Alignment — Phase 58+
+# NUCLEUS Spring Alignment — Phase 58+ (Updated May 13, 2026)
 
 > This is the **canonical** inter-spring reference.
 > Local copies exist in `primalSpring/wateringHole/` for spring context.
 
-**Date**: May 5, 2026
-**From**: primalSpring v0.9.21+ (Phase 58 — Spring NUCLEUS Composition Audit)
+**Date**: May 13, 2026
+**From**: primalSpring v0.9.25 (Phase 58+ — Post-Full-Pull Audit, 418 methods, 76 routing misroutes fixed)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -52,13 +52,13 @@ which has a unique dual-tower ionic bridge pattern and is kept as a standalone g
 
 | Spring | Version | gS | Tests | Primary Atomics | Proto-Nucleate | Status |
 |--------|---------|------|-------|-----------------|----------------|--------|
-| **hotSpring** | 0.6.32 | **5** | 993 | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt complete |
-| **neuralSpring** | V158 | **5** | 910 (IPC-first) | **Node** + Meta | `downstream_manifest.toml` | **Active** — S205b: Deep debt zero-debt (4 audits), NestGate weight persistence, Squirrel inference pipeline complete, 37 caps, 7 IPC modules |
-| **wetSpring** | V151 | **4+** | 1,594 | Node + **Nest** + Meta | `downstream_manifest.toml` | **Active** — Phase 46 absorbed, deep debt, `wetspring_composition.sh` |
+| **hotSpring** | 0.6.32 | **5** | 993 | **Node** (proton-heavy) + Nest | `downstream_manifest.toml` | **Active** — `s_node_atomic` scenario, thermal niche (biomeGate + strandGate dual-team) |
+| **neuralSpring** | V159 | **5** | 910+ (IPC-first) | **Node** + Meta | `downstream_manifest.toml` | **Active** — NestGate weight persistence, Squirrel inference pipeline, 37 caps, CapabilityRouter |
+| **wetSpring** | V167 | **5** | 1,613+ | Node + **Nest** + Meta | `downstream_manifest.toml` | **Active** — guideStone L5, B7 Tenaillon Tier 2 COMPLETE, `crypto.hash` base64 fixed |
 | **airSpring** | 0.10.0 | 0 | 1,364 | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
-| **groundSpring** | V124 | 0 | 1,020+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
-| **healthSpring** | V59 | **5** | 948 | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_*` | **Active** — Phase 46 absorbed (18/24), deep debt, `healthspring_composition.sh` |
-| **ludoSpring** | V53+ | **4** | 820 | Node + **Meta** + Nest | `ludospring_cell.toml` (12-node pure composition) | **Active** — evolution partner, needs more time |
+| **groundSpring** | V135 | 0 | 1,020+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
+| **healthSpring** | V64m | **5** | 948+ | **Nest** (neutron-heavy) + Meta | `healthspring_enclave_*` | **Active** — NestComposition facade, wire contract learnings, Foundation T10 |
+| **ludoSpring** | V71 | **5** | 820+ | Node + **Meta** + Nest | `ludospring_cell.toml` (12-node pure composition) | **Active** — Tower LIVE (6/6), CallResult, MDA framework, Foundation T9+T10 |
 
 ### Key
 
@@ -80,11 +80,11 @@ abstraction layer (GPU/CPU/NPU) that informs toadStool dispatch and stays local.
 | Spring | Rewiring Tier | Local Crate | IPC% | `src/ipc/` | petalTongue | sweetGrass |
 |--------|---------------|-------------|------|-----------|-------------|------------|
 | primalSpring | **4** (binary-only) | `primalspring` (no barraCuda) | ~100% | Full | — | — |
-| **ludoSpring** | **3** | `ludospring-barracuda` | ~40-60% | Full + provenance/ | `game_scene` | Session braids |
-| **healthSpring** | **3** | `healthspring-barracuda` | ~30-50% | Full + dispatch/ | DataChannel | Partial |
+| **ludoSpring** | **4** | `ludospring-barracuda` | ~70%+ | Full + provenance/ | `game_scene` | Session braids |
+| **healthSpring** | **4** | `healthspring-barracuda` | ~60%+ | Full + dispatch/ | DataChannel | Partial |
 | **airSpring** | **2** | `airspring-barracuda` | ~25-40% | Full + rpc/ | Not wired | Not wired |
-| **wetSpring** | **2** | `wetspring-barracuda` | ~10-20% | Full + handlers/ | Partial | Partial |
-| **hotSpring** | **2** | `hotspring-barracuda` | ~5-15% | Scattered | Not wired | Not wired |
+| **wetSpring** | **3** | `wetspring-barracuda` | ~30-40% | Full + handlers/ | Partial | Partial |
+| **hotSpring** | **3** | `hotspring-barracuda` | ~15-25% | `base64_encode` module extracted | Not wired | Not wired |
 | **neuralSpring** | **5** | optional `barracuda` (IPC-first, `default = []`) | 0% direct | `src/ipc/` tree (7 modules, CapabilityRouter, 37 caps) | Wired (deploy graphs) | Wired (composition.status) |
 | **groundSpring** | **1** | `groundspring` (optional feature) | ~1-5% | `ipc.rs` only | Not wired | Not wired |
 

@@ -220,6 +220,13 @@ cycles — each cycle validates the next primitive.
 This mirrors the sporePrint evolution: GitHub Pages + Cloudflare today,
 self-hosted petalTongue tomorrow, BTSP-only sovereign site eventually.
 
+**Membrane channel mapping**: Tunnel Phase 3 (Songbird NAT) is where
+the membrane channel architecture begins. The VPS relay is **Channel 2
+(Relay)** — see `MEMBRANE_CHANNEL_ARCHITECTURE.md` for the full model
+of how Channel 2 (Relay), Channel 1 (Signal/DNS), and Channel 3
+(Surface/TLS) compose into the external surface. Earlier tunnel phases
+(Tailscale, WireGuard) bypass the membrane architecture entirely.
+
 ---
 
 ## Security Checklist for Any Tunnel

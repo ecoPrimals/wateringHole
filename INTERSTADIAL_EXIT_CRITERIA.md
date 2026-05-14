@@ -2,7 +2,7 @@
 
 # Interstadial Exit Criteria — Full Sovereignty Pre-Wire
 
-**Version**: 1.4 — May 12, 2026 (Phase C COMPLETE, toadstool.validate IMPLEMENTED, barracuda.precision.route WIRED, Songbird TURN server shipped)
+**Version**: 1.5 — May 13, 2026 (418 methods. Tower LIVE 6/6. H2-12 TLS shadow LIVE. lithoSpore 6/7 Tier 2. Wire routing fixed: 76 misroutes resolved, base64 encoding, routing consistency scenario)
 **Status**: Active
 **Phase**: Interstadial (entered April 16, 2026; exit gate defined here)
 
@@ -58,7 +58,7 @@ two categories: **upstream debt** (primal code gaps at the gate) and
 **All** primals pass the gate:
 - MethodGate (JH-0 + JH-2): **13/13** — squirrel shipped `method_gate.rs`
 - BTSP Phase 3 AEAD: **13/13**
-- 413-method registry: zero drift
+- 418-method registry: zero drift
 - Edition 2024, deny.toml (ring + openssl), plasmidBin: **13/13**
 
 **Downstream-surfaced per-primal debt (composition gaps, not gate-blocking):**
@@ -94,16 +94,23 @@ dual-auth, deploy graph wiring). 1j (full sovereign DNS) may defer to stadial.
 
 | # | Target | Current State | Interstadial Remaining |
 |---|--------|---------------|----------------------|
-| 2a | BTSP auth live (dual-auth period) | PAM only | Build plugin, start shadow period |
-| 2b | BearDog TLS on :8443 | Not running | Start shadow, measure parity vs Cloudflare |
+| 2a | BTSP auth live (dual-auth period) | **CODE BUILT** (jupyterhub_btsp_auth.py + deploy script) | Start shadow period |
+| 2b | BearDog TLS on :8443 | **SHADOW LIVE** (H2-12) | Measure parity vs Cloudflare |
 | 2c | Songbird NAT operational | cloudflared only | VPS relay, test NAT chain |
 | 2d | NestGate extracellular | GitHub Pages | Content pipeline serving `primals.eco` |
-| 2e | Foundation workloads | Thread 1 WCM validated | Add Threads 4, 7 (LTEE-relevant) |
-| 2f | lithoSpore workload dispatched | Workload TOMLs exist | Integration after lithoSpore Phase 2 |
+| 2e | Foundation workloads | **10/10 threads ACTIVE** | Threads 9+10 seeded by ludoSpring/healthSpring |
+| 2f | lithoSpore workload dispatched | **6/7 modules Tier 2 LIVE** | ecoBin ingestion active |
+| 2g | DoT baseline | **FIXED** (10/10 success) | Tunnel baseline clarified — not a bug |
 
-**Exit gate**: H2 sub-steps 2b/3a/3b/3c all in shadow-run state. Cutover
-is stadial work — interstadial only requires the shadow infrastructure to be
-running and producing comparison data.
+**Exit gate**: H2-12 (BearDog TLS shadow) **LIVE** — shadow infrastructure running.
+DoT baseline fixed (10/10 success). Foundation 10/10 threads active. lithoSpore
+Pillar 4 **EXCEEDED** (6/7 Tier 2). Cutover is stadial work — shadow comparison
+data accruing.
+
+**Membrane channels**: Items 2b-2d map to the three membrane channels defined in
+`MEMBRANE_CHANNEL_ARCHITECTURE.md`: 2b = Channel 3 (Surface/TLS), 2c = Channel 2
+(Relay/NAT), 2d = Channel 3 (Surface/content). All deploy on a single VPS
+(Model A) or tiered across providers (Model B).
 
 ### Pillar 3: ABG Hosting
 
@@ -126,15 +133,16 @@ graphs (Nest + Node atomics) with provenance trio producing verifiable output.
 | 4c | Data fetched and hashed | **ACTIVE** — `fetch_wiser_2013.sh` + `fetch_barrick_2009.sh` shipped, `fitness_data.csv` + `mutation_parameters.json` in tree | BLAKE3-hash into NestGate |
 | 4d | Python Tier 1 baselines running | **ACTIVE** — `power_law_fitness.py` (244L) + `mutation_accumulation.py` (210L) expanded, `expected/module1_fitness.json` + `module2_mutations.json` shipped | Run validation, confirm PASS |
 
-LTEE reproduction status (May 11):
+LTEE reproduction status (May 13):
 - **groundSpring**: B2 (Wiser 2013) Python 9/9 + Rust 10/10 PASS; B1 (Barrick 2009) Python 8/8 + Rust 8/8 PASS
 - **hotSpring**: B2 (Anderson fitness) STARTED — Exp 189, notebook shipped
-- **wetSpring**: B7 (Tenaillon 2016) STARTED — 264 NCBI genomes, mutation accumulation
+- **wetSpring**: B7 (Tenaillon 2016) **Tier 2 COMPLETE** — 264 NCBI genomes, guideStone L5
 - **neuralSpring**: B1 (Barrick 2009) STARTED — Python baseline 8/8 PASS
 
-**Exit gate**: At least 2 modules producing PASS at Tier 1 (Python) with real
-data fetched and BLAKE3-hashed. **groundSpring B2+B1 reproductions are complete** —
-remaining work is integration into lithoSpore module structure and data fetching.
+**GATE EXCEEDED** (May 13): lithoSpore **6/7 modules at Tier 2 LIVE**, ecoBin
+compliant. `litho-core` shared libraries extracted (`discovery`, `harness`, `stats`).
+BLAKE3 `pure` feature resolved. 14 deep-debt items resolved in CATHEDRAL audit.
+**groundSpring B2+B1 reproductions complete**; wetSpring B7 at Tier 2.
 
 ### Pillar 5: River Delta (Springs) — **GATE MET** (May 11, 2026)
 
@@ -142,8 +150,8 @@ remaining work is integration into lithoSpore module structure and data fetching
 |---|--------|---------------|--------|
 | 5a | Tier 4: 4+ springs `optional=true` | **8/8** — all springs IPC-first (`default = []`) | **DONE** |
 | 5b | wetSpring PG gaps below 5 | **4 open** (PG-02, PG-03, PG-04, PG-05 — all external) | **DONE** |
-| 5c | guidestone convergence | airSpring **L4**, neuralSpring **L5** | **EXCEEDED** |
-| 5d | Foundation seeding | **7/10** threads with spring seeds (2, 3, 5, 6, 7, 9, 10) | **DONE** |
+| 5c | guidestone convergence | airSpring **L4**, neuralSpring **L5**, wetSpring **L5** | **EXCEEDED** |
+| 5d | Foundation seeding | **10/10** threads active (9+10 seeded by ludoSpring V71 + healthSpring V64m) | **EXCEEDED** |
 | 5e | plasmidBin: all springs staged | 6/8 staged (ludoSpring composed, primalSpring special) | On track |
 | 5f | LTEE paper queue progress | **4 springs reproducing** (groundSpring B2+B1 DONE, hotSpring B2, wetSpring B7, neuralSpring B1) | **DONE** |
 | 5g | CompositionContext wiring | PrimalClient encapsulated (L2 design) | L2 coordination pass pending |
@@ -158,21 +166,22 @@ LTEE reproductions active across 4 springs.
 
 ```
 [x] Pillar 1: NestGate `content.*` transport parity (Session 60, May 11) — all 8 methods on all 4 surfaces
-[ ] Pillar 1: BearDog TLS shadow running on :8443
+[x] Pillar 1: BearDog TLS shadow running on :8443 — H2-12 LIVE
 [ ] Pillar 1: Songbird NAT + VPS relay operational
 [x] Pillar 1: petalTongue web mode + NestGate backend — UNBLOCKED (SPA+CORS shipped, NestGate transport parity shipped)
-[ ] Pillar 1: BTSP auth dual-auth shadow running
+[~] Pillar 1: BTSP auth dual-auth — code built, shadow period pending
 [x] Pillar 1: JH-5 audit forwarding wired — skunkBat Phase 3 shipped (rhizoCrypt + sweetGrass forwarding)
 [x] Pillar 1: MethodGate 13/13 (squirrel shipped May 11)
-[ ] Pillar 2: H2-2b/3a/3b/3c all in shadow-run state
-[ ] Pillar 2: Foundation Threads 4+7 workloads running
+[x] Pillar 1: Wire routing fixes — security.audit_log→defense, crypto base64 encoding (May 13)
+[~] Pillar 2: H2-2b/3a/3b/3c all in shadow-run state — H2-12 TLS LIVE, DoT FIXED, others pending
+[x] Pillar 2: Foundation 10/10 threads active (Threads 9+10 seeded by ludoSpring V71 + healthSpring V64m)
 [ ] Pillar 3: Thread 1 WCM compositions through provenance trio
-[~] Pillar 4: 2+ lithoSpore modules PASS at Tier 1 — ACTIVE (Module 1+2 integrating, validation pending)
+[x] Pillar 4: lithoSpore 6/7 modules Tier 2 LIVE (EXCEEDED Tier 1 target). ecoBin compliant.
 [x] Pillar 4: Real data fetched from Dryad/NCBI — Wiser 2013 + Barrick 2009 in tree
 [x] Pillar 5: 8/8 springs at barraCuda optional=true (exceeded 4+ target)
 [x] Pillar 5: wetSpring 4 open PG gaps (all external — below 5 threshold)
-[x] Pillar 5: airSpring gS L4, neuralSpring gS L5 (exceeded L4 target)
-[x] Pillar 5: 7/10 foundation threads seeded (exceeded 2+ new target)
+[x] Pillar 5: airSpring gS L4, neuralSpring L5, wetSpring L5 (exceeded L4 target)
+[x] Pillar 5: 10/10 foundation threads active (exceeded 2+ new target)
 ```
 
 When all items are checked, the interstadial is complete and the stadial
@@ -188,18 +197,19 @@ data that proves parity before cutover.
 
 | Shadow Run | Upstream Ready? | Absorption Owner | Status |
 |-----------|:--------------:|-----------------|--------|
-| **BearDog TLS on :8443** | YES (Wave 100) | projectNUCLEUS | **NOT STARTED** — needs deploy script + Cloudflare baseline metrics |
-| **Songbird NAT + VPS relay** | PROGRESSING (TURN server + `songbird relay` CLI + bidirectional data plane) | projectNUCLEUS | **PROGRESSING** — listener wired, relay ops deployment remaining |
-| **BTSP dual-auth** | YES (BearDog authenticator) | projectNUCLEUS | **NOT STARTED** — needs JupyterHub PAM plugin + shadow period |
+| **BearDog TLS on :8443** | YES (Wave 102) | projectNUCLEUS | **SHADOW LIVE** (H2-12) — accruing comparison data vs Cloudflare |
+| **Songbird NAT + VPS relay** | PROGRESSING (TURN server + relay ops deployment) | projectNUCLEUS | **PROGRESSING** — listener wired, relay ops deployment remaining |
+| **BTSP dual-auth** | YES (BearDog authenticator) | projectNUCLEUS | **CODE BUILT** — `jupyterhub_btsp_auth.py` + `deploy_btsp_auth_shadow.sh` shipped. Shadow period pending |
 | **NestGate content serving** | YES (Session 60) | projectNUCLEUS | **UNBLOCKED** — `publish_sporeprint.sh` ready to wire |
-| **lithoSpore Tier 1** | YES (groundSpring B2+B1 PASS) | lithoSpore | **ACTIVE** — Module 1+2 integrating real data (Wiser 2013 + Barrick 2009 fetched), Python notebooks + Rust validation expanded |
+| **lithoSpore Tier 2** | **EXCEEDED** (6/7 modules Tier 2 LIVE) | lithoSpore | **ACTIVE** — ecoBin compliant, `litho-core` extracted, 14 debt items resolved |
+| **DoT baseline** | **FIXED** (10/10 success) | projectNUCLEUS | **RESOLVED** — tunnel baseline clarified (not a bug) |
 | **ABG WCM composition** | PARTIAL (Thread 1 operational) | projectNUCLEUS | **PARTIAL** — needs provenance trio in deploy graph |
 
 **Blocking dependency chain**: Songbird VPS relay → NestGate extracellular →
-full content sovereignty. All other shadow runs are independently startable.
+full content sovereignty. BearDog TLS shadow already live.
 
-**Highest leverage action**: Start the BearDog TLS shadow (no blockers) and
-the lithoSpore Tier 1 integration (groundSpring data ready) in parallel.
+**Highest leverage action**: Songbird NAT relay + BTSP dual-auth are the two
+remaining shadow runs to start. lithoSpore already exceeds Tier 1 gate.
 
 ---
 
@@ -307,3 +317,4 @@ NestGate) may span multiple stadial cycles.
 - `TARGETED_GUIDESTONE_STANDARD.md` — Targeted GuideStone budding pattern
 - `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md` — external validation tiers
 - `UPSTREAM_CONTRIBUTIONS.md` — upstream crate extraction plan
+- `MEMBRANE_CHANNEL_ARCHITECTURE.md` — external surface design: Signal, Relay, and Surface channels

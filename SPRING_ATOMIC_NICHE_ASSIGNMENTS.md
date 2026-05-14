@@ -48,7 +48,7 @@ crypto, and defense harder than any science spring.
 
 | Composition | Niche Spring | Domain Rationale |
 |-------------|-------------|------------------|
-| **Full NUCLEUS** (atom) | **wetSpring** | Highest test count (2,077), broadest domain (environment = everything interacts). Needs all three atomics for EPA/NCBI data pipelines. Natural stress-test for full composition. |
+| **Full NUCLEUS** (atom) | **wetSpring** | Highest test count (1,613+), broadest domain (environment = everything interacts). Needs all three atomics for EPA/NCBI data pipelines. Natural stress-test for full composition. guideStone L5 (May 13). |
 | **Meta-tier** (biomeOS + Squirrel + petalTongue) | **neuralSpring** | AI inference is the meta-tier's primary consumer — Squirrel routing, biomeOS orchestration, petalTongue visualization of model outputs. |
 
 ### Coordinator
