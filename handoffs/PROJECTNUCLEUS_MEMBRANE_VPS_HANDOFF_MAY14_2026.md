@@ -1,18 +1,21 @@
-# projectNUCLEUS — Membrane VPS Deployment Handoff
+# projectNUCLEUS — cellMembrane VPS Deployment Handoff
 
-**Date**: May 14, 2026  
-**From**: primalSpring (ecosystem coordination)  
-**For**: projectNUCLEUS (deployment & ops ownership)  
-**Registry**: 418-method capability registry  
+**Date**: May 14, 2026 (updated)
+**From**: primalSpring (ecosystem coordination)
+**For**: projectNUCLEUS (deployment & ops ownership)
+**Registry**: 418-method capability registry
+**Deployment Class**: fieldMouse (Tower on external substrate)
 
 ---
 
 ## Summary
 
-The first sovereign membrane channel is **live on DigitalOcean**. primalSpring
-built the tooling, deployed Channel 2 (Relay), and validated it. Ownership
-now transfers to projectNUCLEUS for ongoing ops, the NAT shadow run, and
-deployment of Channels 1 and 3.
+The first sovereign membrane channel is **live on DigitalOcean** and has been
+**hardened**. primalSpring built the tooling, deployed Channel 2 (Relay),
+hardened the VPS, and classified it as a **cellMembrane fieldMouse** — a
+minimal Tower atomic on external substrate where the provider is treated as
+a non-family observer. Ownership now transfers to projectNUCLEUS for ongoing
+ops, the NAT shadow run, and deployment of Channels 1 and 3.
 
 ---
 
@@ -21,12 +24,39 @@ deployment of Channels 1 and 3.
 | Item | Value |
 |------|-------|
 | **VPS** | `membrane-relay`, 157.230.3.183, Debian 12 x64, nyc1, ~$4/mo |
+| **Classification** | cellMembrane fieldMouse — Tower (BearDog + Songbird + SkunkBat) |
 | **Channel 2** | Songbird v0.2.1 TURN relay on UDP :3478 |
-| **Firewall** | UFW active, default-deny, ports 22/53/80/443/3478 |
-| **SSH** | Key-only (password auth disabled), key: `ecoPrimal` |
+| **Firewall** | UFW active, default-deny, **ports 22 + 3478 only** (composition-aware) |
+| **SSH** | Key-only (password auth disabled), key: `ecoPrimal`, fail2ban active |
 | **Binary source** | Pulled from GitHub Releases `v2026.05.13` (not SCP'd) |
 | **Credentials** | Generated on-VPS at `/etc/songbird/relay-credentials` |
 | **systemd** | `songbird-relay.service` enabled, auto-restart on failure |
+
+### Hardening Applied (May 14, 2026)
+
+| Action | Detail |
+|--------|--------|
+| exim4 purged | Mail server removed — was running as root with no purpose |
+| fail2ban installed | SSH brute-force protection, systemd backend, 5-retry/1h-ban |
+| Firewall tightened | Ports 53/80/443 **closed** — only 22/tcp + 3478/udp+tcp remain |
+| credentials.env removed | Redundant plaintext duplicate — canonical creds at `/etc/songbird/relay-credentials` |
+| journald persistence | `/var/log/journal/` exists, logs survive reboots |
+
+### cellMembrane fieldMouse Classification
+
+The VPS is classified as a **cellMembrane fieldMouse** — a minimal Tower
+atomic on external substrate. Key principles:
+
+- **Dark Forest**: DigitalOcean is a non-family observer. Everything sensitive
+  is encrypted at rest; the provider sees only noise (binaries, firewall rules,
+  opaque relay bytes).
+- **No biomeOS**: Static composition, no deploy graph. Services managed by
+  systemd units from `plasmidBin/membrane/`.
+- **Tower only**: BearDog (crypto), Songbird (relay), SkunkBat (defense).
+  No data storage (Nest) or compute dispatch (Node) unless future channels
+  require it.
+
+See `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` for the full specification.
 
 ### Client Config (for NAT shadow run)
 
@@ -116,8 +146,9 @@ with `chmod 600` is the practical approach.
 | VPS uptime | Monitor `membrane-relay` droplet, respond to outages |
 | NAT shadow run | Configure clients with TURN credentials, validate two-NAT relay |
 | Credential rotation | Regenerate TURN credentials periodically |
-| Channel 1 (DNS) | Deploy `knot-dns` when ready (port 53 already open) |
-| Channel 3 (Surface) | Deploy `beardog-tls` + `nestgate` when ready (ports 80/443 open) |
+| Channel 1 (DNS) | Deploy `knot-dns` when ready (opens port 53 — update firewall) |
+| Channel 3 (Surface) | Deploy `beardog-tls` + `nestgate` when ready (opens 80/443 — update firewall) |
+| Tower deploy | Deploy full Tower composition when ready (`--composition tower`) |
 | Scaling | Evaluate Model B (multi-VPS) if single box hits limits |
 | DO token rotation | Rotate via DO dashboard, update `~/.config/doctl/token` |
 
@@ -145,12 +176,70 @@ ssh root@157.230.3.183 "systemctl restart songbird-relay"
 
 ---
 
+## Escalation Roadmap
+
+What projectNUCLEUS can do next, in priority order:
+
+| Step | What | Tooling |
+|------|------|---------|
+| 1. NAT shadow run | Validate two-NAT relay with TURN credentials above | Client-side Songbird config |
+| 2. Tower deploy | `./deploy_membrane.sh deploy root@157.230.3.183 --composition tower` | Deploys BearDog + SkunkBat alongside Songbird |
+| 3. Encrypted-at-rest | Use `share_credentials.sh` to encrypt all sensitive files on VPS | `age` + SSH ed25519 |
+| 4. Channel 1 (DNS) | Deploy `knot-dns` — will require opening port 53 | Future tooling |
+| 5. Channel 3 (Surface) | Deploy `beardog-tls` + `nestgate` — will require opening 80/443 | Future tooling |
+| 6. BingoCube verification | Zero-knowledge access control via progressive reveal | Pending BingoCube integration |
+
+### ironGate Verification Procedure
+
+This is the first **secure validation milestone**: ironGate takes ownership
+by proving it can operate the cellMembrane independently.
+
+```bash
+# 1. Pull encrypted credential blob from operator
+scp operator@lan-gate:/path/to/membrane-credentials.age ./
+
+# 2. Decrypt with ironGate's SSH key
+./share_credentials.sh decrypt membrane-credentials.age
+
+# 3. Authenticate with DigitalOcean
+doctl auth init --access-token <decrypted-token>
+
+# 4. Verify cellMembrane status
+./deploy_membrane.sh status root@157.230.3.183
+
+# 5. Confirm relay is operational
+ssh root@157.230.3.183 "systemctl is-active songbird-relay && fail2ban-client status sshd"
+```
+
+Successful completion of all 5 steps confirms: ironGate has operational
+control of the cellMembrane, credentials are securely shared, and the
+handoff is complete.
+
+### Ownership Boundary
+
+| Domain | Owner |
+|--------|-------|
+| Deployment tooling (`deploy_membrane.sh`, systemd units, `share_credentials.sh`) | primalSpring |
+| VPS operations, uptime, credential rotation | **projectNUCLEUS** |
+| Channel deployment decisions (when to enable DNS, TLS) | **projectNUCLEUS** |
+| Upstream capability evolution (BearDog Vault, BingoCube) | primalSpring |
+
+primalSpring built and hardened the cellMembrane. projectNUCLEUS owns and
+operates it from here.
+
+---
+
 ## Cross-References
 
 - `wateringHole/MEMBRANE_CHANNEL_ARCHITECTURE.md` — full architecture doc
+- `wateringHole/CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` — cellMembrane fieldMouse specification
 - `wateringHole/CAPABILITY_WIRE_STANDARD.md` — SP-01, GD-01 conventions
 - `wateringHole/NUCLEUS_TWO_TIER_CRYPTO_MODEL.md` — BearDog secrets delegation model
 - `wateringHole/SECRETS_AND_SEEDS_STANDARD.md` — no-static-secrets principle
 - `wateringHole/handoffs/SONGBIRD_WAVE202_RELAY_OPS_DEPLOYMENT_MAY12_2026.md` — relay readiness
-- `plasmidBin/deploy_membrane.sh` — deployment script
-- `plasmidBin/membrane/songbird-relay.service` — systemd unit
+- `wateringHole/birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` — Dark Forest encryption pattern
+- `plasmidBin/deploy_membrane.sh` — deployment script (composition-aware firewall)
+- `plasmidBin/membrane/songbird-relay.service` — Channel 2 systemd unit
+- `plasmidBin/membrane/beardog-membrane.service` — Tower BearDog systemd unit
+- `plasmidBin/membrane/skunkbat-membrane.service` — Tower SkunkBat systemd unit
+- `plasmidBin/membrane/share_credentials.sh` — `age`-based credential sharing
