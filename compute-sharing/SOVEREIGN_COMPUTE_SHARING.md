@@ -62,6 +62,13 @@ Long-term, biomeOS deploy graphs handle the intake → workload → storage
 routing automatically. Short-term, the operator manually starts JupyterHub
 on the right gate and the NUC is just a tunnel relay.
 
+The NUC intake pattern converges with the **membrane channel architecture**
+(see `MEMBRANE_CHANNEL_ARCHITECTURE.md`). The NUC serves the same role as
+a VPS running Channel 3 (Surface) — it terminates TLS and reverse-proxies
+to internal gates. Channel 2 (Relay) handles NAT traversal so external
+peers can reach the NUC. The intake node is the physical instantiation of
+the membrane surface on the LAN edge.
+
 ### sporePrint Deployment Evolution
 
 The public site (primals.eco) and the compute platform share a convergent
