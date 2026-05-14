@@ -329,6 +329,23 @@ Source: `wateringHole/compute-sharing/SOVEREIGN_COMPUTE_SHARING.md`
 Each BTSP phase hardens the channels progressively. Phase 1 is the
 interstadial entry point. Phase 4 is the stadial endgame.
 
+### Hardware Security Evolution (SoloKey / FIDO2)
+
+Both ironGate and eastGate have **SoloKey 2** devices plugged in,
+providing a hardware security foundation for late-term BTSP evolution.
+
+| BTSP Phase | Hardware Security Role | Status |
+|------------|----------------------|--------|
+| 1: Tunnel + Auth | SoloKey detected, software-only key generation | **Current** (exp096 Phase 4) |
+| 2: BTSP Auth | BearDog FIDO2/CTAP2 for physical-presence authentication on BTSP handshakes | Near-term |
+| 3: BTSP Transport | SoloKey as hardware attestation for gate identity — "this gate has a physical key" as a trust signal | Mid-term |
+| 4: Full BTSP | SoloKey as first-class identity primitive; hardware witness in `liveSpore.json` for provenance | Long-term |
+
+The SoloKey witness enables a stronger provenance claim: physical human
+presence at the gate during validation, anchored into the `liveSpore.json`
+provenance trail. This is particularly valuable for geo-delocalized gates
+where the operator is not physically present at all times.
+
 ### Tunnel Evolution Ladder
 
 Source: `wateringHole/compute-sharing/TUNNEL_ACCESS_GUIDE.md`
