@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: May 12, 2026
-**Version**: v1.6.0 (Phase C complete, Tier 2 unblocked, ecosystem wave sync)
+**Date**: May 14, 2026
+**Version**: v1.7.0 (cellMembrane VPS operational, lithoSpore 6/7 Tier 2 LIVE, Foundation 10/10, 8/8 Tier 4, Songbird relay OPERATIONAL)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -74,7 +74,7 @@ shadow run execution is the remaining gate. Phase 32 atomic model evolution comp
 | Spring | gS | Tests | Key Status |
 |--------|---:|------:|------------|
 | primalSpring | L8 | 689+ | Coordinator — 418 methods, 77 graphs |
-| hotSpring | L6 | 1,025 | LTEE B2, 3-GPU sovereign |
+| hotSpring | L6 | 1,042 | LTEE B2, 3-GPU sovereign |
 | healthSpring | L5 | 999 | Thread 3 seeded |
 | neuralSpring | L5 | 1,453 | LTEE B1 Py+Rust done |
 | wetSpring | L4 | 1,613 | LTEE B7 started, 4 PGs open |
@@ -82,7 +82,7 @@ shadow run execution is the remaining gate. Phase 32 atomic model evolution comp
 | groundSpring | L4 | 1,125 | LTEE B2+B1 COMPLETE |
 | ludoSpring | L4 | 854 | SPDX, composition-only |
 
-- **Interstadial gate**: Pillar 5 met. Tier 2 UNBLOCKED. lithoSpore Module 1+2 integrating real data (Pillar 4 progressing). All 7 springs wiring Tier 2. Songbird VPS relay progressing (`songbird relay` CLI + TURN data plane). **coralReef diesel engine excised** (Sprint 9 — coral-ember/glowplug/driver/gpu deleted, pure compiler primal). Transition now requires **shadow run execution + lithoSpore PASS + Songbird relay ops deployment**. See `INTERSTADIAL_EXIT_CRITERIA.md` v1.4.
+- **Interstadial gate**: Pillar 5 met. Tier 2 UNBLOCKED. lithoSpore 6/7 modules Tier 2 LIVE (Pillar 4 EXCEEDED). All 8 springs wiring Tier 2. Songbird VPS relay **OPERATIONAL** (cellMembrane VPS deployed with RustDesk + multi-gate SSH). **coralReef diesel engine excised** (Sprint 9 — coral-ember/glowplug/driver/gpu deleted, pure compiler primal). Transition now requires **shadow run execution**. See `INTERSTADIAL_EXIT_CRITERIA.md` v1.5.
 - **plasmidBin genomeBin depot**: 46 cross-architecture binaries, 6 targets, Tier 1 39/39.
 - **guideStone pattern**: absorbed into UniBin as certification organelle (L8).
 
@@ -178,8 +178,8 @@ library so springs can test parity.
 
 **Current priority**: IPC rewiring is **complete** (8/8 Tier 4). Tier 2 Science API
 is **UNBLOCKED** (`toadstool.validate` IMPLEMENTED, `barracuda.precision.route`
-IMPLEMENTED). All 7 springs wiring Tier 2. Focus shifts to shadow run execution
-(BearDog TLS, lithoSpore Tier 1), primalSpring gate tests for Tier 2 methods,
+IMPLEMENTED). All 8 springs wiring Tier 2. Focus shifts to shadow run execution
+(BearDog TLS, lithoSpore Tier 2), primalSpring gate tests for Tier 2 methods,
 and CompositionContext L2 coordination pass. All 13 primals at zero gate debt.
 
 ### If You're a Domain Spring (hotSpring, wetSpring, etc.)
@@ -298,13 +298,13 @@ Five springs are in active delta composition. Two are pre-delta:
 
 | Spring | Status | Rewiring Tier | Composition Evidence |
 |--------|--------|---------------|---------------------|
-| **hotSpring** v0.6.32 | **gS 5 CERTIFIED** | Tier 2 | 993 tests; `composition.rs` dual-lane, `primal_bridge.rs`, `PRIMAL_PROOF_IPC_MAPPING.md`; bulk physics still library-linked |
-| **healthSpring** V59 | **gS 5** | Tier 3 | 948 tests; `primal-proof` feature flag, full `src/ipc/`, dual-tower ionic |
-| **neuralSpring** V138 | **gS 3** | Tier 2 | 1,234 tests; `ipc_dispatch.rs` only, no `src/ipc/` dir |
-| **wetSpring** V151 | **gS 4+** | Tier 2 | 1,594 tests; full `src/ipc/` + 15 handlers, provenance wiring; bulk math library-linked |
-| **ludoSpring** V53 | **gS 4** | Tier 3 | 820 tests; pure composition, per-trio-primal IPC modules, 13 deploy graphs |
-| **airSpring** v0.10.0 | **Pre-delta** | Tier 2 | 1,364 tests; full `src/ipc/` + `src/rpc/`; no guideStone |
-| **groundSpring** V124 | **Pre-delta** | Tier 1 | 1,020 tests; optional barraCuda feature; minimal IPC |
+| **hotSpring** v0.6.32 | **gS 6** | Tier 4 | 1,042 tests; `composition.rs` dual-lane, `primal_bridge.rs`, `PRIMAL_PROOF_IPC_MAPPING.md`; IPC-first |
+| **healthSpring** V63 | **gS 5** | Tier 4 | 999 tests; `primal-proof` feature flag, full `src/ipc/`, dual-tower ionic |
+| **neuralSpring** S201b | **gS 5** | Tier 4 | 1,453 tests; LTEE B1 Py+Rust done; `ipc_dispatch.rs` |
+| **wetSpring** V163 | **gS 4+** | Tier 4 | 1,613 tests; full `src/ipc/` + 15 handlers, provenance wiring; LTEE B7 started |
+| **ludoSpring** V63 | **gS 4** | Tier 4 | 854 tests; pure composition, per-trio-primal IPC modules, 13 deploy graphs |
+| **airSpring** v0.10.0 | **gS 4** | Tier 4 | 1,389 tests; full `src/ipc/` + `src/rpc/`; barraCuda 0.3.13 |
+| **groundSpring** V135 | **gS 4** | Tier 4 | 1,125 tests; LTEE B2+B1 COMPLETE; optional barraCuda feature |
 
 ### Library-to-Binary Rewiring (Phase 58 — Primary Delta Task)
 
@@ -487,7 +487,7 @@ pillars define the exit gate:
    Foundation Threads 4+7 workloads running — **Pass 11/13 work**
 3. **ABG Hosting**: Thread 1 WCM through provenance trio — **Pass 13 work**
 4. **lithoSpore**: 2+ modules PASS at Tier 1 with real NCBI/Dryad data — **Pass 11 work**
-5. **River Delta**: **PILLAR 5 GATE MET** (May 11) — 8/8 Tier 4, 4 PGs, L4/L5, 7/10 seeded
+5. **River Delta**: **PILLAR 5 GATE MET** (May 11) — 8/8 Tier 4, 4 PGs, L4/L5, 10/10 seeded (EXCEEDED)
 
 Full details: `INTERSTADIAL_EXIT_CRITERIA.md`
 
@@ -514,8 +514,8 @@ ends when shadow runs prove parity and external deployments succeed.
 
 **Pass 12 — Upstream Sentinel (escalated)** — toadStool **RESOLVED**:
 - ~~toadStool Phase C~~ **COMPLETE** (S245-S250, 520 cylinder tests). Phase D plumbing in. `toadstool.validate` IMPLEMENTED.
-- Songbird VPS relay — TURN server shipped, relay progressing (blocks NAT shadow)
-- ~~coralReef~~ — **Diesel engine migration feature freeze** (Sprint 8, E1/E2/E3 resolved, zero debt)
+- ~~Songbird VPS relay~~ — **OPERATIONAL** (cellMembrane VPS: Songbird relay + RustDesk, multi-gate SSH)
+- ~~coralReef~~ — **Diesel engine excised** (Sprint 9: coral-ember/glowplug/driver/gpu deleted, pure compiler primal, zero debt)
 
 **Pass 13 — Gate Composition**:
 - BTSP JupyterHub dual-auth shadow (H2-2b — ready)

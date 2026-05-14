@@ -96,7 +96,7 @@ dual-auth, deploy graph wiring). 1j (full sovereign DNS) may defer to stadial.
 |---|--------|---------------|----------------------|
 | 2a | BTSP auth live (dual-auth period) | **CODE BUILT** (jupyterhub_btsp_auth.py + deploy script) | Start shadow period |
 | 2b | BearDog TLS on :8443 | **SHADOW LIVE** (H2-12) | Measure parity vs Cloudflare |
-| 2c | Songbird NAT operational | cloudflared only | VPS relay, test NAT chain |
+| 2c | Songbird NAT operational | **cellMembrane VPS OPERATIONAL** — Songbird relay + RustDesk deployed, multi-gate SSH, hardened (fail2ban, droplet-agent purged) | Measure parity vs cloudflared |
 | 2d | NestGate extracellular | GitHub Pages | Content pipeline serving `primals.eco` |
 | 2e | Foundation workloads | **10/10 threads ACTIVE** | Threads 9+10 seeded by ludoSpring/healthSpring |
 | 2f | lithoSpore workload dispatched | **6/7 modules Tier 2 LIVE** | ecoBin ingestion active |
@@ -157,8 +157,8 @@ BLAKE3 `pure` feature resolved. 14 deep-debt items resolved in CATHEDRAL audit.
 | 5g | CompositionContext wiring | PrimalClient encapsulated (L2 design) | L2 coordination pass pending |
 
 **Exit gate**: **ALL conditions met.** 8/8 Tier 4, wetSpring at 4 PG (below 5),
-airSpring L4, neuralSpring L5 (exceeded L4 target), 7/10 foundation threads seeded,
-LTEE reproductions active across 4 springs.
+airSpring L4, neuralSpring L5 (exceeded L4 target), 10/10 foundation threads active
+(EXCEEDED), LTEE reproductions active across 4 springs.
 
 ---
 
@@ -167,7 +167,7 @@ LTEE reproductions active across 4 springs.
 ```
 [x] Pillar 1: NestGate `content.*` transport parity (Session 60, May 11) — all 8 methods on all 4 surfaces
 [x] Pillar 1: BearDog TLS shadow running on :8443 — H2-12 LIVE
-[ ] Pillar 1: Songbird NAT + VPS relay operational
+[x] Pillar 1: Songbird NAT + VPS relay operational — cellMembrane VPS deployed (Songbird + RustDesk + multi-gate SSH)
 [x] Pillar 1: petalTongue web mode + NestGate backend — UNBLOCKED (SPA+CORS shipped, NestGate transport parity shipped)
 [~] Pillar 1: BTSP auth dual-auth — code built, shadow period pending
 [x] Pillar 1: JH-5 audit forwarding wired — skunkBat Phase 3 shipped (rhizoCrypt + sweetGrass forwarding)
@@ -198,7 +198,7 @@ data that proves parity before cutover.
 | Shadow Run | Upstream Ready? | Absorption Owner | Status |
 |-----------|:--------------:|-----------------|--------|
 | **BearDog TLS on :8443** | YES (Wave 102) | projectNUCLEUS | **SHADOW LIVE** (H2-12) — accruing comparison data vs Cloudflare |
-| **Songbird NAT + VPS relay** | PROGRESSING (TURN server + relay ops deployment) | projectNUCLEUS | **PROGRESSING** — listener wired, relay ops deployment remaining |
+| **Songbird NAT + VPS relay** | YES (cellMembrane VPS deployed) | projectNUCLEUS | **OPERATIONAL** — cellMembrane VPS live (Songbird relay + RustDesk), multi-gate SSH, hardened |
 | **BTSP dual-auth** | YES (BearDog authenticator) | projectNUCLEUS | **CODE BUILT** — `jupyterhub_btsp_auth.py` + `deploy_btsp_auth_shadow.sh` shipped. Shadow period pending |
 | **NestGate content serving** | YES (Session 60) | projectNUCLEUS | **UNBLOCKED** — `publish_sporeprint.sh` ready to wire |
 | **lithoSpore Tier 2** | **EXCEEDED** (6/7 modules Tier 2 LIVE) | lithoSpore | **ACTIVE** — ecoBin compliant, `litho-core` extracted, 14 debt items resolved |
@@ -241,7 +241,7 @@ primals that must evolve before the stadial cold advance.
 | Action | Owner | Level | Why Escalated |
 |--------|-------|-------|---------------|
 | ~~**toadStool Phase C**~~ — **COMPLETE** (S245-S250, 7 batches, 520 cylinder tests). Phase D plumbing in. `toadstool.validate` **IMPLEMENTED**. | toadStool | L1 | **RESOLVED** — Tier 2 Science API unblocked. E2E sovereign dispatch (factory + VFIO PBDMA) is stadial. |
-| **Songbird VPS relay** — TURN server shipped (836 lines), VPS relay infra progressing | Songbird | L1 | Still blocks NAT shadow → NestGate extracellular |
+| ~~**Songbird VPS relay**~~ — **OPERATIONAL** (cellMembrane VPS: Songbird relay + RustDesk, multi-gate SSH) | Songbird | L1 | **RESOLVED** — NAT shadow unblocked |
 | ~~**coralReef timeout/FECS/GPCCS**~~ — **STABILITY PROOF SHIPPED** (Sprint 7): `boot_gr_falcons_with_recovery` (3× retry + PMC GR reset), structured `GrBootOutcome`, all boot paths recovery-aware. 4790 tests, zero debt. | coralReef | L1 | **RESOLVED** — sovereign dispatch proof unblocked for hotSpring. |
 
 ### Pass 13: Gate Composition (L3/L4 — wiring shipped capabilities)

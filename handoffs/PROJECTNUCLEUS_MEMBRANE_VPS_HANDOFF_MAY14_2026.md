@@ -24,9 +24,10 @@ ops, the NAT shadow run, and deployment of Channels 1 and 3.
 | Item | Value |
 |------|-------|
 | **VPS** | `membrane-relay`, 157.230.3.183, Debian 12 x64, nyc1, ~$4/mo |
-| **Classification** | cellMembrane fieldMouse — Tower (BearDog + Songbird + SkunkBat) |
+| **Classification** | cellMembrane fieldMouse — Tower (BearDog + Songbird + SkunkBat) + RustDesk (hbbs + hbbr) |
 | **Channel 2** | Songbird v0.2.1 TURN relay on UDP :3478 |
-| **Firewall** | UFW active, default-deny, **ports 22 + 3478 only** (composition-aware) |
+| **Channel 2b** | RustDesk relay (hbbs :21115-21116, hbbr :21117) |
+| **Firewall** | UFW active, default-deny, **ports 22 + 3478 + 21115-21117** (composition-aware: relay + RustDesk) |
 | **SSH** | Key-only (password auth disabled), key: `ecoPrimal`, fail2ban active |
 | **Binary source** | Pulled from GitHub Releases `v2026.05.13` (not SCP'd) |
 | **Credentials** | Generated on-VPS at `/etc/songbird/relay-credentials` |
@@ -38,7 +39,7 @@ ops, the NAT shadow run, and deployment of Channels 1 and 3.
 |--------|--------|
 | exim4 purged | Mail server removed — was running as root with no purpose |
 | fail2ban installed | SSH brute-force protection, systemd backend, 5-retry/1h-ban |
-| Firewall tightened | Ports 53/80/443 **closed** — only 22/tcp + 3478/udp+tcp remain |
+| Firewall tightened | Ports 53/80/443 **closed** — 22/tcp + 3478/udp+tcp + 21115-21117/tcp+udp (RustDesk) |
 | credentials.env removed | Redundant plaintext duplicate — canonical creds at `/etc/songbird/relay-credentials` |
 | journald persistence | `/var/log/journal/` exists, logs survive reboots |
 
@@ -72,12 +73,13 @@ export SONGBIRD_TURN_KEY=210bcbb59980af265e48c7caaab525c6c4e88b74f9c3ca9e5d9f5b8
 
 ### `deploy_membrane.sh`
 
-Four modes:
+Five modes:
 
 ```bash
 ./deploy_membrane.sh provision --region nyc1     # Create droplet + deploy
 ./deploy_membrane.sh deploy root@<ip>            # Deploy to existing VPS
 ./deploy_membrane.sh status root@<ip>            # Health check
+./deploy_membrane.sh keys add root@<ip> --name <gate> --pubkey <key>  # Multi-gate SSH
 ./deploy_membrane.sh teardown --name membrane-relay  # Destroy droplet
 ```
 
@@ -240,6 +242,8 @@ operates it from here.
 - `wateringHole/birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` — Dark Forest encryption pattern
 - `plasmidBin/deploy_membrane.sh` — deployment script (composition-aware firewall)
 - `plasmidBin/membrane/songbird-relay.service` — Channel 2 systemd unit
+- `plasmidBin/membrane/hbbs-membrane.service` — RustDesk rendezvous systemd unit
+- `plasmidBin/membrane/hbbr-membrane.service` — RustDesk relay systemd unit
 - `plasmidBin/membrane/beardog-membrane.service` — Tower BearDog systemd unit
 - `plasmidBin/membrane/skunkbat-membrane.service` — Tower SkunkBat systemd unit
 - `plasmidBin/membrane/share_credentials.sh` — `age`-based credential sharing

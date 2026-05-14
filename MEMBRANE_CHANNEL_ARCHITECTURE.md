@@ -211,8 +211,8 @@ active composition, not a static full-channel list.
 Each channel binds only to its assigned port(s). No channel listens
 on another channel's ports. The `songbird relay` binary does not open
 port 443. The `beardog-tls` binary does not open port 3478. Ports
-for inactive channels remain closed — the current relay-only deployment
-only opens 22/tcp and 3478/udp+tcp.
+for inactive channels remain closed — the current relay + RustDesk deployment
+opens 22/tcp, 3478/udp+tcp, and 21115-21117/tcp+udp (RustDesk).
 
 ---
 
