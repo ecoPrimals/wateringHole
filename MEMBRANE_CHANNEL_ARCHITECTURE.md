@@ -150,23 +150,27 @@ compromise of one channel does not grant access to another.
 | Channel 3 cannot resolve DNS | No knot-dns zone files, different process |
 | No channel can reach internal NUCLEUS | VPS has no LAN access; relay forwards opaque bytes only |
 
-### Firewall Rules (per-channel)
+### Firewall Rules (per-channel, composition-aware)
+
+Firewall rules are **composition-aware**: only ports required by deployed
+channels are opened. `deploy_membrane.sh` configures UFW based on the
+active composition, not a static full-channel list.
 
 ```bash
-# Channel 1: Signal (DNS only)
--A INPUT -p udp --dport 53 -j ACCEPT
--A INPUT -p tcp --dport 53 -j ACCEPT
+# Always open: management
+-A INPUT -p tcp --dport 22 -j ACCEPT   # SSH (key-only, fail2ban)
 
-# Channel 2: Relay (TURN only, authenticated at application layer)
+# Channel 2: Relay — open when relay or tower composition is active
 -A INPUT -p udp --dport 3478 -j ACCEPT
 -A INPUT -p tcp --dport 3478 -j ACCEPT
 
-# Channel 3: Surface (HTTPS + ACME only)
+# Channel 1: Signal — open only when DNS channel is deployed
+-A INPUT -p udp --dport 53 -j ACCEPT
+-A INPUT -p tcp --dport 53 -j ACCEPT
+
+# Channel 3: Surface — open only when TLS channel is deployed
 -A INPUT -p tcp --dport 443 -j ACCEPT
 -A INPUT -p tcp --dport 80 -j ACCEPT
-
-# Management (SSH, key-based, operator only)
--A INPUT -p tcp --dport 22 -j ACCEPT
 
 # Default deny
 -A INPUT -j DROP
@@ -174,7 +178,9 @@ compromise of one channel does not grant access to another.
 
 Each channel binds only to its assigned port(s). No channel listens
 on another channel's ports. The `songbird relay` binary does not open
-port 443. The `beardog-tls` binary does not open port 3478.
+port 443. The `beardog-tls` binary does not open port 3478. Ports
+for inactive channels remain closed — the current relay-only deployment
+only opens 22/tcp and 3478/udp+tcp.
 
 ---
 
@@ -366,26 +372,226 @@ internal atomics become external surfaces.
 
 ---
 
+## Inner/Outer Crypto Layer Architecture
+
+The membrane is not just a firewall — it is a **cryptographic boundary**
+with two distinct trust regimes. Traffic arriving from the public internet
+uses one set of credentials and protocols; traffic arriving from inner
+gates uses a completely different set. The membrane Tower mediates the
+transition between them.
+
+### Two Crypto Layers
+
+```
+┌──────────────────────────────────────────────────────────────────┐
+│                    PUBLIC INTERNET (outer)                       │
+│   Browsers, remote peers, DNS resolvers, ACME CAs               │
+└───────┬────────────────────┬─────────────────────┬──────────────┘
+        │ TLS (public CA)    │ TURN (HMAC)         │ DNS (plain)
+        ▼                    ▼                     ▼
+┌───────────────────── MEMBRANE VPS ──────────────────────────────┐
+│                                                                  │
+│   ┌────────────────────────────────────────────────────────────┐ │
+│   │  OUTER LAYER — Extracellular Crypto                        │ │
+│   │                                                            │ │
+│   │  Protocol: TLS 1.3 (ACME certs), DNS, TURN HMAC            │ │
+│   │  Trust:    Public CAs, shared DNS, credential-gated relay   │ │
+│   │  Keys:     Let's Encrypt cert/key, TURN HMAC shared secret  │ │
+│   │  Visible:  Domain names, IP addresses, timing metadata      │ │
+│   │  Actors:   Browsers, remote peers, bots, scanners — anyone  │ │
+│   └─────────────────────┬──────────────────────────────────────┘ │
+│                         │                                        │
+│   ┌─────────────────────▼──────────────────────────────────────┐ │
+│   │  SELECTIVE PERMEABILITY — BearDog + SkunkBat                │ │
+│   │                                                            │ │
+│   │  BearDog:  Validates BTSP handshakes, manages crypto keys   │ │
+│   │  SkunkBat: Audits cross-boundary traffic, threat assessment │ │
+│   │  Policy:   Public content → pass through                    │ │
+│   │            Private API → require BTSP identity              │ │
+│   │            Relay bytes → opaque forwarding                  │ │
+│   │            Credentials → inner-only, never cross outward    │ │
+│   └─────────────────────┬──────────────────────────────────────┘ │
+│                         │                                        │
+│   ┌─────────────────────▼──────────────────────────────────────┐ │
+│   │  INNER LAYER — Intracellular Crypto                        │ │
+│   │                                                            │ │
+│   │  Protocol: BTSP (genetic identity, AEAD sessions)           │ │
+│   │  Trust:    FAMILY_SEED (shared between all gates)           │ │
+│   │  Keys:     Ed25519 identity keys, BTSP session keys         │ │
+│   │  Visible:  Only to gates that prove family membership       │ │
+│   │  Actors:   ironGate, NUC, other NUCLEUS gates — family only │ │
+│   └────────────────────────────────────────────────────────────┘ │
+│                                                                  │
+└────────┬──────────────────────────────────────────┬─────────────┘
+         │ BTSP tunnel (family key)                 │
+         ▼                                          ▼
+┌─────────────────┐                      ┌─────────────────┐
+│  ironGate (LAN) │                      │  NUC (intake)   │
+│  Full NUCLEUS   │                      │  Compute gate   │
+└─────────────────┘                      └─────────────────┘
+```
+
+### Outer Layer: Extracellular Crypto
+
+The outer layer speaks the internet's native protocols. Any actor on the
+public internet can interact at this layer:
+
+| Component | Protocol | Keys | Issuer |
+|-----------|----------|------|--------|
+| Channel 3 TLS | TLS 1.3 | ACME cert/key pair | Let's Encrypt (public CA) |
+| Channel 2 TURN | HMAC-SHA256 | Shared secret | Self-generated |
+| Channel 1 DNS | DNS (no encryption) | None | N/A |
+
+The outer layer's security properties are limited by public internet
+constraints: TLS certificates are issued by external CAs, DNS is
+unauthenticated, and TURN credentials are HMAC shared secrets.
+BearDog on the membrane manages all outer-layer key material.
+
+### Inner Layer: Intracellular Crypto
+
+The inner layer uses BTSP — the ecosystem's own genetic identity protocol.
+Only gates that share the `FAMILY_SEED` can reach through the membrane:
+
+| Component | Protocol | Keys | Issuer |
+|-----------|----------|------|--------|
+| Gate ↔ membrane | BTSP Phase 2+ | Ed25519 identity keys | Self-generated from FAMILY_SEED |
+| Secrets delegation | BTSP-authenticated RPC | Session keys | BearDog handshake |
+| Credential retrieval | `secrets.retrieve` | BTSP session token | BearDog on membrane |
+
+The inner layer never speaks TLS, never uses public CAs, and never
+exposes material to the outer layer. A browser cannot reach the inner
+layer — it lacks the FAMILY_SEED required for BTSP handshake.
+
+### Selective Permeability Rules
+
+The membrane Tower (BearDog + SkunkBat) enforces what crosses between
+layers. The rules are content-aware, not just port-based:
+
+| Traffic Type | Direction | Policy |
+|-------------|-----------|--------|
+| Public content (website, downloads) | Outer → Inner | Pass through Channel 3 |
+| API calls (authenticated) | Outer → Inner | Require BTSP identity via BearDog |
+| Relay traffic (peer-to-peer) | Outer ↔ Inner | Opaque forwarding, no inspection |
+| DNS queries | Outer → Inner | Answer from zone file, no inner contact |
+| Credentials (API tokens, secrets) | Inner only | **Never cross outward** |
+| FAMILY_SEED / identity keys | Inner only | **Never leave inner layer** |
+| Audit logs | Inner → Outer | SkunkBat may export to inner gates, never outward |
+
+### Credential Sharing Evolution
+
+The mechanism for sharing credentials between gates evolves in lockstep
+with the crypto layers:
+
+| Phase | Mechanism | Trust Anchor | Where Credentials Live |
+|-------|-----------|-------------|----------------------|
+| **Short term** (now) | `age` + SSH ed25519 keys | Shared SSH key pair | Encrypted blob on VPS + gates |
+| **Mid term** | BearDog `secrets.store`/`secrets.retrieve` via BTSP | FAMILY_SEED + BTSP handshake | BearDog's encrypted store on membrane |
+| **Long term** | Autonomous rotation by membrane Tower | Membrane identity key | Generated and rotated by membrane BearDog, never shared as files |
+
+Short-term tooling: `plasmidBin/membrane/share_credentials.sh` wraps
+`age` encryption to SSH public keys. Any gate with the corresponding
+private key can decrypt. See the script for usage.
+
+### Tower on Membrane — Composition
+
+When deployed with `--composition tower`, the membrane VPS runs the full
+Tower atomic alongside the relay channels:
+
+| Service | Role | Unit |
+|---------|------|------|
+| BearDog | BTSP handshake, secrets delegation, crypto key management | `beardog-membrane.service` |
+| Songbird | Relay + discovery (Channel 2) | `songbird-relay.service` |
+| SkunkBat | Defense audit, threat assessment, cross-boundary monitoring | `skunkbat-membrane.service` |
+
+This composition enables the mid-term credential delegation pattern:
+inner gates authenticate via BTSP to BearDog on the membrane, then
+retrieve credentials without any file sharing.
+
+### Evolution Milestones
+
+1. **biomeOS on ironGate auto-provisions membrane channels** via
+   `secrets.retrieve("membrane:doctl:token")` + `doctl`
+2. **Membrane BearDog rotates TURN credentials autonomously** — no
+   operator intervention for credential refresh
+3. **Membrane NestGate serves public content** — replaces GitHub Pages,
+   Channel 3 becomes sovereign
+4. **Membrane SkunkBat audits all cross-boundary traffic** — anomaly
+   detection on the membrane surface
+5. **Operator's only role is initial FAMILY_SEED provisioning** and
+   domain registration — everything else is autonomous
+
+---
+
+## cellMembrane fieldMouse Classification
+
+The membrane VPS is formally classified as a **fieldMouse** deployment — the
+first production instance of the fieldMouse deployment class on external
+substrate.
+
+| Property | Value |
+|----------|-------|
+| **Deployment class** | fieldMouse |
+| **Composition** | Tower atomic (BearDog + Songbird + SkunkBat) |
+| **Substrate** | External (DigitalOcean VPS, nyc1) |
+| **biomeOS** | None — static composition, no deploy graph |
+| **Topology** | `ecoprimals-fieldmouse-chimera.yaml` (benchScale) |
+| **Dark Forest** | Provider treated as non-family observer; sensitive data encrypted at rest |
+
+The cellMembrane is not a gate, not a niche. It runs exactly the Tower
+atomic turned outward — the same primals that handle trust, discovery, and
+defense inside NUCLEUS, deployed to face the public internet.
+
+### Hardening profile
+
+Firewall is composition-aware — only ports required by active channels are
+open. With relay-only composition (current state):
+
+| Port | Protocol | Purpose | Status |
+|------|----------|---------|--------|
+| 22 | TCP | SSH management (key-only, fail2ban) | Open |
+| 3478 | TCP + UDP | Channel 2: Relay (TURN) | Open |
+| 53 | UDP + TCP | Channel 1: Signal (DNS) | **Closed** (no listener) |
+| 80 | TCP | Channel 3: ACME challenge | **Closed** (no listener) |
+| 443 | TCP | Channel 3: Surface (HTTPS) | **Closed** (no listener) |
+
+Services purged: `exim4` (unnecessary mail server). Services added:
+`fail2ban` (SSH brute-force protection, systemd backend).
+
+See `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` for the full fieldMouse
+specification, escalation ladder, and BingoCube verification roadmap.
+
+---
+
 ## Deployment Tooling
 
 ### `plasmidBin/deploy_membrane.sh`
 
-Provisions and deploys membrane channels to a VPS. Four modes:
+Provisions and deploys membrane channels to a VPS. Four modes, two
+compositions:
 
 ```bash
-./deploy_membrane.sh provision --region nyc1     # Create droplet + deploy
-./deploy_membrane.sh deploy root@<ip>            # Deploy to existing VPS
-./deploy_membrane.sh status root@<ip>            # Health check
-./deploy_membrane.sh teardown --name membrane-relay  # Destroy droplet
+./deploy_membrane.sh provision --region nyc1              # Create droplet + deploy (relay)
+./deploy_membrane.sh deploy root@<ip>                     # Deploy relay to existing VPS
+./deploy_membrane.sh deploy root@<ip> --composition tower # Deploy full Tower atomic
+./deploy_membrane.sh status root@<ip>                     # Health check
+./deploy_membrane.sh teardown --name membrane-relay       # Destroy droplet
 ```
 
 All modes support `--dry-run` for plan-only inspection.
 
-### `plasmidBin/membrane/` — systemd unit templates
+| Composition | Primals | Use case |
+|-------------|---------|----------|
+| `relay` (default) | Songbird only | Channel 2 relay, minimal footprint |
+| `tower` | BearDog + Songbird + SkunkBat | Full Tower atomic, enables BTSP credential delegation |
 
-| Unit | Channel | Status |
+### `plasmidBin/membrane/` — unit templates and tooling
+
+| File | Purpose | Status |
 |------|---------|--------|
 | `songbird-relay.service` | Channel 2: Relay (:3478) | **Active** |
+| `beardog-membrane.service` | Tower: BTSP + crypto identity | **Ready** (deploy with `--composition tower`) |
+| `skunkbat-membrane.service` | Tower: Defense + audit | **Ready** (deploy with `--composition tower`) |
+| `share_credentials.sh` | `age`-based credential sharing between gates | **Active** |
 | `knot-dns.service` | Channel 1: Signal (:53) | Future |
 | `beardog-tls.service` | Channel 3: Surface (:443) | Future |
 | `nestgate-content.service` | Channel 3: Surface (:443) | Future |
@@ -393,7 +599,13 @@ All modes support `--dry-run` for plan-only inspection.
 Each unit is security-hardened (`NoNewPrivileges`, `PrivateTmp`,
 `ProtectSystem=strict`, `MemoryMax`, `CPUQuota`).
 
-### Token management
+### Credential management
+
+| Phase | Tool | Storage |
+|-------|------|---------|
+| **Current** | `age` + SSH ed25519 keys via `share_credentials.sh` | Encrypted blob on VPS (`/opt/membrane/credentials.age`) |
+| **Mid term** | BearDog `secrets.store`/`secrets.retrieve` via BTSP | BearDog encrypted store on membrane |
+| **Long term** | Autonomous rotation by membrane BearDog | Never stored as files |
 
 DigitalOcean API tokens are stored at `~/.config/doctl/token` with
 `chmod 600`. The deployment script uses `doctl` CLI (authenticated
@@ -422,9 +634,14 @@ internals.
 - `INTERSTADIAL_EXIT_CRITERIA.md` — Pillar 2 deployment targets map to membrane channels
 - `compute-sharing/SOVEREIGN_COMPUTE_SHARING.md` — NUC intake pattern is Channel 3 surface
 - `compute-sharing/TUNNEL_ACCESS_GUIDE.md` — Tunnel evolution phases map to Channel 2
-- `plasmidBin/deploy_membrane.sh` — Agentic provisioning and deployment script
+- `plasmidBin/deploy_membrane.sh` — Agentic provisioning and deployment script (supports `--composition tower`)
 - `plasmidBin/membrane/songbird-relay.service` — Channel 2 systemd unit template
+- `plasmidBin/membrane/beardog-membrane.service` — Tower BearDog systemd unit template
+- `plasmidBin/membrane/skunkbat-membrane.service` — Tower SkunkBat systemd unit template
+- `plasmidBin/membrane/share_credentials.sh` — `age`-based credential sharing between gates
 - `handoffs/SONGBIRD_WAVE202_RELAY_OPS_DEPLOYMENT_MAY12_2026.md` — Songbird relay ops readiness
+- `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` — cellMembrane as fieldMouse Tower on external substrate
+- `handoffs/PROJECTNUCLEUS_MEMBRANE_VPS_HANDOFF_MAY14_2026.md` — cellMembrane VPS ownership handoff
 - `primalSpring/ecoPrimal/src/bonding/stun_tiers.rs` — STUN sovereignty-first escalation
 - `primalSpring/ecoPrimal/src/composition/context.rs` — Discovery escalation hierarchy
 - `BTSP_PROTOCOL_STANDARD.md` — BTSP phase definitions

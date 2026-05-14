@@ -67,13 +67,13 @@ shadow run execution is the remaining gate. Phase 32 atomic model evolution comp
 | **NUCLEUS** | Atom | Tower + Node + Nest (deduplicated) + meta-tier | 10+3=13 |
 
 - **13/13 primals at zero gate debt**: MethodGate, BTSP AEAD Phase 3, Edition 2024, deny.toml — all clean.
-- **primalSpring v0.9.25**: guideStone **Level 8** (absorbed certification engine), 602 library tests, 77 deploy graphs, 413 registered methods (301 exercised, 72%), fragment-based composition v3.0.0.
+- **primalSpring v0.9.25**: guideStone **Level 8** (absorbed certification engine), 689+ library tests, 77 deploy graphs, 418 registered methods (302 exercised, 72%), fragment-based composition v3.0.0.
 - **Library-to-binary rewiring COMPLETE**: 8/8 springs at **Tier 4** (`default = []`, barraCuda optional). All springs now IPC-first for NUCLEUS deployments.
 - **Active delta springs (May 12, all Tier 4 IPC-first)**:
 
 | Spring | gS | Tests | Key Status |
 |--------|---:|------:|------------|
-| primalSpring | L8 | 602 | Coordinator — 413 methods, 77 graphs |
+| primalSpring | L8 | 689+ | Coordinator — 418 methods, 77 graphs |
 | hotSpring | L6 | 1,025 | LTEE B2, 3-GPU sovereign |
 | healthSpring | L5 | 999 | Thread 3 seeded |
 | neuralSpring | L5 | 1,453 | LTEE B1 Py+Rust done |
@@ -463,7 +463,7 @@ their external validation gate.
 ```
 Layer         Phase          Gate / Pressure
 ─────         ─────          ───────────────
-L1 Primals    STADIAL        primalSpring (413 registry, MethodGate, graphs)
+L1 Primals    STADIAL        primalSpring (418 registry, MethodGate, graphs)
 L2 primalSpring  GATE        validates L1, patterns flow to L3/L4
 L3 Springs    INTERSTADIAL   absorbing primal capabilities
 L4 Products   INTERSTADIAL   pre-wiring sovereignty, shadow runs pending
@@ -472,7 +472,7 @@ L5 Foundation INTERSTADIAL   thread coverage, data anchoring
 
 **Upstream primal debt (at the gate)**: **Zero.** All 13 primals pass the
 primalSpring gate — 13/13 MethodGate (JH-0 + JH-2), 13/13 BTSP Phase 3
-AEAD, 413 methods (zero drift), deny.toml (ring + openssl banned).
+AEAD, 418 methods (zero drift), deny.toml (ring + openssl banned).
 
 ## Interstadial Exit Criteria (5 Pillars)
 

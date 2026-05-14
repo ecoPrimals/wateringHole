@@ -380,7 +380,7 @@ You do not need to know about other primals. You need to know what you can do, a
 ## Current Ecosystem State (May 2026)
 
 - **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing), MethodGate 13/13. **Zero critical gaps** — NestGate `content.*` transport parity resolved (Session 60)
-- **415 registered capability methods** (primalSpring canonical, zero drift)
+- **418 registered capability methods** (primalSpring canonical, zero drift)
 - **46 cross-architecture binaries** in plasmidBin (6 target triples, Tier 1 39/39)
 - **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 689+ tests, two-tier validation (Rust + Live), `CompositionContext` throughout, **zero debt** (all LOW/deferred resolved in Wave 9)
 - **8 springs** — all Tier 4 IPC-first (`default = []`, barracuda optional), all eukaryotic UniBin, LTEE reproductions active
