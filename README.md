@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 13, 2026 (barraCuda Sprint 68: TENSOR_WIRE_CONTRACT.md aligned — batch ops table + IPC namespace coverage updated for sub/negate; GEMM routing stable, awaiting coralReef HMMA codegen; Sprint 67: 12-axis deep debt zero confirmed; Sprint 66: GAP-HS-027 TensorSession sub/negate for lattice HMC + GAP-HS-041 resolved)
+**Last Updated**: May 14, 2026 (barraCuda Sprint 69: `health.version` standalone RPC for trio-consistent version probes — 73 methods; Sprint 68: TENSOR_WIRE_CONTRACT.md aligned; GEMM routing stable, awaiting coralReef HMMA codegen)
 
 ---
 
