@@ -3,7 +3,7 @@
 **Date**: May 14, 2026
 **From**: projectNUCLEUS (ironGate)
 **For**: primalSpring (upstream audit), all primal teams (upstream gaps)
-**Registry**: 418-method capability registry
+**Registry**: 427-method capability registry
 
 ---
 

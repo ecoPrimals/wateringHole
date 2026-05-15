@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 14, 2026 (Wave 13 ecosystem reconciliation: all springs pulled to HEAD — 13,750+ total tests. wetSpring V168 composed, healthSpring V64n Tower atomic, ludoSpring V71 compute trio cells, groundSpring V142 GS-015/16/17. plasmidBin v5.4.0. 419 methods. Deep debt sweep complete)
+**Last Updated**: May 15, 2026 (Sovereignty evolution: Forgejo primary (32 repos), VPS Tower LIVE (2GB, 6 services), Channel 3 shadow, content-aware routing. 427 methods. Interstadial exit gate CLEARED)
 
 ---
 
@@ -454,7 +454,7 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 **primalSpring validation gap** (closed by Wave 7 + Wave 8):
 - ~~`content` not in `ALL_CAPS` routing table~~ **FIXED** (W7-01)
 - ~~Zero `content.*` scenarios, tests, or graph steps~~ **FIXED** (W7-02/03/04)
-- ~~413-method registry unchecked semantically~~ **FIXED** — inverse drift detection (W7-06); now 418 methods, routing consistency scenario enforced
+- ~~413-method registry unchecked semantically~~ **FIXED** — inverse drift detection (W7-06); now 427 methods, routing consistency scenario enforced
 - **Wave 7** (contract testing): content domain semantic gates shipped
 - **Wave 8** (compute trio): Node atomic sovereign dispatch contracts shipped — see `handoffs/COMPUTE_TRIO_WAVE8_NODE_ATOMIC_EVOLUTION_MAY11_2026.md`
 
@@ -496,13 +496,13 @@ The stadial begins when the exit gate clears. External pressure drives evolution
 | airSpring | v0.10.0 | 1,389 | L4 | Done | E3 queued | Zero actionable debt, 10 scenarios, 49 capabilities |
 | groundSpring | V142 | 1,123 | L4 | Done | **B3+B4 DONE** | Compute trio deepened (20 IPC methods), GS-015/16/17 filed |
 | ludoSpring | V71 | 862 | L4 | Done | N/A | Compute trio in cells, Foundation T9+T10, coralReef/barraCuda GAPs |
-| primalSpring | v0.9.25 | 641 | L8 | N/A | N/A | **Zero debt** — Waves 1-12, deep debt sweep, 27 scenarios, 419 methods |
+| primalSpring | v0.9.25 | 641 | L8 | N/A | N/A | **Zero debt** — Waves 1-12, deep debt sweep, 27 scenarios, 427 methods |
 
 ### Evolution Cycle Ownership
 
 Gaps are owned by exactly one layer:
 - **L1 (Primals)**: **CLEAN** — 13/13 structural + semantic. NestGate transport parity resolved (Session 60). All downstream-surfaced debt closed
-- **L2 (primalSpring)**: **CLEAN** — canonical 419-method registry, CompositionContext, 27 scenarios, 77 graphs, 73.3% method coverage, deep debt sweep complete (Waves 1-12)
+- **L2 (primalSpring)**: **CLEAN** — canonical 427-method registry, CompositionContext, 27 scenarios, 77 graphs, 73.3% method coverage, deep debt sweep complete (Waves 1-12)
 - **L3 (Springs)**: LTEE reproductions, remaining PG gaps (external), primal composition wiring
 - **L4 (Products)**: NUCLEUS sovereignty horizons H2 shadow runs, NestGate content pipeline, lithoSpore integration
 - **L5 (Foundation)**: Thread coverage 10/10 (EXCEEDED), LTEE data anchoring, provenance validation

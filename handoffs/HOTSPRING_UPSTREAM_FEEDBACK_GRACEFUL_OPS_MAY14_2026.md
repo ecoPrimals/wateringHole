@@ -3,7 +3,7 @@
 **Date**: May 14, 2026  
 **From**: hotSpring team (downstream consumer of compute trio)  
 **For**: primalSpring (ecosystem), toadStool/barraCuda/coralReef (compute trio)  
-**Registry**: 418-method capability registry  
+**Registry**: 427-method capability registry  
 
 ---
 
@@ -92,7 +92,7 @@ All items are local to hotSpring and do NOT need upstream changes:
 ## Cross-References
 
 - `CAPABILITY_WIRE_STANDARD.md` — SP-01 (socket mode), GD-01 (graceful drain)
-- `capability_registry.toml` — `health.drain`, `health.version` (418 methods)
+- `capability_registry.toml` — `health.drain`, `health.version` (427 methods)
 - `primalSpring/ecoPrimal/src/ipc/methods.rs` — `health::DRAIN`, `health::VERSION`
 - `plasmidBin/doctor.sh --freshness` — ecoBin staleness report
 - `fossilRecord/wateringHole/TOADSTOOL_S214_PG46_BTSP_PHASE3_HANDOFF_MAY01_2026.md` — original `TOADSTOOL_SOCKET_MODE` shipping note
