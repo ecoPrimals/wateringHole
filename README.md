@@ -321,8 +321,11 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Sovereign Hosting & Cell Membrane
 - `MEMBRANE_CHANNEL_ARCHITECTURE.md` — External surface design: three membrane channels (Signal/DNS, Relay/NAT, Surface/TLS), deployment models, evolution path, tiering system mappings
+- `SOVEREIGNTY_STANDARDS.md` — Ecosystem sovereignty behaviors: bonding model in infrastructure, content-aware routing, membrane channel standards, credential management, VPS deployment sizing, Forgejo-primary workflow, validation standards
+- `PRIMAL_VS_SOVEREIGNTY_GOALS.md` — Layer separation: primal capabilities (L1) vs security validation (L2) vs sovereignty deployment (L3) vs sovereign composition (L4). Maps overlaps, divergences, and the Rust evolution thread
 - `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Hosting evolution, DNS metadata closure, cell membrane addendum
 - `handoffs/PROJECTNUCLEUS_CELL_MEMBRANE_COMPOSITION_HANDOFF_MAY10_2026.md` — Cell membrane architecture, NUCLEUS composition patterns, neuralAPI deployment, per-team absorption targets
+- `handoffs/PROJECTNUCLEUS_SOVEREIGNTY_EVOLUTION_MAY15_2026.md` — Forgejo primary (32 repos), VPS Tower (6 services), Channel 3 shadow, content-aware routing
 
 ### Interstadial Exit & Stadial Boundary
 - `INTERSTADIAL_EXIT_CRITERIA.md` — Authoritative exit criteria: 5 pillars, gate conditions, stadial boundary definition, external validation drivers
