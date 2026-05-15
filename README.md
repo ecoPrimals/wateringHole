@@ -289,6 +289,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `COMPOSITION_HEALTH_STANDARD.md` — Health check patterns for compositions
 - `COMPOSITION_TICK_MODEL_STANDARD.md` — Tick budget model for real-time compositions
 - `CROSS_SPRING_COORDINATION_STANDARD.md` — Cross-spring validation patterns
+- `DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5-pillar security invariant gate (metadata, ports, network, BTSP, enclave)
 - `DEPLOYMENT_VALIDATION_STANDARD.md` — Deployment validation procedures
 - `DESKTOP_NUCLEUS_DEPLOYMENT.md` — Desktop NUCLEUS deployment guide
 - `ECOBIN_ARCHITECTURE_STANDARD.md` — Universal portability standard
