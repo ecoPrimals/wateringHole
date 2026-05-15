@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 15, 2026 (Sovereignty evolution: Forgejo primary (32 repos), VPS Tower LIVE (2GB, 6 services), Channel 3 shadow, content-aware routing. 427 methods. Interstadial exit gate CLEARED)
+**Last Updated**: May 15, 2026 (L3+L4 membrane telemetry, permanent shadow mode. Sovereignty: Forgejo primary (32 repos), VPS Tower LIVE, Channel 3 shadow, content-aware routing. 427 methods)
 
 ---
 
@@ -326,6 +326,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Hosting evolution, DNS metadata closure, cell membrane addendum
 - `handoffs/PROJECTNUCLEUS_CELL_MEMBRANE_COMPOSITION_HANDOFF_MAY10_2026.md` — Cell membrane architecture, NUCLEUS composition patterns, neuralAPI deployment, per-team absorption targets
 - `handoffs/PROJECTNUCLEUS_SOVEREIGNTY_EVOLUTION_MAY15_2026.md` — Forgejo primary (32 repos), VPS Tower (6 services), Channel 3 shadow, content-aware routing
+- `handoffs/PROJECTNUCLEUS_MEMBRANE_TELEMETRY_MAY15_2026.md` — L3+L4 continuous membrane telemetry: unified probe script, rolling 7-day summary, permanent shadow mode, SkunkBat correlation
 
 ### Interstadial Exit & Stadial Boundary
 - `INTERSTADIAL_EXIT_CRITERIA.md` — Authoritative exit criteria: 5 pillars, gate conditions, stadial boundary definition, external validation drivers

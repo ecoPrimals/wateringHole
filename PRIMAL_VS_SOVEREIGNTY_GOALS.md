@@ -203,6 +203,30 @@ A service is sovereign when:
 - darkforest validation passes **before and after** cutover
 - Rollback path is documented and tested
 
+### The L3+L4 Membrane Bridge: Continuous Telemetry
+
+Layer 3 (external membrane / VPS) and Layer 4 (internal membrane / gate)
+are two faces of the same cell membrane. The key architectural insight:
+**shadow runs do not end at cutover**. They become permanent telemetry.
+
+The calibrate-shadow-cutover protocol remains, but shadow collection
+continues even after a primal reaches parity and replaces an external:
+
+- **Regression detection**: sovereign TLS could degrade after a BearDog update
+- **Baseline drift**: Cloudflare's behavior changes over time (their edge moves)
+- **Cost monitoring**: VPS bandwidth, gate CPU, Songbird relay load
+- **Bonding model validation**: different trust levels produce different latency profiles
+
+Implementation:
+- `deploy/membrane_telemetry.sh` — unified collection across both membranes (cron every 15 min)
+- `deploy/membrane_summary.sh` — rolling 7-day summary with cutover gates
+- `validation/baselines/membrane_7day.toml` — canonical state snapshot (committed)
+- `routing_config.toml [telemetry]` — `shadow_mode = "permanent"`, SkunkBat correlation enabled
+
+The telemetry data feeds both Layer 3 (parity validation before cutover)
+and Layer 4 (composition health after cutover). This is how the two
+layers connect: through a shared data plane that never stops collecting.
+
 ---
 
 ## Layer 4: Sovereign Composition (The Final Goal)
@@ -432,4 +456,5 @@ Layer 4 (Composition):     ██░░░░░░░░  EARLY — Tower on VP
 
 | Date | Change |
 |------|--------|
+| 2026-05-15 | L3+L4 membrane bridge: continuous telemetry model, permanent shadow collection |
 | 2026-05-15 | Initial version — primal/sovereignty goal separation formalized |
