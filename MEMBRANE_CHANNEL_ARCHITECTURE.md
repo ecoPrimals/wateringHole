@@ -220,8 +220,8 @@ opens 22/tcp, 3478/udp+tcp, and 21115-21117/tcp+udp (RustDesk).
 
 ### Model A: Single VPS (interstadial start)
 
-All three channels on one box. Cheapest (~$5/mo). Channels are
-separated by port and process, not by machine.
+All three channels on one box. Current: ~$12/mo (2GB RAM, Tower composition).
+Channels are separated by port and process, not by machine.
 
 ```
 VPS (one public IP)

@@ -3,7 +3,7 @@
 **Date**: May 14, 2026 (updated)
 **From**: primalSpring (ecosystem coordination)
 **For**: projectNUCLEUS (deployment & ops ownership)
-**Registry**: 418-method capability registry
+**Registry**: 427-method capability registry
 **Deployment Class**: fieldMouse (Tower on external substrate)
 
 ---
@@ -23,7 +23,7 @@ ops, the NAT shadow run, and deployment of Channels 1 and 3.
 
 | Item | Value |
 |------|-------|
-| **VPS** | `membrane-relay`, 157.230.3.183, Debian 12 x64, nyc1, ~$4/mo |
+| **VPS** | `membrane-relay`, 157.230.3.183, Debian 12 x64, nyc1, ~$12/mo (2GB, resized from $4) |
 | **Classification** | cellMembrane fieldMouse — Tower (BearDog + Songbird + SkunkBat) + RustDesk (hbbs + hbbr) |
 | **Channel 2** | Songbird v0.2.1 TURN relay on UDP :3478 |
 | **Channel 2b** | RustDesk relay (hbbs :21115-21116, hbbr :21117) |
