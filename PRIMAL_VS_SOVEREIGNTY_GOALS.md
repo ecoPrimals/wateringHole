@@ -162,11 +162,11 @@ the external, run the primal in parallel, cut over when parity is proven.
 
 | External Service | Primal Goal (L1) | Sovereignty Goal (L3) | Overlap | Status |
 |-----------------|-------------------|----------------------|---------|--------|
-| **Cloudflare TLS** | BearDog ships `tls.terminate` with rustls, SNI, ACME, rate limiter | Replace Cloudflare :443 with BearDog :8443 on VPS, prove p50 < 73ms | BearDog TLS capability enables the replacement | L1: SHIPPED. L3: shadow LIVE (2ms vs 102ms) |
-| **cloudflared tunnel** | Songbird ships STUN/TURN/NAT/fallback chain | Replace cloudflared with Songbird relay on VPS, prove 100% reachability | Songbird NAT capability enables the replacement | L1: SHIPPED. L3: relay LIVE, HTTP parity pending |
+| **Cloudflare TLS** | BearDog ships `tls.terminate` with rustls, SNI, ACME, rate limiter | Replace Cloudflare :443 with BearDog :8443 on VPS, prove p50 < 73ms | BearDog TLS capability enables the replacement | L1: SHIPPED. L3: shadow LIVE (3ms RPC). `membrane.primals.eco` ACME cert LIVE |
+| **cloudflared tunnel** | Songbird ships STUN/TURN/NAT/fallback chain | Replace cloudflared with Songbird relay on VPS, prove 100% reachability | Songbird NAT capability enables the replacement | L1: SHIPPED. L3: relay LIVE, **HTTP parity PASS** (68ms vs 89ms) |
 | **Cloudflare DNS** | Songbird ships DDNS integration | Deploy knot-dns on VPS, transfer NS records, run sovereign authoritative DNS | Songbird DDNS is a helper, not the DNS server itself | L1: SHIPPED (DDNS). L3: NOT STARTED (knot-dns) |
 | **PAM passwords** | BearDog ships ionic tokens + `auth.issue_session` | Replace PAM auth with BTSP tokens on JupyterHub, prove 99.9% success rate | BearDog token capability enables BTSP auth | L1: SHIPPED. L3: dual-auth ACTIVE |
-| **GitHub Pages** | NestGate ships `content.*` pipeline; petalTongue ships web mode | Serve primals.eco from NestGate cache via petalTongue, prove TTFB within 10% | NestGate + petalTongue compose into a content server | L1: SHIPPED. L3: UNBLOCKED, not started |
+| **GitHub Pages** | NestGate ships `content.*` pipeline; petalTongue ships web mode | Serve primals.eco from NestGate cache via petalTongue, prove TTFB within 10% | NestGate + petalTongue compose into a content server | L1: SHIPPED. L3: Content synced to VPS (19MB). Caddy serving at parity. petalTongue backend pending |
 | **GitHub Repos** | (No primal capability needed) | Mirror to Forgejo, configure dual-push, make Forgejo primary | No overlap — this is pure ops | L3: ACTIVE (32 repos) |
 | **GitHub Actions** | (No primal capability needed) | Port 74 workflows to Forgejo Actions or self-hosted runners | No overlap — this is pure ops | L3: NOT STARTED |
 | **GitHub Releases** | NestGate ships blob storage | Wire `fetch.sh` to NestGate instead of GitHub Releases API | NestGate blob capability enables the replacement | L1: SHIPPED. L3: UNBLOCKED |
@@ -431,7 +431,7 @@ physics and coordination constraints, not sovereignty failures.
 ```
 Layer 1 (Primal Caps):     ██████████  COMPLETE — 427 methods, 13/13 primals, zero upstream gaps
 Layer 2 (Security):        ██████████  COMPLETE — Horizon 1 resolved, darkforest + gate + membrane PASS
-Layer 3 (Sovereignty):     █████░░░░░  IN PROGRESS — 4 shadows LIVE, 2 active, 4 not started
+Layer 3 (Sovereignty):     ██████░░░░  IN PROGRESS — TLS LIVE (ACME cert), HTTP parity PASS, 4 shadows LIVE, 4 not started
 Layer 4 (Composition):     ██░░░░░░░░  EARLY — Tower on VPS (no biomeOS), Full NUCLEUS on gate
 ```
 
@@ -439,11 +439,11 @@ Layer 4 (Composition):     ██░░░░░░░░  EARLY — Tower on VP
 
 | Sovereignty Target | Score | Blocking |
 |-------------------|-------|----------|
-| TLS replacement | ████████░░ | DNS grey-cloud for ACME cert |
-| NAT replacement | ███████░░░ | HTTP parity test |
+| TLS replacement | █████████░ | `membrane.primals.eco` ACME cert LIVE (Let's Encrypt E8). BearDog 3ms RPC vs 120ms CF. DNS grey-cloud proven — expand to `primals.eco` when ready |
+| NAT replacement | ████████░░ | HTTP parity PASS (VPS 68ms vs GH Pages 89ms, 10 samples). TLS parity 130ms vs 96ms (within 35%, expected VPS vs CDN) |
 | Auth replacement | ██████░░░░ | 7-day shadow run completion |
 | DNS sovereignty | ██░░░░░░░░ | knot-dns deployment |
-| Content sovereignty | ███░░░░░░░ | Shadow run vs GitHub Pages |
+| Content sovereignty | █████░░░░░ | sporePrint synced to VPS NestGate cache (19MB). Caddy serves real content. petalTongue backend wiring pending |
 | Git sovereignty | ███████░░░ | Forgejo Actions (CI) |
 | CI sovereignty | █░░░░░░░░░ | 74 workflows to port |
 | Registry sovereignty | █░░░░░░░░░ | NestGate OCI wiring |
@@ -456,5 +456,6 @@ Layer 4 (Composition):     ██░░░░░░░░  EARLY — Tower on VP
 
 | Date | Change |
 |------|--------|
+| 2026-05-15 | Sovereignty targets executed: `membrane.primals.eco` ACME cert LIVE, HTTP parity PASS (68ms vs 89ms), BearDog probe fixed (3ms), BTSP auth journald wiring, content synced to VPS |
 | 2026-05-15 | L3+L4 membrane bridge: continuous telemetry model, permanent shadow collection |
 | 2026-05-15 | Initial version — primal/sovereignty goal separation formalized |
