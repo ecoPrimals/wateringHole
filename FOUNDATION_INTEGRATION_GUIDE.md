@@ -2,7 +2,7 @@
 # Foundation Integration Guide
 
 **Audience**: Spring developers, primal maintainers, garden product teams
-**Purpose**: How to integrate with `sporeGarden/foundation` — the scientific
+**Purpose**: How to integrate with `gardens/foundation` — the scientific
 knowledge layer that defines what NUCLEUS should validate
 **Last Updated**: May 6, 2026
 
@@ -10,7 +10,7 @@ knowledge layer that defines what NUCLEUS should validate
 
 ## What is Foundation?
 
-`sporeGarden/foundation` is the soil. It declares:
+`gardens/foundation` is the soil. It declares:
 - **What data exists** (data/sources/*.toml — NCBI accessions, UniProt proteomes, KEGG pathways, PDB structures)
 - **What results to expect** (data/targets/*.toml — published numerical values with tolerances)
 - **How threads connect** (lineage/THREAD_INDEX.toml, lineage/BASECAMP_PAPER_MAP.toml)
@@ -216,13 +216,13 @@ builds on it. The sediment accumulates.
 
 | What | Where |
 |------|-------|
-| Data source manifests | `sporeGarden/foundation/data/sources/*.toml` |
-| Validation targets | `sporeGarden/foundation/data/targets/*.toml` |
-| Thread index | `sporeGarden/foundation/lineage/THREAD_INDEX.toml` |
-| baseCamp paper map | `sporeGarden/foundation/lineage/BASECAMP_PAPER_MAP.toml` |
-| Deploy graph | `sporeGarden/foundation/graphs/foundation_validation.toml` |
-| Fetch script | `sporeGarden/foundation/deploy/fetch_sources.sh` |
-| Validation pipeline | `sporeGarden/foundation/deploy/foundation_validate.sh` |
-| Workloads | `sporeGarden/foundation/workloads/thread*_*/` |
-| Data integrity spec | `sporeGarden/foundation/specs/DATA_INTEGRITY_CONTRACT.md` |
-| Expression authoring | `sporeGarden/foundation/specs/EXPRESSION_AUTHORING_GUIDE.md` |
+| Data source manifests | `gardens/foundation/data/sources/*.toml` |
+| Validation targets | `gardens/foundation/data/targets/*.toml` |
+| Thread index | `gardens/foundation/lineage/THREAD_INDEX.toml` |
+| baseCamp paper map | `gardens/foundation/lineage/BASECAMP_PAPER_MAP.toml` |
+| Deploy graph | `gardens/foundation/graphs/foundation_validation.toml` |
+| Fetch script | `gardens/foundation/deploy/fetch_sources.sh` |
+| Validation pipeline | `gardens/foundation/deploy/foundation_validate.sh` |
+| Workloads | `gardens/foundation/workloads/thread*_*/` |
+| Data integrity spec | `gardens/foundation/specs/DATA_INTEGRITY_CONTRACT.md` |
+| Expression authoring | `gardens/foundation/specs/EXPRESSION_AUTHORING_GUIDE.md` |

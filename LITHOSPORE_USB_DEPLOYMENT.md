@@ -24,7 +24,7 @@ spore itself does not self-update. Like a seed in cold storage.
 | Property | Value |
 |----------|-------|
 | Marker | `.biomeos-spore` |
-| Entry point | `spore.sh` |
+| Entry point | `spore` (symlink → `bin/litho`) |
 | Data | Frozen (BLAKE3-anchored at build time) |
 | Self-update | No |
 | Provenance | None (no validation trail) |
@@ -39,7 +39,7 @@ validated. Like a seed that has germinated.
 | Property | Value |
 |----------|-------|
 | Marker | `.biomeos-spore` |
-| Entry point | `spore.sh` |
+| Entry point | `spore` (symlink → `bin/litho`) |
 | Data | Refreshable via `./refresh` (re-fetches sources, re-computes BLAKE3) |
 | Self-update | Data only (binaries frozen) |
 | Provenance | `liveSpore.json` — append-only validation journal |
@@ -61,11 +61,11 @@ connects to NUCLEUS for full compute capability.
 | Property | Value |
 |----------|-------|
 | Marker | `.biomeos-spore` |
-| Entry point | `spore.sh` → `validate` |
+| Entry point | `spore` → `validate` (all symlinks to `bin/litho`, argv[0] dispatch) |
 | Data | Refreshable + bundled (7 LTEE data bundles, Foundation targets) |
 | Runtime | Embedded Python (`python-build-standalone` or equivalent) |
-| Binaries | litho-core Rust ecoBins (7 module validators) |
-| Self-update | Data (`./refresh`) + binaries (`fetch.sh --release latest`) |
+| Binaries | Single `litho` binary (musl-static, 5.1 MB) — unified CLI, in-process module execution |
+| Self-update | Data (`./refresh`) + binaries via `litho fetch` |
 | Provenance | `liveSpore.json` — append-only, BLAKE3-hashed hostnames |
 | Example | Full CATHEDRAL USB on ironGate |
 
@@ -77,9 +77,10 @@ connects to NUCLEUS for full compute capability.
 /media/lithoSpore/
 ├── .biomeos-spore                    # biomeOS detection marker
 ├── .family.seed                      # Genetics lineage for this spore
-├── spore.sh                          # biomeOS ColdSpore entry point
-├── validate                          # Main entry: Tier 1 or Tier 2 dispatch
-├── refresh                           # Data freshness: re-fetch, re-hash, re-validate
+├── validate                          # symlink → bin/litho (argv[0] dispatch)
+├── verify                            # symlink → bin/litho
+├── refresh                           # symlink → bin/litho
+├── spore                             # symlink → bin/litho (biomeOS entry)
 ├── liveSpore.json                    # Append-only provenance journal
 ├── data_manifest.toml                # BLAKE3 hashes for all bundled data
 │
@@ -89,13 +90,7 @@ connects to NUCLEUS for full compute capability.
 │       └── lithoSpore_validation.toml  # Validation flow graph
 │
 ├── bin/
-│   ├── ltee-mutations                # Module 1: Barrick 2009 (Rust ecoBin)
-│   ├── ltee-fitness                  # Module 2: Wiser 2013
-│   ├── ltee-clonal                   # Module 3: Good 2017
-│   ├── ltee-citrate                  # Module 4: Blount 2008/2012
-│   ├── ltee-biobricks               # Module 5: scaffold (DOI pending)
-│   ├── ltee-breseq                   # Module 6: Tenaillon 2016
-│   └── ltee-anderson                 # Module 7: Anderson/Wiser fitness
+│   └── litho                         # Unified musl-static binary (all 7 modules + CLI)
 │
 ├── python/                           # Embedded Python runtime
 │   ├── bin/python3                   # python-build-standalone or similar
