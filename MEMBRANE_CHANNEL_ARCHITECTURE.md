@@ -689,6 +689,19 @@ internals.
 
 ---
 
+## biomeOS Support (v3.58)
+
+As of biomeOS v3.58, `composition.deploy(graph)` recognizes `composition_model = "membrane"`
+as a first-class deployment topology. Graph metadata is parsed, validated, and preserved
+through the neural-to-deployment conversion pipeline. The `composition.deploy.shadow`
+dry-run also reports the composition model in its validation output.
+
+The `CompositionModel` enum (`nucleated` | `membrane`) is orthogonal to
+`AtomicComposition` (Tower/Node/Nest/Nucleus) — the former describes infrastructure
+topology, the latter describes which primal bundles are required.
+
+---
+
 ## Cross-References
 
 - `INTERSTADIAL_EXIT_CRITERIA.md` — Pillar 2 deployment targets map to membrane channels
