@@ -335,7 +335,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Targeted GuideStone (LTEE)
 - `TARGETED_GUIDESTONE_STANDARD.md` — Standard for how composed subsystems bud into portable artifacts (budding model, 5 components, cross-platform via ecoBin/genomeBin, liveSpore tracking, data freshness protocol)
-- `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem: first Targeted GuideStone artifact (Barrick Lab), 7 science modules, 36 paper-spring assignments across 6 springs, three-tier architecture, projectNUCLEUS deployment subsystem
+- `handoffs/archive/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem: first Targeted GuideStone artifact (Barrick Lab), 7 science modules, 36 paper-spring assignments across 6 springs, three-tier architecture, projectNUCLEUS deployment subsystem
 
 ### Deep Debt & Upstream Handbacks
 - `handoffs/PROJECTNUCLEUS_CROSS_ECOSYSTEM_AUDIT_MAY11_2026.md` — Cross-ecosystem audit findings, MethodGate parity, spring skunkBat wiring, barraCuda version skew
@@ -519,7 +519,7 @@ See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
 See `handoffs/archive/post_interstadial_may2026/` for 19 archived closure handoffs.
 See `fossilRecord/handoffs-may11-2026-wave9-closure/` for 34 archived handoffs from the Wave 9 debt closure cycle.
 
-**Active handoffs (34):** See `handoffs/` directory listing. Covers all primals, springs, and products from the May 12-14 atomic deployment and cellMembrane phases. 16 superseded handoffs moved to `handoffs/archive/`.
+**Active handoffs (51):** See `handoffs/` directory listing. Covers all primals, springs, and products from the May 12-15 atomic deployment, cellMembrane, and sovereignty execution phases. 17 superseded handoffs in `handoffs/archive/`.
 
 ---
 
