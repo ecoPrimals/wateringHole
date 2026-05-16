@@ -25,7 +25,7 @@ Products (helixVision, esotericWebb, blueFish)
 Springs (wetSpring, hotSpring, groundSpring, …)
 ├── Validation runs — each one a sediment event
 │
-Foundation (gardens/foundation)
+projectFOUNDATION (gardens/projectFOUNDATION)
 ├── Declared targets + data sources
 │
 projectNUCLEUS
@@ -141,7 +141,7 @@ spring = "hotSpring"
 ### Step 2: Run Through the Pipeline
 
 ```bash
-cd gardens/foundation/deploy
+cd gardens/projectFOUNDATION/deploy
 bash foundation_validate.sh --thread wcm
 ```
 
@@ -233,4 +233,4 @@ That is the difference between a bibliography and a foundation.
 - `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — rhizoCrypt + loamSpine + sweetGrass patterns
 - `SWEETGRASS_SPRING_BRAID_PATTERNS.md` — per-spring attribution patterns
 - `ECOSYSTEM_EVOLUTION_CYCLE.md` — the water cycle model (seasonal evolution)
-- `gardens/foundation/deploy/README.md` — quick start for validation runs
+- `gardens/projectFOUNDATION/deploy/README.md` — quick start for validation runs

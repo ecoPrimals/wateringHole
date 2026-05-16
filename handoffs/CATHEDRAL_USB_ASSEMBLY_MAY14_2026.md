@@ -68,7 +68,7 @@ layout) instead of `bin/{arch}/static/` (dev layout).
 ├── biomeOS/                ← tower + validation graph
 ├── bin/                    ← 8 ecoBin binaries (flat)
 ├── artifact/data/          ← 7 LTEE datasets
-├── foundation/targets/     ← Foundation validation targets
+├── projectFOUNDATION/targets/ ← projectFOUNDATION validation targets
 └── notebooks/              ← Python baselines + HTML
 ```
 
