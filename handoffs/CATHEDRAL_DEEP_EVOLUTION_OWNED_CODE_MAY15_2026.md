@@ -74,7 +74,7 @@ serve as target patterns for further petalTongue visual evolution.
 | Paper map dedup | Verified clean — no duplicate paper ID 10 |
 | WCM targets | Reviewed `validation/wcm-20260509/` — 0/24 targets have validation evidence, all remain `validated = false` |
 | README quick-start | Fixed stale `cd ../../` paths → env-var-based resolution |
-| Validation summary | Fixed `sporeGarden/foundation` → `gardens/foundation` |
+| Validation summary | Fixed `sporeGarden/foundation` → `gardens/projectFOUNDATION` |
 
 ## Build Verification
 

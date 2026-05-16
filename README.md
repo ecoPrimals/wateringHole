@@ -303,7 +303,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `STANDARDS_AND_EXPECTATIONS.md` — Meta-standard: what standards are and how they evolve
 
 ### Foundation and Sediment
-- `FOUNDATION_INTEGRATION_GUIDE.md` — How springs, primals, and gardens integrate with `gardens/foundation`
+- `FOUNDATION_INTEGRATION_GUIDE.md` — How springs, primals, and gardens integrate with `gardens/projectFOUNDATION`
 - `SEDIMENT_LAYER_MODEL.md` — The geological model: how validated results accumulate as load-bearing layers
 
 ### Visualization and Attribution
@@ -393,7 +393,7 @@ You do not need to know about other primals. You need to know what you can do, a
 - **13,750+ tests** across the river delta (wetSpring 1,962 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,123 · hotSpring 1,042 · healthSpring 1,018 · ludoSpring 862 · primalSpring 641 + metalForge/integration/Python suites)
 - **1 garden** active (esotericWebb from ludoSpring)
 - **projectNUCLEUS** — **Stadial-ready, sovereignty targets executing**. 13-primal Full NUCLEUS, cellMembrane VPS operational (Songbird relay + RustDesk, multi-gate SSH), zero upstream debt. BearDog TLS shadow LIVE on :8443 (H2-12, **3ms RPC** vs 120ms Cloudflare). **Channel 3 TLS LIVE**: `membrane.primals.eco` ACME cert (Let's Encrypt E8), serving real sporePrint. **HTTP parity PASS** (VPS 68ms vs GH Pages 89ms). DoT baseline captured (ACTIVE, 3-8ms). lithoSpore 7/7 modules PASS Tier 2 (75/75 checks). L3+L4 continuous membrane telemetry deployed (permanent shadow mode)
-- **gardens/foundation** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 11 target TOMLs across all threads; 10/10 threads with spring seeds (all threads active — EXCEEDED)
+- **gardens/projectFOUNDATION** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 11 target TOMLs across all threads; 10/10 threads with spring seeds (all threads active — EXCEEDED)
 - **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules (7/7 PASS, 75/75 checks), 16 papers in registry, deployment resilience tested (108 unit + 16 integration + 15 chaos tests), USB artifact 5.8M musl-static, `litho deploy-report` TOML output
 - **benchScale** — GPU lifecycle automation (VFIO/IOMMU), pure-Rust SSH + NoCloud ISO, libvirt VM orchestration
 - **agentReagents** — GPU sovereign VM builder: K80 tooling, Titan V patches, verification modules

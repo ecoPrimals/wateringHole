@@ -106,8 +106,8 @@ connects to NUCLEUS for full compute capability.
 │       ├── anderson_wiser/           # Module 7 source data
 │       └── neuralspring_ml/          # ML surrogate data
 │
-├── foundation/
-│   └── targets/                      # Foundation validation targets
+├── projectFOUNDATION/
+│   └── targets/                      # projectFOUNDATION validation targets
 │       ├── thread05_ltee_targets.toml
 │       └── ...
 │

@@ -87,5 +87,5 @@ critical path to stadial entry (Pillar 2 shadow runs).
 
 - `sporeGarden/projectNUCLEUS` → main
 - `sporeGarden/lithoSpore` → main
-- `sporeGarden/foundation` → main
+- `sporeGarden/projectFOUNDATION` → main
 - `ecoPrimals/plasmidBin` → main
