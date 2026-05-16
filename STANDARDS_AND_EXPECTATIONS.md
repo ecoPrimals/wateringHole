@@ -3,14 +3,14 @@
 **Purpose**: Single-document reference for what ecoPrimals expects of every primal,
 spring, contributor, and session.  Read this first, read everything else second.
 
-**Last Updated**: April 4, 2026
+**Last Updated**: March 15, 2026
 
 ---
 
 ## Companion Documents
 
 - **`GLOSSARY.md`** — Every term defined (gate, primal, spring, atomic, niche, etc.)
-- **`DEPLOYMENT_AND_COMPOSITION.md`** — Composition patterns, BYOB schema, deployment classes, workspace layout
+- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, toolchain, directory layout for a gate
 
 ---
 
@@ -24,7 +24,7 @@ spring, contributor, and session.  Read this first, read everything else second.
 | **Unsafe** | `#![forbid(unsafe_code)]` on all crate roots unless hardware-touching (coralReef VFIO, toadStool sysmon). Justify every exception. |
 | **Dependencies** | Minimize. Prefer `no_std`-capable crates. No openssl, no ring, no vendor SDKs. Pure Rust cryptography (RustCrypto suite). |
 | **Documentation** | `#![warn(missing_docs)]` on library crates. Doctests count as tests. |
-| **License** | `AGPL-3.0-or-later` for all primals and springs. Pinning to `-only` means not trusting the nonprofit stewards who fight the legal battles; `-or-later` is the scyBorg standard. See `LICENSING_AND_COPYLEFT.md`. |
+| **License** | AGPL-3.0-only for all primals and springs. See `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` for full licensing standard. |
 
 ## 2. Binary Architecture
 
@@ -42,29 +42,27 @@ genomeBin (deployment)  → + Auto-detection, service integration, health monito
 |----------|------|--------|
 | UniBin | `UNIBIN_ARCHITECTURE_STANDARD.md` | Ecosystem Standard |
 | ecoBin | `ECOBIN_ARCHITECTURE_STANDARD.md` | Ecosystem Standard v3.0 |
-| genomeBin | `ARTIFACT_AND_PACKAGING.md` | Ecosystem Standard |
+| genomeBin | `GENOMEBIN_ARCHITECTURE_STANDARD.md` | Ecosystem Standard |
 
 **Expectation**: Every primal is a single self-contained binary. No shared libraries,
 no plugins, no dynamic loading. `cargo build --release` produces one artifact.
 
-### Binary Distribution (`plasmidBin/`)
+### Genome Pinning (`plasmidBin/`)
 
-When a primal or spring reaches a stable release, its binary is pinned to
-[ecoPrimals/plasmidBin](https://github.com/ecoPrimals/plasmidBin) — the
-public binary distribution surface. Consumers clone this repo, run `fetch.sh`
-to pull binaries from GitHub Releases, and use `start_primal.sh` to launch
-compositions.
+When a primal or spring reaches a stable release, its genomeBin is pinned to
+`ecoPrimals/plasmidBin/`. This is the ecosystem-wide source of truth for
+production-ready binaries. Springs and biomeOS discover primal binaries from
+this directory via the `$ECOPRIMALS_PLASMID_BIN` discovery chain.
 
-| Surface | Location | Role |
-|---------|----------|------|
-| Public distribution | `ecoPrimals/plasmidBin` (GitHub) | Per-primal `metadata.toml`, `manifest.lock`, `fetch.sh`, `harvest.sh`, `start_primal.sh`, `ports.env` |
-| Operator tooling | `infra/plasmidBin/` (dev workspace) | `deploy_gate.sh`, `doctor.sh`, actual binaries, SSH/ADB deployment scripts |
-| Registry reference | `wateringHole/genomeBin/manifest.toml` | Detailed capability registry, tier definitions, architecture mappings |
+| Layer | Location | Role |
+|-------|----------|------|
+| genomeBin | `wateringHole/genomeBin/` | Distribution manifest, checksums, update policy |
+| biomeOS plasmidBin | `phase2/biomeOS/plasmidBin/` | Local cache for spore creation |
+| Root plasmidBin | `ecoPrimals/plasmidBin/` | Ecosystem-wide stable genomes |
 
 **Standard practice**: After a successful audit or milestone, copy the release
-binary to `plasmidBin/<name>/<name>` and run `harvest.sh` to update checksums,
-`metadata.toml`, `manifest.lock`, and create a GitHub Release with all binaries
-attached. See `plasmidBin/CONTEXT.md` for the full workflow.
+binary to `plasmidBin/primals/{name}` (for primals) or `plasmidBin/springs/{name}`
+(for springs), and update `plasmidBin/manifest.toml` + `plasmidBin/sources.toml`.
 
 ## 3. Communication (IPC)
 
@@ -72,7 +70,7 @@ attached. See `plasmidBin/CONTEXT.md` for the full workflow.
 |----------|------|---------|
 | Primal IPC Protocol v3.0 | `PRIMAL_IPC_PROTOCOL.md` | JSON-RPC 2.0 + tarpc, platform-agnostic transports, runtime discovery |
 | Semantic Method Naming | `SEMANTIC_METHOD_NAMING_STANDARD.md` | `domain.verb` method names (`crypto.sign`, `storage.put`) |
-| Cross-Spring Data Flow | `SPRING_INTERACTION_PATTERNS.md` | Time series exchange format via `capability.call` |
+| Cross-Spring Data Flow | `CROSS_SPRING_DATA_FLOW_STANDARD.md` | Time series exchange format via `capability.call` |
 
 **Expectation**: Primals never import each other's code. All coordination is via
 JSON-RPC messages over IPC. Each primal owns its IPC implementation — no shared
@@ -84,7 +82,7 @@ IPC crate.
 |----------|------|---------|
 | Dark Forest Beacon Genetics | `birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` | Two-seed lineage (nuclear + mitochondrial) |
 | BearDog Technical Stack | `btsp/BEARDOG_TECHNICAL_STACK.md` | Ed25519, BLAKE3, X25519 — Pure Rust crypto foundation |
-| Tower Atomic | `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` | BearDog + Songbird + skunkBat = trust boundary |
+| Tower Atomic | `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` | BearDog + Songbird = Pure Rust HTTPS |
 
 **Expectation**: Auto-trust within genetic family, zero trust outside. No certificate
 authorities. Encrypted payloads are unreadable to outsiders. Zero metadata leakage
@@ -94,8 +92,12 @@ authorities. Encrypted payloads are unreadable to outsiders. Zero metadata leaka
 
 | Standard | File | Summary |
 |----------|------|---------|
-| GPU & Compute Evolution | `GPU_AND_COMPUTE_EVOLUTION.md` | Sovereign compute, GPU bring-up, numerical stability, fixed-function science |
+| GPU f64 Stability | `GPU_F64_NUMERICAL_STABILITY.md` | Lessons from hotSpring Paper 44 — precision tiers |
+| Numerical Stability Plan | `NUMERICAL_STABILITY_EVOLUTION_PLAN.md` | Fast AND safe math — fallback chains |
+| Sovereign Compute | `SOVEREIGN_COMPUTE_EVOLUTION.md` | Pure Rust GPU stack — WGSL→native, no CUDA SDK |
 | Pure Rust Stack | `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` | Cross-primal sovereign compute guidance |
+| Cross-Spring Shaders | `CROSS_SPRING_SHADER_EVOLUTION.md` | How springs collectively evolve barraCuda |
+| Spring Validation | `SPRING_VALIDATION_ASSIGNMENTS.md` | Each spring validates specific barraCuda primitives |
 
 **Compute triangle**: barraCuda (WHAT — math/shaders) → coralReef (HOW — compile to native)
 → toadStool (WHERE — discover and dispatch hardware). Springs depend on barraCuda
@@ -108,9 +110,11 @@ directly for math.
 
 | Standard | File | Summary |
 |----------|------|---------|
-| Deployment & Composition | `DEPLOYMENT_AND_COMPOSITION.md` | Niche deployment, composition patterns, deployment classes |
-| Spring Interaction Patterns | `SPRING_INTERACTION_PATTERNS.md` | Cross-evolution, interop, data flow, compute trio |
-| Spring Coordination | `SPRING_COORDINATION_AND_VALIDATION.md` | Handoffs, provenance trio, validation assignments |
+| Spring-as-Niche Standard | `SPRING_AS_NICHE_DEPLOYMENT_STANDARD.md` | Springs deploy as biomeOS niches |
+| Spring-as-Niche Guide | `SPRING_NICHE_DEPLOYMENT_GUIDE.md` | How to evolve a spring into a deployable niche |
+| Spring-as-Provider | `SPRING_AS_PROVIDER_PATTERN.md` | biomeOS capability registration pattern |
+| Provenance Trio Integration | `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` | rhizoCrypt + loamSpine + sweetGrass integration |
+| Spring Evolution Issues | `SPRING_EVOLUTION_ISSUES.md` | Active issues discovered by springs |
 
 **Expectation**: Every spring has its own git repo, its own `Cargo.toml`, its own
 `specs/PAPER_REVIEW_QUEUE.md`. Springs reproduce published papers at paper parity.
@@ -121,26 +125,38 @@ Every experiment gets a number, every check gets counted. No hand-waving.
 | Document | File | Summary |
 |----------|------|---------|
 | Primal Registry | `PRIMAL_REGISTRY.md` | Authoritative catalog of every primal + primitives |
-| Inter-Primal Interactions | `SPRING_COORDINATION_AND_VALIDATION.md` | What works today, what's wired, what's next |
-| Licensing & Copyleft | `LICENSING_AND_COPYLEFT.md` | AGPL + ORC + CC-BY-SA + lysogeny + symbiotic exceptions |
+| Inter-Primal Interactions | `INTER_PRIMAL_INTERACTIONS.md` | What works today, what's wired, what's next |
+| Lysogeny Protocol | `LYSOGENY_PROTOCOL.md` | Area denial through open prior art (AGPL-3.0) |
+| scyBorg Licensing | `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` | AGPL + ORC + CC-BY-SA ecosystem licensing |
 | Novel Ferment Transcript | `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` | NFT architecture (memory-bound digital objects) |
 | Upstream Contributions | `UPSTREAM_CONTRIBUTIONS.md` | Standalone crates for crates.io |
 
-## 8. Leverage Guides
+## 8. Leverage Guides (Per-Primal)
 
-All per-entity leverage patterns are consolidated in a single reference:
+Each primal has a leverage guide describing standalone, trio, and ecosystem compositions:
 
-- **`LEVERAGE_GUIDES.md`** — Standalone, trio, and ecosystem compositions for all 13 primals and springs
+| Guide | Primal |
+|-------|--------|
+| `BARRACUDA_LEVERAGE_GUIDE.md` | barraCuda |
+| `BIOMEOS_LEVERAGE_GUIDE.md` | biomeOS |
+| `CORALREEF_LEVERAGE_GUIDE.md` | coralReef |
+| `LOAMSPINE_LEVERAGE_GUIDE.md` | loamSpine |
+| `RHIZOCRYPT_LEVERAGE_GUIDE.md` | rhizoCrypt |
+| `SQUIRREL_LEVERAGE_GUIDE.md` | Squirrel |
+| `SWEETGRASS_LEVERAGE_GUIDE.md` | sweetGrass |
+| `TOADSTOOL_LEVERAGE_GUIDE.md` | toadStool |
+| `petaltongue/` | petalTongue (integration docs) |
 
 ## 9. Handoffs
 
 Session handoffs live in `handoffs/`. They are the working memory between sessions —
 what was done, what's next, what broke, what was discovered.
 
-- **Active**: `handoffs/*.md` — current work items
-- **Fossil record**: `github.com/ecoPrimals/fossilRecord` — completed work, preserved for provenance (3,831+ documents)
+- **Active**: `handoffs/*.md` — current work items (last 48 hours)
+- **Fossil record**: `handoffs/archive/` — completed work, preserved for provenance
 
-Handoffs are archived to the fossilRecord repository when superseded. They are never deleted.
+Handoffs are archived after ~48 hours or when superseded. They are never deleted.
+The archive is the project's geological record.
 
 ## 10. Testing Expectations
 
@@ -178,21 +194,6 @@ Handoffs are archived to the fossilRecord repository when superseded. They are n
 
 ---
 
-## 13. Secrets, Seeds & Publication Hygiene
-
-| Standard | File | Summary |
-|----------|------|---------|
-| Secrets & Seeds | `SECRETS_AND_SEEDS_STANDARD.md` | No static secrets in repos; seeds generated at init/build time; lineage validation |
-| Build Cleanliness | `ARTIFACT_AND_PACKAGING.md` § Build Cleanliness | Strip host paths from binaries; `--remap-path-prefix`; verify with `strings` |
-| Publication Identity | `SECRETS_AND_SEEDS_STANDARD.md` § Publication Identity | ecoPrimals org: `ecoPrimal <ecoPrimal@pm.me>` only |
-
-**Expectation**: No private keys, API tokens, passwords, or production seeds in any
-repository. Tutorial seeds are generated at init time, not committed. Released binaries
-carry build-derived lineage seeds (non-secret, verifiable via guideStone). All
-ecoPrimals org repos use canonical `ecoPrimal` identity in git metadata.
-
----
-
 ## Quick Reference: "Is my work ready?"
 
 Before pushing, verify:
@@ -205,5 +206,3 @@ Before pushing, verify:
 - [ ] Named tolerances for all numerical comparisons
 - [ ] Experiment checks counted and reported
 - [ ] Handoff written if session work is incomplete
-- [ ] No secrets or personal paths in committed code (see `SECRETS_AND_SEEDS_STANDARD.md`)
-- [ ] Git author is `ecoPrimal <ecoPrimal@pm.me>` for ecoPrimals org repos
