@@ -1,8 +1,8 @@
 # The Watering Hole - ecoPrimals Ecosystem Guidance
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
-**Audience**: Any primal, at any point in its evolution  
-**Last Updated**: May 15, 2026 (Sovereignty targets executed: `membrane.primals.eco` TLS LIVE (ACME cert), HTTP parity PASS (68ms vs 89ms), BearDog 3ms RPC, content synced to VPS. L3+L4 telemetry, permanent shadow. Forgejo primary (32 repos), VPS Tower LIVE. 427 methods)
+**Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
+**Last Updated**: March 18, 2026
 
 ---
 
@@ -51,9 +51,11 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BearDog** | Cryptography | All cryptographic operations: signing, encryption, key exchange, hashing, certificates, genetic lineage | Production (A+ LEGENDARY) |
 | **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
-| **ToadStool** | Compute | Universal compute orchestration: CPU, GPU, neuromorphic, WASM, containers. BarraCuda — 643+ WGSL f64 shaders (shader-first: all math is WGSL, zero CPU-only production math). f64 transcendental polyfills, lattice QCD (14 shaders + HMC/CG), HFB physics, linalg GPU-dispatched, PPPM GPU FFT, RBF surrogate GPU pipeline. Runtime f64 probe + probe-informed Fp64Strategy. AlphaFold2 Evoformer primitives (6 attention + 2 structure). HMM forward/backward/Viterbi. Anderson coupling. Grid search ops via ComputeDispatch builder. ESN 11-head multi-target. ODE universal precision (Scalar/op_*). All Springs absorbed at f64. | Production (A++ GOLD) |
+| **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 20,843 tests, 96+ JSON-RPC methods. Node Atomic for sovereign compute. `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. Cross-compile verified (aarch64, armv7 in CI) | Production (A++ GOLD) |
+| **BarraCuda** | Pure Math | 806 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.5, 3,400+ tests | Production (A+) |
+| **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, auto-D0 recovery, VFIO-first boot, graceful shutdown, DRM render node fencing, IOMMU group handling). **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-069). D3hot→D0 sovereign VRAM recovery. Sovereign power management designed (5-state model). Reproducibility checklist for adding new GPUs | Production (Phase 10, Iter 52) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Ecosystem substrate: Neural API, capability routing, NUCLEUS composition, bonding model, Dark Forest coordination | Production (A, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Composition primal: Neural API (260+ translations, 19 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring | Production (v2.49, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -63,7 +65,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 |--------|--------|------|--------|
 | **petalTongue** | Representation | Universal UI: visual, audio, terminal, web, headless. Accessibility-first multi-modal rendering | Production (A++) |
 | **rhizoCrypt** | Ephemeral Memory | Content-addressed DAG engine for working memory. Sessions, Merkle trees, real-time streaming | Production (A+) |
-| **sweetGrass** | Attribution | Semantic provenance tracking. W3C PROV-O compliant braids, fair attribution calculation | Production (A+) |
+| **sweetGrass** | Attribution | Semantic provenance (v0.7.20). W3C PROV-O braids, fair attribution, 24 JSON-RPC methods + tarpc 0.37 + REST + UDS, UniBin, ecoBin, 1,049 tests, Edition 2024, IpcErrorPhase w/ Timeout, extract_rpc_error, extract_capabilities, DispatchOutcome, OrExit, proptest, parking_lot locks, Provenance Trio coordination, Tower Atomic enforced | Production |
 | **LoamSpine** | Permanence | Immutable linear ledger for selective permanence. Loam Certificates for ownership and transfer | Production (A+) |
 | **skunkBat** | Defense | Defensive network security: threat detection, graduated response, baseline profiling | Production |
 
@@ -81,7 +83,7 @@ Primals achieve their greatest power through composition. These are not separate
 
 ### Tower Atomic
 
-**What**: BearDog (crypto) + Songbird (TLS/HTTP) + skunkBat (defense) = Pure Rust HTTPS + trust boundary
+**What**: BearDog (crypto) + Songbird (TLS/HTTP) = Pure Rust HTTPS
 
 **How**: Songbird implements TLS 1.3 protocol logic. BearDog provides all cryptographic operations via JSON-RPC. Neither embeds the other. The result is a fully Pure Rust HTTPS stack with zero C dependencies.
 
@@ -92,10 +94,16 @@ Primals achieve their greatest power through composition. These are not separate
 **What**: The full primal composition orchestrated by biomeOS.
 
 **Layers**:
-- **Tower Atomic** (electron) = BearDog + Songbird + skunkBat (crypto + network + defense)
-- **Node Atomic** (proton) = Tower + ToadStool + barraCuda + coralReef (+ compute)
-- **Nest Atomic** (neutron) = Tower + NestGate + rhizoCrypt + loamSpine + sweetGrass (+ storage + provenance)
-- **Full NUCLEUS** (atom) = Tower + Node + Nest = 10 core primals + 3 meta-tier
+- **Tower Atomic** = BearDog + Songbird (crypto + network)
+- **Node Atomic** = Tower + ToadStool (hardware) + BarraCuda (math)
+- **Nest Atomic** = Tower + NestGate (+ storage)
+- **Full NUCLEUS** = All primals + Squirrel (+ AI)
+
+*Note*: BarraCuda budded from ToadStool into a standalone primal (S93).
+BarraCuda is pure math — WGSL shaders and precision strategy. coralReef
+compiles the math to native GPU binaries. ToadStool discovers and dispatches
+hardware. Springs depend on BarraCuda directly for math without pulling
+ToadStool's runtime or coralReef's compiler.
 
 biomeOS composes these atomics based on what capabilities are available at runtime.
 
@@ -139,11 +147,33 @@ biomeOS composes these atomics based on what capabilities are available at runti
 **How**: A caller requests `capability.call("crypto", "sha256")` and the Neural API discovers which primal provides that capability, routes the request, and returns the result. The caller never needs to know about BearDog specifically.
 
 **Architecture**:
-- Layer 1: Primals (capabilities)
-- Layer 2: biomeOS (orchestration, learning)
-- Layer 3: Niche APIs (domain patterns like RootPulse)
+- Layer 1: Primals (capabilities via JSON-RPC)
+- Layer 2: biomeOS (orchestration, routing, learning)
+- Layer 3: Niche APIs (domain patterns like RootPulse, RPGPT)
 
-The system learns from usage patterns over time, optimizing coordination automatically.
+**Five Coordination Patterns** (all driven by TOML graphs):
+
+| Pattern | Method | Description |
+|---------|--------|-------------|
+| Sequential | `graph.execute` | Nodes in dependency order |
+| Parallel | `graph.execute` | Independent nodes concurrently |
+| ConditionalDag | `graph.execute` | DAG with `condition`/`skip_if` branching |
+| Pipeline | `graph.execute_pipeline` | Streaming via bounded mpsc channels — items flow through nodes immediately |
+| Continuous | `graph.start_continuous` | Fixed-timestep tick loop (e.g., 60Hz for game engines) |
+
+**biomeOS as Composition Primal**: biomeOS is functionally the super-service — the
+primal that composes all other primals into systems. While it sits at the same level
+as other primals (sovereign, self-contained, JSON-RPC first), its unique role is
+orchestrating emergent systems: RootPulse (version control), RPGPT (game engines),
+AlphaFold-class (protein folding), and any other system that emerges as a function
+of primal coordination.
+
+**Streaming (v2.43)**: Pipeline graphs use NDJSON streaming — primals write multiple
+response lines per request. The `AtomicClient::call_stream()` reads them as they
+arrive. No new protocol needed. All primals already have streaming transport.
+
+The PathwayLearner analyzes execution metrics and suggests optimizations (parallelization,
+prewarming, batching, caching) that improve over time.
 
 ---
 
@@ -242,19 +272,29 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **biomeOS + All Primals**: Health monitoring, capability discovery, Neural API routing
 - **biomeOS + petalTongue**: Real-time SSE events for ecosystem visualization
 
-### Operational (May 2026)
+### Wired (biomeOS coordination layer)
 
-- **rhizoCrypt + LoamSpine**: Dehydration (temporal collapse from DAG to linear) — validated via projectNUCLEUS
-- **NestGate + LoamSpine**: Content-addressed storage backing immutable history — validated
-- **sweetGrass + LoamSpine**: Attribution braids anchored to permanent timeline — validated
-- **Provenance trio (rhizoCrypt + LoamSpine + sweetGrass)**: Full pipeline exercised on ironGate (Nest Atomic, 9 primals)
+- **rhizoCrypt + LoamSpine + sweetGrass**: Provenance trio — `rootpulse_commit` graph orchestrates dehydration → sign → store → commit → attribute
+- **Any Spring + Provenance Trio**: `provenance_pipeline` graph — universal experiment provenance
+- **NestGate + LoamSpine**: Content-addressed storage backing immutable history
+
+### primalSpring Coordination (ecosystem self-validation)
+
+- **primalSpring + All NUCLEUS Primals**: Atomic composition testing (Tower, Node, Nest, Full NUCLEUS)
+- **primalSpring + biomeOS**: Graph execution validation — all 5 coordination patterns with real primals
+- **primalSpring + Provenance Trio**: RootPulse emergent system validation (commit, branch, merge, diff, federate)
+- **primalSpring + Songbird Mesh**: Plasmodium formation, gate failure, capability aggregation
+- **primalSpring + neuralSpring + wetSpring + hotSpring + ToadStool + NestGate**: coralForge neural object pipeline
+- **primalSpring + airSpring + wetSpring + neuralSpring**: Cross-spring ecology data flow
+- **primalSpring + fieldMouse + NestGate + sweetGrass**: Edge data ingestion pipeline
+- **primalSpring + petalTongue**: SSE visualization pipeline
+- **primalSpring + Squirrel**: AI coordination via biomeOS capability graph
 
 ### Under Development
 
 - **Songbird + Songbird**: Cross-tower federation, multi-family routing
-- **Spring library-to-binary rewiring**: Springs replacing local barraCuda imports with ecobin IPC
-- **petalTongue DataBinding per spring**: Science outputs as live presentations
-- **sweetGrass braids per spring**: Experiment attribution as structural artifacts
+
+**Detail**: `INTER_PRIMAL_INTERACTIONS.md`
 
 ---
 
@@ -274,96 +314,68 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ## Document Index
 
-### Living Documents (updated regularly)
-- `ECOSYSTEM_EVOLUTION_CYCLE.md` — The water cycle model; current season assessment, convergence trajectory (v1.4.0)
-- `NUCLEUS_SPRING_ALIGNMENT.md` — Canonical spring × atomic alignment matrix (Phase 58)
-- `SPRING_NUCLEUS_AUDIT_MAY2026.md` — 7-dimension audit of all 8 springs, per-spring evolution blurbs
-- `DOWNSTREAM_EVOLUTION_MAY2026.md` — Team communication blurb for spring teams
+### Master Index
+- **`STANDARDS_AND_EXPECTATIONS.md`** — **Start here.** Single-document reference for all ecoPrimals standards, expectations, and conventions. Links to every standard below.
+- **`GLOSSARY.md`** — Definitive terminology for the ecoPrimals ecosystem. Gate, primal, spring, atomic, niche, deploy graph, germination, absorption, delegation, fossil record, and every other term.
+- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, and tooling spec for an ecoPrimals gate. Pop!\_OS, Rust toolchain, Cursor, GPU configuration, directory layout, post-install checklist.
+
+### Architecture Standards
+- `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
+- `ECOBIN_ARCHITECTURE_STANDARD.md` — Universal portability (Pure Rust, cross-compile)
+- `GENOMEBIN_ARCHITECTURE_STANDARD.md` — Autonomous deployment (self-extracting, auto-detect)
+- `SPRING_AS_NICHE_DEPLOYMENT_STANDARD.md` — Springs deploy as biomeOS niches
+- `SPRING_NICHE_DEPLOYMENT_GUIDE.md` — How-to guide for niche deployment
+
+### Communication Standards
+- `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.0 — consolidated, includes platform-agnostic transport + dual protocol)
+- `SEMANTIC_METHOD_NAMING_STANDARD.md` — `domain.verb` API naming conventions
+- `CROSS_SPRING_DATA_FLOW_STANDARD.md` — Time series exchange format
+
+### Security & Networking (birdsong/)
+- `birdsong/BIRDSONG_PROTOCOL.md` — Encrypted UDP discovery (BirdSong)
+- `birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` — Two-seed genetic lineage architecture
+- `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` — Tower Atomic TLS guide
+- `btsp/BEARDOG_TECHNICAL_STACK.md` — BearDog cryptographic foundation
+
+### GPU & Numerical Computing
+- `GPU_F64_NUMERICAL_STABILITY.md` — f64 precision lessons from hotSpring
+- `NUMERICAL_STABILITY_EVOLUTION_PLAN.md` — Fast AND safe math strategy
+- `SOVEREIGN_COMPUTE_EVOLUTION.md` — Pure Rust GPU stack (VFIO, glow plug, power management)
+- `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — Cross-primal sovereign compute guidance
+- `CROSS_SPRING_SHADER_EVOLUTION.md` — How springs evolve barraCuda collectively
+- `SPRING_VALIDATION_ASSIGNMENTS.md` — Each spring validates specific barraCuda primitives
+
+### Strategy & Licensing
+- `LYSOGENY_PROTOCOL.md` — Area denial through open prior art
+- `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` — **Ecosystem licensing standard** (AGPL + ORC + CC-BY-SA)
+- `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture (memory-bound digital objects)
+- `UPSTREAM_CONTRIBUTIONS.md` — Standalone crates for crates.io from ecoPrimals
+
+### Coordination & Patterns
+- `INTER_PRIMAL_INTERACTIONS.md` — Production interaction map and plans
 - `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
+- `SPRING_AS_PROVIDER_PATTERN.md` — biomeOS capability registration
+- `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Provenance trio integration
+- `SPRING_EVOLUTION_ISSUES.md` — Active issues discovered by springs
 
-### Active Standards
-- `BTSP_PROTOCOL_STANDARD.md` — BearDog Transport Security Protocol (Phase 3 complete, 13/13 AEAD)
-- `CAPABILITY_BASED_DISCOVERY_STANDARD.md` — Runtime capability discovery
-- `CAPABILITY_WIRE_STANDARD.md` — Wire format for capability calls
-- `CAPABILITY_DOMAIN_REGISTRY.md` — Domain namespace registry
-- `COMPOSITION_HEALTH_STANDARD.md` — Health check patterns for compositions
-- `COMPOSITION_TICK_MODEL_STANDARD.md` — Tick budget model for real-time compositions
-- `CROSS_SPRING_COORDINATION_STANDARD.md` — Cross-spring validation patterns
-- `DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5-pillar security invariant gate (metadata, ports, network, BTSP, enclave)
-- `DEPLOYMENT_VALIDATION_STANDARD.md` — Deployment validation procedures
-- `DESKTOP_NUCLEUS_DEPLOYMENT.md` — Desktop NUCLEUS deployment guide
-- `ECOBIN_ARCHITECTURE_STANDARD.md` — Universal portability standard
-- `GARDEN_COMPOSITION_ONRAMP.md` — Garden product composition onramp
-- `NUCLEUS_TWO_TIER_CRYPTO_MODEL.md` — Two-tier crypto architecture
-- `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — Pure Rust sovereignty guidance
-- `SECRETS_AND_SEEDS_STANDARD.md` — Seed management and secret handling
-- `SEMANTIC_METHOD_NAMING_STANDARD.md` — API naming conventions
-- `TARGETED_GUIDESTONE_STANDARD.md` — How composed subsystems bud into portable, deployable artifacts (scope graph, data manifest, binary bundle, validation harness, provenance chain, liveSpore tracking)
-- `WORKSPACE_DEPENDENCY_STANDARD.md` — Cargo workspace dependency rules
-- `STANDARDS_AND_EXPECTATIONS.md` — Meta-standard: what standards are and how they evolve
+### Presentation & External Review
+- **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** — **Read before any docs sweep.** Checklist for making a spring/primal independently reviewable by PIs, students, hobbyists, and compliance reviewers. The 5-minute test. Self-assessment template. Common problems and fixes. References `publicRelease/` audience briefs.
 
-### Foundation and Sediment
-- `FOUNDATION_INTEGRATION_GUIDE.md` — How springs, primals, and gardens integrate with `gardens/projectFOUNDATION`
-- `SEDIMENT_LAYER_MODEL.md` — The geological model: how validated results accumulate as load-bearing layers
+### Leverage Guides (Per-Primal)
+- `BARRACUDA_LEVERAGE_GUIDE.md`, `BIOMEOS_LEVERAGE_GUIDE.md`, `CORALREEF_LEVERAGE_GUIDE.md`
+- `LOAMSPINE_LEVERAGE_GUIDE.md`, `PRIMALSPRING_LEVERAGE_GUIDE.md`, `RHIZOCRYPT_LEVERAGE_GUIDE.md`
+- `SQUIRREL_LEVERAGE_GUIDE.md`, `SWEETGRASS_LEVERAGE_GUIDE.md`, `TOADSTOOL_LEVERAGE_GUIDE.md`
+- `PETALTONGUE_LEVERAGE_GUIDE.md`
+- `WETSPRING_LEVERAGE_GUIDE.md`, `NEURALSPRING_LEVERAGE_GUIDE.md`
+- `petaltongue/` — petalTongue integration documentation (biomeOS API, quick start, showcase)
 
-### Visualization and Attribution
-- `SWEETGRASS_SPRING_BRAID_PATTERNS.md` — Per-spring attribution braid patterns
-- `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — Provenance trio integration for springs
-- `petaltongue/VISUALIZATION_INTEGRATION_GUIDE.md` — petalTongue DataBinding spec
-- `petaltongue/PETALTONGUE_SPRING_SCIENCE_MAP.md` — Per-spring visualization channel mapping
+### Spring Composition Guidance (Per-Spring)
+- `airspring/AIRSPRING_COMPOSITION_GUIDANCE.md` — How airSpring composes with other springs and primals
+- `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
-### Reference
-- `GLOSSARY.md` — Ecosystem terminology
-- `LICENSING_AND_COPYLEFT.md` — AGPL-3.0 licensing guidance
-- `PRIMAL_SPRING_GARDEN_TAXONOMY.md` — Primal/spring/garden layer taxonomy
-- `UPSTREAM_CONTRIBUTIONS.md` — Contributions to upstream Rust ecosystem
-- `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md` — External validation strategy
-
-### Sovereign Hosting & Cell Membrane
-- `MEMBRANE_CHANNEL_ARCHITECTURE.md` — External surface design: three membrane channels (Signal/DNS, Relay/NAT, Surface/TLS), deployment models, evolution path, tiering system mappings
-- `SOVEREIGNTY_STANDARDS.md` — Ecosystem sovereignty behaviors: bonding model in infrastructure, content-aware routing, membrane channel standards, credential management, VPS deployment sizing, Forgejo-primary workflow, validation standards
-- `PRIMAL_VS_SOVEREIGNTY_GOALS.md` — Layer separation: primal capabilities (L1) vs security validation (L2) vs sovereignty deployment (L3) vs sovereign composition (L4). Maps overlaps, divergences, and the Rust evolution thread
-- `handoffs/PROJECTNUCLEUS_SOVEREIGN_HOSTING_DNS_HANDOFF_MAY09_2026.md` — Hosting evolution, DNS metadata closure, cell membrane addendum
-- `handoffs/PROJECTNUCLEUS_CELL_MEMBRANE_COMPOSITION_HANDOFF_MAY10_2026.md` — Cell membrane architecture, NUCLEUS composition patterns, neuralAPI deployment, per-team absorption targets
-- `handoffs/PROJECTNUCLEUS_SOVEREIGNTY_EVOLUTION_MAY15_2026.md` — Forgejo primary (32 repos), VPS Tower (6 services), Channel 3 shadow, content-aware routing
-- `handoffs/PROJECTNUCLEUS_MEMBRANE_TELEMETRY_MAY15_2026.md` — L3+L4 continuous membrane telemetry: unified probe script, rolling 7-day summary, permanent shadow mode, SkunkBat correlation
-- `handoffs/PROJECTNUCLEUS_SOVEREIGNTY_TARGETS_EXECUTION_MAY15_2026.md` — Sovereignty targets executed: content sync to VPS, DNS grey-cloud (`membrane.primals.eco`), ACME cert, BearDog probe fix (3ms), HTTP parity PASS
-
-### Interstadial Exit & Stadial Boundary
-- `INTERSTADIAL_EXIT_CRITERIA.md` — Authoritative exit criteria: 5 pillars, gate conditions, stadial boundary definition, external validation drivers
-- `handoffs/PROJECTNUCLEUS_POST_INTERSTADIAL_FINDINGS_UNIBIN_HANDOFF_MAY10_2026.md` — NUCLEUS findings, spring UniBin → plasmidBin readiness, static observer, darkforest v0.2.1
-
-### Targeted GuideStone (LTEE)
-- `TARGETED_GUIDESTONE_STANDARD.md` — Standard for how composed subsystems bud into portable artifacts (budding model, 5 components, cross-platform via ecoBin/genomeBin, liveSpore tracking, data freshness protocol)
-- `handoffs/archive/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md` — LTEE guideStone subsystem: first Targeted GuideStone artifact (Barrick Lab), 7 science modules, 36 paper-spring assignments across 6 springs, three-tier architecture, projectNUCLEUS deployment subsystem
-
-### Deep Debt & Upstream Handbacks
-- `handoffs/PROJECTNUCLEUS_CROSS_ECOSYSTEM_AUDIT_MAY11_2026.md` — Cross-ecosystem audit findings, MethodGate parity, spring skunkBat wiring, barraCuda version skew
-- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_UPSTREAM_HANDBACK_MAY11_2026.md` — Upstream handback: toadStool/squirrel MethodGate, barraCuda crypto delegation, squirrel LocalProcessProvider
-- `handoffs/PROJECTNUCLEUS_DEEP_DEBT_EVOLUTION_SWEEP_HANDOFF_MAY11_2026.md` — Full sweep handoff: composition patterns, NestGate priority, lessons for all teams, what's next for data/compute chains
-- `handoffs/PROJECTNUCLEUS_TRIO_DEEP_DEBT_COMPLETION_HANDOFF_MAY11_2026.md` — Trio completion: Rust modernization (darkforest submodules, tunnelKeeper clone opt, Tier 2 Nelder-Mead), foundation 10/10 threads + TOML-driven scripts, lithoSpore liveSpore wired, zero hardcoded paths, all stale refs reconciled
-- `handoffs/PROJECTNUCLEUS_ATOMIC_DEPLOYMENT_ABSORPTION_MAY13_2026.md` — Atomic deployment phase absorption: composition.deploy.shadow wired, 12 workloads Tier 2, DoT parity scenario, lithoSpore 6/7 modules live, plasmidBin v5.3.0
-- `handoffs/PROJECTNUCLEUS_SHADOW_RUN_EXECUTION_MAY13_2026.md` — Shadow run execution: DoT/tunnel baseline fixes, BearDog TLS shadow LIVE on :8443, proposed API methods resolved, lithoSpore 5/7 PASS 46/46 checks
-
-### Subdirectories
-- `handoffs/` — Cross-primal evolution handoff documents (active + archived in `archive/` and `fossilRecord/`)
-- `petaltongue/` — petalTongue integration documentation
-- `compute-sharing/` — Sovereign compute sharing validation
-- `healthspring/` — healthSpring-specific guidance
-- `airspring/` — airSpring-specific guidance
-- `birdsong/` — BirdSong protocol specification
-- `btsp/` — BTSP protocol details
-- `genomeBin/` — genomeBin tooling
-- `fossilRecord/` — Archived documents from previous consolidation waves
-- `scripts/` — Utility scripts
-- `templates/` — Templates for new primals/springs
-
-### Fossil Record
-Documents superseded by newer standards or absorbed into living documents are
-preserved in `fossilRecord/`. Two consolidation waves:
-
-- `fossilRecord/consolidated-apr2026/` — 56 documents from March-April 2026
-- `fossilRecord/consolidated-may2026/` — 24 documents superseded by Phase 58 audit
+### Handoffs
+- `handoffs/*.md` — Active session handoffs (last 48 hours)
+- `handoffs/archive/` — Fossil record (507 archived handoffs, Feb 2026 – present)
 
 ---
 
@@ -375,151 +387,39 @@ If you are a new primal entering the ecosystem:
 2. **Review PRIMAL_REGISTRY.md** to see what capabilities already exist
 3. **Follow UniBin standard** from day one (single binary, subcommands)
 4. **Target ecoBin** (Pure Rust, zero C deps, cross-compilation)
-5. **Implement IPC** following Universal IPC Standard v3.0
+5. **Implement IPC** following `PRIMAL_IPC_PROTOCOL.md` v3.0
 6. **Advertise capabilities** so biomeOS can discover and coordinate you
 7. **Register your primal** in PRIMAL_REGISTRY.md with your primitives
+8. **Get your face together** per `SPRING_PRIMAL_PRESENTATION_STANDARD.md` — your repo should be reviewable by any of the four external audiences in 5 minutes
 
 You do not need to know about other primals. You need to know what you can do, and how to tell the ecosystem about it.
 
 ---
 
-## Current Ecosystem State (May 2026)
+## Getting Your Face Together
 
-- **13 primals** — all BTSP Phase 3 authenticated (full AEAD encrypted framing), MethodGate 13/13. **Zero critical gaps** — NestGate `content.*` transport parity resolved (Session 60)
-- **427 registered capability methods** (primalSpring canonical, zero drift)
-- **46 cross-architecture binaries** in plasmidBin v5.4.0 (6 target triples, Tier 1 39/39)
-- **primalSpring v0.9.25** — guideStone Level 8 (absorbed), eukaryotic UniBin, 89 experiments (20 tracks), 641 tests, 27 scenarios, two-tier validation (Rust + Live), `CompositionContext` throughout, **zero debt** (Waves 1-12 complete, deep debt sweep done)
-- **8 springs** — all Tier 4 IPC-first (`default = []`, barracuda optional), all eukaryotic UniBin, LTEE reproductions active
-- **13,750+ tests** across the river delta (wetSpring 1,962 · neuralSpring 1,453 · airSpring 1,389 · groundSpring 1,123 · hotSpring 1,042 · healthSpring 1,018 · ludoSpring 862 · primalSpring 641 + metalForge/integration/Python suites)
-- **1 garden** active (esotericWebb from ludoSpring)
-- **projectNUCLEUS** — **Stadial-ready, sovereignty targets executing**. 13-primal Full NUCLEUS, cellMembrane VPS operational (Songbird relay + RustDesk, multi-gate SSH), zero upstream debt. BearDog TLS shadow LIVE on :8443 (H2-12, **3ms RPC** vs 120ms Cloudflare). **Channel 3 TLS LIVE**: `membrane.primals.eco` ACME cert (Let's Encrypt E8), serving real sporePrint. **HTTP parity PASS** (VPS 68ms vs GH Pages 89ms). DoT baseline captured (ACTIVE, 3-8ms). lithoSpore 7/7 modules PASS Tier 2 (75/75 checks). L3+L4 continuous membrane telemetry deployed (permanent shadow mode)
-- **gardens/projectFOUNDATION** — Live scientific knowledge layer: 10 domain threads, 100+ public data source anchors (NCBI/UniProt/KEGG/PDB), 11 target TOMLs across all threads; 10/10 threads with spring seeds (all threads active — EXCEEDED)
-- **LTEE guideStone** — First Targeted GuideStone (projectNUCLEUS subsystem): 7 science modules (7/7 PASS, 75/75 checks), 16 papers in registry, deployment resilience tested (108 unit + 16 integration + 15 chaos tests), USB artifact 5.8M musl-static, `litho deploy-report` TOML output
-- **benchScale** — GPU lifecycle automation (VFIO/IOMMU), pure-Rust SSH + NoCloud ISO, libvirt VM orchestration
-- **agentReagents** — GPU sovereign VM builder: K80 tooling, Titan V patches, verification modules
+Every spring and primal should be independently reviewable by outsiders.
+See **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** for the full checklist,
+but the short version is: a reviewer should be able to do this in 5 minutes:
 
-### Current Phase: INTERSTADIAL — Sovereignty Pre-Wire
+1. Open `README.md` → understand what this does and what it replaces
+2. `cargo test --workspace` → see all tests pass
+3. `cargo run --release --bin validate_<something>` → see explicit PASS/FAIL
+4. Open `CHANGELOG.md` → understand recent evolution
+5. Open `whitePaper/baseCamp/README.md` → see the faculty and science context
 
-All 8 springs completed eukaryotic evolution. The ecosystem is now pre-wiring
-sovereignty capabilities to enable the stadial (external validation) phase.
+Four external audiences will read your repo without context:
 
-**Completed (post-interstadial green):**
-- 8/8 UniBin, certification organelle, scenario registry, CI cross-sync
-- 8/8 skunkBat Rust IPC, `method.register`, `composition.status`, NUCLEUS workloads
-- **8/8 Tier 4 IPC-first** — every spring `default = []`, barracuda optional
-- Zero open upstream gaps — 13/13 MethodGate, 13/13 BTSP AEAD, all L1 debt resolved (NestGate Session 60 closes final transport parity gap)
-- lithoSpore scaffolded (sporeGarden/lithoSpore): 9 crates, 7 science modules
-- LTEE reproductions active: groundSpring B2+B1 COMPLETE, hotSpring B2, wetSpring B7, neuralSpring B1
-- GuideStone convergence: hotSpring L6 (compute trio wired), neuralSpring/healthSpring L5, wetSpring/groundSpring/ludoSpring/airSpring L4
-- benchScale GPU lifecycle + agentReagents K80/Titan V sovereign tooling operational
+| Audience | What They Look For |
+|----------|-------------------|
+| **Faculty / PIs** | What does this replace? How does it compare to commercial tools? Can I verify claims? |
+| **Students / Core Facilities** | How do I build it? How do I run it? Where do I start? |
+| **Hardware Builders / Hobbyists** | What hardware does it need? What can my GPU do? How do I contribute compute? |
+| **Compliance / Institutional Review** | What standards does it meet? What are the dependencies? Is it safe? What's the license? |
 
-**Interstadial Exit Gate** (5 pillars — full details: `INTERSTADIAL_EXIT_CRITERIA.md`):
-
-| Pillar | Gate Condition | Status |
-|--------|---------------|--------|
-| 1. Primal Sovereignty | NestGate `content.put`, BearDog TLS shadow, Songbird NAT, BTSP auth | **GATE MET** — MethodGate 13/13, NestGate transport parity resolved (Session 60), BearDog/Songbird shipped |
-| 2. NUCLEUS Deployments | H2-2b/3a/3b/3c in shadow-run state | Not yet running |
-| 3. ABG Hosting | Thread 1 WCM compositions via provenance trio | Mapped, not all exercised |
-| 4. lithoSpore | 2+ modules PASS Tier 1 with real data | **EXCEEDED** — 6/7 modules PASS Tier 2, ecoBin compliant, Rust validation live |
-| 5. River Delta | 4+ springs `optional=true`, wetSpring < 5 PG, air/neural gS L4 | **GATE MET** — 8/8 Tier 4, 4 PG open, air L4, neural L5 |
-
-### Stadial Preview — External Validation Drives Evolution
-
-The stadial begins when the exit gate clears. External pressure drives evolution:
-
-| External Driver | Validates | Target |
-|----------------|-----------|--------|
-| Cloudflare baselines | BearDog TLS + Songbird NAT parity | H2-3b/3c shadow → cutover |
-| GitHub → Forgejo | CI, plasmidBin, repo sovereignty | H3-02/03/04 |
-| Barrick Lab USB | lithoSpore artifact end-to-end | Phase 5 deployment |
-| Upstream crates | Community acceptance | wgsl-precision, proc-sysinfo |
-| Dimforge/wgmath | Peer WGSL validation | Proof-of-work engagement |
-| Framework parity | Computational correctness | Kokkos, LAMMPS, SciPy |
-| ABG users | Real science on sovereign infra | Foundation Thread 1 |
-
-### Interstadial Remaining Work
-
-**Pillar 1 — Primal Sovereignty Pre-Wire:**
-- ~~MethodGate for toadStool + Squirrel (11/13 → 13/13)~~ **DONE** — 13/13
-- ~~NestGate `content.*` transport parity~~ **RESOLVED** (Session 60, May 11) — all 8 `content.*` methods wired on all 4 transport surfaces (primary dispatch, SemanticRouter, isomorphic IPC, HTTP API). `lifecycle.status` also added. Unblocks H2-05–09, petalTongue sovereign serving, plasmidBin hosting, foundation layers. See `fossilRecord/handoffs-may11-2026-wave9-closure/NESTGATE_SESSION60_TRANSPORT_PARITY_HANDOFF_MAY11_2026.md`
-- BearDog TLS shadow on :8443 (H2-3b) — L4 absorption (upstream shipped)
-- Songbird NAT + VPS relay (H2-3c) — L4 absorption (upstream shipped)
-- petalTongue web mode + NestGate backend (H2-3a) — **UNBLOCKED** (NestGate transport parity shipped)
-- BTSP JupyterHub authenticator dual-auth (H2-2b) — L4 absorption (upstream ready)
-- JH-5 audit forwarding: skunkBat → rhizoCrypt → sweetGrass (Phase 3)
-
-**Downstream-surfaced per-primal debt** (composition gaps exposed by projectNUCLEUS):
-- toadStool: ~~CLI expands `${VAR}` but JSON-RPC `compute.execute` path does not~~ **RESOLVED** — S234 documents IPC contract as pre-resolved only
-- squirrel: ~~`LocalProcessProvider` dev stub, delegation not wired~~ **RESOLVED** — `RemoteComputeProvider` for toadStool IPC delegation shipped
-- barraCuda: ~~embedded crypto~~ **RESOLVED** — bearDog Wave 101 shipped `crypto.hkdf_sha256` + `crypto.hmac_verify` IPC surface
-- loamSpine: ~~`session.commit` API contract mismatch~~ **RESOLVED** — method aliases (`commit.session`, `provenance.commit`) + hex hash acceptance
-- skunkBat: ~~JH-5 Phase 3 audit forwarding~~ **RESOLVED** — cross-primal forwarding to rhizoCrypt + sweetGrass shipped
-- ~~NestGate: `content.*` transport parity~~ **RESOLVED** (Session 60)
-
-**primalSpring validation gap** (closed by Wave 7 + Wave 8):
-- ~~`content` not in `ALL_CAPS` routing table~~ **FIXED** (W7-01)
-- ~~Zero `content.*` scenarios, tests, or graph steps~~ **FIXED** (W7-02/03/04)
-- ~~413-method registry unchecked semantically~~ **FIXED** — inverse drift detection (W7-06); now 427 methods, routing consistency scenario enforced
-- **Wave 7** (contract testing): content domain semantic gates shipped
-- **Wave 8** (compute trio): Node atomic sovereign dispatch contracts shipped — see `handoffs/COMPUTE_TRIO_WAVE8_NODE_ATOMIC_EVOLUTION_MAY11_2026.md`
-
-**Pillar 2 — NUCLEUS Deployments:**
-- Shadow-run state for H2-2b/3a/3b/3c
-- Foundation Threads 4+7 workloads running
-
-**Pillar 3 — ABG Hosting:**
-- Thread 1 WCM compositions through provenance trio
-
-**Pillar 4 — lithoSpore:**
-- ~~groundSpring B2 reproduction~~ **DONE** — Python 9/9 + Rust 10/10 PASS (Wiser 2013 fitness dynamics)
-- ~~groundSpring B1 reproduction~~ **DONE** — Python 8/8 + Rust 8/8 PASS (Barrick 2009 neutral mutation)
-- Integrate groundSpring reproductions into lithoSpore ltee-fitness + ltee-mutation modules
-- Fetch real data from Dryad/NCBI, BLAKE3-hash
-- 2+ modules PASS at Tier 1 (Python) — **now achievable** with groundSpring data
-
-**Pillar 5 — River Delta:** **GATE CONDITIONS MET** (May 11, 2026)
-- ~~airSpring + groundSpring → `optional=true` (Tier 4)~~ **DONE** — **8/8 springs Tier 4**
-- ~~wetSpring: close 4+ of 8 PG gaps~~ **DONE** — 4 closed (PG-06, PG-10, PG-17, PG-18), 4 remain (all external)
-- ~~airSpring/neuralSpring → gS L4~~ **DONE** — airSpring L4, neuralSpring **L5**
-- Foundation seeding: 10/10 threads with spring seeds (all threads active — EXCEEDED)
-- Remaining: LTEE reproductions continue (feeds Pillar 4), foundation Thread 8 seed
-
-**LTEE Targeted GuideStone** (projectNUCLEUS subsystem):
-- First artifact budding from ecosystem into portable deployment
-- 7 science modules, 36 paper-spring assignments across 6 springs
-- Active reproductions: groundSpring B2+B1 **COMPLETE**, hotSpring B2, wetSpring B7, neuralSpring B1
-- Standard: `TARGETED_GUIDESTONE_STANDARD.md`; handoff: `handoffs/LTEE_GUIDESTONE_SUBSYSTEM_HANDOFF_MAY11_2026.md`
-
-### Remaining Spring Gaps (May 14 — ecosystem Wave 13 reconciliation)
-
-| Spring | Version | Tests | gS | Tier 4 | LTEE | Remaining Gaps |
-|--------|---------|------:|:--:|:------:|------|----------------|
-| wetSpring | V168 | 1,962 | L4 | Done | B7 active | barraCuda 0.4.0 absorbed, coralReef v0.1.0 declared |
-| neuralSpring | V160 | 1,453 | L5 | Done | B1 started | Triple-first Tower + skunkBat, coralReef universal compile routing |
-| hotSpring | V168+ | 1,042 | L6 | Done | **B2 DONE** | Compute trio rewire: compile-then-dispatch, circuit breaker, `wgsl_source` param |
-| healthSpring | V64n | 1,018 | L5 | Done | B5/E2/E4 queued | Tower atomic in all graphs (+ skunkBat), capability renames canonical |
-| airSpring | v0.10.0 | 1,389 | L4 | Done | E3 queued | Zero actionable debt, 10 scenarios, 49 capabilities |
-| groundSpring | V142 | 1,123 | L4 | Done | **B3+B4 DONE** | Compute trio deepened (20 IPC methods), GS-015/16/17 filed |
-| ludoSpring | V71 | 862 | L4 | Done | N/A | Compute trio in cells, Foundation T9+T10, coralReef/barraCuda GAPs |
-| primalSpring | v0.9.25 | 641 | L8 | N/A | N/A | **Zero debt** — Waves 1-12, deep debt sweep, 27 scenarios, 427 methods |
-
-### Evolution Cycle Ownership
-
-Gaps are owned by exactly one layer:
-- **L1 (Primals)**: **CLEAN** — 13/13 structural + semantic. NestGate transport parity resolved (Session 60). All downstream-surfaced debt closed
-- **L2 (primalSpring)**: **CLEAN** — canonical 427-method registry, CompositionContext, 27 scenarios, 77 graphs, 73.3% method coverage, deep debt sweep complete (Waves 1-12)
-- **L3 (Springs)**: LTEE reproductions, remaining PG gaps (external), primal composition wiring
-- **L4 (Products)**: NUCLEUS sovereignty horizons H2 shadow runs, NestGate content pipeline, lithoSpore integration
-- **L5 (Foundation)**: Thread coverage 10/10 (EXCEEDED), LTEE data anchoring, provenance validation
-
-See `primalSpring/docs/PRIMAL_GAPS.md` for the full ownership model.
-
-See `SPRING_NUCLEUS_AUDIT_MAY2026.md` for per-spring 7-dimension audit.
-See `ECOSYSTEM_EVOLUTION_CYCLE.md` for the full evolution narrative.
-See `handoffs/archive/post_interstadial_may2026/` for 19 archived closure handoffs.
-See `fossilRecord/handoffs-may11-2026-wave9-closure/` for 34 archived handoffs from the Wave 9 debt closure cycle.
-
-**Active handoffs (51):** See `handoffs/` directory listing. Covers all primals, springs, and products from the May 12-15 atomic deployment, cellMembrane, and sovereignty execution phases. 17 superseded handoffs in `handoffs/archive/`.
+The `publicRelease/` documents in `whitePaper/attsi/non-anon/contact/publicRelease/`
+make ecosystem-wide claims. Each spring and primal must ensure its own presentation
+supports those claims.
 
 ---
 
