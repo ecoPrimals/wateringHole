@@ -1,7 +1,7 @@
 # BearDog Technical Stack & Plans (BTSP)
 
-**Version**: 0.9.0 (Wave 35 — Deep Debt Cleanup III)
-**Last Updated**: April 11, 2026
+**Version**: 0.9.0 (Wave 104 — Deep Debt + FIDO2 IPC)
+**Last Updated**: May 15, 2026
 **Status**: Production Ready
 
 ---
@@ -59,10 +59,10 @@ All transports use **NDJSON** (newline-delimited JSON-RPC 2.0). Each request is 
 │  Any Primal │ ←─ JSON-RPC ────→ │  BearDog    │
 │ (Protocol)  │  NDJSON framing    │  (Crypto)   │
 └─────────────┘                    └─────────────┘
-     Zero crypto code                 96 crypto methods
+     Zero crypto code                 126 JSON-RPC methods
 ```
 
-### JSON-RPC Method Domains (95 methods)
+### JSON-RPC Method Domains (126 methods)
 
 ```
 crypto.*       - Hash, sign, verify, encrypt, decrypt, key exchange
@@ -123,7 +123,7 @@ HsmProviderRegistry → discover() → select(PreferHardware | RequireHardware |
 | **Pure Rust** | 100% — zero C dependencies |
 | **Unsafe Code** | 0 production blocks (`forbid(unsafe_code)` workspace-wide) |
 | **Format** | `cargo fmt` clean |
-| **Tests** | 14,761+ (concurrent; 35 `#[serial]` in `beardog-production`) |
+| **Tests** | 14,940+ (concurrent; 35 `#[serial]` in `beardog-production`) |
 | **Coverage** | 90.51% line (llvm-cov workspace) |
 | **cargo deny** | 4/4 pass (1 advisory ignore: RSA Marvin, 15 transitive version-skips) |
 | **License** | AGPL-3.0-or-later (SPDX headers on all .rs files) |
