@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: May 14, 2026
-**Version**: v1.7.0 (cellMembrane VPS operational, lithoSpore 6/7 Tier 2 LIVE, Foundation 10/10, 8/8 Tier 4, Songbird relay OPERATIONAL)
+**Date**: May 17, 2026
+**Version**: v1.8.0 (452 methods, 13/13 LIVE, cellMembrane VPS operational, lithoSpore 7/7 Tier 2, interstadial exit gate 9.5/10, REPO_MEMBRANE_BOUNDARY formalized)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -54,8 +54,10 @@ Upstream primals absorb math, shaders, and IPC patterns from springs.
 Downstream gets less "snow melt" — fewer new capabilities flowing down.
 Springs focus on validation of what exists, surfacing gaps, tightening.
 
-**Current state (May 12, 2026)**: Interstadial convergence — **Pillar 5 (river delta) MET**,
-shadow run execution is the remaining gate. Phase 32 atomic model evolution complete.
+**Current state (May 17, 2026)**: Interstadial exit gate cleared (9.5/10). Stadial transition
+ready. 452-method registry, 13/13 primals LIVE, all delta springs at zero Wave 20 debt.
+cellMembrane VPS operational (Songbird TURN + RustDesk LIVE, BearDog TLS + Caddy SHADOW).
+REPO_MEMBRANE_BOUNDARY formalized. Infrastructure recreation playbook authored.
 
 **Phase 32 Atomic Model** (May 12):
 
@@ -67,13 +69,13 @@ shadow run execution is the remaining gate. Phase 32 atomic model evolution comp
 | **NUCLEUS** | Atom | Tower + Node + Nest (deduplicated) + meta-tier | 10+3=13 |
 
 - **13/13 primals at zero gate debt**: MethodGate, BTSP AEAD Phase 3, Edition 2024, deny.toml — all clean.
-- **primalSpring v0.9.25**: guideStone **Level 8** (absorbed certification engine), 689+ library tests, 77 deploy graphs, 418 registered methods (302 exercised, 72%), fragment-based composition v3.0.0.
+- **primalSpring v0.9.25**: guideStone **Level 8** (absorbed certification engine), 689+ library tests, 77 deploy graphs, 452 registered methods, fragment-based composition v3.0.0.
 - **Library-to-binary rewiring COMPLETE**: 8/8 springs at **Tier 4** (`default = []`, barraCuda optional). All springs now IPC-first for NUCLEUS deployments.
 - **Active delta springs (May 12, all Tier 4 IPC-first)**:
 
 | Spring | gS | Tests | Key Status |
 |--------|---:|------:|------------|
-| primalSpring | L8 | 689+ | Coordinator — 418 methods, 77 graphs |
+| primalSpring | L8 | 689+ | Coordinator — 452 methods, 80+ graphs |
 | hotSpring | L6 | 1,042 | LTEE B2, 3-GPU sovereign |
 | healthSpring | L5 | 999 | Thread 3 seeded |
 | neuralSpring | L5 | 1,453 | LTEE B1 Py+Rust done |
@@ -463,7 +465,7 @@ their external validation gate.
 ```
 Layer         Phase          Gate / Pressure
 ─────         ─────          ───────────────
-L1 Primals    STADIAL        primalSpring (418 registry, MethodGate, graphs)
+L1 Primals    STADIAL        primalSpring (452 registry, MethodGate, graphs)
 L2 primalSpring  GATE        validates L1, patterns flow to L3/L4
 L3 Springs    INTERSTADIAL   absorbing primal capabilities
 L4 Products   INTERSTADIAL   pre-wiring sovereignty, shadow runs pending
@@ -472,7 +474,7 @@ L5 Foundation INTERSTADIAL   thread coverage, data anchoring
 
 **Upstream primal debt (at the gate)**: **Zero.** All 13 primals pass the
 primalSpring gate — 13/13 MethodGate (JH-0 + JH-2), 13/13 BTSP Phase 3
-AEAD, 418 methods (zero drift), deny.toml (ring + openssl banned).
+AEAD, 452 methods (zero drift), deny.toml (ring + openssl banned).
 
 ## Interstadial Exit Criteria (5 Pillars)
 

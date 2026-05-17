@@ -4,7 +4,7 @@
 > Local copies exist in `primalSpring/wateringHole/` for spring context.
 
 **Date**: May 13, 2026
-**From**: primalSpring v0.9.25 (Phase 58+ — Post-Full-Pull Audit, 418 methods, 76 routing misroutes fixed)
+**From**: primalSpring v0.9.25 (Phase 58+ — Post-Full-Pull Audit, 452 methods)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -23,7 +23,7 @@ propagate to every other spring in the ecosystem.
 | Nest | Neutron | Tower + NestGate + rhizoCrypt + loamSpine + sweetGrass | `nest_atomic` |
 | NUCLEUS | Atom | Tower + Node + Nest (9 unique primals) | `nucleus` |
 | Meta-tier | Cross-atomic | biomeOS + Squirrel + petalTongue | `meta_tier` |
-| **Desktop NUCLEUS** | Full 12 | All atomics + meta, petalTongue `live` | `nucleus_desktop_cell` |
+| **Desktop NUCLEUS** | Full 13 | All atomics + meta, petalTongue `live` | `nucleus_desktop_cell` |
 
 ### Genetics Layer
 

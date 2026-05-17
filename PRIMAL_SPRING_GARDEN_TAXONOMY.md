@@ -257,7 +257,7 @@ The full NUCLEUS → Spring → Garden pipeline has been validated end-to-end:
 
 ```
 NUCLEUS certification (primalSpring)
-  guidestone: 84/86 (6 layers, 12 primals, 11 capabilities)
+  guidestone: 84/86 (6 layers, 13 primals, 11 capabilities)
   exp094:     15/18 composition parity
   graphs:     17/17 deploy graphs parse clean
           ↓

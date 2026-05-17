@@ -2,7 +2,7 @@
 
 # Interstadial Exit Criteria — Full Sovereignty Pre-Wire
 
-**Version**: 1.7 — May 15, 2026 (Dark Forest Glacial Gate PASS, 427 methods, 13/13 LIVE, 9-day baseline captured, membrane 17 PASS, plasmidBin v5.4.0 synced)
+**Version**: 1.7 — May 15, 2026 (Dark Forest Glacial Gate PASS, 452 methods, 13/13 LIVE, 9-day baseline captured, membrane 17 PASS, plasmidBin v5.4.0 synced)
 **Status**: EXIT GATE CLEARED — stadial transition ready
 **Phase**: Interstadial → Stadial (entered April 16, 2026; exit gate cleared May 15, 2026)
 
@@ -58,7 +58,7 @@ two categories: **upstream debt** (primal code gaps at the gate) and
 **All** primals pass the gate:
 - MethodGate (JH-0 + JH-2): **13/13** — squirrel shipped `method_gate.rs`
 - BTSP Phase 3 AEAD: **13/13**
-- 427-method registry: zero drift (was 418, +9 methods including btsp.capabilities)
+- 452-method registry: zero drift (was 418, +9 methods including btsp.capabilities)
 - Edition 2024, deny.toml (ring + openssl), plasmidBin: **13/13**
 
 **Downstream-surfaced per-primal debt (composition gaps, not gate-blocking):**
@@ -124,7 +124,7 @@ data accruing.
 **Exit gate**: Thread 1 WCM compositions exercised through NUCLEUS deploy
 graphs (Nest + Node atomics) with provenance trio producing verifiable output.
 **STRUCTURALLY MET** (May 15): 12/12 workloads have output schemas, `composition.deploy(graph)`
-live mode validates 12/12 primal nodes LIVE. Cross-primal auth (H3-07) remains
+live mode validates 13/13 primal nodes LIVE. Cross-primal auth (H3-07) remains
 permissive for pipeline execution — CompositionContext federation is stadial work.
 
 ### Pillar 4: lithoSpore
@@ -292,7 +292,7 @@ Tier::Live validation (wire-level with external observers) deferred to stadial p
 ### Gate Status: **CLEARED** (May 15, 2026)
 
 All five interstadial pillars met or exceeded. Dark Forest Glacial Gate PASS at
-Tier::Rust. 427-method registry. 13/13 primals LIVE. 9-day Cloudflare baseline
+Tier::Rust. 452-method registry. 13/13 primals LIVE. 9-day Cloudflare baseline
 captured (TLS p95=101ms; BearDog shadow 2ms). cellMembrane membrane suite
 17 PASS / 0 FAIL. plasmidBin v5.4.0 checksums verified (13/13).
 
@@ -332,17 +332,45 @@ The stadial ends when:
 H3 (primal-only: JupyterHub → petalTongue, GitHub → Forgejo, plasmidBin →
 NestGate) may span multiple stadial cycles.
 
+### Outage Simulation Readiness (added May 17, 2026)
+
+The stadial will impose real constraints. Simulated outages during the
+interstadial build recovery muscle. See `INFRASTRUCTURE_RECREATION_AND_OUTAGE_PLAYBOOK.md`
+in `gen4/architecture/` for the full catalog.
+
+| Scenario | Layer | Recovery Time | Status |
+|----------|-------|--------------|--------|
+| VPS loss | Outer membrane | ~15 min | Ready (deploy_membrane.sh) |
+| WAN loss | ISP boundary | Reconnect | Ready (DAG checkpoint pattern) |
+| Single gate power | Intracellular | Boot + rejoin | Ready (systemd, Songbird mesh) |
+| LAN partition | 10G backbone | Cable reconnect | Ready (append-only DAG merge) |
+| Forgejo down | Inner membrane Git | Docker restart | Ready (on-disk state) |
+| Full site power | All intracellular | 10 min boot | Ready (systemd, sweetGrass sync) |
+
+### Infrastructure Sovereignty Posture (added May 17, 2026)
+
+| Component | Declared | Operational | Gap |
+|-----------|----------|-------------|-----|
+| Git hosting | Forgejo primary | GitHub primary | `forgejo_mirror.sh` not run on dev |
+| CI/CD | Forgejo Actions | GitHub Actions (74 workflows) | Port pending |
+| cellMembrane | Forgejo-only (aspirational) | GitHub Private | Transitional |
+| VPS | Owned operations | DigitalOcean rented | Sovereign HW future |
+| DNS | Self-hosted (future) | Registrar-managed | knot-dns planned |
+
+See `REPO_MEMBRANE_BOUNDARY.md` for repo-level classification.
+
 ---
 
 ## Cross-References
 
 - `ECOSYSTEM_EVOLUTION_CYCLE.md` — water cycle model, season definitions
-- `primalSpring/docs/PRIMAL_GAPS.md` — L1–L5 gap ownership model, Wave 8/9/10 tracking
-- `primalSpring/docs/CROSS_SPRING_PARITY_SCORECARD.md` — per-spring metrics, Phase 32 gap sweep
-- `primalSpring/docs/TEMPORAL_ECOSYSTEM_REVIEW_MAY12_2026.md` — full ecosystem temporal review
-- `primalSpring/docs/LIVE_SCIENCE_API.md` — Tier 2 wire contract for downstream
-- `primalSpring/docs/DOWNSTREAM_PATTERN_GUIDE.md` — spring-to-product pattern handoff
-- `projectNUCLEUS/specs/EVOLUTION_GAPS.md` — H1/H2/H3 horizon tracker
+- `REPO_MEMBRANE_BOUNDARY.md` — inner/outer membrane repo classification, push policies
+- `SOVEREIGNTY_STANDARDS.md` — calibrate → shadow → cutover protocol
+- `INFRASTRUCTURE_RECREATION_AND_OUTAGE_PLAYBOOK.md` — cold-start rebuild, outage simulations
+- `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` — VPS deployment operations
+- `projectNUCLEUS/specs/EVOLUTION_GAPS.md` — H1/H2/H3 horizon tracker, Validation Gate Matrix
+- `primalSpring/docs/PRIMAL_GAPS.md` — L1–L5 gap ownership model
+- `primalSpring/docs/CROSS_SPRING_PARITY_SCORECARD.md` — per-spring metrics
 - `lithoSpore/docs/UPSTREAM_GAPS.md` — per-module spring dependency analysis
 - `TARGETED_GUIDESTONE_STANDARD.md` — Targeted GuideStone budding pattern
 - `EXTERNAL_VALIDATION_AND_UPSTREAM_STRATEGY.md` — external validation tiers

@@ -116,7 +116,7 @@ the running primal confirms them.
 
 ## Transport Discovery Matrix
 
-Live validation (April 13, 2026 — Phase 40 NUCLEUS Complete) confirmed **ALL 12
+Live validation (April 13, 2026 — Phase 40 NUCLEUS Complete) confirmed **ALL 13
 primals support UDS with newline-delimited JSON-RPC**. 19/19 exp094 PASS.
 
 | Primal | Newline TCP | HTTP TCP | UDS (filesystem) | UDS (abstract) | tarpc | Methods |
@@ -139,7 +139,7 @@ on at least one of: filesystem UDS or TCP. HTTP-wrapped JSON-RPC does not
 satisfy this (it requires HTTP framing, breaking raw stream clients).
 
 **Current compliance (April 13, 2026):**
-- PASS: **ALL 12 primals** now have UDS filesystem sockets with JSON-RPC support.
+- PASS: **ALL 13 primals** now have UDS filesystem sockets with JSON-RPC support.
 - Key resolutions: rhizoCrypt UDS (LD-06, S37), loamSpine UDS-first (LD-09, v0.9.16),
   petalTongue `--socket` flag (v1.6.6), barraCuda JSON-RPC via BTSP guard line (LD-10),
   ToadStool BTSP auto-detect (LD-04), squirrel filesystem socket alongside abstract.

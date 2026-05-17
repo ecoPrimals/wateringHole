@@ -10,12 +10,12 @@
 
 ## What Is the Desktop NUCLEUS?
 
-The Desktop NUCLEUS is the **full 12-primal stack** deployed from pre-built
+The Desktop NUCLEUS is the **full 13-primal stack** deployed from pre-built
 plasmidBin binaries with petalTongue in `live` mode as the desktop UI surface.
 It is the standard substrate that springs compose on top of and gardens deploy
 for users.
 
-**The NUCLEUS is exactly 12 primals. No spring binaries. No dev artifacts.**
+**The NUCLEUS is exactly 13 primals. No spring binaries. No dev artifacts.**
 
 | Atomic | Particle | Primals | Role |
 |--------|----------|---------|------|
@@ -29,7 +29,7 @@ for users.
 - `primalspring_guidestone` — certification tool
 - Spring binaries — Rust science validation, not composition nodes
 
-**A spring IS a composition of the 12 primals**, defined by a cell graph.
+**A spring IS a composition of the 13 primals**, defined by a cell graph.
 
 ---
 
@@ -37,7 +37,7 @@ for users.
 
 ### Prerequisites
 
-- `infra/plasmidBin` with 12/12 musl-static binaries
+- `infra/plasmidBin` with 13/13 musl-static binaries
 - A display server (X11/Wayland) for petalTongue `live` mode
 
 ### Deploy
@@ -61,7 +61,7 @@ PETALTONGUE_LIVE=true ./tools/composition_nucleus.sh start
 ### Verify
 
 ```bash
-# Health check all 12 primals (IPC liveness probes)
+# Health check all 13 primals (IPC liveness probes)
 ./tools/desktop_nucleus.sh status
 
 # Deep validation (exercises actual capabilities per atomic + crypto tiers)
@@ -96,7 +96,7 @@ echo '{"jsonrpc":"2.0","method":"proprioception.get","id":1}' | \
 
 ### Atomic Structure
 
-The 12 primals compose from three atomics plus a meta tier. Fragment
+The 13 primals compose from three atomics plus a meta tier. Fragment
 definitions live in `primalSpring/graphs/fragments/`:
 
 ```
@@ -115,7 +115,7 @@ happens without passing through the electron shell (BearDog + Songbird).
 ### Deployment Paths
 
 **Primary: composition_nucleus.sh** (shell-managed)
-- Starts all 12 primals from plasmidBin in dependency order
+- Starts all 13 primals from plasmidBin in dependency order
 - Creates family-namespaced UDS sockets
 - Performs health check on each primal
 - Creates capability domain symlinks
@@ -124,7 +124,7 @@ happens without passing through the electron shell (BearDog + Songbird).
 - biomeOS coordinator primal manages lifecycle
 - Auto-discovery of capabilities
 - Health monitoring with 10s interval
-- Currently launches 5 core primals; full 12 is roadmap
+- Currently launches 5 core primals; full 13 is roadmap
 
 ### Cell Graph
 
@@ -134,7 +134,7 @@ The canonical desktop cell graph is:
 primalSpring/graphs/cells/nucleus_desktop_cell.toml
 ```
 
-This graph defines all 12 primals in biomeOS-compatible format with:
+This graph defines all 13 primals in biomeOS-compatible format with:
 - `coordination = "continuous"` (long-running desktop session)
 - `security_model = "btsp"` on every node
 - `petaltongue` with `mode = "live"`
@@ -234,7 +234,7 @@ See `GARDEN_COMPOSITION_ONRAMP.md` for the full garden contract.
 
 | File | Purpose |
 |------|---------|
-| `graphs/cells/nucleus_desktop_cell.toml` | Canonical 12-primal desktop cell graph |
+| `graphs/cells/nucleus_desktop_cell.toml` | Canonical 13-primal desktop cell graph |
 | `graphs/cells/nucleus_desktop_overlay_template.toml` | Template for spring domain overlays |
 | `graphs/cells/cells_manifest.toml` | Index of all deployable cell graphs |
 | `graphs/fragments/tower_atomic.toml` | Tower atomic definition (electron) |
@@ -243,7 +243,7 @@ See `GARDEN_COMPOSITION_ONRAMP.md` for the full garden contract.
 | `graphs/fragments/meta_tier.toml` | Meta tier definition (cross-atomic) |
 | `graphs/fragments/nucleus.toml` | Full NUCLEUS = tower + node + nest |
 | `tools/desktop_nucleus.sh` | Desktop NUCLEUS launcher |
-| `tools/composition_nucleus.sh` | Full composition launcher (12 primals) |
+| `tools/composition_nucleus.sh` | Full composition launcher (13 primals) |
 | `tools/nucleus_composition_lib.sh` | Reusable composition wiring library |
 
 ---
@@ -263,7 +263,7 @@ See `GARDEN_COMPOSITION_ONRAMP.md` for the full garden contract.
 
 ## plasmidBin Binary Status (April 28, 2026)
 
-All 12 core primals are musl-static x86_64:
+All 13 core primals are musl-static x86_64:
 
 ```
 beardog      — static-pie linked (5.1M)   ✓

@@ -84,7 +84,7 @@ Every primal repository with its own git repo MUST have:
 
 ### Current Wiring Status (May 2026)
 
-All 12 primals with their own repositories are wired:
+All 13 primals with their own repositories are wired:
 bearDog, songbird, toadStool, barraCuda, coralReef, rhizoCrypt, loamSpine,
 sweetGrass, biomeOS, squirrel, petalTongue, skunkBat.
 

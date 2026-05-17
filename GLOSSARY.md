@@ -3,22 +3,27 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: May 9, 2026
+**Last Updated**: May 17, 2026
 
 ---
 
 ## The Three Organizations
 
-The ecosystem is distributed across three GitHub organizations, each with a
-distinct role:
+The ecosystem is distributed across three organizations on both GitHub (outer
+membrane) and Forgejo (inner membrane, `git.primals.eco`):
 
 | Organization | Role | What Lives Here |
 |-------------|------|----------------|
-| **[ecoPrimals](https://github.com/ecoPrimals)** | Infrastructure primals | barraCuda, toadStool, coralReef, biomeOS, BearDog, NestGate, Songbird, sweetGrass, rhizoCrypt, loamSpine, petalTongue, Squirrel, bingoCube. Also infrastructure repos: sporePrint, wateringHole, whitePaper, plasmidBin, benchScale. |
+| **[ecoPrimals](https://github.com/ecoPrimals)** | Infrastructure primals | barraCuda, toadStool, coralReef, biomeOS, BearDog, NestGate, Songbird, sweetGrass, rhizoCrypt, loamSpine, petalTongue, Squirrel, skunkBat, bingoCube, sourDough. Also infrastructure repos: sporePrint, wateringHole, whitePaper, plasmidBin, benchScale. |
 | **[syntheticChemistry](https://github.com/syntheticChemistry)** | Science validation springs | wetSpring, hotSpring, airSpring, neuralSpring, groundSpring, healthSpring, ludoSpring, primalSpring. Springs validate that primals produce correct science. |
-| **[sporeGarden](https://github.com/sporeGarden)** | User-facing products (gen4) | esotericWebb (CRPG engine), helixVision (genomics platform, planned). Products compose primals into tools for scientists, creatives, educators, and others. |
+| **[sporeGarden](https://github.com/sporeGarden)** | User-facing products (gen4) | projectNUCLEUS (sovereignty layer), projectFOUNDATION (knowledge layer), lithoSpore (verification chassis), esotericWebb (UI/agentic), cellMembrane (private ops — VPS deployment). |
 
-**Why three?** Primals build capabilities. Springs validate those capabilities
+**Dual Git hosts**: Forgejo is declared primary (inner membrane), GitHub is
+operationally primary (outer membrane). See `REPO_MEMBRANE_BOUNDARY.md` for
+the full repo classification: inner-only (cellMembrane), dual-push (most repos),
+or outer-only (fossilRecord, sporePrint).
+
+**Why three orgs?** Primals build capabilities. Springs validate those capabilities
 against published science. Products deliver validated capabilities to users.
 The organizations mirror this separation: infrastructure, validation, delivery.
 
@@ -546,6 +551,26 @@ such claim, so the legal uncertainty is everyone else's problem.
 
 See `gen3/about/LICENSING_STRATEGY.md` §8 for the full analysis.
 
+### cellMembrane
+
+The **selective permeability layer** of the ecosystem — a private operational
+repo managed by `projectNUCLEUS` (sporeGarden org) that deploys the
+**fieldMouse Tower** composition to external substrate (VPS). cellMembrane
+controls what crosses between intracellular (LAN/gates) and extracellular
+(public internet) layers.
+
+Current state (May 2026):
+- **Relay** (Songbird TURN): LIVE
+- **Remote** (RustDesk hbbs/hbbr): LIVE
+- **TLS** (BearDog reverse proxy): SHADOW LIVE
+- **Content** (Caddy + NestGate): SHADOW LIVE
+
+cellMembrane is operationally on GitHub Private but should migrate to
+Forgejo-only when the inner membrane is operationally stable. It contains
+sensitive configuration (SSH keys, API tokens, deployment scripts) that
+MUST NOT leak to public repos. See `REPO_MEMBRANE_BOUNDARY.md` and
+`CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md`.
+
 ### fieldMouse
 
 The **minimal deployable structure** for the ecoPrimals ecosystem. Where a gate
@@ -777,6 +802,7 @@ the validator assumes the network is hostile.
 | **Symbiotic exception** | AGPL Section 7 grant to allies based on reciprocal benefit |
 | **Suppression inversion** | Owning nothing makes the project untargetable |
 | **AI authorship paradox** | Copyright uncertainty harms exclusivity claimants, not the commons |
+| **cellMembrane** | Selective permeability layer — private ops repo deploying fieldMouse Tower to VPS for relay/TLS/content channels |
 | **fieldMouse** | Minimal deployable ecoPrimals — smallest atomic/chimera for embedded/sensor/edge niches |
 | **guideStone** | Verification class — ecoBin quality grade certifying reproducible, self-proving, reference-traceable output |
 | **primalSpring** | Coordination spring — validates ecosystem composition, graph execution, emergent systems, bonding |

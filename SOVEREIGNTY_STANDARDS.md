@@ -205,23 +205,37 @@ Validated by `darkforest_membrane.sh` (MEM-01 through MEM-15):
 
 ## Forgejo as Primary Git Host
 
-### Standard
-- **Forgejo is source of truth** for all ecoPrimals repositories
+### Standard (aspirational — see operational reality below)
+- **Forgejo is declared source of truth** for all ecoPrimals repositories
 - **GitHub is the push mirror** (outer membrane) — public visibility, CDN
 - **Dual-push workflow**: `git push forgejo && git push origin`
 - **Credential caching**: `.netrc` with API token (chmod 600)
 
+### Operational Reality (May 2026)
+
+Forgejo is **declared primary** but **operationally secondary**. All local
+clones have `origin` → `github.com` with no `forgejo` remote configured.
+`forgejo_mirror.sh` exists but hasn't been run on dev machines. All CI
+runs on GitHub Actions. See `REPO_MEMBRANE_BOUNDARY.md` for the full
+repo classification (inner-only / dual-push / outer-only) and migration path.
+
+**cellMembrane** is the only private repo in the sporeGarden org on GitHub.
+It should move to Forgejo-only when Forgejo is operationally stable.
+
 ### Organization Mapping
 | Forgejo Org | GitHub Org | Repo Count |
 |-------------|-----------|------------|
-| sporeGarden | sporeGarden | 5 |
+| sporeGarden | sporeGarden | 5 (4 public + 1 private: cellMembrane) |
 | ecoPrimals | ecoPrimals | 19 |
 | syntheticChemistry | syntheticChemistry | 8 |
 
 ### Migration Path
-1. **Current**: Forgejo primary, GitHub mirror, manual dual-push
-2. **Next**: Forgejo Actions for CI (74 workflow files to port)
-3. **Future**: GitHub becomes read-only mirror (Forgejo webhook push)
+1. **Current**: GitHub operationally primary, Forgejo aspirational
+2. **Near-term**: Run `forgejo_mirror.sh` to add `forgejo` remotes, begin dual-push
+3. **Mid-term**: Port `notify-sporeprint.yml` to Forgejo Actions, validate CI parity
+4. **Long-term**: GitHub becomes read-only mirror (Forgejo post-receive hook)
+
+See: `REPO_MEMBRANE_BOUNDARY.md` for detailed repo classification and push policy
 
 ---
 
