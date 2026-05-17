@@ -86,9 +86,7 @@ Every primal repository with its own git repo MUST have:
 
 All 13 primals with their own repositories are wired:
 bearDog, songbird, toadStool, barraCuda, coralReef, rhizoCrypt, loamSpine,
-sweetGrass, biomeOS, squirrel, petalTongue, skunkBat.
-
-nestGate does not yet have its own repository. Workflow is staged on disk.
+sweetGrass, biomeOS, squirrel, petalTongue, skunkBat, nestGate.
 
 ## Key Scripts
 
