@@ -130,6 +130,69 @@ cryptographic proof from BearDog and a permanent ledger entry from loamSpine.
 
 ---
 
+## Transaction Semantics and Partial Completion
+
+The trio commit flow is **not atomic** — each primal operates independently
+over JSON-RPC. Consumers must handle partial completion gracefully.
+
+### Partial Completion States
+
+| State | rhizoCrypt | loamSpine | sweetGrass | Validity | Consumer Action |
+|-------|-----------|-----------|------------|----------|----------------|
+| **Full** | DAG complete | Entry sealed | Braid committed | Complete provenance | Record all IDs |
+| **DAG + spine** | DAG complete | Entry sealed | Unreachable | Valid provenance without attribution | Record DAG + spine; note missing braid |
+| **DAG only** | DAG complete | Unreachable | Unreachable | Ephemeral provenance (no permanence) | Record DAG; flag as unanchored |
+| **None** | Unreachable | — | — | No provenance | Science still runs; record `recorded: false` |
+
+### Rules for Consumers
+
+1. **A DAG session without a braid is valid partial provenance.** The merkle
+   root still covers the computation — it just lacks a W3C PROV-O attribution
+   envelope. Consumers SHOULD record the session ID and flag it for braid
+   backfill when sweetGrass becomes reachable.
+
+2. **A braid without a spine entry is valid attribution without permanence.**
+   The attribution is recorded in sweetGrass but not anchored in the immutable
+   ledger. Consumers SHOULD record the braid ID and attempt spine anchoring
+   later.
+
+3. **There is no rollback.** DAG sessions that complete cannot be undone —
+   they are append-only. If spine or braid fails after DAG completion, the
+   DAG session remains valid and can be referenced by future spine/braid calls.
+
+4. **Partial state MUST be reported in output.** Consumers must expose which
+   primals were reached (lithoSpore uses `primals_reached: Vec<String>` in
+   `Tier3Session`). This enables auditors to distinguish "provenance was
+   partial" from "provenance was not attempted."
+
+5. **Never error on partial provenance.** Domain logic (science, validation,
+   product features) MUST NOT fail because provenance recording was partial.
+   The pattern: `try_record_tier3()` returns `Ok(session)` even with reduced
+   `primals_reached` — only returns `Err` when zero primals respond.
+
+### lithoSpore Reference Implementation
+
+```rust
+// From litho-core/src/provenance.rs — try_record_tier3()
+let dag_ep = discover("dag").ok_or("rhizoCrypt not reachable")?;  // Hard requirement
+let spine_ep = discover("spine").ok_or("loamSpine not reachable")?;
+let braid_ep = discover("braid").ok_or("sweetGrass not reachable")?;
+
+// Phase 1: DAG (required)
+let dag_session_id = rpc_call_extract(&dag_ep, "dag.session.create", ...)?;
+// ... append events, complete session ...
+
+// Phase 2: Spine (best-effort after DAG)
+let spine_id = rpc_call_extract(&spine_ep, "spine.create", ...)
+    .unwrap_or_else(|_| "pending".into());
+
+// Phase 3: Braid (best-effort after spine)
+let braid_id = rpc_call_extract(&braid_ep, "braid.create", ...)
+    .unwrap_or_else(|_| "pending".into());
+```
+
+---
+
 ## JSON-RPC Methods Reference
 
 ### rhizoCrypt (capability: `dag`)

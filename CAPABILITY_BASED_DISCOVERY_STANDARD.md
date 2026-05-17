@@ -97,6 +97,37 @@ in `$XDG_RUNTIME_DIR/biomeos/`.** This means:
 4. **Socket cleanup on shutdown.** Primals MUST remove their socket files
    (and symlinks) on graceful shutdown. Stale socket files pollute discovery.
 
+### Socket Ownership Lifecycle (per lithoSpore R4, May 17 2026)
+
+lithoSpore probes `$XDG_RUNTIME_DIR/ecoPrimals/discovery.sock` for Songbird
+discovery but never creates it. This section formalizes socket ownership.
+
+| Socket | Owner (binds) | Consumers (connect) | Created By | Removed By |
+|--------|--------------|--------------------:|------------|------------|
+| `biomeos/<primal>.sock` | Individual primal process | Any composition consumer | Primal on startup | Primal on shutdown |
+| `biomeos/<domain>.sock` | Symlink (created by primal) | Tier 3 capability discovery | Primal on startup | Primal on shutdown |
+| `ecoPrimals/discovery.sock` | **songBird** | Any consumer needing `ipc.resolve` | songBird on startup | songBird on shutdown |
+| `ecoPrimals/biomeos.sock` | **biomeOS** | Consumers needing `capability.discover` | biomeOS orchestrator | biomeOS orchestrator |
+
+**Rules:**
+
+1. **Only one process binds a socket.** If songBird crashes, no other process
+   should attempt to bind `discovery.sock`. Consumers probe and degrade to
+   the next discovery tier.
+
+2. **Stale socket detection.** Before connecting, consumers SHOULD send a
+   health probe (`health.liveness`). If the socket exists but the probe
+   times out (>2s), treat the socket as stale and skip to the next tier.
+
+3. **biomeOS vs songBird scope.** biomeOS owns orchestration-level sockets
+   (`capability.discover`, `signal.dispatch`). songBird owns transport-level
+   sockets (`ipc.resolve`, `discovery.announce`). Neither creates the other's
+   socket.
+
+4. **Crash recovery.** On restart, a primal SHOULD `unlink()` any pre-existing
+   socket at its path before `bind()`, to clear stale entries from a prior
+   crash. This is already standard for Unix domain sockets.
+
 ## Neural API `capability.call` — The Loose Standard
 
 This is the recommended way for primals to invoke capabilities across the ecosystem:
