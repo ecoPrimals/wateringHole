@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: March 18, 2026
+**Last Updated**: May 17, 2026
 
 ---
 
@@ -55,7 +55,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BarraCuda** | Pure Math | 806 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.5, 3,400+ tests | Production (A+) |
 | **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, auto-D0 recovery, VFIO-first boot, graceful shutdown, DRM render node fencing, IOMMU group handling). **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-069). D3hot→D0 sovereign VRAM recovery. Sovereign power management designed (5-state model). Reproducibility checklist for adding new GPUs | Production (Phase 10, Iter 52) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Composition primal: Neural API (260+ translations, 19 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring | Production (v2.49, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Composition primal: Neural API (260+ translations, 19 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring, `signal.dispatch` composition collapse, `primal.announce` atomic self-registration | Production (v3.57, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -65,7 +65,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 |--------|--------|------|--------|
 | **petalTongue** | Representation | Universal UI: visual, audio, terminal, web, headless. Accessibility-first multi-modal rendering | Production (A++) |
 | **rhizoCrypt** | Ephemeral Memory | Content-addressed DAG engine for working memory. Sessions, Merkle trees, real-time streaming | Production (A+) |
-| **sweetGrass** | Attribution | Semantic provenance (v0.7.20). W3C PROV-O braids, fair attribution, 24 JSON-RPC methods + tarpc 0.37 + REST + UDS, UniBin, ecoBin, 1,049 tests, Edition 2024, IpcErrorPhase w/ Timeout, extract_rpc_error, extract_capabilities, DispatchOutcome, OrExit, proptest, parking_lot locks, Provenance Trio coordination, Tower Atomic enforced | Production |
+| **sweetGrass** | Attribution | Semantic provenance (v0.7.35). W3C PROV-O braids, fair attribution, 37 canonical methods + 10 wire-name aliases, tarpc 0.37 + REST + UDS, UniBin, ecoBin, 1,522 tests, Edition 2024, GAP-36 wire reconciliation, Provenance Trio coordination, Tower Atomic enforced | Production |
 | **LoamSpine** | Permanence | Immutable linear ledger for selective permanence. Loam Certificates for ownership and transfer | Production (A+) |
 | **skunkBat** | Defense | Defensive network security: threat detection, graduated response, baseline profiling | Production |
 
@@ -375,7 +375,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Handoffs
 - `handoffs/*.md` — Active session handoffs (last 48 hours)
-- `handoffs/archive/` — Fossil record (507 archived handoffs, Feb 2026 – present)
+- `handoffs/archive/` — Fossil record (69 archived handoffs, May 2026 — earlier epochs consolidated to fossilRecord)
 
 ---
 
