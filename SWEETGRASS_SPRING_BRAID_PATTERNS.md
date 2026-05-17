@@ -376,4 +376,18 @@ From `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md`:
 
 ---
 
+## Downstream Consumers: Ferment Transcript Pattern
+
+Springs that produce braids may hand them to **guideStone artifacts**
+(gardens) for portable provenance. lithoSpore is the first consumer of
+this pattern: it stores upstream braid IDs in `data.toml` and verifies
+the chain when online. The braid must be **self-describing** — a
+guideStone on a USB stick cannot query sweetGrass, but it can document
+the braid ID and verify it when reconnected.
+
+See `handoffs/LITHOSPORE_FERMENT_TRANSCRIPT_BRAID_HANDOFF_MAY17_2026.md`
+for the contract between upstream springs and lithoSpore.
+
+---
+
 **License**: AGPL-3.0-or-later

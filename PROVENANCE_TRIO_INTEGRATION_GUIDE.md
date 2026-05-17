@@ -375,6 +375,9 @@ economic model.
 - License metadata in trio (scyBorg Phase 1 — schema in existing metadata maps)
 - Cross-spring provenance braids in production compositions
 - plasmidBin binary rebuild cadence for trio fixes
+- **Ferment transcript pattern** — upstream springs hand portable braids to
+  guideStone artifacts (lithoSpore is the first consumer;
+  see `handoffs/LITHOSPORE_FERMENT_TRANSCRIPT_BRAID_HANDOFF_MAY17_2026.md`)
 
 ### Medium Term
 
@@ -382,6 +385,7 @@ economic model.
 - Loam certificate mesh for cross-gate provenance
 - `ProvenanceQueryable` trait implementation in rhizoCrypt
 - sunCloud economic integration — radiating attribution becomes value distribution
+- Braid-chain verification — guideStone Tier 3 provenance referencing upstream braids
 
 ---
 
@@ -394,6 +398,7 @@ economic model.
 - `primalSpring/docs/PRIMAL_GAPS.md` — gap registry (PG-52 resolved, PG-53 resolved)
 - `whitePaper/gen4/economics/NOVEL_FERMENT_TRANSCRIPTS.md` — NFT economics
 - `whitePaper/economics/SUNCLOUD_ECONOMIC_MODEL.md` — Radiating attribution
+- `handoffs/LITHOSPORE_FERMENT_TRANSCRIPT_BRAID_HANDOFF_MAY17_2026.md` — ferment transcript / braid handoff contract for guideStone artifacts
 
 ---
 

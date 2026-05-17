@@ -265,6 +265,24 @@ a stronger provenance claim than software-only timestamping.
 
 ---
 
+## Two-Tier Data Model
+
+The USB ships **summary statistics** (~3.4 MB total across all datasets) —
+the same numbers published in peer-reviewed papers. Full upstream data
+(raw sequencing reads, breseq outputs) ranges from 10–200 GB per dataset
+and lives at SRA/NCBI, fetchable via `litho fetch --full` when online.
+
+Upstream springs that computed the summaries from raw data record
+provenance via the trio (rhizoCrypt + loamSpine + sweetGrass) and hand
+the **braid** to lithoSpore. The braid IDs are stored in `data.toml` and
+verified when NUCLEUS is reachable. Airgapped, the braid is documentation;
+online, it's a verifiable chain.
+
+See `handoffs/LITHOSPORE_FERMENT_TRANSCRIPT_BRAID_HANDOFF_MAY17_2026.md`
+for the upstream contract.
+
+---
+
 ## Cross-References
 
 - `TARGETED_GUIDESTONE_STANDARD.md` — guideStone artifact standard, `liveSpore.json` schema
@@ -273,5 +291,6 @@ a stronger provenance claim than software-only timestamping.
 - `DOWNSTREAM_PATTERN_GUIDE.md` — spring → lithoSpore → sporePrint pipeline
 - `FOUNDATION_INTEGRATION_GUIDE.md` — Foundation thread targets consumed by lithoSpore
 - `sporePrint/CONTENT_GUIDE.md` — sporePrint publishing pipeline
-- `handoffs/CATHEDRAL_DEEP_DEBT_AUDIT_MAY13_2026.md` — lithoSpore debt resolution
+- `handoffs/archive/CATHEDRAL_DEEP_DEBT_AUDIT_MAY13_2026.md` — lithoSpore debt resolution (archived)
 - `plasmidBin/deploy_membrane.sh` — cellMembrane deployment with geo-delocalized gate support
+- `handoffs/LITHOSPORE_FERMENT_TRANSCRIPT_BRAID_HANDOFF_MAY17_2026.md` — ferment transcript / braid handoff contract
