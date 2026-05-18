@@ -103,17 +103,38 @@ accumulating after crashes. If your primal doesn't do this, add it.
 
 ---
 
-## Impact Summary
+## Impact Summary (Updated May 18 — Post-Absorption Sweep)
 
 | Layer | Action | Priority | Status |
 |-------|--------|----------|--------|
 | primalSpring (consumer) | Connect-probe + dead cache | DONE | `socket_is_alive()`, `DEAD_SOCKET_CACHE` |
-| biomeOS (server) | Startup cleanup of `biomeos/*.sock` | MEDIUM | **OPEN** — R9 |
-| songbird (server) | Startup cleanup of stale sockets | LOW | **OPEN** — R10 |
-| All primals | PID file alongside socket | LOW | **OPEN** — R11 |
+| biomeOS (server) | Startup cleanup of `biomeos/*.sock` | MEDIUM | **ABSORBED** — CHANGELOG confirms socket hygiene |
+| songbird (server) | Startup cleanup of stale sockets | LOW | **ABSORBED** — CHANGELOG confirms socket hygiene |
+| All primals | PID file alongside socket | LOW | **DEPRIORITIZED** — consumer-side connect-probe provides equivalent liveness |
 | plasmidBin | `doctor.sh` stale socket check | LOW | **RESOLVED** — stale socket section added |
-| All primals | `unlink()` before `bind()` | — | Self-audit (existing standard) |
-| skunkBat | `unlink()` before `bind()` + shutdown cleanup | — | **CONFIRMED** — v0.2.0 (`transport/mod.rs:120`, `ipc/mod.rs:96-104`) |
+| plasmidBin | `stop_gate.sh` post-kill socket cleanup | — | **RESOLVED** — cleans `biomeos/`, `ecoprimals/`, `/tmp/biomeos/` after stopping |
+| plasmidBin | `start_primal.sh` pre-start socket cleanup | — | **RESOLVED** — removes stale socket at `--socket` path before bind |
+| All primals | `unlink()` before `bind()` | — | **13/14 CONFIRMED** — see absorption table below |
+| **barraCuda** | `unlink()` before `bind()` at 2 sites | LOW | **RESOLVED** — `transport.rs` `remove_file` at both bind sites + legacy symlink cleanup |
+
+### Absorption Table (May 18 sweep)
+
+| Primal | Absorbed | Evidence |
+|--------|:--------:|----------|
+| bearDog | YES | fault tests + integration tests |
+| biomeOS | YES | CHANGELOG + CURRENT_STATUS |
+| coralReef | YES | ecosystem.rs + tarpc_transport |
+| loamSpine | YES | CHANGELOG + uds.rs |
+| nestgate | YES | socket_config.rs + isomorphic_ipc |
+| petalTongue | YES | unix_socket_server + server |
+| rhizoCrypt | YES | CHANGELOG + uds.rs + uds_tests |
+| skunkBat | YES | ipc/mod.rs |
+| songbird | YES | platform/unix.rs + android.rs |
+| sourDough | YES | scaffold template generates clean |
+| squirrel | YES | CHANGELOG + DEPLOYMENT_GUIDE |
+| sweetGrass | YES | CHANGELOG + uds.rs + roundtrip tests |
+| toadStool | YES | S264: 6/6 sites, CLI+Display fixed, 9,028 tests |
+| **barraCuda** | **YES** | `transport.rs`: `remove_file` before bind at both sites + legacy symlink cleanup |
 
 ## Degradation Posture
 
