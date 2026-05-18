@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: May 17, 2026
-**Version**: v1.8.0 (452 methods, 13/13 LIVE, cellMembrane VPS operational, lithoSpore 7/7 Tier 2, interstadial exit gate 9.5/10, REPO_MEMBRANE_BOUNDARY formalized)
+**Date**: May 18, 2026
+**Version**: v1.9.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0, Wave 22 complete, fossilization pass, next waves prepped)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -54,10 +54,14 @@ Upstream primals absorb math, shaders, and IPC patterns from springs.
 Downstream gets less "snow melt" — fewer new capabilities flowing down.
 Springs focus on validation of what exists, surfacing gaps, tightening.
 
-**Current state (May 17, 2026)**: Interstadial exit gate cleared (9.5/10). Stadial transition
-ready. 452-method registry, 13/13 primals LIVE, all delta springs at zero Wave 20 debt.
-cellMembrane VPS operational (Songbird TURN + RustDesk LIVE, BearDog TLS + Caddy SHADOW).
-REPO_MEMBRANE_BOUNDARY formalized. Infrastructure recreation playbook authored.
+**Current state (May 18, 2026)**: Interstadial exit gate cleared (9.5/10). Stadial transition
+ready. 456-method registry, 13/13 primals LIVE, all delta springs at zero Wave 20 debt.
+Wave 22 stadial gate push absorbed — **13/13 primals responded and evolved**. All 3 wetSpring
+upstream asks IMPLEMENTED. 5/7 composition gaps RESOLVED. plasmidBin manifest v5.5.0.
+Major bumps: toadStool 0.2.0, coralReef 0.2.0 (A++), skunkBat 0.2.0, sweetGrass 0.7.36,
+biomeOS v3.61 (composition pipelines, NucleusMode::Full, braid signals, enrichment).
+bearDog: ring/rustls reconciled + ACME design. songbird: btsp.capabilities + primal.announce.
+All primals: stability tiers, canonical envelope, primal.announce. cellMembrane VPS operational.
 
 **Phase 32 Atomic Model** (May 12):
 
@@ -69,13 +73,13 @@ REPO_MEMBRANE_BOUNDARY formalized. Infrastructure recreation playbook authored.
 | **NUCLEUS** | Atom | Tower + Node + Nest (deduplicated) + meta-tier | 10+3=13 |
 
 - **13/13 primals at zero gate debt**: MethodGate, BTSP AEAD Phase 3, Edition 2024, deny.toml — all clean.
-- **primalSpring v0.9.25**: guideStone **Level 8** (absorbed certification engine), 689+ library tests, 77 deploy graphs, 452 registered methods, fragment-based composition v3.0.0.
+- **primalSpring v0.9.25**: guideStone **Level 8** (absorbed certification engine), 689+ library tests, 77 deploy graphs, 456 registered methods, fragment-based composition v3.0.0.
 - **Library-to-binary rewiring COMPLETE**: 8/8 springs at **Tier 4** (`default = []`, barraCuda optional). All springs now IPC-first for NUCLEUS deployments.
 - **Active delta springs (May 12, all Tier 4 IPC-first)**:
 
 | Spring | gS | Tests | Key Status |
 |--------|---:|------:|------------|
-| primalSpring | L8 | 689+ | Coordinator — 452 methods, 80+ graphs |
+| primalSpring | L8 | 689+ | Coordinator — 456 methods, 80+ graphs |
 | hotSpring | L6 | 1,042 | LTEE B2, 3-GPU sovereign |
 | healthSpring | L5 | 999 | Thread 3 seeded |
 | neuralSpring | L5 | 1,453 | LTEE B1 Py+Rust done |
@@ -209,11 +213,12 @@ You compose proven capabilities into products.
 **Your job**: Define your niche composition graph. biomeOS executes it.
 Your validation is that the product works for users.
 
-**Current state**: esotericWebb V7 demonstrates the pattern. 342 tests, ~91%
-coverage, 7 primal domains consumed via PrimalBridge, all degrading gracefully.
-Deploy graphs compose from NUCLEUS fragments (`tower_atomic`, `node_atomic`,
-`nest_atomic`, `meta_tier`). Game science absorbed locally — no spring runtime
-dependencies. Neural API fallback provides transparent AI evolution.
+**Current state**: esotericWebb V9 demonstrates the pattern. Wave 20 absorption
+complete, Neural API signal adoption wired. 7 primal domains consumed via
+PrimalBridge, all degrading gracefully. Deploy graphs compose from NUCLEUS
+fragments (`tower_atomic`, `node_atomic`, `nest_atomic`, `meta_tier`). Game
+science absorbed locally — no spring runtime dependencies. Neural API fallback
+provides transparent AI evolution.
 
 **Current priority**: Exercise composition end-to-end as springs confirm
 composition parity. File capability gaps back through wateringHole handoffs.
@@ -266,7 +271,7 @@ stronger. This is not parallel development — it's compound evolution.
 | BearDog | 36+ | Already composable (crypto.sign, btsp.session — stable schemas) | **READY** |
 | Songbird | 134+ | Already composable (discovery.*, capability.* — stable schemas) | **READY** |
 | NestGate | 43+ | Already composable (storage.store, storage.retrieve — stable on UDS) | **READY** |
-| biomeOS | 3.04+ | Graph execution correctness for multi-primal compositions | **PARTIAL** |
+| biomeOS | 3.61 | Graph execution, composition pipelines, enrichment, NucleusMode::Full (13 primals), 16 braid signal graphs, stability tiers | **READY** |
 
 ### Modernization Debt (parallel work while blockers resolve)
 
@@ -465,7 +470,7 @@ their external validation gate.
 ```
 Layer         Phase          Gate / Pressure
 ─────         ─────          ───────────────
-L1 Primals    STADIAL        primalSpring (452 registry, MethodGate, graphs)
+L1 Primals    STADIAL        primalSpring (456 registry, MethodGate, graphs)
 L2 primalSpring  GATE        validates L1, patterns flow to L3/L4
 L3 Springs    INTERSTADIAL   absorbing primal capabilities
 L4 Products   INTERSTADIAL   pre-wiring sovereignty, shadow runs pending
@@ -474,7 +479,7 @@ L5 Foundation INTERSTADIAL   thread coverage, data anchoring
 
 **Upstream primal debt (at the gate)**: **Zero.** All 13 primals pass the
 primalSpring gate — 13/13 MethodGate (JH-0 + JH-2), 13/13 BTSP Phase 3
-AEAD, 452 methods (zero drift), deny.toml (ring + openssl banned).
+AEAD, 456 methods (zero drift), deny.toml (ring + openssl banned).
 
 ## Interstadial Exit Criteria (5 Pillars)
 
@@ -568,6 +573,92 @@ ends when shadow runs prove parity and external deployments succeed.
 - Mobility edge crossed: isolated sovereign nodes begin to conduct
 - Every computation is its own presentation (petalTongue universal surface)
 - Every result is its own reproducibility proof (sweetGrass universal braiding)
+
+---
+
+## Next Evolution Waves (May 18, 2026)
+
+The ecosystem has hit a natural inflection: upstream primals are stadial-gate
+clean (13/13 zero debt, 456 methods), the interstadial exit gate is cleared
+(9.5/10), and wetSpring's sovereign pipeline is live. The remaining work is
+methodical convergence toward full stadial: shadow runs, E2E science studies,
+downstream team pairing, and the 2 remaining composition gaps.
+
+### Wave 23: wetSpring E2E Study Completion
+
+**Owner**: wetSpring team (southGate)
+**Priority**: HIGH — first full ecosystem E2E proof
+**Blockers**: None (sovereign pipeline live, trio wired)
+
+wetSpring's Barrick 2009 study is running live with sovereign provenance.
+Tenaillon 2016 (264 clones) is queued. This is the ecosystem's first complete
+end-to-end proof: live science → primal composition → provenance braids →
+lithoSpore validation → replication. Completing this study validates the
+entire pipeline from mountain to ocean.
+
+- Barrick 2009: 7 clones, live sovereign pipeline, braids shipping
+- Tenaillon 2016: 264 clones, SRA download in progress, compute.fan_out ready
+- ferment transcript braids → lithoSpore ingestion
+- Cross-tier parity: Python vs Rust numerical agreement for all datasets
+
+### Wave 24: Shadow Run Execution
+
+**Owner**: projectNUCLEUS, bearDog, songbird, nestGate teams
+**Priority**: HIGH — stadial requires shadow parity proof
+**Blockers**: H2-2b (BTSP JupyterHub dual-auth) ready to start
+
+The interstadial exit was structural — shadow runs prove operational parity.
+Each shadow validates that a sovereign component can replace its commercial
+counterpart without regression.
+
+| Shadow | Sovereign | Commercial | Status |
+|--------|-----------|------------|--------|
+| TLS termination | bearDog :8443 | Cloudflare TLS | H2-12 LIVE (10ms vs 120ms) |
+| NAT traversal | songbird relay | cloudflared tunnel | Ready (TURN client shipped) |
+| Content hosting | nestGate + petalTongue | GitHub Pages | Ready (transport parity shipped) |
+| Auth | bearDog BTSP + JupyterHub | OAuth2 proxy | H2-2b ready |
+
+### Wave 25: Primal-Spring Pairing (Stadial Depth)
+
+**Owner**: primalSpring (coordination), all teams
+**Priority**: MEDIUM — stadial-era ongoing work
+**Blockers**: Waves 23-24 in progress
+
+As the stadial drives external pressure, primals and springs will pair off
+for deeper integration. The pairing is based on composition gaps and domain
+affinity:
+
+| Primal | Paired With | Domain |
+|--------|-------------|--------|
+| barraCuda + coralReef + toadStool | hotSpring, wetSpring | GPU compute, sovereign dispatch |
+| nestGate + provenance trio | wetSpring, lithoSpore | Storage, provenance braids |
+| bearDog + songbird | projectNUCLEUS | TLS shadow, NAT cutover |
+| squirrel | neuralSpring | AI inference, model routing |
+| biomeOS | all springs | Composition orchestration |
+| petalTongue | all springs | Visualization, DataBinding |
+
+### Wave 26: Remaining Composition Gaps
+
+**Owner**: Respective primal teams
+**Priority**: LOW (enrichment, not blocking)
+
+| # | Gap | Owner | Notes |
+|---|-----|-------|-------|
+| 3 | GPU API alignment (`submit_and_map`) | barraCuda / wetSpring | HMMA execution path, coralReef codegen |
+| 8 | Cross-gate dispatch via songbird | songbird / biomeOS | Phase 2 songbird evolution |
+| R5 | `nest.store` signal dispatch | biomeOS | MEDIUM — biomeOS signal graph wiring |
+| R7 | `spore.instantiate` atomic VM provisioning | biomeOS | LOW — biomeOS v3.61 has the route |
+
+### Wave 27: projectFOUNDATION Thread Saturation
+
+**Owner**: projectFOUNDATION, contributing springs
+**Priority**: MEDIUM — stadial external validation
+
+Thread coverage targets for full provenance-anchored science:
+- Thread 1 WCM: 0/24 validated → needs ABG compositions through trio
+- Thread 4 (environmental genomics): wetSpring + airSpring seeding
+- Thread 10 (provenance): healthSpring gap documented, trio pipeline live
+- All other threads: sources seeded, validation in progress
 
 ---
 

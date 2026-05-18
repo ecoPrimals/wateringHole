@@ -129,7 +129,7 @@ fn dark_forest_graph_compliance() {
 }
 ```
 
-Springs that already CI-validate against the 452-method registry can add
+Springs that already CI-validate against the 456-method registry can add
 Dark Forest checks as an additional axis in the same test suite.
 
 ### Minimum Spring Requirements

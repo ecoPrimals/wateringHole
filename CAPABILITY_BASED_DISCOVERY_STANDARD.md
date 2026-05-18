@@ -1,7 +1,7 @@
 # Capability-Based Discovery Standard
 
-**Version:** 1.2.0
-**Date:** April 2, 2026 (updated from 1.1.0 March 25, 2026)
+**Version:** 1.3.0
+**Date:** May 18, 2026 (updated: connect-probe liveness + dead socket cache + startup cleanup)
 **Status:** Active — all primals and springs MUST adopt this
 
 ## Principle
@@ -127,6 +127,20 @@ discovery but never creates it. This section formalizes socket ownership.
 4. **Crash recovery.** On restart, a primal SHOULD `unlink()` any pre-existing
    socket at its path before `bind()`, to clear stale entries from a prior
    crash. This is already standard for Unix domain sockets.
+
+5. **Connect-probe liveness (May 18, 2026).** File-exists checks (`path.exists()`)
+   are insufficient for socket discovery — stale socket files from crashed processes
+   remain on disk and pass existence checks. All discovery paths MUST use a connect-probe
+   (`UnixStream::connect()` with ≤50ms timeout) to verify a listener exists before
+   returning a socket as "discovered". Dead sockets SHOULD be negatively cached for
+   the session to avoid repeated ~100ms probe costs per stale socket. Reference:
+   `primalSpring::ipc::discover::socket_is_alive()`.
+
+6. **Startup socket directory cleanup (UPSTREAM — biomeOS).** biomeOS SHOULD scan
+   its socket directory (`$XDG_RUNTIME_DIR/biomeos/`) on startup and remove any
+   `.sock` files without a listening process. Consumer-side probes are defense-in-depth;
+   the authoritative fix is server-side cleanup. PID files alongside sockets enable
+   instant `kill(pid, 0)` checks without connect overhead.
 
 ## Neural API `capability.call` — The Loose Standard
 

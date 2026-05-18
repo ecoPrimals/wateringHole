@@ -2,7 +2,7 @@
 
 # Interstadial Exit Criteria — Full Sovereignty Pre-Wire
 
-**Version**: 1.7 — May 15, 2026 (Dark Forest Glacial Gate PASS, 452 methods, 13/13 LIVE, 9-day baseline captured, membrane 17 PASS, plasmidBin v5.4.0 synced)
+**Version**: 1.8 — May 18, 2026 (Wave 22 stadial gate absorbed: 13/13 primals evolved, 456 methods, 5/7 composition gaps resolved, plasmidBin v5.5.0, 3 upstream asks implemented)
 **Status**: EXIT GATE CLEARED — stadial transition ready
 **Phase**: Interstadial → Stadial (entered April 16, 2026; exit gate cleared May 15, 2026)
 
@@ -58,7 +58,7 @@ two categories: **upstream debt** (primal code gaps at the gate) and
 **All** primals pass the gate:
 - MethodGate (JH-0 + JH-2): **13/13** — squirrel shipped `method_gate.rs`
 - BTSP Phase 3 AEAD: **13/13**
-- 452-method registry: zero drift (was 418, +9 methods including btsp.capabilities)
+- 456-method registry: zero drift (was 418, +9 methods including btsp.capabilities)
 - Edition 2024, deny.toml (ring + openssl), plasmidBin: **13/13**
 
 **Downstream-surfaced per-primal debt (composition gaps, not gate-blocking):**
@@ -292,9 +292,9 @@ Tier::Live validation (wire-level with external observers) deferred to stadial p
 ### Gate Status: **CLEARED** (May 15, 2026)
 
 All five interstadial pillars met or exceeded. Dark Forest Glacial Gate PASS at
-Tier::Rust. 452-method registry. 13/13 primals LIVE. 9-day Cloudflare baseline
+Tier::Rust. 456-method registry. 13/13 primals LIVE. 9-day Cloudflare baseline
 captured (TLS p95=101ms; BearDog shadow 2ms). cellMembrane membrane suite
-17 PASS / 0 FAIL. plasmidBin v5.4.0 checksums verified (13/13).
+17 PASS / 0 FAIL. plasmidBin v5.5.0 checksums verified (13/13).
 
 **Interstadial scoring: 9.5/10.** Remaining: cross-primal auth federation (H3-07)
 and `validate_ltee_b7_mutation_accumulation` binary (both stadial-phase items).
