@@ -4,7 +4,7 @@
 > Local copies exist in `primalSpring/wateringHole/` for spring context.
 
 **Date**: May 13, 2026
-**From**: primalSpring v0.9.25 (Phase 58+ — Post-Full-Pull Audit, 452 methods)
+**From**: primalSpring v0.9.25 (Phase 58+ — Post-Full-Pull Audit, 456 methods)
 **License**: AGPL-3.0-or-later
 
 ---

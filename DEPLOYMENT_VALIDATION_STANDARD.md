@@ -75,6 +75,13 @@ When songBird is live, the entire ecosystem runs port-free on UDS.
 requests it. Without `--tcp-port`, the primal MUST still be reachable
 via its UDS socket.
 
+**Stale socket hygiene (May 18, 2026):** Primals MUST `unlink()` their
+socket before `bind()` on startup. Primals SHOULD write a `{name}.pid`
+file alongside the socket so consumers can verify liveness via `kill(pid, 0)`
+without incurring connect overhead. On graceful shutdown, primals MUST
+remove both the socket and PID file. See `CAPABILITY_BASED_DISCOVERY_STANDARD.md`
+§5-6 for the consumer-side connect-probe and negative caching patterns.
+
 ### 3. CLI Convergence (MANDATORY)
 
 Per `UNIBIN_ARCHITECTURE_STANDARD.md` v1.1, the `server` subcommand MUST

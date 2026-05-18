@@ -80,13 +80,13 @@ scenario-based testing, not by NUCLEUS deployment.
 | **barraCuda** | GPU compute, WGSL shaders, precision routing | 72 | SHIPPED (v0.4.0) |
 | **coralReef** | Shader compilation, FECS stability | 40+ | SHIPPED (Sprint 7) |
 
-**Total**: 452 methods across 13 primals. Zero open upstream gaps.
+**Total**: 456 methods across 13 primals. Zero open upstream gaps.
 8/8 springs at zero debt, 13,750+ tests.
 
 ### What "Shipped" Means at Layer 1
 
 A primal capability is shipped when:
-- The method exists in the registry (452 canonical)
+- The method exists in the registry (456 canonical)
 - It passes primalSpring scenarios (27 scenarios, 77 graphs)
 - It has BTSP Phase 3 AEAD (13/13 primals)
 - It passes MethodGate enforcement (13/13)
@@ -262,7 +262,7 @@ A request arrives at primals.eco:
 
 | Requirement | Layer | Status |
 |-------------|-------|--------|
-| All 13 primal capabilities shipped | L1 | DONE (452 methods) |
+| All 13 primal capabilities shipped | L1 | DONE (456 methods) |
 | All primal APIs secure (MethodGate, BTSP) | L2 | DONE (13/13 enforced) |
 | Gate security validated (5-layer + gate) | L2 | DONE (267+ PASS) |
 | VPS membrane validated | L2 | DONE (17 PASS) |
@@ -429,7 +429,7 @@ physics and coordination constraints, not sovereignty failures.
 ## Tracking: Where Are We Today?
 
 ```
-Layer 1 (Primal Caps):     ██████████  COMPLETE — 452 methods, 13/13 primals, zero upstream gaps
+Layer 1 (Primal Caps):     ██████████  COMPLETE — 456 methods, 13/13 primals, zero upstream gaps
 Layer 2 (Security):        ██████████  COMPLETE — Horizon 1 resolved, darkforest + gate + membrane PASS
 Layer 3 (Sovereignty):     ██████░░░░  IN PROGRESS — TLS LIVE (ACME cert), HTTP parity PASS, 4 shadows LIVE, 4 not started
 Layer 4 (Composition):     ██░░░░░░░░  EARLY — Tower on VPS (no biomeOS), Full NUCLEUS on gate
