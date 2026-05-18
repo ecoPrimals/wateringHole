@@ -313,7 +313,7 @@ tile shapes, pointer ABI). Ready for barraCuda integration.
 Not actionable until toadStool Phase C lands. coralReef compile path is
 ready (`shader.compile.*` IPC surface operational, including `shader.compile.gemm`).
 
-Total test count: 3165 (as of Sprint 11, May 14 2026).
+Total test count: 3181 (as of Sprint 12, May 14 2026).
 
 ### Sprint 11 — hotSpring Audit Resolutions (May 14, 2026)
 
@@ -334,6 +334,21 @@ overflow-correct integer multiply — callers should decompose manually.
 is the next frontier operation after `ImageQuery`/`suq` and requires `.texref`
 texture descriptor + `tex.*` sampled-texture instructions.
 
+### Sprint 12 — RayQuery PTX Emission (May 14, 2026)
+
+**Phase B — RT core activation** is now wired. `Statement::RayQuery` compiles
+for SM75+ targets with all five operations: `Initialize`, `Proceed`,
+`GenerateIntersection`, `ConfirmIntersection`, `Terminate`.
+`Expression::RayQueryGetIntersection` returns the full 10-field
+`RayIntersection` struct (kind, t, instance data, barycentrics, front_face).
+
+The emitted PTX uses RT comment stubs (`// rt.trace.*`) marking hardware
+insertion points. toadStool's acceleration structure dispatch will activate
+these paths on live hardware. The compiler wiring is complete — WGSL ray query
+shaders compile end-to-end for SM75+ targets.
+
+4 new tests: Initialize+Proceed, GetIntersection, Terminate, SM70 rejection.
+
 ### Sprint 10 — hotSpring Audit Resolutions (May 15, 2026)
 
 **SubgroupSize/NumSubgroups builtins (naga_translate)**:
@@ -346,6 +361,56 @@ hotSpring's `sum_reduce_subgroup_f64.wgsl` shader.
 (f64 nested struct member fix + CallResult type resolution). Test
 `deformed_wavefunction_f64_sm70` passes. hotSpring failure is plasmidBin harvest
 lag — once ecoBin updates, their 9/9 shader barrier will be green.
+
+## Full-GPU Silicon Exploitation — Future Horizons (May 14, 2026)
+
+coralReef now compiles compute shaders, tensor-core GEMM, and image/texture
+operations (ImageSample, textureGather, ImageAtomic, WorkGroupUniformLoad —
+Sprint 11). This engages roughly 55% of GPU silicon. The vision going forward
+is **full silicon exploitation** — every hardware unit doing useful work.
+
+### Phased Roadmap
+
+| Phase | Silicon | What Ships | Ecosystem Impact |
+|-------|---------|-----------|-----------------|
+| **A (current)** | ~55% (shader + tensor + TMU) | Compute shaders, HMMA GEMM, subgroups, image ops | hotSpring QCD, barraCuda math, ludoSpring GPU physics |
+| **B (near)** | ~65% (+ RT cores) | `RayQuery` in compute: Initialize/Proceed/GetIntersection | ludoSpring `game.gpu.batch_raycast`, hotSpring BVH spatial, petalTongue shadow probes |
+| **C (medium)** | ~85% (+ rasterizer + ROPs) | Vertex + Fragment shader compilation: SPH, graphics builtins, derivatives, discard | Full render pipeline, petalTongue sovereign 3D, ludoSpring game visuals |
+| **D (far)** | ~95% (+ mesh/task) | Mesh shaders, task shaders | AAA-equivalent rendering without vendor SDK |
+
+### toadStool Implications
+
+- **Phase B (RayQuery)**: toadStool dispatch surface will need to support
+  acceleration structure builds and RT core invocation. coralReef will emit
+  the PTX; toadStool owns the BVH construction and dispatch path.
+- **Phase C (Graphics)**: toadStool will need graphics pipeline state object
+  management (blend, depth, stencil, viewport) and draw command submission.
+  coralReef provides compiled vertex + fragment binaries; toadStool assembles
+  the pipeline and dispatches draw calls.
+- **Phase D (Mesh)**: toadStool will need mesh/task dispatch infrastructure.
+
+### barraCuda Implications
+
+- **Phase B**: barraCuda can route spatial queries (nearest-neighbor, collision
+  detection) through RT cores instead of brute-force compute kernels. The
+  `game.gpu.batch_raycast` capability maps directly to this.
+- **Phase C**: Not directly relevant to barraCuda's math/tensor role.
+
+### ludoSpring / petalTongue Implications
+
+- **Phase B**: GPU raycasting for game visibility, pathfinding, line-of-sight.
+- **Phase C**: Full sovereign game rendering — the Symphony Architecture becomes
+  a reality. CPU game logic orchestrates; GPU compute handles physics; GPU
+  graphics handles rendering. All compiled by coralReef, dispatched by toadStool.
+
+### The Universal Principle
+
+Real physics simulations and videogame physics are both math dispatched to
+parallel hardware. The rasterizer is a special-purpose unit that answers
+"which pixels does this triangle cover?" — a pure function. There is no
+fundamental difference between a lattice QCD HMC trajectory and a game
+physics frame: both are parallel math with a time budget. coralReef's role
+is to compile that math — all of it — to every piece of silicon available.
 
 ---
 

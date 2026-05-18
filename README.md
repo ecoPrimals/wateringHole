@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 17, 2026
+**Last Updated**: May 17, 2026 (barraCuda Sprint 70: Wave 22 stadial gate compliance — `primal.announce` + `btsp.capabilities` + stability tier annotations; 75 methods)
 
 ---
 
