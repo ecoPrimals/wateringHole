@@ -249,7 +249,7 @@ confirms the provenance chain.
 | Tier 1 (Python) | 7/7 modules with notebooks |
 | Tier 3 (Primal) | JSON-RPC client wired, no primals in test yet |
 | Cross-tier parity | `litho parity` wired for all 7 modules |
-| Unit/integration tests | 117 |
+| Unit/integration tests | 125 |
 | Chaos tests | 10 fault injection scenarios |
 | CLI subcommands | 15 |
 | Clippy | Zero warnings (pedantic) |

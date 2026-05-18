@@ -12,7 +12,7 @@
 ## Summary
 
 lithoSpore absorbed the Wave 21 audit's lithoSpore-specific guidance.
-All items addressed in code and documentation. 119 tests pass, zero
+All items addressed in code and documentation. 125 tests pass, zero
 clippy warnings.
 
 ---
@@ -75,7 +75,7 @@ New `specs/PARITY_REPORT_SCHEMA.md`:
 
 - README: ecosystem posture section (452 methods, 9,539+ spring tests, Wave 21 context)
 - capability_registry.toml: Wave 20 alignment
-- Test count: 117 → 119 across all docs
+- Test count: 117 → 125 across all docs (post-chassis-abstraction evolution)
 
 ---
 
@@ -84,7 +84,7 @@ New `specs/PARITY_REPORT_SCHEMA.md`:
 | Metric | Value |
 |--------|-------|
 | Science checks | 75/75 |
-| Unit/integration tests | 119 |
+| Unit/integration tests | 125 |
 | Chaos tests | 10 |
 | CLI subcommands | 15 |
 | Clippy | Zero warnings |
