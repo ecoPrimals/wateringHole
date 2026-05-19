@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: May 18, 2026
-**Version**: v1.9.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0, Wave 22 complete, fossilization pass, next waves prepped)
+**Date**: May 19, 2026
+**Version**: v1.10.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0, Wave 24 complete, 3-wave upstream gap sweep done, shadow S1-S3 LIVE, Barrick SEALED)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -596,10 +596,10 @@ end-to-end proof: live science → primal composition → provenance braids →
 lithoSpore validation → replication. Completing this study validates the
 entire pipeline from mountain to ocean.
 
-- Barrick 2009: 7 clones, live sovereign pipeline, braids shipping
-- Tenaillon 2016: 264 clones, SRA download in progress, compute.fan_out ready
-- ferment transcript braids → lithoSpore ingestion
-- Cross-tier parity: Python vs Rust numerical agreement for all datasets
+- Barrick 2009: **SEALED** — 7/7 clones, 486 sovereign variants, USB to lithoSpore
+- Tenaillon 2016: 264 clones, batch 0 validated (2/5), WS-11 v2 calibration deployed
+- ferment transcript braids → lithoSpore ingestion (Tenaillon Tier 2 braid received)
+- Cross-tier parity: L1 vs L2 documented (0.85 ratio), L3 pending live trio
 
 ### Wave 24: Shadow Run Execution
 
@@ -613,10 +613,10 @@ counterpart without regression.
 
 | Shadow | Sovereign | Commercial | Status |
 |--------|-----------|------------|--------|
-| TLS termination | bearDog :8443 | Cloudflare TLS | H2-12 LIVE (10ms vs 120ms) |
-| NAT traversal | songbird relay | cloudflared tunnel | Ready (TURN client shipped) |
-| Content hosting | nestGate + petalTongue | GitHub Pages | Ready (transport parity shipped) |
-| Auth | bearDog BTSP + JupyterHub | OAuth2 proxy | H2-2b ready |
+| TLS termination | bearDog :8443 | Cloudflare TLS | **LIVE** — ACME crate shipped (W107), 10ms vs 120ms |
+| NAT traversal | songbird relay | cloudflared tunnel | **LIVE** — relay deployed on VPS (projectNUCLEUS) |
+| Content hosting | nestGate + petalTongue | GitHub Pages | **LIVE** — S3 parity: compression, headers, trace, 404 |
+| Auth | bearDog BTSP + JupyterHub | OAuth2 proxy | **SPEC** — dual-auth design shipped, wiring pending |
 
 ### Wave 25: Primal-Spring Pairing (Stadial Depth)
 
@@ -637,17 +637,16 @@ affinity:
 | biomeOS | all springs | Composition orchestration |
 | petalTongue | all springs | Visualization, DataBinding |
 
-### Wave 26: Remaining Composition Gaps
+### Wave 26: ~~Remaining Composition Gaps~~ RESOLVED
 
-**Owner**: Respective primal teams
-**Priority**: LOW (enrichment, not blocking)
+All 4 gaps from this wave were resolved in the May 19 three-wave sweep:
 
-| # | Gap | Owner | Notes |
-|---|-----|-------|-------|
-| 3 | GPU API alignment (`submit_and_map`) | barraCuda / wetSpring | HMMA execution path, coralReef codegen |
-| 8 | Cross-gate dispatch via songbird | songbird / biomeOS | Phase 2 songbird evolution |
-| R5 | `nest.store` signal dispatch | biomeOS | MEDIUM — biomeOS signal graph wiring |
-| R7 | `spore.instantiate` atomic VM provisioning | biomeOS | LOW — biomeOS v3.61 has the route |
+| # | Gap | Owner | Resolution |
+|---|-----|-------|------------|
+| ~~3~~ | ~~GPU API alignment~~ | barraCuda + coralReef | **RESOLVED** — `precision_advice`, `dispatch_hints`, `TENSOR_WIRE_CONTRACT.md` |
+| ~~8~~ | ~~Cross-gate dispatch~~ | songbird + biomeOS | **RESOLVED** — songbird W211 `capability.call` handler |
+| ~~R5~~ | ~~`nest.store` signal dispatch~~ | biomeOS | **RESOLVED** — v3.63 route table promotion |
+| ~~R7~~ | ~~`spore.instantiate`~~ | biomeOS | **DEFERRED** — v3.63 scaffold, wire when lithoSpore Tier 3 ready |
 
 ### Wave 27: projectFOUNDATION Thread Saturation
 
@@ -655,7 +654,7 @@ affinity:
 **Priority**: MEDIUM — stadial external validation
 
 Thread coverage targets for full provenance-anchored science:
-- Thread 1 WCM: 0/24 validated → needs ABG compositions through trio
+- Thread 1 WCM: 10/25 hashed (FN-1 partial), CI validation unblocked (thread_registry.sh shipped)
 - Thread 4 (environmental genomics): wetSpring + airSpring seeding
 - Thread 10 (provenance): healthSpring gap documented, trio pipeline live
 - All other threads: sources seeded, validation in progress
