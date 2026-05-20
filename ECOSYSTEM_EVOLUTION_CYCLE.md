@@ -58,9 +58,11 @@ Springs focus on validation of what exists, surfacing gaps, tightening.
 ready. 456-method registry, 13/13 primals LIVE, all delta springs at zero Wave 20 debt.
 Wave 22 stadial gate push absorbed — **13/13 primals responded and evolved**. All 3 wetSpring
 upstream asks IMPLEMENTED. 5/7 composition gaps RESOLVED. plasmidBin manifest v5.5.0, validate v0.2.0 (serde-typed, edition 2024, 21 tests).
-Major bumps: toadStool 0.2.0, coralReef 0.2.0 (A++), skunkBat 0.2.0, sweetGrass 0.7.36,
-biomeOS v3.61 (composition pipelines, NucleusMode::Full, braid signals, enrichment).
-bearDog: ring/rustls reconciled + ACME design. songbird: btsp.capabilities + primal.announce.
+Major bumps: toadStool S267 (sovereign driver rotation, `sovereign.warm_handoff`),
+barraCuda Sprint 73 (87 IPC methods, `signal.*` + regression + ecology absorption),
+biomeOS v3.65 (`primal.list` Wave 20 schema alignment), bearDog Wave 108 (`content.*` scope).
+skunkBat 0.2.0, sweetGrass 0.7.36, coralReef 0.2.0 (A++).
+songbird: btsp.capabilities + primal.announce. ANCHORING_STANDARD published.
 All primals: stability tiers, canonical envelope, primal.announce. cellMembrane VPS operational.
 
 **Phase 32 Atomic Model** (May 12):
@@ -73,7 +75,7 @@ All primals: stability tiers, canonical envelope, primal.announce. cellMembrane 
 | **NUCLEUS** | Atom | Tower + Node + Nest (deduplicated) + meta-tier | 10+3=13 |
 
 - **13/13 primals at zero gate debt**: MethodGate, BTSP AEAD Phase 3, Edition 2024, deny.toml — all clean.
-- **primalSpring v0.9.25**: guideStone **Level 8** (absorbed certification engine), 689+ library tests, 77 deploy graphs, 456 registered methods, fragment-based composition v3.0.0.
+- **primalSpring v0.9.25 Wave 33**: 706 `#[test]` markers, 45 scenarios, 443 real methods (321 exercised = 72%), 2 binaries (legacy bins removed Wave 32), deprecated probing APIs sunset.
 - **Library-to-binary rewiring COMPLETE**: 8/8 springs at **Tier 4** (`default = []`, barraCuda optional). All springs now IPC-first for NUCLEUS deployments.
 - **Active delta springs (May 12, all Tier 4 IPC-first)**:
 
