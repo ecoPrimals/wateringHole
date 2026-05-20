@@ -110,8 +110,9 @@ both AMD RX 6950 XT and NVIDIA RTX 3090 (via DRM probing).
   `GpuContext::from_descriptor()` creates contexts from discovered devices.
 - **Cross-vendor parity tests**: Compilation parity for SM86 vs RDNA2. Known
   RDNA2 limitations documented (global_invocation_id, VOP2 VSRC1, buffer reads).
-- **Showcase**: 8 progressive demos from hello-compiler through full compute
-  triangle (coralReef → toadStool → barraCuda).
+- **Showcase**: *(fossilized)* 8 progressive demos archived — hardware dispatch
+  demos moved to toadStool domain. Cross-primal compute triangle now demonstrated
+  by barraCuda `showcase/02-cross-primal-compute/` and primalSpring exp050.
 
 **Stack**: 1804 tests (0 failed, 61 ignored), 66.43% line coverage, 75.15% function coverage, 0 DEBT markers.
 93 cross-spring WGSL shaders (84 compiling SM70). Three input languages
