@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
 **Date**: May 20, 2026
-**Version**: v1.12.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0 + validate v0.2.0 serde-typed, Wave 28 absorption: 11/15 primals contributed sporeprint/ dirs, Wave 29 CM-1/CM-2/CM-4 all RESOLVED, shadow S1-S3 LIVE, Barrick SEALED)
+**Version**: v1.13.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0 + validate v0.2.0 serde-typed, Wave 28 sporePrint **15/15** complete, Wave 29 CM-1/CM-2/CM-3/CM-4 all RESOLVED, Wave 30 SP-1 auto-merge + 45 scenarios, shadow S1-S3 LIVE, Barrick SEALED, wetSpring V182 UniBin: 345 scenarios / 1 binary)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -336,7 +336,7 @@ abstraction layer (GPU/CPU/NPU) informing toadStool and stays spring-local.
 1. ludoSpring (3→4) — pure composition, cleanest test case
 2. healthSpring (3→4) — `primal-proof` feature already gates compilation
 3. hotSpring (2→3) — biggest barraCuda contributor validating absorption
-4. wetSpring (2→3) — rich IPC handlers, route compute through ecobin
+4. wetSpring (**3→4** V182) — UniBin eukaryotic (345 scenarios), Barrick SEALED, Tenaillon batch 0 complete
 5. airSpring (2→3) — good IPC foundation despite pre-delta
 6. neuralSpring (2→3) — needs `src/ipc/` dir; latency-sensitive
 7. groundSpring (1→2) — expand `ipc.rs` into `src/ipc/` tree
