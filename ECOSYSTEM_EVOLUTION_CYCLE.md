@@ -251,15 +251,19 @@ stronger. This is not parallel development — it's compound evolution.
 
 ## Current Composition Elevation Priorities
 
-### primalSpring (Phase 43+ — stadial cleared)
+### primalSpring (Wave 31 — eukaryotic evolution)
 
-| Priority | What | Blocked By |
-|----------|------|------------|
-| 1 | Tower atomic composition parity (BearDog + Songbird via IPC) | Nothing — ready now |
-| 2 | Node atomic composition parity (+ barraCuda + coralReef + toadStool) | ~~barraCuda tensor.* response schema standardization~~ RESOLVED (Sprint 42) |
-| 3 | Nest atomic composition parity (+ NestGate + provenance trio) | Nothing — storage IPC stable |
-| 4 | Full NUCLEUS composition parity | Depends on 1-3 |
+| Priority | What | Status |
+|----------|------|--------|
+| ~~1~~ | Tower atomic composition parity | **DONE** — 45 scenarios, 10 tracks |
+| ~~2~~ | Node atomic composition parity | **DONE** — barraCuda Sprint 42 resolved |
+| ~~3~~ | Nest atomic composition parity | **DONE** — storage IPC stable |
+| ~~4~~ | Full NUCLEUS composition parity | **DONE** — cross-atomic pipeline validated |
 | 5 | Chimera compositions via biomeOS | biomeOS graph execution maturity |
+| 6 | `validation::numeric` bridge for spring migrations | **SHIPPED** — Wave 31 |
+| 7 | `EUKARYOTIC_VALIDATION_MIGRATION.md` guide published | **SHIPPED** — Wave 31 |
+| 8 | sporePrint 15/15 + SP-1 auto-merge | **SHIPPED** — Wave 30 |
+| 9 | CM-3 cross-gate capability.call scenario | **SHIPPED** — Wave 29 |
 
 ### Upstream Primals (composition enablement)
 
