@@ -21,7 +21,7 @@ real-world validation. The stadial does not start until the interstadial exit
 gate is cleared.
 
 ```
-INTERSTADIAL (current)                    STADIAL (next)
+INTERSTADIAL (exit gate cleared)          STADIAL (entering)
 ├── Pre-wire sovereignty capabilities     ├── Shadow runs vs Cloudflare
 ├── NUCLEUS deployments ready             ├── Upstream crate contributions
 ├── ABG hosting compositions              ├── Community engagement (Dimforge)
