@@ -703,7 +703,7 @@ boundary with trio-verified deployments and cross-gate composition testing.
 
 | Component | What | Status |
 |-----------|------|--------|
-| `deploy_membrane.sh --composition nest` | Deploy trio + nestGate to VPS | Needs plasmidBin work (CM-1) |
+| `deploy_membrane.sh --composition nest` | Deploy trio + nestGate to VPS | **DONE** — `--composition nest` shipped (CM-1) |
 | `membrane_provenance.sh` | Post-deploy hook: binary BLAKE3 → DAG → spine → braid | **DONE** — 5-phase remote trio verification shipped (CM-2) |
 | Cross-gate `capability.call` | Gate ↔ VPS via songbird relay | CG-8 RESOLVED, needs test scenario (CM-3) |
 | darkforest MEM-14 through MEM-17 | Nest Atomic health checks on VPS | **DONE** — 17 PASS / 0 FAIL / 5 SKIP (CM-4) |
