@@ -659,6 +659,59 @@ Thread coverage targets for full provenance-anchored science:
 - Thread 10 (provenance): healthSpring gap documented, trio pipeline live
 - All other threads: sources seeded, validation in progress
 
+### Wave 28: sporePrint pappusCast — External Surface as Living Artifact
+
+**Owner**: sporePrint (infra), all primal teams (content contribution)
+**Priority**: MEDIUM — stadial external validation surface
+**Blockers**: None — all infrastructure exists, this is incremental contribution
+
+sporePrint (primals.eco) lags because it's treated as a manually-curated artifact.
+The pappusCast model (projectNUCLEUS) demonstrates the target: tiered validation
+with auto-propagation. sporePrint becomes another composition to validate, not a
+separate maintenance burden. Primals contribute incrementally via existing patterns.
+
+**Per-primal contribution checklist** (glacial — teams absorb over time):
+
+| Contribution | What | Pattern |
+|-------------|------|---------|
+| `sporeprint/` directory | validation-summary.md + optional lab content | Copy from spring `sporeprint/` dirs |
+| `notify-sporeprint.yml` | CI dispatch on push to main | Template in `plasmidBin/templates/` |
+| Deploy status metadata | shadow_status, deploy_locations in config.toml | Auto-populated from dispatch payload |
+| Provenance feed | liveSpore.json entries from trio-equipped deploys | Append-only JSON from trio pipeline |
+
+**Automation targets** (sporePrint infra evolves to absorb):
+
+1. Auto-merge: content auto-commits after `spore-validate` passes (replaces PR-gated Tier 2)
+2. Deploy status feed: `config.toml` entity_registry gains `last_push`, `shadow_status`, `deploy_locations`
+3. `liveSpore.json` auto-ingest from trio-equipped deployments
+4. Sovereign publish: `publish_sporeprint.sh` → NestGate `content.put` (S66 path normalization shipped)
+
+**Validation**: primalSpring `s_sporeprint_surface` scenario validates the external
+surface structurally — entity coverage, source registry consistency, content contribution status.
+
+### Wave 29: cellMembrane Nest Atomic — Cross-Boundary Composition Testing
+
+**Owner**: projectNUCLEUS + plasmidBin
+**Priority**: MEDIUM — stadial depth, enables deployment provenance
+**Blockers**: Wave 28 sporePrint for provenance feed; CG-8 (cross-gate dispatch) RESOLVED
+
+cellMembrane runs Tower Atomic (bearDog, songbird, skunkBat). Expanding to Nest
+Atomic adds nestGate + provenance trio, enabling primals on both sides of the
+boundary with trio-verified deployments and cross-gate composition testing.
+
+**Expansion targets**:
+
+| Component | What | Status |
+|-----------|------|--------|
+| `deploy_membrane.sh --composition nest` | Deploy trio + nestGate to VPS | Needs plasmidBin work |
+| `membrane_provenance.sh` | Post-deploy hook: binary BLAKE3 → DAG → spine → braid | Needs projectNUCLEUS work |
+| Cross-gate `capability.call` | Gate ↔ VPS via songbird relay | CG-8 RESOLVED (songbird W211) |
+| darkforest MEM-14 through MEM-17 | Nest Atomic health checks on VPS | Needs projectNUCLEUS work |
+| sporePrint provenance feed | Deploy events → liveSpore.json | Depends on Wave 28 |
+
+**Memory budget**: trio primals are lightweight (~5-15MB RSS each). 2GB VPS can
+accommodate Nest Atomic alongside existing Tower + RustDesk + Caddy + petalTongue.
+
 ---
 
 **The water flows downhill. Gaps evaporate uphill. The ecosystem evolves.**
