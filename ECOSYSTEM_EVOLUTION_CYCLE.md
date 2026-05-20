@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
-**Date**: May 19, 2026
-**Version**: v1.10.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0, Wave 24 complete, 3-wave upstream gap sweep done, shadow S1-S3 LIVE, Barrick SEALED)
+**Date**: May 20, 2026
+**Version**: v1.11.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0, Wave 28 absorption: 11/15 primals contributed sporeprint/ dirs, Wave 29 CM-2/CM-4 RESOLVED, shadow S1-S3 LIVE, Barrick SEALED)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -703,10 +703,10 @@ boundary with trio-verified deployments and cross-gate composition testing.
 
 | Component | What | Status |
 |-----------|------|--------|
-| `deploy_membrane.sh --composition nest` | Deploy trio + nestGate to VPS | Needs plasmidBin work |
-| `membrane_provenance.sh` | Post-deploy hook: binary BLAKE3 → DAG → spine → braid | Needs projectNUCLEUS work |
-| Cross-gate `capability.call` | Gate ↔ VPS via songbird relay | CG-8 RESOLVED (songbird W211) |
-| darkforest MEM-14 through MEM-17 | Nest Atomic health checks on VPS | Needs projectNUCLEUS work |
+| `deploy_membrane.sh --composition nest` | Deploy trio + nestGate to VPS | Needs plasmidBin work (CM-1) |
+| `membrane_provenance.sh` | Post-deploy hook: binary BLAKE3 → DAG → spine → braid | **DONE** — 5-phase remote trio verification shipped (CM-2) |
+| Cross-gate `capability.call` | Gate ↔ VPS via songbird relay | CG-8 RESOLVED, needs test scenario (CM-3) |
+| darkforest MEM-14 through MEM-17 | Nest Atomic health checks on VPS | **DONE** — 17 PASS / 0 FAIL / 5 SKIP (CM-4) |
 | sporePrint provenance feed | Deploy events → liveSpore.json | Depends on Wave 28 |
 
 **Memory budget**: trio primals are lightweight (~5-15MB RSS each). 2GB VPS can
