@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
 **Date**: May 20, 2026
-**Version**: v1.11.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0, Wave 28 absorption: 11/15 primals contributed sporeprint/ dirs, Wave 29 CM-2/CM-4 RESOLVED, shadow S1-S3 LIVE, Barrick SEALED)
+**Version**: v1.12.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0 + validate v0.2.0 serde-typed, Wave 28 absorption: 11/15 primals contributed sporeprint/ dirs, Wave 29 CM-1/CM-2/CM-4 all RESOLVED, shadow S1-S3 LIVE, Barrick SEALED)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -57,7 +57,7 @@ Springs focus on validation of what exists, surfacing gaps, tightening.
 **Current state (May 18, 2026)**: Interstadial exit gate cleared (9.5/10). Stadial transition
 ready. 456-method registry, 13/13 primals LIVE, all delta springs at zero Wave 20 debt.
 Wave 22 stadial gate push absorbed — **13/13 primals responded and evolved**. All 3 wetSpring
-upstream asks IMPLEMENTED. 5/7 composition gaps RESOLVED. plasmidBin manifest v5.5.0.
+upstream asks IMPLEMENTED. 5/7 composition gaps RESOLVED. plasmidBin manifest v5.5.0, validate v0.2.0 (serde-typed, edition 2024, 21 tests).
 Major bumps: toadStool 0.2.0, coralReef 0.2.0 (A++), skunkBat 0.2.0, sweetGrass 0.7.36,
 biomeOS v3.61 (composition pipelines, NucleusMode::Full, braid signals, enrichment).
 bearDog: ring/rustls reconciled + ACME design. songbird: btsp.capabilities + primal.announce.
