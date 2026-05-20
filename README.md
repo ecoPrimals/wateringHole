@@ -348,7 +348,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### Strategy & Licensing
 - `LYSOGENY_PROTOCOL.md` — Area denial through open prior art
 - `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` — **Ecosystem licensing standard** (AGPL + ORC + CC-BY-SA)
-- `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture (memory-bound digital objects)
+- `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture (memory-bound digital objects) → see `whitePaper/gen4/economics/NOVEL_FERMENT_TRANSCRIPTS.md` for full economics
+- `ANCHORING_STANDARD.md` — **Public chain anchoring guidance** (compression pipeline, gas economics, community pooling, crypto stance, verification)
 - `UPSTREAM_CONTRIBUTIONS.md` — Standalone crates for crates.io from ecoPrimals
 
 ### Coordination & Patterns
