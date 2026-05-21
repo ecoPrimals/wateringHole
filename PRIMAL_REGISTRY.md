@@ -435,7 +435,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.7.0 Phase 13 (53 experiments, 10 tracks, 360 tests, 87/87 gates, NUCLEUS VALIDATED, 37 capabilities, cross-gate deployment tooling: build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health, LAN deployment guide, zero warnings, zero unsafe) |
+| primalSpring | v0.9.25 Wave 35 (89 experiments, 10 tracks, 736 tests, 445 methods, 45 scenarios, UniBin, NUCLEUS VALIDATED, cross-gate deployment: build_ecosystem_genomeBin.sh, zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -521,7 +521,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
 **Phase**: Phase 13 (Cross-Gate Deployment Tooling, 87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.7.0 Phase 13 — 53 experiments, 10 tracks, 360 tests (all passing, 42 ignored live), 87/87 gates, 37 capabilities, NUCLEUS VALIDATED (Tower + Nest + Node), Graph Overlays, Squirrel Discovery, Multi-Node Bonding, cross-gate deployment (build_ecosystem_musl.sh, prepare_spore_payload.sh, validate_remote_gate.sh, exp073 LAN mesh, exp074 cross-gate health), IPC resilience stack (CircuitBreaker, RetryPolicy, Transport enum, normalize_method, is_recoverable, OnceLock probes), NdjsonSink, check_relative, check_abs_or_rel, primal_names module, provenance trio circuit breaker, validate_release.sh, deny(missing_docs), 22 deploy graphs (18 single-node + 4 multi-node), MCP tools (8 typed), zero clippy warnings, zero unsafe, ecoBin compliant
+**Status**: v0.9.25 Wave 35 — 89 experiments, 10 tracks, 736 tests (all passing, 2 ignored), 445 methods, 45 scenarios, NUCLEUS VALIDATED, UniBin (validate/certify/serve), cross-gate deployment (build_ecosystem_genomeBin.sh), shadow_comparison + dependency_validation patterns, zero clippy warnings, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 

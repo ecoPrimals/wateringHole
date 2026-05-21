@@ -1,7 +1,7 @@
 # The Ecosystem Evolution Cycle
 
 **Date**: May 20, 2026
-**Version**: v1.13.0 (456 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0 + validate v0.2.0 serde-typed, Wave 28 sporePrint **15/15** complete, Wave 29 CM-1/CM-2/CM-3/CM-4 all RESOLVED, Wave 30 SP-1 auto-merge + 45 scenarios, shadow S1-S3 LIVE, Barrick SEALED, wetSpring V182 UniBin: 345 scenarios / 1 binary)
+**Version**: v1.13.0 (445 methods, 13/13 primals stadial-gate absorbed, plasmidBin v5.5.0 + validate v0.2.0 serde-typed, Wave 28 sporePrint **15/15** complete, Wave 29 CM-1/CM-2/CM-3/CM-4 all RESOLVED, Wave 30 SP-1 auto-merge + 45 scenarios, shadow S1-S3 LIVE, Barrick SEALED, wetSpring V182 UniBin: 345 scenarios / 1 binary)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -55,7 +55,7 @@ Downstream gets less "snow melt" — fewer new capabilities flowing down.
 Springs focus on validation of what exists, surfacing gaps, tightening.
 
 **Current state (May 18, 2026)**: Interstadial exit gate cleared (9.5/10). Stadial transition
-ready. 456-method registry, 13/13 primals LIVE, all delta springs at zero Wave 20 debt.
+ready. 445-method registry, 13/13 primals LIVE, all delta springs at zero Wave 20 debt.
 Wave 22 stadial gate push absorbed — **13/13 primals responded and evolved**. All 3 wetSpring
 upstream asks IMPLEMENTED. 5/7 composition gaps RESOLVED. plasmidBin manifest v5.5.0, validate v0.2.0 (serde-typed, edition 2024, 21 tests).
 Major bumps: toadStool S267 (sovereign driver rotation, `sovereign.warm_handoff`),
@@ -81,7 +81,7 @@ All primals: stability tiers, canonical envelope, primal.announce. cellMembrane 
 
 | Spring | gS | Tests | Key Status |
 |--------|---:|------:|------------|
-| primalSpring | L8 | 689+ | Coordinator — 456 methods, 80+ graphs |
+| primalSpring | L8 | 689+ | Coordinator — 445 methods, 80+ graphs |
 | hotSpring | L6 | 1,042 | LTEE B2, 3-GPU sovereign |
 | healthSpring | L5 | 999 | Thread 3 seeded |
 | neuralSpring | L5 | 1,453 | LTEE B1 Py+Rust done |
@@ -476,7 +476,7 @@ their external validation gate.
 ```
 Layer         Phase          Gate / Pressure
 ─────         ─────          ───────────────
-L1 Primals    STADIAL        primalSpring (456 registry, MethodGate, graphs)
+L1 Primals    STADIAL        primalSpring (445 registry, MethodGate, graphs)
 L2 primalSpring  GATE        validates L1, patterns flow to L3/L4
 L3 Springs    INTERSTADIAL   absorbing primal capabilities
 L4 Products   INTERSTADIAL   pre-wiring sovereignty, shadow runs pending
@@ -485,7 +485,7 @@ L5 Foundation INTERSTADIAL   thread coverage, data anchoring
 
 **Upstream primal debt (at the gate)**: **Zero.** All 13 primals pass the
 primalSpring gate — 13/13 MethodGate (JH-0 + JH-2), 13/13 BTSP Phase 3
-AEAD, 456 methods (zero drift), deny.toml (ring + openssl banned).
+AEAD, 445 methods (zero drift), deny.toml (ring + openssl banned).
 
 ## Interstadial Exit Criteria (5 Pillars)
 
@@ -585,7 +585,7 @@ ends when shadow runs prove parity and external deployments succeed.
 ## Next Evolution Waves (May 18, 2026)
 
 The ecosystem has hit a natural inflection: upstream primals are stadial-gate
-clean (13/13 zero debt, 456 methods), the interstadial exit gate is cleared
+clean (13/13 zero debt, 445 methods), the interstadial exit gate is cleared
 (9.5/10), and wetSpring's sovereign pipeline is live. The remaining work is
 methodical convergence toward full stadial: shadow runs, E2E science studies,
 downstream team pairing, and the 2 remaining composition gaps.

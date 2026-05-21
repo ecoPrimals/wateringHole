@@ -290,7 +290,7 @@ and structure prediction. They were told to use Google Colab.
 
 **Phase 0 (active)**: Tamison runs jobs manually for ABG members.
 
-**Phase 1 (validated 2026-05-04)**: JupyterHub + Full NUCLEUS (13 primals) on ironGate. Pre-installed: scanpy, pydeseq2, QIIME2, Seurat, DESeq2. 235+ wetSpring checks passing through toadStool dispatch, real NCBI data (PRJNA488170, 11.9M reads) processed, full provenance pipeline operational (BLAKE3 → rhizoCrypt DAG → loamSpine ledger → sweetGrass braid). See `COMPOSITION_VALIDATION_LOG.md` and `projectNUCLEUS/validation/` for details.
+**Phase 1 (validated 2026-05-04)**: JupyterHub + Full NUCLEUS (13 primals) on ironGate. Pre-installed: scanpy, pydeseq2, QIIME2, Seurat, DESeq2. 235+ wetSpring checks passing through toadStool dispatch, real NCBI data (PRJNA488170, 11.9M reads) processed, full provenance pipeline operational (BLAKE3 → rhizoCrypt DAG → loamSpine ledger → sweetGrass braid). See `fossilRecord/wateringHole/compute-sharing-logs-may2026/COMPOSITION_VALIDATION_LOG.md` (archived) and `projectNUCLEUS/validation/` for details.
 
 **Phase 2a (validated 2026-05-06)**: Cloudflare Tunnel baseline captured (270ms p50 latency, 15/15 external checks). Three-layer pen testing completed. ABG tiered access operational:
 

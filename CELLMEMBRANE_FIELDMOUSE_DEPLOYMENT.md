@@ -222,7 +222,7 @@ holds the preimage. Neither alone is useful to the substrate provider.
 Phase 0: Relay only (Songbird on :3478)
   └── TURN credentials in plaintext on disk (to be encrypted)
 
-Phase 0.5: Relay + RustDesk (current operational state)
+Phase 1: Tower composition — BearDog + Songbird + SkunkBat + RustDesk (current operational state)
   └── Songbird TURN + RustDesk hbbs/hbbr co-hosted
   └── Multi-gate SSH key management via deploy_membrane.sh keys
   └── droplet-agent purged, geo-delocalized gates supported

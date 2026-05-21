@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 18, 2026 (Wave 22 stadial gate absorbed — 13/13 primals evolved, 456 methods, plasmidBin v5.5.0, fossilization pass)
+**Last Updated**: May 21, 2026 (Wave 35: 13/13 primals evolved, 445 methods, glacial shift alignment, plasmidBin v5.5.0)
 
 ---
 
