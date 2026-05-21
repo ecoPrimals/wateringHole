@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: March 21, 2026
+**Last Updated**: May 21, 2026
 
 ---
 
@@ -435,7 +435,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.9.25 Wave 35 (89 experiments, 10 tracks, 736 tests, 445 methods, 45 scenarios, UniBin, NUCLEUS VALIDATED, cross-gate deployment: build_ecosystem_genomeBin.sh, zero warnings, zero unsafe) |
+| primalSpring | v0.9.25 Wave 37 (89 experiments, 20 tracks, 748 tests, 445 methods, 45 scenarios, 94 deploy graphs, UniBin, NUCLEUS VALIDATED, ionic bond runtime, sovereign publish, zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -519,9 +519,9 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 ### primalSpring - Coordination and Composition Validation
 
-**Domain**: Primal coordination, atomic composition, graph execution, emergent systems, bonding  
-**Phase**: Phase 13 (Cross-Gate Deployment Tooling, 87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.9.25 Wave 35 — 89 experiments, 10 tracks, 736 tests (all passing, 2 ignored), 445 methods, 45 scenarios, NUCLEUS VALIDATED, UniBin (validate/certify/serve), cross-gate deployment (build_ecosystem_genomeBin.sh), shadow_comparison + dependency_validation patterns, zero clippy warnings, zero unsafe, ecoBin compliant
+**Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
+**Phase**: Phase 60+ / Interstadial (87/87 gates, NUCLEUS VALIDATED)  
+**Status**: v0.9.25 Wave 37 — 89 experiments (20 tracks), 748 lib tests (748 pass, 2 ignored), 445 methods, 45 scenarios (10 tracks, 3 tiers), 94 deploy graphs (80 deploy + 14 signal), NUCLEUS VALIDATED, UniBin (validate/certify/serve/status/version), ionic bond runtime (WS-1), sovereign publish pipeline (SP-4), shadow_comparison + dependency_validation patterns, zero clippy warnings, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
@@ -529,12 +529,14 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 53 across 10 tracks: Atomic Composition (6), Graph Execution (6), Emergent Systems (6), Bonding & Plasmodium (5), Cross-Spring Coordination (5), Showcase-Mined (10), Live Composition (11), Multi-Node Bonding (2), Cross-Gate Deployment (2). All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
-| **Deploy Graphs** | 22 (18 single-node + 4 multi-node): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). |
-| **Niche Self-Knowledge** | 37 capabilities (including ai.query, ai.health, composition.tower_squirrel_health), semantic mappings (7 domains), operation dependencies, cost estimates |
-| **RPC Methods** | 17 methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.validate_composition_by_capability, coordination.discovery_sweep, coordination.probe_primal, coordination.probe_capability, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |
+| **Experiments** | 89 across 20 tracks: Atomic Composition, Graph Execution, Emergent Systems, Bonding & Plasmodium, Cross-Spring Coordination, Showcase-Mined, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, Frontier, Subsystem Decomposition, Signal Dispatch, and more. All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
+| **Deploy Graphs** | 94 (80 deploy + 14 signal): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). Fragment-first composition with `resolve = true`. |
+| **Validation Scenarios** | 45 scenarios across 10 tracks, 3 tiers: atomic-signal, meta-tier-signal, agentic-tower, sovereignty (membrane composition, parity, content), signal dispatch parity, cross-gate, primal announce, ionic bond lifecycle. |
+| **Niche Self-Knowledge** | 37+ capabilities (including ai.query, ai.health, composition.tower_squirrel_health), semantic mappings (7 domains), operation dependencies, cost estimates |
+| **RPC Methods** | 17+ methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |
 | **IPC Resilience** | IpcError (8 typed variants + IpcErrorPhase), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
-| **Live Composition** | Tower STABLE (beardog + songbird + biomeOS, 24/24 gates). Squirrel AI composition (Tower + Squirrel + Anthropic Claude). exp060: biomeOS-orchestrated Tower deploy. exp061: 3-primal AI composition. |
+| **Bonding** | Ionic bond runtime (IonicContractRegistry — propose/accept/reject/meter/modify/terminate/seal), covalent mesh, content distribution, graph metadata |
+| **Live Composition** | Tower STABLE (beardog + songbird + biomeOS, 24/24 gates). Squirrel AI composition (Tower + Squirrel + Anthropic Claude). biomeOS-orchestrated Tower deploy. 3-primal AI composition. |
 | **Emergent Systems Tested** | RootPulse (commit/branch/merge/diff/federate), RPGPT (60Hz tick + provenance), coralForge (neural object Pipeline graph), cross-spring ecology |
 
 **Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation), Squirrel (live AI composition)

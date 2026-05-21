@@ -25,8 +25,8 @@ for users.
 | **Meta** | cross-atomic | biomeOS + Squirrel + petalTongue | Coordinator, AI, desktop UI |
 
 **What is NOT a primal:**
-- `primalspring_primal` — pre-composition Rust validation artifact
-- `primalspring_guidestone` — certification tool
+- `primalspring_primal` — IPC server (JSON-RPC cell membrane)
+- `primalspring_unibin` — UniBin: certify/validate/serve/status/version (absorbed guidestone + trio)
 - Spring binaries — Rust science validation, not composition nodes
 
 **A spring IS a composition of the 13 primals**, defined by a cell graph.

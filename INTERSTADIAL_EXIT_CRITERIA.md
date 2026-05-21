@@ -2,7 +2,7 @@
 
 # Interstadial Exit Criteria — Full Sovereignty Pre-Wire
 
-**Version**: 1.9 — May 21, 2026 (Wave 35: 13/13 primals evolved, 445 methods, glacial shift alignment, all composition gaps resolved, plasmidBin v5.5.0)
+**Version**: 1.9 — May 21, 2026 (Wave 37: 13/13 primals evolved, 445 methods, 748 primalSpring tests, ionic bond runtime (WS-1), sovereign publish (SP-4), ecosystem debt sweep)
 **Status**: EXIT GATE CLEARED — stadial transition ready
 **Phase**: Interstadial → Stadial (entered April 16, 2026; exit gate cleared May 15, 2026)
 
