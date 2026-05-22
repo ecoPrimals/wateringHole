@@ -435,7 +435,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.9.25 Wave 37 (89 experiments, 20 tracks, 748 tests, 445 methods, 45 scenarios, 94 deploy graphs, UniBin, NUCLEUS VALIDATED, ionic bond runtime, sovereign publish, zero warnings, zero unsafe) |
+| primalSpring | v0.9.26 Wave 42 (89 experiments, 20 tracks, 779 tests, 457 methods, 46 scenarios, 94 deploy graphs, UniBin, NUCLEUS VALIDATED, NeuralBridge feedback loop, persistent weights, utilization tracking, zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -521,7 +521,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
 **Phase**: Phase 60+ / Interstadial (87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.9.25 Wave 37 — 89 experiments (20 tracks), 748 lib tests (748 pass, 2 ignored), 445 methods, 45 scenarios (10 tracks, 3 tiers), 94 deploy graphs (80 deploy + 14 signal), NUCLEUS VALIDATED, UniBin (validate/certify/serve/status/version), ionic bond runtime (WS-1), sovereign publish pipeline (SP-4), shadow_comparison + dependency_validation patterns, zero clippy warnings, zero unsafe, ecoBin compliant
+**Status**: v0.9.26 Wave 42 — 89 experiments (20 tracks), 779 lib tests (779 pass, 2 ignored), 457 methods, 46 scenarios (10 tracks, 3 tiers), 94 deploy graphs (80 deploy + 14 signal), NUCLEUS VALIDATED, UniBin (validate/certify/serve/status/version), NeuralBridge feedback loop, biomeOS v3.69 persistent weights + utilization tracking, team restructuring documented, zero clippy warnings, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
