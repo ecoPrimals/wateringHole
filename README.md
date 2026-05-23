@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 23, 2026 (Wave 45: 13/13 primals evolved, 458 methods, 784 primalSpring tests, 12/12 primal.announce compliant, all upstream Neural API blockers resolved. biomeOS v3.70 persistent weights + weight health + utilization. Doc debt sweep, local code hygiene.)
+**Last Updated**: May 23, 2026 (Wave 46: primalSpring v0.9.27 deep debt evolution — typed errors, env centralization, idiomatic Rust. 13/13 primals evolved, 458 methods, 784 primalSpring tests, 12/12 primal.announce compliant. biomeOS v3.70 persistent weights + weight health + utilization.)
 
 ---
 

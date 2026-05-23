@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 23, 2026 (Wave 45 — all upstream Neural API blockers resolved, 12/12 primal.announce compliant)
+**Last Updated**: May 23, 2026 (Wave 46 — primalSpring v0.9.27, deep debt evolution. All upstream Neural API blockers resolved, 12/12 primal.announce compliant)
 
 ---
 
@@ -423,7 +423,7 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
-**Spring Versions (as of March 11, 2026)**:
+**Spring Versions (as of May 23, 2026)**:
 
 | Spring | Version |
 |--------|---------|
@@ -435,7 +435,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.9.26 Wave 42 (89 experiments, 20 tracks, 784 tests, 458 methods, 49 scenarios, 94 deploy graphs, UniBin, NUCLEUS VALIDATED, NeuralBridge feedback loop, persistent weights, weight health, utilization tracking, live validation, zero warnings, zero unsafe) |
+| primalSpring | v0.9.27 Wave 46 (89 experiments, 20 tracks, 784 tests, 458 methods, 49 scenarios, 94 deploy graphs, UniBin, NUCLEUS VALIDATED, typed errors (DispatchError, thiserror), env centralization, NeuralBridge feedback loop, persistent weights, weight health, utilization tracking, live validation, zero warnings, zero unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
