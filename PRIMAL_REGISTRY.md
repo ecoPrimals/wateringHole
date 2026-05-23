@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 21, 2026
+**Last Updated**: May 23, 2026 (Wave 45 — all upstream Neural API blockers resolved, 12/12 primal.announce compliant)
 
 ---
 
