@@ -351,7 +351,7 @@ in `gen4/architecture/` for the full catalog.
 
 | Component | Declared | Operational | Gap |
 |-----------|----------|-------------|-----|
-| Git hosting | Forgejo primary | GitHub primary | `forgejo_mirror.sh` not run on dev |
+| Git hosting | Forgejo trailing mirror | GitHub primary | 25 native pull mirrors + 6 timer-synced (8h). Inversion pending covalent gates hosting Forgejo. |
 | CI/CD | Forgejo Actions | GitHub Actions (74 workflows) | Port pending |
 | cellMembrane | Forgejo-only (aspirational) | GitHub Private | Transitional |
 | VPS | Owned operations | DigitalOcean rented | Sovereign HW future |

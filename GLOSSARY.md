@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: May 17, 2026
+**Last Updated**: May 24, 2026
 
 ---
 
@@ -18,10 +18,11 @@ membrane) and Forgejo (inner membrane, `git.primals.eco`):
 | **[syntheticChemistry](https://github.com/syntheticChemistry)** | Science validation springs | wetSpring, hotSpring, airSpring, neuralSpring, groundSpring, healthSpring, ludoSpring, primalSpring. Springs validate that primals produce correct science. |
 | **[sporeGarden](https://github.com/sporeGarden)** | User-facing products (gen4) | projectNUCLEUS (sovereignty layer), projectFOUNDATION (knowledge layer), lithoSpore (verification chassis), esotericWebb (UI/agentic), cellMembrane (private ops — VPS deployment). |
 
-**Dual Git hosts**: Forgejo is declared primary (inner membrane), GitHub is
-operationally primary (outer membrane). See `REPO_MEMBRANE_BOUNDARY.md` for
-the full repo classification: inner-only (cellMembrane), dual-push (most repos),
-or outer-only (fossilRecord, sporePrint).
+**Git hosts**: GitHub is operationally primary (outer membrane). Forgejo is the
+trailing inner membrane mirror — pulls from GitHub server-side every 8h. When
+covalent gates host Forgejo, we invert. See `REPO_MEMBRANE_BOUNDARY.md` for
+the full repo classification: inner-only (cellMembrane), trailing mirror (most
+repos), or outer-only (fossilRecord, sporePrint).
 
 **Why three orgs?** Primals build capabilities. Springs validate those capabilities
 against published science. Products deliver validated capabilities to users.
@@ -566,8 +567,8 @@ Current state (May 23, 2026):
 - **Channel 3 TLS shadow** (BearDog :8443): SHADOW — pending cutover
 - **Channel 1 Signal** (knot-dns :53): **PLANNED** — glacial shift blocker
 
-cellMembrane is operationally on GitHub Private but should migrate to
-Forgejo-only when the inner membrane is operationally stable. It contains
+cellMembrane is operationally on GitHub Private and should migrate to
+Forgejo-only when covalent gates host Forgejo on sovereign infrastructure. It contains
 sensitive configuration (SSH keys, API tokens, deployment scripts) that
 MUST NOT leak to public repos. See `REPO_MEMBRANE_BOUNDARY.md` and
 `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md`.

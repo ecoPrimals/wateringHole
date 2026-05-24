@@ -203,24 +203,27 @@ Validated by `darkforest_membrane.sh` (MEM-01 through MEM-15):
 
 ---
 
-## Forgejo as Primary Git Host
+## Forgejo as Inner Membrane Mirror
 
-### Standard (aspirational — see operational reality below)
-- **Forgejo is declared source of truth** for all ecoPrimals repositories
-- **GitHub is the push mirror** (outer membrane) — public visibility, CDN
-- **Dual-push workflow**: `git push forgejo && git push origin`
-- **Credential caching**: `.netrc` with API token (chmod 600)
+### Standard (current model — May 24, 2026)
+- **GitHub is operationally primary** (outer membrane) — all dev pushes go here
+- **Forgejo is the trailing inner membrane mirror** — pulls from GitHub server-side
+- **No per-machine sync required** — dev happens across multiple gates
+- **When covalent gates host Forgejo, we invert**: Forgejo becomes primary
 
 ### Operational Reality (May 2026)
 
-Forgejo is **declared primary** but **operationally secondary**. All local
-clones have `origin` → `github.com` with no `forgejo` remote configured.
-`forgejo_mirror.sh` exists but hasn't been run on dev machines. All CI
-runs on GitHub Actions. See `REPO_MEMBRANE_BOUNDARY.md` for the full
-repo classification (inner-only / dual-push / outer-only) and migration path.
+Forgejo runs on ironGate (`127.0.0.1:3000`, tunneled as `git.primals.eco`).
+All 31 dual-boundary repos are synced:
+- **25 repos**: Native Forgejo pull mirrors (auto-sync from GitHub every 8h)
+- **6 repos**: Timer-synced via `forgejo_sync.sh` + systemd timer (8h)
+- **cellMembrane**: Inner-only (direct push, not mirrored from GitHub)
+
+CI runs on GitHub Actions. See `REPO_MEMBRANE_BOUNDARY.md` for the full
+repo classification (inner-only / trailing mirror / outer-only).
 
 **cellMembrane** is the only private repo in the sporeGarden org on GitHub.
-It should move to Forgejo-only when Forgejo is operationally stable.
+It should move to Forgejo-only when covalent gates host Forgejo.
 
 ### Organization Mapping
 | Forgejo Org | GitHub Org | Repo Count |
@@ -230,12 +233,13 @@ It should move to Forgejo-only when Forgejo is operationally stable.
 | syntheticChemistry | syntheticChemistry | 8 |
 
 ### Migration Path
-1. **Current**: GitHub operationally primary, Forgejo aspirational
-2. **Near-term**: Run `forgejo_mirror.sh` to add `forgejo` remotes, begin dual-push
-3. **Mid-term**: Port `notify-sporeprint.yml` to Forgejo Actions, validate CI parity
-4. **Long-term**: GitHub becomes read-only mirror (Forgejo post-receive hook)
+1. ~~GitHub-only development~~ — completed May 23, 2026
+2. ~~Push-based sync~~ — replaced May 23 (doesn't scale to multi-gate)
+3. **Current**: Forgejo pulls from GitHub server-side. GitHub primary for CI/dev.
+4. **Near-term**: Port `notify-sporeprint.yml` to Forgejo Actions, CI parity
+5. **Inversion**: Covalent gates host Forgejo → primary. GitHub becomes push mirror.
 
-See: `REPO_MEMBRANE_BOUNDARY.md` for detailed repo classification and push policy
+See: `REPO_MEMBRANE_BOUNDARY.md` for detailed repo classification and sync tooling
 
 ---
 

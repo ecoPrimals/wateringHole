@@ -4,6 +4,7 @@
 **For**: primalSpring (upstream audit), all primal teams
 **Type**: Ecosystem doc sweep + gap report
 **Status**: Active — requesting upstream review
+**Updated**: May 24, 2026 — Forgejo model change, debris sweep results
 
 ---
 
@@ -52,6 +53,38 @@ remaining gaps for upstream teams to triage.
 | `RUNBOOKS.md` | New — 9 operational procedures for all channels |
 | `IRONGATE_VERIFICATION.md` | Updated — Phase 1 Tower + Channel 3 verification |
 | Forgejo remote | Synced — was 1 commit behind, now current |
+
+### Forgejo inner membrane model (May 24 update)
+
+The initial push-based Cursor hook approach (auto-mirror on every `git push`) was
+**replaced** with a server-side pull model. Per-machine hooks don't scale across
+multiple dev gates (ironGate, eastGate, southGate, etc.).
+
+**New model**:
+- 25 repos: Native Forgejo pull mirrors from GitHub (auto-sync every 8h, server-side)
+- 6 repos: Timer-synced via `forgejo_sync.sh` + systemd timer (8h interval)
+  - Private on GitHub: bearDog, skunkBat, whitePaper
+  - Clone-timeout: neuralSpring, primalSpring, wetSpring
+- cellMembrane: Inner-only (direct push, not mirrored from GitHub)
+
+**Tooling**: `forgejo_pull_mirror.sh` (manage mirrors), `forgejo_sync.sh` (sync non-mirrors),
+`forgejo-sync.timer` (systemd). Cursor hooks removed. `REPO_MEMBRANE_BOUNDARY.md` updated.
+
+**Inversion plan**: When covalent gates host Forgejo on sovereign infrastructure,
+Forgejo becomes primary and GitHub becomes the push mirror target.
+
+### Debris sweep (May 24 update)
+
+| Finding | Assessment |
+|---------|------------|
+| `GLOSSARY.md` header date | Bumped to May 24; stale "dual-push" language corrected to "trailing mirror" |
+| `sort-after/` tree (~4 legacy repos) | Pre-ecoPrimals debris; strong archive candidate. Not blocking. |
+| `hotSpring/scripts/archive/` (47 scripts) | Explicitly superseded per scripts/README.md — fossil record, not debris |
+| `prep_usb_litho.sh` in handoff archive | Misplaced operational script; noted in P2 gaps |
+| Duplicate `HOTSPRING_GATE_DEPLOYMENT` handoff | Exists in both `infra/wateringHole/handoffs/` and `springs/hotSpring/wateringHole/handoffs/` — hotSpring owns canonical copy |
+| 3 active gate handoffs (ludo, hot, air) | Live gate status — archive after Wave 46 absorption confirmed |
+| whitePaper thesis TODOs (3 in ch16) | Content work for wetSpring/thesis team, not operational |
+| songBird NFC/IPC platform stubs | Known limitations, documented in crate READMEs |
 
 ---
 

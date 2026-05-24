@@ -48,10 +48,10 @@ infrastructure details that must not exist on external substrate.
 should be moved to Forgejo-only once Forgejo is operationally primary.
 See "Decision: cellMembrane" below.
 
-### Dual-Push (Forgejo Primary, GitHub Mirror)
+### Trailing Mirror (GitHub Primary → Forgejo Pulls)
 
-Public code repos where Forgejo is the source of truth and GitHub
-provides external visibility, CDN, and community access.
+Public code repos where GitHub is operationally primary and Forgejo
+trails as an inner membrane mirror (auto-synced every 8h server-side).
 
 **Gardens (sporeGarden org):**
 
@@ -122,7 +122,7 @@ inner membrane presence.
 | API keys pushed to GitHub | Accidental `git add` of `.env` files | All primals, especially `squirrel` | `.gitignore` patterns cover `.env`, `*.env`, `.env.*` — verified ecosystem-wide |
 | Operational secrets on GitHub | `cellMembrane` is on GitHub (private) | `cellMembrane` | Move to Forgejo-only (pending decision) |
 | Local experiments leak to GitHub | Developer pushes WIP with sensitive data | Any repo | Pre-push hook checking for sensitive patterns (future) |
-| Forgejo/GitHub divergence | Pull mirror fails or timer stops | All dual-push repos | `forgejo_pull_mirror.sh --status` + `forgejo_sync.sh --status` checks |
+| Forgejo/GitHub divergence | Pull mirror fails or timer stops | All trailing-mirror repos | `forgejo_pull_mirror.sh --status` + `forgejo_sync.sh --status` checks |
 
 ### .env Audit Summary (May 17, 2026)
 
@@ -145,7 +145,7 @@ inner membrane presence.
 Forgejo is the **trailing inner membrane mirror**. GitHub is authoritative.
 When covalent gates host Forgejo on sovereign infrastructure, we invert.
 
-- **31/31 dual-push repos** synced to Forgejo (cellMembrane is inner-only)
+- **31/31 trailing-mirror repos** synced to Forgejo (cellMembrane is inner-only)
 - All 3 Forgejo orgs populated: sporeGarden (5), ecoPrimals (19), syntheticChemistry (8)
 - **25 repos**: Native Forgejo **pull mirrors** from GitHub (auto-sync every 8h, server-side)
 - **6 repos**: Regular repos, synced via `forgejo_sync.sh` + systemd timer (8h)
@@ -252,7 +252,7 @@ Post-inversion: Forgejo post-receive hooks auto-mirror to GitHub.
 
 - `SOVEREIGNTY_STANDARDS.md` — Forgejo as Primary Git Host section
 - `MEMBRANE_CHANNEL_ARCHITECTURE.md` — Physical channel architecture
-- `projectNUCLEUS/deploy/forgejo_mirror.sh` — Dual-push tooling
+- `projectNUCLEUS/deploy/forgejo_mirror.sh` — Legacy setup tooling (creates repos + adds remotes)
 - `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` — fieldMouse VPS specification
 - `cellMembrane/README.md` — Operational repo documentation
 
