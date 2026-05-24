@@ -40,49 +40,18 @@ ludoSpring's proto-nucleate declares 26 validation_capabilities across all 4 ato
 | health.liveness | sweetGrass | — | SKIP |
 | visualization.render.scene | petalTongue | TCP :9600 | Not probed (HTTP transport) |
 
-**Result: 5 PASS, 0 FAIL, 6 SKIP — Status: DEGRADED (science validated, some primals offline)**
+**Initial probe: 5 PASS, 6 SKIP (CLI drift)**
+**After fix: 11 PASS, 0 FAIL, 0 SKIP — Status: COMPLETE**
 
-## Root Cause: `start_primal.sh` CLI Drift
+## Root Cause (RESOLVED): `start_primal.sh` CLI Drift
 
-The `infra/plasmidBin/start_primal.sh` script passes `serve` as the subcommand for:
-- barraCuda
-- coralReef
-- rhizoCrypt
-- loamSpine
-- sweetGrass
+The `infra/plasmidBin/start_primal.sh` script used `serve` for 5 primals, but v2026.05.23
+binaries expect `server`. Additionally:
+- barraCuda and rhizoCrypt reject `--socket` (use internal XDG discovery)
+- coralReef uses `--rpc-bind` not `--port`
+- Songbird needs `SONGBIRD_SECURITY_PROVIDER` pointing to BearDog socket
 
-But the v2026.05.23 binaries now expect `server` (not `serve`). Error from logs:
-
-```
-error: unrecognized subcommand 'serve'
-  tip: some similar subcommands exist: 'service', 'server'
-```
-
-**Songbird** additionally requires `SONGBIRD_SECURITY_PROVIDER` env var set (pointing to BearDog socket) before it will start.
-
-### Proposed Fix (for plasmidBin maintainers)
-
-```diff
--    sweetgrass|rhizocrypt|loamspine)
--        ARGS+=(serve)
-+    sweetgrass|rhizocrypt|loamspine)
-+        ARGS+=(server)
-
--    barracuda)
--        ARGS+=(serve)
-+    barracuda)
-+        ARGS+=(server)
-
--    coralreef)
--        ARGS+=(serve)
-+    coralreef)
-+        ARGS+=(server)
-```
-
-For songbird, add before launch:
-```bash
-export SONGBIRD_SECURITY_PROVIDER="unix://$SOCKET_DIR/beardog-${FAMILY_ID}.sock"
-```
+**All fixes applied in plasmidBin commit `8c8cb44`.** After fix: 11/11 PASS.
 
 ## What IS Working
 
