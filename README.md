@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 23, 2026 (Wave 46+: primalSpring v0.9.27 deep debt evolution — typed errors, env centralization, idiomatic Rust. sporePrint ownership transferred to primalSpring with Rust evolution mandate + link-lint CI. 13/13 primals evolved, 458 methods, 784 primalSpring tests, 12/12 primal.announce compliant. biomeOS v3.71 membrane composition live execution. toadStool catalyst teardown + GV100 fixes.)
+**Last Updated**: May 24, 2026 (Wave 47: primalSpring v0.9.28 — sporePrint Rust evolution complete, gate deployment intel absorbed from 5 springs, plasmidBin launcher fixes (health timeout, socket paths, NestGate env, loamSpine discovery). 458 methods, 784 primalSpring tests, 12/12 primal.announce compliant. 5 springs deploying NUCLEUS on LAN gates. cellMembrane operational with VPS Tower + runbooks.)
 
 ---
 
