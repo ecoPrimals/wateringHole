@@ -351,9 +351,9 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Defensive network security  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (87.37% coverage, core modules 90-100%)
+**Status**: Production Ready (v0.2.0 — 389 tests, 90%+ coverage, zero debt)
 
-**Role**: skunkBat protects sovereign computing environments through threat detection and graduated response. It is strictly defensive - reconnaissance, not surveillance. It learns your network's normal baseline and detects deviations. It never inspects content, only metadata.
+**Role**: skunkBat protects sovereign computing environments through metadata-only defensive reconnaissance. It detects threats, orchestrates graduated responses, and federates threat intelligence across trusted peers — all without inspecting packet contents or tracking user behavior.
 
 **Primitives**:
 
@@ -361,13 +361,20 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 |----------|-----------|
 | **Threat Detection** | Genetic (unknown lineage), Topology (layer-hopping), Behavioral (statistical anomalies), Intrusion (attack signatures), Resource (DoS, exhaustion) |
 | **Defense Actions** | Monitor + Alert (low), Quarantine (isolate), Block (deny, operator decision) |
-| **Baseline** | Statistical profiling of normal network patterns |
+| **Baseline** | Statistical profiling of normal network patterns (multi-dimensional rolling window) |
 | **Reconnaissance** | Network intelligence (metadata-only, no content) |
+| **Transport** | BTSP Phase 3 (ChaCha20-Poly1305 encrypted framing, cipher negotiation) |
+| **Authorization** | JH-0 MethodGate (pre-dispatch capability auth, enforced/permissive modes) |
+| **Audit** | JH-5 Audit Log (ring buffer, cursor-based RPC query, rhizoCrypt + sweetGrass forwarding) |
 | **Integration** | Trait-based ecosystem integration (BearDog, ToadStool, Songbird, NestGate) |
+
+**IPC Methods**: 18 JSON-RPC methods (scan, detect, respond, metrics, audit_log, health.*, lifecycle.status, btsp.negotiate, btsp.capabilities, capabilities.list, identity.get, auth.*)  
+**Default Port**: 9750 (TCP) + UDS (`security.sock`)  
+**Dependencies**: Zero C deps. Pure RustCrypto (OsRng, ChaCha20-Poly1305, HMAC).
 
 **Principles**: Defensive only, user authority required, privacy by architecture
 
-**Participates In**: Ecosystem security layer, Dark Forest defense coordination
+**Participates In**: Ecosystem security layer, Dark Forest defense coordination, NUCLEUS compositions (security observability tier)
 
 ---
 
