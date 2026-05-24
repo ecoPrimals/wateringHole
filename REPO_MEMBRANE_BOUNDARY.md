@@ -136,25 +136,35 @@ inner membrane presence.
 
 ## Forgejo Operational Status
 
-### Current Reality (May 2026)
+### Current Reality (May 23, 2026)
 
-Forgejo is **declared primary** but **operationally secondary**:
+Forgejo is **declared primary** and now **operationally synced**:
 
-- Every local clone has `origin` → `github.com` — no `forgejo` remote
-- `forgejo_mirror.sh` exists but hasn't been run on dev machines
-- No automatic sync — dual-push is policy, not enforcement
-- All CI runs on GitHub Actions (`notify-sporeprint.yml`, etc.)
-- Forgejo is reachable at `git.primals.eco:3000` behind tunnel
+- **32/32 repos** have `forgejo` remote configured and are in sync
+- All 3 Forgejo orgs populated: sporeGarden (5), ecoPrimals (19), syntheticChemistry (8)
+- **Async mirror automation** deployed via Cursor `afterShellExecution` hook —
+  every `git push` to origin auto-triggers background `git push forgejo`
+- Manual full-sync available via `cellMembrane/forgejo_sync.sh --status`
+- CI still runs on GitHub Actions (`notify-sporeprint.yml`, etc.)
+- Forgejo reachable at `127.0.0.1:3000` (LAN) and `git.primals.eco:3000` (tunnel)
+
+### Sync Tooling
+
+| Tool | Location | Purpose |
+|------|----------|---------|
+| `forgejo_sync.sh` | `gardens/cellMembrane/forgejo_sync.sh` | Full or single-repo sync (manual/cron) |
+| Cursor hook | `~/.cursor/hooks/forgejo-mirror.sh` | Auto-mirror after any `git push` (async) |
+| `forgejo_mirror.sh` | `gardens/projectNUCLEUS/deploy/forgejo_mirror.sh` | Create repos + add remotes (setup) |
 
 ### Migration Path
 
-1. **Current**: GitHub-only development, Forgejo aspirational
-2. **Near-term**: Run `forgejo_mirror.sh` to add `forgejo` remotes,
-   begin dual-push for active repos
-3. **Mid-term**: Port `notify-sporeprint.yml` to Forgejo Actions,
+1. ~~**GitHub-only development**~~ — completed May 23, 2026
+2. **Current**: Forgejo remotes on all repos, async mirror hook active,
+   GitHub remains operationally primary for CI
+3. **Near-term**: Port `notify-sporeprint.yml` to Forgejo Actions,
    validate CI parity
 4. **Long-term**: Forgejo becomes true primary, GitHub auto-mirrored
-   via post-receive hook or Forgejo's built-in mirror
+   via Forgejo post-receive hook
 
 ---
 
@@ -183,20 +193,33 @@ private is acceptable as a transitional state.
 
 ## Push Policy Enforcement
 
-### Manual (current)
+### Automated (current — May 23, 2026)
+
+**Cursor hook** (`~/.cursor/hooks/forgejo-mirror.sh`): Fires after
+every `git push` to a non-forgejo remote. Detects the repo, checks
+for a `forgejo` remote, and pushes the current branch in the
+background. Fire-and-forget — failures logged to
+`/tmp/forgejo_mirror_hook.log`, never blocks the agent.
+
+**Manual full sync** (`cellMembrane/forgejo_sync.sh`):
 
 ```bash
-# Dual-push workflow
-git push forgejo main
-git push origin main
+# Show sync status across all 32 repos
+./forgejo_sync.sh --status
 
-# Or use forgejo_mirror.sh for batch
-FORGEJO_TOKEN=<token> bash forgejo_mirror.sh --push-all
+# Push all diverged repos to Forgejo
+./forgejo_sync.sh
+
+# Force-push diverged repos (after rebase)
+./forgejo_sync.sh --force
+
+# Sync single repo
+./forgejo_sync.sh primals/bearDog
 ```
 
-### Automated (future)
+### Inner-only enforcement (future)
 
-A pre-push hook can enforce the membrane boundary:
+A pre-push hook can enforce the membrane boundary for `cellMembrane`:
 
 ```bash
 # .git/hooks/pre-push (inner-only repos)
@@ -208,7 +231,7 @@ fi
 ```
 
 A Forgejo post-receive hook can auto-mirror to GitHub for dual-push
-repos, eliminating the need for manual dual-push.
+repos, eliminating the need for the Cursor hook entirely.
 
 ---
 
@@ -227,3 +250,4 @@ repos, eliminating the need for manual dual-push.
 | Date | Change |
 |------|--------|
 | 2026-05-17 | Initial version — repo membrane boundary classification from infrastructure review |
+| 2026-05-23 | Forgejo operationally synced (32/32 repos). Async mirror hook deployed. forgejo_sync.sh created. Migration step 1 complete. |
