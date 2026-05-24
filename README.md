@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 24, 2026 (Wave 47: primalSpring v0.9.28 — sporePrint Rust evolution complete, gate deployment intel absorbed from 5 springs, plasmidBin launcher fixes (health timeout, socket paths, NestGate env, loamSpine discovery). 458 methods, 784 primalSpring tests, 12/12 primal.announce compliant. 5 springs deploying NUCLEUS on LAN gates. cellMembrane operational with VPS Tower + runbooks.)
+**Last Updated**: May 24, 2026 (Wave 47: Post-primordial behavioral convergence complete. DEPLOYMENT_BEHAVIOR_STANDARD 13/13. Deep debt sweeps across 9 primals (toadStool S273, nestgate S72, biomeOS v3.73, barraCuda, rhizoCrypt, coralReef, skunkBat, petalTongue, loamSpine). 458 methods, 784 primalSpring tests. 5 gates deploying NUCLEUS. Glacial shift: covalent bonding, sovereignty cutover, Neural API evolution.)
 
 ---
 

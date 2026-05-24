@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 24, 2026 (Wave 47 — primalSpring v0.9.28, sporePrint Rust evolution, gate deployment intel absorbed. plasmidBin launcher fixes shipped. 5 springs deploying NUCLEUS on LAN gates. All upstream Neural API blockers resolved, 12/12 primal.announce compliant)
+**Last Updated**: May 24, 2026 (Wave 47 — DEPLOYMENT_BEHAVIOR_STANDARD 13/13. Deep debt sweeps across 9 primals. biomeOS v3.73 capability-domain composition. All behavioral convergence items resolved. Glacial shift: covalent bonding, sovereignty cutover, Neural API evolution)
 
 ---
 
