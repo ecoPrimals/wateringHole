@@ -428,7 +428,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | Spring | Version |
 |--------|---------|
 | ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
-| hotSpring | v0.6.30 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
+| hotSpring | v0.6.32 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
 | groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
 | wetSpring | V99 |
@@ -481,41 +481,39 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Participates In**: Node Atomic (via ToadStool compute), Nest Atomic (via NestGate data), NUCLEUS (via biomeOS deployment graphs), metalForge cross-system dispatch
 
-### hotSpring - Computational Physics
+### hotSpring - Computational Physics + Biomolecular MD
 
-**Domain**: Plasma physics, nuclear structure, lattice QCD, transport, spectral theory
-**Phase**: Domain Validation
-**Status**: v0.6.23 — ~700 tests, 84 binaries, 62 WGSL shaders, 39/39 validation suites
+**Domain**: Plasma physics, nuclear structure, lattice QCD, transport, spectral theory, biomolecular MD (CAZyme conformational energy landscapes)
+**Phase**: Domain Validation + Biomolecular Evolution (Exp 220)
+**Status**: v0.6.32 — 700 (cylinder) / 596 (default) / 1,045 (barracuda-local) lib tests, 167 binaries, 128 WGSL shaders, 65 validation suites (3 tiers), 220 experiments. guideStone Level 6 CERTIFIED (primalSpring v0.9.27). Fleet: 2× Titan V (GV100) + RTX 5060 (Blackwell).
 
-**Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC), screened Coulomb transport, Anderson localization, and Hofstadter butterfly. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline.
+**Role**: hotSpring validates the ecoPrimals compute pipeline against published computational physics — Yukawa OCP, nuclear EOS (HFB), lattice QCD (SU(3) pure gauge + dynamical fermion HMC), screened Coulomb transport, Anderson localization, and Hofstadter butterfly. First consumer-GPU dynamical fermion QCD. First neuromorphic silicon (AKD1000) in a lattice QCD production pipeline. **Exp 220 (May 2026)**: Extending into biomolecular MD for CAZyme conformational energy landscapes — GROMACS 2026.0 as industry control, bonded FF + metadynamics bias evolution, helixVision downstream validation layer.
 
 **Capabilities**:
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 30 complete/active: MD, GPU scaling, parity, lattice QCD, NPU characterization, brain architecture, adaptive steering |
-| **Physics Domains** | Yukawa OCP MD, nuclear EOS (SEMF→HFB→deformed), SU(3) gauge + dynamical fermion HMC, Green-Kubo transport, Anderson 1D/2D/3D, Hofstadter butterfly, Abelian Higgs |
-| **GPU Validation** | 62 WGSL shaders, DF64 core streaming (3.24 TFLOPS, 14-digit precision on FP32), GPU-resident CG (15,360× readback reduction) |
-| **NPU Integration** | Live AKD1000 via PCIe, 15-head ESN (11 production + 4 proxy), cross-run learning, concept edge detection |
-| **Brain Architecture** | 4-layer concurrent: RTX 3090 motor + Titan V pre-motor + CPU cortex + NPU cerebellum |
-| **Nautilus Shell** | Evolutionary reservoir computing (bingoCube/nautilus): 5.3% LOO, 2.6% blind Exp 029, 540× quenched→dynamical cost reduction, self-regulating drift + edge seeding, AKD1000 int4 export |
-| **Production Results** | Deconfinement χ=40.1 at β=5.69 (32⁴, 13.6h, $0.58). Dynamical crossover confirmed (8⁴, 17 β points) |
+| **Experiments** | 220 (001–190 archived, 191–220 active): MD, GPU scaling, parity, lattice QCD, NPU characterization, brain architecture, sovereign GPU (Exp 162–219), CAZyme FEL (Exp 220) |
+| **Physics Domains** | Yukawa OCP MD, nuclear EOS (SEMF→HFB→deformed), SU(3) gauge + dynamical fermion HMC, Green-Kubo transport, Anderson 1D/2D/3D, Hofstadter butterfly, Abelian Higgs, biomolecular MD (bonded FF, metadynamics — in progress) |
+| **GPU Validation** | 128 WGSL shaders, DF64 core streaming (3.24 TFLOPS, 14-digit precision on FP32), GPU-resident CG (15,360× readback reduction) |
+| **Sovereign GPU** | VFIO sovereign dispatch on Titan V (GV100) + RTX 5060 (SM120). Sovereignty Tier Model (Tier 0–3). Catalyst Driver Pattern (Exp 219). 24 RPC methods. Warm keepalive 183ms (76× faster than cold). |
+| **NPU Integration** | Live AKD1000 via PCIe, 15-head ESN, cross-run learning, concept edge detection |
+| **Biomolecular MD** | GROMACS 2026.0 industry control (CUDA, PLUMED, Colvars). Existing: LJ, Coulomb, PPPM, VV, thermostats, cell/Verlet lists. Missing: bonded FF, topology reader, metadynamics bias. Feeds helixVision downstream. |
+| **Production Results** | Deconfinement χ=40.1 at β=5.69 (32⁴, 13.6h, $0.58). Dynamical crossover confirmed. Chuna 44/44 PASS. guideStone L6 CERTIFIED. |
 
 **ToadStool Contributions**:
-- 62 WGSL shaders evolved via cross-spring absorption (lattice QCD, HFB, transport, spectral)
+- 128 WGSL shaders evolved via cross-spring absorption (lattice QCD, HFB, transport, spectral, MD)
 - GPU-resident CG solver pattern absorbed upstream
 - DF64 core streaming validated and expanded (S60)
-- NVK dual-GPU deadlock fix (serialize device creation)
-- ESN cross-substrate patterns (GPU WGSL dispatch, NPU int4 quantization)
+- Sovereign GPU dispatch pipeline (Exp 162–219): VFIO, ember, diesel engine, warm keepalive
+- Compile-then-dispatch pipeline wired (coralReef→toadStool)
 
 **primalTools Contributions**:
-- bingoCube/nautilus: evolutionary reservoir computing crate (31 tests, 5 examples)
-- NautilusBrain API for NPU integration, self-regulating drift monitor, integrated edge seeder
+- bingoCube/nautilus: evolutionary reservoir computing crate
+- NautilusBrain API for NPU integration, self-regulating drift monitor
 - AKD1000 int4 weight export with quantization validation (MSE=0.004)
-- Full brain rehearsal: save/restore/transfer/merge/AKD1000 end-to-end validated
-- Exp 030: adaptive steering fix (--max-adaptive=12), bootstrapped from 29 data points
 
-**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment)
+**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment). helixVision downstream (MD validation for coralForge structure prediction).
 
 ### primalSpring - Coordination and Composition Validation
 
