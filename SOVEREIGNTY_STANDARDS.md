@@ -2,7 +2,7 @@
 
 # Sovereignty Standards — Ecosystem Behaviors for Sovereign Evolution
 
-**Date**: May 15, 2026
+**Date**: May 15, 2026 (updated May 23, 2026)
 **Status**: Active
 **Authority**: WateringHole Consensus
 **Audience**: All primals, all compositions, all deployments
@@ -145,10 +145,10 @@ Three channels define the cell's external interfaces (see
 - **Status**: LIVE
 
 ### Channel 3: Surface (TLS)
-- **Process**: Caddy (transitional) → Songbird (sovereign)
-- **Ports**: 80 (ACME/health), 443 (TLS termination)
-- **Trust**: ACME cert (Let's Encrypt), content-aware routing
-- **Status**: SHADOW (HTTP health on :80, TLS blocks ready for DNS grey-cloud)
+- **Process**: Caddy (transitional) → BearDog (sovereign)
+- **Ports**: 80 (ACME/redirect), 443 (TLS termination)
+- **Trust**: ACME cert (Let's Encrypt E8), content-aware routing
+- **Status**: **LIVE** — `membrane.primals.eco`, Caddy TLS, 19MB sporePrint cache, 68ms TTFB. BearDog ACME shadow on :8443 pending cutover.
 
 **Primal role clarification**:
 - **Songbird** handles TLS termination (long-term sovereign TLS)

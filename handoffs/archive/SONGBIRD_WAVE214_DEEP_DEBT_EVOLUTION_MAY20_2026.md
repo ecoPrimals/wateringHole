@@ -59,12 +59,12 @@ paths, and full clippy pedantic compliance across all 31 crates.
 | CG-8 Cross-gate dispatch | **RESOLVED (songBird)** | `capability.call` wired Wave 211. biomeOS integration to route to Songbird UDS still open. |
 | UB-1 TURN client | **RESOLVED** | `songbird-turn-client` (Wave 205) + full data-plane integration (Wave 213) |
 | R10 Stale sockets | **RESOLVED** | Cleanup on startup since Wave 199 |
-| S2 Shadow run | **READY** | `shadow_comparator` probes TURN + cloudflared in parallel; needs live deployment to VPS |
+| S2 Shadow run | **LIVE** | `shadow_comparator` probes TURN + cloudflared in parallel; relay deployed to VPS May 2026 |
 
 ## Remaining (songBird side)
 
 ### Operational (not code debt)
-- [ ] Deploy relay on cellMembrane VPS (projectNUCLEUS coordination)
+- [x] Deploy relay on cellMembrane VPS — **DONE** (Songbird TURN :3478 LIVE, May 2026)
 - [ ] Live STUN/TURN integration test with deployed relay
 - [ ] Run `songbird_nat_parity.sh` bench scenario
 

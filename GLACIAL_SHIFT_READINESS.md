@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-20
+**Last updated**: 2026-05-23
 
 ---
 
@@ -97,7 +97,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Ionic bond runtime (WS-1) | biomeOS + primalSpring | MEDIUM |
 | biomeOS route `capability.call` → Songbird for remote | biomeOS | MEDIUM |
 | Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM |
-| Sovereign DNS (knot-dns) | projectNUCLEUS | LOW |
+| Sovereign DNS (knot-dns) | cellMembrane team | MEDIUM |
 | BearDog ACME Phase 3 renewal daemon | bearDog | LOW |
 | `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW |
 | Forgejo Actions CI | projectNUCLEUS | LOW |

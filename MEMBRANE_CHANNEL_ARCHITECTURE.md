@@ -2,7 +2,7 @@
 
 # Membrane Channel Architecture — External Surface Design
 
-**Date**: May 13, 2026
+**Date**: May 13, 2026 (updated May 23, 2026)
 **Status**: Active
 **Authority**: WateringHole Consensus
 
@@ -210,9 +210,8 @@ active composition, not a static full-channel list.
 
 Each channel binds only to its assigned port(s). No channel listens
 on another channel's ports. The `songbird relay` binary does not open
-port 443. The `beardog-tls` binary does not open port 3478. Ports
-for inactive channels remain closed — the current relay + RustDesk deployment
-opens 22/tcp, 3478/udp+tcp, and 21115-21117/tcp+udp (RustDesk).
+port 443. The `beardog-tls` binary does not open port 3478. Ports for inactive channels remain closed. The current Tower + Channel 3 Surface
+deployment opens 22/tcp, 80/tcp, 443/tcp, 3478/udp+tcp, and 21115-21117/tcp+udp.
 
 ---
 
@@ -366,14 +365,15 @@ sovereign.
 
 ## Evolution Path
 
-### Interstadial (current)
+### Interstadial (current — May 2026)
 
-Deploy Model A (single VPS). All three channels operational. Shadow
-runs producing comparison data against Cloudflare baselines.
+Deploy Model A (single VPS). Channel 2 Relay and Channel 3 Surface operational.
+Channel 1 Signal pending (knot-dns not yet deployed). Shadow runs producing
+comparison data against Cloudflare baselines for S1 and S4 cutovers.
 
-- Channel 1: knot-dns answering queries for `primals.eco`
-- Channel 2: Songbird relay replacing cloudflared
-- Channel 3: BearDog TLS shadow on :8443 → :443 cutover when parity proven
+- Channel 1: knot-dns — **PLANNED** (sovereign DNS not yet deployed on VPS)
+- Channel 2: Songbird relay — **LIVE** (replacing cloudflared)
+- Channel 3: Caddy TLS on :80/:443 — **LIVE** (`membrane.primals.eco`, Let's Encrypt E8, 19MB sporePrint cache). BearDog TLS shadow on :8443 pending cutover.
 
 ### Stadial (next)
 
@@ -594,18 +594,18 @@ defense inside NUCLEUS, deployed to face the public internet.
 ### Hardening profile
 
 Firewall is composition-aware — only ports required by active channels are
-open. With relay-only composition (current state):
+open. Current state (Tower + Channel 3 Surface live, May 2026):
 
 | Port | Protocol | Purpose | Status |
 |------|----------|---------|--------|
-| 22 | TCP | SSH management (key-only, fail2ban) | Open |
-| 3478 | TCP + UDP | Channel 2: Relay (TURN) | Open |
-| 21115 | TCP | Channel 2b: RustDesk NAT test | Open |
-| 21116 | TCP + UDP | Channel 2b: RustDesk ID/hole-punch | Open |
-| 21117 | TCP | Channel 2b: RustDesk relay | Open |
-| 53 | UDP + TCP | Channel 1: Signal (DNS) | **Closed** (no listener) |
-| 80 | TCP | Channel 3: ACME challenge | **Closed** (no listener) |
-| 443 | TCP | Channel 3: Surface (HTTPS) | **Closed** (no listener) |
+| 22 | TCP | SSH management (key-only, fail2ban) | **Open** |
+| 80 | TCP | Channel 3: ACME challenge + redirect | **Open** (Caddy) |
+| 443 | TCP | Channel 3: Surface (HTTPS) | **Open** (Caddy TLS, `membrane.primals.eco`) |
+| 3478 | TCP + UDP | Channel 2: Relay (TURN) | **Open** |
+| 21115 | TCP | Channel 2b: RustDesk NAT test | **Open** |
+| 21116 | TCP + UDP | Channel 2b: RustDesk ID/hole-punch | **Open** |
+| 21117 | TCP | Channel 2b: RustDesk relay | **Open** |
+| 53 | UDP + TCP | Channel 1: Signal (DNS) | **Closed** (knot-dns not deployed) |
 
 Services purged: `exim4` (unnecessary mail server), `droplet-agent`
 (opaque DO monitoring). Services added: `fail2ban` (SSH brute-force
@@ -649,8 +649,8 @@ All modes support `--dry-run` for plan-only inspection.
 | `songbird-relay.service` | Channel 2: Relay (:3478) | **Active** |
 | `hbbs-membrane.service` | Channel 2b: RustDesk rendezvous (:21116) | **Active** |
 | `hbbr-membrane.service` | Channel 2b: RustDesk relay (:21117) | **Active** |
-| `beardog-membrane.service` | Tower: BTSP + crypto identity | **Ready** (deploy with `--composition tower`) |
-| `skunkbat-membrane.service` | Tower: Defense + audit | **Ready** (deploy with `--composition tower`) |
+| `beardog-membrane.service` | Tower: BTSP + crypto identity | **Active** (deployed with `--composition tower`) |
+| `skunkbat-membrane.service` | Tower: Defense + audit | **Active** (deployed with `--composition tower`) |
 | `share_credentials.sh` | `age`-based credential sharing between gates | **Active** |
 | `knot-dns.service` | Channel 1: Signal (:53) | Future |
 | `beardog-tls.service` | Channel 3: Surface (:443) | Future |

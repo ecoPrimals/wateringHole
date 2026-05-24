@@ -1,3 +1,9 @@
+> **HISTORICAL SNAPSHOT (May 14, 2026)** — Superseded by `gardens/cellMembrane/` private repo
+> (VPS_STATE.md, RUNBOOKS.md, GLACIAL_SHIFT_TRACKER.md). Live VPS has advanced beyond this
+> snapshot: Channel 3 Surface LIVE (Caddy TLS on :80/:443, `membrane.primals.eco`), Tower
+> composition deployed, 19MB sporePrint cache. Operational ownership transferred to
+> cellMembrane team (ironGate).
+
 # projectNUCLEUS — cellMembrane VPS Deployment Handoff
 
 **Date**: May 14, 2026 (updated)

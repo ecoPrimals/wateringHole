@@ -2,7 +2,7 @@
 
 # cellMembrane — fieldMouse Tower on External Substrate
 
-**Date**: May 14, 2026
+**Date**: May 14, 2026 (updated May 23, 2026)
 **Status**: Active
 **Authority**: WateringHole Consensus
 **Deployment Class**: fieldMouse
@@ -131,12 +131,14 @@ Only ports required by active channels are open:
 | Port | Protocol | Purpose |
 |------|----------|---------|
 | 22 | TCP | SSH management (key-only, fail2ban protected) |
+| 80 | TCP | Channel 3: ACME HTTP-01 + redirect (Caddy) |
+| 443 | TCP | Channel 3: Surface HTTPS (`membrane.primals.eco`, Let's Encrypt E8) |
 | 3478 | TCP + UDP | Channel 2: Relay (TURN) |
 | 21115 | TCP | RustDesk: NAT type test |
 | 21116 | TCP + UDP | RustDesk: ID registration + hole punching |
 | 21117 | TCP | RustDesk: relay |
 
-Ports 53, 80, 443 are **closed** until Channels 1 and 3 are deployed.
+Port 53 remains **closed** until Channel 1 (knot-dns) is deployed.
 Ports 21118, 21119 (RustDesk web client) are **closed** — not needed.
 
 ### Services removed
@@ -222,14 +224,18 @@ holds the preimage. Neither alone is useful to the substrate provider.
 Phase 0: Relay only (Songbird on :3478)
   └── TURN credentials in plaintext on disk (to be encrypted)
 
-Phase 1: Tower composition — BearDog + Songbird + SkunkBat + RustDesk (current operational state)
+Phase 1: Tower composition — BearDog + Songbird + SkunkBat + RustDesk ← CURRENT
   └── Songbird TURN + RustDesk hbbs/hbbr co-hosted
+  └── Channel 3 Surface: Caddy TLS on :80/:443 (membrane.primals.eco, Let's Encrypt E8)
+  └── 19 MB sporePrint content cache synced from NestGate
   └── Multi-gate SSH key management via deploy_membrane.sh keys
   └── droplet-agent purged, geo-delocalized gates supported
-
-Phase 1: Tower composition (BearDog + Songbird + SkunkBat + RustDesk)
-  └── Adds crypto identity, defense audit
   └── deploy_membrane.sh --composition tower
+
+Phase 1.5: Nest expansion + Channel 1 DNS + Channel 3 TLS hardening ← NEXT
+  └── deploy_membrane.sh --composition nest (NestGate + rhizoCrypt + loamSpine + sweetGrass)
+  └── knot-dns sovereign DNS on Channel 1
+  └── Caddy → BearDog ACME cutover on Channel 3
 
 Phase 2: Encrypted-at-rest
   └── BearDog Vault encrypts all credentials on disk
@@ -274,8 +280,8 @@ fieldMouse-cellMembrane
 │   ├── hbbs — RustDesk rendezvous (ID, NAT)
 │   └── hbbr — RustDesk relay (remote desktop)
 ├── Substrate: DigitalOcean VPS (nyc1)
-├── Channels: 2 active (Relay + RustDesk), 1+3 future
-└── Owner: projectNUCLEUS (ops), primalSpring (tooling)
+├── Channels: 2 active (Relay + RustDesk), 3 active (Surface/TLS), 1 planned (DNS)
+└── Owner: cellMembrane team / ironGate (ops), projectNUCLEUS (validation), primalSpring (tooling)
 ```
 
 ---

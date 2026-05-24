@@ -554,16 +554,17 @@ See `gen3/about/LICENSING_STRATEGY.md` §8 for the full analysis.
 ### cellMembrane
 
 The **selective permeability layer** of the ecosystem — a private operational
-repo managed by `projectNUCLEUS` (sporeGarden org) that deploys the
+repo managed by the **cellMembrane team (ironGate)** (sporeGarden org) that deploys the
 **fieldMouse Tower** composition to external substrate (VPS). cellMembrane
 controls what crosses between intracellular (LAN/gates) and extracellular
 (public internet) layers.
 
-Current state (May 2026):
-- **Relay** (Songbird TURN): LIVE
-- **Remote** (RustDesk hbbs/hbbr): LIVE
-- **TLS** (BearDog reverse proxy): SHADOW LIVE
-- **Content** (Caddy + NestGate): SHADOW LIVE
+Current state (May 23, 2026):
+- **Channel 2 Relay** (Songbird TURN :3478): **LIVE**
+- **Channel 2b Remote** (RustDesk hbbs/hbbr :21115-21117): **LIVE**
+- **Channel 3 Surface** (Caddy TLS :80/:443, `membrane.primals.eco`): **LIVE** — Let's Encrypt E8, 19MB sporePrint cache, 68ms TTFB
+- **Channel 3 TLS shadow** (BearDog :8443): SHADOW — pending cutover
+- **Channel 1 Signal** (knot-dns :53): **PLANNED** — glacial shift blocker
 
 cellMembrane is operationally on GitHub Private but should migrate to
 Forgejo-only when the inner membrane is operationally stable. It contains
