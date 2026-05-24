@@ -20,11 +20,15 @@ CI strategy, and contamination prevention.
 
 ## Membrane Model
 
-| Layer | Git Host | Trust | Push Policy |
-|-------|----------|-------|-------------|
-| **Inner membrane** | Forgejo (`git.primals.eco:3000`) | Covalent — full trust, private by default | `git push forgejo` only |
-| **Dual-push** | Forgejo primary + GitHub mirror | Controlled — Forgejo canonical, GitHub for public visibility | `git push forgejo && git push origin` |
+| Layer | Git Host | Trust | Sync Direction |
+|-------|----------|-------|----------------|
+| **Inner membrane** | Forgejo (`git.primals.eco:3000`) | Covalent — full trust, private by default | Direct push to Forgejo only |
+| **Trailing mirror** | GitHub primary → Forgejo pulls | Observed primary — Forgejo trails GitHub server-side | GitHub authoritative, Forgejo auto-syncs (8h) |
 | **Outer membrane** | GitHub only | Observed — public archive, CDN, Pages | `git push origin` only |
+
+**Note**: The "Dual-push" model was retired May 23, 2026. Dev happens across
+multiple gates — per-machine push hooks don't scale. Forgejo now pulls
+from GitHub server-side. When covalent gates host Forgejo, we invert.
 
 ---
 
@@ -118,7 +122,7 @@ inner membrane presence.
 | API keys pushed to GitHub | Accidental `git add` of `.env` files | All primals, especially `squirrel` | `.gitignore` patterns cover `.env`, `*.env`, `.env.*` — verified ecosystem-wide |
 | Operational secrets on GitHub | `cellMembrane` is on GitHub (private) | `cellMembrane` | Move to Forgejo-only (pending decision) |
 | Local experiments leak to GitHub | Developer pushes WIP with sensitive data | Any repo | Pre-push hook checking for sensitive patterns (future) |
-| Forgejo/GitHub divergence | Forgetting dual-push, one host falls behind | All dual-push repos | `forgejo_mirror.sh --push-all` periodic sweep |
+| Forgejo/GitHub divergence | Pull mirror fails or timer stops | All dual-push repos | `forgejo_pull_mirror.sh --status` + `forgejo_sync.sh --status` checks |
 
 ### .env Audit Summary (May 17, 2026)
 
@@ -138,33 +142,42 @@ inner membrane presence.
 
 ### Current Reality (May 23, 2026)
 
-Forgejo is **declared primary** and now **operationally synced**:
+Forgejo is the **trailing inner membrane mirror**. GitHub is authoritative.
+When covalent gates host Forgejo on sovereign infrastructure, we invert.
 
-- **32/32 repos** have `forgejo` remote configured and are in sync
+- **31/31 dual-push repos** synced to Forgejo (cellMembrane is inner-only)
 - All 3 Forgejo orgs populated: sporeGarden (5), ecoPrimals (19), syntheticChemistry (8)
-- **Async mirror automation** deployed via Cursor `afterShellExecution` hook —
-  every `git push` to origin auto-triggers background `git push forgejo`
-- Manual full-sync available via `cellMembrane/forgejo_sync.sh --status`
+- **25 repos**: Native Forgejo **pull mirrors** from GitHub (auto-sync every 8h, server-side)
+- **6 repos**: Regular repos, synced via `forgejo_sync.sh` + systemd timer (8h)
+  - Private on GitHub: `bearDog`, `skunkBat`, `whitePaper`
+  - Large/clone-timeout: `neuralSpring`, `primalSpring`, `wetSpring`
+- **1 repo**: `cellMembrane` — inner-only, direct push (not mirrored from GitHub)
 - CI still runs on GitHub Actions (`notify-sporeprint.yml`, etc.)
 - Forgejo reachable at `127.0.0.1:3000` (LAN) and `git.primals.eco:3000` (tunnel)
+
+**Why pull, not push?** Dev happens across multiple gates (ironGate, eastGate,
+southGate, etc.). Per-machine push hooks don't scale. Server-side pull mirrors
+ensure Forgejo stays consistent regardless of which gate pushed to GitHub.
 
 ### Sync Tooling
 
 | Tool | Location | Purpose |
 |------|----------|---------|
-| `forgejo_sync.sh` | `gardens/cellMembrane/forgejo_sync.sh` | Full or single-repo sync (manual/cron) |
-| Cursor hook | `~/.cursor/hooks/forgejo-mirror.sh` | Auto-mirror after any `git push` (async) |
-| `forgejo_mirror.sh` | `gardens/projectNUCLEUS/deploy/forgejo_mirror.sh` | Create repos + add remotes (setup) |
+| Native pull mirrors | Forgejo server-side | 25 repos auto-sync from GitHub every 8h |
+| `forgejo_sync.sh` | `gardens/cellMembrane/forgejo_sync.sh` | Sync 6 non-mirror repos (fetch origin → push forgejo) |
+| `forgejo-sync.timer` | `~/.config/systemd/user/` | Systemd timer fires `forgejo_sync.sh` every 8h |
+| `forgejo_pull_mirror.sh` | `gardens/cellMembrane/forgejo_pull_mirror.sh` | Manage native mirrors (migrate, status, trigger sync) |
 
 ### Migration Path
 
 1. ~~**GitHub-only development**~~ — completed May 23, 2026
-2. **Current**: Forgejo remotes on all repos, async mirror hook active,
-   GitHub remains operationally primary for CI
-3. **Near-term**: Port `notify-sporeprint.yml` to Forgejo Actions,
-   validate CI parity
-4. **Long-term**: Forgejo becomes true primary, GitHub auto-mirrored
-   via Forgejo post-receive hook
+2. ~~**Push-based sync**~~ — replaced May 23, 2026 (doesn't scale to multi-gate)
+3. **Current**: Forgejo pulls from GitHub server-side. GitHub remains
+   operationally primary for CI and dev. Forgejo is lagging mirror.
+4. **Near-term**: Port `notify-sporeprint.yml` to Forgejo Actions,
+   validate CI parity. Move 3 private repos to native mirrors with GitHub PAT.
+5. **Inversion**: When covalent gates host Forgejo, it becomes primary.
+   GitHub becomes the push mirror target.
 
 ---
 
@@ -195,26 +208,27 @@ private is acceptable as a transitional state.
 
 ### Automated (current — May 23, 2026)
 
-**Cursor hook** (`~/.cursor/hooks/forgejo-mirror.sh`): Fires after
-every `git push` to a non-forgejo remote. Detects the repo, checks
-for a `forgejo` remote, and pushes the current branch in the
-background. Fire-and-forget — failures logged to
-`/tmp/forgejo_mirror_hook.log`, never blocks the agent.
+**Server-side pull mirrors** (25 repos): Forgejo natively pulls from
+GitHub every 8h. Zero dev-machine involvement. Triggered via
+`POST /api/v1/repos/{owner}/{repo}/mirror-sync` for on-demand sync.
 
-**Manual full sync** (`cellMembrane/forgejo_sync.sh`):
+**Systemd timer** (6 non-mirror repos): `forgejo-sync.timer` runs
+`forgejo_sync.sh` every 8h on the Forgejo host (ironGate). Fetches
+from GitHub origin, pushes to local Forgejo. Independent of which
+dev machine pushed to GitHub.
 
 ```bash
-# Show sync status across all 32 repos
-./forgejo_sync.sh --status
+# Check mirror status (all 31 repos)
+FORGEJO_TOKEN=<tok> ./forgejo_pull_mirror.sh --status
 
-# Push all diverged repos to Forgejo
+# Sync 6 non-mirror repos manually
 ./forgejo_sync.sh
+
+# Trigger all native mirrors + sync non-mirrors
+FORGEJO_TOKEN=<tok> ./forgejo_sync.sh --all
 
 # Force-push diverged repos (after rebase)
 ./forgejo_sync.sh --force
-
-# Sync single repo
-./forgejo_sync.sh primals/bearDog
 ```
 
 ### Inner-only enforcement (future)
@@ -230,8 +244,7 @@ if [[ "$remote" == "origin" ]]; then
 fi
 ```
 
-A Forgejo post-receive hook can auto-mirror to GitHub for dual-push
-repos, eliminating the need for the Cursor hook entirely.
+Post-inversion: Forgejo post-receive hooks auto-mirror to GitHub.
 
 ---
 
@@ -250,4 +263,4 @@ repos, eliminating the need for the Cursor hook entirely.
 | Date | Change |
 |------|--------|
 | 2026-05-17 | Initial version — repo membrane boundary classification from infrastructure review |
-| 2026-05-23 | Forgejo operationally synced (32/32 repos). Async mirror hook deployed. forgejo_sync.sh created. Migration step 1 complete. |
+| 2026-05-23 | Forgejo synced (31/31 repos). Pull-mirror model: 25 native mirrors + 6 timer-synced + 1 inner-only. Cursor hooks removed (wrong model for multi-gate). |
