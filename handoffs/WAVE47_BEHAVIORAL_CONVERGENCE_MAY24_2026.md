@@ -79,11 +79,17 @@ target contract. This blurb contains the per-primal action items.
    `{"status":"alive"}` instead of `{"status":"healthy"}`. The neural-api
    socket already returns `"alive"` — the api socket should match.
 
-### petalTongue — 1 item (LOW effort)
+### petalTongue — DONE (May 24, 2026)
 
-1. **Add explicit SIGTERM handler**. Currently relies on Drop cleanup.
-   Add `tokio::signal::unix::signal(SignalKind::terminate())` to the
-   shutdown path.
+1. ~~**Add explicit SIGTERM handler**~~ — **DONE** (`src/signal.rs` shared
+   module, `shutdown_signal()` for SIGTERM + SIGINT, wired into all 3
+   long-running modes via `with_graceful_shutdown` / `tokio::select!` /
+   spawned task).
+2. **Bonus**: `health.liveness` normalized to `{"status":"alive"}` on both
+   HTTP and IPC (removed legacy `"alive":true` field).
+3. **Bonus**: Deep debt resolved — web_mode refactored (1136→3 files),
+   BTSP BEARDOG overstep removed, NestGate evolved to capability-based
+   `content_backend`, Display V1 + provenance trio discovery rewired.
 
 ### toadStool — 1 item (LOW effort)
 

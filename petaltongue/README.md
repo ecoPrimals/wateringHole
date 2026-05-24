@@ -2,7 +2,7 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: May 2, 2026 (String error elimination — zero `Result<_, String>` in production, typed errors across 13 modules, PG-48 musl resolved, GAP-12 dashboard docs, BTSP Phase 2 operational, deny.toml async-trait guard)
+**Updated**: May 24, 2026 (Wave 47 behavioral convergence — SIGTERM handler, health.liveness normalized, web_mode refactored, BTSP overstep removed, NestGate→content_backend capability evolution, Display V1/provenance discovery rewired, stale refs cleaned)
 
 ---
 
@@ -10,41 +10,34 @@ Cross-primal integration documentation for petalTongue — the **Universal User 
 
 petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
 - 6,191+ tests passing, 0 failures
-- `#![forbid(unsafe_code)]` unconditional on all 18 crates + UniBin, zero C dependencies
+- `#![forbid(unsafe_code)]` unconditional on all 18 crates + UniBin, zero C dependencies, zero `unsafe` blocks
+- Zero `todo!()`, `unimplemented!()`, `TODO`, `FIXME`, `HACK` markers
+- Zero `.unwrap()` in production code; one documented `.expect()` for SIGTERM registration
 - ~90% line coverage (llvm-cov) — threshold enforced via `llvm-cov.toml`
+- All files under 800 lines; largest is `visualization/mod.rs` at 795
 - UUI glossary module (`petal_tongue_core::uui_glossary`) — canonical terminology for modalities, user types, SAME DAVE
 - tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
 - JSON-RPC 2.0 over Unix sockets (secondary, local IPC and debugging)
 - HTTP fallback for browser/external clients
-- Capability-based discovery -- zero hardcoded primal names, 62+ capability constants, 15 primal identity constants
+- Capability-based discovery — zero hardcoded primal names in production, 62+ capability constants
+- **TRUE PRIMAL compliant**: All cross-primal discovery via capability, not name. BTSP uses role-based env vars (`BTSP_PROVIDER_SOCKET`, `SECURITY_PROVIDER_SOCKET`). Content backend via `CONTENT_BACKEND_SOCKET`. Display via `DISPLAY_BACKEND_SOCKET`. Provenance via `PROVENANCE_TRIO_SOCKET`.
+- **Graceful shutdown**: Shared `signal.rs` handles SIGTERM + SIGINT across all long-running modes (web/server/live). Per `DEPLOYMENT_BEHAVIOR_STANDARD.md`.
+- **`health.liveness` normalized**: Returns exactly `{"status":"alive"}` on both HTTP and IPC.
+- **Content backend evolution**: `web_mode/content_backend.rs` replaces nestgate.rs — primal-agnostic `content.resolve` client
 - **Enriched `capability.list`**: returns `primal`, `version`, `transport[]`, `methods[]`, `depends_on[]`, `data_bindings`, `geometry_types`
 - **Sensory Capability Matrix**: `capabilities.sensory` and `capabilities.sensory.negotiate` IPC methods for input×output negotiation
 - **Accessibility adapters**: SwitchInputAdapter, AudioInversePipeline, AgentInputAdapter for motor-impaired, blind, and AI users
 - Grammar of Graphics engine with Tufte constraint validation
-- **DataBinding auto-compiler**: All 11 DataBinding variants (TimeSeries, Distribution, Bar, Gauge, Spectrum, Heatmap, Scatter, Scatter3D, FieldMap, GameScene, Soundscape) auto-compile to Grammar of Graphics
+- **DataBinding auto-compiler**: All 11 DataBinding variants auto-compile to Grammar of Graphics
 - **Dashboard layout engine**: Multi-panel grid with domain theming and SVG/description export
-- **Scenario loader**: Load healthSpring-style JSON scenarios from disk with `--scenario` CLI flag
-- **Faceting**: `compile_faceted()` for small multiples (Wrap/Grid layouts)
-- **Threshold coloring**: `compile_with_thresholds()` for normal/warning/critical cell colors in heatmaps
-- **Tile/Arc geometry**: Real heatmap/fieldmap tile rendering, semicircular gauge arcs
 - Domain-aware rendering (7 palettes: health, physics, ecology, agriculture, measurement, neural, game)
-- Spring IPC: healthSpring DataChannel auto-compile, dashboard render, wetSpring Scatter/Spectrum, physics bridge, interaction method aliases
 - Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, haptic, braille, description, SVG, headless
 - Scene graph with Manim-style animation, modality compilers (SVG, audio, description, terminal)
-- **Spring absorption**: backpressure, JSONL telemetry, diverging palette, pipeline DAG, provider registry, `temp_env` safe testing, `TryFrom` safe casts, `tempfile` socket isolation
-- **Live ecosystem wiring**: sensor feed, interaction broadcast, Neural API registration, GameDataChannel mapping
-- **Smart refactoring**: doom-core (910→47 lines lib.rs via module decomposition), petal-tongue-tui/app (887→module tree)
-- **Game visualization**: Sprite/Tilemap/GameEntity primitives, GameScene DataBinding for ludoSpring
-- **Soundscape synthesis**: 5 waveforms, stereo panning, fade envelopes, Soundscape DataBinding
-- **JSONL telemetry provider**: File-based hotSpring/groundSpring bridge via `PETALTONGUE_TELEMETRY_DIR`
-- All files under 1,000 lines; all production stubs evolved to implementations
-- **BTSP Phase 2**: Typed `BtspHandshakeError` enum, BearDog provider delegation, NULL cipher handshake operational
+- **BTSP Phase 3**: Role-based provider socket resolution, typed `BtspHandshakeError` enum, NULL cipher handshake operational
 - **Zero-copy textures**: `TextureEntry.data` uses `bytes::Bytes` for refcounted sharing
-- **Typed render errors**: `RenderError` struct with machine-readable codes replaces `Option<String>`
-- **Dashboard param schema**: Wire-level JSON-RPC docs for `visualization.render.dashboard` (`session_id` + `bindings` required)
+- **Typed error evolution**: Zero `Result<_, String>` in production — 13 modules evolved to `thiserror` enums
 - **`deny.toml` hardened**: `async-trait` banned with wrappers for transitive deps (axum, opentelemetry)
-- **`cargo deny check bans`**: Passes clean (interstadial quality gate)
-- **Typed error evolution**: Zero `Result<_, String>` in production — 13 modules evolved to `thiserror` enums (provenance, physics bridge, audio, graph builder, event bus, capability taxonomy, biomeOS discovery, status reporter, startup audio, data source, sandbox, network audio, tool integration)
+- **Pure Rust audio**: `hound` (WAV gen), `symphonia` (decode), AudioCanvas (`/dev/snd`). No rodio/cpal/ALSA bindings.
 
 ### Grammar of Graphics Engine (Implemented)
 
