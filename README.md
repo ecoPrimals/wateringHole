@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 23, 2026 (Wave 46: primalSpring v0.9.27 deep debt evolution — typed errors, env centralization, idiomatic Rust. 13/13 primals evolved, 458 methods, 784 primalSpring tests, 12/12 primal.announce compliant. biomeOS v3.70 persistent weights + weight health + utilization.)
+**Last Updated**: May 23, 2026 (Wave 46+: primalSpring v0.9.27 deep debt evolution — typed errors, env centralization, idiomatic Rust. sporePrint ownership transferred to primalSpring with Rust evolution mandate + link-lint CI. 13/13 primals evolved, 458 methods, 784 primalSpring tests, 12/12 primal.announce compliant. biomeOS v3.71 membrane composition live execution. toadStool catalyst teardown + GV100 fixes.)
 
 ---
 
@@ -55,7 +55,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BarraCuda** | Pure Math | 806 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.5, 3,400+ tests | Production (A+) |
 | **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, auto-D0 recovery, VFIO-first boot, graceful shutdown, DRM render node fencing, IOMMU group handling). **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-069). D3hot→D0 sovereign VRAM recovery. Sovereign power management designed (5-state model). Reproducibility checklist for adding new GPUs | Production (Phase 10, Iter 52) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Composition primal: Neural API (260+ translations, 19 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring, `signal.dispatch` composition collapse, `primal.announce` atomic self-registration, `composition.status` pipelines, enrichment module, `NucleusMode::Full` (13 primals), 16 braid signal graphs, `spore.instantiate`, stability tiers (114 annotations), adaptive routing weights (redb-persistent), weight health introspection, composition intelligence (`CompositionTier`, `CompositionPatternRegistry`), capability utilization tracking, attestation verification via BearDog | Production (v3.70, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Composition primal: Neural API (260+ translations, 19 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring, `signal.dispatch` composition collapse, `primal.announce` atomic self-registration, `composition.status` pipelines, enrichment module, `NucleusMode::Full` (13 primals), 16 braid signal graphs, `spore.instantiate`, stability tiers (114 annotations), adaptive routing weights (redb-persistent), weight health introspection, composition intelligence (`CompositionTier`, `CompositionPatternRegistry`), capability utilization tracking, attestation verification via BearDog, membrane composition live execution | Production (v3.71, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -375,8 +375,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
-- `handoffs/*.md` — Active handoffs awaiting upstream absorption
-- `handoffs/archive/` — Fossil record (~148 archived handoffs, May 2026 — earlier epochs consolidated to fossilRecord)
+- `handoffs/*.md` — Active session handoffs (last 48 hours)
+- `handoffs/archive/` — Fossil record (148 archived handoffs, May 2026 — earlier epochs consolidated to fossilRecord)
 
 ---
 

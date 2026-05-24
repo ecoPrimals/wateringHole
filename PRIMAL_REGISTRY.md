@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 23, 2026 (Wave 46 — primalSpring v0.9.27, deep debt evolution. All upstream Neural API blockers resolved, 12/12 primal.announce compliant)
+**Last Updated**: May 23, 2026 (Wave 46+ — primalSpring v0.9.27, deep debt evolution. sporePrint ownership transferred to primalSpring. biomeOS v3.71 membrane composition. All upstream Neural API blockers resolved, 12/12 primal.announce compliant)
 
 ---
 
@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v3.70  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 1311 tests, 25 workspace crates, 40+ deploy graphs, 20 niche templates, 285+ capability translations, 25 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. Neural API Layer 4: persistent routing weights (redb), weight health introspection, capability utilization tracking, attestation verification via BearDog, `primal.announce` v3.68 schema with cost/latency hints, composition intelligence (CompositionTier, CompositionPatternRegistry)
+**Version**: v3.71  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 1311+ tests, 25 workspace crates, 40+ deploy graphs, 20 niche templates, 285+ capability translations, 25 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. Neural API Layer 4: persistent routing weights (redb), weight health introspection, capability utilization tracking, attestation verification via BearDog, `primal.announce` v3.68 schema with cost/latency hints, composition intelligence (CompositionTier, CompositionPatternRegistry), membrane composition live execution
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -521,7 +521,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
 **Phase**: Phase 60+ / Interstadial (87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.9.27 Wave 46 — 89 experiments (20 tracks), 784 lib tests (784 pass, 2 ignored), 458 methods, 49 scenarios (10 tracks, 3 tiers), 94 deploy graphs (80 deploy + 14 signal), NUCLEUS VALIDATED, UniBin (validate/certify/serve/status/version), NeuralBridge feedback loop, biomeOS v3.70 persistent weights + weight health + utilization tracking, CompositionContext + env_keys + typed errors + signal dispatch, zero clippy warnings, zero unsafe, ecoBin compliant
+**Status**: v0.9.27 Wave 46 — 89 experiments (20 tracks), 784 lib tests (784 pass, 2 ignored), 458 methods, 49 scenarios (10 tracks, 3 tiers), 94 deploy graphs (80 deploy + 14 signal), NUCLEUS VALIDATED, UniBin (validate/certify/serve/status/version), NeuralBridge feedback loop, biomeOS v3.71 membrane composition live execution, live validation S47-S49, typed errors (thiserror), env centralization, sporePrint ownership + link-lint CI, zero clippy warnings, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
