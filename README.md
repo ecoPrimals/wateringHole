@@ -65,7 +65,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 |--------|--------|------|--------|
 | **petalTongue** | Representation | Universal UI: visual, audio, terminal, web, headless. Accessibility-first multi-modal rendering | Production (A++) |
 | **rhizoCrypt** | Ephemeral Memory | Content-addressed DAG engine for working memory. Sessions, Merkle trees, real-time streaming | Production (A+) |
-| **sweetGrass** | Attribution | Semantic provenance (v0.7.35). W3C PROV-O braids, fair attribution, 37 canonical methods + 10 wire-name aliases, tarpc 0.37 + REST + UDS, UniBin, ecoBin, 1,522 tests, Edition 2024, GAP-36 wire reconciliation, Provenance Trio coordination, Tower Atomic enforced | Production |
+| **sweetGrass** | Attribution | Semantic provenance (v0.7.38). W3C PROV-O braids, fair attribution, 37 canonical methods + 10 wire-name aliases, tarpc 0.37 + REST + UDS, UniBin, ecoBin, Edition 2024, GAP-36 wire reconciliation, Provenance Trio coordination, Tower Atomic enforced | Production |
 | **LoamSpine** | Permanence | Immutable linear ledger for selective permanence. Loam Certificates for ownership and transfer | Production (A+) |
 | **skunkBat** | Defense | Defensive network security: threat detection, graduated response, baseline profiling | Production |
 
@@ -375,8 +375,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
 
 ### Handoffs
-- `handoffs/*.md` — Active session handoffs (last 48 hours)
-- `handoffs/archive/` — Fossil record (90+ archived handoffs, May 2026 — earlier epochs consolidated to fossilRecord)
+- `handoffs/*.md` — Active handoffs awaiting upstream absorption
+- `handoffs/archive/` — Fossil record (~148 archived handoffs, May 2026 — earlier epochs consolidated to fossilRecord)
 
 ---
 
