@@ -100,22 +100,28 @@ target contract. This blurb contains the per-primal action items.
 
 ---
 
-## What plasmidBin Already Fixed (this wave)
+## What plasmidBin Fixed
 
 - **skunkBat**: `serve` → `server` subcommand in `start_primal.sh`
-- **rhizoCrypt**: `--socket` → `--unix` mapping in launcher
-- **barraCuda**: `--socket` → `--unix` mapping, proper `--bind` forwarding
+- **rhizoCrypt**: `--socket` → `--unix` mapping in launcher (later removed — primal now accepts `--socket`)
+- **barraCuda**: `--socket` → `--unix` mapping, proper `--bind` forwarding (later removed — primal now accepts `--socket`)
 - **petalTongue**: `--socket` forwarded to `server` mode
-- **coralReef**: `CORALREEF_SOCKET` env export for UDS path control
+- **coralReef**: `CORALREEF_SOCKET` env export for UDS path control (later removed — primal now accepts `--socket`)
 
-These workarounds let the current launcher work, but the primals should
-converge to the standard so the workarounds can be removed.
+## Epilogue — FULLY RESOLVED (May 24, 2026)
+
+**All 13 primals converged.** The workarounds listed above have been **removed**
+from `start_primal.sh` — the launcher now passes `--socket` uniformly to all
+primals. The `add_standard_flags()` helper replaced per-primal boilerplate.
+Net: -20 lines in the launcher, zero behavioral change.
+
+This handoff is **CLOSED**. No remaining action items.
 
 ---
 
 ## Reference
 
 - Standard: `primalSpring/wateringHole/DEPLOYMENT_BEHAVIOR_STANDARD.md`
-- Launcher: `plasmidBin/start_primal.sh`
+- Launcher: `plasmidBin/start_primal.sh` (simplified post-convergence)
 - Health sweep: `plasmidBin/nucleus_launcher.sh` Phase 4
 - Gate deployment reports: `infra/wateringHole/handoffs/` (May 23 handoffs)

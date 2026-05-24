@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-23
+**Last updated**: 2026-05-24
 
 ---
 
@@ -11,6 +11,13 @@
 The ecosystem has cleared the interstadial exit gate (~9.5/10). 13/13 primals
 at zero debt. cellMembrane VPS operational (relay + TLS/content shadows).
 Shadow tracks S1-S3 proven. Single-gate NUCLEUS validated on ironGate + eastGate.
+
+**Wave 47 milestone**: 13/13 behavioral convergence — all primals accept
+`--socket`, return `{"status":"alive"}` from `health.liveness`, handle
+SIGTERM+SIGINT, and implement `lifecycle.status`. `start_primal.sh` simplified
+(per-primal workarounds removed). primalSpring: 784 tests, 49 scenarios,
+458 methods (322 exercised = 70%), zero clippy warnings. bearDog Wave 112:
+ACME renewal daemon operational.
 
 **LAN is live** — Cat6 1G backbone on unmanaged switch connects all gates.
 10G (switch + NICs installed, Cat6a cables pending) is an elevation goal for
@@ -92,15 +99,15 @@ Tier 2+ large-dataset science, not a deployment blocker.
 
 ### Software Remaining
 
-| Item | Owner | Priority |
-|------|-------|----------|
-| Ionic bond runtime (WS-1) | biomeOS + primalSpring | MEDIUM |
-| biomeOS route `capability.call` → Songbird for remote | biomeOS | MEDIUM |
-| Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM |
-| Sovereign DNS (knot-dns) | cellMembrane team | MEDIUM |
-| BearDog ACME Phase 3 renewal daemon | bearDog | LOW |
-| `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW |
-| Forgejo Actions CI | projectNUCLEUS | LOW |
+| Item | Owner | Priority | Status |
+|------|-------|----------|--------|
+| ~~Ionic bond runtime (WS-1)~~ | biomeOS + primalSpring | ~~MEDIUM~~ | **RESOLVED** — `IonicContractRegistry` full state machine, `s_ionic_bond` evolved to live RPC lifecycle (`bonding.propose`→`accept`→`status`→`terminate` + `crypto.ionic_bond.verify_proposal`). E2E cross-gate pending flockGate. |
+| biomeOS route `capability.call` → Songbird for remote | biomeOS | MEDIUM | Songbird Wave 211 shipped `capability.call` handler with local+remote forwarding. biomeOS routing integration pending. |
+| Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | biomeOS v3.64 `nest.sync` 6-node graph shipped. Live orchestration wiring pending multi-gate mesh. |
+| Sovereign DNS (knot-dns) | cellMembrane team | MEDIUM | PLANNED |
+| ~~BearDog ACME Phase 3 renewal daemon~~ | bearDog | ~~LOW~~ | **RESOLVED** — Wave 112: `AcmeClient::run_renewal_loop()` wired into `beardog server` as background tokio task. Config via `BEARDOG_TLS_MODE=acme` + domain/email env vars. |
+| `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW | `publish_sporeprint.sh` implemented. E2E requires live NestGate + bearDog session. |
+| Forgejo Actions CI | projectNUCLEUS | LOW | PLANNED |
 
 ---
 

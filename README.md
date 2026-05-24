@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 24, 2026 (Wave 47: Post-primordial behavioral convergence complete. DEPLOYMENT_BEHAVIOR_STANDARD 13/13. Deep debt sweeps across 9 primals (toadStool S273, nestgate S72, biomeOS v3.73, barraCuda, rhizoCrypt, coralReef, skunkBat, petalTongue, loamSpine). 458 methods, 784 primalSpring tests. 5 gates deploying NUCLEUS. Glacial shift: covalent bonding, sovereignty cutover, Neural API evolution.)
+**Last Updated**: May 24, 2026 (Wave 47: 13/13 behavioral convergence, `start_primal.sh` simplified. Zero clippy warnings in primalSpring. bearDog Wave 112: ACME daemon wired, 127 methods. Ionic bond scenario evolved to live RPC. 458 methods, 784 tests, 49 scenarios. Glacial shift: multi-gate LAN mesh, sovereignty cutover, Neural API cross-gate routing.)
 
 ---
 
