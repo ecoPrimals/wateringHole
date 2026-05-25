@@ -26,14 +26,16 @@ WASM client-side rendering (8 `wasm_bindgen` functions). loamSpine benchScale:
 51-validation roundtrip harness exercising all 43 methods via live TCP.
 
 **Wave 48 milestone**: Covalent spring mesh — **all 8/8 springs sounded off**.
-4 gates operational with NUCLEUS + Songbird TCP :7700 federation:
-eastGate (primalSpring + airSpring + groundSpring), ironGate (primalSpring +
-ludoSpring + healthSpring), southGate (wetSpring + neuralSpring), biomeGate
-(hotSpring). wetSpring V185: behavioral convergence (lifecycle.status, bonding
-dispatch). neuralSpring V173: `CompositionContext::dispatch(&Value)` sync,
-Songbird sled cleanup. healthSpring V65a: 23 UDS sockets alive, 4 domain
-capabilities live. hotSpring Exp 221: UEFI model GPU sovereignty (PRI ring
-recovery). CAZyme FEL v0.7.0 (3 modules, GROMACS+PLUMED validated).
+4 gates operational with NUCLEUS + Songbird TCP :7700 federation.
+
+**Wave 49 milestone**: Post-primordial. 4 springs confirmed plasmidBin-only
+(wetSpring V186, ludoSpring Wave 49, neuralSpring V174, healthSpring V65a).
+Deployment debt resolved: `SONGBIRD_PEERS` env + `--peers` CLI for cross-gate
+peer seeding (both bash and Rust launchers). `--security-socket` feature-guarded
+(plasmidBin version compat). Stale socket pre-cleanup (EADDRINUSE fix). Cell
+binary pattern documented (spring cells ≠ NUCLEUS primals). Cross-subnet gap
+documented (southGate 192.168.4.x vs eastGate 192.168.1.x needs routing).
+hotSpring on biomeGate still at Wave 48.
 
 **LAN is live** — Cat6 1G backbone on unmanaged switch connects all gates.
 10G (switch + NICs installed, Cat6a cables pending) is an elevation goal for
@@ -85,11 +87,13 @@ Tier 2+ large-dataset science, not a deployment blocker.
 
 **Covalent mesh order** (over existing 1G LAN):
 1. ~~Enable `SONGBIRD_FEDERATION_PORT=7700` on eastGate + ironGate + southGate + biomeGate~~ **DONE** (Wave 48)
-2. Verify cross-gate `discovery.peers` — **NEXT**: confirm 4 gates see each other
-3. ~~Springs declare gates, deploy cells~~ **DONE** (8/8 sounded off, cells deploying)
-4. Cross-gate `capability.call` smoke test via primalSpring scenario
-5. westGate (Nest Atomic — cold storage), northGate (Node Atomic), strandGate (Full NUCLEUS)
-6. Plasmodium collective validation (3+ gates meshed via live `capability.call`)
+2. ~~Peer seeding mechanism~~ **DONE** (Wave 49) — `SONGBIRD_PEERS` env + `--peers` CLI + `mesh.init` RPC
+3. ~~Springs declare gates, deploy cells, cut primordial patterns~~ **DONE** (4/4 responding springs confirmed)
+4. Verify cross-gate `discovery.peers` — **NEXT**: same-subnet gates (eastGate ↔ ironGate) seed peers, confirm peer count > 0
+5. Cross-gate `capability.call` smoke test via primalSpring `s_covalent_mesh` scenario
+6. Cross-subnet routing for southGate (192.168.4.x) — requires network config or TURN relay
+7. westGate (Nest Atomic — cold storage), northGate (Node Atomic), strandGate (Full NUCLEUS)
+8. Plasmodium collective validation (3+ gates meshed via live `capability.call`)
 
 ### Deployment Matrix (primalSpring)
 
@@ -114,26 +118,33 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | NAT traversal (STUN/punch/TURN) | Shipped, **not field-tested** on residential NAT |
 | toadStool yield-to-owner dispatch | **ENFORCED** (S274: `GuestLoadPolicy` + `YieldStrategy` in `check_quota()`, 10 new tests) |
 | Cross-gate data dependency staging | **PROTOTYPED** (primalSpring `validation::dependency`) |
-| Cross-gate `discovery.peers` verification | **PENDING** — 4 gates live, mesh connectivity not yet confirmed |
-| Plasmodium collective status | **PENDING** — requires 3+ gates meshed |
+| Songbird peer seeding (`SONGBIRD_PEERS`) | **SHIPPED** — Wave 49, both launchers, CLI + env + RPC |
+| Cross-gate `discovery.peers` verification | **UNBLOCKED** — peer seeding shipped, same-subnet test next |
+| Cross-subnet mesh (southGate ↔ eastGate) | **BLOCKED** — different subnets, needs routing or TURN relay |
+| Plasmodium collective status | **PENDING** — requires 3+ same-subnet gates meshed first |
 | flockGate live deployment | **NOT DEPLOYED** |
 
-### Wave 48 Deployment Issues (from spring sound-offs)
+### Wave 49 Deployment Issues (post-primordial audit)
 
-| Issue | Reporter | Priority |
-|-------|----------|----------|
-| loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **MEDIUM** — upstream loamSpine bug |
-| rhizoCrypt/sweetGrass/toadStool slow startup (>8s probe timeout) | wetSpring | **LOW** — cold-start timing |
-| `primal.announce` vs `discovery.register` migration | wetSpring | **LOW** — primalSpring has fallback, springs should use `CompositionContext::announce()` |
-| Songbird sled DB corruption after unclean shutdown | neuralSpring | **LOW** — workaround: clean `task_lifecycle*` |
-| Spring binaries not in plasmidBin 13-primal set | healthSpring | **BY DESIGN** — springs build + symlink |
+| Issue | Reporter | Status |
+|-------|----------|--------|
+| loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **UPSTREAM** — does not block mesh |
+| rhizoCrypt/sweetGrass/toadStool slow startup (>8s probe timeout) | wetSpring | **KNOWN** — cold-start timing |
+| Songbird `--security-socket` flag rejected | wetSpring | **FIXED** Wave 49 — feature-guarded + env fallback |
+| petalTongue stale socket on restart (EADDRINUSE) | primalSpring | **FIXED** Wave 49 — launcher pre-cleans dead sockets |
+| `discovery.peers` returns empty (no cross-gate peers) | healthSpring | **FIXED** Wave 49 — `SONGBIRD_PEERS` + `mesh.init` seeding |
+| southGate ≠ eastGate subnet (cross-subnet mesh) | neuralSpring | **DOCUMENTED** — needs routing or TURN |
+| petalTongue musl binary rejects `--family-id` | primalSpring | **PIPELINE DEBT** — workaround: `FAMILY_ID` env |
+| Songbird sled DB corruption after unclean shutdown | neuralSpring | **WORKAROUND** — clean `task_lifecycle*` |
+| hotSpring still on Wave 48 | review | **PENDING** — biomeGate needs blurb |
 
 ### Software Remaining
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| Cross-gate `discovery.peers` smoke test | primalSpring | **HIGH** | 4 gates have federation :7700 live — need to confirm they see each other |
-| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | biomeOS v3.75 mesh dispatch ready, needs live validation |
+| Cross-gate `discovery.peers` smoke test | primalSpring | **HIGH** | Peer seeding shipped — same-subnet test with `SONGBIRD_PEERS` next |
+| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | biomeOS v3.75 mesh dispatch ready, `s_covalent_mesh` scenario written, needs live run |
+| Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
 | Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | v3.64 `nest.sync` graph shipped. Songbird mesh (v3.75) is the transport. Pending multi-gate connectivity. |
 | Sovereign DNS (knot-dns) | cellMembrane | MEDIUM | PLANNED |
 | `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW | `publish_sporeprint.sh` implemented. E2E requires live NestGate + bearDog session. |
@@ -150,7 +161,7 @@ BearDog ACME renewal daemon — see `fossilRecord/` for detail.
 The glacial shift (stadial entry) is reached when:
 
 1. All 4 sovereignty shadows **cut over** (S1-S4 formal 7-day gate passed)
-2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective) — Wave 48: 4 gates broadcasting :7700, mesh connectivity **pending verification**
+2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective) — Wave 49: peer seeding shipped, same-subnet verification **next**, cross-subnet routing **needed**
 3. cellMembrane Nest expansion **deployed** on VPS
 4. At least one remote covalent node (flockGate) **validated** over WAN
 5. DNS pointed to sovereign infrastructure
