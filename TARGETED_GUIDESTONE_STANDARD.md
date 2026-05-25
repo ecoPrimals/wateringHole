@@ -315,6 +315,7 @@ references where data came from and can pull updates directly.
 | Name | Version | Target | Springs | Status |
 |------|---------|--------|---------|--------|
 | ltee-guidestone | 1.0.0 (pre-release) | Barrick Lab LTEE | wetSpring, groundSpring, neuralSpring, hotSpring, healthSpring, airSpring | Architecture defined, paper queues seeded |
+| hotspring-cazyme-fel | 1.5.0 | Iglesias-Fernández 2015 (GH10 xylanase FEL) | hotSpring | GuideStone-grade: 12/12 audit, data.toml, liveSpore.json, validate/refresh, Domain Profiles |
 
 ---
 

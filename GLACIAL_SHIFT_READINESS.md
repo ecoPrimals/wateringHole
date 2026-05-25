@@ -57,8 +57,9 @@ pgrep collision bug fixed (spring cell binary false positive blocked startup).
 **Upstream leads, downstream lags**: Primals on the mountain (bearDog, Songbird,
 toadStool, NestGate, biomeOS) are tightened and ready to push through the gate.
 Springs lag on cleanup (neuralSpring still has stale `target/release/` hardcode,
-hotSpring still on Wave 48 with Exp 220). The shift moves when the sentinels
-clear — springs follow.
+hotSpring absorbed Wave 50 post-primordial mandate — NUCLEUS launched on biomeGate,
+plasmidBin-only enforced, pseudoSpore v1.5.0 GuideStone-grade). The shift moves when
+the sentinels clear — springs follow.
 
 **LAN is live** — Cat6 1G backbone on unmanaged switch connects all gates.
 10G (switch + NICs installed, Cat6a cables pending) is an elevation goal for
@@ -165,7 +166,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | neuralSpring petalTongue `target/release/` | re-audit | **STALE PATTERN** — only diverging spring launcher |
 | toadStool/loamSpine local wH unarchived | re-audit | **HYGIENE** — 37+14 flat handoffs need archive subdir |
 | Central fossilRecord incomplete | re-audit | **SYNC GAP** — 7/8 primals archived, central repo sparse |
-| hotSpring still on Wave 48 | review | **LAGGING** — Exp 220 CAZyme 2D FEL in progress |
+| hotSpring Wave 50 compliant | resolved | **CURRENT** — pseudoSpore v1.5.0, NUCLEUS launched, plasmidBin-only |
 
 ### Software Remaining
 

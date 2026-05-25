@@ -3,7 +3,7 @@
 **Purpose**: Single-document reference for what ecoPrimals expects of every primal,
 spring, contributor, and session.  Read this first, read everything else second.
 
-**Last Updated**: March 15, 2026
+**Last Updated**: May 25, 2026
 
 ---
 
@@ -11,6 +11,10 @@ spring, contributor, and session.  Read this first, read everything else second.
 
 - **`GLOSSARY.md`** — Every term defined (gate, primal, spring, atomic, niche, etc.)
 - **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, toolchain, directory layout for a gate
+- **`TARGETED_GUIDESTONE_STANDARD.md`** — Self-contained scientific artifact packaging (USB/ecoBin)
+- **`LITHOSPORE_USB_DEPLOYMENT.md`** — Spore taxonomy: ColdSpore → LiveSpore → lithoSpore
+- **`PSEUDOSPORE_STANDARD.md`** — (canonical: `gardens/lithoSpore/specs/`) Braid-first proof artifacts
+- **`PRIMAL_REGISTRY.md`** — Authoritative primal/spring version catalog
 
 ---
 
