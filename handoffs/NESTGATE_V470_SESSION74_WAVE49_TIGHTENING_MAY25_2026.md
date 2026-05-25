@@ -66,18 +66,21 @@ production deployment channel.
 
 ---
 
-## Session 76: aarch64-musl Segfault Fix (May 25, 2026)
+## Session 76: aarch64-musl Segfault Fix — Validated (May 25, 2026)
 
 - **Root cause**: `.cargo/config.toml` specified `linker = "aarch64-linux-gnu-gcc"` for
-  `aarch64-unknown-linux-musl`. The GNU glibc cross-compiler injected glibc CRT startup
-  objects that conflicted with musl's `_start_c` / `dlstart.c`, causing a segfault on
-  aarch64 musl systems (the `nucleus-aarch64-mixed-tcp` cell blocker from Wave 49 re-audit).
-- **Fix**: Removed explicit `linker` overrides from both aarch64-musl and x86_64-musl
-  targets. Rust 1.86+ uses `rust-lld` by default for musl — no external linker needed.
-- **Sovereignty**: Eliminates `musl-tools` and `gcc-aarch64-linux-gnu` build deps.
-  Pure Rust toolchain for all musl cross-compilation.
-- **Status**: Needs verification on actual aarch64 hardware or CI. Config fix is committed;
-  `nucleus-aarch64-mixed-tcp` cell should be retested after next plasmidBin harvest.
+  `aarch64-unknown-linux-musl`. Without `link-self-contained=yes`, the GNU linker provided
+  glibc CRT startup objects instead of musl's, causing a segfault on aarch64 systems
+  (the `nucleus-aarch64-mixed-tcp` cell blocker from Wave 49 re-audit).
+- **Fix**: `linker = "ld.lld"` (LLVM LLD, cross-arch capable) + `linker-flavor=ld` +
+  `link-self-contained=yes` (musl CRT from Rust sysroot). x86_64-musl also updated to
+  `link-self-contained=yes` (drops `musl-gcc` dep).
+- **Validated on dev host**: aarch64 binary built, inspected (ELF 64-bit, ARM aarch64,
+  statically linked, stripped, 6.8M, no dynamic section), and executed under
+  `qemu-aarch64-static` — `--help` and `version` subcommands run without segfault.
+  x86_64-musl also built and validated (7.8M, static, EXEC). 1,648 workspace tests pass.
+- **Build deps**: aarch64-musl now needs `lld` (apt) + Rust target only. x86_64-musl
+  is fully self-contained. Eliminates `musl-tools` and `gcc-aarch64-linux-gnu`.
 
 ---
 
@@ -85,4 +88,4 @@ production deployment channel.
 
 - Push coverage 84.12% → 90% target
 - Track vendored `rustls-rustcrypto` + `rustls-webpki` upstream for drop opportunity
-- Verify aarch64-musl fix on actual aarch64 hardware (next plasmidBin harvest cycle)
+- Verify aarch64-musl fix on actual aarch64 hardware (QEMU validation passed; next harvest cycle deploys)
