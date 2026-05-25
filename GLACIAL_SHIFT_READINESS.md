@@ -15,9 +15,12 @@ Shadow tracks S1-S3 proven. Single-gate NUCLEUS validated on ironGate + eastGate
 **Wave 47 milestone**: 13/13 behavioral convergence — all primals accept
 `--socket`, return `{"status":"alive"}` from `health.liveness`, handle
 SIGTERM+SIGINT, and implement `lifecycle.status`. `start_primal.sh` simplified
-(per-primal workarounds removed). primalSpring: 784 tests, 49 scenarios,
-458 methods (322 exercised = 70%), zero clippy warnings. bearDog Wave 112:
-ACME renewal daemon operational.
+(per-primal workarounds removed). primalSpring: 787 tests, 52 scenarios,
+458 methods (458 exercised = 100%), zero clippy warnings. `nucleus_launcher`
+Rust binary at parity with bash launcher. bearDog Wave 112: ACME renewal
+daemon operational. biomeOS v3.75: Songbird mesh dispatch replaces legacy relay.
+toadStool S274: `max_guest_load` yield-to-owner enforced. petalTongue WS-4:
+WASM client-side rendering (8 `wasm_bindgen` functions).
 
 **LAN is live** — Cat6 1G backbone on unmanaged switch connects all gates.
 10G (switch + NICs installed, Cat6a cables pending) is an elevation goal for
@@ -93,7 +96,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | cellMembrane VPS rendezvous | **OPERATIONAL** |
 | Songbird TCP/WAN fallback | **SHIPPED** (Wave 213-214) |
 | NAT traversal (STUN/punch/TURN) | Shipped, **not field-tested** on residential NAT |
-| toadStool yield-to-owner dispatch | **DESIGNED** (`max_guest_load`) |
+| toadStool yield-to-owner dispatch | **ENFORCED** (S274: `GuestLoadPolicy` + `YieldStrategy` in `check_quota()`, 10 new tests) |
 | Cross-gate data dependency staging | **PROTOTYPED** (primalSpring `validation::dependency`) |
 | flockGate live deployment | **NOT DEPLOYED** |
 
@@ -102,8 +105,8 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
 | ~~Ionic bond runtime (WS-1)~~ | biomeOS + primalSpring | ~~MEDIUM~~ | **RESOLVED** — `IonicContractRegistry` full state machine, `s_ionic_bond` evolved to live RPC lifecycle (`bonding.propose`→`accept`→`status`→`terminate` + `crypto.ionic_bond.verify_proposal`). E2E cross-gate pending flockGate. |
-| biomeOS route `capability.call` → Songbird for remote | biomeOS | MEDIUM | Songbird Wave 211 shipped `capability.call` handler with local+remote forwarding. biomeOS routing integration pending. |
-| Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | biomeOS v3.64 `nest.sync` 6-node graph shipped. Live orchestration wiring pending multi-gate mesh. |
+| ~~biomeOS route `capability.call` → Songbird for remote~~ | biomeOS | ~~MEDIUM~~ | **RESOLVED** — v3.75: `try_songbird_mesh_dispatch()` replaces legacy `relay.allocate`. Both translation and direct-discovery paths fall back to Songbird mesh. Response unwrapping (`{ provider, gate, result }` → inner `result`). Routing contract documented. |
+| Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | biomeOS v3.64 `nest.sync` 6-node graph shipped. Songbird mesh dispatch (v3.75) provides the transparent cross-gate transport. Live orchestration pending multi-gate deployment. |
 | Sovereign DNS (knot-dns) | cellMembrane team | MEDIUM | PLANNED |
 | ~~BearDog ACME Phase 3 renewal daemon~~ | bearDog | ~~LOW~~ | **RESOLVED** — Wave 112: `AcmeClient::run_renewal_loop()` wired into `beardog server` as background tokio task. Config via `BEARDOG_TLS_MODE=acme` + domain/email env vars. |
 | `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW | `publish_sporeprint.sh` implemented. E2E requires live NestGate + bearDog session. |
