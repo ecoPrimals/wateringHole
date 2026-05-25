@@ -1,7 +1,7 @@
 # rhizoCrypt — Wave 49 Ecosystem Tightening
 
 **Date**: May 25, 2026
-**Scope**: Showcase fossilization, startup latency fix, stale deployment cleanup
+**Scope**: Showcase fossilization, startup latency fix, stale deployment cleanup, version + doc reconciliation
 
 ---
 
@@ -36,7 +36,22 @@ After: startup completes in <1s under normal conditions.
 - No `which rhizocrypt` references found.
 - `notify-plasmidbin.yml` verified active.
 
-### 4. wateringHole
+### 4. Version + Doc Reconciliation
+
+- **`0.14.0-dev` → `0.14.0`**: Dropped `-dev` suffix across workspace
+  `Cargo.toml`, all docs, `capability_registry.toml`, `rhizocrypt_deploy.toml`,
+  `Dockerfile`, `manifest.rs`. Resolves Wave 22 version hygiene item.
+- **Metrics refreshed**: 175 → 171 `.rs` files, ~53,852 → ~53,341 lines
+  (post-showcase fossilization). Updated across README, CONTEXT,
+  DEPLOYMENT_CHECKLIST, sporeprint, ARCHITECTURE specs.
+- **Docker alignment**: `DEPLOYMENT_CHECKLIST.md` and service README Docker
+  examples aligned with root `Dockerfile` (`FROM scratch`, `/rhizocrypt` path).
+  Fixed duplicate option numbering.
+- **Debris scan**: Zero stale markers (TODO/FIXME/HACK), zero temp files,
+  zero dead scripts, zero outdated cross-references in active docs.
+  `#[allow(dead_code)]` present only in test harness (correct).
+
+### 5. wateringHole
 
 No local `wateringHole/` tree — already clean.
 
