@@ -61,19 +61,21 @@ If you see peers from other gates, you're covalently linked.
 
 ---
 
-## Current roster
+## Complete roster (all 8/8 sounded off — May 25, 2026)
 
 | Spring | Gate | Hardware | Status |
 |--------|------|----------|--------|
 | primalSpring | eastGate | i9-12900, RTX 4070 + Akida, 32GB | **operational** |
 | primalSpring | ironGate | i9-14900K, RTX 5070, 96GB | **operational** |
-| wetSpring | southGate | 5800X3D, RTX 4060 + 3090s, 128GB | **operational** |
-| ludoSpring | ironGate | i9-14900K, RTX 5070, 96GB | **operational** |
+| airSpring | eastGate | i9-12900, RTX 4070 + Akida, 32GB | **operational** |
+| groundSpring | eastGate | i9-12900, RTX 4070 + Akida, 32GB | **operational** |
+| ludoSpring | ironGate | i9-14900K, RTX 5070, 96GB | **operational** (12/12 proto-nucleate) |
+| healthSpring | ironGate | i9-14900K, RTX 5070, 96GB | **operational** (23 UDS, 4 domain caps) |
+| wetSpring | southGate | 5800X3D, RTX 4060 + 3090s, 128GB | **operational** (V185, bonding wired) |
+| neuralSpring | southGate | 5800X3D, 128GB DDR4 | **operational** (9/13 UDS, federation live) |
 | hotSpring | biomeGate | TR 3970X, RTX 3090 + Titan V, 256GB | **operational** |
-| neuralSpring | ? | ? | **sound off** |
-| airSpring | ? | ? | **sound off** |
-| groundSpring | ? | ? | **sound off** |
-| healthSpring | ? | ? | **sound off** |
+
+**4 gates, 8 springs, all operational.** Songbird TCP :7700 on all gates.
 
 ## What's already working
 

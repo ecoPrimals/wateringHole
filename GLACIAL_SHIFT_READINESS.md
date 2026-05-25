@@ -23,11 +23,15 @@ toadStool S274: `max_guest_load` yield-to-owner enforced. petalTongue WS-4:
 WASM client-side rendering (8 `wasm_bindgen` functions). loamSpine benchScale:
 51-validation roundtrip harness exercising all 43 methods via live TCP.
 
-**Wave 48 milestone**: Covalent spring mesh initialization. All 8 springs now
-declare gate assignments in CONTEXT.md. 4/8 on named gates (eastGate, ironGate,
-southGate, biomeGate) with operational NUCLEUS. Cell deployment graphs ready
-for all 8. Songbird TCP federation on port 7700 enables cross-gate discovery.
-hotSpring: CAZyme FEL v0.7.0 (3 modules, GROMACS+PLUMED validated).
+**Wave 48 milestone**: Covalent spring mesh — **all 8/8 springs sounded off**.
+4 gates operational with NUCLEUS + Songbird TCP :7700 federation:
+eastGate (primalSpring + airSpring + groundSpring), ironGate (primalSpring +
+ludoSpring + healthSpring), southGate (wetSpring + neuralSpring), biomeGate
+(hotSpring). wetSpring V185: behavioral convergence (lifecycle.status, bonding
+dispatch). neuralSpring V173: `CompositionContext::dispatch(&Value)` sync,
+Songbird sled cleanup. healthSpring V65a: 23 UDS sockets alive, 4 domain
+capabilities live. hotSpring Exp 221: UEFI model GPU sovereignty (PRI ring
+recovery). CAZyme FEL v0.7.0 (3 modules, GROMACS+PLUMED validated).
 
 **LAN is live** — Cat6 1G backbone on unmanaged switch connects all gates.
 10G (switch + NICs installed, Cat6a cables pending) is an elevation goal for
@@ -66,13 +70,13 @@ Tier 2+ large-dataset science, not a deployment blocker.
 
 | Gate | Hardware | Role | NUCLEUS status | Springs | LAN |
 |------|----------|------|----------------|---------|-----|
-| **eastGate** | i9-12900, RTX 4070 + Akida, 32GB | Orchestrator, neuromorphic | **VALIDATED** | primalSpring | 1G |
-| **ironGate** | i9-14900K, RTX 5070, 96GB | Agentic dev, ABG | **VALIDATED** | primalSpring, ludoSpring | 1G |
-| **southGate** | 5800X3D, RTX 4060 + float 3090s, 128GB | Gaming + compute | **VALIDATED** (wetSpring 9/9) | wetSpring | 1G (10G NIC ready) |
-| **biomeGate** | Threadripper 3970X, 256GB | HBM2 test bench | **VALIDATED** (hotSpring 62/62) | hotSpring | 1G |
+| **eastGate** | i9-12900, RTX 4070 + Akida, 32GB | Orchestrator, neuromorphic | **OPERATIONAL** | primalSpring, airSpring, groundSpring | 1G |
+| **ironGate** | i9-14900K, RTX 5070, 96GB | Agentic dev, ABG | **OPERATIONAL** (23 UDS) | primalSpring, ludoSpring, healthSpring | 1G |
+| **southGate** | 5800X3D, RTX 4060 + 3090s, 128GB | Gaming + compute | **OPERATIONAL** (9/9) | wetSpring, neuralSpring | 1G (10G NIC ready) |
+| **biomeGate** | Threadripper 3970X, 256GB | HBM2 test bench | **OPERATIONAL** (62/62) | hotSpring | 1G |
+| **strandGate** | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics | Hardware ready, **not deployed** | wetSpring (secondary) | 1G |
 | **northGate** | Ryzen 9950X3D, RTX 5090, 96GB | Gaming primary, heavy compute | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
 | **westGate** | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
-| **strandGate** | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics | Hardware ready, **not deployed** | — | 1G |
 | **swiftGate** | Ryzen 5800X, RTX 3070, 64GB | Mobile/compact | Hardware ready | — | 1G |
 | **flockGate** | i9-13900K, RTX 3070 Ti, 64GB | Remote covalent (WAN) | Config ready, **not deployed** | — | WAN via cellMembrane |
 | **kinGate** | i7-6700K, RTX 3070, 32GB | Staging | Hardware ready | — | 1G |
