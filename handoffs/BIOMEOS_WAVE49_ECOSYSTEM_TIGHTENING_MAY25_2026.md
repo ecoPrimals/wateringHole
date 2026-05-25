@@ -56,6 +56,17 @@
 - `crates/biomeos-boot/src/initramfs.rs`: removed reference to non-existent
   `scripts/prepare-kernel.sh` in error message.
 
+### LiveSpore + build script plasmidBin alignment (Priority #2 from audit)
+- `livespore-usb/x86_64/scripts/deploy_cross_arch.sh`: default target changed
+  from `~/.local/bin` / `/usr/local/bin` to `plasmidBin/primals/`. Supports
+  `BIOMEOS_PLASMID_DIR` override. Removed `$PATH` warning (biomeOS discovers
+  plasmidBin directly). Updated next-steps to `biomeos nucleus start`.
+- `scripts/build_primals_for_testing.sh`: marked DEV-ONLY. After building,
+  now copies binaries into `plasmidBin/primals/` so biomeOS discovers them via
+  the canonical path. Updated next-steps to reference harvest tool.
+- `scripts/README.md`: build script status changed from Active to Dev-only
+  with note pointing to `tools/harvest` and `plasmidBin/MANIFEST.md`.
+
 ---
 
 ## Post-Tightening State
@@ -64,7 +75,7 @@
 - **Clippy**: 0 warnings
 - **TODO/FIXME**: 1 tracked (`live_discovery.rs` REST route wiring)
 - **Unsafe**: 0 production
-- **Pipeline debt**: None (biomeOS is infrastructure, not a primal consumer)
+- **Pipeline debt**: RESOLVED — both audit items (LiveSpore deploy path, build script) fixed
 
 ---
 
