@@ -1,18 +1,18 @@
-# NestGate v4.7.0-dev — Sessions 73–74 Doc Refresh + Wave 49 Handoff
+# NestGate v4.7.0-dev — Sessions 73–76 Doc Refresh + Wave 49 Handoff
 
 **Date**: May 25, 2026  
-**Sessions**: 73–74  
+**Sessions**: 73–76  
 **Version**: 4.7.0-dev (internal iteration; workspace `0.1.0`, binary `2.1.0`)  
 **Primal**: nestgate  
-**Status**: Zero debt — all waves current through Wave 49
+**Status**: Zero debt — all waves current through Wave 49, aarch64-musl segfault fixed
 
 ---
 
 ## Summary
 
-Two documentation-focused sessions following the Session 72 deep debt sweep.
-All root docs synchronized, fossil banners applied to superseded docs, and
-Wave 49 post-primordial tightening completed.
+Four sessions following the Session 72 deep debt sweep: doc synchronization,
+fossil banners on superseded docs, Wave 49 post-primordial tightening, and
+the aarch64-musl segfault root-cause fix.
 
 ---
 
@@ -66,8 +66,23 @@ production deployment channel.
 
 ---
 
+## Session 76: aarch64-musl Segfault Fix (May 25, 2026)
+
+- **Root cause**: `.cargo/config.toml` specified `linker = "aarch64-linux-gnu-gcc"` for
+  `aarch64-unknown-linux-musl`. The GNU glibc cross-compiler injected glibc CRT startup
+  objects that conflicted with musl's `_start_c` / `dlstart.c`, causing a segfault on
+  aarch64 musl systems (the `nucleus-aarch64-mixed-tcp` cell blocker from Wave 49 re-audit).
+- **Fix**: Removed explicit `linker` overrides from both aarch64-musl and x86_64-musl
+  targets. Rust 1.86+ uses `rust-lld` by default for musl — no external linker needed.
+- **Sovereignty**: Eliminates `musl-tools` and `gcc-aarch64-linux-gnu` build deps.
+  Pure Rust toolchain for all musl cross-compilation.
+- **Status**: Needs verification on actual aarch64 hardware or CI. Config fix is committed;
+  `nucleus-aarch64-mixed-tcp` cell should be retested after next plasmidBin harvest.
+
+---
+
 ## Open Items
 
 - Push coverage 84.12% → 90% target
 - Track vendored `rustls-rustcrypto` + `rustls-webpki` upstream for drop opportunity
-- aarch64 musl cross-compile CI (config exists; pipeline not wired)
+- Verify aarch64-musl fix on actual aarch64 hardware (next plasmidBin harvest cycle)
