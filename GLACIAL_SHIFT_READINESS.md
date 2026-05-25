@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-25 (post-tightening re-audit)
+**Last updated**: 2026-05-25 (full NUCLEUS deploy + revalidation)
 
 ---
 
@@ -30,8 +30,12 @@ Songbird, biomeOS, coralReef, sweetGrass, toadStool, bearDog). Songbird wired
 fixed startup latency (was >8s, pipeline debt item). bearDog Wave 113b:
 orphan purge — cloud KMS/mobile HSM/PKCS11 discovery code removed (~15k LOC),
 method count drift fixed (127). toadStool: orchestrator dispatch tests added,
-Unix socket improvements. primalSpring: 789 tests, 53 scenarios, 458 methods,
+Unix socket improvements. primalSpring: 791 tests, 53 scenarios, 458 methods,
 95 deploy graphs, superseded specs archived, metric drift fixed across 15+ docs.
+petalTongue: `--family-id` CLI now accepted (Wave 49 commit `bb5cdc9`),
+showcase pointer updated to central fossilRecord. **All sentinel debt cleared.**
+Full NUCLEUS 12/12 redeployed from plasmidBin musl binaries — barraCuda
+pgrep collision bug fixed (spring cell binary false positive blocked startup).
 
 **Climate-sensitive sentinels** (primals whose readiness gates the glacial shift):
 
@@ -46,9 +50,9 @@ Unix socket improvements. primalSpring: 789 tests, 53 scenarios, 458 methods,
 - **biomeOS**: v3.75 clean — no showcase, no stale patterns. LiveSpore USB
   deploy script still uses `~/.local/bin` (conflicts with plasmidBin mandate).
   Neural API mesh dispatch ready for cross-gate `capability.call`.
-- **petalTongue**: WASM client-side rendering live. musl binary still rejects
-  `--family-id` (workaround: `FAMILY_ID` env). Local fossilRecord in-repo
-  (not synced to central).
+- **petalTongue**: WASM client-side rendering live. `--family-id` now accepted
+  (Wave 49, commit `bb5cdc9`). Showcase pointer updated to central fossilRecord.
+  **CLEAR** — no remaining sentinel-blocking items.
 
 **Upstream leads, downstream lags**: Primals on the mountain (bearDog, Songbird,
 toadStool, NestGate, biomeOS) are tightened and ready to push through the gate.
@@ -155,7 +159,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | petalTongue stale socket on restart | primalSpring | **FIXED** Wave 49 — launcher pre-cleans dead sockets |
 | `discovery.peers` returns empty | healthSpring | **FIXED** Wave 49 — Songbird `mesh.init` + `bootstrap_peers` wired |
 | southGate ≠ eastGate subnet | neuralSpring | **DOCUMENTED** — needs routing or TURN relay |
-| petalTongue musl rejects `--family-id` | primalSpring | **PIPELINE DEBT** — workaround: `FAMILY_ID` env |
+| petalTongue musl rejects `--family-id` | primalSpring | **FIXED** Wave 49 — commit `bb5cdc9` |
 | Songbird sled DB corruption (unclean) | neuralSpring | **WORKAROUND** — clean `task_lifecycle*` |
 | biomeOS LiveSpore deploys to `~/.local/bin` | re-audit | **STALE PATTERN** — conflicts with plasmidBin-only |
 | neuralSpring petalTongue `target/release/` | re-audit | **STALE PATTERN** — only diverging spring launcher |
