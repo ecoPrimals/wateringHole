@@ -2,14 +2,14 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: May 24, 2026 (Wave 47 behavioral convergence — SIGTERM handler, health.liveness normalized, web_mode refactored, BTSP overstep removed, NestGate→content_backend capability evolution, Display V1/provenance discovery rewired, stale refs cleaned)
+**Updated**: May 25, 2026 (Wave 49 ecosystem tightening — showcase fossilized, `--family-id` accepted, stale deployment patterns cut, WASM crate evolved to 14 exports with dashboard/batch/Tufte/scene rendering)
 
 ---
 
 ## Integration Status
 
 petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
-- 6,191+ tests passing, 0 failures
+- 6,321+ tests passing, 0 failures
 - `#![forbid(unsafe_code)]` unconditional on all 18 crates + UniBin, zero C dependencies, zero `unsafe` blocks
 - Zero `todo!()`, `unimplemented!()`, `TODO`, `FIXME`, `HACK` markers
 - Zero `.unwrap()` in production code; one documented `.expect()` for SIGTERM registration
@@ -28,8 +28,9 @@ petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
 - **Sensory Capability Matrix**: `capabilities.sensory` and `capabilities.sensory.negotiate` IPC methods for input×output negotiation
 - **Accessibility adapters**: SwitchInputAdapter, AudioInversePipeline, AgentInputAdapter for motor-impaired, blind, and AI users
 - Grammar of Graphics engine with Tufte constraint validation
-- **DataBinding auto-compiler**: All 11 DataBinding variants auto-compile to Grammar of Graphics
+- **DataBinding auto-compiler**: All 13 DataBinding variants auto-compile to Grammar of Graphics (incl. GenomeTrack, CircularMap)
 - **Dashboard layout engine**: Multi-panel grid with domain theming and SVG/description export
+- **Client-side WASM rendering (WS-4)**: `petal-tongue-wasm` crate with 14 `#[wasm_bindgen]` exports — grammar, binding, batch, dashboard, scene graph, Tufte validation, threshold coloring, multi-modality. 30 tests. CI `wasm32-unknown-unknown` check.
 - Domain-aware rendering (7 palettes: health, physics, ecology, agriculture, measurement, neural, game)
 - Multi-modal rendering: egui GUI, ratatui TUI, audio sonification, haptic, braille, description, SVG, headless
 - Scene graph with Manim-style animation, modality compilers (SVG, audio, description, terminal)
@@ -56,7 +57,7 @@ Implemented capabilities:
 - Domain color palettes resolved at runtime from grammar `domain` field
 - Streaming visualization for real-time data (`visualization.render.stream`)
 - 10 geometry types: Point, Line, Bar, Area, Ribbon, Tile, Arc, Heatmap, Contour, Text
-- DataBinding payloads: TimeSeries, Distribution, Bar, Gauge, Heatmap, Scatter, Scatter3D, FieldMap, Spectrum, GameScene, Soundscape
+- DataBinding payloads: TimeSeries, Distribution, Bar, Gauge, Heatmap, Scatter, Scatter3D, FieldMap, Spectrum, GameScene, Soundscape, GenomeTrack, CircularMap
 - AnimationPlayer for sequenced scene graph animations
 - Scene bridge renderers for both egui (GUI) and ratatui (TUI)
 
@@ -192,11 +193,8 @@ Legacy: `/tmp/petaltongue.sock`
 | [VISUALIZATION_INTEGRATION_GUIDE.md](./VISUALIZATION_INTEGRATION_GUIDE.md) | **How to get petalTongue to visualize your data** (v2.1.0) |
 | [SENSORY_CAPABILITY_MATRIX.md](./SENSORY_CAPABILITY_MATRIX.md) | **Input×output capability negotiation protocol** for consumer primals |
 | [SCENE_FORMAT_REFERENCE.md](./SCENE_FORMAT_REFERENCE.md) | **GameScene, Soundscape, narrative JSON schemas** for ludoSpring, esotericWebb |
-| [BIOMEOS_INTEGRATION_HANDOFF.md](./BIOMEOS_INTEGRATION_HANDOFF.md) | biomeOS integration guide (fossil record, v1.3.0 baseline) |
-| [BIOMEOS_API_SPECIFICATION.md](./BIOMEOS_API_SPECIFICATION.md) | API contract and endpoints |
-| [QUICK_START_FOR_BIOMEOS.md](./QUICK_START_FOR_BIOMEOS.md) | 5-minute quick start |
-| [NEURAL_API_INTEGRATION_RESPONSE.md](./NEURAL_API_INTEGRATION_RESPONSE.md) | Neural API response format |
-| [PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md](./PETALTONGUE_SHOWCASE_LESSONS_LEARNED.md) | Production insights (fossil record, Jan 3 baseline) |
+| [SPOREPRINT_EVOLUTION_ROADMAP.md](./SPOREPRINT_EVOLUTION_ROADMAP.md) | Zola → petalTongue migration roadmap, WASM path |
+| [PETALTONGUE_SPRING_SCIENCE_MAP.md](./PETALTONGUE_SPRING_SCIENCE_MAP.md) | Spring×science domain mapping |
 
 ---
 
@@ -204,7 +202,7 @@ Legacy: `/tmp/petaltongue.sock`
 
 | Standard | Status |
 |----------|--------|
-| `UNIBIN_ARCHITECTURE_STANDARD.md` | Compliant (1 binary, 6 modes) |
+| `UNIBIN_ARCHITECTURE_STANDARD.md` | Compliant (1 binary, 7 modes incl. `live`) |
 | `ECOBIN_ARCHITECTURE_STANDARD.md` | Compliant (pure Rust, no C deps, no genomeBin yet) |
 | `UNIVERSAL_IPC_STANDARD_V3.md` | Compliant (JSON-RPC + tarpc + HTTP fallback) |
 | `SEMANTIC_METHOD_NAMING_STANDARD.md` | Compliant (`visualization.*`, `interaction.*` namespaces) |

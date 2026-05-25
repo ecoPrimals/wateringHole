@@ -22,7 +22,7 @@ SIGTERM+SIGINT, and implement `lifecycle.status`. `start_primal.sh` simplified
 Rust binary at parity with bash launcher. bearDog Wave 112: ACME renewal
 daemon operational. biomeOS v3.75: Songbird mesh dispatch replaces legacy relay.
 toadStool S274: `max_guest_load` yield-to-owner enforced. petalTongue WS-4:
-WASM client-side rendering (8 `wasm_bindgen` functions). loamSpine benchScale:
+WASM client-side rendering (14 `wasm_bindgen` exports — grammar, binding, dashboard, batch, scene, Tufte, thresholds, modalities). loamSpine benchScale:
 51-validation roundtrip harness exercising all 43 methods via live TCP.
 
 **Wave 48 milestone**: Covalent spring mesh — **all 8/8 springs sounded off**.

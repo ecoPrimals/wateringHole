@@ -17,9 +17,11 @@ Pages via a CI pipeline:
 spore-validate --check → zola check → zola build → deploy-pages
 ```
 
-petalTongue is the Universal User Interface primal (v1.6.6, 17 crates). It
-has a `web` mode (Axum + SSE) that serves a minimal API dashboard, and a
-`petal-tongue-wasm` crate that can render grammar-to-SVG in the browser.
+petalTongue is the Universal User Interface primal (v1.6.6, 18 crates). It
+has a `web` mode (Axum + SSE) that serves a full API dashboard with SPA
+support, notebook rendering, and CORS, and a `petal-tongue-wasm` crate
+with 14 browser-side rendering exports (grammar, binding, dashboard, batch,
+scene graph, Tufte validation, threshold coloring, multi-modality).
 
 The **Gonzales interactive explorer** (`static/gonzales/explorer.js`) already
 uses petalTongue as an optional server-side chart renderer — the hybrid
@@ -186,17 +188,26 @@ Remove Zola from the pipeline entirely. petalTongue serves all pages.
 
 ---
 
-## WASM Path
+## WASM Path (WS-4 — Evolved May 2026)
 
-`petal-tongue-wasm` (grammar → SVG) is the client-side entry point for
-rich in-browser rendering without a petalTongue server.
+`petal-tongue-wasm` provides near server-parity client-side rendering
+(14 `#[wasm_bindgen]` exports, 30 tests, CI `wasm32-unknown-unknown` check):
 
-**Steps**:
-1. Wire `wasm-pack build` into CI
-2. Place the WASM bundle in `web/static/`
-3. Extend `web/index.html` (or a new SPA shell) to load the WASM module
-4. Use grammar-to-SVG for entity relationship graphs, ecosystem
-   visualizations, and data-driven charts
+| Export | Purpose |
+|--------|---------|
+| `render_grammar` / `render_grammar_to_modality` | Grammar expression → SVG/description/terminal |
+| `render_binding` / `render_binding_to_modality` | DataBinding → any modality |
+| `render_binding_with_thresholds` | Status-colored heatmaps/fieldmaps |
+| `render_bindings` | Batch render → JSON array of `{id, label, svg}` |
+| `render_dashboard` | Multi-panel dashboard grid (configurable layout) |
+| `compile_scene` / `render_scene` / `render_scene_to_modality` | SceneGraph JSON round-trip |
+| `validate_grammar` | Tufte constraint evaluation (7 constraints) → report JSON |
+| `version` / `init` | Meta + `console_error_panic_hook` browser traces |
+
+**Remaining integration steps**:
+1. Place the WASM bundle in `web/static/` (or serve from sporePrint CDN)
+2. Extend explorer SPA to load the WASM module for offline rendering
+3. Replace Plotly.js toggle with `petal-tongue-wasm` toggle
 
 This can happen independently of the Zola migration — WASM bundles can
 be included as static assets in the Zola build.
