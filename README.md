@@ -357,7 +357,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
 - `SPRING_AS_PROVIDER_PATTERN.md` — biomeOS capability registration
 - `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Provenance trio integration
-- `SPRING_EVOLUTION_ISSUES.md` — Active issues discovered by springs
+- ~~`SPRING_EVOLUTION_ISSUES.md`~~ — Removed; spring issues tracked in `GLACIAL_SHIFT_READINESS.md` Wave 49 issues table
 
 ### Presentation & External Review
 - **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** — **Read before any docs sweep.** Checklist for making a spring/primal independently reviewable by PIs, students, hobbyists, and compliance reviewers. The 5-minute test. Self-assessment template. Common problems and fixes. References `publicRelease/` audience briefs.
