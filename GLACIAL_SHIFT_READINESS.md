@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-24
+**Last updated**: 2026-05-25
 
 ---
 
@@ -20,7 +20,8 @@ SIGTERM+SIGINT, and implement `lifecycle.status`. `start_primal.sh` simplified
 Rust binary at parity with bash launcher. bearDog Wave 112: ACME renewal
 daemon operational. biomeOS v3.75: Songbird mesh dispatch replaces legacy relay.
 toadStool S274: `max_guest_load` yield-to-owner enforced. petalTongue WS-4:
-WASM client-side rendering (8 `wasm_bindgen` functions).
+WASM client-side rendering (8 `wasm_bindgen` functions). loamSpine benchScale:
+51-validation roundtrip harness exercising all 43 methods via live TCP.
 
 **LAN is live** — Cat6 1G backbone on unmanaged switch connects all gates.
 10G (switch + NICs installed, Cat6a cables pending) is an elevation goal for
