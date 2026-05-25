@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 24, 2026 (Wave 47 — DEPLOYMENT_BEHAVIOR_STANDARD 13/13. Deep debt sweeps across 9 primals. biomeOS v3.73 capability-domain composition. All behavioral convergence items resolved. Glacial shift: covalent bonding, sovereignty cutover, Neural API evolution)
+**Last Updated**: May 25, 2026 (Wave 49 — Post-primordial, plasmidBin-only deployment enforced. 8/8 showcase fossilizations complete. Ecosystem tightening: wateringHole consolidation, old pattern cuts. 7 primals responded same-day. Songbird `mesh.init` + `bootstrap_peers` wired. bearDog Wave 113b orphan purge. primalSpring: 789 tests, 53 scenarios, 95 deploy graphs. Glacial shift: sentinels tightened, cross-gate verification next)
 
 ---
 
@@ -219,7 +219,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v3.71  
+**Version**: v3.75  
 **Status**: Production Ready (A++, Security A++ LEGENDARY) — 1311+ tests, 25 workspace crates, 40+ deploy graphs, 20 niche templates, 285+ capability translations, 25 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. Neural API Layer 4: persistent routing weights (redb), weight health introspection, capability utilization tracking, attestation verification via BearDog, `primal.announce` v3.68 schema with cost/latency hints, composition intelligence (CompositionTier, CompositionPatternRegistry), membrane composition live execution
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
@@ -442,7 +442,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.9.28 Wave 47 (89 experiments, 20 tracks, 784 tests, 458 methods, 49 scenarios, 94 deploy graphs, UniBin, NUCLEUS VALIDATED, sporePrint Rust evolution, gate deployment intel absorbed, plasmidBin fixes shipped) |
+| primalSpring | v0.9.28 Wave 49 (89 experiments, 20 tracks, 789 tests, 458 methods, 53 scenarios, 95 deploy graphs, post-primordial, ecosystem tightening, peer seeding, superseded specs archived) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -526,7 +526,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
 **Phase**: Phase 60+ / Interstadial (87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.9.28 Wave 47 — 89 experiments (20 tracks), 784 lib tests (784 pass, 2 ignored), 458 methods, 49 scenarios (10 tracks, 3 tiers), 94 deploy graphs (80 deploy + 14 signal), NUCLEUS VALIDATED, UniBin (validate/certify/serve/status/version), sporePrint Rust evolution complete, gate deployment intel absorbed from 5 springs, plasmidBin launcher fixes shipped, zero clippy errors (51 pedantic advisories), zero unsafe, ecoBin compliant
+**Status**: v0.9.28 Wave 49 — 89 experiments (20 tracks), 789 lib tests (789 pass, 2 ignored), 458 methods, 53 scenarios (10 tracks, 3 tiers), 95 deploy graphs (81 deploy + 14 signal), NUCLEUS VALIDATED, UniBin (validate/certify/serve/status/version), post-primordial deployment enforced, `SONGBIRD_PEERS` peer seeding (both launchers), `--security-socket` feature guard, stale socket cleanup, superseded specs archived, metric drift fixed, ecosystem tightening blurb shipped, zero clippy errors, zero unsafe, ecoBin compliant
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
