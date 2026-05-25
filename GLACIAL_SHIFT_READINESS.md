@@ -23,6 +23,12 @@ toadStool S274: `max_guest_load` yield-to-owner enforced. petalTongue WS-4:
 WASM client-side rendering (8 `wasm_bindgen` functions). loamSpine benchScale:
 51-validation roundtrip harness exercising all 43 methods via live TCP.
 
+**Wave 48 milestone**: Covalent spring mesh initialization. All 8 springs now
+declare gate assignments in CONTEXT.md. 4/8 on named gates (eastGate, ironGate,
+southGate, biomeGate) with operational NUCLEUS. Cell deployment graphs ready
+for all 8. Songbird TCP federation on port 7700 enables cross-gate discovery.
+hotSpring: CAZyme FEL v0.7.0 (3 modules, GROMACS+PLUMED validated).
+
 **LAN is live** — Cat6 1G backbone on unmanaged switch connects all gates.
 10G (switch + NICs installed, Cat6a cables pending) is an elevation goal for
 Tier 2+ large-dataset science, not a deployment blocker.
@@ -58,25 +64,25 @@ Tier 2+ large-dataset science, not a deployment blocker.
 
 ### LAN Gate Deployment
 
-| Gate | Hardware | Role | NUCLEUS status | LAN |
-|------|----------|------|----------------|-----|
-| **ironGate** | i9-14900K, RTX 5070, 96GB | Agentic dev, ABG | **VALIDATED** | 1G |
-| **eastGate** | i9-12900, RTX 4070 + Akida, 32GB | Orchestrator, neuromorphic | **VALIDATED** | 1G |
-| **northGate** | Ryzen 9950X3D, RTX 5090, 96GB | Gaming primary, heavy compute | Hardware ready, **not deployed** | 1G (10G NIC ready) |
-| **southGate** | 5800X3D, RTX 4060 + float 3090s, 128GB | Gaming + compute | Hardware ready, **not deployed** | 1G (10G NIC ready) |
-| **westGate** | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage | Hardware ready, **not deployed** | 1G (10G NIC ready) |
-| **strandGate** | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics | Hardware ready, **not deployed** | 1G |
-| **biomeGate** | Threadripper 3970X, 256GB | HBM2 test bench | Active HBM2 bench, **not full mesh** | 1G |
-| **swiftGate** | Ryzen 5800X, RTX 3070, 64GB | Mobile/compact | Hardware ready | 1G |
-| **flockGate** | i9-13900K, RTX 3070 Ti, 64GB | Remote covalent (WAN) | Config ready, **not deployed** | WAN via cellMembrane |
-| **kinGate** | i7-6700K, RTX 3070, 32GB | Staging | Hardware ready | 1G |
+| Gate | Hardware | Role | NUCLEUS status | Springs | LAN |
+|------|----------|------|----------------|---------|-----|
+| **eastGate** | i9-12900, RTX 4070 + Akida, 32GB | Orchestrator, neuromorphic | **VALIDATED** | primalSpring | 1G |
+| **ironGate** | i9-14900K, RTX 5070, 96GB | Agentic dev, ABG | **VALIDATED** | primalSpring, ludoSpring | 1G |
+| **southGate** | 5800X3D, RTX 4060 + float 3090s, 128GB | Gaming + compute | **VALIDATED** (wetSpring 9/9) | wetSpring | 1G (10G NIC ready) |
+| **biomeGate** | Threadripper 3970X, 256GB | HBM2 test bench | **VALIDATED** (hotSpring 62/62) | hotSpring | 1G |
+| **northGate** | Ryzen 9950X3D, RTX 5090, 96GB | Gaming primary, heavy compute | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
+| **westGate** | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
+| **strandGate** | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics | Hardware ready, **not deployed** | — | 1G |
+| **swiftGate** | Ryzen 5800X, RTX 3070, 64GB | Mobile/compact | Hardware ready | — | 1G |
+| **flockGate** | i9-13900K, RTX 3070 Ti, 64GB | Remote covalent (WAN) | Config ready, **not deployed** | — | WAN via cellMembrane |
+| **kinGate** | i7-6700K, RTX 3070, 32GB | Staging | Hardware ready | — | 1G |
 
-**Deployment order** (over existing 1G LAN):
-1. westGate (Nest Atomic — cold storage)
-2. northGate (Node Atomic — heavy GPU)
-3. strandGate (Full NUCLEUS — bioinformatics)
-4. biomeGate / southGate (expansion)
-5. Plasmodium collective validation
+**Covalent mesh order** (over existing 1G LAN):
+1. Enable `SONGBIRD_FEDERATION_PORT=7700` on eastGate + ironGate + southGate + biomeGate
+2. Verify cross-gate `discovery.peers` (4 gates, 4 springs)
+3. Pending springs declare gates, deploy cells
+4. westGate (Nest Atomic — cold storage), northGate (Node Atomic), strandGate (Full NUCLEUS)
+5. Plasmodium collective validation (3+ gates meshed)
 
 ### Deployment Matrix (primalSpring)
 
