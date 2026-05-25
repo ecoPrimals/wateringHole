@@ -10,7 +10,9 @@
 
 The ecosystem has cleared the interstadial exit gate (~9.5/10). 13/13 primals
 at zero debt. cellMembrane VPS operational (relay + TLS/content shadows).
-Shadow tracks S1-S3 proven. Single-gate NUCLEUS validated on ironGate + eastGate.
+Shadow tracks S1-S3 proven. 4-gate NUCLEUS operational (eastGate, ironGate,
+southGate, biomeGate) with Songbird TCP :7700 federation — cross-gate
+`discovery.peers` verification pending.
 
 **Wave 47 milestone**: 13/13 behavioral convergence — all primals accept
 `--socket`, return `{"status":"alive"}` from `health.liveness`, handle
@@ -82,11 +84,12 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | **kinGate** | i7-6700K, RTX 3070, 32GB | Staging | Hardware ready | — | 1G |
 
 **Covalent mesh order** (over existing 1G LAN):
-1. Enable `SONGBIRD_FEDERATION_PORT=7700` on eastGate + ironGate + southGate + biomeGate
-2. Verify cross-gate `discovery.peers` (4 gates, 4 springs)
-3. Pending springs declare gates, deploy cells
-4. westGate (Nest Atomic — cold storage), northGate (Node Atomic), strandGate (Full NUCLEUS)
-5. Plasmodium collective validation (3+ gates meshed)
+1. ~~Enable `SONGBIRD_FEDERATION_PORT=7700` on eastGate + ironGate + southGate + biomeGate~~ **DONE** (Wave 48)
+2. Verify cross-gate `discovery.peers` — **NEXT**: confirm 4 gates see each other
+3. ~~Springs declare gates, deploy cells~~ **DONE** (8/8 sounded off, cells deploying)
+4. Cross-gate `capability.call` smoke test via primalSpring scenario
+5. westGate (Nest Atomic — cold storage), northGate (Node Atomic), strandGate (Full NUCLEUS)
+6. Plasmodium collective validation (3+ gates meshed via live `capability.call`)
 
 ### Deployment Matrix (primalSpring)
 
@@ -106,22 +109,39 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Family seed + bootstrap tooling | **READY** |
 | cellMembrane VPS rendezvous | **OPERATIONAL** |
 | Songbird TCP/WAN fallback | **SHIPPED** (Wave 213-214) |
+| Songbird TCP federation on LAN | **LIVE** — 4 gates with :7700 (Wave 48) |
+| Rust `nucleus_launcher` `--federation-port` | **SHIPPED** — Wave 48 |
 | NAT traversal (STUN/punch/TURN) | Shipped, **not field-tested** on residential NAT |
 | toadStool yield-to-owner dispatch | **ENFORCED** (S274: `GuestLoadPolicy` + `YieldStrategy` in `check_quota()`, 10 new tests) |
 | Cross-gate data dependency staging | **PROTOTYPED** (primalSpring `validation::dependency`) |
+| Cross-gate `discovery.peers` verification | **PENDING** — 4 gates live, mesh connectivity not yet confirmed |
+| Plasmodium collective status | **PENDING** — requires 3+ gates meshed |
 | flockGate live deployment | **NOT DEPLOYED** |
+
+### Wave 48 Deployment Issues (from spring sound-offs)
+
+| Issue | Reporter | Priority |
+|-------|----------|----------|
+| loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **MEDIUM** — upstream loamSpine bug |
+| rhizoCrypt/sweetGrass/toadStool slow startup (>8s probe timeout) | wetSpring | **LOW** — cold-start timing |
+| `primal.announce` vs `discovery.register` migration | wetSpring | **LOW** — primalSpring has fallback, springs should use `CompositionContext::announce()` |
+| Songbird sled DB corruption after unclean shutdown | neuralSpring | **LOW** — workaround: clean `task_lifecycle*` |
+| Spring binaries not in plasmidBin 13-primal set | healthSpring | **BY DESIGN** — springs build + symlink |
 
 ### Software Remaining
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| ~~Ionic bond runtime (WS-1)~~ | biomeOS + primalSpring | ~~MEDIUM~~ | **RESOLVED** — `IonicContractRegistry` full state machine, `s_ionic_bond` evolved to live RPC lifecycle (`bonding.propose`→`accept`→`status`→`terminate` + `crypto.ionic_bond.verify_proposal`). E2E cross-gate pending flockGate. |
-| ~~biomeOS route `capability.call` → Songbird for remote~~ | biomeOS | ~~MEDIUM~~ | **RESOLVED** — v3.75: `try_songbird_mesh_dispatch()` replaces legacy `relay.allocate`. Both translation and direct-discovery paths fall back to Songbird mesh. Response unwrapping (`{ provider, gate, result }` → inner `result`). Routing contract documented. |
-| Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | biomeOS v3.64 `nest.sync` 6-node graph shipped. Songbird mesh dispatch (v3.75) provides the transparent cross-gate transport. Live orchestration pending multi-gate deployment. |
-| Sovereign DNS (knot-dns) | cellMembrane team | MEDIUM | PLANNED |
-| ~~BearDog ACME Phase 3 renewal daemon~~ | bearDog | ~~LOW~~ | **RESOLVED** — Wave 112: `AcmeClient::run_renewal_loop()` wired into `beardog server` as background tokio task. Config via `BEARDOG_TLS_MODE=acme` + domain/email env vars. |
+| Cross-gate `discovery.peers` smoke test | primalSpring | **HIGH** | 4 gates have federation :7700 live — need to confirm they see each other |
+| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | biomeOS v3.75 mesh dispatch ready, needs live validation |
+| Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | v3.64 `nest.sync` graph shipped. Songbird mesh (v3.75) is the transport. Pending multi-gate connectivity. |
+| Sovereign DNS (knot-dns) | cellMembrane | MEDIUM | PLANNED |
 | `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW | `publish_sporeprint.sh` implemented. E2E requires live NestGate + bearDog session. |
 | Forgejo Actions CI | projectNUCLEUS | LOW | PLANNED |
+| loamSpine Tokio runtime-in-runtime panic | loamSpine | MEDIUM | Upstream bug — blocks health probe on 2 gates |
+
+**Resolved** (fossilized): Ionic bond runtime (WS-1), biomeOS mesh dispatch,
+BearDog ACME renewal daemon — see `fossilRecord/` for detail.
 
 ---
 
@@ -130,7 +150,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 The glacial shift (stadial entry) is reached when:
 
 1. All 4 sovereignty shadows **cut over** (S1-S4 formal 7-day gate passed)
-2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective)
+2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective) — Wave 48: 4 gates broadcasting :7700, mesh connectivity **pending verification**
 3. cellMembrane Nest expansion **deployed** on VPS
 4. At least one remote covalent node (flockGate) **validated** over WAN
 5. DNS pointed to sovereign infrastructure

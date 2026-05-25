@@ -33,12 +33,16 @@ If NUCLEUS is already running on your gate, you're done — just enable
 Songbird TCP federation so other gates can find you:
 
 ```bash
+# Bash launcher:
 SONGBIRD_FEDERATION_PORT=7700 ./tools/nucleus_launcher.sh start
+
+# Rust launcher (primalSpring ecoPrimal binary):
+nucleus_launcher --family-id <your-family> --federation-port 7700
 ```
 
-If you haven't started NUCLEUS yet, this is the command. It starts all 13
-primals over UDS on your local machine, and opens Songbird TCP on port 7700
-for cross-gate LAN discovery.
+If you haven't started NUCLEUS yet, either command works. It starts primals
+over UDS on your local machine and opens Songbird TCP on port 7700 for
+cross-gate LAN discovery.
 
 ### 3. Deploy your cell
 

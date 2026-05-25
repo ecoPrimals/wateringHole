@@ -18,7 +18,7 @@ federation enabled, deploy your cell, and connect over LAN.**
 
 ---
 
-## Gate Self-Reports
+## Gate Self-Reports (ALL 8/8 COMPLETE)
 
 | Spring | Gate | NUCLEUS Status | Composition |
 |--------|------|----------------|-------------|
@@ -26,12 +26,12 @@ federation enabled, deploy your cell, and connect over LAN.**
 | **wetSpring** | southGate | **operational** | Node Atomic (9/9 validated) |
 | **ludoSpring** | ironGate | **operational** | Tower Atomic (11/11 proto-nucleate) |
 | **hotSpring** | biomeGate | **operational** | Node Atomic (62/62 validation) |
-| **neuralSpring** | pending | pending | Node Atomic (7 primals) |
-| **airSpring** | pending | pending | Node Atomic (6 primals) |
-| **groundSpring** | pending | pending | Node Atomic (6 primals) |
-| **healthSpring** | pending | pending | Nest Atomic (5 primals) |
+| **neuralSpring** | southGate | **operational** | Full NUCLEUS |
+| **airSpring** | eastGate | **operational** | Full NUCLEUS |
+| **groundSpring** | eastGate | **operational** | Full NUCLEUS |
+| **healthSpring** | ironGate | **operational** | Nest Atomic |
 
-**4/8 springs on named gates. 4 pending self-report.**
+**8/8 springs sounded off. 4 gates operational.**
 
 ---
 
@@ -91,16 +91,13 @@ curl -s -X POST http://127.0.0.1:7700 \
 
 ```
 LAN Cluster (Cat6 1G)
-├── eastGate ── primalSpring (orchestrator)
-├── ironGate ── primalSpring + ludoSpring + groundSpring*
-├── southGate ── wetSpring
+├── eastGate ── primalSpring + airSpring + groundSpring
+├── ironGate ── primalSpring + ludoSpring + healthSpring
+├── southGate ── wetSpring + neuralSpring
 ├── biomeGate ── hotSpring
-└── strandGate ── (pending assignment)
+└── strandGate/northGate/westGate ── hardware ready, not deployed
 
-* groundSpring gate pending self-report; listed with ironGate per
-  primalSpring's Development Systems table.
-
-All gates: NUCLEUS (13 primals) over UDS
+All gates: NUCLEUS over UDS (composition varies per spring)
 Cross-gate: Songbird TCP :7700 federation
 Dispatch: biomeOS v3.75 mesh dispatch (capability.call → Songbird)
 Yield: toadStool S274 GuestLoadPolicy (yield-to-owner enforced)
@@ -115,6 +112,7 @@ Yield: toadStool S274 GuestLoadPolicy (yield-to-owner enforced)
 | Cell deployment graphs | 8/8 springs in `plasmidBin/cells/` |
 | `cell_launcher.sh` | Shipped in primalSpring `tools/` |
 | `nucleus_launcher.sh` | Shipped with `SONGBIRD_FEDERATION_PORT` support |
+| `nucleus_launcher` (Rust) | `--federation-port 7700` CLI flag (Wave 48) |
 | biomeOS v3.75 mesh dispatch | `try_songbird_mesh_dispatch()` replaces `relay.allocate` |
 | toadStool S274 yield-to-owner | `GuestLoadPolicy` + `YieldStrategy` enforced |
 | Songbird TCP federation | Wave 213-214, TCP/WAN fallback |
@@ -130,8 +128,17 @@ Yield: toadStool S274 GuestLoadPolicy (yield-to-owner enforced)
 
 ## Next Steps
 
-1. Pending springs declare their gates
-2. All gates start NUCLEUS with `SONGBIRD_FEDERATION_PORT=7700`
-3. Validate cross-gate `discovery.peers` visibility
+1. ~~Pending springs declare their gates~~ **DONE** (8/8)
+2. ~~All gates start NUCLEUS with `SONGBIRD_FEDERATION_PORT=7700`~~ **DONE** (4 gates broadcasting)
+3. **NEXT**: Validate cross-gate `discovery.peers` visibility
 4. Run cross-gate `capability.call` smoke test
 5. Once 3+ gates are live: `biomeos plasmodium status`
+
+## Deployment Issues (resolved in-flight)
+
+| Issue | Resolution |
+|-------|------------|
+| `primal.announce` vs `discovery.register` | primalSpring `niche.rs` has auto-fallback. Springs should call `CompositionContext::announce()` which tries `primal.announce` (v3.57+) and falls back to legacy `lifecycle.register` + per-domain `capability.register`. |
+| Songbird sled DB corruption after unclean shutdown | Clean `~/.local/share/songbird/task_lifecycle*` and restart. |
+| Spring binaries not in plasmidBin 13-primal set | By design. Springs build their own binary from source and symlink into `plasmidBin/primals/`. |
+| loamSpine Tokio runtime-in-runtime panic | Upstream loamSpine bug. Does not block mesh — skip loamSpine health probe if needed. |
