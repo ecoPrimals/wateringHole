@@ -154,7 +154,7 @@ BLAKE3 `pure` feature resolved. 14 deep-debt items resolved in CATHEDRAL audit.
 | 5a | Tier 4: 4+ springs `optional=true` | **8/8** — all springs IPC-first (`default = []`) | **DONE** |
 | 5b | wetSpring PG gaps below 5 | **4 open** (PG-02, PG-03, PG-04, PG-05 — all external) | **DONE** |
 | 5c | guidestone convergence | airSpring **L4**, neuralSpring **L5**, wetSpring **L5** | **EXCEEDED** |
-| 5d | Foundation seeding | **10/10** threads active (9+10 seeded by ludoSpring V71 + healthSpring V64m) | **EXCEEDED** |
+| 5d | Foundation seeding | **10/10** threads active (9+10 seeded by ludoSpring V71 + healthSpring V65a) | **EXCEEDED** |
 | 5e | plasmidBin: all springs staged | 6/8 staged (ludoSpring composed, primalSpring special) | On track |
 | 5f | LTEE paper queue progress | **4 springs reproducing** (groundSpring B2+B1 DONE, hotSpring B2, wetSpring B7, neuralSpring B1) | **DONE** |
 | 5g | CompositionContext wiring | PrimalClient encapsulated (L2 design) | L2 coordination pass pending |
@@ -177,7 +177,7 @@ airSpring L4, neuralSpring L5 (exceeded L4 target), 10/10 foundation threads act
 [x] Pillar 1: MethodGate 13/13 (squirrel shipped May 11)
 [x] Pillar 1: Wire routing fixes — security.audit_log→defense, crypto base64 encoding (May 13)
 [~] Pillar 2: H2-2b/3a/3b/3c all in shadow-run state — H2-12 TLS LIVE, DoT FIXED, others pending
-[x] Pillar 2: Foundation 10/10 threads active (Threads 9+10 seeded by ludoSpring V71 + healthSpring V64m)
+[x] Pillar 2: Foundation 10/10 threads active (Threads 9+10 seeded by ludoSpring V71 + healthSpring V65a)
 [ ] Pillar 3: Thread 1 WCM compositions through provenance trio
 [x] Pillar 4: lithoSpore 6/7 modules Tier 2 LIVE (EXCEEDED Tier 1 target). ecoBin compliant.
 [x] Pillar 4: Real data fetched from Dryad/NCBI — Wiser 2013 + Barrick 2009 in tree

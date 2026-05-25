@@ -1,7 +1,7 @@
 # healthSpring — Composition Guidance for Springs and Primals
 
-**Date**: April 7, 2026
-**From**: healthSpring V47
+**Date**: May 25, 2026
+**From**: healthSpring V65a (ironGate — post-primordial)
 **License**: AGPL-3.0-or-later
 
 ---
@@ -19,7 +19,7 @@ Each primal in the ecosystem should write an equivalent document. No primal know
 
 ## 1. healthSpring Solo — Self-Knowledge Capabilities
 
-healthSpring is a health science compute primal. It owns the `health` domain and advertises 58 science capabilities across 10 domains, plus infrastructure and composition health.
+healthSpring is a health science compute primal. It owns the `health` domain and advertises 88 capabilities across 10 science domains, plus infrastructure and composition health. Post-primordial deployment on ironGate — plasmidBin-only, NUCLEUS operational, Songbird TCP federation on port 7700.
 
 ### Science Capabilities (What We Compute)
 
