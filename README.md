@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 24, 2026 (Wave 47: 13/13 behavioral convergence, `start_primal.sh` simplified. Zero clippy warnings in primalSpring. bearDog Wave 112: ACME daemon wired, 127 methods. Ionic bond scenario evolved to live RPC. 458 methods, 784 tests, 49 scenarios. Glacial shift: multi-gate LAN mesh, sovereignty cutover, Neural API cross-gate routing.)
+**Last Updated**: May 25, 2026 (Wave 49: post-primordial deployment, 12/12 NUCLEUS ALIVE. 458 methods, 791 tests, 53 scenarios, 95 deploy graphs. plasmidBin-only enforced. SONGBIRD_PEERS peer seeding shipped. 23 handoffs archived. Glacial shift: cross-gate discovery.peers verification NEXT.)
 
 ---
 
@@ -376,7 +376,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ### Handoffs
 - `handoffs/*.md` — Active session handoffs (last 48 hours)
-- `handoffs/archive/` — Fossil record (148 archived handoffs, May 2026 — earlier epochs consolidated to fossilRecord)
+- `handoffs/archive/` — Fossil record (217 archived handoffs, May 2026 — earlier epochs consolidated to fossilRecord)
 
 ---
 
