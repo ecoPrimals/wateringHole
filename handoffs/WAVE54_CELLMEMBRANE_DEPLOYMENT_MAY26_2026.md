@@ -2,7 +2,7 @@
 
 **Date**: 2026-05-26  
 **From**: primalSpring (coordination)  
-**To**: cellMembrane team, gate operators  
+**To**: cellMembrane team, gate operators, primal teams with deployment items  
 **Context**: PostPrimordial complete. Primal mountain debt clearing in Wave 53.
 This handoff prepares cellMembrane and gate operators for Wave 54 deployment
 stabilization. Glacial shift wave plan at `wateringHole/GLACIAL_SHIFT_WAVE_PLAN.md`.
@@ -19,46 +19,131 @@ stabilization. Glacial shift wave plan at `wateringHole/GLACIAL_SHIFT_WAVE_PLAN.
 
 ---
 
-## cellMembrane Action Items
+## Garden Guidance
 
-### 1. Second CI Runner on eastGate (HIGH — eliminates SPOF)
+### cellMembrane (CRITICAL — owns 3 glacial blockers)
 
-ironGate runner is the single point of failure. Deploy a second
-`actions-runner` on eastGate. Workflow configs already default to
-`self-hosted, linux, x86_64`.
+Phase 1 (Tower) operational on VPS. Channel 2 TURN/RustDesk LIVE, Channel 3
+TLS LIVE. `cellmembrane-types` v0.1.0, 80 tests. Wave 51 deep-debt clean.
 
-### 2. VPS Nest Expansion (GLACIAL BLOCKER 1)
+#### Action items:
 
-Deploy Nest primals on `membrane-relay` VPS (157.230.3.183):
-- rhizoCrypt (ephemeral DAG)
-- loamSpine (permanent ledger)
-- sweetGrass (attribution/PROV-O)
-- NestGate (network/egress)
+1. **2nd CI runner on eastGate** (HIGH — eliminates ironGate SPOF)
+   - Workflow configs already default to `self-hosted, linux, x86_64`
+   - Deploy `actions-runner` on eastGate alongside existing ironGate runner
 
-Use `plasmidbin fetch --all --force` on VPS, then start Nest primals.
-This transforms the VPS from Tower-only to Tower+Nest — enabling
-provenance and storage on the outer membrane.
+2. **VPS Nest expansion** (GLACIAL BLOCKER 1)
+   - Deploy Nest primals on `membrane-relay` VPS (157.230.3.183):
+     rhizoCrypt, loamSpine, sweetGrass, NestGate
+   - Use `plasmidbin fetch --all --force` on VPS, then start Nest primals
+   - Transforms VPS from Tower-only to Tower+Nest (provenance + storage on outer membrane)
+   - Reconcile with projectNUCLEUS README which claims Nest Atomic LIVE —
+     glacial-shift tracker still lists Nest as not deployed
 
-### 3. Sovereign DNS (GLACIAL BLOCKER 2)
+3. **Sovereign DNS** (GLACIAL BLOCKER 2)
+   - Deploy knot-dns on VPS (Channel 1)
+   - Replace Cloudflare DNS delegation for `primals.eco` zone
+   - DNS sovereignty milestone
 
-Deploy knot-dns on VPS (Channel 1). Replace Cloudflare DNS delegation
-for `primals.eco` zone. This is the DNS sovereignty milestone.
+4. **K-Derm wire contract** (NEW — primalSpring integration)
+   - Publish to `wateringHole/`:
+     - `membrane.toml` canonical schema
+     - Layer placement per primal (which K-Derm layer each primal occupies)
+     - `BoundaryPolicy` set (what crosses each layer boundary)
+     - Channel protein definitions
+   - primalSpring will consume `cellmembrane-types` (`EnvelopeTopology`,
+     `BondType`, `ChannelProtein`) and add `s_kderm_boundary` scenario
 
-### 4. K-Derm Wire Contract (NEW)
+5. **S1 TLS shadow prep** (after DNS)
+   - Cloudflare → sovereign TLS via Caddy (S1 cutover)
+   - Can begin once DNS is sovereign
 
-Publish to `wateringHole/`:
-- `membrane.toml` canonical schema
-- Layer placement per primal (which K-Derm layer each primal occupies)
-- `BoundaryPolicy` set (what crosses each layer boundary)
-- Channel protein definitions
+### projectNUCLEUS (IMPORTANT — gate coordination)
 
-primalSpring will consume `cellmembrane-types` (`EnvelopeTopology`,
-`BondType`, `ChannelProtein`) for deploy-graph validation and add an
-`s_kderm_boundary` scenario.
+Sovereignty evolution active. 13/13 primals zero debt, 8/8 springs Tier 4.
+55 Rust tests, shadow orchestrator 6/6 PASS.
+
+- **Gate coordination**: assist SouthGate + BiomeGate redeploy (see operator
+  items below)
+- **Horizon 2 cutovers**: BearDog TLS 7-day parity (H2-12), DNS NS cutover
+  (H2-17/18) — align with cellMembrane sovereign DNS
+- **Forgejo Actions**: deploy Forgejo on ironGate as shadow CI (H3-03), then
+  invert to Forgejo-primary
+
+### projectFOUNDATION (LOW — background)
+
+gen4 soil layer. Deep debt pass complete. Thread validation partial.
+
+- **BLAKE3 backfill**: 155 sources pending fetch — continue as data becomes available
+- **Thread 1 WCM**: 0/27 validated — incremental work, not blocking
+- No Wave 54 deployment dependencies; continue at current pace
+
+### esotericWebb (FYI — spring-side Wave 55)
+
+V10, 357 tests, 91% coverage. 12 open evolution gaps.
+
+- 6 `game.*` methods for ludoSpring integration are Wave 55 items
+- BearDog crypto bridge gap (GAP-015) resolves after BearDog TCP drop
+- No Wave 54 action needed
+
+### lithoSpore (FYI — field deployment)
+
+v0.1.0, 7/7 modules PASS. 4 USBs deployed to Barrick Lab.
+
+- **Tier 3 provenance**: wired but needs live NUCLEUS at runtime — benefits
+  from VPS Nest expansion
+- Songbird TURN client library + TURN-relayed RPC: blocked on Songbird, not
+  cellMembrane
+- No Wave 54 action needed; benefits passively from gate stabilization
+
+### blueFish (NO ACTION)
+
+Placeholder repo. Product not started. No Wave 54 dependencies.
 
 ---
 
-## Gate Operator Action Items
+## Per-Primal Deployment Guidance
+
+### songbird (after Wave 53 fix)
+
+- SouthGate: confirm Songbird process stability after crash investigation
+- BiomeGate: restart with `SONGBIRD_FEDERATION_PORT=7700` + `SONGBIRD_PEERS=192.168.1.144:7700`
+- Validate federation handshake with eastGate mesh
+
+### bearDog (TCP drop prototype)
+
+- **Test NUCLEUS**: run BearDog UDS-only (no TCP 9900/9101)
+- Verify all crypto capabilities reachable via domain sockets
+- If successful, this validates the Tower CNS convergence path (exp114)
+
+### biomeOS (cephalization prep)
+
+- primalSpring will prototype primal-scoped socket directories (exp113):
+  `biomeos/beardog/crypto.sock` instead of `biomeos/crypto.sock`
+- Backward compat via symlinks
+- Phase A: beardog/ (5 sockets) + barracuda/ (5 sockets)
+- biomeOS Neural API will need primal-scoped socket discovery in a future
+  wave — no action needed now, primalSpring validates routing first
+
+### NestGate (VPS deployment)
+
+- Will be deployed to VPS as part of cellMembrane Nest expansion
+- Verify version alignment resolved in Wave 53 before VPS deploy
+
+### rhizoCrypt, loamSpine, sweetGrass (VPS deployment)
+
+- Will be deployed to VPS as Nest primals
+- No code changes needed — `plasmidbin fetch` delivers current binaries
+- Verify health via `plasmidbin doctor` after VPS deployment
+
+### All others (NO ACTION)
+
+toadStool, coralReef, barraCuda, petalTongue, squirrel, skunkBat, sourDough,
+bingoCube — no Wave 54 deployment items. Continue normal evolution.
+
+---
+
+## Gate Operator Guidance
 
 ### SouthGate (after Wave 53 Songbird fix)
 
@@ -80,18 +165,14 @@ SONGBIRD_FEDERATION_PORT=7700 SONGBIRD_PEERS=192.168.1.144:7700 \
 Push from 6–9 primals to full 13/13. Verify federation handshake
 with eastGate.
 
----
+### eastGate (reference — no action)
 
-## Cephalization Prep (primalSpring-owned, FYI to biomeOS)
+13/13 primals, 19/19 sockets, doctor 35/35. Reference deployment.
+Accept 2nd CI runner from cellMembrane.
 
-primalSpring will prototype primal-scoped socket directories (exp113):
-- `biomeos/beardog/crypto.sock` instead of `biomeos/crypto.sock`
-- Backward compat via symlinks
-- Phase A: beardog/ (5 sockets) + barracuda/ (5 sockets)
+### ironGate (no action)
 
-biomeOS Neural API will need to learn primal-scoped socket discovery
-in a future wave. No action needed from biomeOS now — primalSpring
-will validate routing first.
+Operational. Continue as primary CI gate.
 
 ---
 
