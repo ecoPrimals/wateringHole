@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: May 24, 2026
+**Last Updated**: May 26, 2026
 
 ---
 
@@ -453,6 +453,115 @@ session the project has run. 3,831+ documents spanning February 4, 2026 –
 present, consolidated from 10 ecosystem sources with provenance-preserving
 subdirectory structure.
 
+### Fossilization
+
+The act of moving resolved content — handoffs, showcase directories,
+superseded standards, local wateringHole trees — from active repos to the
+fossilRecord. Fossilized content is replaced by a README stub pointing to
+the canonical archive location. The content is never deleted; it moves from
+working memory to geological record.
+
+Fossilization became a first-class ecosystem operation during Wave 49
+(showcase fossilization across 8 primals) and Wave 51 (primalSpring
+wateringHole fossilization). The pattern: **copy to fossilRecord → replace
+with pointer stub → push both repos**.
+
+### Wave
+
+A **wave** is a named coordination pulse across the ecosystem — a point
+where multiple primals and springs evolve together in response to a shared
+signal. Waves are numbered sequentially (Wave 47, 48, 49, 50, 51…) and
+tracked in `GLACIAL_SHIFT_READINESS.md`.
+
+A wave is not a release. It is a *synchronization event* — a moment when
+the ecosystem converges on a shared standard, absorbs upstream changes,
+and confirms alignment. Springs "respond" to waves by pulling the latest
+patterns and confirming compliance. Waves are how the ecosystem breathes.
+
+### Stadial / Interstadial
+
+Borrowed from glacial geology. A **stadial** is a period of hard convergence
+— all components forced to a common fitness threshold. An **interstadial** is
+a warming period of diversification under constraint. The ecosystem cycles
+between these phases: stadials cull non-conforming patterns, interstadials
+allow exploration and specialization, extinction events select what survives,
+and the next stadial raises the bar.
+
+The current position (May 2026) is interstadial exit → stadial entry. The
+glacial shift criteria define the gate.
+
+See `whitePaper/gen4/architecture/STADIAL_INTERSTADIAL_PATTERN.md`.
+
+---
+
+## The Deployment Layer
+
+### plasmidBin
+
+The **binary distribution repository** at `github.com/ecoPrimals/plasmidBin`.
+Contains pre-built musl-static NUCLEUS primal binaries for x86_64 and aarch64.
+Every primal binary deployed in production comes from plasmidBin — never from
+`cargo build` on the gate, never from `target/release/`, never from PATH
+lookup.
+
+plasmidBin provides:
+- `manifest.toml` — canonical primal registry (versions, methods, checksums)
+- `checksums.toml` — BLAKE3 hashes per binary per architecture
+- `sources.toml` — mapping from primal IDs to source repos and build config
+- `plasmidbin` CLI — Rust binary for `validate`, `harvest`, `fetch`, `deploy`,
+  `start`, `stop`, `doctor`, `launch`
+- GitHub Actions CI — automated harvest from upstream releases, checksum
+  generation, smoke testing
+
+The name follows the biological metaphor: a plasmid is a small circular DNA
+molecule that carries genes between bacteria independently of the chromosome.
+plasmidBin carries primal binaries between gates independently of the source
+repos.
+
+### postPrimordial
+
+The **deployment regime** where all NUCLEUS primal binaries come exclusively
+from plasmidBin. No `target/release/` paths, no `cargo install`, no `which`
+PATH lookups, no `~/.local/bin` or `~/.cargo/bin` fallbacks in any launcher,
+deploy script, systemd unit, or composition tool.
+
+postPrimordial is the ecosystem after its primordial phase — the period when
+primals were built locally from source on each gate. The primordial phase
+was necessary (you can't distribute binaries that don't exist yet). The
+post-primordial phase recognizes that local builds are fragile, non-reproducible,
+and create deployment drift between gates.
+
+The transition happened at Wave 49 (post-primordial deployment enforced
+across all launchers). Wave 51 completed the Rust elevation of plasmidBin
+itself — the distribution tool is now as sovereign as the binaries it
+distributes.
+
+**Compliance rule**: any script, service, or doc that resolves a NUCLEUS
+primal binary through anything other than plasmidBin is a primordial
+anti-pattern and must be fixed. Spring-owned validation binaries (e.g.,
+`target/release/healthspring_unibin`) built from the spring's own source
+are exempt — they are not NUCLEUS primals.
+
+### goldenCage
+
+The set of external cloud services that the ecosystem uses to bootstrap
+sovereignty — services that are individually excellent, collectively
+indispensable, and structurally a single point of failure until replaced.
+
+The golden cage bars: GitHub (code, CI, releases), Cursor (AI development),
+Cloudflare (DNS, TLS proxy, tunnel), DigitalOcean (VPS), crates.io
+(dependency resolution), Let's Encrypt (TLS certificates), Python/GROMACS
+(science baseline validation).
+
+The **chrysalis thesis**: the cage is not the enemy — it is the bootstrap
+material from which sovereignty is built. Each sovereign replacement
+(BearDog for Cloudflare TLS, Songbird for cloudflared tunnel, NestGate for
+GitHub Pages, Forgejo for GitHub repos, self-hosted runners for GitHub
+Actions) was built using the cage's resources. The cage becomes the outer
+membrane when the inner membrane is self-sufficient.
+
+See `whitePaper/gen4/architecture/THE_GOLDEN_CAGE.md`.
+
 ---
 
 ## The Meta Layer
@@ -819,3 +928,10 @@ the validator assumes the network is hostile.
 | **darkforest** | Pure Rust security validator — pen test + fuzz + crypto strength (939KB, zero deps) |
 | **Snapshot architecture** | Public surface holds managed copies, not live symlinks — stable observer view |
 | **Tiered validation** | Light (structural) → Medium (execution) → Heavy (regression) validation pipeline |
+| **plasmidBin** | Binary distribution repo — pre-built musl-static NUCLEUS primals, Rust CLI, automated harvest |
+| **postPrimordial** | Deployment regime where all NUCLEUS binaries come from plasmidBin — no local builds |
+| **Fossilization** | Moving resolved content to fossilRecord, replacing with pointer stub |
+| **Wave** | Named coordination pulse — ecosystem synchronization event tracked in glacial readiness |
+| **Stadial** | Hard convergence phase — fitness gate that culls non-conforming patterns |
+| **Interstadial** | Warming phase — diversification and specialization under constraint |
+| **goldenCage** | External services bootstrapping sovereignty (GitHub, Cursor, Cloudflare) — chrysalis thesis |
