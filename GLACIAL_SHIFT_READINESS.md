@@ -2,20 +2,49 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-25 (Wave 50 — 7/7 springs covalent HPC)
+**Last updated**: 2026-05-26 (Wave 51 — plasmidBin Rust elevation, CI sovereignty, golden cage)
 
 ---
 
 ## Position
 
-The ecosystem has cleared the interstadial exit gate (~9.7/10). 13/13 primals
+The ecosystem has cleared the interstadial exit gate (~9.8/10). 13/13 primals
 at zero debt. cellMembrane VPS operational (relay + TLS/content shadows).
 Shadow tracks S1-S3 proven. 4-gate NUCLEUS operational (eastGate, ironGate,
 southGate, biomeGate) with Songbird TCP :7700 federation. **7/7 delta springs
-responded to Wave 50 covalent HPC blurb** — all gates have NUCLEUS running,
-mesh seeded, post-primordial confirmed. Cross-subnet routing confirmed
-(southGate ↔ eastGate, 4ms, no TURN needed). `discovery.peers` population
-is the remaining Songbird evolution item.
+confirmed covalent HPC** (Wave 50). `discovery.peers` population is the
+remaining Songbird evolution item.
+
+**Wave 51 milestone**: Outer membrane stress test + sovereignty hardening.
+
+- **plasmidBin full Rust elevation** — all 20 bash scripts replaced by a single
+  `plasmidbin` Rust CLI binary (`validate`, `harvest`, `fetch`, `doctor`,
+  `deploy`, `start`, `stop`, `launch`). Dynamic harvest driven from `sources.toml`
+  with `binary_name` and `build_args` fields — single-point primal onboarding.
+  Checksum sync pipeline fixed (split `git add` for gitignored dirs). Release
+  smoke test bash substitution bug fixed. biomeos (`biomeos-cli`) and skunkbat
+  (`-p skunk-bat-server`) binary naming resolved. Release tags: v2026.05.25,
+  v2026.05.26.
+- **CI cost optimization** — daily full-sweep cron removed. New `check-updates.yml`
+  does daily lightweight tag check (~1 min) and selectively dispatches harvest
+  only for stale primals. Weekly Monday full sweep retained. Spending cap set
+  at $100/month.
+- **GitHub Actions outage (May 26)** — critical incident (authentication cascade,
+  workflow triggers silently dropped). CI/CD pipeline went dark. All inner membrane
+  components unaffected: 4 NUCLEUS instances running, Songbird mesh live, local
+  `plasmidbin` CLI operational. Outage documented in
+  `whitePaper/gen4/architecture/THE_GOLDEN_CAGE.md`.
+- **cellMembrane self-hosted runners handoff** — issued during outage. Requires
+  2+ LAN gates with lockout prevention. Forgejo-as-primary evolution path
+  documented. See `handoffs/CELLMEMBRANE_SELF_HOSTED_RUNNERS_WAVE50_MAY26_2026.md`.
+- **primalSpring wateringHole fossilized** — 42 files (7 standards, 2 living
+  handoffs, 32 archived) moved to `fossilRecord/springs/primalSpring/wateringHole_wave50_may2026/`.
+  Local `wateringHole/` replaced with pointer stub to `infra/wateringHole/`.
+- **THE_GOLDEN_CAGE.md** — gen4 architecture paper written. Documents dependency
+  audit (7 infrastructure cage bars + science stack cage), chrysalis thesis
+  (bootstrap sequence from cage to sovereignty), evolution order (8 steps from
+  self-hosted runners to barracuda science parity). Forgejo positioned as
+  sovereignty baseline before NUCLEUS absorbs forge capabilities.
 
 **Wave 47 milestone**: 13/13 behavioral convergence — all primals accept
 `--socket`, return `{"status":"alive"}` from `health.liveness`, handle
@@ -25,30 +54,17 @@ SIGTERM+SIGINT, and implement `lifecycle.status`.
 4 gates operational with NUCLEUS + Songbird TCP :7700 federation.
 
 **Wave 49 milestone**: Post-primordial + ecosystem tightening. plasmidBin-only
-deployment enforced across all launchers. 8/8 primal showcases fossilized
-(barraCuda, bearDog, loamSpine, petalTongue, rhizoCrypt, skunkBat, sweetGrass,
-toadStool). 7 primals responded with tightening handoffs same-day (rhizoCrypt,
-Songbird, biomeOS, coralReef, sweetGrass, toadStool, bearDog). Songbird wired
-`mesh.init` with `bootstrap_peers` for cross-gate TCP discovery. rhizoCrypt
-fixed startup latency (was >8s, pipeline debt item). bearDog Wave 113b:
-orphan purge — cloud KMS/mobile HSM/PKCS11 discovery code removed (~15k LOC),
-method count drift fixed (127). toadStool: orchestrator dispatch tests added,
-Unix socket improvements. primalSpring: 791 tests, 53 scenarios, 458 methods,
-95 deploy graphs, superseded specs archived, metric drift fixed across 15+ docs.
-petalTongue: `--family-id` CLI now accepted (Wave 49 commit `bb5cdc9`),
-showcase pointer updated to central fossilRecord. **All sentinel debt cleared.**
-Full NUCLEUS 12/12 redeployed from plasmidBin musl binaries — barraCuda
-pgrep collision bug fixed (spring cell binary false positive blocked startup).
+deployment enforced across all launchers. 8/8 primal showcases fossilized.
+7 primals responded with tightening handoffs same-day. Songbird wired
+`mesh.init` with `bootstrap_peers`. **All sentinel debt cleared.** Full
+NUCLEUS 12/12 redeployed from plasmidBin musl binaries.
 
 **Wave 50 milestone**: Covalent HPC — **all 7/7 delta springs responded**.
-4 gates running NUCLEUS with Songbird :7700. Cross-subnet routing confirmed
-(southGate 192.168.4.29 ↔ eastGate 192.168.1.144, 4ms via router — no TURN
-needed). neuralSpring fixed last `target/release/` hardcode (V175). hotSpring
-absorbed post-primordial (pseudoSpore v1.5.0, 9 primals on biomeGate).
-ludoSpring resolved GAP-01 coralReef (live `shader.compile.wgsl` validation).
-healthSpring validated dual-tower + Nest Atomic against live NUCLEUS (14/17
-sockets). plasmidBin CLI alignment fixed upstream by ludoSpring (barracuda
-`--unix`, rhizocrypt `--unix`, nestgate `server --socket-only`).
+Cross-subnet routing confirmed (southGate ↔ eastGate, 4ms, no TURN needed).
+neuralSpring fixed last `target/release/` hardcode. hotSpring absorbed
+post-primordial (pseudoSpore v1.5.0). ludoSpring resolved GAP-01 coralReef.
+healthSpring validated dual-tower + Nest Atomic. plasmidBin CLI alignment
+fixed upstream.
 
 | Gate | NUCLEUS | Springs | Mesh seeded |
 |------|---------|---------|-------------|
@@ -177,27 +193,30 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Plasmodium collective status | **BLOCKED** — requires `discovery.peers` population for `capability.call` routing |
 | flockGate live deployment | **NOT DEPLOYED** |
 
-### Ecosystem Issues (Wave 50, May 25)
+### Ecosystem Issues (Wave 51, May 26)
 
 | Issue | Reporter | Status |
 |-------|----------|--------|
-| loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **UPSTREAM** — does not block mesh |
-| rhizoCrypt slow startup (>8s) | wetSpring | **FIXED** Wave 49 — `announce_to_biomeos()` off critical path |
-| sweetGrass/toadStool slow startup (>8s) | wetSpring | **KNOWN** — cold-start timing, not blocking |
-| Songbird `--security-socket` rejected | wetSpring | **FIXED** Wave 49 — feature-guarded + env fallback |
-| petalTongue stale socket on restart | primalSpring | **FIXED** Wave 49 — launcher pre-cleans dead sockets |
-| `discovery.peers` returns empty | healthSpring | **FIXED** Wave 49 — Songbird `mesh.init` + `bootstrap_peers` wired |
-| ~~southGate ≠ eastGate subnet~~ | neuralSpring | **RESOLVED** Wave 50 — cross-subnet routing works natively (4ms) |
-| petalTongue musl rejects `--family-id` | primalSpring | **FIXED** Wave 49 — commit `bb5cdc9` |
-| Songbird sled DB corruption (unclean) | neuralSpring | **WORKAROUND** — clean `task_lifecycle*` |
-| biomeOS LiveSpore deploys to `~/.local/bin` | re-audit | **STALE PATTERN** — conflicts with plasmidBin-only |
-| ~~neuralSpring petalTongue `target/release/`~~ | re-audit | **FIXED** Wave 50 — V175/S219, `find_binary` only |
-| toadStool/loamSpine local wH unarchived | re-audit | **HYGIENE** — 37+14 flat handoffs need archive subdir |
-| Central fossilRecord incomplete | re-audit | **SYNC GAP** — 7/8 primals archived, central repo sparse |
-| ~~hotSpring Wave 48~~ | resolved | **RESOLVED** Wave 50 — pseudoSpore v1.5.0, 9 NUCLEUS primals on biomeGate, plasmidBin-only |
-| `discovery.peers` empty after `mesh.init` | all gates (Wave 50) | **SONGBIRD v0.2.1 FEATURE GAP** — mesh state initializes but peer list not populated |
+| `discovery.peers` empty after `mesh.init` | all gates (Wave 50) | **SONGBIRD v0.2.1 FEATURE GAP** — mesh state initializes but peer list not populated. Primary glacial blocker. |
 | southGate primal instability | wetSpring (Wave 50) | **INVESTIGATING** — 7/13 health-responding (Songbird crashes, BearDog/biomeOS socket issues) |
 | Bidirectional seeding required | healthSpring (Wave 50) | **DOCUMENTED** — both sides must `mesh.init`; coordinate seed swap across gates |
+| loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **UPSTREAM** — does not block mesh |
+| sweetGrass/toadStool slow startup (>8s) | wetSpring | **KNOWN** — cold-start timing, not blocking |
+| Songbird sled DB corruption (unclean) | neuralSpring | **WORKAROUND** — clean `task_lifecycle*` |
+| biomeOS LiveSpore deploys to `~/.local/bin` | re-audit | **STALE PATTERN** — conflicts with plasmidBin-only |
+| toadStool/loamSpine local wH unarchived | re-audit | **HYGIENE** — 37+14 flat handoffs need archive subdir |
+| Central fossilRecord incomplete | re-audit | **NARROWED** — primalSpring wH archived Wave 51; remaining primals' local docs still sparse |
+| GitHub Actions outer membrane dependency | primalSpring (Wave 51) | **HANDOFF ISSUED** — cellMembrane self-hosted runners; Forgejo-primary evolution path |
+| plasmidBin metadata version drift | re-audit (Wave 51) | **HYGIENE** — manifest.toml (v5.5.0), checksums.toml (Wave 35), sources.toml (Apr 14) lag README (v5.6.0) |
+
+**Resolved** (fossilized): Ionic bond runtime (WS-1), biomeOS mesh dispatch,
+BearDog ACME renewal daemon, rhizoCrypt startup latency, Songbird `--security-socket`,
+stale socket cleanup, 8/8 showcase fossilizations, cross-subnet routing, neuralSpring
+petalTongue hardcode, hotSpring Wave 50 absorption, petalTongue `--family-id`,
+ludoSpring GAP-01 coralReef, `discovery.peers` RPC wiring (Wave 49 — `mesh.init` +
+`bootstrap_peers` functional; the remaining gap is v0.2.1 peer list *population*,
+tracked above), primalSpring wateringHole fossilized (Wave 51, 42 files to
+fossilRecord) — see `fossilRecord/` for detail.
 
 ### Software Remaining
 
@@ -205,21 +224,15 @@ Tier 2+ large-dataset science, not a deployment blocker.
 |------|-------|----------|--------|
 | Songbird `discovery.peers` population | Songbird team | **HIGH** | v0.2.1 feature gap — `mesh.init` works, peer list stays empty. All 4 gates blocked. |
 | Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | biomeOS v3.75 mesh dispatch ready, `s_covalent_mesh` scenario written — blocked on `discovery.peers` |
-| ~~Cross-subnet routing (southGate ↔ eastGate)~~ | infra/network | ~~MEDIUM~~ | **RESOLVED** Wave 50 — routed natively, 4ms |
+| Self-hosted CI runners (2+ LAN gates) | cellMembrane | **HIGH** | Handoff issued Wave 51. Eliminates GitHub Actions as outer membrane dependency. |
 | southGate primal stability | plasmidBin / southGate | **MEDIUM** | 7/13 vs 12/13 health-responding — Songbird/BearDog/biomeOS socket issues |
 | Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | v3.64 `nest.sync` graph shipped. Songbird mesh (v3.75) is the transport. Pending multi-gate connectivity. |
 | Sovereign DNS (knot-dns) | cellMembrane | MEDIUM | PLANNED |
+| Forgejo as primary code host | projectNUCLEUS | MEDIUM | Mirrors operational. Forgejo is sovereignty baseline before NUCLEUS absorbs forge capabilities. |
+| plasmidBin metadata sync | plasmidBin | LOW | manifest.toml/checksums.toml/sources.toml headers lag README — version and date drift |
 | `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW | `publish_sporeprint.sh` implemented. E2E requires live NestGate + bearDog session. |
-| Forgejo Actions CI | projectNUCLEUS | LOW | PLANNED |
 | loamSpine Tokio runtime-in-runtime panic | loamSpine | MEDIUM | Upstream bug — blocks health probe on 2 gates |
-| Central fossilRecord sync | all primals | LOW | 7/8 primals reference central paths that don't exist yet |
-| ~~neuralSpring composition_nucleus.sh fix~~ | neuralSpring | ~~MEDIUM~~ | **FIXED** Wave 50 — V175/S219 |
-
-**Resolved** (fossilized): Ionic bond runtime (WS-1), biomeOS mesh dispatch,
-BearDog ACME renewal daemon, rhizoCrypt startup latency, Songbird `--security-socket`,
-stale socket cleanup, 8/8 showcase fossilizations, cross-subnet routing, neuralSpring
-petalTongue hardcode, hotSpring Wave 50 absorption, petalTongue `--family-id`,
-ludoSpring GAP-01 coralReef — see `fossilRecord/` for detail.
+| Central fossilRecord sync | all primals | LOW | primalSpring wH archived; remaining primals' local docs still sparse |
 
 ---
 
@@ -233,12 +246,17 @@ The glacial shift (stadial entry) is reached when:
 4. At least one remote covalent node (flockGate) **validated** over WAN
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
+7. CI/CD runs on **inner membrane** (self-hosted runners or Forgejo CI) — Wave 51: handoff issued, not yet deployed
 
 **Current assessment**: Criteria 1 is 3/4 (S4 shadow remaining). Criteria 2 is
 blocked on Songbird `discovery.peers` population (v0.2.1 feature gap) — mesh
 infrastructure is deployed and routing works across all 4 gates, but peer list
-stays empty after `mesh.init`. The shift moves when Songbird ships peer list
-population and S4 auth shadow completes. All springs and primals are ready.
+stays empty after `mesh.init`. Criteria 7 added Wave 51 after GitHub Actions
+outage exposed CI as an unmitigated outer membrane dependency. plasmidBin Rust
+elevation (Wave 51) means the build toolchain itself is sovereign — only the
+runners are not. The shift moves when Songbird ships peer list population, S4
+auth shadow completes, and CI runs on inner membrane. All springs and primals
+are ready.
 
 ---
 
@@ -251,3 +269,5 @@ population and S4 auth shadow completes. All springs and primals are ready.
 - `DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5 security invariants
 - `DISTRIBUTED_COVALENT_DEPLOYMENT.md` — multi-household compute architecture
 - `DESKTOP_NUCLEUS_DEPLOYMENT.md` — single-machine full stack
+- `whitePaper/gen4/architecture/THE_GOLDEN_CAGE.md` — dependency audit + chrysalis thesis
+- `handoffs/CELLMEMBRANE_SELF_HOSTED_RUNNERS_WAVE50_MAY26_2026.md` — inner membrane CI

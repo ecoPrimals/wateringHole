@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 25, 2026 (Wave 49: post-primordial deployment, 12/12 NUCLEUS ALIVE. 458 methods, 791 tests, 53 scenarios, 95 deploy graphs. plasmidBin-only enforced. SONGBIRD_PEERS peer seeding shipped. 23 handoffs archived. Glacial shift: cross-gate discovery.peers verification NEXT.)
+**Last Updated**: May 26, 2026 (Wave 51: plasmidBin full Rust elevation, CI sovereignty hardening, GitHub Actions outage survived on inner membrane. 458 methods, 791 tests, 53 scenarios, 95 deploy graphs. Self-hosted runner handoff issued. primalSpring wateringHole fossilized. THE_GOLDEN_CAGE.md written. Glacial shift: Songbird `discovery.peers` population + inner membrane CI NEXT.)
 
 ---
 
