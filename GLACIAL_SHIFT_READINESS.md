@@ -200,7 +200,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 
 | Issue | Reporter | Status |
 |-------|----------|--------|
-| `discovery.peers` empty after `mesh.init` | all gates (Wave 50) | **FIXED** Wave 51 — orchestrator dispatch wired to mesh+registry merger; `SONGBIRD_PEERS` auto-seeds on startup. Deploy fresh from plasmidBin to verify. |
+| `discovery.peers` empty after `mesh.init` | all gates (Wave 50) | **VALIDATED** Wave 51 — orchestrator dispatch wired to mesh+registry merger; `SONGBIRD_PEERS` auto-seeds on startup. Live-verified on eastGate (primalspring01 :7701 ↔ nucleus01 :7700). |
 | southGate primal instability | wetSpring (Wave 50) | **INVESTIGATING** — 7/13 health-responding (Songbird crashes, BearDog/biomeOS socket issues) |
 | Bidirectional seeding required | healthSpring (Wave 50) | **DOCUMENTED** — both sides must `mesh.init`; coordinate seed swap across gates |
 | loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **UPSTREAM** — does not block mesh |

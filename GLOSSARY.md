@@ -781,7 +781,7 @@ chains via sweetGrass and permanence via loamSpine.
 ### BYOB (Bring Your Own Binaries)
 
 The deployment model for gen4 products. Products consume pre-built primal binaries
-from `plasmidBin/` via `fetch.sh` — they never compile primal source. This
+from `plasmidBin/` via `plasmidbin fetch` (Rust CLI) — they never compile primal source. This
 enforces zero source coupling between products and primals.
 
 ### Niche YAML
