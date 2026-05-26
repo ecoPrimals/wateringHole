@@ -137,12 +137,12 @@ v0.3.1 locally, plasmidBin manifest still shows 0.3.0.
 - v0.4.0 `harvest --all/--release` and Phase 3 live health probes are
   enhancement-only
 
-### NestGate (CRITICAL)
+### NestGate (RESOLVED)
 
-Internal 4.7.0-dev vs plasmidBin 0.1.0 version mismatch.
+~~Internal 4.7.0-dev vs plasmidBin 0.1.0 version mismatch.~~
 
-- **Align Cargo.toml workspace version** with what plasmidBin ships
-- **Coverage push**: 84% → 90% target
+- **DONE** (Session 77): Unified to 0.5.0 across all 21 workspace crates + plasmidBin
+- **Coverage**: 83.61% (Session 78, 12,467 tests); 90% target ongoing
 - Deployed on eastGate Nest atomic; prepare for VPS Nest expansion (Wave 54)
 
 ---

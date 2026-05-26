@@ -30,7 +30,7 @@ downstream pushes.
 | Item | Owner | Detail |
 |------|-------|--------|
 | SouthGate primal instability | Songbird + BearDog + biomeOS | 7/13 primals health-responding; Songbird crashes, stale socket issues. Investigate crash logs, stale socket cleanup, BearDog reconnect. Highest priority — blocks cross-gate mesh validation. |
-| NestGate version unify | NestGate | Internal 4.7.0-dev vs plasmidBin 0.1.0. Align Cargo.toml workspace version. Coverage push 84% → 90%. |
+| ~~NestGate version unify~~ | NestGate | **RESOLVED** (Session 77): Unified to 0.5.0 across all 21 workspace crates + plasmidBin manifest. Coverage 83.61% (Session 78); 90% target ongoing. |
 | SkunkBat seed_fingerprint | SkunkBat / plasmidBin CI | Promoted without BLAKE3 manifest fingerprint. Auto-harvest CI should backfill; verify after next cycle. |
 
 ### Important (mountain hygiene)
