@@ -23,6 +23,12 @@ cephalization plan (26/26), Tower CNS convergence (40/40). K-Derm topology + bon
 standards published. sourDough v0.3.0 harvested. Deploy graph validation fragment-aware.
 Provenance checksums regenerated (24 files, BLAKE3).
 
+**Glacial Shift Wave Plan published**: 3-phase roadmap (Waves 53–55+) at
+`GLACIAL_SHIFT_WAVE_PLAN.md`. Team handoffs distributed to `handoffs/`:
+- Wave 53: Primal mountains (SouthGate stability, NestGate version, Songbird coverage)
+- Wave 54: Deployment + cellMembrane (gate redeploy, VPS Nest, sovereign DNS, K-Derm wire)
+- Wave 55+: Springs launch + cross-gate NUCLEUS (proto-nucleate deployment, capability routing)
+
 **Wave 51 milestone**: Songbird `discovery.peers` resolution + outer membrane hardening.
 
 - **plasmidBin full Rust elevation** — all 20 bash scripts replaced by a single

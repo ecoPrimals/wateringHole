@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 26, 2026 (Wave 51: Songbird `discovery.peers` SHIPPED — auto-seeding from `SONGBIRD_PEERS` env, mesh+registry merge, zero-config mesh on boot. Glacial blocker resolved. plasmidBin `--peers` flag wired. Same-subnet live test NEXT.)
+**Last Updated**: May 26, 2026 (Wave 52b: Glacial Shift Wave Plan published. Full NUCLEUS live on eastGate 13/13. Team handoffs for Waves 53–55 distributed.)
 
 ---
 
