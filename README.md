@@ -315,68 +315,95 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ## Document Index
 
 ### Master Index
-- **`STANDARDS_AND_EXPECTATIONS.md`** — **Start here.** Single-document reference for all ecoPrimals standards, expectations, and conventions. Links to every standard below.
-- **`GLOSSARY.md`** — Definitive terminology for the ecoPrimals ecosystem. Gate, primal, spring, atomic, niche, deploy graph, germination, absorption, delegation, fossil record, and every other term.
-- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, and tooling spec for an ecoPrimals gate. Pop!\_OS, Rust toolchain, Cursor, GPU configuration, directory layout, post-install checklist.
+- **`STANDARDS_AND_EXPECTATIONS.md`** — **Start here.** Single-document reference for all ecoPrimals standards, expectations, and conventions.
+- **`GLOSSARY.md`** — Definitive terminology for the ecoPrimals ecosystem.
+- **`GLACIAL_SHIFT_READINESS.md`** — Active tracking: stadial entry criteria, ecosystem issues, deployment matrix.
 
-### Architecture Standards
-- `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
+### Architecture & Deployment
 - `ECOBIN_ARCHITECTURE_STANDARD.md` — Universal portability (Pure Rust, cross-compile)
-- `GENOMEBIN_ARCHITECTURE_STANDARD.md` — Autonomous deployment (self-extracting, auto-detect)
-- `SPRING_AS_NICHE_DEPLOYMENT_STANDARD.md` — Springs deploy as biomeOS niches
-- `SPRING_NICHE_DEPLOYMENT_GUIDE.md` — How-to guide for niche deployment
+- `DESKTOP_NUCLEUS_DEPLOYMENT.md` — Single-machine full stack
+- `DISTRIBUTED_COVALENT_DEPLOYMENT.md` — Multi-household compute architecture
+- `DEPLOYMENT_VALIDATION_STANDARD.md` — Deployment validation protocol
+- `PRIMAL_SPRING_GARDEN_TAXONOMY.md` — Primal / spring / garden / tool taxonomy
 
 ### Communication Standards
-- `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.0 — consolidated, includes platform-agnostic transport + dual protocol)
 - `SEMANTIC_METHOD_NAMING_STANDARD.md` — `domain.verb` API naming conventions
-- `CROSS_SPRING_DATA_FLOW_STANDARD.md` — Time series exchange format
+- `CAPABILITY_WIRE_STANDARD.md` — Capability-based wire format
+- `CAPABILITY_BASED_DISCOVERY_STANDARD.md` — Runtime capability discovery
+- `CAPABILITY_DOMAIN_REGISTRY.md` — Canonical domain namespace registry
 
-### Security & Networking (birdsong/)
+### Security & Networking
 - `birdsong/BIRDSONG_PROTOCOL.md` — Encrypted UDP discovery (BirdSong)
 - `birdsong/DARK_FOREST_BEACON_GENETICS_STANDARD.md` — Two-seed genetic lineage architecture
 - `birdsong/SONGBIRD_TLS_TOWER_ATOMIC_INTEGRATION_GUIDE.md` — Tower Atomic TLS guide
 - `btsp/BEARDOG_TECHNICAL_STACK.md` — BearDog cryptographic foundation
+- `DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5 security invariants
+- `SECRETS_AND_SEEDS_STANDARD.md` — Seed and credential management
+- `BTSP_PROTOCOL_STANDARD.md` — BearDog Trust Security Protocol
 
 ### GPU & Numerical Computing
-- `GPU_F64_NUMERICAL_STABILITY.md` — f64 precision lessons from hotSpring
-- `NUMERICAL_STABILITY_EVOLUTION_PLAN.md` — Fast AND safe math strategy
-- `SOVEREIGN_COMPUTE_EVOLUTION.md` — Pure Rust GPU stack (VFIO, glow plug, power management)
 - `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — Cross-primal sovereign compute guidance
-- `CROSS_SPRING_SHADER_EVOLUTION.md` — How springs evolve barraCuda collectively
-- `SPRING_VALIDATION_ASSIGNMENTS.md` — Each spring validates specific barraCuda primitives
 
 ### Strategy & Licensing
-- `LYSOGENY_PROTOCOL.md` — Area denial through open prior art
-- `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` — **Ecosystem licensing standard** (AGPL + ORC + CC-BY-SA)
-- `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture (memory-bound digital objects) → see `whitePaper/gen4/economics/NOVEL_FERMENT_TRANSCRIPTS.md` for full economics
-- `ANCHORING_STANDARD.md` — **Public chain anchoring guidance** (compression pipeline, gas economics, community pooling, crypto stance, verification)
+- `LICENSING_AND_COPYLEFT.md` — Ecosystem copyleft framework
+- `ANCHORING_STANDARD.md` — Public chain anchoring guidance
 - `UPSTREAM_CONTRIBUTIONS.md` — Standalone crates for crates.io from ecoPrimals
 
+### Sovereignty & Membrane
+- `SOVEREIGNTY_STANDARDS.md` — Calibrate → shadow → cutover protocol
+- `INTERSTADIAL_EXIT_CRITERIA.md` — 5 pillars + shadow schedule
+- `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` — VPS composition spec
+- `MEMBRANE_CHANNEL_ARCHITECTURE.md` — 3 channels + RustDesk
+- `REPO_MEMBRANE_BOUNDARY.md` — Inner/outer membrane repo classification
+- `NUCLEUS_SPRING_ALIGNMENT.md` — NUCLEUS + spring coordination model
+- `PRIMAL_VS_SOVEREIGNTY_GOALS.md` — Sovereignty evolution tracking
+
 ### Coordination & Patterns
-- `INTER_PRIMAL_INTERACTIONS.md` — Production interaction map and plans
 - `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
-- `SPRING_AS_PROVIDER_PATTERN.md` — biomeOS capability registration
-- `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Provenance trio integration
-- ~~`SPRING_EVOLUTION_ISSUES.md`~~ — Removed; spring issues tracked in `GLACIAL_SHIFT_READINESS.md` Wave 49 issues table
+- `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — Provenance trio integration
+- `SHOWCASE_FOSSILIZATION_STANDARD.md` — How to fossilize showcase directories
+- `SEDIMENT_LAYER_MODEL.md` — Layered evolution model
+- `ECOSYSTEM_EVOLUTION_CYCLE.md` — Ecosystem-wide evolution tracking
 
-### Presentation & External Review
-- **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** — **Read before any docs sweep.** Checklist for making a spring/primal independently reviewable by PIs, students, hobbyists, and compliance reviewers. The 5-minute test. Self-assessment template. Common problems and fixes. References `publicRelease/` audience briefs.
-
-### Leverage Guides (Per-Primal)
-- `BARRACUDA_LEVERAGE_GUIDE.md`, `BIOMEOS_LEVERAGE_GUIDE.md`, `CORALREEF_LEVERAGE_GUIDE.md`
-- `LOAMSPINE_LEVERAGE_GUIDE.md`, `PRIMALSPRING_LEVERAGE_GUIDE.md`, `RHIZOCRYPT_LEVERAGE_GUIDE.md`
-- `SQUIRREL_LEVERAGE_GUIDE.md`, `SWEETGRASS_LEVERAGE_GUIDE.md`, `TOADSTOOL_LEVERAGE_GUIDE.md`
-- `PETALTONGUE_LEVERAGE_GUIDE.md`
-- `WETSPRING_LEVERAGE_GUIDE.md`, `NEURALSPRING_LEVERAGE_GUIDE.md`
-- `petaltongue/` — petalTongue integration documentation (biomeOS API, quick start, showcase)
-
-### Spring Composition Guidance (Per-Spring)
-- `airspring/AIRSPRING_COMPOSITION_GUIDANCE.md` — How airSpring composes with other springs and primals
-- `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — How healthSpring composes with other springs and primals
+### Per-Spring Composition Guidance
+- `airspring/AIRSPRING_COMPOSITION_GUIDANCE.md` — airSpring
+- `healthspring/HEALTHSPRING_COMPOSITION_GUIDANCE.md` — healthSpring
+- `petaltongue/` — petalTongue integration documentation
 
 ### Handoffs
-- `handoffs/*.md` — Active session handoffs (last 48 hours)
-- `handoffs/archive/` — Fossil record (217 archived handoffs, May 2026 — earlier epochs consolidated to fossilRecord)
+- `handoffs/*.md` — Active session handoffs
+- `handoffs/hotSpring/` — hotSpring team handoffs (postPrimordial pattern)
+- `handoffs/archive/` — 226+ archived handoffs (earlier epochs consolidated to fossilRecord)
+
+### Fossilized Standards (in fossilRecord)
+
+The following standards were consolidated to `fossilRecord/wateringHole/` during
+Waves 34–49. They remain authoritative for their domains but are no longer
+maintained as separate files in this repo. See `fossilRecord/wateringHole/consolidated-may2026/`
+and `fossilRecord/wateringHole/consolidated-apr2026/`.
+
+- `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.0)
+- `GATE_DEPLOYMENT_STANDARD.md` — Gate hardware, OS, tooling spec
+- `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
+- `GENOMEBIN_ARCHITECTURE_STANDARD.md` — Autonomous deployment (self-extracting)
+- `UNIVERSAL_IPC_STANDARD_V3.md` — Multi-transport IPC behavioral spec
+- `INTER_PRIMAL_INTERACTIONS.md` — Production interaction map
+- `SPRING_PRIMAL_PRESENTATION_STANDARD.md` — 5-minute reviewability checklist
+- `GUIDESTONE_STANDARD.md` — Verification class specification
+- `LYSOGENY_PROTOCOL.md` — Area denial through open prior art
+- `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` — Triple copyleft standard
+- `NOVEL_FERMENT_TRANSCRIPT_GUIDANCE.md` — NFT architecture
+- `CROSS_SPRING_DATA_FLOW_STANDARD.md` — Time series exchange format
+- `GPU_F64_NUMERICAL_STABILITY.md` — f64 precision lessons
+- `NUMERICAL_STABILITY_EVOLUTION_PLAN.md` — Fast AND safe math strategy
+- `SOVEREIGN_COMPUTE_EVOLUTION.md` — Pure Rust GPU stack
+- `CROSS_SPRING_SHADER_EVOLUTION.md` — Cross-spring barraCuda evolution
+- `SPRING_VALIDATION_ASSIGNMENTS.md` — Per-spring barraCuda validation
+- `SPRING_AS_NICHE_DEPLOYMENT_STANDARD.md` — Niche deployment standard
+- `SPRING_NICHE_DEPLOYMENT_GUIDE.md` — Niche deployment how-to
+- `SPRING_AS_PROVIDER_PATTERN.md` — biomeOS capability registration
+- `SPRING_PROVENANCE_TRIO_INTEGRATION_PATTERN.md` — Trio integration pattern
+- All per-primal leverage guides (`*_LEVERAGE_GUIDE.md`)
 
 ---
 
