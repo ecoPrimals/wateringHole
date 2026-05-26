@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-26 (Wave 51 — plasmidBin Rust elevation, CI sovereignty, golden cage)
+**Last updated**: 2026-05-26 (Wave 51 — discovery.peers SHIPPED, plasmidBin Rust elevation, CI sovereignty)
 
 ---
 
@@ -12,10 +12,11 @@ The ecosystem has cleared the interstadial exit gate (~9.8/10). 13/13 primals
 at zero debt. cellMembrane VPS operational (relay + TLS/content shadows).
 Shadow tracks S1-S3 proven. 4-gate NUCLEUS operational (eastGate, ironGate,
 southGate, biomeGate) with Songbird TCP :7700 federation. **7/7 delta springs
-confirmed covalent HPC** (Wave 50). `discovery.peers` population is the
-remaining Songbird evolution item.
+confirmed covalent HPC** (Wave 50). **`discovery.peers` SHIPPED** (Wave 51) —
+Songbird mesh+registry merge, `SONGBIRD_PEERS` auto-seeds on boot. Live
+gate validation is NEXT.
 
-**Wave 51 milestone**: Outer membrane stress test + sovereignty hardening.
+**Wave 51 milestone**: Songbird `discovery.peers` resolution + outer membrane hardening.
 
 - **plasmidBin full Rust elevation** — all 20 bash scripts replaced by a single
   `plasmidbin` Rust CLI binary (`validate`, `harvest`, `fetch`, `doctor`,
@@ -73,18 +74,20 @@ fixed upstream.
 | southGate | 12/13 | neuralSpring, wetSpring | eastGate (bidirectional verified) |
 | biomeGate | 9 primals | hotSpring | Registry seeded |
 
-**Remaining blocker**: `discovery.peers` returns empty on all gates after
-`mesh.init` succeeds. Songbird v0.2.1 initializes mesh state but does not
-populate the peer list. This is the next Songbird evolution item — not a
-configuration or deployment issue.
+**~~Remaining blocker~~ RESOLVED (Wave 51)**: `discovery.peers` was returning
+empty because orchestrator routed to registry-only. Songbird Wave 51 shipped
+mesh+registry merge in `DiscoveryHandler`, `SONGBIRD_PEERS` auto-seeding via
+`mesh_seed` module, and port-preserving `EndpointType::socket_addr()`. This is
+code-complete; **live gate validation is NEXT** (rebuild Songbird on eastGate +
+ironGate, set `SONGBIRD_PEERS`, run primalSpring `s_covalent_mesh`).
 
 **Climate-sensitive sentinels** (primals whose readiness gates the glacial shift):
 
-- **Songbird**: `mesh.init` + `bootstrap_peers` wired (Wave 49). Cross-gate
-  mesh tested Wave 50 — `mesh.init` succeeds bidirectionally across subnets,
-  but `discovery.peers` returns empty (v0.2.1 feature gap — peer list not
-  populated). sled DB corruption on unclean shutdown remains workaround-only.
-  **NEXT**: Songbird evolution to populate `discovery.peers` after `mesh.init`.
+- **Songbird**: **`discovery.peers` SHIPPED (Wave 51)** — mesh+registry merge,
+  `SONGBIRD_PEERS` env auto-seeds at boot, dual-format parser, remote_dispatch
+  refactor with port-preserving addressing. 7+ new tests. sled DB corruption on
+  unclean shutdown remains workaround-only.
+  **NEXT**: Live gate rebuild + `s_covalent_mesh` + `s_cross_gate_capability_call`.
 - **bearDog**: ACME renewal daemon operational. Massive orphan purge (Wave 113b)
   cleared 15k LOC of dead discovery code. Vault (encrypted creds at rest) still
   PLANNED. S4 auth shadow depends on bearDog BTSP dual-auth.
@@ -99,8 +102,8 @@ configuration or deployment issue.
 
 **Delta has caught up**: All 7 springs at Wave 50. neuralSpring fixed its last
 `target/release/` hardcode (V175). hotSpring absorbed post-primordial (NUCLEUS
-on biomeGate, plasmidBin-only). The gap is now Songbird v0.2.1's `discovery.peers`
-population — when that ships, cross-gate `capability.call` unlocks covalent HPC.
+on biomeGate, plasmidBin-only). **Songbird `discovery.peers` shipped Wave 51** —
+cross-gate `capability.call` is now code-complete. Live gate validation is NEXT.
 southGate primal instability (7/13 health-responding per wetSpring vs 12/13 per
 neuralSpring) needs investigation.
 
@@ -158,8 +161,8 @@ Tier 2+ large-dataset science, not a deployment blocker.
 3. ~~Springs declare gates, deploy cells, cut primordial patterns~~ **DONE** (7/7 springs confirmed Wave 50)
 4. ~~Cross-subnet routing for southGate~~ **DONE** (Wave 50) — 4ms via router, no TURN needed
 5. ~~Bidirectional `mesh.init` across subnets~~ **DONE** (Wave 50) — neuralSpring verified southGate ↔ eastGate
-6. Songbird `discovery.peers` population — **BLOCKED** on Songbird v0.2.1 feature gap (mesh.init works, peer list empty)
-7. Cross-gate `capability.call` smoke test via primalSpring `s_covalent_mesh` scenario — blocked on step 6
+6. ~~Songbird `discovery.peers` population~~ **DONE** (Wave 51) — mesh+registry merge, `SONGBIRD_PEERS` auto-seed, `mesh_seed` module
+7. Cross-gate `capability.call` smoke test via primalSpring `s_covalent_mesh` scenario — **NEXT** (code ready, needs live gate rebuild)
 7. westGate (Nest Atomic — cold storage), northGate (Node Atomic), strandGate (Full NUCLEUS)
 8. Plasmodium collective validation (3+ gates meshed via live `capability.call`)
 
@@ -214,16 +217,15 @@ BearDog ACME renewal daemon, rhizoCrypt startup latency, Songbird `--security-so
 stale socket cleanup, 8/8 showcase fossilizations, cross-subnet routing, neuralSpring
 petalTongue hardcode, hotSpring Wave 50 absorption, petalTongue `--family-id`,
 ludoSpring GAP-01 coralReef, `discovery.peers` RPC wiring (Wave 49 — `mesh.init` +
-`bootstrap_peers` functional; the remaining gap is v0.2.1 peer list *population*,
-tracked above), primalSpring wateringHole fossilized (Wave 51, 42 files to
+`bootstrap_peers` functional; **RESOLVED Wave 51** — mesh+registry merge shipped), primalSpring wateringHole fossilized (Wave 51, 42 files to
 fossilRecord) — see `fossilRecord/` for detail.
 
 ### Software Remaining
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| Songbird `discovery.peers` population | Songbird team | **HIGH** | v0.2.1 feature gap — `mesh.init` works, peer list stays empty. All 4 gates blocked. |
-| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | biomeOS v3.75 mesh dispatch ready, `s_covalent_mesh` scenario written — blocked on `discovery.peers` |
+| ~~Songbird `discovery.peers` population~~ | Songbird team | **DONE** | **SHIPPED Wave 51** — mesh+registry merge, `SONGBIRD_PEERS` auto-seed, 7+ tests |
+| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | `s_covalent_mesh` scenario ready — needs Songbird rebuild on gates + `SONGBIRD_PEERS` set |
 | Self-hosted CI runners (2+ LAN gates) | cellMembrane | **HIGH** | Handoff issued Wave 51. Eliminates GitHub Actions as outer membrane dependency. |
 | southGate primal stability | plasmidBin / southGate | **MEDIUM** | 7/13 vs 12/13 health-responding — Songbird/BearDog/biomeOS socket issues |
 | Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | v3.64 `nest.sync` graph shipped. Songbird mesh (v3.75) is the transport. Pending multi-gate connectivity. |
@@ -241,7 +243,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 The glacial shift (stadial entry) is reached when:
 
 1. All 4 sovereignty shadows **cut over** (S1-S4 formal 7-day gate passed)
-2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective) — Wave 50: 4 gates running, mesh seeded, cross-subnet routing confirmed. **BLOCKED** on Songbird `discovery.peers` population (v0.2.1 feature gap)
+2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective) — Wave 50: 4 gates running, mesh seeded, cross-subnet routing confirmed. **UNBLOCKED** Wave 51: `discovery.peers` shipped. Live gate rebuild + validation NEXT.
 3. cellMembrane Nest expansion **deployed** on VPS
 4. At least one remote covalent node (flockGate) **validated** over WAN
 5. DNS pointed to sovereign infrastructure
@@ -249,9 +251,8 @@ The glacial shift (stadial entry) is reached when:
 7. CI/CD runs on **inner membrane** (self-hosted runners or Forgejo CI) — Wave 51: handoff issued, not yet deployed
 
 **Current assessment**: Criteria 1 is 3/4 (S4 shadow remaining). Criteria 2 is
-blocked on Songbird `discovery.peers` population (v0.2.1 feature gap) — mesh
-infrastructure is deployed and routing works across all 4 gates, but peer list
-stays empty after `mesh.init`. Criteria 7 added Wave 51 after GitHub Actions
+**unblocked** — Songbird shipped `discovery.peers` (Wave 51); needs live gate
+rebuild and `s_covalent_mesh` validation to confirm operational. Criteria 7 added Wave 51 after GitHub Actions
 outage exposed CI as an unmitigated outer membrane dependency. plasmidBin Rust
 elevation (Wave 51) means the build toolchain itself is sovereign — only the
 runners are not. The shift moves when Songbird ships peer list population, S4
