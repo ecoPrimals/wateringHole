@@ -1,8 +1,8 @@
 # plasmidBin Push Automation Pipeline — Ecosystem Standard
 
 **Status**: ACTIVE  
-**Version**: 1.0  
-**Date**: May 12, 2026  
+**Version**: 2.0 — Rust CLI  
+**Date**: May 26, 2026  
 **Authority**: primalSpring (pipeline owner)  
 **Depends on**: [ECOBIN_ARCHITECTURE_STANDARD.md](ECOBIN_ARCHITECTURE_STANDARD.md)
 
@@ -40,18 +40,18 @@ auto-harvest.yml (plasmidBin repo)
    └────┬──────────────────────────┘
         │
    ┌────┴──────────┐
-   │  consolidate   │
-   │  harvest.sh    │  per-arch: validate, strip, BLAKE3, copy
-   │  ↓             │
-   │  commit        │  checksums.toml + binaries
-   │  ↓             │
-   │  validate      │  post-harvest integrity check
-   │  ↓             │
-   │  release       │  GitHub Release (vYYYY.MM.DD)
-   └───────────────┘
+   │  consolidate          │
+   │  plasmidbin harvest    │  per-arch: validate, strip, BLAKE3, copy
+   │  ↓                     │
+   │  commit                │  checksums.toml + binaries
+   │  ↓                     │
+   │  plasmidbin validate   │  post-harvest integrity check
+   │  ↓                     │
+   │  release               │  GitHub Release (vYYYY.MM.DD)
+   └────────────────────────┘
         │
         ▼
-Downstream consumers (fetch.sh, update.sh)
+Downstream consumers (plasmidbin fetch)
   verify BLAKE3 against checksums.toml
 ```
 
@@ -61,12 +61,13 @@ Downstream consumers (fetch.sh, update.sh)
 |---------|------|-------|
 | `repository_dispatch` | Primal pushes to `main` | Single primal |
 | `workflow_dispatch` | Manual (operator) | Single primal or `all` |
-| Daily cron (05:30 UTC) | Catch-up for missed dispatches | `all` (reconciliation) |
+| `check-updates.yml` (daily) | Lightweight tag checker dispatches stale primals | Per-primal (selective) |
 | Weekly cron (Monday 06:00 UTC) | Full sweep | `all` |
 
-The daily cron exists because `repository_dispatch` has a rate limit (~10/min/repo)
-and can silently drop events. It runs as a reconciliation pass, not a full rebuild
-— `harvest.sh` skips binaries whose BLAKE3 hash already matches `checksums.toml`.
+The daily `check-updates.yml` replaces the old full-sweep cron. It queries
+GitHub Releases for upstream tag changes and dispatches `auto-harvest` only
+for primals with new tags. `plasmidbin harvest` skips binaries whose BLAKE3
+hash already matches `checksums.toml`.
 
 ## Primal Team Contract
 
@@ -88,19 +89,22 @@ All 13 primals with their own repositories are wired:
 bearDog, songbird, toadStool, barraCuda, coralReef, rhizoCrypt, loamSpine,
 sweetGrass, biomeOS, squirrel, petalTongue, skunkBat, nestGate.
 
-## Key Scripts
+## Key Commands (Rust CLI — Wave 51)
 
-### `build-primal.sh`
+All pipeline operations now use the `plasmidbin` Rust CLI (15 subcommands).
+Legacy `.sh` scripts remain at repo root as transitional fallbacks.
+
+### `plasmidbin build`
 
 Clones a primal (from `sources.toml`), builds for a target triple, and stages
 the binary to `/tmp/primalspring-deploy/primals/{triple}/`.
 
 ```
-./build-primal.sh beardog --target x86_64-unknown-linux-musl
-./build-primal.sh --all --target aarch64-unknown-linux-musl
+cargo run -p plasmidbin -- build beardog --target x86_64-unknown-linux-musl
+cargo run -p plasmidbin -- build all --target aarch64-unknown-linux-musl
 ```
 
-### `harvest.sh`
+### `plasmidbin harvest`
 
 Takes staged binaries, validates they are static ELFs, strips them, computes
 BLAKE3 checksums, copies to `plasmidBin/primals/{triple}/`, and updates
@@ -111,32 +115,33 @@ BLAKE3 checksums, copies to `plasmidBin/primals/{triple}/`, and updates
 from polluting git history during reconciliation runs.
 
 ```
-./harvest.sh --source /path/to/bins --arch x86_64-unknown-linux-musl
-./harvest.sh --primal beardog --arch aarch64-unknown-linux-musl
-./harvest.sh --dry-run
+cargo run -p plasmidbin -- harvest --source /path/to/bins --arch x86_64-unknown-linux-musl
+cargo run -p plasmidbin -- harvest --primal beardog --arch aarch64
+cargo run -p plasmidbin -- harvest --dry-run
 ```
 
 Exit code 1 if any binary fails validation.
 
-### `update.sh`
+### `plasmidbin fetch`
 
-Downstream consumer script. Fetches binaries from GitHub Releases, verifies
-BLAKE3 checksums against `checksums.toml`, and installs locally.
-
-Architecture detection emits full Rust target triples
-(`x86_64-unknown-linux-musl`, not `x86_64-linux-musl`) to match
-`checksums.toml` keys exactly.
+Downloads binaries from GitHub Releases, verifies BLAKE3 checksums against
+`checksums.toml`, and installs to `primals/{triple}/`. Auto-detects host
+architecture.
 
 ```
-./update.sh                  # fetch all
-./update.sh beardog          # fetch one
-./update.sh --verify-only    # check existing binaries
+cargo run -p plasmidbin -- fetch --all
+cargo run -p plasmidbin -- fetch --primal beardog
+cargo run -p plasmidbin -- fetch --all --release v2026.05.26
 ```
 
-### `fetch.sh`
+### `plasmidbin validate`
 
-Lightweight fetcher for deployment. Downloads from GitHub Releases with
-`manifest.toml` fallback to mirror URLs.
+Post-harvest integrity check. Reads `manifest.toml`, `checksums.toml`, and
+`sources.toml`; verifies cross-references and checksum presence.
+
+```
+cargo run -p plasmidbin -- validate .
+```
 
 ## `checksums.toml` Format
 
@@ -159,9 +164,9 @@ The pipeline is designed to **fail loudly** rather than commit stale checksums:
   attempt to build, but the consolidate job tracks failures per-arch and
   aborts if any harvest exits non-zero.
 
-- **Harvest failures**: `harvest.sh` exits 1 if any binary fails static ELF
-  validation. The consolidate step counts failures across all arches and
-  aborts before committing if any occurred.
+- **Harvest failures**: `plasmidbin harvest` exits 1 if any binary fails
+  static ELF validation. The consolidate step counts failures across all
+  arches and aborts before committing if any occurred.
 
 - **Post-harvest validation**: After committing, a validation step re-reads
   every binary on disk and re-computes BLAKE3 against `checksums.toml`.
@@ -176,7 +181,7 @@ The current pipeline runs on GitHub Actions. The interstadial exit plan
 
 **Preparation**:
 - `sources.toml` will gain a `forge` field per primal pointing to the
-  Forgejo mirror. `build-primal.sh` will fall back to Forgejo when
+  Forgejo mirror. `plasmidbin build` will fall back to Forgejo when
   GitHub clone fails.
 - Forgejo Actions runner on biomeGate (GPU access for coralReef/toadStool
   sovereign builds).

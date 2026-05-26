@@ -46,21 +46,22 @@ A garden MUST NOT:
 
 ```bash
 # From your garden workspace
-mkdir -p plasmidBin
+git clone https://github.com/ecoPrimals/plasmidBin.git
 cd plasmidBin
 
-# Fetch the ecosystem binary depot
-git clone https://github.com/ecoPrimals/plasmidBin.git .
-./fetch.sh          # pulls latest release binaries for your arch
-./doctor.sh         # validates binary integrity (BLAKE3 checksums)
+# Fetch all binaries from latest GitHub Release
+cargo run -p plasmidbin -- fetch --all
+
+# Validate binary integrity (BLAKE3 checksums + metadata)
+cargo run -p plasmidbin -- doctor
 ```
 
-After fetch, `plasmidBin/bin/` contains ecoBin binaries for every primal.
-See `primalSpring/wateringHole/PLASMINBIN_DEPOT_PATTERN.md` for the full
-depot architecture.
+After fetch, `plasmidBin/primals/{triple}/` contains ecoBin binaries for
+every primal. The Rust CLI auto-detects your host architecture.
 
-**Cross-architecture:** `fetch.sh` auto-detects your target triple. For
-explicit targets: `FETCH_TARGET=aarch64-unknown-linux-musl ./fetch.sh`.
+**Cross-architecture:** The fetch command auto-detects your target triple.
+For explicit targets, specify `--arch aarch64` (not yet supported; build
+from source via `plasmidbin build`).
 
 ---
 
@@ -287,22 +288,15 @@ customization:
 ## Step 5: Launch and Validate
 
 ```bash
-# Start NUCLEUS (or subset) from plasmidBin
-source plasmidBin/ports.env
-./plasmidBin/start_primal.sh beardog
-./plasmidBin/start_primal.sh songbird
-./plasmidBin/start_primal.sh petaltongue
+cd plasmidBin
 
-# Or use the composition launcher (full NUCLEUS by default: 10 primals)
-COMPOSITION_NAME="mygarden" \
-BEARDOG_FAMILY_SEED="$(head -c 32 /dev/urandom | xxd -p)" \
-  bash primalSpring/tools/composition_nucleus.sh start
+# Start individual primals
+cargo run -p plasmidbin -- start beardog
+cargo run -p plasmidbin -- start songbird
+cargo run -p plasmidbin -- start petaltongue
 
-# For a minimal launch (subset of primals):
-COMPOSITION_NAME="mygarden" \
-PRIMAL_LIST="beardog songbird petaltongue" \
-BEARDOG_FAMILY_SEED="$(head -c 32 /dev/urandom | xxd -p)" \
-  bash primalSpring/tools/composition_nucleus.sh start
+# Or launch a full composition
+cargo run -p plasmidbin -- launch --composition full
 
 # Deploy your graph via biomeOS
 biomeos deploy --graph graphs/mygarden_deploy.toml

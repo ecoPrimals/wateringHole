@@ -1,8 +1,8 @@
 # Deployment Validation Standard
 
 **Status**: Ecosystem Standard
-**Version**: v1.1.0
-**Date**: April 13, 2026
+**Version**: v1.2.0
+**Date**: May 26, 2026
 **Authority**: wateringHole (ecoPrimals Core Standards)
 **Driven by**: plasmidBin v2026.03.25 live validation, benchScale IPC compliance testing
 
@@ -11,7 +11,7 @@
 ## Purpose
 
 This standard defines the requirements for a primal to be **deployment-valid** —
-meaning it can be fetched from plasmidBin, started by `start_primal.sh`, and
+meaning it can be fetched from plasmidBin, started by `plasmidbin start`, and
 validated by `benchscale validate ipc` or equivalent probes without any source
 code, Rust toolchain, or primal-specific knowledge on the consumer's machine.
 
@@ -25,7 +25,7 @@ diverges from the contract.
 ## The Deployment Contract
 
 A primal binary fetched from plasmidBin MUST satisfy all of the following
-when started by an orchestrator (start_primal.sh, biomeOS, benchScale):
+when started by an orchestrator (`plasmidbin start`, biomeOS, benchScale):
 
 ### 1. Health Triad (MANDATORY)
 
@@ -71,7 +71,7 @@ $XDG_RUNTIME_DIR/biomeos/<primal>.sock
 TCP ports are **fallback** for cross-gate, Docker, mobile, and testing.
 When songBird is live, the entire ecosystem runs port-free on UDS.
 
-`start_primal.sh` passes `--tcp-port` only when the caller explicitly
+`plasmidbin start` passes `--tcp-port` only when the caller explicitly
 requests it. Without `--tcp-port`, the primal MUST still be reachable
 via its UDS socket.
 
@@ -95,7 +95,7 @@ Primals that use different flags MUST alias `--port`:
 | `--http-address ADDR:PORT` | `--port PORT` | sweetGrass |
 | `--listen ADDR:PORT` | `--port PORT` | bearDog (already has both) |
 
-`start_primal.sh` absorbs current differences as a compatibility shim.
+`plasmidbin start` absorbs current differences as a compatibility shim.
 As primals converge, the shim shrinks to a single generic case.
 
 ### 4. Standalone Startup (MANDATORY)
@@ -158,7 +158,7 @@ satisfy this (it requires HTTP framing, breaking raw stream clients).
 ### metadata.toml Transport Declaration
 
 Each primal's `metadata.toml` SHOULD declare its transport surfaces so
-`start_primal.sh` and `fetch.sh` can make informed decisions:
+`plasmidbin start` and `plasmidbin fetch` can make informed decisions:
 
 ```toml
 [genomeBin.server]
@@ -176,8 +176,8 @@ enabling benchScale to choose the right validation method.
 ### Checksum Hygiene
 
 Binaries MUST be built with `--remap-path-prefix` and `strip = true` per
-`SECRETS_AND_SEEDS_STANDARD.md`. The `harvest.sh` script now warns when
-binaries contain build-machine paths.
+`SECRETS_AND_SEEDS_STANDARD.md`. `plasmidbin harvest` warns when binaries
+contain build-machine paths.
 
 ---
 
@@ -187,22 +187,21 @@ The standard validation flow for any plasmidBin deployment:
 
 ```
 1. Clone plasmidBin
-2. ./fetch.sh [--composition <name>]
+2. cargo run -p plasmidbin -- fetch --all
    → downloads arch-matched binaries from GitHub Releases
-   → verifies SHA-256 checksums against metadata.toml
+   → verifies BLAKE3 checksums against checksums.toml
 
-3. source ports.env
-4. ./start_primal.sh <primal> --tcp-port <PORT>
+3. cargo run -p plasmidbin -- start <primal> --tcp-port <PORT>
    → maps generic flags to per-primal CLI
    → starts binary, waits 2s, checks liveness
 
-5. benchscale validate ipc 127.0.0.1:<PORT>
+4. benchscale validate ipc 127.0.0.1:<PORT>
    → probes health.liveness, health.readiness, health.check
    → reports COMPLIANT or NON-COMPLIANT
 
-6. For full composition validation:
-   → start all primals in composition
-   → probe each primal's health
+5. For full composition validation:
+   cargo run -p plasmidbin -- launch --composition full
+   → starts all primals, probes each health
    → optionally probe cross-primal capabilities
 ```
 
