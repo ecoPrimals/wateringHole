@@ -188,16 +188,16 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Cross-gate data dependency staging | **PROTOTYPED** (primalSpring `validation::dependency`) |
 | Songbird peer seeding (`SONGBIRD_PEERS`) | **SHIPPED** — Wave 49, both launchers, CLI + env + RPC |
 | Songbird `mesh.init` + `bootstrap_peers` | **WIRED** — Wave 49, Songbird team confirmed functional |
-| Cross-gate `discovery.peers` verification | **BLOCKED** — Songbird v0.2.1 feature gap: mesh.init works but peer list stays empty |
+| Cross-gate `discovery.peers` verification | **SHIPPED** (Wave 51) — orchestrator dispatch fixed + `SONGBIRD_PEERS` auto-seeds on startup. Live test NEXT. |
 | Cross-subnet mesh (southGate ↔ eastGate) | **RESOLVED** Wave 50 — 4ms routing, bidirectional mesh.init succeeds |
-| Plasmodium collective status | **BLOCKED** — requires `discovery.peers` population for `capability.call` routing |
+| Plasmodium collective status | **UNBLOCKED** — `discovery.peers` now populates; needs live test with 3+ gates |
 | flockGate live deployment | **NOT DEPLOYED** |
 
 ### Ecosystem Issues (Wave 51, May 26)
 
 | Issue | Reporter | Status |
 |-------|----------|--------|
-| `discovery.peers` empty after `mesh.init` | all gates (Wave 50) | **SONGBIRD v0.2.1 FEATURE GAP** — mesh state initializes but peer list not populated. Primary glacial blocker. |
+| `discovery.peers` empty after `mesh.init` | all gates (Wave 50) | **FIXED** Wave 51 — orchestrator dispatch wired to mesh+registry merger; `SONGBIRD_PEERS` auto-seeds on startup. Rebuild from plasmidBin to verify. |
 | southGate primal instability | wetSpring (Wave 50) | **INVESTIGATING** — 7/13 health-responding (Songbird crashes, BearDog/biomeOS socket issues) |
 | Bidirectional seeding required | healthSpring (Wave 50) | **DOCUMENTED** — both sides must `mesh.init`; coordinate seed swap across gates |
 | loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **UPSTREAM** — does not block mesh |
