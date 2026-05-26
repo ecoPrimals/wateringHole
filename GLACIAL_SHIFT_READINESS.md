@@ -1,8 +1,8 @@
 # Glacial Shift Readiness
 
 **Status**: Active tracking document  
-**Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-26 (Wave 51 — discovery.peers SHIPPED, plasmidBin Rust elevation, CI sovereignty)
+**Phase**: PostPrimordial → Glacial Shift  
+**Last updated**: 2026-05-26 (Wave 52b — Full NUCLEUS live, cephalization + Tower CNS experiments, glacial shift readiness confirmed)
 
 ---
 
@@ -15,6 +15,13 @@ southGate, biomeGate) with Songbird TCP :7700 federation. **7/7 delta springs
 confirmed covalent HPC** (Wave 50). **`discovery.peers` SHIPPED** (Wave 51) —
 Songbird mesh+registry merge, `SONGBIRD_PEERS` auto-seeds on boot. Live
 gate validation is NEXT.
+
+**Wave 52b milestone**: Full NUCLEUS live on eastGate — 13/13 primals from plasmidBin,
+19/19 sockets alive, `plasmidbin doctor` 35/35 pass. primalSpring v0.9.30: 92 experiments
+(21 tracks), certify 175/193, zero debt. Track 21 experiments: postPrimordial review (40/40),
+cephalization plan (26/26), Tower CNS convergence (40/40). K-Derm topology + bonding model
+standards published. sourDough v0.3.0 harvested. Deploy graph validation fragment-aware.
+Provenance checksums regenerated (24 files, BLAKE3).
 
 **Wave 51 milestone**: Songbird `discovery.peers` resolution + outer membrane hardening.
 
@@ -69,7 +76,7 @@ fixed upstream.
 
 | Gate | NUCLEUS | Springs | Mesh seeded |
 |------|---------|---------|-------------|
-| eastGate | 12/12 | airSpring, groundSpring, primalSpring | ironGate |
+| eastGate | 13/13 | airSpring, groundSpring, primalSpring | ironGate |
 | ironGate | 12/12 | healthSpring, ludoSpring | eastGate |
 | southGate | 12/13 | neuralSpring, wetSpring | eastGate (bidirectional verified) |
 | biomeGate | 9 primals | hotSpring | Registry seeded |
