@@ -78,8 +78,8 @@ fixed upstream.
 empty because orchestrator routed to registry-only. Songbird Wave 51 shipped
 mesh+registry merge in `DiscoveryHandler`, `SONGBIRD_PEERS` auto-seeding via
 `mesh_seed` module, and port-preserving `EndpointType::socket_addr()`. This is
-code-complete; **live gate validation is NEXT** (rebuild Songbird on eastGate +
-ironGate, set `SONGBIRD_PEERS`, run primalSpring `s_covalent_mesh`).
+code-complete; **live gate validation is NEXT** (deploy fresh Songbird from
+plasmidBin on eastGate + ironGate, set `SONGBIRD_PEERS`, run `s_covalent_mesh`).
 
 **Climate-sensitive sentinels** (primals whose readiness gates the glacial shift):
 
@@ -87,7 +87,7 @@ ironGate, set `SONGBIRD_PEERS`, run primalSpring `s_covalent_mesh`).
   `SONGBIRD_PEERS` env auto-seeds at boot, dual-format parser, remote_dispatch
   refactor with port-preserving addressing. 7+ new tests. sled DB corruption on
   unclean shutdown remains workaround-only.
-  **NEXT**: Live gate rebuild + `s_covalent_mesh` + `s_cross_gate_capability_call`.
+  **NEXT**: Deploy fresh Songbird from plasmidBin + `s_covalent_mesh` + `s_cross_gate_capability_call`.
 - **bearDog**: ACME renewal daemon operational. Massive orphan purge (Wave 113b)
   cleared 15k LOC of dead discovery code. Vault (encrypted creds at rest) still
   PLANNED. S4 auth shadow depends on bearDog BTSP dual-auth.
@@ -162,7 +162,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 4. ~~Cross-subnet routing for southGate~~ **DONE** (Wave 50) — 4ms via router, no TURN needed
 5. ~~Bidirectional `mesh.init` across subnets~~ **DONE** (Wave 50) — neuralSpring verified southGate ↔ eastGate
 6. ~~Songbird `discovery.peers` population~~ **DONE** (Wave 51) — mesh+registry merge, `SONGBIRD_PEERS` auto-seed, `mesh_seed` module
-7. Cross-gate `capability.call` smoke test via primalSpring `s_covalent_mesh` scenario — **NEXT** (code ready, needs live gate rebuild)
+7. Cross-gate `capability.call` smoke test via primalSpring `s_covalent_mesh` scenario — **NEXT** (code ready, deploy fresh Songbird from plasmidBin)
 7. westGate (Nest Atomic — cold storage), northGate (Node Atomic), strandGate (Full NUCLEUS)
 8. Plasmodium collective validation (3+ gates meshed via live `capability.call`)
 
@@ -200,7 +200,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 
 | Issue | Reporter | Status |
 |-------|----------|--------|
-| `discovery.peers` empty after `mesh.init` | all gates (Wave 50) | **FIXED** Wave 51 — orchestrator dispatch wired to mesh+registry merger; `SONGBIRD_PEERS` auto-seeds on startup. Rebuild from plasmidBin to verify. |
+| `discovery.peers` empty after `mesh.init` | all gates (Wave 50) | **FIXED** Wave 51 — orchestrator dispatch wired to mesh+registry merger; `SONGBIRD_PEERS` auto-seeds on startup. Deploy fresh from plasmidBin to verify. |
 | southGate primal instability | wetSpring (Wave 50) | **INVESTIGATING** — 7/13 health-responding (Songbird crashes, BearDog/biomeOS socket issues) |
 | Bidirectional seeding required | healthSpring (Wave 50) | **DOCUMENTED** — both sides must `mesh.init`; coordinate seed swap across gates |
 | loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **UPSTREAM** — does not block mesh |
@@ -225,7 +225,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
 | ~~Songbird `discovery.peers` population~~ | Songbird team | **DONE** | **SHIPPED Wave 51** — mesh+registry merge, `SONGBIRD_PEERS` auto-seed, 7+ tests |
-| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | `s_covalent_mesh` scenario ready — needs Songbird rebuild on gates + `SONGBIRD_PEERS` set |
+| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | `s_covalent_mesh` scenario ready — deploy fresh Songbird from plasmidBin + set `SONGBIRD_PEERS` |
 | Self-hosted CI runners (2+ LAN gates) | cellMembrane | **HIGH** | Handoff issued Wave 51. Eliminates GitHub Actions as outer membrane dependency. |
 | southGate primal stability | plasmidBin / southGate | **MEDIUM** | 7/13 vs 12/13 health-responding — Songbird/BearDog/biomeOS socket issues |
 | Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | v3.64 `nest.sync` graph shipped. Songbird mesh (v3.75) is the transport. Pending multi-gate connectivity. |
@@ -243,7 +243,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 The glacial shift (stadial entry) is reached when:
 
 1. All 4 sovereignty shadows **cut over** (S1-S4 formal 7-day gate passed)
-2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective) — Wave 50: 4 gates running, mesh seeded, cross-subnet routing confirmed. **UNBLOCKED** Wave 51: `discovery.peers` shipped. Live gate rebuild + validation NEXT.
+2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective) — Wave 50: 4 gates running, mesh seeded, cross-subnet routing confirmed. **UNBLOCKED** Wave 51: `discovery.peers` shipped. Deploy fresh from plasmidBin + live validation NEXT.
 3. cellMembrane Nest expansion **deployed** on VPS
 4. At least one remote covalent node (flockGate) **validated** over WAN
 5. DNS pointed to sovereign infrastructure
@@ -252,7 +252,7 @@ The glacial shift (stadial entry) is reached when:
 
 **Current assessment**: Criteria 1 is 3/4 (S4 shadow remaining). Criteria 2 is
 **unblocked** — Songbird shipped `discovery.peers` (Wave 51); needs live gate
-rebuild and `s_covalent_mesh` validation to confirm operational. Criteria 7 added Wave 51 after GitHub Actions
+fresh plasmidBin deploy and `s_covalent_mesh` validation to confirm operational. Criteria 7 added Wave 51 after GitHub Actions
 outage exposed CI as an unmitigated outer membrane dependency. plasmidBin Rust
 elevation (Wave 51) means the build toolchain itself is sovereign — only the
 runners are not. The shift moves when Songbird ships peer list population, S4
