@@ -83,14 +83,16 @@ plasmidBin on eastGate + ironGate, set `SONGBIRD_PEERS`, run `s_covalent_mesh`).
 
 **Climate-sensitive sentinels** (primals whose readiness gates the glacial shift):
 
-- **Songbird**: **`discovery.peers` SHIPPED (Wave 51)** — mesh+registry merge,
+- **Songbird**: **`discovery.peers` VALIDATED LIVE (Wave 51)** — mesh+registry merge,
   `SONGBIRD_PEERS` env auto-seeds at boot, dual-format parser, remote_dispatch
-  refactor with port-preserving addressing. 7+ new tests. sled DB corruption on
-  unclean shutdown remains workaround-only.
-  **NEXT**: Deploy fresh Songbird from plasmidBin + `s_covalent_mesh` + `s_cross_gate_capability_call`.
+  refactor with port-preserving addressing. 7+ new tests. Sled DB corruption
+  **RESOLVED** (Wave 51b — auto-cleanup of orphaned artifacts on startup).
+  **NEXT**: `s_covalent_mesh` + `s_cross_gate_capability_call` scenario validation.
 - **bearDog**: ACME renewal daemon operational. Massive orphan purge (Wave 113b)
-  cleared 15k LOC of dead discovery code. Vault (encrypted creds at rest) still
-  PLANNED. S4 auth shadow depends on bearDog BTSP dual-auth.
+  cleared 15k LOC of dead discovery code. Vault (encrypted creds at rest) deferred
+  to Phase 2 (not blocking — in-memory `secrets.*` IPC operational with lazy
+  NUCLEUS purpose-key derivation). S4 auth shadow is a cellMembrane observation
+  criterion; bearDog auth infra is **complete** (14,940+ tests, zero debt).
 - **toadStool**: Yield-to-owner dispatch enforced (S274). Orchestrator tests
   added (S275). 36 unmirrored wateringHole handoffs need archive hygiene.
 - **biomeOS**: v3.75 clean — no showcase, no stale patterns. LiveSpore USB
@@ -203,9 +205,9 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | `discovery.peers` empty after `mesh.init` | all gates (Wave 50) | **VALIDATED** Wave 51 — orchestrator dispatch wired to mesh+registry merger; `SONGBIRD_PEERS` auto-seeds on startup. Live-verified on eastGate (primalspring01 :7701 ↔ nucleus01 :7700). |
 | southGate primal instability | wetSpring (Wave 50) | **INVESTIGATING** — 7/13 health-responding (Songbird crashes, BearDog/biomeOS socket issues) |
 | Bidirectional seeding required | healthSpring (Wave 50) | **DOCUMENTED** — both sides must `mesh.init`; coordinate seed swap across gates |
-| loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **UPSTREAM** — does not block mesh |
+| loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **INVESTIGATED** Wave 51b — loamSpine audited all 192 .rs files: zero Runtime::new/block_on in production. benchScale Phase 20 added (40 rapid-fire probes, all pass). Upstream suspects caller wraps in block_on. |
 | sweetGrass/toadStool slow startup (>8s) | wetSpring | **KNOWN** — cold-start timing, not blocking |
-| Songbird sled DB corruption (unclean) | neuralSpring | **WORKAROUND** — clean `task_lifecycle*` |
+| Songbird sled DB corruption (unclean) | neuralSpring | **RESOLVED** Wave 51b — auto-cleanup of orphaned sled DB artifacts on startup (sled removed in Wave 135, artifacts persisted). |
 | biomeOS LiveSpore deploys to `~/.local/bin` | re-audit | **STALE PATTERN** — conflicts with plasmidBin-only |
 | toadStool/loamSpine local wH unarchived | re-audit | **HYGIENE** — 37+14 flat handoffs need archive subdir |
 | Central fossilRecord incomplete | re-audit | **NARROWED** — primalSpring wH archived Wave 51; remaining primals' local docs still sparse |
@@ -233,7 +235,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 | Forgejo as primary code host | projectNUCLEUS | MEDIUM | Mirrors operational. Forgejo is sovereignty baseline before NUCLEUS absorbs forge capabilities. |
 | plasmidBin metadata sync | plasmidBin | LOW | manifest.toml/checksums.toml/sources.toml headers lag README — version and date drift |
 | `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW | `publish_sporeprint.sh` implemented. E2E requires live NestGate + bearDog session. |
-| loamSpine Tokio runtime-in-runtime panic | loamSpine | MEDIUM | Upstream bug — blocks health probe on 2 gates |
+| ~~loamSpine Tokio runtime-in-runtime panic~~ | loamSpine | **INVESTIGATED** | Wave 51b: loamSpine audit confirms zero runtime nesting in production. benchScale 54-phase validation passes. Suspects caller-side wrapping — wetSpring/neuralSpring to verify launcher. |
 | Central fossilRecord sync | all primals | LOW | primalSpring wH archived; remaining primals' local docs still sparse |
 
 ---
