@@ -350,6 +350,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `UPSTREAM_CONTRIBUTIONS.md` — Standalone crates for crates.io from ecoPrimals
 
 ### Sovereignty & Membrane
+- `K_DERM_TOPOLOGY_STANDARD.md` — K-Derm cell envelope model: monoderm/diderm, absolute layers, NUCLEUS atomic placement, bonding per boundary, channel proteins, braid policy
+- `BONDING_MODEL_STANDARD.md` — Organo-metallo-salt bonding model: covalent/metallic/ionic/ceremony/weak + OrganoMetalSalt composite, BTSP cipher mapping, K-Derm layer placement, genetics alignment
 - `SOVEREIGNTY_STANDARDS.md` — Calibrate → shadow → cutover protocol
 - `INTERSTADIAL_EXIT_CRITERIA.md` — 5 pillars + shadow schedule
 - `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` — VPS composition spec
