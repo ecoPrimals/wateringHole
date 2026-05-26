@@ -107,17 +107,21 @@ GitHub Cloud                     Inner Membrane LAN
    gh api orgs/ecoPrimals/actions/runners --jq '.runners[] | "\(.name) \(.status)"'
    ```
 
-### Workflow migration (primalSpring will handle)
+### Workflow migration — DONE (cellMembrane, May 26)
 
-Once both runners report `online`, primalSpring will update `auto-harvest.yml`:
+All 5 workflows evolved to sovereign-first runner strategy:
 
 ```yaml
-# Before
-runs-on: ubuntu-latest
-
-# After
-runs-on: [self-hosted, linux, x86_64]
+# Sovereign-first: self-hosted by default, org var override to fall back
+runs-on: ${{ vars.USE_GITHUB_HOSTED == 'true' && 'ubuntu-latest' || fromJson('["self-hosted", "linux", "x86_64"]') }}
 ```
+
+Conditional steps skip `dtolnay/rust-toolchain`, `actions/cache`, and
+`apt-get install` on self-hosted (toolchains pre-installed).
+
+`validate.yml` goes further — raw `git checkout` replaces `actions/checkout@v4`,
+eliminating all marketplace action archive downloads. This is the only workflow
+that can run during a full GitHub codeload outage.
 
 Self-hosted runner minutes are free — they don't count against the 2,000
 included minutes or any spending cap.
@@ -135,16 +139,27 @@ cargo run -p plasmidbin -- harvest --arch x86_64 --source /path/to/binaries
 No GitHub dependency. Forgejo on cellMembrane holds repo mirrors and can run
 validation/harvest independently.
 
+**Lesson learned (May 26 incident):** GitHub Actions dispatch is also degraded
+during infrastructure incidents. Self-hosted runners were online and listening,
+but GitHub's job routing plane wouldn't assign work to them. This means even
+self-hosted runners are not fully sovereign — they still depend on GitHub's
+dispatch infrastructure. True CI sovereignty requires Forgejo Actions or
+equivalent to own the dispatch plane.
+
 ## Evolution Path
 
-| Phase | GitHub | Forgejo | Who leads |
-|-------|--------|---------|-----------|
-| Now | hosted runners | mirror only | GitHub |
-| Next | self-hosted on LAN | mirror + Woodpecker CI | GitHub (Forgejo fallback) |
-| Covalent | public mirror | primary CI + releases | Forgejo |
+| Phase | GitHub | Forgejo | Who leads | Status |
+|-------|--------|---------|-----------|--------|
+| Now | self-hosted on LAN | mirror only | GitHub dispatch | **irongate LIVE** |
+| Next | self-hosted + Forgejo Actions | mirror + local CI dispatch | Forgejo fallback | planned |
+| Covalent | public mirror | primary CI + releases | Forgejo | target |
 
-The target state: Forgejo leads, GitHub mirrors. CI runs entirely on the
-mesh. Zero external CI dependency. Full sovereignty.
+The target state: Forgejo leads, GitHub mirrors. CI dispatches from Forgejo
+Actions to LAN gate runners. Zero external CI dependency. Full sovereignty.
+
+The key architectural insight: self-hosted runners solve the **compute** problem
+(no GitHub-hosted runner needed) but not the **control plane** problem (GitHub
+still dispatches jobs). Forgejo Actions solves both.
 
 ## Dependencies
 
@@ -152,11 +167,15 @@ mesh. Zero external CI dependency. Full sovereignty.
 - SSH access to both gates for runner installation
 - `PLASMIDBIN_HARVEST_PAT` secret (already exists in GitHub, needs to be
   set as env var on self-hosted runners or configured in runner .env)
-- Forgejo already mirroring repos (confirm with cellMembrane)
+- Forgejo already mirroring repos (25 native pull mirrors, 6 timer-synced)
 
 ## Acceptance Criteria
 
-- [ ] 2 runners show `online` in `gh api orgs/ecoPrimals/actions/runners`
-- [ ] Manual workflow dispatch runs on self-hosted runner
-- [ ] `plasmidbin validate .` passes on both gates
+- [x] 1 runner shows `online` in `gh api orgs/ecoPrimals/actions/runners` (irongate)
+- [x] All 5 workflows updated to sovereign-first `runs-on`
+- [x] `plasmidbin validate .` passes locally (98 passed, 0 failed)
+- [x] validate.yml has raw git checkout (no marketplace action dependency)
+- [ ] 2nd runner on another gate (eastGate or southGate)
+- [ ] Manual workflow dispatch completes on self-hosted runner (blocked by GitHub incident)
 - [ ] If one runner goes offline, the other picks up jobs
+- [ ] Forgejo Actions evaluated for control-plane sovereignty
