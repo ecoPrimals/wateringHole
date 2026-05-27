@@ -124,6 +124,36 @@ All 7 delta springs deploy `proto_nucleate_template.toml` on their assigned gate
 | Provenance trio roundtrips | wetSpring | PG-02 (provenance trio live) and PG-04 (NestGate storage) verification. |
 | Ionic cross-family GPU lease | hotSpring + BearDog | GAP-HS-005: `crypto.sign_contract` for cross-family GPU scheduling. |
 
+### pseudoSpore Ecosystem — Delta Spring Releases (Wave 55+)
+
+hotSpring and lithoSpore completed the pseudoSpore Ecosystem Evolution (May 27):
+`pseudospore-core` crate extracted, domain-agnostic `litho emit-pseudospore`, unified
+`liveSpore.json` schema, `SPORE_OWNERSHIP_MATRIX.md` published, biomeOS `nucleus ingest`
+scaffolded. The CompChem pseudoSpore is at v1.6.1.
+
+**Goal**: Every delta spring produces a pseudoSpore release artifact on sporePrint.
+
+| Spring | Domain | pseudoSpore Target | Status |
+|--------|--------|-------------------|--------|
+| hotSpring | CompChem | `pseudoSpore_hotSpring-CompChem-GuideStone_v1.6.1` | **DONE** — reference implementation |
+| wetSpring | Biology | Ferment transcript spore (Barrick 2009 SEALED, Tenaillon 2016 in-flight) | READY — data exists, needs `domain_profile.toml` + `litho emit-pseudospore` |
+| neuralSpring | ML/Structure | Inference benchmark spore (model weights + eval metrics) | SCAFFOLD — needs domain_profile |
+| healthSpring | Clinical/PK-PD | Drug interaction model spore (PBPK curves + PD responses) | SCAFFOLD — needs domain_profile |
+| ludoSpring | Game Science | Game telemetry spore (Fitts, WFC, engagement models) | SCAFFOLD — needs domain_profile |
+| groundSpring | Measurement | Uncertainty quantification spore (calibration datasets) | SCAFFOLD — needs domain_profile |
+| airSpring | Agriculture | Soil dynamics spore (ET₀, diversity indices) | SCAFFOLD — needs domain_profile |
+
+**Per-spring steps** (each spring owns):
+1. Write `domain_profile.toml` describing their science modules
+2. Run `litho emit-pseudospore --spring <name> --domain-profile ./domain_profile.toml`
+3. Validate with `litho audit`
+4. Promote to sporePrint via `litho promote` or NestGate `content.put`
+
+**primalSpring validation** (coordination):
+- `exp115_nest_ingest_pseudospore`: Structural checks for spore gateway
+- `s_nest_atomic` Phase 4: Spore ingest/verify round-trip
+- `NUCLEUS_VALIDATION_MATRIX` columns U/V/W: Live gateway experiments
+
 ### Membrane interaction
 
 | Item | Owner | Detail |
@@ -136,13 +166,13 @@ All 7 delta springs deploy `proto_nucleate_template.toml` on their assigned gate
 
 | Spring | Key next step |
 |--------|--------------|
-| wetSpring | PG-02/PG-04 live verification on stable southGate |
-| neuralSpring | Resolve loamSpine Tokio double-runtime crash; Squirrel provider registration |
-| hotSpring | BiomeGate federation fix; ionic GPU lease prototype |
-| healthSpring | BTSP `btsp.capabilities` probe pattern (avoid unconditional negotiation) |
-| ludoSpring | 6 game.* methods for esotericWebb; notebook gap |
-| groundSpring | Squirrel composition integration (additive) |
-| airSpring | AG-006 coralReef compile, AG-009 petalTongue direct IPC |
+| wetSpring | PG-02/PG-04 live verification on stable southGate; **pseudoSpore: ferment transcript spore** |
+| neuralSpring | Resolve loamSpine Tokio double-runtime crash; Squirrel provider registration; **pseudoSpore: inference benchmark** |
+| hotSpring | BiomeGate federation fix; ionic GPU lease prototype; **pseudoSpore: DONE (v1.6.1)** |
+| healthSpring | BTSP `btsp.capabilities` probe pattern; **pseudoSpore: clinical model spore** |
+| ludoSpring | 6 game.* methods for esotericWebb; **pseudoSpore: game telemetry spore** |
+| groundSpring | Squirrel composition integration; **pseudoSpore: uncertainty quantification spore** |
+| airSpring | AG-006 coralReef compile; **pseudoSpore: soil dynamics spore** |
 
 ---
 
@@ -160,4 +190,5 @@ All 7 delta springs deploy `proto_nucleate_template.toml` on their assigned gate
 | Primals 90%+ coverage | ~10/13 (songbird 73%, coralReef/barraCuda incremental) | 13/13 |
 | BearDog TCP drop | **VALIDATED** — UDS-only on eastGate | All gates UDS-only |
 | K-Derm boundary scenarios | **3 scenarios PASS** (56 total) | + channel protein live validation |
+| pseudoSpore delta coverage | **1/7** (hotSpring CompChem v1.6.1) | 7/7 springs emit domain spore |
 | primalSpring lib tests | **787/799** (10 live-tier) | All pass with full graph deploy |

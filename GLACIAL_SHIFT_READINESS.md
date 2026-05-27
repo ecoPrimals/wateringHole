@@ -266,11 +266,12 @@ The glacial shift (stadial entry) is reached when:
 
 1. All 4 sovereignty shadows **cut over** (S1-S4 formal 7-day gate passed)
 2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective) — Wave 50: 4 gates running, mesh seeded, cross-subnet routing confirmed. **UNBLOCKED** Wave 51: `discovery.peers` shipped. Deploy fresh from plasmidBin + live validation NEXT.
-3. cellMembrane Nest expansion **deployed** on VPS
+3. cellMembrane Nest expansion **deployed** on VPS — `deploy_membrane.sh --composition nucleus` (Wave 54: node+meta tiers added)
 4. At least one remote covalent node (flockGate) **validated** over WAN
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 7. CI/CD runs on **inner membrane** (self-hosted runners or Forgejo CI) — Wave 51: handoff issued, not yet deployed
+8. **pseudoSpore delta coverage** — all 7 springs produce a domain pseudoSpore (Wave 55+ goal, 1/7 done: hotSpring CompChem v1.6.1)
 
 **Current assessment**: Criteria 1 is 3/4 (S4 shadow remaining). Criteria 2 is
 **unblocked** — Songbird shipped `discovery.peers` (Wave 51); needs live gate
