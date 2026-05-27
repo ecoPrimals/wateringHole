@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: PostPrimordial → Glacial Shift  
-**Last updated**: 2026-05-26 (Wave 52b — Full NUCLEUS live, cephalization + Tower CNS experiments, glacial shift readiness confirmed)
+**Last updated**: 2026-05-27 (Wave 54 — Provenance-elevated checksums shipped. VPS NUCLEUS route mapped. Full temporal/glacial/ecological review completed.)
 
 ---
 
@@ -23,10 +23,17 @@ cephalization plan (26/26), Tower CNS convergence (40/40). K-Derm topology + bon
 standards published. sourDough v0.3.0 harvested. Deploy graph validation fragment-aware.
 Provenance checksums regenerated (24 files, BLAKE3).
 
+**Wave 54 milestone**: Provenance-elevated checksums shipped — `provenance.toml` (Layer 2
+composite fingerprint), sweetGrass `braid.create` post-harvest, `plasmidbin verify-provenance`
+subcommand. primalSpring consumer tooling rewired. Full temporal/glacial/ecological review
+completed (`TEMPORAL_ECOLOGICAL_REVIEW_MAY27_2026.md`). VPS NUCLEUS critical path mapped:
+zero mountain debt blocking, `deploy_membrane.sh --composition nest` ready, NestGate v0.5.0
+unified. cellMembrane deployment sprint is the sole remaining gate.
+
 **Glacial Shift Wave Plan published**: 3-phase roadmap (Waves 53–55+) at
 `GLACIAL_SHIFT_WAVE_PLAN.md`. Team handoffs distributed to `handoffs/`:
-- Wave 53: Primal mountains (SouthGate stability, NestGate version, Songbird coverage)
-- Wave 54: Deployment + cellMembrane (gate redeploy, VPS Nest, sovereign DNS, K-Derm wire)
+- Wave 53: Primal mountains — **RESOLVED** (12/13, SouthGate ops carries to W54)
+- Wave 54: Deployment + cellMembrane (gate redeploy, VPS Nest, sovereign DNS, K-Derm wire) + **provenance elevation**
 - Wave 55+: Springs launch + cross-gate NUCLEUS (proto-nucleate deployment, capability routing)
 
 **Wave 51 milestone**: Songbird `discovery.peers` resolution + outer membrane hardening.

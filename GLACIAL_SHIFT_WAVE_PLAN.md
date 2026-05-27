@@ -1,8 +1,8 @@
 # Glacial Shift Wave Plan — PostPrimordial to Sovereignty
 
 **Status**: Active roadmap  
-**Phase**: PostPrimordial (Wave 52b) → Glacial Shift  
-**Last updated**: 2026-05-26  
+**Phase**: PostPrimordial (Wave 54) → Glacial Shift  
+**Last updated**: 2026-05-27  
 **Owner**: primalSpring (coordination); cellMembrane (deployment); primal teams (mountains)
 
 ---
@@ -10,13 +10,18 @@
 ## Current Position
 
 Interstadial exit achieved. 13/13 NUCLEUS primals shipped via plasmidBin with
-checksums. eastGate is the reference deployment (13/13, 19/19 sockets, doctor
-35/35 pass). 4 gates operational (eastGate, ironGate, southGate, biomeGate)
-with varying completeness. 8/8 springs at zero code debt, primordial patterns
-extinct, covalent HPC confirmed.
+checksums + provenance-elevated fingerprints (Wave 54). eastGate is the reference
+deployment (13/13, 19/19 sockets, doctor 35/35 pass). 4 gates operational
+(eastGate, ironGate, southGate, biomeGate) with varying completeness. 8/8 springs
+at zero code debt, primordial patterns extinct, covalent HPC confirmed.
 
 Three phases below are ordered by dependency: mountains feed deployment,
 deployment feeds springs, springs feed cross-gate interaction.
+
+**Wave 54 provenance elevation completed**: `provenance.toml` (Layer 2 composite
+fingerprint + sweetGrass braids) shipped in plasmidBin. `plasmidbin verify-provenance`
+subcommand added. primalSpring consumer tooling rewired. VPS NUCLEUS route: zero
+mountain debt blocking, `deploy_membrane.sh --composition nest` ready.
 
 ---
 
