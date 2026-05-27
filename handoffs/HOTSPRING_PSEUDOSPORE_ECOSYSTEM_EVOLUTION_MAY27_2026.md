@@ -38,8 +38,8 @@ unified `{envelope, validations}` liveSpore.json schema.
 - Legacy migration logic handles append-only array and hotSpring object formats
 
 ### Phase 3: pseudospore-core Crate Extraction
-- **NEW**: `gardens/lithoSpore/crates/pseudospore-core/` — 8 modules:
-  `blake3_manifest`, `braid_envelope`, `domain_profile`, `livespore`, `receipts`, `scope`, `tarball`, `validation`
+- **NEW**: `gardens/lithoSpore/crates/pseudospore-core/` — 10 `pub mod` (9 API + `error`):
+  `blake3_manifest`, `braid_envelope`, `domain_profile`, `envelope`, `error`, `livespore`, `receipts`, `scope`, `tarball`, `validation`
 - Workspace member added to `gardens/lithoSpore/Cargo.toml`
 - `cargo check` passes
 
@@ -108,7 +108,7 @@ unified `{envelope, validations}` liveSpore.json schema.
 
 ### For lithoSpore
 1. ~~Wire `ltee-cli` to depend on `pseudospore-core` (currently parallel implementations)~~ **COMPLETE** (NC-1.3, May 27)
-2. Validate domain-agnostic emission against a second spring (wetSpring or desertSpring)
+2. ~~Validate domain-agnostic emission against a second spring~~ **COMPLETE** — groundSpring emits identical envelope structure (column W validated, May 27)
 
 ---
 

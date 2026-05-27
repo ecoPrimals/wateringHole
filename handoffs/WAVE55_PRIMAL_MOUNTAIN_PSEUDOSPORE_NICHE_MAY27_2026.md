@@ -96,6 +96,27 @@ giving us one canonical envelope implementation across the ecosystem.
 `braid_envelope.rs` as pseudospore-core modules — both modules now exist in
 `pseudospore-core`.
 
+**Post-NC-1.3 additions (May 27, 2026):**
+- `envelope.rs` added — `PseudoSporeEnvelope::load()` + `validate()` consumer API
+  for biomeOS `nucleus_ingest.rs` to call instead of inline validation.
+  `pseudospore-core` now has 10 `pub mod` entries (9 API + `error`).
+- **Second-spring emission validated** — `litho emit-pseudospore --spring groundSpring`
+  produces identical envelope structure to hotSpring (column W). Hardcoded
+  `urn:hotspring` URNs in `manifest.rs` replaced with spring-agnostic
+  `urn:{spring_lower}` derivation.
+- `ingest-pseudospore` CLI help updated: "Prefer `biomeos nucleus ingest` when
+  NUCLEUS is available. This command is the offline/airgapped fallback path."
+
+**Deep debt evolution (May 27, 2026):**
+- `SporeError` typed error hierarchy (thiserror) replaces `Result<_, String>` in pseudospore-core
+- `harness::format_output()` + `exit_code()` — library no longer calls `process::exit`
+- Tier-0 structural checks in 5/7 LTEE modules
+- `ureq` explicitly rustls (pure-Rust TLS, ecoBin compliant)
+- All hardcoded paths evolved: `LITHO_SPRINGS_ROOT`, `LITHO_LIBVIRT_IMAGES`, `LITHO_RUST_TARGET`
+- `registry::load_modules()` reads scope.toml first, compiled LTEE_MODULES as fallback
+- `LITHOSPORE_VERSION` uses `env!("CARGO_PKG_VERSION")` — zero version drift
+- 198 tests, 0 clippy warnings, 0 unsafe, all files ≤800 LOC
+
 ---
 
 ## BearDog — No action (supporting role)

@@ -51,6 +51,8 @@ gardens/lithoSpore/crates/pseudospore-core/
 │   ├── blake3_manifest.rs    # data.toml read/write/verify
 │   ├── braid_envelope.rs     # FermentBraid wire types (FermentTranscript)
 │   ├── domain_profile.rs     # domain_profile.toml parsing
+│   ├── envelope.rs           # PseudoSporeEnvelope — load() + validate() consumer API
+│   ├── error.rs              # SporeError typed hierarchy (thiserror)
 │   ├── livespore.rs          # liveSpore.json unified schema (envelope + validations)
 │   ├── receipts.rs           # environment.toml, checksums.blake3, ChecksumEntry
 │   ├── scope.rs              # scope.toml parsing and validation
