@@ -236,7 +236,9 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Security** | Dark Forest integration (A++ LEGENDARY), genetic model coordination |
 | **IPC** | Universal IPC v3.0, multi-transport support |
 
-**Participates In**: Coordinates all composed systems (RootPulse, Tower Atomic, NUCLEUS, federation). Provenance trio (rhizoCrypt + LoamSpine + sweetGrass) wired into Neural API for `dag.*`, `commit.*`, `provenance.*` routing.
+**Participates In**: Coordinates all composed systems (RootPulse, Tower Atomic, NUCLEUS, federation). Provenance trio (rhizoCrypt + LoamSpine + sweetGrass) wired into Neural API for `dag.*`, `commit.*`, `provenance.*` routing. NUCLEUS Gateway for spore ingestion/emission (see `SPORE_OWNERSHIP_MATRIX.md`).
+
+**NUCLEUS Gateway** (planned): biomeOS gains `biomeos nucleus ingest` and `biomeos nucleus emit` subcommands for bidirectional spore transmission. Ingests pseudoSpores/lithoSpores into nest_atomic storage via NestGate + provenance trio. Emits new spores from NUCLEUS composition state. Depends on `pseudospore-core` crate (lithoSpore) for envelope primitives. See `infra/wateringHole/SPORE_OWNERSHIP_MATRIX.md` for the three-way ownership split.
 
 ---
 

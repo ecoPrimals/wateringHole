@@ -916,6 +916,7 @@ the validator assumes the network is hostile.
 | **cellMembrane** | Selective permeability layer — private ops repo deploying fieldMouse Tower to VPS for relay/TLS/content channels |
 | **fieldMouse** | Minimal deployable ecoPrimals — smallest atomic/chimera for embedded/sensor/edge niches |
 | **guideStone** | Verification class — ecoBin quality grade certifying reproducible, self-proving, reference-traceable output |
+| **Spore Ownership Matrix** | Three-way ownership split: domain science (springs), spore envelope (lithoSpore), NUCLEUS gateway (biomeOS). See `SPORE_OWNERSHIP_MATRIX.md` |
 | **primalSpring** | Coordination spring — validates ecosystem composition, graph execution, emergent systems, bonding |
 | **BYOB** | Bring Your Own Binaries — gen4 products consume pre-built primal binaries, never source |
 | **Niche YAML** | YAML metadata declaring a composition's organisms, interactions, and customization options |
@@ -923,6 +924,8 @@ the validator assumes the network is hostile.
 | **sporeGarden product** | A gen4 tool composing primals for end users (e.g., esotericWebb, helixVision) |
 | **PrimalBridge** | Product-side JSON-RPC client wrapping capability calls to running primals |
 | **Primal resolution order** | 8-step discovery: env → capability → XDG → abstract → /tmp → registry → Neural API → TCP |
+| **NUCLEUS Gateway** | biomeOS bidirectional spore interface — `biomeos nucleus ingest` absorbs spores into nest_atomic; `biomeos nucleus emit` creates spores from NUCLEUS state |
+| **pseudospore-core** | Shared Rust crate (lithoSpore) for spore envelope primitives — BLAKE3, scope, liveSpore, receipts, tarball. Consumed by litho CLI and biomeOS |
 | **pappusCast** | Auto-propagation daemon — dandelion-seed dispersal from workspace to observer surface |
 | **tunnelKeeper** | Rust crate for Cloudflare tunnel health, DNS resolution, config parsing |
 | **darkforest** | Pure Rust security validator — pen test + fuzz + crypto strength (939KB, zero deps) |

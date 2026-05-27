@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 26, 2026 (Wave 52b: Glacial Shift Wave Plan published. Full NUCLEUS live on eastGate 13/13. Team handoffs for Waves 53–55 distributed.)
+**Last Updated**: May 27, 2026 (Wave 55: pseudoSpore Ecosystem Evolution — SPORE_OWNERSHIP_MATRIX.md published, three-way ownership split formalized. Handoffs for Waves 53–55 distributed.)
 
 ---
 
