@@ -71,10 +71,10 @@ idempotent safety belt for direct callers.
 
 | File | Change |
 |------|--------|
-| `cylinder/src/vfio/guarded_sysfs.rs` | `prepare_anchor_release()` |
+| `cylinder/src/vfio/guarded_sysfs/` (was `guarded_sysfs.rs` — split S276) | `prepare_anchor_release()` in `driver_ops.rs` |
 | `ember/src/vfio_anchor.rs` | `release_prepared()` |
 | `server/src/pure_jsonrpc/handler/dispatch/sovereign.rs` | FLR-first wiring in both RPCs |
-| `cylinder/src/vfio/sovereign_handoff.rs` | Step 0e guard, post-settle check, safety belt comment, early `is_catalyst` |
+| `cylinder/src/vfio/sovereign_handoff/` (was `sovereign_handoff.rs` — split S276) | Step 0e guard in `runtime_probe.rs`, post-settle check, early `is_catalyst` in `pipeline.rs` |
 
 ## Upstream Impact
 

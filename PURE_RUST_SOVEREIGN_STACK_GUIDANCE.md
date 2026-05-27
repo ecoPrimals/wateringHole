@@ -379,7 +379,7 @@ generations" is now complete at the hardware level:
 | wgpu (GPU compute in barracuda/toadStool) | gfx-rs | toadStool team evolves; `sovereign-dispatch` feature bypasses wgpu. |
 | PTX for SM120 (requires `ptxas`) | NVIDIA | coralReef compiler team building native SM120 SASS encoder to eliminate. |
 | cudarc (optional feature) | Rust CUDA community | Removed after sovereign dispatch is default path. |
-| `coral-kmod` C kernel modules | coralReef | coralReef kernel team evolving to pure Rust. |
+| ~~`coral-kmod` C kernel modules~~ | ~~coralReef~~ | **FOSSILIZED S276** — RM ABI absorbed into `toadstool_cylinder::nv::rm_abi` (22 repr(C) structs). C sources archived to `fossilRecord/primals/coralReef/coral-kmod/`. |
 
 **Upstream-owned evolution (not local team responsibility):**
 
@@ -390,7 +390,7 @@ generations" is now complete at the hardware level:
 | coral-ember/glowplug absorption into toadStool | toadStool team |
 | coral-driver hardware access absorption into toadStool | toadStool team |
 | SM120 native SASS encoder (replacing PTX emitter) | coralReef compiler team |
-| `coral-kmod` C → Rust evolution | coralReef kernel team |
+| ~~`coral-kmod` C → Rust evolution~~ | ~~coralReef kernel team~~ | **DONE S276** — absorbed into `nv/rm_abi.rs`, fossilized |
 
 ### toadStool Layer 4 — What This Enables
 

@@ -53,11 +53,9 @@ GR engine ready for compute
 
 ## What Changed
 
-### New Tools (agentReagents)
-- `tools/titanv-sovereign/capture_pmu_falcon.c` — live falcon state capture
-  from running nvidia-470 (BAR0 resource0, PIO IMEM/DMEM read)
-- `tools/titanv-sovereign/sovereign_pmu_boot.c` — SBR + PMC_ENABLE + PIO
-  upload + DMATRF attempt + STARTCPU (validated safe — no lockups)
+### New Tools (ported to Rust — S276)
+- ~~`tools/titanv-sovereign/capture_pmu_falcon.c`~~ → `toadstool-cylinder` bin `capture_pmu_falcon` (`src/bin/capture_pmu_falcon.rs`) — live falcon state capture from running nvidia-470 (BAR0 resource0, PIO IMEM/DMEM read)
+- ~~`tools/titanv-sovereign/sovereign_pmu_boot.c`~~ → `toadstool-cylinder` bin `sovereign_pmu_boot` (`src/bin/sovereign_pmu_boot.rs`) — SBR + PMC_ENABLE + PIO upload + DMATRF attempt + STARTCPU (validated safe — no lockups)
 
 ### Firmware Artifacts (hotSpring)
 - `data/firmware/gv100_nvidia470/pmu_imem.bin` — already existed, confirmed deterministic

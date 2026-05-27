@@ -36,7 +36,7 @@ mode on GV100, blocking direct host IMEM upload.
 
 ## What Changed (toadStool)
 
-### `sovereign_handoff.rs`
+### `sovereign_handoff/` (was `sovereign_handoff.rs` — split S276; recovery in `pri_recovery.rs`, pipeline in `pipeline.rs`)
 - **`recover_pri_ring()`** — new function: re-enables PGRAPH in PMC_ENABLE,
   acknowledges pending PRI ring interrupts, enumerates PRI ring stations,
   starts ring, verifies falcon accessibility. Runs as step 6c between
@@ -51,7 +51,7 @@ mode on GV100, blocking direct host IMEM upload.
   instead of using pre-swap tier. Correctly classifies as Degraded when
   PGRAPH is on and falcons are accessible but TPC sub-ring is down.
 
-### `module_patch.rs`
+### `module_patch/` (was `module_patch.rs` — split S276; patch sets in `patch_sets/nvidia.rs`)
 - **`nvidia_boot_services`** — no longer uses RetAtEntry on `nv_pci_remove`
   (leaks iomem without preserving PRI ring). Now delegates to
   `nvidia_catalyst_handoff` (clean unbind + post-swap PRI ring recovery).

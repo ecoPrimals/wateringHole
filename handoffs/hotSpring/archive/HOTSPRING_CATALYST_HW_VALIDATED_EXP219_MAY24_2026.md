@@ -36,7 +36,7 @@ optimizations resolved the 7-minute timeout that blocked the initial attempt:
   skipping dead inter-domain MMIO gaps that cause PCIe completion timeouts
   (~110μs each). For Volta: 641K register reads vs 4.2M full scan.
 
-### `module_patch.rs`
+### `module_patch/` (was `module_patch.rs` — split S276; see `patch_sets/nvidia.rs`)
 - **`nv_pci_remove` surgical NOPs**: Replaced blanket `RetAtEntry` with four
   targeted `NopCallAt` patches:
   - `0x374` → NOP `nv_shutdown_adapter`
@@ -46,7 +46,7 @@ optimizations resolved the 7-minute timeout that blocked the initial attempt:
   This allows `__release_region` and `pci_disable_device` to execute normally,
   preventing stale BAR0 claims in the kernel `iomem_resource` tree.
 
-### `sovereign_handoff.rs`
+### `sovereign_handoff/` (was `sovereign_handoff.rs` — split S276; see `pipeline.rs`)
 - **Pipeline reordering**: BAR0 capture moved before sibling rebind (step 6b)
   to avoid PCI device lock contention with ongoing RM teardown.
 - **Domain-scoped capture**: `capture_full` → `capture_domains` with
@@ -54,7 +54,7 @@ optimizations resolved the 7-minute timeout that blocked the initial attempt:
 - **Per-step profiling**: `tracing::info!` with `pipeline_elapsed_s`, `open_ms`,
   `capture_ms` fields for every pipeline step.
 
-### `guarded_sysfs.rs`
+### `guarded_sysfs/` (was `guarded_sysfs.rs` — split S276; see `driver_ops.rs`)
 - **`sysfs_unbind_fire_and_poll`**: Non-blocking unbind + poll loop monitoring
   the driver symlink. Prevents D-state in toadstool-ember during 7s RM teardown.
 - **`HANDOFF_DEADLINE`**: 400s (from 180s).
