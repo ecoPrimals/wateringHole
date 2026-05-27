@@ -30,6 +30,16 @@ completed (`TEMPORAL_ECOLOGICAL_REVIEW_MAY27_2026.md`). VPS NUCLEUS critical pat
 zero mountain debt blocking, `deploy_membrane.sh --composition nest` ready, NestGate v0.5.0
 unified. cellMembrane deployment sprint is the sole remaining gate.
 
+**Provenance pipeline live**: 3 primals (loamSpine, toadStool, Songbird) harvested with
+full `provenance.toml` fingerprints (May 27). `rustc_version = "1.95.0"`, source commits
+verified. Provenance-elevated checksums confirmed operational in CI.
+
+**Mountain blurb responses absorbed** (May 27):
+- toadStool S279: zero production panic paths, 9,156+ lib tests, handoffs archived
+- Songbird W53b: +74 tests (8,070 total), deep debt zero confirmed, `forbid(unsafe_code)` all crates
+- biomeOS v3.76: LiveSpore `~/.local/bin` already fixed (eddc3fd2)
+- loamSpine W55: BearDog coupling removed, placeholder DIDs replaced, self-knowledge enforced
+
 **Glacial Shift Wave Plan published**: 3-phase roadmap (Waves 53–55+) at
 `GLACIAL_SHIFT_WAVE_PLAN.md`. Team handoffs distributed to `handoffs/`:
 - Wave 53: Primal mountains — **RESOLVED** (12/13, SouthGate ops carries to W54)
@@ -113,11 +123,12 @@ plasmidBin on eastGate + ironGate, set `SONGBIRD_PEERS`, run `s_covalent_mesh`).
   to Phase 2 (not blocking — in-memory `secrets.*` IPC operational with lazy
   NUCLEUS purpose-key derivation). S4 auth shadow is a cellMembrane observation
   criterion; bearDog auth infra is **complete** (14,940+ tests, zero debt).
-- **toadStool**: Yield-to-owner dispatch enforced (S274). Orchestrator tests
-  added (S275). 36 unmirrored wateringHole handoffs need archive hygiene.
-- **biomeOS**: v3.75 clean — no showcase, no stale patterns. LiveSpore USB
-  deploy script still uses `~/.local/bin` (conflicts with plasmidBin mandate).
-  Neural API mesh dispatch ready for cross-gate `capability.call`.
+- **toadStool**: **S279 deep debt III complete** — zero production panic paths (12 eliminated),
+  deprecated legacy capability roundtrip, 9,156+ lib tests. Handoffs archived (S278b).
+  **CLEAR** — zero sentinel-blocking items.
+- **biomeOS**: **v3.76 — LiveSpore `~/.local/bin` FIXED** (commit eddc3fd2, Wave 49).
+  Zero stale patterns. Neural API mesh dispatch ready for cross-gate `capability.call`.
+  1 tracked TODO (REST route — enhancement). **CLEAR** — zero sentinel-blocking items.
 - **petalTongue**: WASM client-side rendering live. `--family-id` now accepted
   (Wave 49, commit `bb5cdc9`). Showcase pointer updated to central fossilRecord.
   **CLEAR** — no remaining sentinel-blocking items.
@@ -228,8 +239,8 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | loamSpine Tokio panic on health probe | wetSpring, neuralSpring | **INVESTIGATED** Wave 51b — loamSpine audited all 192 .rs files: zero Runtime::new/block_on in production. benchScale Phase 20 added (40 rapid-fire probes, all pass). Upstream suspects caller wraps in block_on. |
 | sweetGrass/toadStool slow startup (>8s) | wetSpring | **KNOWN** — cold-start timing, not blocking |
 | Songbird sled DB corruption (unclean) | neuralSpring | **RESOLVED** Wave 51b — auto-cleanup of orphaned sled DB artifacts on startup (sled removed in Wave 135, artifacts persisted). |
-| biomeOS LiveSpore deploys to `~/.local/bin` | re-audit | **STALE PATTERN** — conflicts with plasmidBin-only |
-| toadStool/loamSpine local wH unarchived | re-audit | **HYGIENE** — 37+14 flat handoffs need archive subdir |
+| ~~biomeOS LiveSpore deploys to `~/.local/bin`~~ | re-audit | **RESOLVED** — v3.76 commit eddc3fd2, target → `plasmidBin/primals/` |
+| ~~toadStool local wH unarchived~~ | re-audit | **RESOLVED** — S278b: handoffs archived, debris cleaned |
 | Central fossilRecord incomplete | re-audit | **NARROWED** — primalSpring wH archived Wave 51; remaining primals' local docs still sparse |
 | GitHub Actions outer membrane dependency | primalSpring (Wave 51) | **HANDOFF ISSUED** — cellMembrane self-hosted runners; Forgejo-primary evolution path |
 | plasmidBin metadata version drift | re-audit (Wave 51) | **HYGIENE** — manifest.toml (v5.5.0), checksums.toml (Wave 35), sources.toml (Apr 14) lag README (v5.6.0) |
