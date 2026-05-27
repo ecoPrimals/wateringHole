@@ -80,6 +80,15 @@ Removed:
 | C dependencies | **CLEAN** — 0 banned crates in lockfile |
 | Files >800L (production) | **2 remaining** — `routing.rs` (910), `nucleus.rs` (883) |
 
+## Documentation Cleanup (second pass)
+
+Root docs synced to v3.78:
+- All version stamps, TODO counts (1→0), signal graph counts (17→18),
+  test counts (7,859→8,036), and stale footers refreshed across 20 files.
+- `wateringHole` path normalized to `ecoPrimals/infra/wateringHole/` (5 files).
+- Stale systemd configs deleted (personal paths, missing scripts).
+- Broken `pull-primals.sh` references → `tools/harvest` (4 files).
+
 ## Test Results
 
 - All **8,036 tests** pass (0 failures)
