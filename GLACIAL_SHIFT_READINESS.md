@@ -30,8 +30,8 @@ Songbird, biomeOS, coralReef, sweetGrass, toadStool, bearDog). Songbird wired
 fixed startup latency (was >8s, pipeline debt item). bearDog Wave 113b:
 orphan purge — cloud KMS/mobile HSM/PKCS11 discovery code removed (~15k LOC),
 method count drift fixed (127). toadStool: orchestrator dispatch tests added,
-Unix socket improvements. primalSpring: 789 tests, 53 scenarios, 458 methods,
-95 deploy graphs, superseded specs archived, metric drift fixed across 15+ docs.
+Unix socket improvements. primalSpring: 813 tests, 56 scenarios, 460 methods,
+96 deploy graphs (81 deploy + 15 signal), superseded specs archived, metric drift fixed across 15+ docs.
 
 **Climate-sensitive sentinels** (primals whose readiness gates the glacial shift):
 

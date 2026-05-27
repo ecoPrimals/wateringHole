@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 25, 2026 (Wave 49 — Post-primordial, plasmidBin-only deployment enforced. 8/8 showcase fossilizations complete. Ecosystem tightening: wateringHole consolidation, old pattern cuts. 7 primals responded same-day. Songbird `mesh.init` + `bootstrap_peers` wired. bearDog Wave 113b orphan purge. primalSpring: 789 tests, 53 scenarios, 95 deploy graphs. Glacial shift: sentinels tightened, cross-gate verification next)
+**Last Updated**: May 27, 2026 (Wave 55b — PostPrimordial checkpoint. 460 methods, 56 scenarios, 96 deploy graphs (81 deploy + 15 signal), 93 experiments, 813 tests. biomeOS v3.79 gateway complete. Niche Climate NC-1 WIRED, NC-2 IN PROGRESS, NC-3 ADVANCING. pseudoSpore 2.0 ingestion/emission signal graphs landed.)
 
 ---
 
@@ -537,7 +537,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | Category | Details |
 |----------|---------|
 | **Experiments** | 89 across 20 tracks: Atomic Composition, Graph Execution, Emergent Systems, Bonding & Plasmodium, Cross-Spring Coordination, Showcase-Mined, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, Frontier, Subsystem Decomposition, Signal Dispatch, and more. All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
-| **Deploy Graphs** | 94 (80 deploy + 14 signal): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). Fragment-first composition with `resolve = true`. |
+| **Deploy Graphs** | 96 (81 deploy + 15 signal): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). Fragment-first composition with `resolve = true`. |
 | **Validation Scenarios** | 49 scenarios across 10 tracks, 3 tiers: atomic-signal, meta-tier-signal, agentic-tower, sovereignty (membrane composition, parity, content), signal dispatch parity, cross-gate, primal announce, ionic bond lifecycle. |
 | **Niche Self-Knowledge** | 37+ capabilities (including ai.query, ai.health, composition.tower_squirrel_health), semantic mappings (7 domains), operation dependencies, cost estimates |
 | **RPC Methods** | 17+ methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |

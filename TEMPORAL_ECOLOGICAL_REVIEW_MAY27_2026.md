@@ -1,7 +1,7 @@
 # Full Temporal / Glacial / Ecological Review — May 27, 2026
 
 **Status**: Active review document
-**Phase**: PostPrimordial → Glacial Shift (Wave 54 in progress)
+**Phase**: PostPrimordial → Glacial Shift (Wave 55b checkpoint)
 **Author**: primalSpring / eastGate
 **Scope**: All levels — primals, springs, gardens, infra, sovereignty
 
@@ -68,7 +68,7 @@ levels.** This is a remarkable position to be in before the glacial shift.
 
 ### Honest Assessment
 
-**What's done**: Everything computational — 13/13 primals at zero debt, 458/458 methods
+**What's done**: Everything computational — 13/13 primals at zero debt, 460/460 methods
 exercised, BTSP Phase 3 AEAD on all primals, provenance-elevated checksums shipped,
 plasmidBin Rust CLI sovereign. The software is ready.
 
@@ -124,7 +124,7 @@ primals are at A+ or A++ ecoBin grade with full BTSP Phase 3 and MethodGate adop
 
 | Spring | Version | Tests | Gate | Evolution | Key Focus |
 |--------|---------|------:|------|-----------|-----------|
-| primalSpring | 0.9.30 | 799 | eastGate | composing | Coordination, 56 scenarios, 458 methods |
+| primalSpring | 0.9.30 | 813 | eastGate | composing | Coordination, 56 scenarios, 460 methods |
 | wetSpring | 0.3.0 | 1,962 | southGate | **composed** | Biology, ferment transcripts |
 | neuralSpring | 0.1.0 | 1,453 | southGate | composing | ML inference, Squirrel provider |
 | hotSpring | 0.6.32 | 1,042 | biomeGate | composing | Computational physics, QCD |
@@ -334,7 +334,7 @@ These are the non-negotiable principles that guide all sovereignty decisions:
 - **93,000+ tests** across the primal layer alone; ~103,000+ including springs
 - **Provenance chain complete** — Layer 1 (bytes) + Layer 2 (composite) + Layer 3 (braids)
 - **4-gate NUCLEUS operational** with Songbird covalent mesh seeded
-- **458/458 method coverage** (100% of capability registry exercised)
+- **460/460 method coverage** (100% of capability registry exercised)
 - **Wave cadence sustained** at ~2 waves/day during active development
 - **fossilRecord comprehensive** (~9,920 files, structured archive)
 - **plasmidBin Rust CLI fully sovereign** — no bash script dependencies remain
