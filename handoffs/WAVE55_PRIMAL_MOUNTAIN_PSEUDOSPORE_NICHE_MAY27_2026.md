@@ -115,7 +115,9 @@ giving us one canonical envelope implementation across the ecosystem.
 - All hardcoded paths evolved: `LITHO_SPRINGS_ROOT`, `LITHO_LIBVIRT_IMAGES`, `LITHO_RUST_TARGET`
 - `registry::load_modules()` reads scope.toml first, compiled LTEE_MODULES as fallback
 - `LITHOSPORE_VERSION` uses `env!("CARGO_PKG_VERSION")` — zero version drift
-- 198 tests, 0 clippy warnings, 0 unsafe, all files ≤800 LOC
+- 200 tests, 0 clippy warnings, 0 unsafe, all files ≤800 LOC
+- 7/7 Tier 0 structural checks, `litho parity` in CI
+- `emit-pseudospore --from-dir` for nest-validate delegation
 
 ---
 
