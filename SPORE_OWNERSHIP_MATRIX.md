@@ -49,14 +49,14 @@ Both lithoSpore and biomeOS depend on a shared crate for envelope primitives:
 gardens/lithoSpore/crates/pseudospore-core/
 ├── src/
 │   ├── blake3_manifest.rs    # data.toml read/write/verify
-│   ├── scope.rs              # scope.toml parsing and validation
-│   ├── livespore.rs          # liveSpore.json unified schema (envelope + validations)
-│   ├── receipts.rs           # environment.toml, checksums.blake3
-│   ├── validation.rs         # validation.json read/write
+│   ├── braid_envelope.rs     # FermentBraid wire types (FermentTranscript)
 │   ├── domain_profile.rs     # domain_profile.toml parsing
+│   ├── livespore.rs          # liveSpore.json unified schema (envelope + validations)
+│   ├── receipts.rs           # environment.toml, checksums.blake3, ChecksumEntry
+│   ├── scope.rs              # scope.toml parsing and validation
 │   ├── tarball.rs            # present/external split, tar.gz creation
-│   ├── braid_envelope.rs     # FermentBraid wire types
-│   └── lib.rs
+│   ├── validation.rs         # validation.json read/write
+│   └── lib.rs                # re-exports canonical types
 └── Cargo.toml
 ```
 
@@ -85,9 +85,9 @@ currently contains all three layers mixed together:
 
 | Module | Current State | Target State |
 |--------|--------------|--------------|
-| `emit_pseudospore.rs` | Hardcoded carbohydrate/metadynamics hints | Domain-agnostic via `domain_profile.toml` |
-| `audit.rs` | liveSpore.json as `[]` array | Unified schema with `envelope` + `validations` |
-| `ingest_pseudospore.rs` | Direct filesystem ingest | Delegates to `biomeos nucleus ingest` when available |
+| `emit_pseudospore/` | **DONE** — domain-agnostic via `--domain-profile` | Domain-agnostic via `domain_profile.toml` |
+| `audit/` | **DONE** — unified `{envelope, validations}` schema | Unified schema with `envelope` + `validations` |
+| `ingest_pseudospore.rs` | Direct filesystem ingest (transitional until biomeOS NC-1.1) | Delegates to `biomeos nucleus ingest` when available |
 
 ---
 

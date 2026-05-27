@@ -129,7 +129,8 @@ All 7 delta springs deploy `proto_nucleate_template.toml` on their assigned gate
 hotSpring and lithoSpore completed the pseudoSpore Ecosystem Evolution (May 27):
 `pseudospore-core` crate extracted, domain-agnostic `litho emit-pseudospore`, unified
 `liveSpore.json` schema, `SPORE_OWNERSHIP_MATRIX.md` published, biomeOS `nucleus ingest`
-scaffolded. The CompChem pseudoSpore is at v1.6.1.
+scaffolded. The CompChem pseudoSpore is at v1.6.1. **lithoSpore NC-1.3 COMPLETE** —
+`ltee-cli` and `litho-core` consume `pseudospore-core`.
 
 **Goal**: Every delta spring produces a pseudoSpore release artifact on sporePrint.
 

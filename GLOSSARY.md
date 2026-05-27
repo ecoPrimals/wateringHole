@@ -925,7 +925,7 @@ the validator assumes the network is hostile.
 | **PrimalBridge** | Product-side JSON-RPC client wrapping capability calls to running primals |
 | **Primal resolution order** | 8-step discovery: env → capability → XDG → abstract → /tmp → registry → Neural API → TCP |
 | **NUCLEUS Gateway** | biomeOS bidirectional spore interface — `biomeos nucleus ingest` absorbs spores into nest_atomic; `biomeos nucleus emit` creates spores from NUCLEUS state |
-| **pseudospore-core** | Shared Rust crate (lithoSpore) for spore envelope primitives — BLAKE3, scope, liveSpore, receipts, tarball. Consumed by litho CLI and biomeOS |
+| **pseudospore-core** | Shared Rust crate (lithoSpore) for spore envelope primitives — `blake3_manifest`, `braid_envelope`, `domain_profile`, `livespore`, `receipts`, `scope`, `tarball`, `validation`. lithoSpore wired (NC-1.3); biomeOS pending NC-1.1 |
 | **pappusCast** | Auto-propagation daemon — dandelion-seed dispersal from workspace to observer surface |
 | **tunnelKeeper** | Rust crate for Cloudflare tunnel health, DNS resolution, config parsing |
 | **darkforest** | Pure Rust security validator — pen test + fuzz + crypto strength (939KB, zero deps) |

@@ -90,7 +90,7 @@ All primals: stability tiers, canonical envelope, primal.announce. cellMembrane 
 | groundSpring | L4 | 1,125 | LTEE B2+B1 COMPLETE |
 | ludoSpring | L4 | 854 | SPDX, composition-only |
 
-- **Interstadial gate**: Pillar 5 met. Tier 2 UNBLOCKED. lithoSpore 6/7 modules Tier 2 LIVE (Pillar 4 EXCEEDED). All 8 springs wiring Tier 2. Songbird VPS relay **OPERATIONAL** (cellMembrane VPS deployed with RustDesk + multi-gate SSH). **coralReef diesel engine excised** (Sprint 9 — coral-ember/glowplug/driver/gpu deleted, pure compiler primal). Transition now requires **shadow run execution**. See `INTERSTADIAL_EXIT_CRITERIA.md` v1.5.
+- **Interstadial gate**: Pillar 5 met. Tier 2 UNBLOCKED. lithoSpore 7/7 modules Tier 2 LIVE (Pillar 4 EXCEEDED). All 8 springs wiring Tier 2. Songbird VPS relay **OPERATIONAL** (cellMembrane VPS deployed with RustDesk + multi-gate SSH). **coralReef diesel engine excised** (Sprint 9 — coral-ember/glowplug/driver/gpu deleted, pure compiler primal). Transition now requires **shadow run execution**. See `INTERSTADIAL_EXIT_CRITERIA.md` v1.5.
 - **plasmidBin genomeBin depot**: 46 cross-architecture binaries, 6 targets, Tier 1 39/39.
 - **guideStone pattern**: absorbed into UniBin as certification organelle (L8).
 

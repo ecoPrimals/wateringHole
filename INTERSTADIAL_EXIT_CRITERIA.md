@@ -99,12 +99,12 @@ dual-auth, deploy graph wiring). 1j (full sovereign DNS) may defer to stadial.
 | 2c | Songbird NAT operational | **cellMembrane VPS OPERATIONAL** — Songbird relay + RustDesk deployed, multi-gate SSH, hardened (fail2ban, droplet-agent purged) | Measure parity vs cloudflared |
 | 2d | NestGate extracellular | GitHub Pages | Content pipeline serving `primals.eco` |
 | 2e | Foundation workloads | **10/10 threads ACTIVE** | Threads 9+10 seeded by ludoSpring/healthSpring |
-| 2f | lithoSpore workload dispatched | **6/7 modules Tier 2 LIVE** | ecoBin ingestion active |
+| 2f | lithoSpore workload dispatched | **7/7 modules Tier 2 LIVE** | ecoBin ingestion active |
 | 2g | DoT baseline | **FIXED** (10/10 success) | Tunnel baseline clarified — not a bug |
 
 **Exit gate**: H2-12 (BearDog TLS shadow) **LIVE** — shadow infrastructure running.
 DoT baseline fixed (10/10 success). Foundation 10/10 threads active. lithoSpore
-Pillar 4 **EXCEEDED** (6/7 Tier 2). Cutover is stadial work — shadow comparison
+Pillar 4 **EXCEEDED** (7/7 Tier 2). Cutover is stadial work — shadow comparison
 data accruing.
 
 **Membrane channels**: Items 2b-2d map to the three membrane channels defined in
@@ -142,7 +142,7 @@ LTEE reproduction status (May 13):
 - **wetSpring**: B7 (Tenaillon 2016) **Tier 2 COMPLETE** — 264 NCBI genomes, guideStone L5
 - **neuralSpring**: B1 (Barrick 2009) STARTED — Python baseline 8/8 PASS
 
-**GATE EXCEEDED** (May 13): lithoSpore **6/7 modules at Tier 2 LIVE**, ecoBin
+**GATE EXCEEDED** (May 13): lithoSpore **7/7 modules at Tier 2 LIVE**, ecoBin
 compliant. `litho-core` shared libraries extracted (`discovery`, `harness`, `stats`).
 BLAKE3 `pure` feature resolved. 14 deep-debt items resolved in CATHEDRAL audit.
 **groundSpring B2+B1 reproductions complete**; wetSpring B7 at Tier 2.
@@ -179,7 +179,7 @@ airSpring L4, neuralSpring L5 (exceeded L4 target), 10/10 foundation threads act
 [~] Pillar 2: H2-2b/3a/3b/3c all in shadow-run state — H2-12 TLS LIVE, DoT FIXED, others pending
 [x] Pillar 2: Foundation 10/10 threads active (Threads 9+10 seeded by ludoSpring V71 + healthSpring V65a)
 [ ] Pillar 3: Thread 1 WCM compositions through provenance trio
-[x] Pillar 4: lithoSpore 6/7 modules Tier 2 LIVE (EXCEEDED Tier 1 target). ecoBin compliant.
+[x] Pillar 4: lithoSpore 7/7 modules Tier 2 LIVE (EXCEEDED Tier 1 target). ecoBin compliant.
 [x] Pillar 4: Real data fetched from Dryad/NCBI — Wiser 2013 + Barrick 2009 in tree
 [x] Pillar 5: 8/8 springs at barraCuda optional=true (exceeded 4+ target)
 [x] Pillar 5: wetSpring 4 open PG gaps (all external — below 5 threshold)
@@ -204,7 +204,7 @@ data that proves parity before cutover.
 | **Songbird NAT + VPS relay** | YES (cellMembrane VPS deployed) | projectNUCLEUS | **OPERATIONAL** — cellMembrane VPS live (Songbird relay + RustDesk), multi-gate SSH, hardened |
 | **BTSP dual-auth** | YES (BearDog authenticator) | projectNUCLEUS | **CODE BUILT** — `jupyterhub_btsp_auth.py` + `deploy_btsp_auth_shadow.sh` shipped. Shadow period pending |
 | **NestGate content serving** | YES (Session 60) | projectNUCLEUS | **UNBLOCKED** — `publish_sporeprint.sh` ready to wire |
-| **lithoSpore Tier 2** | **EXCEEDED** (6/7 modules Tier 2 LIVE) | lithoSpore | **ACTIVE** — ecoBin compliant, `litho-core` extracted, 14 debt items resolved |
+| **lithoSpore Tier 2** | **EXCEEDED** (7/7 modules Tier 2 LIVE) | lithoSpore | **ACTIVE** — ecoBin compliant, `litho-core` extracted, 14 debt items resolved |
 | **DoT baseline** | **FIXED** (10/10 success) | projectNUCLEUS | **RESOLVED** — tunnel baseline clarified (not a bug) |
 | **ABG WCM composition** | PARTIAL (Thread 1 operational) | projectNUCLEUS | **PARTIAL** — needs provenance trio in deploy graph |
 

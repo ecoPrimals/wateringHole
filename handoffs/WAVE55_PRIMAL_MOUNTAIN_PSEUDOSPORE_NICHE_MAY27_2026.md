@@ -79,20 +79,22 @@ subcommands work against live Nest Atomic, exp115 Phases 4-5 light up.
 
 ## lithoSpore — Wire pseudospore-core (NC-1.3)
 
-**`pseudospore-core` exists but has zero consumers.** Wire it:
+**Status: COMPLETE (May 27, 2026)**
 
-1. Add `pseudospore-core` as dependency of `ltee-cli` (`Cargo.toml`)
-2. Replace `litho-core::pseudospore` calls with `pseudospore-core` equivalents
-3. Deprecate `litho-core/src/pseudospore.rs` (parallel implementation)
-4. Verify `litho emit-pseudospore` still produces identical output
-5. Verify `litho audit` still validates correctly
+**`pseudospore-core` is wired.** Consumers: `ltee-cli`, `litho-core`.
+
+1. ~~Add `pseudospore-core` as dependency of `ltee-cli` (`Cargo.toml`)~~ ✓
+2. ~~Replace `litho-core::pseudospore` calls with `pseudospore-core` equivalents~~ ✓
+3. ~~Deprecate `litho-core/src/pseudospore.rs` (parallel implementation)~~ ✓
+4. ~~Verify `litho emit-pseudospore` still produces identical output~~ ✓
+5. ~~Verify `litho audit` still validates correctly~~ ✓
 
 This unblocks biomeOS from depending on the same crate for its gateway handler,
 giving us one canonical envelope implementation across the ecosystem.
 
-**Doc drift note:** `SPORE_OWNERSHIP_MATRIX.md` lists `receipts.rs` and
-`braid_envelope.rs` as pseudospore-core modules, but the crate currently has
-6 modules without those. Either add them or correct the matrix.
+**Doc drift note (RESOLVED):** `SPORE_OWNERSHIP_MATRIX.md` lists `receipts.rs` and
+`braid_envelope.rs` as pseudospore-core modules — both modules now exist in
+`pseudospore-core`.
 
 ---
 
@@ -177,7 +179,7 @@ These primals are not involved in the spore ingest signal. All are CLEAN.
 
 | Phase | When | What |
 |-------|------|------|
-| **Now** | Wave 55 | biomeOS lands `nucleus ingest/emit`; lithoSpore wires `pseudospore-core` |
+| **Now** | Wave 55 | biomeOS lands `nucleus ingest/emit`; lithoSpore wires `pseudospore-core` (**COMPLETE**) |
 | **Next** | Wave 56 | hotSpring v1.6.1 first NUCLEUS ingest (column U); southGate stabilization |
 | **Then** | Wave 57 | groundSpring second ingest (column U × 2); live `s_covalent_mesh` across 3+ gates |
 | **Gate** | Wave 58+ | Stadial entry evaluation: spore universality + mesh topology + spring depth |
