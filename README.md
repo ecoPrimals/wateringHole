@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 27, 2026 (Wave 56: Deep Debt W56 complete — biomeOS v3.80, archive hygiene, 19 active handoffs + 262 archived. Handoffs for Waves 53–56 distributed.)
+**Last Updated**: May 27, 2026 (Wave 57: Deep Debt W57 complete — biomeOS v3.82, nucleus_ingest module split, bearDog casing fix, LogConfig XDG, flate2 pure Rust. 19 active handoffs + 262 archived.)
 
 ---
 
