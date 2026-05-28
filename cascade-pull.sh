@@ -403,8 +403,15 @@ process_repo() {
     local remote
     remote=$(resolve_pull_remote "$repo_dir" "$SOURCE")
 
+    local branch
+    branch=$(cd "$repo_dir" && git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+
     local pull_output pull_ok=true
-    pull_output=$(cd "$repo_dir" && git pull --ff-only "$remote" 2>&1) || pull_ok=false
+    if [[ "$remote" != "origin" ]]; then
+        pull_output=$(cd "$repo_dir" && git pull --ff-only "$remote" "$branch" 2>&1) || pull_ok=false
+    else
+        pull_output=$(cd "$repo_dir" && git pull --ff-only "$remote" 2>&1) || pull_ok=false
+    fi
 
     if $pull_ok; then
         local new_head
