@@ -25,7 +25,7 @@ gen4: Gardens        — user-facing products (making it USEFUL)
 |-------|-----------------|------|----------|
 | **Primal** (gen2) | `primals/` | Self-contained Rust binary providing domain primitives via IPC | BearDog, Songbird, barraCuda, biomeOS |
 | **Spring** (gen3) | `springs/` | Validation environment: composes primals, validates science, surfaces gaps | ludoSpring, hotSpring, wetSpring, primalSpring |
-| **Garden** (gen4) | `gardens/` | User-facing product: composes primals into tools people use | esotericWebb, helixVision |
+| **Garden** (gen4) | `gardens/` | User-facing product: composes primals into tools people use | esotericWebb, blueFish, helixVision, initioChem |
 | **fossilRecord** | `ecoPrimals/fossilRecord` | Canonical archive: superseded handoffs, closed audits, evolution history | 3,831+ documents from 10 sources |
 
 ---

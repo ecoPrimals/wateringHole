@@ -159,7 +159,8 @@ validate, and turn them into products.
 Gardens live in the `gardens/` directory. They own user experience, graceful
 degradation when optional primals are absent, and product-level deploy graphs.
 
-Examples: esotericWebb (CRPG engine), helixVision (genomics platform, planned).
+Examples: esotericWebb (CRPG engine), blueFish (PFAS analytical chemistry),
+helixVision (genomics platform), initioChem (CompChem FEL explorer).
 
 See `PRIMAL_SPRING_GARDEN_TAXONOMY.md` for the full taxonomy and co-evolution
 contract between primals, springs, and gardens.
@@ -810,7 +811,8 @@ primals into tools people use — games, science platforms, creative tools. They
 follow the BYOB model, consuming binaries via IPC and defining their composition
 through deploy graphs + niche YAML.
 
-Examples: esotericWebb (CRPG engine), helixVision (genomics platform, planned).
+Examples: esotericWebb (CRPG engine), blueFish (PFAS analytical chemistry),
+helixVision (genomics platform), initioChem (CompChem FEL explorer).
 
 ### PrimalBridge
 
@@ -921,7 +923,7 @@ the validator assumes the network is hostile.
 | **BYOB** | Bring Your Own Binaries — gen4 products consume pre-built primal binaries, never source |
 | **Niche YAML** | YAML metadata declaring a composition's organisms, interactions, and customization options |
 | **Primal launch profile** | TOML config for how a product launcher invokes each primal binary |
-| **sporeGarden product** | A gen4 tool composing primals for end users (e.g., esotericWebb, helixVision) |
+| **sporeGarden product** | A gen4 tool composing primals for end users (e.g., esotericWebb, blueFish, helixVision, initioChem) |
 | **PrimalBridge** | Product-side JSON-RPC client wrapping capability calls to running primals |
 | **Primal resolution order** | 8-step discovery: env → capability → XDG → abstract → /tmp → registry → Neural API → TCP |
 | **NUCLEUS Gateway** | biomeOS bidirectional spore interface — `biomeos nucleus ingest` absorbs spores into nest_atomic; `biomeos nucleus emit` creates spores from NUCLEUS state |

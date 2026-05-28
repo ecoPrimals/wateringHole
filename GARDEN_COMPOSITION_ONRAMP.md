@@ -361,8 +361,9 @@ Your garden inherits: GPU math is correct when called via capability
 | Garden | Status | Deploy Graphs | Primals Consumed |
 |--------|--------|---------------|-----------------|
 | **esotericWebb** V7 | Active | 4 fragment graphs + full | 7 domains, all degrading |
-| **blueFish** | Pending transfer | TBD | TBD |
-| **helixVision** | Planned | TBD | TBD |
+| **blueFish** | Seed (v0.1.0) | 6 tiered graphs (tower→full) | 10 domains planned, neutron-heavy |
+| **helixVision** | Seed (v0.1.0) | 5 tiered graphs (tower→full) | 11 domains planned, electron-heavy |
+| **initioChem** | Seed (v0.1.0) | 6 tiered graphs (tower→full) | 8 domains planned, proton-heavy |
 
 See `esotericWebb/` for the canonical gen4 product pattern:
 - `config/primal_launch_profiles.toml`
