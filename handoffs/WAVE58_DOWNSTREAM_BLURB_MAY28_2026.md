@@ -18,7 +18,7 @@
 | Envelope validation + firewall + credential tests | Acknowledged |
 
 **Your next actions (unchanged):**
-1. **P0: Deploy biomeOS v3.81 to VPS** — the single remaining blocker
+1. **P0: Deploy biomeOS v3.84 to VPS** — the single remaining blocker
 2. **Test `spring-overlay` with hotSpring** — first emission candidate
 3. NS registrar cutover (external, not code-blocked)
 4. Forgejo releases (config, not code-blocked)
@@ -42,7 +42,7 @@
 to `send_jsonrpc_newline()` is correct.
 
 **NC-1 status correction:** Please update your local tracking from
-**WIRED → COMPLETE**. biomeOS v3.81 shipped `biomeos-pseudospore` with full
+**WIRED → COMPLETE**. biomeOS v3.84 shipped `biomeos-pseudospore` with full
 envelope validation + emit materialization (May 27, 2026).
 
 **No blocking actions.** Deploy tooling is aligned.
@@ -56,7 +56,7 @@ envelope validation + emit materialization (May 27, 2026).
 | Question | Answer |
 |----------|--------|
 | `health.liveness` canonical? | **YES** — all 13 primals, Cert Layer 2 |
-| `FAMILY_ID` discovery? | biomeOS `family.id` method — verify on v3.81 |
+| `FAMILY_ID` discovery? | biomeOS `family.id` method — verify on v3.84 |
 
 FN-5 Rust elevation Phase B remains unblocked.
 
@@ -66,9 +66,9 @@ FN-5 Rust elevation Phase B remains unblocked.
 
 See **WAVE58_SPRINGS_DELTA_BLURB** for per-spring priorities.
 
-**Summary:** All infrastructure is ready. Awaiting biomeOS v3.81 VPS deploy
+**Summary:** All infrastructure is ready. Awaiting biomeOS v3.84 VPS deploy
 to begin spring emissions.
 
 ---
 
-*Wave 58. All downstream absorbed. One action remaining: deploy v3.81.*
+*Wave 58. All downstream absorbed. One action remaining: deploy v3.84.*

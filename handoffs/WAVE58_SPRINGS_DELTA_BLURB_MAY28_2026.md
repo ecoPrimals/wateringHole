@@ -6,13 +6,13 @@
 
 ---
 
-## Ecosystem Ready. Awaiting v3.81 Deploy.
+## Ecosystem Ready. Awaiting v3.84 Deploy.
 
 cellMembrane: 95.8% coverage, typed errors, VPS standard live.
 projectNUCLEUS: 166 tests, async-correct, wire-native discovery.
 primalSpring: 797 tests, zero debt, env vars centralized across 8 primals.
 
-**The only blocker for spring emissions is biomeOS v3.81 on VPS.**
+**The only blocker for spring emissions is biomeOS v3.84 on VPS.**
 
 ---
 
@@ -38,7 +38,7 @@ All 6 spring cells: `vps_standard = true`, `spawn = false`.
 
 | Spring | Gate | Priority | Status |
 |--------|------|----------|--------|
-| **hotSpring** | biomeGate (Nest Atomic) | **P0 — first emitter** | GATED on v3.81 deploy |
+| **hotSpring** | biomeGate (Nest Atomic) | **P0 — first emitter** | GATED on v3.84 deploy |
 | **groundSpring** | eastGate (Full NUCLEUS) | **P1 — second emitter** | GATED on first pass |
 | wetSpring | southGate (Node Atomic) | P2 | GATED on southGate 13/13 |
 | neuralSpring | southGate (Node Atomic) | P2 | GATED on southGate 13/13 |
@@ -62,7 +62,7 @@ All 6 spring cells: `vps_standard = true`, `spawn = false`.
 ## Timeline
 
 ```
-NOW    → biomeOS v3.81 VPS deploy (cellMembrane)
+NOW    → biomeOS v3.84 VPS deploy (cellMembrane)
 THEN   → hotSpring column U (first emission)
 THEN   → groundSpring column U (NC-5 universality)
 THEN   → lithoSpore postPrimordial (pipeline proven)

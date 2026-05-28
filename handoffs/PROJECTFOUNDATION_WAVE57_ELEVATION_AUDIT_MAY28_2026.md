@@ -2,7 +2,7 @@
 
 **From:** projectFOUNDATION (sporeGarden/gardens)
 **To:** primalSpring coordination (eastGate)
-**Context:** Wave 57, primalSpring v0.9.30, biomeOS v3.81/v3.82, NC-1 COMPLETE (code)
+**Context:** Wave 57, primalSpring v0.9.30, biomeOS v3.84/v3.82, NC-1 COMPLETE (code)
 **Date:** 2026-05-28
 **Gate:** irongate
 
@@ -94,8 +94,8 @@ compliant). Bash pipeline remains canonical for production until Phase C cutover
 |----------|--------|--------|
 | `health.liveness` canonical? | YES — all nodes | WAVE57_DOWNSTREAM_BLURB |
 | UDS-first VPS standard? | YES — `transport = "uds_only"` | DEPLOYMENT_VALIDATION_STANDARD |
-| `FAMILY_ID` via JSON-RPC? | Pending verification on live biomeOS v3.81 | Wave 57 answers |
-| NC-1 status? | Code COMPLETE — blocked on VPS deploy v3.81+ | Wave 57 convergence |
+| `FAMILY_ID` via JSON-RPC? | Pending verification on live biomeOS v3.84 | Wave 57 answers |
+| NC-1 status? | Code COMPLETE — blocked on VPS deploy v3.84+ | Wave 57 convergence |
 
 ---
 

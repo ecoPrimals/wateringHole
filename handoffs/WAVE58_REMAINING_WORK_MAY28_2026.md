@@ -35,7 +35,7 @@ all 13 primals**.
 | bearDog: `env_keys.rs` (290 constants), orphan purge (21 files) | bearDog | 117b |
 | songbird: `songbird-process-env` full adoption, 146 `#[expect` | songbird | 58 |
 | squirrel: 316 env constants, self-identity eliminated, 5,417L purge | squirrel | 58 |
-| primalSpring local debt: zero | primalSpring | 57 |
+| primalSpring local debt: zero `#[allow]` → `#[expect]`, dispatch telemetry persistence | primalSpring | 58b |
 | Port SSOT reconciliation | cellMembrane + primalSpring | 56 |
 | Wire-native newline JSON-RPC discovery | projectNUCLEUS | 58 |
 

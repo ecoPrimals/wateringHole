@@ -36,7 +36,7 @@ No action needed from these 8 teams — changes are merged.
 ## Remaining Per-Primal Work
 
 ### biomeOS — **P0 CRITICAL PATH**
-- NC-1 COMPLETE (code). **Deploy v3.81 to VPS** — unblocks all spring emissions.
+- NC-1 COMPLETE (code). **Deploy v3.84 to VPS** — unblocks all spring emissions.
 
 ### bearDog — Tier 2 (team-owned)
 - ~550 env sites / 130 files. Enforce `zero_hardcoding.rs` pattern.
@@ -61,14 +61,14 @@ No action needed from these 8 teams — changes are merged.
 ## Niche Climate
 
 ```
-NC-1  postPrimordial Spore Gateway    COMPLETE     Code done. Deploy v3.81.
+NC-1  postPrimordial Spore Gateway    COMPLETE     Code done. Deploy v3.84.
 NC-2  Multi-Gate NUCLEUS Mesh          IN PROGRESS  southGate 7/13 → 13/13
 NC-3  cellMembrane Sovereignty         CONSUMED     95.8% coverage, typed errors
 NC-4  Spring NUCLEUS Depth             ADVANCING    166 tests, wire-native discovery
 NC-5  lithoSpore postPrimordial        UNBLOCKED    Waiting on 2 spring emissions
 ```
 
-**Critical path**: v3.81 on VPS → hotSpring column U → groundSpring → NC-5 → stadial.
+**Critical path**: v3.84 on VPS → hotSpring column U → groundSpring → NC-5 → stadial.
 
 ---
 
