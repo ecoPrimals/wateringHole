@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 28, 2026 (Wave 58: Env Var Centralization — biomeOS v3.83, 90+ raw env::var literals centralized to env_config::vars across 37 files, 15 new constants, 14 sovereign test files #[allow]→#[expect]. 38 active handoffs + 306 archived.)
+**Last Updated**: May 28, 2026 (Wave 58b: Deep Debt — biomeOS v3.84, 22 more env vars wired, connection.rs 798→376L + suggestions/mod.rs 772→22L test extractions, zero >800L production files. 39 active handoffs + 306 archived.)
 
 ---
 

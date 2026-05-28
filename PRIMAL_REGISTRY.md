@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v3.83  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 8,053 tests, 26 workspace crates, 43+ deploy graphs, 19 signal graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. env_config::vars SSOT: 90+ raw env::var literals centralized to constants across 37 production files, 15 new constants, 14 sovereign test files migrated #[allow]→#[expect]. Neural API Layer 4: persistent routing weights (redb), NUCLEUS spore gateway (ingest/emit), composition intelligence, membrane composition live execution
+**Version**: v3.84  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 8,053 tests, 26 workspace crates, 43+ deploy graphs, 19 signal graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. env_config::vars SSOT (~90% wired), zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -238,7 +238,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Participates In**: Coordinates all composed systems (RootPulse, Tower Atomic, NUCLEUS, federation). Provenance trio (rhizoCrypt + LoamSpine + sweetGrass) wired into Neural API for `dag.*`, `commit.*`, `provenance.*` routing. NUCLEUS Gateway for spore ingestion/emission (see `SPORE_OWNERSHIP_MATRIX.md`).
 
-**NUCLEUS Gateway** (shipped v3.77–v3.83): biomeOS provides `biomeos nucleus ingest` and `biomeos nucleus emit` subcommands for bidirectional spore transmission via `nest_ingest_spore.toml` and `nest_emit_spore.toml` signal graphs. Ingests pseudoSpores/lithoSpores into nest_atomic storage via NestGate + provenance trio. Emits new spores from NUCLEUS composition state with full pseudoSpore 2.0 materialization (polling + dir unpack). NC-1.4 resolved: `biomeos-pseudospore` crate provides canonical validation (compatible with `litho_core::pseudospore`). NC-1.emit complete: full materialization pipeline. See `infra/wateringHole/SPORE_OWNERSHIP_MATRIX.md` for the three-way ownership split.
+**NUCLEUS Gateway** (shipped v3.77–v3.84): biomeOS provides `biomeos nucleus ingest` and `biomeos nucleus emit` subcommands for bidirectional spore transmission via `nest_ingest_spore.toml` and `nest_emit_spore.toml` signal graphs. Ingests pseudoSpores/lithoSpores into nest_atomic storage via NestGate + provenance trio. Emits new spores from NUCLEUS composition state with full pseudoSpore 2.0 materialization (polling + dir unpack). NC-1.4 resolved: `biomeos-pseudospore` crate provides canonical validation (compatible with `litho_core::pseudospore`). NC-1.emit complete: full materialization pipeline. See `infra/wateringHole/SPORE_OWNERSHIP_MATRIX.md` for the three-way ownership split.
 
 ---
 
