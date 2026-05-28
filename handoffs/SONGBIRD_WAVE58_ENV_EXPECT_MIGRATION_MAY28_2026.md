@@ -82,6 +82,21 @@ migrated to `songbird_process_env::var()` / `songbird_process_env::var_os()`.
 
 ---
 
+## Additional: Coverage Expansion (+67 tests)
+
+Following the env/expect migration, a deep debt sweep confirmed zero files >800L,
+zero unsafe, zero hardcoding, zero production mocks, and all-pure-Rust deps. Then
+**67 new tests** were added to 4 previously-untested pure-logic modules:
+
+- `songbird-config/src/canonical/constants/env_helpers.rs` (+23): boolean/port/parse edge cases
+- `songbird-config/src/canonical/constants/logging_cors_env.rs` (+11): log level chains, CORS policy
+- `songbird-orchestrator/src/server/compute_api/compute_types.rs` (+18): job status serde, API errors
+- `songbird-discovery/src/production/real_service_discovery/conversions.rs` (+15): type conversions
+
+**Total test count**: 8,091 → **8,158** (+67)
+
+---
+
 ## Files Changed
 
-61 files, +216 insertions, -162 deletions across 8 crates.
+65 files (wave58) + 4 files (coverage), +994 insertions, -169 deletions across 10 crates.
