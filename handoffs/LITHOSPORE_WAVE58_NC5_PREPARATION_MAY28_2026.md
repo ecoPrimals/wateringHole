@@ -28,13 +28,13 @@ while waiting on v3.81 VPS deployment and hotSpring column U.
 ## Metrics
 
 ```
-204 tests, 0 failures
+191 tests, 0 failures
 0 clippy warnings
 0 unsafe code
 All files ≤ 800 LOC
 7/7 Tier 0, 7/7 Tier 1, 7/7 Tier 2 PASS
 75/75 science checks
-litho-core: 13 modules (+ env_vars)
+litho-core: 11 modules (retired pseudospore.rs + graph_checks.rs dead code)
 pseudospore-core: 10 modules
 cargo deny: advisories ok, bans ok, licenses ok, sources ok
 ```
