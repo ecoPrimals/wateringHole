@@ -1,16 +1,24 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: CC-BY-SA-4.0
 #
-# cascade-pull.sh — Concurrent ecosystem-wide git pull orchestrated by wateringHole
+# cascade-pull.sh — WaterFall: concurrent ecosystem-wide git pull orchestrated by wateringHole
+#
+# WaterFall pattern (K-Derm model): Forgejo in the periplasm mediates
+# between gate cytoplasms. Evolution cascades down; gates push back up.
+# See WATERFALL_PATTERN.md for the full pattern spec.
 #
 # Reads ecosystem_manifest.toml and freshness.toml to determine which
 # repos need updating, then concurrently pulls them with per-repo
 # failure isolation.
 #
 # Usage:
-#   cascade-pull.sh                        # Pull all repos
+#   cascade-pull.sh                        # Pull all repos (from default_source)
 #   cascade-pull.sh --gate eastGate        # Pull only repos for this gate
 #   cascade-pull.sh --category primals     # Pull only primals
+#   cascade-pull.sh --source forgejo       # Pull from Forgejo (periplasm)
+#   cascade-pull.sh --source github        # Pull from GitHub (extracellular)
+#   cascade-pull.sh --source auto          # Try forgejo, fall back to origin
+#   cascade-pull.sh --ensure-remotes       # Add forgejo remotes from manifest
 #   cascade-pull.sh --check                # Report drift without pulling
 #   cascade-pull.sh --dry-run              # Show what would be pulled
 #   cascade-pull.sh --publish-freshness    # Update freshness.toml from live state
@@ -20,8 +28,9 @@
 #   - bash 4+, git, python3 (ships with all gates)
 #
 # Environment:
-#   ECOPRIMALS_ROOT   Override workspace root (default: auto-detect)
-#   CASCADE_PARALLEL  Override parallelism (default: 8)
+#   ECOPRIMALS_ROOT        Override workspace root (default: auto-detect)
+#   CASCADE_PARALLEL       Override parallelism (default: 8)
+#   CASCADE_SYNC_SOURCE    Override default pull source (github|forgejo|auto)
 
 set -euo pipefail
 
@@ -47,8 +56,10 @@ CATEGORY=""
 CHECK_ONLY=false
 DRY_RUN=false
 PUBLISH_FRESHNESS=false
+ENSURE_REMOTES=false
 PARALLEL="${CASCADE_PARALLEL:-8}"
 SELF_UPDATE=true
+SOURCE="${CASCADE_SYNC_SOURCE:-}"
 
 usage() {
     echo "Usage: $0 [OPTIONS]"
@@ -56,6 +67,8 @@ usage() {
     echo "Options:"
     echo "  --gate NAME          Pull only repos assigned to this gate"
     echo "  --category CAT       Filter by category (primal, spring, garden, infra)"
+    echo "  --source SOURCE      Pull source: github|forgejo|auto (default: manifest)"
+    echo "  --ensure-remotes     Add forgejo remotes from manifest (no pull)"
     echo "  --check              Report drift without pulling"
     echo "  --dry-run            Show what would be pulled"
     echo "  --publish-freshness  Update freshness.toml from current HEADs"
@@ -68,6 +81,8 @@ while [[ $# -gt 0 ]]; do
     case "$1" in
         --gate)       GATE="$2"; shift 2 ;;
         --category)   CATEGORY="$2"; shift 2 ;;
+        --source)     SOURCE="$2"; shift 2 ;;
+        --ensure-remotes) ENSURE_REMOTES=true; shift ;;
         --check)      CHECK_ONLY=true; shift ;;
         --dry-run)    DRY_RUN=true; shift ;;
         --publish-freshness) PUBLISH_FRESHNESS=true; shift ;;
@@ -83,6 +98,8 @@ if [[ ! -f "$MANIFEST" ]]; then
     echo "ERROR: ecosystem_manifest.toml not found at $MANIFEST"
     exit 1
 fi
+
+# Sync source and Forgejo SSH are resolved after _py_toml_import is defined below.
 
 # ─── TOML Parsing via Python ────────────────────────────────────────────────
 
@@ -105,6 +122,32 @@ except ModuleNotFoundError:
             return toml.load(path)
 PYIMPORT
 }
+
+parse_sync_config() {
+    python3 -c "
+$(_py_toml_import)
+data = load_toml('$MANIFEST')
+sync = data.get('sync', {})
+print(sync.get('forgejo_ssh', 'ssh://git@git.primals.eco:2222'))
+print(sync.get('default_source', 'github'))
+print(sync.get('default_branch', 'main'))
+"
+}
+
+# Resolve sync source: CLI --source > env CASCADE_SYNC_SOURCE > manifest [sync].default_source
+if [[ -z "$SOURCE" ]]; then
+    SOURCE=$(python3 -c "
+$(_py_toml_import)
+data = load_toml('$MANIFEST')
+print(data.get('sync', {}).get('default_source', 'github'))
+" 2>/dev/null || echo "github")
+fi
+
+FORGEJO_SSH=$(python3 -c "
+$(_py_toml_import)
+data = load_toml('$MANIFEST')
+print(data.get('sync', {}).get('forgejo_ssh', 'ssh://git@git.primals.eco:2222'))
+" 2>/dev/null || echo "ssh://git@git.primals.eco:2222")
 
 parse_repos() {
     local manifest_arg="$MANIFEST"
@@ -133,7 +176,8 @@ for name in sorted(repos):
     lp = info.get('local_path', '')
     mem = info.get('membrane', 'trailing-mirror')
     ss = info.get('sync_source', 'github')
-    print(f'{name}\t{lp}\t{mem}\t{ss}')
+    fj = info.get('forgejo_repo', '')
+    print(f'{name}\t{lp}\t{mem}\t{ss}\t{fj}')
 "
 }
 
@@ -151,6 +195,55 @@ for name, head in data.get('heads', {}).items():
     print(f'{name}\t{head}')
 "
 }
+
+# ─── Ensure Remotes (add forgejo remote to all repos) ────────────────────────
+
+if $ENSURE_REMOTES; then
+    echo "ensure-remotes — adding forgejo remotes from manifest"
+    echo "  Forgejo SSH: $FORGEJO_SSH"
+    echo ""
+
+    added=0; skipped=0; missing=0
+
+    while IFS=$'\t' read -r name local_path membrane sync_source forgejo_repo; do
+        repo_dir="$ECO_ROOT/$local_path"
+
+        if [[ ! -d "$repo_dir/.git" ]]; then
+            printf "  [%-20s] MISSING  %s\n" "$name" "$repo_dir"
+            missing=$((missing + 1))
+            continue
+        fi
+
+        if [[ -z "$forgejo_repo" ]]; then
+            printf "  [%-20s] NO-FORGEJO-REPO  (skipping)\n" "$name"
+            skipped=$((skipped + 1))
+            continue
+        fi
+
+        # Build forgejo URL from SSH base + repo path
+        forgejo_url="${FORGEJO_SSH}/${forgejo_repo}.git"
+
+        # Check if forgejo remote already exists
+        existing_url=$(cd "$repo_dir" && git remote get-url forgejo 2>/dev/null || echo "")
+
+        if [[ "$existing_url" == "$forgejo_url" ]]; then
+            printf "  [%-20s] EXISTS   forgejo -> %s\n" "$name" "$forgejo_repo"
+            skipped=$((skipped + 1))
+        elif [[ -n "$existing_url" ]]; then
+            (cd "$repo_dir" && git remote set-url forgejo "$forgejo_url" 2>/dev/null)
+            printf "  [%-20s] UPDATED  forgejo -> %s\n" "$name" "$forgejo_repo"
+            added=$((added + 1))
+        else
+            (cd "$repo_dir" && git remote add forgejo "$forgejo_url" 2>/dev/null)
+            printf "  [%-20s] ADDED    forgejo -> %s\n" "$name" "$forgejo_repo"
+            added=$((added + 1))
+        fi
+    done < <(parse_repos)
+
+    echo ""
+    echo "Summary: $added added/updated, $skipped already configured, $missing not on disk"
+    exit 0
+fi
 
 # ─── Publish Freshness ───────────────────────────────────────────────────────
 
@@ -192,7 +285,7 @@ HEADER
         echo ""
         echo "[heads]"
 
-        GATE="" CATEGORY="" parse_repos | while IFS=$'\t' read -r name local_path _membrane _ss; do
+        GATE="" CATEGORY="" parse_repos | while IFS=$'\t' read -r name local_path _membrane _ss _fj; do
             repo_dir="$ECO_ROOT/$local_path"
             if [[ -d "$repo_dir/.git" ]]; then
                 head=$(cd "$repo_dir" && git rev-parse HEAD 2>/dev/null || echo "unknown")
@@ -234,6 +327,7 @@ fi
 
 echo "cascade-pull — $(date -Iseconds)"
 echo "  Root:     $ECO_ROOT"
+echo "  Source:   $SOURCE"
 [[ -n "$GATE" ]] && echo "  Gate:     $GATE"
 [[ -n "$CATEGORY" ]] && echo "  Category: $CATEGORY"
 $CHECK_ONLY && echo "  Mode:     CHECK (no pulls)"
@@ -242,8 +336,34 @@ echo ""
 
 # ─── Worker function (called in subshells) ───────────────────────────────────
 
+resolve_pull_remote() {
+    local repo_dir="$1" source="$2"
+    case "$source" in
+        github)
+            echo "origin"
+            ;;
+        forgejo)
+            if (cd "$repo_dir" && git remote get-url forgejo >/dev/null 2>&1); then
+                echo "forgejo"
+            else
+                echo "origin"
+            fi
+            ;;
+        auto)
+            if (cd "$repo_dir" && git remote get-url forgejo >/dev/null 2>&1); then
+                echo "forgejo"
+            else
+                echo "origin"
+            fi
+            ;;
+        *)
+            echo "origin"
+            ;;
+    esac
+}
+
 process_repo() {
-    local name="$1" local_path="$2" membrane="$3" sync_source="$4"
+    local name="$1" local_path="$2" membrane="$3" sync_source="$4" forgejo_repo="${5:-}"
     local repo_dir="$ECO_ROOT/$local_path"
     local result_file="$TMPDIR_RESULTS/$name"
 
@@ -273,13 +393,18 @@ process_repo() {
     fi
 
     if $DRY_RUN; then
-        printf "  [%-20s] WOULD-PULL  %s\n" "$name" "$repo_dir"
+        local remote
+        remote=$(resolve_pull_remote "$repo_dir" "$SOURCE")
+        printf "  [%-20s] WOULD-PULL  %s (remote: %s)\n" "$name" "$repo_dir" "$remote"
         echo "DRYRUN" > "$result_file"
         return
     fi
 
+    local remote
+    remote=$(resolve_pull_remote "$repo_dir" "$SOURCE")
+
     local pull_output pull_ok=true
-    pull_output=$(cd "$repo_dir" && git pull --ff-only 2>&1) || pull_ok=false
+    pull_output=$(cd "$repo_dir" && git pull --ff-only "$remote" 2>&1) || pull_ok=false
 
     if $pull_ok; then
         local new_head
@@ -302,14 +427,14 @@ process_repo() {
     fi
 }
 
-export -f process_repo
-export ECO_ROOT TMPDIR_RESULTS CHECK_ONLY DRY_RUN FRESHNESS FRESHNESS_CACHE
+export -f process_repo resolve_pull_remote
+export ECO_ROOT TMPDIR_RESULTS CHECK_ONLY DRY_RUN FRESHNESS FRESHNESS_CACHE SOURCE
 
 # ─── Run in parallel using background jobs ───────────────────────────────────
 
 active_jobs=0
-while IFS=$'\t' read -r name local_path membrane sync_source; do
-    process_repo "$name" "$local_path" "$membrane" "$sync_source" &
+while IFS=$'\t' read -r name local_path membrane sync_source forgejo_repo; do
+    process_repo "$name" "$local_path" "$membrane" "$sync_source" "$forgejo_repo" &
     active_jobs=$((active_jobs + 1))
     if [[ $active_jobs -ge $PARALLEL ]]; then
         wait -n 2>/dev/null || true

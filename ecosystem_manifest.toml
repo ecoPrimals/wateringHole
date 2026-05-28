@@ -14,13 +14,34 @@
 #   category       — "primal" | "spring" | "garden" | "infra" | "root"
 #   description    — Short human description
 #   github_repo    — Full GitHub repo path (org/name)
+#   forgejo_repo   — Forgejo repo path (org/name on git.primals.eco)
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "1.0.0"
+version = "2.0.0"
 generated = "2026-05-28"
-wave = 59
+wave = 60
 total_repos = 36
+
+# ═══════════════════════════════════════════════════════════════════
+# WaterFall Sync Configuration
+# ═══════════════════════════════════════════════════════════════════
+# K-Derm model: Forgejo sits in the periplasm between gate plasma
+# membranes and the extracellular GitHub outer mirror. WaterFall
+# cascades evolution down from Forgejo to gate cytoplasms; gates
+# push evolution back up through the periplasm.
+#
+# Pattern lineage: WaterFall parallels RootPulse (whitePaper) —
+# both are firstLast biomeOS coordination patterns. RootPulse
+# coordinates primals for single-repo VCS; WaterFall coordinates
+# membranes for multi-repo ecosystem sync.
+
+[sync]
+forgejo_base_url = "https://git.primals.eco"
+forgejo_ssh = "ssh://git@git.primals.eco:2222"
+forgejo_host = "vps"
+default_source = "github"
+default_branch = "main"
 
 # ═══════════════════════════════════════════════════════════════════
 # Root
@@ -34,6 +55,7 @@ sync_priority = "standard"
 category = "root"
 description = "Workspace root + NestGate storage/content crates"
 github_repo = "ecoPrimals/nestGate"
+forgejo_repo = "ecoPrimals/nestGate"
 
 # ═══════════════════════════════════════════════════════════════════
 # Primals (ecoPrimals org)
@@ -47,6 +69,7 @@ sync_priority = "high"
 category = "primal"
 description = "Security, crypto, BTSP identity"
 github_repo = "ecoPrimals/bearDog"
+forgejo_repo = "ecoPrimals/bearDog"
 
 [repos.songbird]
 org = "ecoPrimals"
@@ -56,6 +79,7 @@ sync_priority = "high"
 category = "primal"
 description = "Discovery, routing, federation"
 github_repo = "ecoPrimals/songBird"
+forgejo_repo = "ecoPrimals/songBird"
 
 [repos.toadStool]
 org = "ecoPrimals"
@@ -65,6 +89,7 @@ sync_priority = "high"
 category = "primal"
 description = "Compute dispatch"
 github_repo = "ecoPrimals/toadStool"
+forgejo_repo = "ecoPrimals/toadStool"
 
 [repos.barraCuda]
 org = "ecoPrimals"
@@ -74,6 +99,7 @@ sync_priority = "standard"
 category = "primal"
 description = "GPU compute dispatch"
 github_repo = "ecoPrimals/barraCuda"
+forgejo_repo = "ecoPrimals/barraCuda"
 
 [repos.coralReef]
 org = "ecoPrimals"
@@ -83,6 +109,7 @@ sync_priority = "standard"
 category = "primal"
 description = "Distributed compute mesh"
 github_repo = "ecoPrimals/coralReef"
+forgejo_repo = "ecoPrimals/coralReef"
 
 [repos.rhizoCrypt]
 org = "ecoPrimals"
@@ -92,6 +119,7 @@ sync_priority = "standard"
 category = "primal"
 description = "Provenance DAG"
 github_repo = "ecoPrimals/rhizoCrypt"
+forgejo_repo = "ecoPrimals/rhizoCrypt"
 
 [repos.loamSpine]
 org = "ecoPrimals"
@@ -101,6 +129,7 @@ sync_priority = "standard"
 category = "primal"
 description = "Provenance spine"
 github_repo = "ecoPrimals/loamSpine"
+forgejo_repo = "ecoPrimals/loamSpine"
 
 [repos.sweetGrass]
 org = "ecoPrimals"
@@ -110,6 +139,7 @@ sync_priority = "standard"
 category = "primal"
 description = "Provenance braid"
 github_repo = "ecoPrimals/sweetGrass"
+forgejo_repo = "ecoPrimals/sweetGrass"
 
 [repos.biomeOS]
 org = "ecoPrimals"
@@ -119,6 +149,7 @@ sync_priority = "high"
 category = "primal"
 description = "Orchestration layer"
 github_repo = "ecoPrimals/biomeOS"
+forgejo_repo = "ecoPrimals/biomeOS"
 
 [repos.squirrel]
 org = "ecoPrimals"
@@ -128,6 +159,7 @@ sync_priority = "high"
 category = "primal"
 description = "AI/MCP orchestration"
 github_repo = "ecoPrimals/squirrel"
+forgejo_repo = "ecoPrimals/squirrel"
 
 [repos.petalTongue]
 org = "ecoPrimals"
@@ -137,6 +169,7 @@ sync_priority = "standard"
 category = "primal"
 description = "Storytelling/UI bridge"
 github_repo = "ecoPrimals/petalTongue"
+forgejo_repo = "ecoPrimals/petalTongue"
 
 [repos.skunkBat]
 org = "ecoPrimals"
@@ -146,6 +179,7 @@ sync_priority = "standard"
 category = "primal"
 description = "Defense/audit"
 github_repo = "ecoPrimals/skunkBat"
+forgejo_repo = "ecoPrimals/skunkBat"
 
 [repos.sourDough]
 org = "ecoPrimals"
@@ -155,6 +189,7 @@ sync_priority = "low"
 category = "primal"
 description = "Starter culture/bootstrap"
 github_repo = "ecoPrimals/sourDough"
+forgejo_repo = "ecoPrimals/sourDough"
 
 [repos.bingoCube]
 org = "ecoPrimals"
@@ -164,6 +199,7 @@ sync_priority = "low"
 category = "primal"
 description = "Validation framework"
 github_repo = "ecoPrimals/bingoCube"
+forgejo_repo = "ecoPrimals/bingoCube"
 
 # ═══════════════════════════════════════════════════════════════════
 # Springs (syntheticChemistry org)
@@ -177,6 +213,7 @@ sync_priority = "high"
 category = "spring"
 description = "Coordination spring, composition validation"
 github_repo = "syntheticChemistry/primalSpring"
+forgejo_repo = "syntheticChemistry/primalSpring"
 
 [repos.wetSpring]
 org = "syntheticChemistry"
@@ -186,6 +223,7 @@ sync_priority = "high"
 category = "spring"
 description = "Breseq/LTEE science validation"
 github_repo = "syntheticChemistry/wetSpring"
+forgejo_repo = "syntheticChemistry/wetSpring"
 
 [repos.neuralSpring]
 org = "syntheticChemistry"
@@ -195,6 +233,7 @@ sync_priority = "high"
 category = "spring"
 description = "Neural/AI validation"
 github_repo = "syntheticChemistry/neuralSpring"
+forgejo_repo = "syntheticChemistry/neuralSpring"
 
 [repos.hotSpring]
 org = "syntheticChemistry"
@@ -204,6 +243,7 @@ sync_priority = "standard"
 category = "spring"
 description = "GPU compute validation"
 github_repo = "syntheticChemistry/hotSpring"
+forgejo_repo = "syntheticChemistry/hotSpring"
 
 [repos.airSpring]
 org = "syntheticChemistry"
@@ -213,6 +253,7 @@ sync_priority = "low"
 category = "spring"
 description = "Atmospheric/ADS-B validation"
 github_repo = "syntheticChemistry/airSpring"
+forgejo_repo = "syntheticChemistry/airSpring"
 
 [repos.groundSpring]
 org = "syntheticChemistry"
@@ -222,6 +263,7 @@ sync_priority = "low"
 category = "spring"
 description = "Geospatial validation"
 github_repo = "syntheticChemistry/groundSpring"
+forgejo_repo = "syntheticChemistry/groundSpring"
 
 [repos.healthSpring]
 org = "syntheticChemistry"
@@ -231,6 +273,7 @@ sync_priority = "low"
 category = "spring"
 description = "Health/clinical validation"
 github_repo = "syntheticChemistry/healthSpring"
+forgejo_repo = "syntheticChemistry/healthSpring"
 
 [repos.ludoSpring]
 org = "syntheticChemistry"
@@ -240,6 +283,7 @@ sync_priority = "low"
 category = "spring"
 description = "Game engine validation"
 github_repo = "syntheticChemistry/ludoSpring"
+forgejo_repo = "syntheticChemistry/ludoSpring"
 
 # ═══════════════════════════════════════════════════════════════════
 # Gardens (sporeGarden org)
@@ -254,6 +298,7 @@ sync_priority = "high"
 category = "garden"
 description = "VPS deployment, sovereignty boundary"
 github_repo = "sporeGarden/cellMembrane"
+forgejo_repo = "sporeGarden/cellMembrane"
 
 [repos.lithoSpore]
 org = "sporeGarden"
@@ -263,6 +308,7 @@ sync_priority = "high"
 category = "garden"
 description = "Verification chassis, USB-deployable validation"
 github_repo = "sporeGarden/lithoSpore"
+forgejo_repo = "sporeGarden/lithoSpore"
 
 [repos.projectNUCLEUS]
 org = "sporeGarden"
@@ -272,6 +318,7 @@ sync_priority = "high"
 category = "garden"
 description = "Sovereignty layer, deployment infrastructure"
 github_repo = "sporeGarden/projectNUCLEUS"
+forgejo_repo = "sporeGarden/projectNUCLEUS"
 
 [repos.projectFOUNDATION]
 org = "sporeGarden"
@@ -281,6 +328,7 @@ sync_priority = "standard"
 category = "garden"
 description = "Knowledge layer, thread lineage, validation evidence"
 github_repo = "sporeGarden/projectFOUNDATION"
+forgejo_repo = "sporeGarden/projectFOUNDATION"
 
 [repos.esotericWebb]
 org = "sporeGarden"
@@ -290,6 +338,7 @@ sync_priority = "low"
 category = "garden"
 description = "UI/agentic interaction layer"
 github_repo = "sporeGarden/esotericWebb"
+forgejo_repo = "sporeGarden/esotericWebb"
 
 [repos.blueFish]
 org = "syntheticChemistry"
@@ -299,6 +348,7 @@ sync_priority = "low"
 category = "garden"
 description = "BlueFish product garden"
 github_repo = "syntheticChemistry/blueFish"
+forgejo_repo = "syntheticChemistry/blueFish"
 
 # ═══════════════════════════════════════════════════════════════════
 # Infrastructure (mixed orgs)
@@ -312,6 +362,7 @@ sync_priority = "high"
 category = "infra"
 description = "Ecosystem standards, coordination, cascading pull orchestration"
 github_repo = "ecoPrimals/wateringHole"
+forgejo_repo = "ecoPrimals/wateringHole"
 
 [repos.plasmidBin]
 org = "ecoPrimals"
@@ -321,6 +372,7 @@ sync_priority = "high"
 category = "infra"
 description = "Binary depot, deploy scripts, release assets"
 github_repo = "ecoPrimals/plasmidBin"
+forgejo_repo = "ecoPrimals/plasmidBin"
 
 [repos.whitePaper]
 org = "ecoPrimals"
@@ -330,6 +382,7 @@ sync_priority = "standard"
 category = "infra"
 description = "Research documentation"
 github_repo = "ecoPrimals/whitePaper"
+forgejo_repo = "ecoPrimals/whitePaper"
 
 [repos.sporePrint]
 org = "ecoPrimals"
@@ -339,6 +392,7 @@ sync_priority = "low"
 category = "infra"
 description = "GitHub Pages deployment — generated site"
 github_repo = "ecoPrimals/sporePrint"
+forgejo_repo = "ecoPrimals/sporePrint"
 
 [repos.benchScale]
 org = "syntheticChemistry"
@@ -348,6 +402,7 @@ sync_priority = "low"
 category = "infra"
 description = "Lab validation infrastructure"
 github_repo = "syntheticChemistry/benchScale"
+forgejo_repo = "syntheticChemistry/benchScale"
 
 [repos.agentReagents]
 org = "syntheticChemistry"
@@ -357,6 +412,7 @@ sync_priority = "low"
 category = "infra"
 description = "Agent configuration reagents"
 github_repo = "syntheticChemistry/agentReagents"
+forgejo_repo = "syntheticChemistry/agentReagents"
 
 [repos.rustChip]
 org = "syntheticChemistry"
@@ -366,6 +422,7 @@ sync_priority = "low"
 category = "infra"
 description = "Rust toolchain chip"
 github_repo = "syntheticChemistry/rustChip"
+forgejo_repo = "syntheticChemistry/rustChip"
 
 # ═══════════════════════════════════════════════════════════════════
 # Gate Profiles
