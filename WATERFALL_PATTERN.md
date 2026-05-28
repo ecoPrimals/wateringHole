@@ -18,7 +18,7 @@ architectural framing. Each layer maps to an ecosystem component:
 |---------------------|--------------------------------------------|--------------------------------------------------|
 | **Cytoplasm**       | Gate NUCLEUS workspace                     | Local evolution — repos evolve independently     |
 | **Plasma membrane** | Gate firewall + SSH keys                   | Covalent boundary — SSH auth to periplasm        |
-| **Periplasm**       | Forgejo on ironGate (`git.primals.eco`)    | WaterFall mediator — distributes pulls, receives pushes |
+| **Periplasm**       | Forgejo on VPS — golgiBody (`git.primals.eco`) | WaterFall mediator — distributes pulls, receives pushes |
 | **Outer membrane**  | VPS channels (Caddy, sporePrint, TURN)     | Service surface — lab.primals.eco, membrane.primals.eco |
 | **Extracellular**   | GitHub                                     | Trailing mirror — outer-world CI and discovery   |
 
@@ -42,7 +42,7 @@ now live at `lab.primals.eco`.
                     ┌──────────────┴───────────────────┐
                     │   Periplasm (Forgejo)             │
                     │   git.primals.eco                 │
-                    │   32+ repos, waterfall source     │
+                    │   38 repos, waterfall source      │
                     └───┬───────┬───────┬──────────────┘
                         │       │       │
           ┌─────────────┘       │       └──────────────┐

@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: May 27, 2026
+**Last Updated**: May 28, 2026 (Wave 60 — golgiBody Phase A, 38 repos sovereign sync)
 
 ---
 
@@ -16,13 +16,14 @@ membrane) and Forgejo (inner membrane, `git.primals.eco`):
 |-------------|------|----------------|
 | **[ecoPrimals](https://github.com/ecoPrimals)** | Infrastructure primals | barraCuda, toadStool, coralReef, biomeOS, BearDog, NestGate, Songbird, sweetGrass, rhizoCrypt, loamSpine, petalTongue, Squirrel, skunkBat, bingoCube, sourDough. Also infrastructure repos: sporePrint, wateringHole, whitePaper, plasmidBin, benchScale. |
 | **[syntheticChemistry](https://github.com/syntheticChemistry)** | Science validation springs | wetSpring, hotSpring, airSpring, neuralSpring, groundSpring, healthSpring, ludoSpring, primalSpring. Springs validate that primals produce correct science. |
-| **[sporeGarden](https://github.com/sporeGarden)** | User-facing products (gen4) | projectNUCLEUS (sovereignty layer), projectFOUNDATION (knowledge layer), lithoSpore (verification chassis), esotericWebb (UI/agentic), cellMembrane (private ops — VPS deployment). |
+| **[sporeGarden](https://github.com/sporeGarden)** | User-facing products (gen4) | projectNUCLEUS (sovereignty layer), projectFOUNDATION (knowledge layer), lithoSpore (verification chassis), esotericWebb (UI/agentic), cellMembrane (private ops — VPS deployment), helixVision (genomics pipeline), initioChem (computational chemistry), blueFish (analytical chemistry ETL). |
 
-**Git hosts**: GitHub is operationally primary (outer membrane). Forgejo is the
-trailing inner membrane mirror — pulls from GitHub server-side every 8h. When
-covalent gates host Forgejo, we invert. See `REPO_MEMBRANE_BOUNDARY.md` for
-the full repo classification: inner-only (cellMembrane), trailing mirror (most
-repos), or outer-only (fossilRecord, sporePrint).
+**Git hosts**: Forgejo on VPS (`git.primals.eco`) is the sovereign periplasmic
+layer (golgiBody Phase A). GitHub is the trailing outer membrane mirror. Gates
+push to Forgejo via SSH; GitHub receives post-push mirrors. WaterFall sync
+(`cascade-pull.sh --source forgejo`) pulls from the periplasm. See
+`WATERFALL_PATTERN.md` for the full sync model and `REPO_MEMBRANE_BOUNDARY.md`
+for per-repo classification: inner-only, trailing mirror, or outer-only.
 
 **Why three orgs?** Primals build capabilities. Springs validate those capabilities
 against published science. Products deliver validated capabilities to users.

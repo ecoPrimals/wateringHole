@@ -66,7 +66,7 @@ usage() {
     echo ""
     echo "Options:"
     echo "  --gate NAME          Pull only repos assigned to this gate"
-    echo "  --category CAT       Filter by category (primal, spring, garden, infra)"
+    echo "  --category CAT       Filter by category (primal|spring|garden|infra|root)"
     echo "  --source SOURCE      Pull source: github|forgejo|auto (default: manifest)"
     echo "  --ensure-remotes     Add forgejo remotes from manifest (no pull)"
     echo "  --check              Report drift without pulling"
@@ -121,17 +121,6 @@ except ModuleNotFoundError:
         def load_toml(path):
             return toml.load(path)
 PYIMPORT
-}
-
-parse_sync_config() {
-    python3 -c "
-$(_py_toml_import)
-data = load_toml('$MANIFEST')
-sync = data.get('sync', {})
-print(sync.get('forgejo_ssh', 'ssh://git@git.primals.eco:2222'))
-print(sync.get('default_source', 'github'))
-print(sync.get('default_branch', 'main'))
-"
 }
 
 # Resolve sync source: CLI --source > env CASCADE_SYNC_SOURCE > manifest [sync].default_source
@@ -303,11 +292,13 @@ fi
 if $SELF_UPDATE && ! $CHECK_ONLY && ! $DRY_RUN; then
     wh_dir="$ECO_ROOT/infra/wateringHole"
     if [[ -d "$wh_dir/.git" ]]; then
-        echo "=== Self-update: pulling wateringHole ==="
-        if (cd "$wh_dir" && git pull --ff-only 2>&1); then
-            echo "  wateringHole updated"
+        local_remote=$(resolve_pull_remote "$wh_dir" "$SOURCE")
+        local_branch=$(cd "$wh_dir" && git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+        echo "=== Self-update: pulling wateringHole from $local_remote ==="
+        if [[ "$local_remote" != "origin" ]]; then
+            (cd "$wh_dir" && git pull --ff-only "$local_remote" "$local_branch" 2>&1) && echo "  wateringHole updated" || echo "  WARNING: wateringHole pull failed (continuing with local state)"
         else
-            echo "  WARNING: wateringHole pull failed (continuing with local state)"
+            (cd "$wh_dir" && git pull --ff-only 2>&1) && echo "  wateringHole updated" || echo "  WARNING: wateringHole pull failed (continuing with local state)"
         fi
         echo ""
     fi

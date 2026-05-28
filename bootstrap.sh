@@ -330,10 +330,12 @@ for repo in airSpring groundSpring healthSpring hotSpring ludoSpring \
     clone_repo "syntheticChemistry" "$repo" "$ROOT/springs/$repo"
 done
 
-# Gardens (sporeGarden org, plus blueFish from syntheticChemistry pending transfer)
+# Gardens (sporeGarden org)
 clone_repo "sporeGarden" "esotericWebb" "$ROOT/gardens/esotericWebb"
 clone_repo "sporeGarden" "projectFOUNDATION" "$ROOT/gardens/projectFOUNDATION"
-clone_repo "syntheticChemistry" "blueFish" "$ROOT/gardens/blueFish"
+clone_repo "sporeGarden" "blueFish" "$ROOT/gardens/blueFish"
+clone_repo "sporeGarden" "helixVision" "$ROOT/gardens/helixVision"
+clone_repo "sporeGarden" "initioChem" "$ROOT/gardens/initioChem"
 
 # Infra (ecoPrimals org)
 clone_repo "ecoPrimals" "wateringHole" "$ROOT/infra/wateringHole"
