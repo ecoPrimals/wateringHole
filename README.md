@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 27, 2026 (Wave 57: Deep Debt W57 complete — biomeOS v3.82, nucleus_ingest module split, bearDog casing fix, LogConfig XDG, flate2 pure Rust. 19 active handoffs + 262 archived.)
+**Last Updated**: May 27, 2026 (Wave 57: Deep Debt W57 complete — biomeOS v3.82, nucleus_ingest module split, bearDog casing fix, LogConfig XDG, flate2 pure Rust. 37 active handoffs + 306 archived.)
 
 ---
 
@@ -375,7 +375,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 ### Handoffs
 - `handoffs/*.md` — Active session handoffs
 - `handoffs/hotSpring/` — hotSpring team handoffs (postPrimordial pattern)
-- `handoffs/archive/` — 262 archived handoffs (earlier epochs consolidated to fossilRecord)
+- `handoffs/archive/` — 263 archived handoffs (earlier epochs consolidated to fossilRecord)
+- `handoffs/hotSpring/archive/` — 43 archived hotSpring handoffs
 
 ### Fossilized Standards (in fossilRecord)
 
