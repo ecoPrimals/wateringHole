@@ -21,7 +21,7 @@
 version = "2.0.0"
 generated = "2026-05-28"
 wave = 60
-total_repos = 36
+total_repos = 38
 
 # ═══════════════════════════════════════════════════════════════════
 # WaterFall Sync Configuration
@@ -341,14 +341,34 @@ github_repo = "sporeGarden/esotericWebb"
 forgejo_repo = "sporeGarden/esotericWebb"
 
 [repos.blueFish]
-org = "syntheticChemistry"
+org = "sporeGarden"
 local_path = "gardens/blueFish"
 membrane = "trailing-mirror"
 sync_priority = "low"
 category = "garden"
-description = "BlueFish product garden"
-github_repo = "syntheticChemistry/blueFish"
-forgejo_repo = "syntheticChemistry/blueFish"
+description = "BlueFish analytical chemistry ETL product"
+github_repo = "sporeGarden/blueFish"
+forgejo_repo = "sporeGarden/blueFish"
+
+[repos.helixVision]
+org = "sporeGarden"
+local_path = "gardens/helixVision"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "garden"
+description = "Sovereign genomics discovery pipeline — 16S/WGS from MinION to taxonomy"
+github_repo = "sporeGarden/helixVision"
+forgejo_repo = "sporeGarden/helixVision"
+
+[repos.initioChem]
+org = "sporeGarden"
+local_path = "gardens/initioChem"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "garden"
+description = "Computational chemistry product — hotSpring science consumer"
+github_repo = "sporeGarden/initioChem"
+forgejo_repo = "sporeGarden/initioChem"
 
 # ═══════════════════════════════════════════════════════════════════
 # Infrastructure (mixed orgs)
