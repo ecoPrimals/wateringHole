@@ -1,6 +1,6 @@
-# Wave 58 — Remaining Work to Stadial Entry
+# Wave 58b — Remaining Work to Stadial Entry (updated)
 
-**Date:** May 28, 2026
+**Date:** May 28, 2026 (updated after ecosystem-wide pull)
 **From:** primalSpring coordination
 **To:** All teams
 
@@ -8,10 +8,14 @@
 
 ## Ecosystem State
 
-The mountain is clean. 8 of 12 non-biomeOS primals have centralized env vars
-(pushed this wave). Downstream has converged: cellMembrane at 95.8% coverage
-with typed errors, projectNUCLEUS at 166 tests with async-correct discovery.
-NC-1 is COMPLETE (all code). The remaining path is live deployment.
+The mountain responded. After our Wave 58 blurbs, 4 of 4 Tier 2 primals
+shipped env var work: bearDog created `env_keys.rs` (290 constants),
+songbird fully adopted `songbird-process-env` (48 sites + 146 expect
+migrations), squirrel centralized 316 constants, biomeOS shipped `env_config`
+(90+ literals). projectFOUNDATION elevated to full Rust (5 crates).
+lithoSpore retired dead code and created `env_vars.rs`. Fresh ecoBins
+harvested. Env var centralization is now **complete or in progress across
+all 13 primals**.
 
 ---
 
@@ -20,11 +24,17 @@ NC-1 is COMPLETE (all code). The remaining path is live deployment.
 | Item | Owner | Wave |
 |------|-------|------|
 | NC-1 code: `biomeos-pseudospore` + emit materialization | biomeOS | 57 |
+| biomeOS env centralization: `env_config` module (90+ literals) | biomeOS | 58b |
 | VPS deployment standard: `--uds-only`, TransportMode, spring overlays | cellMembrane | 56 |
+| cellMembrane deep debt: 95.8% coverage, typed errors, licensing | cellMembrane | 57 |
 | Deploy scripts: all 13 primal `--uds-only` + socket health | projectNUCLEUS | 58 |
-| Graph-driven health checks, env bootstrap | projectFOUNDATION | 56b |
-| lithoSpore `--from-dir` emission path | lithoSpore | 56 |
-| Env var centralization (8 primals) | primalSpring coord | 57b |
+| projectNUCLEUS: async-correct, wire-native discovery, 166 tests | projectNUCLEUS | 58 |
+| projectFOUNDATION: Rust elevation Phase B (5 crates) | projectFOUNDATION | 58b |
+| lithoSpore: dead code retired, `env_vars.rs`, NC-5 preparation | lithoSpore | 58b |
+| Env var centralization (8 primals pushed by primalSpring) | primalSpring coord | 57b |
+| bearDog: `env_keys.rs` (290 constants), orphan purge (21 files) | bearDog | 117b |
+| songbird: `songbird-process-env` full adoption, 146 `#[expect` | songbird | 58 |
+| squirrel: 316 env constants, self-identity eliminated, 5,417L purge | squirrel | 58 |
 | primalSpring local debt: zero | primalSpring | 57 |
 | Port SSOT reconciliation | cellMembrane + primalSpring | 56 |
 | Wire-native newline JSON-RPC discovery | projectNUCLEUS | 58 |
@@ -37,8 +47,8 @@ NC-1 is COMPLETE (all code). The remaining path is live deployment.
 
 | Action | Owner | Blocker |
 |--------|-------|---------|
-| Deploy biomeOS v3.81 to VPS via plasmidBin | cellMembrane + ops | None |
-| Test `biomeos deploy graphs/cells/hotspring_cell.toml` on VPS | cellMembrane + hotSpring | biomeOS v3.81 on VPS |
+| Deploy biomeOS v3.84 to VPS via plasmidBin | cellMembrane + ops | None — fresh ecoBin harvested |
+| Test `biomeos deploy graphs/cells/hotspring_cell.toml` on VPS | cellMembrane + hotSpring | biomeOS on VPS |
 
 ### P1: First Spring Emissions (blocks NC-5 + stadial)
 
@@ -62,37 +72,22 @@ NC-1 is COMPLETE (all code). The remaining path is live deployment.
 | Forgejo releases (NC-3.4) | cellMembrane + plasmidBin | Forgejo config |
 | sporePrint living content (NC-3.5) | cellMembrane + petalTongue | BearDog `auth.issue_session` scope |
 
-### P4: Remaining Primal Env Debt (not blocking, team work)
+### P4: Remaining Primal Env Debt (reduced — most resolved this wave)
 
-| Primal | Env sites | Difficulty | Notes |
-|--------|-----------|------------|-------|
-| bearDog | ~550 / 130 files | High | `zero_hardcoding.rs` philosophy needs enforcement |
-| songbird | ~70 / 35 files | Medium | `songbird-process-env` crate needs full adoption |
-| squirrel | ~250 / 90 files | High | SDK `infrastructure/config.rs` sprawl |
-| toadStool | ~200 / 95 files | High | `env_overrides.rs` split + VFIO domain work |
+| Primal | Status | Remaining |
+|--------|--------|-----------|
+| ~~bearDog~~ | **RESOLVED** Wave 117b | `env_keys.rs` (290 constants). Residual: PRIMAL_CONTRACTS method catalog stale. |
+| ~~songbird~~ | **RESOLVED** Wave 58 | `songbird-process-env` fully adopted. Zero hardcoded env in prod. |
+| squirrel | **IN PROGRESS** | 316 constants built, ~93 files still have raw `std::env::var`. SDK config layer next. |
+| toadStool | **PENDING** | ~200 env sites. `env_overrides.rs` split needed. VFIO domain complexity. |
 
-### P4b: Remaining Primal Clippy Debt
+### P4b: Remaining Primal Clippy Debt (reduced)
 
-| Primal | `#[allow(clippy::` | Notes |
-|--------|--------------------|-------|
-| songbird | ~180 (test modules) | Batch `expect` migration |
-| toadStool | ~17 | VFIO pipeline + `unused_async` |
-| squirrel | 3 | Quick fix |
-
----
-
-## projectNUCLEUS: NC-1 Status Correction
-
-projectNUCLEUS handoffs still show NC-1 as **WIRED**. Correct status:
-
-```
-NC-1 → COMPLETE (biomeOS v3.81, May 27, 2026)
-```
-
-biomeOS shipped `biomeos-pseudospore` crate with `load_pseudospore`,
-`verify_checksums`, `check_completeness` + full emit materialization
-(scope.toml, validation.json, checksums.blake3, ferment_transcript.json,
-data/, README). Please update local tracking.
+| Primal | Status | Notes |
+|--------|--------|-------|
+| ~~songbird~~ | **RESOLVED** Wave 58 | 146 `#[expect` migrations complete. |
+| toadStool | **PENDING** | ~17 `#[allow(clippy::` + `unused_async` |
+| ~~squirrel~~ | **RESOLVED** Wave 58 | Covered in deep debt session. |
 
 ---
 
@@ -106,8 +101,11 @@ NC-3: partial satisfaction sufficient   → ADVANCING
 NC-5: progressive after NC-1 live      → UNBLOCKED
 ```
 
-**Estimated timeline**: P0 (deploy v3.81) → P1 (2 emissions) → stadial candidate.
+**Critical path unchanged**: P0 (deploy v3.84) → P1 (2 emissions) → stadial candidate.
+
+**P4 env debt is nearly eliminated.** Only squirrel (in progress) and toadStool
+(pending) remain. 11 of 13 primals have fully centralized env vars.
 
 ---
 
-*Wave 58. All code delivered. Deploy and emit.*
+*Wave 58b. Mountain responded. Deploy the ecosystem.*
