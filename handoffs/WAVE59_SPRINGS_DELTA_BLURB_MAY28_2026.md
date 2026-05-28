@@ -1,88 +1,93 @@
-# Wave 59 Springs Delta Blurb — Deploy & Emit
+# Wave 59b Springs Delta Blurb — southGate Focus
 
 **Date:** May 28, 2026
 **From:** primalSpring coordination
-**To:** All spring teams
+**To:** wet/neuralSpring (active), all other springs (delayed)
 
 ---
 
-## Glacial Review Complete. Software Ready. Awaiting Deploy.
+## P0 RESOLVED. NUCLEUS is live on VPS.
 
-Glacial gate assessment: **~90% structural/software PASS; ~35-40% operational.**
-The gap is VPS deployment and live mesh — not your code.
-
-primalSpring: 797+17 tests, 56 scenarios, 460 methods, zero debt markers,
-dispatch telemetry for Layer 4/5 routing evolution. All 21 docs aligned.
+13/13 primals on UDS sockets. Spring overlay validated. The infrastructure
+works. Now we prove the patterns.
 
 ---
 
-## VPS Deployment — 3 Steps (unchanged)
+## Strategy: Concentrate on southGate
 
-```
-1. cellMembrane deploys NUCLEUS base (13 primals, UDS-only)
-   → deploy_membrane.sh --composition nucleus --uds-only
+**All springs delayed except wet/neuralSpring.** southGate is the pattern
+node. We stabilize it, prove the membrane-to-spring connection, document
+the patterns, then hand off to all other springs.
 
-2. cellMembrane deploys your spring overlay
-   → deploy_membrane.sh spring-overlay root@<ip> --cell <yourspring>
-
-3. Your spring runtime discovers primals via UDS
-   → CompositionContext::from_live_discovery()
-```
-
-Cell graphs: `graphs/cells/<yourspring>_cell.toml` in primalSpring.
-All 6 spring cells: `vps_standard = true`, `spawn = false`.
+This means: hotSpring, groundSpring, airSpring, healthSpring — **no action
+needed this wave**. Prepare column U artifacts at your own pace. We'll come
+to you with proven patterns.
 
 ---
 
-## Per-Spring Priorities
+## wet/neuralSpring — Your Sprint
 
-| Spring | Gate | Priority | Status |
-|--------|------|----------|--------|
-| **hotSpring** | biomeGate (Nest Atomic) | **P0 — first emitter** | GATED on v3.84 VPS deploy |
-| **groundSpring** | eastGate (Full NUCLEUS) | **P1 — second emitter** | GATED on hotSpring pass |
-| wetSpring | southGate (Node Atomic) | P2 | GATED on southGate 13/13 |
-| neuralSpring | southGate (Node Atomic) | P2 | GATED on southGate 13/13 |
-| airSpring | eastGate (Full NUCLEUS) | P3 | Ready after first 2 emissions |
-| healthSpring | ironGate (Full NUCLEUS) | P3 | Ready after first 2 emissions |
-| ludoSpring | ironGate (desktop-only) | — | Not on VPS path |
+### Phase 1: southGate Stabilization
+
+| Task | Status |
+|------|--------|
+| Fresh plasmidBin redeploy (13 primals) | NEEDED (currently 7/13 health) |
+| SONGBIRD_PEERS config for mesh seeding | NEEDED |
+| All 13 primals responding on southGate | TARGET |
+
+### Phase 2: Membrane Connection Patterns
+
+| Task | Status |
+|------|--------|
+| `CompositionContext::from_live_discovery()` against live VPS sockets | PROVE |
+| UDS discovery path (tiers 2-4) working from spring runtime | PROVE |
+| `health.liveness` round-trip through Neural API | PROVE |
+| Dispatch telemetry flowing (JSON-lines for routing data) | PROVE |
+
+### Phase 3: Column U (first emission)
+
+| Task | Status |
+|------|--------|
+| Cell graph exists with `vps_standard = true` | CHECK |
+| `domain_profile.toml` prepared for lithoSpore | PREPARE |
+| Binary in plasmidBin depot | CHECK |
+| `biomeos nucleus ingest` through NUCLEUS path | GATED on biomeOS v0.2 |
+
+### What You Document for Other Springs
+
+After proving phases 1-2, document:
+1. How spring runtime discovers VPS NUCLEUS primals
+2. UDS socket paths and discovery tiers that work
+3. Any env vars or config needed
+4. Failure modes and workarounds
+5. Telemetry expectations
+
+This becomes the **Spring Membrane Connection Playbook** for all other springs.
 
 ---
 
-## Column U Preparation Checklist
+## Other Springs — Status (delayed, no action needed)
 
-Prepare now while waiting for P0 deploy:
-
-- [ ] Cell graph exists with `vps_standard = true`
-- [ ] `domain_profile.toml` prepared for lithoSpore emission
-- [ ] `source_dir` content ready for pseudoSpore packaging
-- [ ] `CompositionContext::from_live_discovery()` tested locally
-- [ ] `health.liveness` responds correctly
-- [ ] Binary in plasmidBin depot (`plasmidbin harvest`)
-
----
-
-## What Changed This Wave (primalSpring 58b→59)
-
-| Change | Why it matters to springs |
-|--------|--------------------------|
-| Dispatch telemetry persistence | Your dispatches through Neural API now produce training data for routing evolution |
-| False readiness signals corrected | NC-1 "CODE COMPLETE" not "COMPLETE" — live column U is the real gate |
-| Sovereignty reality check | knot-dns deployed (not planned); CI still GitHub; ~50% cutover done |
-| 21 docs aligned to canonical metrics | Version/count references you consume are now accurate |
+| Spring | Gate | Column U | Wait For |
+|--------|------|----------|----------|
+| hotSpring | biomeGate | P3 (after patterns) | biomeGate 13/13 + biomeOS v0.2 |
+| groundSpring | eastGate | P3 (after patterns) | Pattern playbook |
+| airSpring | eastGate | P3 (after patterns) | Pattern playbook |
+| healthSpring | ironGate | P3 (after patterns) | Pattern playbook |
+| ludoSpring | desktop-only | N/A | Not on VPS path |
 
 ---
 
 ## Timeline
 
 ```
-NOW    → Prepare column U artifacts (hotSpring, groundSpring first)
-NEXT   → biomeOS v3.84 VPS deploy (cellMembrane action)
-THEN   → hotSpring column U (first emission via biomeos nucleus ingest)
-THEN   → groundSpring column U (NC-5 universality proven)
-THEN   → lithoSpore postPrimordial (emission pipeline operational)
-TARGET → Stadial: NC-1(2+) + NC-2(3+) + NC-4(all 4 gates healthy)
+NOW    → southGate fresh redeploy + stabilization
+THEN   → wet/neuralSpring membrane patterns proven
+THEN   → Spring Membrane Connection Playbook documented
+THEN   → hotSpring + groundSpring column U (pattern handoff)
+TARGET → Stadial: NC-1(2+) + NC-2(3+) + NC-4(all 4 gates)
 ```
 
 ---
 
-*Wave 59. Glacial review done. Infrastructure converged. Springs: prepare to emit.*
+*Wave 59b. NUCLEUS live. southGate is your node. Prove the path.*
