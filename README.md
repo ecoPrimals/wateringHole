@@ -387,7 +387,7 @@ maintained as separate files in this repo. See `fossilRecord/wateringHole/consol
 and `fossilRecord/wateringHole/consolidated-apr2026/`.
 
 - `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.0)
-- `GATE_DEPLOYMENT_STANDARD.md` — Gate hardware, OS, tooling spec
+- `GATE_SPRING_OWNERSHIP.md` — Gate-spring routing SSOT (replaces `GATE_DEPLOYMENT_STANDARD.md`)
 - `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
 - `GENOMEBIN_ARCHITECTURE_STANDARD.md` — Autonomous deployment (self-extracting)
 - `UNIVERSAL_IPC_STANDARD_V3.md` — Multi-transport IPC behavioral spec

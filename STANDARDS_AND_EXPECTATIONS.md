@@ -10,7 +10,7 @@ spring, contributor, and session.  Read this first, read everything else second.
 ## Companion Documents
 
 - **`GLOSSARY.md`** — Every term defined (gate, primal, spring, atomic, niche, etc.)
-- **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, toolchain, directory layout for a gate
+- **`GATE_SPRING_OWNERSHIP.md`** — Gate-spring routing SSOT: ownership, hardware profiles, covalent evolution path
 - **`TARGETED_GUIDESTONE_STANDARD.md`** — Self-contained scientific artifact packaging (USB/ecoBin)
 - **`DERIVATION_ANCHORING_STANDARD.md`** — Zero Magic Numbers: all numeric thresholds must be formally derived and runtime-enforced
 - **`LITHOSPORE_USB_DEPLOYMENT.md`** — Spore taxonomy: ColdSpore → LiveSpore → lithoSpore

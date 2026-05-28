@@ -31,6 +31,7 @@
 #   ECOPRIMALS_ROOT        Override workspace root (default: auto-detect)
 #   CASCADE_PARALLEL       Override parallelism (default: 8)
 #   CASCADE_SYNC_SOURCE    Override default pull source (github|forgejo|auto)
+#   GATE_NAME              Override gate identity (default: auto-detect from hostname)
 
 set -euo pipefail
 
@@ -61,11 +62,26 @@ PARALLEL="${CASCADE_PARALLEL:-8}"
 SELF_UPDATE=true
 SOURCE="${CASCADE_SYNC_SOURCE:-}"
 
+resolve_gate_from_hostname() {
+    local host
+    host=$(hostname -s 2>/dev/null || echo "unknown")
+    case "$host" in
+        east*|eastgate*|eastGate*)   echo "eastGate" ;;
+        iron*|irongate*|ironGate*)   echo "ironGate" ;;
+        south*|southgate*|southGate*) echo "southGate" ;;
+        biome*|biomegate*|biomeGate*) echo "biomeGate" ;;
+        strand*|strandgate*|strandGate*) echo "strandGate" ;;
+        golgi*|vps*)                  echo "golgiBody" ;;
+        *)                            echo "" ;;
+    esac
+}
+
 usage() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
     echo "  --gate NAME          Pull only repos assigned to this gate"
+    echo "  --gate auto          Auto-detect gate from hostname or GATE_NAME env"
     echo "  --category CAT       Filter by category (primal|spring|garden|infra|root)"
     echo "  --source SOURCE      Pull source: github|forgejo|auto (default: manifest)"
     echo "  --ensure-remotes     Add forgejo remotes from manifest (no pull)"
@@ -75,6 +91,12 @@ usage() {
     echo "  --parallel N         Max concurrent pulls (default: 8)"
     echo "  --no-self-update     Skip pulling wateringHole first"
     echo "  --help               Show this help"
+    echo ""
+    echo "Environment:"
+    echo "  GATE_NAME            Override gate identity (skip hostname auto-detection)"
+    echo "  ECOPRIMALS_ROOT      Override workspace root (default: auto-detect)"
+    echo "  CASCADE_PARALLEL     Override parallelism (default: 8)"
+    echo "  CASCADE_SYNC_SOURCE  Override default pull source"
 }
 
 while [[ $# -gt 0 ]]; do
@@ -97,6 +119,20 @@ done
 if [[ ! -f "$MANIFEST" ]]; then
     echo "ERROR: ecosystem_manifest.toml not found at $MANIFEST"
     exit 1
+fi
+
+# Resolve --gate auto: GATE_NAME env > hostname detection
+if [[ "$GATE" == "auto" ]]; then
+    if [[ -n "${GATE_NAME:-}" ]]; then
+        GATE="$GATE_NAME"
+    else
+        GATE=$(resolve_gate_from_hostname)
+    fi
+    if [[ -z "$GATE" ]]; then
+        echo "WARNING: --gate auto could not detect gate (set GATE_NAME env). Pulling all repos."
+    else
+        echo "Gate auto-detected: $GATE"
+    fi
 fi
 
 # Sync source and Forgejo SSH are resolved after _py_toml_import is defined below.
@@ -287,6 +323,27 @@ HEADER
     exit 0
 fi
 
+# ─── Remote resolution (must be defined before self-update uses it) ──────────
+
+resolve_pull_remote() {
+    local repo_dir="$1" source="$2"
+    case "$source" in
+        github)
+            echo "origin"
+            ;;
+        forgejo|auto)
+            if (cd "$repo_dir" && git remote get-url forgejo >/dev/null 2>&1); then
+                echo "forgejo"
+            else
+                echo "origin"
+            fi
+            ;;
+        *)
+            echo "origin"
+            ;;
+    esac
+}
+
 # ─── Self-update wateringHole first ──────────────────────────────────────────
 
 if $SELF_UPDATE && ! $CHECK_ONLY && ! $DRY_RUN; then
@@ -326,32 +383,6 @@ $DRY_RUN && echo "  Mode:     DRY-RUN"
 echo ""
 
 # ─── Worker function (called in subshells) ───────────────────────────────────
-
-resolve_pull_remote() {
-    local repo_dir="$1" source="$2"
-    case "$source" in
-        github)
-            echo "origin"
-            ;;
-        forgejo)
-            if (cd "$repo_dir" && git remote get-url forgejo >/dev/null 2>&1); then
-                echo "forgejo"
-            else
-                echo "origin"
-            fi
-            ;;
-        auto)
-            if (cd "$repo_dir" && git remote get-url forgejo >/dev/null 2>&1); then
-                echo "forgejo"
-            else
-                echo "origin"
-            fi
-            ;;
-        *)
-            echo "origin"
-            ;;
-    esac
-}
 
 process_repo() {
     local name="$1" local_path="$2" membrane="$3" sync_source="$4" forgejo_repo="${5:-}"

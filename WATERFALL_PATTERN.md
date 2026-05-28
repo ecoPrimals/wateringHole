@@ -6,8 +6,8 @@ RootPulse coordinates primals for single-repo version control within a
 cytoplasm; WaterFall coordinates membranes for multi-repo ecosystem sync
 across envelope layers.
 
-**Status**: Phase 1–2 implemented (manifest + script evolved, remotes configured).
-Phases 3–5 are operational and require multi-day validation windows.
+**Status**: Phase 1–2 implemented, Phase 5 specified (gate specialization + covalent routing).
+Phases 3–4 are operational and require multi-day validation windows.
 
 ## K-Derm Topology
 
@@ -143,16 +143,73 @@ If Forgejo becomes unavailable during shadow period or after inversion:
 cascade-pull --source github    # explicit fallback
 ```
 
-## Phase 5: Multi-Biome / Multi-Membrane
+## Phase 5: Multi-Biome / Multi-Membrane — Gate Specialization
 
 Once gates pull from Forgejo and push back to it, WaterFall becomes a
-full biomeOS coordination pattern:
+full biomeOS coordination pattern with covalent routing.
 
-- **Gate specialization**: Different biomes pull different repo subsets
-  via `--gate` profiles in the manifest (ironGate = dev, southGate =
-  production, biomeGate = experimental)
-- **VPS cascade profile**: cellMembrane gets its own cascade-pull profile
-  (periplasm-local repos only)
+### Gate-Spring Ownership
+
+Each gate owns specific science domains and pulls only what it needs.
+The canonical SSOT is `GATE_SPRING_OWNERSHIP.md`.
+
+| Gate | Domain | Springs | Sync Profile |
+|------|--------|---------|-------------|
+| **eastGate** | Coordination hub | primalSpring, airSpring, groundSpring | Full superset (38 repos) |
+| **ironGate** | Clinical, game science | healthSpring, ludoSpring | Core + health/ludo + esotericWebb |
+| **southGate** | Biology, ML inference | wetSpring, neuralSpring | Core + wet/neural |
+| **biomeGate** | GPU compute | hotSpring | Core + hotSpring |
+| **strandGate** | ABG science, genomics | hotSpring, wetSpring | Core + ABG gardens + lithoSpore |
+| **golgiBody** | Periplasmic relay | — | NUCLEUS primals + deployment infra |
+
+### Gate Auto-Detection
+
+`cascade-pull.sh --gate auto` resolves the current gate identity:
+
+1. `GATE_NAME` environment variable (explicit override)
+2. Hostname detection (`hostname -s` mapped to gate name)
+3. Falls back to pulling all repos if unresolved
+
+This makes per-gate sync the default operational mode. Gates pull only
+their assigned repos, reducing bandwidth and avoiding conflicts in
+repos they don't own.
+
+### Cross-Gate Compute Routing
+
+hotSpring operates on both strandGate (ABG science validation) and
+biomeGate (GPU-accelerated physics). The science evolves on strandGate;
+heavy compute dispatches to biomeGate via Songbird mesh. This is the
+first cross-gate covalent bond — work flows between gates through the
+periplasm rather than through manual coordination.
+
+### Covalent Evolution Path
+
+```
+Ad-hoc routing (Wave 55-59)
+    Handoff blurbs coordinate gate work manually.
+    ↓
+Documented ownership (Wave 60) — THIS PHASE
+    GATE_SPRING_OWNERSHIP.md + manifest [gates.*] profiles.
+    cascade-pull --gate auto syncs per-gate repos.
+    ↓
+Songbird mesh discovery (Wave 62+)
+    Gates advertise capabilities via Songbird primitives.
+    Cross-gate dispatch replaces manual blurbs.
+    ↓
+toadStool covalent dispatch (Wave 63+)
+    Compute jobs route to best-fit gate hardware.
+    hotSpring GPU work auto-dispatches to biomeGate.
+    ↓
+biomeOS graph.execute (Wave 65+)
+    WaterFall becomes a TOML-defined neuralAPI pattern.
+    Routing via biomeOS engine instead of shell scripts.
+    Parallels RootPulse coordination of primals.
+```
+
+### Infrastructure Patterns
+
+- **VPS cascade profile**: golgiBody gets its own cascade-pull profile
+  (periplasm-local NUCLEUS repos only — no springs)
 - **New gate bootstrap**: Clone from Forgejo, install cascade-pull timer,
   done — K-Derm endosymbiosis (Phase 1 weak → Phase 4 covalent)
 - **Nested diderm**: A lab's outer membrane is the campus periplasm;

@@ -470,7 +470,8 @@ repos = [
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
     "cellMembrane", "projectNUCLEUS", "lithoSpore",
-    "healthSpring",
+    "esotericWebb",
+    "healthSpring", "ludoSpring",
 ]
 
 [gates.southGate]
@@ -491,6 +492,18 @@ repos = [
     "petalTongue", "skunkBat",
     "cellMembrane", "projectNUCLEUS",
     "hotSpring",
+]
+
+# strandGate — ABG science, compChem, genomics, lithoSpore
+[gates.strandGate]
+repos = [
+    "nestGate", "wateringHole", "plasmidBin",
+    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat",
+    "cellMembrane", "projectNUCLEUS", "lithoSpore",
+    "hotSpring", "wetSpring",
+    "helixVision", "initioChem", "blueFish", "esotericWebb",
 ]
 
 # golgiBody (VPS) — fieldMouse deployment, periplasmic sync point

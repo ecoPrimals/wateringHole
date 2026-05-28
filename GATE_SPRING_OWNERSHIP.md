@@ -1,0 +1,125 @@
+# Gate-Spring Ownership — Canonical Routing SSOT
+
+**Purpose**: Definitive assignment of which gate owns which springs, gardens,
+and science domains. This is the missing doc that `STANDARDS_AND_EXPECTATIONS.md`
+referenced as `GATE_DEPLOYMENT_STANDARD.md`.
+
+**Last updated**: 2026-05-28 (Wave 60 — postPrimordial, golgiBody Phase A live)
+
+**Authority**: wateringHole consensus. Changes require coordination across
+affected gate teams.
+
+---
+
+## Gate-Spring Ownership Table
+
+| Gate | Springs | Gardens / Products | Science Domain | NUCLEUS Status |
+|------|---------|-------------------|----------------|----------------|
+| **eastGate** | primalSpring, airSpring, groundSpring | — | Ecosystem coordination, ecology, geoscience | Full 13/13 |
+| **ironGate** | healthSpring, ludoSpring | esotericWebb | Clinical/compliance, game science | Full 13/13 |
+| **southGate** | wetSpring, neuralSpring | — | Biology/analytical chemistry, ML inference | Node Atomic (P1 pattern node) |
+| **biomeGate** | hotSpring | — | GPU-accelerated physics, toadStool diesel engine | Node Atomic 9/13 |
+| **strandGate** | hotSpring | helixVision, initioChem, blueFish, lithoSpore | ABG science, compChem, genomics, analytical ETL | Full NUCLEUS planned |
+| **golgiBody** (VPS) | — | — | Periplasmic sync, Forgejo, NUCLEUS relay | Infra NUCLEUS 13/13 |
+
+**Cross-gate springs**: hotSpring operates on both strandGate (ABG science,
+lithoSpore, compChem validation) and biomeGate (GPU solving, HBM2 compute,
+toadStool diesel engine). The science evolves on strandGate; heavy compute
+dispatches to biomeGate via Songbird mesh.
+
+---
+
+## primalSpring — Coordination Spring (Not Science)
+
+primalSpring is the ecosystem's coordination and composition validation spring.
+Its scope is exclusively:
+
+- **NUCLEUS evolution** — composition tiers, deployment patterns, dark forest validation
+- **Primal bonding** — capability contracts, IPC wire standards, cross-gate mesh
+- **Ecosystem validation** — 57 scenarios, freshness checks, WaterFall integrity
+
+primalSpring does NOT own domain science. Each science spring evolves
+independently on its home gate. primalSpring validates that their compositions
+work together — it is the bonding mechanics, not the atoms.
+
+---
+
+## Gate Hardware Profiles
+
+| Gate | Hardware | CPU | RAM | GPU | Storage | Role |
+|------|----------|-----|-----|-----|---------|------|
+| **eastGate** | Utility + neuromorphic | Ryzen | 64GB | Akida BrainChip | NVMe | Orchestration hub, coordination |
+| **ironGate** | Agentic dev workstation | — | 96GB | — | Large | ABG JupyterHub, cellMembrane team home |
+| **southGate** | Gaming + heavy compute | — | 128GB | Multi-GPU | NVMe | Biology + inference pattern node |
+| **biomeGate** | HBM2 test bench | Threadripper | — | Titan V + K80 | NVMe | HPC physics, GPU shader validation |
+| **strandGate** | Bioinformatics | 64-core | — | — | Large | ABG science, genomics pipelines |
+| **northGate** | Flagship AI/LLM (future) | — | — | — | — | Node Atomic planned |
+| **westGate** | Cold storage (future) | — | — | — | 76TB | Nest Atomic planned |
+| **golgiBody** | DigitalOcean VPS | 1 vCPU | 2GB | — | 50GB | Periplasmic sync, NUCLEUS relay |
+
+---
+
+## Domain Routing
+
+### Current: Ad-Hoc (Documented)
+
+Gates currently route work via handoff blurbs in wateringHole. Each gate team
+pulls repos relevant to their springs via `cascade-pull.sh --gate <name>`.
+Cross-gate compute is coordinated manually through blurbs.
+
+### Target: Covalent (Songbird Mesh)
+
+Evolution path from ad-hoc to fully covalent routing:
+
+```
+Phase 1: Documented ownership (this file)              ← YOU ARE HERE
+Phase 2: Gate profiles in manifest drive WaterFall sync ← DONE (cascade-pull --gate)
+Phase 3: Songbird mesh discovers cross-gate capabilities
+Phase 4: toadStool dispatches compute to best-fit gate
+Phase 5: biomeOS graph.execute routes across Plasmodium
+```
+
+### Cross-Gate Patterns
+
+| Pattern | Mechanism | Example |
+|---------|-----------|---------|
+| **Science on one gate, compute on another** | Songbird mesh + toadStool dispatch | hotSpring science on strandGate, GPU dispatch to biomeGate |
+| **Coordination validates all gates** | primalSpring `s_covalent_mesh` | eastGate probes ironGate + southGate mesh health |
+| **Repo sync through periplasm** | WaterFall cascade-pull via Forgejo | All gates pull from golgiBody VPS |
+| **Product composition across springs** | Garden composes primals via IPC | helixVision on strandGate consumes wetSpring + hotSpring science |
+
+---
+
+## WaterFall Sync Profiles
+
+Each gate's `[gates.*]` manifest profile determines which repos it pulls
+via `cascade-pull.sh --gate <name>`. The profile reflects ownership:
+
+- **eastGate**: Full superset (38 repos) — coordination hub sees everything
+- **ironGate**: Core primals + healthSpring + infra
+- **southGate**: Core primals + wetSpring + neuralSpring
+- **biomeGate**: Core primals + hotSpring
+- **strandGate**: Core primals + hotSpring + wetSpring + ABG gardens + lithoSpore
+- **golgiBody**: NUCLEUS primals + deployment infra (no springs)
+
+Gates can override with `--gate` flag or pull everything without `--gate`.
+
+---
+
+## Evolution Timeline
+
+| Wave | Milestone | Status |
+|------|-----------|--------|
+| 55 | Gate-spring assignments in handoff blurbs | DONE |
+| 59 | southGate designated pattern node (wet/neural first) | DONE |
+| 60 | golgiBody Phase A — VPS Forgejo, WaterFall 38/38 validated | DONE |
+| 60 | This SSOT created — documented ownership | DONE |
+| 60 | strandGate enters ecosystem (helixVision, initioChem, blueFish) | DONE |
+| 61+ | southGate 13/13 + membrane patterns proven | P1 critical path |
+| 61+ | biomeGate 13/13 + GPU dispatch | P2 |
+| 62+ | Songbird covalent mesh across 4+ gates | P3 |
+| 63+ | biomeOS graph.execute over mesh | P5 |
+
+---
+
+*Wave 60. Gate-spring routing formalized. Ad-hoc → documented → covalent.*
