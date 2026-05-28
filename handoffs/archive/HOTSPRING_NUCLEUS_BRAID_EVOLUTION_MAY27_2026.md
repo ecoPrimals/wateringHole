@@ -125,9 +125,9 @@ Step 7/7: Ingest                    biomeos → litho → manual (graceful fallb
 3. Wire provenance trio services (rhizoCrypt DAG, loamSpine ledger, sweetGrass braid)
 
 ### For lithoSpore
-1. Wire `litho emit-pseudospore` positional arg interface (currently `--name --version` only)
-2. Adopt `pseudospore-core` as dependency for envelope generation
-3. Validate domain-agnostic emission against second spring
+1. ~~Wire `litho emit-pseudospore` positional arg interface~~ **DONE** — `--from-dir` + `--name`/`--version`
+2. ~~Adopt `pseudospore-core` as dependency for envelope generation~~ **DONE** — canonical since Wave 55
+3. ~~Validate domain-agnostic emission against second spring~~ **DONE** — groundSpring domain profile authored
 
 ---
 

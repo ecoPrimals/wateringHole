@@ -21,7 +21,7 @@ primalSpring Wave 56 Mountain Blurb:
 ### What changed
 
 - Created `crates/biomeos-pseudospore/` (26th workspace crate) with types
-  and validation functions compatible with `litho_core::pseudospore`
+  and validation functions compatible with `pseudospore-core` (lithoSpore's canonical API)
 - Types: `PseudoSporeManifest`, `PseudoSporeScope`, `ArtifactIdentity`,
   `ValidationDoc`, `ChecksumEntry`, `SporeStatus`, etc.
 - Functions: `load_pseudospore()`, `verify_checksums()`, `check_completeness()`,

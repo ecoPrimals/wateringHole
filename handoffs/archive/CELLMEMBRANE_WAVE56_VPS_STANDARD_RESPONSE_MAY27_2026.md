@@ -102,7 +102,7 @@ NC-1 (spore gateway)        — Not cellMembrane-owned
 NC-2 (multi-gate mesh)      — TURN relay operational, 4 gates running
 NC-3 (sovereignty)          — ADVANCING: Forgejo + NS cutover remaining
 NC-4 (spring NUCLEUS depth) — VPS standard consumed, cell graph deploy ready
-NC-5 (lithoSpore emission)  — Gated on NC-1
+NC-5 (lithoSpore emission)  — UNBLOCKED (gated on v3.81 VPS deploy)
 ```
 
 cellMembrane is ready to deploy spring overlays when springs are ready to test against live NUCLEUS.

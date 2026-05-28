@@ -60,15 +60,15 @@ Updated 15+ docs to canonical metrics (460/15/56/93/96/813):
 
 | Gate | Status |
 |------|--------|
-| NC-1 Spore Gateway | **WIRED** — biomeOS v3.79, lithoSpore API, primalSpring graphs |
+| NC-1 Spore Gateway | **COMPLETE** — biomeOS v3.81 code done, deploy pending |
 | NC-2 Multi-Gate Mesh | **IN PROGRESS** — Songbird TCP fix, cellMembrane knot-dns |
-| NC-3 cellMembrane Sovereignty | **ADVANCING** — Nest Atomic, K-Derm, DNSSEC |
-| NC-4 Spring NUCLEUS Depth | PENDING — hotSpring/groundSpring gate deployments |
-| NC-5 Stadial Gate | BLOCKED on NC-1 through NC-4 |
+| NC-3 cellMembrane Sovereignty | **CONSUMED** — 95.8% coverage, typed errors |
+| NC-4 Spring NUCLEUS Depth | **ADVANCING** — 166 tests, wire-native discovery |
+| NC-5 Stadial Gate | **UNBLOCKED** — gated on v3.81 VPS deploy + column U |
 
 ## Remaining Known Gaps
 
-- biomeOS NC-1.4: swap to `pseudospore-core` for canonical validation
+- ~~biomeOS NC-1.4: swap to `pseudospore-core` for canonical validation~~ **RESOLVED v3.81**
 - biomeOS emit pipeline: unpack content from receipt
 - Live gate deployments: ops coordination for ironGate/southGate
 - `capability_registry.toml` at 1034 lines (config file, not code — accepted)

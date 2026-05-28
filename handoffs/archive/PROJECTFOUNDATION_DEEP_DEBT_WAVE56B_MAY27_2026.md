@@ -80,7 +80,7 @@ The "Shell library fixture tests" step now covers:
 |----|------|--------|
 | FN-1 | BLAKE3 backfill threads 4, 5, 1 | Blocked on `.data/` fetch |
 | FN-5 | Rust elevation Phase B | Unblocked by Wave 56 |
-| NC-1 | Thread 10 spore ingest | Blocked on biomeOS v3.77 live deploy |
+| NC-1 | Thread 10 spore ingest | Code COMPLETE (v3.81) — gated on VPS deploy |
 
 ## Upstream Notes
 

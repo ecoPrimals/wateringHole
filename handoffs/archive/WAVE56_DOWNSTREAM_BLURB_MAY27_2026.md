@@ -87,7 +87,7 @@ No `desktop_nucleus.sh`, no `cell_launcher.sh`, no TCP ports on the standard pat
 1. Ensure your spring cell graph (`graphs/cells/{spring}_cell.toml`) has `spawn=false` for all primals
 2. Test `biomeos deploy` with your cell graph against a live NUCLEUS
 3. Run your domain workload through `CompositionContext::from_live_discovery()`, not harness
-4. Column U: emit a pseudoSpore via NUCLEUS ingest (gated on NC-1.4)
+4. Column U: emit a pseudoSpore via NUCLEUS ingest (gated on v3.81 VPS deploy)
 
 ### What Springs Do NOT Need to Do
 
@@ -100,7 +100,7 @@ No `desktop_nucleus.sh`, no `cell_launcher.sh`, no TCP ports on the standard pat
 ## Stadial Gate Readiness
 
 ```
-NC-1 (spore gateway)        WIRED     — biomeOS NC-1.4 is the last gap
+NC-1 (spore gateway)        COMPLETE  — code done, v3.81 needs VPS deploy
 NC-2 (multi-gate mesh)      IN PROGRESS — southGate ops stabilization
 NC-3 (cellMembrane sovereignty) ADVANCING — Forgejo + NS cutover remaining
 NC-4 (spring NUCLEUS depth) MIXED     — east/iron OK, south/biome partial

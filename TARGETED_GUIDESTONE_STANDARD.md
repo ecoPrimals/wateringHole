@@ -291,6 +291,7 @@ references where data came from and can pull updates directly.
 | **Foundation Threads** (`FOUNDATION_INTEGRATION_GUIDE.md`) | Data manifest references foundation thread datasets |
 | **Provenance Trio** (`PROVENANCE_TRIO_INTEGRATION_GUIDE.md`) | Tier 3 provenance uses rhizoCrypt + loamSpine + sweetGrass |
 | **Deployment Validation** (`DEPLOYMENT_VALIDATION_STANDARD.md`) | Validation harness follows the same three-tier pattern |
+| **Derivation Anchoring** (`DERIVATION_ANCHORING_STANDARD.md`) | Extends §4: all numeric thresholds must trace through a 5-layer empirical chain with runtime enforcement |
 | **Composition Health** (`COMPOSITION_HEALTH_STANDARD.md`) | `composition.status` available at Tier 3 |
 
 ---
@@ -315,7 +316,7 @@ references where data came from and can pull updates directly.
 | Name | Version | Target | Springs | Status |
 |------|---------|--------|---------|--------|
 | ltee-guidestone | 1.0.0 (pre-release) | Barrick Lab LTEE | wetSpring, groundSpring, neuralSpring, hotSpring, healthSpring, airSpring | Architecture defined, paper queues seeded |
-| hotspring-cazyme-fel | 1.5.0 | Iglesias-Fernández 2015 (GH10 xylanase FEL) | hotSpring | GuideStone-grade: 12/12 audit, data.toml, liveSpore.json, validate/refresh, Domain Profiles |
+| hotspring-cazyme-fel | 1.7.0 | Iglesias-Fernández 2015 (GH10 xylanase FEL) | hotSpring | GuideStone-grade: 190/190 checks, Phase 0 self-consistency, Derivation Anchoring (23/23 constants), automated artifact detection |
 
 ---
 

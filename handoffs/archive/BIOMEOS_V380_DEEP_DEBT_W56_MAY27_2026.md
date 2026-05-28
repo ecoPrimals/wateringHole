@@ -62,7 +62,7 @@ dependency unification. All 8,038 tests pass with 0 failures.
 | `#[allow]` in production | **0** (was 2) |
 | Raw primal name strings | **0** in production (was 1) |
 | Hardcoded paths/values | Config-driven (was hardcoded `/tmp/`, `test_family`) |
-| Mocks in production | **0** ungated (NC-1.4 stub is documented blocker) |
+| Mocks in production | **0** ungated (NC-1.4 resolved in v3.81) |
 
 ## Test results
 

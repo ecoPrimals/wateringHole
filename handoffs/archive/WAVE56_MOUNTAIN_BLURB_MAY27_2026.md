@@ -25,9 +25,9 @@ need to warm the deployment topology before stadial gates.**
 
 | ID | Action | Priority | Notes |
 |----|--------|----------|-------|
-| NC-1.4 | Swap inline pseudoSpore validation to `pseudospore-core` crate | **HIGH** | Last spore gateway gap. lithoSpore already shipped `PseudoSporeEnvelope` API. |
+| NC-1.4 | ~~Swap inline pseudoSpore validation to `pseudospore-core` crate~~ | — | **RESOLVED** — v3.81 ships the swap |
 | NC-1.emit | Complete emit content materialization (full pseudoSpore dir unpack, not just `emit_manifest.json`) | MEDIUM | Partial in v3.79 |
-| — | v3.79 ingest/emit subcommands, signal graphs, conventions | — | **DELIVERED** — thank you |
+| — | v3.79 ingest/emit subcommands, signal graphs, conventions | — | **DELIVERED** |
 
 ### Songbird (security + mesh primal)
 
@@ -41,7 +41,7 @@ need to warm the deployment topology before stadial gates.**
 | ID | Action | Priority | Notes |
 |----|--------|----------|-------|
 | NC-5 | postPrimordial emission pattern ready on your side (`pseudospore-core`, envelope API shipped) | — | **DELIVERED** |
-| NC-5.live | First live postPrimordial pseudoSpore emission via `biomeos nucleus ingest` | **HIGH** | Gated on NC-1.4 + deployed NUCLEUS with Nest Atomic |
+| NC-5.live | First live postPrimordial pseudoSpore emission via `biomeos nucleus ingest` | **HIGH** | Gated on v3.81 VPS deploy + column U |
 | — | `PseudoSporeEnvelope` load/validate, `ltee-cli` wiring | — | **DELIVERED** |
 
 ### bearDog (identity + crypto primal)
@@ -63,8 +63,8 @@ need to warm the deployment topology before stadial gates.**
 
 ```
 13/13 primals clean          — zero method drift, zero upstream code gaps
-NC-1.4 is the critical gap   — biomeOS swap to pseudospore-core
-NC-5 is gated on NC-1.4      — lithoSpore postPrimordial emission
+NC-1 COMPLETE (code)         — v3.81 needs VPS deploy
+NC-5 UNBLOCKED               — gated on deploy + column U
 NC-2 is ops, not code         — southGate stabilization
 ```
 

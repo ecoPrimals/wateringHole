@@ -12,6 +12,7 @@ spring, contributor, and session.  Read this first, read everything else second.
 - **`GLOSSARY.md`** — Every term defined (gate, primal, spring, atomic, niche, etc.)
 - **`GATE_DEPLOYMENT_STANDARD.md`** — Hardware, OS, toolchain, directory layout for a gate
 - **`TARGETED_GUIDESTONE_STANDARD.md`** — Self-contained scientific artifact packaging (USB/ecoBin)
+- **`DERIVATION_ANCHORING_STANDARD.md`** — Zero Magic Numbers: all numeric thresholds must be formally derived and runtime-enforced
 - **`LITHOSPORE_USB_DEPLOYMENT.md`** — Spore taxonomy: ColdSpore → LiveSpore → lithoSpore
 - **`PSEUDOSPORE_STANDARD.md`** — (canonical: `gardens/lithoSpore/specs/`) Braid-first proof artifacts
 - **`PRIMAL_REGISTRY.md`** — Authoritative primal/spring version catalog
@@ -169,7 +170,7 @@ The archive is the project's geological record.
 | **Unit tests** | Every module has tests. `cargo test` passes with zero failures. |
 | **Forge tests** | Integration/forge tests for cross-module behavior. |
 | **Python cross-validation** | For scientific springs: Python reference implementations validate Rust output at paper parity. |
-| **Named tolerances** | Every numerical comparison uses a named tolerance constant (e.g., `PLANCK_TEMPERATURE_REL_TOL`), not magic numbers. |
+| **Named tolerances** | Every numerical comparison uses a named tolerance constant (e.g., `PLANCK_TEMPERATURE_REL_TOL`), not magic numbers. GuideStone artifacts: full derivation anchoring per `DERIVATION_ANCHORING_STANDARD.md`. |
 | **Clippy** | `clippy::pedantic` + `clippy::nursery`, zero warnings, all features enabled. |
 | **CI** | `cargo test --all-features`, `cargo clippy --all-features -- -D warnings`. |
 | **Coverage** | Track and increase. Minimum varies by maturity — new primals target 80%+. |

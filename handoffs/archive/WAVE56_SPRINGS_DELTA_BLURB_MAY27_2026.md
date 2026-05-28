@@ -56,10 +56,10 @@ No shell scripts. No TCP ports. No desktop symlinks.
 |------|--------|--------|
 | Cell graph | `hotspring_cell.toml` — **VPS ready** (`spawn=false`) | Deploy via `biomeos deploy` |
 | Gate depth | 9/13 primals | Elevate to full NUCLEUS (hardware: HBM2 capacity) |
-| postPrimordial | **First target** for pseudoSpore v1.6.1 ingest via NUCLEUS | Gated on biomeOS NC-1.4 (`pseudospore-core` swap) + live Nest Atomic on biomeGate |
+| postPrimordial | **First target** for pseudoSpore v1.6.1 ingest via NUCLEUS | Gated on v3.81 VPS deploy + live Nest Atomic on biomeGate |
 | Validation matrix | Column U **GATED** | Will be first spring to pass when NC-1 goes live |
 
-**Priority:** Get biomeGate to 13/13 primals, then run first live spore ingest when biomeOS delivers NC-1.4.
+**Priority:** Get biomeGate to 13/13 primals, then run first live spore ingest when v3.81 is deployed to VPS.
 
 ---
 
@@ -171,7 +171,7 @@ Column V passes when provenance trio is verified end-to-end.
 
 ```
 NOW          → Deploy from VPS via biomeos deploy (all VPS-ready springs)
-NC-1.4       → biomeOS pseudospore-core swap (upstream primal work)
+NC-1.4       → RESOLVED (v3.81) — deploy to VPS is remaining gate
 NC-1 live    → hotSpring first column U pass
 After NC-1   → groundSpring second column U pass → stadial gate criterion
 NC-2         → 3+ gates meshed (southGate stabilization required)

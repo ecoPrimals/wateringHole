@@ -60,24 +60,17 @@ swap) which is blocked upstream.
 - Aligned with actual response envelope from `signal.dispatch`:
   `{ signal, graph_id, execution: { execution_id, graph_id, started_at } }`.
 
-### 5. NC-1.4 blocker documented
+### 5. NC-1.4 blocker — RESOLVED
 
-**Status**: BLOCKED UPSTREAM
+**Status**: ~~BLOCKED UPSTREAM~~ **RESOLVED**
 
-`pseudospore-core` does not exist as a standalone crate anywhere in the
-monorepo. The canonical pseudospore API lives in:
+`pseudospore-core` now exists as a standalone crate at
+`gardens/lithoSpore/crates/pseudospore-core/` (10 modules, `SporeError` typed
+errors, `PseudoSporeEnvelope::load()` + `validate()` API). The legacy
+`litho-core/src/pseudospore.rs` re-export wrapper has been retired (deleted).
 
-- **Crate**: `litho-core` at `gardens/lithoSpore/crates/litho-core/`
-- **Module**: `src/pseudospore.rs`
-- **Key type**: `PseudoSporeManifest`
-- **API**: `load_pseudospore()` + `verify_checksums()` + `check_completeness()`
-
-biomeOS maintains a local `validate_envelope()` stub until lithoSpore either:
-- **Option A**: Extracts `pseudospore-core` as a standalone crate
-- **Option B**: biomeOS depends on `litho-core` directly (architecturally
-  questionable — primal depending on garden crate)
-
-Source comments updated to document the actual API surface.
+biomeOS v3.81 created `biomeos-pseudospore` with compatible types. Future
+evolution: swap to `pseudospore-core` directly as a workspace dep.
 
 ## Files Changed
 

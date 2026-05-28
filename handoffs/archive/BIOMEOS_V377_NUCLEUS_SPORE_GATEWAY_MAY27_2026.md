@@ -42,7 +42,7 @@ Signal graph count: 17 → 18.
 ### 4. Envelope validation
 
 Local BLAKE3 + `liveSpore.json` + `scope.toml` validation. Designed as a
-drop-in for `pseudospore-core` when lithoSpore ships it. No external dependency.
+drop-in for `pseudospore-core` (now shipped). No external dependency.
 
 ## Files changed
 
@@ -73,9 +73,9 @@ drop-in for `pseudospore-core` when lithoSpore ships it. No external dependency.
 - `exp115` Phases 4-5 can probe live NUCLEUS
 - NUCLEUS_VALIDATION_MATRIX column U unblocked for all springs
 
-## What remains for pseudospore-core integration
+## pseudospore-core integration — RESOLVED
 
-When lithoSpore ships `pseudospore-core`:
-1. Add `pseudospore-core = { path = "../../gardens/lithoSpore/crates/pseudospore-core" }` to biomeOS workspace
-2. Replace local `validate_envelope()` with `PseudoSporeEnvelope::validate()`
-3. The handler, signal graph, and Neural API routes are already wired — only the validation layer changes
+lithoSpore shipped `pseudospore-core` (Wave 55). biomeOS v3.81 created
+`biomeos-pseudospore` with compatible types. Remaining evolution: swap to
+`pseudospore-core` directly as a workspace dep for full API parity
+(`PseudoSporeEnvelope::validate()`, `SporeError` typed errors).
