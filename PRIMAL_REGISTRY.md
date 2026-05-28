@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 28, 2026 (Wave 58 — biomeOS v3.83, Env Var Centralization. 460 methods, 56 scenarios, 96 deploy graphs (81 deploy + 15 signal), 93 experiments, 813 tests. NC-1 COMPLETE. env_config::vars SSOT: 90+ raw literals centralized across 37 files, 15 new constants, 14 sovereign test files #[expect] migrated. 8,053 workspace tests, 26 crates.)
+**Last Updated**: May 28, 2026 (Wave 58b — biomeOS v3.84, Deep Debt complete. NC-1 COMPLETE. env_config::vars SSOT (~90% wired), zero >800L production files, zero unsafe/mocks/TODO in production. 8,053 workspace tests, 26 crates, 13 active handoffs + 340 archived.)
 
 ---
 
