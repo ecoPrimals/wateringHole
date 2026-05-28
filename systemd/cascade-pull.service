@@ -1,0 +1,31 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# cascade-pull.service — Ecosystem-wide git pull via wateringHole
+#
+# Install per-user (no root required):
+#   mkdir -p ~/.config/systemd/user
+#   cp cascade-pull.service cascade-pull.timer ~/.config/systemd/user/
+#   systemctl --user daemon-reload
+#   systemctl --user enable --now cascade-pull.timer
+#
+# Environment overrides:
+#   Create ~/.config/cascade-pull.env with:
+#     ECOPRIMALS_ROOT=/home/eastgate/Development/ecoPrimals
+#     CASCADE_GATE=eastGate
+#     CASCADE_PARALLEL=8
+
+[Unit]
+Description=Cascade pull — ecosystem workspace sync via wateringHole
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-%h/.config/cascade-pull.env
+ExecStart=%h/Development/ecoPrimals/infra/wateringHole/cascade-pull.sh --gate ${CASCADE_GATE:-eastGate}
+StandardOutput=journal
+StandardError=journal
+TimeoutStartSec=300
+
+[Install]
+WantedBy=default.target

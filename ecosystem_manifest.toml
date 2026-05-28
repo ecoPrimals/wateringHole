@@ -1,0 +1,416 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# ecosystem_manifest.toml — Machine-readable catalog of all ecoPrimals repositories
+#
+# Authority: wateringHole consensus
+# Consumed by: cascade-pull, freshness checks, primalSpring s_ecosystem_freshness
+#
+# Fields:
+#   org            — GitHub org (ecoPrimals, syntheticChemistry, sporeGarden)
+#   local_path     — Path relative to ecoPrimals workspace root
+#   membrane       — "inner-only" | "trailing-mirror" | "outer-only"
+#   sync_source    — "github" (default) | "forgejo" (inner-only repos)
+#   sync_priority  — "high" | "standard" | "low"
+#   category       — "primal" | "spring" | "garden" | "infra" | "root"
+#   description    — Short human description
+#   github_repo    — Full GitHub repo path (org/name)
+#   default_branch — Git branch name (default: "main")
+
+[meta]
+version = "1.0.0"
+generated = "2026-05-28"
+wave = 59
+total_repos = 36
+
+# ═══════════════════════════════════════════════════════════════════
+# Root
+# ═══════════════════════════════════════════════════════════════════
+
+[repos.nestGate]
+org = "ecoPrimals"
+local_path = "."
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "root"
+description = "Workspace root + NestGate storage/content crates"
+github_repo = "ecoPrimals/nestGate"
+
+# ═══════════════════════════════════════════════════════════════════
+# Primals (ecoPrimals org)
+# ═══════════════════════════════════════════════════════════════════
+
+[repos.bearDog]
+org = "ecoPrimals"
+local_path = "primals/bearDog"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "primal"
+description = "Security, crypto, BTSP identity"
+github_repo = "ecoPrimals/bearDog"
+
+[repos.songbird]
+org = "ecoPrimals"
+local_path = "primals/songbird"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "primal"
+description = "Discovery, routing, federation"
+github_repo = "ecoPrimals/songBird"
+
+[repos.toadStool]
+org = "ecoPrimals"
+local_path = "primals/toadStool"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "primal"
+description = "Compute dispatch"
+github_repo = "ecoPrimals/toadStool"
+
+[repos.barraCuda]
+org = "ecoPrimals"
+local_path = "primals/barraCuda"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "primal"
+description = "GPU compute dispatch"
+github_repo = "ecoPrimals/barraCuda"
+
+[repos.coralReef]
+org = "ecoPrimals"
+local_path = "primals/coralReef"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "primal"
+description = "Distributed compute mesh"
+github_repo = "ecoPrimals/coralReef"
+
+[repos.rhizoCrypt]
+org = "ecoPrimals"
+local_path = "primals/rhizoCrypt"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "primal"
+description = "Provenance DAG"
+github_repo = "ecoPrimals/rhizoCrypt"
+
+[repos.loamSpine]
+org = "ecoPrimals"
+local_path = "primals/loamSpine"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "primal"
+description = "Provenance spine"
+github_repo = "ecoPrimals/loamSpine"
+
+[repos.sweetGrass]
+org = "ecoPrimals"
+local_path = "primals/sweetGrass"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "primal"
+description = "Provenance braid"
+github_repo = "ecoPrimals/sweetGrass"
+
+[repos.biomeOS]
+org = "ecoPrimals"
+local_path = "primals/biomeOS"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "primal"
+description = "Orchestration layer"
+github_repo = "ecoPrimals/biomeOS"
+
+[repos.squirrel]
+org = "ecoPrimals"
+local_path = "primals/squirrel"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "primal"
+description = "AI/MCP orchestration"
+github_repo = "ecoPrimals/squirrel"
+
+[repos.petalTongue]
+org = "ecoPrimals"
+local_path = "primals/petalTongue"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "primal"
+description = "Storytelling/UI bridge"
+github_repo = "ecoPrimals/petalTongue"
+
+[repos.skunkBat]
+org = "ecoPrimals"
+local_path = "primals/skunkBat"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "primal"
+description = "Defense/audit"
+github_repo = "ecoPrimals/skunkBat"
+
+[repos.sourDough]
+org = "ecoPrimals"
+local_path = "primals/sourDough"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "primal"
+description = "Starter culture/bootstrap"
+github_repo = "ecoPrimals/sourDough"
+
+[repos.bingoCube]
+org = "ecoPrimals"
+local_path = "primals/bingoCube"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "primal"
+description = "Validation framework"
+github_repo = "ecoPrimals/bingoCube"
+
+# ═══════════════════════════════════════════════════════════════════
+# Springs (syntheticChemistry org)
+# ═══════════════════════════════════════════════════════════════════
+
+[repos.primalSpring]
+org = "syntheticChemistry"
+local_path = "springs/primalSpring"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "spring"
+description = "Coordination spring, composition validation"
+github_repo = "syntheticChemistry/primalSpring"
+
+[repos.wetSpring]
+org = "syntheticChemistry"
+local_path = "springs/wetSpring"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "spring"
+description = "Breseq/LTEE science validation"
+github_repo = "syntheticChemistry/wetSpring"
+
+[repos.neuralSpring]
+org = "syntheticChemistry"
+local_path = "springs/neuralSpring"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "spring"
+description = "Neural/AI validation"
+github_repo = "syntheticChemistry/neuralSpring"
+
+[repos.hotSpring]
+org = "syntheticChemistry"
+local_path = "springs/hotSpring"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "spring"
+description = "GPU compute validation"
+github_repo = "syntheticChemistry/hotSpring"
+
+[repos.airSpring]
+org = "syntheticChemistry"
+local_path = "springs/airSpring"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "spring"
+description = "Atmospheric/ADS-B validation"
+github_repo = "syntheticChemistry/airSpring"
+
+[repos.groundSpring]
+org = "syntheticChemistry"
+local_path = "springs/groundSpring"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "spring"
+description = "Geospatial validation"
+github_repo = "syntheticChemistry/groundSpring"
+
+[repos.healthSpring]
+org = "syntheticChemistry"
+local_path = "springs/healthSpring"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "spring"
+description = "Health/clinical validation"
+github_repo = "syntheticChemistry/healthSpring"
+
+[repos.ludoSpring]
+org = "syntheticChemistry"
+local_path = "springs/ludoSpring"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "spring"
+description = "Game engine validation"
+github_repo = "syntheticChemistry/ludoSpring"
+
+# ═══════════════════════════════════════════════════════════════════
+# Gardens (sporeGarden org)
+# ═══════════════════════════════════════════════════════════════════
+
+[repos.cellMembrane]
+org = "sporeGarden"
+local_path = "gardens/cellMembrane"
+membrane = "inner-only"
+sync_source = "forgejo"
+sync_priority = "high"
+category = "garden"
+description = "VPS deployment, sovereignty boundary"
+github_repo = "sporeGarden/cellMembrane"
+
+[repos.lithoSpore]
+org = "sporeGarden"
+local_path = "gardens/lithoSpore"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "garden"
+description = "Verification chassis, USB-deployable validation"
+github_repo = "sporeGarden/lithoSpore"
+
+[repos.projectNUCLEUS]
+org = "sporeGarden"
+local_path = "gardens/projectNUCLEUS"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "garden"
+description = "Sovereignty layer, deployment infrastructure"
+github_repo = "sporeGarden/projectNUCLEUS"
+
+[repos.projectFOUNDATION]
+org = "sporeGarden"
+local_path = "gardens/projectFOUNDATION"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "garden"
+description = "Knowledge layer, thread lineage, validation evidence"
+github_repo = "sporeGarden/projectFOUNDATION"
+
+[repos.esotericWebb]
+org = "sporeGarden"
+local_path = "gardens/esotericWebb"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "garden"
+description = "UI/agentic interaction layer"
+github_repo = "sporeGarden/esotericWebb"
+
+[repos.blueFish]
+org = "syntheticChemistry"
+local_path = "gardens/blueFish"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "garden"
+description = "BlueFish product garden"
+github_repo = "syntheticChemistry/blueFish"
+
+# ═══════════════════════════════════════════════════════════════════
+# Infrastructure (mixed orgs)
+# ═══════════════════════════════════════════════════════════════════
+
+[repos.wateringHole]
+org = "ecoPrimals"
+local_path = "infra/wateringHole"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "infra"
+description = "Ecosystem standards, coordination, cascading pull orchestration"
+github_repo = "ecoPrimals/wateringHole"
+
+[repos.plasmidBin]
+org = "ecoPrimals"
+local_path = "infra/plasmidBin"
+membrane = "trailing-mirror"
+sync_priority = "high"
+category = "infra"
+description = "Binary depot, deploy scripts, release assets"
+github_repo = "ecoPrimals/plasmidBin"
+
+[repos.whitePaper]
+org = "ecoPrimals"
+local_path = "infra/whitePaper"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "infra"
+description = "Research documentation"
+github_repo = "ecoPrimals/whitePaper"
+
+[repos.sporePrint]
+org = "ecoPrimals"
+local_path = "infra/sporePrint"
+membrane = "outer-only"
+sync_priority = "low"
+category = "infra"
+description = "GitHub Pages deployment — generated site"
+github_repo = "ecoPrimals/sporePrint"
+
+[repos.benchScale]
+org = "syntheticChemistry"
+local_path = "infra/benchScale"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "infra"
+description = "Lab validation infrastructure"
+github_repo = "syntheticChemistry/benchScale"
+
+[repos.agentReagents]
+org = "syntheticChemistry"
+local_path = "infra/agentReagents"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "infra"
+description = "Agent configuration reagents"
+github_repo = "syntheticChemistry/agentReagents"
+
+[repos.rustChip]
+org = "syntheticChemistry"
+local_path = "infra/rustChip"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "infra"
+description = "Rust toolchain chip"
+github_repo = "syntheticChemistry/rustChip"
+
+# ═══════════════════════════════════════════════════════════════════
+# Gate Profiles
+# ═══════════════════════════════════════════════════════════════════
+# Which repos each gate cares about. cascade-pull uses these to
+# filter — a gate only pulls repos it needs.
+
+[gates.eastGate]
+repos = [
+    "nestGate", "wateringHole", "plasmidBin", "primalSpring",
+    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat", "bingoCube", "sourDough",
+    "cellMembrane", "projectNUCLEUS", "lithoSpore", "projectFOUNDATION",
+    "whitePaper", "benchScale", "agentReagents",
+    "wetSpring", "neuralSpring", "hotSpring",
+    "airSpring", "groundSpring", "healthSpring", "ludoSpring",
+]
+
+[gates.ironGate]
+repos = [
+    "nestGate", "wateringHole", "plasmidBin", "primalSpring",
+    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat",
+    "cellMembrane", "projectNUCLEUS", "lithoSpore",
+    "healthSpring",
+]
+
+[gates.southGate]
+repos = [
+    "nestGate", "wateringHole", "plasmidBin", "primalSpring",
+    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat",
+    "cellMembrane", "projectNUCLEUS",
+    "wetSpring", "neuralSpring",
+]
+
+[gates.biomeGate]
+repos = [
+    "nestGate", "wateringHole", "plasmidBin", "primalSpring",
+    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat",
+    "cellMembrane", "projectNUCLEUS",
+    "hotSpring",
+]

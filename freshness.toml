@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# freshness.toml — Ecosystem state snapshot at wave publish time
+#
+# Authority: primalSpring coordination (published each wave)
+# Consumed by: cascade-pull --check, s_ecosystem_freshness scenario
+#
+# Gates compare their local HEADs against [heads] to detect drift.
+# `cascade-pull --check` reads this without fetching; full cascade-pull
+# uses it to decide which repos need updating.
+#
+# Regenerate: cascade-pull --publish-freshness (updates heads from live state)
+
+[wave]
+id = 59
+date = "2026-05-28"
+ssot = "handoffs/WAVE59_REMAINING_WORK_MAY28_2026.md"
+publisher = "primalSpring"
+
+[heads]
+nestGate = "df81c77d690c3179428022501858f48e8633acb4"
+bearDog = "2a7be2f40d7f6eca3b745b75f87cbf7f8c00ea8a"
+songbird = "a6ef1ec8693ce43af7a4cee214262718ae8ec105"
+toadStool = "b3fc8bc26209305a4fa0aadf7d2e1a93a7480c3a"
+barraCuda = "738c0a6183279f29126fb2b4d6f6135787ea4354"
+coralReef = "548d05447a158a0b89dcdfad8c64032a67e29e55"
+rhizoCrypt = "06b6dd6ce6a5aed58820d0b31549f357ed753e48"
+loamSpine = "9b3d67ecf9b26e9d0f59a6bbf9b494c515a2304e"
+sweetGrass = "83ad29e6a02f6286bc87794fc75d82a37636b34b"
+biomeOS = "59d6ba51f3625a7d711bf4982e696dfd480b3190"
+squirrel = "03a6470c4ebcea558791e5ea706b5c9a4d6baac8"
+petalTongue = "d96b301bb60e0abf0dc7ef95404f247edc9a3c41"
+skunkBat = "5479cdbf493803cbcc5baf37ea9f65f9daaa4f63"
+sourDough = "367876d99e3fd85a1f7fa460605e08e041021f50"
+bingoCube = "b5340ef4886b3e98774979e80b75dc32d49f2002"
+primalSpring = "1261ee74c7bf21aa6a6c63ca87df629a6fa973c3"
+wetSpring = "064650e4477eef5c1322879f307f5671fb45b2c7"
+neuralSpring = "5b4fcc075054dd5cb1a07622b2490297e40f4410"
+hotSpring = "56a5094c7e6f636b33856371b0f20865310f93c8"
+airSpring = "5429e59b2af0c5560a1d7ad1ca3bdaa4693d062f"
+groundSpring = "3fde7148d92a4f47b659fa95efbe0abf255af8ac"
+healthSpring = "fdebba2a3b8602ed79fd608fb6cb5c9695c692c6"
+ludoSpring = "3f9dff70b031efebfa9b10f725cd6840aa01734d"
+cellMembrane = "dea86de3ef0bcbdf4fb20225323fc8af1e38a2c2"
+lithoSpore = "7231bc4931ec13764c3850ec8a238f4681cbe527"
+projectNUCLEUS = "9cd7e6db2e1ece6ad4f3e1dd4b33128edf40131f"
+projectFOUNDATION = "c39602c7efa5254518ab0df7b61a3edc567e8ffe"
+esotericWebb = "f514535280dff27a8796f4da5c1df73813f2ca3b"
+wateringHole = "d1254cf40d7f29dd1c227f5d0307a2b485f1bbbf"
+plasmidBin = "941e177c7153ffbbc3c66d4628b204a1b522030e"
+whitePaper = "42ab7a94afa6ff396635d27d446c83be27102fea"
+sporePrint = "867429da8a4b0ebd801cbcac22052df46f457e75"
+benchScale = "789d2c4204fc39ca052ab72b7d5a9c414baebcbd"
+agentReagents = "f75265105f9f10d097dfd932112bee921ebd6bb5"
+rustChip = "f5c84a582bf9728afecd335ce04a35433a4f46af"

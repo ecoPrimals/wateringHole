@@ -1,0 +1,351 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# cascade-pull.sh — Concurrent ecosystem-wide git pull orchestrated by wateringHole
+#
+# Reads ecosystem_manifest.toml and freshness.toml to determine which
+# repos need updating, then concurrently pulls them with per-repo
+# failure isolation.
+#
+# Usage:
+#   cascade-pull.sh                        # Pull all repos
+#   cascade-pull.sh --gate eastGate        # Pull only repos for this gate
+#   cascade-pull.sh --category primals     # Pull only primals
+#   cascade-pull.sh --check                # Report drift without pulling
+#   cascade-pull.sh --dry-run              # Show what would be pulled
+#   cascade-pull.sh --publish-freshness    # Update freshness.toml from live state
+#   cascade-pull.sh --parallel 8           # Limit concurrent pulls (default: 8)
+#
+# Prerequisites:
+#   - bash 4+, git, python3 (ships with all gates)
+#
+# Environment:
+#   ECOPRIMALS_ROOT   Override workspace root (default: auto-detect)
+#   CASCADE_PARALLEL  Override parallelism (default: 8)
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+
+resolve_eco_root() {
+    if [[ -n "${ECOPRIMALS_ROOT:-}" ]]; then
+        echo "$ECOPRIMALS_ROOT"
+    elif [[ -d "$SCRIPT_DIR/../../primals" ]]; then
+        cd "$SCRIPT_DIR/../.." && pwd
+    else
+        echo "ERROR: Cannot determine ecoPrimals root. Set ECOPRIMALS_ROOT." >&2
+        exit 1
+    fi
+}
+
+ECO_ROOT="$(resolve_eco_root)"
+MANIFEST="$SCRIPT_DIR/ecosystem_manifest.toml"
+FRESHNESS="$SCRIPT_DIR/freshness.toml"
+
+GATE=""
+CATEGORY=""
+CHECK_ONLY=false
+DRY_RUN=false
+PUBLISH_FRESHNESS=false
+PARALLEL="${CASCADE_PARALLEL:-8}"
+SELF_UPDATE=true
+
+usage() {
+    echo "Usage: $0 [OPTIONS]"
+    echo ""
+    echo "Options:"
+    echo "  --gate NAME          Pull only repos assigned to this gate"
+    echo "  --category CAT       Filter by category (primal, spring, garden, infra)"
+    echo "  --check              Report drift without pulling"
+    echo "  --dry-run            Show what would be pulled"
+    echo "  --publish-freshness  Update freshness.toml from current HEADs"
+    echo "  --parallel N         Max concurrent pulls (default: 8)"
+    echo "  --no-self-update     Skip pulling wateringHole first"
+    echo "  --help               Show this help"
+}
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --gate)       GATE="$2"; shift 2 ;;
+        --category)   CATEGORY="$2"; shift 2 ;;
+        --check)      CHECK_ONLY=true; shift ;;
+        --dry-run)    DRY_RUN=true; shift ;;
+        --publish-freshness) PUBLISH_FRESHNESS=true; shift ;;
+        --parallel)   PARALLEL="$2"; shift 2 ;;
+        --no-self-update) SELF_UPDATE=false; shift ;;
+        --help)       usage; exit 0 ;;
+        -*)           echo "Unknown option: $1"; usage; exit 1 ;;
+        *)            echo "Unknown argument: $1"; usage; exit 1 ;;
+    esac
+done
+
+if [[ ! -f "$MANIFEST" ]]; then
+    echo "ERROR: ecosystem_manifest.toml not found at $MANIFEST"
+    exit 1
+fi
+
+# ─── TOML Parsing via Python ────────────────────────────────────────────────
+
+_py_toml_import() {
+    cat << 'PYIMPORT'
+try:
+    import tomllib
+    def load_toml(path):
+        with open(path, "rb") as f:
+            return tomllib.load(f)
+except ModuleNotFoundError:
+    try:
+        import tomli
+        def load_toml(path):
+            with open(path, "rb") as f:
+                return tomli.load(f)
+    except ModuleNotFoundError:
+        import toml
+        def load_toml(path):
+            return toml.load(path)
+PYIMPORT
+}
+
+parse_repos() {
+    local manifest_arg="$MANIFEST"
+    local gate_arg="$GATE"
+    local category_arg="$CATEGORY"
+    python3 -c "
+$(_py_toml_import)
+
+data = load_toml('$manifest_arg')
+
+gate = '$gate_arg'
+category = '$category_arg'
+
+repos = data.get('repos', {})
+gate_repos = None
+if gate:
+    gate_repos = set(data.get('gates', {}).get(gate, {}).get('repos', []))
+
+for name in sorted(repos):
+    info = repos[name]
+    if gate_repos is not None and name not in gate_repos:
+        continue
+    cat = info.get('category', '')
+    if category and cat != category:
+        continue
+    lp = info.get('local_path', '')
+    mem = info.get('membrane', 'trailing-mirror')
+    ss = info.get('sync_source', 'github')
+    print(f'{name}\t{lp}\t{mem}\t{ss}')
+"
+}
+
+parse_freshness_heads() {
+    if [[ ! -f "$FRESHNESS" ]]; then
+        return
+    fi
+    local freshness_arg="$FRESHNESS"
+    python3 -c "
+$(_py_toml_import)
+
+data = load_toml('$freshness_arg')
+
+for name, head in data.get('heads', {}).items():
+    print(f'{name}\t{head}')
+"
+}
+
+# ─── Publish Freshness ───────────────────────────────────────────────────────
+
+if $PUBLISH_FRESHNESS; then
+    echo "Publishing freshness.toml from live HEADs..."
+
+    wave_id=0
+    ssot=""
+    if [[ -f "$FRESHNESS" ]]; then
+        wave_id=$(python3 -c "
+$(_py_toml_import)
+d = load_toml('$FRESHNESS')
+print(d.get('wave', {}).get('id', 0))
+" 2>/dev/null || echo "0")
+        ssot=$(python3 -c "
+$(_py_toml_import)
+d = load_toml('$FRESHNESS')
+print(d.get('wave', {}).get('ssot', ''))
+" 2>/dev/null || echo "")
+    fi
+
+    {
+        cat <<'HEADER'
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# freshness.toml — Ecosystem state snapshot at wave publish time
+#
+# Authority: primalSpring coordination (published each wave)
+# Consumed by: cascade-pull --check, s_ecosystem_freshness scenario
+#
+# Regenerate: cascade-pull --publish-freshness
+
+HEADER
+        echo "[wave]"
+        echo "id = $wave_id"
+        echo "date = \"$(date +%Y-%m-%d)\""
+        [[ -n "$ssot" ]] && echo "ssot = \"$ssot\""
+        echo "publisher = \"cascade-pull\""
+        echo ""
+        echo "[heads]"
+
+        GATE="" CATEGORY="" parse_repos | while IFS=$'\t' read -r name local_path _membrane _ss; do
+            repo_dir="$ECO_ROOT/$local_path"
+            if [[ -d "$repo_dir/.git" ]]; then
+                head=$(cd "$repo_dir" && git rev-parse HEAD 2>/dev/null || echo "unknown")
+                echo "$name = \"$head\""
+            fi
+        done
+    } > "$FRESHNESS.tmp"
+    mv "$FRESHNESS.tmp" "$FRESHNESS"
+    echo "freshness.toml updated (wave $wave_id, $(date +%Y-%m-%d))."
+    exit 0
+fi
+
+# ─── Self-update wateringHole first ──────────────────────────────────────────
+
+if $SELF_UPDATE && ! $CHECK_ONLY && ! $DRY_RUN; then
+    wh_dir="$ECO_ROOT/infra/wateringHole"
+    if [[ -d "$wh_dir/.git" ]]; then
+        echo "=== Self-update: pulling wateringHole ==="
+        if (cd "$wh_dir" && git pull --ff-only 2>&1); then
+            echo "  wateringHole updated"
+        else
+            echo "  WARNING: wateringHole pull failed (continuing with local state)"
+        fi
+        echo ""
+    fi
+fi
+
+# ─── Build freshness cache file ──────────────────────────────────────────────
+
+TMPDIR_RESULTS=$(mktemp -d)
+trap 'rm -rf "$TMPDIR_RESULTS"' EXIT
+
+FRESHNESS_CACHE="$TMPDIR_RESULTS/.freshness_cache"
+if [[ -f "$FRESHNESS" ]]; then
+    parse_freshness_heads > "$FRESHNESS_CACHE"
+else
+    touch "$FRESHNESS_CACHE"
+fi
+
+echo "cascade-pull — $(date -Iseconds)"
+echo "  Root:     $ECO_ROOT"
+[[ -n "$GATE" ]] && echo "  Gate:     $GATE"
+[[ -n "$CATEGORY" ]] && echo "  Category: $CATEGORY"
+$CHECK_ONLY && echo "  Mode:     CHECK (no pulls)"
+$DRY_RUN && echo "  Mode:     DRY-RUN"
+echo ""
+
+# ─── Worker function (called in subshells) ───────────────────────────────────
+
+process_repo() {
+    local name="$1" local_path="$2" membrane="$3" sync_source="$4"
+    local repo_dir="$ECO_ROOT/$local_path"
+    local result_file="$TMPDIR_RESULTS/$name"
+
+    if [[ ! -d "$repo_dir/.git" ]]; then
+        printf "  [%-20s] MISSING  %s\n" "$name" "$repo_dir"
+        echo "MISSING" > "$result_file"
+        return
+    fi
+
+    local local_head
+    local_head=$(cd "$repo_dir" && git rev-parse HEAD 2>/dev/null)
+
+    if $CHECK_ONLY; then
+        local expected
+        expected=$(grep "^${name}	" "$FRESHNESS_CACHE" 2>/dev/null | cut -f2 || echo "")
+        if [[ -z "$expected" ]]; then
+            printf "  [%-20s] NO-REF   (not in freshness.toml)\n" "$name"
+            echo "SKIPPED" > "$result_file"
+        elif [[ "$local_head" == "$expected" ]]; then
+            printf "  [%-20s] CURRENT  %s\n" "$name" "${local_head:0:12}"
+            echo "CURRENT" > "$result_file"
+        else
+            printf "  [%-20s] STALE    local=%s expected=%s\n" "$name" "${local_head:0:12}" "${expected:0:12}"
+            echo "STALE" > "$result_file"
+        fi
+        return
+    fi
+
+    if $DRY_RUN; then
+        printf "  [%-20s] WOULD-PULL  %s\n" "$name" "$repo_dir"
+        echo "DRYRUN" > "$result_file"
+        return
+    fi
+
+    local pull_output pull_ok=true
+    pull_output=$(cd "$repo_dir" && git pull --ff-only 2>&1) || pull_ok=false
+
+    if $pull_ok; then
+        local new_head
+        new_head=$(cd "$repo_dir" && git rev-parse HEAD 2>/dev/null)
+        if [[ "$new_head" == "$local_head" ]]; then
+            printf "  [%-20s] CURRENT  %s\n" "$name" "${local_head:0:12}"
+            echo "CURRENT" > "$result_file"
+        else
+            printf "  [%-20s] UPDATED  %s -> %s\n" "$name" "${local_head:0:12}" "${new_head:0:12}"
+            echo "UPDATED" > "$result_file"
+        fi
+    else
+        if echo "$pull_output" | grep -q "Not possible to fast-forward\|cannot fast-forward"; then
+            printf "  [%-20s] DIVERGED %s (needs manual merge)\n" "$name" "${local_head:0:12}"
+            echo "DIVERGED" > "$result_file"
+        else
+            printf "  [%-20s] FAILED   %s\n" "$name" "$(echo "$pull_output" | head -1)"
+            echo "FAILED" > "$result_file"
+        fi
+    fi
+}
+
+export -f process_repo
+export ECO_ROOT TMPDIR_RESULTS CHECK_ONLY DRY_RUN FRESHNESS FRESHNESS_CACHE
+
+# ─── Run in parallel using background jobs ───────────────────────────────────
+
+active_jobs=0
+while IFS=$'\t' read -r name local_path membrane sync_source; do
+    process_repo "$name" "$local_path" "$membrane" "$sync_source" &
+    active_jobs=$((active_jobs + 1))
+    if [[ $active_jobs -ge $PARALLEL ]]; then
+        wait -n 2>/dev/null || true
+        active_jobs=$((active_jobs - 1))
+    fi
+done < <(parse_repos)
+
+wait
+
+# ─── Tally results ───────────────────────────────────────────────────────────
+
+UPDATED=0; CURRENT=0; SKIPPED=0; MISSING=0; DIVERGED=0; FAILED=0
+
+for f in "$TMPDIR_RESULTS"/*; do
+    [[ -f "$f" ]] || continue
+    case "$(cat "$f")" in
+        UPDATED)  UPDATED=$((UPDATED + 1)) ;;
+        CURRENT)  CURRENT=$((CURRENT + 1)) ;;
+        MISSING)  MISSING=$((MISSING + 1)) ;;
+        FAILED)   FAILED=$((FAILED + 1)) ;;
+        DIVERGED) DIVERGED=$((DIVERGED + 1)) ;;
+        STALE)    FAILED=$((FAILED + 1)) ;;
+        SKIPPED)  SKIPPED=$((SKIPPED + 1)) ;;
+        DRYRUN)   SKIPPED=$((SKIPPED + 1)) ;;
+    esac
+done
+
+echo ""
+echo "Summary:"
+echo "  Updated:  $UPDATED"
+echo "  Current:  $CURRENT"
+echo "  Skipped:  $SKIPPED"
+echo "  Missing:  $MISSING"
+echo "  Diverged: $DIVERGED"
+echo "  Failed:   $FAILED"
+
+if [[ $FAILED -gt 0 || $DIVERGED -gt 0 ]]; then
+    exit 1
+fi
