@@ -1,6 +1,6 @@
 # Wave 57 Mountain Blurb — Upstream Primals
 
-**Date:** May 28, 2026
+**Date:** May 28, 2026 (updated)
 **From:** primalSpring coordination
 **To:** All 13 primal teams (upstream mountain)
 
@@ -13,62 +13,67 @@ split into 3 focused modules, all env vars centralized, zero production
 unwraps/unsafe/todo, zero clippy suppressions without reason, all doctests fixed.
 797 lib tests, 56 scenarios, zero clippy warnings.
 
-Downstream has fully converged: cellMembrane shipped the typed VPS standard
-(`TransportMode`), projectNUCLEUS has `--uds-only` deploy for all 13 primals,
-projectFOUNDATION has graph-driven health. **The ecosystem is aligned.**
-
-**NC-1 is COMPLETE.** biomeOS v3.81 delivered `biomeos-pseudospore` + full emit
-materialization. The remaining path is live deployment and spring emissions.
+**primalSpring coordination pushed env var centralization to 8 primals this wave.**
+This eliminates hardcoded `std::env::var("LITERAL")` across the mountain, matching
+the `env_keys.rs` pattern established in primalSpring.
 
 ---
 
-## Per-Primal Action Items
+## What We Pushed (8 primals, committed & pushed)
+
+| Primal | Constants | Files | Pattern | Tests |
+|--------|-----------|-------|---------|-------|
+| **sourDough** | 3 keys | 7 files | new `env_keys.rs` + scaffold template | 185 pass |
+| **sweetGrass** | 3 keys | 3 files | extended `primal_names::env_vars` | 878+ pass |
+| **skunkBat** | 18 keys | 15 files | new `env_keys.rs` | 376 pass |
+| **rhizoCrypt** | 22 keys | 10 files | completed `safe_env` migration | 883+ pass |
+| **loamSpine** | 30+ keys | 13 files | completed `env_resolution` + facades | all pass |
+| **petalTongue** | 60 keys | 17 files | new `constants/env_vars.rs` | 1583+ pass |
+| **coralReef** | 22 keys | 16 files | new `env_keys.rs` + 3 clippy fixes | all pass |
+| **barraCuda** | 30 keys | 15 files | new `env_keys.rs` (core + device) | 3867 pass |
+
+**Total: ~188 env var constants centralized across 96 files in 8 primals.**
+
+---
+
+## Remaining Per-Primal Action Items
 
 ### biomeOS — **CRITICAL PATH**
 - NC-1 COMPLETE code-side. **Action: deploy v3.81 to cellMembrane VPS via plasmidBin**
 - Once live: hotSpring column U pass becomes unblocked (first spring emission)
 - `biomeos deploy graphs/cells/hotspring_cell.toml` — test on live VPS
-- `FAMILY_ID` discovery via JSON-RPC confirmed by projectFOUNDATION (used in `env.sh`)
 
-### bearDog
-- NC-3.5 sporePrint living content is **BLOCKED** on `auth.issue_session` scope expansion
-- **Action**: scope expansion to unblock cellMembrane sporePrint integration
-- Wave 56 orphan modules deleted + ionic bond refactor absorbed — clean
+### bearDog — **NEEDS TEAM** (env epic)
+- ~550 env var sites across 130 files — multi-crate migration
+- `zero_hardcoding.rs` exists but literals remain widespread
+- **Action**: enforce `zero_hardcoding.rs` philosophy, track as env migration epic
+- NC-3.5 sporePrint: `auth.issue_session` scope expansion needed
 
-### songbird
-- GAP-17/18 **partially resolved** — capability socket constants centralized, `ipc.resolve` migration path available
-- **Action**: complete `ipc.resolve` migration for full capability socket resolution
-- southGate 7/13 health likely `SONGBIRD_PEERS` env or cold-start timing — not a code bug
+### songbird — **NEEDS TEAM** (env + clippy)
+- ~70 env sites across 35 files — `songbird-process-env` crate exists but not fully adopted
+- ~180 `#[allow(clippy::` in test modules (batch `expect` migration)
+- **Action**: adopt `songbird-process-env` everywhere; batch clippy expect migration
+
+### squirrel — **NEEDS TEAM** (SDK config sprawl)
+- ~250 env sites across 90 files — SDK `infrastructure/config.rs` is the hotspot
+- 3 `#[allow(clippy::` in prod-adjacent code
+- **Action**: extract shared env constants from SDK config layer
+
+### toadStool — **NEEDS TEAM** (domain complexity)
+- ~200 env sites, `env_overrides.rs` (70+ literals in one file) needs split
+- ~17 `#[allow(clippy::` + extensive VFIO unsafe (domain-required)
+- **Action**: split `env_overrides.rs` into domain modules; `unused_async` quick fix
 
 ### lithoSpore
 - NC-5 **UNBLOCKED** — NC-1.4 resolved, `--from-dir` emission path shipped
-- **Action**: prepare for first live lithoSpore postPrimordial emission once 2 springs pass column U
-- 7/7 tier-0 in CI, parity workflow active
-
-### skunkBat, rhizoCrypt, loamSpine, sweetGrass, coralReef, barraCuda
-- No blocking action items
-- Port SSOT fully reconciled across all repos (verified cellMembrane `ports.env` ↔ primalSpring `tolerances/mod.rs`)
-- VPS deploys will use UDS-only — zero TCP ports in production
-
-### squirrel
-- No blocking items. Meta-tier UDS deployment ready.
-
-### toadStool
-- No blocking items. Node-tier UDS deployment ready.
-- `TOADSTOOL_AUTH_MODE` env var resolved in prior wave
-
-### petalTongue / sourDough
-- No blocking items. plasmidBin harvests current (May 28).
+- **Action**: prepare for first live postPrimordial emission once 2 springs pass column U
 
 ---
 
 ## Canonical Health Method
 
 **`health.liveness`** is the canonical health method across all primals.
-primalSpring also aliases `health.check`. Certification Layer 2 uses
-`health.liveness`. projectFOUNDATION's `foundation_validation.toml` uses
-`health.liveness` for all nodes. **All primals should respond to
-`health.liveness`.**
+All 13 primals implement it. Certification Layer 2 uses `health.liveness`.
 
 ---
 
@@ -86,4 +91,4 @@ NC-5  lithoSpore postPrimordial        UNBLOCKED    Waiting on 2 spring emission
 
 ---
 
-*Wave 57. Mountain clean. Ecosystem converged. Deploy the primals.*
+*Wave 57. 8 primals pushed upstream. Mountain converging. Deploy the ecosystem.*
