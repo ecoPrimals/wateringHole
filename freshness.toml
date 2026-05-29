@@ -10,7 +10,8 @@
 [wave]
 id = 60
 date = "2026-05-29"
-ssot = "handoffs/VPS_FEDERATION_HUB_MAY29_2026.md"
+ssot = "specs/NEURAL_API_EVOLUTION.md"
+notes = "Coordination Triad formalized (quorumSignal/rootPulse/waterFall). 23 signals, 6 tiers, manifest-driven cascade-pull, cross-gate executor spec."
 publisher = "cascade-pull"
 
 [heads]

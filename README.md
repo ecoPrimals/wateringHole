@@ -107,21 +107,43 @@ ToadStool's runtime or coralReef's compiler.
 
 biomeOS composes these atomics based on what capabilities are available at runtime.
 
-### RootPulse
+### The Coordination Triad: quorumSignal / rootPulse / waterFall
 
-**What**: Distributed version control that emerges from primal coordination - not a monolithic VCS.
+Three coordination domains form the ecosystem's nervous system. Each uses the
+5 `CoordinationPattern` execution strategies (Sequential, Parallel, ConditionalDag,
+Pipeline, Continuous) but serves a distinct biological purpose:
+
+| Domain | Role | Analogy | Status |
+|--------|------|---------|--------|
+| **quorumSignal** | SENSE — observe, discover, react | Afferent nervous system | First-class: 15 atomic graphs, `signal.dispatch` |
+| **rootPulse** | ACTION — create, mutate, prove | Efferent nervous system | Partial: `nest.commit` signal + pattern wired |
+| **waterFall** | SYNC — ecosystem coherence across gates | Autonomic nervous system | Bash today, evolving to Neural API |
+
+Named after bacterial quorum sensing: collective behavior emerges when enough
+gate NUCLEUS instances participate. The quorum is the minimum primal set for an
+atomic operation — Tower quorum is 3, Nest quorum is 4, Full NUCLEUS is 13.
+
+**Short triad**: quorum, pulse, fall.
+
+**Specification**: `primalSpring/specs/NEURAL_API_EVOLUTION.md` (Coordination Domains section)
+
+### rootPulse (ACTION — efferent)
+
+**What**: Distributed version control that emerges from primal coordination - not a monolithic VCS. The "pulse" coordination domain of the triad.
 
 **Composition**:
 - **rhizoCrypt** provides the ephemeral DAG workspace (fast, lock-free, present/future)
-- **LoamSpine** provides the immutable linear history (permanent, cryptographically provable, past)
-- **NestGate** provides content-addressed blob storage
-- **BearDog** provides cryptographic signing and verification
+- **loamSpine** provides the immutable linear history (permanent, cryptographically provable, past)
+- **nestGate** provides content-addressed blob storage
+- **bearDog** provides cryptographic signing and verification
 - **sweetGrass** provides semantic attribution tracking
-- **Songbird** provides discovery and federation
+- **songbird** provides discovery and federation
 
 **Coordinator**: biomeOS orchestrates these primals via the Neural API. No primal knows about "version control" - biomeOS composes their primitives into temporal coordination patterns, and version control emerges.
 
-**Core insight**: "RootPulse is what primals DO together, not what they ARE."
+**Core insight**: "rootPulse is what primals DO together, not what they ARE."
+
+**Five operations**: commit, branch, merge, diff, federate — all composed from atomic primal capabilities via `signal.dispatch` and `graph.execute`.
 
 ### Plasmodium (Over-NUCLEUS Collective)
 
