@@ -115,6 +115,7 @@ Gates can override with `--gate` flag or pull everything without `--gate`.
 | 60 | golgiBody Phase A — VPS Forgejo, WaterFall 38/38 validated | DONE |
 | 60 | This SSOT created — documented ownership | DONE |
 | 60 | strandGate enters ecosystem (helixVision, initioChem, blueFish) | DONE |
+| 60 | Eukaryotic gate onboarding — one spring per gate blurbs shipped | DONE |
 | 61+ | southGate 13/13 + membrane patterns proven | P1 critical path |
 | 61+ | biomeGate 13/13 + GPU dispatch | P2 |
 | 62+ | Songbird covalent mesh across 4+ gates | P3 |
@@ -122,4 +123,38 @@ Gates can override with `--gate` flag or pull everything without `--gate`.
 
 ---
 
-*Wave 60. Gate-spring routing formalized. Ad-hoc → documented → covalent.*
+## Biological State: Eukaryotic Unicellular → Multicellular
+
+The ecosystem evolves through distinct organizational states:
+
+```
+Prokaryotic (Wave 1-48)
+    Primals exist but gates are unstructured. No NUCLEUS.
+    ↓
+Eukaryotic unicellular (Wave 49-62) ← CURRENT
+    Each gate has internal organization (NUCLEUS, springs, primals).
+    Gates share the VPS periplasm (Forgejo) but operate independently.
+    Like yeast: organized, capable, but each cell is autonomous.
+    ↓
+Colonial (Wave 62-63)
+    Songbird mesh discovers cross-gate capabilities.
+    Gates share advertisements but don't yet dispatch work.
+    Like Volvox: cells in proximity, beginning to specialize.
+    ↓
+Multicellular (Wave 63+)
+    Covalent bonds between gates via Songbird mesh.
+    toadStool dispatches compute to best-fit hardware.
+    Gates specialize as tissues: compute, science, coordination.
+    ↓
+Organism (Wave 65+)
+    biomeOS graph.execute routes across the full Plasmodium.
+    The ecosystem operates as one distributed sovereign system.
+```
+
+**Current wave objective**: Get every gate eukaryotic (NUCLEUS running,
+primary spring validating, syncing through periplasm). See
+`handoffs/EUKARYOTIC_GATE_ONBOARDING_MAY28_2026.md` for per-gate blurbs.
+
+---
+
+*Wave 60. Eukaryotic unicellular. Yeast runs the biosphere.*
