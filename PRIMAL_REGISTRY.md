@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 29, 2026 (Wave 60b — biomeOS v3.86, DH-1 COMPLETE: zero temp_dir() + zero /tmp in production. Inline test extraction. NC-1 COMPLETE. 8,058 workspace tests, 26 crates.)
+**Last Updated**: May 29, 2026 (Wave 62 — biomeOS v3.87, TMPDIR regression fixed, JWT hardened, 1,090L orphans deleted, env_config SSOT complete. NC-1 COMPLETE. 8,058 workspace tests, 26 crates.)
 
 ---
 
