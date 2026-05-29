@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 29, 2026 (Wave 62 — biomeOS v3.87, TMPDIR regression fixed, JWT hardened, 1,090L orphans deleted, env_config SSOT complete. NC-1 COMPLETE. 8,058 workspace tests, 26 crates.)
+**Last Updated**: May 29, 2026 (Wave 63 — biomeOS v3.88, JSON parse observability, silent error elimination, env SSOT expansion, service/core split, rootpulse centralization, stale test removal. NC-1 COMPLETE. 7,983 workspace tests, 26 crates.)
 
 ---
 
@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v3.85  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 8,053 tests, 26 workspace crates, 43+ deploy graphs, 19 signal graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. env_config::vars SSOT (~90% wired), zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
+**Version**: v3.88  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983 tests, 26 workspace crates, 43+ deploy graphs, 19 signal graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. env_config::vars SSOT expanded (Wave 63), zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
