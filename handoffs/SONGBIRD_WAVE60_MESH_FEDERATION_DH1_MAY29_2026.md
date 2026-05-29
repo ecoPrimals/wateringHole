@@ -105,3 +105,16 @@ semantic testing when they go live on deployed gates.
 
 DH-1 for Songbird is complete. Remaining DH-1 work is in other primals (toadStool, coralReef,
 barraCuda, sweetGrass, squirrel) — per Wave 60 timeline, sweep is targeted for Wave 66.
+
+---
+
+## Coverage Expansion (Same Session)
+
++21 new tests added to `songbird-network-federation` pure-logic modules:
+
+| Module | Tests Added | Coverage Targets |
+|--------|-------------|-----------------|
+| `state.rs` | +9 | `active_endpoints` filter, `update_endpoint_status` (match/noop), `preferred_endpoint` (degraded-only/empty), `add_endpoint` deduplication |
+| `protocol_capability.rs` | +12 | `best_encrypted_protocol` (selection/inactive/none), `supports_protocol`, `best_protocol` tiers, `negotiate_protocol` (no-mutual/unknown-peer), `get_active_peers`, `register_feature`, encryption classification |
+
+**Total test count**: 8,179 (up from 8,158).
