@@ -159,4 +159,52 @@ primary spring validating, syncing through periplasm). See
 
 ---
 
+---
+
+## Peptidoglycan Relay Layer
+
+The VPS operates as the ecosystem's peptidoglycan — a structural relay substrate
+between the outer membrane (internet) and the plasma membrane (gate firewalls).
+It provides sovereign replacements for commercial services, running as persistent
+infrastructure that gates connect to for federation, NAT traversal, and remote access.
+
+### Shadow Pattern Map
+
+| Commercial Service | Sovereign Shadow | VPS Port | Shadow Track | Status |
+|----|----|----|----|----|
+| Cloudflare Tunnel | Songbird TURN relay | :3478 + 49152:65535/udp | S2 | Parity met |
+| Cloudflare TLS | BearDog ACME shadow | :8443 | S1 | Shadow live |
+| GitHub Pages | NestGate + Caddy | :443 | S3 | Live, 68ms |
+| Cloudflare DNS | knot-dns DNSSEC | :53 | S5 | Live, NS pending |
+| Cloud IDE relay | RustDesk hbbs/hbbr | :21115-21117 | — | Live |
+| GitHub Repos | Forgejo (golgiBody) | :2222 (SSH) + :3000 (HTTP) | — | Live, 38 repos |
+
+### Gate Onboarding to Relay Layer
+
+Gates onboard to the peptidoglycan via `onboard-gate-relay.sh`:
+
+```bash
+# From VPS depot (onboard a remote gate):
+onboard-gate-relay.sh eastGate --vps-host 157.230.3.183 --gate-host 10.10.0.3
+
+# From a gate (onboard self):
+onboard-gate-relay.sh eastGate --vps-host 157.230.3.183 --local
+```
+
+This pulls TURN credentials, RustDesk key, MitoBeacon family/lineage seeds
+from the VPS and writes `relay.env` to the gate. The gate's `tower.env` sources
+this file for Songbird federation, TURN traversal, and family identity.
+
+### Transport Paths by Gate Class
+
+| Gate Class | Network | Federation Path | TURN Required |
+|------------|---------|-----------------|---------------|
+| LAN cluster | Basement 10G backbone | Direct TCP :7700 to VPS | No |
+| WAN household | Remote ISP | TURN :3478 → federation | Yes |
+| Roaming mobile | LAN ↔ cellular | Direct when LAN, TURN fallback | Conditional |
+| Friend tower | External household | TURN :3478 → federation | Yes |
+| NAS/depot | LAN backbone | Direct TCP :7700 to VPS | No |
+
+---
+
 *Wave 60. Eukaryotic unicellular. Yeast runs the biosphere.*

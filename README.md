@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 28, 2026 (Wave 60 postPrimordial: golgiBody Phase A live — VPS Forgejo sovereign at `git.primals.eco`, WaterFall 38/38 repos validated, VPS knot-dns zone updated with lab/git A records, Caddyfile lab routes fixed. 7 active handoffs + 373 archived (incl. 13 wave60).)
+**Last Updated**: May 29, 2026 (Wave 60 postPrimordial: golgiBody Phase A live — VPS Forgejo sovereign at `git.primals.eco`, WaterFall 38/38 repos validated, VPS federation hub :7700 + MitoBeacon + TURN relay live, eukaryotic gate onboarding shipped, Common NUCLEUS Deployment converged, benchScale VPS depot topology validated 26/26. 12 active handoffs + 373 archived (incl. 13 wave60).)
 
 ---
 
@@ -376,8 +376,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `handoffs/*.md` — Active session handoffs
 - `handoffs/hotSpring/` — hotSpring team handoffs (postPrimordial pattern)
 - `handoffs/archive/` — 297 archived handoffs (earlier epochs consolidated to fossilRecord)
-- `handoffs/hotSpring/archive/` — 43 archived hotSpring handoffs
-- `handoffs/hotSpring/archive/` — 43 archived hotSpring handoffs
+- `handoffs/hotSpring/archive/` — 47 archived hotSpring handoffs
 
 ### Fossilized Standards (in fossilRecord)
 
@@ -387,7 +386,7 @@ maintained as separate files in this repo. See `fossilRecord/wateringHole/consol
 and `fossilRecord/wateringHole/consolidated-apr2026/`.
 
 - `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.0)
-- `GATE_SPRING_OWNERSHIP.md` — Gate-spring routing SSOT (replaces `GATE_DEPLOYMENT_STANDARD.md`)
+- `GATE_DEPLOYMENT_STANDARD.md` — Gate deployment (replaced by active `GATE_SPRING_OWNERSHIP.md`)
 - `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
 - `GENOMEBIN_ARCHITECTURE_STANDARD.md` — Autonomous deployment (self-extracting)
 - `UNIVERSAL_IPC_STANDARD_V3.md` — Multi-transport IPC behavioral spec
