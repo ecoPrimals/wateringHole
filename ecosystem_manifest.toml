@@ -49,11 +49,11 @@ default_branch = "main"
 
 [repos.nestGate]
 org = "ecoPrimals"
-local_path = "."
+local_path = "primals/nestGate"
 membrane = "trailing-mirror"
 sync_priority = "standard"
-category = "root"
-description = "Workspace root + NestGate storage/content crates"
+category = "primal"
+description = "NestGate persistent storage + content-addressed crates"
 github_repo = "ecoPrimals/nestGate"
 forgejo_repo = "ecoPrimals/nestGate"
 
@@ -73,7 +73,7 @@ forgejo_repo = "ecoPrimals/bearDog"
 
 [repos.songbird]
 org = "ecoPrimals"
-local_path = "primals/songbird"
+local_path = "primals/songBird"
 membrane = "trailing-mirror"
 sync_priority = "high"
 category = "primal"
