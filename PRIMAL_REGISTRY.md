@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 29, 2026 (Wave 60 — biomeOS v3.85, manifest.gate_profile wired, DH-1 /tmp eliminated. NC-1 COMPLETE. env_config::vars SSOT, zero >800L production files. 8,058 workspace tests, 26 crates.)
+**Last Updated**: May 29, 2026 (Wave 60b — biomeOS v3.86, DH-1 COMPLETE: zero temp_dir() + zero /tmp in production. Inline test extraction. NC-1 COMPLETE. 8,058 workspace tests, 26 crates.)
 
 ---
 
