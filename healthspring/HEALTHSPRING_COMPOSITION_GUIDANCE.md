@@ -1,6 +1,6 @@
 # healthSpring — Composition Guidance for Springs and Primals
 
-**Date**: May 25, 2026
+**Date**: May 28, 2026
 **From**: healthSpring V65a (ironGate — post-primordial)
 **License**: AGPL-3.0-or-later
 

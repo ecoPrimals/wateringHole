@@ -57,7 +57,7 @@ which has a unique dual-tower ionic bridge pattern and is kept as a standalone g
 | **wetSpring** | V167 | **5** | 1,613+ | Node + **Nest** + Meta | `downstream_manifest.toml` | **Active** — guideStone L5, B7 Tenaillon Tier 2 COMPLETE, `crypto.hash` base64 fixed |
 | **airSpring** | 0.10.0 | 0 | 1,364 | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
 | **groundSpring** | V135 | 0 | 1,020+ | Node + **Nest** | `downstream_manifest.toml` | **Pinned** — paths fixed |
-| **healthSpring** | V65a | **5** | 1,021+ | **Nest** (neutron-heavy) + Meta | `healthspring_cell.toml` (plasmidBin) | **Active** — Post-primordial, ironGate operational, 57 scenarios, 88 capabilities, Wave 50 covalent HPC, dual-tower + Nest Atomic validated |
+| **healthSpring** | V65a | **5** | 1,021+ | **Nest** (neutron-heavy) + Meta | `healthspring_cell.toml` (plasmidBin) | **Active** — ironGate eukaryotic, Forgejo sync + cascade-pull 22-repo, 13/13 NUCLEUS, 57 scenarios, 88 capabilities, Wave 60 |
 | **ludoSpring** | V71 | **5** | 820+ | Node + **Meta** + Nest | `ludospring_cell.toml` (12-node pure composition) | **Active** — Tower LIVE (6/6), CallResult, MDA framework, Foundation T9+T10 |
 
 ### Key
