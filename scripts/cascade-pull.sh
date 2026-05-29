@@ -44,6 +44,8 @@ GATE_PROFILES[biomeGate]="$CORE springs/hotSpring infra/agentReagents gardens/fo
 
 GATE_PROFILES[strandGate]="$CORE springs/hotSpring springs/wetSpring infra/agentReagents gardens/foundation gardens/lithoSpore gardens/projectNUCLEUS"
 
+GATE_PROFILES[golgiBody]="infra/wateringHole infra/plasmidBin primals/bearDog primals/songBird primals/toadStool primals/barraCuda primals/coralReef primals/nestGate primals/rhizoCrypt primals/loamSpine primals/sweetGrass primals/biomeOS primals/squirrel primals/petalTongue primals/skunkBat gardens/cellMembrane gardens/projectNUCLEUS"
+
 # ── Remote URL mapping ────────────────────────────────────────────────
 
 forgejo_url() {
@@ -82,6 +84,7 @@ detect_gate() {
         south*)  echo "southGate" ;;
         strand*) echo "strandGate" ;;
         east*)   echo "eastGate" ;;
+        golgi*|membrane*|vps*) echo "golgiBody" ;;
         *)
             echo >&2 "WARNING: cannot auto-detect gate from hostname '$hostname'"
             echo >&2 "Set GATE_NAME=biomeGate (or your gate) in environment"
