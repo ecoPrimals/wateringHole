@@ -116,8 +116,10 @@ Gates can override with `--gate` flag or pull everything without `--gate`.
 | 60 | This SSOT created — documented ownership | DONE |
 | 60 | strandGate enters ecosystem (helixVision, initioChem, blueFish) | DONE |
 | 60 | Eukaryotic gate onboarding — one spring per gate blurbs shipped | DONE |
+| 60 | VPS federation hub — Songbird :7700 + MitoBeacon seed + Dark Forest | DONE |
 | 61+ | southGate 13/13 + membrane patterns proven | P1 critical path |
 | 61+ | biomeGate 13/13 + GPU dispatch | P2 |
+| 61+ | Gates mesh with VPS hub — colonial phase begins | P2 |
 | 62+ | Songbird covalent mesh across 4+ gates | P3 |
 | 63+ | biomeOS graph.execute over mesh | P5 |
 
