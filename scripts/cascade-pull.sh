@@ -169,7 +169,8 @@ for repo_path in "${REPOS[@]}"; do
     fi
 
     echo -n "  pull: $repo_path ... "
-    if git -C "$local_path" pull "$SOURCE" --ff-only 2>/dev/null; then
+    branch=$(git -C "$local_path" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
+    if git -C "$local_path" pull "$SOURCE" "$branch" --ff-only 2>/dev/null; then
         echo "ok"
         PULLED=$((PULLED + 1))
     else
