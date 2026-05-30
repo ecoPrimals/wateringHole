@@ -102,6 +102,8 @@ and the glacial shift infrastructure blockers.
 | Sovereign shadow functions | cellMembrane | **DONE** (Wave 62) — `membrane-shadow` Rust crate: agentic VPS control + temporal sync + manifest reader + gate identity. Deep debt sprint (security, hardcoding, error handling). |
 | Forgejo bidirectional repos | cellMembrane | **DONE** (Wave 62) — 5 repos bidirectional (biomeOS, coralReef, sweetGrass, squirrel, wateringHole). 33 remaining as pull mirrors. |
 | waterFall temporal sync | cellMembrane | **DONE** (Wave 62) — `cascade-pull.sh --source temporal` delegates to Rust `membrane` binary. Multi-remote DAG sync: fetch all, measure position, pull leader, push followers. |
+| K-Derm diderm deployment | cellMembrane | **DONE** (Wave 63) — Three-node VPS envelope: golgiBody (inner, Forgejo), peptidoglycan (structural, builds), golgiBody-ext (outer, sporePrint live). $48/mo total. |
+| GATE_SETUP_STANDARD | wateringHole | **DONE** (Wave 63) — Standardized gate setup/sync/resync for physical gates and VPS proto-fieldMouse deployments. |
 
 ### Cephalization + Tower CNS (primalSpring-validated)
 

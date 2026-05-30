@@ -18,9 +18,9 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.1.0"
+version = "2.2.0"
 generated = "2026-05-30"
-wave = 62
+wave = 63
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -39,11 +39,22 @@ total_repos = 39
 [sync]
 forgejo_base_url = "https://git.primals.eco"
 forgejo_ssh = "ssh://git@git.primals.eco:2222"
-forgejo_host = "vps"
+forgejo_host = "golgiBody"
 default_source = "temporal"
 default_branch = "main"
 divergence_policy = "flag"
 push_to_followers = true
+
+[topology]
+model = "diderm"
+inner_membrane = "golgiBody"
+peptidoglycan = "peptidoglycan"
+outer_membrane = "golgiBody-ext"
+
+[topology.hosts]
+golgiBody = "157.230.3.183"
+peptidoglycan = "157.230.209.218"
+golgiBody-ext = "137.184.197.151"
 
 # ═══════════════════════════════════════════════════════════════════
 # Root
@@ -517,12 +528,42 @@ repos = [
     "helixVision", "initioChem", "blueFish", "esotericWebb",
 ]
 
-# golgiBody (VPS) — fieldMouse deployment, periplasmic sync point
+# golgiBody (VPS, inner membrane) — sovereign periplasm, Forgejo, primal services
 [gates.golgiBody]
+kderm_layer = "inner_membrane"
+bond_types = ["covalent", "metallic"]
+host = "157.230.3.183"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "cellMembrane", "projectNUCLEUS",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
+]
+
+# peptidoglycan (VPS, structural layer) — build hub, workspace, temporal sync convergence
+[gates.peptidoglycan]
+kderm_layer = "peptidoglycan"
+bond_types = ["metallic"]
+host = "157.230.209.218"
+repos = [
+    "nestGate", "wateringHole", "plasmidBin", "primalSpring",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat", "bingoCube", "sourDough",
+    "cellMembrane", "projectNUCLEUS", "lithoSpore", "projectFOUNDATION",
+    "esotericWebb", "blueFish", "helixVision", "initioChem",
+    "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint",
+    "wetSpring", "neuralSpring", "hotSpring",
+    "airSpring", "groundSpring", "healthSpring", "ludoSpring",
+    "fossilRecord",
+]
+
+# golgiBody-ext (VPS, outer membrane) — public-facing, sporePrint, TURN relay
+[gates.golgiBody-ext]
+kderm_layer = "outer_membrane"
+bond_types = ["ionic", "weak"]
+host = "137.184.197.151"
+repos = [
+    "sporePrint", "wateringHole",
 ]

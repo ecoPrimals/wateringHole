@@ -8,10 +8,10 @@
 # Regenerate: cascade-pull --publish-freshness
 
 [wave]
-id = 62
+id = 63
 date = "2026-05-30"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "waterFall temporal sync operational. membrane-shadow: temporal.rs, manifest.rs, identity.rs. 4 Forgejo mirrors→bidirectional (biomeOS, coralReef, sweetGrass, squirrel). cascade-pull.sh delegates to Rust. Deep debt: shell injection fix, hardcoding→config, default_source=temporal. 10 handoffs archived."
+notes = "K-Derm diderm envelope physically deployed: golgiBody (inner, 157.230.3.183), peptidoglycan (structural, 157.230.209.218), golgiBody-ext (outer, 137.184.197.151). sporePrint live on outer membrane. ecosystem_manifest.toml v2.2.0 with topology section. membrane.toml three-layer config. Cross-node SSH mesh. golgiBody workspace cleaned (80%→66%). 9 active handoffs."
 publisher = "cascade-pull"
 
 [heads]

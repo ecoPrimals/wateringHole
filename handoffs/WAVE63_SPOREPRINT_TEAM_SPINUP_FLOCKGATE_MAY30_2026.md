@@ -56,7 +56,8 @@ infra/sporePrint/
 ```
 
 **Current deployment**: GitHub Actions → GitHub Pages + Cloudflare CDN
-**Target deployment**: Sovereign on golgiBody VPS via Caddy (S3 cutover)
+**Live sovereign deployment**: golgiBody-ext VPS (`137.184.197.151`) serving via Caddy
+**Target deployment**: golgiBody-ext serves primals.eco (DNS cutover pending)
 
 ---
 
@@ -64,29 +65,41 @@ infra/sporePrint/
 
 Before you can develop sporePrint, flockGate needs to be a working ecosystem gate.
 
-### Gate Setup
+### Gate Setup — K-Derm Diderm Path
+
+The workspace is `~/Development/ecoPrimals/` — a plain directory, same as every
+other gate. The VPS infrastructure is now a three-node diderm envelope:
+
+- **golgiBody** (inner, `157.230.3.183`): Forgejo SSH at port 2222, sovereign git
+- **peptidoglycan** (`157.230.209.218`): Full workspace, build hub, deployment source
+- **golgiBody-ext** (outer, `137.184.197.151`): sporePrint hosting, TURN relay
 
 ```bash
-# 1. Clone ecoPrimals workspace
-git clone git@github.com:ecoPrimals/nestGate.git ecoPrimals
-cd ecoPrimals
+# 1. Create workspace
+mkdir -p ~/Development/ecoPrimals
+cd ~/Development/ecoPrimals
 
 # 2. Create gate identity
 echo "flockGate" > .gate
 export GATE_NAME=flockGate
 
-# 3. Pull wateringHole for ecosystem standards + cascade-pull
-git clone git@github.com:ecoPrimals/wateringHole.git infra/wateringHole
+# 3. Clone wateringHole from VPS Forgejo (inner membrane, covalent SSH)
+mkdir -p infra
+git clone ssh://git@git.primals.eco:2222/ecoPrimals/wateringHole.git infra/wateringHole
 
-# 4. Pull ecosystem manifest and cascade-pull all repos
+# 4. Pull entire ecosystem from VPS via cascade-pull
 cd infra/wateringHole
-./scripts/cascade-pull.sh --mode pull --source temporal
+./scripts/cascade-pull.sh --mode pull
 
-# 5. Verify Songbird WAN connectivity
+# 5. Verify Songbird WAN connectivity (relayed via golgiBody-ext outer membrane)
 export SONGBIRD_FEDERATION_PORT=7700
-export SONGBIRD_PEERS=<golgiBody-public-ip>:7700
-# Songbird connects via cellMembrane TURN relay on golgiBody VPS
+export SONGBIRD_PEERS=137.184.197.151:7700
+# WAN relay goes through golgiBody-ext outer membrane
 ```
+
+flockGate's SSH key must be registered on golgiBody Forgejo (covalent bond).
+The sporePrint team on flockGate validates WAN connectivity through the full
+diderm envelope — inner membrane for git, outer membrane for WAN relay.
 
 ### Dev Platform Standards
 
@@ -187,17 +200,35 @@ This should evolve to:
    flockGate detects the change and triggers a local rebuild
 3. **VPS deployment**: `zola build` on golgiBody, Caddy serves the result
 
-### VPS Hosting Migration
+### VPS Hosting Migration — K-Derm Diderm Architecture (Wave 63)
 
-sporePrint currently lives on GitHub Pages (`primals.eco` CNAME).
-Migration path to sovereign hosting:
+The VPS infrastructure is now a proper K-Derm diderm envelope with three nodes:
 
 ```
-Phase A: Build locally on flockGate (validate Zola pipeline works over WAN)
-Phase B: Build on golgiBody VPS, serve via Caddy alongside Forgejo
-Phase C: DNS cutover — primals.eco points to golgiBody (S3 sovereignty shadow)
-Phase D: GitHub Pages becomes the shadow (extracellular backup)
+Inner membrane (golgiBody, 157.230.3.183):
+  Forgejo, NUCLEUS primals, knot-dns, BTSP auth
+  Bond: covalent/metallic — gates only
+
+Peptidoglycan (peptidoglycan, 157.230.209.218):
+  Full 39-repo workspace, Rust toolchain, Zola, membrane binary
+  Bond: metallic — build/sync hub between inner and outer
+  Role: Clone from here, build here, converge here
+
+Outer membrane (golgiBody-ext, 137.184.197.151):
+  Caddy TLS, sporePrint hosting (LIVE — HTTP 200), TURN relay
+  Bond: ionic/weak — public-facing
 ```
+
+sporePrint is LIVE on golgiBody-ext. Migration path to full sovereignty:
+
+```
+Phase A (DONE): sporePrint built and served on golgiBody-ext via Caddy
+Phase B: DNS cutover — primals.eco A record → 137.184.197.151
+Phase C: HTTPS via Caddy automatic TLS (Let's Encrypt)
+Phase D: GitHub Pages becomes extracellular shadow (backup)
+```
+
+Build pipeline: peptidoglycan builds → rsync/scp to golgiBody-ext → Caddy serves
 
 ---
 
@@ -251,7 +282,8 @@ sporePrint should register capabilities:
 ### Near-term (Wave 64-65)
 - [ ] pseudoSpore gallery template implemented and serving 2+ spores
 - [ ] `spore-validate` reads lithoSpore registry and generates gallery content
-- [ ] sporePrint builds and serves on golgiBody VPS via Caddy
+- [x] sporePrint builds and serves on golgiBody-ext via Caddy (DONE — Wave 63)
+- [ ] DNS cutover: primals.eco A record → golgiBody-ext (137.184.197.151)
 - [ ] Cross-gate `capability.call` proven over WAN (flockGate → LAN gate)
 
 ### Glacial Gate

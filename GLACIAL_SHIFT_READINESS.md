@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-30 (Wave 62: temporal sync operational, 5 mirrors→bidirectional, deep debt sprint)
+**Last updated**: 2026-05-30 (Wave 63: K-Derm diderm envelope deployed — 3 VPS nodes, sporePrint live, GATE_SETUP_STANDARD published)
 
 ---
 
@@ -51,6 +51,16 @@ squirrel, wateringHole). `cascade-pull.sh --source temporal` now delegates to th
 `membrane` binary with bash fallback. Deep debt sprint: shell injection fix in
 `token_create`/`token_revoke`, hardcoded paths→`ShadowConfig`, `unreachable!()`→`Result`,
 magic numbers→named constants. Manifest bumped to v2.1.0 (Wave 62). 10 handoffs archived.
+
+**Wave 63 K-Derm diderm deployment** (May 30): Three-node VPS envelope physically
+deployed. golgiBody (inner membrane, 157.230.3.183): Forgejo + NUCLEUS, workspace cleaned
+80%→66%. peptidoglycan (structural, 157.230.209.218): 2-vCPU/4GB/80GB, Rust 1.96, Zola 0.22.1,
+39-repo workspace, membrane binary, temporal sync hub. golgiBody-ext (outer membrane,
+137.184.197.151): Caddy 2.11.3, sporePrint live (HTTP 200, 143 pages). Cross-node SSH mesh.
+ecosystem_manifest.toml v2.2.0 with `[topology]` section and three new gate profiles.
+`GATE_SETUP_STANDARD.md` published — standardizes physical gate and VPS proto-fieldMouse
+setup, sync, resync. `gen5/KDERM_DIDERM_APPLICATION.md` documents bonding interactions
+per boundary. Cost: $48/mo for complete sovereign diderm envelope.
 
 **Mountain blurb responses absorbed** (May 27):
 - toadStool S279: zero production panic paths, 9,156+ lib tests, handoffs archived

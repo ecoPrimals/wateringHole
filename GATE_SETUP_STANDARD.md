@@ -1,0 +1,327 @@
+# Gate Setup, Sync, and Resync Standard
+
+**Authority**: wateringHole consensus (Wave 63)
+**Applies to**: Physical gates (LAN/WAN), VPS proto-fieldMouse deployments
+**Prerequisites**: ecosystem_manifest.toml, K_DERM_TOPOLOGY_STANDARD.md
+
+---
+
+## Gate Types
+
+### Physical Gates (Cytoplasm)
+
+Desktop/server hardware running full NUCLEUS. Connected via LAN or WAN.
+Bond type to inner membrane: **covalent**.
+
+| Gate | Hardware | Location | Springs |
+|------|----------|----------|---------|
+| eastGate | Primary dev | LAN | Full ecosystem |
+| ironGate | Server | LAN | Core primals + health/ludo |
+| southGate | Dev | LAN | Core primals + wet/neural |
+| biomeGate | Dev | LAN | Core primals + hot |
+| strandGate | ABG science | LAN | Science suite + genomics |
+| flockGate | WAN shadow | WAN | sporePrint + full validation |
+
+### VPS Proto-FieldMouse Deployments (Periplasm)
+
+DigitalOcean droplets running specialized membrane roles. The diderm envelope
+consists of three nodes with distinct K-Derm layer assignments.
+
+| Node | K-Derm Layer | Bond | Role |
+|------|-------------|------|------|
+| golgiBody | Inner membrane | Covalent/Metallic | Forgejo, NUCLEUS, DNS |
+| peptidoglycan | Peptidoglycan | Metallic | Builds, workspace, sync |
+| golgiBody-ext | Outer membrane | Ionic/Weak | Public hosting, WAN relay |
+
+---
+
+## Gate Setup — Physical
+
+### Step 1: Workspace Layout
+
+```bash
+mkdir -p ~/Development/ecoPrimals
+cd ~/Development/ecoPrimals
+
+echo "<gate-name>" > .gate
+export GATE_NAME=$(cat .gate)
+```
+
+### Step 2: Clone wateringHole
+
+wateringHole is always the first clone. It contains the ecosystem manifest,
+cascade-pull, and all standards.
+
+```bash
+mkdir -p infra
+git clone ssh://git@git.primals.eco:2222/ecoPrimals/wateringHole.git infra/wateringHole
+```
+
+If golgiBody Forgejo is unreachable, fall back to GitHub:
+```bash
+git clone git@github.com:ecoPrimals/wateringHole.git infra/wateringHole
+```
+
+### Step 3: Cascade Pull
+
+cascade-pull reads the gate profile from ecosystem_manifest.toml and clones
+only the repos this gate needs.
+
+```bash
+cd infra/wateringHole
+./scripts/cascade-pull.sh --gate $GATE_NAME --clone-missing --source temporal
+```
+
+This will:
+- Read `[gates.<name>]` from ecosystem_manifest.toml for the repo list
+- Clone missing repos into the standard layout (primals/, springs/, gardens/, infra/)
+- Set up both `origin` (GitHub) and `forgejo` remotes
+- Run temporal sync to pull from the leading remote
+
+### Step 4: Dev Platform
+
+```bash
+# Rust toolchain
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+# Verify
+rustc --version
+cargo --version
+```
+
+### Step 5: Membrane Binary (Optional)
+
+If the gate needs VPS control or advanced temporal sync:
+
+```bash
+cd gardens/cellMembrane/crates/membrane-shadow
+cargo build --release
+sudo cp target/release/membrane /usr/local/bin/
+```
+
+### Step 6: NUCLEUS Deploy (Optional)
+
+For gates running primal services:
+
+```bash
+# From plasmidBin
+cd infra/plasmidBin
+./deploy_gate.sh --composition tower    # Tower first
+./deploy_gate.sh --composition node     # Then Node
+./deploy_gate.sh --composition nest     # Then Nest
+./deploy_gate.sh --composition full     # Full NUCLEUS
+```
+
+---
+
+## Gate Setup — VPS Proto-FieldMouse
+
+VPS nodes are provisioned via `doctl` and bootstrapped with a role-specific
+configuration. They are NOT full gates — they are membrane layer nodes.
+
+### Provisioning
+
+```bash
+doctl compute droplet create <name> \
+  --image debian-12-x64 \
+  --size <size-slug> \
+  --region nyc1 \
+  --ssh-keys <key-id> \
+  --tag-names membrane,<role>
+```
+
+### Bootstrap (common to all VPS nodes)
+
+```bash
+export DEBIAN_FRONTEND=noninteractive
+apt-get update -qq && apt-get upgrade -y -qq
+apt-get install -y -qq git curl build-essential pkg-config libssl-dev unzip jq ufw
+
+mkdir -p /opt/ecoPrimals
+echo "<node-name>" > /opt/ecoPrimals/.gate
+
+ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519 -N "" -C "<node-name>@vps"
+# Register pubkey on GitHub (gh ssh-key add) and Forgejo (API POST /user/keys)
+```
+
+### Role-Specific Bootstrap
+
+**Inner membrane (golgiBody)**:
+- Forgejo, Caddy TLS for git.primals.eco, knot-dns
+- NUCLEUS primal services via UDS
+- UFW: SSH + 2222 (Forgejo SSH) + 443 (Caddy)
+- Workspace: wateringHole only (Forgejo serves all repo data)
+
+**Peptidoglycan**:
+- Rust, Zola, build-essential
+- Full 39-repo workspace (--depth 1 for bloated repos)
+- Both origin + forgejo remotes on every repo
+- membrane binary built and installed
+- UFW: SSH only (no public services)
+
+**Outer membrane (golgiBody-ext)**:
+- Caddy, Zola
+- sporePrint clone, build, and serve
+- UFW: SSH + HTTP + HTTPS
+
+---
+
+## Sync — cascade-pull
+
+### Daily Sync
+
+```bash
+cd ~/Development/ecoPrimals/infra/wateringHole
+./scripts/cascade-pull.sh --source temporal
+```
+
+`--source temporal` uses the membrane binary (if available) to:
+1. Fetch all remotes (origin, forgejo)
+2. Compare commit timestamps across remotes
+3. Pull from the temporally leading remote
+4. Push to followers (if `push_to_followers = true` in manifest)
+5. Report divergences
+
+### Automated Sync (systemd timer)
+
+```bash
+# Install systemd units
+sudo cp systemd/cascade-pull.service /etc/systemd/system/
+sudo cp systemd/cascade-pull.timer /etc/systemd/system/
+
+# Configure
+sudo systemctl edit cascade-pull.service
+# Set Environment: ECOPRIMALS_ROOT, CASCADE_GATE, CASCADE_PARALLEL
+
+sudo systemctl enable --now cascade-pull.timer
+```
+
+### Manual Sync Modes
+
+```bash
+# Pull from Forgejo only (inner membrane)
+./scripts/cascade-pull.sh --source forgejo
+
+# Pull from GitHub only (extracellular)
+./scripts/cascade-pull.sh --source origin
+
+# Dry run (show what would happen)
+./scripts/cascade-pull.sh --source temporal --dry-run
+
+# Check freshness without pulling
+./scripts/cascade-pull.sh --check
+```
+
+---
+
+## Resync — Recovery from Divergence
+
+### Soft Resync (ff-only failed)
+
+When temporal sync reports divergence (non-fast-forward), investigate:
+
+```bash
+cd <repo-path>
+git log --oneline origin/main..forgejo/main  # Commits on Forgejo not on GitHub
+git log --oneline forgejo/main..origin/main  # Commits on GitHub not on Forgejo
+```
+
+Resolution options:
+1. **Rebase**: `git rebase origin/main` (if your work is on top)
+2. **Merge**: `git merge origin/main` (creates merge commit)
+3. **Force-align**: `git reset --hard <leading-remote>/main` (loses local work)
+
+### Hard Resync (corrupted state)
+
+When a gate's workspace is in an unrecoverable state:
+
+```bash
+# Remove the repo entirely
+rm -rf <repo-path>
+
+# Re-clone via cascade-pull
+cd ~/Development/ecoPrimals/infra/wateringHole
+./scripts/cascade-pull.sh --gate $GATE_NAME --clone-missing --source temporal
+```
+
+### VPS Resync
+
+For peptidoglycan (structural layer):
+```bash
+# On peptidoglycan
+cd /opt/ecoPrimals/infra/wateringHole
+./scripts/cascade-pull.sh --gate peptidoglycan --source temporal
+```
+
+For golgiBody-ext (outer membrane):
+```bash
+# Just re-pull and rebuild sporePrint
+cd /opt/ecoPrimals/infra/sporePrint
+git pull origin main
+zola build
+sudo systemctl restart caddy
+```
+
+---
+
+## Multi-Vendor VPS Plans
+
+The diderm model is designed for vendor portability:
+
+### Current: DigitalOcean nyc1
+
+All three nodes in the same datacenter for <1ms inter-node latency.
+Cost: ~$48/mo total.
+
+### Planned: Multi-vendor redundancy
+
+| Vendor | Role | Rationale |
+|--------|------|-----------|
+| DigitalOcean | Inner membrane (golgiBody) | Established, Forgejo data lives here |
+| Hetzner | Peptidoglycan mirror | Cost-effective builds, EU jurisdiction |
+| Vultr | Outer membrane backup | Geographic redundancy |
+
+The inner membrane is the hardest to move (Forgejo data). Peptidoglycan and
+outer membrane are stateless and can be reprovisioned from scratch.
+
+### WAN Mesh Sovereign Barrier
+
+The ultimate goal: if enough physical gates have WAN connectivity, the VPS
+becomes optional. Gates form a covalent mesh via Songbird TURN relay:
+
+```
+Gate A (WAN) ←─[covalent]──→ Gate B (WAN)
+     ↕                              ↕
+Gate C (LAN) ←─[covalent]──→ Gate D (LAN)
+```
+
+In this model:
+- Forgejo can run on any gate with stable uptime (replaces golgiBody inner)
+- Temporal sync happens peer-to-peer (replaces peptidoglycan)
+- sporePrint can be served from any gate with public IP (replaces golgiBody-ext)
+- VPS becomes a bootstrap convenience, not a requirement
+
+This is the **sovereign barrier**: the point where the ecosystem no longer
+depends on any external provider for core operations. VPS nodes transition
+from "metallic fleet" to "weak extracellular" — a nice-to-have, not essential.
+
+---
+
+## SSH Key Management
+
+### Gate Key Registration
+
+Every gate needs its SSH key registered on:
+1. **GitHub** (extracellular): `gh ssh-key add ~/.ssh/id_ed25519.pub --title "<gate>"`
+2. **Forgejo** (inner membrane): API POST to `git.primals.eco/api/v1/user/keys`
+
+### Registered Keys (Wave 63)
+
+| Key Name | Registered On |
+|----------|---------------|
+| irongate | GitHub, Forgejo |
+| eastGate | GitHub, Forgejo |
+| southGate | GitHub, Forgejo |
+| golgiBody-vps | GitHub, Forgejo |
+| peptidoglycan@vps | GitHub, Forgejo |
+| golgiBody-ext@vps | GitHub, Forgejo |
