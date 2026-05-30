@@ -184,13 +184,13 @@ elif cmd == 'clone_url':
                 else:
                     print(f'https://github.com/{gr}.git')
             elif source == 'auto':
-                if fr:
-                    print(f'{forgejo_ssh}/{fr}.git')
-                elif gr:
+                if gr:
                     if use_ssh:
                         print(f'{github_ssh}{gr}.git')
                     else:
                         print(f'https://github.com/{gr}.git')
+                elif fr:
+                    print(f'{forgejo_ssh}/{fr}.git')
             break
 
 elif cmd == 'all_repos':
@@ -302,9 +302,8 @@ clone_repo() {
         if [[ "$clone_url" == *"github.com"* ]] && [[ -n "$forgejo_url" ]]; then
             git -C "$local_path" remote add forgejo "$forgejo_url" 2>/dev/null || true
         elif [[ "$clone_url" == *"git.primals.eco"* ]] && [[ -n "$github_url" ]]; then
+            git -C "$local_path" remote rename origin forgejo 2>/dev/null || true
             git -C "$local_path" remote add origin "$github_url" 2>/dev/null || true
-            git -C "$local_path" remote rename origin github 2>/dev/null || true
-            git -C "$local_path" remote rename forgejo origin 2>/dev/null || true
         fi
 
         echo "CLONED $repo_path ($clone_url)"
@@ -781,11 +780,42 @@ DIVERGED_REPOS=()
 # ── Temporal pull mode ────────────────────────────────────────────────
 
 if [[ "$SOURCE" == "temporal" ]]; then
+    # Clone missing repos first (bash handles this regardless of membrane)
+    if $CLONE_MISSING; then
+        CLONE_NEEDED=false
+        for repo_path in "${REPOS[@]}"; do
+            local_path="$ECOPRIMALS_ROOT/$repo_path"
+            if [[ ! -d "$local_path/.git" ]]; then
+                CLONE_NEEDED=true
+                break
+            fi
+        done
+
+        if $CLONE_NEEDED; then
+            echo "--- Cloning missing repos ---"
+            echo ""
+            for repo_path in "${REPOS[@]}"; do
+                local_path="$ECOPRIMALS_ROOT/$repo_path"
+                if [[ ! -d "$local_path/.git" ]]; then
+                    echo -n "  clone: $repo_path ... "
+                    result=$(clone_repo "$repo_path" "auto")
+                    case "$result" in
+                        CLONED*) echo "ok"; CLONED=$((CLONED + 1)) ;;
+                        *)       echo "FAILED"; SKIPPED=$((SKIPPED + 1)) ;;
+                    esac
+                fi
+            done
+            echo ""
+        fi
+    fi
+
     if [[ -n "$MEMBRANE_BIN" ]]; then
         echo "--- Temporal Sync (Rust membrane) ---"
         echo ""
         ECOPRIMALS_ROOT="$ECOPRIMALS_ROOT" "$MEMBRANE_BIN" temporal.sync "${REPOS[@]}" 2>&1 | sed '/^\[$/,$d'
         echo ""
+        [[ $CLONED -gt 0 ]] && echo "Cloned: $CLONED" || true
+        [[ $SKIPPED -gt 0 ]] && echo "Clone failures: $SKIPPED" || true
         exit 0
     fi
 
@@ -795,17 +825,8 @@ if [[ "$SOURCE" == "temporal" ]]; then
         local_path="$ECOPRIMALS_ROOT/$repo_path"
 
         if [[ ! -d "$local_path/.git" ]]; then
-            if $CLONE_MISSING; then
-                echo -n "  clone: $repo_path ... "
-                result=$(clone_repo "$repo_path" "auto")
-                case "$result" in
-                    CLONED*) echo "ok"; CLONED=$((CLONED + 1)) ;;
-                    *)       echo "FAILED"; SKIPPED=$((SKIPPED + 1)) ;;
-                esac
-            else
-                echo "  SKIP (not cloned): $repo_path"
-                SKIPPED=$((SKIPPED + 1))
-            fi
+            echo "  SKIP (not cloned): $repo_path"
+            SKIPPED=$((SKIPPED + 1))
             continue
         fi
 

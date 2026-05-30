@@ -139,6 +139,38 @@ After pulling eastGate fixes, flockGate validated all 7 and reported two additio
 
 ---
 
+## Round 2 — Validation Deployment (F10, F11, F12)
+
+### F10: membrane binary in PATH bypasses --clone-missing (Blocking)
+
+- **Symptom**: Cold-start with membrane installed → synced=1 failed=37, no cloning occurs
+- **Root cause**: Membrane delegation path exits before bash clone logic runs
+- **Resolution**: Clone missing repos via bash BEFORE delegating to membrane binary.
+  Clone loop runs first, then membrane handles temporal sync on the now-present repos.
+
+### F11: Forgejo-first clone produces broken remote wiring (Blocking)
+
+- **Symptom**: Both `github` and `forgejo` remotes point to same Forgejo URL
+- **Root cause**: `clone_repo()` tried to add `origin` (already exists), then renamed
+  the Forgejo-pointing `origin` to `github`, then failed to rename non-existent `forgejo`
+- **Resolution**: Simplified to: (1) rename clone's `origin` to `forgejo`, (2) add
+  `origin` pointing to GitHub SSH URL. Two operations, correct wiring.
+
+### F12: `auto` clone source prefers Forgejo over WAN (Friction)
+
+- **Symptom**: WAN clones from Forgejo timeout; GitHub CDN is always faster
+- **Root cause**: `clone_url` with `auto` source checked Forgejo first
+- **Resolution**: Flipped `auto` to prefer GitHub (CDN edge servers) for initial clones,
+  Forgejo as fallback. Ongoing temporal sync uses both remotes regardless.
+
+| AAR Item | Fix | Status |
+|----------|-----|--------|
+| F10: membrane bypasses clone | Clone before membrane delegation | DONE |
+| F11: Forgejo-first remote wiring | Simplified rename→add sequence | DONE |
+| F12: auto prefers Forgejo for clone | Flipped to GitHub-first for CDN speed | DONE |
+
+---
+
 ## Glacial Shift Criterion #4 Evidence
 
 This bootstrap validates WAN gate spinup:
@@ -147,14 +179,16 @@ This bootstrap validates WAN gate spinup:
 - `cascade-pull.sh --check` temporal matrix shows all-parity from WAN
 - Code changes (pseudoSpore gallery) developed entirely on WAN node
 - Forgejo SSH validated (key ID 7, authenticated as golgiAdmin)
-- 35 forgejo remotes added via `--ensure-remotes`
+- Forgejo bidirectional push verified (3 repos, 3 orgs)
+- membrane binary builds and runs on WAN node (14.5s build)
+- Cold-start path validated (dirty, clean, reset)
 
 **Remaining for full criterion #4**: Songbird relay validation,
 cross-gate `capability.call` over WAN.
 
 ---
 
-## Current flockGate State (Post-Fix)
+## Current flockGate State (Round 2)
 
 ```
 flockGate workspace: ~/Development/ecoPrimals/
@@ -162,11 +196,10 @@ flockGate workspace: ~/Development/ecoPrimals/
 ├── primals/    (14 repos, shallow, origin + forgejo remotes)
 ├── springs/    (8 repos, shallow, origin + forgejo remotes)
 ├── gardens/    (8 repos, shallow, origin + forgejo remotes)
-├── infra/      (8 repos, mixed depth, origin + forgejo remotes)
+├── infra/      (8 repos, shallow except wateringHole, origin + forgejo remotes)
 
 Parity: 38/38 repos at PARITY with origin
-Forgejo: CONNECTED (key ID 7, authenticated as golgiAdmin)
-Remotes: origin (GitHub SSH) + forgejo (git.primals.eco:2222) on all 38
-sporePrint: builds (144 pages), pseudoSpore gallery implemented
-membrane binary: not yet built (requires full clone of cellMembrane)
+Forgejo: CONNECTED, push verified
+membrane: built and installed at /usr/local/bin/membrane
+Dirty workspace preserved at: ~/Development/ecoPrimals.dirty-wave63/
 ```
