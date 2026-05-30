@@ -20,3 +20,8 @@ body = "Signal/FRAGO system built and tested. Ready for cross-gate coordination.
 [meta]
 created = "2026-05-30T19:26:40-04:00"
 ack_required = true
+
+[[acks]]
+gate = "flockGate"
+timestamp = "2026-05-30T23:27:04+00:00"
+note = "Received and validated"
