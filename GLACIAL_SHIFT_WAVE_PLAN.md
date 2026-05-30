@@ -2,7 +2,7 @@
 
 **Status**: Active roadmap  
 **Phase**: PostPrimordial (Wave 54) → Glacial Shift  
-**Last updated**: 2026-05-29  
+**Last updated**: 2026-05-30  
 **Owner**: primalSpring (coordination); cellMembrane (deployment); primal teams (mountains)
 
 ---
@@ -99,8 +99,9 @@ and the glacial shift infrastructure blockers.
 | VPS Nest expansion | cellMembrane | Deploy rhizoCrypt, loamSpine, sweetGrass, NestGate on VPS. Glacial blocker 1. loamSpine confirmed mountain-clean (90.92% coverage, 1,528 tests). |
 | Sovereign DNS | cellMembrane | Deploy knot-dns on VPS (Channel 1). Glacial blocker 2. |
 | K-Derm wire contract | cellMembrane → wateringHole | Publish `membrane.toml` schema, layer placement, `BoundaryPolicy` set. primalSpring `s_kderm_boundary` scenario ready to consume. |
-| Sovereign shadow functions | cellMembrane | **DONE** (Wave 61) — `membrane-shadow` Rust crate provides typed agentic VPS control. Forgejo repo/mirror, systemd service, gate management via SSH + HTTP. Replaces bash `membrane.sh`. |
-| Forgejo pull mirrors | cellMembrane | **DONE** (Wave 61) — All 38 repos mirrored on Forgejo at `git.primals.eco`. Auto-sync every 8 hours. |
+| Sovereign shadow functions | cellMembrane | **DONE** (Wave 62) — `membrane-shadow` Rust crate: agentic VPS control + temporal sync + manifest reader + gate identity. Deep debt sprint (security, hardcoding, error handling). |
+| Forgejo bidirectional repos | cellMembrane | **DONE** (Wave 62) — 5 repos bidirectional (biomeOS, coralReef, sweetGrass, squirrel, wateringHole). 33 remaining as pull mirrors. |
+| waterFall temporal sync | cellMembrane | **DONE** (Wave 62) — `cascade-pull.sh --source temporal` delegates to Rust `membrane` binary. Multi-remote DAG sync: fetch all, measure position, pull leader, push followers. |
 
 ### Cephalization + Tower CNS (primalSpring-validated)
 

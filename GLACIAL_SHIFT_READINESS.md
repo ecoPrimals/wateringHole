@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-29 (Wave 61: sovereign shadow functions + temporal sync spec)
+**Last updated**: 2026-05-30 (Wave 62: temporal sync operational, 5 mirrors→bidirectional, deep debt sprint)
 
 ---
 
@@ -42,6 +42,15 @@ Capability registries aligned across nestGate, bearDog, and biomeOS. Forgejo pul
 operational for all 38 repos. Temporal sync spec published. Ecosystem standardization
 audit: stale remotes cleaned, duplicate repos removed, branch naming normalized. 13/14
 upstream Neural API methods shipped by primal teams.
+
+**Wave 62 temporal sync operational** (May 30): waterFall temporal sync implemented in
+Rust (`temporal.rs` — typed multi-remote DAG sync, `manifest.rs` — ecosystem manifest
+reader replacing Python tomllib, `identity.rs` — capability-based gate detection).
+5 Forgejo mirrors converted to bidirectional repos (biomeOS, coralReef, sweetGrass,
+squirrel, wateringHole). `cascade-pull.sh --source temporal` now delegates to the Rust
+`membrane` binary with bash fallback. Deep debt sprint: shell injection fix in
+`token_create`/`token_revoke`, hardcoded paths→`ShadowConfig`, `unreachable!()`→`Result`,
+magic numbers→named constants. Manifest bumped to v2.1.0 (Wave 62). 10 handoffs archived.
 
 **Mountain blurb responses absorbed** (May 27):
 - toadStool S279: zero production panic paths, 9,156+ lib tests, handoffs archived
@@ -161,8 +170,9 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Channel 3: TLS surface (Caddy + ACME) | **LIVE** |
 | Tower composition (BearDog + Songbird + SkunkBat) | **DEPLOYED** |
 | Nest expansion (rhizoCrypt + loamSpine + sweetGrass) | Tooling shipped, **not deployed on VPS yet** |
-| Sovereign shadow functions (membrane-shadow) | **OPERATIONAL** (Wave 61) — Rust crate, agentic VPS control |
-| Forgejo pull mirrors (38 repos) | **OPERATIONAL** (Wave 61) — 8-hour auto-sync |
+| Sovereign shadow functions (membrane-shadow) | **OPERATIONAL** (Wave 62) — Rust crate + temporal/manifest/identity modules |
+| Forgejo repos (5 bidirectional + 33 mirrors) | **OPERATIONAL** (Wave 62) — biomeOS/coralReef/sweetGrass/squirrel/wateringHole push-enabled |
+| waterFall temporal sync | **OPERATIONAL** (Wave 62) — Rust `temporal.rs`, `cascade-pull.sh --source temporal` |
 | Channel 1: Sovereign DNS (knot-dns) | **PLANNED** |
 | Caddy → BearDog ACME replacement | Shadow live, **not cut over** |
 | BearDog Vault (encrypted creds at rest) | **PLANNED** (Phase 2) |
