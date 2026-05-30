@@ -2,17 +2,25 @@
 #
 # cascade-pull.service — Ecosystem-wide git pull via wateringHole
 #
-# Install per-user (no root required):
+# Works on any gate — auto-detects ECOPRIMALS_ROOT and gate identity.
+#
+# Install per-user (desktop gates):
 #   mkdir -p ~/.config/systemd/user
 #   cp cascade-pull.service cascade-pull.timer ~/.config/systemd/user/
 #   systemctl --user daemon-reload
 #   systemctl --user enable --now cascade-pull.timer
 #
+# Install system-wide (VPS / headless gates):
+#   cp cascade-pull.service cascade-pull.timer /etc/systemd/system/
+#   systemctl daemon-reload
+#   systemctl enable --now cascade-pull.timer
+#
 # Environment overrides:
-#   Create ~/.config/cascade-pull.env with:
-#     ECOPRIMALS_ROOT=/home/eastgate/Development/ecoPrimals
-#     CASCADE_GATE=eastGate
-#     CASCADE_PARALLEL=8
+#   Create the env file for your gate with any of:
+#     ECOPRIMALS_ROOT=/opt/ecoPrimals
+#     CASCADE_GATE=golgiBody
+#     CASCADE_SOURCE=origin
+#     CASCADE_PARALLEL=4
 
 [Unit]
 Description=Cascade pull — ecosystem workspace sync via wateringHole
@@ -21,11 +29,15 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
+
 EnvironmentFile=-%h/.config/cascade-pull.env
-ExecStart=%h/Development/ecoPrimals/infra/wateringHole/cascade-pull.sh --gate ${CASCADE_GATE:-eastGate}
+EnvironmentFile=-/etc/cascade-pull.env
+
+ExecStart=/bin/bash -c '${ECOPRIMALS_ROOT:-/opt/ecoPrimals}/infra/wateringHole/scripts/cascade-pull.sh --gate ${CASCADE_GATE:-auto} --source ${CASCADE_SOURCE:-origin} --parallel ${CASCADE_PARALLEL:-1}'
+
 StandardOutput=journal
 StandardError=journal
-TimeoutStartSec=300
+TimeoutStartSec=600
 
 [Install]
 WantedBy=default.target

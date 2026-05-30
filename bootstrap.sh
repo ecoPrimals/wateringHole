@@ -249,8 +249,8 @@ if ! $FRESH; then
         run rm -f "$ROOT/ecoSprings/barraCuda"
     fi
 
-    # primalTools/ -> primals/ or sort-after/
-    move_repo "$ROOT/primalTools/bingoCube"     "$ROOT/primals/bingoCube"       "bingoCube (primalTools)"
+    # primalTools/ -> infra/ or sort-after/
+    move_repo "$ROOT/primalTools/bingoCube"     "$ROOT/infra/bingoCube"         "bingoCube (primalTools)"
     move_repo "$ROOT/primalTools/benchscale"    "$ROOT/sort-after/benchScale"   "benchScale (primalTools)"
     move_repo "$ROOT/primalTools/agentReagents" "$ROOT/sort-after/agentReagents" "agentReagents (primalTools)"
 
@@ -311,7 +311,7 @@ fi
 echo "--- Cloning missing repos ---"
 
 # Primals (ecoPrimals org)
-for repo in barraCuda bearDog biomeOS bingoCube coralReef loamSpine nestGate \
+for repo in barraCuda bearDog biomeOS coralReef loamSpine nestGate \
             petalTongue rhizoCrypt skunkBat songBird sourDough squirrel \
             sweetGrass toadStool; do
     # phase1 used lowercase names — check both
@@ -323,6 +323,9 @@ for repo in barraCuda bearDog biomeOS bingoCube coralReef loamSpine nestGate \
         clone_repo "ecoPrimals" "$repo" "$ROOT/primals/$repo"
     fi
 done
+
+# bingoCube is a tool, lives in infra/
+clone_repo "ecoPrimals" "bingoCube" "$ROOT/infra/bingoCube"
 
 # Springs (syntheticChemistry org)
 for repo in airSpring groundSpring healthSpring hotSpring ludoSpring \
@@ -342,6 +345,7 @@ clone_repo "ecoPrimals" "wateringHole" "$ROOT/infra/wateringHole"
 clone_repo "ecoPrimals" "whitePaper" "$ROOT/infra/whitePaper"
 clone_repo "ecoPrimals" "plasmidBin" "$ROOT/infra/plasmidBin"
 clone_repo "ecoPrimals" "sporePrint" "$ROOT/infra/sporePrint"
+clone_repo "ecoPrimals" "fossilRecord" "$ROOT/infra/fossilRecord"
 
 # Sort-after (syntheticChemistry org)
 for repo in agentReagents benchScale ionChannel rustChip; do

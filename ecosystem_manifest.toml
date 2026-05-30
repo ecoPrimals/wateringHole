@@ -21,7 +21,7 @@
 version = "2.0.0"
 generated = "2026-05-28"
 wave = 60
-total_repos = 38
+total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
 # WaterFall Sync Configuration
@@ -71,7 +71,7 @@ description = "Security, crypto, BTSP identity"
 github_repo = "ecoPrimals/bearDog"
 forgejo_repo = "ecoPrimals/bearDog"
 
-[repos.songbird]
+[repos.songBird]
 org = "ecoPrimals"
 local_path = "primals/songBird"
 membrane = "trailing-mirror"
@@ -190,16 +190,6 @@ category = "primal"
 description = "Starter culture/bootstrap"
 github_repo = "ecoPrimals/sourDough"
 forgejo_repo = "ecoPrimals/sourDough"
-
-[repos.bingoCube]
-org = "ecoPrimals"
-local_path = "primals/bingoCube"
-membrane = "trailing-mirror"
-sync_priority = "low"
-category = "primal"
-description = "Validation framework"
-github_repo = "ecoPrimals/bingoCube"
-forgejo_repo = "ecoPrimals/bingoCube"
 
 # ═══════════════════════════════════════════════════════════════════
 # Springs (syntheticChemistry org)
@@ -444,6 +434,25 @@ description = "Rust toolchain chip"
 github_repo = "syntheticChemistry/rustChip"
 forgejo_repo = "syntheticChemistry/rustChip"
 
+[repos.bingoCube]
+org = "ecoPrimals"
+local_path = "infra/bingoCube"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "infra"
+description = "Validation framework tool"
+github_repo = "ecoPrimals/bingoCube"
+forgejo_repo = "ecoPrimals/bingoCube"
+
+[repos.fossilRecord]
+org = "ecoPrimals"
+local_path = "infra/fossilRecord"
+membrane = "outer-only"
+sync_priority = "low"
+category = "infra"
+description = "Ecosystem archive — fossilized docs, historical artifacts"
+github_repo = "ecoPrimals/fossilRecord"
+
 # ═══════════════════════════════════════════════════════════════════
 # Gate Profiles
 # ═══════════════════════════════════════════════════════════════════
@@ -453,7 +462,7 @@ forgejo_repo = "syntheticChemistry/rustChip"
 [gates.eastGate]
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
-    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat", "bingoCube", "sourDough",
     "cellMembrane", "projectNUCLEUS", "lithoSpore", "projectFOUNDATION",
@@ -466,7 +475,7 @@ repos = [
 [gates.ironGate]
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
-    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
     "cellMembrane", "projectNUCLEUS", "lithoSpore",
@@ -477,7 +486,7 @@ repos = [
 [gates.southGate]
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
-    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
     "cellMembrane", "projectNUCLEUS",
@@ -487,7 +496,7 @@ repos = [
 [gates.biomeGate]
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
-    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
     "cellMembrane", "projectNUCLEUS",
@@ -498,7 +507,7 @@ repos = [
 [gates.strandGate]
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
-    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
     "cellMembrane", "projectNUCLEUS", "lithoSpore",
@@ -511,7 +520,7 @@ repos = [
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "cellMembrane", "projectNUCLEUS",
-    "bearDog", "songbird", "toadStool", "biomeOS", "squirrel",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
 ]

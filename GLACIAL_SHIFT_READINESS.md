@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-25 (post-tightening re-audit)
+**Last updated**: 2026-05-29 (Wave 61: sovereign shadow functions + temporal sync spec)
 
 ---
 
@@ -33,6 +33,15 @@ unified. cellMembrane deployment sprint is the sole remaining gate.
 **Provenance pipeline live**: 3 primals (loamSpine, toadStool, Songbird) harvested with
 full `provenance.toml` fingerprints (May 27). `rustc_version = "1.95.0"`, source commits
 verified. Provenance-elevated checksums confirmed operational in CI.
+
+**Wave 61 sovereign shadow functions** (May 29): `membrane-shadow` Rust crate replaces
+bash VPS control scripts. Typed APIs for Forgejo repo/mirror management (`content.repo.*`,
+`content.mirror.*`), token lifecycle (`auth.token.*`), systemd service control
+(`gate.service.*`), and gate management (`gate.info`, `gate.pull`, `gate.check`).
+Capability registries aligned across nestGate, bearDog, and biomeOS. Forgejo pull mirrors
+operational for all 38 repos. Temporal sync spec published. Ecosystem standardization
+audit: stale remotes cleaned, duplicate repos removed, branch naming normalized. 13/14
+upstream Neural API methods shipped by primal teams.
 
 **Mountain blurb responses absorbed** (May 27):
 - toadStool S279: zero production panic paths, 9,156+ lib tests, handoffs archived
@@ -152,6 +161,8 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Channel 3: TLS surface (Caddy + ACME) | **LIVE** |
 | Tower composition (BearDog + Songbird + SkunkBat) | **DEPLOYED** |
 | Nest expansion (rhizoCrypt + loamSpine + sweetGrass) | Tooling shipped, **not deployed on VPS yet** |
+| Sovereign shadow functions (membrane-shadow) | **OPERATIONAL** (Wave 61) — Rust crate, agentic VPS control |
+| Forgejo pull mirrors (38 repos) | **OPERATIONAL** (Wave 61) — 8-hour auto-sync |
 | Channel 1: Sovereign DNS (knot-dns) | **PLANNED** |
 | Caddy → BearDog ACME replacement | Shadow live, **not cut over** |
 | BearDog Vault (encrypted creds at rest) | **PLANNED** (Phase 2) |

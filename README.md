@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 29, 2026 (Wave 63: biomeOS v3.88 — 3 commits, JSON parse observability, silent error elimination, env SSOT expansion, service/core split, rootpulse centralization, stale test removal, 7,983 tests. Wave 60 postPrimordial: golgiBody Phase A live — VPS Forgejo sovereign at `git.primals.eco`, WaterFall 38/38 repos validated, VPS federation hub :7700 + MitoBeacon + TURN relay live, eukaryotic gate onboarding shipped, Common NUCLEUS Deployment converged, benchScale VPS depot topology validated 26/26. 13 active handoffs + 373 archived (incl. 13 wave60).)
+**Last Updated**: May 29, 2026 (Wave 61: sovereign shadow functions — membrane-shadow Rust crate replaces bash, capability registries aligned (nestGate content.repo.*, bearDog auth.token.*, biomeOS gate.service.*), Forgejo mirrors operational, temporal sync spec complete, ecosystem standardization AAR filed. biomeOS v3.88. 4 active handoffs + 394 archived (incl. 14 wave61).)
 
 ---
 

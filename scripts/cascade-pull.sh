@@ -38,7 +38,7 @@ _resolve_root() {
     elif command -v readlink >/dev/null 2>&1; then
         start="$(readlink -f "$SCRIPT_DIR" 2>/dev/null || echo "$SCRIPT_DIR")"
     fi
-    cd "$start/../.." 2>/dev/null && pwd
+    cd "$start/../../.." 2>/dev/null && pwd
 }
 
 ECOPRIMALS_ROOT="${ECOPRIMALS_ROOT:-$(_resolve_root)}"

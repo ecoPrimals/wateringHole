@@ -2,7 +2,7 @@
 
 **Status**: Active roadmap  
 **Phase**: PostPrimordial (Wave 54) → Glacial Shift  
-**Last updated**: 2026-05-27  
+**Last updated**: 2026-05-29  
 **Owner**: primalSpring (coordination); cellMembrane (deployment); primal teams (mountains)
 
 ---
@@ -22,6 +22,15 @@ deployment feeds springs, springs feed cross-gate interaction.
 fingerprint + sweetGrass braids) shipped in plasmidBin. `plasmidbin verify-provenance`
 subcommand added. primalSpring consumer tooling rewired. VPS NUCLEUS route: zero
 mountain debt blocking, `deploy_membrane.sh --composition nest` ready.
+
+**Wave 61 sovereign shadow functions completed**: `membrane-shadow` Rust crate
+replaces bash `membrane.sh` for agentic VPS control. Typed APIs for Forgejo repo/mirror
+management, systemd service control, gate info/pull/check. Capability registries aligned:
+nestGate `content.repo.*`/`content.mirror.*`, bearDog `auth.token.*`, biomeOS
+`gate.service.*` + shadow translation entries. Forgejo pull mirrors operational for all
+38 repos. Temporal sync spec published (`primalSpring/specs/WATERFALL_TEMPORAL_SYNC.md`).
+Ecosystem standardization audit completed — stale remotes, duplicate repos, branch
+naming all resolved. 13/14 upstream Neural API methods shipped.
 
 ---
 
@@ -90,6 +99,8 @@ and the glacial shift infrastructure blockers.
 | VPS Nest expansion | cellMembrane | Deploy rhizoCrypt, loamSpine, sweetGrass, NestGate on VPS. Glacial blocker 1. loamSpine confirmed mountain-clean (90.92% coverage, 1,528 tests). |
 | Sovereign DNS | cellMembrane | Deploy knot-dns on VPS (Channel 1). Glacial blocker 2. |
 | K-Derm wire contract | cellMembrane → wateringHole | Publish `membrane.toml` schema, layer placement, `BoundaryPolicy` set. primalSpring `s_kderm_boundary` scenario ready to consume. |
+| Sovereign shadow functions | cellMembrane | **DONE** (Wave 61) — `membrane-shadow` Rust crate provides typed agentic VPS control. Forgejo repo/mirror, systemd service, gate management via SSH + HTTP. Replaces bash `membrane.sh`. |
+| Forgejo pull mirrors | cellMembrane | **DONE** (Wave 61) — All 38 repos mirrored on Forgejo at `git.primals.eco`. Auto-sync every 8 hours. |
 
 ### Cephalization + Tower CNS (primalSpring-validated)
 
