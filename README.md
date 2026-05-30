@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 29, 2026 (Wave 61: sovereign shadow functions — membrane-shadow Rust crate replaces bash, capability registries aligned (nestGate content.repo.*, bearDog auth.token.*, biomeOS gate.service.*), Forgejo mirrors operational, temporal sync spec complete, ecosystem standardization AAR filed. biomeOS v3.88. 4 active handoffs + 394 archived (incl. 14 wave61).)
+**Last Updated**: May 30, 2026 (Wave 62: waterFall temporal sync operational — membrane-shadow Rust crate now includes temporal.rs (typed multi-remote DAG sync), manifest.rs (ecosystem_manifest.toml reader, replaces Python tomllib dep), identity.rs (capability-based gate detection). 4 Forgejo mirrors converted to bidirectional repos (biomeOS, coralReef, sweetGrass, squirrel). cascade-pull.sh --source temporal delegates to Rust membrane binary. Deep debt sprint: shell injection fix, hardcoding→config, unreachable!()→Result, named constants. 0 active handoffs + 404 archived.)
 
 ---
 

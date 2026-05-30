@@ -8,10 +8,10 @@
 # Regenerate: cascade-pull --publish-freshness
 
 [wave]
-id = 61
-date = "2026-05-29"
+id = 62
+date = "2026-05-30"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Temporal sync spec + whitePaper/waterFall/ series. 8 upstream primals synced (GitHub→Forgejo). 13/14 upstream methods shipped. Glacial analysis updated."
+notes = "waterFall temporal sync operational. membrane-shadow: temporal.rs, manifest.rs, identity.rs. 4 Forgejo mirrors→bidirectional (biomeOS, coralReef, sweetGrass, squirrel). cascade-pull.sh delegates to Rust. Deep debt: shell injection fix, hardcoding→config, default_source=temporal. 10 handoffs archived."
 publisher = "cascade-pull"
 
 [heads]

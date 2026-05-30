@@ -40,8 +40,10 @@ total_repos = 39
 forgejo_base_url = "https://git.primals.eco"
 forgejo_ssh = "ssh://git@git.primals.eco:2222"
 forgejo_host = "vps"
-default_source = "github"
+default_source = "temporal"
 default_branch = "main"
+divergence_policy = "flag"
+push_to_followers = true
 
 # ═══════════════════════════════════════════════════════════════════
 # Root
@@ -104,7 +106,7 @@ forgejo_repo = "ecoPrimals/barraCuda"
 [repos.coralReef]
 org = "ecoPrimals"
 local_path = "primals/coralReef"
-membrane = "trailing-mirror"
+membrane = "bidirectional"
 sync_priority = "standard"
 category = "primal"
 description = "Distributed compute mesh"
@@ -134,7 +136,7 @@ forgejo_repo = "ecoPrimals/loamSpine"
 [repos.sweetGrass]
 org = "ecoPrimals"
 local_path = "primals/sweetGrass"
-membrane = "trailing-mirror"
+membrane = "bidirectional"
 sync_priority = "standard"
 category = "primal"
 description = "Provenance braid"
@@ -144,7 +146,7 @@ forgejo_repo = "ecoPrimals/sweetGrass"
 [repos.biomeOS]
 org = "ecoPrimals"
 local_path = "primals/biomeOS"
-membrane = "trailing-mirror"
+membrane = "bidirectional"
 sync_priority = "high"
 category = "primal"
 description = "Orchestration layer"
@@ -154,7 +156,7 @@ forgejo_repo = "ecoPrimals/biomeOS"
 [repos.squirrel]
 org = "ecoPrimals"
 local_path = "primals/squirrel"
-membrane = "trailing-mirror"
+membrane = "bidirectional"
 sync_priority = "high"
 category = "primal"
 description = "AI/MCP orchestration"
