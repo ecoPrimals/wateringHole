@@ -35,6 +35,50 @@ consists of three nodes with distinct K-Derm layer assignments.
 
 ---
 
+## Prerequisites (complete BEFORE starting)
+
+- [ ] **SSH key generated** on the new gate (`ssh-keygen -t ed25519`)
+- [ ] **SSH key registered on GitHub**: `gh ssh-key add ~/.ssh/id_ed25519.pub --title "<gate>"`
+- [ ] **SSH key registered on Forgejo**: `curl -X POST https://git.primals.eco/api/v1/user/keys -H "Authorization: token <TOKEN>" -H "Content-Type: application/json" -d '{"title":"<gate>","key":"<pubkey>"}'`
+- [ ] **Verify Forgejo connectivity**: `ssh -p 2222 git@git.primals.eco` should print `Hi <user>!`
+- [ ] **Gate profile exists** in `ecosystem_manifest.toml` under `[gates.<name>]`
+
+If Forgejo key registration is blocked, you can bootstrap from GitHub only using
+`--source origin`, but bidirectional temporal sync will not work until the key is registered.
+
+---
+
+## Pre-Bootstrap Cleanup
+
+If this gate previously had repos cloned at non-standard paths, remove them:
+
+```bash
+# Known stale layouts from pre-standard workspace
+rm -rf ~/Development/ecoPrimals/songbird    # superseded by primals/songBird/
+rm -rf ~/Development/ecoPrimals/toadstool   # superseded by primals/toadStool/
+```
+
+---
+
+## Known Large Repos (shallow clone recommended for WAN)
+
+These repos have large histories and will timeout or saturate bandwidth on full WAN clone.
+Use `--shallow` flag or `git clone --depth 1` for these:
+
+| Repo | Approx Size | Notes |
+|------|-------------|-------|
+| bearDog | 413K LOC, 2226 files | Largest in ecosystem |
+| songBird | Large history | Federation protocol |
+| toadStool | Large history | Identity system |
+| petalTongue | Large | NLP/taxonomy |
+| hotSpring | 127K LOC, 2562 files | Thermodynamics spring |
+| sporePrint | Large | Zola site + pseudoSpores |
+| rustChip | Large | Embedded systems |
+
+To unshallow later: `git fetch --unshallow`
+
+---
+
 ## Gate Setup — Physical
 
 ### Step 1: Workspace Layout
@@ -69,14 +113,28 @@ only the repos this gate needs.
 
 ```bash
 cd infra/wateringHole
+
+# Full clone (LAN or fast connection)
 ./scripts/cascade-pull.sh --gate $GATE_NAME --clone-missing --source temporal
+
+# WAN gate (shallow clone for large repos)
+./scripts/cascade-pull.sh --gate $GATE_NAME --clone-missing --shallow --source temporal
+```
+
+**Fallback** — If Forgejo is unreachable (key not registered yet):
+```bash
+# Clone from GitHub only (uses SSH URLs when SSH agent is active)
+./scripts/cascade-pull.sh --gate $GATE_NAME --clone-missing --shallow --source origin
 ```
 
 This will:
 - Read `[gates.<name>]` from ecosystem_manifest.toml for the repo list
-- Clone missing repos into the standard layout (primals/, springs/, gardens/, infra/)
+- Create workspace directories (primals/, springs/, gardens/, infra/) if missing
+- Clone missing repos into the standard layout
+- Auto-shallow known large repos (bearDog, songBird, etc.) even without `--shallow`
 - Set up both `origin` (GitHub) and `forgejo` remotes
 - Run temporal sync to pull from the leading remote
+- Pre-flight check Forgejo connectivity before per-repo fetches
 
 ### Step 4: Dev Platform
 
@@ -322,6 +380,7 @@ Every gate needs its SSH key registered on:
 | irongate | GitHub, Forgejo |
 | eastGate | GitHub, Forgejo |
 | southGate | GitHub, Forgejo |
+| flockGate | GitHub, Forgejo |
 | golgiBody-vps | GitHub, Forgejo |
 | peptidoglycan@vps | GitHub, Forgejo |
 | golgiBody-ext@vps | GitHub, Forgejo |

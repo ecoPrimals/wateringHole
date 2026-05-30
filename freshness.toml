@@ -11,7 +11,7 @@
 id = 63
 date = "2026-05-30"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "K-Derm diderm envelope physically deployed: golgiBody (inner, 157.230.3.183), peptidoglycan (structural, 157.230.209.218), golgiBody-ext (outer, 137.184.197.151). sporePrint live on outer membrane. ecosystem_manifest.toml v2.2.0 with topology section. membrane.toml three-layer config. Cross-node SSH mesh. golgiBody workspace cleaned (80%→66%). 9 active handoffs."
+notes = "flockGate AAR actioned: Forgejo key registered (ID 7), [gates.flockGate] added. cascade-pull.sh hardened (SSH URLs, --shallow, Forgejo pre-flight, mkdir on --clone-missing, better gate error messages). GATE_SETUP_STANDARD updated with prerequisites, known-large repos, stale cleanup. 10 active handoffs."
 publisher = "cascade-pull"
 
 [heads]

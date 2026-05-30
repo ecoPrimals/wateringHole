@@ -39,6 +39,7 @@ total_repos = 39
 [sync]
 forgejo_base_url = "https://git.primals.eco"
 forgejo_ssh = "ssh://git@git.primals.eco:2222"
+github_ssh = "git@github.com:"
 forgejo_host = "golgiBody"
 default_source = "temporal"
 default_branch = "main"
@@ -514,6 +515,20 @@ repos = [
     "petalTongue", "skunkBat",
     "cellMembrane", "projectNUCLEUS",
     "hotSpring",
+]
+
+# flockGate — WAN shadow, sporePrint team, full validation
+[gates.flockGate]
+repos = [
+    "nestGate", "wateringHole", "plasmidBin", "primalSpring",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat", "bingoCube", "sourDough",
+    "cellMembrane", "projectNUCLEUS", "lithoSpore", "projectFOUNDATION",
+    "esotericWebb", "blueFish", "helixVision", "initioChem",
+    "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint",
+    "wetSpring", "neuralSpring", "hotSpring",
+    "airSpring", "groundSpring", "healthSpring", "ludoSpring",
 ]
 
 # strandGate — ABG science, compChem, genomics, lithoSpore

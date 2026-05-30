@@ -43,10 +43,36 @@ _resolve_root() {
 
 ECOPRIMALS_ROOT="${ECOPRIMALS_ROOT:-$(_resolve_root)}"
 
+# Known-large repos — shallow clone recommended for WAN/bandwidth-constrained gates
+KNOWN_LARGE_REPOS="bearDog songBird toadStool petalTongue hotSpring sporePrint rustChip"
+
+# ── Forgejo connectivity check ───────────────────────────────────────
+_forgejo_reachable=
+_check_forgejo() {
+    if [[ -n "$_forgejo_reachable" ]]; then
+        return "$_forgejo_reachable"
+    fi
+    if ssh -o ConnectTimeout=3 -o BatchMode=yes -p 2222 git@git.primals.eco true 2>/dev/null; then
+        _forgejo_reachable=0
+    else
+        _forgejo_reachable=1
+        echo >&2 "WARNING: Forgejo (git.primals.eco:2222) unreachable — skipping forgejo remotes"
+        echo >&2 "  Fix: register this gate's SSH key on golgiBody Forgejo"
+    fi
+    return "$_forgejo_reachable"
+}
+
 if [[ ! -d "$ECOPRIMALS_ROOT/primals" ]]; then
-    echo "ERROR: cannot find ecoPrimals root (tried $ECOPRIMALS_ROOT)"
-    echo "Hint: set ECOPRIMALS_ROOT=/path/to/ecoPrimals or create a symlink"
-    exit 1
+    # When --clone-missing is likely, don't block — just warn
+    if [[ "${*}" == *"--clone-missing"* ]]; then
+        echo "NOTE: creating workspace layout at $ECOPRIMALS_ROOT"
+        mkdir -p "$ECOPRIMALS_ROOT"/{primals,springs,gardens,infra}
+    else
+        echo "ERROR: cannot find ecoPrimals root (tried $ECOPRIMALS_ROOT)"
+        echo "Hint: set ECOPRIMALS_ROOT=/path/to/ecoPrimals or create a symlink"
+        echo "  or: re-run with --clone-missing to bootstrap from scratch"
+        exit 1
+    fi
 fi
 
 if [[ ! -f "$MANIFEST" ]]; then
@@ -93,8 +119,14 @@ if cmd == 'gate_repos':
     gate = sys.argv[2]
     gates = m.get('gates', {})
     if gate not in gates:
-        known = ', '.join(sorted(gates.keys()))
-        print(f'ERROR: unknown gate \"{gate}\". Known: {known}', file=sys.stderr)
+        known = sorted(gates.keys())
+        suggestions = [g for g in known if g.lower().startswith(gate[:4].lower())] if len(gate) >= 4 else []
+        msg = f'ERROR: unknown gate \"{gate}\". Known gates: {", ".join(known)}'
+        if suggestions:
+            msg += f'\\n  Did you mean: {suggestions[0]}?'
+        msg += f'\\n  Fix: add [{gate}] to ecosystem_manifest.toml gates'
+        msg += f'\\n   or: cascade-pull.sh --gate {known[0] if known else "eastGate"}'
+        print(msg, file=sys.stderr)
         sys.exit(1)
     for repo_key in gates[gate].get('repos', []):
         repo = m.get('repos', {}).get(repo_key, {})
@@ -117,18 +149,27 @@ elif cmd == 'forgejo_url':
             break
 
 elif cmd == 'github_url':
+    import os
     repo_path = sys.argv[2]
+    github_ssh = m.get('sync', {}).get('github_ssh', 'git@github.com:')
+    use_ssh = os.environ.get('SSH_AUTH_SOCK') or os.path.exists(os.path.expanduser('~/.ssh/id_ed25519'))
     for key, repo in m.get('repos', {}).items():
         if repo.get('local_path') == repo_path:
             gr = repo.get('github_repo', '')
             if gr:
-                print(f'https://github.com/{gr}.git')
+                if use_ssh:
+                    print(f'{github_ssh}{gr}.git')
+                else:
+                    print(f'https://github.com/{gr}.git')
             break
 
 elif cmd == 'clone_url':
+    import os
     repo_path = sys.argv[2]
     source = sys.argv[3] if len(sys.argv) > 3 else 'auto'
     forgejo_ssh = m.get('sync', {}).get('forgejo_ssh', 'ssh://git@git.primals.eco:2222')
+    github_ssh = m.get('sync', {}).get('github_ssh', 'git@github.com:')
+    use_ssh = os.environ.get('SSH_AUTH_SOCK') or os.path.exists(os.path.expanduser('~/.ssh/id_ed25519'))
     for key, repo in m.get('repos', {}).items():
         if repo.get('local_path') == repo_path:
             fr = repo.get('forgejo_repo', '')
@@ -136,12 +177,18 @@ elif cmd == 'clone_url':
             if source == 'forgejo' and fr:
                 print(f'{forgejo_ssh}/{fr}.git')
             elif source == 'origin' and gr:
-                print(f'https://github.com/{gr}.git')
+                if use_ssh:
+                    print(f'{github_ssh}{gr}.git')
+                else:
+                    print(f'https://github.com/{gr}.git')
             elif source == 'auto':
                 if fr:
                     print(f'{forgejo_ssh}/{fr}.git')
                 elif gr:
-                    print(f'https://github.com/{gr}.git')
+                    if use_ssh:
+                        print(f'{github_ssh}{gr}.git')
+                    else:
+                        print(f'https://github.com/{gr}.git')
             break
 
 elif cmd == 'all_repos':
@@ -234,7 +281,17 @@ clone_repo() {
 
     mkdir -p "$parent_dir"
 
-    if git clone "$clone_url" "$local_path" 2>/dev/null; then
+    local clone_args=()
+    local repo_basename
+    repo_basename=$(basename "$repo_path")
+    if $SHALLOW; then
+        clone_args+=(--depth 1)
+    elif echo "$KNOWN_LARGE_REPOS" | grep -qw "$repo_basename"; then
+        clone_args+=(--depth 1)
+        echo >&2 "  (auto-shallow: $repo_basename is a known large repo)"
+    fi
+
+    if git clone "${clone_args[@]}" "$clone_url" "$local_path" 2>/dev/null; then
         # Add the other remote if we cloned from one source
         local forgejo_url github_url
         forgejo_url=$(_py_read_manifest forgejo_url "$repo_path")
@@ -304,11 +361,16 @@ temporal_check_repo() {
     local branch
     branch=$(git -C "$local_path" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
 
-    git -C "$local_path" fetch --all --quiet 2>/dev/null || true
-
     local remotes
     remotes=$(git -C "$local_path" remote 2>/dev/null)
     [[ -z "$remotes" ]] && { echo "NO_REMOTE"; return; }
+
+    for remote in $remotes; do
+        if [[ "$remote" == "forgejo" ]] && ! _check_forgejo 2>/dev/null; then
+            continue
+        fi
+        git -C "$local_path" fetch "$remote" --quiet 2>/dev/null || true
+    done
 
     local matrix=""
     local has_leader=false
@@ -388,7 +450,14 @@ temporal_sync_repo() {
     local branch
     branch=$(git -C "$local_path" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
 
-    git -C "$local_path" fetch --all --quiet 2>/dev/null || true
+    local _remotes
+    _remotes=$(git -C "$local_path" remote 2>/dev/null)
+    for _r in $_remotes; do
+        if [[ "$_r" == "forgejo" ]] && ! _check_forgejo 2>/dev/null; then
+            continue
+        fi
+        git -C "$local_path" fetch "$_r" --quiet 2>/dev/null || true
+    done
 
     local check_result
     check_result=$(temporal_check_repo "$repo_path")
@@ -527,6 +596,7 @@ DRY_RUN=false
 ENSURE_REMOTES=false
 CHECK_PARITY=false
 CLONE_MISSING=false
+SHALLOW=false
 PARALLEL=1
 
 while [[ $# -gt 0 ]]; do
@@ -537,6 +607,7 @@ while [[ $# -gt 0 ]]; do
         --ensure-remotes) ENSURE_REMOTES=true; shift ;;
         --check)     CHECK_PARITY=true; shift ;;
         --clone-missing) CLONE_MISSING=true; shift ;;
+        --shallow)   SHALLOW=true; shift ;;
         --parallel)  PARALLEL="$2"; shift 2 ;;
         -h|--help)
             cat <<'USAGE'
@@ -551,6 +622,7 @@ Options:
   --check             Parity check: fetch + compare without pulling
                       With --source temporal: shows per-remote temporal position matrix
   --clone-missing     Clone repos that aren't local yet (uses manifest URLs)
+  --shallow           Use --depth 1 for clones (faster over WAN, no history)
   --parallel N        Number of concurrent pull workers (default: 1)
   --ensure-remotes    Add forgejo remotes to all repos in gate profile
   -h, --help          Show this help
@@ -623,6 +695,10 @@ if [[ "$PARALLEL" -gt 1 ]]; then
 fi
 if $CLONE_MISSING; then
     echo "Mode:    clone-missing enabled"
+    mkdir -p "$ECOPRIMALS_ROOT"/{primals,springs,gardens,infra}
+fi
+if $SHALLOW; then
+    echo "Shallow: --depth 1 for all clones"
 fi
 echo ""
 

@@ -61,6 +61,28 @@ infra/sporePrint/
 
 ---
 
+## Prerequisites (complete BEFORE starting)
+
+- [x] **SSH key registered on GitHub**: `gh ssh-key add ~/.ssh/id_ed25519.pub --title "flockGate"`
+- [x] **SSH key registered on Forgejo**: Key ID 7, registered Wave 63
+- [x] **Gate profile exists**: `[gates.flockGate]` in ecosystem_manifest.toml
+- [ ] **Verify Forgejo connectivity**: `ssh -p 2222 git@git.primals.eco` should print `Hi golgiAdmin!`
+
+See `GATE_SETUP_STANDARD.md` for the full prerequisites checklist.
+
+---
+
+## Pre-Bootstrap Cleanup
+
+If flockGate previously had repos cloned at non-standard paths, remove them:
+
+```bash
+rm -rf ~/Development/ecoPrimals/songbird    # superseded by primals/songBird/
+rm -rf ~/Development/ecoPrimals/toadstool   # superseded by primals/toadStool/
+```
+
+---
+
 ## Phase 1: flockGate Bootstrap (Immediate)
 
 Before you can develop sporePrint, flockGate needs to be a working ecosystem gate.
@@ -83,23 +105,29 @@ cd ~/Development/ecoPrimals
 echo "flockGate" > .gate
 export GATE_NAME=flockGate
 
-# 3. Clone wateringHole from VPS Forgejo (inner membrane, covalent SSH)
+# 3. Clone wateringHole (prefer Forgejo, fall back to GitHub)
 mkdir -p infra
 git clone ssh://git@git.primals.eco:2222/ecoPrimals/wateringHole.git infra/wateringHole
+# Fallback: git clone git@github.com:ecoPrimals/wateringHole.git infra/wateringHole
 
-# 4. Pull entire ecosystem from VPS via cascade-pull
+# 4. Pull entire ecosystem via cascade-pull (WAN-safe with --shallow)
 cd infra/wateringHole
-./scripts/cascade-pull.sh --mode pull
+./scripts/cascade-pull.sh --gate flockGate --clone-missing --shallow --source temporal
+# If Forgejo unreachable, use: --source origin
 
 # 5. Verify Songbird WAN connectivity (relayed via golgiBody-ext outer membrane)
 export SONGBIRD_FEDERATION_PORT=7700
 export SONGBIRD_PEERS=137.184.197.151:7700
-# WAN relay goes through golgiBody-ext outer membrane
 ```
 
-flockGate's SSH key must be registered on golgiBody Forgejo (covalent bond).
-The sporePrint team on flockGate validates WAN connectivity through the full
-diderm envelope — inner membrane for git, outer membrane for WAN relay.
+### Known Large Repos (shallow clone recommended)
+
+These repos will timeout on full WAN clone. `cascade-pull.sh --shallow` handles this,
+or auto-shallows known large repos even without `--shallow`:
+
+bearDog, songBird, toadStool, petalTongue, hotSpring, sporePrint, rustChip
+
+To get full history later: `git fetch --unshallow`
 
 ### Dev Platform Standards
 
