@@ -18,9 +18,9 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.0.0"
-generated = "2026-05-28"
-wave = 60
+version = "2.1.0"
+generated = "2026-05-30"
+wave = 62
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -369,7 +369,7 @@ forgejo_repo = "sporeGarden/initioChem"
 [repos.wateringHole]
 org = "ecoPrimals"
 local_path = "infra/wateringHole"
-membrane = "trailing-mirror"
+membrane = "bidirectional"
 sync_priority = "high"
 category = "infra"
 description = "Ecosystem standards, coordination, cascading pull orchestration"
