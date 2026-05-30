@@ -120,13 +120,15 @@ if cmd == 'gate_repos':
     gates = m.get('gates', {})
     if gate not in gates:
         known = sorted(gates.keys())
+        known_str = ', '.join(known)
         suggestions = [g for g in known if g.lower().startswith(gate[:4].lower())] if len(gate) >= 4 else []
-        msg = f'ERROR: unknown gate \"{gate}\". Known gates: {", ".join(known)}'
+        lines = [f'ERROR: unknown gate \"{gate}\". Known gates: {known_str}']
         if suggestions:
-            msg += f'\\n  Did you mean: {suggestions[0]}?'
-        msg += f'\\n  Fix: add [{gate}] to ecosystem_manifest.toml gates'
-        msg += f'\\n   or: cascade-pull.sh --gate {known[0] if known else "eastGate"}'
-        print(msg, file=sys.stderr)
+            lines.append(f'  Did you mean: {suggestions[0]}?')
+        lines.append(f'  Fix: add [{gate}] to ecosystem_manifest.toml gates')
+        fallback = known[0] if known else 'eastGate'
+        lines.append(f'   or: cascade-pull.sh --gate {fallback}')
+        print('\\n'.join(lines), file=sys.stderr)
         sys.exit(1)
     for repo_key in gates[gate].get('repos', []):
         repo = m.get('repos', {}).get(repo_key, {})
@@ -720,7 +722,8 @@ if $CHECK_PARITY; then
             MISSING=0
             NO_REMOTE=0
             for repo_path in "${REPOS[@]}"; do
-                status=$(temporal_check_repo "$repo_path")
+                raw_status=$(temporal_check_repo "$repo_path" 2>/dev/null)
+                status=$(echo "$raw_status" | tail -1)
                 pattern=$(echo "$status" | awk '{print $1}')
                 detail=$(echo "$status" | cut -d' ' -f2-)
                 case "$pattern" in
@@ -807,7 +810,8 @@ if [[ "$SOURCE" == "temporal" ]]; then
         fi
 
         if $DRY_RUN; then
-            status=$(temporal_check_repo "$repo_path")
+            raw_status=$(temporal_check_repo "$repo_path" 2>/dev/null)
+            status=$(echo "$raw_status" | tail -1)
             pattern=$(echo "$status" | awk '{print $1}')
             printf "  %-35s %s\n" "$repo_path" "$status"
             PULLED=$((PULLED + 1))
@@ -816,8 +820,10 @@ if [[ "$SOURCE" == "temporal" ]]; then
 
         echo -n "  sync: $repo_path ... "
         result=$(temporal_sync_repo "$repo_path" 2>&1) || true
-        pattern=$(echo "$result" | head -1 | awk '{print $1}')
-        detail=$(echo "$result" | head -1 | cut -d' ' -f2-)
+        status_line=$(echo "$result" | grep -E '^(OK|FAIL|DIVERGE|SKIP|UNKNOWN) ' | tail -1)
+        [[ -z "$status_line" ]] && status_line=$(echo "$result" | tail -1)
+        pattern=$(echo "$status_line" | awk '{print $1}')
+        detail=$(echo "$status_line" | cut -d' ' -f2-)
 
         case "$pattern" in
             OK)      echo "$detail"; PULLED=$((PULLED + 1)) ;;

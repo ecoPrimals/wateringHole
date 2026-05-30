@@ -111,6 +111,34 @@ recommendation so the handoff + tooling can be hardened for future WAN gate spin
 
 ---
 
+## Post-Fix Validation (flockGate)
+
+After pulling eastGate fixes, flockGate validated all 7 and reported two additional bugs:
+
+### F8: f-string quoting in bash-embedded Python (line 124)
+
+- **Symptom**: SyntaxError when `--gate unknownName` triggers error path
+- **Root cause**: `{", ".join(known)}` inside f-string inside bash `python3 -c "..."` —
+  the `"` in `", "` terminates bash's outer double-quoted string
+- **Resolution**: Extract join to variable before f-string (`known_str = ', '.join(known)`)
+
+### F9: Temporal summary count mismatch on shallow repos
+
+- **Symptom**: Matrix shows 38/38 PARITY but summary reports "Parity: 0/38"
+- **Root cause**: `temporal_check_repo` output can contain extra lines from git fetch
+  warnings on shallow repos. `awk '{print $1}'` picks up warning text instead of
+  the PARITY/CONVERGE/DIVERGE status keyword.
+- **Resolution**: Use `tail -1` to grab only the last line (actual status), redirect
+  stderr from `temporal_check_repo` to /dev/null, and use `grep -E` to match known
+  status keywords in temporal sync output.
+
+| AAR Item | Fix | Status |
+|----------|-----|--------|
+| F8: f-string quoting | Extract join to variable | DONE |
+| F9: temporal count | tail -1 + stderr redirect + keyword grep | DONE |
+
+---
+
 ## Glacial Shift Criterion #4 Evidence
 
 This bootstrap validates WAN gate spinup:
@@ -118,24 +146,27 @@ This bootstrap validates WAN gate spinup:
 - `zola build` succeeds on flockGate (content pipeline over WAN)
 - `cascade-pull.sh --check` temporal matrix shows all-parity from WAN
 - Code changes (pseudoSpore gallery) developed entirely on WAN node
+- Forgejo SSH validated (key ID 7, authenticated as golgiAdmin)
+- 35 forgejo remotes added via `--ensure-remotes`
 
-**Remaining for full criterion #4**: Forgejo bidirectional sync (unblocked by F1 fix),
-Songbird relay validation, cross-gate `capability.call` over WAN.
+**Remaining for full criterion #4**: Songbird relay validation,
+cross-gate `capability.call` over WAN.
 
 ---
 
-## Current flockGate State
+## Current flockGate State (Post-Fix)
 
 ```
 flockGate workspace: ~/Development/ecoPrimals/
 ├── .gate = "flockGate"
-├── primals/    (14 repos, all shallow)
-├── springs/    (8 repos, all shallow)
-├── gardens/    (8 repos, all shallow)
-├── infra/      (8 repos, wateringHole+plasmidBin+primalSpring full, rest shallow)
+├── primals/    (14 repos, shallow, origin + forgejo remotes)
+├── springs/    (8 repos, shallow, origin + forgejo remotes)
+├── gardens/    (8 repos, shallow, origin + forgejo remotes)
+├── infra/      (8 repos, mixed depth, origin + forgejo remotes)
 
-Parity: 38/38 repos at PARITY with origin (GitHub)
-Forgejo: UNBLOCKED (key registered, connectivity pending validation)
-sporePrint: builds, 144 pages, pseudoSpore gallery implemented
+Parity: 38/38 repos at PARITY with origin
+Forgejo: CONNECTED (key ID 7, authenticated as golgiAdmin)
+Remotes: origin (GitHub SSH) + forgejo (git.primals.eco:2222) on all 38
+sporePrint: builds (144 pages), pseudoSpore gallery implemented
 membrane binary: not yet built (requires full clone of cellMembrane)
 ```
