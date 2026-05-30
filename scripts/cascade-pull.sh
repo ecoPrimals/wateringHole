@@ -318,6 +318,7 @@ clone_repo() {
 
 check_parity() {
     local repo_path="$1"
+    local check_source="${2:-auto}"
     local local_path="$ECOPRIMALS_ROOT/$repo_path"
 
     [[ -d "$local_path/.git" ]] || { echo "MISSING"; return; }
@@ -326,16 +327,33 @@ check_parity() {
     local_head=$(git -C "$local_path" rev-parse HEAD 2>/dev/null || echo "none")
 
     local remote_head="unknown"
+    local check_remote=""
     local branch
     branch=$(git -C "$local_path" rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")
 
-    if git -C "$local_path" remote get-url forgejo >/dev/null 2>&1; then
-        git -C "$local_path" fetch forgejo "$branch" --quiet 2>/dev/null || true
-        remote_head=$(git -C "$local_path" rev-parse "forgejo/$branch" 2>/dev/null || echo "unknown")
-    elif git -C "$local_path" remote get-url origin >/dev/null 2>&1; then
-        git -C "$local_path" fetch origin "$branch" --quiet 2>/dev/null || true
-        remote_head=$(git -C "$local_path" rev-parse "origin/$branch" 2>/dev/null || echo "unknown")
+    if [[ "$check_source" == "origin" ]]; then
+        if git -C "$local_path" remote get-url origin >/dev/null 2>&1; then
+            check_remote="origin"
+        fi
+    elif [[ "$check_source" == "forgejo" ]]; then
+        if git -C "$local_path" remote get-url forgejo >/dev/null 2>&1; then
+            check_remote="forgejo"
+        fi
+    else
+        if git -C "$local_path" remote get-url forgejo >/dev/null 2>&1; then
+            check_remote="forgejo"
+        elif git -C "$local_path" remote get-url origin >/dev/null 2>&1; then
+            check_remote="origin"
+        fi
     fi
+
+    if [[ -z "$check_remote" ]]; then
+        echo "NO_REMOTE"
+        return
+    fi
+
+    git -C "$local_path" fetch "$check_remote" "$branch" --quiet 2>/dev/null || true
+    remote_head=$(git -C "$local_path" rev-parse "$check_remote/$branch" 2>/dev/null || echo "unknown")
 
     if [[ "$local_head" == "$remote_head" ]]; then
         echo "OK"
@@ -345,7 +363,11 @@ check_parity() {
         local behind ahead
         behind=$(git -C "$local_path" rev-list --count "$local_head..$remote_head" 2>/dev/null || echo "?")
         ahead=$(git -C "$local_path" rev-list --count "$remote_head..$local_head" 2>/dev/null || echo "?")
-        echo "DRIFT(behind=$behind,ahead=$ahead)"
+        if [[ "$behind" == "?" && "$ahead" == "?" ]]; then
+            echo "DRIFT(shallow — cannot compute)"
+        else
+            echo "DRIFT(behind=$behind,ahead=$ahead)"
+        fi
     fi
 }
 
@@ -750,7 +772,7 @@ if $CHECK_PARITY; then
         MISSING=0
         NO_REMOTE=0
         for repo_path in "${REPOS[@]}"; do
-            status=$(check_parity "$repo_path")
+            status=$(check_parity "$repo_path" "$SOURCE")
             case "$status" in
                 OK)        OK=$((OK + 1));        printf "  %-40s %s\n" "$repo_path" "✓" ;;
                 MISSING)   MISSING=$((MISSING + 1));  printf "  %-40s %s\n" "$repo_path" "NOT CLONED" ;;
