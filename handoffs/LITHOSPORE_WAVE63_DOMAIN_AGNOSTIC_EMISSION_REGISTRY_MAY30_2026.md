@@ -15,7 +15,7 @@ carbohydrate ring atoms) are now gated behind profile detection. Registry
 ingest uses structured TOML I/O with version-aware upsert, status derivation,
 and meta counter maintenance.
 
-**196 tests**, zero clippy warnings, `#![forbid(unsafe_code)]`.
+**199 tests**, zero clippy warnings, `#![forbid(unsafe_code)]`.
 
 ---
 
@@ -82,9 +82,10 @@ never updated. Write errors silently ignored.
 
 | Metric | Before | After |
 |--------|--------|-------|
-| Total tests | 192 | 196 |
-| ltee-cli unit tests | 31 | 35 |
+| Total tests | 192 | 199 |
+| ltee-cli unit tests | 31 | 36 |
 | Registry tests | 0 | 4 |
+| Domain synthesis tests | 0 | 2 |
 | Clippy warnings | 0 | 0 |
 
 ---
@@ -121,7 +122,25 @@ requires schema alignment. This is a coordination item for Wave 64.
 |------|----------|--------|
 | Multi-spring emission (domain-agnostic gating) | **HIGH** | **DONE** — pipeline ready for any spring |
 | Registry automation (structured upsert) | LOW | **DONE** — status, meta, version-aware |
-| Remote fetch subcommand | MEDIUM | Not started — needs `litho fetch-pseudospore --url` |
+| Remote fetch subcommand | MEDIUM | **DONE** — `litho fetch-pseudospore --url <url>` with `--ingest` chain |
+| Domain knowledge extraction | — | **DONE** — LTEE synthesis moved from chassis to domain crates |
+
+### 7. Remote Fetch Subcommand (`fetch_pseudospore.rs`)
+
+New `litho fetch-pseudospore --url <url>` subcommand. Downloads a tarball
+from a hosted gallery (HTTP/HTTPS), extracts and validates the pseudoSpore
+envelope, and optionally chains into `ingest-pseudospore` with `--ingest`.
+Uses existing `ureq`/`tar`/`flate2` workspace deps — no new externals.
+
+### 8. Domain Knowledge Extraction (`fetch.rs` → domain crates)
+
+LTEE-specific data synthesis functions (`generate_fitness_csv`,
+`generate_mutation_params`) moved from the chassis `fetch.rs` pipeline
+into their domain crates as `synthesize_from_expected()`. Domain
+constants (`POPULATION_SIZE = 500_000`, `GENOMIC_MUTATION_RATE = 8.9e-4`,
+`GENERATIONS_OBSERVED = 20_000`) centralized as named constants in
+`ltee-mutations`. `fetch.rs` now delegates to domain crate APIs — no
+hardcoded LTEE constants remain in the chassis pipeline.
 
 ---
 
