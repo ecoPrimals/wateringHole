@@ -25,3 +25,8 @@ ack_required = true
 gate = "flockGate"
 timestamp = "2026-05-30T23:27:04+00:00"
 note = "Received and validated"
+
+[[acks]]
+gate = "eastGate"
+timestamp = "2026-05-30T23:27:21+00:00"
+note = "Confirmed, signal system looks great"
