@@ -27,11 +27,16 @@ Bond type to inner membrane: **covalent**.
 DigitalOcean droplets running specialized membrane roles. The diderm envelope
 consists of three nodes with distinct K-Derm layer assignments.
 
-| Node | K-Derm Layer | Bond | Role |
-|------|-------------|------|------|
-| golgiBody | Inner membrane | Covalent/Metallic | Forgejo, NUCLEUS, DNS |
-| peptidoglycan | Peptidoglycan | Metallic | Builds, workspace, sync |
-| golgiBody-ext | Outer membrane | Ionic/Weak | Public hosting, WAN relay |
+| Node | K-Derm Layer | Bond | Role | GitHub SSH |
+|------|-------------|------|------|------------|
+| golgiBody | Inner membrane (cis) | Covalent/Metallic | Forgejo sovereign store, NUCLEUS, DNS | None (revoked) |
+| peptidoglycan | Peptidoglycan | Metallic | Sync relay, impulse cascade, builds | None (revoked) |
+| golgiBody-ext | Outer membrane (trans) | Ionic/Weak | GitHub push, sporePrint hosting | **Yes** (ships extracellularly) |
+
+Only the outer membrane (trans face) holds GitHub SSH write credentials.
+The diderm relay chain propagates pushes with proper bond degradation:
+`gate → inner (covalent) → peptidoglycan (metallic) → outer (ionic) → GitHub (weak)`.
+See `hooks/forgejo/README.md` for the relay chain scripts.
 
 ---
 
@@ -42,10 +47,10 @@ consists of three nodes with distinct K-Derm layer assignments.
 - [ ] **Verify Forgejo connectivity**: `ssh -p 2222 git@git.primals.eco` should print `Hi <user>!`
 - [ ] **Gate profile exists** in `ecosystem_manifest.toml` under `[gates.<name>]`
 
-GitHub SSH key registration is **optional** — gates push only to Forgejo.
-The VPS auto-mirrors to GitHub via push mirrors. If you need read access
-to GitHub for cold-start (Forgejo unreachable), register a key there too:
-`gh ssh-key add ~/.ssh/id_ed25519.pub --title "<gate>"`
+GitHub SSH key registration is **not needed** for gates — gates push only to Forgejo.
+The K-Derm relay chain handles GitHub propagation automatically via golgiBody-ext.
+If you need read access to GitHub for cold-start (Forgejo unreachable), register
+a read-only deploy key: `gh ssh-key add ~/.ssh/id_ed25519.pub --title "<gate>"`
 
 ---
 
@@ -218,9 +223,10 @@ ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519 -N "" -C "<node-name>@vps"
 - membrane binary built and installed
 - UFW: SSH only (no public services)
 
-**Outer membrane (golgiBody-ext)**:
-- Caddy, Zola
-- sporePrint clone, build, and serve
+**Outer membrane (golgiBody-ext)** — trans/shipping face:
+- Caddy, Zola for sporePrint hosting
+- wateringHole clone + `ext-github-push.sh` for GitHub publication
+- GitHub SSH write credentials (only node with extracellular write access)
 - UFW: SSH + HTTP + HTTPS
 
 ---
@@ -316,9 +322,13 @@ cd /opt/ecoPrimals/infra/wateringHole
 ./scripts/cascade-pull.sh --gate peptidoglycan --source temporal
 ```
 
-For golgiBody-ext (outer membrane):
+For golgiBody-ext (outer membrane / trans face):
 ```bash
-# Just re-pull and rebuild sporePrint
+# Sync wateringHole for relay scripts
+cd /opt/ecoPrimals/infra/wateringHole
+git pull --ff-only forgejo main
+
+# Re-pull and rebuild sporePrint
 cd /opt/ecoPrimals/infra/sporePrint
 git pull origin main
 zola build
@@ -374,9 +384,11 @@ from "metallic fleet" to "weak extracellular" — a nice-to-have, not essential.
 
 ### Gate Key Registration
 
-Every gate needs its SSH key registered on:
-1. **Forgejo** (inner membrane — required): API POST to `git.primals.eco/api/v1/user/keys`
-2. **GitHub** (extracellular — optional): `gh ssh-key add ~/.ssh/id_ed25519.pub --title "<gate>"`
+Every gate needs its SSH key registered on **Forgejo only** (inner membrane):
+`curl -X POST https://git.primals.eco/api/v1/user/keys -H "Authorization: token <TOKEN>" ...`
+
+GitHub SSH write access lives exclusively on golgiBody-ext (outer/trans membrane).
+Gates do not need GitHub keys — the K-Derm relay chain handles propagation.
 
 With the Forgejo-primary model, only Forgejo SSH access is required. GitHub
 is populated by the VPS push mirror. GitHub keys are only needed if a gate
@@ -387,9 +399,9 @@ wants direct read access for cold-start when Forgejo is unreachable.
 | Key Name | Registered On |
 |----------|---------------|
 | irongate | GitHub, Forgejo |
-| eastGate | GitHub, Forgejo |
-| southGate | GitHub, Forgejo |
-| flockGate | GitHub, Forgejo |
-| golgiBody-vps | GitHub, Forgejo |
-| peptidoglycan@vps | GitHub, Forgejo |
-| golgiBody-ext@vps | GitHub, Forgejo |
+| eastGate | Forgejo |
+| southGate | Forgejo |
+| flockGate | Forgejo |
+| golgiBody (inner) | Forgejo (owns it) |
+| peptidoglycan | Forgejo |
+| golgiBody-ext (outer) | Forgejo, **GitHub** (trans face ships extracellularly) |

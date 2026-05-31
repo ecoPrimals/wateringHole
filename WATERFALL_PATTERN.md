@@ -7,7 +7,8 @@ cytoplasm; WaterFall coordinates membranes for multi-repo ecosystem sync
 across envelope layers.
 
 **Status**: Phase 1–4 implemented. Phase 4 inversion LIVE (Wave 63+).
-Gates push to Forgejo only; VPS push mirrors propagate to GitHub as external linear ledger.
+Gates push to Forgejo only; K-Derm diderm relay chain propagates to GitHub
+via peptidoglycan → golgiBody-ext with proper bond-type degradation.
 Phase 5 specified (gate specialization + covalent routing).
 
 ## K-Derm Topology
@@ -32,9 +33,9 @@ now live at `lab.primals.eco`.
 ```
                     ┌──────────────────────────────────┐
                     │        Extracellular (GitHub)     │
-                    │     trailing push mirror from FJ  │
+                    │   trailing mirror (weak bond)     │
                     └──────────────┬───────────────────┘
-                                   │ post-receive hook
+                                   │ weak (ext-github-push.sh)
                     ┌──────────────┴───────────────────┐
                     │  Outer Membrane (VPS channels)    │
                     │  lab.primals.eco, sporePrint       │
@@ -98,8 +99,9 @@ forgejo_repo = "syntheticChemistry/primalSpring"
 ```
 
 **`push_target`**: Controls where temporal sync pushes. `"forgejo"` means gates
-push only to the Forgejo remote. The VPS push mirror auto-propagates to GitHub.
-Set to `"all"` for legacy dual-push behavior.
+push only to the Forgejo remote (golgiBody-inner, cis face). The K-Derm diderm
+relay chain propagates to GitHub through peptidoglycan → golgiBody-ext.
+Set to `"all"` for legacy dual-push behavior (bypasses K-Derm layers).
 
 ### Gate-level override
 
@@ -133,21 +135,28 @@ The inversion flips Forgejo from trailing mirror to primary source.
 
 1. `[sync].push_target = "forgejo"` in manifest — gates push to Forgejo only
 2. `[sync].default_source = "temporal"` — pull from whichever remote leads
-3. VPS push mirrors created via `membrane mirror.push-create` per repo
-4. Forgejo `sync_on_commit = true` — every push auto-mirrors to GitHub
+3. K-Derm diderm relay chain wired with proper bond-type degradation:
+   - Gate → golgiBody-inner (covalent: Forgejo receives)
+   - golgiBody-inner → peptidoglycan (metallic: `pepti-sync-relay.sh` syncs)
+   - peptidoglycan → golgiBody-ext (ionic: relay to outer membrane)
+   - golgiBody-ext → GitHub (weak: `ext-github-push.sh` ships extracellularly)
+4. GitHub SSH write credentials live only on golgiBody-ext (trans/shipping face)
 5. GitHub becomes the external linear ledger (analogous to loamSpine → BTC/ETH)
-6. Forgejo post-receive webhook fires impulse cascade via `impulse-relay-hook.sh`
+6. `topology.roles` in manifest declares per-layer function assignments
+7. Impulse cascade runs on peptidoglycan during relay
 
 **Implementation files**:
-- `hooks/forgejo/setup-push-mirrors.sh` — one-time push mirror provisioning
-- `hooks/forgejo/impulse-relay-hook.sh` — post-receive impulse cascade
+- `hooks/forgejo/pepti-sync-relay.sh` — peptidoglycan metallic→ionic relay
+- `hooks/forgejo/ext-github-push.sh` — golgiBody-ext trans face GitHub push
+- `hooks/forgejo/impulse-relay-hook.sh` — standalone impulse detection
 - `graphs/waterfall_publish.toml` — full cascade graph specification
 
-**K-Derm bonding debt**: Push mirror currently fires from golgiBody-inner
-directly to GitHub, crossing covalent→weak without intermediate bond degradation.
-Target flow when membrane inner/outer separation completes:
-inner (covalent) → peptidoglycan (metallic) → golgiBody-ext (ionic) → GitHub (weak).
-GitHub SSH keys migrate from inner to outer (trans face) at that point.
+**K-Derm diderm relay** (Wave 63+): Proper bond-type degradation wired.
+`pepti-sync-relay.sh` on peptidoglycan mediates between inner and outer.
+`ext-github-push.sh` on golgiBody-ext (trans face) pushes to GitHub.
+Flow: inner (covalent) → peptidoglycan (metallic) → golgiBody-ext (ionic) → GitHub (weak).
+GitHub SSH write credentials live only on golgiBody-ext (outer membrane).
+See `hooks/forgejo/README.md` for relay chain setup.
 
 ### Rollback
 
@@ -245,9 +254,11 @@ biomeOS graph.execute (Wave 65+)
 ## History
 
 - **Wave 63+** (2026-05-31): Phase 4 inversion LIVE. `push_target = "forgejo"`
-  in manifest. Push mirror API added to membrane-shadow (`mirror.push-create`,
-  `mirror.push-list`, `mirror.push-sync`). Temporal sync respects designated
-  push target. Post-receive impulse relay hook and cascade graphs created.
+  in manifest. K-Derm diderm relay chain wired: `pepti-sync-relay.sh` on
+  peptidoglycan mediates between inner/outer; `ext-github-push.sh` on
+  golgiBody-ext ships to GitHub (trans face). `topology.roles` added to manifest.
+  GitHub SSH write credentials moved exclusively to golgiBody-ext (outer membrane).
+  Bonding violation resolved: proper covalent→metallic→ionic→weak degradation.
   GitHub becomes external linear ledger; gates push to Forgejo only.
 - **Wave 60** (2026-05-28): Phase 1–2 implemented. Manifest v2.0.0 with
   `[sync]` section and `forgejo_repo` fields. `cascade-pull.sh` evolved

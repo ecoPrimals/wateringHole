@@ -9,7 +9,7 @@
 #   3. rhizoCrypt records the push event in the DAG
 #   4. sweetGrass weaves context braid at milestone boundaries
 #   5. loamSpine anchors wave state (external ledger stamp)
-#   6. Forgejo push mirror propagates to GitHub (metallic bond)
+#   6. K-Derm relay: peptidoglycan syncs, golgiBody-ext pushes to GitHub
 #   7. songbird relays impulse to mesh (near-realtime)
 #
 # The NeuralBridge in membrane-shadow routes each step through biomeOS
@@ -103,13 +103,13 @@ fallback = "skip"
 # ── Transport Layer (waterFall) ──────────────────────────────────────
 
 [[steps]]
-name = "push_mirror"
+name = "diderm_relay"
 primal = "membrane"
-operation = "mirror.push_sync"
-description = "Forgejo push mirror propagates to GitHub (external linear ledger)"
+operation = "kderm.relay"
+description = "K-Derm diderm relay: pepti syncs inner→outer, golgiBody-ext pushes to GitHub"
 inputs = ["push_result"]
-outputs = ["mirror_result"]
-note = "Automatic via Forgejo sync_on_commit — this step is a verification"
+outputs = ["relay_result"]
+note = "pepti-sync-relay.sh (metallic→ionic) + ext-github-push.sh (ionic→weak)"
 fallback = "skip"
 
 [[steps]]
@@ -126,4 +126,5 @@ fallback = "defer"
 biological_analog = "action potential propagation with full myelination"
 triad_coverage = { quorumSignal = "potential.sense", waterFall = "temporal.sync", rootPulse = "impulse.post" }
 provenance_trio = { bearDog = "sign", rhizoCrypt = "DAG", sweetGrass = "validate" }
-external_ledgers = { github = "git-tier (metallic bond)", loamSpine = "crypto-tier (BTC/ETH stamp)" }
+external_ledgers = { github = "git-tier (weak bond via golgiBody-ext trans face)", loamSpine = "crypto-tier (BTC/ETH stamp)" }
+kderm_relay = { inner = "golgiBody (cis)", mediator = "peptidoglycan", outer = "golgiBody-ext (trans)" }

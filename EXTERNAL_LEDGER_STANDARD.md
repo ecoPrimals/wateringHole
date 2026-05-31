@@ -67,12 +67,11 @@ Gate ──covalent SSH──→ Forgejo ──push mirror──→ GitHub
 Gates push to Forgejo only. The VPS (`golgiBody`) has push mirrors configured
 per repo. Forgejo syncs on every commit received, so GitHub trails by seconds.
 
-**K-Derm bonding debt**: The current push mirror fires from golgiBody-inner
-(covalent/metallic periplasm) directly to GitHub (weak extracellular), bypassing
-the peptidoglycan structural layer and golgiBody-ext outer membrane. The correct
-diderm flow is: inner (covalent) → peptidoglycan (metallic) → outer (ionic) →
-GitHub (weak). This resolves when the membrane fully separates inner/outer
-sovereign roles — GitHub write credentials migrate to golgiBody-ext (trans face).
+**K-Derm diderm relay** (Wave 63+): The push flow properly traverses the
+diderm envelope with bond-type degradation at each layer:
+inner (covalent) → peptidoglycan (metallic) → golgiBody-ext (ionic) → GitHub (weak).
+GitHub SSH write credentials live only on golgiBody-ext (trans/shipping face).
+`pepti-sync-relay.sh` mediates on peptidoglycan; `ext-github-push.sh` ships from outer.
 
 ### Implementation
 

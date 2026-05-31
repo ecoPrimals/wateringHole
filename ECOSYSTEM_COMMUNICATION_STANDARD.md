@@ -216,29 +216,33 @@ membrane context.clear --repo gardens-cellmembrane
 All three layers propagate through the VPS as sovereign mediator:
 
 ```
-Gate ──push──→ Forgejo ──push-mirror──→ GitHub (external linear ledger)
-                  │
-                  ├── Impulse relay: post-receive → potential.sense → songbird
-                  └── Context sync:  waterFall cascade-pull across gates
+Gate ──covalent──→ golgiBody-inner (cis: Forgejo)
+                       │ metallic
+                   peptidoglycan (structural: sync + impulse cascade)
+                       │ ionic
+                   golgiBody-ext (trans: ships to extracellular)
+                       │ weak
+                   GitHub (external linear ledger)
 ```
 
 **Push Target**: Gates push only to Forgejo (`push_target = "forgejo"` in manifest).
-The VPS auto-mirrors to GitHub via Forgejo push mirrors (`sync_on_commit = true`).
-Gates no longer need GitHub SSH keys for push operations.
+The K-Derm diderm relay chain propagates through all three VPS nodes with proper
+bond-type degradation. Gates no longer need GitHub SSH keys.
 
 **GitHub as External Linear Ledger**: GitHub serves the same conceptual role as
 loamSpine → BTC/ETH stamping: an external, immutable, publicly-discoverable
 record of ecosystem evolution. It is a trailing mirror, not the source of truth.
 
-| Operation | Target | Mechanism |
-|-----------|--------|-----------|
-| `git push` | Forgejo (sovereign) | Gate SSH to VPS |
-| GitHub mirror | GitHub (external ledger) | VPS push mirror (auto) |
-| Impulse propagation | Mesh | VPS webhook → songbird relay |
-| Context braid sync | All gates | waterFall cascade-pull |
+| Operation | Target | Bond | Mechanism |
+|-----------|--------|------|-----------|
+| `git push` | Forgejo (inner) | Covalent | Gate SSH to golgiBody |
+| Sync relay | peptidoglycan | Metallic | Post-receive webhook → `pepti-sync-relay.sh` |
+| GitHub mirror | GitHub | Weak | `ext-github-push.sh` on golgiBody-ext |
+| Impulse relay | Mesh | — | peptidoglycan `potential.sense` → songbird |
+| Context sync | All gates | — | waterFall cascade-pull |
 
-See `WATERFALL_PATTERN.md` Phase 4 and `graphs/waterfall_publish.toml` for
-the full cascade specification.
+See `WATERFALL_PATTERN.md` Phase 4, `hooks/forgejo/README.md` for relay chain,
+and `graphs/waterfall_publish.toml` for cascade specification.
 
 ---
 

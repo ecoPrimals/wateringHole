@@ -62,17 +62,17 @@ ecosystem_manifest.toml v2.2.0 with `[topology]` section and three new gate prof
 setup, sync, resync. `gen5/KDERM_DIDERM_APPLICATION.md` documents bonding interactions
 per boundary. Cost: $48/mo for complete sovereign diderm envelope.
 
-**Wave 63+ waterFall Phase 4 inversion** (May 31): Forgejo-primary push model deployed.
-`push_target = "forgejo"` in manifest — gates push to Forgejo only, VPS push mirrors
-auto-propagate to GitHub as external linear ledger. Push mirror API added to membrane-shadow
-(`mirror.push-create/list/sync`). `temporal.sync` respects `push_target` — only pushes to
-designated remote. Post-receive impulse relay hook and cascade graphs created
-(`waterfall_publish.toml`, `impulse_post_signed.toml`, `context_weave_anchored.toml`).
-`EXTERNAL_LEDGER_STANDARD.md` published — formalizes git-tier (GitHub) and crypto-tier
-(BTC/ETH) stamping via loamSpine pipeline. **Known debt**: push mirror bond-type violation —
-golgiBody-inner (covalent) pushes directly to GitHub (weak), bypassing peptidoglycan (metallic)
-mediation and golgiBody-ext (ionic) boundary. Correct K-Derm flow: covalent→metallic→ionic→weak.
-Resolves when membrane fully separates inner/outer sovereign roles (cis/trans Golgi separation).
+**Wave 63+ waterFall Phase 4 inversion + K-Derm bonding enforcement** (May 31):
+Forgejo-primary push model deployed with proper K-Derm diderm relay chain.
+`push_target = "forgejo"` in manifest — gates push to Forgejo only. Diderm relay
+chain wired: `pepti-sync-relay.sh` on peptidoglycan mediates metallic→ionic bond;
+`ext-github-push.sh` on golgiBody-ext (trans face) ships to GitHub (weak bond).
+GitHub SSH write credentials moved exclusively to golgiBody-ext (outer membrane).
+`topology.roles` added to manifest declaring per-layer function assignments.
+Push mirror API in membrane-shadow (`mirror.push-create/list/sync`), `temporal.sync`
+respects `push_target`. Post-receive impulse relay + cascade graphs created.
+`EXTERNAL_LEDGER_STANDARD.md` published. Bond-type violation resolved:
+proper covalent→metallic→ionic→weak degradation through the diderm envelope.
 
 **Mountain blurb responses absorbed** (May 27):
 - toadStool S279: zero production panic paths, 9,156+ lib tests, handoffs archived
