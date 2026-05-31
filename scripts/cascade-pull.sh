@@ -1006,3 +1006,15 @@ if [[ $SKIPPED -gt 0 ]] && ! $CLONE_MISSING; then
     echo ""
     echo "Hint: re-run with --clone-missing to clone skipped repos from manifest"
 fi
+
+# ── Membrane potential sense (qS triggered by wF) ─────────────────
+# After sync, check for pending impulses if membrane binary is available.
+if [[ -n "$MEMBRANE_BIN" ]] || command -v membrane >/dev/null 2>&1; then
+    _membrane="${MEMBRANE_BIN:-membrane}"
+    PENDING=$(ECOPRIMALS_ROOT="$ECOPRIMALS_ROOT" "$_membrane" potential.sense --count 2>/dev/null || echo "0")
+    if [[ "$PENDING" -gt 0 ]]; then
+        echo ""
+        echo "=== Membrane Potential (${PENDING} pending impulse(s)) ==="
+        ECOPRIMALS_ROOT="$ECOPRIMALS_ROOT" "$_membrane" potential.sense 2>/dev/null | head -20
+    fi
+fi
