@@ -1,28 +1,28 @@
 [braid]
 gate = "flockGate"
 project = "infra/wateringHole"
-updated = "2026-05-31T09:23:54-04:00"
+updated = "2026-05-31T11:15:31-04:00"
 updated_by = "flockGate"
 ttl_hours = 48
 wave = 63
 
 [strands.focus]
-summary = "Context braid layer shipped — sweetGrass external analog for developer state"
+summary = "K-Derm diderm relay validated — topology model operational on flockGate"
 status = "active"
 
 [strands.breadcrumbs]
 trail = [
-    "CONTEXT_BRAID_STANDARD.md",
-    "context/flockGate/",
-    "src/context.rs",
-    "src/main.rs",
+    "hooks/forgejo/README.md",
+    "hooks/forgejo/pepti-sync-relay.sh",
+    "hooks/forgejo/ext-github-push.sh",
+    "ecosystem_manifest.toml",
 ]
 
 [strands.next]
 actions = [
-    "Push to eastGate for review",
-    "Integrate context.sense into cascade-pull",
+    "Confirm relay propagation latency to GitHub",
+    "Archive old flockGate context braid",
 ]
 
 [strands.notes]
-body = "Three-layer model complete: git (loamSpine) + impulses (rhizoCrypt) + context braids (sweetGrass)"
+body = "Diderm envelope: gate→golgiBody(covalent)→peptidoglycan(metallic)→golgiBody-ext(ionic)→GitHub(weak). No workflow change needed — forgejo-only push, relay handles extracellular delivery."
