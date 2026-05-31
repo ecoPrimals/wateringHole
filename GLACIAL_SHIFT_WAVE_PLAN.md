@@ -104,6 +104,8 @@ and the glacial shift infrastructure blockers.
 | waterFall temporal sync | cellMembrane | **DONE** (Wave 62) — `cascade-pull.sh --source temporal` delegates to Rust `membrane` binary. Multi-remote DAG sync: fetch all, measure position, pull leader, push followers. |
 | K-Derm diderm deployment | cellMembrane | **DONE** (Wave 63) — Three-node VPS envelope: golgiBody (inner, Forgejo), peptidoglycan (structural, builds), golgiBody-ext (outer, sporePrint live). $48/mo total. |
 | GATE_SETUP_STANDARD | wateringHole | **DONE** (Wave 63) — Standardized gate setup/sync/resync for physical gates and VPS proto-fieldMouse deployments. |
+| waterFall Phase 4 inversion | cellMembrane + wateringHole | **DONE** (Wave 63+) — Forgejo-primary push model. `push_target = "forgejo"` in manifest; push mirror API in membrane-shadow; cascade graphs defined. **DEBT**: push mirror crosses covalent→weak directly (golgiBody-inner→GitHub), bypassing peptidoglycan mediation and golgiBody-ext ionic boundary. Resolves when membrane fully separates inner/outer sovereign roles. |
+| K-Derm bonding enforcement | cellMembrane | **HARDENING DEBT** — Push mirror bond-type violation: inner membrane (covalent) holds extracellular write credentials (GitHub SSH). Correct flow: inner→peptidoglycan (metallic)→outer (ionic)→GitHub (weak). GitHub keys migrate to golgiBody-ext when membrane inner/outer separation completes. |
 
 ### Cephalization + Tower CNS (primalSpring-validated)
 

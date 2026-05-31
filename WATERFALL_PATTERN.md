@@ -143,6 +143,12 @@ The inversion flips Forgejo from trailing mirror to primary source.
 - `hooks/forgejo/impulse-relay-hook.sh` — post-receive impulse cascade
 - `graphs/waterfall_publish.toml` — full cascade graph specification
 
+**K-Derm bonding debt**: Push mirror currently fires from golgiBody-inner
+directly to GitHub, crossing covalent→weak without intermediate bond degradation.
+Target flow when membrane inner/outer separation completes:
+inner (covalent) → peptidoglycan (metallic) → golgiBody-ext (ionic) → GitHub (weak).
+GitHub SSH keys migrate from inner to outer (trans face) at that point.
+
 ### Rollback
 
 If Forgejo becomes unavailable during shadow period or after inversion:
