@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 30, 2026 (Wave 63: K-Derm diderm envelope physically deployed — three VPS nodes: golgiBody (inner membrane, sovereign Forgejo/NUCLEUS), peptidoglycan (structural sync, 39-repo workspace, Rust/Zola builds, membrane binary), golgiBody-ext (outer membrane, sporePrint hosting live, WAN relay). ecosystem_manifest.toml v2.2.0 with topology section. GATE_SETUP_STANDARD.md created. 10 active handoffs + 414 archived.)
+**Last Updated**: May 31, 2026 (Wave 63+: impulsePotential system live — `signal.*` graduated to `impulse.*`/`potential.*` mapping to Neural API Triad (rootPulse ACTION, quorumSignal SENSE, waterFall SYNC). Context braid three-layer coordination model validated (git/impulses/context ↔ loamSpine/rhizoCrypt/sweetGrass). Primal graduation: capabilities registered in `capability_registry.toml`, graph TOMLs for signed impulses + anchored braids, NeuralBridge feature-gated in membrane-shadow, bearDog signing + songbird relay wired. `cascade-pull.sh` auto-triggers `potential.sense` after sync. 18 active handoffs + 410 archived.)
 
 ---
 

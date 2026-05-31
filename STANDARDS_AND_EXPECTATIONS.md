@@ -3,7 +3,7 @@
 **Purpose**: Single-document reference for what ecoPrimals expects of every primal,
 spring, contributor, and session.  Read this first, read everything else second.
 
-**Last Updated**: May 25, 2026
+**Last Updated**: May 31, 2026 (Wave 63+)
 
 ---
 
@@ -16,6 +16,10 @@ spring, contributor, and session.  Read this first, read everything else second.
 - **`LITHOSPORE_USB_DEPLOYMENT.md`** — Spore taxonomy: ColdSpore → LiveSpore → lithoSpore
 - **`PSEUDOSPORE_STANDARD.md`** — (canonical: `gardens/lithoSpore/specs/`) Braid-first proof artifacts
 - **`PRIMAL_REGISTRY.md`** — Authoritative primal/spring version catalog
+- **`ECOSYSTEM_COMMUNICATION_STANDARD.md`** — Three-layer coordination model (git/impulses/context)
+- **`IMPULSE_POTENTIAL_STANDARD.md`** — Inter-gate action potentials (rootPulse/quorumSignal)
+- **`CONTEXT_BRAID_STANDARD.md`** — Ephemeral developer-state weaving
+- **`GATE_SETUP_STANDARD.md`** — Gate setup, sync, and resync
 
 ---
 
@@ -69,17 +73,32 @@ this directory via the `$ECOPRIMALS_PLASMID_BIN` discovery chain.
 binary to `plasmidBin/primals/{name}` (for primals) or `plasmidBin/springs/{name}`
 (for springs), and update `plasmidBin/manifest.toml` + `plasmidBin/sources.toml`.
 
-## 3. Communication (IPC)
+## 3. Communication (IPC + Inter-Gate Coordination)
 
 | Standard | File | Summary |
 |----------|------|---------|
 | Primal IPC Protocol v3.0 | `PRIMAL_IPC_PROTOCOL.md` | JSON-RPC 2.0 + tarpc, platform-agnostic transports, runtime discovery |
 | Semantic Method Naming | `SEMANTIC_METHOD_NAMING_STANDARD.md` | `domain.verb` method names (`crypto.sign`, `storage.put`) |
 | Cross-Spring Data Flow | `CROSS_SPRING_DATA_FLOW_STANDARD.md` | Time series exchange format via `capability.call` |
+| Ecosystem Communication | `ECOSYSTEM_COMMUNICATION_STANDARD.md` | Three-layer coordination: git (permanent) + impulses (events) + context braids (state) |
+| impulsePotential | `IMPULSE_POTENTIAL_STANDARD.md` | Inter-gate action potentials mapped to Neural API Triad (rP/qS/wF) |
+| Context Braids | `CONTEXT_BRAID_STANDARD.md` | Ephemeral developer-state weaving across the gate mesh |
 
 **Expectation**: Primals never import each other's code. All coordination is via
 JSON-RPC messages over IPC. Each primal owns its IPC implementation — no shared
 IPC crate.
+
+**Inter-gate coordination** uses the three-layer model:
+
+| Layer | Pattern | Lifetime | Biological analog |
+|-------|---------|----------|-------------------|
+| Git commits | Linear, permanent | Forever | loamSpine ledger |
+| Impulses | Event DAG, time-bounded | Archived per wave | rhizoCrypt sessions |
+| Context braids | Woven strands, superseding | TTL-based auto-decay | sweetGrass braids |
+
+**CLI surface**: `membrane impulse.post/ack/archive`, `membrane potential.sense/check`,
+`membrane context.weave/sense/clear`. All registered in `capability_registry.toml`
+with primal graduation path (bearDog signing, songbird relay, sweetGrass anchoring).
 
 ## 4. Security
 

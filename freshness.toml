@@ -11,7 +11,7 @@
 id = 63
 date = "2026-05-30"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "flockGate AAR actioned: Forgejo key registered (ID 7), [gates.flockGate] added. cascade-pull.sh hardened (SSH URLs, --shallow, Forgejo pre-flight, mkdir on --clone-missing, better gate error messages). GATE_SETUP_STANDARD updated with prerequisites, known-large repos, stale cleanup. 10 active handoffs."
+notes = "impulsePotential live: signal.* → impulse.*/potential.* (triad mapping). Context braid three-layer model validated (git/impulses/context). Primal graduation: capabilities registered, graph TOMLs shipped, NeuralBridge feature-gated, bearDog signing + songbird relay wired. cascade-pull.sh auto-triggers potential.sense. ECOSYSTEM_COMMUNICATION_STANDARD.md created. 18 active handoffs."
 publisher = "cascade-pull"
 
 [heads]
