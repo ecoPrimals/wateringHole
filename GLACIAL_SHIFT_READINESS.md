@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-30 (Wave 63: K-Derm diderm envelope deployed — 3 VPS nodes, sporePrint live, GATE_SETUP_STANDARD published)
+**Last updated**: 2026-05-31 (Wave 64: Sovereignty sprint started — S1 TLS 7-day gate running, DNS NS infrastructure ready (ns1+ns2 live), VPS Nest confirmed operational, Wave 64 handoffs distributed to ironGate/flockGate/biomeGate)
 
 ---
 
@@ -181,12 +181,12 @@ Tier 2+ large-dataset science, not a deployment blocker.
 
 | Track | What | Sovereign | Commercial | Status | Cutover gate |
 |-------|------|-----------|------------|--------|--------------|
-| **S1** | TLS termination | BearDog :8443 (~10ms) | Cloudflare (~120ms) | **LIVE** | 7-day p95 <= 1.5x |
-| **S2** | NAT relay | Songbird TURN :3478 | cloudflared tunnel | **LIVE** (100% 3+ days) | 7-day 100% reachable |
+| **S1** | TLS termination | Caddy+LE :443 (80ms TTFB) | Cloudflare (INACTIVE) | **7-DAY GATE RUNNING** (started 2026-05-31, q15min probe) | p95 < 500ms, 0 TLS failures |
+| **S2** | NAT relay | Songbird TURN :3478 | cloudflared (INACTIVE) | **LIVE** (100% 3+ days) | 7-day 100% reachable |
 | **S3** | Content serving | NestGate + petalTongue (67ms TTFB) | GitHub Pages (111ms) | **LIVE** | 7-day TTFB parity |
-| **S4** | Auth | BearDog BTSP dual-auth | OAuth2/PAM proxy | **READY** (code built) | 7-day p95 < 50ms |
+| **S4** | Auth | BearDog BTSP dual-auth | OAuth2/PAM proxy | **SHADOW LIVE on ironGate** (since ~May 14) | 7-day p95 < 50ms |
 
-**Remaining**: Complete S4 shadow period, then formal 7-day all-track cutover gate.
+**Remaining**: S1 gate completes ~June 7. S4 formal 7-day gate blocked on ironGate services restart. DNS NS cutover infra ready (ns1+ns2 live, DNSSEC active), registrar action pending.
 
 ### cellMembrane (inner membrane)
 
@@ -197,11 +197,11 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Channel 2b: RustDesk hbbs/hbbr | **LIVE** |
 | Channel 3: TLS surface (Caddy + ACME) | **LIVE** |
 | Tower composition (BearDog + Songbird + SkunkBat) | **DEPLOYED** |
-| Nest expansion (rhizoCrypt + loamSpine + sweetGrass) | Tooling shipped, **not deployed on VPS yet** |
+| Nest expansion (rhizoCrypt + loamSpine + sweetGrass) | **OPERATIONAL** (since May 28) — all 4 services active, ports verified |
 | Sovereign shadow functions (membrane-shadow) | **OPERATIONAL** (Wave 62) — Rust crate + temporal/manifest/identity modules |
 | Forgejo repos (5 bidirectional + 33 mirrors) | **OPERATIONAL** (Wave 62) — biomeOS/coralReef/sweetGrass/squirrel/wateringHole push-enabled |
 | waterFall temporal sync | **OPERATIONAL** (Wave 62) — Rust `temporal.rs`, `cascade-pull.sh --source temporal` |
-| Channel 1: Sovereign DNS (knot-dns) | **PLANNED** |
+| Channel 1: Sovereign DNS (knot-dns) | **OPERATIONAL** — ns1 (golgiBody) + ns2 (golgiBody-ext), DNSSEC active, zone transfer confirmed. NS registrar cutover pending. |
 | Caddy → BearDog ACME replacement | Shadow live, **not cut over** |
 | BearDog Vault (encrypted creds at rest) | **PLANNED** (Phase 2) |
 
@@ -217,7 +217,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | **northGate** | Ryzen 9950X3D, RTX 5090, 96GB | Gaming primary, heavy compute | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
 | **westGate** | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
 | **swiftGate** | Ryzen 5800X, RTX 3070, 64GB | Mobile/compact | Hardware ready | — | 1G |
-| **flockGate** | i9-13900K, RTX 3070 Ti, 64GB | Remote covalent (WAN) | Config ready, **not deployed** | — | WAN via cellMembrane |
+| **flockGate** | i9-13900K, RTX 3070 Ti, 64GB | Remote covalent (WAN) | **OPERATIONAL** (Wave 63) — WAN relay validated (~3s propagation) | sporePrint | WAN via cellMembrane |
 | **kinGate** | i7-6700K, RTX 3070, 32GB | Staging | Hardware ready | — | 1G |
 
 **Covalent mesh order** (over existing 1G LAN):
