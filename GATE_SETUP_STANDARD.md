@@ -44,6 +44,7 @@ See `hooks/forgejo/README.md` for the relay chain scripts.
 
 - [ ] **SSH key generated** on the new gate (`ssh-keygen -t ed25519`)
 - [ ] **SSH key registered on Forgejo** (primary): `curl -X POST https://git.primals.eco/api/v1/user/keys -H "Authorization: token <TOKEN>" -H "Content-Type: application/json" -d '{"title":"<gate>","key":"<pubkey>"}'`
+  - To register keys without a pre-existing token, have an existing gate admin add your SSH public key via the Forgejo web UI: **Admin Panel -> User Accounts -> Keys -> Add Key**, or request eastGate to register via the `membrane` CLI.
 - [ ] **Verify Forgejo connectivity**: `ssh -p 2222 git@git.primals.eco` should print `Hi <user>!`
 - [ ] **Gate profile exists** in `ecosystem_manifest.toml` under `[gates.<name>]`
 
@@ -102,6 +103,10 @@ export GATE_NAME=$(cat .gate)
 wateringHole is always the first clone. It contains the ecosystem manifest,
 cascade-pull, and all standards.
 
+> **Note**: Forgejo paths are case-sensitive. Use exact casing from
+> ecosystem_manifest.toml (e.g., `ecoPrimals/wateringHole`, not
+> `ecoprimals/wateringhole`). Mismatched casing fails silently.
+
 ```bash
 mkdir -p infra
 git clone ssh://git@git.primals.eco:2222/ecoPrimals/wateringHole.git infra/wateringHole
@@ -151,6 +156,12 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 # Verify
 rustc --version
 cargo --version
+
+# Zola (for sporePrint and other static site builds)
+# Option A: pre-built binary (recommended)
+# Download from https://www.getzola.org/documentation/getting-started/installation/
+# Option B: build from source (slower)
+cargo install zola
 ```
 
 ### Step 5: Membrane Binary (Optional)

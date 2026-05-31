@@ -30,17 +30,33 @@ LOG_TAG="pepti-sync-relay"
 
 log() { logger -t "$LOG_TAG" "$@" 2>/dev/null || echo "[$LOG_TAG] $*"; }
 
+# Repos to relay: passed as arguments or defaults to wateringHole
+if [[ $# -gt 0 ]]; then
+    RELAY_REPOS=("$@")
+else
+    RELAY_REPOS=("infra/wateringHole")
+fi
+
 # ── Step 1: Pull from Forgejo (metallic bond inward) ─────────────────
 
-log "=== Sync relay triggered ==="
+log "=== Sync relay triggered for ${#RELAY_REPOS[@]} repo(s) ==="
 
-cd "$ECOPRIMALS_ROOT/infra/wateringHole"
-git pull --ff-only forgejo main --quiet 2>/dev/null || {
-    log "WARN: wateringHole pull failed — may be up to date"
-}
+for repo_path in "${RELAY_REPOS[@]}"; do
+    local_path="$ECOPRIMALS_ROOT/$repo_path"
+    if [[ -d "$local_path/.git" ]]; then
+        cd "$local_path"
+        git pull --ff-only forgejo main --quiet 2>/dev/null || {
+            log "WARN: $repo_path pull failed — may be up to date"
+        }
+        log "Pulled $repo_path from Forgejo"
+    else
+        log "SKIP $repo_path (not cloned on peptidoglycan)"
+    fi
+done
 
 # ── Step 2: Impulse cascade (if membrane available) ──────────────────
 
+cd "$ECOPRIMALS_ROOT/infra/wateringHole" 2>/dev/null || true
 if [[ -x "$MEMBRANE_BIN" ]]; then
     PENDING=$("$MEMBRANE_BIN" potential.sense --count 2>/dev/null || echo "0")
     if [[ "$PENDING" -gt 0 ]]; then
@@ -55,14 +71,21 @@ fi
 
 # ── Step 3: Push to golgiBody-ext (ionic bond outward) ───────────────
 #
-# SSH to golgiBody-ext and trigger a pull from Forgejo. The outer
-# membrane then pushes to GitHub (extracellular weak bond).
+# SSH to golgiBody-ext and trigger pulls + GitHub push for each repo.
 
 log "Relaying to golgiBody-ext (outer membrane)..."
 
+REPO_ARGS=""
+for repo_path in "${RELAY_REPOS[@]}"; do
+    REPO_ARGS="$REPO_ARGS $repo_path"
+done
+
 ssh -o ConnectTimeout=5 -o BatchMode=yes "$GOLGI_EXT_HOST" \
-    "cd /opt/ecoPrimals/infra/wateringHole && git pull --ff-only forgejo main --quiet 2>/dev/null; \
-     /opt/ecoPrimals/infra/wateringHole/hooks/forgejo/ext-github-push.sh 2>&1" \
+    "for rp in $REPO_ARGS; do \
+       d=/opt/ecoPrimals/\$rp; \
+       [ -d \"\$d/.git\" ] && cd \"\$d\" && git pull --ff-only forgejo main --quiet 2>/dev/null; \
+     done; \
+     /opt/ecoPrimals/infra/wateringHole/hooks/forgejo/ext-github-push.sh $REPO_ARGS 2>&1" \
     2>/dev/null && {
     log "Relay to golgiBody-ext complete"
 } || {
