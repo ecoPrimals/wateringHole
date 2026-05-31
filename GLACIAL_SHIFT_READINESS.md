@@ -74,6 +74,12 @@ respects `push_target`. Post-receive impulse relay + cascade graphs created.
 `EXTERNAL_LEDGER_STANDARD.md` published. Bond-type violation resolved:
 proper covalent→metallic→ionic→weak degradation through the diderm envelope.
 
+**Transport evolution roadmap published** (May 31): `gen5/TRANSPORT_EVOLUTION_NANOWIRE_TO_QUORUM.md`
+documents the path from SSH-triggered relay (nanowire) to timer-based autonomous sensing
+(quorum Phase 1) to songbird mesh relay (Phase 2) to capability-routed quorum (Phase 3).
+Current relay chain validated by flockGate (WAN, ~3s propagation) and ironGate (LAN covalent
+backbone). biomeGate (async hardware cadence) serves as air-gap validation loop.
+
 **Mountain blurb responses absorbed** (May 27):
 - toadStool S279: zero production panic paths, 9,156+ lib tests, handoffs archived
 - Songbird W53b: +74 tests (8,070 total), deep debt zero confirmed, `forbid(unsafe_code)` all crates

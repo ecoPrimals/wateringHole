@@ -106,6 +106,11 @@ and the glacial shift infrastructure blockers.
 | GATE_SETUP_STANDARD | wateringHole | **DONE** (Wave 63) — Standardized gate setup/sync/resync for physical gates and VPS proto-fieldMouse deployments. |
 | waterFall Phase 4 inversion | cellMembrane + wateringHole | **DONE** (Wave 63+) — Forgejo-primary push model. `push_target = "forgejo"` in manifest; push mirror API in membrane-shadow; cascade graphs defined. K-Derm diderm relay chain wired with proper bond degradation. |
 | K-Derm bonding enforcement | cellMembrane + wateringHole | **DONE** (Wave 63+) — Diderm relay chain: `pepti-sync-relay.sh` on peptidoglycan mediates metallic→ionic; `ext-github-push.sh` on golgiBody-ext ships to GitHub (weak). GitHub SSH keys moved to outer membrane (trans face). `topology.roles` in manifest. Bonding violation resolved: covalent→metallic→ionic→weak. |
+| Transport: nanowire→quorum Phase 1 | cellMembrane | **NEXT** — Replace SSH-triggered relay with timer-based `potential.sense` on peptidoglycan + golgiBody-ext. Nodes sense and respond autonomously. Nanowire SSH retained for metallic/covalent ops. See `gen5/TRANSPORT_EVOLUTION_NANOWIRE_TO_QUORUM.md`. |
+| Transport: nanowire→quorum Phase 2 | cellMembrane + songbird | **FUTURE** — Songbird `mesh.publish` carries impulse notifications. Nodes subscribe to K-Derm-layer-relevant channels. Relay becomes multicast, not point-to-point SSH. |
+| Transport: nanowire→quorum Phase 3 | cellMembrane + songbird + biomeOS | **FUTURE** — Capability-routed quorum. Nodes register K-Derm roles via songbird capabilities. Coordination routing is topology-discoverable, not hardcoded. |
+| Multi-vendor peptidoglycan | cellMembrane | **FUTURE** — Additional VPS node(s) on different providers (Hetzner/Vultr) as peptidoglycan layer redundancy. Validates quorum sensing across providers. ABG compute workload submission interface. |
+| Air-gap validation loop | biomeGate | **ACTIVE** — biomeGate's async hardware cadence validates temporal sync tolerance for delayed pushes. Pattern maps to air-gapped/intermittent gates post-stadial. |
 
 ### Cephalization + Tower CNS (primalSpring-validated)
 
@@ -209,3 +214,5 @@ scaffolded. The CompChem pseudoSpore is at v1.6.1. **lithoSpore NC-1.3 COMPLETE*
 | K-Derm boundary scenarios | **3 scenarios PASS** (56 total) | + channel protein live validation |
 | pseudoSpore delta coverage | **1/7** (hotSpring CompChem v1.6.1) | 7/7 springs emit domain spore |
 | primalSpring lib tests | **787/799** (10 live-tier) | All pass with full graph deploy |
+| K-Derm relay chain | **LIVE** (nanowire SSH) | Phase 1 quorum (timer-based sensing) |
+| Gate validation coverage | 2/4 (flockGate WAN, ironGate LAN pending) | All gates validated + air-gap (biomeGate) |
