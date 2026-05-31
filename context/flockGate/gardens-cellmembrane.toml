@@ -1,0 +1,32 @@
+[braid]
+gate = "flockGate"
+project = "gardens/cellMembrane"
+updated = "2026-05-31T10:01:49-04:00"
+updated_by = "flockGate"
+ttl_hours = 48
+wave = 63
+
+[strands.focus]
+summary = "Cursor hook design + context.sense agent workflow integration"
+status = "active"
+
+[strands.breadcrumbs]
+trail = [
+    "src/context.rs",
+    "src/bridge.rs",
+    ".cursor/hooks.json",
+    ".cursor/rules/",
+]
+
+[strands.next]
+actions = [
+    "Design .cursor/hooks.json for context.sense auto-inject",
+    "Test structured TOML vs freeform for agent parsing",
+    "Define braid template system for recurring K-NOME patterns",
+]
+
+[strands.blockers]
+items = ["Need to determine hook injection point: system prompt vs initial message vs file reference"]
+
+[strands.notes]
+body = "K-NOME: the blurb IS the program. context.weave encodes the human directive, context.sense delivers it to the agent. Standing: AGPL-3.0, 1000L max, zero-copy, discover at runtime."
