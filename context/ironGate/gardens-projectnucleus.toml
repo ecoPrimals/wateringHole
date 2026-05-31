@@ -1,0 +1,35 @@
+[braid]
+gate = "ironGate"
+project = "gardens/projectNUCLEUS"
+updated = "2026-05-31T11:30:00-04:00"
+updated_by = "ironGate"
+ttl_hours = 48
+wave = 64
+
+[strands.focus]
+summary = "K-Derm diderm onboarding validated — temporal sync 21/22, push relay gap found (mirrors not deployed)"
+status = "active"
+
+[strands.breadcrumbs]
+trail = [
+    "README.md",
+    "PHASES.md",
+    "specs/EVOLUTION_GAPS.md",
+    "specs/COMPLETE_DEPENDENCY_INVENTORY.md",
+    "whitePaper/baseCamp/README.md",
+    "infra/wateringHole/handoffs/PROJECTNUCLEUS_KDERM_ONBOARD_VALIDATION_MAY31_2026.md",
+]
+
+[strands.decisions]
+notes = [
+    "Dual-push refs cleaned from 5 docs — ecosystem norm is push forgejo only",
+    "toadStool DIVERGE flagged for cellMembrane one-time force-push",
+    "Push mirrors not deployed on golgiBody — gates still need origin fallback",
+    "membrane binary installed locally at ~/.local/bin/membrane (7.2MB release)",
+]
+
+[strands.blockers]
+items = [
+    "Push relay: VPS needs membrane binary + setup-push-mirrors.sh + relay hooks",
+    "toadStool: GitHub origin/main has different history from Forgejo (pre-diderm)",
+]
