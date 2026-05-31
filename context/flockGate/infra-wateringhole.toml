@@ -1,0 +1,26 @@
+[braid]
+gate = "flockGate"
+project = "infra/wateringHole"
+updated = "2026-05-31T09:23:08-04:00"
+updated_by = "flockGate"
+ttl_hours = 48
+wave = 63
+
+[strands.focus]
+summary = "Implementing context braid layer — sweetGrass external equivalent"
+status = "active"
+
+[strands.breadcrumbs]
+trail = [
+    "CONTEXT_BRAID_STANDARD.md",
+    "context/flockGate/",
+]
+
+[strands.next]
+actions = [
+    "E2E validation",
+    "Push to eastGate for review",
+]
+
+[strands.notes]
+body = "Wave 63 context layer: ephemeral developer state weaving across gate mesh"
