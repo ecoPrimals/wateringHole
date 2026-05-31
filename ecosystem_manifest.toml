@@ -479,6 +479,7 @@ sync_priority = "low"
 category = "infra"
 description = "Ecosystem archive — fossilized docs, historical artifacts"
 github_repo = "ecoPrimals/fossilRecord"
+forgejo_repo = "ecoPrimals/fossilRecord"
 
 # ═══════════════════════════════════════════════════════════════════
 # Gate Profiles
