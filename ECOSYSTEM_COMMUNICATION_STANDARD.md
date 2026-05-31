@@ -144,7 +144,7 @@ The triad cycle with all three layers:
 ```bash
 # Layer 1: Git commit (always happens)
 git add . && git commit -m "feat: impulse signing via bearDog"
-git push origin main && git push forgejo main
+git push forgejo main    # K-Derm relay propagates to GitHub automatically
 
 # Layer 2: Fire an impulse (when other gates need to act)
 membrane impulse.post \
@@ -158,7 +158,7 @@ membrane context.weave \
   --repo gardens-cellmembrane \
   --focus "impulse.rs bearDog signing integration" \
   --breadcrumbs "bridge.rs NeuralBridge, impulse.rs try_sign_impulse, main.rs dispatch" \
-  --next-steps "test signing with live bearDog UDS, validate TOML schema, push to both remotes"
+  --next-steps "test signing with live bearDog UDS, validate TOML schema, push to forgejo"
 ```
 
 ### Discovering Communication

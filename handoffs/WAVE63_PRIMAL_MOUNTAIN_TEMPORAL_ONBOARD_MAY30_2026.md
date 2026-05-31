@@ -47,7 +47,7 @@ team onto the temporal sync.
 - [ ] Set env: `export GATE_NAME=southGate` in shell profile
 - [ ] Run: `cascade-pull.sh --mode check --source temporal`
 - [ ] If clean, run: `cascade-pull.sh --mode pull --source temporal`
-- [ ] Push biomeOS: `git push origin main && git push forgejo main`
+- [ ] Push biomeOS: `git push forgejo main`  (K-Derm relay mirrors to GitHub)
 - [ ] **NUCLEUS redeploy**: `plasmidbin fetch --all --force && plasmidbin launch` (pending since Wave 53)
 - [ ] Verify: `SONGBIRD_PEERS=192.168.1.144:7700` in environment
 
@@ -59,8 +59,8 @@ team onto the temporal sync.
 - [ ] Create `.gate` file: `echo "strandGate" > /path/to/ecoPrimals/.gate`
 - [ ] Set env: `export GATE_NAME=strandGate`
 - [ ] Run: `cascade-pull.sh --mode check --source temporal`
-- [ ] Push coralReef: `git push origin main && git push forgejo main`
-- [ ] Push sweetGrass: `git push origin main && git push forgejo main`
+- [ ] Push coralReef: `git push forgejo main`  (K-Derm relay mirrors to GitHub)
+- [ ] Push sweetGrass: `git push forgejo main`
 
 ### ironGate (agentic dev)
 

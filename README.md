@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 31, 2026 (Wave 63+: impulsePotential system live — `signal.*` graduated to `impulse.*`/`potential.*` mapping to Neural API Triad (rootPulse ACTION, quorumSignal SENSE, waterFall SYNC). Context braid three-layer coordination model validated (git/impulses/context ↔ loamSpine/rhizoCrypt/sweetGrass). Primal graduation: capabilities registered in `capability_registry.toml`, graph TOMLs for signed impulses + anchored braids, NeuralBridge feature-gated in membrane-shadow, bearDog signing + songbird relay wired. `cascade-pull.sh` auto-triggers `potential.sense` after sync. 18 active handoffs + 410 archived.)
+**Last Updated**: May 31, 2026 (Wave 63+: K-Derm diderm relay chain wired — proper bond-type degradation through the three-node VPS envelope: gate→golgiBody-inner (covalent)→peptidoglycan (metallic)→golgiBody-ext (ionic)→GitHub (weak). GitHub SSH keys live only on outer membrane (trans face). `topology.roles` in manifest. impulsePotential live — impulse/potential mapping to Neural API Triad. Context braid three-layer coordination validated. 12 active handoffs + 418 archived.)
 
 ---
 
