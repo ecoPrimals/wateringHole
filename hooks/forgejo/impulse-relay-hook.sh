@@ -1,21 +1,16 @@
 #!/bin/bash
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# impulse-relay-hook.sh — Forgejo post-receive webhook handler
+# impulse-relay-hook.sh — Impulse detection and relay (standalone)
 #
-# Deployed on golgiBody VPS. Triggered by Forgejo webhook on push to
-# wateringHole repo. Detects new impulses in impulses/active/ and
-# relays them via songbird mesh.publish for near-realtime propagation.
+# Detects pending impulses in impulses/active/ and relays them via
+# songbird mesh.publish for near-realtime propagation.
 #
-# Webhook config (Forgejo repo settings → Webhooks):
-#   URL: http://localhost:3001/hooks/impulse-relay
-#   Method: POST
-#   Content type: application/json
-#   Trigger: Push events
-#   Branch filter: main
+# K-Derm deployment: runs on peptidoglycan as part of pepti-sync-relay.sh.
+# Can also run standalone on any node with membrane binary and wateringHole.
 #
-# This script is called by a lightweight HTTP listener (e.g. webhook daemon)
-# that receives the Forgejo push payload.
+# For the full K-Derm diderm flow, use pepti-sync-relay.sh instead —
+# it calls this script as part of the metallic→ionic relay chain.
 
 set -euo pipefail
 
