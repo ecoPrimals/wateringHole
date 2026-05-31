@@ -61,7 +61,7 @@ fi
 log "Relaying to golgiBody-ext (outer membrane)..."
 
 ssh -o ConnectTimeout=5 -o BatchMode=yes "$GOLGI_EXT_HOST" \
-    "cd /opt/ecoPrimals/infra/wateringHole && git pull --ff-only origin main --quiet 2>/dev/null; \
+    "cd /opt/ecoPrimals/infra/wateringHole && git pull --ff-only forgejo main --quiet 2>/dev/null; \
      /opt/ecoPrimals/infra/wateringHole/hooks/forgejo/ext-github-push.sh 2>&1" \
     2>/dev/null && {
     log "Relay to golgiBody-ext complete"
