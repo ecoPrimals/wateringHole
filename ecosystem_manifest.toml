@@ -45,6 +45,11 @@ default_source = "temporal"
 default_branch = "main"
 divergence_policy = "flag"
 push_to_followers = true
+# Push target: "forgejo" (sovereign mediator) or "all" (legacy dual-push).
+# When set to "forgejo", temporal.sync pushes only to forgejo remote;
+# the VPS push mirror handles GitHub propagation. Gates still pull from
+# all remotes (GitHub may have external contributions).
+push_target = "forgejo"
 
 [topology]
 model = "diderm"

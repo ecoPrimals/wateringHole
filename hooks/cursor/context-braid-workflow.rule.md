@@ -35,7 +35,7 @@ membrane context.weave \
 - Primal code has self-knowledge only — discover capabilities at runtime, no hardcoding
 - No 2^n enumeration of peers — use capability registries
 - Commit messages follow: `feat:`, `fix:`, `docs:`, `refactor:` prefixes
-- Push to both `origin` (GitHub) and `forgejo` (LAN Forgejo) remotes
+- Push to `forgejo` only — VPS auto-mirrors to GitHub (external ledger)
 
 ## Gate Identity
 

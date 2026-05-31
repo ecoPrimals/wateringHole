@@ -6,8 +6,9 @@ RootPulse coordinates primals for single-repo version control within a
 cytoplasm; WaterFall coordinates membranes for multi-repo ecosystem sync
 across envelope layers.
 
-**Status**: Phase 1–2 implemented, Phase 5 specified (gate specialization + covalent routing).
-Phases 3–4 are operational and require multi-day validation windows.
+**Status**: Phase 1–4 implemented. Phase 4 inversion LIVE (Wave 63+).
+Gates push to Forgejo only; VPS push mirrors propagate to GitHub as external linear ledger.
+Phase 5 specified (gate specialization + covalent routing).
 
 ## K-Derm Topology
 
@@ -85,14 +86,20 @@ Forgejo post-receive hooks then:
 [sync]
 forgejo_base_url = "https://git.primals.eco"
 forgejo_ssh = "ssh://git@git.primals.eco:2222"
-forgejo_host = "ironGate"
-default_source = "github"   # flip to "forgejo" at inversion (Phase 4)
+forgejo_host = "golgiBody"
+default_source = "temporal"
 default_branch = "main"
+push_to_followers = true
+push_target = "forgejo"       # Phase 4 inversion: gates push to Forgejo only
 
 [repos.primalSpring]
 # ... existing fields ...
 forgejo_repo = "syntheticChemistry/primalSpring"
 ```
+
+**`push_target`**: Controls where temporal sync pushes. `"forgejo"` means gates
+push only to the Forgejo remote. The VPS push mirror auto-propagates to GitHub.
+Set to `"all"` for legacy dual-push behavior.
 
 ### Gate-level override
 
@@ -122,19 +129,19 @@ The inversion flips Forgejo from trailing mirror to primary source.
 4. Extend `s_ecosystem_freshness` or add `s_ecosystem_forgejo_parity`
    to validate in CI
 
-### Phase 4: Inversion
+### Phase 4: Inversion — LIVE (Wave 63+)
 
-1. Flip `[sync].default_source = "forgejo"` in manifest
-2. `cascade-pull` now pulls from Forgejo by default
-3. Optionally rename remotes:
-   ```bash
-   git remote rename origin github
-   git remote rename forgejo origin
-   ```
-4. Invert server-side mirror direction:
-   - Forgejo post-receive hooks push to GitHub
-   - `forgejo_sync.sh` becomes `github_push_mirror.sh`
-5. GitHub becomes a trailing read-only mirror (extracellular)
+1. `[sync].push_target = "forgejo"` in manifest — gates push to Forgejo only
+2. `[sync].default_source = "temporal"` — pull from whichever remote leads
+3. VPS push mirrors created via `membrane mirror.push-create` per repo
+4. Forgejo `sync_on_commit = true` — every push auto-mirrors to GitHub
+5. GitHub becomes the external linear ledger (analogous to loamSpine → BTC/ETH)
+6. Forgejo post-receive webhook fires impulse cascade via `impulse-relay-hook.sh`
+
+**Implementation files**:
+- `hooks/forgejo/setup-push-mirrors.sh` — one-time push mirror provisioning
+- `hooks/forgejo/impulse-relay-hook.sh` — post-receive impulse cascade
+- `graphs/waterfall_publish.toml` — full cascade graph specification
 
 ### Rollback
 
@@ -231,6 +238,11 @@ biomeOS graph.execute (Wave 65+)
 
 ## History
 
+- **Wave 63+** (2026-05-31): Phase 4 inversion LIVE. `push_target = "forgejo"`
+  in manifest. Push mirror API added to membrane-shadow (`mirror.push-create`,
+  `mirror.push-list`, `mirror.push-sync`). Temporal sync respects designated
+  push target. Post-receive impulse relay hook and cascade graphs created.
+  GitHub becomes external linear ledger; gates push to Forgejo only.
 - **Wave 60** (2026-05-28): Phase 1–2 implemented. Manifest v2.0.0 with
   `[sync]` section and `forgejo_repo` fields. `cascade-pull.sh` evolved
   with `--source` and `--ensure-remotes`. All eastGate repos configured

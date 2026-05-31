@@ -38,13 +38,14 @@ consists of three nodes with distinct K-Derm layer assignments.
 ## Prerequisites (complete BEFORE starting)
 
 - [ ] **SSH key generated** on the new gate (`ssh-keygen -t ed25519`)
-- [ ] **SSH key registered on GitHub**: `gh ssh-key add ~/.ssh/id_ed25519.pub --title "<gate>"`
-- [ ] **SSH key registered on Forgejo**: `curl -X POST https://git.primals.eco/api/v1/user/keys -H "Authorization: token <TOKEN>" -H "Content-Type: application/json" -d '{"title":"<gate>","key":"<pubkey>"}'`
+- [ ] **SSH key registered on Forgejo** (primary): `curl -X POST https://git.primals.eco/api/v1/user/keys -H "Authorization: token <TOKEN>" -H "Content-Type: application/json" -d '{"title":"<gate>","key":"<pubkey>"}'`
 - [ ] **Verify Forgejo connectivity**: `ssh -p 2222 git@git.primals.eco` should print `Hi <user>!`
 - [ ] **Gate profile exists** in `ecosystem_manifest.toml` under `[gates.<name>]`
 
-If Forgejo key registration is blocked, you can bootstrap from GitHub only using
-`--source origin`, but bidirectional temporal sync will not work until the key is registered.
+GitHub SSH key registration is **optional** — gates push only to Forgejo.
+The VPS auto-mirrors to GitHub via push mirrors. If you need read access
+to GitHub for cold-start (Forgejo unreachable), register a key there too:
+`gh ssh-key add ~/.ssh/id_ed25519.pub --title "<gate>"`
 
 ---
 
@@ -234,11 +235,15 @@ cd ~/Development/ecoPrimals/infra/wateringHole
 ```
 
 `--source temporal` uses the membrane binary (if available) to:
-1. Fetch all remotes (origin, forgejo)
+1. Fetch all remotes (origin, forgejo) — pull from any source
 2. Compare commit timestamps across remotes
 3. Pull from the temporally leading remote
-4. Push to followers (if `push_to_followers = true` in manifest)
+4. Push to the designated target (default: `forgejo` — VPS mediator model)
 5. Report divergences
+
+**Push Target**: The manifest `push_target = "forgejo"` means gates push
+only to Forgejo. The VPS push mirror auto-propagates to GitHub as the
+external linear ledger. Gates no longer need to worry about GitHub access.
 
 ### Automated Sync (systemd timer)
 
@@ -370,8 +375,12 @@ from "metallic fleet" to "weak extracellular" — a nice-to-have, not essential.
 ### Gate Key Registration
 
 Every gate needs its SSH key registered on:
-1. **GitHub** (extracellular): `gh ssh-key add ~/.ssh/id_ed25519.pub --title "<gate>"`
-2. **Forgejo** (inner membrane): API POST to `git.primals.eco/api/v1/user/keys`
+1. **Forgejo** (inner membrane — required): API POST to `git.primals.eco/api/v1/user/keys`
+2. **GitHub** (extracellular — optional): `gh ssh-key add ~/.ssh/id_ed25519.pub --title "<gate>"`
+
+With the Forgejo-primary model, only Forgejo SSH access is required. GitHub
+is populated by the VPS push mirror. GitHub keys are only needed if a gate
+wants direct read access for cold-start when Forgejo is unreachable.
 
 ### Registered Keys (Wave 63)
 

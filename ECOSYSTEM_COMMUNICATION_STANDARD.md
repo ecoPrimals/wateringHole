@@ -211,6 +211,37 @@ membrane context.clear --repo gardens-cellmembrane
 
 ---
 
+## VPS Mediator Pattern (Phase 4 Inversion — Wave 63+)
+
+All three layers propagate through the VPS as sovereign mediator:
+
+```
+Gate ──push──→ Forgejo ──push-mirror──→ GitHub (external linear ledger)
+                  │
+                  ├── Impulse relay: post-receive → potential.sense → songbird
+                  └── Context sync:  waterFall cascade-pull across gates
+```
+
+**Push Target**: Gates push only to Forgejo (`push_target = "forgejo"` in manifest).
+The VPS auto-mirrors to GitHub via Forgejo push mirrors (`sync_on_commit = true`).
+Gates no longer need GitHub SSH keys for push operations.
+
+**GitHub as External Linear Ledger**: GitHub serves the same conceptual role as
+loamSpine → BTC/ETH stamping: an external, immutable, publicly-discoverable
+record of ecosystem evolution. It is a trailing mirror, not the source of truth.
+
+| Operation | Target | Mechanism |
+|-----------|--------|-----------|
+| `git push` | Forgejo (sovereign) | Gate SSH to VPS |
+| GitHub mirror | GitHub (external ledger) | VPS push mirror (auto) |
+| Impulse propagation | Mesh | VPS webhook → songbird relay |
+| Context braid sync | All gates | waterFall cascade-pull |
+
+See `WATERFALL_PATTERN.md` Phase 4 and `graphs/waterfall_publish.toml` for
+the full cascade specification.
+
+---
+
 ## Primal Graduation Path
 
 Today, all three layers are implemented as direct filesystem operations in
@@ -223,8 +254,9 @@ Today, all three layers are implemented as direct filesystem operations in
 | Git | `git commit/push` | rootPulse graph: dehydrate → sign → store → commit → attribute |
 
 The graduation graphs are defined in:
-- `primalSpring/graphs/signals/impulse_post_signed.toml`
-- `primalSpring/graphs/signals/context_weave_anchored.toml`
+- `infra/wateringHole/graphs/impulse_post_signed.toml`
+- `infra/wateringHole/graphs/context_weave_anchored.toml`
+- `infra/wateringHole/graphs/waterfall_publish.toml` (full cascade composition)
 
 The NeuralBridge in `membrane-shadow` (feature-gated) already attempts to route
 through biomeOS before falling back to shadow implementations.

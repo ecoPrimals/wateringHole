@@ -214,6 +214,9 @@ elif cmd == 'repo_info':
             print(json.dumps(info))
             break
 
+elif cmd == 'push_target':
+    print(m.get('sync', {}).get('push_target', 'all'))
+
 elif cmd == 'manifest_version':
     meta = m.get('meta', {})
     print(f\"v{meta.get('version', '?')} wave {meta.get('wave', '?')} ({meta.get('total_repos', '?')} repos)\")
@@ -499,9 +502,14 @@ temporal_sync_repo() {
             local remotes
             remotes=$(git -C "$local_path" remote 2>/dev/null)
 
+            # Resolve push_target from manifest: "forgejo" or "all"
+            local push_target
+            push_target=$(_py_read_manifest push_target 2>/dev/null || echo "all")
+
             if [[ "$action" == "push followers" ]]; then
                 local pushed=""
                 for remote in $remotes; do
+                    [[ "$push_target" == "forgejo" && "$remote" != "forgejo" ]] && continue
                     local remote_ref="$remote/$branch"
                     git -C "$local_path" rev-parse "$remote_ref" >/dev/null 2>&1 || continue
                     local ahead
@@ -526,6 +534,7 @@ temporal_sync_repo() {
                 local pushed=""
                 for remote in $remotes; do
                     [[ "$remote" == "$leader" ]] && continue
+                    [[ "$push_target" == "forgejo" && "$remote" != "forgejo" ]] && continue
                     local remote_ref="$remote/$branch"
                     git -C "$local_path" rev-parse "$remote_ref" >/dev/null 2>&1 || continue
                     local ahead
