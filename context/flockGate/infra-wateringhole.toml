@@ -1,26 +1,24 @@
 [braid]
 gate = "flockGate"
 project = "infra/wateringHole"
-updated = "2026-05-31T09:23:08-04:00"
+updated = "2026-05-31T09:23:23-04:00"
 updated_by = "flockGate"
-ttl_hours = 48
+ttl_hours = 24
 wave = 63
 
 [strands.focus]
-summary = "Implementing context braid layer — sweetGrass external equivalent"
-status = "active"
+summary = "Context braid E2E validation complete"
+status = "complete"
 
 [strands.breadcrumbs]
 trail = [
+    "src/context.rs",
+    "src/main.rs",
     "CONTEXT_BRAID_STANDARD.md",
-    "context/flockGate/",
 ]
 
 [strands.next]
 actions = [
-    "E2E validation",
-    "Push to eastGate for review",
+    "Push for eastGate review",
+    "Integrate with cascade-pull",
 ]
-
-[strands.notes]
-body = "Wave 63 context layer: ephemeral developer state weaving across gate mesh"
