@@ -114,6 +114,59 @@ The `[from].ref` field is auto-populated by `impulse.post` from the project repo
 | `status` | Informational state update — no action required | 12-24h |
 | `request` | Asks for something from target gate(s) | Until fulfilled |
 | `announce` | Broadcast to all gates — ecosystem-wide notice | Until next wave |
+| `sync` | Divergence detected — merge coordination needed | 48h |
+
+### SYNC Impulses (Wave 66+)
+
+SYNC impulses are auto-fired by `membrane temporal.cascade` when a repo enters
+`diverge` state (controlled by `diverge_impulse = true` in `ecosystem_manifest.toml`).
+They carry structured payload enabling agentic or human resolution:
+
+```toml
+[impulse]
+type = "sync"
+priority = "priority"
+subject = "DIVERGE: plasmidBin — origin(+2) vs forgejo(+0)"
+ttl_hours = 48
+
+[from]
+gate = "eastGate"
+ref = "71208e9"
+
+[to]
+gates = ["*"]
+
+[content]
+subject = "DIVERGE: plasmidBin — origin(+2) vs forgejo(+0)"
+body = "Cascade detected non-ff divergence. See payload for resolution context."
+
+[payload]
+repo = "infra/plasmidBin"
+diverge_type = "origin_ahead"
+merge_base = "a3efdef"
+
+[payload.remotes]
+origin = "36f5b39"
+forgejo = "a3efdef"
+
+[payload.ahead]
+origin = 2
+forgejo = 0
+
+[payload.policy]
+repo_policy = "merge-ff"
+suggested_action = "pull_origin_push_forgejo"
+```
+
+Per-repo `divergence_policy` in the manifest controls resolution behavior:
+
+| Policy | Behavior |
+|--------|----------|
+| `flag` | Fire impulse + print diverge warning (default) |
+| `merge-ff` | Auto-resolve if one side is a strict ancestor; impulse on non-ff |
+| `merge-rebase` | Auto-rebase if no content conflicts; impulse on conflict |
+| `impulse-only` | Fire impulse, never auto-resolve |
+| `agentic` | Full pipeline: impulse → provenance-recorded resolution (Phase 2+) |
 
 ---
 

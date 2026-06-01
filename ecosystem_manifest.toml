@@ -50,6 +50,9 @@ push_to_followers = true
 # the VPS push mirror handles GitHub propagation. Gates still pull from
 # all remotes (GitHub may have external contributions).
 push_target = "forgejo"
+# When true, cascade auto-fires a SYNC impulse on diverge detection.
+# The impulse carries repo, remote HEADs, merge base, and suggested action.
+diverge_impulse = true
 
 [topology]
 model = "diderm"
@@ -410,6 +413,7 @@ category = "infra"
 description = "Binary depot, deploy scripts, release assets"
 github_repo = "ecoPrimals/plasmidBin"
 forgejo_repo = "ecoPrimals/plasmidBin"
+divergence_policy = "merge-ff"  # CI harvest commits are always linear extensions
 
 [repos.whitePaper]
 org = "ecoPrimals"
@@ -430,6 +434,7 @@ category = "infra"
 description = "GitHub Pages deployment — generated site"
 github_repo = "ecoPrimals/sporePrint"
 forgejo_repo = "ecoPrimals/sporePrint"
+divergence_policy = "impulse-only"  # multi-writer; human review preferred
 
 [repos.benchScale]
 org = "syntheticChemistry"
@@ -460,6 +465,7 @@ category = "infra"
 description = "Rust toolchain chip"
 github_repo = "syntheticChemistry/rustChip"
 forgejo_repo = "syntheticChemistry/rustChip"
+exclude_remotes = ["upstream"]  # stale Brainchip fork — unrelated history
 
 [repos.bingoCube]
 org = "ecoPrimals"
