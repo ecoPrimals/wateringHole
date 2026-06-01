@@ -33,9 +33,34 @@
 
 ### Local Work Completed (this ack)
 
+- **Cross-gate dispatch pipeline**: 3 new IPC methods for hotSpring compatibility:
+  - `compute.dispatch.capabilities` — GPU/CPU capability reporting for routing
+  - `compute.dispatch.submit` — shader binary + input → GPU execution → job_id
+  - `compute.dispatch.result` — job_id → output data retrieval
+  - Wire-compatible with hotSpring `cross_gate.rs` contract
+  - CPU fallback when no GPU available
+  - 9 new tests, full pipeline roundtrip validated
 - Split `transport.rs` (805L → 707L) into focused modules (`transport_config.rs` 113L)
 - Bumped `tokio` 1.50 → 1.52.3
+- Method count: 87 → 90
 - Full 10-axis audit clean: zero TODO/FIXME, zero `#[allow(`, zero `Box<dyn Error>`
+
+---
+
+## Cross-Gate Pipeline Status
+
+hotSpring's `compute_dispatch/cross_gate.rs` routes through:
+```
+hotSpring → capability.call{gate:strandGate} → biomeOS → Songbird
+  → remote biomeOS → barraCuda (compute.dispatch.*)
+```
+
+| Method | Status | Notes |
+|--------|--------|-------|
+| `compute.dispatch.capabilities` | ✅ Live | Reports gpu.f32, f64, tensor_ops, cpu.* |
+| `compute.dispatch.submit` | ✅ Live | GPU tensor pipeline or CPU fallback |
+| `compute.dispatch.result` | ✅ Live | Job store retrieval |
+| Full SPIR-V binary execution | ⚠️ Planned | Currently passes input through tensor pipeline |
 
 ---
 
