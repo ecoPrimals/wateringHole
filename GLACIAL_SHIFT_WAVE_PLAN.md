@@ -1,8 +1,8 @@
 # Glacial Shift Wave Plan — PostPrimordial to Sovereignty
 
 **Status**: Active roadmap  
-**Phase**: PostPrimordial (Wave 54) → Glacial Shift  
-**Last updated**: 2026-05-30  
+**Phase**: PostPrimordial (Wave 65) → Glacial Shift  
+**Last updated**: 2026-05-31  
 **Owner**: primalSpring (coordination); cellMembrane (deployment); primal teams (mountains)
 
 ---
@@ -200,19 +200,21 @@ scaffolded. The CompChem pseudoSpore is at v1.6.1. **lithoSpore NC-1.3 COMPLETE*
 
 ## Glacial Shift Exit Criteria
 
-| Criterion | Current (post-Wave 53) | Target |
+| Criterion | Current (Wave 65) | Target |
 |-----------|----------------------|--------|
-| Shadow cutover S1–S4 | 3/4 | 4/4 (S1 TLS cut) |
-| Mountain code debt | **12/13 resolved** (SouthGate ops redeploy remains) | 13/13 |
-| Multi-gate mesh validated | 4 gates up, mesh not validated | `s_covalent_mesh` PASS on 4 gates |
-| VPS Nest expansion | NOT DEPLOYED | rhizoCrypt + loamSpine + sweetGrass live |
-| Sovereign DNS | NOT DEPLOYED | knot-dns on VPS |
+| Shadow cutover S1–S4 | **3/4** (S1 TLS 7-day gate running ~June 7, S4 blocked on ironGate) | 4/4 |
+| Mountain code debt | **13/13 resolved** | 13/13 |
+| Multi-gate mesh validated | **5 gates operational** (east/iron/south/biome/flock), mesh.init wired | `s_covalent_mesh` PASS on 5+ gates |
+| VPS Nest expansion | **DEPLOYED** (since May 28) — rhizoCrypt + loamSpine + sweetGrass | Operational |
+| Sovereign DNS | **OPERATIONAL** — ns1 (golgiBody) + ns2 (golgiBody-ext), DNSSEC, zone transfers | Registrar cutover |
 | CI on inner membrane | 1 runner (SPOF) | 2+ runners, Forgejo shadow |
-| Cloudflare removed | S1 not cut | TLS via Caddy |
+| Cloudflare removed | S1 shadowing (Caddy LIVE, Cloudflare INACTIVE) | DNS cutover complete |
 | Primals 90%+ coverage | ~10/13 (songbird 73%, coralReef/barraCuda incremental) | 13/13 |
 | BearDog TCP drop | **VALIDATED** — UDS-only on eastGate | All gates UDS-only |
-| K-Derm boundary scenarios | **3 scenarios PASS** (56 total) | + channel protein live validation |
-| pseudoSpore delta coverage | **1/7** (hotSpring CompChem v1.6.1) | 7/7 springs emit domain spore |
-| primalSpring lib tests | **787/799** (10 live-tier) | All pass with full graph deploy |
-| K-Derm relay chain | **LIVE** (nanowire SSH) | Phase 1 quorum (timer-based sensing) |
-| Gate validation coverage | 2/4 (flockGate WAN, ironGate LAN pending) | All gates validated + air-gap (biomeGate) |
+| K-Derm boundary scenarios | **3 scenarios PASS** (57 total) | + channel protein live validation |
+| pseudoSpore delta coverage | **2/7** (hotSpring CompChem v1.6.1, healthSpring PROFILE_READY) | 7/7 springs emit domain spore |
+| primalSpring lib tests | **838 pass** (807 lib + 10 integration + 4 binary + 17 doc) | All pass |
+| K-Derm relay chain | **LIVE** (nanowire SSH diderm relay + Rust temporal.cascade) | Phase 1 quorum (timer-based sensing) |
+| Gate validation coverage | **3/5** (flockGate WAN, biomeGate temporal, ironGate LAN pending) | All gates validated + air-gap |
+| membrane-shadow Rust | **12 modules** (was bash scripts) — 0 critical bash in pipeline | Feature-complete for Wave 65 |
+| Manifest-driven validation | **LIVE** — gates discovered from manifest, not hardcoded | Auto-validates new gates |

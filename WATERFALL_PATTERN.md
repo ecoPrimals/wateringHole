@@ -10,6 +10,9 @@ across envelope layers.
 Gates push to Forgejo only; K-Derm diderm relay chain propagates to GitHub
 via peptidoglycan → golgiBody-ext with proper bond-type degradation.
 Phase 5 specified (gate specialization + covalent routing).
+**Wave 65**: `temporal.cascade` fully Rust (replaces bash `cascade-pull.sh`),
+`plasmid.fetch` fully Rust (replaces bash `fetch_primals.sh`), manifest-driven
+gate discovery (no hardcoded gate lists), dynamic validation.
 
 ## K-Derm Topology
 
@@ -246,7 +249,8 @@ biomeOS graph.execute (Wave 65+)
 | File | Role |
 |------|------|
 | `infra/wateringHole/ecosystem_manifest.toml` | Repo catalog + `[sync]` config |
-| `infra/wateringHole/cascade-pull.sh` | WaterFall orchestrator |
+| `infra/wateringHole/cascade-pull.sh` | WaterFall orchestrator (bash fallback) |
+| `cellMembrane/crates/membrane-shadow/src/temporal.rs` | Rust WaterFall engine (`temporal.cascade`) |
 | `infra/wateringHole/freshness.toml` | Wave state snapshot |
 | `gardens/projectNUCLEUS/deploy/forgejo_mirror.sh` | Forgejo repo provisioning |
 | `springs/primalSpring/ecoPrimal/.../s_ecosystem_freshness.rs` | Manifest + sync validation |

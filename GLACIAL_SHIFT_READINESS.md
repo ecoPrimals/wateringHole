@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-31 (Wave 64: Sovereignty sprint started — S1 TLS 7-day gate running, DNS NS infrastructure ready (ns1+ns2 live), VPS Nest confirmed operational, Wave 64 handoffs distributed to ironGate/flockGate/biomeGate)
+**Last updated**: 2026-05-31 (Wave 65: Deep debt evolution — plasmid.fetch Rust module, dispatch/impulse/signal refactors, manifest-driven validation, all bash→Rust critical path scripts evolved, 838 tests pass, 3 repos at parity across Forgejo+GitHub)
 
 ---
 
@@ -198,9 +198,9 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Channel 3: TLS surface (Caddy + ACME) | **LIVE** |
 | Tower composition (BearDog + Songbird + SkunkBat) | **DEPLOYED** |
 | Nest expansion (rhizoCrypt + loamSpine + sweetGrass) | **OPERATIONAL** (since May 28) — all 4 services active, ports verified |
-| Sovereign shadow functions (membrane-shadow) | **OPERATIONAL** (Wave 62) — Rust crate + temporal/manifest/identity modules |
+| Sovereign shadow functions (membrane-shadow) | **OPERATIONAL** (Wave 65) — 12 Rust modules: dispatch, cli, temporal, impulse, context, plasmid, git_ops, forgejo, gate, config, manifest, identity. `plasmid.fetch` + `temporal.cascade` fully Rust. |
 | Forgejo repos (5 bidirectional + 33 mirrors) | **OPERATIONAL** (Wave 62) — biomeOS/coralReef/sweetGrass/squirrel/wateringHole push-enabled |
-| waterFall temporal sync | **OPERATIONAL** (Wave 62) — Rust `temporal.rs`, `cascade-pull.sh --source temporal` |
+| waterFall temporal sync | **OPERATIONAL** (Wave 65) — Rust `temporal.cascade` replaces bash cascade-pull. Manifest-driven gate profiles, dynamic gate discovery. |
 | Channel 1: Sovereign DNS (knot-dns) | **OPERATIONAL** — ns1 (golgiBody) + ns2 (golgiBody-ext), DNSSEC active, zone transfer confirmed. NS registrar cutover pending. |
 | Caddy → BearDog ACME replacement | Shadow live, **not cut over** |
 | BearDog Vault (encrypted creds at rest) | **PLANNED** (Phase 2) |
@@ -217,7 +217,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | **northGate** | Ryzen 9950X3D, RTX 5090, 96GB | Gaming primary, heavy compute | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
 | **westGate** | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
 | **swiftGate** | Ryzen 5800X, RTX 3070, 64GB | Mobile/compact | Hardware ready | — | 1G |
-| **flockGate** | i9-13900K, RTX 3070 Ti, 64GB | Remote covalent (WAN) | **OPERATIONAL** (Wave 63) — WAN relay validated (~3s propagation) | sporePrint | WAN via cellMembrane |
+| **flockGate** | i9-13900K, RTX 3070 Ti, 64GB | Remote covalent (WAN) | **OPERATIONAL** (Wave 64) — WAN relay validated (~1.3s Forgejo, ~3s end-to-end), pseudoSpore gallery, Zola 226 pages/746ms | sporePrint | WAN via cellMembrane |
 | **kinGate** | i7-6700K, RTX 3070, 32GB | Staging | Hardware ready | — | 1G |
 
 **Covalent mesh order** (over existing 1G LAN):
@@ -258,7 +258,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Cross-gate `discovery.peers` verification | **UNBLOCKED** — peer seeding shipped, same-subnet test next |
 | Cross-subnet mesh (southGate ↔ eastGate) | **BLOCKED** — different subnets, needs routing or TURN relay |
 | Plasmodium collective status | **PENDING** — requires 3+ same-subnet gates meshed first |
-| flockGate live deployment | **NOT DEPLOYED** |
+| flockGate live deployment | **OPERATIONAL** (Wave 63-64) — WAN relay, sporePrint gallery, Zola pipeline, temporal sync validated |
 
 ### Wave 49 Ecosystem Issues (post-tightening re-audit, May 25)
 
@@ -290,7 +290,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 | Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | biomeOS v3.75 mesh dispatch ready, `s_covalent_mesh` scenario written, needs live run |
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
 | Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | v3.64 `nest.sync` graph shipped. Songbird mesh (v3.75) is the transport. Pending multi-gate connectivity. |
-| Sovereign DNS (knot-dns) | cellMembrane | MEDIUM | PLANNED |
+| Sovereign DNS (knot-dns) | cellMembrane | MEDIUM | **OPERATIONAL** — ns1 (golgiBody) + ns2 (golgiBody-ext), DNSSEC active, zone transfers confirmed. NS registrar action pending. |
 | `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW | `publish_sporeprint.sh` implemented. E2E requires live NestGate + bearDog session. |
 | Forgejo Actions CI | projectNUCLEUS | LOW | PLANNED |
 | loamSpine Tokio runtime-in-runtime panic | loamSpine | MEDIUM | Upstream bug — blocks health probe on 2 gates |
@@ -314,10 +314,14 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment**: Criteria 1 is 3/4 (S4 shadow remaining). Criteria 2 is
-unblocked — peer seeding and mesh.init are wired, live same-subnet test is next.
-Primals on the mountain are tightened (Wave 49). The shift moves when sentinels
-Songbird + bearDog clear the cross-gate verification and S4 auth shadow completes.
+**Current assessment (Wave 65)**: Criteria 1 is 3/4 (S1 TLS 7-day gate running,
+S4 formal validation still pending ironGate services restart). Criteria 2 is
+unblocked — 5 gates operational (eastGate, ironGate, southGate, biomeGate,
+flockGate), mesh.init+bootstrap_peers wired. Criteria 3 VPS Nest deployed.
+Criteria 4 flockGate validated over WAN (Wave 63-64, ~1.3s propagation).
+Criteria 5 sovereign DNS infra live (ns1+ns2), registrar action pending.
+Remaining: S1 TLS gate completes ~June 7, S4 formal gate blocked on ironGate,
+DNS NS registrar cutover, Cloudflare removal post-validation.
 
 ---
 
