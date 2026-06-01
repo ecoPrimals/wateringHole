@@ -58,8 +58,8 @@ Prove multi-gate covalent mesh works. This is glacial criterion #2.
 
 | Item | Owner Gate | Action | Status |
 |------|-----------|--------|--------|
-| **ecoBins pipeline** | eastGate (plasmidBin + membrane) | Evolve waterfall to distribute built binaries, not just source | **NEW — P1 blocker** |
-| **Deploy Songbird w/ socket fix** | eastGate (plasmidBin) | `plasmidbin fetch songBird && plasmidbin install songbird` (post-ecoBins) | BLOCKED on ecoBins |
+| **ecoBins pipeline** | eastGate (plasmidBin + membrane) | `plasmidbin install` — build from local source + install to PATH | **DONE** (f8da0b2) |
+| **Deploy Songbird w/ socket fix** | eastGate (plasmidBin) | `plasmidbin install songbird` → eb913612 deployed with provenance | **DONE** |
 | **`discovery.peers` smoke test** | eastGate (primalSpring) | Same-subnet test: eastGate ↔ strandGate (192.168.1.132, already broadcasting) + southGate | BLOCKED on deploy |
 | **`capability.call` smoke test** | eastGate (primalSpring) | Run `s_covalent_mesh` scenario live | BLOCKED on deploy |
 | **Plasmodium collective sign-off** | eastGate (primalSpring) | 3+ gates meshed, formal validation | Pending |
@@ -197,15 +197,15 @@ coralReef (compute trio), hotSpring (science side)
   + S4 bearDog config (southGate)      DONE (Wave 119)
         |
         v
-  ecoBins pipeline (plasmidBin)        <-- YOU ARE HERE
-  (waterfall evolves: source → binaries)
+  ecoBins pipeline (plasmidBin)         DONE (f8da0b2)
+  (plasmidbin install: source → binary → PATH)
         |
         v
-  Deploy fixed Songbird to eastGate via plasmidBin
-  + southGate route (Eero cross-subnet)
+  Songbird eb913612 deployed to eastGate  DONE
+  + southGate route (Eero cross-subnet)   PENDING
         |
         v
-  discovery.peers test (eastGate ↔ strandGate + southGate)
+  discovery.peers test (eastGate ↔ strandGate + southGate)  <-- YOU ARE HERE
   + capability.call test (primalSpring s_covalent_mesh)
   (NOTE: strandGate@192.168.1.132 already broadcasting!)
         |
