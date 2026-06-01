@@ -17,3 +17,8 @@ body = "Evolve pepti-sync-relay.sh (95L) + ext-github-push.sh (91L) + impulse-re
 [meta]
 created = "2026-05-31T20:45:37-04:00"
 ack_required = true
+
+[[acks]]
+gate = "ironGate"
+timestamp = "2026-06-01T00:55:05+00:00"
+note = "relay.rs implemented: mediate(), ship_extracellular(), run() — 3-stage K-Derm chain in Rust"
