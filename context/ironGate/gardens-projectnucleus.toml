@@ -1,13 +1,13 @@
 [braid]
 gate = "ironGate"
 project = "gardens/projectNUCLEUS"
-updated = "2026-05-31T11:30:00-04:00"
+updated = "2026-06-01T01:15:00-04:00"
 updated_by = "ironGate"
 ttl_hours = 48
-wave = 64
+wave = 65
 
 [strands.focus]
-summary = "K-Derm diderm onboarding validated — temporal sync 21/22, push relay gap found (mirrors not deployed)"
+summary = "Wave 64 deep debt COMPLETE — 235 tests, 9 nucleus-deploy subcommands, security module split, shared util, Songbird transport"
 status = "active"
 
 [strands.breadcrumbs]
@@ -17,19 +17,22 @@ trail = [
     "specs/EVOLUTION_GAPS.md",
     "specs/COMPLETE_DEPENDENCY_INVENTORY.md",
     "whitePaper/baseCamp/README.md",
-    "infra/wateringHole/handoffs/PROJECTNUCLEUS_KDERM_ONBOARD_VALIDATION_MAY31_2026.md",
+    "infra/wateringHole/handoffs/archive/wave64/PROJECTNUCLEUS_KDERM_ONBOARD_VALIDATION_MAY31_2026.md",
 ]
 
 [strands.decisions]
 notes = [
-    "Dual-push refs cleaned from 5 docs — ecosystem norm is push forgejo only",
-    "toadStool DIVERGE flagged for cellMembrane one-time force-push",
-    "Push mirrors not deployed on golgiBody — gates still need origin fallback",
-    "membrane binary installed locally at ~/.local/bin/membrane (7.2MB release)",
+    "All bash deploy scripts evolved to Rust (nucleus-deploy 9 subcommands)",
+    "security.rs (1015L) split into security/ directory module (6 files)",
+    "Shared util.rs deduplicates blake3_hash, value_to_hex, hex_to_bytes, timestamped log",
+    "VPS IP/user centralized in NucleusConfig — removed 14 hardcoded env lookups",
+    "SongbirdTransport v0.2 in tunnelKeeper alongside CloudflareTunnelTransport",
+    "8 completed impulses archived to wave64",
+    "Cloudflare artifacts fossilized to deploy/legacy/",
 ]
 
 [strands.blockers]
 items = [
-    "Push relay: VPS needs membrane binary + setup-push-mirrors.sh + relay hooks",
-    "toadStool: GitHub origin/main has different history from Forgejo (pre-diderm)",
+    "Forgejo Actions shadow CI on ironGate — Wave 64 assignment, not yet started",
+    "S4 BTSP formal 7-day gate — shadow period pending eastGate configuration",
 ]
