@@ -21,12 +21,15 @@ Gate ──covalent──→ golgiBody-inner (cis: receives)
 
 ## Scripts
 
-| Script | Runs On | Bond | Purpose |
-|--------|---------|------|---------|
-| `pepti-sync-relay.sh` | peptidoglycan | Metallic→Ionic | Pull from Forgejo, run impulse cascade, relay to outer |
-| `ext-github-push.sh` | golgiBody-ext | Ionic→Weak | Push to GitHub from the trans (shipping) face |
-| `impulse-relay-hook.sh` | peptidoglycan | — | Standalone impulse detection + songbird relay |
-| `setup-push-mirrors.sh` | golgiBody-inner | — | Legacy: Forgejo push mirror setup (pre-diderm) |
+> **Wave 66**: Scripts relocated to their code owners (`cellMembrane/deploy/hooks/forgejo/`).
+> wateringHole retains this architecture reference as the K-Derm diderm relay spec.
+
+| Script | Runs On | Bond | Owner |
+|--------|---------|------|-------|
+| `pepti-sync-relay.sh` | peptidoglycan | Metallic→Ionic | cellMembrane |
+| `ext-github-push.sh` | golgiBody-ext | Ionic→Weak | cellMembrane |
+| `impulse-relay-hook.sh` | peptidoglycan | — | cellMembrane |
+| `setup-push-mirrors.sh` | — | — | Fossilized (pre-diderm) |
 
 ## K-Derm Diderm Flow
 
@@ -57,28 +60,17 @@ Only the outer membrane (trans face) has extracellular write access.
 ### peptidoglycan
 
 ```bash
-# Ensure wateringHole is synced
-cd /opt/ecoPrimals/infra/wateringHole
-git pull --ff-only forgejo main
-
-# Install scripts
-chmod +x hooks/forgejo/pepti-sync-relay.sh
-chmod +x hooks/forgejo/impulse-relay-hook.sh
+# Scripts are deployed from cellMembrane
+cd /opt/ecoPrimals/gardens/cellMembrane
+membrane deploy.hooks --target peptidoglycan
 ```
 
 ### golgiBody-ext
 
 ```bash
-# Clone wateringHole (if not present)
-cd /opt/ecoPrimals/infra
-git clone ssh://git@git.primals.eco:2222/ecoPrimals/wateringHole.git
-
-# Ensure GitHub remote exists (origin should point to GitHub)
-cd wateringHole
-git remote get-url origin  # should be github.com
-
-# Install push script
-chmod +x hooks/forgejo/ext-github-push.sh
+# Scripts are deployed from cellMembrane
+cd /opt/ecoPrimals/gardens/cellMembrane
+membrane deploy.hooks --target golgiBody-ext
 ```
 
 ### golgiBody-inner (Forgejo webhook)

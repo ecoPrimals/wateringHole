@@ -3,16 +3,16 @@
 # freshness.toml — Ecosystem state snapshot at wave publish time
 #
 # Authority: primalSpring coordination (published each wave)
-# Consumed by: cascade-pull --check, s_ecosystem_freshness scenario
+# Consumed by: membrane temporal.cascade --check, s_ecosystem_freshness scenario
 #
-# Regenerate: cascade-pull --publish-freshness
+# Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 63
-date = "2026-05-30"
+id = 66
+date = "2026-06-01"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "impulsePotential live: signal.* → impulse.*/potential.* (triad mapping). Context braid three-layer model validated (git/impulses/context). Primal graduation: capabilities registered, graph TOMLs shipped, NeuralBridge feature-gated, bearDog signing + songbird relay wired. cascade-pull.sh auto-triggers potential.sense. ECOSYSTEM_COMMUNICATION_STANDARD.md created. 18 active handoffs."
-publisher = "cascade-pull"
+notes = "Wave 66: wateringHole at zero code. Deep debt evolution across primalSpring (forbid unsafe, PORT_REGISTRY, deny-by-default auth, capability routing). S1 TLS shadow PASSED (13 days). 20/20 primal services on golgiBody. 0 active handoffs, 437 archived. membrane temporal.cascade replaces bash cascade-pull."
+publisher = "membrane"
 
 [heads]
 agentReagents = "1560759477196e29dce6d94b4f937ec304634193"

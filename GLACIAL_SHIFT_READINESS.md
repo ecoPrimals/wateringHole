@@ -47,8 +47,8 @@ upstream Neural API methods shipped by primal teams.
 Rust (`temporal.rs` — typed multi-remote DAG sync, `manifest.rs` — ecosystem manifest
 reader replacing Python tomllib, `identity.rs` — capability-based gate detection).
 5 Forgejo mirrors converted to bidirectional repos (biomeOS, coralReef, sweetGrass,
-squirrel, wateringHole). `cascade-pull.sh --source temporal` now delegates to the Rust
-`membrane` binary with bash fallback. Deep debt sprint: shell injection fix in
+squirrel, wateringHole). `membrane temporal.cascade` now handles temporal sync (Rust,
+replaces bash `cascade-pull.sh`). Deep debt sprint: shell injection fix in
 `token_create`/`token_revoke`, hardcoded paths→`ShadowConfig`, `unreachable!()`→`Result`,
 magic numbers→named constants. Manifest bumped to v2.1.0 (Wave 62). 10 handoffs archived.
 

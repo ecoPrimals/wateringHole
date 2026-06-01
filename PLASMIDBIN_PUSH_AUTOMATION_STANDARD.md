@@ -92,7 +92,7 @@ sweetGrass, biomeOS, squirrel, petalTongue, skunkBat, nestGate.
 ## Key Commands (Rust CLI — Wave 51)
 
 All pipeline operations now use the `plasmidbin` Rust CLI (15 subcommands).
-Legacy `.sh` scripts remain at repo root as transitional fallbacks.
+Legacy `.sh` scripts have been fossilized (Wave 66). The `plasmidbin` binary is the sole pipeline.
 
 ### `plasmidbin build`
 

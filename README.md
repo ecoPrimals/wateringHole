@@ -207,22 +207,19 @@ These standards define how every primal is built, packaged, and deployed.
 
 One binary per primal, multiple operational modes via subcommands. Professional CLI with `--help`, `--version`, and structured error messages. Every primal is a single executable named after itself.
 
-**Specification**: `UNIBIN_ARCHITECTURE_STANDARD.md`  
-**Technical paper**: `whitePaper/technical/UNIBIN_TECHNICAL_SPECIFICATION.md`
+**Specification**: `ECOBIN_ARCHITECTURE_STANDARD.md` (consolidated — UniBin is a subset of ecoBin)
 
 ### ecoBin - Universal Portability Standard
 
 ecoBin = UniBin + Pure Rust + Cross-Platform. Zero C dependencies in application code, cross-compiles to any Rust target with a single `cargo build` command, platform-agnostic IPC with runtime transport discovery.
 
-**Specification**: `ECOBIN_ARCHITECTURE_STANDARD.md`  
-**Technical paper**: `whitePaper/technical/ECOBIN_TECHNICAL_SPECIFICATION.md`
+**Specification**: `ECOBIN_ARCHITECTURE_STANDARD.md`
 
 ### genomeBin - Autonomous Deployment Standard
 
 genomeBin = ecoBin + deployment wrapper. Self-extracting archive that auto-detects the system, installs the correct binary, configures services, and validates health. One command installs on any system with zero manual configuration.
 
-**Specification**: `GENOMEBIN_ARCHITECTURE_STANDARD.md`  
-**Technical paper**: `whitePaper/technical/GENOMEBIN_TECHNICAL_SPECIFICATION.md`
+**Specification**: See `ECOBIN_ARCHITECTURE_STANDARD.md` (genomeBin section)
 
 ### The Evolutionary Ladder
 
@@ -244,13 +241,13 @@ All ecoBins are UniBins. All genomeBins are ecoBins. Each stage adds capability 
 
 JSON-RPC 2.0 over platform-agnostic transports. Capability-based discovery with zero cross-embedding. Every primal implements its own IPC independently - standards define WHAT, primals implement HOW.
 
-**Specification**: `PRIMAL_IPC_PROTOCOL.md`
+**Specification**: `CAPABILITY_WIRE_STANDARD.md` (IPC protocol consolidated here)
 
-### Universal IPC Standard (v3.0)
+### Universal IPC Standard
 
 Behavioral specification for multi-transport IPC. Each primal discovers the best transport at runtime: Unix sockets on Linux/macOS, abstract sockets on Android, named pipes on Windows, TCP as universal fallback. No shared IPC crate - each primal owns its communication code.
 
-**Specification**: `UNIVERSAL_IPC_STANDARD_V3.md`
+**Specification**: `CAPABILITY_BASED_DISCOVERY_STANDARD.md`
 
 ### BirdSong Protocol
 
@@ -316,7 +313,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 - **Songbird + Songbird**: Cross-tower federation, multi-family routing
 
-**Detail**: `INTER_PRIMAL_INTERACTIONS.md`
+**Detail**: See primal composition maps in `PRIMAL_REGISTRY.md`
 
 ---
 
@@ -415,7 +412,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `petaltongue/` — petalTongue integration documentation
 
 ### Handoffs
-- `handoffs/archive/` — 387+ archived handoffs organized by wave (wave58–wave66)
+- `handoffs/archive/` — 437 archived handoffs organized by wave (wave58–wave66)
 - `handoffs/hotSpring/archive/` — 49 archived hotSpring handoffs
 - Earlier epochs consolidated to fossilRecord (3,231 documents)
 
@@ -464,10 +461,10 @@ If you are a new primal entering the ecosystem:
 2. **Review PRIMAL_REGISTRY.md** to see what capabilities already exist
 3. **Follow UniBin standard** from day one (single binary, subcommands)
 4. **Target ecoBin** (Pure Rust, zero C deps, cross-compilation)
-5. **Implement IPC** following `PRIMAL_IPC_PROTOCOL.md` v3.0
+5. **Implement IPC** following `CAPABILITY_WIRE_STANDARD.md` (JSON-RPC 2.0)
 6. **Advertise capabilities** so biomeOS can discover and coordinate you
 7. **Register your primal** in PRIMAL_REGISTRY.md with your primitives
-8. **Get your face together** per `SPRING_PRIMAL_PRESENTATION_STANDARD.md` — your repo should be reviewable by any of the four external audiences in 5 minutes
+8. **Get your face together** — your repo should be reviewable by any of the four external audiences in 5 minutes (see `STANDARDS_AND_EXPECTATIONS.md`)
 
 You do not need to know about other primals. You need to know what you can do, and how to tell the ecosystem about it.
 
@@ -476,7 +473,7 @@ You do not need to know about other primals. You need to know what you can do, a
 ## Getting Your Face Together
 
 Every spring and primal should be independently reviewable by outsiders.
-See **`SPRING_PRIMAL_PRESENTATION_STANDARD.md`** for the full checklist,
+See **`STANDARDS_AND_EXPECTATIONS.md`** for the full checklist,
 but the short version is: a reviewer should be able to do this in 5 minutes:
 
 1. Open `README.md` → understand what this does and what it replaces

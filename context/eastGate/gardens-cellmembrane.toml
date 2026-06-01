@@ -21,7 +21,7 @@ trail = [
 
 [strands.next]
 actions = [
-    "Wire context.sense into cascade-pull.sh alongside potential.sense",
+    "Wire context.sense into membrane temporal.cascade alongside potential.sense",
     "Standardize IDE hook for context.sense on session start",
 ]
 

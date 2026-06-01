@@ -11,10 +11,13 @@ Copy these files to your workspace `.cursor/` directory:
 # From workspace root (e.g. ~/Development/ecoPrimals)
 mkdir -p .cursor/hooks .cursor/rules
 cp infra/wateringHole/hooks/cursor/hooks.json .cursor/hooks.json
-cp infra/wateringHole/hooks/cursor/context-sense.sh .cursor/hooks/context-sense.sh
+cp gardens/cellMembrane/deploy/hooks/cursor/context-sense.sh .cursor/hooks/context-sense.sh
 cp infra/wateringHole/hooks/cursor/context-braid-workflow.rule.md .cursor/rules/context-braid-workflow.md
 chmod +x .cursor/hooks/context-sense.sh
 ```
+
+> **Note**: `context-sense.sh` lives in `cellMembrane` (its code owner). wateringHole
+> provides the hook config and rule (comms layer); cellMembrane provides the script.
 
 ## What it does
 
