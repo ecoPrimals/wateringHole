@@ -40,3 +40,8 @@ Pull wateringHole for all updates.
 [meta]
 created = "2026-06-01T13:32:43-04:00"
 ack_required = false
+
+[[acks]]
+gate = "flockGate"
+timestamp = "2026-06-01T16:22:00-04:00"
+note = "Received. Metrics refreshed (85 drifts → 0). Manifest now emits schema_version + merkle_root fields for primalSpring scenario parity (70/70 PASS). petalTongue viz_data doc warnings resolved (15 → 0). Awaiting Phase 2 DNS."
