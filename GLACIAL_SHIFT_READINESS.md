@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-05-31 (Wave 65: Deep debt evolution — plasmid.fetch Rust module, dispatch/impulse/signal refactors, manifest-driven validation, all bash→Rust critical path scripts evolved, 838 tests pass, 3 repos at parity across Forgejo+GitHub)
+**Last updated**: 2026-06-01 (Wave 67: Vocabulary evolution signal→composition, Deep Debt II — Arc\<str\> interning, FromStr for AtomicType, FEDERATION_PORTS, capability-based ordered_primals(). 835 tests, 57 scenarios, 93 experiments, 33 compositions, 490+ methods. sporePrint pure-primal content-direct parity validated 22/22. flockGate sporePrint W68 live viz + deep debt.)
 
 ---
 
@@ -314,14 +314,15 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 65)**: Criteria 1 is 3/4 (S1 TLS 7-day gate running,
-S4 formal validation still pending ironGate services restart). Criteria 2 is
-unblocked — 5 gates operational (eastGate, ironGate, southGate, biomeGate,
-flockGate), mesh.init+bootstrap_peers wired. Criteria 3 VPS Nest deployed.
-Criteria 4 flockGate validated over WAN (Wave 63-64, ~1.3s propagation).
-Criteria 5 sovereign DNS infra live (ns1+ns2), registrar action pending.
-Remaining: S1 TLS gate completes ~June 7, S4 formal gate blocked on ironGate,
-DNS NS registrar cutover, Cloudflare removal post-validation.
+**Current assessment (Wave 67)**: Criteria 1 is 3/4 (S1 TLS 7-day gate running
+since May 31 — completes ~June 7. S4 formal validation still pending ironGate
+services restart). Criteria 2 is unblocked — 5 gates operational (eastGate,
+ironGate, southGate, biomeGate, flockGate), mesh.init+bootstrap_peers wired.
+Criteria 3 VPS Nest deployed — sporePrint content-direct backend validated 22/22
+parity (Wave 67, flockGate). Criteria 4 flockGate validated over WAN (Wave 63-64,
+~1.3s propagation; Wave 68 live viz serving). Criteria 5 sovereign DNS infra live
+(ns1+ns2), registrar action pending. Remaining: S1 TLS gate completes ~June 7,
+S4 formal gate, DNS NS registrar cutover, Cloudflare removal post-validation.
 
 ---
 
