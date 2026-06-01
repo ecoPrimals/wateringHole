@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: May 31, 2026 (Wave 63+: K-Derm diderm relay chain wired — proper bond-type degradation through the three-node VPS envelope: gate→golgiBody-inner (covalent)→peptidoglycan (metallic)→golgiBody-ext (ionic)→GitHub (weak). GitHub SSH keys live only on outer membrane (trans face). `topology.roles` in manifest. impulsePotential live — impulse/potential mapping to Neural API Triad. Context braid three-layer coordination validated. 12 active handoffs + 418 archived.)
+**Last Updated**: June 1, 2026 (Wave 66: wateringHole at zero code — all scripts fossilized or relocated to owners. S1 TLS shadow PASSED (13 days). 20/20 primal membrane services running on golgiBody. `membrane temporal.cascade` replaces bash cascade-pull. K-Derm relay chain fully Rust (`relay.rs`). impulsePotential + context braids operational. 0 active handoffs + 437 archived.)
 
 ---
 
@@ -117,7 +117,7 @@ Pipeline, Continuous) but serves a distinct biological purpose:
 |--------|------|---------|--------|
 | **quorumSignal** | SENSE — observe, discover, react | Afferent nervous system | First-class: 15 atomic graphs, `signal.dispatch` |
 | **rootPulse** | ACTION — create, mutate, prove | Efferent nervous system | Partial: `nest.commit` signal + pattern wired |
-| **waterFall** | SYNC — ecosystem coherence across gates | Autonomic nervous system | Bash today, evolving to Neural API |
+| **waterFall** | SYNC — ecosystem coherence across gates | Autonomic nervous system | Fully Rust (`membrane temporal.cascade`), manifest-driven |
 
 Named after bacterial quorum sensing: collective behavior emerges when enough
 gate NUCLEUS instances participate. The quorum is the minimum primal set for an
@@ -375,19 +375,39 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `K_DERM_TOPOLOGY_STANDARD.md` — K-Derm cell envelope model: monoderm/diderm, absolute layers, NUCLEUS atomic placement, bonding per boundary, channel proteins, braid policy
 - `BONDING_MODEL_STANDARD.md` — Organo-metallo-salt bonding model: covalent/metallic/ionic/ceremony/weak + OrganoMetalSalt composite, BTSP cipher mapping, K-Derm layer placement, genetics alignment
 - `SOVEREIGNTY_STANDARDS.md` — Calibrate → shadow → cutover protocol
-- `INTERSTADIAL_EXIT_CRITERIA.md` — 5 pillars + shadow schedule
 - `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` — VPS composition spec
 - `MEMBRANE_CHANNEL_ARCHITECTURE.md` — 3 channels + RustDesk
 - `REPO_MEMBRANE_BOUNDARY.md` — Inner/outer membrane repo classification
-- `NUCLEUS_SPRING_ALIGNMENT.md` — NUCLEUS + spring coordination model
 - `PRIMAL_VS_SOVEREIGNTY_GOALS.md` — Sovereignty evolution tracking
+
+### Ecosystem Communication & Coordination
+- `ECOSYSTEM_COMMUNICATION_STANDARD.md` — Three-layer model: git + impulses + context braids
+- `IMPULSE_POTENTIAL_STANDARD.md` — Inter-gate impulse/potential coordination (Wave 63+)
+- `CONTEXT_BRAID_STANDARD.md` — Ephemeral developer-state weaving
+- `graphs/` — Declarative deploy graphs (waterfall_publish, impulse_post, context_weave)
+
+### Gen5 Applied Architecture
+- `gen5/KDERM_DIDERM_APPLICATION.md` — Physical K-Derm deployment on 3-node VPS
+- `gen5/IMPULSE_POTENTIAL_KDERM_INTERACTIONS.md` — Neural API triad mapped to K-Derm layers
+- `gen5/TRANSPORT_EVOLUTION_NANOWIRE_TO_QUORUM.md` — Nanowire (SSH) → quorum sensing roadmap
+
+### Evolution Tracking
+- `EVOLUTION_STATUS_WAVE66.md` — Current wave checkpoint
+- `SHADOW_DATA_COLLECTION_WAVE66.md` — VPS shadow metrics (S1, tower, services)
+- `GLACIAL_SHIFT_READINESS.md` — Stadial entry criteria tracking
+- `GLACIAL_SHIFT_WAVE_PLAN.md` — Post-primordial → sovereignty roadmap
+
+### Per-Spring & Product Guidance
+- `sporePrint/CONTENT_GUIDE.md` — sporePrint publishing standards
+- `sporePrint/SPRING_EVOLUTION_TARGETS.md` — Spring content evolution targets
+- `compute-sharing/SOVEREIGN_COMPUTE_SHARING.md` — Sovereign compute sharing pattern
+- `compute-sharing/workloads/` — ironGate workload definitions
 
 ### Coordination & Patterns
 - `PRIMAL_REGISTRY.md` — Complete primal definitions and primitive catalogs
 - `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — Provenance trio integration
 - `SHOWCASE_FOSSILIZATION_STANDARD.md` — How to fossilize showcase directories
 - `SEDIMENT_LAYER_MODEL.md` — Layered evolution model
-- `ECOSYSTEM_EVOLUTION_CYCLE.md` — Ecosystem-wide evolution tracking
 
 ### Per-Spring Composition Guidance
 - `airspring/AIRSPRING_COMPOSITION_GUIDANCE.md` — airSpring
@@ -395,10 +415,9 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `petaltongue/` — petalTongue integration documentation
 
 ### Handoffs
-- `handoffs/*.md` — Active session handoffs
-- `handoffs/hotSpring/` — hotSpring team handoffs (postPrimordial pattern)
-- `handoffs/archive/` — 297 archived handoffs (earlier epochs consolidated to fossilRecord)
-- `handoffs/hotSpring/archive/` — 47 archived hotSpring handoffs
+- `handoffs/archive/` — 387+ archived handoffs organized by wave (wave58–wave66)
+- `handoffs/hotSpring/archive/` — 49 archived hotSpring handoffs
+- Earlier epochs consolidated to fossilRecord (3,231 documents)
 
 ### Fossilized Standards (in fossilRecord)
 
@@ -408,7 +427,12 @@ maintained as separate files in this repo. See `fossilRecord/wateringHole/consol
 and `fossilRecord/wateringHole/consolidated-apr2026/`.
 
 - `PRIMAL_IPC_PROTOCOL.md` — JSON-RPC 2.0 inter-primal communication (v3.0)
-- `GATE_DEPLOYMENT_STANDARD.md` — Gate deployment (replaced by active `GATE_SPRING_OWNERSHIP.md`)
+- `GATE_DEPLOYMENT_STANDARD.md` — Gate deployment (fossilized Wave 66, replaced by `GATE_SPRING_OWNERSHIP.md`)
+- `INTERSTADIAL_EXIT_CRITERIA.md` — Interstadial 5-pillar exit criteria (fossilized Wave 66)
+- `NUCLEUS_SPRING_ALIGNMENT.md` — NUCLEUS + spring coordination snapshot (fossilized Wave 66)
+- `SPRING_ATOMIC_NICHE_ASSIGNMENTS.md` — Phase 32 niche map (fossilized Wave 66)
+- `ECOSYSTEM_EVOLUTION_CYCLE.md` — Ecosystem evolution tracking (fossilized Wave 66, replaced by `EVOLUTION_STATUS_WAVE66.md`)
+- `EVOLUTION_STATUS_WAVE65.md` — Wave 65 checkpoint (fossilized Wave 66, replaced by Wave 66)
 - `UNIBIN_ARCHITECTURE_STANDARD.md` — Binary structure (one binary, subcommands)
 - `GENOMEBIN_ARCHITECTURE_STANDARD.md` — Autonomous deployment (self-extracting)
 - `UNIVERSAL_IPC_STANDARD_V3.md` — Multi-transport IPC behavioral spec

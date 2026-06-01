@@ -43,7 +43,7 @@ waterFall sync infrastructure that already connects every gate.
    │                   │   │  Archived/wave    │   │  Superseding      │
    └──────────────────┘   └──────────────────┘   └──────────────────┘
          │                       │                       │
-         │   All three sync via waterFall cascade-pull   │
+         │   All three sync via waterFall temporal cascade   │
          └───────────────────────┴───────────────────────┘
 ```
 
@@ -69,7 +69,7 @@ through the membrane alongside code. They answer: *what should I do?*
 - **Schema**: TOML files in `impulses/active/` (`IMPULSE_POTENTIAL_STANDARD.md`)
 - **Lifetime**: Active until acknowledged, archived per wave
 - **Transport**: Git push through waterFall; auto-discovered via `potential.sense`
-- **Discovery**: `membrane potential.sense`, `cascade-pull.sh` auto-trigger
+- **Discovery**: `membrane potential.sense`, `membrane temporal.cascade` auto-trigger
 - **Biological analog**: rhizoCrypt DAG sessions (fire, propagate, acknowledge)
 - **Subtypes**: FRAGO (fragmentary order), AUDIT (validation request), SYNC (merge request)
 
@@ -114,7 +114,7 @@ The three layers map directly to the Neural API triad:
 | Git commits | rootPulse (ACTION) | Create artifacts | `git commit`, `git push` |
 | Impulses | rootPulse + quorumSignal | Fire + sense | `membrane impulse.post`, `membrane potential.sense` |
 | Context braids | quorumSignal (SENSE) | Observe state | `membrane context.weave`, `membrane context.sense` |
-| All three | waterFall (SYNC) | Propagate across mesh | `cascade-pull.sh --source temporal` |
+| All three | waterFall (SYNC) | Propagate across mesh | `membrane temporal.cascade` |
 
 The triad cycle with all three layers:
 
@@ -124,7 +124,7 @@ The triad cycle with all three layers:
    ├── membrane impulse.post         (rP: fire action potential)
    └── membrane context.weave        (qS: update working state)
 
-2. waterFall propagates              (wF: cascade-pull sync)
+2. waterFall propagates              (wF: temporal cascade sync)
    ├── git changes flow to all gates
    ├── impulse TOML appears in impulses/active/
    └── context TOML appears in context/{gateA}/
@@ -163,10 +163,10 @@ membrane context.weave \
 
 ### Discovering Communication
 
-After `cascade-pull.sh` syncs, discovery happens automatically:
+After `membrane temporal.cascade` syncs, discovery happens automatically:
 
 ```bash
-# cascade-pull already runs potential.sense at the end
+# temporal cascade already runs potential.sense at the end
 # But you can also discover manually:
 
 membrane potential.sense              # List pending impulses
@@ -239,7 +239,7 @@ record of ecosystem evolution. It is a trailing mirror, not the source of truth.
 | Sync relay | peptidoglycan | Metallic | Post-receive webhook → `pepti-sync-relay.sh` |
 | GitHub mirror | GitHub | Weak | `ext-github-push.sh` on golgiBody-ext |
 | Impulse relay | Mesh | — | peptidoglycan `potential.sense` → songbird |
-| Context sync | All gates | — | waterFall cascade-pull |
+| Context sync | All gates | — | waterFall temporal cascade |
 
 See `WATERFALL_PATTERN.md` Phase 4, `hooks/forgejo/README.md` for relay chain,
 and `graphs/waterfall_publish.toml` for cascade specification.

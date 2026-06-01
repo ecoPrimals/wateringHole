@@ -381,8 +381,8 @@ spring boundaries.
 - `SPRING_COMPOSITION_PATTERNS.md` — Per-spring absorbed patterns
 - `SPRING_INTERACTION_PATTERNS.md` — Cross-evolution and interop patterns
 - `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — Wiring the provenance trio
-- `ECOSYSTEM_EVOLUTION_CYCLE.md` — How capabilities flow between layers
-- `NUCLEUS_SPRING_ALIGNMENT.md` — Spring composition readiness matrix
+- `EVOLUTION_STATUS_WAVE66.md` — How capabilities flow between layers
+- `GATE_SPRING_OWNERSHIP.md` — Spring composition readiness matrix
 - `SPRING_COORDINATION_AND_VALIDATION.md` — Handoffs and validation assignments
 
 ---

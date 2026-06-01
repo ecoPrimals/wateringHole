@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: CC-BY-SA-4.0
 #
-# cascade-pull.service — Ecosystem-wide git pull via wateringHole
+# cascade-pull.service — Ecosystem-wide temporal cascade via membrane
 #
-# Works on any gate — auto-detects ECOPRIMALS_ROOT and gate identity.
+# Works on any gate — auto-detects gate identity from ecosystem_manifest.toml.
+# Supersedes the bash cascade-pull.sh (fossilized Wave 66).
 #
 # Install per-user (desktop gates):
 #   mkdir -p ~/.config/systemd/user
@@ -17,13 +18,11 @@
 #
 # Environment overrides:
 #   Create the env file for your gate with any of:
+#     MEMBRANE_BIN=/usr/local/bin/membrane
 #     ECOPRIMALS_ROOT=/opt/ecoPrimals
-#     CASCADE_GATE=golgiBody
-#     CASCADE_SOURCE=origin
-#     CASCADE_PARALLEL=4
 
 [Unit]
-Description=Cascade pull — ecosystem workspace sync via wateringHole
+Description=Temporal cascade — ecosystem workspace sync via membrane
 After=network-online.target
 Wants=network-online.target
 
@@ -33,7 +32,7 @@ Type=oneshot
 EnvironmentFile=-%h/.config/cascade-pull.env
 EnvironmentFile=-/etc/cascade-pull.env
 
-ExecStart=/bin/bash -c '${ECOPRIMALS_ROOT:-/opt/ecoPrimals}/infra/wateringHole/scripts/cascade-pull.sh --gate ${CASCADE_GATE:-auto} --source ${CASCADE_SOURCE:-origin} --parallel ${CASCADE_PARALLEL:-1}'
+ExecStart=${MEMBRANE_BIN:-/usr/local/bin/membrane} temporal.cascade
 
 StandardOutput=journal
 StandardError=journal

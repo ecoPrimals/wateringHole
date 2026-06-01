@@ -232,5 +232,5 @@ That is the difference between a bibliography and a foundation.
 - `FOUNDATION_INTEGRATION_GUIDE.md` — operational integration for springs
 - `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — rhizoCrypt + loamSpine + sweetGrass patterns
 - `SWEETGRASS_SPRING_BRAID_PATTERNS.md` — per-spring attribution patterns
-- `ECOSYSTEM_EVOLUTION_CYCLE.md` — the water cycle model (seasonal evolution)
+- `EVOLUTION_STATUS_WAVE66.md` — the water cycle model (seasonal evolution)
 - `gardens/projectFOUNDATION/deploy/README.md` — quick start for validation runs

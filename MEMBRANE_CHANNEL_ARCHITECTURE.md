@@ -704,7 +704,7 @@ topology, the latter describes which primal bundles are required.
 
 ## Cross-References
 
-- `INTERSTADIAL_EXIT_CRITERIA.md` — Pillar 2 deployment targets map to membrane channels
+- `GLACIAL_SHIFT_READINESS.md` — Pillar 2 deployment targets map to membrane channels
 - `compute-sharing/SOVEREIGN_COMPUTE_SHARING.md` — NUC intake pattern is Channel 3 surface
 - `compute-sharing/TUNNEL_ACCESS_GUIDE.md` — Tunnel evolution phases map to Channel 2
 - `plasmidBin/deploy_membrane.sh` — Agentic provisioning and deployment script (supports `--composition relay|rustdesk|tower`, `keys` management)
@@ -720,4 +720,4 @@ topology, the latter describes which primal bundles are required.
 - `primalSpring/ecoPrimal/src/bonding/stun_tiers.rs` — STUN sovereignty-first escalation
 - `primalSpring/ecoPrimal/src/composition/context.rs` — Discovery escalation hierarchy
 - `BTSP_PROTOCOL_STANDARD.md` — BTSP phase definitions
-- `ECOSYSTEM_EVOLUTION_CYCLE.md` — Interstadial/stadial transition model
+- `EVOLUTION_STATUS_WAVE66.md` — Interstadial/stadial transition model

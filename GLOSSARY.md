@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: May 28, 2026 (Wave 60 — golgiBody Phase A, 38 repos sovereign sync)
+**Last Updated**: June 1, 2026 (Wave 66 — 20 membrane services live, S1 TLS passed, wateringHole zero-code, 39 repos sovereign sync)
 
 ---
 
@@ -20,10 +20,11 @@ membrane) and Forgejo (inner membrane, `git.primals.eco`):
 
 **Git hosts**: Forgejo on VPS (`git.primals.eco`) is the sovereign periplasmic
 layer (golgiBody Phase A). GitHub is the trailing outer membrane mirror. Gates
-push to Forgejo via SSH; GitHub receives post-push mirrors. WaterFall sync
-(`cascade-pull.sh --source forgejo`) pulls from the periplasm. See
-`WATERFALL_PATTERN.md` for the full sync model and `REPO_MEMBRANE_BOUNDARY.md`
-for per-repo classification: inner-only, trailing mirror, or outer-only.
+push to Forgejo via SSH; GitHub receives post-push mirrors via the K-Derm
+diderm relay chain. WaterFall sync (`membrane temporal.cascade`) pulls from
+the periplasm. See `WATERFALL_PATTERN.md` for the full sync model and
+`REPO_MEMBRANE_BOUNDARY.md` for per-repo classification: inner-only, trailing
+mirror, or outer-only.
 
 **Why three orgs?** Primals build capabilities. Springs validate those capabilities
 against published science. Products deliver validated capabilities to users.

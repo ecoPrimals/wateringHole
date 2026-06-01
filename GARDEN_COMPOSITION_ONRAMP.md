@@ -377,7 +377,7 @@ See `esotericWebb/` for the canonical gen4 product pattern:
 
 - `DEPLOYMENT_AND_COMPOSITION.md` — Full composition architecture (BYOB schema, niche YAML, launch profiles)
 - `PRIMAL_SPRING_GARDEN_TAXONOMY.md` — The three layers: primals, springs, gardens
-- `ECOSYSTEM_EVOLUTION_CYCLE.md` — The water cycle: how capabilities flow
+- `EVOLUTION_STATUS_WAVE66.md` — The water cycle: how capabilities flow
 - `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — Wiring the provenance trio
 - `COMPOSITION_TICK_MODEL_STANDARD.md` — Temporal requirements for real-time products
 - `INTERACTION_EVENT_TAXONOMY.md` — Input event types across modalities

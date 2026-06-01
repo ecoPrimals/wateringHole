@@ -197,6 +197,6 @@ item.
 ## References
 
 - [ECOBIN_ARCHITECTURE_STANDARD.md](ECOBIN_ARCHITECTURE_STANDARD.md) — binary compliance
-- [INTERSTADIAL_EXIT_CRITERIA.md](INTERSTADIAL_EXIT_CRITERIA.md) — H3 sovereign CI gates
+- [GLACIAL_SHIFT_READINESS.md](GLACIAL_SHIFT_READINESS.md) — H3 sovereign CI gates
 - `infra/plasmidBin/` — pipeline source code
 - `infra/plasmidBin/templates/` — workflow templates for primal repos

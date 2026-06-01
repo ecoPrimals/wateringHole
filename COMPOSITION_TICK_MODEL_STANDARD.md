@@ -330,7 +330,7 @@ The composition engine will evolve from fixed scheduling to adaptive:
 
 - `DEPLOYMENT_AND_COMPOSITION.md` — Deploy graph schema and coordination patterns
 - `GARDEN_COMPOSITION_ONRAMP.md` — Garden product integration
-- `ECOSYSTEM_EVOLUTION_CYCLE.md` — Seasonal evolution model
+- `EVOLUTION_STATUS_WAVE66.md` — Seasonal evolution model
 - `SPRING_COMPOSITION_PATTERNS.md` — Per-spring patterns
 - `TOADSTOOL_SENSOR_CONTRACT.md` — Hardware sensor event timing
 

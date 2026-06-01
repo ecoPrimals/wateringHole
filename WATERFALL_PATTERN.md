@@ -38,7 +38,7 @@ now live at `lab.primals.eco`.
                     │        Extracellular (GitHub)     │
                     │   trailing mirror (weak bond)     │
                     └──────────────┬───────────────────┘
-                                   │ weak (ext-github-push.sh)
+                                   │ weak (membrane relay.ship)
                     ┌──────────────┴───────────────────┐
                     │  Outer Membrane (VPS channels)    │
                     │  lab.primals.eco, sporePrint       │
@@ -57,18 +57,21 @@ now live at `lab.primals.eco`.
     │ cytoplasm │       │ cytoplasm │          │ cytoplasm │
     └───────────┘       └───────────┘          └───────────┘
 
-    ─── waterfall down: cascade-pull --source forgejo ───▶
-    ◀── evolution up:   git push forgejo ────────────────
+    ─── waterfall down: membrane temporal.cascade ───▶
+    ◀── evolution up:   git push forgejo ──────────────
 ```
 
 ### Waterfall Down (pull)
 
-Gates invoke `cascade-pull.sh --source forgejo` (or `auto`). The script:
+Gates invoke `membrane temporal.cascade`. The Rust binary:
 
-1. Reads `ecosystem_manifest.toml` `[sync]` for Forgejo SSH URL
-2. For each repo, selects the `forgejo` remote (falls back to `origin` if missing)
+1. Reads `ecosystem_manifest.toml` for gate profile, sync config, and Forgejo SSH URL
+2. For each repo in the gate's manifest, selects the temporal leader remote
 3. Executes `git pull --ff-only <remote>` concurrently across repos
-4. Updates `freshness.toml` via `--publish-freshness`
+4. Reports per-repo status (OK, SKIP, FAIL) with timing
+
+**Historical note**: `cascade-pull.sh` (1,029 lines) was the bash predecessor.
+It was fossilized in Wave 66 (June 2026). All gates now use `membrane temporal.cascade`.
 
 ### Evolution Up (push)
 
@@ -113,14 +116,15 @@ Set to `"all"` for legacy dual-push behavior (bypasses K-Derm layers).
 CASCADE_SYNC_SOURCE=forgejo
 ```
 
-### cascade-pull.sh flags
+### membrane temporal.cascade flags
 
-| Flag                | Description                                    |
-|---------------------|------------------------------------------------|
-| `--source github`   | Pull from `origin` (GitHub) — current default  |
-| `--source forgejo`  | Pull from `forgejo` remote (periplasm)         |
-| `--source auto`     | Try `forgejo`, fall back to `origin`           |
-| `--ensure-remotes`  | Add/update `forgejo` remote to all repos       |
+| Flag                  | Description                                      |
+|-----------------------|--------------------------------------------------|
+| `--gate auto`         | Auto-detect gate identity from `.gate` file      |
+| `--gate <name>`       | Specify gate explicitly                          |
+| `--source temporal`   | Use temporal leader (default)                    |
+| `--check`             | Dry-run: report status without pulling           |
+| `--clone-missing`     | Clone repos not yet present on this gate         |
 
 ## Inversion Protocol (Phase 3–4)
 
@@ -128,7 +132,7 @@ The inversion flips Forgejo from trailing mirror to primary source.
 
 ### Phase 3: Shadow Period (dual-source validation)
 
-1. Run `cascade-pull --source forgejo --check` alongside normal pulls
+1. Run `membrane temporal.cascade --check` alongside normal pulls
 2. Compare HEADs from both remotes for parity
 3. Track parity for 7+ days (matching membrane telemetry cutover gate)
 4. Extend `s_ecosystem_freshness` or add `s_ecosystem_forgejo_parity`
@@ -189,7 +193,7 @@ The canonical SSOT is `GATE_SPRING_OWNERSHIP.md`.
 
 ### Gate Auto-Detection
 
-`cascade-pull.sh --gate auto` resolves the current gate identity:
+`membrane temporal.cascade` resolves the current gate identity:
 
 1. `GATE_NAME` environment variable (explicit override)
 2. Hostname detection (`hostname -s` mapped to gate name)
@@ -249,22 +253,26 @@ biomeOS graph.execute (Wave 65+)
 | File | Role |
 |------|------|
 | `infra/wateringHole/ecosystem_manifest.toml` | Repo catalog + `[sync]` config |
-| `infra/wateringHole/cascade-pull.sh` | WaterFall orchestrator (bash fallback) |
-| `cellMembrane/crates/membrane-shadow/src/temporal.rs` | Rust WaterFall engine (`temporal.cascade`) |
+| `cellMembrane/crates/membrane-shadow/src/temporal.rs` | Rust WaterFall engine (`membrane temporal.cascade`) |
+| `cellMembrane/crates/membrane-shadow/src/relay.rs` | K-Derm relay chain (`relay.run`, `relay.mediate`, `relay.ship`) |
 | `infra/wateringHole/freshness.toml` | Wave state snapshot |
 | `gardens/projectNUCLEUS/deploy/forgejo_mirror.sh` | Forgejo repo provisioning |
 | `springs/primalSpring/ecoPrimal/.../s_ecosystem_freshness.rs` | Manifest + sync validation |
 
 ## History
 
+- **Wave 66** (2026-06-01): wateringHole at zero code. All bash scripts
+  fossilized. `membrane temporal.cascade` fully Rust, manifest-driven.
+  K-Derm relay chain evolved to `relay.rs` (relay.run/mediate/ship).
+  S1 TLS shadow PASSED (13 days). MESH_DEPLOYMENT_STANDARD.md added.
 - **Wave 63+** (2026-05-31): Phase 4 inversion LIVE. `push_target = "forgejo"`
-  in manifest. K-Derm diderm relay chain wired: `pepti-sync-relay.sh` on
-  peptidoglycan mediates between inner/outer; `ext-github-push.sh` on
-  golgiBody-ext ships to GitHub (trans face). `topology.roles` added to manifest.
-  GitHub SSH write credentials moved exclusively to golgiBody-ext (outer membrane).
+  in manifest. K-Derm diderm relay chain wired: golgi-post-receive-relay on
+  golgiBody triggers pepti-sync-relay on peptidoglycan, which triggers
+  ext-github-push on golgiBody-ext (trans face). `topology.roles` added.
+  GitHub SSH write credentials moved exclusively to golgiBody-ext.
   Bonding violation resolved: proper covalent→metallic→ionic→weak degradation.
-  GitHub becomes external linear ledger; gates push to Forgejo only.
 - **Wave 60** (2026-05-28): Phase 1–2 implemented. Manifest v2.0.0 with
   `[sync]` section and `forgejo_repo` fields. `cascade-pull.sh` evolved
-  with `--source` and `--ensure-remotes`. All eastGate repos configured
-  with `forgejo` remote. Validation extended to check WaterFall fields.
+  with `--source` and `--ensure-remotes` (now fossilized — replaced by
+  `membrane temporal.cascade`). All eastGate repos configured with
+  `forgejo` remote.

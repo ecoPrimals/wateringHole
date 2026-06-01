@@ -6,7 +6,7 @@
 **Date**: May 26, 2026
 **Status**: Active
 **Authority**: wateringHole Consensus
-**Related**: `K_DERM_TOPOLOGY_STANDARD.md`, `BTSP_PROTOCOL_STANDARD.md`, `SOVEREIGNTY_STANDARDS.md`, `NUCLEUS_SPRING_ALIGNMENT.md`
+**Related**: `K_DERM_TOPOLOGY_STANDARD.md`, `BTSP_PROTOCOL_STANDARD.md`, `SOVEREIGNTY_STANDARDS.md`, `GATE_SPRING_OWNERSHIP.md`
 **Typed implementation**: `gardens/cellMembrane/crates/cellmembrane-types/src/envelope.rs` (`BondType`)
 **Canonical bonding spec**: `primals/biomeOS/specs/NUCLEUS_BONDING_MODEL.md`
 
@@ -170,7 +170,7 @@ From `BTSP_PROTOCOL_STANDARD.md`:
 
 ## Bonding × Genetics Alignment
 
-From `NUCLEUS_SPRING_ALIGNMENT.md`:
+From `GATE_SPRING_OWNERSHIP.md`:
 
 | Genetics Tier | Type | Role | Cloneable | Minimum Bond |
 |---------------|------|------|-----------|--------------|
@@ -267,7 +267,7 @@ all external bonding passes through Tower's capability surface.
 | `K_DERM_TOPOLOGY_STANDARD.md` | Envelope layers where bonds are placed |
 | `BTSP_PROTOCOL_STANDARD.md` | Cipher enforcement per bond type |
 | `SOVEREIGNTY_STANDARDS.md` | Trust layers (Intracellular/Inner/Outer/Extracellular) |
-| `NUCLEUS_SPRING_ALIGNMENT.md` | Genetics tier → bond minimum mapping |
+| `GATE_SPRING_OWNERSHIP.md` | Genetics tier → bond minimum mapping |
 | `MEMBRANE_CHANNEL_ARCHITECTURE.md` | Three channels + crypto layers |
 | `DARK_FOREST_GLACIAL_GATE_STANDARD.md` | Enclave bonding policies |
 | `primals/biomeOS/specs/NUCLEUS_BONDING_MODEL.md` | Canonical bonding spec |

@@ -47,7 +47,7 @@ Unlike impulses (which are action-oriented and time-bounded), context braids are
 
 ## Architecture
 
-Context braids live in `infra/wateringHole/context/`. They sync via the same waterFall cascade-pull mechanism as all other wateringHole content. Gates discover current context via `context.sense` after pull; `cascade-pull.sh` automatically runs `context.clear --expired` after sync to decay stale braids.
+Context braids live in `infra/wateringHole/context/`. They sync via the same waterFall cascade-pull mechanism as all other wateringHole content. Gates discover current context via `context.sense` after pull; `membrane temporal.cascade` automatically runs `context.clear --expired` after sync to decay stale braids.
 
 ```
 Developer sits down → pulls wateringHole → context.sense → sees living state
@@ -214,7 +214,7 @@ Freeform context that doesn't fit other strands.
 1. **Woven**: `membrane context.weave` creates/overwrites the braid file for this gate+project. Auto-populates gate, timestamp, wave. Commits and pushes.
 2. **Sensed**: Other gates pull wateringHole; `membrane context.sense` shows current mesh state. Cascade-pull can auto-trigger this.
 3. **Superseded**: A new weave for the same gate+project overwrites the previous braid. No history is preserved in the file — git is the fossil record.
-4. **Decayed**: `membrane context.clear --expired` removes braids past their TTL. Run automatically during cascade-pull sync.
+4. **Decayed**: `membrane context.clear --expired` removes braids past their TTL. Run automatically during temporal cascade sync.
 5. **Cleared**: `membrane context.clear --project <path>` explicitly removes a braid (work complete, no longer relevant).
 
 ---
@@ -262,7 +262,7 @@ membrane context.clear [--project <path>] [--expired]
 | Flag | Description |
 |------|-------------|
 | `--project <path>` | Clear this gate's braid for a specific project |
-| `--expired` | Clear all braids past their TTL (cascade-pull integration) |
+| `--expired` | Clear all braids past their TTL (temporal cascade integration) |
 
 ---
 
@@ -279,7 +279,7 @@ Context braids change frequently. To manage git history:
 
 ## Cascade-Pull Integration
 
-After wateringHole sync, `cascade-pull.sh` should:
+After wateringHole sync, `membrane temporal.cascade` should:
 
 1. Run `membrane context.clear --expired` to decay stale braids
 2. Run `membrane context.sense` to show current mesh state

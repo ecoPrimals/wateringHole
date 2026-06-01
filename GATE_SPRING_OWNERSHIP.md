@@ -64,7 +64,7 @@ work together — it is the bonding mechanics, not the atoms.
 ### Current: Ad-Hoc (Documented)
 
 Gates currently route work via handoff blurbs in wateringHole. Each gate team
-pulls repos relevant to their springs via `cascade-pull.sh --gate <name>`.
+pulls repos relevant to their springs via `membrane temporal.cascade`.
 Cross-gate compute is coordinated manually through blurbs.
 
 ### Target: Covalent (Songbird Mesh)
@@ -73,7 +73,7 @@ Evolution path from ad-hoc to fully covalent routing:
 
 ```
 Phase 1: Documented ownership (this file)              ← YOU ARE HERE
-Phase 2: Gate profiles in manifest drive WaterFall sync ← DONE (cascade-pull --gate)
+Phase 2: Gate profiles in manifest drive WaterFall sync ← DONE (membrane temporal.cascade --gate)
 Phase 3: Songbird mesh discovers cross-gate capabilities
 Phase 4: toadStool dispatches compute to best-fit gate
 Phase 5: biomeOS graph.execute routes across Plasmodium
@@ -85,7 +85,7 @@ Phase 5: biomeOS graph.execute routes across Plasmodium
 |---------|-----------|---------|
 | **Science on one gate, compute on another** | Songbird mesh + toadStool dispatch | hotSpring science on strandGate, GPU dispatch to biomeGate |
 | **Coordination validates all gates** | primalSpring `s_covalent_mesh` | eastGate probes ironGate + southGate mesh health |
-| **Repo sync through periplasm** | WaterFall cascade-pull via Forgejo | All gates pull from golgiBody VPS |
+| **Repo sync through periplasm** | WaterFall temporal cascade via Forgejo | All gates pull from golgiBody VPS |
 | **Product composition across springs** | Garden composes primals via IPC | helixVision on strandGate consumes wetSpring + hotSpring science |
 
 ---
@@ -93,7 +93,7 @@ Phase 5: biomeOS graph.execute routes across Plasmodium
 ## WaterFall Sync Profiles
 
 Each gate's `[gates.*]` manifest profile determines which repos it pulls
-via `cascade-pull.sh --gate <name>`. The profile reflects ownership:
+via `membrane temporal.cascade`. The profile reflects ownership:
 
 - **eastGate**: Full superset (38 repos) — coordination hub sees everything
 - **ironGate**: Core primals + healthSpring + infra

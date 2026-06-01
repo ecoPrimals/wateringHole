@@ -37,7 +37,7 @@ A **FRAGO** (Fragmentary Order) is an impulse subtype that amends an existing di
 
 ## Architecture
 
-Impulses live in `infra/wateringHole/impulses/`. They sync via the same waterFall cascade-pull mechanism as all other wateringHole content. Gates discover pending impulses via `potential.sense` on their next pull; `cascade-pull.sh` automatically runs `potential.sense` after sync.
+Impulses live in `infra/wateringHole/impulses/`. They sync via the same waterFall cascade-pull mechanism as all other wateringHole content. Gates discover pending impulses via `potential.sense` on their next pull; `membrane temporal.cascade` automatically runs `potential.sense` after sync.
 
 ```
 Team pushes code → fires impulse → commits to wateringHole → pushes
@@ -130,7 +130,7 @@ The `[from].ref` field is auto-populated by `impulse.post` from the project repo
 ## Lifecycle
 
 1. **Fired**: `membrane impulse.post` generates file in `impulses/active/`, auto-populates `[from].ref`, commits, pushes.
-2. **Sensed**: Target gates pull wateringHole; `membrane potential.sense` shows pending impulses. `cascade-pull.sh` auto-triggers this after sync.
+2. **Sensed**: Target gates pull wateringHole; `membrane potential.sense` shows pending impulses. `membrane temporal.cascade` auto-triggers this after sync.
 3. **Acknowledged**: `membrane impulse.ack <id>` appends `[[acks]]` entry, commits, pushes (receptor binding).
 4. **Discharged**: `membrane impulse.archive` moves expired or fully-acked impulses to `impulses/archive/wave{N}/`.
 5. **Health**: `membrane potential.check` reports gradient health — expired unacked, TTL violations, volume per wave.
@@ -165,7 +165,7 @@ Multiple gates can ack independently; each appends its own `[[acks]]` entry.
 | Command | Action |
 |---------|--------|
 | `membrane potential.sense [--all]` | Measure pending potential for this gate |
-| `membrane potential.sense --count` | Lightweight integer count (cascade-pull integration) |
+| `membrane potential.sense --count` | Lightweight integer count (temporal cascade integration) |
 | `membrane potential.check` | Gradient health across the mesh |
 
 ---
@@ -201,6 +201,6 @@ When Forgejo webhooks are deployed on wateringHole:
 1. Forgejo post-receive detects new files in `impulses/active/`
 2. Webhook POSTs to peptidoglycan `impulse-relay` service
 3. `impulse-relay` broadcasts via Songbird `mesh.publish` to subscribed gates
-4. Subscribing gates' cascade-pull fires immediately, triggers `potential.sense`
+4. Subscribing gates' temporal cascade fires immediately, triggers `potential.sense`
 
 No schema changes required — impulse files remain the durable store regardless of delivery mechanism.

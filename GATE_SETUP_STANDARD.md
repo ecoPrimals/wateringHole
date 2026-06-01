@@ -101,7 +101,8 @@ export GATE_NAME=$(cat .gate)
 ### Step 2: Clone wateringHole
 
 wateringHole is always the first clone. It contains the ecosystem manifest,
-cascade-pull, and all standards.
+deployment standards, and all coordination docs (zero code — all tooling
+lives in cellMembrane as the `membrane` binary).
 
 > **Note**: Forgejo paths are case-sensitive. Use exact casing from
 > ecosystem_manifest.toml (e.g., `ecoPrimals/wateringHole`, not
@@ -119,24 +120,22 @@ git clone git@github.com:ecoPrimals/wateringHole.git infra/wateringHole
 
 ### Step 3: Cascade Pull
 
-cascade-pull reads the gate profile from ecosystem_manifest.toml and clones
-only the repos this gate needs.
+`membrane temporal.cascade` reads the gate profile from ecosystem_manifest.toml
+and clones only the repos this gate needs.
 
 ```bash
-cd infra/wateringHole
+# Full cascade (LAN or fast connection)
+membrane temporal.cascade --gate $GATE_NAME --clone-missing
 
-# Full clone (LAN or fast connection)
-./scripts/cascade-pull.sh --gate $GATE_NAME --clone-missing --source temporal
-
-# WAN gate (shallow clone for large repos)
-./scripts/cascade-pull.sh --gate $GATE_NAME --clone-missing --shallow --source temporal
+# If membrane is not yet installed, bootstrap via plasmid.fetch:
+membrane plasmid.fetch --primal membrane --source github
+# Or build from source:
+cd gardens/cellMembrane && cargo build --release --bin membrane
 ```
 
-**Fallback** — If Forgejo is unreachable (key not registered yet):
-```bash
-# Clone from GitHub only (uses SSH URLs when SSH agent is active)
-./scripts/cascade-pull.sh --gate $GATE_NAME --clone-missing --shallow --source origin
-```
+**Note**: The bash `cascade-pull.sh` was fossilized in Wave 66. All gates
+now use `membrane temporal.cascade` which is manifest-driven and handles
+gate identity, remote selection, and clone-missing automatically.
 
 This will:
 - Read `[gates.<name>]` from ecosystem_manifest.toml for the repo list
@@ -242,36 +241,34 @@ ssh-keygen -t ed25519 -f /root/.ssh/id_ed25519 -N "" -C "<node-name>@vps"
 
 ---
 
-## Sync — cascade-pull
+## Sync — membrane temporal.cascade
 
 ### Daily Sync
 
 ```bash
-cd ~/Development/ecoPrimals/infra/wateringHole
-./scripts/cascade-pull.sh --source temporal
+membrane temporal.cascade
 ```
 
-`--source temporal` uses the membrane binary (if available) to:
-1. Fetch all remotes (origin, forgejo) — pull from any source
-2. Compare commit timestamps across remotes
-3. Pull from the temporally leading remote
-4. Push to the designated target (default: `forgejo` — VPS mediator model)
-5. Report divergences
+`temporal.cascade` uses the manifest to:
+1. Resolve gate identity (from `.gate` file or `--gate` flag)
+2. For each repo in the gate's manifest profile, select the temporal leader remote
+3. Execute `git pull --ff-only <remote>` concurrently
+4. Report per-repo status (OK, SKIP, FAIL) with timing
 
 **Push Target**: The manifest `push_target = "forgejo"` means gates push
-only to Forgejo. The VPS push mirror auto-propagates to GitHub as the
-external linear ledger. Gates no longer need to worry about GitHub access.
+only to Forgejo. The K-Derm relay chain auto-propagates to GitHub via
+peptidoglycan → golgiBody-ext. Gates no longer need GitHub SSH access.
 
 ### Automated Sync (systemd timer)
 
 ```bash
-# Install systemd units
+# Install systemd units (updated to use membrane)
 sudo cp systemd/cascade-pull.service /etc/systemd/system/
 sudo cp systemd/cascade-pull.timer /etc/systemd/system/
 
 # Configure
 sudo systemctl edit cascade-pull.service
-# Set Environment: ECOPRIMALS_ROOT, CASCADE_GATE, CASCADE_PARALLEL
+# Set Environment: MEMBRANE_BIN, ECOPRIMALS_ROOT
 
 sudo systemctl enable --now cascade-pull.timer
 ```
@@ -279,17 +276,14 @@ sudo systemctl enable --now cascade-pull.timer
 ### Manual Sync Modes
 
 ```bash
-# Pull from Forgejo only (inner membrane)
-./scripts/cascade-pull.sh --source forgejo
+# Check temporal alignment without pulling
+membrane temporal.check
 
-# Pull from GitHub only (extracellular)
-./scripts/cascade-pull.sh --source origin
+# Full cascade with clone-missing for new repos
+membrane temporal.cascade --clone-missing
 
-# Dry run (show what would happen)
-./scripts/cascade-pull.sh --source temporal --dry-run
-
-# Check freshness without pulling
-./scripts/cascade-pull.sh --check
+# Sync specific repos only
+membrane temporal.sync springs/primalSpring
 ```
 
 ---
@@ -319,9 +313,8 @@ When a gate's workspace is in an unrecoverable state:
 # Remove the repo entirely
 rm -rf <repo-path>
 
-# Re-clone via cascade-pull
-cd ~/Development/ecoPrimals/infra/wateringHole
-./scripts/cascade-pull.sh --gate $GATE_NAME --clone-missing --source temporal
+# Re-clone via temporal cascade
+membrane temporal.cascade --clone-missing
 ```
 
 ### VPS Resync
@@ -329,8 +322,7 @@ cd ~/Development/ecoPrimals/infra/wateringHole
 For peptidoglycan (structural layer):
 ```bash
 # On peptidoglycan
-cd /opt/ecoPrimals/infra/wateringHole
-./scripts/cascade-pull.sh --gate peptidoglycan --source temporal
+membrane temporal.cascade
 ```
 
 For golgiBody-ext (outer membrane / trans face):

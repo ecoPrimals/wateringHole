@@ -327,7 +327,7 @@ DNS NS registrar cutover, Cloudflare removal post-validation.
 
 ## References
 
-- `INTERSTADIAL_EXIT_CRITERIA.md` — 5 pillars + shadow schedule
+- `GLACIAL_SHIFT_READINESS.md` — 5 pillars + shadow schedule
 - `SOVEREIGNTY_STANDARDS.md` — calibrate → shadow → cutover protocol
 - `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` — VPS composition spec
 - `MEMBRANE_CHANNEL_ARCHITECTURE.md` — 3 channels + RustDesk

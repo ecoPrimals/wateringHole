@@ -6,7 +6,7 @@
 **Date**: May 26, 2026
 **Status**: Active
 **Authority**: wateringHole Consensus (canonical spec: `gardens/cellMembrane/specs/K_DERM_TOPOLOGY.md`)
-**Related**: `BONDING_MODEL_STANDARD.md`, `SOVEREIGNTY_STANDARDS.md`, `BTSP_PROTOCOL_STANDARD.md`, `NUCLEUS_SPRING_ALIGNMENT.md`, `MEMBRANE_CHANNEL_ARCHITECTURE.md`
+**Related**: `BONDING_MODEL_STANDARD.md`, `SOVEREIGNTY_STANDARDS.md`, `BTSP_PROTOCOL_STANDARD.md`, `GATE_SPRING_OWNERSHIP.md`, `MEMBRANE_CHANNEL_ARCHITECTURE.md`
 **Typed implementation**: `gardens/cellMembrane/crates/cellmembrane-types/src/envelope.rs`
 
 ---
@@ -343,7 +343,7 @@ crossing validation in reproducible test environments.
 | Bonding model standard | `wateringHole/BONDING_MODEL_STANDARD.md` | Bond types + BTSP ciphers |
 | Sovereignty standards | `wateringHole/SOVEREIGNTY_STANDARDS.md` | Trust layers (pre-K-Derm vocabulary) |
 | BTSP protocol | `wateringHole/BTSP_PROTOCOL_STANDARD.md` | Cipher enforcement per bond type |
-| NUCLEUS spring alignment | `wateringHole/NUCLEUS_SPRING_ALIGNMENT.md` | Atomic model + genetics |
+| NUCLEUS spring alignment | `wateringHole/GATE_SPRING_OWNERSHIP.md` | Atomic model + genetics |
 | Membrane channels | `wateringHole/MEMBRANE_CHANNEL_ARCHITECTURE.md` | Three-channel architecture |
 | cellMembrane architecture | `gardens/cellMembrane/specs/CELLMEMBRANE_ARCHITECTURE.md` | Operational membrane model |
 | K-NOME methodology | `infra/whitePaper/gen3/about/K_NOME_PROGRAMMING.md` | Parallel methodology |
