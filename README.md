@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 1, 2026 (Wave 66: wateringHole at zero code — all scripts fossilized or relocated to owners. S1 TLS shadow PASSED (13 days). 20/20 primal membrane services running on golgiBody. `membrane temporal.cascade` replaces bash cascade-pull. K-Derm relay chain fully Rust (`relay.rs`). impulsePotential + context braids operational. 0 active handoffs + 437 archived.)
+**Last Updated**: June 1, 2026 (Wave 67: vocabulary evolution — primalSpring `signal`→`composition` across code/configs/docs. Deep Debt II: `Arc<str>` interning, `FromStr` for `AtomicType`, `FEDERATION_PORTS`, capability-based `ordered_primals()`. 835 tests, 57 scenarios, 33 composition graphs, 490+ methods. Wire protocol (`signal.dispatch`) unchanged. 0 active handoffs + 437 archived.)
 
 ---
 

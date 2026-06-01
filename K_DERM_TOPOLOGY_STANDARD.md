@@ -314,7 +314,7 @@ Deploy graphs reference these types in `[graph.bonding_policy]` sections:
 | Scenario | Validates |
 |----------|-----------|
 | `s_kderm_boundary` | Deploy graph `bonding_policy` matches K-Derm layer rules |
-| `s_atomic_signals` (existing) | Signal graph primals placed in correct atomic tiers |
+| `s_atomic_compositions` (existing) | Composition graph primals placed in correct atomic tiers |
 | `s_sovereignty_parity` (existing) | `routing_config_reference.toml` backend types match K-Derm bonding |
 
 ### cellMembrane validation (existing)

@@ -220,7 +220,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
 **Version**: v3.88  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983 tests, 26 workspace crates, 43+ deploy graphs, 19 signal graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. env_config::vars SSOT expanded (Wave 63), zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983 tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. env_config::vars SSOT expanded (Wave 63), zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -238,7 +238,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Participates In**: Coordinates all composed systems (RootPulse, Tower Atomic, NUCLEUS, federation). Provenance trio (rhizoCrypt + LoamSpine + sweetGrass) wired into Neural API for `dag.*`, `commit.*`, `provenance.*` routing. NUCLEUS Gateway for spore ingestion/emission (see `SPORE_OWNERSHIP_MATRIX.md`).
 
-**NUCLEUS Gateway** (shipped v3.77–v3.84): biomeOS provides `biomeos nucleus ingest` and `biomeos nucleus emit` subcommands for bidirectional spore transmission via `nest_ingest_spore.toml` and `nest_emit_spore.toml` signal graphs. Ingests pseudoSpores/lithoSpores into nest_atomic storage via NestGate + provenance trio. Emits new spores from NUCLEUS composition state with full pseudoSpore 2.0 materialization (polling + dir unpack). NC-1.4 resolved: `biomeos-pseudospore` crate provides canonical validation (compatible with `pseudospore-core`; legacy `litho_core::pseudospore` retired). NC-1.emit complete: full materialization pipeline. See `infra/wateringHole/SPORE_OWNERSHIP_MATRIX.md` for the three-way ownership split.
+**NUCLEUS Gateway** (shipped v3.77–v3.84): biomeOS provides `biomeos nucleus ingest` and `biomeos nucleus emit` subcommands for bidirectional spore transmission via `nest_ingest_spore.toml` and `nest_emit_spore.toml` composition graphs. Ingests pseudoSpores/lithoSpores into nest_atomic storage via NestGate + provenance trio. Emits new spores from NUCLEUS composition state with full pseudoSpore 2.0 materialization (polling + dir unpack). NC-1.4 resolved: `biomeos-pseudospore` crate provides canonical validation (compatible with `pseudospore-core`; legacy `litho_core::pseudospore` retired). NC-1.emit complete: full materialization pipeline. See `infra/wateringHole/SPORE_OWNERSHIP_MATRIX.md` for the three-way ownership split.
 
 ---
 
@@ -444,7 +444,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.9.30 Wave 56 (93 experiments, 20 tracks, 813 tests, 460 methods, 56 scenarios, 96 deploy graphs, UDS-only VPS standard, cell graph patterns, CompositionContext, post-primordial) |
+| primalSpring | v0.9.31 Wave 67 (93 experiments, 21 tracks, 835 tests, 490+ methods, 57 scenarios, 113 graph TOMLs (~80 deploy + 33 compositions), vocabulary evolution signal→composition, Arc\<str\> interning, FEDERATION_PORTS, zero TODO/unsafe) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -528,7 +528,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
 **Phase**: Phase 60+ / Interstadial (87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.9.30 Wave 56 — 93 experiments (20 tracks), 813 lib tests (813 pass, 2 ignored), 460 methods, 56 scenarios (10 tracks, 3 tiers), 96 deploy graphs (81 deploy + 15 signal), NUCLEUS VALIDATED, UniBin (validate/certify/serve/status/version), UDS-only VPS standard, cell graph patterns, CompositionContext, post-primordial deployment enforced, `SONGBIRD_PEERS` peer seeding (both launchers), `--security-socket` feature guard, stale socket cleanup, superseded specs archived, zero clippy errors, zero unsafe, ecoBin compliant
+**Status**: v0.9.31 Wave 67 — 93 experiments (21 tracks), 835 tests (804 lib + 10 integration + 4 binary + 17 doc, 2 ignored), 490+ methods, 57 scenarios (10 tracks, 3 tiers), 113 graph TOMLs (~80 deploy + 33 compositions). Vocabulary evolution: signal→composition across code/configs/docs (wire protocol `signal.dispatch` preserved). Deep Debt II: `Arc<str>` interning in NeuralRoutingTable, `FromStr` for `AtomicType`, `FEDERATION_PORTS`, `DispatchError::Ipc(Arc<IpcError>)`, capability-based `ordered_primals()`. `#![forbid(unsafe_code)]` on all crate roots. Zero TODO/FIXME/unsafe/mocks in production
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
@@ -537,8 +537,8 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | Category | Details |
 |----------|---------|
 | **Experiments** | 89 across 20 tracks: Atomic Composition, Graph Execution, Emergent Systems, Bonding & Plasmodium, Cross-Spring Coordination, Showcase-Mined, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, Frontier, Subsystem Decomposition, Signal Dispatch, and more. All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
-| **Deploy Graphs** | 96 (81 deploy + 15 signal): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). Fragment-first composition with `resolve = true`. |
-| **Validation Scenarios** | 56 scenarios across 10 tracks, 3 tiers: atomic-signal, meta-tier-signal, agentic-tower, sovereignty (membrane composition, parity, content), signal dispatch parity, cross-gate, primal announce, ionic bond lifecycle. |
+| **Graph TOMLs** | 113 (~80 deploy + 33 compositions): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). Fragment-first composition with `resolve = true`. |
+| **Validation Scenarios** | 57 scenarios across 10 tracks, 3 tiers: atomic-compositions, meta-tier-compositions, agentic-tower, sovereignty (membrane composition, parity, content), composition dispatch parity, cross-gate, primal announce, ionic bond lifecycle. |
 | **Niche Self-Knowledge** | 37+ capabilities (including ai.query, ai.health, composition.tower_squirrel_health), semantic mappings (7 domains), operation dependencies, cost estimates |
 | **RPC Methods** | 17+ methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |
 | **IPC Resilience** | IpcError (8 typed variants + IpcErrorPhase), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
