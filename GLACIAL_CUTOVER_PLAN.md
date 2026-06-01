@@ -48,13 +48,23 @@ Items that can complete immediately with no external dependency.
 
 Prove multi-gate covalent mesh works. This is glacial criterion #2.
 
-| Item | Owner Gate | Action |
-|------|-----------|--------|
-| **`discovery.peers` smoke test** | eastGate (primalSpring) | Same-subnet test eastGate <-> southGate with `SONGBIRD_PEERS` |
-| **`capability.call` smoke test** | eastGate (primalSpring) | Run `s_covalent_mesh` scenario live |
-| **Plasmodium collective sign-off** | eastGate (primalSpring) | 3+ gates meshed, formal validation |
-| **southGate federation verify** | southGate | Confirm `SONGBIRD_PEERS` + 13/13 after Songbird fix |
-| **Cross-subnet routing** | infra/network | southGate (192.168.4.x) to eastGate (192.168.1.x) — router config or TURN relay |
+**Wave 67 live test results (2026-06-01):**
+- bearDog + Songbird start clean on eastGate (HSM, BTSP, federation :7700, IPC, JWT)
+- **strandGate (192.168.1.132) auto-discovered** via UDP broadcast — orchestration, federation, secure_http, TLS 1.3 capabilities
+- strandGate federation port :7700 TCP reachable (same subnet)
+- `discovery.peers` RPC responds but peer list empty — TLS handshake fails on pre-fix binary
+- **BLOCKED**: local Songbird binary predates socket fix (eb913612). Needs plasmidBin deploy.
+- **GAP FOUND**: cascade syncs source but not binaries → **ecoBins evolution needed** in waterfall
+
+| Item | Owner Gate | Action | Status |
+|------|-----------|--------|--------|
+| **ecoBins pipeline** | eastGate (plasmidBin + membrane) | Evolve waterfall to distribute built binaries, not just source | **NEW — P1 blocker** |
+| **Deploy Songbird w/ socket fix** | eastGate (plasmidBin) | `plasmidbin fetch songBird && plasmidbin install songbird` (post-ecoBins) | BLOCKED on ecoBins |
+| **`discovery.peers` smoke test** | eastGate (primalSpring) | Same-subnet test: eastGate ↔ strandGate (192.168.1.132, already broadcasting) + southGate | BLOCKED on deploy |
+| **`capability.call` smoke test** | eastGate (primalSpring) | Run `s_covalent_mesh` scenario live | BLOCKED on deploy |
+| **Plasmodium collective sign-off** | eastGate (primalSpring) | 3+ gates meshed, formal validation | Pending |
+| **southGate federation verify** | southGate | Confirm `SONGBIRD_PEERS` + 13/13 after Songbird fix | Pending |
+| **Cross-subnet routing** | infra/network | southGate (192.168.4.x) to eastGate (192.168.1.x) — Eero mesh routes between properties, needs OS route | Pending |
 
 ### Phase 2 — Outer Membrane Cutover
 
@@ -187,8 +197,17 @@ coralReef (compute trio), hotSpring (science side)
   + S4 bearDog config (southGate)      DONE (Wave 119)
         |
         v
-  discovery.peers test (eastGate <-> southGate)   <-- YOU ARE HERE
+  ecoBins pipeline (plasmidBin)        <-- YOU ARE HERE
+  (waterfall evolves: source → binaries)
+        |
+        v
+  Deploy fixed Songbird to eastGate via plasmidBin
+  + southGate route (Eero cross-subnet)
+        |
+        v
+  discovery.peers test (eastGate ↔ strandGate + southGate)
   + capability.call test (primalSpring s_covalent_mesh)
+  (NOTE: strandGate@192.168.1.132 already broadcasting!)
         |
         v
   Plasmodium collective 3+ gates  ----+
