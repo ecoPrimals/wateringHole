@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-01 (Wave 67: Vocabulary evolution signal→composition, Deep Debt II — Arc\<str\> interning, FromStr for AtomicType, FEDERATION_PORTS, capability-based ordered_primals(). 835 tests, 57 scenarios, 93 experiments, 33 compositions, 490+ methods. sporePrint pure-primal content-direct parity validated 22/22. flockGate sporePrint W68 live viz + deep debt.)
+**Last updated**: 2026-06-01 (Wave 67 post-cascade: P0 blockers CLEARED — Songbird socket fix (eb913612), biomeOS capability.call (9ed36983), bearDog S4 config (Wave 119). 836 tests, 58 scenarios, 93 experiments, 33 compositions, 490+ methods. Phase 0 complete, Phase 1 mesh validation NEXT.)
 
 ---
 
@@ -144,8 +144,9 @@ Unix socket improvements. primalSpring: 789 tests, 53 scenarios, 458 methods,
 
 **Climate-sensitive sentinels** (primals whose readiness gates the glacial shift):
 
-- **Songbird**: `mesh.init` + `bootstrap_peers` now wired (Wave 49). Cross-gate
-  `discovery.peers` verification **NEXT** — same-subnet gates need live test.
+- **Songbird**: `mesh.init` + `bootstrap_peers` wired (Wave 49). Security socket fix
+  SHIPPED (Wave 67, eb913612) — `--security-socket` / `BEARDOG_SOCKET` honored.
+  Cross-gate `discovery.peers` verification **NEXT** — same-subnet live test.
   sled DB corruption on unclean shutdown remains a workaround-only issue.
 - **bearDog**: ACME renewal daemon operational. Massive orphan purge (Wave 113b)
   cleared 15k LOC of dead discovery code. Vault (encrypted creds at rest) deferred
@@ -156,7 +157,7 @@ Unix socket improvements. primalSpring: 789 tests, 53 scenarios, 458 methods,
   deprecated legacy capability roundtrip, 9,156+ lib tests. Handoffs archived (S278b).
   **CLEAR** — zero sentinel-blocking items.
 - **biomeOS**: **v3.76 — LiveSpore `~/.local/bin` FIXED** (commit eddc3fd2, Wave 49).
-  Zero stale patterns. Neural API mesh dispatch ready for cross-gate `capability.call`.
+  Zero stale patterns. Neural API `capability.call` proxy SHIPPED (Wave 67, 9ed36983).
   1 tracked TODO (REST route — enhancement). **CLEAR** — zero sentinel-blocking items.
 - **petalTongue**: WASM client-side rendering live. `--family-id` now accepted
   (Wave 49, commit `bb5cdc9`). Showcase pointer updated to central fossilRecord.
@@ -255,7 +256,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Cross-gate data dependency staging | **PROTOTYPED** (primalSpring `validation::dependency`) |
 | Songbird peer seeding (`SONGBIRD_PEERS`) | **SHIPPED** — Wave 49, both launchers, CLI + env + RPC |
 | Songbird `mesh.init` + `bootstrap_peers` | **WIRED** — Wave 49, Songbird team confirmed functional |
-| Cross-gate `discovery.peers` verification | **UNBLOCKED** — peer seeding shipped, same-subnet test next |
+| Cross-gate `discovery.peers` verification | **UNBLOCKED** — peer seeding shipped, socket fix DONE (eb913612), same-subnet test next |
 | Cross-subnet mesh (southGate ↔ eastGate) | **BLOCKED** — different subnets, needs routing or TURN relay |
 | Plasmodium collective status | **PENDING** — requires 3+ same-subnet gates meshed first |
 | flockGate live deployment | **OPERATIONAL** (Wave 63-64) — WAN relay, sporePrint gallery, Zola pipeline, temporal sync validated |
@@ -286,8 +287,8 @@ fossilRecord) — see `fossilRecord/` for detail.
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| Cross-gate `discovery.peers` smoke test | primalSpring | **HIGH** | Peer seeding + `mesh.init` shipped — same-subnet test with `SONGBIRD_PEERS` next |
-| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | biomeOS v3.75 mesh dispatch ready, `s_covalent_mesh` scenario written, needs live run |
+| Cross-gate `discovery.peers` smoke test | primalSpring | **HIGH** | Peer seeding + `mesh.init` shipped. Songbird socket fix DONE (eb913612). Same-subnet test with `SONGBIRD_PEERS` **NEXT** |
+| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | biomeOS `capability.call` DONE (9ed36983). `s_covalent_mesh` scenario written, needs live run |
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
 | Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | v3.64 `nest.sync` graph shipped. Songbird mesh (v3.75) is the transport. Pending multi-gate connectivity. |
 | Sovereign DNS (knot-dns) | cellMembrane | MEDIUM | **OPERATIONAL** — ns1 (golgiBody) + ns2 (golgiBody-ext), DNSSEC active, zone transfers confirmed. NS registrar action pending. |
@@ -314,15 +315,18 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 67)**: Criteria 1 is 3/4 (S1 TLS 7-day gate running
-since May 31 — completes ~June 7. S4 formal validation still pending ironGate
-services restart). Criteria 2 is unblocked — 5 gates operational (eastGate,
-ironGate, southGate, biomeGate, flockGate), mesh.init+bootstrap_peers wired.
+**Current assessment (Wave 67 post-cascade)**: Phase 0 COMPLETE — all P0 blockers
+cleared by southGate (Songbird socket eb913612, biomeOS capability.call 9ed36983,
+bearDog S4 Wave 119). Criteria 1 is 3/4 (S1 TLS 7-day gate running since May 31 —
+completes ~June 7. S4 formal validation begun, bearDog config shipped). Criteria 2
+UNBLOCKED — 5 gates operational, mesh.init+bootstrap_peers wired, socket fix landed;
+**`discovery.peers` same-subnet live test is NEXT** (eastGate ↔ southGate).
 Criteria 3 VPS Nest deployed — sporePrint content-direct backend validated 22/22
 parity (Wave 67, flockGate). Criteria 4 flockGate validated over WAN (Wave 63-64,
 ~1.3s propagation; Wave 68 live viz serving). Criteria 5 sovereign DNS infra live
-(ns1+ns2), registrar action pending. Remaining: S1 TLS gate completes ~June 7,
-S4 formal gate, DNS NS registrar cutover, Cloudflare removal post-validation.
+(ns1+ns2), registrar action pending. Remaining: discovery.peers live test, S1 TLS
+gate completes ~June 7, Plasmodium 3+ gate collective, DNS NS registrar cutover,
+content cutover (sporePrint → VPS), Cloudflare removal post-validation.
 
 ---
 

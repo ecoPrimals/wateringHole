@@ -444,7 +444,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.7.6 |
 | barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
 | coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.9.31 Wave 67 (93 experiments, 21 tracks, 835 tests, 490+ methods, 57 scenarios, 113 graph TOMLs (~80 deploy + 33 compositions), vocabulary evolution signal→composition, Arc\<str\> interning, FEDERATION_PORTS, zero TODO/unsafe) |
+| primalSpring | v0.9.31 Wave 67 (93 experiments, 21 tracks, 836 tests, 490+ methods, 58 scenarios, 113 graph TOMLs (~80 deploy + 33 compositions), Phase 0 P0 cleared, mesh validation NEXT) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -528,7 +528,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
 **Phase**: Phase 60+ / Interstadial (87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.9.31 Wave 67 — 93 experiments (21 tracks), 835 tests (804 lib + 10 integration + 4 binary + 17 doc, 2 ignored), 490+ methods, 57 scenarios (10 tracks, 3 tiers), 113 graph TOMLs (~80 deploy + 33 compositions). Vocabulary evolution: signal→composition across code/configs/docs (wire protocol `signal.dispatch` preserved). Deep Debt II: `Arc<str>` interning in NeuralRoutingTable, `FromStr` for `AtomicType`, `FEDERATION_PORTS`, `DispatchError::Ipc(Arc<IpcError>)`, capability-based `ordered_primals()`. `#![forbid(unsafe_code)]` on all crate roots. Zero TODO/FIXME/unsafe/mocks in production
+**Status**: v0.9.31 Wave 67 — 93 experiments (21 tracks), 836 tests (805 lib + 10 integration + 4 binary + 17 doc, 2 ignored), 490+ methods, 58 scenarios (10 tracks, 3 tiers), 113 graph TOMLs (~80 deploy + 33 compositions). Phase 0 P0 blockers CLEARED (Songbird socket fix, biomeOS capability.call, bearDog S4). Phase 1 mesh validation NEXT. `#![forbid(unsafe_code)]` on all crate roots. Zero TODO/FIXME/unsafe/mocks in production
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
@@ -538,7 +538,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 |----------|---------|
 | **Experiments** | 89 across 20 tracks: Atomic Composition, Graph Execution, Emergent Systems, Bonding & Plasmodium, Cross-Spring Coordination, Showcase-Mined, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, Frontier, Subsystem Decomposition, Signal Dispatch, and more. All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
 | **Graph TOMLs** | 113 (~80 deploy + 33 compositions): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). Fragment-first composition with `resolve = true`. |
-| **Validation Scenarios** | 57 scenarios across 10 tracks, 3 tiers: atomic-compositions, meta-tier-compositions, agentic-tower, sovereignty (membrane composition, parity, content), composition dispatch parity, cross-gate, primal announce, ionic bond lifecycle. |
+| **Validation Scenarios** | 58 scenarios across 10 tracks, 3 tiers: atomic-compositions, meta-tier-compositions, agentic-tower, sovereignty (membrane composition, parity, content), composition dispatch parity, cross-gate, primal announce, ionic bond lifecycle, sporePrint pure-primal parity. |
 | **Niche Self-Knowledge** | 37+ capabilities (including ai.query, ai.health, composition.tower_squirrel_health), semantic mappings (7 domains), operation dependencies, cost estimates |
 | **RPC Methods** | 17+ methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |
 | **IPC Resilience** | IpcError (8 typed variants + IpcErrorPhase), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |

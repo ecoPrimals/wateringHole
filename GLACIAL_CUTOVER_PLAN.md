@@ -37,9 +37,9 @@ Items that can complete immediately with no external dependency.
 | Item | Owner Gate | Primals/Projects | Action | Status |
 |------|-----------|-----------------|--------|--------|
 | **S1 TLS graduation** | ironGate (cellMembrane) | Caddy | Declare S1 OPERATIONAL (13d > 7-day gate) | Ready |
-| **Songbird security socket fix** | southGate | Songbird | `songbird_http_client` must honor `--security-socket` / `BEARDOG_SOCKET` instead of hardcoded `/tmp/neural-api-*.sock` | P0 blocker |
-| **biomeOS `capability.call` RPC** | southGate | biomeOS | Implement JSON-RPC method (currently -32601) | P0 blocker |
-| **bearDog S4 service config** | southGate (bearDog) + ironGate (validation) | bearDog | Configure BearDog auth services; begin formal 7-day shadow gate | P0 |
+| **Songbird security socket fix** | southGate | Songbird | `songbird_http_client` must honor `--security-socket` / `BEARDOG_SOCKET` instead of hardcoded `/tmp/neural-api-*.sock` | **DONE** (eb913612) |
+| **biomeOS `capability.call` RPC** | southGate | biomeOS | Implement JSON-RPC method (currently -32601) | **DONE** (9ed36983) |
+| **bearDog S4 service config** | southGate (bearDog) + ironGate (validation) | bearDog | Configure BearDog auth services; begin formal 7-day shadow gate | **DONE** (Wave 119, 5e6b5a5) |
 | **VPS relay bash to Rust** | ironGate (cellMembrane) | membrane | 4 bash scripts (pepti-sync-relay, ext-github-push, post-receive hook, impulse relay) to `membrane relay.*` | P1 |
 | **golgiBody disk cleanup** | ironGate (cellMembrane) | — | Move build artifacts to peptidoglycan (9% used, 79GB free) | P1 |
 | **Family seed on golgiBody** | ironGate (cellMembrane) | biomeOS | Replace dev-mode; production family seed | P1 |
@@ -117,14 +117,10 @@ ludoSpring, esotericWebb
 **Role**: Core mesh and orchestration primals. Security infrastructure.
 
 **Wave 67+ tasks:**
-1. **Songbird security socket fix** (P0 glacial blocker) — `songbird_http_client`
-   must honor `--security-socket` / `BEARDOG_SOCKET` instead of hardcoded
-   `/tmp/neural-api-*.sock`. Blocks federation TLS and cross-gate routing.
-2. **biomeOS `capability.call`** — implement JSON-RPC method (currently returns
-   -32601). Required for cross-gate capability routing.
-3. **bearDog S4 config** — ensure auth services are configured for ironGate
-   to begin formal 7-day shadow validation.
-4. Cross-gate mesh partner for eastGate `discovery.peers` test (Phase 1).
+1. ~~Songbird security socket fix~~ **DONE** (eb913612) — `--security-socket` / `BEARDOG_SOCKET` honored.
+2. ~~biomeOS `capability.call`~~ **DONE** (9ed36983) — proxied to Neural API.
+3. ~~bearDog S4 config~~ **DONE** (Wave 119, 5e6b5a5) — method gate evolution, BTSP config, platform support.
+4. Cross-gate mesh partner for eastGate `discovery.peers` test (Phase 1) — **NEXT**.
 
 ### biomeGate (Air-Gap Tester)
 
@@ -186,12 +182,12 @@ coralReef (compute trio), hotSpring (science side)
 ## Critical Path
 
 ```
-  Songbird socket fix (southGate)
-  + biomeOS capability.call (southGate)
-  + S4 bearDog config (southGate)
+  Songbird socket fix (southGate)     DONE (eb913612)
+  + biomeOS capability.call (southGate) DONE (9ed36983)
+  + S4 bearDog config (southGate)      DONE (Wave 119)
         |
         v
-  discovery.peers test (eastGate <-> southGate)
+  discovery.peers test (eastGate <-> southGate)   <-- YOU ARE HERE
   + capability.call test (primalSpring s_covalent_mesh)
         |
         v
