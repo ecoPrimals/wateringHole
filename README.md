@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 2, 2026 (Wave 68: graduated composition, dependency evolution, mesh validation. Wave 67 complete — vocabulary evolution (`signal`→`composition`), Deep Debt II, glacial cutover resolved. 835 tests, 57 scenarios, 33 composition graphs, 490+ methods. Wire protocol (`signal.dispatch`) unchanged. 20 active handoffs + 412 archived.)
+**Last Updated**: June 2, 2026 (Wave 71: L4 weighted routing, shadow pathway, bearDog env consolidation. Waves 67–70 archived — graduated composition, sovereignty graduation, virtual relay phase 1, biomeOS taxonomy provider. 835 tests, 57 scenarios, 33 composition graphs, 490+ methods. Wire protocol (`signal.dispatch`) unchanged. 1 active handoff + 445 archived.)
 
 ---
 
@@ -412,8 +412,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `petaltongue/` — petalTongue integration documentation
 
 ### Handoffs
-- `handoffs/archive/` — 411 archived handoffs organized by wave (wave58–wave67)
-- `handoffs/hotSpring/archive/` — 49 archived hotSpring handoffs
+- `handoffs/archive/` — 445 archived handoffs organized by wave (wave58–wave68)
+- `handoffs/hotSpring/archive/` — 53 archived hotSpring handoffs
 - Earlier epochs consolidated to fossilRecord (3,231 documents)
 
 ### Fossilized Standards (in fossilRecord)
