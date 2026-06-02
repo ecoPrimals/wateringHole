@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-02 (Wave 68 sovereign evolution: Four strategic domains added — (1) Songbird routing consolidation (TCP Tier 5 blocked in release builds, droppable port validation, virtual endpoint relay designed), (2) Neural API perceptron evolution (L4 weighted routing impulse dispatched, perceptron design doc published, topology affinity specified), (3) grapheneGate portable trust anchor (manifest entry, bootstrap standard, three-role evolution), (4) Network topology leverage (TOPOLOGY_MAP.toml published, segment/affinity model, latency in discovery.peers). Compute trio ownership moved to biomeGate. 6 impulses active. Cascade 38/38 parity.)
+**Last updated**: 2026-06-02 evening (Wave 70 — post-sprint: southGate ALL P1 DELIVERED (L4 routing, topology affinity, ring→aws-lc-rs, virtual relay Phase 1, probe_latency, hickory 0.25). ironGate sovereignty graduation EXECUTED (S4 7-day gate ACTIVE, membrane binary on VPS, relay bash→Rust COMPLETE, disk 60%). strandGate provenance trio RESOLVED. biomeGate OFFLINE (kernel recovery) — compute trio PAUSED. 29 handoffs + 15 impulses archived. Cascade 37/38 (petalTongue resolved manually).)
 
 ---
 
@@ -182,12 +182,12 @@ Tier 2+ large-dataset science, not a deployment blocker.
 
 | Track | What | Sovereign | Commercial | Status | Cutover gate |
 |-------|------|-----------|------------|--------|--------------|
-| **S1** | TLS termination | Caddy+LE :443 (80ms TTFB) | Cloudflare (INACTIVE) | **7-DAY GATE RUNNING** (started 2026-05-31, q15min probe) | p95 < 500ms, 0 TLS failures |
-| **S2** | NAT relay | Songbird TURN :3478 | cloudflared (INACTIVE) | **LIVE** (100% 3+ days) | 7-day 100% reachable |
-| **S3** | Content serving | NestGate + petalTongue (67ms TTFB) | GitHub Pages (111ms) | **LIVE** | 7-day TTFB parity |
-| **S4** | Auth | BearDog BTSP dual-auth | OAuth2/PAM proxy | **SHADOW LIVE on ironGate** (since ~May 14) | 7-day p95 < 50ms |
+| **S1** | TLS termination | Caddy+LE :443 (80ms TTFB) | Cloudflare (INACTIVE) | **VERIFIED** — 198 probes, 0 failures, p95 < 120ms. Awaiting NS cutover. | p95 < 500ms, 0 TLS failures |
+| **S2** | NAT relay | Songbird TURN :3478 | cloudflared (INACTIVE) | **GRADUATED** | 7-day 100% reachable |
+| **S3** | Content serving | NestGate + petalTongue (67ms TTFB) | GitHub Pages (111ms) | **READY** — sporePrint 101 tests, zero-C deps. Cutover after DNS NS switch. | 7-day TTFB parity |
+| **S4** | Auth | BearDog BTSP enforced | OAuth2/PAM (DISABLED) | **7-DAY GATE ACTIVE** (started Jun 2, ends ~Jun 9, 15-min probes) | 7-day p95 < 50ms |
 
-**Remaining**: S1 gate completes ~June 7. S4 formal 7-day gate blocked on ironGate services restart. DNS NS cutover infra ready (ns1+ns2 live, DNSSEC active), registrar action pending.
+**Remaining**: S4 gate running autonomously (ends ~Jun 9). DNS NS registrar cutover is the critical path (operator manual action). S1 graduation (Cloudflare removal) follows NS cutover.
 
 ### cellMembrane (inner membrane)
 
@@ -213,7 +213,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | **eastGate** | i9-12900, RTX 4070 + Akida, 32GB | Orchestrator, neuromorphic | **OPERATIONAL** | primalSpring, airSpring, groundSpring | 1G |
 | **ironGate** | i9-14900K, RTX 5070, 96GB | Agentic dev, ABG | **OPERATIONAL** (23 UDS) | primalSpring, ludoSpring, healthSpring | 1G |
 | **southGate** | 5800X3D, RTX 4060 + 3090s, 128GB | Gaming + compute | **OPERATIONAL** (9/9) | wetSpring, neuralSpring | 1G (10G NIC ready) |
-| **biomeGate** | Threadripper 3970X, 256GB | HBM2 test bench | **OPERATIONAL** (62/62) | hotSpring | 1G |
+| **biomeGate** | Threadripper 3970X, 256GB | HBM2 test bench | **OFFLINE** (kernel recovery) | hotSpring | 1G |
 | **strandGate** | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics | Hardware ready, **not deployed** | wetSpring (secondary) | 1G |
 | **northGate** | Ryzen 9950X3D, RTX 5090, 96GB | Gaming primary, heavy compute | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
 | **westGate** | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
@@ -287,20 +287,23 @@ fossilRecord) — see `fossilRecord/` for detail.
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| Cross-gate `discovery.peers` smoke test | primalSpring | **HIGH** | Peer seeding + `mesh.init` shipped. Songbird socket fix DONE (eb913612). Same-subnet test with `SONGBIRD_PEERS` **NEXT** |
-| Cross-gate `capability.call` smoke test | primalSpring | **HIGH** | biomeOS `capability.call` DONE (9ed36983). `s_covalent_mesh` scenario written, needs live run |
+| Cross-gate `discovery.peers` live test | primalSpring | **HIGH** | Songbird `latency_ms` + `mesh.probe_latency` DONE. biomeOS endpoints ready. **eastGate must initiate paired test** |
+| Cross-gate `capability.call` live test | primalSpring | **HIGH** | biomeOS `capability.call` DONE. `s_covalent_mesh` scenario written. **Needs live run** |
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
-| Cross-gate `nest.sync` live orchestration | biomeOS | MEDIUM | v3.64 `nest.sync` graph shipped. Songbird mesh (v3.75) is the transport. Pending multi-gate connectivity. |
-| Sovereign DNS (knot-dns) | cellMembrane | MEDIUM | **OPERATIONAL** — ns1 (golgiBody) + ns2 (golgiBody-ext), DNSSEC active, zone transfers confirmed. NS registrar action pending. |
-| `content.put` publish pipeline (SP-4) | sporePrint + bearDog | LOW | `publish_sporeprint.sh` implemented. E2E requires live NestGate + bearDog session. |
-| Forgejo Actions CI | projectNUCLEUS | LOW | PLANNED |
-| loamSpine Tokio runtime-in-runtime panic | loamSpine | MEDIUM | Upstream bug — blocks health probe on 2 gates |
+| DNS NS registrar cutover | operator | **HIGH** | Sovereign DNS infra LIVE (ns1+ns2, DNSSEC). **Registrar manual action pending** |
+| Forgejo Actions CI | projectNUCLEUS | LOW | Evaluation planned (P2) |
+| neuralSpring composition_nucleus.sh fix | neuralSpring | LOW | Only spring with stale `target/release/` primal hardcode |
 | Central fossilRecord sync | all primals | LOW | 7/8 primals reference central paths that don't exist yet |
-| neuralSpring composition_nucleus.sh fix | neuralSpring | MEDIUM | Only spring with stale `target/release/` primal hardcode |
 
-**Resolved** (fossilized): Ionic bond runtime (WS-1), biomeOS mesh dispatch,
-BearDog ACME renewal daemon, rhizoCrypt startup latency, Songbird `--security-socket`,
-stale socket cleanup, 8/8 showcase fossilizations — see `fossilRecord/` for detail.
+**Resolved since Wave 68** (archived to wave70/wave68): loamSpine Tokio panic **FIXED**,
+rhizoCrypt discovery hardening **DONE**, sweetGrass PROV-O parity **DONE**, bearDog ring
+eliminated (aws-lc-rs, 14,988 tests), Songbird sled removed (Wave 135), biomeOS L4 routing
++ topology affinity **LIVE**, cellMembrane relay bash→Rust **COMPLETE**, VPS membrane binary
+deployed, S4 auth **ACTIVATED**.
+
+**Previously resolved**: Ionic bond runtime, biomeOS mesh dispatch, BearDog ACME,
+rhizoCrypt startup latency, Songbird `--security-socket`, stale socket cleanup,
+8/8 showcase fossilizations, sovereign DNS infra — see `fossilRecord/`.
 
 ---
 
@@ -315,18 +318,17 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 67 post-cascade)**: Phase 0 COMPLETE — all P0 blockers
-cleared by southGate (Songbird socket eb913612, biomeOS capability.call 9ed36983,
-bearDog S4 Wave 119). Criteria 1 is 3/4 (S1 TLS 7-day gate running since May 31 —
-completes ~June 7. S4 formal validation begun, bearDog config shipped). Criteria 2
-UNBLOCKED — 5 gates operational, mesh.init+bootstrap_peers wired, socket fix landed;
-**`discovery.peers` same-subnet live test is NEXT** (eastGate ↔ southGate).
-Criteria 3 VPS Nest deployed — sporePrint content-direct backend validated 22/22
-parity (Wave 67, flockGate). Criteria 4 flockGate validated over WAN (Wave 63-64,
-~1.3s propagation; Wave 68 live viz serving). Criteria 5 sovereign DNS infra live
-(ns1+ns2), registrar action pending. Remaining: discovery.peers live test, S1 TLS
-gate completes ~June 7, Plasmodium 3+ gate collective, DNS NS registrar cutover,
-content cutover (sporePrint → VPS), Cloudflare removal post-validation.
+**Current assessment (Wave 70 post-sprint)**: Criteria 1 sovereignty: S2 GRADUATED,
+S4 7-day gate ACTIVE (started Jun 2, ends ~Jun 9), S1 infra verified (198 probes, 0
+failures), S3 ready (sporePrint 101 tests, zero-C). **Two operator actions on critical
+path**: DNS NS registrar cutover and S1 Cloudflare removal post-cutover. Criteria 2
+mesh: both sides READY — Songbird `latency_ms` + `mesh.probe_latency` wired, biomeOS
+endpoints verified, virtual relay Phase 1 in shadow. **eastGate must initiate paired
+test**. Criteria 3 VPS Nest deployed — membrane binary on VPS (6.1M musl), relay
+Rust-native, disk 60%. Criteria 4 flockGate validated over WAN. Criteria 5 sovereign
+DNS infra live, registrar cutover pending. Criteria 6 Cloudflare removal follows
+NS cutover. biomeGate OFFLINE (kernel recovery) — compute trio PAUSED but not on
+glacial critical path.
 
 ---
 
