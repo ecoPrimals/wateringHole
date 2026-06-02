@@ -19,7 +19,7 @@ spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 | **eastGate** | eastGate (overwatch) | i9-12900, RTX 4070 + Akida, 32GB | Orchestrator, coordination hub | 13/13 | LAN 1G | OPERATIONAL |
 | **ironGate** | ironGate (cellMembrane, projectNUCLEUS, NestGate, petalTongue) | i9-14900K, RTX 5070, 96GB | Deployment infra, agentic dev | 13/13 (23 UDS) | LAN 1G | OPERATIONAL |
 | **southGate** | southGate (Songbird, biomeOS, bearDog) | 5800X3D, RTX 4060 + 3090s, 128GB | Mesh + orchestration + security primals | 9/9 | LAN 1G | OPERATIONAL |
-| **biomeGate** | biomeGate (hotSpring, toadStool) | Threadripper 3970X, Titan V + K80, 256GB | HPC physics, air-gap tester | 62/62 | LAN 1G | OPERATIONAL |
+| **biomeGate** | biomeGate (hotSpring, toadStool, barraCuda, coralReef) | Threadripper 3970X, Titan V + K80, 256GB | HPC physics, compute trio, air-gap tester | 62/62 | LAN 1G | OPERATIONAL |
 | **flockGate** | flockGate (sporePrint) | i9-13900K, RTX 3070 Ti, 64GB | WAN covalent, sporePrint hosting | OPERATIONAL | WAN via cellMembrane | OPERATIONAL |
 | **strandGate** | — (undeployed) | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics, ABG science | — | LAN 1G | HARDWARE READY |
 | **northGate** | — (undeployed) | Ryzen 9950X3D, RTX 5090, 96GB | Heavy compute, AI/LLM | — | LAN 1G (10G ready) | HARDWARE READY |
@@ -64,12 +64,12 @@ spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 | **Songbird** | southGate | Mesh discovery, federation, TURN relay |
 | **biomeOS** | southGate | Adaptive orchestration, Neural API |
 | **bearDog** | southGate | Security, TLS, BTSP authentication |
-| **toadStool** | biomeGate | Compute dispatch, GPU diesel engine |
+| **toadStool** | biomeGate | Compute dispatch, GPU diesel engine (compute trio) |
+| **barraCuda** | biomeGate | Pure Rust math + compute engine (compute trio) |
+| **coralReef** | biomeGate | Shader compiler, SPIR-V/WGSL (compute trio) |
 | **rhizoCrypt** | strandGate | Content-addressed DAG (provenance trio) |
 | **loamSpine** | strandGate | Immutable linear ledger (provenance trio) |
 | **sweetGrass** | strandGate | Attribution, W3C PROV-O braids (provenance trio) |
-| **barraCuda** | strandGate | Compute engine (compute trio) |
-| **coralReef** | strandGate | Analytical compute (compute trio) |
 
 ### Infrastructure Projects
 
@@ -88,9 +88,9 @@ spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 | **eastGate** | primalSpring, airSpring, groundSpring | skunkBat, squirrel | — | — | Full superset (39 repos) |
 | **ironGate** | healthSpring, ludoSpring | NestGate, petalTongue | cellMembrane, projectNUCLEUS | esotericWebb | Core + health/ludo + infra |
 | **southGate** | wetSpring, neuralSpring | Songbird, biomeOS, bearDog | — | — | Core + wet/neural + mesh primals |
-| **biomeGate** | hotSpring | toadStool | — | — | Core + hotSpring (air-gap tester) |
+| **biomeGate** | hotSpring | toadStool, barraCuda, coralReef | — | — | Core + hotSpring + compute trio |
 | **flockGate** | sporePrint | — | — | — | Core + sporePrint/petalTongue |
-| **strandGate** | hotSpring (science) | rhizoCrypt, loamSpine, sweetGrass, barraCuda, coralReef | — | helixVision, initioChem, blueFish, lithoSpore | Core + provenance/compute + ABG |
+| **strandGate** | hotSpring (science) | rhizoCrypt, loamSpine, sweetGrass | — | helixVision, initioChem, blueFish, lithoSpore | Core + provenance + ABG |
 
 ---
 
@@ -120,9 +120,9 @@ Tier 3 — Domain Science (per-gate)
 | **eastGate** | `discovery.peers` + `capability.call` live mesh tests (primalSpring). skunkBat/squirrel coordination | P0 glacial |
 | **ironGate** | S4 auth formal 7-day gate (bearDog on southGate provides auth). VPS relay bash→Rust. Forgejo Actions CI. sporePrint composition deploy | P0 glacial |
 | **southGate** | Songbird security socket fix (P0 blocker). biomeOS `capability.call` RPC. bearDog S4 service config. Cross-gate mesh partner | P0 glacial |
-| **biomeGate** | hotSpring Exp 234 Run #6 (catalyst NOP teardown/rebind). toadStool kernel patch validation. Air-gap testing | P2 |
+| **biomeGate** | Compute trio (toadStool + barraCuda + coralReef): Exp 234 Run #6, PBDMA runlist, VFIO enumeration (GAP-BC-002), SPIR-V output (GAP-HS-124), Blackwell zero readback (GAP-HS-115). Air-gap testing | P1 |
 | **flockGate** | sporePrint Wave 68 deep debt + live viz complete. Content cutover pending Phase 2 DNS | Clear |
-| **strandGate** | Undeployed. Provenance trio + compute trio gate deployment after mesh validated | P3 |
+| **strandGate** | Undeployed. Provenance trio gate deployment after mesh validated | P3 |
 | **golgiBody** | Disk pressure 68%. Relay bash→Rust evolution (4 scripts). Family seed deployment | P1 |
 
 ---

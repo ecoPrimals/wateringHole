@@ -18,8 +18,8 @@ affected gate teams.
 | **eastGate** | primalSpring, airSpring, groundSpring | — | Ecosystem coordination, ecology, geoscience | Full 13/13 |
 | **ironGate** | healthSpring, ludoSpring | esotericWebb | Clinical/compliance, game science | Full 13/13 |
 | **southGate** | wetSpring, neuralSpring | — | Biology/analytical chemistry, ML inference | Node Atomic (P1 pattern node) |
-| **biomeGate** | hotSpring | — | GPU-accelerated physics, toadStool diesel engine | Node Atomic 9/13 |
-| **strandGate** | hotSpring | helixVision, initioChem, blueFish, lithoSpore | ABG science, compChem, genomics, analytical ETL | Full NUCLEUS planned |
+| **biomeGate** | hotSpring | — | GPU-accelerated physics, compute trio (toadStool + barraCuda + coralReef) | Node Atomic 9/13 |
+| **strandGate** | hotSpring | helixVision, initioChem, blueFish, lithoSpore | ABG science, provenance trio, genomics, analytical ETL | Full NUCLEUS planned |
 | **golgiBody** (VPS) | — | — | Periplasmic sync, Forgejo, NUCLEUS relay | Infra NUCLEUS 13/13 |
 
 **Cross-gate springs**: hotSpring operates on both strandGate (ABG science,
