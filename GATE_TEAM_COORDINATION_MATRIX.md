@@ -6,7 +6,7 @@ hierarchy. Consolidates data from `GATE_SPRING_OWNERSHIP.md` (canonical
 spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 `ecosystem_manifest.toml` (sync profiles).
 
-**Last updated**: 2026-06-01 (Wave 67)
+**Last updated**: 2026-06-02 (Wave 68 — sovereign evolution review, team decomposition)
 
 **Authority**: wateringHole consensus
 
@@ -114,17 +114,17 @@ Tier 3 — Domain Science (per-gate)
   primalSpring's scenarios verify cross-gate composition parity.
 ```
 
-### Current Wave Assignments (Wave 67+)
+### Current Wave Assignments (Wave 69+)
 
 | Gate | Active Work | Priority |
 |------|-------------|----------|
-| **eastGate** | `discovery.peers` + `capability.call` live mesh tests (primalSpring). skunkBat/squirrel coordination | P0 glacial |
-| **ironGate** | S4 auth formal 7-day gate (bearDog on southGate provides auth). VPS relay bash→Rust. Forgejo Actions CI. sporePrint composition deploy | P0 glacial |
-| **southGate** | Songbird security socket fix (P0 blocker). biomeOS `capability.call` RPC. bearDog S4 service config. Cross-gate mesh partner | P0 glacial |
-| **biomeGate** | Compute trio (toadStool + barraCuda + coralReef): Exp 234 Run #6, PBDMA runlist, VFIO enumeration (GAP-BC-002), SPIR-V output (GAP-HS-124), Blackwell zero readback (GAP-HS-115). Air-gap testing | P1 |
-| **flockGate** | sporePrint Wave 68 deep debt + live viz complete. Content cutover pending Phase 2 DNS | Clear |
-| **strandGate** | Undeployed. Provenance trio gate deployment after mesh validated | P3 |
-| **golgiBody** | Disk pressure 68%. Relay bash→Rust evolution (4 scripts). Family seed deployment | P1 |
+| **eastGate** | Live mesh validation (`discovery.peers` + `capability.call` scenarios). DNS NS registrar cutover (manual). Cloudflare removal. Perceptron feature extraction. grapheneGate Role 1 beacon test. | P0 glacial |
+| **ironGate** | S1 TLS graduation (remove Cloudflare). S4 Auth formal 7-day gate (BTSP-only). cellMembrane relay bash→Rust (4 scripts). Forgejo Actions CI. S3 content cutover coord w/ flockGate. | P0 glacial |
+| **southGate** | biomeOS L4 weighted routing (replace first-match with score()). Topology affinity factor. Mesh validation partner. Songbird virtual endpoint relay (Phase B). sled→redb + ring elimination. | P1 evolution |
+| **biomeGate** | toadStool PBDMA runlist + Exp 234. coralReef SPIR-V + Blackwell. barraCuda ml.mlp_train for perceptron. Math pack/unpack. Air-gap testing. | P1 HPC |
+| **flockGate** | sporePrint S3 content cutover (target VPS). WAN relay maintenance. Content pipeline. | P2 cutover |
+| **strandGate** | loamSpine Tokio panic fix. rhizoCrypt peer population. Hardware deployment (post mesh). sweetGrass attribution. | P2 provenance |
+| **golgiBody** | Disk pressure 68%. Relay bash→Rust evolution (4 scripts). Family seed deployment. | P1 infra |
 
 ---
 
@@ -132,7 +132,7 @@ Tier 3 — Domain Science (per-gate)
 
 | Track | Commercial | Sovereign | Gate | Status |
 |-------|-----------|-----------|------|--------|
-| S1 TLS | Cloudflare (INACTIVE) | Caddy + LE on golgiBody-ext | cellMembrane | **13d PASSED** — ready to graduate |
+| S1 TLS | Cloudflare (INACTIVE) | Caddy + LE on golgiBody-ext | cellMembrane | **GRADUATED** — 13d passed, ready for Cloudflare removal |
 | S2 NAT | cloudflared (INACTIVE) | Songbird TURN :3478 | cellMembrane | **DONE** |
 | S3 Content | GitHub Pages | NestGate + Caddy (67ms TTFB) | cellMembrane + sporePrint | **LIVE** — cutover after DNS |
 | S4 Auth | OAuth2/PAM | BearDog BTSP dual-auth | southGate (bearDog) + ironGate (validation) | **Shadow live** — formal 7-day gate pending |
@@ -151,4 +151,4 @@ Tier 3 — Domain Science (per-gate)
 
 ---
 
-*Wave 67. Colonial phase. Gates coordinate through periplasm, mesh next.*
+*Wave 68. Five tracks, six gates. Mesh validates, routing learns, trust goes portable.*
