@@ -1,0 +1,34 @@
+# TOPOLOGY_MAP.toml — L4 Routing Topology Affinity Reference
+#
+# Defines multipliers applied to provider routing scores based on
+# transport proximity. Used by ProviderWeight::score() in biomeOS
+# Neural API adaptive routing.
+#
+# Owner: primalSpring (eastGate)
+# Consumers: biomeOS (southGate), all Neural API dispatchers
+# Version: v1.0 — Wave 71
+
+[affinity_multipliers]
+same_gate      = 1.0   # IPC on same NUCLEUS (Unix/abstract socket, TCP localhost)
+same_segment   = 0.9   # LAN/private network peers (10.x, 192.168.x, 172.16-31.x)
+cross_segment  = 0.7   # Reachable gate in different network segment
+vps            = 0.4   # Cloud VPS endpoint (public IP, not WAN-distant)
+wan            = 0.3   # Wide-area network (internet-routed, high latency expected)
+
+[inference_rules]
+# Transport-tier → affinity mapping (auto-inferred by biomeOS)
+# When gate_id comparison is unavailable, transport type determines affinity:
+#
+# UnixSocket      → same_gate (1.0)
+# AbstractSocket  → same_gate (1.0)
+# TcpSocket(localhost)  → same_gate (1.0)
+# TcpSocket(private IP) → same_segment (0.9)
+# TcpSocket(public IP)  → wan (0.3)
+# HttpJsonRpc(localhost) → same_gate (1.0)
+# HttpJsonRpc(private)   → same_segment (0.9)
+# HttpJsonRpc(public)    → wan (0.3)
+
+[gate_overrides]
+# Per-gate overrides for known topologies.
+# Format: gate_pair = affinity
+# Example: "southGate:eastGate" = 0.85  # co-located VPS
