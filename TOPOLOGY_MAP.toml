@@ -1,34 +1,128 @@
-# TOPOLOGY_MAP.toml — L4 Routing Topology Affinity Reference
+# Ecosystem Network Topology Map
 #
-# Defines multipliers applied to provider routing scores based on
-# transport proximity. Used by ProviderWeight::score() in biomeOS
-# Neural API adaptive routing.
+# Machine-readable topology for Neural API routing decisions.
+# Updated by discovery.peers RTT measurements + manual annotation.
 #
-# Owner: primalSpring (eastGate)
-# Consumers: biomeOS (southGate), all Neural API dispatchers
-# Version: v1.0 — Wave 71
-
-[affinity_multipliers]
-same_gate      = 1.0   # IPC on same NUCLEUS (Unix/abstract socket, TCP localhost)
-same_segment   = 0.9   # LAN/private network peers (10.x, 192.168.x, 172.16-31.x)
-cross_segment  = 0.7   # Reachable gate in different network segment
-vps            = 0.4   # Cloud VPS endpoint (public IP, not WAN-distant)
-wan            = 0.3   # Wide-area network (internet-routed, high latency expected)
-
-[inference_rules]
-# Transport-tier → affinity mapping (auto-inferred by biomeOS)
-# When gate_id comparison is unavailable, transport type determines affinity:
+# Segments define network boundaries with distinct latency profiles.
+# The Neural API uses segment affinity to bias capability.call routing
+# toward local providers (same-gate > same-segment > cross-segment > WAN).
 #
-# UnixSocket      → same_gate (1.0)
-# AbstractSocket  → same_gate (1.0)
-# TcpSocket(localhost)  → same_gate (1.0)
-# TcpSocket(private IP) → same_segment (0.9)
-# TcpSocket(public IP)  → wan (0.3)
-# HttpJsonRpc(localhost) → same_gate (1.0)
-# HttpJsonRpc(private)   → same_segment (0.9)
-# HttpJsonRpc(public)    → wan (0.3)
+# Last updated: 2026-06-02 (Wave 68)
 
-[gate_overrides]
-# Per-gate overrides for known topologies.
-# Format: gate_pair = affinity
-# Example: "southGate:eastGate" = 0.85  # co-located VPS
+[meta]
+version = "1.0.0"
+wave = 68
+measured_by = "manual + discovery.peers (planned)"
+
+# ═══════════════════════════════════════════════════════════════
+# Network Segments
+# ═══════════════════════════════════════════════════════════════
+
+[segments.backbone]
+subnet = "192.168.1.0/24"
+transport = "cat6_1g"
+description = "Basement backbone — Cat6 unmanaged switch"
+gates = ["eastGate", "ironGate", "biomeGate", "strandGate"]
+
+[segments.eero_mesh]
+subnet = "192.168.4.0/24"
+transport = "eero_wifi_mesh"
+description = "Next-door property — Eero mesh bridge to backbone via Cat6e"
+gates = ["southGate"]
+bridge_to = "backbone"
+bridge_latency_ms = 3.0
+
+[segments.vps_periplasm]
+transport = "digitalocean_vpc"
+description = "VPS membrane — golgiBody + peptidoglycan + golgiBody-ext"
+nodes = ["golgiBody", "peptidoglycan", "golgiBody-ext"]
+
+[segments.wan]
+transport = "residential_isp"
+description = "Remote WAN gates — TURN relay required"
+gates = ["flockGate"]
+
+[segments.portable]
+transport = "cellular_wifi"
+description = "Portable trust anchors — grapheneGate, swiftGate"
+gates = ["grapheneGate"]
+
+# ═══════════════════════════════════════════════════════════════
+# Estimated Latency Matrix (ms, one-way)
+# ═══════════════════════════════════════════════════════════════
+#
+# Values are estimates until discovery.peers RTT measurements are live.
+# "local" = UDS on same machine (<0.1ms)
+# Latency classes:
+#   local:        <0.1ms  (UDS, same machine)
+#   same_segment: <1ms    (LAN, same switch)
+#   cross_segment: 2-5ms  (Eero bridge, routed subnet)
+#   vps_relay:    20-50ms (BTSP through VPS)
+#   wan_turn:     50-200ms (TURN relay through VPS)
+
+[latency.backbone_to_backbone]
+estimate_ms = 0.5
+confidence = "high"
+notes = "Same switch, Cat6"
+
+[latency.backbone_to_eero_mesh]
+estimate_ms = 3.0
+confidence = "medium"
+notes = "Cat6e between properties, Eero mesh bridge"
+
+[latency.backbone_to_vps]
+estimate_ms = 25.0
+confidence = "medium"
+notes = "BTSP relay, DigitalOcean NYC"
+
+[latency.eero_mesh_to_vps]
+estimate_ms = 28.0
+confidence = "medium"
+notes = "BTSP relay via backbone bridge"
+
+[latency.wan_to_vps]
+estimate_ms = 80.0
+confidence = "low"
+notes = "TURN :3478, residential ISP"
+
+[latency.portable_to_backbone]
+estimate_ms = 5.0
+confidence = "low"
+notes = "WiFi to local LAN (varies by AP proximity)"
+
+[latency.portable_to_vps]
+estimate_ms = 50.0
+confidence = "low"
+notes = "Cellular → TURN (carrier-dependent)"
+
+# ═══════════════════════════════════════════════════════════════
+# Affinity Table — Neural API routing bias
+# ═══════════════════════════════════════════════════════════════
+#
+# Used by biomeOS ProviderWeight::score() topology factor.
+# Higher affinity = stronger preference for this path.
+
+[affinity]
+same_gate = 1.0
+same_segment = 0.9
+cross_segment_bridged = 0.7
+vps_relay = 0.4
+wan_turn = 0.3
+portable_wifi = 0.5
+portable_cellular = 0.2
+
+# ═══════════════════════════════════════════════════════════════
+# Transport Inference Rules — biomeOS auto-detection
+# ═══════════════════════════════════════════════════════════════
+#
+# When gate_id comparison is unavailable, biomeOS infers affinity
+# from the transport type used to reach the provider:
+#
+# UnixSocket           → same_gate (1.0)
+# AbstractSocket       → same_gate (1.0)
+# TcpSocket(localhost) → same_gate (1.0)
+# TcpSocket(private IP)→ same_segment (0.9)
+# TcpSocket(public IP) → wan_turn (0.3)
+# HttpJsonRpc(localhost)  → same_gate (1.0)
+# HttpJsonRpc(private IP) → same_segment (0.9)
+# HttpJsonRpc(public IP)  → wan_turn (0.3)

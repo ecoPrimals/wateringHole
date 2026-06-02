@@ -268,8 +268,22 @@ benchScale scenarios validate replacement parity:
 
 ---
 
+## Wave 68 Strategic Domains
+
+Four new strategic tracks added to the sovereignty evolution:
+
+| Domain | Description | Design Doc | Status |
+|--------|-------------|-----------|--------|
+| **Songbird Routing Consolidation** | TCP Tier 5 blocked in release; virtual endpoint relay for single-ingress; membrane TLS sovereignty | `SONGBIRD_VIRTUAL_ENDPOINT_RELAY_DESIGN.md` | Phase A: DONE. Phase B: DESIGNED. Phase C: ironGate. |
+| **Neural API Perceptron** | Evolve rule-based routing to learned single-layer perceptron; shadow mode graduation protocol | `NEURAL_API_PERCEPTRON_DESIGN.md` | L4 impulse dispatched. L5: DESIGNED. |
+| **grapheneGate Trust Anchor** | Pixel 8a as portable physical root of trust; Dark Forest beacon; sovereign mesh seed | `GRAPHENEGATE_BOOTSTRAP_STANDARD.md` | Manifest + standard: DONE. Role 1: P2. |
+| **Topology-Aware Routing** | Network segment model; latency in discovery.peers; affinity-biased dispatch | `TOPOLOGY_MAP.toml` | Topology map: DONE. Routing impulse: dispatched. |
+
+---
+
 ## Changelog
 
 | Date | Change |
 |------|--------|
+| 2026-06-02 | Wave 68: grapheneGate, topology routing, perceptron design, Songbird relay design, TCP Tier 5 release enforcement |
 | 2026-05-15 | Initial version — sovereignty standards codified from ecosystem practice |

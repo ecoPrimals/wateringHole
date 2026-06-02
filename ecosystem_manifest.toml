@@ -563,6 +563,17 @@ repos = [
     "helixVision", "initioChem", "blueFish", "esotericWebb",
 ]
 
+# grapheneGate — portable trust anchor (Pixel 8a, GrapheneOS)
+# Minimal Tower Atomic: BearDog + Songbird + SkunkBat
+# Carries beacon/lineage seeds, acts as physical root of trust
+[gates.grapheneGate]
+gate_class = "portable_anchor"
+bond_types = ["covalent"]
+repos = [
+    "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "skunkBat",
+]
+
 # golgiBody (VPS, inner membrane) — sovereign periplasm, Forgejo, primal services
 [gates.golgiBody]
 kderm_layer = "inner_membrane"

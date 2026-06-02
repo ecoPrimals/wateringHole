@@ -231,6 +231,17 @@ the sync chain works. Report sync results in your ack.
 
 ---
 
+## Wave 68 Strategic Extensions
+
+Four new evolution domains extend the glacial plan beyond infrastructure cutover:
+
+- **Songbird routing consolidation** — TCP Tier 5 blocked in release builds; Songbird virtual endpoint relay designed for single-ingress gate surface; membrane TLS sovereignty planned. See `SONGBIRD_VIRTUAL_ENDPOINT_RELAY_DESIGN.md`.
+- **Neural API perceptron routing** — L4 weighted selection impulse dispatched to biomeOS; single-layer perceptron design for L5 learned routing published; training pipeline uses existing `dispatch_telemetry.jsonl`. See `NEURAL_API_PERCEPTRON_DESIGN.md`.
+- **grapheneGate portable trust anchor** — Pixel 8a (GrapheneOS) added to ecosystem manifest as `portable_anchor` gate class; three-role evolution (beacon → relay → mesh seed) for overseas/hostile-network operation. See `GRAPHENEGATE_BOOTSTRAP_STANDARD.md`.
+- **Topology-aware routing** — Network segment model with latency estimates and affinity values published in `TOPOLOGY_MAP.toml`; discovery.peers extended with latency_ms field; routing impulse dispatched to biomeOS.
+
+---
+
 ## Cross-References
 
 - `GATE_TEAM_COORDINATION_MATRIX.md` — gate/team/hardware/project SSOT
@@ -238,7 +249,11 @@ the sync chain works. Report sync results in your ack.
 - `DNS_NS_CUTOVER_INSTRUCTIONS.md` — step-by-step NS registrar procedure
 - `GATE_SPRING_OWNERSHIP.md` — canonical spring routing
 - `IMPULSE_POTENTIAL_STANDARD.md` — impulse format and lifecycle
+- `TOPOLOGY_MAP.toml` — network segment model with latency/affinity
+- `GRAPHENEGATE_BOOTSTRAP_STANDARD.md` — portable trust anchor protocol
+- `SONGBIRD_VIRTUAL_ENDPOINT_RELAY_DESIGN.md` — single-ingress design
+- `NEURAL_API_PERCEPTRON_DESIGN.md` — learned routing evolution
 
 ---
 
-*Wave 67. The infrastructure is built. Now we validate and cut over.*
+*Wave 68. Infrastructure built. Routing learns. Trust goes portable.*

@@ -55,6 +55,7 @@ work together — it is the bonding mechanics, not the atoms.
 | **strandGate** | Bioinformatics | 64-core | — | — | Large | ABG science, genomics pipelines |
 | **northGate** | Flagship AI/LLM (future) | — | — | — | — | Node Atomic planned |
 | **westGate** | Cold storage (future) | — | — | — | 76TB | Nest Atomic planned |
+| **grapheneGate** | Pixel 8a (GrapheneOS) | Tensor G3 | 8GB | — | 128GB | Portable trust anchor, Dark Forest beacon |
 | **golgiBody** | DigitalOcean VPS | 1 vCPU | 2GB | — | 50GB | Periplasmic sync, NUCLEUS relay |
 
 ---
@@ -204,7 +205,8 @@ this file for Songbird federation, TURN traversal, and family identity.
 | Roaming mobile | LAN ↔ cellular | Direct when LAN, TURN fallback | Conditional |
 | Friend tower | External household | TURN :3478 → federation | Yes |
 | NAS/depot | LAN backbone | Direct TCP :7700 to VPS | No |
+| Portable anchor | WiFi / cellular | TURN :3478 → federation or BLE beacon | Conditional |
 
 ---
 
-*Wave 60. Eukaryotic unicellular. Yeast runs the biosphere.*
+*Wave 68. Colonial phase. Portable trust anchors extend the mesh.*

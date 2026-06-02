@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-02 (Wave 68 post-review: Deep debt 18/18 complete. ironGate cellMembrane 7/7 complete. Cascade 38/38 parity. Mesh validation structural 100% PASS (3 gaps fixed: songbird/beardog primal fields in membrane graph, capability.resolve in registry). Live mesh tests blocked on southGate ack — impulse dispatched. S1 TLS 7-day gate completes ~June 7. DNS NS cutover instructions ready. Dependency evolution impulses dispatched to southGate + strandGate.)
+**Last updated**: 2026-06-02 (Wave 68 sovereign evolution: Four strategic domains added — (1) Songbird routing consolidation (TCP Tier 5 blocked in release builds, droppable port validation, virtual endpoint relay designed), (2) Neural API perceptron evolution (L4 weighted routing impulse dispatched, perceptron design doc published, topology affinity specified), (3) grapheneGate portable trust anchor (manifest entry, bootstrap standard, three-role evolution), (4) Network topology leverage (TOPOLOGY_MAP.toml published, segment/affinity model, latency in discovery.peers). Compute trio ownership moved to biomeGate. 6 impulses active. Cascade 38/38 parity.)
 
 ---
 
