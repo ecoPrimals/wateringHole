@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-01 (Wave 67 post-cascade: P0 blockers CLEARED — Songbird socket fix (eb913612), biomeOS capability.call (9ed36983), bearDog S4 config (Wave 119). 836 tests, 58 scenarios, 93 experiments, 33 compositions, 490+ methods. Phase 0 complete, Phase 1 mesh validation NEXT.)
+**Last updated**: 2026-06-02 (Wave 68 post-review: Deep debt 18/18 complete. ironGate cellMembrane 7/7 complete. Cascade 38/38 parity. Mesh validation structural 100% PASS (3 gaps fixed: songbird/beardog primal fields in membrane graph, capability.resolve in registry). Live mesh tests blocked on southGate ack — impulse dispatched. S1 TLS 7-day gate completes ~June 7. DNS NS cutover instructions ready. Dependency evolution impulses dispatched to southGate + strandGate.)
 
 ---
 
