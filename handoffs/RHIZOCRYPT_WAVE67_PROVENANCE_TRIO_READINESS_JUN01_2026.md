@@ -31,6 +31,13 @@ fail on the dehydration commit path when LoamSpine is discovered at runtime.
 **Fix**: All 5 method names corrected and centralized in `permanent.rs::wire`
 constants module. Aligned with LoamSpine's method negotiation protocol.
 
+**Bug 2**: `ProvenanceNotifier.connect()` was never called in production — all
+push notifications (`contribution.record_session`, `record_dehydration`,
+`record_provenance`) were silent no-ops.
+
+**Fix**: `connect()` now called during `PrimalLifecycle::start()` with graceful
+failure. `notify_session_commit()` hooked to the dehydration commit path.
+
 **Validation**: 1,654 tests passing, 0 clippy warnings.
 
 ---
@@ -55,7 +62,7 @@ constants module. Aligned with LoamSpine's method negotiation protocol.
 | Component | Status | Notes |
 |-----------|--------|-------|
 | `provenance.create_braid` | Manifest only | In CONSUMED_CAPABILITIES; no client method yet |
-| `ProvenanceNotifier` | Ready | Push on dehydration/session commit events |
+| `ProvenanceNotifier` | **Fixed** (v0.14.1) | Connected at startup; push on dehydration + session commit |
 | `ProvenanceClient` | Query only | Read ops wired; write (braid create) not yet |
 
 **Remaining**: Implement `ProvenanceClient::create_braid` + post-append hook.
