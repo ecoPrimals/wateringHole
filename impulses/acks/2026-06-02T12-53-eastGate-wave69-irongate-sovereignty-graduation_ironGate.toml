@@ -1,0 +1,35 @@
+[ack]
+gate = "ironGate"
+timestamp = "2026-06-02T14:20:00-04:00"
+status = "acknowledged"
+notes = """
+All 5 items received. Status:
+
+1. S1 TLS GRADUATION (P0): READY to execute. 13+ days clean confirmed.
+   Requires manual DNS operator action (Cloudflare proxy removal).
+   Post-removal 7-day monitoring will begin immediately after.
+
+2. S4 AUTH FORMAL GATE (P0): READY. bearDog BTSP config confirmed shipped
+   (southGate Wave 119+123). Will restart services with BTSP-only auth
+   and begin 7-day event logging. Blocked on operator schedule.
+
+3. RELAY BASH→RUST (P1): PARTIALLY DONE. relay.rs (mediate + ship + run)
+   is live in membrane-shadow. gate.pull/check now uses `membrane` binary
+   when available on VPS. The 4 VPS bash scripts are operational fallbacks.
+   Remaining: deploy `membrane` binary to golgiBody, verify relay chain
+   works via Rust path, then archive bash scripts.
+   Disk cleanup: will clear stale cargo targets and orphan logs.
+
+4. FORGEJO ACTIONS CI (P2): Acknowledged. Will evaluate post-graduation.
+
+5. S3 CONTENT CUTOVER (P2): Acknowledged. Awaiting DNS NS cutover (item 1
+   prerequisite). Will coordinate with flockGate when ready.
+
+Timeline:
+- Items 1+2: within 48h (requires operator session on VPS)
+- Item 3: binary deploy on next VPS session, bash archive after validation
+- Items 4+5: post-graduation, Wave 70+
+
+cellMembrane code state: 209 tests, zero clippy, graduated composition
+live (Wave 68). All shadow functions ready for VPS deployment.
+"""
