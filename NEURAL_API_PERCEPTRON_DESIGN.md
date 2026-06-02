@@ -203,14 +203,52 @@ If perceptron error rate exceeds threshold → automatic fallback to rules
 
 ## Timeline
 
-| Phase | Wave | Owner | Prerequisite |
-|-------|------|-------|-------------|
-| L4 weighted selection complete | 69 | southGate (biomeOS) | First-match replaced with score() |
-| Feature extraction in primalSpring | 70 | eastGate | L4 complete, telemetry flowing |
-| Shadow mode + offline training | 71 | eastGate + biomeGate | barraCuda ml.mlp_train wired |
-| Epsilon-greedy adoption | 72 | southGate (biomeOS) | Shadow agreement >90% |
-| Full graduation | 73+ | southGate (biomeOS) | Epsilon performance validated |
+| Phase | Wave | Owner | Status |
+|-------|------|-------|--------|
+| L4 weighted selection complete | 71 | southGate (biomeOS) | **DONE** — all 4 discovery paths use `select_best()` |
+| Topology affinity factor | 71 | southGate (biomeOS) | **DONE** — transport-inferred multiplier in score() |
+| A/B shadow logging | 71 | southGate (biomeOS) | **DONE** — milestone summaries, disagreement tracking |
+| PathwayLearner feedback | 71+ | southGate (biomeOS) | **DONE** — graph per-node timing feeds routing weights |
+| Feature extraction in primalSpring | 72 | eastGate | L4 complete, telemetry flowing |
+| Shadow mode + offline training | 73 | eastGate + biomeGate | barraCuda ml.mlp_train wired |
+| biomeOS perceptron consumer | 73 | southGate (biomeOS) | Shadow mode ready, consumes recommendations |
+| Epsilon-greedy adoption | 74 | southGate (biomeOS) | Shadow agreement >90% |
+| Full graduation | 75+ | southGate (biomeOS) | Epsilon performance validated |
+
+## biomeOS Shadow Mode Integration (v3.95+)
+
+biomeOS will consume perceptron recommendations via a new `PerceptronAdvisor` trait:
+
+```rust
+trait PerceptronAdvisor {
+    fn recommend(&self, capability: &str, candidates: &[Arc<str>]) -> Option<Arc<str>>;
+}
+```
+
+Integration in `select_primary()`:
+
+```rust
+// Rule-based choice (current)
+let rule_choice = weights.select_best(capability, &candidates);
+
+// Perceptron choice (shadow mode — observes only)
+let nn_choice = self.perceptron_advisor.recommend(capability, &candidates);
+
+// Log disagreement (feeds Phase 1 shadow metrics)
+if rule_choice != nn_choice {
+    info!("perceptron shadow: rule={:?} nn={:?}", rule_choice, nn_choice);
+}
+
+// Rule-based decides until epsilon-greedy graduation
+rule_choice
+```
+
+Perceptron weights are loaded from `neural_routing_perceptron.bin` in the
+gate data directory, updated periodically by barraCuda's `ml.mlp_train`.
+`neural_api.weight_health` RPC already exposes shadow routing stats (total
+dispatches, disagreements, divergence %). The perceptron forward pass must
+remain <0.1ms to stay in the hot path.
 
 ---
 
-*Wave 68. The Neural API begins to earn its name.*
+*Wave 71. L4 weighted routing earns its name. The perceptron watches and learns.*
