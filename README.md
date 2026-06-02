@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 2, 2026 (Wave 68: graduated composition, dependency evolution, mesh validation. Wave 67 complete — vocabulary evolution (`signal`→`composition`), Deep Debt II, glacial cutover resolved. 835 tests, 57 scenarios, 33 composition graphs, 490+ methods. Wire protocol (`signal.dispatch`) unchanged. 21 active handoffs + 411 archived.)
+**Last Updated**: June 2, 2026 (Wave 68: graduated composition, dependency evolution, mesh validation. Wave 67 complete — vocabulary evolution (`signal`→`composition`), Deep Debt II, glacial cutover resolved. 835 tests, 57 scenarios, 33 composition graphs, 490+ methods. Wire protocol (`signal.dispatch`) unchanged. 20 active handoffs + 412 archived.)
 
 ---
 
