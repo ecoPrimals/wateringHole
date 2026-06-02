@@ -1,5 +1,0 @@
-
-[[acks]]
-gate = "ironGate"
-timestamp = "2026-06-01T16:57:00-04:00"
-note = "Reviewed songbird-http-client socket_discovery.rs — discover_ipc_endpoint() and discover_security_socket() already implement full XDG chain with env var priority. The issue is that SecurityRpcClient::from_env() defaults to neural mode with nat0 fallback. This is southGate-owned code (songBird primal). ironGate confirmed: our cellMembrane relay + impulse modules use native UDS (no socat, no hardcoded paths)."
