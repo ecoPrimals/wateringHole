@@ -1,20 +1,22 @@
 # Wave 70 — Remaining Work & Status
 
-**Date**: 2026-06-02 (evening)
+**Date**: 2026-06-03 (morning, updated)
 **Author**: eastGate (overwatch)
-**Wave**: 70 (post Wave 68-69 evolution sprint)
-**Status**: Active — guides Wave 71+ assignments
+**Wave**: 71 (post Wave 70 overnight sprint)
+**Status**: Active — guides Wave 72+ assignments
 **Supersedes**: WAVE68_SOVEREIGN_EVOLUTION_REMAINING_WORK_JUN02_2026.md (archived)
 
 ---
 
 ## Executive Summary
 
-Massive evolution sprint since Wave 68. southGate delivered on all P1 items
-(L4 routing, topology affinity, ring elimination, virtual relay Phase 1).
-ironGate executed sovereignty graduation (S4 active, relay Rust-native, VPS
-deployed). strandGate provenance trio fully resolved. biomeGate is temporarily
-offline (kernel recovery) — compute trio PAUSED.
+Massive evolution sprint Waves 68-71. southGate delivered ALL P1 items. ironGate
+executed sovereignty graduation AND S3 VPS readiness (cutover is a single DNS flip).
+bearDog shipped grapheneGate keystore design. primalSpring hardened security
+(deny on missing scopes, real latency probes). projectNUCLEUS built genomeBin
+scaffold. projectFOUNDATION fixed 3 failing tests and typed all errors. strandGate
+provenance trio fully resolved. biomeGate offline (kernel recovery) — compute trio
+PAUSED.
 
 Two operator-gated items remain on the glacial critical path: DNS NS registrar
 cutover and eastGate mesh validation initiation.
@@ -58,7 +60,7 @@ cutover and eastGate mesh validation initiation.
 |--------|-----------|-----------|
 | **Songbird** v0.2.5 | latency_ms, mesh.probe_latency, virtual relay Phase 1 (shadow), relay pooling, hickory-resolver 0.25, sled eliminated (Wave 135) | Phase 2: flip virtual default, BTSP relay validation, TLS sovereignty (Phase C, horizon) |
 | **biomeOS** v3.97 | L4 weighted routing, topology affinity, --tcp-only deprecated, HTTP removed, A/B shadow active, PathwayLearner, deep debt waves 71-72 (map_err sweep, test extraction 12 files) | A/B shadow analysis completion (1000 dispatches), perceptron shadow mode (needs barraCuda), String error types (GeneticsTier, EscalationManager) |
-| **bearDog** v0.9.0 w128b | ring→aws-lc-rs, env migration COMPLETE (803+ constants), base64-url removed, dep consolidation | S4 auth partner (7-day gate active), grapheneGate keystore design (P2), pure-Rust crypto horizon (P3) |
+| **bearDog** v0.9.0 w129 | ring→aws-lc-rs, env migration COMPLETE (803+ constants), **grapheneGate keystore design** (KeystoreTransport trait, AndroidKeymaster variant, device detection), pure-Rust crypto horizon documented | S4 auth partner (7-day gate active), grapheneGate Phase 2 hardware wiring (NDK + device), pure-Rust crypto (P3) |
 
 ### 2B. biomeGate — PAUSED (gate offline)
 
@@ -85,10 +87,11 @@ Hardware deployment remains post-mesh-validation (P3).
 
 | Project | Delivered | Remaining |
 |---------|-----------|-----------|
-| **cellMembrane** | S1 verified, S4 activated, disk 60%, membrane binary on VPS (6.1M musl), relay bash→Rust COMPLETE, family seed deployed, deep debt (CascadeMode enum) | S4 gate monitoring (auto), NS cutover (operator), S3 cutover coord |
-| **projectNUCLEUS** | Shared registry, Forgejo CI primary, grapheneGate manifest, 95 GB reclaimed | Forgejo Actions CI evaluation (P2) |
+| **cellMembrane** w71 | S1 verified, S4 activated, disk 60%, membrane on VPS, relay Rust-native, **legacy cascade() REMOVED**, **3 new commands** (relay.status, gate.health, content.verify), **S3 VPS READY** (Caddyfile configured, cutover = single DNS flip) | S4 monitoring (auto, ends ~Jun 9), NS cutover (operator), S3 cutover coord |
+| **projectNUCLEUS** w71 | Shared registry, Forgejo CI primary, **genomeBin scaffold** (manifest + harvest.sh), biomeGate OFFLINE in gate_manifest, deep debt (unreachable!() eliminated, env-configurable ports) | Forgejo Actions CI evaluation (P2) |
+| **projectFOUNDATION** w71 | **3 failing tests FIXED** (race conditions), **typed errors** (CliError enum, DegradationLevel enum, Box\<dyn Error\> eliminated), lineage counts synced (17,600+) | Validation workload freshness (P2), expression doc refresh |
 | **NestGate** v0.5.0 s84b | /tmp centralized, doc hygiene, 12,522+ tests | Maintenance mode |
-| **petalTongue** v1.6.8 | Error typing, Tokio narrowed (6 crates), dead code wired, TRUE PRIMAL | Maintenance mode |
+| **petalTongue** v1.6.8 | Error typing, Tokio narrowed (6 crates), dead code wired, cfg(test) accessors | Maintenance mode |
 
 ### 2E. flockGate
 
@@ -100,7 +103,7 @@ Hardware deployment remains post-mesh-validation (P3).
 
 | Project | Status | Remaining |
 |---------|--------|-----------|
-| **primalSpring** | Validation scenarios written | Live mesh test initiation, perceptron feature extraction (P2) |
+| **primalSpring** v0.9.31 w71 | Security hardened (deny on missing scopes, real latency probes, per-primal cap validation), deprecated API migration (5 experiments), 842 tests | Live mesh test initiation, perceptron feature extraction (P2) |
 | **squirrel** | Stable | Maintenance |
 | **skunkBat** | Stable | Maintenance |
 

@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-02 evening (Wave 70 — post-sprint: southGate ALL P1 DELIVERED (L4 routing, topology affinity, ring→aws-lc-rs, virtual relay Phase 1, probe_latency, hickory 0.25). ironGate sovereignty graduation EXECUTED (S4 7-day gate ACTIVE, membrane binary on VPS, relay bash→Rust COMPLETE, disk 60%). strandGate provenance trio RESOLVED. biomeGate OFFLINE (kernel recovery) — compute trio PAUSED. 29 handoffs + 15 impulses archived. Cascade 37/38 (petalTongue resolved manually).)
+**Last updated**: 2026-06-03 morning (Wave 71 — overnight sprint: cellMembrane S3 VPS READY (Caddyfile configured, cutover = single DNS flip, 3 new commands, cascade() removed). bearDog grapheneGate keystore design COMPLETE (KeystoreTransport trait, AndroidKeymaster variant). primalSpring security hardened (deny missing scopes, real latency probes, deprecated API migration, 842 tests). projectNUCLEUS genomeBin scaffold + biomeGate OFFLINE in manifests. projectFOUNDATION 3 failing tests FIXED, typed errors. Cascade 38/38 clean.)
 
 ---
 
@@ -318,17 +318,19 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 70 post-sprint)**: Criteria 1 sovereignty: S2 GRADUATED,
-S4 7-day gate ACTIVE (started Jun 2, ends ~Jun 9), S1 infra verified (198 probes, 0
-failures), S3 ready (sporePrint 101 tests, zero-C). **Two operator actions on critical
-path**: DNS NS registrar cutover and S1 Cloudflare removal post-cutover. Criteria 2
-mesh: both sides READY — Songbird `latency_ms` + `mesh.probe_latency` wired, biomeOS
-endpoints verified, virtual relay Phase 1 in shadow. **eastGate must initiate paired
-test**. Criteria 3 VPS Nest deployed — membrane binary on VPS (6.1M musl), relay
-Rust-native, disk 60%. Criteria 4 flockGate validated over WAN. Criteria 5 sovereign
-DNS infra live, registrar cutover pending. Criteria 6 Cloudflare removal follows
-NS cutover. biomeGate OFFLINE (kernel recovery) — compute trio PAUSED but not on
-glacial critical path.
+**Current assessment (Wave 71)**: Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate
+ACTIVE (started Jun 2, ends ~Jun 9). S1 infra verified (198 probes, 0 failures). S3
+**VPS READY** — cellMembrane confirmed Caddyfile configured, content routes live,
+cutover = single DNS A-record flip. **Two operator actions on critical path**: DNS NS
+registrar cutover and S1 Cloudflare removal post-cutover. Criteria 2 mesh: both sides
+READY — Songbird `latency_ms` + `mesh.probe_latency` wired, biomeOS endpoints verified,
+virtual relay Phase 1 in shadow. primalSpring security hardened (deny missing scopes).
+**eastGate must initiate paired test**. Criteria 3 VPS deployed — membrane binary on
+VPS (6.1M musl), relay Rust-native, disk 60%, 3 new monitoring commands (relay.status,
+gate.health, content.verify). Criteria 4 flockGate validated over WAN. Criteria 5
+sovereign DNS infra live, registrar cutover pending. Criteria 6 Cloudflare removal
+follows NS cutover. biomeGate OFFLINE — compute trio PAUSED, not on glacial critical
+path. grapheneGate keystore design COMPLETE (bearDog Wave 129).
 
 ---
 

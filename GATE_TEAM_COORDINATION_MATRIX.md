@@ -6,7 +6,7 @@ hierarchy. Consolidates data from `GATE_SPRING_OWNERSHIP.md` (canonical
 spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 `ecosystem_manifest.toml` (sync profiles).
 
-**Last updated**: 2026-06-02 evening (Wave 70 — post-sprint status update)
+**Last updated**: 2026-06-03 morning (Wave 71 — overnight sprint deliveries absorbed)
 
 **Authority**: wateringHole consensus
 
@@ -119,8 +119,8 @@ Tier 3 — Domain Science (per-gate)
 | Gate | Active Work | Priority | Status |
 |------|-------------|----------|--------|
 | **eastGate** | Live mesh validation (`discovery.peers` + `capability.call`). DNS NS registrar cutover (manual). Perceptron feature extraction. | P0 glacial | **READY** — both sides prepared |
-| **ironGate** | S4 Auth 7-day gate monitoring (ends ~Jun 9). S1 TLS graduation (post NS cutover). S3 content cutover coord w/ flockGate. Forgejo Actions CI eval (P2). | P0 glacial | S4 **ACTIVE**, S1 infra verified |
-| **southGate** | Mesh validation partner. A/B shadow analysis (1000 dispatches). Virtual relay Phase 2 (P2). bearDog S4 auth partner + grapheneGate keystore design (P2). | P1 evolution | All P1 **DELIVERED** |
+| **ironGate** | S4 Auth 7-day gate monitoring (ends ~Jun 9). S1 TLS graduation (post NS cutover). **S3 VPS READY** (cutover = DNS flip). genomeBin scaffold. Forgejo Actions CI eval (P2). | P0 glacial | S4 **ACTIVE**, S3 VPS **READY** |
+| **southGate** | Mesh validation partner. A/B shadow analysis (1000 dispatches). Virtual relay Phase 2 (P2). bearDog S4 auth partner. grapheneGate Phase 2 hardware wiring (P3). | P1 evolution | All P1 **DELIVERED**, keystore **DESIGNED** |
 | **biomeGate** | Compute trio PAUSED. Resume on kernel recovery. | P1 HPC | **OFFLINE** |
 | **flockGate** | sporePrint S3 content cutover (post-DNS). WAN relay maintenance. | P2 cutover | Ready, waiting on NS cutover |
 | **strandGate** | Hardware deployment (post mesh). | P3 expansion | Provenance trio **RESOLVED** |
@@ -151,4 +151,4 @@ Tier 3 — Domain Science (per-gate)
 
 ---
 
-*Wave 70. Sprint delivered. Two operator actions on critical path. Compute trio paused. Everything else done or running.*
+*Wave 71. Every team delivered. S3 VPS ready — cutover is a DNS flip. Two operator actions on critical path.*
