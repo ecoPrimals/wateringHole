@@ -25,18 +25,19 @@ cutover and eastGate mesh validation initiation.
 
 ## Track 1: Glacial Cutover (P0)
 
-### 1A. Live Mesh Validation (eastGate + southGate)
+### 1A. Live Mesh Validation (eastGate + strandGate) — WAVE 72 UPDATE
 
 | Item | Status | Notes |
 |------|--------|-------|
-| Songbird `latency_ms` in `discovery.peers` | **DONE** | Wire + active probing (`mesh.probe_latency`) |
+| Songbird `latency_ms` in `discovery.peers` | **DONE** (wire) | Populated as null — HTTP probing not invoked (P2) |
 | biomeOS endpoints ready | **DONE** | Cross-gate mesh partner verified |
-| `discovery.peers` live 2-gate test | **TODO** | eastGate must initiate paired test with southGate |
-| `capability.call` cross-gate test | **TODO** | Scenario written, needs live run |
-| Cross-subnet routing (192.168.4.x) | **TODO** | Eero mesh bridge, should route directly |
-| 3+ gate plasmodium collective | BLOCKED | After 2-gate verified |
+| `discovery.peers` live 2-gate test | **DONE** | Wave 72: eastGate ↔ strandGate, 1 peer, quality 1.0 |
+| `capability.call` cross-gate test | **BLOCKED** | Songbird raw TCP vs HTTP mismatch (P1 FRAGO filed) |
+| Cross-subnet routing (192.168.4.x) | **DEFERRED** | Used strandGate (same subnet) instead. Eero doesn't route VLANs |
+| 3+ gate plasmodium collective | BLOCKED | After capability.call fixed |
 
-**Critical path**: eastGate initiates live test. Both gates operational and ready.
+**Critical path**: Songbird `remote_dispatch.rs` must HTTP POST to `/jsonrpc` (not raw TCP).
+See: `wave72-songbird-remote-dispatch-fix` FRAGO.
 
 ### 1B. Sovereignty Shadow Graduation
 
