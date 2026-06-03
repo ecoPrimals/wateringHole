@@ -6,7 +6,7 @@ hierarchy. Consolidates data from `GATE_SPRING_OWNERSHIP.md` (canonical
 spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 `ecosystem_manifest.toml` (sync profiles).
 
-**Last updated**: 2026-06-03 (Wave 72 — strandGate compute trio pickup, westGate incoming)
+**Last updated**: 2026-06-03 (Wave 73 — mesh discovery LIVE, Songbird dispatch P1 FRAGO, all teams delivering)
 
 **Authority**: wateringHole consensus
 
@@ -118,9 +118,9 @@ Tier 3 — Domain Science (per-gate)
 
 | Gate | Active Work | Priority | Status |
 |------|-------------|----------|--------|
-| **eastGate** | Live mesh validation (`discovery.peers` + `capability.call`). DNS NS registrar cutover (manual). Perceptron feature extraction. | P0 glacial | **READY** — both sides prepared |
-| **ironGate** | S4 Auth 7-day gate monitoring (ends ~Jun 9). S1 TLS graduation (post NS cutover). **S3 VPS READY** (cutover = DNS flip). genomeBin scaffold. Forgejo Actions CI eval (P2). | P0 glacial | S4 **ACTIVE**, S3 VPS **READY** |
-| **southGate** | Mesh validation partner. A/B shadow analysis (1000 dispatches). Virtual relay Phase 2 (P2). bearDog S4 auth partner. grapheneGate Phase 2 hardware wiring (P3). | P1 evolution | All P1 **DELIVERED**, keystore **DESIGNED** |
+| **eastGate** | **Mesh discovery LIVE**. Awaiting Songbird dispatch fix for capability.call. DNS NS cutover (manual). Perceptron feature extraction. | P0 glacial | **MESH DISCOVERY DONE** — dispatch blocked on Songbird |
+| **ironGate** | S4 Auth 7-day gate (ends ~Jun 9). S3 VPS READY. genomeBin harvest 14/14. CI eval spec. westGate onboarding prep. strandGate NUCLEUS deploy. | P0 glacial | S4 **ACTIVE**, S3 VPS **READY**, genomeBin **VALIDATED** |
+| **southGate** | **Songbird P1: HTTP dispatch fix (CRITICAL PATH)**. biomeOS v3.98 mesh ready. bearDog w130 quantum purge. A/B shadow. | P0→P1 | Songbird dispatch = **GLACIAL BLOCKER** |
 | **biomeGate** | toadStool PAUSED (hardware). Resume on kernel recovery. | P1 HPC | **OFFLINE** |
 | **flockGate** | sporePrint S3 content cutover (post-DNS). WAN relay maintenance. | P2 cutover | Ready, waiting on NS cutover |
 | **strandGate** | Compute trio pickup: barraCuda ml.mlp_train + coralReef SPIR-V. NUCLEUS deploy. | P2 compute | **ACTIVE** (Wave 72) |
@@ -152,4 +152,4 @@ Tier 3 — Domain Science (per-gate)
 
 ---
 
-*Wave 72. strandGate activated for compute trio software work. westGate incoming this week. Two operator actions on glacial critical path.*
+*Wave 73. Mesh discovery LIVE. Songbird dispatch fix is THE glacial blocker. Every team has active forward work. Evolution never stops.*

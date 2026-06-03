@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-03 (Wave 72 — strandGate ACTIVATED for compute trio pickup: barraCuda ml.mlp_train (full) + coralReef SPIR-V (partial) reassigned from offline biomeGate. toadStool stays biomeGate (hardware-dependent). westGate INCOMING this week (76TB ZFS cold storage, Nest Atomic). Previous: cellMembrane S3 VPS READY, bearDog keystore DESIGNED, primalSpring security hardened, projectFOUNDATION tests FIXED.)
+**Last updated**: 2026-06-03 (Wave 73 — **MESH DISCOVERY LIVE**: eastGate ↔ strandGate 2-gate mesh operational (discovery.peers, mesh.health_check bidirectional). capability.call BLOCKED on Songbird HTTP dispatch (P1 FRAGO filed). biomeOS v3.98: runtime gate.register for mesh. bearDog w130: quantum_crypto feature-gated, deprecated purge (-369L). projectNUCLEUS: genomeBin harvest 14/14, CI eval spec. projectFOUNDATION: workload paths fixed. strandGate ACTIVE (compute trio). westGate INCOMING.)
 
 ---
 
@@ -318,21 +318,17 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 72)**: Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate
-ACTIVE (started Jun 2, ends ~Jun 9). S1 infra verified (198 probes, 0 failures). S3
-**VPS READY** — cellMembrane confirmed Caddyfile configured, content routes live,
-cutover = single DNS A-record flip. **Two operator actions on critical path**: DNS NS
-registrar cutover and S1 Cloudflare removal post-cutover. Criteria 2 mesh: both sides
-READY — Songbird `latency_ms` + `mesh.probe_latency` wired, biomeOS endpoints verified,
-virtual relay Phase 1 in shadow. primalSpring security hardened (deny missing scopes).
-**eastGate must initiate paired test**. Criteria 3 VPS deployed — membrane binary on
-VPS (6.1M musl), relay Rust-native, disk 60%, 3 new monitoring commands (relay.status,
-gate.health, content.verify). Criteria 4 flockGate validated over WAN. Criteria 5
-sovereign DNS infra live, registrar cutover pending. Criteria 6 Cloudflare removal
-follows NS cutover. biomeGate OFFLINE — toadStool stays biomeGate (hardware). **Compute
-trio software work reassigned to strandGate** (barraCuda ml.mlp_train + coralReef SPIR-V).
-**westGate INCOMING this week** (76TB ZFS cold storage, Nest Atomic). grapheneGate
-keystore design COMPLETE (bearDog Wave 129).
+**Current assessment (Wave 73)**: **MESH DISCOVERY LIVE** — first 2-gate mesh operational
+(eastGate ↔ strandGate, discovery.peers peer_count=1, mesh.health_check bidirectional
+healthy). Cross-gate capability.call BLOCKED on Songbird protocol mismatch (raw TCP vs
+HTTP on :7700) — P1 FRAGO filed. Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate
+ACTIVE (started Jun 2, ends ~Jun 9). S1 infra verified. S3 VPS READY (single DNS flip).
+**Songbird HTTP dispatch fix is THE critical path item.** Criteria 2 mesh: discovery
+layer PROVEN. Dispatch layer blocked. After Songbird fix → 3-gate plasmodium (add
+ironGate .238). biomeOS v3.98 shipped runtime gate.register for mesh partner readiness.
+Criteria 3 VPS deployed. Criteria 4 flockGate validated over WAN. Criteria 5 sovereign
+DNS live, registrar cutover pending (operator). Criteria 6 Cloudflare removal follows NS.
+strandGate ACTIVE (compute trio software). westGate INCOMING this week (76TB ZFS).
 
 ---
 
