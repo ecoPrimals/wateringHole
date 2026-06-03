@@ -1,7 +1,7 @@
 # Ecosystem Communication Standard — Three-Artifact Coordination
 
-**Authority**: primalSpring coordination
-**Status**: Active (Wave 63+, revised Wave 68)
+**Authority**: Overwatch (see `OVERWATCH_POSITION_STANDARD.md`)
+**Status**: Active (Wave 63+, revised Wave 68, Wave 75)
 **Prerequisites**: `IMPULSE_POTENTIAL_STANDARD.md`, `CONTEXT_BRAID_STANDARD.md`, `WATERFALL_PATTERN.md`
 **Lineage**: Synthesizes inter-gate coordination patterns into a unified standard
 
@@ -175,9 +175,9 @@ Critical paths the agent needs to read first.
 Active FRAGOs to check, gates to acknowledge, blockers.
 ```
 
-**Location**: Not persisted in git. Blurbs are composed by an overwatch agent
-(eastGate primalSpring) or by the operator, then delivered via copy-paste to
-the target gate's IDE session.
+**Location**: Not persisted in git. Blurbs are composed by the overwatch position
+(see `OVERWATCH_POSITION_STANDARD.md`) or by the operator, then delivered via
+copy-paste to the target gate's IDE session.
 
 **When to compose**: When bootstrapping a fresh team on a gate. When a primal
 changes ownership between gates. When a new wave begins and teams need
@@ -426,6 +426,7 @@ development:
 | Standard | File | Domain |
 |----------|------|--------|
 | This document | `ECOSYSTEM_COMMUNICATION_STANDARD.md` | Unified coordination model |
+| Overwatch Position | `OVERWATCH_POSITION_STANDARD.md` | Floating coordination role definition |
 | Impulse/Potential | `IMPULSE_POTENTIAL_STANDARD.md` | FRAGOs: event-driven work DAG |
 | Context Braids | `CONTEXT_BRAID_STANDARD.md` | Blurbs → braids graduation target |
 | WaterFall Pattern | `WATERFALL_PATTERN.md` | Transport: temporal sync across mesh |
@@ -440,6 +441,7 @@ development:
 
 | Wave | Change |
 |------|--------|
+| 75 | Overwatch position formalized as separate standard (`OVERWATCH_POSITION_STANDARD.md`). Authority updated from "primalSpring coordination" to "Overwatch" — reflecting the floating, sovereign-enabled nature of the role. |
 | 68 | Revised: three artifacts (Handoffs, FRAGOs, Blurbs) formally codified with provenance trio mapping. Blurbs recognized as pragmatic sweetGrass layer with graduation path to context braids. Escalation ladder, sprint cycle, anti-patterns updated. |
 | 63 | Initial: three-layer model (commits, impulses, context braids) synthesized from ecosystem practice. |
 
