@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-03 (Wave 73 — **MESH DISCOVERY LIVE**: eastGate ↔ strandGate 2-gate mesh operational (discovery.peers, mesh.health_check bidirectional). capability.call BLOCKED on Songbird HTTP dispatch (P1 FRAGO filed). biomeOS v3.98: runtime gate.register for mesh. bearDog w130: quantum_crypto feature-gated, deprecated purge (-369L). projectNUCLEUS: genomeBin harvest 14/14, CI eval spec. projectFOUNDATION: workload paths fixed. strandGate ACTIVE (compute trio). westGate INCOMING.)
+**Last updated**: 2026-06-03 (Wave 74 — **SONGBIRD CRITICAL PATH FIX DEPLOYED** (d6a6f714): HTTP dispatch, mesh_seed auto-bootstrap, string format, latency in health cycle. capability.call UNBLOCKED. barraCuda ml.mlp_train COMPLETE (strandGate, <150ms). biomeOS v3.99 perceptron consumer (shadow mode). bearDog w131 scopes fixed. NestGate s85 ZFS backend + content.replicate.pull + route.register (12,537 tests). sporePrint cas-manifest + CAS design. petalTongue mesh routing + WASM trim. Every team delivered.)
 
 ---
 
@@ -318,17 +318,16 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 73)**: **MESH DISCOVERY LIVE** — first 2-gate mesh operational
-(eastGate ↔ strandGate, discovery.peers peer_count=1, mesh.health_check bidirectional
-healthy). Cross-gate capability.call BLOCKED on Songbird protocol mismatch (raw TCP vs
-HTTP on :7700) — P1 FRAGO filed. Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate
-ACTIVE (started Jun 2, ends ~Jun 9). S1 infra verified. S3 VPS READY (single DNS flip).
-**Songbird HTTP dispatch fix is THE critical path item.** Criteria 2 mesh: discovery
-layer PROVEN. Dispatch layer blocked. After Songbird fix → 3-gate plasmodium (add
-ironGate .238). biomeOS v3.98 shipped runtime gate.register for mesh partner readiness.
-Criteria 3 VPS deployed. Criteria 4 flockGate validated over WAN. Criteria 5 sovereign
-DNS live, registrar cutover pending (operator). Criteria 6 Cloudflare removal follows NS.
-strandGate ACTIVE (compute trio software). westGate INCOMING this week (76TB ZFS).
+**Current assessment (Wave 74)**: **SONGBIRD FIX DEPLOYED — capability.call UNBLOCKED.**
+Discovery layer PROVEN (Wave 72). Dispatch layer fix shipped (Wave 73, d6a6f714). Live
+capability.call test is NEXT — execute NOW. After validation → 3-gate plasmodium (add
+ironGate .238). Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (started Jun 2,
+ends ~Jun 9). S1 infra verified. S3 VPS READY (single DNS flip, sporePrint CAS design done).
+Criteria 2 mesh: discovery PROVEN, dispatch UNBLOCKED, barraCuda ml.mlp_train COMPLETE,
+biomeOS v3.99 perceptron consumer READY, NestGate ZFS backend + cross-gate federation BUILT.
+Criteria 3 VPS deployed. Criteria 4 flockGate validated over WAN. Criteria 5 sovereign DNS
+live, registrar cutover pending (operator). Criteria 6 Cloudflare removal follows NS.
+strandGate ACTIVE (barraCuda done, coralReef SPIR-V next). westGate INCOMING this week.
 
 ---
 

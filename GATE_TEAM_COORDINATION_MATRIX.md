@@ -6,7 +6,7 @@ hierarchy. Consolidates data from `GATE_SPRING_OWNERSHIP.md` (canonical
 spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 `ecosystem_manifest.toml` (sync profiles).
 
-**Last updated**: 2026-06-03 (Wave 73 — mesh discovery LIVE, Songbird dispatch P1 FRAGO, all teams delivering)
+**Last updated**: 2026-06-03 (Wave 74 — Songbird critical path FIX deployed, capability.call UNBLOCKED, full ecosystem sprint)
 
 **Authority**: wateringHole consensus
 
@@ -118,12 +118,12 @@ Tier 3 — Domain Science (per-gate)
 
 | Gate | Active Work | Priority | Status |
 |------|-------------|----------|--------|
-| **eastGate** | **Mesh discovery LIVE**. Awaiting Songbird dispatch fix for capability.call. DNS NS cutover (manual). Perceptron feature extraction. | P0 glacial | **MESH DISCOVERY DONE** — dispatch blocked on Songbird |
-| **ironGate** | S4 Auth 7-day gate (ends ~Jun 9). S3 VPS READY. genomeBin harvest 14/14. CI eval spec. westGate onboarding prep. strandGate NUCLEUS deploy. | P0 glacial | S4 **ACTIVE**, S3 VPS **READY**, genomeBin **VALIDATED** |
-| **southGate** | **Songbird P1: HTTP dispatch fix (CRITICAL PATH)**. biomeOS v3.98 mesh ready. bearDog w130 quantum purge. A/B shadow. | P0→P1 | Songbird dispatch = **GLACIAL BLOCKER** |
+| **eastGate** | **capability.call UNBLOCKED — live test NOW**. 3-gate plasmodium. DNS NS cutover (manual). primalSpring evolution: mesh composition, perceptron extraction. | P0 glacial | Songbird fix deployed — **EXECUTE** |
+| **ironGate** | S4 Auth gate (ends ~Jun 9). S3 VPS READY. CI runner provisioned. westGate onboarding. NestGate ZFS + federation BUILT. sporePrint CAS designed. | P0 glacial | S4 **ACTIVE**, NestGate **ZFS READY** |
+| **southGate** | **ALL CRITICAL PATH ITEMS RESOLVED.** Songbird dispatch FIXED. biomeOS v3.99 perceptron consumer. bearDog w131 scopes. | P1 evolution | **DELIVERED** — standing by for mesh test |
 | **biomeGate** | toadStool PAUSED (hardware). Resume on kernel recovery. | P1 HPC | **OFFLINE** |
 | **flockGate** | sporePrint S3 content cutover (post-DNS). WAN relay maintenance. | P2 cutover | Ready, waiting on NS cutover |
-| **strandGate** | Compute trio pickup: barraCuda ml.mlp_train + coralReef SPIR-V. NUCLEUS deploy. | P2 compute | **ACTIVE** (Wave 72) |
+| **strandGate** | barraCuda ml.mlp_train **COMPLETE**. coralReef SPIR-V next. Mesh peer LIVE. | P2 compute | **DELIVERING** (Wave 73) |
 | **westGate** | 76TB ZFS cold storage. Nest Atomic. Gate setup + NUCLEUS deploy. | P3 expansion | **INCOMING** (ETA this week) |
 | **golgiBody** | Disk at 60%. S4 monitoring active. Relay chain Rust-native. | Maintenance | **HEALTHY** |
 
@@ -152,4 +152,4 @@ Tier 3 — Domain Science (per-gate)
 
 ---
 
-*Wave 73. Mesh discovery LIVE. Songbird dispatch fix is THE glacial blocker. Every team has active forward work. Evolution never stops.*
+*Wave 74. Songbird fix DEPLOYED. capability.call UNBLOCKED. barraCuda ml.mlp_train DONE. Every team delivered and evolving forward. Evolution never stops.*

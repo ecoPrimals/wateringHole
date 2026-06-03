@@ -1,25 +1,23 @@
 # Wave 70 — Remaining Work & Status
 
-**Date**: 2026-06-03 (Wave 73 update)
-**Author**: eastGate (overwatch)
-**Wave**: 73 (post live mesh validation)
-**Status**: Active — guides Wave 73+ assignments
+**Date**: 2026-06-03 (Wave 74 update)
+**Author**: eastGate (overwatch + evolution)
+**Wave**: 74 (post Songbird critical path fix)
+**Status**: Active — guides Wave 74+ assignments
 **Supersedes**: WAVE68_SOVEREIGN_EVOLUTION_REMAINING_WORK_JUN02_2026.md (archived)
 
 ---
 
 ## Executive Summary
 
-**MESH DISCOVERY IS LIVE.** First successful 2-gate mesh (eastGate ↔ strandGate):
-`discovery.peers` returns remote peers, `mesh.health_check` bidirectional healthy.
-Cross-gate `capability.call` BLOCKED on Songbird protocol mismatch (raw TCP vs HTTP
-on port 7700) — P1 FRAGO filed. biomeOS v3.98 shipped runtime `gate.register` for
-mesh. bearDog Wave 130 purged deprecated modules + feature-gated quantum_crypto.
-projectNUCLEUS validated genomeBin harvest 14/14. projectFOUNDATION fixed workload
-paths + refreshed expressions.
+**SONGBIRD CRITICAL PATH FIX DEPLOYED.** All 4 P1/P2 blockers resolved (d6a6f714):
+HTTP POST dispatch, mesh_seed auto-bootstrap, string format parsing, latency in health
+cycle. Cross-gate `capability.call` UNBLOCKED. Full ecosystem sprint: barraCuda
+ml.mlp_train COMPLETE (strandGate, <150ms). biomeOS v3.99 perceptron consumer (shadow).
+bearDog w131 scopes fixed. NestGate ZFS backend + federation + route.register. sporePrint
+cas-manifest + CAS design. petalTongue mesh content routing + WASM trim. Every team delivered.
 
-**Critical path**: Songbird remote dispatch HTTP fix → capability.call cross-gate →
-3-gate plasmodium collective. DNS NS registrar cutover remains operator-gated.
+**Critical path**: Live capability.call test → 3-gate plasmodium → DNS NS cutover.
 
 ---
 
@@ -29,15 +27,16 @@ paths + refreshed expressions.
 
 | Item | Status | Notes |
 |------|--------|-------|
-| Songbird `latency_ms` in `discovery.peers` | **DONE** (wire) | Populated as null — HTTP probing not invoked (P2) |
-| biomeOS endpoints ready | **DONE** | Cross-gate mesh partner verified |
+| Songbird `latency_ms` in `discovery.peers` | **DONE** | Wired into health cycle every 4th tick (~2min). Songbird w73. |
+| biomeOS endpoints ready | **DONE** | v3.99: gate.register + perceptron consumer |
 | `discovery.peers` live 2-gate test | **DONE** | Wave 72: eastGate ↔ strandGate, 1 peer, quality 1.0 |
-| `capability.call` cross-gate test | **BLOCKED** | Songbird raw TCP vs HTTP mismatch (P1 FRAGO filed) |
-| Cross-subnet routing (192.168.4.x) | **DEFERRED** | Used strandGate (same subnet) instead. Eero doesn't route VLANs |
-| 3+ gate plasmodium collective | BLOCKED | After capability.call fixed |
+| Songbird HTTP dispatch fix | **DONE** | d6a6f714: HTTP POST to /jsonrpc. FRAGO resolved. |
+| Songbird mesh_seed auto-bootstrap | **DONE** | d6a6f714: spawn_mesh_seed wired into startup. |
+| `capability.call` cross-gate test | **UNBLOCKED** | Songbird fix deployed. **LIVE TEST NEXT** |
+| Cross-subnet routing (192.168.4.x) | **DEFERRED** | Eero doesn't route VLANs. TURN relay available |
+| 3+ gate plasmodium collective | **UNBLOCKED** | After capability.call verified, add ironGate (.238) |
 
-**Critical path**: Songbird `remote_dispatch.rs` must HTTP POST to `/jsonrpc` (not raw TCP).
-See: `wave72-songbird-remote-dispatch-fix` FRAGO.
+**Critical path**: capability.call live test. Songbird fix deployed — execute NOW.
 
 ### 1B. Sovereignty Shadow Graduation
 
@@ -59,9 +58,9 @@ See: `wave72-songbird-remote-dispatch-fix` FRAGO.
 
 | Primal | Delivered | Remaining |
 |--------|-----------|-----------|
-| **Songbird** v0.2.5 | latency_ms, mesh.probe_latency, virtual relay Phase 1 (shadow), relay pooling, hickory-resolver 0.25, sled eliminated (Wave 135) | **P1**: HTTP dispatch fix (`remote_dispatch.rs` → POST `/jsonrpc`), `mesh_seed` auto-bootstrap wiring. P2: virtual relay Phase 2, `latency_ms` population, BTSP relay, TLS sovereignty |
-| **biomeOS** v3.98 | L4 routing, topology affinity, HTTP removed, A/B shadow, PathwayLearner, deep debt, **runtime gate.register + gate.list** (Wave 73), **string error types DONE** (GeneticsTier, EscalationManager → thiserror) | A/B shadow analysis completion (1000 dispatches), perceptron shadow mode (strandGate barraCuda unblocking), SONGBIRD_MESH_ENABLED alignment |
-| **bearDog** v0.9.0 w130 | ring→aws-lc-rs, env migration, grapheneGate keystore design, **quantum_crypto feature-gated**, **deprecated modules purged** (-369 lines, 0 .unwrap() in prod), pure-Rust crypto horizon | S4 auth partner (ends ~Jun 9), `auth.verify_ionic` scopes fix (P1), grapheneGate Phase 2 (P3), AI deprecated modules migration (P3) |
+| **Songbird** v0.2.5 w73 | All previous + **HTTP dispatch FIX** (d6a6f714), **mesh_seed auto-bootstrap**, string format parsing, **latency in health cycle** | Virtual relay Phase 2 (flip default, BTSP relay), TLS sovereignty (Phase C, horizon), env var alignment with biomeOS |
+| **biomeOS** v3.99 | All previous + **perceptron consumer interface** (36-dim, shadow mode, weight I/O, 13 tests), **test extraction wave 3** (771L extracted from http_client + lifecycle_manager) | A/B shadow analysis (1000 dispatch milestone), perceptron Phase 2 (epsilon-greedy, after trained weights), cross-gate mesh testing |
+| **bearDog** v0.9.0 w131 | All previous + **auth.verify_ionic scopes FIXED** (top-level scopes in all responses), health.liveness confirmed ALREADY IMPLEMENTED, Android type stack confirmed ALREADY feature-gated | AI deprecated modules design (type incompatibility, needs redesign), pure-Rust crypto tracking, mobile feature flag |
 
 ### 2B. biomeGate — OFFLINE (kernel recovery)
 
@@ -81,8 +80,8 @@ FRAGO: `wave72-strandgate-compute-trio-pickup` (supersedes `wave70-biomegate-dow
 | **loamSpine** | Tokio panic **FIXED**, anchoring pipeline **COMPLETE** |
 | **rhizoCrypt** | Discovery fallback hardening **DONE** |
 | **sweetGrass** | PROV-O completeness, privacy edge tests, store parity **DONE** |
-| **barraCuda** (pickup) | ml.mlp_train implementation — 36-dim perceptron, pure software. **Unblocks** biomeOS L5 + primalSpring perceptron |
-| **coralReef** (partial pickup) | SPIR-V output compiler (pure software). SM120 Blackwell testing remains biomeGate |
+| **barraCuda** (pickup) | **ml.mlp_train COMPLETE** — 36→16 perceptron, <150ms, dual-mode (dims + explicit), 6 new tests. MESH PEER LIVE. | coralReef SPIR-V (next) |
+| **coralReef** (partial pickup) | SPIR-V output compiler next (pure software). SM120 Blackwell testing remains biomeGate |
 
 strandGate hardware: Dual EPYC 7452 (64c), 256GB ECC — ideal for pure-software compute work.
 Hardware deployment (NUCLEUS) also proceeds on strandGate.
@@ -92,24 +91,24 @@ Hardware deployment (NUCLEUS) also proceeds on strandGate.
 | Project | Delivered | Remaining |
 |---------|-----------|-----------|
 | **cellMembrane** w71 | S1 verified, S4 activated, disk 60%, membrane on VPS, relay Rust-native, **legacy cascade() REMOVED**, **3 new commands** (relay.status, gate.health, content.verify), **S3 VPS READY** (Caddyfile configured, cutover = single DNS flip) | S4 monitoring (auto, ends ~Jun 9), NS cutover (operator), S3 cutover coord |
-| **projectNUCLEUS** w72 | Shared registry, Forgejo CI primary, genomeBin scaffold, **harvest validated 14/14**, **CI_EVALUATION.md spec**, gate_manifest synced (atomic labels, primal counts), clippy cfg_attr fix | strandGate + westGate deploy graphs (P2), Forgejo Actions CI (P2), `plasmidbin launch` auto-symlinks (P2) |
-| **projectFOUNDATION** w72 | 3 failing tests FIXED, typed errors, **workload binary paths corrected** (airSpring, ludoSpring, healthSpring, groundSpring), **expressions reviewed for Wave 72** | Continue deep debt (.unwrap() audit), cfg_attr patterns (P3) |
-| **NestGate** v0.5.0 s84b | /tmp centralized, doc hygiene, 12,522+ tests, Wave 72 mesh AAR + Songbird FRAGO filed | westGate CAS integration prep (P2), ZFS backend architecture (P2) |
-| **petalTongue** v1.6.8 | Error typing, Tokio narrowed (6 crates), dead code wired, cfg(test) accessors | Sovereign content rendering pipeline (post-S3 cutover), WASM optimization (P3) |
+| **projectNUCLEUS** w73 | All previous + **CI runner provisioning script**, **primalSpring CI workflow PoC**, **genomeBin harvest automation**, strandGate + westGate deploy graphs | Forgejo Actions full implementation (P2), plasmidbin auto-symlinks (P2) |
+| **projectFOUNDATION** w73 | All previous + **lineage freshness updated** (41,500+ ecosystem checks), **SPRING_VERSIONS.toml** (machine-readable), mesh evaluation spec (cross-gate = guideStone responsibility) | Spring evolution auto-tracking (P3), drift detection (P3) |
+| **NestGate** v0.5.0 s85 | All previous + **ZFS backend env** (`NESTGATE_STORAGE_BASE_PATH`), **content.replicate.pull** (cold-from-hot), **route.register** for mesh, 12,537 tests | westGate onboarding (ZFS dataset provision), cross-gate integration test, streaming transfer (P3) |
+| **petalTongue** v1.6.8 w73 | All previous + **mesh content routing** (4-tier discovery: UDS→TCP→socket-dir→mesh), **WASM trim** (toml+tracing removed), **Tokio reduction** (dead deps from 3 crates), 6,209 tests | Sovereign rendering post-cutover, WASM bundle profiling (P3) |
 
 ### 2E. flockGate
 
 | Project | Delivered | Remaining |
 |---------|-----------|-----------|
-| **sporePrint** w70 | Zero-C deps, typed returns, paths module, 101 tests, source registry parity | S3 content cutover (post-DNS), NestGate CAS integration (P3) |
+| **sporePrint** w73 | All previous + **cas-manifest subcommand** (BLAKE3 hashing), **pre-cutover verification doc**, **NestGate CAS integration 4-phase design**, GitHub URL audit (zero hardcoded), 107 tests | S3 cutover execution (post-DNS), CAS Phase 1 implementation (P2) |
 
 ### 2F. eastGate
 
 | Project | Status | Remaining |
 |---------|--------|-----------|
-| **primalSpring** v0.9.31 w72 | Security hardened, deprecated API migration, **LIVE MESH VALIDATED** (discovery.peers + mesh.health_check), s_covalent_mesh updated for wire format, **AAR published** | capability.call cross-gate (blocked Songbird), 3-gate plasmodium, perceptron feature extraction (P2) |
-| **squirrel** | Stable | Composition planning evolution — mesh-aware planning for multi-gate dispatch (P3) |
-| **skunkBat** | Stable | Family enrollment protocol for new gates (westGate onboarding) (P2) |
+| **primalSpring** v0.9.31 w72 | Security hardened, deprecated API migration, **LIVE MESH VALIDATED**, s_covalent_mesh wire format fix, **AAR published**, 842 tests | **capability.call live test (P0)** — Songbird fix deployed! 3-gate plasmodium. Perceptron feature extraction. Composition mesh awareness. |
+| **squirrel** | Stable | Mesh-aware composition planning for multi-gate dispatch (P3) |
+| **skunkBat** | Stable | westGate enrollment FRAGO active. Family seed protocol. (P2) |
 
 ---
 
@@ -145,7 +144,7 @@ Hardware deployment (NUCLEUS) also proceeds on strandGate.
 | L4 topology affinity | **DONE** (biomeOS v3.94) |
 | A/B shadow analysis | **ACTIVE** (1000 dispatch counter running) |
 | PathwayLearner feedback | **WIRED** (per-node graph execution timing) |
-| L5 perceptron training | **UNBLOCKING** — barraCuda ml.mlp_train reassigned to strandGate |
+| L5 perceptron training | **UNBLOCKED** — barraCuda ml.mlp_train COMPLETE (strandGate). biomeOS consumer ready. |
 
 ### 4C. grapheneGate Trust Anchor
 
@@ -182,15 +181,15 @@ strandGate ACTIVATED for compute trio pickup. westGate expected back online this
 
 ## Immediate Critical Path (Priority Order)
 
-1. **Songbird HTTP dispatch fix (P1)** — remote_dispatch.rs must POST to `/jsonrpc`. FRAGO filed. Blocks ALL cross-gate capability routing.
-2. **Songbird mesh_seed auto-bootstrap (P1)** — wire into startup so SONGBIRD_PEERS auto-seeds. FRAGO filed.
+1. **Live capability.call cross-gate test (P0)** — Songbird fix deployed. Execute NOW.
+2. **3-gate plasmodium collective (P0)** — after capability.call works, add ironGate (.238).
 3. **S4 Auth 7-day gate** — running autonomously, ends ~Jun 9.
 4. **DNS NS registrar cutover** — operator manual action.
 5. **S1 TLS graduation** — after NS cutover, remove Cloudflare.
-6. **S3 content cutover** — after DNS, sporePrint targets VPS directly.
-7. **3-gate plasmodium collective** — after Songbird fix, add ironGate for 3-gate mesh.
-8. **strandGate compute trio** — barraCuda ml.mlp_train + coralReef SPIR-V.
-9. **westGate bring-up** — ETA this week. 76TB ZFS cold storage.
+6. **S3 content cutover** — after DNS, sporePrint targets VPS (single flip).
+7. **Perceptron end-to-end** — barraCuda training DONE + biomeOS consumer DONE = wire together.
+8. **westGate bring-up** — ETA this week. 76TB ZFS. NestGate CAS ready.
+9. **coralReef SPIR-V** — strandGate next compute item.
 10. **biomeGate recovery** — toadStool + coralReef Blackwell testing.
 
 ---
@@ -208,5 +207,6 @@ strandGate ACTIVATED for compute trio pickup. westGate expected back online this
 
 ---
 
-*Wave 73. Mesh discovery LIVE. Songbird dispatch fix is THE critical path blocker.
-strandGate active on compute trio. westGate incoming. Evolution never stops.*
+*Wave 74. Songbird critical path FIX DEPLOYED. capability.call UNBLOCKED. barraCuda
+ml.mlp_train COMPLETE. biomeOS perceptron consumer READY. Every team delivered.
+The glacial shift accelerates. Evolution never stops.*

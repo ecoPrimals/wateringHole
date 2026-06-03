@@ -18,9 +18,9 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.6.0"
-generated = "2026-06-03"
-wave = 73
+version = "2.5.0"
+generated = "2026-06-01"
+wave = 67
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -561,19 +561,6 @@ repos = [
     "cellMembrane", "projectNUCLEUS", "lithoSpore",
     "hotSpring", "wetSpring",
     "helixVision", "initioChem", "blueFish", "esotericWebb",
-]
-
-# westGate — 76TB ZFS cold storage, Nest Atomic + provenance
-# Primary role: ecosystem-wide content-addressed cold archive
-# NestGate CAS backend on ZFS pool for integrity + dedup
-[gates.westGate]
-repos = [
-    "nestGate", "wateringHole", "plasmidBin",
-    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
-    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
-    "petalTongue", "skunkBat",
-    "cellMembrane", "projectNUCLEUS", "lithoSpore",
-    "sporePrint", "fossilRecord",
 ]
 
 # grapheneGate — portable trust anchor (Pixel 8a, GrapheneOS)
