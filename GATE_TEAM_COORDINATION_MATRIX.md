@@ -6,7 +6,7 @@ hierarchy. Consolidates data from `GATE_SPRING_OWNERSHIP.md` (canonical
 spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 `ecosystem_manifest.toml` (sync profiles).
 
-**Last updated**: 2026-06-03 (Wave 74 — Songbird critical path FIX deployed, capability.call UNBLOCKED, full ecosystem sprint)
+**Last updated**: 2026-06-03 (Wave 75 — covalent mesh FORMING, every primal evolved, cross-gate trust validation NEXT)
 
 **Authority**: wateringHole consensus
 
@@ -118,9 +118,9 @@ Tier 3 — Domain Science (per-gate)
 
 | Gate | Active Work | Priority | Status |
 |------|-------------|----------|--------|
-| **eastGate** | **capability.call UNBLOCKED — live test NOW**. 3-gate plasmodium. DNS NS cutover (manual). primalSpring evolution: mesh composition, perceptron extraction. | P0 glacial | Songbird fix deployed — **EXECUTE** |
-| **ironGate** | S4 Auth gate (ends ~Jun 9). S3 VPS READY. CI runner provisioned. westGate onboarding. NestGate ZFS + federation BUILT. sporePrint CAS designed. | P0 glacial | S4 **ACTIVE**, NestGate **ZFS READY** |
-| **southGate** | **ALL CRITICAL PATH ITEMS RESOLVED.** Songbird dispatch FIXED. biomeOS v3.99 perceptron consumer. bearDog w131 scopes. | P1 evolution | **DELIVERED** — standing by for mesh test |
+| **eastGate** | Cross-gate trust validation (bearDog BTSP + Dark Forest). Capability propagation FRAGO. Gen5 paper. DNS cutover. | P0 glacial | **COVALENT MESH FORMING** |
+| **ironGate** | S4 gate (ends ~Jun 9). 3-gate mesh OPERATIONAL. CI activated. NestGate ZFS + federation. Deep debt ZERO (cellMembrane). | P0 glacial | S4 **ACTIVE**, mesh **3-GATE** |
+| **southGate** | Songbird virtual relay Phase 2 DEFAULT. biomeOS v4.02. bearDog w134. Capability propagation P1. | P0→P1 | **EVERY PRIMAL EVOLVED** |
 | **biomeGate** | toadStool PAUSED (hardware). Resume on kernel recovery. | P1 HPC | **OFFLINE** |
 | **flockGate** | sporePrint S3 content cutover (post-DNS). WAN relay maintenance. | P2 cutover | Ready, waiting on NS cutover |
 | **strandGate** | barraCuda ml.mlp_train **COMPLETE**. coralReef SPIR-V next. Mesh peer LIVE. | P2 compute | **DELIVERING** (Wave 73) |
@@ -152,4 +152,4 @@ Tier 3 — Domain Science (per-gate)
 
 ---
 
-*Wave 74. Songbird fix DEPLOYED. capability.call UNBLOCKED. barraCuda ml.mlp_train DONE. Every team delivered and evolving forward. Evolution never stops.*
+*Wave 75. Covalent mesh FORMING. Every primal evolved. Virtual relay Phase 2 default. Cross-gate trust validation and gen5 paper NEXT. Evolution never stops.*

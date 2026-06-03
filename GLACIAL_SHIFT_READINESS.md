@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-03 (Wave 74 — **SONGBIRD CRITICAL PATH FIX DEPLOYED** (d6a6f714): HTTP dispatch, mesh_seed auto-bootstrap, string format, latency in health cycle. capability.call UNBLOCKED. barraCuda ml.mlp_train COMPLETE (strandGate, <150ms). biomeOS v3.99 perceptron consumer (shadow mode). bearDog w131 scopes fixed. NestGate s85 ZFS backend + content.replicate.pull + route.register (12,537 tests). sporePrint cas-manifest + CAS design. petalTongue mesh routing + WASM trim. Every team delivered.)
+**Last updated**: 2026-06-03 (Wave 75 — **COVALENT MESH FORMING**: Songbird virtual relay Phase 2 DEFAULT. biomeOS v4.02 (composition.reload, SSOT hardening, deep idiom). bearDog w134 (ACME refactor, stub evolution). toadStool S285 (security migration). coralReef w74 (composition evolution, socket unification, math_matrix extraction). barraCuda (btsp split, thiserror). NestGate s87-89 (modularization, fake success elimination). cellMembrane (3-gate mesh OPERATIONAL, HardeningStep enum, deep debt zero). projectNUCLEUS (CAS upload, CI activation). projectFOUNDATION (drift detection, guideStone spec). esotericWebb (mesh registration, coverage). petalTongue (TRUE PRIMAL compliance, AppError typed). Capability propagation P1 FRAGO active.)
 
 ---
 
@@ -318,16 +318,18 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 74)**: **SONGBIRD FIX DEPLOYED — capability.call UNBLOCKED.**
-Discovery layer PROVEN (Wave 72). Dispatch layer fix shipped (Wave 73, d6a6f714). Live
-capability.call test is NEXT — execute NOW. After validation → 3-gate plasmodium (add
-ironGate .238). Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (started Jun 2,
-ends ~Jun 9). S1 infra verified. S3 VPS READY (single DNS flip, sporePrint CAS design done).
-Criteria 2 mesh: discovery PROVEN, dispatch UNBLOCKED, barraCuda ml.mlp_train COMPLETE,
-biomeOS v3.99 perceptron consumer READY, NestGate ZFS backend + cross-gate federation BUILT.
-Criteria 3 VPS deployed. Criteria 4 flockGate validated over WAN. Criteria 5 sovereign DNS
-live, registrar cutover pending (operator). Criteria 6 Cloudflare removal follows NS.
-strandGate ACTIVE (barraCuda done, coralReef SPIR-V next). westGate INCOMING this week.
+**Current assessment (Wave 75)**: **COVALENT MESH FORMING — inner membrane systems starting.**
+Discovery PROVEN. Dispatch FIXED. Virtual relay Phase 2 DEFAULT. cellMembrane reports 3-gate
+mesh OPERATIONAL. Capability propagation is the remaining mesh blocker (peers don't share
+registered capabilities — P1 FRAGO active). **Cross-gate trust validation NEXT**: bearDog
+BTSP chain between gates, Dark Forest security invariants across mesh, content integrity
+via BLAKE3 federation. Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends
+~Jun 9). S1 infra verified. S3 VPS READY. Criteria 2 mesh: 3-gate forming, NestGate ZFS +
+federation, biomeOS v4.02 composition.reload, virtual relay default mode. Every primal
+evolved this wave (bearDog w134, biomeOS v4.02, toadStool S285, coralReef w74, barraCuda
+btsp split, NestGate s89). Criteria 3-6 unchanged. strandGate delivering (barraCuda done,
+coralReef SPIR-V in progress). westGate INCOMING. **Gen5 paper documenting covalent mesh
+trust achievement in progress.**
 
 ---
 
