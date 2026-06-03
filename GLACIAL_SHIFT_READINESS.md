@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-03 (Wave 75 — **COVALENT MESH FORMING**: Songbird virtual relay Phase 2 DEFAULT. biomeOS v4.02 (composition.reload, SSOT hardening, deep idiom). bearDog w134 (ACME refactor, stub evolution). toadStool S285 (security migration). coralReef w74 (composition evolution, socket unification, math_matrix extraction). barraCuda (btsp split, thiserror). NestGate s87-89 (modularization, fake success elimination). cellMembrane (3-gate mesh OPERATIONAL, HardeningStep enum, deep debt zero). projectNUCLEUS (CAS upload, CI activation). projectFOUNDATION (drift detection, guideStone spec). esotericWebb (mesh registration, coverage). petalTongue (TRUE PRIMAL compliance, AppError typed). Capability propagation P1 FRAGO active.)
+**Last updated**: 2026-06-03 (Wave 76 — **CROSS-GATE TRUST DELIVERED**: bearDog w135 cross-gate trust model (TrustedIssuerRegistry, multi-issuer verify_ionic, Ed25519 key exchange, 3 trust methods). Songbird w75 capability propagation FIX DEPLOYED (mesh.capabilities_announce push model, HTTP/UDS state unification, relay Phase 3 security). barraCuda w75 full ML pipeline (mlp_infer + mlp_save + mlp_load + mesh.trust_verify). toadStool S286 (dispatch.verify_trust, telemetry schema evolution, yield-to-owner audit). coralReef w75 (artifact provenance headers, Dark Forest trust). NestGate s90 (BLAKE3 content trust verification in federation pull). biomeOS v4.03 (env alignment, AtomicType dedup, typed errors). cellMembrane w75 (relay trust boundary spec). projectNUCLEUS w75 (deploy graph trust validation, gate TOML authority). Capability propagation RESOLVED. Overwatch position codified.)
 
 ---
 
@@ -318,18 +318,24 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 75)**: **COVALENT MESH FORMING — inner membrane systems starting.**
-Discovery PROVEN. Dispatch FIXED. Virtual relay Phase 2 DEFAULT. cellMembrane reports 3-gate
-mesh OPERATIONAL. Capability propagation is the remaining mesh blocker (peers don't share
-registered capabilities — P1 FRAGO active). **Cross-gate trust validation NEXT**: bearDog
-BTSP chain between gates, Dark Forest security invariants across mesh, content integrity
-via BLAKE3 federation. Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends
-~Jun 9). S1 infra verified. S3 VPS READY. Criteria 2 mesh: 3-gate forming, NestGate ZFS +
-federation, biomeOS v4.02 composition.reload, virtual relay default mode. Every primal
-evolved this wave (bearDog w134, biomeOS v4.02, toadStool S285, coralReef w74, barraCuda
-btsp split, NestGate s89). Criteria 3-6 unchanged. strandGate delivering (barraCuda done,
-coralReef SPIR-V in progress). westGate INCOMING. **Gen5 paper documenting covalent mesh
-trust achievement in progress.**
+**Current assessment (Wave 76)**: **CROSS-GATE TRUST INFRASTRUCTURE DELIVERED.**
+Discovery PROVEN. Dispatch FIXED. Virtual relay Phase 2 DEFAULT. **Capability propagation
+RESOLVED** (Songbird w75 — push model with `mesh.capabilities_announce`, HTTP/UDS state
+unified). **bearDog w135 cross-gate trust model OPERATIONAL**: TrustedIssuerRegistry with
+Ed25519 key exchange, multi-issuer `auth.verify_ionic`, 3 trust establishment methods
+(family_seed, contract_exchange, manual), token enrichment with gate_id/family_id claims.
+**barraCuda full ML pipeline COMPLETE**: train → save → load → infer (all `ml.*` methods
+protected behind BTSP MethodGate). **NestGate s90 BLAKE3 content trust**: federation pull
+now verifies integrity, rejects tampering. **toadStool S286**: dispatch.verify_trust,
+telemetry schema with gate-of-origin fields, yield-to-owner multi-gate audit. **coralReef
+w75**: artifact provenance headers (sporePrint hash + gate + signature). **cellMembrane
+w75**: relay trust boundary spec (BTSP opaque in all channels). **projectNUCLEUS w75**:
+deploy graph trust validation, gate TOML authority sync. **biomeOS v4.03**: env alignment,
+typed errors, AtomicType dedup. Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE
+(ends ~Jun 9). S1 infra verified. S3 VPS READY. Criteria 2 mesh: 3-gate OPERATIONAL,
+capability routing UNBLOCKED. Criteria 3-6 unchanged. Overwatch position codified
+(wateringHole + gen5). Next: live cross-gate capability.call validation, Songbird relay
+Phase 3.5 (full Ed25519 verification), westGate enrollment.
 
 ---
 

@@ -114,16 +114,16 @@ Tier 3 — Domain Science (per-gate)
   primalSpring's scenarios verify cross-gate composition parity.
 ```
 
-### Current Wave Assignments (Wave 70+)
+### Current Wave Assignments (Wave 76)
 
 | Gate | Active Work | Priority | Status |
 |------|-------------|----------|--------|
-| **eastGate** | Cross-gate trust validation (bearDog BTSP + Dark Forest). Capability propagation FRAGO. Gen5 paper. DNS cutover. | P0 glacial | **COVALENT MESH FORMING** |
-| **ironGate** | S4 gate (ends ~Jun 9). 3-gate mesh OPERATIONAL. CI activated. NestGate ZFS + federation. Deep debt ZERO (cellMembrane). | P0 glacial | S4 **ACTIVE**, mesh **3-GATE** |
-| **southGate** | Songbird virtual relay Phase 2 DEFAULT. biomeOS v4.02. bearDog w134. Capability propagation P1. | P0→P1 | **EVERY PRIMAL EVOLVED** |
-| **biomeGate** | toadStool PAUSED (hardware). Resume on kernel recovery. | P1 HPC | **OFFLINE** |
+| **eastGate** | Overwatch codified. Gen5 trust + overwatch papers written. Live cross-gate capability.call validation NEXT. DNS cutover. | P0 glacial | **TRUST INFRASTRUCTURE DELIVERED** |
+| **ironGate** | S4 gate (ends ~Jun 9). 3-gate mesh OPERATIONAL. NestGate s90 BLAKE3 content trust. cellMembrane relay trust boundary spec. | P0 glacial | S4 **ACTIVE**, content trust **VERIFIED** |
+| **southGate** | bearDog w135 cross-gate trust model. Songbird w75 capability propagation FIXED. biomeOS v4.03. Relay Phase 3.5 NEXT. | P0 | **TRUST MODEL SHIPPED** |
+| **biomeGate** | toadStool S286 delivered (trust + telemetry). Hardware still OFFLINE. | P1 HPC | **OFFLINE** (software evolving) |
 | **flockGate** | sporePrint S3 content cutover (post-DNS). WAN relay maintenance. | P2 cutover | Ready, waiting on NS cutover |
-| **strandGate** | barraCuda ml.mlp_train **COMPLETE**. coralReef SPIR-V next. Mesh peer LIVE. | P2 compute | **DELIVERING** (Wave 73) |
+| **strandGate** | barraCuda w75 full ML pipeline. coralReef w75 artifact provenance. toadStool S286 via remote. Mesh peer LIVE. | P1 compute | **FULL PIPELINE DELIVERED** |
 | **westGate** | 76TB ZFS cold storage. Nest Atomic. Gate setup + NUCLEUS deploy. | P3 expansion | **INCOMING** (ETA this week) |
 | **golgiBody** | Disk at 60%. S4 monitoring active. Relay chain Rust-native. | Maintenance | **HEALTHY** |
 
