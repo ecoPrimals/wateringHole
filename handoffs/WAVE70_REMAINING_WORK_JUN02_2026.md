@@ -62,26 +62,29 @@ cutover and eastGate mesh validation initiation.
 | **biomeOS** v3.97 | L4 weighted routing, topology affinity, --tcp-only deprecated, HTTP removed, A/B shadow active, PathwayLearner, deep debt waves 71-72 (map_err sweep, test extraction 12 files) | A/B shadow analysis completion (1000 dispatches), perceptron shadow mode (needs barraCuda), String error types (GeneticsTier, EscalationManager) |
 | **bearDog** v0.9.0 w129 | ring→aws-lc-rs, env migration COMPLETE (803+ constants), **grapheneGate keystore design** (KeystoreTransport trait, AndroidKeymaster variant, device detection), pure-Rust crypto horizon documented | S4 auth partner (7-day gate active), grapheneGate Phase 2 hardware wiring (NDK + device), pure-Rust crypto (P3) |
 
-### 2B. biomeGate — PAUSED (gate offline)
+### 2B. biomeGate — OFFLINE (kernel recovery)
 
-| Primal | Last State | Movable? |
-|--------|------------|----------|
-| **toadStool** | Wave 68: PBDMA diagnostic, wgpu dispatch verified | No — Titan V hardware-dependent |
-| **coralReef** | Wave 68: SM120 barrier fix, SPIR-V prep | Partial — SPIR-V output is pure compiler; Blackwell testing needs hardware |
-| **barraCuda** | Wave 68: deep debt complete | Yes — ml.mlp_train is pure software |
+| Primal | Last State | Reassigned? |
+|--------|------------|-------------|
+| **toadStool** | Wave 68: PBDMA diagnostic, wgpu dispatch verified | **NO** — Titan V hardware-dependent, stays biomeGate |
+| **coralReef** | Wave 68: SM120 barrier fix, SPIR-V prep | **PARTIAL** — SPIR-V compiler work → strandGate. SM120 Blackwell testing stays biomeGate |
+| **barraCuda** | Wave 68: deep debt complete | **YES** — ml.mlp_train → strandGate (pure software) |
 
-Ownership remains biomeGate. Resume trigger: kernel recovery + cascade sync.
-FRAGO: `wave70-biomegate-down-compute-trio-paused`
+toadStool ownership stays biomeGate. Resume trigger: kernel recovery + cascade sync.
+FRAGO: `wave72-strandgate-compute-trio-pickup` (supersedes `wave70-biomegate-down-compute-trio-paused`)
 
-### 2C. strandGate — ALL RESOLVED
+### 2C. strandGate — ACTIVE (provenance + compute trio pickup)
 
 | Primal | Status |
 |--------|--------|
 | **loamSpine** | Tokio panic **FIXED**, anchoring pipeline **COMPLETE** |
 | **rhizoCrypt** | Discovery fallback hardening **DONE** |
 | **sweetGrass** | PROV-O completeness, privacy edge tests, store parity **DONE** |
+| **barraCuda** (pickup) | ml.mlp_train implementation — 36-dim perceptron, pure software. **Unblocks** biomeOS L5 + primalSpring perceptron |
+| **coralReef** (partial pickup) | SPIR-V output compiler (pure software). SM120 Blackwell testing remains biomeGate |
 
-Hardware deployment remains post-mesh-validation (P3).
+strandGate hardware: Dual EPYC 7452 (64c), 256GB ECC — ideal for pure-software compute work.
+Hardware deployment (NUCLEUS) also proceeds on strandGate.
 
 ### 2D. ironGate — Sovereignty EXECUTED
 
@@ -164,15 +167,15 @@ Hardware deployment remains post-mesh-validation (P3).
 
 ## Track 5: Infrastructure Expansion (P3)
 
-Unchanged from Wave 68. All gates HARDWARE READY, waiting on mesh validation.
+strandGate ACTIVATED for compute trio pickup. westGate expected back online this week.
 
-| Gate | Planned Role | Blocker |
-|------|-------------|---------|
-| strandGate | Provenance trio + ABG science | Mesh validation |
-| northGate | Heavy compute, AI/LLM | No blocker (P3) |
-| westGate | 76TB ZFS cold storage (Nest Atomic) | No blocker (P3) |
-| swiftGate | Mobile/compact | No blocker (P4) |
-| kinGate | Staging | No blocker (P4) |
+| Gate | Planned Role | Status | Blocker |
+|------|-------------|--------|---------|
+| strandGate | Provenance trio + compute trio pickup (barraCuda, coralReef SPIR-V) | **ACTIVE** — assigned via FRAGO wave72 | NUCLEUS deployment needed |
+| westGate | 76TB ZFS cold storage (Nest Atomic) | **INCOMING** — ETA this week | Gate setup + NUCLEUS deploy |
+| northGate | Heavy compute, AI/LLM | Hardware ready | No blocker (P3) |
+| swiftGate | Mobile/compact | Hardware ready | No blocker (P4) |
+| kinGate | Staging | Hardware ready | No blocker (P4) |
 
 ---
 
@@ -183,7 +186,9 @@ Unchanged from Wave 68. All gates HARDWARE READY, waiting on mesh validation.
 3. **DNS NS registrar cutover** — operator manual action.
 4. **S1 TLS graduation** — after NS cutover, remove Cloudflare.
 5. **S3 content cutover** — after DNS, sporePrint targets VPS directly.
-6. **biomeGate recovery** — resume compute trio when kernel is fixed.
+6. **strandGate compute trio pickup** — barraCuda ml.mlp_train + coralReef SPIR-V (pure software).
+7. **westGate bring-up** — ETA this week. 76TB ZFS cold storage (Nest Atomic).
+8. **biomeGate recovery** — toadStool + coralReef Blackwell testing resume when kernel is fixed.
 
 ---
 
@@ -195,8 +200,11 @@ Unchanged from Wave 68. All gates HARDWARE READY, waiting on mesh validation.
 | strandGate FRAGO archived | All items resolved by upstream teams | 70 |
 | 3 biomeGate FRAGOs consolidated | Superseded by single wave70 pause FRAGO | 70 |
 | Wave 68 remaining work archived | Superseded by this document | 70 |
+| Compute trio → strandGate (partial) | barraCuda (full) + coralReef SPIR-V (partial) moved to strandGate. toadStool stays biomeGate (hardware). | 72 |
+| westGate incoming | ETA this week. 76TB ZFS cold storage, Nest Atomic role. | 72 |
 
 ---
 
-*Wave 70. The sprint delivered. Two operator actions remain on the critical path.
-Everything else is either done, running autonomously, or paused with clear resume triggers.*
+*Wave 72. strandGate activated for compute trio software work. westGate incoming this week.
+Two operator actions remain on the glacial critical path. Everything else is delivered,
+running autonomously, or paused with clear resume triggers.*

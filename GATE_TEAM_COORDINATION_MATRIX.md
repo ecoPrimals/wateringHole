@@ -6,7 +6,7 @@ hierarchy. Consolidates data from `GATE_SPRING_OWNERSHIP.md` (canonical
 spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 `ecosystem_manifest.toml` (sync profiles).
 
-**Last updated**: 2026-06-03 morning (Wave 71 — overnight sprint deliveries absorbed)
+**Last updated**: 2026-06-03 (Wave 72 — strandGate compute trio pickup, westGate incoming)
 
 **Authority**: wateringHole consensus
 
@@ -21,9 +21,9 @@ spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 | **southGate** | southGate (Songbird, biomeOS, bearDog) | 5800X3D, RTX 4060 + 3090s, 128GB | Mesh + orchestration + security primals | 9/9 | LAN 1G | OPERATIONAL |
 | **biomeGate** | biomeGate (hotSpring, toadStool, barraCuda, coralReef) | Threadripper 3970X, Titan V + K80, 256GB | HPC physics, compute trio, air-gap tester | 62/62 | LAN 1G | **OFFLINE** (kernel recovery) |
 | **flockGate** | flockGate (sporePrint) | i9-13900K, RTX 3070 Ti, 64GB | WAN covalent, sporePrint hosting | OPERATIONAL | WAN via cellMembrane | OPERATIONAL |
-| **strandGate** | — (undeployed) | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics, ABG science | — | LAN 1G | HARDWARE READY |
+| **strandGate** | strandGate (provenance trio + compute trio pickup) | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics, ABG science, barraCuda + coralReef SPIR-V | — | LAN 1G | **ACTIVE** (Wave 72) |
 | **northGate** | — (undeployed) | Ryzen 9950X3D, RTX 5090, 96GB | Heavy compute, AI/LLM | — | LAN 1G (10G ready) | HARDWARE READY |
-| **westGate** | — (undeployed) | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage (Nest Atomic) | — | LAN 1G (10G ready) | HARDWARE READY |
+| **westGate** | — (incoming this week) | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage (Nest Atomic) | — | LAN 1G (10G ready) | **INCOMING** (ETA this week) |
 | **swiftGate** | — (undeployed) | Ryzen 5800X, RTX 3070, 64GB | Mobile/compact | — | LAN 1G | HARDWARE READY |
 | **kinGate** | — (undeployed) | i7-6700K, RTX 3070, 32GB | Staging | — | LAN 1G | HARDWARE READY |
 | **grapheneGate** | eastGate (portable) | Pixel 8a, Tensor G3, 8GB | Portable trust anchor, Dark Forest beacon | Tower Atomic (BearDog + Songbird + SkunkBat) | Cellular / WiFi | HARDWARE READY |
@@ -65,9 +65,9 @@ spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 | **Songbird** | southGate | Mesh discovery, federation, TURN relay |
 | **biomeOS** | southGate | Adaptive orchestration, Neural API |
 | **bearDog** | southGate | Security, TLS, BTSP authentication |
-| **toadStool** | biomeGate | Compute dispatch, GPU diesel engine (compute trio) |
-| **barraCuda** | biomeGate | Pure Rust math + compute engine (compute trio) |
-| **coralReef** | biomeGate | Shader compiler, SPIR-V/WGSL (compute trio) |
+| **toadStool** | biomeGate | Compute dispatch, GPU diesel engine (compute trio) — BLOCKED (hardware) |
+| **barraCuda** | strandGate (pickup from biomeGate) | Pure Rust math + compute engine — ml.mlp_train (pure software) |
+| **coralReef** | strandGate (SPIR-V) / biomeGate (Blackwell) | Shader compiler — SPIR-V portable, SM120 hardware-dependent |
 | **rhizoCrypt** | strandGate | Content-addressed DAG (provenance trio) |
 | **loamSpine** | strandGate | Immutable linear ledger (provenance trio) |
 | **sweetGrass** | strandGate | Attribution, W3C PROV-O braids (provenance trio) |
@@ -91,7 +91,7 @@ spring routing), `GLACIAL_SHIFT_READINESS.md` (operational status), and
 | **southGate** | wetSpring, neuralSpring | Songbird, biomeOS, bearDog | — | — | Core + wet/neural + mesh primals |
 | **biomeGate** | hotSpring | toadStool, barraCuda, coralReef | — | — | Core + hotSpring + compute trio |
 | **flockGate** | sporePrint | — | — | — | Core + sporePrint/petalTongue |
-| **strandGate** | hotSpring (science) | rhizoCrypt, loamSpine, sweetGrass | — | helixVision, initioChem, blueFish, lithoSpore | Core + provenance + ABG |
+| **strandGate** | hotSpring (science) | rhizoCrypt, loamSpine, sweetGrass, **barraCuda** (pickup), **coralReef** (SPIR-V pickup) | — | helixVision, initioChem, blueFish, lithoSpore | Core + provenance + ABG + compute trio (software) |
 
 ---
 
@@ -121,9 +121,10 @@ Tier 3 — Domain Science (per-gate)
 | **eastGate** | Live mesh validation (`discovery.peers` + `capability.call`). DNS NS registrar cutover (manual). Perceptron feature extraction. | P0 glacial | **READY** — both sides prepared |
 | **ironGate** | S4 Auth 7-day gate monitoring (ends ~Jun 9). S1 TLS graduation (post NS cutover). **S3 VPS READY** (cutover = DNS flip). genomeBin scaffold. Forgejo Actions CI eval (P2). | P0 glacial | S4 **ACTIVE**, S3 VPS **READY** |
 | **southGate** | Mesh validation partner. A/B shadow analysis (1000 dispatches). Virtual relay Phase 2 (P2). bearDog S4 auth partner. grapheneGate Phase 2 hardware wiring (P3). | P1 evolution | All P1 **DELIVERED**, keystore **DESIGNED** |
-| **biomeGate** | Compute trio PAUSED. Resume on kernel recovery. | P1 HPC | **OFFLINE** |
+| **biomeGate** | toadStool PAUSED (hardware). Resume on kernel recovery. | P1 HPC | **OFFLINE** |
 | **flockGate** | sporePrint S3 content cutover (post-DNS). WAN relay maintenance. | P2 cutover | Ready, waiting on NS cutover |
-| **strandGate** | Hardware deployment (post mesh). | P3 expansion | Provenance trio **RESOLVED** |
+| **strandGate** | Compute trio pickup: barraCuda ml.mlp_train + coralReef SPIR-V. NUCLEUS deploy. | P2 compute | **ACTIVE** (Wave 72) |
+| **westGate** | 76TB ZFS cold storage. Nest Atomic. Gate setup + NUCLEUS deploy. | P3 expansion | **INCOMING** (ETA this week) |
 | **golgiBody** | Disk at 60%. S4 monitoring active. Relay chain Rust-native. | Maintenance | **HEALTHY** |
 
 ---
@@ -151,4 +152,4 @@ Tier 3 — Domain Science (per-gate)
 
 ---
 
-*Wave 71. Every team delivered. S3 VPS ready — cutover is a DNS flip. Two operator actions on critical path.*
+*Wave 72. strandGate activated for compute trio software work. westGate incoming this week. Two operator actions on glacial critical path.*

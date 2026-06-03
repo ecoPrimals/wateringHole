@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-03 morning (Wave 71 — overnight sprint: cellMembrane S3 VPS READY (Caddyfile configured, cutover = single DNS flip, 3 new commands, cascade() removed). bearDog grapheneGate keystore design COMPLETE (KeystoreTransport trait, AndroidKeymaster variant). primalSpring security hardened (deny missing scopes, real latency probes, deprecated API migration, 842 tests). projectNUCLEUS genomeBin scaffold + biomeGate OFFLINE in manifests. projectFOUNDATION 3 failing tests FIXED, typed errors. Cascade 38/38 clean.)
+**Last updated**: 2026-06-03 (Wave 72 — strandGate ACTIVATED for compute trio pickup: barraCuda ml.mlp_train (full) + coralReef SPIR-V (partial) reassigned from offline biomeGate. toadStool stays biomeGate (hardware-dependent). westGate INCOMING this week (76TB ZFS cold storage, Nest Atomic). Previous: cellMembrane S3 VPS READY, bearDog keystore DESIGNED, primalSpring security hardened, projectFOUNDATION tests FIXED.)
 
 ---
 
@@ -214,9 +214,9 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | **ironGate** | i9-14900K, RTX 5070, 96GB | Agentic dev, ABG | **OPERATIONAL** (23 UDS) | primalSpring, ludoSpring, healthSpring | 1G |
 | **southGate** | 5800X3D, RTX 4060 + 3090s, 128GB | Gaming + compute | **OPERATIONAL** (9/9) | wetSpring, neuralSpring | 1G (10G NIC ready) |
 | **biomeGate** | Threadripper 3970X, 256GB | HBM2 test bench | **OFFLINE** (kernel recovery) | hotSpring | 1G |
-| **strandGate** | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics | Hardware ready, **not deployed** | wetSpring (secondary) | 1G |
+| **strandGate** | Dual EPYC 7452 (64c), 256GB ECC | Bioinformatics + compute trio pickup | **ACTIVE** (Wave 72) — barraCuda + coralReef SPIR-V | wetSpring (secondary) | 1G |
 | **northGate** | Ryzen 9950X3D, RTX 5090, 96GB | Gaming primary, heavy compute | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
-| **westGate** | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage | Hardware ready, **not deployed** | — | 1G (10G NIC ready) |
+| **westGate** | i7-4771, RTX 2070 Super, 32GB | 76TB ZFS cold storage | **INCOMING** (ETA this week) | — | 1G (10G NIC ready) |
 | **swiftGate** | Ryzen 5800X, RTX 3070, 64GB | Mobile/compact | Hardware ready | — | 1G |
 | **flockGate** | i9-13900K, RTX 3070 Ti, 64GB | Remote covalent (WAN) | **OPERATIONAL** (Wave 64) — WAN relay validated (~1.3s Forgejo, ~3s end-to-end), pseudoSpore gallery, Zola 226 pages/746ms | sporePrint | WAN via cellMembrane |
 | **kinGate** | i7-6700K, RTX 3070, 32GB | Staging | Hardware ready | — | 1G |
@@ -228,7 +228,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 4. Verify cross-gate `discovery.peers` — **NEXT**: same-subnet gates (eastGate ↔ ironGate) seed peers, confirm peer count > 0
 5. Cross-gate `capability.call` smoke test via primalSpring `s_covalent_mesh` scenario
 6. Cross-subnet routing for southGate (192.168.4.x) — requires network config or TURN relay
-7. westGate (Nest Atomic — cold storage), northGate (Node Atomic), strandGate (Full NUCLEUS)
+7. strandGate (ACTIVE — compute trio pickup + NUCLEUS deploy), westGate (INCOMING — Nest Atomic cold storage), northGate (Node Atomic)
 8. Plasmodium collective validation (3+ gates meshed via live `capability.call`)
 
 ### Deployment Matrix (primalSpring)
@@ -318,7 +318,7 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 71)**: Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate
+**Current assessment (Wave 72)**: Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate
 ACTIVE (started Jun 2, ends ~Jun 9). S1 infra verified (198 probes, 0 failures). S3
 **VPS READY** — cellMembrane confirmed Caddyfile configured, content routes live,
 cutover = single DNS A-record flip. **Two operator actions on critical path**: DNS NS
@@ -329,8 +329,10 @@ virtual relay Phase 1 in shadow. primalSpring security hardened (deny missing sc
 VPS (6.1M musl), relay Rust-native, disk 60%, 3 new monitoring commands (relay.status,
 gate.health, content.verify). Criteria 4 flockGate validated over WAN. Criteria 5
 sovereign DNS infra live, registrar cutover pending. Criteria 6 Cloudflare removal
-follows NS cutover. biomeGate OFFLINE — compute trio PAUSED, not on glacial critical
-path. grapheneGate keystore design COMPLETE (bearDog Wave 129).
+follows NS cutover. biomeGate OFFLINE — toadStool stays biomeGate (hardware). **Compute
+trio software work reassigned to strandGate** (barraCuda ml.mlp_train + coralReef SPIR-V).
+**westGate INCOMING this week** (76TB ZFS cold storage, Nest Atomic). grapheneGate
+keystore design COMPLETE (bearDog Wave 129).
 
 ---
 
