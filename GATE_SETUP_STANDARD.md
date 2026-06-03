@@ -20,6 +20,7 @@ Bond type to inner membrane: **covalent**.
 | southGate | Dev | LAN | Core primals + wet/neural |
 | biomeGate | Dev | LAN | Core primals + hot |
 | strandGate | ABG science | LAN | Science suite + genomics |
+| westGate | 76TB ZFS cold storage | LAN | Nest Atomic + sporePrint + fossilRecord |
 | flockGate | WAN shadow | WAN | sporePrint + full validation |
 
 ### VPS Proto-FieldMouse Deployments (Periplasm)
@@ -397,14 +398,16 @@ With the Forgejo-primary model, only Forgejo SSH access is required. GitHub
 is populated by the VPS push mirror. GitHub keys are only needed if a gate
 wants direct read access for cold-start when Forgejo is unreachable.
 
-### Registered Keys (Wave 63)
+### Registered Keys (Wave 73)
 
 | Key Name | Registered On |
 |----------|---------------|
 | irongate | GitHub, Forgejo |
 | eastGate | Forgejo |
 | southGate | Forgejo |
+| strandGate | Forgejo |
 | flockGate | Forgejo |
+| westGate | **pending** (onboarding this week) |
 | golgiBody (inner) | Forgejo (owns it) |
 | peptidoglycan | Forgejo |
 | golgiBody-ext (outer) | Forgejo, **GitHub** (trans face ships extracellularly) |
