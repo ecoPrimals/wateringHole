@@ -1,0 +1,113 @@
+[impulse]
+id = "wave77b-operator-blurb"
+type = "blurb"
+priority = "P0"
+wave = 77
+
+[from]
+gate = "eastGate"
+role = "overwatch"
+
+[to]
+gates = ["eastGate"]
+team = "operator (user)"
+
+[content]
+subject = "Wave 77b Operator Actions — User Interactions"
+body = """
+These are the real-world actions that only the operator (you) can do.
+They are independent of code evolution cadence and can be done in any
+order as dependencies allow.
+
+═══════════════════════════════════════════════════════════
+ACTION 1: PORKBUN DNS NS CUTOVER (Priority: NOW)
+DEPENDS ON: Nothing — all infrastructure ready
+TIME: 5 minutes per domain + 24-48h propagation
+═══════════════════════════════════════════════════════════
+
+Log in to porkbun.com. For each domain:
+
+a) primals.eco → Domain Details → Nameservers → Custom:
+   ns1.primals.eco  157.230.3.183
+   ns2.primals.eco  137.184.197.151
+
+b) primal.eco → same custom nameservers
+
+c) nestgate.io → same custom nameservers
+
+Then add DNSSEC DS records (get from: ssh golgi "keymgr <domain> ds")
+
+Full step-by-step: DNS_NS_CUTOVER_OPERATOR_CHECKLIST.md
+
+Verify after 24-48h: dig @8.8.8.8 <domain> NS
+
+═══════════════════════════════════════════════════════════
+ACTION 2: CLOUDFLARE OUTER MEMBRANE CONFIG (After DNS cutover)
+DEPENDS ON: primals.eco DNS propagation confirmed
+TIME: 10 minutes
+═══════════════════════════════════════════════════════════
+
+Under the diderm model, Cloudflare stays on primals.eco as the outer
+membrane. Two options:
+
+OPTION A (recommended): Leave Cloudflare zone active for primals.eco.
+  It provides DDoS protection and CDN for the public-facing surface.
+  Inner membrane validates its integrity via cross-membrane checks.
+
+OPTION B: Set Cloudflare to DNS-only mode (orange cloud off).
+  Caddy on golgiBody-ext becomes sole TLS terminator.
+  See S1_TLS_GRADUATION_CHECKLIST.md if you choose this.
+
+No action needed for primal.eco or nestgate.io — they are sovereign-only.
+
+═══════════════════════════════════════════════════════════
+ACTION 3: S4 AUTH GATE REVIEW (~Jun 9)
+DEPENDS ON: Time (7-day gate ends ~Jun 9)
+TIME: 5 minutes
+═══════════════════════════════════════════════════════════
+
+On ironGate, check the S4 probe log:
+  - If p95 < 50ms across 7 days → S4 GRADUATED
+  - If not → extend gate, notify overwatch
+
+Update GLACIAL_SHIFT_READINESS.md with result.
+
+═══════════════════════════════════════════════════════════
+ACTION 4: WESTGATE HARDWARE (When it arrives)
+DEPENDS ON: Physical hardware shipping
+TIME: 2-4 hours for full enrollment
+═══════════════════════════════════════════════════════════
+
+When the hardware arrives:
+  1. Connect to LAN (Cat6 to unmanaged switch)
+  2. Follow WESTGATE_ENROLLMENT_OPERATOR_CHECKLIST.md
+  3. Phase 1-6: Physical → Identity → Services → Mesh → NestGate → Validation
+
+Primary role: 76TB ZFS cold storage for NestGate CAS (nestgate.io).
+
+═══════════════════════════════════════════════════════════
+ACTION 5: CONFIRM HARDWARE ETA (Priority: NOW)
+DEPENDS ON: Nothing
+TIME: 1 minute
+═══════════════════════════════════════════════════════════
+
+Check shipping status for westGate hardware. Update ETA in
+GLACIAL_SHIFT_READINESS.md if known.
+
+═══════════════════════════════════════════════════════════
+
+SUMMARY — What only YOU can do (not automatable):
+1. Porkbun login + NS changes (registrar auth)
+2. Cloudflare dashboard decisions (outer membrane policy)
+3. S4 probe log review (judgment call)
+4. Physical hardware connection (hands-on)
+5. Shipping ETA check (vendor portal)
+
+Everything else — code evolution, DNS zone management, FRAGO routing,
+handoff archiving — can be done by any overwatch from any gate.
+"""
+
+[meta]
+created = "2026-06-04T16:10:00-04:00"
+ack_required = false
+depends_on = []
