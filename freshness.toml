@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 67
-date = "2026-06-01"
+id = 76
+date = "2026-06-03"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 67 post-cascade: Phase 0 P0 blockers CLEARED (Songbird socket fix eb913612, biomeOS capability.call 9ed36983, bearDog S4 Wave 119). 836 tests, 58 scenarios, 93 experiments, 33 composition graphs, 490+ methods. Phase 1 mesh validation NEXT (discovery.peers live test). sporePrint cert pipeline 3 known-debt."
+notes = "Wave 76: cross-gate trust schemas delivered (loamSpine, rhizoCrypt, sweetGrass). Parity sprint in progress — healthSpring 1097t, wetSpring 2085t, projectNUCLEUS 247t, esotericWebb 410t, cellMembrane 210t, plasmidBin 24t all clean. Deep debt: plasmidbin-types Result<_,String>→thiserror, helpers deduplicated. westGate deploy graph complete. 8 handoffs archived. Freshness: skunkBat/benchScale/squirrel Tier 3 (parity sprint targets)."
 publisher = "membrane"
 
 [heads]

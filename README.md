@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 2, 2026 (Wave 71: L4 weighted routing, shadow pathway, bearDog env consolidation. Waves 67–70 archived — graduated composition, sovereignty graduation, virtual relay phase 1, biomeOS taxonomy provider. 835 tests, 57 scenarios, 33 composition graphs, 490+ methods. Wire protocol (`signal.dispatch`) unchanged. 1 active handoff + 445 archived.)
+**Last Updated**: June 3, 2026 (Wave 76: cross-gate trust schemas, parity sprint, deep debt sweep. Waves 71–75 archived — Songbird mesh push, deploy graph trust, plasmidBin thiserror evolution. 1 active handoff + 553 archived. 4 active impulses. NC-1 code complete.)
 
 ---
 
