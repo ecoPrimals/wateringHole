@@ -1,0 +1,35 @@
+[impulse]
+id = "2026-06-03T21-52-eastGate-diverge-biomeOS"
+type = "sync"
+priority = "priority"
+wave = 76
+
+[from]
+gate = "eastGate"
+project = "primals/biomeOS"
+ref = "b75478f7"
+
+[to]
+gates = ["*"]
+
+[content]
+subject = "DIVERGE: biomeOS - origin(+1,-2)"
+body = "Cascade detected non-ff divergence in primals/biomeOS. Policy: flag. See payload for resolution context."
+
+[payload]
+repo = "primals/biomeOS"
+diverge_type = "diverge"
+repo_policy = "flag"
+suggested_action = "human_review"
+
+[payload.remotes]
+forgejo = "b75478f7"
+origin = "1e49d3cb"
+
+[payload.ahead]
+forgejo = 0
+origin = 1
+
+[meta]
+created = "2026-06-03T21:52:55-04:00"
+ack_required = true
