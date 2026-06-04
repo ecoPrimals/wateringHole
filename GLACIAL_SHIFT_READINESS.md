@@ -202,7 +202,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Sovereign shadow functions (membrane-shadow) | **OPERATIONAL** (Wave 65) — 12 Rust modules: dispatch, cli, temporal, impulse, context, plasmid, git_ops, forgejo, gate, config, manifest, identity. `plasmid.fetch` + `temporal.cascade` fully Rust. |
 | Forgejo repos (5 bidirectional + 33 mirrors) | **OPERATIONAL** (Wave 62) — biomeOS/coralReef/sweetGrass/squirrel/wateringHole push-enabled |
 | waterFall temporal sync | **OPERATIONAL** (Wave 65) — Rust `temporal.cascade` replaces bash cascade-pull. Manifest-driven gate profiles, dynamic gate discovery. |
-| Channel 1: Sovereign DNS (knot-dns) | **OPERATIONAL** — ns1 (golgiBody) + ns2 (golgiBody-ext), DNSSEC active, zone transfer confirmed. NS registrar cutover pending. |
+| Channel 1: Sovereign DNS (knot-dns) | **CUTOVER SUBMITTED** (Jun 4, 12:36 ET) — 3 zones (primals.eco, primal.eco, nestgate.io), ns1+ns2, DNSSEC. Porkbun NS + DS records set for primal.eco + nestgate.io. primals.eco stays Cloudflare (outer membrane). Propagation in progress. |
 | Caddy → BearDog ACME replacement | Shadow live, **not cut over** |
 | BearDog Vault (encrypted creds at rest) | **PLANNED** (Phase 2) |
 
