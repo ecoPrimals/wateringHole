@@ -11,7 +11,7 @@
 id = 77
 date = "2026-06-04"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 77b: Ecosystem at full parity. Diderm membrane architecture formalized — outer membrane (primals.eco), peptidoglycan trust barrier, inner membrane (primal.eco), content layer (nestgate.io). primal.eco + nestgate.io zones live on knot-dns (ns1+ns2, DNSSEC). Caddy vhosts configured. 11 handoffs archived (wave77/). Cross-membrane validation scenario shipped (s_cross_membrane_integrity, 61 scenarios, 858 tests). Peptidoglycan formalization FRAGO fired. DNS NS cutover checklist updated for all 3 domains. S4 7-day gate active (ends ~Jun 9). 4 active impulses."
+notes = "Wave 77c: Inner membrane live. primal.eco DNS propagated on public resolvers + TLS cert obtained (LE via Caddy). Peptidoglycan formalization DELIVERED by ironGate (ACK: MembraneComposition::Peptidoglycan variant, TrustBarrierConfig schema, FIELDMOUSE_CONTRACT.md, 214 tests). nestgate.io DNS propagating. strandGate FRAGO: bearDog auth.events.subscribe for cross-gate trust events. Criterion 3 FORMALIZED, Criteria 5+6 progressing. S4 7-day gate active (ends ~Jun 9). 5 active impulses."
 publisher = "membrane"
 
 [heads]

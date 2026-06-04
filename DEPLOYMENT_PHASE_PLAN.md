@@ -142,26 +142,19 @@ serving content-addressed data objects.
 
 ### Current knot-dns State (Verified 2026-06-04)
 
-**`primals.eco` zone** — LIVE, DNSSEC active, zone transfer to ns2 confirmed:
+**`primals.eco` zone** — LIVE, DNSSEC active, zone transfer to ns2 confirmed.
+Stays on Cloudflare DNS (outer membrane per diderm model).
 
-| Record | Type | Value | Status |
-|--------|------|-------|--------|
-| `primals.eco` | A | 137.184.197.151 (golgiBody-ext) | Correct — Caddy |
-| `primals.eco` | NS | ns1.primals.eco, ns2.primals.eco | Correct |
-| `www.primals.eco` | A | 137.184.197.151 | Correct — Caddy |
-| `git.primals.eco` | A | 157.230.3.183 (golgiBody) | Correct — Forgejo |
-| `lab.primals.eco` | A | 157.230.3.183 | Correct |
-| `membrane.primals.eco` | A | 157.230.3.183 | Correct |
-| `ns1.primals.eco` | A | 157.230.3.183 | Glue |
-| `ns2.primals.eco` | A | 137.184.197.151 | Glue |
-| `primals.eco` | CAA | `letsencrypt.org` (issue + issuewild) | Correct |
-| `primals.eco` | TXT | `v=spf1 -all` | Anti-spoofing |
+**`primal.eco` zone** — **LIVE + TLS OPERATIONAL** (Jun 4). DNS propagated on
+public resolvers (8.8.8.8, 1.1.1.1 → 137.184.197.151). Let's Encrypt cert
+obtained via Caddy TLS-ALPN-01. HTTPS serving: `primal.eco — inner membrane
+operational`. NS: ns1.primals.eco + ns2.primals.eco. DNSSEC active + DS records
+submitted to Porkbun.
 
-Zone is clean. No GitHub Pages IPs. Ready for NS cutover.
-
-**`primal.eco` zone** — NOT YET CREATED. Needs zone file + knot-dns config.
-
-**`nestgate.io` zone** — NOT YET CREATED. Needs zone file + knot-dns config.
+**`nestgate.io` zone** — **DNS PROPAGATING** (Jun 4). Zone created, DNSSEC
+active, NS set at Porkbun, DS records submitted. SERVFAIL on public resolvers
+(TLD registry propagation in progress). TLS cert will auto-provision via Caddy
+once DNS resolves.
 
 ## B1. DNS NS Registrar Cutover — primals.eco (Critical Path)
 
@@ -190,22 +183,25 @@ See `DNS_NS_CUTOVER_OPERATOR_CHECKLIST.md` for full step-by-step.
 ## B1b. DNS Zone Creation — primal.eco + nestgate.io
 
 **Type**: Operator + cellMembrane evolution  
-**Dependency**: B1 proven (do `primals.eco` first, then add others)  
-**Async factor**: Zone creation is quick; NS propagation is 24-48h per domain
+**Status**: **`primal.eco` COMPLETE. `nestgate.io` propagating.**
 
-**primal.eco** (inner membrane):
-1. Create zone file on golgiBody with records pointing to inner services
-2. Add zone to knot-dns config, enable DNSSEC
-3. Configure Caddy virtual host on golgiBody-ext (LE cert auto-provisions)
-4. On Porkbun: set NS to `ns1.primals.eco` / `ns2.primals.eco`
-   (same sovereign nameservers — they can serve multiple zones)
+**primal.eco** (inner membrane) — **ALL STEPS COMPLETE**:
+1. ~~Create zone file on golgiBody~~ — DONE (DNSSEC active, zone transfer to ns2)
+2. ~~Add zone to knot-dns config, enable DNSSEC~~ — DONE
+3. ~~Configure Caddy virtual host on golgiBody-ext~~ — DONE (TLS cert obtained Jun 4)
+4. ~~On Porkbun: set NS + DS records~~ — DONE (NS propagated, DS submitted)
 
-**nestgate.io** (content objects):
-1. Create zone file: `nestgate.io` A → 137.184.197.151 (golgiBody-ext)
-2. Add zone to knot-dns config, enable DNSSEC
-3. Configure Caddy virtual host — reverse proxy to NestGate HTTP endpoint
-4. On Porkbun: set NS to `ns1.primals.eco` / `ns2.primals.eco`
-5. Wire NestGate content serving: `nestgate.io/<hash>` → `content.get`
+**Verification** (Jun 4, 12:50 ET):
+- `host primal.eco 8.8.8.8` → 137.184.197.151 (correct)
+- `host -t NS primal.eco 8.8.8.8` → ns1.primals.eco, ns2.primals.eco (correct)
+- `curl https://primal.eco` → `primal.eco — inner membrane operational` (TLS valid)
+
+**nestgate.io** (content objects) — **STEPS 1-4 COMPLETE, PROPAGATING**:
+1. ~~Create zone file~~ — DONE (DNSSEC active)
+2. ~~Add zone to knot-dns config~~ — DONE
+3. ~~Configure Caddy virtual host~~ — DONE (TLS will auto-provision once DNS resolves)
+4. ~~On Porkbun: set NS + DS records~~ — DONE
+5. Wire NestGate content serving: `nestgate.io/<hash>` → `content.get` — **PENDING** (after TLS live)
 
 **Content model for nestgate.io**:
 - PseudoSpores, notebooks, and data objects live as CAS-addressable resources
@@ -227,8 +223,8 @@ protection and CDN benefits.
 | Domain | TLS Provider | Dark Forest | Status |
 |--------|-------------|-------------|--------|
 | `primals.eco` | Cloudflare proxy (acceptable) | RELAXED | Operational |
-| `primal.eco` | Sovereign Caddy + LE (required) | STRICT | Zone creation pending |
-| `nestgate.io` | Sovereign Caddy + LE (required) | STRICT | Zone creation pending |
+| `primal.eco` | Sovereign Caddy + LE (required) | STRICT | **LIVE** — cert obtained Jun 4 |
+| `nestgate.io` | Sovereign Caddy + LE (required) | STRICT | DNS propagating — cert auto-provisions |
 
 Once `primal.eco` and `nestgate.io` are on sovereign DNS + TLS, the
 inner membrane has zero commercial TLS dependency regardless of
@@ -315,12 +311,12 @@ is disposable and replicable.
 
 | # | Criterion | Code Goal | Infra Goal | Status |
 |---|-----------|-----------|------------|--------|
-| 1 | Sovereignty shadows graduated (inner membrane) | — | B2 + B3 + B4 | S2 GRADUATED. S4 gate active. S1+S3 on inner membrane path. |
-| 2 | 3+ gates in LAN mesh | A1 (mesh validation) | B5 (westGate) | 2 meshed (eastGate + strandGate). Need 3rd. |
-| 3 | Peptidoglycan replicable | — | B1b (peptidoglycan formalization) | Operational, formalization pending. |
-| 4 | Remote covalent node over WAN | A1 (capability.call) | B6 (flockGate) | flockGate OPERATIONAL, formal validation pending. |
-| 5 | DNS sovereign for inner membrane | — | B1 + B1b | `primals.eco` zone LIVE. `primal.eco` + `nestgate.io` zone creation NEXT. |
-| 6 | Inner membrane zero-commercial + cross-validation | Cross-membrane validation (A-new) | B1b (inner membrane DNS) | Cross-membrane validation design pending. |
+| 1 | Sovereignty shadows graduated (inner membrane) | — | B2 + B3 + B4 | S2 GRADUATED. S4 gate active (~Jun 9). **S1 inner membrane TLS LIVE** (`primal.eco` Caddy+LE). S3 content layer wiring pending `nestgate.io`. |
+| 2 | 3+ gates in LAN mesh | A1 (mesh validation) | B5 (westGate) | 2 meshed (eastGate + strandGate). Need 3rd (westGate hardware incoming). |
+| 3 | Peptidoglycan replicable | — | B1b (peptidoglycan formalization) | **FORMALIZED** — ironGate ACK: Peptidoglycan variant + TrustBarrierConfig schema + contract doc + 4 tests. |
+| 4 | Remote covalent node over WAN | A1 (capability.call) | B6 (flockGate) | flockGate OPERATIONAL, formal validation pending B1+B2. |
+| 5 | DNS sovereign for inner membrane | — | B1 + B1b | **`primal.eco` DNS PROPAGATED + TLS LIVE.** `nestgate.io` propagating. `primals.eco` on Cloudflare (acceptable). |
+| 6 | Inner membrane zero-commercial + cross-validation | Cross-membrane validation (A-new) | B1b (inner membrane DNS) | `primal.eco` zero-commercial ACHIEVED. Cross-membrane validation scenario shipped, live validation pending `nestgate.io`. |
 
 **Key change**: Criterion 6 no longer requires Cloudflare elimination.
 It requires zero commercial services in the `primal.eco` data path plus
@@ -402,6 +398,7 @@ position can read them.
 | 77 | Initial: 5-phase deployment plan from parity to stadial entry. biomeGate excluded from critical path. |
 | 77b | Restructured: separated Code Evolution (Part A) from Infrastructure (Part B). Made plan position-independent — goals survive overwatch changes. Added coordination guide as guidance, not dependency. |
 | 77c | Diderm revision: revised glacial shift criteria for diderm membrane architecture. Criterion 6 now requires inner membrane zero-commercial + cross-membrane validation instead of total Cloudflare elimination. B2 revised for inner/outer TLS distinction. Added `DIDERM_DOMAIN_ARCHITECTURE.md` reference. |
+| 77d | Inner membrane live: `primal.eco` DNS propagated + TLS cert obtained (LE via Caddy). B1b `primal.eco` marked COMPLETE. `nestgate.io` propagating. Criterion 3 FORMALIZED (ironGate ACK). Criteria 5+6 progress: inner membrane zero-commercial achieved. |
 
 ---
 

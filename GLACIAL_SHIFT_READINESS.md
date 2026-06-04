@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-03 (Wave 77 — **ECOSYSTEM AT PARITY**: Parity sprint complete — all lagging teams absorbed Wave 76 trust infrastructure. bearDog w137 (DID↔key binding, typed handler errors, dashmap 6). Songbird w76 (Phase 3.5 scaffold, capability_propagation.rs extracted, retry resilience). biomeOS v4.05 (zero String errors, perceptron remote infer wired, deep debt). toadStool S288 (panic elimination, feature gates, trust semantics). barraCuda (ml.rs split, runtime discovery). coralReef w77 (SPIR-V portable output configurable, mesh capability readiness). NestGate s92 (ZERO test failures — env-var race fixed). neuralSpring V179 (production stubs→real IPC, capability-first discovery). wetSpring V195 (157 warnings eliminated, bearDog w135 absorbed). ludoSpring V82 (data-driven const table). sweetGrass v0.7.45 (cross-gate attribution schema). rhizoCrypt w76 (cross-gate mesh event types). loamSpine w76 (cross-gate trust entry schema). skunkBat w76b (westGate readiness). squirrel w76 (deep debt refactor). plasmidBin (thiserror migration). projectFOUNDATION w76 (trust infrastructure update). 20 handoffs archived. 3 parity FRAGOs resolved. Ready for live validation + deployment.)
+**Last updated**: 2026-06-04 (Wave 77c — **INNER MEMBRANE LIVE**: `primal.eco` sovereign DNS propagated + TLS cert obtained (Let's Encrypt via Caddy). Inner membrane operational with zero commercial services in data path. `nestgate.io` DNS propagating. Peptidoglycan formalization DELIVERED by ironGate (cellMembrane ACK: MembraneComposition::Peptidoglycan variant, TrustBarrierConfig schema, FIELDMOUSE_CONTRACT.md, 4 tests/214 total). strandGate FRAGO: bearDog auth.events.subscribe for cross-gate trust event wiring. S4 7-day gate active (ends ~Jun 9). Diderm membrane architecture fully formalized and operational.)
 
 ---
 
@@ -202,7 +202,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Sovereign shadow functions (membrane-shadow) | **OPERATIONAL** (Wave 65) — 12 Rust modules: dispatch, cli, temporal, impulse, context, plasmid, git_ops, forgejo, gate, config, manifest, identity. `plasmid.fetch` + `temporal.cascade` fully Rust. |
 | Forgejo repos (5 bidirectional + 33 mirrors) | **OPERATIONAL** (Wave 62) — biomeOS/coralReef/sweetGrass/squirrel/wateringHole push-enabled |
 | waterFall temporal sync | **OPERATIONAL** (Wave 65) — Rust `temporal.cascade` replaces bash cascade-pull. Manifest-driven gate profiles, dynamic gate discovery. |
-| Channel 1: Sovereign DNS (knot-dns) | **CUTOVER SUBMITTED** (Jun 4, 12:36 ET) — 3 zones (primals.eco, primal.eco, nestgate.io), ns1+ns2, DNSSEC. Porkbun NS + DS records set for primal.eco + nestgate.io. primals.eco stays Cloudflare (outer membrane). Propagation in progress. |
+| Channel 1: Sovereign DNS (knot-dns) | **PROPAGATED** (Jun 4) — `primal.eco` DNS LIVE on public resolvers (8.8.8.8, 1.1.1.1) + TLS cert obtained (LE). `nestgate.io` propagating (SERVFAIL on public resolvers, expected). `primals.eco` stays Cloudflare (outer membrane per diderm model). 3 zones, ns1+ns2, DNSSEC all active. |
 | Caddy → BearDog ACME replacement | Shadow live, **not cut over** |
 | BearDog Vault (encrypted creds at rest) | **PLANNED** (Phase 2) |
 
@@ -290,7 +290,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 | Cross-gate `discovery.peers` live test | primalSpring | **HIGH** | Songbird `latency_ms` + `mesh.probe_latency` DONE. biomeOS endpoints ready. **eastGate must initiate paired test** |
 | Cross-gate `capability.call` live test | primalSpring | **HIGH** | biomeOS `capability.call` DONE. `s_covalent_mesh` scenario written. **Needs live run** |
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
-| DNS NS registrar cutover | operator | **HIGH** | Sovereign DNS infra LIVE (ns1+ns2, DNSSEC). **Registrar manual action pending** |
+| DNS NS registrar cutover | operator | ~~HIGH~~ | **DONE** — `primal.eco` propagated + TLS live. `nestgate.io` propagating. `primals.eco` stays Cloudflare. |
 | Forgejo Actions CI | projectNUCLEUS | LOW | Evaluation planned (P2) |
 | neuralSpring composition_nucleus.sh fix | neuralSpring | LOW | Only spring with stale `target/release/` primal hardcode |
 | Central fossilRecord sync | all primals | LOW | 7/8 primals reference central paths that don't exist yet |
@@ -329,24 +329,24 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 77b)**: **ECOSYSTEM AT PARITY — READY FOR DEPLOYMENT STEPS.**
-All teams aligned to Wave 76+ trust infrastructure. Parity sprint complete: 4 springs
-absorbed upstream (neuralSpring V179 real IPC, wetSpring V195 157 warnings eliminated,
-ludoSpring V82 data-driven, healthSpring current). Provenance trio wired cross-gate schemas
-(rhizoCrypt mesh events, loamSpine trust entries, sweetGrass v0.7.45 attribution braids).
-Hot teams consolidated: bearDog w137 (DID↔key binding, typed errors), Songbird w76
-(Phase 3.5 scaffold, retry resilience), NestGate s92 (ZERO test failures), biomeOS v4.05
-(zero String errors, perceptron remote infer wired), toadStool S288 (panic elimination),
-barraCuda (ml.rs modularized), coralReef w77 (SPIR-V output configurable + mesh capability).
-eastGate tools freshened: skunkBat westGate-ready, squirrel refactored, plasmidBin thiserror.
-20 handoffs archived. 3 parity FRAGOs resolved. 1 active FRAGO (westGate enrollment).
-Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 infra verified.
-S3 VPS READY. Criteria 2 mesh: 3-gate OPERATIONAL, capability routing UNBLOCKED, trust
-verified. Criteria 3: peptidoglycan operational, formalization pending. Criteria 5: `primals.eco`
-zone LIVE on knot-dns, `primal.eco` + `nestgate.io` zone creation NEXT. Criteria 6:
-cross-membrane validation design pending (`s_cross_membrane_integrity` scenario).
-**Next**: `primal.eco`/`nestgate.io` zone creation, live cross-gate `capability.call`,
-DNS NS registrar cutover, peptidoglycan formalization, cross-membrane validation design.
+**Current assessment (Wave 77c)**: **INNER MEMBRANE LIVE — DEPLOYMENT IN PROGRESS.**
+`primal.eco` sovereign DNS propagated on public resolvers + TLS cert obtained (Let's Encrypt
+via Caddy on golgiBody-ext). Inner membrane serves HTTPS with zero commercial services in
+data path. `nestgate.io` DNS propagating (~hours remaining). Peptidoglycan formalization
+DELIVERED by ironGate: `MembraneComposition::Peptidoglycan` variant (role, not ladder tier),
+`TrustBarrierConfig` schema, `FIELDMOUSE_CONTRACT.md` trust barrier contract, 4 new tests
+(214 total cellMembrane). strandGate FRAGO: bearDog `auth.events.subscribe` for cross-gate
+trust event wiring (rhizoCrypt inbound ready, bearDog outbound pending).
+Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 inner membrane
+TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY + content layer wiring pending
+(`nestgate.io`). Criteria 2 mesh: 2 gates operational (eastGate + strandGate), need 3rd
+(westGate hardware incoming). Criteria 3: peptidoglycan FORMALIZED (ironGate ACK). Criteria
+4: flockGate OPERATIONAL, formal WAN validation pending. Criteria 5: `primal.eco` DNS
+PROPAGATED + TLS LIVE. `nestgate.io` DNS propagating. `primals.eco` stays Cloudflare (outer
+membrane). Criteria 6: cross-membrane validation scenario shipped (`s_cross_membrane_integrity`,
+61 scenarios), live dual-path validation pending `nestgate.io` propagation.
+**Next**: `nestgate.io` DNS propagation → TLS cert → content wiring. Live cross-gate
+`capability.call` (A1 P0). S4 gate review (~Jun 9). westGate enrollment (hardware ETA).
 
 ---
 
