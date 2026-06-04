@@ -1,9 +1,10 @@
-# Wave 76 Remaining Work — Ecosystem Parity Sprint
+# Wave 77 Remaining Work — Post-Parity Deployment Phase
 
 **Date**: 2026-06-03  
 **Author**: eastGate overwatch  
 **Supersedes**: Wave 70 remaining work (archived)  
-**Status**: Active
+**Status**: Active  
+**Updated**: Wave 77 — parity sprint COMPLETE, all teams aligned
 
 ---
 
@@ -101,22 +102,24 @@ deployment-critical (skunkBat for westGate, benchScale for validation).
 
 ## Remaining Work by Track
 
-### Track 1: Parity Sprint (P0 — do before deployment)
+### Track 1: Parity Sprint — COMPLETE ✓
 
-**Goal**: Bring lagging teams to Wave 76 awareness so compositions work
-with the new trust-aware mesh infrastructure.
+**Goal**: Bring lagging teams to Wave 76 awareness. **ACHIEVED.**
 
-| Team | Gate | Work | Priority |
-|------|------|------|----------|
-| neuralSpring | southGate | Absorb Songbird w75 propagation. Verify capability.call scenarios pass with new push model. Deep debt if clear. | P1 |
-| wetSpring | southGate | Absorb bearDog w135 trust patterns. Verify compositions pass with new verify_ionic. Deep debt if clear. | P1 |
-| healthSpring | ironGate | Verify compositions pass with NestGate s90 content trust. Deep debt if clear. | P1 |
-| ludoSpring | ironGate | Verify compositions pass. Deep debt if clear. | P1 |
-| sweetGrass | strandGate | Wire cross-gate attribution schema. Prepare for multi-gate provenance braids. | P1 |
-| rhizoCrypt | strandGate | Wire cross-gate DAG event types. Session events for trust establishment. | P1 |
-| loamSpine | strandGate | Anchor schema for cross-gate trust events. Ledger entries for key exchange. | P1 |
-| skunkBat | eastGate | Freshen for westGate deployment. Verify defense.status works. | P2 |
-| benchScale | eastGate | Cross-gate test topology definition for live validation. | P2 |
+| Team | Gate | Delivery | Status |
+|------|------|----------|--------|
+| neuralSpring | southGate | V178 parity alignment + V179 deep debt (real IPC, capability-first discovery) | **DONE** |
+| wetSpring | southGate | V194 parity (157 warnings eliminated) + V195 deep debt (TCP transport) | **DONE** |
+| healthSpring | ironGate | Pulled current from forgejo | **DONE** |
+| ludoSpring | ironGate | V82 parity + deep debt (data-driven const table) | **DONE** |
+| sweetGrass | strandGate | v0.7.45 cross-gate attribution schema | **DONE** |
+| rhizoCrypt | strandGate | w76 cross-gate mesh event types | **DONE** |
+| loamSpine | strandGate | w76 cross-gate trust entry schema | **DONE** |
+| skunkBat | eastGate | w76b evolution sprint (westGate readiness) | **DONE** |
+| squirrel | eastGate | w76 parity freshening + deep debt refactor | **DONE** |
+| plasmidBin | eastGate | thiserror migration, helper dedup | **DONE** |
+
+**20 handoffs archived to `wave76/`. 3 parity FRAGOs resolved.**
 
 ### Track 2: Live Cross-Gate Validation (P0 — after parity)
 
@@ -166,25 +169,28 @@ with the new trust-aware mesh infrastructure.
 
 | FRAGO | From→To | Status |
 |-------|---------|--------|
-| `wave72-strandgate-compute-trio-pickup` | eastGate→strandGate | **COMPLETE** — barraCuda + coralReef delivered. Archive pending. |
 | `wave73-westgate-skunkbat-enrollment` | eastGate→westGate | **PENDING** — hardware incoming |
-| `wave76-parity-sprint` (NEW) | eastGate→all | **ACTIVE** — springs + provenance trio alignment |
+
+**Archived (Wave 76)**:
+- `wave72-strandgate-compute-trio-pickup` — COMPLETE (barraCuda + coralReef delivered)
+- `wave76-parity-sprint-springs` — COMPLETE (all 4 springs delivered)
+- `wave76-parity-sprint-provenance` — COMPLETE (all 3 primals delivered)
+- `wave76-parity-sprint-eastgate-tools` — COMPLETE (skunkBat + squirrel delivered)
 
 ---
 
-## Assessment
+## Assessment (Updated Wave 77)
 
-The ecosystem is in a **post-burst consolidation** phase. The frontline
-teams (southGate, strandGate, ironGate) executed a remarkable coordinated
-trust infrastructure delivery in Wave 75-76. But the springs (the validation
-backbone), the provenance trio (the recording layer), and several eastGate
-utilities haven't absorbed any of it yet.
+The ecosystem is at **full parity**. Every team has absorbed the Wave 76
+trust infrastructure. The parity sprint executed in a single evening —
+20 handoffs delivered and archived.
 
-**The risk**: if we push to live cross-gate validation or DNS cutover before
-springs and provenance are aligned, compositions may fail against the new
-trust-aware services, and trust events won't be properly recorded.
-
-**The plan**: parity sprint first, then validate, then deploy.
+**Next phase is deployment**:
+1. Live cross-gate capability.call validation (proves the full chain)
+2. DNS NS registrar cutover (unblocks S1/S3)
+3. S4 auth 7-day gate completion (~Jun 9)
+4. westGate enrollment (when hardware arrives)
+5. Songbird relay Phase 3.5 (full Ed25519 verification)
 
 ---
 

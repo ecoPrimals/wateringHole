@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-03 (Wave 76 — **CROSS-GATE TRUST DELIVERED**: bearDog w135 cross-gate trust model (TrustedIssuerRegistry, multi-issuer verify_ionic, Ed25519 key exchange, 3 trust methods). Songbird w75 capability propagation FIX DEPLOYED (mesh.capabilities_announce push model, HTTP/UDS state unification, relay Phase 3 security). barraCuda w75 full ML pipeline (mlp_infer + mlp_save + mlp_load + mesh.trust_verify). toadStool S286 (dispatch.verify_trust, telemetry schema evolution, yield-to-owner audit). coralReef w75 (artifact provenance headers, Dark Forest trust). NestGate s90 (BLAKE3 content trust verification in federation pull). biomeOS v4.03 (env alignment, AtomicType dedup, typed errors). cellMembrane w75 (relay trust boundary spec). projectNUCLEUS w75 (deploy graph trust validation, gate TOML authority). Capability propagation RESOLVED. Overwatch position codified.)
+**Last updated**: 2026-06-03 (Wave 77 — **ECOSYSTEM AT PARITY**: Parity sprint complete — all lagging teams absorbed Wave 76 trust infrastructure. bearDog w137 (DID↔key binding, typed handler errors, dashmap 6). Songbird w76 (Phase 3.5 scaffold, capability_propagation.rs extracted, retry resilience). biomeOS v4.05 (zero String errors, perceptron remote infer wired, deep debt). toadStool S288 (panic elimination, feature gates, trust semantics). barraCuda (ml.rs split, runtime discovery). coralReef w77 (SPIR-V portable output configurable, mesh capability readiness). NestGate s92 (ZERO test failures — env-var race fixed). neuralSpring V179 (production stubs→real IPC, capability-first discovery). wetSpring V195 (157 warnings eliminated, bearDog w135 absorbed). ludoSpring V82 (data-driven const table). sweetGrass v0.7.45 (cross-gate attribution schema). rhizoCrypt w76 (cross-gate mesh event types). loamSpine w76 (cross-gate trust entry schema). skunkBat w76b (westGate readiness). squirrel w76 (deep debt refactor). plasmidBin (thiserror migration). projectFOUNDATION w76 (trust infrastructure update). 20 handoffs archived. 3 parity FRAGOs resolved. Ready for live validation + deployment.)
 
 ---
 
@@ -318,24 +318,21 @@ The glacial shift (stadial entry) is reached when:
 5. DNS pointed to sovereign infrastructure
 6. Cloudflare/cloudflared **removed** from production data path
 
-**Current assessment (Wave 76)**: **CROSS-GATE TRUST INFRASTRUCTURE DELIVERED.**
-Discovery PROVEN. Dispatch FIXED. Virtual relay Phase 2 DEFAULT. **Capability propagation
-RESOLVED** (Songbird w75 — push model with `mesh.capabilities_announce`, HTTP/UDS state
-unified). **bearDog w135 cross-gate trust model OPERATIONAL**: TrustedIssuerRegistry with
-Ed25519 key exchange, multi-issuer `auth.verify_ionic`, 3 trust establishment methods
-(family_seed, contract_exchange, manual), token enrichment with gate_id/family_id claims.
-**barraCuda full ML pipeline COMPLETE**: train → save → load → infer (all `ml.*` methods
-protected behind BTSP MethodGate). **NestGate s90 BLAKE3 content trust**: federation pull
-now verifies integrity, rejects tampering. **toadStool S286**: dispatch.verify_trust,
-telemetry schema with gate-of-origin fields, yield-to-owner multi-gate audit. **coralReef
-w75**: artifact provenance headers (sporePrint hash + gate + signature). **cellMembrane
-w75**: relay trust boundary spec (BTSP opaque in all channels). **projectNUCLEUS w75**:
-deploy graph trust validation, gate TOML authority sync. **biomeOS v4.03**: env alignment,
-typed errors, AtomicType dedup. Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE
-(ends ~Jun 9). S1 infra verified. S3 VPS READY. Criteria 2 mesh: 3-gate OPERATIONAL,
-capability routing UNBLOCKED. Criteria 3-6 unchanged. Overwatch position codified
-(wateringHole + gen5). Next: live cross-gate capability.call validation, Songbird relay
-Phase 3.5 (full Ed25519 verification), westGate enrollment.
+**Current assessment (Wave 77)**: **ECOSYSTEM AT PARITY — READY FOR DEPLOYMENT STEPS.**
+All teams aligned to Wave 76+ trust infrastructure. Parity sprint complete: 4 springs
+absorbed upstream (neuralSpring V179 real IPC, wetSpring V195 157 warnings eliminated,
+ludoSpring V82 data-driven, healthSpring current). Provenance trio wired cross-gate schemas
+(rhizoCrypt mesh events, loamSpine trust entries, sweetGrass v0.7.45 attribution braids).
+Hot teams consolidated: bearDog w137 (DID↔key binding, typed errors), Songbird w76
+(Phase 3.5 scaffold, retry resilience), NestGate s92 (ZERO test failures), biomeOS v4.05
+(zero String errors, perceptron remote infer wired), toadStool S288 (panic elimination),
+barraCuda (ml.rs modularized), coralReef w77 (SPIR-V output configurable + mesh capability).
+eastGate tools freshened: skunkBat westGate-ready, squirrel refactored, plasmidBin thiserror.
+20 handoffs archived. 3 parity FRAGOs resolved. 1 active FRAGO (westGate enrollment).
+Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 infra verified.
+S3 VPS READY. Criteria 2 mesh: 3-gate OPERATIONAL, capability routing UNBLOCKED, trust
+verified. Criteria 3-6 unchanged. **Next**: live cross-gate capability.call validation,
+DNS NS registrar cutover, Songbird relay Phase 3.5, westGate enrollment when hardware arrives.
 
 ---
 

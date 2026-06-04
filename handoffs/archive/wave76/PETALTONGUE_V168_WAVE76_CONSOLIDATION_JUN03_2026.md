@@ -2,7 +2,7 @@
 
 **Date**: June 3, 2026
 **Version**: v1.6.8 consolidation
-**Commit**: `3807229`
+**Commit**: `6ef5042` (deep debt pass 3, supersedes `3807229`)
 **Tests**: 6,217+ passed, 0 failed
 **Clippy**: 0 warnings (first-party)
 
@@ -106,3 +106,19 @@ Active impulses (none petalTongue-specific):
   `DiscoveryServiceClient` — NUCLEUS compositions work end-to-end.
 - **Error typing**: Only 2 `AppError::Other` remain (acceptable docroot
   validation). Zero `Result<_, String>` in production.
+
+## Deep Debt Pass 3 (same session, commit `6ef5042`)
+
+- **TRUE PRIMAL TLS**: `nucleus.rs` TLS handshake labels evolved from
+  `Songbird`/`BearDog` to `TLS provider`/`X.509`/`X25519`/`HMAC verify`.
+- **NESTGATE_SOCKET removed**: Deprecated constant fully deleted (zero refs).
+- **Complete idiom sweep**: ALL remaining `"literal".to_string()` in production
+  replaced with `.to_owned()` — 600+ replacements across 195 files. Zero
+  instances remain in non-test code.
+- **Codebase audit results** (all verified clean):
+  - Zero files >800L in production (max 755L)
+  - Zero unsafe code (workspace `forbid`)
+  - Zero hardcoded primal names in production
+  - All mocks properly feature/test-gated
+  - Dependencies well-narrowed, no `full` features
+  - Zero `Result<_, String>` in production

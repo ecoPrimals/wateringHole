@@ -114,16 +114,16 @@ Tier 3 — Domain Science (per-gate)
   primalSpring's scenarios verify cross-gate composition parity.
 ```
 
-### Current Wave Assignments (Wave 76)
+### Current Wave Assignments (Wave 77)
 
 | Gate | Active Work | Priority | Status |
 |------|-------------|----------|--------|
-| **eastGate** | Overwatch codified. Gen5 trust + overwatch papers written. Live cross-gate capability.call validation NEXT. DNS cutover. | P0 glacial | **TRUST INFRASTRUCTURE DELIVERED** |
-| **ironGate** | S4 gate (ends ~Jun 9). 3-gate mesh OPERATIONAL. NestGate s90 BLAKE3 content trust. cellMembrane relay trust boundary spec. | P0 glacial | S4 **ACTIVE**, content trust **VERIFIED** |
-| **southGate** | bearDog w135 cross-gate trust model. Songbird w75 capability propagation FIXED. biomeOS v4.03. Relay Phase 3.5 NEXT. | P0 | **TRUST MODEL SHIPPED** |
-| **biomeGate** | toadStool S286 delivered (trust + telemetry). Hardware still OFFLINE. | P1 HPC | **OFFLINE** (software evolving) |
+| **eastGate** | Live cross-gate capability.call validation. DNS NS cutover. primalSpring security scenarios. skunkBat westGate-ready. | P0 glacial | **AT PARITY — VALIDATION NEXT** |
+| **ironGate** | S4 gate (ends ~Jun 9). NestGate s92 ZERO test failures. cellMembrane westGate onboarding prep. ludoSpring V82 parity. | P0 glacial | S4 **ACTIVE**, NestGate **ZERO FAILURES** |
+| **southGate** | bearDog w137 (DID↔key, typed errors). Songbird w76 Phase 3.5 scaffold. biomeOS v4.05 (perceptron infer wired). Springs V195/V179 at parity. | P0 | **AT PARITY — PHASE 3.5 NEXT** |
+| **biomeGate** | toadStool S288 (deep debt VIII, panic elimination). Hardware still OFFLINE. | P1 HPC | **OFFLINE** (S288 delivered remotely) |
 | **flockGate** | sporePrint S3 content cutover (post-DNS). WAN relay maintenance. | P2 cutover | Ready, waiting on NS cutover |
-| **strandGate** | barraCuda w75 full ML pipeline. coralReef w75 artifact provenance. toadStool S286 via remote. Mesh peer LIVE. | P1 compute | **FULL PIPELINE DELIVERED** |
+| **strandGate** | coralReef w77 SPIR-V output + mesh capability. Provenance trio cross-gate schemas delivered. barraCuda modularized. | P1 compute | **AT PARITY — ALL TEAMS DELIVERED** |
 | **westGate** | 76TB ZFS cold storage. Nest Atomic. Gate setup + NUCLEUS deploy. | P3 expansion | **INCOMING** (ETA this week) |
 | **golgiBody** | Disk at 60%. S4 monitoring active. Relay chain Rust-native. | Maintenance | **HEALTHY** |
 
