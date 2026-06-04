@@ -50,7 +50,7 @@ step_9 = "Fire sitrep: impulse.post --to eastGate --type sitrep --subject 'westG
 songbird_node_id = "west-gate"
 songbird_federation_port = 7700
 songbird_peers = "east-gate@192.168.1.144:7700,strand-gate@192.168.1.132:7700"
-security_endpoint = "http://127.0.0.1:9900"
+security_endpoint = "http://127.0.0.1:9100"
 
 [enrollment.validation]
 check_1 = "discovery.peers returns peer_count >= 2"
