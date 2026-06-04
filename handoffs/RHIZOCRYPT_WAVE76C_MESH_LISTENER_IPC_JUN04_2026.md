@@ -58,15 +58,50 @@ bearDog (auth.trust_issuer fires)
 - `sporeprint/validation-summary.md`, `docs/DEPLOYMENT_CHECKLIST.md`
 - `specs/00_SPECIFICATIONS_INDEX.md`
 
-## Next Steps (Upstream Gaps)
+## Upstream Dependency: bearDog (southGate) — BLOCKING
 
-1. **bearDog w137**: Needs `auth.events.subscribe` or `ipc.watch` on signing
-   endpoint for rhizoCrypt to auto-subscribe. Until then, events can be
-   injected via `record_event()` from RPC handler layer.
-2. **Songbird**: When bearDog advertises `crypto:events` capability,
-   `SongbirdClient::populate_registry()` should map it.
-3. **Mesh session provisioning**: Dedicated mesh-trust session auto-creation
+**FRAGO filed**: `wave76c-beardog-auth-events-subscribe` in `impulses/active/`
+
+rhizoCrypt's inbound side is complete. The wiring is blocked on bearDog
+exposing auth event notifications. Three options proposed (in order of preference):
+
+1. **`auth.events.subscribe`** — JSON-RPC streaming on signing endpoint (UDS).
+   bearDog streams notifications as trust events fire. Preferred.
+2. **`ipc.watch`** — Generic watch with filter on signing endpoint.
+3. **`auth.events.poll`** — Fallback polling if streaming is too complex.
+
+### Wire Format Expected by rhizoCrypt
+
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "auth.event",
+  "params": {
+    "kind": {
+      "type": "TrustIssuerRegistered",
+      "payload": { "issuer_fingerprint": "<hex>" }
+    },
+    "source_gate": "<gate>",
+    "timestamp": 1717444800
+  }
+}
+```
+
+All 5 event kinds defined: `TrustIssuerRegistered`, `KeyExchangeCompleted`,
+`FamilyEnrollment`, `MeshJoin`, `MeshLeave`.
+
+### Songbird Gap
+
+When bearDog advertises `crypto:events` capability, Songbird's service
+registry should map it so rhizoCrypt can discover it via
+`SongbirdClient::populate_registry()`.
+
+## Next Steps (Local)
+
+1. **Mesh session provisioning**: Dedicated mesh-trust session auto-creation
    on first event (or config-driven `RHIZOCRYPT_MESH_SESSION_ID`).
+2. **Background subscription task**: Once bearDog exposes events, add
+   `tokio::spawn` background listener in `PrimalLifecycle::start()`.
 
 ## Integration Status
 
@@ -75,6 +110,7 @@ bearDog (auth.trust_issuer fires)
 | Event types (Wave 76) | Delivered, tested |
 | Wire DTOs | Delivered, roundtrip tested |
 | MeshEventListener scaffold | Delivered, 11 tests |
-| bearDog IPC subscription | Waiting on bearDog w137 |
+| bearDog IPC subscription | **BLOCKED** — FRAGO filed to southGate |
 | Mesh session auto-provision | Designed, not implemented |
 | Clippy guard consistency | Complete (zero unfulfilled) |
+| FRAGO to bearDog | Filed: `wave76c-beardog-auth-events-subscribe` |
