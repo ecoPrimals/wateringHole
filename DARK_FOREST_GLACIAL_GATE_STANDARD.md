@@ -95,6 +95,35 @@ The provenance trio graph fragment includes the three provenance primals.
 
 ---
 
+## Dark Forest Membrane Classification (Wave 77b)
+
+The 5 pillars above apply with different strictness depending on which
+membrane layer a component belongs to. This is the **diderm membrane
+classification** — see `DIDERM_DOMAIN_ARCHITECTURE.md` for the full
+trust barrier model.
+
+| Pillar | Outer Membrane (`primals.eco`) | Peptidoglycan (trust barrier) | Inner Membrane (`primal.eco`) |
+|--------|-------------------------------|-------------------------------|------------------------------|
+| 1. Zero metadata leakage | **RELAXED** — Cloudflare sees visitor IPs, headers, timing. Acceptable for world-facing surface. | **STRICT** — VPS provider sees only encrypted relay traffic volume/timing. No primal identity or capability surface leaked. | **STRICT** — zero metadata leakage. Stripped binaries, no hostnames, BirdSong encrypted. |
+| 2. Zero port exposure | **RELAXED** — 80/443 (Caddy), 53 (DNS ns2). | **STRICT** — 3478 (TURN), 2222 (sync relay), 22 (admin SSH). | **STRICT** — UDS-only default. Songbird :7700 sole federation surface. |
+| 3. Songbird sole network surface | **N/A** — Caddy is the network surface by design. | **STRICT** — only Songbird TURN relay handles cross-membrane traffic. | **STRICT** — all external traffic routes through Songbird. |
+| 4. BTSP crypto integrity | **N/A** — external users don't use BTSP. | **STRICT** — BTSP tokens are opaque. Peptidoglycan relays but cannot read, modify, or forge them. | **STRICT** — full BTSP enforcement, ChaCha20-Poly1305 AEAD, TrustedIssuerRegistry. |
+| 5. Enclave computing | **N/A** — no compute on outer membrane. | **STRICT** — no biomeOS, no orchestration, no compute. Pure relay. | **STRICT** — full enclave boundaries, BTSP-gated dispatch. |
+
+**The trust barrier invariant**: Peptidoglycan MUST NOT be able to read,
+modify, or forge inner membrane traffic. It is a dumb pipe with
+BTSP-opaque relay. cellMembrane Wave 75 confirmed: "BTSP tokens OPAQUE
+in all relay channels."
+
+### Content Layer (`nestgate.io`)
+
+The content layer follows **inner membrane classification** (STRICT) for
+all 5 pillars. Content integrity is verified by BLAKE3 hashes regardless
+of delivery path. Even content served through the outer membrane CDN can
+be validated by comparing hashes with the inner membrane's canonical copy.
+
+---
+
 ## Validation Tiers
 
 ### Tier::Rust (Structural — available now)
@@ -151,3 +180,15 @@ Dark Forest checks as an additional axis in the same test suite.
 - Membrane Channel Architecture: `MEMBRANE_CHANNEL_ARCHITECTURE.md`
 - Zero-Port Standard: primalSpring `s_zero_port_standard` scenario
 - Deployment Validation: `DEPLOYMENT_VALIDATION_STANDARD.md`
+- Diderm Domain Architecture: `DIDERM_DOMAIN_ARCHITECTURE.md`
+- Sovereignty Standards: `SOVEREIGNTY_STANDARDS.md` (§Sovereignty Shadow Membrane Applicability)
+- fieldMouse Contract: `gardens/cellMembrane/specs/FIELDMOUSE_CONTRACT.md` (peptidoglycan is a fieldMouse)
+
+---
+
+## Changelog
+
+| Date | Change |
+|------|--------|
+| 2026-06-04 | Wave 77b: Added §Dark Forest Membrane Classification — per-layer strictness for outer/peptidoglycan/inner membrane. Trust barrier invariant. Content layer classification. |
+| 2026-05-14 | Initial: 5 pillars, structural validation, spring adoption guidance. |

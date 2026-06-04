@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 3, 2026 (Wave 76: cross-gate trust schemas, parity sprint, deep debt sweep. Waves 71–75 archived — Songbird mesh push, deploy graph trust, plasmidBin thiserror evolution. 1 active handoff + 553 archived. 4 active impulses. NC-1 code complete.)
+**Last Updated**: June 4, 2026 (Wave 77b: Ecosystem at full parity. Diderm membrane architecture formalized — outer membrane (`primals.eco`), peptidoglycan trust barrier, inner membrane (`primal.eco`), content layer (`nestgate.io`). `primal.eco` + `nestgate.io` zones live on sovereign knot-dns. 61 validation scenarios, 858 tests. 1 active handoff + 530+ archived. 4 active impulses. Cross-membrane validation scenario shipped.)
 
 ---
 

@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 76
-date = "2026-06-03"
+id = 77
+date = "2026-06-04"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 76: cross-gate trust schemas delivered (loamSpine, rhizoCrypt, sweetGrass). Parity sprint in progress — healthSpring 1097t, wetSpring 2085t, projectNUCLEUS 247t, esotericWebb 410t, cellMembrane 210t, plasmidBin 24t all clean. Deep debt: plasmidbin-types Result<_,String>→thiserror, helpers deduplicated. westGate deploy graph complete. 8 handoffs archived. Freshness: skunkBat/benchScale/squirrel Tier 3 (parity sprint targets)."
+notes = "Wave 77b: Ecosystem at full parity. Diderm membrane architecture formalized — outer membrane (primals.eco), peptidoglycan trust barrier, inner membrane (primal.eco), content layer (nestgate.io). primal.eco + nestgate.io zones live on knot-dns (ns1+ns2, DNSSEC). Caddy vhosts configured. 11 handoffs archived (wave77/). Cross-membrane validation scenario shipped (s_cross_membrane_integrity, 61 scenarios, 858 tests). Peptidoglycan formalization FRAGO fired. DNS NS cutover checklist updated for all 3 domains. S4 7-day gate active (ends ~Jun 9). 4 active impulses."
 publisher = "membrane"
 
 [heads]

@@ -1,0 +1,385 @@
+# Diderm Domain Architecture — Trust Barrier Model
+
+**Authority**: Overwatch + Ecosystem Convention  
+**Status**: Active (Wave 77)  
+**Date**: 2026-06-04  
+**Prerequisites**: `DARK_FOREST_GLACIAL_GATE_STANDARD.md`, `SOVEREIGNTY_STANDARDS.md`, `OVERWATCH_POSITION_STANDARD.md`
+
+---
+
+## Abstract
+
+The ecoPrimals ecosystem operates a diderm (double-membrane) architecture
+across three web domains. The **peptidoglycan VPS layer** is the trust
+barrier — an air gap between the outer membrane (world-facing, commercial
+services acceptable) and the inner membrane (pure sovereign primals, zero
+commercial in the data path). The peptidoglycan is disposable, replicable,
+and provider-independent.
+
+This document defines the trust model, domain assignments, Dark Forest
+membrane classification, and the cross-membrane validation pattern that
+makes the dual membrane stronger than either membrane alone.
+
+---
+
+## The Biological Model
+
+In gram-negative bacteria, the diderm envelope has two membranes separated
+by the periplasmic space containing peptidoglycan — a rigid structural
+layer that gives the cell shape and mechanical strength while remaining
+permeable to small molecules.
+
+The ecoPrimals diderm follows this pattern:
+
+```
+                  Hostile Internet
+                        │
+          ┌─────────────┴──────────────┐
+          │    OUTER MEMBRANE          │
+          │    primals.eco             │
+          │    Cloudflare + Caddy      │
+          │    (world-facing surface)  │
+          └─────────────┬──────────────┘
+                        │
+          ┌─────────────┴──────────────┐
+          │    PEPTIDOGLYCAN           │
+          │    Trust Barrier / Air Gap │
+          │    Songbird TURN relay     │
+          │    Temporal sync hub       │
+          │    STORES NOTHING          │
+          │    DISPOSABLE              │
+          └─────────────┬──────────────┘
+                        │
+          ┌─────────────┴──────────────┐
+          │    INNER MEMBRANE          │
+          │    primal.eco              │
+          │    Sovereign DNS + TLS     │
+          │    Songbird mesh           │
+          │    bearDog BTSP            │
+          │    biomeOS orchestration   │
+          │    (organism coordination) │
+          └─────────────┬──────────────┘
+                        │
+          ┌─────────────┴──────────────┐
+          │    CONTENT LAYER           │
+          │    nestgate.io             │
+          │    NestGate CAS            │
+          │    BLAKE3 integrity        │
+          │    pseudoSpores, notebooks │
+          │    (data objects)          │
+          └────────────────────────────┘
+```
+
+---
+
+## Domain Assignments
+
+| Domain | K-Derm Layer | DNS Authority | TLS Provider | Trust Level | Purpose |
+|--------|-------------|--------------|-------------|-------------|---------|
+| `primals.eco` | Outer (trans face) | Cloudflare | Cloudflare proxy | **Untrusted by inner membrane** | Public website, Forgejo web UI, ecosystem portal |
+| `primal.eco` | Inner (cis face) | Sovereign knot-dns | Sovereign Caddy + LE | **Full trust** — Dark Forest strict | Mesh API, relay, cross-gate coordination, HPC federation |
+| `nestgate.io` | Content organelle | Sovereign knot-dns | Sovereign Caddy + LE | **Content trust** — BLAKE3 integrity | CAS data objects: pseudoSpores, notebooks, datasets |
+
+### Registrar
+
+All three domains are on Porkbun. NS records are set per-domain:
+- `primals.eco` → Cloudflare nameservers (outer membrane)
+- `primal.eco` → `ns1.primals.eco` / `ns2.primals.eco` (sovereign)
+- `nestgate.io` → `ns1.primals.eco` / `ns2.primals.eco` (sovereign)
+
+---
+
+## The Peptidoglycan Trust Barrier
+
+### Properties
+
+The peptidoglycan layer sits between outer and inner membranes. It is the
+**only** point where they touch. It has these invariant properties:
+
+| Property | Requirement |
+|----------|------------|
+| **Stores nothing** | Broker/relay only. No primary data, no user data, no secrets beyond `tower.env`. |
+| **Disposable** | Can be torn down and reprovisioned from `membrane.toml` + `tower.env`. No state loss. |
+| **Replicable** | Deployable on any VPS provider or self-hosted from a WAN-facing gate. |
+| **Provider-as-adversary** | VPS provider is a non-family observer. Secrets encrypted at rest. |
+| **BTSP-opaque** | All relay traffic is encrypted end-to-end. Peptidoglycan relays but cannot read, modify, or forge inner membrane traffic. |
+| **Unidirectional flow** | Outer pushes TO peptidoglycan. Inner pulls FROM peptidoglycan. Neither reaches the other directly. |
+
+### Current Deployment
+
+| Node | IP | Layer | Role |
+|------|----|-------|------|
+| golgiBody-ext | 137.184.197.151 | Outer membrane | Caddy TLS, sporePrint, DNS ns2 |
+| peptidoglycan | 157.230.209.218 | Trust barrier | Songbird TURN, temporal sync, Forgejo relay |
+| golgiBody | 157.230.3.183 | Inner membrane | knot-dns ns1, Forgejo, sovereign DNS |
+
+### Multi-Peptidoglycan
+
+The peptidoglycan is a **role**, not a single VPS. It can be fulfilled by:
+
+| Instance | Provider | Purpose | Status |
+|----------|----------|---------|--------|
+| peptidoglycan-nyc1 | DigitalOcean | Primary relay | **OPERATIONAL** |
+| peptidoglycan-eu | Hetzner | Geographic redundancy | Future |
+| peptidoglycan-self | Self-hosted WAN gate | Remove VPS dependency | Future |
+| peptidoglycan-abg | ABG member hosted | Federation relay | Future |
+
+The inner membrane discovers peptidoglycan instances through Songbird TURN
+peer registration. Adding a new instance requires only:
+1. Deploy `membrane.toml` with `composition = "peptidoglycan"`
+2. Start Songbird TURN on the new instance
+3. Inner membrane gates add it to `SONGBIRD_PEERS`
+
+### Self-Hosting Path
+
+When a WAN-facing gate has a public IP (flockGate already does, via
+cellMembrane relay), it can serve the peptidoglycan role directly. The
+VPS peptidoglycan then becomes redundant — the organism grows its own
+structural layer. This is the sovereignty endgame for the structural
+layer: zero external substrate dependency.
+
+---
+
+## Dark Forest Membrane Classification
+
+The 5 Dark Forest pillars (from `DARK_FOREST_GLACIAL_GATE_STANDARD.md`)
+apply with different strictness per membrane layer:
+
+### Pillar 1: Zero Metadata Leakage
+
+| Layer | Classification | What Leaks | Acceptable? |
+|-------|---------------|-----------|-------------|
+| Outer | **RELAXED** | Cloudflare sees visitor IPs, headers, timing, geographic distribution | Yes — this is the world-facing surface. Its job is to absorb hostile traffic. |
+| Peptidoglycan | **STRICT** | VPS provider sees only encrypted relay traffic volume and timing. No primal identity, no capability surface, no content. | Provider metadata (connection timing, bandwidth) is the residual. Acceptable for relay. |
+| Inner | **STRICT** | Zero metadata leakage. Stripped binaries, no hostnames embedded, BirdSong encrypted. | No exceptions. |
+
+### Pillar 2: Zero Port Exposure
+
+| Layer | Classification | Exposed Ports |
+|-------|---------------|--------------|
+| Outer | **RELAXED** | 80/443 (Caddy HTTP/HTTPS), 53 (DNS ns2) |
+| Peptidoglycan | **STRICT** | 3478 (TURN relay), 2222 (Forgejo SSH relay), 22 (admin SSH) |
+| Inner | **STRICT** | UDS-only default. Songbird :7700 is the sole federation surface on LAN. |
+
+### Pillar 3: Songbird as Sole Network Surface
+
+| Layer | Classification | Network Surface |
+|-------|---------------|----------------|
+| Outer | **N/A** | Caddy is the network surface by design. |
+| Peptidoglycan | **STRICT** | Only Songbird TURN relay handles cross-membrane traffic. |
+| Inner | **STRICT** | All external traffic routes through Songbird. No primal directly opens external listeners. |
+
+### Pillar 4: BTSP Crypto Integrity
+
+| Layer | Classification | BTSP Role |
+|-------|---------------|-----------|
+| Outer | **N/A** | External users don't use BTSP. Authentication is Cloudflare-level or public. |
+| Peptidoglycan | **STRICT** | BTSP tokens are **opaque** to peptidoglycan. It relays encrypted payloads. It cannot issue, verify, or modify tokens. |
+| Inner | **STRICT** | Full BTSP enforcement. ChaCha20-Poly1305 AEAD. Cross-gate token verification via TrustedIssuerRegistry. |
+
+### Pillar 5: Enclave Computing
+
+| Layer | Classification | Compute Role |
+|-------|---------------|-------------|
+| Outer | **N/A** | No compute — serves static content and proxies. |
+| Peptidoglycan | **STRICT** | No biomeOS, no orchestration, no compute dispatch. Pure relay. |
+| Inner | **STRICT** | Full enclave boundaries. toadStool dispatch, barraCuda ML, coralReef SPIR-V — all BTSP-gated. |
+
+### The Key Rule
+
+**Peptidoglycan MUST NOT be able to read, modify, or forge inner membrane
+traffic.** It is a dumb pipe. cellMembrane Wave 75 confirmed: "BTSP tokens
+OPAQUE in all relay channels." This is the trust barrier invariant.
+
+---
+
+## Cross-Membrane Validation
+
+The dual membrane creates a **permanent integrity monitoring pattern**.
+The inner membrane is the ground truth. The outer membrane is always
+under suspicion.
+
+### Validation Checks
+
+| Check | Method | What It Catches |
+|-------|--------|----------------|
+| Content integrity | Same resource via outer (`primals.eco`) and inner (`primal.eco`), compare BLAKE3 hashes | CDN injection, content modification, stale cache |
+| Timing baseline | Inner membrane response time is the floor. Outer should be inner + CDN overhead. | Unexpected latency = interception or throttling |
+| Availability cross-check | Inner healthy + outer reports down = external service failure, not real downtime | Cloudflare outage, regional blocking |
+| TLS certificate verification | Inner membrane knows the real LE certificate fingerprint. Compare with outer. | Certificate substitution (Cloudflare MITM by design issues its own cert) |
+| DNS consistency | Query sovereign NS (`ns1.primals.eco`) vs public resolver (`8.8.8.8`). Compare. | DNS poisoning, hijacking, registrar compromise |
+| Route integrity | Traceroute from inner membrane to outer. Known hop count as baseline. | BGP hijacking, route injection |
+
+### Why This Is Stronger Than Eliminating Cloudflare
+
+Eliminating Cloudflare removes DDoS protection and CDN benefits.
+Keeping Cloudflare on the outer membrane but validating from the inner
+membrane gives you **both**:
+
+- External traffic protection (Cloudflare absorbs DDoS, bots, scanners)
+- Integrity verification (inner membrane detects any tampering)
+- Graceful degradation (if outer membrane is compromised, inner membrane
+  continues serving trusted peers directly)
+
+The dual membrane is not a transitional state. It is the **target
+architecture**.
+
+---
+
+## Inner Membrane Use Cases (primal.eco)
+
+| Subdomain | Service | Purpose |
+|-----------|---------|---------|
+| `mesh.primal.eco` | Songbird | Federation endpoint for gate-to-gate mesh |
+| `relay.primal.eco` | Songbird TURN | Peptidoglycan relay endpoint |
+| `auth.primal.eco` | bearDog BTSP | Token exchange, trust establishment |
+| `api.primal.eco` | biomeOS | Internal API for orchestration and dispatch |
+| `dns.primal.eco` | knot-dns | Sovereign DNS management interface |
+
+### ABG Federation
+
+An ABG member spinning up their own HPC gate joins via `primal.eco` mesh:
+1. Deploy their own peptidoglycan (or connect directly if LAN-reachable)
+2. Start bearDog with family seed enrollment
+3. Start Songbird with `SONGBIRD_PEERS` pointing to `relay.primal.eco`
+4. Inner membrane discovers them via `discovery.peers`
+5. Sovereign trust only — no commercial service in the data path
+6. Shared compute via BTSP-authenticated `capability.call`
+
+---
+
+## Content Layer Use Cases (nestgate.io)
+
+| URL Pattern | Service | Purpose |
+|-------------|---------|---------|
+| `nestgate.io/<blake3-hash>` | NestGate CAS | Direct content-addressed fetch |
+| `nestgate.io/spore/<name>` | NestGate + pseudoSpore | Named pseudoSpore access |
+| `nestgate.io/notebook/<id>` | NestGate + petalTongue | Rendered notebook view |
+| `nestgate.io/manifest/<name>` | NestGate cas-manifest | sporePrint content manifests |
+
+Content integrity is sovereign regardless of delivery path. Even if served
+through a CDN, BLAKE3 hashes verify end-to-end. The content layer can
+optionally use outer membrane CDN for performance while inner membrane
+verifies integrity.
+
+**Backing store**: westGate 76TB ZFS pool (primary), federated across gates
+via `content.replicate.pull` on inner membrane.
+
+---
+
+## Sovereignty Shadow Evolution
+
+The sovereignty shadows (S1-S5) now apply specifically to the inner membrane:
+
+| Track | What | Inner Membrane | Outer Membrane |
+|-------|------|---------------|----------------|
+| S1 TLS | TLS termination | Caddy + LE on golgiBody (sovereign, MUST) | Cloudflare proxy (acceptable) |
+| S2 NAT | NAT relay | Songbird TURN (GRADUATED) | N/A |
+| S3 Content | Content serving | NestGate CAS on `nestgate.io` (sovereign) | sporePrint via Caddy or CDN (acceptable) |
+| S4 Auth | Authentication | bearDog BTSP enforced (sovereign, MUST) | Public/Cloudflare auth (acceptable) |
+| S5 DNS | DNS resolution | knot-dns for `primal.eco` + `nestgate.io` (sovereign, MUST) | Cloudflare DNS for `primals.eco` (acceptable) |
+
+The principle: **inner membrane MUST be fully sovereign. Outer membrane
+MAY use commercial services.** Cross-membrane validation ensures the outer
+membrane stays honest.
+
+---
+
+## Peptidoglycan Composition Specification
+
+### membrane.toml Schema
+
+```toml
+[membrane]
+name = "peptidoglycan-nyc1"
+composition = "peptidoglycan"
+
+[membrane.identity]
+family_id = "membrane-alpha"
+gate_id = "pepti-nyc1"
+
+[membrane.provider]
+type = "digitalocean"
+region = "nyc1"
+
+[membrane.channels.relay]
+enabled = true
+port = 3478
+primal = "songbird"
+
+[membrane.channels.sync]
+enabled = true
+port = 2222
+
+[membrane.channels.surface]
+enabled = false
+
+[membrane.trust_barrier]
+inner_domain = "primal.eco"
+outer_domain = "primals.eco"
+opaque_relay = true
+```
+
+### Lifecycle
+
+```
+provision → harden → deploy → validate → operate → [teardown → reprovision]
+                                                          │
+                                                   No data loss.
+                                                   tower.env is the only state.
+                                                   Inner membrane unaffected.
+```
+
+### Deploy Anywhere
+
+```bash
+# DigitalOcean (current)
+deploy_membrane.sh --composition peptidoglycan --provider digitalocean --region nyc1
+
+# Hetzner (future redundancy)
+deploy_membrane.sh --composition peptidoglycan --provider hetzner --region fsn1
+
+# Self-hosted from WAN gate
+deploy_membrane.sh --composition peptidoglycan --provider bare_metal --host flockgate.local
+```
+
+---
+
+## Revised Glacial Shift Criteria
+
+| # | Criterion | Revised Meaning |
+|---|-----------|----------------|
+| 1 | Sovereignty shadows graduated (inner membrane) | S1-S4 on `primal.eco` path. Outer membrane may use commercial TLS. |
+| 2 | Multi-gate LAN mesh operational (3+) | Songbird mesh on inner membrane. eastGate + strandGate + westGate. |
+| 3 | Peptidoglycan replicable | Can be torn down and redeployed from `membrane.toml`. Trust barrier tested. |
+| 4 | Remote covalent node over WAN | Via inner membrane only (TURN through peptidoglycan). |
+| 5 | DNS sovereign for inner membrane | `primal.eco` + `nestgate.io` on knot-dns. `primals.eco` on Cloudflare OK. |
+| 6 | Inner membrane zero-commercial + cross-validation | Zero commercial in `primal.eco` data path. Dual-path validation operational. |
+
+---
+
+## References
+
+- `DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5 security invariants
+- `SOVEREIGNTY_STANDARDS.md` — Calibrate → Shadow → Cutover protocol
+- `OVERWATCH_POSITION_STANDARD.md` — Floating coordination role
+- `FIELDMOUSE_CONTRACT.md` — fieldMouse deployment contract (peptidoglycan is a fieldMouse)
+- `MULTI_MEMBRANE_DEPLOYMENT.md` — Multi-membrane parameterization model
+- `DEPLOYMENT_PHASE_PLAN.md` — Phased deployment from parity to stadial entry
+- `whitePaper/gen5/foundations/COVALENT_MESH_TRUST_VALIDATION.md` — Cross-gate trust model
+- `whitePaper/gen5/foundations/KDERM_DIDERM_APPLICATION.md` — K-Derm bonding model
+
+---
+
+## Changelog
+
+| Wave | Change |
+|------|--------|
+| 77 | Initial: formalized diderm domain architecture with peptidoglycan trust barrier, Dark Forest membrane classification, cross-membrane validation pattern, revised glacial shift criteria. |
+
+---
+
+*"The outer membrane faces the storm. The inner membrane coordinates the
+organism. Between them, the peptidoglycan stands — thin, disposable,
+replaceable — but structurally essential. It is the air gap that makes
+sovereignty possible while the world still rages outside."*

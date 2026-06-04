@@ -307,18 +307,29 @@ rhizoCrypt startup latency, Songbird `--security-socket`, stale socket cleanup,
 
 ---
 
-## Glacial Shift Criteria
+## Glacial Shift Criteria (Revised — Diderm Membrane Architecture)
 
-The glacial shift (stadial entry) is reached when:
+The glacial shift (stadial entry) is reached when the following 6 criteria
+are met. **Revised Wave 77b** to reflect the diderm membrane model: the
+inner membrane (`primal.eco`) must be fully sovereign; the outer membrane
+(`primals.eco`) may use commercial services (Cloudflare). See
+`DIDERM_DOMAIN_ARCHITECTURE.md` for the full trust barrier model.
 
-1. All 4 sovereignty shadows **cut over** (S1-S4 formal 7-day gate passed)
-2. Multi-gate LAN mesh **operational** (3+ gates in Plasmodium collective) — Wave 49: peer seeding + mesh.init shipped, same-subnet verification **next**, cross-subnet routing **needed**
-3. cellMembrane Nest expansion **deployed** on VPS
-4. At least one remote covalent node (flockGate) **validated** over WAN
-5. DNS pointed to sovereign infrastructure
-6. Cloudflare/cloudflared **removed** from production data path
+| # | Criterion | Revised Meaning |
+|---|-----------|----------------|
+| 1 | Sovereignty shadows graduated (inner membrane) | S1-S4 on the `primal.eco` data path. Outer membrane may retain commercial TLS. |
+| 2 | Multi-gate LAN mesh operational (3+) | Songbird mesh on inner membrane. eastGate + strandGate + westGate (or substitute). |
+| 3 | Peptidoglycan replicable | Can be torn down and redeployed from `membrane.toml`. Trust barrier tested. |
+| 4 | Remote covalent node over WAN | Via inner membrane only (Songbird TURN through peptidoglycan). |
+| 5 | DNS sovereign for inner membrane | `primal.eco` + `nestgate.io` on knot-dns. `primals.eco` on Cloudflare is acceptable. |
+| 6 | Inner membrane zero-commercial + cross-validation | Zero commercial services in `primal.eco` data path. Dual-path cross-membrane validation operational. |
 
-**Current assessment (Wave 77)**: **ECOSYSTEM AT PARITY — READY FOR DEPLOYMENT STEPS.**
+**Key change from pre-Wave 77b**: Criterion 6 no longer requires
+Cloudflare removal from the outer membrane. Instead, it requires cross-
+membrane validation — the inner membrane acts as the ground truth
+validator for content served by the outer membrane.
+
+**Current assessment (Wave 77b)**: **ECOSYSTEM AT PARITY — READY FOR DEPLOYMENT STEPS.**
 All teams aligned to Wave 76+ trust infrastructure. Parity sprint complete: 4 springs
 absorbed upstream (neuralSpring V179 real IPC, wetSpring V195 157 warnings eliminated,
 ludoSpring V82 data-driven, healthSpring current). Provenance trio wired cross-gate schemas
@@ -331,17 +342,21 @@ eastGate tools freshened: skunkBat westGate-ready, squirrel refactored, plasmidB
 20 handoffs archived. 3 parity FRAGOs resolved. 1 active FRAGO (westGate enrollment).
 Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 infra verified.
 S3 VPS READY. Criteria 2 mesh: 3-gate OPERATIONAL, capability routing UNBLOCKED, trust
-verified. Criteria 3-6 unchanged. **Next**: live cross-gate capability.call validation,
-DNS NS registrar cutover, Songbird relay Phase 3.5, westGate enrollment when hardware arrives.
+verified. Criteria 3: peptidoglycan operational, formalization pending. Criteria 5: `primals.eco`
+zone LIVE on knot-dns, `primal.eco` + `nestgate.io` zone creation NEXT. Criteria 6:
+cross-membrane validation design pending (`s_cross_membrane_integrity` scenario).
+**Next**: `primal.eco`/`nestgate.io` zone creation, live cross-gate `capability.call`,
+DNS NS registrar cutover, peptidoglycan formalization, cross-membrane validation design.
 
 ---
 
 ## References
 
-- `GLACIAL_SHIFT_READINESS.md` — 5 pillars + shadow schedule
+- `DIDERM_DOMAIN_ARCHITECTURE.md` — Trust barrier model, peptidoglycan air gap, domain assignments
 - `SOVEREIGNTY_STANDARDS.md` — calibrate → shadow → cutover protocol
 - `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md` — VPS composition spec
 - `MEMBRANE_CHANNEL_ARCHITECTURE.md` — 3 channels + RustDesk
-- `DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5 security invariants
+- `DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5 security invariants + membrane classification
 - `DISTRIBUTED_COVALENT_DEPLOYMENT.md` — multi-household compute architecture
 - `DESKTOP_NUCLEUS_DEPLOYMENT.md` — single-machine full stack
+- `DEPLOYMENT_PHASE_PLAN.md` — Phased deployment from parity to stadial entry

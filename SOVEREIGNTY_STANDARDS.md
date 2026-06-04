@@ -55,12 +55,29 @@ The gate hardware is the source of truth. The VPS is a touchpoint —
 it terminates TLS, relays traffic, and caches content, but it owns
 nothing. All state lives inside the gate's intracellular membrane.
 
-| Layer | What | Trust | Example |
-|-------|------|-------|---------|
-| **Intracellular** | Gate hardware, full NUCLEUS, all data | Covalent (full trust) | Active gate, 13 primals |
-| **Inner membrane** | VPS touchpoint — relay, TLS, cache | Controlled (we own it, provider has hypervisor) | cellMembrane fieldMouse |
-| **Outer membrane** | GitHub mirror, CDN fallback | Observed (no trust, public) | primals.eco on GitHub Pages |
-| **Extracellular** | External APIs, registries, DNS | Weak (Dark Forest principle) | crates.io, NCBI, Let's Encrypt |
+### 3b. Diderm Membrane Architecture (Wave 77b)
+
+The VPS layer is refined into a diderm (double-membrane) model with a
+peptidoglycan trust barrier. See `DIDERM_DOMAIN_ARCHITECTURE.md` for
+the complete specification.
+
+| Layer | Domain | Trust | Dark Forest | Example |
+|-------|--------|-------|-------------|---------|
+| **Intracellular** | — | Covalent (full trust) | STRICT | Active gate, 13 primals |
+| **Inner membrane** | `primal.eco` | Full sovereign trust | STRICT — zero commercial | golgiBody (knot-dns, Forgejo, mesh API) |
+| **Peptidoglycan** | — | Trust barrier (opaque relay) | STRICT — broker only | peptidoglycan VPS (Songbird TURN, sync) |
+| **Outer membrane** | `primals.eco` | Verified by cross-validation | RELAXED — commercial OK | golgiBody-ext (Caddy, Cloudflare CDN) |
+| **Content organelle** | `nestgate.io` | Content trust (BLAKE3) | STRICT — sovereign DNS/TLS | NestGate CAS (pseudoSpores, notebooks) |
+| **Extracellular** | — | Weak (Dark Forest) | N/A | crates.io, NCBI, Let's Encrypt |
+
+**Key principle**: The inner membrane MUST be fully sovereign — zero
+commercial services in the `primal.eco` data path. The outer membrane
+MAY use commercial services (Cloudflare). The peptidoglycan is the air
+gap between them — disposable, replicable, stores nothing.
+
+Cross-membrane validation ensures the outer membrane stays honest:
+the inner membrane compares BLAKE3 content hashes, TLS certificate
+fingerprints, timing baselines, and DNS consistency between both paths.
 
 ---
 
@@ -268,6 +285,26 @@ benchScale scenarios validate replacement parity:
 
 ---
 
+## Sovereignty Shadow Membrane Applicability (Wave 77b)
+
+Under the diderm model, the sovereignty shadow tracks (S1-S5) apply
+specifically to the **inner membrane** (`primal.eco`). The outer membrane
+(`primals.eco`) may retain commercial services.
+
+| Track | What | Inner Membrane (`primal.eco`) | Outer Membrane (`primals.eco`) |
+|-------|------|------------------------------|-------------------------------|
+| **S1** TLS | TLS termination | Sovereign Caddy + LE (**MUST**) | Cloudflare proxy (acceptable) |
+| **S2** NAT | NAT relay | Songbird TURN (**GRADUATED**) | N/A |
+| **S3** Content | Content serving | NestGate CAS on `nestgate.io` (sovereign) | sporePrint via Caddy or CDN (acceptable) |
+| **S4** Auth | Authentication | bearDog BTSP enforced (**MUST**) | Public/Cloudflare auth (acceptable) |
+| **S5** DNS | DNS resolution | knot-dns for `primal.eco` + `nestgate.io` (**MUST**) | Cloudflare DNS for `primals.eco` (acceptable) |
+
+**Cutover protocol unchanged**: Each track still follows Calibrate → Shadow
+→ Cutover. The change is that graduation criteria apply to the inner membrane
+path, not the outer.
+
+---
+
 ## Wave 68 Strategic Domains
 
 Four new strategic tracks added to the sovereignty evolution:
@@ -285,5 +322,6 @@ Four new strategic tracks added to the sovereignty evolution:
 
 | Date | Change |
 |------|--------|
+| 2026-06-04 | Wave 77b: Diderm membrane architecture — added §3b layer model, sovereignty shadow membrane applicability table. S-tracks now apply to inner membrane (`primal.eco`); outer membrane may retain commercial. Cross-membrane validation added. |
 | 2026-06-02 | Wave 68: grapheneGate, topology routing, perceptron design, Songbird relay design, TCP Tier 5 release enforcement |
 | 2026-05-15 | Initial version — sovereignty standards codified from ecosystem practice |
