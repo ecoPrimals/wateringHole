@@ -1,0 +1,90 @@
+# FRAGO: Transport Evolution — Capability-Addressed Routing
+# Phase 2: Songbird-routed IPC replaces direct UDS/TCP discovery
+
+[impulse]
+id = "wave79-transport-evolution-capability-routing"
+type = "frago"
+from = "eastGate"
+to = ["songBird", "bearDog", "biomeOS", "all-primals"]
+date = "2026-06-05"
+priority = "P0"
+
+[context]
+reason = """
+Wave 79 established the UDS-only stadial gate: nucleus_launcher defaults
+port-free, TCP discovery gated, all graphs uds_only. BD-TRUST-01 resolved
+(Songbird auto trust in mesh.init). All 4 upstream gaps closed.
+
+UDS is convergent evolution — correct first step but not final form.
+UDS is Unix-only, single-machine, path-length-limited, and not isomorphic.
+The target architecture is capability-addressed routing through Songbird,
+where primals never know or choose their transport.
+
+This FRAGO defines the transport evolution from Phase 1 (UDS convergence)
+to Phase 2 (Songbird-routed IPC) to Phase 3 (Tower transport abstraction).
+"""
+reference = "primalSpring/docs/TRANSPORT_EVOLUTION.md"
+
+[directive]
+summary = """
+All primals must evolve toward transport ignorance. A primal provides
+capabilities and consumes capabilities. How they connect is decided by
+Songbird (runtime) and Tower Atomic (composition). No primal should
+hardcode TcpListener::bind or UnixListener::bind — transport is injected.
+"""
+
+[directive.songbird]
+action = "Evolve ipc.resolve to return transport-qualified endpoints"
+detail = """
+ipc.resolve currently returns a socket path or host:port string.
+Evolve to return a structured endpoint:
+  { transport: "uds", path: "/run/membrane/beardog.sock" }
+  { transport: "tcp", host: "127.0.0.1", port: 7700 }
+  { transport: "mesh_relay", peer_id: "strand-gate", capability: "security" }
+This enables Tower Atomic to select transport without string parsing.
+"""
+priority = "P1"
+
+[directive.all_primals]
+action = "Accept transport injection, do not self-bind"
+detail = """
+Current: primals parse --port/--socket/--bind CLI flags and self-bind.
+Target: primals receive a transport channel from the launcher/Tower.
+Interim: primals accept --socket for UDS (current), with the understanding
+that the launcher decides the path, not the primal.
+
+ecoBin compliance: a primal binary must not assume Unix, TCP, or any
+specific transport. Transport is an injected dependency.
+"""
+priority = "P2"
+
+[directive.biomeOS]
+action = "graph.deploy evolves to capability-only node declarations"
+detail = """
+Current graph nodes declare transport hints (transport = 'uds_only').
+Target: nodes declare only capabilities. biomeOS + Songbird select transport
+at deploy time based on topology, platform, and composition tier.
+"""
+priority = "P2"
+
+[phases]
+phase_1 = "UDS Convergence (Wave 79) — COMPLETE"
+phase_2 = "Songbird-Routed IPC — IN PROGRESS"
+phase_3 = "Tower Transport Abstraction — TARGET"
+
+[phases.phase_2_milestones]
+m1 = "Songbird ipc.resolve returns transport-qualified endpoints"
+m2 = "CompositionContext queries Songbird instead of probing sockets"
+m3 = "nucleus_launcher registers capabilities at spawn time"
+m4 = "Graph metadata: transport field deprecated"
+
+[outcome]
+expected = """
+Primals become transport-ignorant. A composition graph deploys identically
+on VPS, desktop, Raspberry Pi, container, or WASM. Adding a gate is O(n):
+start bearDog, start Songbird, mesh.init with one peer. No port config,
+no firewall rules, no transport selection. The mesh self-organizes.
+
+This eliminates the isomorphic/fractal deployment blockers and enables
+ecoBin single-binary compliance across all platforms.
+"""

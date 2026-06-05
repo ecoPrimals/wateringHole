@@ -1,10 +1,11 @@
-# Wave 78 Parity Blurbs — Ecosystem Level
+# Wave 79 Parity Blurbs — Ecosystem Level
 
 **Date**: 2026-06-05 | **Source**: eastGate overwatch ecosystem survey
+**Updated**: Wave 79 — BD-TRUST-01 resolved, UDS-only stadial gate, transport evolution formalized
 **Purpose**: Copy-paste context per team. Primals first, then springs.
 Springs inherit full primal parity — solve primals, springs follow.
 
-**Ecosystem standard (Wave 78)**:
+**Ecosystem standard (Wave 79)**:
 - Zero clippy (pedantic + nursery)
 - Zero `#[allow]` in production
 - `capability_registry.toml` (machine-readable, TOML)
@@ -14,6 +15,8 @@ Springs inherit full primal parity — solve primals, springs follow.
 - plasmidBin ecoBin compliant
 - `forbid(unsafe_code)` or justified opt-out
 - 90% line coverage (stadial target)
+- **UDS-only default** — no standalone TCP ports (Wave 79 stadial gate)
+- **Transport-ignorant target** — primals must not hardcode transport (see `TRANSPORT_EVOLUTION.md`)
 
 ---
 
@@ -35,60 +38,32 @@ consistency with biomeOS/petalTongue/sweetGrass convention (optional hygiene).
 
 ---
 
-## songBird — P0 MESH.INIT + P1 COVERAGE
+## songBird — P0 TRANSPORT EVOLUTION + P1 COVERAGE
 
-**Version**: v0.2.9 | **Wave**: 79 | **Tests**: 13,971 | **Coverage**: 73.4%
-**Registry**: MISSING `capability_registry.toml`
-**Last commit**: Jun 4
+**Version**: v0.2.9 | **Wave**: 81 | **Tests**: 13,971+ | **Coverage**: 73.4%
+**Registry**: Has `capability_registry.toml` ✓ (delivered Wave 81)
+**Last commit**: Jun 5
 
-**RESOLVED this wave**: SB-TLS-01 (direct-mode TLS crypto), SB-TLS-02 (Phase
-3.5 Ed25519 relay verification). Thank you — symmetric mesh unblocked.
+**RESOLVED this wave**:
+- SB-TLS-01 (direct-mode TLS crypto) ✓
+- SB-TLS-02 (Phase 3.5 Ed25519 relay verification) ✓
+- **BD-TRUST-01** (`auth.exchange_trust` wired into `mesh.init`) ✓
+- Deep debt: 8 inline port literals → `songbird_types::defaults` constants ✓
+- Production stubs hardened (NFC, lineage, TLS) ✓
 
-**P0 — Wire `auth.exchange_trust` in mesh.init**:
-After BTSP handshake succeeds in federation `mesh.init`:
-```rust
-// 1. Call auth.exchange_trust on REMOTE bearDog
-let resp = remote_rpc.call("auth.exchange_trust", json!({
-    "public_key": local_beardog_public_key_b64,
-    "gate_id": local_node_id,
-    "family_id": local_family_id,
-}));
-// 2. Response has remote key — register it on LOCAL bearDog
-local_rpc.call("auth.exchange_trust", json!({
-    "public_key": resp["local_public_key"],
-    "gate_id": resp["local_gate_id"],
-    "family_id": local_family_id,
-}));
-// Zero operator intervention. Bidirectional trust established.
+**P0 — Transport evolution**: Songbird is the universal routing bus.
+`ipc.resolve` must evolve to return transport-qualified endpoints:
+```json
+{ "transport": "uds", "path": "/run/membrane/beardog.sock" }
+{ "transport": "mesh_relay", "peer_id": "strand-gate", "capability": "security" }
 ```
-See bearDog handoff `archive/wave77/BEARDOG_V090_WAVE140_AUTO_TRUST_SEEDING_JUN04_2026.md`.
+See FRAGO `wave79-transport-evolution-capability-routing` and
+`primalSpring/docs/TRANSPORT_EVOLUTION.md`.
 
 **P1 — Coverage sprint**: 73.4% → 90%. Largest quantitative gap across all
 14 primals. Every other primal with significant surface is 80%+.
 
-**P2 — Create `config/capability_registry.toml`**: Machine-readable capability
-declaration. Pattern:
-```toml
-[capabilities.discovery]
-owner = "songbird"
-methods = [
-    "discovery.register",
-    "discovery.peers",
-    "discovery.resolve",
-    "mesh.init",
-    "mesh.health_check",
-]
-
-[capabilities.relay]
-owner = "songbird"
-methods = [
-    "relay.allocate",
-    "relay.refresh",
-    "capability.call",
-]
-```
-
-**P3 — Doc drift**: README says v0.2.8-wave76, CHANGELOG says v0.2.9-wave79.
+**P3 — Doc drift**: README says v0.2.8-wave76, CHANGELOG says v0.2.9-wave81.
 Sync banner.
 
 ---
@@ -269,8 +244,8 @@ methods = [
 **Status**: Coverage met. Zero hot-path env reads. Cross-gate trust weaving.
 Attribution/provenance leader.
 
-**Parity items**: NONE. Waiting on rhizoCrypt DAG append to proceed with
-attribution braid testing against live mesh events.
+**Parity items**: rhizoCrypt DAG append + lifecycle wiring DELIVERED (Wave 78).
+Attribution braid testing against live mesh events now UNBLOCKED.
 
 ---
 
@@ -393,9 +368,9 @@ persistence, Squirrel inference integration).
 **Status**: guideStone L5. Highest application-spring maturity. 60 scenarios,
 88 capabilities. S4 BTSP auth scenario wired.
 
-**P3 — Wave 78 absorption**: Pull latest primals. Absorb
-`auth.exchange_trust` awareness. Update wave marker. Low priority — ironGate
-is stable.
+**P3 — Wave 79 absorption**: Pull latest primals. Absorb
+`auth.exchange_trust` awareness + UDS-only posture. Update wave marker.
+Low priority — ironGate is stable.
 
 ---
 
@@ -495,7 +470,9 @@ capabilities, update wave markers.
 # SUMMARY — WHAT BLOCKS FORWARD PROGRESS
 
 ## P0 (blocks mesh)
-- **Songbird**: Wire `auth.exchange_trust` in `mesh.init` flow
+- ~~**Songbird**: Wire `auth.exchange_trust` in `mesh.init` flow~~ **RESOLVED** (Wave 81)
+- **VPS binary refresh**: Deploy binaries with BD-TRUST-01 + SB-TLS-01 + UDS-native
+- **Songbird**: Evolve `ipc.resolve` to transport-qualified endpoints (Phase 2 transport evolution)
 
 ## P1 (blocks 3-gate mesh)
 - **Songbird**: Coverage sprint 73% → 90%
@@ -503,16 +480,18 @@ capabilities, update wave markers.
 - **cellMembrane**: Caddy reverse proxy wiring
 
 ## P2 (parity hygiene — parallel, non-blocking)
-- **8 primals**: Create/move `config/capability_registry.toml`
+- **6 primals**: Create/move `config/capability_registry.toml`
 - **3 springs**: Create `domain_profile.toml`
 - **5 primals**: Coverage sprint to 90%
 - **3 springs**: Wave marker freshening
 - **ludoSpring**: CONTEXT.md stale
+- **All primals**: Evolve toward transport-ignorant binaries (ecoBin compliance)
 
 ## Sequence
 ```
-Primals ship registry TOML + coverage
-  → Springs pull and inherit
-    → primalSpring validates at ecosystem level
-      → mesh deployment proceeds
+VPS binary refresh (BD-TRUST-01 + UDS-native)
+  → mesh.init on golgiBody (auto trust exchange)
+    → 3-gate Plasmodium collective
+      → Transport evolution Phase 2 (Songbird-routed IPC)
+        → Stadial entry
 ```
