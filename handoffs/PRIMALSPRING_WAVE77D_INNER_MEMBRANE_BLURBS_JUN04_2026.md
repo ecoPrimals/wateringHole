@@ -42,23 +42,22 @@ rpc.call("tls.sign_handshake", {...})
 
 ---
 
-## cellMembrane Team — P1 Caddy + DNS
+## cellMembrane Team — P1 Caddy Reverse Proxy Wiring
 
-**DNS Status** (Jun 4):
-- `primal.eco` → LIVE (137.184.197.151), NS on sovereign knot-dns, **TLS cert provisioning failing** (Caddy internal error on golgiBody-ext — likely ACME challenge issue)
-- `nestgate.io` → SERVFAIL (propagating)
-- All subdomains (`mesh/relay/auth/api/dns.primal.eco`) → LIVE
+**DNS/TLS Status** (Jun 4, RESOLVED):
+- `primal.eco` → LIVE, sovereign TLS via Let's Encrypt (HTTP 200)
+- `nestgate.io` → LIVE, sovereign TLS via Let's Encrypt (HTTP 200)
+- `primals.eco` → LIVE, Cloudflare (HTTP 200, sporePrint served)
+- DNS glue (ns1/ns2.primals.eco) → LIVE in Cloudflare, resolves publicly
 
-**Action 1**: Fix Caddy TLS on golgiBody-ext for `primal.eco` — check ACME provisioning, LE rate limits, or Caddy config.
-
-**Action 2**: When `nestgate.io` propagates, wire Caddy vhost:
+**Action 1**: Wire `nestgate.io` reverse proxy to Forgejo content:
 ```caddy
 nestgate.io {
     reverse_proxy /content/* localhost:3000
 }
 ```
 
-**Action 3**: Wire subdomain reverse proxies on golgiBody-ext → golgiBody backends:
+**Action 2**: Wire subdomain reverse proxies on golgiBody-ext → golgiBody backends:
 - `mesh.primal.eco` → Songbird (157.230.3.183:7700)
 - `auth.primal.eco` → BearDog  
 - `api.primal.eco` → biomeOS neural-api
@@ -75,13 +74,16 @@ nestgate.io {
 
 ---
 
-## Operator — DNS + TLS
+## Operator — Overwatch
 
-**primal.eco TLS**: Caddy on golgiBody-ext returning `tlsv1 alert internal error` on port 443. DNS resolves correctly. Investigate Caddy config and ACME challenge.
+**DNS/TLS**: ALL RESOLVED. Three-layer diderm membrane is live with sovereign TLS:
+- Outer: `primals.eco` (Cloudflare) — sporePrint public surface
+- Inner: `primal.eco` (Let's Encrypt on golgiBody-ext) — sovereign inner membrane
+- Content: `nestgate.io` (Let's Encrypt on golgiBody-ext) — content layer
 
-**nestgate.io**: SERVFAIL on public resolvers. Check Porkbun DS/NS records and knot-dns zone for `nestgate.io`.
+**Resolution**: ns1/ns2.primals.eco A records were missing in Cloudflare. Added Jun 4, immediate propagation. Caddy auto-provisioned both LE certs.
 
-**CLOUDFLARE_API_TOKEN**: cellMembrane's `membrane cloudflare.*` module delivered but needs token in `tower.env` on golgiBody-ext.
+**CLOUDFLARE_API_TOKEN**: cellMembrane's `membrane cloudflare.*` module delivered but needs token in `tower.env` on golgiBody-ext for future agentic DNS management.
 
 ---
 
