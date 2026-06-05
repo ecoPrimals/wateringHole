@@ -1,169 +1,520 @@
-# Wave 78 Parity Blurbs — Lagging Codebases
+# Wave 78 Parity Blurbs — Ecosystem Level
 
 **Date**: 2026-06-05 | **Source**: eastGate overwatch ecosystem survey
-**Purpose**: Copy-paste context for bringing lagging codebases to Wave 78 parity.
+**Purpose**: Copy-paste context per team. Primals first, then springs.
+Springs inherit full primal parity — solve primals, springs follow.
+
+**Ecosystem standard (Wave 78)**:
+- Zero clippy (pedantic + nursery)
+- Zero `#[allow]` in production
+- `capability_registry.toml` (machine-readable, TOML)
+- BTSP Phase 3
+- Wire Standard L2+
+- MethodGate pre-dispatch
+- plasmidBin ecoBin compliant
+- `forbid(unsafe_code)` or justified opt-out
+- 90% line coverage (stadial target)
 
 ---
 
-## Songbird Team — Coverage Sprint (P1)
+# PRIMALS
 
-**Gap**: 73.41% line coverage vs 90% stadial target. Largest quantitative gap
-across all 14 primals. Every other primal with significant code surface is at
-80%+ (bearDog 90.5%, squirrel 90.1%, sweetGrass 91.7%).
+---
 
-**SB-TLS-01/02**: RESOLVED — thank you. Symmetric mesh TLS origination unblocked.
+## bearDog — REFERENCE TIER
 
-**Next P0**: Wire `auth.exchange_trust` call after BTSP handshake in `mesh.init`
-flow. bearDog Wave 140 delivered the endpoint. Pattern:
+**Version**: v0.9.0 | **Wave**: 140 | **Tests**: 15,004 | **Coverage**: 90.5%
+**Registry**: `capability_registry.toml` at root (not `config/`)
+**Last commit**: Jun 4
 
+**Status**: Ecosystem reference. Zero gaps. BD-TRUST-01 `auth.exchange_trust`
+delivered. S4 auth graduation ~Jun 9.
+
+**Parity items**: NONE. Move `capability_registry.toml` to `config/` for
+consistency with biomeOS/petalTongue/sweetGrass convention (optional hygiene).
+
+---
+
+## songBird — P0 MESH.INIT + P1 COVERAGE
+
+**Version**: v0.2.9 | **Wave**: 79 | **Tests**: 13,971 | **Coverage**: 73.4%
+**Registry**: MISSING `capability_registry.toml`
+**Last commit**: Jun 4
+
+**RESOLVED this wave**: SB-TLS-01 (direct-mode TLS crypto), SB-TLS-02 (Phase
+3.5 Ed25519 relay verification). Thank you — symmetric mesh unblocked.
+
+**P0 — Wire `auth.exchange_trust` in mesh.init**:
+After BTSP handshake succeeds in federation `mesh.init`:
 ```rust
-// After BTSP handshake succeeds, call on remote bearDog:
-rpc.call("auth.exchange_trust", json!({
+// 1. Call auth.exchange_trust on REMOTE bearDog
+let resp = remote_rpc.call("auth.exchange_trust", json!({
     "public_key": local_beardog_public_key_b64,
     "gate_id": local_node_id,
     "family_id": local_family_id,
 }));
-// Response includes remote_did + local_public_key — register locally
+// 2. Response has remote key — register it on LOCAL bearDog
+local_rpc.call("auth.exchange_trust", json!({
+    "public_key": resp["local_public_key"],
+    "gate_id": resp["local_gate_id"],
+    "family_id": local_family_id,
+}));
+// Zero operator intervention. Bidirectional trust established.
 ```
+See bearDog handoff `archive/wave77/BEARDOG_V090_WAVE140_AUTO_TRUST_SEEDING_JUN04_2026.md`.
 
-**Also needed**: `config/capability_registry.toml` for machine-readable capability
-declaration. 7/14 primals have this. Pattern: see bearDog or biomeOS registries.
+**P1 — Coverage sprint**: 73.4% → 90%. Largest quantitative gap across all
+14 primals. Every other primal with significant surface is 80%+.
 
-**Also**: README version/wave drift — README says v0.2.8-wave76, CHANGELOG says
-v0.2.9-wave79. Sync banner.
-
----
-
-## airSpring Team — Wave 78 Alignment (P2)
-
-**Gap**: Last evolved Wave 60 (May 29) — 7 days behind Wave 78. Not on the
-Wave 76/77 parity sprint. Code quality is solid (1,446 tests, zero clippy,
-pedantic+nursery clean, `domain_profile.toml` present, guideStone L4).
-
-**Ask**: Absorb Wave 76-78 trust patterns:
-1. Verify `CONSUMED_CAPABILITIES` includes cross-gate trust methods
-2. Absorb bearDog `auth.exchange_trust` awareness if using mesh
-3. Update `docs/PRIMAL_GAPS.md` to reflect any resolved gaps from upstream
-4. Bump wave marker in README/CHANGELOG
-
-**Open gaps** (from your `docs/PRIMAL_GAPS.md`):
-- AG-006: coralReef compile IPC
-- AG-007: toadStool typed dispatch
-- AG-009: petalTongue IPC
-- AG-010: barraCuda TensorSession
-- AG-011: Anderson WGSL
-- AG-021: Akida NPU driver
-
-**Priority**: LOW for mesh — airSpring is not on the critical mesh path.
-Freshening pass when team capacity permits.
-
----
-
-## groundSpring Team — Wave 78 Alignment (P2)
-
-**Gap**: Last evolved Wave 63 (May 30) — 6 days behind. Code quality solid
-(1,123 Rust + 455 Python tests, zero clippy, `domain_profile.toml` present,
-guideStone L4).
-
-**Ask**: Same trust pattern absorption as airSpring. Squirrel integration
-already wired (Wave 63). Main work is wave marker freshening and verifying
-gap registry reflects upstream resolutions.
-
-**Priority**: LOW for mesh — groundSpring is not on the critical mesh path.
-
----
-
-## hotSpring Team — Root domain_profile.toml (P2)
-
-**Current**: L6 certified, sovereign compute reference, v0.6.32, S284.
-Separate wave numbering (sovereign-compute track). Functionally the most
-mature spring but uses embedded compchem profiles, not a root
-`domain_profile.toml`.
-
-**Ask**: Create root `domain_profile.toml` for ecosystem classification.
-Pattern: see airSpring or wetSpring profiles. This enables `litho emit-pseudospore`
-integration and ecosystem tooling discovery.
-
-**Priority**: LOW — not blocking mesh or deployment.
-
----
-
-## ludoSpring Team — Doc Freshening (P2)
-
-**Current**: V82, Wave 76, 995 tests, guideStone L4, all 16 gaps resolved.
-Composition-only spring (no spring binary in plasmidBin).
-
-**Ask**:
-1. `CONTEXT.md` stale (still says V78/982 tests) — sync with README (V82/995)
-2. Create `domain_profile.toml` for ecosystem classification
-3. Wave marker freshening to 78
-
-**Priority**: LOW — ludoSpring is not on the mesh path.
-
----
-
-## neuralSpring Team — domain_profile.toml + southGate (P1)
-
-**Current**: V179, Wave 76, 930+ tests, guideStone L5, IPC-first.
-southGate deployment with wetSpring.
-
-**Ask**:
-1. Create root `domain_profile.toml` (missing — pattern: airSpring/wetSpring)
-2. southGate health stabilization — discovery.peers showing empty on cold starts
-3. Wave marker freshening to 78
-
-**Priority**: MEDIUM — southGate mesh stability is on the critical path for
-3-gate Plasmodium collective.
-
----
-
-## Primal Teams — capability_registry.toml Adoption (P2)
-
-6 primals lack machine-readable `config/capability_registry.toml`. This file
-enables primalSpring's `DOMAIN_OWNER_MAP` auto-discovery and ecosystem tooling.
-
-**Pattern**: See `bearDog/config/capability_registry.toml` or
-`biomeOS/config/capability_registry.toml`.
-
-**Format**:
+**P2 — Create `config/capability_registry.toml`**: Machine-readable capability
+declaration. Pattern:
 ```toml
-[capabilities.your_domain]
-owner = "your_primal_name"
+[capabilities.discovery]
+owner = "songbird"
 methods = [
-    "your_domain.method_one",
-    "your_domain.method_two",
+    "discovery.register",
+    "discovery.peers",
+    "discovery.resolve",
+    "mesh.init",
+    "mesh.health_check",
+]
+
+[capabilities.relay]
+owner = "songbird"
+methods = [
+    "relay.allocate",
+    "relay.refresh",
+    "capability.call",
 ]
 ```
 
-| Primal | Priority | Notes |
-|--------|----------|-------|
-| songBird | MEDIUM | Has `consumed_capabilities` in code, needs TOML |
-| toadStool | MEDIUM | Has `provided_capabilities` in handlers, needs TOML |
-| barraCuda | LOW | Inline in `primal.rs` |
-| coralReef | LOW | Self-knowledge in code |
-| loamSpine | LOW | `CONSUMED_CAPABILITIES` in `niche.rs` |
-| skunkBat | LOW | `CONSUMED_CAPABILITIES` in `dispatch.rs` |
+**P3 — Doc drift**: README says v0.2.8-wave76, CHANGELOG says v0.2.9-wave79.
+Sync banner.
 
 ---
 
-## Coverage Sprint Candidates (Stadial Target: 90%)
+## biomeOS — REFERENCE TIER
 
-| Primal | Current | Gap | Priority |
-|--------|---------|-----|----------|
-| songBird | 73% | -17% | P1 (largest gap) |
-| barraCuda | 81% | -9% (needs real GPU) | P2 (hardware-gated) |
-| nestGate | 84% | -6% | P2 |
-| toadStool | 84% | -6% (hardware paths) | P2 |
-| petalTongue | 85% | -5% | P2 |
+**Version**: v4.07 | **Wave**: 77 | **Tests**: 7,983 | **Coverage**: 90%+
+**Registry**: `config/capability_registry.toml` ✓
+**Last commit**: Jun 4
+
+**Status**: NUCLEUS orchestrator reference. 27 domains, 320+ translations.
+L5 perceptron in shadow mode. Zero blocking debt.
+
+**Parity items**: NONE.
 
 ---
 
-## Summary — What Blocks Forward Progress
+## toadStool — P2 REGISTRY + COVERAGE
 
-1. **BD-TRUST-01 mesh.init integration** (Songbird) — auto-join for 3+ gate mesh
-2. **southGate health stabilization** (wetSpring/neuralSpring) — 11/13 → 13/13
-3. **Caddy reverse proxy wiring** (cellMembrane/operator) — content layer functional
-4. **westGate hardware** (physical — waiting on arrival)
+**Version**: v0.2.0 | **Session**: S290 | **Tests**: 23,000+ | **Coverage**: ~84%
+**Registry**: MISSING `capability_registry.toml`
+**Last commit**: Jun 4
 
-Everything else (coverage, domain_profile.toml, registry TOML, doc freshening)
-is hygiene that can happen in parallel and doesn't block mesh deployment.
+**Status**: Largest test suite in ecosystem. 46 documented `unsafe` in hardware
+containment crates (justified). CallerContext fan_out wired.
+
+**P2 — Create `config/capability_registry.toml`**:
+```toml
+[capabilities.compute]
+owner = "toadstool"
+methods = [
+    "compute.dispatch.submit",
+    "compute.capabilities",
+    "compute.dispatch.verify_trust",
+    "toadstool.validate",
+    "toadstool.list_workloads",
+]
+```
+
+**P2 — Coverage**: 84% → 90%. Hardware paths inherently gapped — focus
+coverage on non-VFIO code paths.
+
+---
+
+## nestGate — P2 COVERAGE
+
+**Version**: v0.5.0 | **Session**: 93 | **Tests**: 12,551 | **Coverage**: ~84%
+**Registry**: Has `capability_registry.rs` in code (Rust), not TOML
+**Last commit**: Jun 4
+
+**Status**: Storage/content leader. HTTP parity complete. All 8 `content.*`
+methods on all 4 transport surfaces.
+
+**P2 — Create `config/capability_registry.toml`**: Extract from Rust registry
+to TOML format for ecosystem tooling consistency.
+
+**P2 — Coverage**: 84% → 90%. Focus on content pipeline paths and HTTP API
+handlers.
+
+---
+
+## squirrel — CLEAN
+
+**Version**: v0.1.0 | **Wave**: 76 | **Tests**: 7,098 | **Coverage**: 90.1%
+**Registry**: `capability_registry.toml` at root ✓
+**Last commit**: Jun 3
+
+**Status**: Coverage target met. Inference/BTSP/MethodGate parity strong.
+`CONSUMED_CAPABILITIES` in `niche.rs`.
+
+**Parity items**: Move `capability_registry.toml` to `config/` for convention
+consistency (optional hygiene).
+
+---
+
+## barraCuda — P2 REGISTRY + COVERAGE
+
+**Version**: v0.4.0 | **Wave**: 76 | **Tests**: 4,393 | **Coverage**: 81%
+**Registry**: MISSING `capability_registry.toml` (inline in `primal.rs`)
+**Last commit**: Jun 4
+
+**Status**: Sovereign dispatch wire extracted. 96 JSON-RPC methods. Stadial
+gate release. GPU coverage requires real hardware (llvmpipe only reaches 81%).
+
+**P2 — Create `config/capability_registry.toml`**:
+```toml
+[capabilities.math]
+owner = "barracuda"
+methods = [
+    "stats.mean",
+    "stats.variance",
+    "stats.std",
+    "precision.route",
+    "tensor.create",
+]
+
+[capabilities.compute_dispatch]
+owner = "barracuda"
+methods = [
+    "compute.dispatch.submit",
+]
+```
+
+**P2 — Coverage**: 81% → 90%. Hardware-gated — track llvmpipe and real GPU
+separately.
+
+---
+
+## petalTongue — P2 COVERAGE
+
+**Version**: v1.6.6 | **Wave**: 77d | **Tests**: 6,217 | **Coverage**: ~85%
+**Registry**: `config/capability_registry.toml` ✓
+**Last commit**: Jun 4
+
+**Status**: Registry TOML present. BTSP Phase 3. S3 cutover readiness.
+UUI/multimodal leader.
+
+**Parity items**:
+**P2 — Coverage**: 85% → 90%. Focus on content-backend integration paths.
+
+---
+
+## rhizoCrypt — P2 LOCAL WIRING
+
+**Version**: v0.14.1 | **Wave**: 77e | **Tests**: 1,683 | **Coverage**: stadial
+**Registry**: `capability_registry.toml` at root ✓
+**Last commit**: Jun 4
+
+**Status**: RC-POLL-01 RESOLVED — `MeshEventListener.poll_events()` wired
+to `auth.events.poll`, 30s incremental polling.
+
+**Remaining local work** (P2):
+1. Mesh-trust session auto-provision on first poll result
+2. DAG append: wire `poll_events()` results into `append_vertex()`
+3. Lifecycle wiring: call `spawn_poller()` from `PrimalLifecycle::start()`
+   when endpoint is Connected
+
+Move `capability_registry.toml` to `config/` (optional hygiene).
+
+---
+
+## loamSpine — P2 REGISTRY
+
+**Version**: v0.9.16 | **Wave**: 76 | **Tests**: 1,600 | **Coverage**: 90.9%
+**Registry**: MISSING `capability_registry.toml` (`CONSUMED_CAPABILITIES` in `niche.rs`)
+**Last commit**: Jun 4
+
+**Status**: Coverage met. Trust ledger IPC wired. Provenance trio complete.
+
+**P2 — Create `config/capability_registry.toml`**:
+```toml
+[capabilities.ledger]
+owner = "loamspine"
+methods = [
+    "spine.create",
+    "spine.list",
+    "spine.status",
+    "entry.append",
+    "entry.list",
+    "entry.get",
+]
+
+[capabilities.session]
+owner = "loamspine"
+methods = [
+    "session.create",
+    "session.commit",
+    "session.status",
+]
+```
+
+---
+
+## sweetGrass — CLEAN
+
+**Version**: v0.7.48 | **Wave**: 78b | **Tests**: 1,623 | **Coverage**: 91.7%
+**Registry**: `config/capability_registry.toml` ✓
+**Last commit**: Jun 4
+
+**Status**: Coverage met. Zero hot-path env reads. Cross-gate trust weaving.
+Attribution/provenance leader.
+
+**Parity items**: NONE. Waiting on rhizoCrypt DAG append to proceed with
+attribution braid testing against live mesh events.
+
+---
+
+## coralReef — P2 REGISTRY
+
+**Version**: v0.2.0 | **Wave**: 78 | **Tests**: 3,307 | **Coverage**: clean
+**Registry**: MISSING `capability_registry.toml` (self-knowledge in code)
+**Last commit**: Jun 4
+
+**Status**: Pure compiler domain. Phase D hardware cutover to toadStool.
+SPIR-V E2E proven. Zero unsafe/FFI.
+
+**P2 — Create `config/capability_registry.toml`**:
+```toml
+[capabilities.shader]
+owner = "coralreef"
+methods = [
+    "shader.compile.wgsl",
+    "shader.compile.capabilities",
+    "shader.compile.module",
+]
+```
+
+---
+
+## skunkBat — P2 REGISTRY + SCALE
+
+**Version**: v0.2.2 | **Wave**: 76b | **Tests**: 391 | **Coverage**: 90%+ fn
+**Registry**: MISSING `capability_registry.toml` (`CONSUMED_CAPABILITIES` in `dispatch.rs`)
+**Last commit**: Jun 4
+
+**Status**: Defense meta-primal. westGate deployment primal.
+`defense.status` health probe added. Smallest test surface (391 vs 1,600-15,000).
+
+**P2 — Create `config/capability_registry.toml`**:
+```toml
+[capabilities.defense]
+owner = "skunkbat"
+methods = [
+    "defense.status",
+    "defense.audit",
+    "security.audit_log",
+]
+
+[capabilities.reconnaissance]
+owner = "skunkbat"
+methods = [
+    "reconnaissance.scan",
+    "reconnaissance.report",
+]
+```
+
+**P3 — Scale**: Consider expanding test surface to at least 500+ to cover
+thymic selection design when it moves from spec to implementation.
+
+---
+
+## sourDough — META-PRIMAL (N/A)
+
+**Version**: v0.3.1 | **Tests**: 281 | **Coverage**: 95%+
+**Last commit**: May 28
+
+**Status**: Meta-primal scaffold tool. Not a runtime service. Generates
+capability wire + MethodGate + BTSP for scaffolded primals. Runtime parity
+N/A. Last touched May 28 — no urgency.
+
+**Parity items**: NONE (meta-tool, not a primal service).
+
+---
+
+# SPRINGS
+
+Springs inherit full primal parity. When primals ship ecosystem-level
+features (registry TOML, trust exchange, coverage), springs absorb
+automatically through their NUCLEUS dependency. Sprint-specific work below.
+
+---
+
+## wetSpring — P1 SOUTHGATE STABILIZATION
+
+**Version**: V196 | **Wave**: 77 | **Gate**: southGate | **Tests**: 2,089
+**Profile**: `domain_profile.toml` ✓
+**Last commit**: Jun 4
+
+**Status**: Largest validation surface (345 scenarios, 5,967+ checks).
+guideStone L5. Forward evolution complete. Forgejo push blocked.
+
+**P1 — southGate health**: 11/13 health → 13/13. Two primals BTSP-gated.
+Investigate cold-start timing vs `SONGBIRD_PEERS` env vs OOM.
+
+**P2 — Science gaps**: WS-9 (L3 cross-tier parity), WS-11 (variant-caller
+MAPQ calibration). Not blocking mesh.
+
+---
+
+## neuralSpring — P1 SOUTHGATE + P2 PROFILE
+
+**Version**: V179 | **Wave**: 76 | **Gate**: southGate | **Tests**: 930+
+**Profile**: MISSING `domain_profile.toml`
+**Last commit**: Jun 4
+
+**Status**: guideStone L5. IPC-first. Deep debt (real IPC stubs) done.
+southGate deployment partner with wetSpring.
+
+**P1 — southGate mesh**: `discovery.peers` empty on cold starts. Coordinate
+with wetSpring on peer seeding and BTSP timing.
+
+**P2 — Create `domain_profile.toml`**: Pattern — copy airSpring or wetSpring
+profile and adapt for neural/ML domain (inference pipeline, NestGate weight
+persistence, Squirrel inference integration).
+
+---
+
+## healthSpring — CLEAN (P3 FRESHENING)
+
+**Version**: V65c | **Wave**: 76 | **Gate**: ironGate (13/13) | **Tests**: 1,056
+**Profile**: `domain_profile.toml` ✓
+**Last commit**: Jun 3
+
+**Status**: guideStone L5. Highest application-spring maturity. 60 scenarios,
+88 capabilities. S4 BTSP auth scenario wired.
+
+**P3 — Wave 78 absorption**: Pull latest primals. Absorb
+`auth.exchange_trust` awareness. Update wave marker. Low priority — ironGate
+is stable.
+
+---
+
+## hotSpring — P2 PROFILE
+
+**Version**: v0.6.32 | **Session**: S284 | **Gate**: biomeGate | **Tests**: 720-1,045
+**Profile**: MISSING root `domain_profile.toml` (only nested compchem profiles)
+**Last commit**: Jun 1
+
+**Status**: guideStone **L6 CERTIFIED** — ecosystem reference for sovereign
+compute. Separate wave numbering (sovereign-compute track). Fleet compute
+leader. Functionally most mature spring.
+
+**P2 — Create root `domain_profile.toml`**: For ecosystem classification and
+`litho emit-pseudospore`. Pattern:
+```toml
+[profile]
+name = "hotSpring"
+domain = "computational_chemistry"
+gate = "biomeGate"
+guidestone_level = "L6"
+
+[capabilities]
+primary = ["sovereign_compute", "cazyme_fel", "vfio_dispatch"]
+consumed_primals = ["toadStool", "barraCuda", "coralReef", "bearDog", "songBird"]
+```
+
+**Open gaps**: GAP-HS-118-122 (sovereign readback, DRM, cross-gate, Blackwell
+firmware, sm_120). Hardware-gated — not blocking mesh.
+
+---
+
+## ludoSpring — P2 PROFILE + DOC FRESHENING
+
+**Version**: V82 | **Wave**: 76 | **Gate**: ironGate (12/12) | **Tests**: 995
+**Profile**: MISSING `domain_profile.toml`
+**Last commit**: Jun 3
+
+**Status**: guideStone L4. Pure composition spring (no spring binary in
+plasmidBin). All 16 gaps resolved.
+
+**P2 — Create `domain_profile.toml`**: Pattern:
+```toml
+[profile]
+name = "ludoSpring"
+domain = "interactive_simulation"
+gate = "ironGate"
+guidestone_level = "L4"
+
+[capabilities]
+primary = ["game_engine", "mda_framework", "tower_atomic"]
+consumed_primals = ["bearDog", "songBird", "skunkBat", "coralReef"]
+```
+
+**P2 — Doc freshening**: `CONTEXT.md` says V78/982 tests. README says
+V82/995. Sync CONTEXT to match.
+
+---
+
+## airSpring — P2 WAVE ALIGNMENT
+
+**Version**: v0.10.0 | **Wave**: 60 | **Gate**: eastGate (12/12) | **Tests**: 1,446
+**Profile**: `domain_profile.toml` ✓
+**Last commit**: May 31
+
+**Status**: guideStone L4. 7 days behind Wave 78. Not on parity sprint.
+Code quality solid (pedantic+nursery clean).
+
+**P2 — Wave 78 alignment**:
+1. Pull latest primals
+2. Verify `CONSUMED_CAPABILITIES` includes trust methods
+3. Update `docs/PRIMAL_GAPS.md` for upstream resolutions
+4. Bump wave marker in README/CHANGELOG
+
+**Open gaps**: AG-006 (coralReef), AG-007 (toadStool), AG-009 (petalTongue),
+AG-010 (barraCuda), AG-011 (Anderson WGSL), AG-021 (Akida NPU).
+
+**Priority**: LOW for mesh — airSpring is not mesh-critical.
+
+---
+
+## groundSpring — P2 WAVE ALIGNMENT
+
+**Version**: V146 | **Wave**: 63 | **Gate**: eastGate (12/12) | **Tests**: 1,123 + 455 py
+**Profile**: `domain_profile.toml` ✓
+**Last commit**: May 30
+
+**Status**: guideStone L4. 6 days behind Wave 78. Squirrel integration done.
+
+**P2 — Wave 78 alignment**: Same as airSpring — pull primals, verify
+capabilities, update wave markers.
+
+**Priority**: LOW for mesh — groundSpring is not mesh-critical.
+
+---
+
+# SUMMARY — WHAT BLOCKS FORWARD PROGRESS
+
+## P0 (blocks mesh)
+- **Songbird**: Wire `auth.exchange_trust` in `mesh.init` flow
+
+## P1 (blocks 3-gate mesh)
+- **Songbird**: Coverage sprint 73% → 90%
+- **wetSpring + neuralSpring**: southGate 11/13 → 13/13 health
+- **cellMembrane**: Caddy reverse proxy wiring
+
+## P2 (parity hygiene — parallel, non-blocking)
+- **8 primals**: Create/move `config/capability_registry.toml`
+- **3 springs**: Create `domain_profile.toml`
+- **5 primals**: Coverage sprint to 90%
+- **3 springs**: Wave marker freshening
+- **ludoSpring**: CONTEXT.md stale
+
+## Sequence
+```
+Primals ship registry TOML + coverage
+  → Springs pull and inherit
+    → primalSpring validates at ecosystem level
+      → mesh deployment proceeds
+```
