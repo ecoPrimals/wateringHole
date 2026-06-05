@@ -1,10 +1,10 @@
-# Wave 78 Remaining Work — Full Parity & Mesh Deployment
+# Wave 79 Remaining Work — Full Parity & Mesh Deployment
 
 **Date**: 2026-06-05  
 **Author**: eastGate overwatch  
 **Supersedes**: Wave 76 remaining work (archived)  
 **Status**: Active  
-**Updated**: Wave 78b — 13/13 VPS health, DH-1 partial fix, binary refresh needed
+**Updated**: Wave 79 — UDS-only stadial gate, BD-TRUST-01 resolved, all upstream gaps closed
 
 ---
 
@@ -20,8 +20,13 @@ Wave 78 upstream deliveries resolved the two highest-priority blockers:
 - **BD-TRUST-01**: bearDog `auth.exchange_trust` (zero-operator trust seeding)
 - **RC-POLL-01**: rhizoCrypt `MeshEventListener` polling wired
 
-**Remaining critical path**: Wire `auth.exchange_trust` into Songbird `mesh.init`
-→ 3-gate mesh proof → stadial entry.
+Wave 79 established the UDS-only stadial gate in primalSpring: launcher defaults
+port-free, TCP discovery gated, all graphs `uds_only`, deploy profiles port-free.
+BD-TRUST-01 resolved — Songbird wired `auth.exchange_trust` into `mesh.init`.
+All 4 upstream gaps are closed. Songbird Wave 81 deep debt pass absorbed.
+
+**Remaining critical path**: VPS binary refresh (include BD-TRUST-01 + SB-TLS-01
++ UDS-native nestgate/toadstool/skunkbat) → 3-gate mesh proof → stadial entry.
 
 ---
 
@@ -32,7 +37,7 @@ Wave 78 upstream deliveries resolved the two highest-priority blockers:
 | Repo | Gate | Version/Wave | Delivery |
 |------|------|--------------|----------|
 | bearDog | southGate | v0.9.0 / w140 | `auth.exchange_trust`, auto trust seeding |
-| songBird | southGate | v0.2.9-w79 | SB-TLS-01 fix, Phase 3.5 Ed25519, retry hardening |
+| songBird | southGate | v0.2.9-w81 | SB-TLS-01, BD-TRUST-01 mesh.init, deep debt (ports→constants, prod stubs hardened) |
 | biomeOS | southGate | v4.07 / w77 | Perceptron training data pipeline |
 | toadStool | biomeGate | S290 | CallerContext fan_out, coordination feature-gate |
 | sweetGrass | strandGate | v0.7.48 / w78b | Zero hot-path env reads |
@@ -42,7 +47,7 @@ Wave 78 upstream deliveries resolved the two highest-priority blockers:
 | coralReef | strandGate | v0.2.0 / w78 | Mesh propagation, SPIR-V E2E |
 | petalTongue | ironGate | v1.6.6 / w77d | Typed errors, MIME notebook |
 | skunkBat | eastGate | v0.2.2 | defense.status health probe |
-| primalSpring | eastGate | w77d | UDS registry fix, deep debt, gap docs |
+| primalSpring | eastGate | w79 | UDS-only stadial gate, 893 tests, all upstream gaps resolved |
 | wateringHole | eastGate | w78 | Overwatch, fossilized wave77 handoffs |
 | cellMembrane | ironGate | w77b | Peptidoglycan formalization |
 | barraCuda | strandGate | v0.4.0 / w76 | ML pipeline, mesh.trust_verify |
@@ -145,7 +150,7 @@ But mesh is not initialized (`mesh.init` not called, 0 peers).
 |------|-------|--------|
 | Build fresh musl-static binaries for all 13 primals | plasmidBin / eastGate ops | **NEEDED** |
 | Deploy to golgiBody `/opt/membrane/` | operator | **BLOCKED** on build |
-| Wire `auth.exchange_trust` in Songbird `mesh.init` | Songbird (code) | **READY** — but deployed binary lacks fix |
+| Wire `auth.exchange_trust` in Songbird `mesh.init` | Songbird (code) | **RESOLVED** — `ec978b86`. Deployed binary needs refresh. |
 | Call `mesh.init` on VPS Songbird with gate peers | operator | **BLOCKED** on binary refresh |
 | 3-gate mesh proof | primalSpring overwatch | **BLOCKED** on mesh.init |
 | S4 auth 7-day gate completion | bearDog + ironGate | ~Jun 9 |
@@ -231,16 +236,16 @@ ports CLOSED.
 
 ---
 
-## Upstream Gap Summary
+## Upstream Gap Summary — ALL RESOLVED
 
 | Gap | Status |
 |-----|--------|
 | ~~SB-TLS-01~~ | **RESOLVED** — Songbird direct-mode TLS crypto |
 | ~~SB-TLS-02~~ | **RESOLVED** — Phase 3.5 Ed25519 relay verification |
-| **BD-TRUST-01** | bearDog DELIVERED `auth.exchange_trust`. **Needs Songbird mesh.init integration.** |
+| ~~BD-TRUST-01~~ | **RESOLVED** — Songbird `ec978b86` wires `auth.exchange_trust` into `mesh.init`. Zero-operator cross-gate trust seeding. |
 | ~~RC-POLL-01~~ | **RESOLVED** — rhizoCrypt MeshEventListener polling wired |
 
-**Only remaining P1 gap**: BD-TRUST-01 Songbird integration (bearDog side complete).
+**Zero P0/P1 upstream gaps.** Remaining blocker: VPS binary refresh to deploy resolved code.
 
 ---
 
