@@ -4,7 +4,7 @@
 **Author**: eastGate overwatch  
 **Supersedes**: Wave 76 remaining work (archived)  
 **Status**: Active  
-**Updated**: Wave 79 — UDS-only stadial gate, BD-TRUST-01 resolved, all upstream gaps closed
+**Updated**: Wave 79b — VPS binary refresh (10/13 deployed), deployment pipeline validated, handoff to cellMembrane for 3 headless fixes
 
 ---
 
@@ -25,8 +25,9 @@ port-free, TCP discovery gated, all graphs `uds_only`, deploy profiles port-free
 BD-TRUST-01 resolved — Songbird wired `auth.exchange_trust` into `mesh.init`.
 All 4 upstream gaps are closed. Songbird Wave 81 deep debt pass absorbed.
 
-**Remaining critical path**: VPS binary refresh (include BD-TRUST-01 + SB-TLS-01
-+ UDS-native nestgate/toadstool/skunkbat) → 3-gate mesh proof → stadial entry.
+**Remaining critical path**: Fix 3 headless VPS regressions (toadstool/coralreef/squirrel)
+→ redeploy → mesh.init with gate peers → 3-gate mesh proof → stadial entry.
+10/13 VPS binaries refreshed. Full pipeline validated (build→harvest→deploy→verify).
 
 ---
 
@@ -148,9 +149,10 @@ bearDog ionic tokens + rhizoCrypt DAG provenance.
 `skunkbat` TCP-only (needs binary rebuild for UDS), `squirrel`/`petaltongue` UDS connected
 but health probe silent (binary-level framing difference). Mesh not yet initialized.
 
-**Binary versions on VPS** (pre-Wave 79 primal binaries, Wave 79 launcher):
-All primals still Jun 2 binaries. Full rebuild needed for Wave 79 UDS-native flags in
-nestgate, skunkbat, toadstool. TCP fallback on localhost is safe (ufw blocks external).
+**Binary versions on VPS** (Wave 79b refresh):
+10/13 primals refreshed to HEAD builds (Jun 5). skunkBat v0.2.5, rhizoCrypt v0.14.2,
+sweetGrass v0.7.50, nestGate v0.5.0 (notable version jumps). 3 rolled back to pre-refresh
+(toadstool/coralreef/squirrel) — headless VPS regressions in new code.
 
 | Step | Owner | Status |
 |------|-------|--------|
@@ -249,6 +251,7 @@ primal TCP ports exposed externally.
 | FRAGO | From→To | Status |
 |-------|---------|--------|
 | `wave73-westgate-skunkbat-enrollment` | eastGate→westGate | **PENDING** — hardware incoming |
+| `wave79-transport-evolution-capability-routing` | eastGate→all | **Phase 1 COMPLETE**, Phase 2 in progress |
 
 ---
 
@@ -261,7 +264,8 @@ primal TCP ports exposed externally.
 | ~~BD-TRUST-01~~ | **RESOLVED** — Songbird `ec978b86` wires `auth.exchange_trust` into `mesh.init`. Zero-operator cross-gate trust seeding. |
 | ~~RC-POLL-01~~ | **RESOLVED** — rhizoCrypt MeshEventListener polling wired |
 
-**Zero P0/P1 upstream gaps.** Remaining blocker: VPS binary refresh to deploy resolved code.
+**Zero P0/P1 upstream gaps.** VPS binary refresh 10/13 complete. 3 headless regressions
+handed off to cellMembrane. mesh.init ready once all 13 confirmed.
 
 ---
 

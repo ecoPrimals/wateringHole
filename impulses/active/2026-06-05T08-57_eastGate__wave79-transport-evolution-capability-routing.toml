@@ -68,8 +68,8 @@ at deploy time based on topology, platform, and composition tier.
 priority = "P2"
 
 [phases]
-phase_1 = "UDS Convergence (Wave 79) — COMPLETE"
-phase_2 = "Songbird-Routed IPC — IN PROGRESS"
+phase_1 = "UDS Convergence (Wave 79) — COMPLETE. VPS 10/13 refreshed, 3 need headless fix."
+phase_2 = "Songbird-Routed IPC — IN PROGRESS. songbird-mesh.service live on VPS."
 phase_3 = "Tower Transport Abstraction — TARGET"
 
 [phases.phase_2_milestones]
