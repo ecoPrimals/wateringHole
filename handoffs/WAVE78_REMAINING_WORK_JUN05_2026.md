@@ -4,7 +4,7 @@
 **Author**: eastGate overwatch  
 **Supersedes**: Wave 76 remaining work (archived)  
 **Status**: Active  
-**Updated**: Wave 78 — diderm membrane live, SB-TLS-01/02 resolved, BD-TRUST-01 delivered
+**Updated**: Wave 78b — 13/13 VPS health, DH-1 partial fix, binary refresh needed
 
 ---
 
@@ -130,15 +130,40 @@ bearDog ionic tokens + rhizoCrypt DAG provenance.
 | Content Layer | nestgate.io | LIVE | Let's Encrypt (sovereign) |
 | Peptidoglycan (VPS) | golgiBody/golgiBody-ext | LIVE | Sovereign knot-dns |
 
-### Track 4: Mesh Deployment (P0 — current critical path)
+### Track 4: VPS Binary Refresh (P0 — blocks mesh)
+
+**Current state**: VPS binaries are from Jun 2. They predate:
+- SB-TLS-01 fix (Songbird Jun 4) — symmetric mesh TLS origination
+- BD-TRUST-01 `auth.exchange_trust` (bearDog Jun 4) — zero-operator trust
+- rhizoCrypt Wave 78 (Jun 5) — DAG append + lifecycle wiring
+- DH-1 socket fixes for nestgate, skunkbat, toadstool
+
+**VPS health (Jun 5, post DH-1 fix)**: 13/13 alive via `/run/membrane/`.
+But mesh is not initialized (`mesh.init` not called, 0 peers).
 
 | Step | Owner | Status |
 |------|-------|--------|
-| Wire `auth.exchange_trust` in Songbird `mesh.init` | Songbird | **READY** — bearDog W140 + SB-TLS fix unblock |
-| 3-gate mesh proof (eastGate + strandGate + westGate/southGate) | primalSpring overwatch | **UNBLOCKED** |
+| Build fresh musl-static binaries for all 13 primals | plasmidBin / eastGate ops | **NEEDED** |
+| Deploy to golgiBody `/opt/membrane/` | operator | **BLOCKED** on build |
+| Wire `auth.exchange_trust` in Songbird `mesh.init` | Songbird (code) | **READY** — but deployed binary lacks fix |
+| Call `mesh.init` on VPS Songbird with gate peers | operator | **BLOCKED** on binary refresh |
+| 3-gate mesh proof | primalSpring overwatch | **BLOCKED** on mesh.init |
 | S4 auth 7-day gate completion | bearDog + ironGate | ~Jun 9 |
 | westGate enrollment | skunkBat + eastGate | Hardware pending |
 | southGate 13/13 stabilization | wetSpring / neuralSpring ops | **INVESTIGATING** |
+
+### Track 4b: DH-1 Socket Standardization
+
+**Current**: 13/13 reachable via `/run/membrane/` but 3 use symlinks to `/tmp`:
+
+| Primal | Socket Path | Method | Needs |
+|--------|-------------|--------|-------|
+| nestgate | symlink → `/tmp/nestgate-*.sock` | No `--socket` in binary | Binary rebuild with `--socket` flag |
+| toadstool | symlink → `/tmp/biomeos/compute.sock` | `--socket` ignored | Binary rebuild to respect `--socket` |
+| skunkbat | TCP only (:9140, `--no-uds`) | No socket path flag | Binary rebuild with `--socket` flag |
+
+**7 primals clean UDS**: beardog, songbird, biomeos, barracuda, coralreef, squirrel, petaltongue
+**3 primals fixed this wave**: loamspine (`--socket`), sweetgrass (`--socket`), rhizocrypt (`--unix`)
 
 ### Track 5: Caddy Reverse Proxy Wiring (P1)
 
