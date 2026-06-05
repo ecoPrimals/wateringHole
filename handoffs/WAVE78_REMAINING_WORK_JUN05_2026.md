@@ -152,18 +152,34 @@ But mesh is not initialized (`mesh.init` not called, 0 peers).
 | westGate enrollment | skunkBat + eastGate | Hardware pending |
 | southGate 13/13 stabilization | wetSpring / neuralSpring ops | **INVESTIGATING** |
 
-### Track 4b: DH-1 Socket Standardization
+### Track 4b: DH-1 Socket Standardization + UDS-Only Migration
 
-**Current**: 13/13 reachable via `/run/membrane/` but 3 use symlinks to `/tmp`:
+**Wave 78b**: Migrated to Tower Atomic UDS-only posture. Removed all
+standalone TCP `--port` flags from systemd units. Songbird :7700 is
+the only primal TCP port. Closed standalone ports (9500, 9601, 9700,
+9850) in ufw firewall.
 
-| Primal | Socket Path | Method | Needs |
-|--------|-------------|--------|-------|
-| nestgate | symlink → `/tmp/nestgate-*.sock` | No `--socket` in binary | Binary rebuild with `--socket` flag |
-| toadstool | symlink → `/tmp/biomeos/compute.sock` | `--socket` ignored | Binary rebuild to respect `--socket` |
-| skunkbat | TCP only (:9140, `--no-uds`) | No socket path flag | Binary rebuild with `--socket` flag |
+**UDS posture** (13/13 alive):
 
-**7 primals clean UDS**: beardog, songbird, biomeos, barracuda, coralreef, squirrel, petaltongue
-**3 primals fixed this wave**: loamspine (`--socket`), sweetgrass (`--socket`), rhizocrypt (`--unix`)
+| Primal | Socket | Notes |
+|--------|--------|-------|
+| beardog | `/run/membrane/beardog.sock` | Clean |
+| songbird | `/run/membrane/songbird.sock` + :7700 | Federation port is correct |
+| biomeos | `/run/membrane/biomeos.sock` | Clean |
+| barracuda | `/run/membrane/barracuda.sock` | Clean |
+| coralreef | `/run/membrane/coralreef.sock` | Clean |
+| squirrel | `/run/membrane/squirrel.sock` | Clean |
+| petaltongue | `/run/membrane/petaltongue.sock` | Clean |
+| loamspine | `/run/membrane/loamspine.sock` | Fixed W78 (removed `--port 9700`) |
+| sweetgrass | `/run/membrane/sweetgrass.sock` | Fixed W78 (removed `--port 9850`) |
+| rhizocrypt | `/run/membrane/rhizocrypt.sock` | Fixed W78 (removed `--port 9601`) |
+| nestgate | symlink → `/tmp/` + localhost :9500 | **Needs binary update** for `--socket` |
+| toadstool | symlink → `/tmp/biomeos/` | **Needs binary update** to respect `--socket` |
+| skunkbat | TCP-only localhost :9140 | **Needs binary update** for UDS |
+
+**Firewall (ufw)**: Only allows SSH(22), DNS(53), HTTP/S(80/443), Forgejo(2222),
+Songbird(3478/7700), TURN data(49152-65535/udp). All standalone primal TCP
+ports CLOSED.
 
 ### Track 5: Caddy Reverse Proxy Wiring (P1)
 
