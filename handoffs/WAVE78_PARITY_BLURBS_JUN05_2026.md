@@ -197,36 +197,34 @@ separately.
 
 ---
 
-## petalTongue — P2 COVERAGE
+## petalTongue — P2 COVERAGE (sprint active)
 
-**Version**: v1.6.6 | **Wave**: 77d | **Tests**: 6,217 | **Coverage**: ~85%
+**Version**: v1.6.6 | **Wave**: 78 | **Tests**: 6,259 | **Coverage**: ~85%+
 **Registry**: `config/capability_registry.toml` ✓
-**Last commit**: Jun 4
+**Last commit**: Jun 5
 
-**Status**: Registry TOML present. BTSP Phase 3. S3 cutover readiness.
-UUI/multimodal leader.
+**Status**: Coverage sprint active — 42 new tests added (Wave 78). Deep debt
+passes 4-5 completed (tokio narrowing, anyhow demotion, format idiom cleanup).
 
 **Parity items**:
-**P2 — Coverage**: 85% → 90%. Focus on content-backend integration paths.
+**P2 — Coverage**: 85% → 90%. Continue coverage sprint on content-backend
+and discovery integration paths.
 
 ---
 
-## rhizoCrypt — P2 LOCAL WIRING
+## rhizoCrypt — CLEAN (delivered Wave 78)
 
-**Version**: v0.14.1 | **Wave**: 77e | **Tests**: 1,683 | **Coverage**: stadial
-**Registry**: `capability_registry.toml` at root ✓
-**Last commit**: Jun 4
+**Version**: v0.14.2 | **Wave**: 78 | **Tests**: 1,683+ | **Coverage**: stadial
+**Registry**: `config/capability_registry.toml` ✓ (moved from root Wave 78)
+**Last commit**: Jun 5
 
-**Status**: RC-POLL-01 RESOLVED — `MeshEventListener.poll_events()` wired
-to `auth.events.poll`, 30s incremental polling.
+**Status**: ALL BLURB ITEMS DELIVERED:
+- ✓ Mesh-trust session auto-provision on first poll result
+- ✓ DAG append: `poll_events()` results wired into `append_vertex()`
+- ✓ Lifecycle wiring: `spawn_mesh_poller()` called after `Arc::new(primal)`
+- ✓ `capability_registry.toml` moved to `config/`
 
-**Remaining local work** (P2):
-1. Mesh-trust session auto-provision on first poll result
-2. DAG append: wire `poll_events()` results into `append_vertex()`
-3. Lifecycle wiring: call `spawn_poller()` from `PrimalLifecycle::start()`
-   when endpoint is Connected
-
-Move `capability_registry.toml` to `config/` (optional hygiene).
+**Parity items**: NONE. VPS binary refresh needed (deployed is pre-Wave 78).
 
 ---
 
