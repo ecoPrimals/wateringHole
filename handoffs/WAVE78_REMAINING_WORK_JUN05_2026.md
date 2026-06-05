@@ -137,54 +137,70 @@ bearDog ionic tokens + rhizoCrypt DAG provenance.
 
 ### Track 4: VPS Binary Refresh (P0 — blocks mesh)
 
-**Current state**: VPS binaries are from Jun 2. They predate:
-- SB-TLS-01 fix (Songbird Jun 4) — symmetric mesh TLS origination
-- BD-TRUST-01 `auth.exchange_trust` (bearDog Jun 4) — zero-operator trust
-- rhizoCrypt Wave 78 (Jun 5) — DAG append + lifecycle wiring
-- DH-1 socket fixes for nestgate, skunkbat, toadstool
+**Wave 79 deployment (Jun 5)**:
+- `nucleus_launcher` v0.9.31 deployed to VPS (musl-static, Wave 79 UDS-only default)
+- All 13 systemd units updated: Nest/Node/Meta switched to UDS-only or localhost-bound
+- `membrane-socket-bridge.service` created for `/run/membrane/` → `/run/biomeos/` path alignment
+- Legacy Nest TCP firewall rules (9500, 9601, 9700, 9850) removed from ufw
+- Stale /tmp sockets cleaned
 
-**VPS health (Jun 5, post DH-1 fix)**: 13/13 alive via `/run/membrane/`.
-But mesh is not initialized (`mesh.init` not called, 0 peers).
+**VPS health (Jun 5, post Wave 79 unit refresh)**: 13/13 services active, 10/12 UDS ALIVE.
+`skunkbat` TCP-only (needs binary rebuild for UDS), `squirrel`/`petaltongue` UDS connected
+but health probe silent (binary-level framing difference). Mesh not yet initialized.
+
+**Binary versions on VPS** (pre-Wave 79 primal binaries, Wave 79 launcher):
+All primals still Jun 2 binaries. Full rebuild needed for Wave 79 UDS-native flags in
+nestgate, skunkbat, toadstool. TCP fallback on localhost is safe (ufw blocks external).
 
 | Step | Owner | Status |
 |------|-------|--------|
-| Build fresh musl-static binaries for all 13 primals | plasmidBin / eastGate ops | **NEEDED** |
-| Deploy to golgiBody `/opt/membrane/` | operator | **BLOCKED** on build |
-| Wire `auth.exchange_trust` in Songbird `mesh.init` | Songbird (code) | **RESOLVED** — `ec978b86`. Deployed binary needs refresh. |
-| Call `mesh.init` on VPS Songbird with gate peers | operator | **BLOCKED** on binary refresh |
+| Build fresh musl-static binaries for all 13 primals | plasmidBin / eastGate ops | **DONE** — 13 built, harvested with blake3 checksums |
+| Deploy to golgiBody `/opt/membrane/` | operator | **DONE** — 10/13 refreshed, 3 rolled back (toadstool/coralreef/squirrel need repo fixes) |
+| `nucleus_launcher` v0.9.31 to VPS | eastGate ops | **DONE** — Wave 79 binary deployed |
+| Systemd units → UDS-only / localhost | eastGate ops | **DONE** — 13 units updated + songbird-mesh.service created |
+| Wire `auth.exchange_trust` in Songbird `mesh.init` | Songbird (code) | **RESOLVED** — Binary refreshed on VPS |
+| Fix toadstool/coralreef/squirrel headless mode | cellMembrane (ironGate) | **HANDED OFF** — see WAVE79_VPS_REFRESH_HANDOFF_JUN05_2026.md |
+| Call `mesh.init` on VPS Songbird with gate peers | operator | **READY** — can proceed once all 13 binaries confirmed |
 | 3-gate mesh proof | primalSpring overwatch | **BLOCKED** on mesh.init |
 | S4 auth 7-day gate completion | bearDog + ironGate | ~Jun 9 |
 | westGate enrollment | skunkBat + eastGate | Hardware pending |
-| southGate 13/13 stabilization | wetSpring / neuralSpring ops | **INVESTIGATING** |
 
 ### Track 4b: DH-1 Socket Standardization + UDS-Only Migration
 
-**Wave 78b**: Migrated to Tower Atomic UDS-only posture. Removed all
-standalone TCP `--port` flags from systemd units. Songbird :7700 is
-the only primal TCP port. Closed standalone ports (9500, 9601, 9700,
-9850) in ufw firewall.
+**Wave 79 (Jun 5)**: Full systemd unit refresh. All 13 primals now have
+UDS-only or localhost-bound units. `deploy_membrane.sh` updated: Nest units
+generate `--socket` flags, skunkBat unit uses `--socket --no-tcp`, firewall
+no longer opens standalone primal ports.
 
-**UDS posture** (13/13 alive):
+**UDS posture** (13/13 services active, 10/12 UDS health ALIVE):
 
-| Primal | Socket | Notes |
-|--------|--------|-------|
-| beardog | `/run/membrane/beardog.sock` | Clean |
-| songbird | `/run/membrane/songbird.sock` + :7700 | Federation port is correct |
-| biomeos | `/run/membrane/biomeos.sock` | Clean |
-| barracuda | `/run/membrane/barracuda.sock` | Clean |
-| coralreef | `/run/membrane/coralreef.sock` | Clean |
-| squirrel | `/run/membrane/squirrel.sock` | Clean |
-| petaltongue | `/run/membrane/petaltongue.sock` | Clean |
-| loamspine | `/run/membrane/loamspine.sock` | Fixed W78 (removed `--port 9700`) |
-| sweetgrass | `/run/membrane/sweetgrass.sock` | Fixed W78 (removed `--port 9850`) |
-| rhizocrypt | `/run/membrane/rhizocrypt.sock` | Fixed W78 (removed `--port 9601`) |
-| nestgate | symlink → `/tmp/` + localhost :9500 | **Needs binary update** for `--socket` |
-| toadstool | symlink → `/tmp/biomeos/` | **Needs binary update** to respect `--socket` |
-| skunkbat | TCP-only localhost :9140 | **Needs binary update** for UDS |
+| Primal | Transport | Socket | TCP | Status |
+|--------|-----------|--------|-----|--------|
+| beardog | UDS+TCP | `/run/membrane/beardog.sock` | 127.0.0.1:9100 (binary default) | ALIVE via UDS |
+| songbird | UDS+TCP | `/run/membrane/songbird.sock` | :7700 (federation, correct) | ALIVE via UDS |
+| biomeos | UDS | `/run/membrane/biomeos.sock` | — | ALIVE via UDS |
+| barracuda | UDS | `/run/membrane/barracuda.sock` | — | ALIVE via UDS |
+| coralreef | UDS | `/run/membrane/coralreef.sock` | 127.0.0.1:random | ALIVE via UDS |
+| toadstool | UDS | `/run/membrane/toadstool.sock` | 127.0.0.1:random | ALIVE via UDS |
+| nestgate | UDS+TCP | `/run/membrane/nestgate.sock` | 127.0.0.1:9500 | ALIVE via UDS |
+| rhizocrypt | UDS | `/run/membrane/rhizocrypt.sock` | — | ALIVE via UDS |
+| loamspine | UDS | `/run/membrane/loamspine.sock` | — | ALIVE via UDS |
+| sweetgrass | UDS+HTTP | `/run/membrane/sweetgrass.sock` | 127.0.0.1:random (HTTP) | ALIVE via UDS |
+| squirrel | UDS | `/run/membrane/squirrel.sock` | — | Socket connects, health silent |
+| petaltongue | UDS | `/run/membrane/petaltongue.sock` | — | Socket connects, health silent |
+| skunkbat | TCP-only | (no UDS in current binary) | 127.0.0.1:9140 | ALIVE via TCP |
 
-**Firewall (ufw)**: Only allows SSH(22), DNS(53), HTTP/S(80/443), Forgejo(2222),
-Songbird(3478/7700), TURN data(49152-65535/udp). All standalone primal TCP
-ports CLOSED.
+**Socket path bridge**: `/run/membrane/*.sock` → symlinked to `/run/biomeos/*.sock`
+and `/run/user/0/biomeos/*.sock` via `membrane-socket-bridge.service`.
+
+**Firewall (ufw)**: Default deny incoming. Allows: SSH(22), DNS(53), HTTP/S(80/443),
+Forgejo(2222), Songbird(3478/7700), TURN data(49152-65535/udp). Zero standalone
+primal TCP ports exposed externally.
+
+**Remaining for full UDS purity**:
+- skunkBat binary needs rebuild with UDS support
+- sweetgrass `--http-address` defaults to `0.0.0.0:0` — needs `127.0.0.1:0` or removal
+- squirrel/petaltongue health probe framing investigation
 
 ### Track 5: Caddy Reverse Proxy Wiring (P1)
 
