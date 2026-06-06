@@ -1,0 +1,83 @@
+# FRAGO: Peptidoglycan Self-Awareness — VPS Detects Upstream Evolution
+# The toadStool divergence exposed a cellMembrane model gap.
+
+[impulse]
+id = "wave80c-peptidoglycan-self-awareness"
+type = "frago"
+from = "eastGate"
+to = ["cellMembrane", "plasmidBin"]
+date = "2026-06-06"
+priority = "P1"
+
+[context]
+reason = """
+Wave 80 incident: toadStool pushed --headless fix to their repo. Cascade synced
+it to Forgejo. But the peptidoglycan VPS layer (golgiBody) had no awareness that
+upstream primals had evolved. The VPS continued running rolled-back binaries.
+
+The divergence was discovered by accident ("toadStool said they pushed").
+golgiBody-ext should have detected the upstream evolution and either:
+  1. Auto-refreshed (if binaries available)
+  2. Notified the overwatch that stale primals were detected
+
+Root cause: the deployment pipeline stopped at "checksums committed to plasmidBin."
+No feedback loop existed from plasmidBin → VPS.
+"""
+
+[resolution.implemented]
+wave = "80c"
+date = "2026-06-06"
+
+[resolution.implemented.check_mode]
+description = "deploy_membrane.sh check <user@host>"
+behavior = """
+SSH to VPS, compute blake3 of each running binary, compare against
+local checksums.toml. Reports CURRENT/STALE/MISSING per primal.
+Enables operator to see divergence instantly.
+"""
+
+[resolution.implemented.self_refresh]
+description = "deploy_membrane.sh self-refresh (runs ON the VPS)"
+behavior = """
+1. git pull plasmidBin from sovereign Forgejo (shallow, fast)
+2. Compare checksums against running binaries via b3sum
+3. If stale primals found AND binaries available in plasmidBin/primals/: auto-refresh
+4. If stale but no binaries: log warning, exit 1 (operator action needed)
+"""
+
+[resolution.implemented.systemd_timer]
+description = "membrane-self-refresh.timer on VPS (6-hour cycle)"
+behavior = """
+Every 6 hours (with 5-min jitter): run self-refresh. If stale primals
+detected, attempt auto-refresh. Journal logs show exact divergence.
+"""
+
+[resolution.implemented.b3sum]
+description = "b3sum v1.8.5 deployed to VPS as musl-static binary"
+behavior = "Enables blake3 checksum verification on the peptidoglycan layer"
+
+[remaining]
+summary = """
+Self-refresh detects staleness but currently can't auto-fix because
+binaries aren't stored in the Forgejo repo (too large for git).
+
+Two evolution paths:
+  1. plasmidbin fetch: download from GitHub Releases on the VPS (requires PAT)
+  2. Gate-push model: gates build + harvest, then push to Forgejo LFS or
+     a sovereign binary store on the VPS itself
+
+The operator workaround remains: deploy_membrane.sh refresh root@<ip>
+from any gate with pre-built binaries.
+"""
+
+[remaining.cascade_visibility]
+gap = "membrane temporal.cascade reports 'OK pull' but not what changed"
+fix = "Enhance cascade to log commit subjects of incoming commits"
+priority = "P2"
+
+[outcome]
+expected = """
+The peptidoglycan layer becomes self-aware of upstream primal evolution.
+When a primal team pushes a fix, the VPS detects staleness within 6 hours
+and either auto-refreshes or alerts the overwatch. No more silent divergence.
+"""
