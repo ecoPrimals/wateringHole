@@ -237,6 +237,25 @@ golgiBody inner, firewall-locked to golgiBody-ext private IP only.
 | grapheneGate bootstrap | — | Portable trust anchor |
 | Cloudflare → sovereign content cutover | cellMembrane | After Caddy wiring |
 
+### Track 8: Post-Stadial Bloom — tideGlass (P3)
+
+[protoKarya/tideGlass](https://github.com/protoKarya/tideGlass) — gen5-native
+GPS sovereign rebuild for NF drug repurposing. First external consumer of
+full NUCLEUS composition stack.
+
+| Phase | Scope | Dependencies | Status |
+|-------|-------|--------------|--------|
+| 0. Archaeology | Zenodo artifact inventory | None | **ACTIVE** |
+| 1. Reproduce | Python validation per module | nestGate (data fetch) | Pending |
+| 2. Validate | Cross-validation vs primary sources | nestGate + provenance trio | Pending |
+| 3. Rebuild sovereign | Rust modules, barraCuda shaders | Full primal mesh | Pending |
+| 4. Package | pseudoSpore + lithoSpore + NF extension | All | Post-stadial |
+
+**Deployment implications**: tideGlass Phase 1 will be the first real-world
+validation that plasmidBin deployment pipeline -> NUCLEUS composition ->
+primal UDS mesh can serve external science workloads. This is why the
+cellMembrane/projectNUCLEUS ownership handoff for plasmidBin matters now.
+
 ---
 
 ## Sovereignty Shadow Status

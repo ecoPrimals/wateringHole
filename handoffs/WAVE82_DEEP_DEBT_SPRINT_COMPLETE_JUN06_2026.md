@@ -115,4 +115,29 @@ projectNUCLEUS (long-term deployment owner)
 debt tasks delivered. Shell scripts deprecated with comprehensive Rust
 replacement guides. The codebase is now HPC mesh-ready.
 
-*"Sixteen tasks. Nine hundred twenty-nine tests. Zero string dispatch. The mountain is clean."*
+---
+
+## tideGlass Seeded (Post-Stadial Bloom Target)
+
+[protoKarya/tideGlass](https://github.com/protoKarya/tideGlass) — first
+gen5-native product. GPS sovereign rebuild (Bin Chen Lab, Cell 2026) for
+NF drug repurposing. Assigned by Andrea Gonzales.
+
+**Why this matters for deployment**: tideGlass is the first consumer that
+will exercise the full NUCLEUS composition stack for external science
+production. The Python validation phase (Phases 0-2) needs:
+
+- **nestGate** — content-addressed data fetch (LINCS L1000, ChEMBL, ZINC)
+- **provenance trio** — data braid chains for sovereign compute validation
+- **barraCuda** — 3 WGSL shaders (RGES batch scoring, MCTS rollout, fingerprints)
+- **toadStool** — GPU streaming for RCL training
+
+This is why the deployment pipeline matters NOW — when Phase 3 (Rust
+rebuild) starts, the primals must be NUCLEUS-composable. The deep debt
+sprint cleaned primalSpring's side. cellMembrane and projectNUCLEUS
+own the deployment path that makes this possible.
+
+**Timeline**: Post-stadial bloom. Phase 0 (archaeology) begins now.
+Full NUCLEUS lithoSpore (Phase 4) is a 12+ week horizon.
+
+*"Sixteen tasks. Nine hundred twenty-nine tests. Zero string dispatch. The mountain is clean. And the first lens is being ground."*

@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-04 (Wave 77c — **INNER MEMBRANE LIVE**: `primal.eco` sovereign DNS propagated + TLS cert obtained (Let's Encrypt via Caddy). Inner membrane operational with zero commercial services in data path. `nestgate.io` DNS propagating. Peptidoglycan formalization DELIVERED by ironGate (cellMembrane ACK: MembraneComposition::Peptidoglycan variant, TrustBarrierConfig schema, FIELDMOUSE_CONTRACT.md, 4 tests/214 total). strandGate FRAGO: bearDog auth.events.subscribe for cross-gate trust event wiring. S4 7-day gate active (ends ~Jun 9). Diderm membrane architecture fully formalized and operational.)
+**Last updated**: 2026-06-06 (Wave 82 — primalSpring Deep Debt Sprint COMPLETE (16/16 tasks, 929 tests). All shell business logic absorbed into Rust. TOML-driven type-safe dispatch. plasmidBin ownership formalized (cellMembrane → projectNUCLEUS). **tideGlass seeded** ([protoKarya/tideGlass](https://github.com/protoKarya/tideGlass)) — first gen5-native product, GPS sovereign rebuild for NF drug repurposing. Post-stadial bloom target: NUCLEUS compositions serving tideGlass Python validation via primal data braids (nestGate fetch, provenance trio, barraCuda shaders). Deployment pipeline hardened for this path.)
 
 ---
 
