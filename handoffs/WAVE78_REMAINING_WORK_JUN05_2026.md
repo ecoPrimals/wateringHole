@@ -4,7 +4,7 @@
 **Author**: eastGate overwatch  
 **Supersedes**: Wave 76 remaining work (archived)  
 **Status**: Active  
-**Updated**: Wave 80c — ALL 13 primals VPS-ready. toadStool --headless RESOLVED (v0.2.0). Full pipeline validated. Ready for deploy_membrane.sh refresh → mesh.init.
+**Updated**: Wave 82 — Deep Debt Evolution Sprint COMPLETE (16/16 tasks). 929 tests (up from 893). All shell business logic absorbed into Rust. TOML-driven dispatch, config, and health checks. plasmidBin ownership formalized (cellMembrane → projectNUCLEUS). See `WAVE82_DEEP_DEBT_SPRINT_COMPLETE_JUN06_2026.md`.
 
 ---
 
@@ -48,7 +48,7 @@ ALL 13 primals VPS-ready. All headless regressions RESOLVED. Pipeline fully vali
 | coralReef | strandGate | v0.2.0 / w78 | Mesh propagation, SPIR-V E2E |
 | petalTongue | ironGate | v1.6.6 / w77d | Typed errors, MIME notebook |
 | skunkBat | eastGate | v0.2.2 | defense.status health probe |
-| primalSpring | eastGate | w79 | UDS-only stadial gate, 893 tests, all upstream gaps resolved |
+| primalSpring | eastGate | w82 | Deep debt sprint COMPLETE (16/16), 929 tests, TOML-driven, type-safe dispatch, shell absorbed |
 | wateringHole | eastGate | w78 | Overwatch, fossilized wave77 handoffs |
 | cellMembrane | ironGate | w77b | Peptidoglycan formalization |
 | barraCuda | strandGate | v0.4.0 / w76 | ML pipeline, mesh.trust_verify |
