@@ -68,7 +68,7 @@ at deploy time based on topology, platform, and composition tier.
 priority = "P2"
 
 [phases]
-phase_1 = "UDS Convergence (Wave 79) — COMPLETE. VPS 10/13 refreshed, sweetGrass localhost fixed (v0.7.51). 3 headless fixes pending."
+phase_1 = "UDS Convergence (Wave 80) — 11/13 refreshed. squirrel RESOLVED (wrong binary, code correct). 2 headless fixes pending (toadStool NPU, coralReef GPU specs)."
 phase_2 = "Songbird-Routed IPC — IN PROGRESS. songbird-mesh.service live. All 5 Caddy endpoints LIVE (mesh/auth/api.primal.eco + nestgate.io). Cross-node socat bridges deployed. 10G backbone installed across LAN gates."
 phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE. mesh.init ready once 3 headless fixes land → 3-gate mesh proof at wire speed."
 

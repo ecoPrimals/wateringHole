@@ -1,5 +1,5 @@
 # FRAGO: westGate Enrollment — skunkBat Family Onboarding
-# Updated Wave 79: UDS-only posture, capability-addressed transport
+# Updated Wave 80: skunkBat v0.2.6 ships --socket (UDS-only default)
 
 [impulse]
 id = "wave73-westgate-skunkbat-enrollment"
@@ -7,15 +7,17 @@ type = "frago"
 from = "eastGate"
 to = "westGate"
 date = "2026-06-03"
-updated = "2026-06-05"
+updated = "2026-06-06"
 priority = "P1"
 
 [context]
 reason = """
 westGate incoming. skunkBat (defense primal) needs family seed enrollment
-and mesh integration. Wave 79 update: UDS-only is now the stadial gate
+and mesh integration. Wave 80 update: v0.2.6 ships --socket flag with
+implicit --no-tcp (ecosystem convention). UDS-only is the stadial gate
 default. No standalone TCP ports. Songbird handles all routing.
 BD-TRUST-01 resolved — mesh.init auto-exchanges trust (zero operator).
+10G backbone installed — LAN mesh at wire speed, sub-ms latency.
 """
 
 [enrollment]
@@ -29,7 +31,7 @@ transport = "uds_only"
 [enrollment.prerequisites]
 operator = "westGate operator"
 hardware = "TBD (incoming)"
-network = "Same subnet as eastGate (192.168.1.x) — 10G backbone INSTALLED (Jun 7-8)"
+network = "Same subnet as eastGate (192.168.1.x) — 10G backbone LIVE"
 repos_needed = [
     "nestGate",
     "wateringHole",

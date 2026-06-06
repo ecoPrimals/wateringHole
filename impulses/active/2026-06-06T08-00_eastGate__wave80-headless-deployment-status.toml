@@ -1,0 +1,71 @@
+# FRAGO: Wave 80 — VPS Headless Deployment Status
+# 3 primals blocking mesh.init. 1 resolved (squirrel). 2 pending (toadStool, coralReef).
+
+[impulse]
+id = "wave80-headless-deployment-status"
+type = "frago"
+from = "eastGate"
+to = ["cellMembrane", "plasmidBin", "toadStool", "coralReef"]
+date = "2026-06-06"
+priority = "P0"
+
+[context]
+reason = """
+VPS NUCLEUS refresh blocked on 3 primals whose HEAD builds fail in headless
+(no GPU/NPU) environments. 10G backbone installed. Cross-node proxy COMPLETE.
+mesh.init is ready — only waiting on 13/13 ALIVE.
+
+squirrel is RESOLVED (wrong binary deployed — not a code bug).
+toadStool and coralReef require code fixes for headless mode.
+"""
+
+[status.squirrel]
+state = "RESOLVED"
+commit = "5dea2cc6"
+root_cause = "Wrong binary deployed (ai_tools_demo instead of squirrel)"
+fix = "Build with: cargo build --release -p squirrel --bin squirrel"
+test = "squirrel server --socket /tmp/test.sock → starts, responds to health.check"
+handoff = "wateringHole/handoffs/archive/SQUIRREL_WAVE79B_VPS_SERVER_MODE_FIX_JUN05_2026.md"
+note = """
+The `server` subcommand has existed since Wave 43. default-run = "squirrel"
+added to crates/main/Cargo.toml to prevent future ambiguity. cellMembrane
+just needs to rebuild the correct binary and redeploy.
+"""
+
+[status.toadstool]
+state = "PENDING"
+blocker = "Akida NPU probe at startup hard-fails without hardware"
+fix_needed = "Add --headless or --no-hardware flag to skip NPU enumeration"
+test = "toadstool server --socket /tmp/test.sock --headless → starts clean"
+
+[status.coralreef]
+state = "PENDING"
+blocker = "GPU ISA spec files required at startup even in server mode"
+fix_needed = "Lazy-load specs on first compile request, or add --headless flag"
+test = "coralreef server --socket /tmp/test.sock → starts without ./specs/ dir"
+
+[directive.cellMembrane]
+action = "Redeploy squirrel from correct binary"
+detail = """
+squirrel fix is already pushed. Rebuild:
+  cargo build --release -p squirrel --bin squirrel --target x86_64-unknown-linux-musl
+Copy the resulting binary to VPS and refresh:
+  ./deploy_membrane.sh refresh root@157.230.3.183
+This unblocks squirrel immediately. toadStool and coralReef still need code fixes.
+"""
+priority = "P0"
+
+[directive.toadstool]
+action = "Add headless server mode (skip hardware enumeration)"
+priority = "P0"
+
+[directive.coralreef]
+action = "Lazy-load GPU ISA specs (don't require at startup)"
+priority = "P0"
+
+[outcome]
+expected = """
+Once all 3 are resolved and redeployed:
+  13/13 ALIVE → mesh.init → 3-gate mesh proof → stadial gate entry
+squirrel is unblocked NOW — just needs rebuild/redeploy by cellMembrane.
+"""
