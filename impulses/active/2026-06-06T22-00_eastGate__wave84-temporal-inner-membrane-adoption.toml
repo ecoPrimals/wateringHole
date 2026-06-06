@@ -16,6 +16,13 @@ with git timeouts, CWD workspace resolution, and merge-ff divergence policy.
 38/38 repos sync in ~59 seconds. Manual git loops are deprecated.
 All repos, gates, and springs must adopt the temporal inner membrane
 for sync, deployment, and evolution tracking.
+
+Wave 85 gate status:
+  eastGate: DONE — cascade operational
+  ironGate: Evolves cascade (cellMembrane team)
+  strandGate: DONE — membrane built, temporal.cascade 24/24, 13/13 ALIVE
+  southGate: Set env, adopt membrane CLI
+  flockGate: WAN — cascade via peptidoglycan relay
 """
 
 [context]
