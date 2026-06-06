@@ -329,24 +329,29 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 77c)**: **INNER MEMBRANE LIVE — DEPLOYMENT IN PROGRESS.**
-`primal.eco` sovereign DNS propagated on public resolvers + TLS cert obtained (Let's Encrypt
-via Caddy on golgiBody-ext). Inner membrane serves HTTPS with zero commercial services in
-data path. `nestgate.io` DNS propagating (~hours remaining). Peptidoglycan formalization
-DELIVERED by ironGate: `MembraneComposition::Peptidoglycan` variant (role, not ladder tier),
-`TrustBarrierConfig` schema, `FIELDMOUSE_CONTRACT.md` trust barrier contract, 4 new tests
-(214 total cellMembrane). strandGate FRAGO: bearDog `auth.events.subscribe` for cross-gate
-trust event wiring (rhizoCrypt inbound ready, bearDog outbound pending).
+**Current assessment (Wave 82b)**: **39/39 REPOS CLEAN — DEPLOYMENT PIPELINE READY.**
+All ecosystem repos synchronized and pushed. ecoPrimals workspace dewired from NestGate
+legacy. primalSpring deep debt sprint complete (929 tests). tideGlass seeded (first gen5
+product). plasmidBin ownership formalized (cellMembrane evolution, projectNUCLEUS deployment).
+
 Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 inner membrane
-TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY + content layer wiring pending
-(`nestgate.io`). Criteria 2 mesh: 2 gates operational (eastGate + strandGate), need 3rd
-(westGate hardware incoming). Criteria 3: peptidoglycan FORMALIZED (ironGate ACK). Criteria
-4: flockGate OPERATIONAL, formal WAN validation pending. Criteria 5: `primal.eco` DNS
-PROPAGATED + TLS LIVE. `nestgate.io` DNS propagating. `primals.eco` stays Cloudflare (outer
-membrane). Criteria 6: cross-membrane validation scenario shipped (`s_cross_membrane_integrity`,
-61 scenarios), live dual-path validation pending `nestgate.io` propagation.
-**Next**: `nestgate.io` DNS propagation → TLS cert → content wiring. Live cross-gate
-`capability.call` (A1 P0). S4 gate review (~Jun 9). westGate enrollment (hardware ETA).
+TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY, 5/5 Caddy endpoints LIVE
+(primal.eco, mesh.primal.eco, auth.primal.eco, api.primal.eco, nestgate.io).
+Criteria 2 mesh: 2 gates operational (eastGate + strandGate), need 3rd
+(westGate — 10G backbone installed, hardware pending). Criteria 3: peptidoglycan FORMALIZED
+(ironGate ACK). Criteria 4: flockGate OPERATIONAL, formal WAN validation pending.
+Criteria 5: `primal.eco` + `nestgate.io` DNS PROPAGATED + TLS LIVE. `primals.eco` stays
+Cloudflare (outer membrane). DNSSEC enabled on both sovereign domains.
+Criteria 6: cross-membrane validation scenario shipped (`s_cross_membrane_integrity`,
+61 scenarios). Peptidoglycan self-refresh timer deployed (6-hour cycle, blake3 checksum
+verification). VPS staleness detection operational.
+
+**Critical path to stadial entry**:
+1. VPS deploy refresh (rebuild 3 rolled-back primals: toadstool/coralreef/squirrel)
+2. mesh.init with gate peers (all 13 confirmed ALIVE, ready)
+3. 3-gate mesh proof (blocked on westGate hardware)
+4. S4 auth gate review (~Jun 9)
+5. westGate enrollment (10G backbone LIVE, hardware pending)
 
 ---
 

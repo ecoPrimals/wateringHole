@@ -31,52 +31,55 @@ ALL 13 primals VPS-ready. All headless regressions RESOLVED. Pipeline fully vali
 
 ---
 
-## Ecosystem Freshness Assessment (Jun 5, 2026)
+## Ecosystem Freshness Assessment (Jun 6, 2026 — Wave 82b)
 
-### Tier 1: HOT — Current Wave 77-78 (delivered Jun 3-5)
+**39/39 repos clean. Zero dirty. Zero unpushed.**
 
-| Repo | Gate | Version/Wave | Delivery |
-|------|------|--------------|----------|
+### Tier 1: HOT — All pushed, synced (Jun 6)
+
+| Repo | Gate | Version/Wave | Latest |
+|------|------|--------------|--------|
+| primalSpring | eastGate | w82 | Deep debt sprint COMPLETE (16/16), 929 tests |
+| wateringHole | eastGate | w82b | Glacial goals + tideGlass + dewiring |
+| cellMembrane | ironGate | w82b | Deep debt refactor pushed |
+| coralReef | strandGate | w82b | Socket path XDG simplification |
+| loamSpine | strandGate | w82b | Lint fix, discovery doc comments |
+| petalTongue | ironGate | w82b | Redundant MIME check removed |
+| rhizoCrypt | strandGate | w82b | Discovery registration simplified |
+| wetSpring | southGate | w82b | Deploy service unit added |
+| esotericWebb | eastGate | w82b | Interactive launch script + deploy graph |
+| bingoCube | eastGate | w82b | egui/eframe pinned to 0.28 |
+| neuralSpring | southGate | w82b | Merge conflict resolved |
+| ludoSpring | ironGate | w82b | Merge conflict resolved |
 | bearDog | southGate | v0.9.0 / w140 | `auth.exchange_trust`, auto trust seeding |
-| songBird | southGate | v0.2.9-w81 | SB-TLS-01, BD-TRUST-01 mesh.init, deep debt (ports→constants, prod stubs hardened) |
+| songBird | southGate | v0.2.9-w81 | SB-TLS-01, BD-TRUST-01 mesh.init |
 | biomeOS | southGate | v4.07 / w77 | Perceptron training data pipeline |
-| toadStool | biomeGate | S290 | CallerContext fan_out, coordination feature-gate |
-| sweetGrass | strandGate | v0.7.51 / w79b | Localhost-only default bind, zero hot-path env reads |
-| rhizoCrypt | strandGate | v0.14.1 / w77e | MeshEventListener polling (RC-POLL-01) |
-| loamSpine | strandGate | w76 | Trust ledger IPC wired |
-| NestGate | ironGate | v0.5.0 / s93 | HTTP parity, content serving |
-| coralReef | strandGate | v0.2.0 / w78 | Mesh propagation, SPIR-V E2E |
-| petalTongue | ironGate | v1.6.6 / w77d | Typed errors, MIME notebook |
-| skunkBat | eastGate | v0.2.2 | defense.status health probe |
-| primalSpring | eastGate | w82 | Deep debt sprint COMPLETE (16/16), 929 tests, TOML-driven, type-safe dispatch, shell absorbed |
-| wateringHole | eastGate | w78 | Overwatch, fossilized wave77 handoffs |
-| cellMembrane | ironGate | w77b | Peptidoglycan formalization |
+| toadStool | biomeGate | S290 | CallerContext fan_out, --headless fix |
+| sweetGrass | strandGate | v0.7.51 / w79b | Localhost-only default bind |
+| NestGate | ironGate | s95b | HTTP parity, content serving, UDS compliance |
 | barraCuda | strandGate | v0.4.0 / w76 | ML pipeline, mesh.trust_verify |
+| skunkBat | eastGate | v0.2.2 | defense.status health probe |
+| squirrel | eastGate | w76 | 7,098 tests. Env centralization done. |
 
-### Tier 2: WARM — 3-6 Days Behind Wave 78
+### Tier 2: WARM — Functional, minor lag
 
-| Repo | Gate | Last Wave | Gap | Parity Work Needed |
-|------|------|-----------|-----|-------------------|
-| wetSpring | southGate | w77 (Jun 4) | 1d | V196 forward evolution. southGate health 11/13. |
-| neuralSpring | southGate | w76 (Jun 3-4) | 1-2d | V179 deep debt done. southGate mesh needs stabilization. |
-| healthSpring | ironGate | w76 (Jun 2) | 3d | V65c glacial cutover done. Absorb Wave 78 patterns. |
-| ludoSpring | ironGate | w76 (Jun 3) | 2d | V82 parity done. CONTEXT.md stale, no domain_profile.toml. |
-| squirrel | eastGate | w76 (Jun 3) | 2d | 7,098 tests. Env centralization done. |
+| Repo | Gate | Last Wave | Parity Work Needed |
+|------|------|-----------|--------------------|
+| healthSpring | ironGate | w76 (Jun 2) | V65c glacial cutover done. Absorb Wave 82 patterns. |
 
-### Tier 3: COOL — 5+ Days Behind
+### Tier 3: COOL — Evolving on separate tracks
 
-| Repo | Gate | Last Wave | Gap | Parity Work Needed |
-|------|------|-----------|-----|-------------------|
-| airSpring | eastGate | w60 (May 29) | 7d | v0.10.0, 1,446 tests. Not on parity sprint. |
-| groundSpring | eastGate | w63 (May 30) | 6d | V146, 1,123 tests. Squirrel integration done. |
-| hotSpring | biomeGate | S284 (Jun 1) | 4d | v0.6.32, L6. Separate sovereign-compute track. |
+| Repo | Gate | Last Wave | Status |
+|------|------|-----------|---------| 
+| airSpring | eastGate | w60 (May 29) | v0.10.0, 1,446 tests. Not on parity sprint. |
+| groundSpring | eastGate | w63 (May 30) | V146, 1,123 tests. Squirrel integration done. |
+| hotSpring | biomeGate | S284 (Jun 1) | v0.6.32, L6. Separate sovereign-compute track. |
 
 ### Tier 4: DORMANT (evolve on demand)
 
 | Repo | Last Commit | Assessment |
 |------|------------|------------|
 | sourDough | Jun 4 | Meta-primal, scaffold tool. Current. |
-| bingoCube | May 20 | Validation tool. Hygiene when convenient. |
 | rustChip | Apr 30 | Utility crate. Not blocking. |
 
 ---
