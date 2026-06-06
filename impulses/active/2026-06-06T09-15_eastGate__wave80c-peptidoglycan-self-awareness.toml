@@ -7,10 +7,10 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "plasmidBin"]
 date = "2026-06-06"
-updated = "2026-06-06"
+updated = "2026-06-06T16:00"
 priority = "P1"
 owner = "cellMembrane"
-note = "Wave 82c: ownership transferred from primalSpring to cellMembrane"
+note = "Wave 83: cellMembrane first long-term goal. AAR added — cascade-to-VPS sync gap is structural. See WAVE82C_OVERWATCH_SHIFT handoff for full AAR."
 
 [context]
 reason = """
@@ -64,14 +64,25 @@ summary = """
 Self-refresh detects staleness but currently can't auto-fix because
 binaries aren't stored in the Forgejo repo (too large for git).
 
-Two evolution paths:
-  1. plasmidbin fetch: download from GitHub Releases on the VPS (requires PAT)
-  2. Gate-push model: gates build + harvest, then push to Forgejo LFS or
-     a sovereign binary store on the VPS itself
+AAR (Wave 82c): Today's cascade pulled evolution from 4 primals
+(songBird, nestGate, petalTongue, squirrel). We detected .rs code
+changes, rebuilt selectively, verified checksums, and pushed — but
+the VPS had no awareness. This 10-minute manual cycle must be
+zero-touch under cellMembrane ownership.
 
-The operator workaround remains: deploy_membrane.sh refresh root@<ip>
-from any gate with pre-built binaries.
+Three evolution paths (cellMembrane to prioritize):
+  1. plasmidbin fetch: download from GitHub Releases on VPS (requires PAT)
+  2. Gate-push model: gates build + harvest, push to Forgejo LFS or
+     sovereign binary store on VPS
+  3. Cascade-aware rebuild: cellMembrane CI detects .rs changes on
+     cascade, triggers selective rebuild, pushes to VPS automatically
 """
+
+[remaining.cascade_to_vps_sync]
+gap = "Outer membrane receives evolution but VPS peptidoglycan has no auto-sync"
+fix = "cellMembrane owns the full cascade → rebuild → verify → push → swap pipeline"
+priority = "P1"
+aar = "WAVE82C_OVERWATCH_SHIFT_PLASMIDIN_HANDOFF_JUN06_2026.md#aar-cascade-to-vps-sync-gap"
 
 [remaining.cascade_visibility]
 gap = "membrane temporal.cascade reports 'OK pull' but not what changed"

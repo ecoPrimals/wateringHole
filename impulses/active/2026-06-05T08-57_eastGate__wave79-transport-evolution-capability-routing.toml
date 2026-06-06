@@ -71,9 +71,9 @@ at deploy time based on topology, platform, and composition tier.
 priority = "P2"
 
 [phases]
-phase_1 = "UDS Convergence (Wave 80c) — COMPLETE. 13/13 VPS-ready. All headless regressions RESOLVED. primalspring_primal deprecated. Pipeline validated. Ready for deploy refresh → mesh.init."
-phase_2 = "Songbird-Routed IPC — IN PROGRESS. songbird-mesh.service live. All 5 Caddy endpoints LIVE (mesh/auth/api.primal.eco + nestgate.io). Cross-node socat bridges deployed. 10G backbone installed across LAN gates."
-phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE. All 13 primals ready. Deploy refresh → mesh.init → 3-gate mesh proof at wire speed."
+phase_1 = "UDS Convergence (Wave 80c) — COMPLETE. 13/13 VPS-ready. All headless regressions RESOLVED. primalspring_primal deprecated. Pipeline validated. UDS health probe fix shipped (squirrel, petalTongue)."
+phase_2 = "Songbird-Routed IPC — IN PROGRESS. songbird-mesh.service live. All 5 Caddy endpoints LIVE. Cross-node socat bridges deployed. 10G backbone installed across LAN gates. songBird v0.2.12 shipped security_crypto + sovereign-onion (+2,259 lines)."
+phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE. All 13 primals ready. plasmidBin fully harvested + checksums verified. Deploy refresh → mesh.init → 3-gate mesh proof at wire speed."
 
 [phases.phase_2_milestones]
 m1 = "Songbird ipc.resolve returns transport-qualified endpoints"
