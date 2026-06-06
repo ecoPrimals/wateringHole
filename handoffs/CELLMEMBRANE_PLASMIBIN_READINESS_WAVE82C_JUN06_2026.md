@@ -1,17 +1,21 @@
-# cellMembrane — plasmidBin Ownership Readiness (Wave 82c)
+# cellMembrane — plasmidBin Ownership Readiness (Wave 82c → Wave 83 DEPLOYED)
 
 **Date**: 2026-06-06  
 **Gate**: ironGate  
-**Status**: Ready to receive full plasmidBin ownership  
+**Status**: DEPLOYED — plasmidBin ownership active, zero-touch pipeline live on VPS  
 
 ---
 
-## What cellMembrane Now Owns (implemented)
+## What cellMembrane Now Owns (implemented + deployed)
 
 | Capability | Implementation | Status |
 |------------|---------------|--------|
 | Binary fetch from Forgejo/GitHub releases | `membrane plasmid.fetch` | LIVE |
 | Binary push to VPS (atomic replace + restart) | `membrane plasmid.refresh` | LIVE |
+| Build from source, checksum, stage to depot | `membrane plasmid.harvest` | **LIVE (Wave 83)** |
+| End-to-end zero-touch: harvest → refresh | `membrane plasmid.pipeline` | **LIVE (Wave 83)** |
+| Depot freshness monitoring | `membrane plasmid.status` | **LIVE (Wave 83)** |
+| Automated 30-min pipeline timer on VPS | `plasmid-pipeline.timer` | **LIVE (Wave 83)** |
 | BLAKE3 checksum verification | `plasmid/fetch.rs` (native blake3 crate) | LIVE |
 | Service registry derivation | `nucleus_primals()` from `MembraneService::all()` | LIVE |
 | Source priority (Forgejo → GitHub → SSH) | `sources.toml` + `FetchSource` enum | LIVE |
@@ -21,51 +25,67 @@
 | K-Derm relay chain | `membrane relay.run` | LIVE |
 | Gate health aggregation | `membrane gate.health` | LIVE |
 
-## What Remains (P2 — next waves)
+## What Remains (P2 — future waves)
 
 | Item | Priority | Notes |
 |------|----------|-------|
-| `plasmid.deploy` (absorb `deploy_membrane.sh deploy`) | P2 | Full deploy flow in Rust |
-| `plasmid.harvest` (build from source + checksum + store) | P3 | Currently manual via `build-primal.sh` |
-| CI workflow wiring (check-updates.yml, harvest.yml) | P2 | Forgejo Actions on cellMembrane org |
-| Peptidoglycan self-refresh auto-fetch | P2 | Timer + Forgejo releases API |
+| `plasmid.deploy` (absorb remaining `deploy_membrane.sh` ops) | P2 | Full deploy flow in Rust |
+| CI workflow wiring (Forgejo Actions) | P2 | Auto-trigger on push |
+| Webhook-driven pipeline (vs timer-poll) | P3 | Instant refresh on push |
+| Binary taxonomy + evolution velocity tracking | P3 | Size, symbols, dep surface over time |
 
-## VPS Integration Readiness (projectNUCLEUS)
+## VPS Deployment Validation (Wave 83 — CONFIRMED)
 
 | Validation | Status |
 |------------|--------|
-| 13/13 primals ALIVE on VPS | CONFIRMED |
-| UDS-only posture (zero external primal TCP) | CONFIRMED |
+| 13/13 primals ACTIVE on VPS | **CONFIRMED** |
+| 12/13 health.liveness on UDS | **CONFIRMED** (petaltongue needs BTSP auth) |
+| skunkBat on TCP localhost:9140 | **CONFIRMED** (--socket pending upstream) |
+| UDS-only posture (zero external primal TCP) | **CONFIRMED** |
 | 5-domain sovereign TLS (Caddy + Let's Encrypt) | CONFIRMED |
 | `socat` bridges for UDS→private-network | OPERATIONAL |
 | Federation mesh port :7700 | OPERATIONAL |
 | BTSP auth enforced | SINCE 2026-06-02 |
-| Dark Forest audit re-validation needed | PENDING (NUCLEUS scope) |
+| plasmid-pipeline.timer active (30-min cycle) | **CONFIRMED** |
+| Old membrane-self-refresh.timer disabled | **CONFIRMED** |
+| Songbird discovery.peers responding | CONFIRMED (0 peers — awaiting mesh enrollment) |
 
-## For Upstream primalSpring Audit
+## Fixes Applied During Wave 83 Deployment
 
-cellMembrane codebase metrics (Wave 82c):
+| Primal | Issue | Resolution |
+|--------|-------|-----------|
+| barracuda | May 14 binary lacked `--socket` support | Force-rebuilt from HEAD, `--unix` flag now works |
+| squirrel | Ignored `--socket`, bound to biomeos discovery path | Force-rebuilt from HEAD, now binds correctly |
+| coralreef | No `--socket` flag in CLI | Unit updated to `--tarpc-bind unix:///run/membrane/coralreef.sock` |
 
-- **226 tests** passing (8 test modules + integration + doc-tests)
+## Codebase Metrics (Wave 83)
+
+- **231 tests** passing (up from 226)
 - **Zero clippy warnings** (pedantic + nursery enforced)
 - **Zero unsafe code** (`#![forbid(unsafe_code)]` on both crates)
-- **Zero TODOs/FIXMEs** in source
+- **Zero `unwrap()` in production** code (all in test fns)
+- **Zero hardcoded non-fallback paths** in production
 - **Zero mocks** in production code
-- **Zero `#[allow]`** attributes (1 justified Clippy override for lifetime)
-- **All files < 800 lines** (max 743L in test coverage module)
-- **All paths capability-based** (ServicePaths, CredentialPaths, env-driven)
+- **57 Rust files**, 14,931 lines total
+- **Max file**: 743L (test coverage module)
 - **All external deps pure Rust** (reqwest+rustls, blake3, tokio, serde)
-- **Proper error taxonomy** (ShadowError: Ssh, CloudflareApi, ForgejoApi, Http, Parse, Io, Json, Git, Toml)
 
-## Gaps for Upstream Primal Teams
+## Resolved Gaps (Wave 83)
+
+| Gap | Resolution |
+|-----|-----------|
+| squirrel UDS socket binding | Force-rebuilt from latest HEAD — binds correctly now |
+| 3 rolled-back VPS binaries | All rebuilt and redeployed |
+| Cascade-to-VPS sync gap | `plasmid-pipeline.timer` (30-min zero-touch cycle) |
+| No auto-build capability on VPS | `plasmid.harvest` builds from source |
+
+## Remaining Gaps for Upstream Primal Teams
 
 | Gap | Owner | Blocking |
 |-----|-------|----------|
-| squirrel UDS JSON-RPC dispatch not wired | eastGate | Health probe (workaround: SocketExists) |
-| petaltongue UDS JSON-RPC dispatch not wired | ironGate | Health probe (workaround: SocketExists) |
-| skunkBat needs `--socket` binary rebuild on VPS | eastGate | UDS-only audit |
-| 6 primals missing `capability_registry.toml` | Various | Ecosystem tooling |
+| petaltongue BTSP auth required for health probe | ironGate | Health probe (workaround: SocketExists) |
+| skunkBat needs `--socket` flag in binary | eastGate | UDS-only audit |
 
 ---
 
-*"The membrane is ready. The depot is inherited. The pipeline flows."*
+*"The pipeline flows. The depot is sovereign. The VPS refreshes itself."*
