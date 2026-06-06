@@ -4,7 +4,7 @@
 **Author**: eastGate overwatch  
 **Supersedes**: Wave 76 remaining work (archived)  
 **Status**: Active  
-**Updated**: Wave 79c — sweetGrass localhost fix landed (P1→RESOLVED), Caddy proxy wired (mesh.primal.eco LIVE), plasmidBin harvest evolved to Rust-canonical, 10G backbone install incoming
+**Updated**: Wave 80 — Cross-node proxy COMPLETE (5/5 Caddy endpoints LIVE), VPS refresh handoff fossilized, 10G backbone install complete (Jun 7-8)
 
 ---
 
@@ -204,17 +204,18 @@ primal TCP ports exposed externally.
 - ~~sweetgrass `--http-address` defaults to `0.0.0.0:0`~~ **RESOLVED** — v0.7.51 defaults to `127.0.0.1:0`
 - squirrel/petaltongue health probe framing investigation
 
-### Track 5: Caddy Reverse Proxy Wiring — PARTIALLY LIVE ✓
+### Track 5: Caddy Reverse Proxy Wiring — LIVE ✓
 
 | Endpoint | Backend | Status |
 |----------|---------|--------|
-| mesh.primal.eco | Songbird 157.230.3.183:7700 | **LIVE** (LE cert, reverse proxy) |
-| auth.primal.eco | bearDog UDS | DNS+TLS live, backend 503 (cross-node proxy needed) |
-| api.primal.eco | biomeOS UDS | DNS+TLS live, backend 503 (cross-node proxy needed) |
-| nestgate.io /content/* | Forgejo localhost:3000 | DNS+TLS live, backend 200 placeholder (cross-node proxy needed) |
+| primal.eco | Static response | **LIVE** (LE cert) |
+| mesh.primal.eco | Songbird 10.116.0.3:7700 | **LIVE** (LE cert, reverse proxy) |
+| auth.primal.eco | bearDog via socat bridge 10.116.0.3:9443 | **LIVE** (LE cert, JSON-RPC verified) |
+| api.primal.eco | biomeOS via socat bridge 10.116.0.3:9444 | **LIVE** (LE cert, JSON-RPC verified) |
+| nestgate.io | Forgejo via socat bridge 10.116.0.3:3001 | **LIVE** (LE cert, content serving) |
 
-Cross-node proxy (golgiBody-ext → golgiBody inner) needed for UDS backends.
-cellMembrane recommends socat forwarders in systemd units.
+Cross-node proxy COMPLETE (Wave 79c). Three socat systemd bridge units on
+golgiBody inner, firewall-locked to golgiBody-ext private IP only.
 
 ### Track 6: Lagging Codebase Parity (P2)
 
@@ -242,9 +243,9 @@ cellMembrane recommends socat forwarders in systemd units.
 
 | Track | Status | Next Step |
 |-------|--------|-----------|
-| S1 TLS | **LIVE** (sovereign LE on primal.eco + nestgate.io) | Caddy reverse proxy wiring |
+| S1 TLS | **LIVE** (sovereign LE on primal.eco + nestgate.io) | 5/5 Caddy endpoints LIVE |
 | S2 NAT | **GRADUATED** | Complete |
-| S3 Content | READY (67ms TTFB, 101 tests) | Wire nestgate.io → Forgejo content |
+| S3 Content | **LIVE** (nestgate.io → Forgejo via socat bridge) | Validate content rendering |
 | S4 Auth | 7-DAY GATE ACTIVE (started Jun 2, ends ~Jun 9) | Wait → graduate |
 
 ---
@@ -255,7 +256,7 @@ cellMembrane recommends socat forwarders in systemd units.
 |-------|---------|--------|
 | `wave73-westgate-skunkbat-enrollment` | eastGate→westGate | **P1** — hardware + 10G backbone incoming (Jun 7-8) |
 | `wave79-transport-evolution-capability-routing` | eastGate→all | **Phase 1 COMPLETE**, Phase 2 in progress |
-| `wave79c-cross-node-proxy` | cellMembrane | **NEW** — socat forwarders for ext→inner UDS backends |
+| ~~`wave79c-cross-node-proxy`~~ | cellMembrane | **RESOLVED** — 3 socat bridge units deployed, 5/5 endpoints LIVE |
 
 ---
 

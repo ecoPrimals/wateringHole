@@ -29,7 +29,7 @@ transport = "uds_only"
 [enrollment.prerequisites]
 operator = "westGate operator"
 hardware = "TBD (incoming)"
-network = "Same subnet as eastGate (192.168.1.x) — 10G backbone install weekend Jun 7-8"
+network = "Same subnet as eastGate (192.168.1.x) — 10G backbone INSTALLED (Jun 7-8)"
 repos_needed = [
     "nestGate",
     "wateringHole",

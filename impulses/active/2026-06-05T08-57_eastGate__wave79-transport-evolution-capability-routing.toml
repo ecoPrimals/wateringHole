@@ -69,8 +69,8 @@ priority = "P2"
 
 [phases]
 phase_1 = "UDS Convergence (Wave 79) — COMPLETE. VPS 10/13 refreshed, sweetGrass localhost fixed (v0.7.51). 3 headless fixes pending."
-phase_2 = "Songbird-Routed IPC — IN PROGRESS. songbird-mesh.service live, mesh.primal.eco Caddy proxy LIVE."
-phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone install (LAN gates, weekend Jun 7-8) enables high-bandwidth mesh proof."
+phase_2 = "Songbird-Routed IPC — IN PROGRESS. songbird-mesh.service live. All 5 Caddy endpoints LIVE (mesh/auth/api.primal.eco + nestgate.io). Cross-node socat bridges deployed. 10G backbone installed across LAN gates."
+phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE. mesh.init ready once 3 headless fixes land → 3-gate mesh proof at wire speed."
 
 [phases.phase_2_milestones]
 m1 = "Songbird ipc.resolve returns transport-qualified endpoints"
