@@ -3,7 +3,7 @@
 **Date**: 2026-06-06  
 **From**: eastGate overwatch  
 **Purpose**: Copy-paste blurbs for teams with pending action  
-**Context**: Cross-node proxy COMPLETE (5/5 Caddy endpoints LIVE). 10G backbone installed. 3 headless fixes remain before mesh.init.
+**Context**: Cross-node proxy COMPLETE (5/5 Caddy endpoints LIVE). 10G backbone installed. squirrel/coralReef/skunkBat RESOLVED. primalspring_primal deprecated. Full pipeline validated. 1 headless fix remains (toadStool).
 
 ---
 
@@ -35,56 +35,28 @@ clean on a machine with no Akida/GPU.
 
 ---
 
-### coralReef (strandGate)
+### ~~coralReef~~ (strandGate) — RESOLVED
 
-Wave 80: VPS binary rolled back. HEAD build requires GPU ISA spec files
-at startup, even in `server` mode:
-
-```
-Error: Cannot read ./specs/amd/amdgpu_isa_rdna2.xml
-```
-
-**Action**: Lazy-load GPU ISA specs on first compile request, or add
-`--headless` flag. The IPC server must start cleanly without GPU spec
-files on disk.
-
-**Test**: `coralreef server --socket /tmp/test.sock` starts without error
-when `./specs/` directory doesn't exist.
-
-**Blocking**: 13/13 ALIVE → mesh.init → stadial gate entry.
+Root cause: workspace `cargo build` was building `amd-isa-gen` tool (needs
+`./specs/`) instead of the `coralreef` server binary. Fixed via
+`default-members` in workspace `Cargo.toml`. Server binary never required
+spec files at startup. Rebuilt and harvested — checksum unchanged.
 
 ---
 
-### squirrel (eastGate)
+### ~~squirrel~~ (eastGate) — RESOLVED
 
-Wave 80: VPS binary rolled back. HEAD build only has CLI subcommands
-(`text-generation`, `code-generation`, `list-models`) — the IPC `server`
-mode was removed or never merged:
-
-```
-error: unrecognized subcommand 'server'
-```
-
-**Action**: Restore `server` subcommand (or add `ipc` subcommand) that
-starts UDS JSON-RPC service mode at a given socket path.
-
-**Test**: `squirrel server --socket /tmp/test.sock` starts UDS listener
-and responds to `health.check`.
-
-**Blocking**: 13/13 ALIVE → mesh.init → stadial gate entry.
+Root cause: wrong binary was deployed (CLI-only variant). The correct
+`squirrel` binary with `server` subcommand exists at commit `5dea2cc6`.
+Rebuilt from correct binary — checksum unchanged.
 
 ---
 
-### skunkBat (eastGate)
+### ~~skunkBat~~ (eastGate) — RESOLVED
 
-Wave 80: ALIVE via TCP (localhost:9140), but the only primal without a
-UDS socket. Binary has `--bind` and `--port` but no `--socket` flag.
-
-**Priority**: P1 (not blocking mesh.init, breaks UDS-only audit)
-
-**Action**: Add `--socket <PATH>` flag matching the pattern used by
-bearDog, songBird, and all other primals. When `--socket` is provided,
-TCP should be optional.
+v0.2.6 ships `--socket` flag with implicit `--no-tcp` (ecosystem
+convention). VPS binary rebuilt and harvested. Systemd unit update:
+`ExecStart=/opt/membrane/skunkbat server --socket /run/membrane/skunkbat.sock`
 
 ---
 
@@ -194,8 +166,8 @@ This triggers BD-TRUST-01 auto trust seeding. 13/13 ALIVE + mesh.init
 ## Critical Path Summary
 
 ```
-3 headless fixes (toadStool/coralReef/squirrel)
-  → redeploy via deploy_membrane.sh refresh
+1 headless fix (toadStool NPU)
+  → redeploy all 13 via deploy_membrane.sh refresh
     → 13/13 ALIVE
       → mesh.init with gate peers
         → 3-gate mesh proof (east+strand+VPS)
@@ -207,4 +179,4 @@ This triggers BD-TRUST-01 auto trust seeding. 13/13 ALIVE + mesh.init
 
 ---
 
-*"Five endpoints live. Ten primals renewed. Three need headless mode. The glacier waits for no one."*
+*"Five endpoints live. Twelve primals ready. One toadstool needs its headless mode. The glacier waits for no one."*

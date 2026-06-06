@@ -4,7 +4,7 @@
 **Author**: eastGate overwatch  
 **Supersedes**: Wave 76 remaining work (archived)  
 **Status**: Active  
-**Updated**: Wave 80 — Cross-node proxy COMPLETE (5/5 Caddy endpoints LIVE), VPS refresh handoff fossilized, 10G backbone install complete (Jun 7-8)
+**Updated**: Wave 80b — squirrel/coralReef/skunkBat RESOLVED, primalspring_primal deprecated, full pipeline validated (build→harvest→deploy). toadStool headless pending. 12/13 VPS-ready.
 
 ---
 
@@ -25,9 +25,10 @@ port-free, TCP discovery gated, all graphs `uds_only`, deploy profiles port-free
 BD-TRUST-01 resolved — Songbird wired `auth.exchange_trust` into `mesh.init`.
 All 4 upstream gaps are closed. Songbird Wave 81 deep debt pass absorbed.
 
-**Remaining critical path**: Fix 3 headless VPS regressions (toadstool/coralreef/squirrel)
-→ redeploy → mesh.init with gate peers → 3-gate mesh proof → stadial entry.
-10/13 VPS binaries refreshed. Full pipeline validated (build→harvest→deploy→verify).
+**Remaining critical path**: Fix toadStool headless VPS regression (1 remaining)
+→ redeploy all 13 via `deploy_membrane.sh refresh` → mesh.init with gate peers
+→ 3-gate mesh proof → stadial entry.
+12/13 primals VPS-ready. squirrel/coralReef/skunkBat RESOLVED. Pipeline fully validated.
 
 ---
 
@@ -161,7 +162,7 @@ sweetGrass v0.7.50, nestGate v0.5.0 (notable version jumps). 3 rolled back to pr
 | `nucleus_launcher` v0.9.31 to VPS | eastGate ops | **DONE** — Wave 79 binary deployed |
 | Systemd units → UDS-only / localhost | eastGate ops | **DONE** — 13 units updated + songbird-mesh.service created |
 | Wire `auth.exchange_trust` in Songbird `mesh.init` | Songbird (code) | **RESOLVED** — Binary refreshed on VPS |
-| Fix toadstool/coralreef/squirrel headless mode | cellMembrane (ironGate) | **HANDED OFF** — see WAVE79_VPS_REFRESH_HANDOFF_JUN05_2026.md |
+| Fix toadstool headless mode | toadStool (biomeGate) | **1 remaining** — squirrel + coralReef RESOLVED |
 | Call `mesh.init` on VPS Songbird with gate peers | operator | **READY** — can proceed once all 13 binaries confirmed |
 | 3-gate mesh proof | primalSpring overwatch | **BLOCKED** on mesh.init |
 | S4 auth 7-day gate completion | bearDog + ironGate | ~Jun 9 |
@@ -269,8 +270,9 @@ golgiBody inner, firewall-locked to golgiBody-ext private IP only.
 | ~~BD-TRUST-01~~ | **RESOLVED** — Songbird `ec978b86` wires `auth.exchange_trust` into `mesh.init`. Zero-operator cross-gate trust seeding. |
 | ~~RC-POLL-01~~ | **RESOLVED** — rhizoCrypt MeshEventListener polling wired |
 
-**Zero P0/P1 upstream gaps.** VPS binary refresh 10/13 complete. 3 headless regressions
-handed off to cellMembrane. mesh.init ready once all 13 confirmed.
+**Zero P0/P1 upstream gaps.** VPS binary refresh 12/13 ready. 1 headless regression
+remaining (toadStool NPU). mesh.init ready once toadStool fixed + full refresh deployed.
+primalspring_primal deprecated (Wave 80) — primalSpring composes primals via NUCLEUS.
 
 ---
 
