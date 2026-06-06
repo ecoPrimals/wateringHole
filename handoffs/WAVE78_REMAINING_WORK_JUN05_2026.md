@@ -4,7 +4,7 @@
 **Author**: eastGate overwatch  
 **Supersedes**: Wave 76 remaining work (archived)  
 **Status**: Active  
-**Updated**: Wave 79b — VPS binary refresh (10/13 deployed), deployment pipeline validated, handoff to cellMembrane for 3 headless fixes
+**Updated**: Wave 79c — sweetGrass localhost fix landed (P1→RESOLVED), Caddy proxy wired (mesh.primal.eco LIVE), plasmidBin harvest evolved to Rust-canonical, 10G backbone install incoming
 
 ---
 
@@ -201,17 +201,20 @@ primal TCP ports exposed externally.
 
 **Remaining for full UDS purity**:
 - skunkBat binary needs rebuild with UDS support
-- sweetgrass `--http-address` defaults to `0.0.0.0:0` — needs `127.0.0.1:0` or removal
+- ~~sweetgrass `--http-address` defaults to `0.0.0.0:0`~~ **RESOLVED** — v0.7.51 defaults to `127.0.0.1:0`
 - squirrel/petaltongue health probe framing investigation
 
-### Track 5: Caddy Reverse Proxy Wiring (P1)
+### Track 5: Caddy Reverse Proxy Wiring — PARTIALLY LIVE ✓
 
 | Endpoint | Backend | Status |
 |----------|---------|--------|
-| nestgate.io /content/* | Forgejo localhost:3000 | PENDING |
-| mesh.primal.eco | Songbird 157.230.3.183:7700 | PENDING |
-| auth.primal.eco | bearDog | PENDING |
-| api.primal.eco | biomeOS neural-api | PENDING |
+| mesh.primal.eco | Songbird 157.230.3.183:7700 | **LIVE** (LE cert, reverse proxy) |
+| auth.primal.eco | bearDog UDS | DNS+TLS live, backend 503 (cross-node proxy needed) |
+| api.primal.eco | biomeOS UDS | DNS+TLS live, backend 503 (cross-node proxy needed) |
+| nestgate.io /content/* | Forgejo localhost:3000 | DNS+TLS live, backend 200 placeholder (cross-node proxy needed) |
+
+Cross-node proxy (golgiBody-ext → golgiBody inner) needed for UDS backends.
+cellMembrane recommends socat forwarders in systemd units.
 
 ### Track 6: Lagging Codebase Parity (P2)
 

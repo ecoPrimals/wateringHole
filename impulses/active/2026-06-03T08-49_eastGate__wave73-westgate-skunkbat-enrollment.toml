@@ -8,7 +8,7 @@ from = "eastGate"
 to = "westGate"
 date = "2026-06-03"
 updated = "2026-06-05"
-priority = "P2"
+priority = "P1"
 
 [context]
 reason = """
@@ -29,7 +29,7 @@ transport = "uds_only"
 [enrollment.prerequisites]
 operator = "westGate operator"
 hardware = "TBD (incoming)"
-network = "Same subnet as eastGate (192.168.1.x) — no cross-VLAN routing needed"
+network = "Same subnet as eastGate (192.168.1.x) — 10G backbone install weekend Jun 7-8"
 repos_needed = [
     "nestGate",
     "wateringHole",
