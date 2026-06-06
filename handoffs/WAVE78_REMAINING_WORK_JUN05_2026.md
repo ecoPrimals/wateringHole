@@ -4,7 +4,7 @@
 **Author**: eastGate overwatch  
 **Supersedes**: Wave 76 remaining work (archived)  
 **Status**: Active  
-**Updated**: Wave 82 — Deep Debt Evolution Sprint COMPLETE (16/16 tasks). 929 tests (up from 893). All shell business logic absorbed into Rust. TOML-driven dispatch, config, and health checks. plasmidBin ownership formalized (cellMembrane → projectNUCLEUS). See `WAVE82_DEEP_DEBT_SPRINT_COMPLETE_JUN06_2026.md`.
+**Updated**: Wave 82b — ecoPrimals workspace dewired from NestGate legacy. Root `.git` removed, `primals/nestGate/` is canonical. tideGlass seeded (protoKarya/tideGlass). Deep Debt Sprint COMPLETE (16/16, 929 tests). plasmidBin ownership formalized (cellMembrane → projectNUCLEUS). See `WAVE82_DEEP_DEBT_SPRINT_COMPLETE_JUN06_2026.md`.
 
 ---
 

@@ -140,4 +140,37 @@ own the deployment path that makes this possible.
 **Timeline**: Post-stadial bloom. Phase 0 (archaeology) begins now.
 Full NUCLEUS lithoSpore (Phase 4) is a 12+ week horizon.
 
-*"Sixteen tasks. Nine hundred twenty-nine tests. Zero string dispatch. The mountain is clean. And the first lens is being ground."*
+---
+
+## ecoPrimals Workspace Dewired (NestGate Legacy Cleanup)
+
+`/home/eastgate/Development/ecoPrimals/` was historically a NestGate clone
+(NestGate was the first ecoPrimal). Over time the workspace grew to hold
+all primals, springs, gardens, and infra as gitignored sibling directories.
+This created:
+
+1. **Submodule coupling** — `infra/wateringHole` was tracked as a NestGate
+   submodule. Every wateringHole update required syncing with NestGate upstream.
+2. **Push conflicts** — NestGate upstream (ironGate team) evolved independently.
+   Pushing the submodule pointer caused rebase conflicts with ZFS restructuring.
+3. **Identity confusion** — directory named `ecoPrimals/` but git identity was
+   `ecoPrimals/nestGate.git`.
+
+**Resolution (Wave 82)**:
+- Root `.git` removed (backed to `/tmp/nestgate_root_git_backup_20260606`)
+- Root NestGate source files removed (duplicates of `primals/nestGate/`)
+- `infra/wateringHole` is now a plain independent clone (always was, just
+  also had a submodule pointer in the root git)
+- `primals/nestGate/` is the canonical NestGate clone (session 95b, ahead)
+- All 39 ecosystem repos verified with correct independent remotes
+
+**Manual cleanup needed**:
+- `sudo rm -rf /home/eastgate/Development/ecoPrimals/wetSpring` — root-owned
+  empty directory (orphan, real wetSpring is at `springs/wetSpring/`)
+- `/tmp/nestgate_root_git_backup_20260606/` can be deleted after verification
+
+**Impact on ironGate team**: NestGate no longer needs wateringHole as a
+submodule. If their repo still references it, they should remove the
+`.gitmodules` entry and the `infra/wateringHole` submodule tracking.
+
+*"Sixteen tasks. Nine hundred twenty-nine tests. Zero string dispatch. The mountain is clean. The first lens is being ground. And the fossil wire is cut."*
