@@ -272,12 +272,13 @@ cellMembrane/projectNUCLEUS ownership handoff for plasmidBin matters now.
 
 ---
 
-## Active FRAGOs
+## Active FRAGOs (Wave 82c — ownership reassigned)
 
-| FRAGO | From→To | Status |
-|-------|---------|--------|
-| `wave73-westgate-skunkbat-enrollment` | eastGate→westGate | **P1** — hardware + 10G backbone incoming (Jun 7-8) |
-| `wave79-transport-evolution-capability-routing` | eastGate→all | **Phase 1 COMPLETE**, Phase 2 in progress |
+| FRAGO | Owner | Status |
+|-------|-------|--------|
+| `wave73-westgate-skunkbat-enrollment` | wateringHole overwatch | **P1** — hardware-gated, 10G backbone LIVE |
+| `wave79-transport-evolution-capability-routing` | songBird + biomeOS | **Phase 1 COMPLETE**, Phase 2 in progress |
+| `wave80c-peptidoglycan-self-awareness` | cellMembrane | **P1** — self-refresh deployed, auto-fetch pending |
 | ~~`wave79c-cross-node-proxy`~~ | cellMembrane | **RESOLVED** — 3 socat bridge units deployed, 5/5 endpoints LIVE |
 
 ---

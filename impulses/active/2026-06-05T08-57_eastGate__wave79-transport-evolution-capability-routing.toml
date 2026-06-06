@@ -7,7 +7,10 @@ type = "frago"
 from = "eastGate"
 to = ["songBird", "bearDog", "biomeOS", "all-primals"]
 date = "2026-06-05"
+updated = "2026-06-06"
 priority = "P0"
+owner = "songBird + biomeOS"
+note = "Wave 82c: transport evolution owned by songBird (routing) and biomeOS (graph deploy). primalSpring experiments with the resulting compositions."
 
 [context]
 reason = """

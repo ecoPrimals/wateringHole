@@ -9,6 +9,8 @@ to = "westGate"
 date = "2026-06-03"
 updated = "2026-06-06"
 priority = "P1"
+owner = "wateringHole overwatch"
+note = "Wave 82c: hardware-gated. Overwatch tracks. primalSpring validates mesh after enrollment."
 
 [context]
 reason = """
