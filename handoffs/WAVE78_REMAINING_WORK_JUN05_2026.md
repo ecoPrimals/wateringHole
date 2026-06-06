@@ -41,7 +41,7 @@ All 4 upstream gaps are closed. Songbird Wave 81 deep debt pass absorbed.
 | songBird | southGate | v0.2.9-w81 | SB-TLS-01, BD-TRUST-01 mesh.init, deep debt (ports→constants, prod stubs hardened) |
 | biomeOS | southGate | v4.07 / w77 | Perceptron training data pipeline |
 | toadStool | biomeGate | S290 | CallerContext fan_out, coordination feature-gate |
-| sweetGrass | strandGate | v0.7.48 / w78b | Zero hot-path env reads |
+| sweetGrass | strandGate | v0.7.51 / w79b | Localhost-only default bind, zero hot-path env reads |
 | rhizoCrypt | strandGate | v0.14.1 / w77e | MeshEventListener polling (RC-POLL-01) |
 | loamSpine | strandGate | w76 | Trust ledger IPC wired |
 | NestGate | ironGate | v0.5.0 / s93 | HTTP parity, content serving |
@@ -253,8 +253,9 @@ cellMembrane recommends socat forwarders in systemd units.
 
 | FRAGO | From→To | Status |
 |-------|---------|--------|
-| `wave73-westgate-skunkbat-enrollment` | eastGate→westGate | **PENDING** — hardware incoming |
+| `wave73-westgate-skunkbat-enrollment` | eastGate→westGate | **P1** — hardware + 10G backbone incoming (Jun 7-8) |
 | `wave79-transport-evolution-capability-routing` | eastGate→all | **Phase 1 COMPLETE**, Phase 2 in progress |
+| `wave79c-cross-node-proxy` | cellMembrane | **NEW** — socat forwarders for ext→inner UDS backends |
 
 ---
 

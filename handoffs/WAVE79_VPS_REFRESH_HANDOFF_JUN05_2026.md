@@ -65,13 +65,14 @@ Backups of pre-refresh binaries are at `/opt/membrane/backup-pre-wave79/` on gol
 
 3. **squirrel** — File issue on `ecoPrimals/squirrel`: binary lost `server` subcommand. Either restore it or add `ipc` subcommand for UDS JSON-RPC service mode.
 
-### P0: sweetgrass `--http-address` Default
+### ~~P0: sweetgrass `--http-address` Default~~ — RESOLVED
 
-sweetgrass defaults `--http-address` to `0.0.0.0:0` which binds to all interfaces. Current unit uses `--http-address 127.0.0.1:0` as workaround. Upstream fix: default to `127.0.0.1:0`.
+~~sweetgrass defaults `--http-address` to `0.0.0.0:0`~~ Fixed in v0.7.51 — defaults to `127.0.0.1:0`.
 
-### P1: `deploy_membrane.sh` Bug — `build-primal.sh` Empty Release Dir
+### ~~P1: `deploy_membrane.sh` Bug — `build-primal.sh` Empty Release Dir~~ — RESOLVED
 
-`build-primal.sh` successfully compiles but finds empty `target/x86_64-unknown-linux-musl/release/` dir for binaries. Root cause unclear — workspace target dir interference suspected. Manual builds work fine. Investigate and fix.
+~~Root cause unclear~~ Fixed in commit `4c5f08d` — explicit `--target-dir` to cargo build.
+Harvest pipeline also evolved to Rust-canonical (`plasmidbin harvest`).
 
 ### P1: mesh.init
 
