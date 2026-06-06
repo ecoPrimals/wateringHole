@@ -43,7 +43,7 @@ github_ssh = "git@github.com:"
 forgejo_host = "golgiBody"
 default_source = "temporal"
 default_branch = "main"
-divergence_policy = "flag"
+divergence_policy = "merge-ff"
 push_to_followers = true
 # Push target: "forgejo" (sovereign mediator) or "all" (legacy dual-push).
 # When set to "forgejo", temporal.sync pushes only to forgejo remote;

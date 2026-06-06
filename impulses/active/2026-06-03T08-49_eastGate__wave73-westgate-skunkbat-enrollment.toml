@@ -10,7 +10,7 @@ date = "2026-06-03"
 updated = "2026-06-06"
 priority = "P1"
 owner = "wateringHole overwatch"
-note = "Wave 83: hardware-gated. Overwatch tracks. plasmidBin fully harvested (13/13 checksums verified). Pipeline validated — once hardware arrives, deploy from plasmidBin depot. cellMembrane owns deployment going forward."
+note = "Wave 84: hardware-gated. Overwatch tracks. plasmidBin depot operational (13/13 BLAKE3 verified). cellMembrane owns full deployment pipeline (zero-touch plasmid.pipeline, 30-min VPS timer). Cascade system leveled — membrane temporal.cascade is sole sync interface. westGate enrolls via membrane CLI, not manual git. deployment: membrane plasmid.fetch → nucleus_launcher start."
 
 [context]
 reason = """

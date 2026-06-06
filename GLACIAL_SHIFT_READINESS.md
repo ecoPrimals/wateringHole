@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-06 (Wave 83 — primalSpring deployment wiring EXCISED (12,365 lines removed, 894 tests pass). primalSpring is now a pure experimentation spring. plasmidBin fully harvested: 13/13 binaries rebuilt, BLAKE3 checksums verified, VPS-deployment-ready. cellMembrane takeover formalized with AAR (cascade-to-VPS sync gap). All 6 capability_registry.toml and 3 domain_profile.toml delivered. Zero P0/P1 upstream gaps. toadStool S299 deep debt XI absorbed. Critical path: cellMembrane VPS refresh → mesh.init → 3-gate mesh proof.)
+**Last updated**: 2026-06-06 (Wave 84 — cascade system LEVELED. membrane temporal.cascade is sole sync interface: git 60s timeouts, CWD workspace resolution, merge-ff divergence policy. 38/38 repos at parity, 0 failures, ~59s. cellMembrane zero-touch pipeline LIVE on VPS (plasmid-pipeline.timer, 30-min cycle, plasmid.harvest + plasmid.refresh + plasmid.status). primalSpring excised (12,365 lines). Peptidoglycan FRAGO RESOLVED. Tree-parity divergences auto-resolved (wateringHole, primalSpring). New FRAGO: wave84-temporal-inner-membrane-adoption — all gates adopt membrane cascade. Transport injection gap: 0/14 primals. Critical path: 3-gate mesh proof → stadial.)
 
 ---
 
@@ -201,7 +201,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Nest expansion (rhizoCrypt + loamSpine + sweetGrass) | **OPERATIONAL** (since May 28) — all 4 services active, ports verified |
 | Sovereign shadow functions (membrane-shadow) | **OPERATIONAL** (Wave 65) — 12 Rust modules: dispatch, cli, temporal, impulse, context, plasmid, git_ops, forgejo, gate, config, manifest, identity. `plasmid.fetch` + `temporal.cascade` fully Rust. |
 | Forgejo repos (5 bidirectional + 33 mirrors) | **OPERATIONAL** (Wave 62) — biomeOS/coralReef/sweetGrass/squirrel/wateringHole push-enabled |
-| waterFall temporal sync | **OPERATIONAL** (Wave 65) — Rust `temporal.cascade` replaces bash cascade-pull. Manifest-driven gate profiles, dynamic gate discovery. |
+| waterFall temporal sync | **LEVELED** (Wave 84) — git 60s timeouts, CWD resolution, merge-ff policy. 38/38 repos in ~59s. Tree-parity auto-resolution. Manual git loops DEPRECATED. |
 | Channel 1: Sovereign DNS (knot-dns) | **PROPAGATED** (Jun 4) — `primal.eco` DNS LIVE on public resolvers (8.8.8.8, 1.1.1.1) + TLS cert obtained (LE). `nestgate.io` propagating (SERVFAIL on public resolvers, expected). `primals.eco` stays Cloudflare (outer membrane per diderm model). 3 zones, ns1+ns2, DNSSEC all active. |
 | Caddy → BearDog ACME replacement | Shadow live, **not cut over** |
 | BearDog Vault (encrypted creds at rest) | **PLANNED** (Phase 2) |
@@ -329,10 +329,13 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 82b)**: **39/39 REPOS CLEAN — DEPLOYMENT PIPELINE READY.**
-All ecosystem repos synchronized and pushed. ecoPrimals workspace dewired from NestGate
-legacy. primalSpring deep debt sprint complete (929 tests). tideGlass seeded (first gen5
-product). plasmidBin ownership formalized (cellMembrane evolution, projectNUCLEUS deployment).
+**Current assessment (Wave 84)**: **38/38 REPOS AT PARITY — TEMPORAL INNER MEMBRANE OPERATIONAL.**
+Cascade system leveled: `membrane temporal.cascade` is the sole sync interface. Git ops have
+60-second timeouts. CWD-based workspace resolution. `merge-ff` divergence policy auto-resolves
+convergence. cellMembrane zero-touch pipeline LIVE on VPS (30-min cycle). primalSpring fully
+excised (12,365 lines). New gaps: 0/14 primals have transport injection, cascade still sequential
+(~59s, target <10s with parallel sync). Peptidoglycan FRAGO RESOLVED. Tree-parity divergences
+resolved (wateringHole + primalSpring).
 
 Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 inner membrane
 TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY, 5/5 Caddy endpoints LIVE
@@ -347,11 +350,12 @@ Criteria 6: cross-membrane validation scenario shipped (`s_cross_membrane_integr
 verification). VPS staleness detection operational.
 
 **Critical path to stadial entry**:
-1. VPS deploy refresh (rebuild 3 rolled-back primals: toadstool/coralreef/squirrel)
+1. ~~VPS deploy refresh~~ **DONE** — cellMembrane plasmid-pipeline.timer (zero-touch, 30-min cycle)
 2. mesh.init with gate peers (all 13 confirmed ALIVE, ready)
 3. 3-gate mesh proof (blocked on westGate hardware)
 4. S4 auth gate review (~Jun 9)
 5. westGate enrollment (10G backbone LIVE, hardware pending)
+6. Transport injection evolution (0/14 primals — P2, non-blocking for stadial)
 
 ---
 

@@ -1,0 +1,133 @@
+# FRAGO: Temporal Inner Membrane Adoption
+# Evolve entire ecosystem to use membrane temporal.cascade as sole sync interface
+
+[impulse]
+id = "wave84-temporal-inner-membrane-adoption"
+type = "frago"
+from = "eastGate"
+to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
+date = "2026-06-06"
+updated = "2026-06-06"
+priority = "P1"
+owner = "cellMembrane"
+note = """
+Wave 84: cascade system leveled — membrane temporal.cascade is operational
+with git timeouts, CWD workspace resolution, and merge-ff divergence policy.
+38/38 repos sync in ~59 seconds. Manual git loops are deprecated.
+All repos, gates, and springs must adopt the temporal inner membrane
+for sync, deployment, and evolution tracking.
+"""
+
+[context]
+reason = """
+The ecosystem has been using manual bash loops (git fetch/pull per repo)
+for cascade sync despite cellMembrane having a fully typed Rust
+implementation. Wave 84 fixed three operational gaps:
+
+1. Git operations had no timeout → 60s timeout + SSH keepalive
+2. Workspace resolution required ECOPRIMALS_ROOT → CWD walk-up added
+3. Default divergence policy was 'flag' → upgraded to 'merge-ff'
+
+Now membrane temporal.cascade is robust enough to be the sole sync
+interface. Manual git loops waste time and miss divergence detection.
+"""
+
+[aar]
+problem = "Cascade hung on SSH timeout, required manual env, flagged tree-parity for review"
+fix_1 = "git_ops.rs: 60s tokio timeout + GIT_SSH_COMMAND with ConnectTimeout=10"
+fix_2 = "lib.rs: CWD walk-up before executable walk-up in resolve_workspace_root()"
+fix_3 = ".bashrc: ECOPRIMALS_ROOT + GATE_NAME persisted"
+fix_4 = "ecosystem_manifest.toml: divergence_policy = merge-ff"
+validation = "38/38 repos synced, 0 failures, ~59 seconds"
+
+[directive]
+summary = """
+All ecosystem participants adopt membrane temporal.cascade as their
+sync mechanism. No manual git fetch/pull loops. All gates set
+ECOPRIMALS_ROOT and GATE_NAME in their shell profile. cellMembrane
+evolves the cascade with parallel repo sync, webhook triggers, and
+freshness tracking.
+"""
+
+[directive.cellMembrane]
+action = "Evolve cascade: parallel sync, webhook triggers, freshness publish"
+detail = """
+Priority items for cascade evolution:
+1. Parallel repo sync (tokio::spawn per repo) — target <10s for 38 repos
+2. Freshness tracking (publish freshness.toml after each cascade)
+3. Webhook-driven cascade (Forgejo push → trigger selective rebuild)
+4. Forgejo sourDough repo health check (transient 500 on push)
+"""
+priority = "P1"
+
+[directive.all_gates]
+action = "Set ECOPRIMALS_ROOT and GATE_NAME in shell profile"
+detail = """
+Add to ~/.bashrc or equivalent:
+  export ECOPRIMALS_ROOT="$HOME/Development/ecoPrimals"
+  export GATE_NAME="<gate>"
+  
+Then use: membrane temporal.cascade
+Instead of: manual git fetch/pull loops
+"""
+priority = "P1"
+
+[directive.all_primals]
+action = "Upstream primal gaps for temporal membrane adoption"
+detail = """
+Transport injection gap (Phase 2 of transport evolution):
+- 0/14 primals have transport injection — all still self-bind
+- bearDog: 90 TCP refs — highest TCP density (crypto/TLS)
+- songBird: 267 TCP refs — expected (transport provider)
+- toadStool: 101 TCP refs — orchestrator needs transport abstraction
+- squirrel: 68 TCP refs — metrics needs UDS-first default
+- rhizoCrypt: 37 TCP refs — discovery transport self-binding
+
+songBird is exempt as the transport provider. All others should evolve
+to accept injected transport from the launcher/Tower Atomic.
+"""
+priority = "P2"
+
+[gaps]
+summary = """
+New gaps identified from Wave 84 cascade review:
+"""
+
+[gaps.gap_1]
+id = "CM-CASCADE-01"
+description = "Sequential cascade — 38 repos × 1.5s ≈ 57s (should be <10s with parallel)"
+owner = "cellMembrane"
+priority = "P2"
+
+[gaps.gap_2]
+id = "CM-FORGEJO-01"
+description = "Forgejo sourDough repo returns 500 on push (transient)"
+owner = "cellMembrane"
+priority = "P2"
+
+[gaps.gap_3]
+id = "PRIMAL-TRANSPORT-01"
+description = "0/14 primals have transport injection — all self-bind TCP/UDS"
+owner = "songBird + all-primals"
+priority = "P2"
+
+[gaps.gap_4]
+id = "CM-WEBHOOK-01"
+description = "Cascade still timer-polled (30-min); webhook-driven would reduce latency"
+owner = "cellMembrane"
+priority = "P3"
+
+[gaps.gap_5]
+id = "CM-FRESHNESS-01"
+description = "freshness.toml not published after cascade (--publish-freshness not default)"
+owner = "cellMembrane"
+priority = "P2"
+
+[outcome]
+expected = """
+All ecosystem sync goes through membrane temporal.cascade. Manual git
+loops eliminated. Cascade runs in <10s with parallel sync. Freshness
+tracking tells every gate how stale its workspace is. Webhook-driven
+cascade reduces push-to-VPS latency from 30 minutes to ~2 minutes.
+Transport injection enables isomorphic deployment across platforms.
+"""
