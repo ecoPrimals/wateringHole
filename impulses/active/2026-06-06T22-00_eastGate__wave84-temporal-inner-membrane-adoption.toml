@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-07"
+updated = "2026-06-07T12"
 priority = "P1"
 owner = "cellMembrane"
 note = """
@@ -30,17 +30,27 @@ Root cause: eastGate Songbird port 7700 CONNECTION REFUSED (ping OK 0.26ms).
 strandGate *:7700 LIVE and accepting. 2-gate mesh proof BLOCKED on eastGate
 federation port. eastGate action needed: restart Songbird with --federation-port 7700.
 
-Wave 91 update: 2-gate mesh proof PROVEN (3/4 criteria). mesh.init with proper
-bootstrap_peers format (object {node_id, address}) → bootstrap_peers_added:1.
-discovery.peers: total_count:1, eastGate reachable:true, source:mesh, protocol:tcp.
-mesh.health_check: all_healthy:true, eastGate healthy via direct path.
-mesh.status: reachable_peers:1, 1 direct path, relay_enabled:true.
-capability.call routes correctly to eastGate via HTTP (192.168.1.144:7700/jsonrpc)
-but TCP delivery fails — eastGate :7700 still CONNECTION REFUSED on LAN despite
-blurb saying LIVE. Likely binding localhost only or VPS-only. Mesh discovery +
-health + routing PROVEN. Cross-gate dispatch needs TCP connectivity coordination.
-Also: plasmidBin depot standardized — 7 drifted primals rebuilt (musl-static),
-checksums.toml regenerated (13/13 BLAKE3), 10/13 current per membrane plasmid.status.
+Wave 87: plasmidBin pipeline validated END-TO-END. 13/13 current, NUCLEUS
+launched from depot binary. CM-TRIGGER-01 identified + shipped (78c571c).
+BIO-SEARCH-01 identified (livespore-usb search order). ECOPRIMALS_PLASMID_BIN
+persisted.
+
+CM-WEBHOOK-01: RESOLVED (Wave 91 — webhook handler + HMAC + selective harvest).
+Remaining: PRIMAL-TRANSPORT-01 (P2, 1/14).
+
+Wave 90: primalSpring role FORMALIZED as experimentation laboratory. Three-tier
+model: primalSpring→cellMembrane→projectNUCLEUS. Deep debt sprint COMPLETE.
+
+Wave 91: 2-gate mesh proof PROVEN (3/4). mesh.init → bootstrap_peers_added:1,
+discovery.peers total_count:1, mesh.health_check all_healthy. capability.call
+routes correctly but TCP delivery blocked (eastGate :7700 LAN binding/firewall).
+
+Wave 92: VPS deployment VALIDATED. 13/13 binaries rebuilt + pushed to golgiBody.
+Depot symlink fixed (/opt/ecoPrimals/infra/plasmidBin → /opt/plasmidBin).
+Checksums synced. golgiBody has NO Rust toolchain — builds must happen on gates
+or peptidoglycan. cellMembrane pipeline must NOT cargo build on golgiBody.
+All team responses same-day: biomeOS v4.13 BIO-ORPHAN-01 RESOLVED, songBird
+TransportEndpoint canonicalized, cellMembrane CM-WEBHOOK-01 RESOLVED.
 """
 
 [context]

@@ -10,7 +10,35 @@ date = "2026-06-05"
 updated = "2026-06-07"
 priority = "P0"
 owner = "songBird + biomeOS + cellMembrane"
-note = "Wave 91: 2-gate mesh proof PROVEN at protocol level. mesh.init with structured bootstrap_peers → bootstrap_peers_added:1, discovery.peers total_count:1 (eastGate reachable:true, source:mesh, tcp_port:7700), mesh.health_check all_healthy:true (eastGate healthy, direct path), mesh.status reachable_peers:1. capability.call correctly routes to eastGate HTTP endpoint (192.168.1.144:7700/jsonrpc) but TCP delivery fails — eastGate :7700 still CONNECTION REFUSED on LAN. Mesh discovery + health + routing layers PROVEN. Cross-gate dispatch needs eastGate :7700 TCP accessibility on LAN (binding/firewall coordination). plasmidBin depot standardized: 7 drifted primals rebuilt musl-static, checksums.toml regenerated 13/13 BLAKE3, 10/13 current. Previous: Wave 85 strandGate 13/13 ALIVE, membrane cascade 24/24. TCP debt: rhizoCrypt 29, barraCuda 13, coralReef 10, loamSpine 9, sweetGrass 9. Transport injection P2 — waiting on songBird ipc.resolve structured endpoints. Primals: 1/14 transport-agnostic (sporePrint). Next evolution gate: songBird ipc.resolve (Phase 2 M1) for remaining 13 primals."
+note = """
+Wave 92: VPS deployment VALIDATED. All P1 deployment blockers RESOLVED.
+
+2-gate mesh proof PROVEN at protocol level (Wave 91):
+mesh.init → bootstrap_peers_added:1, discovery.peers total_count:1
+(eastGate reachable:true, source:mesh), mesh.health_check all_healthy:true,
+mesh.status reachable_peers:1. capability.call routes correctly but TCP
+delivery blocked — eastGate :7700 CONNECTION REFUSED on LAN (binding/firewall).
+Mesh discovery + health + routing layers PROVEN.
+
+Resolved (Waves 87-92):
+- SB-FEDERATION-01: songbird federation server mode (0a09354b)
+- BIO-SEARCH-01: biomeOS v4.10 depot-first binary search
+- CM-TRIGGER-01: plasmid.trigger SSH-kicks VPS service (78c571c)
+- BARRACUDA-SOCKET-01: self-referencing socket symlink fixed (126ea3e1)
+- BIO-HEALTHRETRY-01: health check retry with backoff (biomeOS v4.12)
+- BIO-ORPHAN-01: NUCLEUS supervisor + SIGTERM handling (biomeOS v4.13)
+- CM-WEBHOOK-01: webhook handler + HMAC + selective harvest
+- VPS-DEPOT-01: depot symlink fixed (/opt/ecoPrimals/infra/plasmidBin → /opt/plasmidBin)
+- VPS deployment: 13/13 binaries rebuilt musl-static, checksums synced
+
+VPS pipeline gap: golgiBody (2GB droplet) has no Rust toolchain. Builds must
+happen on gates or peptidoglycan, then refresh to VPS. cellMembrane pipeline
+must NOT attempt cargo build on golgiBody (VPS-BUILD-01).
+
+Remaining P1: 2-gate mesh proof — eastGate :7700 TCP LAN accessibility.
+Remaining P2: transport injection (1/14 primals — sporePrint has TransportEndpoint).
+Phase 2 M1 (songbird TransportEndpoint) IN PROGRESS — types shipped, ipc.resolve next.
+"""
 
 [context]
 reason = """
