@@ -144,3 +144,16 @@ tracking tells every gate how stale its workspace is. Webhook-driven
 cascade reduces push-to-VPS latency from 30 minutes to ~2 minutes.
 Transport injection enables isomorphic deployment across platforms.
 """
+
+[ack.southGate]
+date = "2026-06-06"
+status = "complete"
+detail = """
+southGate fully adopted membrane temporal.cascade (Wave 85):
+- ECOPRIMALS_ROOT + GATE_NAME persisted in ~/.bashrc
+- .gate identity file confirmed
+- membrane CLI built and installed (~/.cargo/bin/membrane)
+- temporal.cascade operational: 20/20 repos at parity, 0 failures
+- Manual git loops deprecated — sole sync via membrane
+- wetSpring V196: 2,089 tests, 0 clippy warnings
+"""
