@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-07T17"
+updated = "2026-06-07T23"
 priority = "P2"
 owner = "cellMembrane"
 note = """
@@ -57,6 +57,16 @@ eastGate started LAN NUCLEUS (192.168.1.144:7700 OPEN). Both directions:
 strandGate→eastGate and eastGate→strandGate pass all 4 criteria (mesh.init,
 discovery.peers, mesh.health_check, direct JSON-RPC). capability.call transport
 proven. SOLE P1 ITEM RESOLVED. No remaining P1 blockers in ecosystem.
+
+Wave 93: primalSpring deployment validation hardening COMPLETE. 52 scenarios,
+887 tests, 52/52 bare cert. s_deployment_pipeline wired. 13/13 harvested.
+
+Wave 94: 3-gate deployment validation. ironGate clean-room redeploy from
+plasmidBin: ALL checks PASS (13/13 depot, idempotent rollback, health OK,
+LAN reachable 192.168.1.238:7700). Mesh BLOCKED on beardog capability.call
+(-32601). Key findings: --security-socket flag NOT recognized by songbird
+(use SONGBIRD_SECURITY_PROVIDER env), stale sockets require manual cleanup
+on rollback. toadStool divergence: forgejo +13 vs origin +126 (impulse filed).
 """
 
 [context]
