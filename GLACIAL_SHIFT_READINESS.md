@@ -329,15 +329,34 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 87)**: **PLASMIDIN DEPLOYMENT PIPELINE VALIDATED END-TO-END.**
-`membrane plasmid.harvest` rebuilt 3 drifted primals (biomeOS v4.09, loamSpine, petalTongue).
-Depot: 13/13 current, 0 drifted. NUCLEUS launched from depot binary — beardog + songbird
-HEALTHY (biomeOS v4.09 federation env fix confirmed). `ECOPRIMALS_PLASMID_BIN` env persisted.
-Cascade system leveled (Wave 84): `membrane temporal.cascade` sole sync interface, parallel
-dispatch (6.9s for 22 repos). cellMembrane zero-touch pipeline LIVE on VPS (30-min timer).
-New gaps: CM-TRIGGER-01 (on-demand harvest trigger — P1), BIO-SEARCH-01 (binary search
-priority: livespore-usb > plasmidBin depot — P2, biomeOS), barracuda socket timeout (P2).
-0/14 primals have transport injection. primalSpring fully excised (12,365 lines).
+**Current assessment (Wave 90)**: **THREE-TIER MODEL FORMALIZED.**
+
+The ecosystem now operates on a formalized three-tier pattern:
+
+| Tier | Component | Role |
+|------|-----------|------|
+| 1 | **primalSpring** | Composition experimentation laboratory — validates patterns, publishes to wateringHole |
+| 2 | **cellMembrane** | Binary evolution + VPS ops — deploys validated patterns, manages plasmidBin depot |
+| 3 | **projectNUCLEUS** | Polished agnostic deployment product — packages patterns for end users |
+
+**Wave 82c Deep Debt Sprint COMPLETE**: primalSpring codebase fully modernized —
+3 fossil scripts deleted, 2 bash validation gates replaced by Rust subcommands
+(`primalspring nucleus`, `primalspring release`), hardcoded routing eliminated
+(TOML-driven), shell-out `kill` replaced with `nix` crate, default auth evolved
+to Enforced (fail-closed). 931 tests passing, zero bash in production path.
+
+**Wave 87 milestone**: plasmidBin deployment pipeline VALIDATED end-to-end.
+`membrane plasmid.harvest` rebuilt 3 drifted primals (biomeOS v4.09, loamSpine,
+petalTongue). Depot: 13/13 current, 0 drifted. NUCLEUS launched from depot binary.
+Cascade system leveled (Wave 84): parallel dispatch (6.9s for 22 repos).
+
+**Wave 89 milestone**: SB-FEDERATION-01 RESOLVED — songbird federation listener
+starts in server mode (0a09354b), biomeOS v4.11 passes `SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0`.
+BIO-SEARCH-01 RESOLVED — biomeOS v4.10 depot-first binary search.
+CM-TRIGGER-01 RESOLVED — `plasmid.trigger` SSH-kicks VPS service.
+All P1 deployment blockers RESOLVED.
+
+0/14 primals have transport injection (P2, non-blocking for stadial).
 
 Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 inner membrane
 TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY, 5/5 Caddy endpoints LIVE
@@ -354,14 +373,17 @@ verification). VPS staleness detection operational.
 **Critical path to stadial entry**:
 1. ~~VPS deploy refresh~~ **DONE** — cellMembrane plasmid-pipeline.timer (zero-touch, 30-min cycle)
 2. ~~plasmidBin pipeline e2e~~ **VALIDATED** (Wave 87) — harvest, status, NUCLEUS from depot all proven
-3. On-demand trigger mechanism (CM-TRIGGER-01) — `membrane plasmid.pipeline --now` for critical fixes
-4. Fix biomeOS binary search priority (BIO-SEARCH-01) — depot must be first source, not livespore-usb
-5. eastGate Songbird federation port 7700 — needs depot-sourced songbird (blocked by BIO-SEARCH-01)
-6. mesh.init 2-gate proof (strandGate ready, eastGate federation port pending)
-7. 3-gate mesh proof (blocked on westGate hardware)
-8. S4 auth gate review (~Jun 9)
-9. westGate enrollment (10G backbone LIVE, hardware pending)
-10. Transport injection evolution (0/14 primals — P2, non-blocking for stadial)
+3. ~~On-demand trigger mechanism (CM-TRIGGER-01)~~ **RESOLVED** (Wave 87) — `plasmid.trigger` SSH-kicks VPS
+4. ~~Fix biomeOS binary search priority (BIO-SEARCH-01)~~ **RESOLVED** (Wave 88) — v4.10 depot-first
+5. ~~eastGate Songbird federation port 7700 (SB-FEDERATION-01)~~ **RESOLVED** (Wave 89) — songbird + biomeOS fix
+6. mesh.init 2-gate proof (strandGate ready, eastGate federation LIVE) — **UNBLOCKED, READY TO RUN**
+7. S4 auth gate review (~Jun 9)
+8. Transport injection evolution (1/14 primals — P2, non-blocking for stadial)
+9. **NEW**: projectNUCLEUS consumption surface validated (specs/DOWNSTREAM_CONSUMPTION.md published)
+
+Additional gates (westGate, northGate, etc.) enroll using the standard gate
+enrollment template — not on the critical path. 3-gate mesh proof runs when
+a 3rd gate is available; 2-gate proof is sufficient for stadial entry.
 
 ---
 

@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-07"
+updated = "2026-06-07T11"
 priority = "P1"
 owner = "cellMembrane"
 note = """
@@ -42,8 +42,17 @@ biomeOS gap: BIO-SEARCH-01 — discover_binaries_with() searches livespore-usb/
 before ECOPRIMALS_PLASMID_BIN, causing 5/12 primals to resolve from stale
 livespore-usb instead of the depot.
 
-Remaining: PRIMAL-TRANSPORT-01 (P2, 1/14), CM-WEBHOOK-01 (P3),
-CM-TRIGGER-01 (P1 — on-demand harvest trigger), BIO-SEARCH-01 (P2).
+Remaining: PRIMAL-TRANSPORT-01 (P2, 1/14), CM-WEBHOOK-01 (P3).
+
+Wave 90 update: primalSpring role FORMALIZED as composition experimentation
+laboratory. Three-tier model published:
+  Tier 1: primalSpring (experiment + validate + certify)
+  Tier 2: cellMembrane (deploy + VPS ops + plasmidBin evolution)
+  Tier 3: projectNUCLEUS (polished agnostic deployment product)
+specs/DOWNSTREAM_CONSUMPTION.md published — defines what projectNUCLEUS
+consumes from primalSpring (library crate, graph artifacts, config schema,
+certification gates). Deep debt sprint COMPLETE: zero bash in production
+path, all validation gates in Rust, default auth Enforced.
 """
 
 [context]
@@ -178,14 +187,8 @@ id = "SB-FEDERATION-01"
 description = "Songbird federation TCP listener does not start in NUCLEUS server mode"
 owner = "songBird + biomeOS"
 priority = "P1"
-detail = """
-songbird receives SONGBIRD_FEDERATION_PORT=7700 via env (confirmed in /proc/PID/environ)
-but does not open a TCP listener on that port. Opens 8081 (discovery) and 8091 but not
-7700 or 8082 (default federation). Two sub-issues:
-1. SONGBIRD_PRODUCTION_BIND_ADDRESS defaults to 127.0.0.1 — biomeOS needs to pass 0.0.0.0
-2. Federation listener may not be wired into start_orchestrator() for server subcommand
-strandGate Songbird :7700 works — different startup path. BLOCKER for 2-gate mesh proof.
-"""
+status = "RESOLVED"
+resolution = "Wave 89: songBird 0a09354b (federation listener in server mode) + biomeOS e96cfe72 v4.11 (SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0). Validated: *:7700 LIVE on eastGate. 2-gate mesh proof UNBLOCKED."
 
 [audit]
 wave87_postprimordial = """

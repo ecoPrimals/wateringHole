@@ -11,25 +11,26 @@ updated = "2026-06-07"
 priority = "P0"
 owner = "songBird + biomeOS + cellMembrane"
 note = """
-Wave 88: FULL NUCLEUS DEPLOYMENT VALIDATED FROM DEPOT.
-biomeOS v4.10 shipped BIO-SEARCH-01 fix — depot-first binary search priority.
-All 12 primals now resolve from plasmidBin depot. Zero livespore-usb, zero ~/.local/bin.
-beardog HEALTHY, songbird HEALTHY (UDS, env vars correctly passed).
+Wave 91: ALL P1 DEPLOYMENT BLOCKERS RESOLVED. Pipeline proven end-to-end.
 
-FEDERATION PORT BLOCKER NARROWED: songbird has SONGBIRD_FEDERATION_PORT=7700 in
-its process env (confirmed via /proc/PID/environ). However, the federation TCP
-listener is NOT starting in NUCLEUS server mode. songbird opens ports 8081 (discovery)
-and 8091, but NOT 7700 or 8082 (default federation). Two issues:
-1. SONGBIRD_PRODUCTION_BIND_ADDRESS defaults to 127.0.0.1 — needs 0.0.0.0 for cross-gate
-2. Federation listener may not be wired into the server subcommand's start_orchestrator()
-   path — strandGate Songbird :7700 works because it may use different startup (standalone?)
+Resolved (Waves 87-90):
+- SB-FEDERATION-01: songbird federation listener in server mode (0a09354b)
+- BIO-SEARCH-01: biomeOS v4.10 depot-first binary search priority
+- CM-TRIGGER-01: plasmid.trigger SSH-kicks VPS service (78c571c)
+- BARRACUDA-SOCKET-01: self-referencing socket symlink fixed (126ea3e1)
+- BIO-HEALTHRETRY-01: health check retry with backoff (biomeOS v4.12)
 
-This is a songBird team issue: the federation TCP listener must start in NUCLEUS server
-mode when SONGBIRD_FEDERATION_PORT is set. biomeOS needs to also pass
-SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0 in nucleus_launch_profiles.toml.
+Current state: 12/12 primals ACTIVE from depot, federation :7700 LIVE on
+eastGate (*:7700) + strandGate (*:7700). 38/38 cascade parity.
 
-Pipeline status: CM-TRIGGER-01 RESOLVED. BIO-SEARCH-01 RESOLVED.
-Primals: 1/14 transport-agnostic (sporePrint). Waiting on songBird ipc.resolve (Phase 2 M1).
+primalSpring role formalized (Wave 90): three-tier model
+(primalSpring→cellMembrane→projectNUCLEUS). Deep debt sprint COMPLETE:
+zero bash in production path, all validation in Rust.
+
+Remaining P1: 2-gate mesh proof (eastGate↔strandGate) — coordination task.
+Remaining P2: BIO-ORPHAN-01 (NUCLEUS exits, primals orphaned), transport
+injection (1/14 primals — sporePrint only). Phase 2 M1 (songbird ipc.resolve
+structured endpoints) is the next evolution gate.
 """
 
 [context]
@@ -91,9 +92,9 @@ at deploy time based on topology, platform, and composition tier.
 priority = "P2"
 
 [phases]
-phase_1 = "UDS Convergence (Wave 80c) — COMPLETE. 13/13 VPS-ready. All headless regressions RESOLVED. primalspring_primal deprecated. Pipeline validated. UDS health probe fix shipped (squirrel, petalTongue)."
-phase_2 = "Songbird-Routed IPC — IN PROGRESS. songbird-mesh.service live. All 5 Caddy endpoints LIVE. Cross-node socat bridges deployed. 10G backbone installed across LAN gates. songBird v0.2.12 shipped security_crypto + sovereign-onion (+2,259 lines). Cascade-to-VPS sync gap CLOSED (cellMembrane plasmid-pipeline.timer, 30-min zero-touch)."
-phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE. All 13 primals ready. plasmidBin fully harvested + checksums verified. membrane temporal.cascade is sole sync interface (git timeouts, CWD resolution, merge-ff policy). 0/14 primals at transport injection — next evolution gate."
+phase_1 = "UDS Convergence (Wave 80c) — COMPLETE. 13/13 VPS-ready. All headless regressions RESOLVED. Pipeline validated end-to-end (Wave 87-90). All P1 blockers RESOLVED."
+phase_2 = "Songbird-Routed IPC — IN PROGRESS. Federation :7700 LIVE on 2 gates (eastGate + strandGate). 2-gate mesh proof UNBLOCKED (coordination task). songBird ipc.resolve structured endpoints is M1 (not yet started). 1/14 primals at transport injection (sporePrint). primalSpring deep debt sprint COMPLETE — zero bash in production, all validation in idiomatic Rust."
+phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE across LAN gates. Three-tier model formalized (primalSpring→cellMembrane→projectNUCLEUS). specs/DOWNSTREAM_CONSUMPTION.md published. 0/14 primals at full transport injection — sporePrint has TransportEndpoint enum, others waiting on ipc.resolve (M1)."
 
 [phases.phase_2_milestones]
 m1 = "Songbird ipc.resolve returns transport-qualified endpoints"
