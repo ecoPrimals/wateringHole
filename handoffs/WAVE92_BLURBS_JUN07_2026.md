@@ -21,28 +21,46 @@ VPS deployment validated: 13/13 binaries rebuilt and pushed to golgiBody via
 
 ---
 
-## cellMembrane Team — P2 (pipeline hardening)
+## cellMembrane Team — P1 (peptidoglycan depot + pipeline)
 
-**VPS-BUILD-01**: The `plasmid-pipeline.service` on golgiBody attempts `cargo build`
-but golgiBody is a 2GB/10GB droplet with **no Rust toolchain**. 5 primals fail
-every 30-min cycle (songbird, loamspine, barracuda, biomeos, petaltongue).
+### Architecture Handoff: Peptidoglycan Shared Depot
 
-The pipeline must not build on golgiBody. Two options:
+See full spec: `WAVE92_PEPTIDOGLYCAN_DEPOT_ARCHITECTURE.md`
 
-1. **Preferred**: Pipeline fetches pre-built binaries from the gate depot
-   (eastGate builds via `plasmid.harvest`, pushes via `plasmid.refresh`).
-   The timer should run `plasmid.refresh` (pull from gate depot), not
-   `plasmid.harvest` (build from source).
+peptidoglycan (10.116.0.4) sits between inner and outer golgiBody on the VPC.
+It has Rust 1.96, 4GB RAM, 79GB disk. It should host the **canonical binary depot**
+so either membrane side can serve. The topology:
 
-2. **Alternative**: Pipeline SSH-delegates builds to peptidoglycan (has Rust 1.96,
-   4GB RAM, 79GB disk), then pulls the results to golgiBody.
+```
+gates (build) → peptidoglycan (store) → golgiBody inner (LAN serve)
+                                       → golgiBody outer (GitHub sync)
+```
 
-Current workaround: eastGate runs `membrane plasmid.harvest && membrane plasmid.refresh`
-manually. This works but is not zero-touch.
+### Two build paths — both flow through pepti:
 
-**Also**: `plasmid.status` reports beardog + skunkbat as "drifted" despite matching
-provenance commits. Likely a stale freshness.toml on the VPS (Wave 67 vs current).
-Low priority — cosmetic.
+**Path A — Gate-pushed builds (preferred for large primals):**
+Gates build locally on cascade, push ecobins to peptidoglycan depot.
+Evolve `temporal.cascade` to support `--with-harvest`: sync repos, detect drift,
+build locally, push binary + checksums to pepti in one flow. This makes binary
+freshness part of the cascade contract.
+
+**Path B — Peptidoglycan builds (fallback for small primals):**
+pepti builds locally when gates haven't pushed. Needs `rustup target add
+x86_64-unknown-linux-musl` (one-time). Monitor OOM on 4GB for large primals.
+
+### Immediate items:
+
+1. **CM-PEPTI-SSH-01**: golgiBody → peptidoglycan SSH host key trust (currently fails)
+2. **VPS-BUILD-01**: `plasmid-pipeline.service` must NOT `cargo build` on golgiBody.
+   Replace with: pull from pepti depot OR accept gate-pushed refresh.
+3. **musl target on pepti**: `rustup target add x86_64-unknown-linux-musl`
+4. **`--with-harvest` flag**: `temporal.cascade --with-harvest` builds drifted
+   primals locally and pushes binaries + checksums as part of cascade.
+5. **Depot report in cascade**: cascade output should include binary freshness
+   (current/drifted count) alongside repo parity.
+
+### Cosmetic: `plasmid.status` reports beardog + skunkbat as "drifted" despite
+matching provenance commits. Likely stale freshness.toml on VPS. P3.
 
 ---
 
@@ -82,11 +100,14 @@ from plasmidBin depot on VPS. S4 auth gate review ends ~Jun 9 (automated).
 | # | Item | Owner | Priority | Status |
 |---|------|-------|----------|--------|
 | 1 | 2-gate mesh proof | operators | P1 | UNBLOCKED — coordination |
-| 2 | VPS-BUILD-01: pipeline builds on toolchain-less VPS | cellMembrane | P2 | Open |
-| 3 | songBird ipc.resolve structured endpoints | songBird | P2 | Types shipped, wiring next |
-| 4 | Transport injection (1/14 primals) | all primals | P2 | Blocked on ipc.resolve |
-| 5 | S4 auth gate review | automated | P1 | Ends ~Jun 9 |
-| 6 | VPS plasmid.status drift (cosmetic) | cellMembrane | P3 | beardog/skunkbat false drift |
+| 2 | Peptidoglycan shared depot architecture | cellMembrane | P1 | Spec delivered — execute |
+| 3 | VPS-BUILD-01: pipeline builds on toolchain-less VPS | cellMembrane | P1 | Open — blocked on #2 |
+| 4 | CM-PEPTI-SSH-01: golgiBody→pepti SSH trust | cellMembrane | P1 | One-time setup |
+| 5 | `--with-harvest` cascade flag | cellMembrane | P1 | Design delivered |
+| 6 | songBird ipc.resolve structured endpoints | songBird | P2 | Types shipped, wiring next |
+| 7 | Transport injection (1/14 primals) | all primals | P2 | Blocked on ipc.resolve |
+| 8 | S4 auth gate review | automated | P1 | Ends ~Jun 9 |
+| 9 | VPS plasmid.status drift (cosmetic) | cellMembrane | P3 | beardog/skunkbat false drift |
 
 ---
 

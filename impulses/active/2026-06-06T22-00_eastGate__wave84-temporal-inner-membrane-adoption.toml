@@ -155,6 +155,8 @@ id = "CM-WEBHOOK-01"
 description = "Cascade still timer-polled (30-min); webhook-driven would reduce latency"
 owner = "cellMembrane"
 priority = "P3"
+status = "RESOLVED"
+resolution = "Wave 91: webhook handler + HMAC + selective harvest"
 
 [gaps.gap_5]
 id = "CM-FRESHNESS-01"
@@ -164,6 +166,33 @@ priority = "P2"
 status = "RESOLVED"
 resolution = "Wave 85: publish_freshness defaults to true for Sync mode (opt-out --no-freshness)"
 
+[gaps.gap_6]
+id = "VPS-BUILD-01"
+description = "plasmid-pipeline.service on golgiBody attempts cargo build — no Rust toolchain on 2GB droplet"
+owner = "cellMembrane"
+priority = "P1"
+
+[gaps.gap_7]
+id = "CM-PEPTI-DEPOT-01"
+description = "Peptidoglycan depot architecture: shared storage between inner/outer membrane, build-carrying cascades"
+owner = "cellMembrane"
+priority = "P1"
+detail = """
+Peptidoglycan (10.116.0.4, VPC) hosts canonical depot at /opt/plasmidBin/.
+Both golgiBody inner (LAN cascade) and outer (GitHub sync) read from pepti.
+Two build paths:
+  Path A: pepti builds locally (Rust 1.96, 4GB — fallback for small primals)
+  Path B: gates push ecobins on cascade (preferred for large primals)
+temporal.cascade evolves --with-harvest flag: sync repos + harvest + refresh.
+See handoff: WAVE92_PEPTIDOGLYCAN_DEPOT_ARCHITECTURE.md
+"""
+
+[gaps.gap_8]
+id = "CM-PEPTI-SSH-01"
+description = "golgiBody → peptidoglycan SSH host key not trusted"
+owner = "cellMembrane"
+priority = "P1"
+
 [outcome]
 expected = """
 All ecosystem sync goes through membrane temporal.cascade. Manual git
@@ -171,4 +200,9 @@ loops eliminated. Cascade runs in <10s with parallel sync. Freshness
 tracking tells every gate how stale its workspace is. Webhook-driven
 cascade reduces push-to-VPS latency from 30 minutes to ~2 minutes.
 Transport injection enables isomorphic deployment across platforms.
+
+Peptidoglycan serves as the canonical binary depot between inner and outer
+golgiBody membranes. Gates push fresh ecobins on cascade, pepti stores them,
+both membrane sides serve. Build-carrying cascades (--with-harvest) make
+binary freshness part of the sync contract, not a separate manual step.
 """
