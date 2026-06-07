@@ -19,7 +19,10 @@ for sync, deployment, and evolution tracking.
 
 Wave 85 update: CM-CASCADE-01, CM-FRESHNESS-01, CM-FORGEJO-01 all RESOLVED.
 Parallel cascade (tokio::JoinSet) — 22 repos in 6.9s. Freshness auto-publishes.
-Remaining: PRIMAL-TRANSPORT-01 (P2, upstream), CM-WEBHOOK-01 (P3).
+strandGate ACK: cascade adopted, 13/13 primals ALIVE, mesh-ready.
+flockGate ACK: sporePrint transport abstraction shipped (TransportEndpoint enum,
+first primal transport-agnostic, ready for ipc.resolve).
+Remaining: PRIMAL-TRANSPORT-01 (P2, 1/14 done — sporePrint), CM-WEBHOOK-01 (P3).
 """
 
 [context]
