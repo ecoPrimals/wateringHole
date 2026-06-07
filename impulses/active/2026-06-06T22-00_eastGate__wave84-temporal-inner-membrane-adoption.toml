@@ -23,6 +23,12 @@ strandGate ACK: cascade adopted, 13/13 primals ALIVE, mesh-ready.
 flockGate ACK: sporePrint transport abstraction shipped (TransportEndpoint enum,
 first primal transport-agnostic, ready for ipc.resolve).
 Remaining: PRIMAL-TRANSPORT-01 (P2, 1/14 done — sporePrint), CM-WEBHOOK-01 (P3).
+
+Wave 86 update: strandGate attempted mesh.init → eastGate (192.168.1.144:7700).
+Result: mesh.init returned initialized:true but 0 reachable peers.
+Root cause: eastGate Songbird port 7700 CONNECTION REFUSED (ping OK 0.26ms).
+strandGate *:7700 LIVE and accepting. 2-gate mesh proof BLOCKED on eastGate
+federation port. eastGate action needed: restart Songbird with --federation-port 7700.
 """
 
 [context]
