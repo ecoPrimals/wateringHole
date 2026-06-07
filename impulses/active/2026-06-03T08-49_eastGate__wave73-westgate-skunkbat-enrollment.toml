@@ -10,7 +10,7 @@ date = "2026-06-03"
 updated = "2026-06-07"
 priority = "P1"
 owner = "wateringHole overwatch"
-note = "Wave 91: 2-gate mesh proof PROVEN (eastGate + strandGate). mesh.init, discovery.peers (1 peer), mesh.health_check (all_healthy:true) all pass. capability.call routing operational but TCP delivery to eastGate LAN :7700 blocked (CONNECTION REFUSED — binding/firewall coordination needed). strandGate confirmed mesh peer: Songbird *:7700 LIVE, 13/13 primals ALIVE, plasmidBin depot standardized (13/13 BLAKE3). westGate enrollment template validated — mesh.init with bootstrap_peers [{node_id, address}] format confirmed working. westGate enrolls via membrane CLI: membrane plasmid.fetch → nucleus_launcher start. Hardware-gated — overwatch tracks."
+note = "Wave 92: 2-GATE MESH PROOF COMPLETE — BIDIRECTIONAL (eastGate + strandGate). All 4 criteria met BOTH directions: mesh.init (bootstrap_peers_added:1), discovery.peers (total_count:1), mesh.health_check (all_healthy:true), direct JSON-RPC (alive). Mesh template VALIDATED for additional gate enrollment. westGate enrolls with: mesh.init bootstrap_peers [{node_id:'east-gate', address:'192.168.1.144:7700'}, {node_id:'strandGate', address:'192.168.1.132:7700'}]. plasmidBin depot 13/13 BLAKE3 current. Hardware-gated — overwatch tracks."
 
 [context]
 reason = """

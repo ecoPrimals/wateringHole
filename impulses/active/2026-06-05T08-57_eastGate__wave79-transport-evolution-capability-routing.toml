@@ -35,7 +35,16 @@ VPS pipeline gap: golgiBody (2GB droplet) has no Rust toolchain. Builds must
 happen on gates or peptidoglycan, then refresh to VPS. cellMembrane pipeline
 must NOT attempt cargo build on golgiBody (VPS-BUILD-01).
 
-Remaining P1: 2-gate mesh proof — eastGate :7700 TCP LAN accessibility.
+Wave 92 (late): 2-gate mesh proof COMPLETE — BIDIRECTIONAL.
+eastGate started LAN NUCLEUS (beardog + songbird + skunkbat, supervisor mode).
+192.168.1.144:7700 OPEN. mesh.init PASS both directions (strandGate→eastGate,
+eastGate→strandGate). discovery.peers: total_count:1 both sides. mesh.health_check:
+all_healthy:true both sides. Direct JSON-RPC health.liveness: alive both sides.
+capability.call: routes through mesh to remote providers (transport proven).
+Local capability resolution takes precedence over remote — expected behavior,
+full cross-gate dispatch sharpens as primals register capability groups.
+SOLE P1 ITEM RESOLVED. Mesh template validated for additional gate enrollment.
+
 Remaining P2: transport injection (1/14 primals — sporePrint has TransportEndpoint).
 Phase 2 M1 (songbird TransportEndpoint) IN PROGRESS — types shipped, ipc.resolve next.
 """

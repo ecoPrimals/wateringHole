@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-07T12"
+updated = "2026-06-07T19"
 priority = "P1"
 owner = "cellMembrane"
 note = """
@@ -51,6 +51,12 @@ Checksums synced. golgiBody has NO Rust toolchain — builds must happen on gate
 or peptidoglycan. cellMembrane pipeline must NOT cargo build on golgiBody.
 All team responses same-day: biomeOS v4.13 BIO-ORPHAN-01 RESOLVED, songBird
 TransportEndpoint canonicalized, cellMembrane CM-WEBHOOK-01 RESOLVED.
+
+Wave 92 (late): 2-GATE MESH PROOF COMPLETE — BIDIRECTIONAL.
+eastGate started LAN NUCLEUS (192.168.1.144:7700 OPEN). Both directions:
+strandGate→eastGate and eastGate→strandGate pass all 4 criteria (mesh.init,
+discovery.peers, mesh.health_check, direct JSON-RPC). capability.call transport
+proven. SOLE P1 ITEM RESOLVED. No remaining P1 blockers in ecosystem.
 """
 
 [context]
