@@ -10,28 +10,7 @@ date = "2026-06-05"
 updated = "2026-06-07"
 priority = "P0"
 owner = "songBird + biomeOS + cellMembrane"
-note = """
-Wave 91: ALL P1 DEPLOYMENT BLOCKERS RESOLVED. Pipeline proven end-to-end.
-
-Resolved (Waves 87-90):
-- SB-FEDERATION-01: songbird federation listener in server mode (0a09354b)
-- BIO-SEARCH-01: biomeOS v4.10 depot-first binary search priority
-- CM-TRIGGER-01: plasmid.trigger SSH-kicks VPS service (78c571c)
-- BARRACUDA-SOCKET-01: self-referencing socket symlink fixed (126ea3e1)
-- BIO-HEALTHRETRY-01: health check retry with backoff (biomeOS v4.12)
-
-Current state: 12/12 primals ACTIVE from depot, federation :7700 LIVE on
-eastGate (*:7700) + strandGate (*:7700). 38/38 cascade parity.
-
-primalSpring role formalized (Wave 90): three-tier model
-(primalSpring→cellMembrane→projectNUCLEUS). Deep debt sprint COMPLETE:
-zero bash in production path, all validation in Rust.
-
-Remaining P1: 2-gate mesh proof (eastGate↔strandGate) — coordination task.
-Remaining P2: BIO-ORPHAN-01 (NUCLEUS exits, primals orphaned), transport
-injection (1/14 primals — sporePrint only). Phase 2 M1 (songbird ipc.resolve
-structured endpoints) is the next evolution gate.
-"""
+note = "Wave 91: 2-gate mesh proof PROVEN at protocol level. mesh.init with structured bootstrap_peers → bootstrap_peers_added:1, discovery.peers total_count:1 (eastGate reachable:true, source:mesh, tcp_port:7700), mesh.health_check all_healthy:true (eastGate healthy, direct path), mesh.status reachable_peers:1. capability.call correctly routes to eastGate HTTP endpoint (192.168.1.144:7700/jsonrpc) but TCP delivery fails — eastGate :7700 still CONNECTION REFUSED on LAN. Mesh discovery + health + routing layers PROVEN. Cross-gate dispatch needs eastGate :7700 TCP accessibility on LAN (binding/firewall coordination). plasmidBin depot standardized: 7 drifted primals rebuilt musl-static, checksums.toml regenerated 13/13 BLAKE3, 10/13 current. Previous: Wave 85 strandGate 13/13 ALIVE, membrane cascade 24/24. TCP debt: rhizoCrypt 29, barraCuda 13, coralReef 10, loamSpine 9, sweetGrass 9. Transport injection P2 — waiting on songBird ipc.resolve structured endpoints. Primals: 1/14 transport-agnostic (sporePrint). Next evolution gate: songBird ipc.resolve (Phase 2 M1) for remaining 13 primals."
 
 [context]
 reason = """
@@ -92,9 +71,9 @@ at deploy time based on topology, platform, and composition tier.
 priority = "P2"
 
 [phases]
-phase_1 = "UDS Convergence (Wave 80c) — COMPLETE. 13/13 VPS-ready. All headless regressions RESOLVED. Pipeline validated end-to-end (Wave 87-90). All P1 blockers RESOLVED."
-phase_2 = "Songbird-Routed IPC — IN PROGRESS. Federation :7700 LIVE on 2 gates (eastGate + strandGate). 2-gate mesh proof UNBLOCKED (coordination task). songBird ipc.resolve structured endpoints is M1 (not yet started). 1/14 primals at transport injection (sporePrint). primalSpring deep debt sprint COMPLETE — zero bash in production, all validation in idiomatic Rust."
-phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE across LAN gates. Three-tier model formalized (primalSpring→cellMembrane→projectNUCLEUS). specs/DOWNSTREAM_CONSUMPTION.md published. 0/14 primals at full transport injection — sporePrint has TransportEndpoint enum, others waiting on ipc.resolve (M1)."
+phase_1 = "UDS Convergence (Wave 80c) — COMPLETE. 13/13 VPS-ready. All headless regressions RESOLVED. primalspring_primal deprecated. Pipeline validated. UDS health probe fix shipped (squirrel, petalTongue)."
+phase_2 = "Songbird-Routed IPC — IN PROGRESS. songbird-mesh.service live. All 5 Caddy endpoints LIVE. Cross-node socat bridges deployed. 10G backbone installed across LAN gates. songBird v0.2.12 shipped security_crypto + sovereign-onion (+2,259 lines). Cascade-to-VPS sync gap CLOSED (cellMembrane plasmid-pipeline.timer, 30-min zero-touch)."
+phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE. All 13 primals ready. plasmidBin fully harvested + checksums verified. membrane temporal.cascade is sole sync interface (git timeouts, CWD resolution, merge-ff policy). 0/14 primals at transport injection — next evolution gate."
 
 [phases.phase_2_milestones]
 m1 = "Songbird ipc.resolve returns transport-qualified endpoints"

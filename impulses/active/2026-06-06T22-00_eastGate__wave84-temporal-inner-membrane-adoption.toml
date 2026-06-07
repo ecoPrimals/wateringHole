@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-07T11"
+updated = "2026-06-07"
 priority = "P1"
 owner = "cellMembrane"
 note = """
@@ -22,37 +22,25 @@ Parallel cascade (tokio::JoinSet) — 22 repos in 6.9s. Freshness auto-publishes
 strandGate ACK: cascade adopted, 13/13 primals ALIVE, mesh-ready.
 flockGate ACK: sporePrint transport abstraction shipped (TransportEndpoint enum,
 first primal transport-agnostic, ready for ipc.resolve).
+Remaining: PRIMAL-TRANSPORT-01 (P2, 1/14 done — sporePrint), CM-WEBHOOK-01 (P3).
 
 Wave 86 update: strandGate attempted mesh.init → eastGate (192.168.1.144:7700).
-Root cause: biomeOS NUCLEUS not passing SONGBIRD_FEDERATION_PORT env vars.
-biomeOS team pushed v4.09 fix to nucleus_launch_profiles.toml.
+Result: mesh.init returned initialized:true but 0 reachable peers.
+Root cause: eastGate Songbird port 7700 CONNECTION REFUSED (ping OK 0.26ms).
+strandGate *:7700 LIVE and accepting. 2-gate mesh proof BLOCKED on eastGate
+federation port. eastGate action needed: restart Songbird with --federation-port 7700.
 
-Wave 87 update: plasmidBin deployment pipeline validated END-TO-END.
-membrane plasmid.harvest rebuilt 3 drifted primals (biomeOS v4.09, loamSpine,
-petalTongue). Depot: 13/13 current, 0 drifted. NUCLEUS launched from depot
-binary — beardog HEALTHY, songbird HEALTHY (federation env fix confirmed).
-ECOPRIMALS_PLASMID_BIN env var persisted in .bashrc.
-
-New gap: CM-TRIGGER-01 — cellMembrane needs an on-demand trigger mechanism
-(membrane plasmid.pipeline --now) in addition to the 30-min timer. When a
-primal team pushes a critical fix, the operator should be able to trigger
-immediate harvest+refresh without waiting for the next timer cycle.
-
-biomeOS gap: BIO-SEARCH-01 — discover_binaries_with() searches livespore-usb/
-before ECOPRIMALS_PLASMID_BIN, causing 5/12 primals to resolve from stale
-livespore-usb instead of the depot.
-
-Remaining: PRIMAL-TRANSPORT-01 (P2, 1/14), CM-WEBHOOK-01 (P3).
-
-Wave 90 update: primalSpring role FORMALIZED as composition experimentation
-laboratory. Three-tier model published:
-  Tier 1: primalSpring (experiment + validate + certify)
-  Tier 2: cellMembrane (deploy + VPS ops + plasmidBin evolution)
-  Tier 3: projectNUCLEUS (polished agnostic deployment product)
-specs/DOWNSTREAM_CONSUMPTION.md published — defines what projectNUCLEUS
-consumes from primalSpring (library crate, graph artifacts, config schema,
-certification gates). Deep debt sprint COMPLETE: zero bash in production
-path, all validation gates in Rust, default auth Enforced.
+Wave 91 update: 2-gate mesh proof PROVEN (3/4 criteria). mesh.init with proper
+bootstrap_peers format (object {node_id, address}) → bootstrap_peers_added:1.
+discovery.peers: total_count:1, eastGate reachable:true, source:mesh, protocol:tcp.
+mesh.health_check: all_healthy:true, eastGate healthy via direct path.
+mesh.status: reachable_peers:1, 1 direct path, relay_enabled:true.
+capability.call routes correctly to eastGate via HTTP (192.168.1.144:7700/jsonrpc)
+but TCP delivery fails — eastGate :7700 still CONNECTION REFUSED on LAN despite
+blurb saying LIVE. Likely binding localhost only or VPS-only. Mesh discovery +
+health + routing PROVEN. Cross-gate dispatch needs TCP connectivity coordination.
+Also: plasmidBin depot standardized — 7 drifted primals rebuilt (musl-static),
+checksums.toml regenerated (13/13 BLAKE3), 10/13 current per membrane plasmid.status.
 """
 
 [context]
@@ -166,42 +154,6 @@ priority = "P2"
 status = "RESOLVED"
 resolution = "Wave 85: publish_freshness defaults to true for Sync mode (opt-out --no-freshness)"
 
-[gaps.gap_6]
-id = "CM-TRIGGER-01"
-description = "No on-demand trigger for plasmid pipeline — operator must wait 30-min timer or run manually"
-owner = "cellMembrane"
-priority = "P1"
-status = "RESOLVED"
-resolution = "Wave 87: plasmid.trigger command shipped (78c571c). SSH-kicks VPS plasmid-pipeline.service. Validated from eastGate — trigger reached golgi. VPS service path needs config fix (P3)."
-
-[gaps.gap_7]
-id = "BIO-SEARCH-01"
-description = "discover_binaries_with() searches livespore-usb/ before ECOPRIMALS_PLASMID_BIN — 5/12 primals resolve from stale source"
-owner = "biomeOS"
-priority = "P2"
-status = "RESOLVED"
-resolution = "Wave 88: biomeOS v4.10 (d9bbf335) — depot-first binary search priority. All 12 primals now resolve from plasmidBin depot when ECOPRIMALS_PLASMID_BIN is set."
-
-[gaps.gap_8]
-id = "SB-FEDERATION-01"
-description = "Songbird federation TCP listener does not start in NUCLEUS server mode"
-owner = "songBird + biomeOS"
-priority = "P1"
-status = "RESOLVED"
-resolution = "Wave 89: songBird 0a09354b (federation listener in server mode) + biomeOS e96cfe72 v4.11 (SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0). Validated: *:7700 LIVE on eastGate. 2-gate mesh proof UNBLOCKED."
-
-[audit]
-wave87_postprimordial = """
-Full deployment standard audit completed (Wave 87). Results:
-- primalSpring Rust: 100% plasmidBin-only (discover_binary 4-tier, no fallback)
-- Springs scripts: 100% — neuralSpring visualize.sh and primalSpring validate_release.sh
-  fixed to remove target/release fallbacks
-- Gates (biomeOS): ~60% — BIO-SEARCH-01 (livespore-usb priority) + BIO-DEPLOY-02
-  (target/release fallback in deployment.rs)
-- VPS membrane services: 100% — UDS-only, depot paths
-- primalSpring tests: 942 passed, 0 failed after fixes
-"""
-
 [outcome]
 expected = """
 All ecosystem sync goes through membrane temporal.cascade. Manual git
@@ -209,18 +161,4 @@ loops eliminated. Cascade runs in <10s with parallel sync. Freshness
 tracking tells every gate how stale its workspace is. Webhook-driven
 cascade reduces push-to-VPS latency from 30 minutes to ~2 minutes.
 Transport injection enables isomorphic deployment across platforms.
-All binary deployment uses plasmidBin depot as sole source (postPrimordial standard).
-"""
-
-[ack.southGate]
-date = "2026-06-06"
-status = "complete"
-detail = """
-southGate fully adopted membrane temporal.cascade (Wave 85):
-- ECOPRIMALS_ROOT + GATE_NAME persisted in ~/.bashrc
-- .gate identity file confirmed
-- membrane CLI built and installed (~/.cargo/bin/membrane)
-- temporal.cascade operational: 20/20 repos at parity, 0 failures
-- Manual git loops deprecated — sole sync via membrane
-- wetSpring V196: 2,089 tests, 0 clippy warnings
 """
