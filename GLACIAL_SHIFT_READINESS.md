@@ -329,13 +329,15 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 84)**: **38/38 REPOS AT PARITY — TEMPORAL INNER MEMBRANE OPERATIONAL.**
-Cascade system leveled: `membrane temporal.cascade` is the sole sync interface. Git ops have
-60-second timeouts. CWD-based workspace resolution. `merge-ff` divergence policy auto-resolves
-convergence. cellMembrane zero-touch pipeline LIVE on VPS (30-min cycle). primalSpring fully
-excised (12,365 lines). New gaps: 0/14 primals have transport injection, cascade still sequential
-(~59s, target <10s with parallel sync). Peptidoglycan FRAGO RESOLVED. Tree-parity divergences
-resolved (wateringHole + primalSpring).
+**Current assessment (Wave 87)**: **PLASMIDIN DEPLOYMENT PIPELINE VALIDATED END-TO-END.**
+`membrane plasmid.harvest` rebuilt 3 drifted primals (biomeOS v4.09, loamSpine, petalTongue).
+Depot: 13/13 current, 0 drifted. NUCLEUS launched from depot binary — beardog + songbird
+HEALTHY (biomeOS v4.09 federation env fix confirmed). `ECOPRIMALS_PLASMID_BIN` env persisted.
+Cascade system leveled (Wave 84): `membrane temporal.cascade` sole sync interface, parallel
+dispatch (6.9s for 22 repos). cellMembrane zero-touch pipeline LIVE on VPS (30-min timer).
+New gaps: CM-TRIGGER-01 (on-demand harvest trigger — P1), BIO-SEARCH-01 (binary search
+priority: livespore-usb > plasmidBin depot — P2, biomeOS), barracuda socket timeout (P2).
+0/14 primals have transport injection. primalSpring fully excised (12,365 lines).
 
 Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 inner membrane
 TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY, 5/5 Caddy endpoints LIVE
@@ -351,11 +353,15 @@ verification). VPS staleness detection operational.
 
 **Critical path to stadial entry**:
 1. ~~VPS deploy refresh~~ **DONE** — cellMembrane plasmid-pipeline.timer (zero-touch, 30-min cycle)
-2. mesh.init with gate peers (all 13 confirmed ALIVE, ready)
-3. 3-gate mesh proof (blocked on westGate hardware)
-4. S4 auth gate review (~Jun 9)
-5. westGate enrollment (10G backbone LIVE, hardware pending)
-6. Transport injection evolution (0/14 primals — P2, non-blocking for stadial)
+2. ~~plasmidBin pipeline e2e~~ **VALIDATED** (Wave 87) — harvest, status, NUCLEUS from depot all proven
+3. On-demand trigger mechanism (CM-TRIGGER-01) — `membrane plasmid.pipeline --now` for critical fixes
+4. Fix biomeOS binary search priority (BIO-SEARCH-01) — depot must be first source, not livespore-usb
+5. eastGate Songbird federation port 7700 — needs depot-sourced songbird (blocked by BIO-SEARCH-01)
+6. mesh.init 2-gate proof (strandGate ready, eastGate federation port pending)
+7. 3-gate mesh proof (blocked on westGate hardware)
+8. S4 auth gate review (~Jun 9)
+9. westGate enrollment (10G backbone LIVE, hardware pending)
+10. Transport injection evolution (0/14 primals — P2, non-blocking for stadial)
 
 ---
 
