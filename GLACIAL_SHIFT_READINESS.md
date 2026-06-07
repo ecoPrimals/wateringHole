@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-06 (Wave 84 — cascade system LEVELED. membrane temporal.cascade is sole sync interface: git 60s timeouts, CWD workspace resolution, merge-ff divergence policy. 38/38 repos at parity, 0 failures, ~59s. cellMembrane zero-touch pipeline LIVE on VPS (plasmid-pipeline.timer, 30-min cycle, plasmid.harvest + plasmid.refresh + plasmid.status). primalSpring excised (12,365 lines). Peptidoglycan FRAGO RESOLVED. Tree-parity divergences auto-resolved (wateringHole, primalSpring). New FRAGO: wave84-temporal-inner-membrane-adoption — all gates adopt membrane cascade. Transport injection gap: 0/14 primals. Critical path: 3-gate mesh proof → stadial.)
+**Last updated**: 2026-06-07 (Wave 93 — ALL P1 ITEMS RESOLVED. 2-gate mesh proof COMPLETE (bidirectional, eastGate ↔ strandGate, sub-ms latency). VPS depot 13/13 current, 0 drifted. Pipeline hardened: peptidoglycan depot architecture, --with-harvest cascade, refresh-only VPS. cellMembrane responded same-day to 3 consecutive wave blurbs — VPS-BUILD-01, CM-PEPTI-SSH-01, false drift, barraCuda build all RESOLVED. primalSpring role FORMALIZED as experimentation laboratory (three-tier: primalSpring→cellMembrane→projectNUCLEUS). Deep debt sprint COMPLETE (zero bash in production). S4 auth gate ends ~Jun 9. Remaining: transport injection P2 (1/14 primals), 3rd gate for mesh (westGate incoming), cross-subnet routing.)
 
 ---
 
@@ -225,11 +225,11 @@ Tier 2+ large-dataset science, not a deployment blocker.
 1. ~~Enable `SONGBIRD_FEDERATION_PORT=7700` on eastGate + ironGate + southGate + biomeGate~~ **DONE** (Wave 48)
 2. ~~Peer seeding mechanism~~ **DONE** (Wave 49) — `SONGBIRD_PEERS` env + `--peers` CLI + `mesh.init` RPC
 3. ~~Springs declare gates, deploy cells, cut primordial patterns~~ **DONE** (4/4 responding springs confirmed)
-4. Verify cross-gate `discovery.peers` — **NEXT**: same-subnet gates (eastGate ↔ ironGate) seed peers, confirm peer count > 0
-5. Cross-gate `capability.call` smoke test via primalSpring `s_covalent_mesh` scenario
+4. ~~Verify cross-gate `discovery.peers`~~ **COMPLETE** (Wave 92) — eastGate ↔ strandGate bidirectional, peer_count:1, sub-ms
+5. ~~Cross-gate `capability.call` smoke test~~ **COMPLETE** (Wave 92) — routes through mesh, local resolution takes precedence
 6. Cross-subnet routing for southGate (192.168.4.x) — requires network config or TURN relay
-7. strandGate (ACTIVE — compute trio pickup + NUCLEUS deploy), westGate (INCOMING — Nest Atomic cold storage), northGate (Node Atomic)
-8. Plasmodium collective validation (3+ gates meshed via live `capability.call`)
+7. westGate (INCOMING — Nest Atomic cold storage), northGate (Node Atomic) — hardware gated
+8. Plasmodium collective validation (3+ gates meshed via live `capability.call`) — needs 3rd gate
 
 ### Deployment Matrix (primalSpring)
 
@@ -256,9 +256,9 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Cross-gate data dependency staging | **PROTOTYPED** (primalSpring `validation::dependency`) |
 | Songbird peer seeding (`SONGBIRD_PEERS`) | **SHIPPED** — Wave 49, both launchers, CLI + env + RPC |
 | Songbird `mesh.init` + `bootstrap_peers` | **WIRED** — Wave 49, Songbird team confirmed functional |
-| Cross-gate `discovery.peers` verification | **UNBLOCKED** — peer seeding shipped, socket fix DONE (eb913612), same-subnet test next |
+| Cross-gate `discovery.peers` verification | **COMPLETE** (Wave 92) — bidirectional, both gates report peer_count:1, quality:1.0 |
 | Cross-subnet mesh (southGate ↔ eastGate) | **BLOCKED** — different subnets, needs routing or TURN relay |
-| Plasmodium collective status | **PENDING** — requires 3+ same-subnet gates meshed first |
+| Plasmodium collective status | **PENDING** — requires 3+ same-subnet gates meshed first (2/3 operational) |
 | flockGate live deployment | **OPERATIONAL** (Wave 63-64) — WAN relay, sporePrint gallery, Zola pipeline, temporal sync validated |
 
 ### Wave 49 Ecosystem Issues (post-tightening re-audit, May 25)
@@ -287,10 +287,13 @@ fossilRecord) — see `fossilRecord/` for detail.
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| Cross-gate `discovery.peers` live test | primalSpring | **HIGH** | Songbird `latency_ms` + `mesh.probe_latency` DONE. biomeOS endpoints ready. **eastGate must initiate paired test** |
-| Cross-gate `capability.call` live test | primalSpring | **HIGH** | biomeOS `capability.call` DONE. `s_covalent_mesh` scenario written. **Needs live run** |
+| ~~Cross-gate `discovery.peers` live test~~ | primalSpring | ~~HIGH~~ | **DONE** (Wave 92) — bidirectional mesh proof, total_count:1 both directions |
+| ~~Cross-gate `capability.call` live test~~ | primalSpring | ~~HIGH~~ | **DONE** (Wave 92) — routes through mesh, local resolution takes precedence as expected |
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
-| DNS NS registrar cutover | operator | ~~HIGH~~ | **DONE** — `primal.eco` propagated + TLS live. `nestgate.io` propagating. `primals.eco` stays Cloudflare. |
+| ~~DNS NS registrar cutover~~ | operator | ~~HIGH~~ | **DONE** — `primal.eco` + `nestgate.io` propagated + TLS live. DNSSEC enabled. |
+| songBird ipc.resolve structured endpoints | songBird | **P2** | TransportEndpoint types shipped, ipc.resolve wiring next (Phase 2 M1) |
+| Transport injection (1/14 primals) | all primals | **P2** | Blocked on ipc.resolve. sporePrint has TransportEndpoint. |
+| Peptidoglycan canonical depot wiring | cellMembrane | **P2** | Gate→pepti binary push via SCP/rsync |
 | Forgejo Actions CI | projectNUCLEUS | LOW | Evaluation planned (P2) |
 | neuralSpring composition_nucleus.sh fix | neuralSpring | LOW | Only spring with stale `target/release/` primal hardcode |
 | Central fossilRecord sync | all primals | LOW | 7/8 primals reference central paths that don't exist yet |
@@ -329,7 +332,7 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 90)**: **THREE-TIER MODEL FORMALIZED.**
+**Current assessment (Wave 93)**: **ALL P1 RESOLVED. MESH PROVEN. STADIAL GATE IN SIGHT.**
 
 The ecosystem now operates on a formalized three-tier pattern:
 
@@ -361,9 +364,12 @@ All P1 deployment blockers RESOLVED.
 Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 inner membrane
 TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY, 5/5 Caddy endpoints LIVE
 (primal.eco, mesh.primal.eco, auth.primal.eco, api.primal.eco, nestgate.io).
-Criteria 2 mesh: 2 gates operational (eastGate + strandGate), need 3rd
-(westGate — 10G backbone installed, hardware pending). Criteria 3: peptidoglycan FORMALIZED
-(ironGate ACK). Criteria 4: flockGate OPERATIONAL, formal WAN validation pending.
+Criteria 2 mesh: **2-gate mesh proof COMPLETE** (Wave 92, bidirectional, eastGate ↔ strandGate).
+mesh.init, discovery.peers, mesh.health_check, direct JSON-RPC all PASS both directions.
+Sub-ms latency (0.224ms). Need 3rd gate for full criterion (westGate incoming).
+Criteria 3: peptidoglycan FORMALIZED (ironGate ACK). Depot architecture designed
+(Wave 92) — pepti as shared storage, builds flow from gates, VPS is deploy-only.
+Criteria 4: flockGate OPERATIONAL, formal WAN validation pending.
 Criteria 5: `primal.eco` + `nestgate.io` DNS PROPAGATED + TLS LIVE. `primals.eco` stays
 Cloudflare (outer membrane). DNSSEC enabled on both sovereign domains.
 Criteria 6: cross-membrane validation scenario shipped (`s_cross_membrane_integrity`,
@@ -376,14 +382,20 @@ verification). VPS staleness detection operational.
 3. ~~On-demand trigger mechanism (CM-TRIGGER-01)~~ **RESOLVED** (Wave 87) — `plasmid.trigger` SSH-kicks VPS
 4. ~~Fix biomeOS binary search priority (BIO-SEARCH-01)~~ **RESOLVED** (Wave 88) — v4.10 depot-first
 5. ~~eastGate Songbird federation port 7700 (SB-FEDERATION-01)~~ **RESOLVED** (Wave 89) — songbird + biomeOS fix
-6. mesh.init 2-gate proof (strandGate ready, eastGate federation LIVE) — **UNBLOCKED, READY TO RUN**
-7. S4 auth gate review (~Jun 9)
+6. ~~mesh.init 2-gate proof~~ **COMPLETE** (Wave 92) — bidirectional, all 4 criteria, sub-ms latency
+7. S4 auth gate review (~Jun 9) — **IN PROGRESS** (autonomous, ends ~Jun 9)
 8. Transport injection evolution (1/14 primals — P2, non-blocking for stadial)
-9. **NEW**: projectNUCLEUS consumption surface validated (specs/DOWNSTREAM_CONSUMPTION.md published)
+9. projectNUCLEUS consumption surface validated (specs/DOWNSTREAM_CONSUMPTION.md published)
+10. ~~VPS-BUILD-01 pipeline cargo build on golgiBody~~ **RESOLVED** (Wave 92) — refresh-only
+11. ~~CM-PEPTI-SSH-01 golgiBody→pepti SSH trust~~ **RESOLVED** (Wave 92)
+12. ~~barraCuda build break~~ **RESOLVED** (Wave 93) — SimpleMlp methods restored, depot 13/13
 
-Additional gates (westGate, northGate, etc.) enroll using the standard gate
-enrollment template — not on the critical path. 3-gate mesh proof runs when
-a 3rd gate is available; 2-gate proof is sufficient for stadial entry.
+**Stadial entry is gated only on**:
+- S4 auth gate review completion (~Jun 9, automated)
+- 3rd gate mesh enrollment (westGate incoming — hardware gated, not software)
+- WAN covalent validation with flockGate (pending coordination)
+
+All software items are RESOLVED. The remaining gates are operational/hardware/time.
 
 ---
 

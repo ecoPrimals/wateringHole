@@ -7,8 +7,8 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-07T19"
-priority = "P1"
+updated = "2026-06-07T17"
+priority = "P2"
 owner = "cellMembrane"
 note = """
 Wave 84: cascade system leveled — membrane temporal.cascade is operational
@@ -177,27 +177,24 @@ id = "VPS-BUILD-01"
 description = "plasmid-pipeline.service on golgiBody attempts cargo build — no Rust toolchain on 2GB droplet"
 owner = "cellMembrane"
 priority = "P1"
+status = "RESOLVED"
+resolution = "Wave 92: pipeline now runs plasmid.refresh only (deploy from depot). No cargo build on golgiBody."
 
 [gaps.gap_7]
 id = "CM-PEPTI-DEPOT-01"
 description = "Peptidoglycan depot architecture: shared storage between inner/outer membrane, build-carrying cascades"
 owner = "cellMembrane"
-priority = "P1"
-detail = """
-Peptidoglycan (10.116.0.4, VPC) hosts canonical depot at /opt/plasmidBin/.
-Both golgiBody inner (LAN cascade) and outer (GitHub sync) read from pepti.
-Two build paths:
-  Path A: pepti builds locally (Rust 1.96, 4GB — fallback for small primals)
-  Path B: gates push ecobins on cascade (preferred for large primals)
-temporal.cascade evolves --with-harvest flag: sync repos + harvest + refresh.
-See handoff: WAVE92_PEPTIDOGLYCAN_DEPOT_ARCHITECTURE.md
-"""
+priority = "P2"
+status = "IN PROGRESS"
+resolution = "Wave 92: SSH trust established, musl target installed on pepti, --with-harvest flag shipped. Gate→pepti binary push (SCP/rsync) is next."
 
 [gaps.gap_8]
 id = "CM-PEPTI-SSH-01"
 description = "golgiBody → peptidoglycan SSH host key not trusted"
 owner = "cellMembrane"
 priority = "P1"
+status = "RESOLVED"
+resolution = "Wave 92: SSH trust established, pepti alias configured, x86_64-unknown-linux-musl target installed."
 
 [outcome]
 expected = """
