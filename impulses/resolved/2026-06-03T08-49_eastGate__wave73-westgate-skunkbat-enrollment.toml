@@ -10,17 +10,7 @@ date = "2026-06-03"
 updated = "2026-06-07"
 priority = "P1"
 owner = "wateringHole overwatch"
-note = """
-Wave 91: Still hardware-gated. No change in westGate hardware status.
-Pipeline fully validated (Wave 87-90): 12/12 primals ACTIVE from depot,
-federation :7700 LIVE on eastGate + strandGate. All P1 deployment blockers
-RESOLVED (SB-FEDERATION-01, BIO-SEARCH-01, CM-TRIGGER-01, BARRACUDA-SOCKET-01).
-Three-tier model formalized (Wave 90): primalSpring→cellMembrane→projectNUCLEUS.
-westGate enrollment is UNBLOCKED from software perspective — waiting on hardware.
-strandGate confirmed as mesh peer: Songbird 7700 LIVE, FAMILY_ID e8b62b6e,
-13/13 primals ALIVE. 2-gate mesh proof is the next coordination task before
-westGate becomes the 3rd gate for plasmodium collective.
-"""
+note = "Wave 91: 2-gate mesh proof PROVEN (eastGate + strandGate). mesh.init, discovery.peers (1 peer), mesh.health_check (all_healthy:true) all pass. capability.call routing operational but TCP delivery to eastGate LAN :7700 blocked (CONNECTION REFUSED — binding/firewall coordination needed). strandGate confirmed mesh peer: Songbird *:7700 LIVE, 13/13 primals ALIVE, plasmidBin depot standardized (13/13 BLAKE3). westGate enrollment template validated — mesh.init with bootstrap_peers [{node_id, address}] format confirmed working. westGate enrolls via membrane CLI: membrane plasmid.fetch → nucleus_launcher start. Hardware-gated — overwatch tracks."
 
 [context]
 reason = """
