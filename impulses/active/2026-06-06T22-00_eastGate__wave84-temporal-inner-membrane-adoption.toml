@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-07T23"
+updated = "2026-06-08T15"
 priority = "P2"
 owner = "cellMembrane"
 note = """
@@ -61,12 +61,20 @@ proven. SOLE P1 ITEM RESOLVED. No remaining P1 blockers in ecosystem.
 Wave 93: primalSpring deployment validation hardening COMPLETE. 52 scenarios,
 887 tests, 52/52 bare cert. s_deployment_pipeline wired. 13/13 harvested.
 
-Wave 94: 3-gate deployment validation. ironGate clean-room redeploy from
-plasmidBin: ALL checks PASS (13/13 depot, idempotent rollback, health OK,
-LAN reachable 192.168.1.238:7700). Mesh BLOCKED on beardog capability.call
-(-32601). Key findings: --security-socket flag NOT recognized by songbird
-(use SONGBIRD_SECURITY_PROVIDER env), stale sockets require manual cleanup
-on rollback. toadStool divergence: forgejo +13 vs origin +126 (impulse filed).
+Wave 94: 3-gate deployment + mesh validation.
+- beardog capability.call SHIPPED (bc3dd077f) — VERIFIED on eastGate, routes
+  correctly through HandlerRegistry (220+ methods). Blocker RESOLVED.
+- ironGate clean-room deployment VALIDATED (all checks PASS, idempotent).
+- Depot reharvested: 13/13 current (2026-06-07T23:47:30Z).
+- NEW BLOCKER: SB-TLS-LAN-01 — songbird HTTP client sends TLS ClientHello to
+  LAN federation peers that serve plain HTTP. Peer returns HTTP/1.1 400 →
+  bootstrap_peers_added:0. Songbird team must support plain HTTP peer probes
+  or add TLS termination to federation server.
+- VPS peptidoglycan available as additional NUCLEUS deployment node alongside
+  LAN gates. Future deployments target projectNUCLEUS as completed systems.
+- Operational findings: SONGBIRD_SECURITY_PROVIDER + SECURITY_PROVIDER_SOCKET +
+  BEARDOG_SOCKET envs all needed, security.sock capability symlink required,
+  stale sockets need rm -f on rollback.
 """
 
 [context]
@@ -165,6 +173,14 @@ id = "PRIMAL-TRANSPORT-01"
 description = "0/14 primals have transport injection — all self-bind TCP/UDS"
 owner = "songBird + all-primals"
 priority = "P2"
+status = "IN PROGRESS"
+resolution = """Wave 97: sourDough absorbed TransportEndpoint (wire-compatible with songbird_types).
+sourdough-core has connect_transport(), IpcClient, TransportStream. Scaffold templates
+emit transport-injected primals. sourdough validate transport audits compliance.
+strandGate audit: 5/5 primals clean for self-binding, 0/5 adopted TransportEndpoint yet.
+cellMembrane absorbed transport.rs into cellmembrane-types. 1/14 (sporePrint) transport-agnostic.
+NUCLEUS tower redeployed from plasmidBin (eastGate). Musl segfault FIXED (static-pie).
+Next: ipc.resolve returns TransportEndpoint → all primals adopt."""
 
 [gaps.gap_4]
 id = "CM-WEBHOOK-01"
