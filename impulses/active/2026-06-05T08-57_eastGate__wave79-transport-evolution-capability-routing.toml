@@ -82,9 +82,25 @@ Wave 97: sourDough ecobin audit on strandGate primals. 0/5 self-binding anti-pat
 ecoBin cross-arch. Investigation: ring is dev-only (testcontainers→bollard→rustls),
 openssl not in tree at all. Production binary is pure Rust. BUT: sweetGrass must
 HARD DROP ring from dev-deps and delegate ALL crypto to bearDog via Tower Atomic
-capability.call (capability='crypto'). No primal should carry its own crypto stack
-— bearDog IS the crypto spine. This is an ecoBin compliance AND security posture
-requirement. See [directive.sweetgrass] below.
+capability.call (capability='crypto'). No primal should carry its own crypto spine.
+
+Wave 98: sweetGrass RESOLVED ring elimination (v0.7.52). testcontainers + bollard
+removed. Zero C/ASM crypto in entire dep tree. deny.toml hardened: ring + rustls
+fully denied with zero wrappers. ecoBin cross-arch UNBLOCKED. 1613+ tests, 91.7%.
+strandGate formatted all 5 owned primals (cargo fmt pushed). [[bin]] validator
+false positive flagged — sourDough validate ecobin only checks workspace root,
+not crate manifests. sourDough team should fix.
+strandGate reports: sourDough musl binary from depot still segfaults on their gate.
+They built from glibc source locally. Our eastGate depot has the FIXED static-pie
+binary (2026-06-08 rebuild with link-self-contained=yes) — strandGate needs to
+pull the updated depot binary, not use the May 28 cached version.
+songBird: major evolution — 1657 lines, TLS handshake tests added. SB-TLS-LAN-01
+likely addressed (plain HTTP probe shipped dba32023).
+cellMembrane: depot.rs module created (194 lines). Depot ownership absorption in progress.
+Full NUCLEUS deployed on eastGate: 13/13 primals running, all IPC-live over UDS.
+biomeos fix applied (neural-api subcommand, not server). primalspring removed from
+COMP_FULL (13 deployable primals, primalspring is a validation spring).
+VPS peptidoglycan rebuild needed for stale binaries (7/14 stale after cascade).
 """
 
 [context]

@@ -212,7 +212,11 @@ description = "Peptidoglycan depot architecture: shared storage between inner/ou
 owner = "cellMembrane"
 priority = "P2"
 status = "IN PROGRESS"
-resolution = "Wave 92: SSH trust established, musl target installed on pepti, --with-harvest flag shipped. Gate→pepti binary push (SCP/rsync) is next."
+resolution = """Wave 92: SSH trust established, musl target installed on pepti, --with-harvest flag shipped.
+Wave 98: cellMembrane depot.rs module created (194 lines). Depot ownership absorption in progress.
+7/14 depot binaries stale after cascade — peptidoglycan rebuild needed.
+Provenance now tracks stale=true per primal. VPS should rebuild stale primals on next cycle.
+Next: peptidoglycan auto-rebuild trigger on cascade (build-carrying cascades)."""
 
 [gaps.gap_8]
 id = "CM-PEPTI-SSH-01"
