@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["songBird", "bearDog", "biomeOS", "all-primals"]
 date = "2026-06-05"
-updated = "2026-06-07T23"
+updated = "2026-06-08"
 priority = "P2"
 owner = "songBird + biomeOS + cellMembrane"
 note = """
@@ -68,6 +68,15 @@ BLOCKER: beardog capability.call — sole P1 for 3-gate mesh.
 Remaining P2: transport injection (1/14 primals — sporePrint has TransportEndpoint).
 Phase 2 M1 (songbird TransportEndpoint) IN PROGRESS — types shipped, ipc.resolve next.
 Phase 2 M2-M4: CompositionContext Songbird query, capability registration, transport deprecation.
+
+Wave 97: sourDough ecobin audit on strandGate primals. 0/5 self-binding anti-patterns
+(clean for transport injection). sweetGrass flagged for C deps (ring, openssl) blocking
+ecoBin cross-arch. Investigation: ring is dev-only (testcontainers→bollard→rustls),
+openssl not in tree at all. Production binary is pure Rust. BUT: sweetGrass must
+HARD DROP ring from dev-deps and delegate ALL crypto to bearDog via Tower Atomic
+capability.call (capability='crypto'). No primal should carry its own crypto stack
+— bearDog IS the crypto spine. This is an ecoBin compliance AND security posture
+requirement. See [directive.sweetgrass] below.
 """
 
 [context]
@@ -118,6 +127,35 @@ ecoBin compliance: a primal binary must not assume Unix, TCP, or any
 specific transport. Transport is an injected dependency.
 """
 priority = "P2"
+
+[directive.sweetgrass]
+action = "Hard-drop C crypto deps (ring, openssl) — delegate to bearDog via Tower Atomic"
+priority = "P1"
+detail = """
+strandGate audit (Wave 97) found ring in sweetGrass dependency tree via
+testcontainers→bollard→rustls. openssl is not present. Production binary is
+currently pure Rust, but the dev-dep chain pulls ring (C/asm) which:
+
+1. Breaks ecoBin cross-arch compliance (ring fails on aarch64-linux-android,
+   GrapheneOS Pixel 8 — the blurb confirms beardog already hit this)
+2. Violates Tower Atomic security posture: no primal should carry its own
+   crypto stack. bearDog IS the ecosystem crypto spine. All crypto operations
+   (signing, hashing, TLS, key exchange) route through bearDog via
+   capability.call(capability='crypto', operation='crypto.*')
+3. Blocks isomorphic deployment: ring has platform-specific C/asm that
+   prevents single-binary deployment across all targets
+
+Action required:
+  - Remove testcontainers + bollard from dev-deps (replace with mock/stub)
+  - If any production code uses ring/rustls directly: replace with
+    bearDog capability.call(crypto.sign, crypto.encrypt, etc.)
+  - Verify: cargo tree -i ring --no-dev returns empty (zero production C deps)
+  - Run sourdough validate ecobin to confirm clean
+
+bearDog now ships capability.call (Wave 94, bc3dd077f) with 220+ methods
+including full crypto suite. The infrastructure is ready — sweetGrass just
+needs to consume it instead of carrying its own.
+"""
 
 [directive.biomeOS]
 action = "graph.deploy evolves to capability-only node declarations"
