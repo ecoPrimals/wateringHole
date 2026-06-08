@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-08T17"
+updated = "2026-06-08T17:18"
 priority = "P2"
 owner = "cellMembrane"
 note = """
@@ -132,18 +132,23 @@ Instead of: manual git fetch/pull loops
 priority = "P1"
 
 [directive.all_primals]
-action = "Upstream primal gaps for temporal membrane adoption"
+action = "Adopt transport standard locally, do NOT import sourdough-core"
 detail = """
-Transport injection gap (Phase 2 of transport evolution):
-- 0/14 primals have transport injection — all still self-bind
-- bearDog: 90 TCP refs — highest TCP density (crypto/TLS)
-- songBird: 267 TCP refs — expected (transport provider)
+Transport injection status (Wave 100):
+- sweetGrass v0.7.53: DONE (local impl, correct pattern)
+- nestGate Session 97: DONE (local impl, correct pattern)
+- barracuda: DONE but MUST FIX (imported sourdough-core — remove dep, impl locally)
+- rhizoCrypt: DONE but MUST FIX (imported sourdough-core — remove dep, impl locally)
+- loamSpine: ACK, ready for Wave 103
+- bearDog: 90 TCP refs — highest TCP density, needs transport injection
 - toadStool: 101 TCP refs — orchestrator needs transport abstraction
 - squirrel: 68 TCP refs — metrics needs UDS-first default
-- rhizoCrypt: 37 TCP refs — discovery transport self-binding
+- songBird: EXEMPT (transport provider)
+- biomeOS: EXEMPT (orchestrator)
 
-songBird is exempt as the transport provider. All others should evolve
-to accept injected transport from the launcher/Tower Atomic.
+sourDough is the REPOSITORY OF PRIMAL STANDARDS. It defines wire formats,
+validates compliance externally. Primals implement the TransportEndpoint type
+locally using self-knowledge only. The wire format is the contract.
 """
 priority = "P2"
 
@@ -170,17 +175,25 @@ resolution = "Wave 85: repo fsck clean, 6.4M, Forgejo active, disk 67% — trans
 
 [gaps.gap_3]
 id = "PRIMAL-TRANSPORT-01"
-description = "0/14 primals have transport injection — all self-bind TCP/UDS"
-owner = "songBird + all-primals"
+description = "Transport injection adoption across ecosystem"
+owner = "all-primals"
 priority = "P2"
 status = "IN PROGRESS"
-resolution = """Wave 97: sourDough absorbed TransportEndpoint (wire-compatible with songbird_types).
-sourdough-core has connect_transport(), IpcClient, TransportStream. Scaffold templates
-emit transport-injected primals. sourdough validate transport audits compliance.
-strandGate audit: 5/5 primals clean for self-binding, 0/5 adopted TransportEndpoint yet.
-cellMembrane absorbed transport.rs into cellmembrane-types. 1/14 (sporePrint) transport-agnostic.
-NUCLEUS tower redeployed from plasmidBin (eastGate). Musl segfault FIXED (static-pie).
-Next: ipc.resolve returns TransportEndpoint → all primals adopt."""
+resolution = """Wave 97: sourDough published TransportEndpoint wire standard.
+Wave 100: 4 primals responded to transport evolution trigger:
+  sweetGrass v0.7.53: LOCAL impl, wire-compatible, 0 new deps — CORRECT PATTERN
+  nestGate Session 97: LOCAL impl in nestgate-types, 13,116 tests — CORRECT PATTERN
+  barracuda 47a17b62: imported sourdough-core as path dep — MUST FIX (self-knowledge violation)
+  rhizoCrypt 1caf0f9: imported sourdough-core as path dep — MUST FIX (self-knowledge violation)
+  loamSpine: ACK, ready, LOW priority — no changes yet
+
+CRITICAL CLARIFICATION (Wave 100): sourDough defines the wire standard and validates
+compliance externally. Primals do NOT import sourdough-core as a crate dependency.
+Each primal implements TransportEndpoint locally. barracuda and rhizoCrypt must remove
+their sourdough-core path dep and implement the type locally, per primal self-knowledge.
+
+Adoption: 4/14 responded, 2/14 correct pattern, 2/14 need dep removal, ~8 remaining.
+Next: barracuda/rhizoCrypt fix deps, songBird ships ipc.resolve, remaining primals adopt."""
 
 [gaps.gap_4]
 id = "CM-WEBHOOK-01"

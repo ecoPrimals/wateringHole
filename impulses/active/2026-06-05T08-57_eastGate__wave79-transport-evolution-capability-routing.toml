@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["songBird", "bearDog", "biomeOS", "all-primals"]
 date = "2026-06-05"
-updated = "2026-06-08"
+updated = "2026-06-08T17:18"
 priority = "P2"
 owner = "songBird + biomeOS + cellMembrane"
 note = """
@@ -163,6 +163,17 @@ All primals must evolve toward transport ignorance. A primal provides
 capabilities and consumes capabilities. How they connect is decided by
 Songbird (runtime) and Tower Atomic (composition). No primal should
 hardcode TcpListener::bind or UnixListener::bind — transport is injected.
+
+CRITICAL: sourDough is the REPOSITORY OF PRIMAL STANDARDS — it defines
+wire formats, validates compliance, and scaffolds new primals. But primals
+do NOT import sourdough-core as a dependency. Each primal implements the
+TransportEndpoint type locally using self-knowledge only. The wire format
+(serde tagged JSON: uds/tcp/mesh_relay) is the contract. sourDough validates
+compliance externally via 'sourdough validate transport'.
+
+Correct: sweetGrass, nestGate — local TransportEndpoint type, wire-compatible.
+Incorrect: barracuda, rhizoCrypt — imported sourdough-core as path dep. Must
+remove the dep and implement the type locally to preserve primal self-knowledge.
 """
 
 [directive.songbird]
@@ -178,15 +189,28 @@ This enables Tower Atomic to select transport without string parsing.
 priority = "P1"
 
 [directive.all_primals]
-action = "Accept transport injection, do not self-bind"
+action = "Accept transport injection, do not self-bind, do NOT import sourdough-core"
 detail = """
 Current: primals parse --port/--socket/--bind CLI flags and self-bind.
 Target: primals receive a transport channel from the launcher/Tower.
-Interim: primals accept --socket for UDS (current), with the understanding
-that the launcher decides the path, not the primal.
+Interim: primals accept TRANSPORT_ENDPOINT env var (JSON, serde tagged).
+
+Each primal implements TransportEndpoint LOCALLY in its own types crate.
+The wire format is the standard — do NOT import sourdough-core as a dep.
+sourDough defines the spec and validates compliance externally.
+
+Wave 100 adoption status:
+  sweetGrass v0.7.53: LOCAL impl, wire-compatible, 0 new deps — CORRECT
+  nestGate Session 97: LOCAL impl in nestgate-types, 13,116 tests — CORRECT
+  barracuda 47a17b62: imported sourdough-core as path dep — MUST FIX
+  rhizoCrypt 1caf0f9: imported sourdough-core as path dep — MUST FIX
+  loamSpine: ACK, ready, LOW priority — no changes yet
+  songBird: EXEMPT (transport provider)
+  biomeOS: EXEMPT (orchestrator)
 
 ecoBin compliance: a primal binary must not assume Unix, TCP, or any
-specific transport. Transport is an injected dependency.
+specific transport. Transport is an injected dependency. And a primal
+must not depend on another primal's crate — self-knowledge only.
 """
 priority = "P2"
 

@@ -55,12 +55,14 @@ We have a live 3-gate LAN with confirmed-alive peers. The protocol layer works �
 
 ## All Primals — Transport Evolution Trigger
 
-sourDough has shipped the canonical transport standard. The ecosystem is now ready for transport injection adoption. Here's the standard and what each primal needs to do:
+sourDough has published the canonical transport standard. sourDough is the **repository of primal standards** — it defines wire formats, validates compliance, and scaffolds new primals. But primals do NOT import `sourdough-core` as a dependency. Each primal implements the standard independently using only self-knowledge. The wire format is the contract.
 
-### The Standard (sourDough TransportEndpoint)
+**IMPORTANT**: Do NOT add `sourdough-core` as a crate dependency. That violates primal self-knowledge — a primal only knows itself. Instead, implement the `TransportEndpoint` type locally in your primal's types crate, with the same `#[serde(tag = "transport")]` wire format. sweetGrass and nestGate did this correctly. barracuda and rhizoCrypt: please remove the `sourdough-core` path dep and implement locally.
+
+### The Wire Standard (defined by sourDough, implemented by each primal)
 
 ```rust
-// Wire format (JSON, serde tagged):
+// Wire format (JSON, serde tagged — implement this locally):
 { "transport": "uds", "path": "/run/user/1000/biomeos/beardog.sock" }
 { "transport": "tcp", "host": "127.0.0.1", "port": 9100 }
 { "transport": "mesh_relay", "peer_id": "strandgate", "capability": "security" }
@@ -72,11 +74,12 @@ sourDough has shipped the canonical transport standard. The ecosystem is now rea
 
 ### What each primal needs
 
-1. **Add** `sourdough-core` as a dependency (provides `TransportEndpoint`, `connect_transport()`, `IpcClient`)
-2. **Accept** `TRANSPORT_ENDPOINT` env var in main.rs — parse with `serde_json::from_str::<TransportEndpoint>()`
-3. **Use** `connect_transport(&endpoint)` instead of raw `TcpStream::connect` or `UnixStream::connect` for outbound IPC
+1. **Implement** `TransportEndpoint` locally in your types crate (same serde tagged format — the wire format IS the standard)
+2. **Implement** `connect_transport()` locally (UDS/TCP dispatch — ~30 lines of Rust)
+3. **Accept** `TRANSPORT_ENDPOINT` env var in main.rs — parse with `serde_json::from_str::<TransportEndpoint>()`
 4. **Remove** hardcoded `TcpListener::bind("0.0.0.0:PORT")` from production paths — the launcher binds, not the primal
 5. **Keep** `--port` as a Tier 5 fallback (debug/standalone mode only)
+6. **Do NOT** import `sourdough-core` — reference it as a specification, not a dependency
 
 ### Priority order
 
@@ -96,12 +99,14 @@ sourDough has shipped the canonical transport standard. The ecosystem is now rea
 | biomeOS | ~40 | EXEMPT | Orchestrator — manages transport for others |
 | songBird | 267 | EXEMPT | Transport provider — owns the transport layer |
 
-### Scaffold reference
+### Reference implementation
 
-New primals scaffolded with `sourdough scaffold` already emit transport-injected code. Existing primals can reference the template at:
-```
-sourDough/crates/sourdough/src/commands/scaffold/templates/server.rs
-```
+sourDough's scaffold templates show the canonical pattern for new primals. Existing primals should reference the wire format and implement locally:
+- Wire format spec: `sourDough/crates/sourdough-core/src/transport.rs` (read, don't import)
+- Scaffold template: `sourDough/crates/sourdough/src/commands/scaffold/templates/server.rs`
+- Correct adoption: sweetGrass `sweet_grass_core::transport` — local type, wire-compatible
+- Correct adoption: nestGate `nestgate-types::transport` — local type, wire-compatible
+- **Incorrect**: barracuda/rhizoCrypt `sourdough-core` path dep — remove and implement locally
 
 **Target**: All non-exempt primals accept `TRANSPORT_ENDPOINT` by Wave 103. sourDough `validate transport` will be run against the full ecosystem and results published.
 
