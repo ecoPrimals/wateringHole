@@ -101,6 +101,44 @@ Full NUCLEUS deployed on eastGate: 13/13 primals running, all IPC-live over UDS.
 biomeos fix applied (neural-api subcommand, not server). primalspring removed from
 COMP_FULL (13 deployable primals, primalspring is a validation spring).
 VPS peptidoglycan rebuild needed for stale binaries (7/14 stale after cascade).
+
+Wave 99 (mesh revalidation): 3-gate mesh revalidation attempted.
+LAN peer at 192.168.1.173:7700 CONFIRMED ALIVE (HTTP /jsonrpc returns alive).
+strandGate (192.168.1.100) federation ports CLOSED — running UDS-only.
+mesh.init from eastGate returns initialized:true but bootstrap_peers_added:0.
+ROOT CAUSE: Two upstream blockers still active:
+  SB-TLS-LAN-01 (STILL ACTIVE): songbird TLS handshake fails — beardog rejects
+    crypto.x25519_generate_ephemeral (requires capability token). Peer probe pipeline
+    attempts TLS ClientHello, beardog denies the crypto call, probe fails.
+  SB-SECURITY-URL-01 (NEW): songbird formats beardog trust/evaluate URL as relative
+    path (beardog/api/v1/trust/evaluate) instead of UDS socket path → Invalid URL.
+    This blocks peer trust evaluation even when direct HTTP reachability is confirmed.
+eastGate songbird has NO federation TCP port (launched --uds-only). For mesh, songbird
+needs at minimum a federation HTTP port open for peer probes (--port or similar).
+HANDOFF: songbird team must fix security provider URL resolution to use UDS socket
+path, and beardog team must allow crypto.x25519 calls from songbird without capability
+token (or songbird must acquire the token during Tower Atomic startup).
+
+Wave 99b (post-cascade revalidation): songbird 4eb5111d pulled — PARTIAL FIX.
+songbird rebuilt from source with P1 fix commit. Deployed to eastGate with:
+  SECURITY_PROVIDER_SOCKET=/tmp/biomeos/biomeos/security.sock
+  BEARDOG_SOCKET=/tmp/biomeos/biomeos/beardog-6df362cb.sock
+  SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0 --port 7700
+Federation port *:7700 LIVE. Local /health and /jsonrpc respond correctly.
+SB-SECURITY-URL-01 PARTIAL: security_setup.rs now resolves bare names to socket paths
+via XDG scanning (resolve_bare_name_to_endpoint). BUT security_client still appends
+REST path to socket path: /tmp/biomeos/biomeos/security.sock/api/v1/trust/evaluate
+→ Invalid URL: Missing scheme. Security client needs UDS JSON-RPC, not HTTP over path.
+SB-TLS-LAN-01 IMPROVED: TLS handshake now properly detects plain HTTP responses
+(logged: 'Server responded with HTTP instead of TLS'). BUT HttpRemoteConnection
+fallback (http_remote.rs, 151 lines) not yet triggered on TLS failure → mesh.init
+still returns bootstrap_peers_added:0.
+biomeOS v4.14 (a459ec58): LocalTrusted access level pushed to git but running binary
+is pre-v4.14. composition.deploy still auth-gated on running instance.
+coralReef capabilities.list fix (15d1702) pushed to git but running binary is pre-fix.
+NEXT: songbird security_client must use UDS JSON-RPC for trust evaluation on local
+socket. HttpRemoteConnection fallback path needs activation on TLS detection failure.
+biomeOS + coralReef need rebuild from latest commits for full validation.
 """
 
 [context]
@@ -154,7 +192,7 @@ priority = "P2"
 
 [directive.sweetgrass]
 action = "Hard-drop C crypto deps (ring, openssl) — delegate to bearDog via Tower Atomic"
-priority = "P1"
+priority = "RESOLVED"
 detail = """
 strandGate audit (Wave 97) found ring in sweetGrass dependency tree via
 testcontainers→bollard→rustls. openssl is not present. Production binary is
@@ -203,6 +241,19 @@ self-binding, 0/5 have TransportEndpoint yet (waiting on ipc.resolve).
 NUCLEUS tower redeployed from plasmidBin on eastGate (beardog+songbird+skunkbat).
 cellMembrane absorbed transport.rs into cellmembrane-types. Harvest improvements shipped.
 ipc.resolve NEXT (Phase 2 M1). 1/14 primals transport-agnostic (sporePrint).
+
+Wave 99: Full NUCLEUS 13/13 on eastGate (all IPC-live over UDS). IPC compliance sweep:
+12/12 liveness PASS, 12/12 readiness PASS, 11/12 capabilities PASS (coralReef missing).
+nucleus-deploy --graph-deploy flag ships: probes biomeOS, calls composition.deploy +
+graph.status. Auth-gated by BTSP (expected — beardog cap token integration needed).
+XDG_RUNTIME_DIR fix in nucleus-deploy config. Pixel deploy: all 13 startup handlers
+wired, aarch64-linux-android path discovery added. 1/14 aarch64 built (sourdough),
+12 pending cross-compile. sweetGrass ring elimination RESOLVED (v0.7.52).
+GLACIAL_SHIFT_READINESS updated with Wave 99 status.
+
+3-gate mesh still BLOCKED: SB-TLS-LAN-01 (beardog rejects crypto.x25519 without cap
+token) + SB-SECURITY-URL-01 (songbird formats beardog URL as relative path not UDS).
+LAN peer CONFIRMED ALIVE at 192.168.1.173:7700 (HTTP /jsonrpc returns alive).
 """
 phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE. All 14 primals ready. plasmidBin fully harvested. sourDough validate transport enables systematic compliance auditing. After 3-gate mesh proven + ipc.resolve, all primals adopt TransportEndpoint."
 
