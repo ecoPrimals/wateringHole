@@ -1691,13 +1691,13 @@ elimination resolved Wave 98. All primals are now pure Rust application code.
 
 | Target Triple | Status | Blocker |
 |---------------|--------|---------|
-| `x86_64-unknown-linux-musl` | 14/14 depot, operational | — |
-| `aarch64-unknown-linux-musl` | 3/14 built, **UNBLOCKED** | Sweep pending |
-| `aarch64-linux-android` | 3/14 built, **UNBLOCKED** | Sweep pending |
+| `x86_64-unknown-linux-musl` | **14/14 depot, operational** (VPS authority) | — |
+| `aarch64-unknown-linux-musl` | **14/14 BUILT** (Wave 105 sweep complete) | NDK android next |
+| `aarch64-linux-android` | 6/13 running on grapheneGate (Pixel 8) | UDS adaptation for 7 primals |
 | `x86_64-pc-windows-msvc` | 0/14 | Not yet attempted |
 | `wasm32-wasi` | 0/14 | Design phase |
 
-All non-x86 targets are now UNBLOCKED. cellMembrane aarch64 sweep can proceed.
+All non-x86 targets UNBLOCKED. aarch64-musl sweep COMPLETE. **All gates fetch from VPS depot.**
 
 ---
 
@@ -1706,9 +1706,29 @@ All non-x86 targets are now UNBLOCKED. cellMembrane aarch64 sweep can proceed.
 Every primal that passes ecoBin must submit its binary to `ecoPrimals/infra/plasmidBin/`.
 This is the ecosystem's shared binary distribution surface.
 
-### Self-service submission
+**POST-PRIMORDIAL DEPLOYMENT STANDARD (Wave 105c)**:
+- **peptidoglycan/VPS is the sole build authority** — all production binaries are built on peptidoglycan
+- **All gates FETCH from VPS** (`membrane.primals.eco/depot/`) — no local rebuilds for deployment
+- `checksums.toml` always reflects VPS/peptidoglycan output
+- Local `cargo build --release` is for **development/testing ONLY** — never deployed to `plasmidBin/primals/`
+- Violating this breaks the post-primordial deployment model
+
+### Deployment (all gates)
 
 ```bash
+# Fetch from VPS (the sole authority):
+membrane plasmid.fetch --source vps
+
+# Or direct fetch:
+curl -o plasmidBin/primals/x86_64-unknown-linux-musl/YOUR_PRIMAL \
+  https://membrane.primals.eco/depot/x86_64-unknown-linux-musl/YOUR_PRIMAL
+chmod +x plasmidBin/primals/x86_64-unknown-linux-musl/YOUR_PRIMAL
+```
+
+### Build submission (peptidoglycan only)
+
+```bash
+# ON PEPTIDOGLYCAN (VPS build authority) ONLY:
 cd /path/to/your-primal
 
 # 1. Build musl-static for x86_64
@@ -1721,11 +1741,12 @@ file target/x86_64-unknown-linux-musl/release/YOUR_PRIMAL
 # 3. Cross-compile for aarch64 (if .cargo/config.toml is set up)
 cargo build --release --target aarch64-unknown-linux-musl
 
-# 4. Harvest into plasmidBin
-cd /path/to/ecoPrimals/infra/plasmidBin
-./harvest.sh --primal YOUR_PRIMAL --source /path/to/staging/x86_64
-./harvest.sh --primal YOUR_PRIMAL --arch aarch64 --source /path/to/staging/aarch64
+# 4. Harvest into plasmidBin (peptidoglycan deploys to VPS depot)
+membrane plasmid.harvest YOUR_PRIMAL
 ```
+
+**DEPRECATED**: Direct local `cargo build` → `plasmidBin/primals/` on any gate.
+If you are building locally and copying to depot, you broke post-primordial deployment.
 
 ### Compliance checklist
 

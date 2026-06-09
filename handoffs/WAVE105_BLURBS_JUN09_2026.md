@@ -1,11 +1,13 @@
-# Wave 105 Blurbs — Zero P1, All Targets Built, Stadial Gate in Sight
+# Wave 105c Blurbs — Post-Primordial Depot Standard Enforced
 
 **Date**: 2026-06-09
 **From**: eastGate overwatch
 
-**What just landed**: Zero P1 blockers. Dual-target depot (x86_64 14/14 + aarch64 14/14). WAN depot DEPLOYED and validated. biomeOS graph.deploy VALIDATED (LocalTrusted). Mesh 17h+ stable. checksums.toml multi-target pipeline fix shipped same-wave by cellMembrane. primalSpring Wave 105: canonical `is_skippable()`, 887 tests, PRIMAL_GAPS current.
+**CRITICAL UPDATE**: **Post-primordial depot standard is now ENFORCED.** VPS (peptidoglycan) is the sole depot authority. All gates FETCH from `membrane.primals.eco/depot/`. eastGate local depot has been re-fetched from VPS — 13/13 BLAKE3 verified, NUCLEUS restarted from VPS-authoritative binaries. **All direct/local `cargo build` deployment is DEPRECATED.** If you are deploying from local build output, you broke post-primordial deployment.
 
-**Where we are**: The ecosystem is at full readiness. Every former P1 is resolved. Every P2 handed off this wave has been actioned or shipped. S4 auth gate ending today — if PASS, all 4 sovereignty shadows graduate on the inner membrane.
+**What just landed**: Zero P1 blockers. Dual-target depot (x86_64 14/14 + aarch64 14/14). WAN depot DEPLOYED. biomeOS graph.deploy VALIDATED (LocalTrusted). Mesh 17h+ stable. CM-CHECKSUM-MULTI-TARGET + CM-DEPOT-DIVERGENCE both RESOLVED. primalSpring Wave 105: canonical `is_skippable()`, 887 tests, PRIMAL_GAPS current.
+
+**Where we are**: The ecosystem is at full readiness with VPS-authoritative deployment enforced. Every former P1 is resolved. S4 auth gate ending today — if PASS, all 4 sovereignty shadows graduate on the inner membrane.
 
 **This wave's focus**: Each team has a clear next item. Read your section below.
 
@@ -87,8 +89,10 @@ Protocol proven (eastGate↔strandGate 17h+ stable). ironGate has 23 UDS sockets
 | Cascade auto-resolve (was P2) | cellMembrane | SHIPPED — auto-discards regenerable metadata |
 | biomeOS graph.deploy (was P2) | primalSpring | VALIDATED — LocalTrusted, 13-phase composition |
 | CM-CHECKSUM-MULTI-TARGET (P2) | cellMembrane | SHIPPED same-wave — read-modify-write + validation gate |
-| bearDog depot rebuild | eastGate | FRESH — v0.9.0 pure Rust, 11.2MB |
-| biomeOS depot rebuild | eastGate | FRESH — v4.16, 15.9MB |
+| ~~bearDog depot rebuild~~ | eastGate | **DEPRECATED** — local rebuild was a post-primordial violation. Re-fetched from VPS. |
+| ~~biomeOS depot rebuild~~ | eastGate | **DEPRECATED** — local rebuild was a post-primordial violation. Re-fetched from VPS. |
+| CM-DEPOT-DIVERGENCE (was P2) | eastGate | RESOLVED — was self-inflicted local rebuild, not upstream issue |
+| Post-primordial depot standard | eastGate | ENFORCED — all 13/13 binaries from VPS, BLAKE3 verified |
 | primalSpring is_skippable() | primalSpring | SHIPPED — 35 ad-hoc guards → 1 canonical predicate |
 
 ## Remaining Work Map
@@ -115,7 +119,7 @@ eastGate overwatch:
 | Metric | Value |
 |--------|-------|
 | P1 blockers | **0** |
-| P2 remaining | 4 (flockGate WAN, grapheneGate NDK, ironGate mesh, VPS depot sync) |
+| P2 remaining | 3 (flockGate WAN, grapheneGate NDK, ironGate mesh) |
 | Mesh | LIVE (eastGate↔strandGate, **17h+** stable) |
 | Transport | 11/11 non-exempt COMPLETE |
 | Depot x86_64 | 14/14 BLAKE3 VERIFIED |
@@ -130,6 +134,6 @@ eastGate overwatch:
 
 - `wave104-cross-deployment-readiness.toml` — FRAGO (8 resolved, 4 remaining)
 - `handoffs/cellMembrane/AAR_CELLMEMBRANE_WAVE105_DEPOT_HARVEST_ATOMIC_REPLACE_JUN09_2026.md` — dual AAR
-- `GLACIAL_SHIFT_READINESS.md` — updated to Wave 105b
+- `GLACIAL_SHIFT_READINESS.md` — updated to Wave 105c (post-primordial enforced)
 - `GRAPHENEGATE_BOOTSTRAP_STANDARD.md` — Pixel trust model
 - `plasmidBin/graphs/nucleus_complete.toml` — composition graph for graph.deploy

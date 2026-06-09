@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-09 (Wave 105b — **ZERO P1 BLOCKERS**. grapheneGate FIRST DEPLOY: 6/13 primals on Pixel 8 (bearDog BTSP production, songbird federation). flockGate WAN e2e 4/5 PASS (blocked on VPS songbird relay). ironGate mesh INITIALIZED (blocked on eastGate port 7700). CM-VPS-DEPOT-SYNC SHIPPED. CM-CHECKSUM-MULTI-TARGET RESOLVED. NEW P2: CM-DEPOT-DIVERGENCE (inner/outer membrane depot binaries differ). primalSpring Wave 105b: grapheneGate deploy, cast safety, 887 tests.)
+**Last updated**: 2026-06-09 (Wave 105c — **POST-PRIMORDIAL DEPOT STANDARD ENFORCED**. VPS (peptidoglycan) is the sole depot authority. eastGate local depot re-fetched from VPS — 13/13 BLAKE3 verified, NUCLEUS restarted from VPS-authoritative binaries. CM-DEPOT-DIVERGENCE reclassified: was self-inflicted local rebuild violation, now RESOLVED. grapheneGate FIRST DEPLOY: 6/13 on Pixel 8. flockGate WAN e2e 4/5 PASS. All direct/local depot deployment DEPRECATED.)
 
 ---
 
@@ -15,11 +15,17 @@ over UDS. Transport injection at **11/11 non-exempt primals COMPLETE** (toadStoo
 Wave 104) — all using correct LOCAL implementation pattern, zero self-knowledge violations.
 
 **Deployment surface (ecoBin target matrix)**:
-- `x86_64-unknown-linux-musl`: 14/14 depot fresh, LAN/VPS/WAN operational
-- `aarch64-unknown-linux-musl`: **14/14 BUILT** (Wave 105 sweep complete, zero C-dep violations). NOTE: sweep overwrote x86_64 checksums — pipeline fix pending (CM-CHECKSUM-MULTI-TARGET).
+- `x86_64-unknown-linux-musl`: 14/14 depot fresh, LAN/VPS/WAN operational. **All gates fetch from VPS — no local rebuilds.**
+- `aarch64-unknown-linux-musl`: **14/14 BUILT** (Wave 105 sweep complete, zero C-dep violations). CM-CHECKSUM-MULTI-TARGET RESOLVED (pipeline fix shipped).
 - `aarch64-linux-android`: **UNBLOCKED** (aarch64-musl proven). NDK cross-compile pending. grapheneGate (Pixel 8) is the portable root of trust + gate spawner.
 - `x86_64-pc-windows-msvc`: 0/14, future (Windows gates, named pipes IPC)
 - `wasm32-wasi`: 0/14, design phase (browser/edge/embedded)
+
+**POST-PRIMORDIAL DEPLOYMENT STANDARD**: peptidoglycan/VPS is the sole build authority.
+All gates FETCH from `membrane.primals.eco/depot/`. `checksums.toml` reflects VPS output.
+Local `cargo build --release` is for development/testing ONLY — never deployed to
+`plasmidBin/primals/`. This is enforced, not advisory. Violating this breaks the
+post-primordial deployment model and causes depot divergence.
 
 **ZERO P1 blockers remain.** Both former P1s are RESOLVED:
 1. ~~bearDog `aws-lc-rs`~~ → RESOLVED (Wave 145): `rustls-rustcrypto` pure Rust. All non-x86 targets UNBLOCKED.
@@ -323,7 +329,8 @@ fossilRecord) — see `fossilRecord/` for detail.
 | ~~biomeOS graph.deploy revalidation~~ | biomeOS + eastGate | ~~P2~~ | **VALIDATED** (Wave 105) — v4.16 composition.deploy accepted, graph.status 13 phases, LocalTrusted. |
 | ~~CM-CASCADE-CONFLICT~~ | cellMembrane | ~~P2~~ | **RESOLVED** (Wave 105) — cascade auto-discards dirty regenerable metadata before ff-only pull. |
 | CM-VPS-DEPOT-SYNC | cellMembrane | **P2** | golgiBody inner→outer membrane binary flow for WAN depot. |
-| **CM-CHECKSUM-MULTI-TARGET** | cellMembrane | **P2** | checksums.toml pipeline must be multi-target aware. aarch64 sweep destroyed x86_64 entries (upstream cascade failure). Ad-hoc restored. |
+| ~~CM-CHECKSUM-MULTI-TARGET~~ | cellMembrane | ~~P2~~ | **RESOLVED** (Wave 105) — read-modify-write for multi-target checksums.toml shipped (commit 3a1900b). |
+| ~~CM-DEPOT-DIVERGENCE~~ | eastGate | ~~P2~~ | **RESOLVED** (Wave 105c) — was self-inflicted: local rebuilds violated post-primordial standard. Fixed by re-fetching 13/13 from VPS. Standard now enforced. |
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
 | grapheneGate UDS adaptation | primalSpring (parallel) | **P2** | 7 primals need Android socket path remapping. 6/13 already running on Pixel 8. NDK blocked on bearDog StrongBox (bearDog team debt). |
 | ~~aarch64 cross-compilation~~ | cellMembrane | ~~P2~~ | **COMPLETE** (Wave 105) — 14/14 aarch64-musl built, zero C-dep violations. NOTE: sweep overwrote x86_64 checksums (CM-CHECKSUM-MULTI-TARGET). |
@@ -371,7 +378,7 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 105)**: **ZERO P1 BLOCKERS. MESH LIVE. TRANSPORT COMPLETE (11/11). DEPOT 14/14 VERIFIED. bearDog P1 RESOLVED. WAN DEPOT SHIPPED. CASCADE AUTO-RESOLVE SHIPPED. S4 ENDING TODAY. aarch64 UNBLOCKED. STADIAL GATE WITHIN REACH.**
+**Current assessment (Wave 105c)**: **ZERO P1 BLOCKERS. MESH LIVE. TRANSPORT COMPLETE (11/11). DEPOT 14/14 VERIFIED (VPS AUTHORITY). bearDog P1 RESOLVED. WAN DEPOT SHIPPED. CASCADE AUTO-RESOLVE SHIPPED. S4 ENDING TODAY. aarch64 UNBLOCKED. POST-PRIMORDIAL DEPOT STANDARD ENFORCED. STADIAL GATE WITHIN REACH.**
 
 **Wave 98-103 milestones**:
 - Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 12/12 capabilities with coralReef depot fix)
@@ -463,7 +470,8 @@ timer deployed. benchScale IPC compliance sweep validates 12/12 primals. biomeOS
 
 Software items: **ZERO P1 blockers.** Transport 11/11 COMPLETE. Depot 14/14 x86_64 + 14/14 aarch64 BUILT.
 bearDog pure Rust SHIPPED. biomeOS v4.16 graph.deploy VALIDATED. WAN depot DEPLOYED. Cascade auto-resolve
-SHIPPED. aarch64 sweep COMPLETE. One new P2: CM-CHECKSUM-MULTI-TARGET (pipeline fix for multi-target checksums).
+SHIPPED. aarch64 sweep COMPLETE. CM-CHECKSUM-MULTI-TARGET RESOLVED. CM-DEPOT-DIVERGENCE RESOLVED (was
+self-inflicted local rebuild violation). **Post-primordial depot standard enforced: VPS-only deployment.**
 
 ---
 

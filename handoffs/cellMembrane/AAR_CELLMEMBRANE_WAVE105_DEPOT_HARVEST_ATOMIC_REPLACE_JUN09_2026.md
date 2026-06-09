@@ -188,35 +188,45 @@ checksums for automated verification without local fallback).
 
 ---
 
-## AAR: Inner/Outer Membrane Depot Divergence (Wave 105b)
+## AAR: Post-Primordial Deployment Violation — Local Rebuilds (Wave 105b)
 
 ### Incident
 
-Commit `64e275e` replaced x86_64 checksum entries with hashes from the VPS (outer
-membrane) depot. The VPS depot has different binaries (unstripped, different compiler
-settings) from the eastGate local depot (stripped, manually rebuilt). After cascade,
-all 14 x86_64 checksums on eastGate show MISMATCH.
+During Wave 105, eastGate manually rebuilt bearDog and biomeOS from local source
+and deployed them to the local depot, bypassing the post-primordial deployment
+standard. This created a divergence between the VPS-authoritative depot (peptidoglycan)
+and the local depot.
+
+When commit `64e275e` correctly updated checksums.toml to match the VPS depot (the
+authority), all 14 local checksums showed MISMATCH because the local binaries were
+ad-hoc rebuilt, not VPS-fetched.
 
 ### Root Cause
 
-Two independent depot instances with no sync — eastGate local `plasmidBin/primals/`
-and VPS `/opt/ecoPrimals/plasmidBin/primals/` are different binaries built independently.
-`checksums.toml` is a shared file in git that claims to represent "the depot" — but
-there are now 3 depots (eastGate, VPS, aarch64) with different binaries.
+**The local rebuilds were the violation, not the checksums.** Post-primordial deployment
+mandates: peptidoglycan/VPS builds, plasmidBin is the single depot authority, all gates
+FETCH from plasmidBin — no local `cargo build --release` for deployment.
 
-### Recommendation
+### Resolution
 
-**Option A**: Per-gate checksum sections (`[eastGate.x86_64-musl]`, `[golgiBody.x86_64-musl]`)
-**Option B**: Single build authority (peptidoglycan builds, all gates fetch — no local rebuilds)
-**Option C**: Drop checksums from git — each gate verifies locally after fetch
+1. Stopped all locally-rebuilt NUCLEUS primals
+2. Fetched all 13 server binaries from VPS depot (`membrane.primals.eco/depot/`)
+3. Verified 13/13 BLAKE3 checksums match VPS authority (sourdough is CLI-only, not on VPS)
+4. Restarted NUCLEUS from VPS-fetched binaries — 23 JSON-RPC sockets alive
+5. **Local depot is now in sync with VPS authority**
 
-Option B is most correct for the diderm model: peptidoglycan builds, all checksums
-derive from peptidoglycan output. Local rebuilds should be considered temporary overrides.
+### Post-Primordial Standard (reinforced)
+
+- **DO NOT** `cargo build --release` for deployment on any gate
+- **DO** `membrane plasmid.fetch` or `curl` from VPS depot
+- **peptidoglycan builds** → plasmidBin checksums → all gates fetch
+- Local builds are for development/testing ONLY, never deployed to `plasmidBin/primals/`
+- `checksums.toml` always reflects the VPS/peptidoglycan authority
 
 ### Classification
 
-Upstream cascade failure — checksums mutated to represent a different gate's depot.
-P2 (primals run, but formal verification broken for non-matching gates).
+Self-inflicted divergence from post-primordial standard. Corrected by re-fetching
+from VPS authority. No upstream cascade failure — the checksums were correct.
 
 ---
 

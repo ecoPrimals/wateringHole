@@ -43,8 +43,8 @@ biomeos_graph = "VALIDATED — v4.16 composition.deploy accepted, graph.status 1
 primalspring = "Wave 105b: grapheneGate deploy (6/13 running on Pixel 8), sequential_graph flake fix, cast-safety fixes, 887 tests 0 failures."
 graphenegate = "Wave 105b: 13/13 aarch64-musl BUILT on eastGate. 6/13 primals RUNNING on Pixel 8 (beardog + songbird + rhizocrypt + loamspine + sweetgrass + squirrel). bearDog BTSP production mode LIVE. NDK (aarch64-linux-android) blocked by bearDog StrongBox module (16 compilation errors). 7 primals need Android UDS path adaptation. deploy_pixel.sh FAMILY_SEED fix shipped."
 flockgate_wan = "Wave 105: WAN e2e 4/5 PASS — fetch/launch/mesh.init/health all OK. BLOCKED on VPS songbird relay (no songbird on VPS:7700 for WAN federation)."
-depot_divergence = "WARNING: eastGate local depot and VPS outer membrane depot have DIVERGED. checksums.toml updated to VPS ground truth (commit 64e275e) — invalidates local eastGate verification. Needs resolution: per-gate checksums or single build authority."
-p1_blockers = "ZERO. All former P1s resolved. NEW P2: CM-DEPOT-DIVERGENCE (inner/outer depot binaries differ)."
+depot_authority = "VPS (peptidoglycan) is the SOLE depot authority. eastGate local depot re-fetched from VPS — 13/13 BLAKE3 verified. Post-primordial standard enforced: no local rebuilds for deployment."
+p1_blockers = "ZERO. All former P1s resolved. Post-primordial depot standard reinforced."
 
 # ──────────────────────────────────────────────────────────────
 # DEPLOYMENT TARGET MATRIX (ecoBin standard)
@@ -222,20 +222,16 @@ resolution = """biomeOS v4.16 composition.deploy accepted on eastGate. graph.sta
 by parallel primalSpring team. Composition graph definitions (nucleus_complete.toml,
 tower_atomic.toml) deployed to plasmidBin/graphs/."""
 
-[remaining.cm_depot_divergence]
+[resolved.depot_authority_enforced]
 id = "CM-DEPOT-DIVERGENCE"
-owner = "cellMembrane"
-priority = "P2"
-description = "Inner/outer membrane depot binaries have diverged — checksums.toml represents VPS, not local gates"
-why = """eastGate local depot (stripped, manually rebuilt) and VPS outer membrane depot
-(unstripped, peptidoglycan-built) have different binaries. checksums.toml was updated
-to VPS ground truth (commit 64e275e), invalidating local gate verification. This is
-fundamentally a single-file-for-multiple-depots problem."""
-action = """Choose one:
-A. Per-gate sections in checksums.toml ([eastGate.x86_64-musl], [golgiBody.x86_64-musl])
-B. Single build authority (peptidoglycan builds, all gates fetch — no local rebuilds)
-C. Drop checksums from git (each gate verifies locally after fetch)
-Option B is recommended for the diderm model. See cellMembrane AAR for full analysis."""
+owner = "eastGate"
+priority = "was-P2"
+description = "RESOLVED — post-primordial depot standard enforced, local depot re-fetched from VPS"
+resolution = """The divergence was caused by ad-hoc local rebuilds on eastGate, violating
+post-primordial deployment. Resolution: stopped all locally-rebuilt primals, fetched 13/13
+from VPS (membrane.primals.eco/depot/), verified BLAKE3 checksums, restarted NUCLEUS.
+Standard reinforced: peptidoglycan/VPS is the sole build authority. No local cargo build
+for deployment. checksums.toml always reflects VPS output."""
 
 [remaining.vps_songbird_relay]
 id = "VPS-SONGBIRD-RELAY"
