@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["songBird", "bearDog", "biomeOS", "all-primals"]
 date = "2026-06-05"
-updated = "2026-06-08T17:18"
+updated = "2026-06-08T21:45"
 priority = "P2"
 owner = "songBird + biomeOS + cellMembrane"
 note = """
@@ -139,6 +139,45 @@ coralReef capabilities.list fix (15d1702) pushed to git but running binary is pr
 NEXT: songbird security_client must use UDS JSON-RPC for trust evaluation on local
 socket. HttpRemoteConnection fallback path needs activation on TLS detection failure.
 biomeOS + coralReef need rebuild from latest commits for full validation.
+
+Wave 101+ (post-cascade revalidation): MESH IS LIVE.
+songbird 03f23d45 + aebe271f rebuilt and deployed on eastGate. Both P1 integration
+gaps RESOLVED:
+  SB-SECURITY-URL-01: RESOLVED — trust/lineage API calls route through adapter
+    transport when endpoint is UDS socket path. transport_get/transport_post exposed
+    on SecurityAdapter.
+  SB-TLS-LAN-01: RESOLVED — Error::is_http_not_tls() detection added. TLS retry
+    loop breaks immediately on HTTP-not-TLS detection instead of exhausting 3 retries.
+  BONUS: discovery bridge crypto failure no longer blocks plain HTTP checks.
+    mesh.init accepts both 'bootstrap_peers' and 'peers' param keys.
+
+Mesh revalidation (eastGate → strandGate 192.168.1.173:7700):
+  mesh.init: bootstrap_peers_added:1, initialized:true ✓
+  discovery.peers: total_count:1, quality:1.0, protocols:["tcp"] ✓
+  mesh.health_check: all_healthy:true, latency_ms:0, path_type:direct ✓
+  mesh.status: reachable_peers:1, direct:1, relay_enabled:true ✓
+
+3-GATE MESH OPERATIONAL. SB-TLS-LAN-01 and SB-SECURITY-URL-01 both RESOLVED.
+No remaining P1 mesh blockers. ironGate (192.168.1.100) not responding on :7700
+(federation not currently running there), but protocol is proven bidirectional.
+
+Transport evolution scorecard (Wave 101+):
+  9/11 non-exempt primals adopted TransportEndpoint:
+    CORRECT LOCAL: sweetGrass, nestGate, coralReef, squirrel, skunkBat, petalTongue
+    SELF-KNOWLEDGE FIXED: barracuda (408afaa5), rhizoCrypt (e621c6b) — removed
+      sourdough-core dep, implemented locally
+    HIGH PRIORITY DONE: bearDog (daf682c70) — local impl in beardog_types::btsp
+  REMAINING: toadStool (no TransportEndpoint yet), loamSpine (ACK, LOW, Wave 103)
+  EXEMPT: songBird (transport provider), biomeOS (orchestrator)
+
+NUCLEUS health (eastGate):
+  12/12 liveness PASS, 12/12 readiness PASS, 11/12 capabilities PASS
+  (coralReef running pre-capabilities.list binary — needs rebuild)
+
+songBird auth hardening (aebe271f): reject-by-default auth stubs, real RFC 6238
+TOTP validation, evolved network detection via /proc/net/fib_trie.
+
+bearDog deep debt (d3a8eb7bb): fail-closed PQC, hardcoding elimination, dead dep cleanup.
 """
 
 [context]

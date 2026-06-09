@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-08T17:18"
+updated = "2026-06-08T21:45"
 priority = "P2"
 owner = "cellMembrane"
 note = """
@@ -136,13 +136,16 @@ action = "Adopt transport standard locally, do NOT import sourdough-core"
 detail = """
 Transport injection status (Wave 100):
 - sweetGrass v0.7.53: DONE (local impl, correct pattern)
-- nestGate Session 97: DONE (local impl, correct pattern)
-- barracuda: DONE but MUST FIX (imported sourdough-core — remove dep, impl locally)
-- rhizoCrypt: DONE but MUST FIX (imported sourdough-core — remove dep, impl locally)
+- nestGate Session 97-98: DONE (local impl, Phase 2 wired)
+- coralReef 0a2f2f6: DONE (local impl, correct pattern)
+- squirrel f180c311: DONE (local impl, Phase 2 — all 4 outbound TCP wired)
+- skunkBat f22ba12: DONE (local impl, correct pattern)
+- petalTongue b584571: DONE (local impl, correct pattern)
+- barracuda 408afaa5: DONE — FIXED (sourdough-core dep removed, local impl)
+- rhizoCrypt e621c6b: DONE — FIXED (sourdough-core dep removed, local impl)
+- bearDog daf682c70: DONE (local impl in beardog_types::btsp, Phase 2 wired)
 - loamSpine: ACK, ready for Wave 103
-- bearDog: 90 TCP refs — highest TCP density, needs transport injection
-- toadStool: 101 TCP refs — orchestrator needs transport abstraction
-- squirrel: 68 TCP refs — metrics needs UDS-first default
+- toadStool: PENDING — no TransportEndpoint yet (last remaining gap)
 - songBird: EXEMPT (transport provider)
 - biomeOS: EXEMPT (orchestrator)
 
@@ -192,8 +195,16 @@ compliance externally. Primals do NOT import sourdough-core as a crate dependenc
 Each primal implements TransportEndpoint locally. barracuda and rhizoCrypt must remove
 their sourdough-core path dep and implement the type locally, per primal self-knowledge.
 
-Adoption: 4/14 responded, 2/14 correct pattern, 2/14 need dep removal, ~8 remaining.
-Next: barracuda/rhizoCrypt fix deps, songBird ships ipc.resolve, remaining primals adopt."""
+Wave 101+ cascade: barracuda (408afaa5) and rhizoCrypt (e621c6b) BOTH removed
+sourdough-core dep and implemented locally. Self-knowledge violation RESOLVED.
+bearDog shipped transport Phase 2 (daf682c70) — local impl in beardog_types::btsp.
+skunkBat (f22ba12) and petalTongue (b584571) also adopted, local impl.
+squirrel shipped Phase 2 (f180c311) — all 4 outbound TCP wired through connect_transport.
+sourDough shipped scaffold transport-kit + dep violation detection (4cf83fd).
+
+Adoption: 9/11 non-exempt primals adopted. Only toadStool and loamSpine remain.
+All 9 adopted primals use correct LOCAL implementation pattern. Zero self-knowledge violations.
+Next: toadStool transport adoption. loamSpine ready for Wave 103."""
 
 [gaps.gap_4]
 id = "CM-WEBHOOK-01"

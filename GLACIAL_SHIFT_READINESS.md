@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-08 (Wave 99 — NUCLEUS 13/13 LIVE on eastGate, full IPC compliance sweep PASS (12/12 liveness, 12/12 readiness, 11/12 capabilities). biomeOS orchestration wired (--graph-deploy flag, composition.deploy called, BTSP auth gated). Pixel 8 deploy extended: all 13 startup handlers, aarch64-linux-android depot path. benchScale IPC validation operational. XDG runtime dir fix in nucleus-deploy. 3-gate mesh revalidation: 2 active blockers — SB-TLS-LAN-01 (beardog crypto.x25519 capability token) + SB-SECURITY-URL-01 (relative URL format). LAN peer at 192.168.1.173:7700 CONFIRMED ALIVE via HTTP /jsonrpc. sourDough convergent evolution COMPLETE (TransportEndpoint + validate transport + cross-arch). sweetGrass ring elimination RESOLVED. 7/14 depot binaries stale. S4 auth gate ends ~Jun 9.)
+**Last updated**: 2026-06-08 (Wave 101+ — **MESH IS LIVE.** SB-TLS-LAN-01 and SB-SECURITY-URL-01 both RESOLVED. songBird 03f23d45+aebe271f rebuilt, deployed, revalidated: mesh.init bootstrap_peers_added:1, all_healthy:true, reachable_peers:1 to strandGate. Transport evolution 9/11 non-exempt primals adopted — barracuda+rhizoCrypt self-knowledge violation FIXED, bearDog HIGH priority DONE. toadStool only remaining gap. NUCLEUS 13/13 LIVE, 12/12 liveness, 12/12 readiness, 11/12 capabilities. sourDough shipped scaffold transport-kit + dep violation detection.)
 
 ---
 
@@ -17,8 +17,11 @@ strandGate, Wave 92). biomeOS orchestration path wired (`--graph-deploy`,
 all 13 primals. sourDough convergent evolution COMPLETE (TransportEndpoint
 absorbed, `validate transport` shipped, cross-arch Pixel push validated).
 benchScale IPC compliance sweep passing (12/12 liveness, 12/12 readiness).
-3-gate mesh blocked on 2 upstream issues in songbird+beardog security
-integration (SB-TLS-LAN-01, SB-SECURITY-URL-01).
+3-gate mesh **OPERATIONAL** — SB-TLS-LAN-01 and SB-SECURITY-URL-01 both
+RESOLVED (songBird 03f23d45+aebe271f). eastGate↔strandGate mesh proven:
+bootstrap_peers_added:1, all_healthy:true, reachable_peers:1, latency 0ms.
+Transport evolution at 9/11 non-exempt primals — only toadStool + loamSpine
+remain. All self-knowledge violations (sourdough-core deps) eliminated.
 
 **Wave 52b milestone**: Full NUCLEUS live on eastGate — 13/13 primals from plasmidBin,
 19/19 sockets alive, `plasmidbin doctor` 35/35 pass. primalSpring v0.9.30: 92 experiments
@@ -435,14 +438,16 @@ validates 12/12 primals (liveness + readiness PASS). biomeOS orchestration path 
 
 **Stadial entry is gated only on**:
 - S4 auth gate review completion (~Jun 9, automated)
-- 3rd gate mesh enrollment — BLOCKED on SB-TLS-LAN-01 + SB-SECURITY-URL-01 (songbird+beardog)
+- 3rd gate mesh enrollment — SB-TLS-LAN-01 + SB-SECURITY-URL-01 RESOLVED. Protocol proven. ironGate federation port activation remaining (hardware coordination).
 - WAN covalent validation with flockGate (pending coordination)
-- biomeOS orchestration auth integration (BTSP capability token for composition.deploy)
+- biomeOS orchestration auth integration (BTSP capability token for composition.deploy — LocalTrusted in git, rebuild needed)
+- toadStool TransportEndpoint adoption (last non-exempt primal without transport injection)
 
-Software items: 2 mesh blockers remain upstream (songbird/beardog security integration).
-All other software items RESOLVED. biomeOS --graph-deploy path WIRED but auth-gated.
+Software items: **Zero P1 mesh blockers.** songBird mesh fix v2 deployed and validated.
+All 2 mesh blockers RESOLVED (03f23d45+aebe271f). Transport adoption at 9/11 non-exempt
+primals. biomeOS --graph-deploy path WIRED but auth-gated (v4.14 rebuild needed).
 Pixel full NUCLEUS deploy: startup handlers complete, aarch64 cross-compilation pending.
-benchScale Docker topology validation: image tag fix needed (ubuntu → ubuntu:24.04).
+Depot: multiple primals have shipped transport evolution code — rebuild cycle needed.
 
 ---
 
