@@ -31,7 +31,7 @@ mesh = "LIVE — eastGate↔strandGate bidirectional, 13h+ stable, all 4 criteri
 transport = "10-11/11 non-exempt adopted. toadStool sole potential gap (strandGate ACK pending). Zero self-knowledge violations."
 nucleus = "13/13 alive on eastGate, 12/12 liveness+readiness, 12/12 capabilities (with depot rebuild)"
 sovereignty = "S1-S3 GRADUATED. S4 auth gate ending Jun 9 (review pending today). DNS PROPAGATED (Jun 4)."
-ipc_resolve = "NOT YET SHIPPED — songBird Phase 2 M1 (keystone for topology-aware routing)"
+ipc_resolve = "SHIPPED (Wave 98, commit aebe271f) — returns structured TransportEndpoint JSON (UDS/TCP/MeshRelay). 10+ primals ready as consumers."
 cascade = "OPERATIONAL — 38/38 repos, <10s parallel, freshness auto-publish"
 
 # ──────────────────────────────────────────────────────────────
@@ -128,15 +128,14 @@ See GRAPHENEGATE_BOOTSTRAP_STANDARD.md."""
 [remaining.songbird_ipc_resolve]
 id = "SONGBIRD-IPC-RESOLVE-M1"
 owner = "songBird"
-priority = "P2"
-description = "ipc.resolve must return structured TransportEndpoint JSON"
-why = """10-11 primals accept TRANSPORT_ENDPOINT but nobody produces it yet. ipc.resolve
-currently returns plain socket paths. Once it returns structured JSON, Tower Atomic
-can inject endpoints at composition deploy time — unlocking topology-aware deployment."""
-action = """Evolve ipc.resolve response to structured format:
-  { "transport": "uds", "path": "/run/biomeos/beardog.sock" }
-  { "transport": "tcp", "host": "192.168.1.173", "port": 9100 }
-  { "transport": "mesh_relay", "peer_id": "strandgate", "capability": "security" }"""
+priority = "DONE"
+description = "ipc.resolve returns structured TransportEndpoint JSON — SHIPPED Wave 98"
+why = """RESOLVED. ipc.resolve returns structured JSON since Wave 98 (commit aebe271f).
+Wire format: { "transport": "uds", "path": "..." } / { "transport": "tcp", "host": "...", "port": N }
+/ { "transport": "mesh_relay", "peer_id": "...", "capability": "..." }.
+Test: ipc_resolve_returns_transport_endpoint_json_sourdough_wire_compat (passes deterministically).
+10+ primals ready as consumers. Orchestrator capability.resolve also returns TransportEndpoint."""
+action = "No action needed. Consumers can adopt at will. sourdough validate transport confirms wire compat."
 
 [remaining.cm_cascade_conflict]
 id = "CM-CASCADE-CONFLICT"
