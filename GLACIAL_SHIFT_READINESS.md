@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-09 (Wave 105b — **ZERO P1 BLOCKERS**. WAN depot DEPLOYED (/depot/ live, ironGate 13/13 validated). aarch64 14/14 BUILT (sweep complete, zero C-dep). graph.deploy VALIDATED (LocalTrusted, 13-phase). Mesh 17h+ stable. New P2: CM-CHECKSUM-MULTI-TARGET (aarch64 sweep overwrote x86_64 checksums — ad-hoc restored, pipeline fix needed). primalSpring Wave 105: is_skippable() canonical, 887 tests.)
+**Last updated**: 2026-06-09 (Wave 105b — **ZERO P1 BLOCKERS**. grapheneGate FIRST DEPLOY: 6/13 primals on Pixel 8 (bearDog BTSP production, songbird federation). flockGate WAN e2e 4/5 PASS (blocked on VPS songbird relay). ironGate mesh INITIALIZED (blocked on eastGate port 7700). CM-VPS-DEPOT-SYNC SHIPPED. CM-CHECKSUM-MULTI-TARGET RESOLVED. NEW P2: CM-DEPOT-DIVERGENCE (inner/outer membrane depot binaries differ). primalSpring Wave 105b: grapheneGate deploy, cast safety, 887 tests.)
 
 ---
 
@@ -277,12 +277,12 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Songbird `mesh.init` + `bootstrap_peers` | **WIRED** — Wave 49, Songbird team confirmed functional |
 | Cross-gate `discovery.peers` verification | **COMPLETE** (Wave 92) — bidirectional, both gates report peer_count:1, quality:1.0 |
 | Cross-subnet mesh (southGate ↔ eastGate) | **BLOCKED** — different subnets, needs routing or TURN relay |
-| Plasmodium collective status | **2/3 OPERATIONAL** — eastGate↔strandGate mesh LIVE (17h+ stable). SB-TLS-LAN-01 + SB-SECURITY-URL-01 RESOLVED. ironGate 3rd gate needs federation port. |
+| Plasmodium collective status | **2/3 OPERATIONAL** — eastGate↔strandGate mesh LIVE (17h+). ironGate INITIALIZED (port 7700 listening, blocked on eastGate port 7700). flockGate INITIALIZED (4/5 WAN e2e PASS, blocked on VPS songbird relay). |
 | biomeOS graph.deploy orchestration | **WIRED** (Wave 99) — `nucleus-deploy --graph-deploy` calls `composition.deploy`. biomeOS v4.14 (LocalTrusted) rebuilt. eastGate revalidation pending. |
 | Full NUCLEUS 13/13 IPC-live | **COMPLETE** (Wave 98) — 12/12 liveness, 12/12 readiness. coralReef capabilities.list shipped (12/12 with depot rebuild). |
-| Pixel 8 / grapheneGate | **WIRED** (Wave 99) — all 13 startup handlers. 3/14 aarch64 built. bearDog aws-lc-rs blocks remainder. grapheneGate = portable trust anchor + gate spawner. |
+| Pixel 8 / grapheneGate | **FIRST DEPLOY** (Wave 105b) — 6/13 primals RUNNING on Pixel 8 via ADB (bearDog BTSP production, songbird, rhizocrypt, loamspine, sweetgrass, squirrel). 7 primals need Android UDS path adaptation. NDK blocked on bearDog StrongBox (future phase). |
 | benchScale IPC compliance | **OPERATIONAL** (Wave 99) — validates liveness/readiness/capabilities across live NUCLEUS |
-| flockGate WAN deployment | **UNBLOCKED** (Wave 105) — WAN relay + cascade operational. `plasmid.fetch --source wan` SHIPPED. `caddy.depot.provision` ready. Production validation pending. |
+| flockGate WAN deployment | **4/5 PASS** (Wave 105) — WAN fetch + NUCLEUS launch + mesh.init + health all OK. BLOCKED on VPS songbird relay (no songbird on VPS:7700). |
 
 ### Wave 49 Ecosystem Issues (post-tightening re-audit, May 25)
 
@@ -325,7 +325,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 | CM-VPS-DEPOT-SYNC | cellMembrane | **P2** | golgiBody inner→outer membrane binary flow for WAN depot. |
 | **CM-CHECKSUM-MULTI-TARGET** | cellMembrane | **P2** | checksums.toml pipeline must be multi-target aware. aarch64 sweep destroyed x86_64 entries (upstream cascade failure). Ad-hoc restored. |
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
-| grapheneGate bootstrap | eastGate | **P2** | Pixel 8 as portable trust anchor + spawner (GRAPHENEGATE_BOOTSTRAP_STANDARD). Blocked on bearDog pure Rust. |
+| grapheneGate UDS adaptation | primalSpring (parallel) | **P2** | 7 primals need Android socket path remapping. 6/13 already running on Pixel 8. NDK blocked on bearDog StrongBox (bearDog team debt). |
 | ~~aarch64 cross-compilation~~ | cellMembrane | ~~P2~~ | **COMPLETE** (Wave 105) — 14/14 aarch64-musl built, zero C-dep violations. NOTE: sweep overwrote x86_64 checksums (CM-CHECKSUM-MULTI-TARGET). |
 | ironGate mesh enrollment | ironGate | **LOW** | Federation port activation for 3rd LAN gate. Hardware coordination. |
 | Windows ecoBin (x86_64-pc-windows-msvc) | future | **LOW** | Named pipes IPC, MSVC target. Design phase. |

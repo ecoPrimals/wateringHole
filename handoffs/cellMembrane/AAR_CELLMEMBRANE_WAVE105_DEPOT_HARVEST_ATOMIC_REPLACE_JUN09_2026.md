@@ -188,17 +188,49 @@ checksums for automated verification without local fallback).
 
 ---
 
-## Ecosystem Snapshot (Wave 105 final, Jun 9 2026)
+## AAR: Inner/Outer Membrane Depot Divergence (Wave 105b)
 
-- **Mesh**: ironGate INITIALIZED (node_id: ironGate, port 7700 listening). eastGate↔strandGate 17h+ stable. Awaiting eastGate federation port for 3-gate collective.
+### Incident
+
+Commit `64e275e` replaced x86_64 checksum entries with hashes from the VPS (outer
+membrane) depot. The VPS depot has different binaries (unstripped, different compiler
+settings) from the eastGate local depot (stripped, manually rebuilt). After cascade,
+all 14 x86_64 checksums on eastGate show MISMATCH.
+
+### Root Cause
+
+Two independent depot instances with no sync — eastGate local `plasmidBin/primals/`
+and VPS `/opt/ecoPrimals/plasmidBin/primals/` are different binaries built independently.
+`checksums.toml` is a shared file in git that claims to represent "the depot" — but
+there are now 3 depots (eastGate, VPS, aarch64) with different binaries.
+
+### Recommendation
+
+**Option A**: Per-gate checksum sections (`[eastGate.x86_64-musl]`, `[golgiBody.x86_64-musl]`)
+**Option B**: Single build authority (peptidoglycan builds, all gates fetch — no local rebuilds)
+**Option C**: Drop checksums from git — each gate verifies locally after fetch
+
+Option B is most correct for the diderm model: peptidoglycan builds, all checksums
+derive from peptidoglycan output. Local rebuilds should be considered temporary overrides.
+
+### Classification
+
+Upstream cascade failure — checksums mutated to represent a different gate's depot.
+P2 (primals run, but formal verification broken for non-matching gates).
+
+---
+
+## Ecosystem Snapshot (Wave 105b, Jun 9 2026)
+
+- **Mesh**: ironGate INITIALIZED (port 7700 listening). eastGate↔strandGate 17h+ stable.
 - **Transport**: 11/11 non-exempt COMPLETE
-- **Depot x86_64**: 14/14 BLAKE3 VERIFIED — ironGate WAN fetch 13/13 PASS, checksums match VPS ground truth
-- **Depot aarch64**: 14/14 built (Wave 105 sweep), checksums committed
-- **WAN depot**: DEPLOYED + VALIDATED (membrane.primals.eco/depot/, 13/13 fetch + BLAKE3 + liveness)
-- **CM-CHECKSUM-MULTI-TARGET**: **RESOLVED** (commit 3a1900b) — read-modify-write + validation gate + regression test
-- **CM-VPS-DEPOT-SYNC**: **RESOLVED** (commit 7ff43f5) — plasmid.depot_sync automated inner→outer flow
-- **Cascade**: 22/22 synced, zero failures
+- **Depot x86_64**: eastGate local and VPS DIVERGED — checksums represent VPS, not local. Needs resolution.
+- **Depot aarch64**: 14/14 built. 6/13 running on Pixel 8 (grapheneGate).
+- **WAN depot**: DEPLOYED + VALIDATED (4/5 PASS from flockGate, blocked on VPS songbird relay)
+- **grapheneGate**: FIRST DEPLOY — 6/13 primals on Pixel 8, bearDog BTSP production mode LIVE
+- **Cascade**: 38/38 synced, zero failures
+- **NUCLEUS**: Restarted from local depot (29 JSON-RPC alive after primals went down)
 - **P1 blockers**: **ZERO**
-- **P2 blockers (cellMembrane)**: **ZERO** — all handed-off P2s resolved
+- **NEW P2**: CM-DEPOT-DIVERGENCE (inner/outer depot binaries differ, checksums conflict)
 - **Sovereignty**: S1-S3 GRADUATED, S4 gate ending today
-- **primalSpring**: Wave 105 — `is_skippable()` canonical, graph.deploy validated, 887 tests
+- **primalSpring**: Wave 105b — grapheneGate deploy, cast safety fixes, 887 tests
