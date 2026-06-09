@@ -108,11 +108,12 @@ priority = "P1"
 why = """flockGate (192.168.60.20) is genuinely WAN-isolated — cannot reach LAN gates.
 VPS (137.184.197.151) reachable at 34.8ms. Depot has checksums but zero binaries.
 Without a distribution path, WAN gates cannot deploy NUCLEUS or enroll in mesh."""
-action = """Define the canonical WAN binary distribution path. Options:
-  a. VPS HTTP endpoint (Caddy serving /opt/plasmidBin/primals/)
-  b. SSH/rsync from peptidoglycan (needs flockGate SSH provisioning)
-  c. GitHub Releases with fetch.sh (needs gh CLI or public URLs)
-  d. Build-carrying cascades via Forgejo relay
+action = """This is the golgiBody outer membrane problem (see wave84 architecture section).
+The inner membrane (VPS) serves LAN covalent gates. WAN gates need the outer membrane
+face — either the same VPS with a Caddy /depot/ route, or a dedicated external golgiBody
+that links to the inner via covalent bond. The outer membrane handles ionic/weak
+interactions (partially-trusted WAN traffic). cellMembrane owns the pepti layer sync
+that feeds both membrane faces: inner→peptidoglycan builds→inner serves LAN, outer serves WAN.
 Priority: get songbird+beardog to flockGate for minimum mesh enrollment."""
 
 [remaining.biomeos_revalidate]
