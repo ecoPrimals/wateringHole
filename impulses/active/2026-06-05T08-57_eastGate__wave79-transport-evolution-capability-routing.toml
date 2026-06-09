@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["songBird", "bearDog", "biomeOS", "all-primals"]
 date = "2026-06-05"
-updated = "2026-06-09T09:30"
+updated = "2026-06-09T10:56"
 priority = "P2"
 owner = "songBird + biomeOS"
 note = """
@@ -16,19 +16,28 @@ A primal that accepts TRANSPORT_ENDPOINT can deploy identically on
 eastGate (UDS), strandGate (UDS+TCP), golgiBody (TCP), Pixel (UDS),
 or any future topology. Without it, every deployment is bespoke.
 
-KEY MILESTONE (Wave 101): Mesh is LIVE. SB-TLS-LAN-01 + SB-SECURITY-URL-01
-both RESOLVED. eastGate↔strandGate mesh proven stable (11.6h+).
-Transport adoption at 10/11 non-exempt primals. Depot refreshed (14/14).
-Zero P1 blockers in the ecosystem.
+Mesh is LIVE (13.2h+ stable, eastGate↔strandGate). Transport at 10/11
+non-exempt (toadStool sole gap). Depot fresh (14/14 x86_64-musl).
+
+Wave 103 cascade surfaced two new blockers:
+  P1: bearDog aws-lc-rs C-dep blocks ALL aarch64 cross-compile (Pixel/ARM).
+      __memcpy_chk glibc symbol not in musl. Must eliminate C deps.
+      songbird+skunkbat+sourdough cross-compile clean already.
+  P1: flockGate WAN depot empty — no binary distribution path defined.
+      Need: VPS HTTP endpoint or SSH/rsync or GitHub Releases for WAN gates.
+  DONE: biomeOS v4.14 rebuilt on strandGate (LocalTrusted confirmed).
+  DONE: sporePrint canonical TransportEndpoint adopted (flockGate).
 """
 
 [current_state]
-mesh = "LIVE — eastGate↔strandGate bidirectional, 11.6h+ stable, all 4 criteria PASS"
-transport_adoption = "10/11 non-exempt primals (toadStool is sole remaining gap)"
-nucleus = "13/13 alive on eastGate, 12/12 liveness+readiness, 11/12 capabilities"
-depot = "14/14 x86_64-musl fresh (Wave 102 rebuild). 1/14 aarch64 (sourdough only)"
-self_knowledge = "Zero violations — barracuda+rhizoCrypt sourdough-core deps removed"
-ipc_resolve = "NOT YET SHIPPED — songBird Phase 2 M1 blocker"
+mesh = "LIVE — eastGate↔strandGate bidirectional, 13.2h+ stable, all 4 criteria PASS"
+transport_adoption = "10/11 non-exempt primals (toadStool sole gap). sporePrint also adopted."
+nucleus = "13/13 alive on eastGate, 12/12 liveness+readiness"
+depot_x86 = "14/14 x86_64-musl fresh. biomeOS v4.14 rebuilt (strandGate confirmed)."
+depot_aarch64 = "3/14 (songbird+skunkbat+sourdough). bearDog BLOCKED on aws-lc-rs C-dep."
+wan = "flockGate BLOCKED — depot empty, no binary distribution path. VPS reachable 34.8ms."
+self_knowledge = "Zero violations"
+ipc_resolve = "NOT YET SHIPPED — songBird Phase 2 M1"
 
 [context]
 reason = """
@@ -75,43 +84,66 @@ action = """Evolve ipc.resolve response from string to:
 This is Phase 2 M1 — the keystone that connects consumer-side transport injection
 (10/11 adopted) to producer-side endpoint resolution."""
 
-[remaining.biomeos_orchestration]
-id = "BIOMEOS-LOCALTRUSTED"
-description = "biomeOS v4.14 rebuild needed — LocalTrusted access for nucleus-deploy --graph-deploy"
-owner = "biomeOS"
-priority = "P2"
-why = """nucleus-deploy --graph-deploy calls composition.deploy via UDS JSON-RPC. Currently
-auth-gated by BTSP. v4.14 (a459ec58) adds LocalTrusted access level — UDS callers get
-orchestration method access without capability tokens. Unblocks automated graph deployment."""
-action = "Rebuild biomeOS from a459ec58+, harvest to depot. eastGate will revalidate --graph-deploy."
+[remaining.beardog_c_dep]
+id = "BEARDOG-AWS-LC"
+description = "bearDog aws-lc-rs C-dep blocks ALL aarch64 cross-compile"
+owner = "bearDog"
+priority = "P1"
+why = """aws-lc-rs contains C code (dsa.c etc) that uses __memcpy_chk — a glibc fortification
+symbol not available in musl. This breaks aarch64-unknown-linux-musl cross-compile.
+bearDog is the security provider — every composition depends on it. Until bearDog
+cross-compiles, no full NUCLEUS runs on Pixel/ARM. songbird+skunkbat+sourdough already
+build clean for aarch64 (pure Rust). bearDog is the sole blocker."""
+action = """Replace aws-lc-rs with pure-Rust crypto: rustls + ring (or RustCrypto suite).
+Or find aws-lc-rs feature flags for musl-compatible builds. Validate with:
+  cargo build --release --target aarch64-unknown-linux-musl
+  file target/aarch64-unknown-linux-musl/release/beardog
+  # Expected: ELF 64-bit LSB executable, ARM aarch64, statically linked"""
 
-[remaining.coralreef_restart]
-id = "CORALREEF-RESTART"
-description = "Running coralReef binary is pre-capabilities.list — needs restart from depot"
+[remaining.wan_binary_distribution]
+id = "WAN-DEPOT-PATH"
+description = "No binary distribution path for WAN gates — flockGate depot empty"
+owner = "cellMembrane + eastGate"
+priority = "P1"
+why = """flockGate (192.168.60.20) is genuinely WAN-isolated — cannot reach LAN gates.
+VPS (137.184.197.151) reachable at 34.8ms. Depot has checksums but zero binaries.
+Without a distribution path, WAN gates cannot deploy NUCLEUS or enroll in mesh."""
+action = """Define the canonical WAN binary distribution path. Options:
+  a. VPS HTTP endpoint (Caddy serving /opt/plasmidBin/primals/)
+  b. SSH/rsync from peptidoglycan (needs flockGate SSH provisioning)
+  c. GitHub Releases with fetch.sh (needs gh CLI or public URLs)
+  d. Build-carrying cascades via Forgejo relay
+Priority: get songbird+beardog to flockGate for minimum mesh enrollment."""
+
+[remaining.biomeos_revalidate]
+id = "BIOMEOS-GRAPH-DEPLOY"
+description = "Revalidate nucleus-deploy --graph-deploy with biomeOS v4.14 (LocalTrusted)"
 owner = "eastGate"
-priority = "LOW"
-why = "Depot has the fix (4c417a95). Process restart gets IPC compliance from 11/12 to 12/12."
-action = "Restart coralReef from fresh depot binary on next NUCLEUS redeploy."
+priority = "P2"
+why = """biomeOS v4.14 rebuilt on strandGate (confirmed). Running eastGate binary may still
+be pre-v4.14. Restart from depot and revalidate --graph-deploy to confirm LocalTrusted
+access works without BTSP token."""
+action = "Restart biomeOS from fresh depot binary. Run nucleus-deploy --graph-deploy full."
 
 [remaining.cross_arch]
 id = "CROSS-ARCH-AARCH64"
-description = "12/14 primals need aarch64-linux-android cross-compilation for Pixel/GrapheneOS"
+description = "aarch64 cross-compile pipeline — 3/14 built, bearDog blocks remainder"
 owner = "cellMembrane"
-priority = "P3"
-why = """deploy_pixel.sh has all 13 startup handlers wired. Only sourdough is built for
-aarch64. Full Pixel NUCLEUS requires NDK cross-compile for remaining 12 primals.
-Transport injection (10/11 done) means the same binaries work across architectures."""
-action = "Set up NDK cross-compile pipeline in peptidoglycan. Priority: beardog, songbird, biomeos."
+priority = "P2 (blocked on BEARDOG-AWS-LC)"
+why = """songbird (20MB), skunkbat, sourdough confirmed building for aarch64-unknown-linux-musl.
+bearDog BLOCKED on aws-lc-rs C-dep. Once bearDog is clean, remaining primals can sweep.
+deploy_pixel.sh has all 13 startup handlers wired and ready."""
+action = "After bearDog C-dep elimination, sweep remaining primals. Pipeline is operational."
 
 [remaining.wan_covalent]
 id = "WAN-COVALENT"
 description = "WAN mesh validation with flockGate"
-owner = "flockGate"
-priority = "P3"
-why = """LAN mesh is proven. WAN mesh (flockGate at remote location) validates that the
-transport abstraction works across network boundaries, NAT traversal, and latency.
-songBird's relay + STUN/TURN infrastructure exists but is untested in production."""
-action = "Coordinate with flockGate: deploy songbird with federation port, mesh.init to eastGate."
+owner = "flockGate + eastGate"
+priority = "P2 (blocked on WAN-DEPOT-PATH)"
+why = """LAN mesh is proven (13.2h+ stable). WAN mesh validates transport across network
+boundaries. flockGate at 192.168.60.20 is genuinely isolated from LAN. VPS at
+137.184.197.151 is the natural relay point. songBird STUN/TURN exists but untested."""
+action = "After binary distribution path defined, deploy core stack, mesh.init via VPS relay."
 
 [remaining.irongate_mesh]
 id = "IRONGATE-MESH"
@@ -137,8 +169,9 @@ done = [
   "barracuda 408afaa5 — LOCAL (sourdough-core dep removed)",
   "rhizoCrypt e621c6b — LOCAL (sourdough-core dep removed)",
   "bearDog daf682c70 — LOCAL in beardog_types::btsp, Phase 2 wired",
+  "sporePrint Wave 103 — LOCAL, canonical format (flockGate)",
 ]
-pending = ["toadStool — only remaining gap (101 TCP refs)"]
+pending = ["toadStool — only remaining non-exempt gap (101 TCP refs)"]
 exempt = ["songBird (transport provider)", "biomeOS (orchestrator)"]
 
 # ──────────────────────────────────────────────────────────────

@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-09T09:30"
+updated = "2026-06-09T10:56"
 priority = "P2"
 owner = "cellMembrane"
 note = """
@@ -23,10 +23,11 @@ wave79-transport-evolution-capability-routing.
 
 [current_state]
 cascade = "OPERATIONAL — 38/38 repos, <10s parallel, freshness auto-publish"
-depot = "14/14 x86_64-musl fresh (Wave 102 rebuild). strandGate confirmed."
-depot_aarch64 = "1/14 (sourdough only). 12 remaining need NDK cross-compile."
+depot_x86 = "14/14 x86_64-musl fresh. biomeOS v4.14 rebuilt. strandGate confirmed."
+depot_aarch64 = "3/14 (songbird+skunkbat+sourdough). bearDog BLOCKED on aws-lc-rs C-dep."
 vps = "golgiBody relay operational. No Rust toolchain — refresh-only from depot."
 peptidoglycan = "SSH trust established. Musl target installed. Build node ready."
+wan_distribution = "NOT DEFINED — flockGate depot empty, no binary fetch path for WAN gates."
 
 [context]
 reason = """
@@ -68,26 +69,40 @@ sourDough validate depot --json (cb526d8) provides machine-readable freshness da
 
 [remaining.aarch64_cross_compile]
 id = "CM-AARCH64-PIPELINE"
-description = "Cross-compile 12 remaining primals for aarch64-linux-android (Pixel/GrapheneOS)"
+description = "aarch64 cross-compile: 3/14 built, bearDog blocks remainder"
 owner = "cellMembrane"
-priority = "P3"
-why = """deploy_pixel.sh has all 13 startup handlers wired. Only sourdough is built for
-aarch64-linux-android. Full mobile NUCLEUS requires the remaining 12 primals cross-compiled
-via NDK. Ring/C-dep elimination is complete (sweetGrass v0.7.52) — pure Rust across
-the ecosystem enables clean cross-compile."""
-action = """Set up NDK cross-compile in peptidoglycan pipeline. Use:
-  cargo build --release --target aarch64-linux-android
-Priority: beardog (security), songbird (mesh), biomeos (orchestrator).
-checksums.toml already has [aarch64-linux-android] section ready."""
+priority = "P2 (blocked on bearDog aws-lc-rs elimination)"
+why = """songbird (20MB), skunkbat, sourdough confirmed clean for aarch64-unknown-linux-musl.
+bearDog fails: aws-lc-rs C code uses __memcpy_chk (glibc-only). Until bearDog eliminates
+the C dep, no full NUCLEUS on Pixel/ARM. deploy_pixel.sh has all 13 handlers ready."""
+action = """After bearDog ships pure-Rust crypto, sweep remaining primals:
+  cargo build --release --target aarch64-unknown-linux-musl
+checksums.toml [aarch64-linux-android] section ready for expansion."""
+
+[remaining.wan_binary_distribution]
+id = "CM-WAN-DEPOT"
+description = "Define binary distribution path for WAN gates (flockGate depot empty)"
+owner = "cellMembrane + eastGate"
+priority = "P1"
+why = """flockGate (192.168.60.20) is genuinely WAN-isolated — no LAN reach to eastGate/
+strandGate. VPS (137.184.197.151) reachable at 34.8ms. Checksums exist in depot but
+zero binaries fetched. WAN mesh enrollment requires at minimum songbird+beardog."""
+action = """Define the canonical path. Options:
+  a. VPS HTTP endpoint (Caddy serving /opt/plasmidBin/primals/) — simplest
+  b. SSH/rsync from VPS peptidoglycan (needs SSH provisioning)
+  c. GitHub Releases via fetch.sh (needs gh CLI or public URLs)
+  d. Cascade-carried binary distribution (build-carrying cascades)
+Recommend (a): Caddy already runs on VPS for content shadow. Add /depot/ route."""
 
 [remaining.vps_depot_sync]
 id = "CM-VPS-DEPOT-SYNC"
 description = "golgiBody depot should sync from peptidoglycan automatically"
 owner = "cellMembrane"
-priority = "LOW"
-why = """Currently, VPS depot sync is manual (plasmid.refresh pulls from depot).
-After build-carrying cascades land, VPS should auto-refresh on new depot binaries."""
-action = "Wire plasmid.refresh into cascade post-build hook."
+priority = "P2"
+why = """Currently, VPS depot sync is manual. After build-carrying cascades land,
+VPS should auto-refresh. This also serves as the WAN distribution endpoint if
+option (a) is selected for WAN binary distribution."""
+action = "Wire plasmid.refresh into cascade post-build hook. Serve via Caddy for WAN."
 
 [outcome]
 expected = """
