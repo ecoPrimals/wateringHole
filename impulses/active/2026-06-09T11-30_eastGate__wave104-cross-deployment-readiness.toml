@@ -8,7 +8,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "bearDog", "songBird", "biomeOS", "all-primals", "all-gates"]
 date = "2026-06-09"
-updated = "2026-06-09T11:30"
+updated = "2026-06-09T13:40"
 priority = "P1"
 owner = "cellMembrane + bearDog + eastGate"
 note = """
@@ -28,11 +28,14 @@ Replaces: wave79-transport-evolution-capability-routing (archived)
 
 [current_state]
 mesh = "LIVE — eastGate↔strandGate bidirectional, 13h+ stable, all 4 criteria PASS"
-transport = "10-11/11 non-exempt adopted. toadStool sole potential gap (strandGate ACK pending). Zero self-knowledge violations."
-nucleus = "13/13 alive on eastGate, 12/12 liveness+readiness, 12/12 capabilities (with depot rebuild)"
+transport = "11/11 non-exempt COMPLETE (toadStool S306c confirmed, Wave 104). Zero self-knowledge violations."
+nucleus = "13/13 alive on eastGate, 29/34 sockets responding (5 are tarpc binary protocol — expected)"
 sovereignty = "S1-S3 GRADUATED. S4 auth gate ending Jun 9 (review pending today). DNS PROPAGATED (Jun 4)."
-ipc_resolve = "SHIPPED (Wave 98, commit aebe271f) — returns structured TransportEndpoint JSON (UDS/TCP/MeshRelay). 10+ primals ready as consumers."
+ipc_resolve = "SHIPPED — returns structured TransportEndpoint JSON (UDS/TCP/MeshRelay). 11 primals ready as consumers."
 cascade = "OPERATIONAL — 38/38 repos, <10s parallel, freshness auto-publish"
+beardog_p1 = "RESOLVED — Wave 145: aws-lc-rs replaced with rustls-rustcrypto (pure Rust). aarch64-unknown-linux-musl cargo check PASS. PURE_RUST_CRYPTO_PURITY_STANDARD.md published. 19-crate C-crypto ban in deny.toml."
+biomeos = "v4.16 shipped (deep debt, error chains, hardcoding elimination). v4.15 (mesh capability alignment). Rebuild in progress."
+songbird = "Wave 104: env-var race conditions eliminated across 5 crates."
 
 # ──────────────────────────────────────────────────────────────
 # DEPLOYMENT TARGET MATRIX (ecoBin standard)
@@ -49,18 +52,18 @@ blockers = []
 [deployment_targets.aarch64_musl]
 triple = "aarch64-unknown-linux-musl"
 description = "ARM servers, future ARM VPS"
-depot = "3/14 built (songbird, skunkbat, sourdough)"
+depot = "3/14 built (songbird, skunkbat, sourdough). bearDog UNBLOCKED (Wave 145). Sweep in progress."
 gates = ["future ARM VPS"]
-status = "BLOCKED"
-blockers = ["BEARDOG-PURE-RUST"]
+status = "UNBLOCKED — sweep pending"
+blockers = []
 
 [deployment_targets.aarch64_android]
 triple = "aarch64-linux-android"
 description = "Pixel 8 / GrapheneOS (grapheneGate) — portable trust anchor + gate spawner"
-depot = "3/14 built"
+depot = "3/14 built. bearDog UNBLOCKED (Wave 145). Sweep pending."
 gates = ["grapheneGate (Pixel 8)"]
-status = "BLOCKED"
-blockers = ["BEARDOG-PURE-RUST"]
+status = "UNBLOCKED — sweep pending"
+blockers = []
 note = """grapheneGate is not just a mobile deploy target — it is the ecosystem's
 portable physical root of trust and gate spawner. It is tethered to eastGate on
 LAN, can WAN via mesh, and in time bootstraps new gates on arbitrary hardware.
@@ -86,20 +89,15 @@ blockers = ["WASM runtime integration"]
 # REMAINING WORK — prioritized, deduplicated
 # ──────────────────────────────────────────────────────────────
 
-[remaining.beardog_pure_rust]
+[resolved.beardog_pure_rust]
 id = "BEARDOG-PURE-RUST"
 owner = "bearDog"
-priority = "P1"
-description = "aws-lc-rs C-dep blocks ALL non-x86 ecoBin targets"
-why = """aws-lc-rs contains C code using __memcpy_chk (glibc fortification symbol,
-not in musl). bearDog is the security provider — every composition depends on it.
-Blocks: aarch64-musl (ARM servers), aarch64-android (Pixel/grapheneGate),
-future ARM VPS, and any non-glibc target. songbird+skunkbat+sourdough already
-build clean for aarch64 (pure Rust). bearDog is the sole cross-arch blocker.
-Per ecoBin standard, pure Rust is the means to universal portability."""
-action = """Replace aws-lc-rs with RustCrypto suite (or rustls with rustcrypto-provider).
-Validate: cargo build --release --target aarch64-unknown-linux-musl
-Expected: ELF 64-bit LSB executable, ARM aarch64, statically linked"""
+priority = "was-P1"
+description = "RESOLVED (Wave 145) — aws-lc-rs replaced with rustls-rustcrypto (pure Rust)"
+resolution = """bearDog v0.9.0 Wave 145: TLS CryptoProvider → rustls-rustcrypto, CSR → p256+x509-cert,
+deny.toml bans 19 C-crypto crates. cargo check --target aarch64-unknown-linux-musl PASS.
+PURE_RUST_CRYPTO_PURITY_STANDARD.md published as ecosystem standard. Zero C-crypto deps
+in resolved dependency graph. All non-x86 ecoBin targets UNBLOCKED."""
 
 [remaining.wan_outer_membrane]
 id = "WAN-OUTER-MEMBRANE"
@@ -201,7 +199,8 @@ done = [
   "bearDog daf682c70 — LOCAL in beardog_types::btsp, Phase 2 wired",
   "sporePrint Wave 103 — LOCAL, canonical format (flockGate)",
 ]
-pending = ["toadStool — strandGate ACK pending, may already be done"]
+pending = []
+note_toadstool = "toadStool S306c Wave 104: transport CONFIRMED DONE. 11/11 non-exempt COMPLETE."
 exempt = ["songBird (transport provider)", "biomeOS (orchestrator)"]
 note = """sourDough defines the wire format as the REPOSITORY OF PRIMAL STANDARDS.
 Primals implement TransportEndpoint locally using self-knowledge only. No primal

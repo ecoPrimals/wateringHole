@@ -1682,25 +1682,22 @@ Your primal becomes a TRUE ecoBin v2.0:
 
 ## Current Compliance (Wave 103, Jun 9 2026)
 
-**bearDog `aws-lc-rs` is the sole remaining C-dep violation across the ecosystem.**
+**Zero C-dep violations across the ecosystem.** (Wave 104, Jun 9 2026)
 
-The sweetGrass `ring` elimination was resolved in Wave 98. All other primals are
-pure Rust application code. bearDog uses `aws-lc-rs` (via `rustls` default crypto
-provider) which introduces a C dependency (`__memcpy_chk` glibc symbol). This
-blocks ALL non-x86 target triples in the ecoBin matrix:
+bearDog Wave 145 resolved the last C-crypto dependency: `aws-lc-rs` → `rustls-rustcrypto`
+(pure Rust), `rcgen` → `p256` + `x509-cert`. `PURE_RUST_CRYPTO_PURITY_STANDARD.md`
+published as ecosystem standard. `deny.toml` bans 19 C-crypto crates. sweetGrass `ring`
+elimination resolved Wave 98. All primals are now pure Rust application code.
 
 | Target Triple | Status | Blocker |
 |---------------|--------|---------|
 | `x86_64-unknown-linux-musl` | 14/14 depot, operational | — |
-| `aarch64-unknown-linux-musl` | 3/14 built | bearDog aws-lc-rs |
-| `aarch64-linux-android` | 3/14 built | bearDog aws-lc-rs |
+| `aarch64-unknown-linux-musl` | 3/14 built, **UNBLOCKED** | Sweep pending |
+| `aarch64-linux-android` | 3/14 built, **UNBLOCKED** | Sweep pending |
 | `x86_64-pc-windows-msvc` | 0/14 | Not yet attempted |
 | `wasm32-wasi` | 0/14 | Design phase |
 
-**Resolution**: bearDog must replace `aws-lc-rs` with pure-Rust crypto stack
-(RustCrypto suite). This is tracked as P1: BEARDOG-PURE-RUST in the cross-deployment
-FRAGO. Until resolved, universal portability per the ecoBin standard is not achievable
-for the full NUCLEUS.
+All non-x86 targets are now UNBLOCKED. cellMembrane aarch64 sweep can proceed.
 
 ---
 
