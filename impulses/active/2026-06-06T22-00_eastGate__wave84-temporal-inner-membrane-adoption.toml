@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-08T21:45"
+updated = "2026-06-09T09:23"
 priority = "P2"
 owner = "cellMembrane"
 note = """
@@ -144,8 +144,8 @@ Transport injection status (Wave 100):
 - barracuda 408afaa5: DONE — FIXED (sourdough-core dep removed, local impl)
 - rhizoCrypt e621c6b: DONE — FIXED (sourdough-core dep removed, local impl)
 - bearDog daf682c70: DONE (local impl in beardog_types::btsp, Phase 2 wired)
-- loamSpine: ACK, ready for Wave 103
-- toadStool: PENDING — no TransportEndpoint yet (last remaining gap)
+- loamSpine b9828fe: DONE (local impl, Wave 101 — ahead of Wave 103 target)
+- toadStool: PENDING — only non-exempt primal without TransportEndpoint
 - songBird: EXEMPT (transport provider)
 - biomeOS: EXEMPT (orchestrator)
 
@@ -202,9 +202,15 @@ skunkBat (f22ba12) and petalTongue (b584571) also adopted, local impl.
 squirrel shipped Phase 2 (f180c311) — all 4 outbound TCP wired through connect_transport.
 sourDough shipped scaffold transport-kit + dep violation detection (4cf83fd).
 
-Adoption: 9/11 non-exempt primals adopted. Only toadStool and loamSpine remain.
-All 9 adopted primals use correct LOCAL implementation pattern. Zero self-knowledge violations.
-Next: toadStool transport adoption. loamSpine ready for Wave 103."""
+Wave 102 cascade: loamSpine confirmed DONE (b9828fe, shipped Wave 101 ahead of
+Wave 103 target). skunkBat shipped full transport injection across all integrations
+(1b2f696 — per-capability TRANSPORT env vars). bearDog deep debt continues
+(ec4ed3db0 — fail-closed HSM, test extraction). Depot rebuilt (7b331f4 — 9/9
+stale primals fresh). sourDough shipped validate depot + json output (cb526d8).
+
+Adoption: 10/11 non-exempt primals adopted. toadStool is the ONLY remaining gap.
+All 10 adopted primals use correct LOCAL implementation pattern. Zero self-knowledge violations.
+Next: toadStool transport adoption (S300+ target)."""
 
 [gaps.gap_4]
 id = "CM-WEBHOOK-01"

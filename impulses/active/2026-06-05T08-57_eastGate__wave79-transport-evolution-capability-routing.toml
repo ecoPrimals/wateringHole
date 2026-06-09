@@ -7,7 +7,7 @@ type = "frago"
 from = "eastGate"
 to = ["songBird", "bearDog", "biomeOS", "all-primals"]
 date = "2026-06-05"
-updated = "2026-06-08T21:45"
+updated = "2026-06-09T09:23"
 priority = "P2"
 owner = "songBird + biomeOS + cellMembrane"
 note = """
@@ -178,6 +178,18 @@ songBird auth hardening (aebe271f): reject-by-default auth stubs, real RFC 6238
 TOTP validation, evolved network detection via /proc/net/fib_trie.
 
 bearDog deep debt (d3a8eb7bb): fail-closed PQC, hardcoding elimination, dead dep cleanup.
+
+Wave 102 cascade (Jun 9): Mesh stable overnight (11.6h uptime). 13/13 NUCLEUS alive.
+loamSpine corrected: transport shipped at Wave 101 (b9828fe), not pending as listed
+in Wave 102 blurbs. Transport scorecard now 10/11 non-exempt — only toadStool remains.
+Depot refreshed: 9/9 stale primals rebuilt (plasmidBin 7b331f4). sourDough shipped
+validate depot + json output (cb526d8) for CI/automation. skunkBat completed full
+transport injection across all integration boundaries (1b2f696 — per-capability
+env vars). bearDog continued deep debt (ec4ed3db0 — fail-closed HSM init).
+nestGate Session 100: deep debt sweep pass 2 (BLAKE3 centralization, 45 new tests,
+3,790+ total). rhizoCrypt Wave 104 shipped. petalTongue coverage sprint (+52 tests).
+Running coralReef binary still pre-capabilities.list — needs process restart from
+fresh depot binary to achieve 12/12 IPC compliance.
 """
 
 [context]
@@ -210,9 +222,10 @@ TransportEndpoint type locally using self-knowledge only. The wire format
 (serde tagged JSON: uds/tcp/mesh_relay) is the contract. sourDough validates
 compliance externally via 'sourdough validate transport'.
 
-Correct: sweetGrass, nestGate — local TransportEndpoint type, wire-compatible.
-Incorrect: barracuda, rhizoCrypt — imported sourdough-core as path dep. Must
-remove the dep and implement the type locally to preserve primal self-knowledge.
+10/11 non-exempt primals adopted with correct LOCAL pattern: sweetGrass, nestGate,
+coralReef, squirrel, skunkBat, petalTongue, loamSpine, barracuda, rhizoCrypt, bearDog.
+barracuda + rhizoCrypt self-knowledge violations FIXED (removed sourdough-core dep).
+Only toadStool remains without TransportEndpoint adoption.
 """
 
 [directive.songbird]
@@ -238,12 +251,18 @@ Each primal implements TransportEndpoint LOCALLY in its own types crate.
 The wire format is the standard — do NOT import sourdough-core as a dep.
 sourDough defines the spec and validates compliance externally.
 
-Wave 100 adoption status:
-  sweetGrass v0.7.53: LOCAL impl, wire-compatible, 0 new deps — CORRECT
-  nestGate Session 97: LOCAL impl in nestgate-types, 13,116 tests — CORRECT
-  barracuda 47a17b62: imported sourdough-core as path dep — MUST FIX
-  rhizoCrypt 1caf0f9: imported sourdough-core as path dep — MUST FIX
-  loamSpine: ACK, ready, LOW priority — no changes yet
+Wave 102 adoption status (10/11 non-exempt):
+  sweetGrass v0.7.53: LOCAL — DONE
+  nestGate Session 97-98: LOCAL — DONE (Phase 2 wired)
+  coralReef 0a2f2f6: LOCAL — DONE
+  squirrel f180c311: LOCAL — DONE (Phase 2 — all outbound TCP wired)
+  skunkBat 1b2f696: LOCAL — DONE (full injection across all integrations)
+  petalTongue b584571: LOCAL — DONE
+  loamSpine b9828fe: LOCAL — DONE (shipped Wave 101, ahead of Wave 103 target)
+  barracuda 408afaa5: LOCAL — FIXED (removed sourdough-core dep)
+  rhizoCrypt e621c6b: LOCAL — FIXED (removed sourdough-core dep)
+  bearDog daf682c70: LOCAL — DONE (Phase 2 wired)
+  toadStool: PENDING — only non-exempt primal without TransportEndpoint
   songBird: EXEMPT (transport provider)
   biomeOS: EXEMPT (orchestrator)
 
