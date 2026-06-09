@@ -1,0 +1,277 @@
+# FRAGO: Cross-Topology Validation & Autonomous Gate Operations
+# Replaces: wave104-cross-deployment-readiness (archived — all P1s resolved, 12/16 items done)
+# Purpose: validate across ALL arch, WAN, LAN, and topologies as gates redeploy
+
+[impulse]
+id = "wave106-cross-topology-validation"
+type = "frago"
+from = "eastGate"
+to = ["cellMembrane", "songBird", "biomeOS", "primalSpring", "all-gates"]
+date = "2026-06-09"
+priority = "P2"
+owner = "eastGate + cellMembrane"
+note = """
+The deployment surface works: VPS builds, all gates fetch, 13/13 NUCLEUS alive on
+eastGate + VPS. Mesh is LIVE (eastGate↔golgiBody). Transport 11/11. Depot 14/14 x86_64
++ 14/14 aarch64 built. Zero P1 blockers.
+
+What remains is CROSS-TOPOLOGY VALIDATION: proving the deployment model works on every
+gate, every arch, every network topology. Each gate that comes online is a validation
+opportunity. We evolve the tooling as we go — each redeployment should be easier than
+the last.
+
+Companion: AAR_WAVE105_COMPREHENSIVE_CROSS_DEPLOYMENT_JUN09_2026.md (lessons learned)
+"""
+
+# ──────────────────────────────────────────────────────────────
+# CURRENT STATE (Wave 105c, Jun 9 2026 23:10 UTC)
+# ──────────────────────────────────────────────────────────────
+
+[current_state]
+p1_blockers = "ZERO"
+depot_authority = "VPS (peptidoglycan). Post-primordial standard ENFORCED. All gates FETCH from membrane.primals.eco/depot/."
+mesh = "LIVE — eastGate↔golgiBody(VPS) bidirectional, quality 1.0. strandGate/ironGate OFFLINE. flockGate WAN relay now possible (VPS songbird:7700 LIVE)."
+transport = "11/11 non-exempt COMPLETE."
+depot_x86 = "14/14 BLAKE3 VERIFIED (VPS authority, all gates fetch)."
+depot_aarch64 = "14/14 BUILT. 6/13 RUNNING on grapheneGate (Pixel 8). 7 need UDS adaptation."
+wan_depot = "13/13 serving HTTP 200 from membrane.primals.eco/depot/."
+sovereignty = "S1-S3 GRADUATED. S4 ending today."
+
+# ──────────────────────────────────────────────────────────────
+# VALIDATION MATRIX — what needs to be proven on each topology
+# ──────────────────────────────────────────────────────────────
+
+[validation.lan_x86_64]
+description = "LAN gates (eastGate, strandGate, ironGate, southGate) — x86_64-musl over UDS"
+proven_on = ["eastGate (13/13 alive, VPS-fetched)", "golgiBody VPS (13/13 alive)"]
+needs_validation = ["strandGate (offline)", "ironGate (offline)", "southGate (cross-subnet)"]
+gate_playbook = """When gate comes online:
+  1. ssh <gate> 'curl -O https://membrane.primals.eco/depot/x86_64-unknown-linux-musl/{primal}' × 13
+  2. chmod +x all binaries
+  3. Start songbird with federation port, mesh.init to VPS + known LAN peers
+  4. Start remaining NUCLEUS from depot
+  5. Verify health sweep — 13/13 JSON-RPC alive"""
+
+[validation.wan_x86_64]
+description = "WAN gates (flockGate) — x86_64-musl, depot via HTTPS, mesh via VPS relay"
+proven_on = ["flockGate (4/5 e2e PASS — fetch/launch/mesh.init/health OK)"]
+needs_validation = ["flockGate mesh peering (VPS songbird relay now LIVE — should unblock)"]
+gate_playbook = """When flockGate is online:
+  1. plasmid.fetch --source wan (or curl from membrane.primals.eco/depot/)
+  2. mesh.init to 157.230.3.183:7700 (golgiBody VPS relay)
+  3. Verify discovery.peers shows transitive discovery of eastGate
+  4. Full NUCLEUS health sweep"""
+
+[validation.aarch64_musl]
+description = "ARM gates (grapheneGate/Pixel 8) — aarch64-musl via ADB"
+proven_on = ["grapheneGate (6/13 running: beardog, songbird, rhizocrypt, loamspine, sweetgrass, squirrel)"]
+needs_validation = ["7 remaining primals need UDS path adaptation"]
+gate_playbook = """Remaining work (primalSpring parallel team):
+  1. BIOMEOS_SOCKET_DIR env var override for Android paths
+  2. deploy_pixel.sh sets /data/local/tmp/biomeos/ as socket dir
+  3. Each of 7 primals must respect BIOMEOS_SOCKET_DIR
+  4. Redeploy via deploy_pixel.sh, verify 13/13 alive"""
+
+[validation.vps_nucleus]
+description = "VPS NUCLEUS (golgiBody inner membrane) — x86_64 depot authority"
+proven_on = ["golgiBody (13/13 running, songbird:7700 mesh LIVE)"]
+needs_validation = ["Automated refresh when peptidoglycan builds new binaries"]
+
+# ──────────────────────────────────────────────────────────────
+# REMAINING WORK — focused, deduplicated, team-routed
+# ──────────────────────────────────────────────────────────────
+
+# --- P1: Gate Self-Healing (blocks autonomous operation) ---
+
+[remaining.nucleus_supervision]
+id = "NUCLEUS-SUPERVISION"
+owner = "biomeOS + cellMembrane"
+priority = "P1"
+description = "NUCLEUS primals need supervision — they die silently and nothing restarts them"
+why = """NUCLEUS went down 3+ times during Wave 105. Each time required manual restart.
+There is no systemd unit, no watchdog, no health monitoring. This blocks autonomous gate
+operation — gates cannot self-heal after binary replacement, power events, or crashes."""
+action = """Options (pick one, evolve):
+A. systemd --user units per-primal (most reliable, integrates with OS)
+B. biomeOS lifecycle.watchdog (polls health.liveness, restarts on failure)
+C. nucleus-deploy --supervised mode (registers with systemd on deploy)
+Minimum viable: option B (biomeOS already has composition.deploy + graph.status)."""
+
+[remaining.mesh_persistence]
+id = "MESH-PERSISTENCE"
+owner = "songBird"
+priority = "P1"
+description = "Mesh state is ephemeral — lost on every songbird restart"
+why = """After every restart, operator must manually call mesh.init with peer addresses.
+This blocks autonomous recovery. When a gate reboots, it comes back with zero peers
+and no way to rejoin the collective without operator intervention."""
+action = """1. Persist peers to ~/.local/share/songbird/peers.toml (or configurable path)
+2. On startup, auto-connect to persisted peers
+3. mesh.init should append to persistent store
+4. Future: mDNS/broadcast for LAN peer auto-discovery"""
+
+[remaining.cascade_auto_fetch]
+id = "CASCADE-AUTO-FETCH"
+owner = "cellMembrane"
+priority = "P2"
+description = "Cascade syncs source but does not trigger binary deployment"
+why = """When checksums.toml changes after cascade, the gate has stale binaries.
+The operator must manually fetch + restart. This is the last manual step between
+peptidoglycan building and gates running new binaries."""
+action = """Post-cascade hook: if checksums.toml changed → plasmid.fetch → selective restart.
+Could be a membrane post-cascade hook or a biomeOS --watch mode."""
+
+# --- P2: Cross-Topology Validation (blocks stadial) ---
+
+[remaining.eastgate_federation_port]
+id = "EASTGATE-FEDERATION-PORT"
+owner = "eastGate ops"
+priority = "P2"
+description = "eastGate songbird federation port 7700 not binding to TCP — blocks incoming mesh"
+why = """songbird on eastGate only has UDS. Port 7700 not in ss output despite env vars
+and CLI flags. ironGate's mesh.init to eastGate:7700 gets connection refused. eastGate
+can connect outbound (mesh.init to VPS works) but cannot accept incoming."""
+action = """Fix songbird TCP listener startup. Options:
+1. Run songbird in tmux/screen with correct env vars (not backgrounded with &)
+2. songbird federation.enable JSON-RPC method
+3. systemd user unit with Environment=SONGBIRD_FEDERATION_PORT=7700"""
+
+[remaining.irongate_mesh]
+id = "IRONGATE-MESH"
+owner = "ironGate ops"
+priority = "P2"
+description = "ironGate needs mesh enrollment when online"
+why = "ironGate was initialized (port 7700 listening) but blocked on eastGate:7700.
+With VPS relay now live, ironGate can mesh.init to 157.230.3.183:7700 instead."
+action = """When ironGate comes online:
+1. VPS-fetch 13/13 depot binaries
+2. mesh.init to 157.230.3.183:7700 (VPS relay)
+3. Verify discovery.peers shows eastGate via VPS
+4. This gives us 3-gate collective (eastGate + ironGate + VPS)"""
+
+[remaining.flockgate_wan_e2e]
+id = "FLOCKGATE-WAN-E2E"
+owner = "flockGate ops"
+priority = "P2"
+description = "Complete flockGate WAN e2e — VPS songbird relay is now LIVE"
+why = """flockGate passed 4/5 WAN e2e stages. Was blocked on VPS songbird relay.
+golgiBody songbird:7700 is now LIVE and meshed with eastGate. flockGate should be
+able to mesh.init to VPS and reach the collective."""
+action = """When flockGate is online:
+1. mesh.init to 157.230.3.183:7700
+2. Verify discovery.peers shows eastGate transitively
+3. If PASS → 5/5 WAN e2e → stadial criterion 4 VALIDATED"""
+
+[remaining.graphenegate_uds]
+id = "GRAPHENEGATE-UDS"
+owner = "primalSpring (parallel team)"
+priority = "P2"
+description = "7 primals need Android UDS path adaptation for grapheneGate"
+why = """skunkbat, toadstool, barracuda, coralreef, nestgate, biomeos, petaltongue
+bind to /run/user/ or /tmp/biomeos/ which are not writable on Android."""
+action = """1. Add BIOMEOS_SOCKET_DIR env var to all primals
+2. deploy_pixel.sh sets /data/local/tmp/biomeos/
+3. Redeploy and verify 13/13 alive on Pixel 8"""
+
+# --- P2: Tooling (blocks automation) ---
+
+[remaining.gate_bootstrap]
+id = "GATE-BOOTSTRAP"
+owner = "cellMembrane"
+priority = "P2"
+description = "One-command gate enrollment: membrane gate.bootstrap <gate-name>"
+why = """Currently deploying a gate requires 5+ manual steps. As gates come online
+(strandGate, ironGate, southGate, northGate, westGate), each deployment is manual.
+A single command would: detect arch → fetch depot → verify → configure mesh → start
+NUCLEUS → health sweep → report status."""
+action = """Implement membrane gate.bootstrap:
+1. Detect architecture (uname -m → target triple)
+2. Fetch all depot binaries from VPS
+3. Verify BLAKE3 checksums
+4. Configure songbird peers (from persistent peer store or --peers flag)
+5. Start NUCLEUS with correct env vars
+6. Run health sweep
+7. Report status"""
+
+[remaining.plasmid_fetch_fix]
+id = "PLASMID-FETCH-FIX"
+owner = "cellMembrane"
+priority = "P2"
+description = "plasmid.fetch --source vps has path doubling bug"
+why = "Downloads to primals/arch/primals/arch/ instead of primals/arch/. All 13 fail."
+action = "Fix destination path normalization in plasmid.fetch VPS codepath."
+
+[remaining.sourdough_segfault]
+id = "SOURDOUGH-SEGFAULT"
+owner = "sourDough"
+priority = "LOW"
+description = "sourdough validate depot crashes (segfault)"
+why = "Depot validation falls back to manual b3sum. Erodes trust in tooling."
+action = "Run under RUST_BACKTRACE=1, investigate and fix."
+
+# ──────────────────────────────────────────────────────────────
+# GATE ENROLLMENT PLAYBOOK (for any gate that comes online)
+# ──────────────────────────────────────────────────────────────
+
+[playbook.gate_enrollment]
+description = """Universal playbook for when any gate powers on and needs deployment.
+Until membrane gate.bootstrap exists, this is the manual procedure."""
+
+steps = """
+# 1. Identify gate arch
+ARCH=$(uname -m)  # x86_64 → x86_64-unknown-linux-musl, aarch64 → aarch64-unknown-linux-musl
+
+# 2. Create depot directory
+mkdir -p ~/Development/ecoPrimals/infra/plasmidBin/primals/${ARCH}-unknown-linux-musl/
+
+# 3. Fetch all primals from VPS
+for p in beardog songbird biomeos nestgate coralreef sweetgrass squirrel loamspine rhizocrypt skunkbat petaltongue barracuda toadstool; do
+  curl -o primals/${ARCH}-unknown-linux-musl/$p https://membrane.primals.eco/depot/${ARCH}-unknown-linux-musl/$p
+  chmod +x primals/${ARCH}-unknown-linux-musl/$p
+done
+
+# 4. Verify checksums (compare against checksums.toml from git)
+for p in primals/${ARCH}-unknown-linux-musl/*; do
+  b3sum $p
+done
+
+# 5. Start songbird with federation
+SONGBIRD_FEDERATION_PORT=7700 SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0 \
+  primals/${ARCH}-unknown-linux-musl/songbird server --socket /run/user/$(id -u)/biomeos/songbird.sock &
+
+# 6. Initialize mesh (to VPS relay + any known LAN peers)
+echo '{"jsonrpc":"2.0","method":"mesh.init","params":{"node_id":"<GATE_NAME>","peers":["157.230.3.183:7700"]},"id":1}' | \
+  socat - UNIX-CONNECT:/run/user/$(id -u)/biomeos/songbird.sock
+
+# 7. Start remaining NUCLEUS
+for p in beardog biomeos nestgate coralreef sweetgrass squirrel loamspine rhizocrypt skunkbat petaltongue barracuda toadstool; do
+  primals/${ARCH}-unknown-linux-musl/$p server --socket /run/user/$(id -u)/biomeos/${p}.sock &
+done
+
+# 8. Verify health
+for sock in /run/user/$(id -u)/biomeos/*.sock; do
+  echo '{"jsonrpc":"2.0","method":"health.liveness","id":1}' | timeout 2 socat - UNIX-CONNECT:$sock
+done
+"""
+
+# ──────────────────────────────────────────────────────────────
+# OUTCOME
+# ──────────────────────────────────────────────────────────────
+
+[outcome]
+expected = """
+Each gate that comes online validates a topology:
+  - strandGate → LAN x86_64 re-enrollment from VPS (proves gate.bootstrap)
+  - ironGate → 3rd mesh node via VPS relay (proves collective without direct peer)
+  - flockGate → WAN e2e 5/5 (proves remote covalent over WAN) → stadial criterion 4
+  - grapheneGate → 13/13 aarch64 (proves cross-arch + Android adaptation)
+  - southGate → cross-subnet mesh (proves TURN relay or router config)
+
+As each gate succeeds, we evolve the tooling:
+  - First gate: manual playbook (above)
+  - Second gate: membrane gate.bootstrap script
+  - Third gate: automated with health verification
+  - Fourth gate: fully autonomous with watchdog
+
+The ecosystem becomes self-healing as we go. Each redeployment is easier than the last.
+"""
