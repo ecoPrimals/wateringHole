@@ -1,272 +1,99 @@
 # FRAGO: Temporal Inner Membrane Adoption
-# Evolve entire ecosystem to use membrane temporal.cascade as sole sync interface
+# Cascade sync + depot pipeline as ecosystem infrastructure
 
 [impulse]
 id = "wave84-temporal-inner-membrane-adoption"
 type = "frago"
 from = "eastGate"
-to = ["cellMembrane", "all-primals", "all-springs", "all-gates"]
+to = ["cellMembrane", "all-gates"]
 date = "2026-06-06"
-updated = "2026-06-09T09:23"
+updated = "2026-06-09T09:30"
 priority = "P2"
 owner = "cellMembrane"
 note = """
-Wave 84: cascade system leveled — membrane temporal.cascade is operational
-with git timeouts, CWD workspace resolution, and merge-ff divergence policy.
-38/38 repos sync in ~59 seconds. Manual git loops are deprecated.
-All repos, gates, and springs must adopt the temporal inner membrane
-for sync, deployment, and evolution tracking.
+Cascade is OPERATIONAL and ADOPTED. 38/38 repos sync in <10s via
+membrane temporal.cascade. Freshness auto-publishes. Webhook-driven
+selective harvest operational. All gates have ECOPRIMALS_ROOT set.
+Manual git loops are deprecated.
 
-Wave 85 update: CM-CASCADE-01, CM-FRESHNESS-01, CM-FORGEJO-01 all RESOLVED.
-Parallel cascade (tokio::JoinSet) — 22 repos in 6.9s. Freshness auto-publishes.
-strandGate ACK: cascade adopted, 13/13 primals ALIVE, mesh-ready.
-flockGate ACK: sporePrint transport abstraction shipped (TransportEndpoint enum,
-first primal transport-agnostic, ready for ipc.resolve).
-Remaining: PRIMAL-TRANSPORT-01 (P2, 1/14 done — sporePrint), CM-WEBHOOK-01 (P3).
-
-Wave 86 update: strandGate attempted mesh.init → eastGate (192.168.1.144:7700).
-Result: mesh.init returned initialized:true but 0 reachable peers.
-Root cause: eastGate Songbird port 7700 CONNECTION REFUSED (ping OK 0.26ms).
-strandGate *:7700 LIVE and accepting. 2-gate mesh proof BLOCKED on eastGate
-federation port. eastGate action needed: restart Songbird with --federation-port 7700.
-
-Wave 87: plasmidBin pipeline validated END-TO-END. 13/13 current, NUCLEUS
-launched from depot binary. CM-TRIGGER-01 identified + shipped (78c571c).
-BIO-SEARCH-01 identified (livespore-usb search order). ECOPRIMALS_PLASMID_BIN
-persisted.
-
-CM-WEBHOOK-01: RESOLVED (Wave 91 — webhook handler + HMAC + selective harvest).
-Remaining: PRIMAL-TRANSPORT-01 (P2, 1/14).
-
-Wave 90: primalSpring role FORMALIZED as experimentation laboratory. Three-tier
-model: primalSpring→cellMembrane→projectNUCLEUS. Deep debt sprint COMPLETE.
-
-Wave 91: 2-gate mesh proof PROVEN (3/4). mesh.init → bootstrap_peers_added:1,
-discovery.peers total_count:1, mesh.health_check all_healthy. capability.call
-routes correctly but TCP delivery blocked (eastGate :7700 LAN binding/firewall).
-
-Wave 92: VPS deployment VALIDATED. 13/13 binaries rebuilt + pushed to golgiBody.
-Depot symlink fixed (/opt/ecoPrimals/infra/plasmidBin → /opt/plasmidBin).
-Checksums synced. golgiBody has NO Rust toolchain — builds must happen on gates
-or peptidoglycan. cellMembrane pipeline must NOT cargo build on golgiBody.
-All team responses same-day: biomeOS v4.13 BIO-ORPHAN-01 RESOLVED, songBird
-TransportEndpoint canonicalized, cellMembrane CM-WEBHOOK-01 RESOLVED.
-
-Wave 92 (late): 2-GATE MESH PROOF COMPLETE — BIDIRECTIONAL.
-eastGate started LAN NUCLEUS (192.168.1.144:7700 OPEN). Both directions:
-strandGate→eastGate and eastGate→strandGate pass all 4 criteria (mesh.init,
-discovery.peers, mesh.health_check, direct JSON-RPC). capability.call transport
-proven. SOLE P1 ITEM RESOLVED. No remaining P1 blockers in ecosystem.
-
-Wave 93: primalSpring deployment validation hardening COMPLETE. 52 scenarios,
-887 tests, 52/52 bare cert. s_deployment_pipeline wired. 13/13 harvested.
-
-Wave 94: 3-gate deployment + mesh validation.
-- beardog capability.call SHIPPED (bc3dd077f) — VERIFIED on eastGate, routes
-  correctly through HandlerRegistry (220+ methods). Blocker RESOLVED.
-- ironGate clean-room deployment VALIDATED (all checks PASS, idempotent).
-- Depot reharvested: 13/13 current (2026-06-07T23:47:30Z).
-- NEW BLOCKER: SB-TLS-LAN-01 — songbird HTTP client sends TLS ClientHello to
-  LAN federation peers that serve plain HTTP. Peer returns HTTP/1.1 400 →
-  bootstrap_peers_added:0. Songbird team must support plain HTTP peer probes
-  or add TLS termination to federation server.
-- VPS peptidoglycan available as additional NUCLEUS deployment node alongside
-  LAN gates. Future deployments target projectNUCLEUS as completed systems.
-- Operational findings: SONGBIRD_SECURITY_PROVIDER + SECURITY_PROVIDER_SOCKET +
-  BEARDOG_SOCKET envs all needed, security.sock capability symlink required,
-  stale sockets need rm -f on rollback.
+This FRAGO now tracks the remaining depot/pipeline work that underpins
+cross-deployment readiness. Transport adoption status is tracked in
+wave79-transport-evolution-capability-routing.
 """
+
+[current_state]
+cascade = "OPERATIONAL — 38/38 repos, <10s parallel, freshness auto-publish"
+depot = "14/14 x86_64-musl fresh (Wave 102 rebuild). strandGate confirmed."
+depot_aarch64 = "1/14 (sourdough only). 12 remaining need NDK cross-compile."
+vps = "golgiBody relay operational. No Rust toolchain — refresh-only from depot."
+peptidoglycan = "SSH trust established. Musl target installed. Build node ready."
 
 [context]
 reason = """
-The ecosystem has been using manual bash loops (git fetch/pull per repo)
-for cascade sync despite cellMembrane having a fully typed Rust
-implementation. Wave 84 fixed three operational gaps:
-
-1. Git operations had no timeout → 60s timeout + SSH keepalive
-2. Workspace resolution required ECOPRIMALS_ROOT → CWD walk-up added
-3. Default divergence policy was 'flag' → upgraded to 'merge-ff'
-
-Now membrane temporal.cascade is robust enough to be the sole sync
-interface. Manual git loops waste time and miss divergence detection.
+Wave 84 evolved membrane temporal.cascade into the sole ecosystem sync
+interface: git timeouts, CWD workspace resolution, merge-ff divergence
+policy, parallel dispatch (tokio::JoinSet), freshness tracking, webhook
+triggers. This infrastructure underpins all cross-deployment work.
 """
 
-[aar]
-problem = "Cascade hung on SSH timeout, required manual env, flagged tree-parity for review"
-fix_1 = "git_ops.rs: 60s tokio timeout + GIT_SSH_COMMAND with ConnectTimeout=10"
-fix_2 = "lib.rs: CWD walk-up before executable walk-up in resolve_workspace_root()"
-fix_3 = ".bashrc: ECOPRIMALS_ROOT + GATE_NAME persisted"
-fix_4 = "ecosystem_manifest.toml: divergence_policy = merge-ff"
-validation = "38/38 repos synced, 0 failures, ~59 seconds"
+# ──────────────────────────────────────────────────────────────
+# RESOLVED — cascade adoption complete
+# ──────────────────────────────────────────────────────────────
 
-[directive]
-summary = """
-All ecosystem participants adopt membrane temporal.cascade as their
-sync mechanism. No manual git fetch/pull loops. All gates set
-ECOPRIMALS_ROOT and GATE_NAME in their shell profile. cellMembrane
-evolves the cascade with parallel repo sync, webhook triggers, and
-freshness tracking.
-"""
+[resolved]
+CM_CASCADE_01 = "Parallel dispatch — 22 repos in 6.9s (Wave 85)"
+CM_FRESHNESS_01 = "Auto-publish freshness.toml (Wave 85)"
+CM_FORGEJO_01 = "Transient 500 resolved (Wave 85)"
+CM_WEBHOOK_01 = "Webhook handler + HMAC + selective harvest (Wave 91)"
+VPS_BUILD_01 = "Pipeline refresh-only, no cargo build on golgiBody (Wave 92)"
+CM_PEPTI_SSH_01 = "golgiBody → peptidoglycan SSH trust established (Wave 92)"
+DEPOT_REFRESH = "9/9 stale primals rebuilt, 14/14 checksummed (Wave 102)"
 
-[directive.cellMembrane]
-action = "Evolve cascade: parallel sync, webhook triggers, freshness publish"
-detail = """
-Priority items for cascade evolution:
-1. Parallel repo sync (tokio::spawn per repo) — target <10s for 38 repos
-2. Freshness tracking (publish freshness.toml after each cascade)
-3. Webhook-driven cascade (Forgejo push → trigger selective rebuild)
-4. Forgejo sourDough repo health check (transient 500 on push)
-"""
-priority = "P1"
+# ──────────────────────────────────────────────────────────────
+# REMAINING WORK — depot/pipeline gaps for cross-deployment
+# ──────────────────────────────────────────────────────────────
 
-[directive.all_gates]
-action = "Set ECOPRIMALS_ROOT and GATE_NAME in shell profile"
-detail = """
-Add to ~/.bashrc or equivalent:
-  export ECOPRIMALS_ROOT="$HOME/Development/ecoPrimals"
-  export GATE_NAME="<gate>"
-  
-Then use: membrane temporal.cascade
-Instead of: manual git fetch/pull loops
-"""
-priority = "P1"
-
-[directive.all_primals]
-action = "Adopt transport standard locally, do NOT import sourdough-core"
-detail = """
-Transport injection status (Wave 100):
-- sweetGrass v0.7.53: DONE (local impl, correct pattern)
-- nestGate Session 97-98: DONE (local impl, Phase 2 wired)
-- coralReef 0a2f2f6: DONE (local impl, correct pattern)
-- squirrel f180c311: DONE (local impl, Phase 2 — all 4 outbound TCP wired)
-- skunkBat f22ba12: DONE (local impl, correct pattern)
-- petalTongue b584571: DONE (local impl, correct pattern)
-- barracuda 408afaa5: DONE — FIXED (sourdough-core dep removed, local impl)
-- rhizoCrypt e621c6b: DONE — FIXED (sourdough-core dep removed, local impl)
-- bearDog daf682c70: DONE (local impl in beardog_types::btsp, Phase 2 wired)
-- loamSpine b9828fe: DONE (local impl, Wave 101 — ahead of Wave 103 target)
-- toadStool: PENDING — only non-exempt primal without TransportEndpoint
-- songBird: EXEMPT (transport provider)
-- biomeOS: EXEMPT (orchestrator)
-
-sourDough is the REPOSITORY OF PRIMAL STANDARDS. It defines wire formats,
-validates compliance externally. Primals implement the TransportEndpoint type
-locally using self-knowledge only. The wire format is the contract.
-"""
-priority = "P2"
-
-[gaps]
-summary = """
-New gaps identified from Wave 84 cascade review:
-"""
-
-[gaps.gap_1]
-id = "CM-CASCADE-01"
-description = "Sequential cascade — 38 repos × 1.5s ≈ 57s (should be <10s with parallel)"
+[remaining.build_carrying_cascades]
+id = "CM-BUILD-CASCADE"
+description = "Cascade should auto-rebuild stale depot binaries (build-carrying cascades)"
 owner = "cellMembrane"
 priority = "P2"
-status = "RESOLVED"
-resolution = "Wave 85: tokio::JoinSet parallel dispatch — 22 repos in 6.9s (8.5x speedup)"
+why = """Currently, depot rebuilds are manual (gate operator runs cargo build + harvest).
+Build-carrying cascades would detect stale binaries on cascade and trigger peptidoglycan
+rebuild automatically. This eliminates the depot freshness gap that accumulates between
+waves of primal evolution."""
+action = """cellMembrane depot.rs (194 lines) has provenance tracking with stale=true.
+Wire cascade to trigger peptidoglycan rebuild when staleness detected.
+sourDough validate depot --json (cb526d8) provides machine-readable freshness data."""
 
-[gaps.gap_2]
-id = "CM-FORGEJO-01"
-description = "Forgejo sourDough repo returns 500 on push (transient)"
-owner = "cellMembrane"
-priority = "P2"
-status = "RESOLVED"
-resolution = "Wave 85: repo fsck clean, 6.4M, Forgejo active, disk 67% — transient network issue"
-
-[gaps.gap_3]
-id = "PRIMAL-TRANSPORT-01"
-description = "Transport injection adoption across ecosystem"
-owner = "all-primals"
-priority = "P2"
-status = "IN PROGRESS"
-resolution = """Wave 97: sourDough published TransportEndpoint wire standard.
-Wave 100: 4 primals responded to transport evolution trigger:
-  sweetGrass v0.7.53: LOCAL impl, wire-compatible, 0 new deps — CORRECT PATTERN
-  nestGate Session 97: LOCAL impl in nestgate-types, 13,116 tests — CORRECT PATTERN
-  barracuda 47a17b62: imported sourdough-core as path dep — MUST FIX (self-knowledge violation)
-  rhizoCrypt 1caf0f9: imported sourdough-core as path dep — MUST FIX (self-knowledge violation)
-  loamSpine: ACK, ready, LOW priority — no changes yet
-
-CRITICAL CLARIFICATION (Wave 100): sourDough defines the wire standard and validates
-compliance externally. Primals do NOT import sourdough-core as a crate dependency.
-Each primal implements TransportEndpoint locally. barracuda and rhizoCrypt must remove
-their sourdough-core path dep and implement the type locally, per primal self-knowledge.
-
-Wave 101+ cascade: barracuda (408afaa5) and rhizoCrypt (e621c6b) BOTH removed
-sourdough-core dep and implemented locally. Self-knowledge violation RESOLVED.
-bearDog shipped transport Phase 2 (daf682c70) — local impl in beardog_types::btsp.
-skunkBat (f22ba12) and petalTongue (b584571) also adopted, local impl.
-squirrel shipped Phase 2 (f180c311) — all 4 outbound TCP wired through connect_transport.
-sourDough shipped scaffold transport-kit + dep violation detection (4cf83fd).
-
-Wave 102 cascade: loamSpine confirmed DONE (b9828fe, shipped Wave 101 ahead of
-Wave 103 target). skunkBat shipped full transport injection across all integrations
-(1b2f696 — per-capability TRANSPORT env vars). bearDog deep debt continues
-(ec4ed3db0 — fail-closed HSM, test extraction). Depot rebuilt (7b331f4 — 9/9
-stale primals fresh). sourDough shipped validate depot + json output (cb526d8).
-
-Adoption: 10/11 non-exempt primals adopted. toadStool is the ONLY remaining gap.
-All 10 adopted primals use correct LOCAL implementation pattern. Zero self-knowledge violations.
-Next: toadStool transport adoption (S300+ target)."""
-
-[gaps.gap_4]
-id = "CM-WEBHOOK-01"
-description = "Cascade still timer-polled (30-min); webhook-driven would reduce latency"
+[remaining.aarch64_cross_compile]
+id = "CM-AARCH64-PIPELINE"
+description = "Cross-compile 12 remaining primals for aarch64-linux-android (Pixel/GrapheneOS)"
 owner = "cellMembrane"
 priority = "P3"
-status = "RESOLVED"
-resolution = "Wave 91: webhook handler + HMAC + selective harvest"
+why = """deploy_pixel.sh has all 13 startup handlers wired. Only sourdough is built for
+aarch64-linux-android. Full mobile NUCLEUS requires the remaining 12 primals cross-compiled
+via NDK. Ring/C-dep elimination is complete (sweetGrass v0.7.52) — pure Rust across
+the ecosystem enables clean cross-compile."""
+action = """Set up NDK cross-compile in peptidoglycan pipeline. Use:
+  cargo build --release --target aarch64-linux-android
+Priority: beardog (security), songbird (mesh), biomeos (orchestrator).
+checksums.toml already has [aarch64-linux-android] section ready."""
 
-[gaps.gap_5]
-id = "CM-FRESHNESS-01"
-description = "freshness.toml not published after cascade (--publish-freshness not default)"
+[remaining.vps_depot_sync]
+id = "CM-VPS-DEPOT-SYNC"
+description = "golgiBody depot should sync from peptidoglycan automatically"
 owner = "cellMembrane"
-priority = "P2"
-status = "RESOLVED"
-resolution = "Wave 85: publish_freshness defaults to true for Sync mode (opt-out --no-freshness)"
-
-[gaps.gap_6]
-id = "VPS-BUILD-01"
-description = "plasmid-pipeline.service on golgiBody attempts cargo build — no Rust toolchain on 2GB droplet"
-owner = "cellMembrane"
-priority = "P1"
-status = "RESOLVED"
-resolution = "Wave 92: pipeline now runs plasmid.refresh only (deploy from depot). No cargo build on golgiBody."
-
-[gaps.gap_7]
-id = "CM-PEPTI-DEPOT-01"
-description = "Peptidoglycan depot architecture: shared storage between inner/outer membrane, build-carrying cascades"
-owner = "cellMembrane"
-priority = "P2"
-status = "IN PROGRESS"
-resolution = """Wave 92: SSH trust established, musl target installed on pepti, --with-harvest flag shipped.
-Wave 98: cellMembrane depot.rs module created (194 lines). Depot ownership absorption in progress.
-Wave 102 (strandGate): 9/9 stale primals rebuilt locally — songbird aebe271f, beardog d3a8eb7bb,
-barracuda 9b9cbed3, rhizocrypt 133dd23, coralreef 4c417a95, skunkbat, squirrel, petaltongue,
-sourdough. 14/14 depot binaries checksummed. VPS peptidoglycan rebuild still needed to match.
-Next: peptidoglycan auto-rebuild trigger on cascade (build-carrying cascades)."""
-
-[gaps.gap_8]
-id = "CM-PEPTI-SSH-01"
-description = "golgiBody → peptidoglycan SSH host key not trusted"
-owner = "cellMembrane"
-priority = "P1"
-status = "RESOLVED"
-resolution = "Wave 92: SSH trust established, pepti alias configured, x86_64-unknown-linux-musl target installed."
+priority = "LOW"
+why = """Currently, VPS depot sync is manual (plasmid.refresh pulls from depot).
+After build-carrying cascades land, VPS should auto-refresh on new depot binaries."""
+action = "Wire plasmid.refresh into cascade post-build hook."
 
 [outcome]
 expected = """
-All ecosystem sync goes through membrane temporal.cascade. Manual git
-loops eliminated. Cascade runs in <10s with parallel sync. Freshness
-tracking tells every gate how stale its workspace is. Webhook-driven
-cascade reduces push-to-VPS latency from 30 minutes to ~2 minutes.
-Transport injection enables isomorphic deployment across platforms.
-
-Peptidoglycan serves as the canonical binary depot between inner and outer
-golgiBody membranes. Gates push fresh ecobins on cascade, pepti stores them,
-both membrane sides serve. Build-carrying cascades (--with-harvest) make
-binary freshness part of the sync contract, not a separate manual step.
+Cascade is the sole sync interface. Depot freshness is maintained automatically
+through build-carrying cascades. Cross-arch binaries are produced by peptidoglycan
+for all target triples. VPS deployments stay current via automatic depot sync.
+This infrastructure enables: LAN gate enrollment (just cascade + deploy),
+WAN covalent bonds (depot ships to remote gates), and mobile NUCLEUS (Pixel aarch64).
 """

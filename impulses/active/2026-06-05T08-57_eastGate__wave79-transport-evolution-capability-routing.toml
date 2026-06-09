@@ -7,349 +7,162 @@ type = "frago"
 from = "eastGate"
 to = ["songBird", "bearDog", "biomeOS", "all-primals"]
 date = "2026-06-05"
-updated = "2026-06-09T09:23"
+updated = "2026-06-09T09:30"
 priority = "P2"
-owner = "songBird + biomeOS + cellMembrane"
+owner = "songBird + biomeOS"
 note = """
-Wave 92: VPS deployment VALIDATED. All P1 deployment blockers RESOLVED.
+Transport evolution drives WAN/LAN/cross-arch deployment readiness.
+A primal that accepts TRANSPORT_ENDPOINT can deploy identically on
+eastGate (UDS), strandGate (UDS+TCP), golgiBody (TCP), Pixel (UDS),
+or any future topology. Without it, every deployment is bespoke.
 
-2-gate mesh proof PROVEN at protocol level (Wave 91):
-mesh.init → bootstrap_peers_added:1, discovery.peers total_count:1
-(eastGate reachable:true, source:mesh), mesh.health_check all_healthy:true,
-mesh.status reachable_peers:1. capability.call routes correctly but TCP
-delivery blocked — eastGate :7700 CONNECTION REFUSED on LAN (binding/firewall).
-Mesh discovery + health + routing layers PROVEN.
-
-Resolved (Waves 87-92):
-- SB-FEDERATION-01: songbird federation server mode (0a09354b)
-- BIO-SEARCH-01: biomeOS v4.10 depot-first binary search
-- CM-TRIGGER-01: plasmid.trigger SSH-kicks VPS service (78c571c)
-- BARRACUDA-SOCKET-01: self-referencing socket symlink fixed (126ea3e1)
-- BIO-HEALTHRETRY-01: health check retry with backoff (biomeOS v4.12)
-- BIO-ORPHAN-01: NUCLEUS supervisor + SIGTERM handling (biomeOS v4.13)
-- CM-WEBHOOK-01: webhook handler + HMAC + selective harvest
-- VPS-DEPOT-01: depot symlink fixed (/opt/ecoPrimals/infra/plasmidBin → /opt/plasmidBin)
-- VPS deployment: 13/13 binaries rebuilt musl-static, checksums synced
-
-VPS pipeline gap: golgiBody (2GB droplet) has no Rust toolchain. Builds must
-happen on gates or peptidoglycan, then refresh to VPS. cellMembrane pipeline
-must NOT attempt cargo build on golgiBody (VPS-BUILD-01).
-
-Wave 92 (late): 2-gate mesh proof COMPLETE — BIDIRECTIONAL.
-eastGate started LAN NUCLEUS (beardog + songbird + skunkbat, supervisor mode).
-192.168.1.144:7700 OPEN. mesh.init PASS both directions (strandGate→eastGate,
-eastGate→strandGate). discovery.peers: total_count:1 both sides. mesh.health_check:
-all_healthy:true both sides. Direct JSON-RPC health.liveness: alive both sides.
-capability.call: routes through mesh to remote providers (transport proven).
-Local capability resolution takes precedence over remote — expected behavior,
-full cross-gate dispatch sharpens as primals register capability groups.
-SOLE P1 ITEM RESOLVED. Mesh template validated for additional gate enrollment.
-
-Wave 93: barraCuda build FIXED (ac920e50, BCML binary format restored).
-Depot: 13/13 current, 0 drifted. All 13 primals rebuilt and pushed to VPS.
-cellMembrane deep debt: 333 tests (+12), zero clippy, zero TODO/FIXME.
-Pipeline architecture evolved: peptidoglycan depot, --with-harvest, refresh-only VPS.
-VPS-BUILD-01 RESOLVED: pipeline no longer attempts cargo build on golgiBody.
-CM-PEPTI-SSH-01 RESOLVED: golgiBody → peptidoglycan SSH trust established.
-False drift detection FIXED: Forgejo SSH fallback for private repos.
-
-ALL P1 ITEMS RESOLVED. Zero P1 blockers in the ecosystem.
-
-Wave 94: 3-gate deployment validation.
-- beardog capability.call SHIPPED (bc3dd077f) and VERIFIED locally — routes
-  {capability,operation,args} → {capability}.{operation} through HandlerRegistry.
-  220+ methods routable. 10 tests. BLOCKER RESOLVED.
-- ironGate clean-room deployment VALIDATED by cellMembrane team (all checks PASS).
-- Depot harvested: 13/13 current (2026-06-07T23:47:30Z).
-- NEW BLOCKER: Songbird HTTP client TLS-only for peer connections. Federation
-  peers serve plain HTTP on :7700, but songbird_http_client sends TLS ClientHello.
-  Peer responds with HTTP/1.1 400 Bad Request → TLS handshake fails → bootstrap_
-  peers_added:0, reachable_peers:0. mesh.init returns initialized but no peers
-  register because the probe connection fails at TLS.
-  SB-TLS-LAN-01: songbird HTTP client must support plain HTTP for LAN federation
-  peers, OR federation server must terminate TLS.
-- VPS peptidoglycan available as additional NUCLEUS deployment node.
-- Key findings: --security-socket flag NOT recognized by songbird (use
-  SONGBIRD_SECURITY_PROVIDER + SECURITY_PROVIDER_SOCKET + BEARDOG_SOCKET envs),
-  stale sockets require rm -f on rollback, security.sock capability symlink needed.
-
-Remaining P2: transport injection (1/14 primals — sporePrint has TransportEndpoint).
-Phase 2 M1 (songbird TransportEndpoint) IN PROGRESS — types shipped, ipc.resolve next.
-Phase 2 M2-M4: CompositionContext Songbird query, capability registration, transport deprecation.
-
-Wave 97: sourDough ecobin audit on strandGate primals. 0/5 self-binding anti-patterns
-(clean for transport injection). sweetGrass flagged for C deps (ring, openssl) blocking
-ecoBin cross-arch. Investigation: ring is dev-only (testcontainers→bollard→rustls),
-openssl not in tree at all. Production binary is pure Rust. BUT: sweetGrass must
-HARD DROP ring from dev-deps and delegate ALL crypto to bearDog via Tower Atomic
-capability.call (capability='crypto'). No primal should carry its own crypto spine.
-
-Wave 98: sweetGrass RESOLVED ring elimination (v0.7.52). testcontainers + bollard
-removed. Zero C/ASM crypto in entire dep tree. deny.toml hardened: ring + rustls
-fully denied with zero wrappers. ecoBin cross-arch UNBLOCKED. 1613+ tests, 91.7%.
-strandGate formatted all 5 owned primals (cargo fmt pushed). [[bin]] validator
-false positive flagged — sourDough validate ecobin only checks workspace root,
-not crate manifests. sourDough team should fix.
-strandGate reports: sourDough musl binary from depot still segfaults on their gate.
-They built from glibc source locally. Our eastGate depot has the FIXED static-pie
-binary (2026-06-08 rebuild with link-self-contained=yes) — strandGate needs to
-pull the updated depot binary, not use the May 28 cached version.
-songBird: major evolution — 1657 lines, TLS handshake tests added. SB-TLS-LAN-01
-likely addressed (plain HTTP probe shipped dba32023).
-cellMembrane: depot.rs module created (194 lines). Depot ownership absorption in progress.
-Full NUCLEUS deployed on eastGate: 13/13 primals running, all IPC-live over UDS.
-biomeos fix applied (neural-api subcommand, not server). primalspring removed from
-COMP_FULL (13 deployable primals, primalspring is a validation spring).
-VPS peptidoglycan rebuild needed for stale binaries (7/14 stale after cascade).
-
-Wave 99 (mesh revalidation): 3-gate mesh revalidation attempted.
-LAN peer at 192.168.1.173:7700 CONFIRMED ALIVE (HTTP /jsonrpc returns alive).
-strandGate (192.168.1.100) federation ports CLOSED — running UDS-only.
-mesh.init from eastGate returns initialized:true but bootstrap_peers_added:0.
-ROOT CAUSE: Two upstream blockers still active:
-  SB-TLS-LAN-01 (STILL ACTIVE): songbird TLS handshake fails — beardog rejects
-    crypto.x25519_generate_ephemeral (requires capability token). Peer probe pipeline
-    attempts TLS ClientHello, beardog denies the crypto call, probe fails.
-  SB-SECURITY-URL-01 (NEW): songbird formats beardog trust/evaluate URL as relative
-    path (beardog/api/v1/trust/evaluate) instead of UDS socket path → Invalid URL.
-    This blocks peer trust evaluation even when direct HTTP reachability is confirmed.
-eastGate songbird has NO federation TCP port (launched --uds-only). For mesh, songbird
-needs at minimum a federation HTTP port open for peer probes (--port or similar).
-HANDOFF: songbird team must fix security provider URL resolution to use UDS socket
-path, and beardog team must allow crypto.x25519 calls from songbird without capability
-token (or songbird must acquire the token during Tower Atomic startup).
-
-Wave 99b (post-cascade revalidation): songbird 4eb5111d pulled — PARTIAL FIX.
-songbird rebuilt from source with P1 fix commit. Deployed to eastGate with:
-  SECURITY_PROVIDER_SOCKET=/tmp/biomeos/biomeos/security.sock
-  BEARDOG_SOCKET=/tmp/biomeos/biomeos/beardog-6df362cb.sock
-  SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0 --port 7700
-Federation port *:7700 LIVE. Local /health and /jsonrpc respond correctly.
-SB-SECURITY-URL-01 PARTIAL: security_setup.rs now resolves bare names to socket paths
-via XDG scanning (resolve_bare_name_to_endpoint). BUT security_client still appends
-REST path to socket path: /tmp/biomeos/biomeos/security.sock/api/v1/trust/evaluate
-→ Invalid URL: Missing scheme. Security client needs UDS JSON-RPC, not HTTP over path.
-SB-TLS-LAN-01 IMPROVED: TLS handshake now properly detects plain HTTP responses
-(logged: 'Server responded with HTTP instead of TLS'). BUT HttpRemoteConnection
-fallback (http_remote.rs, 151 lines) not yet triggered on TLS failure → mesh.init
-still returns bootstrap_peers_added:0.
-biomeOS v4.14 (a459ec58): LocalTrusted access level pushed to git but running binary
-is pre-v4.14. composition.deploy still auth-gated on running instance.
-coralReef capabilities.list fix (15d1702) pushed to git but running binary is pre-fix.
-NEXT: songbird security_client must use UDS JSON-RPC for trust evaluation on local
-socket. HttpRemoteConnection fallback path needs activation on TLS detection failure.
-biomeOS + coralReef need rebuild from latest commits for full validation.
-
-Wave 101+ (post-cascade revalidation): MESH IS LIVE.
-songbird 03f23d45 + aebe271f rebuilt and deployed on eastGate. Both P1 integration
-gaps RESOLVED:
-  SB-SECURITY-URL-01: RESOLVED — trust/lineage API calls route through adapter
-    transport when endpoint is UDS socket path. transport_get/transport_post exposed
-    on SecurityAdapter.
-  SB-TLS-LAN-01: RESOLVED — Error::is_http_not_tls() detection added. TLS retry
-    loop breaks immediately on HTTP-not-TLS detection instead of exhausting 3 retries.
-  BONUS: discovery bridge crypto failure no longer blocks plain HTTP checks.
-    mesh.init accepts both 'bootstrap_peers' and 'peers' param keys.
-
-Mesh revalidation (eastGate → strandGate 192.168.1.173:7700):
-  mesh.init: bootstrap_peers_added:1, initialized:true ✓
-  discovery.peers: total_count:1, quality:1.0, protocols:["tcp"] ✓
-  mesh.health_check: all_healthy:true, latency_ms:0, path_type:direct ✓
-  mesh.status: reachable_peers:1, direct:1, relay_enabled:true ✓
-
-3-GATE MESH OPERATIONAL. SB-TLS-LAN-01 and SB-SECURITY-URL-01 both RESOLVED.
-No remaining P1 mesh blockers. ironGate (192.168.1.100) not responding on :7700
-(federation not currently running there), but protocol is proven bidirectional.
-
-Transport evolution scorecard (Wave 101+):
-  9/11 non-exempt primals adopted TransportEndpoint:
-    CORRECT LOCAL: sweetGrass, nestGate, coralReef, squirrel, skunkBat, petalTongue
-    SELF-KNOWLEDGE FIXED: barracuda (408afaa5), rhizoCrypt (e621c6b) — removed
-      sourdough-core dep, implemented locally
-    HIGH PRIORITY DONE: bearDog (daf682c70) — local impl in beardog_types::btsp
-  REMAINING: toadStool (no TransportEndpoint yet), loamSpine (ACK, LOW, Wave 103)
-  EXEMPT: songBird (transport provider), biomeOS (orchestrator)
-
-NUCLEUS health (eastGate):
-  12/12 liveness PASS, 12/12 readiness PASS, 11/12 capabilities PASS
-  (coralReef running pre-capabilities.list binary — needs rebuild)
-
-songBird auth hardening (aebe271f): reject-by-default auth stubs, real RFC 6238
-TOTP validation, evolved network detection via /proc/net/fib_trie.
-
-bearDog deep debt (d3a8eb7bb): fail-closed PQC, hardcoding elimination, dead dep cleanup.
-
-Wave 102 cascade (Jun 9): Mesh stable overnight (11.6h uptime). 13/13 NUCLEUS alive.
-loamSpine corrected: transport shipped at Wave 101 (b9828fe), not pending as listed
-in Wave 102 blurbs. Transport scorecard now 10/11 non-exempt — only toadStool remains.
-Depot refreshed: 9/9 stale primals rebuilt (plasmidBin 7b331f4). sourDough shipped
-validate depot + json output (cb526d8) for CI/automation. skunkBat completed full
-transport injection across all integration boundaries (1b2f696 — per-capability
-env vars). bearDog continued deep debt (ec4ed3db0 — fail-closed HSM init).
-nestGate Session 100: deep debt sweep pass 2 (BLAKE3 centralization, 45 new tests,
-3,790+ total). rhizoCrypt Wave 104 shipped. petalTongue coverage sprint (+52 tests).
-Running coralReef binary still pre-capabilities.list — needs process restart from
-fresh depot binary to achieve 12/12 IPC compliance.
+KEY MILESTONE (Wave 101): Mesh is LIVE. SB-TLS-LAN-01 + SB-SECURITY-URL-01
+both RESOLVED. eastGate↔strandGate mesh proven stable (11.6h+).
+Transport adoption at 10/11 non-exempt primals. Depot refreshed (14/14).
+Zero P1 blockers in the ecosystem.
 """
+
+[current_state]
+mesh = "LIVE — eastGate↔strandGate bidirectional, 11.6h+ stable, all 4 criteria PASS"
+transport_adoption = "10/11 non-exempt primals (toadStool is sole remaining gap)"
+nucleus = "13/13 alive on eastGate, 12/12 liveness+readiness, 11/12 capabilities"
+depot = "14/14 x86_64-musl fresh (Wave 102 rebuild). 1/14 aarch64 (sourdough only)"
+self_knowledge = "Zero violations — barracuda+rhizoCrypt sourdough-core deps removed"
+ipc_resolve = "NOT YET SHIPPED — songBird Phase 2 M1 blocker"
 
 [context]
 reason = """
-Wave 79 established the UDS-only stadial gate: nucleus_launcher defaults
-port-free, TCP discovery gated, all graphs uds_only. BD-TRUST-01 resolved
-(Songbird auto trust in mesh.init). All 4 upstream gaps closed.
-
 UDS is convergent evolution — correct first step but not final form.
 UDS is Unix-only, single-machine, path-length-limited, and not isomorphic.
-The target architecture is capability-addressed routing through Songbird,
-where primals never know or choose their transport.
+The target is capability-addressed routing through Songbird, where primals
+never know or choose their transport.
 
-This FRAGO defines the transport evolution from Phase 1 (UDS convergence)
-to Phase 2 (Songbird-routed IPC) to Phase 3 (Tower transport abstraction).
+sourDough is the REPOSITORY OF PRIMAL STANDARDS — it defines wire formats
+and validates compliance externally. Primals implement TransportEndpoint
+locally using self-knowledge only. The wire format is the contract.
 """
 reference = "primalSpring/docs/TRANSPORT_EVOLUTION.md"
 
-[directive]
-summary = """
-All primals must evolve toward transport ignorance. A primal provides
-capabilities and consumes capabilities. How they connect is decided by
-Songbird (runtime) and Tower Atomic (composition). No primal should
-hardcode TcpListener::bind or UnixListener::bind — transport is injected.
+# ──────────────────────────────────────────────────────────────
+# REMAINING WORK — what blocks WAN/LAN/cross-arch deployments
+# ──────────────────────────────────────────────────────────────
 
-CRITICAL: sourDough is the REPOSITORY OF PRIMAL STANDARDS — it defines
-wire formats, validates compliance, and scaffolds new primals. But primals
-do NOT import sourdough-core as a dependency. Each primal implements the
-TransportEndpoint type locally using self-knowledge only. The wire format
-(serde tagged JSON: uds/tcp/mesh_relay) is the contract. sourDough validates
-compliance externally via 'sourdough validate transport'.
-
-10/11 non-exempt primals adopted with correct LOCAL pattern: sweetGrass, nestGate,
-coralReef, squirrel, skunkBat, petalTongue, loamSpine, barracuda, rhizoCrypt, bearDog.
-barracuda + rhizoCrypt self-knowledge violations FIXED (removed sourdough-core dep).
-Only toadStool remains without TransportEndpoint adoption.
-"""
-
-[directive.songbird]
-action = "Evolve ipc.resolve to return transport-qualified endpoints"
-detail = """
-ipc.resolve currently returns a socket path or host:port string.
-Evolve to return a structured endpoint:
-  { transport: "uds", path: "/run/membrane/beardog.sock" }
-  { transport: "tcp", host: "127.0.0.1", port: 7700 }
-  { transport: "mesh_relay", peer_id: "strand-gate", capability: "security" }
-This enables Tower Atomic to select transport without string parsing.
-"""
-priority = "P1"
-
-[directive.all_primals]
-action = "Accept transport injection, do not self-bind, do NOT import sourdough-core"
-detail = """
-Current: primals parse --port/--socket/--bind CLI flags and self-bind.
-Target: primals receive a transport channel from the launcher/Tower.
-Interim: primals accept TRANSPORT_ENDPOINT env var (JSON, serde tagged).
-
-Each primal implements TransportEndpoint LOCALLY in its own types crate.
-The wire format is the standard — do NOT import sourdough-core as a dep.
-sourDough defines the spec and validates compliance externally.
-
-Wave 102 adoption status (10/11 non-exempt):
-  sweetGrass v0.7.53: LOCAL — DONE
-  nestGate Session 97-98: LOCAL — DONE (Phase 2 wired)
-  coralReef 0a2f2f6: LOCAL — DONE
-  squirrel f180c311: LOCAL — DONE (Phase 2 — all outbound TCP wired)
-  skunkBat 1b2f696: LOCAL — DONE (full injection across all integrations)
-  petalTongue b584571: LOCAL — DONE
-  loamSpine b9828fe: LOCAL — DONE (shipped Wave 101, ahead of Wave 103 target)
-  barracuda 408afaa5: LOCAL — FIXED (removed sourdough-core dep)
-  rhizoCrypt e621c6b: LOCAL — FIXED (removed sourdough-core dep)
-  bearDog daf682c70: LOCAL — DONE (Phase 2 wired)
-  toadStool: PENDING — only non-exempt primal without TransportEndpoint
-  songBird: EXEMPT (transport provider)
-  biomeOS: EXEMPT (orchestrator)
-
-ecoBin compliance: a primal binary must not assume Unix, TCP, or any
-specific transport. Transport is an injected dependency. And a primal
-must not depend on another primal's crate — self-knowledge only.
-"""
+[remaining.toadstool_transport]
+id = "TRANSPORT-TOADSTOOL"
+description = "toadStool is the only non-exempt primal without TransportEndpoint"
+owner = "toadStool"
 priority = "P2"
+why = """toadStool has 101 TCP refs across GPU compute dispatch, orchestration IPC,
+and health probes. Without transport injection, toadStool deployments require
+manual port configuration — blocking isomorphic cross-arch deployment."""
+action = """Implement TransportEndpoint locally in toadstool-types. Accept
+TRANSPORT_ENDPOINT env var. ~30 lines for connect_transport(). See sweetGrass
+sweet_grass_core::transport or nestGate nestgate-types::transport for reference."""
 
-[directive.sweetgrass]
-action = "Hard-drop C crypto deps (ring, openssl) — delegate to bearDog via Tower Atomic"
-priority = "RESOLVED"
-detail = """
-strandGate audit (Wave 97) found ring in sweetGrass dependency tree via
-testcontainers→bollard→rustls. openssl is not present. Production binary is
-currently pure Rust, but the dev-dep chain pulls ring (C/asm) which:
-
-1. Breaks ecoBin cross-arch compliance (ring fails on aarch64-linux-android,
-   GrapheneOS Pixel 8 — the blurb confirms beardog already hit this)
-2. Violates Tower Atomic security posture: no primal should carry its own
-   crypto stack. bearDog IS the ecosystem crypto spine. All crypto operations
-   (signing, hashing, TLS, key exchange) route through bearDog via
-   capability.call(capability='crypto', operation='crypto.*')
-3. Blocks isomorphic deployment: ring has platform-specific C/asm that
-   prevents single-binary deployment across all targets
-
-Action required:
-  - Remove testcontainers + bollard from dev-deps (replace with mock/stub)
-  - If any production code uses ring/rustls directly: replace with
-    bearDog capability.call(crypto.sign, crypto.encrypt, etc.)
-  - Verify: cargo tree -i ring --no-dev returns empty (zero production C deps)
-  - Run sourdough validate ecobin to confirm clean
-
-bearDog now ships capability.call (Wave 94, bc3dd077f) with 220+ methods
-including full crypto suite. The infrastructure is ready — sweetGrass just
-needs to consume it instead of carrying its own.
-"""
-
-[directive.biomeOS]
-action = "graph.deploy evolves to capability-only node declarations"
-detail = """
-Current graph nodes declare transport hints (transport = 'uds_only').
-Target: nodes declare only capabilities. biomeOS + Songbird select transport
-at deploy time based on topology, platform, and composition tier.
-"""
+[remaining.songbird_ipc_resolve]
+id = "SONGBIRD-IPC-RESOLVE"
+description = "songBird ipc.resolve must return structured TransportEndpoint JSON"
+owner = "songBird"
 priority = "P2"
+why = """10 primals accept TRANSPORT_ENDPOINT but nobody produces it yet. ipc.resolve
+currently returns plain socket paths or host:port strings. Once it returns structured
+JSON, Tower Atomic can inject endpoints at composition deploy time — unlocking
+topology-aware deployment across LAN, WAN, and cross-arch."""
+action = """Evolve ipc.resolve response from string to:
+  { "transport": "uds", "path": "/run/biomeos/beardog.sock" }
+  { "transport": "tcp", "host": "192.168.1.173", "port": 9100 }
+  { "transport": "mesh_relay", "peer_id": "strandgate", "capability": "security" }
+This is Phase 2 M1 — the keystone that connects consumer-side transport injection
+(10/11 adopted) to producer-side endpoint resolution."""
+
+[remaining.biomeos_orchestration]
+id = "BIOMEOS-LOCALTRUSTED"
+description = "biomeOS v4.14 rebuild needed — LocalTrusted access for nucleus-deploy --graph-deploy"
+owner = "biomeOS"
+priority = "P2"
+why = """nucleus-deploy --graph-deploy calls composition.deploy via UDS JSON-RPC. Currently
+auth-gated by BTSP. v4.14 (a459ec58) adds LocalTrusted access level — UDS callers get
+orchestration method access without capability tokens. Unblocks automated graph deployment."""
+action = "Rebuild biomeOS from a459ec58+, harvest to depot. eastGate will revalidate --graph-deploy."
+
+[remaining.coralreef_restart]
+id = "CORALREEF-RESTART"
+description = "Running coralReef binary is pre-capabilities.list — needs restart from depot"
+owner = "eastGate"
+priority = "LOW"
+why = "Depot has the fix (4c417a95). Process restart gets IPC compliance from 11/12 to 12/12."
+action = "Restart coralReef from fresh depot binary on next NUCLEUS redeploy."
+
+[remaining.cross_arch]
+id = "CROSS-ARCH-AARCH64"
+description = "12/14 primals need aarch64-linux-android cross-compilation for Pixel/GrapheneOS"
+owner = "cellMembrane"
+priority = "P3"
+why = """deploy_pixel.sh has all 13 startup handlers wired. Only sourdough is built for
+aarch64. Full Pixel NUCLEUS requires NDK cross-compile for remaining 12 primals.
+Transport injection (10/11 done) means the same binaries work across architectures."""
+action = "Set up NDK cross-compile pipeline in peptidoglycan. Priority: beardog, songbird, biomeos."
+
+[remaining.wan_covalent]
+id = "WAN-COVALENT"
+description = "WAN mesh validation with flockGate"
+owner = "flockGate"
+priority = "P3"
+why = """LAN mesh is proven. WAN mesh (flockGate at remote location) validates that the
+transport abstraction works across network boundaries, NAT traversal, and latency.
+songBird's relay + STUN/TURN infrastructure exists but is untested in production."""
+action = "Coordinate with flockGate: deploy songbird with federation port, mesh.init to eastGate."
+
+[remaining.irongate_mesh]
+id = "IRONGATE-MESH"
+description = "ironGate mesh enrollment — federation port not running"
+owner = "ironGate"
+priority = "LOW"
+why = "ironGate has 23 UDS sockets deployed. Federation port activation enrolls 3rd LAN gate."
+action = "Start songbird with --port 7700, mesh.init to eastGate + strandGate."
+
+# ──────────────────────────────────────────────────────────────
+# TRANSPORT ADOPTION SCORECARD
+# ──────────────────────────────────────────────────────────────
+
+[transport_scorecard]
+done = [
+  "sweetGrass v0.7.53 — LOCAL, wire-compatible",
+  "nestGate Session 97-98 — LOCAL, Phase 2 wired",
+  "coralReef 0a2f2f6 — LOCAL, 19 tests",
+  "squirrel f180c311 — LOCAL, Phase 2 (all 4 outbound TCP wired)",
+  "skunkBat 1b2f696 — LOCAL, full injection (per-capability env vars)",
+  "petalTongue b584571 — LOCAL",
+  "loamSpine b9828fe — LOCAL, shipped ahead of Wave 103 target",
+  "barracuda 408afaa5 — LOCAL (sourdough-core dep removed)",
+  "rhizoCrypt e621c6b — LOCAL (sourdough-core dep removed)",
+  "bearDog daf682c70 — LOCAL in beardog_types::btsp, Phase 2 wired",
+]
+pending = ["toadStool — only remaining gap (101 TCP refs)"]
+exempt = ["songBird (transport provider)", "biomeOS (orchestrator)"]
+
+# ──────────────────────────────────────────────────────────────
+# PHASES
+# ──────────────────────────────────────────────────────────────
 
 [phases]
-phase_1 = "UDS Convergence (Wave 80c) — COMPLETE. 13/13 VPS-ready. All headless regressions RESOLVED. primalspring_primal deprecated. Pipeline validated. UDS health probe fix shipped (squirrel, petalTongue)."
-phase_2 = """Songbird-Routed IPC — IN PROGRESS.
-Wave 97: sourDough absorbed TransportEndpoint (wire-compatible with songbird_types).
-sourdough-core now has connect_transport(), IpcClient, TransportStream.
-Scaffold templates emit transport-injected primals (TRANSPORT_ENDPOINT env var).
-sourdough validate transport audits any primal for compliance.
-Cross-arch: sourDough deploys to Pixel 8 (aarch64-linux-android). Musl segfault FIXED
-(link-self-contained=yes for static-pie). strandGate audit: 5/5 primals clean for
-self-binding, 0/5 have TransportEndpoint yet (waiting on ipc.resolve).
-NUCLEUS tower redeployed from plasmidBin on eastGate (beardog+songbird+skunkbat).
-cellMembrane absorbed transport.rs into cellmembrane-types. Harvest improvements shipped.
-ipc.resolve NEXT (Phase 2 M1). 1/14 primals transport-agnostic (sporePrint).
-
-Wave 99: Full NUCLEUS 13/13 on eastGate (all IPC-live over UDS). IPC compliance sweep:
-12/12 liveness PASS, 12/12 readiness PASS, 11/12 capabilities PASS (coralReef missing).
-nucleus-deploy --graph-deploy flag ships: probes biomeOS, calls composition.deploy +
-graph.status. Auth-gated by BTSP (expected — beardog cap token integration needed).
-XDG_RUNTIME_DIR fix in nucleus-deploy config. Pixel deploy: all 13 startup handlers
-wired, aarch64-linux-android path discovery added. 1/14 aarch64 built (sourdough),
-12 pending cross-compile. sweetGrass ring elimination RESOLVED (v0.7.52).
-GLACIAL_SHIFT_READINESS updated with Wave 99 status.
-
-3-gate mesh BLOCKED resolved: SB-TLS-LAN-01 + SB-SECURITY-URL-01 both fixed in
-songbird 03f23d45+aebe271f. 2-gate mesh PROVEN (eastGate↔strandGate, 10.8h stable).
-
-Wave 102 (strandGate depot refresh): 9/9 stale primals rebuilt to musl-static.
-songbird aebe271f (mesh+auth), beardog d3a8eb7bb (transport+PQC, 220+ methods),
-barracuda 9b9cbed3 (sourdough-core removed), rhizocrypt 133dd23 (transport+service),
-coralreef 4c417a95 (capabilities.list), skunkbat+squirrel+petaltongue+sourdough.
-14/14 depot binaries checksummed. Mesh validated: init→discovery→health_check all PASS.
-9/11 primals transport-adopted. loamSpine already shipped (b9828fe). toadStool last gap.
-"""
-phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE. All 14 primals ready. plasmidBin fully harvested. sourDough validate transport enables systematic compliance auditing. After 3-gate mesh proven + ipc.resolve, all primals adopt TransportEndpoint."
+phase_1 = "UDS Convergence — COMPLETE. 13/13 VPS-ready. All headless regressions resolved."
+phase_2 = """Songbird-Routed IPC — 90% COMPLETE.
+Transport injection: 10/11 non-exempt adopted. toadStool remaining.
+ipc.resolve: NOT YET SHIPPED (Phase 2 M1 — the keystone).
+Mesh: LIVE (eastGate↔strandGate, 2-gate bidirectional proven).
+Depot: 14/14 fresh x86_64-musl. sourDough validate transport + depot operational.
+Remaining: toadStool transport, songBird ipc.resolve, biomeOS LocalTrusted rebuild."""
+phase_3 = """Tower Transport Abstraction — TARGET.
+After ipc.resolve ships and toadStool adopts, all primals are transport-ignorant.
+Composition graphs deploy identically across VPS/desktop/Pixel/container.
+Adding a gate becomes O(n): start bearDog + Songbird, mesh.init. No port config."""
 
 [phases.phase_2_milestones]
-m1 = "Songbird ipc.resolve returns transport-qualified endpoints"
-m2 = "CompositionContext queries Songbird instead of probing sockets"
-m3 = "nucleus_launcher registers capabilities at spawn time"
-m4 = "Graph metadata: transport field deprecated"
+m1 = "songBird ipc.resolve returns structured TransportEndpoint — IN PROGRESS"
+m2 = "CompositionContext queries Songbird instead of probing sockets — PENDING"
+m3 = "nucleus_launcher registers capabilities at spawn time — PENDING"
+m4 = "Graph metadata: transport field deprecated — PENDING"
 
 [outcome]
 expected = """
@@ -357,7 +170,6 @@ Primals become transport-ignorant. A composition graph deploys identically
 on VPS, desktop, Raspberry Pi, container, or WASM. Adding a gate is O(n):
 start bearDog, start Songbird, mesh.init with one peer. No port config,
 no firewall rules, no transport selection. The mesh self-organizes.
-
-This eliminates the isomorphic/fractal deployment blockers and enables
-ecoBin single-binary compliance across all platforms.
+This unlocks: LAN multi-gate mesh, WAN covalent bonds, Pixel mobile NUCLEUS,
+and future topologies (container, WASM, embedded) without per-primal changes.
 """
