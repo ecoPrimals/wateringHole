@@ -117,15 +117,16 @@ Production deployment on golgiBody-ext and flockGate validation pending."""
 
 [remaining.graphenegate_bootstrap]
 id = "GRAPHENEGATE-BOOTSTRAP"
-owner = "eastGate"
+owner = "primalSpring (parallel team)"
 priority = "P2"
 description = "Pixel 8 as portable trust anchor + gate spawner — aarch64 musl BUILT, NDK target next"
 why = """grapheneGate is the portable physical root of trust. aarch64-unknown-linux-musl
 sweep COMPLETE (14/14). Next step: aarch64-linux-android NDK cross-compile (distinct
-target from musl — requires Android NDK toolchain)."""
+target from musl — requires Android NDK toolchain). Pixel is plugged over ADB to
+eastGate — primalSpring parallel team owns this deployment path."""
 action = """1. Set up aarch64-linux-android NDK cross-compile toolchain
 2. Build aarch64-android depot from musl-validated sources
-3. Deploy via deploy_pixel.sh (all 13 handlers ready)
+3. Deploy via deploy_pixel.sh over ADB (all 13 handlers ready)
 4. Validate Role 1 beacon broadcast
 See GRAPHENEGATE_BOOTSTRAP_STANDARD.md."""
 
@@ -188,21 +189,15 @@ resolution = """Full aarch64 sweep complete. All 14 primals cross-compile cleanl
 bearDog Wave 145 pure Rust. Checksums committed. NOTE: sweep overwrote x86_64 checksums
 section — see CM-CHECKSUM-MULTI-TARGET AAR."""
 
-[remaining.cm_checksum_multi_target]
+[resolved.cm_checksum_multi_target]
 id = "CM-CHECKSUM-MULTI-TARGET"
 owner = "cellMembrane"
-priority = "P2"
-description = "checksums.toml must be multi-target aware — aarch64 sweep destroyed x86_64 entries"
-why = """The aarch64 sweep (commit c46cc1c) overwrote checksums.toml wholesale, destroying
-the [x86_64-unknown-linux-musl] section (14 entries). The sweep pipeline treats
-checksums.toml as a single-target file. This is a data-destructive single-writer
-assumption in a multi-target depot. Detected during eastGate revalidation (14/14
-MISMATCH on x86_64). Ad-hoc restored from local binary hashes."""
-action = """1. Read-modify-write: harvest/sweep must parse existing checksums.toml,
-   update only the target section being built, preserve all other sections.
-2. Validation gate: before committing, verify all known target sections survive.
-3. Regression test: harvest target A, then target B, verify A's entries survive.
-See full AAR: handoffs/cellMembrane/AAR_CELLMEMBRANE_WAVE105_DEPOT_HARVEST_ATOMIC_REPLACE_JUN09_2026.md"""
+priority = "was-P2"
+description = "RESOLVED (Wave 105b) — multi-target checksums pipeline shipped (read-modify-write)"
+resolution = """cellMembrane shipped fix (commit 3a1900b): depot.rs now parses existing TOML,
+updates only the target section being built, writes back complete file. Includes validation
+gate that aborts if a pre-existing section would be lost, plus regression test confirming
+target A survives after target B harvest. Same-wave turnaround from AAR to fix."""
 
 [resolved.biomeos_graph_revalidate]
 id = "BIOMEOS-GRAPH-REVALIDATE"
