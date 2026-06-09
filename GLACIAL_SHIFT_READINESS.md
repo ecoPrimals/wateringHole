@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-09 (Wave 104 — **bearDog P1 RESOLVED** (Wave 145: aws-lc-rs → rustls-rustcrypto, pure Rust, aarch64 cross-compile PASS). Transport 11/11 COMPLETE (toadStool S306c confirmed). biomeOS v4.16 shipped. songBird Wave 104 test hardening. PURE_RUST_CRYPTO_PURITY_STANDARD published. Remaining P1: flockGate WAN depot empty. aarch64 sweep UNBLOCKED.)
+**Last updated**: 2026-06-09 (Wave 105 — **ZERO P1 BLOCKERS**. bearDog P1 RESOLVED (Wave 145: pure Rust crypto). WAN depot P1 RESOLVED (Wave 105: cellMembrane shipped `plasmid.fetch --source wan`). Cascade conflict auto-resolve SHIPPED. Depot 14/14 BLAKE3 VERIFIED (bearDog + biomeOS rebuilt). Transport 11/11 COMPLETE. biomeOS v4.16 fresh. NUCLEUS fully alive. S4 gate ending today.)
 
 ---
 
@@ -21,11 +21,11 @@ Wave 104) — all using correct LOCAL implementation pattern, zero self-knowledg
 - `x86_64-pc-windows-msvc`: 0/14, future (Windows gates, named pipes IPC)
 - `wasm32-wasi`: 0/14, design phase (browser/edge/embedded)
 
-**One P1 blocker remains**:
-1. flockGate WAN depot empty — no binary distribution path defined. golgiBody outer membrane needed.
+**ZERO P1 blockers remain.** Both former P1s are RESOLVED:
+1. ~~bearDog `aws-lc-rs`~~ → RESOLVED (Wave 145): `rustls-rustcrypto` pure Rust. All non-x86 targets UNBLOCKED.
+2. ~~flockGate WAN depot empty~~ → RESOLVED (Wave 105): cellMembrane shipped `plasmid.fetch --source wan` + `caddy.depot.provision`. Production validation pending.
 
-**Recently resolved P1**: bearDog `aws-lc-rs` → `rustls-rustcrypto` (Wave 145). All non-x86
-targets UNBLOCKED. `PURE_RUST_CRYPTO_PURITY_STANDARD.md` published as ecosystem standard.
+`PURE_RUST_CRYPTO_PURITY_STANDARD.md` published as ecosystem standard.
 
 biomeOS v4.14 rebuilt by strandGate (LocalTrusted access level). `--graph-deploy`
 revalidation pending on eastGate. S4 auth gate ending Jun 9. sourDough shipped
@@ -256,7 +256,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | `graph-deploy-x86-uds` | **PARTIAL** — biomeOS v4.14 rebuilt (LocalTrusted). eastGate revalidation pending. |
 | `benchscale-ipc-x86-uds` | **PASS** — 12/12 liveness, 12/12 readiness, 12/12 capabilities (with depot rebuild) |
 | `pixel-tower-aarch64-tcp` | **UNBLOCKED** — all 13 handlers wired, 3/14 aarch64 built. bearDog pure Rust shipped. Sweep pending. |
-| `wan-flockgate-deploy` | **BLOCKED** — depot empty, no binary distribution path. golgiBody outer membrane needed. |
+| `wan-flockgate-deploy` | **UNBLOCKED** (Wave 105) — WAN depot SHIPPED (`plasmid.fetch --source wan`). Production deploy + validation pending. |
 | 37 other cells | **UNTESTED** |
 
 **P0 target**: `nucleus-x86-mixed-uds` — full NUCLEUS over LAN. **ACHIEVED** (Wave 98).
@@ -282,7 +282,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Full NUCLEUS 13/13 IPC-live | **COMPLETE** (Wave 98) — 12/12 liveness, 12/12 readiness. coralReef capabilities.list shipped (12/12 with depot rebuild). |
 | Pixel 8 / grapheneGate | **WIRED** (Wave 99) — all 13 startup handlers. 3/14 aarch64 built. bearDog aws-lc-rs blocks remainder. grapheneGate = portable trust anchor + gate spawner. |
 | benchScale IPC compliance | **OPERATIONAL** (Wave 99) — validates liveness/readiness/capabilities across live NUCLEUS |
-| flockGate WAN deployment | **BLOCKED** (Wave 103) — WAN relay + cascade operational, but depot EMPTY. No binary distribution path. Needs golgiBody outer membrane endpoint. |
+| flockGate WAN deployment | **UNBLOCKED** (Wave 105) — WAN relay + cascade operational. `plasmid.fetch --source wan` SHIPPED. `caddy.depot.provision` ready. Production validation pending. |
 
 ### Wave 49 Ecosystem Issues (post-tightening re-audit, May 25)
 
@@ -317,11 +317,11 @@ fossilRecord) — see `fossilRecord/` for detail.
 | ~~DNS NS registrar cutover~~ | operator | ~~HIGH~~ | **DONE** — `primal.eco` + `nestgate.io` propagated + TLS live. DNSSEC enabled. |
 | ~~coralReef capabilities.list~~ | coralReef | ~~LOW~~ | **DONE** (Wave 101, 15d1702) — capabilities.list alias shipped |
 | ~~bearDog aws-lc-rs C-dep~~ | bearDog | ~~P1~~ | **RESOLVED** (Wave 145) — `aws-lc-rs` replaced with `rustls-rustcrypto` (pure Rust). `cargo check --target aarch64-unknown-linux-musl` PASS. 19-crate C-crypto ban in `deny.toml`. All non-x86 targets UNBLOCKED. |
-| **flockGate WAN depot empty** | cellMembrane | **P1** | No binary distribution path to WAN gates. flockGate lacks `b3sum`, `gh`, SSH. Needs golgiBody outer membrane HTTP endpoint (Caddy). |
+| ~~flockGate WAN depot empty~~ | cellMembrane | ~~P1~~ | **RESOLVED** (Wave 105) — `plasmid.fetch --source wan` SHIPPED. `caddy.depot.provision` ready. Production validation pending. |
 | songBird ipc.resolve M1 | songBird | **P2** | TransportEndpoint types shipped, ipc.resolve wiring next (topology-aware routing) |
 | ~~Transport injection (toadStool)~~ | toadStool | ~~P2~~ | **DONE** (S306c Wave 104) — transport CONFIRMED, 11/11 non-exempt COMPLETE. |
 | biomeOS graph.deploy revalidation | biomeOS + eastGate | **P2** | v4.14 (LocalTrusted) rebuilt. eastGate `--graph-deploy` revalidation pending. |
-| CM-CASCADE-CONFLICT | cellMembrane | **P2** | checksums.toml / freshness.toml ff-only conflicts on cascade. Needs auto-resolve strategy. |
+| ~~CM-CASCADE-CONFLICT~~ | cellMembrane | ~~P2~~ | **RESOLVED** (Wave 105) — cascade auto-discards dirty regenerable metadata before ff-only pull. |
 | CM-VPS-DEPOT-SYNC | cellMembrane | **P2** | golgiBody inner→outer membrane binary flow for WAN depot. |
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
 | grapheneGate bootstrap | eastGate | **P2** | Pixel 8 as portable trust anchor + spawner (GRAPHENEGATE_BOOTSTRAP_STANDARD). Blocked on bearDog pure Rust. |
@@ -370,7 +370,7 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 104)**: **MESH LIVE. TRANSPORT COMPLETE (11/11). DEPOT FRESH (x86_64). bearDog P1 RESOLVED (pure Rust). 1 P1 REMAINING (WAN depot). S4 ENDING TODAY. aarch64 UNBLOCKED. STADIAL GATE IN SIGHT.**
+**Current assessment (Wave 105)**: **ZERO P1 BLOCKERS. MESH LIVE. TRANSPORT COMPLETE (11/11). DEPOT 14/14 VERIFIED. bearDog P1 RESOLVED. WAN DEPOT SHIPPED. CASCADE AUTO-RESOLVE SHIPPED. S4 ENDING TODAY. aarch64 UNBLOCKED. STADIAL GATE WITHIN REACH.**
 
 **Wave 98-103 milestones**:
 - Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 12/12 capabilities with coralReef depot fix)
@@ -384,7 +384,7 @@ validator for content served by the outer membrane.
   toadStool may be done per strandGate ACK. sourDough shipped `validate depot` + dep violation detection.
 - **Depot 14/14 fresh** (Wave 103): full x86_64-musl rebuild. All binaries current. checksums.toml regenerated.
 - bearDog `aws-lc-rs` C-dep discovered: blocks ALL non-x86 targets (aarch64-musl, aarch64-android). P1 for ecoBin.
-- flockGate WAN depot empty: no binary distribution path. P1 for WAN deployment surface.
+- ~~flockGate WAN depot empty~~ — RESOLVED (Wave 105): `plasmid.fetch --source wan` SHIPPED.
 - biomeOS v4.14 rebuilt by strandGate (LocalTrusted access level for UDS callers).
 - sourDough convergent evolution COMPLETE: `validate transport`, `validate depot`, scaffold transport-kit.
   sourDough is the repository of primal standards as a primal — primals do NOT depend on sourdough-core.
@@ -425,8 +425,8 @@ Criteria 2 mesh: **MESH LIVE** (Wave 101). eastGate↔strandGate bidirectional, 
 SB-TLS-LAN-01 + SB-SECURITY-URL-01 RESOLVED. 3rd gate (ironGate) needs federation port activation.
 Criteria 3: peptidoglycan FORMALIZED (ironGate ACK). Depot 14/14 fresh (x86_64-musl).
 cellMembrane depot.rs module operational. Build-carrying cascades delivered.
-Criteria 4: flockGate cascade operational but **depot empty** — no binary distribution path.
-golgiBody outer membrane HTTP endpoint needed. WAN covalent validation blocked.
+Criteria 4: flockGate cascade operational. **WAN depot SHIPPED** (Wave 105) — `plasmid.fetch --source wan`
++ `caddy.depot.provision`. Production deployment and end-to-end validation pending.
 Criteria 5: `primal.eco` + `nestgate.io` DNS PROPAGATED + TLS LIVE (Jun 4). `primals.eco` stays
 Cloudflare (outer membrane per diderm model). DNSSEC enabled on both sovereign domains.
 Criteria 6: cross-membrane validation scenario shipped (61 scenarios). Peptidoglycan self-refresh
@@ -450,19 +450,19 @@ timer deployed. benchScale IPC compliance sweep validates 12/12 primals. biomeOS
 **Stadial entry is gated only on**:
 - S4 auth gate review completion (Jun 9, ending today)
 - 3rd gate mesh enrollment — protocol proven, ironGate federation port activation remaining
-- WAN covalent validation — **BLOCKED** on flockGate depot (P1: golgiBody outer membrane needed)
-- biomeOS orchestration revalidation — v4.14 (LocalTrusted) rebuilt, eastGate `--graph-deploy` pending
+- WAN covalent validation — WAN depot SHIPPED, production deployment + flockGate validation pending
+- biomeOS orchestration revalidation — v4.16 rebuilt, eastGate `--graph-deploy` pending
 
 **Cross-deployment gates (ecoBin matrix)**:
 - ~~bearDog pure Rust (P1)~~ — **RESOLVED** (Wave 145). aarch64 UNBLOCKED.
-- flockGate WAN depot (P1) — no binary distribution path to WAN gates
+- ~~flockGate WAN depot (P1)~~ — **RESOLVED** (Wave 105). `plasmid.fetch --source wan` SHIPPED. Validation pending.
 - grapheneGate bootstrap (P2) — Pixel as trust anchor, **UNBLOCKED** (bearDog resolved)
-- aarch64 sweep (P2) — cellMembrane cross-compile remaining primals
+- aarch64 sweep (P2) — cellMembrane cross-compile remaining 11/14 primals, UNBLOCKED
 - Windows ecoBin (LOW) — named pipes IPC, MSVC target, design phase
 
-Software items: **Zero P1 mesh blockers.** Transport 11/11 COMPLETE. Depot 14/14 fresh (x86_64-musl).
-bearDog pure Rust SHIPPED. biomeOS v4.16 shipped. PURE_RUST_CRYPTO_PURITY_STANDARD published.
-aarch64 cross-compile sweep UNBLOCKED — cellMembrane can proceed.
+Software items: **ZERO P1 blockers.** Transport 11/11 COMPLETE. Depot 14/14 BLAKE3 VERIFIED (x86_64-musl).
+bearDog pure Rust SHIPPED. biomeOS v4.16 rebuilt. WAN depot SHIPPED. Cascade auto-resolve SHIPPED.
+PURE_RUST_CRYPTO_PURITY_STANDARD published. aarch64 sweep UNBLOCKED — cellMembrane can proceed.
 
 ---
 

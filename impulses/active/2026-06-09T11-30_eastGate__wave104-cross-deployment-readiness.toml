@@ -8,9 +8,9 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "bearDog", "songBird", "biomeOS", "all-primals", "all-gates"]
 date = "2026-06-09"
-updated = "2026-06-09T13:40"
-priority = "P1"
-owner = "cellMembrane + bearDog + eastGate"
+updated = "2026-06-09T14:59"
+priority = "P2"
+owner = "cellMembrane + eastGate"
 note = """
 The ecosystem has reached a critical inflection: mesh is LIVE, transport is near-
 complete, depot is fresh for x86_64. The deployment surface is a MATRIX of target
@@ -23,19 +23,22 @@ Replaces: wave79-transport-evolution-capability-routing (archived)
 """
 
 # ──────────────────────────────────────────────────────────────
-# CURRENT STATE (Wave 103, Jun 9 2026)
+# CURRENT STATE (Wave 105, Jun 9 2026)
 # ──────────────────────────────────────────────────────────────
 
 [current_state]
 mesh = "LIVE — eastGate↔strandGate bidirectional, 13h+ stable, all 4 criteria PASS"
 transport = "11/11 non-exempt COMPLETE (toadStool S306c confirmed, Wave 104). Zero self-knowledge violations."
-nucleus = "13/13 alive on eastGate, 29/34 sockets responding (5 are tarpc binary protocol — expected)"
+nucleus = "Full NUCLEUS alive on eastGate — all JSON-RPC primals responding, tarpc sockets nominal."
 sovereignty = "S1-S3 GRADUATED. S4 auth gate ending Jun 9 (review pending today). DNS PROPAGATED (Jun 4)."
 ipc_resolve = "SHIPPED — returns structured TransportEndpoint JSON (UDS/TCP/MeshRelay). 11 primals ready as consumers."
-cascade = "OPERATIONAL — 38/38 repos, <10s parallel, freshness auto-publish"
-beardog_p1 = "RESOLVED — Wave 145: aws-lc-rs replaced with rustls-rustcrypto (pure Rust). aarch64-unknown-linux-musl cargo check PASS. PURE_RUST_CRYPTO_PURITY_STANDARD.md published. 19-crate C-crypto ban in deny.toml."
-biomeos = "v4.16 shipped (deep debt, error chains, hardcoding elimination). v4.15 (mesh capability alignment). Rebuild in progress."
+cascade = "OPERATIONAL — 38/38 repos, zero failures, conflict auto-resolve SHIPPED by cellMembrane."
+beardog_p1 = "RESOLVED — Wave 145: pure Rust crypto. Depot binary FRESH (11.2MB, rebuilt Jun 9)."
+biomeos = "v4.16 depot binary FRESH (15.9MB, rebuilt Jun 9). Deep debt + error chains + hardcoding elimination."
 songbird = "Wave 104: env-var race conditions eliminated across 5 crates."
+cellmembrane = "Wave 105: WAN depot distribution SHIPPED (plasmid.fetch --source wan). Cascade conflict auto-resolve SHIPPED. Deep debt sprint complete."
+depot = "14/14 x86_64-musl BLAKE3 checksums VERIFIED. bearDog + biomeOS rebuilt from latest waves."
+p1_blockers = "ZERO. WAN depot SHIPPED by cellMembrane. bearDog pure Rust RESOLVED Wave 145."
 
 # ──────────────────────────────────────────────────────────────
 # DEPLOYMENT TARGET MATRIX (ecoBin standard)
@@ -99,28 +102,28 @@ deny.toml bans 19 C-crypto crates. cargo check --target aarch64-unknown-linux-mu
 PURE_RUST_CRYPTO_PURITY_STANDARD.md published as ecosystem standard. Zero C-crypto deps
 in resolved dependency graph. All non-x86 ecoBin targets UNBLOCKED."""
 
-[remaining.wan_outer_membrane]
+[resolved.wan_outer_membrane]
 id = "WAN-OUTER-MEMBRANE"
 owner = "cellMembrane"
-priority = "P1"
-description = "golgiBody outer membrane for WAN binary distribution (flockGate depot empty)"
-why = """flockGate (WAN) has zero depot binaries. No binary distribution path defined.
-Without it, WAN gates cannot deploy NUCLEUS or enroll in mesh. This is the outer
-membrane face of the golgiBody diderm architecture."""
-action = """Simplest path: Caddy on VPS adds /depot/ route serving /opt/plasmidBin/primals/.
-Long-term: separate golgiBody-ext with covalent bond to inner membrane.
-See architecture.golgibody section below."""
+priority = "was-P1"
+description = "RESOLVED (Wave 105) — golgiBody outer membrane WAN binary distribution SHIPPED"
+resolution = """cellMembrane shipped `plasmid.fetch --source wan` for HTTPS-based binary fetching
+from the outer membrane (Caddy). `caddy.depot.provision` sets up file_server on golgiBody-ext
+serving /opt/ecoPrimals/plasmidBin. WAN gates no longer need SSH access to fetch depot binaries.
+Production deployment on golgiBody-ext and flockGate validation pending."""
 
 [remaining.graphenegate_bootstrap]
 id = "GRAPHENEGATE-BOOTSTRAP"
 owner = "eastGate"
 priority = "P2"
-description = "Pixel 8 as portable trust anchor + gate spawner"
-why = """grapheneGate is not just aarch64 cross-compile — it is the portable physical
-root of trust. BirdSong beacon proves family membership. Can bootstrap new gates on
-arbitrary hardware via USB/WiFi. Blocked on BEARDOG-PURE-RUST."""
-action = """After bearDog pure Rust: build full aarch64-android depot, deploy via
-deploy_pixel.sh (all 13 handlers ready), validate Role 1 beacon broadcast.
+description = "Pixel 8 as portable trust anchor + gate spawner — UNBLOCKED"
+why = """grapheneGate is the portable physical root of trust. BirdSong beacon proves
+family membership. Can bootstrap new gates via USB/WiFi. bearDog pure Rust SHIPPED
+(Wave 145) — aarch64 cross-compile UNBLOCKED."""
+action = """1. cellMembrane aarch64 sweep (CM-AARCH64-SWEEP) — cross-compile remaining 11 primals
+2. Build full aarch64-android depot from sweep output
+3. Deploy via deploy_pixel.sh (all 13 handlers ready)
+4. Validate Role 1 beacon broadcast
 See GRAPHENEGATE_BOOTSTRAP_STANDARD.md."""
 
 [remaining.songbird_ipc_resolve]
@@ -135,26 +138,64 @@ Test: ipc_resolve_returns_transport_endpoint_json_sourdough_wire_compat (passes 
 10+ primals ready as consumers. Orchestrator capability.resolve also returns TransportEndpoint."""
 action = "No action needed. Consumers can adopt at will. sourdough validate transport confirms wire compat."
 
-[remaining.cm_cascade_conflict]
+[resolved.cm_cascade_conflict]
 id = "CM-CASCADE-CONFLICT"
 owner = "cellMembrane"
+priority = "was-P2"
+description = "RESOLVED (Wave 105) — cascade conflict auto-resolve SHIPPED"
+resolution = """cellMembrane now auto-discards dirty regenerable metadata files
+(checksums.toml, provenance.toml, freshness.toml) before ff-only pull. Eliminates
+recurring operator intervention on every 2nd cascade. Matches recommendation from
+[aar.cascade_conflicts]. Tested: 38/38 cascade with zero conflicts."""
+
+[remaining.cm_wan_validate]
+id = "CM-WAN-VALIDATE"
+owner = "cellMembrane + eastGate"
 priority = "P2"
-description = "checksums.toml / freshness.toml ff-only conflicts on cascade"
-why = """Recurring on Waves 99, 102, 103. Multiple gates independently write machine-
-generated files (checksums after rebuild, freshness on cascade). merge-ff correctly
-rejects diverged files, but these files are regenerable metadata, not source."""
-action = """Implement auto-resolve: detect checksums.toml + freshness.toml conflicts,
-resolve with 'theirs' (upstream wins). Long-term: single-writer model for checksums
-via peptidoglycan. See AAR section below."""
+description = "Validate plasmid.fetch --source wan on flockGate + deploy caddy.depot.provision on golgiBody-ext"
+why = """WAN depot code is SHIPPED but needs production deployment. caddy.depot.provision
+must be run on golgiBody-ext to expose /depot/ route. Then flockGate validates
+plasmid.fetch --source wan end-to-end."""
+action = """1. Run caddy.depot.provision on golgiBody-ext (VPS)
+2. Verify /depot/ route serves binary list over HTTPS
+3. Run plasmid.fetch --source wan on flockGate
+4. Verify BLAKE3 checksum matches after WAN fetch
+5. Launch NUCLEUS on flockGate from WAN-fetched depot"""
+
+[remaining.cm_harvest_atomic]
+id = "CM-HARVEST-ATOMIC"
+owner = "cellMembrane"
+priority = "P2"
+description = "Atomic rename in plasmid.harvest — avoid ETXTBSY on running binaries"
+why = """plasmid.harvest fails with ETXTBSY when target binary is a running NUCLEUS
+primal. Occurred on bearDog + biomeOS during Wave 105 rebuild. Operator must
+manually stop → copy → restart."""
+action = """Write to primals/<triple>/<name>.new, then rename(2) over original.
+rename is atomic on same filesystem, succeeds even when original is running.
+Log warning that restart is needed to pick up new binary. See AAR:
+handoffs/cellMembrane/AAR_CELLMEMBRANE_WAVE105_DEPOT_HARVEST_ATOMIC_REPLACE_JUN09_2026.md"""
 
 [remaining.cm_vps_depot_sync]
 id = "CM-VPS-DEPOT-SYNC"
 owner = "cellMembrane"
 priority = "P2"
-description = "golgiBody inner→outer membrane binary flow for WAN depot"
+description = "golgiBody inner→outer membrane automatic binary flow"
 why = """After build-carrying cascades land, VPS should auto-refresh depot from
-peptidoglycan. This also serves as the WAN distribution endpoint."""
-action = "Wire plasmid.refresh into cascade post-build hook. Serve via Caddy for WAN."
+peptidoglycan. plasmid.fetch --source wan is shipped; now wire the push side
+so pepti builds automatically flow to the outer membrane Caddy route."""
+action = "Wire plasmid.refresh into cascade post-build hook for automated inner→outer flow."
+
+[remaining.cm_aarch64_sweep]
+id = "CM-AARCH64-SWEEP"
+owner = "cellMembrane"
+priority = "P2"
+description = "Cross-compile remaining 11/14 primals for aarch64-unknown-linux-musl + aarch64-linux-android"
+why = """bearDog pure Rust SHIPPED (Wave 145). 3/14 primals already built for aarch64
+(songbird, skunkbat, sourdough). Remaining 11 primals now unblocked for cross-compilation.
+This enables grapheneGate bootstrap and ARM VPS deployment."""
+action = """Iterate through remaining primals: cargo build --release --target aarch64-unknown-linux-musl.
+Update checksums.toml with aarch64 section. Validate stripped binaries. Report any crate-level
+C-dep violations via cargo deny check."""
 
 [remaining.biomeos_graph_revalidate]
 id = "BIOMEOS-GRAPH-REVALIDATE"
@@ -279,11 +320,19 @@ occurrences = [
 
 [outcome]
 expected = """
-The deployment surface is a complete matrix: every target triple in the ecoBin
-standard has a clear path to operational depot, with blockers identified and
-prioritized. bearDog pure Rust unlocks ALL non-x86 targets simultaneously.
-golgiBody outer membrane unlocks WAN deployment. grapheneGate bootstrap unlocks
-portable trust. Together these enable: LAN multi-gate mesh, WAN covalent bonds,
-Pixel mobile NUCLEUS, ARM server deployment, and future topologies — all flowing
-through the same diderm architecture with cascade as the sole sync interface.
+ZERO P1 BLOCKERS as of Wave 105. Both former P1s are RESOLVED:
+  - bearDog pure Rust (Wave 145): all non-x86 targets UNBLOCKED
+  - WAN depot distribution (Wave 105): cellMembrane shipped plasmid.fetch --source wan
+
+Remaining work is P2 — validation, sweep, and automation:
+  1. Validate WAN depot end-to-end on flockGate (CM-WAN-VALIDATE)
+  2. aarch64 cross-compile sweep for 11 remaining primals (CM-AARCH64-SWEEP)
+  3. Atomic harvest to eliminate ETXTBSY (CM-HARVEST-ATOMIC)
+  4. grapheneGate bootstrap (Pixel trust anchor, UNBLOCKED)
+  5. biomeOS graph.deploy revalidation on eastGate
+  6. ironGate 3rd mesh node enrollment
+
+The ecosystem is in the strongest position it has ever been. Mesh LIVE, transport
+COMPLETE, depot VERIFIED, sovereignty graduating, WAN distribution SHIPPED. The
+stadial gate criteria are within reach.
 """

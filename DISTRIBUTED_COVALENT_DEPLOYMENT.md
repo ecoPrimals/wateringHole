@@ -2,7 +2,7 @@
 
 **Status**: Architecture + implementation guide  
 **Scope**: Multi-household compute via covalent-bonded gates  
-**Last updated**: 2026-06-09 (Wave 103: Mesh LIVE eastGate↔strandGate. flockGate WAN depot BLOCKED — no binary distribution path.)
+**Last updated**: 2026-06-09 (Wave 105: Mesh LIVE eastGate↔strandGate. WAN depot SHIPPED — `plasmid.fetch --source wan`. flockGate validation pending.)
 
 ---
 
@@ -146,7 +146,7 @@ avoiding expensive real-time transfers over WAN.
 - Family seed available -- **DONE** (irongate-sovereign family)
 - Remote machine accessible via RustDesk -- **DONE**
 - plasmidBin binaries for x86_64-unknown-linux-musl -- **DONE** (14/14 fresh, Wave 103)
-- plasmidBin depot accessible from WAN -- **BLOCKED** (flockGate depot EMPTY, no binary distribution path. golgiBody outer membrane HTTP endpoint needed. See `GLACIAL_SHIFT_READINESS.md` P1: WAN-OUTER-MEMBRANE.)
+- plasmidBin depot accessible from WAN -- **SHIPPED** (Wave 105: `plasmid.fetch --source wan` + `caddy.depot.provision`). Production deployment + flockGate validation pending.
 
 ### Steps
 
