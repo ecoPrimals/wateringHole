@@ -16,7 +16,7 @@ Wave 104) — all using correct LOCAL implementation pattern, zero self-knowledg
 
 **Deployment surface (ecoBin target matrix)**:
 - `x86_64-unknown-linux-musl`: 14/14 depot fresh, LAN/VPS/WAN operational
-- `aarch64-unknown-linux-musl`: 3/14 built, **bearDog UNBLOCKED** (Wave 145 pure Rust). Sweep pending.
+- `aarch64-unknown-linux-musl`: **14/14 BUILT** (Wave 105 sweep complete, zero C-dep violations)
 - `aarch64-linux-android`: 3/14 built. grapheneGate (Pixel 8) is the portable root of trust + gate spawner. **UNBLOCKED**.
 - `x86_64-pc-windows-msvc`: 0/14, future (Windows gates, named pipes IPC)
 - `wasm32-wasi`: 0/14, design phase (browser/edge/embedded)

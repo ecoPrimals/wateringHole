@@ -82,11 +82,11 @@ cellMembrane has shipped significant work since Wave 103. Acknowledging:
 
 | ID | Priority | Description | Status |
 |----|----------|-------------|--------|
-| CM-HARVEST-ATOMIC | P2 | Atomic rename in plasmid.harvest (this AAR) | NEW |
-| CM-WAN-VALIDATE | P2 | Validate plasmid.fetch --source wan on flockGate | READY TO TEST |
-| CM-AARCH64-SWEEP | P2 | Cross-compile remaining 11/14 primals for aarch64 | UNBLOCKED (bearDog resolved) |
+| CM-HARVEST-ATOMIC | P2 | Atomic rename in plasmid.harvest (this AAR) | **ALREADY SHIPPED** (stage_to_depot uses .new + rename(2), refresh SCPs to .new + mv) |
+| CM-WAN-VALIDATE | P2 | Validate plasmid.fetch --source wan on flockGate | **DEPLOYED** — validated from ironGate, 13/13 OK over HTTPS. Awaiting flockGate team. |
+| CM-AARCH64-SWEEP | P2 | Cross-compile remaining 11/14 primals for aarch64 | **COMPLETE** — 14/14 built, zero C-dep violations, checksums committed |
 | CM-SOURDOUGH-SEGV | LOW | `sourdough validate depot` segfaults — investigate | KNOWN |
-| CM-CADDY-PROVISION | P2 | Deploy caddy.depot.provision on golgiBody-ext (production) | READY |
+| CM-CADDY-PROVISION | P2 | Deploy caddy.depot.provision on golgiBody (production) | **DEPLOYED** — `/depot/` route live on membrane.primals.eco |
 
 ### Dependency Map
 
