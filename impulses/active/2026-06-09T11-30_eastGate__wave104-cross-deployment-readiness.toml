@@ -8,7 +8,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "bearDog", "songBird", "biomeOS", "all-primals", "all-gates"]
 date = "2026-06-09"
-updated = "2026-06-09T21:45"
+updated = "2026-06-09T18:20"
 priority = "P2"
 owner = "cellMembrane + eastGate"
 note = """
@@ -38,9 +38,10 @@ biomeos = "v4.16 depot binary FRESH (15.9MB, rebuilt Jun 9). Deep debt + error c
 songbird = "Wave 104: env-var race conditions eliminated across 5 crates."
 cellmembrane = "Wave 105: WAN depot DEPLOYED + VALIDATED (ironGate 13/13 BLAKE3). Multi-target pipeline fix SHIPPED (commit 3a1900b). plasmid.depot_sync SHIPPED (automated inner→outer). aarch64 14/14. Deep debt complete."
 depot_x86 = "14/14 x86_64-musl BLAKE3 VERIFIED (ironGate WAN fetch 13/13 PASS). checksums.toml updated to VPS ground truth."
-depot_aarch64 = "14/14 aarch64-unknown-linux-musl BUILT (Wave 105 sweep). Multi-target pipeline fix SHIPPED — overwrite issue RESOLVED (commit 3a1900b)."
+depot_aarch64 = "14/14 aarch64-unknown-linux-musl BUILT (Wave 105 sweep). Multi-target pipeline fix SHIPPED — overwrite issue RESOLVED (commit 3a1900b). Wave 105b: 13/13 rebuilt locally on eastGate, 6 primals RUNNING on Pixel 8 via deploy_pixel.sh."
 biomeos_graph = "VALIDATED — v4.16 composition.deploy accepted, graph.status 13 phases, LocalTrusted works."
-primalspring = "Wave 105: is_skippable() canonical, graph.deploy validated, 887 tests, PRIMAL_GAPS updated to Wave 105."
+primalspring = "Wave 105b: grapheneGate deploy (6/13 running on Pixel 8), sequential_graph flake fix, cast-safety fixes, 887 tests 0 failures."
+graphenegate = "Wave 105b: 13/13 aarch64-musl BUILT on eastGate. 6/13 primals RUNNING on Pixel 8 (beardog + songbird + rhizocrypt + loamspine + sweetgrass + squirrel). bearDog BTSP production mode LIVE. NDK (aarch64-linux-android) blocked by bearDog StrongBox module (16 compilation errors). 7 primals need Android UDS path adaptation. deploy_pixel.sh FAMILY_SEED fix shipped."
 p1_blockers = "ZERO. All former P1s resolved. CM-CHECKSUM-MULTI-TARGET RESOLVED same-wave (commit 3a1900b)."
 
 # ──────────────────────────────────────────────────────────────
@@ -57,22 +58,22 @@ blockers = []
 
 [deployment_targets.aarch64_musl]
 triple = "aarch64-unknown-linux-musl"
-description = "ARM servers, future ARM VPS"
-depot = "14/14 BUILT (Wave 105 sweep complete, zero C-dep violations)"
-gates = ["future ARM VPS"]
-status = "BUILT — grapheneGate bootstrap next"
-blockers = []
+description = "ARM servers, future ARM VPS, GrapheneOS (Pixel 8)"
+depot = "13/13 BUILT locally on eastGate (Wave 105b). 6/13 RUNNING on Pixel 8."
+gates = ["grapheneGate (Pixel 8 — 6 primals live)", "future ARM VPS"]
+status = "OPERATIONAL on grapheneGate — Tower + 3 data primals + squirrel running"
+blockers = ["7 primals need Android UDS path adaptation (/run/user/ and /tmp/biomeos/ not accessible under ADB shell)"]
 
 [deployment_targets.aarch64_android]
 triple = "aarch64-linux-android"
-description = "Pixel 8 / GrapheneOS (grapheneGate) — portable trust anchor + gate spawner"
-depot = "14/14 aarch64-musl built. Android NDK cross-compile pending."
+description = "Pixel 8 / GrapheneOS (grapheneGate) — native Android NDK target for APK integration"
+depot = "0/14 (NDK target blocked by bearDog StrongBox)"
 gates = ["grapheneGate (Pixel 8)"]
-status = "UNBLOCKED — NDK cross-compile next"
-blockers = ["aarch64-linux-android NDK target setup (distinct from musl)"]
-note = """grapheneGate is not just a mobile deploy target — it is the ecosystem's
-portable physical root of trust and gate spawner. It is tethered to eastGate on
-LAN, can WAN via mesh, and in time bootstraps new gates on arbitrary hardware.
+status = "BLOCKED — bearDog StrongBox module has 16 compilation errors for android target"
+blockers = ["bearDog beardog-tunnel android_strongbox: 16 errors (missing type imports KeyGenerationSpec/KeyUsage/etc, unimplemented HSM methods)", "aarch64-musl is sufficient for initial GrapheneOS deployment"]
+note = """NDK cross-compile is a future phase. aarch64-unknown-linux-musl static binaries
+run natively on GrapheneOS and are the correct initial deployment target. NDK target is
+needed later for native APK integration and StrongBox hardware HSM access.
 See GRAPHENEGATE_BOOTSTRAP_STANDARD.md."""
 
 [deployment_targets.x86_64_windows]
@@ -119,15 +120,25 @@ Production deployment on golgiBody-ext and flockGate validation pending."""
 id = "GRAPHENEGATE-BOOTSTRAP"
 owner = "primalSpring (parallel team)"
 priority = "P2"
-description = "Pixel 8 as portable trust anchor + gate spawner — aarch64 musl BUILT, NDK target next"
-why = """grapheneGate is the portable physical root of trust. aarch64-unknown-linux-musl
-sweep COMPLETE (14/14). Next step: aarch64-linux-android NDK cross-compile (distinct
-target from musl — requires Android NDK toolchain). Pixel is plugged over ADB to
-eastGate — primalSpring parallel team owns this deployment path."""
-action = """1. Set up aarch64-linux-android NDK cross-compile toolchain
-2. Build aarch64-android depot from musl-validated sources
-3. Deploy via deploy_pixel.sh over ADB (all 13 handlers ready)
-4. Validate Role 1 beacon broadcast
+description = "grapheneGate Role 1 partially validated — 6/13 primals live on Pixel 8, UDS adaptation needed for remaining 7"
+why = """aarch64-musl 13/13 built locally on eastGate. 6 primals RUNNING on Pixel 8
+(beardog, songbird, rhizocrypt, loamspine, sweetgrass, squirrel). bearDog BTSP
+production mode LIVE with family seed. NDK (aarch64-linux-android) blocked by
+bearDog StrongBox module — 16 compilation errors, bearDog team debt.
+aarch64-musl is the correct initial target for GrapheneOS deployment."""
+action = """COMPLETED:
+1. ✅ aarch64-musl 13/13 built on eastGate (ld.lld symlinked from rust-lld)
+2. ✅ deploy_pixel.sh FAMILY_SEED export fix shipped
+3. ✅ 6/13 primals deployed and running on Pixel 8 via ADB
+4. ✅ bearDog BTSP production mode, BirdSong genetics initialized
+5. ✅ songbird responding on HTTP with federation capabilities
+
+REMAINING:
+1. Android UDS path adaptation for 7 primals (skunkbat, toadstool, barracuda, coralreef, nestgate, biomeos, petaltongue)
+   - /run/user/2000/biomeos/ not accessible under ADB shell user
+   - /tmp/biomeos/ socket paths need remapping to /data/local/tmp/biomeos/
+2. Dark Forest beacon broadcast validation (requires songbird port-conflict fix)
+3. bearDog StrongBox NDK compilation (bearDog team debt — 16 errors)
 See GRAPHENEGATE_BOOTSTRAP_STANDARD.md."""
 
 [remaining.songbird_ipc_resolve]
@@ -293,7 +304,9 @@ grapheneGate (Pixel 8) is the portable physical root of trust:
   - BirdSong beacon proves family membership on any network
   - Can bootstrap new gates via USB or WiFi (Role 2-3)
   - Appears as standard Android device under scrutiny
-  - Blocked only on bearDog pure Rust (aws-lc-rs)
+  - Wave 105b: FIRST DEPLOYMENT — 6 primals running via aarch64-musl over ADB
+    bearDog BTSP production, songbird federation, rhizocrypt, loamspine, sweetgrass, squirrel
+  - NDK (aarch64-linux-android) blocked on bearDog StrongBox (future phase for APK/HSM)
 See GRAPHENEGATE_BOOTSTRAP_STANDARD.md for full trust model.
 """
 
@@ -343,30 +356,73 @@ occurrences = [
 ]
 
 # ──────────────────────────────────────────────────────────────
+# AAR: GRAPHENEGATE FIRST DEPLOYMENT (Wave 105b)
+# ──────────────────────────────────────────────────────────────
+
+[aar.graphenegate_first_deploy]
+problem = """grapheneGate NDK cross-compile (aarch64-linux-android) was the assigned task.
+bearDog's android_strongbox module has 16 compilation errors for the android target
+(missing type imports: KeyGenerationSpec, KeyUsage, AttestationResponse, etc; unimplemented
+HSM methods: is_healthy, check, attest_device). This is bearDog team debt, not fixable
+from primalSpring."""
+
+root_cause = """The aarch64-linux-android target activates cfg(target_os = "android") code
+paths in bearDog's StrongBox HSM module. These paths reference types and methods that exist
+only as stubs/skeletons — the actual JNI/Keymaster integration is incomplete. The 16 errors
+are in crates/beardog-tunnel/src/tunnel/hsm/android_strongbox/. This blocks the entire
+NDK depot since bearDog is a dependency of the Tower composition."""
+
+resolution = """Pivoted to aarch64-unknown-linux-musl which is the correct initial target
+for GrapheneOS deployment. musl static binaries run natively on GrapheneOS (no NDK needed).
+Built all 13 primals locally on eastGate:
+  - ld.lld: symlinked from rust-lld (nestGate + rhizoCrypt required LLD)
+  - toolchain: aarch64-musl target added to nestGate's pinned 1.94.1 toolchain
+  - binary names: biomeOS needed -p biomeos-unibin, skunkBat needed -p skunk-bat-server
+Deployed via deploy_pixel.sh with --beacon-seed. Fixed FAMILY_SEED export missing from
+startup script generation. 6/13 primals running (TCP-capable ones). 7 failed due to
+Android UDS path restrictions (/run/user/ and /tmp/biomeos/ not accessible under ADB shell)."""
+
+recommendation = """1. bearDog team: complete android_strongbox type definitions and HSM method
+   implementations for aarch64-linux-android target.
+2. Android UDS adaptation: primals that bind to /run/user/ or /tmp/biomeos/ sockets need
+   an Android override to use $HOME-relative paths (e.g., /data/local/tmp/biomeos/).
+   This could be a per-primal env var (e.g., BIOMEOS_SOCKET_DIR) or a deploy_pixel.sh
+   startup script fix that creates appropriate symlinks.
+3. songbird port-conflict: deploy_pixel.sh should kill stale processes before launching
+   (pkill by binary path, not just process name)."""
+
+classification = "Design adaptation — musl target validated as correct first step. NDK is a future phase for APK/HSM integration."
+
+occurrences = ["Wave 105b: first grapheneGate deployment — 6/13 primals live on Pixel 8"]
+
+# ──────────────────────────────────────────────────────────────
 # OUTCOME
 # ──────────────────────────────────────────────────────────────
 
 [outcome]
 expected = """
-ZERO P1 BLOCKERS. ZERO OPEN P2s for cellMembrane. Wave 105 sweep complete:
-  RESOLVED THIS WAVE:
+ZERO P1 BLOCKERS as of Wave 105b. grapheneGate first deployment achieved:
+  RESOLVED:
   - bearDog pure Rust (Wave 145): all non-x86 targets UNBLOCKED
   - WAN depot distribution (Wave 105): DEPLOYED + VALIDATED (ironGate 13/13 BLAKE3 PASS)
   - aarch64 sweep (Wave 105): 14/14 built, zero C-dep violations
   - Cascade conflict auto-resolve (Wave 105): SHIPPED
   - Harvest atomic rename (Wave 105): SHIPPED (stage_to_depot .new + rename)
-  - CM-CHECKSUM-MULTI-TARGET (Wave 105): SHIPPED same-wave (read-modify-write + validation gate)
+  - CM-CHECKSUM-MULTI-TARGET (Wave 105): SHIPPED same-wave (read-modify-write + validation gate, commit 3a1900b)
   - CM-VPS-DEPOT-SYNC (Wave 105): SHIPPED (plasmid.depot_sync, automated inner→outer)
   - biomeOS graph.deploy (Wave 105): VALIDATED (LocalTrusted, 13-phase composition)
   - primalSpring Wave 105: is_skippable() canonical, 887 tests, PRIMAL_GAPS current
   - ironGate mesh init (Wave 105): INITIALIZED (node_id: ironGate, port 7700 listening)
+  - grapheneGate Wave 105b: 13/13 aarch64-musl BUILT, 6/13 RUNNING on Pixel 8,
+    bearDog BTSP production mode LIVE, deploy_pixel.sh FAMILY_SEED fix shipped
 
-  REMAINING (other teams):
-  1. grapheneGate bootstrap — aarch64-linux-android NDK cross-compile (primalSpring)
-  2. ironGate mesh federation — BLOCKED on eastGate port 7700 (eastGate team)
-  3. flockGate WAN-side e2e validation (awaiting flockGate team)
+  REMAINING:
+  1. grapheneGate UDS path adaptation — 7 primals need Android socket path remapping
+  2. bearDog StrongBox NDK compilation — 16 errors in android_strongbox module (bearDog team debt)
+  3. ironGate mesh federation — BLOCKED on eastGate port 7700 (eastGate team)
+  4. flockGate WAN-side e2e validation (awaiting flockGate team)
 
-The ecosystem is at its strongest. Mesh initialized on 2 gates (ironGate + eastGate pair
-awaiting TCP handshake), transport COMPLETE, both depot targets built, WAN deployed +
-verified, sovereignty graduating. Stadial gate within reach.
+The ecosystem is at its strongest. Mesh initialized on 3 gates (eastGate↔strandGate stable,
+ironGate initialized), transport COMPLETE, both depot targets built, WAN deployed + verified,
+grapheneGate first primals live on Pixel 8, sovereignty graduating. Stadial gate within reach.
 """
