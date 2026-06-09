@@ -238,8 +238,9 @@ priority = "P2"
 status = "IN PROGRESS"
 resolution = """Wave 92: SSH trust established, musl target installed on pepti, --with-harvest flag shipped.
 Wave 98: cellMembrane depot.rs module created (194 lines). Depot ownership absorption in progress.
-7/14 depot binaries stale after cascade — peptidoglycan rebuild needed.
-Provenance now tracks stale=true per primal. VPS should rebuild stale primals on next cycle.
+Wave 102 (strandGate): 9/9 stale primals rebuilt locally — songbird aebe271f, beardog d3a8eb7bb,
+barracuda 9b9cbed3, rhizocrypt 133dd23, coralreef 4c417a95, skunkbat, squirrel, petaltongue,
+sourdough. 14/14 depot binaries checksummed. VPS peptidoglycan rebuild still needed to match.
 Next: peptidoglycan auto-rebuild trigger on cascade (build-carrying cascades)."""
 
 [gaps.gap_8]

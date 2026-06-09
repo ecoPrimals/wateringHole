@@ -314,9 +314,15 @@ wired, aarch64-linux-android path discovery added. 1/14 aarch64 built (sourdough
 12 pending cross-compile. sweetGrass ring elimination RESOLVED (v0.7.52).
 GLACIAL_SHIFT_READINESS updated with Wave 99 status.
 
-3-gate mesh still BLOCKED: SB-TLS-LAN-01 (beardog rejects crypto.x25519 without cap
-token) + SB-SECURITY-URL-01 (songbird formats beardog URL as relative path not UDS).
-LAN peer CONFIRMED ALIVE at 192.168.1.173:7700 (HTTP /jsonrpc returns alive).
+3-gate mesh BLOCKED resolved: SB-TLS-LAN-01 + SB-SECURITY-URL-01 both fixed in
+songbird 03f23d45+aebe271f. 2-gate mesh PROVEN (eastGate↔strandGate, 10.8h stable).
+
+Wave 102 (strandGate depot refresh): 9/9 stale primals rebuilt to musl-static.
+songbird aebe271f (mesh+auth), beardog d3a8eb7bb (transport+PQC, 220+ methods),
+barracuda 9b9cbed3 (sourdough-core removed), rhizocrypt 133dd23 (transport+service),
+coralreef 4c417a95 (capabilities.list), skunkbat+squirrel+petaltongue+sourdough.
+14/14 depot binaries checksummed. Mesh validated: init→discovery→health_check all PASS.
+9/11 primals transport-adopted. loamSpine already shipped (b9828fe). toadStool last gap.
 """
 phase_3 = "Tower Transport Abstraction — TARGET. 10G backbone LIVE. All 14 primals ready. plasmidBin fully harvested. sourDough validate transport enables systematic compliance auditing. After 3-gate mesh proven + ipc.resolve, all primals adopt TransportEndpoint."
 
