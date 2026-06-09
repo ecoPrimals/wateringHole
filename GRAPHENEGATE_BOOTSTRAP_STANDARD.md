@@ -1,9 +1,11 @@
 # grapheneGate Bootstrap Standard — Physical Dark Forest Protocol
 
-**Status**: DRAFT (Wave 68)
+**Status**: Active tracking (Wave 103, elevated from DRAFT)
 **Owner**: eastGate (overwatch)
 **Hardware**: Pixel 8a, Google Tensor G3, 8GB RAM, GrapheneOS
 **Gate class**: `portable_anchor`
+
+> **Wave 103 status**: Architecture remains valid. 3/14 aarch64 binaries built (songbird, skunkbat, sourdough). **bearDog aws-lc-rs C-dep blocks remainder** — this is the sole technical blocker for grapheneGate bootstrap. The standard itself is not blocking; the ecoBin compliance of bearDog is. grapheneGate is tracked as P2: GRAPHENEGATE-BOOTSTRAP in the cross-deployment FRAGO.
 
 ---
 
@@ -181,13 +183,14 @@ adb shell plasmidbin bootstrap --from-graphene \
 | Requirement | Status | Notes |
 |-------------|--------|-------|
 | GrapheneOS installed on Pixel 8a | DONE | Currently plugged into eastGate |
-| BearDog deployed on Android | VALIDATED | ecoBin v2.0 abstract-socket transport |
+| BearDog deployed on Android | **BLOCKED** | aws-lc-rs C-dep prevents aarch64-android build. Pure Rust replacement required. |
 | aarch64-android build target | CONFIGURED | `.cargo/config.toml` has target |
 | ecoBin abstract socket transport | DONE | Driven by GrapheneOS SELinux constraints |
 | BirdSong beacon broadcast | IMPLEMENTED | Two-seed genetics standard validated |
 | Hardware-backed keystore integration | NOT STARTED | Android Keymaster / StrongBox API |
-| plasmidBin aarch64-android binary | NOT BUILT | Needs cross-compilation pipeline |
+| plasmidBin aarch64-android binary | **3/14 BUILT** | songbird, skunkbat, sourdough. bearDog blocks remainder. |
 | TURN relay on Android | NOT TESTED | Songbird abstract socket -> network relay |
+| deploy_pixel.sh handlers | **DONE** (Wave 99) | All 13 primal startup handlers wired |
 
 ---
 
@@ -211,11 +214,14 @@ adb shell plasmidbin bootstrap --from-graphene \
 |------|-----------|--------|
 | 68 | grapheneGate in ecosystem manifest + matrix | DONE |
 | 68 | This bootstrap standard published | DONE |
-| 69 | plasmidBin cross-compiled for aarch64-android | P1 |
-| 69 | BearDog Keymaster/StrongBox integration design | P1 |
-| 70 | Role 1: beacon broadcast + lineage verification test | P2 |
-| 71 | Role 2: BTSP relay on phone, bootstrap via USB | P3 |
-| 73+ | Role 3: full sovereign mesh seed | Horizon |
+| 99 | deploy_pixel.sh all 13 primal handlers | DONE |
+| 103 | 3/14 aarch64 binaries in depot (songbird, skunkbat, sourdough) | DONE |
+| TBD | bearDog pure Rust (aws-lc-rs replacement) | **P1 BLOCKER** — blocks all non-x86 targets |
+| TBD | Full aarch64 plasmidBin depot (14/14) | Blocked on bearDog |
+| TBD | Role 1: beacon broadcast + lineage verification test | P2 (after bearDog) |
+| TBD | BearDog Keymaster/StrongBox integration design | P2 |
+| TBD | Role 2: BTSP relay on phone, bootstrap via USB | P3 |
+| TBD | Role 3: full sovereign mesh seed | Horizon |
 
 ---
 

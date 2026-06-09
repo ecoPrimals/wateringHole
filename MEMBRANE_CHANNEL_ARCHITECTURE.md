@@ -2,7 +2,7 @@
 
 # Membrane Channel Architecture — External Surface Design
 
-**Date**: May 13, 2026 (updated May 23, 2026)
+**Date**: May 13, 2026 (updated Jun 9, 2026 — Wave 103: Channel 1 DNS LIVE)
 **Status**: Active
 **Authority**: WateringHole Consensus
 
@@ -371,7 +371,7 @@ Deploy Model A (single VPS). Channel 2 Relay and Channel 3 Surface operational.
 Channel 1 Signal pending (knot-dns not yet deployed). Shadow runs producing
 comparison data against Cloudflare baselines for S1 and S4 cutovers.
 
-- Channel 1: knot-dns — **PLANNED** (sovereign DNS not yet deployed on VPS)
+- Channel 1: knot-dns — **PROPAGATED** (Jun 4) — `primal.eco` + `nestgate.io` zones live, DNSSEC enabled, public resolvers confirming
 - Channel 2: Songbird relay — **LIVE** (replacing cloudflared)
 - Channel 3: Caddy TLS on :80/:443 — **LIVE** (`membrane.primals.eco`, Let's Encrypt E8, 19MB sporePrint cache). BearDog TLS shadow on :8443 pending cutover.
 
@@ -605,7 +605,7 @@ open. Current state (Tower + Channel 3 Surface live, May 2026):
 | 21115 | TCP | Channel 2b: RustDesk NAT test | **Open** |
 | 21116 | TCP + UDP | Channel 2b: RustDesk ID/hole-punch | **Open** |
 | 21117 | TCP | Channel 2b: RustDesk relay | **Open** |
-| 53 | UDP + TCP | Channel 1: Signal (DNS) | **Closed** (knot-dns not deployed) |
+| 53 | UDP + TCP | Channel 1: Signal (DNS) | **Open** (knot-dns LIVE, Jun 4 — `primal.eco` + `nestgate.io`) |
 
 Services purged: `exim4` (unnecessary mail server), `droplet-agent`
 (opaque DO monitoring). Services added: `fail2ban` (SSH brute-force

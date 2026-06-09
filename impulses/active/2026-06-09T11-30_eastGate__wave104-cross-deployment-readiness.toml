@@ -1,0 +1,291 @@
+# FRAGO: Cross-Deployment Readiness
+# Consolidated from wave79 (transport) + wave84 (depot/pipeline)
+# Single focused FRAGO for remaining cross-deployment work
+
+[impulse]
+id = "wave104-cross-deployment-readiness"
+type = "frago"
+from = "eastGate"
+to = ["cellMembrane", "bearDog", "songBird", "biomeOS", "all-primals", "all-gates"]
+date = "2026-06-09"
+updated = "2026-06-09T11:30"
+priority = "P1"
+owner = "cellMembrane + bearDog + eastGate"
+note = """
+The ecosystem has reached a critical inflection: mesh is LIVE, transport is near-
+complete, depot is fresh for x86_64. The deployment surface is a MATRIX of target
+triples x gate topologies — not just x86_64-musl with others as side projects.
+The ecoBin standard mandates universal portability. This FRAGO tracks what remains
+to achieve it.
+
+Replaces: wave79-transport-evolution-capability-routing (archived)
+          wave84-temporal-inner-membrane-adoption (archived)
+"""
+
+# ──────────────────────────────────────────────────────────────
+# CURRENT STATE (Wave 103, Jun 9 2026)
+# ──────────────────────────────────────────────────────────────
+
+[current_state]
+mesh = "LIVE — eastGate↔strandGate bidirectional, 13h+ stable, all 4 criteria PASS"
+transport = "10-11/11 non-exempt adopted. toadStool sole potential gap (strandGate ACK pending). Zero self-knowledge violations."
+nucleus = "13/13 alive on eastGate, 12/12 liveness+readiness, 12/12 capabilities (with depot rebuild)"
+sovereignty = "S1-S3 GRADUATED. S4 auth gate ending Jun 9 (review pending today). DNS PROPAGATED (Jun 4)."
+ipc_resolve = "NOT YET SHIPPED — songBird Phase 2 M1 (keystone for topology-aware routing)"
+cascade = "OPERATIONAL — 38/38 repos, <10s parallel, freshness auto-publish"
+
+# ──────────────────────────────────────────────────────────────
+# DEPLOYMENT TARGET MATRIX (ecoBin standard)
+# ──────────────────────────────────────────────────────────────
+
+[deployment_targets.x86_64_musl]
+triple = "x86_64-unknown-linux-musl"
+description = "Baseline LAN / VPS / WAN — operational"
+depot = "14/14 fresh"
+gates = ["eastGate", "strandGate", "ironGate", "golgiBody", "flockGate (depot empty)"]
+status = "OPERATIONAL"
+blockers = []
+
+[deployment_targets.aarch64_musl]
+triple = "aarch64-unknown-linux-musl"
+description = "ARM servers, future ARM VPS"
+depot = "3/14 built (songbird, skunkbat, sourdough)"
+gates = ["future ARM VPS"]
+status = "BLOCKED"
+blockers = ["BEARDOG-PURE-RUST"]
+
+[deployment_targets.aarch64_android]
+triple = "aarch64-linux-android"
+description = "Pixel 8 / GrapheneOS (grapheneGate) — portable trust anchor + gate spawner"
+depot = "3/14 built"
+gates = ["grapheneGate (Pixel 8)"]
+status = "BLOCKED"
+blockers = ["BEARDOG-PURE-RUST"]
+note = """grapheneGate is not just a mobile deploy target — it is the ecosystem's
+portable physical root of trust and gate spawner. It is tethered to eastGate on
+LAN, can WAN via mesh, and in time bootstraps new gates on arbitrary hardware.
+See GRAPHENEGATE_BOOTSTRAP_STANDARD.md."""
+
+[deployment_targets.x86_64_windows]
+triple = "x86_64-pc-windows-msvc"
+description = "Future Windows gates — named pipes IPC"
+depot = "0/14"
+gates = []
+status = "DESIGN PHASE"
+blockers = ["named pipes transport implementation", "MSVC toolchain setup"]
+
+[deployment_targets.wasm32_wasi]
+triple = "wasm32-wasi"
+description = "Future browser/edge/embedded"
+depot = "0/14"
+gates = []
+status = "DESIGN PHASE"
+blockers = ["WASM runtime integration"]
+
+# ──────────────────────────────────────────────────────────────
+# REMAINING WORK — prioritized, deduplicated
+# ──────────────────────────────────────────────────────────────
+
+[remaining.beardog_pure_rust]
+id = "BEARDOG-PURE-RUST"
+owner = "bearDog"
+priority = "P1"
+description = "aws-lc-rs C-dep blocks ALL non-x86 ecoBin targets"
+why = """aws-lc-rs contains C code using __memcpy_chk (glibc fortification symbol,
+not in musl). bearDog is the security provider — every composition depends on it.
+Blocks: aarch64-musl (ARM servers), aarch64-android (Pixel/grapheneGate),
+future ARM VPS, and any non-glibc target. songbird+skunkbat+sourdough already
+build clean for aarch64 (pure Rust). bearDog is the sole cross-arch blocker.
+Per ecoBin standard, pure Rust is the means to universal portability."""
+action = """Replace aws-lc-rs with RustCrypto suite (or rustls with rustcrypto-provider).
+Validate: cargo build --release --target aarch64-unknown-linux-musl
+Expected: ELF 64-bit LSB executable, ARM aarch64, statically linked"""
+
+[remaining.wan_outer_membrane]
+id = "WAN-OUTER-MEMBRANE"
+owner = "cellMembrane"
+priority = "P1"
+description = "golgiBody outer membrane for WAN binary distribution (flockGate depot empty)"
+why = """flockGate (WAN) has zero depot binaries. No binary distribution path defined.
+Without it, WAN gates cannot deploy NUCLEUS or enroll in mesh. This is the outer
+membrane face of the golgiBody diderm architecture."""
+action = """Simplest path: Caddy on VPS adds /depot/ route serving /opt/plasmidBin/primals/.
+Long-term: separate golgiBody-ext with covalent bond to inner membrane.
+See architecture.golgibody section below."""
+
+[remaining.graphenegate_bootstrap]
+id = "GRAPHENEGATE-BOOTSTRAP"
+owner = "eastGate"
+priority = "P2"
+description = "Pixel 8 as portable trust anchor + gate spawner"
+why = """grapheneGate is not just aarch64 cross-compile — it is the portable physical
+root of trust. BirdSong beacon proves family membership. Can bootstrap new gates on
+arbitrary hardware via USB/WiFi. Blocked on BEARDOG-PURE-RUST."""
+action = """After bearDog pure Rust: build full aarch64-android depot, deploy via
+deploy_pixel.sh (all 13 handlers ready), validate Role 1 beacon broadcast.
+See GRAPHENEGATE_BOOTSTRAP_STANDARD.md."""
+
+[remaining.songbird_ipc_resolve]
+id = "SONGBIRD-IPC-RESOLVE-M1"
+owner = "songBird"
+priority = "P2"
+description = "ipc.resolve must return structured TransportEndpoint JSON"
+why = """10-11 primals accept TRANSPORT_ENDPOINT but nobody produces it yet. ipc.resolve
+currently returns plain socket paths. Once it returns structured JSON, Tower Atomic
+can inject endpoints at composition deploy time — unlocking topology-aware deployment."""
+action = """Evolve ipc.resolve response to structured format:
+  { "transport": "uds", "path": "/run/biomeos/beardog.sock" }
+  { "transport": "tcp", "host": "192.168.1.173", "port": 9100 }
+  { "transport": "mesh_relay", "peer_id": "strandgate", "capability": "security" }"""
+
+[remaining.cm_cascade_conflict]
+id = "CM-CASCADE-CONFLICT"
+owner = "cellMembrane"
+priority = "P2"
+description = "checksums.toml / freshness.toml ff-only conflicts on cascade"
+why = """Recurring on Waves 99, 102, 103. Multiple gates independently write machine-
+generated files (checksums after rebuild, freshness on cascade). merge-ff correctly
+rejects diverged files, but these files are regenerable metadata, not source."""
+action = """Implement auto-resolve: detect checksums.toml + freshness.toml conflicts,
+resolve with 'theirs' (upstream wins). Long-term: single-writer model for checksums
+via peptidoglycan. See AAR section below."""
+
+[remaining.cm_vps_depot_sync]
+id = "CM-VPS-DEPOT-SYNC"
+owner = "cellMembrane"
+priority = "P2"
+description = "golgiBody inner→outer membrane binary flow for WAN depot"
+why = """After build-carrying cascades land, VPS should auto-refresh depot from
+peptidoglycan. This also serves as the WAN distribution endpoint."""
+action = "Wire plasmid.refresh into cascade post-build hook. Serve via Caddy for WAN."
+
+[remaining.biomeos_graph_revalidate]
+id = "BIOMEOS-GRAPH-REVALIDATE"
+owner = "eastGate"
+priority = "P2"
+description = "Revalidate --graph-deploy with biomeOS v4.14 (LocalTrusted)"
+why = """biomeOS v4.14 rebuilt on strandGate. eastGate binary may be pre-v4.14.
+Restart from depot and revalidate --graph-deploy to confirm LocalTrusted works."""
+action = "Restart biomeOS from fresh depot binary. Run nucleus-deploy --graph-deploy full."
+
+[remaining.irongate_mesh_enroll]
+id = "IRONGATE-MESH-ENROLL"
+owner = "ironGate"
+priority = "LOW"
+description = "ironGate mesh enrollment — federation port not running"
+why = "ironGate has 23 UDS sockets deployed. Federation port enrolls 3rd LAN gate."
+action = "Start songbird with --port 7700, mesh.init to eastGate + strandGate."
+
+[remaining.windows_ecobin]
+id = "WINDOWS-ECOBIN"
+owner = "future"
+priority = "LOW"
+description = "x86_64-pc-windows-msvc target — named pipes IPC"
+why = "Windows gates would extend the deployment surface to Windows hardware."
+action = "Design: named pipes transport, MSVC build pipeline. Long-term."
+
+# ──────────────────────────────────────────────────────────────
+# TRANSPORT ADOPTION SCORECARD (final tally)
+# ──────────────────────────────────────────────────────────────
+
+[transport_scorecard]
+done = [
+  "sweetGrass v0.7.53 — LOCAL, wire-compatible",
+  "nestGate Session 97-98 — LOCAL, Phase 2 wired",
+  "coralReef 0a2f2f6 — LOCAL, 19 tests",
+  "squirrel f180c311 — LOCAL, Phase 2 (all 4 outbound TCP wired)",
+  "skunkBat 1b2f696 — LOCAL, full injection (per-capability env vars)",
+  "petalTongue b584571 — LOCAL",
+  "loamSpine b9828fe — LOCAL, shipped ahead of Wave 103 target",
+  "barracuda 408afaa5 — LOCAL (sourdough-core dep removed, self-knowledge enforced)",
+  "rhizoCrypt e621c6b — LOCAL (sourdough-core dep removed, self-knowledge enforced)",
+  "bearDog daf682c70 — LOCAL in beardog_types::btsp, Phase 2 wired",
+  "sporePrint Wave 103 — LOCAL, canonical format (flockGate)",
+]
+pending = ["toadStool — strandGate ACK pending, may already be done"]
+exempt = ["songBird (transport provider)", "biomeOS (orchestrator)"]
+note = """sourDough defines the wire format as the REPOSITORY OF PRIMAL STANDARDS.
+Primals implement TransportEndpoint locally using self-knowledge only. No primal
+depends on sourdough-core. sourdough validate transport audits compliance externally."""
+
+# ──────────────────────────────────────────────────────────────
+# ARCHITECTURE: GOLGIBODY DIDERM + GRAPHENEGATE TRUST MODEL
+# ──────────────────────────────────────────────────────────────
+
+[architecture.golgibody]
+summary = """
+The golgiBody diderm has two membrane faces and a peptidoglycan layer between them.
+The WAN mesh requires formalizing the outer membrane face:
+
+  INNER MEMBRANE (golgiBody)
+    - Faces LAN / covalent bonded gates
+    - Serves depot binaries to eastGate, strandGate, ironGate
+    - Syncs source via cascade (peptidoglycan relay to Forgejo)
+    - Trust: SSH keys, Forgejo HMAC, covalent bond auth
+    - Current: VPS at 137.184.197.151 (operational)
+
+  PEPTIDOGLYCAN LAYER
+    - Build substrate between inner and outer membranes
+    - Compiles static binaries (musl-static, cross-arch) from synced source
+    - Stores depot in plasmidBin. SSH trust established (Wave 92).
+    - Operational for x86_64-musl. aarch64 blocked on bearDog.
+
+  OUTER MEMBRANE (golgiBody-ext)
+    - Faces WAN / external / ionic+weak interaction partners
+    - Serves depot to flockGate and future WAN gates
+    - NEEDED: HTTP endpoint (Caddy /depot/) or separate instance
+    - Trust: BTSP tokens, TLS, beardog capability verification
+
+The inner membrane syncs the pepti layer. The pepti layer builds. Both membrane
+faces serve from the pepti layer's output. Inner serves LAN (covalent). Outer
+serves WAN (ionic/weak). The pepti layer is the air gap.
+"""
+
+[architecture.graphenegate]
+summary = """
+grapheneGate (Pixel 8) is the portable physical root of trust:
+  - Titan M2 secure element binds FAMILY_SEED to hardware
+  - BirdSong beacon proves family membership on any network
+  - Can bootstrap new gates via USB or WiFi (Role 2-3)
+  - Appears as standard Android device under scrutiny
+  - Blocked only on bearDog pure Rust (aws-lc-rs)
+See GRAPHENEGATE_BOOTSTRAP_STANDARD.md for full trust model.
+"""
+
+# ──────────────────────────────────────────────────────────────
+# AAR: RECURRING CASCADE CONFLICTS (carried from wave84)
+# ──────────────────────────────────────────────────────────────
+
+[aar.cascade_conflicts]
+problem = """Recurring ff-only merge conflicts on cascade for plasmidBin (checksums.toml)
+and wateringHole (freshness.toml). Occurred on Waves 99, 102, and 103."""
+
+root_cause = """Two files are both locally-generated AND upstream-synced:
+  1. checksums.toml — regenerated locally after depot rebuild, also pushed by other gates
+  2. freshness.toml — auto-published by cascade on every gate
+Multiple gates writing within the same window → ff-only fails."""
+
+recommendation = """Option A (quick fix): Auto-resolve 'theirs' for machine-generated files.
+Option B (long-term): Single-writer model — peptidoglycan writes checksums, cascade
+initiator writes freshness. cellMembrane implements Option A, evolves toward B."""
+
+occurrences = [
+  "Wave 99: plasmidBin checksums.toml",
+  "Wave 102: plasmidBin checksums.toml",
+  "Wave 103: plasmidBin checksums.toml + wateringHole freshness.toml",
+]
+
+# ──────────────────────────────────────────────────────────────
+# OUTCOME
+# ──────────────────────────────────────────────────────────────
+
+[outcome]
+expected = """
+The deployment surface is a complete matrix: every target triple in the ecoBin
+standard has a clear path to operational depot, with blockers identified and
+prioritized. bearDog pure Rust unlocks ALL non-x86 targets simultaneously.
+golgiBody outer membrane unlocks WAN deployment. grapheneGate bootstrap unlocks
+portable trust. Together these enable: LAN multi-gate mesh, WAN covalent bonds,
+Pixel mobile NUCLEUS, ARM server deployment, and future topologies — all flowing
+through the same diderm architecture with cascade as the sole sync interface.
+"""

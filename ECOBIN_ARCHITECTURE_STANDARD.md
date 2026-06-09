@@ -1680,6 +1680,30 @@ Your primal becomes a TRUE ecoBin v2.0:
 
 ---
 
+## Current Compliance (Wave 103, Jun 9 2026)
+
+**bearDog `aws-lc-rs` is the sole remaining C-dep violation across the ecosystem.**
+
+The sweetGrass `ring` elimination was resolved in Wave 98. All other primals are
+pure Rust application code. bearDog uses `aws-lc-rs` (via `rustls` default crypto
+provider) which introduces a C dependency (`__memcpy_chk` glibc symbol). This
+blocks ALL non-x86 target triples in the ecoBin matrix:
+
+| Target Triple | Status | Blocker |
+|---------------|--------|---------|
+| `x86_64-unknown-linux-musl` | 14/14 depot, operational | — |
+| `aarch64-unknown-linux-musl` | 3/14 built | bearDog aws-lc-rs |
+| `aarch64-linux-android` | 3/14 built | bearDog aws-lc-rs |
+| `x86_64-pc-windows-msvc` | 0/14 | Not yet attempted |
+| `wasm32-wasi` | 0/14 | Design phase |
+
+**Resolution**: bearDog must replace `aws-lc-rs` with pure-Rust crypto stack
+(RustCrypto suite). This is tracked as P1: BEARDOG-PURE-RUST in the cross-deployment
+FRAGO. Until resolved, universal portability per the ecoBin standard is not achievable
+for the full NUCLEUS.
+
+---
+
 ## plasmidBin Submission (ecoBin v3.0 Gate)
 
 Every primal that passes ecoBin must submit its binary to `ecoPrimals/infra/plasmidBin/`.

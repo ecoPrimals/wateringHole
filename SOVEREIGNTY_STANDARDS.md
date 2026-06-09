@@ -147,7 +147,7 @@ Three channels define the cell's external interfaces (see
 - **Process**: knot-dns on VPS
 - **Port**: 53
 - **Trust**: Lowest — public data
-- **Status**: PENDING (DoT intermediate active, sovereign DNS not started)
+- **Status**: **PROPAGATED** (Jun 4) — `primal.eco` + `nestgate.io` zones live on sovereign knot-dns. Public resolvers (8.8.8.8, 1.1.1.1) resolve correctly. DNSSEC enabled.
 
 ### Channel 2: Relay (NAT Traversal)
 - **Process**: Songbird TURN relay on VPS

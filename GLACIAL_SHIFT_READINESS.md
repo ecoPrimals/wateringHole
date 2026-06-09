@@ -2,26 +2,32 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-08 (Wave 101+ — **MESH IS LIVE.** SB-TLS-LAN-01 and SB-SECURITY-URL-01 both RESOLVED. songBird 03f23d45+aebe271f rebuilt, deployed, revalidated: mesh.init bootstrap_peers_added:1, all_healthy:true, reachable_peers:1 to strandGate. Transport evolution 9/11 non-exempt primals adopted — barracuda+rhizoCrypt self-knowledge violation FIXED, bearDog HIGH priority DONE. toadStool only remaining gap. NUCLEUS 13/13 LIVE, 12/12 liveness, 12/12 readiness, 11/12 capabilities. sourDough shipped scaffold transport-kit + dep violation detection.)
+**Last updated**: 2026-06-09 (Wave 103 — Full glacial/eco/sovereign/temporal review. Mesh LIVE 13h+ stable. Transport 10-11/11 non-exempt adopted (toadStool may be done per strandGate ACK). Depot 14/14 x86_64-musl fresh, 3/14 aarch64 built. bearDog aws-lc-rs C-dep blocks ALL non-x86 targets (P1). flockGate WAN depot empty — no binary distribution path (P1). biomeOS v4.14 rebuilt by strandGate. S4 auth gate ending Jun 9. sourDough shipped validate depot + scaffold transport-kit + dep violation detection. Zero P1 mesh blockers.)
 
 ---
 
 ## Position
 
-The ecosystem has cleared the interstadial exit gate (~9.7/10). 13/13 primals
-at zero debt. Full NUCLEUS deployed on eastGate — 13/13 primals running, all
-IPC-live over UDS. cellMembrane VPS operational (relay + TLS/content shadows).
-Shadow tracks S1-S3 proven. 2-gate mesh bidirectionally validated (eastGate ↔
-strandGate, Wave 92). biomeOS orchestration path wired (`--graph-deploy`,
-`composition.deploy` called — BTSP auth gated). Pixel 8 deploy extended to
-all 13 primals. sourDough convergent evolution COMPLETE (TransportEndpoint
-absorbed, `validate transport` shipped, cross-arch Pixel push validated).
-benchScale IPC compliance sweep passing (12/12 liveness, 12/12 readiness).
-3-gate mesh **OPERATIONAL** — SB-TLS-LAN-01 and SB-SECURITY-URL-01 both
-RESOLVED (songBird 03f23d45+aebe271f). eastGate↔strandGate mesh proven:
-bootstrap_peers_added:1, all_healthy:true, reachable_peers:1, latency 0ms.
-Transport evolution at 9/11 non-exempt primals — only toadStool + loamSpine
-remain. All self-knowledge violations (sourdough-core deps) eliminated.
+The ecosystem has cleared the interstadial exit gate (~9.8/10). **Mesh is LIVE**
+(eastGate↔strandGate, 13h+ stable, all 4 criteria PASS). 13/13 primals at zero
+debt. Full NUCLEUS deployed on eastGate — 13/13 primals running, all IPC-live
+over UDS. Transport injection at **10-11/11 non-exempt primals** — all using
+correct LOCAL implementation pattern, zero self-knowledge violations.
+
+**Deployment surface (ecoBin target matrix)**:
+- `x86_64-unknown-linux-musl`: 14/14 depot fresh, LAN/VPS/WAN operational
+- `aarch64-unknown-linux-musl`: 3/14 built (songbird, skunkbat, sourdough). **bearDog aws-lc-rs C-dep blocks remainder** (P1)
+- `aarch64-linux-android`: 3/14 built. grapheneGate (Pixel 8) is the portable root of trust + gate spawner, not just a deploy target
+- `x86_64-pc-windows-msvc`: 0/14, future (Windows gates, named pipes IPC)
+- `wasm32-wasi`: 0/14, design phase (browser/edge/embedded)
+
+**Two P1 blockers remain**:
+1. bearDog `aws-lc-rs` C-dep (`__memcpy_chk` glibc symbol) — blocks ALL non-x86 targets. Pure Rust is the means to universal portability per ecoBin standard.
+2. flockGate WAN depot empty — no binary distribution path defined. golgiBody outer membrane needed.
+
+biomeOS v4.14 rebuilt by strandGate (LocalTrusted access level). `--graph-deploy`
+revalidation pending on eastGate. S4 auth gate ending Jun 9. sourDough shipped
+`validate depot`, `scaffold transport-kit`, and dep violation detection.
 
 **Wave 52b milestone**: Full NUCLEUS live on eastGate — 13/13 primals from plasmidBin,
 19/19 sockets alive, `plasmidbin doctor` 35/35 pass. primalSpring v0.9.30: 92 experiments
@@ -151,23 +157,22 @@ Unix socket improvements. primalSpring: 789 tests, 53 scenarios, 458 methods,
 
 **Climate-sensitive sentinels** (primals whose readiness gates the glacial shift):
 
-- **Songbird**: `mesh.init` + `bootstrap_peers` wired (Wave 49). Security socket fix
-  SHIPPED (Wave 67, eb913612) — `--security-socket` / `BEARDOG_SOCKET` honored.
-  Cross-gate `discovery.peers` verification **NEXT** — same-subnet live test.
-  sled DB corruption on unclean shutdown remains a workaround-only issue.
-- **bearDog**: ACME renewal daemon operational. Massive orphan purge (Wave 113b)
-  cleared 15k LOC of dead discovery code. Vault (encrypted creds at rest) deferred
-  to Phase 2 (not blocking — in-memory `secrets.*` IPC operational with lazy
-  NUCLEUS purpose-key derivation). S4 auth shadow is a cellMembrane observation
-  criterion; bearDog auth infra is **complete** (14,940+ tests, zero debt).
-- **toadStool**: **S279 deep debt III complete** — zero production panic paths (12 eliminated),
-  deprecated legacy capability roundtrip, 9,156+ lib tests. Handoffs archived (S278b).
+- **Songbird**: **MESH LIVE** (Wave 101). P1 fix (03f23d45+aebe271f) resolved TLS/UDS routing
+  + HTTP fallback. eastGate↔strandGate bidirectional mesh 13h+ stable. Auth hardening +
+  network detection shipped. ipc.resolve M1 (topology-aware routing) is P2 next.
+  **CLEAR for stadial** — mesh operational.
+- **bearDog**: ACME renewal daemon operational. Transport Phase 2 adopted (Wave 103).
+  S4 auth gate ending Jun 9. **P1 BLOCKER**: `aws-lc-rs` C-dep (`__memcpy_chk`) blocks
+  ALL non-x86 ecoBin targets. Must replace with pure-Rust crypto stack for universal portability.
+  14,940+ tests, zero debt otherwise.
+- **toadStool**: **S279 deep debt III complete** — zero production panic paths, 9,156+ lib tests.
+  TransportEndpoint adoption may be done (strandGate ACK pending).
   **CLEAR** — zero sentinel-blocking items.
-- **biomeOS**: **v3.76 — LiveSpore `~/.local/bin` FIXED** (commit eddc3fd2, Wave 49).
-  Zero stale patterns. Neural API `capability.call` proxy SHIPPED (Wave 67, 9ed36983).
-  1 tracked TODO (REST route — enhancement). **CLEAR** — zero sentinel-blocking items.
-- **petalTongue**: WASM client-side rendering live. `--family-id` now accepted
-  (Wave 49, commit `bb5cdc9`). Showcase pointer updated to central fossilRecord.
+- **biomeOS**: **v4.14 rebuilt** by strandGate (LocalTrusted access level for UDS callers).
+  Neural API `capability.call` proxy, `composition.deploy`, `graph.status` all operational.
+  eastGate `--graph-deploy` revalidation pending.
+  **CLEAR** — zero sentinel-blocking items.
+- **petalTongue**: WASM client-side rendering live. Transport evolution adopted.
   **CLEAR** — no remaining sentinel-blocking items.
 
 **Upstream leads, downstream lags**: Primals on the mountain (bearDog, Songbird,
@@ -192,9 +197,9 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | **S1** | TLS termination | Caddy+LE :443 (80ms TTFB) | Cloudflare (INACTIVE) | **VERIFIED** — 198 probes, 0 failures, p95 < 120ms. Awaiting NS cutover. | p95 < 500ms, 0 TLS failures |
 | **S2** | NAT relay | Songbird TURN :3478 | cloudflared (INACTIVE) | **GRADUATED** | 7-day 100% reachable |
 | **S3** | Content serving | NestGate + petalTongue (67ms TTFB) | GitHub Pages (111ms) | **READY** — sporePrint 101 tests, zero-C deps. Cutover after DNS NS switch. | 7-day TTFB parity |
-| **S4** | Auth | BearDog BTSP enforced | OAuth2/PAM (DISABLED) | **7-DAY GATE ACTIVE** (started Jun 2, ends ~Jun 9, 15-min probes) | 7-day p95 < 50ms |
+| **S4** | Auth | BearDog BTSP enforced | OAuth2/PAM (DISABLED) | **7-DAY GATE ENDING** (started Jun 2, ends Jun 9 — review pending today) | 7-day p95 < 50ms |
 
-**Remaining**: S4 gate running autonomously (ends ~Jun 9). DNS NS registrar cutover is the critical path (operator manual action). S1 graduation (Cloudflare removal) follows NS cutover.
+**Remaining**: S4 gate ending Jun 9 — review pending today. If PASS → S4 GRADUATED, all 4 shadows sovereign. DNS NS already cutover (Jun 4). S1 graduation (Cloudflare removal from outer membrane) follows.
 
 ### cellMembrane (inner membrane)
 
@@ -245,11 +250,12 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | `tower-x86-homelan-uds` | **PASS** (golden path) |
 | `full-x86-homelan-uds` | **PASS** (Wave 98) — 13/13 primals, 12/12 IPC liveness, 12/12 readiness |
 | `lithospore-x86-vm-uds` | **PASS** |
-| `nucleus-aarch64-mixed-tcp` | **BLOCKED** (only sourdough built for aarch64, 12 pending cross-compile) |
-| `graph-deploy-x86-uds` | **PARTIAL** — biomeOS reachable, composition.deploy auth-gated by BTSP |
-| `benchscale-ipc-x86-uds` | **PASS** — 12/12 liveness, 12/12 readiness, 11/12 capabilities |
-| `pixel-tower-aarch64-tcp` | **PARTIAL** — all 13 handlers wired, aarch64 binaries pending |
-| 38 other cells | **UNTESTED** |
+| `nucleus-aarch64-mixed-tcp` | **BLOCKED** (3/14 aarch64 built — bearDog aws-lc-rs blocks remainder) |
+| `graph-deploy-x86-uds` | **PARTIAL** — biomeOS v4.14 rebuilt (LocalTrusted). eastGate revalidation pending. |
+| `benchscale-ipc-x86-uds` | **PASS** — 12/12 liveness, 12/12 readiness, 12/12 capabilities (with depot rebuild) |
+| `pixel-tower-aarch64-tcp` | **PARTIAL** — all 13 handlers wired, 3/14 aarch64 built. bearDog blocks. grapheneGate = trust anchor. |
+| `wan-flockgate-deploy` | **BLOCKED** — depot empty, no binary distribution path. golgiBody outer membrane needed. |
+| 37 other cells | **UNTESTED** |
 
 **P0 target**: `nucleus-x86-mixed-uds` — full NUCLEUS over LAN. **ACHIEVED** (Wave 98).
 
@@ -269,12 +275,12 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Songbird `mesh.init` + `bootstrap_peers` | **WIRED** — Wave 49, Songbird team confirmed functional |
 | Cross-gate `discovery.peers` verification | **COMPLETE** (Wave 92) — bidirectional, both gates report peer_count:1, quality:1.0 |
 | Cross-subnet mesh (southGate ↔ eastGate) | **BLOCKED** — different subnets, needs routing or TURN relay |
-| Plasmodium collective status | **PENDING** — requires 3+ same-subnet gates meshed first (2/3 operational). Blocked on SB-TLS-LAN-01 + SB-SECURITY-URL-01. |
-| biomeOS graph.deploy orchestration | **WIRED** (Wave 99) — `nucleus-deploy --graph-deploy` calls `composition.deploy`, auth-gated by BTSP |
-| Full NUCLEUS 13/13 IPC-live | **COMPLETE** (Wave 98) — 12/12 liveness, 12/12 readiness, 11/12 capabilities |
-| Pixel 8 full NUCLEUS handlers | **WIRED** (Wave 99) — all 13 startup handlers in deploy_pixel.sh. aarch64 binaries pending. |
+| Plasmodium collective status | **2/3 OPERATIONAL** — eastGate↔strandGate mesh LIVE (13h+ stable). SB-TLS-LAN-01 + SB-SECURITY-URL-01 RESOLVED. ironGate 3rd gate needs federation port. |
+| biomeOS graph.deploy orchestration | **WIRED** (Wave 99) — `nucleus-deploy --graph-deploy` calls `composition.deploy`. biomeOS v4.14 (LocalTrusted) rebuilt. eastGate revalidation pending. |
+| Full NUCLEUS 13/13 IPC-live | **COMPLETE** (Wave 98) — 12/12 liveness, 12/12 readiness. coralReef capabilities.list shipped (12/12 with depot rebuild). |
+| Pixel 8 / grapheneGate | **WIRED** (Wave 99) — all 13 startup handlers. 3/14 aarch64 built. bearDog aws-lc-rs blocks remainder. grapheneGate = portable trust anchor + gate spawner. |
 | benchScale IPC compliance | **OPERATIONAL** (Wave 99) — validates liveness/readiness/capabilities across live NUCLEUS |
-| flockGate live deployment | **OPERATIONAL** (Wave 63-64) — WAN relay, sporePrint gallery, Zola pipeline, temporal sync validated |
+| flockGate WAN deployment | **BLOCKED** (Wave 103) — WAN relay + cascade operational, but depot EMPTY. No binary distribution path. Needs golgiBody outer membrane endpoint. |
 
 ### Wave 49 Ecosystem Issues (post-tightening re-audit, May 25)
 
@@ -302,27 +308,37 @@ fossilRecord) — see `fossilRecord/` for detail.
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| ~~Cross-gate `discovery.peers` live test~~ | primalSpring | ~~HIGH~~ | **DONE** (Wave 92) — bidirectional mesh proof, total_count:1 both directions |
-| ~~Cross-gate `capability.call` live test~~ | primalSpring | ~~HIGH~~ | **DONE** (Wave 92) — routes through mesh, local resolution takes precedence as expected |
-| SB-TLS-LAN-01: songbird TLS handshake + beardog crypto token | songBird + bearDog | **P1** | beardog rejects crypto.x25519_generate_ephemeral without capability token. Blocks 3-gate mesh. |
-| SB-SECURITY-URL-01: songbird security provider URL format | songBird | **P1** | Formats beardog trust/evaluate URL as relative path, not UDS socket. Invalid URL error. |
-| Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
+| ~~Cross-gate `discovery.peers` live test~~ | primalSpring | ~~HIGH~~ | **DONE** (Wave 92) |
+| ~~Cross-gate `capability.call` live test~~ | primalSpring | ~~HIGH~~ | **DONE** (Wave 92) |
+| ~~SB-TLS-LAN-01: songbird TLS handshake~~ | songBird + bearDog | ~~P1~~ | **RESOLVED** (Wave 101, 03f23d45) — UDS routing fixed, HTTP fallback wired |
+| ~~SB-SECURITY-URL-01: songbird security URL format~~ | songBird | ~~P1~~ | **RESOLVED** (Wave 101, 03f23d45) — UDS socket path used directly |
 | ~~DNS NS registrar cutover~~ | operator | ~~HIGH~~ | **DONE** — `primal.eco` + `nestgate.io` propagated + TLS live. DNSSEC enabled. |
-| songBird ipc.resolve structured endpoints | songBird | **P2** | TransportEndpoint types shipped, ipc.resolve wiring next (Phase 2 M1) |
-| Transport injection (1/14 primals) | all primals | **P2** | sourDough has TransportEndpoint. `sourdough validate transport` shipped. |
-| biomeOS orchestration auth (BTSP cap token) | biomeOS + bearDog | **P2** | `composition.deploy` wired in nucleus-deploy, auth-gated. Needs cap token flow. |
-| Peptidoglycan stale binary rebuild | cellMembrane | **P2** | 7/14 depot binaries stale after cascade. depot.rs module in progress. |
-| aarch64 cross-compilation (12/13 primals) | primal teams | **P2** | Only sourdough built for aarch64. sweetGrass ring eliminated (unblocked). |
+| ~~coralReef capabilities.list~~ | coralReef | ~~LOW~~ | **DONE** (Wave 101, 15d1702) — capabilities.list alias shipped |
+| **bearDog aws-lc-rs C-dep** | bearDog | **P1** | `aws-lc-rs` uses `__memcpy_chk` (glibc). Blocks ALL non-x86 targets: aarch64-musl, aarch64-android (Pixel), future ARM VPS. Must replace with pure-Rust crypto stack. |
+| **flockGate WAN depot empty** | cellMembrane | **P1** | No binary distribution path to WAN gates. flockGate lacks `b3sum`, `gh`, SSH. Needs golgiBody outer membrane HTTP endpoint (Caddy). |
+| songBird ipc.resolve M1 | songBird | **P2** | TransportEndpoint types shipped, ipc.resolve wiring next (topology-aware routing) |
+| Transport injection (toadStool) | toadStool | **P2** | 10-11/11 non-exempt adopted. toadStool may be done (strandGate ACK pending). `sourdough validate transport` audit available. |
+| biomeOS graph.deploy revalidation | biomeOS + eastGate | **P2** | v4.14 (LocalTrusted) rebuilt. eastGate `--graph-deploy` revalidation pending. |
+| CM-CASCADE-CONFLICT | cellMembrane | **P2** | checksums.toml / freshness.toml ff-only conflicts on cascade. Needs auto-resolve strategy. |
+| CM-VPS-DEPOT-SYNC | cellMembrane | **P2** | golgiBody inner→outer membrane binary flow for WAN depot. |
+| Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
+| grapheneGate bootstrap | eastGate | **P2** | Pixel 8 as portable trust anchor + spawner (GRAPHENEGATE_BOOTSTRAP_STANDARD). Blocked on bearDog pure Rust. |
+| aarch64 cross-compilation (11/14 primals) | primal teams | **P2** | 3/14 built (songbird, skunkbat, sourdough). bearDog aws-lc-rs blocks remainder. sweetGrass ring eliminated. |
+| ironGate mesh enrollment | ironGate | **LOW** | Federation port activation for 3rd LAN gate. Hardware coordination. |
+| Windows ecoBin (x86_64-pc-windows-msvc) | future | **LOW** | Named pipes IPC, MSVC target. Design phase. |
+| wasm32-wasi ecoBin | future | **LOW** | Browser/edge/embedded. Design phase. |
 | benchScale Docker image tag fix | benchScale | **LOW** | Topologies use bare `ubuntu` tag — needs `ubuntu:24.04` |
-| coralReef capabilities.list | coralReef | **LOW** | Only primal without `capabilities.list` response (11/12) |
 | Forgejo Actions CI | projectNUCLEUS | LOW | Evaluation planned (P2) |
 | Central fossilRecord sync | all primals | LOW | 7/8 primals reference central paths that don't exist yet |
 
-**Resolved since Wave 68** (archived to wave70/wave68): loamSpine Tokio panic **FIXED**,
-rhizoCrypt discovery hardening **DONE**, sweetGrass PROV-O parity **DONE**, bearDog ring
-eliminated (aws-lc-rs, 14,988 tests), Songbird sled removed (Wave 135), biomeOS L4 routing
-+ topology affinity **LIVE**, cellMembrane relay bash→Rust **COMPLETE**, VPS membrane binary
-deployed, S4 auth **ACTIVATED**.
+**Resolved since Wave 68**: loamSpine Tokio panic, rhizoCrypt discovery hardening,
+sweetGrass PROV-O parity, bearDog ring eliminated (aws-lc-rs retained — C-dep still present),
+Songbird sled removed, biomeOS L4 routing + topology affinity, cellMembrane relay bash→Rust,
+VPS membrane binary deployed, S4 auth ACTIVATED, SB-TLS-LAN-01 RESOLVED (Wave 101),
+SB-SECURITY-URL-01 RESOLVED (Wave 101), barracuda sourdough-core dep REMOVED (Wave 101),
+rhizoCrypt sourdough-core dep REMOVED (Wave 101), coralReef capabilities.list SHIPPED (Wave 101),
+bearDog transport adoption DONE (Wave 103), loamSpine transport confirmed (Wave 103),
+biomeOS v4.14 rebuilt (Wave 103), depot 14/14 fresh x86_64-musl (Wave 103).
 
 **Previously resolved**: Ionic bond runtime, biomeOS mesh dispatch, BearDog ACME,
 rhizoCrypt startup latency, Songbird `--security-socket`, stale socket cleanup,
@@ -352,25 +368,24 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 99)**: **ALL P1 RESOLVED. 2-GATE MESH PROVEN. BIOME ORCHESTRATION WIRED. STADIAL GATE IN SIGHT.**
+**Current assessment (Wave 103)**: **MESH LIVE. TRANSPORT NEAR-COMPLETE (10-11/11). DEPOT FRESH (x86_64). 2 P1 BLOCKERS (bearDog aws-lc-rs, WAN depot). S4 ENDING TODAY. STADIAL GATE IN SIGHT.**
 
-**Wave 98-99 milestones**:
-- Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 11/12 capabilities)
+**Wave 98-103 milestones**:
+- Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 12/12 capabilities with coralReef depot fix)
 - `nucleus-deploy --graph-deploy` flag ships: probes biomeOS, calls `composition.deploy` + `graph.status`
-  (correctly auth-gated by BTSP — beardog capability token integration is next)
-- XDG_RUNTIME_DIR fix in nucleus-deploy config (was defaulting to /tmp/biomeos)
 - Pixel deploy extended: all 13 primal startup handlers, aarch64-linux-android path discovery
 - benchScale IPC compliance operational: `benchscale validate ipc` against live NUCLEUS
-- Docker topology labs blocked on bare `ubuntu` image tag (needs ubuntu:24.04 — fix trivial)
-- 3-gate mesh revalidation: LAN peer at 192.168.1.173:7700 CONFIRMED ALIVE (HTTP /jsonrpc
-  returns `{"status":"alive"}`). mesh.init from eastGate initializes but bootstrap_peers_added:0
-  ROOT CAUSE: SB-TLS-LAN-01 (beardog rejects crypto.x25519_generate_ephemeral — needs capability
-  token) + SB-SECURITY-URL-01 (songbird formats beardog URL as relative path, not UDS socket)
-- sourDough convergent evolution COMPLETE: TransportEndpoint + connect_transport() + IpcClient
-  absorbed into sourdough-core. `sourdough validate transport` subcommand shipped. Scaffold
-  templates emit transport-injected primals. Cross-arch aarch64-linux-android build + Pixel push.
-- sweetGrass ring elimination RESOLVED (v0.7.52): testcontainers+bollard removed, deny.toml hardened
-- 7/14 depot binaries stale (peptidoglycan rebuild needed on next cascade)
+- **Mesh LIVE** (Wave 101): songBird P1 fix (03f23d45+aebe271f) resolved SB-TLS-LAN-01 + SB-SECURITY-URL-01.
+  eastGate↔strandGate: bootstrap_peers_added:1, all_healthy:true, reachable_peers:1, latency 0ms. 13h+ stable.
+- **Transport 10-11/11** (Wave 101-103): barracuda + rhizoCrypt self-knowledge violations fixed (sourdough-core dep
+  removed, local TransportEndpoint). bearDog transport adoption DONE. loamSpine confirmed ahead of target.
+  toadStool may be done per strandGate ACK. sourDough shipped `validate depot` + dep violation detection.
+- **Depot 14/14 fresh** (Wave 103): full x86_64-musl rebuild. All binaries current. checksums.toml regenerated.
+- bearDog `aws-lc-rs` C-dep discovered: blocks ALL non-x86 targets (aarch64-musl, aarch64-android). P1 for ecoBin.
+- flockGate WAN depot empty: no binary distribution path. P1 for WAN deployment surface.
+- biomeOS v4.14 rebuilt by strandGate (LocalTrusted access level for UDS callers).
+- sourDough convergent evolution COMPLETE: `validate transport`, `validate depot`, scaffold transport-kit.
+  sourDough is the repository of primal standards as a primal — primals do NOT depend on sourdough-core.
 
 The ecosystem now operates on a formalized three-tier pattern:
 
@@ -397,30 +412,24 @@ BIO-SEARCH-01 RESOLVED — biomeOS v4.10 depot-first binary search.
 CM-TRIGGER-01 RESOLVED — `plasmid.trigger` SSH-kicks VPS service.
 All P1 deployment blockers RESOLVED.
 
-1/14 primals have transport injection (sourDough — TransportEndpoint absorbed). P2, non-blocking for stadial.
-`sourdough validate transport` auditing tool shipped for compliance scanning.
+10-11/11 non-exempt primals have transport injection. toadStool last potential gap (strandGate ACK pending).
+All self-knowledge violations eliminated (barracuda, rhizoCrypt removed sourdough-core dep).
+`sourdough validate transport` + `sourdough validate depot` auditing tools shipped.
 
-Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ACTIVE (ends ~Jun 9). S1 inner membrane
-TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY, 5/5 Caddy endpoints LIVE
-(primal.eco, mesh.primal.eco, auth.primal.eco, api.primal.eco, nestgate.io).
-Criteria 2 mesh: **2-gate mesh proof COMPLETE** (Wave 92, bidirectional, eastGate ↔ strandGate).
-Wave 99 revalidation: 3-gate mesh BLOCKED on 2 upstream issues:
-- SB-TLS-LAN-01: songbird TLS handshake fails (beardog rejects crypto.x25519 without cap token)
-- SB-SECURITY-URL-01: songbird formats beardog trust URL as relative path (not UDS socket)
-LAN peer at 192.168.1.173:7700 CONFIRMED ALIVE (direct HTTP /jsonrpc probe returns alive).
-eastGate songbird has no federation TCP port (UDS-only launch) — needs --port for mesh.
-Criteria 3: peptidoglycan FORMALIZED (ironGate ACK). Depot architecture designed
-(Wave 92) — pepti as shared storage, builds flow from gates, VPS is deploy-only.
-cellMembrane depot.rs module created (194 lines) — depot ownership absorption in progress.
-7/14 stale binaries flagged in provenance.toml (peptidoglycan rebuild needed).
-Criteria 4: flockGate OPERATIONAL, formal WAN validation pending.
-Criteria 5: `primal.eco` + `nestgate.io` DNS PROPAGATED + TLS LIVE. `primals.eco` stays
-Cloudflare (outer membrane). DNSSEC enabled on both sovereign domains.
-Criteria 6: cross-membrane validation scenario shipped (`s_cross_membrane_integrity`,
-61 scenarios). Peptidoglycan self-refresh timer deployed (6-hour cycle, blake3 checksum
-verification). VPS staleness detection operational. benchScale IPC compliance sweep
-validates 12/12 primals (liveness + readiness PASS). biomeOS orchestration path wired
-(`composition.deploy` called, auth-gated as expected).
+Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ENDING Jun 9 (review pending today).
+S1 inner membrane TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY, 5/5 Caddy endpoints LIVE.
+If S4 PASS → all 4 sovereignty shadows graduated on inner membrane.
+Criteria 2 mesh: **MESH LIVE** (Wave 101). eastGate↔strandGate bidirectional, 13h+ stable.
+SB-TLS-LAN-01 + SB-SECURITY-URL-01 RESOLVED. 3rd gate (ironGate) needs federation port activation.
+Criteria 3: peptidoglycan FORMALIZED (ironGate ACK). Depot 14/14 fresh (x86_64-musl).
+cellMembrane depot.rs module operational. Build-carrying cascades delivered.
+Criteria 4: flockGate cascade operational but **depot empty** — no binary distribution path.
+golgiBody outer membrane HTTP endpoint needed. WAN covalent validation blocked.
+Criteria 5: `primal.eco` + `nestgate.io` DNS PROPAGATED + TLS LIVE (Jun 4). `primals.eco` stays
+Cloudflare (outer membrane per diderm model). DNSSEC enabled on both sovereign domains.
+Criteria 6: cross-membrane validation scenario shipped (61 scenarios). Peptidoglycan self-refresh
+timer deployed. benchScale IPC compliance sweep validates 12/12 primals. biomeOS v4.14 rebuilt
+(LocalTrusted). Zero commercial services in inner membrane data path.
 
 **Critical path to stadial entry**:
 1. ~~VPS deploy refresh~~ **DONE** — cellMembrane plasmid-pipeline.timer (zero-touch, 30-min cycle)
@@ -437,17 +446,20 @@ validates 12/12 primals (liveness + readiness PASS). biomeOS orchestration path 
 12. ~~barraCuda build break~~ **RESOLVED** (Wave 93) — SimpleMlp methods restored, depot 13/13
 
 **Stadial entry is gated only on**:
-- S4 auth gate review completion (~Jun 9, automated)
-- 3rd gate mesh enrollment — SB-TLS-LAN-01 + SB-SECURITY-URL-01 RESOLVED. Protocol proven. ironGate federation port activation remaining (hardware coordination).
-- WAN covalent validation with flockGate (pending coordination)
-- biomeOS orchestration auth integration (BTSP capability token for composition.deploy — LocalTrusted in git, rebuild needed)
-- toadStool TransportEndpoint adoption (last non-exempt primal without transport injection)
+- S4 auth gate review completion (Jun 9, ending today)
+- 3rd gate mesh enrollment — protocol proven, ironGate federation port activation remaining
+- WAN covalent validation — **BLOCKED** on flockGate depot (P1: golgiBody outer membrane needed)
+- biomeOS orchestration revalidation — v4.14 (LocalTrusted) rebuilt, eastGate `--graph-deploy` pending
 
-Software items: **Zero P1 mesh blockers.** songBird mesh fix v2 deployed and validated.
-All 2 mesh blockers RESOLVED (03f23d45+aebe271f). Transport adoption at 9/11 non-exempt
-primals. biomeOS --graph-deploy path WIRED but auth-gated (v4.14 rebuild needed).
-Pixel full NUCLEUS deploy: startup handlers complete, aarch64 cross-compilation pending.
-Depot: multiple primals have shipped transport evolution code — rebuild cycle needed.
+**Cross-deployment gates (ecoBin matrix)**:
+- bearDog pure Rust (P1) — aws-lc-rs blocks ALL non-x86 targets
+- flockGate WAN depot (P1) — no binary distribution path to WAN gates
+- grapheneGate bootstrap (P2) — Pixel as trust anchor, blocked on bearDog
+- Windows ecoBin (LOW) — named pipes IPC, MSVC target, design phase
+
+Software items: **Zero P1 mesh blockers.** songBird mesh fix deployed and validated (13h+).
+Transport 10-11/11 non-exempt adopted. Depot 14/14 fresh (x86_64-musl). 3/14 aarch64 built.
+coralReef capabilities.list shipped. biomeOS v4.14 rebuilt. sourDough validate depot shipped.
 
 ---
 
