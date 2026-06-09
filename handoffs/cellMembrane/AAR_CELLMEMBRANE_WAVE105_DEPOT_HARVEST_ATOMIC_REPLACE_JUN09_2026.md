@@ -108,14 +108,97 @@ CM-HARVEST-ATOMIC (atomic rename in harvest)
 
 ---
 
-## Ecosystem Snapshot (Wave 105, Jun 9 2026)
+## AAR: aarch64 Sweep Overwrote x86_64 Checksums (Upstream Cascade Failure)
 
-- **Mesh**: LIVE (eastGate↔strandGate, 13h+ stable)
+### Incident
+
+During the Wave 105 aarch64 cross-compile sweep (commit `c46cc1c`), the
+sweep tooling wrote `checksums.toml` with **only** the `[aarch64-unknown-linux-musl]`
+section, destroying the existing `[x86_64-unknown-linux-musl]` section (14 entries).
+This was committed and pushed upstream, then cascaded to all gates.
+
+### Root Cause
+
+The harvest/sweep pipeline treats `checksums.toml` as a single-target file.
+When the aarch64 sweep completed, it regenerated `checksums.toml` from its
+local build output — which was only aarch64 binaries. The existing x86_64
+section was not read, preserved, or merged. The file was overwritten wholesale.
+
+This is a **data-destructive single-writer assumption** in a multi-target
+depot. The pipeline was designed when only one target triple existed. The
+aarch64 sweep is the first time two target sections needed to coexist.
+
+### Impact
+
+- All 14 x86_64 checksum entries were silently lost
+- Any downstream gate running `plasmid.verify` against x86_64 binaries
+  would fail checksum validation (entries missing)
+- Detected during eastGate revalidation — 14/14 MISMATCH
+- Ad-hoc fix applied: x86_64 checksums regenerated from local binaries and
+  both sections restored to `checksums.toml`
+
+### Recommendation
+
+**The pipeline must be multi-target aware.** Specific fixes:
+
+1. **Read-modify-write**: Harvest/sweep must read existing `checksums.toml`,
+   parse all `[target]` sections, update only the section being built, and
+   write back the complete file. Never overwrite the entire file from a
+   single target's output.
+
+2. **Section-level locking**: If multiple gates build for different targets
+   concurrently, a TOML merge strategy is needed (similar to the cascade
+   conflict auto-resolve already shipped for freshness.toml).
+
+3. **Validation gate**: Before committing, verify that all known target
+   sections are present. A simple check: count `[` headers in checksums.toml
+   and ensure none were lost.
+
+4. **Test**: Add a regression test — run harvest for target A, then target B,
+   verify target A's entries survive.
+
+### Evidence
+
+```
+# Before aarch64 sweep (commit 55cde48):
+[x86_64-unknown-linux-musl]
+barracuda = { blake3 = "09cf8bc...", size = 11545120 }
+beardog = { blake3 = "1605e2c...", size = 11243648 }
+... (14 entries)
+
+# After aarch64 sweep (commit c46cc1c):
+[aarch64-unknown-linux-musl]
+barracuda = { blake3 = "64c2435...", size = 13840880 }
+... (13 entries, x86_64 section GONE)
+
+# After manual restore:
+[x86_64-unknown-linux-musl]  ← restored from local binary hashes
+... (14 entries)
+[aarch64-unknown-linux-musl]
+... (13 entries)
+```
+
+### Classification
+
+**Upstream cascade failure** — destructive metadata loss propagated through
+cascade to all gates. Not caught by cascade conflict auto-resolve because
+the sweep was the sole writer (no conflict, just data loss). Severity: P2
+(data recoverable from local binaries, but would be P1 if gates relied on
+checksums for automated verification without local fallback).
+
+---
+
+## Ecosystem Snapshot (Wave 105b, Jun 9 2026)
+
+- **Mesh**: LIVE (eastGate↔strandGate, 17h+ stable)
 - **Transport**: 11/11 non-exempt COMPLETE
-- **Depot**: 14/14 x86_64-musl VERIFIED (BLAKE3 checksums confirmed)
-- **bearDog**: v0.9.0 Wave 145 pure Rust — depot binary fresh (11.2MB)
-- **biomeOS**: v4.16 — depot binary fresh (15.9MB)
-- **Cascade**: 38/38 synced, zero failures
-- **NUCLEUS**: All JSON-RPC primals alive, tarpc sockets nominal
-- **P1 blockers**: **ZERO** (WAN depot SHIPPED by cellMembrane, bearDog RESOLVED Wave 145)
+- **Depot x86_64**: 14/14 BLAKE3 VERIFIED (checksums restored after aarch64 overwrite)
+- **Depot aarch64**: 14/14 built (Wave 105 sweep), checksums committed
+- **bearDog**: v0.9.0 pure Rust — x86_64 depot fresh (11.2MB), aarch64 depot fresh (8.9MB)
+- **biomeOS**: v4.16 — x86_64 depot fresh (15.9MB), graph.deploy VALIDATED (LocalTrusted)
+- **Cascade**: 38/38 synced (wateringHole freshness.toml conflict resolved)
+- **NUCLEUS**: 27 JSON-RPC alive, 3 tarpc nominal, 2 toadstool sockets down (tarpc binary protocol)
+- **P1 blockers**: **ZERO** (WAN depot DEPLOYED, bearDog RESOLVED, aarch64 sweep COMPLETE)
 - **Sovereignty**: S1-S3 GRADUATED, S4 gate ending today
+- **primalSpring**: Wave 105 — `is_skippable()` canonical, graph.deploy validated, 887 tests, PRIMAL_GAPS updated
+- **NEW AAR**: checksums.toml x86_64 section overwritten by aarch64 sweep (CM-CHECKSUM-MULTI-TARGET)

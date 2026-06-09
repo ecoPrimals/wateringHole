@@ -8,7 +8,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "bearDog", "songBird", "biomeOS", "all-primals", "all-gates"]
 date = "2026-06-09"
-updated = "2026-06-09T14:59"
+updated = "2026-06-09T16:18"
 priority = "P2"
 owner = "cellMembrane + eastGate"
 note = """
@@ -36,9 +36,12 @@ cascade = "OPERATIONAL — 38/38 repos, zero failures, conflict auto-resolve SHI
 beardog_p1 = "RESOLVED — Wave 145: pure Rust crypto. Depot binary FRESH (11.2MB, rebuilt Jun 9)."
 biomeos = "v4.16 depot binary FRESH (15.9MB, rebuilt Jun 9). Deep debt + error chains + hardcoding elimination."
 songbird = "Wave 104: env-var race conditions eliminated across 5 crates."
-cellmembrane = "Wave 105: WAN depot distribution SHIPPED (plasmid.fetch --source wan). Cascade conflict auto-resolve SHIPPED. Deep debt sprint complete."
-depot = "14/14 x86_64-musl BLAKE3 checksums VERIFIED. bearDog + biomeOS rebuilt from latest waves."
-p1_blockers = "ZERO. WAN depot SHIPPED by cellMembrane. bearDog pure Rust RESOLVED Wave 145."
+cellmembrane = "Wave 105: WAN depot DEPLOYED (/depot/ live on membrane.primals.eco). Cascade auto-resolve SHIPPED. aarch64 sweep 14/14 COMPLETE. Deep debt sprint complete. Harvest atomic rename SHIPPED."
+depot_x86 = "14/14 x86_64-musl BLAKE3 VERIFIED. bearDog + biomeOS rebuilt from latest waves."
+depot_aarch64 = "14/14 aarch64-unknown-linux-musl BUILT (Wave 105 sweep). Checksums committed. WARNING: sweep overwrote x86_64 section — ad-hoc restored (see CM-CHECKSUM-MULTI-TARGET)."
+biomeos_graph = "VALIDATED — v4.16 composition.deploy accepted, graph.status 13 phases, LocalTrusted works."
+primalspring = "Wave 105: is_skippable() canonical, graph.deploy validated, 887 tests, PRIMAL_GAPS updated to Wave 105."
+p1_blockers = "ZERO. All former P1s resolved. One new P2: CM-CHECKSUM-MULTI-TARGET (upstream cascade failure)."
 
 # ──────────────────────────────────────────────────────────────
 # DEPLOYMENT TARGET MATRIX (ecoBin standard)
@@ -55,18 +58,18 @@ blockers = []
 [deployment_targets.aarch64_musl]
 triple = "aarch64-unknown-linux-musl"
 description = "ARM servers, future ARM VPS"
-depot = "3/14 built (songbird, skunkbat, sourdough). bearDog UNBLOCKED (Wave 145). Sweep in progress."
+depot = "14/14 BUILT (Wave 105 sweep complete, zero C-dep violations)"
 gates = ["future ARM VPS"]
-status = "UNBLOCKED — sweep pending"
+status = "BUILT — grapheneGate bootstrap next"
 blockers = []
 
 [deployment_targets.aarch64_android]
 triple = "aarch64-linux-android"
 description = "Pixel 8 / GrapheneOS (grapheneGate) — portable trust anchor + gate spawner"
-depot = "3/14 built. bearDog UNBLOCKED (Wave 145). Sweep pending."
+depot = "14/14 aarch64-musl built. Android NDK cross-compile pending."
 gates = ["grapheneGate (Pixel 8)"]
-status = "UNBLOCKED — sweep pending"
-blockers = []
+status = "UNBLOCKED — NDK cross-compile next"
+blockers = ["aarch64-linux-android NDK target setup (distinct from musl)"]
 note = """grapheneGate is not just a mobile deploy target — it is the ecosystem's
 portable physical root of trust and gate spawner. It is tethered to eastGate on
 LAN, can WAN via mesh, and in time bootstraps new gates on arbitrary hardware.
@@ -116,12 +119,12 @@ Production deployment on golgiBody-ext and flockGate validation pending."""
 id = "GRAPHENEGATE-BOOTSTRAP"
 owner = "eastGate"
 priority = "P2"
-description = "Pixel 8 as portable trust anchor + gate spawner — UNBLOCKED"
-why = """grapheneGate is the portable physical root of trust. BirdSong beacon proves
-family membership. Can bootstrap new gates via USB/WiFi. bearDog pure Rust SHIPPED
-(Wave 145) — aarch64 cross-compile UNBLOCKED."""
-action = """1. cellMembrane aarch64 sweep (CM-AARCH64-SWEEP) — cross-compile remaining 11 primals
-2. Build full aarch64-android depot from sweep output
+description = "Pixel 8 as portable trust anchor + gate spawner — aarch64 musl BUILT, NDK target next"
+why = """grapheneGate is the portable physical root of trust. aarch64-unknown-linux-musl
+sweep COMPLETE (14/14). Next step: aarch64-linux-android NDK cross-compile (distinct
+target from musl — requires Android NDK toolchain)."""
+action = """1. Set up aarch64-linux-android NDK cross-compile toolchain
+2. Build aarch64-android depot from musl-validated sources
 3. Deploy via deploy_pixel.sh (all 13 handlers ready)
 4. Validate Role 1 beacon broadcast
 See GRAPHENEGATE_BOOTSTRAP_STANDARD.md."""
@@ -148,32 +151,23 @@ resolution = """cellMembrane now auto-discards dirty regenerable metadata files
 recurring operator intervention on every 2nd cascade. Matches recommendation from
 [aar.cascade_conflicts]. Tested: 38/38 cascade with zero conflicts."""
 
-[remaining.cm_wan_validate]
+[resolved.cm_wan_validate]
 id = "CM-WAN-VALIDATE"
 owner = "cellMembrane + eastGate"
-priority = "P2"
-description = "Validate plasmid.fetch --source wan on flockGate + deploy caddy.depot.provision on golgiBody-ext"
-why = """WAN depot code is SHIPPED but needs production deployment. caddy.depot.provision
-must be run on golgiBody-ext to expose /depot/ route. Then flockGate validates
-plasmid.fetch --source wan end-to-end."""
-action = """1. Run caddy.depot.provision on golgiBody-ext (VPS)
-2. Verify /depot/ route serves binary list over HTTPS
-3. Run plasmid.fetch --source wan on flockGate
-4. Verify BLAKE3 checksum matches after WAN fetch
-5. Launch NUCLEUS on flockGate from WAN-fetched depot"""
+priority = "was-P2"
+description = "RESOLVED (Wave 105) — WAN depot DEPLOYED, validated from ironGate 13/13 OK over HTTPS"
+resolution = """caddy.depot.provision deployed on golgiBody, /depot/ route live on
+membrane.primals.eco. plasmid.fetch --source wan validated from ironGate — 13/13 binaries
+fetched successfully over HTTPS. Awaiting flockGate team for WAN-side e2e validation."""
 
-[remaining.cm_harvest_atomic]
+[resolved.cm_harvest_atomic]
 id = "CM-HARVEST-ATOMIC"
 owner = "cellMembrane"
-priority = "P2"
-description = "Atomic rename in plasmid.harvest — avoid ETXTBSY on running binaries"
-why = """plasmid.harvest fails with ETXTBSY when target binary is a running NUCLEUS
-primal. Occurred on bearDog + biomeOS during Wave 105 rebuild. Operator must
-manually stop → copy → restart."""
-action = """Write to primals/<triple>/<name>.new, then rename(2) over original.
-rename is atomic on same filesystem, succeeds even when original is running.
-Log warning that restart is needed to pick up new binary. See AAR:
-handoffs/cellMembrane/AAR_CELLMEMBRANE_WAVE105_DEPOT_HARVEST_ATOMIC_REPLACE_JUN09_2026.md"""
+priority = "was-P2"
+description = "RESOLVED (Wave 105) — stage_to_depot uses .new + rename(2), refresh SCPs to .new + mv"
+resolution = """cellMembrane already implemented atomic rename pattern. The ETXTBSY failure
+during Wave 105 was on an older code path (manual harvest). Current pipeline uses
+.new temp file + rename(2) which is atomic on same filesystem."""
 
 [remaining.cm_vps_depot_sync]
 id = "CM-VPS-DEPOT-SYNC"
@@ -185,26 +179,40 @@ peptidoglycan. plasmid.fetch --source wan is shipped; now wire the push side
 so pepti builds automatically flow to the outer membrane Caddy route."""
 action = "Wire plasmid.refresh into cascade post-build hook for automated inner→outer flow."
 
-[remaining.cm_aarch64_sweep]
+[resolved.cm_aarch64_sweep]
 id = "CM-AARCH64-SWEEP"
 owner = "cellMembrane"
-priority = "P2"
-description = "Cross-compile remaining 11/14 primals for aarch64-unknown-linux-musl + aarch64-linux-android"
-why = """bearDog pure Rust SHIPPED (Wave 145). 3/14 primals already built for aarch64
-(songbird, skunkbat, sourdough). Remaining 11 primals now unblocked for cross-compilation.
-This enables grapheneGate bootstrap and ARM VPS deployment."""
-action = """Iterate through remaining primals: cargo build --release --target aarch64-unknown-linux-musl.
-Update checksums.toml with aarch64 section. Validate stripped binaries. Report any crate-level
-C-dep violations via cargo deny check."""
+priority = "was-P2"
+description = "RESOLVED (Wave 105) — 14/14 aarch64-unknown-linux-musl built, zero C-dep violations"
+resolution = """Full aarch64 sweep complete. All 14 primals cross-compile cleanly after
+bearDog Wave 145 pure Rust. Checksums committed. NOTE: sweep overwrote x86_64 checksums
+section — see CM-CHECKSUM-MULTI-TARGET AAR."""
 
-[remaining.biomeos_graph_revalidate]
+[remaining.cm_checksum_multi_target]
+id = "CM-CHECKSUM-MULTI-TARGET"
+owner = "cellMembrane"
+priority = "P2"
+description = "checksums.toml must be multi-target aware — aarch64 sweep destroyed x86_64 entries"
+why = """The aarch64 sweep (commit c46cc1c) overwrote checksums.toml wholesale, destroying
+the [x86_64-unknown-linux-musl] section (14 entries). The sweep pipeline treats
+checksums.toml as a single-target file. This is a data-destructive single-writer
+assumption in a multi-target depot. Detected during eastGate revalidation (14/14
+MISMATCH on x86_64). Ad-hoc restored from local binary hashes."""
+action = """1. Read-modify-write: harvest/sweep must parse existing checksums.toml,
+   update only the target section being built, preserve all other sections.
+2. Validation gate: before committing, verify all known target sections survive.
+3. Regression test: harvest target A, then target B, verify A's entries survive.
+See full AAR: handoffs/cellMembrane/AAR_CELLMEMBRANE_WAVE105_DEPOT_HARVEST_ATOMIC_REPLACE_JUN09_2026.md"""
+
+[resolved.biomeos_graph_revalidate]
 id = "BIOMEOS-GRAPH-REVALIDATE"
 owner = "eastGate"
-priority = "P2"
-description = "Revalidate --graph-deploy with biomeOS v4.14 (LocalTrusted)"
-why = """biomeOS v4.14 rebuilt on strandGate. eastGate binary may be pre-v4.14.
-Restart from depot and revalidate --graph-deploy to confirm LocalTrusted works."""
-action = "Restart biomeOS from fresh depot binary. Run nucleus-deploy --graph-deploy full."
+priority = "was-P2"
+description = "RESOLVED (Wave 105) — biomeOS v4.16 graph.deploy VALIDATED with LocalTrusted"
+resolution = """biomeOS v4.16 composition.deploy accepted on eastGate. graph.status reports
+13 phases. Zero BTSP ceremony for local operator (LocalTrusted access level). Validated
+by parallel primalSpring team. Composition graph definitions (nucleus_complete.toml,
+tower_atomic.toml) deployed to plasmidBin/graphs/."""
 
 [remaining.irongate_mesh_enroll]
 id = "IRONGATE-MESH-ENROLL"
@@ -292,7 +300,29 @@ See GRAPHENEGATE_BOOTSTRAP_STANDARD.md for full trust model.
 """
 
 # ──────────────────────────────────────────────────────────────
-# AAR: RECURRING CASCADE CONFLICTS (carried from wave84)
+# AAR: CHECKSUM MULTI-TARGET OVERWRITE (Wave 105)
+# ──────────────────────────────────────────────────────────────
+
+[aar.checksum_multi_target_overwrite]
+problem = """aarch64 sweep (commit c46cc1c) overwrote checksums.toml wholesale, destroying
+the [x86_64-unknown-linux-musl] section (14 entries). Detected during eastGate revalidation
+as 14/14 MISMATCH on x86_64 depot binaries."""
+
+root_cause = """The harvest/sweep pipeline treats checksums.toml as a single-target file.
+It regenerates the file from local build output rather than read-modify-write. When only
+one target existed this was fine. With two target sections (x86_64 + aarch64), the second
+sweep destroyed the first. This is a data-destructive single-writer assumption."""
+
+recommendation = """1. Read-modify-write: parse existing sections, update only the target being built.
+2. Validation gate: verify all known target sections survive before commit.
+3. Regression test: harvest A, harvest B, verify A survives."""
+
+classification = "Upstream cascade failure — destructive metadata loss propagated to all gates. P2 (recoverable from local binaries)."
+
+occurrences = ["Wave 105: aarch64 sweep overwrote x86_64 checksums (commit c46cc1c)"]
+
+# ──────────────────────────────────────────────────────────────
+# AAR: RECURRING CASCADE CONFLICTS (carried from wave84, RESOLVED Wave 105)
 # ──────────────────────────────────────────────────────────────
 
 [aar.cascade_conflicts]
@@ -320,19 +350,27 @@ occurrences = [
 
 [outcome]
 expected = """
-ZERO P1 BLOCKERS as of Wave 105. Both former P1s are RESOLVED:
+ZERO P1 BLOCKERS as of Wave 105b. Massive parallel progress absorbed:
+  RESOLVED:
   - bearDog pure Rust (Wave 145): all non-x86 targets UNBLOCKED
-  - WAN depot distribution (Wave 105): cellMembrane shipped plasmid.fetch --source wan
+  - WAN depot distribution (Wave 105): DEPLOYED, /depot/ live, ironGate 13/13 validated
+  - aarch64 sweep (Wave 105): 14/14 built, zero C-dep violations
+  - Cascade conflict auto-resolve (Wave 105): SHIPPED
+  - Harvest atomic rename (Wave 105): SHIPPED (stage_to_depot .new + rename)
+  - biomeOS graph.deploy (Wave 105): VALIDATED (LocalTrusted, 13-phase composition)
+  - primalSpring Wave 105: is_skippable() canonical, 887 tests, PRIMAL_GAPS current
 
-Remaining work is P2 — validation, sweep, and automation:
-  1. Validate WAN depot end-to-end on flockGate (CM-WAN-VALIDATE)
-  2. aarch64 cross-compile sweep for 11 remaining primals (CM-AARCH64-SWEEP)
-  3. Atomic harvest to eliminate ETXTBSY (CM-HARVEST-ATOMIC)
-  4. grapheneGate bootstrap (Pixel trust anchor, UNBLOCKED)
-  5. biomeOS graph.deploy revalidation on eastGate
-  6. ironGate 3rd mesh node enrollment
+  NEW ISSUE:
+  - CM-CHECKSUM-MULTI-TARGET (P2): aarch64 sweep destroyed x86_64 checksums section.
+    Pipeline needs read-modify-write for multi-target checksums.toml.
 
-The ecosystem is in the strongest position it has ever been. Mesh LIVE, transport
-COMPLETE, depot VERIFIED, sovereignty graduating, WAN distribution SHIPPED. The
-stadial gate criteria are within reach.
+  REMAINING:
+  1. CM-CHECKSUM-MULTI-TARGET — multi-target checksums.toml pipeline fix
+  2. grapheneGate bootstrap — aarch64-linux-android NDK cross-compile
+  3. ironGate 3rd mesh node enrollment
+  4. flockGate WAN-side e2e validation (awaiting flockGate team)
+  5. CM-VPS-DEPOT-SYNC — inner→outer membrane automated binary flow
+
+The ecosystem is at its strongest. Mesh 17h+ stable, transport COMPLETE, both
+depot targets built, WAN deployed, sovereignty graduating. Stadial gate within reach.
 """
