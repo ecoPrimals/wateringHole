@@ -188,17 +188,17 @@ checksums for automated verification without local fallback).
 
 ---
 
-## Ecosystem Snapshot (Wave 105b, Jun 9 2026)
+## Ecosystem Snapshot (Wave 105 final, Jun 9 2026)
 
-- **Mesh**: LIVE (eastGate↔strandGate, 17h+ stable)
+- **Mesh**: ironGate INITIALIZED (node_id: ironGate, port 7700 listening). eastGate↔strandGate 17h+ stable. Awaiting eastGate federation port for 3-gate collective.
 - **Transport**: 11/11 non-exempt COMPLETE
-- **Depot x86_64**: 14/14 BLAKE3 VERIFIED (checksums restored after aarch64 overwrite)
+- **Depot x86_64**: 14/14 BLAKE3 VERIFIED — ironGate WAN fetch 13/13 PASS, checksums match VPS ground truth
 - **Depot aarch64**: 14/14 built (Wave 105 sweep), checksums committed
-- **bearDog**: v0.9.0 pure Rust — x86_64 depot fresh (11.2MB), aarch64 depot fresh (8.9MB)
-- **biomeOS**: v4.16 — x86_64 depot fresh (15.9MB), graph.deploy VALIDATED (LocalTrusted)
-- **Cascade**: 38/38 synced (wateringHole freshness.toml conflict resolved)
-- **NUCLEUS**: 27 JSON-RPC alive, 3 tarpc nominal, 2 toadstool sockets down (tarpc binary protocol)
-- **P1 blockers**: **ZERO** (WAN depot DEPLOYED, bearDog RESOLVED, aarch64 sweep COMPLETE)
+- **WAN depot**: DEPLOYED + VALIDATED (membrane.primals.eco/depot/, 13/13 fetch + BLAKE3 + liveness)
+- **CM-CHECKSUM-MULTI-TARGET**: **RESOLVED** (commit 3a1900b) — read-modify-write + validation gate + regression test
+- **CM-VPS-DEPOT-SYNC**: **RESOLVED** (commit 7ff43f5) — plasmid.depot_sync automated inner→outer flow
+- **Cascade**: 22/22 synced, zero failures
+- **P1 blockers**: **ZERO**
+- **P2 blockers (cellMembrane)**: **ZERO** — all handed-off P2s resolved
 - **Sovereignty**: S1-S3 GRADUATED, S4 gate ending today
-- **primalSpring**: Wave 105 — `is_skippable()` canonical, graph.deploy validated, 887 tests, PRIMAL_GAPS updated
-- **NEW AAR**: checksums.toml x86_64 section overwritten by aarch64 sweep (CM-CHECKSUM-MULTI-TARGET)
+- **primalSpring**: Wave 105 — `is_skippable()` canonical, graph.deploy validated, 887 tests

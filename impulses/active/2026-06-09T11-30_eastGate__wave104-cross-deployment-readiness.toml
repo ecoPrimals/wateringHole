@@ -8,7 +8,7 @@ type = "frago"
 from = "eastGate"
 to = ["cellMembrane", "bearDog", "songBird", "biomeOS", "all-primals", "all-gates"]
 date = "2026-06-09"
-updated = "2026-06-09T16:18"
+updated = "2026-06-09T21:45"
 priority = "P2"
 owner = "cellMembrane + eastGate"
 note = """
@@ -36,12 +36,12 @@ cascade = "OPERATIONAL — 38/38 repos, zero failures, conflict auto-resolve SHI
 beardog_p1 = "RESOLVED — Wave 145: pure Rust crypto. Depot binary FRESH (11.2MB, rebuilt Jun 9)."
 biomeos = "v4.16 depot binary FRESH (15.9MB, rebuilt Jun 9). Deep debt + error chains + hardcoding elimination."
 songbird = "Wave 104: env-var race conditions eliminated across 5 crates."
-cellmembrane = "Wave 105: WAN depot DEPLOYED (/depot/ live on membrane.primals.eco). Cascade auto-resolve SHIPPED. aarch64 sweep 14/14 COMPLETE. Deep debt sprint complete. Harvest atomic rename SHIPPED."
-depot_x86 = "14/14 x86_64-musl BLAKE3 VERIFIED. bearDog + biomeOS rebuilt from latest waves."
-depot_aarch64 = "14/14 aarch64-unknown-linux-musl BUILT (Wave 105 sweep). Checksums committed. WARNING: sweep overwrote x86_64 section — ad-hoc restored (see CM-CHECKSUM-MULTI-TARGET)."
+cellmembrane = "Wave 105: WAN depot DEPLOYED + VALIDATED (ironGate 13/13 BLAKE3). Multi-target pipeline fix SHIPPED (commit 3a1900b). plasmid.depot_sync SHIPPED (automated inner→outer). aarch64 14/14. Deep debt complete."
+depot_x86 = "14/14 x86_64-musl BLAKE3 VERIFIED (ironGate WAN fetch 13/13 PASS). checksums.toml updated to VPS ground truth."
+depot_aarch64 = "14/14 aarch64-unknown-linux-musl BUILT (Wave 105 sweep). Multi-target pipeline fix SHIPPED — overwrite issue RESOLVED (commit 3a1900b)."
 biomeos_graph = "VALIDATED — v4.16 composition.deploy accepted, graph.status 13 phases, LocalTrusted works."
 primalspring = "Wave 105: is_skippable() canonical, graph.deploy validated, 887 tests, PRIMAL_GAPS updated to Wave 105."
-p1_blockers = "ZERO. All former P1s resolved. One new P2: CM-CHECKSUM-MULTI-TARGET (upstream cascade failure)."
+p1_blockers = "ZERO. All former P1s resolved. CM-CHECKSUM-MULTI-TARGET RESOLVED same-wave (commit 3a1900b)."
 
 # ──────────────────────────────────────────────────────────────
 # DEPLOYMENT TARGET MATRIX (ecoBin standard)
@@ -170,15 +170,15 @@ resolution = """cellMembrane already implemented atomic rename pattern. The ETXT
 during Wave 105 was on an older code path (manual harvest). Current pipeline uses
 .new temp file + rename(2) which is atomic on same filesystem."""
 
-[remaining.cm_vps_depot_sync]
+[resolved.cm_vps_depot_sync]
 id = "CM-VPS-DEPOT-SYNC"
 owner = "cellMembrane"
-priority = "P2"
-description = "golgiBody inner→outer membrane automatic binary flow"
-why = """After build-carrying cascades land, VPS should auto-refresh depot from
-peptidoglycan. plasmid.fetch --source wan is shipped; now wire the push side
-so pepti builds automatically flow to the outer membrane Caddy route."""
-action = "Wire plasmid.refresh into cascade post-build hook for automated inner→outer flow."
+priority = "was-P2"
+description = "RESOLVED (Wave 105) — plasmid.depot_sync SHIPPED, automated inner→outer binary flow"
+resolution = """cellMembrane shipped plasmid.depot_sync (commit 7ff43f5): after plasmid.refresh
+pushes binaries to /opt/membrane/, depot_sync copies them to the WAN depot directory
+(/opt/ecoPrimals/plasmidBin/primals/{arch}/) so Caddy serves current binaries. Runs
+automatically as post-refresh step. Also available as standalone command."""
 
 [resolved.cm_aarch64_sweep]
 id = "CM-AARCH64-SWEEP"
@@ -213,9 +213,12 @@ tower_atomic.toml) deployed to plasmidBin/graphs/."""
 id = "IRONGATE-MESH-ENROLL"
 owner = "ironGate"
 priority = "LOW"
-description = "ironGate mesh enrollment — federation port not running"
-why = "ironGate has 23 UDS sockets deployed. Federation port enrolls 3rd LAN gate."
-action = "Start songbird with --port 7700, mesh.init to eastGate + strandGate."
+description = "ironGate mesh initialized — waiting for eastGate federation port"
+why = """ironGate songbird running with --federation-port 7700, mesh.init complete
+(node_id: ironGate). Port 7700 bound and listening. BLOCKED: eastGate port 7700 not
+accepting connections (TCP connection refused). strandGate offline (no ping response).
+ironGate side is READY — will federate when peers come online."""
+action = "Awaiting eastGate team to enable songbird federation port 7700. strandGate needs to be powered on."
 
 [remaining.windows_ecobin]
 id = "WINDOWS-ECOBIN"
@@ -345,27 +348,25 @@ occurrences = [
 
 [outcome]
 expected = """
-ZERO P1 BLOCKERS as of Wave 105b. Massive parallel progress absorbed:
-  RESOLVED:
+ZERO P1 BLOCKERS. ZERO OPEN P2s for cellMembrane. Wave 105 sweep complete:
+  RESOLVED THIS WAVE:
   - bearDog pure Rust (Wave 145): all non-x86 targets UNBLOCKED
-  - WAN depot distribution (Wave 105): DEPLOYED, /depot/ live, ironGate 13/13 validated
+  - WAN depot distribution (Wave 105): DEPLOYED + VALIDATED (ironGate 13/13 BLAKE3 PASS)
   - aarch64 sweep (Wave 105): 14/14 built, zero C-dep violations
   - Cascade conflict auto-resolve (Wave 105): SHIPPED
   - Harvest atomic rename (Wave 105): SHIPPED (stage_to_depot .new + rename)
+  - CM-CHECKSUM-MULTI-TARGET (Wave 105): SHIPPED same-wave (read-modify-write + validation gate)
+  - CM-VPS-DEPOT-SYNC (Wave 105): SHIPPED (plasmid.depot_sync, automated inner→outer)
   - biomeOS graph.deploy (Wave 105): VALIDATED (LocalTrusted, 13-phase composition)
   - primalSpring Wave 105: is_skippable() canonical, 887 tests, PRIMAL_GAPS current
+  - ironGate mesh init (Wave 105): INITIALIZED (node_id: ironGate, port 7700 listening)
 
-  NEW ISSUE:
-  - CM-CHECKSUM-MULTI-TARGET (P2): aarch64 sweep destroyed x86_64 checksums section.
-    Pipeline needs read-modify-write for multi-target checksums.toml.
+  REMAINING (other teams):
+  1. grapheneGate bootstrap — aarch64-linux-android NDK cross-compile (primalSpring)
+  2. ironGate mesh federation — BLOCKED on eastGate port 7700 (eastGate team)
+  3. flockGate WAN-side e2e validation (awaiting flockGate team)
 
-  REMAINING:
-  1. CM-CHECKSUM-MULTI-TARGET — multi-target checksums.toml pipeline fix
-  2. grapheneGate bootstrap — aarch64-linux-android NDK cross-compile
-  3. ironGate 3rd mesh node enrollment
-  4. flockGate WAN-side e2e validation (awaiting flockGate team)
-  5. CM-VPS-DEPOT-SYNC — inner→outer membrane automated binary flow
-
-The ecosystem is at its strongest. Mesh 17h+ stable, transport COMPLETE, both
-depot targets built, WAN deployed, sovereignty graduating. Stadial gate within reach.
+The ecosystem is at its strongest. Mesh initialized on 2 gates (ironGate + eastGate pair
+awaiting TCP handshake), transport COMPLETE, both depot targets built, WAN deployed +
+verified, sovereignty graduating. Stadial gate within reach.
 """
