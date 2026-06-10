@@ -1,52 +1,40 @@
-# Wave 106 Blurbs — Cross-Topology Validation & Autonomous Gates
+# Wave 106 Blurbs — Cross-Topology Validation, Autonomous Gates, strandGate ACK
 
 **Date**: 2026-06-09
 **From**: eastGate overwatch
 
-**What changed**: Comprehensive AAR completed. Every deployment issue, every pipeline failure, every neuralAPI gap documented. Old FRAGO archived (12/16 items resolved). New FRAGO focused on cross-topology validation — proving the deployment model works on every gate, every arch, every network topology. Gate enrollment playbook published.
+**What happened this wave**: Comprehensive AAR published (17 issues, 5 categories). Old FRAGO archived (12/16 resolved). New FRAGO for cross-topology validation. Then massive parallel team response: songBird shipped mesh persistence + federation port fix. cellMembrane shipped gate.bootstrap + plasmid.fetch fix + cascade auto-fetch. primalSpring pushed grapheneGate to 9/13. strandGate sent an ACK — LAN re-enrollment VALIDATED.
 
-**The shift**: We are no longer building the deployment pipeline. We are now validating it across topologies. Each gate that comes online is a validation opportunity. We evolve the tooling as we go.
+**The shift**: We are no longer building the deployment pipeline. We are now validating it across topologies. The tooling evolution is happening in real time — AAR items from hours ago are already shipped.
 
 ---
 
 ## To: cellMembrane
 
-### Gate Bootstrap Command (P2)
+### Shipped This Wave (thank you)
 
-The AAR identified that deploying a gate requires 5+ manual steps. As strandGate, ironGate, southGate, and future gates come online, this multiplies. We need `membrane gate.bootstrap <gate-name>` that does everything in one command: detect arch → fetch depot → verify checksums → configure mesh → start NUCLEUS → health sweep.
+1. **gate.bootstrap** (commit `b6c9fa0`) — one-command gate enrollment. strandGate used it.
+2. **plasmid.fetch VPS path fix** (commit `b6c9fa0`) — path doubling bug fixed.
+3. **cascade auto-fetch** (commit `b6c9fa0`) — post-cascade hook triggers WAN fetch when checksums.toml changes.
 
-A gate enrollment playbook (manual version) is in the FRAGO. Each gate you help deploy makes the next one easier.
+Plus everything from Wave 104: WAN depot, cascade conflict auto-resolve, harvest atomic rename, aarch64 sweep, multi-target checksums, VPS depot sync.
 
-### Bug Fixes
+### Remaining
 
-1. **plasmid.fetch --source vps** — destination path doubles up (`primals/arch/primals/arch/`). All 13 downloads fail. Direct curl works. Need path normalization fix.
-2. **cascade auto-fetch** — when checksums.toml changes in cascade, nothing triggers binary update. Post-cascade hook that calls `plasmid.fetch` would close the loop from peptidoglycan-build to gate-running.
-
-### Resolved (thank you — massive wave)
-
-Everything from Wave 104 FRAGO: WAN depot, cascade conflict auto-resolve, harvest atomic rename, aarch64 sweep, multi-target checksums, VPS depot sync. All shipped, all working.
+The only cellMembrane-owned item left is running gate.bootstrap on ironGate/flockGate when they come online. This is operational, not development.
 
 ---
 
 ## To: songBird
 
-### Mesh Persistence (P1 — blocks autonomous operation)
+### Shipped This Wave (both P1 items from AAR — same-day turnaround)
 
-The AAR's #1 interaction gap: mesh state is ephemeral. Every songbird restart requires manual `mesh.init`. When a gate reboots, it has zero peers. This blocks autonomous recovery.
+1. **Mesh persistence** (commit `1df7ef90`) — peers persist to `~/.local/share/songbird/peers.toml`. Auto-reconnect on startup via `spawn_mesh_seed`. `mesh.init` appends to persistent store. `SONGBIRD_DATA_DIR` override available.
+2. **Federation port fix** (commit `1df7ef90`) — `SONGBIRD_FEDERATION_PORT` now auto-promotes bind to `0.0.0.0`. eastGate:7700 is now accepting incoming mesh connections from LAN + WAN.
 
-**Action**:
-1. Persist peers to `~/.local/share/songbird/peers.toml`
-2. On startup, auto-connect to persisted peers
-3. `mesh.init` should append to persistent store
+### Remaining
 
-### Federation Port Not Binding
-
-eastGate songbird runs with `SONGBIRD_FEDERATION_PORT=7700` and `--port 7700` but port 7700 never appears in `ss -tlnp`. ironGate was blocked for days because eastGate:7700 refused connections. Meanwhile, golgiBody VPS songbird binds 7700 correctly.
-
-**Action**: Investigate why the federation listener doesn't start in UDS-server mode. Either:
-- Fix the server initialization to start TCP listener alongside UDS
-- Add `federation.enable` JSON-RPC method that opens TCP at runtime
-- Document the correct startup sequence that reliably binds both UDS + TCP
+**mDNS/LAN auto-discovery** — already wired in discovery layer per your ACK. Future phase. No blockers from songBird for stadial.
 
 ---
 
@@ -67,13 +55,13 @@ This is the single biggest gap between "deployment works" and "deployment is aut
 
 ## To: primalSpring (parallel team)
 
-### grapheneGate 13/13 (P2)
+### Shipped This Wave
 
-You own grapheneGate. 6/13 running. 7 need `BIOMEOS_SOCKET_DIR` env var support:
-- skunkbat, toadstool, barracuda, coralreef, nestgate, biomeos, petaltongue
-- Android can't write to `/run/user/` or `/tmp/biomeos/`
-- Override to `/data/local/tmp/biomeos/`
-- `deploy_pixel.sh` should set this env var before launch
+grapheneGate pushed to **9/13** (commit `84a500e`): SELinux UDS adaptation for skunkbat (`--no-uds`), toadstool (server mode), barracuda (`--no-unix`). `BIOMEOS_SOCKET_DIR`, `XDG_RUNTIME_DIR`, per-primal socket overrides all shipped in `deploy_pixel.sh`.
+
+### Remaining: 4 Primals Need Upstream TCP-Only Fallback
+
+coralreef, nestgate, biomeOS, petaltongue exit fatally on UDS bind SELinux denial. These need **upstream code changes** in each primal — the deploy script can't work around a fatal exit. Each primal needs to gracefully degrade to TCP-only when UDS bind is denied by SELinux.
 
 ---
 
@@ -117,31 +105,63 @@ DO NOT `cargo build --release` for deployment. VPS is the sole depot authority.
 
 ---
 
-## Reshaped Priority Map
+## Reshaped Priority Map (Post Wave 106 Evolution)
 
 ```
-P1 (blocks autonomous operation):
+P1 (sole remaining — blocks autonomous operation):
   biomeOS → NUCLEUS supervision (watchdog or systemd units)
-  songBird → mesh peer persistence (auto-reconnect on restart)
+             Only P1 left. Everything else is shipped or operational.
 
-P2 (blocks stadial, validate as gates come online):
-  eastGate → fix federation port 7700 binding
-  cellMembrane → gate.bootstrap command + plasmid.fetch path fix
-  ironGate → 3rd mesh node (mesh.init to VPS relay)
-  flockGate → WAN e2e 5/5 (VPS relay now LIVE)
-  primalSpring → grapheneGate 13/13 (UDS adaptation)
+P2 (validate as gates come online):
+  ironGate → 3rd mesh node (eastGate:7700 NOW ACCEPTING — should just work)
+  flockGate → WAN e2e 5/5 (VPS relay LIVE — just needs power-on)
+  primalSpring → grapheneGate 13/13 (4 primals need upstream TCP-only fallback)
 
-LOW (future targets):
+SHIPPED THIS WAVE (was P1/P2, now DONE):
+  ✅ songBird → mesh persistence (peers.toml + auto-reconnect)
+  ✅ songBird → federation port fix (auto-promotes to 0.0.0.0)
+  ✅ cellMembrane → gate.bootstrap (one-command enrollment)
+  ✅ cellMembrane → plasmid.fetch VPS path fix
+  ✅ cellMembrane → cascade auto-fetch (post-cascade binary update)
+  ✅ eastGate → federation port 7700 LISTENING
+  ✅ strandGate → LAN re-enrollment VALIDATED (ACK)
+  ✅ primalSpring → grapheneGate 9/13 (SELinux adaptation)
+
+LOW (future):
   sourDough → validate depot segfault
-  bearDog → StrongBox NDK compilation (android target)
+  bearDog → StrongBox NDK (android target)
   future → Windows ecoBin, wasm32-wasi
 ```
 
 ---
 
+## Ecosystem Snapshot (2026-06-10 01:10 UTC)
+
+| Metric | Value |
+|--------|-------|
+| P1 blockers | **1** (NUCLEUS supervision — sole remaining) |
+| P2 remaining | 3 (ironGate mesh, flockGate WAN, grapheneGate 4 primals) |
+| Cascade | **38/38 clean**, zero failures |
+| Mesh | LIVE (eastGate↔golgiBody, 123min+, quality 1.0) |
+| Mesh persistence | **SHIPPED** (peers.toml + auto-reconnect) |
+| Federation port | **LISTENING** (eastGate:7700, bound *, LAN + WAN) |
+| Transport | 11/11 non-exempt COMPLETE |
+| Depot x86_64 | **13/13 BLAKE3 VERIFIED** (VPS authority) |
+| Depot aarch64 | 14/14 BUILT |
+| WAN depot | 13/13 serving (HTTP 200) |
+| gate.bootstrap | **SHIPPED** (strandGate validated) |
+| cascade auto-fetch | **SHIPPED** |
+| VPS NUCLEUS | **13/13 RUNNING** |
+| grapheneGate | **9/13 running** on Pixel 8 (9 primals via SELinux adaptation) |
+| eastGate NUCLEUS | 23 JSON-RPC + 3 tarpc, stable |
+| Sovereignty | S1-S3 GRADUATED, S4 ending today |
+| strandGate | Wave 106 ACK (LAN re-enrollment PROVEN, 1089 tests) |
+| primalSpring | 887 tests, 0 failures |
+
 ## Reference
 
-- `AAR_WAVE105_COMPREHENSIVE_CROSS_DEPLOYMENT_JUN09_2026.md` — full AAR (17 issues documented)
-- `wave106-cross-topology-validation.toml` — FRAGO (gate enrollment playbook + remaining work)
-- `GLACIAL_SHIFT_READINESS.md` — updated to Wave 105c (post-primordial enforced)
+- `AAR_WAVE105_COMPREHENSIVE_CROSS_DEPLOYMENT_JUN09_2026.md` — full AAR (17 issues, 5 categories)
+- `wave106-cross-topology-validation.toml` — FRAGO (8 shipped, 4 remaining, gate enrollment playbook)
+- `wave106-ack-cross-topology-validated.toml` — strandGate ACK (LAN re-enrollment validated)
+- `GLACIAL_SHIFT_READINESS.md` — updated to Wave 106
 - `ECOBIN_ARCHITECTURE_STANDARD.md` — plasmidBin submission rewritten for VPS-only
