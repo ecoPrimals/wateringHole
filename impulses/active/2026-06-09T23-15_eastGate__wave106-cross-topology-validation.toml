@@ -154,13 +154,16 @@ action = """1. Rebuild all 13 primals for aarch64-unknown-linux-musl on peptidog
 
 # --- P2: Primal Code (blocks grapheneGate 13/13) ---
 
-[remaining.biomeos_neural_api_bind]
+[resolved.biomeos_neural_api_bind]
 id = "BM-UDS-01"
 owner = "biomeOS"
-priority = "P2"
-description = "Neural API server binds UDS before checking PRIMAL_BIND_MODE — blocks grapheneGate 13/13"
-why = "v4.18 native fallback not wired into actual Neural API bind path."
-action = "Skip Neural API UDS bind() when PRIMAL_BIND_MODE=tcp_only."
+priority = "DONE"
+description = "SHIPPED (biomeOS v4.20 d35c943e + v4.21 2d64cf1f). PRIMAL_BIND_MODE=tcp_only fully wired."
+resolution = """All server bind paths (Neural API, API server, NUCLEUS) check
+PRIMAL_BIND_MODE=tcp_only before UDS bind(). SystemPaths checks BIOMEOS_SOCKET_DIR first.
+NUCLEUS injects BIOMEOS_SOCKET_DIR into all child primal env at spawn.
+Also: discovery provider dynamically resolved, NUCLEUS timeouts named constants,
+nest_commit composition pattern, niche catalog refactored to data-driven."""
 
 # --- LOW ---
 
@@ -177,7 +180,7 @@ action = "Run under RUST_BACKTRACE=1, investigate and fix."
 # ──────────────────────────────────────────────────────────────
 
 [resolved_summary]
-count = 22
+count = 23
 detail = """
 Wave 106: strandGate LAN re-enrollment, ironGate 3rd mesh node, gate.bootstrap SHIPPED,
   plasmid.fetch fix, cascade auto-fetch, mesh persistence, federation port fix,
@@ -188,6 +191,8 @@ Wave 107 primals: SONGBIRD-IPC-RESOLVE-M1 (ff86204c), BARRACUDA-METHOD-DESCRIBE 
   PRIMAL-SOCKET-CLEANUP 5/5 (toadStool VERIFIED), CR-TARPC-01 (b1ec1f4b), NG-DOWNCAST-01 (7c3fe9a6),
   BIOMEOS-AUTO-REGISTER (v4.19), SKUNKBAT-TCP-9750 DROPPED (zero-port clean).
 Wave 107 gates: southGate cross-subnet VALIDATED (13/13, 19/22 capabilities, science pipeline).
+Wave 107 biomeOS deep debt: BM-UDS-01 (v4.20), socket dir injection (v4.21), signal route completeness,
+  niche catalog refactor, discovery provider decoupled, NUCLEUS timeouts named.
 
 Full detail: archive/wave107/ (9 handoffs), impulses/resolved/ (CR-TARPC-01)
 Living standard: cellMembrane/AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
