@@ -28,7 +28,7 @@ Companion: AAR_WAVE105_COMPREHENSIVE_CROSS_DEPLOYMENT_JUN09_2026.md (lessons lea
 # ──────────────────────────────────────────────────────────────
 
 [current_state]
-p1_blockers = "1 (NUCLEUS supervision — biomeOS). Zero cellMembrane blockers."
+p1_blockers = "0. NUCLEUS supervision SHIPPED (biomeOS v4.17, a4a59245). TCP-only fallback SHIPPED (v4.18, b8ddf351). Zero blockers."
 depot_authority = "VPS (peptidoglycan). Post-primordial standard ENFORCED."
 mesh = """LIVE — 3-gate collective: eastGate ↔ golgiBody(VPS) ↔ ironGate.
 eastGate federation port 7700 LISTENING (bound *, accepting LAN + WAN).
@@ -73,7 +73,7 @@ gate_playbook = """When flockGate is online:
 [validation.aarch64_musl]
 description = "ARM gates (grapheneGate/Pixel 8) — aarch64-musl via ADB"
 proven_on = ["grapheneGate (9/13 running — skunkbat, toadstool, barracuda added via SELinux --no-uds/--no-unix adaptation)"]
-needs_validation = ["4 remaining: coralreef, nestgate, biomeOS, petaltongue — exit fatally on UDS bind SELinux denial, need TCP-only graceful degradation"]
+needs_validation = ["3 remaining: coralreef, nestgate, petaltongue — exit fatally on UDS bind SELinux denial, need TCP-only graceful degradation. biomeOS TCP-only fallback SHIPPED (v4.18, b8ddf351)."]
 gate_playbook = """Remaining work (primalSpring parallel team):
   1. ✅ BIOMEOS_SOCKET_DIR env var shipped
   2. ✅ deploy_pixel.sh SELinux adaptation for 9/13 primals
@@ -91,19 +91,18 @@ needs_validation = ["Automated refresh when peptidoglycan builds new binaries"]
 
 # --- P1: Gate Self-Healing (blocks autonomous operation) ---
 
-[remaining.nucleus_supervision]
+[resolved.nucleus_supervision]
 id = "NUCLEUS-SUPERVISION"
-owner = "biomeOS + cellMembrane"
-priority = "P1"
-description = "NUCLEUS primals need supervision — they die silently and nothing restarts them"
-why = """NUCLEUS went down 3+ times during Wave 105. Each time required manual restart.
-There is no systemd unit, no watchdog, no health monitoring. This blocks autonomous gate
-operation — gates cannot self-heal after binary replacement, power events, or crashes."""
-action = """Options (pick one, evolve):
-A. systemd --user units per-primal (most reliable, integrates with OS)
-B. biomeOS lifecycle.watchdog (polls health.liveness, restarts on failure)
-C. nucleus-deploy --supervised mode (registers with systemd on deploy)
-Minimum viable: option B (biomeOS already has composition.deploy + graph.status)."""
+owner = "biomeOS"
+priority = "DONE"
+description = "SHIPPED (biomeOS v4.17, commit a4a59245). LifecycleManager auto-restarts crashed primals."
+resolution = """Option B implemented — lifecycle watchdog via LifecycleManager:
+1. ✅ ManagedPrimal extended with binary_path + node_id for launch context
+2. ✅ register_primal_binary() — NUCLEUS registers primals with depot binary path
+3. ✅ respawn_primal_binary() — resurrection path: kill old → clean socket → respawn from binary → PID file → wait for socket → Incubating state
+4. ✅ attempt_resurrection() falls back to binary_path when deployment_node is None
+5. ✅ Exponential backoff (2s base, 60s max), max 5 attempts before Dead state
+6. Health poll (10s) → degrade → backoff → kill → respawn → incubate → health poll → active"""
 
 [remaining.mesh_persistence]
 id = "MESH-PERSISTENCE"
@@ -174,15 +173,17 @@ action = """When flockGate is online:
 id = "GRAPHENEGATE-UDS"
 owner = "primalSpring (parallel team) + upstream primal teams"
 priority = "P2"
-description = "4 primals need TCP-only graceful degradation for grapheneGate (9/13 running)"
-why = """coralreef, nestgate, biomeOS, petaltongue exit fatally on UDS bind SELinux denial.
-The deploy_pixel.sh SELinux adaptation (--no-uds, --no-unix, --abstract, TRANSPORT_ENDPOINT)
-resolved 3 more primals (skunkbat, toadstool, barracuda) bringing total to 9/13.
-Remaining 4 need upstream code changes to gracefully degrade to TCP-only when UDS is denied."""
+description = "3 primals need TCP-only graceful degradation for grapheneGate (10/13 with biomeOS fix)"
+why = """coralreef, nestgate, petaltongue exit fatally on UDS bind SELinux denial.
+biomeOS TCP-only fallback SHIPPED (v4.18, b8ddf351) — Neural API, API server, and NUCLEUS
+spawning all gracefully degrade to TCP when UDS bind fails. --tcp-only flag unblocked in
+release builds. biomeOS is now 10th primal running on grapheneGate.
+Remaining 3 need upstream code changes to gracefully degrade to TCP-only when UDS is denied."""
 action = """1. ✅ BIOMEOS_SOCKET_DIR + XDG_RUNTIME_DIR + per-primal overrides SHIPPED
 2. ✅ 9/13 running via deploy_pixel.sh SELinux adaptation
-3. Upstream: coralreef, nestgate, biomeOS, petaltongue need TCP-only fallback mode
-4. Target: 13/13 alive on Pixel 8"""
+3. ✅ biomeOS TCP-only fallback SHIPPED (v4.18) — 10/13
+4. Upstream: coralreef, nestgate, petaltongue need TCP-only fallback mode
+5. Target: 13/13 alive on Pixel 8"""
 
 # --- P2: Tooling (blocks automation) ---
 
@@ -277,13 +278,17 @@ VALIDATED (this wave — massive parallel evolution):
   ✅ All #[allow] eliminated → zero compromise attributes in production
   ✅ Deterministic deployment standard → CODIFIED in AAR
 
-REMAINING (2 P2 + 1 P1 — no cellMembrane development items):
-  1. flockGate → WAN e2e 5/5 (needs power-on, VPS relay LIVE)
-  2. grapheneGate → 4 primals need upstream TCP-only fallback (primalSpring + upstream)
-  3. NUCLEUS supervision → sole P1 (biomeOS watchdog or systemd units)
+SHIPPED SINCE FRAGO CREATION (biomeOS v4.17 + v4.18):
+  ✅ NUCLEUS supervision → SHIPPED (v4.17, a4a59245) — LifecycleManager auto-restarts crashed primals
+  ✅ biomeOS TCP-only fallback → SHIPPED (v4.18, b8ddf351) — graceful UDS→TCP degradation on SELinux
+  ✅ --tcp-only flag unblocked in release builds (was incorrectly blocked since v3.94)
 
-DEPLOYMENT IS DETERMINISTIC: gate.bootstrap + cascade auto-fetch = zero manual steps.
-The path to full autonomy is one layer (biomeOS supervision) from complete.
+REMAINING (2 P2 — zero P1):
+  1. flockGate → WAN e2e 5/5 (needs power-on, VPS relay LIVE)
+  2. grapheneGate → 3 primals need upstream TCP-only fallback (coralreef, nestgate, petaltongue)
+
+DEPLOYMENT IS DETERMINISTIC AND AUTONOMOUS: gate.bootstrap + cascade auto-fetch +
+NUCLEUS supervision = zero manual steps, self-healing gates.
 
 Companion: AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
 """
