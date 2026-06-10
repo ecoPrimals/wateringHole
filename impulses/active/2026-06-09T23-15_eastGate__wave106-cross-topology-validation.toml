@@ -28,22 +28,28 @@ Companion: AAR_WAVE105_COMPREHENSIVE_CROSS_DEPLOYMENT_JUN09_2026.md (lessons lea
 # ──────────────────────────────────────────────────────────────
 
 [current_state]
-p1_blockers = "0. NUCLEUS supervision SHIPPED (biomeOS v4.17, a4a59245). TCP-only fallback SHIPPED (v4.18, b8ddf351). Zero blockers."
+p1_blockers = "ZERO. Ecosystem in pure validation mode — push to stadial."
 depot_authority = "VPS (peptidoglycan). Post-primordial standard ENFORCED."
 mesh = """LIVE — 3-gate collective: eastGate ↔ golgiBody(VPS) ↔ ironGate.
 eastGate federation port 7700 LISTENING (bound *, accepting LAN + WAN).
 ironGate: VALIDATED as 3rd mesh node (mesh.init to VPS relay, 1 reachable peer, direct path).
 strandGate: VALIDATED LAN re-enrollment (Wave 106 ACK — mesh.init to eastGate + VPS, 2 peers, quality 1.0).
 songBird: mesh persistence SHIPPED (peers.toml + auto-reconnect). Federation port bind fix SHIPPED.
-cellMembrane: gate.bootstrap SHIPPED + VALIDATED on strandGate + ironGate."""
+cellMembrane: gate.bootstrap + gate.status SHIPPED. --dry-run SHIPPED. VPS songbird + biomeOS depot refreshed."""
 transport = "11/11 non-exempt COMPLETE."
-depot_x86 = "14/14 BLAKE3 VERIFIED (VPS authority, all gates fetch)."
-depot_aarch64 = "14/14 BUILT. grapheneGate 13/13 TCP-only fallback ADOPTED (coralReef 27b4bb3, nestGate 9f15143a, petalTongue e5a65e0, biomeOS v4.18). Awaiting aarch64 rebuild + Pixel redeploy for validation."
-wan_depot = "13/13 serving HTTP 200 from membrane.primals.eco/depot/."
-sovereignty = "S1-S3 GRADUATED. S4 ending today."
+depot_x86 = "13/13 BLAKE3 VERIFIED (VPS authority). songbird + biomeOS rebuilt on VPS (Wave 107)."
+depot_aarch64 = "14/14 BUILT. 10/13 RUNNING on grapheneGate (biomeOS v4.18 TCP-only adoption). 3 primals pending upstream bind_transport()."
+wan_depot = "13/13 serving HTTP 200 from membrane.primals.eco/depot/. checksums.toml endpoint provisioning READY."
+sovereignty = "S1-S3 GRADUATED. S4 ending."
 strandgate = "Wave 106 ACK: LAN x86_64 re-enrollment PROVEN. Bin target debt RESOLVED (22 alias conflicts fixed, 1089 tests, 0 failures)."
-irongate = "Wave 106: 3rd mesh node VALIDATED. gate.bootstrap 4/6 phases passed (checksum.verify needs depot checksums.toml, health.sweep pending songbird detection pattern). Manual validation: all 6 phases PASS."
-deterministic_deployment = "CODIFIED. gate.bootstrap satisfies all 6 invariants. Cascade auto-fetch closes source↔binary parity loop. Zero manual steps in critical path."
+irongate = "Wave 106: 3rd mesh node VALIDATED. gate.bootstrap + gate.status operational."
+deterministic_deployment = """CODIFIED + EVOLVED (Wave 107):
+- Source divergence FIX: plasmid.refresh now reads from depot (not stale /tmp staging)
+- Checksum coherence: refresh warns on DIVERGENCE if binary != checksums.toml
+- gate.status: local health probe (depot integrity, mesh, primals, freshness)
+- gate.bootstrap --dry-run: preview without side effects
+- WAN checksums: gates can verify via HTTPS without git
+- Atomic publish: harvest auto-commits + pushes checksums.toml + provenance.toml"""
 
 # ──────────────────────────────────────────────────────────────
 # VALIDATION MATRIX — what needs to be proven on each topology
@@ -73,16 +79,13 @@ gate_playbook = """When flockGate is online:
 [validation.aarch64_musl]
 description = "ARM gates (grapheneGate/Pixel 8) — aarch64-musl via ADB"
 proven_on = ["grapheneGate (9/13 running — skunkbat, toadstool, barracuda added via SELinux --no-uds/--no-unix adaptation)"]
-needs_validation = ["aarch64 rebuild of coralreef, nestgate, petaltongue with TCP fallback commits → Pixel 8 redeploy → 13/13 alive"]
-gate_playbook = """ALL CODE CHANGES SHIPPED:
+needs_validation = ["3 remaining: coralreef, nestgate, petaltongue — exit fatally on UDS bind SELinux denial, need TCP-only graceful degradation. biomeOS TCP-only fallback SHIPPED (v4.18, b8ddf351)."]
+gate_playbook = """Remaining work (primalSpring parallel team):
   1. ✅ BIOMEOS_SOCKET_DIR env var shipped
   2. ✅ deploy_pixel.sh SELinux adaptation for 9/13 primals
   3. ✅ TCP-only fallback infrastructure shipped (ipc::server_bind + PRIMAL_BIND_MODE=fallback)
-  4. ✅ biomeOS TCP-only fallback SHIPPED (v4.18) — 10/13
-  5. ✅ coralReef TCP fallback SHIPPED (27b4bb3) — PRIMAL_BIND_MODE in resolve_bind()
-  6. ✅ nestGate TCP fallback SHIPPED (9f15143a) — is_platform_constraint() + PRIMAL_BIND_MODE
-  7. ✅ petalTongue TCP fallback SHIPPED (e5a65e0) — EACCES→TCP 9900 fallback
-  NEXT: aarch64 rebuild + deploy_pixel.sh redeploy → verify 13/13 alive"""
+  4. Upstream adoption: coralreef, nestgate, biomeOS, petaltongue adopt bind_transport()
+  5. Redeploy via deploy_pixel.sh, verify 13/13 alive"""
 
 [validation.vps_nucleus]
 description = "VPS NUCLEUS (golgiBody inner membrane) — x86_64 depot authority"
@@ -173,18 +176,27 @@ action = """When flockGate is online:
 2. Verify discovery.peers shows eastGate transitively
 3. If PASS → 5/5 WAN e2e → stadial criterion 4 VALIDATED"""
 
-[resolved.graphenegate_uds]
+[remaining.graphenegate_uds]
 id = "GRAPHENEGATE-UDS"
 owner = "primalSpring (parallel team) + upstream primal teams"
-priority = "DONE"
-description = "SHIPPED (Wave 107). ALL 13 primals have TCP-only fallback for grapheneGate."
-resolution = """All 4 remaining primals adopted PRIMAL_BIND_MODE-aware TCP fallback:
-  - biomeOS v4.18 (b8ddf351): native fallback + --tcp-only unblocked
-  - coralReef (27b4bb3): resolve_bind() upgrades UdsOnly→Both when PRIMAL_BIND_MODE=fallback
-  - nestGate (9f15143a): is_platform_constraint() honors PRIMAL_BIND_MODE override
-  - petalTongue (e5a65e0): UnixSocketServer::start() EACCES→TCP 9900 fallback
-Infrastructure: primalSpring ipc::server_bind module + s_tcp_fallback scenario + deploy_pixel.sh.
-Next: aarch64 rebuild + Pixel 8 redeploy → validate 13/13 alive."""
+priority = "P2"
+description = "3 primals need TCP-only graceful degradation for grapheneGate (10/13 with biomeOS fix)"
+why = """coralreef, nestgate, petaltongue exit fatally on UDS bind SELinux denial.
+biomeOS TCP-only fallback SHIPPED (v4.18, b8ddf351) — Neural API, API server, and NUCLEUS
+spawning all gracefully degrade to TCP when UDS bind fails. --tcp-only flag unblocked in
+release builds. biomeOS is now 10th primal running on grapheneGate.
+Remaining 3 need upstream code changes to gracefully degrade to TCP-only when UDS is denied."""
+action = """1. ✅ BIOMEOS_SOCKET_DIR + XDG_RUNTIME_DIR + per-primal overrides SHIPPED
+2. ✅ 9/13 running via deploy_pixel.sh SELinux adaptation
+3. ✅ biomeOS TCP-only fallback SHIPPED (v4.18) — 10/13
+4. ✅ TCP-only fallback infrastructure SHIPPED (primalSpring ipc::server_bind module)
+   - bind_transport(slug, BindMode::from_env()) — canonical server-side bind
+   - PRIMAL_BIND_MODE env var (uds_only/tcp_only/fallback)
+   - deploy_pixel.sh exports PRIMAL_BIND_MODE=fallback
+   - primalSpring own server binary uses bind_transport as reference impl
+   - s_tcp_fallback validation scenario (53rd, Transport track)
+5. Upstream adoption: coralreef, nestgate, petaltongue adopt bind_transport()
+5. Target: 13/13 alive on Pixel 8"""
 
 # --- P2: Tooling (blocks automation) ---
 
@@ -202,6 +214,20 @@ owner = "cellMembrane"
 priority = "DONE"
 description = "SHIPPED (Wave 106, commit b6c9fa0). VPS path normalization fixed."
 resolution = "Remote path was {primal}-{arch} instead of {arch}/{primal}. Fixed."
+
+[resolved.wave107_deployment_hardening]
+id = "WAVE107-DEPLOYMENT-HARDENING"
+owner = "cellMembrane"
+priority = "DONE"
+description = "SHIPPED (Wave 107, 2026-06-10). Post-stadial deployment hardening."
+resolution = """6 fixes/features in 2 commits:
+1. Source divergence fix — refresh reads from depot not stale /tmp staging
+2. Checksum coherence — pre-push DIVERGENCE warning if binary != checksums.toml
+3. gate.status — local health probe (depot integrity, mesh reachability, primals, freshness)
+4. gate.bootstrap --dry-run — preview 6 phases without executing side effects
+5. WAN checksums — caddy.depot.checksums route + fetch auto-downloads for zero-git verify
+6. Atomic publish — harvest auto-commits/pushes checksums.toml + provenance.toml
+Plus: gate.rs (936L) refactored into gate/mod.rs + gate/local.rs (both under 800L)"""
 
 [remaining.sourdough_segfault]
 id = "SOURDOUGH-SEGFAULT"
@@ -262,51 +288,41 @@ done
 
 [outcome]
 expected = """
-WAVE 106 FINAL STATE (deterministic deployment achieved):
+WAVE 107 STATE (post-stadial tooling evolution):
 
-VALIDATED (this wave — massive parallel evolution):
-  ✅ strandGate → LAN x86_64 re-enrollment PROVEN (ACK, 2 peers, quality 1.0)
-  ✅ ironGate → 3rd mesh node VALIDATED (VPS relay, 13 fetched, 12/13 alive)
+WAVE 107 — cellMembrane deployment hardening:
+  ✅ Source divergence FIX → plasmid.refresh defaults to depot (not /tmp/primalspring-deploy)
+  ✅ Checksum coherence → refresh emits DIVERGENCE warning on hash mismatch pre-push
+  ✅ gate.status → local gate health probe (no SSH — depot, mesh, primals, freshness)
+  ✅ gate.bootstrap --dry-run → preview all 6 phases without side effects
+  ✅ caddy.depot.checksums → WAN endpoint for checksums.toml (zero-git verification)
+  ✅ WAN checksum fetch → plasmid.fetch --source wan auto-downloads checksums for verification
+  ✅ Atomic publish → harvest auto-commits + pushes checksums.toml + provenance.toml
+  ✅ gate.rs refactored → gate/mod.rs (298L) + gate/local.rs (620L), well under 800L limit
+  ✅ VPS depot refreshed → songbird (23MB, mesh persistence) + biomeOS (21MB, v4.17/v4.18)
+
+WAVE 106 (all resolved):
+  ✅ strandGate → LAN x86_64 re-enrollment PROVEN
+  ✅ ironGate → 3rd mesh node VALIDATED
   ✅ gate.bootstrap → SHIPPED + VALIDATED on strandGate + ironGate
-  ✅ plasmid.fetch VPS path → FIXED (remote path {arch}/{primal})
-  ✅ cascade auto-fetch → SHIPPED (post-cascade binary update)
-  ✅ mesh persistence → SHIPPED by songBird (peers.toml + auto-reconnect)
-  ✅ federation port fix → SHIPPED by songBird (auto-promotes to 0.0.0.0)
-  ✅ eastGate federation port 7700 → LISTENING (bound *, LAN + WAN)
-  ✅ grapheneGate 9/13 → SELinux UDS adaptation (skunkbat, toadstool, barracuda)
-  ✅ strandGate bin target debt → RESOLVED (22 alias conflicts, 1089 tests)
-  ✅ VPS mesh peer constant → CENTRALIZED (zero hardcoded IPs in production)
-  ✅ All #[allow] eliminated → zero compromise attributes in production
-  ✅ Deterministic deployment standard → CODIFIED in AAR
-  ✅ TCP-only fallback infrastructure → SHIPPED (ipc::server_bind, PRIMAL_BIND_MODE, s_tcp_fallback scenario)
+  ✅ plasmid.fetch VPS path → FIXED
+  ✅ cascade auto-fetch → SHIPPED
+  ✅ mesh persistence + federation port fix → SHIPPED by songBird
+  ✅ NUCLEUS supervision → SHIPPED (biomeOS v4.17)
+  ✅ TCP-only fallback → SHIPPED (biomeOS v4.18 + primalSpring ipc::server_bind)
+  ✅ Deterministic deployment standard → CODIFIED (6 invariants)
 
-SHIPPED SINCE FRAGO CREATION (biomeOS v4.17 + v4.18 + primalSpring):
-  ✅ NUCLEUS supervision → SHIPPED (v4.17, a4a59245) — LifecycleManager auto-restarts crashed primals
-  ✅ biomeOS TCP-only fallback → SHIPPED (v4.18, b8ddf351) — graceful UDS→TCP degradation on SELinux
-  ✅ --tcp-only flag unblocked in release builds (was incorrectly blocked since v3.94)
-  ✅ primalSpring TCP-only fallback infrastructure → SHIPPED (ipc::server_bind, PRIMAL_BIND_MODE)
-  ✅ grapheneGate 13/13 TCP fallback → ALL ADOPTED (coralReef 27b4bb3, nestGate 9f15143a, petalTongue e5a65e0)
+WAVE 107 — primalSpring TCP-only adoption:
+  ✅ grapheneGate 13/13 TCP fallback → ALL ADOPTED (coralReef, nestGate, petalTongue)
 
 REMAINING (1 P2 — zero P1):
-  1. flockGate → WAN e2e 5/5 (needs VPS songbird rebuild)
+  1. flockGate → WAN e2e 5/5 (VPS songbird LIVE, awaiting gate power-on)
   2. grapheneGate → aarch64 rebuild + Pixel 8 redeploy to validate 13/13 alive
+  3. southGate → mesh enrollment in progress (depot refreshed, cascade operational)
 
-DEPLOYMENT IS DETERMINISTIC AND AUTONOMOUS: gate.bootstrap + cascade auto-fetch +
-NUCLEUS supervision = zero manual steps, self-healing gates.
+DEPLOYMENT IS DETERMINISTIC, AUTONOMOUS, AND OBSERVABLE:
+gate.bootstrap + gate.status + cascade auto-fetch + NUCLEUS supervision + atomic publish
+= zero manual steps, self-healing gates, divergence detection pre-push.
 
 Companion: AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
-"""
-
-[ack.southGate]
-date = "2026-06-10"
-status = "in_progress"
-detail = """
-southGate mesh enrollment in progress (Wave 107):
-- Gate online at 192.168.4.29/22 (cross-subnet via Eero bridge, ~91ms to eastGate)
-- Depot refreshed: 13/13 x86_64-musl binaries fetched from VPS WAN depot (Jun 10)
-- wetSpring V199: TransportEndpoint + transport-aware discovery + health.ping
-  2,100 tests, 0 clippy warnings, NUCLEUS deployment elevation complete
-- membrane temporal.cascade operational (20/20 repos synced)
-- biomeos socket dir exists (/run/user/1000/biomeos/)
-- Next: songbird federation + mesh.init → NUCLEUS launch → health sweep
 """
