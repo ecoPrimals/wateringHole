@@ -75,13 +75,32 @@ gate_playbook = """When gate comes online:
 
 [validation.wan_x86_64]
 description = "WAN gates (flockGate) — x86_64-musl, depot via HTTPS, mesh via VPS relay"
-proven_on = ["flockGate (4/5 e2e PASS — fetch/launch/mesh.init/health OK)"]
-needs_validation = ["flockGate mesh peering (VPS songbird relay now LIVE — should unblock)"]
-gate_playbook = """When flockGate is online:
-  1. plasmid.fetch --source wan (or curl from membrane.primals.eco/depot/)
-  2. mesh.init to 157.230.3.183:7700 (golgiBody VPS relay)
-  3. Verify discovery.peers shows transitive discovery of eastGate
-  4. Full NUCLEUS health sweep"""
+proven_on = ["flockGate (4/5 e2e PASS — fetch BLAKE3-VERIFIED, launch OK, mesh.init OK, health OK)"]
+needs_validation = ["flockGate bidirectional handshake — VPS songbird PROCESS must be restarted (depot binary fresh, running process stale)"]
+blocker = """CRITICAL: VPS songbird process on golgiBody has NOT been restarted.
+The depot FILE was refreshed Jun 10 02:28 UTC (BLAKE3 03775a3f... verified).
+But the RUNNING PROCESS is still the pre-federation-fix binary (predates 1df7ef90).
+
+flockGate tested TWICE (11:40 UTC + 17:26 UTC):
+- TCP to 157.230.3.183:7700: CONNECTS (32ms RTT)
+- mesh.init: ACKNOWLEDGED by VPS
+- After 67s+: latency_ms remains null — no bidirectional protocol handshake
+
+The 4-gate LAN collective works because LAN gates connected differently.
+WAN requires the federation fix in the running process.
+
+FIX (cellMembrane on golgiBody VPS):
+  kill $(pgrep songbird)
+  SONGBIRD_FEDERATION_PORT=7700 /opt/ecoPrimals/plasmidBin/x86_64-unknown-linux-musl/songbird server --port 7700 --bind 0.0.0.0 --socket /run/user/1000/biomeos/songbird.sock &
+
+flockGate side is READY (songbird running, port 7700 bound, mesh.init will auto-retry).
+Once VPS restarts: expect latency_ms ≈ 30-35ms → 5/5 → stadial criterion 4."""
+gate_playbook = """flockGate READY — waiting on VPS process restart only.
+After VPS restarts songbird:
+  1. flockGate mesh.init auto-retries (already running)
+  2. Verify latency_ms becomes non-null
+  3. Verify discovery.peers shows transitive peer discovery
+  4. Full NUCLEUS health sweep → 5/5 WAN e2e"""
 
 [validation.aarch64_musl]
 description = "ARM gates (grapheneGate/Pixel 8) — aarch64-musl via ADB"
