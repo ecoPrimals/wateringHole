@@ -38,9 +38,9 @@ southGate: VALIDATED cross-subnet (Wave 107 — 192.168.4.29/22, Eero bridge, 4.
 songBird: mesh persistence SHIPPED (peers.toml + auto-reconnect). Federation port bind fix SHIPPED.
 cellMembrane: gate.bootstrap + gate.status SHIPPED. --dry-run SHIPPED. VPS songbird + biomeOS depot refreshed."""
 transport = "11/11 non-exempt COMPLETE."
-depot_x86 = "13/13 BLAKE3 VERIFIED (VPS authority). songbird + biomeOS rebuilt on VPS (Wave 107)."
-depot_aarch64 = "14/14 BUILT. 13/13 TCP-only fallback ALL ADOPTED (Wave 107). Awaiting aarch64 rebuild + Pixel 8 redeploy."
-wan_depot = "13/13 serving HTTP 200 from membrane.primals.eco/depot/. checksums.toml endpoint provisioning READY."
+depot_x86 = "13/13 BLAKE3 VERIFIED. All primals rebuilt from latest commits (Wave 108). VPS synced."
+depot_aarch64 = "13/13 REBUILT (Wave 108, peptidoglycan). biomeOS v4.20 (BM-UDS-01 fix), coralReef (CR-TARPC-01). checksums.toml updated. Awaiting Pixel 8 deploy + 13/13 alive validation."
+wan_depot = "13/13 serving HTTP 200 from membrane.primals.eco/depot/. checksums.toml synced."
 sovereignty = "S1-S4 ALL GRADUATED. Inner membrane fully sovereign."
 strandgate = "Wave 106 ACK: LAN x86_64 re-enrollment PROVEN. Bin target debt RESOLVED (22 alias conflicts fixed, 1089 tests, 0 failures)."
 irongate = "Wave 106: 3rd mesh node VALIDATED. gate.bootstrap + gate.status operational."
@@ -55,7 +55,10 @@ deterministic_deployment = """CODIFIED + EVOLVED (Wave 107):
 - BearDog ACME prep: TlsProvider type + caddy.tls.external/revert wired (awaiting BearDog ACME client)
 - depot_sync evolved: BLAKE3 diff (skip current), atomic copy (.new+mv), checksums verification
 - Mobile golgi fleet: GateMobility type (Fixed|Mobile), --mobile bootstrap, systemd templates,
-  NM dispatcher hook (auto mesh.init on network-up), provision-golgi.sh one-shot script"""
+  NM dispatcher hook (auto mesh.init on network-up), provision-golgi.sh one-shot script
+- NDK cross-compile: aarch64-linux-android pipeline, linker auto-detection, plasmid.ndk.check
+- Wave 108 aarch64 rebuild: 13/13 primals rebuilt on peptidoglycan (biomeOS v4.20, coralReef b1ec1f4b)
+  checksums.toml updated (516879f), VPS x86_64 synced, zero divergence"""
 
 # ──────────────────────────────────────────────────────────────
 # VALIDATION MATRIX — what needs to be proven on each topology
@@ -104,13 +107,14 @@ After VPS restarts songbird:
 [validation.aarch64_musl]
 description = "ARM gates (grapheneGate/Pixel 8) — aarch64-musl via ADB"
 proven_on = ["grapheneGate (9/13 running — skunkbat, toadstool, barracuda via SELinux adaptation)", "biomeOS v4.18 TCP-only fallback (10th primal)"]
-needs_validation = ["aarch64 rebuild of all 13 primals with TCP-only adoption, then Pixel 8 redeploy → target 13/13"]
-gate_playbook = """All development COMPLETE:
+needs_validation = ["Pixel 8 redeploy via deploy_pixel.sh → target 13/13 alive"]
+gate_playbook = """All development COMPLETE. aarch64 rebuild DONE (Wave 108):
   1. ✅ BIOMEOS_SOCKET_DIR + deploy_pixel.sh + PRIMAL_BIND_MODE=fallback shipped
   2. ✅ TCP-only fallback infrastructure shipped (ipc::server_bind)
   3. ✅ ALL 13 primals adopted bind_transport() (coralReef, nestGate, petalTongue, biomeOS)
-  4. Rebuild aarch64-unknown-linux-musl on peptidoglycan → push to VPS depot
-  5. Redeploy via deploy_pixel.sh, verify 13/13 alive"""
+  4. ✅ aarch64 rebuild on peptidoglycan DONE (Wave 108) — biomeOS v4.20, coralReef b1ec1f4b
+  5. ✅ checksums.toml updated, VPS depot synced
+  6. Redeploy via deploy_pixel.sh, verify 13/13 alive (hardware: plug Pixel 8a via USB)"""
 
 [validation.vps_nucleus]
 description = "VPS NUCLEUS (golgiBody inner membrane) — x86_64 depot authority"
@@ -140,15 +144,15 @@ action = """When flockGate is online:
 id = "GRAPHENEGATE-REBUILD"
 owner = "primalSpring (parallel team) + cellMembrane (peptidoglycan)"
 priority = "P2"
-description = "aarch64 rebuild + Pixel 8 redeploy — all 13 primals TCP-only adopted, needs binary refresh"
+description = "aarch64 REBUILT (Wave 108). Pixel 8 redeploy pending — connect device + deploy_pixel.sh"
 why = """All 13 primals now have bind_transport() / TCP-only fallback adopted:
 - coralReef (27b4bb3): PRIMAL_BIND_MODE in resolve_bind()
 - nestGate (9f15143a): is_platform_constraint() honors PRIMAL_BIND_MODE=fallback
 - petalTongue (e5a65e0): EACCES→TCP 9900 fallback
 - biomeOS (v4.18, b8ddf351): native TCP-only fallback
-Development is COMPLETE. This is an operational item — rebuild aarch64, push to VPS, redeploy."""
-action = """1. Rebuild all 13 primals for aarch64-unknown-linux-musl on peptidoglycan
-2. Push to VPS depot, update checksums.toml (aarch64 section)
+Development is COMPLETE. Rebuild DONE (Wave 108). Only hardware deploy remains."""
+action = """1. ✅ Rebuild all 13 primals for aarch64-unknown-linux-musl on peptidoglycan (Wave 108)
+2. ✅ checksums.toml updated + pushed (516879f)
 3. Redeploy to Pixel 8 via deploy_pixel.sh (exports PRIMAL_BIND_MODE=fallback)
 4. Verify 13/13 alive on grapheneGate"""
 
@@ -193,6 +197,8 @@ Wave 107 primals: SONGBIRD-IPC-RESOLVE-M1 (ff86204c), BARRACUDA-METHOD-DESCRIBE 
 Wave 107 gates: southGate cross-subnet VALIDATED (13/13, 19/22 capabilities, science pipeline).
 Wave 107 biomeOS deep debt: BM-UDS-01 (v4.20), socket dir injection (v4.21), signal route completeness,
   niche catalog refactor, discovery provider decoupled, NUCLEUS timeouts named.
+Wave 108 cellMembrane: NDK cross-compile pipeline (aarch64-linux-android), plasmid.ndk.check,
+  aarch64-musl rebuild 13/13 on peptidoglycan (biomeOS v4.20, coralReef b1ec1f4b), VPS depot synced.
 
 Full detail: archive/wave107/ (9 handoffs), impulses/resolved/ (CR-TARPC-01)
 Living standard: cellMembrane/AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
