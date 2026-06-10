@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 10, 2026 (Wave 107: ZERO P1. S1-S4 GRADUATED. 4-gate mesh collective LIVE. Topology-aware routing SHIPPED. 13/13 primals clean. primalSpring 897 tests, clippy-clean. nucleus-deploy clippy-clean. skunkBat zero-port-standard RESOLVED. 2 active handoffs + 5 archived to wave107.)
+**Last Updated**: June 10, 2026 (Wave 108: ZERO P1. ZERO primal code blockers. Mountain clear — BM-UDS-01, CR-TARPC-01, NG-DOWNCAST-01 all resolved. 13/13 primals clean. grapheneGate 13/13 ready. 4-gate mesh collective LIVE. S1-S4 GRADUATED. 4 P2 ops remaining.)
 
 ---
 
