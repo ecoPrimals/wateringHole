@@ -1,11 +1,11 @@
-# Wave 106 Blurbs — Cross-Topology Validation, Autonomous Gates, strandGate ACK
+# Wave 106 Blurbs — Deterministic Deployment Achieved, 3-Gate Collective LIVE
 
-**Date**: 2026-06-09
+**Date**: 2026-06-10
 **From**: eastGate overwatch
 
-**What happened this wave**: Comprehensive AAR published (17 issues, 5 categories). Old FRAGO archived (12/16 resolved). New FRAGO for cross-topology validation. Then massive parallel team response: songBird shipped mesh persistence + federation port fix. cellMembrane shipped gate.bootstrap + plasmid.fetch fix + cascade auto-fetch. primalSpring pushed grapheneGate to 9/13. strandGate sent an ACK — LAN re-enrollment VALIDATED.
+**What happened this wave**: Comprehensive AAR published (17 issues, 5 categories) → massive parallel team response → strandGate LAN re-enrollment VALIDATED → **ironGate VALIDATED as 3rd mesh node** (gate.bootstrap 6/6 PASS, 12/13 alive) → **cellMembrane codified Deterministic Deployment Standard** → **flockGate published guideStone-grade WAN deployment analysis** (5 gaps → post-stadial evolution path).
 
-**The shift**: We are no longer building the deployment pipeline. We are now validating it across topologies. The tooling evolution is happening in real time — AAR items from hours ago are already shipped.
+**The shift**: The deployment pipeline is **deterministic end-to-end**. `gate.bootstrap` goes from powered-off gate → fully operational mesh participant in a single command. We now have a **3-gate mesh collective** (eastGate↔golgiBody↔ironGate). The conversation has moved from "does it work?" to "how do we make it guideStone-grade?"
 
 ---
 
@@ -19,9 +19,16 @@
 
 Plus everything from Wave 104: WAN depot, cascade conflict auto-resolve, harvest atomic rename, aarch64 sweep, multi-target checksums, VPS depot sync.
 
+### Also Shipped (ironGate session)
+
+4. **ironGate 3rd mesh node** (commit `e482216`) — VPS mesh peer constant centralized. ironGate validated with gate.bootstrap: 13 downloaded, 13 verified, 12/13 started, VPS relay mesh.
+5. **Deterministic Deployment Standard** (AAR `WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md`) — codified the 6 invariants that gate.bootstrap satisfies. Zero `#[allow]`, zero `unwrap()`, zero hardcoded IPs.
+
 ### Remaining
 
-The only cellMembrane-owned item left is running gate.bootstrap on ironGate/flockGate when they come online. This is operational, not development.
+Development is COMPLETE. The only cellMembrane item is operational:
+- VPS depot rebuild (songbird binary is stale on outer membrane — flockGate is blocked on this)
+- Future: serve `checksums.toml` from WAN endpoint for zero-git verification
 
 ---
 
@@ -113,18 +120,18 @@ P1 (sole remaining — blocks autonomous operation):
              Only P1 left. Everything else is shipped or operational.
 
 P2 (validate as gates come online):
-  ironGate → 3rd mesh node (eastGate:7700 NOW ACCEPTING — should just work)
-  flockGate → WAN e2e 5/5 (VPS relay LIVE — just needs power-on)
+  flockGate → WAN e2e 5/5 (blocked: VPS depot has stale songbird, needs rebuild)
   primalSpring → grapheneGate 13/13 (4 primals need upstream TCP-only fallback)
+  flockGate → guideStone-grade gaps (5 items — depot integrity, manifest, tolerances, WAN verify, versioning)
 
 SHIPPED THIS WAVE (was P1/P2, now DONE):
-  ✅ songBird → mesh persistence (peers.toml + auto-reconnect)
-  ✅ songBird → federation port fix (auto-promotes to 0.0.0.0)
-  ✅ cellMembrane → gate.bootstrap (one-command enrollment)
-  ✅ cellMembrane → plasmid.fetch VPS path fix
-  ✅ cellMembrane → cascade auto-fetch (post-cascade binary update)
-  ✅ eastGate → federation port 7700 LISTENING
-  ✅ strandGate → LAN re-enrollment VALIDATED (ACK)
+  ✅ ironGate → 3rd mesh node VALIDATED (gate.bootstrap 6/6, VPS relay, 12/13 alive)
+  ✅ strandGate → LAN re-enrollment VALIDATED (ACK, 2 peers, quality 1.0)
+  ✅ cellMembrane → gate.bootstrap SHIPPED + VALIDATED on strandGate + ironGate
+  ✅ cellMembrane → Deterministic Deployment Standard CODIFIED (6 invariants)
+  ✅ cellMembrane → plasmid.fetch VPS path fix + cascade auto-fetch
+  ✅ songBird → mesh persistence + federation port fix (both P1 items)
+  ✅ eastGate → federation port 7700 LISTENING (bound *, LAN + WAN)
   ✅ primalSpring → grapheneGate 9/13 (SELinux adaptation)
 
 LOW (future):
@@ -135,33 +142,38 @@ LOW (future):
 
 ---
 
-## Ecosystem Snapshot (2026-06-10 01:10 UTC)
+## Ecosystem Snapshot (2026-06-10 02:10 UTC)
 
 | Metric | Value |
 |--------|-------|
 | P1 blockers | **1** (NUCLEUS supervision — sole remaining) |
-| P2 remaining | 3 (ironGate mesh, flockGate WAN, grapheneGate 4 primals) |
+| P2 remaining | 3 (flockGate WAN e2e, grapheneGate 4 primals, guideStone gaps) |
 | Cascade | **38/38 clean**, zero failures |
-| Mesh | LIVE (eastGate↔golgiBody, 123min+, quality 1.0) |
+| Mesh | **3-GATE COLLECTIVE** (eastGate↔golgiBody↔ironGate) |
 | Mesh persistence | **SHIPPED** (peers.toml + auto-reconnect) |
 | Federation port | **LISTENING** (eastGate:7700, bound *, LAN + WAN) |
 | Transport | 11/11 non-exempt COMPLETE |
 | Depot x86_64 | **13/13 BLAKE3 VERIFIED** (VPS authority) |
 | Depot aarch64 | 14/14 BUILT |
 | WAN depot | 13/13 serving (HTTP 200) |
-| gate.bootstrap | **SHIPPED** (strandGate validated) |
+| gate.bootstrap | **SHIPPED + VALIDATED** on strandGate + ironGate |
+| Deterministic deploy | **CODIFIED** (6 invariants, zero manual steps) |
 | cascade auto-fetch | **SHIPPED** |
 | VPS NUCLEUS | **13/13 RUNNING** |
-| grapheneGate | **9/13 running** on Pixel 8 (9 primals via SELinux adaptation) |
+| grapheneGate | **9/13 running** on Pixel 8 |
 | eastGate NUCLEUS | 23 JSON-RPC + 3 tarpc, stable |
+| ironGate | **VALIDATED** (3rd mesh node, 12/13 alive) |
+| strandGate | Wave 106 ACK (LAN re-enrollment PROVEN) |
 | Sovereignty | S1-S3 GRADUATED, S4 ending today |
-| strandGate | Wave 106 ACK (LAN re-enrollment PROVEN, 1089 tests) |
-| primalSpring | 887 tests, 0 failures |
+| cellMembrane | **Development COMPLETE** (all items shipped) |
+| songBird | **Both P1 items shipped** (persistence + federation) |
 
 ## Reference
 
 - `AAR_WAVE105_COMPREHENSIVE_CROSS_DEPLOYMENT_JUN09_2026.md` — full AAR (17 issues, 5 categories)
-- `wave106-cross-topology-validation.toml` — FRAGO (8 shipped, 4 remaining, gate enrollment playbook)
-- `wave106-ack-cross-topology-validated.toml` — strandGate ACK (LAN re-enrollment validated)
-- `GLACIAL_SHIFT_READINESS.md` — updated to Wave 106
+- `AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md` — Deterministic Deployment Standard
+- `wave106-flockgate-wan-deployment-aar.toml` — guideStone-grade WAN deployment analysis (5 gaps)
+- `wave106-cross-topology-validation.toml` — FRAGO (updated: ironGate RESOLVED, all shipped items tracked)
+- `wave106-ack-cross-topology-validated.toml` — strandGate ACK
+- `GLACIAL_SHIFT_READINESS.md` — updated to Wave 106 final (3-gate collective)
 - `ECOBIN_ARCHITECTURE_STANDARD.md` — plasmidBin submission rewritten for VPS-only
