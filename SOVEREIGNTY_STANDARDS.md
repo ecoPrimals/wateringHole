@@ -2,7 +2,7 @@
 
 # Sovereignty Standards — Ecosystem Behaviors for Sovereign Evolution
 
-**Date**: May 15, 2026 (updated May 23, 2026)
+**Date**: May 15, 2026 (updated Jun 10, 2026 — Wave 107: S4 GRADUATED, all 4 shadows sovereign)
 **Status**: Active
 **Authority**: WateringHole Consensus
 **Audience**: All primals, all compositions, all deployments
@@ -322,6 +322,7 @@ Four new strategic tracks added to the sovereignty evolution:
 
 | Date | Change |
 |------|--------|
+| 2026-06-10 | Wave 107: **S4 GRADUATED** — 7-day BTSP auth gate PASSED (Jun 9). All 4 sovereignty shadows (S1-S4) now sovereign on inner membrane. 4-gate mesh collective LIVE. Deterministic deployment codified. NUCLEUS supervision shipped. |
 | 2026-06-04 | Wave 77b: Diderm membrane architecture — added §3b layer model, sovereignty shadow membrane applicability table. S-tracks now apply to inner membrane (`primal.eco`); outer membrane may retain commercial. Cross-membrane validation added. |
 | 2026-06-02 | Wave 68: grapheneGate, topology routing, perceptron design, Songbird relay design, TCP Tier 5 release enforcement |
 | 2026-05-15 | Initial version — sovereignty standards codified from ecosystem practice |

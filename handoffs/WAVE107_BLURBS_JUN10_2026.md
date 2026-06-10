@@ -3,9 +3,9 @@
 **Date**: 2026-06-10
 **From**: eastGate overwatch
 
-**State**: **ZERO P1 blockers** across the entire ecosystem. NUCLEUS supervision shipped (biomeOS v4.17). biomeOS TCP-only fallback shipped (v4.18). TCP-only fallback infrastructure shipped (primalSpring `ipc::server_bind`). Deterministic deployment codified. 3-gate mesh collective operational. songBird deep debt cleared (+30 tests). VPS depot refreshed (biomeOS + songbird rebuilt). eastGate fully revalidated and redeployed — 13/13 depot verified, 23 JSON-RPC + 3 tarpc, mesh LIVE.
+**State**: **ZERO P1 blockers** across the entire ecosystem. **4-gate mesh collective LIVE** (eastGate↔golgiBody↔ironGate+southGate). **southGate cross-subnet VALIDATED** (13/13, distributed science pipeline, 19/22 capability domains). **grapheneGate 13/13 TCP fallback ALL ADOPTED** (awaiting aarch64 rebuild). cellMembrane shipped gate.status + --dry-run + WAN checksums + atomic publish. VPS depot refreshed. S1-S4 ALL GRADUATED. Deterministic deployment codified + hardened.
 
-**The shift**: Every P1 is resolved. The ecosystem is in pure validation mode — proving the pipeline across remaining topologies and closing the last 3 primal adoption gaps for grapheneGate.
+**The shift**: Every P1 is resolved. All sovereignty shadows graduated. The ecosystem is in pure validation mode — the remaining work is operational (gate power-ons, binary rebuilds) not development.
 
 ---
 
@@ -23,32 +23,21 @@ Also: biomeOS was rebuilt on VPS (v4.17/v4.18, checksum updated to `00ca522a...`
 
 ---
 
-## To: primalSpring — grapheneGate 3 Primals (P2)
+## To: primalSpring — grapheneGate aarch64 Rebuild + Redeploy (P2, operational)
 
-TCP-only fallback infrastructure is **SHIPPED** (`ipc::server_bind` module). biomeOS already adopted (v4.18, grapheneGate 10/13). **3 primals remain**:
+**ALL 13 primals have adopted TCP-only fallback** (Wave 107). Development is COMPLETE:
+- coralReef (`27b4bb3`): `PRIMAL_BIND_MODE` in `resolve_bind()`
+- nestGate (`9f15143a`): `is_platform_constraint()` honors `PRIMAL_BIND_MODE=fallback`
+- petalTongue (`e5a65e0`): EACCES→TCP 9900 fallback
+- biomeOS v4.18: native fallback
 
-| Primal | What's Needed |
-|--------|---------------|
-| coralreef | Adopt `bind_transport(slug, BindMode::from_env())` |
-| nestgate | Adopt `bind_transport(slug, BindMode::from_env())` |
-| petaltongue | Adopt `bind_transport(slug, BindMode::from_env())` |
-
-**Pattern** (reference impl in primalSpring server binary):
-```rust
-let listener = ipc::server_bind::bind_transport(slug, BindMode::from_env())?;
-```
-
-`deploy_pixel.sh` already exports `PRIMAL_BIND_MODE=fallback`. Once adopted → redeploy → grapheneGate 13/13.
+**Action**: aarch64-unknown-linux-musl rebuild of all 13 primals, push to VPS depot, redeploy to Pixel 8 via `deploy_pixel.sh`. Target: grapheneGate 13/13 alive.
 
 ---
 
-## To: biomeOS — CLEAR (celebrate)
+## To: biomeOS — CLEAR
 
-**NUCLEUS supervision SHIPPED** (v4.17, commit `a4a59245`). LifecycleManager auto-restarts crashed primals from depot binary — exponential backoff (2s base, 60s max), max 5 attempts before Dead state. Health poll every 10s.
-
-**TCP-only fallback SHIPPED** (v4.18, commit `b8ddf351`). Neural API, API server, and NUCLEUS spawning all gracefully degrade to TCP when UDS bind fails. `--tcp-only` flag unblocked in release builds. grapheneGate 10/13 (biomeOS now running).
-
-**No remaining action items for biomeOS.** Both P1 and P2 items are resolved.
+Both P1 items resolved: NUCLEUS supervision (v4.17) + TCP-only fallback (v4.18). Auto-registration of newly-launched primals with songbird would close the registration gap identified by southGate.
 
 ---
 
@@ -77,22 +66,22 @@ Your guideStone-grade WAN analysis (5 gaps) shapes the post-stadial roadmap. Not
 | Gate | Status | Next Action |
 |------|--------|-------------|
 | eastGate | **OPERATIONAL** (23 RPC + 3 tarpc, mesh LIVE) | — |
-| golgiBody (VPS) | **OPERATIONAL** (13/13, mesh hub) | Rebuild songbird in depot |
+| golgiBody (VPS) | **OPERATIONAL** (13/13, mesh hub, depot refreshed) | — |
 | ironGate | **VALIDATED** (3rd mesh node, 12/13) | — |
 | strandGate | **VALIDATED** (LAN re-enrollment) | — |
-| flockGate | 4/5 WAN e2e | Awaiting VPS depot rebuild |
-| grapheneGate | 10/13 (Pixel 8) | Awaiting 3 primal TCP fallback adoption |
-| southGate | Unknown | Power-on + `gate.bootstrap` |
+| southGate | **VALIDATED** (4th mesh node, 13/13, cross-subnet, science pipeline) | — |
+| flockGate | 4/5 WAN e2e | Power-on → re-fetch → 5/5 |
+| grapheneGate | 13/13 TCP ADOPTED | aarch64 rebuild + redeploy |
 
 ---
 
-## Ecosystem Snapshot (2026-06-10 11:30 UTC)
+## Ecosystem Snapshot (2026-06-10 12:30 UTC)
 
 | Metric | Value |
 |--------|-------|
 | **P1 remaining** | **ZERO** |
-| P2 remaining | **2** — VPS depot rebuild (flockGate), grapheneGate 3 primals |
-| Mesh | 3-gate collective (eastGate↔golgiBody↔ironGate) |
+| P2 remaining | **2** — grapheneGate aarch64 rebuild, flockGate WAN 5/5 (power-on) |
+| Mesh | **4-gate collective** (eastGate↔golgiBody↔ironGate+southGate) |
 | Depot x86_64 | **13/13 BLAKE3 VERIFIED** (VPS authority) |
 | Depot aarch64 | 14/14 built |
 | WAN depot | 13/13 serving (HTTP 200) |
@@ -100,15 +89,16 @@ Your guideStone-grade WAN analysis (5 gaps) shapes the post-stadial roadmap. Not
 | Cascade | **38/38 clean** |
 | gate.bootstrap | Shipped + validated (strandGate, ironGate) |
 | NUCLEUS supervision | **SHIPPED** (biomeOS v4.17) |
-| TCP-only fallback | **SHIPPED** (infra + biomeOS adopted, 3 primals pending) |
+| TCP-only fallback | **SHIPPED + ALL ADOPTED** (13/13 primals, awaiting rebuild) |
+| Sovereignty | **S1-S4 ALL GRADUATED** |
 | Deterministic deploy | Codified (6 invariants) |
-| Sovereignty | S1-S3 graduated, S4 ending |
+| southGate | **VALIDATED** (4th mesh node, 13/13, science pipeline) |
 
 ---
 
 ## Reference
 
-- `wave106-cross-topology-validation.toml` — active FRAGO (updated: ZERO P1)
-- `AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md` — deployment standard
-- `wave106-flockgate-wan-deployment-aar.toml` — guideStone-grade WAN analysis
-- `GLACIAL_SHIFT_READINESS.md` — ecosystem readiness
+- `wave106-cross-topology-validation.toml` — active FRAGO (updated: ZERO P1, 4-gate collective)
+- `cellMembrane/AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md` — deployment standard
+- `SOUTHGATE_WAVE107_MESH_VALIDATION_AAR_JUN10_2026.md` — cross-subnet validation + science pipeline
+- `GLACIAL_SHIFT_READINESS.md` — ecosystem readiness (Wave 107, S1-S4 graduated)

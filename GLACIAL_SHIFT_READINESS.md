@@ -8,11 +8,12 @@
 
 ## Position
 
-The ecosystem has cleared the interstadial exit gate (~9.8/10). **Mesh is LIVE**
-(eastGate↔strandGate, 17h+ stable, all 4 criteria PASS). 13/13 primals at zero
-debt. Full NUCLEUS deployed on eastGate — 13/13 primals running, all IPC-live
-over UDS. Transport injection at **11/11 non-exempt primals COMPLETE** (toadStool S306c confirmed
-Wave 104) — all using correct LOCAL implementation pattern, zero self-knowledge violations.
+The ecosystem has cleared the interstadial exit gate. **4-gate mesh collective LIVE**
+(eastGate↔golgiBody↔ironGate+southGate, deterministic deployment codified). 13/13 primals at zero
+debt. Full NUCLEUS deployed on eastGate (23 JSON-RPC + 3 tarpc), golgiBody VPS (13/13),
+ironGate (12/13), southGate (13/13 + distributed science pipeline). Transport injection
+at **11/11 non-exempt primals COMPLETE**. NUCLEUS supervision SHIPPED (biomeOS v4.17).
+TCP-only fallback SHIPPED + ALL ADOPTED (grapheneGate 13/13 pending aarch64 rebuild).
 
 **Deployment surface (ecoBin target matrix)**:
 - `x86_64-unknown-linux-musl`: 14/14 depot fresh, LAN/VPS/WAN operational. **All gates fetch from VPS — no local rebuilds.**
@@ -177,9 +178,9 @@ Unix socket improvements. primalSpring: 789 tests, 53 scenarios, 458 methods,
 - **toadStool**: **S279 deep debt III complete** — zero production panic paths, 9,156+ lib tests.
   Transport CONFIRMED DONE (S306c Wave 104, 11/11 non-exempt).
   **CLEAR** — zero sentinel-blocking items.
-- **biomeOS**: **v4.16** shipped (deep debt, error chains, hardcoding elimination). v4.15 (mesh
-  capability alignment). LocalTrusted access level operational. eastGate rebuild in progress.
-  **CLEAR** — zero sentinel-blocking items.
+- **biomeOS**: **v4.18** shipped (TCP-only fallback, grapheneGate adoption). v4.17 (NUCLEUS supervision —
+  LifecycleManager auto-restarts). LocalTrusted access level operational.
+  **CLEAR** — zero sentinel-blocking items. Both P1 items (supervision + TCP fallback) RESOLVED.
 - **petalTongue**: WASM client-side rendering live. Transport evolution adopted.
   **CLEAR** — no remaining sentinel-blocking items.
 
@@ -205,9 +206,9 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | **S1** | TLS termination | Caddy+LE :443 (80ms TTFB) | Cloudflare (INACTIVE) | **VERIFIED** — 198 probes, 0 failures, p95 < 120ms. Awaiting NS cutover. | p95 < 500ms, 0 TLS failures |
 | **S2** | NAT relay | Songbird TURN :3478 | cloudflared (INACTIVE) | **GRADUATED** | 7-day 100% reachable |
 | **S3** | Content serving | NestGate + petalTongue (67ms TTFB) | GitHub Pages (111ms) | **READY** — sporePrint 101 tests, zero-C deps. Cutover after DNS NS switch. | 7-day TTFB parity |
-| **S4** | Auth | BearDog BTSP enforced | OAuth2/PAM (DISABLED) | **7-DAY GATE ENDING** (started Jun 2, ends Jun 9 — review pending today) | 7-day p95 < 50ms |
+| **S4** | Auth | BearDog BTSP enforced | OAuth2/PAM (DISABLED) | **7-DAY GATE COMPLETE** (started Jun 2, ended Jun 9). BTSP production mode LIVE on grapheneGate. Review: PASS. | 7-day p95 < 50ms |
 
-**Remaining**: S4 gate ending Jun 9 — review pending today. If PASS → S4 GRADUATED, all 4 shadows sovereign. DNS NS already cutover (Jun 4). S1 graduation (Cloudflare removal from outer membrane) follows.
+**S4 GRADUATED** (Jun 9). All 4 sovereignty shadows are now sovereign on the inner membrane. DNS NS cutover complete (Jun 4). S1 graduation (Cloudflare removal from outer membrane) is the next sovereignty evolution.
 
 ### cellMembrane (inner membrane)
 
@@ -247,9 +248,9 @@ Tier 2+ large-dataset science, not a deployment blocker.
 3. ~~Springs declare gates, deploy cells, cut primordial patterns~~ **DONE** (4/4 responding springs confirmed)
 4. ~~Verify cross-gate `discovery.peers`~~ **COMPLETE** (Wave 92) — eastGate ↔ strandGate bidirectional, peer_count:1, sub-ms
 5. ~~Cross-gate `capability.call` smoke test~~ **COMPLETE** (Wave 92) — routes through mesh, local resolution takes precedence
-6. Cross-subnet routing for southGate (192.168.4.x) — requires network config or TURN relay
+6. ~~Cross-subnet routing for southGate (192.168.4.x)~~ **VALIDATED** (Wave 107) — Eero bridge, 4.7ms, mesh.init works natively
 7. westGate (INCOMING — Nest Atomic cold storage), northGate (Node Atomic) — hardware gated
-8. Plasmodium collective validation (3+ gates meshed via live `capability.call`) — needs 3rd gate
+8. ~~Plasmodium collective validation (3+ gates meshed via live `capability.call`)~~ **DONE** (Wave 107) — 4-gate collective, 19/22 capability domains resolved on southGate
 
 ### Deployment Matrix (primalSpring)
 
@@ -282,13 +283,13 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Songbird peer seeding (`SONGBIRD_PEERS`) | **SHIPPED** — Wave 49, both launchers, CLI + env + RPC |
 | Songbird `mesh.init` + `bootstrap_peers` | **WIRED** — Wave 49, Songbird team confirmed functional |
 | Cross-gate `discovery.peers` verification | **COMPLETE** (Wave 92) — bidirectional, both gates report peer_count:1, quality:1.0 |
-| Cross-subnet mesh (southGate ↔ eastGate) | **BLOCKED** — different subnets, needs routing or TURN relay |
-| Plasmodium collective status | **3/3+ OPERATIONAL** — eastGate↔golgiBody(VPS) mesh LIVE (117min+). strandGate LAN re-enrollment VALIDATED (Wave 106 ACK, 2 peers, quality 1.0). eastGate federation port 7700 NOW LISTENING. ironGate + flockGate should unblock on next power-on. songBird mesh persistence SHIPPED (peers.toml + auto-reconnect). |
-| biomeOS graph.deploy orchestration | **WIRED** (Wave 99) — `nucleus-deploy --graph-deploy` calls `composition.deploy`. biomeOS v4.14 (LocalTrusted) rebuilt. eastGate revalidation pending. |
-| Full NUCLEUS 13/13 IPC-live | **COMPLETE** (Wave 98) — 12/12 liveness, 12/12 readiness. coralReef capabilities.list shipped (12/12 with depot rebuild). |
-| Pixel 8 / grapheneGate | **9/13 RUNNING** (Wave 106) — SELinux UDS adaptation shipped: skunkbat (--no-uds), toadstool (server mode), barracuda (--no-unix) added. 4 remaining (coralreef, nestgate, biomeOS, petaltongue) need upstream TCP-only graceful degradation. NDK blocked on bearDog StrongBox (future phase). |
+| Cross-subnet mesh (southGate ↔ eastGate) | **VALIDATED** (Wave 107) — 192.168.4.29↔192.168.1.144 via Eero bridge, 4.7ms, 2 direct peers, 13/13 alive, 19/22 capabilities |
+| Plasmodium collective status | **4-GATE COLLECTIVE LIVE** (Wave 107) — eastGate↔golgiBody↔ironGate+southGate. Deterministic deployment codified (gate.bootstrap 6/6). Mesh persistence SHIPPED. NUCLEUS supervision SHIPPED. |
+| biomeOS graph.deploy orchestration | **VALIDATED** (Wave 105) — `composition.deploy` accepted, graph.status 13 phases, LocalTrusted. biomeOS v4.18 (TCP fallback + supervision). |
+| Full NUCLEUS 13/13 IPC-live | **COMPLETE** (Wave 98+) — eastGate 23 JSON-RPC + 3 tarpc. golgiBody 13/13. ironGate 12/13. southGate 13/13. |
+| Pixel 8 / grapheneGate | **13/13 TCP FALLBACK ADOPTED** (Wave 107) — all primals shipped `bind_transport()`. Awaiting aarch64 rebuild + Pixel 8 redeploy. NDK blocked on bearDog StrongBox (future). |
 | benchScale IPC compliance | **OPERATIONAL** (Wave 99) — validates liveness/readiness/capabilities across live NUCLEUS |
-| flockGate WAN deployment | **4/5 PASS** (Wave 105) — WAN fetch + NUCLEUS launch + mesh.init + health all OK. BLOCKED on VPS songbird relay (no songbird on VPS:7700). |
+| flockGate WAN deployment | **4/5 PASS** (Wave 105) — WAN fetch + NUCLEUS launch + mesh.init + health OK. VPS depot refreshed (songbird + biomeOS rebuilt). Awaiting flockGate power-on for 5/5. |
 
 ### Wave 49 Ecosystem Issues (post-tightening re-audit, May 25)
 
@@ -331,8 +332,8 @@ fossilRecord) — see `fossilRecord/` for detail.
 | CM-VPS-DEPOT-SYNC | cellMembrane | **P2** | golgiBody inner→outer membrane binary flow for WAN depot. |
 | ~~CM-CHECKSUM-MULTI-TARGET~~ | cellMembrane | ~~P2~~ | **RESOLVED** (Wave 105) — read-modify-write for multi-target checksums.toml shipped (commit 3a1900b). |
 | ~~CM-DEPOT-DIVERGENCE~~ | eastGate | ~~P2~~ | **RESOLVED** (Wave 105c) — was self-inflicted: local rebuilds violated post-primordial standard. Fixed by re-fetching 13/13 from VPS. Standard now enforced. |
-| Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
-| grapheneGate UDS adaptation | primalSpring (parallel) + upstream | **P2** | 4 primals need TCP-only graceful degradation. **9/13 running** (Wave 106 SELinux adaptation). NDK blocked on bearDog StrongBox (future). |
+| ~~Cross-subnet routing (southGate ↔ eastGate)~~ | infra/network | ~~MEDIUM~~ | **VALIDATED** (Wave 107) — Eero bridge works natively, 4.7ms, no TURN needed |
+| ~~grapheneGate UDS adaptation~~ | primalSpring (parallel) + upstream | ~~P2~~ | **ALL ADOPTED** (Wave 107) — all 13 primals shipped `bind_transport()`. Awaiting aarch64 rebuild + redeploy. |
 | ~~aarch64 cross-compilation~~ | cellMembrane | ~~P2~~ | **COMPLETE** (Wave 105) — 14/14 aarch64-musl built, zero C-dep violations. NOTE: sweep overwrote x86_64 checksums (CM-CHECKSUM-MULTI-TARGET). |
 | ~~ironGate mesh enrollment~~ | ironGate + cellMembrane | ~~P2~~ | **VALIDATED** (Wave 106) — 3rd mesh node. gate.bootstrap 6/6 PASS, 12/13 alive, VPS relay mesh. |
 | Windows ecoBin (x86_64-pc-windows-msvc) | future | **LOW** | Named pipes IPC, MSVC target. Design phase. |
@@ -426,20 +427,18 @@ All P1 deployment blockers RESOLVED.
 All self-knowledge violations eliminated (barracuda, rhizoCrypt removed sourdough-core dep).
 `sourdough validate transport` + `sourdough validate depot` auditing tools shipped.
 
-Criteria 1 sovereignty: S2 GRADUATED. S4 7-day gate ENDING Jun 9 (review pending today).
+Criteria 1 sovereignty: **S1-S4 ALL GRADUATED** on inner membrane. S4 7-day gate PASSED (Jun 9).
 S1 inner membrane TLS LIVE (Caddy + LE on `primal.eco`). S3 VPS READY, 5/5 Caddy endpoints LIVE.
-If S4 PASS → all 4 sovereignty shadows graduated on inner membrane.
-Criteria 2 mesh: **MESH LIVE** (Wave 101). eastGate↔strandGate bidirectional, 17h+ stable.
-SB-TLS-LAN-01 + SB-SECURITY-URL-01 RESOLVED. 3rd gate (ironGate) needs federation port activation.
-Criteria 3: peptidoglycan FORMALIZED (ironGate ACK). Depot 14/14 fresh (x86_64-musl).
-cellMembrane depot.rs module operational. Build-carrying cascades delivered.
-Criteria 4: flockGate cascade operational. **WAN depot SHIPPED** (Wave 105) — `plasmid.fetch --source wan`
-+ `caddy.depot.provision`. Production deployment and end-to-end validation pending.
+Criteria 2 mesh: **4-GATE COLLECTIVE LIVE** (Wave 107). eastGate↔golgiBody↔ironGate+southGate.
+southGate cross-subnet validated (4.7ms, 13/13 alive, distributed science pipeline).
+Criteria 3: peptidoglycan FORMALIZED. Depot 13/13 verified x86_64-musl. Deterministic deployment
+codified (gate.bootstrap 6/6 invariants). gate.status + --dry-run shipped.
+Criteria 4: WAN depot SHIPPED + REFRESHED (songbird + biomeOS rebuilt). flockGate 4/5 PASS,
+awaiting power-on for 5/5.
 Criteria 5: `primal.eco` + `nestgate.io` DNS PROPAGATED + TLS LIVE (Jun 4). `primals.eco` stays
 Cloudflare (outer membrane per diderm model). DNSSEC enabled on both sovereign domains.
-Criteria 6: cross-membrane validation scenario shipped (61 scenarios). Peptidoglycan self-refresh
-timer deployed. benchScale IPC compliance sweep validates 12/12 primals. biomeOS v4.14 rebuilt
-(LocalTrusted). Zero commercial services in inner membrane data path.
+Criteria 6: cross-membrane validation scenario shipped. Peptidoglycan self-refresh timer deployed.
+biomeOS v4.18 (supervision + TCP fallback). Zero commercial services in inner membrane data path.
 
 **Critical path to stadial entry**:
 1. ~~VPS deploy refresh~~ **DONE** — cellMembrane plasmid-pipeline.timer (zero-touch, 30-min cycle)
@@ -448,7 +447,7 @@ timer deployed. benchScale IPC compliance sweep validates 12/12 primals. biomeOS
 4. ~~Fix biomeOS binary search priority (BIO-SEARCH-01)~~ **RESOLVED** (Wave 88) — v4.10 depot-first
 5. ~~eastGate Songbird federation port 7700 (SB-FEDERATION-01)~~ **RESOLVED** (Wave 89) — songbird + biomeOS fix
 6. ~~mesh.init 2-gate proof~~ **COMPLETE** (Wave 92) — bidirectional, all 4 criteria, sub-ms latency
-7. S4 auth gate review (~Jun 9) — **IN PROGRESS** (autonomous, ends ~Jun 9)
+7. ~~S4 auth gate review (~Jun 9)~~ — **PASSED** (Jun 9, S4 GRADUATED)
 8. Transport injection evolution (1/14 primals — P2, non-blocking for stadial)
 9. projectNUCLEUS consumption surface validated (specs/DOWNSTREAM_CONSUMPTION.md published)
 10. ~~VPS-BUILD-01 pipeline cargo build on golgiBody~~ **RESOLVED** (Wave 92) — refresh-only
@@ -456,7 +455,7 @@ timer deployed. benchScale IPC compliance sweep validates 12/12 primals. biomeOS
 12. ~~barraCuda build break~~ **RESOLVED** (Wave 93) — SimpleMlp methods restored, depot 13/13
 
 **Stadial entry is gated only on**:
-- S4 auth gate review completion (Jun 9, ending)
+- ~~S4 auth gate review completion~~ — **PASSED** (Jun 9, S4 GRADUATED)
 - ~~3rd gate mesh enrollment~~ — **DONE** (Wave 106, ironGate 3rd node. Wave 107, southGate 4th node)
 - ~~WAN covalent validation~~ — VPS depot refreshed (songbird+biomeOS). flockGate 4/5 PASS, awaiting power-on for 5/5
 - ~~biomeOS orchestration revalidation~~ — **VALIDATED** (Wave 105, graph.deploy 13-phase, LocalTrusted)

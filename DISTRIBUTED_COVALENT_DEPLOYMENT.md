@@ -2,7 +2,7 @@
 
 **Status**: Architecture + implementation guide  
 **Scope**: Multi-household compute via covalent-bonded gates  
-**Last updated**: 2026-06-09 (Wave 105: Mesh LIVE eastGate↔strandGate. WAN depot SHIPPED — `plasmid.fetch --source wan`. flockGate validation pending.)
+**Last updated**: 2026-06-10 (Wave 107: **4-gate mesh collective LIVE** — eastGate↔golgiBody↔ironGate+southGate. southGate cross-subnet VALIDATED (192.168.4.29/22, 4.7ms, 13/13 alive, distributed science pipeline). Deterministic deployment codified (gate.bootstrap). WAN depot refreshed. flockGate 4/5 PASS, awaiting power-on.)
 
 ---
 

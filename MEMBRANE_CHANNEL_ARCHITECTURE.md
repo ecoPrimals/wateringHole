@@ -2,7 +2,7 @@
 
 # Membrane Channel Architecture — External Surface Design
 
-**Date**: May 13, 2026 (updated Jun 9, 2026 — Wave 103: Channel 1 DNS LIVE)
+**Date**: May 13, 2026 (updated Jun 10, 2026 — Wave 107: All 3 channels LIVE. 4-gate collective. S1-S4 GRADUATED.)
 **Status**: Active
 **Authority**: WateringHole Consensus
 
