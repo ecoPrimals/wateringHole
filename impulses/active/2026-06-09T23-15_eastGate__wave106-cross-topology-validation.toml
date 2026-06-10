@@ -55,7 +55,8 @@ deterministic_deployment = """CODIFIED + EVOLVED (Wave 107):
 - BearDog ACME prep: TlsProvider type + caddy.tls.external/revert wired (awaiting BearDog ACME client)
 - depot_sync evolved: BLAKE3 diff (skip current), atomic copy (.new+mv), checksums verification
 - Mobile golgi fleet: GateMobility type (Fixed|Mobile), --mobile bootstrap, systemd templates,
-  NM dispatcher hook (auto mesh.init on network-up), provision-golgi.sh one-shot script"""
+  NM dispatcher hook (auto mesh.init on network-up), provision-golgi.sh one-shot script
+- NDK cross-compile: aarch64-linux-android pipeline, linker auto-detection, plasmid.ndk.check"""
 
 # ──────────────────────────────────────────────────────────────
 # VALIDATION MATRIX — what needs to be proven on each topology
@@ -317,6 +318,8 @@ WAVE 107 — cellMembrane deployment hardening:
   ✅ provision-golgi.sh → one-shot NUC provisioning (WAN fetch + systemd + mesh + NUCLEUS)
   ✅ Root docs updated → README, GLACIAL_SHIFT_TRACKER, VPS_STATE, RUNBOOKS → Wave 107 stadial-ready
   ✅ capability_registry.toml → gate_bootstrap + gate_status capabilities added
+  ✅ NDK cross-compile pipeline → aarch64-linux-android target, NDK linker auto-detection,
+    plasmid.ndk.check command, .cargo/config.toml, NDK-aware strip (019b90f)
 
 WAVE 106 (all resolved):
   ✅ strandGate → LAN x86_64 re-enrollment PROVEN
