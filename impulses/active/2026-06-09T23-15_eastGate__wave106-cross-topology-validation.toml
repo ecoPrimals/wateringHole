@@ -30,10 +30,11 @@ Companion: AAR_WAVE105_COMPREHENSIVE_CROSS_DEPLOYMENT_JUN09_2026.md (lessons lea
 [current_state]
 p1_blockers = "ZERO. Ecosystem in pure validation mode — push to stadial."
 depot_authority = "VPS (peptidoglycan). Post-primordial standard ENFORCED."
-mesh = """LIVE — 3-gate collective: eastGate ↔ golgiBody(VPS) ↔ ironGate.
+mesh = """LIVE — 4-gate collective: eastGate ↔ golgiBody(VPS) ↔ ironGate + southGate.
 eastGate federation port 7700 LISTENING (bound *, accepting LAN + WAN).
 ironGate: VALIDATED as 3rd mesh node (mesh.init to VPS relay, 1 reachable peer, direct path).
 strandGate: VALIDATED LAN re-enrollment (Wave 106 ACK — mesh.init to eastGate + VPS, 2 peers, quality 1.0).
+southGate: VALIDATED cross-subnet (Wave 107 — 192.168.4.29/22, Eero bridge, 4.7ms to eastGate, 2 direct peers, 13/13 alive, 19/22 capabilities resolved, distributed science pipeline exercised).
 songBird: mesh persistence SHIPPED (peers.toml + auto-reconnect). Federation port bind fix SHIPPED.
 cellMembrane: gate.bootstrap + gate.status SHIPPED. --dry-run SHIPPED. VPS songbird + biomeOS depot refreshed."""
 transport = "11/11 non-exempt COMPLETE."
@@ -57,8 +58,8 @@ deterministic_deployment = """CODIFIED + EVOLVED (Wave 107):
 
 [validation.lan_x86_64]
 description = "LAN gates (eastGate, strandGate, ironGate, southGate) — x86_64-musl over UDS"
-proven_on = ["eastGate (13/13 alive, VPS-fetched)", "golgiBody VPS (13/13 alive)", "strandGate (Wave 106 ACK — LAN re-enrollment PROVEN, mesh rejoin after extended offline)", "ironGate (3rd mesh node VALIDATED — VPS relay, 13 fetched, 12/13 started)"]
-needs_validation = ["southGate (cross-subnet — needs power-on)"]
+proven_on = ["eastGate (13/13 alive, VPS-fetched)", "golgiBody VPS (13/13 alive)", "strandGate (Wave 106 ACK — LAN re-enrollment PROVEN, mesh rejoin after extended offline)", "ironGate (3rd mesh node VALIDATED — VPS relay, 13 fetched, 12/13 started)", "southGate (Wave 107 — CROSS-SUBNET VALIDATED, 13/13 alive, 4.7ms to eastGate via Eero bridge, 26/26 registered, 19/22 capability domains)"]
+needs_validation = []
 gate_playbook = """When gate comes online:
   1. ssh <gate> 'curl -O https://membrane.primals.eco/depot/x86_64-unknown-linux-musl/{primal}' × 13
   2. chmod +x all binaries
@@ -325,4 +326,43 @@ gate.bootstrap + gate.status + cascade auto-fetch + NUCLEUS supervision + atomic
 = zero manual steps, self-healing gates, divergence detection pre-push.
 
 Companion: AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
+"""
+
+[ack.southGate]
+date = "2026-06-10"
+status = "VALIDATED"
+detail = """
+southGate cross-subnet mesh validation COMPLETE (Wave 107, 2026-06-10 12:20 UTC):
+
+TOPOLOGY:
+- southGate 192.168.4.29/22 (cross-subnet via Eero WiFi bridge, adjacent property)
+- eastGate 192.168.1.144 (LAN peer, 4.7ms TCP connect)
+- golgiBody 157.230.3.183 (VPS relay, 33ms TCP connect)
+- Mesh: 2 direct peers, relay_enabled, all_healthy=true
+
+NUCLEUS:
+- 13/13 primals ALIVE on UDS, all responding to health.liveness
+- Songbird federation :7700 on 0.0.0.0, mesh.init to eastGate + golgiBody
+- 26/26 primal sockets registered with songbird (ipc.register)
+- 19/22 capability domains resolvable via capability.resolve → structured TransportEndpoint
+
+CAPABILITY MESH CONFIRMED:
+- capability.resolve returns {"transport":"uds","path":"..."} — wetSpring V199 wire format
+- ipc.resolve returns mesh_relay TransportEndpoint with peer_id — topology-aware
+- Domains: security, science, compute, orchestration, grammar, ai, gpu, shader,
+  ledger, dag, crypto, btsp, biology, analytics, tower, rendering, nlp, provenance, storage
+
+DISTRIBUTED SCIENCE PIPELINE (12 steps, 11.2s):
+- Nautilus evolutionary compute: create → train → observe → export
+- Ecology: Shannon H'=2.10, Simpson D=0.85, Bray-Curtis=0.87
+- LinAlg: SVD (σ₁=40.38), eigenvalues, QR factorization
+- ML: Self-attention (d_k=6, d_v=4), perceptron training
+- Stats: ANOVA F=58.6 p=4.4e-10, Pearson r=0.90
+- Barracuda shotgun: 47/76 methods succeeded, 0 unknown methods (27 param-format only)
+
+WETSPRING:
+- V199: 2,100/2,100 tests, 0 clippy warnings, 51 niche capabilities, 46 dispatch methods
+- TransportEndpoint + resolve_transport_via_songbird() confirmed working with live mesh
+
+AAR: handoffs/SOUTHGATE_WAVE107_MESH_VALIDATION_AAR_JUN10_2026.md
 """
