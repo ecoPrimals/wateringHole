@@ -38,7 +38,7 @@ songBird: mesh persistence SHIPPED (peers.toml + auto-reconnect). Federation por
 cellMembrane: gate.bootstrap SHIPPED + VALIDATED on strandGate + ironGate."""
 transport = "11/11 non-exempt COMPLETE."
 depot_x86 = "14/14 BLAKE3 VERIFIED (VPS authority, all gates fetch)."
-depot_aarch64 = "14/14 BUILT. 9/13 RUNNING on grapheneGate (Pixel 8, SELinux UDS adaptation shipped). 4 remaining need TCP-only graceful degradation."
+depot_aarch64 = "14/14 BUILT. 9/13 RUNNING on grapheneGate (Pixel 8). TCP-only fallback infrastructure SHIPPED (primalSpring ipc::server_bind). 4 remaining primals can adopt bind_transport() for graceful UDS→TCP degradation."
 wan_depot = "13/13 serving HTTP 200 from membrane.primals.eco/depot/."
 sovereignty = "S1-S3 GRADUATED. S4 ending today."
 strandgate = "Wave 106 ACK: LAN x86_64 re-enrollment PROVEN. Bin target debt RESOLVED (22 alias conflicts fixed, 1089 tests, 0 failures)."
@@ -77,8 +77,9 @@ needs_validation = ["3 remaining: coralreef, nestgate, petaltongue — exit fata
 gate_playbook = """Remaining work (primalSpring parallel team):
   1. ✅ BIOMEOS_SOCKET_DIR env var shipped
   2. ✅ deploy_pixel.sh SELinux adaptation for 9/13 primals
-  3. 4 remaining primals need upstream TCP-only graceful degradation (not deploy_pixel.sh fixable)
-  4. Redeploy via deploy_pixel.sh, verify 13/13 alive"""
+  3. ✅ TCP-only fallback infrastructure shipped (ipc::server_bind + PRIMAL_BIND_MODE=fallback)
+  4. Upstream adoption: coralreef, nestgate, biomeOS, petaltongue adopt bind_transport()
+  5. Redeploy via deploy_pixel.sh, verify 13/13 alive"""
 
 [validation.vps_nucleus]
 description = "VPS NUCLEUS (golgiBody inner membrane) — x86_64 depot authority"
@@ -182,7 +183,13 @@ Remaining 3 need upstream code changes to gracefully degrade to TCP-only when UD
 action = """1. ✅ BIOMEOS_SOCKET_DIR + XDG_RUNTIME_DIR + per-primal overrides SHIPPED
 2. ✅ 9/13 running via deploy_pixel.sh SELinux adaptation
 3. ✅ biomeOS TCP-only fallback SHIPPED (v4.18) — 10/13
-4. Upstream: coralreef, nestgate, petaltongue need TCP-only fallback mode
+4. ✅ TCP-only fallback infrastructure SHIPPED (primalSpring ipc::server_bind module)
+   - bind_transport(slug, BindMode::from_env()) — canonical server-side bind
+   - PRIMAL_BIND_MODE env var (uds_only/tcp_only/fallback)
+   - deploy_pixel.sh exports PRIMAL_BIND_MODE=fallback
+   - primalSpring own server binary uses bind_transport as reference impl
+   - s_tcp_fallback validation scenario (53rd, Transport track)
+5. Upstream adoption: coralreef, nestgate, petaltongue adopt bind_transport()
 5. Target: 13/13 alive on Pixel 8"""
 
 # --- P2: Tooling (blocks automation) ---
@@ -277,11 +284,13 @@ VALIDATED (this wave — massive parallel evolution):
   ✅ VPS mesh peer constant → CENTRALIZED (zero hardcoded IPs in production)
   ✅ All #[allow] eliminated → zero compromise attributes in production
   ✅ Deterministic deployment standard → CODIFIED in AAR
+  ✅ TCP-only fallback infrastructure → SHIPPED (ipc::server_bind, PRIMAL_BIND_MODE, s_tcp_fallback scenario)
 
-SHIPPED SINCE FRAGO CREATION (biomeOS v4.17 + v4.18):
+SHIPPED SINCE FRAGO CREATION (biomeOS v4.17 + v4.18 + primalSpring):
   ✅ NUCLEUS supervision → SHIPPED (v4.17, a4a59245) — LifecycleManager auto-restarts crashed primals
   ✅ biomeOS TCP-only fallback → SHIPPED (v4.18, b8ddf351) — graceful UDS→TCP degradation on SELinux
   ✅ --tcp-only flag unblocked in release builds (was incorrectly blocked since v3.94)
+  ✅ primalSpring TCP-only fallback infrastructure → SHIPPED (ipc::server_bind, PRIMAL_BIND_MODE)
 
 REMAINING (2 P2 — zero P1):
   1. flockGate → WAN e2e 5/5 (needs power-on, VPS relay LIVE)
