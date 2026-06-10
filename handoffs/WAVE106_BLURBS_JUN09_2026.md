@@ -1,179 +1,114 @@
-# Wave 106 Blurbs — Deterministic Deployment Achieved, 3-Gate Collective LIVE
+# Wave 106 Blurb — Remaining Work by Team
 
 **Date**: 2026-06-10
 **From**: eastGate overwatch
 
-**What happened this wave**: Comprehensive AAR published (17 issues, 5 categories) → massive parallel team response → strandGate LAN re-enrollment VALIDATED → **ironGate VALIDATED as 3rd mesh node** (gate.bootstrap 6/6 PASS, 12/13 alive) → **cellMembrane codified Deterministic Deployment Standard** → **flockGate published guideStone-grade WAN deployment analysis** (5 gaps → post-stadial evolution path).
-
-**The shift**: The deployment pipeline is **deterministic end-to-end**. `gate.bootstrap` goes from powered-off gate → fully operational mesh participant in a single command. We now have a **3-gate mesh collective** (eastGate↔golgiBody↔ironGate). The conversation has moved from "does it work?" to "how do we make it guideStone-grade?"
+**State**: Deterministic deployment is achieved. 3-gate mesh collective LIVE (eastGate↔golgiBody↔ironGate). `gate.bootstrap` goes from zero → fully operational in one command. The pipeline is end-to-end. What follows is the remaining work to reach stadial and autonomous operation.
 
 ---
 
-## To: cellMembrane
+## To: biomeOS — NUCLEUS Supervision (sole P1)
 
-### Shipped This Wave (thank you)
+NUCLEUS primals run as bare processes. They die silently with no restart, no detection, no self-repair. This happened 3+ times during Wave 105. Manual operator intervention every time.
 
-1. **gate.bootstrap** (commit `b6c9fa0`) — one-command gate enrollment. strandGate used it.
-2. **plasmid.fetch VPS path fix** (commit `b6c9fa0`) — path doubling bug fixed.
-3. **cascade auto-fetch** (commit `b6c9fa0`) — post-cascade hook triggers WAN fetch when checksums.toml changes.
-
-Plus everything from Wave 104: WAN depot, cascade conflict auto-resolve, harvest atomic rename, aarch64 sweep, multi-target checksums, VPS depot sync.
-
-### Also Shipped (ironGate session)
-
-4. **ironGate 3rd mesh node** (commit `e482216`) — VPS mesh peer constant centralized. ironGate validated with gate.bootstrap: 13 downloaded, 13 verified, 12/13 started, VPS relay mesh.
-5. **Deterministic Deployment Standard** (AAR `WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md`) — codified the 6 invariants that gate.bootstrap satisfies. Zero `#[allow]`, zero `unwrap()`, zero hardcoded IPs.
-
-### Remaining
-
-Development is COMPLETE. The only cellMembrane item is operational:
-- VPS depot rebuild (songbird binary is stale on outer membrane — flockGate is blocked on this)
-- Future: serve `checksums.toml` from WAN endpoint for zero-git verification
-
----
-
-## To: songBird
-
-### Shipped This Wave (both P1 items from AAR — same-day turnaround)
-
-1. **Mesh persistence** (commit `1df7ef90`) — peers persist to `~/.local/share/songbird/peers.toml`. Auto-reconnect on startup via `spawn_mesh_seed`. `mesh.init` appends to persistent store. `SONGBIRD_DATA_DIR` override available.
-2. **Federation port fix** (commit `1df7ef90`) — `SONGBIRD_FEDERATION_PORT` now auto-promotes bind to `0.0.0.0`. eastGate:7700 is now accepting incoming mesh connections from LAN + WAN.
-
-### Remaining
-
-**mDNS/LAN auto-discovery** — already wired in discovery layer per your ACK. Future phase. No blockers from songBird for stadial.
-
----
-
-## To: biomeOS
-
-### NUCLEUS Supervision (P1 — blocks autonomous operation)
-
-NUCLEUS primals died silently 3+ times during Wave 105. No watchdog, no restart, no detection. Manual operator intervention each time.
-
-**Action**: Implement one of:
-- `lifecycle.watchdog` method — polls `health.liveness` every 30s, restarts failures from depot
+**Action** — implement one of:
+- `lifecycle.watchdog` — poll `health.liveness` every 30s, restart failures from depot binaries
 - systemd user unit generation — `composition.deploy` creates per-primal `.service` files
-- `--supervised` mode in nucleus-deploy that registers with systemd
+- `--supervised` mode in `nucleus-deploy` that registers with systemd
 
-This is the single biggest gap between "deployment works" and "deployment is autonomous."
+**Why P1**: This is the single gap between "deployment works" and "deployment is autonomous." Every other layer is shipped. Once supervision lands, gates self-heal.
 
----
-
-## To: primalSpring (parallel team)
-
-### Shipped This Wave
-
-grapheneGate pushed to **9/13** (commit `84a500e`): SELinux UDS adaptation for skunkbat (`--no-uds`), toadstool (server mode), barracuda (`--no-unix`). `BIOMEOS_SOCKET_DIR`, `XDG_RUNTIME_DIR`, per-primal socket overrides all shipped in `deploy_pixel.sh`.
-
-### Remaining: 4 Primals Need Upstream TCP-Only Fallback
-
-coralreef, nestgate, biomeOS, petaltongue exit fatally on UDS bind SELinux denial. These need **upstream code changes** in each primal — the deploy script can't work around a fatal exit. Each primal needs to gracefully degrade to TCP-only when UDS bind is denied by SELinux.
+**Integration point**: `gate.bootstrap` can install the watchdog as its 7th phase once available.
 
 ---
 
-## To: all gates (when you come online)
+## To: cellMembrane — VPS Depot Rebuild (operational)
 
-### Gate Enrollment Playbook
+All development items are **COMPLETE**. One operational action:
 
-Full manual procedure is in the FRAGO (`wave106-cross-topology-validation.toml`). Short version:
+**Action**: Rebuild songbird on peptidoglycan and push to outer membrane depot. The VPS depot still serves songbird v0.2.1 (pre-persistence, pre-federation-port-fix). flockGate's WAN e2e validation is blocked on this — the fetched songbird cannot complete a bidirectional mesh handshake.
 
-```bash
-# Fetch from VPS (the sole authority)
-for p in beardog songbird biomeos nestgate coralreef sweetgrass squirrel \
-         loamspine rhizocrypt skunkbat petaltongue barracuda toadstool; do
-  curl -o primals/x86_64-unknown-linux-musl/$p \
-    https://membrane.primals.eco/depot/x86_64-unknown-linux-musl/$p
-  chmod +x primals/x86_64-unknown-linux-musl/$p
-done
-
-# Start songbird, mesh to VPS
-SONGBIRD_FEDERATION_PORT=7700 songbird server --socket /run/user/$(id -u)/biomeos/songbird.sock &
-echo '{"jsonrpc":"2.0","method":"mesh.init","params":{"node_id":"<YOUR_GATE>","peers":["157.230.3.183:7700"]},"id":1}' | \
-  socat - UNIX-CONNECT:/run/user/$(id -u)/biomeos/songbird.sock
-
-# Start NUCLEUS, verify
-for p in beardog biomeos nestgate ...; do primals/x86_64-unknown-linux-musl/$p server &; done
-```
-
-DO NOT `cargo build --release` for deployment. VPS is the sole depot authority.
+**Post-stadial** (from flockGate's guideStone analysis):
+- Serve `checksums.toml` from WAN depot endpoint for zero-git verification
+- Atomic depot rebuild + checksums.toml publication (currently decoupled)
+- `--dry-run` for `gate.bootstrap` (pre-validation without side effects)
+- `gate.status` command for already-bootstrapped gates
 
 ---
 
-## What Each Gate Validates
+## To: primalSpring — grapheneGate TCP-Only Fallback (4 primals)
 
-| Gate | Topology | What It Proves |
-|------|----------|----------------|
-| strandGate | LAN x86_64 re-enrollment | gate.bootstrap works, mesh rejoin after extended offline |
-| ironGate | 3rd mesh node via VPS relay | Collective without direct peer (VPS-mediated mesh) |
-| flockGate | WAN e2e 5/5 | Remote covalent over WAN → stadial criterion 4 |
-| grapheneGate | aarch64 13/13 | Cross-arch + Android adaptation |
-| southGate | Cross-subnet mesh | TURN relay or router-routed federation |
+9/13 primals running on Pixel 8. 4 exit fatally on UDS bind SELinux denial:
 
----
+| Primal | Failure | What's Needed |
+|--------|---------|---------------|
+| coralreef | `EACCES` on UDS bind | TCP-only fallback |
+| nestgate | `EACCES` on UDS bind | TCP-only fallback |
+| biomeOS | `EACCES` on UDS bind | TCP-only fallback |
+| petaltongue | `EACCES` on UDS bind | TCP-only fallback |
 
-## Reshaped Priority Map (Post Wave 106 Evolution)
+**Pattern**: `bind_uds()` → `Err(EACCES)` → `fallback_to_tcp(localhost:PORT)`
 
-```
-P1 (sole remaining — blocks autonomous operation):
-  biomeOS → NUCLEUS supervision (watchdog or systemd units)
-             Only P1 left. Everything else is shipped or operational.
-
-P2 (validate as gates come online):
-  flockGate → WAN e2e 5/5 (blocked: VPS depot has stale songbird, needs rebuild)
-  primalSpring → grapheneGate 13/13 (4 primals need upstream TCP-only fallback)
-  flockGate → guideStone-grade gaps (5 items — depot integrity, manifest, tolerances, WAN verify, versioning)
-
-SHIPPED THIS WAVE (was P1/P2, now DONE):
-  ✅ ironGate → 3rd mesh node VALIDATED (gate.bootstrap 6/6, VPS relay, 12/13 alive)
-  ✅ strandGate → LAN re-enrollment VALIDATED (ACK, 2 peers, quality 1.0)
-  ✅ cellMembrane → gate.bootstrap SHIPPED + VALIDATED on strandGate + ironGate
-  ✅ cellMembrane → Deterministic Deployment Standard CODIFIED (6 invariants)
-  ✅ cellMembrane → plasmid.fetch VPS path fix + cascade auto-fetch
-  ✅ songBird → mesh persistence + federation port fix (both P1 items)
-  ✅ eastGate → federation port 7700 LISTENING (bound *, LAN + WAN)
-  ✅ primalSpring → grapheneGate 9/13 (SELinux adaptation)
-
-LOW (future):
-  sourDough → validate depot segfault
-  bearDog → StrongBox NDK (android target)
-  future → Windows ecoBin, wasm32-wasi
-```
+The deploy script cannot work around a fatal exit — each primal needs an upstream code change to gracefully degrade. `BIOMEOS_SOCKET_DIR` and `TRANSPORT_ENDPOINT` env vars are already shipped.
 
 ---
 
-## Ecosystem Snapshot (2026-06-10 02:10 UTC)
+## To: songBird — Clear (future: mDNS)
+
+Both P1 items shipped (mesh persistence + federation port fix). No blockers for stadial.
+
+**Future**: mDNS/LAN auto-discovery (already wired in discovery layer). Low priority — VPS relay bootstrap is sufficient.
+
+---
+
+## To: flockGate — WAN e2e Completion (blocked on cellMembrane)
+
+4/5 stages PASS. Blocked on stale VPS songbird binary (see cellMembrane action above). Once rebuilt:
+1. Re-fetch songbird from VPS
+2. Restart songbird with federation
+3. Verify bidirectional mesh handshake
+4. 5/5 → stadial criterion 4 met
+
+**Post-stadial**: Your guideStone-grade analysis identified 5 evolution gaps — depot integrity chain, deployment manifest, health convergence tolerances, WAN verification gate, depot version tracking. These shape the post-stadial roadmap but don't block entry.
+
+---
+
+## To: all gates — Enrollment Playbook
+
+`gate.bootstrap` or manual procedure in FRAGO (`wave106-cross-topology-validation.toml`).
+
+**DO NOT** `cargo build --release` for deployment. VPS `plasmidBin` is the sole binary authority.
+
+| Gate | Status | Next Action |
+|------|--------|-------------|
+| eastGate | OPERATIONAL (23 RPC + 3 tarpc) | — |
+| golgiBody (VPS) | OPERATIONAL (13/13, mesh hub) | Rebuild songbird in depot |
+| ironGate | VALIDATED (3rd mesh node, 12/13) | — |
+| strandGate | VALIDATED (LAN re-enrollment) | Power-on when needed |
+| flockGate | 4/5 WAN e2e | Awaiting depot rebuild |
+| grapheneGate | 9/13 (Pixel 8) | Awaiting TCP-only fallback |
+| southGate | Unknown | Power-on + gate.bootstrap |
+
+---
+
+## Ecosystem Snapshot
 
 | Metric | Value |
 |--------|-------|
-| P1 blockers | **1** (NUCLEUS supervision — sole remaining) |
-| P2 remaining | 3 (flockGate WAN e2e, grapheneGate 4 primals, guideStone gaps) |
-| Cascade | **38/38 clean**, zero failures |
-| Mesh | **3-GATE COLLECTIVE** (eastGate↔golgiBody↔ironGate) |
-| Mesh persistence | **SHIPPED** (peers.toml + auto-reconnect) |
-| Federation port | **LISTENING** (eastGate:7700, bound *, LAN + WAN) |
-| Transport | 11/11 non-exempt COMPLETE |
-| Depot x86_64 | **13/13 BLAKE3 VERIFIED** (VPS authority) |
-| Depot aarch64 | 14/14 BUILT |
-| WAN depot | 13/13 serving (HTTP 200) |
-| gate.bootstrap | **SHIPPED + VALIDATED** on strandGate + ironGate |
-| Deterministic deploy | **CODIFIED** (6 invariants, zero manual steps) |
-| cascade auto-fetch | **SHIPPED** |
-| VPS NUCLEUS | **13/13 RUNNING** |
-| grapheneGate | **9/13 running** on Pixel 8 |
-| eastGate NUCLEUS | 23 JSON-RPC + 3 tarpc, stable |
-| ironGate | **VALIDATED** (3rd mesh node, 12/13 alive) |
-| strandGate | Wave 106 ACK (LAN re-enrollment PROVEN) |
-| Sovereignty | S1-S3 GRADUATED, S4 ending today |
-| cellMembrane | **Development COMPLETE** (all items shipped) |
-| songBird | **Both P1 items shipped** (persistence + federation) |
+| P1 remaining | **1** — NUCLEUS supervision (biomeOS) |
+| P2 remaining | **3** — VPS depot rebuild, grapheneGate 4 primals, flockGate WAN 5/5 |
+| Mesh | 3-gate collective (eastGate↔golgiBody↔ironGate) |
+| Depot | 13/13 x86_64 verified, 14/14 aarch64 built, 13/13 WAN serving |
+| Transport | 11/11 non-exempt complete |
+| Cascade | 38/38 clean |
+| Deterministic deploy | Codified — gate.bootstrap 6/6 invariants |
+| Sovereignty | S1-S3 graduated, S4 ending |
+
+---
 
 ## Reference
 
-- `AAR_WAVE105_COMPREHENSIVE_CROSS_DEPLOYMENT_JUN09_2026.md` — full AAR (17 issues, 5 categories)
-- `AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md` — Deterministic Deployment Standard
-- `wave106-flockgate-wan-deployment-aar.toml` — guideStone-grade WAN deployment analysis (5 gaps)
-- `wave106-cross-topology-validation.toml` — FRAGO (updated: ironGate RESOLVED, all shipped items tracked)
-- `wave106-ack-cross-topology-validated.toml` — strandGate ACK
-- `GLACIAL_SHIFT_READINESS.md` — updated to Wave 106 final (3-gate collective)
-- `ECOBIN_ARCHITECTURE_STANDARD.md` — plasmidBin submission rewritten for VPS-only
+- `wave106-cross-topology-validation.toml` — active FRAGO
+- `AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md` — deployment standard
+- `wave106-flockgate-wan-deployment-aar.toml` — guideStone-grade WAN analysis
+- `GLACIAL_SHIFT_READINESS.md` — ecosystem readiness (Wave 106 final)
