@@ -169,16 +169,22 @@ Mesh topology now: eastGate ↔ golgiBody(VPS) ↔ ironGate (3-gate collective)"
 
 [remaining.flockgate_wan_e2e]
 id = "FLOCKGATE-WAN-E2E"
-owner = "flockGate ops"
+owner = "flockGate ops + cellMembrane (VPS restart)"
 priority = "P2"
-description = "Complete flockGate WAN e2e — VPS songbird relay is now LIVE"
-why = """flockGate passed 4/5 WAN e2e stages. Was blocked on VPS songbird relay.
-golgiBody songbird:7700 is now LIVE and meshed with eastGate. flockGate should be
-able to mesh.init to VPS and reach the collective."""
-action = """When flockGate is online:
-1. mesh.init to 157.230.3.183:7700
-2. Verify discovery.peers shows eastGate transitively
-3. If PASS → 5/5 WAN e2e → stadial criterion 4 VALIDATED"""
+description = "4/5 PASS — flockGate side READY, VPS songbird process needs restart"
+why = """flockGate retried 2026-06-10T17:26 UTC. Results:
+- TCP to 157.230.3.183:7700: CONNECTED (32ms RTT)
+- mesh.init: {bootstrap_peers_added:1, initialized:true, node_id:flockGate}
+- mesh.peers after 67s: {reachable:true, latency_ms:null, last_seen_ms:67870}
+- Diagnosis: TCP port accepts connections but no mesh protocol handshake completes.
+  VPS songbird process is ALIVE but running the pre-federation-fix binary in memory.
+  The depot FILE was refreshed Jun 10 02:28 (BLAKE3 verified: 03775a3f...)
+  but the RUNNING PROCESS was never restarted."""
+action = """cellMembrane action on golgiBody VPS:
+  kill $(pgrep songbird)
+  SONGBIRD_FEDERATION_PORT=7700 /opt/ecoPrimals/plasmidBin/x86_64-unknown-linux-musl/songbird server --port 7700 --bind 0.0.0.0 --socket /run/user/1000/biomeos/songbird.sock &
+Once restarted, flockGate will re-send mesh.init (we are already running, port 7700 bound).
+Validate: latency_ms becomes non-null (expect 30-35ms) → 5/5 → stadial criterion 4."""
 
 [remaining.graphenegate_rebuild]
 id = "GRAPHENEGATE-REBUILD"
