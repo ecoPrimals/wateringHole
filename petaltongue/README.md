@@ -2,23 +2,23 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: May 25, 2026 (Wave 49 ecosystem tightening — showcase fossilized, `--family-id` accepted, stale deployment patterns cut, WASM crate evolved to 14 exports with dashboard/batch/Tufte/scene rendering)
+**Updated**: June 10, 2026 (Wave 107 — transport evolution complete, 4-gate mesh live, zero P1 blockers, 6,454+ tests)
 
 ---
 
 ## Integration Status
 
 petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
-- 6,321+ tests passing, 0 failures
+- 6,454+ tests passing, 0 failures
 - `#![forbid(unsafe_code)]` unconditional on all 18 crates + UniBin, zero C dependencies, zero `unsafe` blocks
 - Zero `todo!()`, `unimplemented!()`, `TODO`, `FIXME`, `HACK` markers
 - Zero `.unwrap()` in production code; one documented `.expect()` for SIGTERM registration
 - ~90% line coverage (llvm-cov) — threshold enforced via `llvm-cov.toml`
-- All files under 800 lines; largest is `visualization/mod.rs` at 795
+- All production files under 800 lines (smart domain refactoring)
 - UUI glossary module (`petal_tongue_core::uui_glossary`) — canonical terminology for modalities, user types, SAME DAVE
-- tarpc binary RPC (primary primal-to-primal, zero-copy `bytes::Bytes`)
-- JSON-RPC 2.0 over Unix sockets (secondary, local IPC and debugging)
-- HTTP fallback for browser/external clients
+- **Transport (Wave 100+)**: `TRANSPORT_ENDPOINT` env var accepted (sourDough canonical wire format). Supports UDS, TCP, mesh-relay. Supersedes CLI args when launcher-injected.
+- **UDS→TCP fallback**: `PRIMAL_BIND_MODE=fallback` enables automatic TCP fallback when UDS bind fails (Android/SELinux).
+- JSON-RPC 2.0 REQUIRED (UDS + TCP), tarpc MAY for Rust-to-Rust hot paths, HTTP for browser/external clients
 - Capability-based discovery — zero hardcoded primal names in production, 62+ capability constants
 - **TRUE PRIMAL compliant**: All cross-primal discovery via capability, not name. BTSP uses role-based env vars (`BTSP_PROVIDER_SOCKET`, `SECURITY_PROVIDER_SOCKET`). Content backend via `CONTENT_BACKEND_SOCKET`. Display via `DISPLAY_BACKEND_SOCKET`. Provenance via `PROVENANCE_TRIO_SOCKET`.
 - **Graceful shutdown**: Shared `signal.rs` handles SIGTERM + SIGINT across all long-running modes (web/server/live). Per `DEPLOYMENT_BEHAVIOR_STANDARD.md`.
@@ -39,6 +39,9 @@ petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
 - **Typed error evolution**: Zero `Result<_, String>` in production — 13 modules evolved to `thiserror` enums
 - **`deny.toml` hardened**: `async-trait` banned with wrappers for transitive deps (axum, opentelemetry)
 - **Pure Rust audio**: `hound` (WAV gen), `symphonia` (decode), AudioCanvas (`/dev/snd`). No rodio/cpal/ALSA bindings.
+- **Wave 102 deep debt sweep**: `.ok()` sites evolved with `inspect_err()` logging, `unwrap_or("")` → `unwrap_or_default()` across 20+ call sites, `content_render` refactored into 3 submodules
+- **Wave 107 remaining debt**: Zero `/tmp` hardcoding (all use `LEGACY_TMP_PREFIX`), `RwLock` poison logging on all `.read().ok()` sites, zero TODO/FIXME/HACK markers
+- **Zero Clippy warnings**: pedantic + nursery lint set, `#[expect]` with reasons for justified suppressions
 
 ### Grammar of Graphics Engine (Implemented)
 
