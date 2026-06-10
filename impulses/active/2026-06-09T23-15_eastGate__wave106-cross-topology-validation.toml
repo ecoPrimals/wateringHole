@@ -52,7 +52,8 @@ deterministic_deployment = """CODIFIED + EVOLVED (Wave 107):
 - WAN checksums: gates can verify via HTTPS without git
 - Atomic publish: harvest auto-commits + pushes checksums.toml + provenance.toml
 - Forgejo Actions CI: clippy+test+build pipeline on push/PR (dispatch plane ACTIVE)
-- BearDog ACME prep: TlsProvider type + caddy.tls.external/revert wired (awaiting BearDog ACME client)"""
+- BearDog ACME prep: TlsProvider type + caddy.tls.external/revert wired (awaiting BearDog ACME client)
+- depot_sync evolved: BLAKE3 diff (skip current), atomic copy (.new+mv), checksums verification"""
 
 # ──────────────────────────────────────────────────────────────
 # VALIDATION MATRIX — what needs to be proven on each topology
@@ -309,6 +310,7 @@ WAVE 107 — cellMembrane deployment hardening:
   ✅ VPS depot refreshed → songbird (23MB, mesh persistence) + biomeOS (21MB, v4.17/v4.18)
   ✅ Forgejo Actions CI → .forgejo/workflows/ci.yml (clippy+test+build on push/PR)
   ✅ BearDog ACME prep → TlsProvider enum, caddy.tls.external/revert commands, cert path wiring
+  ✅ CM-VPS-DEPOT-SYNC → BLAKE3 diff, atomic copy, checksums verification, skip-if-current
   ✅ Root docs updated → README, GLACIAL_SHIFT_TRACKER, VPS_STATE, RUNBOOKS → Wave 107 stadial-ready
   ✅ capability_registry.toml → gate_bootstrap + gate_status capabilities added
 
