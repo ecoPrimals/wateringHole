@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-10 (Wave 106 final — **ironGate VALIDATED as 3rd mesh node** (gate.bootstrap 6/6 phases PASS, 12/13 alive, VPS relay mesh). **3-gate collective: eastGate↔golgiBody(VPS)↔ironGate.** cellMembrane published Deterministic Deployment Standard (gate.bootstrap satisfies all 6 invariants). flockGate published guideStone-grade WAN deployment analysis (5 gaps identified for post-stadial). **Deployment pipeline is deterministic end-to-end.** Sole remaining P1: NUCLEUS supervision (biomeOS).)
+**Last updated**: 2026-06-10 (Wave 107 — **ZERO P1. 4-gate mesh collective LIVE** (eastGate↔golgiBody↔ironGate+southGate). **southGate cross-subnet VALIDATED** (192.168.4.29/22, 13/13 alive, 19/22 capabilities resolved, 12-step distributed science pipeline). **grapheneGate 13/13 TCP fallback ALL ADOPTED** (awaiting aarch64 rebuild + redeploy). cellMembrane shipped gate.status, --dry-run, WAN checksums, atomic publish. VPS depot refreshed (songbird+biomeOS). Ecosystem in pure validation mode.)
 
 ---
 
@@ -378,7 +378,7 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 106 final)**: **3-GATE MESH COLLECTIVE LIVE (eastGate↔VPS↔ironGate). DETERMINISTIC DEPLOYMENT ACHIEVED (gate.bootstrap 6/6). MESH PERSISTENT. TRANSPORT COMPLETE (11/11). DEPOT 14/14 VERIFIED. CASCADE AUTO-FETCH SHIPPED. strandGate + ironGate VALIDATED. grapheneGate 9/13. SOLE P1: NUCLEUS supervision (biomeOS). STADIAL GATE WITHIN REACH.**
+**Current assessment (Wave 107)**: **ZERO P1. 4-GATE MESH COLLECTIVE LIVE (eastGate↔golgiBody↔ironGate+southGate). DETERMINISTIC DEPLOYMENT ACHIEVED + HARDENED (gate.status, --dry-run, WAN checksums, atomic publish). NUCLEUS SUPERVISION SHIPPED. TCP-ONLY FALLBACK SHIPPED + ALL ADOPTED. TRANSPORT 11/11. DEPOT 13/13 VERIFIED. southGate CROSS-SUBNET VALIDATED (distributed science pipeline). grapheneGate 13/13 TCP ADOPTED (awaiting rebuild). STADIAL GATE CLEAR.**
 
 **Wave 98-103 milestones**:
 - Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 12/12 capabilities with coralReef depot fix)
@@ -456,9 +456,9 @@ timer deployed. benchScale IPC compliance sweep validates 12/12 primals. biomeOS
 12. ~~barraCuda build break~~ **RESOLVED** (Wave 93) — SimpleMlp methods restored, depot 13/13
 
 **Stadial entry is gated only on**:
-- S4 auth gate review completion (Jun 9, ending today)
-- ~~3rd gate mesh enrollment~~ — **DONE** (Wave 106, ironGate validated as 3rd node via VPS relay)
-- WAN covalent validation — flockGate 4/5 PASS, blocked on VPS depot rebuild (songbird is stale on outer membrane)
+- S4 auth gate review completion (Jun 9, ending)
+- ~~3rd gate mesh enrollment~~ — **DONE** (Wave 106, ironGate 3rd node. Wave 107, southGate 4th node)
+- ~~WAN covalent validation~~ — VPS depot refreshed (songbird+biomeOS). flockGate 4/5 PASS, awaiting power-on for 5/5
 - ~~biomeOS orchestration revalidation~~ — **VALIDATED** (Wave 105, graph.deploy 13-phase, LocalTrusted)
 
 **Cross-deployment gates (ecoBin matrix)**:
