@@ -100,15 +100,16 @@ Minimum viable: option B (biomeOS already has composition.deploy + graph.status)
 [remaining.mesh_persistence]
 id = "MESH-PERSISTENCE"
 owner = "songBird"
-priority = "P1"
-description = "Mesh state is ephemeral — lost on every songbird restart"
-why = """After every restart, operator must manually call mesh.init with peer addresses.
-This blocks autonomous recovery. When a gate reboots, it comes back with zero peers
-and no way to rejoin the collective without operator intervention."""
-action = """1. Persist peers to ~/.local/share/songbird/peers.toml (or configurable path)
-2. On startup, auto-connect to persisted peers
-3. mesh.init should append to persistent store
-4. Future: mDNS/broadcast for LAN peer auto-discovery"""
+priority = "DONE"
+description = "SHIPPED (Wave 106, commit 1df7ef90). Peers persist to ~/.local/share/songbird/peers.toml"
+why = """RESOLVED. mesh.init now appends peers to persistent store (merge-dedup by node_id).
+On startup, spawn_mesh_seed loads persisted peers as autonomous fallback when SONGBIRD_PEERS
+is unset. Gates auto-reconnect on reboot without operator intervention."""
+action = """SHIPPED:
+1. ✅ Persist peers to ~/.local/share/songbird/peers.toml (SONGBIRD_DATA_DIR override available)
+2. ✅ On startup, auto-connect to persisted peers (spawn_mesh_seed fallback)
+3. ✅ mesh.init appends to persistent store (spawn_blocking, merge-dedup)
+4. Future: mDNS/broadcast for LAN peer auto-discovery (already wired in discovery layer)"""
 
 [remaining.cascade_auto_fetch]
 id = "CASCADE-AUTO-FETCH"
@@ -126,15 +127,15 @@ Could be a membrane post-cascade hook or a biomeOS --watch mode."""
 [remaining.eastgate_federation_port]
 id = "EASTGATE-FEDERATION-PORT"
 owner = "eastGate ops"
-priority = "P2"
-description = "eastGate songbird federation port 7700 not binding to TCP — blocks incoming mesh"
-why = """songbird on eastGate only has UDS. Port 7700 not in ss output despite env vars
-and CLI flags. ironGate's mesh.init to eastGate:7700 gets connection refused. eastGate
-can connect outbound (mesh.init to VPS works) but cannot accept incoming."""
-action = """Fix songbird TCP listener startup. Options:
-1. Run songbird in tmux/screen with correct env vars (not backgrounded with &)
-2. songbird federation.enable JSON-RPC method
-3. systemd user unit with Environment=SONGBIRD_FEDERATION_PORT=7700"""
+priority = "DONE"
+description = "SHIPPED (Wave 106, commit 1df7ef90). Federation port now binds 0.0.0.0 when set."
+why = """RESOLVED. Root cause identified and fixed: when SONGBIRD_FEDERATION_PORT was set,
+the HTTP/federation server still defaulted bind to 127.0.0.1 (localhost). Remote peers
+got connection refused. Fix: setting SONGBIRD_FEDERATION_PORT (env or --federation-port CLI)
+now auto-promotes bind to 0.0.0.0 (all interfaces). SONGBIRD_FEDERATION_BIND still overrides."""
+action = """SHIPPED. To use on any gate:
+  SONGBIRD_FEDERATION_PORT=7700 songbird server --socket /run/user/$(id -u)/biomeos/songbird.sock
+Port 7700 will now be visible in 'ss -tlnp' bound to 0.0.0.0 and accept incoming mesh connections."""
 
 [remaining.irongate_mesh]
 id = "IRONGATE-MESH"
