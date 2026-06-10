@@ -2,8 +2,8 @@
 
 **Date**: 2026-06-10
 **From**: eastGate primalSpring team
-**State**: ZERO P1. S1-S4 ALL GRADUATED. 4-gate mesh collective LIVE.
-**Priority cascade**: Fix primals (mountain) → primalSpring absorbs → gates rebuild → gardens automate.
+**State**: ZERO P1. ZERO PRIMAL BLOCKERS. S1-S4 ALL GRADUATED. 4-gate mesh collective LIVE.
+**Priority cascade**: ~~Fix primals (mountain)~~ **DONE** → primalSpring absorbs → gates rebuild → gardens automate.
 
 ---
 
@@ -11,24 +11,25 @@
 
 | Level | P2 | LOW | Key Next Action |
 |-------|-----|-----|-----------------|
-| **Primals** (mountain) | 3 | 1 | Fix CR-TARPC-01 + BM-UDS-01 + toadStool /tmp |
-| **primalSpring** | 1 | 2 | Absorb primal fixes → grapheneGate 13/13 scenario |
+| **Primals** (mountain) | **0** | 0 | **ALL CLEAR** — CR-TARPC-01, BM-UDS-01, NG-DOWNCAST-01, TOADSTOOL all RESOLVED |
+| **primalSpring** | 0 | 1 | grapheneGate 13/13 scenario PASSES. aarch64 rebuild + deploy next. |
 | **Springs** | 1 | 15 | healthSpring signal dispatch live test on ironGate |
 | **Gates** | 2 | 0 | flockGate power-on, grapheneGate aarch64 rebuild |
-| **Gardens** | 3 | 2 | CM depot sync, NDK pipeline, BearDog ACME cutover |
-| **TOTAL** | **10** | **20** | **Fix mountain first, everything else follows** |
+| **Gardens** | 1 | 2 | NDK pipeline, BearDog ACME cutover |
+| **TOTAL** | **4** | **18** | **Rebuild aarch64 → deploy → 13/13 alive** |
 
 ---
 
 ## Level 1: Primals (Mountain)
 
-### P2 — Blocks grapheneGate 13/13
+### ALL RESOLVED — Mountain Clear
 
 | ID | Owner | Action | primalSpring Tracking |
 |----|-------|--------|----------------------|
-| `CR-TARPC-01` | coralReef | Skip tarpc `bind()` when `PRIMAL_BIND_MODE=tcp_only`. JSON-RPC TCP :9730 works. | `blocker:cr_tarpc_01` in `s_graphenegate_readiness` |
-| `BM-UDS-01` | biomeOS | Skip Neural API UDS `bind()` when `PRIMAL_BIND_MODE=tcp_only`. v4.18 fallback not wired into actual bind path. | `blocker:bm_uds_01` in `s_graphenegate_readiness` |
-| `TOADSTOOL-SOCKET-CLEANUP` | toadStool | Migrate compute-tarpc.sock + toadstool-jsonrpc-port to 3-tier resolution. Blocks `ProtectSystem=strict`. | `blocker:toadstool_socket` in `s_graphenegate_readiness` — PASS (3-tier adopted, `temp_dir()` fallback remains) |
+| ~~`CR-TARPC-01`~~ | coralReef | **RESOLVED** (b1ec1f4). tarpc skips bind on tcp_only. | `blocker:cr_tarpc_01` → **PASS** |
+| ~~`BM-UDS-01`~~ | biomeOS | **RESOLVED** (v4.20 d35c943e). All bind paths check tcp_only before UDS. | `blocker:bm_uds_01` → **PASS** |
+| ~~`NG-DOWNCAST-01`~~ | nestGate | **RESOLVED** (7c3fe9a6). `is_platform_constraint()` chain-walking. | Workaround removed |
+| ~~`TOADSTOOL-SOCKET-CLEANUP`~~ | toadStool | **VERIFIED** — 3-tier resolution adopted. | `blocker:toadstool_socket` → **PASS** |
 
 ### LOW
 
@@ -40,11 +41,11 @@
 
 ## Level 2: primalSpring
 
-### P2
+### RESOLVED
 
 | ID | Owner | Action |
 |----|-------|--------|
-| `GRAPHENEGATE-SCENARIO` | primalSpring | After CR-TARPC-01 + BM-UDS-01 fixes, rebuild aarch64, run `--composition full` on Pixel 8, validate 13/13 in scenarios. grapheneGate readiness Phase 7 tracks blockers structurally. |
+| ~~`GRAPHENEGATE-SCENARIO`~~ | primalSpring | **RESOLVED** — grapheneGate readiness Phase 7 all PASS. 13/13 deployable. aarch64 rebuild + `deploy_pixel.sh` is the next operational step. |
 
 ### LOW
 
@@ -77,7 +78,7 @@ See `impulses/active/2026-06-10T14-20_ironGate__wave107-healthspring-upstream-ga
 | ID | Owner | Action |
 |----|-------|--------|
 | `FLOCKGATE-WAN-E2E` | flockGate ops | Power on → re-fetch from VPS → mesh.init to 157.230.3.183:7700 → verify 5/5. |
-| `GRAPHENEGATE-REBUILD` | primalSpring + cellMembrane | aarch64 rebuild on peptidoglycan → push checksums.toml → `deploy_pixel.sh` → 13/13 alive. **Requires CR-TARPC-01 + BM-UDS-01 fixes first.** |
+| `GRAPHENEGATE-REBUILD` | primalSpring + cellMembrane | aarch64 rebuild on peptidoglycan → push checksums.toml → `deploy_pixel.sh` → 13/13 alive. **Requires BM-UDS-01 fix first.** |
 
 ---
 
@@ -87,15 +88,16 @@ See `impulses/active/2026-06-10T14-20_ironGate__wave107-healthspring-upstream-ga
 
 | ID | Owner | Action |
 |----|-------|--------|
-| `CM-VPS-DEPOT-SYNC` | cellMembrane | Automate golgiBody inner→outer membrane binary flow. |
+| ~~`CM-VPS-DEPOT-SYNC`~~ | cellMembrane | **SHIPPED** (ef3f0b8). BLAKE3 diff, atomic copy, checksums verification. |
 | `NDK-CROSS-COMPILE` | cellMembrane | `aarch64-linux-android` target on peptidoglycan for native grapheneGate. |
 | `BEARDOG-ACME-CUTOVER` | cellMembrane + bearDog | TlsProvider wired, awaiting BearDog ACME client to replace Caddy LE. |
+| `MOBILE-GOLGI-FLEET` | cellMembrane | **SHIPPED** (9e07b01). GateMobility, --mobile, systemd templates, NM dispatcher hook, provision-golgi.sh. |
 
 ### LOW
 
 | ID | Owner | Action |
 |----|-------|--------|
-| `NG-DOWNCAST-01` | nestGate | `is_platform_constraint()` downcast fails. Workaround: `NESTGATE_SOCKET=""`. |
+| ~~`NG-DOWNCAST-01`~~ | nestGate | **RESOLVED** (7c3fe9a6). Error chain walking. Workaround removed. 7 new tests. |
 | `PB-FORWARD-01` | cellMembrane | deploy_pixel.sh ADB port conflict — silent failure. |
 
 ---
@@ -114,13 +116,13 @@ See `impulses/active/2026-06-10T14-20_ironGate__wave107-healthspring-upstream-ga
 ## Dependency Graph
 
 ```
-CR-TARPC-01 + BM-UDS-01 (primal code)
+CR-TARPC-01 + BM-UDS-01 (primal code) ← ALL RESOLVED ✓
     │
     ▼
-GRAPHENEGATE-REBUILD (aarch64 rebuild on peptidoglycan)
+GRAPHENEGATE-REBUILD (aarch64 rebuild on peptidoglycan) ← NEXT
     │
     ▼
-GRAPHENEGATE-SCENARIO (primalSpring validation: 13/13 on Pixel 8)
+deploy_pixel.sh → 13/13 alive on Pixel 8
     │
     ▼
 grapheneGate mesh enrollment (future)
@@ -142,7 +144,7 @@ FLOCKGATE-WAN-E2E (independent — just needs power-on)
 | primalSpring scenarios | 55 (10 tracks, 3 tiers) |
 | lib tests | 901 pass, 2 ignored |
 | clippy | zero warnings |
-| known_debt | 3 (graphenegate-readiness upstream blockers) |
+| known_debt | **0** (all upstream blockers resolved) |
 | federation ports | 2 non-droppable (songbird), 0 droppable |
 | zero-port standard | CLEAN |
 | cascade | 38/38 parity |

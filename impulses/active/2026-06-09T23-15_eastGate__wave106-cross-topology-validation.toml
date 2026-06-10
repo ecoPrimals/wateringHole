@@ -55,8 +55,7 @@ deterministic_deployment = """CODIFIED + EVOLVED (Wave 107):
 - BearDog ACME prep: TlsProvider type + caddy.tls.external/revert wired (awaiting BearDog ACME client)
 - depot_sync evolved: BLAKE3 diff (skip current), atomic copy (.new+mv), checksums verification
 - Mobile golgi fleet: GateMobility type (Fixed|Mobile), --mobile bootstrap, systemd templates,
-  NM dispatcher hook (auto mesh.init on network-up), provision-golgi.sh one-shot script
-- NDK cross-compile: aarch64-linux-android pipeline, linker auto-detection, plasmid.ndk.check"""
+  NM dispatcher hook (auto mesh.init on network-up), provision-golgi.sh one-shot script"""
 
 # ──────────────────────────────────────────────────────────────
 # VALIDATION MATRIX — what needs to be proven on each topology
@@ -119,75 +118,10 @@ proven_on = ["golgiBody (13/13 running, songbird:7700 mesh LIVE)"]
 needs_validation = ["Automated refresh when peptidoglycan builds new binaries"]
 
 # ──────────────────────────────────────────────────────────────
-# REMAINING WORK — focused, deduplicated, team-routed
+# REMAINING WORK (6 P2, 2 LOW — zero P1)
 # ──────────────────────────────────────────────────────────────
 
-# --- P1: Gate Self-Healing (blocks autonomous operation) ---
-
-[resolved.nucleus_supervision]
-id = "NUCLEUS-SUPERVISION"
-owner = "biomeOS"
-priority = "DONE"
-description = "SHIPPED (biomeOS v4.17, commit a4a59245). LifecycleManager auto-restarts crashed primals."
-resolution = """Option B implemented — lifecycle watchdog via LifecycleManager:
-1. ✅ ManagedPrimal extended with binary_path + node_id for launch context
-2. ✅ register_primal_binary() — NUCLEUS registers primals with depot binary path
-3. ✅ respawn_primal_binary() — resurrection path: kill old → clean socket → respawn from binary → PID file → wait for socket → Incubating state
-4. ✅ attempt_resurrection() falls back to binary_path when deployment_node is None
-5. ✅ Exponential backoff (2s base, 60s max), max 5 attempts before Dead state
-6. Health poll (10s) → degrade → backoff → kill → respawn → incubate → health poll → active"""
-
-[remaining.mesh_persistence]
-id = "MESH-PERSISTENCE"
-owner = "songBird"
-priority = "DONE"
-description = "SHIPPED (Wave 106, commit 1df7ef90). Peers persist to ~/.local/share/songbird/peers.toml"
-why = """RESOLVED. mesh.init now appends peers to persistent store (merge-dedup by node_id).
-On startup, spawn_mesh_seed loads persisted peers as autonomous fallback when SONGBIRD_PEERS
-is unset. Gates auto-reconnect on reboot without operator intervention."""
-action = """SHIPPED:
-1. ✅ Persist peers to ~/.local/share/songbird/peers.toml (SONGBIRD_DATA_DIR override available)
-2. ✅ On startup, auto-connect to persisted peers (spawn_mesh_seed fallback)
-3. ✅ mesh.init appends to persistent store (spawn_blocking, merge-dedup)
-4. Future: mDNS/broadcast for LAN peer auto-discovery (already wired in discovery layer)"""
-
-[resolved.cascade_auto_fetch]
-id = "CASCADE-AUTO-FETCH"
-owner = "cellMembrane"
-priority = "DONE"
-description = "SHIPPED (Wave 106, commit b6c9fa0). Post-cascade auto-fetch hook."
-resolution = """When plasmidBin is pulled during cascade and checksums.toml changes,
-automatically triggers WAN fetch to update local binaries. Closes the loop from
-peptidoglycan-build to gate-running."""
-
-# --- P2: Cross-Topology Validation (blocks stadial) ---
-
-[remaining.eastgate_federation_port]
-id = "EASTGATE-FEDERATION-PORT"
-owner = "eastGate ops"
-priority = "DONE"
-description = "SHIPPED (Wave 106, commit 1df7ef90). Federation port now binds 0.0.0.0 when set."
-why = """RESOLVED. Root cause identified and fixed: when SONGBIRD_FEDERATION_PORT was set,
-the HTTP/federation server still defaulted bind to 127.0.0.1 (localhost). Remote peers
-got connection refused. Fix: setting SONGBIRD_FEDERATION_PORT (env or --federation-port CLI)
-now auto-promotes bind to 0.0.0.0 (all interfaces). SONGBIRD_FEDERATION_BIND still overrides."""
-action = """SHIPPED. To use on any gate:
-  SONGBIRD_FEDERATION_PORT=7700 songbird server --socket /run/user/$(id -u)/biomeos/songbird.sock
-Port 7700 will now be visible in 'ss -tlnp' bound to 0.0.0.0 and accept incoming mesh connections."""
-
-[resolved.irongate_mesh]
-id = "IRONGATE-MESH"
-owner = "ironGate ops"
-priority = "DONE"
-description = "RESOLVED (Wave 106, 2026-06-10 01:30 UTC). ironGate is 3rd mesh node."
-resolution = """ironGate validated as 3rd mesh node in collective:
-1. VPS:7700 confirmed reachable from ironGate (nc -z, 69ms)
-2. songbird started with federation port 7700 + UDS socket
-3. mesh.init to 157.230.3.183:7700 → {bootstrap_peers_added:1, initialized:true, node_id:ironGate}
-4. mesh.status → {reachable_peers:1, paths:{direct:1}, relay_enabled:true}
-5. 13 primals fetched via WAN, 12/13 started, health sweep confirmed alive
-
-Mesh topology now: eastGate ↔ golgiBody(VPS) ↔ ironGate (3-gate collective)"""
+# --- P2: Primal Code (blocks grapheneGate 13/13) ---
 
 [remaining.flockgate_wan_e2e]
 id = "FLOCKGATE-WAN-E2E"
@@ -218,45 +152,17 @@ action = """1. Rebuild all 13 primals for aarch64-unknown-linux-musl on peptidog
 3. Redeploy to Pixel 8 via deploy_pixel.sh (exports PRIMAL_BIND_MODE=fallback)
 4. Verify 13/13 alive on grapheneGate"""
 
-# --- P2: Tooling (blocks automation) ---
+# --- P2: Primal Code (blocks grapheneGate 13/13) ---
 
-[resolved.gate_bootstrap]
-id = "GATE-BOOTSTRAP"
-owner = "cellMembrane"
-priority = "DONE"
-description = "SHIPPED (Wave 106, commit b6c9fa0). membrane gate.bootstrap <gate-name>"
-resolution = """One-command gate enrollment: detect arch → fetch depot → verify checksums
-→ configure mesh → start NUCLEUS → health sweep. strandGate used it for LAN re-enrollment."""
-
-[resolved.plasmid_fetch_fix]
-id = "PLASMID-FETCH-FIX"
-owner = "cellMembrane"
-priority = "DONE"
-description = "SHIPPED (Wave 106, commit b6c9fa0). VPS path normalization fixed."
-resolution = "Remote path was {primal}-{arch} instead of {arch}/{primal}. Fixed."
-
-[resolved.wave107_deployment_hardening]
-id = "WAVE107-DEPLOYMENT-HARDENING"
-owner = "cellMembrane"
-priority = "DONE"
-description = "SHIPPED (Wave 107, 2026-06-10). Post-stadial deployment hardening."
-resolution = """6 fixes/features in 2 commits:
-1. Source divergence fix — refresh reads from depot not stale /tmp staging
-2. Checksum coherence — pre-push DIVERGENCE warning if binary != checksums.toml
-3. gate.status — local health probe (depot integrity, mesh reachability, primals, freshness)
-4. gate.bootstrap --dry-run — preview 6 phases without executing side effects
-5. WAN checksums — caddy.depot.checksums route + fetch auto-downloads for zero-git verify
-6. Atomic publish — harvest auto-commits/pushes checksums.toml + provenance.toml
-Plus: gate.rs (936L) refactored into gate/mod.rs + gate/local.rs (both under 800L)"""
-
-[resolved.biomeos_auto_register]
-id = "BIOMEOS-AUTO-REGISTER"
+[remaining.biomeos_neural_api_bind]
+id = "BM-UDS-01"
 owner = "biomeOS"
-priority = "DONE"
-description = "SHIPPED (biomeOS v4.19, commit 421433dc). NUCLEUS auto-registers launched primals with songBird."
-resolution = """After health.liveness confirms primal is alive, biomeOS LifecycleManager
-auto-calls ipc.register on songBird with primal socket path. Eliminates manual
-ipc.register step from gate enrollment. Companion: doc cleanup (2d537d50)."""
+priority = "P2"
+description = "Neural API server binds UDS before checking PRIMAL_BIND_MODE — blocks grapheneGate 13/13"
+why = "v4.18 native fallback not wired into actual Neural API bind path."
+action = "Skip Neural API UDS bind() when PRIMAL_BIND_MODE=tcp_only."
+
+# --- LOW ---
 
 [remaining.sourdough_segfault]
 id = "SOURDOUGH-SEGFAULT"
@@ -267,143 +173,32 @@ why = "Depot validation falls back to manual b3sum. Erodes trust in tooling."
 action = "Run under RUST_BACKTRACE=1, investigate and fix."
 
 # ──────────────────────────────────────────────────────────────
-# GATE ENROLLMENT PLAYBOOK (for any gate that comes online)
+# RESOLVED LEDGER (compact — detail in archive/wave107/)
+# ──────────────────────────────────────────────────────────────
+
+[resolved_summary]
+count = 22
+detail = """
+Wave 106: strandGate LAN re-enrollment, ironGate 3rd mesh node, gate.bootstrap SHIPPED,
+  plasmid.fetch fix, cascade auto-fetch, mesh persistence, federation port fix,
+  NUCLEUS supervision (biomeOS v4.17), TCP-only fallback, deterministic deployment codified.
+Wave 107 cellMembrane: deployment hardening (6 items), depot_sync (BLAKE3+atomic), mobile golgi fleet,
+  Forgejo Actions CI, BearDog ACME prep, provision-golgi.sh.
+Wave 107 primals: SONGBIRD-IPC-RESOLVE-M1 (ff86204c), BARRACUDA-METHOD-DESCRIBE (v0.4.0),
+  PRIMAL-SOCKET-CLEANUP 5/5 (toadStool VERIFIED), CR-TARPC-01 (b1ec1f4b), NG-DOWNCAST-01 (7c3fe9a6),
+  BIOMEOS-AUTO-REGISTER (v4.19), SKUNKBAT-TCP-9750 DROPPED (zero-port clean).
+Wave 107 gates: southGate cross-subnet VALIDATED (13/13, 19/22 capabilities, science pipeline).
+
+Full detail: archive/wave107/ (9 handoffs), impulses/resolved/ (CR-TARPC-01)
+Living standard: cellMembrane/AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
+"""
+
+# ──────────────────────────────────────────────────────────────
+# GATE ENROLLMENT
 # ──────────────────────────────────────────────────────────────
 
 [playbook.gate_enrollment]
-description = """Universal playbook for when any gate powers on and needs deployment.
-Preferred: `membrane gate.bootstrap <gate-name>` (6-phase deterministic — SHIPPED Wave 106).
-Fallback manual procedure below (for gates without the membrane binary):"""
-
-steps = """
-# 1. Identify gate arch
-ARCH=$(uname -m)  # x86_64 → x86_64-unknown-linux-musl, aarch64 → aarch64-unknown-linux-musl
-
-# 2. Create depot directory
-mkdir -p ~/Development/ecoPrimals/infra/plasmidBin/primals/${ARCH}-unknown-linux-musl/
-
-# 3. Fetch all primals from VPS
-for p in beardog songbird biomeos nestgate coralreef sweetgrass squirrel loamspine rhizocrypt skunkbat petaltongue barracuda toadstool; do
-  curl -o primals/${ARCH}-unknown-linux-musl/$p https://membrane.primals.eco/depot/${ARCH}-unknown-linux-musl/$p
-  chmod +x primals/${ARCH}-unknown-linux-musl/$p
-done
-
-# 4. Verify checksums (compare against checksums.toml from git)
-for p in primals/${ARCH}-unknown-linux-musl/*; do
-  b3sum $p
-done
-
-# 5. Start songbird with federation
-SONGBIRD_FEDERATION_PORT=7700 SONGBIRD_PRODUCTION_BIND_ADDRESS=0.0.0.0 \
-  primals/${ARCH}-unknown-linux-musl/songbird server --socket /run/user/$(id -u)/biomeos/songbird.sock &
-
-# 6. Initialize mesh (to VPS relay + any known LAN peers)
-echo '{"jsonrpc":"2.0","method":"mesh.init","params":{"node_id":"<GATE_NAME>","peers":["157.230.3.183:7700"]},"id":1}' | \
-  socat - UNIX-CONNECT:/run/user/$(id -u)/biomeos/songbird.sock
-
-# 7. Start remaining NUCLEUS
-for p in beardog biomeos nestgate coralreef sweetgrass squirrel loamspine rhizocrypt skunkbat petaltongue barracuda toadstool; do
-  primals/${ARCH}-unknown-linux-musl/$p server --socket /run/user/$(id -u)/biomeos/${p}.sock &
-done
-
-# 8. Verify health
-for sock in /run/user/$(id -u)/biomeos/*.sock; do
-  echo '{"jsonrpc":"2.0","method":"health.liveness","id":1}' | timeout 2 socat - UNIX-CONNECT:$sock
-done
-"""
-
-# ──────────────────────────────────────────────────────────────
-# OUTCOME
-# ──────────────────────────────────────────────────────────────
-
-[outcome]
-expected = """
-WAVE 107 STATE (post-stadial tooling evolution):
-
-WAVE 107 — cellMembrane deployment hardening:
-  ✅ Source divergence FIX → plasmid.refresh defaults to depot (not /tmp/primalspring-deploy)
-  ✅ Checksum coherence → refresh emits DIVERGENCE warning on hash mismatch pre-push
-  ✅ gate.status → local gate health probe (no SSH — depot, mesh, primals, freshness)
-  ✅ gate.bootstrap --dry-run → preview all 6 phases without side effects
-  ✅ caddy.depot.checksums → WAN endpoint for checksums.toml (zero-git verification)
-  ✅ WAN checksum fetch → plasmid.fetch --source wan auto-downloads checksums for verification
-  ✅ Atomic publish → harvest auto-commits + pushes checksums.toml + provenance.toml
-  ✅ gate.rs refactored → gate/mod.rs (298L) + gate/local.rs (620L), well under 800L limit
-  ✅ VPS depot refreshed → songbird (23MB, mesh persistence) + biomeOS (21MB, v4.17/v4.18)
-  ✅ Forgejo Actions CI → .forgejo/workflows/ci.yml (clippy+test+build on push/PR)
-  ✅ BearDog ACME prep → TlsProvider enum, caddy.tls.external/revert commands, cert path wiring
-  ✅ CM-VPS-DEPOT-SYNC → BLAKE3 diff, atomic copy, checksums verification, skip-if-current
-  ✅ Mobile golgi fleet → GateMobility type, --mobile flag, systemd templates, NM dispatcher hook
-  ✅ provision-golgi.sh → one-shot NUC provisioning (WAN fetch + systemd + mesh + NUCLEUS)
-  ✅ Root docs updated → README, GLACIAL_SHIFT_TRACKER, VPS_STATE, RUNBOOKS → Wave 107 stadial-ready
-  ✅ capability_registry.toml → gate_bootstrap + gate_status capabilities added
-  ✅ NDK cross-compile pipeline → aarch64-linux-android target, NDK linker auto-detection,
-    plasmid.ndk.check command, .cargo/config.toml, NDK-aware strip (019b90f)
-
-WAVE 106 (all resolved):
-  ✅ strandGate → LAN x86_64 re-enrollment PROVEN
-  ✅ ironGate → 3rd mesh node VALIDATED
-  ✅ gate.bootstrap → SHIPPED + VALIDATED on strandGate + ironGate
-  ✅ plasmid.fetch VPS path → FIXED
-  ✅ cascade auto-fetch → SHIPPED
-  ✅ mesh persistence + federation port fix → SHIPPED by songBird
-  ✅ NUCLEUS supervision → SHIPPED (biomeOS v4.17)
-  ✅ TCP-only fallback → SHIPPED (biomeOS v4.18 + primalSpring ipc::server_bind)
-  ✅ Deterministic deployment standard → CODIFIED (6 invariants)
-
-WAVE 107 — primalSpring TCP-only adoption:
-  ✅ grapheneGate 13/13 TCP fallback → ALL ADOPTED (coralReef, nestGate, petalTongue)
-
-WAVE 107 — biomeOS:
-  ✅ BIOMEOS-AUTO-REGISTER → SHIPPED (v4.19, 421433dc). NUCLEUS auto-registers launched primals with songBird.
-  ✅ Doc cleanup → SHIPPED (2d537d50). Stale refs fixed, duplicate examples removed, specs updated.
-
-REMAINING (2 P2 — zero P1, zero development — all operational):
-  1. FLOCKGATE-WAN-E2E → WAN e2e 5/5 (VPS depot refreshed, awaiting gate power-on)
-  2. GRAPHENEGATE-REBUILD → aarch64 rebuild + Pixel 8 redeploy (13/13 TCP adopted, needs binary refresh)
-
-DEPLOYMENT IS DETERMINISTIC, AUTONOMOUS, AND OBSERVABLE:
-gate.bootstrap + gate.status + cascade auto-fetch + NUCLEUS supervision + atomic publish
-= zero manual steps, self-healing gates, divergence detection pre-push.
-
-Companion: AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
-"""
-
-[ack.southGate]
-date = "2026-06-10"
-status = "VALIDATED"
-detail = """
-southGate cross-subnet mesh validation COMPLETE (Wave 107, 2026-06-10 12:20 UTC):
-
-TOPOLOGY:
-- southGate 192.168.4.29/22 (cross-subnet via Eero WiFi bridge, adjacent property)
-- eastGate 192.168.1.144 (LAN peer, 4.7ms TCP connect)
-- golgiBody 157.230.3.183 (VPS relay, 33ms TCP connect)
-- Mesh: 2 direct peers, relay_enabled, all_healthy=true
-
-NUCLEUS:
-- 13/13 primals ALIVE on UDS, all responding to health.liveness
-- Songbird federation :7700 on 0.0.0.0, mesh.init to eastGate + golgiBody
-- 26/26 primal sockets registered with songbird (ipc.register)
-- 19/22 capability domains resolvable via capability.resolve → structured TransportEndpoint
-
-CAPABILITY MESH CONFIRMED:
-- capability.resolve returns {"transport":"uds","path":"..."} — wetSpring V199 wire format
-- ipc.resolve returns mesh_relay TransportEndpoint with peer_id — topology-aware
-- Domains: security, science, compute, orchestration, grammar, ai, gpu, shader,
-  ledger, dag, crypto, btsp, biology, analytics, tower, rendering, nlp, provenance, storage
-
-DISTRIBUTED SCIENCE PIPELINE (12 steps, 11.2s):
-- Nautilus evolutionary compute: create → train → observe → export
-- Ecology: Shannon H'=2.10, Simpson D=0.85, Bray-Curtis=0.87
-- LinAlg: SVD (σ₁=40.38), eigenvalues, QR factorization
-- ML: Self-attention (d_k=6, d_v=4), perceptron training
-- Stats: ANOVA F=58.6 p=4.4e-10, Pearson r=0.90
-- Barracuda shotgun: 47/76 methods succeeded, 0 unknown methods (27 param-format only)
-
-WETSPRING:
-- V199: 2,100/2,100 tests, 0 clippy warnings, 51 niche capabilities, 46 dispatch methods
-- TransportEndpoint + resolve_transport_via_songbird() confirmed working with live mesh
-
-AAR: handoffs/SOUTHGATE_WAVE107_MESH_VALIDATION_AAR_JUN10_2026.md
-"""
+description = """Preferred: `membrane gate.bootstrap <gate-name>` (6-phase deterministic).
+For mobile NUCs: `membrane gate.bootstrap <name> --mobile` or `provision-golgi.sh <name>`.
+Fallback: curl from membrane.primals.eco/depot/, manual songbird + NUCLEUS start.
+See cellMembrane deploy/ for systemd units and NM dispatcher hook."""
