@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-09 (Wave 105c — **POST-PRIMORDIAL DEPOT STANDARD ENFORCED**. VPS (peptidoglycan) is the sole depot authority. eastGate local depot re-fetched from VPS — 13/13 BLAKE3 verified, NUCLEUS restarted from VPS-authoritative binaries. CM-DEPOT-DIVERGENCE reclassified: was self-inflicted local rebuild violation, now RESOLVED. grapheneGate FIRST DEPLOY: 6/13 on Pixel 8. flockGate WAN e2e 4/5 PASS. All direct/local depot deployment DEPRECATED.)
+**Last updated**: 2026-06-09 (Wave 106 — strandGate LAN re-enrollment VALIDATED (ACK received). songBird: mesh persistence SHIPPED (peers.toml + auto-reconnect) + federation port fix SHIPPED (auto-promotes to 0.0.0.0). cellMembrane: gate.bootstrap SHIPPED + plasmid.fetch VPS fix + cascade auto-fetch. grapheneGate 9/13 running (SELinux UDS adaptation). eastGate federation port 7700 NOW LISTENING. Comprehensive AAR published — 17 issues, 5 categories. FRAGO reshaped for cross-topology validation.)
 
 ---
 
@@ -283,10 +283,10 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Songbird `mesh.init` + `bootstrap_peers` | **WIRED** — Wave 49, Songbird team confirmed functional |
 | Cross-gate `discovery.peers` verification | **COMPLETE** (Wave 92) — bidirectional, both gates report peer_count:1, quality:1.0 |
 | Cross-subnet mesh (southGate ↔ eastGate) | **BLOCKED** — different subnets, needs routing or TURN relay |
-| Plasmodium collective status | **2/3 OPERATIONAL** — eastGate↔strandGate mesh LIVE (17h+). ironGate INITIALIZED (port 7700 listening, blocked on eastGate port 7700). flockGate INITIALIZED (4/5 WAN e2e PASS, blocked on VPS songbird relay). |
+| Plasmodium collective status | **3/3+ OPERATIONAL** — eastGate↔golgiBody(VPS) mesh LIVE (117min+). strandGate LAN re-enrollment VALIDATED (Wave 106 ACK, 2 peers, quality 1.0). eastGate federation port 7700 NOW LISTENING. ironGate + flockGate should unblock on next power-on. songBird mesh persistence SHIPPED (peers.toml + auto-reconnect). |
 | biomeOS graph.deploy orchestration | **WIRED** (Wave 99) — `nucleus-deploy --graph-deploy` calls `composition.deploy`. biomeOS v4.14 (LocalTrusted) rebuilt. eastGate revalidation pending. |
 | Full NUCLEUS 13/13 IPC-live | **COMPLETE** (Wave 98) — 12/12 liveness, 12/12 readiness. coralReef capabilities.list shipped (12/12 with depot rebuild). |
-| Pixel 8 / grapheneGate | **FIRST DEPLOY** (Wave 105b) — 6/13 primals RUNNING on Pixel 8 via ADB (bearDog BTSP production, songbird, rhizocrypt, loamspine, sweetgrass, squirrel). 7 primals need Android UDS path adaptation. NDK blocked on bearDog StrongBox (future phase). |
+| Pixel 8 / grapheneGate | **9/13 RUNNING** (Wave 106) — SELinux UDS adaptation shipped: skunkbat (--no-uds), toadstool (server mode), barracuda (--no-unix) added. 4 remaining (coralreef, nestgate, biomeOS, petaltongue) need upstream TCP-only graceful degradation. NDK blocked on bearDog StrongBox (future phase). |
 | benchScale IPC compliance | **OPERATIONAL** (Wave 99) — validates liveness/readiness/capabilities across live NUCLEUS |
 | flockGate WAN deployment | **4/5 PASS** (Wave 105) — WAN fetch + NUCLEUS launch + mesh.init + health all OK. BLOCKED on VPS songbird relay (no songbird on VPS:7700). |
 
@@ -332,9 +332,9 @@ fossilRecord) — see `fossilRecord/` for detail.
 | ~~CM-CHECKSUM-MULTI-TARGET~~ | cellMembrane | ~~P2~~ | **RESOLVED** (Wave 105) — read-modify-write for multi-target checksums.toml shipped (commit 3a1900b). |
 | ~~CM-DEPOT-DIVERGENCE~~ | eastGate | ~~P2~~ | **RESOLVED** (Wave 105c) — was self-inflicted: local rebuilds violated post-primordial standard. Fixed by re-fetching 13/13 from VPS. Standard now enforced. |
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
-| grapheneGate UDS adaptation | primalSpring (parallel) | **P2** | 7 primals need Android socket path remapping. 6/13 already running on Pixel 8. NDK blocked on bearDog StrongBox (bearDog team debt). |
+| grapheneGate UDS adaptation | primalSpring (parallel) + upstream | **P2** | 4 primals need TCP-only graceful degradation. **9/13 running** (Wave 106 SELinux adaptation). NDK blocked on bearDog StrongBox (future). |
 | ~~aarch64 cross-compilation~~ | cellMembrane | ~~P2~~ | **COMPLETE** (Wave 105) — 14/14 aarch64-musl built, zero C-dep violations. NOTE: sweep overwrote x86_64 checksums (CM-CHECKSUM-MULTI-TARGET). |
-| ironGate mesh enrollment | ironGate | **LOW** | Federation port activation for 3rd LAN gate. Hardware coordination. |
+| ironGate mesh enrollment | ironGate | **P2** | eastGate:7700 now LISTENING. ironGate should mesh.init on next power-on. gate.bootstrap available. |
 | Windows ecoBin (x86_64-pc-windows-msvc) | future | **LOW** | Named pipes IPC, MSVC target. Design phase. |
 | wasm32-wasi ecoBin | future | **LOW** | Browser/edge/embedded. Design phase. |
 | benchScale Docker image tag fix | benchScale | **LOW** | Topologies use bare `ubuntu` tag — needs `ubuntu:24.04` |
@@ -378,7 +378,7 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 105c)**: **ZERO P1 BLOCKERS. MESH LIVE. TRANSPORT COMPLETE (11/11). DEPOT 14/14 VERIFIED (VPS AUTHORITY). bearDog P1 RESOLVED. WAN DEPOT SHIPPED. CASCADE AUTO-RESOLVE SHIPPED. S4 ENDING TODAY. aarch64 UNBLOCKED. POST-PRIMORDIAL DEPOT STANDARD ENFORCED. STADIAL GATE WITHIN REACH.**
+**Current assessment (Wave 106)**: **ZERO P1 BLOCKERS. MESH LIVE + PERSISTENT (songBird peers.toml shipped). TRANSPORT COMPLETE (11/11). DEPOT 14/14 VERIFIED (VPS AUTHORITY). GATE.BOOTSTRAP SHIPPED. CASCADE AUTO-FETCH SHIPPED. FEDERATION PORT FIX SHIPPED. strandGate LAN RE-ENROLLMENT VALIDATED. grapheneGate 9/13 (SELinux adaptation). eastGate:7700 ACCEPTING. STADIAL GATE WITHIN REACH.**
 
 **Wave 98-103 milestones**:
 - Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 12/12 capabilities with coralReef depot fix)
