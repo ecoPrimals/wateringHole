@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 67
+id = 107
 date = "2026-06-10"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Auto-published by membrane temporal.cascade --publish-freshness"
+notes = "Wave 107: BM-UDS-01 SHIPPED (biomeOS PRIMAL_BIND_MODE). grapheneGate 12→13 unblocked. primalSpring 901 tests. biomeOS 8000+ tests. All clippy-clean."
 publisher = "membrane"
 
 [heads]
