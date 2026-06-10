@@ -310,6 +310,10 @@ WAVE 106 (all resolved):
 WAVE 107 — primalSpring TCP-only adoption:
   ✅ grapheneGate 13/13 TCP fallback → ALL ADOPTED (coralReef, nestGate, petalTongue)
 
+WAVE 107 — biomeOS:
+  ✅ BIOMEOS-AUTO-REGISTER → SHIPPED (v4.19, 421433dc). NUCLEUS auto-registers launched primals with songBird.
+  ✅ Doc cleanup → SHIPPED (2d537d50). Stale refs fixed, duplicate examples removed, specs updated.
+
 REMAINING (2 P2 — zero P1, zero development — all operational):
   1. FLOCKGATE-WAN-E2E → WAN e2e 5/5 (VPS depot refreshed, awaiting gate power-on)
   2. GRAPHENEGATE-REBUILD → aarch64 rebuild + Pixel 8 redeploy (13/13 TCP adopted, needs binary refresh)
