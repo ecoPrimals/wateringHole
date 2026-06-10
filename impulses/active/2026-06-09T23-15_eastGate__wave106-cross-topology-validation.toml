@@ -53,7 +53,9 @@ deterministic_deployment = """CODIFIED + EVOLVED (Wave 107):
 - Atomic publish: harvest auto-commits + pushes checksums.toml + provenance.toml
 - Forgejo Actions CI: clippy+test+build pipeline on push/PR (dispatch plane ACTIVE)
 - BearDog ACME prep: TlsProvider type + caddy.tls.external/revert wired (awaiting BearDog ACME client)
-- depot_sync evolved: BLAKE3 diff (skip current), atomic copy (.new+mv), checksums verification"""
+- depot_sync evolved: BLAKE3 diff (skip current), atomic copy (.new+mv), checksums verification
+- Mobile golgi fleet: GateMobility type (Fixed|Mobile), --mobile bootstrap, systemd templates,
+  NM dispatcher hook (auto mesh.init on network-up), provision-golgi.sh one-shot script"""
 
 # ──────────────────────────────────────────────────────────────
 # VALIDATION MATRIX — what needs to be proven on each topology
@@ -169,22 +171,16 @@ Mesh topology now: eastGate ↔ golgiBody(VPS) ↔ ironGate (3-gate collective)"
 
 [remaining.flockgate_wan_e2e]
 id = "FLOCKGATE-WAN-E2E"
-owner = "flockGate ops + cellMembrane (VPS restart)"
+owner = "flockGate ops"
 priority = "P2"
-description = "4/5 PASS — flockGate side READY, VPS songbird process needs restart"
-why = """flockGate retried 2026-06-10T17:26 UTC. Results:
-- TCP to 157.230.3.183:7700: CONNECTED (32ms RTT)
-- mesh.init: {bootstrap_peers_added:1, initialized:true, node_id:flockGate}
-- mesh.peers after 67s: {reachable:true, latency_ms:null, last_seen_ms:67870}
-- Diagnosis: TCP port accepts connections but no mesh protocol handshake completes.
-  VPS songbird process is ALIVE but running the pre-federation-fix binary in memory.
-  The depot FILE was refreshed Jun 10 02:28 (BLAKE3 verified: 03775a3f...)
-  but the RUNNING PROCESS was never restarted."""
-action = """cellMembrane action on golgiBody VPS:
-  kill $(pgrep songbird)
-  SONGBIRD_FEDERATION_PORT=7700 /opt/ecoPrimals/plasmidBin/x86_64-unknown-linux-musl/songbird server --port 7700 --bind 0.0.0.0 --socket /run/user/1000/biomeos/songbird.sock &
-Once restarted, flockGate will re-send mesh.init (we are already running, port 7700 bound).
-Validate: latency_ms becomes non-null (expect 30-35ms) → 5/5 → stadial criterion 4."""
+description = "Complete flockGate WAN e2e — VPS songbird relay is now LIVE"
+why = """flockGate passed 4/5 WAN e2e stages. Was blocked on VPS songbird relay.
+golgiBody songbird:7700 is now LIVE and meshed with eastGate. flockGate should be
+able to mesh.init to VPS and reach the collective."""
+action = """When flockGate is online:
+1. mesh.init to 157.230.3.183:7700
+2. Verify discovery.peers shows eastGate transitively
+3. If PASS → 5/5 WAN e2e → stadial criterion 4 VALIDATED"""
 
 [remaining.graphenegate_rebuild]
 id = "GRAPHENEGATE-REBUILD"
@@ -201,46 +197,6 @@ action = """1. Rebuild all 13 primals for aarch64-unknown-linux-musl on peptidog
 2. Push to VPS depot, update checksums.toml (aarch64 section)
 3. Redeploy to Pixel 8 via deploy_pixel.sh (exports PRIMAL_BIND_MODE=fallback)
 4. Verify 13/13 alive on grapheneGate"""
-
-# --- Upstream Primal Evolution (resolved + remaining) ---
-
-[resolved.songbird_ipc_resolve]
-id = "SONGBIRD-IPC-RESOLVE-M1"
-owner = "songBird"
-priority = "DONE"
-description = "SHIPPED (Wave 107, commit ff86204c). Topology-aware mesh routing."
-resolution = "ipc.resolve returns MeshRelay TransportEndpoint with peer_id for cross-gate dispatch."
-
-[resolved.primal_socket_cleanup]
-id = "PRIMAL-SOCKET-CLEANUP"
-owner = "sweetGrass, barraCuda, coralReef, squirrel"
-priority = "DONE (4/5)"
-description = "4/5 primals cleaned /tmp hardcoding. toadStool still pending."
-resolution = """sweetGrass v0.7.55: Tier 5 fallback → $TMPDIR/biomeos/.
-barraCuda v0.4.0: state co-locates with socket path.
-coralReef Wave 107: 3-tier config::socket_base_dir().
-squirrel Wave 107: /tmp manifest write eliminated."""
-
-[remaining.toadstool_socket_cleanup]
-id = "TOADSTOOL-SOCKET-CLEANUP"
-owner = "toadStool"
-priority = "P2"
-description = "Last primal with /tmp hardcoding — compute-tarpc.sock + toadstool-jsonrpc-port"
-why = "Blocks ProtectSystem=strict systemd hardening on VPS."
-action = "Migrate to 3-tier resolution (BIOMEOS_SOCKET_DIR → XDG_RUNTIME_DIR/biomeos → /run/biomeos)."
-
-[resolved.barracuda_method_introspection]
-id = "BARRACUDA-METHOD-DESCRIBE"
-owner = "barraCuda"
-priority = "DONE"
-description = "SHIPPED (Wave 107, v0.4.0). method.describe for runtime introspection. 97 methods."
-
-[remaining.skunkbat_tcp_port]
-id = "SKUNKBAT-TCP-9750"
-owner = "skunkBat"
-priority = "LOW"
-description = "Sole zero-port standard violation. Migrate to UDS-only."
-action = "Use PRIMAL_BIND_MODE=fallback for TCP when needed (Android etc)."
 
 # --- P2: Tooling (blocks automation) ---
 
@@ -357,6 +313,8 @@ WAVE 107 — cellMembrane deployment hardening:
   ✅ Forgejo Actions CI → .forgejo/workflows/ci.yml (clippy+test+build on push/PR)
   ✅ BearDog ACME prep → TlsProvider enum, caddy.tls.external/revert commands, cert path wiring
   ✅ CM-VPS-DEPOT-SYNC → BLAKE3 diff, atomic copy, checksums verification, skip-if-current
+  ✅ Mobile golgi fleet → GateMobility type, --mobile flag, systemd templates, NM dispatcher hook
+  ✅ provision-golgi.sh → one-shot NUC provisioning (WAN fetch + systemd + mesh + NUCLEUS)
   ✅ Root docs updated → README, GLACIAL_SHIFT_TRACKER, VPS_STATE, RUNBOOKS → Wave 107 stadial-ready
   ✅ capability_registry.toml → gate_bootstrap + gate_status capabilities added
 
@@ -378,82 +336,16 @@ WAVE 107 — biomeOS:
   ✅ BIOMEOS-AUTO-REGISTER → SHIPPED (v4.19, 421433dc). NUCLEUS auto-registers launched primals with songBird.
   ✅ Doc cleanup → SHIPPED (2d537d50). Stale refs fixed, duplicate examples removed, specs updated.
 
-WAVE 107 — upstream primal evolution:
-  ✅ SONGBIRD-IPC-RESOLVE-M1 → SHIPPED (ff86204c). Topology-aware mesh routing via ipc.resolve.
-  ✅ BARRACUDA-METHOD-DESCRIBE → SHIPPED (v0.4.0). Runtime method introspection, 97 methods.
-  ✅ PRIMAL-SOCKET-CLEANUP → 4/5 DONE (sweetGrass, barraCuda, coralReef, squirrel).
-  ✅ BIOMEOS-AUTO-REGISTER → SHIPPED (v4.19, 421433dc). NUCLEUS auto-registers primals with songBird.
-
-REMAINING (2 P2 ops, 1 P2 code, 2 LOW — zero P1):
-  1. FLOCKGATE-WAN-E2E → P2 ops: WAN e2e 5/5 (VPS depot refreshed, awaiting gate power-on)
-  2. GRAPHENEGATE-REBUILD → P2 ops: aarch64 rebuild + Pixel 8 redeploy (13/13 TCP adopted, needs binary refresh)
-  3. TOADSTOOL-SOCKET-CLEANUP → P2 code: last primal with /tmp hardcoding
-  4. SKUNKBAT-TCP-9750 → LOW: sole zero-port standard violation
-  5. SOURDOUGH-SEGFAULT → LOW: validate depot crashes
+REMAINING (2 P2 — zero P1, zero development — all operational):
+  1. FLOCKGATE-WAN-E2E → WAN e2e 5/5 (VPS depot refreshed, awaiting gate power-on)
+  2. GRAPHENEGATE-REBUILD → aarch64 rebuild + Pixel 8 redeploy (13/13 TCP adopted, needs binary refresh)
 
 DEPLOYMENT IS DETERMINISTIC, AUTONOMOUS, AND OBSERVABLE:
 gate.bootstrap + gate.status + cascade auto-fetch + NUCLEUS supervision + atomic publish
 = zero manual steps, self-healing gates, divergence detection pre-push.
 
 Companion: AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
-Companion: WAVE107_REMAINING_SCOPE_BY_LEVEL_JUN10_2026.md
-Companion FRAGO: 2026-06-10T14-20_ironGate__wave107-healthspring-upstream-gaps.toml (15 upstream gaps, 2 MEDIUM, 13 LOW)
 """
-
-# ──────────────────────────────────────────────────────────────
-# PER-LEVEL VALIDATION STATUS
-# ──────────────────────────────────────────────────────────────
-
-[level.primals]
-status = "3 P2 code, 1 LOW code"
-remaining = """
-P2: TOADSTOOL-SOCKET-CLEANUP (last /tmp hardcoding)
-P2: CR-TARPC-01 (coralReef tarpc fatal on tcp_only — blocks grapheneGate 12/13)
-P2: BM-UDS-01 (biomeOS Neural API UDS fatal on tcp_only — blocks grapheneGate 13/13)
-LOW: SOURDOUGH-SEGFAULT (validate depot crashes)
-
-Abstractions to evolve:
-1. Bind mode completeness — gate ALL bind() calls, not just JSON-RPC primary
-2. Socket directory injection — biomeOS should set BIOMEOS_SOCKET_DIR at launch, not each primal discovering independently"""
-
-[level.primalspring]
-status = "P2: grapheneGate scenario validation pending primal fixes"
-remaining = """
-P2: Run --composition full on Pixel 8 after CR-TARPC-01 + BM-UDS-01 fixes → 13/13
-P3: Absorb NG-DOWNCAST-01 fix when nestGate ships
-LOW: Inference namespace decision (model.* vs inference.*)
-LOW: Socket injection simplification after biomeOS ships"""
-
-[level.springs]
-status = "healthSpring 15 upstream gaps (2 MEDIUM). All others at parity."
-remaining = """
-MEDIUM: GAP-02-NESTGATE-EGRESS (clinical data sovereignty — needs nestGate content.egress)
-MEDIUM: GAP-47-SIGNAL-DISPATCH-LIVE (nest.store/nest.commit on live biomeOS ironGate)
-LOW: 13 gaps with stable workarounds (see healthSpring FRAGO)
-hotSpring: biomeGate OFFLINE (kernel recovery) — hotSpring itself at parity
-Springs: wetSpring V199 at parity, neuralSpring V182 inference wired, air/ground/ludo at parity"""
-
-[level.gates]
-status = "4-gate collective LIVE. 2 P2 ops remaining."
-remaining = """
-P2 OPS: FLOCKGATE-WAN-E2E — power on → mesh.init → 5/5 e2e
-P2 OPS: GRAPHENEGATE-REBUILD — aarch64 rebuild → push → Pixel 8 redeploy
-HARDWARE: biomeGate (kernel recovery), westGate (INCOMING), northGate/swiftGate/kinGate (ready)
-
-Abstractions to evolve:
-1. WAN depot sync (CM-VPS-DEPOT-SYNC) — automate inner→outer membrane binary flow
-2. NAT traversal — STUN/TURN shipped but not field-tested on residential NAT"""
-
-[level.gardens]
-status = "cellMembrane P2: depot sync, NDK, ACME. NUCLEUS + FOUNDATION at parity."
-remaining = """
-P2: CM-VPS-DEPOT-SYNC (automate inner→outer depot sync)
-P2: NDK cross-compile pipeline (aarch64-linux-android for native grapheneGate)
-P2: BearDog ACME cutover (TlsProvider wired, awaiting BearDog ACME client)
-LOW: Forgejo Actions CI evaluation
-FUTURE: S1 graduation (Cloudflare removal from outer membrane)
-FUTURE: Nanowire→Quorum transport evolution (gen5 roadmap Phase 1-3)
-FUTURE: Provenance chain signing (BLAKE3 + Ed25519 from peptidoglycan)"""
 
 [ack.southGate]
 date = "2026-06-10"
