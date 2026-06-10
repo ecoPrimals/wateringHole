@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-09 (Wave 106 — strandGate LAN re-enrollment VALIDATED (ACK received). songBird: mesh persistence SHIPPED (peers.toml + auto-reconnect) + federation port fix SHIPPED (auto-promotes to 0.0.0.0). cellMembrane: gate.bootstrap SHIPPED + plasmid.fetch VPS fix + cascade auto-fetch. grapheneGate 9/13 running (SELinux UDS adaptation). eastGate federation port 7700 NOW LISTENING. Comprehensive AAR published — 17 issues, 5 categories. FRAGO reshaped for cross-topology validation.)
+**Last updated**: 2026-06-10 (Wave 106 final — **ironGate VALIDATED as 3rd mesh node** (gate.bootstrap 6/6 phases PASS, 12/13 alive, VPS relay mesh). **3-gate collective: eastGate↔golgiBody(VPS)↔ironGate.** cellMembrane published Deterministic Deployment Standard (gate.bootstrap satisfies all 6 invariants). flockGate published guideStone-grade WAN deployment analysis (5 gaps identified for post-stadial). **Deployment pipeline is deterministic end-to-end.** Sole remaining P1: NUCLEUS supervision (biomeOS).)
 
 ---
 
@@ -334,7 +334,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 | Cross-subnet routing (southGate ↔ eastGate) | infra/network | **MEDIUM** | Different subnets block direct federation; needs router config or TURN relay |
 | grapheneGate UDS adaptation | primalSpring (parallel) + upstream | **P2** | 4 primals need TCP-only graceful degradation. **9/13 running** (Wave 106 SELinux adaptation). NDK blocked on bearDog StrongBox (future). |
 | ~~aarch64 cross-compilation~~ | cellMembrane | ~~P2~~ | **COMPLETE** (Wave 105) — 14/14 aarch64-musl built, zero C-dep violations. NOTE: sweep overwrote x86_64 checksums (CM-CHECKSUM-MULTI-TARGET). |
-| ironGate mesh enrollment | ironGate | **P2** | eastGate:7700 now LISTENING. ironGate should mesh.init on next power-on. gate.bootstrap available. |
+| ~~ironGate mesh enrollment~~ | ironGate + cellMembrane | ~~P2~~ | **VALIDATED** (Wave 106) — 3rd mesh node. gate.bootstrap 6/6 PASS, 12/13 alive, VPS relay mesh. |
 | Windows ecoBin (x86_64-pc-windows-msvc) | future | **LOW** | Named pipes IPC, MSVC target. Design phase. |
 | wasm32-wasi ecoBin | future | **LOW** | Browser/edge/embedded. Design phase. |
 | benchScale Docker image tag fix | benchScale | **LOW** | Topologies use bare `ubuntu` tag — needs `ubuntu:24.04` |
@@ -378,7 +378,7 @@ Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 106)**: **ZERO P1 BLOCKERS. MESH LIVE + PERSISTENT (songBird peers.toml shipped). TRANSPORT COMPLETE (11/11). DEPOT 14/14 VERIFIED (VPS AUTHORITY). GATE.BOOTSTRAP SHIPPED. CASCADE AUTO-FETCH SHIPPED. FEDERATION PORT FIX SHIPPED. strandGate LAN RE-ENROLLMENT VALIDATED. grapheneGate 9/13 (SELinux adaptation). eastGate:7700 ACCEPTING. STADIAL GATE WITHIN REACH.**
+**Current assessment (Wave 106 final)**: **3-GATE MESH COLLECTIVE LIVE (eastGate↔VPS↔ironGate). DETERMINISTIC DEPLOYMENT ACHIEVED (gate.bootstrap 6/6). MESH PERSISTENT. TRANSPORT COMPLETE (11/11). DEPOT 14/14 VERIFIED. CASCADE AUTO-FETCH SHIPPED. strandGate + ironGate VALIDATED. grapheneGate 9/13. SOLE P1: NUCLEUS supervision (biomeOS). STADIAL GATE WITHIN REACH.**
 
 **Wave 98-103 milestones**:
 - Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 12/12 capabilities with coralReef depot fix)
@@ -457,8 +457,8 @@ timer deployed. benchScale IPC compliance sweep validates 12/12 primals. biomeOS
 
 **Stadial entry is gated only on**:
 - S4 auth gate review completion (Jun 9, ending today)
-- 3rd gate mesh enrollment — protocol proven, ironGate federation port activation remaining
-- WAN covalent validation — WAN depot DEPLOYED (/depot/ live), ironGate 13/13 validated, flockGate e2e pending
+- ~~3rd gate mesh enrollment~~ — **DONE** (Wave 106, ironGate validated as 3rd node via VPS relay)
+- WAN covalent validation — flockGate 4/5 PASS, blocked on VPS depot rebuild (songbird is stale on outer membrane)
 - ~~biomeOS orchestration revalidation~~ — **VALIDATED** (Wave 105, graph.deploy 13-phase, LocalTrusted)
 
 **Cross-deployment gates (ecoBin matrix)**:
