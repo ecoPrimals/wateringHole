@@ -363,3 +363,35 @@ WETSPRING:
 
 AAR: handoffs/SOUTHGATE_WAVE107_MESH_VALIDATION_AAR_JUN10_2026.md
 """
+
+[ack.neuralSpring]
+date = "2026-06-10"
+status = "EVOLVED"
+detail = """
+neuralSpring S226/V182 — Wave 107 forward evolution (commit 15fdf9d):
+
+SQUIRREL PROVIDER LIFECYCLE WIRED:
+- inference.register_provider + inference.unregister_provider IPC wrappers
+- IpcMathClient.register_as_provider() facade routed via CapabilityRouter
+- Matches upstream Squirrel's fully-tested wire format (provider_id, socket, capabilities)
+- Startup registration call ready — needs live Squirrel for E2E
+
+NESTGATE SIGNAL CONSTANTS:
+- nest.store / nest.commit promoted from string literals to typed capability constants
+- provenance_dispatch.rs now uses capabilities::NEST_STORE / NEST_COMMIT
+
+CAPABILITY SURFACE: 47 → 51 capabilities
+- inference.register_provider, inference.unregister_provider (Squirrel lifecycle)
+- nest.store, nest.commit (biomeOS signal surface)
+- All synced: ALL_CAPABILITIES, niche::CAPABILITIES, capability_registry.toml, MCP tools
+
+VERIFICATION: 934 workspace tests (758 lib + 11 int + 73 forge + 80 pg + 12 exp094), 0 clippy
+
+REMAINING WIP:
+- Startup registration call (needs live Squirrel)
+- WGSL tokenization pipeline (deferred — coralReef → toadStool → barraCuda composition)
+- NestGate weight persistence live E2E (needs live NUCLEUS)
+- TransportEndpoint adoption (P2 — transport evolution impulse)
+
+V182 handoff published.
+"""
