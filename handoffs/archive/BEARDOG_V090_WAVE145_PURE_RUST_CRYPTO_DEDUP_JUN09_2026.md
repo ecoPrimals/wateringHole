@@ -171,3 +171,23 @@ cargo deny check bans 2>&1 | grep -c "DENIED"
 | beardog-core tests | 1302 passing (1 pre-existing failure in unrelated `universal_compute_client`) |
 | Dead code removed | ~194KB (19 orphaned files) |
 | Docs updated | 5 files |
+
+---
+
+## Addendum: Wave 146 — Debris Sweep (Jun 10, 2026)
+
+Follow-up pass after eastGate cascade pull. Fresh audit found 9 additional orphaned `.rs` files
+missed in Wave 145 (~66KB, ~2,000 LOC):
+
+- `beardog-utils/src/zero_copy/` — 4 files (`safe.rs`, `buffer_management.rs`,
+  `advanced_patterns.rs`, `advanced_optimization.rs`) never declared in `mod.rs`
+- `beardog-genetics/src/genetics/spawning/` — 2 files (`lineage.rs`, `workflows.rs`)
+  with broken syntax, never declared in `mod.rs`
+- `beardog-core/src/zero_knowledge_bootstrap/` — 3 test files (`tests.rs`, `tests/mod.rs`,
+  `tests/discovery_comprehensive_tests.rs`) superseded by wired `zero_knowledge_bootstrap_tests.rs`
+
+Also fixed: 7 root docs synced to ground-truth metrics (226 methods, 14,974+ tests, 2,125 `.rs`
+files), 4 broken `docs/sessions/` links repaired in source code, `PRIMAL_CONTRACTS.md` method
+count updated, CHANGELOG Waves 145+146 entries added.
+
+**Cumulative debris removed (Waves 145+146)**: 28 orphaned files, ~260KB dead code.
