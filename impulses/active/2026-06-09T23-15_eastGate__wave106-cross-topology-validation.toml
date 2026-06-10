@@ -114,7 +114,7 @@ gate_playbook = """All development COMPLETE. aarch64 rebuild DONE (Wave 108):
   3. ✅ ALL 13 primals adopted bind_transport() (coralReef, nestGate, petalTongue, biomeOS)
   4. ✅ aarch64 rebuild on peptidoglycan DONE (Wave 108) — biomeOS v4.20, coralReef b1ec1f4b
   5. ✅ checksums.toml updated, VPS depot synced
-  6. Redeploy via deploy_pixel.sh, verify 13/13 alive (hardware: plug Pixel 8a via USB)"""
+  6. primalSpring evolution team (eastGate): deploy_pixel.sh, verify 13/13 alive"""
 
 [validation.vps_nucleus]
 description = "VPS NUCLEUS (golgiBody inner membrane) — x86_64 depot authority"
@@ -142,7 +142,7 @@ action = """When flockGate is online:
 
 [remaining.graphenegate_rebuild]
 id = "GRAPHENEGATE-REBUILD"
-owner = "primalSpring (parallel team) + cellMembrane (peptidoglycan)"
+owner = "primalSpring evolution team (eastGate)"
 priority = "P2"
 description = "aarch64 REBUILT (Wave 108). Pixel 8 redeploy pending — connect device + deploy_pixel.sh"
 why = """All 13 primals now have bind_transport() / TCP-only fallback adopted:
@@ -150,11 +150,12 @@ why = """All 13 primals now have bind_transport() / TCP-only fallback adopted:
 - nestGate (9f15143a): is_platform_constraint() honors PRIMAL_BIND_MODE=fallback
 - petalTongue (e5a65e0): EACCES→TCP 9900 fallback
 - biomeOS (v4.18, b8ddf351): native TCP-only fallback
-Development is COMPLETE. Rebuild DONE (Wave 108). Only hardware deploy remains."""
+Development is COMPLETE. Rebuild DONE (Wave 108). Only hardware deploy remains.
+Owned by primalSpring evolution team on eastGate (system with Pixel 8a)."""
 action = """1. ✅ Rebuild all 13 primals for aarch64-unknown-linux-musl on peptidoglycan (Wave 108)
 2. ✅ checksums.toml updated + pushed (516879f)
-3. Redeploy to Pixel 8 via deploy_pixel.sh (exports PRIMAL_BIND_MODE=fallback)
-4. Verify 13/13 alive on grapheneGate"""
+3. primalSpring evolution team: deploy to Pixel 8a via deploy_pixel.sh (PRIMAL_BIND_MODE=fallback)
+4. primalSpring evolution team: verify 13/13 alive on grapheneGate"""
 
 # --- P2: Primal Code (blocks grapheneGate 13/13) ---
 
