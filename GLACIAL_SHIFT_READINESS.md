@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-10 (Wave 107 — **ZERO P1. 4-gate mesh collective LIVE** (eastGate↔golgiBody↔ironGate+southGate). **southGate cross-subnet VALIDATED** (192.168.4.29/22, 13/13 alive, 19/22 capabilities resolved, 12-step distributed science pipeline). **grapheneGate 13/13 TCP fallback ALL ADOPTED** (awaiting aarch64 rebuild + redeploy). cellMembrane shipped gate.status, --dry-run, WAN checksums, atomic publish. VPS depot refreshed (songbird+biomeOS). Ecosystem in pure validation mode.)
+**Last updated**: 2026-06-10 (Wave 107 — **ZERO P1. 4-gate mesh collective LIVE** (eastGate↔golgiBody↔ironGate+southGate). **southGate cross-subnet VALIDATED** (192.168.4.29/22, 13/13 alive, 19/22 capabilities resolved, 12-step distributed science pipeline). **grapheneGate 13/13 TCP fallback ALL ADOPTED** (awaiting aarch64 rebuild + redeploy). cellMembrane shipped gate.status, --dry-run, WAN checksums, atomic publish. VPS depot refreshed (songbird+biomeOS). **Upstream primal evolution**: songBird M1 SHIPPED (topology-aware ipc.resolve), barraCuda method.describe SHIPPED (v0.4.0, 97 methods), socket cleanup 4/5 DONE (toadStool pending), biomeOS auto-register SHIPPED (v4.19 — NUCLEUS registers primals with songBird). **5 remaining items: 2 P2 ops (flockGate power-on, grapheneGate rebuild), 1 P2 code (toadStool /tmp), 2 LOW (skunkBat TCP 9750, sourDough segfault).** Ecosystem in pure validation mode.)
 
 ---
 
@@ -325,7 +325,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 | ~~coralReef capabilities.list~~ | coralReef | ~~LOW~~ | **DONE** (Wave 101, 15d1702) — capabilities.list alias shipped |
 | ~~bearDog aws-lc-rs C-dep~~ | bearDog | ~~P1~~ | **RESOLVED** (Wave 145) — `aws-lc-rs` replaced with `rustls-rustcrypto` (pure Rust). `cargo check --target aarch64-unknown-linux-musl` PASS. 19-crate C-crypto ban in `deny.toml`. All non-x86 targets UNBLOCKED. |
 | ~~flockGate WAN depot empty~~ | cellMembrane | ~~P1~~ | **RESOLVED** (Wave 105) — `plasmid.fetch --source wan` SHIPPED. `caddy.depot.provision` ready. Production validation pending. |
-| songBird ipc.resolve M1 | songBird | **P2** | TransportEndpoint types shipped, ipc.resolve wiring next (topology-aware routing) |
+| ~~songBird ipc.resolve M1~~ | songBird | ~~**P2**~~ | **SHIPPED** (Wave 107, ff86204c) — `ipc.resolve` returns MeshRelay TransportEndpoint with peer_id. Topology-aware mesh routing LIVE. |
 | ~~Transport injection (toadStool)~~ | toadStool | ~~P2~~ | **DONE** (S306c Wave 104) — transport CONFIRMED, 11/11 non-exempt COMPLETE. |
 | ~~biomeOS graph.deploy revalidation~~ | biomeOS + eastGate | ~~P2~~ | **VALIDATED** (Wave 105) — v4.16 composition.deploy accepted, graph.status 13 phases, LocalTrusted. |
 | ~~CM-CASCADE-CONFLICT~~ | cellMembrane | ~~P2~~ | **RESOLVED** (Wave 105) — cascade auto-discards dirty regenerable metadata before ff-only pull. |
