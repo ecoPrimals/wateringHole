@@ -301,3 +301,17 @@ NUCLEUS supervision = zero manual steps, self-healing gates.
 
 Companion: AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
 """
+
+[ack.southGate]
+date = "2026-06-10"
+status = "in_progress"
+detail = """
+southGate mesh enrollment in progress (Wave 107):
+- Gate online at 192.168.4.29/22 (cross-subnet via Eero bridge, ~91ms to eastGate)
+- Depot refreshed: 13/13 x86_64-musl binaries fetched from VPS WAN depot (Jun 10)
+- wetSpring V199: TransportEndpoint + transport-aware discovery + health.ping
+  2,100 tests, 0 clippy warnings, NUCLEUS deployment elevation complete
+- membrane temporal.cascade operational (20/20 repos synced)
+- biomeos socket dir exists (/run/user/1000/biomeos/)
+- Next: songbird federation + mesh.init → NUCLEUS launch → health sweep
+"""
