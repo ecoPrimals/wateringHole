@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 67
+id = 107
 date = "2026-06-10"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Auto-published by membrane temporal.cascade --publish-freshness"
+notes = "Wave 107: ZERO P1. 4-gate mesh collective LIVE. Topology-aware routing SHIPPED. 13/13 primals clean. primalSpring clippy sweep (26+ lints). nucleus-deploy clippy-clean. skunkBat zero-port-standard RESOLVED. S1-S4 GRADUATED."
 publisher = "membrane"
 
 [heads]

@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 9, 2026 (Wave 103: Mesh LIVE (eastGate↔strandGate, 13h+ stable). Transport 10-11/11 non-exempt adopted. Depot 14/14 x86_64-musl fresh. bearDog aws-lc-rs P1 blocks non-x86 targets. biomeOS v4.14 rebuilt (LocalTrusted). S4 auth gate ending Jun 9. sourDough validate depot shipped.)
+**Last Updated**: June 10, 2026 (Wave 107: ZERO P1. S1-S4 GRADUATED. 4-gate mesh collective LIVE. Topology-aware routing SHIPPED. 13/13 primals clean. primalSpring 897 tests, clippy-clean. nucleus-deploy clippy-clean. skunkBat zero-port-standard RESOLVED. 2 active handoffs + 5 archived to wave107.)
 
 ---
 

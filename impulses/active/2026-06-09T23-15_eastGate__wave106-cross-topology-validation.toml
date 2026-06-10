@@ -224,6 +224,15 @@ resolution = """6 fixes/features in 2 commits:
 6. Atomic publish — harvest auto-commits/pushes checksums.toml + provenance.toml
 Plus: gate.rs (936L) refactored into gate/mod.rs + gate/local.rs (both under 800L)"""
 
+[resolved.biomeos_auto_register]
+id = "BIOMEOS-AUTO-REGISTER"
+owner = "biomeOS"
+priority = "DONE"
+description = "SHIPPED (biomeOS v4.19, commit 421433dc). NUCLEUS auto-registers launched primals with songBird."
+resolution = """After health.liveness confirms primal is alive, biomeOS LifecycleManager
+auto-calls ipc.register on songBird with primal socket path. Eliminates manual
+ipc.register step from gate enrollment. Companion: doc cleanup (2d537d50)."""
+
 [remaining.sourdough_segfault]
 id = "SOURDOUGH-SEGFAULT"
 owner = "sourDough"
@@ -238,7 +247,8 @@ action = "Run under RUST_BACKTRACE=1, investigate and fix."
 
 [playbook.gate_enrollment]
 description = """Universal playbook for when any gate powers on and needs deployment.
-Until membrane gate.bootstrap exists, this is the manual procedure."""
+Preferred: `membrane gate.bootstrap <gate-name>` (6-phase deterministic — SHIPPED Wave 106).
+Fallback manual procedure below (for gates without the membrane binary):"""
 
 steps = """
 # 1. Identify gate arch
