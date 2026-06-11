@@ -15,7 +15,7 @@
 
 [instance]
 name = "ecoPrimals-alpha"
-wave = 109
+wave = 110
 topology = "diderm"
 vps_provider = "digitalocean"
 region = "nyc1"
@@ -153,14 +153,15 @@ secondary = ["wave107-healthspring-upstream-gaps"]
 see = "impulses/active/"
 
 [coordination.current_wave]
-number = 109
-name = "guideStone Deployment Convergence"
+number = 110
+name = "Last Mile Health + Gate Expansion"
 streams = [
-    "Stream 1: Standard Primal Startup Contract",
-    "Stream 2: Build Pipeline + Gate Profiles",
-    "Stream 3: Post-Deploy Validation + Orchestration",
-    "Stream 4: BTSP End-to-End",
-    "Stream 5: cellMembrane Cascade + quorumSignal + rootPulse",
+    "Stream 1: HEALTH-13/13 (rhizoCrypt, petalTongue remaining)",
+    "Stream 2: BTSP End-to-End (cross-primal chain)",
+    "Stream 3: Build Hardening (FULLY RESOLVED)",
+    "Stream 4: Gate Expansion (northGate + westGate)",
+    "Stream 5: primalSpring Dogfood (MOSTLY RESOLVED)",
+    "Stream 6: Federation Debug (ROOT CAUSE FIXED, deploy pending)",
 ]
 
 # ──────────────────────────────────────────────────────────────
