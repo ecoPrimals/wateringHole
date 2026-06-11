@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-11 (Wave 109 — **guideStone deployment convergence.** Cross-topology validation COMPLETE: LAN (5 gates), WAN (flockGate 4/5 — VPS restarted, re-test pending), ARM (grapheneGate 13/13 DEPLOYED Wave 108), VPS (golgiBody 13/13). **5-gate ecosystem LIVE.** Strategic shift from "deploy and verify" to guideStone-grade identical deployments. 5 work streams: startup contract (7 primal items), build pipeline + gate profiles (cellMembrane), health + orchestration (primalSpring + biomeOS), BTSP e2e (sweetGrass + bearDog), cascade + quorumSignal + rootPulse (cellMembrane). FRAGO: `wave109-guidestone-deployment-convergence`. **Criterion 7 (guideStone deployment) added below.**)
+**Last updated**: 2026-06-11 (Wave 109 mid-wave — **guideStone deployment convergence 66% resolved.** 39/59 FRAGO items closed. Cross-topology COMPLETE: LAN (5 gates), WAN (flockGate 4/5 — **`federation.enabled=false` diagnosed as songBird protocol gap, DO NOT re-test**), ARM (grapheneGate 13/13 DEPLOYED Wave 108), VPS (golgiBody 13/13). **5-gate ecosystem LIVE.** Startup contract **5/6** (bearDog remaining). HEALTH-01 **10/13** (rhizoCrypt, petalTongue, songBird remaining). Build infrastructure LANDED. BTSP server-side READY. 4 primals ACTIVE, 9 STANDBY. Criterion 7 IN PROGRESS. FRAGO: `wave109-guidestone-deployment-convergence`.)
 
 ---
 
@@ -287,7 +287,7 @@ Tier 2+ large-dataset science, not a deployment blocker.
 | Plasmodium collective status | **4-GATE COLLECTIVE LIVE** (Wave 107) — eastGate↔golgiBody↔ironGate+southGate. Deterministic deployment codified (gate.bootstrap 6/6). Mesh persistence SHIPPED. NUCLEUS supervision SHIPPED. |
 | biomeOS graph.deploy orchestration | **VALIDATED** (Wave 105) — `composition.deploy` accepted, graph.status 13 phases, LocalTrusted. biomeOS v4.18 (TCP fallback + supervision). |
 | Full NUCLEUS 13/13 IPC-live | **COMPLETE** (Wave 98+) — eastGate 23 JSON-RPC + 3 tarpc. golgiBody 13/13. ironGate 12/13. southGate 13/13. |
-| Pixel 8 / grapheneGate | **13/13 TCP FALLBACK ADOPTED** (Wave 107) — all primals shipped `bind_transport()`. Awaiting aarch64 rebuild + Pixel 8 redeploy. NDK blocked on bearDog StrongBox (future). |
+| Pixel 8 / grapheneGate | **13/13 DEPLOYED AND ALIVE** (Wave 108) — all primals TCP-only on Pixel 8a. First cross-arch full NUCLEUS. BTSP E2E and mesh enrollment pending. |
 | benchScale IPC compliance | **OPERATIONAL** (Wave 99) — validates liveness/readiness/capabilities across live NUCLEUS |
 | flockGate WAN deployment | **4/5 PASS** (Wave 105) — WAN fetch + NUCLEUS launch + mesh.init + health OK. VPS depot refreshed (songbird + biomeOS rebuilt). Awaiting flockGate power-on for 5/5. |
 
@@ -469,7 +469,7 @@ biomeOS v4.18 (supervision + TCP fallback). Zero commercial services in inner me
 **Cross-deployment gates (ecoBin matrix)**:
 - ~~bearDog pure Rust (P1)~~ — **RESOLVED** (Wave 145). aarch64 UNBLOCKED.
 - ~~flockGate WAN depot (P1)~~ — **RESOLVED** (Wave 105). DEPLOYED, /depot/ live, ironGate validated.
-- grapheneGate bootstrap (P2) — Pixel as trust anchor, aarch64-musl BUILT, NDK android target next
+- ~~grapheneGate bootstrap (P2)~~ — **DEPLOYED** (Wave 108). 13/13 alive TCP-only. guideStone-grade convergence in progress (Wave 109).
 - ~~aarch64 sweep (P2)~~ — **COMPLETE** (Wave 105, 14/14 built). CM-CHECKSUM-MULTI-TARGET P2 pipeline fix needed.
 - Windows ecoBin (LOW) — named pipes IPC, MSVC target, design phase
 

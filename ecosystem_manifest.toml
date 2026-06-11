@@ -18,9 +18,9 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.5.0"
-generated = "2026-06-01"
-wave = 67
+version = "2.6.0"
+generated = "2026-06-11"
+wave = 109
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -610,7 +610,7 @@ repos = [
 ]
 
 # grapheneGate — portable trust anchor (Pixel 8a, GrapheneOS)
-# Minimal Tower Atomic: BearDog + Songbird + SkunkBat
+# Full NUCLEUS 13/13 deployed and alive (Wave 108)
 # Carries beacon/lineage seeds, acts as physical root of trust
 [gates.grapheneGate]
 gate_class = "portable_anchor"
@@ -620,7 +620,8 @@ mobility = "mobile"
 bind_mode = "tcp_only"
 composition = "full"
 transport = "adb"
-notes = "Pixel 8a — 13/13 primals via deploy_pixel.sh"
+nucleus_status = "13/13 deployed and alive (Wave 108)"
+notes = "Pixel 8a — 13/13 primals via deploy_pixel.sh, TCP-only, first cross-arch NUCLEUS"
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
