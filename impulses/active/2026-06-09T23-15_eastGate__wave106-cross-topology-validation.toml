@@ -78,30 +78,31 @@ gate_playbook = """When gate comes online:
 [validation.wan_x86_64]
 description = "WAN gates (flockGate) — x86_64-musl, depot via HTTPS, mesh via VPS relay"
 proven_on = ["flockGate (4/5 e2e PASS — fetch BLAKE3-VERIFIED, launch OK, mesh.init OK, health OK)"]
-needs_validation = ["flockGate bidirectional handshake — VPS songbird PROCESS must be restarted (depot binary fresh, running process stale)"]
-blocker = """CRITICAL: VPS songbird process on golgiBody has NOT been restarted.
-The depot FILE was refreshed Jun 10 02:28 UTC (BLAKE3 03775a3f... verified).
-But the RUNNING PROCESS is still the pre-federation-fix binary (predates 1df7ef90).
+needs_validation = ["flockGate bidirectional handshake — VPS songbird RESTARTED (Wave 108), awaiting flockGate auto-retry"]
+blocker = """RESOLVED (Wave 108): VPS songbird RESTARTED on golgiBody.
+Old stale processes (PID 408850, 642360) killed. Fresh binary (Jun 10 21:55 UTC) now running
+as PID 645362/645363. Federation port 7700 bound to 0.0.0.0, confirmed REACHABLE from eastGate.
 
-flockGate tested TWICE (11:40 UTC + 17:26 UTC):
+flockGate tested TWICE before restart (11:40 UTC + 17:26 UTC):
 - TCP to 157.230.3.183:7700: CONNECTS (32ms RTT)
 - mesh.init: ACKNOWLEDGED by VPS
-- After 67s+: latency_ms remains null — no bidirectional protocol handshake
+- After 67s+: latency_ms remains null — no bidirectional protocol handshake (stale binary)
 
 The 4-gate LAN collective works because LAN gates connected differently.
 WAN requires the federation fix in the running process.
 
-FIX (cellMembrane on golgiBody VPS):
-  kill $(pgrep songbird)
-  SONGBIRD_FEDERATION_PORT=7700 /opt/ecoPrimals/plasmidBin/x86_64-unknown-linux-musl/songbird server --port 7700 --bind 0.0.0.0 --socket /run/user/1000/biomeos/songbird.sock &
+EXECUTED (Wave 108, 2026-06-11 00:30 UTC):
+  Stale PIDs 408850, 642360 killed.
+  Fresh /opt/membrane/songbird (Jun 10 21:55 UTC) launched: PID 645362, 645363.
+  Federation port 7700 bound *:7700, confirmed REACHABLE from eastGate (76ms).
+  Relay (PID 642395, port 3478) left untouched.
 
 flockGate side is READY (songbird running, port 7700 bound, mesh.init will auto-retry).
-Once VPS restarts: expect latency_ms ≈ 30-35ms → 5/5 → stadial criterion 4."""
-gate_playbook = """flockGate READY — waiting on VPS process restart only.
-After VPS restarts songbird:
+Expect latency_ms ≈ 30-35ms → 5/5 → stadial criterion 4."""
+gate_playbook = """VPS songbird RESTARTED (Wave 108). flockGate should auto-mesh:
   1. flockGate mesh.init auto-retries (already running)
-  2. Verify latency_ms becomes non-null
-  3. Verify discovery.peers shows transitive peer discovery
+  2. Verify latency_ms becomes non-null (expect ~30ms)
+  3. Verify discovery.peers shows eastGate transitively
   4. Full NUCLEUS health sweep → 5/5 WAN e2e"""
 
 [validation.aarch64_musl]
@@ -131,14 +132,16 @@ needs_validation = ["Automated refresh when peptidoglycan builds new binaries"]
 id = "FLOCKGATE-WAN-E2E"
 owner = "flockGate ops"
 priority = "P2"
-description = "Complete flockGate WAN e2e — VPS songbird relay is now LIVE"
-why = """flockGate passed 4/5 WAN e2e stages. Was blocked on VPS songbird relay.
-golgiBody songbird:7700 is now LIVE and meshed with eastGate. flockGate should be
-able to mesh.init to VPS and reach the collective."""
-action = """When flockGate is online:
-1. mesh.init to 157.230.3.183:7700
-2. Verify discovery.peers shows eastGate transitively
-3. If PASS → 5/5 WAN e2e → stadial criterion 4 VALIDATED"""
+description = "VPS songbird RESTARTED (Wave 108). Awaiting flockGate auto-retry → 5/5 WAN e2e"
+why = """flockGate passed 4/5 WAN e2e stages. Was blocked on VPS songbird stale process.
+VPS songbird RESTARTED (Wave 108): fresh binary, federation port 7700 bound 0.0.0.0, REACHABLE.
+flockGate auto-retries should now complete bidirectional handshake."""
+action = """flockGate auto-retry should establish mesh. If flockGate is powered off:
+1. Power on flockGate
+2. mesh.init to 157.230.3.183:7700 (auto-retry already configured)
+3. Verify latency_ms non-null (~30ms expected)
+4. Verify discovery.peers shows eastGate transitively
+5. If PASS → 5/5 WAN e2e → stadial criterion 4 VALIDATED"""
 
 [remaining.graphenegate_rebuild]
 id = "GRAPHENEGATE-REBUILD"
