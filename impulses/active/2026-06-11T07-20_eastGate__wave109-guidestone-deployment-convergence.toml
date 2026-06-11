@@ -86,7 +86,7 @@ PRIMAL_BIND_MODE becomes override-only."""
 [stream1.items]
 beardog = "auto-detect abstract socket from bind mode (remove --abstract flag dependency)"
 nestgate = "default HTTP in server mode (remove explicit --enable-http requirement)"
-biomeos = "infer --btsp-optional from bind mode (Neural API server startup)"
+biomeos = "✅ SHIPPED v4.22 (5311dd3f). --bind-mode <uds_only|tcp_only|dual> CLI added, auto-infers --btsp-optional from tcp_only. BindMode enum + HEALTH-01 (bare 'health' route, {status,primal,version,uptime_s})."
 coralreef = "unify --rpc-bind with --port --bind (tarpc + JSON-RPC under one flag)"
 barracuda = "replace --no-unix with PRIMAL_BIND_MODE reading"
 skunkbat = "replace --no-uds with PRIMAL_BIND_MODE reading"
@@ -218,11 +218,13 @@ description = "sourdough validate depot crashes (segfault). Manual b3sum fallbac
 # ──────────────────────────────────────────────────────────────
 
 [resolved_summary]
-count = 26
+count = 28
 detail = """Waves 106-108 resolved cross-topology validation:
   grapheneGate 13/13 DEPLOYED (Wave 108), VPS songbird RESTARTED, BM-UDS-01 (biomeOS v4.20),
   CR-TARPC-01 (coralReef b1ec1f4), NG-DOWNCAST-01 (nestGate 7c3fe9a6), aarch64 rebuild,
   NDK pipeline, SONGBIRD-IPC-RESOLVE-M1, BARRACUDA-METHOD-DESCRIBE, socket cleanup 5/5,
   southGate cross-subnet, strandGate re-enrollment, ironGate 3rd node, gate.bootstrap,
   depot_sync, mobile golgi fleet, deterministic deployment codified.
+Wave 109 Stream 1: STARTUP-BM-01 (biomeOS v4.22 --bind-mode + auto btsp-optional),
+  HEALTH-01 biomeOS (bare 'health' route + {status,primal,version,uptime_s} response).
 Full detail: archive/wave107/, archive/wave108/"""
