@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 109
+id = 110
 date = "2026-06-11"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 109: guideStone deployment convergence. PlatformCapabilities::detect() shipped (CAPS-01). HEALTH-01 schema + scenario. 5 work streams active. 915 tests, 56 scenarios, zero debt."
+notes = "Wave 110: last mile health + gate expansion. primalSpring self-convergence (STARTUP-PS-01, HEALTH-PS-01 dogfood). Inline tolerance migration (15 values centralized). Clippy test compliance. 916 tests, 56 scenarios, zero debt."
 publisher = "membrane"
 
 [heads]

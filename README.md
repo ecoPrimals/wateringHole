@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 11, 2026 (Wave 109: guideStone deployment convergence. PlatformCapabilities::detect() shipped. HEALTH-01 response schema + validation scenario. 5 work streams: standard startup contract, build pipeline + gate profiles, post-deploy validation, BTSP E2E, cellMembrane cascade. 5-gate mesh live. 915 tests, 56 scenarios, zero known debt.)
+**Last Updated**: June 11, 2026 (Wave 110: last mile health + gate expansion. primalSpring self-convergence — `--bind-mode`/`--port` + bare `"health"` + `uptime_s` (dogfooding STARTUP-PS-01, HEALTH-PS-01). Inline tolerance migration (15 values centralized). Clippy test compliance (lib + test targets `-D warnings`). 916 tests, 56 scenarios, zero known debt.)
 
 ---
 
