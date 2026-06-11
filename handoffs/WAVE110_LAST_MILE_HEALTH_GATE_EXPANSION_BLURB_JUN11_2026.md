@@ -1,6 +1,6 @@
 # Wave 110 — Last Mile Health + Gate Expansion
 
-**Date**: 2026-06-11 (ACTIVE — mid-wave status)
+**Date**: 2026-06-11 (ACTIVE — mid-wave update)
 **From**: eastGate overwatch (cellMembrane)
 **FRAGO**: `impulses/active/2026-06-11T07-20_eastGate__wave109-guidestone-deployment-convergence.toml` (carries forward)
 
@@ -11,7 +11,7 @@
 Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 - **53/59 FRAGO items resolved** (90% closed)
 - **Startup contract 6/6 COMPLETE** — bearDog shipped (945de60f), all 13 primals standardized
-- **HEALTH-01 12/13** — songBird SHIPPED (471ed43b), petalTongue SHIPPED (2dba46f), joining sweetGrass, biomeOS, healthSpring
+- **HEALTH-01 13/13 COMPLETE** — rhizoCrypt (410018d), petalTongue (2dba46f), songBird (471ed43b), joining sweetGrass, biomeOS, healthSpring
 - **Build pipeline COMPLETE** — Stream 3 fully resolved (5/5 items), gate engine wired
 - **BTSP TCP E2E test SHIPPED** — bearDog (945de60f) real handshake + encrypted JSON-RPC
 - **cellMembrane Stream 5 core DONE** — dual checksum, cascade-restart, agentic resolve all wired
@@ -19,7 +19,7 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 - **primalSpring post-primordial reversal** — no longer a primal, exclusively an arena (4f9a865)
 - **biomeOS v4.23** — deep debt, Duration consolidation across 12 crates
 
-**Remaining** (5 active items): 1 health (rhizoCrypt), LAUNCHER-01, BTSP cross-primal E2E, flockGate handshake retest, sourDough segfault. Plus 3 deferred (qS/rP/freshness → Wave 111+).
+**Remaining** (4 active items): LAUNCHER-01, BTSP cross-primal E2E, flockGate handshake retest, sourDough segfault. Plus 3 deferred (qS/rP/freshness → Wave 111+). **HEALTH-01 13/13 GRADUATED.**
 
 ---
 
@@ -33,18 +33,18 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 
 ### Stream 1: HEALTH-13/13 — Close the Health Contract
 
-**Owner**: rhizoCrypt team (last remaining)
+**Owner**: ALL TEAMS — **STREAM GRADUATED**
 **guideStone**: P3 (Self-Verifying), P5 (Tolerance-Documented)
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| HEALTH-RC-01 | rhizoCrypt | P2 | REMAINING — Enrich `health_liveness()` → add `primal`, `version`, `uptime_s` |
+| ~~HEALTH-RC-01~~ | rhizoCrypt | P2 | **DONE** (410018d → v0.14.8, Wave 107) — `health_liveness()` enriched with `primal`, `version`, `uptime_s`. Wave 108 (0e2b031 → v0.14.9): typed `DiscoveryQueryError` deep debt. |
 | ~~HEALTH-PT-01~~ | petalTongue | P2 | **DONE** (2dba46f) — bare `"health"` rerouted to enriched `health.check`, `uptime_s` field added, advertised in `capabilities.list` |
 | ~~HEALTH-SB-01~~ | songBird | P2 | **DONE** (471ed43b) — bare "health" + enriched schema + uptime_s |
 | ~~STARTUP-BD-01~~ | bearDog | P2 | **DONE** (945de60f) — `--bind-mode` flag, 6/6 startup contract COMPLETE |
 
 **Exit criterion**: 13/13 primals respond to `{"method":"health"}` with `{status, primal, version, uptime_s}`.
-**Current**: 12/13. Remaining: rhizoCrypt.
+**STATUS: 13/13 HEALTH-01 COMPLETE.** Stream 1 GRADUATED.
 
 ### Stream 2: BTSP End-to-End — Encrypted Composition Proof
 
@@ -146,16 +146,16 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 
 ## Success Criteria (Wave 110 exit gate)
 
+- [x] ~~13/13 HEALTH-01 compliant~~ **DONE** — rhizoCrypt (410018d) + petalTongue (2dba46f) shipped. **13/13 GRADUATED.**
 - [x] ~~bearDog STARTUP-BD-01 resolved → **6/6 startup contract**~~ **DONE** (945de60f)
 - [x] ~~BTSP-E2E-01 first execution documented~~ **DONE** — bearDog TCP handshake + encrypted JSON-RPC (945de60f)
 - [x] ~~primalSpring self-convergence~~ **DONE** — post-primordial reversal: no longer primal (4f9a865)
 - [x] ~~flockGate federation root cause documented~~ **DONE** (471ed43b)
 - [x] ~~Registry versions reflect ground truth~~ **MAINTAINED**
-- [ ] 13/13 HEALTH-01 compliant (currently 12/13 — rhizoCrypt remaining)
 - [ ] BTSP cross-primal E2E (bearDog→client→sweetGrass full chain)
 - [ ] northGate NUCLEUS 13/13 bootstrapped and meshed
 - [ ] Federation fix deployed to VPS + flockGate handshake validated
-- [ ] Depot rebuild to bake in bearDog/biomeOS/songBird/petalTongue evolution
+- [ ] Depot rebuild to bake in bearDog/biomeOS/songBird/petalTongue/rhizoCrypt evolution
 
 ---
 
@@ -163,9 +163,9 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 
 | Primal | Work | Status |
 |--------|------|--------|
-| **rhizoCrypt** | HEALTH-RC-01 | ACTIVE — last health holdout |
-| **songBird** | Deploy fix to VPS + handshake retest | ACTIVE — code shipped, deploy pending |
+| **songBird** | Deploy federation fix to VPS + handshake retest | ACTIVE — code shipped, deploy pending |
 | **bearDog** | ~~STARTUP-BD-01~~ DONE, BTSP cross-primal client role | STANDBY (shipped) |
+| **rhizoCrypt** | ~~HEALTH-RC-01~~ DONE (v0.14.9) + deep debt | STANDBY (shipped) |
 | **petalTongue** | ~~HEALTH-PT-01~~ DONE (2dba46f) | STANDBY (shipped) |
 | All others (9) | — | STANDBY |
 

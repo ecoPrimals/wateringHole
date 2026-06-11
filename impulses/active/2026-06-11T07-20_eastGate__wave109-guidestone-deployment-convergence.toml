@@ -137,9 +137,10 @@ grapheneGate. Named tolerances for deployment lifecycle."""
 health_endpoint = """HEALTH-01: every primal responds to {"method":"health"} with
   {"status":"ok","primal":"beardog","version":"0.9.0","uptime_s":42}
   deploy engine validates all; failed health → restart with backoff"""
-health_convergence = """rhizocrypt + petaltongue converge on JSON-RPC health.
+health_convergence = """13/13 HEALTH-01 GRADUATED.
   ✅ songBird HEALTH-SB-01 DONE (Wave 110, 471ed43b): bare "health" → {status, primal, version, uptime_s}.
-  Remaining: HEALTH-RC-01, HEALTH-PT-01 (Wave 110 Stream 1)."""
+  ✅ rhizoCrypt HEALTH-RC-01 DONE (Wave 107, 410018d → v0.14.8): health_liveness() enriched with primal, version, uptime_s. dispatch_liveness() reads uptime from RhizoCryptRpcServer. Wave 108 (0e2b031 → v0.14.9): typed DiscoveryQueryError deep debt.
+  ✅ petalTongue HEALTH-PT-01 DONE (Wave 110, 2dba46f): bare "health" rerouted to enriched health.check, uptime_s added."""
 launcher = """LAUNCHER-01: nucleus_launcher cross-compiled for aarch64, or equivalent.
   Starts primals in dependency order, waits for health, injects discovery, monitors crashes."""
 tolerances = """Named tolerances for deployment lifecycle:
