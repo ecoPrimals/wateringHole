@@ -1,71 +1,76 @@
 # Wave 110 — Last Mile Health + Gate Expansion
 
-**Date**: 2026-06-11 (prepared; activate on Wave 109 closure)
+**Date**: 2026-06-11 (ACTIVE — mid-wave status)
 **From**: eastGate overwatch (cellMembrane)
 **FRAGO**: `impulses/active/2026-06-11T07-20_eastGate__wave109-guidestone-deployment-convergence.toml` (carries forward)
 
 ---
 
-## Wave 109 Exit Summary
+## Wave 109→110 Transition Summary
 
-Wave 109 proved guideStone infrastructure lands at scale:
-- **39/59 FRAGO items resolved** (66% closed)
-- **Startup contract 5/6** — barraCuda, coralReef, nestGate, biomeOS, skunkBat all converged
-- **HEALTH-01 10/13** — schema, sweetGrass, biomeOS, healthSpring all compliant
-- **Build pipeline landed** — `plasmid.build` Rust, `deployment.toml`, gate profiles, JSON-RPC health sweep
-- **BTSP server ready** — sweetGrass v0.7.56, 88 BTSP tests
-- **grapheneGate 13/13** — first cross-arch full NUCLEUS on mobile hardware
+Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
+- **53/59 FRAGO items resolved** (90% closed)
+- **Startup contract 6/6 COMPLETE** — bearDog shipped (945de60f), all 13 primals standardized
+- **HEALTH-01 12/13** — songBird SHIPPED (471ed43b), petalTongue SHIPPED (2dba46f), joining sweetGrass, biomeOS, healthSpring
+- **Build pipeline COMPLETE** — Stream 3 fully resolved (5/5 items), gate engine wired
+- **BTSP TCP E2E test SHIPPED** — bearDog (945de60f) real handshake + encrypted JSON-RPC
+- **cellMembrane Stream 5 core DONE** — dual checksum, cascade-restart, agentic resolve all wired
+- **Federation root cause FOUND** — songBird (471ed43b) fixes `enabled` semantics
+- **primalSpring post-primordial reversal** — no longer a primal, exclusively an arena (4f9a865)
+- **biomeOS v4.23** — deep debt, Duration consolidation across 12 crates
 
-**Carried from Wave 109** (20 items): bearDog startup, 3 primals health, LAUNCHER-01, BTSP-E2E-01, build hardening (5), gate engine, all Stream 5 (7 cascade/qS/rP items), flockGate federation, sourDough segfault.
-
----
-
-## Wave 110 Focus
-
-**Theme**: Close HEALTH-01 13/13, execute BTSP E2E proof, begin gate expansion, primalSpring self-convergence.
+**Remaining** (5 active items): 1 health (rhizoCrypt), LAUNCHER-01, BTSP cross-primal E2E, flockGate handshake retest, sourDough segfault. Plus 3 deferred (qS/rP/freshness → Wave 111+).
 
 ---
 
-## 6 Work Streams
+## Wave 110 Focus (Updated)
+
+**Theme**: Close HEALTH-01 13/13, deploy federation fix to VPS, begin gate expansion (northGate/westGate), validate BTSP cross-primal E2E.
+
+---
+
+## 6 Work Streams (Updated Status)
 
 ### Stream 1: HEALTH-13/13 — Close the Health Contract
 
-**Owner**: songBird, rhizoCrypt, petalTongue teams
+**Owner**: rhizoCrypt team (last remaining)
 **guideStone**: P3 (Self-Verifying), P5 (Tolerance-Documented)
 
-| Item | Owner | Priority | Notes |
-|------|-------|----------|-------|
-| HEALTH-RC-01 | rhizoCrypt | P2 | Enrich `health_liveness()` → add `primal`, `version`, `uptime_s` |
-| HEALTH-PT-01 | petalTongue | P2 | Bare `"health"` alias + schema enrichment |
-| HEALTH-SB-01 | songBird | P2 | Standard health endpoint (ties to federation investigation) |
-| STARTUP-BD-01 | bearDog | P2 | Abstract socket auto-detect (last startup holdout) |
+| Item | Owner | Priority | Status |
+|------|-------|----------|--------|
+| HEALTH-RC-01 | rhizoCrypt | P2 | REMAINING — Enrich `health_liveness()` → add `primal`, `version`, `uptime_s` |
+| ~~HEALTH-PT-01~~ | petalTongue | P2 | **DONE** (2dba46f) — bare `"health"` rerouted to enriched `health.check`, `uptime_s` field added, advertised in `capabilities.list` |
+| ~~HEALTH-SB-01~~ | songBird | P2 | **DONE** (471ed43b) — bare "health" + enriched schema + uptime_s |
+| ~~STARTUP-BD-01~~ | bearDog | P2 | **DONE** (945de60f) — `--bind-mode` flag, 6/6 startup contract COMPLETE |
 
 **Exit criterion**: 13/13 primals respond to `{"method":"health"}` with `{status, primal, version, uptime_s}`.
+**Current**: 12/13. Remaining: rhizoCrypt.
 
 ### Stream 2: BTSP End-to-End — Encrypted Composition Proof
 
 **Owner**: primalSpring + bearDog + sweetGrass
 **guideStone**: P3 (Self-Verifying)
 
-| Item | Owner | Priority |
-|------|-------|----------|
-| BTSP-E2E-01 | primalSpring | P2 |
-| grapheneGate BTSP TCP validation | primalSpring | P3 |
+| Item | Owner | Priority | Status |
+|------|-------|----------|--------|
+| ~~BTSP-E2E-01 (TCP handshake)~~ | bearDog | P2 | **DONE** (945de60f) — real TCP handshake + encrypted JSON-RPC roundtrip |
+| BTSP cross-primal E2E | primalSpring | P2 | REMAINING — full bearDog→client→sweetGrass chain |
+| grapheneGate BTSP TCP validation | primalSpring | P3 | REMAINING |
 
 **Exit criterion**: Full bearDog→client→sweetGrass handshake validated (pass or documented failure mode with root cause).
 
-### Stream 3: Build Hardening — Pipeline Determinism
+### Stream 3: Build Hardening — Pipeline Determinism — **FULLY RESOLVED**
 
 **Owner**: cellMembrane
 **guideStone**: P1 (Deterministic), P2 (Reference-Traceable)
 
-| Item | Priority |
-|------|----------|
-| BUILD-CACHE-01: clean staging before `--all` | P2 |
-| BUILD-ELF-01: ELF arch validation at build time | P2 |
-| HARVEST-NAME-01: cargo-vs-primal naming audit | P2 |
-| GATE-PROFILE-01: gate.bootstrap reads profile TOML | P2 |
-| Gate engine: `deploy_pixel.sh` → transport backend | P3 |
+| Item | Priority | Status |
+|------|----------|--------|
+| ~~BUILD-CACHE-01~~ | P2 | **DONE** — ephemeral --depth 1 clone |
+| ~~BUILD-ELF-01~~ | P2 | **DONE** — validate_elf_arch() |
+| ~~HARVEST-NAME-01~~ | P2 | **DONE** — binary_name from sources.toml |
+| ~~GATE-PROFILE-01~~ | P2 | **DONE** — GateProfile expanded |
+| ~~Gate engine~~ | P3 | **DONE** (456ab08) — transport_to_fetch_source() |
 
 ### Stream 4: Gate Expansion — northGate + westGate
 
@@ -86,33 +91,33 @@ Wave 109 proved guideStone infrastructure lands at scale:
 
 **Exit criterion**: northGate 13/13 alive + meshed. westGate Nest Atomic 7/7 alive.
 
-### Stream 5: primalSpring Dogfood — Self-Convergence
+### Stream 5: primalSpring Dogfood — Self-Convergence — **MOSTLY RESOLVED**
 
 **Owner**: primalSpring evolution team (parallel chat)
 **guideStone**: P4 (Environment-Agnostic), P5 (Tolerance-Documented)
 
-| Item | Priority | Notes |
-|------|----------|-------|
-| STARTUP-PS-01: `--bind-mode`/`--port` on `primalspring_primal` | P1 | Dogfood own standard |
-| HEALTH-PS-01: bare `"health"` + `uptime_s` on own server | P1 | Dogfood HEALTH-01 |
-| LAUNCHER-01: `nucleus_launcher` aarch64 cross-compile | P2 | On-device orchestration |
-| Inline tolerance migration (~15 scenarios) | P2 | guideStone P5 compliance |
-| Proto-nucleate manifest completion (4 springs) | P3 | Composition readiness |
-| Clippy test compliance (test targets passing `-D warnings`) | P3 | CI quality |
+| Item | Priority | Status |
+|------|----------|--------|
+| ~~STARTUP-PS-01~~ | P1 | **DONE** (f0ca016) — then DELETED in post-primordial reversal (4f9a865) |
+| ~~HEALTH-PS-01~~ | P1 | **DONE** (f0ca016) — then DELETED (primalSpring is arena, not primal) |
+| LAUNCHER-01 | P2 | REMAINING — `nucleus_launcher` aarch64 cross-compile |
+| ~~Tolerance migration~~ | P2 | **DONE** (f0ca016) — 15 inline values → tolerances/mod.rs |
+| Proto-nucleate manifest | P3 | REMAINING |
+| ~~Clippy test compliance~~ | P3 | **DONE** (f0ca016) — `-D warnings` all-targets clean |
 
-### Stream 6: Federation Debug — flockGate WAN
+### Stream 6: Federation Debug — flockGate WAN — **ROOT CAUSE FIXED**
 
 **Owner**: songBird team + flockGate ops
 **guideStone**: P1 (Deterministic)
 
-| Investigation | Question |
-|---------------|----------|
-| Client activation | What enables `federation.enabled = true`? |
-| Auth dependency | Is `SECURITY_PROVIDER_SOCKET` required? |
-| Config delta | What do LAN gates have that flockGate/VPS don't? |
-| Push model | Should VPS initiate federation TO flockGate? |
+| Investigation | Answer |
+|---------------|--------|
+| ~~Client activation~~ | **FOUND**: `federation.status` reported connectivity (`total_nodes > 0`) not config. Fixed (471ed43b). |
+| ~~Auth dependency~~ | **DOCUMENTED**: `SECURITY_PROVIDER_SOCKET` NOT required — gracefully degrades to plaintext. |
+| ~~Config delta~~ | **N/A** — the bug was in the status reporting logic, not in config. |
+| Push model | REMAINING — deploy fix, retest. If handshake still fails: investigate join protocol. |
 
-**Exit criterion**: Root cause documented. Fix shipped OR architecture decision recorded.
+**Exit criterion**: ~~Root cause documented.~~ **DONE.** Fix deployed to VPS + flockGate handshake validated.
 
 ---
 
@@ -141,24 +146,27 @@ Wave 109 proved guideStone infrastructure lands at scale:
 
 ## Success Criteria (Wave 110 exit gate)
 
-- [ ] 13/13 HEALTH-01 compliant (or 12/13 with songBird federation documented)
-- [ ] BTSP-E2E-01 first execution documented (pass or root cause)
+- [x] ~~bearDog STARTUP-BD-01 resolved → **6/6 startup contract**~~ **DONE** (945de60f)
+- [x] ~~BTSP-E2E-01 first execution documented~~ **DONE** — bearDog TCP handshake + encrypted JSON-RPC (945de60f)
+- [x] ~~primalSpring self-convergence~~ **DONE** — post-primordial reversal: no longer primal (4f9a865)
+- [x] ~~flockGate federation root cause documented~~ **DONE** (471ed43b)
+- [x] ~~Registry versions reflect ground truth~~ **MAINTAINED**
+- [ ] 13/13 HEALTH-01 compliant (currently 12/13 — rhizoCrypt remaining)
+- [ ] BTSP cross-primal E2E (bearDog→client→sweetGrass full chain)
 - [ ] northGate NUCLEUS 13/13 bootstrapped and meshed
-- [ ] primalSpring serves on own standard (`--bind-mode`, `"health"`)
-- [ ] bearDog STARTUP-BD-01 resolved → **6/6 startup contract**
-- [ ] flockGate federation root cause documented
-- [ ] Registry versions reflect ground truth (maintained this wave)
+- [ ] Federation fix deployed to VPS + flockGate handshake validated
+- [ ] Depot rebuild to bake in bearDog/biomeOS/songBird/petalTongue evolution
 
 ---
 
-## Routing — Primal Status (Wave 110 entry)
+## Routing — Primal Status (Wave 110 mid-wave)
 
 | Primal | Work | Status |
 |--------|------|--------|
-| **bearDog** | STARTUP-BD-01 + BTSP-E2E-01 client | ACTIVE |
-| **songBird** | HEALTH-SB-01 + federation investigation | ACTIVE |
-| **rhizoCrypt** | HEALTH-RC-01 | ACTIVE |
-| **petalTongue** | HEALTH-PT-01 | ACTIVE |
+| **rhizoCrypt** | HEALTH-RC-01 | ACTIVE — last health holdout |
+| **songBird** | Deploy fix to VPS + handshake retest | ACTIVE — code shipped, deploy pending |
+| **bearDog** | ~~STARTUP-BD-01~~ DONE, BTSP cross-primal client role | STANDBY (shipped) |
+| **petalTongue** | ~~HEALTH-PT-01~~ DONE (2dba46f) | STANDBY (shipped) |
 | All others (9) | — | STANDBY |
 
 ---
@@ -168,11 +176,13 @@ Wave 109 proved guideStone infrastructure lands at scale:
 | Document | Purpose |
 |----------|---------|
 | This blurb | Wave 110 per-level guidance |
-| `impulses/active/...wave109-guidestone-deployment-convergence.toml` | Main FRAGO (carries forward) |
-| `impulses/active/...wave109-wan-federation-disabled.toml` | flockGate federation gap |
+| `impulses/active/...wave109-guidestone-deployment-convergence.toml` | Main FRAGO (carries forward, 53/59 resolved) |
+| `impulses/active/...wave110-songbird-health-federation-fix.toml` | songBird health + federation AAR |
+| `impulses/active/...wave109-wan-federation-disabled.toml` | flockGate federation gap (root cause found) |
+| `handoffs/AAR_PRIMALSPRING_WAVE110_POST_PRIMORDIAL_EVOLUTION_JUN11_2026.md` | primalSpring reversal AAR |
 | `cellMembrane/AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md` | Living deployment standard |
 | `GLACIAL_SHIFT_READINESS.md` | Stadial entry tracking |
 
 ---
 
-**Wave 109 proved the infrastructure works. Wave 110 closes the last mile.**
+**Wave 109 proved the infrastructure works. Wave 110 is closing the last mile — 90% resolved, 5 items remaining.**
