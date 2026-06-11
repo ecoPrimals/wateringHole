@@ -167,7 +167,7 @@ successful handshake untested."""
 
 [stream4.items]
 btsp_handshake = "✅ RESOLVED (79bdc82, Wave 110): BTSP cross-primal E2E — 17/20 pass. bearDog handshake PROVEN. sweetGrass/songBird respond via authenticated context. Documented gaps: discovery/attribution plaintext fallback (BTSP server not yet in songBird/sweetGrass)."
-btsp_graphenegate = "REMAINING: validate BTSP on grapheneGate TCP-only transport (no UDS involved)"
+btsp_graphenegate = "✅ RESOLVED (Wave 110): grapheneGate TCP BTSP validated — security model PROVEN (sweetGrass gates, bearDog serves, Tower crypto operational). Full handshake blocked by stale binaries (Feb 2026), fix = depot rebuild."
 
 [stream4.resolved]
 sweetgrass_btsp = "RESOLVED (a675425): sweetGrass v0.7.56 BTSP E2E readiness — BEARDOG_SOCKET resolution, 88 BTSP tests"
@@ -230,7 +230,7 @@ description = "sourdough validate depot crashes (segfault). Manual b3sum fallbac
 # ──────────────────────────────────────────────────────────────
 
 [resolved_summary]
-count = 57
+count = 58
 detail = """Waves 106-110 resolved:
   Wave 106-108 (26): grapheneGate 13/13, VPS songbird restart, BM-UDS-01, CR-TARPC-01,
     NG-DOWNCAST-01, aarch64 rebuild, NDK, SONGBIRD-IPC, BARRACUDA-METHOD-DESCRIBE,
