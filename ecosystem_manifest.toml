@@ -494,6 +494,13 @@ forgejo_repo = "ecoPrimals/fossilRecord"
 # filter — a gate only pulls repos it needs.
 
 [gates.eastGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "full"
+transport = "lan"
+mesh_peer = "157.230.3.183:7700"
+notes = "Primary development gate + peptidoglycan build host"
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -569,6 +576,12 @@ repos = [
 [gates.grapheneGate]
 gate_class = "portable_anchor"
 bond_types = ["covalent"]
+target = "aarch64-unknown-linux-musl"
+mobility = "mobile"
+bind_mode = "tcp_only"
+composition = "full"
+transport = "adb"
+notes = "Pixel 8a — 13/13 primals via deploy_pixel.sh"
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
@@ -579,6 +592,13 @@ repos = [
 kderm_layer = "inner_membrane"
 bond_types = ["covalent", "metallic"]
 host = "157.230.3.183"
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "full"
+transport = "local"
+mesh_peer = "127.0.0.1:7700"
+notes = "VPS inner membrane — 13/13 NUCLEUS, Forgejo, Caddy"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "cellMembrane", "projectNUCLEUS",

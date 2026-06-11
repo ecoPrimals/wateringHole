@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 10, 2026 (Wave 108: ZERO P1. ZERO primal code blockers. Mountain clear — BM-UDS-01, CR-TARPC-01, NG-DOWNCAST-01 all resolved. 13/13 primals clean. grapheneGate 13/13 ready. 4-gate mesh collective LIVE. S1-S4 GRADUATED. 4 P2 ops remaining.)
+**Last Updated**: June 11, 2026 (Wave 109: guideStone deployment convergence. PlatformCapabilities::detect() shipped. HEALTH-01 response schema + validation scenario. 5 work streams: standard startup contract, build pipeline + gate profiles, post-deploy validation, BTSP E2E, cellMembrane cascade. 5-gate mesh live. 915 tests, 56 scenarios, zero known debt.)
 
 ---
 
