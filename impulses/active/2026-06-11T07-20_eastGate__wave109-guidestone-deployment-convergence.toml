@@ -12,10 +12,11 @@ date = "2026-06-11"
 priority = "P2"
 owner = "eastGate + cellMembrane + primalSpring"
 note = """
-Wave 110 status (cellMembrane): Stream 2 FULLY RESOLVED (6/6). Deep debt evolution shipped —
-native UDS probes, modular gate/ split, agnostic config, agentic resolver, dual checksum,
-cascade-restart. northGate + westGate profiles registered. 360 tests, zero clippy.
-Stream 5: dual_checksum + cascade_restart DONE. Remaining 4 items → Wave 111+.
+Wave 110+ status (cellMembrane): Stream 2 FULLY RESOLVED (6/6). Stream 5 agentic_resolve DONE.
+Deep debt evolution to PRIMAL COMPOSITION GRADE: ServiceCapability enum (capability-based
+discovery), temporal/resolve.rs + plasmid/toolchain.rs extracted, all paths env-configurable,
+DRY socket resolution. Zero prod unwrap/TODO/allow/unsafe, all deps pure Rust. 360 tests.
+Remaining Stream 5 items (qs_signal_graphs, rp_impulse_evolution, freshness_mesh) → Wave 111+.
 
 ---
 Cross-topology validation is COMPLETE: LAN (4 gates), WAN (flockGate 4/5), ARM (grapheneGate
@@ -184,7 +185,7 @@ dual_checksum = "✅ DONE (Wave 110). gate.bootstrap now runs checksum.git + che
 cascade_restart = "✅ DONE (Wave 110). temporal.cascade --with-restart: compares depot vs installed BLAKE3, copies + restarts changed primals."
 process_version = "✅ DONE (Wave 109, 9b764a5). health_sweep now probes UDS via JSON-RPC health before falling back to pgrep."
 deployment_manifest = "✅ DONE (Wave 109, 9b764a5). deployment.toml emission from gate.bootstrap — records gate, arch, mobility, hostname, timestamp, membrane_version."
-agentic_resolve = "graduate divergence policy from merge-ff → agentic resolve (stub exists, not wired)"
+agentic_resolve = "✅ DONE (Wave 110+). Authority-first graduated escalation: ff → rebase from sovereign → signal conflict. SOVEREIGN_REMOTE configurable via env. temporal/resolve.rs extracted."
 qs_signal_graphs = "quorumSignal: 15 atomic signal graphs from WATERFALL_TEMPORAL_SYNC.md Phase 2"
 rp_impulse_evolution = "rootPulse: impulse lifecycle → full provenance trio (commit/branch/merge/diff/federate)"
 freshness_mesh = "move freshness from file-based freshness.toml → songbird mesh.publish of per-remote HEADs"
