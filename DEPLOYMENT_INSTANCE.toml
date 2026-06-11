@@ -194,6 +194,18 @@ mobility = "fixed"
 transport = "lan"
 role = "CompChem + genomics"
 
+[fleet.gates.northGate]
+arch = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+transport = "lan"
+role = "Primary compute — Ryzen 9950X3D + RTX 5090 32GB + 96GB RAM"
+
+[fleet.gates.westGate]
+arch = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+transport = "lan"
+role = "Cold storage — i7-4771 + 76TB ZFS, Nest Atomic (7 primals)"
+
 [fleet.gates.grapheneGate]
 arch = "aarch64-unknown-linux-musl"
 mobility = "mobile"

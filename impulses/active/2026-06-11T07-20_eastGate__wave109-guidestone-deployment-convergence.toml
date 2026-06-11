@@ -106,18 +106,12 @@ description = """Port build-primal.sh to Rust (membrane plasmid.build). Gate pro
 gate.bootstrap reads profile instead of hardcoding topology assumptions."""
 
 [stream2.items]
-plasmid_build = "membrane plasmid.build — ephemeral staging, BLAKE3 verify, provenance recording"
-build_cache_fix = "BUILD-CACHE-01: clean staging before --all (prevents stale cache poisoning)"
-build_elf_fix = "BUILD-ELF-01: use object crate or readelf instead of shell file+grep"
-harvest_name_fix = "HARVEST-NAME-01: eliminate cargo-vs-primal naming mismatches"
-gate_profiles = """GATE-PROFILE-01: topology-aware TOML per gate in ecosystem_manifest.toml:
-  [gates.grapheneGate]
-  arch = 'aarch64-unknown-linux-musl'
-  transport = 'adb'
-  deploy_root = '/data/local/tmp/plasmidBin'
-  bind_mode = 'tcp_only'
-  capabilities = ['tcp', 'abstract_socket_partial']"""
-gate_engine = "gate.bootstrap reads gate profile; deploy_pixel.sh becomes one transport backend"
+plasmid_build = "✅ DONE (Wave 109, 9b764a5). plasmid.build: guideStone-grade Rust build with ephemeral staging, ELF validation, provenance, BLAKE3."
+build_cache_fix = "✅ DONE (Wave 109). BUILD-CACHE-01: ephemeral --depth 1 clone inherently prevents stale cache."
+build_elf_fix = "✅ DONE (Wave 109, 9b764a5). BUILD-ELF-01: validate_elf_arch() in both plasmid.build and plasmid.harvest — verifies correct arch + static linking."
+harvest_name_fix = "✅ DONE (Wave 109, 9b764a5). HARVEST-NAME-01: binary_name resolution from sources.toml with clear error on mismatch."
+gate_profiles = "✅ DONE (Wave 109, 9b764a5). GATE-PROFILE-01: GateProfile expanded (target, mobility, bind_mode, composition, transport, mesh_peer, notes). gate.profile command. ecosystem_manifest.toml updated."
+gate_engine = "gate.bootstrap reads gate profile (done). deploy_pixel.sh transport backend abstraction: P3, Wave 110."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: Post-Deploy Validation + Orchestration (AAR Gaps 5+6)
@@ -181,8 +175,8 @@ guideStone-grade deployment lifecycle."""
 [stream5.items]
 dual_checksum = "gate.bootstrap verifies against BOTH git checksums.toml AND VPS-served checksums"
 cascade_restart = "post-cascade selective NUCLEUS restart — auto-fetch + supervised restart"
-process_version = "health.sweep version match — JSON-RPC version check, not just pgrep liveness"
-deployment_manifest = "deployment.toml emission from gate.bootstrap — exact binary hashes, mesh state, health"
+process_version = "✅ DONE (Wave 109, 9b764a5). health_sweep now probes UDS via JSON-RPC health before falling back to pgrep."
+deployment_manifest = "✅ DONE (Wave 109, 9b764a5). deployment.toml emission from gate.bootstrap — records gate, arch, mobility, hostname, timestamp, membrane_version."
 agentic_resolve = "graduate divergence policy from merge-ff → agentic resolve (stub exists, not wired)"
 qs_signal_graphs = "quorumSignal: 15 atomic signal graphs from WATERFALL_TEMPORAL_SYNC.md Phase 2"
 rp_impulse_evolution = "rootPulse: impulse lifecycle → full provenance trio (commit/branch/merge/diff/federate)"
