@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-10 (Wave 107 — **ZERO P1. 4-gate mesh collective LIVE** (eastGate↔golgiBody↔ironGate+southGate). **southGate cross-subnet VALIDATED** (192.168.4.29/22, 13/13 alive, 19/22 capabilities resolved, 12-step distributed science pipeline). **grapheneGate 13/13 TCP fallback ALL ADOPTED** (awaiting aarch64 rebuild + redeploy). cellMembrane shipped gate.status, --dry-run, WAN checksums, atomic publish. VPS depot refreshed (songbird+biomeOS). **Upstream primal evolution**: songBird M1 SHIPPED (topology-aware ipc.resolve), barraCuda method.describe SHIPPED (v0.4.0, 97 methods), socket cleanup 4/5 DONE (toadStool pending), biomeOS auto-register SHIPPED (v4.19 — NUCLEUS registers primals with songBird). **5 remaining items: 2 P2 ops (flockGate power-on, grapheneGate rebuild), 1 P2 code (toadStool /tmp), 2 LOW (skunkBat TCP 9750, sourDough segfault).** Ecosystem in pure validation mode.)
+**Last updated**: 2026-06-11 (Wave 109 — **guideStone deployment convergence.** Cross-topology validation COMPLETE: LAN (5 gates), WAN (flockGate 4/5 — VPS restarted, re-test pending), ARM (grapheneGate 13/13 DEPLOYED Wave 108), VPS (golgiBody 13/13). **5-gate ecosystem LIVE.** Strategic shift from "deploy and verify" to guideStone-grade identical deployments. 5 work streams: startup contract (7 primal items), build pipeline + gate profiles (cellMembrane), health + orchestration (primalSpring + biomeOS), BTSP e2e (sweetGrass + bearDog), cascade + quorumSignal + rootPulse (cellMembrane). FRAGO: `wave109-guidestone-deployment-convergence`. **Criterion 7 (guideStone deployment) added below.**)
 
 ---
 
@@ -359,8 +359,8 @@ rhizoCrypt startup latency, Songbird `--security-socket`, stale socket cleanup,
 
 ## Glacial Shift Criteria (Revised — Diderm Membrane Architecture)
 
-The glacial shift (stadial entry) is reached when the following 6 criteria
-are met. **Revised Wave 77b** to reflect the diderm membrane model: the
+The glacial shift (stadial entry) is reached when the following 7 criteria
+are met. **Revised Wave 77b** (criteria 1-6) + **Wave 109** (criterion 7): the
 inner membrane (`primal.eco`) must be fully sovereign; the outer membrane
 (`primals.eco`) may use commercial services (Cloudflare). See
 `DIDERM_DOMAIN_ARCHITECTURE.md` for the full trust barrier model.
@@ -373,13 +373,18 @@ inner membrane (`primal.eco`) must be fully sovereign; the outer membrane
 | 4 | Remote covalent node over WAN | Via inner membrane only (Songbird TURN through peptidoglycan). |
 | 5 | DNS sovereign for inner membrane | `primal.eco` + `nestgate.io` on knot-dns. `primals.eco` on Cloudflare is acceptable. |
 | 6 | Inner membrane zero-commercial + cross-validation | Zero commercial services in `primal.eco` data path. Dual-path cross-membrane validation operational. |
+| 7 | guideStone-grade deployment across all gates | All NUCLEUS deployments satisfy 5 guideStone properties: deterministic, reference-traceable, self-verifying, environment-agnostic, tolerance-documented. Functionally identical from VPS authority. Standard startup contract, gate profiles, health endpoints, named tolerances. |
 
 **Key change from pre-Wave 77b**: Criterion 6 no longer requires
 Cloudflare removal from the outer membrane. Instead, it requires cross-
 membrane validation — the inner membrane acts as the ground truth
 validator for content served by the outer membrane.
 
-**Current assessment (Wave 107)**: **ZERO P1. 4-GATE MESH COLLECTIVE LIVE (eastGate↔golgiBody↔ironGate+southGate). DETERMINISTIC DEPLOYMENT ACHIEVED + HARDENED (gate.status, --dry-run, WAN checksums, atomic publish). NUCLEUS SUPERVISION SHIPPED. TCP-ONLY FALLBACK SHIPPED + ALL ADOPTED. TRANSPORT 11/11. DEPOT 13/13 VERIFIED. southGate CROSS-SUBNET VALIDATED (distributed science pipeline). grapheneGate 13/13 TCP ADOPTED (awaiting rebuild). STADIAL GATE CLEAR.**
+**Criterion 7 (Wave 109)**: Added to codify the requirement that deployment itself must
+be guideStone-grade — not just "working" but deterministic, traceable, self-verifying,
+environment-agnostic, and tolerance-documented. FRAGO: `wave109-guidestone-deployment-convergence`.
+
+**Current assessment (Wave 109)**: **ZERO P1. 5-GATE ECOSYSTEM LIVE** (eastGate↔golgiBody↔ironGate+southGate + grapheneGate). **grapheneGate 13/13 DEPLOYED AND ALIVE** (Wave 108). Deterministic deployment ACHIEVED but **not yet guideStone-grade** — per-primal startup knowledge in scripts, no standard health endpoint, no on-device orchestration, BTSP handshake untested. **Criterion 7 drives the remaining convergence**: 5 work streams, 10+ convergence items across primalSpring, cellMembrane, biomeOS, and primal teams. **Criteria 1-6 status: stadial-ready. Criterion 7: IN PROGRESS.**
 
 **Wave 98-103 milestones**:
 - Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 12/12 capabilities with coralReef depot fix)

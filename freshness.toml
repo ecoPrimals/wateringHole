@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 67
+id = 108
 date = "2026-06-11"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Auto-published by membrane temporal.cascade --publish-freshness"
+notes = "Wave 108: grapheneGate 13/13 DEPLOYED. VPS songbird RESTARTED. flockGate WAN 5/5 pending re-test. 1 P2, 18 LOW."
 publisher = "membrane"
 
 [heads]
@@ -50,6 +50,6 @@ sporePrint = "e4e84e35da311a540f6a350fc4fc9d0b3e3f083b"
 squirrel = "a8c2e7cc5153406b7075dd42ee42e7358c9aadf7"
 sweetGrass = "8759baab125b975c7f1ffc9fac4cdfa1dd47adb1"
 toadStool = "02a0db2c7e93dfe2b90e40e8f8c9c914a67a07bc"
-wateringHole = "5daaa456dafa213c805822feb573d50deda546d3"
+wateringHole = "757a2e073c4baa2209ba16a37f3b19d37f193894"
 wetSpring = "8b6c68f3e24ecb25361780925174f64b97e49fe5"
 whitePaper = "d7392f9dfb3de9d43f8e4f971d73f6ca51c7308b"

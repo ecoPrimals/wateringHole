@@ -1,0 +1,228 @@
+# FRAGO: guideStone-Grade Deployment Convergence
+# Replaces: wave106-cross-topology-validation (archived — all topologies validated)
+# Purpose: evolve all NUCLEUS deployments to guideStone-grade deterministic, functionally
+#          identical across every gate, true postPrimordial from VPS authority.
+
+[impulse]
+id = "wave109-guidestone-deployment-convergence"
+type = "frago"
+from = "eastGate"
+to = ["cellMembrane", "biomeOS", "primalSpring", "all-primals", "all-gates"]
+date = "2026-06-11"
+priority = "P2"
+owner = "eastGate + cellMembrane + primalSpring"
+note = """
+Cross-topology validation is COMPLETE: LAN (4 gates), WAN (flockGate 4/5), ARM (grapheneGate
+13/13), VPS (golgiBody 13/13). Deployment works. But "works" is not the goal — the goal is
+every NUCLEUS deployment on every gate being guideStone-grade and functionally identical.
+
+The grapheneGate AAR (Wave 108) exposed 7 abstraction gaps. The flockGate WAN AAR (Wave 106)
+mapped 5 guideStone properties to deployment. This FRAGO structures the convergence into 5
+work streams with clear ownership and guideStone property traceability.
+
+Companion: AAR_GRAPHENEGATE_WAVE108_13_OF_13_DEPLOYED_JUN10_2026.md (7 gaps)
+Living standard: cellMembrane/AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md
+"""
+
+# ──────────────────────────────────────────────────────────────
+# GUIDESTONE PROPERTIES APPLIED TO DEPLOYMENT
+# ──────────────────────────────────────────────────────────────
+
+[guidestone]
+description = """Every NUCLEUS deployment must satisfy all 5 guideStone properties:
+
+  P1: DETERMINISTIC — same depot + same gate profile = identical NUCLEUS state
+  P2: REFERENCE-TRACEABLE — every binary traces to provenance.toml (commit, rustc, timestamp, blake3)
+  P3: SELF-VERIFYING — BLAKE3 fail-closed; mismatch = abort, no silent degradation
+  P4: ENVIRONMENT-AGNOSTIC — musl-static ecoBins, no runtime deps, no sudo, no local builds
+  P5: TOLERANCE-DOCUMENTED — named tolerances for depot staleness, mesh handshake, health convergence
+
+The 6 existing deterministic deployment invariants (Wave 106 AAR) are the foundation:
+  Binary authority, Checksum verification, Atomic replacement, Mesh bootstrap,
+  Health verification, Source parity.
+
+This FRAGO adds the abstraction layer that makes those invariants universal across topologies."""
+
+# ──────────────────────────────────────────────────────────────
+# CURRENT STATE (Wave 109, Jun 11 2026)
+# ──────────────────────────────────────────────────────────────
+
+[current_state]
+p1_blockers = "ZERO."
+cross_topology = """ALL VALIDATED:
+  LAN x86_64: eastGate + golgiBody + ironGate + strandGate + southGate (5 gates, 13/13 each)
+  WAN x86_64: flockGate (4/5 — VPS restarted Wave 108, awaiting re-test)
+  ARM aarch64: grapheneGate (13/13 deployed + alive, Wave 108)
+  VPS: golgiBody (13/13, depot authority)"""
+depot = "14/14 aarch64 + 13/13 x86_64, BLAKE3 verified. VPS synced. checksums.toml + provenance.toml current."
+mesh = "5-gate: eastGate↔golgiBody↔ironGate+southGate + grapheneGate standalone. flockGate pending."
+sovereignty = "S1-S4 ALL GRADUATED."
+deployment_model = """postPrimordial ENFORCED. gate.bootstrap shipped (6-phase).
+Deployment WORKS but is not yet guideStone-grade:
+  - Per-primal startup knowledge in scripts, not standard contract
+  - Platform detection hardcoded, not auto-sensed
+  - Build pipeline fragile (shell staging, naming mismatches)
+  - Gate profiles assumed, not declared
+  - Health = TCP probe only, not JSON-RPC version match
+  - No on-device orchestration on grapheneGate
+  - BTSP auth enforcement confirmed, handshake untested"""
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 1: Standard Primal Startup Contract (AAR Gaps 1+2)
+# guideStone: P1 (Deterministic), P4 (Environment-Agnostic)
+# ──────────────────────────────────────────────────────────────
+
+[stream1]
+id = "STARTUP-CONTRACT"
+owner = "primalSpring + primal teams"
+priority = "P2"
+guidestone_properties = ["P1-Deterministic", "P4-Environment-Agnostic"]
+description = """Converge all 13 primals on a standard startup envelope.
+No per-primal case blocks in deploy scripts. Every primal accepts:
+  $PRIMAL server --bind-mode $PRIMAL_BIND_MODE --port $PORT
+PlatformCapabilities::detect() auto-senses transport from environment.
+PRIMAL_BIND_MODE becomes override-only."""
+
+[stream1.items]
+beardog = "auto-detect abstract socket from bind mode (remove --abstract flag dependency)"
+nestgate = "default HTTP in server mode (remove explicit --enable-http requirement)"
+biomeos = "infer --btsp-optional from bind mode (Neural API server startup)"
+coralreef = "unify --rpc-bind with --port --bind (tarpc + JSON-RPC under one flag)"
+barracuda = "replace --no-unix with PRIMAL_BIND_MODE reading"
+skunkbat = "replace --no-uds with PRIMAL_BIND_MODE reading"
+platform_detect = "PlatformCapabilities::detect() in primalSpring ipc crate (infrastructure, not a primal) — SELinux, UDS, abstract socket probing. Primals consume this."
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 2: Build Pipeline + Gate Profiles (AAR Gaps 3+4)
+# guideStone: P1 (Deterministic), P2 (Reference-Traceable)
+# ──────────────────────────────────────────────────────────────
+
+[stream2]
+id = "BUILD-PIPELINE-GATE-PROFILES"
+owner = "cellMembrane"
+priority = "P2"
+guidestone_properties = ["P1-Deterministic", "P2-Reference-Traceable"]
+description = """Port build-primal.sh to Rust (membrane plasmid.build). Gate profiles in TOML.
+gate.bootstrap reads profile instead of hardcoding topology assumptions."""
+
+[stream2.items]
+plasmid_build = "membrane plasmid.build — ephemeral staging, BLAKE3 verify, provenance recording"
+build_cache_fix = "BUILD-CACHE-01: clean staging before --all (prevents stale cache poisoning)"
+build_elf_fix = "BUILD-ELF-01: use object crate or readelf instead of shell file+grep"
+harvest_name_fix = "HARVEST-NAME-01: eliminate cargo-vs-primal naming mismatches"
+gate_profiles = """GATE-PROFILE-01: topology-aware TOML per gate in ecosystem_manifest.toml:
+  [gates.grapheneGate]
+  arch = 'aarch64-unknown-linux-musl'
+  transport = 'adb'
+  deploy_root = '/data/local/tmp/plasmidBin'
+  bind_mode = 'tcp_only'
+  capabilities = ['tcp', 'abstract_socket_partial']"""
+gate_engine = "gate.bootstrap reads gate profile; deploy_pixel.sh becomes one transport backend"
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 3: Post-Deploy Validation + Orchestration (AAR Gaps 5+6)
+# guideStone: P3 (Self-Verifying), P5 (Tolerance-Documented)
+# ──────────────────────────────────────────────────────────────
+
+[stream3]
+id = "HEALTH-ORCHESTRATION"
+owner = "primalSpring + biomeOS"
+priority = "P2"
+guidestone_properties = ["P3-Self-Verifying", "P5-Tolerance-Documented"]
+description = """Standard health endpoint across all primals. On-device orchestration for
+grapheneGate. Named tolerances for deployment lifecycle."""
+
+[stream3.items]
+health_endpoint = """HEALTH-01: every primal responds to {"method":"health"} with
+  {"status":"ok","primal":"beardog","version":"0.9.0","uptime_s":42}
+  deploy engine validates all; failed health → restart with backoff"""
+health_convergence = """rhizocrypt + petaltongue converge on JSON-RPC health.
+  songbird exposes standard health or /health endpoint."""
+launcher = """LAUNCHER-01: nucleus_launcher cross-compiled for aarch64, or equivalent.
+  Starts primals in dependency order, waits for health, injects discovery, monitors crashes."""
+tolerances = """Named tolerances for deployment lifecycle:
+  depot_freshness_max = 24h
+  mesh_handshake_timeout = 30s
+  health_convergence_window = 60s
+  primal_startup_timeout = 10s"""
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 4: BTSP End-to-End (AAR Gap 7)
+# guideStone: P3 (Self-Verifying)
+# ──────────────────────────────────────────────────────────────
+
+[stream4]
+id = "BTSP-E2E"
+owner = "primalSpring + sweetGrass + bearDog"
+priority = "P2"
+guidestone_properties = ["P3-Self-Verifying"]
+description = """Validate BTSP handshake end-to-end: bearDog bootstrap keys → client auth →
+sweetGrass/petalTongue accept authenticated requests. Currently: rejection confirmed,
+successful handshake untested."""
+
+[stream4.items]
+btsp_handshake = "BTSP-E2E-01: validate full handshake from bearDog key → client → sweetGrass/petalTongue"
+btsp_graphenegate = "validate BTSP on grapheneGate TCP-only transport (no UDS involved)"
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 5: cellMembrane Cascade + quorumSignal + rootPulse
+# guideStone: P2 (Reference-Traceable), P3 (Self-Verifying)
+# ──────────────────────────────────────────────────────────────
+
+[stream5]
+id = "CASCADE-QS-RP"
+owner = "cellMembrane"
+priority = "P2"
+guidestone_properties = ["P2-Reference-Traceable", "P3-Self-Verifying"]
+description = """Divergence hardening. Git temporal cascade is mature (38/38 parity).
+Evolve quorumSignal (SENSE), rootPulse (ACTION), waterFall (SYNC) toward
+guideStone-grade deployment lifecycle."""
+
+[stream5.items]
+dual_checksum = "gate.bootstrap verifies against BOTH git checksums.toml AND VPS-served checksums"
+cascade_restart = "post-cascade selective NUCLEUS restart — auto-fetch + supervised restart"
+process_version = "health.sweep version match — JSON-RPC version check, not just pgrep liveness"
+deployment_manifest = "deployment.toml emission from gate.bootstrap — exact binary hashes, mesh state, health"
+agentic_resolve = "graduate divergence policy from merge-ff → agentic resolve (stub exists, not wired)"
+qs_signal_graphs = "quorumSignal: 15 atomic signal graphs from WATERFALL_TEMPORAL_SYNC.md Phase 2"
+rp_impulse_evolution = "rootPulse: impulse lifecycle → full provenance trio (commit/branch/merge/diff/federate)"
+freshness_mesh = "move freshness from file-based freshness.toml → songbird mesh.publish of per-remote HEADs"
+
+# ──────────────────────────────────────────────────────────────
+# PENDING VALIDATION (carried from Wave 108)
+# ──────────────────────────────────────────────────────────────
+
+[pending.flockgate_wan_e2e]
+id = "FLOCKGATE-WAN-E2E"
+owner = "flockGate ops"
+priority = "P2"
+description = "VPS songbird RESTARTED (Wave 108). Awaiting flockGate re-test → 5/5 WAN e2e"
+action = """flockGate to re-test with fresh VPS songbird:
+1. mesh.init to 157.230.3.183:7700
+2. Verify latency_ms non-null (~30ms)
+3. Verify discovery.peers shows eastGate
+4. If PASS → 5/5 → stadial criterion 4 VALIDATED"""
+
+# ──────────────────────────────────────────────────────────────
+# LOW
+# ──────────────────────────────────────────────────────────────
+
+[remaining.sourdough_segfault]
+id = "SOURDOUGH-SEGFAULT"
+owner = "sourDough"
+priority = "LOW"
+description = "sourdough validate depot crashes (segfault). Manual b3sum fallback."
+
+# ──────────────────────────────────────────────────────────────
+# RESOLVED LEDGER (Waves 106-108 — compact)
+# ──────────────────────────────────────────────────────────────
+
+[resolved_summary]
+count = 26
+detail = """Waves 106-108 resolved cross-topology validation:
+  grapheneGate 13/13 DEPLOYED (Wave 108), VPS songbird RESTARTED, BM-UDS-01 (biomeOS v4.20),
+  CR-TARPC-01 (coralReef b1ec1f4), NG-DOWNCAST-01 (nestGate 7c3fe9a6), aarch64 rebuild,
+  NDK pipeline, SONGBIRD-IPC-RESOLVE-M1, BARRACUDA-METHOD-DESCRIBE, socket cleanup 5/5,
+  southGate cross-subnet, strandGate re-enrollment, ironGate 3rd node, gate.bootstrap,
+  depot_sync, mobile golgi fleet, deterministic deployment codified.
+Full detail: archive/wave107/, archive/wave108/"""
