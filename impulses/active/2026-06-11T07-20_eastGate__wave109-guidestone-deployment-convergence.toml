@@ -44,7 +44,7 @@ The 6 existing deterministic deployment invariants (Wave 106 AAR) are the founda
 This FRAGO adds the abstraction layer that makes those invariants universal across topologies."""
 
 # ──────────────────────────────────────────────────────────────
-# CURRENT STATE (Wave 110, Jun 11 2026)
+# CURRENT STATE (Wave 109, Jun 11 2026)
 # ──────────────────────────────────────────────────────────────
 
 [current_state]
@@ -90,8 +90,7 @@ biomeos = "✅ SHIPPED v4.22 (5311dd3f). --bind-mode <uds_only|tcp_only|dual> CL
 coralreef = "unify --rpc-bind with --port --bind (tarpc + JSON-RPC under one flag)"
 barracuda = "replace --no-unix with PRIMAL_BIND_MODE reading"
 skunkbat = "replace --no-uds with PRIMAL_BIND_MODE reading"
-platform_detect = "✅ DONE (Wave 109). PlatformCapabilities::detect() in primalSpring ipc crate — SELinux, UDS, abstract socket probing. Primals consume this."
-primalspring = "✅ DONE (Wave 110). --bind-mode/--port CLI on primalspring_primal, dogfooding own standard via bind_transport()."
+platform_detect = "PlatformCapabilities::detect() in primalSpring ipc crate (infrastructure, not a primal) — SELinux, UDS, abstract socket probing. Primals consume this."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 2: Build Pipeline + Gate Profiles (AAR Gaps 3+4)
@@ -112,7 +111,7 @@ build_cache_fix = "✅ DONE (Wave 109). BUILD-CACHE-01: ephemeral --depth 1 clon
 build_elf_fix = "✅ DONE (Wave 109, 9b764a5). BUILD-ELF-01: validate_elf_arch() in both plasmid.build and plasmid.harvest — verifies correct arch + static linking."
 harvest_name_fix = "✅ DONE (Wave 109, 9b764a5). HARVEST-NAME-01: binary_name resolution from sources.toml with clear error on mismatch."
 gate_profiles = "✅ DONE (Wave 109, 9b764a5). GATE-PROFILE-01: GateProfile expanded (target, mobility, bind_mode, composition, transport, mesh_peer, notes). gate.profile command. ecosystem_manifest.toml updated."
-gate_engine = "gate.bootstrap reads gate profile (done). deploy_pixel.sh transport backend abstraction: P3, Wave 110."
+gate_engine = "✅ DONE (Wave 110, 456ab08). Gate engine: bootstrap reads profile transport field → routes fetch via transport_to_fetch_source(). deploy_pixel.sh abstracted."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: Post-Deploy Validation + Orchestration (AAR Gaps 5+6)
@@ -130,20 +129,16 @@ grapheneGate. Named tolerances for deployment lifecycle."""
 [stream3.items]
 health_endpoint = """HEALTH-01: every primal responds to {"method":"health"} with
   {"status":"ok","primal":"beardog","version":"0.9.0","uptime_s":42}
-  deploy engine validates all; failed health → restart with backoff.
-  ✅ primalSpring (Wave 110): bare "health" method + uptime_s + schema validation scenario."""
+  deploy engine validates all; failed health → restart with backoff"""
 health_convergence = """rhizocrypt + petaltongue converge on JSON-RPC health.
-  songbird exposes standard health or /health endpoint.
-  Remaining: HEALTH-RC-01, HEALTH-PT-01, HEALTH-SB-01 (Wave 110 Stream 1)."""
+  songbird exposes standard health or /health endpoint."""
 launcher = """LAUNCHER-01: nucleus_launcher cross-compiled for aarch64, or equivalent.
   Starts primals in dependency order, waits for health, injects discovery, monitors crashes."""
 tolerances = """Named tolerances for deployment lifecycle:
   depot_freshness_max = 24h
   mesh_handshake_timeout = 30s
   health_convergence_window = 60s
-  primal_startup_timeout = 10s
-  ✅ primalSpring (Wave 110): 15 inline values centralized — SCENARIO_TCP_PROBE_TIMEOUT_MS,
-  HEALTH_COMPLIANCE_MIN_PCT, SCENARIO_DISPATCH_LATENCY_MAX_MS. Clippy --tests clean."""
+  primal_startup_timeout = 10s"""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 4: BTSP End-to-End (AAR Gap 7)
@@ -178,8 +173,8 @@ Evolve quorumSignal (SENSE), rootPulse (ACTION), waterFall (SYNC) toward
 guideStone-grade deployment lifecycle."""
 
 [stream5.items]
-dual_checksum = "gate.bootstrap verifies against BOTH git checksums.toml AND VPS-served checksums"
-cascade_restart = "post-cascade selective NUCLEUS restart — auto-fetch + supervised restart"
+dual_checksum = "✅ DONE (Wave 110). gate.bootstrap now runs checksum.git + checksum.wan phases — dual independent verification (guideStone P3)."
+cascade_restart = "✅ DONE (Wave 110). temporal.cascade --with-restart: compares depot vs installed BLAKE3, copies + restarts changed primals."
 process_version = "✅ DONE (Wave 109, 9b764a5). health_sweep now probes UDS via JSON-RPC health before falling back to pgrep."
 deployment_manifest = "✅ DONE (Wave 109, 9b764a5). deployment.toml emission from gate.bootstrap — records gate, arch, mobility, hostname, timestamp, membrane_version."
 agentic_resolve = "graduate divergence policy from merge-ff → agentic resolve (stub exists, not wired)"
@@ -217,17 +212,13 @@ description = "sourdough validate depot crashes (segfault). Manual b3sum fallbac
 # ──────────────────────────────────────────────────────────────
 
 [resolved_summary]
-count = 33
+count = 28
 detail = """Waves 106-108 resolved cross-topology validation:
   grapheneGate 13/13 DEPLOYED (Wave 108), VPS songbird RESTARTED, BM-UDS-01 (biomeOS v4.20),
   CR-TARPC-01 (coralReef b1ec1f4), NG-DOWNCAST-01 (nestGate 7c3fe9a6), aarch64 rebuild,
   NDK pipeline, SONGBIRD-IPC-RESOLVE-M1, BARRACUDA-METHOD-DESCRIBE, socket cleanup 5/5,
   southGate cross-subnet, strandGate re-enrollment, ironGate 3rd node, gate.bootstrap,
   depot_sync, mobile golgi fleet, deterministic deployment codified.
-Wave 109: STARTUP-BM-01 (biomeOS v4.22 --bind-mode), HEALTH-01 biomeOS,
-  PlatformCapabilities::detect() (CAPS-01), HEALTH-01 schema + scenario,
-  build pipeline (plasmid.build, gate profiles, deployment.toml).
-Wave 110: STARTUP-PS-01 (primalSpring --bind-mode/--port), HEALTH-PS-01
-  (bare "health" + uptime_s), inline tolerance migration (15 values centralized),
-  clippy test compliance (--tests -D warnings clean), STARTUP-NG-01 (nestGate HTTP default).
-Full detail: archive/wave107/, archive/wave108/, archive/wave109/"""
+Wave 109 Stream 1: STARTUP-BM-01 (biomeOS v4.22 --bind-mode + auto btsp-optional),
+  HEALTH-01 biomeOS (bare 'health' route + {status,primal,version,uptime_s} response).
+Full detail: archive/wave107/, archive/wave108/"""
