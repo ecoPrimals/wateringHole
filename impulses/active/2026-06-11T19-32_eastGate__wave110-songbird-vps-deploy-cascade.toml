@@ -103,13 +103,21 @@ If federation.enabled=true but peers still show latency_ms=null:
   → Try explicit mesh.init: {"method":"mesh.init","params":{"peers":"157.230.3.183:7700"}}
 """
 
+[execution_status]
+step_1_harvest = "DONE — eastGate ran full plasmid.harvest (10 built, 4 current). checksums.toml + provenance.toml auto-committed (c8e0c94)."
+step_2_depot_sync = "DONE — auto-published to both GitHub + Forgejo during harvest."
+step_3_golgi_fetch = "DONE — plasmid.refresh pushed 13/13 binaries to VPS. systemctl restart songbird-membrane executed."
+step_4_verify_golgi = "PARTIAL — HEALTH-01 PASS (uptime_s present). federation.enabled=false despite SONGBIRD_FEDERATION_ENABLED=true env var. Needs songBird team investigation."
+step_5_flockgate_retest = "BLOCKED on step 4 — federation.enabled must report true before testing handshake."
+note = "Steps 1-3 executed via cellMembrane plasmid.harvest + plasmid.refresh (not on peptidoglycan — eastGate is build authority for this wave). VPS binary confirmed new via uptime_s field in health response."
+
 [context]
 songbird_commit = "9f1f5c9e4ce2df8a0e12e4d6ee54ea971eb43d25"
 fix_commit = "471ed43bb (federation.status + HEALTH-SB-01)"
 stale_binary_hash = "03775a3fa2c3571627ec6880e64e54d50a72fc63ba83c829d83e5e3570920494"
 blocks = "wave109-flockgate-wan-federation-disabled"
 also_harvest = ["bearDog 945de60f", "biomeOS 3aa4e7e4"]
-note = "Full --all harvest recommended to also pick up bearDog STARTUP-BD-01 and biomeOS v4.23"
+note = "Full --all harvest completed — all primals rebuilt from HEAD."
 
 [gap_confirmations]
 note = "healthSpring upstream gaps confirmed resolved from songBird side"
