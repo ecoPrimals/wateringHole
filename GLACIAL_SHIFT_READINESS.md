@@ -326,6 +326,7 @@ fossilRecord) — see `fossilRecord/` for detail.
 | ~~bearDog aws-lc-rs C-dep~~ | bearDog | ~~P1~~ | **RESOLVED** (Wave 145) — `aws-lc-rs` replaced with `rustls-rustcrypto` (pure Rust). `cargo check --target aarch64-unknown-linux-musl` PASS. 19-crate C-crypto ban in `deny.toml`. All non-x86 targets UNBLOCKED. |
 | ~~flockGate WAN depot empty~~ | cellMembrane | ~~P1~~ | **RESOLVED** (Wave 105) — `plasmid.fetch --source wan` SHIPPED. `caddy.depot.provision` ready. Production validation pending. |
 | ~~songBird ipc.resolve M1~~ | songBird | ~~**P2**~~ | **SHIPPED** (Wave 107, ff86204c) — `ipc.resolve` returns MeshRelay TransportEndpoint with peer_id. Topology-aware mesh routing LIVE. |
+| ~~HEALTH-SB-01~~ | songBird | ~~**P2**~~ | **SHIPPED** (Wave 110, 471ed43b) — bare `"health"` → `{status, primal, version, uptime_s}` per HEALTH-01 contract. Federation `enabled` status fix: reports config state, not connectivity count. |
 | ~~Transport injection (toadStool)~~ | toadStool | ~~P2~~ | **DONE** (S306c Wave 104) — transport CONFIRMED, 11/11 non-exempt COMPLETE. |
 | ~~biomeOS graph.deploy revalidation~~ | biomeOS + eastGate | ~~P2~~ | **VALIDATED** (Wave 105) — v4.16 composition.deploy accepted, graph.status 13 phases, LocalTrusted. |
 | ~~CM-CASCADE-CONFLICT~~ | cellMembrane | ~~P2~~ | **RESOLVED** (Wave 105) — cascade auto-discards dirty regenerable metadata before ff-only pull. |
