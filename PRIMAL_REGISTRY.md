@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: May 29, 2026 (Wave 63 — biomeOS v3.88, JSON parse observability, silent error elimination, env SSOT expansion, service/core split, rootpulse centralization, stale test removal. NC-1 COMPLETE. 7,983 workspace tests, 26 crates.)
+**Last Updated**: June 11, 2026 (Wave 110 — biomeOS v4.23, guideStone startup contract, HEALTH-01 compliant, Duration constants centralized. 7,983+ workspace tests, 26 crates.)
 
 ---
 
@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v3.88  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983 tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. env_config::vars SSOT expanded (Wave 63), zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
+**Version**: v4.23  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983+ tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. guideStone startup contract (`--bind-mode`, auto `--btsp-optional`), HEALTH-01 compliant (`{status,primal,version,uptime_s}`), Duration constants centralized, zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -228,7 +228,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Neural API** | Semantic routing (`capability.call`), 260+ translations, 19 domains, adaptive routing weights, weight health, utilization tracking, `primal.announce` self-registration, composition patterns |
+| **Neural API** | Semantic routing (`capability.call`), 320+ translations, 27 domains, L4 weighted routing, L5 perceptron shadow, adaptive weights (redb-persistent), utilization tracking, `primal.announce` self-registration, composition patterns |
 | **Atomics** | Tower Atomic, Node Atomic, Nest Atomic, Full NUCLEUS composition |
 | **Provenance** | `rootpulse_commit` graph, `provenance_pipeline` graph, rhizoCrypt/LoamSpine/sweetGrass domains |
 | **Discovery** | Runtime capability matching, primal health monitoring, prefix resolution |

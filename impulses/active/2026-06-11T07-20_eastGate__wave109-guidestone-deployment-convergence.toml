@@ -92,7 +92,7 @@ PRIMAL_BIND_MODE becomes override-only."""
 [stream1.items]
 beardog = "auto-detect abstract socket from bind mode (remove --abstract flag dependency)"
 nestgate = "default HTTP in server mode (remove explicit --enable-http requirement)"
-biomeos = "✅ SHIPPED v4.22 (5311dd3f). --bind-mode <uds_only|tcp_only|dual> CLI added, auto-infers --btsp-optional from tcp_only. BindMode enum + HEALTH-01 (bare 'health' route, {status,primal,version,uptime_s})."
+biomeos = "✅ SHIPPED v4.23 (917380b3). v4.22: --bind-mode + auto btsp-optional + HEALTH-01. v4.23: deep debt — 10 named Duration constants, ~25 bare literals replaced, magic numbers extracted across 12 crates, 3 test fixes."
 coralreef = "unify --rpc-bind with --port --bind (tarpc + JSON-RPC under one flag)"
 barracuda = "replace --no-unix with PRIMAL_BIND_MODE reading"
 skunkbat = "replace --no-uds with PRIMAL_BIND_MODE reading"
@@ -228,4 +228,5 @@ detail = """Waves 106-108 resolved cross-topology validation:
   depot_sync, mobile golgi fleet, deterministic deployment codified.
 Wave 109 Stream 1: STARTUP-BM-01 (biomeOS v4.22 --bind-mode + auto btsp-optional),
   HEALTH-01 biomeOS (bare 'health' route + {status,primal,version,uptime_s} response).
+Wave 110: biomeOS v4.23 deep debt (Duration consolidation, magic number elimination, 26 files/12 crates).
 Full detail: archive/wave107/, archive/wave108/"""

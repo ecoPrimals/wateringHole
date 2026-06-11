@@ -178,9 +178,9 @@ Unix socket improvements. primalSpring: 789 tests, 53 scenarios, 458 methods,
 - **toadStool**: **S279 deep debt III complete** — zero production panic paths, 9,156+ lib tests.
   Transport CONFIRMED DONE (S306c Wave 104, 11/11 non-exempt).
   **CLEAR** — zero sentinel-blocking items.
-- **biomeOS**: **v4.18** shipped (TCP-only fallback, grapheneGate adoption). v4.17 (NUCLEUS supervision —
-  LifecycleManager auto-restarts). LocalTrusted access level operational.
-  **CLEAR** — zero sentinel-blocking items. Both P1 items (supervision + TCP fallback) RESOLVED.
+- **biomeOS**: **v4.23** shipped (v4.22: guideStone startup `--bind-mode` + HEALTH-01; v4.23: deep debt
+  Duration/magic-number consolidation). NUCLEUS supervision, LocalTrusted access level operational.
+  **CLEAR** — zero sentinel-blocking items.
 - **petalTongue**: WASM client-side rendering live. Transport evolution adopted.
   **CLEAR** — no remaining sentinel-blocking items.
 
