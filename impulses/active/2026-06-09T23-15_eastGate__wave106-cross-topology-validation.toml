@@ -24,7 +24,7 @@ Companion: AAR_WAVE105_COMPREHENSIVE_CROSS_DEPLOYMENT_JUN09_2026.md (lessons lea
 """
 
 # ──────────────────────────────────────────────────────────────
-# CURRENT STATE (Wave 106, Jun 10 2026 01:00 UTC)
+# CURRENT STATE (Wave 108, Jun 10 2026 20:00 EDT)
 # ──────────────────────────────────────────────────────────────
 
 [current_state]
@@ -36,7 +36,9 @@ ironGate: VALIDATED as 3rd mesh node (mesh.init to VPS relay, 1 reachable peer, 
 strandGate: VALIDATED LAN re-enrollment (Wave 106 ACK — mesh.init to eastGate + VPS, 2 peers, quality 1.0).
 southGate: VALIDATED cross-subnet (Wave 107 — 192.168.4.29/22, Eero bridge, 4.7ms to eastGate, 2 direct peers, 13/13 alive, 19/22 capabilities resolved, distributed science pipeline exercised).
 songBird: mesh persistence SHIPPED (peers.toml + auto-reconnect). Federation port bind fix SHIPPED.
-cellMembrane: gate.bootstrap + gate.status SHIPPED. --dry-run SHIPPED. VPS songbird + biomeOS depot refreshed."""
+cellMembrane: gate.bootstrap + gate.status SHIPPED. --dry-run SHIPPED. VPS depot refreshed.
+flockGate: 4/5 WAN e2e — TCP connects, mesh.init acknowledged, but VPS songbird PROCESS is stale
+  (pre-federation-fix). Need cellMembrane ops to restart songbird on golgiBody."""
 transport = "11/11 non-exempt COMPLETE."
 depot_x86 = "13/13 BLAKE3 VERIFIED. All primals rebuilt from latest commits (Wave 108). VPS synced."
 depot_aarch64 = "13/13 REBUILT (Wave 108, peptidoglycan). biomeOS v4.20 (BM-UDS-01 fix), coralReef (CR-TARPC-01). checksums.toml updated. Awaiting Pixel 8 deploy + 13/13 alive validation."
@@ -123,14 +125,14 @@ proven_on = ["golgiBody (13/13 running, songbird:7700 mesh LIVE)"]
 needs_validation = ["Automated refresh when peptidoglycan builds new binaries"]
 
 # ──────────────────────────────────────────────────────────────
-# REMAINING WORK (6 P2, 2 LOW — zero P1)
+# REMAINING WORK (2 P2 ops, 1 LOW — zero P1, zero primal code)
 # ──────────────────────────────────────────────────────────────
 
-# --- P2: Primal Code (blocks grapheneGate 13/13) ---
+# --- P2: Operational (no code changes needed) ---
 
 [remaining.flockgate_wan_e2e]
 id = "FLOCKGATE-WAN-E2E"
-owner = "flockGate ops"
+owner = "cellMembrane ops (golgiBody VPS)"
 priority = "P2"
 description = "VPS songbird RESTARTED (Wave 108). Awaiting flockGate auto-retry → 5/5 WAN e2e"
 why = """flockGate passed 4/5 WAN e2e stages. Was blocked on VPS songbird stale process.
@@ -147,20 +149,18 @@ action = """flockGate auto-retry should establish mesh. If flockGate is powered 
 id = "GRAPHENEGATE-REBUILD"
 owner = "primalSpring evolution team (eastGate)"
 priority = "P2"
-description = "aarch64 REBUILT (Wave 108). Pixel 8 redeploy pending — connect device + deploy_pixel.sh"
-why = """All 13 primals now have bind_transport() / TCP-only fallback adopted:
-- coralReef (27b4bb3): PRIMAL_BIND_MODE in resolve_bind()
-- nestGate (9f15143a): is_platform_constraint() honors PRIMAL_BIND_MODE=fallback
-- petalTongue (e5a65e0): EACCES→TCP 9900 fallback
-- biomeOS (v4.18, b8ddf351): native TCP-only fallback
-Development is COMPLETE. Rebuild DONE (Wave 108). Only hardware deploy remains.
-Owned by primalSpring evolution team on eastGate (system with Pixel 8a)."""
-action = """1. ✅ Rebuild all 13 primals for aarch64-unknown-linux-musl on peptidoglycan (Wave 108)
-2. ✅ checksums.toml updated + pushed (516879f)
-3. primalSpring evolution team: deploy to Pixel 8a via deploy_pixel.sh (PRIMAL_BIND_MODE=fallback)
-4. primalSpring evolution team: verify 13/13 alive on grapheneGate"""
+description = "✅ DEPLOYED AND VALIDATED (Wave 108). 13/13 primals ALIVE on Pixel 8a."
+why = """All upstream blockers resolved. aarch64 depot rebuilt on eastGate.
+coralReef required local rebuild (build-primal.sh staging cache stale — see AAR).
+13/13 processes confirmed via pgrep + TCP probe + JSON-RPC health.
+AAR published: AAR_GRAPHENEGATE_WAVE108_13_OF_13_DEPLOYED_JUN10_2026.md"""
+action = """COMPLETE. Next evolution items in AAR:
+- Standard primal startup contract (Gap 1)
+- Platform capability auto-detection (Gap 2)
+- Rust build pipeline (Gap 3)
+- Gate profiles for deterministic deployment (Gap 4)"""
 
-# --- P2: Primal Code (blocks grapheneGate 13/13) ---
+# --- RESOLVED (this wave) ---
 
 [resolved.biomeos_neural_api_bind]
 id = "BM-UDS-01"

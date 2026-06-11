@@ -14,9 +14,9 @@
 | **Primals** (mountain) | **0** | 0 | **ALL CLEAR** — CR-TARPC-01, BM-UDS-01, NG-DOWNCAST-01, TOADSTOOL all RESOLVED |
 | **primalSpring** | 0 | 1 | grapheneGate 13/13 scenario PASSES. aarch64 rebuild + deploy next. |
 | **Springs** | 1 | 15 | healthSpring signal dispatch live test on ironGate |
-| **Gates** | 2 | 0 | flockGate power-on, grapheneGate aarch64 rebuild |
-| **Gardens** | 1 | 2 | NDK pipeline, BearDog ACME cutover |
-| **TOTAL** | **4** | **18** | **Rebuild aarch64 → deploy → 13/13 alive** |
+| **Gates** | 1 | 0 | flockGate power-on (grapheneGate aarch64 REBUILT — deploy pending) |
+| **Gardens** | 0 | 2 | NDK pipeline **DONE**. BearDog ACME + Forgejo CI are LOW. |
+| **TOTAL** | **3** | **18** | **aarch64 REBUILT — deploy → 13/13 alive** |
 
 ---
 
@@ -78,7 +78,7 @@ See `impulses/active/2026-06-10T14-20_ironGate__wave107-healthspring-upstream-ga
 | ID | Owner | Action |
 |----|-------|--------|
 | `FLOCKGATE-WAN-E2E` | flockGate ops | Power on → re-fetch from VPS → mesh.init to 157.230.3.183:7700 → verify 5/5. |
-| `GRAPHENEGATE-REBUILD` | primalSpring + cellMembrane | aarch64 rebuild on peptidoglycan → push checksums.toml → `deploy_pixel.sh` → 13/13 alive. **Requires BM-UDS-01 fix first.** |
+| `GRAPHENEGATE-REBUILD` | primalSpring evolution team (eastGate) | **aarch64 REBUILT** (Wave 108, `cdff8b9`). Connect Pixel 8 → `deploy_pixel.sh` → 13/13 alive. |
 
 ---
 
@@ -89,7 +89,7 @@ See `impulses/active/2026-06-10T14-20_ironGate__wave107-healthspring-upstream-ga
 | ID | Owner | Action |
 |----|-------|--------|
 | ~~`CM-VPS-DEPOT-SYNC`~~ | cellMembrane | **SHIPPED** (ef3f0b8). BLAKE3 diff, atomic copy, checksums verification. |
-| `NDK-CROSS-COMPILE` | cellMembrane | `aarch64-linux-android` target on peptidoglycan for native grapheneGate. |
+| ~~`NDK-CROSS-COMPILE`~~ | cellMembrane | **DONE** (Wave 108). `aarch64-linux-android` pipeline, linker auto-detection, `plasmid.ndk.check`. |
 | `BEARDOG-ACME-CUTOVER` | cellMembrane + bearDog | TlsProvider wired, awaiting BearDog ACME client to replace Caddy LE. |
 | `MOBILE-GOLGI-FLEET` | cellMembrane | **SHIPPED** (9e07b01). GateMobility, --mobile, systemd templates, NM dispatcher hook, provision-golgi.sh. |
 
@@ -119,10 +119,10 @@ See `impulses/active/2026-06-10T14-20_ironGate__wave107-healthspring-upstream-ga
 CR-TARPC-01 + BM-UDS-01 (primal code) ← ALL RESOLVED ✓
     │
     ▼
-GRAPHENEGATE-REBUILD (aarch64 rebuild on peptidoglycan) ← NEXT
+GRAPHENEGATE-REBUILD (aarch64 rebuild) ← DONE ✓ (Wave 108, cdff8b9)
     │
     ▼
-deploy_pixel.sh → 13/13 alive on Pixel 8
+deploy_pixel.sh → 13/13 alive on Pixel 8 ← NEXT (physical access)
     │
     ▼
 grapheneGate mesh enrollment (future)
