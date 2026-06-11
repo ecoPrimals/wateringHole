@@ -1,6 +1,6 @@
 # Wave 110 — Last Mile Health + Gate Expansion
 
-**Date**: 2026-06-11 (ACTIVE — mid-wave update)
+**Date**: 2026-06-11 (ACTIVE — mid-wave status)
 **From**: eastGate overwatch (cellMembrane)
 **FRAGO**: `impulses/active/2026-06-11T07-20_eastGate__wave109-guidestone-deployment-convergence.toml` (carries forward)
 
@@ -11,15 +11,15 @@
 Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 - **53/59 FRAGO items resolved** (90% closed)
 - **Startup contract 6/6 COMPLETE** — bearDog shipped (945de60f), all 13 primals standardized
-- **HEALTH-01 13/13 COMPLETE** — rhizoCrypt (410018d), petalTongue (2dba46f), songBird (471ed43b), joining sweetGrass, biomeOS, healthSpring
-- **Build pipeline COMPLETE** — Stream 3 fully resolved (5/5 items), gate engine wired
+- **HEALTH-01 11/13** — songBird SHIPPED (471ed43b), joining sweetGrass, biomeOS, healthSpring
+- **Build pipeline COMPLETE** — Stream 2 fully resolved (6/6 items), gate engine wired
 - **BTSP TCP E2E test SHIPPED** — bearDog (945de60f) real handshake + encrypted JSON-RPC
 - **cellMembrane Stream 5 core DONE** — dual checksum, cascade-restart, agentic resolve all wired
 - **Federation root cause FOUND** — songBird (471ed43b) fixes `enabled` semantics
 - **primalSpring post-primordial reversal** — no longer a primal, exclusively an arena (4f9a865)
 - **biomeOS v4.23** — deep debt, Duration consolidation across 12 crates
 
-**Remaining** (4 active items): LAUNCHER-01, BTSP cross-primal E2E, flockGate handshake retest, sourDough segfault. Plus 3 deferred (qS/rP/freshness → Wave 111+). **HEALTH-01 13/13 GRADUATED.**
+**Remaining** (6 active items): 2 health (rhizoCrypt, petalTongue), LAUNCHER-01, BTSP cross-primal E2E, flockGate handshake retest, sourDough segfault. Plus 3 deferred (qS/rP/freshness → Wave 111+).
 
 ---
 
@@ -33,18 +33,18 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 
 ### Stream 1: HEALTH-13/13 — Close the Health Contract
 
-**Owner**: ALL TEAMS — **STREAM GRADUATED**
+**Owner**: rhizoCrypt, petalTongue teams
 **guideStone**: P3 (Self-Verifying), P5 (Tolerance-Documented)
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| ~~HEALTH-RC-01~~ | rhizoCrypt | P2 | **DONE** (410018d → v0.14.8, Wave 107) — `health_liveness()` enriched with `primal`, `version`, `uptime_s`. Wave 108 (0e2b031 → v0.14.9): typed `DiscoveryQueryError` deep debt. |
-| ~~HEALTH-PT-01~~ | petalTongue | P2 | **DONE** (2dba46f) — bare `"health"` rerouted to enriched `health.check`, `uptime_s` field added, advertised in `capabilities.list` |
+| HEALTH-RC-01 | rhizoCrypt | P2 | REMAINING — Enrich `health_liveness()` → add `primal`, `version`, `uptime_s` |
+| HEALTH-PT-01 | petalTongue | P2 | REMAINING — Bare `"health"` alias + schema enrichment |
 | ~~HEALTH-SB-01~~ | songBird | P2 | **DONE** (471ed43b) — bare "health" + enriched schema + uptime_s |
 | ~~STARTUP-BD-01~~ | bearDog | P2 | **DONE** (945de60f) — `--bind-mode` flag, 6/6 startup contract COMPLETE |
 
 **Exit criterion**: 13/13 primals respond to `{"method":"health"}` with `{status, primal, version, uptime_s}`.
-**STATUS: 13/13 HEALTH-01 COMPLETE.** Stream 1 GRADUATED.
+**Current**: 11/13. Remaining: rhizoCrypt, petalTongue.
 
 ### Stream 2: BTSP End-to-End — Encrypted Composition Proof
 
@@ -53,7 +53,7 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
-| ~~BTSP-E2E-01 (TCP handshake)~~ | bearDog | P2 | **DONE** (945de60f) — real TCP handshake + encrypted JSON-RPC roundtrip |
+| BTSP-E2E-01 (TCP handshake) | bearDog | P2 | **DONE** (945de60f) — real TCP handshake + encrypted JSON-RPC roundtrip |
 | BTSP cross-primal E2E | primalSpring | P2 | REMAINING — full bearDog→client→sweetGrass chain |
 | grapheneGate BTSP TCP validation | primalSpring | P3 | REMAINING |
 
@@ -136,7 +136,7 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 
 | Item | Owner | Notes |
 |------|-------|-------|
-| Stream 5 cascade/qS/rP (7 items) | cellMembrane | Infrastructure not urgent until autonomous gates |
+| qS signal graphs / rP impulse / freshness mesh (3 items) | cellMembrane | Infrastructure not urgent until autonomous gates |
 | healthSpring 14 upstream gaps | Various primals | LOW, stable workarounds |
 | sourDough depot segfault | sourDough | LOW, manual `b3sum` fallback |
 | 10G backbone cables | ops | Blocks high-throughput only |
@@ -146,16 +146,16 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 
 ## Success Criteria (Wave 110 exit gate)
 
-- [x] ~~13/13 HEALTH-01 compliant~~ **DONE** — rhizoCrypt (410018d) + petalTongue (2dba46f) shipped. **13/13 GRADUATED.**
 - [x] ~~bearDog STARTUP-BD-01 resolved → **6/6 startup contract**~~ **DONE** (945de60f)
 - [x] ~~BTSP-E2E-01 first execution documented~~ **DONE** — bearDog TCP handshake + encrypted JSON-RPC (945de60f)
 - [x] ~~primalSpring self-convergence~~ **DONE** — post-primordial reversal: no longer primal (4f9a865)
 - [x] ~~flockGate federation root cause documented~~ **DONE** (471ed43b)
 - [x] ~~Registry versions reflect ground truth~~ **MAINTAINED**
+- [ ] 13/13 HEALTH-01 compliant (currently 11/13 — rhizoCrypt, petalTongue remaining)
 - [ ] BTSP cross-primal E2E (bearDog→client→sweetGrass full chain)
 - [ ] northGate NUCLEUS 13/13 bootstrapped and meshed
 - [ ] Federation fix deployed to VPS + flockGate handshake validated
-- [ ] Depot rebuild to bake in bearDog/biomeOS/songBird/petalTongue/rhizoCrypt evolution
+- [ ] Depot rebuild to bake in bearDog/biomeOS/songBird evolution
 
 ---
 
@@ -163,10 +163,10 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 
 | Primal | Work | Status |
 |--------|------|--------|
-| **songBird** | Deploy federation fix to VPS + handshake retest | ACTIVE — code shipped, deploy pending |
+| **rhizoCrypt** | HEALTH-RC-01 | ACTIVE — last 2 health |
+| **petalTongue** | HEALTH-PT-01 | ACTIVE — last 2 health |
+| **songBird** | Deploy fix to VPS + handshake retest | ACTIVE — code shipped, deploy pending |
 | **bearDog** | ~~STARTUP-BD-01~~ DONE, BTSP cross-primal client role | STANDBY (shipped) |
-| **rhizoCrypt** | ~~HEALTH-RC-01~~ DONE (v0.14.9) + deep debt | STANDBY (shipped) |
-| **petalTongue** | ~~HEALTH-PT-01~~ DONE (2dba46f) | STANDBY (shipped) |
 | All others (9) | — | STANDBY |
 
 ---
@@ -182,6 +182,33 @@ Wave 109→110 proved the ecosystem converges fast once infrastructure lands:
 | `handoffs/AAR_PRIMALSPRING_WAVE110_POST_PRIMORDIAL_EVOLUTION_JUN11_2026.md` | primalSpring reversal AAR |
 | `cellMembrane/AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md` | Living deployment standard |
 | `GLACIAL_SHIFT_READINESS.md` | Stadial entry tracking |
+
+---
+
+## PostPrimordial Revalidation (Jun 11, 2026 — overwatch cascade)
+
+**Status: STRUCTURALLY INTACT.** The postPrimordial model holds:
+
+| Layer | Status | Evidence |
+|-------|--------|----------|
+| **VPS build authority** | ✅ | `peptidoglycan` (golgiBody) hosts Forgejo + `plasmidBin` depot. `membrane plasmid.harvest` builds exclusively on VPS. |
+| **WAN depot** | ✅ | `https://membrane.primals.eco/depot/` serves binaries over Caddy TLS. Gates fetch via WAN HTTPS. |
+| **Forgejo ↔ GitHub parity** | ✅ | `plasmidBin` local = `origin` (GitHub) = `forgejo` (VPS). All at `8dd6d43`. |
+| **BLAKE3 checksums** | ✅ | `checksums.toml` present for both arches. `gate.bootstrap` dual-verifies (git + WAN). |
+| **aarch64 depot integrity** | ✅ | 14/14 binaries match `checksums.toml` exactly (BLAKE3 verified). |
+| **x86_64 depot integrity** | ⚠️ | Binaries rebuilt locally since last `checksums.toml` generation. Hashes diverged. **Needs `plasmid.harvest` + commit.** |
+| **Gate installed binaries** | ⚠️ | eastGate `~/.local/bin/` binaries date Jun 6 (pre-Wave 108 rebuild). Need `plasmid.fetch --source wan` + cascade --with-restart. |
+| **Static linking** | ✅ | All depot binaries: ELF musl-static, stripped (verified via `file` + `ldd`). |
+| **Provenance** | ✅ | `provenance.toml` tracks commit + rustc version per binary. |
+| **No local deploy bypass** | ✅ (policy) | `gate.bootstrap` always fetches from VPS/WAN. No local-build install path in gate enrollment. |
+
+**Action items (depot freshness)**:
+1. Run `membrane plasmid.harvest --all` on peptidoglycan to rebuild x86_64 depot with latest commits (bearDog 945de60f, biomeOS 3aa4e7e4, songBird 471ed43b)
+2. Regenerate `checksums.toml` + `provenance.toml` (auto from harvest)
+3. Run `membrane temporal.cascade --with-restart` on eastGate to pull fresh binaries
+4. Commit + push depot update to Forgejo + GitHub
+
+**Architectural note**: cellMembrane enforces postPrimordial via **convention** (gate.bootstrap always fetches from VPS/WAN depot) rather than hard fail-closed lockout. The `plasmid.harvest` / `plasmid.build` paths remain available on the build host (peptidoglycan) by design — that IS the build authority. No gate except peptidoglycan should run harvest.
 
 ---
 
