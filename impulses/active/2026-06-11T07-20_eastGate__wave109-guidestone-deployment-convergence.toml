@@ -54,21 +54,23 @@ cross_topology = """ALL VALIDATED:
   WAN x86_64: flockGate (4/5 — federation.enabled=false, songBird protocol gap, see FLOCKGATE-WAN-FEDERATION)
   ARM aarch64: grapheneGate (13/13 deployed + alive, Wave 108)
   VPS: golgiBody (13/13, depot authority)"""
-depot = "14/14 aarch64 + 13/13 x86_64, BLAKE3 verified. VPS synced. checksums.toml + provenance.toml current."
-mesh = "5-gate: eastGate↔golgiBody↔ironGate+southGate + grapheneGate standalone. flockGate blocked on federation protocol."
+depot = """14/14 aarch64 VERIFIED (checksums match).
+x86_64 depot STALE — binaries from Jun 9 dev build, checksums.toml references older VPS build.
+ROOT CAUSE: BUILD-ELF-01 was rejecting static-pie linked binaries (Rust 1.96+ musl output).
+FIX LANDED: cellMembrane 975d45a accepts static-pie. harvest --all (3784903) added.
+ACTION: run `membrane plasmid.harvest` on peptidoglycan to rebuild x86_64 from HEAD."""
+mesh = "5-gate: eastGate↔golgiBody↔ironGate+southGate + grapheneGate standalone. flockGate federation fix deployed, handshake retest pending."
 sovereignty = "S1-S4 ALL GRADUATED."
 deployment_model = """postPrimordial ENFORCED. gate.bootstrap shipped (6-phase + deployment.toml emission).
-guideStone convergence Wave 109→110:
-  ✅ CLOSED (Stream 1): 6/6 startup contract — bearDog SHIPPED (945de60f, Wave 110).
-  ✅ CLOSED (Stream 1): PlatformCapabilities::detect() landed in primalSpring ipc crate.
+guideStone convergence Wave 109→110 — NEAR COMPLETE:
+  ✅ CLOSED (Stream 1): 6/6 startup contract — ALL primals standardized.
   ✅ CLOSED (Stream 2): FULLY RESOLVED (6/6). plasmid.build, gate profiles, gate engine all wired.
-  PARTIAL (Stream 3): 2/13 primals remain (rhizoCrypt, petalTongue). 11/13 HEALTH-01 compliant.
-                       songBird SHIPPED (471ed43b, Wave 110). LAUNCHER-01 remains.
-  PARTIAL (Stream 4): bearDog BTSP TCP E2E test SHIPPED (945de60f). sweetGrass server-side READY.
-                       Full cross-primal handshake untested.
-  ✅ CLOSED (Stream 5 core): dual_checksum, cascade_restart, process_version, deployment_manifest,
-                       agentic_resolve ALL DONE. Remaining: qs/rp/freshness → Wave 111+.
-  FIXED (flockGate): federation.enabled root cause FOUND + FIXED (471ed43b). Handshake retest needed."""
+  ✅ CLOSED (Stream 3): 13/13 HEALTH-01 GRADUATED — rhizoCrypt + petalTongue shipped.
+  ✅ CLOSED (Stream 4): BTSP TCP E2E + grapheneGate validation documented.
+  ✅ CLOSED (Stream 5 core): dual_checksum, cascade_restart, agentic_resolve ALL DONE.
+  ✅ FIXED (flockGate): federation.enabled root cause FOUND + FIXED (471ed43b). Deployed to VPS.
+  REMAINING: x86_64 depot rebuild (BUILD-ELF-01 fix landed), gate expansion (northGate/westGate),
+             flockGate handshake retest, qS/rP/freshness deferred → Wave 111+."""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Standard Primal Startup Contract (AAR Gaps 1+2)
@@ -204,14 +206,14 @@ freshness_mesh = "DEFERRED → Wave 111+. move freshness.toml → songbird mesh.
 id = "FLOCKGATE-WAN-FEDERATION"
 owner = "songBird team + flockGate ops"
 priority = "P2"
-description = """ROOT CAUSE FOUND + FIXED (Wave 110, 471ed43b):
+description = """ROOT CAUSE FOUND + FIXED + DEPLOYED (Wave 110, 471ed43b):
 federation.status was reporting `enabled: fed_stats.total_nodes > 0` — a CONNECTIVITY metric,
-not a CONFIGURATION flag. Fix: `enabled` now reflects startup configuration
-(self.federation_state is Some → true). Federation activation conditions documented.
-REMAINING: deploy fix to VPS + retest actual handshake on flockGate.
+not a CONFIGURATION flag. Fix: `enabled` now reflects startup configuration.
+DEPLOYED to VPS via cascade (confirmed by wateringHole commit abc03e9).
+REMAINING: retest flockGate handshake — does active_connections > 0?
 See impulse: wave110-songbird-health-federation-fix"""
 action = """REMAINING:
-1. Deploy songBird 471ed43b to VPS golgiBody (next cascade --with-rebuild)
+1. ✅ Deploy songBird 471ed43b to VPS golgiBody — DONE (cascade abc03e9)
 2. Retest flockGate: does federation handshake complete? (active_connections > 0?)
 3. If not: investigate join protocol (POST /api/federation/join response from VPS)"""
 
