@@ -34,8 +34,9 @@ gates_pending = "northGate (new), westGate (new)"
 federation = "MECHANICALLY WORKING — port bound, mesh.init succeeds, status reporting bug"
 
 # ──────────────────────────────────────────────────────────────
-# STREAM 1: Gate Expansion — northGate + westGate
+# STREAM 1: Gate Expansion — Priority Order
 # Owner: cellMembrane + ops
+# Priority: flockGate WAN fix > dev gates > NUCs/Pixle > northGate (last)
 # ──────────────────────────────────────────────────────────────
 
 [stream1]
@@ -44,21 +45,18 @@ owner = "cellMembrane + ops"
 priority = "P2"
 guidestone_properties = ["P1-Deterministic", "P4-Environment-Agnostic"]
 description = """Bootstrap new hardware into the mesh using proven gate.bootstrap pipeline.
-Depot is fresh, tooling is wired, profiles defined in ecosystem_manifest.toml."""
+Depot is fresh, tooling is wired, profiles defined in ecosystem_manifest.toml.
 
-[stream1.northgate]
-hardware = "Ryzen 9950X3D + RTX 5090 (32GB VRAM) + 96GB DDR5"
-target = "Full NUCLEUS 13/13"
-profile = "full"
-steps = [
-    "1. gate.bootstrap enrollment (6-phase + deployment.toml)",
-    "2. NUCLEUS binary fetch from VPS depot (WAN HTTPS)",
-    "3. Health sweep 13/13",
-    "4. songBird mesh enrollment (:7700)",
-    "5. primalSpring validation (s_graphenegate_readiness pattern)",
-]
-status = "READY — awaiting hardware setup"
-note = "Heaviest compute node in fleet. First gate with RTX 5090."
+PRIORITY ORDER (corrected):
+  1. flockGate WAN federation fix (existing, operational)
+  2. Current dev gates freshness (eastGate, ironGate, southGate cascade)
+  3. westGate (76TB ZFS, Nest Atomic — cold storage)
+  4. NUCs + Pixle (small form factor, Linux, quick spin-up)
+  5. blueGate + swiftGate (Windows targets — cross-platform testing)
+  6. northGate (gaming/hobby, Windows — family gate validation LAST)
+
+northGate is exclusively a family gate validation case — spare compute only when not in use.
+blueGate and swiftGate are Windows targets accessible for deployment testing."""
 
 [stream1.westgate]
 hardware = "i7-4771 + RTX 2070 Super + 76TB ZFS array"
@@ -73,6 +71,50 @@ steps = [
 ]
 status = "READY — awaiting hardware setup"
 note = "Cold storage specialization. 76TB ZFS = archival backbone."
+priority_rank = 3
+
+[stream1.nucs_pixle]
+hardware = "Intel NUCs + Pixle (small form factor Linux nodes)"
+target = "Subset NUCLEUS (profile TBD)"
+steps = [
+    "1. gate.bootstrap enrollment",
+    "2. Binary fetch from VPS depot",
+    "3. Health sweep",
+    "4. songBird mesh enrollment",
+]
+status = "PENDING — can spin up before northGate"
+note = "Quick-spin-up Linux nodes. Higher priority than gaming gate."
+priority_rank = 4
+
+[stream1.bluegate_swiftgate]
+hardware = "Windows machines (accessible for deployment)"
+target = "ecoBin Windows testing (cross-platform validation)"
+steps = [
+    "1. Define Windows gate profile in ecosystem_manifest.toml",
+    "2. Validate ecoBin cross-platform (musl binaries via WSL2 or native Windows port)",
+    "3. Health sweep via TCP transport",
+    "4. Mesh enrollment",
+]
+status = "PENDING — cross-platform validation targets"
+note = "Windows gates for family deployment testing. May require WSL2 or native port."
+priority_rank = 5
+
+[stream1.northgate]
+hardware = "Ryzen 9950X3D + RTX 5090 (32GB VRAM) + 96GB DDR5"
+target = "Family gate validation (spare compute when not in use)"
+profile = "full"
+steps = [
+    "1. gate.bootstrap enrollment (6-phase + deployment.toml)",
+    "2. NUCLEUS binary fetch from VPS depot (WAN HTTPS)",
+    "3. Health sweep 13/13",
+    "4. songBird mesh enrollment (:7700)",
+    "5. primalSpring validation",
+]
+status = "LAST — gaming/hobby gate, only when not in use"
+note = """Windows gaming gate. Exclusively a family gate validation use case.
+Only deployed to test ecoBin on family hardware with spare compute.
+Not a dev or production node. Deploy after all other gates."""
+priority_rank = 6
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 2: Federation Status Wire Fix + Handshake Validation
@@ -175,14 +217,18 @@ biomegate_recovery = "LOW: biomeGate recovery — hotSpring can use strandGate"
 
 [success_criteria]
 criteria = [
-    "northGate NUCLEUS 13/13 bootstrapped + meshed + health-passing",
+    "flockGate federation handshake validated (active_connections > 0, latency_ms confirmed)",
+    "Dev gates cascaded to fresh depot binaries (eastGate, ironGate, southGate)",
     "westGate Nest Atomic 7/7 bootstrapped + ZFS active",
     "federation.status reports enabled=true (wire fix shipped)",
-    "flockGate active_connections > 0, latency_ms confirmed",
     "gate.bootstrap sandbox-validates before promotion (stream 3)",
 ]
-stretch = [
-    "7-gate mesh fully connected",
+extended = [
+    "NUCs + Pixle enrolled and meshed",
+    "blueGate/swiftGate Windows cross-platform validation",
     "tolerances codified in deployment.toml",
     "nucleus_launcher aarch64 cross-compiled",
+]
+last = [
+    "northGate NUCLEUS 13/13 — family gate, spare compute when not in use",
 ]

@@ -45,7 +45,13 @@ gates = ["flockGate"]
 [segments.portable]
 transport = "cellular_wifi"
 description = "Portable trust anchors — grapheneGate, swiftGate"
-gates = ["grapheneGate"]
+gates = ["grapheneGate", "swiftGate"]
+
+[segments.family]
+transport = "lan_or_wifi"
+description = "Family gates — Windows nodes, spare compute when available"
+gates = ["northGate", "blueGate"]
+note = "Ancillary nodes. northGate = gaming (spare compute only). blueGate = Windows target."
 
 # ═══════════════════════════════════════════════════════════════
 # Estimated Latency Matrix (ms, one-way)

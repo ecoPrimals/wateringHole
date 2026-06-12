@@ -570,45 +570,6 @@ repos = [
     "helixVision", "initioChem", "blueFish", "esotericWebb",
 ]
 
-# northGate — Ryzen 9950X3D, RTX 5090 (32GB VRAM), 96GB RAM
-# Heaviest compute node in fleet. Full NUCLEUS 13/13.
-[gates.northGate]
-target = "x86_64-unknown-linux-musl"
-mobility = "fixed"
-bind_mode = "uds"
-composition = "full"
-transport = "lan"
-mesh_peer = "157.230.3.183:7700"
-notes = "Primary compute node — Ryzen 9950X3D + RTX 5090 32GB + 96GB RAM"
-repos = [
-    "nestGate", "wateringHole", "plasmidBin", "primalSpring",
-    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
-    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
-    "petalTongue", "skunkBat", "bingoCube", "sourDough",
-    "cellMembrane", "projectNUCLEUS", "lithoSpore", "projectFOUNDATION",
-    "esotericWebb", "blueFish", "helixVision", "initioChem",
-    "whitePaper", "benchScale", "agentReagents", "rustChip",
-    "wetSpring", "neuralSpring", "hotSpring",
-    "airSpring", "groundSpring", "healthSpring", "ludoSpring",
-]
-
-# westGate — i7-4771, RTX 2070 Super, 76TB ZFS cold storage
-# Nest Atomic specialization: storage + provenance + trust boundary.
-[gates.westGate]
-target = "x86_64-unknown-linux-musl"
-mobility = "fixed"
-bind_mode = "uds"
-composition = "nest"
-transport = "lan"
-mesh_peer = "157.230.3.183:7700"
-notes = "Cold storage node — i7-4771 + RTX 2070S + 76TB ZFS. Nest Atomic (7 primals)."
-repos = [
-    "nestGate", "wateringHole", "plasmidBin", "primalSpring",
-    "bearDog", "songBird", "toadStool",
-    "rhizoCrypt", "loamSpine", "sweetGrass",
-    "cellMembrane", "projectNUCLEUS", "lithoSpore",
-]
-
 # grapheneGate — portable trust anchor (Pixel 8a, GrapheneOS)
 # Full NUCLEUS 13/13 deployed and alive (Wave 108)
 # Carries beacon/lineage seeds, acts as physical root of trust
@@ -626,6 +587,53 @@ repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",
 ]
+
+# westGate — 76TB ZFS cold storage, Nest Atomic specialization
+[gates.westGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "nest"
+transport = "lan"
+mesh_peer = "157.230.3.183:7700"
+notes = "i7-4771 + RTX 2070 Super + 76TB ZFS. Nest Atomic 7/7. Cold storage specialization."
+repos = [
+    "nestGate", "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "biomeOS", "squirrel",
+    "sweetGrass", "loamSpine",
+    "cellMembrane",
+]
+
+# northGate — gaming/hobby gate (Windows), family validation LAST
+[gates.northGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "tcp"
+composition = "full"
+transport = "lan"
+mesh_peer = "157.230.3.183:7700"
+notes = "Ryzen 9950X3D + RTX 5090. Windows gaming gate. Family validation only — spare compute when not in use. LAST priority."
+gate_class = "family"
+
+# blueGate — Windows cross-platform validation target
+[gates.blueGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "tcp"
+composition = "subset"
+transport = "lan"
+notes = "Windows machine. Cross-platform ecoBin validation (WSL2 or native)."
+gate_class = "family"
+
+# swiftGate — portable Windows/cross-platform target
+[gates.swiftGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "portable"
+bind_mode = "tcp"
+composition = "subset"
+transport = "wifi"
+notes = "Portable Windows target. Cross-platform testing."
+gate_class = "portable_anchor"
 
 # golgiBody (VPS, inner membrane) — sovereign periplasm, Forgejo, primal services
 [gates.golgiBody]
