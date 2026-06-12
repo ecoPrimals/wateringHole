@@ -1,0 +1,188 @@
+# FRAGO: Wave 111 — Gate Expansion + Federation Wire + Sandbox Graduation
+# From: eastGate overwatch (cellMembrane)
+# Replaces: wave109-guidestone-deployment-convergence (59/59 RESOLVED, archived)
+# Context: Wave 110 achieved 13/13 HEALTH-01, 6/6 startup, full depot rebuild,
+#          membrane parity, sandbox/canary pipeline. All protocol-level convergence DONE.
+#          Wave 111 is OPERATIONAL: new hardware, federation completion, pipeline graduation.
+
+[impulse]
+id = "wave111-gate-expansion-federation-sandbox"
+type = "frago"
+from = "eastGate"
+to = ["cellMembrane", "songBird", "primalSpring", "all-gates"]
+date = "2026-06-11"
+priority = "P2"
+owner = "eastGate + cellMembrane"
+note = """
+Wave 110 proved guideStone convergence at the protocol level. Every primal speaks the same
+language, every binary traces to provenance, sandbox validation ensures no degradation.
+Wave 111 scales this to new topology and completes the last operational gaps.
+"""
+
+# ──────────────────────────────────────────────────────────────
+# ENTRY STATE
+# ──────────────────────────────────────────────────────────────
+
+[entry_state]
+health = "13/13 GRADUATED"
+startup = "6/6 COMPLETE"
+depot = "FRESH — all 13 from HEAD (c8e0c94, 2026-06-11T19:58:49Z)"
+membrane_parity = "12/12 repos at parity (origin = forgejo = local)"
+sandbox = "SHIPPED — plasmid.sandbox + plasmid.canary CLI ready"
+gates_active = "eastGate, golgiBody, ironGate, southGate, grapheneGate (5-gate mesh)"
+gates_pending = "northGate (new), westGate (new)"
+federation = "MECHANICALLY WORKING — port bound, mesh.init succeeds, status reporting bug"
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 1: Gate Expansion — northGate + westGate
+# Owner: cellMembrane + ops
+# ──────────────────────────────────────────────────────────────
+
+[stream1]
+id = "GATE-EXPANSION"
+owner = "cellMembrane + ops"
+priority = "P2"
+guidestone_properties = ["P1-Deterministic", "P4-Environment-Agnostic"]
+description = """Bootstrap new hardware into the mesh using proven gate.bootstrap pipeline.
+Depot is fresh, tooling is wired, profiles defined in ecosystem_manifest.toml."""
+
+[stream1.northgate]
+hardware = "Ryzen 9950X3D + RTX 5090 (32GB VRAM) + 96GB DDR5"
+target = "Full NUCLEUS 13/13"
+profile = "full"
+steps = [
+    "1. gate.bootstrap enrollment (6-phase + deployment.toml)",
+    "2. NUCLEUS binary fetch from VPS depot (WAN HTTPS)",
+    "3. Health sweep 13/13",
+    "4. songBird mesh enrollment (:7700)",
+    "5. primalSpring validation (s_graphenegate_readiness pattern)",
+]
+status = "READY — awaiting hardware setup"
+note = "Heaviest compute node in fleet. First gate with RTX 5090."
+
+[stream1.westgate]
+hardware = "i7-4771 + RTX 2070 Super + 76TB ZFS array"
+target = "Nest Atomic 7/7 (storage specialization)"
+profile = "nest"
+steps = [
+    "1. gate.bootstrap enrollment (nest profile)",
+    "2. Nest binaries fetch (7/7: nestgate, songbird, biomeos, sweetgrass, loamspine, beardog, squirrel)",
+    "3. Health sweep 7/7",
+    "4. ZFS pool mount + nestGate storage assignment",
+    "5. songBird mesh enrollment",
+]
+status = "READY — awaiting hardware setup"
+note = "Cold storage specialization. 76TB ZFS = archival backbone."
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 2: Federation Status Wire Fix + Handshake Validation
+# Owner: songBird team + ops
+# ──────────────────────────────────────────────────────────────
+
+[stream2]
+id = "FEDERATION-COMPLETION"
+owner = "songBird + flockGate ops"
+priority = "P2"
+guidestone_properties = ["P1-Deterministic", "P5-Tolerance-Documented"]
+description = """Federation IS mechanically working (port bound, mesh.init succeeds).
+The remaining issue is a STATUS REPORTING bug — songBird v0.2.1 doesn't wire
+SONGBIRD_FEDERATION_ENABLED env var into the federation.status RPC response.
+Fix is a one-line wire. After fix: validate full handshake on flockGate."""
+
+[stream2.items]
+federation_status_wire = """PENDING: songBird team wire SONGBIRD_FEDERATION_ENABLED
+(or --federation-port presence) into federation.status enabled field.
+One-line fix in federation status RPC handler."""
+flockgate_handshake = """PENDING (after wire fix):
+1. Rebuild songBird on VPS (membrane plasmid.harvest --targets songbird)
+2. Deploy to flockGate (plasmid.fetch --source wan --targets songbird)
+3. Call mesh.init with peers=157.230.3.183:7700
+4. Validate: federation.enabled=true, active_connections > 0, latency_ms != null"""
+workaround = """Federation works NOW without the fix — port is bound, mesh.init succeeds.
+The status response is wrong but the protocol is operational. flockGate can call mesh.init
+to establish handshake immediately (skip waiting for code fix if operational pressure)."""
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 3: Sandbox Graduation — Integrate into gate.bootstrap
+# Owner: cellMembrane
+# ──────────────────────────────────────────────────────────────
+
+[stream3]
+id = "SANDBOX-GRADUATION"
+owner = "cellMembrane"
+priority = "P3"
+guidestone_properties = ["P3-Self-Verifying"]
+description = """Sandbox and canary pipeline shipped (9fffe9d). Graduate into gate.bootstrap
+so every deploy inherently sandbox-validates before promotion."""
+
+[stream3.items]
+gate_bootstrap_sandbox = "PENDING: wire plasmid.sandbox into gate.bootstrap phase 2 (post-fetch, pre-health-sweep)"
+canary_cascade = "WIRED: cascade-restart already retires old binary to canary"
+promote_flag = "WIRED: --promote flag does sandbox + atomic promote in one step"
+systemd_templates = "DEPLOYED: membrane-sandbox@.service + membrane-canary@.service on VPS"
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 4: primalSpring — Remaining Evolution
+# Owner: primalSpring team (parallel)
+# ──────────────────────────────────────────────────────────────
+
+[stream4]
+id = "PRIMALSPRING-EVOLUTION"
+owner = "primalSpring (parallel chat)"
+priority = "P3"
+guidestone_properties = ["P4-Environment-Agnostic"]
+description = """primalSpring is now a NUCLEUS evolution arena (pure CLI + IPC client).
+Remaining items are cross-compile and manifest work."""
+
+[stream4.items]
+launcher_aarch64 = "PENDING: nucleus_launcher aarch64 cross-compile for grapheneGate"
+proto_nucleate_manifest = "PENDING: Proto-nucleate manifest for sub-NUCLEUS topologies"
+btsp_cross_primal = "LOW: Full bearDog→client→sweetGrass BTSP chain (documented gaps exist)"
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 5: Deferred Infrastructure (from Wave 109)
+# Owner: cellMembrane
+# ──────────────────────────────────────────────────────────────
+
+[stream5]
+id = "DEFERRED-INFRASTRUCTURE"
+owner = "cellMembrane"
+priority = "P3"
+guidestone_properties = ["P2-Reference-Traceable", "P3-Self-Verifying"]
+description = "Infrastructure items deferred since Wave 109. Not urgent until autonomous gates."
+
+[stream5.items]
+qs_signal_graphs = "DEFERRED: quorumSignal — 15 atomic signal graphs from WATERFALL_TEMPORAL_SYNC.md Phase 2"
+rp_impulse = "DEFERRED: rootPulse — impulse lifecycle → full provenance trio"
+freshness_mesh = "DEFERRED: move freshness.toml → songbird mesh.publish of per-remote HEADs"
+tolerances_codification = """PENDING: Named tolerances need codification in deployment.toml:
+  depot_freshness_max = 24h, mesh_handshake_timeout = 30s,
+  health_convergence_window = 60s, primal_startup_timeout = 10s"""
+
+# ──────────────────────────────────────────────────────────────
+# CARRY (LOW, stable workarounds)
+# ──────────────────────────────────────────────────────────────
+
+[carry]
+sourdough_segfault = "LOW: sourdough validate depot segfault (manual b3sum fallback)"
+healthspring_upstream = "14 gaps, all LOW, all workaround-stable (see wave107-healthspring-upstream-gaps FRAGO)"
+backbone_10g = "LOW: 10G backbone cables — blocks high-throughput only"
+biomegate_recovery = "LOW: biomeGate recovery — hotSpring can use strandGate"
+
+# ──────────────────────────────────────────────────────────────
+# SUCCESS CRITERIA
+# ──────────────────────────────────────────────────────────────
+
+[success_criteria]
+criteria = [
+    "northGate NUCLEUS 13/13 bootstrapped + meshed + health-passing",
+    "westGate Nest Atomic 7/7 bootstrapped + ZFS active",
+    "federation.status reports enabled=true (wire fix shipped)",
+    "flockGate active_connections > 0, latency_ms confirmed",
+    "gate.bootstrap sandbox-validates before promotion (stream 3)",
+]
+stretch = [
+    "7-gate mesh fully connected",
+    "tolerances codified in deployment.toml",
+    "nucleus_launcher aarch64 cross-compiled",
+]

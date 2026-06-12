@@ -1,8 +1,10 @@
-# FRAGO: Wave 110 — songBird VPS Deploy Cascade
+# FRAGO: Wave 110→111 — songBird VPS Deploy Cascade
 # From: eastGate (songBird team)
 # Purpose: Deploy federation fix + HEALTH-SB-01 to VPS depot, validate flockGate handshake
 # Blocks: flockGate handshake retest (wave109-flockgate-wan-federation-disabled)
 # Resolves: federation.status enabled=false on WAN nodes (471ed43b)
+# Status: Steps 1-4 DONE (Wave 110). Step 5 carries to Wave 111 (federation status wire fix needed first).
+# Related: wave111-gate-expansion-federation-sandbox.toml Stream 2
 
 [impulse]
 id = "wave110-songbird-vps-deploy-cascade"
