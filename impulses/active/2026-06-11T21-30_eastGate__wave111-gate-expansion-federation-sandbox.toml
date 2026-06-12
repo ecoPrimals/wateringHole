@@ -137,11 +137,16 @@ SONGBIRD_PEERS, SONGBIRD_FEDERATION_PORT env vars in bin_interface UDS/TCP path.
 Fixes flockGate reporting enabled=false."""
 federation_reconnect = """✅ DONE (f18aeb6b, Wave 111): spawn_peer_health_loop — 30s probe with
 exponential backoff (30s→60s→120s→cap 300s). Auto-reconnects after VPS restart."""
-flockgate_handshake = """PENDING (UNBLOCKED — wire fix shipped):
-1. Rebuild songBird on VPS (membrane plasmid.harvest --targets songbird)
-2. Deploy to flockGate (plasmid.fetch --source wan --targets songbird)
-3. Validate: federation.enabled=true, active_connections > 0, latency_ms != null
-4. Auto-reconnect: kill VPS songBird, verify flockGate reconnects within 5 min"""
+flockgate_handshake = """BLOCKED ON DEPOT REBUILD (tested 2026-06-12):
+1. ✅ songbird v0.2.1 fetched from depot (BLAKE3: 4153be15... VERIFIED)
+2. ✅ VPS port 7700 confirmed TCP-accepting (nc connection succeeds, HTTP 400 on raw)
+3. ✅ mesh.init succeeds locally (bootstrap_peers_added=1, peer registered as reachable)
+4. ❌ federation.status: enabled=false, active_connections=0 (env var NOT read — fix not in build)
+5. ❌ ss -tnp shows ZERO outbound TCP to 157.230.3.183 (no auto-reconnect — fix not in build)
+
+CAUSE: depot binary (c8e0c94, 2026-06-11T19:58:49Z) predates f18aeb6b.
+RESOLUTION: ops must run 'plasmid.harvest --targets songbird' to rebuild depot with wire fix.
+AFTER REBUILD: auto-reconnect means no manual mesh.init needed."""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: Sandbox Graduation — Integrate into gate.bootstrap
