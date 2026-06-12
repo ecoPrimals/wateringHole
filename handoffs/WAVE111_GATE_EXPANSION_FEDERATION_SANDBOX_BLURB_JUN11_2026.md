@@ -39,20 +39,26 @@ Every primal speaks the same language. Every binary traces to provenance. Now we
 | **westGate gate.bootstrap** (76TB ZFS, Nest Atomic) | Gate Expansion | P2 | READY — nest profile defined |
 | **NUCs + Pixle spin-up** | Gate Expansion | P2 | PENDING — quick Linux nodes |
 | **blueGate + swiftGate** (Windows targets) | Cross-Platform | P3 | PENDING — WSL2 or native validation |
-| gate.bootstrap sandbox integration | Sandbox Grad | P3 | PENDING — wire plasmid.sandbox into phase 2 |
+| ~~gate.bootstrap sandbox integration~~ | Sandbox Grad | P3 | **DONE** (acab3f6) — Tower sandbox in phase 2 |
+| ~~CASCADE-STALE-RECOVERY~~ | Divergence | P2 | **DONE** (acab3f6) — auto-stash + ff-only |
+| ~~PARTIAL-FETCH-RESUME~~ | Divergence | P2 | **DONE** (acab3f6) — atomic temp+rename |
+| CANARY-STALENESS-AUDIT | Divergence | P2 | PENDING |
+| CROSS-GATE-SKEW-REPORT | Divergence | P2 | PENDING |
+| WAN-TIMEOUT-GRACEFUL | Divergence | P2 | PENDING |
 | tolerances in deployment.toml | Deferred | P3 | PENDING — 4 named tolerances |
 | northGate (gaming gate, family validation LAST) | Gate Expansion | LOW | LAST — spare compute only |
 | qS signal graphs | Deferred | P3 | DEFERRED — not urgent until autonomous gates |
-| rP impulse lifecycle | Deferred | P3 | DEFERRED |
-| freshness → mesh.publish | Deferred | P3 | DEFERRED |
 
 ### songBird team
 
 | Item | Stream | Priority | Status |
 |------|--------|----------|--------|
-| **Federation status wire fix** | Federation | P2 | PENDING — one-line: wire env var into RPC response |
-| VPS rebuild + deploy | Federation | P2 | BLOCKED on wire fix (or use workaround) |
-| flockGate handshake validation | Federation | P2 | READY — mesh.init workaround available NOW |
+| ~~**Federation status wire fix**~~ | Federation | P2 | **DONE** (f18aeb6b) — env var fallback wired |
+| ~~**Federation auto-reconnect**~~ | Divergence | P2 | **DONE** (f18aeb6b) — peer health loop + backoff |
+| VPS rebuild + deploy | Federation | P2 | **UNBLOCKED** — wire fix shipped, needs harvest |
+| flockGate handshake validation | Federation | P2 | READY — auto-reconnect now means no manual mesh.init needed |
+| MESH-PARTITION-TOLERANCE | Divergence | P2 | PENDING (gap documented) |
+| PEER-VERSION-MISMATCH | Divergence | P3 | PENDING (gap documented) |
 
 ### primalSpring team (parallel)
 
@@ -187,23 +193,27 @@ No remaining protocol work. All guideStone properties satisfied:
 
 ### cellMembrane — Forced Robustness Evolution
 
-| Task | Scenario | Forces |
+| Task | Scenario | Status |
 |------|----------|--------|
-| **CASCADE-STALE-RECOVERY** | `temporal.cascade` on a gate 5+ commits behind, one repo with dirty worktree | Auto-stash + ff-only recovery, or fail-report with remediation steps |
-| **PARTIAL-FETCH-RESUME** | Interrupt `plasmid.fetch` mid-download (kill -9 during transfer) | Atomic fetch (temp + rename), partial-download detection, auto-retry |
-| **CANARY-STALENESS-AUDIT** | Canary pool holds binaries from 3 waves ago, trigger failover | Refuse failover to stale canary, auto-refresh from depot |
-| **CROSS-GATE-SKEW-REPORT** | Newer songBird on VPS, older on eastGate — `membrane health.audit --mesh` | Version skew report across mesh, convergence recommendation |
-| **WAN-TIMEOUT-GRACEFUL** | Simulate flockGate WAN disconnect during `plasmid.refresh` | Timeout detection, partial-state rollback, retry with exponential backoff |
-| **SANDBOX-DEPENDENCY-CHAIN** | Sandbox primal requiring bearDog — bearDog not started in sandbox | Sandbox dependency resolution: start prereqs, or skip-with-warning |
+| ~~**CASCADE-STALE-RECOVERY**~~ | `temporal.cascade` on a gate 5+ commits behind, dirty worktree | **DONE** (acab3f6) — auto-stash, ff-only, pop |
+| ~~**PARTIAL-FETCH-RESUME**~~ | Interrupt `plasmid.fetch` mid-download | **DONE** (acab3f6) — atomic write (temp+rename), .tmp cleanup, retry |
+| **CANARY-STALENESS-AUDIT** | Canary pool holds binaries from 3 waves ago, trigger failover | PENDING |
+| **CROSS-GATE-SKEW-REPORT** | Newer songBird on VPS, older on eastGate — `membrane health.audit --mesh` | PENDING |
+| **WAN-TIMEOUT-GRACEFUL** | Simulate flockGate WAN disconnect during `plasmid.refresh` | PENDING |
+| **SANDBOX-DEPENDENCY-CHAIN** | Sandbox primal requiring bearDog — bearDog not started in sandbox | PENDING |
+
+Also shipped (cellMembrane `c8c2631`): pure Rust ELF validation (no external `file` command), constant extraction (magic numbers → named constants), zero production unwrap/expect/todo/allow/unsafe.
 
 ### songBird — Federation Robustness
 
-| Task | Scenario | Forces |
+| Task | Scenario | Status |
 |------|----------|--------|
-| **FEDERATION-STATUS-WIRE** | Wire `SONGBIRD_FEDERATION_ENABLED` into RPC response | One-line fix — unblocks flockGate |
-| **FEDERATION-RECONNECT** | Kill VPS songBird, restart after 60s — auto-reconnect? | Auto-reconnect, exponential backoff, health-degraded state |
-| **MESH-PARTITION-TOLERANCE** | VPS reachable from eastGate but not from flockGate | Partition detection, graceful degradation, reunion protocol |
-| **PEER-VERSION-MISMATCH** | songBird v0.2.0 on one gate, v0.2.1 on another | Version negotiation, backward-compatible wire format |
+| ~~**FEDERATION-STATUS-WIRE**~~ | Wire env vars into `federation.status` response | **DONE** (f18aeb6b) — reads SONGBIRD_FEDERATION_ENABLED, PEERS, PORT |
+| ~~**FEDERATION-RECONNECT**~~ | Kill VPS songBird, restart after 60s — auto-reconnect? | **DONE** (f18aeb6b) — spawn_peer_health_loop, 30s→300s backoff |
+| **MESH-PARTITION-TOLERANCE** | VPS reachable from eastGate but not from flockGate | PENDING (gap documented) |
+| **PEER-VERSION-MISMATCH** | songBird v0.2.0 on one gate, v0.2.1 on another | PENDING (gap documented) |
+
+Also shipped (songBird `32a8d700`, Wave 112): dep hoisting, real health probes replacing stubs, env-only → TCP probes, security provider naming agnostic.
 
 ### primalSpring — Validation Scenarios for Divergence
 
@@ -215,10 +225,12 @@ No remaining protocol work. All guideStone properties satisfied:
 
 ### biomeOS — Orchestration Under Divergence
 
-| Task | Scenario | Forces |
+| Task | Scenario | Status |
 |------|----------|--------|
-| **DISCOVERY-STALE-PRUNE** | Primal dies (no health response) — biomeOS prunes registration | Stale registration pruning, health-aware discovery |
-| **ROUTING-PARTITION-AWARE** | Primal on unreachable segment — routing degrades? | Topology-aware degradation, don't block on unreachable |
+| ~~**DISCOVERY-STALE-PRUNE**~~ | Primal dies — biomeOS prunes registration | **DONE** (249bce28, v4.24) — unregister + prune_stale + capability.prune RPC + 60s sweep |
+| ~~**ROUTING-PARTITION-AWARE**~~ | Primal on unreachable segment — routing degrades? | **DONE** (249bce28, v4.24) — all_circuits_open detection, mesh fallback before hard error |
+
+Also shipped (biomeOS `8c310e1b`, v4.25): security fail-closed, real metrics, agnostic naming, router refactor. Neural router registry extracted (`neural_router/registry.rs`).
 
 ### ops — Intentional Divergence Creation
 

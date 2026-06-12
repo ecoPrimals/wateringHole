@@ -132,17 +132,16 @@ SONGBIRD_FEDERATION_ENABLED env var into the federation.status RPC response.
 Fix is a one-line wire. After fix: validate full handshake on flockGate."""
 
 [stream2.items]
-federation_status_wire = """PENDING: songBird team wire SONGBIRD_FEDERATION_ENABLED
-(or --federation-port presence) into federation.status enabled field.
-One-line fix in federation status RPC handler."""
-flockgate_handshake = """PENDING (after wire fix):
+federation_status_wire = """✅ DONE (f18aeb6b, Wave 111): songBird reads SONGBIRD_FEDERATION_ENABLED,
+SONGBIRD_PEERS, SONGBIRD_FEDERATION_PORT env vars in bin_interface UDS/TCP path.
+Fixes flockGate reporting enabled=false."""
+federation_reconnect = """✅ DONE (f18aeb6b, Wave 111): spawn_peer_health_loop — 30s probe with
+exponential backoff (30s→60s→120s→cap 300s). Auto-reconnects after VPS restart."""
+flockgate_handshake = """PENDING (UNBLOCKED — wire fix shipped):
 1. Rebuild songBird on VPS (membrane plasmid.harvest --targets songbird)
 2. Deploy to flockGate (plasmid.fetch --source wan --targets songbird)
-3. Call mesh.init with peers=157.230.3.183:7700
-4. Validate: federation.enabled=true, active_connections > 0, latency_ms != null"""
-workaround = """Federation works NOW without the fix — port is bound, mesh.init succeeds.
-The status response is wrong but the protocol is operational. flockGate can call mesh.init
-to establish handshake immediately (skip waiting for code fix if operational pressure)."""
+3. Validate: federation.enabled=true, active_connections > 0, latency_ms != null
+4. Auto-reconnect: kill VPS songBird, verify flockGate reconnects within 5 min"""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: Sandbox Graduation — Integrate into gate.bootstrap
@@ -158,7 +157,7 @@ description = """Sandbox and canary pipeline shipped (9fffe9d). Graduate into ga
 so every deploy inherently sandbox-validates before promotion."""
 
 [stream3.items]
-gate_bootstrap_sandbox = "PENDING: wire plasmid.sandbox into gate.bootstrap phase 2 (post-fetch, pre-health-sweep)"
+gate_bootstrap_sandbox = "✅ DONE (acab3f6, Wave 111): plasmid.sandbox wired into gate.bootstrap phase 2 — Tower primals validated in isolation before nucleus.start"
 canary_cascade = "WIRED: cascade-restart already retires old binary to canary"
 promote_flag = "WIRED: --promote flag does sandbox + atomic promote in one step"
 systemd_templates = "DEPLOYED: membrane-sandbox@.service + membrane-canary@.service on VPS"
@@ -235,14 +234,14 @@ id = "CASCADE-STALE-RECOVERY"
 scenario = "Run temporal.cascade on a gate 5+ commits behind, one repo with dirty worktree"
 forces = "Auto-stash + ff-only recovery, or fail-report with remediation steps"
 priority = "P2"
-status = "PENDING"
+status = "✅ DONE (acab3f6): auto-stash dirty worktree, ff-only pull, pop. Handles 5+ commits behind."
 
 [stream6.cellmembrane.partial_fetch_resume]
 id = "PARTIAL-FETCH-RESUME"
 scenario = "Interrupt plasmid.fetch mid-download (kill -9 during binary transfer)"
 forces = "Atomic fetch (temp file + rename), partial-download detection, auto-retry"
 priority = "P2"
-status = "PENDING"
+status = "✅ DONE (acab3f6): atomic write (temp + rename), .tmp cleanup on startup, one-retry with 2s backoff."
 
 [stream6.cellmembrane.canary_staleness_audit]
 id = "CANARY-STALENESS-AUDIT"
@@ -283,7 +282,7 @@ id = "FEDERATION-RECONNECT"
 scenario = "Kill VPS songBird, restart after 60s — does flockGate auto-reconnect?"
 forces = "Auto-reconnect logic, exponential backoff, health-degraded state reporting"
 priority = "P2"
-status = "PENDING"
+status = "✅ DONE (f18aeb6b): spawn_peer_health_loop — 30s probe, exponential backoff (30→60→120→cap 300s), auto-reconnect via record_direct_connection()."
 
 [stream6.songbird.mesh_partition_tolerance]
 id = "MESH-PARTITION-TOLERANCE"
@@ -337,25 +336,14 @@ id = "DISCOVERY-STALE-PRUNE"
 scenario = "Register a primal, let it die (no health response), verify biomeOS prunes it"
 forces = "Stale registration pruning, health-aware discovery"
 priority = "P2"
-status = "✅ SHIPPED v4.24 → v4.25 (8c310e1b)"
-resolution = """biomeOS v4.24 (249bce28) → v4.25 (8c310e1b):
-- NeuralRouter::unregister_primal() removes all capability registrations for dead primals
-- NeuralRouter::prune_stale_registrations() probes all endpoints, evicts unreachable
-- capability.prune JSON-RPC method for manual triggering
-- Background 60s sweep auto-evicts dead primals from capability registry
-- STALE_PRUNE_SWEEP_INTERVAL constant centralized in biomeos_types"""
+status = "✅ DONE (249bce28, v4.24): unregister_primal() + prune_stale_registrations() + capability.prune RPC + 60s background sweep."
 
 [stream6.biomeos.routing_partition_aware]
 id = "ROUTING-PARTITION-AWARE"
 scenario = "Two primals on different segments, one segment unreachable"
 forces = "Topology-aware routing degrades gracefully, doesn't block on unreachable"
 priority = "P3"
-status = "✅ SHIPPED v4.24 → v4.25 (8c310e1b)"
-resolution = """biomeOS v4.24 (249bce28) → v4.25 (8c310e1b):
-- RoutingWeightTable::all_circuits_open() detects all-dead provider set
-- try_registry_lookup() returns None when all circuits open → mesh fallback
-- capability.call forward failure now tries Songbird mesh before hard error
-- No more blind fallback to providers[0] when all circuits broken"""
+status = "✅ DONE (249bce28, v4.24): all_circuits_open() detection, try_registry_lookup returns None on all-dead, capability.call tries mesh before hard error."
 
 # --- ops: Intentional Divergence Creation ---
 
