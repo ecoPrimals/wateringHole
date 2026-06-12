@@ -21,6 +21,27 @@ All protocol-level convergence achieved:
 
 ---
 
+## Wave 111 Mid-Wave Evolution (2026-06-12)
+
+**Major cellMembrane evolution shipped (e230e10, ironGate):**
+- **3-Tier Diesel Engine** fully operational: Ember (sandbox) → Cylinder (main) → Glowplug (canary)
+- **gate.provision CLI**: DigitalOcean API v2 client — create/poll/destroy droplets, SSH bootstrap, mesh join
+- **canary-fieldmouse.toml**: Full NUCLEUS 13/13 warm standby profile in plasmidBin
+- **Deep debt**: cascade.rs 877L→390L (extracted post_sync.rs), all hardcoded primal names → capability-based discovery
+- **Bash fallback removed**: gate/mod.rs pull()/check() now pure temporal.cascade/temporal.check
+- **membrane.toml**: Updated from "Wave 63: Three-node diderm" → "Wave 111: 3-tier diesel engine"
+- **Cargo clean**: 1.2GiB artifacts reclaimed, full rebuild 7.88s, zero warnings, 377 tests green
+- **VPS Surface Minimization Plan**: Path from $24/mo to $6/mo relay-only (Phase 1 immediately actionable)
+
+**songBird evolution (9903cf50, Wave 113):**
+- **MESH-PARTITION-TOLERANCE**: Cross-gate reachability gossip, partition detection, graceful degradation
+- **PEER-VERSION-MISMATCH**: Version negotiation, backward-compatible wire protocol, version_skew reporting
+- 8918 total tests passing, zero clippy warnings
+
+**Stream 6 Divergence Pressure: 13/16 SHIPPED** (was 10/16 at last blurb update)
+
+---
+
 ## Wave 111 Theme
 
 **Scale proven infrastructure to new topology. Complete federation. Push divergence hard to force robustness.**
@@ -42,9 +63,12 @@ Every primal speaks the same language. Every binary traces to provenance. Now we
 | ~~gate.bootstrap sandbox integration~~ | Sandbox Grad | P3 | **DONE** (acab3f6) — Tower sandbox in phase 2 |
 | ~~CASCADE-STALE-RECOVERY~~ | Divergence | P2 | **DONE** (acab3f6) — auto-stash + ff-only |
 | ~~PARTIAL-FETCH-RESUME~~ | Divergence | P2 | **DONE** (acab3f6) — atomic temp+rename |
-| CANARY-STALENESS-AUDIT | Divergence | P2 | PENDING |
-| CROSS-GATE-SKEW-REPORT | Divergence | P2 | PENDING |
-| WAN-TIMEOUT-GRACEFUL | Divergence | P2 | PENDING |
+| ~~CANARY-STALENESS-AUDIT~~ | Divergence | P2 | **DONE** (e80993f) — refuse stale >168h, --refresh auto-prune |
+| ~~CROSS-GATE-SKEW-REPORT~~ | Divergence | P2 | **DONE** (e80993f) — health.audit --mesh, provenance mismatch report |
+| ~~WAN-TIMEOUT-GRACEFUL~~ | Divergence | P2 | **DONE** (e80993f) — SCP exponential backoff 2s/4s/8s, rollback on fail |
+| **gate.provision** (DO API) | Provisioning | P2 | **DONE** (e230e10) — create/poll/destroy droplets, SSH bootstrap |
+| **canary-fieldmouse profile** | Canary | P2 | **DONE** (cb62907) — NUCLEUS 13/13 warm standby |
+| **VPS surface minimization** | Sovereignty | P2 | PLANNED — Phase 1 (NUC canary) immediately actionable |
 | tolerances in deployment.toml | Deferred | P3 | PENDING — 4 named tolerances |
 | northGate (gaming gate, family validation LAST) | Gate Expansion | LOW | LAST — spare compute only |
 | qS signal graphs | Deferred | P3 | DEFERRED — not urgent until autonomous gates |
@@ -55,10 +79,10 @@ Every primal speaks the same language. Every binary traces to provenance. Now we
 |------|--------|----------|--------|
 | ~~**Federation status wire fix**~~ | Federation | P2 | **DONE** (f18aeb6b) — env var fallback wired |
 | ~~**Federation auto-reconnect**~~ | Divergence | P2 | **DONE** (f18aeb6b) — peer health loop + backoff |
-| VPS rebuild + deploy | Federation | P2 | **UNBLOCKED** — wire fix shipped, needs harvest |
-| flockGate handshake validation | Federation | P2 | READY — auto-reconnect now means no manual mesh.init needed |
-| MESH-PARTITION-TOLERANCE | Divergence | P2 | PENDING (gap documented) |
-| PEER-VERSION-MISMATCH | Divergence | P3 | PENDING (gap documented) |
+| VPS rebuild + deploy | Federation | P2 | **BLOCKER** — depot binary (32a8d700) predates federation fix (f18aeb6b). Needs plasmid.harvest. |
+| flockGate handshake validation | Federation | P2 | PARTIALLY VALIDATED — mesh.init succeeds, port 7700 open, no outbound TCP (stale binary) |
+| ~~MESH-PARTITION-TOLERANCE~~ | Divergence | P2 | **DONE** (9903cf50) — cross-gate reachability gossip, partition detection |
+| ~~PEER-VERSION-MISMATCH~~ | Divergence | P3 | **DONE** (9903cf50) — version negotiation, backward-compatible wire |
 
 ### primalSpring team (parallel)
 
@@ -130,18 +154,18 @@ See federation section below — highest priority operational item.
 **Owner**: cellMembrane + ops
 **Status**: LAST priority. Not a dev or production node. Validates ecoBin on family hardware with spare compute utilization. Deploy after all other gates are stable.
 
-### flockGate (WAN — Federation Fix)
+### flockGate (WAN — Federation Fix) — HIGHEST PRIORITY OPS ITEM
 
 **Hardware**: ARM64 (existing, deployed)
-**Issue**: `federation.status` reports `enabled: false` (status reporting bug only)
-**Reality**: Port :7700 bound, mesh.init succeeds, federation MECHANICALLY WORKING
+**Status**: Partially validated (08c36f2). mesh.init succeeds, port 7700 open. Depot binary stale.
+**Blocker**: Depot songBird is `32a8d700` (Wave 112). Needs rebuild from `fe47c012`+ (partition tolerance + federation wire fix).
 
 | Action | Owner | Status |
 |--------|-------|--------|
-| Wire fix (code) | songBird team | PENDING — one-line env var read |
-| Rebuild + deploy | ops | BLOCKED on fix (or use workaround) |
-| mesh.init handshake (workaround) | ops | READY NOW — call mesh.init with peers |
-| Validate active_connections > 0 | ops | After mesh.init |
+| ~~Wire fix (code)~~ | songBird team | **DONE** (f18aeb6b) — env var wired |
+| ~~Partition tolerance~~ | songBird team | **DONE** (9903cf50) — gossip + version negotiation |
+| Rebuild + deploy (`plasmid.harvest --targets songbird`) | ops | **BLOCKER** — depot stale |
+| Validate active_connections > 0 | ops | After rebuild + deploy |
 
 ### grapheneGate (ARM — Existing, Maintenance)
 
@@ -168,10 +192,10 @@ No remaining protocol work. All guideStone properties satisfied:
 - P4 (Environment-Agnostic): musl-static, no runtime deps
 - P5 (Tolerance-Documented): 6 named tolerances in primalSpring; 4 more pending codification
 
-### Deployment Level — 2 items
+### Deployment Level — 1 item
 
-1. **Sandbox integration** into gate.bootstrap (P3, cellMembrane)
-2. **Tolerances** codified in deployment.toml (P3, cellMembrane)
+1. ~~**Sandbox integration** into gate.bootstrap~~ — **DONE** (acab3f6 + e230e10)
+2. **Tolerances** codified in deployment.toml (P3, cellMembrane) — PENDING
 
 ### Infrastructure Level — 6 items (priority order)
 
@@ -200,9 +224,9 @@ No remaining protocol work. All guideStone properties satisfied:
 |------|----------|--------|
 | ~~**CASCADE-STALE-RECOVERY**~~ | `temporal.cascade` on a gate 5+ commits behind, dirty worktree | **DONE** (acab3f6) — auto-stash, ff-only, pop |
 | ~~**PARTIAL-FETCH-RESUME**~~ | Interrupt `plasmid.fetch` mid-download | **DONE** (acab3f6) — atomic write (temp+rename), .tmp cleanup, retry |
-| **CANARY-STALENESS-AUDIT** | Canary pool holds binaries from 3 waves ago, trigger failover | PENDING |
-| **CROSS-GATE-SKEW-REPORT** | Newer songBird on VPS, older on eastGate — `membrane health.audit --mesh` | PENDING |
-| **WAN-TIMEOUT-GRACEFUL** | Simulate flockGate WAN disconnect during `plasmid.refresh` | PENDING |
+| ~~**CANARY-STALENESS-AUDIT**~~ | Canary pool holds binaries from 3 waves ago, trigger failover | **DONE** (e80993f) — refuse >168h stale, plasmid.canary.audit --refresh |
+| ~~**CROSS-GATE-SKEW-REPORT**~~ | Newer songBird on VPS, older on eastGate — `membrane health.audit --mesh` | **DONE** (e80993f) — depot staleness + provenance mismatch report |
+| ~~**WAN-TIMEOUT-GRACEFUL**~~ | Simulate flockGate WAN disconnect during `plasmid.refresh` | **DONE** (e80993f) — exponential backoff (2s/4s/8s), partial rollback |
 | **SANDBOX-DEPENDENCY-CHAIN** | Sandbox primal requiring bearDog — bearDog not started in sandbox | PENDING |
 
 Also shipped (cellMembrane `c8c2631`): pure Rust ELF validation (no external `file` command), constant extraction (magic numbers → named constants), zero production unwrap/expect/todo/allow/unsafe.
@@ -213,8 +237,8 @@ Also shipped (cellMembrane `c8c2631`): pure Rust ELF validation (no external `fi
 |------|----------|--------|
 | ~~**FEDERATION-STATUS-WIRE**~~ | Wire env vars into `federation.status` response | **DONE** (f18aeb6b) — reads SONGBIRD_FEDERATION_ENABLED, PEERS, PORT |
 | ~~**FEDERATION-RECONNECT**~~ | Kill VPS songBird, restart after 60s — auto-reconnect? | **DONE** (f18aeb6b) — spawn_peer_health_loop, 30s→300s backoff |
-| **MESH-PARTITION-TOLERANCE** | VPS reachable from eastGate but not from flockGate | PENDING (gap documented) |
-| **PEER-VERSION-MISMATCH** | songBird v0.2.0 on one gate, v0.2.1 on another | PENDING (gap documented) |
+| ~~**MESH-PARTITION-TOLERANCE**~~ | VPS reachable from eastGate but not from flockGate | **DONE** (9903cf50) — reachability gossip, partition detection, graceful degradation |
+| ~~**PEER-VERSION-MISMATCH**~~ | songBird v0.2.0 on one gate, v0.2.1 on another | **DONE** (9903cf50) — version negotiation, backward-compatible wire |
 
 Also shipped (songBird `32a8d700`, Wave 112): dep hoisting, real health probes replacing stubs, env-only → TCP probes, security provider naming agnostic.
 
@@ -247,21 +271,21 @@ Also shipped (biomeOS `8c310e1b`, v4.25): security fail-closed, real metrics, ag
 ## Success Criteria
 
 **Core (Wave 111)**:
-- [ ] flockGate federation handshake validated (active_connections > 0)
+- [ ] flockGate federation handshake validated (active_connections > 0) — BLOCKER: depot rebuild needed
 - [ ] Dev gates cascaded to fresh depot binaries (eastGate, ironGate, southGate)
 - [ ] westGate Nest Atomic 7/7 bootstrapped + ZFS active
-- [ ] federation.status reports `enabled: true` (wire fix shipped)
-- [ ] gate.bootstrap sandbox-validates before promotion
-- [ ] At least 4 divergence scenarios (Stream 6) executed, findings documented
-- [ ] cellMembrane: CASCADE-STALE-RECOVERY + PARTIAL-FETCH-RESUME either fixed or gap-documented
+- [x] federation.status reports `enabled: true` (wire fix shipped — f18aeb6b)
+- [x] gate.bootstrap sandbox-validates before promotion (acab3f6 + e230e10)
+- [x] At least 4 divergence scenarios (Stream 6) executed — **13/16 shipped**
+- [x] cellMembrane: CASCADE-STALE-RECOVERY + PARTIAL-FETCH-RESUME — **DONE** (acab3f6)
 
 **Extended**:
 - [ ] NUCs + Pixle enrolled and meshed
 - [ ] blueGate/swiftGate Windows cross-platform validation
 - [ ] tolerances codified in deployment.toml
 - [ ] nucleus_launcher aarch64 cross-compiled
-- [ ] primalSpring: `s_version_skew_detection` scenario shipping
-- [ ] biomeOS: stale registration pruning demonstrated
+- [x] primalSpring: `s_version_skew_detection` scenario shipping — **DONE**
+- [x] biomeOS: stale registration pruning demonstrated — **DONE** (249bce28, v4.24)
 
 **Last** (family validation):
 - [ ] northGate NUCLEUS 13/13 — spare compute when not in use
@@ -273,9 +297,10 @@ Also shipped (biomeOS `8c310e1b`, v4.25): security fail-closed, real metrics, ag
 | Document | Purpose |
 |----------|---------|
 | This blurb | Wave 111 per-team/level/gate guidance |
-| `impulses/active/...wave111-gate-expansion-federation-sandbox.toml` | Wave 111 FRAGO |
-| `impulses/active/...wave110-songbird-vps-deploy-cascade.toml` | Deploy procedure (steps 1-3 done) |
+| `impulses/active/...wave111-gate-expansion-federation-sandbox.toml` | Wave 111 FRAGO (13/16 Stream 6 shipped) |
 | `impulses/active/...wave107-healthspring-upstream-gaps.toml` | healthSpring upstream backlog (LOW) |
+| `handoffs/VPS_SURFACE_MINIMIZATION_EVOLUTION_JUN12_2026.md` | VPS sovereignty roadmap ($24→$6/mo) |
+| `plasmidBin/profiles/canary-fieldmouse.toml` | Canary gate profile (Phase 1 ready) |
 | `cellMembrane/AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md` | Living deployment standard |
 | `GLACIAL_SHIFT_READINESS.md` | Stadial entry tracking |
 
@@ -283,12 +308,14 @@ Also shipped (biomeOS `8c310e1b`, v4.25): security fail-closed, real metrics, ag
 
 ## Key Insight for Teams
 
-**Federation is WORKING — only the status RPC lies.** Port 7700 is bound and TCP-accepting on both VPS and flockGate. `mesh.init` succeeds. The only remaining bug is `federation.status` not reading the `SONGBIRD_FEDERATION_ENABLED` env var into its response JSON. This is a one-line fix.
+**Federation code is COMPLETE — deployment is the bottleneck.** songBird now has partition tolerance (9903cf50), version negotiation, and the wire fix (f18aeb6b). All 4/4 songBird divergence scenarios DONE. The only remaining action is operational: rebuild songBird in the depot from HEAD and deploy to flockGate.
 
-**Workaround (available now)**: Call `mesh.init` on flockGate with `peers=157.230.3.183:7700` to establish the outbound handshake. Don't wait for the status fix if operational pressure exists.
+**Depot staleness is the single remaining blocker.** The depot has songBird `32a8d700` (Wave 112). The VPS needs `plasmid.harvest --targets songbird` to build from `fe47c012` (Wave 113, 8918 tests). After that, `plasmid.fetch --source wan --targets songbird` on flockGate completes federation.
 
-**Sandbox pipeline is ready.** `membrane plasmid.sandbox --primal X --promote` validates and promotes in one atomic step. `membrane plasmid.canary.{list,health,failover}` manages the fallback pool. Use this for northGate/westGate bootstrapping.
+**VPS surface minimization is planned and actionable.** Phase 1 (NUC replaces fieldMouse droplet → $12/mo savings) can execute immediately using `gate.bootstrap` with the new `canary-fieldmouse` profile. `gate.provision.destroy` decommissions the DO canary when ready.
+
+**cellMembrane is now bash-free.** The dead `cascade-pull.sh` fallback is removed. All gate operations are pure Rust — temporal.cascade/temporal.check invocations only. The locally installed membrane binary on ironGate is older (pre-temporal.cascade); rebuild with `cargo install --path crates/membrane-shadow` to get the full diesel engine.
 
 ---
 
-**Wave 111 scales guideStone convergence to new topology and stress-tests it. The protocol is proven — now we grow the mesh, break it intentionally, and harden the membrane until ionic/weak bonding is reliable.**
+**Wave 111 scales guideStone convergence to new topology and stress-tests it. The protocol is proven, the membrane is bash-free and capability-driven, divergence pressure yielded 13/16 robustness primitives, and the VPS sovereignty path is documented. The single remaining blocker is operational: rebuild the depot and deploy fresh songBird to complete WAN federation. After that, gate expansion (westGate, NUCs, Pixle) proceeds from proven infrastructure.**
