@@ -294,14 +294,16 @@ id = "MESH-PARTITION-TOLERANCE"
 scenario = "Split mesh: VPS reachable from eastGate but not from flockGate"
 forces = "Partition detection, graceful degradation (local-only mode), reunion protocol"
 priority = "P2"
-status = "PENDING"
+status = "DONE"
+resolution = "Wave 113 (9903cf50): PeerMetadata gossip via capabilities_announce, partition_status_for(), mesh.status/health_check surface partition_warnings"
 
 [stream6.songbird.peer_version_mismatch]
 id = "PEER-VERSION-MISMATCH"
 scenario = "Run songBird v0.2.0 on one gate, v0.2.1 on another — do they mesh?"
 forces = "Version negotiation, backward-compatible wire format"
 priority = "P3"
-status = "PENDING"
+status = "DONE"
+resolution = "Wave 113 (9903cf50): probe_peer_full extracts version, mesh.peers reports version_mismatch, mesh.status reports version_skew array"
 
 # --- primalSpring: Validation Scenarios for Divergence ---
 
