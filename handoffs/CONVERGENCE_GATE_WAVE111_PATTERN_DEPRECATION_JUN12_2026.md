@@ -21,8 +21,8 @@ code, docs, and runbooks permanently.
 | # | Criterion | Condition | State | Blocked By |
 |---|-----------|-----------|-------|-----------|
 | 1 | **All gates run post-e230e10 membrane** | `membrane --version` ≥ Wave 111 on all 5 active gates | ⚠️ PARTIAL | ironGate local binary older (pre-temporal.cascade) |
-| 2 | **Depot includes partition-tolerant songBird** | provenance.toml → songBird ≥ 9903cf50 | ❌ STALE | Needs `plasmid.harvest --targets songbird` |
-| 3 | **flockGate WAN federation validated** | `federation.status` → active_connections > 0, latency_ms present | ❌ BLOCKED | Depot rebuild → deploy |
+| 2 | **Depot includes partition-tolerant songBird** | provenance.toml → songBird ≥ 9903cf50 | ⚠️ PARTIAL | Depot rebuilt to 3fc94365 (federation fix). Partition tolerance (9903cf50) still needs harvest. |
+| 3 | **flockGate WAN federation validated** | `federation.status` → active_connections > 0, latency_ms present | ⚠️ PARTIAL | 64ms RTT validated, enabled=true. Persistent relay pending (active_connections=0 until VPS songBird rebuilds to fe47c012). |
 | 4 | **No gate uses bash fallback paths** | Code removed (gate/mod.rs e230e10) + binaries updated | ⚠️ CODE DONE | Binary rollout pending |
 | 5 | **canary.audit passes on all canary nodes** | `plasmid.canary.audit` → 0 stale entries | ⚠️ NO CANARY YET | NUC bootstrap pending |
 | 6 | **2 full cascade cycles, zero manual intervention** | temporal.cascade runs 2x across all 5 gates, no human fix-up needed | ❌ NOT YET TESTED | Gate binary rollout |

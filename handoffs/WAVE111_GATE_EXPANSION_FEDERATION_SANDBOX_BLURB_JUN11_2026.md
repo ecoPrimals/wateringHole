@@ -1,6 +1,6 @@
 # Wave 111 — Gate Expansion + Federation Completion + Sandbox Graduation
 
-**Date**: 2026-06-11 (prepared; activate on Wave 110 closure)
+**Date**: 2026-06-12 (ACTIVE — pre-wave sync complete, ready for distribution)
 **From**: eastGate overwatch (cellMembrane)
 **FRAGO**: `impulses/active/2026-06-11T21-30_eastGate__wave111-gate-expansion-federation-sandbox.toml`
 
@@ -79,8 +79,8 @@ Every primal speaks the same language. Every binary traces to provenance. Now we
 |------|--------|----------|--------|
 | ~~**Federation status wire fix**~~ | Federation | P2 | **DONE** (f18aeb6b) — env var fallback wired |
 | ~~**Federation auto-reconnect**~~ | Divergence | P2 | **DONE** (f18aeb6b) — peer health loop + backoff |
-| VPS rebuild + deploy | Federation | P2 | **BLOCKER** — depot binary (32a8d700) predates federation fix (f18aeb6b). Needs plasmid.harvest. |
-| flockGate handshake validation | Federation | P2 | PARTIALLY VALIDATED — mesh.init succeeds, port 7700 open, no outbound TCP (stale binary) |
+| ~~VPS rebuild + deploy~~ | Federation | P2 | **DONE** (3fc94365) — federation fix in depot, validated on flockGate |
+| ~~flockGate handshake validation~~ | Federation | P2 | **DONE** (1faea88) — 64ms RTT, enabled=true, auto-reconnect functional |
 | ~~MESH-PARTITION-TOLERANCE~~ | Divergence | P2 | **DONE** (9903cf50) — cross-gate reachability gossip, partition detection |
 | ~~PEER-VERSION-MISMATCH~~ | Divergence | P3 | **DONE** (9903cf50) — version negotiation, backward-compatible wire |
 
@@ -109,9 +109,9 @@ Every primal speaks the same language. Every binary traces to provenance. Now we
 
 ## Remaining Work by Gate
 
-### Priority 1: flockGate (WAN — Federation Fix)
+### Priority 1: flockGate (WAN — Federation VALIDATED)
 
-See federation section below — highest priority operational item.
+**64ms RTT confirmed.** Federation handshake validated 2026-06-12T14:07Z. Wire fix + auto-reconnect working. Remaining: VPS songBird rebuild to `fe47c012` for persistent relay + partition tolerance.
 
 ### Priority 2: Dev Gates (eastGate / ironGate / southGate — Cascade Freshness)
 
@@ -154,18 +154,19 @@ See federation section below — highest priority operational item.
 **Owner**: cellMembrane + ops
 **Status**: LAST priority. Not a dev or production node. Validates ecoBin on family hardware with spare compute utilization. Deploy after all other gates are stable.
 
-### flockGate (WAN — Federation Fix) — HIGHEST PRIORITY OPS ITEM
+### flockGate (WAN — Federation VALIDATED)
 
 **Hardware**: ARM64 (existing, deployed)
-**Status**: Partially validated (08c36f2). mesh.init succeeds, port 7700 open. Depot binary stale.
-**Blocker**: Depot songBird is `32a8d700` (Wave 112). Needs rebuild from `fe47c012`+ (partition tolerance + federation wire fix).
+**Status**: VALIDATED (1faea88). 64ms RTT, enabled=true, wire fix confirmed, auto-reconnect functional.
+**Remaining**: Persistent relay (VPS songBird rebuild to `fe47c012` for partition tolerance).
 
 | Action | Owner | Status |
 |--------|-------|--------|
 | ~~Wire fix (code)~~ | songBird team | **DONE** (f18aeb6b) — env var wired |
 | ~~Partition tolerance~~ | songBird team | **DONE** (9903cf50) — gossip + version negotiation |
-| Rebuild + deploy (`plasmid.harvest --targets songbird`) | ops | **BLOCKER** — depot stale |
-| Validate active_connections > 0 | ops | After rebuild + deploy |
+| ~~Depot rebuild~~ | ops | **DONE** (3fc94365) — federation fix in depot |
+| ~~Federation validation~~ | ops | **DONE** — 64ms RTT, enabled=true, mesh.init succeeds |
+| VPS rebuild to `fe47c012` (partition tolerance in depot) | ops | PENDING — persistent relay |
 
 ### grapheneGate (ARM — Existing, Maintenance)
 
@@ -271,7 +272,7 @@ Also shipped (biomeOS `8c310e1b`, v4.25): security fail-closed, real metrics, ag
 ## Success Criteria
 
 **Core (Wave 111)**:
-- [ ] flockGate federation handshake validated (active_connections > 0) — BLOCKER: depot rebuild needed
+- [x] flockGate federation handshake validated — **64ms RTT, enabled=true** (1faea88). Persistent relay pending VPS rebuild.
 - [ ] Dev gates cascaded to fresh depot binaries (eastGate, ironGate, southGate)
 - [ ] westGate Nest Atomic 7/7 bootstrapped + ZFS active
 - [x] federation.status reports `enabled: true` (wire fix shipped — f18aeb6b)
@@ -298,19 +299,22 @@ Also shipped (biomeOS `8c310e1b`, v4.25): security fail-closed, real metrics, ag
 |----------|---------|
 | This blurb | Wave 111 per-team/level/gate guidance |
 | `impulses/active/...wave111-gate-expansion-federation-sandbox.toml` | Wave 111 FRAGO (13/16 Stream 6 shipped) |
-| `impulses/active/...wave107-healthspring-upstream-gaps.toml` | healthSpring upstream backlog (LOW) |
+| `handoffs/PREWAVE_SYNC_WAVE111_JUN12_2026.md` | Pre-wave sync state (freshness regenerated) |
+| `handoffs/AAR_DIVERGENCE_PRESSURE_WAVE111_STREAM6_JUN12_2026.md` | Stream 6 results + 8 proven patterns |
+| `handoffs/AAR_PIPELINE_ADHOC_PATTERNS_WAVE111_JUN12_2026.md` | Pipeline automation roadmap (P1/P2/P3 items) |
+| `handoffs/CONVERGENCE_GATE_WAVE111_PATTERN_DEPRECATION_JUN12_2026.md` | When old patterns can be permanently deprecated |
 | `handoffs/VPS_SURFACE_MINIMIZATION_EVOLUTION_JUN12_2026.md` | VPS sovereignty roadmap ($24→$6/mo) |
 | `plasmidBin/profiles/canary-fieldmouse.toml` | Canary gate profile (Phase 1 ready) |
-| `cellMembrane/AAR_CELLMEMBRANE_WAVE106_DETERMINISTIC_DEPLOYMENT_JUN10_2026.md` | Living deployment standard |
+| `impulses/active/...wave107-healthspring-upstream-gaps.toml` | healthSpring upstream backlog (LOW) |
 | `GLACIAL_SHIFT_READINESS.md` | Stadial entry tracking |
 
 ---
 
 ## Key Insight for Teams
 
-**Federation code is COMPLETE — deployment is the bottleneck.** songBird now has partition tolerance (9903cf50), version negotiation, and the wire fix (f18aeb6b). All 4/4 songBird divergence scenarios DONE. The only remaining action is operational: rebuild songBird in the depot from HEAD and deploy to flockGate.
+**Federation is VALIDATED.** 64ms RTT confirmed on flockGate (2026-06-12T14:07Z). Wire fix, auto-reconnect, partition tolerance, and version negotiation all shipped. Persistent relay pending one more VPS rebuild to `fe47c012`.
 
-**Depot staleness is the single remaining blocker.** The depot has songBird `32a8d700` (Wave 112). The VPS needs `plasmid.harvest --targets songbird` to build from `fe47c012` (Wave 113, 8918 tests). After that, `plasmid.fetch --source wan --targets songbird` on flockGate completes federation.
+**Depot rebuild worked.** songBird `3fc94365` was built, deployed, and validated on flockGate via WAN. The pipeline is proven end-to-end: code push → harvest on VPS → fetch on remote gate → health probe confirms.
 
 **VPS surface minimization is planned and actionable.** Phase 1 (NUC replaces fieldMouse droplet → $12/mo savings) can execute immediately using `gate.bootstrap` with the new `canary-fieldmouse` profile. `gate.provision.destroy` decommissions the DO canary when ready.
 

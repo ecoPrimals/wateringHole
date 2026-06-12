@@ -8,32 +8,32 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 109
+id = 111
 date = "2026-06-12"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Auto-published by membrane temporal.cascade --publish-freshness"
-publisher = "membrane"
+notes = "Pre-wave sync — full HEAD regeneration. Policy: no more manual per-primal freshness edits."
+publisher = "eastGate overwatch"
 
 [heads]
 barraCuda = "5f0e55e554d29d73c54255c0ade6d819dd83fbb9"
 bearDog = "945de60fdd508fa5fa49ca9a158c774694dd1eee"
 biomeOS = "4648ffd10c4b7a5e46779b41d50e34eea110f7ec"
-cellMembrane = "a54a04929fb446646f1151b382aa188fa8a9aca1"
+cellMembrane = "e230e10696e608d06f7d8476a54108a508f538cc"
 coralReef = "7bc90e535ff746490a519510acf1a80ce53cb604"
 esotericWebb = "2593302fb42627c1191a697058b75895230d395a"
-healthSpring = "054d5c9d6ad1e618701eab140f0eb6d9ab3e9393"
+healthSpring = "c65f89ac04d7ff692fe8c7964faa57096fbc6c3f"
 lithoSpore = "3046fb895a9e0240ba9d1d8a5ba660f79333828f"
 loamSpine = "a3c481cf41f9b1978ba40f4ff99aed16c7fd2247"
 ludoSpring = "8e7f0d829faf5b536c2ad254b558fdae1bbdf193"
 nestGate = "661268993d875db56d06929d415e014ce947773f"
 petalTongue = "2dba46ff44213091260b6d431f9facb9617762c1"
-plasmidBin = "c8e0c94f86554985d3574046220f6eff86bbb6e1"
-primalSpring = "33535c8dfe76a792cd5bcc59c08f908450706d4b"
+plasmidBin = "cb62907acefbe4f600aed89cb614a2474c2bf565"
+primalSpring = "d98c2b164892d8a6de2dddc553cea9d84b2bfc94"
 projectNUCLEUS = "131b12707dfc10df8f872a76289437212a74cbfb"
 rhizoCrypt = "0e2b031329d4ac159bfddd4a756953f8a4644250"
 skunkBat = "00b3436f7a3fbc9d9a74b58208ecaaffc2d8d3a0"
-songBird = "32a8d700648158e9f4b1bf1cf565e12b2e3c6a1a"
+songBird = "fe47c0126edc626e1821a55749b4c206aa447cf3"
 squirrel = "a8c2e7cc5153406b7075dd42ee42e7358c9aadf7"
 sweetGrass = "a675425ede203cf6ef765ba0dc37a185ad0c31bb"
 toadStool = "02a0db2c7e93dfe2b90e40e8f8c9c914a67a07bc"
-wateringHole = "e0fc53b3941931924b5a78e156bc7035ca039435"
+wateringHole = "376709ab2fc39dfc1a122b6672d41e797e6e8285"
