@@ -64,6 +64,9 @@ Every primal speaks the same language. Every binary traces to provenance. Now we
 
 | Item | Stream | Priority | Status |
 |------|--------|----------|--------|
+| ~~S_VERSION_SKEW + S_CASCADE_REGRESSION + S_WAN_LATENCY_TOLERANCE~~ | Divergence | P2 | **DONE** — 3 scenarios shipped |
+| ~~Deep debt (thiserror, module splits, hardcoding)~~ | Evolution | P2 | **DONE** — 1005 tests, 60 scenarios |
+| s_gate_expansion_readiness + nest_atomic.toml | Gate Expansion | P3 | **DONE** — northGate/westGate prep |
 | nucleus_launcher aarch64 cross-compile | Evolution | P3 | PENDING |
 | Proto-nucleate manifest | Evolution | P3 | PENDING |
 | BTSP cross-primal full chain | Evolution | LOW | Documented gaps, non-blocking |
@@ -217,11 +220,11 @@ Also shipped (songBird `32a8d700`, Wave 112): dep hoisting, real health probes r
 
 ### primalSpring — Validation Scenarios for Divergence
 
-| Task | Scenario | Forces |
+| Task | Scenario | Status |
 |------|----------|--------|
-| **S_VERSION_SKEW** | Detect version skew across health responses from mesh | `s_version_skew_detection` scenario |
-| **S_CASCADE_REGRESSION** | Validate post-cascade state matches depot provenance | `s_cascade_provenance_match` scenario |
-| **S_WAN_LATENCY_TOLERANCE** | Validate IPC works within tolerance over high-latency link | `s_wan_ipc_tolerance` with configurable threshold |
+| ~~**S_VERSION_SKEW**~~ | Detect version skew across health responses from mesh | **DONE** — `s_version_skew_detection` + wetSpring `composition.mesh_health` |
+| ~~**S_CASCADE_REGRESSION**~~ | Validate post-cascade state matches depot provenance | **DONE** — `s_cascade_provenance_match` scenario |
+| ~~**S_WAN_LATENCY_TOLERANCE**~~ | Validate IPC works within tolerance over high-latency link | **DONE** — `s_wan_ipc_tolerance` with configurable threshold |
 
 ### biomeOS — Orchestration Under Divergence
 

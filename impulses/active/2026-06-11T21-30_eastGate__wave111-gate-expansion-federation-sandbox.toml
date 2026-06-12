@@ -309,21 +309,21 @@ id = "S_VERSION_SKEW"
 scenario = "New validation scenario: detect version skew across health responses from mesh"
 forces = "Evolution: s_version_skew_detection scenario in primalSpring"
 priority = "P2"
-status = "PENDING"
+status = "✅ DONE (Wave 111 AAR): s_version_skew_detection — detects semver divergence across NUCLEUS mesh. wetSpring composition.mesh_health provides live data."
 
 [stream6.primalspring.s_cascade_regression]
 id = "S_CASCADE_REGRESSION"
 scenario = "Scenario that validates post-cascade state matches depot provenance"
 forces = "Evolution: s_cascade_provenance_match scenario"
 priority = "P2"
-status = "PENDING"
+status = "✅ DONE (Wave 111 AAR): s_cascade_provenance_match — validates installed vs depot provenance."
 
 [stream6.primalspring.s_wan_latency_tolerance]
 id = "S_WAN_LATENCY_TOLERANCE"
 scenario = "Scenario that validates IPC works within tolerance over high-latency link"
 forces = "Evolution: s_wan_ipc_tolerance with configurable latency threshold"
 priority = "P3"
-status = "PENDING"
+status = "✅ DONE (Wave 111 AAR): s_wan_ipc_tolerance — measures/validates IPC latency over WAN links."
 
 # --- biomeOS: Orchestration Under Divergence ---
 

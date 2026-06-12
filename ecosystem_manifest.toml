@@ -614,6 +614,13 @@ transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 notes = "Ryzen 9950X3D + RTX 5090. Windows gaming gate. Family validation only — spare compute when not in use. LAST priority."
 gate_class = "family"
+repos = [
+    "nestGate", "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat",
+    "cellMembrane", "projectNUCLEUS",
+]
 
 # blueGate — Windows cross-platform validation target
 [gates.blueGate]
@@ -624,6 +631,11 @@ composition = "subset"
 transport = "lan"
 notes = "Windows machine. Cross-platform ecoBin validation (WSL2 or native)."
 gate_class = "family"
+repos = [
+    "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "biomeOS",
+    "cellMembrane",
+]
 
 # swiftGate — portable Windows/cross-platform target
 [gates.swiftGate]
@@ -634,6 +646,11 @@ composition = "subset"
 transport = "wifi"
 notes = "Portable Windows target. Cross-platform testing."
 gate_class = "portable_anchor"
+repos = [
+    "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "biomeOS",
+    "cellMembrane",
+]
 
 # golgiBody (VPS, inner membrane) — sovereign periplasm, Forgejo, primal services
 [gates.golgiBody]
