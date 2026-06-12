@@ -202,9 +202,24 @@ guidestone_properties = ["P2-Reference-Traceable", "P3-Self-Verifying"]
 description = "Infrastructure items deferred since Wave 109. Not urgent until autonomous gates."
 
 [stream5.items]
+freshness_auto_publish = """P1 — READY TO IMPLEMENT: Extend post_sync.rs to git-add + commit + push
+freshness.toml after publish_freshness_toml() succeeds. Handles conflict via re-fetch + re-generate.
+Eliminates ALL manual freshness commits. See AAR_PIPELINE_ADHOC_PATTERNS."""
+vps_auto_rebuild = """P1 — READY NOW (config only): Set MEMBRANE_AUTO_REBUILD=1 on VPS.
+post_sync.rs already detects depot staleness and triggers rebuild when this env var is set.
+Eliminates manual plasmid.harvest invocations."""
+docs_publish_command = """P2 — NEW COMMAND: membrane docs.publish --message 'description'.
+Stages handoffs/ + impulses/ → commits → pushes to both remotes with authority ordering.
+Eliminates double-push manual workflow for all documentation."""
+git_publish_command = """P2 — NEW COMMAND: membrane git.publish --message 'description'.
+Thin wrapper over resolve.rs push logic. Stages, commits, dual-push. Standard commit flow."""
+impulse_resolve_command = """P3 — NEW COMMAND: membrane impulse.resolve --item ID --commit SHA.
+Parses FRAGO TOML, updates status field, commits atomically."""
+wave_close_command = """P3 — NEW COMMAND: membrane wave.close --wave N.
+Archives completed handoffs, updates FRAGO status, commits + pushes."""
+freshness_mesh = "DEFERRED: move freshness.toml → songbird mesh.publish of per-remote HEADs (endgame — eliminates all conflict patterns)"
 qs_signal_graphs = "DEFERRED: quorumSignal — 15 atomic signal graphs from WATERFALL_TEMPORAL_SYNC.md Phase 2"
 rp_impulse = "DEFERRED: rootPulse — impulse lifecycle → full provenance trio"
-freshness_mesh = "DEFERRED: move freshness.toml → songbird mesh.publish of per-remote HEADs"
 tolerances_codification = """PENDING: Named tolerances need codification in deployment.toml:
   depot_freshness_max = 24h, mesh_handshake_timeout = 30s,
   health_convergence_window = 60s, primal_startup_timeout = 10s"""
