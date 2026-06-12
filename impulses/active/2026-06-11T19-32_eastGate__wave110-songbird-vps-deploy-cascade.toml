@@ -148,8 +148,8 @@ summary = """
 """
 
 [context]
-songbird_commit = "9f1f5c9e4ce2df8a0e12e4d6ee54ea971eb43d25"
-fix_commit = "471ed43bb (federation.status + HEALTH-SB-01)"
+songbird_commit = "f18aeb6ba3932ca569ad82aeb0e2d0e9ed0a7f49"
+fix_commit = "f18aeb6b (federation wire fix + mesh auto-reconnect, supersedes 471ed43b)"
 stale_binary_hash = "03775a3fa2c3571627ec6880e64e54d50a72fc63ba83c829d83e5e3570920494"
 blocks = "wave109-flockgate-wan-federation-disabled"
 also_harvest = ["bearDog 945de60f", "biomeOS 3aa4e7e4"]
