@@ -30,12 +30,14 @@ depot = "FRESH — all 13 from HEAD (44fd18d, 2026-06-12T12:37:00Z). songBird in
 membrane_parity = "12/12 repos at parity (origin = forgejo = local) as of 2026-06-12"
 sandbox = "SHIPPED — plasmid.sandbox + plasmid.canary CLI ready"
 provision = "SHIPPED (e230e10) — gate.provision (DO API), gate.provision.status, gate.provision.destroy. canary-fieldmouse profile defined."
-gates_active = "eastGate, golgiBody, ironGate, southGate, grapheneGate (5-gate mesh). strandGate postPrimordial LIVE (Tower Atomic + hotSpring serve, 2 GPUs detected, 265/282 validation, Jun 12)."
+gates_active = "eastGate, golgiBody, ironGate, southGate, grapheneGate (5-gate mesh)"
 gates_pending = "northGate (new), westGate (new), NUCs, Pixle, blueGate, swiftGate"
-federation = "MECHANICALLY WORKING — port bound, mesh.init succeeds. Depot binary stale (predates f18aeb6b wire fix). Needs harvest + deploy."
-divergence_stream6 = "13/16 shipped (cellMembrane 5/6, songBird 4/4, primalSpring 3/3, biomeOS 2/2). Remaining: SANDBOX-DEPENDENCY-CHAIN, DEPLOY-THEN-STALE, WINDOWS-ECOBIN-DIVERGENCE."
+federation = "VALIDATED (2026-06-12T14:07Z) — 64ms RTT, enabled=true, wire fix confirmed, auto-reconnect functional. Persistent relay pending VPS songBird rebuild to fe47c012."
+divergence_stream6 = "14/16 shipped (cellMembrane 6/6 COMPLETE, songBird 4/4, primalSpring 3/3, biomeOS 2/2). Remaining: DEPLOY-THEN-STALE, WINDOWS-ECOBIN-DIVERGENCE (both ops/hardware-blocked)."
 vps_minimization = "Plan documented (VPS_SURFACE_MINIMIZATION_EVOLUTION_JUN12_2026.md). Phase 1 (NUC canary) immediately actionable."
 bash_fallback_removed = "gate/mod.rs: pull() and check() now pure temporal.cascade/temporal.check — no bash fallback path."
+irongate_validation_gap = "cellMembrane ironGate binary is pre-temporal.cascade — gate.pull hits old bash path. Needs: cargo install --path crates/membrane-shadow. VPS work proceeding without local NUCLEUS validation (sandbox validates remotely)."
+strandgate_live = "strandGate postPrimordial LIVE — Tower Atomic + hotSpring, 2 GPUs (RTX 3090 + RX 6950 XT), 265/282 validation. Gap: TOADSTOOL-AUTO-REGISTER (P2, carry)."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Gate Expansion — Priority Order
@@ -141,16 +143,15 @@ SONGBIRD_PEERS, SONGBIRD_FEDERATION_PORT env vars in bin_interface UDS/TCP path.
 Fixes flockGate reporting enabled=false."""
 federation_reconnect = """✅ DONE (f18aeb6b, Wave 111): spawn_peer_health_loop — 30s probe with
 exponential backoff (30s→60s→120s→cap 300s). Auto-reconnects after VPS restart."""
-flockgate_handshake = """✅ FEDERATION WORKING (validated 2026-06-12T14:07 UTC, post-harvest):
-1. ✅ songbird v0.2.1 fetched from REBUILT depot (BLAKE3: 3fc94365... VERIFIED, built 2026-06-12T12:37Z)
-2. ✅ federation.status: enabled=TRUE (wire fix CONFIRMED in this build)
-3. ✅ latency_ms: 64ms — WAN peer health probes WORKING (auto-reconnect functional)
-4. ✅ mesh.init succeeds, peer reachable, path_type=direct
-5. ⚠️ active_connections: 0 — persistent relay not yet established (VPS songbird may need rebuild to fe47c012)
-
-RESULT: Mesh is functionally communicating over WAN (64ms RTT measured).
-Wire fix + peer health loop both operational on flockGate side.
-REMAINING: VPS songbird rebuild to fe47c012 (Wave 113) for persistent federation relay + MESH-PARTITION-TOLERANCE."""
+flockgate_handshake = """IN PROGRESS (08c36f2 — flockGate WAN mesh validated):
+✅ songBird v0.2.1 deployed from depot (BLAKE3 verified)
+✅ VPS port 7700 confirmed open
+✅ mesh.init succeeds
+⚠️ BLOCKER: Depot binary predates federation fix (f18aeb6b). Needs plasmid.harvest.
+Steps remaining:
+1. Rebuild songBird on VPS (plasmid.harvest --targets songbird) — depot has 32a8d700, need fe47c012+
+2. Deploy fresh binary to flockGate
+3. Validate: federation.enabled=true, active_connections > 0"""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: Sandbox Graduation — Integrate into gate.bootstrap
@@ -293,7 +294,7 @@ id = "SANDBOX-DEPENDENCY-CHAIN"
 scenario = "Sandbox a primal that requires bearDog (BTSP) — bearDog not yet started in sandbox env"
 forces = "Sandbox dependency resolution: start prereqs, or skip-with-warning"
 priority = "P3"
-status = "PENDING"
+status = "✅ DONE (95cb8d4): validate_with_deps() resolves security dependencies via ServiceCapability::CryptoSigner. Auto-spins sandbox bearDog, injects --security-socket, tears down in reverse order. 380 tests green."
 
 # --- songBird: Federation Robustness ---
 
@@ -398,22 +399,6 @@ sourdough_segfault = "LOW: sourdough validate depot segfault (manual b3sum fallb
 healthspring_upstream = "14 gaps, all LOW, all workaround-stable (see wave107-healthspring-upstream-gaps FRAGO)"
 backbone_10g = "LOW: 10G backbone cables — blocks high-throughput only"
 biomegate_recovery = "LOW: biomeGate recovery — hotSpring can use strandGate"
-toadstool_auto_register = """P2 — TOADSTOOL-AUTO-REGISTER (discovered strandGate Wave 111):
-toadStool does not auto-discover GPU/NPU hardware on startup. PCI devices (NVIDIA RTX 3090,
-AMD RX 6950 XT, BrainChip AKD1000) are visible on the bus with loaded drivers, but toadStool
-`capabilities` reports 'No platforms detected'. hotSpring detects GPUs via wgpu, but toadStool
-(the compute dispatch layer) has no startup hardware enumeration.
-
-Impact: gate.bootstrap cannot autonomously register compute capabilities — manual
-lifecycle.register to biomeOS required per gate. Blocks Stream 1 autonomous gate enrollment
-for compute-capable gates.
-
-Recommended: Wire PCI/sysfs hardware enumeration into toadStool diesel engine ignition
-sequence. On startup: enumerate → classify → lifecycle.register to biomeOS. Natural fit
-for diesel engine architecture (ignition phase before biome manifest load).
-
-Owner: toadStool team. Filed from strandGate AAR_WAVE111_POSTPRIMORDIAL_DEPLOYMENT."""
-akida_npu_driver = "LOW: BrainChip AKD1000 on PCI e2:00.0 but no kernel module loaded — needs akida-driver install. hotSpring npu-hw feature ready."
 
 # ──────────────────────────────────────────────────────────────
 # SUCCESS CRITERIA
