@@ -44,7 +44,17 @@ divergence_stream6 = "14/16 shipped (cellMembrane 6/6 COMPLETE, songBird 4/4, pr
 vps_minimization = "Plan documented (VPS_SURFACE_MINIMIZATION_EVOLUTION_JUN12_2026.md). Phase 1 (NUC canary) immediately actionable."
 bash_fallback_removed = "gate/mod.rs: pull() and check() now pure temporal.cascade/temporal.check — no bash fallback path."
 irongate_validation_gap = "cellMembrane ironGate binary is pre-temporal.cascade — gate.pull hits old bash path. Needs: cargo install --path crates/membrane-shadow. VPS work proceeding without local NUCLEUS validation (sandbox validates remotely)."
-strandgate_live = "strandGate postPrimordial LIVE — Tower Atomic + hotSpring, 2 GPUs (RTX 3090 + RX 6950 XT), 265/282 validation. Gap: TOADSTOOL-AUTO-REGISTER (P2, carry)."
+strandgate_live = """strandGate postPrimordial LIVE (Jun 12, uptime 96+ min confirmed).
+Tower Atomic (bearDog + songBird + biomeOS) + hotSpring serve on TCP :9800.
+Hardware: RTX 3090 (24GB) + RX 6950 XT (16GB) + BrainChip AKD1000 (no driver).
+Validation: 265/282 Tier 1 + 12/12 GPU f64 + 20/20 MD forces + 19/19 special functions.
+17 failures categorized (all pre-existing, zero regressions):
+  - 5 IPC liveness (coralReef/toadStool/barraCuda not running as separate IPC servers)
+  - 2 SLy4 parameter mismatch (semf range calibrated for liquid-drop, not Skyrme functional)
+  - 4 LTEE stochastic variance (random matrix small-sample windows)
+  - 3 tight tolerances (sarkas D* 0.07% over threshold, dielectric collisionless)
+  - 3 Herman lambda (plasma dielectric compute path)
+Gap: TOADSTOOL-AUTO-REGISTER (P2, carry — toadStool team)."""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Gate Expansion — Priority Order
