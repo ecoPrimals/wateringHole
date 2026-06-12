@@ -195,9 +195,9 @@ handoffs (AAR prefix, resolved FRAGO items) can be heuristic initially.
 
 | Pattern | Frequency | Conflict Risk | Elevation Effort | Priority |
 |---------|-----------|---------------|-----------------|----------|
-| Freshness auto-commit+push | VERY HIGH | HIGH (multi-gate) | LOW (extend post_sync.rs) | **P1** |
-| Per-primal freshness (STOP DOING) | HIGH | MODERATE | ZERO (policy change) | **P1** |
-| Depot auto-rebuild on staleness | MODERATE | NONE | LOW (set env var) | **P1** |
+| ~~Freshness auto-commit+push~~ | VERY HIGH | HIGH (multi-gate) | LOW (extend post_sync.rs) | **DONE** (1baa2ec) — auto_commit_freshness() in post_sync, proven on VPS |
+| ~~Per-primal freshness (STOP DOING)~~ | HIGH | MODERATE | ZERO (policy change) | **DONE** — policy shipped, auto-publish replaces manual |
+| ~~Depot auto-rebuild on staleness~~ | MODERATE | NONE | LOW (set env var) | **DONE** (1baa2ec) — MEMBRANE_AUTO_REBUILD=1 on VPS, --with-rebuild in service |
 | Remote parity push (`git.publish`) | HIGH | LOW | LOW (wrapper) | **P2** |
 | Doc publish mechanics | MODERATE | LOW | LOW (new dispatch) | **P2** |
 | FRAGO status resolution | MODERATE | NONE | MODERATE (TOML parse+edit) | **P3** |

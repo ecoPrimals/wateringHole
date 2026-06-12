@@ -29,9 +29,9 @@
 |------|----------|-------|
 | **ironGate binary rebuild** | P1 | `cargo install --path crates/membrane-shadow` — activates diesel engine locally |
 | **Dev gate cascade** (eastGate/ironGate/southGate) | P2 | `membrane temporal.cascade --with-restart` — pull fresh binaries |
-| **VPS songBird harvest** (fe47c012) | P2 | `plasmid.harvest --targets songbird` — partition tolerance into depot |
-| **VPS `MEMBRANE_AUTO_REBUILD=1`** | P2 | Set env var — enables auto-rebuild on cascade staleness detection |
-| **Freshness auto-publish** (extend post_sync.rs) | P2 | Auto-commit + push freshness.toml after cascade |
+| ~~VPS `MEMBRANE_AUTO_REBUILD=1`~~ | P1 | **DONE** (1baa2ec) — set, active, depot auto-rebuilds on staleness |
+| ~~Freshness auto-publish~~ | P1 | **DONE** (1baa2ec) — auto_commit_freshness(), proven on golgiBody VPS |
+| **VPS `plasmid.harvest --all`** | P2 | biomeOS depot hash mismatch — auto-rebuild should fix on next cascade cycle |
 | **westGate gate.bootstrap** | P2 | Nest Atomic 7/7 on 76TB ZFS — hardware ready |
 | **NUC canary bootstrap** | P2 | Phase 1 of VPS minimization — `canary-fieldmouse` profile |
 | **NUCs + Pixle spin-up** | P2 | Quick Linux node enrollments |
@@ -86,7 +86,7 @@ Discovered on strandGate: toadStool doesn't auto-discover hardware. Blocks auton
 
 | Gate | Status | Remaining |
 |------|--------|-----------|
-| **flockGate** (WAN) | VALIDATED (64ms RTT) | VPS songBird rebuild for persistent relay |
+| **flockGate** (WAN) | VALIDATED (64ms RTT, triad deployed) | `plasmid.harvest --all` on VPS (biomeOS hash mismatch). Auto-rebuild should self-heal. |
 | **eastGate/ironGate/southGate** (LAN) | 13/13 healthy | Cascade to fresh depot binaries + ironGate binary rebuild |
 | **grapheneGate** (ARM) | 13/13 stale binaries | `temporal.cascade --with-restart` (depot fresh, tooling wired) |
 | **strandGate** (compute) | LIVE (265/282) | TOADSTOOL-AUTO-REGISTER (manual registration needed for GPUs) |
@@ -97,16 +97,16 @@ Discovered on strandGate: toadStool doesn't auto-discover hardware. Blocks auton
 
 ---
 
-## Pipeline Automation (Remaining)
+## Pipeline Automation
 
-| Command | Priority | What It Eliminates |
-|---------|----------|--------------------|
-| freshness auto-publish in post_sync.rs | P1 | All manual freshness commits |
-| `MEMBRANE_AUTO_REBUILD=1` on VPS | P1 | Manual harvest invocations |
-| `membrane docs.publish` | P2 | Double-push for doc commits |
-| `membrane git.publish` | P2 | Manual dual-remote push |
-| `membrane impulse.resolve` | P3 | Manual FRAGO edits |
-| `membrane wave.close` | P3 | Manual archival at wave transitions |
+| Command | Priority | Status |
+|---------|----------|--------|
+| ~~freshness auto-publish~~ | P1 | **DONE** (1baa2ec) — proven on VPS (b3dcf55) |
+| ~~`MEMBRANE_AUTO_REBUILD=1`~~ | P1 | **DONE** (1baa2ec) — active on VPS service |
+| `membrane docs.publish` | P2 | PENDING — dual-push for doc commits |
+| `membrane git.publish` | P2 | PENDING — standard commit flow |
+| `membrane impulse.resolve` | P3 | PENDING — FRAGO item automation |
+| `membrane wave.close` | P3 | PENDING — archival at wave transitions |
 
 ---
 

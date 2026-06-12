@@ -34,8 +34,8 @@ code, docs, and runbooks permanently.
 
 **Immediate (no hardware required):**
 1. `cargo install --path crates/membrane-shadow` on ironGate → clears Criterion 1
-2. `membrane plasmid.harvest --targets songbird` on VPS → clears Criterion 2
-3. `membrane plasmid.fetch --source wan --targets songbird` on flockGate → unblocks Criterion 3
+2. `plasmid.harvest --all` on VPS → clears Criterion 2 (biomeOS hash skew detected, auto-rebuild now enabled — should self-heal on next cascade)
+3. Wait for VPS auto-cascade to rebuild all stale binaries (MEMBRANE_AUTO_REBUILD=1 now live) → clears Criterion 3
 4. `membrane temporal.cascade --with-restart` on all 5 gates → begins Criterion 6
 
 **Short-term (hardware):**
