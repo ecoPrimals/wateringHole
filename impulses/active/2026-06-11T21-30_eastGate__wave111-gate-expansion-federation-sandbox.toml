@@ -202,6 +202,171 @@ tolerances_codification = """PENDING: Named tolerances need codification in depl
   health_convergence_window = 60s, primal_startup_timeout = 10s"""
 
 # ──────────────────────────────────────────────────────────────
+# STREAM 6: Divergence Pressure — Force Robustness Evolution
+# Owner: ALL teams (coordinated by eastGate overwatch)
+# Purpose: Intentionally create divergence, staleness, and regression scenarios
+#          that force cellMembrane to evolve robust error recovery. WAN deployment
+#          and eventual ionic/weak bonding interactions depend on this reliability.
+# Principle: Every task breaks something in a controlled way. The fix becomes a
+#            cellMembrane robustness primitive that ionic/weak bonding depends on.
+# ──────────────────────────────────────────────────────────────
+
+[stream6]
+id = "DIVERGENCE-PRESSURE"
+owner = "ALL teams (cellMembrane primary)"
+priority = "P2"
+guidestone_properties = ["P1-Deterministic", "P3-Self-Verifying", "P5-Tolerance-Documented"]
+description = """Intentionally push divergence and regressions so that cellMembrane is forced
+to evolve more robust solutions. LAN gates are forgiving (sub-ms, always-on). WAN gates,
+ionic bonds (Windows/family), and weak bonds (portable/cellular) expose every gap in error
+recovery. Apply pressure NOW so we know what breaks BEFORE ionic/weak bonding is live.
+
+These are not all deliverables — they are PRESSURE APPLIED that reveals what needs building.
+Some will be fixed immediately. Others document gaps that drive Wave 112+."""
+
+# --- cellMembrane: Forced Robustness ---
+
+[stream6.cellmembrane]
+owner = "cellMembrane"
+note = "These scenarios must produce either auto-recovery OR actionable diagnostics"
+
+[stream6.cellmembrane.cascade_stale_recovery]
+id = "CASCADE-STALE-RECOVERY"
+scenario = "Run temporal.cascade on a gate 5+ commits behind, one repo with dirty worktree"
+forces = "Auto-stash + ff-only recovery, or fail-report with remediation steps"
+priority = "P2"
+status = "PENDING"
+
+[stream6.cellmembrane.partial_fetch_resume]
+id = "PARTIAL-FETCH-RESUME"
+scenario = "Interrupt plasmid.fetch mid-download (kill -9 during binary transfer)"
+forces = "Atomic fetch (temp file + rename), partial-download detection, auto-retry"
+priority = "P2"
+status = "PENDING"
+
+[stream6.cellmembrane.canary_staleness_audit]
+id = "CANARY-STALENESS-AUDIT"
+scenario = "Let canary pool hold binaries from 3 waves ago, then trigger failover"
+forces = "Canary freshness check, refuse failover to stale canary, auto-refresh from depot"
+priority = "P2"
+status = "PENDING"
+
+[stream6.cellmembrane.cross_gate_skew_report]
+id = "CROSS-GATE-SKEW-REPORT"
+scenario = "Deploy newer songBird on VPS, older on eastGate — call membrane health.audit --mesh"
+forces = "Version skew report across mesh, convergence recommendation"
+priority = "P2"
+status = "PENDING"
+
+[stream6.cellmembrane.wan_timeout_graceful]
+id = "WAN-TIMEOUT-GRACEFUL"
+scenario = "Simulate flockGate WAN disconnect during plasmid.refresh (iptables drop)"
+forces = "Timeout detection, partial-state rollback, retry with exponential backoff"
+priority = "P2"
+status = "PENDING"
+
+[stream6.cellmembrane.sandbox_dependency_chain]
+id = "SANDBOX-DEPENDENCY-CHAIN"
+scenario = "Sandbox a primal that requires bearDog (BTSP) — bearDog not yet started in sandbox env"
+forces = "Sandbox dependency resolution: start prereqs, or skip-with-warning"
+priority = "P3"
+status = "PENDING"
+
+# --- songBird: Federation Robustness ---
+
+[stream6.songbird]
+owner = "songBird team"
+note = "Federation must survive real-world WAN conditions"
+
+[stream6.songbird.federation_reconnect]
+id = "FEDERATION-RECONNECT"
+scenario = "Kill VPS songBird, restart after 60s — does flockGate auto-reconnect?"
+forces = "Auto-reconnect logic, exponential backoff, health-degraded state reporting"
+priority = "P2"
+status = "PENDING"
+
+[stream6.songbird.mesh_partition_tolerance]
+id = "MESH-PARTITION-TOLERANCE"
+scenario = "Split mesh: VPS reachable from eastGate but not from flockGate"
+forces = "Partition detection, graceful degradation (local-only mode), reunion protocol"
+priority = "P2"
+status = "PENDING"
+
+[stream6.songbird.peer_version_mismatch]
+id = "PEER-VERSION-MISMATCH"
+scenario = "Run songBird v0.2.0 on one gate, v0.2.1 on another — do they mesh?"
+forces = "Version negotiation, backward-compatible wire format"
+priority = "P3"
+status = "PENDING"
+
+# --- primalSpring: Validation Scenarios for Divergence ---
+
+[stream6.primalspring]
+owner = "primalSpring (parallel chat)"
+note = "New validation scenarios that detect divergence across the mesh"
+
+[stream6.primalspring.s_version_skew]
+id = "S_VERSION_SKEW"
+scenario = "New validation scenario: detect version skew across health responses from mesh"
+forces = "Evolution: s_version_skew_detection scenario in primalSpring"
+priority = "P2"
+status = "PENDING"
+
+[stream6.primalspring.s_cascade_regression]
+id = "S_CASCADE_REGRESSION"
+scenario = "Scenario that validates post-cascade state matches depot provenance"
+forces = "Evolution: s_cascade_provenance_match scenario"
+priority = "P2"
+status = "PENDING"
+
+[stream6.primalspring.s_wan_latency_tolerance]
+id = "S_WAN_LATENCY_TOLERANCE"
+scenario = "Scenario that validates IPC works within tolerance over high-latency link"
+forces = "Evolution: s_wan_ipc_tolerance with configurable latency threshold"
+priority = "P3"
+status = "PENDING"
+
+# --- biomeOS: Orchestration Under Divergence ---
+
+[stream6.biomeos]
+owner = "biomeOS"
+note = "Orchestration must handle partial-mesh and stale registrations"
+
+[stream6.biomeos.discovery_stale_prune]
+id = "DISCOVERY-STALE-PRUNE"
+scenario = "Register a primal, let it die (no health response), verify biomeOS prunes it"
+forces = "Stale registration pruning, health-aware discovery"
+priority = "P2"
+status = "PENDING"
+
+[stream6.biomeos.routing_partition_aware]
+id = "ROUTING-PARTITION-AWARE"
+scenario = "Two primals on different segments, one segment unreachable"
+forces = "Topology-aware routing degrades gracefully, doesn't block on unreachable"
+priority = "P3"
+status = "PENDING"
+
+# --- ops: Intentional Divergence Creation ---
+
+[stream6.ops]
+owner = "ops (eastGate)"
+note = "Deliberately create real-world divergence to test detection and recovery"
+
+[stream6.ops.deploy_then_stale]
+id = "DEPLOY-THEN-STALE"
+scenario = "Deploy westGate from depot, then don't cascade for 2 waves — measure skew"
+forces = "Proves freshness audit catches real-world drift"
+priority = "P2"
+status = "PENDING"
+
+[stream6.ops.windows_ecobin_divergence]
+id = "WINDOWS-ECOBIN-DIVERGENCE"
+scenario = "Deploy to blueGate (Windows/WSL2) — validate musl binary runs, measure behavior delta"
+forces = "Cross-platform divergence detection"
+priority = "P3"
+status = "PENDING"
+
+# ──────────────────────────────────────────────────────────────
 # CARRY (LOW, stable workarounds)
 # ──────────────────────────────────────────────────────────────
 
@@ -222,12 +387,16 @@ criteria = [
     "westGate Nest Atomic 7/7 bootstrapped + ZFS active",
     "federation.status reports enabled=true (wire fix shipped)",
     "gate.bootstrap sandbox-validates before promotion (stream 3)",
+    "Stream 6: at least 4 divergence scenarios executed, findings documented",
+    "cellMembrane: cascade-stale-recovery and partial-fetch-resume either fixed or gap-documented",
 ]
 extended = [
     "NUCs + Pixle enrolled and meshed",
     "blueGate/swiftGate Windows cross-platform validation",
     "tolerances codified in deployment.toml",
     "nucleus_launcher aarch64 cross-compiled",
+    "primalSpring: s_version_skew_detection scenario shipping",
+    "biomeOS: stale registration pruning demonstrated",
 ]
 last = [
     "northGate NUCLEUS 13/13 — family gate, spare compute when not in use",

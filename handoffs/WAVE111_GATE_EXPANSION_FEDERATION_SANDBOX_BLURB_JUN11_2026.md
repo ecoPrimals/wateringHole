@@ -23,9 +23,9 @@ All protocol-level convergence achieved:
 
 ## Wave 111 Theme
 
-**Scale proven infrastructure to new topology. Complete federation. Graduate sandbox to production.**
+**Scale proven infrastructure to new topology. Complete federation. Push divergence hard to force robustness.**
 
-Every primal speaks the same language. Every binary traces to provenance. Now we expand the mesh.
+Every primal speaks the same language. Every binary traces to provenance. Now we expand the mesh — and intentionally stress it. WAN deployment and eventual ionic/weak bonding interactions depend on reliability that only emerges from confronting real failure modes. Wave 111 applies divergence pressure so cellMembrane evolves the self-healing primitives that non-LAN bonds require.
 
 ---
 
@@ -179,6 +179,56 @@ No remaining protocol work. All guideStone properties satisfied:
 
 ---
 
+## Stream 6: Divergence Pressure — Force Robustness (NEW)
+
+**Strategic intent**: Intentionally create divergence, staleness, and regression scenarios that force cellMembrane to evolve robust error recovery. LAN gates are forgiving (sub-ms, always-on). WAN gates, ionic bonds (Windows/family), and weak bonds (portable/cellular) expose every gap. Apply pressure NOW so we know what breaks BEFORE ionic/weak bonding is live.
+
+> Every task below is designed to **break something** in a controlled way. The fix becomes a cellMembrane robustness primitive that ionic/weak bonding depends on.
+
+### cellMembrane — Forced Robustness Evolution
+
+| Task | Scenario | Forces |
+|------|----------|--------|
+| **CASCADE-STALE-RECOVERY** | `temporal.cascade` on a gate 5+ commits behind, one repo with dirty worktree | Auto-stash + ff-only recovery, or fail-report with remediation steps |
+| **PARTIAL-FETCH-RESUME** | Interrupt `plasmid.fetch` mid-download (kill -9 during transfer) | Atomic fetch (temp + rename), partial-download detection, auto-retry |
+| **CANARY-STALENESS-AUDIT** | Canary pool holds binaries from 3 waves ago, trigger failover | Refuse failover to stale canary, auto-refresh from depot |
+| **CROSS-GATE-SKEW-REPORT** | Newer songBird on VPS, older on eastGate — `membrane health.audit --mesh` | Version skew report across mesh, convergence recommendation |
+| **WAN-TIMEOUT-GRACEFUL** | Simulate flockGate WAN disconnect during `plasmid.refresh` | Timeout detection, partial-state rollback, retry with exponential backoff |
+| **SANDBOX-DEPENDENCY-CHAIN** | Sandbox primal requiring bearDog — bearDog not started in sandbox | Sandbox dependency resolution: start prereqs, or skip-with-warning |
+
+### songBird — Federation Robustness
+
+| Task | Scenario | Forces |
+|------|----------|--------|
+| **FEDERATION-STATUS-WIRE** | Wire `SONGBIRD_FEDERATION_ENABLED` into RPC response | One-line fix — unblocks flockGate |
+| **FEDERATION-RECONNECT** | Kill VPS songBird, restart after 60s — auto-reconnect? | Auto-reconnect, exponential backoff, health-degraded state |
+| **MESH-PARTITION-TOLERANCE** | VPS reachable from eastGate but not from flockGate | Partition detection, graceful degradation, reunion protocol |
+| **PEER-VERSION-MISMATCH** | songBird v0.2.0 on one gate, v0.2.1 on another | Version negotiation, backward-compatible wire format |
+
+### primalSpring — Validation Scenarios for Divergence
+
+| Task | Scenario | Forces |
+|------|----------|--------|
+| **S_VERSION_SKEW** | Detect version skew across health responses from mesh | `s_version_skew_detection` scenario |
+| **S_CASCADE_REGRESSION** | Validate post-cascade state matches depot provenance | `s_cascade_provenance_match` scenario |
+| **S_WAN_LATENCY_TOLERANCE** | Validate IPC works within tolerance over high-latency link | `s_wan_ipc_tolerance` with configurable threshold |
+
+### biomeOS — Orchestration Under Divergence
+
+| Task | Scenario | Forces |
+|------|----------|--------|
+| **DISCOVERY-STALE-PRUNE** | Primal dies (no health response) — biomeOS prunes registration | Stale registration pruning, health-aware discovery |
+| **ROUTING-PARTITION-AWARE** | Primal on unreachable segment — routing degrades? | Topology-aware degradation, don't block on unreachable |
+
+### ops — Intentional Divergence Creation
+
+| Task | Scenario | Forces |
+|------|----------|--------|
+| **DEPLOY-THEN-STALE** | Deploy westGate, skip cascades for 2 waves — measure skew | Proves freshness audit catches real-world drift |
+| **WINDOWS-ECOBIN-DIVERGENCE** | Deploy to blueGate (Windows/WSL2) — measure behavior delta | Cross-platform divergence detection |
+
+---
+
 ## Success Criteria
 
 **Core (Wave 111)**:
@@ -187,12 +237,16 @@ No remaining protocol work. All guideStone properties satisfied:
 - [ ] westGate Nest Atomic 7/7 bootstrapped + ZFS active
 - [ ] federation.status reports `enabled: true` (wire fix shipped)
 - [ ] gate.bootstrap sandbox-validates before promotion
+- [ ] At least 4 divergence scenarios (Stream 6) executed, findings documented
+- [ ] cellMembrane: CASCADE-STALE-RECOVERY + PARTIAL-FETCH-RESUME either fixed or gap-documented
 
 **Extended**:
 - [ ] NUCs + Pixle enrolled and meshed
 - [ ] blueGate/swiftGate Windows cross-platform validation
 - [ ] tolerances codified in deployment.toml
 - [ ] nucleus_launcher aarch64 cross-compiled
+- [ ] primalSpring: `s_version_skew_detection` scenario shipping
+- [ ] biomeOS: stale registration pruning demonstrated
 
 **Last** (family validation):
 - [ ] northGate NUCLEUS 13/13 — spare compute when not in use
@@ -222,4 +276,4 @@ No remaining protocol work. All guideStone properties satisfied:
 
 ---
 
-**Wave 111 scales guideStone convergence to new topology. The protocol is proven — now we grow the mesh.**
+**Wave 111 scales guideStone convergence to new topology and stress-tests it. The protocol is proven — now we grow the mesh, break it intentionally, and harden the membrane until ionic/weak bonding is reliable.**
