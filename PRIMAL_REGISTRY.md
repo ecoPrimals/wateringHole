@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 11, 2026 (Wave 110 mid-wave — rhizoCrypt v0.14.9 HEALTH-RC-01 DONE, biomeOS v4.23, guideStone startup contract, HEALTH-01 12/13, Duration constants centralized. 7,983+ workspace tests, 26 crates.)
+**Last Updated**: June 11, 2026 (Wave 111 — biomeOS v4.24, stale registration pruning + partition-aware routing shipped. HEALTH-01 12/13. 7,983+ workspace tests, 26 crates.)
 
 ---
 
@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v4.23  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983+ tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. guideStone startup contract (`--bind-mode`, auto `--btsp-optional`), HEALTH-01 compliant (`{status,primal,version,uptime_s}`), Duration constants centralized, zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
+**Version**: v4.24  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983+ tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. guideStone startup contract (`--bind-mode`, auto `--btsp-optional`), HEALTH-01 compliant (`{status,primal,version,uptime_s}`), Duration constants centralized, **stale registration pruning** (background 60s sweep + `capability.prune` RPC), **partition-aware routing** (all-circuits-open → mesh fallback, forward-fail → mesh retry), zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
