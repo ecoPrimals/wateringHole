@@ -211,33 +211,38 @@ Wave 110 achieved **guideStone deployment convergence** — every core stream cl
 | **Provenance** | ✅ | `provenance.toml` tracks commit + rustc version per binary. |
 | **No local deploy bypass** | ✅ (policy) | `gate.bootstrap` always fetches from VPS/WAN. No local-build install path in gate enrollment. |
 
-**Action items (depot freshness)**:
-1. Run `membrane plasmid.harvest --all` on peptidoglycan to rebuild x86_64 depot with latest commits (bearDog 945de60f, biomeOS 3aa4e7e4, songBird 471ed43b)
-2. Regenerate `checksums.toml` + `provenance.toml` (auto from harvest)
-3. Run `membrane temporal.cascade --with-restart` on eastGate to pull fresh binaries
-4. Commit + push depot update to Forgejo + GitHub
+**Action items (depot freshness)** — ALL RESOLVED:
+1. ✅ `membrane plasmid.harvest --all` executed (10 built, 4 current). Provenance: bearDog `945de60f`, biomeOS `3aa4e7e4`, songBird `9f1f5c9e`, rhizoCrypt `410018db`, petalTongue `2dba46ff`.
+2. ✅ `checksums.toml` + `provenance.toml` regenerated automatically (`c8e0c94`, 2026-06-11T19:58:49Z).
+3. ✅ `plasmid.refresh` pushed 13/13 binaries to VPS. systemctl restart confirmed.
+4. ✅ Depot committed + pushed to both GitHub and Forgejo.
 
-**Architectural note**: cellMembrane enforces postPrimordial via **convention** (gate.bootstrap always fetches from VPS/WAN depot) rather than hard fail-closed lockout. The `plasmid.harvest` / `plasmid.build` paths remain available on the build host (peptidoglycan) by design — that IS the build authority. No gate except peptidoglycan should run harvest.
+**PostPrimordial: FULLY VALIDATED.** All gates now fetch from the rebuilt VPS depot. BUILD-ELF-01 fix accepted static-pie binaries. Sandbox + canary pipeline adds pre-deployment validation for Wave 111+.
 
----
-
-## Wave 111 Preview — Gate Expansion + Depot Freshness
-
-**Theme**: Scale the proven infrastructure to new hardware. Rebuild depot. Validate federation WAN.
-
-| Stream | Owner | Work |
-|--------|-------|------|
-| **Depot Rebuild** | cellMembrane/ops | `membrane plasmid.harvest` on peptidoglycan. x86_64 from latest HEAD. Push checksums. |
-| **northGate Bootstrap** | cellMembrane + ops | Ryzen 9950X3D + RTX 5090. Full NUCLEUS 13/13. First compute-heavy gate. |
-| **westGate Bootstrap** | cellMembrane + ops | i7-4771 + 76TB ZFS. Nest Atomic 7/7. Cold storage specialization. |
-| **flockGate Retest** | songBird + ops | Federation fix is deployed. Test handshake from flockGate → VPS. |
-| **qS/rP/freshness** | cellMembrane | Signal graphs, impulse lifecycle, mesh freshness (deferred from Wave 109) |
-
-**Entry criteria**: Wave 110 closed (13/13 health, all streams graduated, membrane parity confirmed).
+**Architectural note**: cellMembrane enforces postPrimordial via **convention** (gate.bootstrap always fetches from VPS/WAN depot) rather than hard fail-closed lockout. The `plasmid.harvest` / `plasmid.build` paths remain available on the build host by design — that IS the build authority. Sandbox validation (`plasmid.sandbox`) now adds an isolation proof step before promotion.
 
 ---
 
-**Wave 110 proved guideStone convergence at the protocol level — every primal speaks the same language. Wave 111 scales it to new topology.**
+## Wave 111 Preview — Gate Expansion + Federation Handshake + Sandbox Graduation
+
+**Theme**: Scale the proven infrastructure to new hardware. Fix federation status reporting. Graduate sandbox pipeline to production.
+
+| Stream | Owner | Work | Status |
+|--------|-------|------|--------|
+| ~~**Depot Rebuild**~~ | cellMembrane/ops | ~~harvest + refresh~~ | ✅ DONE (c8e0c94) |
+| **northGate Bootstrap** | cellMembrane + ops | Ryzen 9950X3D + RTX 5090. Full NUCLEUS 13/13. | READY — depot fresh, bootstrap tooling wired |
+| **westGate Bootstrap** | cellMembrane + ops | i7-4771 + 76TB ZFS. Nest Atomic 7/7. | READY — cold storage specialization |
+| **Federation Status Fix** | songBird team | Wire `SONGBIRD_FEDERATION_ENABLED` into `federation.status` response | NEW — status reporting bug, not mechanical |
+| **flockGate Handshake** | songBird + ops | Call `mesh.init` on flockGate → establish outbound to VPS :7700 | READY — workaround available now |
+| **Sandbox Graduation** | cellMembrane | `plasmid.sandbox` → validate before every deploy | SHIPPED — integrate into gate.bootstrap |
+| **qS/rP/freshness** | cellMembrane | Signal graphs, impulse lifecycle, mesh freshness | DEFERRED from Wave 109 |
+
+**Entry criteria**: Wave 110 closed (13/13 health, depot rebuilt, membrane parity confirmed).
+**Key insight**: Federation IS mechanically working (port bound, mesh.init succeeds). The `enabled: false` response is a **status reporting bug** — songBird doesn't read the env var into the RPC response. Fix is a one-line wire.
+
+---
+
+**Wave 110 proved guideStone convergence at the protocol level — every primal speaks the same language, every binary traces to provenance, and sandbox validation ensures no degradation on deploy. Wave 111 scales it to new topology.**
 
 ---
 

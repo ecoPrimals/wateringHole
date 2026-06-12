@@ -58,7 +58,7 @@ depot = """14/14 aarch64 VERIFIED (checksums match).
 x86_64 depot STALE — binaries from Jun 9 dev build, checksums.toml references older VPS build.
 ROOT CAUSE: BUILD-ELF-01 was rejecting static-pie linked binaries (Rust 1.96+ musl output).
 FIX LANDED: cellMembrane 975d45a accepts static-pie. harvest --all (3784903) added.
-ACTION: run `membrane plasmid.harvest` on peptidoglycan to rebuild x86_64 from HEAD."""
+✅ RESOLVED: `membrane plasmid.harvest --all` executed (c8e0c94, 2026-06-11T19:58:49Z). 10 rebuilt, all 13 primals at HEAD. plasmid.refresh pushed to VPS. checksums + provenance committed."""
 mesh = "5-gate: eastGate↔golgiBody↔ironGate+southGate + grapheneGate standalone. flockGate federation fix deployed, handshake retest pending."
 sovereignty = "S1-S4 ALL GRADUATED."
 deployment_model = """postPrimordial ENFORCED. gate.bootstrap shipped (6-phase + deployment.toml emission).
@@ -69,8 +69,9 @@ guideStone convergence Wave 109→110 — NEAR COMPLETE:
   ✅ CLOSED (Stream 4): BTSP TCP E2E + grapheneGate validation documented.
   ✅ CLOSED (Stream 5 core): dual_checksum, cascade_restart, agentic_resolve ALL DONE.
   ✅ FIXED (flockGate): federation.enabled root cause FOUND + FIXED (471ed43b). Deployed to VPS.
-  REMAINING: x86_64 depot rebuild (BUILD-ELF-01 fix landed), gate expansion (northGate/westGate),
-             flockGate handshake retest, qS/rP/freshness deferred → Wave 111+."""
+  ✅ DONE: x86_64 depot rebuilt (c8e0c94, all 13 from HEAD). Sandbox + canary pipeline shipped.
+  REMAINING (Wave 111): gate expansion (northGate/westGate), federation status wire fix,
+             flockGate mesh.init handshake, qS/rP/freshness deferred."""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Standard Primal Startup Contract (AAR Gaps 1+2)
@@ -212,10 +213,16 @@ not a CONFIGURATION flag. Fix: `enabled` now reflects startup configuration.
 DEPLOYED to VPS via cascade (confirmed by wateringHole commit abc03e9).
 REMAINING: retest flockGate handshake — does active_connections > 0?
 See impulse: wave110-songbird-health-federation-fix"""
-action = """REMAINING:
-1. ✅ Deploy songBird 471ed43b to VPS golgiBody — DONE (cascade abc03e9)
-2. Retest flockGate: does federation handshake complete? (active_connections > 0?)
-3. If not: investigate join protocol (POST /api/federation/join response from VPS)"""
+action = """STATUS (2026-06-11T23:53Z):
+1. ✅ Deploy songBird to VPS golgiBody — DONE (harvest c8e0c94 + refresh)
+2. ✅ HEALTH-01 PASS on VPS (uptime_s confirmed in response)
+3. ⚠️ federation.status still reports enabled=false DESPITE env var being set.
+   ROOT CAUSE: songBird v0.2.1 does NOT read SONGBIRD_FEDERATION_ENABLED into the
+   RPC response. Port :7700 IS bound and mesh.init succeeds — federation is
+   MECHANICALLY WORKING but status reporting is incorrect.
+4. WORKAROUND: call mesh.init on flockGate with peers=157.230.3.183:7700 to
+   trigger outbound handshake (works regardless of status response).
+5. FIX NEEDED: songBird team wire env var into federation.status enabled field."""
 
 # ──────────────────────────────────────────────────────────────
 # LOW
@@ -232,7 +239,7 @@ description = "sourdough validate depot crashes (segfault). Manual b3sum fallbac
 # ──────────────────────────────────────────────────────────────
 
 [resolved_summary]
-count = 58
+count = 59
 detail = """Waves 106-110 resolved:
   Wave 106-108 (26): grapheneGate 13/13, VPS songbird restart, BM-UDS-01, CR-TARPC-01,
     NG-DOWNCAST-01, aarch64 rebuild, NDK, SONGBIRD-IPC, BARRACUDA-METHOD-DESCRIBE,
