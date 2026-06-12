@@ -26,13 +26,20 @@ Wave 111 scales this to new topology and completes the last operational gaps.
 [entry_state]
 health = "13/13 GRADUATED"
 startup = "6/6 COMPLETE"
-depot = "FRESH — all 13 from HEAD (44fd18d, 2026-06-12T12:37:00Z). songBird in depot is 32a8d700, needs rebuild for partition tolerance (9903cf50)."
+depot = "PARTIAL — songBird (3fc94365) + beardog (9c351408) verified match checksums.toml. biomeOS STALE (depot serves 9196cac0, checksums expects 83bc9b19). Needs plasmid.harvest --all for full depot integrity."
 membrane_parity = "12/12 repos at parity (origin = forgejo = local) as of 2026-06-12"
 sandbox = "SHIPPED — plasmid.sandbox + plasmid.canary CLI ready"
 provision = "SHIPPED (e230e10) — gate.provision (DO API), gate.provision.status, gate.provision.destroy. canary-fieldmouse profile defined."
 gates_active = "eastGate, golgiBody, ironGate, southGate, grapheneGate (5-gate mesh)"
 gates_pending = "northGate (new), westGate (new), NUCs, Pixle, blueGate, swiftGate"
-federation = "VALIDATED (2026-06-12T14:07Z) — 64ms RTT, enabled=true, wire fix confirmed, auto-reconnect functional. Persistent relay pending VPS songBird rebuild to fe47c012."
+federation = "VALIDATED (2026-06-12T16:31Z) — health triad deployed from depot (beardog+songbird BLAKE3 verified, biomeos functional but depot-stale). 9/9 sockets healthy via biomeOS doctor. VPS peer reachable, persistent relay pending fe47c012 rebuild."
+flockgate_nucleus_triad = """VALIDATED (2026-06-12T16:31Z):
+  beardog v0.9.0: alive, BLAKE3 9c351408 ✅ (matches checksums.toml)
+  songbird v0.2.1: healthy, BLAKE3 3fc94365 ✅ (matches checksums.toml)
+  biomeos v0.1.0: alive, 255 capabilities registered — BLAKE3 MISMATCH (depot serves 9196cac0, checksums expects 83bc9b19)
+  biomeOS doctor: 9/9 sockets healthy, auto-discovered 1278 capabilities from 8 endpoints
+  Federation: enabled=true, mesh initialized, VPS reachable, active_connections=0 (VPS songbird at 32a8d700, needs fe47c012)
+  DEPOT GAP: biomeos binary on VPS depot is stale — needs plasmid.harvest --all (not just --targets songbird)"""
 divergence_stream6 = "14/16 shipped (cellMembrane 6/6 COMPLETE, songBird 4/4, primalSpring 3/3, biomeOS 2/2). Remaining: DEPLOY-THEN-STALE, WINDOWS-ECOBIN-DIVERGENCE (both ops/hardware-blocked)."
 vps_minimization = "Plan documented (VPS_SURFACE_MINIMIZATION_EVOLUTION_JUN12_2026.md). Phase 1 (NUC canary) immediately actionable."
 bash_fallback_removed = "gate/mod.rs: pull() and check() now pure temporal.cascade/temporal.check — no bash fallback path."
@@ -143,15 +150,18 @@ SONGBIRD_PEERS, SONGBIRD_FEDERATION_PORT env vars in bin_interface UDS/TCP path.
 Fixes flockGate reporting enabled=false."""
 federation_reconnect = """✅ DONE (f18aeb6b, Wave 111): spawn_peer_health_loop — 30s probe with
 exponential backoff (30s→60s→120s→cap 300s). Auto-reconnects after VPS restart."""
-flockgate_handshake = """IN PROGRESS (08c36f2 — flockGate WAN mesh validated):
-✅ songBird v0.2.1 deployed from depot (BLAKE3 verified)
-✅ VPS port 7700 confirmed open
-✅ mesh.init succeeds
-⚠️ BLOCKER: Depot binary predates federation fix (f18aeb6b). Needs plasmid.harvest.
+flockgate_handshake = """PARTIALLY VALIDATED (2026-06-12T16:31Z — flockGate NUCLEUS triad test):
+✅ beardog v0.9.0 from depot — BLAKE3 verified, alive, crypto-spine operational
+✅ songBird v0.2.1 from depot — BLAKE3 verified, healthy, federation.enabled=true
+✅ biomeOS v0.1.0 from depot — alive, 255 caps, 9/9 sockets discovered (functional but depot-stale hash)
+✅ mesh.init succeeds, VPS peer reachable
+✅ biomeOS doctor passes: 9/9 healthy, 32 cores, 62.6GB RAM available
+⚠️ BLOCKER 1: active_connections=0, latency_ms=null — VPS songBird still at 32a8d700 (needs fe47c012)
+⚠️ BLOCKER 2: biomeOS depot hash mismatch — needs plasmid.harvest --all (not just --targets songbird)
 Steps remaining:
-1. Rebuild songBird on VPS (plasmid.harvest --targets songbird) — depot has 32a8d700, need fe47c012+
-2. Deploy fresh binary to flockGate
-3. Validate: federation.enabled=true, active_connections > 0"""
+1. VPS: plasmid.harvest --all (rebuild ALL primals to match checksums.toml)
+2. Validate: active_connections > 0, latency_ms < 100ms
+3. Full 13/13 NUCLEUS from verified depot (currently 2/13 BLAKE3-verified, 1/13 functional-stale)"""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: Sandbox Graduation — Integrate into gate.bootstrap
