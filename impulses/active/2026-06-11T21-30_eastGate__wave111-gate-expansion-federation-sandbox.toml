@@ -337,8 +337,8 @@ id = "DISCOVERY-STALE-PRUNE"
 scenario = "Register a primal, let it die (no health response), verify biomeOS prunes it"
 forces = "Stale registration pruning, health-aware discovery"
 priority = "P2"
-status = "✅ SHIPPED v4.24"
-resolution = """biomeOS v4.24 (249bce28):
+status = "✅ SHIPPED v4.24 → v4.25 (8c310e1b)"
+resolution = """biomeOS v4.24 (249bce28) → v4.25 (8c310e1b):
 - NeuralRouter::unregister_primal() removes all capability registrations for dead primals
 - NeuralRouter::prune_stale_registrations() probes all endpoints, evicts unreachable
 - capability.prune JSON-RPC method for manual triggering
@@ -350,8 +350,8 @@ id = "ROUTING-PARTITION-AWARE"
 scenario = "Two primals on different segments, one segment unreachable"
 forces = "Topology-aware routing degrades gracefully, doesn't block on unreachable"
 priority = "P3"
-status = "✅ SHIPPED v4.24"
-resolution = """biomeOS v4.24 (249bce28):
+status = "✅ SHIPPED v4.24 → v4.25 (8c310e1b)"
+resolution = """biomeOS v4.24 (249bce28) → v4.25 (8c310e1b):
 - RoutingWeightTable::all_circuits_open() detects all-dead provider set
 - try_registry_lookup() returns None when all circuits open → mesh fallback
 - capability.call forward failure now tries Songbird mesh before hard error

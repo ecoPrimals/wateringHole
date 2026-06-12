@@ -8,8 +8,8 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 109
-date = "2026-06-11"
+id = 111
+date = "2026-06-12"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
 notes = "Auto-published by membrane temporal.cascade --publish-freshness"
 publisher = "membrane"
@@ -17,7 +17,7 @@ publisher = "membrane"
 [heads]
 barraCuda = "5f0e55e554d29d73c54255c0ade6d819dd83fbb9"
 bearDog = "945de60fdd508fa5fa49ca9a158c774694dd1eee"
-biomeOS = "8c310e1b3379434de866ebe9df7cf11610c1bb77"
+biomeOS = "4648ffd10c4b7a5e46779b41d50e34eea110f7ec"
 cellMembrane = "975d45a2add83f321b119d02dd289738da7088f6"
 coralReef = "7bc90e535ff746490a519510acf1a80ce53cb604"
 esotericWebb = "2593302fb42627c1191a697058b75895230d395a"

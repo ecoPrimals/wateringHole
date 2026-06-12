@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-11 (Wave 109 mid-wave — **guideStone deployment convergence 66% resolved.** 39/59 FRAGO items closed. Cross-topology COMPLETE: LAN (5 gates), WAN (flockGate 4/5 — **`federation.enabled=false` diagnosed as songBird protocol gap, DO NOT re-test**), ARM (grapheneGate 13/13 DEPLOYED Wave 108), VPS (golgiBody 13/13). **5-gate ecosystem LIVE.** Startup contract **5/6** (bearDog remaining). HEALTH-01 **10/13** (rhizoCrypt, petalTongue, songBird remaining). Build infrastructure LANDED. BTSP server-side READY. 4 primals ACTIVE, 9 STANDBY. Criterion 7 IN PROGRESS. FRAGO: `wave109-guidestone-deployment-convergence`.)
+**Last updated**: 2026-06-12 (Wave 111 — **guideStone deployment convergence COMPLETE.** HEALTH-01 **13/13 GRADUATED.** Startup contract **6/6 COMPLETE.** Cross-topology COMPLETE: LAN (5 gates), WAN (flockGate — songBird wire fix `f18aeb6b` shipped, validation pending Stream 2), ARM (grapheneGate 13/13), VPS (golgiBody 13/13). **5-gate ecosystem LIVE.** biomeOS **v4.25**: lineage fail-closed, real system metrics, agnostic naming, stale registration pruning, partition-aware routing, all 26 crates `#![forbid(unsafe_code)]`. FRAGO: `wave111-gate-expansion-federation-sandbox`.)
 
 ---
 
