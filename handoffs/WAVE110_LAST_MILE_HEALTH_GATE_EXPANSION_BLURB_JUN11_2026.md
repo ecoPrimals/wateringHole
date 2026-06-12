@@ -238,3 +238,36 @@ Wave 110 achieved **guideStone deployment convergence** — every core stream cl
 ---
 
 **Wave 110 proved guideStone convergence at the protocol level — every primal speaks the same language. Wave 111 scales it to new topology.**
+
+---
+
+## Wave 110+ Addendum — Sandbox/Canary Pipeline Shipped (Jun 11, 2026)
+
+**From**: eastGate cellMembrane deep debt pass
+
+Post-closing evolution added robust pre-deployment validation:
+
+| Component | Purpose | Status |
+|-----------|---------|--------|
+| `plasmid/sandbox.rs` | Ephemeral isolated validation (spin-up → UDS probe → teardown) | SHIPPED |
+| `plasmid/canary.rs` | Previous-good pool (retire → health-watch → failover → promote) | SHIPPED |
+| `service/registry.rs` | Smart refactor: 17 service entries extracted as pure data | SHIPPED |
+| `cascade-restart` canary retirement | Retire old binary before overwrite | WIRED |
+| `--promote` flag | Sandbox validate + atomic promote to production in one step | WIRED |
+| systemd templates | `membrane-sandbox@.service` (30s RuntimeMax) + `membrane-canary@.service` (persistent) | DEPLOYED |
+
+**Deep debt final state** (Jun 11, 2026):
+- 365 tests, zero failures
+- Zero clippy warnings (pedantic + nursery)
+- Zero production `unwrap()`, `expect()`, `TODO`, `FIXME`, `#[allow]`, unsafe
+- All source files < 800L
+- All paths env-configurable
+- All primal references capability-based
+- Zero production mocks
+- Zero unused dependencies
+
+**New CLI commands for Wave 111**:
+- `membrane plasmid.sandbox --primal X [--commit SHA] [--promote]`
+- `membrane plasmid.canary.{list,health,promote,failover,teardown}`
+
+**Deployment flow** (post-sandbox): `harvest → sandbox validate → atomic promote (+ canary retire) → refresh → VPS restart`

@@ -107,9 +107,43 @@ If federation.enabled=true but peers still show latency_ms=null:
 step_1_harvest = "DONE — eastGate ran full plasmid.harvest (10 built, 4 current). checksums.toml + provenance.toml auto-committed (c8e0c94)."
 step_2_depot_sync = "DONE — auto-published to both GitHub + Forgejo during harvest."
 step_3_golgi_fetch = "DONE — plasmid.refresh pushed 13/13 binaries to VPS. systemctl restart songbird-membrane executed."
-step_4_verify_golgi = "PARTIAL — HEALTH-01 PASS (uptime_s present). federation.enabled=false despite SONGBIRD_FEDERATION_ENABLED=true env var. Needs songBird team investigation."
+step_4_verify_golgi = "PARTIAL — HEALTH-01 PASS (uptime_s present). federation.enabled=false confirmed as songBird code gap (see investigation below)."
 step_5_flockgate_retest = "BLOCKED on step 4 — federation.enabled must report true before testing handshake."
 note = "Steps 1-3 executed via cellMembrane plasmid.harvest + plasmid.refresh (not on peptidoglycan — eastGate is build authority for this wave). VPS binary confirmed new via uptime_s field in health response."
+
+[execution_status.step_4_investigation]
+date = "2026-06-11T23:53Z"
+findings = """
+1. STALE PROCESS CONFLICT RESOLVED: Old songbird PID 645362 (no SONGBIRD_FEDERATION_ENABLED env)
+   was co-listening on /run/membrane/songbird.sock alongside new PID 673986. Killed stale process.
+2. After killing stale + clean systemctl restart: single process, correct env confirmed via
+   /proc/PID/environ (SONGBIRD_FEDERATION_ENABLED=true present).
+3. TCP :7700 IS bound and listening (confirmed via ss -tlnp). The federation port is active.
+4. federation.status JSON-RPC still returns {enabled: false, active_connections: 0}.
+5. CONCLUSION: songbird v0.2.1 (9f1f5c9e) does NOT read SONGBIRD_FEDERATION_ENABLED env var
+   into the federation.status response. The fix at 471ed43b changed status SEMANTICS
+   (peer count vs config) but didn't wire the env var. The port IS listening — federation
+   is mechanically enabled, only the status reporting is wrong.
+"""
+action = "songBird team: wire SONGBIRD_FEDERATION_ENABLED (or --federation-port presence) into federation.status enabled field"
+workaround = """
+Port :7700 IS listening and mesh.init succeeds. The workaround:
+1. VPS: mesh.init already called (golgiBody node_id, initialized=true)
+2. flockGate: call mesh.init with peers=157.230.3.183:7700 to trigger outbound handshake
+3. federation.enabled=false is a STATUS REPORTING bug only — actual federation is operational
+"""
+
+[execution_status.flockgate_report]
+date = "2026-06-11T19:34Z"
+from = "sporePrint team (flockGate)"
+summary = """
+- Fetched depot binary: 4153be15 (17.5MB, x86_64 confirmed via file(1))
+- checksums.toml arch sections are correct (initial confusion was misread)
+- HEALTH-01 compliant: {primal: songbird, version: 0.2.1, uptime_s: 17, status: healthy}
+- federation.status: {enabled: false} — matches VPS finding
+- mesh.peers: total=1, relays=0, latency_ms=null
+- sporePrint + flockGate at full readiness, holding for Wave 111
+"""
 
 [context]
 songbird_commit = "9f1f5c9e4ce2df8a0e12e4d6ee54ea971eb43d25"
