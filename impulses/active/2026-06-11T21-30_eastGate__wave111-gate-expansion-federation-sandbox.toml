@@ -42,7 +42,7 @@ irongate_nucleus = """✅ DEPLOYED (Jun 12): Full 13/13 NUCLEUS live on ironGate
 benchScale validated: Docker lab → libvirt VM mesh (3-node) → production.
 13/13 sockets alive, gate.bootstrap 8/9 phases pass (checksum.git expected with dev builds).
 GATE_NUCLEUS_SYSTEMD_STANDARD.md published as ecosystem standard."""
-strandgate_live = "strandGate postPrimordial LIVE — Tower Atomic + hotSpring, 2 GPUs (RTX 3090 + RX 6950 XT), 265/282 validation. Gap: TOADSTOOL-AUTO-REGISTER (P2, carry)."
+strandgate_live = "strandGate LIVE — riboCipher COMPLIANT (Wave 112 ERROR escalation shipped). 627 tests, 0 clippy. Tower Atomic + hotSpring, 2 GPUs (RTX 3090 + RX 6950 XT), 265/282 validation. Gap: TOADSTOOL-AUTO-REGISTER (P2, carry)."
 pipeline_evolution = """✅ SHIPPED: freshness auto-publish (1baa2ec) + VPS auto-rebuild + race-condition fix (082d77c→34e472d).
 Race fix: wave-ID guard + rebase-before-push prevents stale Wave 109 overwrites.
 VPS binary rebuilt to 34e472d (2026-06-13): riboCipher mito-tier + dispatch SRP + wave-ID fix live."""
