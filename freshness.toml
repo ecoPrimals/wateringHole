@@ -17,7 +17,7 @@ publisher = "eastGate-overwatch"
 [heads]
 barraCuda = "5f0e55e554d29d73c54255c0ade6d819dd83fbb9"
 bearDog = "cdcdff56f9af6b1c20d004c49437e8b05819089c"
-biomeOS = "6d887ea1e3ae576b2692d4ecfad7eb3bde2901f6"
+biomeOS = "b8596973ab49cdeac31026c7bbef5dc8db9d3582"
 cellMembrane = "922eb2433ad04902f6a3fcc2b5f5d6205a15d03b"
 coralReef = "7bc90e535ff746490a519510acf1a80ce53cb604"
 esotericWebb = "2593302fb42627c1191a697058b75895230d395a"

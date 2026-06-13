@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 13, 2026 (Wave 111 — biomeOS v4.26, riboCipher transport signal detection — Stream 7 convergent evolution.)
+**Last Updated**: June 13, 2026 (Wave 112 — biomeOS v4.27, riboCipher deprecation escalation WARN→ERROR.)
 
 ---
 
@@ -219,7 +219,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v4.26  
+**Version**: v4.27  
 **Status**: Production Ready (A++, Security A++ LEGENDARY) — 26 workspace crates (all `#![forbid(unsafe_code)]`), 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. guideStone startup contract, HEALTH-01 compliant, **riboCipher transport signal detection** (API + neural-api sockets, WARN phase), **zero `Box<dyn Error>` in production**, **typed `DeploymentMode`/`HealthStatus` enums** (eliminated stringly-typed API), **`NucleusRunConfig` struct** (typed startup config), lineage verification fail-closed, real system metrics via biomeos-system, readiness probe checks actual discovery state, agnostic naming (no primal-specific constants), neural router refactored (mod.rs → registry.rs extraction), stale registration pruning, partition-aware routing, zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
