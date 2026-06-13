@@ -409,6 +409,41 @@ backbone_10g = "LOW: 10G backbone cables — blocks high-throughput only"
 biomegate_recovery = "LOW: biomeGate recovery — hotSpring can use strandGate"
 
 # ──────────────────────────────────────────────────────────────
+# STREAM 7: FBSP — First-Byte Signal Protocol Convergence
+# Owner: ALL teams (each primal evolves independently)
+# Standard: FIRST_BYTE_SIGNAL_PROTOCOL_STANDARD.md (wateringHole)
+# Philosophy: Convergent evolution, not shared dependency. Each team
+#             implements the standard idiomatically. No cross-primal crate.
+# Deprecation: warn (wave 111-112) → error (112) → reject (113) → remove (114)
+# ──────────────────────────────────────────────────────────────
+
+[stream7]
+id = "FBSP-CONVERGENCE"
+owner = "ALL teams"
+priority = "P2"
+guidestone_properties = ["P1-Deterministic", "P2-Reference-Traceable"]
+description = """Replace fragile peek-and-guess protocol detection with intentional
+first-byte signaling. Each primal independently evolves to send/receive FBSP signals.
+Standard published in FIRST_BYTE_SIGNAL_PROTOCOL_STANDARD.md.
+
+Root cause: ironGate/cellMembrane found that BTSP-encrypted first bytes are
+indistinguishable from noise — peek-based routing hung on encrypted connections.
+Additionally, primals disagree on what 'unknown byte' means (bearDog → BTSP,
+biomeOS → HTTP). This divergence is a jelly-sting pattern that must converge."""
+
+[stream7.tasks]
+beardog_server_fbsp = "bearDog: implement FBSP detection in unix_socket_ipc/server.rs and tcp_ipc/server.rs. Signal before peek, legacy fallback with WARN."
+beardog_client_fbsp = "bearDog: send clear signal (0xEC 0x01) from BTSP client connections"
+songbird_server_fbsp = "songBird: implement FBSP detection in pure_rust_server and bin_interface accept loops"
+songbird_federation_mito = "songBird: send mito-obfuscated signal (0xED) for cross-gate federation connections"
+biomeos_api_fbsp = "biomeOS: implement FBSP detection in biomeos-api unix_server.rs (replaces {/[ vs HTTP guess)"
+biomeos_neural_fbsp = "biomeOS: implement FBSP detection in neural_api_server/connection.rs"
+sweetgrass_reference = "sweetGrass: update peek.rs as reference implementation — FBSP first, legacy fallback second"
+primalspring_harness = "primalSpring: update nucleus_launcher and harness IPC to send clear signal"
+cellmembrane_health = "cellMembrane: update uds_jsonrpc_call() to prepend [0xEC, 0x01] before JSON payload"
+cellmembrane_config = "cellMembrane: add [transport.fbsp] section to membrane.toml with unsignalled_policy=warn"
+
+# ──────────────────────────────────────────────────────────────
 # SUCCESS CRITERIA
 # ──────────────────────────────────────────────────────────────
 
@@ -429,6 +464,7 @@ extended = [
     "nucleus_launcher aarch64 cross-compiled",
     "primalSpring: s_version_skew_detection scenario shipping",
     "biomeOS: stale registration pruning demonstrated",
+    "FBSP: all primals log WARN on unsignalled connections (stream 7 wave 111 target)",
 ]
 last = [
     "northGate NUCLEUS 13/13 — family gate, spare compute when not in use",

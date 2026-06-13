@@ -113,6 +113,26 @@ Old patterns permanently excised when ALL criteria GREEN:
 
 ---
 
+## NEW: FBSP — First-Byte Signal Protocol (Stream 7)
+
+**Standard**: `FIRST_BYTE_SIGNAL_PROTOCOL_STANDARD.md`  
+**Root cause**: ironGate/cellMembrane found peek-based routing hangs on encrypted first bytes. Primals disagree on "unknown byte" meaning. Jelly-sting pattern that must converge.
+
+**Each team evolves independently** — no shared crate, no cross-primal dependency. The standard defines the target; each team implements idiomatically.
+
+| Team | Wave 111 Task |
+|------|---------------|
+| bearDog | FBSP detection in server accept loops. Legacy WARN. |
+| songBird | FBSP detection in pure_rust_server + bin_interface. Mito for federation. |
+| biomeOS | FBSP detection in API + neural-api sockets. |
+| sweetGrass | Reference implementation in peek.rs. |
+| primalSpring | nucleus_launcher + harness send clear signal. |
+| cellMembrane | `uds_jsonrpc_call()` prepends `[0xEC, 0x01]`. Config in membrane.toml. |
+
+**Deprecation**: WARN (111-112) → ERROR (112) → REJECT (113) → REMOVE (114)
+
+---
+
 ## Priority Order (What to Do Next)
 
 1. **VPS**: Rebuild cellMembrane to `082d77c` (fixes race condition + freshness wave-ID)
@@ -121,6 +141,7 @@ Old patterns permanently excised when ALL criteria GREEN:
 4. **NUC**: `gate.bootstrap` with `canary-fieldmouse` profile (criteria 5)
 5. **westGate**: Hardware power-on + gate.bootstrap (gate expansion)
 6. **toadStool**: TOADSTOOL-AUTO-REGISTER (compute gate autonomy)
+7. **ALL TEAMS**: Begin FBSP convergent evolution (Stream 7)
 
 ---
 
@@ -129,8 +150,9 @@ Old patterns permanently excised when ALL criteria GREEN:
 | Document | Purpose |
 |----------|---------|
 | This blurb | Remaining work overview |
-| `impulses/active/...wave111...toml` | Wave 111 FRAGO (14/16 Stream 6) |
-| `GATE_NUCLEUS_SYSTEMD_STANDARD.md` | **NEW** — systemd deployment standard |
+| `impulses/active/...wave111...toml` | Wave 111 FRAGO (14/16 Stream 6 + Stream 7 FBSP) |
+| `FIRST_BYTE_SIGNAL_PROTOCOL_STANDARD.md` | **NEW** — FBSP convergent evolution standard |
+| `GATE_NUCLEUS_SYSTEMD_STANDARD.md` | systemd deployment standard |
 | `BENCHSCALE_NUCLEUS_VALIDATION_IRONGATE_DEPLOY_JUN12_2026.md` | **NEW** — ironGate deploy handoff |
 | `CONVERGENCE_GATE_WAVE111_PATTERN_DEPRECATION_JUN12_2026.md` | Pattern deprecation criteria |
 | `AAR_PIPELINE_ADHOC_PATTERNS_WAVE111_JUN12_2026.md` | Pipeline automation roadmap |
@@ -138,4 +160,4 @@ Old patterns permanently excised when ALL criteria GREEN:
 
 ---
 
-**Wave 111 is code-complete. ironGate NUCLEUS deployed (systemd standard established). Remaining: VPS rebuild for race fix + depot integrity, cascade to remaining dev gates, hardware enrollment (westGate, NUCs), and TOADSTOOL-AUTO-REGISTER. The ecosystem is self-deploying.**
+**Wave 111 is code-complete. ironGate NUCLEUS deployed. FBSP standard published — all teams begin convergent evolution away from fragile peek patterns. Remaining: VPS rebuild, cascade, hardware enrollment, TOADSTOOL-AUTO-REGISTER, and per-team FBSP adoption. The ecosystem is self-deploying and self-declaring.**
