@@ -8,20 +8,20 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 111
-date = "2026-06-12"
+id = 109
+date = "2026-06-13"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Pre-wave sync — full HEAD regeneration. Policy: no more manual per-primal freshness edits."
-publisher = "eastGate overwatch"
+notes = "Auto-published by membrane temporal.cascade --publish-freshness"
+publisher = "membrane"
 
 [heads]
 barraCuda = "5f0e55e554d29d73c54255c0ade6d819dd83fbb9"
 bearDog = "945de60fdd508fa5fa49ca9a158c774694dd1eee"
 biomeOS = "4648ffd10c4b7a5e46779b41d50e34eea110f7ec"
-cellMembrane = "e230e10696e608d06f7d8476a54108a508f538cc"
+cellMembrane = "1baa2ec3aace72ebdf7928114146ab9a1deebccf"
 coralReef = "7bc90e535ff746490a519510acf1a80ce53cb604"
 esotericWebb = "2593302fb42627c1191a697058b75895230d395a"
-healthSpring = "c65f89ac04d7ff692fe8c7964faa57096fbc6c3f"
+healthSpring = "054d5c9d6ad1e618701eab140f0eb6d9ab3e9393"
 lithoSpore = "3046fb895a9e0240ba9d1d8a5ba660f79333828f"
 loamSpine = "a3c481cf41f9b1978ba40f4ff99aed16c7fd2247"
 ludoSpring = "8e7f0d829faf5b536c2ad254b558fdae1bbdf193"
@@ -35,5 +35,5 @@ skunkBat = "00b3436f7a3fbc9d9a74b58208ecaaffc2d8d3a0"
 songBird = "dcc728fce9ff35f57e2a48c6a2ff11612127e37b"
 squirrel = "a8c2e7cc5153406b7075dd42ee42e7358c9aadf7"
 sweetGrass = "a675425ede203cf6ef765ba0dc37a185ad0c31bb"
-toadStool = "02a0db2c7e93dfe2b90e40e8f8c9c914a67a07bc"
-wateringHole = "368739b914831c86c4c0009dd180cf98f60cac54"
+toadStool = "a51619974024ff31800bbc5ae188d620f1e8760c"
+wateringHole = "94563f79a69574a4b8c1eb44c00e6c3eb4805987"
