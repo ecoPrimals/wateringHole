@@ -1,31 +1,15 @@
-# Wave 112 — Kickoff
+# Wave 112 — Remaining Work
 
-**Date**: 2026-06-13  
+**Date**: 2026-06-13 (updated Jun 13 cascade)  
 **From**: eastGate overwatch  
 **Closes**: Wave 111 (code-complete, 9/9 riboCipher converged)  
 **Opens**: Wave 112 (operational convergence + riboCipher deprecation escalation)
 
 ---
 
-## Wave 111 Closure Summary
+## Context
 
-Wave 111 delivered:
-
-1. **riboCipher Transport Signal Standard** — published, implemented by 9/9 primals independently (convergent evolution in a single wave)
-2. **Stream 6 Divergence Pressure** — 14/16 scenarios shipped (2 hardware-blocked)
-3. **ironGate NUCLEUS** — 13/13 systemd deployment, benchScale validated (Docker→VM→prod)
-4. **Federation** — 64ms RTT, triad deployed, auto-reconnect proven
-5. **Pipeline Automation** — freshness auto-publish, VPS auto-rebuild, race-condition fix
-6. **cellMembrane** — bash fallback removed, gate.provision shipped, sandbox/canary shipped, dispatch SRP, riboCipher mito-tier
-7. **bearDog** — riboCipher + deep evolution (discovery, storage, genetics from stubs to impls)
-8. **sourDough** — riboCipher reference implementation
-9. **primalSpring** — riboCipher clear signal, port registry consolidation, LAUNCHER-01 aarch64
-10. **songBird** — riboCipher 3 accept loops, SRP extraction, deep debt zero
-11. **sweetGrass** — v0.7.57 riboCipher reference, 1647 tests, zero deep debt
-12. **biomeOS** — v4.26 riboCipher + type safety + error handling evolution
-13. **strandGate/hotSpring** — riboCipher COMPLIANT, 627 tests
-
-**Wave 111 was the riboCipher wave.** The ecosystem evolved from fragile peek-and-guess to intentional transport signaling in one coordinated push.
+Wave 111 closed: 9/9 riboCipher converged, 14/16 Stream 6 divergence shipped, ironGate NUCLEUS 13/13, federation validated. Wave 112 escalates the deprecation clock and proves operational self-healing.
 
 ---
 
@@ -39,18 +23,30 @@ Wave 112 shifts from code delivery to operational validation. The code is done �
 
 **Wave 112 policy**: Unsignalled connections produce **ERROR** logs (was WARN in 111).
 
-Each team upgrades their legacy fallback from WARN → ERROR:
-- This is a one-line log level change in most implementations
-- No connections are rejected yet (that's Wave 113)
-- The ERROR logs surface any remaining unsignalled callers
+**SHIPPED (6/8):**
+- cellMembrane: `922eb24` ✅
+- bearDog: `cdcdff56f` ✅
+- songBird: `acf20b6e` ✅
+- strandGate/hotSpring: ✅ (acknowledged)
+- sourDough: `28c0636` ✅
+- primalSpring: N/A (no accept loop, hard-asserts signal) ✅
+
+**PENDING (2/8):**
+- **sweetGrass**: Currently at WARN in peek.rs — needs one-line escalation to ERROR
+- **biomeOS**: Currently at DEBUG in neural_api_server/connection.rs — needs escalation to ERROR
+
+No connections are rejected yet (that's Wave 113). The ERROR logs surface any remaining unsignalled callers.
 
 ### 2. VPS Rebuild (cellMembrane — P1)
 
-Deploy `34e472d` to VPS. This:
-- Stops junk Wave 109 auto-publish commits (race-condition fix)
-- Enables riboCipher mito-tier on WAN connections
+Deploy `922eb24` (latest) to VPS. This:
+- Stops junk Wave 109 auto-publish commits (race-condition fix from 082d77c)
+- Enables riboCipher mito-tier + WARN→ERROR on WAN connections
+- Includes health probe fix + plasmidBin resolution
 - Triggers depot harvest cycle (fixes BLAKE3 mismatches)
 - Unblocks cascade automation testing
+
+**Status**: cellMembrane code shipped (`922eb24`). VPS deployment pending ops execution.
 
 ### 3. Cascade Validation (cellMembrane — P2)
 
@@ -82,24 +78,25 @@ Blocks autonomous `gate.bootstrap` for compute gates.
 
 Wave 112 closes when:
 
-1. ✅ VPS rebuilt to `34e472d`
-2. ✅ 2 cascade cycles, zero intervention (Convergence Gate criterion 6)
-3. ✅ Version skew = 0 after cascade (criterion 7)
-4. ✅ riboCipher ERROR logs: all primals at ERROR level for unsignalled
-5. ✅ At least 1 new hardware gate enrolled (westGate or NUC)
+1. ⬜ VPS rebuilt to `922eb24` (ops)
+2. ⬜ 2 cascade cycles, zero intervention (Convergence Gate criterion 6)
+3. ⬜ Version skew = 0 after cascade (criterion 7)
+4. ⚠️ riboCipher ERROR logs: 6/8 shipped, sweetGrass + biomeOS pending
+5. ⬜ At least 1 new hardware gate enrolled (westGate or NUC)
 
 ---
 
 ## Per-Team Summary
 
-| Team | Wave 112 Work | Priority |
-|------|---------------|----------|
-| **cellMembrane** | VPS rebuild → cascade validation → NUC bootstrap | P1 |
-| **ALL TEAMS** | riboCipher WARN→ERROR upgrade (one-line change) | P2 |
-| **sourDough** | validate ribocipher + scaffold update | P2 |
-| **toadStool** | TOADSTOOL-AUTO-REGISTER | P2 |
-| **ops** | westGate + NUC + Pixle enrollment | P2 |
-| **primalSpring** | nucleus_launcher aarch64 (grapheneGate) | P3 |
+| Team | Wave 112 Work | Priority | Status |
+|------|---------------|----------|--------|
+| **cellMembrane** | VPS deploy 922eb24 → cascade validation → NUC bootstrap | P1 | Code shipped, ops pending |
+| **sweetGrass** | riboCipher WARN→ERROR (one-line in peek.rs) | P2 | PENDING |
+| **biomeOS** | riboCipher DEBUG→ERROR (connection.rs) | P2 | PENDING |
+| **sourDough** | validate ribocipher + scaffold update | P2 | PENDING |
+| **toadStool** | TOADSTOOL-AUTO-REGISTER | P2 | PENDING |
+| **ops** | westGate + NUC + Pixle enrollment | P2 | PENDING |
+| **primalSpring** | Proto-nucleate manifest (sub-NUCLEUS topologies) | P3 | PENDING |
 
 ---
 
@@ -107,9 +104,9 @@ Wave 112 closes when:
 
 | Document | Status |
 |----------|--------|
-| `CONVERGENCE_GATE_WAVE111_PATTERN_DEPRECATION_JUN12_2026.md` | Active — 3/8 GREEN, 5 pending operational |
+| `CONVERGENCE_GATE_WAVE111_PATTERN_DEPRECATION_JUN12_2026.md` | Active — 2/8 GREEN (4+8), 6 pending ops |
 | `VPS_SURFACE_MINIMIZATION_EVOLUTION_JUN12_2026.md` | Active — Phase 1 (NUC replaces droplet) |
-| `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md` | Standard — 9/9 converged, deprecation active |
+| `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md` | Standard — 9/9 converged, 6/8 at ERROR |
 | `GATE_NUCLEUS_SYSTEMD_STANDARD.md` | Standard — deployed on ironGate |
 
 ---
