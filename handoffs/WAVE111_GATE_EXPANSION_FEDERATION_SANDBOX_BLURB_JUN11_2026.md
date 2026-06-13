@@ -113,18 +113,22 @@ Old patterns permanently excised when ALL criteria GREEN:
 
 ---
 
-## NEW: FBSP — First-Byte Signal Protocol (Stream 7)
+## NEW: riboCipher — Transport Signal Convergence (Stream 7)
 
-**Standard**: `FIRST_BYTE_SIGNAL_PROTOCOL_STANDARD.md`  
+**Standard**: `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md`  
+**Accelerator**: sourDough (scaffold + validate + reference implementation)  
 **Root cause**: ironGate/cellMembrane found peek-based routing hangs on encrypted first bytes. Primals disagree on "unknown byte" meaning. Jelly-sting pattern that must converge.
 
-**Each team evolves independently** — no shared crate, no cross-primal dependency. The standard defines the target; each team implements idiomatically.
+**Biology**: Modeled on ribosomal codon reading — the accept loop (ribosome) reads signal bytes (codons) and routes deterministically. Three tiers: clear (0xEC), mito-obfuscated (0xED), nuclear-sealed (0xEE).
+
+**Each team evolves independently** — no shared crate, no cross-primal dependency. sourDough accelerates: new primals are born compliant, existing primals are audited toward convergence.
 
 | Team | Wave 111 Task |
 |------|---------------|
-| bearDog | FBSP detection in server accept loops. Legacy WARN. |
-| songBird | FBSP detection in pure_rust_server + bin_interface. Mito for federation. |
-| biomeOS | FBSP detection in API + neural-api sockets. |
+| **sourDough** | Reference impl + `validate ribocipher` command + scaffold templates |
+| bearDog | riboCipher detection in server accept loops. Legacy WARN. |
+| songBird | riboCipher detection in pure_rust_server + bin_interface. Mito for federation. |
+| biomeOS | riboCipher detection in API + neural-api sockets. |
 | sweetGrass | Reference implementation in peek.rs. |
 | primalSpring | nucleus_launcher + harness send clear signal. |
 | cellMembrane | `uds_jsonrpc_call()` prepends `[0xEC, 0x01]`. Config in membrane.toml. |
@@ -141,7 +145,7 @@ Old patterns permanently excised when ALL criteria GREEN:
 4. **NUC**: `gate.bootstrap` with `canary-fieldmouse` profile (criteria 5)
 5. **westGate**: Hardware power-on + gate.bootstrap (gate expansion)
 6. **toadStool**: TOADSTOOL-AUTO-REGISTER (compute gate autonomy)
-7. **ALL TEAMS**: Begin FBSP convergent evolution (Stream 7)
+7. **ALL TEAMS**: Begin riboCipher convergent evolution (Stream 7, sourDough accelerates)
 
 ---
 
@@ -150,8 +154,8 @@ Old patterns permanently excised when ALL criteria GREEN:
 | Document | Purpose |
 |----------|---------|
 | This blurb | Remaining work overview |
-| `impulses/active/...wave111...toml` | Wave 111 FRAGO (14/16 Stream 6 + Stream 7 FBSP) |
-| `FIRST_BYTE_SIGNAL_PROTOCOL_STANDARD.md` | **NEW** — FBSP convergent evolution standard |
+| `impulses/active/...wave111...toml` | Wave 111 FRAGO (14/16 Stream 6 + Stream 7 riboCipher) |
+| `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md` | **NEW** — riboCipher transport signal standard |
 | `GATE_NUCLEUS_SYSTEMD_STANDARD.md` | systemd deployment standard |
 | `BENCHSCALE_NUCLEUS_VALIDATION_IRONGATE_DEPLOY_JUN12_2026.md` | **NEW** — ironGate deploy handoff |
 | `CONVERGENCE_GATE_WAVE111_PATTERN_DEPRECATION_JUN12_2026.md` | Pattern deprecation criteria |
@@ -160,4 +164,4 @@ Old patterns permanently excised when ALL criteria GREEN:
 
 ---
 
-**Wave 111 is code-complete. ironGate NUCLEUS deployed. FBSP standard published — all teams begin convergent evolution away from fragile peek patterns. Remaining: VPS rebuild, cascade, hardware enrollment, TOADSTOOL-AUTO-REGISTER, and per-team FBSP adoption. The ecosystem is self-deploying and self-declaring.**
+**Wave 111 is code-complete. ironGate NUCLEUS deployed. riboCipher standard published — all teams begin convergent evolution away from fragile peek patterns, accelerated by sourDough. Remaining: VPS rebuild, cascade, hardware enrollment, TOADSTOOL-AUTO-REGISTER, and per-team riboCipher adoption. The ecosystem is self-deploying and self-declaring.**
