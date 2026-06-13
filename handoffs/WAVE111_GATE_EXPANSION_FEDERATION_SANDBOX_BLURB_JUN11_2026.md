@@ -166,4 +166,4 @@ Old patterns permanently excised when ALL criteria GREEN:
 
 ---
 
-**riboCipher at 9/9 — FULL ECOSYSTEM CONVERGENCE. The deprecation clock is ticking. All remaining work is operational: VPS rebuild to stop junk auto-publish, depot harvest, gate cascades, hardware enrollment. The ecosystem has evolved from peek-and-guess to intentional signaling. Wave 112 can begin escalating WARN→ERROR on unsignalled connections.**
+**WAVE 111 CLOSED** — riboCipher 9/9 FULL CONVERGENCE achieved. All code work complete. Remaining operational items carried to **Wave 112** (`WAVE112_KICKOFF_BLURB_JUN13_2026.md`). The deprecation clock is ticking — Wave 112 escalates WARN→ERROR.
