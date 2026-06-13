@@ -441,8 +441,10 @@ validate audits existing primals, own IPC is the reference implementation."""
 sourdough_reference = "sourDough: implement riboCipher in own IPC server as canonical reference implementation"
 sourdough_validate = "sourDough: add `validate ribocipher` subcommand — audits primal accept loops for compliance"
 sourdough_scaffold = "sourDough: update scaffold templates to emit riboCipher-compliant accept loops (new primals born compliant)"
+sourdough_status = "✅ SHIPPED (1f68f64): riboCipher reference implementation + deep debt evolution. Wave 111."
 beardog_server = "bearDog: implement riboCipher detection in unix_socket_ipc/server.rs and tcp_ipc/server.rs"
 beardog_client = "bearDog: send clear signal (0xEC 0x01) from BTSP client connections"
+beardog_status = "✅ SHIPPED (8efc963→123e318): server detect in all accept loops + client signal on all outbound IPC. Wave 111."
 songbird_server = "songBird: implement riboCipher detection in pure_rust_server and bin_interface accept loops"
 songbird_federation_mito = "songBird: send mito-obfuscated signal (0xED) for cross-gate federation connections"
 songbird_status = "✅ SHIPPED (053163f3→677ec343): all 3 accept loops (pure_rust_server, bin_interface, http_server), songbird_types::constants::ribocipher module, 8929 tests."
@@ -477,7 +479,7 @@ extended = [
     "nucleus_launcher aarch64 cross-compiled",
     "primalSpring: s_version_skew_detection scenario shipping",
     "biomeOS: stale registration pruning demonstrated",
-    "riboCipher: 7/9 primals SHIPPED (biomeOS, songBird, sweetGrass, primalSpring, cellMembrane, strandGate/hotSpring). Remaining: bearDog, sourDough.",
+    "riboCipher: 9/9 primals SHIPPED — full ecosystem convergence achieved Wave 111. Deprecation clock starts.",
 ]
 last = [
     "northGate NUCLEUS 13/13 — family gate, spare compute when not in use",
