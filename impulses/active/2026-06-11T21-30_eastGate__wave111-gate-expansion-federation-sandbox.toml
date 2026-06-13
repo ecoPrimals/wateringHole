@@ -447,6 +447,7 @@ songbird_server = "songBird: implement riboCipher detection in pure_rust_server 
 songbird_federation_mito = "songBird: send mito-obfuscated signal (0xED) for cross-gate federation connections"
 biomeos_api = "biomeOS: implement riboCipher detection in biomeos-api unix_server.rs (replaces {/[ vs HTTP guess)"
 biomeos_neural = "biomeOS: implement riboCipher detection in neural_api_server/connection.rs"
+biomeos_status = "✅ SHIPPED v4.26 (4c1596f0): constants in biomeos-types, fill_buf peek in unix_server.rs, consume_ribocipher_signal() in connection.rs (UDS+TCP). WARN on legacy."
 sweetgrass_reference = "sweetGrass: update peek.rs as reference implementation — riboCipher first, legacy fallback second"
 primalspring_harness = "primalSpring: update nucleus_launcher and harness IPC to send clear signal"
 cellmembrane_health = "cellMembrane: update uds_jsonrpc_call() to prepend [0xEC, 0x01] before JSON payload"
