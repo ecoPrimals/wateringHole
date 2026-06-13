@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 11, 2026 (Wave 110: last mile health + gate expansion. primalSpring self-convergence — `--bind-mode`/`--port` + bare `"health"` + `uptime_s` (dogfooding STARTUP-PS-01, HEALTH-PS-01). Inline tolerance migration (15 values centralized). Clippy test compliance (lib + test targets `-D warnings`). 916 tests, 56 scenarios, zero known debt.)
+**Last Updated**: June 13, 2026 (Wave 111: ironGate NUCLEUS deployed (13/13 systemd). riboCipher transport signal standard published — Stream 7 convergent evolution. biomeOS v4.26 (riboCipher detection + deep debt type safety). Federation VALIDATED (64ms RTT). 5-gate ecosystem LIVE. All AARs archived.)
 
 ---
 
