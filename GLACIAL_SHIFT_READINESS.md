@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-13 (Wave 111 — **guideStone deployment convergence COMPLETE.** HEALTH-01 **13/13 GRADUATED.** Startup contract **6/6 COMPLETE.** Cross-topology COMPLETE: LAN (5 gates), WAN (flockGate — songBird wire fix `f18aeb6b` shipped, validation pending Stream 2), ARM (grapheneGate 13/13), VPS (golgiBody 13/13). **5-gate ecosystem LIVE.** biomeOS **v4.26**: riboCipher transport signal detection (Stream 7), lineage fail-closed, real system metrics, agnostic naming, stale registration pruning, partition-aware routing, all 26 crates `#![forbid(unsafe_code)]`. FRAGO: `wave111-gate-expansion-federation-sandbox`.)
+**Last updated**: 2026-06-13 (Wave 111 — **riboCipher 9/9 FULL CONVERGENCE.** All primals signal transport intent; peek-and-guess deprecated. Deprecation: WARN(111)→ERROR(112)→REJECT(113)→REMOVE(114). **guideStone deployment convergence COMPLETE.** HEALTH-01 **13/13 GRADUATED.** Startup contract **6/6 COMPLETE.** Cross-topology COMPLETE: LAN (5 gates), WAN (flockGate validated 64ms RTT), ARM (grapheneGate 13/13), VPS (golgiBody 13/13). **5-gate ecosystem LIVE.** Stream 6 divergence: 14/16 shipped. ironGate NUCLEUS DEPLOYED (13/13 systemd). cellMembrane `34e472d`: riboCipher mito-tier. bearDog `123e318`: riboCipher server+client. sourDough `1f68f64`: reference impl. Criterion 7 COMPLETE. FRAGO: `wave111-gate-expansion-federation-sandbox`.)
 
 ---
 
@@ -178,9 +178,9 @@ Unix socket improvements. primalSpring: 789 tests, 53 scenarios, 458 methods,
 - **toadStool**: **S279 deep debt III complete** — zero production panic paths, 9,156+ lib tests.
   Transport CONFIRMED DONE (S306c Wave 104, 11/11 non-exempt).
   **CLEAR** — zero sentinel-blocking items.
-- **biomeOS**: **v4.23** shipped (v4.22: guideStone startup `--bind-mode` + HEALTH-01; v4.23: deep debt
-  Duration/magic-number consolidation). NUCLEUS supervision, LocalTrusted access level operational.
-  **CLEAR** — zero sentinel-blocking items.
+- **biomeOS**: **v4.18** shipped (TCP-only fallback, grapheneGate adoption). v4.17 (NUCLEUS supervision —
+  LifecycleManager auto-restarts). LocalTrusted access level operational.
+  **CLEAR** — zero sentinel-blocking items. Both P1 items (supervision + TCP fallback) RESOLVED.
 - **petalTongue**: WASM client-side rendering live. Transport evolution adopted.
   **CLEAR** — no remaining sentinel-blocking items.
 
@@ -326,7 +326,6 @@ fossilRecord) — see `fossilRecord/` for detail.
 | ~~bearDog aws-lc-rs C-dep~~ | bearDog | ~~P1~~ | **RESOLVED** (Wave 145) — `aws-lc-rs` replaced with `rustls-rustcrypto` (pure Rust). `cargo check --target aarch64-unknown-linux-musl` PASS. 19-crate C-crypto ban in `deny.toml`. All non-x86 targets UNBLOCKED. |
 | ~~flockGate WAN depot empty~~ | cellMembrane | ~~P1~~ | **RESOLVED** (Wave 105) — `plasmid.fetch --source wan` SHIPPED. `caddy.depot.provision` ready. Production validation pending. |
 | ~~songBird ipc.resolve M1~~ | songBird | ~~**P2**~~ | **SHIPPED** (Wave 107, ff86204c) — `ipc.resolve` returns MeshRelay TransportEndpoint with peer_id. Topology-aware mesh routing LIVE. |
-| ~~HEALTH-SB-01~~ | songBird | ~~**P2**~~ | **SHIPPED** (Wave 110, 471ed43b) — bare `"health"` → `{status, primal, version, uptime_s}` per HEALTH-01 contract. Federation `enabled` status fix: reports config state, not connectivity count. |
 | ~~Transport injection (toadStool)~~ | toadStool | ~~P2~~ | **DONE** (S306c Wave 104) — transport CONFIRMED, 11/11 non-exempt COMPLETE. |
 | ~~biomeOS graph.deploy revalidation~~ | biomeOS + eastGate | ~~P2~~ | **VALIDATED** (Wave 105) — v4.16 composition.deploy accepted, graph.status 13 phases, LocalTrusted. |
 | ~~CM-CASCADE-CONFLICT~~ | cellMembrane | ~~P2~~ | **RESOLVED** (Wave 105) — cascade auto-discards dirty regenerable metadata before ff-only pull. |
@@ -385,7 +384,7 @@ validator for content served by the outer membrane.
 be guideStone-grade — not just "working" but deterministic, traceable, self-verifying,
 environment-agnostic, and tolerance-documented. FRAGO: `wave109-guidestone-deployment-convergence`.
 
-**Current assessment (Wave 109)**: **ZERO P1. 5-GATE ECOSYSTEM LIVE** (eastGate↔golgiBody↔ironGate+southGate + grapheneGate). **grapheneGate 13/13 DEPLOYED AND ALIVE** (Wave 108). Deterministic deployment ACHIEVED but **not yet guideStone-grade** — per-primal startup knowledge in scripts, no standard health endpoint, no on-device orchestration, BTSP handshake untested. **Criterion 7 drives the remaining convergence**: 5 work streams, 10+ convergence items across primalSpring, cellMembrane, biomeOS, and primal teams. **Criteria 1-6 status: stadial-ready. Criterion 7: IN PROGRESS.**
+**Current assessment (Wave 111)**: **ZERO P1. 5-GATE ECOSYSTEM LIVE** (eastGate↔golgiBody↔ironGate+southGate + grapheneGate). **ironGate NUCLEUS DEPLOYED** (13/13 systemd, benchScale validated). **Criterion 7 COMPLETE** — guideStone-grade deployment achieved (HEALTH-01 13/13, startup 6/6, deterministic, reference-traceable, self-verifying). **riboCipher 9/9 CONVERGED** — all primals signal transport intent. **Criteria 1-7 status: ALL CLEAR for stadial entry.** Remaining work is purely operational (VPS rebuild, gate cascades, hardware enrollment). The system is self-deploying and self-declaring.
 
 **Wave 98-103 milestones**:
 - Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 12/12 capabilities with coralReef depot fix)
