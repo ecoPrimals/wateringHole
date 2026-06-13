@@ -359,6 +359,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5 security invariants
 - `SECRETS_AND_SEEDS_STANDARD.md` — Seed and credential management
 - `BTSP_PROTOCOL_STANDARD.md` — BearDog Trust Security Protocol
+- `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md` — Transport signal routing (riboCipher): intentional first-byte signaling replaces peek-and-guess. Three tiers: clear/mito/nuclear. BTSP rides on top as protocol type 0x02/0x03/0x05.
 
 ### GPU & Numerical Computing
 - `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — Cross-primal sovereign compute guidance

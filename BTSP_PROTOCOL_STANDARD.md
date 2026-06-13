@@ -5,7 +5,12 @@
 **Status:** Active — all primals MUST implement when `FAMILY_ID` is set
 **Authority:** wateringHole (ecoPrimals Core Standards)
 **Derived from:** Secure Socket Architecture plan (primalSpring Phase 26)
-**Related:** `PRIMAL_IPC_PROTOCOL.md`, `PRIMAL_SELF_KNOWLEDGE_STANDARD.md`, `CAPABILITY_WIRE_STANDARD.md`
+**Related:** `PRIMAL_IPC_PROTOCOL.md`, `PRIMAL_SELF_KNOWLEDGE_STANDARD.md`, `CAPABILITY_WIRE_STANDARD.md`, `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md`
+
+> **Note (Wave 111):** BTSP is now signaled via riboCipher transport routing.
+> A riboCipher signal byte (0xEC/0xED/0xEE) precedes the BTSP handshake on the wire.
+> BTSP protocol types within riboCipher: 0x02 (binary), 0x03 (JSON-line), 0x05 (encrypted resume).
+> See `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md` for the routing layer specification.
 
 ---
 
