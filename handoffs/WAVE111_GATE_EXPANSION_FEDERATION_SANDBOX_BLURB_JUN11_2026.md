@@ -1,6 +1,6 @@
 # Wave 111 — Remaining Work
 
-**Date**: 2026-06-12 (scoped to outstanding items only)  
+**Date**: 2026-06-13 (scoped to outstanding items only)  
 **From**: eastGate overwatch (cellMembrane)  
 **FRAGO**: `impulses/active/2026-06-11T21-30_eastGate__wave111-gate-expansion-federation-sandbox.toml`
 
@@ -11,9 +11,12 @@
 - Protocol convergence: 13/13 HEALTH, 6/6 startup, guideStone COMPLETE
 - Stream 6 Divergence: **14/16 shipped** — remaining 2 blocked on hardware
 - Federation: VALIDATED (64ms RTT, triad deployed, auto-reconnect proven)
-- Pipeline: P1 automation SHIPPED (freshness auto-publish + VPS auto-rebuild live)
-- strandGate: LIVE (265/282 validation, 0 regressions, 17 pre-existing categorized)
+- Pipeline: P1 automation SHIPPED (freshness auto-publish + VPS auto-rebuild + race fix)
+- **ironGate NUCLEUS DEPLOYED**: 13/13 via systemd, benchScale validated (Docker→VM→prod)
+- **GATE_NUCLEUS_SYSTEMD_STANDARD**: Ecosystem standard published
+- strandGate: LIVE (265/282 validation, 0 regressions)
 - Bash fallback: REMOVED, gate.provision SHIPPED, sandbox/canary SHIPPED
+- Freshness race fix: wave-ID guard prevents stale overwrites (`082d77c`)
 
 **All AARs archived**: `handoffs/archive/wave111/`
 
@@ -25,9 +28,9 @@
 
 | Item | Priority | Notes |
 |------|----------|-------|
-| **ironGate binary rebuild** | P1 | `cargo install --path crates/membrane-shadow` — activates diesel engine locally |
-| **Dev gate cascade** | P2 | `temporal.cascade --with-restart` on eastGate/ironGate/southGate |
-| **VPS depot integrity** | P2 | biomeOS hash mismatch — auto-rebuild should self-heal next cycle |
+| **VPS cellMembrane rebuild** | P1 | Deploy `082d77c` to VPS — fixes freshness wave-ID + race condition |
+| **VPS `plasmid.harvest --all`** | P1 | biomeOS hash mismatch — depot integrity. Auto-rebuild should self-heal after VPS update |
+| **Dev gate cascade** | P2 | `temporal.cascade --with-restart` on eastGate/southGate (ironGate already deployed) |
 | **westGate gate.bootstrap** | P2 | Nest Atomic profile on 76TB ZFS |
 | **NUC canary bootstrap** | P2 | `canary-fieldmouse` profile — Phase 1 VPS minimization |
 | **Tolerances in deployment.toml** | P3 | 4 named tolerances pending codification |
@@ -80,8 +83,9 @@ Blocks autonomous `gate.bootstrap` for compute gates. Diesel engine ignition pha
 
 | Gate | Status | Next Action |
 |------|--------|-------------|
-| **flockGate** (WAN) | VALIDATED, triad deployed | VPS auto-rebuild fixes biomeOS hash → persistent relay |
-| **eastGate/ironGate/southGate** (LAN) | 13/13 healthy | ironGate binary rebuild + cascade all |
+| **ironGate** (workstation) | ✅ NUCLEUS DEPLOYED (13/13 systemd) | VPS rebuild for cascade integration |
+| **flockGate** (WAN) | VALIDATED, triad deployed | VPS depot rebuild → persistent relay |
+| **eastGate/southGate** (LAN) | 13/13 healthy | `temporal.cascade --with-restart` |
 | **grapheneGate** (ARM) | Stale binaries | `temporal.cascade --with-restart` |
 | **strandGate** (compute) | LIVE (265/282) | TOADSTOOL-AUTO-REGISTER only |
 | **westGate** (storage) | PENDING | Hardware power-on → gate.bootstrap |
@@ -97,23 +101,23 @@ Old patterns permanently excised when ALL criteria GREEN:
 
 | # | Criterion | State |
 |---|-----------|-------|
-| 1 | All gates run post-e230e10 membrane | ⚠️ ironGate binary older |
-| 2 | Depot fully fresh (all 13 BLAKE3 match) | ⚠️ biomeOS stale — auto-rebuild pending |
+| 1 | All gates run post-e230e10 membrane | ⚠️ ironGate DEPLOYED, eastGate/southGate pending cascade |
+| 2 | Depot fully fresh (all 13 BLAKE3 match) | ⚠️ biomeOS stale — VPS auto-rebuild pending |
 | 3 | flockGate persistent relay active | ⚠️ needs VPS songBird rebuild |
-| 4 | No gate uses bash fallback | ✅ CODE DONE — binary rollout pending |
+| 4 | No gate uses bash fallback | ✅ CODE DONE — ironGate systemd deployed |
 | 5 | canary.audit passes on canary node | ❌ NUC bootstrap pending |
 | 6 | 2 full cascade cycles, zero intervention | ❌ Not yet tested |
 | 7 | Version skew = 0 after cascade | ❌ Not yet tested |
 
-**To clear**: ironGate rebuild → VPS harvest cycle → full cascade → NUC bootstrap.
+**To clear**: VPS rebuild (`082d77c`) → harvest cycle → cascade eastGate/southGate → NUC bootstrap.
 
 ---
 
 ## Priority Order (What to Do Next)
 
-1. **ironGate**: `cargo install --path crates/membrane-shadow` (5 min, unblocks criteria 1+4)
-2. **Wait**: VPS auto-rebuild cycle fixes depot integrity (criteria 2+3)
-3. **All gates**: `membrane temporal.cascade --with-restart` (begins criteria 6+7)
+1. **VPS**: Rebuild cellMembrane to `082d77c` (fixes race condition + freshness wave-ID)
+2. **VPS**: `plasmid.harvest --all` (fixes biomeOS hash mismatch, rebuilds songBird)
+3. **eastGate/southGate**: `membrane temporal.cascade --with-restart` (criteria 6+7)
 4. **NUC**: `gate.bootstrap` with `canary-fieldmouse` profile (criteria 5)
 5. **westGate**: Hardware power-on + gate.bootstrap (gate expansion)
 6. **toadStool**: TOADSTOOL-AUTO-REGISTER (compute gate autonomy)
@@ -126,10 +130,12 @@ Old patterns permanently excised when ALL criteria GREEN:
 |----------|---------|
 | This blurb | Remaining work overview |
 | `impulses/active/...wave111...toml` | Wave 111 FRAGO (14/16 Stream 6) |
+| `GATE_NUCLEUS_SYSTEMD_STANDARD.md` | **NEW** — systemd deployment standard |
+| `BENCHSCALE_NUCLEUS_VALIDATION_IRONGATE_DEPLOY_JUN12_2026.md` | **NEW** — ironGate deploy handoff |
 | `CONVERGENCE_GATE_WAVE111_PATTERN_DEPRECATION_JUN12_2026.md` | Pattern deprecation criteria |
 | `AAR_PIPELINE_ADHOC_PATTERNS_WAVE111_JUN12_2026.md` | Pipeline automation roadmap |
 | `VPS_SURFACE_MINIMIZATION_EVOLUTION_JUN12_2026.md` | VPS sovereignty path |
 
 ---
 
-**Wave 111 is code-complete. Remaining work: binary rollout (rebuild + cascade), hardware enrollment (westGate, NUCs), VPS depot self-heal (auto-rebuild live), and one evolution item (TOADSTOOL-AUTO-REGISTER). The system is converging toward full self-healing autonomy.**
+**Wave 111 is code-complete. ironGate NUCLEUS deployed (systemd standard established). Remaining: VPS rebuild for race fix + depot integrity, cascade to remaining dev gates, hardware enrollment (westGate, NUCs), and TOADSTOOL-AUTO-REGISTER. The ecosystem is self-deploying.**
