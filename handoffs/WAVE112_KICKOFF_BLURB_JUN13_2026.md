@@ -23,30 +23,30 @@ Wave 112 shifts from code delivery to operational validation. The code is done �
 
 **Wave 112 policy**: Unsignalled connections produce **ERROR** logs (was WARN in 111).
 
-**SHIPPED (6/8):**
-- cellMembrane: `922eb24` ✅
+**✅ 8/8 COMPLETE** — All primals at ERROR level for unsignalled connections:
+- cellMembrane: `922eb24→54eee01` ✅
 - bearDog: `cdcdff56f` ✅
 - songBird: `acf20b6e` ✅
-- strandGate/hotSpring: ✅ (acknowledged)
+- strandGate/hotSpring: ✅
 - sourDough: `28c0636` ✅
-- primalSpring: N/A (no accept loop, hard-asserts signal) ✅
-
-**PENDING (2/8):**
-- **sweetGrass**: Currently at WARN in peek.rs — needs one-line escalation to ERROR
-- **biomeOS**: Currently at DEBUG in neural_api_server/connection.rs — needs escalation to ERROR
+- primalSpring: N/A (hard-asserts signal) ✅
+- sweetGrass: `3ddefbe` ✅ (just shipped)
+- biomeOS: `b8596973` (v4.27) ✅ (just shipped)
 
 No connections are rejected yet (that's Wave 113). The ERROR logs surface any remaining unsignalled callers.
 
 ### 2. VPS Rebuild (cellMembrane — P1)
 
-Deploy `922eb24` (latest) to VPS. This:
+Deploy `54eee01` (latest) to VPS. This:
 - Stops junk Wave 109 auto-publish commits (race-condition fix from 082d77c)
 - Enables riboCipher mito-tier + WARN→ERROR on WAN connections
-- Includes health probe fix + plasmidBin resolution
+- Health probe fix + plasmidBin resolution
+- UDS probe riboCipher fallback for transitional deploys (gates running old binaries)
+- Sovereignty + mesh probes use standard socket resolution
 - Triggers depot harvest cycle (fixes BLAKE3 mismatches)
 - Unblocks cascade automation testing
 
-**Status**: cellMembrane code shipped (`922eb24`). VPS deployment pending ops execution.
+**Status**: cellMembrane code shipped (`54eee01`). VPS deployment pending ops execution.
 
 ### 3. Cascade Validation (cellMembrane — P2)
 
@@ -78,10 +78,10 @@ Blocks autonomous `gate.bootstrap` for compute gates.
 
 Wave 112 closes when:
 
-1. ⬜ VPS rebuilt to `922eb24` (ops)
+1. ⬜ VPS rebuilt to `54eee01` (ops — cellMembrane latest)
 2. ⬜ 2 cascade cycles, zero intervention (Convergence Gate criterion 6)
 3. ⬜ Version skew = 0 after cascade (criterion 7)
-4. ⚠️ riboCipher ERROR logs: 6/8 shipped, sweetGrass + biomeOS pending
+4. ✅ riboCipher ERROR logs: **8/8 COMPLETE** — all primals at ERROR
 5. ⬜ At least 1 new hardware gate enrolled (westGate or NUC)
 
 ---
@@ -90,10 +90,9 @@ Wave 112 closes when:
 
 | Team | Wave 112 Work | Priority | Status |
 |------|---------------|----------|--------|
-| **cellMembrane** | VPS deploy 922eb24 → cascade validation → NUC bootstrap | P1 | Code shipped, ops pending |
-| **sweetGrass** | riboCipher WARN→ERROR (one-line in peek.rs) | P2 | PENDING |
-| **biomeOS** | riboCipher DEBUG→ERROR (connection.rs) | P2 | PENDING |
-| **sourDough** | validate ribocipher + scaffold update | P2 | PENDING |
+| **cellMembrane** | VPS deploy `54eee01` → cascade validation → NUC bootstrap | P1 | Code shipped, ops pending |
+| **ALL TEAMS** | riboCipher WARN→ERROR | P2 | ✅ 8/8 COMPLETE |
+| **sourDough** | validate ribocipher + scaffold update + forgejo fix | P2 | PENDING |
 | **toadStool** | TOADSTOOL-AUTO-REGISTER | P2 | PENDING |
 | **ops** | westGate + NUC + Pixle enrollment | P2 | PENDING |
 | **primalSpring** | Proto-nucleate manifest (sub-NUCLEUS topologies) | P3 | PENDING |
@@ -104,9 +103,9 @@ Wave 112 closes when:
 
 | Document | Status |
 |----------|--------|
-| `CONVERGENCE_GATE_WAVE111_PATTERN_DEPRECATION_JUN12_2026.md` | Active — 2/8 GREEN (4+8), 6 pending ops |
+| `CONVERGENCE_GATE_WAVE111_PATTERN_DEPRECATION_JUN12_2026.md` | Active — 3/8 GREEN (4+8+riboCipher ERROR), 5 pending ops |
 | `VPS_SURFACE_MINIMIZATION_EVOLUTION_JUN12_2026.md` | Active — Phase 1 (NUC replaces droplet) |
-| `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md` | Standard — 9/9 converged, 6/8 at ERROR |
+| `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md` | Standard — 9/9 converged, **8/8 at ERROR** |
 | `GATE_NUCLEUS_SYSTEMD_STANDARD.md` | Standard — deployed on ironGate |
 
 ---

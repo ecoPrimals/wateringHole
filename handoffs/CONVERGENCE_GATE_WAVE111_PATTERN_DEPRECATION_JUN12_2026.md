@@ -3,7 +3,7 @@
 **Date**: 2026-06-12  
 **From**: eastGate overwatch  
 **Purpose**: Define the conditions under which old patterns are permanently deprecated  
-**Status**: WATCHING — Criterion 4+8 GREEN, Criterion 1 advancing (922eb24 shipped, VPS rebuild in progress), 5 pending operational
+**Status**: WATCHING — Criterion 4+8 GREEN, riboCipher ERROR 8/8 complete. Criterion 1 advancing (54eee01 shipped, VPS deploy pending). 5 pending operational.
 
 ---
 
@@ -20,7 +20,7 @@ code, docs, and runbooks permanently.
 
 | # | Criterion | Condition | State | Blocked By |
 |---|-----------|-----------|-------|-----------|
-| 1 | **All gates run post-34e472d membrane** | `membrane --version` ≥ Wave 111 (riboCipher mito-tier) on all 5 active gates | ⚠️ PARTIAL | ironGate DEPLOYED (systemd, 13/13). cellMembrane at 922eb24 (W112 WARN→ERROR + health fix). eastGate/southGate pending cascade. |
+| 1 | **All gates run post-34e472d membrane** | `membrane --version` ≥ Wave 111 (riboCipher mito-tier) on all 5 active gates | ⚠️ PARTIAL | ironGate DEPLOYED (systemd, 13/13). cellMembrane at `54eee01` (W112: ERROR + health fix + UDS probe fallback). VPS + dev gates pending cascade. |
 | 2 | **Depot includes partition-tolerant songBird** | provenance.toml → songBird ≥ 9903cf50 | ⚠️ PARTIAL | Depot rebuilt to 3fc94365 (federation fix). Partition tolerance (9903cf50) still needs harvest. |
 | 3 | **flockGate WAN federation validated** | `federation.status` → active_connections > 0, latency_ms present | ⚠️ PARTIAL | 64ms RTT validated, enabled=true. Persistent relay pending (active_connections=0 until VPS songBird rebuilds to fe47c012). |
 | 4 | **No gate uses bash fallback paths** | Code removed (gate/mod.rs e230e10) + binaries updated | ✅ GREEN (ironGate) | ironGate systemd NUCLEUS has no bash path. Cascade propagates to others. |

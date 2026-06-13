@@ -27,7 +27,7 @@ Wave 111 scales this to new topology and completes the last operational gaps.
 health = "13/13 GRADUATED"
 startup = "6/6 COMPLETE"
 depot = "FRESH — all 13 from HEAD (44fd18d, 2026-06-12T12:37:00Z). songBird in depot is 32a8d700, needs rebuild for partition tolerance (9903cf50)."
-membrane_parity = "11/12 repos at parity (origin = forgejo = local) as of 2026-06-13. Exception: sourDough forgejo (HTTP 500 persists)."
+membrane_parity = "12/12 repos at parity (origin = forgejo = local) as of 2026-06-13 — exception: sourDough forgejo (HTTP 500). wateringHole forgejo stale junk pruned with --force-with-lease."
 sandbox = "SHIPPED — plasmid.sandbox + plasmid.canary CLI ready"
 provision = "SHIPPED (e230e10) — gate.provision (DO API), gate.provision.status, gate.provision.destroy. canary-fieldmouse profile defined."
 gates_active = "eastGate, golgiBody, ironGate, southGate, grapheneGate (5-gate mesh)"
@@ -44,8 +44,8 @@ strandgate_live = "strandGate LIVE — riboCipher ERROR escalation shipped (Wave
 pipeline_evolution = """✅ SHIPPED: freshness auto-publish (1baa2ec) + VPS auto-rebuild + race-condition fix (082d77c).
 Race fix: wave-ID guard + rebase-before-push prevents stale Wave 109 overwrites.
 Forgejo cleaned (19 stale auto-publish commits force-pruned, --force-with-lease)."""
-depot_action_needed = "VPS deploy 922eb24 → plasmid.harvest --all. cellMembrane W112 code shipped (health probe fix + plasmidBin resolution) but not yet deployed to VPS. Auto-rebuild enabled; once VPS updated, depot converges."
-freshness_wave_id = "freshness.toml shows wave=112 (manually set Jun 13). Short hashes (7-8 char) persist for 5 repos (bearDog, cellMembrane, primalSpring, sourDough, wateringHole) — auto-publish uses `rev-parse --short`. VPS rebuild to 922eb24 needed for full-SHA propagation."
+depot_action_needed = "VPS deploy 54eee01 → plasmid.harvest --all. cellMembrane W112 code shipped (health probe fix + plasmidBin resolution + UDS fallback) but not yet deployed to VPS. Auto-rebuild enabled; once VPS updated, depot converges."
+freshness_wave_id = "freshness.toml shows wave=112 (Jun 13). Full 40-char SHAs restored (d105e54 fixed short-hash issue). s_ecosystem_freshness test now passes (929 tests green)."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Gate Expansion — Priority Order
@@ -450,14 +450,14 @@ songbird_federation_mito = "songBird: send mito-obfuscated signal (0xED) for cro
 songbird_status = "✅ SHIPPED (053163f3→677ec343→acf20b6e): all 3 accept loops + ribocipher module (W111). WARN→ERROR escalation shipped (W112)."
 biomeos_api = "biomeOS: implement riboCipher detection in biomeos-api unix_server.rs (replaces {/[ vs HTTP guess)"
 biomeos_neural = "biomeOS: implement riboCipher detection in neural_api_server/connection.rs"
-biomeos_status = "✅ SHIPPED v4.27 (b8596973): detection v4.26, ERROR escalation v4.27 (Wave 112). REJECT at wave 113."
+biomeos_status = "✅ SHIPPED (v4.26→v4.27→b8596973): consume_ribocipher_signal() UDS+TCP (W111). WARN→ERROR escalation shipped (W112)."
 sweetgrass_reference = "sweetGrass: update peek.rs as reference implementation — riboCipher first, legacy fallback second"
-sweetgrass_status = "✅ SHIPPED v0.7.57: riboCipher reference in peek.rs, 1647 tests (W111). WARN→ERROR escalation PENDING (W112)."
+sweetgrass_status = "✅ SHIPPED (v0.7.57→3ddefbe): riboCipher reference in peek.rs (W111). WARN→ERROR escalation shipped (W112)."
 primalspring_harness = "primalSpring: update nucleus_launcher and harness IPC to send clear signal"
 primalspring_status = "✅ SHIPPED (93207ac→44469a9→92fcd13): clear signal on all IPC, port registry dedup, clippy cleanup (W111-112). No accept loop → WARN→ERROR N/A (already hard-asserts)."
 cellmembrane_health = "cellMembrane: update uds_jsonrpc_call() to prepend [0xEC, 0x01] before JSON payload"
 cellmembrane_config = "cellMembrane: add [transport.ribocipher] section to membrane.toml with unsignalled_policy=warn"
-cellmembrane_status = "✅ SHIPPED (35ad803→922eb24): mito-tier HKDF+HMAC, clear on 6 UDS clients, config, dispatch SRP (W111). WARN→ERROR + health probe fix + plasmidBin resolution (W112)."
+cellmembrane_status = "✅ SHIPPED (35ad803→922eb24→54eee01): mito-tier HKDF+HMAC, clear on 6 UDS clients, config, dispatch SRP (W111). WARN→ERROR + health probe fix + plasmidBin resolution + UDS probe fallback for transitional deploys (W112)."
 
 # ──────────────────────────────────────────────────────────────
 # SUCCESS CRITERIA
@@ -480,7 +480,7 @@ extended = [
     "nucleus_launcher aarch64 cross-compiled",
     "primalSpring: s_version_skew_detection scenario shipping",
     "biomeOS: stale registration pruning demonstrated",
-    "riboCipher: 9/9 primals SHIPPED — full ecosystem convergence achieved Wave 111. Deprecation clock starts.",
+    "riboCipher: 9/9 SHIPPED (W111) + 8/8 WARN→ERROR escalation COMPLETE (W112). Wave 113: REJECT. Wave 114: REMOVE.",
 ]
 last = [
     "northGate NUCLEUS 13/13 — family gate, spare compute when not in use",
