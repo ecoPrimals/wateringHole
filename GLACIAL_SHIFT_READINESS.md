@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-13 (Wave 111 — **riboCipher 9/9 FULL CONVERGENCE.** All primals signal transport intent; peek-and-guess deprecated. Deprecation: WARN(111)→ERROR(112)→REJECT(113)→REMOVE(114). **guideStone deployment convergence COMPLETE.** HEALTH-01 **13/13 GRADUATED.** Startup contract **6/6 COMPLETE.** Cross-topology COMPLETE: LAN (5 gates), WAN (flockGate validated 64ms RTT), ARM (grapheneGate 13/13), VPS (golgiBody 13/13). **5-gate ecosystem LIVE.** Stream 6 divergence: 14/16 shipped. ironGate NUCLEUS DEPLOYED (13/13 systemd). cellMembrane `34e472d`: riboCipher mito-tier. bearDog `123e318`: riboCipher server+client. sourDough `1f68f64`: reference impl. Criterion 7 COMPLETE. FRAGO: `wave111-gate-expansion-federation-sandbox`.)
+**Last updated**: 2026-06-14 (Wave 113 — **riboCipher REJECT enforced.** Unsignalled connections dropped on neural-api + biomeos-api sockets. Schedule: WARN(111)→ERROR(112)→**REJECT(113)**→REMOVE(114). **Primal auto-registration SHIPPED.** NUCLEUS post-boot topology.rescan bridges NeuralRouter gap — capability.call routing operational. biomeOS v4.28 (`b10ad05f`). 4/6 exit criteria met.)
 
 ---
 

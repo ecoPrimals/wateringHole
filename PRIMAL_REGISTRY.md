@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 11, 2026 (Wave 109 — guideStone deployment convergence. 13/13 primals CLEAN, 5-gate mesh LIVE, startup contract 5/6, HEALTH-01 10/13. biomeOS v4.22, sweetGrass v0.7.56, barraCuda v0.4.0, skunkBat v0.2.10, rhizoCrypt v0.14.7, loamSpine v0.9.16. grapheneGate 13/13 deployed. Criterion 7 convergence in progress.)
+**Last Updated**: June 14, 2026 (Wave 113 — riboCipher REJECT shipped + primal auto-registration. biomeOS v4.28, riboCipher REJECT enforced on all sockets, NUCLEUS topology.rescan bridges NeuralRouter registration gap.)
 
 ---
 
@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v4.22  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983+ tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. guideStone startup contract SHIPPED (Wave 109, `--bind-mode` + HEALTH-01). NUCLEUS supervision SHIPPED (v4.17). TCP-only fallback SHIPPED + ALL ADOPTED. `primal.announce` self-registration. Zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
+**Version**: v4.28  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983+ tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. guideStone startup contract SHIPPED (Wave 109, `--bind-mode` + HEALTH-01). NUCLEUS supervision SHIPPED (v4.17). TCP-only fallback SHIPPED + ALL ADOPTED. `primal.announce` self-registration. Zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps. riboCipher REJECT enforced (Wave 113). Post-boot topology.rescan for NeuralRouter auto-registration.
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
