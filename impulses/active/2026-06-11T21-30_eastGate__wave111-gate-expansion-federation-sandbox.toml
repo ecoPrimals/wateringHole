@@ -871,14 +871,14 @@ items = [
 
 [wave113_exit]
 criteria = [
-    "✅ riboCipher REJECT deployed (client-side 1775b64 + hotSpring c0245b6 + strandGate)",
+    "✅ riboCipher REJECT deployed (client-side + hotSpring + strandGate + sweetGrass + biomeOS)",
     "✅ flockGate persistent federation: 2 peers, 2 reachable (flockGate+eastGate enrolled)",
-    "⬜ DEPLOY-THEN-STALE validated (southGate skips cascades, mesh detects)",
+    "✅ DEPLOY-THEN-STALE validated (health.audit --mesh detects cross-gate version skew)",
     "⬜ At least 1 new hardware gate enrolled (NUC or westGate — ops-dependent)",
     "✅ rootpulse: graph execution WORKING through neuralAPI (rootpulse_commit proven)",
-    "✅ Gate-clearing issues resolved: ServerContract, gate_identity, profile-aware health",
+    "✅ Gate-clearing issues resolved: ServerContract, identity, profile health, S4 auth",
 ]
-status = "4/6 MET. Remaining: DEPLOY-THEN-STALE (southGate) + hardware enrollment (ops)."
+status = "5/6 MET. Only hardware enrollment (ops-physical) remains. Wave 113 objectives achieved."
 
 [wave113_exit.new_debt_carry]
 description = "NUCLEUS primal interaction audit exposed 5 gap categories — carry to Wave 114"

@@ -1,21 +1,17 @@
 # Wave 113 — Active Tasks
 
-**Status**: 4/6 exit criteria met | **Remaining**: STALE sim + hardware  
-**New priority**: NUCLEUS primal interaction quality (5 gap categories from VPS audit)
+**Status**: 5/6 exit criteria met | VPS FULL GREEN (8/8) | **Only hardware enrollment remains**  
+**Primal compliance**: riboCipher acceptance evolving (nestGate, biomeOS, sweetGrass shipped this wave)  
+**Convergence**: DEPLOY-THEN-STALE proven, federation persistent, rootpulse operational
 
 ---
 
-## cellMembrane / ironGate — P1
+## cellMembrane / ironGate — P2 (most P1 work DONE)
 
-**Remaining membrane tasks:**
-- Probe biomeOS on `neural-api.sock` (not `biomeos.sock`)
-- Accept `-32601` (method_not_found) as "alive" in S4 probe
-- Remove `membrane-bridge-biomeos` (deprecated socat pattern)
-- `plasmid.harvest --targets beardog,songbird,skunkbat --arch aarch64` from HEAD
-- Route depot rebuilds through neuralAPI graph (pepti orchestration)
-
-**southGate task (owns):**
-- DEPLOY-THEN-STALE: Skip 1-2 cascade cycles on southGate, verify `health.audit --mesh` detects skew
+| Task | Notes |
+|------|-------|
+| aarch64 depot harvest | `plasmid.harvest --targets beardog,songbird,skunkbat --arch aarch64` from HEAD — unblocks grapheneGate |
+| Pepti build orchestration | Route depot rebuilds through neuralAPI graph |
 
 ---
 
@@ -25,62 +21,76 @@
 - [ ] Implement `health` JSON-RPC method → `{status, primal: "beardog", version}`
 - [ ] Expose plaintext health socket (`--health-socket` or `beardog-default.sock`)
 
-BTSP-locked main socket blocks plain JSON-RPC probes. cellMembrane can't health-check without BTSP handshake.
+Main socket BTSP-locked. cellMembrane recognizes BTSP error as "alive + enforcing" (S4 workaround), but proper plaintext endpoint still needed.
 
 ---
 
-## songBird — P1
+## songBird — MOSTLY DONE
 
-- [ ] Accept riboCipher `[0xEC, 0x01]` prefix on UDS
-- [ ] Send riboCipher signal on federation TCP outbound (:7700)
-- [ ] Fix self-connect loop (VPS reconnects to own :7700 every 30s)
-- [ ] Add `--state-dir` / `SONGBIRD_STATE_DIR` for PID/state placement (GrapheneOS read-only FS)
+✅ Outbound riboCipher signalling (`4169c47a`)  
+✅ Self-connect fix  
+✅ `--state-dir` / `SONGBIRD_STATE_DIR`
+
+Remaining:
+- [ ] Accept riboCipher prefix on UDS (inbound — currently only outbound TCP is signalled)
 
 ---
 
 ## toadStool — P1
 
-- [ ] Fix silent socket (accepts connection, produces no response — protocol violation)
+- [ ] Fix silent socket (accepts connection, produces no response)
 - [ ] Accept riboCipher prefix
 - [ ] Implement `health` method
 
 ---
 
-## biomeOS — P1
+## biomeOS — MOSTLY DONE
 
-- [ ] Accept riboCipher prefix on `neural-api.sock` (currently returns HTTP 400)
-- [ ] Implement primal auto-registration so `capability.call` routing works (0 registered currently)
-- [ ] Transition from Bootstrap mode to operational orchestration
+✅ riboCipher REJECT (`b10ad05f`)  
+✅ Auto-registration (`topology.rescan`)
 
-neuralAPI is live, graph execution works (rootpulse proven), but 0 primals registered = hollow orchestration layer.
-
----
-
-## skunkBat, loamSpine, coralReef, squirrel — P2
-
-- [ ] Implement `health` JSON-RPC method (currently -32601 method_not_found)
-- [ ] Accept riboCipher `[0xEC, 0x01]` prefix
+Remaining:
+- [ ] Complete primal discovery in operational mode (currently Bootstrap → needs rescan trigger)
 
 ---
 
-## nestGate, sweetGrass, rhizoCrypt, barracuda, petalTongue — P2
+## nestGate — DONE
 
-- [ ] Accept riboCipher prefix (currently reject/timeout)
+✅ riboCipher signal acceptance on all handlers (`17baed59`)
 
-Already respond to raw JSON-RPC health — just need signal acceptance.
+---
+
+## sweetGrass — DONE
+
+✅ v0.7.58 riboCipher REJECT
 
 ---
 
 ## hotSpring / strandGate — DONE
 
-riboCipher REJECT shipped. Legacy removed. No remaining Wave 113 tasks.
+✅ riboCipher REJECT shipped. Legacy removed.
+
+---
+
+## skunkBat, loamSpine, coralReef, squirrel — P2
+
+- [ ] Implement `health` JSON-RPC method (currently -32601)
+- [ ] Accept riboCipher prefix
+
+---
+
+## rhizoCrypt, barracuda, petalTongue — P2
+
+- [ ] Accept riboCipher prefix (currently reject/timeout)
+
+Already respond to raw health — just need signal acceptance.
 
 ---
 
 ## grapheneGate — P3
 
 - Cross-arch deploy blocked until aarch64 depot harvested
-- songBird `--state-dir` needed for GrapheneOS
+- songBird `--state-dir` ✅ shipped — can test once depot fresh
 
 ---
 
@@ -89,18 +99,18 @@ riboCipher REJECT shipped. Legacy removed. No remaining Wave 113 tasks.
 - NUC: placement, power, network cable
 - westGate: power on (i7-4771 + 76TB ZFS)
 
-Once networked → cellMembrane `gate.bootstrap`.
+Once networked → cellMembrane `gate.bootstrap`. This is the only remaining exit criterion.
 
 ---
 
-## guideStone Amendments Needed
+## guideStone Amendments (in progress)
 
-| Amendment | Scope |
-|-----------|-------|
-| `health` method MANDATORY for all primals | `{status, primal, version}` minimum |
-| riboCipher signal handling MANDATORY on UDS | Accept `[0xEC, 0x01]` prefix, ignore, parse JSON |
-| Socket manifest per primal | Document all exposed sockets and purposes |
-| neuralAPI capability registration | Standard for primals to register with orchestration |
+| Amendment | Status |
+|-----------|--------|
+| `health` method MANDATORY | sporePrint validation shipped (`nucleus --probe`) |
+| riboCipher signal MANDATORY on UDS | nestGate, biomeOS, sweetGrass compliant. Others in progress. |
+| Socket manifest per primal | Documented in NUCLEUS audit AAR |
+| neuralAPI capability registration | biomeOS auto-registration shipped |
 
 ---
 
@@ -110,9 +120,9 @@ Once networked → cellMembrane `gate.bootstrap`.
 |---|-----------|--------|
 | 1 | riboCipher REJECT | ✅ |
 | 2 | Persistent federation | ✅ |
-| 3 | DEPLOY-THEN-STALE | ⬜ southGate |
+| 3 | DEPLOY-THEN-STALE | ✅ |
 | 4 | Hardware enrollment | ⬜ ops |
-| 5 | rootpulse graph execution | ✅ |
+| 5 | rootpulse execution | ✅ |
 | 6 | Gate-clearing issues | ✅ |
 
-**4/6. Close when southGate STALE sim validated + any hardware gate bootstrapped.**
+**5/6. Wave 113 closes when any hardware gate bootstrapped (ops-dependent).**
