@@ -17,7 +17,7 @@ publisher = "membrane"
 [heads]
 barraCuda = "5f0e55e554d29d73c54255c0ade6d819dd83fbb9"
 bearDog = "cdcdff56f9af6b1c20d004c49437e8b05819089c"
-biomeOS = "c8f4f020482e92f98af838b9dfbaf9057ca96c70"
+biomeOS = "bcf506b7eb991d613444321176dd65d072639acd"
 cellMembrane = "0a03160986b005d7e8e7d9eae3828100c16535d5"
 coralReef = "7bc90e535ff746490a519510acf1a80ce53cb604"
 esotericWebb = "2593302fb42627c1191a697058b75895230d395a"
