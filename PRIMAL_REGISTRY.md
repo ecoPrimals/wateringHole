@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 13, 2026 (Wave 112 — biomeOS v4.27, riboCipher deprecation escalation WARN→ERROR.)
+**Last Updated**: June 11, 2026 (Wave 109 — guideStone deployment convergence. 13/13 primals CLEAN, 5-gate mesh LIVE, startup contract 5/6, HEALTH-01 10/13. biomeOS v4.22, sweetGrass v0.7.56, barraCuda v0.4.0, skunkBat v0.2.10, rhizoCrypt v0.14.7, loamSpine v0.9.16. grapheneGate 13/13 deployed. Criterion 7 convergence in progress.)
 
 ---
 
@@ -162,7 +162,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Pure mathematics — WGSL shaders, precision strategy, naga IR optimisation  
 **Phase**: Foundation  
-**Status**: Production Ready (A+) — v0.3.5 — 3,348+ tests, 803 WGSL shaders, 1,060+ Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, NVVM device poisoning guard (all proprietary NVIDIA architectures), DF64 safety probing (`df64_arith`, `df64_transcendentals_safe`), `NvvmDf64TranscendentalPoisoning` workaround, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin), FMA policy, health module (pkpd, microbiome, biosignal), stable GPU special functions; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`
+**Status**: Production Ready (A+) — v0.4.0 — 3,348+ tests, 803 WGSL shaders, 1,060+ Rust source files, zero unsafe, zero clippy warnings, AGPL-3.0-only, NVVM device poisoning guard (all proprietary NVIDIA architectures), DF64 safety probing (`df64_arith`, `df64_transcendentals_safe`), `NvvmDf64TranscendentalPoisoning` workaround, all env-configurable timeouts, idiomatic iterators, let-else patterns, capability-based discovery (zero hardcoded primal names), `split_at_mut` zero-copy LSTM, clean 3-tier precision model (F32/F64/Df64) aligned with coralReef `Fp64Strategy`, `CompileWgslRequest.fp64_strategy` IPC hint, runtime `shared_mem_f64` probe, `PrecisionRoutingAdvice`, `hill_activation`/`hill_repression` kinetics, f64-native pipeline cache, `bytes::Bytes` zero-copy I/O, thread-local GPU test throttling, `service` subcommand (genomeBin), FMA policy, health module (pkpd, microbiome, biosignal), stable GPU special functions; budded from ToadStool (S93), separate primal at `ecoPrimals/barraCuda/`. **Wave 109**: STARTUP-BC-01 RESOLVED — `--bind-mode / PRIMAL_BIND_MODE` standard envelope, `method.describe` (97 methods)
 
 **Role**: BarraCuda is pure math. All math originates as WGSL shaders authored in f64 as the canonical precision. BarraCuda does not care about hardware — it writes the mathematics, coralReef compiles it, toadStool discovers and dispatches it. The precision tier (`Fp64Strategy`: f32 / f64 / df64) is the interface between barraCuda and coralReef. naga-IR optimisation (FMA fusion, DCE) operates on the math, not the hardware. Currently uses wgpu as a transitional dispatch substrate until coralReef's sovereign dispatch pipeline is integrated.
 
@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v4.27  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 26 workspace crates (all `#![forbid(unsafe_code)]`), 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. guideStone startup contract, HEALTH-01 compliant, **riboCipher transport signal detection** (API + neural-api sockets, WARN phase), **zero `Box<dyn Error>` in production**, **typed `DeploymentMode`/`HealthStatus` enums** (eliminated stringly-typed API), **`NucleusRunConfig` struct** (typed startup config), lineage verification fail-closed, real system metrics via biomeos-system, readiness probe checks actual discovery state, agnostic naming (no primal-specific constants), neural router refactored (mod.rs → registry.rs extraction), stale registration pruning, partition-aware routing, zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
+**Version**: v4.22  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983+ tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. guideStone startup contract SHIPPED (Wave 109, `--bind-mode` + HEALTH-01). NUCLEUS supervision SHIPPED (v4.17). TCP-only fallback SHIPPED + ALL ADOPTED. `primal.announce` self-registration. Zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -228,7 +228,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 | Category | Primitives |
 |----------|-----------|
-| **Neural API** | Semantic routing (`capability.call`), 320+ translations, 27 domains, L4 weighted routing, L5 perceptron shadow, adaptive weights (redb-persistent), utilization tracking, `primal.announce` self-registration, composition patterns |
+| **Neural API** | Semantic routing (`capability.call`), 260+ translations, 19 domains, adaptive routing weights, weight health, utilization tracking, `primal.announce` self-registration, composition patterns |
 | **Atomics** | Tower Atomic, Node Atomic, Nest Atomic, Full NUCLEUS composition |
 | **Provenance** | `rootpulse_commit` graph, `provenance_pipeline` graph, rhizoCrypt/LoamSpine/sweetGrass domains |
 | **Discovery** | Runtime capability matching, primal health monitoring, prefix resolution |
@@ -281,8 +281,8 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
-**Version**: v0.14.9  
-**Status**: Production Ready (1,685 tests, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, `#[forbid(unsafe_code)]` on all crate roots in production, AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (16-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools + `ENV_PREFIX` SSOT, `capability_registry.toml` (27 methods, 8 domains) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types, HEALTH-01 compliant (`{status, primal, version, uptime_s}`), typed `DiscoveryQueryError`, `TransportEndpoint` adopted, `service_vertex_ops`/`service_branch_ops` module extraction)
+**Version**: 0.14.7  
+**Status**: Production Ready (1,412+ tests, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (16-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools, `capability_registry.toml` (27 methods, 8 domains) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types). **Wave 109 gap**: HEALTH-RC-01 — bare `"health"` response needs `primal`, `version`, `uptime_s` fields
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
@@ -307,7 +307,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Semantic provenance and attribution  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.7.38, 37 canonical methods + 10 wire-name aliases, ecoBin compliant, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-only, pedantic+nursery clean, zero unsafe, zero production unwrap, 7 benchmarks, 11 proptest strategies, sovereign types — no shared crates)
+**Status**: Production Ready (v0.7.56, 1,636 tests, 88 BTSP tests, 37 canonical methods + 10 wire-name aliases, ecoBin compliant, redb default, parking_lot locks, Edition 2024, MSRV 1.87, AGPL-3.0-only, pedantic+nursery clean, zero unsafe, zero production unwrap, 7 benchmarks, 11 proptest strategies, sovereign types — no shared crates). **Wave 109**: HEALTH-01 RESOLVED (bare `"health"` alias + enriched response), BTSP server-side E2E READY (`BEARDOG_SOCKET` resolution)
 
 **Role**: sweetGrass tracks who created what, when, and how. It creates "braids" - content-addressable provenance records compliant with W3C PROV-O - and calculates fair attribution shares across contributors. Privacy controls are built in (GDPR-inspired, 5 levels).
 
@@ -331,7 +331,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Immutable linear ledger for selective permanence  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.9.9, 1,256 tests, 92%+ line / 90%+ region coverage, pure Rust, ecoBin compliant, UniBin, Edition 2024, pedantic+nursery clean, cast lint deny, `#[expect(reason)]` bulk migration, CONTEXT.md per PUBLIC_SURFACE_STANDARD, `capabilities.list` + `health.liveness` + `tools.list` + `tools.call` (MCP) per Semantic Method Naming v2.1, tarpc 0.37 (json transport, bincode path eliminated), `ResilientSyncEngine` (circuit-breaker + retry for federation), `DispatchOutcome`/`IpcErrorPhase`/`StreamItem`/`OrExit`/`extract_rpc_result`/`normalize_method` ecosystem patterns, cargo deny 4/4 clean, provenance trio types inlined (no shared crate), `publish = false` on all workspace crates)
+**Status**: Production Ready (v0.9.16, 1,256+ tests, 92%+ line / 90%+ region coverage, pure Rust, ecoBin compliant, UniBin, Edition 2024, pedantic+nursery clean, cast lint deny, `#[expect(reason)]` bulk migration, CONTEXT.md per PUBLIC_SURFACE_STANDARD, `capabilities.list` + `health.liveness` + `tools.list` + `tools.call` (MCP) per Semantic Method Naming v2.1, tarpc 0.37 (json transport, bincode path eliminated), `ResilientSyncEngine` (circuit-breaker + retry for federation), `DispatchOutcome`/`IpcErrorPhase`/`StreamItem`/`OrExit`/`extract_rpc_result`/`normalize_method` ecosystem patterns, cargo deny 4/4 clean, provenance trio types inlined (no shared crate), `publish = false` on all workspace crates)
 
 **Role**: LoamSpine is the fossil record. Where rhizoCrypt is ephemeral and fast, LoamSpine is permanent and provable. Important events are deliberately committed ("dehydrated") from rhizoCrypt into LoamSpine's append-only ledger. Most data should be temporary; only what matters should be permanent.
 
@@ -353,7 +353,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Defensive network security  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (v0.2.0 — 389 tests, 90%+ coverage, zero debt)
+**Status**: Production Ready (v0.2.10 — 389+ tests, 90%+ coverage, zero debt). **Wave 109**: STARTUP-SB-01 RESOLVED — `--bind-mode` replaces `--no-uds/--no-tcp`, standard primal startup contract
 
 **Role**: skunkBat protects sovereign computing environments through metadata-only defensive reconnaissance. It detects threats, orchestrates graduated responses, and federates threat intelligence across trusted peers — all without inspecting packet contents or tracking user behavior.
 
@@ -432,19 +432,19 @@ BearDog doesn't know Songbird exists. rhizoCrypt doesn't know about LoamSpine. s
 
 These primals validate the ecoPrimals compute pipeline end-to-end by reproducing published science in specific domains. Each Spring follows Paper → Python → Rust (BarraCuda CPU) → GPU (ToadStool shaders) → metalForge (mixed hardware) → biomeOS (NUCLEUS deployment). Springs consume ToadStool/BarraCuda compute and contribute domain-specific fixes, shaders, and absorption candidates back upstream.
 
-**Spring Versions (as of May 27, 2026)**:
+**Spring Versions (as of June 11, 2026 — Wave 109)**:
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S155b (20,843 tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety rename, FirmwareInventory in gpu.info) |
-| hotSpring | v0.6.32 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch) |
+| ToadStool | S279+ (23,000+ tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety, FirmwareInventory, PrecisionBrain, PRIMAL_BIND_MODE adopted) |
+| hotSpring | v0.6.32 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch, guideStone L6 CERTIFIED) |
 | groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
 | wetSpring | V99 |
-| airSpring | v0.7.6 |
-| barraCuda | v0.3.5 (3,348+ tests, 803 shaders, AGPL-3.0-only, health absorption, FMA policy, stable specials) |
-| coralReef | Phase 10 Iteration 59 (3038 tests, 65.8% line / 79.6% non-hw coverage, zero warnings, zero doc warnings, all files <1000 LOC, deep encoder test coverage, clone reduction complete) |
-| primalSpring | v0.9.31 Wave 67 (93 experiments, 21 tracks, 836 tests, 490+ methods, 58 scenarios, 113 graph TOMLs (~80 deploy + 33 compositions), Phase 0 P0 cleared, mesh validation NEXT) |
+| airSpring | v0.10.0 (911 lib + 311 integration + 61 forge tests, 97 binaries, 87 experiments, 14.3× CPU speedup, 10 MCP tools, Edition 2024) |
+| barraCuda | v0.4.0 (3,348+ tests, 803 shaders, AGPL-3.0-only, startup contract SHIPPED, method.describe 97 methods) |
+| coralReef | Phase 10 Iteration 59 (3,304+ tests, startup contract SHIPPED, tarpc skip on tcp_only) |
+| primalSpring | v0.9.31 Wave 109 (93 experiments, 21 tracks, 1,000+ tests, 490+ methods, 55 scenarios, 113 graph TOMLs, PlatformCapabilities::detect() SHIPPED, HEALTH-01 schema SHIPPED) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences

@@ -33,17 +33,19 @@ Everything downstream is blocked until the songBird depot binary is rebuilt from
 
 ## Remaining Work by Team
 
-### cellMembrane / ops — P1
+### cellMembrane (ironGate) — P1
+
+Owns VPS (golgiBody). All VPS operations are cellMembrane/ironGate team scope.
 
 | Task | Detail | Blocked By |
 |------|--------|-----------|
 | **songBird harvest** | `plasmid.harvest --targets songbird` on VPS | — |
 | **VPS cellMembrane update** | Deploy `06f9ad2` (refactored) to VPS | — |
-| **sourDough forgejo fix** | Repo corrupt on Forgejo — needs `gitea admin` or repo recreate | VPS access |
+| **sourDough forgejo fix** | Repo corrupt — `gitea admin repo-sync` or recreate | — |
 | Dev gate cascade | `temporal.cascade --with-restart` on eastGate, southGate | songBird harvest |
 | Mesh enrollment | Configure gates with VPS peer address | songBird harvest |
 | 2 clean cycles | Zero-intervention cascade validation | Cascade + enrollment |
-| NUC canary | `gate.bootstrap` canary-fieldmouse profile | — |
+| NUC canary bootstrap | `gate.bootstrap` canary-fieldmouse profile | — |
 
 ### sourDough — P2
 
@@ -51,27 +53,29 @@ Everything downstream is blocked until the songBird depot binary is rebuilt from
 |------|--------|
 | `validate ribocipher` | Fleet compliance auditing subcommand |
 | Scaffold update | New primals born with riboCipher-compliant accept loops |
-| Forgejo parity | **BLOCKED** — server-side repo corruption (HTTP 500 on push AND read) |
 
-### toadStool — P2
+### toadStool (strandGate) — P2
 
 | Task | Detail |
 |------|--------|
 | **TOADSTOOL-AUTO-REGISTER** | PCI/sysfs enumeration on startup — auto-register GPU/NPU with biomeOS |
 
-### ops (eastGate) — P2
-
-| Task | Detail |
-|------|--------|
-| **westGate** | Power on, network, `gate.bootstrap` (i7-4771 + 76TB ZFS, Nest Atomic) |
-| NUC + Pixle | Linux node enrollments |
-| DEPLOY-THEN-STALE | Stream 6 validation (after westGate enrolled) |
-
-### primalSpring — P3
+### primalSpring (eastGate) — P3
 
 | Task | Detail |
 |------|--------|
 | Proto-nucleate manifest | Sub-NUCLEUS topology definition for partial deployments |
+
+### ops (physical only) — P2
+
+Hardware that requires human hands. Cannot be agentified.
+
+| Task | Detail |
+|------|--------|
+| **westGate** | Power on, network cable, physical setup (i7-4771 + 76TB ZFS) |
+| **NUC + Pixle** | Physical placement, power, network cable |
+
+After physical setup, `gate.bootstrap` is cellMembrane's job.
 
 ---
 
@@ -84,29 +88,28 @@ Everything downstream is blocked until the songBird depot binary is rebuilt from
 | 3 | 2 cascade cycles, zero intervention | ⬜ blocked by #2 |
 | 4 | Version skew = 0 after cascade | ⬜ blocked by #3 |
 | 5 | riboCipher ERROR 8/8 | ✅ COMPLETE |
-| 6 | At least 1 new hardware gate enrolled | ⬜ pending |
+| 6 | At least 1 new hardware gate enrolled | ⬜ pending (ops physical + cellMembrane bootstrap) |
 
 ---
 
-## sourDough Diagnosis
+## sourDough Forgejo Diagnosis
 
-The Forgejo repo `ecoPrimals/sourDough.git` is returning Internal Server Error on both push AND read (ls-remote). SSH auth succeeds, other repos push fine. The repo itself is likely corrupted on disk.
+Forgejo Internal Server Error on push AND read (`ls-remote`). SSH auth succeeds, other repos push fine. Server-side repo corruption.
 
-**Fix options (require VPS shell access):**
-1. `ssh golgiBody` → check Forgejo logs for the specific error
-2. `gitea admin repo-sync --repo ecoPrimals/sourDough` — attempt repair
-3. Delete and recreate the repo via Forgejo admin panel, then force-push
-
-**Impact**: Low operational. Origin (GitHub) is authoritative and current. No team is blocked on forgejo reads for sourDough. Fix is P2.
+**Fix (cellMembrane/ironGate — owns VPS):**
+1. Check Forgejo logs: `journalctl -u forgejo`
+2. Attempt: `gitea admin repo-sync --repo ecoPrimals/sourDough`
+3. Nuclear: delete repo via admin panel, recreate, `git push forgejo main --force`
 
 ---
 
 ## Priority Order
 
 ```
-P1: songBird harvest + VPS update + sourDough forgejo fix (all VPS ops)
-P2: sourDough tooling | toadStool auto-register | hardware enrollment
+P1: songBird harvest + VPS update + forgejo fix (cellMembrane/ironGate)
+P2: sourDough tooling | toadStool auto-register
 P3: primalSpring proto-nucleate
+ops: westGate + NUC physical setup (when human has time)
 ```
 
 ---

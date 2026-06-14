@@ -12,7 +12,7 @@ from = "eastGate"
 to = ["cellMembrane", "songBird", "primalSpring", "all-gates"]
 date = "2026-06-11"
 priority = "P2"
-owner = "eastGate + cellMembrane"
+owner = "eastGate overwatch + cellMembrane (ironGate owns VPS)"
 note = """
 Wave 110 proved guideStone convergence at the protocol level. Every primal speaks the same
 language, every binary traces to provenance, sandbox validation ensures no degradation.
@@ -44,10 +44,8 @@ strandgate_live = "strandGate LIVE — riboCipher ERROR escalation shipped (Wave
 pipeline_evolution = """✅ SHIPPED: freshness auto-publish (1baa2ec) + VPS auto-rebuild + race-condition fix (082d77c).
 Race fix: wave-ID guard + rebase-before-push prevents stale Wave 109 overwrites.
 Forgejo cleaned (19 stale auto-publish commits force-pruned, --force-with-lease)."""
-depot_action_needed = """VPS DEPLOYED (0ef6c38, Jun 13): 13/13 integrity, 13/13 alive, S4 OK. Freshness auto-publish working (dual-push fix).
-Latest cellMembrane: 06f9ad2 (major refactor — jsonrpc extraction, XDG/git/path consolidation, capability-based discovery, net -200 lines). Pending next VPS deploy cycle.
-CRITICAL BLOCKER: songBird depot binary 32a8d700 predates riboCipher — rejects [0xEC,0x01] prefix. Needs plasmid.harvest --targets songbird."""
-freshness_wave_id = "freshness.toml wave=112, auto-publish working (dual-push fix 0ef6c38). Full 40-char SHAs. s_ecosystem_freshness 929 tests green."
+depot_action_needed = "VPS deploy 54eee01 → plasmid.harvest --all. cellMembrane W112 code shipped (health probe fix + plasmidBin resolution + UDS fallback) but not yet deployed to VPS. Auto-rebuild enabled; once VPS updated, depot converges."
+freshness_wave_id = "freshness.toml shows wave=112 (Jun 13). Full 40-char SHAs restored (d105e54 fixed short-hash issue). s_ecosystem_freshness test now passes (929 tests green)."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Gate Expansion — Priority Order
@@ -57,7 +55,7 @@ freshness_wave_id = "freshness.toml wave=112, auto-publish working (dual-push fi
 
 [stream1]
 id = "GATE-EXPANSION"
-owner = "cellMembrane + ops"
+owner = "cellMembrane (ironGate) — ops provides physical setup only"
 priority = "P2"
 guidestone_properties = ["P1-Deterministic", "P4-Environment-Agnostic"]
 description = """Bootstrap new hardware into the mesh using proven gate.bootstrap pipeline.
@@ -139,7 +137,7 @@ priority_rank = 6
 
 [stream2]
 id = "FEDERATION-COMPLETION"
-owner = "songBird + flockGate ops"
+owner = "songBird + cellMembrane (ironGate — VPS songBird deploy)"
 priority = "P2"
 guidestone_properties = ["P1-Deterministic", "P5-Tolerance-Documented"]
 description = """Federation IS mechanically working (port bound, mesh.init succeeds).
@@ -153,19 +151,15 @@ SONGBIRD_PEERS, SONGBIRD_FEDERATION_PORT env vars in bin_interface UDS/TCP path.
 Fixes flockGate reporting enabled=false."""
 federation_reconnect = """✅ DONE (f18aeb6b, Wave 111): spawn_peer_health_loop — 30s probe with
 exponential backoff (30s→60s→120s→cap 300s). Auto-reconnects after VPS restart."""
-flockgate_handshake = """BLOCKED (songBird depot binary predates riboCipher + federation fix):
-✅ songBird v0.2.1 running on VPS (healthy, 11h uptime)
-✅ VPS port 7700 bound and listening (federation_enabled=true)
-✅ mesh.init succeeds (node_id=golgiBody, relay_enabled=true)
-✅ cellMembrane probe handles non-riboCipher songBird gracefully (UDS fallback)
-⚠️ FINDINGS (Jun 13 AAR):
-  - VPS songBird binary is commit 32a8d700 (pre-riboCipher, pre-federation-wire-fix)
-  - Rejects riboCipher [0xEC,0x01] prefix with 'stream did not contain valid UTF-8'
-  - External scanner 162.226.225.148 hits :7700 every ~90s (invalid HTTP method — harmless)
-  - No bootstrap peers configured → 0 inbound connections (expected for hub awaiting enrollment)
-  - mesh.reachability now reports 'hub listening' instead of false DEGRADED (fbe0204)
-BLOCKING: plasmid.harvest --targets songbird (rebuild from ≥fe47c012 or latest songBird HEAD)
-THEN: Configure local gates with VPS peer address for inbound mesh enrollment"""
+flockgate_handshake = """IN PROGRESS (08c36f2 — flockGate WAN mesh validated):
+✅ songBird v0.2.1 deployed from depot (BLAKE3 verified)
+✅ VPS port 7700 confirmed open
+✅ mesh.init succeeds
+⚠️ BLOCKER: Depot binary predates federation fix (f18aeb6b). Needs plasmid.harvest.
+Steps remaining:
+1. Rebuild songBird on VPS (plasmid.harvest --targets songbird) — depot has 32a8d700, need fe47c012+
+2. Deploy fresh binary to flockGate
+3. Validate: federation.enabled=true, active_connections > 0"""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: Sandbox Graduation — Integrate into gate.bootstrap
@@ -387,8 +381,8 @@ status = "✅ DONE (249bce28, v4.24): all_circuits_open() detection, try_registr
 # --- ops: Intentional Divergence Creation ---
 
 [stream6.ops]
-owner = "ops (eastGate)"
-note = "Deliberately create real-world divergence to test detection and recovery"
+owner = "cellMembrane (ironGate) + ops (physical only)"
+note = "Deliberately create real-world divergence to test detection and recovery. Ops = physical setup only (power, cable). gate.bootstrap + cascade = cellMembrane."
 
 [stream6.ops.deploy_then_stale]
 id = "DEPLOY-THEN-STALE"
@@ -463,13 +457,7 @@ primalspring_harness = "primalSpring: update nucleus_launcher and harness IPC to
 primalspring_status = "✅ SHIPPED (93207ac→44469a9→92fcd13): clear signal on all IPC, port registry dedup, clippy cleanup (W111-112). No accept loop → WARN→ERROR N/A (already hard-asserts)."
 cellmembrane_health = "cellMembrane: update uds_jsonrpc_call() to prepend [0xEC, 0x01] before JSON payload"
 cellmembrane_config = "cellMembrane: add [transport.ribocipher] section to membrane.toml with unsignalled_policy=warn"
-cellmembrane_status = """✅ SHIPPED (35ad803→922eb24→54eee01→0ef6c38→fbe0204):
-  W111: mito-tier HKDF+HMAC, clear on 6 UDS clients, config, dispatch SRP.
-  W112: WARN→ERROR escalation + health probe JSON-RPC fix + plasmidBin resolution
-        + UDS probe riboCipher fallback + freshness dual-push + mesh probe hub-aware.
-  VPS deployed: 0ef6c38 (13/13 integrity, 13/13 alive, S4 OK).
-  Latest: 06f9ad2 — major refactor (jsonrpc extraction, XDG/git consolidation, capability-based discovery, net -200 lines).
-  VPS pending update from 0ef6c38 to 06f9ad2."""
+cellmembrane_status = "✅ SHIPPED (35ad803→922eb24→54eee01): mito-tier HKDF+HMAC, clear on 6 UDS clients, config, dispatch SRP (W111). WARN→ERROR + health probe fix + plasmidBin resolution + UDS probe fallback for transitional deploys (W112)."
 
 # ──────────────────────────────────────────────────────────────
 # SUCCESS CRITERIA
@@ -497,50 +485,3 @@ extended = [
 last = [
     "northGate NUCLEUS 13/13 — family gate, spare compute when not in use",
 ]
-
-# ──────────────────────────────────────────────────────────────
-# AAR: Wave 112 — cellMembrane VPS Convergence (2026-06-13)
-# ──────────────────────────────────────────────────────────────
-
-[aar_wave112_cellmembrane]
-date = "2026-06-13"
-scope = "cellMembrane code + VPS operational convergence"
-operator = "eastGate overwatch"
-
-[aar_wave112_cellmembrane.summary]
-outcome = """CONVERGED. VPS gate.status at full green (13/13 integrity, 13/13 alive, S4 OK).
-mesh.reachability upgraded from false-DEGRADED to hub-aware (relay listening = healthy).
-398 tests green. Cascade pipeline stable at 22/22 synced, 0 failures."""
-
-[aar_wave112_cellmembrane.findings]
-finding_1 = """HEALTH PROBE FALSE NEGATIVES: probe_primal_jsonrpc only accepted {"result":...} as alive.
-Many primals return JSON-RPC errors (-32601 method not found) which are valid 'alive' signals.
-Fix: accept any valid JSON-RPC response (result OR error) as alive. 11/13 → 13/13."""
-finding_2 = """PLASMIDBIN RESOLUTION AMBIGUITY: VPS membrane without ECOPRIMALS_PLASMID_BIN fell through
-to XDG default (~/.local/share/ecoPrimals/plasmidBin/) which held stale Jun 12 binaries.
-Fix: set ECOPRIMALS_PLASMID_BIN=/opt/ecoPrimals/plasmidBin in /etc/environment. Removed stale path."""
-finding_3 = """RIBOCIPHER TRANSITIONAL DEPLOYMENT: songBird binary (32a8d700) predates riboCipher.
-Rejects [0xEC,0x01] prefix with 'stream did not contain valid UTF-8'.
-Fix: UDS probe fallback — try with signal first, if empty response retry raw JSON. Graceful transition."""
-finding_4 = """MESH HUB MISCONCEPTION: VPS songBird is a federation HUB (listens for inbound).
-Reporting '0 peers, 0 reachable' as DEGRADED is incorrect for a hub awaiting enrollment.
-Fix: parse relay_enabled from mesh.status — hub with relay_enabled=true is healthy (fbe0204)."""
-finding_5 = """EXTERNAL SCANNER NOISE: 162.226.225.148 probes :7700 every ~90s with non-HTTP payloads.
-Known since Wave 66. Harmless — songBird logs 'invalid HTTP method parsed' and drops. No action needed."""
-finding_6 = """FRESHNESS DUAL-PUSH: auto_commit_freshness only pushed to forgejo, leaving origin behind.
-Next cascade pulled origin (stale) then forgejo (ahead) → divergence.
-Fix: pull --rebase from BOTH remotes before commit, push to BOTH after. Eliminated recurring failure."""
-
-[aar_wave112_cellmembrane.blockers_remaining]
-blocker_1 = "songBird depot binary needs rebuild from ≥fe47c012 (plasmid.harvest --targets songbird)"
-blocker_2 = "No gates enrolled as mesh peers — hub has 0 inbound connections (awaiting gate.bootstrap mesh enrollment)"
-blocker_3 = "sourDough Forgejo HTTP 500 — cannot validate forgejo parity for that repo"
-
-[aar_wave112_cellmembrane.commits]
-commits = [
-    "0ef6c38: fix(gate): health probe accepts JSON-RPC errors as alive + plasmidBin resolution + UDS riboCipher fallback",
-    "fbe0204: fix(gate): improve mesh.reachability probe diagnostics (hub-aware, error messages)",
-]
-tests = "398/398 green (workspace total)"
-cascade = "22/22 synced, 0 failures (ironGate local)"
-vps_status = "13/13 integrity, 13/13 alive, S4 RESPONDING, mesh hub listening"
