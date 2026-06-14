@@ -8,7 +8,7 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 109
+id = 112
 date = "2026-06-14"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
 notes = "Auto-published by membrane temporal.cascade --publish-freshness"
@@ -18,7 +18,7 @@ publisher = "membrane"
 barraCuda = "5f0e55e554d29d73c54255c0ade6d819dd83fbb9"
 bearDog = "cdcdff56f9af6b1c20d004c49437e8b05819089c"
 biomeOS = "b8596973ab49cdeac31026c7bbef5dc8db9d3582"
-cellMembrane = "54eee01af9dbadeab4aec284d0cd761982bcb803"
+cellMembrane = "0ef6c3820631afe1533985f692869935a36ffcf1"
 coralReef = "7bc90e535ff746490a519510acf1a80ce53cb604"
 esotericWebb = "2593302fb42627c1191a697058b75895230d395a"
 healthSpring = "054d5c9d6ad1e618701eab140f0eb6d9ab3e9393"
@@ -36,4 +36,4 @@ songBird = "acf20b6e6462aabbcb27f116e7261795e38c6e27"
 squirrel = "a8c2e7cc5153406b7075dd42ee42e7358c9aadf7"
 sweetGrass = "3ddefbe72c889f30a116bed18f74c8f70039d44d"
 toadStool = "f721f2446cc4528c981222dff6a60b7bb0135993"
-wateringHole = "8829d202d5f931b3b515ce970b538f8b88c3f460"
+wateringHole = "846b987a5fea51f174ee0baa10432bf273c98ebe"
