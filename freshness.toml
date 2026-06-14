@@ -9,16 +9,16 @@
 
 [wave]
 id = 112
-date = "2026-06-13"
+date = "2026-06-14"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 112 — riboCipher 9/9 converged, deprecation escalation. Full SHA hashes restored (fixes VPS short-hash junk publish)."
-publisher = "eastGate-overwatch"
+notes = "Auto-published by membrane temporal.cascade --publish-freshness"
+publisher = "membrane"
 
 [heads]
 barraCuda = "5f0e55e554d29d73c54255c0ade6d819dd83fbb9"
 bearDog = "cdcdff56f9af6b1c20d004c49437e8b05819089c"
-biomeOS = "6d887ea1e3ae576b2692d4ecfad7eb3bde2901f6"
-cellMembrane = "922eb2433ad04902f6a3fcc2b5f5d6205a15d03b"
+biomeOS = "b8596973ab49cdeac31026c7bbef5dc8db9d3582"
+cellMembrane = "06f9ad25d92b65324641cc8dd09f3bcd354a7001"
 coralReef = "7bc90e535ff746490a519510acf1a80ce53cb604"
 esotericWebb = "2593302fb42627c1191a697058b75895230d395a"
 healthSpring = "054d5c9d6ad1e618701eab140f0eb6d9ab3e9393"
@@ -33,8 +33,7 @@ projectNUCLEUS = "131b12707dfc10df8f872a76289437212a74cbfb"
 rhizoCrypt = "0e2b031329d4ac159bfddd4a756953f8a4644250"
 skunkBat = "00b3436f7a3fbc9d9a74b58208ecaaffc2d8d3a0"
 songBird = "acf20b6e6462aabbcb27f116e7261795e38c6e27"
-sourDough = "28c06364a36c52f732809c8c5c5603d7182d8dea"
 squirrel = "a8c2e7cc5153406b7075dd42ee42e7358c9aadf7"
-sweetGrass = "a00407d46f5e5ef5d70515b40a84009b4b11eef8"
-toadStool = "a51619974024ff31800bbc5ae188d620f1e8760c"
-wateringHole = "352c42722b95c7da5daa484d8be234752e5cd32c"
+sweetGrass = "3ddefbe72c889f30a116bed18f74c8f70039d44d"
+toadStool = "f721f2446cc4528c981222dff6a60b7bb0135993"
+wateringHole = "6276d2274f29ab5e19edd343cfff2cd586953f94"
