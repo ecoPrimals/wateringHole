@@ -32,7 +32,11 @@ sandbox = "SHIPPED — plasmid.sandbox + plasmid.canary CLI ready"
 provision = "SHIPPED (e230e10) — gate.provision (DO API), gate.provision.status, gate.provision.destroy. canary-fieldmouse profile defined."
 gates_active = "eastGate, golgiBody, ironGate, southGate, grapheneGate (5-gate mesh)"
 gates_pending = "northGate (new), westGate (new), NUCs, Pixle, blueGate, swiftGate"
-federation = "VALIDATED (2026-06-12T14:07Z) — 64ms RTT, enabled=true, wire fix confirmed, auto-reconnect functional. Persistent relay pending VPS songBird rebuild to fe47c012."
+federation = """PARTIAL (2026-06-14T16:01Z) — VPS hub alive (/health → OK on :7700), songBird acf20b6e in depot (BLAKE3 c42ef13 verified).
+flockGate mesh.init succeeds, peer reachable=true, federation.enabled=true.
+BUT: active_connections=0, latency_ms=null. VPS songbird not enrolled flockGate as peer.
+Action needed: cellMembrane enroll flockGate on VPS songBird peers list (Wave 113).
+Depot checksums skew: checksums.toml says 334b695b (17566128 bytes) but depot serves c42ef13 (17755072 bytes) — convergence gate document says c42ef13 is correct (acf20b6e build)."""
 divergence_stream6 = "14/16 shipped (cellMembrane 6/6 COMPLETE, songBird 4/4, primalSpring 3/3, biomeOS 2/2). Remaining: DEPLOY-THEN-STALE, WINDOWS-ECOBIN-DIVERGENCE (both ops/hardware-blocked)."
 vps_minimization = "Plan documented (VPS_SURFACE_MINIMIZATION_EVOLUTION_JUN12_2026.md). Phase 1 (NUC canary) immediately actionable."
 bash_fallback_removed = "gate/mod.rs: pull() and check() now pure temporal.cascade/temporal.check — no bash fallback path."
@@ -46,7 +50,8 @@ Race fix: wave-ID guard + rebase-before-push prevents stale Wave 109 overwrites.
 Forgejo cleaned (19 stale auto-publish commits force-pruned, --force-with-lease)."""
 depot_action_needed = "RESOLVED — VPS deployed (06f9ad2→latest), depot 13/13 verified, songBird rebuilt to acf20b6e (riboCipher-aware). gate.status FULL GREEN HEALTHY."
 freshness_wave_id = """RESOLVED — freshness.toml wave=112 (Jun 14). Sparse-publish regression fixed: publish_freshness_toml now merges existing heads (preserves entries from other gates). auto_commit_freshness re-publishes after pull to ensure merge base includes full remote set. VPS publishes 27-entry (full) freshness confirmed."""
-ribocipher_convergence = "✅ COMPLETE — 8/8 WARN→ERROR escalation shipped. All primals riboCipher-compliant. Wave 113 target: REJECT."
+ribocipher_convergence = """✅ COMPLETE — 8/8 WARN→ERROR escalation shipped. All primals riboCipher-compliant. Wave 113 target: REJECT.
+sporePrint: riboCipher Tier 1 signal support shipped (8336f86, 2026-06-14). SPOREPRINT_RIBOCIPHER=1 enables 0xEC 0x01 preamble on cas-push connections. Ready for Wave 113 NestGate REJECT enforcement."""
 sourdough_forgejo = "RESOLVED — repository.status=1 in Forgejo DB caused HTTP 500. Fixed via sqlite3 UPDATE to status=0. ls-remote/push verified working."
 nucleus_activation = """✅ SHIPPED — biomeOS NUCLEUS (neural-api) running on golgiBody via biomeos-nucleus.service.
 rootpulse_commit graph deployed to /opt/membrane/graphs/. Provenance trio (sweetGrass, rhizoCrypt, loamSpine) routable via neural-api.
