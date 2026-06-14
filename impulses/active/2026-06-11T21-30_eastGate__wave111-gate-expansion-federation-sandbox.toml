@@ -45,7 +45,8 @@ pipeline_evolution = """✅ SHIPPED: freshness auto-publish (1baa2ec) + VPS auto
 Race fix: wave-ID guard + rebase-before-push prevents stale Wave 109 overwrites.
 Forgejo cleaned (19 stale auto-publish commits force-pruned, --force-with-lease)."""
 depot_action_needed = "VPS deploy 54eee01 → plasmid.harvest --all. cellMembrane W112 code shipped (health probe fix + plasmidBin resolution + UDS fallback) but not yet deployed to VPS. Auto-rebuild enabled; once VPS updated, depot converges."
-freshness_wave_id = "freshness.toml shows wave=112 (Jun 13). Full 40-char SHAs restored (d105e54 fixed short-hash issue). s_ecosystem_freshness test now passes (929 tests green)."
+freshness_wave_id = """freshness.toml wave=112 (Jun 14). NEW ISSUE: golgiBody auto-publish overwrites full freshness with sparse (2-entry) version — VPS only sees plasmidBin + wateringHole repos locally.
+s_ecosystem_freshness test FAILS (expects >=20 heads, gets 2). cellMembrane evolution needed: --publish-freshness must merge, not overwrite, when publisher has partial visibility."""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Gate Expansion — Priority Order

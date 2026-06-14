@@ -13,7 +13,7 @@
 | riboCipher WARN→ERROR | ✅ 8/8 COMPLETE |
 | VPS cellMembrane deploy | ✅ DONE (`0ef6c38`, 13/13 alive) |
 | cellMembrane refactor | ✅ `06f9ad2` (net -200 lines, VPS pending update) |
-| freshness auto-publish | ✅ WORKING (dual-push, Wave 112 IDs) |
+| freshness auto-publish | ⚠️ REGRESSION — VPS publishes sparse (2-entry) freshness, overwrites full manifest |
 | songBird depot rebuild | ❌ BLOCKER — depot binary `32a8d700` predates riboCipher |
 | sourDough forgejo | ❌ BROKEN — Forgejo Internal Server Error (repo corrupt) |
 | Parity | 11/12 (sourDough exception) |
@@ -39,8 +39,9 @@ Owns VPS (golgiBody). All VPS operations are cellMembrane/ironGate team scope.
 
 | Task | Detail | Blocked By |
 |------|--------|-----------|
+| **freshness sparse-publish fix** | `--publish-freshness` must merge with existing, not overwrite — VPS only sees 2 repos | — |
 | **songBird harvest** | `plasmid.harvest --targets songbird` on VPS | — |
-| **VPS cellMembrane update** | Deploy `06f9ad2` (refactored) to VPS | — |
+| **VPS cellMembrane update** | Deploy latest to VPS | — |
 | **sourDough forgejo fix** | Repo corrupt — `gitea admin repo-sync` or recreate | — |
 | Dev gate cascade | `temporal.cascade --with-restart` on eastGate, southGate | songBird harvest |
 | Mesh enrollment | Configure gates with VPS peer address | songBird harvest |
