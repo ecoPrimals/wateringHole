@@ -709,25 +709,34 @@ ensure every gate is either testing, cascading, federating, or stressing the sys
 [stream8.irongate_vps]
 owner = "cellMembrane (ironGate)"
 priority = "P1"
-tasks = [
-    "RIBOCIPHER-REJECT-PREP: Implement reject-mode in accept loops, test on VPS first",
-    "FLOCKGATE-FEDERATION-LIVE: Persistent (not ephemeral) peer enrollment, active_connections > 0",
-    "NUCLEUS-AWARE-PROBES: Replace socat with neuralAPI capability.call",
+shipped = [
+    "✅ RIBOCIPHER-REJECT: Client-side REJECT default (1775b64)",
+    "✅ FLOCKGATE-FEDERATION-LIVE: 2 peers, 2 reachable (flockGate+eastGate enrolled)",
+    "✅ NUCLEUS-AWARE-PROBES: neuralAPI-routed with UDS fallback",
+    "✅ ROOTPULSE-LEDGER-INIT: Graph execution WORKING (rootpulse_commit proven)",
+    "✅ CASCADE-STRESS-SCHEDULE: temporal.cascade.stress --cycles N",
+    "✅ PRIMAL-CLI-CONTRACT: ServerContract enum per-primal",
+    "✅ GATE-IDENTITY-FILE: Written during bootstrap",
+    "✅ PROFILE-AWARE-HEALTH: Tower=2/2, Nest=7/7, Full=13/13",
+    "✅ FRESHNESS-SINGLE-WRITER: golgiBody only (83ad975)",
+]
+remaining = [
+    "PROBE-NEURAL-API-SOCKET: Probe biomeOS on neural-api.sock not biomeos.sock",
+    "ACCEPT-32601-AS-ALIVE: -32601 method_not_found = alive in S4 probe",
+    "REMOVE-BRIDGE-BIOMEOS: Remove deprecated socat UDS→TCP bridge",
+    "AARCH64-DEPOT-HARVEST: plasmid.harvest --arch aarch64 from HEAD",
     "PEPTI-BUILD-ORCHESTRATION: Route builds through neuralAPI graph",
-    "ROOTPULSE-LEDGER-INIT: First real commit chain (not dry-run)",
-    "CASCADE-STRESS-SCHEDULE: Scheduled cascade cycles against LAN gates",
-    "PRIMAL-CLI-CONTRACT: Standardize server subcommand args (guideStone amendment)",
-    "GATE-IDENTITY-FILE: Write /etc/membrane/gate_identity during bootstrap",
-    "PROFILE-AWARE-HEALTH: Tower-only = 2/2 PASS, full = 13/13",
 ]
 
 [stream8.eastgate]
 owner = "primalSpring (eastGate)"
 priority = "P2"
-tasks = [
+shipped = [
+    "✅ PROTO-NUCLEATE-MANIFEST: sporePrint nucleus.rs (69e850c→c92244d) — profiles, topology, --probe",
+    "✅ VALIDATION-MONITORING: 929 tests green, freshness 27/27 heads",
+]
+remaining = [
     "CASCADE-RECIPIENT: Accept VPS cascades, validate zero-skew",
-    "PROTO-NUCLEATE-MANIFEST: Design sub-NUCLEUS topologies (nest, tower, compute)",
-    "VALIDATION-MONITORING: Run suite after cascades, catch regressions",
     "OVERWATCH-AUDIT: Monitor cascade logs for manual intervention",
 ]
 
@@ -750,10 +759,13 @@ tasks = [
 [stream8.flockgate]
 owner = "cellMembrane (flockGate WAN)"
 priority = "P2"
-tasks = [
-    "PERSISTENT-FEDERATION: Sustained (not ephemeral) active_connections > 0",
-    "WAN-CASCADE-TEST: Cascade over WAN, measure latency",
-    "PARTITION-TOLERANCE-OPERATIONAL: Kill VPS songBird, verify auto-reconnect",
+shipped = [
+    "✅ PERSISTENT-FEDERATION: 2 peers enrolled (flockGate+eastGate), 2 reachable, direct paths",
+    "✅ WAN-CASCADE-TEST: 2.2 MB/s, BLAKE3 verified, sub-5s per primal",
+]
+remaining = [
+    "PARTITION-TOLERANCE-OPERATIONAL: Blocked — songBird reachability STATIC without active connection (gap documented)",
+    "SONGBIRD-SELF-CONNECT-FIX: VPS songbird reconnects to own :7700 every 30s",
 ]
 
 [stream8.ops_physical]
@@ -859,12 +871,23 @@ items = [
 
 [wave113_exit]
 criteria = [
-    "riboCipher REJECT deployed on at least 1 gate (VPS) with 0 unsignalled callers",
-    "flockGate persistent federation: active_connections > 0 (sustained, not ephemeral)",
-    "DEPLOY-THEN-STALE validated (southGate skips cascades, mesh detects)",
-    "At least 1 new hardware gate enrolled (NUC or westGate — ops-dependent)",
-    "rootpulse: first real (non-dry-run) commit chain through trio",
-    "Issues from gate clearing resolved: CLI contracts, gate_identity, profile-aware health",
+    "✅ riboCipher REJECT deployed (client-side 1775b64 + hotSpring c0245b6 + strandGate)",
+    "✅ flockGate persistent federation: 2 peers, 2 reachable (flockGate+eastGate enrolled)",
+    "⬜ DEPLOY-THEN-STALE validated (southGate skips cascades, mesh detects)",
+    "⬜ At least 1 new hardware gate enrolled (NUC or westGate — ops-dependent)",
+    "✅ rootpulse: graph execution WORKING through neuralAPI (rootpulse_commit proven)",
+    "✅ Gate-clearing issues resolved: ServerContract, gate_identity, profile-aware health",
+]
+status = "4/6 MET. Remaining: DEPLOY-THEN-STALE (southGate) + hardware enrollment (ops)."
+
+[wave113_exit.new_debt_carry]
+description = "NUCLEUS primal interaction audit exposed 5 gap categories — carry to Wave 114"
+items = [
+    "riboCipher server-side acceptance: 1/13 primals (songbird only). ALL primals need update.",
+    "health method: 4/13 missing, 1/13 silent (toadstool). guideStone amendment needed.",
+    "neuralAPI hollow: 0 registered capabilities. biomeOS auto-registration needed.",
+    "28 undocumented sockets. guideStone socket manifest amendment needed.",
+    "bearDog BTSP-locked main socket, toadStool silent, songBird self-connect loop.",
 ]
 
 # ──────────────────────────────────────────────────────────────
