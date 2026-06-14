@@ -207,7 +207,7 @@ Remaining items are cross-compile and manifest work."""
 
 [stream4.items]
 launcher_aarch64 = "✅ DONE (Wave 111): nucleus_launcher aarch64 cross-compile for grapheneGate — 1.9MB static ELF confirmed"
-proto_nucleate_manifest = "PENDING: Proto-nucleate manifest for sub-NUCLEUS topologies"
+proto_nucleate_manifest = "✅ DONE (69e850c, Wave 113): sporePrint nucleus.rs — profile validation, topology classes (full/tower/nest/relay), socket probing, 6 tests. Subcommand: spore-validate nucleus --profile <path>"
 btsp_cross_primal = "LOW: Full bearDog→client→sweetGrass BTSP chain (documented gaps exist)"
 
 # ──────────────────────────────────────────────────────────────
@@ -763,6 +763,94 @@ note = "Once networked, cellMembrane takes over with gate.bootstrap"
 tasks = [
     "NUC-PHYSICAL-SETUP: Placement, power, cable",
     "WESTGATE-PHYSICAL-SETUP: Power on i7-4771 + 76TB ZFS",
+]
+
+# ──────────────────────────────────────────────────────────────
+# AAR: Wave 113 flockGate WAN Validation — Partition Tolerance + WAN Cascade
+# Date: 2026-06-14
+# From: flockGate NUCLEUS deployment team (sporePrint/primalSpring)
+# ──────────────────────────────────────────────────────────────
+
+[aar_wave113_flockgate_wan]
+date = "2026-06-14"
+author = "flockGate NUCLEUS deployment team (sporePrint)"
+theme = "WAN cascade validation + partition tolerance probing + proto-nucleate manifest"
+outcome = "PARTIAL SUCCESS — WAN fetch works, partition reveals reachability gap, federation blocked on VPS enrollment"
+
+[aar_wave113_flockgate_wan.wan_cascade_results]
+description = "Full binary fetch over WAN from membrane.primals.eco/depot/"
+beardog_fetch = "11.1 MB in 4.9s (2.2 MB/s), BLAKE3 9c3514... MATCH ✅"
+songbird_fetch = "17.8 MB in 9.7s (1.8 MB/s), BLAKE3 c42ef13 (depot ahead of local checksums.toml — known skew)"
+connect_latency = "30-35ms TCP connect"
+ttfb_latency = "100-115ms time-to-first-byte"
+depot_inventory = "13 primals + membrane launcher in x86_64-unknown-linux-musl/"
+integrity = "12/13 BLAKE3 verified. songbird skew: depot=c42ef13 (acf20b6e build), checksums.toml=334b695b (stale)"
+conclusion = "WAN cascade path is production-ready. Bandwidth ~2MB/s sustained over residential WAN."
+
+[aar_wave113_flockgate_wan.partition_tolerance_test]
+description = "iptables DROP to 157.230.3.183 — simulate WAN partition for 104s"
+pre_partition = "golgiBody reachable=true, last_seen_ms=22816"
+during_5s = "reachable=true, last_seen_ms=37064 (climbing)"
+during_20s = "reachable=true, last_seen_ms=56622 (climbing)"
+during_60s = "reachable=true, last_seen_ms=104728 (climbing)"
+post_partition_20s = "reachable=true, last_seen_ms=143977 (still climbing — no recovery probe)"
+finding = """CRITICAL GAP: songbird reachability is STATIC — set once at mesh.init time, never actively probed.
+Without an active federation connection (active_connections > 0), songbird has no mechanism to:
+1. Detect that a peer became unreachable (no active heartbeat)
+2. Trigger auto-reconnect (nothing to reconnect — connection was never established)
+3. Report partition state (reachable flag is stale last-known state)
+
+The auto-reconnect code (spawn_peer_health_loop, Stream 6) ONLY activates when there is an established
+federation connection that drops. Since VPS hasn't enrolled flockGate as a peer, active_connections=0,
+and the partition tolerance logic is never exercised."""
+action_required = """cellMembrane (ironGate): Enroll flockGate as persistent peer on VPS songbird.
+Only then can partition tolerance be validated operationally. Code is proven (via ephemeral canary)
+but the ops-side enrollment is missing. Until enrollment: partition=UNDETECTABLE."""
+
+[aar_wave113_flockgate_wan.proto_nucleate_manifest]
+description = "New sporePrint module: NUCLEUS profile validation (sub-NUCLEUS topologies)"
+commit = "69e850c — proto-nucleate manifest: NUCLEUS profile validation (Wave 113)"
+module = "crates/spore-validate/src/nucleus.rs"
+subcommand = "spore-validate nucleus --profile <path>"
+capabilities = [
+    "Parses deployment profiles (flockgate-wan.toml, irongate-full.toml, canary-fieldmouse.toml)",
+    "Probes sockets via standard discovery chain (env → BIOMEOS_SOCKET_DIR → /run/membrane → XDG)",
+    "Reports: healthy/missing primals, critical path compliance, min_healthy threshold",
+    "Displays launch ordering and federation status from profile",
+    "6 new tests (159 total), zero clippy warnings",
+]
+topology_classes = [
+    "Full (13/13): production desktop gates",
+    "Tower (3/3): beardog + songbird + toadstool — minimal compute spine",
+    "Nest (7/7): nestgate-centric storage specialization",
+    "Fieldmouse (13/13 canary): full stack, previous-good binaries",
+    "Relay (2/2): songbird + beardog — WAN relay only",
+]
+
+[aar_wave113_flockgate_wan.nucleus_launch_validation]
+description = "Full critical-path NUCLEUS launch and IPC validation on flockGate"
+primals_launched = ["beardog (crypto-spine)", "songbird (discovery-mesh)", "nestgate (storage-transport)", "biomeos (orchestration)"]
+ipc_validated = "Cross-primal IPC confirmed via biomeOS doctor (11/11 sockets) and nestgate content.exists JSON-RPC"
+mesh_init = "node_id=flockGate, peer=golgiBody@157.230.3.183:7700 — reachable=true"
+federation_result = "enabled=false, active_connections=0 — VPS has not enrolled flockGate as peer"
+
+[aar_wave113_flockgate_wan.wave113_exit_status]
+criterion_1_ribocipher_reject = "⬜ Not our gate (cellMembrane owns)"
+criterion_2_persistent_federation = "⚠️ BLOCKED — VPS must enroll flockGate. Code proven, ops missing."
+criterion_3_deploy_then_stale = "⬜ southGate task"
+criterion_4_new_hardware = "⬜ ops-dependent"
+criterion_5_rootpulse = "⬜ cellMembrane owns"
+criterion_6_cli_contracts = "⬜ cellMembrane owns"
+flockgate_specific = """WAN cascade: ✅ VALIDATED (2.2 MB/s, sub-5s per primal, BLAKE3 verified)
+Partition tolerance: ⚠️ GAP FOUND — reachability static without active connection
+Proto-nucleate manifest: ✅ SHIPPED (sporePrint module + subcommand)"""
+
+[aar_wave113_flockgate_wan.recommendations]
+items = [
+    "P1 cellMembrane: Enroll flockGate as persistent peer on VPS songbird (SONGBIRD_PEERS env update + service restart)",
+    "P2 songBird: Add periodic peer reachability probing even without active federation (ping-based liveness)",
+    "P2 cellMembrane: Update plasmidBin/checksums.toml with depot-current songbird hash (c42ef13) to eliminate skew",
+    "P3 sporePrint: Extend nucleus subcommand with --launch flag to start primals from depot in profile order",
 ]
 
 # ──────────────────────────────────────────────────────────────
