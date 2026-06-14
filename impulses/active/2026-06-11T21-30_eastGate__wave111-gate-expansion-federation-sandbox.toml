@@ -207,7 +207,7 @@ Remaining items are cross-compile and manifest work."""
 
 [stream4.items]
 launcher_aarch64 = "✅ DONE (Wave 111): nucleus_launcher aarch64 cross-compile for grapheneGate — 1.9MB static ELF confirmed"
-proto_nucleate_manifest = "✅ DONE (69e850c→c92244d, Wave 113): sporePrint nucleus.rs — profile validation + IPC health probing (--probe flag). Topology classes (full/tower/nest/relay), JSON-RPC health.ping per-socket, latency + version reporting. 159 tests. Subcommand: spore-validate nucleus --profile <path> [--probe]"
+proto_nucleate_manifest = "✅ DONE (69e850c→40c3b52, Wave 113): sporePrint nucleus.rs — profile validation + IPC health probing + guideStone contract validation. Topology classes (full/tower/nest/relay), JSON-RPC health.ping per-socket, validates {status,primal,version} schema, reports compliance (Compliant/Partial/None). Handles -32601 as alive-no-health. 159 tests. Subcommand: spore-validate nucleus --profile <path> [--probe]"
 btsp_cross_primal = "LOW: Full bearDog→client→sweetGrass BTSP chain (documented gaps exist)"
 
 # ──────────────────────────────────────────────────────────────
