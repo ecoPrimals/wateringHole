@@ -1051,3 +1051,40 @@ for_guidestone = [
     "AMENDMENT NEEDED: Document multi-socket primals and their purposes",
     "AMENDMENT NEEDED: neuralAPI capability registration protocol",
 ]
+
+# ── Wave 113 Session: VPS FULL GREEN + DEPLOY-THEN-STALE proven (2026-06-14 17:00 ET) ──
+
+[aar_wave113_vps_full_green]
+date = "2026-06-14T21:00:00Z"
+from = "cellMembrane/ironGate"
+summary = """
+golgiBody VPS: FULL HEALTHY (8/8 probes GREEN).
+- S4 auth fixed: read before writer.shutdown() prevents beardog from closing prematurely
+- BTSP error responses now recognized as 'alive + enforcing' proof
+- neuralAPI try_bridge routing in S4 probe (falls through to direct UDS on VPS)
+- membrane-bridge-biomeos REMOVED (deprecated socat pattern)
+- DEPLOY-THEN-STALE mechanism validated: health.audit --mesh detects cross-gate version skew"""
+
+[aar_wave113_vps_full_green.evidence]
+gate_status = "golgiBody (x86_64-unknown-linux-musl) — HEALTHY"
+probes_passed = "8/8"
+depot = "13 verified, 0 hash mismatch, 0 missing"
+mesh = "2 peers, 2 reachable"
+primals = "13/13 alive"
+sovereignty = "S1-S4 ALL OPERATIONAL"
+s4_detail = "ENFORCED — BearDog BTSP active (direct UDS)"
+deploy_then_stale = "health.audit --mesh: 1 VPS mismatch detected (songbird commit 32a8d700 vs VPS)"
+
+[aar_wave113_vps_full_green.code_shipped]
+commits = ["1f6b04a — S4 auth fix (read before shutdown + BTSP recognition)"]
+binary_deployed = "10.6MB membrane to /opt/membrane/membrane on golgiBody"
+services_removed = ["membrane-bridge-biomeos.service"]
+
+[aar_wave113_vps_full_green.exit_criteria_update]
+criterion_1 = "✅ riboCipher REJECT shipped"
+criterion_2 = "✅ Persistent federation (2 peers, 2 reachable — flockGate + eastGate)"
+criterion_3 = "✅ DEPLOY-THEN-STALE validated (health.audit --mesh detects skew)"
+criterion_4 = "⬜ Hardware enrollment (ops physical — pending)"
+criterion_5 = "✅ rootpulse graph execution (proven via neuralAPI)"
+criterion_6 = "✅ Gate-clearing issues resolved (CLI contract, identity, profile health, S4)"
+assessment = "5/6 EXIT CRITERIA MET. Only hardware enrollment (ops-physical) remains."
