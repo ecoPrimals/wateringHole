@@ -8,7 +8,7 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 109
+id = 112
 date = "2026-06-14"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
 notes = "Auto-published by membrane temporal.cascade --publish-freshness"
@@ -36,4 +36,4 @@ songBird = "acf20b6e6462aabbcb27f116e7261795e38c6e27"
 squirrel = "a8c2e7cc5153406b7075dd42ee42e7358c9aadf7"
 sweetGrass = "3ddefbe72c889f30a116bed18f74c8f70039d44d"
 toadStool = "f721f2446cc4528c981222dff6a60b7bb0135993"
-wateringHole = "528ab65c08e0d77f606fb242c4ece87f75f381f6"
+wateringHole = "4c2caaa43bd93884fa2921f33d565f8d9c9c1ce1"
