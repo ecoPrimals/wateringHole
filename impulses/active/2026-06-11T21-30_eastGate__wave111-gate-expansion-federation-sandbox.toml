@@ -943,6 +943,24 @@ description = """Until cellMembrane evolves auto-resolution:
 - If divergence is detected, the gate that detects it should auto-pull + push (not just notify)
 Policy: single-writer for freshness.toml until mesh.publish replaces VCS coordination."""
 
+[aar_diverge_autopublish.broader_problem]
+description = """The divergence is NOT limited to freshness. ANY multi-gate write to a shared repo
+(wateringHole) creates the same pattern. Evidence from Wave 113:
+- AARs committed from different gates (ironGate AAR vs eastGate blurb) → different remotes → diverge
+- impulse sync commits from ironGate while golgiBody freshness publishes → parallel histories
+- Overwatch blurb commits (origin) vs gate freshness commits (forgejo) → force-with-lease needed
+
+The fundamental issue: wateringHole is a multi-writer repo accessed via two remotes (origin=GitHub,
+forgejo=VPS). Without a single coordination point for ALL writes (not just freshness), divergence
+is inevitable whenever two gates commit within the same fetch window.
+
+cellMembrane needs to evolve GENERAL diderm reconciliation:
+1. All gates push to BOTH remotes after every commit (already done for freshness, not for AARs/impulses)
+2. If push to second remote fails (non-ff), auto-rebase + retry (no manual intervention)
+3. Leader election for write coordination: one gate is the 'commit authority' for wateringHole
+4. Or: replace diderm VCS model with mesh-native state (eliminates dual-remote coordination entirely)"""
+priority = "P1 — this is the #1 source of overwatch manual intervention"
+
 # ── Wave 113 AAR: NUCLEUS Primal Interaction Audit (2026-06-14) ─────────────
 # Probing from cellMembrane gate.status pipeline on golgiBody VPS.
 # VPS state: 13/13 primals alive, 2/2 mesh peers reachable, S1-S3 sovereignty OPERATIONAL.

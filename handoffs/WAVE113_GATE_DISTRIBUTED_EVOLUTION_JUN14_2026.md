@@ -6,12 +6,22 @@
 
 ---
 
-## cellMembrane / ironGate — P2 (most P1 work DONE)
+## cellMembrane / ironGate — P1/P2
 
-| Task | Notes |
-|------|-------|
-| aarch64 depot harvest | `plasmid.harvest --targets beardog,songbird,skunkbat --arch aarch64` from HEAD — unblocks grapheneGate |
-| Pepti build orchestration | Route depot rebuilds through neuralAPI graph |
+| Task | Priority | Notes |
+|------|----------|-------|
+| **Diderm auto-reconciliation** | P1 | ALL gate commits must push to BOTH remotes. If second push fails (non-ff), auto-rebase + retry. This is the #1 source of overwatch manual intervention. |
+| aarch64 depot harvest | P2 | `plasmid.harvest --targets beardog,songbird,skunkbat --arch aarch64` from HEAD — unblocks grapheneGate |
+| Pepti build orchestration | P3 | Route depot rebuilds through neuralAPI graph |
+
+### Diderm Divergence (chronic — needs systemic fix)
+
+Every gate that commits to a shared repo (wateringHole) must push to **both** origin (GitHub) AND forgejo (VPS). Currently only freshness has single-writer policy. AARs, impulse syncs, and handoffs from different gates still create parallel histories requiring manual `--force-with-lease`.
+
+**Required evolution:**
+1. All `git push` operations in cellMembrane push to both remotes (not just freshness)
+2. If second push fails non-ff: `fetch → rebase → push` automatically
+3. Long-term: leader election OR mesh-native state (eliminate dual-remote coordination)
 
 ---
 
