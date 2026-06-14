@@ -10,18 +10,21 @@
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| **Diderm auto-reconciliation** | P1 | ALL gate commits must push to BOTH remotes. If second push fails (non-ff), auto-rebase + retry. This is the #1 source of overwatch manual intervention. |
+| ~~**Diderm auto-reconciliation**~~ | ~~P1~~ | ✅ DONE — `951c96a` + `bd9dfcb`. push_all_remotes() auto-reconciles non-ff. cascade sync_converge() does pull --rebase on diverge. |
 | aarch64 depot harvest | P2 | `plasmid.harvest --targets beardog,songbird,skunkbat --arch aarch64` from HEAD — unblocks grapheneGate |
 | Pepti build orchestration | P3 | Route depot rebuilds through neuralAPI graph |
 
-### Diderm Divergence (chronic — needs systemic fix)
+### Diderm Divergence — RESOLVED
 
-Every gate that commits to a shared repo (wateringHole) must push to **both** origin (GitHub) AND forgejo (VPS). Currently only freshness has single-writer policy. AARs, impulse syncs, and handoffs from different gates still create parallel histories requiring manual `--force-with-lease`.
+~~Every gate that commits to a shared repo (wateringHole) must push to **both** origin (GitHub) AND forgejo (VPS). Currently only freshness has single-writer policy. AARs, impulse syncs, and handoffs from different gates still create parallel histories requiring manual `--force-with-lease`.~~
 
-**Required evolution:**
-1. All `git push` operations in cellMembrane push to both remotes (not just freshness)
-2. If second push fails non-ff: `fetch → rebase → push` automatically
-3. Long-term: leader election OR mesh-native state (eliminate dual-remote coordination)
+**Shipped (`bd9dfcb`):**
+1. ✅ All `git push` operations push to both remotes via `push_all_remotes()`
+2. ✅ If push fails non-ff: `fetch → rebase → push` automatically (max 2 retries)
+3. ✅ Cascade pull divergence: `pull --rebase` fallback when ff-only fails on clean tree
+4. ✅ Freshness migrated from inline dual-push to reconciliation-aware `push_all_remotes()`
+
+**Remaining debt (long-term):** Leader election OR mesh-native state via `songBird mesh.publish`
 
 ---
 

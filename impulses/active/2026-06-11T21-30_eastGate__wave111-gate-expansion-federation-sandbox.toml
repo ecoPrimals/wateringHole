@@ -1106,3 +1106,56 @@ criterion_4 = "⬜ Hardware enrollment (ops physical — pending)"
 criterion_5 = "✅ rootpulse graph execution (proven via neuralAPI)"
 criterion_6 = "✅ Gate-clearing issues resolved (CLI contract, identity, profile health, S4)"
 assessment = "5/6 EXIT CRITERIA MET. Only hardware enrollment (ops-physical) remains."
+
+# ─── AAR: Wave 113 Diderm Auto-Reconciliation ─────────────────────────
+
+[aar_wave113_diderm_reconciliation]
+date = "2026-06-14"
+gate = "eastGate"
+subject = "Diderm auto-reconciliation: dual-remote push with fetch+rebase+retry"
+
+[aar_wave113_diderm_reconciliation.problem]
+description = """
+Multiple gates committing to shared repos (wateringHole, freshness) create \
+parallel histories when pushing to dual remotes (GitHub origin + Forgejo VPS). \
+The second push frequently fails non-fast-forward because another gate pushed \
+between the two pushes. This was the #1 source of overwatch manual intervention \
+(manual --force-with-lease required)."""
+frequency = "Every cascade cycle on multi-gate mesh"
+impact = "Blocked automated convergence, required human fix-up"
+
+[aar_wave113_diderm_reconciliation.solution]
+approach = """
+Two-layer fix:
+1. push_all_remotes() in git_ops.rs: try_push → if rejected → fetch+rebase+retry (max 2 attempts)
+2. temporal.cascade sync_converge(): when pull --ff-only fails on clean tree → pull --rebase (linearize local on remote)
+Both layers abort rebase on conflict (no data loss) and report failure."""
+commits = ["951c96a — feat: diderm auto-reconciliation in git_ops push_all_remotes", "bd9dfcb — feat: cascade diderm rebase in temporal sync_converge"]
+
+[aar_wave113_diderm_reconciliation.changes]
+git_ops_push = """
+push_all_remotes() now:
+- try_push(remote) → success? done
+- else: reconcile_and_push(remote) → fetch → rebase → retry (2x max)
+- Rebase conflict: abort + fail gracefully
+- All push commands include SSH_CMD_WITH_TIMEOUT env"""
+cascade_pull = """
+sync_converge() Pull action now:
+- try pull --ff-only (fast path)
+- if dirty: stash → try ff-only OR rebase → pop
+- if clean but diverged: pull --rebase (diderm linearization)
+- Rebase conflict: abort + report"""
+freshness_migration = """
+auto_commit_freshness() migrated from inline dual-push with silent non-ff swallow
+to git_ops::push_all_remotes() — gets reconciliation for free"""
+
+[aar_wave113_diderm_reconciliation.validation]
+local_cascade = "22/22 parity, 0 failed (ironGate)"
+vps_cascade = "2/2 synced (wateringHole was previously FAIL diverged → now OK parity)"
+vps_gate_status = "HEALTHY 8/8 GREEN"
+binary_deployed = "bd9dfcb → golgiBody /opt/membrane/membrane"
+
+[aar_wave113_diderm_reconciliation.remaining_debt]
+short_term = "Current approach: rebase linearization on shared repos"
+long_term = "Leader election OR mesh-native state via songBird mesh.publish (eliminate dual-remote coordination entirely)"
+known_gap = "If rebase conflicts (content conflict, not just history): still fails and requires manual resolution. Expected to be rare since most shared repo changes are additive (freshness, AARs, impulses)."
