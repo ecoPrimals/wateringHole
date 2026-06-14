@@ -546,6 +546,11 @@ repos = [
 
 # flockGate — WAN shadow, sporePrint team, full validation
 [gates.flockGate]
+target = "x86_64-unknown-linux-musl"
+composition = "full"
+transport = "wan"
+mesh_peer = "157.230.3.183:7700"
+bind_mode = "uds"
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
