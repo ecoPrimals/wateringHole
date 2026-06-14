@@ -44,9 +44,10 @@ strandgate_live = "strandGate LIVE — riboCipher ERROR escalation shipped (Wave
 pipeline_evolution = """✅ SHIPPED: freshness auto-publish (1baa2ec) + VPS auto-rebuild + race-condition fix (082d77c).
 Race fix: wave-ID guard + rebase-before-push prevents stale Wave 109 overwrites.
 Forgejo cleaned (19 stale auto-publish commits force-pruned, --force-with-lease)."""
-depot_action_needed = """RESOLVED (Jun 13): VPS deployed at 0ef6c38 (health probe + plasmidBin + UDS fallback). gate.status 13/13 integrity, 13/13 alive, S4 responding.
-New commit fbe0204 (mesh probe improvement) — needs next deploy cycle. songBird depot binary still 32a8d700 (pre-riboCipher). Needs plasmid.harvest --targets songbird from latest songBird source."""
-freshness_wave_id = "freshness.toml shows wave=112 (Jun 13). Full 40-char SHAs restored (d105e54 fixed short-hash issue). s_ecosystem_freshness test now passes (929 tests green)."
+depot_action_needed = """VPS DEPLOYED (0ef6c38, Jun 13): 13/13 integrity, 13/13 alive, S4 OK. Freshness auto-publish working (dual-push fix).
+Latest cellMembrane: 06f9ad2 (major refactor — jsonrpc extraction, XDG/git/path consolidation, capability-based discovery, net -200 lines). Pending next VPS deploy cycle.
+CRITICAL BLOCKER: songBird depot binary 32a8d700 predates riboCipher — rejects [0xEC,0x01] prefix. Needs plasmid.harvest --targets songbird."""
+freshness_wave_id = "freshness.toml wave=112, auto-publish working (dual-push fix 0ef6c38). Full 40-char SHAs. s_ecosystem_freshness 929 tests green."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Gate Expansion — Priority Order
@@ -467,7 +468,8 @@ cellmembrane_status = """✅ SHIPPED (35ad803→922eb24→54eee01→0ef6c38→fb
   W112: WARN→ERROR escalation + health probe JSON-RPC fix + plasmidBin resolution
         + UDS probe riboCipher fallback + freshness dual-push + mesh probe hub-aware.
   VPS deployed: 0ef6c38 (13/13 integrity, 13/13 alive, S4 OK).
-  Latest: fbe0204 — mesh.reachability now hub-aware (relay_enabled = healthy)."""
+  Latest: 06f9ad2 — major refactor (jsonrpc extraction, XDG/git consolidation, capability-based discovery, net -200 lines).
+  VPS pending update from 0ef6c38 to 06f9ad2."""
 
 # ──────────────────────────────────────────────────────────────
 # SUCCESS CRITERIA

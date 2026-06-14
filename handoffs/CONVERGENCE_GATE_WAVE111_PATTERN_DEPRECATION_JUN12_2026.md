@@ -3,7 +3,7 @@
 **Date**: 2026-06-12  
 **From**: eastGate overwatch  
 **Purpose**: Define the conditions under which old patterns are permanently deprecated  
-**Status**: WATCHING — Criterion 4+8 GREEN, riboCipher ERROR 8/8 complete. Criterion 1 advancing (54eee01 shipped, VPS deploy pending). 5 pending operational.
+**Status**: WATCHING — Criterion 4+8 GREEN, riboCipher ERROR 8/8 complete. VPS DEPLOYED (0ef6c38). Criterion 1: VPS+ironGate at post-34e472d, dev gates pending cascade. 4 criteria pending operational.
 
 ---
 
@@ -20,9 +20,9 @@ code, docs, and runbooks permanently.
 
 | # | Criterion | Condition | State | Blocked By |
 |---|-----------|-----------|-------|-----------|
-| 1 | **All gates run post-34e472d membrane** | `membrane --version` ≥ Wave 111 (riboCipher mito-tier) on all 5 active gates | ⚠️ PARTIAL | ironGate DEPLOYED (systemd, 13/13). cellMembrane at `54eee01` (W112: ERROR + health fix + UDS probe fallback). VPS + dev gates pending cascade. |
-| 2 | **Depot includes partition-tolerant songBird** | provenance.toml → songBird ≥ 9903cf50 | ⚠️ PARTIAL | Depot rebuilt to 3fc94365 (federation fix). Partition tolerance (9903cf50) still needs harvest. |
-| 3 | **flockGate WAN federation validated** | `federation.status` → active_connections > 0, latency_ms present | ⚠️ PARTIAL | 64ms RTT validated, enabled=true. Persistent relay pending (active_connections=0 until VPS songBird rebuilds to fe47c012). |
+| 1 | **All gates run post-34e472d membrane** | `membrane --version` ≥ Wave 111 (riboCipher mito-tier) on all 5 active gates | ⚠️ PARTIAL | VPS at `0ef6c38` (13/13 alive). ironGate DEPLOYED (systemd). cellMembrane latest: `06f9ad2`. Dev gates (eastGate/southGate) pending cascade. |
+| 2 | **Depot includes partition-tolerant songBird** | provenance.toml → songBird ≥ 9903cf50 | ⚠️ BLOCKED | songBird depot binary still at 32a8d700 (pre-riboCipher). Needs `plasmid.harvest --targets songbird`. |
+| 3 | **flockGate WAN federation validated** | `federation.status` → active_connections > 0, latency_ms present | ⚠️ BLOCKED | VPS songBird rejects riboCipher prefix (pre-standard binary). Needs depot rebuild + deploy. Hub listening, 0 peers enrolled. |
 | 4 | **No gate uses bash fallback paths** | Code removed (gate/mod.rs e230e10) + binaries updated | ✅ GREEN (ironGate) | ironGate systemd NUCLEUS has no bash path. Cascade propagates to others. |
 | 5 | **canary.audit passes on all canary nodes** | `plasmid.canary.audit` → 0 stale entries | ⚠️ NO CANARY YET | NUC bootstrap pending |
 | 6 | **2 full cascade cycles, zero manual intervention** | temporal.cascade runs 2x across all 5 gates, no human fix-up needed | ❌ NOT YET TESTED | Gate binary rollout |
@@ -33,10 +33,11 @@ code, docs, and runbooks permanently.
 ## Actions to Clear This Gate
 
 **Immediate (no hardware required):**
-1. `cargo install --path crates/membrane-shadow` on ironGate → clears Criterion 1
-2. `plasmid.harvest --all` on VPS → clears Criterion 2 (biomeOS hash skew detected, auto-rebuild now enabled — should self-heal on next cascade)
-3. Wait for VPS auto-cascade to rebuild all stale binaries (MEMBRANE_AUTO_REBUILD=1 now live) → clears Criterion 3
-4. `membrane temporal.cascade --with-restart` on all 5 gates → begins Criterion 6
+1. `plasmid.harvest --targets songbird` on VPS → unblocks Criterion 2 + 3
+2. Deploy fresh songBird binary to VPS → clears federation UTF-8 rejection
+3. Configure dev gates with VPS peer → enables mesh enrollment
+4. `membrane temporal.cascade --with-restart` on eastGate, southGate → advances Criterion 1
+5. Run cascade cycle → begins Criterion 6
 
 **Short-term (hardware):**
 5. Bootstrap NUC with `canary-fieldmouse` profile → enables Criterion 5

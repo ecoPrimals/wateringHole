@@ -1,6 +1,6 @@
 # Wave 112 — Distribution Blurb
 
-**Date**: 2026-06-13  
+**Date**: 2026-06-14 (cascade update)  
 **From**: eastGate overwatch  
 **Theme**: Operational Convergence — the code is done, prove the system self-heals
 
@@ -8,11 +8,13 @@
 
 ## Status
 
-- **riboCipher WARN→ERROR**: ✅ 8/8 COMPLETE (all primals at ERROR for unsignalled)
+- **riboCipher WARN→ERROR**: ✅ 8/8 COMPLETE
+- **VPS cellMembrane**: ✅ DEPLOYED (`0ef6c38`) — 13/13 integrity, 13/13 alive, gate.status GREEN
+- **cellMembrane refactor**: `06f9ad2` — extracted jsonrpc module, consolidated XDG/git/path, net -200 lines
+- **freshness auto-publish**: ✅ WORKING (dual-push fix `0ef6c38`, Wave 112 IDs correct)
 - **Deprecation timeline**: Wave 113 REJECT → Wave 114 REMOVE
-- **Parity**: 12/12 repos aligned (origin = forgejo = local)
-- **Tests**: 929 green across primalSpring, freshness validation passing
-- **Convergence Gate**: 3/8 criteria GREEN, 5 pending ops execution
+- **Parity**: 11/12 (sourDough forgejo HTTP 500 persists)
+- **Convergence Gate**: 3/8 GREEN, critical blocker = songBird depot rebuild
 
 ---
 
@@ -20,15 +22,16 @@
 
 ### cellMembrane — P1 (Critical Path)
 
-| Task | Detail |
-|------|--------|
-| **VPS deploy** | Install `54eee01` on golgiBody VPS — stops junk auto-publish, enables mito-tier ERROR, unblocks depot |
-| **Depot harvest** | `plasmid.harvest --all` after VPS deploy — fixes BLAKE3 mismatches |
-| **Cascade validation** | `temporal.cascade --with-restart` on eastGate, southGate, grapheneGate |
-| **2 clean cycles** | 2 full cascade cycles, zero manual intervention (Convergence Gate criterion 6) |
-| **NUC canary** | `gate.bootstrap` with `canary-fieldmouse` profile (Phase 1 VPS minimization) |
+| Task | Priority | Detail |
+|------|----------|--------|
+| **songBird depot rebuild** | P1 | `plasmid.harvest --targets songbird` — current depot binary (32a8d700) predates riboCipher, rejects `[0xEC,0x01]` with UTF-8 error |
+| **VPS cellMembrane update** | P1 | Deploy `06f9ad2` (refactored, latest) — VPS currently at `0ef6c38`, 6 refactor commits behind |
+| **Dev gate cascade** | P2 | `temporal.cascade --with-restart` on eastGate, southGate — bring to post-34e472d |
+| **Mesh enrollment** | P2 | Configure dev gates with VPS peer address — hub is listening, awaiting inbound |
+| **2 clean cycles** | P2 | 2 full cascade cycles, zero manual intervention (Convergence Gate criterion 6) |
+| **NUC canary** | P2 | `gate.bootstrap` with `canary-fieldmouse` profile (Phase 1 VPS minimization) |
 
-Everything else is blocked until VPS deploy completes.
+**Blocker chain**: songBird depot → VPS songBird deploy → mesh enrollment → cascade cycles → gate clear.
 
 ### sourDough — P2
 
@@ -64,7 +67,7 @@ Blocks autonomous `gate.bootstrap` for compute gates (strandGate, future GPU nod
 
 | Task | Detail |
 |------|--------|
-| riboCipher REJECT | Unsignalled connections actively refused (Wave 113 — after 2 clean cascade cycles prove no legacy callers remain) |
+| riboCipher REJECT | Unsignalled connections actively refused (after 2 clean cascade cycles prove no legacy callers remain) |
 
 ---
 
@@ -72,18 +75,19 @@ Blocks autonomous `gate.bootstrap` for compute gates (strandGate, future GPU nod
 
 Wave 112 closes when:
 
-1. ⬜ VPS rebuilt to `54eee01`
-2. ⬜ 2 cascade cycles, zero intervention
-3. ⬜ Version skew = 0 after cascade
-4. ✅ riboCipher ERROR: **8/8 COMPLETE**
-5. ⬜ At least 1 new hardware gate enrolled
+1. ✅ VPS cellMembrane deployed (0ef6c38 — done, `06f9ad2` pending next cycle)
+2. ⬜ songBird depot rebuilt to ≥fe47c012
+3. ⬜ 2 cascade cycles, zero intervention
+4. ⬜ Version skew = 0 after cascade
+5. ✅ riboCipher ERROR: **8/8 COMPLETE**
+6. ⬜ At least 1 new hardware gate enrolled
 
 ---
 
 ## Priority Order
 
 ```
-P1: VPS deploy → harvest → cascade (cellMembrane)
+P1: songBird harvest → VPS update → mesh enrollment (cellMembrane)
 P2: sourDough tooling | toadStool auto-register | hardware enrollment
 P3: primalSpring proto-nucleate
 ```
