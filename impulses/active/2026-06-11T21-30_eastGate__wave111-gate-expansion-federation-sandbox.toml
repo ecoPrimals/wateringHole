@@ -919,3 +919,112 @@ description = """Until cellMembrane evolves auto-resolution:
 - ironGate should NOT auto-publish freshness (it creates the race)
 - If divergence is detected, the gate that detects it should auto-pull + push (not just notify)
 Policy: single-writer for freshness.toml until mesh.publish replaces VCS coordination."""
+
+# ── Wave 113 AAR: NUCLEUS Primal Interaction Audit (2026-06-14) ─────────────
+# Probing from cellMembrane gate.status pipeline on golgiBody VPS.
+# VPS state: 13/13 primals alive, 2/2 mesh peers reachable, S1-S3 sovereignty OPERATIONAL.
+
+[aar_wave113_nucleus_interaction_audit]
+date = "2026-06-14"
+from = "cellMembrane/ironGate"
+trigger = "gate.status S4 auth probe DEGRADED despite 13/13 alive"
+summary = """
+Full NUCLEUS primal interaction audit on golgiBody VPS reveals 5 categories of
+transport/protocol gaps. All primals respond to RAW JSON-RPC; riboCipher signal
+acceptance varies. biomeOS neuralAPI has 0 registered capabilities despite all
+primals running — the orchestration layer is live but hollow."""
+
+[aar_wave113_nucleus_interaction_audit.ribocipher_signal_response]
+description = "Which primals accept riboCipher-prefixed [0xEC, 0x01] JSON-RPC"
+accepts_signal = ["songbird"]
+rejects_signal_returns_btsp_error = ["beardog", "nestgate", "rhizocrypt"]
+no_response_to_signal = ["skunkbat", "sweetgrass", "loamspine", "toadstool", "barracuda", "squirrel", "petaltongue"]
+returns_http_400 = ["biomeos (main socket)"]
+parses_signal_as_json_error = ["coralreef"]
+assessment = """Only songbird (1/13) correctly handles riboCipher clear signal.
+beardog/nestgate/rhizocrypt reject with BTSP-specific errors (they expect BTSP handshake first).
+7 primals produce no response (timeout) — they likely parse the 0xEC prefix byte as invalid and silently close.
+biomeOS main socket returns HTTP 400 (axum/hyper HTTP server, not JSON-RPC).
+coralreef parse-errors the signal as unexpected value.
+CONCLUSION: riboCipher REJECT on the accept side is NOT deployable fleet-wide yet.
+cellMembrane's client REJECT (no fallback) is valid; server-side REJECT needs primal team updates."""
+
+[aar_wave113_nucleus_interaction_audit.raw_json_health_response]
+description = "Which primals respond to raw JSON-RPC health method (no signal)"
+healthy_response = ["songbird", "nestgate", "sweetgrass", "rhizocrypt", "barracuda", "biomeos", "petaltongue", "beardog"]
+method_not_found = ["skunkbat", "loamspine", "coralreef", "squirrel"]
+no_response = ["toadstool"]
+assessment = """8/13 respond to 'health' method with valid result.
+4/13 respond but don't implement 'health' method (return -32601 method not found).
+1/13 (toadstool) produces no response at all — socket accepts connection but is silent.
+All 12 responding primals prove they're alive (any JSON-RPC response = alive)."""
+
+[aar_wave113_nucleus_interaction_audit.neuralapi_orchestration]
+description = "biomeOS neuralAPI capability routing status"
+neural_api_socket = "/run/membrane/neural-api.sock"
+biomeos_socket = "/run/membrane/biomeos.sock"
+registered_capabilities = 0
+registered_primals = 0
+available_graphs = ["rootpulse_commit", "rootpulse_merge", "rootpulse_diff", "rootpulse_branch", "rootpulse_federate"]
+graph_execution = "WORKING (rootpulse_commit executed successfully)"
+ribocipher_support = "NONE — neuralAPI rejects riboCipher signal, only accepts raw JSON"
+mode = "Bootstrap"
+assessment = """neuralAPI is live and functional for graph execution (rootpulse proven).
+However, 0 primals have registered capabilities with it — the orchestration layer
+cannot route capability.call to any primal. biomeOS is in 'Bootstrap' mode with no
+primal discovery. This means cellMembrane's try_bridge() path always falls through
+to direct UDS. Capability routing is architecturally correct but operationally empty."""
+
+[aar_wave113_nucleus_interaction_audit.extra_sockets]
+description = "Primals expose additional sockets beyond their primary"
+beardog_extra = ["btsp.sock", "crypto.sock", "ed25519.sock", "x25519.sock", "security.sock"]
+barracuda_extra = ["barracuda-e8b62b6e.sock", "compute-tarpc.sock"]
+coralreef_extra = ["coralreef-tarpc.sock"]
+loamspine_extra = ["ledger.sock", "permanence.sock"]
+sweetgrass_extra = ["provenance.sock"]
+biomeos_extra = ["neural-api.sock", "ai.sock"]
+petaltongue_extra = ["visualization.sock", "visualization-e8b62b6e.sock"]
+total_sockets = 28
+assessment = "Primals expose domain-specific sockets beyond the registered primary. These are undocumented in guideStone and not health-probed."
+
+[aar_wave113_nucleus_interaction_audit.service_gaps]
+membrane_bridge_biomeos = "FAILED — socat-based UDS→TCP bridge broken pipe (deprecated pattern)"
+toadstool_silent = "Socket accepts connection but produces no response to any input"
+biomeos_dual_socket = "biomeos.sock (simple health) vs neural-api.sock (full API) — cellMembrane probes the wrong one"
+beardog_btsp_locked = "Main socket requires BTSP handshake — suggests beardog-default.sock for plaintext but it doesn't exist on VPS"
+
+[aar_wave113_nucleus_interaction_audit.federation_proven]
+vps_mesh_init = "mesh.init with node_id=golgiBody, peers=[flockGate:7700, eastGate:7700]"
+reachable_peers = 2
+direct_paths = 2
+relay_enabled = true
+unsignalled_tcp_connections = "flockGate + eastGate connect on :7700 without riboCipher (TCP federation path)"
+self_connection_loop = "VPS connecting to itself on :7700 every 30s (auto-reconnect loop targeting own address)"
+
+[aar_wave113_nucleus_interaction_audit.recommendations]
+for_primal_teams = [
+    "ALL PRIMALS: Accept riboCipher clear signal [0xEC, 0x01] as prefix before JSON-RPC — ignore 2 bytes, parse remainder as JSON",
+    "ALL PRIMALS: Implement 'health' JSON-RPC method returning {status: 'alive/healthy', primal: '<name>', version: '<ver>'}",
+    "bearDog: Expose plaintext health endpoint (beardog-default.sock or --health-socket flag)",
+    "toadStool: Fix silent socket — accept connection but produce no response is a protocol violation",
+    "biomeOS: Accept riboCipher signal on neural-api.sock (or document that it's HTTP-only)",
+    "biomeOS: Implement primal auto-registration so capability.call routing works",
+    "songBird: Send riboCipher signal on federation TCP outbound connections",
+    "songBird: Don't self-connect to own federation port in reconnect loop",
+]
+for_cellmembrane = [
+    "SHIPPED: Freshness single-writer policy (golgiBody only)",
+    "SHIPPED: ServerContract per-primal systemd units (no more template unit)",
+    "SHIPPED: Profile-aware health expectations",
+    "SHIPPED: riboCipher REJECT on client side (no fallback to raw JSON)",
+    "SHIPPED: neuralAPI-routed probes with direct UDS fallback",
+    "TODO: Probe biomeos on neural-api.sock instead of biomeos.sock for S4-equivalent",
+    "TODO: Accept -32601 (method not found) as 'alive' signal in S4 probe",
+    "TODO: Remove membrane-bridge-biomeos (deprecated socat pattern)",
+]
+for_guidestone = [
+    "AMENDMENT NEEDED: Mandatory 'health' method for all primals",
+    "AMENDMENT NEEDED: riboCipher signal handling requirement for UDS servers",
+    "AMENDMENT NEEDED: Document multi-socket primals and their purposes",
+    "AMENDMENT NEEDED: neuralAPI capability registration protocol",
+]
