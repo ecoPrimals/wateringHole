@@ -691,3 +691,90 @@ items = [
     "Legacy peek-and-guess protocol detection: DYING (riboCipher REJECT in Wave 113 removes last fallback)",
     "Manual mesh.init: DEAD (federation auto-enrolled via SONGBIRD_PEERS env + bootstrap pipeline)",
 ]
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 8: Wave 113 — Gate-Distributed Evolution
+# Owner: ALL gate teams
+# Principle: Every alive gate runs something. Idle gates = wasted convergence.
+# Added by eastGate overwatch (2026-06-14) to assign per-gate ownership.
+# ──────────────────────────────────────────────────────────────
+
+[stream8]
+id = "GATE-DISTRIBUTED-EVOLUTION"
+owner = "ALL gate teams (cellMembrane/ironGate primary)"
+priority = "P1"
+description = """Wave 113 distributes evolution across the living mesh. Per-gate assignments
+ensure every gate is either testing, cascading, federating, or stressing the system."""
+
+[stream8.irongate_vps]
+owner = "cellMembrane (ironGate)"
+priority = "P1"
+tasks = [
+    "RIBOCIPHER-REJECT-PREP: Implement reject-mode in accept loops, test on VPS first",
+    "FLOCKGATE-FEDERATION-LIVE: Persistent (not ephemeral) peer enrollment, active_connections > 0",
+    "NUCLEUS-AWARE-PROBES: Replace socat with neuralAPI capability.call",
+    "PEPTI-BUILD-ORCHESTRATION: Route builds through neuralAPI graph",
+    "ROOTPULSE-LEDGER-INIT: First real commit chain (not dry-run)",
+    "CASCADE-STRESS-SCHEDULE: Scheduled cascade cycles against LAN gates",
+    "PRIMAL-CLI-CONTRACT: Standardize server subcommand args (guideStone amendment)",
+    "GATE-IDENTITY-FILE: Write /etc/membrane/gate_identity during bootstrap",
+    "PROFILE-AWARE-HEALTH: Tower-only = 2/2 PASS, full = 13/13",
+]
+
+[stream8.eastgate]
+owner = "primalSpring (eastGate)"
+priority = "P2"
+tasks = [
+    "CASCADE-RECIPIENT: Accept VPS cascades, validate zero-skew",
+    "PROTO-NUCLEATE-MANIFEST: Design sub-NUCLEUS topologies (nest, tower, compute)",
+    "VALIDATION-MONITORING: Run suite after cascades, catch regressions",
+    "OVERWATCH-AUDIT: Monitor cascade logs for manual intervention",
+]
+
+[stream8.southgate]
+owner = "cellMembrane (southGate)"
+priority = "P2"
+tasks = [
+    "PARALLEL-CASCADE-TARGET: Second LAN gate for cascade diversity",
+    "DEPLOY-THEN-STALE: Skip cycles intentionally, verify mesh detects skew",
+]
+
+[stream8.graphenegate]
+owner = "cellMembrane (grapheneGate)"
+priority = "P3"
+tasks = [
+    "AARCH64-CASCADE: Confirm x86 VPS → ARM cascade works",
+    "NUCLEUS-LAUNCHER-DEPLOY: Deploy 1.9MB ELF, validate subset startup",
+]
+
+[stream8.flockgate]
+owner = "cellMembrane (flockGate WAN)"
+priority = "P2"
+tasks = [
+    "PERSISTENT-FEDERATION: Sustained (not ephemeral) active_connections > 0",
+    "WAN-CASCADE-TEST: Cascade over WAN, measure latency",
+    "PARTITION-TOLERANCE-OPERATIONAL: Kill VPS songBird, verify auto-reconnect",
+]
+
+[stream8.ops_physical]
+owner = "ops (human hands only)"
+priority = "P2"
+note = "Once networked, cellMembrane takes over with gate.bootstrap"
+tasks = [
+    "NUC-PHYSICAL-SETUP: Placement, power, cable",
+    "WESTGATE-PHYSICAL-SETUP: Power on i7-4771 + 76TB ZFS",
+]
+
+# ──────────────────────────────────────────────────────────────
+# WAVE 113 EXIT CRITERIA
+# ──────────────────────────────────────────────────────────────
+
+[wave113_exit]
+criteria = [
+    "riboCipher REJECT deployed on at least 1 gate (VPS) with 0 unsignalled callers",
+    "flockGate persistent federation: active_connections > 0 (sustained, not ephemeral)",
+    "DEPLOY-THEN-STALE validated (southGate skips cascades, mesh detects)",
+    "At least 1 new hardware gate enrolled (NUC or westGate — ops-dependent)",
+    "rootpulse: first real (non-dry-run) commit chain through trio",
+    "Issues from gate clearing resolved: CLI contracts, gate_identity, profile-aware health",
+]
