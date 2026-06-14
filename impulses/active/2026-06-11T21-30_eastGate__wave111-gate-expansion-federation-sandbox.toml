@@ -44,9 +44,14 @@ strandgate_live = "strandGate LIVE — riboCipher ERROR escalation shipped (Wave
 pipeline_evolution = """✅ SHIPPED: freshness auto-publish (1baa2ec) + VPS auto-rebuild + race-condition fix (082d77c).
 Race fix: wave-ID guard + rebase-before-push prevents stale Wave 109 overwrites.
 Forgejo cleaned (19 stale auto-publish commits force-pruned, --force-with-lease)."""
-depot_action_needed = "VPS deploy 54eee01 → plasmid.harvest --all. cellMembrane W112 code shipped (health probe fix + plasmidBin resolution + UDS fallback) but not yet deployed to VPS. Auto-rebuild enabled; once VPS updated, depot converges."
-freshness_wave_id = """freshness.toml wave=112 (Jun 14). NEW ISSUE: golgiBody auto-publish overwrites full freshness with sparse (2-entry) version — VPS only sees plasmidBin + wateringHole repos locally.
-s_ecosystem_freshness test FAILS (expects >=20 heads, gets 2). cellMembrane evolution needed: --publish-freshness must merge, not overwrite, when publisher has partial visibility."""
+depot_action_needed = "RESOLVED — VPS deployed (06f9ad2→latest), depot 13/13 verified, songBird rebuilt to acf20b6e (riboCipher-aware). gate.status FULL GREEN HEALTHY."
+freshness_wave_id = """RESOLVED — freshness.toml wave=112 (Jun 14). Sparse-publish regression fixed: publish_freshness_toml now merges existing heads (preserves entries from other gates). auto_commit_freshness re-publishes after pull to ensure merge base includes full remote set. VPS publishes 27-entry (full) freshness confirmed."""
+ribocipher_convergence = "✅ COMPLETE — 8/8 WARN→ERROR escalation shipped. All primals riboCipher-compliant. Wave 113 target: REJECT."
+sourdough_forgejo = "RESOLVED — repository.status=1 in Forgejo DB caused HTTP 500. Fixed via sqlite3 UPDATE to status=0. ls-remote/push verified working."
+nucleus_activation = """✅ SHIPPED — biomeOS NUCLEUS (neural-api) running on golgiBody via biomeos-nucleus.service.
+rootpulse_commit graph deployed to /opt/membrane/graphs/. Provenance trio (sweetGrass, rhizoCrypt, loamSpine) routable via neural-api.
+rootpulse.commit wired into post-cascade freshness pipeline. sovereignty_verify() checks VCS HEADs against rootpulse ledger."""
+wave_abstraction = "✅ SHIPPED — WaveState struct (id, opened, closed, exit_criteria, last_rootpulse_session) in manifest.rs. Wave lifecycle is now a typed domain, not a raw TOML integer."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Gate Expansion — Priority Order
@@ -152,15 +157,14 @@ SONGBIRD_PEERS, SONGBIRD_FEDERATION_PORT env vars in bin_interface UDS/TCP path.
 Fixes flockGate reporting enabled=false."""
 federation_reconnect = """✅ DONE (f18aeb6b, Wave 111): spawn_peer_health_loop — 30s probe with
 exponential backoff (30s→60s→120s→cap 300s). Auto-reconnects after VPS restart."""
-flockgate_handshake = """IN PROGRESS (08c36f2 — flockGate WAN mesh validated):
-✅ songBird v0.2.1 deployed from depot (BLAKE3 verified)
+flockgate_handshake = """✅ UNBLOCKED (acf20b6e deployed to VPS depot, Jun 14):
+✅ songBird v0.2.1 deployed from depot (BLAKE3 verified, c42ef13)
 ✅ VPS port 7700 confirmed open
-✅ mesh.init succeeds
-⚠️ BLOCKER: Depot binary predates federation fix (f18aeb6b). Needs plasmid.harvest.
-Steps remaining:
-1. Rebuild songBird on VPS (plasmid.harvest --targets songbird) — depot has 32a8d700, need fe47c012+
-2. Deploy fresh binary to flockGate
-3. Validate: federation.enabled=true, active_connections > 0"""
+✅ mesh.init succeeds, riboCipher-aware
+✅ Depot binary rebuilt to acf20b6e (riboCipher + federation fix)
+Remaining:
+1. Deploy fresh binary to flockGate (fetch from VPS depot)
+2. Validate: federation.enabled=true, active_connections > 0"""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: Sandbox Graduation — Integrate into gate.bootstrap
@@ -486,3 +490,102 @@ extended = [
 last = [
     "northGate NUCLEUS 13/13 — family gate, spare compute when not in use",
 ]
+
+# ──────────────────────────────────────────────────────────────
+# AAR: Wave 112 cellMembrane — Operational Convergence
+# Date: 2026-06-14
+# From: eastGate overwatch
+# ──────────────────────────────────────────────────────────────
+
+[aar_wave112_cellmembrane]
+date = "2026-06-14"
+author = "eastGate overwatch (cellMembrane/ironGate)"
+theme = "Operational Convergence — prove the system self-heals"
+outcome = "SUCCESS — all P1 exit criteria met. System demonstrated zero-intervention cascade."
+
+[aar_wave112_cellmembrane.completed]
+items = [
+    "riboCipher WARN→ERROR: 8/8 primals escalated (W112 deprecation schedule on track)",
+    "VPS cellMembrane deploy: multiple iterations — 06f9ad2 (refactor), then freshness fix, then rootpulse wiring",
+    "songBird depot rebuild: acf20b6e deployed to golgiBody (riboCipher-aware, BLAKE3 c42ef13)",
+    "sourDough Forgejo fix: repository.status=1 → 0 in sqlite3 (HTTP 500 resolved)",
+    "Freshness sparse-publish fix: publish merges heads, auto_commit re-publishes after pull",
+    "NUCLEUS activation: neural-api service live, rootpulse graphs deployed, trio routable",
+    "RootPulse sovereignty: post-cascade commit + verification wired into pipeline",
+    "WaveState abstraction: typed lifecycle struct in manifest.rs",
+    "2 consecutive zero-intervention cascade cycles (22/22 parity) on eastGate",
+    "VPS gate.status: FULL GREEN HEALTHY (13/13 alive, 0 hash mismatch)",
+    "Deep refactoring: -213 net LOC across 22 files (jsonrpc module, atomic_write, serde freshness, git_ops consolidation, build toolchain dedup)",
+]
+
+[aar_wave112_cellmembrane.code_evolution]
+commits = [
+    "refactor: extract jsonrpc module, atomic_write, serde freshness, path idioms",
+    "refactor: consolidate XDG resolution, mesh init via jsonrpc, flatten nested ifs",
+    "refactor: consolidate git ops, XDG dedup, flatten depot read chains",
+    "refactor: deduplicate build toolchain, consolidate git helpers",
+    "fix: freshness sparse-publish merge + rootpulse sovereignty wiring + WaveState",
+]
+net_loc_delta = "-213 (refactoring) + 318 (sovereignty layer) = +105 net"
+test_count = "398/398 green"
+clippy = "zero warnings (-D warnings)"
+
+[aar_wave112_cellmembrane.architecture_shipped]
+items = [
+    "crate::jsonrpc — unified UDS JSON-RPC client with riboCipher signal + fallback",
+    "crate::atomic_write — safe temp+rename for all state files",
+    "crate::resolve_xdg_data_home — single source for XDG resolution",
+    "crate::git_ops — consolidated async git helpers",
+    "freshness::rootpulse_commit — registers cascade state with provenance trio via neural-api",
+    "freshness::sovereignty_verify — checks VCS HEADs against rootpulse ledger",
+    "manifest::WaveState — typed wave lifecycle (id, opened, closed, exit_criteria)",
+    "MembraneService::binary_for() — capability-based binary resolution (replaces FALLBACK_* constants)",
+    "FreshnessFile serde structs — replaces manual writeln! builder",
+    "publish_freshness_toml head merge — preserves entries from repos not locally cloned",
+]
+
+[aar_wave112_cellmembrane.vps_state]
+gate_status = "FULL GREEN HEALTHY"
+primals_alive = "13/13"
+depot_integrity = "13 verified, 0 hash mismatch, 0 missing"
+mesh_reachability = "1 peers, 1 reachable"
+nucleus_service = "biomeos-nucleus.service (neural-api, graphs deployed)"
+freshness = "27 heads (full ecosystem), auto-publish working"
+rootpulse = "COMMITTED (wave-112-cascade session IDs registered)"
+sovereignty_s1 = "OPERATIONAL — membrane.primals.eco 200 OK"
+sovereignty_s2 = "federation:REACHABLE TURN:TCP-CLOSED(UDP-only)"
+sovereignty_s3 = "OPERATIONAL — depot serving 10876KB"
+sovereignty_s4 = "RESPONDING — BearDog alive"
+
+[aar_wave112_cellmembrane.issues_found_and_resolved]
+items = [
+    "Freshness sparse-publish: VPS with partial repo set overwrote full manifest → fixed with head merge + post-pull re-publish",
+    "rootpulse graph_id: neural-api expects 'graph_id' not 'graph' in graph.execute params → fixed",
+    "wateringHole divergence: golgiBody had local-only freshness commits conflicting with forgejo → reset --hard to forgejo/main",
+    "sourDough forgejo HTTP 500: repository.status DB field was 1 (migrating?) → set to 0",
+    "NUCLEUS mode confusion: 'nucleus start --mode full' tries to spawn primals (conflicts with existing systemd units) → 'neural-api' command is correct for routing-only",
+    "NUCLEUS socket path: uses /run/user/0/biomeos by default → set MEMBRANE_SOCKET_BASE=/run/membrane in service env",
+    "rootpulse status 'unhealthy': primals lack 'health' capability registration → trio still routable via graph execution (different path)",
+]
+
+[aar_wave112_cellmembrane.remaining_for_wave113]
+items = [
+    "riboCipher REJECT escalation (Wave 113): unsignalled connections refused",
+    "flockGate federation validation: deploy acf20b6e songBird, validate active_connections > 0",
+    "westGate bootstrap: gate.bootstrap with nest profile after ops physical setup",
+    "NUC canary: gate.bootstrap canary-fieldmouse profile",
+    "NUCLEUS-aware gate probes: replace socat with neuralAPI-routed capability.call",
+    "Pepti build orchestration: route builds through neuralAPI graph instead of SSH scripts",
+    "rootpulse ledger initialization: first real (non-dry-run) commit chain through trio",
+    "sourDough: validate ribocipher subcommand + scaffold update for compliant accept loops",
+    "toadStool: TOADSTOOL-AUTO-REGISTER (PCI/sysfs GPU enumeration)",
+]
+
+[aar_wave112_cellmembrane.exit_criteria_assessment]
+criterion_1 = "VPS cellMembrane deployed: ✅ COMPLETE (latest with freshness fix + rootpulse)"
+criterion_2 = "songBird depot rebuilt ≥fe47c012: ✅ COMPLETE (acf20b6e, BLAKE3 verified)"
+criterion_3 = "2 cascade cycles, zero intervention: ✅ COMPLETE (22/22 parity × 2)"
+criterion_4 = "Version skew = 0 after cascade: ✅ COMPLETE (all repos at parity)"
+criterion_5 = "riboCipher ERROR 8/8: ✅ COMPLETE"
+criterion_6 = "At least 1 new hardware gate enrolled: ⬜ PENDING (ops physical setup required)"
+overall = "5/6 EXIT CRITERIA MET — Wave 112 operational objectives achieved. Criterion 6 blocked on physical ops."
