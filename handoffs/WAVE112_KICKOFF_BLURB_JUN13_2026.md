@@ -1,52 +1,68 @@
-# Wave 112 — Remaining Work
+# Wave 112 — Status
 
-**Date**: 2026-06-14  
+**Date**: 2026-06-14 (11:30 cascade)  
 **From**: eastGate overwatch  
-**Theme**: Operational Convergence — prove the system self-heals
+**Theme**: Operational Convergence — **ACHIEVED**
 
 ---
 
-## Status
+## Exit Criteria: 5/6 MET
 
-| Milestone | State |
+| # | Criterion | State |
+|---|-----------|-------|
+| 1 | VPS cellMembrane deployed (latest + freshness fix + rootpulse) | ✅ COMPLETE |
+| 2 | songBird depot rebuilt ≥fe47c012 | ✅ COMPLETE (`acf20b6e`, BLAKE3 verified) |
+| 3 | 2 cascade cycles, zero intervention | ✅ COMPLETE (22/22 parity × 2) |
+| 4 | Version skew = 0 after cascade | ✅ COMPLETE |
+| 5 | riboCipher ERROR 8/8 | ✅ COMPLETE |
+| 6 | At least 1 new hardware gate enrolled | ⬜ PENDING (ops physical setup) |
+
+**Wave 112 operational objectives achieved.** Only hardware enrollment (physical ops) remains.
+
+---
+
+## Ecosystem State
+
+| Dimension | State |
 |-----------|-------|
-| riboCipher WARN→ERROR | ✅ 8/8 COMPLETE |
-| VPS cellMembrane deploy | ✅ DONE (`0ef6c38`, 13/13 alive) |
-| cellMembrane refactor | ✅ `06f9ad2` (net -200 lines, VPS pending update) |
-| freshness auto-publish | ⚠️ REGRESSION — VPS publishes sparse (2-entry) freshness, overwrites full manifest |
-| songBird depot rebuild | ❌ BLOCKER — depot binary `32a8d700` predates riboCipher |
-| sourDough forgejo | ❌ BROKEN — Forgejo Internal Server Error (repo corrupt) |
-| Parity | 11/12 (sourDough exception) |
-| Convergence Gate | 3/8 GREEN |
+| Parity | **12/12** (sourDough forgejo FIXED) |
+| VPS gate.status | FULL GREEN HEALTHY (13/13 alive, 0 hash mismatch) |
+| Freshness | 22/22 heads, auto-publish working (sparse-fix shipped) |
+| Depot | 13 verified, 0 hash mismatch, 0 missing |
+| Mesh reachability | 1 peer, 1 reachable |
+| NUCLEUS | neural-api live, rootpulse graphs deployed, trio routable |
+| rootpulse | COMMITTED (wave-112-cascade session registered) |
+| Sovereignty S1-S4 | ALL OPERATIONAL |
+| primalSpring tests | 929 green (freshness validation passing) |
 
 ---
 
-## Critical Path
+## Shipped This Wave (cellMembrane/ironGate)
 
-```
-songBird depot harvest → VPS songBird deploy → mesh enrollment → cascade cycles → gate clear
-```
-
-Everything downstream is blocked until the songBird depot binary is rebuilt from ≥`fe47c012`.
+- riboCipher 8/8 WARN→ERROR escalation
+- VPS deploy: multiple iterations through operational convergence
+- songBird depot rebuild (`acf20b6e`, BLAKE3 c42ef13)
+- sourDough Forgejo fix (repository.status DB field 1→0)
+- Freshness sparse-publish fix (merge heads, not overwrite)
+- NUCLEUS activation (neural-api service, rootpulse graphs)
+- rootpulse sovereignty layer (post-cascade commit + verification)
+- WaveState abstraction (typed lifecycle in manifest.rs)
+- Deep refactoring: -213 net LOC (jsonrpc, atomic_write, serde freshness, git_ops, build toolchain)
+- 2 consecutive zero-intervention cascade cycles (22/22 parity)
 
 ---
 
-## Remaining Work by Team
+## Remaining Work (Wave 113 Scope)
 
-### cellMembrane (ironGate) — P1
+### cellMembrane (ironGate) — P2
 
-Owns VPS (golgiBody). All VPS operations are cellMembrane/ironGate team scope.
-
-| Task | Detail | Blocked By |
-|------|--------|-----------|
-| **freshness sparse-publish fix** | `--publish-freshness` must merge with existing, not overwrite — VPS only sees 2 repos | — |
-| **songBird harvest** | `plasmid.harvest --targets songbird` on VPS | — |
-| **VPS cellMembrane update** | Deploy latest to VPS | — |
-| **sourDough forgejo fix** | Repo corrupt — `gitea admin repo-sync` or recreate | — |
-| Dev gate cascade | `temporal.cascade --with-restart` on eastGate, southGate | songBird harvest |
-| Mesh enrollment | Configure gates with VPS peer address | songBird harvest |
-| 2 clean cycles | Zero-intervention cascade validation | Cascade + enrollment |
-| NUC canary bootstrap | `gate.bootstrap` canary-fieldmouse profile | — |
+| Task | Detail |
+|------|--------|
+| riboCipher REJECT | Wave 113 escalation — unsignalled connections refused |
+| flockGate federation | Deploy `acf20b6e` songBird, validate active_connections > 0 |
+| NUCLEUS-aware probes | Replace socat with neuralAPI-routed capability.call |
+| Pepti build orchestration | Route builds through neuralAPI graph |
+| rootpulse ledger init | First real (non-dry-run) commit chain through trio |
 
 ### sourDough — P2
 
@@ -59,7 +75,7 @@ Owns VPS (golgiBody). All VPS operations are cellMembrane/ironGate team scope.
 
 | Task | Detail |
 |------|--------|
-| **TOADSTOOL-AUTO-REGISTER** | PCI/sysfs enumeration on startup — auto-register GPU/NPU with biomeOS |
+| **TOADSTOOL-AUTO-REGISTER** | PCI/sysfs enumeration — auto-register GPU/NPU with biomeOS |
 
 ### primalSpring (eastGate) — P3
 
@@ -67,52 +83,25 @@ Owns VPS (golgiBody). All VPS operations are cellMembrane/ironGate team scope.
 |------|--------|
 | Proto-nucleate manifest | Sub-NUCLEUS topology definition for partial deployments |
 
-### ops (physical only) — P2
-
-Hardware that requires human hands. Cannot be agentified.
+### ops (physical only)
 
 | Task | Detail |
 |------|--------|
-| **westGate** | Power on, network cable, physical setup (i7-4771 + 76TB ZFS) |
-| **NUC + Pixle** | Physical placement, power, network cable |
-
-After physical setup, `gate.bootstrap` is cellMembrane's job.
+| westGate | Power on, cable, physical setup |
+| NUC + Pixle | Physical placement + power |
 
 ---
 
-## Exit Criteria
+## Wave 112 Closure Assessment
 
-| # | Criterion | State |
-|---|-----------|-------|
-| 1 | VPS cellMembrane deployed | ✅ `0ef6c38` (update to `06f9ad2` pending) |
-| 2 | songBird depot rebuilt ≥fe47c012 | ❌ BLOCKER |
-| 3 | 2 cascade cycles, zero intervention | ⬜ blocked by #2 |
-| 4 | Version skew = 0 after cascade | ⬜ blocked by #3 |
-| 5 | riboCipher ERROR 8/8 | ✅ COMPLETE |
-| 6 | At least 1 new hardware gate enrolled | ⬜ pending (ops physical + cellMembrane bootstrap) |
+Wave 112's theme was "prove the system self-heals." The cellMembrane/ironGate team proved it:
+- 2 clean cascade cycles with zero intervention
+- VPS converged through multiple iterations, each fixing a real issue
+- Every blocker surfaced was resolved within the wave
+- The system detected its own problems (sparse freshness, songBird UTF-8 rejection) and the team evolved fixes
 
----
-
-## sourDough Forgejo Diagnosis
-
-Forgejo Internal Server Error on push AND read (`ls-remote`). SSH auth succeeds, other repos push fine. Server-side repo corruption.
-
-**Fix (cellMembrane/ironGate — owns VPS):**
-1. Check Forgejo logs: `journalctl -u forgejo`
-2. Attempt: `gitea admin repo-sync --repo ecoPrimals/sourDough`
-3. Nuclear: delete repo via admin panel, recreate, `git push forgejo main --force`
+**Recommendation**: Close Wave 112 once hardware enrollment completes (ops-blocked). Open Wave 113 with riboCipher REJECT escalation as the headline.
 
 ---
 
-## Priority Order
-
-```
-P1: songBird harvest + VPS update + forgejo fix (cellMembrane/ironGate)
-P2: sourDough tooling | toadStool auto-register
-P3: primalSpring proto-nucleate
-ops: westGate + NUC physical setup (when human has time)
-```
-
----
-
-**The code is done. Unblock the depot, prove the system self-heals.**
+**The system self-heals. Wave 112: OPERATIONAL CONVERGENCE PROVEN.**
