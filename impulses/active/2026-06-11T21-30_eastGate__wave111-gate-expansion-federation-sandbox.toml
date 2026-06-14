@@ -866,3 +866,56 @@ criteria = [
     "rootpulse: first real (non-dry-run) commit chain through trio",
     "Issues from gate clearing resolved: CLI contracts, gate_identity, profile-aware health",
 ]
+
+# ──────────────────────────────────────────────────────────────
+# AAR: Multi-Gate Auto-Publish Divergence Pattern
+# Date: 2026-06-14
+# From: eastGate overwatch
+# Severity: P2 — recurring, creates manual reconciliation burden
+# ──────────────────────────────────────────────────────────────
+
+[aar_diverge_autopublish]
+date = "2026-06-14"
+author = "eastGate overwatch"
+theme = "Multi-gate freshness auto-publish creates VCS divergence requiring manual --force-with-lease"
+severity = "P2"
+recurrence = "Chronic — observed 4+ times in Wave 112-113 transition"
+
+[aar_diverge_autopublish.pattern]
+description = """Multiple gates (ironGate, golgiBody) independently auto-publish freshness.toml to
+whichever remote they reach. Despite the 02e79bb fix (push to both remotes), race conditions persist:
+1. ironGate publishes to origin (commit A)
+2. golgiBody publishes to forgejo (commit B) — same logical content, different SHA
+3. Neither can fast-forward the other → remotes diverge
+4. Membrane detects divergence → writes impulse notification (type=sync, diverge_type=multi_remote_diverge)
+5. No gate auto-resolves → overwatch must manually --force-with-lease one side
+
+Evidence from this wave: commits 1753b41, f583f3f, bcda332 are all DIVERGE impulse notifications.
+Required manual reconciliation: git push forgejo main --force-with-lease (e676c1f → b46a242)."""
+
+[aar_diverge_autopublish.root_cause]
+items = [
+    "No leader election for freshness publishes — both ironGate and golgiBody think they should publish",
+    "Race window: even pushing to both remotes, if two gates push within seconds, the second push to the 'other' remote will fail (not fast-forward)",
+    "Impulse notifications detect but don't resolve — suggested_action 'pull_leader_push_followers' is advisory only",
+    "wateringHole is a shared mutable repo with multiple writers — classic coordination problem",
+]
+
+[aar_diverge_autopublish.evolution_required]
+owner = "cellMembrane"
+priority = "P2"
+description = "Auto-resolve VCS divergence when impulse detects it, OR prevent it via leader election"
+options = [
+    "OPTION A (leader election): Designate ONE gate as freshness publisher. Others defer. golgiBody VPS is natural leader (always-on).",
+    "OPTION B (auto-resolve): When impulse detects diverge with suggested_action=pull_leader_push_followers, execute it automatically — fetch leader, rebase, push followers.",
+    "OPTION C (merge-reconcile): On diverge detection, auto-merge (commits are additive freshness updates, never conflict semantically). Push merged result to both.",
+    "OPTION D (freshness.mesh): Migrate freshness to songbird mesh.publish — eliminates VCS as coordination layer entirely (already identified as Wave 113 P3).",
+]
+recommended = "OPTION A (short-term) + OPTION D (long-term). Designate golgiBody as sole freshness publisher NOW, evolve to mesh.publish over time."
+
+[aar_diverge_autopublish.immediate_mitigation]
+description = """Until cellMembrane evolves auto-resolution:
+- golgiBody VPS should be the ONLY gate that auto-publishes freshness
+- ironGate should NOT auto-publish freshness (it creates the race)
+- If divergence is detected, the gate that detects it should auto-pull + push (not just notify)
+Policy: single-writer for freshness.toml until mesh.publish replaces VCS coordination."""

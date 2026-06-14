@@ -41,8 +41,8 @@ ARM:            grapheneGate
 
 | Task | Detail | Status |
 |------|--------|--------|
-| **riboCipher REJECT prep** | Implement reject-mode in accept loops. Test on VPS — 0 unsignalled in ERROR logs before enabling REJECT. | ⬜ |
-| **flockGate persistent federation** | Sustained (not ephemeral) peer enrollment — `active_connections > 0` continuous | ⚠️ proven ephemeral |
+| **riboCipher REJECT prep** | Implement reject-mode in accept loops. Test on VPS — 0 unsignalled in ERROR logs before enabling REJECT. | ✅ hotSpring+strandGate SHIPPED. VPS remaining. |
+| **flockGate persistent federation** | Sustained (not ephemeral) peer enrollment — `active_connections > 0` continuous | ⚠️ BLOCKED — enroll flockGate on VPS |
 | **NUCLEUS-aware probes** | Replace socat with neuralAPI-routed `capability.call` | ⬜ |
 | **Pepti build orchestration** | Route depot rebuilds through neuralAPI graph | ⬜ |
 | **rootpulse ledger init** | First real commit chain through trio (not dry-run) | ⬜ |
@@ -53,12 +53,12 @@ ARM:            grapheneGate
 
 ### eastGate (primalSpring + overwatch) — P2
 
-| Task | Detail |
-|------|--------|
-| **Cascade recipient** | Accept cascades from VPS, validate zero-skew |
-| **Proto-nucleate manifest** | Design sub-NUCLEUS topologies (nest, tower, compute profiles) |
-| **Validation monitoring** | Run `s_ecosystem_freshness` + full suite after cascades |
-| **Overwatch auditing** | Monitor cascade logs for manual intervention signals |
+| Task | Detail | Status |
+|------|--------|--------|
+| **Cascade recipient** | Accept cascades from VPS, validate zero-skew | ⬜ |
+| **Proto-nucleate manifest** | Design sub-NUCLEUS topologies (nest, tower, compute profiles) | ✅ SHIPPED (sporePrint `69e850c`) |
+| **Validation monitoring** | Run `s_ecosystem_freshness` + full suite after cascades | ✅ 929 tests green |
+| **Overwatch auditing** | Monitor cascade logs for manual intervention signals | ⬜ |
 
 ### southGate — P2
 
@@ -69,18 +69,18 @@ ARM:            grapheneGate
 
 ### grapheneGate (aarch64) — P3
 
-| Task | Detail |
-|------|--------|
-| **Cross-arch cascade** | Confirm x86 VPS → ARM gate cascade works |
-| **nucleus_launcher deploy** | Deploy 1.9MB ELF, validate NUCLEUS subset startup |
+| Task | Detail | Status |
+|------|--------|--------|
+| **Cross-arch cascade** | Confirm x86 VPS → ARM gate cascade works | ⬜ (stale depot blocks) |
+| **nucleus_launcher deploy** | Deploy 1.9MB ELF, validate NUCLEUS subset startup | ⚠️ launcher works, blocked by pre-riboCipher depot binaries + songBird PID dir |
 
 ### flockGate (WAN) — P2
 
 | Task | Detail | Status |
 |------|--------|--------|
-| **Persistent federation** | Sustained (not ephemeral) `active_connections > 0` — ephemeral canary proved code, now validate ops | ⚠️ proven ephemeral |
-| **WAN cascade** | Cascade over WAN link, measure latency/reliability | ⬜ |
-| **Partition tolerance** | Kill VPS songBird, verify auto-reconnect (operational validation of Stream 6 code) | ⬜ |
+| **Persistent federation** | Sustained (not ephemeral) `active_connections > 0` — VPS must enroll flockGate | ⚠️ BLOCKED on VPS peer enrollment |
+| **WAN cascade** | Cascade over WAN link, measure latency/reliability | ✅ VALIDATED (2.2 MB/s, BLAKE3 verified) |
+| **Partition tolerance** | Kill VPS songBird, verify auto-reconnect | ⚠️ GAP: reachability is STATIC without active connection — needs enrollment first |
 
 ---
 
@@ -101,12 +101,12 @@ Once powered and networked, `gate.bootstrap` is cellMembrane's job.
 
 | # | Criterion | Status |
 |---|-----------|--------|
-| 1 | riboCipher REJECT deployed on at least 1 gate (VPS) with 0 unsignalled callers in ERROR logs | ⬜ |
-| 2 | flockGate persistent federation: `active_connections > 0` (not ephemeral — sustained) | ⚠️ PROVEN ephemeral, needs persistent |
+| 1 | riboCipher REJECT deployed on at least 1 gate with 0 unsignalled callers | ✅ DONE — hotSpring `c0245b6` + strandGate: -32002, legacy removed |
+| 2 | flockGate persistent federation: `active_connections > 0` (sustained) | ⚠️ BLOCKED — VPS must enroll flockGate as peer |
 | 3 | DEPLOY-THEN-STALE validated (southGate skips cascades, mesh detects) | ⬜ |
 | 4 | At least 1 new hardware gate enrolled (NUC or westGate — ops-dependent) | ⬜ |
 | 5 | rootpulse: first real (non-dry-run) commit chain through trio | ⬜ |
-| 6 | Issues exposed by gate clearing resolved: per-primal CLI contracts, gate identity file, profile-aware health | ⬜ |
+| 6 | Issues exposed by gate clearing resolved: CLI contracts, gate identity, profile-aware health | ⚠️ PARTIAL — proto-nucleate SHIPPED, CLI+identity pending |
 
 ---
 
@@ -121,10 +121,28 @@ Once powered and networked, `gate.bootstrap` is cellMembrane's job.
 
 ---
 
+## Critical Findings (this wave)
+
+| Finding | Impact | Action |
+|---------|--------|--------|
+| **Multi-gate freshness divergence** | ironGate + golgiBody both auto-publish → parallel histories → manual `--force-with-lease` required | P2 cellMembrane: Single-writer policy (golgiBody only) + evolve to mesh.publish |
+| **songBird reachability is STATIC** | Partition tolerance undetectable without active connection — `last_seen_ms` climbs forever | P2 songBird: Add periodic reachability probing even without established federation |
+| **grapheneGate depot stale** | Pre-riboCipher binaries misinterpret `[0xEC, 0x01]` as BTSP frame (3.9GB) | P1 cellMembrane: `plasmid.harvest --targets beardog,songbird --arch aarch64` from HEAD |
+| **songBird PID dir portability** | Read-only filesystem on GrapheneOS blocks startup | P2 songBird: Add `--state-dir` / `SONGBIRD_STATE_DIR` with XDG fallback |
+| **flockGate enrollment missing** | Code proven via ephemeral canary, but persistent ops not yet done | P1 cellMembrane: Update VPS SONGBIRD_PEERS + restart |
+
+### Divergence Pattern (chronic, needs evolution)
+
+Multiple gates auto-publish freshness independently → different SHAs for same content → remotes diverge → manual reconciliation. The membrane **detects** it (writes impulse notifications) but doesn't **resolve** it. This is the same class of problem we've manually fixed 4+ times.
+
+**Recommended**: Designate golgiBody VPS as sole freshness publisher (short-term). Evolve to `freshness.mesh` via songbird `mesh.publish` (long-term, eliminates VCS as coordination layer).
+
+---
+
 ## Key Principle
 
 > Gates are evolution arenas. Every gate that's alive should be running something. The mesh is the test environment. The mesh IS the system under test.
 
 ---
 
-**Wave 113: Distribute. Evolve. Stress. Every gate earns its place.**
+**Wave 113: 1/6 exit criteria met. Critical path: VPS peer enrollment → persistent federation.**
