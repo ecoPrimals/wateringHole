@@ -20,7 +20,7 @@
 [meta]
 version = "2.6.0"
 generated = "2026-06-11"
-wave = 112
+wave = 109
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -544,13 +544,35 @@ repos = [
     "hotSpring",
 ]
 
+# fieldGate — NUC canary, full NUCLEUS 13/13, canary-fieldmouse profile
+[gates.fieldGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "full"
+transport = "lan"
+mesh_peer = "157.230.3.183:7700"
+profile = "canary-fieldmouse"
+notes = "Fresh NUC — zero-context onboarding target. Full NUCLEUS canary with previous-good binaries."
+repos = [
+    "nestGate", "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat",
+    "cellMembrane", "projectNUCLEUS",
+]
+
 # flockGate — WAN shadow, sporePrint team, full validation
+# SEGMENTATION: external-only. Reaches LAN gates exclusively via golgiBody relay.
 [gates.flockGate]
 target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "uds"
 composition = "full"
 transport = "wan"
 mesh_peer = "157.230.3.183:7700"
-bind_mode = "uds"
+segmentation = "external-only"
+notes = "WAN shadow gate. External-to-internal only via golgiBody relay. Never direct LAN access."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",

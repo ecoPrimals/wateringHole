@@ -1159,3 +1159,93 @@ binary_deployed = "bd9dfcb → golgiBody /opt/membrane/membrane"
 short_term = "Current approach: rebase linearization on shared repos"
 long_term = "Leader election OR mesh-native state via songBird mesh.publish (eliminate dual-remote coordination entirely)"
 known_gap = "If rebase conflicts (content conflict, not just history): still fails and requires manual resolution. Expected to be rare since most shared repo changes are additive (freshness, AARs, impulses)."
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 9: Wave 114 — fieldGate Onboarding + RustDesk Relay + Network Segmentation
+# Owner: cellMembrane/ironGate (primary), ops (physical only)
+# Added by eastGate overwatch (2026-06-15)
+# Principle: Fresh NUC validates gate.bootstrap end-to-end.
+#            RustDesk relay enables sovereignty-layer remote access.
+#            Network segmentation codifies external/internal routing.
+# ──────────────────────────────────────────────────────────────
+
+[stream9]
+id = "WAVE114-FIELDGATE-RUSTDESK-SEGMENTATION"
+owner = "cellMembrane/ironGate (primary), ops (physical NUC setup only)"
+priority = "P1"
+description = """Wave 114 has three threads:
+1. fieldGate NUC onboarding — zero-context gate bootstrap validation (canary-fieldmouse profile)
+2. RustDesk relay on golgiBody — sovereignty layer for remote gate access (validates primal-native solution)
+3. Network segmentation — codify flockGate external-only, LAN internal-only, golgiBody as relay bridge
+
+fieldGate is a fresh NUC with zero primal code. gate.bootstrap --gate fieldGate --profile canary-fieldmouse
+must work end-to-end: pull depot, generate identity, install systemd units, start NUCLEUS 13/13, mesh enroll.
+
+RustDesk (hbbs/hbbr on golgiBody) is used like Forgejo — a sovereignty-affirming tool that validates
+the primal-native solution (songBird mesh relay). cellMembrane routes for RustDesk as part of Tower
+composition. Also enables projectNUCLEUS compute access (ABG member remote desktop to workload gates).
+
+Network segmentation clarifies routing: flockGate reaches LAN exclusively through golgiBody relay.
+LAN gates communicate internal-only (UDS + LAN TCP). golgiBody bridges external and internal."""
+
+[stream9.fieldgate_onboarding]
+owner = "cellMembrane/ironGate + ops (physical setup)"
+priority = "P1"
+tasks = [
+    "OPS: NUC physical placement, power, Cat6e cable to LAN switch",
+    "OPS: Install base OS (Pop!_OS/Ubuntu minimal), ensure SSH from eastGate",
+    "CELLMEMBRANE: gate.bootstrap --gate fieldGate --profile canary-fieldmouse",
+    "CELLMEMBRANE: Validate 13/13 health-alive post-bootstrap",
+    "CELLMEMBRANE: Register fieldGate in songBird mesh (SONGBIRD_PEERS update)",
+    "CELLMEMBRANE: Verify depot pull from VPS (previous-good binaries from plasmidBin)",
+]
+success_criteria = [
+    "gate.bootstrap completes on blank NUC with no manual intervention beyond physical setup",
+    "13/13 primals alive (canary-fieldmouse profile)",
+    "fieldGate appears in songBird mesh (peer reachable from eastGate + golgiBody)",
+    "RustDesk client on fieldGate can reach golgiBody relay",
+]
+
+[stream9.rustdesk_relay]
+owner = "cellMembrane/ironGate"
+priority = "P2"
+description = """RustDesk relay (hbbs + hbbr) on golgiBody-ext enables sovereignty-layer remote access.
+Ports 21115-21117 already documented in MEMBRANE_CHANNEL_ARCHITECTURE.md.
+CellMembrane manages relay health as part of NUCLEUS composition. Over time, RustDesk validates and
+guides evolution of primal-native remote access (songBird mesh relay + projectNUCLEUS SSH tunnels)."""
+tasks = [
+    "Verify hbbs-membrane + hbbr-membrane services running on golgiBody-ext (:21115-21117)",
+    "Add RustDesk relay to cellMembrane health sweep (systemd alive + port reachable)",
+    "Configure LAN gates to use golgiBody relay (P2P when LAN-local, relay fallback via VPS)",
+    "Configure WAN gates (flockGate) to always route through golgiBody relay",
+    "Document RustDesk key distribution (how new gates get relay public key during bootstrap)",
+    "projectNUCLEUS: Enable ABG member compute access via RustDesk relay to workload gates",
+]
+
+[stream9.network_segmentation]
+owner = "cellMembrane/ironGate"
+priority = "P2"
+description = """Codify and enforce network segmentation policy:
+- flockGate (WAN): external-to-internal ONLY via golgiBody relay. Never direct LAN access.
+- LAN gates (east, iron, field, north, strand, south, west): internal-only mesh. UDS + LAN TCP.
+- golgiBody: Relay bridge between external and internal. Runs songBird + RustDesk + TURN.
+- grapheneGate: Mobile. LAN when home (covalent), WAN via golgiBody relay when away."""
+tasks = [
+    "Enforce flockGate external-only routing (songBird mesh peer via golgiBody relay only)",
+    "Verify LAN gates cannot be reached from WAN without relay (no port exposure)",
+    "Document relay bridge topology in MEMBRANE_CHANNEL_ARCHITECTURE.md update",
+    "Implement transport-aware mesh peering in cellMembrane (LAN=direct, WAN=relay)",
+    "RustDesk segmentation: LAN sessions P2P direct, WAN sessions relay-only via golgiBody",
+]
+
+[stream9.projectnucleus_compute_access]
+owner = "cellMembrane/ironGate"
+priority = "P3"
+description = """projectNUCLEUS compute sharing for ABG members. RustDesk relay + SSH tunnel pattern.
+NUC intake node on LAN, relay via golgiBody for external access. RustDesk for desktop sharing, SSH for headless."""
+tasks = [
+    "SSH tunnel pattern: external user -> golgiBody relay -> NUC intake -> LAN workload gate",
+    "RustDesk: ABG member connects to relay, reaches workload gate screen",
+    "Validate with fieldGate as intake node for compute access",
+    "Document access provisioning in compute-sharing/ guide",
+]

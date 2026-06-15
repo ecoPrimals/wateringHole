@@ -213,6 +213,13 @@ mobility = "mobile"
 transport = "adb"
 role = "Pixel 8a portable trust anchor"
 
+[fleet.gates.fieldGate]
+arch = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+transport = "lan"
+profile = "canary-fieldmouse"
+role = "NUC canary — full NUCLEUS 13/13, previous-good binaries, zero-context onboarding target"
+
 [fleet.gates.flockGate]
 arch = "x86_64-unknown-linux-musl"
 mobility = "fixed"
