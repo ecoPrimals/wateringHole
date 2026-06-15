@@ -3,7 +3,7 @@
 **Status**: 5/6 exit criteria met | VPS FULL GREEN (8/8) | Diderm auto-reconciliation SHIPPED  
 **Only exit blocker**: Hardware enrollment (ops-physical)  
 **Focus now**: Per-primal interaction quality + remaining evolution debt  
-**Latest**: `047ad49` probe_policy fix (S4 regression resolved), `443fc6a` sync_converge refactor
+**Latest**: skunkBat `6962d04` riboCipher+health+deep-debt (Jun 14-15), `047ad49` probe_policy fix, `443fc6a` sync_converge refactor
 
 ---
 
@@ -21,13 +21,13 @@
 | rhizoCrypt | ❌ BTSP reject | ✅ | Accept prefix |
 | barracuda | ❌ timeout | ✅ | Accept prefix |
 | petalTongue | ✅ `cdcb1ee` | ✅ | **DONE** — riboCipher prefix acceptance shipped (Jun 14). Depot rebuild needed. |
-| skunkBat | ❌ timeout | ⚠️ -32601 | Accept prefix + implement `health` method |
+| skunkBat | ✅ `6962d04` | ✅ `6962d04` | **DONE** — riboCipher + health shipped (Jun 14). Deep debt evolution (env centralization, magic→config, AtomicBool, session TTL reaper, TCP BTSP parity) Jun 15. Depot rebuild needed. |
 | loamSpine | ❌ timeout | ⚠️ -32601 | Accept prefix + implement `health` method |
 | coralReef | ❌ parse error | ⚠️ -32601 | Accept prefix + implement `health` method |
 | squirrel | ❌ timeout | ⚠️ -32601 | Accept prefix + implement `health` method |
 | toadStool | ❌ timeout | ❌ silent | **P1**: Fix silent socket + accept prefix + implement `health` |
 
-**Score**: 7/15 signal-compliant, 10/15 health-responding. Target: 15/15 both.
+**Score**: 8/15 signal-compliant, 11/15 health-responding. Target: 15/15 both.
 
 ---
 
@@ -108,7 +108,21 @@ Auto-registration shipped. 0 capabilities still registered operationally — nee
 
 ---
 
-## skunkBat, loamSpine, coralReef, squirrel
+## skunkBat — **DONE**
+
+All Wave 113 tasks shipped + deep debt evolution:
+- ✅ riboCipher `[0xEC, 0x01]` prefix acceptance on TCP + UDS (`6962d04`, Jun 14)
+- ✅ `health` JSON-RPC method — HEALTH-01 compliant (`6962d04`, Jun 14)
+- ✅ TCP BTSP binary riboCipher routing (was UDS-only, now parity)
+- ✅ Session TTL reaper for BTSP sessions (1hr TTL, 5min sweep)
+- ✅ All env vars centralized in `env_keys.rs` (10+ scattered literals eliminated)
+- ✅ `Timestamp::now()` panic-free (last `.expect()` eliminated)
+- ✅ 5 magic numbers promoted to `DetectionConfig`
+- ✅ `FederationClient.connected`: `Arc<RwLock<bool>>` → `AtomicBool`
+- ✅ Baseline seed data decoupled from hardcoded port
+- 544 tests, zero clippy warnings. **Depot rebuild needed** to deploy to VPS.
+
+## loamSpine, coralReef, squirrel
 
 | Task | Priority |
 |------|----------|
@@ -181,8 +195,8 @@ nucleus_launcher works, TCP bind works. Blocked by stale depot + songBird state-
 
 | Amendment | Status |
 |-----------|--------|
-| `health` method MANDATORY | sporePrint validation ships enforcement. 10/15 comply. |
-| riboCipher signal MANDATORY on UDS | 7/15 comply (petalTongue `cdcb1ee` shipped, depot rebuild pending). Standard documented. |
+| `health` method MANDATORY | sporePrint validation ships enforcement. 11/15 comply (skunkBat `6962d04` shipped). |
+| riboCipher signal MANDATORY on UDS | 8/15 comply (skunkBat `6962d04`, petalTongue `cdcb1ee` shipped, depot rebuilds pending). Standard documented. |
 | Socket manifest per primal | Documented in NUCLEUS audit AAR (28 sockets) |
 | neuralAPI capability registration | biomeOS auto-registration shipped, needs operational validation |
 | Per-primal `server` arg standard | ServerContract enum codifies it. Template units replaced. |
@@ -215,4 +229,4 @@ nucleus_launcher works, TCP bind works. Blocked by stale depot + songBird state-
 
 ---
 
-**Primal interaction compliance: 7/15 signal, 10/15 health. Target: all 15. This is the primary evolution pressure for Wave 114.**
+**Primal interaction compliance: 8/15 signal, 11/15 health. Target: all 15. This is the primary evolution pressure for Wave 114.**
