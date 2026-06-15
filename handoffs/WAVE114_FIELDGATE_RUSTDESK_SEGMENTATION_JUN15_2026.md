@@ -55,16 +55,18 @@ ADB-like point-to-point. Static /30, instant SSH, no switch needed.
 | fieldGate RustDesk client → relay | TODO |
 | ABG member end-to-end via relay | TODO |
 
-### Thread 3: Pepti Build Authority (cellMembrane debt)
+### Thread 3: Pepti Build Authority (ASSIGNED: cellMembrane/ironGate)
 
-pepti = dedicated build VPS (2 cores, 4GB, 80GB, cargo). **Cannot self-fetch** (no GitHub SSH key, golgi SSH 28s+).
+pepti = dedicated build VPS (2 cores, 4GB, 80GB, cargo). **Cannot self-fetch** (no GitHub SSH key, golgi SSH 28s+). VPS is cellMembrane purview — assigned on reboot return.
 
-| Task | Status |
-|------|--------|
-| Deploy key for GitHub (or reliable Forgejo pull) | TODO |
-| Investigate pepti↔golgi 28s SSH latency | TODO |
-| harvest freshness gate (refuse stale source) | TODO |
-| aarch64 cross-compile target | TODO |
+| Task | Owner | Status |
+|------|-------|--------|
+| Ensure pepti repos are at HEAD before harvest | cellMembrane | TODO |
+| Full `plasmid.harvest --all` on pepti (prior attempt SSH-timed-out) | cellMembrane | TODO |
+| Deploy key for GitHub (or reliable Forgejo pull) | cellMembrane | TODO |
+| Investigate pepti↔golgi 28s SSH latency | cellMembrane | TODO |
+| harvest freshness gate (refuse stale source) | cellMembrane | TODO |
+| aarch64 cross-compile target on pepti | cellMembrane | TODO |
 
 ### Thread 4: aarch64 for Pixel
 

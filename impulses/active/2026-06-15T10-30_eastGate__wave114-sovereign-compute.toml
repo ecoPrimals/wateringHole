@@ -83,13 +83,16 @@ id = "PEPTI-BUILD-AUTHORITY"
 owner = "cellMembrane/ironGate"
 priority = "P1"
 description = """pepti (4GB, 2 cores, 80GB, cargo 1.96.0) is the build-authority VPS.
-Divergence: no GitHub deploy key, slow SSH to golgi. Must self-heal."""
+Divergence: no GitHub deploy key, slow SSH to golgi. Must self-heal.
+ASSIGNED: cellMembrane/ironGate owns all VPS infrastructure. Pepti convergence
+is their responsibility upon return from reboot."""
 
 [stream3.tasks]
-deploy_key = { status = "TODO", priority = "P1", note = "pepti needs GitHub SSH deploy key OR must pull reliably from Forgejo before harvest" }
-golgi_ssh_latency = { status = "TODO", priority = "P2", note = "pepti↔golgi SSH is 28s+. DNS or network. Investigate." }
-harvest_freshness_gate = { status = "TODO", priority = "P2", note = "plasmid.harvest should refuse to build from stale source. Check repo HEAD age before compile." }
-aarch64_target = { status = "TODO", priority = "P2", note = "Add musl aarch64 target to pepti for Pixel cross-compile" }
+deploy_key = { status = "TODO", priority = "P1", owner = "cellMembrane/ironGate", note = "pepti needs GitHub SSH deploy key OR must pull reliably from Forgejo before harvest" }
+golgi_ssh_latency = { status = "TODO", priority = "P2", owner = "cellMembrane/ironGate", note = "pepti↔golgi SSH is 28s+. DNS or network. Investigate." }
+harvest_freshness_gate = { status = "TODO", priority = "P2", owner = "cellMembrane/ironGate", note = "plasmid.harvest should refuse to build from stale source. Check repo HEAD age before compile." }
+pepti_full_rebuild = { status = "TODO", priority = "P1", owner = "cellMembrane/ironGate", note = "Ensure pepti repos are current, then plasmid.harvest --all. Prior attempt aborted (SSH timeout). Pepti has cargo — can build all 13." }
+aarch64_target = { status = "TODO", priority = "P2", owner = "cellMembrane/ironGate", note = "Add musl aarch64 target to pepti for Pixel cross-compile" }
 
 # ──────────────────────────────────────────────────────────────
 # CARRY (parallel, not blocking Wave 114 close)
