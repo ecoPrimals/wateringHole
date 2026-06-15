@@ -1,134 +1,174 @@
-# Wave 114 — fieldGate Onboarding + RustDesk Relay + Network Segmentation
+# Wave 114 — ABG Sovereign Compute by Friday
 
-**Status**: ACTIVE | Wave 113 exit 5/6 (hardware enrollment pending — THIS WAVE CLOSES IT)
+**Status**: ACTIVE | ALL THREADS P1 | Deadline: Friday June 20
 **Date**: June 15, 2026
 **From**: eastGate overwatch
 
 ---
 
-## Objective
+## Driving Objective
 
-Three threads converge: onboard `fieldGate` NUC (satisfies hardware enrollment criterion),
-validate RustDesk relay as sovereignty layer, and codify network segmentation for the mesh.
+Evolve the proven compute path into robust, sovereign, multi-target infrastructure.
 
----
+**Exit gate**: cellMembrane + plasmidBin depots live and deploying on all form factors:
+- **NUC** (fieldGate) — x86_64, LAN 2.5G, canary-fieldmouse profile
+- **Pixel** (grapheneGate) — aarch64, mobile/LAN
+- **WAN** (flockGate) — x86_64, relay-only via golgiBody
 
-## Thread 1: fieldGate NUC Onboarding (P1)
-
-**Owner**: ops (physical) + cellMembrane/ironGate (bootstrap)
-
-A fresh NUC with zero context. `gate.bootstrap` must work end-to-end.
-
-| Phase | Owner | Task |
-|-------|-------|------|
-| Physical | ops | Rack, power, Cat6e cable, base OS, SSH reachable |
-| Bootstrap | cellMembrane | `gate.bootstrap --gate fieldGate --profile canary-fieldmouse` |
-| Validate | cellMembrane | 13/13 alive, mesh enrolled, cascade from VPS works |
-| RustDesk | cellMembrane | Client installed, relay reachable via golgiBody-ext |
-
-**Success**: fieldGate healthy in mesh = Wave 113 exit criterion #4 MET = Wave 113 CLOSED.
-
-**Handoff**: [FIELDGATE_NUC_ONBOARDING_WAVE114_JUN15_2026.md](FIELDGATE_NUC_ONBOARDING_WAVE114_JUN15_2026.md)
+Full validation: depot pull → bootstrap/update → 13/13 alive → health sweep GREEN.
 
 ---
 
-## Thread 2: RustDesk Relay Validation (P2)
+## Compliance Snapshot (post-cascade Jun 15 10:00)
+
+| Metric | Score | Notes |
+|--------|-------|-------|
+| riboCipher accept | ~14/15 | bearDog + toadStool SHIPPED (code) |
+| riboCipher signal | 9-10/15 | squirrel full bidirectional, bearDog likely signals |
+| health method | ~13/15 | bearDog + toadStool SHIPPED |
+| depot (x86_64) | **13/13 BUILT** | plasmidBin rebuilt today (2026-06-15T14:05Z) |
+| VCS parity (origin↔forgejo) | **ALL SYNCED** | 14/14 repos pushed Jun 15 |
+| toadStool S319 | dead protocol purge | gRPC + OpenCL deleted (−458 lines, 60 files) |
+| cellMembrane bf0c7c3 | VCS parity probe + RustDesk health | gate.status now detects drift + relay TCP |
+
+**Critical path resolved**: Depot is **13/13 current from HEAD** (all x86_64 musl).
+The blocker was depot builds — **pepti** (build-authority VPS) is now actively
+rebuilding a fresh set (redundant validation). Next: aarch64 cross-compile for Pixel.
+
+---
+
+## Remaining Work — Closing Checklist
+
+### 1. Diderm Sync + Depot Rebuild (P1 — THE CRITICAL PATH)
 
 **Owner**: cellMembrane/ironGate
+**AAR**: [AAR_DIDERM_CASCADE_STALE_FORGEJO_WAVE114_JUN15_2026.md](AAR_DIDERM_CASCADE_STALE_FORGEJO_WAVE114_JUN15_2026.md)
 
-RustDesk is sovereignty infrastructure — used like Forgejo. Self-hosted relay validates
-primal-native remote access solutions (songBird mesh, SSH tunnels) over time.
+Forgejo was 49 commits stale — now synced. Depot rebuilt from HEAD.
 
-**Tiered access convergence**: RustDesk view-only mode = Reviewer tier (Tier 2). The relay
-enables live screen observation without input — validating the view/action separation that
-bearDog will eventually enforce cryptographically. Full architecture documented in
-`projectNUCLEUS/specs/TIERED_ACCESS_ARCHITECTURE.md`.
+**First ant through** (unblock this week):
+
+| Task | Status |
+|------|--------|
+| Sync all 14 repos to forgejo (`git push forgejo main`) | **DONE** (Jun 15) |
+| Depot x86_64 rebuilt from HEAD (plasmidBin 13/13) | **DONE** (Jun 15 14:05Z) |
+| pepti rebuild (redundant build-authority validation) | IN PROGRESS (building) |
+| `plasmid.harvest --targets aarch64` (cross-compile for Pixel) | TODO |
+| Verify BLAKE3 checksums match rebuilt binaries | DONE (checksums.toml updated) |
+
+**Evolve and abstract** (cellMembrane self-healing — Wave 115):
+
+| Evolution | Status |
+|-----------|--------|
+| Bidirectional cascade: detect drift on either remote, push ahead→behind | TODO |
+| Event-driven: Forgejo webhook on push-receive triggers cascade | TODO |
+| VCS parity in health sweep (drift > 0 = WARN) | **SHIPPED** (bf0c7c3) |
+| RustDesk relay TCP health in gate.status | **SHIPPED** (bf0c7c3) |
+| No workflow change for gate teams — peptid layer self-heals | TODO |
+
+**Then validate deployment on all three targets:**
+
+| Target | Arch | Transport | Validation |
+|--------|------|-----------|------------|
+| fieldGate (NUC) | x86_64-musl | LAN 2.5G direct | gate.bootstrap → 13/13 alive |
+| grapheneGate (Pixel) | aarch64-musl | LAN/relay | gate.fetch + gate.update → 13/13 alive |
+| flockGate (WAN) | x86_64-musl | relay via golgiBody | gate.fetch + gate.update → 13/13 alive |
+
+### 2. fieldGate NUC Onboarding (P1 — ops + cellMembrane/ironGate)
+
+| Task | Owner | Status |
+|------|-------|--------|
+| NUC physical: rack, power, Cat6e (2.5G) to 10G switch | ops | TODO |
+| Base OS (Pop!_OS minimal), SSH from eastGate | ops | TODO |
+| `gate.bootstrap --gate fieldGate --profile canary-fieldmouse` | cellMembrane | TODO |
+| 13/13 health-alive + songBird mesh enrolled | cellMembrane | TODO |
+
+### 3. RustDesk Relay (P1 — cellMembrane/ironGate)
 
 | Task | Status |
 |------|--------|
 | Verify hbbs-membrane + hbbr-membrane alive on golgiBody-ext (:21115-21117) | TODO |
-| Add relay to cellMembrane health sweep (systemd alive + port probe) | TODO |
-| LAN gates: P2P direct, relay fallback via VPS | TODO |
-| WAN gates (flockGate): relay-only via golgiBody | TODO |
-| Key distribution: relay public key during gate.bootstrap | TODO |
-| projectNUCLEUS: ABG member compute access via relay | TODO |
-| RustDesk view-only mode for reviewer tier (no input forwarding) | TODO |
+| Add relay to cellMembrane health sweep | **SHIPPED** (bf0c7c3 — S2 TCP probe) |
+| fieldGate RustDesk client → golgiBody relay | TODO |
+| flockGate → relay-only via golgiBody | TODO |
+| grapheneGate → LAN P2P when home, relay when away | TODO |
 
----
-
-## Thread 3: Network Segmentation (P2)
-
-**Owner**: cellMembrane/ironGate
-
-Routing policy codified. cellMembrane enforces based on gate `transport` field.
-
-| Zone | Gates | Routing |
-|------|-------|---------|
-| Internal (LAN) | east, iron, field, north, strand, south, west | Direct LAN mesh. No inbound from WAN. |
-| External (WAN) | flockGate | Via golgiBody relay ONLY. No direct LAN access. |
-| Bridge (VPS) | golgiBody, golgiBody-ext, pepti | Relay hub. Forwards external↔internal. |
-| Mobile | grapheneGate | LAN when home, relay when away. |
-
-**Policy document**: [NETWORK_SEGMENTATION_POLICY_WAVE114_JUN15_2026.md](NETWORK_SEGMENTATION_POLICY_WAVE114_JUN15_2026.md)
+### 4. ABG Compute Access (P1 — cellMembrane/ironGate)
 
 | Task | Status |
 |------|--------|
-| Enforce flockGate external-only in mesh peering | TODO |
-| Verify LAN gates have no WAN port exposure | TODO |
-| Transport-aware mesh config in cellMembrane | TODO |
-| RustDesk segmentation (P2P vs relay based on zone) | TODO |
+| SSH tunnel: external → golgiBody → fieldGate → workload gate | TODO |
+| RustDesk: ABG connects via relay to workload gate | TODO |
+| First ABG member validates end-to-end | TODO |
+
+### 5. Network Segmentation (P1 — cellMembrane/ironGate)
+
+| Zone | Routing | Validate |
+|------|---------|----------|
+| LAN (east, iron, field, north, strand) | Direct mesh, 10G backbone | Depot pull direct |
+| WAN (flockGate) | Relay-only via golgiBody | Cannot reach LAN direct |
+| Mobile (grapheneGate) | P2P home, relay away | Both paths work |
+| Bridge (golgiBody, pepti) | Relay + depot | WAN→LAN forwarding |
 
 ---
 
-## Thread 4: projectNUCLEUS Compute Access (P3)
+## Multi-Droplet VPS Architecture
 
-**Owner**: cellMembrane/ironGate
+| Droplet | Host | CPU | RAM | Disk | Role |
+|---------|------|-----|-----|------|------|
+| **golgi** | golgiBody | 1 | 2GB | 10GB | Forgejo, relay, periplasm (lightweight) |
+| **golgi-ext** | golgiBody-ext | — | — | — | RustDesk relay (hbbs/hbbr :21115-21117) |
+| **pepti** | peptidoglycan | 2 | 4GB | 80GB | **Build authority**, depot host, sync hub |
 
-ABG members need remote access to workload gates. Two patterns:
-
-```
-Desktop: ABG member → RustDesk relay → fieldGate intake → Cat6e → workload gate
-SSH:     ABG member → golgiBody SSH → ProxyJump fieldGate → workload gate port
-```
-
-fieldGate serves as intake node (expendable NUC, absorbs external traffic).
-
-| Task | Status |
-|------|--------|
-| SSH tunnel pattern documented | TODO |
-| RustDesk relay path validated | TODO |
-| fieldGate as intake node tested | TODO |
-| Access provisioning guide updated | TODO |
+**pepti** has cargo (1.96.0), full workspace at `/opt/ecoPrimals/`, and 65GB free.
+It simulates what a dedicated WAN gate with more power would look like — hosting
+depot builds and serving plasmidBin over HTTPS. golgi stays lightweight (services only).
 
 ---
 
-## Per-Gate Assignment Summary
+## Per-Gate Assignment
 
-| Gate | Wave 114 Role |
-|------|---------------|
-| **fieldGate** | ONBOARDING TARGET — zero to 13/13 via gate.bootstrap |
-| **ironGate** | cellMembrane evolution: bootstrap, relay health, segmentation enforcement |
-| **eastGate** | Overwatch: blurb/FRAGO/handoff, validate post-bootstrap |
-| **golgiBody-ext** | RustDesk relay host (hbbs/hbbr on :21115-21117) |
-| **golgiBody** | Mesh relay hub, depot authority, songBird federation hub |
-| **flockGate** | Segmentation validation target (external-only enforcement) |
-| **grapheneGate** | Mobile zone testing (LAN vs WAN relay switching) |
-| **ops** | Physical: NUC rack, power, cable, OS, SSH |
+| Gate | Role This Week |
+|------|----------------|
+| **fieldGate** | ONBOARDING — zero to 13/13, depot pull, ABG intake |
+| **grapheneGate** | aarch64 depot validation target (Pixel) |
+| **flockGate** | WAN depot validation target (relay-only) |
+| **ironGate** | cellMembrane: bootstrap, depot rebuild, relay, segmentation |
+| **eastGate** | Overwatch: validate, test, coordinate |
+| **golgi** | Forgejo, relay bridge, mesh hub (lightweight services) |
+| **pepti** | **BUILD AUTHORITY** — depot builds, plasmidBin WAN host |
+| **golgi-ext** | RustDesk relay host (hbbs/hbbr :21115-21117) |
+| **strandGate/northGate** | Workload targets (ABG science, GPU) |
+| **ops** | Physical: fieldGate rack, power, cable, OS |
 
 ---
 
-## Carry from Wave 113
+## Resolved This Wave
 
-These remain active alongside Wave 114 threads:
+| Item | Resolution |
+|------|-----------|
+| 10G backbone | INSTALLED — SFP+ AOC, towers upgrading, NUCs on 2.5G |
+| bearDog compliance | 3/3 SHIPPED (riboCipher + health + prefix) — needs depot rebuild |
+| toadStool silent socket | FIXED (d1faa877) — health + riboCipher accept shipped |
+| toadStool S319 dead protocol purge | gRPC + OpenCL **DELETED** (60 files, −458 LOC) |
+| cellMembrane probe_policy | FIXED (047ad49) — probes tolerate transitional primals |
+| cellMembrane VCS parity probe | SHIPPED (bf0c7c3) — gate.status detects origin↔forgejo drift |
+| cellMembrane RustDesk health | SHIPPED (bf0c7c3) — hbbs/hbbr TCP reachability in S2 probe |
+| sync_converge refactor | SHIPPED (443fc6a) — try_pull_converge graduated strategy |
+| cellMembrane ext processes | ELIMINATED (94c4261) — pure Rust, capability-driven |
+| Forgejo sync (14 repos) | ALL SYNCED (Jun 15) — origin = forgejo parity |
+| Depot x86_64 rebuild | **13/13 BUILT** (Jun 15 14:05Z) — all primals from HEAD |
+| pepti as build authority | VALIDATED — cargo 1.96.0, 4GB RAM, 80GB disk, building |
+
+---
+
+## Carry (parallel, not blocking close)
 
 | Debt | Owner | Priority |
 |------|-------|----------|
-| Primal riboCipher signal compliance (6/15) | ALL primal teams | P2 |
-| Primal health method compliance (10/15) | ALL primal teams | P2 |
-| bearDog: accept prefix + health socket | bearDog team | P1 |
-| toadStool: fix silent socket | toadStool team | P1 |
+| riboCipher outbound signal (remaining ~5 primals) | per-team | P2 |
 | neuralAPI capability registration | biomeOS team | P2 |
-| Diderm leader election (long-term) | cellMembrane | P3 |
+| Diderm self-healing cascade (P1 evolution, see AAR) | cellMembrane | P1 |
 | freshness.mesh via songBird (long-term) | songBird + cellMembrane | P3 |
 
 ---
@@ -137,9 +177,11 @@ These remain active alongside Wave 114 threads:
 
 | # | Criterion | How |
 |---|-----------|-----|
-| 1 | fieldGate 13/13 alive in mesh | gate.bootstrap + gate.status |
-| 2 | RustDesk relay health-probed | cellMembrane health sweep includes relay |
-| 3 | Segmentation enforced | flockGate cannot reach LAN directly |
-| 4 | Wave 113 CLOSED | Hardware enrollment (fieldGate) satisfies last criterion |
+| 1 | Depot rebuilt from HEAD (x86_64 + aarch64) | plasmid.harvest --all |
+| 2 | fieldGate (NUC): depot pull + 13/13 alive | gate.bootstrap + gate.status |
+| 3 | grapheneGate (Pixel): depot pull + 13/13 alive | gate.fetch + gate.status |
+| 4 | flockGate (WAN): depot pull via relay + 13/13 alive | gate.fetch + gate.status |
+| 5 | RustDesk relay operational + health-probed | cellMembrane sweep |
+| 6 | ABG member connects via sovereign path | RustDesk or SSH validated |
 
-**Wave 114 closes when fieldGate is healthy and relay + segmentation are validated.**
+**Wave 114 closes when depot deploys validated across NUC + Pixel + WAN.**

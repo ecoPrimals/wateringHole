@@ -26,8 +26,8 @@ Wave 111 scales this to new topology and completes the last operational gaps.
 [entry_state]
 health = "13/13 GRADUATED"
 startup = "6/6 COMPLETE"
-depot = "FRESH — all 13 from HEAD (44fd18d, 2026-06-12T12:37:00Z). songBird in depot is 32a8d700, needs rebuild for partition tolerance (9903cf50)."
-membrane_parity = "12/12 repos at parity (origin = forgejo = local) as of 2026-06-13 — exception: sourDough forgejo (HTTP 500). wateringHole forgejo stale junk pruned with --force-with-lease."
+depot = "FRESH — 13/13 x86_64 musl built from HEAD (2026-06-15T14:05Z). pepti (build-authority VPS) redundantly rebuilding. aarch64 cross-compile pending."
+membrane_parity = "14/14 repos at parity (origin = forgejo = local) as of 2026-06-15. VCS parity probe SHIPPED in gate.status (bf0c7c3) — drift auto-detected."
 sandbox = "SHIPPED — plasmid.sandbox + plasmid.canary CLI ready"
 provision = "SHIPPED + PROVEN (e230e10→latest) — gate.provision (DO API), gate.provision.status, gate.provision.destroy, gate.provision.verify (NEW). canary-fieldmouse profile defined. Full lifecycle proven: provision→bootstrap→federate→verify→cascade→destroy on ephemeral DO droplet."
 gates_active = "eastGate, golgiBody, ironGate, southGate, grapheneGate (5-gate mesh)"
@@ -417,9 +417,12 @@ status = "PENDING"
 [carry]
 sourdough_segfault = "LOW: sourdough validate depot segfault (manual b3sum fallback)"
 healthspring_upstream = "14 gaps, all LOW, all workaround-stable (see wave107-healthspring-upstream-gaps FRAGO)"
-backbone_10g = "LOW: 10G backbone cables — blocks high-throughput only"
+backbone_10g = "RESOLVED (2026-06-15): 10G SFP+ AOC backbone installed. LAN towers on 10G as NICs added, NUCs/peripherals on 2.5G."
 biomegate_recovery = "LOW: biomeGate recovery — hotSpring can use strandGate"
 tiered_access_architecture = "LONG-TERM: Four-tier remote access (observer/reviewer/user/operator) converging JupyterHub+pappusCast+RustDesk+IDE into primal-native sovereignty. bearDog blindness model enforces view/action separation cryptographically. Spec: projectNUCLEUS/specs/TIERED_ACCESS_ARCHITECTURE.md"
+diderm_self_healing = "P1-ACTIVE: cellMembrane peptid layer must self-heal bidirectionally — detect drift on either remote, push ahead→behind. Event-driven convergence (webhooks). VCS parity probe SHIPPED (bf0c7c3). Evolves toward mesh-native state (songBird) eliminating dual-remote entirely."
+multi_droplet_architecture = "ACTIVE: pepti (4GB, 2 cores, 80GB, cargo) = build authority + depot WAN host. golgi (2GB, 1 core, 10GB) = Forgejo + relay + services. Simulates dedicated LAN/WAN gate for hosting/building. aarch64 cross-compile pending for grapheneGate (Pixel)."
+freshness_mesh_songbird = "LONG-TERM: Distribute freshness.toml via songBird mesh instead of VPS-pull pattern"
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 7: riboCipher — Transport Signal Convergence
@@ -882,14 +885,23 @@ criteria = [
 status = "5/6 MET. Only hardware enrollment (ops-physical) remains. Wave 113 objectives achieved."
 
 [wave113_exit.new_debt_carry]
-description = "NUCLEUS primal interaction audit exposed 5 gap categories — carry to Wave 114"
+description = "Wave 113 debt MOSTLY RESOLVED — primal code shipped, depot rebuild needed"
 items = [
-    "riboCipher server-side acceptance: 1/13 primals (songbird only). ALL primals need update.",
-    "health method: 4/13 missing, 1/13 silent (toadstool). guideStone amendment needed.",
-    "neuralAPI hollow: 0 registered capabilities. biomeOS auto-registration needed.",
-    "28 undocumented sockets. guideStone socket manifest amendment needed.",
-    "bearDog BTSP-locked main socket, toadStool silent, songBird self-connect loop.",
+    "RESOLVED: riboCipher acceptance ~14/15 (bearDog+toadStool shipped, need depot rebuild)",
+    "RESOLVED: health method ~13/15 (bearDog+toadStool shipped, need depot rebuild)",
+    "OPEN: neuralAPI hollow — 0 registered capabilities. biomeOS auto-registration still needed.",
+    "OPEN: ~28 undocumented sockets. guideStone socket manifest amendment still needed.",
+    "RESOLVED: bearDog 3/3 compliant (eff59c4), toadStool fixed (d1faa877). Depot rebuild needed.",
+    "CRITICAL PATH: plasmid.harvest --all to rebuild binaries from HEAD across all targets.",
 ]
+
+
+
+
+
+
+
+
 
 # ──────────────────────────────────────────────────────────────
 # AAR: Multi-Gate Auto-Publish Divergence Pattern
@@ -1161,11 +1173,26 @@ short_term = "Current approach: rebase linearization on shared repos"
 long_term = "Leader election OR mesh-native state via songBird mesh.publish (eliminate dual-remote coordination entirely)"
 known_gap = "If rebase conflicts (content conflict, not just history): still fails and requires manual resolution. Expected to be rare since most shared repo changes are additive (freshness, AARs, impulses)."
 
+
+# ─── AAR: Wave 114 Diderm One-Way Cascade Failure ─────────────────────────────
+[aar_wave114_diderm_cascade_stale]
+date = "2026-06-15"
+gate = "eastGate"
+subject = "Forgejo 49 commits stale across 14 repos — one-way cascade failure"
+severity = "P1"
+owner = "cellMembrane/ironGate"
+impact = "Depot builds from stale VPS source. Blocks Wave 114 exit gate (NUC+Pixel+WAN deploy)."
+root_cause = "Cascade assumes push-to-both workflow. Should detect drift on either side and self-heal bidirectionally."
+short_term_fix = "Manual git push forgejo main across 14 repos from eastGate, then plasmid.harvest --all"
+medium_term = "Bidirectional self-healing: cascade fetches all remotes, detects which is ahead, pushes ahead→behind. Event-driven via webhooks. VCS parity in health sweep."
+long_term = "Mesh-native state via songBird mesh.publish — Forgejo becomes read-only mirror, VCS coordination eliminated."
+aar_doc = "handoffs/AAR_DIDERM_CASCADE_STALE_FORGEJO_WAVE114_JUN15_2026.md"
 # ──────────────────────────────────────────────────────────────
 # STREAM 9: Wave 114 — fieldGate Onboarding + RustDesk Relay + Network Segmentation
 # Owner: cellMembrane/ironGate (primary), ops (physical only)
 # Added by eastGate overwatch (2026-06-15)
-# Principle: Fresh NUC validates gate.bootstrap end-to-end.
+# Principle: Evolve proven compute path — depot deploys to NUC + Pixel + WAN.
+#            Resolution target: ABG sovereign compute by Friday June 20.
 #            RustDesk relay enables sovereignty-layer remote access.
 #            Network segmentation codifies external/internal routing.
 # ──────────────────────────────────────────────────────────────
@@ -1190,6 +1217,7 @@ Network segmentation clarifies routing: flockGate reaches LAN exclusively throug
 LAN gates communicate internal-only (UDS + LAN TCP). golgiBody bridges external and internal."""
 
 [stream9.fieldgate_onboarding]
+deadline = "2026-06-20"
 owner = "cellMembrane/ironGate + ops (physical setup)"
 priority = "P1"
 tasks = [
@@ -1208,8 +1236,9 @@ success_criteria = [
 ]
 
 [stream9.rustdesk_relay]
+deadline = "2026-06-20"
 owner = "cellMembrane/ironGate"
-priority = "P2"
+priority = "P1"
 description = """RustDesk relay (hbbs + hbbr) on golgiBody-ext enables sovereignty-layer remote access.
 Ports 21115-21117 already documented in MEMBRANE_CHANNEL_ARCHITECTURE.md.
 CellMembrane manages relay health as part of NUCLEUS composition. Over time, RustDesk validates and
@@ -1240,8 +1269,9 @@ tasks = [
 ]
 
 [stream9.projectnucleus_compute_access]
+deadline = "2026-06-20"
 owner = "cellMembrane/ironGate"
-priority = "P3"
+priority = "P1"
 description = """projectNUCLEUS compute sharing for ABG members. RustDesk relay + SSH tunnel pattern.
 NUC intake node on LAN, relay via golgiBody for external access. RustDesk for desktop sharing, SSH for headless."""
 tasks = [
@@ -1249,4 +1279,26 @@ tasks = [
     "RustDesk: ABG member connects to relay, reaches workload gate screen",
     "Validate with fieldGate as intake node for compute access",
     "Document access provisioning in compute-sharing/ guide",
+]
+
+[stream9.depot_validation]
+deadline = "2026-06-20"
+owner = "cellMembrane/ironGate"
+priority = "P1"
+description = """Full depot pipeline validation across all form factors.
+cellMembrane gate.fetch + gate.bootstrap/update must work on NUC (x86_64 LAN),
+Pixel (aarch64 mobile), and WAN (x86_64 relay-only). plasmidBin as binary source.
+Exit gate: all three targets pull depot, deploy, report 13/13 alive."""
+tasks = [
+    "fieldGate (NUC x86_64): gate.fetch from golgiBody plasmidBin, gate.bootstrap, 13/13 alive",
+    "grapheneGate (Pixel aarch64): gate.fetch from golgiBody plasmidBin, gate.update, 13/13 alive",
+    "flockGate (WAN x86_64): gate.fetch via relay from pepti plasmidBin, gate.update, 13/13 alive",
+    "BLAKE3 checksums verified per-target (depot manifest match)",
+    "cellMembrane health sweep confirms all-GREEN across NUC + Pixel + WAN",
+]
+success_criteria = [
+    "fieldGate: 13/13 alive after depot pull + bootstrap (zero manual intervention)",
+    "grapheneGate: 13/13 alive after depot pull + update (aarch64 binaries verified)",
+    "flockGate: 13/13 alive after depot pull via relay (WAN path validated)",
+    "All BLAKE3 checksums match depot manifest (no corruption)",
 ]
