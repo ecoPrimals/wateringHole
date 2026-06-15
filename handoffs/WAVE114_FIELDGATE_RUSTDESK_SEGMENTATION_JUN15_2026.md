@@ -10,7 +10,7 @@ Depot deploys to all form factors. Three targets must pass:
 
 | Target | Arch | Transport | Status |
 |--------|------|-----------|--------|
-| **fieldGate** (NUC) | x86_64-musl | LAN direct (eno1 P2P hardwire) | READY |
+| **fieldGate** (NUC) | x86_64-musl | LAN via MikroTik | **✅ 13/13 ALIVE** (first ant through) |
 | **grapheneGate** (Pixel) | aarch64-musl | LAN/relay | BLOCKED (cross-compile) |
 | **flockGate** (WAN) | x86_64-musl | relay via golgiBody | READY (path proven) |
 
@@ -35,19 +35,22 @@ Depot deploys to all form factors. Three targets must pass:
 
 ## Remaining Work
 
-### Thread 1: fieldGate NUC Onboarding
+### Thread 1: fieldGate NUC Onboarding — ✅ COMPLETE
 
-NUC is physically adjacent to eastGate. Hardwire via `eno1` (unused onboard NIC) for
-ADB-like point-to-point. Static /30, instant SSH, no switch needed.
+**13/13 primals alive. Mesh enrolled (1 peer, 1 reachable). First ant through.**
 
 | Task | Owner | Status |
 |------|-------|--------|
-| Cable NUC → eastGate eno1, power on | ops | TODO |
-| Configure eno1 static IP (/30) | ops | TODO |
-| Base OS + SSH accessible | ops | TODO |
-| scp membrane + env to fieldGate | cellMembrane | READY |
-| `gate.bootstrap --gate fieldGate --profile canary-fieldmouse` | cellMembrane | TODO |
-| 13/13 alive + mesh enrolled | cellMembrane | TODO |
+| NUC on LAN via MikroTik switch (Cat6) | ops | **DONE** |
+| SSH from eastGate (192.168.4.36, user fieldgate) | ops | **DONE** |
+| membrane binary + env + family key deployed | overwatch | **DONE** |
+| gate.bootstrap (7/9 phases auto, 2 manual fixes) | fieldGate team | **DONE** |
+| 13/13 alive (biomeos via `api --socket --unix-only`) | fieldGate team | **DONE** |
+| Mesh enrolled (songBird → golgiBody :7700) | fieldGate team | **DONE** |
+| Workspace + repos (diderm: Forgejo + GitHub) | fieldGate team | **DONE** |
+
+**Deployment time**: ~4 hours (including hurdle discovery + documentation).
+**Hurdles**: 8 documented → cellMembrane evolution debt in FRAGO.
 
 ### Thread 2: RustDesk Relay + ABG Access
 
@@ -122,11 +125,13 @@ pepti = dedicated build VPS. **Unblocked**: pulls from Forgejo (264ms), SSH via 
 
 ## Exit Criteria
 
-1. fieldGate: depot pull + bootstrap + 13/13 alive
-2. grapheneGate: aarch64 depot pull + update + 13/13 alive
-3. flockGate: WAN depot pull via relay + 13/13 alive
-4. RustDesk relay operational + health-probed
-5. ABG member connects via sovereign path
-6. pepti builds from fresh source (no stale harvests)
+| # | Criterion | Status |
+|---|-----------|--------|
+| 1 | fieldGate (NUC): depot pull + bootstrap + 13/13 alive | **✅ DONE** |
+| 2 | grapheneGate (Pixel): aarch64 depot pull + 13/13 alive | BLOCKED (cross-compile) |
+| 3 | flockGate (WAN): depot pull via relay + 13/13 alive | TODO |
+| 4 | RustDesk relay operational + health-probed | TODO |
+| 5 | ABG member connects via sovereign path | TODO |
+| 6 | pepti builds from fresh source (no stale harvests) | IN PROGRESS |
 
-**Wave 114 closes when depot deploys validated across NUC + Pixel + WAN.**
+**1/6 exit criteria CLEARED. Wave 114 closes when depot deploys validated across NUC + Pixel + WAN.**

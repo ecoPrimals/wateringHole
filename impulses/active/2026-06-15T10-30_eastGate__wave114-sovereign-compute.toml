@@ -45,12 +45,12 @@ description = """Prove end-to-end: depot pull → bootstrap/update → 13/13 ali
 Three targets must pass. This is the Wave 114 exit gate."""
 
 [stream1.targets]
-fieldgate_nuc = { arch = "x86_64-musl", transport = "LAN 2.5G direct or eno1 P2P", validation = "gate.bootstrap → 13/13 alive", status = "READY (depot + binary + blurb prepared)" }
+fieldgate_nuc = { arch = "x86_64-musl", transport = "LAN via MikroTik switch", validation = "gate.bootstrap → 13/13 alive", status = "✅ DONE — 13/13 alive, mesh enrolled, first-ant-through PROVEN (Jun 15)" }
 graphenegate_pixel = { arch = "aarch64-musl", transport = "LAN/relay", validation = "gate.fetch + gate.update → 13/13 alive", status = "BLOCKED (aarch64 cross-compile pending)" }
 flockgate_wan = { arch = "x86_64-musl", transport = "relay via golgiBody", validation = "gate.fetch + gate.update → 13/13 alive", status = "READY (WAN path proven 2.2 MB/s)" }
 
 [stream1.tasks]
-fieldgate_bootstrap = { owner = "fieldGate team + cellMembrane", status = "12/13 ALIVE", note = "First-ant through PROVEN. 12/13 primals alive. biomeos path discovery broken. 8 hurdles documented." }
+fieldgate_bootstrap = { owner = "fieldGate team + cellMembrane", status = "✅ 13/13 ALIVE", note = "First-ant-through COMPLETE. 13/13 primals alive, mesh enrolled (1 peer reachable), sovereignty S1-S4 operational. biomeos workaround: 'biomeos api --socket --unix-only'. 8 hurdles documented as cellMembrane evolution." }
 aarch64_cross_compile = { owner = "cellMembrane/pepti", status = "TODO", note = "pepti has cargo + disk. Cross-compile via --target aarch64-unknown-linux-musl." }
 flockgate_update = { owner = "cellMembrane", status = "TODO", note = "WAN fetch path proven. Just needs gate.update with current depot." }
 blake3_verification = { owner = "cellMembrane", status = "DONE", note = "checksums.toml updated from harvest" }
