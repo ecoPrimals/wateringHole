@@ -2,7 +2,8 @@
 
 **Status**: 5/6 exit criteria met | VPS FULL GREEN (8/8) | Diderm auto-reconciliation SHIPPED  
 **Only exit blocker**: Hardware enrollment (ops-physical)  
-**Focus now**: Per-primal interaction quality + remaining evolution debt
+**Focus now**: Per-primal interaction quality + remaining evolution debt  
+**Latest**: `047ad49` probe_policy fix (S4 regression resolved), `443fc6a` sync_converge refactor
 
 ---
 
@@ -44,18 +45,21 @@
 - ✅ membrane-bridge-biomeos REMOVED
 - ✅ Cascade stress (`temporal.cascade.stress --cycles N`)
 - ✅ Federation: 2 peers enrolled, persistent
+- ✅ Health probe_policy — permissive fallback for non-compliant primals (`047ad49`)
+- ✅ biomeOS neural-api.sock as preferred probe socket (`047ad49`)
+- ✅ sync_converge refactor — PullOutcome enum, -14 LOC (`443fc6a`)
 
 ### Remaining
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| Probe biomeOS on neural-api.sock | P2 | Currently probes biomeos.sock (HTTP) |
-| Accept -32601 as alive | P2 | 4 primals return method_not_found = still alive |
-| aarch64 depot harvest | P2 | Unblocks grapheneGate cross-arch |
+| ~~Probe biomeOS on neural-api.sock~~ | ~~P2~~ | ✅ DONE (`047ad49`) |
+| ~~Accept -32601 as alive~~ | ~~P2~~ | ✅ Already handled — `"error"` string check covers it |
+| aarch64 depot harvest | P2 | IN PROGRESS — cross-compile running on eastGate |
 | Pepti build orchestration | P3 | Route builds through neuralAPI graph |
 | DO SSH key auto-register | P3 | Manual key management during provision |
 | Cascade remote canary discovery | P3 | Only VPS visible in mesh currently |
-| checksums.toml songBird skew | P3 | Depot `c42ef13` vs checksums `334b695b` |
+| checksums.toml songBird skew | P3 | Will auto-resolve when harvest completes |
 
 ---
 
