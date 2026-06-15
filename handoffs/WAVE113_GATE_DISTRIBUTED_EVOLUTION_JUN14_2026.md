@@ -19,14 +19,14 @@
 | bearDog | ❌ BTSP-locked | ✅ (via BTSP) | Accept prefix + expose `--health-socket` |
 | rhizoCrypt | ❌ BTSP reject | ✅ | Accept prefix |
 | barracuda | ❌ timeout | ✅ | Accept prefix |
-| petalTongue | ❌ timeout | ✅ | Accept prefix |
+| petalTongue | ✅ `cdcb1ee` | ✅ | **DONE** — riboCipher prefix acceptance shipped (Jun 14). Depot rebuild needed. |
 | skunkBat | ❌ timeout | ⚠️ -32601 | Accept prefix + implement `health` method |
 | loamSpine | ❌ timeout | ⚠️ -32601 | Accept prefix + implement `health` method |
 | coralReef | ❌ parse error | ⚠️ -32601 | Accept prefix + implement `health` method |
 | squirrel | ❌ timeout | ⚠️ -32601 | Accept prefix + implement `health` method |
 | toadStool | ❌ timeout | ❌ silent | **P1**: Fix silent socket + accept prefix + implement `health` |
 
-**Score**: 6/15 signal-compliant, 10/15 health-responding. Target: 15/15 both.
+**Score**: 7/15 signal-compliant, 10/15 health-responding. Target: 15/15 both.
 
 ---
 
@@ -115,13 +115,20 @@ Currently return -32601 (method_not_found) — alive but non-compliant.
 
 ---
 
-## rhizoCrypt, barracuda, petalTongue
+## rhizoCrypt, barracuda
 
 | Task | Priority |
 |------|----------|
 | Accept riboCipher prefix | P2 |
 
 Already respond to raw health probes — just need signal acceptance.
+
+## petalTongue — **DONE**
+
+All Wave 113 tasks shipped:
+- ✅ riboCipher `[0xEC, 0x01]` prefix acceptance (`cdcb1ee`, Jun 14) — peek + consume before BTSP classification
+- ✅ HEALTH-01 bare `"health"` → enriched `{status, primal, version, uptime_s}` (`2dba46f`, Jun 11)
+- 6,460+ tests, zero clippy warnings. **Depot rebuild needed** to deploy to VPS.
 
 ---
 
@@ -171,7 +178,7 @@ nucleus_launcher works, TCP bind works. Blocked by stale depot + songBird state-
 | Amendment | Status |
 |-----------|--------|
 | `health` method MANDATORY | sporePrint validation ships enforcement. 10/15 comply. |
-| riboCipher signal MANDATORY on UDS | 6/15 comply. Standard documented. |
+| riboCipher signal MANDATORY on UDS | 7/15 comply (petalTongue `cdcb1ee` shipped, depot rebuild pending). Standard documented. |
 | Socket manifest per primal | Documented in NUCLEUS audit AAR (28 sockets) |
 | neuralAPI capability registration | biomeOS auto-registration shipped, needs operational validation |
 | Per-primal `server` arg standard | ServerContract enum codifies it. Template units replaced. |
@@ -204,4 +211,4 @@ nucleus_launcher works, TCP bind works. Blocked by stale depot + songBird state-
 
 ---
 
-**Primal interaction compliance: 6/15 signal, 10/15 health. Target: all 15. This is the primary evolution pressure for Wave 114.**
+**Primal interaction compliance: 7/15 signal, 10/15 health. Target: all 15. This is the primary evolution pressure for Wave 114.**
