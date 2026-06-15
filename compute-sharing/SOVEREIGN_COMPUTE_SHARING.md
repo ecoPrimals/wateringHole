@@ -367,6 +367,47 @@ without manual metric maintenance.
 
 ---
 
+## Tiered Access Convergence (Wave 114+)
+
+The four access tiers (observer, reviewer, compute, operator) are converging
+with sovereignty-layer tools and primal-native replacements:
+
+| Tier | Current Tool | Sovereignty Layer | Primal Endgame |
+|------|-------------|-------------------|----------------|
+| Observer (static) | pappusCast → HTML | pappusCast (self-hosted) | petalTongue static render |
+| Reviewer (live read) | RustDesk view-only | RustDesk relay on golgiBody | songBird frame stream |
+| User (compute) | JupyterHub + IDE | JupyterHub + Cursor/IDE | toadStool + squirrel |
+| Operator (hardware) | SSH / console | Direct access | bearDog sovereign key |
+
+**Key architectural principle**: Because remote protocols are parseable
+(RustDesk separates video from input, JupyterHub separates render from
+execute, IDE protocols separate read from write), view/action separation
+can be enforced at the transport layer — not just application permissions.
+
+**bearDog blindness**: In full BTSP Phase 4 deployment, hardware operators
+and software admins are cryptographically blind to each other. User compute
+state is encrypted per-user; operators cannot read it. This is structural
+(key derivation prevents cross-branch decryption), not policy-based.
+
+**RustDesk as reviewer tier**: The golgiBody-ext relay (:21115-21117)
+enables view-only sessions — the reviewer sees live screen state but cannot
+send input. This validates the separation before primal-native songBird
+frame streaming replaces it.
+
+**IDE convergence (Cursor-like)**: Scientists access a Cursor-like IDE that
+pushes work to the mesh. The IDE is a thin client over the primal composition:
+squirrel decomposes intent into atomic signals, biomeOS dispatches to
+available hardware via toadStool. The user never directly touches the OS.
+
+**fieldGate intake pattern**: The NUC intake node (fieldGate) routes external
+users to workload gates by tier. Observer/reviewer traffic is lightweight
+(static HTML / frame stream). Compute traffic routes to GPU gates (northGate,
+strandGate). The intake node is expendable — no user state resides there.
+
+Full architecture: `projectNUCLEUS/specs/TIERED_ACCESS_ARCHITECTURE.md`
+
+---
+
 *This document is a living pattern. Update after each phase transition
 with observed friction points, security learnings, and primal evolution
 triggered by external use.*

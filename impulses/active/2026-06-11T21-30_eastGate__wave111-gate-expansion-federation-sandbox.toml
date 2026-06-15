@@ -419,6 +419,7 @@ sourdough_segfault = "LOW: sourdough validate depot segfault (manual b3sum fallb
 healthspring_upstream = "14 gaps, all LOW, all workaround-stable (see wave107-healthspring-upstream-gaps FRAGO)"
 backbone_10g = "LOW: 10G backbone cables — blocks high-throughput only"
 biomegate_recovery = "LOW: biomeGate recovery — hotSpring can use strandGate"
+tiered_access_architecture = "LONG-TERM: Four-tier remote access (observer/reviewer/user/operator) converging JupyterHub+pappusCast+RustDesk+IDE into primal-native sovereignty. bearDog blindness model enforces view/action separation cryptographically. Spec: projectNUCLEUS/specs/TIERED_ACCESS_ARCHITECTURE.md"
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 7: riboCipher — Transport Signal Convergence

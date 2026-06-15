@@ -39,6 +39,11 @@ A fresh NUC with zero context. `gate.bootstrap` must work end-to-end.
 RustDesk is sovereignty infrastructure — used like Forgejo. Self-hosted relay validates
 primal-native remote access solutions (songBird mesh, SSH tunnels) over time.
 
+**Tiered access convergence**: RustDesk view-only mode = Reviewer tier (Tier 2). The relay
+enables live screen observation without input — validating the view/action separation that
+bearDog will eventually enforce cryptographically. Full architecture documented in
+`projectNUCLEUS/specs/TIERED_ACCESS_ARCHITECTURE.md`.
+
 | Task | Status |
 |------|--------|
 | Verify hbbs-membrane + hbbr-membrane alive on golgiBody-ext (:21115-21117) | TODO |
@@ -47,6 +52,7 @@ primal-native remote access solutions (songBird mesh, SSH tunnels) over time.
 | WAN gates (flockGate): relay-only via golgiBody | TODO |
 | Key distribution: relay public key during gate.bootstrap | TODO |
 | projectNUCLEUS: ABG member compute access via relay | TODO |
+| RustDesk view-only mode for reviewer tier (no input forwarding) | TODO |
 
 ---
 
