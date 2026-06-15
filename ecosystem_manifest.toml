@@ -49,7 +49,7 @@ push_to_followers = true
 # When set to "forgejo", temporal.sync pushes only to forgejo remote;
 # the VPS push mirror handles GitHub propagation. Gates still pull from
 # all remotes (GitHub may have external contributions).
-push_target = "forgejo"
+push_target = "all"
 # When true, cascade auto-fires a SYNC impulse on diverge detection.
 # The impulse carries repo, remote HEADs, merge base, and suggested action.
 diverge_impulse = true
