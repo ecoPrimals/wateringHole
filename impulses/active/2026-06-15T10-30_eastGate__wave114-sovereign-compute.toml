@@ -25,12 +25,13 @@ ABG sovereign compute by Friday. Everything else is carry or future-wave."""
 
 [entry_state]
 depot_x86_64 = "13/13 BUILT from HEAD (2026-06-15T14:05Z)"
-depot_aarch64 = "PENDING — cross-compile needed for grapheneGate (Pixel)"
-vcs_parity = "14/14 origin = forgejo = local"
-pepti_build = "IN PROGRESS — redundant validation build on pepti (cargo 1.96.0, 4GB, 80GB)"
-compliance = "riboCipher ~14/15, health ~13/15, code all shipped, binaries current"
-sovereignty = "S1-S4 OPERATIONAL, VCS parity probe SHIPPED, RustDesk health SHIPPED"
-temporal = "All primals within 24h of HEAD. Ecosystem temporally tight."
+depot_aarch64 = "PENDING — cross-compile on pepti (toolchain ready, needs harvest run)"
+vcs_parity = "18/18 origin = forgejo = local (confirmed 2026-06-15T22:17Z)"
+pepti_build = "OPERATIONAL — repos at HEAD, toolchain ready, x86_64 harvest in progress"
+fieldgate = "✅ DEPLOYED 13/13 alive, mesh enrolled (first-ant-through Jun 15)"
+compliance = "riboCipher ~14/15, health ~13/15, binaries current"
+sovereignty = "S1-S4 OPERATIONAL (S1-S3 intermittent from fieldGate LAN side)"
+temporal = "All primals within 25h of HEAD. Zero drift."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Depot Validation (THE EXIT GATE)
@@ -92,19 +93,14 @@ ssh_tunnel_pattern = { status = "TODO", note = "external → golgiBody → field
 [stream3]
 id = "PEPTI-BUILD-AUTHORITY"
 owner = "cellMembrane/ironGate"
-priority = "P1"
+priority = "P2"
 description = """pepti (4GB, 2 cores, 80GB, cargo 1.96.0) is the build-authority VPS.
-Divergence: no GitHub deploy key, slow SSH to golgi. Must self-heal.
-ASSIGNED: cellMembrane/ironGate owns all VPS infrastructure. Pepti convergence
-is their responsibility upon return from reboot."""
+OPERATIONAL: SSH working, repos at HEAD from Forgejo, toolchain ready.
+Only remaining tasks: complete x86_64 full harvest + run aarch64 harvest."""
 
 [stream3.tasks]
-deploy_key = { status = "RESOLVED", priority = "P1", owner = "cellMembrane/ironGate", note = "pepti pulls from Forgejo (264ms latency). GitHub deploy key unnecessary — bidirectional cascade keeps Forgejo at HEAD." }
-golgi_ssh_latency = { status = "RESOLVED", priority = "P2", owner = "cellMembrane/ironGate", note = "pepti↔Forgejo latency: 264ms. Was transient — DNS/network hiccup on Jun 14. Confirmed working consistently." }
-harvest_freshness_gate = { status = "DONE", priority = "P2", owner = "cellMembrane/ironGate", note = "SHIPPED 369701c — harvest checks clone HEAD vs origin/HEAD after clone. Warns if stale, never blocks." }
-pepti_full_rebuild = { status = "IN PROGRESS", priority = "P1", owner = "cellMembrane/ironGate", note = "Repos synced to HEAD from Forgejo. x86_64 harvest running (beardog done, songbird building). Should complete ~15:45Z." }
-aarch64_target = { status = "DONE", priority = "P2", owner = "cellMembrane/ironGate", note = "rustup target + gcc-aarch64-linux-gnu installed. .cargo/config.toml linker set. Also toolchain auto-sets linker (3dd403c)." }
-pepti_ssh_access = { status = "DONE", priority = "P1", owner = "cellMembrane/ironGate", note = "eastGate SSH key added to pepti authorized_keys. Direct ProxyCommand through golgi works (1s)." }
+pepti_full_rebuild = { status = "IN PROGRESS", priority = "P1", owner = "cellMembrane/ironGate", note = "x86_64 harvest running. Toolchain + repos confirmed operational." }
+aarch64_harvest = { status = "TODO", priority = "P2", owner = "cellMembrane/ironGate", note = "plasmid.harvest --targets aarch64 on pepti. Linker auto-set ready (3dd403c)." }
 
 # ──────────────────────────────────────────────────────────────
 # CARRY (parallel, not blocking Wave 114 close)
@@ -178,45 +174,18 @@ criteria = [
 ]
 
 # ──────────────────────────────────────────────────────────────
-# AAR: Jun 15 10:30-11:15 Session
+# RESOLVED THIS WAVE (Jun 15)
 # ──────────────────────────────────────────────────────────────
 
-[aar_jun15_second_session]
-date = "2026-06-15T15:15Z"
-from = "eastGate overwatch"
-summary = """
-Pepti build authority unblocked and operational:
-- SSH key added (eastGate→pepti direct access via golgi proxy, 1s)
-- 28s latency was transient — Forgejo SSH consistently 264ms
-- All 14 repos synced to HEAD from Forgejo on pepti
-- membrane binary rebuilt from latest on pepti (3.5 min)
-- aarch64 cross-compile toolchain installed (rustup target + gcc-aarch64)
-- x86_64 harvest IN PROGRESS on pepti (beardog complete, songbird building)
-- Killed stale prior harvest process (from timed-out session)
-
-cellMembrane shipped:
-- 369701c: harvest freshness gate (warn on stale clone source)
-- c1d1222: depot.freshness binary age probe (oldest Xh/Xd)
-- aae1006: cascade depot summary arch-aware + stale detection
-- 3dd403c: auto-set aarch64-musl linker in harvest toolchain
-- 9dd0cae7: bidirectional cascade (push_target=all in wateringHole manifest)
-
-VPS validation: HEALTHY 13/13, depot 13/13 verified, oldest 1h, all probes GREEN.
-Bidirectional cascade CONFIRMED: wateringHole pulled from forgejo, pushed to origin.
-"""
-
-[aar_jun15_second_session.shipped]
-harvest_freshness_gate = "369701c"
-depot_age_probe = "c1d1222"
-cascade_depot_arch_fix = "aae1006"
-aarch64_linker_auto = "3dd403c"
-bidirectional_cascade = "9dd0cae7 (wateringHole)"
-
-[aar_jun15_second_session.pepti_state]
-ssh = "WORKING (via golgi proxy)"
-forgejo_latency = "264ms"
-repos = "14/14 at HEAD"
-cargo = "1.96.0"
-x86_target = "INSTALLED"
-aarch64_target = "INSTALLED + linker configured"
-harvest = "IN PROGRESS (x86_64)"
+[resolved]
+fieldgate_13_13 = "✅ 13/13 alive, mesh enrolled, first-ant-through COMPLETE"
+pepti_unblocked = "✅ SSH working, Forgejo 264ms, repos at HEAD, aarch64 toolchain ready"
+bidirectional_cascade = "✅ SHIPPED (9dd0cae7) — push_target=all"
+harvest_freshness_gate = "✅ SHIPPED (369701c) — warns on stale source"
+depot_age_probe = "✅ SHIPPED (c1d1222) — >7d = DEGRADED"
+aarch64_linker = "✅ SHIPPED (3dd403c) — auto-set in harvest"
+vcs_parity_probe = "✅ SHIPPED (bf0c7c3) — drift detection in gate.status"
+rustdesk_health_probe = "✅ SHIPPED (bf0c7c3) — TCP reachability"
+toadstool_dead_protocol = "✅ S319 — gRPC + OpenCL deleted (−458 LOC)"
+cellmembrane_forgejo_repo = "✅ Created ecoPrimals/cellMembrane on Forgejo (was sporeGarden/)"
+ecosystem_parity = "✅ 18/18 repos at full parity (local = origin = forgejo)"
