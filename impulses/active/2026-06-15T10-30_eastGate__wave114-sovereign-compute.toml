@@ -50,10 +50,21 @@ graphenegate_pixel = { arch = "aarch64-musl", transport = "LAN/relay", validatio
 flockgate_wan = { arch = "x86_64-musl", transport = "relay via golgiBody", validation = "gate.fetch + gate.update → 13/13 alive", status = "READY (WAN path proven 2.2 MB/s)" }
 
 [stream1.tasks]
-fieldgate_bootstrap = { owner = "ops (cable) + cellMembrane (software)", status = "TODO", note = "NUC is adjacent to eastGate. Hardwire via eno1 P2P or switch. ADB-like direct link." }
+fieldgate_bootstrap = { owner = "fieldGate team + cellMembrane", status = "12/13 ALIVE", note = "First-ant through PROVEN. 12/13 primals alive. biomeos path discovery broken. 8 hurdles documented." }
 aarch64_cross_compile = { owner = "cellMembrane/pepti", status = "TODO", note = "pepti has cargo + disk. Cross-compile via --target aarch64-unknown-linux-musl." }
 flockgate_update = { owner = "cellMembrane", status = "TODO", note = "WAN fetch path proven. Just needs gate.update with current depot." }
 blake3_verification = { owner = "cellMembrane", status = "DONE", note = "checksums.toml updated from harvest" }
+
+[stream1.fieldgate_hurdles]
+description = "First-ant-through deployment hurdles discovered Jun 15. Each is cellMembrane evolution debt."
+port_8080_collision = "P1: songbird + nestgate both bind :8080. Workaround: NESTGATE_PORT=8081. Bootstrap should assign unique ports."
+nestgate_jwt_secret = "P2: bootstrap doesn't generate/inject NESTGATE_JWT_SECRET. Workaround: openssl rand."
+biomeos_path_discovery = "P1: biomeos nucleus start can't find sibling binaries in depot path. Binary exists but discovery logic fails."
+checksums_toml_missing = "P2: checksum.git phase fails — checksums.toml not in depot workspace. Phase should fallback gracefully."
+no_systemd_units = "P1: gate.bootstrap didn't install systemd units. Primals run as background processes. Likely needs sudo/root."
+opt_membrane_permissions = "P2: /opt/membrane not writable by gate user without manual chmod. Bootstrap should handle."
+mesh_not_initialized = "P2: songbird running but mesh.init never called. Bootstrap should call mesh.init after songbird starts."
+cellmembrane_forgejo_org = "FIXED: cellMembrane was under sporeGarden/ not ecoPrimals/ on Forgejo. Repo created + pushed."
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 2: RustDesk Relay + ABG Compute Access
