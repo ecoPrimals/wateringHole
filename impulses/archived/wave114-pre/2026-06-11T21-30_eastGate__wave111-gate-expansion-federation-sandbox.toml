@@ -422,6 +422,7 @@ biomegate_recovery = "LOW: biomeGate recovery — hotSpring can use strandGate"
 tiered_access_architecture = "LONG-TERM: Four-tier remote access (observer/reviewer/user/operator) converging JupyterHub+pappusCast+RustDesk+IDE into primal-native sovereignty. bearDog blindness model enforces view/action separation cryptographically. Spec: projectNUCLEUS/specs/TIERED_ACCESS_ARCHITECTURE.md"
 diderm_self_healing = "P1-ACTIVE: cellMembrane peptid layer must self-heal bidirectionally — detect drift on either remote, push ahead→behind. Event-driven convergence (webhooks). VCS parity probe SHIPPED (bf0c7c3). Evolves toward mesh-native state (songBird) eliminating dual-remote entirely."
 multi_droplet_architecture = "ACTIVE: pepti (4GB, 2 cores, 80GB, cargo) = build authority + depot WAN host. golgi (2GB, 1 core, 10GB) = Forgejo + relay + services. Simulates dedicated LAN/WAN gate for hosting/building. aarch64 cross-compile pending for grapheneGate (Pixel)."
+pepti_divergence = "P1-CELLMEMBRANE: pepti has no GitHub deploy key (SSH denied) and pepti↔golgi SSH is 28s+ latency. Repos drift stale between harvests. Peptid layer must evolve: either deploy key for origin, or reliable pull from Forgejo before harvest. harvest should refuse to build from stale source."
 freshness_mesh_songbird = "LONG-TERM: Distribute freshness.toml via songBird mesh instead of VPS-pull pattern"
 
 # ──────────────────────────────────────────────────────────────

@@ -1,0 +1,163 @@
+# FRAGO: Wave 114 — Sovereign Compute Deployment
+# From: eastGate overwatch
+# Date: 2026-06-15
+# Replaces: wave111-gate-expansion-federation-sandbox (1305L, archived — Streams 1-8 RESOLVED)
+# Context: Waves 111-113 achieved riboCipher convergence, federation, sandbox graduation,
+#          divergence pressure testing, gate-distributed evolution. 13/13 depot from HEAD.
+#          Wave 114 is OPERATIONAL: deploy proven depot to NUC + Pixel + WAN.
+
+[impulse]
+id = "wave114-sovereign-compute"
+type = "frago"
+from = "eastGate"
+to = ["cellMembrane", "ops"]
+date = "2026-06-15"
+priority = "P1"
+owner = "cellMembrane/ironGate (primary), ops (physical only)"
+deadline = "2026-06-20"
+note = """
+Wave 114 objective: Prove depot deploys to all form factors (NUC x86_64, Pixel aarch64, WAN relay).
+ABG sovereign compute by Friday. Everything else is carry or future-wave."""
+
+# ──────────────────────────────────────────────────────────────
+# ENTRY STATE (Jun 15)
+# ──────────────────────────────────────────────────────────────
+
+[entry_state]
+depot_x86_64 = "13/13 BUILT from HEAD (2026-06-15T14:05Z)"
+depot_aarch64 = "PENDING — cross-compile needed for grapheneGate (Pixel)"
+vcs_parity = "14/14 origin = forgejo = local"
+pepti_build = "IN PROGRESS — redundant validation build on pepti (cargo 1.96.0, 4GB, 80GB)"
+compliance = "riboCipher ~14/15, health ~13/15, code all shipped, binaries current"
+sovereignty = "S1-S4 OPERATIONAL, VCS parity probe SHIPPED, RustDesk health SHIPPED"
+temporal = "All primals within 24h of HEAD. Ecosystem temporally tight."
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 1: Depot Validation (THE EXIT GATE)
+# ──────────────────────────────────────────────────────────────
+
+[stream1]
+id = "DEPOT-VALIDATION"
+owner = "cellMembrane/ironGate"
+priority = "P1"
+deadline = "2026-06-20"
+description = """Prove end-to-end: depot pull → bootstrap/update → 13/13 alive → health GREEN.
+Three targets must pass. This is the Wave 114 exit gate."""
+
+[stream1.targets]
+fieldgate_nuc = { arch = "x86_64-musl", transport = "LAN 2.5G direct or eno1 P2P", validation = "gate.bootstrap → 13/13 alive", status = "READY (depot + binary + blurb prepared)" }
+graphenegate_pixel = { arch = "aarch64-musl", transport = "LAN/relay", validation = "gate.fetch + gate.update → 13/13 alive", status = "BLOCKED (aarch64 cross-compile pending)" }
+flockgate_wan = { arch = "x86_64-musl", transport = "relay via golgiBody", validation = "gate.fetch + gate.update → 13/13 alive", status = "READY (WAN path proven 2.2 MB/s)" }
+
+[stream1.tasks]
+fieldgate_bootstrap = { owner = "ops (cable) + cellMembrane (software)", status = "TODO", note = "NUC is adjacent to eastGate. Hardwire via eno1 P2P or switch. ADB-like direct link." }
+aarch64_cross_compile = { owner = "cellMembrane/pepti", status = "TODO", note = "pepti has cargo + disk. Cross-compile via --target aarch64-unknown-linux-musl." }
+flockgate_update = { owner = "cellMembrane", status = "TODO", note = "WAN fetch path proven. Just needs gate.update with current depot." }
+blake3_verification = { owner = "cellMembrane", status = "DONE", note = "checksums.toml updated from harvest" }
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 2: RustDesk Relay + ABG Compute Access
+# ──────────────────────────────────────────────────────────────
+
+[stream2]
+id = "RUSTDESK-ABG-COMPUTE"
+owner = "cellMembrane/ironGate"
+priority = "P1"
+deadline = "2026-06-20"
+description = """RustDesk relay on golgiBody-ext enables sovereignty-layer remote access.
+Health probes SHIPPED (bf0c7c3). Deployment + ABG member validation remaining."""
+
+[stream2.tasks]
+verify_relay_alive = { status = "TODO", note = "hbbs-membrane + hbbr-membrane on golgiBody-ext :21115-21117" }
+health_probe = { status = "DONE", note = "SHIPPED bf0c7c3 — TCP reachability in S2 sovereignty probe" }
+fieldgate_client = { status = "TODO", note = "Install RustDesk client on fieldGate, connect via relay" }
+abg_member_e2e = { status = "TODO", note = "External user → relay → fieldGate → workload. First member validates." }
+ssh_tunnel_pattern = { status = "TODO", note = "external → golgiBody → fieldGate → LAN workload gate" }
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 3: Pepti Build Authority Evolution
+# ──────────────────────────────────────────────────────────────
+
+[stream3]
+id = "PEPTI-BUILD-AUTHORITY"
+owner = "cellMembrane/ironGate"
+priority = "P1"
+description = """pepti (4GB, 2 cores, 80GB, cargo 1.96.0) is the build-authority VPS.
+Divergence: no GitHub deploy key, slow SSH to golgi. Must self-heal."""
+
+[stream3.tasks]
+deploy_key = { status = "TODO", priority = "P1", note = "pepti needs GitHub SSH deploy key OR must pull reliably from Forgejo before harvest" }
+golgi_ssh_latency = { status = "TODO", priority = "P2", note = "pepti↔golgi SSH is 28s+. DNS or network. Investigate." }
+harvest_freshness_gate = { status = "TODO", priority = "P2", note = "plasmid.harvest should refuse to build from stale source. Check repo HEAD age before compile." }
+aarch64_target = { status = "TODO", priority = "P2", note = "Add musl aarch64 target to pepti for Pixel cross-compile" }
+
+# ──────────────────────────────────────────────────────────────
+# CARRY (parallel, not blocking Wave 114 close)
+# ──────────────────────────────────────────────────────────────
+
+[carry]
+diderm_self_healing = "P1-ACTIVE: VCS parity probe SHIPPED (bf0c7c3). Next: bidirectional push (ahead→behind), event-driven webhooks. Evolves toward mesh-native state."
+network_segmentation = "P2: Codify flockGate external-only, LAN internal-only. golgiBody bridges. Currently documented, not enforced."
+neuralapi_hollow = "P2: biomeOS neuralAPI has 0 registered capabilities. Auto-registration needed. Low priority until NUCLEUS composition matters."
+undocumented_sockets = "LOW: ~28 primal sockets not in guideStone manifest. Needs amendment."
+tiered_access = "LONG-TERM: Four-tier remote access converging JupyterHub+pappusCast+RustDesk+IDE."
+freshness_mesh = "LONG-TERM: Distribute freshness via songBird mesh, eliminate VCS coordination."
+sourdough_segfault = "LOW: validate depot segfault (manual b3sum fallback works)"
+windows_ecobin = "DEFERRED: blueGate Windows/WSL2 cross-platform — hardware blocked"
+
+# ──────────────────────────────────────────────────────────────
+# MULTI-DROPLET ARCHITECTURE
+# ──────────────────────────────────────────────────────────────
+
+[architecture]
+description = """Two VPS droplets with separated concerns:
+- golgi (1 core, 2GB, 10GB) = Forgejo + RustDesk relay + periplasm (services only)
+- pepti (2 cores, 4GB, 80GB) = Build authority + depot WAN host + structural sync
+Simulates a dedicated LAN/WAN gate for hosting and building."""
+
+[architecture.golgi]
+host = "golgiBody"
+cpu = 1
+ram_gb = 2
+disk_gb = 10
+role = ["forgejo", "rustdesk-relay", "mesh-hub", "sovereignty-endpoints"]
+note = "Disk 85% full — services only, no builds"
+
+[architecture.pepti]
+host = "peptidoglycan"
+cpu = 2
+ram_gb = 4
+disk_gb = 80
+role = ["build-authority", "depot-host", "structural-sync"]
+cargo = "1.96.0"
+workspace = "/opt/ecoPrimals/ (full 13 primals + infra)"
+note = "65GB free. Has no GitHub deploy key (P1 debt)."
+
+# ──────────────────────────────────────────────────────────────
+# PER-GATE ASSIGNMENTS
+# ──────────────────────────────────────────────────────────────
+
+[gates]
+fieldgate = "ONBOARDING TARGET — NUC, x86_64, LAN 2.5G or eno1 P2P hardwire"
+graphenegate = "aarch64 depot validation (Pixel)"
+flockgate = "WAN depot validation (relay-only)"
+irongate = "cellMembrane: builds, relay, segmentation, cascade"
+eastgate = "Overwatch: validate, coordinate, pair-program fieldGate"
+golgi = "Services: Forgejo, relay bridge, mesh hub"
+pepti = "BUILD AUTHORITY: cargo builds, depot WAN host"
+strandgate = "Workload target (ABG science, GPU)"
+ops = "Physical only: fieldGate cable + power"
+
+# ──────────────────────────────────────────────────────────────
+# EXIT CRITERIA
+# ──────────────────────────────────────────────────────────────
+
+[exit_criteria]
+criteria = [
+    "fieldGate (NUC): depot pull + gate.bootstrap + 13/13 alive",
+    "grapheneGate (Pixel): depot pull + gate.update + 13/13 alive (aarch64)",
+    "flockGate (WAN): depot pull via relay + gate.update + 13/13 alive",
+    "RustDesk relay operational + health-probed",
+    "ABG member connects via sovereign path (RustDesk or SSH)",
+    "pepti build authority: fresh harvest from current source (no stale builds)",
+]
