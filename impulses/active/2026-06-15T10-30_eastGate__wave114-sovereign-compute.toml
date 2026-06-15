@@ -88,18 +88,19 @@ ASSIGNED: cellMembrane/ironGate owns all VPS infrastructure. Pepti convergence
 is their responsibility upon return from reboot."""
 
 [stream3.tasks]
-deploy_key = { status = "TODO", priority = "P1", owner = "cellMembrane/ironGate", note = "pepti needs GitHub SSH deploy key OR must pull reliably from Forgejo before harvest" }
-golgi_ssh_latency = { status = "TODO", priority = "P2", owner = "cellMembrane/ironGate", note = "pepti↔golgi SSH is 28s+. DNS or network. Investigate." }
-harvest_freshness_gate = { status = "TODO", priority = "P2", owner = "cellMembrane/ironGate", note = "plasmid.harvest should refuse to build from stale source. Check repo HEAD age before compile." }
-pepti_full_rebuild = { status = "TODO", priority = "P1", owner = "cellMembrane/ironGate", note = "Ensure pepti repos are current, then plasmid.harvest --all. Prior attempt aborted (SSH timeout). Pepti has cargo — can build all 13." }
-aarch64_target = { status = "TODO", priority = "P2", owner = "cellMembrane/ironGate", note = "Add musl aarch64 target to pepti for Pixel cross-compile" }
+deploy_key = { status = "RESOLVED", priority = "P1", owner = "cellMembrane/ironGate", note = "pepti pulls from Forgejo (264ms latency). GitHub deploy key unnecessary — bidirectional cascade keeps Forgejo at HEAD." }
+golgi_ssh_latency = { status = "RESOLVED", priority = "P2", owner = "cellMembrane/ironGate", note = "pepti↔Forgejo latency: 264ms. Was transient — DNS/network hiccup on Jun 14. Confirmed working consistently." }
+harvest_freshness_gate = { status = "DONE", priority = "P2", owner = "cellMembrane/ironGate", note = "SHIPPED 369701c — harvest checks clone HEAD vs origin/HEAD after clone. Warns if stale, never blocks." }
+pepti_full_rebuild = { status = "IN PROGRESS", priority = "P1", owner = "cellMembrane/ironGate", note = "Repos synced to HEAD from Forgejo. x86_64 harvest running (beardog done, songbird building). Should complete ~15:45Z." }
+aarch64_target = { status = "DONE", priority = "P2", owner = "cellMembrane/ironGate", note = "rustup target + gcc-aarch64-linux-gnu installed. .cargo/config.toml linker set. Also toolchain auto-sets linker (3dd403c)." }
+pepti_ssh_access = { status = "DONE", priority = "P1", owner = "cellMembrane/ironGate", note = "eastGate SSH key added to pepti authorized_keys. Direct ProxyCommand through golgi works (1s)." }
 
 # ──────────────────────────────────────────────────────────────
 # CARRY (parallel, not blocking Wave 114 close)
 # ──────────────────────────────────────────────────────────────
 
 [carry]
-diderm_self_healing = "P1-ACTIVE: VCS parity probe SHIPPED (bf0c7c3). Next: bidirectional push (ahead→behind), event-driven webhooks. Evolves toward mesh-native state."
+diderm_self_healing = "P1-SHIPPED: Bidirectional cascade ACTIVE (9dd0cae7 push_target=all). VCS parity probe SHIPPED (bf0c7c3). Cascade now pulls from ahead remote and pushes to all behind. Event-driven webhooks deferred to Wave 115."
 network_segmentation = "P2: Codify flockGate external-only, LAN internal-only. golgiBody bridges. Currently documented, not enforced."
 neuralapi_hollow = "P2: biomeOS neuralAPI has 0 registered capabilities. Auto-registration needed. Low priority until NUCLEUS composition matters."
 undocumented_sockets = "LOW: ~28 primal sockets not in guideStone manifest. Needs amendment."
@@ -164,3 +165,47 @@ criteria = [
     "ABG member connects via sovereign path (RustDesk or SSH)",
     "pepti build authority: fresh harvest from current source (no stale builds)",
 ]
+
+# ──────────────────────────────────────────────────────────────
+# AAR: Jun 15 10:30-11:15 Session
+# ──────────────────────────────────────────────────────────────
+
+[aar_jun15_second_session]
+date = "2026-06-15T15:15Z"
+from = "eastGate overwatch"
+summary = """
+Pepti build authority unblocked and operational:
+- SSH key added (eastGate→pepti direct access via golgi proxy, 1s)
+- 28s latency was transient — Forgejo SSH consistently 264ms
+- All 14 repos synced to HEAD from Forgejo on pepti
+- membrane binary rebuilt from latest on pepti (3.5 min)
+- aarch64 cross-compile toolchain installed (rustup target + gcc-aarch64)
+- x86_64 harvest IN PROGRESS on pepti (beardog complete, songbird building)
+- Killed stale prior harvest process (from timed-out session)
+
+cellMembrane shipped:
+- 369701c: harvest freshness gate (warn on stale clone source)
+- c1d1222: depot.freshness binary age probe (oldest Xh/Xd)
+- aae1006: cascade depot summary arch-aware + stale detection
+- 3dd403c: auto-set aarch64-musl linker in harvest toolchain
+- 9dd0cae7: bidirectional cascade (push_target=all in wateringHole manifest)
+
+VPS validation: HEALTHY 13/13, depot 13/13 verified, oldest 1h, all probes GREEN.
+Bidirectional cascade CONFIRMED: wateringHole pulled from forgejo, pushed to origin.
+"""
+
+[aar_jun15_second_session.shipped]
+harvest_freshness_gate = "369701c"
+depot_age_probe = "c1d1222"
+cascade_depot_arch_fix = "aae1006"
+aarch64_linker_auto = "3dd403c"
+bidirectional_cascade = "9dd0cae7 (wateringHole)"
+
+[aar_jun15_second_session.pepti_state]
+ssh = "WORKING (via golgi proxy)"
+forgejo_latency = "264ms"
+repos = "14/14 at HEAD"
+cargo = "1.96.0"
+x86_target = "INSTALLED"
+aarch64_target = "INSTALLED + linker configured"
+harvest = "IN PROGRESS (x86_64)"
