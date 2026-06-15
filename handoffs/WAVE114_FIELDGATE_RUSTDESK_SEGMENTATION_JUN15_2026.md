@@ -16,14 +16,17 @@ Depot deploys to all form factors. Three targets must pass:
 
 ---
 
-## State (Jun 15 10:30)
+## State (Jun 15 11:37)
 
 | Metric | Value |
 |--------|-------|
-| Depot x86_64 | **13/13 BUILT** from HEAD (14:05Z today) |
-| VCS parity | **14/14 synced** (origin = forgejo) |
-| pepti rebuild | IN PROGRESS (cargo 1.96.0, building) |
-| Depot aarch64 | TODO (cross-compile on pepti) |
+| Depot x86_64 | **13/13 BUILT** from HEAD |
+| VCS parity | **18/18 synced** (all repos, both remotes) |
+| pepti x86_64 harvest | **IN PROGRESS** (building from HEAD) |
+| pepti aarch64 toolchain | **READY** (rustup + gcc + linker auto-set) |
+| Bidirectional cascade | **SHIPPED** (9dd0cae7 — push_target=all) |
+| Harvest freshness gate | **SHIPPED** (369701c — warns on stale source) |
+| Depot age probe | **SHIPPED** (c1d1222 — >7d = DEGRADED) |
 | RustDesk health probe | **SHIPPED** (bf0c7c3) |
 | VCS parity probe | **SHIPPED** (bf0c7c3) |
 | toadStool S319 | gRPC + OpenCL DELETED (−458 LOC) |
@@ -55,18 +58,20 @@ ADB-like point-to-point. Static /30, instant SSH, no switch needed.
 | fieldGate RustDesk client → relay | TODO |
 | ABG member end-to-end via relay | TODO |
 
-### Thread 3: Pepti Build Authority (ASSIGNED: cellMembrane/ironGate)
+### Thread 3: Pepti Build Authority (cellMembrane/ironGate — MOSTLY RESOLVED)
 
-pepti = dedicated build VPS (2 cores, 4GB, 80GB, cargo). **Cannot self-fetch** (no GitHub SSH key, golgi SSH 28s+). VPS is cellMembrane purview — assigned on reboot return.
+pepti = dedicated build VPS. **Unblocked**: pulls from Forgejo (264ms), SSH via golgi proxy (1s), aarch64 toolchain ready.
 
 | Task | Owner | Status |
 |------|-------|--------|
-| Ensure pepti repos are at HEAD before harvest | cellMembrane | TODO |
-| Full `plasmid.harvest --all` on pepti (prior attempt SSH-timed-out) | cellMembrane | TODO |
-| Deploy key for GitHub (or reliable Forgejo pull) | cellMembrane | TODO |
-| Investigate pepti↔golgi 28s SSH latency | cellMembrane | TODO |
-| harvest freshness gate (refuse stale source) | cellMembrane | TODO |
-| aarch64 cross-compile target on pepti | cellMembrane | TODO |
+| SSH access (eastGate → pepti via golgi proxy) | cellMembrane | **DONE** |
+| Forgejo latency (was 28s, now 264ms — transient) | cellMembrane | **RESOLVED** |
+| Harvest freshness gate (warn on stale source) | cellMembrane | **SHIPPED** (369701c) |
+| Depot age probe in gate.status (>7d = DEGRADED) | cellMembrane | **SHIPPED** (c1d1222) |
+| aarch64 toolchain (rustup + gcc + linker auto-set) | cellMembrane | **SHIPPED** (3dd403c) |
+| Bidirectional cascade (push_target=all) | cellMembrane | **SHIPPED** (9dd0cae7) |
+| pepti x86_64 harvest (repos at HEAD, building) | cellMembrane | **IN PROGRESS** |
+| pepti aarch64 harvest (for Pixel) | cellMembrane | TODO |
 
 ### Thread 4: aarch64 for Pixel
 
@@ -105,10 +110,11 @@ pepti = dedicated build VPS (2 cores, 4GB, 80GB, cargo). **Cannot self-fetch** (
 
 | Debt | Owner | Priority |
 |------|-------|----------|
-| Diderm self-healing (bidirectional push) | cellMembrane | P1 |
+| Diderm self-healing (bidirectional push) | cellMembrane | **SHIPPED** (9dd0cae7) |
 | Network segmentation enforcement | cellMembrane | P2 |
 | neuralAPI hollow (0 registrations) | biomeOS | P2 |
 | riboCipher outbound signal (~5 primals) | per-team | P2 |
+| Event-driven webhooks (Forgejo push → cascade) | cellMembrane | P3 (Wave 115) |
 | Tiered access architecture | long-term | P3 |
 | freshness.mesh (songBird) | long-term | P3 |
 

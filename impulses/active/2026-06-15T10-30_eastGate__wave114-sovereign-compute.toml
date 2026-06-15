@@ -135,7 +135,7 @@ disk_gb = 80
 role = ["build-authority", "depot-host", "structural-sync"]
 cargo = "1.96.0"
 workspace = "/opt/ecoPrimals/ (full 13 primals + infra)"
-note = "65GB free. Has no GitHub deploy key (P1 debt)."
+note = "65GB free. Pulls from Forgejo (264ms). SSH via golgi proxy (1s). aarch64 toolchain ready."
 
 # ──────────────────────────────────────────────────────────────
 # PER-GATE ASSIGNMENTS
