@@ -454,3 +454,131 @@ CARRY TO WAVE 115:
   - Bring virbr-mesh up for LAN mesh with fieldGate
   - grapheneGate deployment via eastGate ADB (when device is at hand)
 """
+
+# ──────────────────────────────────────────────────────────────
+# AAR: Jun 16 14:30 — VPS Diderm Layer Divergence Audit
+# ──────────────────────────────────────────────────────────────
+
+[aar_jun16_1430_vps_divergence]
+gate = "ironGate"
+duration = "~30min audit"
+summary = """
+COMPREHENSIVE VPS DIDERM LAYER AUDIT — divergence between code expectations
+and deployed state across golgiBody (cis face) and pepti (peptidoglycan trust barrier).
+
+═══════════════════════════════════════════════════════════════════════════════
+GOLGI BODY (cis face) — 16 running services, 28 UDS sockets
+═══════════════════════════════════════════════════════════════════════════════
+
+DIVERGENCE #1: Three competing depot paths
+  /opt/ecoPrimals/plasmidBin/         → 14 binaries (ACTIVE, used by gate.status)
+  /opt/ecoPrimals/infra/plasmidBin/   → 13 binaries (harvest output)
+  /opt/plasmidBin/                    → legacy git clone (bash self-refresh)
+  ACTION: Consolidate to single canonical path. Code fix (63a2130) handles
+  resolution, but VPS layout should converge.
+
+DIVERGENCE #2: No cellMembrane clone on golgiBody
+  Binary deployed via scp; cannot self-update or run new membrane commands.
+  Still using legacy /opt/plasmidBin/deploy_membrane.sh for self-refresh.
+  ACTION: Clone cellMembrane to /opt/ecoPrimals/gardens/cellMembrane, build
+  from source, or use plasmid.refresh Rust pipeline.
+
+DIVERGENCE #3: Binary version lag
+  Deployed: 2026-06-15T13:50 (8f4e4eb or earlier)
+  HEAD:     2026-06-16 (63a2130 — unified depot resolution + env-configurable paths)
+  ACTION: Rebuild and redeploy. Missing: all hardcoded-path fixes, multi-peer mesh.
+
+DIVERGENCE #4: Socket naming explosion (28 sockets, 13 primals)
+  Standard sockets (13): songbird.sock, beardog.sock, biomeos.sock, etc.
+  Capability aliases (12): crypto.sock, security.sock, ed25519.sock, x25519.sock,
+    btsp.sock, beardog-default.sock, ai.sock, ledger.sock, permanence.sock,
+    provenance.sock, visualization.sock, compute-tarpc.sock
+  FAMILY_ID-suffixed (2): barracuda-e8b62b6e.sock, visualization-e8b62b6e.sock
+  Tarpc variants (1): coralreef-tarpc.sock
+  ISSUE: No standard for capability aliasing. Each primal creates its own
+  symlinks/sockets ad-hoc. Need centralized socket registry in bootstrap.
+  ACTION: Document socket naming convention in cellmembrane-types. Bootstrap
+  should generate canonical + alias sockets from ServiceCapability registry.
+
+DIVERGENCE #5: Systemd unit style mismatch
+  Songbird unit (hand-crafted): --dark-forest, SONGBIRD_PEERS external IPs,
+    ExecStartPost mesh-init probe, CPUQuota=50%
+  Bootstrap-generated units: simpler, no ExecStartPost, no CPUQuota
+  Nestgate unit: uses "nestgate service start --port 9500 --bind 127.0.0.1"
+    vs bootstrap generates "nestgate server --socket /run/membrane/nestgate.sock"
+  ACTION: Evolve bootstrap to optionally preserve VPS-specific hardening params.
+  Nestgate invocation style needs upstream primal alignment.
+
+DIVERGENCE #6: Environment/secrets model
+  golgiBody uses /opt/membrane/tower.env (FAMILY_ID, FAMILY_SEED, auth mode)
+  Bootstrap generates /etc/membrane/secrets.env (NESTGATE_JWT_SECRET only)
+  golgiBody has /etc/membrane/family/family.key (BearDog key material)
+  ACTION: Unify env model. tower.env contents should migrate to secrets.env
+  or a structured /etc/membrane/env.d/ approach.
+
+DIVERGENCE #7: SONGBIRD_PEERS points to unknown external IPs
+  Current: 96.66.60.229:7700, 162.226.225.148:7700
+  These are NOT documented in our infrastructure. May be legacy test nodes or
+  ABG member gates. Need audit and documentation.
+  ACTION: Document all mesh peers. Implement peer registry in songbird so
+  gate.status can report peer identities.
+
+DIVERGENCE #8: Legacy bridge services (socat-based)
+  membrane-bridge-forgejo: TCP:3001 on 10.116.0.3 → localhost:3000 (Forgejo)
+  membrane-bridge-beardog: TCP:9443 on 10.116.0.3 → beardog.sock (UDS→TCP)
+  membrane-socket-bridge: symlinks /run/membrane/*.sock → /run/biomeos/*.sock
+  ISSUE: socat bridges are fragile, have no TLS, and duplicate the relay function.
+  ACTION: Evolve to Rust-native transport relay. socket-bridge should become
+  bootstrap-generated symlinks from ServiceCapability → canonical socket.
+
+DIVERGENCE #9: Deployment debris in /opt/membrane/
+  backup-pre-wave79/ (13 files), beardog.bak, songbird.bak, nucleus_launcher,
+  s4-auth-probe.sh, checksums.toml, provenance.toml, manifest.toml, graphs/,
+  canary/ (rootpulse_*.toml scripts), sandbox/ (empty)
+  ACTION: Archive debris to /opt/membrane/.archive/ or remove.
+
+═══════════════════════════════════════════════════════════════════════════════
+PEPTI (peptidoglycan trust barrier) — build authority, no operational layer
+═══════════════════════════════════════════════════════════════════════════════
+
+DIVERGENCE #10: No deployed binaries or services
+  /opt/membrane/ does not exist. No NUCLEUS. Cannot validate its own harvest.
+  ACTION: Deploy minimal NUCLEUS (beardog + songbird + skunkbat) for harvest
+  self-validation. Or: implement plasmid.harvest --self-test flag.
+
+DIVERGENCE #11: Has full source tree but no operational role
+  /opt/ecoPrimals/primals/ has 14 primal repos (build inputs)
+  /opt/ecoPrimals/gardens/cellMembrane at HEAD (63a2130)
+  /opt/ecoPrimals/infra/plasmidBin/ has full depot
+  But: no systemd units, no sockets, no mesh participation
+  ACTION: Decide pepti's operational tier. As peptidoglycan (relay composition),
+  it should run Tower Atomic at minimum for mesh trust.
+
+═══════════════════════════════════════════════════════════════════════════════
+ABSTRACTION OPPORTUNITIES (Wave 115+)
+═══════════════════════════════════════════════════════════════════════════════
+
+1. SOCKET NAMING STANDARD: cellmembrane-types needs a canonical socket registry
+   that maps ServiceCapability → socket name(s). Bootstrap uses this to generate
+   socket dirs. Eliminates ad-hoc capability aliases.
+
+2. DEPLOYMENT ATOMICITY: Current model is "scp binary → service restarts."
+   Need: canary promote pattern where new binary starts on sandbox socket,
+   health-verified, then atomically swapped (rename + signal).
+
+3. SELF-REFRESH EVOLUTION: Replace bash deploy_membrane.sh with Rust-native
+   plasmid.refresh pipeline. Timer triggers: git fetch → checksum verify →
+   canary validate → atomic promote → service restart.
+
+4. BRIDGE EVOLUTION: socat TCP bridges → Rust relay with mTLS. The songbird
+   federation layer should subsume the bridge function.
+
+5. ENV CONSOLIDATION: tower.env + secrets.env → structured env.d/ with
+   role-based files (tower.env, family.env, mesh.env).
+
+6. MEMBRANE --version: Add commit SHA and build timestamp to membrane binary
+   for deployment verification.
+
+7. PEER REGISTRY: songbird should expose mesh.peers RPC method returning
+   all known peer identities + last-seen timestamp.
+"""
