@@ -115,7 +115,8 @@ depot_path_nesting = "P2: Local x86_64 depot has double-nested structure (primal
 aarch64_depot_stale = "P2: aarch64 binaries are Jun 10 (6 days old, pre-genetics wave). Need fresh harvest including all genetics-layer commits."
 manifest_stale = "RESOLVED (this session): ecosystem_manifest.toml updated from wave 109 → wave 114."
 sourdough_x86_missing = "P2: sourdough binary missing from x86_64 depot (present in aarch64 depot)."
-network_segmentation = "P2: Codify flockGate external-only, LAN internal-only. golgiBody bridges. Currently documented, not enforced."
+network_sovereignty = "P1-PLANNED: sporeGate (NucBox M6, Ryzen 7 6800H, 32GB, dual 2.5G) as LAN periplasm router. CRS310 confirmed doing L3 routing (wrong role). Architecture doc: compute-sharing/NETWORK_SOVEREIGNTY.md. Activation blurb: compute-sharing/SPOREGATE_ACTIVATION_BLURB.md"
+network_segmentation = "P2 (depends on network_sovereignty Phase 6): VLANs on CRS310 once sporeGate takes over routing. Compute/mobile/guest/mgmt separation."
 neuralapi_hollow = "P2: biomeOS neuralAPI has 0 registered capabilities. Auto-registration needed."
 undocumented_sockets = "RESOLVED (9dc6a1d): socket alias registry now documents all 28 capability sockets in cellmembrane-types."
 tiered_access = "LONG-TERM: Four-tier remote access converging RustDesk+Cursor+toadStool."
@@ -157,15 +158,16 @@ note = "65GB free. Pulls from Forgejo (264ms). SSH via golgi proxy (1s). aarch64
 # ──────────────────────────────────────────────────────────────
 
 [gates]
-fieldgate = "ONBOARDING TARGET — NUC, x86_64, LAN 2.5G or eno1 P2P hardwire"
+sporegate = "PERIMETER: LAN periplasm router (NAT/firewall/DHCP/DNS/VPN). NucBox M6, Ryzen 7, 32GB, dual 2.5G. PLANNED."
+fieldgate = "DEPLOYED — NUC, x86_64, LAN 2.5G, 13/13 alive"
 graphenegate = "aarch64 depot validation (Pixel)"
 flockgate = "WAN depot validation (relay-only)"
-irongate = "cellMembrane: builds, relay, segmentation, cascade"
-eastgate = "Overwatch: validate, coordinate, pair-program fieldGate"
+irongate = "cellMembrane: builds, relay, segmentation, cascade. DRY-RUN 11/11 PASS."
+eastgate = "Overwatch: validate, coordinate, pair-program"
 golgi = "Services: Forgejo, relay bridge, mesh hub"
 pepti = "BUILD AUTHORITY: cargo builds, depot WAN host"
 strandgate = "Workload target (ABG science, GPU)"
-ops = "Physical only: fieldGate cable + power"
+ops = "Physical only: hardware wiring + power"
 
 # ──────────────────────────────────────────────────────────────
 # EXIT CRITERIA

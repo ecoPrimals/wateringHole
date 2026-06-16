@@ -154,7 +154,22 @@ Key findings from ironGate audit of golgiBody + pepti:
 
 ---
 
-## Wave 115 Shape (VPS Convergence + Deployment Atomicity)
+## Wave 115 Shape (Network Sovereignty + VPS Convergence)
+
+### P1: sporeGate LAN Periplasm (ops + cellMembrane)
+
+sporeGate (NucBox M6, Ryzen 7 6800H, 32GB, dual 2.5G) replaces CRS310 as router.
+CRS310 reverts to pure L2 switch. Solves intermittent NAT saturation (confirmed: CRS310
+at 192.168.4.1 currently doing L3 routing on switch ASIC — wrong role).
+
+- Phase 1: Basic routing (nftables NAT + DHCP + DNS) — first ant through
+- Phase 2: ATT bridge mode (eliminate double NAT)
+- Phase 3: Firewall hardening
+- Phase 4: NUCLEUS (bearDog VPN, skunkBat monitoring, songBird mesh)
+- Phase 5: WireGuard tunnel to golgi (persistent, eliminates SSH NAT timeouts)
+- Phase 6: VLAN segmentation (compute/mobile/guest/mgmt)
+
+Docs: `compute-sharing/NETWORK_SOVEREIGNTY.md`, `compute-sharing/SPOREGATE_ACTIVATION_BLURB.md`
 
 ### P1: RustDesk Relay Formalization (cellMembrane/ironGate)
 
