@@ -33,36 +33,46 @@ Depot deploys to all form factors + primals health-validate via riboCipher.
 
 ---
 
-## NEW: riboCipher Server-Side Acceptance (P1 — SOFT BLOCKER)
+## NEW: Genetics-Layer Wiring (Eukaryotic Model) — P1
 
-**Discovery**: Jun 16 live NUCLEUS on eastGate — 11/11 primals spawn but 7/11 reject the
-`[0xEC, 0x01]` riboCipher prefix, breaking health probes. Fix is mechanical (2 lines at
-connection accept per primal).
+**Discovery**: Jun 16 live NUCLEUS — 7/11 primals reject the mito-beacon signal prefix.
+This is a **genetics-layer wiring** issue, not a mechanical per-primal patch.
 
-| Primal | Status | Priority |
-|--------|--------|----------|
-| beardog | BTSP frame misparse | **P1** (blocks auth) |
-| songbird | TLS config + prefix reject | **P1** (blocks federation) |
-| rhizocrypt | Rejects prefix | **P1** |
-| barracuda | Rejects prefix | P2 |
-| loamspine | Rejects prefix | P2 |
-| toadstool | Rejects prefix | P2 |
-| squirrel | Invalid UTF-8 | P2 |
-| sweetgrass | Rejects prefix | P2 |
-| coralreef | Passes | ✅ |
-| nestgate | Passes | ✅ |
-| petaltongue | Passes (UDS) | ✅ |
+### Two Genetics Streams (Eukaryotic)
+
+| Stream | Purpose | Property | Wire |
+|--------|---------|----------|------|
+| **MitoBeacon** | Relay access, mesh, ABG transport | Shared/copyable ("grandma tells cousin") | `0xEC`/`0xED` |
+| **Nuclear Lineage** | Per-user permissions, tiered access | Non-fungible, BearDog-spawned | `0xEE` |
+
+BearDog owns both. `FAMILY_SEED` IS mito-beacon material (legacy naming).
+
+### Acceptance Status
+
+| Primal | Status |
+|--------|--------|
+| beardog | **HAS CODE** — debug mode-detection race |
+| squirrel | **HAS ENUM** — wire into accept loop |
+| petaltongue | ✅ **REFERENCE IMPL** |
+| coralreef, nestgate | ✅ pass (no health method) |
+| songbird | NEEDS + TLS config fix |
+| rhizocrypt, barracuda, loamspine, toadstool, sweetgrass | NEEDS (adopt centralized pattern) |
+
+### For Friday (ABG Access)
+
+MitoBeacon access via RustDesk relay is sufficient — shared group key gets members
+through the relay. Nuclear lineage per-user is Wave 115+ evolution.
 
 **Workaround**: `--skip-preflight --no-rollback` + manual `ps` for alive validation.
-**AAR**: `handoffs/primalSpring/AAR_WAVE114_EASTGATE_LIVE_NUCLEUS_EXECUTION_JUN16_2026.md`
+**Architecture doc**: `handoffs/primalSpring/GENETICS_ARCHITECTURE_EUKARYOTIC_MODEL_JUN16_2026.md`
 
 ---
 
 ## Remaining Work
 
-### 1. riboCipher Acceptance (all primal teams) — P1
+### 1. Genetics-Layer Wiring (primalSpring pattern + teams adopt) — P1
 
-Each primal needs 2-byte prefix consumer at connection accept. Fix pattern in AAR.
+Centralize mito-beacon accept pattern. BearDog: debug. Squirrel: wire enum. Others: adopt.
 
 ### 2. grapheneGate Deployment (ops + cellMembrane)
 
@@ -111,9 +121,9 @@ All 7 fieldGate deployment hurdles are now **resolved in code**.
 | 4 | RustDesk relay operational | **✅ DONE** |
 | 5 | ABG member end-to-end | TODO |
 | 6 | pepti fresh harvest (both arches) | **✅ DONE** |
-| 7 | riboCipher acceptance (≥10/11 primals) | **3/11** — SOFT BLOCKER |
+| 7 | Genetics-layer wiring (≥10/11 accept mito-beacon) | **3/11** — SOFT BLOCKER |
 
-**3/7 cleared. Hard blockers: 0. Soft blocker: riboCipher (mechanical fix per primal).**
+**3/7 cleared. Hard blockers: 0. Soft blocker: genetics wiring (centralized pattern, not per-primal).**
 
 ---
 
@@ -121,6 +131,8 @@ All 7 fieldGate deployment hurdles are now **resolved in code**.
 
 | Debt | Owner | Priority |
 |------|-------|----------|
+| `BEARDOG_FAMILY_SEED` env var deprecation | bearDog | P2/Wave 115 |
+| Nuclear lineage per-ABG-user (tiered access) | bearDog + primalSpring | P2/Wave 115 |
 | Songbird TLS federation config | songbird | P2 |
 | Network segmentation enforcement | cellMembrane | P2 |
 | neuralAPI hollow (0 registrations) | biomeOS | P2 |

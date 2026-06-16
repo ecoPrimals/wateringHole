@@ -105,30 +105,44 @@ pepti_full_rebuild = { status = "✅ DONE", priority = "P1", owner = "cellMembra
 aarch64_harvest = { status = "✅ DONE (previous)", priority = "P2", owner = "cellMembrane/ironGate", note = "13/13 aarch64 binaries present on pepti from Jun 15 session. toadstool was manually uploaded (OOM on linking). Ready for grapheneGate deployment." }
 
 # ──────────────────────────────────────────────────────────────
-# STREAM 4: riboCipher Server-Side Acceptance (NEW — BLOCKING)
+# STREAM 4: Genetics-Layer Wiring (Eukaryotic Model)
 # ──────────────────────────────────────────────────────────────
 
 [stream4]
-id = "RIBOCIPHER-ACCEPTANCE"
-owner = "all primal teams"
+id = "GENETICS-LAYER-WIRING"
+owner = "primalSpring (pattern) + per-primal teams (adoption)"
 priority = "P1"
-description = """Jun 16 live NUCLEUS execution: 11/11 primals spawn but 7/11 reject
-riboCipher [0xEC,0x01] prefix, breaking health probes. Fix is 2 lines at connection
-accept. Without this, launcher cannot validate 13/13 ALIVE even though processes run.
+description = """Eukaryotic genetics model: mitoBeacon (shared/relay) + nuclear lineage (per-user/permissions).
+The riboCipher rejection by 7/11 primals is a genetics-layer wiring issue, not a mechanical patch.
+BearDog already has full detection. PetalTongue has the reference impl. Squirrel has the enum.
+Other primals need to adopt the mito-beacon accept pattern from centralized reference.
+
+Architecture doc: handoffs/primalSpring/GENETICS_ARCHITECTURE_EUKARYOTIC_MODEL_JUN16_2026.md
 AAR: handoffs/primalSpring/AAR_WAVE114_EASTGATE_LIVE_NUCLEUS_EXECUTION_JUN16_2026.md"""
 
+[stream4.genetics_model]
+mito_beacon = "Shared group key → relay access, mesh discovery, depot fetch, ABG member transport"
+nuclear_lineage = "Per-user non-fungible → permissions, tiered access, view/action separation"
+beardog_role = "Sole cryptographic authority — derives both tiers, validates at accept"
+eukaryotic_principle = "Both live in BearDog but handled/passed differently. Mito=copyable, Nuclear=spawned."
+
 [stream4.status]
-beardog = { status = "P1-NEEDED", note = "BTSP frame length misparse — blocks auth for entire mesh" }
-songbird = { status = "P1-NEEDED", note = "TLS config issue (federation port 80→443) + prefix rejection" }
-rhizocrypt = { status = "P1-NEEDED", note = "Rejects prefix" }
-barracuda = { status = "P2-NEEDED", note = "Rejects prefix" }
-loamspine = { status = "P2-NEEDED", note = "Rejects prefix" }
-toadstool = { status = "P2-NEEDED", note = "Rejects prefix" }
-squirrel = { status = "P2-NEEDED", note = "Invalid UTF-8 rejection" }
-sweetgrass = { status = "P2-NEEDED", note = "Rejects prefix" }
+beardog = { status = "HAS CODE — DEBUG", note = "Full riboCipher detection exists (UDS+TCP). Frame error suggests mode-detection race, not missing code." }
+songbird = { status = "P1-NEEDED", note = "TLS config issue (federation port 80→443) + no mito-beacon accept" }
+squirrel = { status = "HAS ENUM — WIRE", note = "universal-patterns/transport/ribocipher.rs has SignalResult. Needs wiring into accept loop." }
+petaltongue = { status = "✅ REFERENCE IMPL", note = "strip_ribocipher_prefix() via AsyncBufRead::fill_buf — working pattern" }
+rhizocrypt = { status = "NEEDS PATTERN", note = "No detection. Adopt from centralized reference." }
+barracuda = { status = "NEEDS PATTERN", note = "No detection." }
+loamspine = { status = "NEEDS PATTERN", note = "No detection." }
+toadstool = { status = "NEEDS PATTERN", note = "No detection." }
+sweetgrass = { status = "NEEDS PATTERN", note = "No detection." }
 coralreef = { status = "✅ PASSES", note = "Accepts connection (no health method)" }
 nestgate = { status = "✅ PASSES", note = "Accepts connection (no health method)" }
-petaltongue = { status = "✅ PASSES", note = "UDS, accepts riboCipher" }
+
+[stream4.deprecation]
+beardog_family_seed = "DEPRECATED — redundant alias for FAMILY_SEED. Remove Wave 115."
+tag_tier = "DEPRECATED — FAMILY_SEED is now mito-beacon material, not a generic tag."
+per_primal_adhoc = "DEPRECATED — centralize detection in shared pattern (universal-patterns or sourDough scaffold)"
 
 # ──────────────────────────────────────────────────────────────
 # CARRY (parallel, not blocking Wave 114 close)
