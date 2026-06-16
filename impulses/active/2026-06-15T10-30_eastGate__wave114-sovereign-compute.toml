@@ -57,14 +57,14 @@ flockgate_update = { owner = "cellMembrane", status = "TODO", note = "WAN fetch 
 blake3_verification = { owner = "cellMembrane", status = "DONE", note = "checksums.toml updated from harvest" }
 
 [stream1.fieldgate_hurdles]
-description = "First-ant-through deployment hurdles discovered Jun 15. Each is cellMembrane evolution debt."
-port_8080_collision = "P1: songbird + nestgate both bind :8080. Workaround: NESTGATE_PORT=8081. Bootstrap should assign unique ports."
-nestgate_jwt_secret = "P2: bootstrap doesn't generate/inject NESTGATE_JWT_SECRET. Workaround: openssl rand."
-biomeos_path_discovery = "P1: biomeos nucleus start can't find sibling binaries in depot path. Binary exists but discovery logic fails."
-checksums_toml_missing = "P2: checksum.git phase fails — checksums.toml not in depot workspace. Phase should fallback gracefully."
-no_systemd_units = "P1: gate.bootstrap didn't install systemd units. Primals run as background processes. Likely needs sudo/root."
-opt_membrane_permissions = "P2: /opt/membrane not writable by gate user without manual chmod. Bootstrap should handle."
-mesh_not_initialized = "P2: songbird running but mesh.init never called. Bootstrap should call mesh.init after songbird starts."
+description = "First-ant-through deployment hurdles discovered Jun 15. ALL RESOLVED (fed3335, c032abf)."
+port_8080_collision = "✅ RESOLVED (fed3335): ServerContract.exec_args() assigns unique ports — songbird :7700 federation, nestgate :9500 --bind 127.0.0.1"
+nestgate_jwt_secret = "✅ RESOLVED (fed3335): generate_secrets_env() creates /etc/membrane/secrets.env with random JWT, EnvironmentFile in nestgate unit"
+biomeos_path_discovery = "✅ RESOLVED (fed3335): install.link phase hardlinks depot primals → /opt/membrane/ (where ExecStart references them)"
+checksums_toml_missing = "✅ RESOLVED (fed3335): persist_checksums() saves checksums.toml to depot root after WAN fetch"
+no_systemd_units = "✅ RESOLVED (fed3335): nucleus_phase writes proper systemd units per primal, daemon-reload, enable --now"
+opt_membrane_permissions = "✅ RESOLVED (fed3335): permissions_phase() creates /opt/membrane + /opt/ecoPrimals/plasmidBin with 755"
+mesh_not_initialized = "✅ RESOLVED (fed3335): Phase reordered — nucleus start → 2s settle → mesh.init with retry loop (5x 2s = 10s max)"
 cellmembrane_forgejo_org = "FIXED: cellMembrane was under sporeGarden/ not ecoPrimals/ on Forgejo. Repo created + pushed."
 
 # ──────────────────────────────────────────────────────────────
@@ -80,7 +80,7 @@ description = """RustDesk relay on golgiBody-ext enables sovereignty-layer remot
 Health probes SHIPPED (bf0c7c3). Deployment + ABG member validation remaining."""
 
 [stream2.tasks]
-verify_relay_alive = { status = "TODO", note = "hbbs-membrane + hbbr-membrane on golgiBody-ext :21115-21117" }
+verify_relay_alive = { status = "✅ DONE", note = "hbbs/hbbr on golgiBody-ext :21115-21117 LISTENING + EXTERNALLY REACHABLE. UFW rules added Jun 16 (were blocking external)." }
 health_probe = { status = "DONE", note = "SHIPPED bf0c7c3 — TCP reachability in S2 sovereignty probe" }
 fieldgate_client = { status = "TODO", note = "Install RustDesk client on fieldGate, connect via relay" }
 abg_member_e2e = { status = "TODO", note = "External user → relay → fieldGate → workload. First member validates." }
@@ -99,8 +99,8 @@ OPERATIONAL: SSH working, repos at HEAD from Forgejo, toolchain ready.
 Only remaining tasks: complete x86_64 full harvest + run aarch64 harvest."""
 
 [stream3.tasks]
-pepti_full_rebuild = { status = "IN PROGRESS", priority = "P1", owner = "cellMembrane/ironGate", note = "x86_64 harvest running. Toolchain + repos confirmed operational." }
-aarch64_harvest = { status = "TODO", priority = "P2", owner = "cellMembrane/ironGate", note = "plasmid.harvest --targets aarch64 on pepti. Linker auto-set ready (3dd403c)." }
+pepti_full_rebuild = { status = "IN PROGRESS", priority = "P1", owner = "cellMembrane/ironGate", note = "x86_64 harvest RUNNING (Jun 16 00:42Z). songbird compiling (heavy deps, ~30min). Binary rebuilt with latest bootstrap fixes (fed3335)." }
+aarch64_harvest = { status = "TODO", priority = "P2", owner = "cellMembrane/ironGate", note = "plasmid.harvest --targets aarch64 on pepti. Linker auto-set ready (3dd403c). Previous OOM on toadstool linking — may need swap or pre-built upload." }
 
 # ──────────────────────────────────────────────────────────────
 # CARRY (parallel, not blocking Wave 114 close)
@@ -189,3 +189,39 @@ rustdesk_health_probe = "✅ SHIPPED (bf0c7c3) — TCP reachability"
 toadstool_dead_protocol = "✅ S319 — gRPC + OpenCL deleted (−458 LOC)"
 cellmembrane_forgejo_repo = "✅ Created ecoPrimals/cellMembrane on Forgejo (was sporeGarden/)"
 ecosystem_parity = "✅ 18/18 repos at full parity (local = origin = forgejo)"
+bootstrap_hurdles_resolved = "✅ ALL 7 fieldGate hurdles RESOLVED (fed3335, c032abf) — proper systemd units, install phase, secrets, permissions, mesh ordering"
+rustdesk_firewall = "✅ UFW rules added for :21115-21117 — relay externally reachable (was blocked by firewall)"
+wan_depot_live = "✅ https://membrane.primals.eco/depot/ serving x86_64 binaries over HTTPS (200 OK)"
+
+# ──────────────────────────────────────────────────────────────
+# AAR: Jun 16 00:26-01:10 Session
+# ──────────────────────────────────────────────────────────────
+
+[aar_jun16_0026]
+gate = "eastGate"
+duration = "~45min"
+summary = """
+Session focus: (1) Resolve all 7 fieldGate bootstrap hurdles in code, (2) Open RustDesk relay firewall, (3) Kick off pepti x86_64 harvest with latest code.
+
+Key achievements:
+- SHIPPED fed3335: Robust bootstrap — systemd units, install.link phase, secrets generation, permissions, checksums persistence
+- SHIPPED c032abf: Mesh retry loop (5x2s), removed --dark-forest from gate units, updated docs
+- OPENED RustDesk UFW ports on golgiBody (21115-21117) — relay now externally reachable
+- CONFIRMED WAN depot serving (https://membrane.primals.eco/depot/) — flockGate WAN path validated
+- INITIATED fresh x86_64 harvest on pepti with latest membrane binary (includes all hurdle fixes)
+- Cascade bidirectional confirmed working (wateringHole pulled forgejo → pushed origin)
+- golgiBody gate.status: FULL GREEN HEALTHY (13/13 alive, all sovereignty OK, oldest binary 10h)
+
+Bootstrap phase order (new):
+  arch.detect → permissions.set → depot.fetch → checksum.git → checksum.wan →
+  sandbox.validate → install.link → nucleus.start (systemd) → mesh.configure → health.sweep → deployment.emit
+
+Pepti status: x86_64 harvest IN PROGRESS (songbird compiling, largest primal ~30min on 4GB VPS).
+Next: aarch64 harvest after x86_64 completes.
+
+Remaining for Wave 114 close:
+  1. Pepti x86_64 harvest complete → depot updated
+  2. Pepti aarch64 harvest → grapheneGate unblocked
+  3. flockGate WAN gate.update (path proven, just needs execution)
+  4. fieldGate RustDesk client install + ABG member e2e test
+"""
