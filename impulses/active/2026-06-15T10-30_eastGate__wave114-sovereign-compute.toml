@@ -26,11 +26,12 @@ ABG sovereign compute by Friday. Everything else is carry or future-wave."""
 [entry_state]
 depot_x86_64 = "13/13 BUILT from HEAD (2026-06-16T02:27Z — pepti fresh harvest COMPLETE)"
 depot_aarch64 = "13/13 BUILT on pepti (2026-06-15, toadstool manually uploaded due to OOM)"
-vcs_parity = "17/17 origin = forgejo = local (confirmed 2026-06-16T12:10Z after force-convergence)"
+vcs_parity = "17/17 origin = forgejo = local (confirmed 2026-06-16T12:46Z)"
 pepti_build = "✅ COMPLETE — x86_64 13/13, aarch64 13/13. Independent build authority PROVEN."
 fieldgate = "✅ DEPLOYED 13/13 alive, mesh enrolled (first-ant-through Jun 15)"
-genetics_adoption = "9/11 primals accept mito-beacon signal (was 3/11). Soft blocker CLEARED."
-compliance = "riboCipher 9/11 accept, health 13/15, binaries current"
+genetics_adoption = "✅ 11/11 ALL PRIMALS accept mito-beacon signal. Genetics criterion COMPLETE."
+compliance = "riboCipher 11/11 accept, health 13/15, binaries current"
+cascade_fix = "✅ SHIPPED (8f4e4eb) — ff-merge preferred over rebase. Reduces SHA divergence."
 sovereignty = "S1-S4 OPERATIONAL — golgiBody FULL GREEN HEALTHY (verified Jun 16 10:33Z)"
 temporal = "All primals within 20h of HEAD. Zero drift."
 
@@ -172,9 +173,9 @@ criteria = [
     "RustDesk relay operational + health-probed — ✅ DONE",
     "ABG member connects via sovereign path (RustDesk or SSH) — TODO",
     "pepti build authority: fresh harvest from current source — ✅ DONE",
-    "Genetics-layer wiring ≥10/11 accept mito-beacon — 9/11 ✅ (squirrel + loamspine remain)",
+    "Genetics-layer wiring ≥10/11 accept mito-beacon — ✅ 11/11 ALL SHIPPED (loamSpine e68873d, squirrel verified)",
 ]
-score = "5/7 cleared. Genetics soft blocker REMOVED. Remaining 2 are physical/provisioning."
+score = "6/7 cleared. ALL CODE WORK COMPLETE. Remaining: ABG member e2e test (ops-dependent)."
 
 # ──────────────────────────────────────────────────────────────
 # RESOLVED THIS WAVE (Jun 15)
@@ -206,7 +207,10 @@ sweetgrass_mito_accept = "✅ SHIPPED (96d35e5) — accepts 0xED mito-beacon sig
 rhizocrypt_genetics_layer = "✅ SHIPPED (c5913cd) — genetics-layer mito-beacon + SSOT completion"
 barracuda_centralized_pattern = "✅ SHIPPED (cbb2704) — adopted centralized mito-beacon accept pattern"
 toadstool_all_loops = "✅ SHIPPED (5903cf6) — S320: 0xED accepted on all loops"
-genetics_soft_blocker_removed = "✅ 9/11 primals now accept mito-beacon signal (was 3/11). Soft blocker CLEARED."
+genetics_soft_blocker_removed = "✅ 11/11 ALL PRIMALS accept mito-beacon signal. loamSpine e68873d completed the set."
+loamspine_genetics = "✅ SHIPPED (e68873d) — full eukaryotic genetics model (0xEC/0xED/0xEE) + GENETICS_SIGNAL_RANGE + 3 tests"
+squirrel_verified = "✅ VERIFIED (code review by ironGate) — already had full mito-beacon acceptance wired"
+cascade_ff_merge_fix = "✅ SHIPPED (8f4e4eb) — cellMembrane: prefer ff-merge over rebase (reduces SHA divergence)"
 
 # ──────────────────────────────────────────────────────────────
 # AAR: Jun 16 00:26-01:10 Session

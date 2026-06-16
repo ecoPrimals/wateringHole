@@ -1,7 +1,7 @@
 # Wave 114 — ABG Sovereign Compute by Friday
 
 **Status**: ACTIVE | Deadline: Friday June 20 | **From**: eastGate overwatch
-**Last review**: Jun 16 12:10Z
+**Last review**: Jun 16 12:46Z
 
 ---
 
@@ -17,19 +17,19 @@ Depot deploys to all form factors + primals health-validate via riboCipher.
 
 ---
 
-## Ecosystem Snapshot (Jun 16 12:10Z)
+## Ecosystem Snapshot (Jun 16 12:46Z)
 
 | Metric | Value |
 |--------|-------|
-| VCS parity | **17/17 ✓** (zero drift — forced wateringHole convergence) |
+| VCS parity | **17/17 ✓** (zero drift) |
 | Depot x86_64 | **13/13 BUILT** from HEAD (pepti Jun 16 02:27Z) |
 | Depot aarch64 | **13/13 BUILT** on pepti (Jun 15) |
 | fieldGate primals | **13/13 ALIVE**, mesh enrolled |
-| Genetics adoption | **9/11 SHIPPED** mito-beacon acceptance (was 3/11) |
+| Genetics adoption | **11/11 ✅ ALL PRIMALS** accept mito-beacon |
 | golgiBody | **FULL GREEN HEALTHY** (all 9 probes OK) |
 | RustDesk relay | **EXTERNALLY REACHABLE** (:21115-21117) |
 | WAN depot | **HTTPS 200 OK** (membrane.primals.eco) |
-| Bidirectional cascade | **ACTIVE** (divergence still occurring — see notes) |
+| Bidirectional cascade | **ff-merge fix SHIPPED** (`8f4e4eb`) — reduces SHA divergence |
 
 ---
 
@@ -47,21 +47,24 @@ This is a **genetics-layer wiring** issue, not a mechanical per-primal patch.
 
 BearDog owns both. `FAMILY_SEED` IS mito-beacon material (legacy naming).
 
-### Acceptance Status (updated Jun 16 12:10Z — MASSIVE ADOPTION WAVE)
+### Acceptance Status (Jun 16 12:46Z — **ALL PRIMALS COMPLETE**)
 
 | Primal | Status | Commit |
 |--------|--------|--------|
-| beardog | ✅ **SHIPPED** — mode-detection race resolved | `f997a33` |
-| songbird | ✅ **SHIPPED** — federation handler evolved | `fc766dc` |
-| sweetgrass | ✅ **SHIPPED** — 0xED mito-beacon accepted | `96d35e5` |
-| rhizocrypt | ✅ **SHIPPED** — genetics-layer + SSOT | `c5913cd` |
-| barracuda | ✅ **SHIPPED** — centralized pattern adopted | `cbb2704` |
-| toadstool | ✅ **SHIPPED** — 0xED on all loops | `5903cf6` |
-| cellmembrane | ✅ **SHIPPED** — signal module (reference) | `fbd58ac` |
-| petaltongue | ✅ **REFERENCE IMPL** | (original) |
-| coralreef, nestgate | ✅ pass (no health method) | — |
-| squirrel | **PENDING** — has enum, needs accept loop verification | — |
-| loamspine | **TODO** — no commit yet | — |
+| beardog | ✅ SHIPPED | `f997a33` |
+| songbird | ✅ SHIPPED | `fc766dc` |
+| sweetgrass | ✅ SHIPPED | `96d35e5` |
+| rhizocrypt | ✅ SHIPPED | `c5913cd` |
+| barracuda | ✅ SHIPPED | `cbb2704` |
+| toadstool | ✅ SHIPPED | `5903cf6` |
+| cellmembrane | ✅ SHIPPED (reference) | `fbd58ac` |
+| loamspine | ✅ SHIPPED | `e68873d` |
+| squirrel | ✅ VERIFIED (code review) | (already had it) |
+| petaltongue | ✅ REFERENCE IMPL | (original) |
+| coralreef | ✅ passes | — |
+| nestgate | ✅ passes | — |
+
+**11/11 genetics-compliant. Exit criterion CLEARED.**
 
 ### For Friday (ABG Access)
 
@@ -75,9 +78,7 @@ through the relay. Nuclear lineage per-user is Wave 115+ evolution.
 
 ## Remaining Work
 
-### 1. Genetics-Layer Wiring — P2 (was P1, now 9/11 shipped)
-
-Squirrel: verify enum wired. LoamSpine: adopt pattern. Then 11/11.
+### ~~1. Genetics-Layer Wiring~~ — ✅ COMPLETE (11/11)
 
 ### 2. grapheneGate Deployment (ops + cellMembrane)
 
@@ -95,19 +96,22 @@ RustDesk relay is live and externally reachable. Needs:
 
 ---
 
-## Shipped Since Last Review (Jun 16 cascade)
+## Shipped This Wave (Jun 16 — Genetics Adoption + Cascade Fix)
 
 | Primal | Commit | What |
 |--------|--------|------|
-| bearDog | `f997a33` | Mode-detection race resolved — mito-beacon acceptance working |
-| songBird | `fc766dc` | Federation riboCipher handler: stub → proper dispatcher |
+| bearDog | `f997a33` | Mode-detection race resolved — mito-beacon acceptance |
+| songBird | `fc766dc` | Federation riboCipher: stub → proper dispatcher |
 | sweetGrass | `96d35e5` | 0xED mito-beacon signal accepted |
-| rhizoCrypt | `c5913cd` | Genetics-layer mito-beacon + SSOT completion |
-| barraCuda | `cbb2704` | Centralized mito-beacon accept pattern adopted |
-| toadStool | `5903cf6` | S320: 0xED accepted on all loops |
-| cellMembrane | `fbd58ac` | `cellmembrane-types::signal` — centralized accept reference |
+| rhizoCrypt | `c5913cd` | Genetics-layer mito-beacon + SSOT |
+| barraCuda | `cbb2704` | Centralized mito-beacon accept pattern |
+| toadStool | `5903cf6` | S320: 0xED on all loops |
+| loamSpine | `e68873d` | Full eukaryotic genetics model (0xEC/0xED/0xEE) |
+| cellMembrane | `fbd58ac` | `cellmembrane-types::signal` — centralized reference |
+| cellMembrane | `8f4e4eb` | **Cascade fix**: prefer ff-merge over rebase (SHA preservation) |
+| squirrel | (verified) | Code review confirmed full acceptance already wired |
 
-**7 primals shipped genetics-layer wiring in one wave.** Exit criteria #7 moves from 3/11 → 9/11.
+**11/11 genetics-compliant. Cascade divergence fix shipped. All code work DONE.**
 
 ---
 
@@ -131,10 +135,10 @@ RustDesk relay is live and externally reachable. Needs:
 | 4 | RustDesk relay operational | **✅ DONE** |
 | 5 | ABG member end-to-end | TODO |
 | 6 | pepti fresh harvest (both arches) | **✅ DONE** |
-| 7 | Genetics-layer wiring (≥10/11 accept mito-beacon) | **9/11 ✅** (squirrel + loamspine remain) |
+| 7 | Genetics-layer wiring (≥10/11 accept mito-beacon) | **✅ 11/11 DONE** |
 
-**5/7 cleared. Remaining 2 need physical access (Pixel) or gate provisioning (flockGate).**
-**Genetics soft blocker REMOVED** — 9/11 shipped, 2 remaining are minor adoption (not blocking ABG).
+**6/7 cleared. ALL CODE WORK COMPLETE.**
+Remaining: ABG member e2e test (#5) + physical device deployments (#2, #3) — ops-dependent only.
 
 ---
 
@@ -148,16 +152,13 @@ rebase-and-pray. Until then, manual force-convergence is expected during active 
 
 ---
 
-## Carry (not blocking Wave 114)
+## Carry (Wave 115+)
 
 | Debt | Owner | Priority |
 |------|-------|----------|
-| Bidirectional cascade SHA divergence | cellMembrane | P1/Wave 115 |
-| Squirrel accept-loop wiring | squirrel | P2 |
-| LoamSpine mito-beacon adoption | loamSpine | P2 |
+| Event-driven cascade (webhooks) | cellMembrane | P1/Wave 115 |
 | `BEARDOG_FAMILY_SEED` env var deprecation | bearDog | P2/Wave 115 |
 | Nuclear lineage per-ABG-user (tiered access) | bearDog + primalSpring | P2/Wave 115 |
 | Network segmentation enforcement | cellMembrane | P2 |
 | neuralAPI hollow (0 registrations) | biomeOS | P2 |
 | Socket naming (family-suffixed) | primalSpring | P2 |
-| Webhooks (push-triggered cascade) | cellMembrane | P3/Wave 115 |
