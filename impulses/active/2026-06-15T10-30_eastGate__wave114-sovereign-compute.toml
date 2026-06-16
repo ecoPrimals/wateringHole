@@ -198,6 +198,8 @@ wan_depot_live = "✅ https://membrane.primals.eco/depot/ serving x86_64 binarie
 pepti_x86_harvest_complete = "✅ 13/13 x86_64 primals rebuilt from HEAD on pepti (Jun 16 02:27Z, 104min, exit 0)"
 pepti_aarch64_depot_complete = "✅ 13/13 aarch64 primals on pepti (Jun 15 session — toadstool manual upload for OOM)"
 signal_acceptance_module = "✅ SHIPPED (fbd58ac) — cellmembrane_types::signal module: centralized riboCipher accept pattern for all primals"
+cascade_divergence_fix = "✅ SHIPPED (8f4e4eb) — prefer ff-merge over rebase in reconcile_and_push (reduces SHA divergence)"
+squirrel_genetics_verified = "✅ VERIFIED — squirrel already has full mito-beacon acceptance (0xEC/0xED/0xEE), confirmed via code review"
 beardog_mode_detection = "✅ SHIPPED (f997a33) — resolved mode-detection race, mito-beacon acceptance working"
 songbird_federation_handler = "✅ SHIPPED (fc766dc) — evolved from stub to proper dispatcher"
 sweetgrass_mito_accept = "✅ SHIPPED (96d35e5) — accepts 0xED mito-beacon signal"
@@ -347,4 +349,44 @@ NEXT ACTIONS (non-blocking, ops-dependent):
   - Provision or designate flockGate target for WAN validation
   - Install RustDesk client on fieldGate NUC
   - ABG member end-to-end test via relay
+"""
+
+# ──────────────────────────────────────────────────────────────
+# AAR: Jun 16 12:25 Session (eastGate)
+# ──────────────────────────────────────────────────────────────
+
+[aar_jun16_1225]
+gate = "eastGate"
+duration = "~50min"
+summary = """
+Session focus: Cascade sync of massive genetics adoption wave + cascade divergence fix.
+
+SYNCED FROM VPS/FORGEJO:
+- 8 primals pulled genetics-layer adoption commits (bearDog, songBird, sweetGrass,
+  rhizoCrypt, barraCuda, toadStool, squirrel, primalSpring) — the 9/11 adoption wave
+- wateringHole pulled FRAGO updates
+
+SHIPPED:
+- 8f4e4eb: Fix cascade divergence — prefer ff-merge over rebase in reconcile_and_push
+  - Reduces SHA-divergence between remotes during multi-gate cascades
+  - Falls back to rebase only when genuinely diverged
+  - Preserves SHA identity in the common case (one remote simply ahead)
+
+VERIFIED (code review):
+- Squirrel ALREADY has full mito-beacon acceptance wired (0xEC, 0xED, 0xEE handling)
+  - Lines 290-331 of jsonrpc_server.rs: complete signal dispatch
+  - FRAGO should update: squirrel is DONE, not PENDING
+- LoamSpine: confirmed no riboCipher signal handling yet (signals.rs is Unix signals)
+
+VALIDATION:
+- golgiBody: FULL GREEN HEALTHY (13/13 alive, oldest 22h, all probes OK)
+- eastGate cascade: 22/22 synced → bidirectional working
+- Sovereignty: s1_tls OK, s2_relay OK (hbbs+hbbr), s3_content OK
+
+EXIT CRITERIA UPDATE (corrected):
+  5/7 CLEARED → 5.5/7 (squirrel confirmed done, only loamspine remains for #7)
+  - #7 genetics wiring: 10/11 accept (squirrel verified, loamspine is the only holdout)
+
+cellMembrane has NO remaining code work for Wave 114.
+All remaining exit criteria are ops-dependent (device access, gate provisioning).
 """
