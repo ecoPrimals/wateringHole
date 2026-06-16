@@ -18,9 +18,9 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.6.0"
-generated = "2026-06-11"
-wave = 109
+version = "2.7.0"
+generated = "2026-06-16"
+wave = 114
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════

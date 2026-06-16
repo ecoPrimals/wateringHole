@@ -100,48 +100,115 @@ Key findings from ironGate audit of golgiBody + pepti:
 
 ---
 
-## Wave 115 Shape (Deployment Hardening + VPS Convergence)
+## Overwatch Audit (Jun 16 15:31Z — Full Temporal/Ecosystem/Sovereignty/Glacial/Deployment)
+
+### Temporal
+
+| Tier | Repos | Age |
+|------|-------|-----|
+| Active (today) | cellMembrane, primalSpring, wateringHole, 8 primals | 0-3h |
+| Recent | skunkBat, coralReef, plasmidBin | 26-27h |
+| Settling | biomeOS, nestGate, petalTongue | 41-42h |
+| Dormant springs | wetSpring, neuralSpring, etc. | 5-7d |
+| Glacial | rustChip, fossilRecord, blueFish, helixVision | 17-46d |
+
+38 repos total on disk. 17 in active cascade. 21 dormant/stable (not drift).
+
+### Sovereignty Findings
+
+| Check | Status |
+|-------|--------|
+| golgi uptime | 31 days, load 0.00 ✓ |
+| golgi Forgejo | **ACTIVE** ✓ |
+| golgi membrane binary | **AT HEAD** (9dc6a1d) ✓ |
+| golgi RustDesk (hbbs/hbbr) | **⚠ NOT FOUND** — no systemd units, ports not listening |
+| golgi sockets | 28 running ✓ |
+| pepti uptime | 17 days, load 0.00 ✓ |
+| pepti cellMembrane | **AT HEAD** (9dc6a1d) ✓ |
+| pepti depot | Binaries at `primals/{arch}/` subdirectory ✓ |
+| fieldGate | **UP** (1d18h, 3 sockets, load 2.07) |
+| eastGate NUCLEUS | No systemd units (dev mode, manual execution) |
+
+**Critical**: RustDesk relay appears DOWN despite previous validation. Needs cellMembrane investigation.
+
+### Depot State
+
+| Arch | Count | Age | Location |
+|------|-------|-----|----------|
+| x86_64-musl | 13/13 | Jun 15 (1 day) | `primals/x86_64-unknown-linux-musl/` |
+| aarch64-musl | 14/14 | Jun 10 (**6 days**) | `primals/aarch64-unknown-linux-musl/` |
+| aarch64-android | 1 (sourdough) | — | experimental |
+
+**Issues**: 
+- x86_64 depot missing `sourdough` binary
+- aarch64 depot is pre-genetics-wave (stale)
+- Double-nested directory bug: `primals/x86_64/.../primals/x86_64/...`
+- No checksums for aarch64
+
+### Glacial Debt (Long-term)
+
+- **Version tags**: Only 5/13 primals tagged. bearDog +862, toadStool +2073 since last tag
+- **Manifest**: Was wave 109, updated to wave 114 this session
+- **No guideStone/ or standards/ directories** in wateringHole — socket naming + service contracts undocumented
+- **21 dormant repos** not in cascade (stable, not drifting — but unchecked)
+
+---
+
+## Wave 115 Shape (VPS Convergence + Deployment Atomicity)
+
+### P1: RustDesk Relay Formalization (cellMembrane/ironGate)
+
+Relay was working but is not persisted as systemd. Needs:
+- Formalize as `rustdesk-hbbs.service` + `rustdesk-hbbr.service`
+- OR document docker-compose lifecycle
+- Verify external reachability after formalization
 
 ### P1: VPS Layer Convergence (cellMembrane/ironGate)
 
-- Redeploy `membrane` binary on golgiBody (include `63a2130` + `9dc6a1d`)
-- Consolidate depot paths to single canonical (`infra/plasmidBin/`)
-- Clone cellMembrane on golgiBody for self-update capability
-- Decide pepti operational tier (Tower Atomic minimum)
+- golgi membrane is at HEAD ✓ — verify services using new socket registry
+- Consolidate triple depot paths to single canonical
+- Replace legacy bash `deploy_membrane.sh` with `plasmid.refresh`
+- Decide pepti operational tier (Tower Atomic min for self-validation)
 
 ### P1: Event-Driven Cascade (cellMembrane)
 
-- Replace manual force-convergence with webhook-triggered sync
-- ff-merge fix (`8f4e4eb`) is interim — webhooks eliminate the race entirely
+- ff-merge fix is interim — webhooks eliminate the multi-gate race
+- Forgejo webhook → triggers sync to GitHub (and reverse)
+- Eliminates manual force-convergence during active waves
 
-### P2: Socket Naming Standard (cellMembrane + primalSpring)
+### P2: Fresh aarch64 Harvest (cellMembrane/pepti)
 
-- Codify capability → socket name mapping in `cellmembrane-types`
-- Bootstrap generates canonical + alias sockets from registry
-- Eliminates ad-hoc FAMILY_ID suffixing
+- Current aarch64 depot is 6 days old (pre-genetics wave)
+- Needs rebuild including all 7+ genetics-layer commits
+- Also need sourdough in x86_64 depot
+
+### P2: Socket Naming + Service Standard (cellMembrane + primalSpring)
+
+- `9dc6a1d` documents all 28 sockets in registry — but no enforcement yet
+- Bootstrap should generate from registry
+- Eliminate ad-hoc FAMILY_ID suffixing
 
 ### P2: Deployment Atomicity (cellMembrane)
 
-- Canary promote pattern: new binary → sandbox socket → health verify → atomic swap
-- Replace bash `deploy_membrane.sh` with Rust-native `plasmid.refresh`
+- Canary promote: new binary → sandbox socket → health verify → atomic swap
+- Self-refresh pipeline in Rust (replace bash)
 
-### P2: Environment Consolidation (cellMembrane)
+### P3: Environment Consolidation
 
-- Unify tower.env + secrets.env → structured env.d/ approach
-- Role-based files: tower.env, family.env, mesh.env
+- Unify tower.env + secrets.env → structured `env.d/`
 
 ### P3: Bridge Evolution (cellMembrane + songBird)
 
 - socat TCP bridges → Rust-native transport with mTLS
-- songBird federation subsumes bridge function
 
-### Carry
+### Carry (Wave 115+)
 
 | Debt | Owner | Priority |
 |------|-------|----------|
 | `BEARDOG_FAMILY_SEED` deprecation | bearDog | P2 |
 | Nuclear lineage per-ABG-user | bearDog + primalSpring | P2 |
 | Network segmentation enforcement | cellMembrane | P2 |
+| Version tag hygiene | all teams | P3 |
 | neuralAPI hollow (0 registrations) | biomeOS | P3 |
 | Peer registry (mesh.peers RPC) | songBird | P3 |
 

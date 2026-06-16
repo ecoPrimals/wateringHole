@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 14, 2026 (Wave 113 — riboCipher REJECT shipped + primal auto-registration. biomeOS v4.28, riboCipher REJECT enforced on all sockets, NUCLEUS topology.rescan bridges NeuralRouter registration gap.)
+**Last Updated**: June 16, 2026 (Wave 114 — 11/11 genetics-compliant (mito-beacon acceptance). Eukaryotic model: MitoBeacon (0xEC/0xED) + Nuclear Lineage (0xEE). cellMembrane: signal module + socket alias registry + ff-merge cascade fix. All deployment hardening shipped.)
 
 ---
 

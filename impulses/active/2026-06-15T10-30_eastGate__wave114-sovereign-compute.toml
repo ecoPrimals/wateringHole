@@ -109,13 +109,19 @@ aarch64_harvest = { status = "✅ DONE (previous)", priority = "P2", owner = "ce
 # ──────────────────────────────────────────────────────────────
 
 [carry]
-diderm_self_healing = "P1-ACTIVE: push_target=all creates SHA divergence during concurrent multi-gate pushes (observed Jun 16 12:10Z — required force-with-lease). Root cause: rebase chains from parallel gate evolution produce same-content-different-hash. Event-driven convergence (webhooks) needed Wave 115 to eliminate manual force-sync."
+diderm_self_healing = "P1-SHIPPED (8f4e4eb): ff-merge preferred over rebase. SHA divergence still occurs during concurrent pushes but is now reduced. Webhook-based convergence (Wave 115) will eliminate it fully."
+rustdesk_relay_down = "P1-INVESTIGATE: hbbs/hbbr units NOT FOUND on golgiBody (Jun 16 15:43Z). Ports not listening. Was reported ACTIVE earlier — may have been containerized or manually run. Needs cellMembrane to formalize as systemd or persist via docker-compose."
+depot_path_nesting = "P2: Local x86_64 depot has double-nested structure (primals/x86_64/.../primals/x86_64/...). cellMembrane 63a2130 handles resolution but VPS+local layout should consolidate."
+aarch64_depot_stale = "P2: aarch64 binaries are Jun 10 (6 days old, pre-genetics wave). Need fresh harvest including all genetics-layer commits."
+manifest_stale = "RESOLVED (this session): ecosystem_manifest.toml updated from wave 109 → wave 114."
+sourdough_x86_missing = "P2: sourdough binary missing from x86_64 depot (present in aarch64 depot)."
 network_segmentation = "P2: Codify flockGate external-only, LAN internal-only. golgiBody bridges. Currently documented, not enforced."
-neuralapi_hollow = "P2: biomeOS neuralAPI has 0 registered capabilities. Auto-registration needed. Low priority until NUCLEUS composition matters."
-undocumented_sockets = "LOW: ~28 primal sockets not in guideStone manifest. Needs amendment."
-tiered_access = "LONG-TERM: Four-tier remote access converging JupyterHub+pappusCast+RustDesk+IDE."
+neuralapi_hollow = "P2: biomeOS neuralAPI has 0 registered capabilities. Auto-registration needed."
+undocumented_sockets = "RESOLVED (9dc6a1d): socket alias registry now documents all 28 capability sockets in cellmembrane-types."
+tiered_access = "LONG-TERM: Four-tier remote access converging RustDesk+Cursor+toadStool."
 freshness_mesh = "LONG-TERM: Distribute freshness via songBird mesh, eliminate VCS coordination."
-sourdough_segfault = "LOW: validate depot segfault (manual b3sum fallback works)"
+glacial_repos = "NOTE: 21 repos not in active cascade. rustChip 46d, fossilRecord 21d, blueFish/helixVision/initioChem 19d. These are dormant/stable — not drift."
+version_tags_stale = "LOW: Only 5/13 primals have ANY git tags. bearDog +862 since tag, toadStool +2073. Tags are purely informational (not used for deployment) but represent hygiene debt."
 windows_ecobin = "DEFERRED: blueGate Windows/WSL2 cross-platform — hardware blocked"
 
 # ──────────────────────────────────────────────────────────────
