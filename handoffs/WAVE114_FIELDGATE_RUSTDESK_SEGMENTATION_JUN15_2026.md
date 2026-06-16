@@ -1,88 +1,103 @@
 # Wave 114 — ABG Sovereign Compute by Friday
 
 **Status**: ACTIVE | Deadline: Friday June 20 | **From**: eastGate overwatch
-**Last review**: Jun 15 22:17Z (full temporal/sovereignty/glacial)
+**Last review**: Jun 16 11:22Z
 
 ---
 
 ## Objective
 
-Depot deploys to all form factors. Three targets must pass:
+Depot deploys to all form factors + primals health-validate via riboCipher.
 
 | Target | Arch | Transport | Status |
 |--------|------|-----------|--------|
 | **fieldGate** (NUC) | x86_64-musl | LAN via MikroTik | **✅ 13/13 ALIVE** |
-| **grapheneGate** (Pixel) | aarch64-musl | LAN/relay | BLOCKED (cross-compile) |
-| **flockGate** (WAN) | x86_64-musl | relay via golgiBody | READY (path proven) |
+| **grapheneGate** (Pixel) | aarch64-musl | LAN/relay | DEPOT READY (device needed) |
+| **flockGate** (WAN) | x86_64-musl | relay via golgiBody | PATH PROVEN (target needed) |
 
 ---
 
-## Ecosystem Snapshot (Jun 15 22:17Z)
+## Ecosystem Snapshot (Jun 16 11:22Z)
 
 | Metric | Value |
 |--------|-------|
-| VCS parity | **18/18 ✓** (zero drift anywhere) |
-| Depot x86_64 | **13/13 BUILT** from HEAD |
+| VCS parity | **18/18 ✓** (zero drift) |
+| Depot x86_64 | **13/13 BUILT** from HEAD (pepti Jun 16 02:27Z) |
+| Depot aarch64 | **13/13 BUILT** on pepti (Jun 15) |
 | fieldGate primals | **13/13 ALIVE**, mesh enrolled |
-| pepti state | OPERATIONAL — repos at HEAD, harvest running |
-| Bidirectional cascade | **SHIPPED** (push_target=all) |
-| Sovereignty (golgi) | S1-S4 all GREEN |
-| Sovereignty (fieldGate) | S4 GREEN, S1-S3 intermittent (LAN routing) |
+| eastGate live NUCLEUS | **11/11 spawn** from depot (4/11 health-reachable) |
+| golgiBody | **FULL GREEN HEALTHY** (all 9 probes OK) |
+| RustDesk relay | **EXTERNALLY REACHABLE** (:21115-21117) |
+| WAN depot | **HTTPS 200 OK** (membrane.primals.eco) |
+| Bidirectional cascade | **WORKING** (confirmed live Jun 16) |
 
 ---
 
-## Remaining Work (4 threads)
+## NEW: riboCipher Server-Side Acceptance (P1 — SOFT BLOCKER)
 
-### 1. aarch64 Cross-Compile for Pixel (cellMembrane/ironGate)
+**Discovery**: Jun 16 live NUCLEUS on eastGate — 11/11 primals spawn but 7/11 reject the
+`[0xEC, 0x01]` riboCipher prefix, breaking health probes. Fix is mechanical (2 lines at
+connection accept per primal).
 
-Toolchain ready on pepti. Just needs harvest run.
+| Primal | Status | Priority |
+|--------|--------|----------|
+| beardog | BTSP frame misparse | **P1** (blocks auth) |
+| songbird | TLS config + prefix reject | **P1** (blocks federation) |
+| rhizocrypt | Rejects prefix | **P1** |
+| barracuda | Rejects prefix | P2 |
+| loamspine | Rejects prefix | P2 |
+| toadstool | Rejects prefix | P2 |
+| squirrel | Invalid UTF-8 | P2 |
+| sweetgrass | Rejects prefix | P2 |
+| coralreef | Passes | ✅ |
+| nestgate | Passes | ✅ |
+| petaltongue | Passes (UDS) | ✅ |
 
-| Task | Status |
-|------|--------|
-| `plasmid.harvest --targets aarch64` on pepti | TODO |
-| grapheneGate gate.update with aarch64 binaries | TODO |
-| grapheneGate 13/13 alive validation | TODO |
-
-### 2. flockGate WAN Validation (cellMembrane)
-
-WAN path proven (2.2 MB/s). Needs execution.
-
-| Task | Status |
-|------|--------|
-| gate.fetch via relay (x86_64 depot) | TODO |
-| gate.update + 13/13 alive | TODO |
-
-### 3. RustDesk Relay + ABG Access (cellMembrane/ironGate)
-
-| Task | Status |
-|------|--------|
-| Verify hbbs/hbbr alive on golgiBody-ext (:21115-21117) | TODO |
-| fieldGate RustDesk client → relay | TODO |
-| ABG member end-to-end via relay | TODO |
-
-### 4. pepti Full Harvest (cellMembrane/ironGate)
-
-| Task | Status |
-|------|--------|
-| Complete x86_64 harvest (in progress) | IN PROGRESS |
-| Run aarch64 harvest | TODO |
+**Workaround**: `--skip-preflight --no-rollback` + manual `ps` for alive validation.
+**AAR**: `handoffs/primalSpring/AAR_WAVE114_EASTGATE_LIVE_NUCLEUS_EXECUTION_JUN16_2026.md`
 
 ---
 
-## fieldGate Deployment Hurdles (cellMembrane evolution debt)
+## Remaining Work
 
-8 issues discovered during first-ant-through. All are bootstrap automation gaps:
+### 1. riboCipher Acceptance (all primal teams) — P1
 
-| Hurdle | Priority |
-|--------|----------|
-| Port 8080 collision (songbird + nestgate) | P1 |
-| biomeos binary path discovery failure | P1 |
-| No systemd units installed by bootstrap | P1 |
-| Missing NESTGATE_JWT_SECRET generation | P2 |
-| checksums.toml not in depot (phase fails) | P2 |
-| /opt/membrane permissions (needs chmod) | P2 |
-| mesh.init not called after songbird starts | P2 |
-| cellMembrane Forgejo org mismatch | FIXED |
+Each primal needs 2-byte prefix consumer at connection accept. Fix pattern in AAR.
+
+### 2. grapheneGate Deployment (ops + cellMembrane)
+
+Depot aarch64 is ready. Needs physical device access to deploy.
+
+### 3. flockGate WAN Validation (cellMembrane)
+
+WAN path proven (2.2 MB/s, HTTPS 200). Needs target gate provisioned.
+
+### 4. ABG Member End-to-End (cellMembrane)
+
+RustDesk relay is live and externally reachable. Needs:
+- fieldGate RustDesk client installed
+- ABG member connects via relay
+
+---
+
+## cellMembrane Shipped (since last review)
+
+| Commit | What |
+|--------|------|
+| `fed3335` | Robust bootstrap: systemd units, install phase, secrets, permissions (ALL 7 hurdles) |
+| `c032abf` | Mesh retry loop (5x2s), removed --dark-forest, updated docs |
+
+All 7 fieldGate deployment hurdles are now **resolved in code**.
+
+---
+
+## primalSpring Shipped (this session)
+
+| Commit | What |
+|--------|------|
+| `6190d8e` | `nucleus_launcher validate` subcommand + `s_bootstrap_readiness` scenario (62nd) |
+| — | Live NUCLEUS execution: confirmed 11/11 spawn from depot on eastGate |
+| — | riboCipher incompatibility diagnosis + AAR filed |
 
 ---
 
@@ -91,12 +106,14 @@ WAN path proven (2.2 MB/s). Needs execution.
 | # | Criterion | Status |
 |---|-----------|--------|
 | 1 | fieldGate (NUC): 13/13 alive + mesh | **✅ DONE** |
-| 2 | grapheneGate (Pixel): aarch64 depot + 13/13 | BLOCKED |
-| 3 | flockGate (WAN): relay depot + 13/13 | TODO |
-| 4 | RustDesk relay + ABG member connects | TODO |
-| 5 | pepti fresh harvest (x86 + aarch64) | IN PROGRESS |
+| 2 | grapheneGate (Pixel): aarch64 depot + 13/13 | DEPOT READY |
+| 3 | flockGate (WAN): relay depot + 13/13 | PATH PROVEN |
+| 4 | RustDesk relay operational | **✅ DONE** |
+| 5 | ABG member end-to-end | TODO |
+| 6 | pepti fresh harvest (both arches) | **✅ DONE** |
+| 7 | riboCipher acceptance (≥10/11 primals) | **3/11** — SOFT BLOCKER |
 
-**1/5 cleared. Remaining work is execution — no design blockers.**
+**3/7 cleared. Hard blockers: 0. Soft blocker: riboCipher (mechanical fix per primal).**
 
 ---
 
@@ -104,9 +121,8 @@ WAN path proven (2.2 MB/s). Needs execution.
 
 | Debt | Owner | Priority |
 |------|-------|----------|
+| Songbird TLS federation config | songbird | P2 |
 | Network segmentation enforcement | cellMembrane | P2 |
 | neuralAPI hollow (0 registrations) | biomeOS | P2 |
-| riboCipher outbound (~5 primals) | per-team | P2 |
+| Socket naming (family-suffixed) | primalSpring | P2 |
 | Webhooks (push-triggered cascade) | cellMembrane | P3/Wave 115 |
-| Tiered access architecture | long-term | P3 |
-| freshness.mesh (songBird distribution) | long-term | P3 |

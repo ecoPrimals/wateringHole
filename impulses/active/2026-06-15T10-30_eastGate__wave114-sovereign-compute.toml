@@ -26,12 +26,14 @@ ABG sovereign compute by Friday. Everything else is carry or future-wave."""
 [entry_state]
 depot_x86_64 = "13/13 BUILT from HEAD (2026-06-16T02:27Z — pepti fresh harvest COMPLETE)"
 depot_aarch64 = "13/13 BUILT on pepti (2026-06-15, toadstool manually uploaded due to OOM)"
-vcs_parity = "22/22 origin = forgejo = local (confirmed 2026-06-16T10:33Z)"
+vcs_parity = "18/18 origin = forgejo = local (confirmed 2026-06-16T11:22Z)"
 pepti_build = "✅ COMPLETE — x86_64 13/13, aarch64 13/13. Independent build authority PROVEN."
 fieldgate = "✅ DEPLOYED 13/13 alive, mesh enrolled (first-ant-through Jun 15)"
-compliance = "riboCipher ~14/15, health ~13/15, binaries current"
+eastgate_live_nucleus = "11/11 spawn from depot, 4/11 health-reachable (riboCipher gap)"
+compliance = "riboCipher server-side: 3/11 accept, 8/11 need fix. BLOCKING for health validation."
 sovereignty = "S1-S4 OPERATIONAL — golgiBody FULL GREEN HEALTHY (verified Jun 16 10:33Z)"
-temporal = "All primals within 20h of HEAD. Zero drift."
+temporal = "All primals within 36h of HEAD. Zero drift."
+cellmembrane_shipped = "fed3335 + c032abf: robust bootstrap (all 7 fieldGate hurdles resolved)"
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Depot Validation (THE EXIT GATE)
@@ -47,12 +49,12 @@ Three targets must pass. This is the Wave 114 exit gate."""
 
 [stream1.targets]
 fieldgate_nuc = { arch = "x86_64-musl", transport = "LAN via MikroTik switch", validation = "gate.bootstrap → 13/13 alive", status = "✅ DONE — 13/13 alive, mesh enrolled, first-ant-through PROVEN (Jun 15)" }
-graphenegate_pixel = { arch = "aarch64-musl", transport = "LAN/relay", validation = "gate.fetch + gate.update → 13/13 alive", status = "BLOCKED (aarch64 cross-compile pending)" }
+graphenegate_pixel = { arch = "aarch64-musl", transport = "LAN/relay", validation = "gate.fetch + gate.update → 13/13 alive", status = "READY (aarch64 binaries built on pepti Jun 15)" }
 flockgate_wan = { arch = "x86_64-musl", transport = "relay via golgiBody", validation = "gate.fetch + gate.update → 13/13 alive", status = "READY (WAN path proven 2.2 MB/s)" }
 
 [stream1.tasks]
 fieldgate_bootstrap = { owner = "fieldGate team + cellMembrane", status = "✅ 13/13 ALIVE", note = "First-ant-through COMPLETE. 13/13 primals alive, mesh enrolled (1 peer reachable), sovereignty S1-S4 operational. biomeos workaround: 'biomeos api --socket --unix-only'. 8 hurdles documented as cellMembrane evolution." }
-aarch64_cross_compile = { owner = "cellMembrane/pepti", status = "TODO", note = "pepti has cargo + disk. Cross-compile via --target aarch64-unknown-linux-musl." }
+aarch64_cross_compile = { owner = "cellMembrane/pepti", status = "✅ DONE", note = "13/13 aarch64 binaries built on pepti (toadstool manual upload due to OOM)." }
 flockgate_update = { owner = "cellMembrane", status = "TODO", note = "WAN fetch path proven. Just needs gate.update with current depot." }
 blake3_verification = { owner = "cellMembrane", status = "DONE", note = "checksums.toml updated from harvest" }
 
@@ -101,6 +103,32 @@ Only remaining tasks: complete x86_64 full harvest + run aarch64 harvest."""
 [stream3.tasks]
 pepti_full_rebuild = { status = "✅ DONE", priority = "P1", owner = "cellMembrane/ironGate", note = "x86_64 harvest COMPLETE (Jun 16 02:27Z). 13/13 primals built from HEAD in 104 min. All binaries include bootstrap hurdle fixes (fed3335, c032abf)." }
 aarch64_harvest = { status = "✅ DONE (previous)", priority = "P2", owner = "cellMembrane/ironGate", note = "13/13 aarch64 binaries present on pepti from Jun 15 session. toadstool was manually uploaded (OOM on linking). Ready for grapheneGate deployment." }
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 4: riboCipher Server-Side Acceptance (NEW — BLOCKING)
+# ──────────────────────────────────────────────────────────────
+
+[stream4]
+id = "RIBOCIPHER-ACCEPTANCE"
+owner = "all primal teams"
+priority = "P1"
+description = """Jun 16 live NUCLEUS execution: 11/11 primals spawn but 7/11 reject
+riboCipher [0xEC,0x01] prefix, breaking health probes. Fix is 2 lines at connection
+accept. Without this, launcher cannot validate 13/13 ALIVE even though processes run.
+AAR: handoffs/primalSpring/AAR_WAVE114_EASTGATE_LIVE_NUCLEUS_EXECUTION_JUN16_2026.md"""
+
+[stream4.status]
+beardog = { status = "P1-NEEDED", note = "BTSP frame length misparse — blocks auth for entire mesh" }
+songbird = { status = "P1-NEEDED", note = "TLS config issue (federation port 80→443) + prefix rejection" }
+rhizocrypt = { status = "P1-NEEDED", note = "Rejects prefix" }
+barracuda = { status = "P2-NEEDED", note = "Rejects prefix" }
+loamspine = { status = "P2-NEEDED", note = "Rejects prefix" }
+toadstool = { status = "P2-NEEDED", note = "Rejects prefix" }
+squirrel = { status = "P2-NEEDED", note = "Invalid UTF-8 rejection" }
+sweetgrass = { status = "P2-NEEDED", note = "Rejects prefix" }
+coralreef = { status = "✅ PASSES", note = "Accepts connection (no health method)" }
+nestgate = { status = "✅ PASSES", note = "Accepts connection (no health method)" }
+petaltongue = { status = "✅ PASSES", note = "UDS, accepts riboCipher" }
 
 # ──────────────────────────────────────────────────────────────
 # CARRY (parallel, not blocking Wave 114 close)
@@ -165,13 +193,15 @@ ops = "Physical only: fieldGate cable + power"
 
 [exit_criteria]
 criteria = [
-    "fieldGate (NUC): depot pull + gate.bootstrap + 13/13 alive",
-    "grapheneGate (Pixel): depot pull + gate.update + 13/13 alive (aarch64)",
-    "flockGate (WAN): depot pull via relay + gate.update + 13/13 alive",
-    "RustDesk relay operational + health-probed",
-    "ABG member connects via sovereign path (RustDesk or SSH)",
-    "pepti build authority: fresh harvest from current source (no stale builds)",
+    "fieldGate (NUC): depot pull + gate.bootstrap + 13/13 alive — ✅ DONE",
+    "grapheneGate (Pixel): depot pull + gate.update + 13/13 alive (aarch64) — DEPOT READY, device needed",
+    "flockGate (WAN): depot pull via relay + gate.update + 13/13 alive — PATH PROVEN, target needed",
+    "RustDesk relay operational + health-probed — ✅ DONE",
+    "ABG member connects via sovereign path (RustDesk or SSH) — TODO",
+    "pepti build authority: fresh harvest from current source — ✅ DONE (both arches)",
+    "riboCipher server-side acceptance: ≥10/11 primals accept prefix — SOFT BLOCKER (3/11 today)",
 ]
+score = "3/7 (was 3/5 before riboCipher discovery). Hard blockers: 0. Soft blocker: riboCipher."
 
 # ──────────────────────────────────────────────────────────────
 # RESOLVED THIS WAVE (Jun 15)
@@ -194,6 +224,10 @@ rustdesk_firewall = "✅ UFW rules added for :21115-21117 — relay externally r
 wan_depot_live = "✅ https://membrane.primals.eco/depot/ serving x86_64 binaries over HTTPS (200 OK)"
 pepti_x86_harvest_complete = "✅ 13/13 x86_64 primals rebuilt from HEAD on pepti (Jun 16 02:27Z, 104min, exit 0)"
 pepti_aarch64_depot_complete = "✅ 13/13 aarch64 primals on pepti (Jun 15 session — toadstool manual upload for OOM)"
+primalspring_validate_subcommand = "✅ nucleus_launcher validate — run scenarios against live/structural NUCLEUS (6190d8e)"
+primalspring_bootstrap_readiness = "✅ s_bootstrap_readiness scenario (62nd) — codifies all 8 fieldGate hurdles as preflight checks"
+primalspring_live_nucleus_validated = "✅ 11/11 primals spawn from x86_64 depot on eastGate — CONFIRMED WORKING"
+ribocipher_gap_diagnosed = "AAR filed: 7/11 primals reject [0xEC,0x01] prefix — fix pattern documented for all teams"
 
 # ──────────────────────────────────────────────────────────────
 # AAR: Jun 16 00:26-01:10 Session
