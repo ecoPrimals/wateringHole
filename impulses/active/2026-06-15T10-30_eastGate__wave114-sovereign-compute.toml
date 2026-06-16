@@ -394,3 +394,63 @@ EXIT CRITERIA UPDATE (corrected):
 cellMembrane has NO remaining code work for Wave 114.
 All remaining exit criteria are ops-dependent (device access, gate provisioning).
 """
+
+# ──────────────────────────────────────────────────────────────
+# AAR: Jun 16 13:00 Session (ironGate)
+# ──────────────────────────────────────────────────────────────
+
+[aar_jun16_1300]
+gate = "ironGate"
+duration = "~45min"
+summary = """
+Session focus: Deep debt elimination + ironGate deployment readiness.
+
+ARCHITECTURE DISCOVERY:
+- ironGate is on LAN (192.168.1.164) with eastGate
+- fieldGate NUC at 192.168.2.32 (different subnet, mesh bridge DOWN)
+- eastGate has grapheneGate (Pixel) on ADB
+- All ops are actionable — we own VPS + LAN gates
+
+SHIPPED (63a2130):
+- Unified depot resolution: resolve_plasmidbin_dir() now checks both
+  {eco_root}/infra/plasmidBin (harvest canonical) AND {eco_root}/plasmidBin (compat)
+  Fixes depot-not-found on pepti where code used wrong path
+- All hardcoded /opt/membrane replaced with ENV_INSTALL_BASE configurable
+  (bootstrap, provision, ServerContract.exec_args_with_base())
+- Freshness publisher evolved from name-based to capability-based:
+  FRESHNESS_PUBLISHER=1 env var instead of gate_name == "golgiBody"
+- Mesh hub identity: DEFAULT_MESH_HUB_ID + ENV_MESH_HUB_ID (was hardcoded "golgiBody@")
+- Multi-peer mesh: ENV_MESH_PEERS (comma-separated) for LAN+WAN topology
+- CLI fix: gate.bootstrap --dry-run no longer parses flag as gate name
+- All systemd templates now use {install_base} variable
+
+VCS RECONCILIATION:
+- agentReagents: origin pushed to forgejo HEAD (ff)
+- benchScale: origin pushed to forgejo HEAD (ff)
+- sporePrint: forgejo pushed to origin HEAD (ff)
+- wateringHole: local+origin fast-forwarded to forgejo HEAD
+
+IRONGATE VALIDATION:
+- gate.bootstrap --dry-run: 11/11 phases PASS — ENROLLED
+- gate.status: depot.integrity 14 verified, depot.freshness 13/13, sovereignty S1-S3 all OK
+- Degraded only: 0/13 primals alive (expected — NUCLEUS not started yet)
+- Ready for live bootstrap with: ECOPRIMALS_ROOT=/home/irongate/Development/ecoPrimals
+
+DEBT PROFILE (post-session):
+- NO unsafe code (both crates #![forbid(unsafe_code)])
+- NO todo!/unimplemented! in prod code
+- All path hardcoding now has env-var overrides
+- Single file >800L: tests/coverage.rs (817L, acceptable for test)
+- Remaining external shell deps: git, ssh, scp, systemctl — intentional for now
+- 386 tests all passing, no new clippy warnings
+
+EXIT CRITERIA UPDATE:
+  ironGate is now a PROVEN deployment target (dry-run validated, depot verified).
+  Cross-subnet convergence solved by multi-peer mesh (hub-and-spoke through VPS).
+  virbr-mesh bridge activation is OS-level ops (not a code issue).
+
+CARRY TO WAVE 115:
+  - Live NUCLEUS bootstrap on ironGate (sudo gate.bootstrap ironGate)
+  - Bring virbr-mesh up for LAN mesh with fieldGate
+  - grapheneGate deployment via eastGate ADB (when device is at hand)
+"""
