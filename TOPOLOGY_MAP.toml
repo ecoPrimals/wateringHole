@@ -146,9 +146,9 @@ confidence = "medium"
 notes = "Cat6e between properties, Eero mesh bridge"
 
 [latency.backbone_to_vps]
-estimate_ms = 25.0
-confidence = "medium"
-notes = "BTSP relay, DigitalOcean NYC"
+estimate_ms = 30.0
+confidence = "high"
+notes = "WireGuard wg0 tunnel, measured 2026-06-17: 29-34ms RTT to golgiBody (DO NYC)"
 
 [latency.eero_mesh_to_vps]
 estimate_ms = 28.0
