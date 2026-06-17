@@ -13,15 +13,15 @@ from = "eastGate"
 to = ["cellMembrane/sporeGate", "ironGate/projectNUCLEUS", "ops"]
 date = "2026-06-16"
 priority = "P1"
-owner = "cellMembrane/sporeGate (primary), ironGate (ABG access)"
+owner = "sporeGate (LAN hardware), cellMembrane IDE (code+VPS), ironGate (ABG)"
 
 note = """
-Wave 115 objective: Harden what Wave 114 proved.
-- All gates can remote to all others (RustDesk sovereign relay)
-- Primals persist across reboot (systemd units)
-- sporeGate fully autonomous (push access, cellMembrane ownership)
-- northGate onboarded as final NUCLEUS gate
-- ironGate transitions to projectNUCLEUS/ABG compute access"""
+Wave 115 objective: Harden what Wave 114 proved. TWO-TEAM SPLIT:
+- sporeGate team (NUC): LAN hardware, routing, Omada/Eero, gate deploys, RustDesk mesh push
+- cellMembrane team (Cursor IDE in gardens/cellMembrane): code evolution, VPS (golgi+pepti),
+  cascade pipeline, depot, Forgejo, bootstrap fixes, membrane commands
+- Co-evolution: sporeGate deploys what cellMembrane builds. Both push to same repos.
+- ironGate: projectNUCLEUS/ABG compute access"""
 
 # ──────────────────────────────────────────────────────────────
 # ENTRY STATE (Jun 16 21:53 EDT)
