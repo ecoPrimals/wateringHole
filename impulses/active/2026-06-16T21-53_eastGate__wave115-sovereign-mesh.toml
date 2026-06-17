@@ -59,10 +59,11 @@ eastgate_client = { status = "✅ DONE", note = "Configured via GUI, hairpin NAT
 northgate_client = { status = "✅ DONE", note = "Configured, can reach sporeGate + eastGate" }
 fieldgate_client = { status = "TODO", note = "Gate offline — deploy when back up" }
 hairpin_nat = { status = "✅ DONE", note = "eno1→eno1 accept + LAN masquerade. Persisted to /etc/nftables.conf" }
-omada_towers_push = { status = "TODO", note = "SSH-push config string to all wired towers behind Omada L2 switch. If Omada has L3/VLAN, needs controller access (password from operator)." }
-flockgate_wan_relay = { status = "TODO", note = "flockGate is offsite WAN on public relay. Apply sovereign config via SSH from golgi or current public RustDesk session." }
-eero_bridge_investigate = { status = "TODO", note = "Eeros likely NAT WiFi clients to separate subnet. Investigate bridge mode (dumb AP) or add routing/hairpin for Eero subnet on sporeGate." }
-membrane_remote_configure = { status = "TODO", note = "Evolve cellMembrane: membrane remote.configure --relay golgi auto-pushes config to any SSH-reachable gate. Eliminates manual per-machine typing." }
+omada_towers_push = { status = "READY", note = "Omada is L2 (confirmed: SX3008F sticker). All wired devices on same 192.168.4.x. sporeGate can SSH directly. Script: sovereign-relay-push.sh discover. No password needed — just SSH key access." }
+omada_controller_audit = { status = "READY", note = "Default creds confirmed: admin/admin. Log in, verify no VLAN port isolation splitting traffic. L2+ features may be useful later for segmentation." }
+flockgate_wan_relay = { status = "READY", note = "flockGate is on public relay NOW — use that session to push sovereign config. Or SSH hop: sporeGate → golgi → flockGate. Script: sovereign-relay-push.sh wan" }
+eero_bridge_investigate = { status = "TODO", note = "Eeros NAT WiFi clients to 192.168.1.x (ATT subnet). Bridge mode via Eero app collapses to flat 192.168.4.x under sporeGate DHCP. Only path to sovereign WiFi clients." }
+membrane_remote_configure = { status = "TODO", note = "Evolve cellMembrane: membrane remote.configure --relay golgi auto-pushes config to any SSH-reachable gate. Interim: sovereign-relay-push.sh script." }
 lan_local_relay = { status = "P3-FUTURE", note = "Run hbbs on sporeGate for zero-WAN-latency LAN connections" }
 
 # ──────────────────────────────────────────────────────────────
@@ -158,6 +159,29 @@ This is the cellMembrane team's primary code evolution target."""
 forgejo_webhook = { status = "PARTIAL", owner = "cellMembrane IDE", note = "webhook.rs handles Forgejo push events → local operations. Needs: → trigger cascade to GitHub remote." }
 github_webhook = { status = "TODO", owner = "cellMembrane IDE", note = "No GitHub → Forgejo sync path exists. Needs GitHub Actions or webhook endpoint on golgi." }
 eliminate_force_push = { status = "TODO", owner = "cellMembrane IDE", note = "Goal: zero manual intervention for VCS parity" }
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 7: K-Derm Plasma Membrane Convergence
+# ──────────────────────────────────────────────────────────────
+
+[stream7]
+id = "KDERM-PLASMA-CONVERGENCE"
+owner = "cellMembrane IDE + sporeGate (deploy)"
+priority = "P2"
+description = """sporeGate IS the physical plasma membrane. Its nftables rules ARE the channel
+proteins. cellMembrane firewall.rs already generates composition-deterministic UFW rules.
+Convergence goal: sporeGate's live nftables config is generated from FirewallRuleset::for_composition()
+rather than hand-written. Hardware inventory cataloged (whitePaper/technical/HARDWARE_INVENTORY.md).
+All L2 fabric (CRS310, Omada, TL-SG605S-M2) is cytoplasm — no security policy, just switching."""
+
+[stream7.tasks]
+hardware_inventory = { status = "✅ DONE", note = "All devices cataloged with K-Derm layer mapping in whitePaper/technical/HARDWARE_INVENTORY.md" }
+kderm_mapping = { status = "✅ DONE", note = "Physical topology → envelope model mapping documented. sporeGate=plasma membrane, L2=cytoplasm, VPS=periplasm+outer." }
+firewall_nftables_gen = { status = "TODO", owner = "cellMembrane IDE", note = "Evolve firewall.rs: output nftables ruleset (currently outputs UFW commands). Add nftables backend for composition → rules." }
+sporegate_apply_generated = { status = "TODO", owner = "sporeGate", note = "Apply cellMembrane-generated nftables ruleset to sporeGate. Replaces manual rules with composition-deterministic policy." }
+hairpin_nat_in_composition = { status = "TODO", owner = "cellMembrane IDE", note = "Hairpin NAT (eno1→eno1 masquerade) is a plasma membrane property. Encode in MembraneComposition for diderm-with-LAN topologies." }
+att_passthrough_prep = { status = "BLOCKED", note = "Pending operator admin access to BGW320-500. Eliminates WAN-side NAT, makes sporeGate the sole boundary." }
+omada_vlan_audit = { status = "BLOCKED", note = "Pending Omada SX3008F controller access (admin/admin default). L2+ features may allow VLAN segmentation within cytoplasm." }
 
 # ──────────────────────────────────────────────────────────────
 # CARRY (not blocking Wave 115 close)

@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 09:45 EDT
+**Last review**: Jun 17 10:20 EDT
 
 ---
 
@@ -75,9 +75,28 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 #### LAN Hardware (sporeGate NUC)
 
+- [ ] **K-Derm plasma membrane convergence**: sporeGate nftables → generated from `FirewallRuleset::for_composition()` (replaces hand-written rules with composition-deterministic policy)
 - [ ] northGate NUCLEUS deploy (SSH in, install, start primals, mesh)
 - [ ] WireGuard overlay activation (golgi hub first, then site routers)
 - [ ] Multi-site topology evolution (House 2 link when ready)
+- [ ] ATT BGW320 IP passthrough (eliminate double-NAT when admin access available)
+
+---
+
+## Sovereign Relay Push (remote, no physical access)
+
+All Omada-side devices and flockGate are still on the public relay. Fix remotely:
+
+| Path | Method | Script |
+|------|--------|--------|
+| **LAN wired (Omada side)** | SSH from sporeGate (same L2, 192.168.4.x) | `sovereign-relay-push.sh lan` or `discover` |
+| **flockGate (WAN)** | SSH hop through golgi | `sovereign-relay-push.sh wan` |
+| **WiFi clients (Eero)** | Use existing public relay connection to push sovereign config | Manual RustDesk session → run config command |
+
+**Key insight**: Omada is L2 — it doesn't block anything. sporeGate can SSH directly to
+any wired device. The public relay is a bootstrap path: use it to eliminate itself.
+
+Script: `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|all]`
 
 ---
 
@@ -85,10 +104,10 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 | Item | Blocker | Action When Ready |
 |------|---------|-------------------|
-| Omada bridge mode | Controller password | sporeGate: log in, assess, bridge or route |
+| Omada controller audit | admin/admin (confirmed from sticker) — no blocker! | sporeGate: log in, verify no VLAN isolation |
+| Eero bridge mode | Eero app access | Collapse WiFi to 192.168.4.x (sporeGate DHCP for all) |
 | fieldGate | Dead CMOS, open-air NUC | Repurpose old-gen hardware when viable |
-| flockGate relay migration | Physical visit or SSH from golgi | sporeGate: apply config string |
-| ATT IP passthrough | Gateway admin access | sporeGate: eliminate double-NAT |
+| ATT IP passthrough | Gateway admin access (#283>#66<>) | sporeGate: eliminate double-NAT |
 | Additional NUCs | Operator acquires from various gens | Plug into CRS310, bootstrap |
 
 ---
@@ -151,6 +170,8 @@ harden mesh. Offline hardware returns when physical ops completes.
 | VPS access | sporeGate SSH to golgi + pepti confirmed |
 | Dual-channel handoff | USB kit + Git push active |
 | Full documentation | AAR, topology, onboarding blurb, FRAGO response from sporeGate |
+| **Hardware inventory** | All LAN devices cataloged in `whitePaper/technical/HARDWARE_INVENTORY.md` with K-Derm layer mapping |
+| **K-Derm ↔ hardware** | Physical topology mapped to envelope model — sporeGate = plasma membrane, L2 fabric = cytoplasm |
 
 ---
 
@@ -168,20 +189,39 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 ---
 
-## Architecture
+## Architecture (K-Derm Envelope)
+
+The physical topology maps 1:1 to the K-Derm cell envelope model
+(`whitePaper/technical/HARDWARE_INVENTORY.md` has full device specs + PII).
 
 ```
-Internet → ATT → sporeGate (NAT/FW) → CRS310 (L2) → LAN gates
-                  ↕ WiFi (OOB mgmt)              ↕
-              golgi VPS (relay/forge)    eastGate, northGate, fieldGate
-              pepti VPS (builds)        Omada (L2 switch) → Eeros (WiFi/NAT)
-                                        └─ wired towers (192.168.4.x)
-                                        └─ WiFi clients (Eero subnet?)
+ EXTRACELLULAR     Internet (Dark Forest, weak bonds)
+       │
+ WAN boundary      ATT BGW320-500 (192.168.1.254) ─── Fiber ONT
+       │
+ OUTER MEMBRANE    golgi (Forgejo, hbbs/hbbr relay)
+                   pepti (build authority, depot)
+       │
+ PERIPLASM         WireGuard overlay (10.13.37.0/24), cascade pipeline
+       │
+ ╔══════════════════════════════════════════════════════════════╗
+ ║ PLASMA MEMBRANE   sporeGate nftables/NAT/DHCP/DNS          ║
+ ║                   FirewallRuleset::for_composition()        ║
+ ║                   Channel proteins = nftables rules         ║
+ ╚══════════════════════════════════════════════════════════════╝
+       │
+ CYTOPLASM         CRS310 (L2 backbone, 10G) ─┬─ sfp+1 → Omada SX3008F (L2+)
+                                              ├─ sfp+2 → eastGate (10G compute)
+                                              ├─ ether2 → Eero 6 (WiFi bridge)
+                                              └─ ether8 ← sporeGate eno1
+
+                   TL-SG605S-M2 (2.5G expansion, off Omada)
+                   All NUCLEUS processes (13 primals per gate)
 ```
 
-**sporeGate team**: LAN hardware, routing, NAT, DHCP, Omada/Eero, gate deploys
+**sporeGate team**: Plasma membrane (nftables), LAN hardware, routing, DHCP, Omada/Eero, gate deploys
 **cellMembrane team**: Code evolution, VPS (golgi+pepti), cascade pipeline, depot, Forgejo
-**Co-evolution**: sporeGate deploys what cellMembrane builds. Both push to same repos.
+**Co-evolution**: sporeGate deploys what cellMembrane builds. `firewall.rs` generates nftables from composition → sporeGate applies them live.
 
 RustDesk relay: `157.230.3.183` | One-command config:
 ```
