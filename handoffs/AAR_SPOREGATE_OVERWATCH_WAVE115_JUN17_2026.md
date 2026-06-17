@@ -39,8 +39,9 @@ sporeGate is fully operational as the sovereign plasma membrane. 13/13 primals a
 
 | System | Status | Blocker | Impact |
 |--------|--------|---------|--------|
-| **SSH to LAN gates** | REFUSED/TIMEOUT | `openssh-server` not running on eastGate, northGate, etc. | Cannot deploy NUCLEUS, push sovereign relay config, or run remote preflight |
-| **Omada management UI** | UNREACHABLE | HTTP/HTTPS probes to .115 and 10.0.4.1 return empty/timeout. No open TCP ports found (nmap scan). | Cannot verify VLAN isolation, configure bridge mode, or audit L2 config |
+| **SSH to LAN gates (other than eastGate)** | REFUSED/TIMEOUT | `openssh-server` not running on northGate, etc. | Cannot deploy NUCLEUS or push relay config to remaining gates |
+| **eastGate SSH** | **LIVE** (updated Jun 17 16:00) | `ssh eastgate@192.168.4.244` — Pop!_OS, kernel 6.17.9, up 1d+ |
+| **Omada management UI** | UNREACHABLE (standalone mode) | SX3008F expects SDN controller — installing Omada Controller on sporeGate | Cannot audit L2 config until controller adopts switch |
 | **Eero NAT** | ACTIVE (10.0.7.x) | Requires Eero app (operator phone access) | WiFi clients on separate NAT, invisible sub-membrane in cytoplasm |
 | **ATT IP passthrough** | NOT CONFIGURED | Requires browser session at 192.168.1.254 with Device Access Code | Double-NAT still active (ATT 192.168.1.x → sporeGate 192.168.4.x) |
 | **Sovereign relay push** | BLOCKED | Depends on SSH to gates | Cannot push RustDesk sovereign config to any LAN gate remotely |

@@ -666,10 +666,10 @@ bind_mode = "tcp"
 composition = "full"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
-zone = "house2"
-hub_port = "2.5g"
+zone = "backbone"
+hub_port = "etherX"
 link_speed_mbps = 2500
-notes = "Ryzen 9950X3D + RTX 5090. Omada House 2 zone. Family validation — spare compute. LAST priority."
+notes = "Ryzen 9950X3D + RTX 5090. CRS310 backbone zone. Family validation — spare compute. LAST priority."
 gate_class = "family"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",

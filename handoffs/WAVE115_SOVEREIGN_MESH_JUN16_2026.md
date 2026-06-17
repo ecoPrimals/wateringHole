@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 15:35 EDT (full cascade — overwatch)
+**Last review**: Jun 17 16:15 EDT (Omada controller installed, eastGate SSH live — sporeGate overwatch)
 
 ---
 
@@ -131,10 +131,12 @@ Script: `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|
 
 ---
 
-## Omada Access — INVESTIGATING (sporeGate AAR Jun 17 14:30)
+## Omada Access — SDN CONTROLLER INSTALLED (sporeGate Jun 17 16:10)
 
 **Data plane WORKS** — devices behind Omada are reachable on 192.168.4.x. L2 forwarding confirmed.
-**Management plane UNREACHABLE** — HTTP/HTTPS probes to .115 and 10.0.4.1 return empty. nmap shows no open TCP ports.
+**SDN Controller INSTALLED** — Omada Controller v5.15.24.19 running on sporeGate (Java 17 + MongoDB 7.0).
+**Web UI**: `https://192.168.4.1:8043` (accessible from any LAN device).
+**Status**: `configured: false` — needs initial browser wizard to create admin account and site.
 
 **Likely cause**: Omada SX3008F is in "SDN Controller Managed" mode (factory default for
 newer firmware). The standalone web UI is disabled when no controller is detected OR the
@@ -190,7 +192,7 @@ sudo apt install -y openssh-server
 
 | Item | Blocker | Action When Ready |
 |------|---------|-------------------|
-| Omada controller audit | **UNBLOCKED** (admin/admin confirmed) | sporeGate: log in, verify no VLAN isolation |
+| Omada controller wizard | **Controller running, needs browser setup** | Browse `https://192.168.4.1:8043`, create admin, adopt SX3008F |
 | Eero NAT collapse | Operator has Eero app access | See Eero Collapse Plan below |
 | ATT IP passthrough | **UNBLOCKED** (Device Access Code available) | sporeGate: eliminate double-NAT |
 | House 2 gate enrollment | **UNBLOCKED** (operator confirms access) | sporeGate: sovereign-relay-push.sh + NUCLEUS deploy |
