@@ -11,13 +11,15 @@
 # Authority: sporeGate (routing) + bearDog (key management)
 
 [meta]
-version = "1.1.0"
+version = "1.2.0"
 wave = 115
 overlay_subnet = "10.13.37.0/24"
 port = 51820
 key_management = "wg genkey (manual, pre-bearDog integration)"
-status = "LIVE — golgiBody ↔ sporeGate tunnel active since 2026-06-17"
-last_deployed = "2026-06-17T09:55:00-04:00"
+status = "LIVE — 3-node mesh: golgiBody ↔ sporeGate ↔ pepti (via hub relay)"
+last_deployed = "2026-06-17T13:55:00-04:00"
+active_peers = 3
+hub_forwarding = "enabled (sysctl net.ipv4.ip_forward=1 on golgiBody)"
 
 # ═══════════════════════════════════════════════════════════════
 # Mesh Peers
@@ -64,13 +66,17 @@ note = "House 2 router. When deployed, carves 192.168.5.0/24 from the current /2
 
 [peers.peptidoglycan]
 role = "build_node"
+status = "LIVE"
 endpoint = "157.230.209.218:51820"
 overlay_ip = "10.13.37.4/24"
 public_ip = "157.230.209.218"
+public_key = "0kFgxYo5IWmgoQFq7kGAtkBS9WFwmMJ7vrJl8Y78dwE="
 nat_traversal = "not needed (public IP)"
 allowed_ips = ["10.13.37.4/32"]
 keepalive_seconds = 25
-note = "Build authority. Doesn't route site traffic, just participates in mesh."
+measured_latency_to_golgi_ms = 1.5
+measured_latency_to_sporegate_ms = 34
+note = "Build authority. Mesh relay through golgiBody. systemd persisted."
 
 [peers.neighborhood_node]
 role = "expansion_site"
