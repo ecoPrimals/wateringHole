@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 16 22:51 EDT
+**Last review**: Jun 17 07:44 EDT
 
 ---
 
@@ -95,16 +95,23 @@ Eeros likely NAT WiFi clients to separate subnet.
 
 #### P1: Cascade Pipeline Evolution
 
-- [ ] Event-driven: Forgejo webhook → sync GitHub
-- [ ] Event-driven: GitHub webhook → sync Forgejo (bidirectional)
-- [ ] `membrane remote.configure --relay golgi` command (SSH-push automation)
+- [~] Forgejo webhook handler exists (webhook.rs, 440 lines) — push events → local ops. Needs: trigger cascade to GitHub.
+- [ ] GitHub → Forgejo sync path (GitHub Actions or webhook endpoint on golgi)
+- [ ] Wire bidirectional: any push to either remote cascades to the other
 - [ ] Eliminate all manual VCS convergence
 
 #### P1: Bootstrap & Depot Fixes
 
-- [ ] Fix `gate.bootstrap` hang (timeout on missing binary, skip logic)
-- [ ] `depot.integrity`: generate checksums.toml for all depot binaries
-- [ ] Evolve `plasmid.harvest` for automated multi-arch depot refresh
+- [ ] Fix `gate.bootstrap` hang — per-phase `tokio::time::timeout` wrapping (mesh has retry loop but other phases have none)
+- [ ] `depot.integrity`: create `membrane depot.integrity` command to generate checksums.toml from depot binaries
+- [ ] `plasmid.harvest` multi-arch: flag for cross-compile or multi-builder coordination (pepti=x86_64, need aarch64 path)
+- [ ] Consolidate golgi's 3 depot paths → single canonical (prerequisite for checksums)
+
+#### P2: Git Credential Seeding (AAR from sporeGate onboarding)
+
+- [ ] `gate.bootstrap` should detect missing git config and emit WARNING phase
+- [ ] pepti as credential depot: gates fetch identity config on enrollment
+- [ ] USB kit include gitconfig fragment for operator manual application
 
 #### P2: Code Evolution
 
@@ -128,10 +135,25 @@ Eeros likely NAT WiFi clients to separate subnet.
 
 - [x] 13/13 primals alive + systemd persisted (membrane-nucleus.target)
 - [x] Cascade verified: push/pull both remotes clean
-- [x] VPS SSH: golgi confirmed, pepti now confirmed (IP provided)
+- [x] VPS SSH: golgi confirmed, pepti confirmed (IP provided)
 - [x] RustDesk sovereign relay configured + hairpin fixed
 - [x] FAMILY_SEED + secrets installed
 - [x] Mesh connected (1 peer reachable: golgiBody)
+- [x] HPC characterization document filed
+
+### Shipped (cellMembrane IDE Jun 17 07:39)
+
+- [x] Deep debt evolution (86e9435): 412 tests passing, 60 net new
+- [x] Zero clippy pedantic+nursery, zero fmt, zero doc warnings
+- [x] ~70 eprintln! → tracing structured logging
+- [x] SPDX headers on all specs + scripts + systemd units
+- [x] `ring` banned in deny.toml, cargo-deny CI gate added
+- [x] Hardcoded ports/paths → capability-based registry lookups
+- [x] ribocipher constants public with ALL arrays
+- [x] gate/bootstrap.rs refactored (split extra_exec_args + generate_unit_content)
+- [x] All files under 800 LOC, all `as` casts → try_from/millis_u64
+- [x] Zero-copy temporal layer (bf54650): Arc manifest, Cow defaults, pre-computed refs
+- [x] sporeGate Forgejo remote fixed (HTTPS → SSH, host key added)
 
 ---
 
