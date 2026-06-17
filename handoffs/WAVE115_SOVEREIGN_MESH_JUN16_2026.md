@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 13:50 EDT (cascade review — overwatch)
+**Last review**: Jun 17 14:25 EDT (deep evolution sweep — sporeGate cellMembrane)
 
 ---
 
@@ -62,7 +62,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 | Depot x86_64 | **13/13** from HEAD (pepti Jun 16) |
 | Depot aarch64 | **13/13** (pepti Jun 15) |
 | VCS parity | **17/17** zero drift — both remotes synced (cascade confirmed) |
-| cellMembrane | **495 tests**, zero lint, nftables gen, gate.preflight, async I/O, preflight shipped |
+| cellMembrane | **515 tests**, zero lint, tracing-subscriber, async I/O sweep (canary/sandbox/fetch), error observability, path constants |
 | golgi | **HEALTHY** — 13/13, relay ACTIVE, depot serving |
 | sporeGate | **13/13 ALIVE** — K-Derm nftables deployed, cascade active, VPS SSH live |
 | eastGate | **LIVE** — 10G SFP+ validation node, primalSpring + overwatch |
@@ -160,11 +160,30 @@ nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
 | Item | Blocker | Action When Ready |
 |------|---------|-------------------|
 | Omada controller audit | **UNBLOCKED** (admin/admin confirmed) | sporeGate: log in, verify no VLAN isolation |
-| Eero bridge mode | Operator has Eero app access | Collapse WiFi to 192.168.4.x (sporeGate DHCP for all) |
+| Eero NAT collapse | Operator has Eero app access | See Eero Collapse Plan below |
 | ATT IP passthrough | **UNBLOCKED** (Device Access Code available) | sporeGate: eliminate double-NAT |
 | House 2 gate enrollment | **UNBLOCKED** (operator confirms access) | sporeGate: sovereign-relay-push.sh + NUCLEUS deploy |
 | fieldGate | Dead CMOS, open-air NUC | Repurpose old-gen hardware when viable |
 | Additional NUCs | Operator acquires from various gens | Plug into CRS310, bootstrap |
+
+### Eero NAT Collapse Plan (Operator Task)
+
+**Problem**: Eeros run their own DHCP/NAT on `10.0.7.0/24`, creating an invisible sub-membrane within the cytoplasm. WiFi clients can't reach LAN gates directly, and the zone model has a hidden NAT boundary.
+
+**Goal**: Collapse to flat `192.168.4.x` so all WiFi clients get DHCP from sporeGate, same as wired gates. The `eero_wifi` zone becomes a pure L2 bridge, no NAT.
+
+**Steps**:
+1. Open the Eero app (phone, operator access required)
+2. Set Eero network mode to **Bridge** (AP-only mode)
+   - Settings → Advanced → DHCP & NAT → Bridge mode
+   - This disables Eero's DHCP server and NAT
+3. Eero will relay on CRS310's L2 fabric — WiFi clients get `192.168.4.x` from sporeGate DHCP
+4. Verify: WiFi clients should get `192.168.4.1` as gateway and DNS
+5. Update `TOPOLOGY_MAP.toml`: change `[cytoplasm.zones.eero_wifi]` status from `"collapsing"` to `"bridged"`, remove `nat_subnet`
+
+**Risk**: Low. Eero bridge mode is documented and reversible via the app. If WiFi breaks, revert to router mode.
+
+**Result**: Cytoplasm simplifies to two clean zones: `backbone` (CRS310) and `house2` (Omada). WiFi is transparent L2.
 
 ---
 
@@ -177,6 +196,18 @@ nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
 - [x] FAMILY_SEED + secrets installed
 - [x] Mesh connected (1 peer reachable: golgiBody)
 - [x] HPC characterization document filed
+
+### Shipped (cellMembrane IDE Jun 17 14:25)
+
+- [x] Deep async I/O sweep: canary pool/remote registry → tokio::fs (12 async call sites), sandbox spin_up → tokio::fs, fetch checksums → spawn_blocking, health probe → spawn_blocking
+- [x] `tracing-subscriber` wired in main.rs (WARN default, `RUST_LOG` override for operational logs)
+- [x] Error observability: 8 high-risk silent error drops now surface via `tracing::warn!`/`debug!` (refresh rollback, caddy rollback, temporal recovery, depot sync)
+- [x] `INFRA_WATERING_HOLE` / `INFRA_PLASMID_BIN` constants centralized (12 call sites migrated)
+- [x] `binary_for()` hardcoded primal name fallbacks removed — registry-only
+- [x] Display strings in health.rs/data.rs now capability-derived (no hardcoded `BearDog`/`NestGate`)
+- [x] Clone elimination: identity.rs, gate.rs, preflight.rs
+- [x] +20 tests: jsonrpc (4), error (9), impulse/parse (6), manifest (1) → **515 tests**
+- [x] 515 tests, zero clippy (pedantic+nursery), zero fmt, zero doc warnings
 
 ### Shipped (cellMembrane IDE Jun 17 13:45)
 
@@ -228,7 +259,12 @@ nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
 | K-Derm nftables | `to_nftables_script()` + `NftablesConfig` (NAT, DHCP, WireGuard, IPv6 drop, trust-LAN) |
 | gate.preflight | Pre-deployment scanner: interface detect, IP conflicts, port 53, NM, IPv6 forwarding |
 | async I/O sweep | sandbox/canary/fetch/harvest/refresh/impulse archive → tokio::fs + spawn_blocking |
-| constant centralization | SSH aliases, NestGate port, composition `parse_name()` |
+| async I/O deep sweep | canary pool+remote registry→tokio::fs, sandbox spin_up→tokio::fs, fetch checksums→spawn_blocking, health probe→spawn_blocking |
+| tracing-subscriber | CLI operational logs (WARN default, RUST_LOG override) |
+| error observability | 8 high-risk silent error drops surfaced via tracing::warn!/debug! |
+| constant centralization | SSH aliases, NestGate port, `INFRA_WATERING_HOLE`, `INFRA_PLASMID_BIN`, composition `parse_name()` |
+| hardcode elimination | `binary_for()` registry-only, display names capability-derived, path fragments centralized |
+| test expansion (final) | 495 → 515 tests (jsonrpc, error, impulse/parse) |
 
 ---
 
@@ -245,6 +281,11 @@ nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
 | Full documentation | AAR, topology, onboarding blurb, FRAGO response from sporeGate |
 | **Hardware inventory** | All LAN devices cataloged in `whitePaper/technical/HARDWARE_INVENTORY.md` with K-Derm layer mapping |
 | **K-Derm ↔ hardware** | Physical topology mapped to envelope model — sporeGate = plasma membrane, L2 fabric = cytoplasm |
+| **Cytoplasm zones** | `TOPOLOGY_MAP.toml` now defines backbone (CRS310) + house2 (Omada) + eero_wifi zones with hub devices, uplinks, speeds |
+| **Gate zone annotations** | 4 gate profiles (sporeGate, eastGate, fieldGate, northGate) annotated with `zone`, `hub_port`, `link_speed_mbps` |
+| **GateProfile zone fields** | Surgical `manifest.rs` edit: 3 `Option` fields, serde-default, backward compatible, test passing |
+| **Cytoplasm spec handoff** | `CYTOPLASM_ZONES_SPEC.md` → cellMembrane team: `CytoplasmZone` types, `topology.resolve`, zone-aware preflight |
+| **Eero collapse plan** | NAT collapse documented — bridge mode via Eero app, flat 192.168.4.x for all WiFi clients |
 
 ---
 

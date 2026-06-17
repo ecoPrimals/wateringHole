@@ -493,6 +493,27 @@ forgejo_repo = "ecoPrimals/fossilRecord"
 # Which repos each gate cares about. cascade-pull uses these to
 # filter — a gate only pulls repos it needs.
 
+# sporeGate — plasma membrane, site router, 13/13 NUCLEUS
+[gates.sporeGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "full"
+transport = "lan"
+mesh_peer = "157.230.3.183:7700"
+zone = "backbone"
+hub_port = "ether8"
+link_speed_mbps = 2500
+kderm_role = "plasma_membrane"
+notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke."
+repos = [
+    "nestGate", "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat",
+    "cellMembrane", "projectNUCLEUS",
+]
+
 [gates.eastGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -500,7 +521,10 @@ bind_mode = "uds"
 composition = "full"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
-notes = "Primary development gate + peptidoglycan build host"
+zone = "backbone"
+hub_port = "sfp+2"
+link_speed_mbps = 10000
+notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -553,7 +577,10 @@ composition = "full"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 profile = "canary-fieldmouse"
-notes = "Fresh NUC — zero-context onboarding target. Full NUCLEUS canary with previous-good binaries."
+zone = "house2"
+hub_port = "2.5g"
+link_speed_mbps = 2500
+notes = "DDR3 NUC canary. Omada House 2 zone. OFFLINE — dead CMOS, hardware surgery."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -639,7 +666,10 @@ bind_mode = "tcp"
 composition = "full"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
-notes = "Ryzen 9950X3D + RTX 5090. Windows gaming gate. Family validation only — spare compute when not in use. LAST priority."
+zone = "house2"
+hub_port = "2.5g"
+link_speed_mbps = 2500
+notes = "Ryzen 9950X3D + RTX 5090. Omada House 2 zone. Family validation — spare compute. LAST priority."
 gate_class = "family"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",

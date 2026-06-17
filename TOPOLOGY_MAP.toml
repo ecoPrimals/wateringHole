@@ -10,13 +10,77 @@
 # Last updated: 2026-06-02 (Wave 68)
 
 [meta]
-version = "3.0.0"
+version = "4.0.0"
 wave = 115
 measured_by = "manual + discovery.peers (planned)"
 last_updated = "2026-06-17"
 wan_model = "single_exit_star"
 site_topology = "star_with_10g_backbone"
 neighborhood = "Old Everett, Lansing MI"
+
+# ═══════════════════════════════════════════════════════════════
+# Cytoplasm Zones — L2 switching domains within the plasma membrane
+# ═══════════════════════════════════════════════════════════════
+#
+# The cytoplasm is not a monolith. It has distinct switching zones
+# connected by backbone links. Each zone is defined by its hub device.
+# Gates know which zone they're in and what bandwidth/latency to expect.
+#
+# Hierarchy:
+#   ATT BGW320 (WAN boundary, not ours)
+#       → sporeGate (plasma membrane: NAT/DHCP/DNS/nftables)
+#           → CRS310 (hub 1: L2 backbone)
+#               → Omada SX3008F (hub 2: L2 extension via 10G AOC)
+#                   → TL-SG605S-M2 (2.5G expansion off Omada)
+
+[cytoplasm.zones.backbone]
+hub_device = "MikroTik CRS310-1G-5S-4S+IN"
+hub_role = "backbone"
+hub_mac = "c8:7f:54:xx:xx:xx"
+max_speed_mbps = 10000
+site = "house1"
+ports = [
+    "sfp+1 → Omada SX3008F (10G trunk, 80m AOC)",
+    "sfp+2 → eastGate (10G compute)",
+    "ether2 → Eero 6 (WiFi bridge, collapsing to flat L2)",
+    "ether8 ← sporeGate eno1 (2.5G uplink from plasma membrane)",
+]
+gates = ["sporeGate", "eastGate"]
+
+[cytoplasm.zones.house2]
+hub_device = "TP-Link Omada SX3008F"
+hub_role = "extension"
+hub_mac_data = "c8:e3:06:c6:77:a1"
+hub_mac_mgmt = "c8:e3:06:c6:77:ad"
+hub_mgmt_ip = "10.0.4.1"
+max_speed_mbps = 10000
+site = "house2"
+uplink_zone = "backbone"
+uplink_type = "10g_aoc_80m"
+uplink_speed_mbps = 10000
+uplink_latency_ms = 0.5
+uplink_note = "80m active optical cable between adjacent 1920s lots (~20m physical distance)"
+ports = [
+    "sfp+ ← CRS310 sfp+1 (10G trunk from backbone)",
+    "2.5G ports → compute towers, NUCs, fieldGate",
+]
+expansion_switch = "TP-Link TL-SG605S-M2 (5-port 2.5G, off Omada)"
+gates = ["northGate", "fieldGate"]
+pending_gates = ["marshGate (future site router)"]
+
+[cytoplasm.zones.eero_wifi]
+hub_device = "Amazon Eero 6"
+hub_role = "wifi_bridge"
+status = "collapsing"
+site = "house1"
+uplink_zone = "backbone"
+uplink_type = "cat6_2.5g"
+uplink_speed_mbps = 2500
+uplink_latency_ms = 3.0
+nat_subnet = "10.0.7.0/24"
+nat_note = "Eeros run their own NAT. Plan: bridge to flat 192.168.4.x via Eero app."
+gates = []
+note = "Human WiFi only. No compute gates. Collapsing to bridge mode when operator has Eero app access."
 
 [sites.house1]
 address = "4422 Southgate Ave, Lansing MI 48910"
