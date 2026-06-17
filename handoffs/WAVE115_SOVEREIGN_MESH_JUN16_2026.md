@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 14:25 EDT (deep evolution sweep — sporeGate cellMembrane)
+**Last review**: Jun 17 14:45 EDT (async-first API layer — sporeGate cellMembrane)
 
 ---
 
@@ -197,8 +197,14 @@ nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
 - [x] Mesh connected (1 peer reachable: golgiBody)
 - [x] HPC characterization document filed
 
-### Shipped (cellMembrane IDE Jun 17 14:25)
+### Shipped (cellMembrane IDE Jun 17 14:45)
 
+- [x] Async-first API layer: `load_async()` + `load_from_workspace_async()` + `resolve_async()` + `read_freshness_wave_id_async()`
+- [x] All dispatch boundaries now use native async I/O (manifest, identity, freshness, depot)
+- [x] `dispatch_manifest` + `dispatch_identity` upgraded to `async fn`
+- [x] 7 identity::resolve callers migrated to async (impulse/post, ack, sync + context/weave, clear + temporal)
+- [x] depot `compute_blake3_file` — `tracing::warn` on read failure (was silent empty hash)
+- [x] `gardens/cellMembrane` hardcoding eliminated from config.rs TOML search paths
 - [x] Deep async I/O sweep: canary pool/remote registry → tokio::fs (12 async call sites), sandbox spin_up → tokio::fs, fetch checksums → spawn_blocking, health probe → spawn_blocking
 - [x] `tracing-subscriber` wired in main.rs (WARN default, `RUST_LOG` override for operational logs)
 - [x] Error observability: 8 high-risk silent error drops now surface via `tracing::warn!`/`debug!` (refresh rollback, caddy rollback, temporal recovery, depot sync)
@@ -264,6 +270,8 @@ nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
 | error observability | 8 high-risk silent error drops surfaced via tracing::warn!/debug! |
 | constant centralization | SSH aliases, NestGate port, `INFRA_WATERING_HOLE`, `INFRA_PLASMID_BIN`, composition `parse_name()` |
 | hardcode elimination | `binary_for()` registry-only, display names capability-derived, path fragments centralized |
+| async-first API | `load_async()`, `load_from_workspace_async()`, `resolve_async()`, `read_freshness_wave_id_async()` |
+| dispatch async upgrade | `dispatch_manifest` + `dispatch_identity` → `async fn`, all dispatch boundaries native async |
 | test expansion (final) | 495 → 515 tests (jsonrpc, error, impulse/parse) |
 
 ---
