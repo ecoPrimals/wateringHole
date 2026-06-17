@@ -10,10 +10,24 @@
 # Last updated: 2026-06-02 (Wave 68)
 
 [meta]
-version = "2.0.0"
+version = "3.0.0"
 wave = 115
 measured_by = "manual + discovery.peers (planned)"
-last_updated = "2026-06-16"
+last_updated = "2026-06-17"
+wan_model = "single_exit_star"
+site_topology = "star_with_10g_backbone"
+neighborhood = "Old Everett, Lansing MI"
+
+[sites.house1]
+address = "4422 Southgate Ave, Lansing MI 48910"
+description = "Corner lot, 1920 build. ATT fiber drop, CRS310, sporeGate router."
+role = "primary_periplasm"
+
+[sites.house2]
+address = "641 Samantha Ave, Lansing MI 48910"
+description = "Adjacent west of House 1. 1920 build. Omada switch, compute towers."
+role = "compute_farm"
+link_to_house1 = "80m AOC (10G SFP+), ~20m physical distance (adjacent lots)"
 
 # ═══════════════════════════════════════════════════════════════
 # Network Segments
@@ -27,6 +41,22 @@ description = "sporeGate sovereign LAN — all compute behind NAT + firewall"
 router = "sporeGate"
 switch = "CRS310"
 gates = ["sporeGate", "eastGate", "ironGate", "biomeGate", "strandGate"]
+site = "house1"
+wan_exit = "att_fiber_h1"
+note = "Single WAN exit for ALL sites. House 2 traffic backhauled via 10G trunk."
+
+[segments.house2_compute]
+subnet = "192.168.5.0/24"
+gateway = "192.168.5.1"
+transport = "10g_aoc_80m"
+description = "House 2 (641 Samantha) compute farm — towers, NUCs via Omada switch"
+router = "marshGate (future, currently flat /22 via sporeGate)"
+switch = "Omada SFP+"
+gates = ["eastGate", "fieldGate"]
+site = "house2"
+backhaul = "80m AOC (10G) between adjacent 1920s lots (~20m physical distance)"
+wan_exit = "backhauled via House 1 sporeGate (single-exit star)"
+note = "Currently part of flat 192.168.4.0/22. Carve to /24 when marshGate deploys."
 
 [segments.backbone_legacy]
 subnet = "192.168.1.0/24"
@@ -64,6 +94,33 @@ transport = "lan_or_wifi"
 description = "Family gates — Windows nodes, spare compute when available"
 gates = ["northGate", "blueGate"]
 note = "Ancillary nodes. northGate = gaming (spare compute only). blueGate = Windows target."
+
+[segments.cellular_failover]
+transport = "5g_cellular"
+description = "Mint Mobile hotspot — WAN failover when fiber is down"
+router = "sporeGate (wlp3s0 or usb0)"
+priority = 2
+latency_ms = 30.0
+bandwidth_mbps = "50-200 (variable, carrier-dependent)"
+note = "Activates automatically via route metric when ATT fiber unreachable."
+
+[segments.neighborhood_mesh]
+transport = "p2p_radio_or_cat6a"
+description = "Adjacent houses — wired drops or directional WiFi bridges"
+subnet = "192.168.6.0/24"
+latency_ms = 2.0
+bandwidth_mbps = "300-2500 (radio: 300-500, wired: 2500)"
+status = "planned"
+note = "Old Everett, Lansing — small lots, easy cable runs. Street mesh viable."
+
+[segments.remote_contract]
+transport = "wireguard_overlay"
+description = "Geo-distributed nodes at friend houses or institutes"
+subnet = "192.168.7.0/24"
+overlay_subnet = "10.13.37.0/24"
+latency_ms = 50.0
+status = "planned"
+note = "NUCs shipped to remote sites join via WireGuard to golgiBody or direct."
 
 # ═══════════════════════════════════════════════════════════════
 # Estimated Latency Matrix (ms, one-way)
@@ -113,6 +170,31 @@ estimate_ms = 50.0
 confidence = "low"
 notes = "Cellular → TURN (carrier-dependent)"
 
+[latency.house1_to_house2]
+estimate_ms = 0.3
+confidence = "high"
+notes = "10G SFP+ fiber trunk, same L2 bridge — sub-millisecond"
+
+[latency.cellular_failover_to_vps]
+estimate_ms = 45.0
+confidence = "low"
+notes = "Mint Mobile 5G → golgiBody WireGuard — carrier jitter applies"
+
+[latency.neighborhood_p2p_radio]
+estimate_ms = 2.5
+confidence = "low"
+notes = "Ubiquiti/MikroTik directional radio, 100-200m line of sight"
+
+[latency.neighborhood_wired]
+estimate_ms = 0.5
+confidence = "medium"
+notes = "Cat6a direct burial between adjacent houses, sub-1ms"
+
+[latency.remote_contract_node]
+estimate_ms = 50.0
+confidence = "low"
+notes = "WireGuard overlay, residential ISP at remote site"
+
 # ═══════════════════════════════════════════════════════════════
 # Affinity Table — Neural API routing bias
 # ═══════════════════════════════════════════════════════════════
@@ -124,8 +206,13 @@ notes = "Cellular → TURN (carrier-dependent)"
 same_gate = 1.0
 same_segment = 0.9
 cross_segment_bridged = 0.7
+cross_site_10g_trunk = 0.85
+neighborhood_wired = 0.8
+neighborhood_p2p_radio = 0.6
+cellular_failover = 0.4
 vps_relay = 0.4
 wan_turn = 0.3
+remote_contract = 0.3
 portable_wifi = 0.5
 portable_cellular = 0.2
 
