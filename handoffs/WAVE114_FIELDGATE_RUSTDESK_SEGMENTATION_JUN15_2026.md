@@ -121,7 +121,7 @@ Key findings from ironGate audit of golgiBody + pepti:
 | golgi uptime | 31 days, load 0.00 ✓ |
 | golgi Forgejo | **ACTIVE** ✓ |
 | golgi membrane binary | **AT HEAD** (9dc6a1d) ✓ |
-| golgi RustDesk (hbbs/hbbr) | **⚠ NOT FOUND** — no systemd units, ports not listening |
+| golgi RustDesk (hbbs/hbbr) | **✅ LIVE** — systemd units active, WorkingDir fixed, key generated (Jun 16 21:02Z) |
 | golgi sockets | 28 running ✓ |
 | pepti uptime | 17 days, load 0.00 ✓ |
 | pepti cellMembrane | **AT HEAD** (9dc6a1d) ✓ |
@@ -129,7 +129,7 @@ Key findings from ironGate audit of golgiBody + pepti:
 | fieldGate | **UP** (1d18h, 3 sockets, load 2.07) |
 | eastGate NUCLEUS | No systemd units (dev mode, manual execution) |
 
-**Critical**: RustDesk relay appears DOWN despite previous validation. Needs cellMembrane investigation.
+**Resolved**: RustDesk relay fixed Jun 16 — WorkingDirectory was missing, key not generated. Created dir, restarted, key deployed to sporeGate.
 
 ### Depot State
 
@@ -154,38 +154,59 @@ Key findings from ironGate audit of golgiBody + pepti:
 
 ---
 
-## Wave 115 Shape (Network Sovereignty + VPS Convergence)
+## Team Restructuring (Jun 16)
 
-### P1: sporeGate LAN Periplasm (ops + cellMembrane)
+| Gate | Previous Role | New Role |
+|------|---------------|----------|
+| **sporeGate** | planned/offline | **cellMembrane owner** — LAN periplasm, routing, cascade, depot, bootstrap, RustDesk |
+| **ironGate** | cellMembrane primary | **projectNUCLEUS / ABG** — compute sharing, access tiers, JupyterHub/toadStool |
+| **eastGate** | overwatch | overwatch (unchanged) |
+| **fieldGate** | canary NUC | autonomous LAN node (unchanged) |
 
-sporeGate (NucBox M6, Ryzen 7 6800H, 32GB, dual 2.5G) replaces CRS310 as router.
-CRS310 reverts to pure L2 switch. Solves intermittent NAT saturation (confirmed: CRS310
-at 192.168.4.1 currently doing L3 routing on switch ASIC — wrong role).
+**Rationale**: sporeGate IS the membrane — it sits at the network perimeter, controls
+what enters/exits the LAN, and mediates all gate communication. Natural owner.
+ironGate's strength is ABG-facing work (science compute, user access, content delivery).
 
-- Phase 1: Basic routing (nftables NAT + DHCP + DNS) — first ant through
+---
+
+## Wave 115 Shape (sporeGate Hardening + ABG Access + VPS Convergence)
+
+### P1: sporeGate LAN Periplasm — PHASE 1 COMPLETE (cellMembrane/sporeGate)
+
+**DONE**: Basic routing, NAT, DHCP, DNS, 13/13 primals alive, RustDesk configured.
+
+Remaining phases:
 - Phase 2: ATT bridge mode (eliminate double NAT)
-- Phase 3: Firewall hardening
-- Phase 4: NUCLEUS (bearDog VPN, skunkBat monitoring, songBird mesh)
-- Phase 5: WireGuard tunnel to golgi (persistent, eliminates SSH NAT timeouts)
-- Phase 6: VLAN segmentation (compute/mobile/guest/mgmt)
+- Phase 3: Firewall hardening + primal systemd persistence
+- Phase 4: WireGuard tunnel to golgi (persistent mesh, eliminates NAT timeouts)
+- Phase 5: VLAN segmentation (compute/mobile/guest/mgmt)
 
 Docs: `compute-sharing/NETWORK_SOVEREIGNTY.md`, `compute-sharing/SPOREGATE_ACTIVATION_BLURB.md`
+Handoff: `handoffs/SPOREGATE_ONBOARDING_BLURB.md`
 
-### P1: RustDesk Relay Formalization (cellMembrane/ironGate)
+### P1: Any-to-Any Remote Access (cellMembrane/sporeGate)
 
-Relay was working but is not persisted as systemd. Needs:
-- Formalize as `rustdesk-hbbs.service` + `rustdesk-hbbr.service`
-- OR document docker-compose lifecycle
-- Verify external reachability after formalization
+All gates addressable via RustDesk relay. Key deployed to sporeGate.
+Remaining: deploy key to eastGate + fieldGate, verify inter-tower remote.
+Relay key: `utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=`
+Server: `157.230.3.183` (golgi hbbs/hbbr — systemd units running, WorkingDir fixed)
 
-### P1: VPS Layer Convergence (cellMembrane/ironGate)
+### P1: ABG Member E2E Access (ironGate/projectNUCLEUS)
+
+- External user → RustDesk relay → NUC/tower → workload
+- Access tiers: Observer (view), Reviewer (comment), User (compute), Operator (admin)
+- JupyterHub + toadStool as sovereign compute interface
+- Cursor IDE as pair-programming layer
+
+### P1: VPS Layer Convergence (cellMembrane/sporeGate)
 
 - golgi membrane is at HEAD ✓ — verify services using new socket registry
 - Consolidate triple depot paths to single canonical
 - Replace legacy bash `deploy_membrane.sh` with `plasmid.refresh`
 - Decide pepti operational tier (Tower Atomic min for self-validation)
+- RustDesk relay formalized as systemd (hbbs-membrane.service ✓, hbbr-membrane.service ✓)
 
-### P1: Event-Driven Cascade (cellMembrane)
+### P1: Event-Driven Cascade (cellMembrane/sporeGate)
 
 - ff-merge fix is interim — webhooks eliminate the multi-gate race
 - Forgejo webhook → triggers sync to GitHub (and reverse)
@@ -193,17 +214,17 @@ Relay was working but is not persisted as systemd. Needs:
 
 ### P2: Fresh aarch64 Harvest (cellMembrane/pepti)
 
-- Current aarch64 depot is 6 days old (pre-genetics wave)
-- Needs rebuild including all 7+ genetics-layer commits
+- Current aarch64 depot is 6+ days old (pre-genetics wave)
+- Needs rebuild including all genetics-layer commits
 - Also need sourdough in x86_64 depot
 
-### P2: Socket Naming + Service Standard (cellMembrane + primalSpring)
+### P2: Socket Naming + Service Standard (cellMembrane/sporeGate + primalSpring)
 
 - `9dc6a1d` documents all 28 sockets in registry — but no enforcement yet
 - Bootstrap should generate from registry
 - Eliminate ad-hoc FAMILY_ID suffixing
 
-### P2: Deployment Atomicity (cellMembrane)
+### P2: Deployment Atomicity (cellMembrane/sporeGate)
 
 - Canary promote: new binary → sandbox socket → health verify → atomic swap
 - Self-refresh pipeline in Rust (replace bash)
@@ -212,7 +233,7 @@ Relay was working but is not persisted as systemd. Needs:
 
 - Unify tower.env + secrets.env → structured `env.d/`
 
-### P3: Bridge Evolution (cellMembrane + songBird)
+### P3: Bridge Evolution (cellMembrane/sporeGate + songBird)
 
 - socat TCP bridges → Rust-native transport with mTLS
 
@@ -222,10 +243,11 @@ Relay was working but is not persisted as systemd. Needs:
 |------|-------|----------|
 | `BEARDOG_FAMILY_SEED` deprecation | bearDog | P2 |
 | Nuclear lineage per-ABG-user | bearDog + primalSpring | P2 |
-| Network segmentation enforcement | cellMembrane | P2 |
+| Network segmentation (VLAN) | cellMembrane/sporeGate | P2 |
 | Version tag hygiene | all teams | P3 |
 | neuralAPI hollow (0 registrations) | biomeOS | P3 |
 | Peer registry (mesh.peers RPC) | songBird | P3 |
+| CRS310 strip L3 → pure L2 | ops + cellMembrane/sporeGate | P2 |
 
 ---
 

@@ -13,7 +13,7 @@ from = "eastGate"
 to = ["cellMembrane", "ops"]
 date = "2026-06-15"
 priority = "P1"
-owner = "cellMembrane/ironGate (primary), ops (physical only)"
+owner = "cellMembrane/sporeGate (primary), ironGate → projectNUCLEUS/ABG, ops (physical only)"
 deadline = "2026-06-20"
 note = """
 Wave 114 objective: Prove depot deploys to all form factors (NUC x86_64, Pixel aarch64, WAN relay).
@@ -75,18 +75,22 @@ cellmembrane_forgejo_org = "FIXED: cellMembrane was under sporeGarden/ not ecoPr
 
 [stream2]
 id = "RUSTDESK-ABG-COMPUTE"
-owner = "cellMembrane/ironGate"
+owner = "cellMembrane/sporeGate (relay config), ironGate → projectNUCLEUS (ABG access tiers)"
 priority = "P1"
 deadline = "2026-06-20"
 description = """RustDesk relay on golgiBody-ext enables sovereignty-layer remote access.
-Health probes SHIPPED (bf0c7c3). Deployment + ABG member validation remaining."""
+Health probes SHIPPED (bf0c7c3). Relay key deployed to sporeGate + fieldGate.
+Goal: any tower can remote to all others via relay. ABG member validation → ironGate/projectNUCLEUS."""
 
 [stream2.tasks]
-verify_relay_alive = { status = "✅ DONE", note = "hbbs/hbbr on golgiBody-ext :21115-21117 LISTENING + EXTERNALLY REACHABLE. UFW rules added Jun 16 (were blocking external)." }
+verify_relay_alive = { status = "✅ DONE", note = "hbbs/hbbr on golgiBody :21115-21117 LISTENING + EXTERNALLY REACHABLE. WorkingDirectory fixed, key generated." }
 health_probe = { status = "DONE", note = "SHIPPED bf0c7c3 — TCP reachability in S2 sovereignty probe" }
-fieldgate_client = { status = "TODO", note = "Install RustDesk client on fieldGate, connect via relay" }
-abg_member_e2e = { status = "TODO", note = "External user → relay → fieldGate → workload. First member validates." }
-ssh_tunnel_pattern = { status = "TODO", note = "external → golgiBody → fieldGate → LAN workload gate" }
+relay_key_deployed = { status = "✅ DONE", note = "Key 'utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=' deployed to sporeGate RustDesk config. Service active." }
+sporegate_client = { status = "✅ DONE", note = "RustDesk running on sporeGate, configured with golgi relay key, service active." }
+fieldgate_client = { status = "TODO", owner = "cellMembrane/sporeGate", note = "Deploy relay key to fieldGate RustDesk config" }
+eastgate_client = { status = "TODO", owner = "cellMembrane/sporeGate", note = "Configure eastGate RustDesk with same relay key for inter-tower remote" }
+abg_member_e2e = { status = "TODO", owner = "ironGate/projectNUCLEUS", note = "External user → relay → NUC → workload. First ABG member validates access tiers." }
+any_to_any_remote = { status = "TODO", owner = "cellMembrane/sporeGate", note = "All gates (eastGate, fieldGate, sporeGate, VPS) addressable via RustDesk relay. Inter-tower remote access." }
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: Pepti Build Authority Evolution
@@ -110,12 +114,12 @@ aarch64_harvest = { status = "✅ DONE (previous)", priority = "P2", owner = "ce
 
 [carry]
 diderm_self_healing = "P1-SHIPPED (8f4e4eb): ff-merge preferred over rebase. SHA divergence still occurs during concurrent pushes but is now reduced. Webhook-based convergence (Wave 115) will eliminate it fully."
-rustdesk_relay_down = "P1-INVESTIGATE: hbbs/hbbr units NOT FOUND on golgiBody (Jun 16 15:43Z). Ports not listening. Was reported ACTIVE earlier — may have been containerized or manually run. Needs cellMembrane to formalize as systemd or persist via docker-compose."
+rustdesk_relay_down = "P1-RESOLVED (Jun 16 21:02Z): WorkingDirectory was missing (/opt/membrane/rustdesk/ didn't exist). Created, restarted hbbs+hbbr, key auto-generated. Key deployed to sporeGate. Units: hbbs-membrane.service + hbbr-membrane.service both ACTIVE."
 depot_path_nesting = "P2: Local x86_64 depot has double-nested structure (primals/x86_64/.../primals/x86_64/...). cellMembrane 63a2130 handles resolution but VPS+local layout should consolidate."
 aarch64_depot_stale = "P2: aarch64 binaries are Jun 10 (6 days old, pre-genetics wave). Need fresh harvest including all genetics-layer commits."
 manifest_stale = "RESOLVED (this session): ecosystem_manifest.toml updated from wave 109 → wave 114."
 sourdough_x86_missing = "P2: sourdough binary missing from x86_64 depot (present in aarch64 depot)."
-network_sovereignty = "P1-PLANNED: sporeGate (NucBox M6, Ryzen 7 6800H, 32GB, dual 2.5G) as LAN periplasm router. CRS310 confirmed doing L3 routing (wrong role). Architecture doc: compute-sharing/NETWORK_SOVEREIGNTY.md. Activation blurb: compute-sharing/SPOREGATE_ACTIVATION_BLURB.md"
+network_sovereignty = "P1-LIVE: sporeGate OPERATIONAL as LAN periplasm. NAT active (5.5GB forwarded), DHCP serving 6 leases, 13/13 primals alive, RustDesk relay configured with golgi key. WiFi OOB management pattern documented. Remaining: systemd units for primals (reboot persistence), FAMILY_SEED fill, ATT bridge mode (Phase 2)."
 network_segmentation = "P2 (depends on network_sovereignty Phase 6): VLANs on CRS310 once sporeGate takes over routing. Compute/mobile/guest/mgmt separation."
 neuralapi_hollow = "P2: biomeOS neuralAPI has 0 registered capabilities. Auto-registration needed."
 undocumented_sockets = "RESOLVED (9dc6a1d): socket alias registry now documents all 28 capability sockets in cellmembrane-types."
@@ -158,11 +162,11 @@ note = "65GB free. Pulls from Forgejo (264ms). SSH via golgi proxy (1s). aarch64
 # ──────────────────────────────────────────────────────────────
 
 [gates]
-sporegate = "PERIMETER: LAN periplasm router (NAT/firewall/DHCP/DNS/VPN). NucBox M6, Ryzen 7, 32GB, dual 2.5G. PLANNED."
+sporegate = "LIVE: LAN periplasm router (NAT/firewall/DHCP/DNS/VPN) + cellMembrane owner. NucBox M6, Ryzen 7, 32GB, dual 2.5G. 13/13 alive, RustDesk configured. Takes cellMembrane ownership from ironGate."
 fieldgate = "DEPLOYED — NUC, x86_64, LAN 2.5G, 13/13 alive"
 graphenegate = "aarch64 depot validation (Pixel)"
 flockgate = "WAN depot validation (relay-only)"
-irongate = "cellMembrane: builds, relay, segmentation, cascade. DRY-RUN 11/11 PASS."
+irongate = "REASSIGNED → projectNUCLEUS/ABG: compute sharing, access tiers, JupyterHub/toadStool integration"
 eastgate = "Overwatch: validate, coordinate, pair-program"
 golgi = "Services: Forgejo, relay bridge, mesh hub"
 pepti = "BUILD AUTHORITY: cargo builds, depot WAN host"
