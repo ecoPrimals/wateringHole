@@ -135,8 +135,8 @@ depot_path_consolidation = { status = "TODO", note = "Three paths on golgi → s
 bash_to_rust_refresh = { status = "TODO", note = "Replace deploy_membrane.sh with plasmid.refresh" }
 pepti_operational_tier = { status = "TODO", note = "Deploy Tower Atomic (beardog+songbird+skunkbat) for self-validation" }
 golgi_membrane_update = { status = "DONE", note = "golgi at HEAD (9dc6a1d)" }
-sporegate_golgi_ssh = { status = "TODO", note = "Verify sporeGate SSH key authorized on golgi. sporeGate must independently manage Forgejo, hbbs/hbbr, membrane updates." }
-sporegate_pepti_ssh = { status = "TODO", note = "Verify sporeGate SSH key authorized on pepti. sporeGate must independently trigger builds and manage depot." }
+sporegate_golgi_ssh = { status = "✅ DONE", note = "Key added Jun 16 22:35. sporeGate can: ssh root@157.230.3.183" }
+sporegate_pepti_ssh = { status = "✅ DONE", note = "Key added Jun 16 22:35. sporeGate can: ssh root@157.230.209.218" }
 vps_handoff_complete = { status = "TODO", note = "Milestone: sporeGate can SSH into golgi+pepti, run cascade, manage Forgejo, restart services — zero overwatch dependency." }
 bridge_evolution = { status = "P3", note = "socat bridges → Rust-native relay with mTLS" }
 
