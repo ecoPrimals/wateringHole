@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 14:45 EDT (async-first API layer — sporeGate cellMembrane)
+**Last review**: Jun 17 15:10 EDT (hardcode elimination + tests — sporeGate cellMembrane)
 
 ---
 
@@ -62,7 +62,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 | Depot x86_64 | **13/13** from HEAD (pepti Jun 16) |
 | Depot aarch64 | **13/13** (pepti Jun 15) |
 | VCS parity | **17/17** zero drift — both remotes synced (cascade confirmed) |
-| cellMembrane | **515 tests**, zero lint, tracing-subscriber, async I/O sweep (canary/sandbox/fetch), error observability, path constants |
+| cellMembrane | **527 tests**, zero lint, async-first APIs, hardcode elimination (13 sites), constant centralization, capability-derived paths |
 | golgi | **HEALTHY** — 13/13, relay ACTIVE, depot serving |
 | sporeGate | **13/13 ALIVE** — K-Derm nftables deployed, cascade active, VPS SSH live |
 | eastGate | **LIVE** — 10G SFP+ validation node, primalSpring + overwatch |
@@ -196,6 +196,15 @@ nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
 - [x] FAMILY_SEED + secrets installed
 - [x] Mesh connected (1 peer reachable: golgiBody)
 - [x] HPC characterization document filed
+
+### Shipped (cellMembrane IDE Jun 17 15:10)
+
+- [x] Hardcode elimination: 13 sites migrated to named constants (relay paths, Forgejo paths, caddy-tls, WAN/LAN ifaces, subnet, WG port, systemd dir, secrets path)
+- [x] 9 new constants in `cellmembrane-types`: relay config, Forgejo paths, caddy unit, iface hints, subnet, systemd, secrets
+- [x] Capability-derived: bootstrap relay dir + credentials use `binary_for(TurnServer)`
+- [x] `songbird_unit` → `relay_unit` (agnostic naming in bootstrap)
+- [x] `unreachable!()` → `expect()` in ribocipher HMAC-SHA256 init
+- [x] +12 tests: gate/local (4), lib (5), ssh (3) → **527 tests**
 
 ### Shipped (cellMembrane IDE Jun 17 14:45)
 
