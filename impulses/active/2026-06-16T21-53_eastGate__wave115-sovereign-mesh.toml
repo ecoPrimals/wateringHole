@@ -16,12 +16,15 @@ priority = "P1"
 owner = "sporeGate (LAN hardware), cellMembrane IDE (code+VPS), ironGate (ABG)"
 
 note = """
-Wave 115 objective: Harden what Wave 114 proved. TWO-TEAM SPLIT:
-- sporeGate team (NUC): LAN hardware, routing, Omada/Eero, gate deploys, RustDesk mesh push
-- cellMembrane team (Cursor IDE in gardens/cellMembrane): code evolution, VPS (golgi+pepti),
-  cascade pipeline, depot, Forgejo, bootstrap fixes, membrane commands
-- Co-evolution: sporeGate deploys what cellMembrane builds. Both push to same repos.
-- ironGate: projectNUCLEUS/ABG compute access"""
+Wave 115 objective: Harden what Wave 114 proved. THREE DEDICATED SUBTEAMS:
+- eastGate (this IDE): primalSpring evolution, NUCLEUS validation, overwatch coordination
+- sporeGate Overwatch (Cursor on NUC): LAN/WAN/VPS topology exploration, K-Derm plasma
+  membrane deployment, gate enrollment, hardware solving. Dedicated subteam like biomeGate
+  (GPU eras) but for network sovereignty.
+- cellMembrane Team (separate Cursor IDE on sporeGate): code evolution, VPS (golgi+pepti),
+  cascade pipeline, depot, Forgejo, typed models, sovereignty shadows
+- Co-evolution: sporeGate overwatch deploys what cellMembrane builds. Both push to same repos.
+- ironGate: projectNUCLEUS/ABG compute access (offline — reassigned)"""
 
 # ──────────────────────────────────────────────────────────────
 # ENTRY STATE (Jun 16 21:53 EDT)
@@ -59,11 +62,12 @@ eastgate_client = { status = "✅ DONE", note = "Configured via GUI, hairpin NAT
 northgate_client = { status = "✅ DONE", note = "Configured, can reach sporeGate + eastGate" }
 fieldgate_client = { status = "TODO", note = "Gate offline — deploy when back up" }
 hairpin_nat = { status = "✅ DONE", note = "eno1→eno1 accept + LAN masquerade. Persisted to /etc/nftables.conf" }
-omada_towers_push = { status = "READY → sporeGate", note = "Omada is L2 (SX3008F confirmed). All wired on 192.168.4.x. sporeGate SSH directly or use gate.preflight first. sovereign-relay-push.sh discover." }
-omada_controller_audit = { status = "READY → sporeGate", note = "Default creds admin/admin. Log in, verify no port isolation. sporeGate is on same L2, can reach web UI directly." }
+omada_towers_push = { status = "BLOCKED → SSH", note = "LAN gates behind Omada are reachable (L2 confirmed) but don't have openssh-server. Operator must enable SSH on northGate/fieldGate via RustDesk session first." }
+omada_mgmt_plane = { status = "INVESTIGATING", note = "Data plane WORKS (L2 forwarding confirmed). Management UI unreachable at .115 or 10.0.4.1 (nmap: no open TCP ports). Likely in 'SDN controller managed' mode. May need: factory reset to standalone, or install Omada SDN controller on sporeGate, or connect on mgmt VLAN." }
+eastgate_ssh = { status = "OPERATOR ACTION", note = "eastGate has no openssh-server. Operator runs: sudo apt install -y openssh-server. Unblocks sporeGate SSH immediately." }
 flockgate_wan_relay = { status = "READY → sporeGate", note = "Use existing public relay session to push sovereign config. Or SSH hop via golgi. sovereign-relay-push.sh wan" }
-eero_bridge_investigate = { status = "READY → operator + sporeGate", note = "Eeros NAT to 192.168.1.x. Bridge mode (Eero app) collapses to flat 192.168.4.x. Operator has app access. House 2 gates now accessible." }
-membrane_remote_configure = { status = "SUPERSEDED", note = "gate.preflight + sovereign-relay-push.sh cover immediate need. membrane remote.configure can evolve as Rust-native replacement later." }
+eero_bridge = { status = "OPERATOR ACTION", note = "Eeros NAT to 10.0.7.x (confirmed by sporeGate scan). Bridge mode via Eero app collapses to flat 192.168.4.x. Operator has app." }
+membrane_remote_configure = { status = "SUPERSEDED", note = "gate.preflight + sovereign-relay-push.sh cover immediate need. membrane remote.configure evolves as Rust-native replacement." }
 lan_local_relay = { status = "P3-FUTURE", note = "Run hbbs on sporeGate for zero-WAN-latency LAN connections" }
 
 # ──────────────────────────────────────────────────────────────
@@ -183,7 +187,10 @@ sporegate_nftables_deployed = { status = "✅ DONE", owner = "sporeGate", note =
 hairpin_nat_in_composition = { status = "TODO", owner = "cellMembrane IDE", note = "Hairpin NAT (eno1→eno1 masquerade) is a plasma membrane property. Encode in MembraneComposition for diderm-with-LAN topologies." }
 att_passthrough_prep = { status = "READY", note = "Operator has Device Access Code (#283>#66<>) for BGW320. IP passthrough eliminates double-NAT, makes sporeGate sole boundary." }
 omada_vlan_audit = { status = "READY", note = "Default creds confirmed (admin/admin). sporeGate can log in, verify no port isolation. L2+ VLAN segmentation available for future cytoplasm zones." }
-house2_gates_accessible = { status = "NEW", note = "Operator confirms House 2 gates now accessible. sporeGate can reach via Eero WiFi backhaul or sovereign-relay-push.sh." }
+house2_gates_accessible = { status = "CONFIRMED", note = "House 2 gates reachable on data plane (Omada L2 forwarding live). SSH blocked (no openssh-server). Management plane investigation ongoing." }
+wireguard_3node = { status = "✅ DONE", note = "golgi (10.13.37.1), sporeGate (10.13.37.2), pepti (10.13.37.4) — 3-node mesh LIVE. 35ms/31ms latency." }
+cytoplasm_zones = { status = "✅ DONE", owner = "sporeGate overwatch", note = "TOPOLOGY_MAP.toml v4.0.0: backbone, house2, eero_wifi zones defined. CYTOPLASM_ZONES_SPEC.md handed to cellMembrane team." }
+fresh_binary_harvest = { status = "P1-TODO", owner = "cellMembrane team", note = "sporeGate binary is stale (v0.1.0, 9dc6a1d). Needs fresh harvest from pepti with gate.preflight/firewall.generate/depot.integrity." }
 
 # ──────────────────────────────────────────────────────────────
 # CARRY (not blocking Wave 115 close)

@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 15:10 EDT (hardcode elimination + tests — sporeGate cellMembrane)
+**Last review**: Jun 17 15:35 EDT (full cascade — overwatch)
 
 ---
 
@@ -22,14 +22,18 @@ harden mesh. Offline hardware returns when physical ops completes.
 | **NUCLEUS** | Local 13/13 primals, atomic model tests, gate readiness |
 | **Overwatch** | Cascade review, cross-team coordination, FRAGO/blurb updates |
 
-### sporeGate Overwatch — Hardware, LAN, K-Derm Deployment (Cursor on NUC)
+### sporeGate Overwatch — LAN/WAN/VPS Topology Exploration (Cursor on NUC)
+
+*Dedicated subteam like biomeGate (GPU eras) but for network sovereignty.*
+*The sporeGate NUC IS the exploration ground for our LAN/WAN topology.*
 
 | Focus | Detail |
 |-------|--------|
 | **Plasma membrane** | nftables from composition, NAT, DHCP, DNS, WireGuard overlay |
 | **LAN fabric** | CRS310, Omada SX3008F, TL-SG605S, Eero mesh management |
 | **Gate deployment** | `gate.preflight` → `sovereign-relay-push.sh` → NUCLEUS install |
-| **Hardware access** | Omada (admin/admin), ATT (access code), House 2 (Eero backhaul) |
+| **Topology exploration** | Cytoplasm zones, multi-site links, VLAN segmentation |
+| **Hardware solving** | Omada SDN mode, ATT passthrough, Eero bridge, cable runs |
 
 ### cellMembrane Team — Code + VPS (Cursor on sporeGate, separate IDE)
 
@@ -54,21 +58,25 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 ---
 
-## Ecosystem Snapshot (Jun 17 13:50 EDT — cascade review)
+## Ecosystem Snapshot (Jun 17 15:35 EDT — full cascade)
 
 | Metric | Value |
 |--------|-------|
 | Genetics | **11/11 ✅** all primals accept mito-beacon |
 | Depot x86_64 | **13/13** from HEAD (pepti Jun 16) |
 | Depot aarch64 | **13/13** (pepti Jun 15) |
-| VCS parity | **17/17** zero drift — both remotes synced (cascade confirmed) |
-| cellMembrane | **527 tests**, zero lint, async-first APIs, hardcode elimination (13 sites), constant centralization, capability-derived paths |
-| golgi | **HEALTHY** — 13/13, relay ACTIVE, depot serving |
-| sporeGate | **13/13 ALIVE** — K-Derm nftables deployed, cascade active, VPS SSH live |
-| eastGate | **LIVE** — 10G SFP+ validation node, primalSpring + overwatch |
-| northGate | RustDesk reachable — NUCLEUS deploy pending (sporeGate) |
-| House 2 | **ACCESSIBLE** — operator confirms gates reachable (Eero backhaul) |
-| fieldGate | **OFFLINE** — DDR3 NUC, dead CMOS, hardware surgery |
+| VCS parity | **17/17** zero drift — all remotes synced |
+| cellMembrane | **527 tests**, zero lint, async-first API, error module, hardcode elimination |
+| WireGuard mesh | **3/3 nodes LIVE** — golgi (10.13.37.1) ↔ sporeGate (.2) ↔ pepti (.4) |
+| golgi | **HEALTHY** — 13/13, relay, Forgejo, WireGuard hub |
+| pepti | **HEALTHY** — build authority, WireGuard peer, depot |
+| sporeGate | **13/13 ALIVE** — K-Derm nftables live, WireGuard, cytoplasm zones mapped |
+| eastGate | **LIVE** — 10G SFP+, primalSpring + overwatch. **⚠️ SSH needs openssh-server** |
+| northGate | RustDesk reachable — **⚠️ SSH needs openssh-server**, NUCLEUS pending |
+| Omada SX3008F | **Data plane LIVE** (L2 works), mgmt plane unreachable (SDN mode) |
+| House 2 | Devices on L2 — SSH required for remote management |
+| Cytoplasm zones | **3 zones** defined: backbone, house2, eero_wifi (TOPOLOGY_MAP v4.0.0) |
+| fieldGate | **OFFLINE** — DDR3 NUC, dead CMOS |
 
 ---
 
@@ -123,26 +131,36 @@ Script: `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|
 
 ---
 
-## Omada Access (sporeGate Overwatch — UNBLOCKED)
+## Omada Access — INVESTIGATING (sporeGate AAR Jun 17 14:30)
 
-sporeGate IS the DHCP server. The Omada got a lease from you. Find it and log in:
+**Data plane WORKS** — devices behind Omada are reachable on 192.168.4.x. L2 forwarding confirmed.
+**Management plane UNREACHABLE** — HTTP/HTTPS probes to .115 and 10.0.4.1 return empty. nmap shows no open TCP ports.
+
+**Likely cause**: Omada SX3008F is in "SDN Controller Managed" mode (factory default for
+newer firmware). The standalone web UI is disabled when no controller is detected OR the
+switch expects management on a dedicated VLAN/IP range.
+
+**Resolution paths** (sporeGate overwatch to try):
 
 ```bash
-# 1. Find Omada IP from your own DHCP leases (MAC: EC:75:0C:4C:98:08)
-cat /var/lib/misc/dnsmasq.leases | grep -i "ec:75:0c"
-# or scan:
-nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
+# Path 1: Try management IP range (Omada defaults vary by firmware)
+curl -kI https://10.0.4.1 2>&1 | head -5
+curl -kI http://192.168.0.1 2>&1 | head -5  # some Omada default
 
-# 2. Browse to it (likely 192.168.4.X)
-# Default credentials: admin / admin
-# Web UI: http://<omada-ip>
+# Path 2: Install TP-Link Omada SDN controller on sporeGate (discovers switches on L2)
+# This gives full managed control — VLANs, port config, monitoring
+# apt install default-jre && download Omada Controller .deb from TP-Link
 
-# 3. Verify: no VLAN port isolation, all ports bridged (factory default)
-# 4. Optional: set static IP (e.g. 192.168.4.115) for predictability
+# Path 3: Factory reset the Omada (press reset button 5s) to force standalone mode
+# Then browse http://<dhcp-assigned-ip> with admin/admin
+
+# Path 4: Connect laptop directly to Omada port, set static 192.168.0.x, try web UI
 ```
 
-**Full device specs**: `whitePaper/technical/HARDWARE_INVENTORY.md`
-(MAC, Device Key, S/N, default creds — all captured from sticker photos)
+**Credentials confirmed** (from sticker, stored in `whitePaper/technical/HARDWARE_INVENTORY.md`):
+- Default login: `admin` / `admin`
+- MAC: EC-75-0C-4C-98-08
+- Device Key: 1E73-A4FF-F547-8EC5-8000
 
 ### ATT BGW320-500 (when ready to eliminate double-NAT)
 
@@ -151,6 +169,19 @@ nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
 # Device Access Code: #283>#66<>
 # Goal: IP passthrough to sporeGate's enp1s0 MAC
 # This makes sporeGate the SOLE boundary (true plasma membrane)
+```
+
+### SSH Enablement (OPERATOR — unblocks everything)
+
+```bash
+# On eastGate (this machine):
+sudo apt install -y openssh-server
+
+# On northGate (via RustDesk session):
+sudo apt install -y openssh-server
+
+# Then add sporeGate's pubkey to each:
+# (sporeGate can push its key once SSH is listening)
 ```
 
 ---
