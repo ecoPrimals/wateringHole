@@ -74,27 +74,27 @@ Either powered off or behind Omada NAT (10.0.x.x internally).
 
 ## Action Plan
 
-### Operator (physical ops) — TODAY
+### Operator (physical ops)
 
-- [ ] Grab Omada controller password
+- [ ] Hand Omada controller password to sporeGate team
 - [ ] Check fieldGate: power on, verify cable to CRS310
-- [ ] Verify northGate LAN connection (RustDesk in → `ip addr`)
-- [ ] Optional: set eastGate hostname to `eastGate` (`hostnamectl set-hostname eastGate`)
+- [ ] Optional: set eastGate hostname (`hostnamectl set-hostname eastGate`)
 
-### sporeGate Team (LAN hardware) — AFTER operator input
+### sporeGate Team (LAN hardware) — OWNS ALL BELOW
 
 - [ ] Log into Omada controller, assess mode (router vs bridge)
-- [ ] If possible: switch to bridge mode (unify all devices onto 192.168.4.x)
-- [ ] If not: add static route / NAT hairpin for 10.0.x.x on sporeGate
-- [ ] Identify northGate's LAN IP, add to SSH config
+- [ ] Switch to bridge mode OR add routing for 10.0.x.x
+- [ ] Identify northGate's LAN IP (RustDesk in → `ip addr`)
 - [ ] SSH-push RustDesk config to all newly reachable devices
-- [ ] Deploy fieldGate systemd units once it's back online
+- [ ] Deploy fieldGate systemd units once back online
+- [ ] flockGate WAN relay migration (SSH from golgi)
+- [ ] WireGuard overlay activation (golgi hub, then site routers)
 
-### eastGate Overwatch — CONCURRENT
+### eastGate Overwatch — VALIDATE ONLY
 
-- [ ] Set static IP or update SSH configs to match current .244
-- [ ] Verify primalSpring can communicate with sporeGate primals via IPC
-- [ ] Monitor cascade as devices come online
+- [ ] Monitor cascade as topology evolves
+- [ ] Validate ecosystem convergence (no divergence in remotes)
+- [ ] primalSpring validation scenarios when new gates come online
 
 ---
 
