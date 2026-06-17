@@ -72,16 +72,14 @@ note = "northGate is on backbone (CRS310), NOT house2"
 [cytoplasm.zones.eero_wifi]
 hub_device = "Amazon Eero 6"
 hub_role = "wifi_bridge"
-status = "collapsing"
+status = "bridged"
 site = "house2"
 uplink_zone = "house2"
-uplink_type = "ethernet off Omada"
+uplink_type = "ethernet off TL-SG605S-M2 (via Omada port 8)"
 uplink_speed_mbps = 2500
 uplink_latency_ms = 3.0
-nat_subnet = "10.0.7.0/24"
-nat_note = "Eeros run their own NAT on Omada port. Plan: bridge to flat 192.168.4.x via Eero app."
 gates = []
-note = "Human WiFi at house2. No compute gates. Eero plugged into Omada SX3008F."
+note = "Bridge mode ACTIVE (Jun 17 18:30). WiFi clients get 192.168.4.x from sporeGate DHCP. No more 10.0.7.x NAT."
 
 [sites.house1]
 address = "4422 Southgate Ave, Lansing MI 48910"
