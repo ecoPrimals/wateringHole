@@ -17,6 +17,27 @@ After wiring: CRS310 becomes pure L2 switch. sporeGate handles all L3.
 
 ---
 
+## CRITICAL: WiFi as Out-of-Band Management
+
+**sporeGate MUST keep WiFi enabled and connected at all times.**
+
+Since sporeGate IS the LAN router, any misconfiguration of wired interfaces
+locks out all other gates (including eastGate). WiFi provides an out-of-band
+fallback so agents can still SSH in and self-heal without physical access.
+
+```bash
+# Ensure WiFi stays up even when systemd-networkd manages wired interfaces:
+nmcli device wifi connect "<SSID>" password "<PSK>"
+nmcli connection modify "<SSID>" connection.autoconnect yes
+nmcli connection modify "<SSID>" ipv4.route-metric 600
+# High route-metric ensures WiFi is fallback only (wired preferred for data)
+```
+
+**Biological analogy**: WiFi = flagellar emergency signaling — when the cell wall
+(wired periplasm) is compromised, the organism retains a secondary communication path.
+
+---
+
 ## Step 1: OS Install (if not already Linux)
 
 Pop!_OS or Ubuntu Server 24.04. Either works. Key: systemd-networkd for networking.
