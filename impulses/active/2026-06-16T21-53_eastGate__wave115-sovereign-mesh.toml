@@ -59,6 +59,10 @@ eastgate_client = { status = "✅ DONE", note = "Configured via GUI, hairpin NAT
 northgate_client = { status = "✅ DONE", note = "Configured, can reach sporeGate + eastGate" }
 fieldgate_client = { status = "TODO", note = "Gate offline — deploy when back up" }
 hairpin_nat = { status = "✅ DONE", note = "eno1→eno1 accept + LAN masquerade. Persisted to /etc/nftables.conf" }
+omada_towers_push = { status = "TODO", note = "SSH-push config string to all wired towers behind Omada L2 switch. If Omada has L3/VLAN, needs controller access (password from operator)." }
+flockgate_wan_relay = { status = "TODO", note = "flockGate is offsite WAN on public relay. Apply sovereign config via SSH from golgi or current public RustDesk session." }
+eero_bridge_investigate = { status = "TODO", note = "Eeros likely NAT WiFi clients to separate subnet. Investigate bridge mode (dumb AP) or add routing/hairpin for Eero subnet on sporeGate." }
+membrane_remote_configure = { status = "TODO", note = "Evolve cellMembrane: membrane remote.configure --relay golgi auto-pushes config to any SSH-reachable gate. Eliminates manual per-machine typing." }
 lan_local_relay = { status = "P3-FUTURE", note = "Run hbbs on sporeGate for zero-WAN-latency LAN connections" }
 
 # ──────────────────────────────────────────────────────────────
@@ -120,15 +124,20 @@ cursor_pairing = { status = "TODO", note = "IDE-level pair programming via relay
 [stream5]
 id = "VPS-CONVERGENCE"
 owner = "cellMembrane/sporeGate"
-priority = "P2"
-description = """golgi has 9 divergences documented. pepti has 2.
-Consolidate depot paths, replace bash deploy script, decide pepti operational tier."""
+priority = "P1"
+description = """sporeGate takes FULL OWNERSHIP of VPS layer (golgi + pepti).
+Must be able to: SSH in, manage Forgejo, restart relay, trigger builds, run cascade.
+Also: consolidate depot paths, replace bash deploy script, decide pepti operational tier.
+Dual-channel handoff (USB + Git) active until sporeGate is fully autonomous."""
 
 [stream5.tasks]
 depot_path_consolidation = { status = "TODO", note = "Three paths on golgi → single canonical" }
 bash_to_rust_refresh = { status = "TODO", note = "Replace deploy_membrane.sh with plasmid.refresh" }
 pepti_operational_tier = { status = "TODO", note = "Deploy Tower Atomic (beardog+songbird+skunkbat) for self-validation" }
 golgi_membrane_update = { status = "DONE", note = "golgi at HEAD (9dc6a1d)" }
+sporegate_golgi_ssh = { status = "TODO", note = "Verify sporeGate SSH key authorized on golgi. sporeGate must independently manage Forgejo, hbbs/hbbr, membrane updates." }
+sporegate_pepti_ssh = { status = "TODO", note = "Verify sporeGate SSH key authorized on pepti. sporeGate must independently trigger builds and manage depot." }
+vps_handoff_complete = { status = "TODO", note = "Milestone: sporeGate can SSH into golgi+pepti, run cascade, manage Forgejo, restart services — zero overwatch dependency." }
 bridge_evolution = { status = "P3", note = "socat bridges → Rust-native relay with mTLS" }
 
 # ──────────────────────────────────────────────────────────────

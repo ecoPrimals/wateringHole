@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 16 21:53 EDT
+**Last review**: Jun 16 22:33 EDT
 
 ---
 
@@ -16,11 +16,13 @@ can remote to every other, teams are autonomous and pushing their own evolution.
 
 | Gate | Team | Focus |
 |------|------|-------|
-| **sporeGate** | cellMembrane owner | LAN routing, cascade, depot, bootstrap, RustDesk mesh |
+| **sporeGate** | cellMembrane owner | LAN routing, VPS (golgi+pepti), cascade, depot, bootstrap, RustDesk mesh, Omada/flockGate |
 | **ironGate** | projectNUCLEUS | ABG compute access, tiers, JupyterHub/toadStool |
 | **eastGate** | Overwatch | Validate, coordinate, primalSpring evolution |
 | **northGate** | (pending onboard) | Gaming/remote + final NUCLEUS gate |
 | **fieldGate** | Autonomous | Currently offline — check power |
+
+**Handoff**: Dual-channel (USB kit + Git push) until sporeGate demonstrates full VPS autonomy.
 
 ---
 
@@ -43,6 +45,26 @@ can remote to every other, teams are autonomous and pushing their own evolution.
 
 ## Remaining Work
 
+### P1: RustDesk Mesh Completion (cellMembrane/sporeGate)
+
+SSH-push relay config to remaining gates. Do NOT manually type on each machine.
+
+- [ ] SSH-push config to Omada-wired towers (should be on 192.168.4.x if Omada is L2)
+- [ ] Verify Omada is pure L2 switch (operator supplies controller password AM)
+- [ ] flockGate WAN: apply config via SSH from golgi or current public RustDesk session
+- [ ] fieldGate: deploy config when back online
+- [ ] Evolve: `membrane remote.configure --relay golgi` command for future automation
+
+### P1: VPS Ownership Transfer (cellMembrane/sporeGate)
+
+sporeGate must independently manage golgi + pepti without overwatch.
+
+- [ ] Verify sporeGate SSH key authorized on golgi (add if missing)
+- [ ] Verify sporeGate SSH key authorized on pepti (add if missing)
+- [ ] Demonstrate: restart hbbs/hbbr on golgi independently
+- [ ] Demonstrate: trigger depot rebuild on pepti independently
+- [ ] Demonstrate: run cascade (push_target=all) without overwatch
+
 ### P1: Gate Persistence (cellMembrane/sporeGate)
 
 Primals on sporeGate/fieldGate run as `nohup` — reboot kills them.
@@ -61,6 +83,14 @@ Last LAN gate to fully deploy:
 - [ ] Fetch depot (13/13 x86_64)
 - [ ] Start all primals + mesh.init
 - [ ] Deploy RustDesk systemd persistence
+
+### P2: Eero WiFi Integration (cellMembrane/sporeGate)
+
+Eeros likely NAT WiFi clients to separate subnet. Investigate and solve.
+
+- [ ] Determine Eero subnet (bridge mode or separate NAT?)
+- [ ] If bridge: switch Eeros to AP-only mode (sporeGate DHCP serves WiFi)
+- [ ] If NAT: add routing + hairpin rules on sporeGate for Eero subnet
 
 ### P2: ABG First Member (ironGate/projectNUCLEUS)
 
@@ -90,11 +120,13 @@ Last LAN gate to fully deploy:
 | Hairpin NAT | eno1→eno1 accept + LAN masquerade (same-NAT relay) |
 | eastGate relay | Config fixed (GUI-authoritative pattern learned) |
 | northGate relay | Configured, can reach all LAN gates |
-| Team restructure | sporeGate owns cellMembrane, ironGate → projectNUCLEUS |
+| One-command config | Single string deploys relay config to any device |
+| Team restructure | sporeGate owns cellMembrane + VPS, ironGate → projectNUCLEUS |
 | sporeGate SSH keys | Forgejo + GitHub — can push bidirectionally |
 | sporeGate AAR | 8 deployment interventions documented |
 | Topology map | TOPOLOGY_LIVE.md + INFRA_LAYERS.toml |
 | Network sovereignty | Full architecture documented |
+| Full handoff blurb | VPS ownership, cascade autonomy, Omada/flockGate scope documented |
 
 ---
 
@@ -119,8 +151,13 @@ Last LAN gate to fully deploy:
 Internet → ATT → sporeGate (NAT/FW) → CRS310 (L2) → LAN gates
                   ↕ WiFi (OOB mgmt)              ↕
               golgi VPS (relay/forge)    eastGate, northGate, fieldGate
-              pepti VPS (builds)        Omada → mesh WiFi clients
+              pepti VPS (builds)        Omada (L2 switch) → Eeros (WiFi/NAT)
+                                        └─ wired towers (192.168.4.x)
+                                        └─ WiFi clients (Eero subnet?)
 ```
+
+**sporeGate owns**: LAN routing + golgi VPS + pepti VPS + cascade pipeline
+**Delivery**: USB kit (physical) + Git push (Forgejo/GitHub) — both active until autonomous
 
 RustDesk relay: `157.230.3.183` | One-command config:
 ```

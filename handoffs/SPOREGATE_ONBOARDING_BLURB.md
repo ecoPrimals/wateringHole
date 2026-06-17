@@ -136,6 +136,141 @@ onboarding of new gates.
 
 ---
 
+## VPS Ownership (golgi + pepti)
+
+You own the full VPS layer. This is NOT a shared responsibility — you manage these independently.
+
+### golgi (157.230.3.183)
+
+| Service | Purpose | Management |
+|---------|---------|------------|
+| Forgejo | `git.primals.eco` — sovereign Git hosting | `systemctl restart forgejo` |
+| hbbs | RustDesk rendezvous server (21115-21116) | `systemctl restart hbbs-membrane` |
+| hbbr | RustDesk relay server (21117) | `systemctl restart hbbr-membrane` |
+| 13 primals | Full NUCLEUS for depot serving + mesh | `gate.status` to check |
+| Depot | Binary depot served via `hotSpring` | `/opt/membrane/plasmidBin/` |
+
+```bash
+ssh root@157.230.3.183
+# Key: your SSH key is registered (verify: ssh-add -l)
+# If not: cat ~/.ssh/id_ed25519.pub | ssh root@157.230.3.183 "cat >> ~/.ssh/authorized_keys"
+```
+
+### pepti (build authority)
+
+| Service | Purpose | Management |
+|---------|---------|------------|
+| Cargo builds | x86_64 + aarch64 cross-compile | `plasmid.harvest --all-primals` |
+| Depot generation | Populates binaries for all gates | `/opt/membrane/plasmidBin/` |
+| cellMembrane at HEAD | Structural sync reference | `git pull` in `~/Development/ecoPrimals/gardens/cellMembrane` |
+
+```bash
+ssh root@pepti
+# IP is in wateringHole/compute-sharing docs
+# Same key pattern as golgi
+```
+
+### What you do on VPS
+
+1. **Restart relay**: If RustDesk stops working → `ssh root@157.230.3.183 "systemctl restart hbbs-membrane hbbr-membrane"`
+2. **Rebuild depot**: If primals are updated → SSH to pepti, `cd ~/Development/ecoPrimals/gardens/cellMembrane && git pull && cargo build --release` (or evolve `plasmid.harvest`)
+3. **Manage Forgejo**: Repos, SSH keys, webhooks → `https://git.primals.eco` web UI or Forgejo API
+4. **Monitor health**: `ssh root@157.230.3.183 "membrane gate.status"` should report 13/13
+
+---
+
+## Cascade Autonomy
+
+You own the bidirectional sync pipeline. Here's how it works:
+
+### Current mechanism (ff-merge, commit 8f4e4eb)
+
+```bash
+# From any gate with cellMembrane:
+membrane gate.cascade
+# This:
+# 1. Fetches from both remotes (origin=forgejo, github=github)
+# 2. Attempts ff-merge (preserves SHA identity)
+# 3. Falls back to rebase only if genuinely diverged
+# 4. Pushes to BOTH remotes (push_target=all)
+```
+
+### Manual cascade (if membrane command isn't available):
+
+```bash
+cd ~/Development/ecoPrimals/gardens/cellMembrane  # or any primal
+git fetch origin && git fetch github
+git merge --ff-only origin/main || git rebase origin/main
+git push origin main && git push github main
+```
+
+### Future: Event-driven (Wave 115 Stream 6)
+
+Set up Forgejo webhooks that auto-trigger cascade on push. Eliminates manual intervention.
+This is YOUR evolution target — implement when ready.
+
+---
+
+## Omada/Eero/flockGate (Remaining Mesh)
+
+### Omada-wired towers (P1)
+
+Omada is an SFP+ L2 switch — towers wired to it should be on 192.168.4.x (your DHCP).
+SSH-push the config string to each (no manual typing on each machine):
+
+```bash
+for host in <tower_hostnames>; do
+  ssh $host "pkexec rustdesk --config '=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye'"
+done
+```
+
+If Omada has L3/VLAN config: operator will supply Omada controller password. Log in and
+verify it's pure L2 (bridge mode). If not, switch to bridge so all wired devices get
+sporeGate DHCP directly.
+
+### Eero WiFi clients (P2)
+
+Eeros likely run their own NAT/DHCP. WiFi clients are on a different subnet.
+Options (in order of preference):
+1. **Bridge mode**: Eeros become dumb WiFi APs, sporeGate serves DHCP to WiFi clients too
+2. **Add routing**: If Eero must keep NAT, add sporeGate nftables rules for Eero subnet
+
+### flockGate — WAN/offsite (P1)
+
+flockGate is at a remote location, currently on **public** RustDesk relay.
+Safe migration:
+1. SSH from golgi → flockGate (if SSH key authorized): `ssh flockGate "pkexec rustdesk --config '...'"`
+2. Use current public RustDesk session to run the config command
+3. Physical visit (last resort)
+
+Risk: if sovereign relay goes down after switching, flockGate is unreachable until fix.
+Mitigation: ensure golgi hbbs/hbbr is healthy before switching.
+
+### Long-term: `membrane remote.configure`
+
+Evolve cellMembrane to have a command that auto-discovers SSH-reachable gates and pushes
+relay config to all of them. No manual per-machine work.
+
+---
+
+## Transition Period
+
+Two delivery channels are active until you demonstrate full autonomy:
+
+1. **USB Kit** — Physical handoff with latest blurbs, configs, AARs. Read on boot.
+2. **Git Push** — Overwatch pushes FRAGO + handoffs to both GitHub and Forgejo. You pull.
+
+**You are autonomous when you can:**
+- [ ] SSH into golgi and pepti independently
+- [ ] Run cascade (push to both remotes) without overwatch help
+- [ ] Manage Forgejo (repos, keys, webhooks) solo
+- [ ] Restart relay services and verify mesh health
+- [ ] Push RustDesk config to new gates via SSH
+
+Once all checkboxes are true, USB channel retires and you operate purely from Git.
+
+---
+
 ## Architecture Reference
 
 ```
@@ -160,9 +295,11 @@ VPS (accessible via WAN):
 
 ## Key Ecosystem Docs
 
+- `infra/wateringHole/impulses/active/2026-06-16T21-53_eastGate__wave115-sovereign-mesh.toml` — ACTIVE FRAGO
 - `infra/wateringHole/compute-sharing/NETWORK_SOVEREIGNTY.md` — full architecture
 - `infra/wateringHole/compute-sharing/SPOREGATE_ACTIVATION_BLURB.md` — activation steps
-- `infra/wateringHole/impulses/active/2026-06-15T10-30_eastGate__wave114-sovereign-compute.toml` — FRAGO
+- `infra/wateringHole/compute-sharing/RUSTDESK_CONFIG.md` — relay config string + instructions
+- `infra/wateringHole/handoffs/AAR_RUSTDESK_HAIRPIN_NAT_SPOREGATE_JUN16_2026.md` — hairpin NAT AAR
 - `gardens/cellMembrane/specs/` — membrane command specs
 - `infra/wateringHole/handoffs/primalSpring/GENETICS_ARCHITECTURE_EUKARYOTIC_MODEL_JUN16_2026.md` — genetics model
 
