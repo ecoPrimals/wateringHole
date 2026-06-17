@@ -13,7 +13,7 @@
 | **eastGate** | 192.168.4.244 | 10G SFP+ (sfp-sfpplus2) | ONLINE — 0.14ms to sporeGate |
 | **sporeGate** | 192.168.4.1/3 | 2.5G (ether8) | ONLINE — router, 13/13 primals |
 | **northGate** | ? | via MikroTik or Omada? | RustDesk reachable, LAN IP unclear |
-| **fieldGate** | 192.168.4.36 (was) | DISCONNECTED | OFFLINE — needs power/cable |
+| **fieldGate** | 192.168.4.36 (was) | DISCONNECTED | OFFLINE — DDR3 NUC, dead CMOS, open-air surgery. Indefinite. |
 | **Omada router** | 192.168.4.115 / 10.0.4.1 | 10G trunk (sfp-sfpplus1) | ALIVE — NATs WiFi to 10.0.x.x |
 | **Eero base** | 192.168.1.115 | 2.5G (ether2) | Bridge to ATT subnet |
 | **Debian server** | 192.168.4.218 (expected) | via Omada trunk | NOT in ARP — offline or behind Omada NAT |
@@ -76,8 +76,8 @@ Either powered off or behind Omada NAT (10.0.x.x internally).
 
 ### Operator (physical ops)
 
-- [ ] Hand Omada controller password to sporeGate team
-- [ ] Check fieldGate: power on, verify cable to CRS310
+- [ ] Hand Omada controller password to sporeGate team (soon — not yet available)
+- [x] fieldGate: DDR3 NUC with dead CMOS, cut open, open-air. Offline indefinitely.
 - [ ] Optional: set eastGate hostname (`hostnamectl set-hostname eastGate`)
 
 ### sporeGate Team (LAN hardware) — OWNS ALL BELOW
