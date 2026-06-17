@@ -10,27 +10,39 @@
 # Last updated: 2026-06-02 (Wave 68)
 
 [meta]
-version = "1.0.0"
-wave = 68
+version = "2.0.0"
+wave = 115
 measured_by = "manual + discovery.peers (planned)"
+last_updated = "2026-06-16"
 
 # ═══════════════════════════════════════════════════════════════
 # Network Segments
 # ═══════════════════════════════════════════════════════════════
 
-[segments.backbone]
+[segments.periplasm]
+subnet = "192.168.4.0/22"
+gateway = "192.168.4.1"
+transport = "cat6_2.5g"
+description = "sporeGate sovereign LAN — all compute behind NAT + firewall"
+router = "sporeGate"
+switch = "CRS310"
+gates = ["sporeGate", "eastGate", "ironGate", "biomeGate", "strandGate"]
+
+[segments.backbone_legacy]
 subnet = "192.168.1.0/24"
-transport = "cat6_1g"
-description = "Basement backbone — Cat6 unmanaged switch"
-gates = ["eastGate", "ironGate", "biomeGate", "strandGate"]
+transport = "att_dhcp"
+description = "ATT native subnet — WiFi/Eero devices pending migration to 4.0/22"
+gateway = "192.168.1.254"
+note = "Bridged onto CRS310 via Eero. sporeGate proxy-ARPs for cross-subnet routing."
+gates = ["northGate", "blueGate"]
 
 [segments.eero_mesh]
-subnet = "192.168.4.0/24"
+subnet = "192.168.1.0/24"
 transport = "eero_wifi_mesh"
-description = "Next-door property — Eero mesh bridge to backbone via Cat6e"
-gates = ["southGate"]
-bridge_to = "backbone"
+description = "Eero mesh WiFi — physically on CRS310 bridge, ATT DHCP range"
+bridge_to = "periplasm"
 bridge_latency_ms = 3.0
+note = "To be replaced by Omada APs on 192.168.4.0/22"
 
 [segments.vps_periplasm]
 transport = "digitalocean_vpc"

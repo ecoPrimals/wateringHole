@@ -1,0 +1,244 @@
+# Infrastructure Layers — Physical Network Device Inventory & Configuration
+#
+# Machine-readable manifest of all L1-L3 network devices, their roles, and
+# the configuration required to reproduce this topology. Used by membrane
+# provisioning and WaterFall sync for gate bootstrap.
+#
+# Last updated: 2026-06-16 (Wave 115)
+# Authority: ops (physical layer) + sporeGate (routing authority)
+
+[meta]
+version = "1.0.0"
+wave = 115
+topology_model = "diderm"
+sovereignty_boundary = "sporeGate"
+
+# ═══════════════════════════════════════════════════════════════
+# Layer 1: ISP Modem / WAN Entry
+# ═══════════════════════════════════════════════════════════════
+
+[devices.att_gateway]
+vendor = "ATT"
+model = "BGW320"
+role = "modem"
+target_mode = "ip_passthrough"
+current_mode = "nat_router"
+wan_ip = "dynamic (DHCP from ATT fiber)"
+lan_ip = "192.168.1.254"
+lan_subnet = "192.168.1.0/24"
+interfaces = ["fiber_wan", "4x_1g_lan", "wifi_5g", "wifi_2.4g"]
+managed_by = "att_portal"
+
+[devices.att_gateway.passthrough]
+target_host = "sporeGate enp1s0 MAC"
+note = "Once enabled: sporeGate gets public IP directly, eliminates double-NAT"
+status = "pending"
+
+[devices.att_gateway.wifi]
+ssid_5g = "ATT native WiFi"
+role = "fallback WiFi for sporeGate (wlo1)"
+subnet = "192.168.1.0/24"
+note = "Eero mesh also on this subnet. Pending Omada migration."
+
+# ═══════════════════════════════════════════════════════════════
+# Layer 2: Sovereignty Boundary (Router / Firewall)
+# ═══════════════════════════════════════════════════════════════
+
+[devices.sporegate]
+vendor = "GMKtec"
+model = "NucBox M6"
+cpu = "AMD Ryzen 7 6800H"
+ram_gb = 32
+role = "lan_router"
+os = "Pop!_OS 22.04"
+network_stack = "systemd-networkd + nftables + dnsmasq"
+
+[devices.sporegate.interfaces.wan]
+name = "enp1s0"
+speed = "2.5G"
+ip = "DHCP from ATT"
+connected_to = "att_gateway LAN port"
+
+[devices.sporegate.interfaces.lan]
+name = "eno1"
+speed = "2.5G"
+ip = ["192.168.4.1/22", "192.168.4.3/22"]
+connected_to = "CRS310 RJ45 port"
+
+[devices.sporegate.interfaces.wifi]
+name = "wlo1"
+role = "fallback_management"
+ip = "DHCP from ATT (192.168.1.x)"
+note = "Only used when wired WAN is unavailable"
+
+[devices.sporegate.services]
+networking = ["systemd-networkd", "nftables", "dnsmasq"]
+remote_access = ["ssh", "rustdesk"]
+vpn = ["wireguard (planned)"]
+primals = ["bearDog", "skunkBat", "songBird", "loamSpine"]
+
+[devices.sporegate.config_files]
+wan_network = "/etc/systemd/network/10-wan.network"
+lan_network = "/etc/systemd/network/20-lan.network"
+firewall = "/etc/nftables.conf"
+dns = "/etc/dnsmasq.conf"
+sysctl = "/etc/sysctl.d/99-router.conf"
+routes = "/etc/networkd-dispatcher/routable.d/50-sporegate-routes.sh"
+nm_exclude = "/etc/NetworkManager/conf.d/99-unmanage-wired.conf"
+
+# ═══════════════════════════════════════════════════════════════
+# Layer 2: Switching (L2 Bridge)
+# ═══════════════════════════════════════════════════════════════
+
+[devices.crs310]
+vendor = "MikroTik"
+model = "CRS310-8G+2S+IN"
+role = "l2_bridge"
+os = "RouterOS 7.x"
+management_ip = "192.168.4.2/24"
+management_protocol = "rest_api"
+management_password = "sticker"
+
+[devices.crs310.ports]
+rj45_count = 8
+rj45_speed = "2.5G"
+sfp_count = 2
+sfp_speed = "10G"
+
+[devices.crs310.bridge]
+mode = "pure_l2"
+stp = true
+all_ports_bridged = true
+no_ip_routing = true
+no_dhcp = true
+no_nat = true
+no_firewall = true
+
+[devices.crs310.connections]
+port1 = "sporeGate eno1 (uplink to router)"
+sfp1 = "eastGate 10G SFP+"
+# Other ports: fieldGate, towers, APs (document as they're identified)
+
+[devices.crs310.api]
+base_url = "http://192.168.4.2/rest"
+auth = "basic admin:<sticker_pwd>"
+note = "Use REST API for automation. WebFig for manual config."
+
+# ═══════════════════════════════════════════════════════════════
+# Layer 2: WiFi (Current: Eero, Target: Omada)
+# ═══════════════════════════════════════════════════════════════
+
+[devices.eero_mesh]
+vendor = "Amazon/Eero"
+model = "Eero 6+"
+role = "wifi_ap_bridge"
+mode = "bridge"
+subnet = "192.168.1.0/24"
+connected_to = "CRS310 (via Cat6)"
+status = "active_legacy"
+note = "Pending replacement with Omada APs on 192.168.4.0/22"
+
+[devices.eero_mesh.migration]
+target = "omada_aps"
+reason = "Unify all devices on sovereign 192.168.4.0/22 subnet"
+blocker = "Omada hardware not yet deployed"
+
+[devices.omada_target]
+vendor = "TP-Link"
+model = "Omada EAP series (TBD)"
+role = "wifi_ap"
+target_subnet = "192.168.4.0/22"
+controller = "Omada SDN Controller (on sporeGate or dedicated)"
+status = "planned"
+
+[devices.omada_target.vlans]
+trusted = { vlan = 1, subnet = "192.168.4.0/24", description = "Compute / trusted devices" }
+mobile = { vlan = 10, subnet = "192.168.10.0/24", description = "Phones / tablets (rate-limited)" }
+guest = { vlan = 20, subnet = "192.168.20.0/24", description = "Guest / sandboxed" }
+management = { vlan = 100, subnet = "192.168.100.0/24", description = "Switch + AP management" }
+
+# ═══════════════════════════════════════════════════════════════
+# Compute Nodes (L3 endpoints)
+# ═══════════════════════════════════════════════════════════════
+
+[devices.eastgate]
+role = "primary_compute"
+connection = "10G SFP+ to CRS310"
+ip = "192.168.4.30"
+status = "intermittent"
+note = "Currently unreachable (ARP incomplete). Needs physical check."
+
+[devices.fieldgate]
+role = "canary_worker"
+connection = "2.5G RJ45 to CRS310"
+ip = "DHCP from sporeGate (192.168.4.x pool)"
+status = "active"
+
+# ═══════════════════════════════════════════════════════════════
+# WAN Periplasm (VPS Tier)
+# ═══════════════════════════════════════════════════════════════
+
+[devices.golgi_body]
+vendor = "DigitalOcean"
+model = "s-1vcpu-2gb"
+role = "wan_periplasm"
+ip = "157.230.3.183"
+region = "nyc1"
+services = ["forgejo", "hbbs", "hbbr", "wireguard", "knot-dns", "btsp-auth"]
+wireguard_endpoint = "157.230.3.183:51820"
+
+[devices.peptidoglycan]
+vendor = "DigitalOcean"
+model = "s-2vcpu-4gb"
+role = "build_authority"
+ip = "157.230.209.218"
+region = "nyc1"
+services = ["workspace", "builds", "temporal-sync", "membrane-binary"]
+
+# ═══════════════════════════════════════════════════════════════
+# Evolution Roadmap
+# ═══════════════════════════════════════════════════════════════
+
+[evolution.phase_current]
+name = "sporeGate sovereign routing"
+wave = 115
+status = "active"
+description = "NAT + firewall + DHCP + DNS on dedicated hardware"
+
+[evolution.phase_next]
+name = "ATT IP Passthrough"
+description = "Eliminate double-NAT. sporeGate gets public IPv4 directly."
+dependency = "ATT gateway portal access"
+risk = "medium"
+
+[evolution.phase_wireguard]
+name = "WireGuard mesh"
+description = "Persistent encrypted tunnel sporeGate ↔ golgiBody"
+dependency = "bearDog primal bootstrapped"
+risk = "low"
+
+[evolution.phase_omada]
+name = "Omada AP deployment"
+description = "Replace Eero mesh with TP-Link Omada APs on sovereign subnet"
+dependency = "Hardware purchase + Omada SDN controller"
+risk = "medium"
+benefit = "Unified subnet, VLAN segmentation, proper WiFi management"
+
+[evolution.phase_vlan]
+name = "VLAN segmentation"
+description = "Segment traffic: trusted/mobile/guest/management"
+dependency = "Omada APs + CRS310 VLAN config"
+risk = "medium"
+
+[evolution.phase_proxmox]
+name = "Proxmox virtualization"
+description = "Containerize gate services for cloneability and backup"
+dependency = "Routing proven stable 7d+"
+risk = "low"
+benefit = "Snapshot, clone, migrate gate configs. Reproducible sovereignty."
+
+[evolution.phase_plasmidbin]
+name = "plasmidBin LAN depot"
+description = "Local binary distribution within sovereign periplasm"
+dependency = "ironGate verification + golgiBody integration"
+risk = "low"
