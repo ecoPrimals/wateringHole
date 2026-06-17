@@ -122,4 +122,7 @@ Internet → ATT → sporeGate (NAT/FW) → CRS310 (L2) → LAN gates
               pepti VPS (builds)        Omada → mesh WiFi clients
 ```
 
-RustDesk relay: `157.230.3.183` | Key: `utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=`
+RustDesk relay: `157.230.3.183` | One-command config:
+```
+pkexec rustdesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+```

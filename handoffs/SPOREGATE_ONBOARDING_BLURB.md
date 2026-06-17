@@ -92,22 +92,19 @@ sudo nano /opt/membrane/env
 # Replace __FILL_FROM_OPERATOR__ with actual seed from operator
 ```
 
-### 3. Deploy RustDesk relay key to all gates
+### 3. Deploy RustDesk to any device (ONE COMMAND)
 
-The relay key is: `utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q=`
-Server: `157.230.3.183`
-
-Every gate needs this in its RustDesk config:
-```toml
-# ~/.config/rustdesk/RustDesk2.toml
-rendezvous_server = '157.230.3.183:21116'
-[options]
-relay-server = '157.230.3.183'
-custom-rendezvous-server = '157.230.3.183'
-key = 'utlNOAWUDdV+Q+ifG3zHrQ5HU0FtQnOTHiAnu6prV7Q='
+```bash
+pkexec rustdesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
 ```
 
-Gates to configure: eastGate, fieldGate (sporeGate already done)
+This single command configures server, relay, and key. Works on any Linux device.
+For Windows: `rustdesk.exe --config "<same string>"` (admin cmd)
+
+Already deployed: eastGate, sporeGate, northGate
+TODO: fieldGate (offline), all Omada-connected towers
+
+Full docs: `compute-sharing/RUSTDESK_CONFIG.md`
 
 ### 4. WiFi fallback persistence
 
