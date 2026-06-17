@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 10:20 EDT
+**Last review**: Jun 17 13:45 EDT
 
 ---
 
@@ -40,7 +40,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 | Depot x86_64 | **13/13** from HEAD (pepti Jun 16) |
 | Depot aarch64 | **13/13** (pepti Jun 15) |
 | VCS parity | **17/17** zero drift — both remotes synced |
-| cellMembrane | **cleanest state ever** — 471 tests, zero lint, per-phase timeouts, depot.integrity shipped |
+| cellMembrane | **495 tests**, zero lint, nftables gen, gate.preflight, async I/O sweep shipped |
 | golgi | **HEALTHY** — 13/13, relay ACTIVE, depot serving |
 | sporeGate | **13/13 ALIVE** — systemd persisted, cascade verified, VPS SSH confirmed |
 | eastGate | **LIVE** — 10G SFP+ to CRS310, primalSpring + overwatch |
@@ -75,7 +75,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 #### LAN Hardware (sporeGate NUC)
 
-- [ ] **K-Derm plasma membrane convergence**: sporeGate nftables → generated from `FirewallRuleset::for_composition()` (replaces hand-written rules with composition-deterministic policy)
+- [x] **K-Derm plasma membrane convergence**: `firewall.generate --plasma-membrane` ships nftables from `FirewallRuleset::for_composition()` ✅
 - [ ] northGate NUCLEUS deploy (SSH in, install, start primals, mesh)
 - [ ] WireGuard overlay activation (golgi hub first, then site routers)
 - [ ] Multi-site topology evolution (House 2 link when ready)
@@ -122,6 +122,19 @@ Script: `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|
 - [x] Mesh connected (1 peer reachable: golgiBody)
 - [x] HPC characterization document filed
 
+### Shipped (cellMembrane IDE Jun 17 13:45)
+
+- [x] K-Derm nftables generation: `FirewallRuleset::to_nftables_script()` — full `nft -f` idempotent output
+- [x] `NftablesConfig` struct: WAN/LAN ifaces, NAT masquerade, DHCP, trusted LAN, WireGuard overlay, IPv6 forward drop
+- [x] `membrane firewall.generate` dispatch — `--format nftables|ufw`, `--plasma-membrane`, `--wan/--lan/--subnet` flags
+- [x] `membrane gate.preflight` — pre-deployment scanner (interface detection, IP conflicts, port 53, NM, IPv6)
+- [x] Interface auto-detection by driver/speed/carrier via sysfs + ip-json, WAN/LAN role classification
+- [x] SSH alias centralization: `DEFAULT_SSH_ALIAS` / `DEFAULT_SSH_ALIAS_EXT` / `DEFAULT_PEPTI_SSH_ALIAS`
+- [x] `DEFAULT_NESTGATE_PORT` constant extracted
+- [x] `MembraneComposition::parse_name()` for CLI parsing
+- [x] Async I/O sweep: sandbox teardown, canary kill, fetch, harvest, refresh, impulse archive → tokio::fs/spawn_blocking
+- [x] 495 tests (was 487), zero clippy, zero fmt, zero doc warnings
+
 ### Shipped (cellMembrane IDE Jun 17 07:39)
 
 - [x] Deep debt evolution (86e9435): 412 tests passing, 60 net new
@@ -154,8 +167,12 @@ Script: `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|
 | zero-copy | `Arc<EcosystemManifest>` in cascade, `Cow<'static, str>` relay defaults, pre-computed remote refs |
 | SPDX headers | All .rs, .sh, .md, .service, .timer, .target files carry SPDX license identifier |
 | cargo-deny CI | `deny.toml` with ring ban + Forgejo CI job |
-| test expansion | 416 → 471 tests (nucleus, mesh, verify, service, types, resolve modules) |
+| test expansion | 416 → 495 tests (nucleus, mesh, verify, service, types, resolve, nftables, preflight) |
 | dependency audit | All pure Rust except ring (via reqwest→rustls), feature-gated, tracked |
+| K-Derm nftables | `to_nftables_script()` + `NftablesConfig` (NAT, DHCP, WireGuard, IPv6 drop, trust-LAN) |
+| gate.preflight | Pre-deployment scanner: interface detect, IP conflicts, port 53, NM, IPv6 forwarding |
+| async I/O sweep | sandbox/canary/fetch/harvest/refresh/impulse archive → tokio::fs + spawn_blocking |
+| constant centralization | SSH aliases, NestGate port, composition `parse_name()` |
 
 ---
 
