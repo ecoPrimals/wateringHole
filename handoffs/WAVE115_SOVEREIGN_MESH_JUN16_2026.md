@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 16:15 EDT (Omada controller installed, eastGate SSH live — sporeGate overwatch)
+**Last review**: Jun 17 18:40 EDT (Eero bridged, Omada SDN live, relay migration pattern)
 
 ---
 
@@ -58,7 +58,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 ---
 
-## Ecosystem Snapshot (Jun 17 15:35 EDT — full cascade)
+## Ecosystem Snapshot (Jun 17 18:40 EDT — post-Eero-bridge)
 
 | Metric | Value |
 |--------|-------|
@@ -70,12 +70,13 @@ harden mesh. Offline hardware returns when physical ops completes.
 | WireGuard mesh | **3/3 nodes LIVE** — golgi (10.13.37.1) ↔ sporeGate (.2) ↔ pepti (.4) |
 | golgi | **HEALTHY** — 13/13, relay, Forgejo, WireGuard hub |
 | pepti | **HEALTHY** — build authority, WireGuard peer, depot |
-| sporeGate | **13/13 ALIVE** — K-Derm nftables live, WireGuard, cytoplasm zones mapped |
-| eastGate | **LIVE** — 10G SFP+, primalSpring + overwatch. **⚠️ SSH needs openssh-server** |
-| northGate | RustDesk reachable — **⚠️ SSH needs openssh-server**, NUCLEUS pending |
-| Omada SX3008F | **Data plane LIVE** (L2 works), mgmt plane unreachable (SDN mode) |
-| House 2 | Devices on L2 — SSH required for remote management |
-| Cytoplasm zones | **3 zones** defined: backbone, house2, eero_wifi (TOPOLOGY_MAP v4.0.0) |
+| sporeGate | **13/13 ALIVE** — K-Derm nftables, WireGuard, Omada SDN controller |
+| eastGate | **LIVE** — 10G SFP+, **SSH LIVE** (sporeGate key authorized), primalSpring |
+| northGate | RustDesk reachable — Windows/5090, hobby system, future mesh node (P3) |
+| Omada SX3008F | **FULLY MANAGED** — SDN controller live, 8 SFP+ ports mapped, 18 clients visible |
+| Eero 6 | **BRIDGE MODE** — rebooting. WiFi clients collapsing to 192.168.4.x flat L2 |
+| House 2 devices | **10 compute nodes** visible on Omada (ports 2,3,8 expansion) |
+| Cytoplasm zones | **3 zones** → collapsing to 2 (eero_wifi merges into house2 post-bridge) |
 | fieldGate | **OFFLINE** — DDR3 NUC, dead CMOS |
 
 ---
@@ -124,10 +125,26 @@ All Omada-side devices and flockGate are still on the public relay. Fix remotely
 | **flockGate (WAN)** | SSH hop through golgi | `sovereign-relay-push.sh wan` |
 | **WiFi clients (Eero)** | Use existing public relay connection to push sovereign config | Manual RustDesk session → run config command |
 
-**Key insight**: Omada is L2 — it doesn't block anything. sporeGate can SSH directly to
-any wired device. The public relay is a bootstrap path: use it to eliminate itself.
+**Key insight**: The sovereign relay IS the migration tool. Any gate currently on the public
+relay is already reachable — connect via public, push sovereign config, gate switches over.
+This same path onboards NEW gates: plug in → get DHCP → public relay bootstraps → sovereign.
+No physical colocation needed. The relay handles the swap.
 
 Script: `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|all]`
+
+### Relay Migration Pattern (zero physical access)
+
+```
+1. New/existing gate on public RustDesk relay (reachable remotely)
+2. Connect via public relay session (RustDesk desktop)
+3. Run: pkexec rustdesk --config "<sovereign-config-string>"
+4. Gate switches to sovereign relay → now in our mesh
+5. Gate is SSH-accessible from sporeGate (same L2)
+6. Deploy NUCLEUS, push configs, run preflight
+```
+
+This works for: Omada-side devices still on public, flockGate (WAN), future gates.
+The public relay is a staging area. Gates graduate to sovereign. No typing on keyboards.
 
 ---
 
