@@ -164,6 +164,13 @@ curl -kI http://192.168.0.1 2>&1 | head -5  # some Omada default
 - MAC: EC-75-0C-4C-98-08
 - Device Key: 1E73-A4FF-F547-8EC5-8000
 
+**Omada SDN Controller** (installed on sporeGate):
+- URL: `https://192.168.4.1:8043`
+- Admin: `ecoPrimal`
+- Email: `ecoPrimal@pm.me`
+- Password: `c@^zd1.mr4K@7tas`
+- Cloud Access: **OFF** (sovereign, local-only)
+
 ### ATT BGW320-500 (when ready to eliminate double-NAT)
 
 ```bash
