@@ -234,15 +234,19 @@ sudo apt install -y openssh-server
 | eastGate SSH | ✅ Installed, sporeGate key authorized |
 | Omada VLAN audit | ✅ Flat L2 confirmed, multi-VLAN supported |
 
-## Active Operator Work (1-by-1 via RustDesk from northGate)
+## Relay Migration Progress
 
-Operator connects to each house2 gate via public RustDesk relay from northGate,
-pushes sovereign config. sporeGate overwatch monitors and enrolls each gate after migration.
-
-| Gate | Status | Notes |
-|------|--------|-------|
-| (house2 devices from Omada scan) | In progress | Operator migrating 1-by-1 |
-| flockGate (WAN) | Pending | Same pattern or SSH via golgi |
+| Gate | Relay Status | Zone | Notes |
+|------|-------------|------|-------|
+| **eastGate** | ✅ Sovereign | backbone (CRS310) | SSH live, sporeGate key authorized |
+| **sporeGate** | ✅ Sovereign | backbone (CRS310) | Plasma membrane, 13/13 primals |
+| **northGate** | ✅ Sovereign | backbone (CRS310) | Windows/5090, hobby, P3 mesh node |
+| **ironGate** | ✅ Sovereign | TBD | projectNUCLEUS/ABG |
+| **flockGate** | ✅ Sovereign | WAN | Offsite, now on sovereign relay |
+| **strandGate** | ❌ Public | house2 (Omada) | Operator: RustDesk in, push config |
+| **southGate** | ❌ Public | house2 (Omada) | Operator: RustDesk in, push config |
+| **swiftGate** | ❌ Public | Eero WiFi (house2) | Operator: RustDesk in, push config |
+| **fieldGate** | ⬛ Offline | house2 (Omada) | Dead CMOS, hardware repair |
 
 ## Remaining (low priority, when convenient)
 
