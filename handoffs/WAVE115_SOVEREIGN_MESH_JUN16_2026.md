@@ -12,23 +12,45 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 ---
 
-## Live Systems (agents always working)
+## Teams & Systems
 
-| System | IDE | Local Teams | Focus |
-|--------|-----|-------------|-------|
-| **eastGate** | Cursor (this) | overwatch + primalSpring + NUCLEUS | Validate ecosystem, evolve primalSpring, run local primals |
-| **sporeGate** | Cursor on NUC | cellMembrane IDE + LAN hardware | Code evolution, VPS mgmt, LAN routing, cascade, depot |
-| **golgi** | managed by sporeGate SSH | — | Forgejo, relay, mesh hub (13/13 alive) |
-| **pepti** | managed by sporeGate SSH | — | Build authority, depot generation |
+### eastGate — primalSpring Evolution + NUCLEUS (this IDE)
 
-## Offline / Pending (not blocking)
+| Focus | Detail |
+|-------|--------|
+| **primalSpring** | Validation scenarios, evolution modules, genetics compliance |
+| **NUCLEUS** | Local 13/13 primals, atomic model tests, gate readiness |
+| **Overwatch** | Cascade review, cross-team coordination, FRAGO/blurb updates |
 
-| System | Status | Returns When |
-|--------|--------|--------------|
-| **fieldGate** | DDR3 NUC, dead CMOS, open-air surgery | Operator finishes hardware. Old-gen repurpose TBD. |
-| **northGate** | RustDesk reachable, NUCLEUS pending | sporeGate team deploys when ready |
-| **Omada** | Controller access pending | Operator provides password (soon) |
-| **flockGate** | WAN, on public relay | sporeGate migrates via SSH from golgi |
+### sporeGate Overwatch — Hardware, LAN, K-Derm Deployment (Cursor on NUC)
+
+| Focus | Detail |
+|-------|--------|
+| **Plasma membrane** | nftables from composition, NAT, DHCP, DNS, WireGuard overlay |
+| **LAN fabric** | CRS310, Omada SX3008F, TL-SG605S, Eero mesh management |
+| **Gate deployment** | `gate.preflight` → `sovereign-relay-push.sh` → NUCLEUS install |
+| **Hardware access** | Omada (admin/admin), ATT (access code), House 2 (Eero backhaul) |
+
+### cellMembrane Team — Code + VPS (Cursor on sporeGate, separate IDE)
+
+| Focus | Detail |
+|-------|--------|
+| **cellMembrane code** | firewall.rs, preflight, cascade, webhook, relay |
+| **VPS management** | golgi (Forgejo, relay), pepti (builds, depot) |
+| **Cascade pipeline** | Forgejo → GitHub sync, depot integrity, multi-arch harvest |
+| **Sovereignty shadows** | Evolve S1-S4 tracks toward full sovereign |
+
+### Infrastructure
+
+| System | Owner | Status |
+|--------|-------|--------|
+| **golgi** | cellMembrane team (SSH) | HEALTHY — 13/13, relay, Forgejo |
+| **pepti** | cellMembrane team (SSH) | Build authority, depot, both arches |
+| **northGate** | sporeGate overwatch | RustDesk reachable, NUCLEUS pending |
+| **House 2 gates** | sporeGate overwatch | ACCESSIBLE (Eero backhaul) |
+| **flockGate** | sporeGate overwatch | WAN, public relay → sovereign push pending |
+| **fieldGate** | — | OFFLINE (dead CMOS, hardware surgery) |
+| **Omada SX3008F** | sporeGate overwatch | **UNBLOCKED** — see access instructions below |
 
 ---
 
@@ -98,6 +120,38 @@ All Omada-side devices and flockGate are still on the public relay. Fix remotely
 any wired device. The public relay is a bootstrap path: use it to eliminate itself.
 
 Script: `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|all]`
+
+---
+
+## Omada Access (sporeGate Overwatch — UNBLOCKED)
+
+sporeGate IS the DHCP server. The Omada got a lease from you. Find it and log in:
+
+```bash
+# 1. Find Omada IP from your own DHCP leases (MAC: EC:75:0C:4C:98:08)
+cat /var/lib/misc/dnsmasq.leases | grep -i "ec:75:0c"
+# or scan:
+nmap -sn 192.168.4.0/24 | grep -B2 "EC:75:0C"
+
+# 2. Browse to it (likely 192.168.4.X)
+# Default credentials: admin / admin
+# Web UI: http://<omada-ip>
+
+# 3. Verify: no VLAN port isolation, all ports bridged (factory default)
+# 4. Optional: set static IP (e.g. 192.168.4.115) for predictability
+```
+
+**Full device specs**: `whitePaper/technical/HARDWARE_INVENTORY.md`
+(MAC, Device Key, S/N, default creds — all captured from sticker photos)
+
+### ATT BGW320-500 (when ready to eliminate double-NAT)
+
+```bash
+# Admin UI: http://192.168.1.254
+# Device Access Code: #283>#66<>
+# Goal: IP passthrough to sporeGate's enp1s0 MAC
+# This makes sporeGate the SOLE boundary (true plasma membrane)
+```
 
 ---
 
