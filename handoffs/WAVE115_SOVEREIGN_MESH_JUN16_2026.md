@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 13:45 EDT
+**Last review**: Jun 17 13:50 EDT (cascade review — overwatch)
 
 ---
 
@@ -32,19 +32,20 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 ---
 
-## Ecosystem Snapshot (Jun 17 09:45 EDT)
+## Ecosystem Snapshot (Jun 17 13:50 EDT — cascade review)
 
 | Metric | Value |
 |--------|-------|
 | Genetics | **11/11 ✅** all primals accept mito-beacon |
 | Depot x86_64 | **13/13** from HEAD (pepti Jun 16) |
 | Depot aarch64 | **13/13** (pepti Jun 15) |
-| VCS parity | **17/17** zero drift — both remotes synced |
-| cellMembrane | **495 tests**, zero lint, nftables gen, gate.preflight, async I/O sweep shipped |
+| VCS parity | **17/17** zero drift — both remotes synced (cascade confirmed) |
+| cellMembrane | **495 tests**, zero lint, nftables gen, gate.preflight, async I/O, preflight shipped |
 | golgi | **HEALTHY** — 13/13, relay ACTIVE, depot serving |
-| sporeGate | **13/13 ALIVE** — systemd persisted, cascade verified, VPS SSH confirmed |
-| eastGate | **LIVE** — 10G SFP+ to CRS310, primalSpring + overwatch |
+| sporeGate | **13/13 ALIVE** — K-Derm nftables deployed, cascade active, VPS SSH live |
+| eastGate | **LIVE** — 10G SFP+ validation node, primalSpring + overwatch |
 | northGate | RustDesk reachable — NUCLEUS deploy pending (sporeGate) |
+| House 2 | **ACCESSIBLE** — operator confirms gates reachable (Eero backhaul) |
 | fieldGate | **OFFLINE** — DDR3 NUC, dead CMOS, hardware surgery |
 
 ---
@@ -104,10 +105,11 @@ Script: `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|
 
 | Item | Blocker | Action When Ready |
 |------|---------|-------------------|
-| Omada controller audit | admin/admin (confirmed from sticker) — no blocker! | sporeGate: log in, verify no VLAN isolation |
-| Eero bridge mode | Eero app access | Collapse WiFi to 192.168.4.x (sporeGate DHCP for all) |
+| Omada controller audit | **UNBLOCKED** (admin/admin confirmed) | sporeGate: log in, verify no VLAN isolation |
+| Eero bridge mode | Operator has Eero app access | Collapse WiFi to 192.168.4.x (sporeGate DHCP for all) |
+| ATT IP passthrough | **UNBLOCKED** (Device Access Code available) | sporeGate: eliminate double-NAT |
+| House 2 gate enrollment | **UNBLOCKED** (operator confirms access) | sporeGate: sovereign-relay-push.sh + NUCLEUS deploy |
 | fieldGate | Dead CMOS, open-air NUC | Repurpose old-gen hardware when viable |
-| ATT IP passthrough | Gateway admin access (#283>#66<>) | sporeGate: eliminate double-NAT |
 | Additional NUCs | Operator acquires from various gens | Plug into CRS310, bootstrap |
 
 ---
