@@ -62,12 +62,12 @@ eastgate_client = { status = "✅ DONE", note = "Configured via GUI, hairpin NAT
 northgate_client = { status = "✅ DONE", note = "Configured, can reach sporeGate + eastGate" }
 fieldgate_client = { status = "TODO", note = "Gate offline — deploy when back up" }
 hairpin_nat = { status = "✅ DONE", note = "eno1→eno1 accept + LAN masquerade. Persisted to /etc/nftables.conf" }
-omada_towers_push = { status = "BLOCKED → SSH", note = "LAN gates behind Omada are reachable (L2 confirmed) but don't have openssh-server. Operator must enable SSH on northGate/fieldGate via RustDesk session first." }
-omada_mgmt_plane = { status = "INVESTIGATING", note = "Data plane WORKS (L2 forwarding confirmed). Management UI unreachable at .115 or 10.0.4.1 (nmap: no open TCP ports). Likely in 'SDN controller managed' mode. May need: factory reset to standalone, or install Omada SDN controller on sporeGate, or connect on mgmt VLAN." }
-eastgate_ssh = { status = "OPERATOR ACTION", note = "eastGate has no openssh-server. Operator runs: sudo apt install -y openssh-server. Unblocks sporeGate SSH immediately." }
-flockgate_wan_relay = { status = "READY → sporeGate", note = "Use existing public relay session to push sovereign config. Or SSH hop via golgi. sovereign-relay-push.sh wan" }
-eero_bridge = { status = "OPERATOR ACTION", note = "Eeros NAT to 10.0.7.x (confirmed by sporeGate scan). Bridge mode via Eero app collapses to flat 192.168.4.x. Operator has app." }
-membrane_remote_configure = { status = "SUPERSEDED", note = "gate.preflight + sovereign-relay-push.sh cover immediate need. membrane remote.configure evolves as Rust-native replacement." }
+eastgate_ssh = { status = "✅ DONE", note = "openssh-server installed Jun 17 15:43. sporeGate pubkey authorized. sporeGate can: ssh eastgate@192.168.4.244" }
+omada_mgmt_plane = { status = "HANDED OFF → sporeGate overwatch", note = "Data plane works. Mgmt UI unreachable (SDN mode). sporeGate team to install Omada SDN Controller (Java + .deb). Unblocks full house2 zone visibility." }
+omada_towers_push = { status = "AFTER OMADA SDN → sporeGate", note = "Once Omada controller reveals house2 devices, SSH push sovereign config. fieldGate offline (dead CMOS)." }
+northgate_sovereign = { status = "READY → operator", note = "northGate is on backbone (CRS310), Windows/5090. RustDesk works. Push sovereign config via existing public relay session. Hobby system — 5090 idle compute after NUCLEUS covalent proven." }
+flockgate_wan_relay = { status = "READY → sporeGate", note = "Use existing public relay session or SSH hop via golgi. sovereign-relay-push.sh wan" }
+eero_bridge = { status = "OPERATOR → after Omada solved", note = "Eero on Omada (house2). NAT to 10.0.7.x. Bridge mode via Eero app collapses to flat 192.168.4.x. Operator coaches after review." }
 lan_local_relay = { status = "P3-FUTURE", note = "Run hbbs on sporeGate for zero-WAN-latency LAN connections" }
 
 # ──────────────────────────────────────────────────────────────
@@ -83,27 +83,27 @@ Remaining: fieldGate + northGate units, and bootstrap robustness (code fix in ce
 
 [stream2.tasks]
 sporegate_units = { status = "✅ DONE", owner = "sporeGate", note = "13 systemd services + membrane-nucleus.target. Boot-persisted. Confirmed Jun 16." }
-fieldgate_units = { status = "TODO", owner = "sporeGate", note = "Same pattern once fieldGate is back online" }
-northgate_units = { status = "TODO", owner = "sporeGate", note = "After NUCLEUS deployment" }
-bootstrap_hang_fix = { status = "P1-TODO", owner = "cellMembrane IDE", note = "gate.bootstrap has no per-phase timeout. If depot.fetch or sandbox.validate hangs on unreachable WAN or stuck binary, blocks forever. Needs tokio::time::timeout wrapping per phase." }
+fieldgate_units = { status = "BLOCKED", owner = "sporeGate", note = "fieldGate offline (dead CMOS). Same pattern when hardware returns." }
+northgate_units = { status = "DEFERRED", owner = "operator/northGate agent", note = "northGate is Windows hobby system. NUCLEUS when covalent deployments proven on Linux gates first." }
+bootstrap_hang_fix = { status = "✅ DONE", owner = "cellMembrane IDE", note = "Per-phase tokio::time::timeout (120s) shipped in ea18d6d. gate.bootstrap split into nucleus.rs + mesh.rs." }
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 3: northGate NUCLEUS Deployment
 # ──────────────────────────────────────────────────────────────
 
 [stream3]
-id = "NORTHGATE-NUCLEUS"
-owner = "cellMembrane/sporeGate"
-priority = "P2"
-description = """northGate is the last LAN gate needing NUCLEUS.
-Gaming/remote-in node. Deploy via same pattern as fieldGate/sporeGate."""
+id = "NORTHGATE-MESH-NODE"
+owner = "operator + northGate agent"
+priority = "P3"
+description = """northGate is operator's hobby system (Windows, RTX 5090). Stays personal.
+Becomes a mesh node for idle GPU compute once NUCLEUS covalent deploys are proven on Linux gates.
+Same pattern as any Steam gaming computer joining the sovereign mesh when idle."""
 
 [stream3.tasks]
-ssh_access = { status = "TODO", note = "Verify SSH from eastGate/sporeGate" }
-membrane_install = { status = "TODO", note = "Copy binary or fetch from depot" }
-depot_fetch = { status = "TODO", note = "13/13 x86_64 binaries" }
-primal_start = { status = "TODO", note = "Start all 13, verify gate.status 13/13" }
-mesh_init = { status = "TODO", note = "node_id=northGate, hub=157.230.3.183:7700" }
+sovereign_relay = { status = "READY", note = "Push sovereign RustDesk config via existing public relay session. Operator does this." }
+windows_ssh = { status = "TODO", note = "Windows OpenSSH Server via Settings → Optional Features. Enables remote management." }
+nucleus_proof = { status = "BLOCKED", note = "Prove covalent NUCLEUS on Linux gates (sporeGate, eastGate) first. Then port patterns to Windows." }
+gpu_idle_compute = { status = "FUTURE", note = "5090 available for toadStool/barraCuda workloads when NUCLEUS Windows port exists." }
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 4: projectNUCLEUS / ABG Access (ironGate)
