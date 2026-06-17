@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 07:44 EDT
+**Last review**: Jun 17 09:30 EDT (cellMembrane deep-debt evolution complete)
 
 ---
 
@@ -102,14 +102,14 @@ Eeros likely NAT WiFi clients to separate subnet.
 
 #### P1: Bootstrap & Depot Fixes
 
-- [ ] Fix `gate.bootstrap` hang — per-phase `tokio::time::timeout` wrapping (mesh has retry loop but other phases have none)
-- [ ] `depot.integrity`: create `membrane depot.integrity` command to generate checksums.toml from depot binaries
+- [x] Fix `gate.bootstrap` hang — per-phase `tokio::time::timeout(120s)` wrapping ALL phases (permissions, identity, install, nucleus, mobility, mesh, deployment)
+- [x] `depot.integrity`: `membrane depot.integrity` command SHIPPED — generates/verifies checksums.toml (BLAKE3) for all depot binaries. IntegrityReport + IntegrityMismatch types. 4 new tests.
 - [ ] `plasmid.harvest` multi-arch: flag for cross-compile or multi-builder coordination (pepti=x86_64, need aarch64 path)
 - [ ] Consolidate golgi's 3 depot paths → single canonical (prerequisite for checksums)
 
 #### P2: Git Credential Seeding (AAR from sporeGate onboarding)
 
-- [ ] `gate.bootstrap` should detect missing git config and emit WARNING phase
+- [x] `gate.bootstrap` `identity.git` phase: detects missing `git config user.name`/`user.email` + `~/.ssh/id_ed25519`, emits WARNING with actionable message
 - [ ] pepti as credential depot: gates fetch identity config on enrollment
 - [ ] USB kit include gitconfig fragment for operator manual application
 
@@ -154,6 +154,27 @@ Eeros likely NAT WiFi clients to separate subnet.
 - [x] All files under 800 LOC, all `as` casts → try_from/millis_u64
 - [x] Zero-copy temporal layer (bf54650): Arc manifest, Cow defaults, pre-computed refs
 - [x] sporeGate Forgejo remote fixed (HTTPS → SSH, host key added)
+
+---
+
+## cellMembrane Code Evolution SHIPPED (Wave 113–115)
+
+| What | Detail |
+|------|--------|
+| bootstrap refactor | `gate/bootstrap.rs` 861L → 555L: `nucleus.rs` (228L), `mesh.rs` (138L) extracted |
+| spawn_blocking | All sync fs phases (permissions, identity, install, nucleus, mobility, deploy) moved to `spawn_blocking` via `blocking_phase` helper |
+| per-phase timeouts | 120s `tokio::time::timeout` on every bootstrap phase |
+| identity detection | `identity.git` phase detects missing git config + SSH key |
+| depot.integrity | `membrane depot.integrity` command: BLAKE3 checksums generate/verify |
+| safe casts | All `as` casts → `usize::try_from()` / `usize::from()` / `.to_le_bytes()[0]` |
+| zero .expect() | All production `.expect()` → proper error handling |
+| env-driven config | SSH user (`MEMBRANE_PROVISION_SSH_USER`), Caddy admin (`CADDY_ADMIN_ENDPOINT`), config/socket/install paths |
+| lint tightening | `option_if_let_else` promoted from allow → warn, all instances resolved |
+| zero-copy | `Arc<EcosystemManifest>` in cascade, `Cow<'static, str>` relay defaults, pre-computed remote refs |
+| SPDX headers | All .rs, .sh, .md, .service, .timer, .target files carry SPDX license identifier |
+| cargo-deny CI | `deny.toml` with ring ban + Forgejo CI job |
+| test expansion | 416 → 471 tests (nucleus, mesh, verify, service, types, resolve modules) |
+| dependency audit | All pure Rust except ring (via reqwest→rustls), feature-gated, tracked |
 
 ---
 
