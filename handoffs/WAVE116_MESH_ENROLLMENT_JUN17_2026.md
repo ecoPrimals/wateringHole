@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 18 10:22 EDT (flockGate LIVE on mesh at 72ms, fresh binary built, eastGate preflight complete)
+**Last review**: Jun 18 10:35 EDT (eastGate WG LIVE at .5, 4-node mesh, cascade 37/38 parity, NUCLEUS pending)
 
 ---
 
@@ -18,7 +18,7 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 | Gate | Relay | Zone | OS | SSH | NUCLEUS | WireGuard | Next Action |
 |------|-------|------|----|-----|---------|-----------|-------------|
 | **sporeGate** | ✅ Sovereign | backbone | Pop!_OS | ✅ | 13/13 | ✅ (10.13.37.2) | Reference gate — fully enrolled |
-| **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | — | ⏳ (10.13.37.5) | SSH key added, enroll.sh staged, needs sudo |
+| **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | — | ✅ (10.13.37.5) | **WG LIVE** — 3 peers reachable, NUCLEUS deploy next |
 | **northGate** | ✅ Sovereign | backbone | Windows | — | — | — | P3: hobby, SSH + NUCLEUS after Linux proven |
 | **ironGate** | ✅ Sovereign | TBD | TBD | — | — | — | SSH enable, identify hardware, assign team |
 | **flockGate** | ✅ Sovereign | WAN | Ubuntu 24.04 | ✅ | — | ✅ (10.13.37.6) | **LIVE on mesh** — 32ms to golgi, 72ms to sporeGate. NUCLEUS deploy next. |
