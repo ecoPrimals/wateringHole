@@ -66,7 +66,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 | Depot x86_64 | **13/13** from HEAD (pepti Jun 16) |
 | Depot aarch64 | **13/13** (pepti Jun 15) |
 | VCS parity | **17/17** zero drift — all remotes synced |
-| cellMembrane | **527 tests**, zero lint, async-first API, error module, hardcode elimination |
+| cellMembrane | **539 tests**, zero lint, async-first API, error module, hardcode elimination, error observability |
 | WireGuard mesh | **3/3 nodes LIVE** — golgi (10.13.37.1) ↔ sporeGate (.2) ↔ pepti (.4) |
 | golgi | **HEALTHY** — 13/13, relay, Forgejo, WireGuard hub |
 | pepti | **HEALTHY** — build authority, WireGuard peer, depot |
@@ -267,6 +267,14 @@ sudo apt install -y openssh-server
 - [x] FAMILY_SEED + secrets installed
 - [x] Mesh connected (1 peer reachable: golgiBody)
 - [x] HPC characterization document filed
+
+### Shipped (cellMembrane IDE Jun 18 07:55)
+
+- [x] Error observability: 30+ silent `.ok()` / `let _ =` drops replaced with `tracing::warn!`/`debug!` across nucleus, bootstrap, fetch, harvest, build, sandbox, freshness, jsonrpc
+- [x] Async correctness: `atomic_write_async` tmp cleanup → `tokio::fs::remove_file`, context.sense/dispatch_potential/depot.integrity wrapped in `spawn_blocking` at dispatch boundary
+- [x] Clone/alloc: `format!("{e}")` → `e.to_string()`, minor clean
+- [x] +12 tests: impulse/sync (3) + plasmid/toolchain (8 including ELF validation, NDK, clone) + impulse policy → **539 tests**
+- [x] Zero clippy (pedantic+nursery), zero fmt, zero doc warnings
 
 ### Shipped (cellMembrane IDE Jun 17 15:10)
 
