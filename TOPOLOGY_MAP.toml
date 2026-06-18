@@ -10,13 +10,14 @@
 # Last updated: 2026-06-02 (Wave 68)
 
 [meta]
-version = "4.0.0"
-wave = 115
+version = "5.0.0"
+wave = 116
 measured_by = "manual + discovery.peers (planned)"
-last_updated = "2026-06-17"
+last_updated = "2026-06-18"
 wan_model = "single_exit_star"
-site_topology = "star_with_10g_backbone"
+site_topology = "triangle_3hub_backbone"
 neighborhood = "Old Everett, Lansing MI"
+hardware_philosophy = "heterogeneous_open"
 
 # ═══════════════════════════════════════════════════════════════
 # Cytoplasm Zones — L2 switching domains within the plasma membrane
@@ -26,12 +27,20 @@ neighborhood = "Old Everett, Lansing MI"
 # connected by backbone links. Each zone is defined by its hub device.
 # Gates know which zone they're in and what bandwidth/latency to expect.
 #
-# Hierarchy:
+# Three-hub triangle topology (target):
 #   ATT BGW320 (WAN boundary, not ours)
 #       → sporeGate (plasma membrane: NAT/DHCP/DNS/nftables)
-#           → CRS310 (hub 1: L2 backbone)
-#               → Omada SX3008F (hub 2: L2 extension via 10G AOC)
-#                   → TL-SG605S-M2 (2.5G expansion off Omada)
+#           → CRS310 (hub 1: L2 backbone, house 1)
+#               ├── 80m AOC → Omada SX3008F (hub 2: L2 extension, house 2)
+#               │                └── TL-SG605S-M2 (2.5G expansion)
+#               │                └── GL.iNet Flint 2 (OpenWrt WiFi AP, ordered)
+#               └── Cat6a → garage switch (hub 3: future compute + outdoor WiFi)
+#                            └── leg C back to hub 2 (triangle closure)
+#
+# Hardware philosophy: heterogeneous open. MikroTik (RouterOS), TP-Link
+# (standalone L2), GL.iNet (OpenWrt), ATT (proprietary WAN). No single
+# vendor dependency. Diversity forces the primal abstraction to be robust.
+# Cloud management planes (Eero, Omada SDN controller) are eliminated.
 
 [cytoplasm.zones.backbone]
 hub_device = "MikroTik CRS310-1G-5S-4S+IN"
@@ -40,16 +49,19 @@ hub_mac = "c8:7f:54:xx:xx:xx"
 max_speed_mbps = 10000
 site = "house1"
 ports = [
-    "sfp+1 → Omada SX3008F (10G trunk, 80m AOC)",
+    "sfp+1 → Omada SX3008F (10G trunk, 80m AOC to hub 2)",
     "sfp+2 → eastGate (10G compute)",
     "etherX → northGate (Win/5090, 2.5G)",
+    "etherY → Eero 6 (Cat workaround, temporary — bypasses hub 2)",
     "ether8 ← sporeGate eno1 (2.5G uplink from plasma membrane)",
 ]
 gates = ["sporeGate", "eastGate", "northGate"]
+future_leg = "Cat6a to garage (hub 3, leg A of triangle)"
 
 [cytoplasm.zones.house2]
 hub_device = "TP-Link Omada SX3008F"
 hub_role = "extension"
+hub_mode = "standalone_l2"
 hub_mac_data = "c8:e3:06:c6:77:a1"
 hub_mac_mgmt = "c8:e3:06:c6:77:ad"
 hub_mgmt_ip = "10.0.4.1"
@@ -62,35 +74,115 @@ uplink_latency_ms = 0.5
 uplink_note = "80m active optical cable between adjacent 1920s lots (~20m physical distance)"
 ports = [
     "sfp+ ← CRS310 sfp+1 (10G trunk from backbone)",
-    "2.5G ports → compute towers, NUCs, fieldGate",
+    "sfp+ → TL-SG605S-M2 (2.5G expansion, compute towers)",
+    "2.5G ports → NUCs, fieldGate",
 ]
 expansion_switch = "TP-Link TL-SG605S-M2 (5-port 2.5G, off Omada)"
 gates = ["fieldGate"]
 pending_gates = ["marshGate (future site router)"]
-note = "northGate is on backbone (CRS310), NOT house2"
+future_leg = "Cat6a to garage (hub 3, leg C of triangle)"
+note = "Omada SDN controller STOPPED — standalone L2 only. Controller pushed config that broke port 8 connectivity. Switch runs fine unmanaged."
 
 [cytoplasm.zones.eero_wifi]
 hub_device = "Amazon Eero 6"
+hub_role = "wifi_nat"
+status = "workaround"
+site = "house2"
+uplink_zone = "backbone"
+uplink_type = "Cat direct from CRS310 (temporary, bypasses hub 2 entirely)"
+uplink_speed_mbps = 1000
+uplink_latency_ms = 1.0
+nat_subnet = "10.0.7.0/24"
+gates = []
+retiring = true
+replacement = "GL.iNet Flint 2 (GL-MT6000, OpenWrt, WiFi 6 AX6000, ordered)"
+note = "Eero bricked from bridge mode toggle, factory-reset needed. Currently on Cat workaround direct to CRS310. Cloud-dependent, not sovereign. Being replaced by OpenWrt AP."
+
+[cytoplasm.zones.house2_wifi]
+hub_device = "GL.iNet Flint 2 (GL-MT6000)"
 hub_role = "wifi_bridge"
-status = "bridged"
+status = "ordered"
 site = "house2"
 uplink_zone = "house2"
-uplink_type = "ethernet off TL-SG605S-M2 (via Omada port 8)"
+uplink_type = "ethernet off TL-SG605S-M2"
 uplink_speed_mbps = 2500
-uplink_latency_ms = 3.0
+firmware = "OpenWrt"
+wifi_standard = "WiFi 6 AX6000"
+sovereign = true
+ssh_access = true
+nat_mode = "bridge"
 gates = []
-note = "Bridge mode ACTIVE (Jun 17 18:30). WiFi clients get 192.168.4.x from sporeGate DHCP. No more 10.0.7.x NAT."
+note = "Replaces Eero. Pure AP bridge mode — clients on 192.168.4.x, no double-NAT. SSH/root from day one. Can also run WireGuard."
+
+# ═══════════════════════════════════════════════════════════════
+# Hub 3 — Garage (planned)
+# ═══════════════════════════════════════════════════════════════
+
+[cytoplasm.zones.garage]
+hub_device = "TBD (small switch, MikroTik or OpenWrt)"
+hub_role = "compute_and_wifi"
+status = "planned"
+site = "garage"
+uplink_zone = "backbone"
+uplink_type = "Cat6a from CRS310 (leg A of triangle)"
+uplink_speed_mbps = 2500
+wifi_device = "TBD (outdoor AP or OpenWrt router)"
+gates = []
+note = "Garage between houses 1 and 2. Old wiring, needs insulation. Compute heat keeps above freezing in winter. Triangle leg C to house2 closes redundant backbone."
 
 [sites.house1]
 address = "4422 Southgate Ave, Lansing MI 48910"
 description = "Corner lot, 1920 build. ATT fiber drop, CRS310, sporeGate router."
 role = "primary_periplasm"
+wifi = "ATT BGW320 built-in (not sovereign, evaluate replacement with OpenWrt AP)"
 
 [sites.house2]
 address = "641 Samantha Ave, Lansing MI 48910"
 description = "Adjacent west of House 1. 1920 build. Omada switch, compute towers."
 role = "compute_farm"
 link_to_house1 = "80m AOC (10G SFP+), ~20m physical distance (adjacent lots)"
+wifi = "GL.iNet Flint 2 (ordered, replaces Eero)"
+
+[sites.garage]
+address = "between 4422 Southgate and 641 Samantha"
+description = "Detached garage between both houses. Old wiring, uninsulated. Future hub 3."
+role = "compute_node"
+status = "planned"
+link_to_house1 = "Cat6a (leg A, ~15-25m)"
+link_to_house2 = "Cat6a (leg C, ~10-20m)"
+wifi = "TBD outdoor AP (covers yard + both houses)"
+note = "Triangle closure. Compute NUCs self-heat in winter. Wiring/insulation upgrade needed first."
+
+# ═══════════════════════════════════════════════════════════════
+# Backbone Triangle — redundant inter-site links
+# ═══════════════════════════════════════════════════════════════
+
+[backbone_triangle]
+description = "Three-hub mesh with redundant paths. Any single leg failure routes through the other two."
+
+[backbone_triangle.leg_a]
+from = "house1"
+to = "garage"
+medium = "Cat6a (planned)"
+distance_m = 20
+speed_mbps = 2500
+status = "planned"
+
+[backbone_triangle.leg_b]
+from = "house1"
+to = "house2"
+medium = "80m AOC (10G SFP+)"
+distance_m = 80
+speed_mbps = 10000
+status = "live"
+
+[backbone_triangle.leg_c]
+from = "garage"
+to = "house2"
+medium = "Cat6a (planned)"
+distance_m = 15
+speed_mbps = 2500
+status = "planned"
 
 # ═══════════════════════════════════════════════════════════════
 # Network Segments
@@ -129,13 +221,14 @@ gateway = "192.168.1.254"
 note = "Bridged onto CRS310 via Eero. sporeGate proxy-ARPs for cross-subnet routing."
 gates = ["northGate", "blueGate"]
 
-[segments.eero_mesh]
-subnet = "192.168.1.0/24"
-transport = "eero_wifi_mesh"
-description = "Eero mesh WiFi — physically on CRS310 bridge, ATT DHCP range"
-bridge_to = "periplasm"
-bridge_latency_ms = 3.0
-note = "To be replaced by Omada APs on 192.168.4.0/22"
+[segments.eero_workaround]
+subnet = "10.0.7.0/24"
+transport = "eero_wifi_nat"
+description = "Eero 6 NAT — Cat direct from CRS310, temporary workaround"
+gateway = "10.0.7.1"
+uplink = "192.168.4.x (DHCP from sporeGate)"
+status = "workaround"
+note = "Eero on Cat from CRS310 (bypasses hub 2). Being replaced by GL.iNet Flint 2 in bridge mode on 192.168.4.x."
 
 [segments.vps_periplasm]
 transport = "digitalocean_vpc"
@@ -203,10 +296,15 @@ estimate_ms = 0.5
 confidence = "high"
 notes = "Same switch, Cat6"
 
-[latency.backbone_to_eero_mesh]
-estimate_ms = 3.0
+[latency.backbone_to_eero_workaround]
+estimate_ms = 1.0
 confidence = "medium"
-notes = "Cat6e between properties, Eero mesh bridge"
+notes = "Cat direct from CRS310 to Eero (bypasses hub 2). Higher latency than hub-routed path."
+
+[latency.backbone_to_garage]
+estimate_ms = 0.3
+confidence = "low"
+notes = "Cat6a direct, ~20m. Planned leg A."
 
 [latency.backbone_to_vps]
 estimate_ms = 30.0
