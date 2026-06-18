@@ -201,7 +201,7 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 |------|----------|--------|
 | Fix pepti SSH→forgejo | **P0** | Still needed — blocks fresh builds from reconciled HEAD |
 | eastGate 13/13 (biomeos + nestgate) | **P1** | 11/13 done. biomeos CLI path + nestgate JWT needed |
-| flockGate NUCLEUS deploy | **P1** | BLOCKED: SSH key authorization on flockGate needed |
+| flockGate NUCLEUS deploy | **P1** | ✅ UNBLOCKED: SSH key authorized (irongate@pop-os). Deploy via `ssh flockgate@10.13.37.6` |
 | ~~Cytoplasm zone types~~ | ~~P2~~ | ✅ SHIPPED — CytoplasmZone enum + struct, topology.resolve |
 | ~~Sovereignty ledger~~ | ~~P2~~ | ✅ SHIPPED — rootpulse_commit/verify round-trip |
 | webhook.rs → GitHub cascade | P2 | Provider abstraction shipped, wiring pending |
