@@ -268,6 +268,14 @@ sudo apt install -y openssh-server
 - [x] Mesh connected (1 peer reachable: golgiBody)
 - [x] HPC characterization document filed
 
+### Shipped (cellMembrane IDE Jun 18 08:30)
+
+- [x] Smart refactor: dispatch/data.rs 666L → 176L + 3 focused modules (plasmid_dispatch 301L, relay_dispatch 119L, content_dispatch 114L)
+- [x] Smart refactor: dispatch/gate.rs 707L → 473L + provision_dispatch 239L extracted
+- [x] Timeout centralization: 12 constants hoisted to `cellmembrane-types::service` (bootstrap phase, git op, API read/write, cloudflare, fetch, staleness, canary age, sandbox health, provision poll, page size)
+- [x] 7 call sites updated to use centralized timeout constants
+- [x] 539 tests, zero clippy (pedantic+nursery), zero fmt, zero doc warnings
+
 ### Shipped (cellMembrane IDE Jun 18 07:55)
 
 - [x] Error observability: 30+ silent `.ok()` / `let _ =` drops replaced with `tracing::warn!`/`debug!` across nucleus, bootstrap, fetch, harvest, build, sandbox, freshness, jsonrpc
