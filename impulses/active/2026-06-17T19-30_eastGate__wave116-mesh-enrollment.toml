@@ -54,11 +54,11 @@ SSH → preflight → membrane install → NUCLEUS 13/13 → systemd → WireGua
 sporeGate is the reference. Each gate gets the same treatment."""
 
 [stream1.tasks]
-eastgate_enroll = { status = "BLOCKED", note = "SSH key authorized. Probed: i9-12900K, 32GB, 10G. WG keys gen'd (.5). enroll.sh staged. BLOCKED on sudo password (operator)." }
+eastgate_enroll = { status = "✅ 11/13", note = "NUCLEUS deployed via user systemd (no sudo). 10 primals + songbird LIVE. Missing: biomeos (CLI path), nestgate (JWT). WG .5 LIVE." }
 irongate_enroll = { status = "TODO", note = "On sovereign relay. Need: identify OS via RustDesk, enable SSH, then pipeline." }
-flockgate_enroll = { status = "IN PROGRESS", note = "SSH enabled Jun 18. WG configured (.6), awaiting golgi peer add by sporeGate. Then NUCLEUS." }
+flockgate_enroll = { status = "IN PROGRESS", note = "SSH done, WG .6 LIVE (32ms golgi, 72ms sporeGate). NUCLEUS next. BLOCKED: SSH key not authorized for sporeGate on flockGate." }
 northgate_enroll = { status = "P3", note = "Windows/5090. Hobby system. Prove NUCLEUS on Linux first. Sovereign relay already done." }
-fresh_binary = { status = "✅ DONE", owner = "cellMembrane team", note = "Rebuilt Jun 18 from 11a7c68 on pepti+sporeGate. 539 tests. gate.preflight+firewall.generate WORKING. pepti still behind HEAD (SSH→forgejo fix needed)." }
+fresh_binary = { status = "✅ DONE", owner = "cellMembrane team", note = "620 tests. Type evolution sprint complete. topology.resolve, sovereignty_ledger, typed enums shipped." }
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 2: Remaining Relay Migration (operator + sporeGate)
@@ -89,9 +89,9 @@ description = """Expand WG mesh from 3 nodes to all enrolled gates.
 Hub topology: golgi as hub, sporeGate as site router, gates as spokes."""
 
 [stream3.tasks]
-eastgate_peer = { status = "IN PROGRESS", note = "golgi peer ADDED (10.13.37.5). Config staged at ~/enrollment/wg0.conf. Needs sudo to install+start." }
+eastgate_peer = { status = "✅ DONE", note = "10.13.37.5 LIVE. All 4 peers reachable (31ms golgi, 61ms sporeGate, 32ms pepti, 65ms flockGate)." }
 irongate_peer = { status = "TODO", note = "After SSH enabled. Assign TBD." }
-flockgate_peer = { status = "IN PROGRESS", note = "WG configured on flockGate (10.13.37.6). Awaiting golgi peer add. Direct to golgi hub." }
+flockgate_peer = { status = "✅ DONE", note = "10.13.37.6 LIVE. 32ms to golgi, 72ms to sporeGate. Handshake active, systemd persisted." }
 future_peers = { status = "FUTURE", note = "strand, south, swift after enrollment. northGate when Windows WG proven." }
 
 # ──────────────────────────────────────────────────────────────
@@ -106,11 +106,11 @@ description = """cellMembrane code evolution owned by sporeGate team.
 Fresh tooling, cytoplasm zones, cascade, VPS management."""
 
 [stream4.tasks]
-fresh_harvest = { status = "✅ DONE", note = "Built Jun 18. 539 tests. Deployed to sporeGate. pepti still behind HEAD (SSH→forgejo). Next: deploy to all gates after enrollment." }
-cytoplasm_zones = { status = "P2", note = "Implement CYTOPLASM_ZONES_SPEC.md types in envelope.rs. CytoplasmZone, SwitchHub, ZoneUplink, HubRole." }
-topology_resolve = { status = "P2", note = "membrane topology.resolve zone|latency|path dispatch commands." }
-webhook_cascade = { status = "P2", note = "Wire webhook.rs to push to GitHub. Bidirectional event-driven cascade." }
-omada_api_client = { status = "P3", note = "Rust client for Omada SDN controller API. Enables gate.discover via switch." }
+fresh_harvest = { status = "✅ DONE", note = "620 tests green. Type evolution sprint: typed enums, topology.resolve, sovereignty_ledger, webhook abstraction." }
+cytoplasm_zones = { status = "✅ DONE", note = "CytoplasmZone enum in envelope.rs + struct in topology.rs. ZoneStatus, BackboneLink, NetworkSegment shipped." }
+topology_resolve = { status = "✅ DONE", note = "topology module + topology.resolve command. TopologyMap, ResolvedTopology, AffinityTable implemented." }
+webhook_cascade = { status = "P2", note = "Wire webhook.rs to push to GitHub. Bidirectional event-driven cascade. Provider abstraction shipped." }
+omada_api_client = { status = "P3", note = "Rust client for Omada SDN controller API. Controller STOPPED but switch still useful for programmatic reads." }
 windows_port = { status = "P3", note = "NUCLEUS on Windows (northGate 5090). After Linux enrollment proven." }
 
 # ──────────────────────────────────────────────────────────────
@@ -125,7 +125,7 @@ description = """eastGate becomes a fully enrolled NUCLEUS gate alongside
 its primalSpring development role. Validate locally what sporeGate deploys remotely."""
 
 [stream5.tasks]
-nucleus_on_eastgate = { status = "TODO", note = "Deploy 13/13 primals on eastGate via sporeGate enrollment pipeline. Validates the process." }
+nucleus_on_eastgate = { status = "✅ 11/13", note = "User systemd deployed. 10 nucleus primals + songbird LIVE. Missing biomeos (CLI) + nestgate (JWT). No sudo needed." }
 primalspring_scenarios = { status = "ONGOING", note = "Continue validation scenarios, evolution modules, genetics compliance." }
 cascade_validation = { status = "ONGOING", note = "eastGate as independent validation node — confirm gate parity after each enrollment." }
 
@@ -144,8 +144,8 @@ description = """flockGate is the WAN proving ground. Triple role:
    without touching the plasma membrane (WG direct to golgi, not through sporeGate)"""
 
 [stream6.tasks]
-flockgate_ssh = { status = "TODO", owner = "sporeGate overwatch", note = "Enable SSH on flockGate. Add sporeGate pubkey." }
-flockgate_wg_peer = { status = "TODO", owner = "sporeGate overwatch", note = "WG peer direct to golgi hub (10.13.37.6). NOT through sporeGate. Tests periplasm layer." }
+flockgate_ssh = { status = "BLOCKED", owner = "operator", note = "SSH responds on WG but sporeGate key not authorized. flockGate firewall also filters port 22 on wg0. Operator must add key." }
+flockgate_wg_peer = { status = "✅ DONE", owner = "sporeGate overwatch", note = "WG .6 LIVE. 32ms to golgi. Direct hub spoke, not through sporeGate. Periplasm proven." }
 flockgate_vps_keys = { status = "TODO", owner = "sporeGate overwatch", note = "Add flockGate pubkey to golgi + pepti authorized_keys." }
 flockgate_nucleus = { status = "TODO", note = "Deploy 13/13 primals on flockGate. First WAN NUCLEUS gate. Proves non-LAN deployment." }
 flockgate_cascade = { status = "TODO", note = "Forgejo + GitHub push/pull from WAN. Validates outer membrane cascade path." }

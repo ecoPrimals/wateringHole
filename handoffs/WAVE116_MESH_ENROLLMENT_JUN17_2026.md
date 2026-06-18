@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 18 12:30 EDT (sporeGate overwatch: socket fix, nftables validated, flockGate SSH blocked — key needed)
+**Last review**: Jun 18 14:38 EDT (CONVERGING: 620 tests, topology types shipped, VCS parity restored, all teams active)
 
 ---
 
@@ -197,14 +197,16 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 
 ## Code Evolution Targets (sporeGate team)
 
-| Item | Priority | Unblocks |
-|------|----------|----------|
-| Fix pepti SSH→forgejo | **P0** | Fresh binary from HEAD on all gates |
-| NUCLEUS deploy to eastGate + flockGate | **P1** | Full enrollment (WG already live) |
-| Cytoplasm zone types (envelope.rs) | P2 | Zone-aware preflight + topology.resolve |
-| webhook.rs → GitHub cascade | P2 | Bidirectional event-driven VCS parity |
-| Omada API client | P3 | Programmatic switch management from membrane |
-| Windows NUCLEUS port | P3 | northGate idle compute |
+| Item | Priority | Status |
+|------|----------|--------|
+| Fix pepti SSH→forgejo | **P0** | Still needed — blocks fresh builds from reconciled HEAD |
+| eastGate 13/13 (biomeos + nestgate) | **P1** | 11/13 done. biomeos CLI path + nestgate JWT needed |
+| flockGate NUCLEUS deploy | **P1** | BLOCKED: SSH key authorization on flockGate needed |
+| ~~Cytoplasm zone types~~ | ~~P2~~ | ✅ SHIPPED — CytoplasmZone enum + struct, topology.resolve |
+| ~~Sovereignty ledger~~ | ~~P2~~ | ✅ SHIPPED — rootpulse_commit/verify round-trip |
+| webhook.rs → GitHub cascade | P2 | Provider abstraction shipped, wiring pending |
+| Omada API client | P3 | Controller STOPPED but switch readable |
+| Windows NUCLEUS port | P3 | northGate idle compute — after Linux proven |
 
 ---
 
@@ -217,7 +219,7 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 | Gates NUCLEUS-active | **2** — sporeGate (13/13), eastGate (11/13 user systemd) |
 | Gates WG-enrolled (NUCLEUS pending) | **1** — flockGate (.6, ready for deploy) |
 | WireGuard mesh nodes | **5 live** — golgi(.1), sporeGate(.2), pepti(.4), eastGate(.5), flockGate(.6) |
-| cellMembrane tests | **547**, zero warnings, zero clippy |
+| cellMembrane tests | **620**, zero warnings, zero clippy |
 | VCS parity | **ALL REPOS AT PARITY** — zero drift across origin + forgejo (fixed cellMembrane diverge) |
 | membrane tooling | gate.preflight, gate.bootstrap, firewall.generate, gate.status, gate.health — ALL WORKING |
 | Depot x86_64 | 13/13 (pepti behind HEAD — SSH→forgejo fix needed) |
