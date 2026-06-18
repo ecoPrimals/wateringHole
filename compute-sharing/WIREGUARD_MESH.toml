@@ -7,19 +7,19 @@
 # The mesh is hub-and-spoke with golgiBody as the relay hub for NAT traversal,
 # but supports direct peer connections when both endpoints have public IPs.
 #
-# Last updated: 2026-06-17 (Wave 115)
+# Last updated: 2026-06-18 (Wave 116)
 # Authority: sporeGate (routing) + bearDog (key management)
 
 [meta]
-version = "1.2.0"
-wave = 115
+version = "1.3.0"
+wave = 116
 overlay_subnet = "10.13.37.0/24"
 port = 51820
 key_management = "wg genkey (manual, pre-bearDog integration)"
-status = "LIVE — 4-node mesh: golgiBody ↔ sporeGate ↔ pepti ↔ flockGate, eastGate pending sudo"
-last_deployed = "2026-06-18T10:20:00-04:00"
-active_peers = 4
-pending_peers = 1
+status = "LIVE — 5-node mesh: golgiBody ↔ sporeGate ↔ pepti ↔ eastGate ↔ flockGate — all handshakes active"
+last_deployed = "2026-06-18T11:30:00-04:00"
+active_peers = 5
+pending_peers = 0
 hub_forwarding = "enabled (sysctl net.ipv4.ip_forward=1 on golgiBody)"
 
 # ═══════════════════════════════════════════════════════════════
@@ -67,7 +67,7 @@ note = "House 2 router. When deployed, carves 192.168.5.0/24 from the current /2
 
 [peers.eastgate]
 role = "compute_node"
-status = "PENDING_CONNECT"
+status = "LIVE"
 endpoint = "dynamic (LAN — behind sporeGate NAT)"
 overlay_ip = "10.13.37.5/24"
 public_ip = "none (LAN)"
@@ -75,7 +75,7 @@ public_key = "V8Xy1uRFArEz8DseZhdAQmNdOr2TJ3Q/OhfilK3mDlA="
 nat_traversal = "persistent keepalive to golgiBody (25s)"
 allowed_ips = ["10.13.37.5/32"]
 keepalive_seconds = 25
-status_detail = "golgi peer added, enrollment script staged at ~/enrollment/enroll.sh, needs sudo"
+status_detail = "LIVE — 11/13 NUCLEUS via user-level systemd, WG handshake active, golgi peered"
 note = "Primary compute gate. i9-12900K, 32GB, 10G SFP+. CRS310 backbone zone."
 
 [peers.peptidoglycan]
