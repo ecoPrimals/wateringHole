@@ -17,11 +17,13 @@ owner = "sporeGate overwatch (enrollment), cellMembrane (code), eastGate (valida
 
 note = """
 Wave 116 objective: Every online gate at sporeGate parity.
-THREE TEAMS:
+FOUR TEAMS:
 - eastGate (this IDE): primalSpring evolution, NUCLEUS on eastGate, overwatch validation
 - sporeGate Overwatch (NUC): Gate enrollment pipeline, WireGuard expansion, Omada mgmt,
   remaining relay migration. Dedicated topology exploration subteam.
 - cellMembrane Team (separate IDE on sporeGate): Code evolution, VPS, cascade, typed models
+- flockGate Team (WAN): sporePrint content modernization, WAN NUCLEUS proving ground,
+  K-Derm periplasm/outer-membrane validation. Only gate that tests all layers end-to-end.
 OPERATOR: Connects via northGate RustDesk to migrate remaining gates (strandGate, southGate, swiftGate)"""
 
 # ──────────────────────────────────────────────────────────────
@@ -126,6 +128,30 @@ its primalSpring development role. Validate locally what sporeGate deploys remot
 nucleus_on_eastgate = { status = "TODO", note = "Deploy 13/13 primals on eastGate via sporeGate enrollment pipeline. Validates the process." }
 primalspring_scenarios = { status = "ONGOING", note = "Continue validation scenarios, evolution modules, genetics compliance." }
 cascade_validation = { status = "ONGOING", note = "eastGate as independent validation node — confirm gate parity after each enrollment." }
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 6: flockGate — WAN NUCLEUS + K-Derm + sporePrint
+# ──────────────────────────────────────────────────────────────
+
+[stream6]
+id = "FLOCKGATE-WAN-PROVING"
+owner = "flockGate team"
+priority = "P1"
+description = """flockGate is the WAN proving ground. Triple role:
+1. sporePrint content team — modernize 222-page site, validate WAN cascade
+2. WAN NUCLEUS — first non-LAN gate with 13/13 primals
+3. K-Derm periplasm validator — only gate that exercises outer membrane + periplasm
+   without touching the plasma membrane (WG direct to golgi, not through sporeGate)"""
+
+[stream6.tasks]
+flockgate_ssh = { status = "TODO", owner = "sporeGate overwatch", note = "Enable SSH on flockGate. Add sporeGate pubkey." }
+flockgate_wg_peer = { status = "TODO", owner = "sporeGate overwatch", note = "WG peer direct to golgi hub (10.13.37.6). NOT through sporeGate. Tests periplasm layer." }
+flockgate_vps_keys = { status = "TODO", owner = "sporeGate overwatch", note = "Add flockGate pubkey to golgi + pepti authorized_keys." }
+flockgate_nucleus = { status = "TODO", note = "Deploy 13/13 primals on flockGate. First WAN NUCLEUS gate. Proves non-LAN deployment." }
+flockgate_cascade = { status = "TODO", note = "Forgejo + GitHub push/pull from WAN. Validates outer membrane cascade path." }
+sporeprint_p0 = { status = "TODO", note = "Run spore-validate refresh + check-links. Fix sitemap count (222). Update config.toml dates." }
+sporeprint_p1 = { status = "TODO", note = "Glossary refresh (K-Derm terms), catalog updates, SOVEREIGN_DEPLOYMENT.md rewrite." }
+sporeprint_p2 = { status = "FUTURE", note = "New pages: K-Derm public, gate enrollment, covalent mesh." }
 
 # ──────────────────────────────────────────────────────────────
 # CARRY (Wave 117+)

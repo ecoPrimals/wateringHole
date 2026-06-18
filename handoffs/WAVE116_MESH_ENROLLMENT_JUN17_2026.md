@@ -61,6 +61,17 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 | **Sovereignty shadows** | Evolve S1-S4 tracks |
 | **Multi-gate support** | Ensure NUCLEUS deploy works identically on all Linux gates |
 
+### flockGate Team — sporePrint + WAN NUCLEUS + K-Derm Periplasm (WAN, offsite)
+
+*The WAN proving ground. Only gate that validates ALL K-Derm layers end-to-end.*
+
+| Focus | Detail |
+|-------|--------|
+| **sporePrint** | Modernize 222-page site (stale since March). P0: refresh metrics. P1: K-Derm + glossary. |
+| **WAN NUCLEUS** | First non-LAN NUCLEUS gate. 13/13 primals across real internet latency. |
+| **K-Derm periplasm** | WG direct to golgi (bypasses plasma membrane). Tests outer membrane + periplasm. |
+| **Cascade validation** | Push to Forgejo/GitHub from WAN. Proves cascade works without LAN. |
+
 ---
 
 ## Enrollment Pipeline (sporeGate overwatch executes)
