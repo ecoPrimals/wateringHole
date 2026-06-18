@@ -54,11 +54,11 @@ SSH → preflight → membrane install → NUCLEUS 13/13 → systemd → WireGua
 sporeGate is the reference. Each gate gets the same treatment."""
 
 [stream1.tasks]
-eastgate_enroll = { status = "IN PROGRESS", note = "SSH live. Next: preflight, NUCLEUS deploy, WG peer (10.13.37.3?), cascade connect." }
-irongate_enroll = { status = "TODO", note = "On sovereign relay. Need: identify OS/hardware, enable SSH, then full pipeline." }
-flockgate_enroll = { status = "TODO", note = "WAN gate on sovereign relay. SSH enable, WG peer via golgi (site-to-site)." }
+eastgate_enroll = { status = "BLOCKED", note = "SSH key authorized. Probed: i9-12900K, 32GB, 10G. WG keys gen'd (.5). enroll.sh staged. BLOCKED on sudo password (operator)." }
+irongate_enroll = { status = "TODO", note = "On sovereign relay. Need: identify OS via RustDesk, enable SSH, then pipeline." }
+flockgate_enroll = { status = "IN PROGRESS", note = "SSH enabled Jun 18. WG configured (.6), awaiting golgi peer add by sporeGate. Then NUCLEUS." }
 northgate_enroll = { status = "P3", note = "Windows/5090. Hobby system. Prove NUCLEUS on Linux first. Sovereign relay already done." }
-fresh_binary = { status = "P1", owner = "cellMembrane team", note = "Harvest fresh membrane from pepti. Current sporeGate binary is stale — needs gate.preflight, firewall.generate." }
+fresh_binary = { status = "✅ DONE", owner = "cellMembrane team", note = "Rebuilt Jun 18 from 11a7c68 on pepti+sporeGate. 539 tests. gate.preflight+firewall.generate WORKING. pepti still behind HEAD (SSH→forgejo fix needed)." }
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 2: Remaining Relay Migration (operator + sporeGate)
@@ -89,9 +89,9 @@ description = """Expand WG mesh from 3 nodes to all enrolled gates.
 Hub topology: golgi as hub, sporeGate as site router, gates as spokes."""
 
 [stream3.tasks]
-eastgate_peer = { status = "TODO", note = "Add eastGate as WG peer. Assign 10.13.37.3. Config via SSH." }
-irongate_peer = { status = "TODO", note = "After SSH enabled. Assign 10.13.37.5." }
-flockgate_peer = { status = "TODO", note = "WAN site-to-site. Direct to golgi hub (not through sporeGate). Assign 10.13.37.6." }
+eastgate_peer = { status = "IN PROGRESS", note = "golgi peer ADDED (10.13.37.5). Config staged at ~/enrollment/wg0.conf. Needs sudo to install+start." }
+irongate_peer = { status = "TODO", note = "After SSH enabled. Assign TBD." }
+flockgate_peer = { status = "IN PROGRESS", note = "WG configured on flockGate (10.13.37.6). Awaiting golgi peer add. Direct to golgi hub." }
 future_peers = { status = "FUTURE", note = "strand, south, swift after enrollment. northGate when Windows WG proven." }
 
 # ──────────────────────────────────────────────────────────────
@@ -106,7 +106,7 @@ description = """Support multi-gate enrollment with fresh tooling.
 Harvest binary, implement cytoplasm zones, evolve cascade."""
 
 [stream4.tasks]
-fresh_harvest = { status = "P1", note = "Build fresh membrane on pepti, deploy to all gates. Unblocks preflight/firewall commands." }
+fresh_harvest = { status = "✅ DONE", note = "Built Jun 18. 539 tests. Deployed to sporeGate. pepti still behind HEAD (SSH→forgejo). Next: deploy to all gates after enrollment." }
 cytoplasm_zones = { status = "P2", note = "Implement CYTOPLASM_ZONES_SPEC.md types in envelope.rs. CytoplasmZone, SwitchHub, ZoneUplink, HubRole." }
 topology_resolve = { status = "P2", note = "membrane topology.resolve zone|latency|path dispatch commands." }
 webhook_cascade = { status = "P2", note = "Wire webhook.rs to push to GitHub. Bidirectional event-driven cascade." }
