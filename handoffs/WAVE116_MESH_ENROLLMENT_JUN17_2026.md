@@ -21,7 +21,7 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 | **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | — | ⏳ (10.13.37.5) | SSH key added, enroll.sh staged, needs sudo |
 | **northGate** | ✅ Sovereign | backbone | Windows | — | — | — | P3: hobby, SSH + NUCLEUS after Linux proven |
 | **ironGate** | ✅ Sovereign | TBD | TBD | — | — | — | SSH enable, identify hardware, assign team |
-| **flockGate** | ✅ Sovereign | WAN | Ubuntu 24.04 | ✅ | — | ✅ (10.13.37.6) | **LIVE on mesh** — 72ms RTT, golgi peer active. NUCLEUS deploy next. |
+| **flockGate** | ✅ Sovereign | WAN | Ubuntu 24.04 | ✅ | — | ✅ (10.13.37.6) | **LIVE on mesh** — 32ms to golgi, 72ms to sporeGate. NUCLEUS deploy next. |
 | **strandGate** | ❌ Public | house2 (Omada) | TBD | — | — | — | Operator: push sovereign config |
 | **southGate** | ❌ Public | house2 (Omada) | TBD | — | — | — | Operator: push sovereign config |
 | **swiftGate** | ❌ Public | house2 (WiFi) | TBD | — | — | — | After Flint 2 live: push sovereign config |
@@ -94,7 +94,7 @@ For each gate that's on sovereign relay:
 |------|-------------|-------------------|----------|---------|
 | **eastGate** | ✅ Key authorized | ✅ Probed (i9-12900K, 32GB, 10G) | `enroll.sh` staged at `~/enrollment/` | sudo password (operator) |
 | **ironGate** | Pending | — | After SSH | OS identification via RustDesk |
-| **flockGate** | ✅ Done | — | WG configured, awaiting golgi peer add | golgi peer add (sporeGate) |
+| **flockGate** | ✅ Done | ✅ WG live (32ms golgi, 62ms sporeGate) | NUCLEUS deploy next | — |
 
 ---
 
@@ -183,7 +183,7 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 | Gates on sovereign relay | **5/9** (+ 3 pending, 1 offline) |
 | Gates fully enrolled | **1/9** (sporeGate) |
 | Gates in enrollment | **2** (eastGate: enroll.sh staged, flockGate: WG configured) |
-| WireGuard mesh nodes | **3 live** + 2 pending (golgi, sporeGate, pepti live; eastGate .5 + flockGate .6 pending connect) |
+| WireGuard mesh nodes | **4 live** + 1 pending (golgi, sporeGate, pepti, flockGate live; eastGate .5 pending) |
 | cellMembrane tests | **539**, zero warnings, zero clippy |
 | membrane tooling | gate.preflight, gate.bootstrap, firewall.generate, gate.status, gate.health — ALL WORKING |
 | Depot x86_64 | 13/13 (pepti behind HEAD — SSH→forgejo fix needed) |

@@ -102,9 +102,10 @@ public_key = "kP9qOx3E7QDGfnNfuRyHE0yhPbzUBPnjOlJ1T5Lgoh4="
 nat_traversal = "persistent keepalive to golgiBody (25s)"
 allowed_ips = ["10.13.37.6/32"]
 keepalive_seconds = 25
+measured_latency_to_golgi_ms = 32
 measured_latency_to_sporegate_ms = 72
 status_detail = "LIVE — handshake active, systemd persisted, golgi peer added Jun 18"
-note = "WAN gate. Site-to-site via golgiBody relay. SSH enabled Jun 18. First WAN node on mesh."
+note = "WAN gate (192.168.60.0/24). Site-to-site via golgiBody relay. SSH enabled Jun 18. First WAN node on mesh. Tunnel verified Jun 18 10:20 EDT."
 
 [peers.neighborhood_node]
 role = "expansion_site"
