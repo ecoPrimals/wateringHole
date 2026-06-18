@@ -94,7 +94,7 @@ note = "Build authority. Mesh relay through golgiBody. systemd persisted."
 
 [peers.flockgate]
 role = "wan_gate"
-status = "PENDING_PEER_ADD"
+status = "LIVE"
 endpoint = "dynamic (behind NAT — keepalive punches through)"
 overlay_ip = "10.13.37.6/24"
 public_ip = "none (behind NAT)"
@@ -102,8 +102,9 @@ public_key = "kP9qOx3E7QDGfnNfuRyHE0yhPbzUBPnjOlJ1T5Lgoh4="
 nat_traversal = "persistent keepalive to golgiBody (25s)"
 allowed_ips = ["10.13.37.6/32"]
 keepalive_seconds = 25
-status_detail = "wg0 up, systemd persisted, awaiting golgi peer add"
-note = "WAN gate (192.168.60.0/24). Site-to-site via golgiBody relay. SSH enabled Jun 18."
+measured_latency_to_golgi_ms = 32
+measured_latency_to_sporegate_ms = 62
+note = "WAN gate (192.168.60.0/24). Site-to-site via golgiBody relay. SSH enabled Jun 18. Tunnel verified Jun 18 10:20 EDT."
 
 [peers.neighborhood_node]
 role = "expansion_site"
