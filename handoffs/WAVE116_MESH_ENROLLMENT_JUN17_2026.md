@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 18 10:44 EDT (REVALIDATED: 5-node WG mesh LIVE, all peers reachable from eastGate, 547 tests, zero drift)
+**Last review**: Jun 18 11:18 EDT (eastGate NUCLEUS 11/13 deployed via user systemd, no sudo needed)
 
 ---
 
@@ -18,7 +18,7 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 | Gate | Relay | Zone | OS | SSH | NUCLEUS | WireGuard | Next Action |
 |------|-------|------|----|-----|---------|-----------|-------------|
 | **sporeGate** | ✅ Sovereign | backbone | Pop!_OS | ✅ | 13/13 | ✅ (10.13.37.2) | Reference gate — fully enrolled |
-| **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | — | ✅ (10.13.37.5) | **WG LIVE** — 4 peers confirmed (31ms golgi, 61ms sporeGate, 32ms pepti, 65ms flockGate). NUCLEUS next. |
+| **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | 11/13 | ✅ (10.13.37.5) | **NUCLEUS LIVE** — 11/13 primals, 25 sockets, user systemd. biomeos+nestgate need fixes. |
 | **northGate** | ✅ Sovereign | backbone | Windows | — | — | — | P3: hobby, SSH + NUCLEUS after Linux proven |
 | **ironGate** | ✅ Sovereign | TBD | TBD | — | — | — | SSH enable, identify hardware, assign team |
 | **flockGate** | ✅ Sovereign | WAN | Ubuntu 24.04 | ✅ | — | ✅ (10.13.37.6) | **LIVE on mesh** — 32ms to golgi, 72ms to sporeGate. NUCLEUS deploy next. |
