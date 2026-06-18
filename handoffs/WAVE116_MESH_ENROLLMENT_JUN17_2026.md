@@ -21,7 +21,7 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 | **eastGate** | ✅ Sovereign | backbone | Pop!_OS | ✅ | — | — | NUCLEUS deploy, WG peer |
 | **northGate** | ✅ Sovereign | backbone | Windows | — | — | — | P3: hobby, SSH + NUCLEUS after Linux proven |
 | **ironGate** | ✅ Sovereign | TBD | TBD | — | — | — | SSH enable, identify hardware, assign team |
-| **flockGate** | ✅ Sovereign | WAN | TBD | — | — | — | SSH enable, WG peer (site-to-site via golgi) |
+| **flockGate** | ✅ Sovereign | WAN | Ubuntu 24.04 | ✅ | — | ⏳ (10.13.37.6) | Awaiting golgi peer add, then NUCLEUS deploy |
 | **strandGate** | ❌ Public | house2 (Omada) | TBD | — | — | — | Operator: push sovereign config |
 | **southGate** | ❌ Public | house2 (Omada) | TBD | — | — | — | Operator: push sovereign config |
 | **swiftGate** | ❌ Public | house2 (WiFi) | TBD | — | — | — | After Flint 2 live: push sovereign config |
@@ -94,7 +94,7 @@ For each gate that's on sovereign relay:
 |------|-------------|----------|-------|
 | **eastGate** | ✅ Done | sporeGate executes | 10G compute, primalSpring host |
 | **ironGate** | Pending | After SSH | projectNUCLEUS/ABG, reassign when identified |
-| **flockGate** | Pending | After SSH | WAN site-to-site, WG through golgi |
+| **flockGate** | ✅ Done | WG up, awaiting golgi peer add | pubkey: `kP9qOx3E7QDGfnNfuRyHE0yhPbzUBPnjOlJ1T5Lgoh4=` |
 
 ---
 
