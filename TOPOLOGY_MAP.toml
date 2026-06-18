@@ -71,15 +71,16 @@ note = "northGate is on backbone (CRS310), NOT house2"
 
 [cytoplasm.zones.eero_wifi]
 hub_device = "Amazon Eero 6"
-hub_role = "wifi_bridge"
-status = "bridged"
+hub_role = "wifi_nat"
+status = "stable"
 site = "house2"
 uplink_zone = "house2"
 uplink_type = "ethernet off TL-SG605S-M2 (via Omada port 8)"
 uplink_speed_mbps = 2500
 uplink_latency_ms = 3.0
+nat_subnet = "10.0.7.0/24"
 gates = []
-note = "Bridge mode ACTIVE (Jun 17 18:30). WiFi clients get 192.168.4.x from sporeGate DHCP. No more 10.0.7.x NAT."
+note = "NAT mode (stable). Bridge mode failed — DHCP broadcasts don't traverse hub2→hub1 path. NAT is fine: human WiFi doesn't need flat compute LAN. Collapse optional via DHCP L2 relay on hub2 port 8 if ever needed."
 
 [sites.house1]
 address = "4422 Southgate Ave, Lansing MI 48910"
