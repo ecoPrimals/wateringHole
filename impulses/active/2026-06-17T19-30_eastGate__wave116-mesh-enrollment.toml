@@ -13,17 +13,16 @@ from = "eastGate"
 to = ["sporeGate/overwatch", "sporeGate/cellMembrane", "eastGate/primalSpring"]
 date = "2026-06-17"
 priority = "P1"
-owner = "sporeGate overwatch (enrollment), cellMembrane (code), eastGate (validation)"
+owner = "sporeGate (code+infra+enrollment), eastGate (primalSpring+validation), flockGate (sporePrint+periplasm)"
 
 note = """
 Wave 116 objective: Every online gate at sporeGate parity.
-FOUR TEAMS:
-- eastGate (this IDE): primalSpring evolution, NUCLEUS on eastGate, overwatch validation
-- sporeGate Overwatch (NUC): Gate enrollment pipeline, WireGuard expansion, Omada mgmt,
-  remaining relay migration. Dedicated topology exploration subteam.
-- cellMembrane Team (separate IDE on sporeGate): Code evolution, VPS, cascade, typed models
-- flockGate Team (WAN): sporePrint content modernization, WAN NUCLEUS proving ground,
-  K-Derm periplasm/outer-membrane validation. Only gate that tests all layers end-to-end.
+THREE TEAMS (rescoped Jun 18 11:08):
+- eastGate (this IDE): primalSpring evolution + NUCLEUS on self + overwatch coordination
+- sporeGate (NUC): cellMembrane code + topology + gate enrollment + VPS management.
+  Owns the builder role: code, deploy, infrastructure, LAN/WAN mesh.
+- flockGate (WAN): sporePrint content modernization + K-Derm periplasm validation.
+  Owns the public face + proves WAN NUCLEUS pattern.
 OPERATOR: Connects via northGate RustDesk to migrate remaining gates (strandGate, southGate, swiftGate)"""
 
 # ──────────────────────────────────────────────────────────────
@@ -100,10 +99,10 @@ future_peers = { status = "FUTURE", note = "strand, south, swift after enrollmen
 
 [stream4]
 id = "CODE-EVOLUTION"
-owner = "cellMembrane team"
+owner = "sporeGate team"
 priority = "P1"
-description = """Support multi-gate enrollment with fresh tooling.
-Harvest binary, implement cytoplasm zones, evolve cascade."""
+description = """cellMembrane code evolution owned by sporeGate team.
+Fresh tooling, cytoplasm zones, cascade, VPS management."""
 
 [stream4.tasks]
 fresh_harvest = { status = "✅ DONE", note = "Built Jun 18. 539 tests. Deployed to sporeGate. pepti still behind HEAD (SSH→forgejo). Next: deploy to all gates after enrollment." }

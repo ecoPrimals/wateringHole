@@ -29,48 +29,60 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 
 ---
 
-## Teams & Ownership
+## Teams & Ownership (3 teams, clear lanes)
 
-### eastGate — primalSpring Evolution + NUCLEUS + Overwatch (this IDE)
+### eastGate — primalSpring Evolution + NUCLEUS (this IDE)
 
-| Focus | Detail |
-|-------|--------|
-| **primalSpring** | Validation scenarios, evolution modules, genetics compliance |
-| **NUCLEUS** | Local primals, atomic model tests, gate readiness, NUCLEUS ON EASTGATE |
-| **Overwatch** | Cascade review, cross-team coordination, FRAGO/blurb, gate parity tracking |
-
-### sporeGate Overwatch — Topology Exploration + Gate Enrollment (Cursor on NUC)
-
-*Dedicated subteam: LAN/WAN sovereignty exploration ground.*
+*The science and validation engine. Evolve primalSpring, prove NUCLEUS locally.*
 
 | Focus | Detail |
 |-------|--------|
-| **Gate enrollment** | SSH enable on each sovereign gate → preflight → NUCLEUS deploy → WG peer |
-| **Mesh expansion** | WireGuard overlay: add eastGate, ironGate, flockGate as peers |
-| **Omada management** | SDN controller, VLAN segmentation, port labeling |
-| **Remaining migration** | Investigate strandGate, southGate, swiftGate (still on public) |
-| **Fresh binary** | Harvest membrane from pepti with latest (gate.preflight, firewall.generate) |
+| **primalSpring** | Validation scenarios, evolution modules, genetics compliance, Spring→NUCLEUS integration |
+| **NUCLEUS on eastGate** | Deploy 13/13 primals locally, systemd persist, prove the compute gate pattern |
+| **Overwatch** | Cascade review, cross-team blurbs, gate parity tracking, impulse management |
+| **Ecosystem validation** | Run tests (547 cellMembrane, 74 scenarios), catch drift, confirm convergence |
 
-### cellMembrane Team — Code + VPS (Cursor on sporeGate, separate IDE)
+**Immediate work:**
+1. NUCLEUS deploy on eastGate (13/13 primals + systemd — script staged, needs sudo)
+2. primalSpring scenario expansion (mesh topology validation, gate enrollment posture)
+3. Cascade review + blurb coordination across teams
 
-| Focus | Detail |
-|-------|--------|
-| **cellMembrane code** | Cytoplasm zones types, topology.resolve, Omada API client |
-| **VPS management** | golgi (Forgejo, relay), pepti (builds, depot) |
-| **Cascade pipeline** | Webhook.rs → GitHub, bidirectional event-driven cascade |
-| **Sovereignty shadows** | Evolve S1-S4 tracks |
-| **Multi-gate support** | Ensure NUCLEUS deploy works identically on all Linux gates |
+### sporeGate — cellMembrane + Topology + Gate Enrollment (Cursor on NUC)
 
-### flockGate Team — sporePrint + WAN NUCLEUS + K-Derm Periplasm (WAN, offsite)
-
-*The WAN proving ground. Only gate that validates ALL K-Derm layers end-to-end.*
+*The builder. Owns the code, the infrastructure, and the physical mesh.*
 
 | Focus | Detail |
 |-------|--------|
-| **sporePrint** | Modernize 222-page site (stale since March). P0: refresh metrics. P1: K-Derm + glossary. |
-| **WAN NUCLEUS** | First non-LAN NUCLEUS gate. 13/13 primals across real internet latency. |
-| **K-Derm periplasm** | WG direct to golgi (bypasses plasma membrane). Tests outer membrane + periplasm. |
-| **Cascade validation** | Push to Forgejo/GitHub from WAN. Proves cascade works without LAN. |
+| **cellMembrane code** | Cytoplasm zones, topology.resolve, firewall evolution, gate.* commands, S1-S4 sovereignty |
+| **VPS management** | golgi (Forgejo, relay, WG hub), pepti (builds, depot). Fix pepti SSH→forgejo. |
+| **Gate enrollment** | SSH enable → preflight → NUCLEUS deploy → WG peer on remaining gates |
+| **LAN topology** | Omada (standalone L2), CRS310, Flint 2 swap, three-hub triangle backbone |
+| **Mesh expansion** | WireGuard overlay admin, peer adds, routing, subnet carving |
+| **Relay migration** | Push sovereign config to strandGate, southGate, swiftGate |
+
+**Immediate work:**
+1. NUCLEUS deploy on eastGate (via SSH, once sudo unblocked)
+2. NUCLEUS deploy on flockGate (WG live, SSH live — ready now)
+3. Fix pepti SSH→forgejo (unblocks fresh binary from HEAD)
+4. ironGate OS identification + SSH enable
+5. Flint 2 physical swap + config (this weekend)
+
+### flockGate — sporePrint + K-Derm Periplasm Validator (WAN, offsite)
+
+*The WAN proving ground and public face. Owns the website, validates the outer layers.*
+
+| Focus | Detail |
+|-------|--------|
+| **sporePrint** | Modernize primals.eco (222 pages, many stale). P0: metrics refresh. P1: K-Derm glossary + deployment docs. |
+| **K-Derm periplasm** | Only gate testing WG through real WAN, RustDesk relay from offsite, cascade without LAN. |
+| **WAN NUCLEUS** | First non-LAN NUCLEUS gate (after sporeGate deploys it). Proves deployment over internet. |
+| **Cascade validation** | Every push to Forgejo/GitHub from flockGate proves the outer membrane works. |
+
+**Immediate work:**
+1. Await NUCLEUS deploy from sporeGate team (WG + SSH are ready)
+2. Begin sporePrint P0: `spore-validate refresh`, fix sitemap count, check links
+3. sporePrint P1: glossary refresh (K-Derm terms), SOVEREIGN_DEPLOYMENT.md rewrite
+4. Validate cascade: pull all repos via WG overlay, push updates to both remotes
 
 ---
 
@@ -164,15 +176,16 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 
 ---
 
-## Code Evolution Targets (cellMembrane team)
+## Code Evolution Targets (sporeGate team)
 
 | Item | Priority | Unblocks |
 |------|----------|----------|
-| Fresh binary harvest (pepti) | P1 | gate.preflight + firewall.generate on all gates |
+| Fix pepti SSH→forgejo | **P0** | Fresh binary from HEAD on all gates |
+| NUCLEUS deploy to eastGate + flockGate | **P1** | Full enrollment (WG already live) |
 | Cytoplasm zone types (envelope.rs) | P2 | Zone-aware preflight + topology.resolve |
+| webhook.rs → GitHub cascade | P2 | Bidirectional event-driven VCS parity |
 | Omada API client | P3 | Programmatic switch management from membrane |
 | Windows NUCLEUS port | P3 | northGate idle compute |
-| webhook.rs → GitHub cascade | P2 | Bidirectional event-driven VCS parity |
 
 ---
 
