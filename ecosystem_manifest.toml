@@ -18,9 +18,9 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.7.0"
-generated = "2026-06-16"
-wave = 114
+version = "2.8.0"
+generated = "2026-06-18"
+wave = 116
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -505,7 +505,8 @@ zone = "backbone"
 hub_port = "ether8"
 link_speed_mbps = 2500
 kderm_role = "plasma_membrane"
-notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke."
+site_topology = "triangle_3hub"
+notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke. Omada SDN controller installed but STOPPED (standalone L2 preferred)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -580,7 +581,7 @@ profile = "canary-fieldmouse"
 zone = "house2"
 hub_port = "2.5g"
 link_speed_mbps = 2500
-notes = "DDR3 NUC canary. Omada House 2 zone. OFFLINE — dead CMOS, hardware surgery."
+notes = "DDR3 NUC canary. Omada House 2 zone (standalone L2). OFFLINE — dead CMOS, hardware surgery."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",

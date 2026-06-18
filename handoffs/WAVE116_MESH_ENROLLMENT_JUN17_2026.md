@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 17 19:30 EDT
+**Last review**: Jun 18 07:30 EDT
 
 ---
 
@@ -106,10 +106,28 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 |--------|-------|--------|
 | **golgi** (10.13.37.1) | cellMembrane team | HEALTHY — Forgejo, relay, WG hub, 13/13 |
 | **pepti** (10.13.37.4) | cellMembrane team | HEALTHY — build, depot, WG peer |
-| **Omada SDN** | sporeGate overwatch | LIVE — 18 clients, 8 SFP+ mapped, VLAN-ready |
-| **Eero 6** | bridged (operator) | Flat 192.168.4.x, transparent AP |
-| **CRS310** | sporeGate overwatch | L2 backbone, pure switching |
+| **Omada SX3008F** | sporeGate overwatch | **STANDALONE L2** — controller STOPPED, switch runs unmanaged. Controller pushed config that broke port 8 connectivity. |
+| **Eero 6** | retiring | **WORKAROUND** — Cat direct from CRS310, NAT mode. Bridge mode failed, factory reset pending. Being replaced by Flint 2. |
+| **GL.iNet Flint 2** | sporeGate overwatch | **ORDERED** — OpenWrt WiFi 6, replaces Eero at hub 2. Bridge mode, SSH/root, sovereign. |
+| **CRS310** | sporeGate overwatch | L2 backbone (hub 1), pure switching |
 | **ATT BGW320** | pending passthrough | Double-NAT still active (P2) |
+| **Garage (hub 3)** | planned | Future compute + outdoor WiFi. Wiring/insulation upgrade needed. |
+
+### Topology Evolution: Three-Hub Triangle
+
+```
+         House 1 (hub 1)             Target: triangle backbone
+        CRS310 + sporeGate           with redundant paths.
+       ATT + WiFi (evaluate)         Any single leg failure
+          /           \              routes through other two.
+    leg A/             \leg B (LIVE, 80m AOC 10G)
+        /               \
+   Garage (hub 3)----House 2 (hub 2)
+   planned          leg C    Omada SX3008F (standalone L2)
+                    planned  + GL.iNet Flint 2 (OpenWrt WiFi)
+```
+
+**Hardware philosophy**: heterogeneous open. MikroTik (RouterOS), TP-Link (standalone L2), GL.iNet (OpenWrt), ATT (proprietary WAN). No single vendor, no cloud management planes. Diversity forces the primal abstraction to be robust.
 
 ---
 
@@ -135,8 +153,11 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 | cellMembrane tests | **527**, zero warnings |
 | Depot x86_64 | 13/13 from HEAD |
 | VCS parity | 17/17 repos synced |
-| Omada clients visible | 18 |
-| Cytoplasm zones | 2 (backbone, house2) + Eero bridged |
+| Omada controller | **STOPPED** — switch runs standalone L2 |
+| Eero status | **WORKAROUND** — Cat from CRS310, NAT mode, retiring |
+| Flint 2 | **ORDERED** — OpenWrt WiFi 6, hub 2 replacement |
+| Topology model | **v5.0.0** — three-hub triangle, heterogeneous open hardware |
+| Cytoplasm zones | 3 defined (backbone, house2, garage planned) + Eero workaround |
 
 ---
 
@@ -144,7 +165,11 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 
 | Debt | Owner | Priority |
 |------|-------|----------|
+| Flint 2 deploy + Eero retire | sporeGate overwatch | **P1** |
 | ATT IP passthrough | operator + sporeGate | P2 |
+| Hub 1 WiFi evaluation (replace ATT WiFi with OpenWrt AP) | sporeGate overwatch | P2 |
+| Garage (hub 3) wiring + insulation | operator | P3 |
+| Triangle leg A (house1↔garage) + leg C (garage↔house2) | operator + sporeGate | P3 |
 | VLAN segmentation (compute/wifi/guest) | sporeGate overwatch | P3 |
 | Version tag hygiene | cellMembrane team | P3 |
 | IPv6 with NAT66/PD | sporeGate overwatch | P3 |
