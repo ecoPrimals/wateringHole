@@ -1,0 +1,141 @@
+# FRAGO: Wave 116 — Mesh Enrollment & Gate Parity
+# From: eastGate overwatch
+# Date: 2026-06-17
+# Replaces: wave115-sovereign-mesh (ARCHIVED — relay migration 5/9, K-Derm converged,
+#           Omada SDN live, Eero bridged, eastGate SSH, 527 tests)
+# Context: Wave 115 proved sovereign relay + K-Derm model. Wave 116 enrolls gates
+#          to full parity: SSH, NUCLEUS 13/13, WireGuard, cascade.
+
+[impulse]
+id = "wave116-mesh-enrollment"
+type = "frago"
+from = "eastGate"
+to = ["sporeGate/overwatch", "sporeGate/cellMembrane", "eastGate/primalSpring"]
+date = "2026-06-17"
+priority = "P1"
+owner = "sporeGate overwatch (enrollment), cellMembrane (code), eastGate (validation)"
+
+note = """
+Wave 116 objective: Every online gate at sporeGate parity.
+THREE TEAMS:
+- eastGate (this IDE): primalSpring evolution, NUCLEUS on eastGate, overwatch validation
+- sporeGate Overwatch (NUC): Gate enrollment pipeline, WireGuard expansion, Omada mgmt,
+  remaining relay migration. Dedicated topology exploration subteam.
+- cellMembrane Team (separate IDE on sporeGate): Code evolution, VPS, cascade, typed models
+OPERATOR: Connects via northGate RustDesk to migrate remaining gates (strandGate, southGate, swiftGate)"""
+
+# ──────────────────────────────────────────────────────────────
+# ENTRY STATE (Jun 17 19:30 EDT)
+# ──────────────────────────────────────────────────────────────
+
+[entry_state]
+sovereign_relay = "5/9 gates (east, spore, north, iron, flock). 3 pending (strand, south, swift). 1 offline (field)."
+enrolled = "1/9 (sporeGate: 13/13, systemd, WG, cascade, SSH)"
+wireguard = "3 nodes: golgi (10.13.37.1), sporeGate (.2), pepti (.4)"
+cellmembrane = "527 tests, zero warnings, async-first API, nftables gen, gate.preflight"
+omada = "SDN controller live on sporeGate, 18 clients, 8 SFP+ ports, VLAN-ready"
+eero = "Bridge mode set by operator, flat 192.168.4.x"
+eastgate_ssh = "LIVE, sporeGate key authorized"
+depot = "13/13 x86_64, 13/13 aarch64 (pepti)"
+vcs = "17/17 repos, zero drift"
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 1: Gate Enrollment (sporeGate overwatch)
+# ──────────────────────────────────────────────────────────────
+
+[stream1]
+id = "GATE-ENROLLMENT"
+owner = "sporeGate overwatch"
+priority = "P1"
+description = """Bring every sovereign-relay gate to full parity:
+SSH → preflight → membrane install → NUCLEUS 13/13 → systemd → WireGuard → cascade.
+sporeGate is the reference. Each gate gets the same treatment."""
+
+[stream1.tasks]
+eastgate_enroll = { status = "IN PROGRESS", note = "SSH live. Next: preflight, NUCLEUS deploy, WG peer (10.13.37.3?), cascade connect." }
+irongate_enroll = { status = "TODO", note = "On sovereign relay. Need: identify OS/hardware, enable SSH, then full pipeline." }
+flockgate_enroll = { status = "TODO", note = "WAN gate on sovereign relay. SSH enable, WG peer via golgi (site-to-site)." }
+northgate_enroll = { status = "P3", note = "Windows/5090. Hobby system. Prove NUCLEUS on Linux first. Sovereign relay already done." }
+fresh_binary = { status = "P1", owner = "cellMembrane team", note = "Harvest fresh membrane from pepti. Current sporeGate binary is stale — needs gate.preflight, firewall.generate." }
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 2: Remaining Relay Migration (operator + sporeGate)
+# ──────────────────────────────────────────────────────────────
+
+[stream2]
+id = "RELAY-MIGRATION-REMAINING"
+owner = "operator + sporeGate overwatch"
+priority = "P2"
+description = """3 gates still on public relay. Operator connects from northGate
+via public RustDesk, pushes sovereign config. sporeGate monitors and enrolls after."""
+
+[stream2.tasks]
+strandgate = { status = "TODO", note = "On Omada (house2). Operator: RustDesk in, push sovereign config." }
+southgate = { status = "TODO", note = "On Omada (house2). Operator: RustDesk in, push sovereign config." }
+swiftgate = { status = "TODO", note = "On Eero WiFi (house2, now bridged). Operator: RustDesk in, push sovereign config." }
+investigate_access = { status = "TODO", owner = "sporeGate overwatch", note = "If operator can't reach these 3 via public relay, investigate: are they running RustDesk? Do they have IDs? Alternative: SSH from sporeGate (same L2)." }
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 3: WireGuard Mesh Expansion (sporeGate overwatch)
+# ──────────────────────────────────────────────────────────────
+
+[stream3]
+id = "WIREGUARD-EXPANSION"
+owner = "sporeGate overwatch"
+priority = "P2"
+description = """Expand WG mesh from 3 nodes to all enrolled gates.
+Hub topology: golgi as hub, sporeGate as site router, gates as spokes."""
+
+[stream3.tasks]
+eastgate_peer = { status = "TODO", note = "Add eastGate as WG peer. Assign 10.13.37.3. Config via SSH." }
+irongate_peer = { status = "TODO", note = "After SSH enabled. Assign 10.13.37.5." }
+flockgate_peer = { status = "TODO", note = "WAN site-to-site. Direct to golgi hub (not through sporeGate). Assign 10.13.37.6." }
+future_peers = { status = "FUTURE", note = "strand, south, swift after enrollment. northGate when Windows WG proven." }
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 4: Code Evolution (cellMembrane team)
+# ──────────────────────────────────────────────────────────────
+
+[stream4]
+id = "CODE-EVOLUTION"
+owner = "cellMembrane team"
+priority = "P1"
+description = """Support multi-gate enrollment with fresh tooling.
+Harvest binary, implement cytoplasm zones, evolve cascade."""
+
+[stream4.tasks]
+fresh_harvest = { status = "P1", note = "Build fresh membrane on pepti, deploy to all gates. Unblocks preflight/firewall commands." }
+cytoplasm_zones = { status = "P2", note = "Implement CYTOPLASM_ZONES_SPEC.md types in envelope.rs. CytoplasmZone, SwitchHub, ZoneUplink, HubRole." }
+topology_resolve = { status = "P2", note = "membrane topology.resolve zone|latency|path dispatch commands." }
+webhook_cascade = { status = "P2", note = "Wire webhook.rs to push to GitHub. Bidirectional event-driven cascade." }
+omada_api_client = { status = "P3", note = "Rust client for Omada SDN controller API. Enables gate.discover via switch." }
+windows_port = { status = "P3", note = "NUCLEUS on Windows (northGate 5090). After Linux enrollment proven." }
+
+# ──────────────────────────────────────────────────────────────
+# STREAM 5: primalSpring + NUCLEUS (eastGate)
+# ──────────────────────────────────────────────────────────────
+
+[stream5]
+id = "PRIMALSPRING-NUCLEUS"
+owner = "eastGate"
+priority = "P1"
+description = """eastGate becomes a fully enrolled NUCLEUS gate alongside
+its primalSpring development role. Validate locally what sporeGate deploys remotely."""
+
+[stream5.tasks]
+nucleus_on_eastgate = { status = "TODO", note = "Deploy 13/13 primals on eastGate via sporeGate enrollment pipeline. Validates the process." }
+primalspring_scenarios = { status = "ONGOING", note = "Continue validation scenarios, evolution modules, genetics compliance." }
+cascade_validation = { status = "ONGOING", note = "eastGate as independent validation node — confirm gate parity after each enrollment." }
+
+# ──────────────────────────────────────────────────────────────
+# CARRY (Wave 117+)
+# ──────────────────────────────────────────────────────────────
+
+[carry]
+att_passthrough = "P2: Eliminate double-NAT. Operator has access code. After enrollment wave stable."
+vlan_segmentation = "P3: Omada compute/wifi/guest VLANs. After enrollment, before untrusted guests."
+version_tags = "P3: Only 5/13 primals tagged."
+ipv6 = "P3: Re-enable with proper NAT66 or PD after enrollment stable."
+lan_local_hbbs = "P3: Run hbbs on sporeGate for zero-WAN-latency LAN RustDesk."
+lldp_zones = "P3: Auto-zone detection from LLDP on Omada ports."
+fieldgate_hardware = "P2: Dead CMOS, DDR3 NUC. Hardware repair when operator has time."

@@ -1,7 +1,7 @@
 # Wave 115 — Sovereign Mesh & Gate Hardening
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-16
-**Last review**: Jun 17 16:15 EDT (Omada controller installed, eastGate SSH live — sporeGate overwatch)
+**Last review**: Jun 17 18:40 EDT (Eero bridged, Omada SDN live, relay migration pattern)
 
 ---
 
@@ -58,7 +58,7 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 ---
 
-## Ecosystem Snapshot (Jun 17 15:35 EDT — full cascade)
+## Ecosystem Snapshot (Jun 17 18:40 EDT — post-Eero-bridge)
 
 | Metric | Value |
 |--------|-------|
@@ -70,12 +70,13 @@ harden mesh. Offline hardware returns when physical ops completes.
 | WireGuard mesh | **3/3 nodes LIVE** — golgi (10.13.37.1) ↔ sporeGate (.2) ↔ pepti (.4) |
 | golgi | **HEALTHY** — 13/13, relay, Forgejo, WireGuard hub |
 | pepti | **HEALTHY** — build authority, WireGuard peer, depot |
-| sporeGate | **13/13 ALIVE** — K-Derm nftables live, WireGuard, cytoplasm zones mapped |
-| eastGate | **LIVE** — 10G SFP+, primalSpring + overwatch. **⚠️ SSH needs openssh-server** |
-| northGate | RustDesk reachable — **⚠️ SSH needs openssh-server**, NUCLEUS pending |
-| Omada SX3008F | **Data plane LIVE** (L2 works), mgmt plane unreachable (SDN mode) |
-| House 2 | Devices on L2 — SSH required for remote management |
-| Cytoplasm zones | **3 zones** defined: backbone, house2, eero_wifi (TOPOLOGY_MAP v4.0.0) |
+| sporeGate | **13/13 ALIVE** — K-Derm nftables, WireGuard, Omada SDN controller |
+| eastGate | **LIVE** — 10G SFP+, **SSH LIVE** (sporeGate key authorized), primalSpring |
+| northGate | RustDesk reachable — Windows/5090, hobby system, future mesh node (P3) |
+| Omada SX3008F | **FULLY MANAGED** — SDN controller live, 8 SFP+ ports mapped, 18 clients visible |
+| Eero 6 | **BRIDGE MODE** — rebooting. WiFi clients collapsing to 192.168.4.x flat L2 |
+| House 2 devices | **10 compute nodes** visible on Omada (ports 2,3,8 expansion) |
+| Cytoplasm zones | **3 zones** → collapsing to 2 (eero_wifi merges into house2 post-bridge) |
 | fieldGate | **OFFLINE** — DDR3 NUC, dead CMOS |
 
 ---
@@ -114,20 +115,49 @@ harden mesh. Offline hardware returns when physical ops completes.
 
 ---
 
-## Sovereign Relay Push (remote, no physical access)
+## Sovereign Relay Migration (owned by sporeGate overwatch + operator)
 
-All Omada-side devices and flockGate are still on the public relay. Fix remotely:
+### The Pattern (zero physical colocation needed)
 
-| Path | Method | Script |
-|------|--------|--------|
-| **LAN wired (Omada side)** | SSH from sporeGate (same L2, 192.168.4.x) | `sovereign-relay-push.sh lan` or `discover` |
-| **flockGate (WAN)** | SSH hop through golgi | `sovereign-relay-push.sh wan` |
-| **WiFi clients (Eero)** | Use existing public relay connection to push sovereign config | Manual RustDesk session → run config command |
+```
+1. Gate is on public RustDesk relay (already reachable remotely)
+2. Operator connects via public relay from northGate (RustDesk desktop)
+3. Run: pkexec rustdesk --config "<sovereign-config-string>"
+4. Gate switches to sovereign relay → now in our mesh
+5. sporeGate overwatch takes over: SSH, preflight, NUCLEUS deploy
+```
 
-**Key insight**: Omada is L2 — it doesn't block anything. sporeGate can SSH directly to
-any wired device. The public relay is a bootstrap path: use it to eliminate itself.
+### Roles
 
-Script: `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|all]`
+| Who | Does What |
+|-----|-----------|
+| **Operator (northGate RustDesk)** | Connects to each gate 1-by-1 via public relay, pushes sovereign config |
+| **sporeGate overwatch** | Monitors DHCP leases, runs preflight, deploys NUCLEUS, manages mesh enrollment |
+| **eastGate overwatch** | Validates from backbone (SSH to .244), reviews cascade, pushes FRAGO updates |
+
+### Config String (copy-paste into each gate)
+
+```
+pkexec rustdesk --config "=0nI9E1NWJHc2UnbBlGSU9kbRRnRwUFS1ElcIp3MHZWarE1KWRGRVdVQP5Eb0VnI6ISeltmIsIiI6ISawFmIsIyM4EjLz4CMzIjL3UTMiojI5FGblJnIsIyM4EjLz4CMzIjL3UTMiojI0N3boJye"
+```
+
+### Targets (from Omada SDN — 18 clients visible)
+
+| IP | Status | Action |
+|----|--------|--------|
+| 192.168.4.133 | Public relay (?) | Operator: RustDesk in, push config |
+| 192.168.4.147 | Public relay (?) | Operator: RustDesk in, push config |
+| 192.168.4.149 | Public relay (?) | Operator: RustDesk in, push config |
+| 192.168.4.152 | Public relay (?) | Operator: RustDesk in, push config |
+| 192.168.4.223 | Public relay (?) | Operator: RustDesk in, push config |
+| 192.168.4.235 | Public relay (?) | Operator: RustDesk in, push config |
+| 192.168.4.237 | Public relay (?) | Operator: RustDesk in, push config |
+| 192.168.4.248 | Public relay (?) | Operator: RustDesk in, push config |
+| flockGate | WAN (public relay) | Operator or SSH via golgi |
+
+*As each gate graduates to sovereign, sporeGate overwatch marks it done and begins NUCLEUS enrollment.*
+
+Script (for SSH path after sovereign): `wateringHole/compute-sharing/sovereign-relay-push.sh [lan|discover|wan|all]`
 
 ---
 
@@ -195,35 +225,36 @@ sudo apt install -y openssh-server
 
 ---
 
-## Waiting on Physical Ops (not blocking agent work)
+## Completed Physical Ops
 
-| Item | Blocker | Action When Ready |
-|------|---------|-------------------|
-| Omada controller wizard | **Controller running, needs browser setup** | Browse `https://192.168.4.1:8043`, create admin, adopt SX3008F |
-| Eero NAT collapse | Operator has Eero app access | See Eero Collapse Plan below |
-| ATT IP passthrough | **UNBLOCKED** (Device Access Code available) | sporeGate: eliminate double-NAT |
-| House 2 gate enrollment | **UNBLOCKED** (operator confirms access) | sporeGate: sovereign-relay-push.sh + NUCLEUS deploy |
-| fieldGate | Dead CMOS, open-air NUC | Repurpose old-gen hardware when viable |
-| Additional NUCs | Operator acquires from various gens | Plug into CRS310, bootstrap |
+| Item | Status |
+|------|--------|
+| Omada SDN Controller | ✅ Installed, switch adopted, 8 SFP+ ports, 18 clients, VLAN-ready |
+| Eero bridge mode | ✅ Set by operator Jun 17 18:35, rebooting → flat 192.168.4.x |
+| eastGate SSH | ✅ Installed, sporeGate key authorized |
+| Omada VLAN audit | ✅ Flat L2 confirmed, multi-VLAN supported |
 
-### Eero NAT Collapse Plan (Operator Task)
+## Relay Migration Progress
 
-**Problem**: Eeros run their own DHCP/NAT on `10.0.7.0/24`, creating an invisible sub-membrane within the cytoplasm. WiFi clients can't reach LAN gates directly, and the zone model has a hidden NAT boundary.
+| Gate | Relay Status | Zone | Notes |
+|------|-------------|------|-------|
+| **eastGate** | ✅ Sovereign | backbone (CRS310) | SSH live, sporeGate key authorized |
+| **sporeGate** | ✅ Sovereign | backbone (CRS310) | Plasma membrane, 13/13 primals |
+| **northGate** | ✅ Sovereign | backbone (CRS310) | Windows/5090, hobby, P3 mesh node |
+| **ironGate** | ✅ Sovereign | TBD | projectNUCLEUS/ABG |
+| **flockGate** | ✅ Sovereign | WAN | Offsite, now on sovereign relay |
+| **strandGate** | ❌ Public | house2 (Omada) | Operator: RustDesk in, push config |
+| **southGate** | ❌ Public | house2 (Omada) | Operator: RustDesk in, push config |
+| **swiftGate** | ❌ Public | Eero WiFi (house2) | Operator: RustDesk in, push config |
+| **fieldGate** | ⬛ Offline | house2 (Omada) | Dead CMOS, hardware repair |
 
-**Goal**: Collapse to flat `192.168.4.x` so all WiFi clients get DHCP from sporeGate, same as wired gates. The `eero_wifi` zone becomes a pure L2 bridge, no NAT.
+## Remaining (low priority, when convenient)
 
-**Steps**:
-1. Open the Eero app (phone, operator access required)
-2. Set Eero network mode to **Bridge** (AP-only mode)
-   - Settings → Advanced → DHCP & NAT → Bridge mode
-   - This disables Eero's DHCP server and NAT
-3. Eero will relay on CRS310's L2 fabric — WiFi clients get `192.168.4.x` from sporeGate DHCP
-4. Verify: WiFi clients should get `192.168.4.1` as gateway and DNS
-5. Update `TOPOLOGY_MAP.toml`: change `[cytoplasm.zones.eero_wifi]` status from `"collapsing"` to `"bridged"`, remove `nat_subnet`
-
-**Risk**: Low. Eero bridge mode is documented and reversible via the app. If WiFi breaks, revert to router mode.
-
-**Result**: Cytoplasm simplifies to two clean zones: `backbone` (CRS310) and `house2` (Omada). WiFi is transparent L2.
+| Item | Blocker | Action |
+|------|---------|--------|
+| ATT IP passthrough | Operator browser session | http://192.168.1.254, code `#283>#66<>` — eliminates double-NAT |
+| fieldGate | Dead CMOS, DDR3 NUC | Hardware repair when viable |
+| Verify Eero bridge | Eero reboot completes | WiFi clients should get 192.168.4.x DHCP |
 
 ---
 
