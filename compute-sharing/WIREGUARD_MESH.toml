@@ -16,9 +16,10 @@ wave = 115
 overlay_subnet = "10.13.37.0/24"
 port = 51820
 key_management = "wg genkey (manual, pre-bearDog integration)"
-status = "LIVE — 3-node mesh: golgiBody ↔ sporeGate ↔ pepti (via hub relay)"
-last_deployed = "2026-06-17T13:55:00-04:00"
+status = "LIVE — 5-node mesh: golgiBody ↔ sporeGate ↔ pepti, eastGate + flockGate pending connect"
+last_deployed = "2026-06-18T08:00:00-04:00"
 active_peers = 3
+pending_peers = 2
 hub_forwarding = "enabled (sysctl net.ipv4.ip_forward=1 on golgiBody)"
 
 # ═══════════════════════════════════════════════════════════════
@@ -63,6 +64,19 @@ site_subnet = "192.168.5.0/24"
 keepalive_seconds = 25
 status = "planned"
 note = "House 2 router. When deployed, carves 192.168.5.0/24 from the current /22."
+
+[peers.eastgate]
+role = "compute_node"
+status = "PENDING_CONNECT"
+endpoint = "dynamic (LAN — behind sporeGate NAT)"
+overlay_ip = "10.13.37.5/24"
+public_ip = "none (LAN)"
+public_key = "V8Xy1uRFArEz8DseZhdAQmNdOr2TJ3Q/OhfilK3mDlA="
+nat_traversal = "persistent keepalive to golgiBody (25s)"
+allowed_ips = ["10.13.37.5/32"]
+keepalive_seconds = 25
+status_detail = "golgi peer added, enrollment script staged at ~/enrollment/enroll.sh, needs sudo"
+note = "Primary compute gate. i9-12900K, 32GB, 10G SFP+. CRS310 backbone zone."
 
 [peers.peptidoglycan]
 role = "build_node"
