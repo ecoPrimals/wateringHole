@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 17 19:30 EDT
+**Last review**: Jun 18 07:38 EDT (Eero dropped → Flint 2 swap this weekend, CAT6 interim)
 
 ---
 
@@ -24,7 +24,7 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 | **flockGate** | ✅ Sovereign | WAN | TBD | — | — | — | SSH enable, WG peer (site-to-site via golgi) |
 | **strandGate** | ❌ Public | house2 (Omada) | TBD | — | — | — | Operator: push sovereign config |
 | **southGate** | ❌ Public | house2 (Omada) | TBD | — | — | — | Operator: push sovereign config |
-| **swiftGate** | ❌ Public | Eero WiFi | TBD | — | — | — | Operator: push sovereign config |
+| **swiftGate** | ❌ Public | house2 (WiFi) | TBD | — | — | — | After Flint 2 live: push sovereign config |
 | **fieldGate** | ⬛ Offline | house2 (Omada) | Pop!_OS | — | — | — | Dead CMOS, hardware repair |
 
 ---
@@ -87,6 +87,28 @@ For each gate that's on sovereign relay:
 
 ---
 
+## Hub 2 WiFi Swap: Eero → GL.iNet Flint 2 (this weekend)
+
+**Problem**: Eero bridge mode collapsed overnight — lost internet for hub 2 WiFi clients.
+**Interim**: CAT6 from CRS310 restores wired connectivity now.
+**Fix**: Replace Eero with GL.iNet Flint 2 (GL-MT6000). OpenWrt-based, fully controllable.
+
+| Task | Owner | Status |
+|------|-------|--------|
+| Physical Eero removal + Flint 2 install | operator | This weekend |
+| Flint 2 initial config: AP mode, same SSID, bridge to 192.168.4.x | sporeGate overwatch | After install |
+| swiftGate connectivity (was on Eero WiFi) → connect to Flint 2 | operator | After AP live |
+| Push sovereign relay config to swiftGate | operator + sporeGate | After WiFi restored |
+| Omada SDN: update port map for Flint 2 | sporeGate overwatch | After install |
+
+**Flint 2 advantages over Eero**:
+- OpenWrt: SSH, full CLI, `nftables`, `dnsmasq`, package manager
+- Can run as dumb AP (bridge) without stability issues
+- Future: WireGuard client directly on AP, VLAN-tagged WiFi, guest isolation
+- Meshable with other GL.iNet devices (Goodcloud or manual WG)
+
+---
+
 ## Remaining Relay Migration (operator from northGate)
 
 strandGate, southGate, and swiftGate still on public relay. Operator connects
@@ -107,7 +129,7 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 | **golgi** (10.13.37.1) | cellMembrane team | HEALTHY — Forgejo, relay, WG hub, 13/13 |
 | **pepti** (10.13.37.4) | cellMembrane team | HEALTHY — build, depot, WG peer |
 | **Omada SDN** | sporeGate overwatch | LIVE — 18 clients, 8 SFP+ mapped, VLAN-ready |
-| **Eero 6** | bridged (operator) | Flat 192.168.4.x, transparent AP |
+| **Flint 2** (GL-MT6000) | sporeGate overwatch | INCOMING — replaces Eero this weekend. OpenWrt AP on hub 2 |
 | **CRS310** | sporeGate overwatch | L2 backbone, pure switching |
 | **ATT BGW320** | pending passthrough | Double-NAT still active (P2) |
 
@@ -136,7 +158,7 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 | Depot x86_64 | 13/13 from HEAD |
 | VCS parity | 17/17 repos synced |
 | Omada clients visible | 18 |
-| Cytoplasm zones | 2 (backbone, house2) + Eero bridged |
+| Cytoplasm zones | 2 (backbone, house2) + Flint 2 WiFi (pending swap) |
 
 ---
 
