@@ -17,10 +17,11 @@ owner = "sporeGate (code+infra+enrollment), eastGate (primalSpring+validation), 
 
 note = """
 Wave 116 objective: Every online gate at sporeGate parity.
-THREE TEAMS (rescoped Jun 18 11:08):
+3 GATES, 4 SUBTEAMS (rescoped Jun 18 11:12):
 - eastGate (this IDE): primalSpring evolution + NUCLEUS on self + overwatch coordination
-- sporeGate (NUC): cellMembrane code + topology + gate enrollment + VPS management.
-  Owns the builder role: code, deploy, infrastructure, LAN/WAN mesh.
+- sporeGate (NUC) — TWO SUBTEAMS:
+  - sporeGate Overwatch: hardware, topology, integration, gate enrollment, LAN/WAN mesh
+  - cellMembrane Team: code evolution, VPS management, binary builds, cascade pipeline
 - flockGate (WAN): sporePrint content modernization + K-Derm periplasm validation.
   Owns the public face + proves WAN NUCLEUS pattern.
 OPERATOR: Connects via northGate RustDesk to migrate remaining gates (strandGate, southGate, swiftGate)"""

@@ -29,7 +29,7 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 
 ---
 
-## Teams & Ownership (3 teams, clear lanes)
+## Teams & Ownership (3 gates, 4 subteams)
 
 ### eastGate — primalSpring Evolution + NUCLEUS (this IDE)
 
@@ -47,25 +47,44 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 2. primalSpring scenario expansion (mesh topology validation, gate enrollment posture)
 3. Cascade review + blurb coordination across teams
 
-### sporeGate — cellMembrane + Topology + Gate Enrollment (Cursor on NUC)
+### sporeGate — Two Subteams (both on NUC)
 
-*The builder. Owns the code, the infrastructure, and the physical mesh.*
+#### sporeGate Overwatch — Hardware, Topology, Integration
+
+*Dedicated subteam (like biomeGate). Owns the physical mesh and gate enrollment.*
 
 | Focus | Detail |
 |-------|--------|
-| **cellMembrane code** | Cytoplasm zones, topology.resolve, firewall evolution, gate.* commands, S1-S4 sovereignty |
-| **VPS management** | golgi (Forgejo, relay, WG hub), pepti (builds, depot). Fix pepti SSH→forgejo. |
 | **Gate enrollment** | SSH enable → preflight → NUCLEUS deploy → WG peer on remaining gates |
 | **LAN topology** | Omada (standalone L2), CRS310, Flint 2 swap, three-hub triangle backbone |
 | **Mesh expansion** | WireGuard overlay admin, peer adds, routing, subnet carving |
+| **Hardware integration** | Physical ports, cable runs, AP config, NUC onboarding |
 | **Relay migration** | Push sovereign config to strandGate, southGate, swiftGate |
 
 **Immediate work:**
 1. NUCLEUS deploy on eastGate (via SSH, once sudo unblocked)
 2. NUCLEUS deploy on flockGate (WG live, SSH live — ready now)
-3. Fix pepti SSH→forgejo (unblocks fresh binary from HEAD)
-4. ironGate OS identification + SSH enable
-5. Flint 2 physical swap + config (this weekend)
+3. ironGate OS identification + SSH enable
+4. Flint 2 physical swap + config (this weekend)
+5. Add flockGate golgi peer (if not done)
+
+#### cellMembrane Team — Code + VPS
+
+*Subteam owns the codebase and VPS infrastructure. Evolves the tooling that overwatch deploys.*
+
+| Focus | Detail |
+|-------|--------|
+| **cellMembrane code** | Cytoplasm zones, topology.resolve, firewall evolution, gate.* commands, S1-S4 sovereignty |
+| **VPS management** | golgi (Forgejo, relay, WG hub), pepti (builds, depot). Fix pepti SSH→forgejo. |
+| **Multi-gate support** | Ensure NUCLEUS deploy works identically on all Linux gates |
+| **Cascade pipeline** | webhook.rs → GitHub, bidirectional event-driven VCS parity |
+| **Fresh binary** | Build from HEAD on pepti, deploy to all gates via overwatch |
+
+**Immediate work:**
+1. Fix pepti SSH→forgejo (unblocks fresh binary from HEAD)
+2. Cytoplasm zone types in envelope.rs
+3. topology.resolve command implementation
+4. webhook.rs → GitHub cascade wiring
 
 ### flockGate — sporePrint + K-Derm Periplasm Validator (WAN, offsite)
 
