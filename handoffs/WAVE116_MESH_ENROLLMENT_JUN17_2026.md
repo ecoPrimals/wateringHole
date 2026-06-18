@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 18 11:30 EDT (VALIDATED: 11/13 NUCLEUS on eastGate confirmed, 5-node mesh stable, all VCS at parity, converging)
+**Last review**: Jun 18 12:30 EDT (sporeGate overwatch: socket fix, nftables validated, flockGate SSH blocked — key needed)
 
 ---
 
