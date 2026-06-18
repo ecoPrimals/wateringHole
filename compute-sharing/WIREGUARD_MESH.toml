@@ -16,10 +16,10 @@ wave = 115
 overlay_subnet = "10.13.37.0/24"
 port = 51820
 key_management = "wg genkey (manual, pre-bearDog integration)"
-status = "LIVE — 5-node mesh: golgiBody ↔ sporeGate ↔ pepti, eastGate + flockGate pending connect"
-last_deployed = "2026-06-18T08:00:00-04:00"
-active_peers = 3
-pending_peers = 2
+status = "LIVE — 4-node mesh: golgiBody ↔ sporeGate ↔ pepti ↔ flockGate, eastGate pending sudo"
+last_deployed = "2026-06-18T10:20:00-04:00"
+active_peers = 4
+pending_peers = 1
 hub_forwarding = "enabled (sysctl net.ipv4.ip_forward=1 on golgiBody)"
 
 # ═══════════════════════════════════════════════════════════════
@@ -94,7 +94,7 @@ note = "Build authority. Mesh relay through golgiBody. systemd persisted."
 
 [peers.flockgate]
 role = "wan_gate"
-status = "PENDING_PEER_ADD"
+status = "LIVE"
 endpoint = "dynamic (behind NAT — keepalive punches through)"
 overlay_ip = "10.13.37.6/24"
 public_ip = "none (behind NAT)"
@@ -102,8 +102,9 @@ public_key = "kP9qOx3E7QDGfnNfuRyHE0yhPbzUBPnjOlJ1T5Lgoh4="
 nat_traversal = "persistent keepalive to golgiBody (25s)"
 allowed_ips = ["10.13.37.6/32"]
 keepalive_seconds = 25
-status_detail = "wg0 up, systemd persisted, awaiting golgi peer add"
-note = "WAN gate (192.168.60.0/24). Site-to-site via golgiBody relay. SSH enabled Jun 18."
+measured_latency_to_sporegate_ms = 72
+status_detail = "LIVE — handshake active, systemd persisted, golgi peer added Jun 18"
+note = "WAN gate. Site-to-site via golgiBody relay. SSH enabled Jun 18. First WAN node on mesh."
 
 [peers.neighborhood_node]
 role = "expansion_site"

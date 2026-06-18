@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 18 10:15 EDT (eastGate SSH key authorized, enrollment staged, WG .5 assigned, flockGate SSH+WG ready)
+**Last review**: Jun 18 10:22 EDT (flockGate LIVE on mesh at 72ms, fresh binary built, eastGate preflight complete)
 
 ---
 
@@ -21,7 +21,7 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 | **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | — | ⏳ (10.13.37.5) | SSH key added, enroll.sh staged, needs sudo |
 | **northGate** | ✅ Sovereign | backbone | Windows | — | — | — | P3: hobby, SSH + NUCLEUS after Linux proven |
 | **ironGate** | ✅ Sovereign | TBD | TBD | — | — | — | SSH enable, identify hardware, assign team |
-| **flockGate** | ✅ Sovereign | WAN | Ubuntu 24.04 | ✅ | — | ⏳ (10.13.37.6) | Awaiting golgi peer add, then NUCLEUS deploy |
+| **flockGate** | ✅ Sovereign | WAN | Ubuntu 24.04 | ✅ | — | ✅ (10.13.37.6) | **LIVE on mesh** — 72ms RTT, golgi peer active. NUCLEUS deploy next. |
 | **strandGate** | ❌ Public | house2 (Omada) | TBD | — | — | — | Operator: push sovereign config |
 | **southGate** | ❌ Public | house2 (Omada) | TBD | — | — | — | Operator: push sovereign config |
 | **swiftGate** | ❌ Public | house2 (WiFi) | TBD | — | — | — | After Flint 2 live: push sovereign config |
