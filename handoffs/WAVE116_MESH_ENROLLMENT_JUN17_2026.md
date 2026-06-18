@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 18 10:35 EDT (eastGate WG LIVE at .5, 4-node mesh, cascade 37/38 parity, NUCLEUS pending)
+**Last review**: Jun 18 10:44 EDT (REVALIDATED: 5-node WG mesh LIVE, all peers reachable from eastGate, 547 tests, zero drift)
 
 ---
 
@@ -18,7 +18,7 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 | Gate | Relay | Zone | OS | SSH | NUCLEUS | WireGuard | Next Action |
 |------|-------|------|----|-----|---------|-----------|-------------|
 | **sporeGate** | ✅ Sovereign | backbone | Pop!_OS | ✅ | 13/13 | ✅ (10.13.37.2) | Reference gate — fully enrolled |
-| **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | — | ✅ (10.13.37.5) | **WG LIVE** — 3 peers reachable, NUCLEUS deploy next |
+| **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | — | ✅ (10.13.37.5) | **WG LIVE** — 4 peers confirmed (31ms golgi, 61ms sporeGate, 32ms pepti, 65ms flockGate). NUCLEUS next. |
 | **northGate** | ✅ Sovereign | backbone | Windows | — | — | — | P3: hobby, SSH + NUCLEUS after Linux proven |
 | **ironGate** | ✅ Sovereign | TBD | TBD | — | — | — | SSH enable, identify hardware, assign team |
 | **flockGate** | ✅ Sovereign | WAN | Ubuntu 24.04 | ✅ | — | ✅ (10.13.37.6) | **LIVE on mesh** — 32ms to golgi, 72ms to sporeGate. NUCLEUS deploy next. |
@@ -181,10 +181,10 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 | Metric | Value |
 |--------|-------|
 | Gates on sovereign relay | **5/9** (+ 3 pending, 1 offline) |
-| Gates fully enrolled | **1/9** (sporeGate) |
-| Gates in enrollment | **2** (eastGate: enroll.sh staged, flockGate: WG configured) |
-| WireGuard mesh nodes | **4 live** + 1 pending (golgi, sporeGate, pepti, flockGate live; eastGate .5 pending) |
-| cellMembrane tests | **539**, zero warnings, zero clippy |
+| Gates fully enrolled | **1/9** (sporeGate: 13/13 + WG + cascade) |
+| Gates WG-enrolled (no NUCLEUS yet) | **2** (eastGate .5, flockGate .6) |
+| WireGuard mesh nodes | **5 live** — golgi(.1), sporeGate(.2), pepti(.4), eastGate(.5), flockGate(.6). All reachable. |
+| cellMembrane tests | **547**, zero warnings, zero clippy |
 | membrane tooling | gate.preflight, gate.bootstrap, firewall.generate, gate.status, gate.health — ALL WORKING |
 | Depot x86_64 | 13/13 (pepti behind HEAD — SSH→forgejo fix needed) |
 | VCS parity | 17/17 repos synced |
