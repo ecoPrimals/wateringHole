@@ -701,8 +701,8 @@ target = "x86_64-unknown-linux-musl"
 mobility = "portable"
 bind_mode = "tcp"
 composition = "subset"
-transport = "wifi"
-notes = "Portable Windows target. Cross-platform testing."
+transport = "lan"
+notes = "Portable Windows target. Cross-platform testing. WiFi (LAN transport)."
 gate_class = "portable_anchor"
 repos = [
     "wateringHole", "plasmidBin",
