@@ -14,7 +14,7 @@ Overwatch handles cascade coordination, cross-team blurbs, and ecosystem-wide st
 
 ---
 
-## Current State (Jun 18 12:24 EDT)
+## Current State (Jun 18 20:09 EDT)
 
 | Asset | Status |
 |-------|--------|
@@ -22,9 +22,28 @@ Overwatch handles cascade coordination, cross-team blurbs, and ecosystem-wide st
 | NUCLEUS on eastGate | 11/13 primals LIVE (user systemd, no sudo) |
 | WireGuard | eastGate (.5) enrolled, 5-node mesh stable |
 | VCS | origin + forgejo at parity, zero drift |
-| cellMembrane | 547 tests green (sovereignty_ledger fix just landed) |
+| cellMembrane | 660 tests green (topology types + typed enums landed) |
+| membrane binary | Fresh (topology.resolve/zones/mesh commands LIVE) |
 
 ---
+
+## Your Primals (eastGate compute focus)
+
+Your 11 live primals give you capabilities to leverage:
+
+| Primal | What It Does For You |
+|--------|---------------------|
+| **Squirrel** | AI inference — use for scenario intelligence, evolution guidance |
+| **ToadStool** | Compute dispatch — orchestrate experiment runs, scenario batches |
+| **BarraCuda** | Tensor math — future GPU offload path (northGate 5090 via covalent bond) |
+| **CoralReef** | Shader compilation — visualization backend |
+| **RhizoCrypt** | DAG provenance — track experiment lineage, cascade verification |
+| **LoamSpine** | Merkle ledger — wave state persistence, sovereign commits |
+| **SweetGrass** | Attribution — commit braids, who contributed what |
+| **BearDog** | Trust — BTSP encryption for cross-gate bonds |
+| **Songbird** | Discovery — mesh relay, peer finding |
+| **SkunkBat** | Defense — audit, anomaly detection |
+| **PetalTongue** | Visualization — dashboard rendering |
 
 ## Your Work
 
@@ -42,6 +61,7 @@ Grow validation coverage. Current scenarios cover:
 - K-Derm layer validation (plasma membrane ↔ periplasm ↔ outer membrane)
 - Gate parity assertion (N primals alive, systemd persisted, WG handshake active)
 - Primal debt tracking (detect missing modules from composition)
+- Primal work utilization (are assigned primals responding to their work?)
 
 ### P2 — Spring→NUCLEUS Integration
 
