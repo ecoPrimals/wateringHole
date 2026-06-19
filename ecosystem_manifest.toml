@@ -600,7 +600,7 @@ composition = "full"
 transport = "wan"
 mesh_peer = "157.230.3.183:7700"
 segmentation = "external-only"
-notes = "WAN shadow gate. External-to-internal only via golgiBody relay. Never direct LAN access."
+notes = "WAN Tower atomic (BearDog, Songbird, SkunkBat). 11/13 NUCLEUS via user systemd. i9-13900K/62GB. SSH via golgi ProxyJump."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
