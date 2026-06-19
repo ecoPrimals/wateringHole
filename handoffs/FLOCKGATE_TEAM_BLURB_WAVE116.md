@@ -38,24 +38,36 @@ Extracellular (WAN)    NO                YES (lives here)
 
 ---
 
-## Enrollment Prerequisites (sporeGate overwatch executes)
-
-Before you can do content or NUCLEUS work, you need full enrollment:
+## Enrollment Status
 
 | Step | Status | Action |
 |------|--------|--------|
 | Sovereign relay | ✅ Done | Already on sovereign RustDesk |
-| SSH enable | TODO | `apt install openssh-server` + add sporeGate key |
-| WireGuard peer | TODO | Site-to-site directly to golgi (10.13.37.6). NOT through sporeGate. |
-| SSH key on golgi | TODO | sporeGate team adds your pubkey to golgi authorized_keys |
-| SSH key on pepti | TODO | sporeGate team adds your pubkey to pepti authorized_keys |
-| gate.preflight | TODO | Run after SSH + WG are live |
-| NUCLEUS deploy | TODO | 13/13 primals + systemd persist |
-| Cascade connect | TODO | Forgejo + GitHub remotes, push/pull verified |
+| WireGuard peer | ✅ Done | 10.13.37.6 LIVE (32ms to golgi, 72ms to sporeGate) |
+| SSH enable | ✅ Done | SSH responding |
+| SSH key auth | PENDING | sporeGate overwatch connecting to authorize their key |
+| NUCLEUS deploy | PENDING | sporeGate will deploy after SSH key authorized |
+| Cascade connect | PENDING | After NUCLEUS |
+
+**sporeGate overwatch is handling SSH key + NUCLEUS deploy for you.** Once done, you
+start your Tower work immediately.
+
+## Atomic Role: Tower (BearDog, Songbird, SkunkBat)
+
+You are the **trust layer proving ground**. Tower work is dispatched here because you're
+the only gate on real WAN — trust must work at 65ms+ latency, through NAT, over public internet.
+
+| Primal | Work |
+|--------|------|
+| **BearDog** | Initiate BTSP handshakes over WG to sporeGate + eastGate. Validate latency-tolerant crypto. |
+| **Songbird** | Call `mesh.init`. Establish WAN federation with golgi + sporeGate. Test NAT traversal. |
+| **SkunkBat** | Configure WAN threat rules. Audit cascade integrity from offsite. Anomaly detection. |
+
+**Why here**: If BTSP works at 65ms over public internet, it works everywhere. You prove
+that Tower encryption is robust regardless of network conditions.
 
 **WireGuard topology**: You connect directly to golgi hub (10.13.37.1), not through
-sporeGate. This is intentional — you validate the periplasm path that bypasses the
-plasma membrane entirely.
+sporeGate. This validates the periplasm path that bypasses the plasma membrane entirely.
 
 ---
 

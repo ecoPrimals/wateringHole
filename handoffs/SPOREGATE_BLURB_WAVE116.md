@@ -1,89 +1,104 @@
 # sporeGate Overwatch — Wave 116 Blurb
 
-**Date**: Jun 18 2026 | **From**: eastGate overwatch
-**Context**: 5/9 gates on sovereign relay. You are the reference enrolled gate (13/13, WG, cascade, SSH). Now: enroll the others and swap hub 2 WiFi.
+**Date**: Jun 19 2026 | **From**: eastGate overwatch
+**Status**: Reference gate (13/13, WG .2, cascade, SSH). Nest provenance authority.
+**Atomic Role**: Nest (NestGate, RhizoCrypt, LoamSpine, SweetGrass) — data/provenance dispatch target.
 
 ---
 
-## Priority 1: Gate Enrollment Pipeline
+## Priority 0: SSH into flockGate + ironGate (unblocks Tower + Node work)
 
-You are the template. Repeat what you did on yourself for each sovereign gate:
+You have SSH access across the mesh. Connect and authorize keys so those gates can receive
+their assigned primals and start their Tower/Node work.
 
+### flockGate (Tower atomic — BearDog, Songbird, SkunkBat)
+
+```bash
+# flockGate is on WG — reach via golgi relay or direct
+ssh flockgate@10.13.37.6   # may need golgi as jump host
+
+# Once in:
+# 1. Add your pubkey:
+mkdir -p ~/.ssh && echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILU4i9hEtHJA02/JZ8XR/OHaR/bSiuAaDRMhdJX7zuRp sporegate-gate-v1" >> ~/.ssh/authorized_keys
+
+# 2. Allow SSH on wg0 (if firewall blocks):
+sudo ufw allow in on wg0 to any port 22
+
+# 3. Deploy NUCLEUS:
+scp /usr/local/bin/membrane flockgate@10.13.37.6:/tmp/
+ssh flockgate@10.13.37.6 "sudo mv /tmp/membrane /usr/local/bin/ && membrane gate.bootstrap flockGate"
 ```
-SSH enable → gate.preflight → membrane install → NUCLEUS 13/13 → systemd → WireGuard peer → cascade connect
+
+**After**: flockGate team opens IDE, starts Tower trust work (BTSP over WAN, mesh.init, threat detection).
+
+### ironGate (Node atomic — ToadStool, BarraCuda, CoralReef)
+
+```bash
+# ironGate is on sovereign relay. Check SSH:
+ssh irongate@<IP>   # IP from DHCP table or RustDesk session
+
+# If SSH not enabled (operator may need to assist via RustDesk):
+# On ironGate: sudo apt install -y openssh-server
+# Then add your key: echo "<your-pubkey>" >> ~/.ssh/authorized_keys
+
+# Once SSH live:
+membrane gate.preflight
+sudo membrane gate.bootstrap ironGate
 ```
 
-### Immediate Targets
+**After**: ironGate team opens IDE, starts Node compute work (ToadStool fleet, BarraCuda tensors, CoralReef shaders).
 
-| Gate | SSH Status | Next Step | Notes |
-|------|-----------|-----------|-------|
-| **eastGate** (192.168.4.244) | ✅ Live, your key authorized | preflight + NUCLEUS deploy | 10G on CRS310. First enrollment target. |
-| **ironGate** | Pending | Enable SSH (apt install openssh-server) | On sovereign relay. Need: identify OS via RustDesk, then SSH in. |
-| **flockGate** | Pending | Enable SSH | WAN gate. WireGuard site-to-site via golgi (not through you). |
+---
 
-### Fresh Binary (P1 — cellMembrane team provides)
+## Priority 1: Nest Provenance Work (your assigned atomic)
 
-Your current membrane binary is stale. Coordinate with cellMembrane team to harvest fresh from pepti. New binary has:
-- `gate.preflight` — pre-deployment scanner (interface detect, DNS, IP conflicts)
-- `firewall.generate` — nftables from membrane composition (K-Derm plasma membrane)
+You are the **provenance authority**. These primals need active work:
+
+| Primal | Socket | Work Needed |
+|--------|--------|-------------|
+| **RhizoCrypt** | /run/membrane/rhizocrypt.sock | Wire rootpulse commit into cascade: `dag.session.create` on each wave push |
+| **LoamSpine** | /run/membrane/loamspine.sock | Start sovereign ledger commits (wave state → merkle root → persist) |
+| **SweetGrass** | /run/membrane/sweetgrass.sock | Enable commit braids — track attribution per gate per wave |
+| **NestGate** | /run/membrane/nestgate.sock | Generate `checksums.toml` for depot (fixes DEGRADED probe) |
+
+### Wiring rootpulse into cascade:
+
+```bash
+# After each cascade push, call rootpulse commit:
+membrane rootpulse commit --wave <N> --gate sporeGate
+# This creates a DAG session in rhizoCrypt, signs via beardog, commits to loamspine
+```
+
+### Fix depot integrity:
+
+```bash
+# On pepti (build authority):
+ssh root@10.13.37.4
+cd /opt/depot/primals/x86_64-unknown-linux-musl
+membrane depot.checksums --generate   # produces checksums.toml
+# Then gate.status should show depot.integrity: OK
+```
 
 ---
 
 ## Priority 2: Flint 2 WiFi Swap (this weekend)
 
-Eero bridge mode collapsed overnight. Operator ran a CAT6 from CRS310 as interim.
-
-**Plan**: Replace Eero with GL.iNet Flint 2 (GL-MT6000) this weekend.
-
 | Task | Who | When |
 |------|-----|------|
-| Physical swap (Eero out, Flint 2 in, CAT6 from Omada) | Operator | Weekend |
-| Flint 2 initial setup: AP bridge mode, same SSID, transparent to your DHCP | You (SSH in after boot) | After physical install |
-| swiftGate reconnect (was on Eero WiFi) → verify on Flint 2 | You | After AP live |
-| Push sovereign relay config to swiftGate | You + operator | After WiFi confirmed |
-| Update Omada SDN port map | You | After install |
-
-**Flint 2 config goals** (OpenWrt):
-- Mode: dumb AP (bridge, no DHCP, no NAT)
-- WiFi: same SSID as Eero was broadcasting (seamless for humans)
-- SSH enabled for remote management
-- Future: VLAN-tagged SSIDs (compute vs guest)
+| Physical swap (Eero out, Flint 2 in) | Operator | Weekend |
+| Flint 2 config: AP bridge, same SSID, SSH enabled | You (SSH in) | After install |
+| swiftGate reconnect → Flint 2 WiFi | You | After AP live |
+| Push sovereign relay config to swiftGate | You | After WiFi confirmed |
 
 ---
 
 ## Priority 2: Remaining Relay Migration
 
-3 gates still on public relay. After Flint 2 live:
-
-| Gate | Access Path | Status |
-|------|-------------|--------|
-| **strandGate** | Omada wired (house2) | TODO — operator pushes config via RustDesk |
-| **southGate** | Omada wired (house2) | TODO — operator pushes config via RustDesk |
-| **swiftGate** | WiFi (was Eero, will be Flint 2) | BLOCKED until Flint 2 live |
-
-Alternative: these gates are on your L2 — if they have SSH, you can push config directly without RustDesk.
-
----
-
-## Priority 2: WireGuard Mesh Expansion
-
-Current mesh: golgi (10.13.37.1), you (10.13.37.2), pepti (10.13.37.4).
-
-| New Peer | Assigned IP | Via | Blocked On |
-|----------|------------|-----|------------|
-| eastGate | 10.13.37.3 | Direct SSH from you | Nothing — ready now |
-| ironGate | 10.13.37.5 | After SSH enabled | SSH enablement |
-| flockGate | 10.13.37.6 | Direct to golgi (WAN) | SSH enablement on flockGate |
-
----
-
-## Omada SDN Management
-
-SDN controller is live on your machine. Keep exploring:
-- Label SFP+ ports with connected devices
-- Check for firmware updates
-- Prepare VLAN plan (compute / wifi / guest) — implement after enrollment wave stable
-- Track clients: strandGate, southGate, fieldGate should be visible
+| Gate | Access | Status |
+|------|--------|--------|
+| strandGate | Omada wired (house2) | Push sovereign config (RustDesk or SSH) |
+| southGate | Omada wired (house2) | Push sovereign config (RustDesk or SSH) |
+| swiftGate | Flint 2 WiFi (after swap) | BLOCKED until WiFi live |
 
 ---
 
@@ -93,15 +108,31 @@ SDN controller is live on your machine. Keep exploring:
 |----------|--------|
 | golgi | ssh root@157.230.3.183 (WG: 10.13.37.1) |
 | pepti | ssh root@157.230.209.218 (WG: 10.13.37.4) |
-| eastGate | ssh eastgate@192.168.4.244 |
-| Omada SDN | http://localhost:8088 (on your machine) |
+| eastGate | ssh eastgate@192.168.4.244 (WG: 10.13.37.5) |
+| flockGate | ssh flockgate@10.13.37.6 (WG, via golgi jump) |
 | Forgejo | https://git.primals.eco |
-| Sovereign relay config | See RUSTDESK_CONFIG.md |
+| Sovereign relay | See RUSTDESK_CONFIG.md |
 
 ---
 
-## What NOT to touch
+## Ecosystem State
 
-- **northGate**: Windows hobby system. P3. Leave until NUCLEUS proven on all Linux gates.
-- **fieldGate**: Dead CMOS. Operator will hardware-fix when time allows.
-- **ATT passthrough**: Operator handles. Don't change WAN config without coordination.
+| Metric | Value |
+|--------|-------|
+| eastGate | **13/13 NUCLEUS** (user systemd, no sudo) |
+| sporeGate | **13/13 NUCLEUS** (system systemd) |
+| flockGate | WG .6 LIVE, SSH pending key auth |
+| ironGate | Sovereign relay, SSH pending |
+| cellMembrane | **660 tests**, topology.resolve LIVE |
+| VCS | All repos at parity |
+| WireGuard | 5 nodes (golgi, sporeGate, pepti, eastGate, flockGate) |
+
+---
+
+## What NOT to Touch
+
+- **northGate**: Windows hobby (5090). P3. After Linux proven.
+- **fieldGate**: Dead CMOS. Hardware fix when operator has time.
+- **ATT passthrough**: Operator handles WAN config.
+- **primalSpring code**: eastGate team owns evolution.
+- **sporePrint content**: flockGate team owns.
