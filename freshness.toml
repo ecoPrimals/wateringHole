@@ -8,11 +8,11 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 116
-date = "2026-06-18"
+id = 119
+date = "2026-06-19"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Auto-published by membrane temporal.cascade --publish-freshness"
-publisher = "membrane"
+notes = "Wave 119: flockGate 11/13 LIVE. Nest provenance end-to-end. primalSpring 85 scenarios, 959 tests, deep debt sweep complete."
+publisher = "primalSpring"
 
 [heads]
 agentReagents = "6b1f32acf73daf97fbbfc5144337e2224d565a95"

@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 13, 2026 (Wave 111: ironGate NUCLEUS deployed (13/13 systemd). riboCipher transport signal standard published — Stream 7 convergent evolution. biomeOS v4.26 (riboCipher detection + deep debt type safety). Federation VALIDATED (64ms RTT). 5-gate ecosystem LIVE. All AARs archived.)
+**Last Updated**: June 19, 2026 (Wave 119: flockGate NUCLEUS 11/13 LIVE (i9-13900K/62GB). Nest provenance end-to-end: DAG→ledger→witness. primalSpring 85 scenarios, 959 tests. Deep debt: 18 map().unwrap_or() anti-patterns evolved, Tier::Both test tolerance, cascade-drift known debt. ironGate SSH BLOCKED — pubkey enrollment needed.)
 
 ---
 
