@@ -2,14 +2,14 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: June 13, 2026 (Wave 111 — riboCipher convergent evolution in progress. HEALTH-PT-01 shipped (2dba46f), 6,455+ tests)
+**Updated**: June 19, 2026 (Wave 116 — gate mesh visualization, AEAD consolidated, deep debt executed. 6,618+ tests)
 
 ---
 
 ## Integration Status
 
 petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
-- 6,455+ tests passing, 0 failures
+- 6,618+ tests passing, 0 failures
 - `#![forbid(unsafe_code)]` unconditional on all 18 crates + UniBin, zero C dependencies, zero `unsafe` blocks
 - Zero `todo!()`, `unimplemented!()`, `TODO`, `FIXME`, `HACK` markers
 - Zero `.unwrap()` in production code; one documented `.expect()` for SIGTERM registration
@@ -22,7 +22,11 @@ petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
 - Capability-based discovery — zero hardcoded primal names in production, 62+ capability constants
 - **TRUE PRIMAL compliant**: All cross-primal discovery via capability, not name. BTSP uses role-based env vars (`BTSP_PROVIDER_SOCKET`, `SECURITY_PROVIDER_SOCKET`). Content backend via `CONTENT_BACKEND_SOCKET`. Display via `DISPLAY_BACKEND_SOCKET`. Provenance via `PROVENANCE_TRIO_SOCKET`.
 - **Graceful shutdown**: Shared `signal.rs` handles SIGTERM + SIGINT across all long-running modes (web/server/live). Per `DEPLOYMENT_BEHAVIOR_STANDARD.md`.
-- **HEALTH-01 compliant** (Wave 110, 2dba46f): Bare `{"method":"health"}` returns enriched `{status, primal, version, uptime_s}`. 12/13 ecosystem parity achieved.
+- **HEALTH-01 compliant** (Wave 110, 2dba46f): Bare `{"method":"health"}` returns enriched `{status, primal, version, uptime_s}`. 13/13 ecosystem parity achieved.
+- **riboCipher prefix acceptance** (Wave 113): `[0xEC, 0x01]` prefix stripped on UDS; cellMembrane health probes work transparently.
+- **Gate mesh visualization** (Wave 116): `gate-mesh` viz slug renders WireGuard overlay topology with enrollment status, NUCLEUS health per gate, and enrollment animation. `gate.mesh.status` IPC method for runtime queries.
+- **Single AEAD** (Wave 116): Entire codebase uses XChaCha20-Poly1305; `aes-gcm` removed.
+- **Shared topology data**: `petal_tongue_core::gate_mesh` is single source of truth for mesh state (consumed by viz scene + IPC handler).
 - **`health.liveness` normalized**: Returns exactly `{"status":"alive"}` on both HTTP and IPC.
 - **Content backend evolution**: `web_mode/content_backend.rs` replaces nestgate.rs — primal-agnostic `content.resolve` client
 - **Enriched `capability.list`**: returns `primal`, `version`, `transport[]`, `methods[]`, `depends_on[]`, `data_bindings`, `geometry_types`
