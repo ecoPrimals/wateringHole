@@ -17,14 +17,22 @@ owner = "sporeGate (code+infra+enrollment), eastGate (primalSpring+validation), 
 
 note = """
 Wave 116 objective: Every online gate at sporeGate parity.
-3 GATES, 4 SUBTEAMS (rescoped Jun 18 11:12):
-- eastGate (this IDE): primalSpring evolution + NUCLEUS on self + overwatch coordination
-- sporeGate (NUC) — TWO SUBTEAMS:
-  - sporeGate Overwatch: hardware, topology, integration, gate enrollment, LAN/WAN mesh
-  - cellMembrane Team: code evolution, VPS management, binary builds, cascade pipeline
-- flockGate (WAN): sporePrint content modernization + K-Derm periplasm validation.
-  Owns the public face + proves WAN NUCLEUS pattern.
-OPERATOR: Connects via northGate RustDesk to migrate remaining gates (strandGate, southGate, swiftGate)"""
+3 GATES, 4 SUBTEAMS + FOCUSED ATOMIC ROLES (rescoped Jun 19 07:34):
+
+GATE ATOMIC ASSIGNMENTS (where work is dispatched):
+  Tower (trust)      → flockGate  — WAN periplasm proves trust over internet
+  Node  (compute)    → ironGate   — dedicated GPU/tensor when live
+  Nest  (data)       → sporeGate  — provenance authority, ledger, depot, cascade
+  Meta  (orchestrate)→ eastGate   — AI + viz + orchestration + primalSpring
+
+TEAMS:
+- eastGate: primalSpring evolution + Meta-tier (BiomeOS, Squirrel, PetalTongue) + overwatch
+- sporeGate Overwatch: hardware, topology, enrollment + Nest (NestGate, RhizoCrypt, LoamSpine, SweetGrass)
+- cellMembrane Team: code evolution, VPS, binary builds, cascade
+- flockGate: sporePrint + Tower (BearDog, Songbird, SkunkBat) — K-Derm periplasm validation
+
+All gates run full NUCLEUS 13/13. Assignments define where work is DISPATCHED, not what runs.
+OPERATOR: Connects via northGate RustDesk to migrate remaining gates."""
 
 # ──────────────────────────────────────────────────────────────
 # ENTRY STATE (Jun 17 19:30 EDT)

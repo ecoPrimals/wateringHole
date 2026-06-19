@@ -195,71 +195,88 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 
 ---
 
-## Primal Work Assignments (live gates)
+## Primal Work Assignments (focused gate roles)
 
-Each primal has a role. With gates live, we assign work per primal per gate:
+Each gate owns one atomic composition as its primary workload. All gates run full
+NUCLEUS (13/13) but primals are **assigned work** based on gate role. Idle primals
+still provide their services if called — this is about where work is *dispatched to*.
 
-### eastGate — Node + Nest (11/13 active, i9-12900K, 32GB, 10G SFP+)
+```
+Tower (trust)     → flockGate (WAN periplasm — proves trust over internet)
+Node (compute)    → ironGate (compute trio — dedicated GPU/tensor when live)
+Nest (data)       → sporeGate (provenance authority — ledger, depot, cascade)
+Meta (orchestrate)→ eastGate (AI + viz + orchestration + primalSpring)
+```
 
-*Heavy compute gate. Ideal for tensor/shader work, provenance, AI inference.*
+### flockGate — Tower Atomic (BearDog, Songbird, SkunkBat)
 
-| Primal | Atomic | Role | Work Assignment |
-|--------|--------|------|-----------------|
-| **BearDog** | Tower | Trust & crypto | BTSP key generation, cross-gate bond authentication, family seed management |
-| **Songbird** | Tower | Discovery & NAT | Mesh relay for WG overlay, peer discovery across 5-node mesh |
-| **SkunkBat** | Tower | Defense & audit | Threat assessment, cascade integrity checks, anomaly detection |
-| **ToadStool** | Node | Compute dispatch | Route primalSpring workloads, experiment dispatch, scenario orchestration |
-| **BarraCuda** | Node | Tensor & GPU | GPU compute jobs (future: 5090 offload via covalent bond to northGate) |
-| **CoralReef** | Node | Shader compilation | Shader pipeline, visualization backend for petalTongue |
-| **NestGate** | Nest | Content storage | Local content-addressed blob store, experiment artifacts, scenario results |
-| **RhizoCrypt** | Nest | DAG provenance | Commit provenance tracking, rootpulse ledger, cascade verification |
-| **LoamSpine** | Nest | Merkle ledger | Sovereign ledger commits, wave state persistence |
-| **SweetGrass** | Nest | Attribution | Commit braids, contribution attribution across gates |
-| **Squirrel** | Meta | AI inference | primalSpring scenario intelligence, evolution guidance, pattern matching |
-| **BiomeOS** | Meta | Orchestration | LIVE — neural-api on biomeos-neural.sock. Graph orchestration, NUCLEUS lifecycle. |
-| **NestGate** | Nest | Content storage | LIVE — nestgate.sock + TCP 8092. Sovereign ZFS-style storage, content-addressed blobs. |
-
-**Compute focus**: primalSpring evolution, experiment orchestration, provenance trio (rhizoCrypt → BearDog → LoamSpine → sweetGrass).
-
-### sporeGate — Full NUCLEUS (13/13, NUC, site router, plasma membrane)
-
-*Reference gate. Runs the plasma membrane (nftables), DHCP, mesh hub relay.*
+*WAN periplasm prover. The trust layer exercises over real internet latency.*
 
 | Primal | Work Assignment |
 |--------|-----------------|
-| **BearDog** | Gate enrollment authentication, BTSP for all inbound bonds |
-| **Songbird** | Mesh federation hub, RustDesk relay management |
-| **SkunkBat** | Firewall rule validation, intrusion detection, K-Derm membrane integrity |
-| **ToadStool** | Dispatch membrane commands to enrolled gates via SSH/WG |
-| **BarraCuda** | Binary builds (membrane from HEAD), cross-compile for gate architectures |
-| **CoralReef** | Gate health visualization, topology diagram generation |
-| **NestGate** | Depot serving (13/13 binaries), content distribution to gates |
-| **RhizoCrypt** | Cascade provenance, dehydrate state for rootpulse commits |
-| **LoamSpine** | Sovereign ledger authority, wave state commits |
-| **SweetGrass** | Attribution for multi-gate code changes, commit braids |
-| **BiomeOS** | NUCLEUS orchestration, primal lifecycle, gate.status coordination |
-| **Squirrel** | Topology intelligence, zone-aware routing decisions |
-| **PetalTongue** | Dashboard visualization, gate.health rendering |
+| **BearDog** | WAN BTSP validation — latency-tolerant crypto handshakes over 65ms links |
+| **Songbird** | WAN mesh discovery — proves NAT traversal + relay federation across internet |
+| **SkunkBat** | Perimeter defense — K-Derm outer membrane threat assessment, WAN anomaly detection |
 
-**Infra focus**: membrane generation, gate enrollment, firewall, depot authority, cascade hub.
+**Why flockGate**: Only gate on actual WAN (not LAN). Tower trust must work at 65ms+
+latency, through NAT, over public internet. If BTSP works here, it works everywhere.
+Also validates: sporePrint content integrity (SkunkBat audits), cascade authentication
+(BearDog signs), relay federation (Songbird mesh from offsite).
 
-### flockGate — NUCLEUS pending (WG live, WAN, periplasm prover)
+**Status**: WG live (.6), SSH live. Awaiting NUCLEUS deploy (SSH key blocker).
 
-*WAN gate. Proves NUCLEUS works over internet, validates K-Derm outer layers.*
+### ironGate — Node Atomic (ToadStool, BarraCuda, CoralReef)
 
-Once NUCLEUS is deployed (sporeGate team, blocked on SSH key):
+*Dedicated compute gate. When live: tensor math, GPU dispatch, shader compilation.*
 
 | Primal | Work Assignment |
 |--------|-----------------|
-| **Tower trio** | Validate BTSP over WAN (latency-tolerant crypto handshakes) |
-| **NestGate** | sporePrint content serving, WAN depot mirror |
-| **RhizoCrypt** | WAN cascade provenance (proves outer membrane integrity) |
-| **LoamSpine** | Ledger replication over periplasm (golgi → flockGate) |
-| **SweetGrass** | Attribution for sporePrint commits (K-Derm layer 2 proof) |
-| **Squirrel** | sporePrint content intelligence, stale page detection |
-| **BiomeOS** | WAN NUCLEUS lifecycle (first non-LAN orchestration test) |
+| **ToadStool** | Compute dispatch authority — route GPU jobs, experiment orchestration |
+| **BarraCuda** | Tensor/GPU workloads — ML training, physics sims, heavy math |
+| **CoralReef** | Shader compilation — visualization rendering, compute pipelines |
 
-**Validation focus**: sporePrint content, K-Derm periplasm proof, WAN cascade integrity.
+**Why ironGate**: Keeps heavy compute isolated from the plasma membrane (sporeGate)
+and the orchestration layer (eastGate). Compute gates are fungible — future northGate
+(5090) or garage gates join via covalent bond and receive dispatched work.
+
+**Status**: On sovereign relay. BLOCKED — SSH not enabled, OS unidentified. Operator
+must RustDesk in, identify OS, enable SSH. Then enrollment pipeline runs.
+
+### sporeGate — Nest Atomic (NestGate, RhizoCrypt, LoamSpine, SweetGrass)
+
+*Data/provenance authority. Ledger of truth, depot, cascade state, attribution.*
+
+| Primal | Work Assignment |
+|--------|-----------------|
+| **NestGate** | Depot authority — serves 13/13 binaries, content-addressed blob store |
+| **RhizoCrypt** | Cascade provenance — dehydrate state, rootpulse commits, DAG sessions |
+| **LoamSpine** | Sovereign ledger — wave state commits, merkle proofs, permanence |
+| **SweetGrass** | Attribution — commit braids, multi-gate contribution tracking |
+
+**Why sporeGate**: Site router with 13/13 NUCLEUS, always-on, direct access to all LAN
+gates + VPS. The provenance authority must be on the most connected, most stable node.
+Depot serving requires high uptime. Ledger commits need to survive gate restarts.
+
+**Also runs** (secondary): full Tower (plasma membrane firewall), BiomeOS (gate
+enrollment orchestration), compute dispatch (membrane builds on pepti).
+
+### eastGate — Meta-tier (BiomeOS, Squirrel, PetalTongue)
+
+*Orchestration, AI inference, visualization. The brain of the mesh.*
+
+| Primal | Work Assignment |
+|--------|-----------------|
+| **BiomeOS** | NUCLEUS lifecycle orchestration — graph coordination, plasmodium collective |
+| **Squirrel** | AI inference — scenario intelligence, evolution guidance, pattern matching |
+| **PetalTongue** | Visualization — dashboards, topology rendering, gate.health views |
+
+**Why eastGate**: i9-12900K (24 threads, 32GB RAM) is ideal for AI inference and
+orchestration workloads. PetalTongue visualization benefits from the 10G link for
+streaming data. BiomeOS neural-api coordinates across all gates via WG overlay.
+
+**Also runs** (secondary): full NUCLEUS 13/13 locally for validation. primalSpring
+evolution team uses all primals for scenario testing. Provenance trio active for
+local experiment tracking (rhizoCrypt, LoamSpine, SweetGrass).
 
 ---
 
