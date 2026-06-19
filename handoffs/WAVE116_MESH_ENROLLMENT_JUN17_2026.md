@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 18 14:38 EDT (CONVERGING: 620 tests, topology types shipped, VCS parity restored, all teams active)
+**Last review**: Jun 18 19:57 EDT (STABLE: 660 tests, topology.* commands LIVE on gates, fresh binary deployed, VCS parity)
 
 ---
 
@@ -219,10 +219,11 @@ If pkexec fails, use `sudo` or write config file directly (see RUSTDESK_CONFIG.m
 | Gates NUCLEUS-active | **2** — sporeGate (13/13), eastGate (11/13 user systemd) |
 | Gates WG-enrolled (NUCLEUS pending) | **1** — flockGate (.6, ready for deploy) |
 | WireGuard mesh nodes | **5 live** — golgi(.1), sporeGate(.2), pepti(.4), eastGate(.5), flockGate(.6) |
-| cellMembrane tests | **620**, zero warnings, zero clippy |
+| cellMembrane tests | **660**, zero warnings, zero clippy |
 | VCS parity | **ALL REPOS AT PARITY** — zero drift across origin + forgejo (fixed cellMembrane diverge) |
-| membrane tooling | gate.preflight, gate.bootstrap, firewall.generate, gate.status, gate.health — ALL WORKING |
+| membrane tooling | gate.preflight, gate.bootstrap, firewall.generate, gate.status, gate.health, **topology.resolve/zones/mesh** — ALL WORKING |
 | Depot x86_64 | 13/13 (pepti behind HEAD — SSH→forgejo fix needed) |
+| Fresh binary | Deployed sporeGate + eastGate (f7ecefe → 9c14725). topology.* commands LIVE. |
 | Omada controller | **STOPPED** — switch runs standalone L2 (controller broke port 8) |
 | Eero status | **RETIRING** — CAT6 workaround from CRS310, NAT mode |
 | Flint 2 | **ORDERED** — OpenWrt WiFi 6, replaces Eero this weekend |
