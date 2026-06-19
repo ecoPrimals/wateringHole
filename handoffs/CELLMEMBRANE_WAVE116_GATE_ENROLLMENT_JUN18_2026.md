@@ -1,5 +1,8 @@
 # cellMembrane — Wave 116 Gate Enrollment Status
 
+> **SUPERSEDED** by `EASTGATE_ENROLLMENT_COMPLETE_WAVE116_JUN18.md` and
+> `CELLMEMBRANE_WAVE118_DEEP_DEBT_JUN19_2026.md`. SSH blocker resolved, eastGate enrolled.
+
 **Date:** 2026-06-18
 **From:** cellMembrane team (ironGate / sporeGate)
 **To:** eastGate overwatch, primalSpring coordination
