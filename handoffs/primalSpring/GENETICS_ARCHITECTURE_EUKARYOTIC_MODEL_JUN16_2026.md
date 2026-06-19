@@ -70,8 +70,10 @@ material is always derived on-demand by BearDog from parent lineage + entropy.
 | `0xED` | MitoBeacon obfuscated | "I belong to this group, obfuscate the tunnel" |
 | `0xEE` | Nuclear sealed | "I have lineage identity, encrypt per-session" |
 
-Current state: only `0xEC` (clear) is implemented. `0xED` and `0xEE` are defined
-but deferred until cross-gate WAN transport requires them.
+Current state: `0xEC` (clear) and `0xED` (mito-beacon) are implemented. toadStool
+S320 accepts `0xED` on all accept loops (Unix/TCP/BTSP/early-health) — HMAC tag
+read and logged, validation deferred to Wave 115 HKDF. `0xEE` (nuclear sealed) is
+defined but deferred until per-user tiered access requires it (Wave 115).
 
 ---
 

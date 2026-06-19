@@ -127,7 +127,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — S155b (March 15, 2026) — 20,843 workspace tests, clippy pedantic clean, all tests passing, 96+ JSON-RPC methods (dynamically built), ~83% line coverage (182K lines instrumented), BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, hw-learn pipeline (observe/distill/apply/share/status), nvpmu BAR0→RegisterAccess bridge, SPIR-V codegen safety (root-cause rename from nvvm_safety), FirmwareInventory in gpu.info, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph stability. Key recent: +558 net new tests (12 new integration test files), dependency audit (Pure Rust mandate met), unsafe code audit (all hardware-justified), coverage expansion
+**Status**: Production Ready (A++ GOLD STANDARD) — S320+ (June 19, 2026) — 23,000+ workspace tests (9,069+ lib-only), clippy pedantic clean (zero warnings), all tests passing, **112 JSON-RPC methods** (17 capability groups), **~85%+ line coverage** (target 90%), 100% SPDX AGPL-3.0-or-later headers, zero production files >750L, zero hardcoded cross-primal names, zero production mocks/TODO/FIXME, dispatch hot-path zero-copy optimized, `capability_registry.toml` authoritative. riboCipher: CLEAR (`0xEC`) + MitoBeacon (`0xED`) accepted; REJECT on unsignalled. gRPC + OpenCL **deleted** (S319). NUCLEUS 13/13 on eastGate (user systemd). BearDog crypto delegation enforced (Node Atomic), capability-based discovery, hw-learn pipeline, nvpmu BAR0→RegisterAccess, SPIR-V codegen safety, FirmwareInventory, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph, TOADSTOOL-AUTO-REGISTER (PCI sysfs GPU/NPU inventory)
 
 **Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
@@ -436,7 +436,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S279+ (23,000+ tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety, FirmwareInventory, PrecisionBrain, PRIMAL_BIND_MODE adopted) |
+| ToadStool | S320+ (23,000+ tests, 112 methods, zero-copy dispatch, riboCipher CLEAR+MITO, gRPC/OpenCL deleted, 100% SPDX, NUCLEUS 13/13 eastGate) |
 | hotSpring | v0.6.32 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch, guideStone L6 CERTIFIED) |
 | groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
