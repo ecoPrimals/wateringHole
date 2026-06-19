@@ -114,7 +114,7 @@ description = """cellMembrane code evolution owned by sporeGate team.
 Fresh tooling, cytoplasm zones, cascade, VPS management."""
 
 [stream4.tasks]
-fresh_harvest = { status = "✅ DONE", note = "620 tests green. Type evolution sprint: typed enums, topology.resolve, sovereignty_ledger, webhook abstraction." }
+fresh_harvest = { status = "✅ DONE", note = "680 tests green. rootpulse dispatch, webhook cascade, SSH consolidation, gate identity unified. pepti SSH→forgejo FIXED (wrong URLs)." }
 cytoplasm_zones = { status = "✅ DONE", note = "CytoplasmZone enum in envelope.rs + struct in topology.rs. ZoneStatus, BackboneLink, NetworkSegment shipped." }
 topology_resolve = { status = "✅ DONE", note = "topology module + topology.resolve command. TopologyMap, ResolvedTopology, AffinityTable implemented." }
 webhook_cascade = { status = "P2", note = "Wire webhook.rs to push to GitHub. Bidirectional event-driven cascade. Provider abstraction shipped." }

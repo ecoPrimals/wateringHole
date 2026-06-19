@@ -14,16 +14,17 @@ Overwatch handles cascade coordination, cross-team blurbs, and ecosystem-wide st
 
 ---
 
-## Current State (Jun 18 20:09 EDT)
+## Current State (Jun 19 14:10 EDT)
 
 | Asset | Status |
 |-------|--------|
-| primalSpring | 75 scenarios passing, zero failures |
-| NUCLEUS on eastGate | 11/13 primals LIVE (user systemd, no sudo) |
+| primalSpring | 75 scenarios passing, toadStool S320+ (112 methods, MitoBeacon) |
+| NUCLEUS on eastGate | **13/13 LIVE** (user systemd, no sudo) |
 | WireGuard | eastGate (.5) enrolled, 5-node mesh stable |
 | VCS | origin + forgejo at parity, zero drift |
-| cellMembrane | 660 tests green (topology types + typed enums landed) |
-| membrane binary | Fresh (topology.resolve/zones/mesh commands LIVE) |
+| cellMembrane | **680 tests** green (rootpulse, webhook cascade, SSH consolidation) |
+| membrane binary | Fresh (topology.resolve/zones/mesh + rootpulse dispatch) |
+| pepti | SSH→forgejo FIXED — fresh builds unblocked |
 
 ---
 

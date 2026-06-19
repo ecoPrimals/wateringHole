@@ -1,0 +1,41 @@
+# Wave 119 — Convergence & Final Enrollment
+# Issued: Jun 19, 2026 14:10 EDT
+# From: eastGate overwatch
+
+[meta]
+wave = 119
+issued_by = "eastGate_overwatch"
+issued_at = "2026-06-19T14:10:00-04:00"
+entry_state = """
+Wave 116–118 complete. 680 cellMembrane tests, 75 primalSpring scenarios.
+eastGate 13/13 NUCLEUS. 5-node WG mesh. pepti SSH→forgejo FIXED.
+Deep debt shipped across all 13 primals. sporePrint P0+P1 deployed.
+All VCS at parity (origin + forgejo + sporeGate-direct).
+"""
+note = """
+FOCUSED ATOMIC ROLES (carry from Wave 116):
+  flockGate → Tower (BearDog, Songbird, SkunkBat) — WAN periplasm trust
+  ironGate  → Node (ToadStool, BarraCuda, CoralReef) — compute trio
+  sporeGate → Nest (NestGate, RhizoCrypt, LoamSpine, SweetGrass) — data/provenance
+  eastGate  → Meta (BiomeOS, Squirrel, PetalTongue) — orchestration/AI/viz
+"""
+
+[stream1]
+name = "GATE-ENROLLMENT"
+owner = "sporeGate_overwatch"
+tasks = { flockgate_nucleus = "BLOCKED: SSH key auth not authorized for NUCLEUS deploy", irongate_ssh = "BLOCKED: operator RustDesk session needed to enable SSH + enroll" }
+
+[stream2]
+name = "HARDWARE-SWAP"
+owner = "sporeGate_overwatch"
+tasks = { flint2_install = "PENDING: Flint 2 arriving this weekend — replaces Eero at Hub 2", omada_access = "PENDING: need admin credentials to enable gate control" }
+
+[stream3]
+name = "VPS-HEALTH"
+owner = "sporeGate_overwatch"
+tasks = { pepti_fresh_build = "UNBLOCKED: trigger plasmid.harvest from HEAD", golgi_bridge_fix = "P2: beardog + biomeos bridge services failed on golgi", golgi_disk_watch = "73% — 2.6G free, journal vacuumed" }
+
+[stream4]
+name = "CODE-EVOLUTION"
+owner = "all_teams"
+tasks = { primalspring_scenarios = "75 scenarios — expand primal coverage", cellmembrane_evolution = "rootpulse + webhook cascade landed — test webhook dispatch", sporegprint_deploy = "P1 content (glossary, deployment) shipped — verify on primals.eco" }

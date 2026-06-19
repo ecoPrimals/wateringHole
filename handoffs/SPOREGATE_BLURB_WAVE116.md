@@ -1,8 +1,9 @@
-# sporeGate Overwatch — Wave 116 Blurb
+# sporeGate Overwatch — Wave 119 Blurb
 
-**Date**: Jun 19 2026 | **From**: eastGate overwatch
-**Status**: Reference gate (13/13, WG .2, cascade, SSH). Nest provenance authority.
+**Date**: Jun 19 2026 14:10 EDT | **From**: eastGate overwatch
+**Status**: Reference gate (13/13, WG .2, cascade, SSH). Nest provenance authority. **pepti P0 FIXED.**
 **Atomic Role**: Nest (NestGate, RhizoCrypt, LoamSpine, SweetGrass) — data/provenance dispatch target.
+**Key Win**: pepti SSH→forgejo resolved (wrong URLs, not firewall). All 37 repos now reachable from pepti.
 
 ---
 
@@ -123,8 +124,8 @@ membrane depot.checksums --generate   # produces checksums.toml
 | sporeGate | **13/13 NUCLEUS** (system systemd) |
 | flockGate | WG .6 LIVE, SSH pending key auth |
 | ironGate | Sovereign relay, SSH pending |
-| cellMembrane | **660 tests**, topology.resolve LIVE |
-| VCS | All repos at parity |
+| cellMembrane | **680 tests**, rootpulse+webhook wired, SSH consolidated |
+| VCS | All repos at parity — pepti can now reach forgejo (P0 fixed) |
 | WireGuard | 5 nodes (golgi, sporeGate, pepti, eastGate, flockGate) |
 
 ---

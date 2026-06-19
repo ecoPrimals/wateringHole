@@ -1,7 +1,8 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
-**Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 19 07:30 EDT (**eastGate 13/13 NUCLEUS LIVE** — biomeos + nestgate fixed, no sudo, 28 sockets, 660 tests)
+**Status**: CLOSED → Wave 119 | **From**: eastGate overwatch | **Date**: 2026-06-17
+**Final review**: Jun 19 14:07 EDT (CONVERGED: 680 tests, pepti P0 FIXED, deep debt across all 13 primals, sporePrint P0+P1 shipped, all VCS parity)
+**Transition**: Wave 116 objectives 80%+ complete. Remaining physical/operator-gated items carried to Wave 119.
 
 ---
 
@@ -284,7 +285,7 @@ local experiment tracking (rhizoCrypt, LoamSpine, SweetGrass).
 
 | Item | Priority | Status |
 |------|----------|--------|
-| Fix pepti SSH→forgejo | **P0** | Still needed — blocks fresh builds from reconciled HEAD |
+| ~~Fix pepti SSH→forgejo~~ | ~~P0~~ | ✅ FIXED — wrong remote URLs on pepti (port 22 → 2222, sporeGarden → ecoPrimals) |
 | ~~eastGate 13/13~~ | ~~P1~~ | ✅ DONE — biomeos (neural-api) + nestgate (socket+JWT) fixed. 13/13 LIVE. |
 | flockGate NUCLEUS deploy | **P1** | ✅ UNBLOCKED: SSH key authorized (irongate@pop-os). Deploy via `ssh flockgate@10.13.37.6` |
 | ~~Cytoplasm zone types~~ | ~~P2~~ | ✅ SHIPPED — CytoplasmZone enum + struct, topology.resolve |
@@ -304,7 +305,7 @@ local experiment tracking (rhizoCrypt, LoamSpine, SweetGrass).
 | Gates NUCLEUS-active | **2** — sporeGate (13/13), eastGate (**13/13** user systemd) |
 | Gates WG-enrolled (NUCLEUS pending) | **1** — flockGate (.6, ready for deploy) |
 | WireGuard mesh nodes | **5 live** — golgi(.1), sporeGate(.2), pepti(.4), eastGate(.5), flockGate(.6) |
-| cellMembrane tests | **660**, zero warnings, zero clippy |
+| cellMembrane tests | **680**, zero warnings, zero clippy |
 | VCS parity | **ALL REPOS AT PARITY** — zero drift across origin + forgejo (fixed cellMembrane diverge) |
 | membrane tooling | gate.preflight, gate.bootstrap, firewall.generate, gate.status, gate.health, **topology.resolve/zones/mesh** — ALL WORKING |
 | Depot x86_64 | 13/13 (pepti behind HEAD — SSH→forgejo fix needed) |
