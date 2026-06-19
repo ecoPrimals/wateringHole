@@ -1,7 +1,7 @@
 # Wave 116 — Mesh Enrollment & Gate Parity
 
 **Status**: ACTIVE | **From**: eastGate overwatch | **Date**: 2026-06-17
-**Last review**: Jun 18 20:09 EDT (STABLE: 660 tests, primal work assigned to live gates, topology.* LIVE, all VCS at parity)
+**Last review**: Jun 19 07:30 EDT (**eastGate 13/13 NUCLEUS LIVE** — biomeos + nestgate fixed, no sudo, 28 sockets, 660 tests)
 
 ---
 
@@ -18,7 +18,7 @@ systemd persisted, SSH accessible, WireGuard overlay, cascade connected).
 | Gate | Relay | Zone | OS | SSH | NUCLEUS | WireGuard | Next Action |
 |------|-------|------|----|-----|---------|-----------|-------------|
 | **sporeGate** | ✅ Sovereign | backbone | Pop!_OS | ✅ | 13/13 | ✅ (10.13.37.2) | Reference gate — fully enrolled |
-| **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | 11/13 | ✅ (10.13.37.5) | **NUCLEUS LIVE** — 11/13 primals, 25 sockets, user systemd. biomeos+nestgate need fixes. |
+| **eastGate** | ✅ Sovereign | backbone | Pop!_OS 22.04 | ✅ | **13/13** | ✅ (10.13.37.5) | **FULL NUCLEUS** — 13/13 primals, 28 sockets, user systemd. No sudo needed. |
 | **northGate** | ✅ Sovereign | backbone | Windows | — | — | — | P3: hobby, SSH + NUCLEUS after Linux proven |
 | **ironGate** | ✅ Sovereign | TBD | TBD | — | — | — | SSH enable, identify hardware, assign team |
 | **flockGate** | ✅ Sovereign | WAN | Ubuntu 24.04 | ✅ | — | ✅ (10.13.37.6) | **LIVE on mesh** — 32ms to golgi, 72ms to sporeGate. NUCLEUS deploy next. |
@@ -216,8 +216,8 @@ Each primal has a role. With gates live, we assign work per primal per gate:
 | **LoamSpine** | Nest | Merkle ledger | Sovereign ledger commits, wave state persistence |
 | **SweetGrass** | Nest | Attribution | Commit braids, contribution attribution across gates |
 | **Squirrel** | Meta | AI inference | primalSpring scenario intelligence, evolution guidance, pattern matching |
-| ~~BiomeOS~~ | Meta | Orchestration | BLOCKED — CLI path issue (cellMembrane team P1) |
-| ~~NestGate~~ | Nest | Content gates | BLOCKED — `NESTGATE_JWT_SECRET` needed (cellMembrane team P1) |
+| **BiomeOS** | Meta | Orchestration | LIVE — neural-api on biomeos-neural.sock. Graph orchestration, NUCLEUS lifecycle. |
+| **NestGate** | Nest | Content storage | LIVE — nestgate.sock + TCP 8092. Sovereign ZFS-style storage, content-addressed blobs. |
 
 **Compute focus**: primalSpring evolution, experiment orchestration, provenance trio (rhizoCrypt → BearDog → LoamSpine → sweetGrass).
 
@@ -268,7 +268,7 @@ Once NUCLEUS is deployed (sporeGate team, blocked on SSH key):
 | Item | Priority | Status |
 |------|----------|--------|
 | Fix pepti SSH→forgejo | **P0** | Still needed — blocks fresh builds from reconciled HEAD |
-| eastGate 13/13 (biomeos + nestgate) | **P1** | 11/13 done. biomeos CLI path + nestgate JWT needed |
+| ~~eastGate 13/13~~ | ~~P1~~ | ✅ DONE — biomeos (neural-api) + nestgate (socket+JWT) fixed. 13/13 LIVE. |
 | flockGate NUCLEUS deploy | **P1** | ✅ UNBLOCKED: SSH key authorized (irongate@pop-os). Deploy via `ssh flockgate@10.13.37.6` |
 | ~~Cytoplasm zone types~~ | ~~P2~~ | ✅ SHIPPED — CytoplasmZone enum + struct, topology.resolve |
 | ~~Sovereignty ledger~~ | ~~P2~~ | ✅ SHIPPED — rootpulse_commit/verify round-trip |
@@ -283,8 +283,8 @@ Once NUCLEUS is deployed (sporeGate team, blocked on SSH key):
 | Metric | Value |
 |--------|-------|
 | Gates on sovereign relay | **5/9** (+ 3 pending, 1 offline) |
-| Gates fully enrolled | **1/9** (sporeGate: 13/13 + WG + cascade) |
-| Gates NUCLEUS-active | **2** — sporeGate (13/13), eastGate (11/13 user systemd) |
+| Gates fully enrolled | **2/9** — sporeGate (13/13 system), eastGate (13/13 user systemd) |
+| Gates NUCLEUS-active | **2** — sporeGate (13/13), eastGate (**13/13** user systemd) |
 | Gates WG-enrolled (NUCLEUS pending) | **1** — flockGate (.6, ready for deploy) |
 | WireGuard mesh nodes | **5 live** — golgi(.1), sporeGate(.2), pepti(.4), eastGate(.5), flockGate(.6) |
 | cellMembrane tests | **660**, zero warnings, zero clippy |

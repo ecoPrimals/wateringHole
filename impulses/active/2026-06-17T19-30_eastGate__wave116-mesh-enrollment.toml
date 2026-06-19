@@ -54,7 +54,7 @@ SSH → preflight → membrane install → NUCLEUS 13/13 → systemd → WireGua
 sporeGate is the reference. Each gate gets the same treatment."""
 
 [stream1.tasks]
-eastgate_enroll = { status = "✅ 11/13", note = "NUCLEUS deployed via user systemd (no sudo). 10 primals + songbird LIVE. Missing: biomeos (CLI path), nestgate (JWT). WG .5 LIVE." }
+eastgate_enroll = { status = "✅ 13/13", note = "FULL NUCLEUS via user systemd (no sudo). 13 primals + songbird = 28 sockets. biomeos (neural-api), nestgate (socket+JWT+port 8092). WG .5 LIVE." }
 irongate_enroll = { status = "TODO", note = "On sovereign relay. Need: identify OS via RustDesk, enable SSH, then pipeline." }
 flockgate_enroll = { status = "IN PROGRESS", note = "SSH done, WG .6 LIVE (32ms golgi, 72ms sporeGate). NUCLEUS next. BLOCKED: SSH key not authorized for sporeGate on flockGate." }
 northgate_enroll = { status = "P3", note = "Windows/5090. Hobby system. Prove NUCLEUS on Linux first. Sovereign relay already done." }
@@ -125,7 +125,7 @@ description = """eastGate becomes a fully enrolled NUCLEUS gate alongside
 its primalSpring development role. Validate locally what sporeGate deploys remotely."""
 
 [stream5.tasks]
-nucleus_on_eastgate = { status = "✅ 11/13", note = "User systemd deployed. 10 nucleus primals + songbird LIVE. Missing biomeos (CLI) + nestgate (JWT). No sudo needed." }
+nucleus_on_eastgate = { status = "✅ 13/13", note = "FULL NUCLEUS user systemd. All 13 primals LIVE (28 sockets). biomeos=neural-api, nestgate=socket+JWT. No sudo. DONE." }
 primalspring_scenarios = { status = "ONGOING", note = "Continue validation scenarios, evolution modules, genetics compliance." }
 cascade_validation = { status = "ONGOING", note = "eastGate as independent validation node — confirm gate parity after each enrollment." }
 
