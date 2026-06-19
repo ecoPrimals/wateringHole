@@ -126,7 +126,7 @@ For each gate that's on sovereign relay:
 |------|-------------|-------------------|----------|---------|
 | **eastGate** | ✅ Key authorized | ✅ Probed (i9-12900K, 32GB, 10G) | `enroll.sh` staged at `~/enrollment/` | sudo password (operator) |
 | **ironGate** | Pending | — | After SSH | OS identification via RustDesk |
-| **flockGate** | ✅ Done | ✅ WG live (32ms golgi, 62ms sporeGate) | NUCLEUS deploy next | — |
+| **flockGate** | ✅ Done + sporeGate key authorized | ✅ WG live (32ms golgi, 62ms sporeGate) | NUCLEUS deploy next | ✅ UNBLOCKED |
 
 ---
 
