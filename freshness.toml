@@ -9,9 +9,9 @@
 
 [wave]
 id = 119
-date = "2026-06-19"
+date = "2026-06-20"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 119: flockGate 11/13 LIVE. Nest provenance end-to-end. primalSpring 85 scenarios, 959 tests, deep debt sweep complete."
+notes = "Wave 119: flockGate 11/13 LIVE. Nest provenance end-to-end. primalSpring 90 scenarios, 971 tests. Deep debt: typed errors, hardcoding cleanup, 2 new scenarios (flockgate-tower-wan, provenance-cross-gate). All tracks covered."
 publisher = "primalSpring"
 
 [heads]
