@@ -57,22 +57,20 @@ diverge_impulse = true
 [topology]
 model = "diderm"
 inner_membrane = "golgiBody"
-peptidoglycan = "peptidoglycan"
 outer_membrane = "golgiBody-ext"
 
 [topology.hosts]
 golgiBody = "157.230.3.183"
-peptidoglycan = "157.230.209.218"
 golgiBody-ext = "137.184.197.151"
 
 # K-Derm layer roles — which node handles which function in the
 # waterFall relay chain. Bond types degrade outward:
-# covalent (gate→inner) → metallic (inner→pepti) → ionic (pepti→outer) → weak (outer→GitHub)
+# covalent (gate→inner) → ionic (inner→outer) → weak (outer→GitHub)
 [topology.roles]
 push_receiver = "golgiBody"           # cis face: receives gate pushes (Forgejo)
 build_authority = "sporeGate"         # sovereign CI: builds all primals locally
 depot_server = "golgiBody"            # WAN depot: serves binaries via Caddy TLS
-sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade (was pepti)
+sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade
 external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
 
 # ═══════════════════════════════════════════════════════════════════
@@ -731,26 +729,6 @@ repos = [
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
-]
-
-# peptidoglycan (VPS, structural layer) — DECOMMISSION CANDIDATE (build role moved to sporeGate)
-[gates.peptidoglycan]
-kderm_layer = "peptidoglycan"
-bond_types = ["metallic"]
-host = "157.230.209.218"
-status = "decommission_candidate"
-notes = "Build authority moved to sporeGate (sovereign CI). Depot serving moved to golgi. Keeping alive as redundant sync node until fully validated. Target: downsize or eliminate."
-repos = [
-    "nestGate", "wateringHole", "plasmidBin", "primalSpring",
-    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
-    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
-    "petalTongue", "skunkBat", "bingoCube", "sourDough",
-    "cellMembrane", "projectNUCLEUS", "lithoSpore", "projectFOUNDATION",
-    "esotericWebb", "blueFish", "helixVision", "initioChem",
-    "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint",
-    "wetSpring", "neuralSpring", "hotSpring",
-    "airSpring", "groundSpring", "healthSpring", "ludoSpring",
-    "fossilRecord",
 ]
 
 # golgiBody-ext (VPS, outer membrane) — public-facing, sporePrint, TURN relay
