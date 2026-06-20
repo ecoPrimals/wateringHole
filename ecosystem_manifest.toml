@@ -70,7 +70,9 @@ golgiBody-ext = "137.184.197.151"
 # covalent (gate→inner) → metallic (inner→pepti) → ionic (pepti→outer) → weak (outer→GitHub)
 [topology.roles]
 push_receiver = "golgiBody"           # cis face: receives gate pushes (Forgejo)
-sync_mediator = "peptidoglycan"       # structural: sync hub + impulse cascade
+build_authority = "sporeGate"         # sovereign CI: builds all primals locally
+depot_server = "golgiBody"            # WAN depot: serves binaries via Caddy TLS
+sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade (was pepti)
 external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
 
 # ═══════════════════════════════════════════════════════════════════
@@ -506,7 +508,8 @@ hub_port = "ether8"
 link_speed_mbps = 2500
 kderm_role = "plasma_membrane"
 site_topology = "triangle_3hub"
-notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke. Omada SDN controller installed but STOPPED (standalone L2 preferred)."
+build_authority = true
+notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke. SOVEREIGN CI: builds all 13 primals locally (12-core Ryzen 5 6600H, 27GB RAM), syncs depot to golgi. Omada SDN controller STOPPED (standalone L2 preferred)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -730,11 +733,13 @@ repos = [
     "petalTongue", "skunkBat",
 ]
 
-# peptidoglycan (VPS, structural layer) — build hub, workspace, temporal sync convergence
+# peptidoglycan (VPS, structural layer) — DECOMMISSION CANDIDATE (build role moved to sporeGate)
 [gates.peptidoglycan]
 kderm_layer = "peptidoglycan"
 bond_types = ["metallic"]
 host = "157.230.209.218"
+status = "decommission_candidate"
+notes = "Build authority moved to sporeGate (sovereign CI). Depot serving moved to golgi. Keeping alive as redundant sync node until fully validated. Target: downsize or eliminate."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",

@@ -11,16 +11,17 @@
 # Authority: sporeGate (routing) + bearDog (key management)
 
 [meta]
-version = "1.4.0"
-wave = 119
+version = "1.5.0"
+wave = 120
 overlay_subnet = "10.13.37.0/24"
 port = 51820
 key_management = "wg genkey (manual, pre-bearDog integration)"
-status = "LIVE — 5-node mesh: golgiBody ↔ sporeGate ↔ pepti ↔ eastGate ↔ flockGate — all handshakes active"
-last_deployed = "2026-06-19T14:40:00-04:00"
+status = "LIVE — 5-node mesh: golgiBody ↔ sporeGate ↔ pepti (decommission candidate) ↔ eastGate ↔ flockGate"
+last_deployed = "2026-06-20T10:06:00-04:00"
 active_peers = 5
 pending_peers = 0
 hub_forwarding = "enabled (sysctl net.ipv4.ip_forward=1 on golgiBody)"
+build_authority = "sporeGate (sovereign CI — all 13 primals built locally, synced to golgi depot)"
 
 # ═══════════════════════════════════════════════════════════════
 # Mesh Peers
@@ -79,7 +80,7 @@ status_detail = "LIVE — 11/13 NUCLEUS via user-level systemd, WG handshake act
 note = "Primary compute gate. i9-12900K, 32GB, 10G SFP+. CRS310 backbone zone."
 
 [peers.peptidoglycan]
-role = "build_node"
+role = "decommission_candidate"
 status = "LIVE"
 endpoint = "157.230.209.218:51820"
 overlay_ip = "10.13.37.4/24"
@@ -90,7 +91,7 @@ allowed_ips = ["10.13.37.4/32"]
 keepalive_seconds = 25
 measured_latency_to_golgi_ms = 1.5
 measured_latency_to_sporegate_ms = 34
-note = "Build authority. Mesh relay through golgiBody. systemd persisted."
+note = "DECOMMISSION CANDIDATE: build authority moved to sporeGate (sovereign CI). Keep alive as redundant sync node until operator decides to downsize/eliminate."
 
 [peers.flockgate]
 role = "wan_gate"
