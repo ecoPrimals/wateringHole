@@ -507,6 +507,8 @@ link_speed_mbps = 2500
 kderm_role = "plasma_membrane"
 site_topology = "triangle_3hub"
 build_authority = true
+wg_ip = "10.13.37.2"
+roles = ["build_hub", "depot", "cascade_hub", "nat_firewall", "nucleus"]
 notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke. SOVEREIGN CI: builds all 13 primals locally (12-core Ryzen 5 6600H, 27GB RAM), syncs depot to golgi. Omada SDN controller STOPPED (standalone L2 preferred)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
@@ -526,6 +528,8 @@ mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "sfp+2"
 link_speed_mbps = 10000
+wg_ip = "10.13.37.5"
+roles = ["nucleus", "validation", "overwatch", "primalspring"]
 notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
@@ -540,6 +544,14 @@ repos = [
 ]
 
 [gates.ironGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "full"
+transport = "lan"
+zone = "backbone"
+roles = ["nucleus", "node_atomic", "compute"]
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). Pop!_OS. SSH pending key auth."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -601,6 +613,8 @@ composition = "full"
 transport = "wan"
 mesh_peer = "157.230.3.183:7700"
 segmentation = "external-only"
+wg_ip = "10.13.37.6"
+roles = ["nucleus", "sporePrint", "wan_validator", "tower_atomic"]
 notes = "WAN Tower atomic (BearDog, Songbird, SkunkBat). 11/13 NUCLEUS via user systemd. i9-13900K/62GB. SSH via golgi ProxyJump."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
@@ -722,7 +736,9 @@ bind_mode = "uds"
 composition = "full"
 transport = "local"
 mesh_peer = "127.0.0.1:7700"
-notes = "VPS inner membrane — 13/13 NUCLEUS, Forgejo, Caddy"
+wg_ip = "10.13.37.1"
+roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "nucleus"]
+notes = "VPS inner membrane — 13/13 NUCLEUS, Forgejo, Caddy, WG hub, sovereign relay"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "cellMembrane", "projectNUCLEUS",
@@ -736,6 +752,8 @@ repos = [
 kderm_layer = "outer_membrane"
 bond_types = ["ionic", "weak"]
 host = "137.184.197.151"
+roles = ["tls_terminator", "dns_secondary", "github_publisher", "sporePrint", "turn_relay"]
+notes = "VPS outer membrane — TLS termination (primals.eco, primal.eco, nestgate.io), DNS secondary, GitHub push mirror, Songbird TURN"
 repos = [
     "sporePrint", "wateringHole",
 ]
