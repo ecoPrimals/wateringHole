@@ -15,7 +15,7 @@
 | **flockGate** | **13/13** | .6 | ✅ via golgi jump | Tower (trust/discovery/defense) | i9-13900K 62GB (WAN) |
 | **ironGate** | — | — | BLOCKED | Node (compute trio) | Pop!_OS i9-12900K |
 | **golgi** | 18 svc | .1 | ✅ | VPS hub, Forgejo, WG relay, WAN depot | DO droplet |
-| **pepti** | building | .4 | ✅ | **DECOMMISSION CANDIDATE** — build role absorbed by sporeGate | DO droplet ($24/mo) |
+| **pepti** | — | .4 | ✅ | **DECOMMISSION GO** — destroy this wave | DO droplet ($24/mo → $0) |
 
 ### Offline/Deferred Gates
 
@@ -133,33 +133,31 @@ chmod 600 ~/.ssh/authorized_keys
 | VPS | Disk | Services | Status |
 |-----|------|----------|--------|
 | golgi | 73% (2.3G free) | Forgejo, WG, relay, Caddy, bridges (18) | ✅ 0 failed |
-| pepti | OK | Building fresh harvest from HEAD | ⏳ DECOMMISSION CANDIDATE |
+| pepti | OK | No remaining role | ❌ DECOMMISSION GO — destroy this wave |
 
 ---
 
-## pepti Decommission Decision (Wave 120)
+## pepti Decommission — GO (Wave 120)
 
-sporeGate has fully absorbed pepti's build authority role:
-- Sovereign CI pipeline live with Forgejo hooks
-- 3x faster builds ($0/mo vs $24/mo)
-- Depot integrity proven
-- golgi depot fed via rsync over WG
+**Decision**: GO — operator approved Jun 20.
+**Assigned**: sporeGate overwatch
 
-**Decommission sequence** (on GO):
+sporeGate has fully absorbed pepti's build authority role. golgi stays as the
+smaller public-facing VPS (Forgejo, WG hub, relay, Caddy, WAN depot).
+
+**Decommission sequence**:
 1. Stop all services on pepti
 2. Remove pepti WG peer from golgi (`wg set wg0 peer <key> remove`)
-3. Update `WIREGUARD_MESH.toml` (4-node mesh)
-4. Destroy DigitalOcean droplet
-5. Update manifests
-6. Save $24/mo permanently
-
-**Risk**: If sporeGate goes offline, no builds until it returns. Mitigation: golgi depot keeps serving last-good binaries. eastGate (i9-12900K) available as secondary builder.
+3. Update `WIREGUARD_MESH.toml` (4-node mesh: golgi, sporeGate, eastGate, flockGate)
+4. Destroy DigitalOcean droplet ($24/mo saved)
+5. Update manifests (remove `[gates.peptidoglycan]`)
+6. Remove pepti from DNS if any records exist
 
 **Architecture after decommission**:
 ```
 Internet → ATT → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → LAN gates
                       ↕ WireGuard (10.13.37.2)
-               golgi VPS (10.13.37.1)
+               golgi VPS (10.13.37.1) — the one remaining VPS
                ├── Forgejo (git.primals.eco)
                ├── WG Hub (4-node mesh)
                ├── Sovereign Relay (hbbs/hbbr)

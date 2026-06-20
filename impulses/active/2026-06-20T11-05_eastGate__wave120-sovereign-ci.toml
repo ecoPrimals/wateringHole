@@ -20,7 +20,7 @@ FOCUSED ATOMIC ROLES:
   sporeGate → Nest (NestGate, RhizoCrypt, LoamSpine, SweetGrass) + BUILD AUTHORITY
   eastGate  → Meta (BiomeOS, Squirrel, PetalTongue) — orchestration/AI/viz
 
-DECISION NEEDED: pepti decommission GO/NO-GO (saves $24/mo)
+DECISION: pepti decommission GO (saves $24/mo). golgi stays as sole VPS.
 """
 
 [stream1]
@@ -30,8 +30,8 @@ tasks = { irongate_ssh = "P0: RustDesk into 192.168.4.169, add SSH key, deploy N
 
 [stream2]
 name = "PEPTI-DECOMMISSION"
-owner = "eastGate_overwatch"
-tasks = { decision = "GO/NO-GO decision from operator", execute = "If GO: stop services, remove WG peer, destroy droplet, update manifests" }
+owner = "sporeGate_overwatch"
+tasks = { decision = "✅ GO — operator approved Jun 20", execute = "Stop services, remove WG peer from golgi, destroy droplet, update manifests. golgi stays as sole VPS." }
 
 [stream3]
 name = "HARDWARE"
