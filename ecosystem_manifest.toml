@@ -137,7 +137,7 @@ local_path = "primals/coralReef"
 membrane = "bidirectional"
 sync_priority = "standard"
 category = "primal"
-description = "Distributed compute mesh"
+description = "Sovereign WGSL/SPIR-V/GLSL shader compiler"
 github_repo = "ecoPrimals/coralReef"
 forgejo_repo = "ecoPrimals/coralReef"
 

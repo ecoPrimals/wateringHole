@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 19, 2026 (Wave 119: flockGate NUCLEUS 11/13 LIVE (i9-13900K/62GB). Nest provenance end-to-end: DAG→ledger→witness. primalSpring 85 scenarios, 959 tests. Deep debt: 18 map().unwrap_or() anti-patterns evolved, Tier::Both test tolerance, cascade-drift known debt. ironGate SSH BLOCKED — pubkey enrollment needed.)
+**Last Updated**: June 20, 2026 (Wave 119: flockGate 11/13 LIVE. primalSpring 90 scenarios, 971 tests — deep debt sweep: typed errors (GraphFailed/Training → structured), hardcoding cleanup (/home/eastgate → $HOME, gate debt caps centralized), clone elimination, runtime-dir centralization, 2 new scenarios (flockgate-tower-wan, provenance-cross-gate), all 11 tracks covered. Docs fossilized. ironGate SSH BLOCKED.)
 
 ---
 
