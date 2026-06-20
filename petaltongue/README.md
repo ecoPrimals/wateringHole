@@ -2,7 +2,7 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: June 19, 2026 (Wave 116 — gate mesh visualization, AEAD consolidated, deep debt executed. 6,618+ tests)
+**Updated**: June 20, 2026 (Wave 120 — feature-gated TUI/cache, legacy dead code removed, hot-path optimized. 6,618+ tests)
 
 ---
 
@@ -27,6 +27,10 @@ petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
 - **Gate mesh visualization** (Wave 116): `gate-mesh` viz slug renders WireGuard overlay topology with enrollment status, NUCLEUS health per gate, and enrollment animation. `gate.mesh.status` IPC method for runtime queries.
 - **Single AEAD** (Wave 116): Entire codebase uses XChaCha20-Poly1305; `aes-gcm` removed.
 - **Shared topology data**: `petal_tongue_core::gate_mesh` is single source of truth for mesh state (consumed by viz scene + IPC handler).
+- **Feature-gated binary** (Wave 120): `tui` and `ui` are independent default features — web/headless deployments build without ratatui/crossterm/egui. `--no-default-features` produces minimal ecoBin binary.
+- **Discovery cache gated** (Wave 120): `petal-tongue-discovery` `cache` feature controls LRU+TTL layer; `lru` not pulled unless explicitly needed.
+- **Legacy renderer removed** (Wave 120): 5 pre-SceneGraph draw functions eliminated (508 lines). Grammar of Graphics pipeline is sole rendering path.
+- **Hot-path allocation eliminated** (Wave 120): Modality compile returns `&'static str` format tags — zero heap allocations per visualization render.
 - **`health.liveness` normalized**: Returns exactly `{"status":"alive"}` on both HTTP and IPC.
 - **Content backend evolution**: `web_mode/content_backend.rs` replaces nestgate.rs — primal-agnostic `content.resolve` client
 - **Enriched `capability.list`**: returns `primal`, `version`, `transport[]`, `methods[]`, `depends_on[]`, `data_bindings`, `geometry_types`
