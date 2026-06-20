@@ -15,7 +15,7 @@
 | **flockGate** | **13/13** | .6 | ✅ via golgi jump | Tower (trust/discovery/defense) | i9-13900K 62GB (WAN) |
 | **ironGate** | — | — | BLOCKED | Node (compute trio) | Pop!_OS i9-12900K |
 | **golgi** | 18 svc | .1 | ✅ | VPS hub, Forgejo, WG relay, WAN depot | DO droplet |
-| **pepti** | — | .4 | ✅ | **DECOMMISSION GO** — destroy this wave | DO droplet ($24/mo → $0) |
+| ~~pepti~~ | — | — | — | **DECOMMISSIONED** Wave 120 | Destroyed ($24/mo saved) |
 
 ### Offline/Deferred Gates
 
@@ -100,7 +100,7 @@ chmod 600 ~/.ssh/authorized_keys
 | Flint 2 config (after physical install) | P2 | This weekend |
 | Omada SX3008F management (http://192.168.4.111, admin/admin) | P2 | Access confirmed |
 | strandGate/southGate sovereign relay push | P2 | Via RustDesk |
-| pepti decommission (awaiting GO from overwatch) | P1 | See below |
+| pepti decommission | ✅ | DONE — droplet destroyed, $24/mo saved |
 
 ### eastGate — Meta Atomic (BiomeOS, Squirrel, PetalTongue)
 
@@ -120,7 +120,7 @@ chmod 600 ~/.ssh/authorized_keys
 
 | Repo | Tests | Status | Latest |
 |------|-------|--------|--------|
-| **cellMembrane** | 711 | ✅ zero clippy | native /proc detection, error normalization, mesh constants |
+| **cellMembrane** | 729 | ✅ zero clippy | deployment isomorphism (topology.service, wireguard/caddy.generate) |
 | **primalSpring** | 963 (87 scenarios) | ✅ | toadStool S321, deep debt sweep, typed errors |
 | **sporePrint** | 175 | ✅ | deep debt + docs refresh, gonzales removed, v0.3.0 |
 | **biomeOS** | 8,351 | ✅ 88% cov | v4.31 structural refactoring |
@@ -132,32 +132,44 @@ chmod 600 ~/.ssh/authorized_keys
 
 | VPS | Disk | Services | Status |
 |-----|------|----------|--------|
-| golgi | 73% (2.3G free) | Forgejo, WG, relay, Caddy, bridges (18) | ✅ 0 failed |
-| pepti | OK | No remaining role | ❌ DECOMMISSION GO — destroy this wave |
+| golgi | 73% (2.3G free) | Forgejo, WG hub, relay, Caddy, depot (18 svc) | ✅ 0 failed — sole VPS |
+
+pepti decommissioned Wave 120. $24/mo saved. 4-node mesh: golgi ↔ sporeGate ↔ eastGate ↔ flockGate.
 
 ---
 
-## pepti Decommission — GO (Wave 120)
+## Deployment Isomorphism (NEW — Wave 120)
 
-**Decision**: GO — operator approved Jun 20.
-**Assigned**: sporeGate overwatch
+cellMembrane now supports identity-based service discovery and declarative config generation:
 
-sporeGate has fully absorbed pepti's build authority role. golgi stays as the
-smaller public-facing VPS (Forgejo, WG hub, relay, Caddy, WAN depot).
+### Shipped (Tier 1+2)
 
-**Decommission sequence**:
-1. Stop all services on pepti
-2. Remove pepti WG peer from golgi (`wg set wg0 peer <key> remove`)
-3. Update `WIREGUARD_MESH.toml` (4-node mesh: golgi, sporeGate, eastGate, flockGate)
-4. Destroy DigitalOcean droplet ($24/mo saved)
-5. Update manifests (remove `[gates.peptidoglycan]`)
-6. Remove pepti from DNS if any records exist
+| Command | What It Does |
+|---------|--------------|
+| `membrane topology.service <role>` | Find service by role, not host (returns gate + mesh IP + zone) |
+| `membrane topology.roles` | List all role→gate mappings from manifest |
+| `membrane wireguard.generate` | Produce wg-quick config from manifest peers |
+| `membrane caddy.generate` | Render Caddyfile from manifest roles + topology |
 
-**Architecture after decommission**:
+**Upstream action done**: `roles` and `wg_ip` populated in `ecosystem_manifest.toml` for golgi, sporeGate, eastGate, flockGate, ironGate.
+
+### Remaining (Tier 3 — self-healing mesh)
+
+| Item | Priority | Notes |
+|------|----------|-------|
+| `gate.migrate <role> <from> <to>` | P2 | Orchestrated service migration |
+| `gate.bootstrap --absorb <role>` | P2 | Node assumes role including creds |
+| Credential portability (bearDog vault) | P2 | Keys stored by role-identity |
+| DNS config generation | P3 | `gate.provision --dns` |
+
+---
+
+## Architecture (Post-Decommission)
+
 ```
 Internet → ATT → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → LAN gates
                       ↕ WireGuard (10.13.37.2)
-               golgi VPS (10.13.37.1) — the one remaining VPS
+               golgi VPS (10.13.37.1) — sole VPS
                ├── Forgejo (git.primals.eco)
                ├── WG Hub (4-node mesh)
                ├── Sovereign Relay (hbbs/hbbr)
@@ -172,14 +184,15 @@ Internet → ATT → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → LAN gates
 - eastGate 13/13 NUCLEUS (user systemd, no sudo)
 - sporeGate 13/13 NUCLEUS (system systemd) + **SOVEREIGN BUILD AUTHORITY**
 - flockGate **13/13** NUCLEUS (same pattern, WAN gate, Tower team active)
-- 5-node WireGuard mesh (golgi hub, all handshakes < 2min)
+- 4-node WireGuard mesh (golgi hub, pepti decommissioned)
 - Nest provenance end-to-end: RhizoCrypt DAG → LoamSpine ledger → SweetGrass witness (height 3)
 - Sovereign CI: push → Forgejo hook → sporeGate build → rsync → WAN depot
 - Depot integrity: checksums.toml BLAKE3, 13/13 verified
 - golgi bridges fixed: 0 failed units, 18 services
 - Deep debt across all 13 primals (zero P1, zero known debt)
 - sporePrint v0.3.0: 175 tests, 222 pages, P0+P1 shipped
-- pepti SSH→Forgejo fixed, build role fully migrated
+- **pepti decommissioned**: $24/mo saved, build authority on owned hardware
+- **Deployment isomorphism Tier 1+2**: identity-based discovery + declarative config gen
 
 ---
 
