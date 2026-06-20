@@ -24,12 +24,12 @@ FOCUSED ATOMIC ROLES (carry from Wave 116):
 [stream1]
 name = "GATE-ENROLLMENT"
 owner = "sporeGate_overwatch"
-tasks = { flockgate_nucleus = "✅ 11/13 LIVE — nestgate+biomeos need JWT/CLI fix (same as eastGate pattern)", irongate_ssh = "BLOCKED: operator must add sporeGate pubkey via RustDesk" }
+tasks = { flockgate_nucleus = "✅ 11/13 LIVE — nestgate+biomeos JWT/CLI fix assigned to flockGate Tower team", irongate_ssh = "ASSIGNED: sporeGate overwatch via RustDesk (sovereign relay live)" }
 
 [stream2]
 name = "HARDWARE-SWAP"
 owner = "sporeGate_overwatch"
-tasks = { flint2_install = "PENDING: Flint 2 arriving this weekend — replaces Eero at Hub 2", omada_access = "PENDING: need admin credentials to enable gate control" }
+tasks = { flint2_install = "OPERATOR: Flint 2 physical install this weekend", omada_access = "UNBLOCKED: admin/admin at 192.168.4.115 — assigned to sporeGate overwatch" }
 
 [stream3]
 name = "VPS-HEALTH"

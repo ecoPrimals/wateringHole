@@ -46,15 +46,22 @@
 
 ### ironGate — Node Atomic (ToadStool, BarraCuda, CoralReef)
 
-**Status**: BLOCKED on SSH key auth. Operator must add sporeGate pubkey.
+**Status**: SSH key auth needed. **Assigned: sporeGate overwatch** (RustDesk access live).
 
+| Task | Priority | Status |
+|------|----------|--------|
+| RustDesk into ironGate → add SSH key | P0 | Assigned to sporeGate overwatch |
+| Deploy NUCLEUS (same flockGate pattern) | P0 | After SSH |
+| ToadStool fleet management (112 methods, S320+) | P1 | After NUCLEUS |
+| BarraCuda tensor dispatch | P1 | After NUCLEUS |
+| CoralReef shader pipelines | P1 | After NUCLEUS |
+
+SSH key to add (via RustDesk terminal on ironGate):
 ```bash
-# On ironGate (via RustDesk or keyboard):
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
 echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILU4i9hEtHJA02/JZ8XR/OHaR/bSiuAaDRMhdJX7zuRp sporegate-gate-v1" >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
 ```
-
-**After SSH**: sporeGate deploys NUCLEUS (same proven pattern as flockGate).
-Then: ToadStool fleet management, BarraCuda tensor dispatch, CoralReef shader pipelines.
 
 ### sporeGate — Nest Atomic (NestGate, RhizoCrypt, LoamSpine, SweetGrass)
 
@@ -67,7 +74,7 @@ Then: ToadStool fleet management, BarraCuda tensor dispatch, CoralReef shader pi
 | checksums.toml for depot (fixes DEGRADED probe) | P2 | Need `plasmid.harvest` |
 | Flint 2 physical swap (replaces Eero at Hub 2) | P2 | This weekend |
 | ironGate enrollment (after operator keys) | P1 | Awaiting operator |
-| Omada access (admin credentials needed) | P3 | Awaiting operator |
+| Omada SX3008F config (http://192.168.4.115, admin/admin) | P2 | UNBLOCKED — creds in whitePaper |
 
 ### eastGate — Meta Atomic (BiomeOS, Squirrel, PetalTongue)
 
@@ -128,19 +135,63 @@ sporeGate-direct ← LAN push from eastGate (validation)
 
 ---
 
-## Operator Actions Needed
+## Agentic Tasks (assign to subteams)
 
-| Action | Unblocks | How |
-|--------|----------|-----|
-| Add sporeGate pubkey to ironGate | Node atomic enrollment | RustDesk → paste SSH key |
-| Flint 2 physical install at Hub 2 | swiftGate, Omada-side gates | This weekend |
-| Omada admin credentials | strandGate, southGate access | Sticker/device login |
+These were previously "operator" but can be handled by agents with existing access:
+
+| Task | Assign To | Access Path | Unblocks |
+|------|-----------|-------------|----------|
+| ironGate SSH key auth | sporeGate overwatch | RustDesk into ironGate (sovereign relay live) | Node atomic enrollment |
+| flockGate: NestGate JWT secret | flockGate Tower team | SSH via golgi jump (`ssh flockgate`) | 12/13 → 13/13 |
+| flockGate: BiomeOS `neural-api` unit fix | flockGate Tower team | SSH via golgi jump | 12/13 → 13/13 |
+| flockGate: VCS cascade (6 repos drifted) | flockGate Tower team | SSH → `git fetch --all` per repo | Code parity |
+| checksums.toml on depot | sporeGate overwatch | SSH to pepti (`ssh root@10.13.37.4`) | depot.integrity OK |
+| golgi bridge services fix (beardog+biomeos) | sporeGate overwatch | SSH to golgi (`ssh root@10.13.37.1`) | VPS health |
+| pepti fresh build from HEAD | sporeGate overwatch | SSH to pepti → `plasmid.harvest` | Fresh binaries in depot |
+| strandGate sovereign relay push | sporeGate overwatch | RustDesk (on sovereign relay) | strandGate enrollment |
+| southGate sovereign relay push | sporeGate overwatch | RustDesk (on sovereign relay) | southGate enrollment |
+| Omada SX3008F management | sporeGate overwatch | http://192.168.4.115 — admin/admin | VLAN config, port control |
+
+### ironGate Key Auth (sporeGate overwatch)
+
+ironGate is on sovereign relay. RustDesk into it and run:
+
+```bash
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILU4i9hEtHJA02/JZ8XR/OHaR/bSiuAaDRMhdJX7zuRp sporegate-gate-v1" >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
+
+Then from sporeGate: `ssh irongate@192.168.4.169` → deploy NUCLEUS (same flockGate pattern).
+
+### flockGate 13/13 (flockGate Tower team)
+
+Pattern proven on eastGate. From your IDE on flockGate:
+
+```bash
+# NestGate JWT:
+openssl rand -base64 48 > ~/.config/membrane/nestgate-jwt-secret
+chmod 600 ~/.config/membrane/nestgate-jwt-secret
+echo "NESTGATE_JWT_SECRET=$(cat ~/.config/membrane/nestgate-jwt-secret)" > ~/.config/membrane/nestgate.env
+
+# Create systemd unit for nestgate with --port 8092 --socket
+# Create systemd unit for biomeos with 'neural-api' subcommand
+# See eastGate pattern in ~/.config/systemd/user/membrane-nucleus@{nestgate,biomeos}.service
+```
+
+---
+
+## Operator-Only (physical presence required)
+
+| Action | Unblocks | When |
+|--------|----------|------|
+| Flint 2 physical install at Hub 2 | swiftGate, WiFi for Omada-side | This weekend |
+| fieldGate CMOS repair | fieldGate enrollment | Low priority |
 
 ---
 
 ## What NOT to Touch
 
 - **northGate**: Windows hobby (5090). P3. After Linux proven.
-- **fieldGate**: Dead CMOS. Hardware fix when operator has time.
 - **ATT passthrough**: Operator handles WAN config.
 - **golgi Forgejo DB**: Fixed, don't touch unless breakage recurs.
