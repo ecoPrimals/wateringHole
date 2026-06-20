@@ -493,7 +493,7 @@ forgejo_repo = "ecoPrimals/fossilRecord"
 # Which repos each gate cares about. cascade-pull uses these to
 # filter — a gate only pulls repos it needs.
 
-# sporeGate — plasma membrane, site router, 13/13 NUCLEUS
+# sporeGate — plasma membrane, site router, 13/13 NUCLEUS, BUILD AUTHORITY
 [gates.sporeGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -503,6 +503,9 @@ transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "ether8"
+wg_ip = "10.13.37.2"
+roles = ["build_hub", "depot", "cascade_hub", "firewall", "dhcp"]
+build_authority = true
 link_speed_mbps = 2500
 kderm_role = "plasma_membrane"
 site_topology = "triangle_3hub"
@@ -527,6 +530,8 @@ transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "sfp+2"
+wg_ip = "10.13.37.5"
+roles = ["overwatch", "primalspring_evolution", "meta_atomic"]
 link_speed_mbps = 10000
 wg_ip = "10.13.37.5"
 roles = ["nucleus", "validation", "overwatch", "primalspring"]
@@ -551,7 +556,7 @@ composition = "full"
 transport = "lan"
 zone = "backbone"
 roles = ["nucleus", "node_atomic", "compute"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). Pop!_OS. SSH pending key auth."
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K. SSH pending enrollment."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -603,7 +608,7 @@ repos = [
     "cellMembrane", "projectNUCLEUS",
 ]
 
-# flockGate — WAN shadow, sporePrint team, full validation
+# flockGate — WAN shadow, sporePrint team, Tower atomic, full NUCLEUS
 # SEGMENTATION: external-only. Reaches LAN gates exclusively via golgiBody relay.
 [gates.flockGate]
 target = "x86_64-unknown-linux-musl"
@@ -614,8 +619,8 @@ transport = "wan"
 mesh_peer = "157.230.3.183:7700"
 segmentation = "external-only"
 wg_ip = "10.13.37.6"
-roles = ["nucleus", "sporePrint", "wan_validator", "tower_atomic"]
-notes = "WAN Tower atomic (BearDog, Songbird, SkunkBat). 11/13 NUCLEUS via user systemd. i9-13900K/62GB. SSH via golgi ProxyJump."
+roles = ["nucleus", "tower_atomic", "sporePrint", "wan_validator"]
+notes = "WAN Tower atomic (BearDog, Songbird, SkunkBat). 13/13 NUCLEUS via user systemd. i9-13900K/62GB. SSH via golgi ProxyJump."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -725,7 +730,7 @@ repos = [
     "cellMembrane",
 ]
 
-# golgiBody (VPS, inner membrane) — sovereign periplasm, Forgejo, primal services
+# golgiBody (sole VPS, inner membrane) — sovereign periplasm, Forgejo, relay, depot
 [gates.golgiBody]
 kderm_layer = "inner_membrane"
 bond_types = ["covalent", "metallic"]
@@ -735,6 +740,8 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "local"
+wg_ip = "10.13.37.1"
+roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "caddy_tls"]
 mesh_peer = "127.0.0.1:7700"
 wg_ip = "10.13.37.1"
 roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "nucleus"]
