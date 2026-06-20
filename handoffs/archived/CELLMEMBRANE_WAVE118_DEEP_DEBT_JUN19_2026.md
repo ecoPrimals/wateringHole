@@ -1,4 +1,6 @@
 <!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+> **SUPERSEDED** by `CELLMEMBRANE_WAVE119_NATIVE_EVOLUTION_JUN20_2026.md`
+
 # cellMembrane — Wave 118 Deep Debt Consolidation
 
 **Date:** 2026-06-19
