@@ -31,7 +31,7 @@
 | **Flint 2 enrolled** | ✅ | Bridge AP at Hub 2, ApertureScience WiFi 6, Eeros retired |
 | cellMembrane evolution (deployment isomorphism) | P1 | 731 tests, Tier 1+2 shipped, Tier 3 next |
 | Nest provenance depth (ledger commits per wave) | P1 | Height 3, SweetGrass 4 braids |
-| eastGate connectivity investigation | P1 | Unreachable on WG mesh |
+| ~~eastGate connectivity~~ | ✅ | RESOLVED — was transient (sleep/hibernate). golgi 32ms, sporeGate 60ms |
 | Omada VLAN config (192.168.4.2) | P2 | Access confirmed |
 | strandGate/southGate relay push | P2 | Via RustDesk |
 
@@ -127,5 +127,5 @@ Internet → ATT → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → eastGate, iron
 |--------|----------|------|
 | ~~Flint 2 physical install at Hub 2~~ | ~~swiftGate + Omada-side WiFi~~ | ✅ Done — bridge AP live |
 | ironGate: add sporegate-gate-v1 to authorized_keys | NUCLEUS deploy + full mesh | Waiting on ironGate team |
-| eastGate: check WG service / power state | Mesh integrity | Next check-in |
+| ~~eastGate WG check~~ | ~~Mesh integrity~~ | ✅ RESOLVED — transient (was sleeping) |
 | fieldGate CMOS repair | fieldGate enrollment | Low priority |
