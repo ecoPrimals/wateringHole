@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 119
-date = "2026-06-19"
+id = 120
+date = "2026-06-21"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 119: flockGate 11/13 LIVE. Nest provenance end-to-end. primalSpring 85 scenarios, 959 tests, deep debt sweep complete."
+notes = "Wave 120: pepti decommissioned, sovereign CI on sporeGate, deployment isomorphism Tier 1+2. 731 cellMembrane, 963 primalSpring, 175 sporePrint. 4-node mesh. All 3 live gates 13/13 NUCLEUS."
 publisher = "primalSpring"
 
 [heads]

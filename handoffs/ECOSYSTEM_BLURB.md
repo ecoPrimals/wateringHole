@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem — Wave 120 Unified Blurb
 
-**Date**: Jun 20, 2026 11:05 EDT | **From**: eastGate overwatch
-**Wave**: 120 (Sovereign CI + Convergence)
+**Date**: Jun 21, 2026 07:31 EDT | **From**: eastGate overwatch
+**Wave**: 120 (Sovereign CI + Deployment Isomorphism)
 **Cascade**: All repos at parity (origin + forgejo + sporeGate-direct)
 
 ---
@@ -120,9 +120,9 @@ chmod 600 ~/.ssh/authorized_keys
 
 | Repo | Tests | Status | Latest |
 |------|-------|--------|--------|
-| **cellMembrane** | 729 | ✅ zero clippy | deployment isomorphism (topology.service, wireguard/caddy.generate) |
+| **cellMembrane** | 731 | ✅ zero clippy | manifest-driven config gen, gate.validate trust barrier, nftables refactor, dep upgrades |
 | **primalSpring** | 963 (87 scenarios) | ✅ | toadStool S321, deep debt sweep, typed errors |
-| **sporePrint** | 175 | ✅ | deep debt + docs refresh, gonzales removed, v0.3.0 |
+| **sporePrint** | 183+ | ✅ | taxonomy audit, depot tests, tower primal metrics, last expect() eliminated |
 | **biomeOS** | 8,351 | ✅ 88% cov | v4.31 structural refactoring |
 | **songBird** | 8,929 | ✅ | WG mesh overlay, zero hardcoded names |
 
