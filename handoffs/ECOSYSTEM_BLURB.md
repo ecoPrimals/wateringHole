@@ -1,66 +1,72 @@
-# ecoPrimals Ecosystem — Wave 120 Blurb
+# ecoPrimals Ecosystem — Wave 121 Blurb
 
-**Date**: Jun 21, 2026 12:00 EDT | **From**: sporeGate overwatch + eastGate overwatch
-**Cascade**: All repos at parity | **Mesh**: 5-node (golgi ↔ sporeGate ↔ eastGate ↔ flockGate ↔ ironGate)
+**Date**: Jun 21, 2026 18:35 EDT | **From**: eastGate overwatch
+**Cascade**: All repos at parity | **Mesh**: 5-node LIVE (golgi 41ms, sporeGate 75ms, ironGate 79ms from eastGate)
 
 ---
 
-## Gate Status
+## Gate Status — ALL ENROLLED
 
-| Gate | NUCLEUS | WG | Role | Status |
-|------|---------|-----|------|--------|
-| **sporeGate** | 13/13 | .2 | Build authority + Nest provenance + Overwatch | ✅ Sovereign CI live |
-| **eastGate** | 13/13 | .5 | Meta atomic + primalSpring evolution | ✅ Overwatch |
-| **flockGate** | 13/13 | .6 | Tower atomic + sporePrint | ✅ Tower work unblocked |
-| **ironGate** | — | .7 | Node atomic (compute trio) | ⏳ SSH key exchange needed for NUCLEUS |
-| **golgi** | 18 svc | .1 | Sole VPS: Forgejo, WG hub, relay, depot | ✅ 0 failed |
+| Gate | NUCLEUS | WG | Role | Hardware | Status |
+|------|---------|-----|------|----------|--------|
+| **sporeGate** | 13/13 | .2 | Build authority + Nest + Overwatch | Ryzen 5 6600H 27GB | ✅ Sovereign CI |
+| **eastGate** | 13/13 | .5 | Meta atomic + primalSpring + Overwatch | i7 64GB | ✅ 998 tests |
+| **flockGate** | 13/13 | .6 | Tower atomic + sporePrint | i9-13900K 62GB (WAN) | ✅ Tower ready |
+| **ironGate** | 12/12 | .7 | Node atomic + **GPU compute** | i9-12900K + **RTX 5070** | ✅ GPU live |
+| **golgi** | 18 svc | .1 | Sole VPS: Forgejo, WG hub, relay, depot | DO droplet | ✅ 0 failed |
 
-**Deferred**: strandGate, southGate (Omada-side, relay push pending), northGate (Windows P3), fieldGate (dead CMOS).
-**Infrastructure**: Flint 2 (GL-MT6000) enrolled as bridge AP at Hub 2 — `ApertureScience` WiFi 6, Eeros retired.
+**Infrastructure**: Flint 2 (GL-MT6000) bridge AP at Hub 2 — WiFi 6, WPA2/3, zero cloud.
+
+**Deferred**: strandGate, southGate (relay push pending), northGate (Win/5090, P3), fieldGate (dead CMOS).
 
 ---
 
 ## Active Work by Team
 
-### sporeGate Overwatch — Nest + Infra
+### sporeGate Overwatch — Nest + Build Authority + Infra
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| ironGate SSH enrollment | P0 | Key exchange needed → deploy NUCLEUS |
-| **Convergence shipped** | ✅ | firewall/wireguard/caddy generate from manifest, zero flags, proven identical |
-| **Flint 2 enrolled** | ✅ | Bridge AP at Hub 2, ApertureScience WiFi 6, Eeros retired |
-| cellMembrane evolution (deployment isomorphism) | P1 | 731 tests, Tier 1+2 shipped, Tier 3 next |
-| Nest provenance depth (ledger commits per wave) | P1 | Height 3, SweetGrass 4 braids |
-| ~~eastGate connectivity~~ | ✅ | RESOLVED — was transient (sleep/hibernate). golgi 32ms, sporeGate 60ms |
-| Omada VLAN config (192.168.4.2) | P2 | Access confirmed |
+| **Dual-target depot** (gnu for GPU primals) | P1 | Impulse filed by ironGate. Build barracuda+coralReef as glibc for GPU gates |
+| Nest provenance depth | P1 | Ledger height 3, periodic commits |
+| HPC VLAN 10 implementation | P2 | Designed, blocked on MikroTik credentials |
+| Omada VLAN config (192.168.4.111) | P2 | Access confirmed |
 | strandGate/southGate relay push | P2 | Via RustDesk |
 
 ### flockGate Tower — BearDog, Songbird, SkunkBat
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| BearDog: BTSP trust bootstrap over WAN | P1 | WG mesh live, WAN periplasm validator |
-| Songbird: mesh.init topology-aware routing | P1 | Identity-based discovery now available |
-| SkunkBat: threat detection + defense attestation | P1 | Defense layer for K-Derm outer membrane |
-| sporePrint content + taxonomy coverage | P2 | 183+ tests, 222 pages |
+| BearDog: BTSP trust bootstrap over WAN | P1 | Auth evolution S1→S2 |
+| Songbird: mesh.init topology-aware routing | P1 | Identity-based discovery available |
+| SkunkBat: threat detection + defense attestation | P1 | K-Derm outer membrane defense |
+| sporePrint content evolution | P2 | 183+ tests, taxonomy audited |
+
+### ironGate Node — ToadStool, BarraCuda, CoralReef + GPU
+
+| Task | Priority | Notes |
+|------|----------|-------|
+| BarraCuda GPU compute (RTX 5070 operational) | P1 | LSTM zero-copy, Vulkan shaders, f64 native |
+| CoralReef shader pipelines | P1 | GPU dispatch via sovereign-dispatch IPC |
+| ToadStool fleet management (S323, 9,074 tests) | P1 | submit split, test extraction |
+| Dual-target depot integration (fetch gnu binaries) | P1 | Coordinate with sporeGate |
 
 ### eastGate Meta — BiomeOS, Squirrel, PetalTongue + Overwatch
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| primalSpring scenario expansion (87 → grow) | P1 | 963 lib tests, interaction testing hub |
+| primalSpring scenario expansion | P1 | 998 lib tests, growing |
 | Overwatch: cascade, review, blurb | P1 | Continuous |
-| Squirrel AI pipeline + provenance tracking | P2 | Wired, ready for depth |
+| Squirrel AI pipeline + provenance | P2 | Wired |
 | PetalTongue visualization | P2 | Dashboard for ecosystem state |
-| BiomeOS neural-api (8,351 tests) | P3 | Deep debt complete, stable |
 
-### ironGate Node — ToadStool, BarraCuda, CoralReef (after enrollment)
+### cellMembrane — Code Evolution
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| ToadStool fleet management | P1 | S321, 112 methods, 9,069 lib tests |
-| BarraCuda tensor dispatch | P1 | Compute pipeline |
-| CoralReef shader pipelines | P1 | GPU/compute shaders |
+| Dual-target depot support (arch enum, fetch logic) | P1 | Per ironGate impulse |
+| Tier 3 isomorphism (gate.migrate, absorb) | P2 | Self-healing mesh |
+| Auth evolution: bearDog BTSP → composition auth | P2 | S1→S2→S3 path |
 
 ---
 
@@ -68,11 +74,62 @@
 
 | Repo | Tests | Latest Evolution |
 |------|-------|-----------------|
-| **cellMembrane** | 731 | **Convergence**: firewall/wireguard/caddy generate from manifest (zero flags), wg_pubkey, interface fields |
-| **primalSpring** | 963 (87 scenarios) | toadStool S323+, typed errors, deep debt clean |
-| **sporePrint** | 183+ | Taxonomy audit, depot tests, tower metrics, zero expect() |
+| **cellMembrane** | 731 | Manifest config gen, gate.validate trust barrier, leak fix, BLAKE3 sentinel |
+| **primalSpring** | 998 | toadStool S323, deep debt sweep, scenario expansion |
+| **sporePrint** | 183+ | Taxonomy audit, depot tests, tower metrics |
 | **biomeOS** | 8,351 | v4.31 structural refactor, 88% coverage |
-| **songBird** | 8,929 | WG mesh overlay, zero hardcoded names |
+| **songBird** | 8,929 | Wave 121 idiom sweep, clippy --all-targets zero |
+| **toadStool** | 9,074 | S323 submit split, test extraction, composition graduation |
+| **barraCuda** | — | LSTM zero-copy, mul_add, GPU depot evolution |
+
+---
+
+## Sovereign CI + Depot
+
+```
+Forgejo push → golgi hook → SSH sporeGate → cargo build (musl) → rsync to golgi → WAN depot
+```
+Full build: ~14 min | Incremental: ~2–5 min | Cost: $0 | Depot: BLAKE3 verified 14/14
+
+**Proposed evolution**: Dual-target (musl + gnu) for GPU primals on compute gates.
+
+---
+
+## Topology & Hardware
+
+```
+Internet → ATT BGW320 → sporeGate (NAT/FW/BUILD/DHCP)
+                              │ eno1 (LAN 192.168.4.0/22)
+                              │ wg0 (10.13.37.2)
+                              │
+                         CRS310 (10G L2 trunk) → Omada SX3008F (Hub 2)
+                              │                       │
+                         eastGate (.5)           ironGate (.7) [RTX 5070]
+                                                Flint 2 (.250) [WiFi 6 AP]
+                                                     └── "ApertureScience" 2.4G+5G
+
+                    WireGuard overlay → golgi VPS (.1) ← sole VPS
+                                          ├── Forgejo (git.primals.eco:2222)
+                                          ├── WG Hub (5 peers, forwarding)
+                                          ├── Sovereign Relay (hbbs/hbbr)
+                                          ├── Caddy TLS (membrane.primals.eco)
+                                          └── WAN Depot (fed by sporeGate rsync)
+
+                                        flockGate (.6) ← WAN via golgi relay
+```
+
+**HPC VLAN 10** (192.168.10.0/24) designed — gate-to-gate compute over 10G SFP+ trunk. Blocked on MikroTik credentials.
+
+---
+
+## Sovereignty & Auth
+
+| Stage | Model | Status |
+|-------|-------|--------|
+| S1 | Manual ed25519 keys + Forgejo user | ✅ Current (all gates enrolled) |
+| S2 | bearDog BTSP trust bootstrap | P1 — flockGate Tower team owns |
+| S3 | Composition-deterministic auth | Tier 3 target |
+| S4 | Self-healing mesh (gate.migrate/absorb) | Tier 3 target |
 
 ---
 
@@ -80,44 +137,20 @@
 
 | Tier | Status | Capabilities |
 |------|--------|--------------|
-| **1** | ✅ Shipped | `topology.service <role>`, `topology.roles` — identity-based discovery |
-| **2** | ✅ Shipped | `wireguard.generate`, `caddy.generate`, `firewall.generate` — all manifest-aware, zero flags |
-| **3** | Next | `gate.migrate`, `gate.bootstrap --absorb`, credential portability (bearDog BTSP), DNS gen |
-
-Manifest `roles` + `wg_ip` + `wg_pubkey` populated for all 4 mesh gates. Interface fields for sporeGate. `wan_endpoint` for golgi.
-
-### Auth Evolution (S1→S3)
-
-| Stage | Model | Status |
-|-------|-------|--------|
-| **S1** | Manual ed25519 keys + Forgejo user | Current — fragile, host-coupled |
-| **S2** | bearDog BTSP trust bootstrap | flockGate Tower team owns |
-| **S3** | Composition-deterministic auth (genetics) | Tier 3 isomorphism target |
-
-ironGate Forgejo issue: key IS registered (ID 1, May 28). Problem on ironGate side (likely wrong remote URLs — same pepti pattern). Troubleshooting in FRAGO.
+| **1** | ✅ | `topology.service`, `topology.roles` — identity-based discovery |
+| **2** | ✅ | `wireguard.generate`, `caddy.generate`, `firewall.generate` — manifest-driven |
+| **3** | Next | `gate.migrate`, `gate.bootstrap --absorb`, credential portability, DNS gen |
 
 ---
 
-## Sovereign CI
+## Glacial State (deep infrastructure)
 
-```
-Forgejo push → golgi hook → SSH sporeGate → cargo build (musl) → rsync to golgi → WAN depot
-```
-Full build: ~14 min | Incremental: ~2–5 min | Cost: $0 | Depot: BLAKE3 verified 14/14 (includes membrane)
-
----
-
-## Architecture
-
-```
-Internet → ATT → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → eastGate, ironGate
-                      ↕ WireGuard                              ↕ Omada (Hub 2)
-               golgi VPS (sole)                          strandGate, Flint 2 (bridge AP)
-               ├── Forgejo + WG Hub                           └── WiFi "ApertureScience"
-               ├── Sovereign Relay                                 2.4G+5G WiFi 6
-               ├── Caddy TLS + WAN Depot        flockGate (WAN, via golgi relay)
-               └── Fed by sporeGate rsync
-```
+- **pepti**: Decommissioned Wave 120. $24/mo saved.
+- **Eero mesh**: Retired Wave 120. Replaced by Flint 2 (zero cloud).
+- **Sovereign CI**: Migrated from pepti VPS to sporeGate hardware Wave 120.
+- **WG mesh**: Evolved from 3-node (Wave 116) → 4-node (Wave 119) → 5-node (Wave 121).
+- **NUCLEUS pattern**: Proven across 4 gates (sporeGate system, eastGate/flockGate/ironGate user systemd).
+- **GPU compute**: ironGate RTX 5070 confirmed. Dual-target depot proposal active.
 
 ---
 
@@ -125,7 +158,6 @@ Internet → ATT → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → eastGate, iron
 
 | Action | Unblocks | When |
 |--------|----------|------|
-| ~~Flint 2 physical install at Hub 2~~ | ~~swiftGate + Omada-side WiFi~~ | ✅ Done — bridge AP live |
-| ironGate: add sporegate-gate-v1 to authorized_keys | NUCLEUS deploy + full mesh | Waiting on ironGate team |
-| ~~eastGate WG check~~ | ~~Mesh integrity~~ | ✅ RESOLVED — transient (was sleeping) |
+| MikroTik CRS310 credential recovery (5s reset) | HPC VLAN implementation | When convenient |
+| ATT BGW320 IP Passthrough (MAC: 84:47:09:38:97:54) | Eliminate double NAT | When convenient |
 | fieldGate CMOS repair | fieldGate enrollment | Low priority |
