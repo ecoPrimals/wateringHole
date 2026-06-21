@@ -1,6 +1,6 @@
 # ecoPrimals Ecosystem — Wave 120 Blurb
 
-**Date**: Jun 21, 2026 07:35 EDT | **From**: eastGate overwatch
+**Date**: Jun 21, 2026 08:24 EDT | **From**: sporeGate overwatch + eastGate overwatch
 **Cascade**: All repos at parity | **Mesh**: 4-node (golgi ↔ sporeGate ↔ eastGate ↔ flockGate)
 
 ---
@@ -26,7 +26,8 @@
 | Task | Priority | Notes |
 |------|----------|-------|
 | ironGate SSH enrollment | P0 | RustDesk → add key → deploy NUCLEUS |
-| cellMembrane evolution (deployment isomorphism) | P1 | 731 tests, Tier 1+2 shipped, driving Tier 3 |
+| **Convergence shipped** | ✅ | firewall/wireguard/caddy generate from manifest, zero flags, proven identical |
+| cellMembrane evolution (deployment isomorphism) | P1 | 731 tests, Tier 1+2 shipped, Tier 3 next |
 | Nest provenance depth (ledger commits per wave) | P1 | Height 3, SweetGrass 4 braids |
 | Flint 2 config (after operator installs) | P2 | SSH in, AP bridge, sovereign config |
 | Omada VLAN config (192.168.4.111, admin/admin) | P2 | Access confirmed |
@@ -65,7 +66,7 @@
 
 | Repo | Tests | Latest Evolution |
 |------|-------|-----------------|
-| **cellMembrane** | 731 | Manifest-driven config gen, gate.validate trust barrier, nftables refactor |
+| **cellMembrane** | 731 | **Convergence**: firewall/wireguard/caddy generate from manifest (zero flags), wg_pubkey, interface fields |
 | **primalSpring** | 963 (87 scenarios) | toadStool S321, typed errors, deep debt clean |
 | **sporePrint** | 183+ | Taxonomy audit, depot tests, tower metrics, zero expect() |
 | **biomeOS** | 8,351 | v4.31 structural refactor, 88% coverage |
@@ -78,10 +79,20 @@
 | Tier | Status | Capabilities |
 |------|--------|--------------|
 | **1** | ✅ Shipped | `topology.service <role>`, `topology.roles` — identity-based discovery |
-| **2** | ✅ Shipped | `wireguard.generate`, `caddy.generate` — declarative config from manifest |
-| **3** | Next | `gate.migrate`, `gate.bootstrap --absorb`, credential portability, DNS gen |
+| **2** | ✅ Shipped | `wireguard.generate`, `caddy.generate`, `firewall.generate` — all manifest-aware, zero flags |
+| **3** | Next | `gate.migrate`, `gate.bootstrap --absorb`, credential portability (bearDog BTSP), DNS gen |
 
-Manifest `roles` + `wg_ip` populated for: golgi, sporeGate, eastGate, flockGate, ironGate.
+Manifest `roles` + `wg_ip` + `wg_pubkey` populated for all 4 mesh gates. Interface fields for sporeGate. `wan_endpoint` for golgi.
+
+### Auth Evolution (S1→S3)
+
+| Stage | Model | Status |
+|-------|-------|--------|
+| **S1** | Manual ed25519 keys + Forgejo user | Current — fragile, host-coupled |
+| **S2** | bearDog BTSP trust bootstrap | flockGate Tower team owns |
+| **S3** | Composition-deterministic auth (genetics) | Tier 3 isomorphism target |
+
+ironGate Forgejo issue: key IS registered (ID 1, May 28). Problem on ironGate side (likely wrong remote URLs — same pepti pattern). Troubleshooting in FRAGO.
 
 ---
 
@@ -90,7 +101,7 @@ Manifest `roles` + `wg_ip` populated for: golgi, sporeGate, eastGate, flockGate,
 ```
 Forgejo push → golgi hook → SSH sporeGate → cargo build (musl) → rsync to golgi → WAN depot
 ```
-Full build: ~24 min | Incremental: ~2–5 min | Cost: $0 | Depot: BLAKE3 verified 13/13
+Full build: ~14 min | Incremental: ~2–5 min | Cost: $0 | Depot: BLAKE3 verified 14/14 (includes membrane)
 
 ---
 
