@@ -11,9 +11,9 @@
 
 [meta]
 version = "4.0.0"
-wave = 115
+wave = 120
 measured_by = "manual + discovery.peers (planned)"
-last_updated = "2026-06-17"
+last_updated = "2026-06-21"
 wan_model = "single_exit_star"
 site_topology = "star_with_10g_backbone"
 neighborhood = "Old Everett, Lansing MI"
@@ -69,17 +69,17 @@ gates = ["fieldGate"]
 pending_gates = ["marshGate (future site router)"]
 note = "northGate is on backbone (CRS310), NOT house2"
 
-[cytoplasm.zones.eero_wifi]
-hub_device = "Amazon Eero 6"
-hub_role = "wifi_bridge"
-status = "bridged"
+[cytoplasm.zones.house2_wifi]
+hub_device = "GL-MT6000 (Flint 2)"
+hub_role = "wifi_bridge_ap"
+status = "LIVE"
 site = "house2"
 uplink_zone = "house2"
-uplink_type = "ethernet off TL-SG605S-M2 (via Omada port 8)"
-uplink_speed_mbps = 2500
-uplink_latency_ms = 3.0
+uplink_type = "ethernet off Omada SX3008F"
+uplink_speed_mbps = 1000
+uplink_latency_ms = 0.6
 gates = []
-note = "Bridge mode ACTIVE (Jun 17 18:30). WiFi clients get 192.168.4.x from sporeGate DHCP. No more 10.0.7.x NAT."
+note = "Flint 2 bridge AP — ApertureScience WiFi 6 (2.4G+5G). Enrolled Jun 21, Eeros retired. SSH from sporeGate."
 
 [sites.house1]
 address = "4422 Southgate Ave, Lansing MI 48910"
@@ -124,18 +124,18 @@ note = "Currently part of flat 192.168.4.0/22. Carve to /24 when marshGate deplo
 [segments.backbone_legacy]
 subnet = "192.168.1.0/24"
 transport = "att_dhcp"
-description = "ATT native subnet — WiFi/Eero devices pending migration to 4.0/22"
+description = "ATT native subnet — sporeGate WAN side, northGate/blueGate pending migration"
 gateway = "192.168.1.254"
-note = "Bridged onto CRS310 via Eero. sporeGate proxy-ARPs for cross-subnet routing."
+note = "ATT BGW320 subnet. sporeGate on 192.168.1.233. IP Passthrough planned to eliminate double NAT."
 gates = ["northGate", "blueGate"]
 
-[segments.eero_mesh]
-subnet = "192.168.1.0/24"
-transport = "eero_wifi_mesh"
-description = "Eero mesh WiFi — physically on CRS310 bridge, ATT DHCP range"
+[segments.house2_wifi]
+subnet = "192.168.4.0/22"
+transport = "wifi6_bridge"
+description = "Flint 2 WiFi AP at Hub 2 — bridges ApertureScience WiFi into periplasm"
 bridge_to = "periplasm"
-bridge_latency_ms = 3.0
-note = "To be replaced by Omada APs on 192.168.4.0/22"
+bridge_latency_ms = 0.6
+note = "Replaced Eero mesh Jun 21. WiFi 6, WPA2/WPA3, 802.11k/v roaming. Zero cloud dependency."
 
 [segments.vps_periplasm]
 transport = "digitalocean_vpc"
@@ -194,7 +194,7 @@ note = "NUCs shipped to remote sites join via WireGuard to golgiBody or direct."
 # Latency classes:
 #   local:        <0.1ms  (UDS, same machine)
 #   same_segment: <1ms    (LAN, same switch)
-#   cross_segment: 2-5ms  (Eero bridge, routed subnet)
+#   cross_segment: 0.5-1ms (Flint 2 bridge, same flat /22)
 #   vps_relay:    20-50ms (BTSP through VPS)
 #   wan_turn:     50-200ms (TURN relay through VPS)
 
@@ -203,20 +203,20 @@ estimate_ms = 0.5
 confidence = "high"
 notes = "Same switch, Cat6"
 
-[latency.backbone_to_eero_mesh]
-estimate_ms = 3.0
-confidence = "medium"
-notes = "Cat6e between properties, Eero mesh bridge"
+[latency.backbone_to_wifi]
+estimate_ms = 0.6
+confidence = "high"
+notes = "Flint 2 bridge AP at Hub 2, measured Jun 21: 0.6ms ping from sporeGate"
 
 [latency.backbone_to_vps]
 estimate_ms = 30.0
 confidence = "high"
 notes = "WireGuard wg0 tunnel, measured 2026-06-17: 29-34ms RTT to golgiBody (DO NYC)"
 
-[latency.eero_mesh_to_vps]
-estimate_ms = 28.0
-confidence = "medium"
-notes = "BTSP relay via backbone bridge"
+[latency.wifi_to_vps]
+estimate_ms = 29.0
+confidence = "high"
+notes = "Flint 2 bridge → sporeGate → WireGuard → golgiBody"
 
 [latency.wan_to_vps]
 estimate_ms = 80.0

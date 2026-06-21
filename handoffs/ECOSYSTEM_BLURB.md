@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem — Wave 120 Blurb
 
-**Date**: Jun 21, 2026 08:24 EDT | **From**: sporeGate overwatch + eastGate overwatch
-**Cascade**: All repos at parity | **Mesh**: 4-node (golgi ↔ sporeGate ↔ eastGate ↔ flockGate)
+**Date**: Jun 21, 2026 12:00 EDT | **From**: sporeGate overwatch + eastGate overwatch
+**Cascade**: All repos at parity | **Mesh**: 5-node (golgi ↔ sporeGate ↔ eastGate ↔ flockGate ↔ ironGate)
 
 ---
 
@@ -12,10 +12,11 @@
 | **sporeGate** | 13/13 | .2 | Build authority + Nest provenance + Overwatch | ✅ Sovereign CI live |
 | **eastGate** | 13/13 | .5 | Meta atomic + primalSpring evolution | ✅ Overwatch |
 | **flockGate** | 13/13 | .6 | Tower atomic + sporePrint | ✅ Tower work unblocked |
-| **ironGate** | — | — | Node atomic (compute trio) | ⏳ SSH enrollment (sporeGate RustDesk) |
+| **ironGate** | — | .7 | Node atomic (compute trio) | ⏳ SSH key exchange needed for NUCLEUS |
 | **golgi** | 18 svc | .1 | Sole VPS: Forgejo, WG hub, relay, depot | ✅ 0 failed |
 
-**Deferred**: strandGate, southGate (Omada-side, relay push pending), swiftGate (Flint 2), northGate (Windows P3), fieldGate (dead CMOS).
+**Deferred**: strandGate, southGate (Omada-side, relay push pending), northGate (Windows P3), fieldGate (dead CMOS).
+**Infrastructure**: Flint 2 (GL-MT6000) enrolled as bridge AP at Hub 2 — `ApertureScience` WiFi 6, Eeros retired.
 
 ---
 
@@ -25,12 +26,13 @@
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| ironGate SSH enrollment | P0 | RustDesk → add key → deploy NUCLEUS |
+| ironGate SSH enrollment | P0 | Key exchange needed → deploy NUCLEUS |
 | **Convergence shipped** | ✅ | firewall/wireguard/caddy generate from manifest, zero flags, proven identical |
+| **Flint 2 enrolled** | ✅ | Bridge AP at Hub 2, ApertureScience WiFi 6, Eeros retired |
 | cellMembrane evolution (deployment isomorphism) | P1 | 731 tests, Tier 1+2 shipped, Tier 3 next |
 | Nest provenance depth (ledger commits per wave) | P1 | Height 3, SweetGrass 4 braids |
-| Flint 2 config (after operator installs) | P2 | SSH in, AP bridge, sovereign config |
-| Omada VLAN config (192.168.4.111, admin/admin) | P2 | Access confirmed |
+| eastGate connectivity investigation | P1 | Unreachable on WG mesh |
+| Omada VLAN config (192.168.4.2) | P2 | Access confirmed |
 | strandGate/southGate relay push | P2 | Via RustDesk |
 
 ### flockGate Tower — BearDog, Songbird, SkunkBat
@@ -110,9 +112,9 @@ Full build: ~14 min | Incremental: ~2–5 min | Cost: $0 | Depot: BLAKE3 verifie
 ```
 Internet → ATT → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → eastGate, ironGate
                       ↕ WireGuard                              ↕ Omada (Hub 2)
-               golgi VPS (sole)                          strandGate, southGate, Flint 2
-               ├── Forgejo + WG Hub
-               ├── Sovereign Relay
+               golgi VPS (sole)                          strandGate, Flint 2 (bridge AP)
+               ├── Forgejo + WG Hub                           └── WiFi "ApertureScience"
+               ├── Sovereign Relay                                 2.4G+5G WiFi 6
                ├── Caddy TLS + WAN Depot        flockGate (WAN, via golgi relay)
                └── Fed by sporeGate rsync
 ```
@@ -123,5 +125,7 @@ Internet → ATT → sporeGate (NAT/FW/BUILD) → CRS310 (L2) → eastGate, iron
 
 | Action | Unblocks | When |
 |--------|----------|------|
-| Flint 2 physical install at Hub 2 | swiftGate + Omada-side WiFi | This weekend |
+| ~~Flint 2 physical install at Hub 2~~ | ~~swiftGate + Omada-side WiFi~~ | ✅ Done — bridge AP live |
+| ironGate: add sporegate-gate-v1 to authorized_keys | NUCLEUS deploy + full mesh | Waiting on ironGate team |
+| eastGate: check WG service / power state | Mesh integrity | Next check-in |
 | fieldGate CMOS repair | fieldGate enrollment | Low priority |
