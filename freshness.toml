@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 120
-date = "2026-06-21"
+id = 119
+date = "2026-06-19"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 120: pepti decommissioned, sovereign CI on sporeGate, deployment isomorphism Tier 1+2. 731 cellMembrane, 963 primalSpring, 175 sporePrint. 4-node mesh. All 3 live gates 13/13 NUCLEUS."
+notes = "Wave 119: flockGate 11/13 LIVE. Nest provenance end-to-end. primalSpring 85 scenarios, 959 tests, deep debt sweep complete."
 publisher = "primalSpring"
 
 [heads]
@@ -24,7 +24,7 @@ bingoCube = "c9f54107d99899f0016e83988f40922b217cdf2f"
 biomeOS = "1ce2a4c5be7c58b9cb2fa2be12a99329becb6485"
 blueFish = "8ec23ddc42a99162ee1a512ea36fdf1cf8158fe6"
 cellMembrane = "c51d688a378fbbaf616fc639c9b0eec23f28de89"
-coralReef = "abdd545016c6aebb3adfe8db604a0a838ef52eaf"
+coralReef = "e47ffd8c34d404c675924e878229c161fcca9241"
 esotericWebb = "2593302fb42627c1191a697058b75895230d395a"
 groundSpring = "e2d3b9e1527a2677c3ef483f01d79bf0a2e2212f"
 healthSpring = "054d5c9d6ad1e618701eab140f0eb6d9ab3e9393"
@@ -41,7 +41,7 @@ plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
 primalSpring = "9200635cd525d5fbe85ba4a5335df4a61eba0e8f"
 projectFOUNDATION = "5ea6be80b07b12a434b0cb5905410bd0d8a058d6"
 projectNUCLEUS = "8b7042ebb825791c1eea8025c3d090479f62486c"
-rhizoCrypt = "12b5504499efba77a735e3a355a9bf6dba1eac73"
+rhizoCrypt = "ff60767fcb8b86a18400a58a8c6bdfd3e02e0cfa"
 rustChip = "f5c84a582bf9728afecd335ce04a35433a4f46af"
 skunkBat = "6fbdc43a544351cd165b0abf11824143e05db701"
 songBird = "fc766dc959fd397ee6c119d552071ab5901bd4a8"
