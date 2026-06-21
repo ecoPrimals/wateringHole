@@ -18,6 +18,23 @@
 - Original `forward()` preserved as convenience wrapper (allocates once)
 - 1 new test (`test_lstm_forward_into_matches_forward`) verifying numerical parity
 
+### mul_add Numerical Accuracy Evolution
+- 5 manual multiply-accumulate patterns evolved to fused `mul_add`:
+  - LSTM gate computation (2 sites: w*x + sum, w*h + sum)
+  - Cosine similarity CPU reference (3 sites: dot, norm_a, norm_b)
+  - Crank-Nicolson source contribution (1 site: dt*s + u)
+- Complex64 lattice accumulations confirmed inapplicable (no f64 mul_add)
+
+### Dependency Hygiene
+- `cargo update` removes 12+ unused transitive deps (wasm-*, wit-*, prettyplease, etc.)
+- `bytes` 1.11→1.12, `syn` 2.0.117→2.0.118, other patch bumps
+- Zero duplicate direct deps; only `cpufeatures` 0.2/0.3 transitive (crypto crates)
+
+### Lint Compliance Audit
+- Full scan of all `#[expect()]` attributes across workspace
+- 1 missing `reason` found and fixed (`spectral/stats.rs` dead_code)
+- All 59+ `#[expect()]` across 4 crates now have documented `reason`
+
 ### Doc Cleanup
 - 2-Gate Mesh Proof P1 item superseded — 4-node mesh now operational
   (golgi ↔ sporeGate ↔ eastGate ↔ flockGate, all 13/13 NUCLEUS)
