@@ -74,7 +74,7 @@
 
 | Repo | Tests | Latest Evolution |
 |------|-------|-----------------|
-| **cellMembrane** | 731 | Manifest config gen, gate.validate trust barrier, leak fix, BLAKE3 sentinel |
+| **cellMembrane** | 744 | **Dual-target depot shipped** (arch enum, gnu fetch), PAT deprecated, config gen |
 | **primalSpring** | 998 | toadStool S323, deep debt sweep, scenario expansion |
 | **sporePrint** | 183+ | Taxonomy audit, depot tests, tower metrics |
 | **biomeOS** | 8,351 | v4.31 structural refactor, 88% coverage |
