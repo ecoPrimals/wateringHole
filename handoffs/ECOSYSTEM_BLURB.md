@@ -69,7 +69,7 @@
 | Repo | Tests | Latest Evolution |
 |------|-------|-----------------|
 | **cellMembrane** | 731 | **Convergence**: firewall/wireguard/caddy generate from manifest (zero flags), wg_pubkey, interface fields |
-| **primalSpring** | 963 (87 scenarios) | toadStool S321, typed errors, deep debt clean |
+| **primalSpring** | 963 (87 scenarios) | toadStool S323+, typed errors, deep debt clean |
 | **sporePrint** | 183+ | Taxonomy audit, depot tests, tower metrics, zero expect() |
 | **biomeOS** | 8,351 | v4.31 structural refactor, 88% coverage |
 | **songBird** | 8,929 | WG mesh overlay, zero hardcoded names |
