@@ -114,7 +114,7 @@ proxy_command = "ssh -W %h:%p golgi"
 [instance.forgejo]
 host_node = "golgiBody"
 orgs = ["ecoPrimals", "sporeGarden"]
-token_path = "DEPRECATED — SSH key auth is now standard. PATs to be revoked Wave 121."
+auth_method = "ssh_key"  # All gates use ed25519 SSH keys on port 2222. PATs revoked Wave 121.
 admin_user = "ecoPrimal"
 ssh_port = 2222
 http_port = 3000
