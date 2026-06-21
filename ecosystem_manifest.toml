@@ -503,16 +503,13 @@ transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "ether8"
+wg_ip = "10.13.37.2"
+roles = ["build_hub", "depot", "cascade_hub", "firewall", "dhcp"]
+build_authority = true
 link_speed_mbps = 2500
 kderm_role = "plasma_membrane"
 site_topology = "triangle_3hub"
 build_authority = true
-wg_ip = "10.13.37.2"
-wg_pubkey = "obCKmO89eCvh106gUdqu77L4F1ViASdDirGEddqyYSA="
-wan_interface = "enp1s0"
-lan_interface = "eno1"
-lan_subnet = "192.168.4.0/22"
-roles = ["build_hub", "depot", "cascade_hub", "nat_firewall", "nucleus", "dhcp"]
 notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke. SOVEREIGN CI: builds all 13 primals locally (12-core Ryzen 5 6600H, 27GB RAM), syncs depot to golgi. Omada SDN controller STOPPED (standalone L2 preferred)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
@@ -531,10 +528,9 @@ transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "sfp+2"
-link_speed_mbps = 10000
 wg_ip = "10.13.37.5"
-wg_pubkey = "V8Xy1uRFArEz8DseZhdAQmNdOr2TJ3Q/OhfilK3mDlA="
-roles = ["nucleus", "validation", "overwatch", "primalspring", "meta_atomic"]
+roles = ["overwatch", "primalspring_evolution", "meta_atomic"]
+link_speed_mbps = 10000
 notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
@@ -550,18 +546,13 @@ repos = [
 
 [gates.ironGate]
 target = "x86_64-unknown-linux-musl"
-gpu_target = "x86_64-unknown-linux-gnu"
 mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
-mesh_peer = "157.230.3.183:7700"
-host = "192.168.4.237"
 zone = "backbone"
-wg_ip = "10.13.37.7"
-wg_pubkey = "A4MpSecI1N5+fS5tizkhiumcbb8ZLMYwRXa/1AZvEgQ="
-roles = ["nucleus", "node_atomic", "compute"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070. 12/12 NUCLEUS enrolled Wave 120. GPU primals need glibc build (gpu_target)."
+roles = ["node_atomic", "compute"]
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K. SSH pending enrollment."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -624,8 +615,7 @@ transport = "wan"
 mesh_peer = "157.230.3.183:7700"
 segmentation = "external-only"
 wg_ip = "10.13.37.6"
-wg_pubkey = "kP9qOx3E7QDGfnNfuRyHE0yhPbzUBPnjOlJ1T5Lgoh4="
-roles = ["nucleus", "tower_atomic", "sporePrint", "wan_validator"]
+roles = ["tower_atomic", "sporeprint", "wan_validator"]
 notes = "WAN Tower atomic (BearDog, Songbird, SkunkBat). 13/13 NUCLEUS via user systemd. i9-13900K/62GB. SSH via golgi ProxyJump."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
@@ -746,12 +736,10 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "local"
-mesh_peer = "127.0.0.1:7700"
 wg_ip = "10.13.37.1"
-wg_pubkey = "A2fvz3czkqRUuu2mzkSS6IVr/TCQcpsJX9HbDBa1FBc="
-wan_endpoint = "157.230.3.183"
-roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "nucleus", "caddy_tls"]
-notes = "VPS inner membrane — 13/13 NUCLEUS, Forgejo, Caddy, WG hub, sovereign relay"
+roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "caddy_tls"]
+mesh_peer = "127.0.0.1:7700"
+notes = "VPS inner membrane — 13/13 NUCLEUS, Forgejo, Caddy"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "cellMembrane", "projectNUCLEUS",
@@ -765,8 +753,6 @@ repos = [
 kderm_layer = "outer_membrane"
 bond_types = ["ionic", "weak"]
 host = "137.184.197.151"
-roles = ["tls_terminator", "dns_secondary", "github_publisher", "sporePrint", "turn_relay"]
-notes = "VPS outer membrane — TLS termination (primals.eco, primal.eco, nestgate.io), DNS secondary, GitHub push mirror, Songbird TURN"
 repos = [
     "sporePrint", "wateringHole",
 ]

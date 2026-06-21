@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 121
+id = 122
 date = "2026-06-21"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 121: ALL GATES ENROLLED. ironGate 12/12 + RTX 5070. 5-node mesh live. Flint 2 bridge AP. 731 cellMembrane, 998 primalSpring. Sovereign CI 14/14. Dual-target depot proposed."
+notes = "Wave 122: CHECKPOINT. All P1s shipped. 744 cellMembrane, 998 primalSpring. Dual-target depot live. All gates enrolled. Agentic evolution stable, hardware expansion incoming."
 publisher = "primalSpring"
 
 [heads]
