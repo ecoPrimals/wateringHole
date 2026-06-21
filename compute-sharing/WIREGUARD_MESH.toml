@@ -16,9 +16,9 @@ wave = 120
 overlay_subnet = "10.13.37.0/24"
 port = 51820
 key_management = "wg genkey (manual, pre-bearDog integration)"
-status = "LIVE — 4-node mesh: golgiBody ↔ sporeGate ↔ eastGate ↔ flockGate"
-last_deployed = "2026-06-20T11:25:00-04:00"
-active_peers = 4
+status = "LIVE — 5-node mesh: golgiBody ↔ sporeGate ↔ eastGate ↔ flockGate ↔ ironGate"
+last_deployed = "2026-06-21T09:05:00-04:00"
+active_peers = 5
 pending_peers = 0
 hub_forwarding = "enabled (sysctl net.ipv4.ip_forward=1 on golgiBody)"
 build_authority = "sporeGate (sovereign CI — all 13 primals built locally, synced to golgi depot)"
@@ -93,6 +93,19 @@ measured_latency_to_golgi_ms = 32
 measured_latency_to_sporegate_ms = 72
 status_detail = "LIVE — 11/13 NUCLEUS via user-level systemd, WG handshake active, Tower atomic assigned"
 note = "WAN gate (192.168.60.0/24). i9-13900K, 62GB, 1.9TB NVMe. Tower atomic (BearDog, Songbird, SkunkBat). Enrolled Jun 19 via golgi ProxyJump."
+
+[peers.irongate]
+role = "compute_gate"
+status = "LIVE"
+endpoint = "dynamic (behind NAT — keepalive punches through)"
+overlay_ip = "10.13.37.7/24"
+public_ip = "none (LAN 192.168.4.237)"
+public_key = "A4MpSecI1N5+fS5tizkhiumcbb8ZLMYwRXa/1AZvEgQ="
+nat_traversal = "persistent keepalive to golgiBody (25s)"
+allowed_ips = ["10.13.37.7/32"]
+keepalive_seconds = 25
+status_detail = "LIVE — WG handshake active, SSH key-only, NUCLEUS pending"
+note = "Node atomic (ToadStool, BarraCuda, CoralReef). Pop!_OS. Backbone zone. Enrollment Wave 120."
 
 [peers.neighborhood_node]
 role = "expansion_site"

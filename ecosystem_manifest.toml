@@ -554,9 +554,13 @@ mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
+mesh_peer = "157.230.3.183:7700"
+host = "192.168.4.237"
 zone = "backbone"
+wg_ip = "10.13.37.7"
+wg_pubkey = "A4MpSecI1N5+fS5tizkhiumcbb8ZLMYwRXa/1AZvEgQ="
 roles = ["nucleus", "node_atomic", "compute"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K. SSH pending enrollment."
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). Pop!_OS. SSH live (key-only). WG peer added. Enrollment in progress."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
