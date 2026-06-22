@@ -403,6 +403,7 @@ category = "infra"
 description = "Ecosystem standards, coordination, cascading pull orchestration"
 github_repo = "ecoPrimals/wateringHole"
 forgejo_repo = "ecoPrimals/wateringHole"
+divergence_policy = "agentic"
 
 [repos.plasmidBin]
 org = "ecoPrimals"
