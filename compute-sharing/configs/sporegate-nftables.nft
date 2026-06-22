@@ -53,7 +53,7 @@ table inet membrane {
         iifname $LAN accept
 
         # WireGuard mesh — source-pinned to overlay subnet
-        udp dport 51820 accept comment "WireGuard endpoint"
+        udp dport 51821 accept comment "WireGuard endpoint"
         iifname $WG ip saddr $WG_NET accept comment "WireGuard overlay (source-pinned)"
         iifname $WG counter drop comment "WG spoofed source"
 

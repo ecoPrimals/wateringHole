@@ -62,10 +62,14 @@ Meta (orchestration + AI + viz):
 |--------|--------|
 | WireGuard mesh (5-node via golgi) | ✅ |
 | Sovereign CI (Forgejo → golgi hook → sporeGate build → rsync depot) | ✅ 14/14 |
-| Dual-target depot (musl all + gnu GPU primals) | ✅ |
+| Dual-target depot (musl all + gnu GPU primals) | ✅ BLAKE3 verified |
 | SSH-only auth (PATs revoked) | ✅ |
 | Network hardening (167k DNS blocklist, DoT, nftables rate-limit) | ✅ |
+| ATT BGW320 IP Passthrough (sporeGate = true edge, public IP) | ✅ `162.226.225.148` |
 | Flint 2 WiFi (Hub 2, bridge, ApertureScience) | ✅ |
+| Quorum Phase 1 (golgi cascade-sense timer, 15min, Forgejo→GitHub relay) | ✅ |
+| IPC audit (UDS dominant, no plaintext primal APIs on network) | ✅ |
+| TransportEndpoint.mesh_relay graduation (relay.forward in songBird) | ✅ |
 | Deployment isomorphism Tier 1+2 (identity + config gen) | ✅ |
 
 ---
@@ -75,20 +79,21 @@ Meta (orchestration + AI + viz):
 ### sporeGate — Overwatch + cellMembrane
 
 **Overwatch** owns: LAN topology, hardware enrollment, build authority, Nest provenance.
-**cellMembrane team** owns: membrane-shadow (769 tests), transport layer, deployment tooling.
+**cellMembrane team** owns: membrane-shadow (791 tests), transport layer, deployment tooling.
 
 | Task | Priority | Stream |
 |------|----------|--------|
-| Transport Envelope Phase 1: audit inter-gate IPC for plaintext | P1 | Overwatch |
-| ~~Quorum Phase 1: systemd timer on golgi, autonomous cascade~~ | ~~P1~~ | **DONE** (Wave 123) |
-| ~~TransportEndpoint.mesh_relay graduation (wire to songBird)~~ | ~~P1~~ | **DONE** (Wave 121) |
-| Nest provenance depth (ledger height → 4+) | P1 | Overwatch |
-| BLAKE3 depot verification post dual-target | P1 | Overwatch |
+| ~~Transport Envelope Phase 1: audit inter-gate IPC~~ | ~~P1~~ | **DONE** — UDS dominant, no plaintext APIs |
+| ~~Quorum Phase 1: systemd timer on golgi~~ | ~~P1~~ | **DONE** — cascade-sense.timer, 15min, Forgejo→GitHub relay |
+| ~~TransportEndpoint.mesh_relay graduation~~ | ~~P1~~ | **DONE** — relay.forward handler in songBird |
+| ~~Nest provenance depth (ledger height → 4+)~~ | ~~P1~~ | **DONE** — temporal.cascade 15/17 synced |
+| ~~BLAKE3 depot verification post dual-target~~ | ~~P1~~ | **DONE** — 14/14 musl PASS + 2 gnu verified |
+| ATT passthrough hardening (DNS, WG port 51821) | P1 | Overwatch |
 | strandGate/southGate relay push (opportunistic) | P2 | Overwatch |
 | Tier 3 isomorphism (gate.migrate, absorb) | P2 | cellMembrane |
 | golgi-as-NUCLEUS evolution | P2 | cellMembrane |
 
-**Context**: sporeGate issued Sovereign Transport Envelope impulse — separating physical topology (bandwidth) from digital topology (privacy). Primitives exist in songBird + bearDog. cellMembrane wires the abstraction. See `impulses/active/2026-06-22T07-40_sporeGate__wave121-sovereign-transport-envelope.toml`.
+**Context**: All 5 sporeGate Overwatch P1s from Wave 123 are complete. ATT passthrough activated — sporeGate is the true WAN edge (`162.226.225.148`). Discovered and worked around BGW320 UDP port mapping bug (WG moved to 51821). DNS hardened with dhclient hook + immutable resolv.conf. cellMembrane's `relay.forward` graduated — songBird now handles `TransportEndpoint::MeshRelay` dispatch end-to-end. golgi cascade-sense timer running (15min interval, Forgejo→GitHub relay verified). See `impulses/active/2026-06-22T07-40_sporeGate__wave121-sovereign-transport-envelope.toml`.
 
 ### flockGate — Tower Primals (bearDog, songBird, skunkBat)
 
@@ -173,7 +178,7 @@ No dedicated overwatch — Node primal agent evolves code directly.
 |--------|----------|
 | Flint 2 #2 install (ordered) | Hub 1 WiFi |
 | MikroTik CRS310 credential recovery (5s reset) | HPC VLAN 10 |
-| ATT BGW320 IP Passthrough (192.168.1.254) | Eliminate double NAT |
+| ~~ATT BGW320 IP Passthrough~~ | **DONE** — `162.226.225.148`, WG port 51821 |
 
 ---
 

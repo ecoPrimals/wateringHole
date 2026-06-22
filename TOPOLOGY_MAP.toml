@@ -106,7 +106,10 @@ switch = "CRS310"
 gates = ["sporeGate", "eastGate", "ironGate", "biomeGate", "strandGate"]
 site = "house1"
 wan_exit = "att_fiber_h1"
-note = "Single WAN exit for ALL sites. House 2 traffic backhauled via 10G trunk."
+wan_ip = "162.226.225.148"
+wan_mode = "ip_passthrough"
+wg_port = 51821
+note = "ATT BGW320 IP Passthrough active (Jun 22). sporeGate is true WAN edge. WG port 51821 (BGW320 UDP 51820 bug). Single WAN exit for ALL sites. House 2 traffic backhauled via 10G trunk."
 
 [segments.house2_compute]
 subnet = "192.168.5.0/24"
@@ -124,10 +127,10 @@ note = "Currently part of flat 192.168.4.0/22. Carve to /24 when marshGate deplo
 [segments.backbone_legacy]
 subnet = "192.168.1.0/24"
 transport = "att_dhcp"
-description = "ATT native subnet — WiFi/Eero devices pending migration to 4.0/22"
+description = "ATT native subnet — WiFi clients only (passthrough active, no compute)"
 gateway = "192.168.1.254"
-note = "Bridged onto CRS310 via Eero. sporeGate proxy-ARPs for cross-subnet routing."
-gates = ["northGate", "blueGate"]
+note = "ATT BGW320 IP Passthrough active (Jun 22). Public IP passed to sporeGate. This subnet only serves ATT WiFi clients (House 1 daughters). No gates route here."
+gates = ["northGate"]
 
 [segments.eero_mesh]
 subnet = "192.168.1.0/24"
