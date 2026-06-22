@@ -38,7 +38,7 @@ Tower Atomic (trust + transport + defense):
   SkunkBat    — threat detection, MethodGate enforcement, audit
 
 Node Atomic (compute + fleet + shaders):
-  ToadStool   — workload dispatch, fleet management (9,095 tests)
+  ToadStool   — workload dispatch, fleet management (9,127 tests)
   BarraCuda   — GPU compute, LSTM, Vulkan/WGSL shaders
   CoralReef   — shader compilation, SPIR-V, FECS stability
 
@@ -182,10 +182,10 @@ No dedicated overwatch — Node primal agent evolves code directly.
 | Repo | Tests | Latest |
 |------|-------|--------|
 | cellMembrane | 744 | Dual-target depot, PAT deprecated, mesh_relay typed |
-| primalSpring | 1000 | Wave 123: cross-gate scenarios, deep debt zero, 99 scenarios |
+| primalSpring | 998 | toadStool S323, scenario expansion |
 | biomeOS | 8,351 | v4.31, 88% coverage |
 | songBird | 8,929 | Relay primitives, mesh.capabilities_announce |
-| toadStool | 9,095 | S324 test graduation, catalyst coverage, dispatcher E2E, MMIO split |
+| toadStool | 9,127 | S325 kernel sentinel coverage, path consolidation, clone elimination, discovery gate |
 | sporePrint | 183+ | Taxonomy audit |
 
 ---
