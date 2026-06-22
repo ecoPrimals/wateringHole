@@ -201,6 +201,46 @@ later but is sensed identically.
 
 ---
 
+## Phase 4: Sovereign Transport Envelope (Wave 121+)
+
+Beyond quorum sensing for coordination, the transport layer gains a second
+dimension: **opacity**. The Sovereign Transport Envelope separates the physical
+topology (hardware, cables, switches) from the digital topology (how traffic
+appears to external observers).
+
+**Principle**: model on Tor's onion routing, but use our own primitives.
+
+```
+Physical topology: ATT → sporeGate → switches → gates      (designed for bandwidth)
+Digital topology:  BTSP-wrapped hops → songBird relays      (designed for privacy)
+```
+
+The ecosystem already has the building blocks:
+
+- **songbird-sovereign-onion**: Ed25519 identity, X25519 KEX, ChaCha20-Poly1305
+  encrypted channels with `.onion`-style addressing (feature-gated)
+- **bearDog ntor + cell crypto**: Tor Phase 2 circuit primitives delegated to
+  bearDog as security provider
+- **songBird relay tiers**: lineage-gated UDP relay → STUN → beacon mesh →
+  sovereign .onion → full Tor circuits
+- **Dark Forest Protocol**: zero-metadata discovery via encrypted beacons
+- **cellMembrane TransportEndpoint.mesh_relay**: typed but not yet operational
+
+The envelope evolves in phases:
+
+1. **Audit**: verify all inter-gate traffic is encrypted; map plaintext IPC
+2. **Relay activation**: enable songBird relay on golgiBody-ext with lineage auth
+3. **Transport graduation**: wire cellMembrane's mesh_relay into songBird mesh
+4. **Dark Forest deployment**: encrypted beacon discovery on LAN
+
+The key design constraint: **primal code does not change**. Only the
+TransportEndpoint resolution layer changes — from direct TCP to multi-hop
+BTSP-encrypted relay. The abstraction boundary lives in cellMembrane.
+
+See: `impulses/active/2026-06-22T07-40_sporeGate__wave121-sovereign-transport-envelope.toml`
+
+---
+
 ## Relationship to Existing Standards
 
 - `KDERM_DIDERM_APPLICATION.md` defines the physical layer. This document defines
