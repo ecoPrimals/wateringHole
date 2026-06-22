@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 20, 2026 (Wave 120 — petalTongue: feature-gated TUI/UI, legacy dead code removed, hot-path allocation elimination. 6,618+ tests, 56 IPC methods.)
+**Last Updated**: June 22, 2026 (Wave 123 — petalTongue: NUCLEUS composition typed constants, /api/ecosystem endpoint, ironGate enrolled, web dashboard overwatch panels. 6,618+ tests, 56 IPC methods.)
 
 ---
 

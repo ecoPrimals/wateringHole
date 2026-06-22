@@ -2,7 +2,7 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: June 20, 2026 (Wave 120 — feature-gated TUI/cache, legacy dead code removed, hot-path optimized. 6,618+ tests)
+**Updated**: June 22, 2026 (Wave 123 — ironGate enrolled, NUCLEUS composition endpoint + typed constants, ecosystem dashboard, GateEnrollment::as_str(). 6,618+ tests)
 
 ---
 
@@ -31,6 +31,13 @@ petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
 - **Discovery cache gated** (Wave 120): `petal-tongue-discovery` `cache` feature controls LRU+TTL layer; `lru` not pulled unless explicitly needed.
 - **Legacy renderer removed** (Wave 120): 5 pre-SceneGraph draw functions eliminated (508 lines). Grammar of Graphics pipeline is sole rendering path.
 - **Hot-path allocation eliminated** (Wave 120): Modality compile returns `&'static str` format tags — zero heap allocations per visualization render.
+- **Web dashboard endpoints** (Wave 121): `/api/gate-mesh`, `/viz/{slug}` (SVG/scene-json/animation-json), periodic DataService refresh in web mode.
+- **Gate mesh overwatch panel** (Wave 121): Live WireGuard overlay SVG + gate status table in web dashboard.
+- **NUCLEUS composition endpoint** (Wave 123): `/api/ecosystem` returns typed NUCLEUS composition (4 atomics, 13 primals) derived from `gate_mesh::NUCLEUS_ATOMICS` constants.
+- **NUCLEUS composition panel** (Wave 123): Web dashboard renders color-coded atomic groupings with primal roles and gate assignments.
+- **Typed NUCLEUS data** (Wave 123): `NucleusPrimal`, `NucleusAtomic` structs + `TOWER_ATOMIC`, `NODE_ATOMIC`, `NEST_ATOMIC`, `META_ATOMIC` constants. Single source of truth for ecosystem composition.
+- **GateEnrollment::as_str()** (Wave 123): Zero-allocation const fn for enrollment status display.
+- **ironGate enrolled** (Wave 123): WG IP .7, 12/12 NUCLEUS, 5 gates enrolled, 7 WG links total.
 - **`health.liveness` normalized**: Returns exactly `{"status":"alive"}` on both HTTP and IPC.
 - **Content backend evolution**: `web_mode/content_backend.rs` replaces nestgate.rs — primal-agnostic `content.resolve` client
 - **Enriched `capability.list`**: returns `primal`, `version`, `transport[]`, `methods[]`, `depends_on[]`, `data_bindings`, `geometry_types`
