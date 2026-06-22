@@ -8,13 +8,33 @@
 
 ## Subteam: sporeGate Overwatch (Topology + Hardware + Deploy)
 
+### ✅ COMPLETED (Wave 122 — validated by overwatch)
+
+- Network hardening: 167k DNS blocklist, DoT (stubby→CF+Quad9), nftables (bogon drops, SSH 3/min, WG source-pin)
+- DHCP: full static map (9 reservations), authoritative mode
+- Attack surface: avahi, cupsd, wlp3s0 disabled
+- ironGate enrollment: SSH verified, WG live (89ms/132ms), 12/12 NUCLEUS, Forgejo remotes correct
+- PAT deprecation: 3 tokens revoked on golgi, config cleaned
+- Flint 2 WiFi: ApertureScience broadcasting, bridge mode, DNS+internet verified
+- Dual-target depot: `build-local.sh --target gnu` operational
+- nftables config committed: `compute-sharing/configs/sporegate-nftables.nft`
+
+### P1: Sovereign Transport Envelope (Phase 1 — Audit)
+
+You issued this impulse. Phase 1 is yours:
+- Map all inter-gate IPC: which uses UDS (good), TCP (acceptable on LAN), HTTP (needs wrapping)
+- Verify all WireGuard overlay traffic is fully opaque to LAN observers
+- Document plaintext exposure surface (if any) in handoff for cellMembrane
+
+Reference: `impulses/active/2026-06-22T07-40_sporeGate__wave121-sovereign-transport-envelope.toml`
+
 ### P1: Nest Provenance Depth
 
 - Ledger commit height → 4+ (periodic provenance commits via loamSpine)
 - Stage NestGate content for cross-gate federation test (Wave 124)
 - BLAKE3 verify all depot artifacts post dual-target build
 
-### P1: Relay Push (strandGate/southGate)
+### P2: Relay Push (strandGate/southGate)
 
 - Use RustDesk relay to push sovereign config to strandGate, southGate
 - Pattern: connect via public relay → push sovereign relay config → reconnect via sovereign
@@ -44,6 +64,14 @@ Target (Quorum P1):   gate pushes → golgi senses within 60s → auto-relays
 2. If new commits on any repo, auto-pull to golgi and update depot
 3. Validate: push from eastGate, wait 60s, confirm golgi has it without SSH trigger
 4. Document operational pattern in `wateringHole/TRANSPORT_EVOLUTION_OPS.md`
+
+### P1: TransportEndpoint.mesh_relay Graduation (from transport envelope impulse)
+
+sporeGate overwatch issued the Sovereign Transport Envelope impulse. Phase 3 is yours:
+- `cellmembrane-types/src/transport.rs` has `TransportEndpoint::mesh_relay` (typed, not wired)
+- Wire resolution: when capability resolves to mesh_relay, route through songBird relay
+- Primal code must not change — only transport resolution layer changes
+- Reference: `handoffs/CELLMEMBRANE_WAVE121_TRANSPORT_ENVELOPE_BLURB.md`
 
 ### P2: Tier 3 Isomorphism
 

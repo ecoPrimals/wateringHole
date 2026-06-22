@@ -1,17 +1,20 @@
 # ecoPrimals Ecosystem — Wave 122+ Evolution Blurb
 
-**Date**: Jun 21, 2026 19:30 EDT | **From**: eastGate overwatch
-**State**: STABLE PLATFORM — all gates enrolled, all P1s shipped. Planning next evolution.
+**Date**: Jun 22, 2026 07:55 EDT | **From**: eastGate overwatch
+**State**: STABLE PLATFORM — all gates enrolled, network hardened, transport evolution initiated.
 
 ---
 
 ## Strategic Position
 
-Wave 121 proved the **infrastructure layer is complete**:
+Wave 121-122 proved the **infrastructure layer is complete and hardened**:
 - 5-node WG mesh, all gates pushing to Forgejo
 - Sovereign CI: 14/14 primals built on sporeGate, dual-target (musl + gnu)
 - 744 cellMembrane tests, 998 primalSpring tests
 - All 4 compute gates at full NUCLEUS, GPU live on ironGate
+- Network hardened: 167k DNS blocklist, DoT, nftables rate limiting, bogon drops
+- ironGate fully enrolled: 12/12 NUCLEUS, WG live, PATs scrubbed
+- Flint 2 WiFi operational (Hub 2, bridge mode, ApertureScience SSID)
 
 The ecosystem is now at the **gen4 → gen5 boundary** (see whitePaper/gen5/):
 - gen4 proved primals compose into products (esotericWebb, lithoSpore, helixVision)
@@ -51,9 +54,9 @@ The 5-gate mesh is connected but trust is at Phase 1 (discovery). Next phases:
 | 4: Content | NestGate federation (BLAKE3 end-to-end) | Ready | 125-126 |
 | 5: Dark Forest | Invariants enforced across mesh | Implemented | 125-126 |
 
-### 3. Transport Evolution (from gen5/TRANSPORT_EVOLUTION.md)
+### 3. Transport Evolution (from gen5/TRANSPORT_EVOLUTION.md + sporeGate impulse)
 
-Currently at **Nanowire** (SSH-triggered). Next:
+Currently at **Nanowire** (SSH-triggered). sporeGate issued **Sovereign Transport Envelope** impulse (Wave 122) adding Phase 4 — physical/digital topology separation:
 
 | Phase | Transport | What Changes |
 |-------|-----------|--------------|
@@ -61,6 +64,9 @@ Currently at **Nanowire** (SSH-triggered). Next:
 | Next | Quorum Phase 1 | Timer-based `potential.sense` on nodes — autonomous |
 | Future | Quorum Phase 2 | Songbird `mesh.publish` carries impulses (sub-second) |
 | Horizon | Quorum Phase 3 | Capability-routed, self-integrating |
+| **NEW** | Phase 4: Envelope | BTSP-wrapped multi-hop via songBird relay (BirdSong + Dark Forest) |
+
+**Phase 4** (from sporeGate impulse): separates physical topology (bandwidth/latency) from digital topology (privacy/sovereignty). Primitives exist in songBird + bearDog — operational wiring is the work. Phased: audit → relay activation → mesh_relay graduation → Dark Forest beacons.
 
 **Immediate value**: Quorum Phase 1 makes the cascade autonomous — nodes pull without being told.
 

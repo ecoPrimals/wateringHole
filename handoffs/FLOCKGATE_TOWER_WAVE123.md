@@ -50,6 +50,16 @@ Songbird already has `mesh.capabilities_announce` (push model, w75). Validate th
 
 ## P2 Tasks
 
+### Sovereign Transport Envelope — Phase 2: songBird Relay Activation
+
+sporeGate issued impulse for Sovereign Transport Envelope. Phase 2 is Tower team's:
+- Activate songBird relay on golgiBody-ext (outer membrane)
+- Enable sovereign `.onion` feature gate in `songbird-onion-relay`
+- Wire bearDog `relay.authorize` for lineage-gated access
+- This gives us a sovereign relay endpoint separate from WireGuard hub identity
+
+Reference: `impulses/active/2026-06-22T07-40_sporeGate__wave121-sovereign-transport-envelope.toml`
+
 ### sporePrint Content Evolution
 
 - Current: 183+ tests, taxonomy audited, static via Caddy
