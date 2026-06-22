@@ -509,7 +509,6 @@ build_authority = true
 link_speed_mbps = 2500
 kderm_role = "plasma_membrane"
 site_topology = "triangle_3hub"
-build_authority = true
 notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke. SOVEREIGN CI: builds all 13 primals locally (12-core Ryzen 5 6600H, 27GB RAM), syncs depot to golgi. Omada SDN controller STOPPED (standalone L2 preferred)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
