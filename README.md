@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 20, 2026 (Wave 119: flockGate 11/13 LIVE. primalSpring 90 scenarios, 971 tests — deep debt sweep: typed errors (GraphFailed/Training → structured), hardcoding cleanup (/home/eastgate → $HOME, gate debt caps centralized), clone elimination, runtime-dir centralization, 2 new scenarios (flockgate-tower-wan, provenance-cross-gate), all 11 tracks covered. Docs fossilized. ironGate SSH BLOCKED.)
+**Last Updated**: June 22, 2026 (Wave 123: flockGate 13/13, ironGate 12/12. primalSpring v0.9.33 — 98 scenarios, 1017 tests. Deep debt round 3: hardcoded UID-1000 socket fallbacks centralized, east-gate bias removed, BTSP handshake clone eliminated, CI portability (genomeBin-harvest.yml), doc/metric alignment across projectNUCLEUS specs.)
 
 ---
 

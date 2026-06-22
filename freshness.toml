@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 119
-date = "2026-06-19"
+id = 123
+date = "2026-06-22"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 119: flockGate 11/13 LIVE. Nest provenance end-to-end. primalSpring 85 scenarios, 959 tests, deep debt sweep complete."
+notes = "Wave 123: flockGate 13/13, ironGate 12/12. primalSpring v0.9.33 — 98 scenarios, 1017 tests. Deep debt round 3: centralized socket resolution, east-bias removal, CI portability, doc alignment."
 publisher = "primalSpring"
 
 [heads]
