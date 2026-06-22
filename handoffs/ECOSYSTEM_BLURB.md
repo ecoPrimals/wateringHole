@@ -1,191 +1,193 @@
-# ecoPrimals Ecosystem — Wave 122+ Evolution Blurb
+# ecoPrimals Ecosystem Blurb — Wave 123
 
-**Date**: Jun 22, 2026 07:55 EDT | **From**: eastGate overwatch
-**State**: STABLE PLATFORM — all gates enrolled, network hardened, transport evolution initiated.
-
----
-
-## Strategic Position
-
-Wave 121-122 proved the **infrastructure layer is complete and hardened**:
-- 5-node WG mesh, all gates pushing to Forgejo
-- Sovereign CI: 14/14 primals built on sporeGate, dual-target (musl + gnu)
-- 744 cellMembrane tests, 998 primalSpring tests
-- All 4 compute gates at full NUCLEUS, GPU live on ironGate
-- Network hardened: 167k DNS blocklist, DoT, nftables rate limiting, bogon drops
-- ironGate fully enrolled: 12/12 NUCLEUS, WG live, PATs scrubbed
-- Flint 2 WiFi operational (Hub 2, bridge mode, ApertureScience SSID)
-
-The ecosystem is now at the **gen4 → gen5 boundary** (see whitePaper/gen5/):
-- gen4 proved primals compose into products (esotericWebb, lithoSpore, helixVision)
-- gen5 asks: "does someone else's science come out the other end?"
-- The infrastructure we just proved (sovereign CI, mesh, GPU) enables gen5 delivery
-
-**What remains is evolution, not repair.**
+**Date**: Jun 22, 2026 08:05 EDT | **Wave**: 123 | **From**: eastGate overwatch
+**Cascade**: All repos at parity via Forgejo (git.primals.eco:2222)
 
 ---
 
-## The Four Goals (from whitePaper analysis)
+## You Are Here
 
-### 1. Sovereignty Completion (L3 → L4)
+You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. Read it fully — it tells you who you are, what the ecosystem is, and what to do next.
 
-From `PRIMAL_VS_SOVEREIGNTY_GOALS.md`: Layer 3 is ~60% complete. The proven platform accelerates the remaining sovereignty targets:
+The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals (called NUCLEUS). Gates communicate via WireGuard overlay, build via Sovereign CI on sporeGate, and coordinate via this wateringHole repository.
 
-| Target | Current | Next Step | Owner |
-|--------|---------|-----------|-------|
-| TLS sovereign | Caddy + LE live | BearDog ACME on :8443 (shadow) | sporeGate cellMembrane |
-| NAT sovereign | Songbird TURN live | Formal 7-day gate | sporeGate overwatch |
-| DNS sovereign | knot-dns live (ns1+ns2) | Registrar NS cutover | Operator (registrar action) |
-| Auth sovereign | S1 complete (ed25519) | BearDog BTSP (S2) | flockGate Tower |
-| Content sovereign | sporePrint via Caddy | petalTongue backend wiring | flockGate team |
-| Git sovereign | Forgejo primary (38+ repos) | ✅ Complete | — |
-| CI sovereign | sporeGate builds | Forgejo Actions (stretch) | sporeGate cellMembrane |
-| GPU sovereign | RTX 5070 + dual depot | barraCuda WGSL maturity | ironGate Node |
-
-### 2. Covalent Mesh Trust (from gen5/COVALENT_MESH_TRUST_VALIDATION.md)
-
-The 5-gate mesh is connected but trust is at Phase 1 (discovery). Next phases:
-
-| Phase | What | Status | Wave Target |
-|-------|------|--------|-------------|
-| 1: Discovery | Gates see each other | ✅ Proven (5 nodes) | — |
-| 2: Dispatch | Cross-gate capability.call | Ready (Songbird push model) | 123-124 |
-| 3: Security | BTSP cross-gate token validation | bearDog w135 delivered | 123-124 |
-| 4: Content | NestGate federation (BLAKE3 end-to-end) | Ready | 125-126 |
-| 5: Dark Forest | Invariants enforced across mesh | Implemented | 125-126 |
-
-### 3. Transport Evolution (from gen5/TRANSPORT_EVOLUTION.md + sporeGate impulse)
-
-Currently at **Nanowire** (SSH-triggered). sporeGate issued **Sovereign Transport Envelope** impulse (Wave 122) adding Phase 4 — physical/digital topology separation:
-
-| Phase | Transport | What Changes |
-|-------|-----------|--------------|
-| Current | Nanowire | SSH push/pull, manual cascade |
-| Next | Quorum Phase 1 | Timer-based `potential.sense` on nodes — autonomous |
-| Future | Quorum Phase 2 | Songbird `mesh.publish` carries impulses (sub-second) |
-| Horizon | Quorum Phase 3 | Capability-routed, self-integrating |
-| **NEW** | Phase 4: Envelope | BTSP-wrapped multi-hop via songBird relay (BirdSong + Dark Forest) |
-
-**Phase 4** (from sporeGate impulse): separates physical topology (bandwidth/latency) from digital topology (privacy/sovereignty). Primitives exist in songBird + bearDog — operational wiring is the work. Phased: audit → relay activation → mesh_relay graduation → Dark Forest beacons.
-
-**Immediate value**: Quorum Phase 1 makes the cascade autonomous — nodes pull without being told.
-
-### 4. Primal Code Evolution (per-team)
-
-| Team | Gate | Focus | Goal |
-|------|------|-------|------|
-| **Tower** (flockGate) | bearDog, songBird, skunkBat | BTSP trust bootstrap, mesh routing, defense | S2 auth, cross-gate trust |
-| **Node** (ironGate) | toadStool, barraCuda, coralReef | GPU compute, fleet dispatch, shaders | LSTM zero-copy, Vulkan, fleet |
-| **Nest** (sporeGate) | nestGate, rhizoCrypt, loamSpine, sweetGrass | Provenance depth, federation, content | Ledger depth, BLAKE3 federation |
-| **Meta** (eastGate) | biomeOS, squirrel, petalTongue | Orchestration, AI, visualization | primalSpring 1000+, perceptron |
+**All infrastructure is proven. What remains is evolution, not repair.**
 
 ---
 
-## Wave 123-126 Roadmap
+## Gate Map
 
-### Wave 123: Covalent Trust + Quorum Sensing
+| Gate | WG IP | Hardware | NUCLEUS | Role | K-Derm Layer |
+|------|-------|----------|---------|------|--------------|
+| **golgi** | .1 | DO droplet | 18 svc | WG hub, Forgejo, relay, depot | Periplasm (VPS relay) |
+| **sporeGate** | .2 | Ryzen 5 6600H 27GB | 13/13 | Build authority, Nest provenance, LAN firewall | Peptidoglycan (structural) |
+| **eastGate** | .5 | i7 64GB | 13/13 | Overwatch, primalSpring, Meta primals | Cytoplasm (coordination) |
+| **flockGate** | .6 | i9-13900K 62GB (WAN) | 13/13 | Tower primals, sporePrint | Outer membrane (trust boundary) |
+| **ironGate** | .7 | i9-12900K + RTX 5070 | 12/12 | Node compute, GPU | Cytoplasm (heavy compute) |
 
-| Task | Team | Deliverable |
-|------|------|-------------|
-| Cross-gate `capability.call` validation | primalSpring (eastGate) | Live test: eastGate → sporeGate → ironGate chain |
-| BTSP cross-gate token exchange | flockGate Tower (bearDog) | TrustedIssuerRegistry across 5 nodes |
-| `potential.sense` timer on golgi | sporeGate cellMembrane | Autonomous cascade (Quorum Phase 1) |
-| primalSpring → 1000 tests | eastGate Meta | Cross-gate scenarios |
-
-### Wave 124: Content Federation + GPU Pipeline
-
-| Task | Team | Deliverable |
-|------|------|-------------|
-| NestGate federation live test | sporeGate Nest | put on eastGate, pull on sporeGate, BLAKE3 verify |
-| BarraCuda LSTM on RTX 5070 | ironGate Node | Zero-copy GPU inference, gnu binary |
-| sporePrint petalTongue backend | flockGate team | Content from NestGate, not static files |
-| Songbird relay Phase 3.5 | flockGate Tower | Ed25519 signature verification on relay |
-
-### Wave 125: Sovereignty Shadow Graduation
-
-| Task | Team | Deliverable |
-|------|------|-------------|
-| DNS NS registrar cutover | Operator | Sovereign DNS resolution path |
-| S2 auth 7-day gate | sporeGate overwatch + flockGate Tower | BTSP replaces ed25519-only |
-| HPC VLAN 10 activation | Operator + sporeGate overwatch | 10G trunk for compute traffic |
-| Dark Forest cross-gate validation | primalSpring | Full 5-invariant enforcement |
-
-### Wave 126: Gen5 Readiness
-
-| Task | Team | Deliverable |
-|------|------|-------------|
-| First external collaborator artifact | helixVision (cross-team) | Gonzales NF data → validated output |
-| Quorum Phase 2 (Songbird mesh.publish) | cellMembrane + songBird | Sub-second impulse propagation |
-| biomeOS composition orchestration | eastGate Meta | Deploy graph live on multi-gate |
-| Layer 4 integration test | All teams | Full request path, zero external deps |
+**Deferred**: strandGate, southGate (relay push pending), northGate (Win/5090, hobby), fieldGate (CMOS dead), swiftGate (Omada-side).
 
 ---
 
-## Hardware Expansion (Operator-driven, feeds into above)
-
-| Item | Purpose | Feeds Into |
-|------|---------|-----------|
-| **Flint 2 #2** (ordered) | Hub 1 or mesh extension | Topology, HPC VLAN |
-| MikroTik CRS310 creds | 10G trunk for VLAN 10 | Wave 125 HPC activation |
-| ATT BGW320 IP Passthrough | Eliminate double NAT | WG mesh performance |
-| Future gates (DDR3 NUCs, etc.) | Expand mesh | Quorum Phase 2+ nodes |
-
-**Enrollment pattern (proven)**: Hardware arrives → operator installs → sporeGate enrolls via SSH/WG → NUCLEUS deploys agentically → gate joins mesh → team assigned.
-
----
-
-## K-Derm Topology (Current vs Target)
+## NUCLEUS — 13 Primals, 4 Atomics
 
 ```
-CURRENT (Wave 122):
-  golgi (.1)         — sole VPS: Forgejo + WG hub + relay + depot
-  sporeGate (.2)     — build authority + Nest + overwatch
-  eastGate (.5)      — Meta + overwatch + primalSpring
-  flockGate (.6)     — Tower + sporePrint (WAN)
-  ironGate (.7)      — Node + GPU compute
+Tower Atomic (trust + transport + defense):
+  BearDog     — crypto identity, BTSP auth, TLS, ionic tokens
+  Songbird    — mesh routing, STUN/TURN, relay, NAT traversal
+  SkunkBat    — threat detection, MethodGate enforcement, audit
 
-TARGET (Wave 126+):
-  golgi (.1)         — VPS: Forgejo + WG hub + depot + quorum relay
-  sporeGate (.2)     — peptidoglycan: builds + Nest + LAN topology + quorum node
-  eastGate (.5)      — cytoplasm: Meta + overwatch + coordination
-  flockGate (.6)     — outer membrane: Tower (trust boundary) + WAN relay
-  ironGate (.7)      — cytoplasm: Node compute (GPU) + HPC VLAN participant
-  [new gates]        — cytoplasm: expansion nodes, quorum participants
+Node Atomic (compute + fleet + shaders):
+  ToadStool   — workload dispatch, fleet management (9,074 tests)
+  BarraCuda   — GPU compute, LSTM, Vulkan/WGSL shaders
+  CoralReef   — shader compilation, SPIR-V, FECS stability
+
+Nest Atomic (storage + provenance):
+  NestGate    — content-addressed storage, federation, BLAKE3
+  RhizoCrypt  — DAG sessions, Merkle roots, dehydration
+  LoamSpine   — ledger commits, spine management
+  SweetGrass  — provenance braids, attribution, anchoring
+
+Meta (orchestration + AI + viz):
+  BiomeOS     — composition orchestrator, deploy graphs, Neural API
+  Squirrel    — AI dispatch, Ollama backend
+  PetalTongue — visualization, web mode, dashboards
 ```
 
-The K-Derm model (from gen5/KDERM_DIDERM_ENVELOPE.md) maps gates to membrane layers:
-- **flockGate** = outer membrane (trust boundary, facing WAN)
-- **sporeGate** = peptidoglycan (structural, builds, mediates)
-- **eastGate/ironGate** = cytoplasm (internal compute, coordination)
-- **golgi** = periplasm (VPS relay, content depot)
+---
+
+## Sovereign Infrastructure (proven, stable)
+
+| System | Status |
+|--------|--------|
+| WireGuard mesh (5-node via golgi) | ✅ |
+| Sovereign CI (Forgejo → golgi hook → sporeGate build → rsync depot) | ✅ 14/14 |
+| Dual-target depot (musl all + gnu GPU primals) | ✅ |
+| SSH-only auth (PATs revoked) | ✅ |
+| Network hardening (167k DNS blocklist, DoT, nftables rate-limit) | ✅ |
+| Flint 2 WiFi (Hub 2, bridge, ApertureScience) | ✅ |
+| Deployment isomorphism Tier 1+2 (identity + config gen) | ✅ |
 
 ---
 
-## Debt Register (tracked, not blocking)
+## Team Assignments
 
-| Item | Type | Priority | Notes |
-|------|------|----------|-------|
-| Registrar NS cutover | Sovereignty | P2 | Manual action when convenient |
-| Forgejo Actions CI | Sovereignty | P3 | 74 workflows to port (stretch) |
-| grapheneGate aarch64 | Platform | P3 | NDK cross-compile, Pixel 8 |
-| fieldGate CMOS | Hardware | P4 | Dead, low priority |
-| strandGate/southGate relay | Enrollment | P2 | RustDesk config push |
-| Multi-vendor peptidoglycan | Resilience | P4 | Hetzner/Vultr redundancy |
+### sporeGate — Overwatch + cellMembrane
+
+**Overwatch** owns: LAN topology, hardware enrollment, build authority, Nest provenance.
+**cellMembrane team** owns: membrane-shadow (744 tests), transport layer, deployment tooling.
+
+| Task | Priority | Stream |
+|------|----------|--------|
+| Transport Envelope Phase 1: audit inter-gate IPC for plaintext | P1 | Overwatch |
+| Quorum Phase 1: systemd timer on golgi, autonomous cascade | P1 | cellMembrane |
+| TransportEndpoint.mesh_relay graduation (wire to songBird) | P1 | cellMembrane |
+| Nest provenance depth (ledger height → 4+) | P1 | Overwatch |
+| BLAKE3 depot verification post dual-target | P1 | Overwatch |
+| strandGate/southGate relay push (opportunistic) | P2 | Overwatch |
+| Tier 3 isomorphism (gate.migrate, absorb) | P2 | cellMembrane |
+| golgi-as-NUCLEUS evolution | P2 | cellMembrane |
+
+**Context**: sporeGate issued Sovereign Transport Envelope impulse — separating physical topology (bandwidth) from digital topology (privacy). Primitives exist in songBird + bearDog. cellMembrane wires the abstraction. See `impulses/active/2026-06-22T07-40_sporeGate__wave121-sovereign-transport-envelope.toml`.
+
+### flockGate — Tower Primals (bearDog, songBird, skunkBat)
+
+No dedicated overwatch — Tower primal agent evolves code directly.
+
+| Task | Priority | Stream |
+|------|----------|--------|
+| BTSP cross-gate trust: TrustedIssuerRegistry across 5 gates | P1 | bearDog |
+| Ed25519 key exchange between gates (auth.trust_issuer) | P1 | bearDog |
+| Songbird mesh routing: capabilities_announce + topology-aware | P1 | songBird |
+| SkunkBat MethodGate enforcement validation | P1 | skunkBat |
+| Transport Envelope Phase 2: songBird relay on golgi-ext | P2 | songBird |
+| sporePrint petalTongue backend wiring | P2 | sporePrint |
+
+**Context**: flockGate is the outer membrane — trust boundary facing WAN. Tower atomic is the immune system + transport. bearDog w135 shipped TrustedIssuerRegistry with multi-issuer verify. Songbird has mesh.capabilities_announce (push model). The code exists; deployment across the mesh is the work.
+
+### ironGate — Node Primals (toadStool, barraCuda, coralReef)
+
+No dedicated overwatch — Node primal agent evolves code directly.
+
+| Task | Priority | Stream |
+|------|----------|--------|
+| BarraCuda LSTM zero-copy inference on RTX 5070 (gnu binary) | P1 | barraCuda |
+| CoralReef shader pipelines via sovereign-dispatch IPC | P1 | coralReef |
+| ToadStool fleet dispatch coordinating GPU workloads | P1 | toadStool |
+| Validate dual-target depot fetch (gnu for GPU, musl for rest) | P1 | all |
+| HPC VLAN participant (when VLAN 10 activates) | P2 | infra |
+
+**Context**: ironGate has the only GPU in the mesh (RTX 5070, CUDA 12.8). Dual-target depot is shipped — `primals/x86_64-unknown-linux-gnu/` exists for GPU primals. All `ml.*` methods are behind BTSP MethodGate. Full ML pipeline (train→save→load→infer) delivered Wave 76.
+
+### eastGate — Meta Primals + Overwatch + primalSpring
+
+**Overwatch** owns: cascade, review, blurb maintenance, ecosystem coordination.
+**primalSpring team** owns: scenario expansion, cross-gate validation, coordination testing.
+
+| Task | Priority | Stream |
+|------|----------|--------|
+| Cross-gate capability.call scenarios (eastGate → sporeGate) | P1 | primalSpring |
+| BTSP cross-gate verify scenarios (issued here, verified there) | P1 | primalSpring |
+| Mesh capability propagation scenarios | P1 | primalSpring |
+| primalSpring → 1000+ tests | P1 | primalSpring |
+| BiomeOS composition deploy on multi-gate topology | P2 | biomeOS |
+| Squirrel AI pipeline (local Ollama + cross-gate barraCuda) | P2 | squirrel |
+| PetalTongue ecosystem visualization dashboard | P2 | petalTongue |
+
+**Context**: eastGate is the coordination hub. primalSpring validates that trust (flockGate), compute (ironGate), and provenance (sporeGate) all compose correctly. Cross-gate scenarios are the growth path to 1000+ tests.
 
 ---
 
-## Summary
+## Active Impulses
 
-The ecosystem has crossed from **infrastructure proving** to **capability evolution**. Every wave from here advances the gen4→gen5 arc:
-
-1. **Covalent trust** makes the mesh intelligent (not just connected)
-2. **Quorum sensing** makes the cascade autonomous (not just triggered)
-3. **Sovereignty graduation** removes remaining external deps
-4. **Primal evolution** matures the capabilities that products consume
-5. **Hardware expansion** grows the mesh physically (operator-paced)
-
-Teams work autonomously. Operator adds hardware as available. Overwatch coordinates via cascade. The system is self-sustaining.
+| Impulse | From | Focus |
+|---------|------|-------|
+| `wave123-covalent-trust.toml` | eastGate overwatch | Full FRAGO: 6 streams, all teams |
+| `wave121-sovereign-transport-envelope.toml` | sporeGate overwatch | Physical/digital topology separation |
 
 ---
 
-*End of ecosystem blurb. Single source of truth for all teams.*
+## Strategic Goals (from whitePaper gen4/gen5)
+
+1. **Sovereignty completion** (L3→L4): TLS, DNS registrar cutover, content, CI
+2. **Covalent mesh trust** (Phases 2-5): dispatch → security → content → Dark Forest
+3. **Transport evolution**: Nanowire → Quorum Phase 1 → Phase 2 → Phase 4 (envelope)
+4. **Primal code evolution**: each team evolves their assigned primals autonomously
+5. **Hardware expansion**: operator-paced, gates enroll agentically
+
+---
+
+## Coordination Rules
+
+- **Cascade**: push to Forgejo, all gates pull. wateringHole is the shared state.
+- **Impulses**: propose evolutions. File in `impulses/active/`, overwatch reviews.
+- **Handoffs**: long-term AARs and tracking. Archived when objectives complete.
+- **FRAGOs**: per-wave task orders in impulses/active/ (TOML, machine-readable).
+- **This blurb**: the ONE document. Paste to any IDE on any gate. Replaces all per-team blurbs.
+
+---
+
+## Operator-Only (user handles, not agentic)
+
+| Action | Unblocks |
+|--------|----------|
+| Flint 2 #2 install (ordered) | Hub 1 WiFi |
+| MikroTik CRS310 credential recovery (5s reset) | HPC VLAN 10 |
+| ATT BGW320 IP Passthrough (192.168.1.254) | Eliminate double NAT |
+
+---
+
+## Code Metrics
+
+| Repo | Tests | Latest |
+|------|-------|--------|
+| cellMembrane | 744 | Dual-target depot, PAT deprecated, mesh_relay typed |
+| primalSpring | 998 | toadStool S323, scenario expansion |
+| biomeOS | 8,351 | v4.31, 88% coverage |
+| songBird | 8,929 | Relay primitives, mesh.capabilities_announce |
+| toadStool | 9,074 | S323 submit split, fleet dispatch |
+| sporePrint | 183+ | Taxonomy audit |
+
+---
+
+*Single source of truth. Paste anywhere. Every agent knows the whole ecosystem and their role in it.*
