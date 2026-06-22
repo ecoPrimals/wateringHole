@@ -75,13 +75,13 @@ Meta (orchestration + AI + viz):
 ### sporeGate — Overwatch + cellMembrane
 
 **Overwatch** owns: LAN topology, hardware enrollment, build authority, Nest provenance.
-**cellMembrane team** owns: membrane-shadow (744 tests), transport layer, deployment tooling.
+**cellMembrane team** owns: membrane-shadow (769 tests), transport layer, deployment tooling.
 
 | Task | Priority | Stream |
 |------|----------|--------|
 | Transport Envelope Phase 1: audit inter-gate IPC for plaintext | P1 | Overwatch |
-| Quorum Phase 1: systemd timer on golgi, autonomous cascade | P1 | cellMembrane |
-| TransportEndpoint.mesh_relay graduation (wire to songBird) | P1 | cellMembrane |
+| ~~Quorum Phase 1: systemd timer on golgi, autonomous cascade~~ | ~~P1~~ | **DONE** (Wave 123) |
+| ~~TransportEndpoint.mesh_relay graduation (wire to songBird)~~ | ~~P1~~ | **DONE** (Wave 121) |
 | Nest provenance depth (ledger height → 4+) | P1 | Overwatch |
 | BLAKE3 depot verification post dual-target | P1 | Overwatch |
 | strandGate/southGate relay push (opportunistic) | P2 | Overwatch |
@@ -181,7 +181,7 @@ No dedicated overwatch — Node primal agent evolves code directly.
 
 | Repo | Tests | Latest |
 |------|-------|--------|
-| cellMembrane | 744 | Dual-target depot, PAT deprecated, mesh_relay typed |
+| cellMembrane | 769 | Wire format fix, sovereignty coverage, Quorum P1, TCP transport |
 | primalSpring | 998 | toadStool S323, scenario expansion |
 | biomeOS | 8,351 | v4.31, 88% coverage |
 | songBird | 8,929 | Relay primitives, mesh.capabilities_announce |
