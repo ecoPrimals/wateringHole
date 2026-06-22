@@ -175,7 +175,7 @@ Meta (orchestration + AI + viz):
 
 | Repo | Tests | Latest |
 |------|-------|--------|
-| cellMembrane | 779 | Transport resolver, mesh_relay wired, typed RPC errors |
+| cellMembrane | 788 | pepti decommissioned, typed plasmid errors (11 sigs), hardcode sweep |
 | primalSpring | 1,017 | 98 scenarios, toadStool S325, debt sweep |
 | biomeOS | 8,351 | v4.31, 88% coverage |
 | songBird | 8,929+ | relay.forward handler, mesh capabilities |
