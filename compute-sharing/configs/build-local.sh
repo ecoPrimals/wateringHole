@@ -57,7 +57,7 @@ declare -A PRIMAL_MAP=(
 declare -A BUILD_ARGS=(
     [biomeos]="-p biomeos-unibin"
     [skunkbat]="-p skunk-bat-server"
-    [squirrel]="-p squirrel-server"
+    [squirrel]="-p squirrel"
 )
 
 # Binary name overrides — what the release binary is actually called
