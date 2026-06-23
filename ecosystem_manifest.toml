@@ -545,13 +545,16 @@ repos = [
 
 [gates.ironGate]
 target = "x86_64-unknown-linux-musl"
+gpu_target = "x86_64-unknown-linux-gnu"
 mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
 zone = "backbone"
-roles = ["node_atomic", "compute"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K. SSH pending enrollment."
+wg_ip = "10.13.37.7"
+nucleus_status = "12/12"
+roles = ["node_atomic", "compute", "gpu"]
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070. GPU validated Wave 123."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
