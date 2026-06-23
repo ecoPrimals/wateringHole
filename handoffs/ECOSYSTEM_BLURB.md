@@ -1,6 +1,6 @@
 # ecoPrimals Ecosystem Blurb — Wave 126
 
-**Date**: Jun 23, 2026 09:00 EDT | **Wave**: 126 | **From**: eastGate overwatch
+**Date**: Jun 23, 2026 11:45 EDT | **Wave**: 126 | **From**: sporeGate (gnu depot build + cellMembrane fix)
 **Cascade**: All repos at parity via Forgejo (git.primals.eco:2222) + golgi 15-min auto-relay
 
 ---
@@ -161,7 +161,7 @@ None. All Wave 123-125 impulses fossilized (objectives shipped or carried into t
 
 | Repo | Tests | Latest |
 |------|-------|--------|
-| cellMembrane | 810 | Consolidation, typed enums, relay.forward graduated, pepti decommission |
+| cellMembrane | 833 | TLS cert trim fix, relay force-with-lease graduation, 0 clippy warnings |
 | primalSpring | 1,038 | GPU dispatch tolerance, multigate composition, deep debt |
 | biomeOS | 8,351 | v4.31, 88% coverage |
 | songBird | 8,929+ | relay.forward, WG auto-init, mesh capabilities |

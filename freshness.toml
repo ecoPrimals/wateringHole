@@ -11,7 +11,7 @@
 id = 126
 date = "2026-06-23"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 126: All impulses fossilized. coralReef shader.compile.multi SHIPPED (3631 tests, SM120). barraCuda quota-aware OOM (4619). cellMembrane 810, primalSpring 1038. Agentic divergence live. Remaining: gnu depot, toadStool enrollment, mesh.init, BTSP exchange."
+notes = "Wave 126: gnu depot built (15/15, 0 fail), synced to golgi. cellMembrane 833 (TLS fix, relay force-with-lease graduated). coralReef shader.compile.multi SHIPPED (3631). barraCuda OOM (4619). ironGate unblocked for dual-target fetch. Remaining: toadStool enrollment, mesh.init, BTSP exchange."
 publisher = "primalSpring"
 
 [heads]
