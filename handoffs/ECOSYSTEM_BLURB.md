@@ -1,6 +1,6 @@
 # ecoPrimals Ecosystem Blurb — Wave 124
 
-**Date**: Jun 23, 2026 08:30 EDT | **Wave**: 124 | **From**: sporeGate (doc cleanup + cargo clean)
+**Date**: Jun 23, 2026 08:45 EDT | **Wave**: 126 | **From**: sporeGate (consolidation + typed enums + test expansion)
 **Cascade**: All repos at parity via Forgejo (git.primals.eco:2222)
 
 ---
@@ -177,7 +177,7 @@ Meta (orchestration + AI + viz):
 
 | Repo | Tests | Latest |
 |------|-------|--------|
-| cellMembrane | 788 | pepti decommissioned, typed plasmid errors (11 sigs), hardcode sweep |
+| cellMembrane | 810 | git_ops consolidation, env_or helper, DivergeType/SuggestedAction typed enums, dispatch/sovereignty tests |
 | primalSpring | 1,017 | 98 scenarios, toadStool S325, debt sweep |
 | biomeOS | 8,351 | v4.31, 88% coverage |
 | songBird | 8,929+ | relay.forward handler, mesh capabilities |
