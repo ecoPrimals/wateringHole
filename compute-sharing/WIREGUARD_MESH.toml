@@ -7,17 +7,17 @@
 # The mesh is hub-and-spoke with golgiBody as the relay hub for NAT traversal,
 # but supports direct peer connections when both endpoints have public IPs.
 #
-# Last updated: 2026-06-19 (Wave 119)
+# Last updated: 2026-06-23 (Wave 124)
 # Authority: sporeGate (routing) + bearDog (key management)
 
 [meta]
-version = "2.0.0"
-wave = 120
+version = "3.0.0"
+wave = 124
 overlay_subnet = "10.13.37.0/24"
-port = 51820
+port = 51821
 key_management = "wg genkey (manual, pre-bearDog integration)"
 status = "LIVE — 5-node mesh: golgiBody ↔ sporeGate ↔ eastGate ↔ flockGate ↔ ironGate"
-last_deployed = "2026-06-21T09:05:00-04:00"
+last_deployed = "2026-06-23T08:30:00-04:00"
 active_peers = 5
 pending_peers = 0
 hub_forwarding = "enabled (sysctl net.ipv4.ip_forward=1 on golgiBody)"
@@ -43,16 +43,16 @@ note = "Central hub. All peers that can't reach each other directly relay throug
 [peers.sporegate]
 role = "site_router"
 status = "LIVE"
-endpoint = "dynamic (behind ATT NAT — keepalive punches through)"
+endpoint = "162.226.225.148:51821"
 overlay_ip = "10.13.37.2/24"
-public_ip = "none (double-NAT — ATT BGW320)"
+public_ip = "162.226.225.148 (ATT IP Passthrough active Jun 22)"
 public_key = "obCKmO89eCvh106gUdqu77L4F1ViASdDirGEddqyYSA="
-nat_traversal = "persistent keepalive to golgiBody (25s)"
+nat_traversal = "not needed (public IP via passthrough)"
 allowed_ips = ["10.13.37.2/32", "192.168.4.0/22"]
 site_subnet = "192.168.4.0/22"
 keepalive_seconds = 25
 measured_latency_ms = 30
-note = "Primary LAN router. Routes House 1+2 subnet into mesh overlay. Tunnel active, systemd persisted."
+note = "Primary LAN router. ATT IP Passthrough gives public IP. WG port 51821 (BGW320 UDP 51820 bug). Routes House 1+2 subnet into mesh."
 
 [peers.marshgate]
 role = "site_router"
@@ -104,8 +104,8 @@ public_key = "A4MpSecI1N5+fS5tizkhiumcbb8ZLMYwRXa/1AZvEgQ="
 nat_traversal = "persistent keepalive to golgiBody (25s)"
 allowed_ips = ["10.13.37.7/32"]
 keepalive_seconds = 25
-status_detail = "LIVE — WG handshake active, SSH key-only, NUCLEUS pending"
-note = "Node atomic (ToadStool, BarraCuda, CoralReef). Pop!_OS. Backbone zone. Enrollment Wave 120."
+status_detail = "LIVE — WG handshake active, 12/12 NUCLEUS, GPU validated (RTX 5070 f64)"
+note = "Node atomic (ToadStool, BarraCuda, CoralReef). Pop!_OS. Backbone zone. Enrolled Wave 120. GPU pipeline validated Wave 123."
 
 [peers.neighborhood_node]
 role = "expansion_site"
@@ -170,7 +170,7 @@ If ATT fiber at House 1 dies:
 
 [config.sporegate]
 interface_name = "wg0"
-listen_port = 51820
+listen_port = 51821
 config_path = "/etc/wireguard/wg0.conf"
 systemd_unit = "wg-quick@wg0.service"
 

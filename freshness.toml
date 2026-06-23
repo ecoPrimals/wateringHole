@@ -9,9 +9,9 @@
 
 [wave]
 id = 124
-date = "2026-06-22"
+date = "2026-06-23"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 124: ATT passthrough live, Quorum Phase 1 live, relay.forward shipped, GPU pipeline validated (RTX 5070 f64). 779 cellMembrane, 1017 primalSpring, 4624 barraCuda. All P1 FRAGOs responded."
+notes = "Wave 124: metalForge shipped (7 probes green). Doc cleanup + cargo clean. Wave 123 impulses archived. DEPLOYMENT_INSTANCE + TOPOLOGY_MAP updated to wave 124. Flint 2 replaces Eero in topology. 788 cellMembrane, 1017 primalSpring."
 publisher = "primalSpring"
 
 [heads]

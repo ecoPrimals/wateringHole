@@ -1,6 +1,6 @@
 # ecoPrimals Ecosystem Blurb — Wave 124
 
-**Date**: Jun 22, 2026 12:00 EDT | **Wave**: 124 | **From**: eastGate overwatch
+**Date**: Jun 23, 2026 08:30 EDT | **Wave**: 124 | **From**: sporeGate (doc cleanup + cargo clean)
 **Cascade**: All repos at parity via Forgejo (git.primals.eco:2222)
 
 ---
@@ -26,7 +26,7 @@ The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 R
 | **relay.forward shipped** | cellMembrane → songBird mesh relay wired end-to-end |
 | **GPU pipeline validated** | BarraCuda LSTM on RTX 5070: f64 native, XOR MLP MSE 1.11e-30 |
 | **primalSpring 1017 tests** | 98 scenarios, toadStool S325 (9,127 tests) |
-| **cellMembrane 779 tests** | Transport resolver, TCP consolidation, typed RPC errors |
+| **cellMembrane 788 tests** | Transport resolver, TCP consolidation, typed RPC errors |
 | **sporePrint petalTongue wired** | IPC client operational, render format gap identified |
 | **Tower probed** | bearDog auth.public_key live, songBird needs mesh.init, skunkBat methods missing |
 
@@ -137,10 +137,9 @@ Meta (orchestration + AI + viz):
 
 | Impulse | From | Status |
 |---------|------|--------|
-| `wave123-flockgate-tower.toml` | eastGate | PARTIALLY COMPLETE (sporePrint done, Tower P1 ongoing) |
-| `wave123-irongate-node.toml` | eastGate | PARTIALLY COMPLETE (GPU validated, depot+toadStool pending) |
-| `wave123-gpu-pipeline-validation.toml` | ironGate | RESPONSE — validated, upstream actions listed |
-| `wave124-divergence-resolution.toml` | eastGate | ACTIVE — multi-writer sync policy |
+| `wave124-divergence-resolution.toml` | eastGate | ACTIVE — multi-writer sync policy, force-with-lease shipped |
+
+**Archived (Wave 123)**: `wave123-flockgate-tower`, `wave123-irongate-node`, `wave123-gpu-pipeline-validation` — all resolved or carried into Wave 124 tasks.
 
 ---
 

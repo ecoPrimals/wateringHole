@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 22, 2026 (Wave 123: flockGate 13/13, ironGate 12/12. primalSpring v0.9.33 — 98 scenarios, 1017 tests. Deep debt round 3: hardcoded UID-1000 socket fallbacks centralized, east-gate bias removed, BTSP handshake clone eliminated, CI portability (genomeBin-harvest.yml), doc/metric alignment across projectNUCLEUS specs.)
+**Last Updated**: June 23, 2026 (Wave 124: metalForge v0.1.0 shipped (7 hardware probes, WiFi drift auto-remediation). ATT IP Passthrough live. Quorum Phase 1 cascade-sense with force-with-lease. relay.forward graduated. cellMembrane 788 tests. primalSpring 98 scenarios, 1017 tests.)
 
 ---
 
@@ -74,6 +74,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 | Tool | Purpose |
 |------|---------|
 | **sourDough** | Starter culture - scaffolding, genomeBin tooling, ecosystem bootstrapping |
+| **metalForge** | Hardware topology testing suite - drift detection, infrastructure probes, auto-remediation |
 
 ---
 
@@ -390,10 +391,10 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `gen5/TRANSPORT_EVOLUTION_NANOWIRE_TO_QUORUM.md` — Nanowire (SSH) → quorum sensing roadmap
 
 ### Evolution Tracking
-- `EVOLUTION_STATUS_WAVE66.md` — Current wave checkpoint
-- `SHADOW_DATA_COLLECTION_WAVE66.md` — VPS shadow metrics (S1, tower, services)
 - `GLACIAL_SHIFT_READINESS.md` — Stadial entry criteria tracking
-- `GLACIAL_SHIFT_WAVE_PLAN.md` — Post-primordial → sovereignty roadmap
+- `handoffs/ECOSYSTEM_BLURB.md` — Living ecosystem status (updated each wave)
+- `impulses/active/` — Active inter-gate impulses (current wave)
+- Earlier wave checkpoints and shadow metrics fossilized to `fossilRecord/`
 
 ### Per-Spring & Product Guidance
 - `sporePrint/CONTENT_GUIDE.md` — sporePrint publishing standards
@@ -413,8 +414,9 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `petaltongue/` — petalTongue integration documentation
 
 ### Handoffs
-- `handoffs/archive/` — 445 archived handoffs organized by wave (wave58–wave68)
-- `handoffs/hotSpring/archive/` — 53 archived hotSpring handoffs
+- `handoffs/archive/` — 385 archived handoffs organized by wave (wave58–wave111)
+- `handoffs/archived/` — 67 archived handoffs from waves 114–123
+- `handoffs/hotSpring/archive/` — 55 archived hotSpring handoffs
 - Earlier epochs consolidated to fossilRecord (3,231 documents)
 
 ### Fossilized Standards (in fossilRecord)

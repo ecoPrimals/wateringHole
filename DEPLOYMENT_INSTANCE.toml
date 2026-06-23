@@ -15,11 +15,11 @@
 
 [instance]
 name = "ecoPrimals-alpha"
-wave = 110
+wave = 124
 topology = "diderm"
 vps_provider = "digitalocean"
 region = "nyc1"
-last_updated = "2026-06-11"
+last_updated = "2026-06-23"
 
 # ──────────────────────────────────────────────────────────────
 # VPS NODES (K-Derm diderm envelope)
@@ -114,7 +114,7 @@ proxy_command = "ssh -W %h:%p golgi"
 [instance.forgejo]
 host_node = "golgiBody"
 orgs = ["ecoPrimals", "sporeGarden"]
-token_path = "DEPRECATED — SSH key auth is now standard. PATs to be revoked Wave 121."
+token_path = "DEPRECATED — SSH key auth is standard. PATs revoked."
 admin_user = "ecoPrimal"
 ssh_port = 2222
 http_port = 3000
@@ -148,20 +148,19 @@ architecture_context = "ECOSYSTEM_ARCHITECTURE_CONTEXT.md"
 note = "FRAGOs are time-bounded work DAGs (rhizoCrypt analog). Handoffs are fossil record (loamSpine analog). Blurbs are session seeds (sweetGrass analog)."
 
 [coordination.active_fragos]
-primary = "wave109-guidestone-deployment-convergence"
-secondary = ["wave107-healthspring-upstream-gaps"]
+primary = "wave124-divergence-resolution"
+secondary = []
 see = "impulses/active/"
 
 [coordination.current_wave]
-number = 110
-name = "Last Mile Health + Gate Expansion"
+number = 124
+name = "metalForge + Divergence Resolution + Cleanup"
 streams = [
-    "Stream 1: HEALTH-13/13 (rhizoCrypt, petalTongue remaining)",
-    "Stream 2: BTSP End-to-End (cross-primal chain)",
-    "Stream 3: Build Hardening (FULLY RESOLVED)",
-    "Stream 4: Gate Expansion (northGate + westGate)",
-    "Stream 5: primalSpring Dogfood (MOSTLY RESOLVED)",
-    "Stream 6: Federation Debug (ROOT CAUSE FIXED, deploy pending)",
+    "Stream 1: metalForge hardware probes (7 probes, all green)",
+    "Stream 2: Quorum Phase 1 cascade-sense (force-with-lease)",
+    "Stream 3: ATT IP Passthrough hardened",
+    "Stream 4: Doc cleanup + cargo clean for upstream audit",
+    "Stream 5: GPU depot gnu binaries for ironGate",
 ]
 
 # ──────────────────────────────────────────────────────────────
@@ -178,10 +177,10 @@ transport = "lan"
 role = "Primary dev + peptidoglycan build host"
 
 [fleet.gates.ironGate]
-arch = "x86_64-unknown-linux-musl"
+arch = "x86_64-unknown-linux-gnu"
 mobility = "fixed"
 transport = "lan"
-role = "Secondary dev gate"
+role = "Node compute — i9-12900K + RTX 5070, GPU validated"
 
 [fleet.gates.southGate]
 arch = "x86_64-unknown-linux-musl"
