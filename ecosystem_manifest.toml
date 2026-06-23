@@ -20,7 +20,7 @@
 [meta]
 version = "2.9.0"
 generated = "2026-06-23"
-wave = 123
+wave = 124
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -509,7 +509,8 @@ build_authority = true
 link_speed_mbps = 2500
 kderm_role = "plasma_membrane"
 site_topology = "triangle_3hub"
-notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke. SOVEREIGN CI: builds all 13 primals locally (12-core Ryzen 5 6600H, 27GB RAM), syncs depot to golgi. Omada SDN controller STOPPED (standalone L2 preferred)."
+nucleus_status = "13/13"
+notes = "Peptidoglycan — 13/13 NUCLEUS. Ryzen 5 6600H 27GB. Build authority (sovereign CI, dual-target musl+gnu). Nest provenance. Firewall (nftables, NAT/DHCP/DNS). Public IP via ATT passthrough (162.226.225.148). CRS310 ether8 at 2.5G."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -530,7 +531,8 @@ hub_port = "sfp+2"
 wg_ip = "10.13.37.5"
 roles = ["overwatch", "primalspring_evolution", "meta_atomic"]
 link_speed_mbps = 10000
-notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch."
+nucleus_status = "13/13"
+notes = "Cytoplasm — 13/13 NUCLEUS. i7 64GB. Overwatch + Meta atomic (BiomeOS, Squirrel, PetalTongue). primalSpring evolution (1017 tests, 102 scenarios). CRS310 sfp+2 at 10G."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -618,7 +620,8 @@ mesh_peer = "157.230.3.183:7700"
 segmentation = "external-only"
 wg_ip = "10.13.37.6"
 roles = ["tower_atomic", "sporeprint", "wan_validator"]
-notes = "WAN Tower atomic (BearDog, Songbird, SkunkBat). 13/13 NUCLEUS via user systemd. i9-13900K/62GB. SSH via golgi ProxyJump."
+nucleus_status = "13/13"
+notes = "Outer membrane — 13/13 NUCLEUS via user systemd. Tower atomic (BearDog, Songbird, SkunkBat). sporePrint (petalTongue IPC wired). i9-13900K/62GB. SSH via golgi ProxyJump."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -741,7 +744,8 @@ transport = "local"
 wg_ip = "10.13.37.1"
 roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "caddy_tls"]
 mesh_peer = "127.0.0.1:7700"
-notes = "VPS inner membrane — 13/13 NUCLEUS, Forgejo, Caddy"
+nucleus_status = "18 svc"
+notes = "VPS periplasm — 18 services, WG hub, Forgejo, relay, depot, cascade timer (Quorum Phase 1). Caddy TLS."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "cellMembrane", "projectNUCLEUS",
