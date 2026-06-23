@@ -21,7 +21,7 @@
 version = "2.8.0"
 generated = "2026-06-18"
 wave = 116
-total_repos = 39
+total_repos = 40
 
 # ═══════════════════════════════════════════════════════════════════
 # WaterFall Sync Configuration
@@ -319,6 +319,17 @@ category = "garden"
 description = "VPS deployment, sovereignty boundary"
 github_repo = "sporeGarden/cellMembrane"
 forgejo_repo = "sporeGarden/cellMembrane"
+
+[repos.metalForge]
+org = "sporeGarden"
+local_path = "gardens/metalForge"
+membrane = "inner-only"
+sync_source = "forgejo"
+sync_priority = "standard"
+category = "garden"
+description = "Hardware topology testing suite — drift detection, infrastructure probes, auto-remediation"
+github_repo = "sporeGarden/metalForge"
+forgejo_repo = "sporeGarden/metalForge"
 
 [repos.lithoSpore]
 org = "sporeGarden"

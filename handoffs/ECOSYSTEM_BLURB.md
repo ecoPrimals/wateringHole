@@ -88,6 +88,7 @@ Meta (orchestration + AI + viz):
 | SSH-only auth (PATs revoked) | ✅ |
 | Flint 2 WiFi (Hub 2, bridge, ApertureScience) | ✅ |
 | Deployment isomorphism Tier 1+2 | ✅ |
+| metalForge (hardware topology probes, WiFi drift auto-remediation) | ✅ NEW |
 
 ---
 
@@ -139,6 +140,7 @@ Meta (orchestration + AI + viz):
 | `wave123-flockgate-tower.toml` | eastGate | PARTIALLY COMPLETE (sporePrint done, Tower P1 ongoing) |
 | `wave123-irongate-node.toml` | eastGate | PARTIALLY COMPLETE (GPU validated, depot+toadStool pending) |
 | `wave123-gpu-pipeline-validation.toml` | ironGate | RESPONSE — validated, upstream actions listed |
+| `wave124-divergence-resolution.toml` | eastGate | ACTIVE — multi-writer sync policy |
 
 ---
 
@@ -149,6 +151,7 @@ Meta (orchestration + AI + viz):
 3. **Transport**: Quorum Phase 1 live. Phase 2 (Songbird mesh.publish) next. Phase 4 (Dark Forest) designed.
 4. **GPU**: Pipeline proven. Depot gnu build + toadStool enrollment = full Node atomic.
 5. **Hardware**: Flint 2 #2 incoming. MikroTik creds for VLAN 10. Operator-paced.
+6. **metalForge**: Hardware topology testing live. 7 probes (WiFi drift, WG mesh, DNS/DHCP, topology sweep). Auto-remediation proven.
 
 ---
 
@@ -182,6 +185,7 @@ Meta (orchestration + AI + viz):
 | toadStool | 9,127 | S325 sentinel coverage, discovery gate |
 | barraCuda | 4,624 | LSTM zero-copy, f64 native, GPU validated |
 | sporePrint | 183+ | petalTongue IPC wired |
+| metalForge | 7 probes | WiFi drift, topology sweep, WG mesh, DNS/DHCP audit |
 
 ---
 
