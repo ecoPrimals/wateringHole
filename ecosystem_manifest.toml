@@ -18,10 +18,10 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.8.0"
-generated = "2026-06-18"
-wave = 116
-total_repos = 40
+version = "2.9.0"
+generated = "2026-06-23"
+wave = 123
+total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
 # WaterFall Sync Configuration
@@ -320,17 +320,6 @@ description = "VPS deployment, sovereignty boundary"
 github_repo = "sporeGarden/cellMembrane"
 forgejo_repo = "sporeGarden/cellMembrane"
 
-[repos.metalForge]
-org = "sporeGarden"
-local_path = "gardens/metalForge"
-membrane = "inner-only"
-sync_source = "forgejo"
-sync_priority = "standard"
-category = "garden"
-description = "Hardware topology testing suite — drift detection, infrastructure probes, auto-remediation"
-github_repo = "sporeGarden/metalForge"
-forgejo_repo = "sporeGarden/metalForge"
-
 [repos.lithoSpore]
 org = "sporeGarden"
 local_path = "gardens/lithoSpore"
@@ -414,7 +403,6 @@ category = "infra"
 description = "Ecosystem standards, coordination, cascading pull orchestration"
 github_repo = "ecoPrimals/wateringHole"
 forgejo_repo = "ecoPrimals/wateringHole"
-divergence_policy = "agentic"
 
 [repos.plasmidBin]
 org = "ecoPrimals"
@@ -557,15 +545,13 @@ repos = [
 
 [gates.ironGate]
 target = "x86_64-unknown-linux-musl"
-gpu_target = "x86_64-unknown-linux-gnu"
 mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
 zone = "backbone"
-wg_ip = "10.13.37.7"
-roles = ["node_atomic", "compute", "gpu"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 (CUDA 12.8). 12/12 NUCLEUS enrolled Wave 120. GPU pipeline validated Wave 123: train→save→load→infer E2E, f64 native, SHADER_F64 enabled. barraCuda runs glibc local build for GPU access; coralReef runs musl (pure Rust naga). Dual-target depot fetch pending sporeGate build."
+roles = ["node_atomic", "compute"]
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K. SSH pending enrollment."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",

@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 20, 2026 (Wave 120 — petalTongue: feature-gated TUI/UI, legacy dead code removed, hot-path allocation elimination. 6,618+ tests, 56 IPC methods.)
+**Last Updated**: June 23, 2026 (Wave 123 — primalSpring v0.9.33, 98 scenarios, 1017 tests. biomeOS v4.31, 8,351 tests. flockGate 13/13, ironGate 12/12. petalTongue 6,618+ tests.)
 
 ---
 
@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v4.28  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983+ tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. guideStone startup contract SHIPPED (Wave 109, `--bind-mode` + HEALTH-01). NUCLEUS supervision SHIPPED (v4.17). TCP-only fallback SHIPPED + ALL ADOPTED. `primal.announce` self-registration. Zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps. riboCipher REJECT enforced (Wave 113). Post-boot topology.rescan for NeuralRouter auto-registration.
+**Version**: v4.31  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 8,351+ tests, 88% coverage, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, axum 0.8, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. guideStone startup contract SHIPPED. NUCLEUS supervision SHIPPED. TCP-only fallback SHIPPED + ALL ADOPTED. `primal.announce` self-registration. Zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps. riboCipher REJECT enforced. Post-boot topology.rescan for NeuralRouter auto-registration.
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -444,7 +444,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.10.0 (911 lib + 311 integration + 61 forge tests, 97 binaries, 87 experiments, 14.3× CPU speedup, 10 MCP tools, Edition 2024) |
 | barraCuda | v0.4.0 (3,348+ tests, 803 shaders, AGPL-3.0-only, startup contract SHIPPED, method.describe 97 methods) |
 | coralReef | Phase 10 Iteration 59 (3,304+ tests, startup contract SHIPPED, tarpc skip on tcp_only) |
-| primalSpring | v0.9.31 Wave 109 (93 experiments, 21 tracks, 1,000+ tests, 490+ methods, 55 scenarios, 113 graph TOMLs, PlatformCapabilities::detect() SHIPPED, HEALTH-01 schema SHIPPED) |
+| primalSpring | v0.9.33 Wave 123 (93 experiments, 21 tracks, 1017 tests, 490+ methods, 98 scenarios, 113 graph TOMLs, cross-gate BTSP, metallic bond, parallel graph scenarios. Zero unwrap/expect in prod lib) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -528,7 +528,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
 **Phase**: Phase 60+ / Interstadial (87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.9.31 Wave 67 — 93 experiments (21 tracks), 836 tests (805 lib + 10 integration + 4 binary + 17 doc, 2 ignored), 490+ methods, 58 scenarios (10 tracks, 3 tiers), 113 graph TOMLs (~80 deploy + 33 compositions). Phase 0 P0 blockers CLEARED (Songbird socket fix, biomeOS capability.call, bearDog S4). Phase 1 mesh validation NEXT. `#![forbid(unsafe_code)]` on all crate roots. Zero TODO/FIXME/unsafe/mocks in production
+**Status**: v0.9.33 Wave 123 — 93 experiments (21 tracks), 1017 tests (980 lib + 16 trio-ops + 21 integration/ignored), 490+ methods, 98 scenarios (11 tracks, 3 tiers), 113 graph TOMLs (~80 deploy + 33 compositions). 5-node WireGuard mesh validated. Cross-gate BTSP, metallic bond, parallel graph scenarios shipped. `unsafe_code = "deny"` workspace-wide. Zero unwrap/expect in production lib. Zero TODO/FIXME/mocks in production
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 
