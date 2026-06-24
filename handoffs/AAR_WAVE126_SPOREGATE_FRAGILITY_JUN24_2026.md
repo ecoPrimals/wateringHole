@@ -173,4 +173,26 @@ northGate's only remote path to sporeGate is through RustDesk, which runs ON spo
 
 The ecosystem infrastructure is proven and the firewall/mesh/DNS stack is solid when running. The problem is **resilience** — a single reboot cascades into total service loss with no automated recovery and no secondary access path. This debt must be resolved before adding the Flint 2 #2 hardware, which would increase the blast radius of any future outage.
 
+## Addendum: AT&T WiFi Radio Still Active (DHCP Conflict)
+
+**Discovery**: The Epson ET-2400 printer on ApertureScience WiFi received IP
+`192.168.1.114` from the **AT&T BGW320's DHCP server** instead of sporeGate's
+dnsmasq. The AT&T gateway's WiFi radios are still broadcasting and serving
+DHCP on the 192.168.1.0/24 subnet, creating a competing DHCP server.
+
+**Impact**: Any WiFi client can get an IP from the wrong DHCP server (AT&T
+instead of sporeGate), landing on the wrong subnet with no DNS blocklist,
+no DoT, and no sovereign DNS entries.
+
+**Fix (with Flint 2 #2 provisioning)**:
+1. Disable AT&T BGW320 WiFi radios (both 2.4GHz and 5GHz) via gateway admin
+2. Flint 2 #2 takes over ALL House 1 WiFi (same SSID: ApertureScience)
+3. AT&T BGW320 becomes pure ethernet WAN ingress — no radio, no DHCP for WiFi
+4. Printer will then DHCP from sporeGate → moves to 192.168.4.200 automatically
+
+**Current state**: Printer works at `printer.primals.local` → `192.168.1.114`
+(ad-hoc, on AT&T subnet). DHCP reservation ready at `.200` for when it migrates.
+
+---
+
 **Priority**: Resolve items 1-5 immediately, items 6-9 before Flint 2 #2 provisioning.
