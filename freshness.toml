@@ -11,7 +11,7 @@
 id = 127
 date = "2026-06-24"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 127: Convergence + debt week. GNU depot live. cellMembrane 833, primalSpring 1038. Force-with-lease graduated. Remaining: toadStool enrollment, mesh.init, BTSP exchange, debt sweeps."
+notes = "Wave 127: Flint 2 #2 deployed at House 1 (agentic, bridge mode, 2.5G uplink). Both sites sovereign WiFi. AAR filed for bridge loop + port mapping lessons. metalForge device_registry hardened with port maps. TOPOLOGY_MAP v6. ATT WiFi disable pending."
 publisher = "primalSpring"
 
 [heads]

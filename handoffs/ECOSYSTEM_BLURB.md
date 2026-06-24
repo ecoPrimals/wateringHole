@@ -35,9 +35,11 @@ Everything below is stable. Teams should not revisit unless a regression is foun
 - relay.forward (cellMembrane → songBird E2E), agentic divergence policy
 - GPU pipeline (LSTM f64, shader.compile.multi, SM120, quota-aware OOM)
 - Network hardening (167k DNS blocklist, DoT, nftables, IPC audit clean)
-- metalForge (7 probes, WiFi drift auto-remediation)
+- metalForge (7 probes, WiFi drift auto-remediation, device port registry)
 - GNU depot built and synced to golgi (Wave 126 — sporeGate P1 DONE)
 - Force-with-lease graduated on relay ship (divergence fix operational)
+- **Flint 2 #2 deployed at House 1** (Wave 126 — agentic provision via RPC + SSH)
+- Both sites sovereign WiFi (ApertureScience), seamless roaming, 2.5G uplink
 
 ---
 
@@ -138,12 +140,13 @@ None. Clean slate. Teams work from the task tables above.
 
 ---
 
-## Operator-Only (deferred this week)
+## Operator-Only
 
 | Action | Status |
 |--------|--------|
-| Flint 2 #2 install | Pending delivery |
-| MikroTik CRS310 creds | When convenient |
+| ~~Flint 2 #2 install~~ | ✅ DONE (Jun 24, agentic deploy, AAR filed) |
+| Disable ATT WiFi radios | Pending (manual: 192.168.1.254, no API) |
+| MikroTik CRS310 creds | When convenient (physical reset) |
 
 ---
 

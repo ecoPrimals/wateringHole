@@ -6,7 +6,38 @@
 **Wave**: 126
 **Hardware**: GL.iNet Flint 2 (GL-MT6000)
 **Site**: House 1 (4422 Southgate Ave)
-**Goal**: Own all radio. ATT BGW320 becomes pure ethernet WAN ingress.
+**Goal**: Own all radio. Separate network layer from compute layer. ATT = ethernet WAN.
+
+---
+
+## Architectural Principle: sporeGate is a Deployment, Not the Network
+
+sporeGate is a compute node deployed ON the topology — it runs NUCLEUS,
+Sovereign CI, WireGuard hub, and services. But it should NOT be the sole
+network path. A small home network might not have a sporeGate at all, or
+the NUC might sit internal (behind the router) instead of being the router.
+
+**Current (fragile)**: ATT passthrough → sporeGate → everything. Death = total outage.
+
+**Target (resilient)**: ATT → Flint 2 (network edge) → CRS310 → all devices
+including sporeGate. sporeGate death = services down, but network stays up.
+
+The Flint 2 running OpenWrt can handle: NAT, DHCP, DNS, firewall, WiFi.
+The MikroTik CRS310 (once creds recovered) can handle: L2/L3 routing, VLAN,
+DHCP, firewall. Either can be the edge router.
+
+### Evolution Path
+
+| Phase | Edge Router | sporeGate Role | ATT Passthrough Target |
+|-------|-------------|----------------|----------------------|
+| **Now** | sporeGate | Router + Compute | sporeGate MAC |
+| **Phase 1** | Flint 2 #2 (bridge) + sporeGate | Router + Compute | sporeGate MAC |
+| **Phase 2** | Flint 2 #2 (router) | Compute only | Flint 2 #2 MAC |
+| **Phase 3** | MikroTik CRS310 | Compute only | CRS310 MAC |
+
+Phase 1 is what we do now (add Flint as WiFi, sporeGate still routes).
+Phase 2 promotes Flint to edge router — sporeGate moves behind it as a gate.
+Phase 3 is when MikroTik creds are recovered — full L3 backbone.
 
 ---
 
@@ -21,24 +52,45 @@
 | **ATT BGW320** | eth1 → sporeGate | eth2 → Flint 2 #2 LAN1 | Emergency kickstart |
 | **CRS310** | ether → sporeGate | ether → Flint 2 #2 WAN | L2 backbone hub |
 
-### Normal Operation (Sovereign)
+### Phase 1: Immediate (sporeGate still routes, Flint = WiFi AP)
 
 ```
-ATT BGW320 (WiFi OFF, ethernet only)
-    ├── eth1 → sporeGate enp1s0 (IP passthrough, primary WAN)
-    │           └── eno1 → CRS310 ether8 (2.5G backbone uplink)
-    │                   ├── etherX → Flint 2 #2 WAN (House 1 WiFi, bridge mode)
+ATT BGW320 (WiFi OFF, passthrough → sporeGate MAC)
+    ├── eth1 → sporeGate enp1s0 (public IP: 162.226.225.148)
+    │           └── eno1 → CRS310 ether8 (2.5G)
+    │                   ├── etherX → Flint 2 #2 WAN (bridge mode, WiFi AP)
     │                   ├── sfp+1 → 10G AOC → Omada (House 2)
-    │                   │       └── SG605S → Flint 2 #1 (House 2 WiFi)
+    │                   │       └── SG605S → Flint 2 #1 (bridge, WiFi AP)
     │                   ├── sfp+2 → eastGate (10G)
     │                   └── etherX → northGate (2.5G)
     │
-    └── eth2 → Flint 2 #2 LAN1 (DORMANT — emergency bypass cable)
+    └── eth2 → Flint 2 #2 LAN1 (DORMANT emergency cable)
 ```
 
-**Data path**: All traffic flows through sporeGate (NAT/DNS/firewall/DHCP).
-Flint 2 #2 WAN port is the active uplink to CRS310. LAN1 port is cabled to
-ATT but dormant (Flint 2 bridge mode only uses WAN port).
+### Phase 2: Target (Flint = edge router, sporeGate = compute node)
+
+```
+ATT BGW320 (WiFi OFF, passthrough → Flint 2 #2 MAC)
+    └── eth1 → Flint 2 #2 WAN (public IP, router mode)
+                  ├── WiFi: ApertureScience (House 1)
+                  └── LAN → CRS310 (2.5G backbone uplink)
+                              ├── sporeGate (gate: CI, NUCLEUS, WG hub)
+                              ├── sfp+1 → 10G AOC → Omada (House 2)
+                              │       └── SG605S → Flint 2 #1 (bridge, WiFi)
+                              ├── sfp+2 → eastGate (10G)
+                              └── etherX → northGate (2.5G)
+```
+
+**Phase 2 benefit**: sporeGate can die and the network stays up. WiFi, DHCP,
+DNS, NAT all run on the Flint. sporeGate is a power entry point and compute
+host — WireGuard, NUCLEUS, Sovereign CI — accessed via port forwarding from
+the Flint edge.
+
+**Port forwards needed (Phase 2)**: Flint → sporeGate:
+- UDP 51821 (WireGuard)
+- TCP 22 (SSH, rate limited)
+- TCP 2222 (Forgejo SSH, if exposed)
+- TCP 80/443 (Caddy, if web services exposed)
 
 ### Failure Modes & Recovery
 
@@ -207,16 +259,21 @@ After successful provisioning:
 
 ## Post-Provisioning State
 
+### Phase 1 (Immediate)
+
 ```
-ATT BGW320 (ethernet WAN only — WiFi OFF, DHCP only for passthrough)
-    ├── eth1 → sporeGate enp1s0 ──→ eno1 → CRS310 (SOVEREIGN PATH)
-    │                                        ├── Flint 2 #2 — House 1 WiFi
-    │                                        ├── 10G trunk → Flint 2 #1 — House 2 WiFi
-    │                                        ├── eastGate, northGate, ironGate
-    │                                        └── Printer (192.168.4.200)
-    │
-    └── eth2 → Flint 2 #2 LAN1 (DORMANT emergency bypass cable)
+ATT BGW320 (ethernet only, passthrough → sporeGate)
+    ├── eth1 → sporeGate ──→ CRS310 ──→ Flint 2 #2 (WiFi) + all gates
+    └── eth2 → Flint 2 #2 LAN1 (dormant bypass)
 ```
 
-**All radio owned. All DHCP sovereign. ATT is pure ethernet ingress.**
-**Emergency bypass cable: Flint 2 → ATT direct, activates on sporeGate failure.**
+### Phase 2 (Target)
+
+```
+ATT BGW320 (ethernet only, passthrough → Flint 2 #2)
+    └── eth1 → Flint 2 #2 (edge router + WiFi) ──→ CRS310 ──→ all gates
+                                                        └── sporeGate (compute node)
+```
+
+**All radio owned. sporeGate is a deployment, not the network.**
+**Network survives sporeGate death. Phone hotspot relights after total failure.**
