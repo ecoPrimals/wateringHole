@@ -41,6 +41,31 @@ Everything below is stable. Teams should not revisit unless a regression is foun
 
 ---
 
+## Primal → Gate Assignment (who gets what)
+
+| Primal | Gate | Connect | Debt/Convergence Focus |
+|--------|------|---------|------------------------|
+| **BearDog** | flockGate | RustDesk (WAN relay) | BTSP auth.trust_issuer exchange |
+| **Songbird** | flockGate | RustDesk (WAN relay) | mesh.init validation |
+| **SkunkBat** | flockGate | RustDesk (WAN relay) | Audit methods, document gaps |
+| **ToadStool** | ironGate | SSH 192.168.4.169 | Enrollment into NUCLEUS composition |
+| **BarraCuda** | ironGate | SSH 192.168.4.169 | Clippy sweep, test coverage |
+| **CoralReef** | ironGate | SSH 192.168.4.169 | SM120 edge cases, doc |
+| **NestGate** | sporeGate | SSH 192.168.4.3 | Provenance depth |
+| **RhizoCrypt** | sporeGate | SSH 192.168.4.3 | Debt sweep |
+| **LoamSpine** | sporeGate | SSH 192.168.4.3 | Ledger height → 5+ |
+| **SweetGrass** | sporeGate | SSH 192.168.4.3 | Debt sweep |
+| **cellMembrane** | sporeGate | SSH 192.168.4.3 | Clippy pedantic, env_or completion |
+| **BiomeOS** | eastGate | (this gate) | Composition test, deploy graph |
+| **Squirrel** | eastGate | (this gate) | AI pipeline depth |
+| **PetalTongue** | eastGate | (this gate) | Visualization layer |
+| **primalSpring** | eastGate | (this gate) | KNOWN_DEBT, cross-gate scenarios |
+| **sporePrint** | flockGate | RustDesk (WAN relay) | Dead pages, stale content |
+
+**To dispatch**: open IDE on the gate, paste this full blurb, agent reads their gate's tasks.
+
+---
+
 ## Convergence Tasks (this week)
 
 Focus: close gaps, reduce debt, stabilize. No new features.
