@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 126
-date = "2026-06-23"
+id = 127
+date = "2026-06-24"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 126: gnu depot built (15/15, 0 fail), synced to golgi. cellMembrane 833 (TLS fix, relay force-with-lease graduated). coralReef shader.compile.multi SHIPPED (3631). barraCuda OOM (4619). ironGate unblocked for dual-target fetch. Remaining: toadStool enrollment, mesh.init, BTSP exchange."
+notes = "Wave 127: Convergence + debt week. GNU depot live. cellMembrane 833, primalSpring 1038. Force-with-lease graduated. Remaining: toadStool enrollment, mesh.init, BTSP exchange, debt sweeps."
 publisher = "primalSpring"
 
 [heads]
