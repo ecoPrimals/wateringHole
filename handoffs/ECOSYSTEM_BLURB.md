@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 127
+# ecoPrimals Ecosystem Blurb — Wave 128
 
-**Date**: Jun 24, 2026 08:10 EDT | **Wave**: 127 | **From**: eastGate overwatch
+**Date**: Jun 27, 2026 09:40 EDT | **Wave**: 128 | **From**: eastGate overwatch
 **Cascade**: All repos at parity. golgi auto-relays every 15min.
-**Posture**: Convergence + debt reduction. Operator bandwidth limited this week.
+**Posture**: Convergence + debt. Topology cutover complete. sporeGate ephemeral.
 
 ---
 
@@ -10,110 +10,115 @@
 
 You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals (NUCLEUS) coordinated via WireGuard overlay + Forgejo.
 
-**This week: convergence and debt. No new features. Stabilize, test, clean.**
+**Major topology shift (Wave 127): sporeGate is no longer the edge router. Flint 2 H1 is the plasma membrane. sporeGate is now a hot-pluggable compute node.**
+
+---
+
+## Physical Topology (NEW — Wave 127)
+
+```
+INTERNET → ATT BGW320 (passthrough, no NAT)
+    → Flint 2 H1 (EDGE ROUTER — plasma membrane)
+        WAN: 162.226.225.148 (public)
+        LAN: 192.168.4.1/22
+        Services: NAT, DHCP, DNS (91k blocklist), firewall, WiFi (BlackMesa 5G + ApertureScience 2.4G)
+        Port forwards → sporeGate .3 (WG, SSH, Forgejo, HTTP/S, RustDesk, TURN, NestGate)
+            │
+            ▼
+        CRS310 (L2 backbone, 10G/2.5G)
+            ├── sporeGate .3 (compute, WG hub, Sovereign CI, Nest)
+            ├── eastGate .5 (10G, overwatch, primalSpring)
+            ├── northGate (Win/5090, hobby)
+            └── Omada → House 2 → Flint H2 (bridge, ApertureScience WiFi)
+                            └── ironGate .7 (GPU compute)
+
+WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
+    ├── sporeGate .2
+    ├── eastGate .5
+    ├── flockGate .6 (WAN, via golgi relay)
+    └── ironGate .7
+```
+
+**Key invariant**: unplugging sporeGate does NOT kill the network. Flint is the membrane. sporeGate is ephemeral compute.
 
 ---
 
 ## Gate Map
 
-| Gate | WG IP | NUCLEUS | Tests | Role |
-|------|-------|---------|-------|------|
-| **golgi** | .1 | 18 svc | — | WG hub, Forgejo, depot, cascade timer |
-| **sporeGate** | .2 | 13/13 | 833 (CM) | Build authority, Nest, firewall, public IP |
-| **eastGate** | .5 | 13/13 | 1038 (PS) | Overwatch, primalSpring, Meta |
-| **flockGate** | .6 | 13/13 | 8929+ (SB) | Tower, sporePrint |
-| **ironGate** | .7 | 12/12 | 4619 (BC) | Node compute, GPU (RTX 5070) |
+| Gate | LAN IP | WG IP | NUCLEUS | Role |
+|------|--------|-------|---------|------|
+| **golgi** | VPS | .1 | 18 svc | WG hub, Forgejo, depot, cascade timer |
+| **sporeGate** | .3 | .2 | 13/13 | **Compute node** (was router), Sovereign CI, Nest |
+| **eastGate** | .5 | .5 | 13/13 | Overwatch, primalSpring (1038), Meta |
+| **flockGate** | WAN | .6 | 13/13 | Tower, sporePrint |
+| **ironGate** | H2 | .7 | 12/12 | Node compute, GPU (RTX 5070) |
+| **Flint H1** | .1 | — | — | **Edge router** (plasma membrane) |
+| **Flint H2** | .250 | — | — | Bridge WiFi AP (House 2) |
 
 ---
 
-## What's Proven (no rework needed)
+## Primal → Gate Assignment
 
-Everything below is stable. Teams should not revisit unless a regression is found.
-
-- WireGuard 5-node mesh, ATT IP passthrough, Quorum Phase 1 (auto-cascade)
-- Sovereign CI (14/14, dual-target musl+gnu), BLAKE3 depot verified
-- relay.forward (cellMembrane → songBird E2E), agentic divergence policy
-- GPU pipeline (LSTM f64, shader.compile.multi, SM120, quota-aware OOM)
-- Network hardening (167k DNS blocklist, DoT, nftables, IPC audit clean)
-- metalForge (7 probes, WiFi drift auto-remediation, device port registry)
-- GNU depot built and synced to golgi (Wave 126 — sporeGate P1 DONE)
-- Force-with-lease graduated on relay ship (divergence fix operational)
-- **Flint 2 #2 deployed at House 1** (Wave 126 — agentic provision via RPC + SSH)
-- Both sites sovereign WiFi (ApertureScience), seamless roaming, 2.5G uplink
-
----
-
-## Primal → Gate Assignment (who gets what)
-
-| Primal | Gate | Connect | Debt/Convergence Focus |
-|--------|------|---------|------------------------|
-| **BearDog** | flockGate | RustDesk (WAN relay) | BTSP auth.trust_issuer exchange |
-| **Songbird** | flockGate | RustDesk (WAN relay) | mesh.init validation |
-| **SkunkBat** | flockGate | RustDesk (WAN relay) | Audit methods, document gaps |
-| **ToadStool** | ironGate | SSH 192.168.4.169 | Enrollment into NUCLEUS composition |
-| **BarraCuda** | ironGate | SSH 192.168.4.169 | Clippy sweep, test coverage |
-| **CoralReef** | ironGate | SSH 192.168.4.169 | SM120 edge cases, doc |
-| **NestGate** | sporeGate | SSH 192.168.4.3 | Provenance depth |
-| **RhizoCrypt** | sporeGate | SSH 192.168.4.3 | Debt sweep |
-| **LoamSpine** | sporeGate | SSH 192.168.4.3 | Ledger height → 5+ |
-| **SweetGrass** | sporeGate | SSH 192.168.4.3 | Debt sweep |
-| **cellMembrane** | sporeGate | SSH 192.168.4.3 | Topology cutover (Wave 127), deep debt |
-| **BiomeOS** | eastGate | (this gate) | Composition test, deploy graph |
-| **Squirrel** | eastGate | (this gate) | AI pipeline depth |
-| **PetalTongue** | eastGate | (this gate) | Visualization layer |
-| **primalSpring** | eastGate | (this gate) | KNOWN_DEBT, cross-gate scenarios |
-| **sporePrint** | flockGate | RustDesk (WAN relay) | Dead pages, stale content |
-
-**To dispatch**: open IDE on the gate, paste this full blurb, agent reads their gate's tasks.
+| Primal | Gate | Connect |
+|--------|------|---------|
+| **BearDog** | flockGate | RustDesk (WAN relay) |
+| **Songbird** | flockGate | RustDesk (WAN relay) |
+| **SkunkBat** | flockGate | RustDesk (WAN relay) |
+| **ToadStool** | ironGate | SSH 192.168.4.x (via Omada/H2) |
+| **BarraCuda** | ironGate | SSH 192.168.4.x (via Omada/H2) |
+| **CoralReef** | ironGate | SSH 192.168.4.x (via Omada/H2) |
+| **NestGate** | sporeGate | SSH 192.168.4.3 |
+| **RhizoCrypt** | sporeGate | SSH 192.168.4.3 |
+| **LoamSpine** | sporeGate | SSH 192.168.4.3 |
+| **SweetGrass** | sporeGate | SSH 192.168.4.3 |
+| **cellMembrane** | sporeGate | SSH 192.168.4.3 |
+| **BiomeOS** | eastGate | (this gate) |
+| **Squirrel** | eastGate | (this gate) |
+| **PetalTongue** | eastGate | (this gate) |
+| **primalSpring** | eastGate | (this gate) |
+| **sporePrint** | flockGate | RustDesk (WAN relay) |
 
 ---
 
-## Convergence Tasks (this week)
-
-Focus: close gaps, reduce debt, stabilize. No new features.
+## Convergence + Debt Tasks
 
 ### sporeGate
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| ~~GNU depot build~~ | ~~P1~~ | ✅ DONE (15/15, synced to golgi) |
-| Nest provenance depth (ledger → 5+) | P1 | Convergence: deepen existing ledger |
-| cellMembrane debt: clippy pedantic sweep | P1 | 838 tests green, clean warnings, SSH abstracted, topology cutover |
-| Depot integrity: scheduled BLAKE3 re-verify | P2 | Cron or timer |
-| strandGate/southGate relay push | P2 | Opportunistic |
+| ~~GNU depot build~~ | — | ✅ DONE (15/15) |
+| ~~Topology cutover~~ | — | ✅ DONE (Flint is edge, sporeGate is compute) |
+| systemd-networkd hardening (eno1 → .3, gw .1) | P1 | Debt: prevent DHCP fallback |
+| Nest provenance depth (ledger → 5+) | P1 | Convergence |
+| cellMembrane SSH abstraction evolution | P1 | Manifest-first operations |
+| Flint config backup to git | P2 | Disaster recovery |
+| Blocklist persistence (rc.local on Flint) | P2 | Lost on reboot currently |
 
 ### flockGate
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| songBird mesh.init validation | P1 | WG auto-init registered, validate it works |
-| bearDog BTSP: auth.trust_issuer to eastGate | P1 | Exchange one key pair as proof |
-| skunkBat: audit existing methods, document gaps | P1 | Debt: know what's missing before wiring |
-| sporePrint debt: dead pages, stale content | P2 | Content hygiene |
+| songBird mesh.init (WG auto-init shipped) | P1 | Validate zero-config init works |
+| bearDog BTSP: auth.trust_issuer exchange | P1 | One key pair as proof |
+| skunkBat: document method gaps | P1 | Debt: know what's missing |
+| sporePrint stale content cleanup | P2 | Content debt |
 
 ### ironGate
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| toadStool enrollment (biomeOS composition) | P1 | 12/12 → 13/13, convergence target |
-| Validate gnu fetch from golgi depot | P1 | GNU depot is now live — test the fetch |
-| barraCuda debt: clippy, test coverage gaps | P2 | 4619 tests, sweep for warnings |
-| coralReef debt: SM120 edge cases, doc | P2 | 3631 tests, stabilize |
+| toadStool enrollment (12/12 → 13/13) | P1 | biomeOS composition update |
+| Validate gnu fetch from golgi depot | P1 | Depot is live, test fetch |
+| barraCuda clippy pedantic sweep | P2 | Debt |
+| coralReef SM120 edge cases | P2 | Debt |
 
 ### eastGate
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| primalSpring debt sweep (KNOWN_DEBT.md) | P1 | 1038 tests, clean remaining debt |
-| Cross-gate scenario: eastGate → sporeGate call | P1 | Validate relay.forward in primalSpring |
-| BiomeOS composition test (local multi-service) | P2 | Validate deploy graph on eastGate |
-| Overwatch: cascade, review, blurb (reduced cadence) | P2 | Operator limited this week |
-
----
-
-## Active Impulses
-
-None. Clean slate. Teams work from the task tables above.
+| primalSpring KNOWN_DEBT sweep | P1 | 1038 tests, clean remaining |
+| Cross-gate scenario (relay.forward validation) | P1 | Validate E2E |
+| BiomeOS composition test (local) | P2 | Deploy graph validation |
 
 ---
 
@@ -121,33 +126,34 @@ None. Clean slate. Teams work from the task tables above.
 
 | Repo | Tests | Trend |
 |------|-------|-------|
-| cellMembrane | 838 | ↑ from 810 (env_or rollout, TLS fix, relay graduation, topology cutover, LAN DNS, SSH abstraction) |
-| primalSpring | 1,038 | ↑ from 1017 (GPU dispatch, multigate, debt) |
-| barraCuda | 4,619 | Stable (quota-aware OOM shipped) |
-| coralReef | 3,631 | Stable (shader.compile.multi shipped) |
-| songBird | 8,929+ | Stable (WG auto-init registered) |
-| toadStool | 9,127 | Stable (S325) |
-| biomeOS | 8,351 | Stable (v4.31) |
+| cellMembrane | 838 | ↑ (SSH abstraction, topology cutover support, LAN DNS) |
+| primalSpring | 1,038 | Stable |
+| barraCuda | 4,619 | Stable |
+| coralReef | 3,631 | Stable |
+| songBird | 8,929+ | Stable |
+| toadStool | 9,127 | Stable |
+| biomeOS | 8,351 | Stable |
 
 ---
 
 ## Coordination
 
 - **Cascade**: push to Forgejo → golgi relays → GitHub. Agentic divergence handles races.
-- **This week**: convergence + debt. No new impulses unless critical.
-- **Operator**: limited bandwidth (personal commitment). Hardware tasks deferred.
-- **Teams**: work autonomously from task tables. Push results, overwatch reviews next cascade.
+- **Posture**: convergence + debt. No new features unless organic.
+- **Operator**: back from temporal lag. Hardware tasks resumable.
 
 ---
 
-## Operator-Only
+## Operator Tasks (resumable)
 
 | Action | Status |
 |--------|--------|
-| ~~Flint 2 #2 install~~ | ✅ DONE (Jun 24, agentic deploy, AAR filed) |
-| Disable ATT WiFi radios | Pending (manual: 192.168.1.254, no API) |
-| MikroTik CRS310 creds | When convenient (physical reset) |
+| ~~ATT IP Passthrough~~ | ✅ DONE (to Flint) |
+| ~~Flint H1 edge router~~ | ✅ DONE (Wave 127) |
+| ~~Flint H2 bridge WiFi~~ | ✅ DONE (Wave 121) |
+| MikroTik CRS310 credential recovery | When convenient |
+| Flint blocklist persistence (rc.local) | Quick fix when on-site |
 
 ---
 
-*Convergence week. Stabilize what we have. Deepen, don't widen.*
+*Topology is sovereign. Compute is ephemeral. Infrastructure is independent. Converge and stabilize.*

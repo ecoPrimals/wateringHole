@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 127
-date = "2026-06-24"
+id = 128
+date = "2026-06-27"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 127: Flint 2 #2 deployed at House 1 (agentic, bridge mode, 2.5G uplink). Both sites sovereign WiFi. AAR filed for bridge loop + port mapping lessons. metalForge device_registry hardened with port maps. TOPOLOGY_MAP v6. ATT WiFi disable pending."
+notes = "Wave 128: Topology cutover COMPLETE — Flint H1 is edge router, sporeGate is ephemeral compute. ATT passthrough to Flint. Pull-test passed. cellMembrane 838, primalSpring 1038. AARs fossilized. Convergence + debt posture."
 publisher = "primalSpring"
 
 [heads]
