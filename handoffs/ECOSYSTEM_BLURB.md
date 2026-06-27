@@ -57,7 +57,7 @@ Everything below is stable. Teams should not revisit unless a regression is foun
 | **RhizoCrypt** | sporeGate | SSH 192.168.4.3 | Debt sweep |
 | **LoamSpine** | sporeGate | SSH 192.168.4.3 | Ledger height → 5+ |
 | **SweetGrass** | sporeGate | SSH 192.168.4.3 | Debt sweep |
-| **cellMembrane** | sporeGate | SSH 192.168.4.3 | Clippy pedantic, env_or completion |
+| **cellMembrane** | sporeGate | SSH 192.168.4.3 | Topology cutover (Wave 127), deep debt |
 | **BiomeOS** | eastGate | (this gate) | Composition test, deploy graph |
 | **Squirrel** | eastGate | (this gate) | AI pipeline depth |
 | **PetalTongue** | eastGate | (this gate) | Visualization layer |
@@ -121,7 +121,7 @@ None. Clean slate. Teams work from the task tables above.
 
 | Repo | Tests | Trend |
 |------|-------|-------|
-| cellMembrane | 833 | ↑ from 810 (env_or rollout, TLS fix, relay graduation) |
+| cellMembrane | 835 | ↑ from 810 (env_or rollout, TLS fix, relay graduation, topology cutover, LAN DNS) |
 | primalSpring | 1,038 | ↑ from 1017 (GPU dispatch, multigate, debt) |
 | barraCuda | 4,619 | Stable (quota-aware OOM shipped) |
 | coralReef | 3,631 | Stable (shader.compile.multi shipped) |

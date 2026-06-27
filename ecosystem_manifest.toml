@@ -493,7 +493,9 @@ forgejo_repo = "ecoPrimals/fossilRecord"
 # Which repos each gate cares about. cascade-pull uses these to
 # filter — a gate only pulls repos it needs.
 
-# sporeGate — plasma membrane, site router, 13/13 NUCLEUS, BUILD AUTHORITY
+# sporeGate — peptidoglycan compute node, 13/13 NUCLEUS, BUILD AUTHORITY
+# Wave 127: no longer edge router. Flint 2 H1 handles NAT/DHCP/DNS/firewall.
+# sporeGate is now a compute peer at .3, reachable via port-forward from Flint.
 [gates.sporeGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -504,13 +506,14 @@ mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "ether8"
 wg_ip = "10.13.37.2"
-roles = ["build_hub", "depot", "cascade_hub", "firewall", "dhcp"]
+lan_ip = "192.168.4.3"
+roles = ["build_hub", "depot", "cascade_hub", "firewall"]
 build_authority = true
 link_speed_mbps = 2500
-kderm_role = "plasma_membrane"
+kderm_role = "peptidoglycan"
 site_topology = "triangle_3hub"
 nucleus_status = "13/13"
-notes = "Peptidoglycan — 13/13 NUCLEUS. Ryzen 5 6600H 27GB. Build authority (sovereign CI, dual-target musl+gnu). Nest provenance. Firewall (nftables, NAT/DHCP/DNS). Public IP via ATT passthrough (162.226.225.148). CRS310 ether8 at 2.5G."
+notes = "Peptidoglycan — 13/13 NUCLEUS. Ryzen 5 6600H 27GB. Build authority (sovereign CI, dual-target musl+gnu). Nest provenance. nftables firewall (host-level, not NAT). WAN via Flint port-forward (22, 443, 2222, 51821). LAN at .3 via CRS310 ether8 at 2.5G."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
