@@ -78,7 +78,7 @@ Focus: close gaps, reduce debt, stabilize. No new features.
 |------|----------|-------|
 | ~~GNU depot build~~ | ~~P1~~ | ✅ DONE (15/15, synced to golgi) |
 | Nest provenance depth (ledger → 5+) | P1 | Convergence: deepen existing ledger |
-| cellMembrane debt: clippy pedantic sweep | P1 | 833 tests green, clean warnings |
+| cellMembrane debt: clippy pedantic sweep | P1 | 838 tests green, clean warnings, SSH abstracted, topology cutover |
 | Depot integrity: scheduled BLAKE3 re-verify | P2 | Cron or timer |
 | strandGate/southGate relay push | P2 | Opportunistic |
 
@@ -121,7 +121,7 @@ None. Clean slate. Teams work from the task tables above.
 
 | Repo | Tests | Trend |
 |------|-------|-------|
-| cellMembrane | 835 | ↑ from 810 (env_or rollout, TLS fix, relay graduation, topology cutover, LAN DNS) |
+| cellMembrane | 838 | ↑ from 810 (env_or rollout, TLS fix, relay graduation, topology cutover, LAN DNS, SSH abstraction) |
 | primalSpring | 1,038 | ↑ from 1017 (GPU dispatch, multigate, debt) |
 | barraCuda | 4,619 | Stable (quota-aware OOM shipped) |
 | coralReef | 3,631 | Stable (shader.compile.multi shipped) |
