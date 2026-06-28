@@ -18,9 +18,9 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.9.0"
-generated = "2026-06-23"
-wave = 124
+version = "2.10.0"
+generated = "2026-06-28"
+wave = 128
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -494,8 +494,8 @@ forgejo_repo = "ecoPrimals/fossilRecord"
 # filter — a gate only pulls repos it needs.
 
 # sporeGate — peptidoglycan compute node, 13/13 NUCLEUS, BUILD AUTHORITY
-# Wave 127: no longer edge router. Flint 2 H1 handles NAT/DHCP/DNS/firewall.
-# sporeGate is now a compute peer at .3, reachable via port-forward from Flint.
+# Wave 127: sporeGate is now a hot-pluggable compute peer at LAN .3.
+# Flint H1 replaced it as edge router (plasma membrane).
 [gates.sporeGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -507,13 +507,13 @@ zone = "backbone"
 hub_port = "ether8"
 wg_ip = "10.13.37.2"
 lan_ip = "192.168.4.3"
-roles = ["build_hub", "depot", "cascade_hub", "firewall"]
+roles = ["build_hub", "depot", "cascade_hub", "nest_provenance", "compute"]
 build_authority = true
 link_speed_mbps = 2500
 kderm_role = "peptidoglycan"
 site_topology = "triangle_3hub"
 nucleus_status = "13/13"
-notes = "Peptidoglycan — 13/13 NUCLEUS. Ryzen 5 6600H 27GB. Build authority (sovereign CI, dual-target musl+gnu). Nest provenance. nftables firewall (host-level, not NAT). WAN via Flint port-forward (22, 443, 2222, 51821). LAN at .3 via CRS310 ether8 at 2.5G."
+notes = "Peptidoglycan — 13/13 NUCLEUS. Ryzen 5 6600H 27GB. Ephemeral compute node (hot-pluggable). Build authority (sovereign CI, dual-target musl+gnu). Nest provenance. LAN .3 via Flint port-forward. CRS310 ether8 at 2.5G."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -535,7 +535,7 @@ wg_ip = "10.13.37.5"
 roles = ["overwatch", "primalspring_evolution", "meta_atomic"]
 link_speed_mbps = 10000
 nucleus_status = "13/13"
-notes = "Cytoplasm — 13/13 NUCLEUS. i7 64GB. Overwatch + Meta atomic (BiomeOS, Squirrel, PetalTongue). primalSpring evolution (1017 tests, 102 scenarios). CRS310 sfp+2 at 10G."
+notes = "Cytoplasm — 13/13 NUCLEUS. i7 64GB. Overwatch + Meta atomic (BiomeOS, Squirrel, PetalTongue). primalSpring evolution (1017 tests, 98 scenarios, KNOWN_DEBT=0). CRS310 sfp+2 at 10G."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
