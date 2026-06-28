@@ -436,7 +436,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S322+ (23,000+ tests, 112 methods, zero-copy dispatch, riboCipher CLEAR+MITO, gRPC/OpenCL deleted, 100% SPDX, env SSOT, deps unified, reagent split, client mock fix, composition graduated, ipc_watch covered, NUCLEUS 13/13 eastGate) |
+| ToadStool | S327+ (23,000+ tests / 9,171+ lib, 112 methods, zero-copy dispatch, riboCipher CLEAR+MITO, gRPC/OpenCL deleted, 100% SPDX, env SSOT, hot-path clone elimination, invariant tests, router decomposition, NUCLEUS 13/13 eastGate) |
 | hotSpring | v0.6.32 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch, guideStone L6 CERTIFIED) |
 | groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
