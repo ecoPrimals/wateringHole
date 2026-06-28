@@ -2,19 +2,23 @@
 
 Cross-primal integration documentation for petalTongue — the **Universal User Interface** primal.
 
-**Updated**: June 22, 2026 (Wave 123 — ironGate enrolled, NUCLEUS composition endpoint + typed constants, ecosystem dashboard, GateEnrollment::as_str(). 6,618+ tests)
+**Updated**: June 28, 2026 (Wave 128 — topology cutover: Flint H1 plasma membrane, sporeGate ephemeral compute, physical topology API, GPU compute topology, mul_add FMA. 360 workspace tests)
 
 ---
 
 ## Integration Status
 
 petalTongue v1.6.6 (18 crates, edition 2024, `deny(unwrap/expect)`):
-- 6,618+ tests passing, 0 failures
+- 360 workspace tests passing, 0 failures
 - `#![forbid(unsafe_code)]` unconditional on all 18 crates + UniBin, zero C dependencies, zero `unsafe` blocks
 - Zero `todo!()`, `unimplemented!()`, `TODO`, `FIXME`, `HACK` markers
 - Zero `.unwrap()` in production code; one documented `.expect()` for SIGTERM registration
 - ~90% line coverage (llvm-cov) — threshold enforced via `llvm-cov.toml`
 - All production files under 800 lines (smart domain refactoring)
+- **Topology cutover (Wave 128)**: Flint H1 is plasma membrane (edge router), sporeGate is ephemeral compute. `MeshNode` gains `lan_ip` for physical LAN addresses. `/api/physical-topology` endpoint.
+- **GPU compute (Wave 124)**: `MeshNode.gpu_target`, `ecosystem_manifest.toml`, GPU compute primalSpring scenario, dashboard GPU column.
+- **FMA precision (Wave 128)**: 14 hot-path multiply-add patterns evolved to `f64/f32::mul_add()`.
+- **API hardening (Wave 128)**: 11 public functions marked `#[must_use]`.
 - UUI glossary module (`petal_tongue_core::uui_glossary`) — canonical terminology for modalities, user types, SAME DAVE
 - **Transport (Wave 100+)**: `TRANSPORT_ENDPOINT` env var accepted (sourDough canonical wire format). Supports UDS, TCP, mesh-relay. Supersedes CLI args when launcher-injected.
 - **UDS→TCP fallback**: `PRIMAL_BIND_MODE=fallback` enables automatic TCP fallback when UDS bind fails (Android/SELinux).

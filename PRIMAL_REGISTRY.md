@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 23, 2026 (Wave 123 — primalSpring v0.9.33, 98 scenarios, 1017 tests. biomeOS v4.31, 8,351 tests. flockGate 13/13, ironGate 12/12. petalTongue 6,618+ tests.)
+**Last Updated**: June 28, 2026 (Wave 128 — topology cutover: Flint H1 plasma membrane, sporeGate ephemeral. petalTongue 360 tests, GPU compute topology, physical topology API. primalSpring 1,038 tests.)
 
 ---
 
@@ -250,7 +250,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Universal User Interface — any computational universe → any modality → any user type  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A+) — v1.6.6, 18 crates, 6,618+ tests, ~90% coverage, edition 2024, `#![forbid(unsafe_code)]` + `deny(unwrap/expect)`, zero C deps, AGPL-3.0-or-later, 56 IPC methods, 13 DataBinding variants, UUI glossary module, SAME DAVE model, client-side WASM rendering (14 exports), showcase fossilized (Wave 49), gate mesh topology visualization (Wave 116), single AEAD (XChaCha20-Poly1305), feature-gated TUI/UI (Wave 120), legacy renderers removed. See [PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md](petaltongue/PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md) for integration gaps
+**Status**: Production Ready (A+) — v1.6.6, 18 crates, 360 workspace tests, ~90% coverage, edition 2024, `#![forbid(unsafe_code)]` + `deny(unwrap/expect)`, zero C deps, AGPL-3.0-or-later, 56 IPC methods, 13 DataBinding variants, UUI glossary module, SAME DAVE model, client-side WASM rendering (14 exports), showcase fossilized (Wave 49), gate mesh topology visualization (Wave 116), single AEAD (XChaCha20-Poly1305), feature-gated TUI/UI (Wave 120), legacy renderers removed, GPU compute topology (Wave 124), physical topology API (Wave 128), Flint H1 plasma membrane topology cutover (Wave 128). See [PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md](petaltongue/PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md) for integration gaps
 
 **Role**: petalTongue is the Universal User Interface — translating any computational universe into any modality for any user type. It implements a composable **Grammar of Graphics** pipeline: any primal sends a declarative grammar expression (data + variable bindings + scales + geometry + coordinates), and petalTongue compiles it to the best available representation (desktop display, terminal, audio sonification, SVG, PNG, JSON API, haptic, braille). Tufte constraints (data-ink ratio, lie factor, accessibility) are machine-checked on every render. The **SAME DAVE** cognitive model (Sensory Afferent / Motor Efferent) provides bidirectional feedback loops. Heavy computation (statistics, 3D tessellation, physics) is offloaded to barraCuda via capability-based discovery. The grammar is domain-agnostic: the same pipeline renders ecosystem topology, clinical vitals, molecular structures, game worlds, and universe simulations. Accessibility is not a feature — it is the architecture: every modality is a first-class compilation target, serving sighted humans, blind hikers, paraplegic developers, AI agents, and beyond. Live ecosystem wiring enables 60 Hz sensor streaming, interaction broadcast, and Neural API self-registration with biomeOS.
 
