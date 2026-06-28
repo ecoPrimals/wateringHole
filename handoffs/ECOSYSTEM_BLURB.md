@@ -90,7 +90,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 | ~~Topology cutover~~ | — | ✅ DONE (Flint is edge, sporeGate is compute) |
 | systemd-networkd hardening (eno1 → .3, gw .1) | P1 | Debt: prevent DHCP fallback |
 | Nest provenance depth (ledger → 5+) | P1 | Convergence |
-| ~~cellMembrane SSH abstraction evolution~~ | — | ✅ DONE (ssh_target_for, exec_on_gate, 842 tests) |
+| ~~cellMembrane SSH abstraction evolution~~ | — | ✅ DONE (ssh_target_for, exec_on_gate, KNOWN_MESH_GATES, 848 tests) |
 | Flint config backup to git | P2 | Disaster recovery |
 | Blocklist persistence (rc.local on Flint) | P2 | Lost on reboot currently |
 
@@ -126,7 +126,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 | Repo | Tests | Trend |
 |------|-------|-------|
-| cellMembrane | 842 | ↑ (manifest-first SSH, async systemctl, dep update, LAN DNS) |
+| cellMembrane | 848 | ↑ (manifest-first SSH, KNOWN_MESH_GATES, data.rs coverage, 28 deps) |
 | primalSpring | 1,038 | Stable |
 | barraCuda | 4,619 | Stable |
 | coralReef | 3,631 | Stable |
