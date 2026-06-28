@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 23, 2026 (Wave 124: metalForge v0.1.0 shipped (7 hardware probes, WiFi drift auto-remediation). ATT IP Passthrough live. Quorum Phase 1 cascade-sense with force-with-lease. relay.forward graduated. cellMembrane 788 tests. primalSpring 98 scenarios, 1017 tests.)
+**Last Updated**: June 28, 2026 (Wave 128: Topology cutover complete — Flint H1 edge router, sporeGate ephemeral compute. 5 gates operational (golgi 18 svc, sporeGate/eastGate/flockGate 13/13, ironGate 12/12). primalSpring v0.9.33 — 110 scenarios, 1060 lib tests, KNOWN_DEBT=0. Deep debt: PORT_REGISTRY deprecated, BtspGuardError typed, 9 orphaned scenarios wired.)
 
 ---
 
@@ -51,7 +51,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BearDog** | Cryptography | All cryptographic operations: signing, encryption, key exchange, hashing, certificates, genetic lineage | Production (A+ LEGENDARY) |
 | **Songbird** | Networking | Network orchestration: TLS 1.3, service discovery, NAT traversal, federation, BirdSong protocol, Pure Rust Tor | Production (S+) |
 | **NestGate** | Data Storage | Content-addressed storage, dataset management, capability-based service discovery | Production (A++ TOP 1%) |
-| **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 23,000+ tests (9,171+ lib), **112 JSON-RPC methods** (17 groups). Node Atomic for sovereign compute. `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. riboCipher CLEAR + MitoBeacon. Zero-copy dispatch. 100% SPDX. gRPC/OpenCL deleted (S319). Env SSOT complete. Workspace deps unified. Duration dedup. Test extraction complete, submit param split, cpu_resource resilience, edge coverage, flaky fix (S323). Cross-compile verified (aarch64, armv7 in CI). Hot-path clone elimination, invariant tests, router decomposition (S327). | Production (A++ GOLD, S327+) |
+| **ToadStool** | Hardware Infrastructure | Hardware discovery, capability probing, compute orchestration: CPU, GPU, NPU, WASM, containers, edge. 23,000+ tests (9,127+ lib), **112 JSON-RPC methods** (17 groups). Node Atomic for sovereign compute. `toadstool-sysmon` (pure Rust /proc, zero C). ecoBin v3.0 certified. riboCipher CLEAR + MitoBeacon. Zero-copy dispatch. 100% SPDX. gRPC/OpenCL deleted (S319). Env SSOT complete. Workspace deps unified. Duration dedup. Test extraction complete, submit param split, cpu_resource resilience, edge coverage, flaky fix (S323). Cross-compile verified (aarch64, armv7 in CI) | Production (A++ GOLD, S324+) |
 | **BarraCuda** | Pure Math | 806 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.5, 3,400+ tests | Production (A+) |
 | **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, auto-D0 recovery, VFIO-first boot, graceful shutdown, DRM render node fencing, IOMMU group handling). **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-069). D3hot→D0 sovereign VRAM recovery. Sovereign power management designed (5-state model). Reproducibility checklist for adding new GPUs | Production (Phase 10, Iter 52) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
@@ -74,7 +74,6 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 | Tool | Purpose |
 |------|---------|
 | **sourDough** | Starter culture - scaffolding, genomeBin tooling, ecosystem bootstrapping |
-| **metalForge** | Hardware topology testing suite - drift detection, infrastructure probes, auto-remediation |
 
 ---
 
@@ -391,10 +390,10 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `gen5/TRANSPORT_EVOLUTION_NANOWIRE_TO_QUORUM.md` — Nanowire (SSH) → quorum sensing roadmap
 
 ### Evolution Tracking
+- `EVOLUTION_STATUS_WAVE66.md` — Current wave checkpoint
+- `SHADOW_DATA_COLLECTION_WAVE66.md` — VPS shadow metrics (S1, tower, services)
 - `GLACIAL_SHIFT_READINESS.md` — Stadial entry criteria tracking
-- `handoffs/ECOSYSTEM_BLURB.md` — Living ecosystem status (updated each wave)
-- `impulses/active/` — Active inter-gate impulses (current wave)
-- Earlier wave checkpoints and shadow metrics fossilized to `fossilRecord/`
+- `GLACIAL_SHIFT_WAVE_PLAN.md` — Post-primordial → sovereignty roadmap
 
 ### Per-Spring & Product Guidance
 - `sporePrint/CONTENT_GUIDE.md` — sporePrint publishing standards
@@ -414,9 +413,8 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `petaltongue/` — petalTongue integration documentation
 
 ### Handoffs
-- `handoffs/archive/` — 385 archived handoffs organized by wave (wave58–wave111)
-- `handoffs/archived/` — 67 archived handoffs from waves 114–123
-- `handoffs/hotSpring/archive/` — 55 archived hotSpring handoffs
+- `handoffs/archive/` — 445 archived handoffs organized by wave (wave58–wave68)
+- `handoffs/hotSpring/archive/` — 53 archived hotSpring handoffs
 - Earlier epochs consolidated to fossilRecord (3,231 documents)
 
 ### Fossilized Standards (in fossilRecord)
