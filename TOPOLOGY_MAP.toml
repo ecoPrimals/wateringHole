@@ -7,36 +7,32 @@
 # The Neural API uses segment affinity to bias capability.call routing
 # toward local providers (same-gate > same-segment > cross-segment > WAN).
 #
-# Last updated: 2026-06-24 (Wave 126)
+# Last updated: 2026-06-02 (Wave 68)
 
 [meta]
-version = "7.0.0"
-wave = 127
-measured_by = "manual + metalForge probes + agentic deployment"
-last_updated = "2026-06-27"
+version = "4.0.0"
+wave = 115
+measured_by = "manual + discovery.peers (planned)"
+last_updated = "2026-06-17"
 wan_model = "single_exit_star"
 site_topology = "star_with_10g_backbone"
 neighborhood = "Old Everett, Lansing MI"
 
 # ═══════════════════════════════════════════════════════════════
-# Two-Layer Architecture (Wave 127)
+# Cytoplasm Zones — L2 switching domains within the plasma membrane
 # ═══════════════════════════════════════════════════════════════
 #
-# Infrastructure Layer (always-on, network survives compute loss):
-#   ATT BGW320 (WAN boundary, passthrough only)
-#       → Flint 2 H1 (plasma membrane: edge router, NAT/DHCP/DNS/firewall)
-#           → CRS310 (hub 1: L2 backbone, 2.5G/10G)
-#               → Omada SX3008F (hub 2: L2 extension via 10G AOC to House 2)
+# The cytoplasm is not a monolith. It has distinct switching zones
+# connected by backbone links. Each zone is defined by its hub device.
+# Gates know which zone they're in and what bandwidth/latency to expect.
+#
+# Hierarchy:
+#   ATT BGW320 (WAN boundary, not ours)
+#       → sporeGate (plasma membrane: NAT/DHCP/DNS/nftables)
+#           → CRS310 (hub 1: L2 backbone)
+#               → Omada SX3008F (hub 2: L2 extension via 10G AOC)
 #                   → TL-SG605S-M2 (2.5G expansion off Omada)
-#                       → Flint 2 H2 (WiFi AP, bridge mode)
-#
-# Compute Layer (ephemeral, hot-pluggable):
-#   sporeGate (.3) — WireGuard hub, Caddy, Forgejo, services
-#   eastGate — 10G compute
-#   northGate — gaming/spare compute
-#   fieldGate — House 2 remote compute
-#
-# Key invariant: unplugging ANY compute node leaves internet intact.
+
 [cytoplasm.zones.backbone]
 hub_device = "MikroTik CRS310-1G-5S-4S+IN"
 hub_role = "backbone"
@@ -47,11 +43,9 @@ ports = [
     "sfp+1 → Omada SX3008F (10G trunk, 80m AOC)",
     "sfp+2 → eastGate (10G compute)",
     "etherX → northGate (Win/5090, 2.5G)",
-    "ether6 ← Flint 2 H1 lan1 (2.5G, edge router LAN trunk)",
-    "ether8 ← sporeGate eno1 (2.5G, compute node)",
+    "ether8 ← sporeGate eno1 (2.5G uplink from plasma membrane)",
 ]
 gates = ["sporeGate", "eastGate", "northGate"]
-upstream = "Flint 2 H1 (edge router at 192.168.4.1)"
 
 [cytoplasm.zones.house2]
 hub_device = "TP-Link Omada SX3008F"
@@ -75,50 +69,17 @@ gates = ["fieldGate"]
 pending_gates = ["marshGate (future site router)"]
 note = "northGate is on backbone (CRS310), NOT house2"
 
-[cytoplasm.zones.flint2_wifi_h2]
-hub_device = "GL.iNet Flint 2 (GL-MT6000)"
-hub_role = "wifi_ap"
-status = "active"
+[cytoplasm.zones.eero_wifi]
+hub_device = "Amazon Eero 6"
+hub_role = "wifi_bridge"
+status = "bridged"
 site = "house2"
 uplink_zone = "house2"
-uplink_type = "ethernet off TL-SG605S-M2 (via Omada)"
+uplink_type = "ethernet off TL-SG605S-M2 (via Omada port 8)"
 uplink_speed_mbps = 2500
-uplink_latency_ms = 1.0
+uplink_latency_ms = 3.0
 gates = []
-ssid = "ApertureScience"
-bands = ["2.4GHz", "5GHz"]
-firmware = "OpenWrt (GL.iNet)"
-ip = "192.168.4.250"
-note = "Replaced Eero 6 (retired Jun 21). Bridge mode, DHCP from sporeGate. metalForge wifi-drift probe monitors config parity."
-
-[cytoplasm.zones.flint2_wifi_h1]
-hub_device = "GL.iNet Flint 2 (GL-MT6000)"
-hub_role = "edge_router"
-status = "active"
-site = "house1"
-uplink_zone = "att_wan"
-uplink_type = "eth1 → ATT BGW320 (IP Passthrough, public IP)"
-uplink_speed_mbps = 2500
-wan_ip = "162.226.225.148"
-lan_ip = "192.168.4.1"
-lan_subnet = "192.168.4.0/22"
-gates = []
-ssid_2g = "Aperture Science"
-ssid_5g = "BlackMesa"
-bands = ["2.4GHz ch1 (IoT)", "5GHz ch44 (user)"]
-firmware = "OpenWrt (GL.iNet 4.8.4)"
-services = ["nat", "dhcp", "dns", "firewall", "sovereign-dns-blocklist", "wifi"]
-port_forwards = [
-    "51821/udp → 192.168.4.3 (WireGuard)",
-    "22/tcp → 192.168.4.3 (SSH)",
-    "2222/tcp → 192.168.4.3 (Forgejo SSH)",
-    "80/tcp → 192.168.4.3 (HTTP)",
-    "443/tcp → 192.168.4.3 (HTTPS)",
-    "21115-21117/tcp+udp → 192.168.4.3 (RustDesk)",
-    "3478/tcp+udp → 192.168.4.3 (TURN)",
-    "9500/tcp → 192.168.4.3 (NestGate)",
-]
-note = "Promoted to edge router Jun 27 (Wave 127). ATT IP Passthrough to WAN MAC. Sovereign DNS blocklist (91k rules, security-only: ads+malware+fakenews+gambling). Network survives sporeGate unplug."
+note = "Bridge mode ACTIVE (Jun 17 18:30). WiFi clients get 192.168.4.x from sporeGate DHCP. No more 10.0.7.x NAT."
 
 [sites.house1]
 address = "4422 Southgate Ave, Lansing MI 48910"
@@ -139,16 +100,13 @@ link_to_house1 = "80m AOC (10G SFP+), ~20m physical distance (adjacent lots)"
 subnet = "192.168.4.0/22"
 gateway = "192.168.4.1"
 transport = "cat6_2.5g"
-description = "Flint 2 H1 sovereign LAN — all compute behind NAT + firewall"
-router = "Flint 2 H1 (GL-MT6000)"
+description = "sporeGate sovereign LAN — all compute behind NAT + firewall"
+router = "sporeGate"
 switch = "CRS310"
 gates = ["sporeGate", "eastGate", "ironGate", "biomeGate", "strandGate"]
 site = "house1"
 wan_exit = "att_fiber_h1"
-wan_ip = "162.226.225.148"
-wan_mode = "ip_passthrough"
-wg_port = 51821
-note = "ATT BGW320 IP Passthrough to Flint H1 WAN MAC (Jun 27, Wave 127). Flint is true WAN edge. sporeGate is compute node at .3, all inbound port-forwarded from Flint. WG port 51821 (BGW320 UDP 51820 bug). Single WAN exit for ALL sites. House 2 traffic backhauled via 10G trunk."
+note = "Single WAN exit for ALL sites. House 2 traffic backhauled via 10G trunk."
 
 [segments.house2_compute]
 subnet = "192.168.5.0/24"
@@ -166,21 +124,18 @@ note = "Currently part of flat 192.168.4.0/22. Carve to /24 when marshGate deplo
 [segments.backbone_legacy]
 subnet = "192.168.1.0/24"
 transport = "att_dhcp"
-description = "ATT native subnet — fully deprecated, WiFi disabled"
+description = "ATT native subnet — WiFi/Eero devices pending migration to 4.0/22"
 gateway = "192.168.1.254"
-note = "ATT WiFi disabled. BGW320 in passthrough mode only. No clients on this subnet. Flint H1 WAN port gets DHCP from ATT but receives public IP via passthrough."
-gates = []
-status = "deprecated"
+note = "Bridged onto CRS310 via Eero. sporeGate proxy-ARPs for cross-subnet routing."
+gates = ["northGate", "blueGate"]
 
-[segments.flint2_wifi]
-subnet = "192.168.4.0/22"
-transport = "flint2_wifi"
-description = "Flint 2 WiFi — H1 is router (BlackMesa/Aperture Science), H2 is bridge (ApertureScience)"
-note = "House 1: Flint H1 is the router, WiFi clients get DHCP directly from it. 5GHz=BlackMesa (users), 2.4GHz=Aperture Science (IoT). House 2: Flint H2 in bridge mode, same /22 subnet. All clients get 192.168.4.x."
-aps = [
-    "Flint 2 H2 House 2 (192.168.4.250) — bridge mode, via SG605S → Omada → CRS310 → Flint H1",
-    "Flint 2 H1 House 1 (192.168.4.1) — router mode, direct radio + LAN",
-]
+[segments.eero_mesh]
+subnet = "192.168.1.0/24"
+transport = "eero_wifi_mesh"
+description = "Eero mesh WiFi — physically on CRS310 bridge, ATT DHCP range"
+bridge_to = "periplasm"
+bridge_latency_ms = 3.0
+note = "To be replaced by Omada APs on 192.168.4.0/22"
 
 [segments.vps_periplasm]
 transport = "digitalocean_vpc"
@@ -206,11 +161,11 @@ note = "Ancillary nodes. northGate = gaming (spare compute only). blueGate = Win
 [segments.cellular_failover]
 transport = "5g_cellular"
 description = "Mint Mobile hotspot — WAN failover when fiber is down"
-router = "Flint H1 (secondary WAN) or sporeGate (wlp3s0/usb0)"
+router = "sporeGate (wlp3s0 or usb0)"
 priority = 2
 latency_ms = 30.0
 bandwidth_mbps = "50-200 (variable, carrier-dependent)"
-note = "Manual failover. sporeGate WiFi disabled by default (rfkill). Can be re-enabled for emergency hotspot."
+note = "Activates automatically via route metric when ATT fiber unreachable."
 
 [segments.neighborhood_mesh]
 transport = "p2p_radio_or_cat6a"
@@ -248,20 +203,20 @@ estimate_ms = 0.5
 confidence = "high"
 notes = "Same switch, Cat6"
 
-[latency.backbone_to_flint2_wifi]
-estimate_ms = 1.0
-confidence = "high"
-notes = "Flint 2 bridge, wired backhaul via SG605S → Omada → CRS310"
+[latency.backbone_to_eero_mesh]
+estimate_ms = 3.0
+confidence = "medium"
+notes = "Cat6e between properties, Eero mesh bridge"
 
 [latency.backbone_to_vps]
 estimate_ms = 30.0
 confidence = "high"
 notes = "WireGuard wg0 tunnel, measured 2026-06-17: 29-34ms RTT to golgiBody (DO NYC)"
 
-[latency.flint2_wifi_to_vps]
-estimate_ms = 32.0
+[latency.eero_mesh_to_vps]
+estimate_ms = 28.0
 confidence = "medium"
-notes = "WiFi client → Flint 2 bridge → sporeGate → WG tunnel → golgi"
+notes = "BTSP relay via backbone bridge"
 
 [latency.wan_to_vps]
 estimate_ms = 80.0
@@ -313,7 +268,7 @@ notes = "WireGuard overlay, residential ISP at remote site"
 [affinity]
 same_gate = 1.0
 same_segment = 0.9
-flint2_wifi_bridged = 0.75
+cross_segment_bridged = 0.7
 cross_site_10g_trunk = 0.85
 neighborhood_wired = 0.8
 neighborhood_p2p_radio = 0.6

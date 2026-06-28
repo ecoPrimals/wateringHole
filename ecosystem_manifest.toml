@@ -18,9 +18,9 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.10.0"
-generated = "2026-06-28"
-wave = 128
+version = "2.8.0"
+generated = "2026-06-18"
+wave = 116
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -403,6 +403,7 @@ category = "infra"
 description = "Ecosystem standards, coordination, cascading pull orchestration"
 github_repo = "ecoPrimals/wateringHole"
 forgejo_repo = "ecoPrimals/wateringHole"
+divergence_policy = "agentic"
 
 [repos.plasmidBin]
 org = "ecoPrimals"
@@ -493,9 +494,7 @@ forgejo_repo = "ecoPrimals/fossilRecord"
 # Which repos each gate cares about. cascade-pull uses these to
 # filter — a gate only pulls repos it needs.
 
-# sporeGate — peptidoglycan compute node, 13/13 NUCLEUS, BUILD AUTHORITY
-# Wave 127: sporeGate is now a hot-pluggable compute peer at LAN .3.
-# Flint H1 replaced it as edge router (plasma membrane).
+# sporeGate — plasma membrane, site router, 13/13 NUCLEUS, BUILD AUTHORITY
 [gates.sporeGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -506,14 +505,12 @@ mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "ether8"
 wg_ip = "10.13.37.2"
-lan_ip = "192.168.4.3"
-roles = ["build_hub", "depot", "cascade_hub", "nest_provenance", "compute"]
+roles = ["build_hub", "depot", "cascade_hub", "firewall", "dhcp"]
 build_authority = true
 link_speed_mbps = 2500
-kderm_role = "peptidoglycan"
+kderm_role = "plasma_membrane"
 site_topology = "triangle_3hub"
-nucleus_status = "13/13"
-notes = "Peptidoglycan — 13/13 NUCLEUS. Ryzen 5 6600H 27GB. Ephemeral compute node (hot-pluggable). Build authority (sovereign CI, dual-target musl+gnu). Nest provenance. LAN .3 via Flint port-forward. CRS310 ether8 at 2.5G."
+notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke. SOVEREIGN CI: builds all 13 primals locally (12-core Ryzen 5 6600H, 27GB RAM), syncs depot to golgi. Omada SDN controller STOPPED (standalone L2 preferred)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -534,8 +531,7 @@ hub_port = "sfp+2"
 wg_ip = "10.13.37.5"
 roles = ["overwatch", "primalspring_evolution", "meta_atomic"]
 link_speed_mbps = 10000
-nucleus_status = "13/13"
-notes = "Cytoplasm — 13/13 NUCLEUS. i7 64GB. Overwatch + Meta atomic (BiomeOS, Squirrel, PetalTongue). primalSpring evolution (1017 tests, 98 scenarios, KNOWN_DEBT=0). CRS310 sfp+2 at 10G."
+notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -551,17 +547,14 @@ repos = [
 [gates.ironGate]
 target = "x86_64-unknown-linux-musl"
 gpu_target = "x86_64-unknown-linux-gnu"
-gpu_precision = ["f32", "f64"]
-gpu_features = ["SHADER_F64", "CUDA_12_8", "WGSL", "SPIR_V"]
 mobility = "fixed"
 bind_mode = "uds"
 composition = "full"
 transport = "lan"
 zone = "backbone"
 wg_ip = "10.13.37.7"
-nucleus_status = "12/12"
 roles = ["node_atomic", "compute", "gpu"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070. GPU validated Wave 123. f64 native precision, SHADER_F64 proven."
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 (CUDA 12.8). 12/12 NUCLEUS enrolled Wave 120. GPU pipeline validated Wave 123: train→save→load→infer E2E, f64 native, SHADER_F64 enabled. barraCuda runs glibc local build for GPU access; coralReef runs musl (pure Rust naga). Dual-target depot fetch pending sporeGate build."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -625,8 +618,7 @@ mesh_peer = "157.230.3.183:7700"
 segmentation = "external-only"
 wg_ip = "10.13.37.6"
 roles = ["tower_atomic", "sporeprint", "wan_validator"]
-nucleus_status = "13/13"
-notes = "Outer membrane — 13/13 NUCLEUS via user systemd. Tower atomic (BearDog, Songbird, SkunkBat). sporePrint (petalTongue IPC wired). i9-13900K/62GB. SSH via golgi ProxyJump."
+notes = "WAN Tower atomic (BearDog, Songbird, SkunkBat). 13/13 NUCLEUS via user systemd. i9-13900K/62GB. SSH via golgi ProxyJump."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -749,8 +741,7 @@ transport = "local"
 wg_ip = "10.13.37.1"
 roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "caddy_tls"]
 mesh_peer = "127.0.0.1:7700"
-nucleus_status = "18 svc"
-notes = "VPS periplasm — 18 services, WG hub, Forgejo, relay, depot, cascade timer (Quorum Phase 1). Caddy TLS."
+notes = "VPS inner membrane — 13/13 NUCLEUS, Forgejo, Caddy"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "cellMembrane", "projectNUCLEUS",
