@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 128
+# ecoPrimals Ecosystem Blurb — Wave 129
 
-**Date**: Jun 27, 2026 09:40 EDT | **Wave**: 128 | **From**: eastGate overwatch
+**Date**: Jun 28, 2026 11:40 EDT | **Wave**: 129 | **From**: eastGate overwatch
 **Cascade**: All repos at parity. golgi auto-relays every 15min.
-**Posture**: Convergence + debt. Topology cutover complete. sporeGate ephemeral.
+**Posture**: Convergence complete. Debt at zero on ironGate. Stabilizing across all gates.
 
 ---
 
@@ -80,17 +80,26 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 ---
 
-## Convergence + Debt Tasks
+## What Wave 128-129 Proved
+
+- **ironGate**: GNU depot VERIFIED (BLAKE3 match, RTX 5070 functional), clippy pedantic ZERO warnings, 12-axis debt audit CLEAN (zero actionable debt across all axes)
+- **primalSpring**: 110 scenarios, 1060 lib tests, KNOWN_DEBT=0, PORT_REGISTRY deprecated, 9 orphaned scenarios wired
+- **cellMembrane**: 848 tests, manifest-first SSH resolution, async systemctl, KNOWN_MESH_GATES constant, dispatch/data.rs test coverage
+- **NestGate**: dead dep purge, Arc clones, content_handlers split, fabricated metrics eliminated
+- **Squirrel**: mock evolution, timeout threading, dead module purge
+- **biomeOS**: mega-test split + topology sync
+- **RhizoCrypt**: deep debt sweep (2 rounds)
+
+---
+
+## Remaining Work by Team
 
 ### sporeGate
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| ~~GNU depot build~~ | — | ✅ DONE (15/15) |
-| ~~Topology cutover~~ | — | ✅ DONE (Flint is edge, sporeGate is compute) |
-| systemd-networkd hardening (eno1 → .3, gw .1) | P1 | Debt: prevent DHCP fallback |
+| systemd-networkd hardening (eno1 → .3, gw .1) | P1 | Prevent DHCP fallback |
 | Nest provenance depth (ledger → 5+) | P1 | Convergence |
-| ~~cellMembrane SSH abstraction evolution~~ | — | ✅ DONE (ssh_target_for, exec_on_gate, KNOWN_MESH_GATES, 848 tests) |
 | Flint config backup to git | P2 | Disaster recovery |
 | Blocklist persistence (rc.local on Flint) | P2 | Lost on reboot currently |
 
@@ -98,7 +107,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| songBird mesh.init (WG auto-init shipped) | P1 | Validate zero-config init works |
+| songBird mesh.init validation | P1 | WG auto-init shipped, validate it works |
 | bearDog BTSP: auth.trust_issuer exchange | P1 | One key pair as proof |
 | skunkBat: document method gaps | P1 | Debt: know what's missing |
 | sporePrint stale content cleanup | P2 | Content debt |
@@ -107,16 +116,16 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| toadStool enrollment (12/12 → 13/13) | P1 | biomeOS composition update |
-| Validate gnu fetch from golgi depot | P1 | Depot is live, test fetch |
-| barraCuda clippy pedantic sweep | P2 | Debt |
+| ~~GNU depot validation~~ | — | ✅ DONE (BLAKE3 verified, RTX 5070 functional) |
+| ~~barraCuda clippy pedantic~~ | — | ✅ DONE (zero warnings, 12-axis audit clean) |
+| toadStool enrollment (12/12 → 13/13) | P1 | Blocked on biomeOS composition update |
 | coralReef SM120 edge cases | P2 | Debt |
 
 ### eastGate
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| primalSpring KNOWN_DEBT sweep | P1 | 1038 tests, clean remaining |
+| ~~primalSpring KNOWN_DEBT sweep~~ | — | ✅ DONE (KNOWN_DEBT=0, 1060 tests) |
 | Cross-gate scenario (relay.forward validation) | P1 | Validate E2E |
 | BiomeOS composition test (local) | P2 | Deploy graph validation |
 
@@ -126,21 +135,25 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 | Repo | Tests | Trend |
 |------|-------|-------|
-| cellMembrane | 848 | ↑ (manifest-first SSH, KNOWN_MESH_GATES, data.rs coverage, 28 deps) |
-| primalSpring | 1,038 | Stable |
-| barraCuda | 4,619 | Stable |
+| cellMembrane | 848 | ↑ (SSH abstraction, KNOWN_MESH_GATES, data.rs coverage) |
+| primalSpring | 1,060 | ↑ (110 scenarios, 9 orphaned wired, KNOWN_DEBT=0) |
+| barraCuda | 4,619 | ↑ (clippy pedantic zero, 12-axis audit clean) |
 | coralReef | 3,631 | Stable |
 | songBird | 8,929+ | Stable |
 | toadStool | 9,171 | Stable |
-| biomeOS | 8,351 | Stable |
+| biomeOS | 8,351 | Stable (mega-test split done) |
+| NestGate | — | Evolved (dead deps purged, Arc clones, handlers split) |
+| Squirrel | — | Evolved (mock evolution, timeout threading) |
+| RhizoCrypt | — | Evolved (2-round deep debt sweep) |
 
 ---
 
 ## Coordination
 
 - **Cascade**: push to Forgejo → golgi relays → GitHub. Agentic divergence handles races.
-- **Posture**: convergence + debt. No new features unless organic.
-- **Operator**: back from temporal lag. Hardware tasks resumable.
+- **Posture**: stabilizing. Debt at zero on ironGate + eastGate. Convergence nearly complete.
+- **Operator**: available. Hardware tasks resumable.
+- **Strategic**: gen5/THERMAL_SOVEREIGNTY + SOVEREIGN_PALLET whitepaper concepts shipped today.
 
 ---
 
@@ -156,4 +169,4 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 ---
 
-*Topology is sovereign. Compute is ephemeral. Infrastructure is independent. Converge and stabilize.*
+*Topology is sovereign. Compute is ephemeral. Debt is converging to zero. The rooms are being prepared.*
