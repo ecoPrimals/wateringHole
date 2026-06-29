@@ -50,7 +50,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 | **golgi** | VPS | .1 | 18 svc | WG hub, Forgejo, depot, cascade timer |
 | **sporeGate** | .3 | .2 | 13/13 | **Compute node** (was router), Sovereign CI, Nest |
 | **eastGate** | .5 | .5 | 13/13 | Overwatch, primalSpring (1038), Meta |
-| **flockGate** | WAN | .6 | 13/13 | Tower, sporePrint |
+| **flockGate** | WAN | .6 | 13/13 | Tower, sporePrint — **DOWN** (accidental shutdown, pending physical power-on) |
 | **ironGate** | H2 | .7 | 12/12 | Node compute, GPU (RTX 5070) |
 | **Flint H1** | .1 | — | — | **Edge router** (plasma membrane) |
 | **Flint H2** | .250 | — | — | Bridge WiFi AP (House 2) |
