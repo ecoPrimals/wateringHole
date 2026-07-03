@@ -182,13 +182,69 @@ Internet → lab.primals.eco (DNS: 162.226.225.148)
 
 ---
 
+## Outer Membrane — Cloudflare (K-Derm Layer)
+
+Cloudflare is the **outer membrane** for all public-facing services (`primals.eco`, `lab.primals.eco`, `git.primals.eco`). DNS management is agentic via `membrane cloudflare.dns.update` — no operator login to dashboard required.
+
+**Architecture**:
+```
+Internet → Cloudflare (outer membrane, DDoS, TLS edge)
+    → Origin: Flint H1 (162.226.225.148) for lab.primals.eco
+    → Origin: golgi (157.230.3.183) for membrane.primals.eco, git.primals.eco, primals.eco
+```
+
+**cellMembrane `cloudflare.*` module** (shipped Wave 77, operational):
+- `membrane cloudflare.dns.list --zone primals.eco`
+- `membrane cloudflare.dns.update --zone primals.eco --id <id> --type A --name lab --content 162.226.225.148`
+- `membrane cloudflare.cache.purge --zone primals.eco --all`
+- `membrane cloudflare.ssl.settings --zone primals.eco`
+
+**Blocker**: `CF_API_TOKEN` needs provisioning on golgi tower.env (operator, one-time). Once deployed, all DNS changes are agentic.
+
+**Long-term**: Cloudflare is transitional outer membrane. Internal transport fully replaces it via BTSP/BirdSong relay (songBird + bearDog = sovereign TLS + sovereign routing). Phase:
+1. ✅ Cloudflare manages public DNS (now)
+2. ✅ cellMembrane has full Cloudflare API client (shipped)
+3. 🔜 CF_API_TOKEN provisioned → DNS becomes agentic
+4. 🔜 songBird mesh.init → inter-gate relay operational
+5. 🔮 bearDog BTSP + songBird Dark Forest → Cloudflare becomes optional outer cache only
+
+---
+
+## Transport Layer — Replacing SSH with Primal Mesh
+
+Gates communicate via **cellMembrane transport**, NOT SSH:
+
+```
+LOCAL:    primal → UDS socket (/run/membrane/<primal>.sock) → JSON-RPC
+MESH:     gate → WireGuard overlay (10.13.37.x) → TCP → peer primal
+RELAY:    gate → songBird relay.forward → encrypted multi-hop → peer gate
+```
+
+**Resolution order** (cellMembrane `resolve.rs`):
+1. Local UDS — if capability is on this gate
+2. Mesh TCP — via WireGuard overlay
+3. Mesh relay — via songBird (for NAT-ed or unreachable peers)
+
+**sporeGate status**: 13/13 primals running, all UDS sockets live in `/run/membrane/`. songBird responds to JSON-RPC. Mesh not yet initialized (`mesh.init` pending on flockGate team).
+
+**ironGate status**: WireGuard overlay not responding (handshake expired or interface down). LAN reachable at .169 (0.2ms). SSH key auth broken (key not in authorized_keys). Needs either:
+- RustDesk push: re-authorize sporeGate's ed25519 key, OR
+- WireGuard restart + mesh transport activation
+
+**Once mesh is live**: `capability.call` routes computation requests transparently. SSH becomes irrelevant for primal operations. Human operators still use SSH/RustDesk for system administration, but all primal-to-primal traffic flows through sovereign channels.
+
+---
+
 ## Coordination
 
 - **Cascade**: push to Forgejo → golgi relays → GitHub. Agentic divergence handles races.
-- **Posture**: ABG hosting active. sporeGate gateway live. ironGate first compute node.
-- **Operator actions needed**: (1) Cloudflare DNS: point `lab.primals.eco` A → 162.226.225.148, (2) SSH key exchange: sporeGate→ironGate + eastGate→ironGate, (3) ironGate JupyterHub start + ABG accounts
-- **Strategic**: gen5/THERMAL_SOVEREIGNTY + SOVEREIGN_PALLET whitepapers. KinderLab. ABG compute hosting.
-- **Blocked on operator**: ironGate SSH enrollment, strandGate power-on (weekend).
+- **Posture**: ABG hosting active. sporeGate Caddy live (:443/:80). Cloudflare outer membrane mapped.
+- **Operator actions (one-time, then fully agentic)**:
+  1. Provision `CF_API_TOKEN` in golgi `/etc/membrane/tower.env` → unlocks agentic DNS
+  2. Via RustDesk: re-authorize sporeGate key on ironGate (`~/.ssh/authorized_keys`) OR restart WG
+  3. ironGate: start JupyterHub, create ABG accounts
+- **Strategic**: Cloudflare = outer membrane. BirdSong/BTSP = inner transport. SSH → primal mesh migration.
+- **Blocked**: ironGate transport (WG down + SSH key broken), strandGate power-on (weekend).
 
 ---
 
@@ -199,9 +255,12 @@ Internet → lab.primals.eco (DNS: 162.226.225.148)
 | ~~ATT IP Passthrough~~ | ✅ DONE (to Flint) |
 | ~~Flint H1 edge router~~ | ✅ DONE (Wave 127) |
 | ~~Flint H2 bridge WiFi~~ | ✅ DONE (Wave 121) |
+| Provision CF_API_TOKEN on golgi tower.env | P1 — unlocks agentic DNS |
+| ironGate: re-authorize SSH key OR restart WG | P1 — unlocks compute node |
+| Cloudflare: update lab.primals.eco A → 162.226.225.148 | P1 (agentic once token deployed) |
 | MikroTik CRS310 credential recovery | When convenient |
 | Flint blocklist persistence (rc.local) | Quick fix when on-site |
 
 ---
 
-*Topology is sovereign. Compute is ephemeral. Debt is converging to zero. The rooms are being prepared.*
+*Cloudflare is the outer membrane. Primals are the inner transport. SSH is transitional. The mesh absorbs.*
