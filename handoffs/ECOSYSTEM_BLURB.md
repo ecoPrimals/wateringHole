@@ -91,26 +91,26 @@ Internet → lab.primals.eco (DNS: 162.226.225.148)
 
 ---
 
-## Primal → Gate Assignment
+## Primal → Gate Assignment (Wave 130b — flockGate DOWN, relocated)
 
-| Primal | Gate | Connect |
-|--------|------|---------|
-| **BearDog** | flockGate | RustDesk (WAN relay) |
-| **Songbird** | flockGate | RustDesk (WAN relay) |
-| **SkunkBat** | flockGate | RustDesk (WAN relay) |
-| **ToadStool** | ironGate | SSH 192.168.4.x (via Omada/H2) |
-| **BarraCuda** | ironGate | SSH 192.168.4.x (via Omada/H2) |
-| **CoralReef** | ironGate | SSH 192.168.4.x (via Omada/H2) |
-| **NestGate** | sporeGate | SSH 192.168.4.3 |
-| **RhizoCrypt** | sporeGate | SSH 192.168.4.3 |
-| **LoamSpine** | sporeGate | SSH 192.168.4.3 |
-| **SweetGrass** | sporeGate | SSH 192.168.4.3 |
-| **cellMembrane** | sporeGate | SSH 192.168.4.3 |
-| **BiomeOS** | eastGate | (this gate) |
-| **Squirrel** | eastGate | (this gate) |
-| **PetalTongue** | eastGate | (this gate) |
-| **primalSpring** | eastGate | (this gate) |
-| **sporePrint** | flockGate | RustDesk (WAN relay) |
+| Primal | Gate | Work Type | Status |
+|--------|------|-----------|--------|
+| **SongBird** | **sporeGate** (relocated from flockGate) | P1 EVOLUTION: LAN peer.connect | Critical path |
+| **BearDog** | **sporeGate** (relocated from flockGate) | P1 EVOLUTION: BTSP trust_issuer exchange | Blocks mesh auth |
+| **SkunkBat** | **sporeGate** (relocated from flockGate) | P2: document method gaps | Debt |
+| **ToadStool** | ironGate | Stable (9,171 tests) | |
+| **BarraCuda** | ironGate | Stable (4,619 tests, 12-axis clean) | |
+| **CoralReef** | ironGate | P2: SM120 edge cases | Debt |
+| **NestGate** | sporeGate | P1: provenance depth (ledger → 5+) | Convergence |
+| **RhizoCrypt** | sporeGate | Stable (2 debt rounds done) | |
+| **LoamSpine** | sporeGate | Stable | |
+| **SweetGrass** | sporeGate | Stable | |
+| **cellMembrane** | sporeGate | P1: peer.connect code fix | Critical path |
+| **BiomeOS** | eastGate | P2: composition test | |
+| **Squirrel** | eastGate | Stable (mock evolution done) | |
+| **PetalTongue** | eastGate | Stable | |
+| **primalSpring** | eastGate | Stable (1,060 tests, KNOWN_DEBT=0) | |
+| **sporePrint** | eastGate (relocated from flockGate) | P2: stale content cleanup | |
 
 ---
 
@@ -128,40 +128,47 @@ Internet → lab.primals.eco (DNS: 162.226.225.148)
 
 ## Remaining Work by Team
 
-### sporeGate
+### Critical Path — songBird LAN Peering (sporeGate, P1)
+
+**This blocks everything.** Without LAN peering, the Tower atomic is bypassed and there is no sovereign mesh.
+
+| Task | Owner | File | Notes |
+|------|-------|------|-------|
+| Implement LAN direct-connect bypass | songBird team | `songbird-orchestrator/src/app/connection_manager/` | If target on same subnet → skip punch, use TCP on federation port (7700) |
+| Fix `peer.connect` handshake completion | songBird team | `songbird-onion-relay/src/coordinator/punch.rs` | Currently "punching" forever — signaling channel not established on LAN |
+| Verify relay.serve port (3479 vs 7700) | songBird team | `songbird-orchestrator/src/bin_interface/server.rs` | Port param ignored? Both sides must agree |
+| bearDog BTSP trust_issuer exchange | bearDog team | — | One key pair as proof of lineage auth |
+| Test: `capability.call` cross-gate | cellMembrane team | `membrane-shadow/src/resolve.rs` | Once peers connect, validate E2E dispatch |
+
+### sporeGate (infra + cellMembrane)
 
 | Task | Priority | Notes |
 |------|----------|-------|
+| songBird LAN peering (see above) | P1 | CRITICAL PATH — songBird team relocated here |
 | systemd-networkd hardening (eno1 → .3, gw .1) | P1 | Prevent DHCP fallback |
-| Nest provenance depth (ledger → 5+) | P1 | Convergence |
+| NestGate provenance depth (ledger → 5+) | P1 | Convergence |
 | Flint config backup to git | P2 | Disaster recovery |
-| Blocklist persistence (rc.local on Flint) | P2 | Lost on reboot currently |
 
-### flockGate
-
-| Task | Priority | Notes |
-|------|----------|-------|
-| songBird mesh.init validation | P1 | WG auto-init shipped, validate it works |
-| bearDog BTSP: auth.trust_issuer exchange | P1 | One key pair as proof |
-| skunkBat: document method gaps | P1 | Debt: know what's missing |
-| sporePrint stale content cleanup | P2 | Content debt |
-
-### ironGate
+### ironGate (compute node)
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| ~~GNU depot validation~~ | — | ✅ DONE (BLAKE3 verified, RTX 5070 functional) |
-| ~~barraCuda clippy pedantic~~ | — | ✅ DONE (zero warnings, 12-axis audit clean) |
-| toadStool enrollment (12/12 → 13/13) | P1 | Blocked on biomeOS composition update |
+| JupyterHub running (localhost:8000) | ✅ | Ready — waiting on mesh transport to expose |
+| ABG accounts (bake3011, alistaire) | ✅ | Created with abg-compute group |
+| toadStool enrollment (12/12 → 13/13) | P2 | Blocked on biomeOS composition update |
 | coralReef SM120 edge cases | P2 | Debt |
 
-### eastGate
+### eastGate (overwatch + primalSpring)
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| ~~primalSpring KNOWN_DEBT sweep~~ | — | ✅ DONE (KNOWN_DEBT=0, 1060 tests) |
-| Cross-gate scenario (relay.forward validation) | P1 | Validate E2E |
+| Coordinate cross-gate peering tests | P1 | songBird initialized, eastGate at .244 |
+| sporePrint stale content cleanup | P2 | Relocated from flockGate |
 | BiomeOS composition test (local) | P2 | Deploy graph validation |
+
+### flockGate (DOWN — work relocated)
+
+All flockGate tasks relocated to sporeGate (Tower atomic) and eastGate (sporePrint) until physical power-on.
 
 ---
 
@@ -225,7 +232,7 @@ RELAY:    gate → songBird relay.forward → encrypted multi-hop → peer gate
 2. Mesh TCP — via WireGuard overlay
 3. Mesh relay — via songBird (for NAT-ed or unreachable peers)
 
-**sporeGate status**: 13/13 primals running, all UDS sockets live in `/run/membrane/`. songBird responds to JSON-RPC. Mesh not yet initialized (`mesh.init` pending on flockGate team).
+**sporeGate status**: 13/13 primals running, all UDS sockets live in `/run/membrane/`. songBird mesh initialized (`node_id: sporeGate`), relay on :3479, federation on :7700. 0 peers connected — peer.connect handshake fails (code fix needed).
 
 **ironGate status**: WireGuard overlay not responding (handshake expired or interface down). LAN reachable at .169 (0.2ms). SSH key auth broken (key not in authorized_keys). Needs either:
 - RustDesk push: re-authorize sporeGate's ed25519 key, OR
