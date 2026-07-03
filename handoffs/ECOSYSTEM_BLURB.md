@@ -14,6 +14,8 @@ You are an agent on a gate in the ecoPrimals ecosystem. This is the single sourc
 
 **Wave 130**: KinderLab WiFi deployed (parenting-filtered, guest-isolated at both sites). Sportsbook DNS blocking live on all networks. Boot persistence hardened. Infrastructure is a platform — any NUC plugs in and gets compute-ready.
 
+**Wave 130b**: ABG compute hosting architecture deployed. sporeGate is the `lab.primals.eco` gateway (Caddy reverse proxy). ironGate is first compute node. strandGate joining this weekend for heavy CPU alignment.
+
 ---
 
 ## Physical Topology (NEW — Wave 127)
@@ -52,13 +54,26 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 | ApertureScience | 2.4+5GHz | LAN /22 | Security + sportsbook (91k) | House 2 |
 | **KinderLab** | 2.4+5GHz | **Guest isolated** (192.168.9.0/24 H1, 192.168.10.0/24 H2) | **Full parenting** (167k rules) | Both |
 
-### Compute Hosting Ready
+### Compute Hosting — lab.primals.eco
 
-Any NUC plugs into CRS310 or Omada → gets DHCP from Flint → DNS + internet + mesh access. The platform is modular:
-- **sporeGate (.3)**: public face (Caddy, Forgejo, WG hub), port-forwarded from Flint
-- **ironGate (.169)**: GPU compute (RTX 5070), 0.2ms from sporeGate
-- **New NUCs**: just plug in, mesh absorbs them — open 2.5G ports on CRS310 + Omada
-- **KinderLab**: safe demo/classroom network for student devices (filtered, isolated from LAN)
+```
+Internet → lab.primals.eco (DNS: 162.226.225.148)
+    → Flint H1 (:443 DNAT) → sporeGate (.3, Caddy reverse proxy)
+        → ironGate (.169, 0.2ms): GPU compute, JupyterHub, RTX 5070
+        → strandGate (joining): 64-core EPYC, 256GB, STAR alignment
+        → future NUCs: plug in, mesh absorbs
+```
+
+**Architecture**: sporeGate is the gateway. Compute towers behind it are interchangeable. Caddy routes:
+- `/hub/*`, `/user/*`, `/api/*` → ironGate JupyterHub (:8000)
+- `/` → static lab dashboard (sporeGate local)
+- KinderLab provides safe student WiFi (filtered, isolated from LAN)
+
+**ABG Projects hosted:**
+| Project | Workload | Gate | Status |
+|---------|----------|------|--------|
+| Salmon RNA-seq (bake3011) | STAR alignment, DESeq2, WGCNA | ironGate → strandGate | Pipeline setup |
+| CAZyme FEL (Alistaire) | GROMACS metadynamics, GPU FES | ironGate (RTX 5070) | pseudoSpore v1.7.0 ready |
 
 ---
 
@@ -170,10 +185,10 @@ Any NUC plugs into CRS310 or Omada → gets DHCP from Flint → DNS + internet +
 ## Coordination
 
 - **Cascade**: push to Forgejo → golgi relays → GitHub. Agentic divergence handles races.
-- **Posture**: platform ready. Compute hosting modular. ABG integration next.
-- **Operator**: available. flockGate pending physical power-on (offsite).
-- **Strategic**: gen5/THERMAL_SOVEREIGNTY + SOVEREIGN_PALLET whitepapers shipped. KinderLab deployed.
-- **ABG Compute**: infrastructure supports NUC-as-gateway. Student sessions land on any gate.
+- **Posture**: ABG hosting active. sporeGate gateway live. ironGate first compute node.
+- **Operator actions needed**: (1) Cloudflare DNS: point `lab.primals.eco` A → 162.226.225.148, (2) SSH key exchange: sporeGate→ironGate + eastGate→ironGate, (3) ironGate JupyterHub start + ABG accounts
+- **Strategic**: gen5/THERMAL_SOVEREIGNTY + SOVEREIGN_PALLET whitepapers. KinderLab. ABG compute hosting.
+- **Blocked on operator**: ironGate SSH enrollment, strandGate power-on (weekend).
 
 ---
 
