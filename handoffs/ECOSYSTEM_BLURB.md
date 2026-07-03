@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 129
+# ecoPrimals Ecosystem Blurb — Wave 130
 
-**Date**: Jun 28, 2026 11:40 EDT | **Wave**: 129 | **From**: eastGate overwatch
+**Date**: Jul 3, 2026 07:30 EDT | **Wave**: 130 | **From**: eastGate overwatch
 **Cascade**: All repos at parity. golgi auto-relays every 15min.
-**Posture**: Convergence complete. Debt at zero on ironGate. Stabilizing across all gates.
+**Posture**: Infrastructure hardened. Compute hosting platform ready. ABG integration next.
 
 ---
 
@@ -11,6 +11,8 @@
 You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals (NUCLEUS) coordinated via WireGuard overlay + Forgejo.
 
 **Major topology shift (Wave 127): sporeGate is no longer the edge router. Flint 2 H1 is the plasma membrane. sporeGate is now a hot-pluggable compute node.**
+
+**Wave 130**: KinderLab WiFi deployed (parenting-filtered, guest-isolated at both sites). Sportsbook DNS blocking live on all networks. Boot persistence hardened. Infrastructure is a platform — any NUC plugs in and gets compute-ready.
 
 ---
 
@@ -41,6 +43,23 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 **Key invariant**: unplugging sporeGate does NOT kill the network. Flint is the membrane. sporeGate is ephemeral compute.
 
+### WiFi Map (Wave 130)
+
+| SSID | Band | Zone | DNS Policy | Sites |
+|------|------|------|-----------|-------|
+| BlackMesa | 5GHz | LAN /22 | Security + sportsbook (91k) | House 1 |
+| Aperture Science | 2.4GHz | LAN /22 | Security + sportsbook (91k) | House 1 (IoT) |
+| ApertureScience | 2.4+5GHz | LAN /22 | Security + sportsbook (91k) | House 2 |
+| **KinderLab** | 2.4+5GHz | **Guest isolated** (192.168.9.0/24 H1, 192.168.10.0/24 H2) | **Full parenting** (167k rules) | Both |
+
+### Compute Hosting Ready
+
+Any NUC plugs into CRS310 or Omada → gets DHCP from Flint → DNS + internet + mesh access. The platform is modular:
+- **sporeGate (.3)**: public face (Caddy, Forgejo, WG hub), port-forwarded from Flint
+- **ironGate (.169)**: GPU compute (RTX 5070), 0.2ms from sporeGate
+- **New NUCs**: just plug in, mesh absorbs them — open 2.5G ports on CRS310 + Omada
+- **KinderLab**: safe demo/classroom network for student devices (filtered, isolated from LAN)
+
 ---
 
 ## Gate Map
@@ -50,7 +69,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 | **golgi** | VPS | .1 | 18 svc | WG hub, Forgejo, depot, cascade timer |
 | **sporeGate** | .3 | .2 | 13/13 | **Compute node** (was router), Sovereign CI, Nest |
 | **eastGate** | .5 | .5 | 13/13 | Overwatch, primalSpring (1038), Meta |
-| **flockGate** | WAN | .6 | 13/13 | Tower, sporePrint — **DOWN** (accidental shutdown, pending physical power-on) |
+| **flockGate** | WAN | .6 | 13/13 | Tower, sporePrint — **DOWN** (pending physical power-on) |
 | **ironGate** | H2 | .7 | 12/12 | Node compute, GPU (RTX 5070) |
 | **Flint H1** | .1 | — | — | **Edge router** (plasma membrane) |
 | **Flint H2** | .250 | — | — | Bridge WiFi AP (House 2) |
@@ -80,7 +99,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 ---
 
-## What Wave 128-129 Proved
+## What Wave 128-130 Proved
 
 - **ironGate**: GNU depot VERIFIED (BLAKE3 match, RTX 5070 functional), clippy pedantic ZERO warnings, 12-axis debt audit CLEAN (zero actionable debt across all axes)
 - **primalSpring**: 110 scenarios, 1060 lib tests, KNOWN_DEBT=0, PORT_REGISTRY deprecated, 9 orphaned scenarios wired
@@ -151,9 +170,10 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 ## Coordination
 
 - **Cascade**: push to Forgejo → golgi relays → GitHub. Agentic divergence handles races.
-- **Posture**: stabilizing. Debt at zero on ironGate + eastGate. Convergence nearly complete.
-- **Operator**: available. Hardware tasks resumable.
-- **Strategic**: gen5/THERMAL_SOVEREIGNTY + SOVEREIGN_PALLET whitepaper concepts shipped today.
+- **Posture**: platform ready. Compute hosting modular. ABG integration next.
+- **Operator**: available. flockGate pending physical power-on (offsite).
+- **Strategic**: gen5/THERMAL_SOVEREIGNTY + SOVEREIGN_PALLET whitepapers shipped. KinderLab deployed.
+- **ABG Compute**: infrastructure supports NUC-as-gateway. Student sessions land on any gate.
 
 ---
 

@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 129
-date = "2026-06-28"
+id = 130
+date = "2026-07-03"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 129: Convergence nearly complete. ironGate 12-axis debt audit CLEAN, GNU depot BLAKE3 verified. primalSpring 1060 tests KNOWN_DEBT=0. cellMembrane 848. NestGate/Squirrel/RhizoCrypt/biomeOS all evolved. Impulses discharged. Thermal sovereignty + sovereign pallet whitepapers shipped."
+notes = "Wave 130: Infrastructure hardened — KinderLab WiFi (parenting-filtered guest isolation, both sites), sportsbook DNS blocking, Flint boot persistence. Compute hosting platform ready (any NUC plugs in, mesh absorbs). ABG integration pathway open. flockGate offline (pending physical power-on)."
 publisher = "primalSpring"
 
 [heads]
