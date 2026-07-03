@@ -91,26 +91,32 @@ Internet → lab.primals.eco (DNS: 162.226.225.148)
 
 ---
 
-## Primal → Gate Assignment (Wave 130b — flockGate DOWN, relocated)
+## Primal → Gate Assignment (Wave 130b — flockGate DOWN, dev on eastGate + ironGate)
 
-| Primal | Gate | Work Type | Status |
-|--------|------|-----------|--------|
-| **SongBird** | **sporeGate** (relocated from flockGate) | P1 EVOLUTION: LAN peer.connect | Critical path |
-| **BearDog** | **sporeGate** (relocated from flockGate) | P1 EVOLUTION: BTSP trust_issuer exchange | Blocks mesh auth |
-| **SkunkBat** | **sporeGate** (relocated from flockGate) | P2: document method gaps | Debt |
-| **ToadStool** | ironGate | Stable (9,171 tests) | |
-| **BarraCuda** | ironGate | Stable (4,619 tests, 12-axis clean) | |
-| **CoralReef** | ironGate | P2: SM120 edge cases | Debt |
-| **NestGate** | sporeGate | P1: provenance depth (ledger → 5+) | Convergence |
-| **RhizoCrypt** | sporeGate | Stable (2 debt rounds done) | |
-| **LoamSpine** | sporeGate | Stable | |
-| **SweetGrass** | sporeGate | Stable | |
-| **cellMembrane** | sporeGate | P1: peer.connect code fix | Critical path |
+sporeGate is a NUC — runs services, not dev workloads. Dev teams on eastGate (10G, overwatch) and ironGate (GPU, 64GB).
+
+| Primal | Dev Gate | Work Type | Status |
+|--------|----------|-----------|--------|
+| **SongBird** | **eastGate** | P1 EVOLUTION: LAN peer.connect | Critical path |
+| **BearDog** | **eastGate** | P1 EVOLUTION: BTSP trust_issuer exchange | Blocks mesh auth |
+| **SkunkBat** | **eastGate** | P2: document method gaps | Debt |
+| **cellMembrane** | **eastGate** | P1: peer.connect code fix | Critical path |
+| **sporePrint** | **eastGate** | P2: stale content cleanup | |
+| **ToadStool** | **ironGate** | Stable (9,171 tests) | |
+| **BarraCuda** | **ironGate** | Stable (4,619 tests, 12-axis clean) | |
+| **CoralReef** | **ironGate** | P2: SM120 edge cases | Debt |
+| **NestGate** | **ironGate** | P1: provenance depth (ledger → 5+) | Convergence |
+| **RhizoCrypt** | **ironGate** | Stable (2 debt rounds done) | |
+| **LoamSpine** | **ironGate** | Stable | |
+| **SweetGrass** | **ironGate** | Stable | |
 | **BiomeOS** | eastGate | P2: composition test | |
 | **Squirrel** | eastGate | Stable (mock evolution done) | |
 | **PetalTongue** | eastGate | Stable | |
 | **primalSpring** | eastGate | Stable (1,060 tests, KNOWN_DEBT=0) | |
-| **sporePrint** | eastGate (relocated from flockGate) | P2: stale content cleanup | |
+
+**sporeGate**: runs services only (Caddy, Forgejo, WG hub, Sovereign CI). No dev IDE sessions.
+**eastGate**: Tower atomic evolution (songBird, bearDog, skunkBat) + cellMembrane + overwatch.
+**ironGate**: Compute trio (toadStool, barraCuda, coralReef) + data primals (NestGate, RhizoCrypt, LoamSpine, SweetGrass).
 
 ---
 
@@ -128,47 +134,49 @@ Internet → lab.primals.eco (DNS: 162.226.225.148)
 
 ## Remaining Work by Team
 
-### Critical Path — songBird LAN Peering (sporeGate, P1)
+### Critical Path — songBird LAN Peering (eastGate, P1)
 
 **This blocks everything.** Without LAN peering, the Tower atomic is bypassed and there is no sovereign mesh.
 
-| Task | Owner | File | Notes |
-|------|-------|------|-------|
-| Implement LAN direct-connect bypass | songBird team | `songbird-orchestrator/src/app/connection_manager/` | If target on same subnet → skip punch, use TCP on federation port (7700) |
-| Fix `peer.connect` handshake completion | songBird team | `songbird-onion-relay/src/coordinator/punch.rs` | Currently "punching" forever — signaling channel not established on LAN |
-| Verify relay.serve port (3479 vs 7700) | songBird team | `songbird-orchestrator/src/bin_interface/server.rs` | Port param ignored? Both sides must agree |
-| bearDog BTSP trust_issuer exchange | bearDog team | — | One key pair as proof of lineage auth |
-| Test: `capability.call` cross-gate | cellMembrane team | `membrane-shadow/src/resolve.rs` | Once peers connect, validate E2E dispatch |
+| Task | Dev Gate | File | Notes |
+|------|----------|------|-------|
+| Implement LAN direct-connect bypass | eastGate | `songbird-orchestrator/src/app/connection_manager/` | If target on same subnet → skip punch, use TCP on federation port (7700) |
+| Fix `peer.connect` handshake completion | eastGate | `songbird-onion-relay/src/coordinator/punch.rs` | Currently "punching" forever — signaling channel not established on LAN |
+| Verify relay.serve port (3479 vs 7700) | eastGate | `songbird-orchestrator/src/bin_interface/server.rs` | Port param ignored? Both sides must agree |
+| bearDog BTSP trust_issuer exchange | eastGate | — | One key pair as proof of lineage auth |
+| Test: `capability.call` cross-gate | eastGate | `membrane-shadow/src/resolve.rs` | Once peers connect, validate E2E dispatch |
 
-### sporeGate (infra + cellMembrane)
+### eastGate (Tower atomic evolution + overwatch)
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| songBird LAN peering (see above) | P1 | CRITICAL PATH — songBird team relocated here |
-| systemd-networkd hardening (eno1 → .3, gw .1) | P1 | Prevent DHCP fallback |
-| NestGate provenance depth (ledger → 5+) | P1 | Convergence |
-| Flint config backup to git | P2 | Disaster recovery |
+| songBird LAN peer.connect fix | P1 | CRITICAL PATH — unblocks all mesh routing |
+| bearDog BTSP trust_issuer | P1 | Lineage auth for mesh connections |
+| cellMembrane resolve.rs E2E validation | P1 | Cross-gate capability.call |
+| sporePrint stale content cleanup | P2 | Relocated from flockGate |
+| BiomeOS composition test (local) | P2 | Deploy graph validation |
 
-### ironGate (compute node)
+### ironGate (compute + data primals)
 
 | Task | Priority | Notes |
 |------|----------|-------|
 | JupyterHub running (localhost:8000) | ✅ | Ready — waiting on mesh transport to expose |
 | ABG accounts (bake3011, alistaire) | ✅ | Created with abg-compute group |
+| NestGate provenance depth (ledger → 5+) | P1 | Convergence |
 | toadStool enrollment (12/12 → 13/13) | P2 | Blocked on biomeOS composition update |
 | coralReef SM120 edge cases | P2 | Debt |
 
-### eastGate (overwatch + primalSpring)
+### sporeGate (services only — no dev)
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| Coordinate cross-gate peering tests | P1 | songBird initialized, eastGate at .244 |
-| sporePrint stale content cleanup | P2 | Relocated from flockGate |
-| BiomeOS composition test (local) | P2 | Deploy graph validation |
+| systemd-networkd hardening (eno1 → .3, gw .1) | P1 | Prevent DHCP fallback |
+| Flint config backup to git | P2 | Disaster recovery |
+| Caddy serving lab.primals.eco static | ✅ | Waiting on mesh for interactive proxy |
 
-### flockGate (DOWN — work relocated)
+### flockGate (DOWN — all work relocated)
 
-All flockGate tasks relocated to sporeGate (Tower atomic) and eastGate (sporePrint) until physical power-on.
+Tower atomic → eastGate. sporePrint → eastGate. Data primals → ironGate. Returns when physically powered on.
 
 ---
 
