@@ -63,13 +63,34 @@ This is NOT a network/firewall/NAT issue. It's a **songBird protocol implementat
 
 ### Priority: P1 — this blocks all cross-gate compute hosting
 
-1. **Check relay listener**: Does the UDP socket on :3479 have a handler for incoming peer handshake packets? Or does it only handle relay-forwarded traffic?
+### Source Code Finding (`primals/songBird/crates/songbird-onion-relay/src/coordinator/punch.rs`)
 
-2. **Check if mutual connect is needed**: Does `peer.connect` require BOTH sides to call it simultaneously (like ICE candidates in WebRTC)? If so, we need a signaling mechanism — the federation HTTP API (8091) on each gate could serve as the signaling channel.
+`peer.connect` calls into `HolePunchCoordinator::punch_to_peer()` which:
+1. Requires `my_info` (STUN-discovered public address) — **not populated on LAN**
+2. Requires peer pre-registered in `self.peers` map — **not populated without signaling**
+3. Sends a `SignalingMessage::PunchRequest` via `signal_tx` — **no signaling channel exists between LAN peers**
+4. Waits for `punch_ack` — **never arrives because no signaling path**
 
-3. **Try federation-based peering**: Instead of UDP punch, can peers register with each other via the HTTP federation API (port 8091)? Each gate can POST its own address to the other's `/peers` endpoint (or equivalent).
+The entire `peer.connect` flow is designed for **WAN NAT traversal** (STUN → signaling → simultaneous-open punch). On LAN, there is NO NAT — the flow should short-circuit.
 
-4. **Simplest LAN fix**: On a flat subnet, skip the UDP punch entirely. Direct TCP connections on the federation port (7700) between known peers should work — no NAT traversal needed on LAN.
+### Fix Options (ordered by effort)
+
+1. **LAN direct path** (simplest): If `target_address` is on the same subnet as any local interface, skip punch entirely. Open direct TCP to federation port (7700). This is the equivalent of `TransportEndpoint::Tcp` in cellMembrane's resolve layer.
+
+2. **Federation-based peer registration**: Use the HTTP API (:8091) as the signaling channel. Each gate POSTs its `PeerInfo` (with `local_addr` set) to the other's `/federation/peers` endpoint. Once both have each other's PeerInfo, the punch coordinator can complete.
+
+3. **Mesh bootstrap via manifest**: Load `ecosystem_manifest.toml` gate entries as initial peers. If a gate is listed with a LAN IP and is reachable (TCP probe), register it as a direct peer without punching.
+
+### The Right Architecture
+
+```
+LAN peers:      direct TCP on federation port (7700) — no punch needed
+WG peers:       direct TCP over overlay (10.13.37.x:7700)
+WAN peers:      golgi-relayed signaling → STUN → punch → direct UDP
+Onion peers:    songBird Dark Forest beacons → encrypted relay chain
+```
+
+The resolver (`cellMembrane/crates/membrane-shadow/src/resolve.rs`) already implements this hierarchy — songBird just needs to match it at the transport level.
 
 ---
 
