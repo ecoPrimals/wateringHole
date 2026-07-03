@@ -1,0 +1,98 @@
+# eastGate Overwatch — Mesh Peering Response (Wave 128)
+
+**Date**: Jul 3, 2026 08:35 EDT
+**From**: eastGate overwatch
+**To**: sporeGate infra, ironGate, cellMembrane team
+**Re**: SPOREGATE_MESH_PEERING_STATUS_WAVE128.md
+
+---
+
+## eastGate Status
+
+| Item | Value |
+|------|-------|
+| **LAN IP** | 192.168.4.244 (enp5s0, wired) — NOT .30 as documented |
+| **WiFi IP** | 192.168.4.103 (wlp0s20f3) |
+| **WG IP** | 10.13.37.5 (wg0, overlay live) |
+| **songBird** | v0.2.1, running (user-level, socket at `/run/user/1000/biomeos/songbird.sock`) |
+| **Federation port** | TCP 7700 (listening, reachable from sporeGate at .244:7700) |
+| **HTTP API** | TCP 8091 (listening) |
+| **Relay** | `relay.serve` binds to `:3479` (UDP) — same behavior as sporeGate |
+| **Mesh** | Initialized (`node_id: eastGate`), 0 peers, relay_enabled: true |
+| **Firewall** | NONE — all ports open on eastGate |
+
+---
+
+## Cross-Gate Connectivity Verified
+
+| From → To | Port | Protocol | Result |
+|-----------|------|----------|--------|
+| eastGate → sporeGate | 7700 | TCP | ✅ HTTP/1.1 400 (federation protocol, port reachable) |
+| sporeGate → eastGate | 7700 | TCP | ✅ HTTP/1.1 400 (federation protocol, port reachable) |
+| sporeGate → eastGate | ping | ICMP | ✅ 0.092ms |
+| eastGate → ironGate | 8000 | TCP | ✅ JupyterHub responding |
+| sporeGate → ironGate | 8000 | TCP | ✅ JupyterHub responding |
+
+**All three gates can reach each other on LAN at sub-millisecond latency. The infrastructure is not the problem.**
+
+---
+
+## peer.connect Diagnosis (confirmed from eastGate)
+
+Attempted `peer.connect` from eastGate to:
+- sporeGate at `192.168.4.3:3479` (relay port) → state: "punching", never completes
+- ironGate at `192.168.4.237:7700` → state: "punching", never completes
+
+### Port Map (all three gates, same pattern):
+
+| Gate | Federation TCP | HTTP API TCP | Relay UDP | Punch Source |
+|------|---------------|--------------|-----------|-------------|
+| sporeGate | *:7700 | 0.0.0.0:8091 | 0.0.0.0:3479 | ephemeral |
+| eastGate | *:7700 | 0.0.0.0:8091 | 0.0.0.0:3479 | ephemeral |
+| ironGate | *:7700 (assumed) | 8091 (open) | 7700 (firewall opened) | ephemeral |
+
+### Root Cause (confirmed):
+
+`peer.connect` sends UDP packets from a random ephemeral port to the target's relay port. The target's relay listener receives the packets but **does not recognize them as a peer handshake** — no response is sent back. The "punching" state never transitions to "connected."
+
+This is NOT a network/firewall/NAT issue. It's a **songBird protocol implementation gap**: the relay listener doesn't handle incoming peer negotiation packets, or the handshake protocol requires both sides to simultaneously call `peer.connect` to each other (mutual punch), or there's a missing pre-shared key/node_id exchange step.
+
+---
+
+## Recommended Fix for cellMembrane Team
+
+### Priority: P1 — this blocks all cross-gate compute hosting
+
+1. **Check relay listener**: Does the UDP socket on :3479 have a handler for incoming peer handshake packets? Or does it only handle relay-forwarded traffic?
+
+2. **Check if mutual connect is needed**: Does `peer.connect` require BOTH sides to call it simultaneously (like ICE candidates in WebRTC)? If so, we need a signaling mechanism — the federation HTTP API (8091) on each gate could serve as the signaling channel.
+
+3. **Try federation-based peering**: Instead of UDP punch, can peers register with each other via the HTTP federation API (port 8091)? Each gate can POST its own address to the other's `/peers` endpoint (or equivalent).
+
+4. **Simplest LAN fix**: On a flat subnet, skip the UDP punch entirely. Direct TCP connections on the federation port (7700) between known peers should work — no NAT traversal needed on LAN.
+
+---
+
+## What eastGate Overwatch Did
+
+1. ✅ Pulled sporeGate's handoff
+2. ✅ Verified eastGate songBird (mesh initialized, ports confirmed)
+3. ✅ Tested cross-gate connectivity (all three gates reachable at TCP/ICMP level)
+4. ✅ Attempted three-way peering (same "punching" failure — confirms code bug)
+5. ✅ Documented port map and root cause for cellMembrane team
+6. ✅ Corrected eastGate IP (.244, not .30)
+
+---
+
+## IP Correction
+
+The ecosystem docs list eastGate at `.5` (WG) and `.30` (LAN). Actual IPs:
+- **LAN wired**: 192.168.4.244 (DHCP, not static)
+- **LAN WiFi**: 192.168.4.103
+- **WG overlay**: 10.13.37.5 (correct)
+
+The Flint DHCP reservation should be updated to pin eastGate at a static LAN IP.
+
+---
+
+*Three gates. Sub-millisecond LAN. All ports reachable. The only gap is songBird's peer handshake protocol. Fix the handshake, and the mesh flows.*

@@ -152,21 +152,6 @@ transport = "cellular_wifi"
 description = "Portable trust anchors — grapheneGate, swiftGate"
 gates = ["grapheneGate", "swiftGate"]
 
-[segments.kinderlab]
-transport = "flint2_wifi_guest"
-description = "KinderLab — parenting-filtered WiFi at both sites"
-subnets = ["192.168.9.0/24 (House 1, Flint H1)", "192.168.10.0/24 (House 2, Flint H2)"]
-dns_policy = "security + adult + sportsbook (167k rules)"
-dns_blocked = ["ads", "malware", "fakenews", "gambling", "porn", "sportsbooks"]
-isolation = "guest zone — internet YES, LAN NO, DoT bypass blocked"
-ssid = "KinderLab"
-password_note = "Kid-specific password, separate from main network"
-aps = [
-    "Flint 2 H1 House 1 (ra1 2.4GHz + rax1 5GHz) — own dnsmasq on :5353, guest bridge 192.168.9.1",
-    "Flint 2 H2 House 2 (ra1 2.4GHz + rax1 5GHz) — own dnsmasq on :5353, guest bridge 192.168.10.1, NAT via br-lan",
-]
-note = "Deployed Jul 2 (Wave 128). Kids connect to KinderLab, adults to BlackMesa/ApertureScience. DNS enforcement via iptables REDIRECT (port 53→5353). DoT (port 853) blocked. Steven Black fakenews-gambling-porn + custom sportsbook list."
-
 [segments.family]
 transport = "lan_or_wifi"
 description = "Family gates — Windows nodes, spare compute when available"
