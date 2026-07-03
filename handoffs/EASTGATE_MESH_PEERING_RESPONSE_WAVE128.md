@@ -116,4 +116,23 @@ The Flint DHCP reservation should be updated to pin eastGate at a static LAN IP.
 
 ---
 
-*Three gates. Sub-millisecond LAN. All ports reachable. The only gap is songBird's peer handshake protocol. Fix the handshake, and the mesh flows.*
+## Architectural Clarification — songBird IS the Port Solver
+
+songBird is not just a relay — it IS the routing layer. The Tower atomic (bearDog + songBird + skunkBat) eliminates all inter-gate port exposure:
+
+```
+CORRECT:   Caddy → songBird (UDS) → mesh → peer songBird (UDS) → localhost service
+WRONG:     Caddy → direct TCP to remote port → exposed service
+```
+
+**No primal or service should ever expose a TCP port to the LAN.** Everything stays on localhost. songBird routes between gates. bearDog verifies lineage at every hop. This is the sovereignty model.
+
+JupyterHub on ironGate is bound to `127.0.0.1:8000` — **correct, do not change this**. songBird on ironGate makes it available to the mesh. songBird on sporeGate provides it to Caddy. Zero firewall rules needed between gates.
+
+This makes `peer.connect` the **singular critical path** for the entire ecosystem. Without LAN peering, the Tower atomic is bypassed and we're just SSH + open ports — no sovereignty, no lineage verification, no port-free mesh.
+
+**Priority: Fix songBird LAN peering. Everything else follows.**
+
+---
+
+*Three gates. Sub-millisecond LAN. songBird is the routing layer. Fix peer.connect, and the architecture fulfills its design.*
