@@ -114,7 +114,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 - **songBird LAN bypass**: `try_lan_direct_connect`, `/proc/net/fib_trie` subnet detect, typed exhaustive dispatch (62+ methods), hot-path allocation elimination, security fail-closed, health honesty
 - **bearDog BTSP exchange**: `mesh_join.rs`, bidirectional registry, E2E test, trusted_issuer_registry refactored (826L → 6 modules), dynamic announce
 - **primalSpring**: 110 scenarios, 1060 tests, KNOWN_DEBT=0, 9 orphaned scenarios wired
-- **cellMembrane**: 886 tests, gateway types + shadow validation, KNOWN_MESH_GATES, manifest-first SSH
+- **cellMembrane**: 893 tests, gateway types + shadow validation, KNOWN_GATES, AffinityTable expanded
 
 ---
 
@@ -220,7 +220,7 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 
 | Repo | Tests | Status |
 |------|-------|--------|
-| cellMembrane | 886 | Stable |
+| cellMembrane | 893 | Stable |
 | primalSpring | 1,060 | Stable (KNOWN_DEBT=0) |
 | barraCuda | 4,619 | Stable |
 | coralReef | 3,631 | Stable |
