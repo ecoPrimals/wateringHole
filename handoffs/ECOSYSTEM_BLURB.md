@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 132
+# ecoPrimals Ecosystem Blurb — Wave 132c
 
-**Date**: Jul 4, 2026 10:50 EDT | **Wave**: 132 | **From**: eastGate overwatch
+**Date**: Jul 4, 2026 12:10 EDT | **Wave**: 132c | **From**: eastGate overwatch
 **Cascade**: All repos at parity. Per-gate heads eliminate divergence (wave.toml + heads/*.toml).
-**Posture**: All gates ONLINE. songBird LAN bypass VALIDATED LIVE (eastGate ↔ sporeGate: direct TCP, 0ms). Deploy to remaining gates next.
+**Posture**: **TOWER EVOLUTION** — 4 handoffs published for Tower HTTP gateway + sporePrint living topology. flockGate builds sovereign HTTP (replaces Caddy), eastGate wires live mesh viz, sporeGate deploys, ironGate registers compute.
 
 ---
 
@@ -10,7 +10,7 @@
 
 You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals (NUCLEUS) coordinated via WireGuard overlay + Forgejo.
 
-**Wave 132 milestone**: Async freshness evolution SHIPPED — per-gate head publishing eliminates all cascade divergence conflicts. songBird LAN direct-connect bypass VALIDATED LIVE: eastGate ↔ sporeGate connected via direct TCP on :7700 with 0ms latency (no relay, no UDP punch, no port exposure beyond federation). Deploy to ironGate + flockGate next → then ABG compute pipeline goes live.
+**Wave 132c milestone**: Tower HTTP Gateway + sporePrint Living Topology handoffs published. 4 gate teams working in parallel: flockGate builds sovereign HTTP proxy (songBird `http.proxy` + bearDog ACME :443), eastGate wires petalTongue live mesh visualization from songBird `mesh.peers`, sporeGate deploys and retires Caddy, ironGate deploys JupyterHub + registers `jupyter` capability for mesh routing.
 
 ---
 
@@ -119,26 +119,28 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 ## Forward Work — Deploy + Activate ABG Compute
 
-### Phase 1: Mesh Deploy + Validate (NEXT)
+### Phase 1: Mesh Deploy + Validate — COMPLETE
 
 | Task | Gate | Status |
 |------|------|--------|
 | ~~Build songBird v0.2.1 with LAN bypass~~ | eastGate | ✅ Built + installed in depot |
 | ~~Deploy + restart songBird on eastGate~~ | eastGate | ✅ Running (v0.2.1, mesh initialized) |
 | ~~Test LAN `peer.connect` (eastGate → sporeGate)~~ | eastGate | ✅ **CONNECTED** (direct TCP, 0ms) |
-| Deploy new songBird binary to sporeGate | sporeGate | Pending (golgi offline, manual deploy) |
-| Deploy new songBird binary to ironGate | ironGate | Pending (need WG or manual) |
-| Test LAN `peer.connect` (eastGate ↔ ironGate) | eastGate | Pending (ironGate songBird not on 7700) |
-| Test WAN peering (flockGate → golgi relay → LAN gates) | flockGate | After golgi recovers |
-| Test `capability.call` cross-gate dispatch | eastGate | After bilateral peering |
+| ~~Deploy songBird v0.2.1 to sporeGate~~ | sporeGate | ✅ Built, deployed, running |
+| ~~Deploy songBird v0.2.1 to ironGate~~ | ironGate | ✅ Cascade + build + running on :7700 |
+| ~~Test LAN `peer.connect` (eastGate ↔ ironGate)~~ | eastGate | ✅ **CONNECTED** (direct TCP, 0ms) |
+| ~~Validate `capability.call` cross-gate~~ | eastGate | ✅ eastGate→ironGate, sporeGate→ironGate |
+| ~~Wire Caddy → ironGate JupyterHub~~ | sporeGate | ✅ Caddyfile updated + reloaded |
+| flockGate WAN peering (golgi relay) | flockGate | **ASSIGNED** to flockGate team |
 
-### Phase 2: Lab Activation
+### Phase 2: Lab Activation (NEXT — gate team work)
 
-| Task | Gate | Notes |
-|------|------|-------|
-| Activate Caddy → songBird → JupyterHub route | sporeGate | After capability.call works |
-| Install bioinformatics stack (salmon, STAR, R) | ironGate | Via mesh (no SSH) |
-| Stage pilot dataset (GSE166686 salmon RNA-seq) | ironGate | Via mesh |
+| Task | Gate | Assigned To |
+|------|------|-------------|
+| Deploy JupyterHub on ironGate (localhost:8000) | ironGate | **ironGate team** |
+| Register `compute` capability with songBird | ironGate | **ironGate team** (`primal.announce` from barraCuda) |
+| Install bioinformatics stack (salmon, STAR, R) | ironGate | **ironGate team** |
+| Stage pilot dataset (GSE166686 salmon RNA-seq) | ironGate | **eastGate overwatch** (via mesh transfer) |
 | strandGate enrollment (mesh auto-absorb) | strandGate | When hardware arrives |
 
 ### Phase 3: ABG Student Onboarding
@@ -148,7 +150,22 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 | bake3011: Salmon RNA-seq pipeline validated | STAR + DESeq2 + WGCNA on ironGate → strandGate |
 | alistaire: CAZyme FEL pipeline validated | GROMACS metadynamics on ironGate (RTX 5070) |
 | KinderLab WiFi for student access | Already deployed (guest-isolated, parenting-filtered) |
-| lab.primals.eco: landing page + JupyterHub access | Static dashboard live, interactive pending mesh |
+| lab.primals.eco: landing page + JupyterHub access | Static dashboard live, interactive routes WIRED |
+
+---
+
+## Team Assignments — Wave 132c (Tower HTTP + Living Topology)
+
+| Team | Gate | Handoff | Active Work |
+|------|------|---------|-------------|
+| **flockGate: songBird IDE** | flockGate | `FLOCKGATE_WAVE132_TOWER_HTTP_GATEWAY` | `http.proxy` method, `http_gateway/` wiring, `ReverseProxyConfig` routes |
+| **flockGate: bearDog IDE** | flockGate | `FLOCKGATE_WAVE132_TOWER_HTTP_GATEWAY` | ACME front :443, `HotReloadAcceptor` wire, HTTP-01 solver spawn |
+| **flockGate: skunkBat IDE** | flockGate | `FLOCKGATE_WAVE132_TOWER_HTTP_GATEWAY` | `security.scan` advisory on inbound requests |
+| **eastGate: petalTongue IDE** | eastGate | `EASTGATE_WAVE132_SPOREPRINT_LIVING_TOPOLOGY` | Wire DataService → songBird `mesh.peers`, live viz, sporePrint page |
+| **sporeGate: cellMembrane** | sporeGate | `SPOREGATE_WAVE132_GATEWAY_WIRING` | Deploy evolved binaries, systemd units, shadow validate, retire Caddy |
+| **ironGate: compute team** | ironGate | `IRONGATE_WAVE132_COMPUTE_REGISTRATION` | JupyterHub deploy, `jupyter` capability registration, E2E validation |
+| **eastGate overwatch** | eastGate | — | Coordinate, monitor divergence, stage pilot data, cascade sync |
+| **golgi** | golgi VPS | — | Quorum timer, `unify_freshness()`, relay — no dev work |
 
 ---
 
@@ -192,8 +209,9 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 | Action | Priority | Status |
 |--------|----------|--------|
 | Provision CF_API_TOKEN on golgi tower.env | P1 | Unlocks agentic DNS |
-| ironGate: re-authorize SSH key OR restart WG | P1 | Unlocks compute node access |
+| ~~ironGate: re-authorize SSH key OR restart WG~~ | ~~P1~~ | ✅ SSH via `irongate` user, mesh peered |
 | MikroTik CRS310 credential recovery | P3 | When convenient |
+| ironGate: deploy JupyterHub (Docker or systemd) | P2 | Gate team task |
 
 ---
 
@@ -209,6 +227,18 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 | toadStool | 9,171 | Stable |
 | biomeOS | 8,351 | Stable |
 | bearDog | — | Evolved (BTSP exchange shipped) |
+
+---
+
+## Wave 132 Shipped
+
+- **3-gate LAN mesh LIVE**: eastGate ↔ sporeGate ↔ ironGate, bilateral direct TCP, 0ms latency
+- **capability.call cross-gate VALIDATED**: eastGate→ironGate, sporeGate→ironGate via mesh HTTP
+- **Caddy → ironGate route WIRED**: `lab.primals.eco` paths proxy to ironGate:8000 (pending deploy)
+- **guideStone convergence COMPLETE**: All 13 primals 0 ACTIVE / 13 STANDBY (Wave 109 items resolved)
+- **bearDog STARTUP-BD-01 RESOLVED**: `BindMode::Auto` now auto-detects Android/abstract platforms
+- **songBird deployed to 3 gates**: eastGate, sporeGate, ironGate all running v0.2.1
+- **ironGate mesh**: cascade (22/22 synced), build (release), songBird running, firewall opened (7700/tcp + 8000/tcp LAN)
 
 ---
 
