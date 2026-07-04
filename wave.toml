@@ -9,9 +9,9 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 131
+id = 132
 date = "2026-07-04"
-posture = "All gates ONLINE. songBird LAN peering shipped. Deploy + validate."
+posture = "All gates ONLINE. songBird LAN bypass + bearDog BTSP SHIPPED. Async freshness SHIPPED. Deploy → validate → ABG live."
 publisher = "eastGate-overwatch"
 
 [gates]
