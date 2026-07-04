@@ -121,43 +121,47 @@ sporeGate is a NUC — runs services, not dev workloads. flockGate is back onlin
 
 ---
 
-## What Wave 128-130 Proved
+## What Wave 128-131 Proved
 
-- **ironGate**: GNU depot VERIFIED (BLAKE3 match, RTX 5070 functional), clippy pedantic ZERO warnings, 12-axis debt audit CLEAN (zero actionable debt across all axes)
+- **ironGate**: GNU depot VERIFIED (BLAKE3 match, RTX 5070 functional), clippy pedantic ZERO warnings, 12-axis debt audit CLEAN
 - **primalSpring**: 110 scenarios, 1060 lib tests, KNOWN_DEBT=0, PORT_REGISTRY deprecated, 9 orphaned scenarios wired
-- **cellMembrane**: 848 tests, manifest-first SSH resolution, async systemctl, KNOWN_MESH_GATES constant, dispatch/data.rs test coverage
+- **cellMembrane**: 848 tests, manifest-first SSH resolution, async systemctl, KNOWN_MESH_GATES constant
 - **NestGate**: dead dep purge, Arc clones, content_handlers split, fabricated metrics eliminated
 - **Squirrel**: mock evolution, timeout threading, dead module purge
 - **biomeOS**: mega-test split + topology sync
 - **RhizoCrypt**: deep debt sweep (2 rounds)
+- **songBird (Wave 131)**: LAN direct-connect bypass shipped (`try_lan_direct_connect`, `/proc/net/fib_trie` subnet detection), typed exhaustive dispatch (62+ methods, zero string fallback), hot-path allocation elimination, security fail-closed, health honesty, dep diet, `relay.forward` handler
+- **bearDog (Wave 131)**: BTSP trust_issuer exchange shipped (`mesh_join.rs`, bidirectional registry, E2E test), trusted_issuer_registry refactored (826L → 6 modules), security fail-closed, dynamic announce
 
 ---
 
 ## Remaining Work by Team
 
-### Critical Path — songBird LAN Peering (flockGate + eastGate, P1)
+### Critical Path — Deploy + Validate LAN Peering (all gates)
 
-**This blocks everything.** Without LAN peering, the Tower atomic is bypassed and there is no sovereign mesh.
+**songBird LAN bypass is SHIPPED in code.** Next: build, deploy, test across gates.
 
-| Task | Dev Gate | File | Notes |
-|------|----------|------|-------|
-| Implement LAN direct-connect bypass | flockGate | `songbird-orchestrator/src/app/connection_manager/` | If target on same subnet → skip punch, use TCP on federation port (7700) |
-| Fix `peer.connect` handshake completion | flockGate | `songbird-onion-relay/src/coordinator/punch.rs` | Currently "punching" forever — signaling channel not established on LAN |
-| Verify relay.serve port (3479 vs 7700) | flockGate | `songbird-orchestrator/src/bin_interface/server.rs` | Port param ignored? Both sides must agree |
-| bearDog BTSP trust_issuer exchange | flockGate | — | One key pair as proof of lineage auth |
-| Test: `capability.call` cross-gate | eastGate | `membrane-shadow/src/resolve.rs` | Once peers connect, validate E2E dispatch |
-
-**flockGate is the WAN test case**: it's behind NAT on a different network. Once LAN peering works (sporeGate ↔ eastGate ↔ ironGate), flockGate validates the WAN/relay path through golgi.
+| Task | Gate | Status |
+|------|------|--------|
+| Build songBird v0.2.1-wave131b (Sovereign CI) | sporeGate | CI TRIGGERED — building |
+| Deploy new songBird binary to sporeGate | sporeGate | Pending CI |
+| Deploy new songBird binary to eastGate | eastGate | Pending depot sync |
+| Deploy new songBird binary to ironGate | ironGate | Pending depot sync |
+| Test LAN `peer.connect` (sporeGate ↔ eastGate) | eastGate | After deploy |
+| Test LAN `peer.connect` (eastGate ↔ ironGate) | eastGate | After deploy |
+| Test WAN peering (flockGate → golgi relay → LAN gates) | flockGate | After LAN works |
+| Test `capability.call` cross-gate dispatch | eastGate | After peering |
+| Activate Caddy → songBird → JupyterHub route | sporeGate | After capability.call works |
 
 ### flockGate (Tower atomic home — ONLINE)
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| songBird LAN peer.connect evolution | P1 | CRITICAL PATH — source lives here |
-| bearDog BTSP trust_issuer exchange | P1 | One key pair proof of lineage auth |
+| ~~songBird LAN peer.connect evolution~~ | ✅ | SHIPPED (Wave 131b) |
+| ~~bearDog BTSP trust_issuer exchange~~ | ✅ | SHIPPED (Wave 131) |
 | skunkBat: document method gaps | P2 | Know what's missing |
 | sporePrint stale content cleanup | P2 | Content debt |
-| Validate WAN mesh peering via golgi | P1 | After LAN peering works — flockGate is the WAN test |
+| Validate WAN mesh peering via golgi | P1 | After LAN peering deployed + validated |
 
 ### eastGate (cellMembrane + overwatch)
 
