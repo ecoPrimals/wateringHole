@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 132c
+# ecoPrimals Ecosystem Blurb — Wave 132d
 
-**Date**: Jul 4, 2026 12:10 EDT | **Wave**: 132c | **From**: eastGate overwatch
-**Cascade**: All repos at parity. Per-gate heads eliminate divergence (wave.toml + heads/*.toml).
-**Posture**: **TOWER EVOLUTION** — 4 handoffs published for Tower HTTP gateway + sporePrint living topology. flockGate builds sovereign HTTP (replaces Caddy), eastGate wires live mesh viz, sporeGate deploys, ironGate registers compute.
+**Date**: Jul 4, 2026 12:55 EDT | **Wave**: 132d | **From**: eastGate overwatch
+**Cascade**: All repos cascaded, heads updated. Tower atomic primals actioned handoffs.
+**Posture**: **TOWER ACTIONED** — songBird `http.proxy` WIRED, bearDog ACME gateway :443 WIRED, skunkBat `security.advisory` WIRED. grapheneGate LIVE (ADB tether, 14/14 binaries, Tower running on Pixel 8a).
 
 ---
 
@@ -10,7 +10,7 @@
 
 You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals (NUCLEUS) coordinated via WireGuard overlay + Forgejo.
 
-**Wave 132c milestone**: Tower HTTP Gateway + sporePrint Living Topology handoffs published. 4 gate teams working in parallel: flockGate builds sovereign HTTP proxy (songBird `http.proxy` + bearDog ACME :443), eastGate wires petalTongue live mesh visualization from songBird `mesh.peers`, sporeGate deploys and retires Caddy, ironGate deploys JupyterHub + registers `jupyter` capability for mesh routing.
+**Wave 132d milestone**: Tower atomic primals ACTIONED Wave 132c handoffs. songBird: `http.proxy` + `http.put`/`http.delete` as first-class IPC methods, `CapabilityProxyRouter` with env-based route registration (`SONGBIRD_PROXY_ROUTES`). bearDog: full HTTPS gateway module (`serve_https_gateway`) — TLS termination via `HotReloadAcceptor`, upstream resolution (TCP/UDS), bidirectional proxy to songBird:7700. skunkBat: `security.advisory` composable IPC method (539 tests, 29 methods). grapheneGate (Pixel 8a, GrapheneOS): LIVE as portable trust anchor with Tower composition running via ADB, dual-role USB tether providing eastGate internet.
 
 ---
 
@@ -103,6 +103,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 | **eastGate** | .5 (.244) | .5 | Overwatch, cellMembrane, primalSpring |
 | **flockGate** | WAN | .6 | Tower atomic home (songBird, bearDog, skunkBat) |
 | **ironGate** | .237 (H2) | .7 | **GPU compute** (RTX 5070, JupyterHub, ABG) |
+| **grapheneGate** | ADB (USB) | — | **Portable trust anchor** (Pixel 8a, Tower, cellular relay) |
 | **strandGate** | (joining) | — | **CPU compute** (64-core EPYC, STAR alignment) |
 
 ---
@@ -224,9 +225,11 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 | barraCuda | 4,619 | Stable |
 | coralReef | 3,631 | Stable |
 | songBird | 8,929+ | Evolved (LAN bypass shipped) |
-| toadStool | 9,171 | Stable |
+| toadStool | 9,171+ | Stable |
 | biomeOS | 8,351 | Stable |
-| bearDog | — | Evolved (BTSP exchange shipped) |
+| bearDog | 13,866+ | Evolved (BTSP + ACME gateway) |
+| skunkBat | 539 | Evolved (security.advisory) |
+| sweetGrass | 1,658 | Stable (cargo-deny clean) |
 
 ---
 
@@ -242,4 +245,15 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 
 ---
 
-*sporeGate is the entry. LAN and WAN HPC behind it. songBird routes everything. The mesh absorbs.*
+## Wave 132c-d Actioned (Tower HTTP Gateway + Topology)
+
+- **songBird `http.proxy`**: First-class IPC method WIRED — `CapabilityProxyRouter` with `SONGBIRD_PROXY_ROUTES` env, `http.put`/`http.delete` extended
+- **bearDog ACME gateway**: `serve_https_gateway()` — TLS via `HotReloadAcceptor` on :443, upstream to songBird (TCP/UDS), bidirectional proxy, 502 on upstream failure
+- **skunkBat `security.advisory`**: Composable IPC dispatch, threat telemetry, 539 tests
+- **grapheneGate LIVE**: Pixel 8a (GrapheneOS), Tower composition running via ADB port-forward, 14/14 aarch64-musl binaries, dual-role USB tether (internet for eastGate + mesh gate)
+- **Topology v4.1.0**: grapheneGate enrolled, ADB transport documented, portable_adb affinity=0.95
+- **Remaining**: sporeGate deploy + shadow validate, ironGate JupyterHub + capability registration, eastGate sporePrint live viz
+
+---
+
+*The Tower atomic is wired. The membrane absorbs. Caddy retirement is next.*

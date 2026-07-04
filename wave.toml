@@ -11,9 +11,9 @@
 [wave]
 id = 132
 date = "2026-07-04"
-posture = "TOWER EVOLUTION — 4 handoffs published. flockGate: songBird http.proxy + bearDog ACME gateway. eastGate: sporePrint live mesh viz. sporeGate: deploy + retire Caddy. ironGate: JupyterHub + capability registration."
+posture = "TOWER ACTIONED — songBird http.proxy WIRED, bearDog ACME :443 WIRED, skunkBat security.advisory WIRED. grapheneGate LIVE (ADB/Tower). Remaining: sporeGate deploy, ironGate JupyterHub, eastGate sporePrint."
 publisher = "eastGate-overwatch"
 
 [gates]
-online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi"]
+online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate"]
 offline = []
