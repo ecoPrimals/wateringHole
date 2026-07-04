@@ -220,7 +220,7 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 
 | Repo | Tests | Status |
 |------|-------|--------|
-| cellMembrane | 913 | Evolved (gateway deploy tooling, retire-caddy) |
+| cellMembrane | 917 | Evolved (gateway deploy + transport types) |
 | primalSpring | 1,060 | Stable (KNOWN_DEBT=0) |
 | barraCuda | 4,619 | Stable |
 | coralReef | 3,631 | Stable |
