@@ -20,7 +20,9 @@
 [meta]
 version = "2.8.0"
 generated = "2026-06-18"
-wave = 116
+# DEPRECATED: wave ID now lives in wave.toml (overwatch sole writer).
+# This field is retained at last-known value for backward compat with older binaries.
+wave = 131
 total_repos = 39
 
 # ═══════════════════════════════════════════════════════════════════
@@ -403,7 +405,9 @@ category = "infra"
 description = "Ecosystem standards, coordination, cascading pull orchestration"
 github_repo = "ecoPrimals/wateringHole"
 forgejo_repo = "ecoPrimals/wateringHole"
-divergence_policy = "agentic"
+divergence_policy = "per-gate-heads"
+handoff_policy = "merge-ff"
+wave_authority = "eastGate"
 
 [repos.plasmidBin]
 org = "ecoPrimals"

@@ -261,9 +261,37 @@ RELAY:    gate → songBird relay.forward → encrypted multi-hop → peer gate
 
 ---
 
+## Cascade Interaction Model (Wave 131 — async evolution)
+
+```
+WRITE MODEL (zero conflicts):
+  wave.toml         ← overwatch sole writer (wave ID, posture, gates online/offline)
+  heads/<gate>.toml ← each gate writes ONLY its own file after cascade
+  freshness.toml    ← DEPRECATED (golgi generates from wave.toml + heads/*.toml for compat)
+
+FLOW:
+  Gate pushes code → Forgejo → golgi quorum timer (15min)
+    → golgi pulls all repos
+    → golgi writes heads/golgi.toml (its own HEADs)
+    → golgi runs unify_freshness() → regenerates freshness.toml
+    → golgi pushes wateringHole to GitHub (mirror)
+
+  Each gate after cascade:
+    → writes heads/<gate>.toml with its local repo HEADs
+    → pushes wateringHole (FF-only pull first, no conflict)
+
+PROPERTIES:
+  • wave.toml: single writer → zero conflicts
+  • heads/<gate>.toml: each gate owns its file → zero conflicts
+  • No rebase, no --ours resolution, no race conditions
+  • Gates can evolve async without coordination
+```
+
+---
+
 ## Coordination
 
-- **Cascade**: push to Forgejo → golgi relays → GitHub. Agentic divergence handles races.
+- **Cascade**: push to Forgejo → golgi relays → GitHub. Per-gate heads eliminate divergence.
 - **Posture**: All gates ONLINE. songBird evolution on flockGate. Mesh peering is the critical path.
 - **Operator actions (one-time, then fully agentic)**:
   1. Provision `CF_API_TOKEN` in golgi `/etc/membrane/tower.env` → unlocks agentic DNS
