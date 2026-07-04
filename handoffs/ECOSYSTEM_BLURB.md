@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 132c
+# ecoPrimals Ecosystem Blurb — Wave 132d
 
-**Date**: Jul 4, 2026 12:10 EDT | **Wave**: 132c | **From**: eastGate overwatch
-**Cascade**: All repos at parity. Per-gate heads eliminate divergence (wave.toml + heads/*.toml).
-**Posture**: **TOWER EVOLUTION** — 4 handoffs published for Tower HTTP gateway + sporePrint living topology. flockGate builds sovereign HTTP (replaces Caddy), eastGate wires live mesh viz, sporeGate deploys, ironGate registers compute.
+**Date**: Jul 4, 2026 14:40 EDT | **Wave**: 132d | **From**: eastGate overwatch
+**Cascade**: All repos cascaded. Tower primals actioned. sporePrint deep debt complete.
+**Posture**: **TOWER ACTIONED** — songBird `http.proxy` WIRED, bearDog ACME gateway :443 WIRED, skunkBat `security.advisory` WIRED. grapheneGate LIVE. sporePrint v3.1.0 IPC consolidation complete (220 tests).
 
 ---
 
@@ -10,7 +10,7 @@
 
 You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals (NUCLEUS) coordinated via WireGuard overlay + Forgejo.
 
-**Wave 132c milestone**: Tower HTTP Gateway + sporePrint Living Topology handoffs published. 4 gate teams working in parallel: flockGate builds sovereign HTTP proxy (songBird `http.proxy` + bearDog ACME :443), eastGate wires petalTongue live mesh visualization from songBird `mesh.peers`, sporeGate deploys and retires Caddy, ironGate deploys JupyterHub + registers `jupyter` capability for mesh routing.
+**Wave 132d milestone**: Tower atomic primals ACTIONED handoffs — songBird `http.proxy` + `CapabilityProxyRouter` (env route registration), bearDog ACME gateway (`serve_https_gateway`, TLS → songBird:7700), skunkBat `security.advisory` (539 tests). sporePrint `spore-validate` v3.1.0: IPC consolidation (`send_rpc` shared module), zero-copy, supply chain security (deny.toml), 220 tests. petalTongue: grapheneGate enrolled, ABG compute routing, Cloudflare outer membrane in physical topology. cellMembrane: 913 tests, gateway deployment tooling (retire-caddy, SONGBIRD_PROXY_ROUTES). grapheneGate LIVE (Pixel 8a, Tower running, ADB tether, dual-role).
 
 ---
 
@@ -103,6 +103,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 | **eastGate** | .5 (.244) | .5 | Overwatch, cellMembrane, primalSpring |
 | **flockGate** | WAN | .6 | Tower atomic home (songBird, bearDog, skunkBat) |
 | **ironGate** | .237 (H2) | .7 | **GPU compute** (RTX 5070, JupyterHub, ABG) |
+| **grapheneGate** | ADB (USB) | — | **Portable trust anchor** (Pixel 8a, Tower, cellular relay) |
 | **strandGate** | (joining) | — | **CPU compute** (64-core EPYC, STAR alignment) |
 
 ---
@@ -113,7 +114,7 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 - **songBird LAN bypass**: `try_lan_direct_connect`, `/proc/net/fib_trie` subnet detect, typed exhaustive dispatch (62+ methods), hot-path allocation elimination, security fail-closed, health honesty
 - **bearDog BTSP exchange**: `mesh_join.rs`, bidirectional registry, E2E test, trusted_issuer_registry refactored (826L → 6 modules), dynamic announce
 - **primalSpring**: 110 scenarios, 1060 tests, KNOWN_DEBT=0, 9 orphaned scenarios wired
-- **cellMembrane**: 913 tests, gateway deployment tooling (env/units/retire-caddy), SONGBIRD_PROXY_ROUTES bridge, TLS validation, manifest-first SSH
+- **cellMembrane**: 913 tests, gateway deployment tooling, KNOWN_MESH_GATES, manifest-first SSH
 
 ---
 
@@ -219,14 +220,18 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 
 | Repo | Tests | Status |
 |------|-------|--------|
-| cellMembrane | 913 | Evolved (gateway deploy + retire-caddy) |
+| cellMembrane | 913 | Evolved (gateway deploy tooling, retire-caddy) |
 | primalSpring | 1,060 | Stable (KNOWN_DEBT=0) |
 | barraCuda | 4,619 | Stable |
 | coralReef | 3,631 | Stable |
-| songBird | 8,929+ | Evolved (LAN bypass shipped) |
-| toadStool | 9,171 | Stable |
+| songBird | 8,929+ | Evolved (http.proxy + CapabilityProxyRouter) |
+| toadStool | 9,171+ | Stable |
 | biomeOS | 8,351 | Stable |
-| bearDog | — | Evolved (BTSP exchange shipped) |
+| bearDog | 13,866+ | Evolved (ACME gateway + BTSP) |
+| skunkBat | 539 | Evolved (security.advisory) |
+| sweetGrass | 1,658 | Stable (cargo-deny clean) |
+| sporePrint | 220 | Evolved (IPC consolidation, v3.1.0) |
+| petalTongue | 360 | Evolved (grapheneGate + ABG topology) |
 
 ---
 
@@ -242,4 +247,17 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 
 ---
 
-*sporeGate is the entry. LAN and WAN HPC behind it. songBird routes everything. The mesh absorbs.*
+## Wave 132c-d Actioned
+
+- **songBird `http.proxy`**: First-class IPC method, `CapabilityProxyRouter` with `SONGBIRD_PROXY_ROUTES` env, `http.put`/`http.delete`
+- **bearDog ACME gateway**: `serve_https_gateway()` — TLS via `HotReloadAcceptor` on :443, upstream resolution (TCP/UDS), bidirectional proxy
+- **skunkBat `security.advisory`**: Composable IPC dispatch, threat telemetry, 539 tests, 29 methods
+- **grapheneGate LIVE**: Pixel 8a, Tower composition running via ADB, 14/14 aarch64-musl binaries, dual-role USB tether
+- **sporePrint v3.1.0**: IPC consolidation (`send_rpc`), zero-copy, supply chain security (deny.toml), 220 tests, 65% coverage
+- **petalTongue topology**: grapheneGate enrolled, ABG compute routing, Cloudflare outer membrane, 360 tests
+- **cellMembrane**: 913 tests, gateway deployment tooling (retire-caddy, SONGBIRD_PROXY_ROUTES bridge, TLS validation)
+- **Remaining**: sporeGate deploy + shadow validate, ironGate JupyterHub, eastGate sporePrint live viz
+
+---
+
+*The Tower atomic is wired. Caddy retirement is next. The membrane absorbs.*
