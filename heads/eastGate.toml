@@ -6,7 +6,7 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-04T12:55:00Z"
+updated = "2026-07-04T17:21:00Z"
 
 [heads]
 primalSpring = "f4086e43e0a6a57433fb4b9b6092ff73d2707bfe"
@@ -15,7 +15,7 @@ bearDog = "0e67ef1f85c8eb0dbf5a74b3f036d4e8501cbd43"
 skunkBat = "74e6677a0dc234487bb3f4671959d9297a5d5546"
 cellMembrane = "c93344c22d66da473465861b6eb625a9275de6c7"
 biomeOS = "1ce2a4c5be7c58b9cb2fa2be12a99329becb6485"
-petalTongue = "792c72d160e7c3e14c979b60b6fb65b54ef5ccba"
+petalTongue = "e27ec451fd9a4c7199b1a9f56947aea7438a14ca"
 rhizoCrypt = "ef85124f39aac9fa309448c01db86463683ab00a"
 sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
 toadStool = "1ec374980a3886f1bddc232f4360be3c81a356f2"
