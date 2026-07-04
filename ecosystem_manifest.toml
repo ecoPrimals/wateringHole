@@ -405,7 +405,7 @@ category = "infra"
 description = "Ecosystem standards, coordination, cascading pull orchestration"
 github_repo = "ecoPrimals/wateringHole"
 forgejo_repo = "ecoPrimals/wateringHole"
-divergence_policy = "per-gate-heads"
+divergence_policy = "agentic"
 handoff_policy = "merge-ff"
 wave_authority = "eastGate"
 
@@ -498,7 +498,7 @@ forgejo_repo = "ecoPrimals/fossilRecord"
 # Which repos each gate cares about. cascade-pull uses these to
 # filter — a gate only pulls repos it needs.
 
-# sporeGate — plasma membrane, site router, 13/13 NUCLEUS, BUILD AUTHORITY
+# sporeGate — public entry point, HTTP gateway, 13/13 NUCLEUS, BUILD AUTHORITY
 [gates.sporeGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -509,12 +509,12 @@ mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "ether8"
 wg_ip = "10.13.37.2"
-roles = ["build_hub", "depot", "cascade_hub", "firewall", "dhcp"]
+roles = ["build_hub", "depot", "cascade_hub", "gateway", "http", "mesh_hub"]
 build_authority = true
 link_speed_mbps = 2500
-kderm_role = "plasma_membrane"
+kderm_role = "cytoplasm"
 site_topology = "triangle_3hub"
-notes = "Site router NUC. CRS310 ether8 at 2.5G. NAT/DHCP/DNS/nftables. WireGuard overlay hub spoke. SOVEREIGN CI: builds all 13 primals locally (12-core Ryzen 5 6600H, 27GB RAM), syncs depot to golgi. Omada SDN controller STOPPED (standalone L2 preferred)."
+notes = "Ephemeral compute entry NUC (Wave 127+). CRS310 ether8 at 2.5G. Public HTTP gateway (lab.primals.eco via Caddy → Tower). songBird mesh hub. WireGuard overlay spoke. SOVEREIGN CI: builds all 13 primals locally (12-core Ryzen 5 6600H, 27GB RAM). Demoted from edge router Wave 127 — NAT/DHCP/DNS now on Flint H1."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
