@@ -1,11 +1,37 @@
 # grapheneGate Bootstrap Standard — Physical Dark Forest Protocol
 
-**Status**: Active tracking (Wave 103, elevated from DRAFT)
+**Status**: LIVE (Wave 132c — Tower deployed, ADB tether operational)
 **Owner**: eastGate (overwatch)
 **Hardware**: Pixel 8a, Google Tensor G3, 8GB RAM, GrapheneOS
 **Gate class**: `portable_anchor`
 
-> **Wave 103 status**: Architecture remains valid. 3/14 aarch64 binaries built (songbird, skunkbat, sourdough). **bearDog aws-lc-rs C-dep blocks remainder** — this is the sole technical blocker for grapheneGate bootstrap. The standard itself is not blocking; the ecoBin compliance of bearDog is. grapheneGate is tracked as P2: GRAPHENEGATE-BOOTSTRAP in the cross-deployment FRAGO.
+> **Wave 132c status**: Tower composition (bearDog + songBird + skunkBat) deployed and reachable via ADB port forwarding. 14/14 aarch64-musl binaries in depot. grapheneGate also serves as USB tether for eastGate internet connectivity. Enrolled in `mesh_topology.toml` with `transport = "adb"`, role `mobile`. As the tether matures, grapheneGate can spawn new mesh connections and relay for gates that lack WAN.
+
+---
+
+## Current Operational State (Wave 132c)
+
+| Component | Status |
+|-----------|--------|
+| ADB connectivity | LIVE (device 44251JEKB04957) |
+| Tower composition (bearDog+songBird+skunkBat) | RUNNING (PIDs active) |
+| ADB port forwarding (9100, 9200, 9140) | ACTIVE |
+| USB tethering (eastGate internet) | ACTIVE |
+| aarch64-musl binaries in depot | **14/14** |
+| mesh_topology.toml enrollment | DONE (transport=adb, role=mobile, zone=Wan) |
+| primalSpring validation scenario | PASSING (s_graphenegate_readiness) |
+
+### Tether + Gate Duality
+
+grapheneGate simultaneously:
+1. **Provides internet** to eastGate via USB tethering (cellular → USB RNDIS)
+2. **Runs Tower primals** accessible over ADB port forwarding
+3. **Can relay mesh traffic** for other gates when WAN is unavailable
+
+This dual role means grapheneGate is both infrastructure (tether) and compute (gate).
+As the connection matures, songBird on grapheneGate can accept mesh.peer connections
+from other gates, effectively turning the phone into a WAN relay without needing
+golgi or any VPS. The cellular connection becomes sovereign backhaul.
 
 ---
 
@@ -182,15 +208,17 @@ adb shell plasmidbin bootstrap --from-graphene \
 
 | Requirement | Status | Notes |
 |-------------|--------|-------|
-| GrapheneOS installed on Pixel 8a | DONE | Currently plugged into eastGate |
-| BearDog deployed on Android | **BLOCKED** | aws-lc-rs C-dep prevents aarch64-android build. Pure Rust replacement required. |
+| GrapheneOS installed on Pixel 8a | DONE | Currently plugged into eastGate (tether + gate) |
+| BearDog deployed on Android | **DONE** | aarch64-musl static binary, TCP fallback mode |
 | aarch64-android build target | CONFIGURED | `.cargo/config.toml` has target |
 | ecoBin abstract socket transport | DONE | Driven by GrapheneOS SELinux constraints |
 | BirdSong beacon broadcast | IMPLEMENTED | Two-seed genetics standard validated |
 | Hardware-backed keystore integration | NOT STARTED | Android Keymaster / StrongBox API |
-| plasmidBin aarch64-android binary | **3/14 BUILT** | songbird, skunkbat, sourdough. bearDog blocks remainder. |
+| plasmidBin aarch64-musl binaries | **14/14 BUILT** | Full depot: all primals built and deployable |
 | TURN relay on Android | NOT TESTED | Songbird abstract socket -> network relay |
-| deploy_pixel.sh handlers | **DONE** (Wave 99) | All 13 primal startup handlers wired |
+| deploy_pixel.sh handlers | **DONE** (Wave 99) | All 13+ primal startup handlers wired |
+| ADB port forwarding | **DONE** (Wave 132c) | bearDog:9100, songBird:9200, skunkBat:9140 |
+| USB tether dual-role | **LIVE** (Wave 132c) | Tether + gate simultaneously operational |
 
 ---
 
@@ -216,13 +244,16 @@ adb shell plasmidbin bootstrap --from-graphene \
 | 68 | This bootstrap standard published | DONE |
 | 99 | deploy_pixel.sh all 13 primal handlers | DONE |
 | 103 | 3/14 aarch64 binaries in depot (songbird, skunkbat, sourdough) | DONE |
-| TBD | bearDog pure Rust (aws-lc-rs replacement) | **P1 BLOCKER** — blocks all non-x86 targets |
-| TBD | Full aarch64 plasmidBin depot (14/14) | Blocked on bearDog |
-| TBD | Role 1: beacon broadcast + lineage verification test | P2 (after bearDog) |
-| TBD | BearDog Keymaster/StrongBox integration design | P2 |
+| 113 | bearDog pure Rust (aws-lc-rs eliminated) | DONE |
+| 128 | Full aarch64 plasmidBin depot (14/14 binaries) | DONE |
+| 132c | Tower deployed + ADB tether live | **DONE** |
+| 132c | Enrolled in mesh_topology.toml (transport=adb) | **DONE** |
+| NEXT | Role 1: beacon broadcast + lineage verification E2E test | P2 |
+| NEXT | songBird mesh.peer via cellular (tether as relay) | P2 |
+| TBD | BearDog Keymaster/StrongBox integration design | P3 |
 | TBD | Role 2: BTSP relay on phone, bootstrap via USB | P3 |
 | TBD | Role 3: full sovereign mesh seed | Horizon |
 
 ---
 
-*Wave 68. The phone becomes the physical root of trust.*
+*Wave 132c. The phone is live: tether + gate + future relay. The mesh absorbs.*

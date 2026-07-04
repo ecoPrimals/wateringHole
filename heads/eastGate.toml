@@ -1,15 +1,15 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: eastGate | Updated: 2026-07-04T09:45:00Z
+# Gate: eastGate | Updated: 2026-07-04T12:42:00Z
 #
 # This file is owned exclusively by eastGate. No other gate writes here.
 # Updated automatically after each cascade or manually by overwatch.
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-04T12:15:00Z"
+updated = "2026-07-04T12:42:00Z"
 
 [heads]
-primalSpring = "afeddaa432d02d09888cb5c45e63e4c7f22e8f99"
+primalSpring = "f4086e43e0a6a57433fb4b9b6092ff73d2707bfe"
 songBird = "05e2204300000000000000000000000000000000"
 bearDog = "7ea894fa100000000000000000000000000000000"
 cellMembrane = "c51d688a378fbbaf616fc639c9b0eec23f28de89"

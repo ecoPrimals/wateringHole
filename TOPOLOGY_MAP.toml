@@ -10,10 +10,10 @@
 # Last updated: 2026-06-02 (Wave 68)
 
 [meta]
-version = "4.0.0"
-wave = 115
+version = "4.1.0"
+wave = 132
 measured_by = "manual + discovery.peers (planned)"
-last_updated = "2026-06-17"
+last_updated = "2026-07-04"
 wan_model = "single_exit_star"
 site_topology = "star_with_10g_backbone"
 neighborhood = "Old Everett, Lansing MI"
@@ -151,6 +151,17 @@ gates = ["flockGate"]
 transport = "cellular_wifi"
 description = "Portable trust anchors — grapheneGate, swiftGate"
 gates = ["grapheneGate", "swiftGate"]
+note = "grapheneGate LIVE as of Wave 132c: Tower composition running, ADB tether to eastGate, dual-role (internet provider + gate). songBird on grapheneGate can mature into a cellular relay for other gates."
+
+[segments.portable.grapheneGate]
+device = "Pixel 8a (44251JEKB04957)"
+transport = "adb"
+composition = "tower (bearDog + songBird + skunkBat)"
+adb_ports = [9100, 9200, 9140]
+tether_role = "usb_rndis"
+mesh_role = "mobile"
+status = "LIVE"
+wave_deployed = 132
 
 [segments.family]
 transport = "lan_or_wifi"
@@ -228,6 +239,11 @@ estimate_ms = 5.0
 confidence = "low"
 notes = "WiFi to local LAN (varies by AP proximity)"
 
+[latency.portable_adb_to_backbone]
+estimate_ms = 0.5
+confidence = "high"
+notes = "ADB USB port-forward: sub-1ms (same physical USB bus). grapheneGate → eastGate direct."
+
 [latency.portable_to_vps]
 estimate_ms = 50.0
 confidence = "low"
@@ -278,6 +294,7 @@ wan_turn = 0.3
 remote_contract = 0.3
 portable_wifi = 0.5
 portable_cellular = 0.2
+portable_adb = 0.95
 
 # ═══════════════════════════════════════════════════════════════
 # Transport Inference Rules — biomeOS auto-detection
