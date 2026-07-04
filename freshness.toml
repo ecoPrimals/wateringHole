@@ -8,10 +8,10 @@
 # Regenerate: membrane temporal.cascade --publish-freshness
 
 [wave]
-id = 130
-date = "2026-07-03"
+id = 131
+date = "2026-07-04"
 ssot = "specs/WATERFALL_TEMPORAL_SYNC.md"
-notes = "Wave 130: Infrastructure hardened — KinderLab WiFi (parenting-filtered guest isolation, both sites), sportsbook DNS blocking, Flint boot persistence. Compute hosting platform ready (any NUC plugs in, mesh absorbs). ABG integration pathway open. flockGate offline (pending physical power-on)."
+notes = "Wave 131: All gates ONLINE (flockGate returned). songBird LAN peer.connect is singular critical path — blocks port-free mesh routing. Tower atomic (songBird/bearDog/skunkBat) back on flockGate for evolution. ironGate JupyterHub ready (localhost, ABG accounts). Caddy on sporeGate serving static lab dashboard. Zero debt across primal mountain."
 publisher = "primalSpring"
 
 [heads]

@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 130
+# ecoPrimals Ecosystem Blurb — Wave 131
 
-**Date**: Jul 3, 2026 07:30 EDT | **Wave**: 130 | **From**: eastGate overwatch
+**Date**: Jul 4, 2026 08:15 EDT | **Wave**: 131 | **From**: eastGate overwatch
 **Cascade**: All repos at parity. golgi auto-relays every 15min.
-**Posture**: Infrastructure hardened. Compute hosting platform ready. ABG integration next.
+**Posture**: All gates ONLINE. songBird LAN peering is the singular critical path.
 
 ---
 
@@ -84,24 +84,24 @@ Internet → lab.primals.eco (DNS: 162.226.225.148)
 | **golgi** | VPS | .1 | 18 svc | WG hub, Forgejo, depot, cascade timer |
 | **sporeGate** | .3 | .2 | 13/13 | **Compute node** (was router), Sovereign CI, Nest |
 | **eastGate** | .5 | .5 | 13/13 | Overwatch, primalSpring (1038), Meta |
-| **flockGate** | WAN | .6 | 13/13 | Tower, sporePrint — **DOWN** (pending physical power-on) |
+| **flockGate** | WAN | .6 | 13/13 | Tower, sporePrint — **ONLINE** |
 | **ironGate** | H2 | .7 | 12/12 | Node compute, GPU (RTX 5070) |
 | **Flint H1** | .1 | — | — | **Edge router** (plasma membrane) |
 | **Flint H2** | .250 | — | — | Bridge WiFi AP (House 2) |
 
 ---
 
-## Primal → Gate Assignment (Wave 130b — flockGate DOWN, dev on eastGate + ironGate)
+## Primal → Gate Assignment (Wave 131 — all gates ONLINE)
 
-sporeGate is a NUC — runs services, not dev workloads. Dev teams on eastGate (10G, overwatch) and ironGate (GPU, 64GB).
+sporeGate is a NUC — runs services, not dev workloads. flockGate is back online (WAN). Dev distributed across eastGate, ironGate, and flockGate.
 
 | Primal | Dev Gate | Work Type | Status |
 |--------|----------|-----------|--------|
-| **SongBird** | **eastGate** | P1 EVOLUTION: LAN peer.connect | Critical path |
-| **BearDog** | **eastGate** | P1 EVOLUTION: BTSP trust_issuer exchange | Blocks mesh auth |
-| **SkunkBat** | **eastGate** | P2: document method gaps | Debt |
-| **cellMembrane** | **eastGate** | P1: peer.connect code fix | Critical path |
-| **sporePrint** | **eastGate** | P2: stale content cleanup | |
+| **SongBird** | **flockGate** (home) | P1 EVOLUTION: LAN peer.connect | Critical path |
+| **BearDog** | **flockGate** (home) | P1 EVOLUTION: BTSP trust_issuer exchange | Blocks mesh auth |
+| **SkunkBat** | **flockGate** (home) | P2: document method gaps | Debt |
+| **sporePrint** | **flockGate** (home) | P2: stale content cleanup | |
+| **cellMembrane** | **eastGate** | P1: peer.connect integration + resolve.rs | Critical path |
 | **ToadStool** | **ironGate** | Stable (9,171 tests) | |
 | **BarraCuda** | **ironGate** | Stable (4,619 tests, 12-axis clean) | |
 | **CoralReef** | **ironGate** | P2: SM120 edge cases | Debt |
@@ -114,9 +114,10 @@ sporeGate is a NUC — runs services, not dev workloads. Dev teams on eastGate (
 | **PetalTongue** | eastGate | Stable | |
 | **primalSpring** | eastGate | Stable (1,060 tests, KNOWN_DEBT=0) | |
 
-**sporeGate**: runs services only (Caddy, Forgejo, WG hub, Sovereign CI). No dev IDE sessions.
-**eastGate**: Tower atomic evolution (songBird, bearDog, skunkBat) + cellMembrane + overwatch.
-**ironGate**: Compute trio (toadStool, barraCuda, coralReef) + data primals (NestGate, RhizoCrypt, LoamSpine, SweetGrass).
+**sporeGate** (.3): services only (Caddy, Forgejo, WG hub, Sovereign CI). No dev IDE.
+**flockGate** (WAN): Tower atomic home (songBird, bearDog, skunkBat) + sporePrint. WAN test for mesh.
+**eastGate** (.244): cellMembrane evolution + overwatch + integration testing.
+**ironGate** (.237): Compute trio + data primals. GPU workloads.
 
 ---
 
@@ -134,26 +135,36 @@ sporeGate is a NUC — runs services, not dev workloads. Dev teams on eastGate (
 
 ## Remaining Work by Team
 
-### Critical Path — songBird LAN Peering (eastGate, P1)
+### Critical Path — songBird LAN Peering (flockGate + eastGate, P1)
 
 **This blocks everything.** Without LAN peering, the Tower atomic is bypassed and there is no sovereign mesh.
 
 | Task | Dev Gate | File | Notes |
 |------|----------|------|-------|
-| Implement LAN direct-connect bypass | eastGate | `songbird-orchestrator/src/app/connection_manager/` | If target on same subnet → skip punch, use TCP on federation port (7700) |
-| Fix `peer.connect` handshake completion | eastGate | `songbird-onion-relay/src/coordinator/punch.rs` | Currently "punching" forever — signaling channel not established on LAN |
-| Verify relay.serve port (3479 vs 7700) | eastGate | `songbird-orchestrator/src/bin_interface/server.rs` | Port param ignored? Both sides must agree |
-| bearDog BTSP trust_issuer exchange | eastGate | — | One key pair as proof of lineage auth |
+| Implement LAN direct-connect bypass | flockGate | `songbird-orchestrator/src/app/connection_manager/` | If target on same subnet → skip punch, use TCP on federation port (7700) |
+| Fix `peer.connect` handshake completion | flockGate | `songbird-onion-relay/src/coordinator/punch.rs` | Currently "punching" forever — signaling channel not established on LAN |
+| Verify relay.serve port (3479 vs 7700) | flockGate | `songbird-orchestrator/src/bin_interface/server.rs` | Port param ignored? Both sides must agree |
+| bearDog BTSP trust_issuer exchange | flockGate | — | One key pair as proof of lineage auth |
 | Test: `capability.call` cross-gate | eastGate | `membrane-shadow/src/resolve.rs` | Once peers connect, validate E2E dispatch |
 
-### eastGate (Tower atomic evolution + overwatch)
+**flockGate is the WAN test case**: it's behind NAT on a different network. Once LAN peering works (sporeGate ↔ eastGate ↔ ironGate), flockGate validates the WAN/relay path through golgi.
+
+### flockGate (Tower atomic home — ONLINE)
 
 | Task | Priority | Notes |
 |------|----------|-------|
-| songBird LAN peer.connect fix | P1 | CRITICAL PATH — unblocks all mesh routing |
-| bearDog BTSP trust_issuer | P1 | Lineage auth for mesh connections |
+| songBird LAN peer.connect evolution | P1 | CRITICAL PATH — source lives here |
+| bearDog BTSP trust_issuer exchange | P1 | One key pair proof of lineage auth |
+| skunkBat: document method gaps | P2 | Know what's missing |
+| sporePrint stale content cleanup | P2 | Content debt |
+| Validate WAN mesh peering via golgi | P1 | After LAN peering works — flockGate is the WAN test |
+
+### eastGate (cellMembrane + overwatch)
+
+| Task | Priority | Notes |
+|------|----------|-------|
 | cellMembrane resolve.rs E2E validation | P1 | Cross-gate capability.call |
-| sporePrint stale content cleanup | P2 | Relocated from flockGate |
+| Coordinate three-way peering tests | P1 | songBird initialized, eastGate at .244 |
 | BiomeOS composition test (local) | P2 | Deploy graph validation |
 
 ### ironGate (compute + data primals)
@@ -173,10 +184,6 @@ sporeGate is a NUC — runs services, not dev workloads. Dev teams on eastGate (
 | systemd-networkd hardening (eno1 → .3, gw .1) | P1 | Prevent DHCP fallback |
 | Flint config backup to git | P2 | Disaster recovery |
 | Caddy serving lab.primals.eco static | ✅ | Waiting on mesh for interactive proxy |
-
-### flockGate (DOWN — all work relocated)
-
-Tower atomic → eastGate. sporePrint → eastGate. Data primals → ironGate. Returns when physically powered on.
 
 ---
 
@@ -253,13 +260,11 @@ RELAY:    gate → songBird relay.forward → encrypted multi-hop → peer gate
 ## Coordination
 
 - **Cascade**: push to Forgejo → golgi relays → GitHub. Agentic divergence handles races.
-- **Posture**: ABG hosting active. sporeGate Caddy live (:443/:80). Cloudflare outer membrane mapped.
+- **Posture**: All gates ONLINE. songBird evolution on flockGate. Mesh peering is the critical path.
 - **Operator actions (one-time, then fully agentic)**:
   1. Provision `CF_API_TOKEN` in golgi `/etc/membrane/tower.env` → unlocks agentic DNS
-  2. Via RustDesk: re-authorize sporeGate key on ironGate (`~/.ssh/authorized_keys`) OR restart WG
-  3. ironGate: start JupyterHub, create ABG accounts
 - **Strategic**: Cloudflare = outer membrane. BirdSong/BTSP = inner transport. SSH → primal mesh migration.
-- **Blocked**: ironGate transport (WG down + SSH key broken), strandGate power-on (weekend).
+- **Blocked**: songBird peer.connect handshake (code fix on flockGate). Once fixed → mesh flows → ABG compute live.
 
 ---
 
