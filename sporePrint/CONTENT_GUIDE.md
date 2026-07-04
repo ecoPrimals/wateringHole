@@ -138,7 +138,7 @@ The recommended set (5 notebooks):
 
 ```bash
 cd infra/sporePrint
-bash scripts/render_notebooks.sh --notebook /path/to/notebook.ipynb
+cargo run --manifest-path crates/spore-validate/Cargo.toml -- render-notebooks --notebook /path/to/notebook.ipynb
 ```
 
 ### Automated Rendering (CI)
