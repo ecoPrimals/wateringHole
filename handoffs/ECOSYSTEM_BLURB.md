@@ -1,8 +1,8 @@
 # ecoPrimals Ecosystem Blurb — Wave 132
 
-**Date**: Jul 4, 2026 10:00 EDT | **Wave**: 132 | **From**: eastGate overwatch
+**Date**: Jul 4, 2026 10:50 EDT | **Wave**: 132 | **From**: eastGate overwatch
 **Cascade**: All repos at parity. Per-gate heads eliminate divergence (wave.toml + heads/*.toml).
-**Posture**: All gates ONLINE. songBird LAN bypass SHIPPED. Deploy → validate → ABG live.
+**Posture**: All gates ONLINE. songBird LAN bypass VALIDATED LIVE (eastGate ↔ sporeGate: direct TCP, 0ms). Deploy to remaining gates next.
 
 ---
 
@@ -10,7 +10,7 @@
 
 You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals (NUCLEUS) coordinated via WireGuard overlay + Forgejo.
 
-**Wave 132 milestone**: Async freshness evolution SHIPPED — per-gate head publishing eliminates all cascade divergence conflicts. songBird LAN direct-connect bypass and bearDog BTSP trust exchange are SHIPPED in code. The only remaining step is deploy + validate + activate the ABG compute pipeline.
+**Wave 132 milestone**: Async freshness evolution SHIPPED — per-gate head publishing eliminates all cascade divergence conflicts. songBird LAN direct-connect bypass VALIDATED LIVE: eastGate ↔ sporeGate connected via direct TCP on :7700 with 0ms latency (no relay, no UDP punch, no port exposure beyond federation). Deploy to ironGate + flockGate next → then ABG compute pipeline goes live.
 
 ---
 
@@ -123,12 +123,14 @@ WireGuard overlay (10.13.37.0/24) via golgi VPS (.1)
 
 | Task | Gate | Status |
 |------|------|--------|
-| Build songBird v0.2.1-wave131b (Sovereign CI) | sporeGate | CI triggered |
-| Deploy new songBird to sporeGate, eastGate, ironGate | all LAN | Pending CI |
-| Test LAN `peer.connect` (sporeGate ↔ eastGate) | eastGate | After deploy |
-| Test LAN `peer.connect` (eastGate ↔ ironGate) | eastGate | After deploy |
-| Test WAN peering (flockGate → golgi relay → LAN) | flockGate | After LAN works |
-| Test `capability.call` cross-gate dispatch | eastGate | After peering |
+| ~~Build songBird v0.2.1 with LAN bypass~~ | eastGate | ✅ Built + installed in depot |
+| ~~Deploy + restart songBird on eastGate~~ | eastGate | ✅ Running (v0.2.1, mesh initialized) |
+| ~~Test LAN `peer.connect` (eastGate → sporeGate)~~ | eastGate | ✅ **CONNECTED** (direct TCP, 0ms) |
+| Deploy new songBird binary to sporeGate | sporeGate | Pending (golgi offline, manual deploy) |
+| Deploy new songBird binary to ironGate | ironGate | Pending (need WG or manual) |
+| Test LAN `peer.connect` (eastGate ↔ ironGate) | eastGate | Pending (ironGate songBird not on 7700) |
+| Test WAN peering (flockGate → golgi relay → LAN gates) | flockGate | After golgi recovers |
+| Test `capability.call` cross-gate dispatch | eastGate | After bilateral peering |
 
 ### Phase 2: Lab Activation
 
