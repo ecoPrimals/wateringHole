@@ -1,18 +1,18 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-05T14:13:46Z
+# Gate: sporeGate | Updated: 2026-07-05T14:58:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-05T14:13:46Z"
+updated = "2026-07-05T14:58:00Z"
 
 [heads]
 nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
 wateringHole = "e41ef3647f7768b95da1e3b240d0754b110fba92"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
-bearDog = "16430d90c"
-songBird = "906fe886"
+bearDog = "2ac2bd389"
+songBird = "16435b36"
 toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
 biomeOS = "1ce2a4c5be7c58b9cb2fa2be12a99329becb6485"
 squirrel = "bb3a91d93970a01fbee9fbbb0509dfc9f2943aaf"
@@ -25,25 +25,33 @@ skunkBat = "6fbdc43a544351cd165b0abf11824143e05db701"
 cellMembrane = "0704132"
 
 [deploy]
-songbird_version = "0.2.1-evolved"
-songbird_commit = "906fe886"
+songbird_version = "0.2.1-drawbridge"
+songbird_commit = "16435b36"
 beardog_version = "0.9.0-gatehouse"
-beardog_commit = "16430d90c"
-gateway_status = "golgi_tls_proxy_active"
-topology = "internet → golgi(TLS) → WG → sporeGate:7700(songBird) → mesh → backends"
-http_proxy = "LIVE — golgi Caddy proxies lab.primals.eco to 10.13.37.2:7700"
+beardog_commit = "2ac2bd389"
+gateway_status = "drawbridge_LIVE_e2e_502_backend_pending"
+topology = "internet → golgi(TLS) → WG → sporeGate:7780(drawbridge) → capability routing → backends"
+http_proxy = "LIVE — golgi Caddy proxies lab.primals.eco to 10.13.37.2:7780 (drawbridge)"
 caddy_local = "STOPPED+DISABLED (sporeGate Caddy retired)"
-caddy_golgi = "ACTIVE — TLS termination for lab.primals.eco"
+caddy_golgi = "ACTIVE — TLS termination for lab.primals.eco → drawbridge :7780"
 relay_deployed = "golgi: membrane 0704132 — bidirectional LIVE, 39/39 parity"
 mesh_peers = 2
 cellmembrane_tests = 930
+drawbridge_routes = "/hub=jupyter, /api=jupyter, /user=jupyter, /services=jupyter"
+drawbridge_backends = "jupyter=http://192.168.4.237:8000 (ironGate — pending JupyterHub start)"
 
 [blocking]
-dns = "lab.primals.eco → golgi (157.230.3.183), not sporeGate — needs CF_API_TOKEN or manual DNS"
-http_bridge = "songBird :7700 is JSON-RPC, not HTTP — needs HTTP-to-IPC bridge for proxy path"
-irongate = "JupyterHub not deployed on :8000"
-resolved = "bearDog gatehouse built (16430d90c); golgi Caddyfile proxying to sporeGate; Caddy retired on sporeGate"
+irongate = "JupyterHub not deployed on :8000 — E2E returns 502"
+beardog_tls = "HOLD for DNS decision (bearDog 2ac2bd389 deployed but not activated)"
 
-[evolution_needed]
-code_team = "songBird HTTP server mode or bearDog HTTP-to-IPC bridge for gateway path"
-operator = "CF_API_TOKEN on golgi → update lab.primals.eco DNS → enable direct ACME"
+[resolved]
+drawbridge = "songBird 16435b36 drawbridge HTTP listener :7780 — LIVE"
+golgi_proxy = "Caddy updated: 10.13.37.2:7700 → 10.13.37.2:7780"
+http_bridge = "drawbridge solves HTTP-to-capability routing (was blocking)"
+beardog_deployed = "bearDog 2ac2bd389 (gatehouse + drawbridge upstream default)"
+
+[next_steps]
+p1 = "ironGate: start JupyterHub (docker, port 8000) → 502 becomes 200"
+p2 = "ironGate + strandGate: mesh.init (bootstrap 10.13.37.2:7700)"
+p3 = "bearDog gatehouse activation (pending DNS decision: golgi owns IP)"
+p4 = "Sovereign CI: cross-compile aarch64-linux-android (pepti warehouse)"
