@@ -112,47 +112,79 @@ Android rebuild with BindMode::Auto (landed in 7e932000f). Then `mesh.init` via 
 
 ---
 
-## By Gate — What Each Team Does Next
+## Gate Ownership & Responsibilities
 
-### sporeGate
+### sporeGate (sporeGate overwatch team)
+
+**Owns**: the gate, LAN topology, membrane layers, Sovereign CI, pepti warehouse
 
 1. **Deploy songBird 16435b36** → start drawbridge on :7780
 2. **Deploy bearDog 2ac2bd389** → gatehouse ready (hold for DNS decision)
 3. **Update golgi Caddy** → proxy target `10.13.37.2:7780`
-4. **Validate**: `curl http://lab.primals.eco/hub/api` via golgi → drawbridge → ironGate
+4. **Build multi-arch ecobins** → Sovereign CI produces:
+   - `x86_64-unknown-linux-gnu` (sporeGate, ironGate, strandGate, eastGate)
+   - `aarch64-linux-android` (grapheneGate)
+5. **Publish to pepti warehouse** → `/opt/ecoPrimals/depot/` on golgi (accessible via WG overlay)
+6. **Validate**: `curl http://lab.primals.eco/hub/api` via golgi → drawbridge → ironGate
+7. **LAN mesh topology**: ensure ironGate + strandGate peered via `mesh.init`
 
-### ironGate
+### ironGate (sporeGate overwatch team — LAN compute)
 
 1. **Start JupyterHub** (docker, port 8000, localhost only)
 2. **mesh.init** → join sporeGate mesh (bootstrap `10.13.37.2:7700`)
 3. **Register jupyter capability** via IPC
+4. **Pull binaries from pepti warehouse** for upgrades
 
-### flockGate
+### flockGate (WAN validation — inner membrane behaviors)
+
+**Role**: WAN deployment target for validating membrane behaviors across non-LAN links.
 
 1. **mesh.init** via golgi relay (`10.13.37.1:7700`)
-2. No code work remaining — all debt resolved
+2. **Validate WAN relay path**: capability.call across golgi relay roundtrip
+3. **Test membrane behaviors**: relay.absorb, relay.parity, remote dispatch over WAN latency
+4. No code work remaining — all debt resolved
 
-### eastGate
+### eastGate (eastGate hardware team)
+
+**Owns**: overwatch coordination, primalSpring, petalTongue, grapheneGate hardware
 
 1. Overwatch: cascade + verify mesh convergence
-2. Stage pilot dataset to ironGate after JupyterHub lands
-3. Continue primalSpring scenario evolution
+2. **grapheneGate deploy** from pepti warehouse (see below)
+3. Stage pilot dataset to ironGate after JupyterHub lands
+4. Continue primalSpring scenario evolution
 
-### golgi
+### grapheneGate (eastGate hardware team — deploys from pepti)
+
+**Owns**: Pixel 8a hardware. **Deploys from ecobins via pepti warehouse, not local builds.**
+
+Deployment flow:
+```
+sporeGate Sovereign CI (Forgejo push trigger)
+    → cross-compile aarch64-linux-android targets
+    → publish to pepti warehouse (golgi:/opt/ecoPrimals/depot/android/)
+    → eastGate pulls via WG overlay or golgi relay
+    → ADB push to grapheneGate
+
+Enables: cross-hardware validation without local cross-compilation
+```
+
+Steps:
+1. **Pull Android ecobins** from pepti warehouse (golgi depot)
+2. **ADB deploy**: `adb push depot/beardog-aarch64 /data/local/tmp/beardog`
+3. **Start primal suite** (14 binaries via termux/shell)
+4. **mesh.init** with eastGate as bootstrap peer (USB tether or WiFi)
+5. **Validate**: abstract socket IPC (BindMode::Auto), cellular relay fallback
+
+### golgi (infrastructure — relay + depot)
 
 1. **Update Caddy**: `lab.primals.eco` proxy → `10.13.37.2:7780`
-2. Relay continues (15min timer, 39/39 parity)
-3. Future: bearDog gatehouse here (owns DNS IP)
-
-### grapheneGate
-
-1. Rebuild bearDog + songBird for `aarch64-linux-android`
-2. Deploy via ADB
-3. `mesh.init` with eastGate as bootstrap
+2. **Pepti warehouse**: serve `/opt/ecoPrimals/depot/` for gate deployments
+3. Relay continues (15min timer, 39/39 parity)
+4. Future: bearDog gatehouse here (owns DNS IP)
 
 ---
 
-## Architecture (Gatehouse/Darkforest)
+## Architecture (Gatehouse/Darkforest + Pepti Warehouse)
 
 ```
 INTERNET → Cloudflare → golgi :443 (Caddy TLS, temporary)
@@ -160,13 +192,22 @@ INTERNET → Cloudflare → golgi :443 (Caddy TLS, temporary)
         → path routing → capability.call → mesh
             → ironGate :8000 (JupyterHub)
             → strandGate (compute)
-            → flockGate via golgi relay
+            → flockGate via golgi relay (WAN validation)
+
+Build/Deploy (Pepti Layer):
+Forgejo push → sporeGate Sovereign CI
+    → compile x86_64 + aarch64-android
+    → publish → golgi:/opt/ecoPrimals/depot/ (pepti warehouse)
+    → gates pull binaries via WG overlay
+    → cross-hardware validation (grapheneGate, ironGate, etc.)
 
 Future (once bearDog gatehouse on golgi):
 INTERNET → golgi :443 (bearDog TLS) → :7780 (drawbridge) → mesh
 ```
 
 **Darkforest**: all gates communicate via songBird mesh (UDS, abstract sockets, WG direct-connect). No ports exposed externally. Capabilities, not addresses.
+
+**Pepti Layer**: Sovereign CI builds → depot warehouse → gates deploy. No external package registries. Cross-arch from single CI trigger.
 
 ---
 
@@ -211,13 +252,15 @@ NEXT (operational only):
 2. golgi: update Caddy proxy → 10.13.37.2:7780    ← UNBLOCKS HTTP
 3. ironGate: start JupyterHub                      ← UNBLOCKS backend
 4. ironGate + strandGate: mesh.init                ← LAN MESH
-5. flockGate: mesh.init via golgi                  ← WAN MESH
-6. grapheneGate: Android rebuild + mesh.init       ← MOBILE MESH
+5. flockGate: mesh.init via golgi                  ← WAN MESH (validation)
+6. sporeGate CI: cross-compile aarch64-android     ← PEPTI WAREHOUSE
+7. grapheneGate: pull from pepti + ADB deploy      ← MOBILE MESH
 
-After step 5: ALL GATES MESHED (LAN + WAN)
-After step 6: FULL MESH (including mobile)
+After step 5: LAN + WAN MESHED
+After step 6: cross-hardware binaries available
+After step 7: FULL MESH (including mobile, validated cross-arch)
 ```
 
 ---
 
-*Wave 132g — Zero code blockers. Zero divergence. Deploy and mesh.*
+*Wave 132g — Zero code blockers. Zero divergence. Deploy, mesh, validate cross-hardware.*
