@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 132g
 
-**Date**: Jul 5, 2026 10:28 EDT | **Wave**: 132g | **From**: eastGate overwatch
-**Posture**: **MESH CONVERGENCE** — all code shipped, all repos at parity, zero divergence. Remaining work is operational: deploy binaries, configure mesh peering, start services.
+**Date**: Jul 5, 2026 12:50 EDT | **Wave**: 132g | **From**: eastGate overwatch
+**Posture**: **FULL MESH READY** — bearDog Android fix shipped (6ef436864). pepti warehouse LIVE. Drawbridge LIVE. Zero code blockers. All gates can now mesh.
 
 ---
 
@@ -16,12 +16,12 @@ You are an agent on a gate in the ecoPrimals ecosystem. The ecosystem is a **sov
 ## Status: ALL REPOS AT PARITY
 
 ```
-✅ bearDog       2ac2bd389  (gatehouse mode + drawbridge upstream)
+✅ bearDog       6ef436864  (gatehouse + drawbridge upstream + Android fix)
 ✅ songBird      16435b36   (drawbridge HTTP listener :7780)
 ✅ skunkBat      e7eaa5d    (capabilityClient + quarantine)
 ✅ sweetGrass    bab4657    (stable)
 ✅ cellMembrane  c83bcbc    (relay + freshness + gateway refactor)
-✅ wateringHole  e2e0523    (standards + FRAGOs + blurb)
+✅ wateringHole  071ec76    (standards + FRAGOs + ownership model)
 ✅ sporePrint    99bfc9e    (living topology + 254 tests)
 ✅ primalSpring  cac3eec    (117 scenarios, 1081 tests)
 ✅ petalTongue   0f8da6b    (deep debt zero)
@@ -33,32 +33,19 @@ You are an agent on a gate in the ecoPrimals ecosystem. The ecosystem is a **sov
 
 Zero divergence. GitHub↔Forgejo bidirectional relay running (golgi membrane 0704132, 15min cascade timer).
 
+**Pepti Warehouse**: LIVE at `membrane.primals.eco/depot/`. songBird x86_64 (23MB) + aarch64 (21MB) available. bearDog x86_64 (11MB) available. bearDog aarch64 building (6ef436864 fix just pushed, CI triggered).
+
 ---
 
 ## REMAINING: What Blocks Full Mesh
 
-### P0: Deploy Drawbridge (sporeGate)
+### ~~P0: Deploy Drawbridge~~ DONE
 
-songBird 16435b36 has the drawbridge HTTP listener but it needs to be **deployed and started** on sporeGate.
-
-```bash
-# On sporeGate: rebuild songBird from Sovereign CI output
-# Then start with drawbridge config:
-SONGBIRD_DRAWBRIDGE_ADDR=127.0.0.1:7780 \
-SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter \
-SONGBIRD_PROXY_ROUTES=jupyter=http://192.168.4.237:8000 \
-songbird serve
-```
-
-**Immediate unblock (no DNS change needed)**: Update golgi Caddy:
-```
-lab.primals.eco → reverse_proxy 10.13.37.2:7780
-```
-(was :7700, which is wrong — federation not HTTP)
+sporeGate deployed songBird drawbridge LIVE on :7780. golgi Caddy updated to proxy to :7780. E2E path works (returns 502 — backend not started yet).
 
 ### P1: ironGate JupyterHub
 
-E2E backend. Without this, the drawbridge routes to nothing.
+E2E backend. Without this, the drawbridge routes to nothing (returns 502).
 
 ```bash
 # On ironGate (192.168.4.237 / WG 10.13.37.7):
@@ -243,24 +230,24 @@ Fixed this cascade:
 ## Critical Path
 
 ```
-✅ All code shipped
+✅ All code shipped (including bearDog Android fix 6ef436864)
 ✅ All repos at parity
 ✅ Bidirectional relay live
+✅ Pepti warehouse LIVE (membrane.primals.eco/depot/)
+✅ Drawbridge LIVE (sporeGate :7780, golgi proxy updated)
+✅ Caddy retired on sporeGate
 
 NEXT (operational only):
-1. sporeGate: deploy songBird drawbridge :7780     ← UNBLOCKS E2E
-2. golgi: update Caddy proxy → 10.13.37.2:7780    ← UNBLOCKS HTTP
-3. ironGate: start JupyterHub                      ← UNBLOCKS backend
-4. ironGate + strandGate: mesh.init                ← LAN MESH
-5. flockGate: mesh.init via golgi                  ← WAN MESH (validation)
-6. sporeGate CI: cross-compile aarch64-android     ← PEPTI WAREHOUSE
-7. grapheneGate: pull from pepti + ADB deploy      ← MOBILE MESH
+1. sporeGate CI: rebuild bearDog 6ef436864 for Android  ← PEPTI COMPLETE
+2. ironGate: start JupyterHub (docker :8000)            ← 502 → 200
+3. ironGate + strandGate: mesh.init                     ← LAN MESH
+4. flockGate: mesh.init via golgi                       ← WAN MESH
+5. grapheneGate: pull bearDog from pepti + ADB deploy   ← MOBILE MESH
 
-After step 5: LAN + WAN MESHED
-After step 6: cross-hardware binaries available
-After step 7: FULL MESH (including mobile, validated cross-arch)
+After step 4: LAN + WAN MESHED
+After step 5: FULL MESH (all architectures)
 ```
 
 ---
 
-*Wave 132g — Zero code blockers. Zero divergence. Deploy, mesh, validate cross-hardware.*
+*Wave 132g — Full mesh ready. bearDog Android unblocked. Deploy, peer, validate.*
