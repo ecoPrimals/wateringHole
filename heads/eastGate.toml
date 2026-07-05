@@ -1,27 +1,27 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: eastGate | Updated: 2026-07-05T12:45:00Z
+# Gate: eastGate | Updated: 2026-07-05T12:10:00Z
 #
 # This file is owned exclusively by eastGate. No other gate writes here.
 # Updated automatically after each cascade or manually by overwatch.
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-05T12:45:00Z"
+updated = "2026-07-05T12:55:00Z"
 
 [heads]
-primalSpring = "58d416782f6c63a61bac22f2f777c55f65d678ce"
+primalSpring = "fe60db9afa18b9e7cd6ab3bd4f0d0f3925f42aff"
 songBird = "906fe886bc8c293bae201e501928bfe5962a8069"
 bearDog = "ff18b17f510c79eb9dfd387018c39d1bfad554d0"
 skunkBat = "c27d99cc8a601eabb94d593566571fcd1b8a8b89"
-cellMembrane = "c93344c22d66da473465861b6eb625a9275de6c7"
+cellMembrane = "8cb77846a93c8c19d8929e934faa2cdac6ccc279"
 biomeOS = "1ce2a4c5be7c58b9cb2fa2be12a99329becb6485"
-petalTongue = "a60f163d356de24176e2967f6256fb809951cef7"
+petalTongue = "0f8da6b4153313997ccc09ce18288824171bf71d"
 rhizoCrypt = "ef85124f39aac9fa309448c01db86463683ab00a"
 sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
 toadStool = "1ec374980a3886f1bddc232f4360be3c81a356f2"
 barraCuda = "b2618db0511100a2112196635c037c641649d927"
 coralReef = "3078d0b6d6b99c3df5f404d25812f930a4b0fc3b"
-wateringHole = "8de234886b24df894c5797d09880442bd56f50d1"
+wateringHole = "79d2c6290304ae5a807fa67a4917c6b29c2770c8"
 sporePrint = "dc7e88e6cff7608f060e0e43d88a9137e2b354a1"
 loamSpine = "e68873d2c3092f6947f98655b7adb62d905178d8"
 squirrel = "bb3a91d93970a01fbec9fbbb0509dfc9f2943aaf"
