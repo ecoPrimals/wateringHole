@@ -1,17 +1,17 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-05T13:29:42Z
+# Gate: sporeGate | Updated: 2026-07-05T14:13:46Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-05T13:29:42Z"
+updated = "2026-07-05T14:13:46Z"
 
 [heads]
 nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
-wateringHole = "1ec0aa612adcdd9f77364d184e91299f306f982b"
+wateringHole = "e41ef3647f7768b95da1e3b240d0754b110fba92"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
-bearDog = "136857739"
+bearDog = "16430d90c"
 songBird = "906fe886"
 toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
 biomeOS = "1ce2a4c5be7c58b9cb2fa2be12a99329becb6485"
@@ -27,18 +27,23 @@ cellMembrane = "0704132"
 [deploy]
 songbird_version = "0.2.1-evolved"
 songbird_commit = "906fe886"
-beardog_version = "0.9.0-evolved+es256"
-beardog_commit = "136857739"
-gateway_status = "acme_es256_pushed_awaiting_integration_test"
-http_proxy = "VALIDATED — jupyter→192.168.4.237:8000 (backend pending ironGate)"
-acme_gateway = "ES256 fix pushed (136857739) — port 80 conflict with Caddy (expected in shadow)"
-caddy_status = "active_production"
-relay_deployed = "golgi: membrane 0704132 — relay.config + bidirectional LIVE"
-relay_parity = "39/39 at parity"
+beardog_version = "0.9.0-gatehouse"
+beardog_commit = "16430d90c"
+gateway_status = "golgi_tls_proxy_active"
+topology = "internet → golgi(TLS) → WG → sporeGate:7700(songBird) → mesh → backends"
+http_proxy = "LIVE — golgi Caddy proxies lab.primals.eco to 10.13.37.2:7700"
+caddy_local = "STOPPED+DISABLED (sporeGate Caddy retired)"
+caddy_golgi = "ACTIVE — TLS termination for lab.primals.eco"
+relay_deployed = "golgi: membrane 0704132 — bidirectional LIVE, 39/39 parity"
 mesh_peers = 2
 cellmembrane_tests = 930
 
 [blocking]
-remaining = "Caddy holds :80 — bearDog ACME HTTP-01 solver needs :80 (cutover scheduling)"
-remaining_2 = "ironGate: JupyterHub not deployed on :8000"
-resolved = "ES256 fix pushed; CryptoProvider defensive install; relay 0704132 on golgi"
+dns = "lab.primals.eco → golgi (157.230.3.183), not sporeGate — needs CF_API_TOKEN or manual DNS"
+http_bridge = "songBird :7700 is JSON-RPC, not HTTP — needs HTTP-to-IPC bridge for proxy path"
+irongate = "JupyterHub not deployed on :8000"
+resolved = "bearDog gatehouse built (16430d90c); golgi Caddyfile proxying to sporeGate; Caddy retired on sporeGate"
+
+[evolution_needed]
+code_team = "songBird HTTP server mode or bearDog HTTP-to-IPC bridge for gateway path"
+operator = "CF_API_TOKEN on golgi → update lab.primals.eco DNS → enable direct ACME"
