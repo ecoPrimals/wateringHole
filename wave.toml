@@ -10,8 +10,9 @@
 
 [wave]
 id = 132
-date = "2026-07-04"
-posture = "NEAR INTEGRATION — Tower HTTP code-complete (flockGate), sporePrint live topology WIRED (eastGate). Remaining: sporeGate deploy binaries + shadow, ironGate JupyterHub (NOT STARTED, blocker)."
+sub = "f"
+date = "2026-07-05"
+posture = "DEBT RESOLUTION — songBird http.proxy LIVE on sporeGate, bearDog ACME panics (CryptoProvider missing at startup). cellMembrane bidirectional relay code-complete (needs golgi deploy). 2 P1 bearDog fixes needed from flockGate."
 publisher = "eastGate-overwatch"
 
 [gates]
