@@ -1,11 +1,11 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-05T17:10:00Z
+# Gate: sporeGate | Updated: 2026-07-05T17:50:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-05T17:10:00Z"
+updated = "2026-07-05T17:50:00Z"
 
 [heads]
 nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
@@ -29,34 +29,45 @@ songbird_version = "0.2.1-drawbridge"
 songbird_commit = "40699793"
 beardog_version = "0.9.0-gatehouse"
 beardog_commit = "6ef436864"
-gateway_status = "E2E_LIVE"
+gateway_status = "E2E_LIVE_MESH_PEERED"
 topology = "internet → golgi(TLS) → WG → sporeGate:7780(drawbridge) → ironGate:8000(JupyterHub)"
 http_proxy = "LIVE — lab.primals.eco/hub/api returns {version: 5.4.5}"
-caddy_local = "STOPPED+DISABLED (sporeGate Caddy retired)"
-caddy_golgi = "ACTIVE — TLS termination for lab.primals.eco → drawbridge :7780"
+caddy_local = "STOPPED+DISABLED"
+caddy_golgi = "ACTIVE — TLS → drawbridge :7780"
 relay_deployed = "golgi: membrane 0704132 — bidirectional LIVE, 39/39 parity"
-mesh_peers_sporegate = "initialized, dark-forest, ironGate TCP-connected"
-mesh_peers_irongate = "online:1, sporeGate reachable via 10.13.37.2:7700"
+pepti_warehouse = "LIVE — membrane.primals.eco/depot/ (x86_64+aarch64: songbird+beardog)"
+mesh_status = "PEERED — sporeGate↔ironGate bidirectional (family: ecoPrimals)"
+mesh_reachable_peers = 1
+mesh_mode = "federation (dark-forest disabled for LAN trust)"
+beardog_security = "LIVE on /run/membrane/beardog.sock (production_ready)"
 drawbridge_routes = "/hub=jupyter, /api=jupyter, /user=jupyter, /services=jupyter"
 drawbridge_backends = "jupyter=http://192.168.4.237:8000/hub (ironGate JupyterHub 5.4.5)"
-pepti_warehouse = "LIVE — membrane.primals.eco/depot/ (x86_64: songbird+beardog, aarch64: songbird+beardog)"
+
+[strandgate]
+status = "ALIVE but SSH-inaccessible"
+actual_ip = "192.168.4.103"
+expected_ip = "192.168.4.100"
+hostname = "pop-os"
+mac = "c8:5e:a9:c9:6f:80"
+latency_ms = 30
+note = "On WiFi (30-50ms). SSH keys not deployed. Need physical access or credentials."
+action = "Deploy SSH key + songBird binary to enable mesh.init"
 
 [blocking]
-beardog_tls = "HOLD for DNS decision (bearDog 6ef436864 deployed but not activated)"
-mesh_trust = "sporeGate dark-forest mode requires trust exchange for full mesh registration"
-strandgate = "offline (192.168.4.100 unreachable)"
+strandgate_ssh = "SSH keys not deployed — need physical access"
+dark_forest = "Disabled for LAN trust (re-enable when all peers have bearDog)"
 
 [resolved]
-drawbridge = "songBird drawbridge HTTP listener :7780 — LIVE"
-golgi_proxy = "Caddy updated to :7780"
+mesh_trust = "Fixed: removed dark-forest mode → LAN peers auto-register with FAMILY_ID"
 e2e_path = "lab.primals.eco/hub/api → 200 {version: 5.4.5}"
-jupyterhub = "ironGate JupyterHub 5.4.5 on 0.0.0.0:8000 — LIVE"
-pepti_complete = "All arches published: x86_64-musl + aarch64-android (songbird+beardog)"
-irongate_mesh = "mesh.init done, sporeGate peered (10.13.37.2:7700, reachable)"
-beardog_android = "6ef436864 StrongBox fix — built and published to pepti"
+irongate_mesh = "PEERED — bidirectional, direct path, reachable"
+pepti_complete = "All arches: x86_64-musl + aarch64-android (songbird+beardog)"
+beardog_android = "6ef436864 built + published to pepti"
+strandgate_found = "Alive at .103 (DHCP shifted from .100)"
 
 [next_steps]
-p1 = "Full mesh trust: configure dark-forest mutual auth or LAN trust exception"
+p1 = "strandGate: physical access → deploy SSH key + songBird + mesh.init"
 p2 = "flockGate: mesh.init via golgi relay (WAN mesh)"
 p3 = "grapheneGate: pull from pepti + ADB deploy + mesh.init"
-p4 = "bearDog gatehouse on golgi (owns DNS IP — long-term sovereign TLS)"
+p4 = "Re-enable dark-forest once all LAN peers have bearDog security providers"
+p5 = "bearDog gatehouse on golgi (long-term sovereign TLS)"
