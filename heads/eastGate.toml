@@ -1,17 +1,17 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: eastGate | Updated: 2026-07-05T13:56:00Z
+# Gate: eastGate | Updated: 2026-07-05T14:25:00Z
 #
 # This file is owned exclusively by eastGate. No other gate writes here.
 # Updated automatically after each cascade or manually by overwatch.
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-05T13:56:00Z"
+updated = "2026-07-05T14:25:00Z"
 
 [heads]
 primalSpring = "cac3eeca6b9396543926a627eb4bdb77a9642baf"
-songBird = "906fe886bc8c293bae201e501928bfe5962a8069"
-bearDog = "136857739d7c00c2f189747f9fc31f307002c740"
+songBird = "16435b36"
+bearDog = "2ac2bd389"
 skunkBat = "e7eaa5d0006208912109b25e390fb7eac05ceee4"
 cellMembrane = "0704132e077469814313c1e48137538794869df3"
 biomeOS = "1ce2a4c5be7c58b9cb2fa2be12a99329becb6485"
@@ -21,7 +21,7 @@ sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
 toadStool = "1ec374980a3886f1bddc232f4360be3c81a356f2"
 barraCuda = "b2618db0511100a2112196635c037c641649d927"
 coralReef = "3078d0b6d6b99c3df5f404d25812f930a4b0fc3b"
-wateringHole = "d0d935a"
+wateringHole = "90d7a17"
 sporePrint = "dc7e88e6cff7608f060e0e43d88a9137e2b354a1"
 loamSpine = "e68873d2c3092f6947f98655b7adb62d905178d8"
 squirrel = "bb3a91d93970a01fbec9fbbb0509dfc9f2943aaf"
