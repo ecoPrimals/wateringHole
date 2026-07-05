@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 132g
 
-**Date**: Jul 5, 2026 09:42 EDT | **Wave**: 132g | **From**: eastGate overwatch
-**Posture**: **GATEHOUSE ACTIVE** — bearDog 16430d90c: gatehouse mode (:443 TLS + :80 ACME/redirect). Caddy fully replaceable. Sovereign CI triggered. sporeGate cutover FRAGO dispatched.
+**Date**: Jul 5, 2026 10:23 EDT | **Wave**: 132g | **From**: eastGate overwatch
+**Posture**: **DRAWBRIDGE SHIPPED** — songBird 16435b36 drawbridge HTTP listener (:7780). bearDog 2ac2bd389 upstream fix. Architecture gap closed. Both on Forgejo, CI triggered.
 
 ---
 
@@ -9,7 +9,7 @@
 
 You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals coordinated via WireGuard overlay + Forgejo.
 
-**Wave 132g status**: **Gatehouse/Darkforest architecture shipped.** bearDog IS the sovereign gateway.
+**Wave 132g status**: **Gatehouse/Darkforest architecture complete.** bearDog IS the gateway. songBird IS the drawbridge.
 
 **RESOLVED (cumulative)**:
 1. ~~bearDog `CryptoProvider` missing~~ → **FIXED** (7e932000f + 136857739 defensive).
@@ -18,10 +18,13 @@ You are an agent on a gate in the ecoPrimals ecosystem. This is the single sourc
 4. ~~bearDog ACME EdDSA rejection~~ → **FIXED** (136857739): ES256 (P-256) signing.
 5. ~~Port 80 conflict~~ → **SOLVED** (16430d90c): Http01Solver now dual-purpose (ACME + HTTPS redirect). No Caddy needed.
 6. ~~No gatehouse mode~~ → **SHIPPED** (16430d90c): `BEARDOG_GATEHOUSE_MODE=true` activates :443 + :80 unified.
+7. ~~HTTP-to-IPC bridge gap~~ → **SHIPPED** (songBird 16435b36): drawbridge HTTP listener on :7780. Accepts plain HTTP, routes via CapabilityProxyRouter to backends.
+8. ~~bearDog upstream default wrong~~ → **FIXED** (2ac2bd389): default upstream 7700→7780 (drawbridge, not federation).
 
 **REMAINING**:
-7. **sporeGate: cutover** — stop Caddy, deploy bearDog 16430d90c, activate gatehouse mode. FRAGO dispatched.
-8. **ironGate: deploy JupyterHub** → still NOT STARTED. E2E blocker.
+9. **sporeGate: cutover** — deploy bearDog 2ac2bd389 + songBird 16435b36, activate gatehouse + drawbridge. Updated FRAGO below.
+10. **DNS**: `lab.primals.eco` points to golgi (157.230.3.183), not sporeGate. Either update DNS or use golgi as front proxy to sporeGate.
+11. **ironGate: deploy JupyterHub** → still NOT STARTED. E2E blocker.
 
 **Architecture standard published**: `GATEHOUSE_DARKFOREST_STANDARD.md` — defines gatehouse (known entry), darkforest (invisible mesh), drawbridge (songBird http.proxy crossing point).
 
@@ -30,13 +33,15 @@ You are an agent on a gate in the ecoPrimals ecosystem. This is the single sourc
 ## flockGate — bearDog / songBird / skunkBat
 
 **Role**: Tower atomic home (songBird, bearDog, skunkBat development)
-**Status**: All debt resolved. **Gatehouse mode shipped (16430d90c). No blocking work remaining.**
+**Status**: All debt resolved. **Drawbridge + gatehouse upstream fix shipped. No blocking work.**
 
 ### RESOLVED (Wave 132f-g)
 
 - **bearDog 7e932000f**: CryptoProvider init + BindMode::Auto platform detection
 - **bearDog 136857739**: ES256 signing (Ed25519 → ECDSA P-256), defensive CryptoProvider install, dep promotion
 - **bearDog 16430d90c**: Gatehouse mode (`BEARDOG_GATEHOUSE_MODE=true`), HTTP→HTTPS 301 redirect on :80, dual-purpose Http01Solver
+- **bearDog 2ac2bd389**: Gateway upstream default → :7780 (drawbridge, not federation :7700)
+- **songBird 16435b36**: Drawbridge HTTP listener (`serve_drawbridge`), path→capability routing, `SONGBIRD_DRAWBRIDGE_ROUTES` config
 - **skunkBat e7eaa5d**: `CapabilityClient` extraction (DRY ~120 lines), quarantine persistence, nested metrics. 541 tests.
 
 ### Ongoing
@@ -62,24 +67,50 @@ flockGate previously pushed only to GitHub, causing divergence. sporeGate pulls 
 ## sporeGate — cellMembrane / Sovereign CI / Gateway Deploy
 
 **Role**: Public entry point, builder, gateway host
-**Status**: **GATEHOUSE CUTOVER READY.** bearDog 16430d90c on Forgejo, Sovereign CI building. FRAGO dispatched.
+**Status**: **CUTOVER READY (v2).** Architecture gap solved. New binaries building on Sovereign CI.
 
 ### Current State
 
-- **songBird 906fe886**: Deployed, running, `http.proxy` routes LIVE via `SONGBIRD_PROXY_ROUTES`
-- **bearDog 16430d90c (on Forgejo, building)**: Gatehouse mode + ES256 + CryptoProvider + BindMode::Auto
-- **Caddy**: Still running — **RETIRE after bearDog deploy** (see FRAGO)
+- **songBird 16435b36 (on Forgejo, building)**: Drawbridge HTTP listener (:7780) — accepts HTTP, routes via CapabilityProxyRouter
+- **bearDog 2ac2bd389 (on Forgejo, building)**: Gatehouse mode + upstream default → :7780 (drawbridge)
+- **Caddy**: RETIRED (already stopped + disabled by sporeGate team)
+- **golgi Caddy**: Currently proxying `lab.primals.eco` → `10.13.37.2:7700` (wrong port — update to :7780)
 - **cellMembrane**: 930 tests, gateway refactored, `relay.config` + `relay.status` commands
 - **golgi relay**: ✅ bidirectional relay DEPLOYED + LIVE (39/39 parity, membrane 0704132)
 
-### NEXT: Gatehouse Cutover (FRAGO dispatched)
+### NEXT: Cutover v2 (Updated FRAGO)
 
-See `FRAGO_SPOREGATE_GATEHOUSE_CUTOVER_WAVE132G_JUL05_2026.md` for exact steps:
-1. Deploy bearDog 16430d90c from Sovereign CI
-2. Stop + disable Caddy
-3. Start bearDog with `BEARDOG_GATEHOUSE_MODE=true`
-4. Validate: ACME cert + HTTP redirect + HTTPS proxy
-5. Caddy permanently retired
+**DNS issue identified**: `lab.primals.eco` → 157.230.3.183 (golgi VPS). ACME HTTP-01 needs port 80 on the machine the DNS points to.
+
+**Option A: golgi as front proxy (quick, working now)**
+```bash
+# On golgi — update Caddy proxy target to drawbridge port
+# lab.primals.eco:443 → TLS terminate → proxy 10.13.37.2:7780 (songBird drawbridge on sporeGate)
+# golgi holds the cert (existing), songBird drawbridge routes to backends
+```
+
+**Option B: Update DNS to sporeGate public IP (sovereign)**
+```bash
+# Update Cloudflare: lab.primals.eco → sporeGate public IP
+# Then bearDog ACME issues cert directly
+# Requires CF_API_TOKEN or DNS-01 challenge, OR sporeGate must have a public IP
+```
+
+**Option C: golgi runs bearDog gatehouse (DNS stays)**
+```bash
+# bearDog on golgi for TLS + ACME (it's the IP DNS points to)
+# Proxies to sporeGate:7780 via WireGuard overlay (10.13.37.2:7780)
+# golgi IS the gatehouse, sporeGate IS the drawbridge
+```
+
+### Deployment Steps (once binaries built)
+
+1. Deploy songBird 16435b36 on sporeGate
+2. Configure: `SONGBIRD_DRAWBRIDGE_ADDR=127.0.0.1:7780` + `SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter`
+3. Deploy bearDog 2ac2bd389 on sporeGate (or golgi per DNS decision)
+4. Configure: `BEARDOG_GATEHOUSE_MODE=true` + `BEARDOG_GATEWAY_UPSTREAM=127.0.0.1:7780`
+5. Update golgi Caddy: proxy target → `10.13.37.2:7780` (temporary until DNS resolved)
+6. Validate: `curl -I http://lab.primals.eco` → 301 (via golgi) or via bearDog directly
 
 ### Sovereign CI Note
 
@@ -208,21 +239,28 @@ Provision Cloudflare API token on golgi `tower.env`. One-time action that unlock
 ✅ flockGate: bearDog CryptoProvider + BindMode::Auto FIXED (7e932000f)
 ✅ flockGate: bearDog ES256 signing FIXED (136857739)
 ✅ flockGate: bearDog GATEHOUSE MODE shipped (16430d90c) — :443 TLS + :80 ACME/redirect
+✅ eastGate: songBird DRAWBRIDGE shipped (16435b36) — :7780 HTTP→capability routing
+✅ eastGate: bearDog upstream fix (2ac2bd389) — default → :7780 not :7700
 ✅ golgi: bidirectional relay DEPLOYED (39/39 parity, membrane 0704132)
 ✅ eastGate: GATEHOUSE_DARKFOREST_STANDARD.md published
+✅ sporeGate: Caddy RETIRED (stopped + disabled)
 
-NEXT:
-sporeGate: deploy bearDog 16430d90c from Sovereign CI (building now)
-    → stop Caddy (permanently)
-        → start bearDog BEARDOG_GATEHOUSE_MODE=true
-            → ACME cert auto-issues (port 80 FREE)
-                → TOWER HTTP FULLY SOVEREIGN ← imminent
+NEXT (all operational — no code fixes remaining):
+DNS decision: lab.primals.eco currently → golgi (157.230.3.183)
+    Option A: golgi proxies to sporeGate:7780 (fast, working NOW)
+    Option B: Update DNS to sporeGate public IP (sovereign)
+    Option C: golgi IS the gatehouse (bearDog on golgi)
+
+sporeGate: deploy songBird 16435b36 + bearDog 2ac2bd389
+    → configure SONGBIRD_DRAWBRIDGE_ROUTES + BEARDOG_GATEHOUSE_MODE
+        → songBird drawbridge + bearDog gateway LIVE
+            → TOWER HTTP FULLY SOVEREIGN
 
 ironGate: deploy JupyterHub (parallel, no dependency on above)
-    → register jupyter capability
-        → E2E: browser → bearDog → songBird → ironGate → JupyterHub
+    → register jupyter capability via SONGBIRD_PROXY_ROUTES
+        → E2E: browser → bearDog → drawbridge → ironGate → JupyterHub
 ```
 
 ---
 
-*Wave 132g — Gatehouse/Darkforest architecture live. Tower atomic IS the castle wall. Caddy retirement imminent. Only operational deployment remains.*
+*Wave 132g — Full Gatehouse/Darkforest stack shipped. Only deployment + DNS remain. No code blockers.*
