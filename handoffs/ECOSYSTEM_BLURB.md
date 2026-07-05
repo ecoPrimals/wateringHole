@@ -10,7 +10,7 @@
 
 You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals (NUCLEUS) coordinated via WireGuard overlay + Forgejo.
 
-**Wave 132e milestone**: All 4 Wave 132c handoffs substantially actioned. **flockGate** (code-complete): songBird `http.proxy` + `ReverseProxyConfig` TOML routes + `capability_router()` getter wired, bearDog ACME gateway + const_oid fix, skunkBat dispatch security split. **eastGate** (code-complete): petalTongue `DataService → mesh.peers` wired, `/api/mesh-peers` endpoint, sporePrint living topology page + dashboard, 363 tests. sporePrint v0.3.1 living topology page. **sporeGate** (prepped): cellMembrane 922 tests, gateway deployment tooling ready, awaiting binaries. **ironGate** (pending): JupyterHub + capability registration not yet started.
+**Wave 132e milestone**: All 4 Wave 132c handoffs substantially actioned. **flockGate** (code-complete): songBird `http.proxy` + `ReverseProxyConfig` TOML routes + `capability_router()` getter wired, bearDog ACME gateway + const_oid fix, skunkBat dispatch security split. **eastGate** (code-complete): petalTongue `DataService → mesh.peers` wired, `/api/mesh-peers` endpoint, sporePrint living topology page + dashboard, 363 tests. sporePrint v0.3.1 living topology page. **sporeGate** (prepped): cellMembrane 926 tests, bidirectional relay + gateway deployment tooling ready, awaiting binaries. **ironGate** (pending): JupyterHub + capability registration not yet started.
 
 ---
 
@@ -220,7 +220,7 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 
 | Repo | Tests | Status |
 |------|-------|--------|
-| cellMembrane | 922 | Evolved (deploy.check + songbird TOML config gen) |
+| cellMembrane | 926 | Evolved (bidirectional relay + deploy tooling) |
 | primalSpring | 1,060 | Stable (KNOWN_DEBT=0) |
 | barraCuda | 4,619 | Stable |
 | coralReef | 3,631 | Stable |
@@ -254,7 +254,7 @@ Internet → Cloudflare (outer membrane, DDoS, TLS edge)
 - **skunkBat security**: `security.advisory` composable IPC + `dispatch_security.rs` split + config hydration + test consolidation
 - **petalTongue living topology**: `DataService → mesh.peers` wired, `/api/mesh-peers` endpoint (PeerStatus, transport, latency, caps), `/api/sporeprint` endpoint, dashboard mesh panel + routing flow diagram, 363 tests
 - **sporePrint**: v0.3.1 living topology page + v3.1.0 IPC consolidation + toml 1.x upgrade, 220 tests
-- **cellMembrane**: 922 tests, gateway deployment tooling, deploy.check, songbird TOML config gen
+- **cellMembrane**: 926 tests, bidirectional relay (absorb + parity), gateway deployment tooling
 - **grapheneGate LIVE**: Pixel 8a, Tower running via ADB, 14/14 binaries, dual-role tether
 
 ---
