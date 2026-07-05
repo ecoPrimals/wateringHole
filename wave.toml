@@ -10,9 +10,9 @@
 
 [wave]
 id = 132
-sub = "g"
+sub = "h"
 date = "2026-07-05"
-posture = "FULL MESH READY — bearDog Android fix (6ef436864) unblocks grapheneGate. pepti warehouse LIVE. Drawbridge LIVE. Remaining: JupyterHub + mesh.init on all gates."
+posture = "E2E LIVE — MESH PEERING. Full HTTP path validated. Pepti complete. Remaining: mesh trust config + WAN/mobile peering."
 publisher = "eastGate-overwatch"
 
 [gates]
