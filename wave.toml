@@ -10,9 +10,9 @@
 
 [wave]
 id = 132
-sub = "f"
+sub = "g"
 date = "2026-07-05"
-posture = "INTEGRATION READY — P1 debt RESOLVED (bearDog 7e932000f, golgi relay LIVE). sporeGate rebuilds bearDog → ACME activation. ironGate JupyterHub parallel."
+posture = "ACME READY — bearDog 136857739 ES256 fix on Forgejo, CI triggered. Port 80 scheduling decision (Caddy holds it). ironGate JupyterHub parallel."
 publisher = "eastGate-overwatch"
 
 [gates]

@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 132f
+# ecoPrimals Ecosystem Blurb — Wave 132g
 
-**Date**: Jul 5, 2026 09:03 EDT | **Wave**: 132f | **From**: eastGate overwatch
-**Posture**: **INTEGRATION READY** — Both P1 bearDog fixes merged (7e932000f). Bidirectional relay deployed + live on golgi (39/39 parity). sporeGate needs to rebuild bearDog and activate ACME gateway. ironGate JupyterHub remains parallel blocker.
+**Date**: Jul 5, 2026 09:31 EDT | **Wave**: 132g | **From**: eastGate overwatch
+**Posture**: **ACME READY** — bearDog ES256 signing fix (136857739) pushed to Forgejo. Sovereign CI triggered. ACME gateway code-correct. Remaining scheduling item: port 80 conflict (Caddy holds :80, bearDog HTTP-01 needs it). ironGate JupyterHub still not started.
 
 ---
 
@@ -9,22 +9,23 @@
 
 You are an agent on a gate in the ecoPrimals ecosystem. This is the single source of truth for all teams. The ecosystem is a **sovereign, self-hosted mesh of compute gates** running 13 Rust primals coordinated via WireGuard overlay + Forgejo.
 
-**Wave 132f status**: All P1 debt **RESOLVED** by gate teams within 1 hour of dispatch.
+**Wave 132g status**: sporeGate evolved bearDog ACME — ES256 signing fix + defensive CryptoProvider.
 
-**RESOLVED this cycle**:
-1. ~~bearDog `CryptoProvider` missing~~ → **FIXED** (7e932000f): flockGate added `install_default()` to `main()`.
+**RESOLVED (cumulative)**:
+1. ~~bearDog `CryptoProvider` missing~~ → **FIXED** (7e932000f + 136857739 defensive).
 2. ~~bearDog `BindMode::Auto`~~ → **FIXED** (7e932000f): Platform-aware detection. grapheneGate unblocked.
-3. ~~Bidirectional relay not deployed~~ → **DEPLOYED** on golgi. 39/39 repos at parity.
+3. ~~Bidirectional relay not deployed~~ → **DEPLOYED** on golgi (membrane 0704132). 39/39 parity.
+4. ~~bearDog ACME EdDSA rejection~~ → **FIXED** (136857739): ES256 (P-256) signing. Let's Encrypt accepts JWS.
+5. ~~rustls-rustcrypto dev-dep only~~ → **FIXED** (136857739): promoted to regular dep in beardog-acme.
 
 **REMAINING**:
-4. **sporeGate: rebuild bearDog** (7e932000f on Forgejo) → deploy → activate ACME :443.
-5. **ironGate: deploy JupyterHub** → still NOT STARTED. E2E blocker.
+6. **Port 80 conflict**: Caddy holds :80, bearDog HTTP-01 solver needs it. **Scheduling decision** — stop Caddy HTTP listener temporarily OR switch to DNS-01 challenge. Not a code fix.
+7. **ironGate: deploy JupyterHub** → still NOT STARTED. E2E blocker.
 
-**New evolution absorbed**:
-- skunkBat e7eaa5d: `CapabilityClient` extraction, quarantine persistence, nested metrics. 541 tests.
-- primalSpring 58d4167: `s_beardog_startup_contract` scenario (115 total), relay registry. 1079 tests.
-- cellMembrane 0704132: gateway config.rs extracted, `relay.config` + `relay.status` commands. 930 tests.
-- petalTongue 0f8da6b: deep debt — clippy zero, main.rs extract, deny.toml evolve.
+**New evolution absorbed this cascade**:
+- bearDog 136857739: ES256 signing (jws.rs + account.rs), defensive CryptoProvider, dep promotion. Pushed to Forgejo, Sovereign CI triggered.
+- primalSpring 49e760d: `s_compute_hosting_contract` scenario (116 total, 1080 tests) — validates JupyterHub E2E path, jupyter registry domain, Tower gateway composition.
+- golgi: membrane 0704132 deployed, `relay.config` shows both remotes, bidirectional cascade timer.
 
 **Architecture**: sporeGate is public entry (`lab.primals.eco`). Caddy → songBird → mesh → compute backends (LAN: ironGate/strandGate, WAN: flockGate via golgi relay). songBird IS the port solver — no external ports exposed.
 
@@ -33,12 +34,13 @@ You are an agent on a gate in the ecoPrimals ecosystem. This is the single sourc
 ## flockGate — bearDog / songBird / skunkBat
 
 **Role**: Tower atomic home (songBird, bearDog, skunkBat development)
-**Status**: All P1 debt RESOLVED. skunkBat evolved. **No blocking work.**
+**Status**: All debt resolved. **No blocking work remaining.**
 
-### RESOLVED (Wave 132f)
+### RESOLVED (Wave 132f-g)
 
-- **bearDog 7e932000f**: CryptoProvider init + BindMode::Auto — both P1 fixes landed, pushed to both remotes.
-- **skunkBat e7eaa5d**: `CapabilityClient` extraction (DRY ~120 lines), quarantine persistence (`quarantine.json`), nested `SecurityMetrics`. 541 tests.
+- **bearDog 7e932000f**: CryptoProvider init + BindMode::Auto platform detection
+- **bearDog 136857739**: ES256 signing (Ed25519 → ECDSA P-256), defensive CryptoProvider install, dep promotion
+- **skunkBat e7eaa5d**: `CapabilityClient` extraction (DRY ~120 lines), quarantine persistence, nested metrics. 541 tests.
 
 ### Ongoing
 
@@ -63,25 +65,38 @@ flockGate previously pushed only to GitHub, causing divergence. sporeGate pulls 
 ## sporeGate — cellMembrane / Sovereign CI / Gateway Deploy
 
 **Role**: Public entry point, builder, gateway host
-**Status**: songBird http.proxy LIVE. **bearDog P1 fix on Forgejo — ready to rebuild + activate ACME.**
+**Status**: songBird http.proxy LIVE. **bearDog ES256 fix (136857739) on Forgejo — CI triggered. Port 80 scheduling decision needed.**
 
 ### Current State
 
 - **songBird 906fe886**: Deployed, running, `http.proxy` routes LIVE via `SONGBIRD_PROXY_ROUTES`
-- **bearDog ff18b17f5 (stale)**: Deployed but panics on ACME. **7e932000f now on Forgejo** — fix is ready.
-- **Caddy**: Remains production TLS terminator until new bearDog deployed
+- **bearDog 136857739 (on Forgejo)**: ES256 signing + defensive CryptoProvider. Sovereign CI triggered.
+- **Caddy**: Production TLS (:443) + HTTP (:80). **Holds port 80** that bearDog HTTP-01 solver needs.
 - **cellMembrane**: 930 tests, gateway refactored, `relay.config` + `relay.status` commands
-- **golgi relay**: ✅ bidirectional relay DEPLOYED + LIVE (39/39 parity, 15min timer)
+- **golgi relay**: ✅ bidirectional relay DEPLOYED + LIVE (39/39 parity, 15min timer, membrane 0704132)
 
-### NEXT: Rebuild + Deploy bearDog 7e932000f → ACME Activation
+### NEXT: ACME Activation — Port 80 Decision
 
-bearDog P1 fix is on Forgejo (7e932000f). Sovereign CI should trigger (or manually kick):
-1. Build bearDog from Forgejo HEAD (7e932000f) — includes CryptoProvider + BindMode::Auto
-2. Deploy new binary: `/usr/local/bin/beardog`
-3. `beardog server --gateway` on :443
-4. Validate ACME cert issuance for `lab.primals.eco`
-5. Begin 7-day shadow period (Caddy + bearDog :443 in parallel)
-6. Retire Caddy after shadow passes
+bearDog ACME code is now correct (ES256, defensive CryptoProvider). The one remaining issue is **port 80**:
+
+**Option A: Temporarily stop Caddy's HTTP listener**
+```bash
+# In Caddyfile, comment out HTTP→HTTPS redirect
+# Or: caddy stop, start bearDog ACME, cert acquired, caddy start
+```
+
+**Option B: Switch to DNS-01 challenge (no port 80 needed)**
+- Requires `CF_API_TOKEN` on sporeGate (same token needed on golgi anyway)
+- bearDog uses Cloudflare DNS API to prove domain ownership
+- More robust long-term (no port conflict ever)
+
+**Option C: Shadow cutover** (recommended)
+1. Build bearDog 136857739, deploy
+2. Stop Caddy entirely (brief downtime ~30s)
+3. Start bearDog ACME on :80 + :443
+4. Cert issues via HTTP-01
+5. If fails → restart Caddy (rollback)
+6. If succeeds → bearDog owns both ports, Caddy retired
 
 ### Sovereign CI Note
 
@@ -137,15 +152,14 @@ EOF
 ## eastGate — Overwatch / primalSpring / petalTongue
 
 **Role**: Coordination hub, primalSpring validation, petalTongue/sporePrint
-**Status**: All work shipped. primalSpring validating Tower contracts. Overwatch monitoring.
+**Status**: primalSpring validating Tower + compute contracts. All overwatch items current.
 
 ### Completed This Wave
 
-- primalSpring 58d4167: `s_beardog_startup_contract` (115 scenarios, 1079 tests) — validates CryptoProvider init, BindMode::Auto, TLS ownership, Tower startup ordering
-- primalSpring: relay registry added (`[relay]` domain → cellMembrane methods), LAN bypass SSOT (TOML-derived zones)
-- petalTongue 0f8da6b: deep debt — clippy zero warnings, main.rs extract, deny.toml evolve
-- sporePrint: v0.3.1 living topology page
-- ~~bearDog BindMode::Auto fix~~ → absorbed by flockGate (7e932000f)
+- primalSpring 49e760d: `s_compute_hosting_contract` (116 scenarios, 1080 tests) — validates JupyterHub E2E path, jupyter registry domain (ironGate affinity), Tower composition gateway
+- primalSpring 58d4167: `s_beardog_startup_contract`, relay registry, LAN bypass SSOT from TOML
+- petalTongue 0f8da6b: deep debt — clippy zero, main.rs extract, deny.toml evolve
+- ~~bearDog BindMode::Auto fix~~ → absorbed upstream by flockGate
 
 ### Pending
 
@@ -191,9 +205,9 @@ Provision Cloudflare API token on golgi `tower.env`. One-time action that unlock
 | Repo | Tests | Status |
 |------|-------|--------|
 | cellMembrane | 930 | Evolved (gateway refactor + relay.config + relay.status) |
-| primalSpring | 1,079 | Evolved (115 scenarios, s_beardog_startup_contract) |
+| primalSpring | 1,080 | Evolved (116 scenarios, compute_hosting_contract) |
 | songBird | 8,929+ | LIVE on sporeGate (http.proxy routing) |
-| bearDog | 13,866+ | ✅ P1 FIXED (7e932000f) — ready for rebuild |
+| bearDog | 13,866+ | ✅ ACME-ready (136857739: ES256 + CryptoProvider + BindMode) |
 | skunkBat | 541 | Evolved (CapabilityClient, quarantine persist, nested metrics) |
 | petalTongue | 363+ | Evolved (deep debt, clippy zero) |
 | sporePrint | 220 | Evolved (v0.3.1 living topology) |
@@ -209,13 +223,14 @@ Provision Cloudflare API token on golgi `tower.env`. One-time action that unlock
 
 ```
 ✅ flockGate: bearDog CryptoProvider + BindMode::Auto FIXED (7e932000f)
-✅ golgi: bidirectional relay DEPLOYED (39/39 parity)
+✅ flockGate: bearDog ES256 signing FIXED (136857739)
+✅ golgi: bidirectional relay DEPLOYED (39/39 parity, membrane 0704132)
 
 NEXT:
-sporeGate: Sovereign CI rebuild bearDog 7e932000f
+sporeGate: build bearDog 136857739 from Sovereign CI
     → deploy to sporeGate
-        → ACME gateway :443 activates
-            → 7-day shadow → Caddy retirement
+        → PORT 80 DECISION (stop Caddy or DNS-01)
+            → ACME cert issuance for lab.primals.eco
                 → TOWER HTTP FULLY SOVEREIGN
 
 ironGate: deploy JupyterHub (parallel, no dependency on above)
@@ -225,4 +240,4 @@ ironGate: deploy JupyterHub (parallel, no dependency on above)
 
 ---
 
-*Wave 132f — P1 debt resolved. Integration path: sporeGate rebuilds bearDog, ironGate deploys JupyterHub. Both can proceed independently.*
+*Wave 132g — ACME code-correct. Remaining items are operational (port scheduling + JupyterHub deploy), not code fixes.*
