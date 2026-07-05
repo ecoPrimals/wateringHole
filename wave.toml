@@ -12,7 +12,7 @@
 id = 132
 sub = "g"
 date = "2026-07-05"
-posture = "ACME READY — bearDog 136857739 ES256 fix on Forgejo, CI triggered. Port 80 scheduling decision (Caddy holds it). ironGate JupyterHub parallel."
+posture = "GATEHOUSE ACTIVE — bearDog 16430d90c shipped: gatehouse mode (:443 TLS + :80 redirect). Caddy replaceable. Standard published. sporeGate cutover FRAGO dispatched. ironGate JupyterHub parallel."
 publisher = "eastGate-overwatch"
 
 [gates]
