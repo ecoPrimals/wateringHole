@@ -102,7 +102,7 @@ flockGate previously pushed only to GitHub, causing divergence. sporeGate pulls 
 - **songBird 906fe886**: Deployed, running, `http.proxy` routes configured via `SONGBIRD_PROXY_ROUTES`
 - **bearDog ff18b17f5**: Deployed but ACME gateway panics (see flockGate P1 above)
 - **Caddy**: Remains production TLS terminator until bearDog ACME works
-- **cellMembrane**: 926 tests, bidirectional relay code merged (fce96e2)
+- **cellMembrane**: 930 tests, gateway refactored, relay.config added (Wave 132f)
 
 ### P2: Deploy bidirectional relay to golgi
 
@@ -229,7 +229,7 @@ Provision Cloudflare API token on golgi `tower.env`. One-time action that unlock
 
 | Repo | Tests | Status |
 |------|-------|--------|
-| cellMembrane | 926 | Evolved (bidirectional relay) |
+| cellMembrane | 930 | Evolved (gateway refactor + relay.config) |
 | primalSpring | 1,078 | Evolved (114 scenarios) |
 | songBird | 8,929+ | LIVE on sporeGate |
 | bearDog | 13,866+ | **DEBT** (2 P1 fixes needed) |
