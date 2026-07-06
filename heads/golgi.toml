@@ -1,12 +1,12 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: golgi | Updated: 2026-07-06T14:51:59Z
+# Gate: golgi | Updated: 2026-07-06T14:53:15Z
 #
 # This file is owned exclusively by golgi (VPS). No other gate writes here.
 # golgi runs the quorum timer (every 15min) and updates this file after cascade.
 
 [meta]
 gate = "golgi"
-updated = "2026-07-06T14:51:59Z"
+updated = "2026-07-06T14:53:15Z"
 
 [heads]
 barraCuda = "b2618db0511100a2112196635c037c641649d927"
@@ -23,6 +23,6 @@ squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
 sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
 toadStool = "82a4209f6e2b17c10be00ded6c4e70a84a893b0c"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
-wateringHole = "1f7771ff1c1cf9aeb94da035b5c3a9bf4d75cfc3"
+wateringHole = "f2b81abf33ffe367b44e7fd07e67bc0a307801d9"
 cellMembrane = "c93344c22d66da473465861b6eb625a9275de6c7"
 projectNUCLEUS = "ce928f0f97e0751b5db9f465952ee74fb70599ab"
