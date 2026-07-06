@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 133a
+# ecoPrimals Ecosystem Blurb — Wave 133a (afternoon refresh)
 
-**Date**: Jul 6, 2026 10:36 EDT | **Wave**: 133a | **From**: eastGate overwatch
-**Posture**: **ENMESH + HARDEN + VALIDATE** — All primal code shipped. Pepti-first deployment enforced. Omada 10G backbone LIVE (house 1 ↔ house 2). Gates coming online as hardware allows.
+**Date**: Jul 6, 2026 15:13 EDT | **Wave**: 133a | **From**: eastGate overwatch
+**Posture**: **ENMESH + HARDEN + VALIDATE** — 30/30 ecobins in pepti. grapheneGate 12/13 LIVE. CI divergences surfaced. sporePrint evolving. DNS cutover path mapped.
 
 ---
 
@@ -10,162 +10,147 @@
 ```
 LIVE:
   ✅ E2E HTTP: lab.primals.eco → 200 (JupyterHub 5.4.5)
-  ✅ LAN mesh: eastGate ↔ ironGate (Omada 10G backbone, house 1 ↔ house 2)
+  ✅ LAN mesh: eastGate ↔ ironGate (Omada 10G backbone)
   ✅ WAN mesh: flockGate via golgi relay (2 peers)
-  ✅ Mobile: grapheneGate Tower LIVE (bearDog+songBird+skunkBat via ADB)
-  ✅ Pepti warehouse: 15/15 binaries per arch — SOLE deployment source
-  ✅ Relay: golgi bidirectional, 39/39 parity, 15min timer
-  ✅ 13/13 primals STANDBY — zero debt
-  ✅ primalSpring: 1096 pass, 0 fail, 123 scenarios
+  ✅ Mobile: grapheneGate 12/13 primals LIVE via ADB (nestGate+coralReef: UDS fatal)
+  ✅ Pepti warehouse: 30/30 ecobins (15 x86_64 + 15 aarch64), checksums verified
+  ✅ Relay: golgi synced, 17 repos shallow-cloned, disk 75%
+  ✅ 13/13 primals STANDBY — zero code debt
   ✅ Sovereignty: S1-S4 ALL GRADUATED on inner membrane
+  ⚠️ primalSpring: 1093 pass, 4 fail (SHADER_F64 manifest gap), 2 ignored
 
-PHYSICAL TOPOLOGY:
-  House 1:  eastGate (orchestrator, neuromorphic, SFP+ to Omada)
-            ─── Omada 10G backbone ───
-  House 2:  ironGate (basement HPC, SFP+ to Omada)
-            strandGate (Dual EPYC, ALIVE .103, SSH pending)
-            northGate, southGate, westGate, swiftGate, kinGate
-            biomeGate — many already SFP+ into Omada
-  Remote:   flockGate (WAN via golgi relay)
-  VPS:      golgi (peptidoglycan — built by sporeGate)
-  Mobile:   grapheneGate (Pixel 8a, ADB)
-
-MESHED NOW:
-  eastGate ←✅→ ironGate      (LAN, 10G Omada backbone)
+MESHED:
+  eastGate ←✅→ ironGate      (LAN, 10G Omada)
   eastGate ←✅→ golgi         (WG relay)
   flockGate ←✅→ golgi        (WAN, 2 peers)
-  grapheneGate ←✅→ eastGate  (ADB, Tower running)
-
-MESH CANDIDATES (house 2, SFP+ ready, bring online as available):
-  strandGate: ALIVE .103 — needs SSH key only
-  northGate, southGate, others: OS + pepti pull + mesh.init
+  grapheneGate ←✅→ eastGate  (ADB, 12/13 primals)
+  strandGate: ALIVE .103       (SSH pending)
 ```
 
 ---
 
-## WAVE 133 FOCUS: Enmesh → Harden → Validate
+## EVOLUTION ABSORBED THIS WAVE
 
-**The code is done. The architecture is proven. The backbone is live.**
-
-Wave 133 is about three things:
-
-1. **ENMESH** — Bring available house 2 gates into the mesh. Each gate that comes online pulls from pepti and runs `mesh.init`. The 10G Omada backbone is already connecting the houses. Many gates already have SFP+ — enrollment is: SSH + pepti pull + mesh.init.
-
-2. **HARDEN** — Re-enable dark-forest once enrolled gates have bearDog. Validate BTSP enforcement. Confirm security posture meets DARK_FOREST_GLACIAL_GATE_STANDARD.
-
-3. **VALIDATE** — Prove post-primordial deployment model works at scale. Every gate pulls exclusively from pepti. No local builds. Cross-gate `capability.call` works over the mesh. `mesh.peers` shows all enrolled gates. The deployment is deterministic and pepti-authoritative.
-
-**Constraint**: Hardware availability at house 2 is the gating factor. Gates come online as the user physically provisions them. Overwatch optimizes: prioritize highest-value gates, parallelize where possible, never block on a single gate.
-
----
-
-## FOR: All Gate Enrollments (pepti-first protocol)
-
-Every new gate follows this enrollment sequence:
-
-```bash
-# 1. SSH access (physical or key deploy)
-ssh <gate>
-
-# 2. Pull binaries from pepti (SOLE source — no local builds)
-wget https://membrane.primals.eco/depot/x86_64-unknown-linux-musl/songbird
-wget https://membrane.primals.eco/depot/x86_64-unknown-linux-musl/beardog
-# ... all 14 primals + nucleus_launcher
-
-# 3. Deploy + start tower composition
-chmod +x songbird beardog skunkbat
-# Start via nucleus_launcher or systemd
-
-# 4. Mesh enrollment
-mesh.init --bootstrap 10.13.37.2:7700
-# Verify: mesh.peers shows existing gates
-# Verify: capability.call routes correctly
-
-# 5. Validation
-health.liveness → {"status":"alive"}
-mesh.peers → peer_count >= 1
-capability.call → routes through mesh
-```
-
-Pepti is the SOLE deployment source. If a binary isn't in pepti, it doesn't deploy. If a gate builds locally, that's a violation of post-primordial standard.
+| What | Commit | Impact |
+|------|--------|--------|
+| grapheneGate full NUCLEUS | AAR filed | 12/13 primals on Pixel 8a. nestGate + coralReef UDS-fatal on Android. |
+| Sovereign CI 30/30 ecobins | AAR filed | Pepti confirmed complete. 8 CI divergences flagged. |
+| biomeOS CI-DIV-01 fix | `f77886d1` | `default-members` fixed — `cargo build --bin biomeos` works. **RESOLVED.** |
+| primalSpring 124th scenario | `9154ea4` | WAN dispatch validation scenario added. 1099 total tests. |
+| sporePrint deep debt sprint | `89606fd` | Nucleus refactor, profile-driven probes, sovereign AAR. 226 pages. |
+| sporePrint content evolution | `84b5d06`+ | Living systems, sovereign CI pages, SVG diagrams, contact page. |
+| golgi disk + freshness | manual | Recovered 100%→75%. HEAD metadata published. Cascade timestamp bug found. |
+| sporePrint sovereignty AAR | handoff filed | DNS cutover path mapped. VPS NUCLEUS architecture defined. |
 
 ---
 
-## FOR: sporeGate team (CI + VPS builder)
+## REMAINING WORK BY TEAM
 
-**Context**: sporeGate builds for golgi (VPS). Owns Sovereign CI, pepti warehouse.
+### primalSpring team (parallel tab)
 
-**Your items**:
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| PS-F64-01 | **P1** | Add `SHADER_F64` / f64 precision to ecosystem manifest | Causes 4 test failures (shader pipeline + registry gate) |
+| PS-WAN-01 | P2 | Push 124th scenario to origin (ahead=2 after rebase reconciliation) | Local only |
 
-1. **Pepti depot freshness** (P1 — validate)
-   - Confirm all 15 binaries (14 primals + nucleus_launcher) are current in depot
-   - Both triples: `x86_64-unknown-linux-musl`, `aarch64-unknown-linux-musl`
-   - Verify `checksums.toml` matches published binaries
-
-2. **golgi relay metadata** (P2 — investigate)
-   - `heads/golgi.toml` last updated Jul 4 (2 days stale)
-   - Check: `ssh golgi "systemctl --user status membrane-temporal-cascade.timer"`
-   - If dead: restart. If alive: diagnose why HEAD metadata isn't publishing.
-
-3. **strandGate enrollment support** (P1 — when user has physical access)
-   - Alive at 192.168.4.103 (DHCP shifted from .100)
-   - User deploys SSH key physically → then pepti pull + mesh.init
+**Test suite**: 1093 pass, 4 fail, 2 ignored. Was 1096/0 — regression is manifest gap, not code.
 
 ---
 
-## FOR: flockGate team (WAN mesh validation)
+### biomeOS team
 
-**Context**: WAN validation via golgi relay. Peering DONE.
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| ~~CI-DIV-01~~ | ~~P2~~ | ~~`--package biomeos-unibin` needed~~ | **RESOLVED** (`f77886d1`) |
 
-**Your items**:
-
-1. **Cross-gate dispatch validation** (P1)
-   ```json
-   {"method":"capability.call","params":{"capability":"jupyter","method":"GET","path":"/hub/api"}}
-   ```
-   Expected: JupyterHub response routes through mesh relay
-
-2. **Latency characterization** (P2)
-   - Measure cross-gate `capability.call` RTT via golgi relay
-   - Baseline: ~15ms RTT NYC↔Michigan
-   - Document p50/p95/p99
+**Zero remaining items.** STANDBY.
 
 ---
 
-## FOR: eastGate (orchestrator + gate enrollment)
+### skunkBat team
 
-**Context**: You are house 1. You connect to house 2 via Omada 10G. You bring gates online as hardware allows.
-
-**Gate enrollment priority** (optimize for highest ecosystem value first):
-
-| Priority | Gate | Why | Blocker |
-|----------|------|-----|---------|
-| **P1** | strandGate | 64-core EPYC, 256GB ECC — highest raw compute | SSH key deploy (physical) |
-| **P2** | northGate | RTX 5090, 9950X3D — most capable single GPU | OS + pepti pull |
-| **P2** | westGate | 76TB ZFS — cold storage archive for mesh | Physical delivery + setup |
-| **P3** | southGate | 128GB RAM, dual boot, work card slots | OS + pepti pull |
-| **P3** | swiftGate | Mobile/compact — staging | OS + pepti pull |
-| **P3** | kinGate | Staging/utility | OS + pepti pull |
-
-**After each enrollment**: run primalSpring validation (`cargo test --lib`) to confirm mesh topology reflects new peer. Update `heads/eastGate.toml` with new gate's HEAD SHAs.
-
-**After 3+ LAN peers meshed**: re-enable dark-forest security. All LAN peers will have bearDog — the enrollment prerequisite is met.
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| CI-DIV-02 | P2 | `cargo build --bin skunkbat` fails without `--package skunk-bat-server` | Fix: add `skunk-bat-server` to `default-members` in workspace Cargo.toml |
 
 ---
 
-## Validation Checklist (post-primordial proof)
+### nestGate team
 
-This wave's success is measured by these assertions:
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| CI-DIV-03 | P2 | `.cargo/config.toml` requires `ld.lld` — diverges from ecosystem | Fix: converge on ecosystem linker strategy or document exception |
+| NESTGATE-ANDROID-01 | P2 | UDS fatal on Android (grapheneGate) | Needs Android socket adaptation |
 
-| # | Assertion | How to validate |
-|---|-----------|-----------------|
-| 1 | Every deployed gate runs binaries from pepti, not local builds | `sha256sum` matches `checksums.toml` on depot |
-| 2 | `mesh.peers` shows all enrolled gates | Query from any gate |
-| 3 | Cross-gate `capability.call` routes correctly | flockGate → golgi → ironGate JupyterHub |
-| 4 | `health.liveness` returns alive on all enrolled gates | Sweep from eastGate |
-| 5 | Dark-forest re-enabled after full LAN enrollment | DARK_FOREST_GLACIAL_GATE_STANDARD check |
-| 6 | No gate has local builds in `plasmidBin/primals/` | `ls` should be empty (just `.gitkeep`) |
-| 7 | Pepti checksums match across all deployed gates | `checksums.toml` parity |
+---
+
+### coralReef team
+
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| CORALREEF-ANDROID-01 | P2 | UDS fatal on Android (grapheneGate) | Needs Android socket adaptation |
+
+---
+
+### sweetGrass team
+
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| CI-DIV-06 | P3 | aarch64 binary larger than x86 (101% ratio — only primal where this happens) | Investigate conditional compilation in deps |
+
+---
+
+### cellMembrane / sporeGate team
+
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| CI-DIV-07 | **P1** | `temporal.cascade` doesn't commit freshness updates — root cause of golgi HEAD staleness | Fix `publish_freshness()`: re-read HEADs, bump timestamp, commit + push |
+| CI-DIV-08 | P2 | ecosystem_manifest.toml has no schema validation — caused manifest parse failures | Pre-commit hook or CI validation |
+| SP-DIV-04 | P2 | `temporal.cascade` doesn't rebuild Zola — VPS serves stale sporePrint | Post-cascade hook for `zola build` |
+| VPS-NUCLEUS | P2 | Deploy minimal NUCLEUS on golgi for sporePrint serving (petalTongue + NestGate + songBird + bearDog, ~70MB) | Handoff filed: `EASTGATE_WAVE133_SPOREPRINT_VPS_NUCLEUS.md` |
+
+---
+
+### sporePrint team
+
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| SP-DIV-01 | **P1** | `primals.eco` DNS still points to GitHub Pages — not sovereign | Blocked on VPS NUCLEUS + bearDog ACME |
+| SP-DIV-02 | P2 | Dual-push required (origin + forgejo) — workaround until DNS cutover | Operational friction |
+| SP-DIV-05 | P3 | `.github/workflows/deploy.yml` still load-bearing — archive after cutover | Cleanup |
+| — | — | Content evolution | ACTIVE — 226 pages, 254 tests, SVG viz, living systems pages |
+
+**Workaround**: continue `git push origin main && git push forgejo main` until DNS cutover.
+
+---
+
+### flockGate team
+
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| WAN-DISPATCH-01 | **P1** | Validate cross-gate `capability.call` via golgi relay | Not yet tested. primalSpring scenario ready (124th). |
+| WAN-LATENCY-01 | P2 | Characterize cross-gate RTT (p50/p95/p99) | After dispatch validation |
+
+---
+
+### eastGate hardware team
+
+| ID | Priority | Item | Status |
+|----|----------|------|--------|
+| STRAND-SSH-01 | **P1** | strandGate SSH key deploy (house 2, .103) | Physical access required |
+| DARK-FOREST-01 | P2 | Re-enable dark-forest after 3+ LAN peers have bearDog | Blocked on STRAND-SSH-01 |
+| GRAPHENE-FULL-01 | P2 | grapheneGate full NUCLEUS — nestGate + coralReef adaptation | 12/13 running, 2 primals need Android UDS fix |
+| FLEET-ENROLL | P3 | northGate/westGate/swiftGate/kinGate enrollment | As hardware allows |
+| LAUNCHER-02 | P3 | nucleus_launcher: skip failed primals, continue with available | Filed in grapheneGate AAR |
+
+---
+
+### All primal teams (P3 — ecosystem convergence, no rush)
+
+| ID | Priority | Item |
+|----|----------|------|
+| CI-DIV-04 | P3 | 13/14 primals have project-level `.cargo/config.toml` — standardize shared template |
+| CI-DIV-05 | P3 | Rust toolchain pinning inconsistent (1.93→1.94.1→stable→none) — single strategy |
 
 ---
 
@@ -175,13 +160,20 @@ This wave's success is measured by these assertions:
 bearDog       6ef436864  gatehouse + Android fix
 songBird      40699793   drawbridge wired into orchestrator
 skunkBat      e7eaa5d    stable
+biomeOS       f77886d1   CI-DIV-01 RESOLVED (default-members)
 toadStool     1ec3749    DH-1 resolved
 nestGate      d355c8db   platform_detection simplified
-biomeOS       0e54e93    v4.33 mega-test split complete
 squirrel      45b186b    Wave 129 mock evolution
-primalSpring  548e49b    1096 tests, 0 debt
-wateringHole  88a78d8    pepti-only deployment model
-sporePrint    99bfc9e    living topology
+coralReef     3078d0b    stable
+barraCuda     b2618db0   stable
+loamSpine     e68873d    stable
+petalTongue   0f8da6b    stable
+rhizoCrypt    ef85124    stable
+sweetGrass    bab4657    stable
+primalSpring  e3c4b35    124 scenarios, 1099 tests (4 fail: SHADER_F64 gap)
+wateringHole  ce7fd16    Wave 133a + AARs
+sporePrint    89606fd    deep debt sprint + living systems
+projectNUCLEUS ce928f0   synced to Wave 132f
 ```
 
 ---
@@ -189,27 +181,28 @@ sporePrint    99bfc9e    living topology
 ## Critical Path
 
 ```
-✅ All primal code DONE
-✅ 7/7 stadial criteria CLEAR
-✅ Omada 10G backbone LIVE (house 1 ↔ house 2)
-✅ Pepti warehouse populated (15/15 per arch)
+✅ 30/30 ecobins in pepti (verified)
+✅ grapheneGate 12/13 LIVE
+✅ biomeOS CI-DIV-01 RESOLVED
+✅ golgi disk recovered + HEAD metadata published
+✅ sporePrint sovereignty path mapped
 
-WAVE 133 — ENMESH + HARDEN + VALIDATE:
-1. [ENMESH]   strandGate SSH + pepti pull + mesh.init       → 3rd LAN peer
-2. [ENMESH]   northGate/westGate as hardware allows         → fleet expansion
-3. [HARDEN]   re-enable dark-forest (after 3+ LAN bearDog)  → security posture
-4. [VALIDATE] flockGate cross-gate dispatch                  → WAN mesh proven
-5. [VALIDATE] pepti-first deployment proof (checklist above) → post-primordial confirmed
-6. [VALIDATE] grapheneGate full NUCLEUS from pepti           → mobile stack complete
-7. [OPS]      golgi HEAD metadata fix (D2)                   → freshness publishing
+ACTIVE — ENMESH + HARDEN + VALIDATE:
+1. [CODE]     PS-F64-01: SHADER_F64 manifest gap → 4 tests back to green
+2. [CODE]     CI-DIV-07: cascade freshness publishing → automated HEAD updates
+3. [GATE]     STRAND-SSH-01: strandGate enrollment → 3rd LAN peer
+4. [GATE]     WAN-DISPATCH-01: flockGate cross-gate validation → WAN mesh proven
+5. [GATE]     DARK-FOREST-01: re-enable after enrollment → security posture
+6. [DEPLOY]   VPS-NUCLEUS: sporePrint on golgi → sovereignty cutover path
+7. [DEPLOY]   SP-DIV-01: DNS cutover (primals.eco → VPS) → sovereign public site
 
-FUTURE:
-  - biomeOS cross-gate graph executor → HPC fan-out
-  - golgi bearDog gatehouse → sovereign TLS
-  - songBird 10G peer detection → large payload routing
-  - nestGate westGate ZFS integration → 76TB in mesh
+CONVERGENCE (P2-P3 — as teams have cycles):
+  - CI-DIV-02: skunkBat default-members fix
+  - CI-DIV-03: nestGate linker convergence
+  - NESTGATE-ANDROID-01 + CORALREEF-ANDROID-01: Android UDS adaptation
+  - CI-DIV-04/05: ecosystem-wide config + toolchain standardization
 ```
 
 ---
 
-*Wave 133a — Enmesh what's available. Harden the perimeter. Validate pepti-first. The code waited for the hardware — the hardware is here.*
+*Wave 133a — 30/30 ecobins deployed. 12/13 mobile. CI divergences surfacing and resolving. Sovereignty cutover path clear. Enmesh, harden, validate.*
