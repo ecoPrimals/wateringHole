@@ -1,28 +1,9 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: golgi | Updated: 2026-07-06T14:53:15Z
-#
-# This file is owned exclusively by golgi (VPS). No other gate writes here.
-# golgi runs the quorum timer (every 15min) and updates this file after cascade.
+# This file is owned exclusively by this gate. No other gate writes here.
+# Gate: golgi | Updated: 2026-07-06T16:38:07Z
 
 [meta]
 gate = "golgi"
-updated = "2026-07-06T14:53:15Z"
+updated = "2026-07-06T16:38:07Z"
 
 [heads]
-barraCuda = "b2618db0511100a2112196635c037c641649d927"
-bearDog = "6ef436864e762b479eb5962b6161a6df52764cdc"
-biomeOS = "0e54e93648c8706e33fd63e290b9c07c8281783a"
-coralReef = "3078d0b6d6b99c3df5f404d25812f930a4b0fc3b"
-loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
-nestGate = "d355c8dbbba9df79f9ee8497c19298b91fe45fbd"
-petalTongue = "0f8da6b4153313997ccc09ce18288824171bf71d"
-rhizoCrypt = "ef85124f39aac9fa309448c01db86463683ab00a"
-skunkBat = "e7eaa5d0006208912109b25e390fb7eac05ceee4"
-songBird = "40699793590290fd5d9c61cd825c7cdf408ce0c2"
-squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
-sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
-toadStool = "82a4209f6e2b17c10be00ded6c4e70a84a893b0c"
-plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
-wateringHole = "f2b81abf33ffe367b44e7fd07e67bc0a307801d9"
-cellMembrane = "c93344c22d66da473465861b6eb625a9275de6c7"
-projectNUCLEUS = "ce928f0f97e0751b5db9f465952ee74fb70599ab"
