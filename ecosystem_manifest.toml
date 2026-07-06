@@ -648,18 +648,21 @@ repos = [
 ]
 
 # grapheneGate — portable trust anchor (Pixel 8a, GrapheneOS)
-# Full NUCLEUS 13/13 deployed and alive (Wave 108)
-# Carries beacon/lineage seeds, acts as physical root of trust
+# Tower composition LIVE (Wave 132h). Also USB tether for eastGate.
+# Carries beacon/lineage seeds, acts as physical root of trust + internet relay.
 [gates.grapheneGate]
 gate_class = "portable_anchor"
 bond_types = ["covalent"]
 target = "aarch64-unknown-linux-musl"
 mobility = "mobile"
 bind_mode = "tcp_only"
-composition = "full"
+composition = "tower"
 transport = "adb"
-nucleus_status = "13/13 deployed and alive (Wave 108)"
-notes = "Pixel 8a — 13/13 primals via deploy_pixel.sh, TCP-only, first cross-arch NUCLEUS"
+tether_role = "usb_rndis"
+nucleus_status = "Tower LIVE (bearDog 0.9.0 + songBird 0.2.1 + skunkBat 0.2.9)"
+adb_ports = { beardog = 9100, songbird_ipc = 9201, songbird_federation = 9200, skunkbat = 9140 }
+depot_binaries = "15/15 (14 primals + nucleus_launcher) in pepti warehouse"
+notes = "Pixel 8a — Tower via pepti warehouse, TCP-only, USB tether duality. nucleus_launcher cross-compiled (LAUNCHER-01 complete). Future: mesh.init for WAN relay via cellular backhaul."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",

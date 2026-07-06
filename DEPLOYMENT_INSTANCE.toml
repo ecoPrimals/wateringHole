@@ -148,20 +148,20 @@ architecture_context = "ECOSYSTEM_ARCHITECTURE_CONTEXT.md"
 note = "FRAGOs are time-bounded work DAGs (rhizoCrypt analog). Handoffs are fossil record (loamSpine analog). Blurbs are session seeds (sweetGrass analog)."
 
 [coordination.active_fragos]
-primary = "wave109-guidestone-deployment-convergence"
-secondary = ["wave107-healthspring-upstream-gaps"]
+primary = "wave132h-mesh-convergence-gate-deploys"
+secondary = []
 see = "impulses/active/"
 
 [coordination.current_wave]
-number = 110
-name = "Last Mile Health + Gate Expansion"
+number = 132
+name = "Mesh Convergence + Gate Deploys"
 streams = [
-    "Stream 1: HEALTH-13/13 (rhizoCrypt, petalTongue remaining)",
-    "Stream 2: BTSP End-to-End (cross-primal chain)",
-    "Stream 3: Build Hardening (FULLY RESOLVED)",
-    "Stream 4: Gate Expansion (northGate + westGate)",
-    "Stream 5: primalSpring Dogfood (MOSTLY RESOLVED)",
-    "Stream 6: Federation Debug (ROOT CAUSE FIXED, deploy pending)",
+    "Stream 1: LAN+WAN MESH LIVE (sporeGate↔ironGate, flockGate via golgi)",
+    "Stream 2: Pepti Warehouse (x86_64 + aarch64, nucleus_launcher shipped)",
+    "Stream 3: grapheneGate Tower (bearDog+songBird+skunkBat via ADB)",
+    "Stream 4: strandGate enrollment (SSH pending, alive at .103)",
+    "Stream 5: Dark-forest re-enable (post full LAN enrollment)",
+    "Stream 6: Cross-gate graph execution (biomeOS — future)",
 ]
 
 # ──────────────────────────────────────────────────────────────

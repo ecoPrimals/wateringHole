@@ -1,11 +1,11 @@
 # grapheneGate Bootstrap Standard — Physical Dark Forest Protocol
 
-**Status**: LIVE (Wave 132c — Tower deployed, ADB tether operational)
+**Status**: LIVE (Wave 132h — Tower deployed, nucleus_launcher cross-compiled, ADB tether operational)
 **Owner**: eastGate (overwatch)
 **Hardware**: Pixel 8a, Google Tensor G3, 8GB RAM, GrapheneOS
 **Gate class**: `portable_anchor`
 
-> **Wave 132c status**: Tower composition (bearDog + songBird + skunkBat) deployed and reachable via ADB port forwarding. 14/14 aarch64-musl binaries in depot. grapheneGate also serves as USB tether for eastGate internet connectivity. Enrolled in `mesh_topology.toml` with `transport = "adb"`, role `mobile`. As the tether matures, grapheneGate can spawn new mesh connections and relay for gates that lack WAN.
+> **Wave 132h status**: Tower composition (bearDog + songBird + skunkBat) deployed and reachable via ADB port forwarding. 15/15 aarch64-musl binaries in depot (14 primals + nucleus_launcher). LAUNCHER-01 complete: `nucleus_launcher` cross-compiled and published to pepti warehouse. grapheneGate also serves as USB tether for eastGate internet connectivity. Enrolled in `mesh_topology.toml` with `transport = "adb"`, role `mobile`. As the tether matures, grapheneGate can spawn new mesh connections and relay for gates that lack WAN.
 
 ---
 
@@ -17,7 +17,7 @@
 | Tower composition (bearDog+songBird+skunkBat) | RUNNING (PIDs active) |
 | ADB port forwarding (9100, 9200, 9140) | ACTIVE |
 | USB tethering (eastGate internet) | ACTIVE |
-| aarch64-musl binaries in depot | **14/14** |
+| aarch64-musl binaries in depot | **15/15** (14 primals + nucleus_launcher) |
 | mesh_topology.toml enrollment | DONE (transport=adb, role=mobile, zone=Wan) |
 | primalSpring validation scenario | PASSING (s_graphenegate_readiness) |
 
