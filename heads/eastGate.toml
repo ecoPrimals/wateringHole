@@ -6,10 +6,10 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-06T14:40:00Z"
+updated = "2026-07-06T14:43:00Z"
 
 [heads]
-primalSpring = "548e49b9e6e740d01657ea1acec186d1e9c586c9"
+primalSpring = "b4dff02a3c577061bd858e38a36d6ec45e3491f9"
 songBird = "40699793590290fd5d9c61cd825c7cdf408ce0c2"
 bearDog = "6ef436864e762b479eb5962b6161a6df52764cdc"
 skunkBat = "e7eaa5d0006208912109b25e390fb7eac05ceee4"
