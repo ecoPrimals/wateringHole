@@ -558,7 +558,7 @@ transport = "lan"
 zone = "backbone"
 wg_ip = "10.13.37.7"
 roles = ["node_atomic", "compute", "gpu"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 (CUDA 12.8). 12/12 NUCLEUS enrolled Wave 120. GPU pipeline validated Wave 123: train→save→load→infer E2E, f64 native, SHADER_F64 enabled. barraCuda runs glibc local build for GPU access; coralReef runs musl (pure Rust naga). Dual-target depot fetch pending sporeGate build."
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). 13/13 NUCLEUS. JupyterHub 5.4.5 LIVE on :8000. Binaries deploy from pepti warehouse (membrane.primals.eco/depot/x86_64-unknown-linux-gnu/). songBird drawbridge target. House 2 mesh anchor."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
