@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-05T17:50:00Z"
+updated = "2026-07-06T13:28:00Z"
 
 [heads]
 nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
@@ -29,13 +29,13 @@ songbird_version = "0.2.1-drawbridge"
 songbird_commit = "40699793"
 beardog_version = "0.9.0-gatehouse"
 beardog_commit = "6ef436864"
-gateway_status = "E2E_LIVE_MESH_PEERED"
+gateway_status = "E2E_LIVE_MESH_PEERED_PEPTI_COMPLETE"
 topology = "internet → golgi(TLS) → WG → sporeGate:7780(drawbridge) → ironGate:8000(JupyterHub)"
 http_proxy = "LIVE — lab.primals.eco/hub/api returns {version: 5.4.5}"
 caddy_local = "STOPPED+DISABLED"
 caddy_golgi = "ACTIVE — TLS → drawbridge :7780"
 relay_deployed = "golgi: membrane 0704132 — bidirectional LIVE, 39/39 parity"
-pepti_warehouse = "LIVE — membrane.primals.eco/depot/ (x86_64+aarch64: songbird+beardog)"
+pepti_warehouse = "LIVE — membrane.primals.eco/depot/ (x86_64+aarch64: songbird+beardog+nucleus_launcher)"
 mesh_status = "PEERED — sporeGate↔ironGate bidirectional (family: ecoPrimals)"
 mesh_reachable_peers = 1
 mesh_mode = "federation (dark-forest disabled for LAN trust)"
