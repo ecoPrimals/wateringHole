@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-06T13:28:00Z"
+updated = "2026-07-06T15:35:00Z"
 
 [heads]
 nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
@@ -35,7 +35,7 @@ http_proxy = "LIVE — lab.primals.eco/hub/api returns {version: 5.4.5}"
 caddy_local = "STOPPED+DISABLED"
 caddy_golgi = "ACTIVE — TLS → drawbridge :7780"
 relay_deployed = "golgi: membrane 0704132 — bidirectional LIVE, 39/39 parity"
-pepti_warehouse = "LIVE — membrane.primals.eco/depot/ (x86_64+aarch64: songbird+beardog+nucleus_launcher)"
+pepti_warehouse = "LIVE — 15/15 binaries × 2 triples = 30 ecobins (checksums.toml verified)"
 mesh_status = "PEERED — sporeGate↔ironGate bidirectional (family: ecoPrimals)"
 mesh_reachable_peers = 1
 mesh_mode = "federation (dark-forest disabled for LAN trust)"
@@ -61,8 +61,9 @@ dark_forest = "Disabled for LAN trust (re-enable when all peers have bearDog)"
 mesh_trust = "Fixed: removed dark-forest mode → LAN peers auto-register with FAMILY_ID"
 e2e_path = "lab.primals.eco/hub/api → 200 {version: 5.4.5}"
 irongate_mesh = "PEERED — bidirectional, direct path, reachable"
-pepti_complete = "All arches: x86_64-musl + aarch64-android (songbird+beardog)"
-beardog_android = "6ef436864 built + published to pepti"
+pepti_complete = "15/15 × 2 triples: x86_64-musl + aarch64-musl (all 14 primals + nucleus_launcher)"
+golgi_relay_metadata = "Fixed: heads/golgi.toml freshness published (17 repos). Bug: temporal.cascade timestamp not bumping."
+golgi_disk = "Reclaimed 2.7GB: shallow clones + removed legacy plasmidBin/genomeBin (100%→75%)"
 strandgate_found = "Alive at .103 (DHCP shifted from .100)"
 
 [next_steps]
