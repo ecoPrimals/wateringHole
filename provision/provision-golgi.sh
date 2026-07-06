@@ -151,14 +151,27 @@ lab.primals.eco {
 }
 EOCADDY
 
-echo "=== 5. PULL BINARIES FROM SPOREGATE DEPOT ==="
+echo "=== 5. INSTALL RUSTDESK SERVER ==="
+RUSTDESK_VERSION="1.1.14"
+curl -sL "https://github.com/rustdesk/rustdesk-server/releases/download/${RUSTDESK_VERSION}/rustdesk-server-linux-amd64.zip" \
+    -o /tmp/rustdesk-server.zip
+unzip -o /tmp/rustdesk-server.zip -d /tmp/rustdesk-extract
+cp /tmp/rustdesk-extract/amd64/hbbs /opt/membrane/hbbs
+cp /tmp/rustdesk-extract/amd64/hbbr /opt/membrane/hbbr
+chmod +x /opt/membrane/hbbs /opt/membrane/hbbr
+rm -rf /tmp/rustdesk-server.zip /tmp/rustdesk-extract
+
+mkdir -p /opt/membrane/rustdesk
+echo "RustDesk identity will be restored from pepti depot (see NEXT STEPS)"
+
+echo "=== 6. PULL BINARIES FROM SPOREGATE DEPOT ==="
 echo "Binaries are deployed from pepti depot on sporeGate."
 echo "After WireGuard is up, run:"
 echo "  rsync -avz sporegate:/opt/ecoPrimals/depot/x86_64-unknown-linux-musl/{membrane,songbird,beardog} /opt/membrane/"
 echo "  rsync -avz sporegate:/opt/ecoPrimals/depot/ /opt/ecoPrimals/depot/"
 echo "  cp /opt/membrane/membrane /usr/local/bin/membrane"
 
-echo "=== 6. WIREGUARD ==="
+echo "=== 7. WIREGUARD ==="
 cat > /etc/wireguard/wg0.conf << EOWG
 [Interface]
 Address = 10.13.37.1/24
@@ -175,7 +188,7 @@ EOWG
 
 systemctl enable wg-quick@wg0
 
-echo "=== 7. SYSTEMD SERVICES ==="
+echo "=== 8. SYSTEMD SERVICES ==="
 
 cat > /etc/systemd/system/forgejo.service << 'EOSVC'
 [Unit]
@@ -325,9 +338,61 @@ RandomizedDelaySec=60
 WantedBy=timers.target
 EOSVC
 
+cat > /etc/systemd/system/hbbs-membrane.service << 'EOSVC'
+[Unit]
+Description=RustDesk Rendezvous Server (cellMembrane — remote.primals.eco)
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+ExecStart=/bin/sh -c '/opt/membrane/hbbs -r $(hostname -I | awk "{print \\$1}")'
+WorkingDirectory=/opt/membrane/rustdesk
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/membrane/rustdesk
+MemoryMax=64M
+CPUQuota=25%
+
+[Install]
+WantedBy=multi-user.target
+EOSVC
+
+cat > /etc/systemd/system/hbbr-membrane.service << 'EOSVC'
+[Unit]
+Description=RustDesk Relay Server (cellMembrane — remote.primals.eco)
+After=network-online.target hbbs-membrane.service
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+ExecStart=/opt/membrane/hbbr
+WorkingDirectory=/opt/membrane/rustdesk
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/membrane/rustdesk
+MemoryMax=64M
+CPUQuota=25%
+
+[Install]
+WantedBy=multi-user.target
+EOSVC
+
 systemctl daemon-reload
 
-echo "=== 8. FIREWALL ==="
+echo "=== 9. FIREWALL ==="
 # UFW or iptables — allow essential ports only
 if command -v ufw &>/dev/null; then
     ufw allow 22/tcp     # SSH
@@ -337,11 +402,15 @@ if command -v ufw &>/dev/null; then
     ufw allow 51820/udp  # WireGuard
     ufw allow 7700/tcp   # SongBird federation
     ufw allow 3478/udp   # TURN relay
+    ufw allow 21115/tcp  # RustDesk NAT test
+    ufw allow 21116/tcp  # RustDesk ID registration
+    ufw allow 21116/udp  # RustDesk NAT probe
+    ufw allow 21117/tcp  # RustDesk relay
     ufw --force enable
 fi
 
-echo "=== 9. ENABLE SERVICES ==="
-systemctl enable forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer fail2ban
+echo "=== 10. ENABLE SERVICES ==="
+systemctl enable forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane fail2ban
 
 echo ""
 echo "========================================="
@@ -359,8 +428,14 @@ echo "       rsync -avz sporegate:/opt/ecoPrimals/depot/ /opt/ecoPrimals/depot/"
 echo "  5. Copy relay binaries:"
 echo "       rsync sporegate:/opt/ecoPrimals/depot/x86_64-unknown-linux-musl/{membrane,songbird,beardog} /opt/membrane/"
 echo "       cp /opt/membrane/membrane /usr/local/bin/membrane"
-echo "  6. Start services: systemctl start forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer"
-echo "  7. Verify: curl https://membrane.primals.eco/health"
+echo "  6. Restore RustDesk identity from depot:"
+echo "       cp /opt/ecoPrimals/depot/rustdesk/id_ed25519* /opt/membrane/rustdesk/"
+echo "  7. Add remote.primals.eco DNS record:"
+echo "       knotc zone-begin primals.eco"
+echo "       knotc zone-set primals.eco remote.primals.eco. 300 A <NEW_VPS_IP>"
+echo "       knotc zone-commit primals.eco"
+echo "  8. Start services: systemctl start forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane"
+echo "  9. Verify: curl https://membrane.primals.eco/health"
 echo ""
 echo "Estimated disk usage after restore: ~5GB of 10GB (50%)"
 echo "If golgi dies, re-run this script + rsync from sporeGate."
