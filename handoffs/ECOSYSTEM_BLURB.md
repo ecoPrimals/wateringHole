@@ -1,187 +1,234 @@
 # ecoPrimals Ecosystem Blurb — Wave 132h
 
-**Date**: Jul 5, 2026 13:23 EDT | **Wave**: 132h | **From**: eastGate overwatch
-**Posture**: **E2E LIVE — MESH PEERING** — full HTTP path validated (`lab.primals.eco/hub/api → 200`). Pepti warehouse complete. Remaining: mesh trust + WAN/mobile peering.
+**Date**: Jul 6, 2026 09:07 EDT | **Wave**: 132h | **From**: eastGate overwatch
+**Posture**: **LAN+WAN MESHED** — E2E live, all code shipped. Remaining: 1 CI build + gate deploys.
 
 ---
 
-## What's Done (Wave 132g achievements — fossilized)
+## Ecosystem State
 
 ```
-✅ bearDog gatehouse mode (16430d90c) — :443 TLS + :80 ACME/redirect
-✅ songBird drawbridge (40699793) — :7780 HTTP→capability routing, wired into startup
-✅ bearDog upstream fix (2ac2bd389) — default → :7780 drawbridge
-✅ bearDog Android fix (6ef436864) — StrongBox HSM compiles for aarch64
-✅ Caddy retired on sporeGate (permanent)
-✅ golgi Caddy proxy updated → sporeGate:7780
-✅ ironGate JupyterHub 5.4.5 LIVE on :8000
-✅ E2E validated: internet → golgi TLS → sporeGate drawbridge → ironGate JupyterHub → 200
-✅ Pepti warehouse LIVE: membrane.primals.eco/depot/ (x86_64 + aarch64, songBird + bearDog)
-✅ Bidirectional relay: golgi membrane, 39/39 parity, 15min cascade
-✅ All repos at GitHub↔Forgejo parity (zero divergence)
-✅ Gatehouse/Darkforest standard published
+LIVE:
+  ✅ E2E HTTP: lab.primals.eco → 200 (JupyterHub 5.4.5)
+  ✅ LAN mesh: sporeGate↔ironGate (FAMILY_ID trust)
+  ✅ WAN mesh: flockGate via golgi relay (2 peers)
+  ✅ Pepti warehouse: membrane.primals.eco/depot/ (x86_64 + aarch64)
+  ✅ Relay: golgi bidirectional, 39/39 parity, 15min timer
+  ✅ 13/13 primals STANDBY — zero P1 debt
+  ✅ All repos at GitHub↔Forgejo parity
+
+TOPOLOGY:
+  sporeGate ←✅→ ironGate    (LAN direct, 10.13.37.x)
+  sporeGate ←✅→ golgi       (WG relay)
+  flockGate ←✅→ golgi       (WAN, 2 peers)
+  strandGate: ALIVE .103     (SSH pending)
+  grapheneGate: DEPLOY READY (binaries in pepti)
 ```
 
 ---
 
-## Remaining Work
+## FOR: Primal Teams (code → pepti → gates)
 
-| # | Item | Gate/Team | Type |
-|---|------|-----------|------|
-| 1 | Mesh trust: dark-forest mutual auth or LAN trust exception | sporeGate | config |
-| 2 | flockGate WAN peering: mesh.init via golgi relay | flockGate | operational |
-| 3 | grapheneGate: pull pepti + ADB deploy + mesh.init | eastGate hardware | operational |
-| 4 | strandGate: investigate offline (192.168.4.100 unreachable) | sporeGate | hardware/network |
-| 5 | bearDog gatehouse on golgi (long-term sovereign TLS) | sporeGate | future |
+Primal code ships first. Gate teams deploy from pepti warehouse.
+Push to BOTH remotes: `git push origin main && git push forgejo main`
 
 ---
 
-## Per-Gate Dispatch
+### toadStool team
+
+**One remaining debt item.**
+
+| ID | What | Priority | Status |
+|----|------|----------|--------|
+| DH-1 | `/tmp` hardcoding — `temp_dir()` fallback still lands in `/tmp` when no env set | P2 | 4/5 primals resolved, toadStool remaining |
+
+**What to fix**: When `BIOMEOS_SOCKET_DIR` and `XDG_RUNTIME_DIR` are both unset, the 3-tier resolution falls through to `std::env::temp_dir()` which returns `/tmp`. This breaks `ProtectSystem=strict` on systemd VPS units.
+
+**Fix approach**: Add a 4th tier that uses a hardcoded `/run/membrane/` path when running as a systemd service (detect via `INVOCATION_ID` env), or require one of the env vars to be set (fail-closed).
+
+**Impact**: Non-blocking for mobile (Android uses `/data/local/tmp` anyway). Blocks full systemd hardening on VPS (12 services still without `ProtectSystem=strict`).
 
 ---
 
-### FOR: sporeGate team
+### songBird team
+
+**No active work required.** All shipped.
+
+Current HEAD: `40699793` (drawbridge wired into orchestrator startup)
+
+Recent deliverables absorbed by gates:
+- Drawbridge HTTP listener (:7780) — Gatehouse→Darkforest crossing
+- Mesh persistence (peers.toml, auto-reconnect)
+- Federation port auto-promote to `0.0.0.0`
+- FAMILY_ID auto-register (dark-forest disabled for LAN)
+
+**Glacial** (no timeline pressure): `federation.enabled` config formalization.
+
+---
+
+### bearDog team
+
+**No active work required.** All shipped.
+
+Current HEAD: `6ef436864` (StrongBox HSM Android fix)
+
+Recent deliverables absorbed by gates:
+- Gatehouse mode (:443 TLS + :80 ACME/redirect)
+- Gateway upstream → drawbridge :7780
+- Android StrongBox HSM (10 compile errors resolved for aarch64)
+- `BindMode::Auto` platform detection (ANDROID_ROOT env + cfg)
+- `rustls_rustcrypto::provider().install_default()` in main()
+
+---
+
+### biomeOS team
+
+**No active work required for current critical path.** Next evolution target (post-mesh):
+
+| ID | What | Priority | Status |
+|----|------|----------|--------|
+| CROSS-GATE-EXEC-B | `graph.execute` honors `gate` hint — delegates to `try_relay_dispatch()` for remote gates | P3 | Spec done (Wave 60). Enables HPC fan-out across mesh. |
+
+This is the next major capability evolution: cross-gate graph execution. The mesh transport is live — biomeOS needs to wire `graph.execute` to use it. See `specs/CROSS_GATE_GRAPH_EXECUTOR.md` in wateringHole.
+
+---
+
+### primalSpring team
+
+**One CI/build task.**
+
+| ID | What | Priority | Status |
+|----|------|----------|--------|
+| LAUNCHER-01 | `nucleus_launcher` cross-compile for aarch64-linux-android | P2 | `.cargo/config.toml` has `cargo cross-aarch64` alias ready. Need CI pipeline addition. |
+
+**What's needed**: Add `nucleus_launcher` to the Sovereign CI aarch64 build targets (alongside songBird/bearDog). The cross-compile config already exists:
+
+```toml
+# .cargo/config.toml (already in repo)
+[target.aarch64-unknown-linux-musl]
+linker = "aarch64-linux-gnu-gcc"
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[alias]
+cross-aarch64 = "build --release --target aarch64-unknown-linux-musl --bin nucleus_launcher"
+```
+
+**Impact**: Unblocks full 14-primal orchestration on grapheneGate via single command.
+**Workaround**: Gate teams can deploy songBird + bearDog individually (works today).
+
+---
+
+### All other primals (skunkBat, coralReef, nestGate, rhizoCrypt, loamSpine, sweetGrass, squirrel, barraCuda, petalTongue)
+
+**STANDBY. No action required.**
+
+All at zero debt. 13/13 passing primalSpring gate on all invariants:
+- Edition 2024, `cargo deny check bans`, `forbid(unsafe_code)`
+- MethodGate 13/13, BTSP Phase 3 13/13, plasmidBin musl-static 13/13
+- `PRIMAL_BIND_MODE=tcp_only` adopted 13/13
+- Health standard converged, stale socket cleanup absorbed
+
+---
+
+## FOR: Gate Teams (deploy from pepti)
+
+Gate teams consume binaries from `membrane.primals.eco/depot/` and handle operational deployment. No code changes required.
+
+---
+
+### sporeGate team
 
 **Context**: You own the gate, LAN topology, membrane layers, Sovereign CI, and pepti warehouse.
 
-**Current state**: E2E LIVE. songBird drawbridge on :7780, JupyterHub returning 200, golgi proxying correctly. Pepti warehouse fully populated.
+**Current state**: E2E LIVE. Mesh operational. strandGate found alive at .103 but SSH-inaccessible.
 
-**Your remaining items**:
+**Your items**:
 
-1. **Mesh trust configuration** (P1)
-   - songBird dark-forest mode requires trust exchange for full mesh registration
-   - Options: mutual TLS between mesh peers, pre-shared keys, or LAN trust exception for 10.13.37.0/24
-   - Goal: ironGate and strandGate can register capabilities and be discovered via `mesh.peers`
+1. **strandGate enrollment** (P1 — physical access required)
+   - Alive at 192.168.4.103 (DHCP shifted from .100), 30ms latency (WiFi)
+   - Deploy SSH key → push songBird + bearDog from pepti
+   - Then: `mesh.init --bootstrap 10.13.37.2:7700`
+   - After: re-enable dark-forest (all LAN peers will have bearDog)
 
-2. **strandGate offline** (P2)
-   - 192.168.4.100 unreachable — network or hardware issue
-   - Check: Omada switch port, WiFi bridge (if applicable), WireGuard interface
-   - Once reachable: `mesh.init` with bootstrap `10.13.37.2:7700`
+2. **LAUNCHER-01 CI addition** (P2 — after primalSpring ships the alias)
+   - Add `nucleus_launcher` aarch64 target to Sovereign CI pipeline
+   - Publish to pepti: `/opt/ecoPrimals/depot/aarch64-linux-android/nucleus_launcher`
 
-3. **bearDog gatehouse on golgi** (P3 — future/low priority)
-   - DNS `lab.primals.eco` → 157.230.3.183 (golgi)
-   - Long-term: move bearDog TLS termination to golgi (it owns the IP)
-   - Current golgi Caddy proxy is working — not urgent
-
-**No code work required. All items are operational/configuration.**
+3. **bearDog gatehouse on golgi** (P3 — future)
+   - Replace golgi Caddy with bearDog direct TLS termination
+   - Not urgent — current proxy works
 
 ---
 
-### FOR: flockGate team
+### flockGate team
 
-**Context**: You are the WAN validation deployment for inner membrane behaviors. All code debt is resolved. Your gate validates relay, parity, and remote dispatch over WAN latency.
+**Context**: WAN validation deployment. Peering DONE.
 
-**Current state**: All bearDog/songBird/skunkBat evolution absorbed. No code blockers.
+**Current state**: PEERED. 2 reachable peers via golgi relay.
 
-**Your remaining items**:
+**Your items**:
 
-1. **WAN mesh peering** (P1)
-   ```bash
-   # Join the mesh via golgi relay:
-   socat - UNIX-CONNECT:/run/songbird/songbird.sock <<'EOF'
-   {"jsonrpc":"2.0","id":1,"method":"mesh.init","params":{"bootstrap_peers":["10.13.37.1:7700"]}}
-   EOF
+1. **Validate cross-gate dispatch** (P1)
+   ```json
+   {"method":"capability.call","params":{"capability":"jupyter","method":"GET","path":"/hub/api"}}
    ```
-   - golgi (10.13.37.1) is the relay between your gate and the LAN mesh
-   - After peering: `mesh.peers` should show sporeGate, ironGate, eastGate
+   Expected: JupyterHub response routed through sporeGate→golgi→you
 
-2. **Validate WAN relay path** (P2 — after peering)
-   - `capability.call` across the golgi relay roundtrip
-   - Test: `{"method":"capability.call","params":{"capability":"jupyter","method":"GET","path":"/hub/api"}}`
-   - Expected: JupyterHub response routed through relay
-
-3. **Test membrane behaviors over WAN** (P3)
-   - `relay.parity` — verify your view of repo states matches golgi's
-   - Remote dispatch latency characterization
-   - Verify: bidirectional relay still pushes your commits to Forgejo within 15min
-
-**Push protocol reminder**: always push to BOTH remotes:
-```bash
-git push origin main && git push forgejo main
-```
+2. **Latency characterization** (P2)
+   - `relay.parity` — confirm repo state matches golgi
+   - Measure cross-gate `capability.call` RTT
+   - Verify bidirectional relay pushes within 15min
 
 ---
 
-### FOR: eastGate hardware team (grapheneGate)
+### eastGate hardware team (grapheneGate)
 
-**Context**: You own the Pixel 8a hardware. Binaries come from pepti warehouse — no local cross-compilation needed. bearDog Android fix (6ef436864) has shipped and been built by Sovereign CI.
+**Context**: Pixel 8a mobile deployment. Binaries in pepti warehouse.
 
-**Current state**: Pepti warehouse has `aarch64-linux-android` binaries for songBird (21MB) and bearDog ready.
+**Your items**:
 
-**Your remaining items**:
-
-1. **Pull from pepti warehouse**
+1. **Pull + deploy** (P1)
    ```bash
-   # Via HTTPS:
    wget https://membrane.primals.eco/depot/aarch64-linux-android/songbird
    wget https://membrane.primals.eco/depot/aarch64-linux-android/beardog
-   
-   # Or via WG overlay:
-   scp golgi:/opt/ecoPrimals/depot/aarch64-linux-android/* ./depot/
+   adb push songbird /data/local/tmp/ecoprimals/
+   adb push beardog /data/local/tmp/ecoprimals/
+   adb shell "chmod +x /data/local/tmp/ecoprimals/*"
    ```
 
-2. **ADB deploy**
+2. **Start + peer** (P1)
    ```bash
-   adb push depot/songbird /data/local/tmp/songbird
-   adb push depot/beardog /data/local/tmp/beardog
-   chmod +x /data/local/tmp/songbird /data/local/tmp/beardog
+   adb shell "cd /data/local/tmp/ecoprimals && \
+     PRIMAL_BIND_MODE=tcp_only \
+     SONGBIRD_PEERS=10.13.37.2:7700 \
+     ./songbird server --bind 0.0.0.0 --port 7700 &"
+   adb shell "cd /data/local/tmp/ecoprimals && \
+     PRIMAL_BIND_MODE=tcp_only \
+     ./beardog server --port 9500 &"
+   # Mesh join:
+   adb shell 'echo "{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"mesh.init\",\"params\":{\"bootstrap_peers\":[\"10.13.37.2:7700\"]}}" | nc 127.0.0.1 7700'
    ```
 
-3. **Start primal suite**
-   ```bash
-   # songBird first (mesh foundation):
-   adb shell "SONGBIRD_PEERS=10.13.37.5:7700 /data/local/tmp/songbird serve &"
-   
-   # bearDog (IPC + security):
-   adb shell "/data/local/tmp/beardog server &"
-   ```
+3. **Validate** (P2)
+   - `mesh.peers` → should show sporeGate (10.13.37.2)
+   - StrongBox HSM initializes (hardware-backed crypto)
+   - WiFi disconnect/reconnect → mesh auto-recovers
 
-4. **Mesh peering**
-   ```bash
-   # Via USB tether or WiFi — eastGate as bootstrap:
-   adb shell "echo '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"mesh.init\",\"params\":{\"bootstrap_peers\":[\"10.13.37.5:7700\"]}}' | socat - UNIX-CONNECT:/data/local/tmp/songbird.sock"
-   ```
-
-5. **Validate**
-   - BindMode::Auto should detect Android and use abstract sockets
-   - `mesh.peers` should show eastGate (and LAN mesh via relay)
-   - Test cellular relay fallback if WiFi disconnected
-
----
-
-## Architecture (Current — Working)
-
-```
-INTERNET → Cloudflare → golgi :443 (Caddy TLS)
-    → WG 10.13.37.2:7780 → sporeGate songBird drawbridge
-        → /hub/* → jupyter capability → ironGate :8000 (JupyterHub 5.4.5) ✅ 200
-
-Build/Deploy:
-Forgejo push → sporeGate Sovereign CI → pepti warehouse (golgi depot)
-    → x86_64-musl: songbird (23MB), beardog (11MB)
-    → aarch64-android: songbird (21MB), beardog (built)
-
-Mesh (current):
-    sporeGate ←→ ironGate (LAN, 192.168.4.x, trust pending)
-    sporeGate ←→ golgi (WG relay, bidirectional)
-    flockGate ←→ golgi (WAN, peering pending)
-    grapheneGate ←→ eastGate (mobile, deploy pending)
-    strandGate: OFFLINE (unreachable)
-```
+**After this**: FULL MESH (LAN + WAN + mobile)
 
 ---
 
 ## Repo Status
 
 ```
-✅ bearDog       6ef436864  (gatehouse + Android fix)
-✅ songBird      40699793   (drawbridge wired into orchestrator)
-✅ skunkBat      e7eaa5d    (stable)
-✅ cellMembrane  c83bcbc    (relay + freshness)
-✅ primalSpring  446cdad    (118 scenarios, mesh_convergence_ops)
-✅ wateringHole  bceb7c1    (E2E LIVE status)
-✅ sporePrint    99bfc9e    (living topology)
-✅ petalTongue   0f8da6b    (stable)
+bearDog       6ef436864  gatehouse + Android fix
+songBird      40699793   drawbridge wired into orchestrator
+skunkBat      e7eaa5d    stable
+primalSpring  66ebdb7    122 scenarios, 1095 tests, 0 debt
+wateringHole  2cf8336    LAN+WAN MESHED posture
+sporePrint    99bfc9e    living topology
+cellMembrane  0704132    relay + freshness
+petalTongue   0f8da6b    stable
 ```
 
 All at GitHub↔Forgejo parity. Zero divergence.
@@ -191,20 +238,14 @@ All at GitHub↔Forgejo parity. Zero divergence.
 ## Critical Path
 
 ```
-✅ E2E HTTP path LIVE (lab.primals.eco → 200)
-✅ Pepti warehouse complete (all arches)
-✅ All code shipped + compiled
-
-NEXT:
-1. sporeGate: mesh trust config                    ← UNLOCKS capability discovery
-2. flockGate: mesh.init via golgi                  ← WAN MESH
-3. eastGate: grapheneGate pepti deploy + mesh.init ← MOBILE MESH
-4. sporeGate: strandGate offline investigation     ← HARDWARE
-
-After 1+2: WAN mesh operational (capability.call across relay)
-After 1+3: Mobile mesh operational (Android + abstract sockets)
+1. [PRIMAL] toadStool: DH-1 /tmp fix           → systemd hardening
+2. [PRIMAL] primalSpring: LAUNCHER-01 aarch64   → pepti warehouse
+3. [GATE]   sporeGate: strandGate SSH + deploy  → LAN complete
+4. [GATE]   eastGate: grapheneGate ADB deploy   → FULL MESH
+5. [GATE]   sporeGate: re-enable dark-forest    → security posture
+6. [FUTURE] biomeOS: cross-gate graph executor  → HPC fan-out
 ```
 
 ---
 
-*Wave 132h — E2E validated. Mesh peering phase. Trust, then peer, then full mesh.*
+*Wave 132h — Primal code complete. Gate deploys next. Zero P1 blockers.*

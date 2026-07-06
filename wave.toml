@@ -12,9 +12,9 @@
 id = 132
 sub = "h"
 date = "2026-07-05"
-posture = "E2E LIVE — MESH PEERING. Full HTTP path validated. Pepti complete. Remaining: mesh trust config + WAN/mobile peering."
+posture = "LAN+WAN MESHED. sporeGate↔ironGate peered, flockGate WAN peered. Remaining: grapheneGate mobile deploy + LAUNCHER-01."
 publisher = "eastGate-overwatch"
 
 [gates]
 online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate"]
-offline = []
+offline = ["strandGate"]

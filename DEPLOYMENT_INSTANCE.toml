@@ -15,11 +15,11 @@
 
 [instance]
 name = "ecoPrimals-alpha"
-wave = 110
+wave = 132
 topology = "diderm"
 vps_provider = "digitalocean"
 region = "nyc1"
-last_updated = "2026-06-11"
+last_updated = "2026-07-06"
 
 # ──────────────────────────────────────────────────────────────
 # VPS NODES (K-Derm diderm envelope)
