@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 132
-sub = "h"
-date = "2026-07-05"
-posture = "LAN+WAN MESHED. sporeGate↔ironGate peered, flockGate WAN peered. Remaining: grapheneGate mobile deploy + LAUNCHER-01."
+id = 133
+sub = "a"
+date = "2026-07-06"
+posture = "ENMESH+HARDEN+VALIDATE. All primal code shipped. Omada 10G backbone LIVE (house1↔house2). Pepti-first enforced. Gates enrolling as hardware allows."
 publisher = "eastGate-overwatch"
 
 [gates]
