@@ -74,9 +74,17 @@ The mesh transport is live — biomeOS wires the graph executor to use it.
 
 ---
 
-## FOR: Gate Teams (deploy from pepti)
+## FOR: Gate Teams (deploy from pepti — NO local builds)
 
-Gate teams consume from `membrane.primals.eco/depot/`. No code changes required.
+Gate teams consume EXCLUSIVELY from pepti warehouse. No local builds exist.
+
+```
+Source: membrane.primals.eco/depot/{triple}/{binary}
+   WG: 10.13.37.1:/opt/ecoPrimals/depot/{triple}/{binary}
+Triples: x86_64-unknown-linux-musl, aarch64-unknown-linux-musl
+```
+
+Local `plasmidBin/primals/` is empty. All gates pull from pepti.
 
 ---
 
@@ -139,9 +147,8 @@ Gate teams consume from `membrane.primals.eco/depot/`. No code changes required.
    - Test WiFi disconnect → mesh auto-reconnect
    - Validate StrongBox HSM health
 
-3. **Cross-deployment issue**: graphenegate-readiness scenario failures are
-   environment-dependent (0 on gates with local depot, 14 on WAN gates without).
-   Fixed in primalSpring — test now accepts both values.
+3. **Deployment**: All binaries from pepti warehouse. No local depot needed.
+   Scenarios SKIP local checks gracefully — pepti is the SSOT.
 
 ---
 
