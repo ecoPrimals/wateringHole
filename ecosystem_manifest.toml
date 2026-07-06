@@ -74,6 +74,7 @@ build_authority = "sporeGate"         # sovereign CI: builds all primals locally
 depot_server = "golgiBody"            # WAN depot: serves binaries via Caddy TLS
 sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade
 external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
+remote_access = "golgiBody"           # RustDesk hbbs+hbbr — sovereign remote desktop relay (remote.primals.eco)
 
 # ═══════════════════════════════════════════════════════════════════
 # Compute Capabilities — GPU/shader/precision metadata
@@ -757,7 +758,7 @@ bind_mode = "uds"
 composition = "full"
 transport = "local"
 wg_ip = "10.13.37.1"
-roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "caddy_tls"]
+roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "caddy_tls", "remote_access"]
 mesh_peer = "127.0.0.1:7700"
 notes = "VPS inner membrane — 13/13 NUCLEUS, Forgejo, Caddy"
 repos = [
