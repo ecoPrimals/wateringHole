@@ -234,15 +234,51 @@ MESH OVERLAYS:
 
 Copy this blurb to all active teams/gates:
 
-| Recipient | Focus |
-|-----------|-------|
-| **sporeGate** | 134a pepti rebuild (5 primals), songBird redeploy |
-| **flockGate** | 134a WAN-DISPATCH-01 re-validation after pepti rebuild |
-| **ironGate** | Cascade refresh (stale Jul 4), 134b strandGate enrollment prep |
-| **sporePrint** | 134b sovereignty sprint, DNS cutover, petalTongue rendering |
-| **bearDog** | 134b CryptoProvider fix (UNIT-DIV-04 — P1 for DNS cutover) |
-| **projectNUCLEUS** | Composition subtype manifests, deployment profiles |
-| **primalSpring** | 135+ SHOW_HN E-category prep (cold clone, CI badges, test naming) |
+| Recipient | Focus | Priority |
+|-----------|-------|----------|
+| **sporeGate** | 134a pepti rebuild (10 primals evolved), songBird redeploy, golgi CI log fix | **NOW** |
+| **flockGate** | 134a WAN-DISPATCH-01 re-validation after pepti rebuild | After pepti |
+| **ironGate** | Cascade refresh (stale Jul 4), 134b strandGate enrollment prep | Next SSH |
+| **rhizoCrypt** | 2 server startup test timeouts — `is_running` flag never set in `serve_with_tcp` readiness poll | Code team |
+| **barraCuda** | 10 ESN/wgpu SIGSEGV — `BindGroupLayout` crash in wgpu-core on GPU dispatch tests | Code team |
+| **bearDog** | 134b CryptoProvider fix (UNIT-DIV-04 — P1 for DNS cutover) | Code team |
+| **cellMembrane** | CI-DIV-01/02/03 manifest absorption (biomeOS `--package`, skunkBat `--package`, nestGate `ld.lld`) | Code team |
+| **sporePrint** | 134b sovereignty sprint, DNS cutover, petalTongue rendering | After 134a |
+| **projectNUCLEUS** | Composition subtype manifests, deployment profiles | Ongoing |
+| **primalSpring** | 135+ SHOW_HN E-category prep (cold clone, CI badges, test naming) | Ongoing |
+
+---
+
+## Code Team Dispatches (pre-existing debt for dedicated IDE agents)
+
+### rhizoCrypt — Server Startup Readiness Bug
+
+2 tests fail with 10s timeout: `test_run_server_host_override_enables_tcp`, `test_run_server_tcp_via_jsonrpc_port_env`. Root cause: `serve_with_tcp` polls `is_running` with `yield_now()` but the flag never transitions to `true` in time. The readiness notify loop spins indefinitely.
+
+**File**: `crates/rhizocrypt-service/src/lib.rs:410-419`
+**Fix options**: (a) replace `yield_now()` with a bounded `sleep(50ms)` poll, (b) fire readiness from the bind point inside `serve_with_tcp` rather than polling a flag, (c) use `tokio::sync::watch` instead of atomic bool.
+
+### barraCuda — wgpu/ESN GPU Dispatch Crashes
+
+10 tests SIGSEGV in wgpu-core (`BindGroupLayout[Id(0,3)] does not exist`). All in `esn_v2::model::tests` and `timeseries::tests`. Triggered by GPU driver interaction on eastGate (AMD?).
+
+**Fix options**: (a) gate ESN GPU tests behind `#[cfg(feature = "gpu-tests")]` or `#[ignore]` with env flag, (b) investigate wgpu-core version compatibility with host GPU driver, (c) add wgpu device capability probe before GPU-bound tests.
+
+### bearDog — CryptoProvider Panic (UNIT-DIV-04)
+
+`rustls-rustcrypto` CryptoProvider panics on install. Blocks Caddy→bearDog ACME TLS cutover (134b sovereignty sprint). P1 for DNS cutover.
+
+**File**: `crates/beardog-acme/src/` area — `CryptoProvider::install()` call site
+**Context**: ES256 signing + defensive install added in Wave 132f (`136857739`). The panic may be double-install or incompatible provider state.
+
+### cellMembrane — CI Build Workaround Absorption
+
+3 per-primal build workarounds in `build-local.sh` need absorption into `ecosystem_manifest.toml`:
+- CI-DIV-01: biomeOS requires `--package biomeos-unibin`
+- CI-DIV-02: skunkBat requires `--package skunk-bat-server`
+- CI-DIV-03: nestGate requires `ld.lld` linker (project `.cargo/config.toml` diverges)
+
+**Target**: Add `[primals.<name>] package = "..."` and `linker = "..."` fields to manifest. `plasmid.harvest` reads manifest instead of hardcoded workarounds.
 
 ---
 
@@ -250,14 +286,11 @@ Copy this blurb to all active teams/gates:
 
 | # | Item | Owner | Blocked by | Status |
 |---|------|-------|------------|--------|
-| 1 | Pepti rebuild: songBird + bearDog + toadStool + biomeOS + petalTongue + barraCuda + skunkBat + nestGate + coralReef + sweetGrass | sporeGate CI | — | **NEXT** — debt sweep added 4 more primals to rebuild |
-| 2 | Fix golgi `sovereign-ci.log` permissions | golgi/cellMembrane | — | Quick fix, unblocks clean CI logging |
-| 3 | Move CI-DIV-01/02/03 workarounds into manifest | primal teams + cellMembrane | — | Isomorphism: manifest-driven builds |
-| 4 | Redeploy songBird on sporeGate from fresh pepti | sporeGate team | #1 | Pending |
-| 5 | flockGate WAN-DISPATCH-01 re-run → target FULL PASS | flockGate | #4 | Pending |
-| 6 | grapheneGate 13/13 from fresh pepti | eastGate | #1 | Pending |
-| 7 | ironGate cascade refresh | ironGate | SSH access | STALE since Jul 4 |
-| 8 | bearDog CryptoProvider fix (UNIT-DIV-04) | bearDog team | Investigation | **P1 for 134b** |
-| 9 | strandGate SSH enrollment | eastGate hw | Physical access | Pending (house 2) |
+| 1 | Pepti rebuild: 10 primals (songBird, bearDog, toadStool, biomeOS, petalTongue, barraCuda, skunkBat, nestGate, coralReef, sweetGrass) | sporeGate CI | — | **NEXT** — all code debt swept, ready to build |
+| 2 | Fix golgi `sovereign-ci.log` permissions | golgi/cellMembrane | — | Quick fix |
+| 3 | Redeploy songBird on sporeGate from fresh pepti | sporeGate team | #1 | Pending |
+| 4 | flockGate WAN-DISPATCH-01 re-run → target FULL PASS | flockGate | #3 | Pending |
+| 5 | grapheneGate 13/13 from fresh pepti | eastGate | #1 | Pending |
+| 6 | ironGate cascade refresh | ironGate | SSH access | STALE since Jul 4 |
 
-*Wave 133e — Post-cascade. Pipeline evolution dispatched: evolve sovereign CI from bash scripts to manifest-driven Rust pipeline. The pattern must be fractal — same shape for single primal rebuild, full sweep, new gate onboard, and new builder enrollment. sporeGate already holds both evolved primals (songBird + bearDog). Critical path: pepti rebuild → songBird redeploy → WAN-DISPATCH-01 FULL PASS.*
+*Wave 133e — Code debt swept: 4 primals fixed, 14/14 clippy zero. Pre-existing issues dispatched to dedicated code teams (rhizoCrypt readiness bug, barraCuda wgpu SIGSEGV, bearDog CryptoProvider panic, cellMembrane CI workaround absorption). All primal code frontloaded and clean. Critical path: pepti rebuild (10 primals) → songBird redeploy → WAN-DISPATCH-01 FULL PASS.*
