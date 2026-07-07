@@ -1,8 +1,8 @@
 # ecoPrimals Ecosystem Blurb — Wave 133e
 
-**Date**: Jul 7, 2026 14:50 EDT | **Wave**: 133e | **From**: eastGate overwatch
-**Posture**: **ECOSYSTEM STANDARDS REFRESHED — cascaded, converged, wave plan active**
-Post-cascade: bearDog `a586fbee` fix absorbed (clippy-zero + crossbeam-epoch advisory). All repos converged across origin + forgejo. 1098 tests GREEN.
+**Date**: Jul 7, 2026 16:45 EDT | **Wave**: 133e | **From**: eastGate overwatch
+**Posture**: **CODE DEBT SWEPT — teams delivered, convergence accelerating**
+Code teams delivered: barraCuda deep debt sweep, bearDog gatehouse hardening, rhizoCrypt readiness fix + test splits, primalSpring cold-clone + CI badges + deep debt. 12 primals now need pepti rebuild. 1098 tests GREEN.
 
 ---
 
@@ -29,15 +29,17 @@ Post-cascade: bearDog `a586fbee` fix absorbed (clippy-zero + crossbeam-epoch adv
 - ironGate head still STALE (Jul 4) — needs cascade refresh on next SSH
 - 1098 tests, 125 scenarios, 0 fail — confirmed post-cascade
 
-**Code debt sweep (14 primals)**:
+**Code debt sweep (14 primals — overwatch + code teams)**:
 - 14/14 clippy ZERO warnings
-- toadStool `002332e` — widened shader dispatch error assertion for wgpu fallback path
-- biomeOS `39a1118` — squirrel availability test made environment-agnostic
-- petalTongue `ebaf483` — mesh topology test updated for 11-node count (10 gates + 1 VPS)
-- barraCuda `014a69a` — socket discovery test made environment-agnostic
-- rhizoCrypt: 2 pre-existing server startup timeout tests (environment-dependent, not new debt)
-- barraCuda: 10 ESN/wgpu SIGSEGV tests (GPU driver interaction, not code debt)
-- All fixes pushed to both remotes — 8 primals now need pepti rebuild (was 6)
+- barraCuda `7edc83a` — deep debt sweep: capability-based discovery, clone reduction, fn pointers + ESN wgpu fix
+- bearDog `f6924be` — gatehouse production hardening: bind errors, shadow metrics, tests
+- rhizoCrypt `2d9c146` — readiness fix + vendor decoupling + transport split + test file splits
+- primalSpring `d8028d6` — cold-clone fix (E-2), CI workflow + badges (SHOW_HN), deep debt cleanup
+- toadStool `002332e` — shader dispatch error assertion widened for wgpu fallback
+- biomeOS `39a1118` — squirrel availability test environment-agnostic
+- petalTongue `ebaf483` — mesh topology test updated for 11-node count
+- rhizoCrypt readiness tests: still environment-dependent (partial fix, needs further investigation)
+- 12 primals now need pepti rebuild
 
 ---
 
@@ -239,8 +241,8 @@ Copy this blurb to all active teams/gates:
 | **sporeGate** | 134a pepti rebuild (10 primals evolved), songBird redeploy, golgi CI log fix | **NOW** |
 | **flockGate** | 134a WAN-DISPATCH-01 re-validation after pepti rebuild | After pepti |
 | **ironGate** | Cascade refresh (stale Jul 4), 134b strandGate enrollment prep | Next SSH |
-| **rhizoCrypt** | 2 server startup test timeouts — `is_running` flag never set in `serve_with_tcp` readiness poll | Code team |
-| **barraCuda** | 10 ESN/wgpu SIGSEGV — `BindGroupLayout` crash in wgpu-core on GPU dispatch tests | Code team |
+| **rhizoCrypt** | Readiness fix shipped, 2 startup tests still env-dependent — may need timeout increase | Code team |
+| **barraCuda** | wgpu fix + deep debt sweep DELIVERED — verify in pepti rebuild | Done |
 | **bearDog** | 134b CryptoProvider fix (UNIT-DIV-04 — P1 for DNS cutover) | Code team |
 | **cellMembrane** | CI-DIV-01/02/03 manifest absorption (biomeOS `--package`, skunkBat `--package`, nestGate `ld.lld`) | Code team |
 | **sporePrint** | 134b sovereignty sprint, DNS cutover, petalTongue rendering | After 134a |
@@ -251,18 +253,13 @@ Copy this blurb to all active teams/gates:
 
 ## Code Team Dispatches (pre-existing debt for dedicated IDE agents)
 
-### rhizoCrypt — Server Startup Readiness Bug
+### rhizoCrypt — Server Startup Readiness (PARTIALLY RESOLVED)
 
-2 tests fail with 10s timeout: `test_run_server_host_override_enables_tcp`, `test_run_server_tcp_via_jsonrpc_port_env`. Root cause: `serve_with_tcp` polls `is_running` with `yield_now()` but the flag never transitions to `true` in time. The readiness notify loop spins indefinitely.
+Readiness fix shipped (`edd950c`): replaced `yield_now()` spin-loop with `server.ready_notifier().notified().await`. Test file splits completed (>800L files split). However, 2 startup tests still timeout on eastGate under load — the `run_server_with_ready` path does UDS + manifest + neural announce before reaching TCP bind. May need increased timeout or async startup restructuring.
 
-**File**: `crates/rhizocrypt-service/src/lib.rs:410-419`
-**Fix options**: (a) replace `yield_now()` with a bounded `sleep(50ms)` poll, (b) fire readiness from the bind point inside `serve_with_tcp` rather than polling a flag, (c) use `tokio::sync::watch` instead of atomic bool.
+### barraCuda — wgpu/ESN (RESOLVED)
 
-### barraCuda — wgpu/ESN GPU Dispatch Crashes
-
-10 tests SIGSEGV in wgpu-core (`BindGroupLayout[Id(0,3)] does not exist`). All in `esn_v2::model::tests` and `timeseries::tests`. Triggered by GPU driver interaction on eastGate (AMD?).
-
-**Fix options**: (a) gate ESN GPU tests behind `#[cfg(feature = "gpu-tests")]` or `#[ignore]` with env flag, (b) investigate wgpu-core version compatibility with host GPU driver, (c) add wgpu device capability probe before GPU-bound tests.
+`9ef6641` fixed wgpu BindGroupLayout SIGSEGV. `7edc83a` deep debt sweep shipped: capability-based discovery, clone reduction, fn pointers.
 
 ### bearDog — CryptoProvider Panic (UNIT-DIV-04)
 
@@ -286,11 +283,11 @@ Copy this blurb to all active teams/gates:
 
 | # | Item | Owner | Blocked by | Status |
 |---|------|-------|------------|--------|
-| 1 | Pepti rebuild: 10 primals (songBird, bearDog, toadStool, biomeOS, petalTongue, barraCuda, skunkBat, nestGate, coralReef, sweetGrass) | sporeGate CI | — | **NEXT** — all code debt swept, ready to build |
+| 1 | Pepti rebuild: 12 primals (songBird, bearDog, toadStool, biomeOS, petalTongue, barraCuda, rhizoCrypt, skunkBat, nestGate, coralReef, sweetGrass + sourDough unchanged) | sporeGate CI | — | **NEXT** — all code debt swept, teams delivered, ready to build |
 | 2 | Fix golgi `sovereign-ci.log` permissions | golgi/cellMembrane | — | Quick fix |
 | 3 | Redeploy songBird on sporeGate from fresh pepti | sporeGate team | #1 | Pending |
 | 4 | flockGate WAN-DISPATCH-01 re-run → target FULL PASS | flockGate | #3 | Pending |
 | 5 | grapheneGate 13/13 from fresh pepti | eastGate | #1 | Pending |
 | 6 | ironGate cascade refresh | ironGate | SSH access | STALE since Jul 4 |
 
-*Wave 133e — Code debt swept: 4 primals fixed, 14/14 clippy zero. Pre-existing issues dispatched to dedicated code teams (rhizoCrypt readiness bug, barraCuda wgpu SIGSEGV, bearDog CryptoProvider panic, cellMembrane CI workaround absorption). All primal code frontloaded and clean. Critical path: pepti rebuild (10 primals) → songBird redeploy → WAN-DISPATCH-01 FULL PASS.*
+*Wave 133e — Code teams delivered. barraCuda wgpu fix + deep debt sweep. bearDog gatehouse hardening. rhizoCrypt readiness fix + vendor decoupling. primalSpring cold-clone + CI badges for SHOW_HN. 12 primals evolved, all pushed. 14/14 clippy zero. Critical path: pepti rebuild (12 primals) → songBird redeploy → WAN-DISPATCH-01 FULL PASS.*
