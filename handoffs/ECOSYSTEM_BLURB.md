@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 133a (afternoon refresh)
+# ecoPrimals Ecosystem Blurb — Wave 133b
 
-**Date**: Jul 6, 2026 15:13 EDT | **Wave**: 133a | **From**: eastGate overwatch
-**Posture**: **ENMESH + HARDEN + VALIDATE** — 30/30 ecobins in pepti. grapheneGate 12/13 LIVE. CI divergences surfaced. sporePrint evolving. DNS cutover path mapped.
+**Date**: Jul 7, 2026 07:51 EDT | **Wave**: 133b | **From**: eastGate overwatch
+**Posture**: **ENMESH + HARDEN + VALIDATE** — 30/30 ecobins in pepti. 1097 tests GREEN. CI convergence in progress. Pattern hardening wave.
 
 ---
 
@@ -17,7 +17,7 @@ LIVE:
   ✅ Relay: golgi synced, 17 repos shallow-cloned, disk 75%
   ✅ 13/13 primals STANDBY — zero code debt
   ✅ Sovereignty: S1-S4 ALL GRADUATED on inner membrane
-  ⚠️ primalSpring: 1093 pass, 4 fail (SHADER_F64 manifest gap), 2 ignored
+  ✅ primalSpring: 1097 pass, 0 fail, 124 scenarios (SHADER_F64 RESOLVED)
 
 MESHED:
   eastGate ←✅→ ironGate      (LAN, 10G Omada)
@@ -46,111 +46,36 @@ MESHED:
 
 ## REMAINING WORK BY TEAM
 
-### primalSpring team (parallel tab)
+### RESOLVED since last blurb
 
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| PS-F64-01 | **P1** | Add `SHADER_F64` / f64 precision to ecosystem manifest | Causes 4 test failures (shader pipeline + registry gate) |
-| PS-WAN-01 | P2 | Push 124th scenario to origin (ahead=2 after rebase reconciliation) | Local only |
-
-**Test suite**: 1093 pass, 4 fail, 2 ignored. Was 1096/0 — regression is manifest gap, not code.
-
----
-
-### biomeOS team
-
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| ~~CI-DIV-01~~ | ~~P2~~ | ~~`--package biomeos-unibin` needed~~ | **RESOLVED** (`f77886d1`) |
-
-**Zero remaining items.** STANDBY.
+| ID | Resolution |
+|----|------------|
+| ~~PS-F64-01~~ | **RESOLVED** (`4e7f888`) — SHADER_F64 + compute precision added to manifest. 1097 tests GREEN. |
+| ~~CI-DIV-01~~ | **RESOLVED** (`f77886d1`) — biomeOS `default-members` fixed. |
+| ~~golgi HEAD~~ | **RESOLVED** — golgiBody auto-publishing freshness every 15 min. |
 
 ---
 
-### skunkBat team
+### Active P1 items
 
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| CI-DIV-02 | P2 | `cargo build --bin skunkbat` fails without `--package skunk-bat-server` | Fix: add `skunk-bat-server` to `default-members` in workspace Cargo.toml |
-
----
-
-### nestGate team
-
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| CI-DIV-03 | P2 | `.cargo/config.toml` requires `ld.lld` — diverges from ecosystem | Fix: converge on ecosystem linker strategy or document exception |
-| NESTGATE-ANDROID-01 | P2 | UDS fatal on Android (grapheneGate) | Needs Android socket adaptation |
+| Team | ID | Item |
+|------|----|------|
+| cellMembrane | CI-DIV-07 | `temporal.cascade` doesn't commit freshness (workaround active, needs proper fix) |
+| flockGate | WAN-DISPATCH-01 | Cross-gate `capability.call` validation (primalSpring scenario ready) |
+| eastGate hw | STRAND-SSH-01 | strandGate SSH key deploy (house 2, .103) |
+| sporePrint | SP-DIV-01 | DNS cutover blocked on VPS NUCLEUS + bearDog ACME |
 
 ---
 
-### coralReef team
+### Active P2 items
 
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| CORALREEF-ANDROID-01 | P2 | UDS fatal on Android (grapheneGate) | Needs Android socket adaptation |
-
----
-
-### sweetGrass team
-
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| CI-DIV-06 | P3 | aarch64 binary larger than x86 (101% ratio — only primal where this happens) | Investigate conditional compilation in deps |
-
----
-
-### cellMembrane / sporeGate team
-
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| CI-DIV-07 | **P1** | `temporal.cascade` doesn't commit freshness updates — root cause of golgi HEAD staleness | Fix `publish_freshness()`: re-read HEADs, bump timestamp, commit + push |
-| CI-DIV-08 | P2 | ecosystem_manifest.toml has no schema validation — caused manifest parse failures | Pre-commit hook or CI validation |
-| SP-DIV-04 | P2 | `temporal.cascade` doesn't rebuild Zola — VPS serves stale sporePrint | Post-cascade hook for `zola build` |
-| VPS-NUCLEUS | P2 | Deploy minimal NUCLEUS on golgi for sporePrint serving (petalTongue + NestGate + songBird + bearDog, ~70MB) | Handoff filed: `EASTGATE_WAVE133_SPOREPRINT_VPS_NUCLEUS.md` |
-
----
-
-### sporePrint team
-
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| SP-DIV-01 | **P1** | `primals.eco` DNS still points to GitHub Pages — not sovereign | Blocked on VPS NUCLEUS + bearDog ACME |
-| SP-DIV-02 | P2 | Dual-push required (origin + forgejo) — workaround until DNS cutover | Operational friction |
-| SP-DIV-05 | P3 | `.github/workflows/deploy.yml` still load-bearing — archive after cutover | Cleanup |
-| — | — | Content evolution | ACTIVE — 226 pages, 254 tests, SVG viz, living systems pages |
-
-**Workaround**: continue `git push origin main && git push forgejo main` until DNS cutover.
-
----
-
-### flockGate team
-
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| WAN-DISPATCH-01 | **P1** | Validate cross-gate `capability.call` via golgi relay | Not yet tested. primalSpring scenario ready (124th). |
-| WAN-LATENCY-01 | P2 | Characterize cross-gate RTT (p50/p95/p99) | After dispatch validation |
-
----
-
-### eastGate hardware team
-
-| ID | Priority | Item | Status |
-|----|----------|------|--------|
-| STRAND-SSH-01 | **P1** | strandGate SSH key deploy (house 2, .103) | Physical access required |
-| DARK-FOREST-01 | P2 | Re-enable dark-forest after 3+ LAN peers have bearDog | Blocked on STRAND-SSH-01 |
-| GRAPHENE-FULL-01 | P2 | grapheneGate full NUCLEUS — nestGate + coralReef adaptation | 12/13 running, 2 primals need Android UDS fix |
-| FLEET-ENROLL | P3 | northGate/westGate/swiftGate/kinGate enrollment | As hardware allows |
-| LAUNCHER-02 | P3 | nucleus_launcher: skip failed primals, continue with available | Filed in grapheneGate AAR |
-
----
-
-### All primal teams (P3 — ecosystem convergence, no rush)
-
-| ID | Priority | Item |
-|----|----------|------|
-| CI-DIV-04 | P3 | 13/14 primals have project-level `.cargo/config.toml` — standardize shared template |
-| CI-DIV-05 | P3 | Rust toolchain pinning inconsistent (1.93→1.94.1→stable→none) — single strategy |
+| Team | ID | Item |
+|------|----|------|
+| eastGate hw | DARK-FOREST-01 | Re-enable dark-forest after 3+ LAN peers have bearDog |
+| cellMembrane | VPS-NUCLEUS | Deploy NUCLEUS on golgi for sporePrint (~70MB) |
+| cellMembrane | CI-DIV-08 | ecosystem_manifest.toml schema validation |
+| cellMembrane | SP-DIV-04 | Post-cascade `zola build` hook for sporePrint |
+| sporePrint | SP-DIV-02 | Dual-push workaround until DNS cutover |
 
 ---
 
@@ -182,27 +107,68 @@ projectNUCLEUS ce928f0   synced to Wave 132f
 
 ```
 ✅ 30/30 ecobins in pepti (verified)
+✅ 1097 tests GREEN, 124 scenarios (PS-F64-01 RESOLVED)
 ✅ grapheneGate 12/13 LIVE
 ✅ biomeOS CI-DIV-01 RESOLVED
-✅ golgi disk recovered + HEAD metadata published
-✅ sporePrint sovereignty path mapped
+✅ golgi freshness auto-publishing (every 15 min)
 
-ACTIVE — ENMESH + HARDEN + VALIDATE:
-1. [CODE]     PS-F64-01: SHADER_F64 manifest gap → 4 tests back to green
-2. [CODE]     CI-DIV-07: cascade freshness publishing → automated HEAD updates
-3. [GATE]     STRAND-SSH-01: strandGate enrollment → 3rd LAN peer
-4. [GATE]     WAN-DISPATCH-01: flockGate cross-gate validation → WAN mesh proven
-5. [GATE]     DARK-FOREST-01: re-enable after enrollment → security posture
-6. [DEPLOY]   VPS-NUCLEUS: sporePrint on golgi → sovereignty cutover path
-7. [DEPLOY]   SP-DIV-01: DNS cutover (primals.eco → VPS) → sovereign public site
-
-CONVERGENCE (P2-P3 — as teams have cycles):
-  - CI-DIV-02: skunkBat default-members fix
-  - CI-DIV-03: nestGate linker convergence
-  - NESTGATE-ANDROID-01 + CORALREEF-ANDROID-01: Android UDS adaptation
-  - CI-DIV-04/05: ecosystem-wide config + toolchain standardization
+ACTIVE:
+1. [GATE]     STRAND-SSH-01: strandGate enrollment → 3rd LAN peer
+2. [GATE]     WAN-DISPATCH-01: flockGate cross-gate validation
+3. [GATE]     DARK-FOREST-01: re-enable after enrollment
+4. [DEPLOY]   VPS-NUCLEUS + DNS cutover → sovereign public site
+5. [CONVERGE] Pattern hardening (see addendum below)
 ```
 
 ---
 
-*Wave 133a — 30/30 ecobins deployed. 12/13 mobile. CI divergences surfacing and resolving. Sovereignty cutover path clear. Enmesh, harden, validate.*
+## ADDENDUM: Convergence Cleanup — Pattern Hardening
+
+**Context**: Sovereign CI (Wave 133a) built all 30 ecobins but exposed
+pattern divergences across primals. grapheneGate NUCLEUS deploy exposed
+Android socket gaps. These are P2/P3 cleanup items — the ecosystem works,
+but these divergences create CI friction and block 13/13 mobile. Fixing
+them hardens the patterns so every primal is interchangeable in the pipeline.
+
+**The standard every primal must meet**:
+
+```
+1. BUILDABLE:  cargo build --release --target $TRIPLE --bin $PRIMAL_LOWERCASE
+               (no --package flag, no special linker deps)
+2. RUNNABLE:   PRIMAL_BIND_MODE=tcp_only → starts on TCP, no UDS attempt
+               (required for Android/grapheneGate)
+3. TOOLCHAIN:  rust-toolchain.toml present (can be "stable" — just explicit)
+4. CONFIG:     .cargo/config.toml inherits ecosystem defaults unless documented exception
+```
+
+**Lagging primals and what each needs**:
+
+| Primal | Issue | What to do | Pattern to follow |
+|--------|-------|------------|-------------------|
+| **skunkBat** | CI-DIV-02: `--bin skunkbat` fails without `--package skunk-bat-server` | Add `default-members = ["crates/skunk-bat-server"]` to workspace `Cargo.toml` | biomeOS `f77886d1` — same fix, same pattern |
+| **nestGate** | CI-DIV-03: `.cargo/config.toml` requires `ld.lld` (12 other primals use `gcc`) | Document exception with rationale (gcc CRT segfaults) OR re-test with current gcc | If exception: add `# EXCEPTION: ld.lld required — see CI-DIV-03` comment block |
+| **nestGate** | NESTGATE-ANDROID-01: UDS fatal on Pixel 8a | Honor `PRIMAL_BIND_MODE=tcp_only` — skip UDS bind, use TCP | 11 primals already do this successfully on grapheneGate |
+| **coralReef** | CORALREEF-ANDROID-01: UDS fatal on Pixel 8a | Honor `PRIMAL_BIND_MODE=tcp_only` — skip UDS bind, use TCP | Same as nestGate — these are the only 2 of 13 that fail |
+| **sweetGrass** | CI-DIV-06: aarch64 binary 101% of x86 size (only primal where arm > x86) | Investigate `cfg(target_arch)` in deps — may have x86-only code compiled unconditionally on arm | All other primals are 75-92% — sweetGrass is the outlier |
+
+**Ecosystem-wide (P3 — all primals, no rush)**:
+
+| Issue | What | Current state |
+|-------|------|---------------|
+| CI-DIV-04 | 13/14 primals have project-level `.cargo/config.toml` (8-135 lines) | Standardize a shared template; inherit unless documented exception |
+| CI-DIV-05 | Rust toolchain pinning: bearDog=1.93, songBird=1.94, nestGate=1.94.1, 5="stable", 5=none | Pick one strategy: either all pin explicit version or all use "stable" |
+
+**When this cleanup is done**:
+- Sovereign CI builds all 30 ecobins with zero manual workarounds
+- 13/13 primals run on grapheneGate (Android)
+- Every primal meets the 4-point standard above
+- CI pipeline is a single loop: `for primal in *; do cargo build --bin $primal; done`
+
+**Priority**: P2 for skunkBat/nestGate/coralReef (blocking CI automation + 13/13 mobile).
+P3 for sweetGrass/ecosystem-wide (hygiene, not blocking).
+
+After fixes: `git push origin main && git push forgejo main`
+
+---
+
+*Wave 133b — Pattern hardening. Bring lagging primals to par. The ecosystem works — make it uniform.*
