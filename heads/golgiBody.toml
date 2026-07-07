@@ -1,17 +1,17 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: golgiBody | Updated: 2026-07-07T12:14:29Z
+# Gate: golgiBody | Updated: 2026-07-07T12:29:45Z
 
 [meta]
 gate = "golgiBody"
-updated = "2026-07-07T12:14:29Z"
+updated = "2026-07-07T12:29:45Z"
 
 [heads]
 barraCuda = "b2618db0511100a2112196635c037c641649d927"
 bearDog = "6ef436864e762b479eb5962b6161a6df52764cdc"
 biomeOS = "f77886d12e56095dbe7b344ad43ace96bd2e2179"
 cellMembrane = "c93344c22d66da473465861b6eb625a9275de6c7"
-coralReef = "a6e542cb0b77a6781ade2a31dd4238fdd270ecc3"
+coralReef = "2db3019ae57598a8bf558e8fc2b3b2bc9f4aece6"
 loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
 nestGate = "d355c8dbbba9df79f9ee8497c19298b91fe45fbd"
 petalTongue = "0f8da6b4153313997ccc09ce18288824171bf71d"
@@ -23,4 +23,4 @@ songBird = "40699793590290fd5d9c61cd825c7cdf408ce0c2"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
 sweetGrass = "f189ee2b91ee689a491ed8aa07a478520fdc94da"
 toadStool = "82a4209f6e2b17c10be00ded6c4e70a84a893b0c"
-wateringHole = "848aeadd557a9f73148e7165d0427029f41aaaba"
+wateringHole = "52b79c54bf2f20fd29a55a0324df67c4ad99adad"
