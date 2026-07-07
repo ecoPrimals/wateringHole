@@ -1,14 +1,14 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: golgiBody | Updated: 2026-07-07T18:59:21Z
+# Gate: golgiBody | Updated: 2026-07-07T19:14:28Z
 
 [meta]
 gate = "golgiBody"
-updated = "2026-07-07T18:59:21Z"
+updated = "2026-07-07T19:14:28Z"
 
 [heads]
 barraCuda = "b2618db0511100a2112196635c037c641649d927"
-bearDog = "a586fbee690085b09c4b936604555edd6c2b21a6"
+bearDog = "f6924beb51d9ab8bd7d150afb40c9362e8732667"
 biomeOS = "f77886d12e56095dbe7b344ad43ace96bd2e2179"
 cellMembrane = "c93344c22d66da473465861b6eb625a9275de6c7"
 coralReef = "2db3019ae57598a8bf558e8fc2b3b2bc9f4aece6"
@@ -23,4 +23,4 @@ songBird = "026f6e3ebef6066fedb64cd7e96b13c9420e418a"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
 sweetGrass = "bfac29311075bbe7a7875a1f267b49c43e0e61cf"
 toadStool = "82a4209f6e2b17c10be00ded6c4e70a84a893b0c"
-wateringHole = "c05d5f54c5036a4426623c74f9dc0d5f90ab0836"
+wateringHole = "e3977bd2a54c03b85cc4e3ac97cca0b2e11fe447"
