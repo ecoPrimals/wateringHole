@@ -1,8 +1,8 @@
 # ecoPrimals Ecosystem Blurb — Wave 133e
 
-**Date**: Jul 7, 2026 11:05 EDT | **Wave**: 133e | **From**: eastGate overwatch
-**Posture**: **ECOSYSTEM STANDARDS REFRESHED — stale docs updated, resolved work archived, publication rubric integrated**
-Housekeeping wave: ecosystem standards (GLACIAL, SOVEREIGNTY, TOPOLOGY) brought to 133d. songBird drawbridge committed. Wave plan shaped through 135+.
+**Date**: Jul 7, 2026 14:40 EDT | **Wave**: 133e | **From**: eastGate overwatch
+**Posture**: **ECOSYSTEM STANDARDS REFRESHED — cascaded, reviewed, wave plan active**
+Post-cascade update: bearDog clippy-zero landed, sporeGate already holds songBird `026f6e3e` (auto-advertisement). eastGate head refreshed. ironGate still stale (Jul 4). 1098 tests GREEN.
 
 ---
 
@@ -21,7 +21,16 @@ Housekeeping wave: ecosystem standards (GLACIAL, SOVEREIGNTY, TOPOLOGY) brought 
 ✅ SHOW_HN publication rubric established (28 criteria, 4 categories)
 ```
 
-**This wave**: Standards housekeeping + wave plan. songBird drawbridge auto-advertisement committed. 2 superseded handoffs archived. GLACIAL, SOVEREIGNTY, TOPOLOGY docs updated to 133d. Wave plan shaped: 134a (deploy convergence), 134b (sovereignty sprint), 135+ (SHOW_HN readiness).
+**This wave**: Standards housekeeping + wave plan. songBird drawbridge auto-advertisement committed (`026f6e3e`). 2 superseded handoffs archived. GLACIAL, SOVEREIGNTY, TOPOLOGY docs updated to 133d. Wave plan shaped: 134a (deploy convergence), 134b (sovereignty sprint), 135+ (SHOW_HN readiness).
+
+**Cascade findings (14:40 EDT)**:
+- bearDog `a586fbee` landed — zero clippy warnings + crossbeam-epoch advisory fix
+- sporeGate already holds songBird `026f6e3e` — golgi relay picked up our push
+- projectNUCLEUS `b6f4c08` — composition subtypes docs synced to 133e
+- projectFOUNDATION `38c4d55` — time module + expanded test coverage
+- eastGate head REFRESHED (was stale since Jul 6, now 18:40Z)
+- ironGate head still STALE (Jul 4) — needs cascade refresh on next SSH
+- 1098 tests, 125 scenarios, 0 fail — confirmed post-cascade
 
 ---
 
@@ -176,4 +185,16 @@ Copy this blurb to all active teams/gates:
 
 ---
 
-*Wave 133e — Ecosystem standards refreshed. songBird drawbridge auto-advertisement committed. Wave plan shaped: 134a (pepti rebuild + WAN-DISPATCH-01 FULL PASS), 134b (sovereignty DNS cutover), 135+ (SHOW_HN readiness). The publication track is the glacial proof made external — every rubric criterion maps to work already on the critical path.*
+## Remaining Work (134a critical path)
+
+| # | Item | Owner | Blocked by | Status |
+|---|------|-------|------------|--------|
+| 1 | Pepti rebuild: songBird + bearDog + skunkBat + nestGate + coralReef + sweetGrass | sporeGate CI | — | **NEXT** — songBird `026f6e3e` already on sporeGate, bearDog `a586fbee` landed |
+| 2 | Redeploy songBird on sporeGate from fresh pepti | sporeGate team | #1 | Pending |
+| 3 | flockGate WAN-DISPATCH-01 re-run → target FULL PASS | flockGate | #2 | Pending |
+| 4 | grapheneGate 13/13 from fresh pepti | eastGate | #1 | Pending |
+| 5 | ironGate cascade refresh | ironGate | SSH access | STALE since Jul 4 |
+| 6 | bearDog CryptoProvider fix (UNIT-DIV-04) | bearDog team | Investigation | **P1 for 134b** |
+| 7 | strandGate SSH enrollment | eastGate hw | Physical access | Pending (house 2) |
+
+*Wave 133e — Post-cascade. sporeGate already holds the songBird evolution. 6 primals need pepti rebuild for full convergence. bearDog clippy-zero landed. The critical path to 134a is pepti rebuild → songBird redeploy → WAN-DISPATCH-01 FULL PASS.*
