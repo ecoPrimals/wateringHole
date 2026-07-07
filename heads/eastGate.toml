@@ -6,10 +6,10 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-07T13:40:00Z"
+updated = "2026-07-07T15:07:00Z"
 
 [heads]
-primalSpring = "014daf69ffc6d32b96bcab1f9cc9e6898d5845d9"
+primalSpring = "61944864032aa93e3b8d6fce543e24879a66c03e"
 songBird = "40699793590290fd5d9c61cd825c7cdf408ce0c2"
 bearDog = "6ef436864e762b479eb5962b6161a6df52764cdc"
 skunkBat = "e7eaa5d0006208912109b25e390fb7eac05ceee4"
@@ -21,7 +21,7 @@ sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
 toadStool = "1ec374980a3886f1bddc232f4360be3c81a356f2"
 barraCuda = "b2618db0511100a2112196635c037c641649d927"
 coralReef = "3078d0b6d6b99c3df5f404d25812f930a4b0fc3b"
-wateringHole = "c197f2d"
+wateringHole = "9da88bcd"
 sporePrint = "99bfc9e4bf5ba98301f4b273544b495179a67b48"
 loamSpine = "e68873d2c3092f6947f98655b7adb62d905178d8"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
