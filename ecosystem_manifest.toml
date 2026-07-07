@@ -100,6 +100,8 @@ category = "primal"
 description = "NestGate persistent storage + content-addressed crates"
 github_repo = "ecoPrimals/nestGate"
 forgejo_repo = "ecoPrimals/nestGate"
+# CI-DIV-03: requires ld.lld linker (project .cargo/config.toml diverges)
+linker = "ld.lld"
 
 # ═══════════════════════════════════════════════════════════════════
 # Primals (ecoPrimals org)
@@ -144,6 +146,7 @@ category = "primal"
 description = "GPU compute dispatch"
 github_repo = "ecoPrimals/barraCuda"
 forgejo_repo = "ecoPrimals/barraCuda"
+gpu = true
 
 [repos.coralReef]
 org = "ecoPrimals"
@@ -154,6 +157,7 @@ category = "primal"
 description = "Sovereign WGSL/SPIR-V/GLSL shader compiler"
 github_repo = "ecoPrimals/coralReef"
 forgejo_repo = "ecoPrimals/coralReef"
+gpu = true
 
 [repos.rhizoCrypt]
 org = "ecoPrimals"
@@ -194,6 +198,8 @@ category = "primal"
 description = "Orchestration layer"
 github_repo = "ecoPrimals/biomeOS"
 forgejo_repo = "ecoPrimals/biomeOS"
+# CI-DIV-01: workspace binary crate differs from repo name
+package = "biomeos-unibin"
 
 [repos.squirrel]
 org = "ecoPrimals"
@@ -204,6 +210,7 @@ category = "primal"
 description = "AI/MCP orchestration"
 github_repo = "ecoPrimals/squirrel"
 forgejo_repo = "ecoPrimals/squirrel"
+package = "squirrel"
 
 [repos.petalTongue]
 org = "ecoPrimals"
@@ -224,6 +231,8 @@ category = "primal"
 description = "Defense/audit"
 github_repo = "ecoPrimals/skunkBat"
 forgejo_repo = "ecoPrimals/skunkBat"
+# CI-DIV-02: workspace binary crate differs from repo name
+package = "skunk-bat-server"
 
 [repos.sourDough]
 org = "ecoPrimals"
