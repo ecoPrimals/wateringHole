@@ -36,17 +36,19 @@ Post-cascade update: bearDog clippy-zero landed, sporeGate already holds songBir
 
 ## WAVE PLAN: 134a → 135+
 
-### Wave 134a — Pepti Rebuild + Capability Convergence
+### Wave 134a — Pepti Pipeline Hardening + Capability Convergence
 
-**Goal**: WAN-DISPATCH-01 FULL PASS. All gates run converged binaries from pepti.
+**Goal**: WAN-DISPATCH-01 FULL PASS. Evolve sovereign CI from ad-hoc scripts to robust isomorphic pipeline.
 
 | # | Item | Owner | Status |
 |---|------|-------|--------|
-| 1 | Rebuild pepti: songBird, skunkBat, nestGate, coralReef, sweetGrass | sporeGate CI | **NEXT** — 5 primals need fresh builds |
-| 2 | Redeploy songBird on sporeGate from pepti | sporeGate team | After #1 |
-| 3 | flockGate re-runs WAN-DISPATCH-01 → target FULL PASS | flockGate | After #2 |
-| 4 | grapheneGate 13/13 redeploy from fresh pepti | eastGate | After #1 |
-| 5 | Verify composition subtypes match live deployments | projectNUCLEUS | Ongoing |
+| 1 | Rebuild pepti: songBird + bearDog + skunkBat + nestGate + coralReef + sweetGrass | sporeGate CI | **NEXT** — 6 primals need fresh builds. CI hook already triggered for songBird. |
+| 2 | Harden sovereign CI pipeline (see Pipeline Evolution below) | sporeGate + cellMembrane | **NEW** — evolve bash→Rust, add depot integrity checks |
+| 3 | Redeploy songBird on sporeGate from pepti | sporeGate team | After #1 |
+| 4 | flockGate re-runs WAN-DISPATCH-01 → target FULL PASS | flockGate | After #3 |
+| 5 | grapheneGate 13/13 redeploy from fresh pepti | eastGate | After #1 |
+| 6 | Verify composition subtypes match live deployments | projectNUCLEUS | Ongoing |
+| 7 | Resolve CI-DIV-01/02/03 (biomeOS, skunkBat, nestGate build quirks) | primal teams | P2 — manual workarounds in place |
 
 **Closes**: S-6 (pepti current), S-8 (capability.call cross-gate)
 **Posture target**: CAPABILITY CONVERGENCE PROVEN — WAN-DISPATCH-01 FULL PASS
@@ -77,6 +79,58 @@ Post-cascade update: bearDog clippy-zero landed, sporeGate already holds songBir
 | Operational (O) | O-1 through O-5 | Karma buildup (3-6 month window), posting date, public clone test |
 
 **Posture target**: SHOW_HN PRE-FLIGHT — all rubric items targeting PASS
+
+---
+
+## PIPELINE EVOLUTION: Ad-Hoc → Isomorphic Sovereign CI
+
+The sovereign CI pipeline (Wave 120) works but is held together by bash scripts, hardcoded IPs, and manual SSH triggers. We evolve it toward the fractal/isomorphic/agnostic deployment model documented in `DEPLOYMENT_ISOMORPHISM_DEBT_WAVE120`.
+
+### Current flow (ad-hoc)
+
+```
+Push to Forgejo (any primal repo)
+  → post-receive.d/sovereign-ci (golgi)         ← bash script
+  → SSH sporeGate (10.13.37.2 hardcoded)         ← IP-coupled
+  → /opt/depot/build-local.sh <primal> --sync    ← bash, per-primal workarounds
+  → rsync to golgi:/opt/ecoPrimals/plasmidBin/   ← rsync over WG
+  → Caddy serves at membrane.primals.eco/depot/
+```
+
+**Known fragilities**: CI-DIV-01 (biomeOS `--package`), CI-DIV-02 (skunkBat `--package`), CI-DIV-03 (nestGate `ld.lld`), `/var/log/sovereign-ci.log` permission denied on golgi, golgi freshness publishing sometimes stale.
+
+### Target flow (isomorphic, Wave 134a+)
+
+```
+Push to Forgejo (any primal repo)
+  → Forgejo webhook → membrane sovereign.ci.trigger    ← Rust, typed
+  → membrane plasmid.harvest <primal>                   ← Rust, manifest-driven
+    - reads ecosystem_manifest.toml for binary_name, build_args, package
+    - cargo build --release --target {target}
+    - BLAKE3 checksum + provenance.toml update
+  → membrane plasmid.sync --target depot               ← Rust, rsync or native
+  → Gates auto-fetch via plasmid.fetch --check-update   ← Rust, checksum-verified
+```
+
+### Evolution steps (134a scope)
+
+| # | Step | What changes | Isomorphism gain |
+|---|------|-------------|-----------------|
+| 1 | Fix golgi `sovereign-ci.log` permissions | `chown` or `logrotate.d` entry | Removes silent failure |
+| 2 | Move per-primal build workarounds into `ecosystem_manifest.toml` | `[primals.biomeOS] package = "biomeos-unibin"` | Manifest-driven, not script-hardcoded |
+| 3 | `membrane plasmid.harvest` absorbs `build-local.sh` | Rust replaces bash | Same command on any builder gate |
+| 4 | Depot integrity: checksum verify after sync | BLAKE3 compare on golgi post-sync | Catch rsync corruption |
+| 5 | Auto-notify on build completion | songBird mesh impulse or wateringHole head update | Gates know when to fetch |
+
+### Fractal principle
+
+The pipeline pattern must be **the same shape at every scale**:
+- **Single primal rebuild**: push → build → sync → verify
+- **Full sweep**: push all → build all → sync → verify
+- **New gate onboard**: `plasmid.fetch --all` → same depot, same checksums, same NUCLEUS
+- **New builder gate**: install Rust + musl-tools, set `build_authority = true` in manifest → same pipeline
+
+Any gate with the right toolchain can be a builder. Any gate with depot access can be a consumer. The manifest is the single source of truth, not bash scripts on specific hosts.
 
 ---
 
@@ -189,12 +243,14 @@ Copy this blurb to all active teams/gates:
 
 | # | Item | Owner | Blocked by | Status |
 |---|------|-------|------------|--------|
-| 1 | Pepti rebuild: songBird + bearDog + skunkBat + nestGate + coralReef + sweetGrass | sporeGate CI | — | **NEXT** — songBird `026f6e3e` already on sporeGate, bearDog `a586fbee` landed |
-| 2 | Redeploy songBird on sporeGate from fresh pepti | sporeGate team | #1 | Pending |
-| 3 | flockGate WAN-DISPATCH-01 re-run → target FULL PASS | flockGate | #2 | Pending |
-| 4 | grapheneGate 13/13 from fresh pepti | eastGate | #1 | Pending |
-| 5 | ironGate cascade refresh | ironGate | SSH access | STALE since Jul 4 |
-| 6 | bearDog CryptoProvider fix (UNIT-DIV-04) | bearDog team | Investigation | **P1 for 134b** |
-| 7 | strandGate SSH enrollment | eastGate hw | Physical access | Pending (house 2) |
+| 1 | Pepti rebuild: songBird + bearDog + skunkBat + nestGate + coralReef + sweetGrass | sporeGate CI | — | **NEXT** — songBird `026f6e3e` + bearDog `a586fbee` already on sporeGate |
+| 2 | Fix golgi `sovereign-ci.log` permissions | golgi/cellMembrane | — | Quick fix, unblocks clean CI logging |
+| 3 | Move CI-DIV-01/02/03 workarounds into manifest | primal teams + cellMembrane | — | Isomorphism: manifest-driven builds |
+| 4 | Redeploy songBird on sporeGate from fresh pepti | sporeGate team | #1 | Pending |
+| 5 | flockGate WAN-DISPATCH-01 re-run → target FULL PASS | flockGate | #4 | Pending |
+| 6 | grapheneGate 13/13 from fresh pepti | eastGate | #1 | Pending |
+| 7 | ironGate cascade refresh | ironGate | SSH access | STALE since Jul 4 |
+| 8 | bearDog CryptoProvider fix (UNIT-DIV-04) | bearDog team | Investigation | **P1 for 134b** |
+| 9 | strandGate SSH enrollment | eastGate hw | Physical access | Pending (house 2) |
 
-*Wave 133e — Post-cascade. sporeGate already holds the songBird evolution. 6 primals need pepti rebuild for full convergence. bearDog clippy-zero landed. The critical path to 134a is pepti rebuild → songBird redeploy → WAN-DISPATCH-01 FULL PASS.*
+*Wave 133e — Post-cascade. Pipeline evolution dispatched: evolve sovereign CI from bash scripts to manifest-driven Rust pipeline. The pattern must be fractal — same shape for single primal rebuild, full sweep, new gate onboard, and new builder enrollment. sporeGate already holds both evolved primals (songBird + bearDog). Critical path: pepti rebuild → songBird redeploy → WAN-DISPATCH-01 FULL PASS.*
