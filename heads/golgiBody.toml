@@ -1,20 +1,20 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: golgiBody | Updated: 2026-07-07T19:14:28Z
+# Gate: golgiBody | Updated: 2026-07-07T19:30:03Z
 
 [meta]
 gate = "golgiBody"
-updated = "2026-07-07T19:14:28Z"
+updated = "2026-07-07T19:30:03Z"
 
 [heads]
-barraCuda = "b2618db0511100a2112196635c037c641649d927"
+barraCuda = "014a69a6bff60cfbf5e40925a130f2c89ad00086"
 bearDog = "f6924beb51d9ab8bd7d150afb40c9362e8732667"
-biomeOS = "f77886d12e56095dbe7b344ad43ace96bd2e2179"
+biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
 cellMembrane = "c93344c22d66da473465861b6eb625a9275de6c7"
 coralReef = "2db3019ae57598a8bf558e8fc2b3b2bc9f4aece6"
 loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
 nestGate = "d355c8dbbba9df79f9ee8497c19298b91fe45fbd"
-petalTongue = "0f8da6b4153313997ccc09ce18288824171bf71d"
+petalTongue = "ebaf483c72712ce353635d5ed74ce251a590746a"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
 projectNUCLEUS = "b6f4c089e6775d0c909f7d67a7bc7812ec2d4fcf"
 rhizoCrypt = "ef85124f39aac9fa309448c01db86463683ab00a"
@@ -22,5 +22,5 @@ skunkBat = "35326c39177770f935a944635b510cd220b6270b"
 songBird = "026f6e3ebef6066fedb64cd7e96b13c9420e418a"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
 sweetGrass = "bfac29311075bbe7a7875a1f267b49c43e0e61cf"
-toadStool = "82a4209f6e2b17c10be00ded6c4e70a84a893b0c"
-wateringHole = "e3977bd2a54c03b85cc4e3ac97cca0b2e11fe447"
+toadStool = "002332e485cb1dea5e93a04ed656b727f5cb77a1"
+wateringHole = "0e17f41be6d57507209c421b7fc330f5a3bcbc86"
