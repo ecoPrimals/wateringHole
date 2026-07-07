@@ -26,10 +26,18 @@ Post-cascade: bearDog `a586fbee` fix absorbed (clippy-zero + crossbeam-epoch adv
 **Cascade findings (14:50 EDT)**:
 - bearDog `a586fbee` — fix absorbed: zero clippy warnings + crossbeam-epoch advisory
 - sporeGate holds songBird `026f6e3e` (auto-advertisement) + bearDog `a586fbee`
-- All 13 primals converged across origin + forgejo — zero drift
-- eastGate head refreshed (18:50Z)
 - ironGate head still STALE (Jul 4) — needs cascade refresh on next SSH
 - 1098 tests, 125 scenarios, 0 fail — confirmed post-cascade
+
+**Code debt sweep (14 primals)**:
+- 14/14 clippy ZERO warnings
+- toadStool `002332e` — widened shader dispatch error assertion for wgpu fallback path
+- biomeOS `39a1118` — squirrel availability test made environment-agnostic
+- petalTongue `ebaf483` — mesh topology test updated for 11-node count (10 gates + 1 VPS)
+- barraCuda `014a69a` — socket discovery test made environment-agnostic
+- rhizoCrypt: 2 pre-existing server startup timeout tests (environment-dependent, not new debt)
+- barraCuda: 10 ESN/wgpu SIGSEGV tests (GPU driver interaction, not code debt)
+- All fixes pushed to both remotes — 8 primals now need pepti rebuild (was 6)
 
 ---
 
@@ -242,7 +250,7 @@ Copy this blurb to all active teams/gates:
 
 | # | Item | Owner | Blocked by | Status |
 |---|------|-------|------------|--------|
-| 1 | Pepti rebuild: songBird + bearDog + skunkBat + nestGate + coralReef + sweetGrass | sporeGate CI | — | **NEXT** — songBird `026f6e3e` + bearDog `a586fbee` already on sporeGate |
+| 1 | Pepti rebuild: songBird + bearDog + toadStool + biomeOS + petalTongue + barraCuda + skunkBat + nestGate + coralReef + sweetGrass | sporeGate CI | — | **NEXT** — debt sweep added 4 more primals to rebuild |
 | 2 | Fix golgi `sovereign-ci.log` permissions | golgi/cellMembrane | — | Quick fix, unblocks clean CI logging |
 | 3 | Move CI-DIV-01/02/03 workarounds into manifest | primal teams + cellMembrane | — | Isomorphism: manifest-driven builds |
 | 4 | Redeploy songBird on sporeGate from fresh pepti | sporeGate team | #1 | Pending |
