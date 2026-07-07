@@ -1,17 +1,17 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-04T09:45:00Z
+# Gate: flockGate | Updated: 2026-07-07T09:32:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-05T12:22:00Z"
+updated = "2026-07-07T13:32:00Z"
 
 [heads]
 nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
-wateringHole = "d95c01200000000000000000000000000000000000"
+wateringHole = "c67cc0a"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
-primalSpring = "aa4b6f2c0e948a47f68c68b2080ad7ba51e6e1c9"
+primalSpring = "e5d569f"
 bearDog = "7e932000f393c1ab0b6f4ae4cd8009a0a537bd65"
 songBird = "05e2204300000000000000000000000000000000"
 toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
@@ -25,3 +25,25 @@ sweetGrass = "96d35e5506cdd8f8f4101eef1ccff0448ee07ab3"
 skunkBat = "6fbdc43a544351cd165b0abf11824143e05db701"
 cellMembrane = "c51d688a378fbbaf616fc639c9b0eec23f28de89"
 sporePrint = "52d1517ad8295b4418fd0693dcd393004878a619"
+
+[dispatch_validation]
+status = "PARTIAL"
+capability_call_status = "FAIL"
+capability_call_error = "No local or remote provider found for capability 'jupyter' — peers do not advertise routable capabilities"
+mesh_http_transport_status = "PASS"
+mesh_http_response = "JupyterHub responding (HTTP 200, version 5.4.5)"
+rtt_p50_ms = 72
+rtt_p95_ms = 77
+rtt_p99_ms = 77
+rtt_mean_ms = 70.8
+rtt_min_ms = 65
+rtt_max_ms = 77
+rtt_samples = 10
+icmp_rtt_sporegate_ms = 69
+icmp_rtt_golgi_ms = 31
+tested_at = "2026-07-07T13:32:20Z"
+mesh_uptime_seconds = 160531
+mesh_peers = 2
+path = "flockGate → WireGuard (10.13.37.2) → sporeGate:7780 → ironGate JupyterHub"
+blocker = "sporeGate songBird does not register 'jupyter' as a provided mesh capability"
+notes = "Transport layer PROVEN (http.request routes correctly). Capability abstraction layer BLOCKED (no peer advertises routable capabilities). Connection pooling active — RTT matches raw ICMP baseline."
