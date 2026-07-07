@@ -2,7 +2,7 @@
 
 # Sovereignty Standards — Ecosystem Behaviors for Sovereign Evolution
 
-**Date**: May 15, 2026 (updated Jun 10, 2026 — Wave 107: S4 GRADUATED, all 4 shadows sovereign)
+**Date**: May 15, 2026 (updated Jul 7, 2026 — Wave 133d: sporePrint NUCLEUS on golgi, bearDog CryptoProvider blocker identified, WAN mesh overlay live)
 **Status**: Active
 **Authority**: WateringHole Consensus
 **Audience**: All primals, all compositions, all deployments
@@ -165,7 +165,7 @@ Three channels define the cell's external interfaces (see
 - **Process**: Caddy (transitional) → BearDog (sovereign)
 - **Ports**: 80 (ACME/redirect), 443 (TLS termination)
 - **Trust**: ACME cert (Let's Encrypt E8), content-aware routing
-- **Status**: **LIVE** — `membrane.primals.eco`, Caddy TLS, 19MB sporePrint cache, 68ms TTFB. BearDog ACME shadow on :8443 pending cutover.
+- **Status**: **LIVE** — `membrane.primals.eco`, Caddy TLS. sporePrint NUCLEUS deployed on golgi (212 pages, Zola-rendered). BearDog ACME shadow **BLOCKED** — `CryptoProvider` panic in `rustls-rustcrypto` (UNIT-DIV-04). Caddy→bearDog cutover deferred to Wave 134b sovereignty sprint. DNS `primals.eco` still on Cloudflare (acceptable per diderm outer membrane).
 
 **Primal role clarification**:
 - **Songbird** handles TLS termination (long-term sovereign TLS)
@@ -228,13 +228,14 @@ Validated by `darkforest_membrane.sh` (MEM-01 through MEM-15):
 - **No per-machine sync required** — dev happens across multiple gates
 - **When covalent gates host Forgejo, we invert**: Forgejo becomes primary
 
-### Operational Reality (May 2026)
+### Operational Reality (Jul 2026, Wave 133d)
 
-Forgejo runs on ironGate (`127.0.0.1:3000`, tunneled as `git.primals.eco`).
-All 31 dual-boundary repos are synced:
-- **25 repos**: Native Forgejo pull mirrors (auto-sync from GitHub every 8h)
-- **6 repos**: Timer-synced via `forgejo_sync.sh` + systemd timer (8h)
-- **cellMembrane**: Inner-only (direct push, not mirrored from GitHub)
+Forgejo runs on golgi (`git.primals.eco`). 39 repos tracked via golgi
+bidirectional relay (`membrane-temporal-cascade.timer`, 15-min cycle).
+Relay handles GitHub↔Forgejo sync automatically. All primals, springs,
+gardens, infra repos synced bidirectionally. Push protocol: gates push to
+BOTH remotes (origin=GitHub, forgejo=Sovereign). golgi relay reconciles
+any drift.
 
 CI runs on GitHub Actions. See `REPO_MEMBRANE_BOUNDARY.md` for the full
 repo classification (inner-only / trailing mirror / outer-only).
@@ -295,7 +296,7 @@ specifically to the **inner membrane** (`primal.eco`). The outer membrane
 |-------|------|------------------------------|-------------------------------|
 | **S1** TLS | TLS termination | Sovereign Caddy + LE (**MUST**) | Cloudflare proxy (acceptable) |
 | **S2** NAT | NAT relay | Songbird TURN (**GRADUATED**) | N/A |
-| **S3** Content | Content serving | NestGate CAS on `nestgate.io` (sovereign) | sporePrint via Caddy or CDN (acceptable) |
+| **S3** Content | Content serving | NestGate CAS on `nestgate.io` (sovereign) | sporePrint NUCLEUS on golgi (212pp, Zola). Inner membrane cutover pending bearDog fix (134b). |
 | **S4** Auth | Authentication | bearDog BTSP enforced (**MUST**) | Public/Cloudflare auth (acceptable) |
 | **S5** DNS | DNS resolution | knot-dns for `primal.eco` + `nestgate.io` (**MUST**) | Cloudflare DNS for `primals.eco` (acceptable) |
 
@@ -322,6 +323,7 @@ Four new strategic tracks added to the sovereignty evolution:
 
 | Date | Change |
 |------|--------|
+| 2026-07-07 | Wave 133d: sporePrint NUCLEUS deployed on golgi (212 pages). bearDog CryptoProvider panic (UNIT-DIV-04) blocks Caddy→bearDog TLS cutover — deferred to 134b sovereignty sprint. WAN mesh overlay live (flockGate↔sporeGate WireGuard). Forgejo relay upgraded to bidirectional 39-repo golgi relay (15-min cycle). SHOW_HN S-10 (sporePrint inner membrane) added as external proof target. Channel 3 status updated. |
 | 2026-06-10 | Wave 107: **S4 GRADUATED** — 7-day BTSP auth gate PASSED (Jun 9). All 4 sovereignty shadows (S1-S4) now sovereign on inner membrane. 4-gate mesh collective LIVE. Deterministic deployment codified. NUCLEUS supervision shipped. |
 | 2026-06-04 | Wave 77b: Diderm membrane architecture — added §3b layer model, sovereignty shadow membrane applicability table. S-tracks now apply to inner membrane (`primal.eco`); outer membrane may retain commercial. Cross-membrane validation added. |
 | 2026-06-02 | Wave 68: grapheneGate, topology routing, perceptron design, Songbird relay design, TCP Tier 5 release enforcement |

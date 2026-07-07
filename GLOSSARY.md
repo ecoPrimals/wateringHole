@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: June 1, 2026 (Wave 66 — 20 membrane services live, S1 TLS passed, wateringHole zero-code, 39 repos sovereign sync)
+**Last Updated**: July 7, 2026 (Wave 133d — gatehouse bond escalation broker, drawbridge capability advertisement, bonding model cross-references)
 
 ---
 
@@ -567,6 +567,109 @@ See `whitePaper/gen4/architecture/THE_GOLDEN_CAGE.md`.
 
 ---
 
+## The Network Boundary Layer
+
+### Gatehouse
+
+The **bond escalation broker** — the single external surface of a gate exposed
+to the internet. The gatehouse accepts all incoming traffic as **weak** interactions
+(zero trust, passive diffusion) and validates/promotes them to stronger bond types
+as authentication is established.
+
+bearDog owns the gatehouse — exactly two ports (`:443` TLS, `:80` ACME). No other
+primal binds externally. skunkBat provides threat intelligence. The gatehouse is where
+the K-Derm extracellular → outer membrane crossing happens.
+
+Bond escalation through the gatehouse:
+
+```
+Weak (extracellular) → bearDog TLS termination
+  → Ionic (outer membrane → periplasm) → BTSP scoped token
+    → Metallic (periplasm → plasma) → Mito-Beacon membership
+      → Covalent (plasma → cytoplasm) → nuclear session (fresh spawn)
+```
+
+Only one gate runs gatehouse mode per deployment (sporeGate for the current mesh).
+All other gates are purely darkforest — zero exposed ports.
+
+See `GATEHOUSE_DARKFOREST_STANDARD.md`, `BONDING_MODEL_STANDARD.md`.
+
+### Darkforest
+
+The **invisible interior** of the mesh. No port scanning, no direct access, no
+known entry points from outside. All inter-primal communication uses UDS, abstract
+sockets, or songBird mesh relay. Discovery is via `mesh.peers` and `capability.call`.
+
+The darkforest boundary is the enforcement mechanism that prevents sovereignty
+leakage — nothing inside leaks out without crossing the drawbridge, and nothing
+outside enters without passing through the gatehouse's bond escalation. The Dark
+Forest principle means everything starts untrusted. Trust is earned through
+progressively stronger authentication at each K-Derm layer crossing.
+
+See `GATEHOUSE_DARKFOREST_STANDARD.md`, `DARK_FOREST_GLACIAL_GATE_STANDARD.md`.
+
+### Drawbridge
+
+The **single crossing point** between the gatehouse (external) and the darkforest
+(internal). Implemented as songBird's HTTP proxy listener, the drawbridge translates
+external HTTP semantics into capability-routed mesh semantics.
+
+The drawbridge sits at the outer membrane → periplasm crossing. It is where weak
+bonds begin escalating — path prefixes map to capability names, and
+`capability.call` routes requests to backends in the darkforest.
+
+As of Wave 133d, the drawbridge auto-registers its routed capabilities into the
+local IPC registry and announces them to mesh peers via `mesh.capabilities_announce`.
+This means any gate with drawbridge routes automatically advertises its capabilities
+to the mesh — no manual `ipc.register` or sidecar scripts needed.
+
+```
+SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter,/api=inference
+→ auto-registers ["jupyter", "inference"] in IPC registry
+→ announces to mesh peers
+→ remote capability.call discovers and routes to this drawbridge
+```
+
+See `GATEHOUSE_DARKFOREST_STANDARD.md` §Drawbridge, §Capability advertisement.
+
+### Bond Escalation
+
+The process by which incoming traffic transitions from weaker to stronger bond
+types as trust is progressively established. Each escalation requires stronger
+authentication and crosses a deeper K-Derm envelope layer:
+
+| Escalation | Authentication Required | K-Derm Crossing |
+|------------|------------------------|-----------------|
+| Weak → Ionic | BTSP scoped token | Outer membrane → periplasm |
+| Ionic → Metallic | Mito-Beacon membership proof | Periplasm → plasma membrane |
+| Metallic → Covalent | Nuclear session (fresh key spawn) | Plasma membrane → cytoplasm |
+
+The reverse path (covalent → weak) is **Ceremony** — a controlled temporal decay.
+The outward path (covalent → metallic → ionic → weak across VPS layers) is the
+**bond-type degradation** model documented in `KDERM_DIDERM_ENVELOPE.md`.
+
+Bond escalation and degradation are complementary: escalation is inward (external
+traffic gaining trust), degradation is outward (sovereignty weakening as content
+moves toward the extracellular). The gatehouse brokers inward escalation. The
+VPS diderm envelope enforces outward degradation.
+
+See `BONDING_MODEL_STANDARD.md` §Bonding Escalation Path.
+
+### Endosymbiosis
+
+The process by which external systems progressively internalize — moving from
+weak to ionic to metallic to covalent bonding as they are absorbed into the
+sovereign infrastructure. Named after the biological process where independent
+organisms become organelles through progressive integration.
+
+Examples: Cloudflare TLS (weak) → bearDog ACME shadow (ionic) → bearDog standalone
+(covalent). GitHub Pages (weak) → Forgejo periplasmic mirror (metallic) → Forgejo
+sovereign (covalent). Each sovereignty shadow track is an endosymbiosis in progress.
+
+See `K_DERM_RECONCILIATION.md` §K-Derm Extensions Not in Gen4.
+
+---
+
 ## The Meta Layer
 
 ### metaPrimal
@@ -942,3 +1045,10 @@ the validator assumes the network is hostile.
 | **Stadial** | Hard convergence phase — fitness gate that culls non-conforming patterns |
 | **Interstadial** | Warming phase — diversification and specialization under constraint |
 | **goldenCage** | External services bootstrapping sovereignty (GitHub, Cursor, Cloudflare) — chrysalis thesis |
+| **Gatehouse** | Bond escalation broker — single external surface accepting weak interactions, promoting to ionic/metallic/covalent via authentication |
+| **Darkforest** | Invisible mesh interior — zero external ports, all discovery via mesh.peers and capability.call, prevents sovereignty leakage |
+| **Drawbridge** | Single crossing point between gatehouse and darkforest — songBird HTTP proxy translating external HTTP to capability-routed mesh semantics |
+| **Bond escalation** | Progressive trust promotion: weak → ionic (BTSP token) → metallic (Mito-Beacon) → covalent (nuclear session) |
+| **Bond degradation** | Outward trust weakening across VPS diderm: covalent (gate) → metallic (inner) → ionic (pepti) → weak (GitHub) |
+| **Endosymbiosis** | Progressive internalization of external systems into sovereign infrastructure (weak → covalent over time) |
+| **Capability advertisement** | Drawbridge auto-registers route capabilities into IPC registry and announces to mesh peers at startup (Wave 133d) |

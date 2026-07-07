@@ -10,11 +10,11 @@
 
 [wave]
 id = 133
-sub = "c"
+sub = "e"
 date = "2026-07-07"
-posture = "CONVERGENCE COMPLETE. All CI divergences resolved. 13/13 Android-ready. Pure Rust enforced. NUCLEUS composition subtypes emerging."
+posture = "ECOSYSTEM STANDARDS REFRESHED. GLACIAL/SOVEREIGNTY/TOPOLOGY updated to 133d. songBird drawbridge committed. 2 handoffs archived. Wave plan shaped: 134a (pepti rebuild), 134b (sovereignty sprint), 135+ (SHOW_HN readiness)."
 publisher = "eastGate-overwatch"
 
 [gates]
-online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate"]
-offline = ["strandGate"]
+online = ["sporeGate", "eastGate", "ironGate", "southGate", "flockGate", "golgi", "grapheneGate"]
+offline = ["strandGate", "biomeGate"]

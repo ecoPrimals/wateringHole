@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-06-14 (Wave 113 — **riboCipher REJECT enforced.** Unsignalled connections dropped on neural-api + biomeos-api sockets. Schedule: WARN(111)→ERROR(112)→**REJECT(113)**→REMOVE(114). **Primal auto-registration SHIPPED.** NUCLEUS post-boot topology.rescan bridges NeuralRouter gap — capability.call routing operational. biomeOS v4.28 (`b10ad05f`). 4/6 exit criteria met.)
+**Last updated**: 2026-07-07 (Wave 133e — **ALL 7 CRITERIA CLEAR.** 1098 tests, 125 scenarios, 0 fail. sporePrint NUCLEUS on golgi. songBird drawbridge auto-advertisement evolved. WAN-DISPATCH-01 unblocked. SHOW_HN publication rubric established as external proof target. 13/13 primals converged, zero debt. Composition subtypes in primalSpring. Gatehouse bond escalation pattern codified.)
 
 ---
 
@@ -384,7 +384,9 @@ validator for content served by the outer membrane.
 be guideStone-grade — not just "working" but deterministic, traceable, self-verifying,
 environment-agnostic, and tolerance-documented. FRAGO: `wave109-guidestone-deployment-convergence`.
 
-**Current assessment (Wave 111)**: **ZERO P1. 5-GATE ECOSYSTEM LIVE** (eastGate↔golgiBody↔ironGate+southGate + grapheneGate). **ironGate NUCLEUS DEPLOYED** (13/13 systemd, benchScale validated). **Criterion 7 COMPLETE** — guideStone-grade deployment achieved (HEALTH-01 13/13, startup 6/6, deterministic, reference-traceable, self-verifying). **riboCipher 9/9 CONVERGED** — all primals signal transport intent. **Criteria 1-7 status: ALL CLEAR for stadial entry.** Remaining work is purely operational (VPS rebuild, gate cascades, hardware enrollment). The system is self-deploying and self-declaring.
+**Current assessment (Wave 133d)**: **ZERO P1. 5-GATE MESH + WAN OVERLAY LIVE** (eastGate↔golgi↔ironGate+southGate + grapheneGate, WireGuard overlay flockGate↔sporeGate). **1098 tests, 125 scenarios, 0 fail** in primalSpring — composition subtypes landed. songBird drawbridge auto-advertisement evolved (coded, tested, pending pepti rebuild). WAN-DISPATCH-01 transport proven (72ms p50 RTT via mesh http.request), capability.call routing unblocked by songBird evolution. sporePrint NUCLEUS deployed on golgi (212 pages). **Criteria 1-7 status: ALL CLEAR for stadial entry.** Operational proof exercises pending: WAN-DISPATCH-01 FULL PASS (post pepti rebuild), strandGate enrollment, grapheneGate 13/13 from fresh pepti. **SHOW_HN publication rubric** (4 categories, 28 criteria) established as external stadial proof event — every S-category criterion maps to an existing stadial criterion or deployment goal.
+
+**Previous assessment (Wave 111)**: ZERO P1. 5-GATE ECOSYSTEM LIVE (eastGate↔golgiBody↔ironGate+southGate + grapheneGate). ironGate NUCLEUS DEPLOYED (13/13 systemd, benchScale validated). Criterion 7 COMPLETE — guideStone-grade deployment achieved (HEALTH-01 13/13, startup 6/6, deterministic, reference-traceable, self-verifying). riboCipher 9/9 CONVERGED — all primals signal transport intent. Criteria 1-7 status: ALL CLEAR for stadial entry.
 
 **Wave 98-103 milestones**:
 - Full NUCLEUS 13/13 on eastGate, all IPC-live (12/12 liveness, 12/12 readiness, 12/12 capabilities with coralReef depot fix)
@@ -479,6 +481,22 @@ self-inflicted local rebuild violation). **Post-primordial depot standard enforc
 
 ---
 
+## External Proof: SHOW_HN Publication (Wave 133d+)
+
+The `SHOW_HN_PUBLICATION.md` rubric (whitePaper gen5/thesis/) establishes an external
+validation event that maps directly to stadial readiness. The 10 ecosystem standards
+(S-category) require:
+
+- S-6: Pepti depot current (all binaries built from latest commits)
+- S-8: `capability.call` cross-gate proven (WAN-DISPATCH-01 FULL PASS)
+- S-10: sporePrint served from sovereign inner membrane (bearDog TLS cutover)
+- S-1 through S-5, S-7, S-9: test suite, convergence, documentation standards
+
+The 3-6 month karma buildup window provides natural pacing for sovereignty sprint
+(Wave 134b) and operational proof exercises before public dissemination.
+
+---
+
 ## References
 
 - `DIDERM_DOMAIN_ARCHITECTURE.md` — Trust barrier model, peptidoglycan air gap, domain assignments
@@ -489,3 +507,5 @@ self-inflicted local rebuild violation). **Post-primordial depot standard enforc
 - `DISTRIBUTED_COVALENT_DEPLOYMENT.md` — multi-household compute architecture
 - `DESKTOP_NUCLEUS_DEPLOYMENT.md` — single-machine full stack
 - `DEPLOYMENT_PHASE_PLAN.md` — Phased deployment from parity to stadial entry
+- `whitePaper/gen5/thesis/SHOW_HN_PUBLICATION.md` — External proof rubric (28 criteria, 4 categories)
+- `GATEHOUSE_DARKFOREST_STANDARD.md` — Bond escalation at the gatehouse boundary

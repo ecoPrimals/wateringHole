@@ -10,10 +10,10 @@
 # Last updated: 2026-06-02 (Wave 68)
 
 [meta]
-version = "4.1.0"
-wave = 132
+version = "4.2.0"
+wave = 133
 measured_by = "manual + discovery.peers (planned)"
-last_updated = "2026-07-06"
+last_updated = "2026-07-07"
 wan_model = "single_exit_star"
 site_topology = "star_with_10g_backbone"
 neighborhood = "Old Everett, Lansing MI"
@@ -45,7 +45,8 @@ ports = [
     "etherX → northGate (Win/5090, 2.5G)",
     "ether8 ← sporeGate eno1 (2.5G uplink from plasma membrane)",
 ]
-gates = ["sporeGate", "eastGate", "northGate"]
+gates = ["sporeGate", "eastGate", "northGate", "biomeGate"]
+note = "biomeGate OFFLINE (kernel recovery). sporeGate is the plasma membrane router (NAT/DHCP/nftables)."
 
 [cytoplasm.zones.house2]
 hub_device = "TP-Link Omada SX3008F"
@@ -65,9 +66,9 @@ ports = [
     "2.5G ports → compute towers, NUCs, fieldGate",
 ]
 expansion_switch = "TP-Link TL-SG605S-M2 (5-port 2.5G, off Omada)"
-gates = ["fieldGate"]
+gates = ["ironGate", "southGate", "strandGate", "fieldGate"]
 pending_gates = ["marshGate (future site router)"]
-note = "northGate is on backbone (CRS310), NOT house2"
+note = "Basement HPC cluster. ironGate + southGate active, strandGate pending enrollment (physical access). More gates have SFP+ into Omada, coming online as hardware permits."
 
 [cytoplasm.zones.eero_wifi]
 hub_device = "Amazon Eero 6"
@@ -103,10 +104,10 @@ transport = "cat6_2.5g"
 description = "sporeGate sovereign LAN — all compute behind NAT + firewall"
 router = "sporeGate"
 switch = "CRS310"
-gates = ["sporeGate", "eastGate", "ironGate", "biomeGate", "strandGate"]
-site = "house1"
+gates = ["sporeGate", "eastGate", "northGate", "biomeGate", "ironGate", "southGate", "strandGate"]
+site = "house1+house2"
 wan_exit = "att_fiber_h1"
-note = "Single WAN exit for ALL sites. House 2 traffic backhauled via 10G trunk."
+note = "Flat /22 spans both houses via 10G AOC trunk. sporeGate (house1) is the router. House 2 gates backhaul through Omada→CRS310→sporeGate."
 
 [segments.house2_compute]
 subnet = "192.168.5.0/24"
@@ -300,3 +301,46 @@ portable_cellular = 0.2
 # HttpJsonRpc(localhost)  → same_gate (1.0)
 # HttpJsonRpc(private IP) → same_segment (0.9)
 # HttpJsonRpc(public IP)  → wan_turn (0.3)
+
+# ═══════════════════════════════════════════════════════════════
+# Mesh Overlays — logical topology layered on physical hardware
+# ═══════════════════════════════════════════════════════════════
+#
+# Physical topology (above) describes L1/L2: switches, cables, subnets.
+# Mesh overlays describe L3+: encrypted tunnels and service mesh links
+# that span physical boundaries. A gate may appear in both a hardware
+# zone AND one or more mesh overlays.
+
+[mesh.songbird_covalent]
+description = "Songbird TCP :7700 federation mesh — covalent trust, LAN backbone"
+transport = "tcp_7700"
+trust = "covalent"
+peers = [
+    { gate = "eastGate", site = "house1", status = "live" },
+    { gate = "golgi", site = "vps_do_nyc", status = "live" },
+    { gate = "ironGate", site = "house2", status = "live" },
+    { gate = "southGate", site = "house2", status = "live" },
+    { gate = "grapheneGate", site = "portable", status = "live_tcp_only" },
+]
+note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN."
+
+[mesh.wireguard_wan]
+description = "WireGuard point-to-point overlay — WAN gates into periplasm"
+transport = "wireguard"
+subnet = "10.13.37.0/24"
+trust = "metallic"
+peers = [
+    { gate = "sporeGate", ip = "10.13.37.1", endpoint = "residential_att", status = "live" },
+    { gate = "flockGate", ip = "10.13.37.2", endpoint = "residential_spectrum", status = "live" },
+]
+measured_rtt_ms = 72.0
+note = "flockGate↔sporeGate proven (Wave 133c). songBird connection pooling active — RTT matches raw WireGuard ICMP baseline."
+
+[mesh.capability_routing]
+description = "capability.call dispatch layer — routes by advertised capability, not by gate"
+transport = "songbird_ipc"
+status = "partially_live"
+proven_capabilities = ["http.request"]
+pending_capabilities = ["jupyter", "compute.submit", "storage.get"]
+blocker = "songBird drawbridge auto-advertisement not yet deployed to pepti (coded, tested, pending 134a rebuild)"
+note = "Transport proven (WAN-DISPATCH-01 PARTIAL). capability.call routing unblocked by songBird evolution. Full PASS after pepti rebuild (Wave 134a)."

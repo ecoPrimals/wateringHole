@@ -1,6 +1,6 @@
 # Gatehouse / Darkforest — Sovereign Network Demarcation Standard
 
-**Wave**: 132g | **Authority**: eastGate overwatch
+**Wave**: 133d | **Authority**: eastGate overwatch
 
 ---
 
@@ -75,6 +75,24 @@ bearDog :443 (TLS terminated)
 - The backend address is internal (LAN or mesh) — never exposed externally
 
 **Key invariant**: the drawbridge is the ONLY place that translates external HTTP semantics into internal mesh semantics. Everything before it is "internet". Everything after it is "darkforest".
+
+**Capability advertisement** (Wave 133d):
+
+Drawbridge routes must be discoverable by remote gates via `capability.call`. songBird
+auto-registers each unique capability from `SONGBIRD_DRAWBRIDGE_ROUTES` into the local
+IPC registry at startup and announces them to mesh peers via `mesh.capabilities_announce`.
+
+```
+SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter,/api=jupyter,/infer=inference
+```
+On startup, songBird:
+1. Parses unique capabilities: `["jupyter", "inference"]`
+2. Registers `drawbridge:jupyter`, `drawbridge:inference` in the local IPC registry
+3. Announces `["jupyter", "inference"]` to all mesh peers
+4. Remote gates can now `capability.call("jupyter")` → routed to this gate's drawbridge
+
+Every gate with drawbridge routes automatically advertises its capabilities.
+No manual `ipc.register` calls or sidecar scripts needed.
 
 ---
 
@@ -154,6 +172,63 @@ No gatehouse configuration needed. Just songBird mesh peering:
 
 ---
 
+## Bond Escalation at the Gatehouse (Wave 133d)
+
+The gatehouse is the **bond escalation broker** — the point where extracellular
+weak interactions are validated and promoted through K-Derm layers toward
+stronger bond types, while the darkforest boundary prevents leakage backward.
+
+### Escalation chain
+
+```
+EXTRACELLULAR (internet)
+  │
+  │  all traffic arrives as WEAK — zero trust, passive diffusion
+  │
+  ▼
+bearDog :443 (TLS termination)
+  │  skunkBat security.advisory consulted
+  │  K-Derm crossing: extracellular → outer membrane
+  │
+  ▼
+Drawbridge (songBird http.proxy)
+  │  path prefix → capability name → capability.call
+  │  K-Derm crossing: outer membrane → periplasm
+  │
+  ├─→ WEAK stays weak: public sporePrint content (braid stripped, read-only)
+  ├─→ IONIC promotion: JupyterHub auth → BTSP scoped token, gated ion channel
+  ├─→ METALLIC promotion: gate re-enrollment → Mito-Beacon validation
+  └─→ COVALENT promotion: BTSP Phase 2 → nuclear key session, full cytoplasm
+```
+
+### Bonding at each boundary
+
+| Crossing | Bond Transition | Channel Protein | Braid Policy | BTSP Cipher |
+|----------|----------------|-----------------|--------------|-------------|
+| Internet → bearDog | Extracellular → Weak | Passive diffusion | Block (stripped) | TLS 1.3 |
+| bearDog → drawbridge | Weak → Weak/Ionic | Passive → gated ion | Block/Verify | `BTSP_CHACHA20_POLY1305` |
+| Drawbridge → mesh peer | Ionic → Metallic | Gated → aquaporin | Verify | `BTSP_HMAC_PLAIN` min |
+| Mesh peer → cytoplasm | Metallic → Covalent | Aquaporin (always open) | Pass-through | `BTSP_NULL` allowed |
+
+### Complementary degradation
+
+Bond escalation (inward, gatehouse) is the mirror of bond-type degradation
+(outward, VPS diderm). Escalation promotes trust from weak → covalent as
+authentication strengthens. Degradation weakens trust from covalent → weak
+as content moves toward the extracellular.
+
+```
+INWARD (gatehouse broker):   Weak → Ionic → Metallic → Covalent
+OUTWARD (VPS degradation):   Covalent → Metallic → Ionic → Weak
+```
+
+The gatehouse owns inward escalation. The diderm VPS envelope
+(golgiBody-inner → peptidoglycan → golgiBody-ext → GitHub) owns outward
+degradation. See `BONDING_MODEL_STANDARD.md` §Bonding Escalation Path,
+`KDERM_DIDERM_ENVELOPE.md` §Bond-Type Degradation.
+
+---
+
 ## Anti-Patterns
 
 - Opening a port on a non-gatehouse gate for external access
@@ -161,7 +236,9 @@ No gatehouse configuration needed. Just songBird mesh peering:
 - Binding a service to `0.0.0.0` instead of `127.0.0.1`
 - Routing external traffic without going through the drawbridge
 - Adding DNS records that point directly to darkforest gates
+- Allowing bond escalation to bypass the gatehouse (direct mesh entry without bearDog validation)
+- Exposing capability.call endpoints to the extracellular without drawbridge mediation
 
 ---
 
-*The gatehouse is a known point. The darkforest is invisible. The drawbridge is selective. This is sovereignty.*
+*The gatehouse is the bond escalation broker. The darkforest is invisible. The drawbridge is selective. Weak interactions enter, prove themselves, and earn stronger bonds — or they don't get past the outer membrane. This is sovereignty.*
