@@ -76,6 +76,17 @@ sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade
 external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
 
 # ═══════════════════════════════════════════════════════════════════
+# Compute Capabilities — GPU/shader/precision metadata
+# ═══════════════════════════════════════════════════════════════════
+
+[capabilities.compute]
+SHADER_F64 = true
+precision_tiers = ["f32", "f64"]
+shader_backends = ["wgsl", "spirv", "glsl"]
+gpu_gates = ["ironGate"]
+notes = "f64 precision via SHADER_F64 feature on RTX 5070 Ti (ironGate). coralReef compiles shaders. barraCuda dispatches compute. Precision routing: barraCuda.precision.route selects f32/f64 path based on device capability."
+
+# ═══════════════════════════════════════════════════════════════════
 # Root
 # ═══════════════════════════════════════════════════════════════════
 
