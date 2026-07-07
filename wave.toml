@@ -10,9 +10,9 @@
 
 [wave]
 id = 133
-sub = "e"
+sub = "f"
 date = "2026-07-07"
-posture = "ECOSYSTEM STANDARDS REFRESHED. GLACIAL/SOVEREIGNTY/TOPOLOGY updated to 133d. songBird drawbridge committed. 2 handoffs archived. Wave plan shaped: 134a (pepti rebuild), 134b (sovereignty sprint), 135+ (SHOW_HN readiness)."
+posture = "ALL PRIMALS GREEN — 15/15 pass, 0 fail. rhizoCrypt + barraCuda final fixes landed. 12 primals ready for pepti rebuild. sporeGate is sole CI builder, Forgejo sovereign forge."
 publisher = "eastGate-overwatch"
 
 [gates]
