@@ -1,8 +1,8 @@
 # ecoPrimals Ecosystem Blurb — Wave 133e
 
-**Date**: Jul 7, 2026 14:40 EDT | **Wave**: 133e | **From**: eastGate overwatch
-**Posture**: **ECOSYSTEM STANDARDS REFRESHED — cascaded, reviewed, wave plan active**
-Post-cascade update: bearDog clippy-zero landed, sporeGate already holds songBird `026f6e3e` (auto-advertisement). eastGate head refreshed. ironGate still stale (Jul 4). 1098 tests GREEN.
+**Date**: Jul 7, 2026 14:50 EDT | **Wave**: 133e | **From**: eastGate overwatch
+**Posture**: **ECOSYSTEM STANDARDS REFRESHED — cascaded, converged, wave plan active**
+Post-cascade: bearDog `a586fbee` fix absorbed (clippy-zero + crossbeam-epoch advisory). All repos converged across origin + forgejo. 1098 tests GREEN.
 
 ---
 
@@ -23,12 +23,11 @@ Post-cascade update: bearDog clippy-zero landed, sporeGate already holds songBir
 
 **This wave**: Standards housekeeping + wave plan. songBird drawbridge auto-advertisement committed (`026f6e3e`). 2 superseded handoffs archived. GLACIAL, SOVEREIGNTY, TOPOLOGY docs updated to 133d. Wave plan shaped: 134a (deploy convergence), 134b (sovereignty sprint), 135+ (SHOW_HN readiness).
 
-**Cascade findings (14:40 EDT)**:
-- bearDog `a586fbee` landed — zero clippy warnings + crossbeam-epoch advisory fix
-- sporeGate already holds songBird `026f6e3e` — golgi relay picked up our push
-- projectNUCLEUS `b6f4c08` — composition subtypes docs synced to 133e
-- projectFOUNDATION `38c4d55` — time module + expanded test coverage
-- eastGate head REFRESHED (was stale since Jul 6, now 18:40Z)
+**Cascade findings (14:50 EDT)**:
+- bearDog `a586fbee` — fix absorbed: zero clippy warnings + crossbeam-epoch advisory
+- sporeGate holds songBird `026f6e3e` (auto-advertisement) + bearDog `a586fbee`
+- All 13 primals converged across origin + forgejo — zero drift
+- eastGate head refreshed (18:50Z)
 - ironGate head still STALE (Jul 4) — needs cascade refresh on next SSH
 - 1098 tests, 125 scenarios, 0 fail — confirmed post-cascade
 
