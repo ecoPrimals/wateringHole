@@ -5,14 +5,14 @@
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-07T13:32:00Z"
+updated = "2026-07-07T15:14:00Z"
 
 [heads]
 nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
 wateringHole = "c67cc0a"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
 primalSpring = "e5d569f"
-bearDog = "7e932000f393c1ab0b6f4ae4cd8009a0a537bd65"
+bearDog = "a586fbee690085b09c4b936604555edd6c2b21a6"
 songBird = "05e2204300000000000000000000000000000000"
 toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
 biomeOS = "1ce2a4c5be7c58b9cb2fa2be12a99329becb6485"
