@@ -1,8 +1,8 @@
 # ecoPrimals Ecosystem Blurb — Wave 134a
 
-**Date**: Jul 8, 2026 13:12 EDT | **Wave**: 134a | **From**: eastGate overwatch
-**Posture**: **NEARING CONVERGENCE — sporeGate deploys LIVE. songBird + nestGate + membrane deployed from pepti. E2E 200.**
-songBird `cd13d36d` deployed on sporeGate + golgi (build-divergence glue applied). nestGate `f3006ccd` in depot, active on golgi (sporePrint). membrane `5efff13` in depot, active on golgi. `primals.eco → 200`. Disk 71% (2.7G free on golgi). BUILD-DIV-01 logged — pre-push `cargo check --all-targets` enforcement needed.
+**Date**: Jul 8, 2026 17:40 EDT | **Wave**: 134a | **From**: eastGate overwatch
+**Posture**: **CONVERGING — VPS-thin reconfigured. golgi is now pure relay/depot. sporeGate builds, golgi serves. E2E 200.**
+golgi reconfigured as VPS-thin: only tracks `wateringHole` (was 15+ repos). sporeGate is the source builder; golgi relays binaries + runs sporePrint. bearDog `d594d87` landed BUILD-DIV-01 pre-push gate (`.githooks/pre-push`). flockGate actively testing but drawbridge blocked pending sporeGate redeploy. songBird flockGate HEAD is truncated-zero SHA (caught by our validation).
 
 ---
 
@@ -10,27 +10,30 @@ songBird `cd13d36d` deployed on sporeGate + golgi (build-divergence glue applied
 
 ```
 ✅ 14/14 primals + primalSpring: ALL GREEN — 0 fail across full ecosystem
-✅ songBird cd13d36d DEPLOYED on sporeGate (both services) + golgi (membrane + relay)
+✅ songBird cd13d36d DEPLOYED on sporeGate (both services) + golgi (relay)
 ✅ nestGate f3006ccd in depot, active on golgi (sporePrint)
 ✅ membrane 5efff13 in depot, active on golgi (CLI + cascade)
 ✅ E2E: primals.eco → 200. All services green.
+✅ golgi VPS-THIN: relay + depot + sporePrint only. Tracks wateringHole only.
 ✅ LAN mesh: eastGate ↔ ironGate ↔ southGate (Omada 10G backbone)
 ✅ WAN mesh: flockGate ↔ sporeGate (WireGuard 10.13.37.x, 72ms p50)
-✅ Mobile: grapheneGate 12/13 TCP-only (13/13 after full pepti rebuild)
 ✅ Sovereignty: S1-S4 ALL GRADUATED on inner membrane
-✅ golgi: sporePrint NUCLEUS (212 pages) + thin edge relay + freshness auto-publishing
+✅ bearDog d594d87: BUILD-DIV-01 pre-push gate landed (.githooks/pre-push)
 ✅ 7/7 stadial criteria CLEAR
-✅ SHOW_HN publication rubric established (28 criteria, 4 categories)
-⚠️  golgi disk 71% (2.7G free) — monitor during remaining pepti rebuilds
-⚠️  BUILD-DIV-01: songBird shipped used-but-unimplemented methods — gate CI had to add glue
+⚠️  golgi disk 71% (2.7G free) — lighter now with VPS-thin (fewer clones)
+⚠️  flockGate songBird SHA is truncated zeros — shallow clone artifact, needs cascade refresh
+⚠️  flockGate drawbridge: connection refused (sporeGate pepti rebuild in progress)
+⚠️  sporeGate bearDog HEAD stale (f6924beb vs d594d87 — needs cascade)
 ```
 
 **This wave (134a)**: Pepti pipeline hardening + first deployments from depot.
 
 **Landed (134a)**:
-- **sporeGate deployment**: songBird `cd13d36d` built with glue fix for `MeshMethod::Subscribe` + `provided_capabilities()` + `announce_drawbridge_capabilities()`. Both songBird services active.
-- **golgi deployment**: membrane `5efff13` (CLI + cascade), nestGate `f3006ccd` (sporePrint). E2E primals.eco → 200.
-- **BUILD-DIV-01 identified** (P2): songBird `cd13d36d` shipped `MeshMethod::Subscribe`, `DrawbridgeConfig::provided_capabilities()`, and `IpcServiceHandler::announce_drawbridge_capabilities()` as used-but-unimplemented. sporeGate CI had to add glue code. Root cause: primal pushed without `cargo check --all-targets`.
+- **VPS-thin reconfiguration**: golgi now tracks only `wateringHole`. No primal source repos on VPS. Pure relay + depot + sporePrint host. Frees disk, reduces attack surface.
+- **sporeGate deployment**: songBird `cd13d36d` built with glue fix, both services active. nestGate + membrane in depot.
+- **golgi deployment**: membrane `5efff13` (CLI + cascade), nestGate `f3006ccd` (sporePrint). E2E `primals.eco → 200`.
+- **BUILD-DIV-01 gate**: bearDog `d594d87` adds `.githooks/pre-push` with `cargo check --all-targets` enforcement. DRY riboCipher dispatch refactor included.
+- **BUILD-DIV-01 identified** (P2): songBird `cd13d36d` shipped used-but-unimplemented methods. sporeGate CI had to add glue. Root cause: primal pushed without `cargo check --all-targets`. Gate now exists in bearDog, needs adoption across all primals.
 
 **Landed (133h)**:
 - Multi-builder authority (`build_authorities = ["sporeGate", "eastGate"]`)
@@ -170,7 +173,7 @@ Composition subtypes formalized in projectNUCLEUS:
 | **Full NUCLEUS** | All 13 | eastGate, ironGate | Complete sovereign stack |
 | **Tower** | bearDog + songBird + skunkBat | grapheneGate, new gates | Minimal secure mesh entry |
 | **JupyterHub host** | songBird (drawbridge) + bearDog + biomeOS | ironGate | `lab.primals.eco` via mesh relay |
-| **sporePrint host** | petalTongue + nestGate + songBird + bearDog | golgi VPS | Sovereign website with live mesh viz |
+| **sporePrint host (VPS-thin)** | nestGate + songBird + membrane relay | golgi VPS | Sovereign website + depot + relay. No source repos. |
 | **Cold storage** | nestGate + sweetGrass + rhizoCrypt | westGate | 76TB ZFS CAS archive |
 | **Compute dispatch** | toadStool + barraCuda + coralReef + biomeOS | strandGate | GPU compute mesh |
 
@@ -340,20 +343,28 @@ CI-DIV-01/02/03 absorbed into `ecosystem_manifest.toml` `[build.*]`. Remaining d
 
 ---
 
-## Gate Convergence (134a)
+## Gate Convergence (134a — 17:40 EDT)
 
 ```
 CONVERGED + DEPLOYED:
-  ✅ sporeGate  — songBird cd13d36d LIVE (both services), BUILD-DIV-01 glue applied
-  ✅ golgiBody  — membrane 5efff13 + nestGate f3006ccd LIVE, sporePrint serving, E2E 200
-  ✅ eastGate   — cascade current, 19 repos tracked
+  ✅ sporeGate  — 16:19Z. songBird cd13d36d LIVE. 14 primals tracked.
+                  bearDog stale (f6924beb, needs d594d87 cascade).
+  ✅ golgiBody  — 17:13Z. VPS-THIN — only wateringHole tracked.
+                  membrane 5efff13 + nestGate f3006ccd LIVE. sporePrint serving. E2E 200.
+  ✅ eastGate   — current. 19 repos tracked. bearDog at d594d87.
 
-STALE (need cascade refresh):
-  ⚠️  flockGate  — behind, waiting for full pepti rebuild
+ACTIVELY TESTING:
+  🔄 flockGate  — 16:03Z. WG UP, 2 peers, 72ms RTT.
+                  Drawbridge: connection refused (sporeGate pepti rebuild).
+                  capability.call: FAIL (no jupyter provider).
+                  songBird HEAD: 05e22043…000000 (truncated — shallow clone artifact).
+                  BLOCKER: waiting for sporeGate drawbridge redeploy.
+
+STALE:
   ⚠️  ironGate   — Jul 4, 4+ days stale. Needs SSH access.
 
 DISK:
-  ⚠️  golgi      — 71% (2.7G free). Monitor during remaining rebuilds.
+  ⚠️  golgi      — 71% (2.7G free). Lighter with VPS-thin (only wateringHole cloned).
 ```
 
-*Wave 134a — NEARING CONVERGENCE. songBird + nestGate + membrane deployed from pepti to sporeGate + golgi. E2E primals.eco → 200. BUILD-DIV-01 found and fixed at gate level (pre-push cargo check enforcement needed). ~9 primals remaining for full pepti refresh. Pipeline shape: **build → sync → announce → fetch → verify → deploy** — fractal at every scale.*
+*Wave 134a — CONVERGING. VPS-thin landed on golgi (relay-only). sporeGate deploys LIVE. bearDog ships BUILD-DIV-01 pre-push gate. flockGate actively testing but blocked on drawbridge redeploy. ~9 primals remaining for full pepti. Pipeline: **build → sync → announce → fetch → verify → deploy**.*
