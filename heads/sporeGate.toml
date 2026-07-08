@@ -1,24 +1,75 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# This file is owned exclusively by this gate. No other gate writes here.
-# Gate: sporeGate | Updated: 2026-07-07T23:26:45Z
+# Gate: sporeGate | Updated: 2026-07-05T17:50:00Z
+#
+# This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-07T23:26:45Z"
+updated = "2026-07-06T16:45:00Z"
 
 [heads]
-barraCuda = "3b8ea530296319cbc1d7395831ffcf8d8e0ab4ac"
-bearDog = "f6924beb51d9ab8bd7d150afb40c9362e8732667"
-biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
-cellMembrane = "d9113db5b0a4e3bf560bc6a03c839697f897d756"
-coralReef = "2db3019ae57598a8bf558e8fc2b3b2bc9f4aece6"
-loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
-nestGate = "d355c8dbbba9df79f9ee8497c19298b91fe45fbd"
-petalTongue = "ebaf483c72712ce353635d5ed74ce251a590746a"
-rhizoCrypt = "5a64407b4b7b93ce90e2c20582ddfac5cef7a571"
-skunkBat = "35326c39177770f935a944635b510cd220b6270b"
-songBird = "026f6e3ebef6066fedb64cd7e96b13c9420e418a"
-squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
-sweetGrass = "bfac29311075bbe7a7875a1f267b49c43e0e61cf"
-toadStool = "002332e485cb1dea5e93a04ed656b727f5cb77a1"
-wateringHole = "3a5099c44d6bdb03347880bc95411cb672372cf4"
+nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
+wateringHole = "e41ef3647f7768b95da1e3b240d0754b110fba92"
+plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
+bearDog = "6ef436864"
+songBird = "40699793"
+toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
+biomeOS = "1ce2a4c5be7c58b9cb2fa2be12a99329becb6485"
+squirrel = "bb3a91d93970a01fbee9fbbb0509dfc9f2943aaf"
+barraCuda = "cbb27045f113a51589cbade2d421596e0ce56562"
+coralReef = "2e357b9dca68e43696c0c3ce9f9e6a35cc3864df"
+rhizoCrypt = "ff60767fcb8b86a18400a58a8c6bdfd3e02e0cfa"
+loamSpine = "e68873d2c3092f6947f98655b7adb62d905178d8"
+sweetGrass = "96d35e5506cdd8f8f4101eef1ccff0448ee07ab3"
+skunkBat = "6fbdc43a544351cd165b0abf11824143e05db701"
+cellMembrane = "0a46148"
+
+[deploy]
+songbird_version = "0.2.1-drawbridge"
+songbird_commit = "40699793"
+beardog_version = "0.9.0-gatehouse"
+beardog_commit = "6ef436864"
+gateway_status = "E2E_LIVE_MESH_PEERED_PEPTI_COMPLETE"
+topology = "internet → golgi(TLS) → WG → sporeGate:7780(drawbridge) → ironGate:8000(JupyterHub)"
+http_proxy = "LIVE — lab.primals.eco/hub/api returns {version: 5.4.5}"
+caddy_local = "STOPPED+DISABLED"
+caddy_golgi = "ACTIVE — TLS → drawbridge :7780"
+relay_deployed = "golgi: membrane 0a46148 — freshness fix live, temporal.cascade commits heads"
+pepti_warehouse = "LIVE — 15/15 binaries × 2 triples = 30 ecobins (checksums.toml verified)"
+mesh_status = "PEERED — sporeGate↔ironGate bidirectional (family: ecoPrimals)"
+mesh_reachable_peers = 1
+mesh_mode = "federation (dark-forest disabled for LAN trust)"
+beardog_security = "LIVE on /run/membrane/beardog.sock (production_ready)"
+drawbridge_routes = "/hub=jupyter, /api=jupyter, /user=jupyter, /services=jupyter"
+drawbridge_backends = "jupyter=http://192.168.4.237:8000/hub (ironGate JupyterHub 5.4.5)"
+
+[strandgate]
+status = "ALIVE but SSH-inaccessible"
+actual_ip = "192.168.4.103"
+expected_ip = "192.168.4.100"
+hostname = "pop-os"
+mac = "c8:5e:a9:c9:6f:80"
+latency_ms = 30
+note = "On WiFi (30-50ms). SSH keys not deployed. Need physical access or credentials."
+action = "Deploy SSH key + songBird binary to enable mesh.init"
+
+[blocking]
+strandgate_ssh = "SSH keys not deployed — need physical access"
+dark_forest = "Disabled for LAN trust (re-enable when all peers have bearDog)"
+
+[resolved]
+mesh_trust = "Fixed: removed dark-forest mode → LAN peers auto-register with FAMILY_ID"
+e2e_path = "lab.primals.eco/hub/api → 200 {version: 5.4.5}"
+irongate_mesh = "PEERED — bidirectional, direct path, reachable"
+pepti_complete = "15/15 × 2 triples: x86_64-musl + aarch64-musl (all 14 primals + nucleus_launcher)"
+ci_div_07 = "FIXED: 5 bugs patched in freshness publisher (0a46148). golgi cascade now auto-commits+pushes heads."
+golgi_disk = "Reclaimed 2.7GB (100%→75%), then +70MB NUCLEUS binaries (→79%)"
+golgi_nucleus = "DEPLOYED: petaltongue(28M) + nestgate(8M) + songbird(23M) + beardog(11M) from pepti depot"
+strandgate_found = "Alive at .103 (DHCP shifted from .100)"
+
+[next_steps]
+p1 = "strandGate: physical access → deploy SSH key + songBird + mesh.init"
+p2 = "flockGate: mesh.init via golgi relay (WAN mesh)"
+p3 = "grapheneGate: pull from pepti + ADB deploy + mesh.init"
+p4 = "Re-enable dark-forest once all LAN peers have bearDog security providers"
+p5 = "bearDog gatehouse on golgi (long-term sovereign TLS)"

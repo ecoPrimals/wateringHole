@@ -70,7 +70,7 @@ golgiBody-ext = "137.184.197.151"
 # covalent (gate→inner) → ionic (inner→outer) → weak (outer→GitHub)
 [topology.roles]
 push_receiver = "golgiBody"           # cis face: receives gate pushes (Forgejo)
-build_authority = "sporeGate"         # sovereign CI: builds all primals locally
+build_authorities = ["sporeGate", "eastGate"]  # sovereign CI: any gate with Rust + musl-tools can build
 depot_server = "golgiBody"            # WAN depot: serves binaries via Caddy TLS
 sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade
 external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
@@ -88,7 +88,128 @@ gpu_gates = ["ironGate"]
 notes = "f64 precision via SHADER_F64 feature on RTX 5070 Ti (ironGate). coralReef compiles shaders. barraCuda dispatches compute. Precision routing: barraCuda.precision.route selects f32/f64 path based on device capability."
 
 # ═══════════════════════════════════════════════════════════════════
-# Root
+# Build Metadata — Sovereign CI Pipeline (plasmid.harvest)
+# ═══════════════════════════════════════════════════════════════════
+#
+# Manifest-driven CI: plasmid.harvest reads these fields instead of
+# hardcoding per-primal workarounds in bash scripts.
+#
+# Fields:
+#   binary_name  — Deployed binary name (as installed in pepti depot)
+#   package      — Cargo package for `--package` flag (workspace primals)
+#   workspace    — Whether the primal uses a Cargo workspace
+#   cargo_config — Whether .cargo/config.toml has custom linker/target config
+#   gpu          — Whether this primal needs a glibc build for GPU/dlopen
+#   targets      — Supported build targets (x86_64-musl, aarch64-musl)
+#   notes        — CI quirks or build context
+#
+# Resolves: CI-DIV-01 (biomeOS), CI-DIV-02 (skunkBat), CI-DIV-03 (nestGate)
+
+[build.beardog]
+binary_name = "beardog"
+package = "beardog"
+workspace = false
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.songbird]
+binary_name = "songbird"
+package = "songbird"
+workspace = false
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.toadstool]
+binary_name = "toadstool"
+package = "toadstool-cli"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.barracuda]
+binary_name = "barracuda"
+package = "barracuda-core"
+workspace = true
+cargo_config = false
+gpu = true
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.coralreef]
+binary_name = "coralreef"
+package = "coralreef-core"
+workspace = true
+cargo_config = false
+gpu = true
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.rhizocrypt]
+binary_name = "rhizocrypt"
+package = "rhizocrypt-service"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.loamspine]
+binary_name = "loamspine"
+package = "loamspine-service"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.sweetgrass]
+binary_name = "sweetgrass"
+package = "sweet-grass-service"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.biomeos]
+binary_name = "biomeos"
+package = "biomeos-unibin"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+notes = "CI-DIV-01: workspace has multiple binaries — requires --package biomeos-unibin"
+
+[build.squirrel]
+binary_name = "squirrel"
+package = "squirrel"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.petaltongue]
+binary_name = "petaltongue"
+package = "petaltongue-workspace"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+[build.skunkbat]
+binary_name = "skunkbat"
+package = "skunk-bat-server"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+notes = "CI-DIV-02: workspace root is test-only — requires --package skunk-bat-server"
+
+[build.nestgate]
+binary_name = "nestgate"
+package = "nestgate"
+workspace = false
+cargo_config = true
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+notes = "Custom .cargo/config.toml with link-self-contained and relocation-model=static for musl (CI-DIV-03 resolved Wave 133a)"
+
+[build.sourdough]
+binary_name = "sourdough"
+package = "sourdough"
+workspace = true
+cargo_config = false
+targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+
+# ═══════════════════════════════════════════════════════════════════
+# Repositories
 # ═══════════════════════════════════════════════════════════════════
 
 [repos.nestGate]
@@ -100,8 +221,7 @@ category = "primal"
 description = "NestGate persistent storage + content-addressed crates"
 github_repo = "ecoPrimals/nestGate"
 forgejo_repo = "ecoPrimals/nestGate"
-# CI-DIV-03: requires ld.lld linker (project .cargo/config.toml diverges)
-linker = "ld.lld"
+# CI-DIV-03: RESOLVED Wave 133a — uses aarch64-linux-gnu-gcc, project .cargo/config.toml handles linker
 
 # ═══════════════════════════════════════════════════════════════════
 # Primals (ecoPrimals org)
@@ -554,9 +674,10 @@ mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "sfp+2"
 wg_ip = "10.13.37.5"
-roles = ["overwatch", "primalspring_evolution", "meta_atomic"]
+roles = ["overwatch", "primalspring_evolution", "meta_atomic", "build_hub"]
+build_authority = true
 link_speed_mbps = 10000
-notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch."
+notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch. Build-capable (Ryzen 9 7950X, 128GB RAM)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",

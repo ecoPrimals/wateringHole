@@ -20,6 +20,12 @@ ECOPRIMALS_ROOT="${ECOPRIMALS_ROOT:-$HOME/Development/ecoPrimals}"
 CHECKSUMS_FILE="$SCRIPT_DIR/checksums.toml"
 PROVENANCE_FILE="$SCRIPT_DIR/provenance.toml"
 
+# Depot sync target — sourced from ecosystem_manifest.toml [gates.golgiBody] wg_ip.
+# Prefer `membrane plasmid.harvest` for manifest-driven builds (replaces this script).
+DEPOT_SYNC_HOST="${DEPOT_SYNC_HOST:-10.13.37.1}"
+DEPOT_SYNC_USER="${DEPOT_SYNC_USER:-root}"
+DEPOT_SYNC_PATH="/opt/ecoPrimals/plasmidBin"
+
 # Target selection — musl (default, static), gnu (glibc, for GPU primals)
 TARGET_MODE="musl"
 TARGET_MUSL="x86_64-unknown-linux-musl"
@@ -275,9 +281,9 @@ fi
 
 if $DO_SYNC && [[ $passed -gt 0 ]]; then
     echo ""
-    echo "=== Syncing to golgi (10.13.37.1) ==="
-    rsync -avz --checksum "$SCRIPT_DIR/primals/" "root@10.13.37.1:/opt/ecoPrimals/plasmidBin/primals/"
-    rsync -avz "$CHECKSUMS_FILE" "root@10.13.37.1:/opt/ecoPrimals/plasmidBin/checksums.toml"
+    echo "=== Syncing to golgi ($DEPOT_SYNC_HOST) ==="
+    rsync -avz --checksum "$SCRIPT_DIR/primals/" "${DEPOT_SYNC_USER}@${DEPOT_SYNC_HOST}:${DEPOT_SYNC_PATH}/primals/"
+    rsync -avz "$CHECKSUMS_FILE" "${DEPOT_SYNC_USER}@${DEPOT_SYNC_HOST}:${DEPOT_SYNC_PATH}/checksums.toml"
     echo "  Depot synced to golgi WAN endpoint"
 fi
 
