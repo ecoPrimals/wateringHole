@@ -1,10 +1,10 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: golgiBody | Updated: 2026-07-08T08:03:06Z
+# Gate: golgiBody | Updated: 2026-07-08T08:18:46Z
 
 [meta]
 gate = "golgiBody"
-updated = "2026-07-08T08:03:06Z"
+updated = "2026-07-08T08:18:46Z"
 
 [heads]
 barraCuda = "3b8ea530296319cbc1d7395831ffcf8d8e0ab4ac"
@@ -23,4 +23,4 @@ songBird = "026f6e3ebef6066fedb64cd7e96b13c9420e418a"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
 sweetGrass = "bfac29311075bbe7a7875a1f267b49c43e0e61cf"
 toadStool = "002332e485cb1dea5e93a04ed656b727f5cb77a1"
-wateringHole = "b0b8e461daaf84db7b50785d047de8f36d15f9aa"
+wateringHole = "c3f7ff02d5e2d39f99d63fdaaf6028b7748bb4c2"
