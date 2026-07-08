@@ -1,8 +1,8 @@
 # ecoPrimals Ecosystem Blurb — Wave 133f
 
-**Date**: Jul 7, 2026 17:55 EDT | **Wave**: 133f | **From**: eastGate overwatch
-**Posture**: **ALL PRIMALS GREEN — 15/15 pass, 0 fail. Ready for pepti rebuild.**
-Full ecosystem sweep: 14/14 primals + primalSpring pass all tests. rhizoCrypt TCP port collision fixed (ephemeral ports). barraCuda ESN wgpu race made resilient. All code debt resolved. sporeGate is sole CI builder; Forgejo is the long-term sovereign forge.
+**Date**: Jul 7, 2026 21:50 EDT | **Wave**: 133f | **From**: eastGate overwatch
+**Posture**: **ALL PRIMALS GREEN — pepti rebuilds auto-triggering on sporeGate.**
+15/15 pass, 0 fail. Sovereign CI auto-triggered builds for rhizoCrypt, barraCuda, nestGate on push to Forgejo. Hub gates (eastGate/sporeGate/golgi) fully converged. flockGate + ironGate need cascade refresh.
 
 ---
 
@@ -21,19 +21,22 @@ Full ecosystem sweep: 14/14 primals + primalSpring pass all tests. rhizoCrypt TC
 ✅ SHOW_HN publication rubric established (28 criteria, 4 categories)
 ```
 
-**This wave (133f)**: Final code convergence sweep. All remaining primal test failures resolved:
+**This wave (133f)**: Code convergence complete. Pepti rebuilds flowing.
 
-**Fixes landed (133f — overwatch direct)**:
-- **rhizoCrypt**: 2 TCP startup tests (`test_run_server_host_override_enables_tcp`, `test_run_server_tcp_via_jsonrpc_port_env`) fixed — root cause was port collision with production default. Both now use ephemeral port 0. 86/86 pass.
-- **barraCuda**: `test_esn_forecast` wgpu `BindGroupLayout` panic under concurrent load — isolated in spawned task with panic recovery. Uses CPU device for algorithm validation. 3911/3911 pass.
+**Cascade (21:50 EDT)**:
+- **sporeGate** head fresh (23:26Z): all 14 primals at current SHAs including `5a64407` rhizoCrypt + `3b8ea530` barraCuda ✓
+- **golgiBody** head fresh (01:46Z): all repos tracked, cellMembrane at `c93344c` (newer than sporeGate's `d9113db`) ✓
+- **eastGate** head updated to current (01:50Z): all local SHAs published ✓
+- **nestGate** synced to Forgejo: 2 commits pushed (`CI-DIV-03` linker + `NESTGATE-ANDROID-01` UDS fix), build auto-triggered ✓
+- **flockGate** STALE — last updated 15:14Z, all primals behind. Needs cascade after pepti rebuild.
+- **ironGate** VERY STALE — Jul 4 (3+ days). Needs SSH access for cascade refresh.
 
-**Previously landed (code teams + overwatch)**:
-- 14/14 clippy ZERO warnings
-- barraCuda `7edc83a` deep debt sweep + wgpu SIGSEGV fix
-- bearDog `f6924be` gatehouse production hardening
-- rhizoCrypt `2d9c146` readiness fix + vendor decoupling + test splits
-- primalSpring `d8028d6` cold-clone + CI badges + deep debt
-- toadStool, biomeOS, petalTongue — environment-agnostic test fixes
+**Sovereign CI pipeline activity**: Forgejo post-receive hooks auto-triggered sporeGate builds for rhizoCrypt (`5a64407`), barraCuda (`3b8ea530`), and nestGate (`f3006ccd`) on push. The pipeline is working — push triggers build, build syncs to depot.
+
+**Code fixes landed (133f)**:
+- rhizoCrypt: ephemeral ports for TCP startup tests. 86/86 pass.
+- barraCuda: ESN test panic-resilient (spawned task + CPU device). 3911/3911 pass.
+- 14/14 clippy ZERO warnings. All code teams delivered.
 
 ---
 
@@ -275,11 +278,25 @@ ESN test panicked with `BindGroupLayout[Id(0,3)] does not exist` under concurren
 
 | # | Item | Owner | Blocked by | Status |
 |---|------|-------|------------|--------|
-| 1 | Pepti rebuild: 12 primals (songBird, bearDog, toadStool, biomeOS, petalTongue, barraCuda, rhizoCrypt, skunkBat, nestGate, coralReef, sweetGrass + sourDough unchanged) | sporeGate CI | — | **NOW** — 15/15 GREEN, zero code debt, all tests pass |
+| 1 | Pepti rebuild: 12 primals | sporeGate CI | — | **IN PROGRESS** — 3 builds auto-triggered (rhizoCrypt, barraCuda, nestGate). Remaining 9 need trigger or manual push-to-forgejo. |
 | 2 | Fix golgi `sovereign-ci.log` permissions | golgi/cellMembrane | — | Quick fix |
 | 3 | Redeploy songBird on sporeGate from fresh pepti | sporeGate team | #1 | Pending |
-| 4 | flockGate WAN-DISPATCH-01 re-run → target FULL PASS | flockGate | #3 | Pending |
+| 4 | flockGate cascade + WAN-DISPATCH-01 re-run → FULL PASS | flockGate | #3 | Pending — gate is stale (15:14Z) |
 | 5 | grapheneGate 13/13 from fresh pepti | eastGate | #1 | Pending |
 | 6 | ironGate cascade refresh | ironGate | SSH access | STALE since Jul 4 |
+| 7 | cellMembrane CI-DIV absorption into manifest | cellMembrane | — | P2 — workarounds functional |
 
-*Wave 133f — ALL PRIMALS GREEN. 15/15 pass (14 primals + primalSpring), 0 fail. rhizoCrypt port collision fixed (ephemeral ports). barraCuda ESN wgpu race made resilient (spawn + panic recovery). All code debt resolved across full ecosystem. sporeGate is the sole CI builder; Forgejo is the long-term sovereign forge. Critical path NOW: pepti rebuild (12 primals) → songBird redeploy on sporeGate → flockGate WAN-DISPATCH-01 FULL PASS.*
+## Gate Convergence (133f)
+
+```
+CONVERGED (all primals at current HEADs):
+  ✅ eastGate   — updated 01:50Z, 19 repos tracked
+  ✅ sporeGate  — updated 23:26Z, 14 primals + wateringHole
+  ✅ golgiBody  — updated 01:46Z, 15 repos + plasmidBin + projectNUCLEUS
+
+STALE (need cascade refresh):
+  ⚠️  flockGate  — 15:14Z, all primals behind. Waiting for pepti rebuild + songBird redeploy.
+  ⚠️  ironGate   — Jul 4, 3+ days stale. Needs SSH access.
+```
+
+*Wave 133f — ALL PRIMALS GREEN. 15/15 pass, 0 fail. Code debt fully resolved. Sovereign CI pipeline active: push to Forgejo auto-triggers sporeGate builds. 3 builds triggered this cascade (rhizoCrypt, barraCuda, nestGate). Hub gates converged. Critical path: complete pepti rebuild (12 primals) → songBird redeploy on sporeGate → flockGate cascade + WAN-DISPATCH-01 FULL PASS.*
