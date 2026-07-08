@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 133f
+# ecoPrimals Ecosystem Blurb — Wave 133h
 
-**Date**: Jul 8, 2026 10:01 EDT | **Wave**: 133g | **From**: eastGate overwatch
-**Posture**: **PIPELINE ACTIVE — sovereign CI building, primalSpring at 1099 tests.**
-15/15 pass, 0 fail. primalSpring landed sovereign CI pipeline validation scenario (manifest-driven build metadata). golgiBody head fresh (13:49Z today). projectNUCLEUS evolved on golgi (`13381f7f`). Pipeline flowing.
+**Date**: Jul 8, 2026 10:38 EDT | **Wave**: 133h | **From**: eastGate overwatch
+**Posture**: **CONVERGENCE + AUTO-DISTRIBUTION LANDED — multi-builder authority, mesh.publish fan-out, auto-fetch pipeline.**
+15/15 pass, 0 fail. Resilient build authority (sporeGate + eastGate). songBird `mesh.publish` now fans out to all peers. cellMembrane auto-fetches on `depot.updated`. SHA validation rejects truncated commits. cascade-sense timer template added for all gates. 574 cellMembrane tests, 585 songbird-types tests, 0 fail.
 
 ---
 
@@ -21,19 +21,23 @@
 ✅ SHOW_HN publication rubric established (28 criteria, 4 categories)
 ```
 
-**This wave (133g)**: Cascade + strategic review. Pipeline activity confirmed.
+**This wave (133h)**: Convergence + resilient build authority + mesh auto-distribution.
 
-**Cascade (10:01 EDT Jul 8)**:
-- **primalSpring** `b389528` — sovereign CI pipeline validation scenario landed (133f). Validates `ecosystem_manifest.toml` build metadata: schema, field integrity, slug alignment, workspace consistency, CI-DIV-01/02/03 resolution, target parity. 1099 tests, 126 scenarios, 0 fail.
-- **golgiBody** head fresh (13:49Z today): nestGate at `f3006ccd` (synced), projectNUCLEUS at `13381f7f` (evolved) ✓
-- **sporeGate** head (23:26Z yesterday): all 14 primals at current SHAs ✓
-- **flockGate** STALE — 15:14Z Jul 7. Needs cascade after pepti rebuild + songBird redeploy.
-- **ironGate** VERY STALE — Jul 4 (4 days). Needs SSH for cascade refresh.
+**Landed (133h)**:
+- **Multi-builder authority**: `build_authorities = ["sporeGate", "eastGate"]` in manifest. Any gate with Rust + musl-tools can build. `TopologyRoles` struct extended, `GateProfile.build_authority` added.
+- **mesh.publish fan-out**: songBird `handle_publish` now POSTs to all reachable peers (was stub). Uses `post_jsonrpc_fire_and_forget`.
+- **mesh.subscribe handler**: New method receives `depot.updated` notifications, spawns `membrane plasmid.auto_fetch` (fire-and-forget).
+- **Build-complete hook**: `harvest.rs` calls songBird `mesh.publish depot.updated` after successful builds — peers auto-notified.
+- **Consumer auto-fetch**: New `plasmid/auto_fetch.rs` module. Rate-limited (5min), idempotent, BLAKE3-verified. Wired into `plasmid.auto_fetch` CLI dispatch.
+- **SHA validation**: `publish_gate_heads()` rejects truncated SHAs (40-byte hex ending in 28+ zeros). Prevents corrupt head files from propagating.
+- **Peer staleness detection**: `mesh.status` now includes `stale_peers` array (gates with `heads/<gate>.toml` older than 24h).
+- **cascade-sense timer**: New systemd timer+service pair — hourly convergence monitoring for all gates.
 
-**Previously landed (133f)**:
-- rhizoCrypt `5a64407`: ephemeral ports for TCP startup tests. 86/86 pass.
-- barraCuda `3b8ea530`: ESN test panic-resilient. 3911/3911 pass.
-- 14/14 clippy ZERO warnings. All code debt resolved.
+**Previously landed (133g)**:
+- CI-DIV-01/02/03 resolved, manifest `[build.*]` + `plasmid.harvest` enrichment
+- primalSpring sovereign CI pipeline validation scenario (1099 tests, 126 scenarios)
+- rhizoCrypt ephemeral ports, barraCuda ESN panic-resilience
+- Hardcoded IP extraction in build-local.sh, cargo config divergence inventory
 
 ---
 
@@ -51,7 +55,7 @@
 | 4 | flockGate re-runs WAN-DISPATCH-01 → target FULL PASS | flockGate | After #3 |
 | 5 | grapheneGate 13/13 redeploy from fresh pepti | eastGate | After #1 |
 | 6 | Verify composition subtypes match live deployments | projectNUCLEUS | Ongoing |
-| 7 | Resolve CI-DIV-01/02/03 (biomeOS, skunkBat, nestGate build quirks) | primal teams | P2 — manual workarounds in place |
+| 7 | ~~Resolve CI-DIV-01/02/03~~ | cellMembrane | **DONE** — manifest `[build.*]` + `plasmid.harvest` enrichment landed |
 
 **Closes**: S-6 (pepti current), S-8 (capability.call cross-gate)
 **Posture target**: CAPABILITY CONVERGENCE PROVEN — WAN-DISPATCH-01 FULL PASS
@@ -100,9 +104,9 @@ Push to Forgejo (any primal repo)
   → Caddy serves at membrane.primals.eco/depot/
 ```
 
-**Known fragilities**: CI-DIV-01 (biomeOS `--package`), CI-DIV-02 (skunkBat `--package`), CI-DIV-03 (nestGate `ld.lld`), `/var/log/sovereign-ci.log` permission denied on golgi, golgi freshness publishing sometimes stale.
+**Known fragilities**: `/var/log/sovereign-ci.log` permission denied on golgi, golgi freshness publishing sometimes stale. CI-DIV-01/02/03 resolved. Build authority now resilient (multi-gate).
 
-### Target flow (isomorphic, Wave 134a+)
+### Target flow (isomorphic, Wave 134a+ — IMPLEMENTED 133h)
 
 ```
 Push to Forgejo (any primal repo)
@@ -111,8 +115,12 @@ Push to Forgejo (any primal repo)
     - reads ecosystem_manifest.toml for binary_name, build_args, package
     - cargo build --release --target {target}
     - BLAKE3 checksum + provenance.toml update
-  → membrane plasmid.sync --target depot               ← Rust, rsync or native
-  → Gates auto-fetch via plasmid.fetch --check-update   ← Rust, checksum-verified
+  → drift::publish_depot_checksums                      ← depot metadata updated
+  → notify_mesh_depot_updated → songBird mesh.publish   ← LIVE (133h)
+    { topic: "depot.updated", primals_updated: [...], builder: gate }
+  → songBird fans out to all reachable peers             ← LIVE (133h)
+  → Consumer gates receive mesh.subscribe                ← LIVE (133h)
+  → membrane plasmid.auto_fetch (rate-limited, BLAKE3)  ← LIVE (133h)
 ```
 
 ### Evolution steps (134a scope)
@@ -123,7 +131,7 @@ Push to Forgejo (any primal repo)
 | 2 | Move per-primal build workarounds into `ecosystem_manifest.toml` | `[primals.biomeOS] package = "biomeos-unibin"` | Manifest-driven, not script-hardcoded |
 | 3 | `membrane plasmid.harvest` absorbs `build-local.sh` | Rust replaces bash | Same command on any builder gate |
 | 4 | Depot integrity: checksum verify after sync | BLAKE3 compare on golgi post-sync | Catch rsync corruption |
-| 5 | Auto-notify on build completion | songBird mesh impulse or wateringHole head update | Gates know when to fetch |
+| 5 | ~~Auto-notify on build completion~~ | ~~songBird mesh impulse~~ | **DONE (133h)** — `mesh.publish depot.updated` + `mesh.subscribe` + `plasmid.auto_fetch` |
 
 ### Fractal principle
 
@@ -131,9 +139,10 @@ The pipeline pattern must be **the same shape at every scale**:
 - **Single primal rebuild**: push → build → sync → verify
 - **Full sweep**: push all → build all → sync → verify
 - **New gate onboard**: `plasmid.fetch --all` → same depot, same checksums, same NUCLEUS
-- **New builder gate**: install Rust + musl-tools, set `build_authority = true` in manifest → same pipeline
+- **New builder gate**: install Rust + musl-tools, set `build_authority = true` in manifest, add to `build_authorities` list → same pipeline
+- **Builder failover**: if sporeGate is down, eastGate (or any `build_authority = true` gate) runs the same `plasmid.harvest` → same depot, same mesh notification
 
-Any gate with the right toolchain can be a builder. Any gate with depot access can be a consumer. The manifest is the single source of truth, not bash scripts on specific hosts.
+Any gate with the right toolchain can be a builder. Any gate with depot access can be a consumer. The manifest is the single source of truth, not bash scripts on specific hosts. The mesh auto-distributes via `mesh.publish` → `mesh.subscribe` → `plasmid.auto_fetch`.
 
 ---
 
@@ -236,7 +245,7 @@ Copy this blurb to all active teams/gates:
 | **flockGate** | 134a WAN-DISPATCH-01 re-validation after pepti rebuild | After pepti |
 | **ironGate** | Cascade refresh (stale Jul 4), 134b strandGate enrollment prep | Next SSH |
 | **bearDog** | 134b CryptoProvider fix (UNIT-DIV-04 — P1 for DNS cutover) | Code team |
-| **cellMembrane** | CI-DIV-01/02/03 manifest absorption (biomeOS `--package`, skunkBat `--package`, nestGate `ld.lld`) | Code team |
+| **cellMembrane** | ~~CI-DIV absorption~~ **DONE**. ~~Auto-distribution~~ **DONE (133h)** — `auto_fetch.rs` + `notify_mesh_depot_updated` + SHA validation + `build_authorities()` helpers | Code team |
 | **sporePrint** | 134b sovereignty sprint, DNS cutover, petalTongue rendering | After 134a |
 | **projectNUCLEUS** | Composition subtype manifests, deployment profiles | Ongoing |
 | **primalSpring** | 135+ SHOW_HN E-category prep (cold clone, CI badges, test naming) | Ongoing |
@@ -262,12 +271,12 @@ ESN test panicked with `BindGroupLayout[Id(0,3)] does not exist` under concurren
 
 ### cellMembrane — CI Build Workaround Absorption
 
-3 per-primal build workarounds in `build-local.sh` need absorption into `ecosystem_manifest.toml`:
-- CI-DIV-01: biomeOS requires `--package biomeos-unibin`
-- CI-DIV-02: skunkBat requires `--package skunk-bat-server`
-- CI-DIV-03: nestGate requires `ld.lld` linker (project `.cargo/config.toml` diverges)
+CI-DIV-01/02/03 build workarounds **RESOLVED** — absorbed into `ecosystem_manifest.toml` `[build.*]` section:
+- CI-DIV-01: biomeOS `package = "biomeos-unibin"` in `[build.biomeos]`
+- CI-DIV-02: skunkBat `package = "skunk-bat-server"` in `[build.skunkbat]`
+- CI-DIV-03: nestGate `cargo_config = true` in `[build.nestgate]` (linker handled by project `.cargo/config.toml`, resolved Wave 133a)
 
-**Target**: Add `[primals.<name>] package = "..."` and `linker = "..."` fields to manifest. `plasmid.harvest` reads manifest instead of hardcoded workarounds.
+`plasmid.harvest` now reads manifest build entries and enriches `sources.toml` with correct `--package` args and GPU flags. Triple-source convergence: manifest is authoritative for build config, `sources.toml` retained for release/fetch metadata.
 
 ---
 
@@ -281,7 +290,35 @@ ESN test panicked with `BindGroupLayout[Id(0,3)] does not exist` under concurren
 | 4 | flockGate cascade + WAN-DISPATCH-01 re-run → FULL PASS | flockGate | #3 | Pending — gate is stale (15:14Z) |
 | 5 | grapheneGate 13/13 from fresh pepti | eastGate | #1 | Pending |
 | 6 | ironGate cascade refresh | ironGate | SSH access | STALE since Jul 4 |
-| 7 | cellMembrane CI-DIV absorption into manifest | cellMembrane | — | P2 — workarounds functional |
+| 7 | ~~cellMembrane CI-DIV absorption into manifest~~ | cellMembrane | — | **DONE** — manifest `[build.*]` + harvest enrichment |
+| 8 | ~~Mesh auto-distribution pipeline~~ | songBird + cellMembrane | — | **DONE (133h)** — mesh.publish fan-out + auto-fetch + staleness alerting |
+| 9 | ~~Multi-builder resilience~~ | manifest + cellMembrane | — | **DONE (133h)** — `build_authorities = ["sporeGate", "eastGate"]` |
+
+## Build Config Convergence Inventory
+
+CI-DIV-01/02/03 absorbed into `ecosystem_manifest.toml` `[build.*]`. Remaining documented divergences:
+
+**Musl linking strategies** (two camps — both produce valid static ecobins):
+| Strategy | Primals | Notes |
+|---|---|---|
+| `link-self-contained=yes` | coralReef, nestGate, sourDough | No musl-tools package needed |
+| Explicit linkers + `-static` | sweetGrass, skunkBat, loamSpine, biomeOS, toadStool, squirrel | Requires `musl-tools` installed |
+
+**Resolver versions**: sweetGrass and barraCuda use resolver `"3"`, all others use `"2"`. No impact on ecobins.
+
+**Rust edition**: All 14 primals at edition `2024`. Outliers: nestGate vendored deps (2021), biomeOS chimeras (2021, excluded sub-workspaces).
+
+**rust-version spread**: 1.85 (loamSpine, nestGate, toadStool, coralReef) to 1.93.0 (bearDog). CI builder must run at least the highest.
+
+**squirrel default target**: `.cargo/config.toml` sets `[build] target = "x86_64-unknown-linux-musl"` globally. All `cargo` invocations on squirrel default to musl without `--target`.
+
+**sourDough `-D warnings`**: Global rustflags `-D warnings` in `.cargo/config.toml`. May fail builds if upstream deps emit warnings.
+
+**nestGate `[patch.crates-io]`**: Only primal with `[patch]` section — patches `rustls-rustcrypto` and `rustls-webpki` to vendored forks for UNIT-DIV-04 investigation.
+
+**No cross-primal compile deps**: All inter-primal paths are commented out. Communication is runtime JSON-RPC/tarpc IPC only.
+
+---
 
 ## Gate Convergence (133f)
 
@@ -296,4 +333,4 @@ STALE (need cascade refresh):
   ⚠️  ironGate   — Jul 4, 3+ days stale. Needs SSH access.
 ```
 
-*Wave 133f — ALL PRIMALS GREEN. 15/15 pass, 0 fail. Code debt fully resolved. Sovereign CI pipeline active: push to Forgejo auto-triggers sporeGate builds. 3 builds triggered this cascade (rhizoCrypt, barraCuda, nestGate). Hub gates converged. Critical path: complete pepti rebuild (12 primals) → songBird redeploy on sporeGate → flockGate cascade + WAN-DISPATCH-01 FULL PASS.*
+*Wave 133h — ALL PRIMALS GREEN. 15/15 pass, 0 fail. Convergence + auto-distribution landed. Build authority resilient (sporeGate + eastGate). mesh.publish fans out depot notifications to all peers. Consumer gates auto-fetch on notification. SHA validation rejects truncated commits. cascade-sense timer template deployed. Pipeline shape: **build → sync → announce → fetch → verify → deploy** — fractal at every scale.*
