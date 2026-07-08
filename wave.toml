@@ -10,9 +10,9 @@
 
 [wave]
 id = 133
-sub = "f"
-date = "2026-07-07"
-posture = "ALL PRIMALS GREEN — 15/15 pass, 0 fail. rhizoCrypt + barraCuda final fixes landed. 12 primals ready for pepti rebuild. sporeGate is sole CI builder, Forgejo sovereign forge."
+sub = "g"
+date = "2026-07-08"
+posture = "PIPELINE ACTIVE — 1099 tests, 0 fail. Sovereign CI pipeline scenario validated. Pepti rebuilds flowing. Strategic review: temporal/eco/glacial/sovereign/HN goals shaped for Jul-Sep 2026."
 publisher = "eastGate-overwatch"
 
 [gates]

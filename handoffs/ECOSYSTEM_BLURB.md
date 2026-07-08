@@ -1,8 +1,8 @@
 # ecoPrimals Ecosystem Blurb — Wave 133f
 
-**Date**: Jul 7, 2026 21:50 EDT | **Wave**: 133f | **From**: eastGate overwatch
-**Posture**: **ALL PRIMALS GREEN — pepti rebuilds auto-triggering on sporeGate.**
-15/15 pass, 0 fail. Sovereign CI auto-triggered builds for rhizoCrypt, barraCuda, nestGate on push to Forgejo. Hub gates (eastGate/sporeGate/golgi) fully converged. flockGate + ironGate need cascade refresh.
+**Date**: Jul 8, 2026 10:01 EDT | **Wave**: 133g | **From**: eastGate overwatch
+**Posture**: **PIPELINE ACTIVE — sovereign CI building, primalSpring at 1099 tests.**
+15/15 pass, 0 fail. primalSpring landed sovereign CI pipeline validation scenario (manifest-driven build metadata). golgiBody head fresh (13:49Z today). projectNUCLEUS evolved on golgi (`13381f7f`). Pipeline flowing.
 
 ---
 
@@ -11,7 +11,7 @@
 ```
 ✅ 14/14 primals + primalSpring: ALL GREEN — 0 fail across full ecosystem
 ✅ 30/30 ecobins in pepti (15 x86_64 + 15 aarch64) — 12 need fresh rebuild
-✅ 1098+ tests GREEN, 125 scenarios, 0 fail (all code debt resolved)
+✅ 1099 tests GREEN, 126 scenarios, 0 fail (sovereign CI pipeline scenario added)
 ✅ LAN mesh: eastGate ↔ ironGate ↔ southGate (Omada 10G backbone)
 ✅ WAN mesh: flockGate ↔ sporeGate (WireGuard 10.13.37.x, 72ms p50)
 ✅ Mobile: grapheneGate 12/13 TCP-only (13/13 after pepti rebuild)
@@ -21,22 +21,19 @@
 ✅ SHOW_HN publication rubric established (28 criteria, 4 categories)
 ```
 
-**This wave (133f)**: Code convergence complete. Pepti rebuilds flowing.
+**This wave (133g)**: Cascade + strategic review. Pipeline activity confirmed.
 
-**Cascade (21:50 EDT)**:
-- **sporeGate** head fresh (23:26Z): all 14 primals at current SHAs including `5a64407` rhizoCrypt + `3b8ea530` barraCuda ✓
-- **golgiBody** head fresh (01:46Z): all repos tracked, cellMembrane at `c93344c` (newer than sporeGate's `d9113db`) ✓
-- **eastGate** head updated to current (01:50Z): all local SHAs published ✓
-- **nestGate** synced to Forgejo: 2 commits pushed (`CI-DIV-03` linker + `NESTGATE-ANDROID-01` UDS fix), build auto-triggered ✓
-- **flockGate** STALE — last updated 15:14Z, all primals behind. Needs cascade after pepti rebuild.
-- **ironGate** VERY STALE — Jul 4 (3+ days). Needs SSH access for cascade refresh.
+**Cascade (10:01 EDT Jul 8)**:
+- **primalSpring** `b389528` — sovereign CI pipeline validation scenario landed (133f). Validates `ecosystem_manifest.toml` build metadata: schema, field integrity, slug alignment, workspace consistency, CI-DIV-01/02/03 resolution, target parity. 1099 tests, 126 scenarios, 0 fail.
+- **golgiBody** head fresh (13:49Z today): nestGate at `f3006ccd` (synced), projectNUCLEUS at `13381f7f` (evolved) ✓
+- **sporeGate** head (23:26Z yesterday): all 14 primals at current SHAs ✓
+- **flockGate** STALE — 15:14Z Jul 7. Needs cascade after pepti rebuild + songBird redeploy.
+- **ironGate** VERY STALE — Jul 4 (4 days). Needs SSH for cascade refresh.
 
-**Sovereign CI pipeline activity**: Forgejo post-receive hooks auto-triggered sporeGate builds for rhizoCrypt (`5a64407`), barraCuda (`3b8ea530`), and nestGate (`f3006ccd`) on push. The pipeline is working — push triggers build, build syncs to depot.
-
-**Code fixes landed (133f)**:
-- rhizoCrypt: ephemeral ports for TCP startup tests. 86/86 pass.
-- barraCuda: ESN test panic-resilient (spawned task + CPU device). 3911/3911 pass.
-- 14/14 clippy ZERO warnings. All code teams delivered.
+**Previously landed (133f)**:
+- rhizoCrypt `5a64407`: ephemeral ports for TCP startup tests. 86/86 pass.
+- barraCuda `3b8ea530`: ESN test panic-resilient. 3911/3911 pass.
+- 14/14 clippy ZERO warnings. All code debt resolved.
 
 ---
 
