@@ -7,6 +7,9 @@
 # Architecture. golgi serves as the public ingress surface, running only:
 #
 #   - Forgejo    (sovereign git forge, SSH on :2222, HTTP on :3000)
+#                Bare repos are SHALLOW (depth=1) — full history lives on
+#                sporeGate at /opt/forgejo-mirror/. Pushes work normally;
+#                periodic re-shallowing keeps disk thin.
 #   - Caddy      (TLS termination, depot file_server, reverse proxy)
 #   - membrane   (temporal.cascade — Forgejo→sporeGate sync + freshness)
 #   - songBird   (mesh federation hub + TURN relay)
@@ -30,7 +33,9 @@
 #   1. Create new droplet
 #   2. Set env vars above
 #   3. Run this script via SSH
-#   4. rsync Forgejo data:
+#   4. rsync SHALLOW Forgejo repos from sporeGate mirror:
+#        bash provision-golgi-shallow-repos.sh   (or run inline — see bottom of file)
+#      OR restore full history then shallow later:
 #        rsync -avz /opt/forgejo-mirror/ root@$GOLGI_IP:/opt/forgejo/data/repositories/
 #   5. rsync pepti depot:
 #        rsync -avz /opt/ecoPrimals/depot/ root@$GOLGI_IP:/opt/ecoPrimals/depot/
@@ -409,8 +414,60 @@ if command -v ufw &>/dev/null; then
     ufw --force enable
 fi
 
-echo "=== 10. ENABLE SERVICES ==="
-systemctl enable forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane fail2ban
+echo "=== 10. FORGEJO RE-SHALLOW MAINTENANCE ==="
+
+cat > /usr/local/bin/forgejo-reshallow << 'EOSHALLOW'
+#!/usr/bin/env bash
+set -euo pipefail
+REPO_BASE="/opt/forgejo/data/repositories"
+systemctl stop forgejo.service
+SAVED=0
+for repo_path in $(find "$REPO_BASE" -maxdepth 2 -name "*.git" -type d | sort); do
+  before=$(du -sm "$repo_path" | awk '{print $1}')
+  tmpdir=$(mktemp -d)
+  if git clone --bare --depth=1 "file://${repo_path}" "${tmpdir}/shallow.git" 2>/dev/null; then
+    [ -d "${repo_path}/hooks" ] && cp -a "${repo_path}/hooks" "${tmpdir}/shallow.git/hooks"
+    rm -rf "$repo_path"
+    mv "${tmpdir}/shallow.git" "$repo_path"
+    chown -R git:git "$repo_path"
+    after=$(du -sm "$repo_path" | awk '{print $1}')
+    delta=$((before - after))
+    SAVED=$((SAVED + delta))
+  fi
+  rm -rf "$tmpdir"
+done
+systemctl start forgejo.service
+echo "forgejo-reshallow: saved ~${SAVED}M"
+EOSHALLOW
+chmod +x /usr/local/bin/forgejo-reshallow
+
+cat > /etc/systemd/system/forgejo-reshallow.service << 'EOSVC'
+[Unit]
+Description=Re-shallow Forgejo bare repos (Thin Relay maintenance)
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/forgejo-reshallow
+TimeoutStartSec=600
+StandardOutput=journal
+StandardError=journal
+EOSVC
+
+cat > /etc/systemd/system/forgejo-reshallow.timer << 'EOSVC'
+[Unit]
+Description=Monthly re-shallow of Forgejo bare repos
+
+[Timer]
+OnCalendar=monthly
+RandomizedDelaySec=3600
+
+[Install]
+WantedBy=timers.target
+EOSVC
+
+echo "=== 11. ENABLE SERVICES ==="
+systemctl enable forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane fail2ban forgejo-reshallow.timer
 
 echo ""
 echo "========================================="
@@ -437,5 +494,10 @@ echo "       knotc zone-commit primals.eco"
 echo "  8. Start services: systemctl start forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane"
 echo "  9. Verify: curl https://membrane.primals.eco/health"
 echo ""
-echo "Estimated disk usage after restore: ~5GB of 10GB (50%)"
+echo "Estimated disk usage after restore: ~3.5GB of 10GB (35%)"
 echo "If golgi dies, re-run this script + rsync from sporeGate."
+echo ""
+echo "MAINTENANCE:"
+echo "  - forgejo-reshallow.timer runs monthly to keep repos at depth=1"
+echo "  - Full history lives on sporeGate at /opt/forgejo-mirror/"
+echo "  - Manual re-shallow: forgejo-reshallow"
