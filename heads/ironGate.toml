@@ -5,7 +5,7 @@
 
 [meta]
 gate = "ironGate"
-updated = "2026-07-09T15:17:00Z"
+updated = "2026-07-09T15:40:00Z"
 
 [heads]
 barraCuda = "3b8ea530"
@@ -26,5 +26,5 @@ primalSpring = "9117d1b"
 wateringHole = "2638033e"
 sporePrint = "12a4169"
 whitePaper = "59db04d"
-projectNUCLEUS = "0d6e3ba"
+projectNUCLEUS = "6fe29f4"
 cellMembrane = "1be2b7f"
