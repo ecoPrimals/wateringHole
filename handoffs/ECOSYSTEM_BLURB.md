@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 134b
+# ecoPrimals Ecosystem Blurb — Wave 134c
 
-**Date**: Jul 8, 2026 20:20 EDT | **Wave**: 134b | **From**: eastGate overwatch
-**Posture**: **CONVERGING — BUILD-DIV-01/02 RESOLVED upstream. 14/14 primals pass `--all-targets`. sporeGate CI can rebuild without glue.**
-BUILD-DIV-01 (songBird) and BUILD-DIV-02 (bearDog) fixed at source. Pre-push gates added to songBird + bearDog. Forgejo received both pushes — sporeGate CI should auto-trigger rebuilds. golgi VPS-thin is stable relay. flockGate needs deep-fetch cascade after sporeGate redeploys.
+**Date**: Jul 9, 2026 08:15 EDT | **Wave**: 134c | **From**: eastGate overwatch
+**Posture**: **CONVERGING — Composition profiles formalized. Thin-relay is a fractal pattern. `membrane plasmid.composition` queries manifest.**
+Thin-relay pattern (golgi model) codified in `ecosystem_manifest.toml [compositions]` and in cellMembrane code. Any VPS/edge/HPC site can be a sovereign relay depot without a Rust toolchain. Ecobins arrive via mesh auto-fetch. `plasmid.composition` command live. BUILD-DIV-01/02 resolved. 14/14 pass `--all-targets`. sporeGate rebuilds in progress.
 
 ---
 
@@ -28,9 +28,16 @@ BUILD-DIV-01 (songBird) and BUILD-DIV-02 (bearDog) fixed at source. Pre-push gat
 ⚠️  sporeGate bearDog HEAD stale (f6924beb vs 579bc77f — cascade will resolve)
 ```
 
-**This wave (134a)**: Pepti pipeline hardening + first deployments from depot.
+**This wave (134c)**: Composition profiles + thin-relay fractal pattern + convergence.
 
-**Landed (134a)**:
+**Landed (134c)**:
+- **Composition profiles formalized**: `ecosystem_manifest.toml [compositions]` defines 5 fractal deployment patterns: `full`, `thin-relay`, `tower`, `compute`, `nest`
+- **`membrane plasmid.composition` command**: Query manifest for composition profiles per gate or globally
+- **Thin-relay codified**: golgiBody updated to `composition = "thin-relay"`, `repos = ["wateringHole"]`
+- **SOVEREIGN_DEPLOYMENT.md**: Composition Profiles section + thin-relay documentation
+- **cellMembrane**: `CompositionProfile` struct, `gate_composition()`, `composition_names()` methods. 600 tests pass.
+
+**Landed (134a/b)**:
 - **VPS-thin reconfiguration**: golgi now tracks only `wateringHole`. No primal source repos on VPS. Pure relay + depot + sporePrint host. Frees disk, reduces attack surface.
 - **sporeGate deployment**: songBird `cd13d36d` built with glue fix, both services active. nestGate + membrane in depot.
 - **golgi deployment**: membrane `5efff13` (CLI + cascade), nestGate `f3006ccd` (sporePrint). E2E `primals.eco → 200`.
@@ -254,12 +261,12 @@ Copy this blurb to all active teams/gates:
 
 | Recipient | Focus | Priority |
 |-----------|-------|----------|
-| **sporeGate** | Continue pepti rebuilds (~12 remaining). songBird `e5941eeb` + bearDog `579bc77f` pushed to Forgejo — CI should auto-trigger. Monitor golgi disk (71%). Fix CI log permissions. | **NOW** |
+| **sporeGate** | Continue pepti rebuilds (~12 remaining). songBird `e5941eeb` + bearDog `579bc77f` pushed to Forgejo. cellMembrane Forgejo bare repo needs recreate (shallow relay broke on rebase — `unresolved deltas`). Monitor golgi disk. | **NOW** |
 | **songBird** | ~~BUILD-DIV-01 glue~~ **DONE** — all three gaps implemented upstream (`e5941eeb`). Pre-push gate added. | **DONE** |
 | **flockGate** | 134a WAN-DISPATCH-01 re-validation after full pepti rebuild | After pepti |
 | **ironGate** | Cascade refresh (stale Jul 4, 4+ days). strandGate enrollment prep. | Next SSH |
 | **bearDog** | 134b CryptoProvider fix (UNIT-DIV-04 — P1 for DNS cutover) | Code team |
-| **cellMembrane** | ~~CI-DIV absorption~~ **DONE**. ~~Auto-distribution~~ **DONE**. Monitor auto-fetch on gate deploys. | Monitoring |
+| **cellMembrane** | Composition profiles LIVE. Forgejo bare repo needs `git clone --mirror` recreate on golgi (shallow depth=1 broke on rebase). Origin (GitHub) current at `65aa790`. | **golgi op** |
 | **sporePrint** | 134b sovereignty sprint, DNS cutover, petalTongue rendering | After 134a |
 | **projectNUCLEUS** | Composition subtype manifests, deployment profiles | Ongoing |
 | **primalSpring** | 135+ SHOW_HN E-category prep (cold clone, CI badges, test naming) | Ongoing |
@@ -353,29 +360,23 @@ CI-DIV-01/02/03 absorbed into `ecosystem_manifest.toml` `[build.*]`. Remaining d
 
 ---
 
-## Gate Convergence (134b — 20:20 EDT)
+## Gate Convergence (134c — 08:15 EDT)
 
 ```
 CONVERGED + DEPLOYED:
-  ✅ sporeGate  — 16:19Z. songBird + bearDog pushed to Forgejo (CI will auto-rebuild).
-                  14 primals tracked. Needs cascade for latest HEADs.
-  ✅ golgiBody  — 17:13Z. VPS-THIN — only wateringHole tracked.
-                  membrane 5efff13 + nestGate f3006ccd LIVE. sporePrint serving. E2E 200.
-  ✅ eastGate   — 00:20Z. 19 repos tracked. All 14 primals pass --all-targets.
-                  songBird e5941eeb, bearDog 579bc77f. Heads republished.
+  ✅ sporeGate  — songBird + bearDog pushed to Forgejo. Pepti rebuilds in progress.
+                  cellMembrane Forgejo bare repo needs recreate (shallow broke on rebase).
+  ✅ golgiBody  — VPS-THIN (composition: thin-relay). Only wateringHole tracked.
+                  membrane + nestGate LIVE. sporePrint serving. E2E 200.
+  ✅ eastGate   — 12:15Z. 19 repos tracked. All 14 primals pass --all-targets.
+                  cellMembrane 65aa790 (composition profiles). Heads current.
 
 ACTIVELY TESTING:
-  🔄 flockGate  — 16:03Z. WG UP, 2 peers, 72ms RTT.
-                  Drawbridge: connection refused (sporeGate pepti rebuild).
-                  capability.call: FAIL (no jupyter provider).
+  🔄 flockGate  — WG UP. Drawbridge blocked pending sporeGate redeploy.
                   songBird HEAD: truncated-zero SHA (needs deep fetch).
-                  BLOCKER: waiting for sporeGate drawbridge redeploy.
 
 STALE:
-  ⚠️  ironGate   — Jul 4, 4+ days stale. Needs SSH access.
-
-DISK:
-  ⚠️  golgi      — 71% (2.7G free). Lighter with VPS-thin (only wateringHole cloned).
+  ⚠️  ironGate   — Jul 4, 5+ days stale. Needs SSH access.
 ```
 
-*Wave 134b — BUILD-DIV-01/02 RESOLVED upstream. 14/14 primals compile clean with `--all-targets`. sporeGate Forgejo should auto-trigger CI builds for songBird + bearDog. ~12 primals remaining for full pepti. Pipeline: **build → sync → announce → fetch → verify → deploy**.*
+*Wave 134c — Composition profiles formalized. Thin-relay is a deployable fractal pattern for any VPS/edge/HPC site. `membrane plasmid.composition` queries manifest. cellMembrane Forgejo needs golgi operator. ~12 primals remaining for pepti. Pipeline: **build → sync → announce → fetch → verify → deploy**.*

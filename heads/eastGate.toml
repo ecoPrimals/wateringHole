@@ -6,23 +6,23 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-09T02:07:18Z"
+updated = "2026-07-09T12:02:35Z"
 
 [heads]
 barraCuda = "3b8ea530296319cbc1d7395831ffcf8d8e0ab4ac"
 bearDog = "579bc77fea93ed77499f4d0e7e7a1ef7934f3294"
 biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
-cellMembrane = "59c0578df0efe285e04afc95048d56584d0c5207"
+cellMembrane = "65aa79065a62fb33d2e6bb7c8798032107d34c17"
 coralReef = "2db3019ae57598a8bf558e8fc2b3b2bc9f4aece6"
 loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
 nestGate = "f3006ccd6caee4c9b37141ac24e6301037cc3452"
 petalTongue = "ebaf483c72712ce353635d5ed74ce251a590746a"
-primalSpring = "b73d6c56d91a2d703034726bd9fed5ffa6b36b62"
+primalSpring = "b3b89dff9b1f05d285c7ccd623cb8d57e80183b0"
 rhizoCrypt = "5a64407b4b7b93ce90e2c20582ddfac5cef7a571"
 skunkBat = "35326c39177770f935a944635b510cd220b6270b"
 songBird = "1444581f47642192eabf79723c79e6c748c26760"
 sourDough = "406a57575265112106b405d897609a0948520927"
-sporePrint = "ed2488e5bb0125028feddab709ff7c05956a007d"
+sporePrint = "86d26333f847a7badcd58268ebaf60f801a3965a"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
 sweetGrass = "bfac29311075bbe7a7875a1f267b49c43e0e61cf"
 toadStool = "002332e485cb1dea5e93a04ed656b727f5cb77a1"
