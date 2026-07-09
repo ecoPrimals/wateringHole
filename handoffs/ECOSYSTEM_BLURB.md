@@ -1,395 +1,164 @@
 # ecoPrimals Ecosystem Blurb — Wave 134d
 
-**Date**: Jul 9, 2026 09:15 EDT | **Wave**: 134d | **From**: eastGate overwatch
-**Posture**: **CONVERGING — Cascaded all repos. sporePrint docs updated for NUCLEUS hosting path. Teams active: cellMembrane +970 tests, primalSpring +128th scenario, sporePrint thesis scaffolded (249 pages).**
-Cascade pulled all 16 repos. cellMembrane and primalSpring received upstream evolution (composition test coverage). sporePrint architecture docs updated with infrastructure compositions + thin-relay-to-NUCLEUS evolution path. sporePrint team building toward NUCLEUS for website hosting — nestGate serves the static site, with squirrel/petalTongue/barraCuda progressively added as the site evolves.
+**Date**: Jul 9, 2026 09:45 EDT | **Wave**: 134d | **From**: eastGate overwatch
+**Posture**: **CONVERGING — 14/14 primals clean. Composition profiles formalized. Pepti rebuilds and sovereignty sprint are the remaining gates.**
 
 ---
 
-## Ecosystem State
+## Current State
 
 ```
-✅ 14/14 primals + primalSpring: ALL GREEN — 0 fail across full ecosystem
-✅ 14/14 primals pass `cargo check --all-targets` — zero BUILD-DIV patterns
-✅ songBird e5941eeb: BUILD-DIV-01 RESOLVED + pre-push gate added
-✅ bearDog 579bc77f: BUILD-DIV-02 RESOLVED (gateway module path)
-✅ nestGate f3006ccd in depot, active on golgi (sporePrint)
-✅ membrane 5efff13 in depot, active on golgi (CLI + cascade)
-✅ E2E: primals.eco → 200. All services green.
-✅ golgi VPS-THIN: relay + depot + sporePrint only. Tracks wateringHole only.
-✅ LAN mesh: eastGate ↔ ironGate ↔ southGate (Omada 10G backbone)
-✅ WAN mesh: flockGate ↔ sporeGate (WireGuard 10.13.37.x, 72ms p50)
-✅ Sovereignty: S1-S4 ALL GRADUATED on inner membrane
+✅ 14/14 primals pass cargo check --all-targets (zero BUILD-DIV)
+✅ E2E: primals.eco → 200 (golgi VPS-thin)
+✅ Composition profiles: full, thin-relay, tower, compute, nest (manifest + code)
+✅ Sovereign CI pipeline: plasmid.harvest → mesh.publish → auto_fetch (LIVE)
+✅ Multi-builder authority: sporeGate + eastGate
+✅ Pre-push gates: songBird + bearDog (.githooks/pre-push)
 ✅ 7/7 stadial criteria CLEAR
-✅ Forgejo SSH: ONLINE (pushes to both remotes succeeding)
-⚠️  golgi disk 71% (2.7G free) — lighter now with VPS-thin (fewer clones)
-⚠️  flockGate songBird SHA is truncated zeros — shallow clone artifact, needs deep fetch
-⚠️  flockGate drawbridge: connection refused (sporeGate pepti rebuild in progress)
-⚠️  sporeGate bearDog HEAD stale (f6924beb vs 579bc77f — cascade will resolve)
+✅ WAN mesh: sporeGate ↔ flockGate (WireGuard, 72ms p50)
+✅ LAN mesh: eastGate ↔ ironGate ↔ southGate (10G backbone)
+⚠️  Pepti depot: ~9 primals still need rebuild on sporeGate
+⚠️  bearDog CryptoProvider panic (UNIT-DIV-04) — blocks DNS cutover
+⚠️  ironGate: 5+ days stale (needs SSH)
+⚠️  cellMembrane Forgejo bare repo: unpacker error (shallow broke on rebase)
 ```
-
-**This wave (134d)**: Cascade + sporePrint NUCLEUS evolution + team convergence.
-
-**Landed (134d)**:
-- **sporePrint architecture docs**: Infrastructure compositions added to COMPOSITION_PATTERNS, DEPLOYMENT_MODEL, and NUCLEUS_ARCHITECTURE — documenting the thin-relay-to-NUCLEUS growth path for website hosting
-- **cellMembrane upstream**: Team added 121 lines of composition test coverage (604 tests total, from 600)
-- **primalSpring upstream**: 128th validation scenario (`s_composition_profiles.rs`, 346 lines) — full composition manifest coverage
-- **sporePrint content**: 249 pages, thesis section scaffolded (16 chapters), lithoSpore product page
-
-**sporePrint NUCLEUS evolution path**:
-```
-Current: thin-relay (songBird + nestGate + membrane)
-  → nestGate serves sporePrint static site
-  → Add squirrel for AI chat / MCP tool integration
-  → Add petalTongue for rich content rendering
-  → Add toadStool + barraCuda for live GPU visualizations
-  → Full NUCLEUS for interactive scientific experiences
-```
-
-**Landed (134c)**:
-- **Composition profiles formalized**: `ecosystem_manifest.toml [compositions]` defines 5 fractal deployment patterns: `full`, `thin-relay`, `tower`, `compute`, `nest`
-- **`membrane plasmid.composition` command**: Query manifest for composition profiles per gate or globally
-- **Thin-relay codified**: golgiBody updated to `composition = "thin-relay"`, `repos = ["wateringHole"]`
-- **SOVEREIGN_DEPLOYMENT.md**: Composition Profiles section + thin-relay documentation
-- **cellMembrane**: `CompositionProfile` struct, `gate_composition()`, `composition_names()` methods. 600 tests pass.
-
-**Landed (134a/b)**:
-- **VPS-thin reconfiguration**: golgi now tracks only `wateringHole`. No primal source repos on VPS. Pure relay + depot + sporePrint host. Frees disk, reduces attack surface.
-- **sporeGate deployment**: songBird `cd13d36d` built with glue fix, both services active. nestGate + membrane in depot.
-- **golgi deployment**: membrane `5efff13` (CLI + cascade), nestGate `f3006ccd` (sporePrint). E2E `primals.eco → 200`.
-- **BUILD-DIV-01 gate**: bearDog `d594d87` adds `.githooks/pre-push` with `cargo check --all-targets` enforcement. DRY riboCipher dispatch refactor included.
-- **BUILD-DIV-01 RESOLVED**: songBird `e5941eeb` — `provided_capabilities()`, `announce_drawbridge_capabilities()`, Subscribe dispatch all implemented upstream. Pre-push gate (`.githooks/pre-push`) added. No more gate-side glue needed.
-- **BUILD-DIV-02 RESOLVED**: bearDog `579bc77f` — `serve_https_gateway` module path fixed (`acme::` → `gateway::`). `cargo check --all-targets` passes.
-- **14/14 primals pass `cargo check --all-targets`** — zero BUILD-DIV patterns remaining.
-
-**Landed (133h)**:
-- Multi-builder authority (`build_authorities = ["sporeGate", "eastGate"]`)
-- mesh.publish fan-out, mesh.subscribe handler, build-complete hook
-- Consumer auto-fetch (`plasmid/auto_fetch.rs`), SHA validation, staleness detection
-- cascade-sense timer (hourly convergence monitoring)
-
-**Previously landed (133g)**:
-- CI-DIV-01/02/03 resolved, manifest `[build.*]` + `plasmid.harvest` enrichment
-- primalSpring sovereign CI pipeline validation scenario
-- rhizoCrypt ephemeral ports, barraCuda ESN panic-resilience
 
 ---
 
-## WAVE PLAN: 134a → 135+
+## Remaining Work — Focused
 
-### Wave 134a — Pepti Pipeline Hardening + Capability Convergence
+### 1. Pepti Rebuilds (sporeGate CI)
 
-**Goal**: WAN-DISPATCH-01 FULL PASS. Remaining pepti rebuilds, then full convergence.
+~9 primals need rebuild from current HEADs. songBird, nestGate, membrane already deployed.
 
-| # | Item | Owner | Status |
-|---|------|-------|--------|
-| 1 | ~~Rebuild + deploy songBird~~ | sporeGate CI | **DONE** — `cd13d36d` + glue, LIVE on sporeGate + golgi |
-| 2 | ~~Deploy nestGate to depot + golgi~~ | sporeGate CI | **DONE** — `f3006ccd` active (sporePrint) |
-| 3 | ~~Deploy membrane to depot + golgi~~ | sporeGate CI | **DONE** — `5efff13` active (CLI + cascade) |
-| 4 | Rebuild remaining pepti: bearDog + skunkBat + coralReef + sweetGrass + others | sporeGate CI | **NEXT** — ~9 primals still need rebuild |
-| 5 | flockGate cascade + WAN-DISPATCH-01 re-run → FULL PASS | flockGate | After #4 |
-| 6 | grapheneGate 13/13 redeploy from fresh pepti | eastGate | After #4 |
-| 7 | ~~Harden sovereign CI: `cargo check --all-targets` before push (BUILD-DIV-01 fix)~~ | all primal teams | **DONE** — songBird + bearDog have `.githooks/pre-push`. 14/14 pass. |
-| 8 | ~~Resolve CI-DIV-01/02/03~~ | cellMembrane | **DONE** |
+```
+DONE:    songBird · nestGate · membrane · bearDog (pushed)
+NEXT:    skunkBat · coralReef · sweetGrass · biomeOS · toadStool
+         squirrel · petalTongue · loamSpine · rhizoCrypt · barraCuda
+```
 
-**Closes**: S-6 (pepti current), S-8 (capability.call cross-gate)
-**Posture target**: CAPABILITY CONVERGENCE PROVEN — WAN-DISPATCH-01 FULL PASS
+**Command**: `membrane plasmid.harvest --all` on sporeGate
+**Unblocks**: flockGate WAN-DISPATCH-01, grapheneGate 13/13 redeploy
 
-### Wave 134b — Sovereignty Sprint
+### 2. bearDog CryptoProvider (UNIT-DIV-04) — P1
 
-**Goal**: `primals.eco` served from sovereign infrastructure. bearDog TLS cutover.
+`rustls-rustcrypto` CryptoProvider panics on install. Blocks Caddy → bearDog ACME TLS cutover.
+**File**: `crates/beardog-acme/src/` — `CryptoProvider::install()` call site
+**Likely cause**: Double-install or incompatible provider state (ES256 signing added Wave 132f)
+**Unblocks**: DNS cutover (`primals.eco` → bearDog TLS), sporePrint sovereignty
 
-| # | Item | Owner | Status |
-|---|------|-------|--------|
-| 1 | bearDog CryptoProvider investigation/fix (rustls-rustcrypto panic, UNIT-DIV-04) | bearDog team | **P1 BLOCKER** for DNS cutover |
-| 2 | DNS cutover: `primals.eco` → golgi direct (bearDog ACME) | eastGate overwatch | After #1 |
-| 3 | sporePrint NUCLEUS: Caddy → bearDog TLS cutover on golgi | cellMembrane | After #1 — 7-day shadow |
-| 4 | strandGate SSH enrollment (physical access, house 2) | eastGate hw | Pending hardware access |
+### 3. cellMembrane Forgejo Bare Repo (golgi operator)
 
-**Closes**: S-10 (sporePrint inner membrane), UNIT-DIV-04
-**Posture target**: SOVEREIGNTY DNS CUTOVER — primals.eco on inner membrane
+Push rejected with `unresolved deltas` — shallow depth=1 bare repo broke after rebase.
+**Fix**: On golgi, delete and recreate with `git clone --mirror` from origin.
+**Origin (GitHub)** is current at `ad4e532` (604 tests, composition profiles).
 
-### Wave 135+ — SHOW_HN Readiness Sprint
+### 4. ironGate Cascade (SSH operator)
 
-**Goal**: All 28 rubric criteria targeting PASS. External proof of stadial readiness.
+5+ days stale (since Jul 4). Needs SSH access for cascade refresh. Also: strandGate enrollment prep (physical access, house 2).
 
-| Category | Items | Key Actions |
-|----------|-------|-------------|
-| Evidence (E) | E-1 through E-7 | Cold clone test, CI badges, Lab links, reproduce guide |
-| Narrative (N) | N-1 through N-6 | Title, first comment, criticism responses, comparison table |
-| Standards (S) | S-1 through S-10 | Test suite 1000+, pepti current, cross-gate dispatch, sporePrint sovereign |
-| Operational (O) | O-1 through O-5 | Karma buildup (3-6 month window), posting date, public clone test |
+### 5. flockGate WAN Validation (after pepti)
 
-**Posture target**: SHOW_HN PRE-FLIGHT — all rubric items targeting PASS
+Drawbridge connection refused (waiting for sporeGate pepti redeploy). songBird HEAD shows truncated-zero SHA (shallow clone, needs deep fetch). WAN-DISPATCH-01 re-run once pepti is complete.
+
+### 6. golgi Sovereign-CI Log Fix
+
+`/var/log/sovereign-ci.log` permission denied. Quick `chown` or `logrotate.d` entry.
 
 ---
 
-## PIPELINE EVOLUTION: Ad-Hoc → Isomorphic Sovereign CI
+## Wave Plan
 
-The sovereign CI pipeline (Wave 120) works but is held together by bash scripts, hardcoded IPs, and manual SSH triggers. We evolve it toward the fractal/isomorphic/agnostic deployment model documented in `DEPLOYMENT_ISOMORPHISM_DEBT_WAVE120`.
+### 134a — Pepti + Capability Convergence (current)
 
-### Current flow (ad-hoc)
+| Item | Status |
+|------|--------|
+| Rebuild remaining ~9 pepti primals | **NEXT** |
+| flockGate WAN-DISPATCH-01 FULL PASS | After pepti |
+| grapheneGate 13/13 from fresh pepti | After pepti |
+| golgi sovereign-ci.log permissions | Quick fix |
 
-```
-Push to Forgejo (any primal repo)
-  → post-receive.d/sovereign-ci (golgi)         ← bash script
-  → SSH sporeGate (10.13.37.2 hardcoded)         ← IP-coupled
-  → /opt/depot/build-local.sh <primal> --sync    ← bash, per-primal workarounds
-  → rsync to golgi:/opt/ecoPrimals/plasmidBin/   ← rsync over WG
-  → Caddy serves at membrane.primals.eco/depot/
-```
+### 134b — Sovereignty Sprint
 
-**Known fragilities**: `/var/log/sovereign-ci.log` permission denied on golgi, golgi freshness publishing sometimes stale. CI-DIV-01/02/03 resolved. Build authority now resilient (multi-gate). BUILD-DIV-01: primals can ship used-but-unimplemented methods if `cargo check --all-targets` is not enforced pre-push.
+| Item | Status |
+|------|--------|
+| bearDog CryptoProvider fix (UNIT-DIV-04) | **P1 BLOCKER** |
+| DNS cutover: primals.eco → bearDog ACME TLS | After CryptoProvider |
+| sporePrint: Caddy → bearDog TLS (7-day shadow) | After DNS cutover |
+| strandGate SSH enrollment | Pending hardware access |
 
-### Target flow (isomorphic, Wave 134a+ — IMPLEMENTED 133h)
+### 135+ — SHOW_HN Readiness
 
-```
-Push to Forgejo (any primal repo)
-  → Forgejo webhook → membrane sovereign.ci.trigger    ← Rust, typed
-  → membrane plasmid.harvest <primal>                   ← Rust, manifest-driven
-    - reads ecosystem_manifest.toml for binary_name, build_args, package
-    - cargo build --release --target {target}
-    - BLAKE3 checksum + provenance.toml update
-  → drift::publish_depot_checksums                      ← depot metadata updated
-  → notify_mesh_depot_updated → songBird mesh.publish   ← LIVE (133h)
-    { topic: "depot.updated", primals_updated: [...], builder: gate }
-  → songBird fans out to all reachable peers             ← LIVE (133h)
-  → Consumer gates receive mesh.subscribe                ← LIVE (133h)
-  → membrane plasmid.auto_fetch (rate-limited, BLAKE3)  ← LIVE (133h)
-```
-
-### Evolution steps (134a scope)
-
-| # | Step | What changes | Isomorphism gain |
-|---|------|-------------|-----------------|
-| 1 | Fix golgi `sovereign-ci.log` permissions | `chown` or `logrotate.d` entry | Removes silent failure |
-| 2 | Move per-primal build workarounds into `ecosystem_manifest.toml` | `[primals.biomeOS] package = "biomeos-unibin"` | Manifest-driven, not script-hardcoded |
-| 3 | `membrane plasmid.harvest` absorbs `build-local.sh` | Rust replaces bash | Same command on any builder gate |
-| 4 | Depot integrity: checksum verify after sync | BLAKE3 compare on golgi post-sync | Catch rsync corruption |
-| 5 | ~~Auto-notify on build completion~~ | ~~songBird mesh impulse~~ | **DONE (133h)** — `mesh.publish depot.updated` + `mesh.subscribe` + `plasmid.auto_fetch` |
-| 6 | Pre-push CI gate: `cargo check --all-targets` | Enforced in Forgejo post-receive or primal CI | Prevents BUILD-DIV-01 class (used-but-unimplemented methods) |
-
-### Fractal principle
-
-The pipeline pattern must be **the same shape at every scale**:
-- **Single primal rebuild**: push → build → sync → verify
-- **Full sweep**: push all → build all → sync → verify
-- **New gate onboard**: `plasmid.fetch --all` → same depot, same checksums, same NUCLEUS
-- **New builder gate**: install Rust + musl-tools, set `build_authority = true` in manifest, add to `build_authorities` list → same pipeline
-- **Builder failover**: if sporeGate is down, eastGate (or any `build_authority = true` gate) runs the same `plasmid.harvest` → same depot, same mesh notification
-
-Any gate with the right toolchain can be a builder. Any gate with depot access can be a consumer. The manifest is the single source of truth, not bash scripts on specific hosts. The mesh auto-distributes via `mesh.publish` → `mesh.subscribe` → `plasmid.auto_fetch`.
-
----
-
-## TRACK 1: DEPLOY — Pepti + Capability Convergence
-
-**Immediate priority for 134a.** songBird drawbridge auto-advertisement committed (026f6e3e). Pattern documented in `GATEHOUSE_DARKFOREST_STANDARD.md`:
-
-```
-SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter,/api=inference
-→ songBird auto-registers ["jupyter", "inference"] at startup
-→ announces to mesh peers via mesh.capabilities_announce
-→ remote gates can capability.call("jupyter") → routed to drawbridge
-```
-
-Composition subtypes formalized in projectNUCLEUS:
-
-| Composition | Primals | Gate | Purpose |
-|-------------|---------|------|---------|
-| **Full NUCLEUS** | All 13 | eastGate, ironGate | Complete sovereign stack |
-| **Tower** | bearDog + songBird + skunkBat | grapheneGate, new gates | Minimal secure mesh entry |
-| **JupyterHub host** | songBird (drawbridge) + bearDog + biomeOS | ironGate | `lab.primals.eco` via mesh relay |
-| **sporePrint host (VPS-thin)** | nestGate + songBird + membrane relay | golgi VPS | Sovereign website + depot + relay. No source repos. |
-| **Cold storage** | nestGate + sweetGrass + rhizoCrypt | westGate | 76TB ZFS CAS archive |
-| **Compute dispatch** | toadStool + barraCuda + coralReef + biomeOS | strandGate | GPU compute mesh |
-
----
-
-## TRACK 2: SOVEREIGN — DNS Cutover + Inner Membrane
-
-**134b target.** bearDog CryptoProvider fix is the gate.
-
-```
-CURRENT:
-  primals.eco → Cloudflare → Caddy on golgi → sporePrint (212 pages)
-  primal.eco  → sovereign (S1-S4 GRADUATED) ✅
-  bearDog ACME → BLOCKED (CryptoProvider panic, UNIT-DIV-04)
-
-TARGET (134b):
-  primals.eco → golgi VPS → bearDog ACME TLS → petalTongue rendering
-  primal.eco  → sovereign ✅ (no change)
-  Cloudflare → outer membrane only (acceptable per diderm)
-```
-
-Membrane channels: Channel 1 (DNS) LIVE, Channel 2 (TURN) LIVE, Channel 2b (RustDesk) LIVE, Channel 3 (TLS) LIVE via Caddy (bearDog shadow BLOCKED).
-
----
-
-## TRACK 3: GLACIAL — Stadial Entry + Operational Proof
-
-**All 7 criteria CLEAR.** What remains is operational validation:
-
-| Exercise | Purpose | Wave | Status |
-|----------|---------|------|--------|
-| WAN-DISPATCH-01 FULL PASS | capability.call routes through WAN relay | 134a | Unblocked — songBird evolved |
-| strandGate enrollment | 3+ gate mesh enrollment reproducible | 134b | Physical access needed |
-| grapheneGate 13/13 | Full mobile NUCLEUS from pepti | 134a | After pepti rebuild |
-| Dark-forest re-enable | Full bearDog security posture | 134b+ | After 3+ LAN peers |
-| pepti rebuild | CI pipeline → clean binaries, zero workarounds | 134a | NEXT action |
-
----
-
-## TRACK 4: PUBLICATION — SHOW_HN as External Proof
-
-The SHOW_HN rubric is not a marketing exercise — it IS the glacial proof made external. Every S-category criterion maps to an existing stadial criterion or deployment goal.
-
-**Key linkages**:
-- S-6 (pepti current) → 134a pepti rebuild
+All 28 rubric criteria targeting PASS. Key linkages:
+- S-6 (pepti current) → 134a
 - S-8 (cross-gate dispatch) → 134a WAN-DISPATCH-01
 - S-10 (sporePrint sovereign) → 134b DNS cutover
-- E-2 (cold clone) → spring team prep
-- O-1 (karma buildup) → 3-6 month window starts now
-
-**Timeline model**: ~3-6 months of karma buildup + content refinement → SHOW_HN submission when all S-category PASS and narrative is sharp. The karma buildup window naturally paces the sovereignty sprint and operational proof exercises.
+- O-1 (karma buildup) → 3-6 month window active
 
 ---
 
-## Physical + Mesh Topology (133e)
+## Team Dispatches
+
+| Team | Work | Priority |
+|------|------|----------|
+| **sporeGate** | Pepti rebuilds (~9 remaining). cellMembrane Forgejo bare repo recreate. | **NOW** |
+| **bearDog** | CryptoProvider fix (UNIT-DIV-04). P1 for DNS cutover. | **P1** |
+| **sporePrint** | 249 pages, thesis scaffolded. Evolving thin-relay → NUCLEUS for hosting (nestGate → +squirrel → +petalTongue → +barraCuda). | Active |
+| **cellMembrane** | 604 tests. Composition profiles LIVE. Forgejo needs golgi operator. | Active |
+| **primalSpring** | 128 validation scenarios. SHOW_HN prep ongoing. | Active |
+| **ironGate** | Cascade refresh (5+ days stale). strandGate enrollment. | Next SSH |
+| **flockGate** | WAN-DISPATCH-01 re-validation after pepti. | After pepti |
+
+---
+
+## Topology
 
 ```
-HARDWARE (physical switching):
-  House 1 (CRS310 backbone):  sporeGate, eastGate, northGate, biomeGate(offline)
-  House 2 (Omada SX3008F):    ironGate, southGate, strandGate(pending), fieldGate
-  Link: 80m 10G AOC trunk between adjacent lots
+HARDWARE:
+  House 1 (CRS310):  sporeGate · eastGate · northGate
+  House 2 (SX3008F): ironGate · southGate · strandGate(pending)
+  Link: 80m 10G AOC trunk
 
-MESH OVERLAYS:
-  Songbird covalent (TCP :7700): eastGate ↔ golgi ↔ ironGate + southGate + grapheneGate
-  WireGuard WAN (10.13.37.x):   sporeGate ↔ flockGate (72ms p50, connection pooling active)
-  Capability routing:            PARTIAL — http.request proven, jupyter pending pepti rebuild
+MESH:
+  songBird covalent:  eastGate ↔ golgi ↔ ironGate + southGate + grapheneGate
+  WireGuard WAN:      sporeGate ↔ flockGate (72ms p50)
+
+VPS:
+  golgiBody (thin-relay): relay + depot + sporePrint. Tracks wateringHole only.
+  golgiBody-ext:          sporePrint mirror, TURN relay
 ```
 
 ---
 
-## Distribution
+## Composition Profiles
 
-Copy this blurb to all active teams/gates:
+Defined in `ecosystem_manifest.toml [compositions]`. Query: `membrane plasmid.composition`
 
-| Recipient | Focus | Priority |
-|-----------|-------|----------|
-| **sporeGate** | Continue pepti rebuilds (~12 remaining). songBird `e5941eeb` + bearDog `579bc77f` pushed to Forgejo. cellMembrane Forgejo bare repo needs recreate (shallow relay broke on rebase — `unresolved deltas`). Monitor golgi disk. | **NOW** |
-| **songBird** | ~~BUILD-DIV-01 glue~~ **DONE** — all three gaps implemented upstream (`e5941eeb`). Pre-push gate added. | **DONE** |
-| **flockGate** | 134a WAN-DISPATCH-01 re-validation after full pepti rebuild | After pepti |
-| **ironGate** | Cascade refresh (stale Jul 4, 4+ days). strandGate enrollment prep. | Next SSH |
-| **bearDog** | 134b CryptoProvider fix (UNIT-DIV-04 — P1 for DNS cutover) | Code team |
-| **cellMembrane** | Composition profiles LIVE (604 tests). Forgejo bare repo needs `git clone --mirror` recreate on golgi. Origin current at `ad4e532`. | **golgi op** |
-| **sporePrint** | 249 pages, thesis scaffolded. Architecture docs updated for NUCLEUS hosting path. Evolving thin-relay → full NUCLEUS for website. Needs: squirrel AI integration, petalTongue rendering, live barraCuda viz as features mature. | **Active** |
-| **projectNUCLEUS** | Composition subtype manifests, deployment profiles | Ongoing |
-| **primalSpring** | 128 validation scenarios (134c: `s_composition_profiles.rs`). SHOW_HN prep ongoing. | **Active** |
+| Profile | Primals | Use |
+|---------|---------|-----|
+| **full** | All 13+ | Sovereign NUCLEUS gate |
+| **thin-relay** | songBird, nestGate, membrane | Deployable anywhere — VPS, HPC, edge |
+| **tower** | bearDog, songBird, skunkBat | Minimal mesh entry |
+| **compute** | toadStool, barraCuda, coralReef, biomeOS | GPU/HPC |
+| **nest** | nestGate, sweetGrass, rhizoCrypt | Cold storage |
+
+sporePrint evolution: thin-relay → +squirrel → +petalTongue → +barraCuda → full NUCLEUS
 
 ---
 
-## Code Team Dispatches (status after 134a deployment)
-
-### songBird — BUILD-DIV-01: Used-but-Unimplemented Methods (RESOLVED UPSTREAM)
-
-songBird `cd13d36d` added `MeshMethod::Subscribe` variant and referenced two methods that weren't implemented yet. **Fixed in `e5941eeb`**:
-
-- `provided_capabilities()` on `DrawbridgeConfig` — extracts unique capability names from routes
-- `announce_drawbridge_capabilities()` on `IpcServiceHandler` — delegates to `MeshHandler::announce_capabilities_to_peers()`
-- `Subscribe` match arm in orchestrator dispatch — routes to existing `handle_subscribe`
-- `.githooks/pre-push` gate added — enforces `cargo check --all-targets` before push
-
-**Status**: FULLY RESOLVED. No more gate-side glue needed. sporeGate can rebuild songBird from source without patching.
-
-### bearDog — BUILD-DIV-02: Gateway Module Path (RESOLVED)
-
-bearDog referenced `acme::serve_https_gateway` but the function lives in `gateway.rs`. **Fixed in `579bc77f`**: call site now uses `gateway::serve_https_gateway`. `cargo check --all-targets` passes.
-
-### rhizoCrypt — Server Startup Readiness (RESOLVED)
-
-Root cause: two TCP startup tests were resolving to the production default port instead of ephemeral port 0. When a rhizoCrypt service was already running (or another test occupied the port), `bind()` returned EADDRINUSE and the readiness notification timed out. Fix: both tests now pass `Some(0)` as port_override, matching all other passing startup tests. 86/86 pass.
-
-### barraCuda — wgpu/ESN (RESOLVED)
-
-ESN test panicked with `BindGroupLayout[Id(0,3)] does not exist` under concurrent test load (3900+ parallel tests). This is a wgpu-core race condition in internal resource epoch tracking, not a code bug. Fix: (1) ESN test now uses `get_test_device()` (CPU-first) for algorithm validation instead of requiring GPU hardware, and (2) test body runs in a spawned task with panic recovery, converting wgpu races into logged skips instead of suite-failing panics. 3911/3911 pass.
-
-### bearDog — CryptoProvider Panic (UNIT-DIV-04)
-
-`rustls-rustcrypto` CryptoProvider panics on install. Blocks Caddy→bearDog ACME TLS cutover (134b sovereignty sprint). P1 for DNS cutover.
-
-**File**: `crates/beardog-acme/src/` area — `CryptoProvider::install()` call site
-**Context**: ES256 signing + defensive install added in Wave 132f (`136857739`). The panic may be double-install or incompatible provider state.
-
-### cellMembrane — CI Build Workaround Absorption
-
-CI-DIV-01/02/03 build workarounds **RESOLVED** — absorbed into `ecosystem_manifest.toml` `[build.*]` section:
-- CI-DIV-01: biomeOS `package = "biomeos-unibin"` in `[build.biomeos]`
-- CI-DIV-02: skunkBat `package = "skunk-bat-server"` in `[build.skunkbat]`
-- CI-DIV-03: nestGate `cargo_config = true` in `[build.nestgate]` (linker handled by project `.cargo/config.toml`, resolved Wave 133a)
-
-`plasmid.harvest` now reads manifest build entries and enriches `sources.toml` with correct `--package` args and GPU flags. Triple-source convergence: manifest is authoritative for build config, `sources.toml` retained for release/fetch metadata.
-
----
-
-## Remaining Work (134a critical path)
-
-| # | Item | Owner | Blocked by | Status |
-|---|------|-------|------------|--------|
-| 1 | ~~songBird build + deploy~~ | sporeGate CI | — | **DONE** — `cd13d36d` + glue, LIVE on sporeGate + golgi |
-| 2 | ~~nestGate build + deploy~~ | sporeGate CI | — | **DONE** — `f3006ccd` in depot, active on golgi |
-| 3 | ~~membrane build + deploy~~ | sporeGate CI | — | **DONE** — `5efff13` in depot, active on golgi |
-| 4 | Rebuild remaining pepti (~12 primals) | sporeGate CI | — | **IN PROGRESS** — songBird, bearDog just pushed to Forgejo. Remaining: skunkBat, coralReef, sweetGrass, biomeOS, toadStool, squirrel, petalTongue, loamSpine, rhizoCrypt, barraCuda, sourDough |
-| 5 | ~~Commit BUILD-DIV-01 glue back to songBird repo~~ | songBird team | — | **DONE** — `e5941eeb`: all three gaps + pre-push gate |
-| 5b | ~~Fix BUILD-DIV-02 in bearDog~~ | bearDog | — | **DONE** — `579bc77f`: gateway module path |
-| 6 | Fix golgi `sovereign-ci.log` permissions | golgi/cellMembrane | — | Quick fix |
-| 7 | flockGate cascade + WAN-DISPATCH-01 re-run → FULL PASS | flockGate | #4 | Pending |
-| 8 | grapheneGate 13/13 from fresh pepti | eastGate | #4 | Pending |
-| 9 | ironGate cascade refresh | ironGate | SSH access | STALE since Jul 4 |
-| 10 | ~~cellMembrane CI-DIV absorption~~ | cellMembrane | — | **DONE** |
-| 11 | ~~Mesh auto-distribution pipeline~~ | songBird + cellMembrane | — | **DONE (133h)** |
-| 12 | ~~Multi-builder resilience~~ | manifest + cellMembrane | — | **DONE (133h)** |
-
-## Build Config Convergence Inventory
-
-CI-DIV-01/02/03 absorbed into `ecosystem_manifest.toml` `[build.*]`. Remaining documented divergences:
-
-**Musl linking strategies** (two camps — both produce valid static ecobins):
-| Strategy | Primals | Notes |
-|---|---|---|
-| `link-self-contained=yes` | coralReef, nestGate, sourDough | No musl-tools package needed |
-| Explicit linkers + `-static` | sweetGrass, skunkBat, loamSpine, biomeOS, toadStool, squirrel | Requires `musl-tools` installed |
-
-**Resolver versions**: sweetGrass and barraCuda use resolver `"3"`, all others use `"2"`. No impact on ecobins.
-
-**Rust edition**: All 14 primals at edition `2024`. Outliers: nestGate vendored deps (2021), biomeOS chimeras (2021, excluded sub-workspaces).
-
-**rust-version spread**: 1.85 (loamSpine, nestGate, toadStool, coralReef) to 1.93.0 (bearDog). CI builder must run at least the highest.
-
-**squirrel default target**: `.cargo/config.toml` sets `[build] target = "x86_64-unknown-linux-musl"` globally. All `cargo` invocations on squirrel default to musl without `--target`.
-
-**sourDough `-D warnings`**: Global rustflags `-D warnings` in `.cargo/config.toml`. May fail builds if upstream deps emit warnings.
-
-**nestGate `[patch.crates-io]`**: Only primal with `[patch]` section — patches `rustls-rustcrypto` and `rustls-webpki` to vendored forks for UNIT-DIV-04 investigation.
-
-**No cross-primal compile deps**: All inter-primal paths are commented out. Communication is runtime JSON-RPC/tarpc IPC only.
-
----
-
-## Gate Convergence (134d — 09:15 EDT)
+## Gate Convergence (134d — 09:45 EDT)
 
 ```
-CONVERGED + DEPLOYED:
-  ✅ sporeGate  — Pepti rebuilds in progress. cellMembrane Forgejo needs bare repo recreate.
-  ✅ golgiBody  — VPS-THIN (composition: thin-relay). sporePrint serving via nestGate. E2E 200.
-  ✅ eastGate   — 13:15Z. All repos cascaded. cellMembrane ad4e532, sporePrint 8e62093.
-                  604 membrane tests, 128 primalSpring scenarios, 249 sporePrint pages.
+CONVERGED:
+  ✅ eastGate   — All repos cascaded. 604 membrane tests, 128 scenarios, 249 pages.
+  ✅ golgiBody  — VPS-thin. sporePrint serving. E2E 200.
+  ✅ sporeGate  — Pepti rebuilds in progress.
 
-ACTIVELY TESTING:
-  🔄 flockGate  — WG UP. Drawbridge blocked pending sporeGate redeploy.
+BLOCKED:
+  🔄 flockGate  — WG UP. Drawbridge pending pepti redeploy.
 
 STALE:
-  ⚠️  ironGate   — Jul 4, 5+ days stale. Needs SSH access.
+  ⚠️  ironGate   — Jul 4, 5+ days. Needs SSH.
 ```
 
-*Wave 134d — Cascaded all 16 repos. Teams active: cellMembrane (604 tests), primalSpring (128 scenarios), sporePrint (249 pages + thesis). sporePrint evolving thin-relay → NUCLEUS for website hosting. Pipeline: **build → sync → announce → fetch → verify → deploy**.*
+*Pipeline: push → harvest → checksum → mesh.publish → auto_fetch → verify → deploy*
