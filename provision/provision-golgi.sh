@@ -175,6 +175,13 @@ lab.primals.eco {
 git.primals.eco {
     reverse_proxy localhost:3000
 }
+
+live.primals.eco {
+    reverse_proxy 10.13.37.2:9900 {
+        header_up Host {host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
 EOCADDY
 
 echo "=== 5. INSTALL RUSTDESK SERVER ==="

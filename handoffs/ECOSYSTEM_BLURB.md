@@ -1,33 +1,37 @@
-# ecoPrimals Ecosystem Blurb — Wave 135
+# ecoPrimals Ecosystem Blurb — Wave 135a
 
-**Date**: Jul 9, 2026 13:30 EDT | **Wave**: 135 | **From**: eastGate overwatch
-**Posture**: **SOVEREIGN — Wave 134 closed. primals.eco live on bearDog TLS. All gates converged. Beginning: live site evolution, coordination backend, SHOW_HN readiness.**
+**Date**: Jul 9, 2026 15:00 EDT | **Wave**: 135a | **From**: eastGate overwatch
+**Posture**: **SOVEREIGN — Coordination backend LANDED. nestGate coord domain + petalTongue dashboard + rootPulse-traced ingest pipeline built. live.primals.eco routing configured. Manifest convergence fix shipped.**
 
 ---
 
-## Wave 134 Summary (CLOSED)
+## Wave 135a Delivery
 
-Wave 134 ran Jul 7–9 across 8 sub-waves (134a–134h). All objectives met:
-
-| Objective | Result |
-|-----------|--------|
-| Pepti depot 100% current | 34/34 builds, 0 failures |
-| WAN-DISPATCH-01 transport | PASS (10/10, 142ms p50) |
-| DNS cutover: primals.eco sovereign | bearDog ACME TLS on golgi, LE cert |
-| BUILD-DIV-01/02 resolved | Code fixed + pre-push gates |
-| UNIT-DIV-04 resolved | CryptoProvider idempotent since 132f |
-| SHALLOW-DIV-01/02 absorbed | cellMembrane classified diagnostics |
-| Composition profiles formalized | 5 profiles in manifest + code |
-| All operational fixes | Forgejo, CI log, ironGate cascade |
+| Deliverable | Status | Location |
+|-------------|--------|----------|
+| nestGate `coord.*` JSON-RPC domain (13 methods) | LANDED | `nestgate-rpc/coord_handlers/` |
+| nestGate `/coord/*` HTTP routes (10 endpoints) | LANDED | `nestgate-api/handlers/coordination.rs` |
+| Coordination types (CoordArtifact, CoordManifest, ArtifactKind) | LANDED | `coord_handlers/types.rs` |
+| `coord.ingest` pipeline (rootPulse-ready) | LANDED | `coord_handlers/ingest.rs` |
+| petalTongue coordination dashboard sections | LANDED | `web/index.html` + `handlers.rs` |
+| petalTongue `/api/coord/*` endpoints (6 routes) | LANDED | `web_mode/mod.rs` |
+| `live.primals.eco` Caddy routing | CONFIGURED | `provision-golgi.sh` |
+| Manifest fix: `[compositions.nest]` + westGate repos | LANDED | `ecosystem_manifest.toml` |
+| Routing handoff for sporeGate/golgi team | DOCUMENTED | `LIVE_PRIMALS_ECO_ROUTING_WAVE135.md` |
 
 ---
 
 ## Production Architecture
 
 ```
-primals.eco (LIVE — sovereign)
+primals.eco (LIVE — sovereign, static)
   :443 → bearDog ACME TLS → Caddy :8091 → sporePrint static (Zola)
   :80  → bearDog HTTP-01 + redirect
+
+live.primals.eco (CONFIGURED — pending DNS + Caddy reload)
+  :8443 → Caddy TLS → WireGuard → sporeGate petalTongue :9900
+    → coordination dashboard (nestGate CAS backend)
+    → /api/coord/blurbs, /heads, /waves, /fragos, /topology, /depot
 
 Subdomains (:8443 Caddy)
   membrane.primals.eco → nestGate depot
@@ -41,100 +45,123 @@ Mesh
 
 ---
 
-## Wave 135 Goals
+## Coordination Backend Architecture
 
-### 1. live.primals.eco — petalTongue NUCLEUS Hosting
-
-**Static site is the sovereign baseline. Dynamic site proves the NUCLEUS.**
-
-```
-primals.eco      → golgi (static Zola — always available)
-live.primals.eco → golgi bearDog → WireGuard → sporeGate petalTongue (NUCLEUS)
-```
-
-petalTongue evolves from dashboard-only to full sporePrint host with backend
-capabilities. The live site validates that NUCLEUS composition can render,
-serve, and exceed a static site — then grows with backend capability:
-
-| Capability | Status | Wave |
-|------------|--------|------|
-| Zola static parity (serve existing content) | Dashboard only | 135 |
-| `/api/gates` — live gate topology | Exists in dashboard | 135 |
-| `/api/health` — composition health | Not exposed | 135 |
-| `/api/primals` — primal registry | Not exposed | 135 |
-| `/api/metrics` — ecosystem metrics | Not exposed | 135+ |
-| pseudoSpore gallery (live artifacts) | Static today | 136 |
-| squirrel AI chat integration | Not started | 136+ |
-
-**Validation gate**: 6 checks before production traffic (200 on `/`, CSS, RSS, JSON API, content match, p99 ≤ 100ms).
-
-### 2. nestGate Coordination Backend
-
-**The ecosystem's public-facing coordination surface — like wateringHole, but live.**
-
-nestGate on golgi already serves the depot (`membrane.primals.eco`). Extend it
-to serve the coordination layer — blurbs, FRAGOs, AARs, wave state, gate heads —
-as a structured API and dashboard. Public-facing but intended for ecosystem
-evolution: overwatch uses it to direct the eco, teams use it to read state.
+The nestGate coordination backend is a **Nest Atomic + rootPulse composition**.
+Coordination artifacts (blurbs, FRAGOs, AARs, wave state, gate heads) flow
+through the rootPulse commit pipeline for full provenance tracing:
 
 ```
-nestGate coordination backend:
-  /coord/blurbs      — current + archived blurbs (from wateringHole/handoffs/)
-  /coord/fragos      — FRAGOs and AARs
-  /coord/waves       — wave state (from wave.toml)
-  /coord/heads       — gate HEADs (from heads/*.toml)
-  /coord/topology    — live mesh topology
-  /coord/depot       — depot status, staleness, checksums
+wateringHole (git) → coord.ingest
+  → rhizoCrypt (DAG session)
+  → bearDog (sign dehydration summary)
+  → nestGate CAS (content.put — BLAKE3 hash)
+  → loamSpine (session.commit — permanent ledger)
+  → sweetGrass (braid.create — attribution)
+  → coordination manifest (artifact index)
 ```
 
-This replaces the current pattern of reading `.md` files from git with a live
-queryable surface. As the project grows, overwatch agents and teams can query
-`nestGate` instead of cascading git pulls to read state. wateringHole remains
-the git-native source of truth; nestGate reads and serves it.
+**JSON-RPC methods (coord domain):**
 
-### 3. bearDog Cert Consolidation
+| Method | Description |
+|--------|-------------|
+| `coord.blurbs.current` | Current wave blurb |
+| `coord.blurbs.list` | All blurbs (newest first) |
+| `coord.blurbs.get` | Specific blurb by hash or wave |
+| `coord.fragos.list` | FRAGOs and AARs |
+| `coord.fragos.get` | Specific FRAGO/AAR |
+| `coord.waves.current` | Current wave state |
+| `coord.waves.history` | Wave history with provenance |
+| `coord.heads.get` | Specific gate HEAD state |
+| `coord.heads.all` | All gate HEADs |
+| `coord.topology` | Mesh topology |
+| `coord.depot.status` | Depot staleness + binary inventory |
+| `coord.provenance` | rootPulse trail for any artifact |
+| `coord.ingest` | Ingest wateringHole artifacts into CAS |
 
-bearDog owns :80/:443 but Caddy still handles subdomain certs on :8443.
-Before Aug 13 (cert expiry), consolidate:
+**HTTP routes (REST parallel surface):**
 
-| Option | Complexity | Result |
-|--------|------------|--------|
-| **bearDog Host-header routing** | Medium | All domains on :443. Eliminates :8443. |
-| DNS-01 in bearDog ACME | Medium | Caddy renews independently on :8443. |
-| Temporary bearDog stop for renewal | Low | Manual, but works. |
+| Route | Description |
+|-------|-------------|
+| `GET /coord/blurbs` | List + current blurb |
+| `GET /coord/blurbs/:wave` | Specific wave blurb |
+| `GET /coord/fragos` | FRAGO/AAR list |
+| `GET /coord/fragos/:id` | Specific document |
+| `GET /coord/waves` | Current wave + history |
+| `GET /coord/heads` | All gate HEADs |
+| `GET /coord/heads/:gate` | Specific gate |
+| `GET /coord/topology` | Mesh topology |
+| `GET /coord/depot` | Depot inventory |
+| `GET /coord/provenance/:hash` | Provenance trail |
 
-### 4. capability.call FULL PASS
+---
 
-sporeGate drawbridge configured. flockGate retests `capability.call("jupyter")`.
-Should be a formality — transport already proven.
+## Remaining Wave 135 Goals
 
-### 5. strandGate Enrollment
+### 1. live.primals.eco — Activate
 
-Pending physical access (house 2). Hardware team.
+DNS record + Caddy reload needed on golgi. Handoff delivered:
+`LIVE_PRIMALS_ECO_ROUTING_WAVE135.md`
+
+**Owner**: sporeGate / golgiBody operations team
+
+### 2. coord.ingest Population
+
+Run initial ingest to populate the coordination CAS with current artifacts.
+Can be triggered via `membrane coord.ingest` or direct JSON-RPC.
+
+**Owner**: cellMembrane team (automate via cascade)
+
+### 3. rootPulse Provenance Trio Activation
+
+The ingest pipeline stores artifacts in CAS and updates the manifest. Full
+rootPulse provenance (spine_index, braid_id) requires the provenance trio
+(rhizoCrypt + loamSpine + sweetGrass) running on sporeGate's NUCLEUS.
+
+When the trio is live, `coord.ingest` calls the `rootpulse_commit` graph:
+dehydrate → sign → store → commit → attribute.
+
+**Owner**: sporeGate NUCLEUS composition team
+
+### 4. bearDog Cert Consolidation
+
+Before Aug 13 cert expiry. Options: Host-header routing or DNS-01.
+
+**Owner**: bearDog + sporeGate/golgi team
+
+### 5. capability.call FULL PASS
+
+Retest `capability.call("jupyter")` from flockGate.
+
+**Owner**: flockGate
+
+### 6. strandGate Enrollment
+
+Pending physical access.
 
 ---
 
 ## Team Dispatches
 
-| Team | Wave 135 Work |
-|------|---------------|
-| **petalTongue** | Evolve to sporePrint host: serve Zola content + expose `/api/gates`, `/api/health`, `/api/primals`. Validation parity with static site. |
-| **nestGate** | Coordination backend: serve blurbs, FRAGOs, wave state, gate heads from wateringHole as structured API. Public-facing dashboard. |
-| **sporeGate/golgi** | Cert consolidation strategy. DNS for `live.primals.eco`. petalTongue NUCLEUS composition on sporeGate. |
-| **bearDog** | Host-header routing for cert consolidation. CSR SAN fix already landed. |
-| **flockGate** | capability.call retest for FULL PASS. |
-| **cellMembrane** | Composition lifecycle LIVE. Monitor auto-fetch across topology. |
-| **sporePrint** | Content evolution — 249+ pages, thesis. Target: feed live.primals.eco with structured data. |
-| **primalSpring** | SHOW_HN readiness (E-category: cold clone, CI badges, test naming). |
+| Team | Wave 135a Work |
+|------|----------------|
+| **nestGate** | LANDED: coord domain (13 methods, 10 HTTP routes, CAS-backed manifest, rootPulse-ready ingest). Next: trio activation when NUCLEUS is live. |
+| **petalTongue** | LANDED: coordination dashboard (wave status, gate convergence, blurb preview, FRAGO list, depot health). Next: serve via live.primals.eco. |
+| **sporeGate/golgi** | ACTION: add `live.primals.eco` DNS A record, reload Caddy. Activate petalTongue web :9900. Run coord.ingest. |
+| **cellMembrane** | ACTION: automate coord.ingest via cascade (detect wateringHole changes → ingest). |
+| **primalSpring** | LANDED: manifest fix ([compositions.nest] + westGate repos). |
+| **bearDog** | Cert consolidation strategy before Aug 13. |
+| **flockGate** | capability.call retest pending. |
+| **sporePrint** | Content evolution — target: structured data for live.primals.eco. |
 
 ---
 
-## Gate Convergence (Wave 135)
+## Gate Convergence (Wave 135a)
 
 ```
-✅ eastGate   — All repos current. Overwatch directing Wave 135.
-✅ sporeGate  — Depot 100%. Drawbridge configured. petalTongue NUCLEUS host target.
-✅ golgiBody  — primals.eco LIVE (bearDog TLS). Thin relay. 39% disk.
+✅ eastGate   — Coordination backend + dashboard landed. Overwatch directing.
+✅ sporeGate  — Depot 100%. Drawbridge configured. NUCLEUS host target + coord activation pending.
+✅ golgiBody  — primals.eco LIVE. live.primals.eco Caddy block configured, DNS pending.
 ✅ flockGate  — WAN PASS. capability.call retest pending.
 ✅ ironGate   — 20 repos current.
 🔧 strandGate — Enrollment pending (house 2).
@@ -142,15 +169,13 @@ Pending physical access (house 2). Hardware team.
 
 ---
 
-## SHOW_HN Readiness (tracking)
+## Manifest Fixes Shipped
 
-| Category | Status |
-|----------|--------|
-| S-6 (pepti current) | ✅ |
-| S-8 (cross-gate dispatch) | ⏳ (retest pending) |
-| S-10 (sporePrint sovereign) | ✅ |
-| E-1 through E-7 (evidence) | In progress (primalSpring) |
-| N-1 through N-6 (narrative) | Not started |
-| O-1 (karma buildup) | 3-6 month window active |
+- `[compositions.nest]`: Added `loamSpine` to primals (was missing from provenance trio)
+- `[gates.westGate]`: Added `rhizoCrypt` to repos (was missing, inconsistent with nest composition)
 
-*primals.eco: sovereign. Pipeline: push → harvest → mesh.publish → auto_fetch → deploy. Next: live.primals.eco proves the NUCLEUS.*
+Both fixes align the manifest with canonical Nest Atomic documentation (7/7).
+
+---
+
+*primals.eco: sovereign. Coordination backend: CAS + rootPulse. Next: activate live.primals.eco, populate coord artifacts, wire provenance trio.*
