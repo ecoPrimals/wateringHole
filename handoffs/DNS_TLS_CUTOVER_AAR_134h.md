@@ -56,7 +56,7 @@ on :8443.
 
 ```
 Internet → DNS (primals.eco → 157.230.3.183)
-  :443  → bearDog (ACME TLS) → petalTongue :8090 (sporePrint)
+  :443  → bearDog (ACME TLS) → Caddy :8091 (sporePrint static files)
   :80   → bearDog (HTTP-01 + HTTPS redirect)
   :8443 → Caddy (membrane/git/lab subdomains, existing LE certs)
   :3000 → Forgejo (via Caddy reverse proxy on :8443)
@@ -93,6 +93,16 @@ configured domain.
 4. **www.primals.eco**: Serves 200 (same content) instead of 301 redirect.
    bearDog's TCP proxy has no Host-header routing. Acceptable — both URLs serve
    sporePrint.
+
+## Post-cutover Fix: petalTongue vs sporePrint
+
+After initial deployment, `primals.eco` showed the petalTongue dashboard
+instead of the sporePrint website. Root cause: the plan assumed petalTongue
+(:8090) served sporePrint static content, but petalTongue serves its own
+dashboard. Caddy was always the sporePrint file server.
+
+**Fix**: Added Caddy `:8091` server block serving `/opt/ecoPrimals/sporePrint/public`,
+changed `BEARDOG_GATEWAY_UPSTREAM` from `:8090` to `:8091`.
 
 ## Remaining Items
 

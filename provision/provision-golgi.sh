@@ -115,11 +115,26 @@ chmod +x /opt/membrane/caddy
 cat > /etc/membrane/Caddyfile << 'EOCADDY'
 # bearDog owns :443/:80 for primals.eco + www.primals.eco (ACME gateway).
 # Caddy handles remaining domains on :8443/:8880 with existing LE certs.
+# Caddy also serves sporePrint static content on :8091 (bearDog upstream).
 {
     email ops@primals.eco
     http_port 8880
     https_port 8443
     storage file_system /caddy
+}
+
+# sporePrint static site — bearDog upstream (HTTP only, localhost)
+:8091 {
+    handle /lab/spores/* {
+        root * /opt/ecoPrimals/sporePrint/spores
+        file_server browse
+        try_files {path} {path}/ {path}/index.html
+    }
+    handle {
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
+        try_files {path} {path}/ /index.html
+    }
 }
 
 membrane.primals.eco {
@@ -265,7 +280,7 @@ ExecStart=/opt/membrane/beardog server --bind-mode tcp --port 9999 --socket /run
 Environment=BEARDOG_GATEHOUSE_MODE=true
 Environment=BEARDOG_ACME_DOMAINS=primals.eco,www.primals.eco
 Environment=BEARDOG_ACME_EMAIL=ops@primals.eco
-Environment=BEARDOG_GATEWAY_UPSTREAM=127.0.0.1:8090
+Environment=BEARDOG_GATEWAY_UPSTREAM=127.0.0.1:8091
 Environment=BEARDOG_DATA_DIR=/var/lib/beardog
 Environment=GATE_NAME=golgiBody
 AmbientCapabilities=CAP_NET_BIND_SERVICE
