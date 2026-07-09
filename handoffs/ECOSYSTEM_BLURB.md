@@ -40,8 +40,13 @@ No code change. Enables capability.call → WAN-DISPATCH-01 FULL PASS.
 
 ### 2. DNS Cutover (Wave 135)
 
+**Owner**: sporeGate / golgiBody operations team.
 All blockers cleared. Path: bearDog ACME on golgi → 7-day Caddy shadow → DNS flip.
 Closes S-10 (sporePrint sovereignty).
+
+Long-term, the sporeGate and golgiBody teams own TLS and DNS operations as part of
+the sovereignty and gatehouse layer — eastGate overwatch hands off after the initial
+cutover is validated.
 
 ### 3. strandGate Enrollment
 
@@ -63,7 +68,7 @@ Pending physical access (house 2). Hardware team.
 
 | Team | State |
 |------|-------|
-| **sporeGate** | Converged. 34/34 builds. Set drawbridge env for capability.call. |
+| **sporeGate** | Converged. 34/34 builds. Set drawbridge env. **Owns DNS cutover (135)** with golgi team. |
 | **songBird** | P2 fix deployed. Ready. |
 | **flockGate** | WAN transport PASS. Awaiting env config. |
 | **bearDog** | Ready. 13,884+ tests. |
