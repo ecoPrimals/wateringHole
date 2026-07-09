@@ -15,11 +15,11 @@
 
 [instance]
 name = "ecoPrimals-alpha"
-wave = 132
+wave = 134
 topology = "diderm"
 vps_provider = "digitalocean"
 region = "nyc1"
-last_updated = "2026-07-06"
+last_updated = "2026-07-08"
 
 # ──────────────────────────────────────────────────────────────
 # VPS NODES (K-Derm diderm envelope)
@@ -31,8 +31,8 @@ ip = "157.230.3.183"
 ssh_alias = "golgi"
 ssh_user = "root"
 ssh_key = "~/.ssh/id_ed25519"
-services = ["forgejo", "nucleus-primals", "knot-dns", "caddy", "songbird"]
-role = "Sovereign periplasm — Forgejo, 13x NUCLEUS primals, binary depot authority"
+services = ["forgejo", "songbird-relay", "nestgate-sporeprint", "membrane-cascade", "caddy"]
+role = "VPS-thin — Forgejo, binary depot, sporePrint host, songBird relay. Tracks wateringHole only."
 
 [instance.nodes.peptidoglycan]
 name = "peptidoglycan"
