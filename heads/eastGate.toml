@@ -1,31 +1,29 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: eastGate | Updated: 2026-07-08T01:50:00Z
+# Gate: eastGate | Updated: 2026-07-09T00:19:49Z
 #
 # This file is owned exclusively by eastGate. No other gate writes here.
 # Updated automatically after each cascade or manually by overwatch.
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-08T01:50:00Z"
+updated = "2026-07-09T00:24:16Z"
 
 [heads]
-barraCuda = "b2618db0511100a2112196635c037c641649d927"
+barraCuda = "3b8ea530296319cbc1d7395831ffcf8d8e0ab4ac"
 bearDog = "d594d877862a22f633db58de18f064e00e78a1fc"
-biomeOS = "0e54e93648c8706e33fd63e290b9c07c8281783a"
-cellMembrane = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
-coralReef = "3078d0b6d6b99c3df5f404d25812f930a4b0fc3b"
-loamSpine = "e68873d2c3092f6947f98655b7adb62d905178d8"
+biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
+cellMembrane = "5efff13dc64c9c56fc2c0c9060925898d6ff2121"
+coralReef = "2db3019ae57598a8bf558e8fc2b3b2bc9f4aece6"
+loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
 nestGate = "f3006ccd6caee4c9b37141ac24e6301037cc3452"
-petalTongue = "0f8da6b4153313997ccc09ce18288824171bf71d"
-primalSpring = "e5d569f417371034129af73a5ab5a07356aeba58"
-projectNUCLEUS = "4b88dceb873428dc413c2fbc71036eea9c7001a9"
-rhizoCrypt = "ef85124f39aac9fa309448c01db86463683ab00a"
-skunkBat = "e7eaa5d0006208912109b25e390fb7eac05ceee4"
-songBird = "40699793590290fd5d9c61cd825c7cdf408ce0c2"
+petalTongue = "ebaf483c72712ce353635d5ed74ce251a590746a"
+primalSpring = "6e02fd32a0e67c4e074d6054bfa9cc779d9e4738"
+rhizoCrypt = "5a64407b4b7b93ce90e2c20582ddfac5cef7a571"
+skunkBat = "35326c39177770f935a944635b510cd220b6270b"
+songBird = "1444581f47642192eabf79723c79e6c748c26760"
 sourDough = "406a57575265112106b405d897609a0948520927"
-sporePrint = "99bfc9e4bf5ba98301f4b273544b495179a67b48"
+sporePrint = "ed2488e5bb0125028feddab709ff7c05956a007d"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
-sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
-toadStool = "1ec374980a3886f1bddc232f4360be3c81a356f2"
-wateringHole = "c197f2d"
-whitePaper = "c91774f7d3013dfb84065b9b5b2b5aada00767f9"
+sweetGrass = "bfac29311075bbe7a7875a1f267b49c43e0e61cf"
+toadStool = "002332e485cb1dea5e93a04ed656b727f5cb77a1"
+wateringHole = "6b5c1fde2f8c7c40263af320f276487f968a393b"
