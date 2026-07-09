@@ -1,24 +1,38 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: sporeGate | Updated: 2026-07-08T16:19:44Z
+# Gate: sporeGate | Updated: 2026-07-09T15:20:00Z
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-08T16:19:44Z"
+updated = "2026-07-09T15:20:00Z"
+wave = "134f"
 
 [heads]
 barraCuda = "3b8ea530296319cbc1d7395831ffcf8d8e0ab4ac"
-bearDog = "f6924beb51d9ab8bd7d150afb40c9362e8732667"
+bearDog = "ddabf6a77c85980d91c46188cc3a373341b9b502"
 biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
-cellMembrane = "944dfb4a2fb5356fd3a32ec9eb69c0ffb0cbdf4f"
+cellMembrane = "1be2b7f329c215088a3f6a6600138abf71f06b88"
 coralReef = "2db3019ae57598a8bf558e8fc2b3b2bc9f4aece6"
 loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
 nestGate = "f3006ccd6caee4c9b37141ac24e6301037cc3452"
 petalTongue = "ebaf483c72712ce353635d5ed74ce251a590746a"
 rhizoCrypt = "5a64407b4b7b93ce90e2c20582ddfac5cef7a571"
 skunkBat = "35326c39177770f935a944635b510cd220b6270b"
-songBird = "cd13d36d677adc42b26557ceb5130a2c30e384e3"
+songBird = "e5941eeb3223bd49728bc00a1eb4d027d6dd1537"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
 sweetGrass = "bfac29311075bbe7a7875a1f267b49c43e0e61cf"
 toadStool = "002332e485cb1dea5e93a04ed656b727f5cb77a1"
-wateringHole = "6a2d4341b905a14765872bf17e20c7b6e3ed0a78"
+wateringHole = "212316c7639d43a57d65207a1f507d24a7821f82"
+
+[depot]
+status = "current"
+binaries = 16
+triples = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+checksums_updated = "2026-07-09T15:10:00Z"
+note = "Full 30/30 sweep + bearDog ddabf6a + membrane 1be2b7f incremental rebuild"
+
+[services]
+songbird_gateway = "active"
+drawbridge = "0.0.0.0:7780"
+drawbridge_routes = "/hub=jupyter,/api=jupyter,/user=jupyter,/services=jupyter"
+federation = "0.0.0.0:7700"
