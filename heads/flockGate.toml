@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-09T12:16:00Z
+# Gate: flockGate | Updated: 2026-07-09T13:06:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-09T12:16:00Z"
+updated = "2026-07-09T13:06:00Z"
 wave = "134c"
 
 [heads]
-primalSpring = "b3b89df"
-wateringHole = "a75b5d2a"
+primalSpring = "d0181a1"
+wateringHole = "afadb762"
 bearDog = "7e932000f393c1ab0b6f4ae4cd8009a0a537bd65"
 songBird = "05e2204300000000000000000000000000000000"
 toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
@@ -29,30 +29,47 @@ plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
 
 [mesh]
 node_id = "flockgate"
-uptime_seconds = 328933
+uptime_seconds = 331824
 peers = 2
 peer_addresses = ["10.13.37.1:7700", "10.13.37.2:7700"]
 wireguard_status = "UP"
-icmp_rtt_sporegate_ms = 66
+icmp_rtt_sporegate_ms = 69
 icmp_rtt_golgi_ms = 31
 
 [dispatch_validation]
-status = "PARTIAL — AWAITING SPOREGATE REDEPLOY (e5941eeb)"
-capability_call_status = "FAIL"
-capability_call_error = "No local or remote provider found for capability 'jupyter' (tried 2 mesh peers via TCP and TURN relay)"
-mesh_http_transport_status = "TIMEOUT (port 7780 unreachable — songBird e5941eeb not yet deployed)"
-drawbridge_status = "timeout — sporeGate pepti rebuild in progress"
-lab_primals_eco_status = "TIMEOUT — golgi reverse proxy cannot reach sporeGate:7780"
-rtt_p50_ms = 72
-rtt_p95_ms = 77
-rtt_samples = 10
-tested_at = "2026-07-09T12:16:00Z"
-blocker = "sporeGate pepti rebuild in progress (134a item #4). Need e5941eeb deployed with SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter. Port 7780 currently times out (was connection refused yesterday)."
-next_action = "Re-run WAN-DISPATCH-01 when sporeGate drawbridge responds on :7780"
+status = "PASS — HTTP DATA PATH PROVEN (capability.call protocol pending local songBird update)"
+wan_dispatch_01 = "PASS"
+http_transport_status = "PASS"
+http_response_body = '{"version": "5.4.5"}'
+http_response_code = 200
+capability_call_status = "FAIL — local songBird binary stale (truncated-zero SHA shallow clone)"
+capability_call_error = "No local or remote provider found for capability 'jupyter'"
+capability_call_blocker = "flockGate songBird needs deep fetch + rebuild from e5941eeb"
+
+[dispatch_validation.latency_direct_wg]
+path = "flockGate → WG 10.13.37.2:7780 → ironGate JupyterHub"
+samples = 10
+p50_ms = 142
+p95_ms = 152
+p99_ms = 152
+min_ms = 136
+max_ms = 152
+mean_ms = 143
+
+[dispatch_validation.latency_golgi_relay]
+path = "flockGate → golgi (lab.primals.eco) → sporeGate:7780 → ironGate"
+samples = 5
+p50_ms = 207
+cold_ms = 266
+warm_ms = 200
+
+[dispatch_validation.timing]
+tested_at = "2026-07-09T13:06:00Z"
+icmp_rtt_ms = 69
+note = "HTTP RTT ≈ 2x ICMP (TCP handshake + request/response = 2 round trips)"
 
 [primalspring]
 scenarios = 128
 tests = 1101
 failures = 0
 suite_status = "GREEN"
-new_scenario = "s_composition_profiles (Wave 134c — fractal deployment patterns)"
