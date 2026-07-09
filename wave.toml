@@ -10,9 +10,9 @@
 
 [wave]
 id = 134
-sub = "g"
+sub = "h"
 date = "2026-07-09"
-posture = "NEAR-CONVERGED. Pepti 100% (34/34). WAN transport PASS. songBird P2 fixed. ironGate resolved. DNS cutover is the last gate."
+posture = "NEAR-CONVERGED. All 5 gates green. SHALLOW-DIV-01/02 absorbed into code. Drawbridge env config + DNS cutover remain."
 publisher = "eastGate-overwatch"
 
 [gates]
