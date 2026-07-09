@@ -10,9 +10,9 @@
 
 [wave]
 id = 134
-sub = "e"
+sub = "f"
 date = "2026-07-09"
-posture = "CONVERGING. UNIT-DIV-04 RESOLVED. DNS cutover unblocked. Composition-scoped lifecycle in cellMembrane. Pepti rebuilds remain."
+posture = "CONVERGING. WAN-DISPATCH-01 transport PASS (142ms). UNIT-DIV-04 resolved. Two protocol gaps found. Pepti + DNS cutover remain."
 publisher = "eastGate-overwatch"
 
 [gates]
