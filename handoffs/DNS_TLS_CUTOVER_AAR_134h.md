@@ -1,5 +1,10 @@
 # AAR: DNS/TLS Cutover — primals.eco to golgi (Wave 134h)
 
+> **SUPERSEDED** by `DNS_CUTOVER_EVOLUTION_AAR_134k.md` — the bearDog-on-:443
+> architecture described here was rolled back in 134j due to subdomain routing
+> collapse. Caddy is now the TLS front door on :443 for all domains.
+> See 134k for the full divergence catalog and current production topology.
+
 **Date**: Jul 9, 2026
 **Operator**: sporeGate (Cursor agent)
 **Duration**: ~45 minutes

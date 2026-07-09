@@ -1,5 +1,11 @@
 # Post-Cutover: DNS/TLS Breakage + petalTongue Forward Architecture
 
+> **SUPERSEDED** by `DNS_CUTOVER_EVOLUTION_AAR_134k.md` — this document
+> describes the state after the initial petalTongue fix but before the
+> subdomain routing collapse was identified and resolved. The architecture
+> diagrams below showing bearDog on :443 and Caddy on :8443 are no longer
+> accurate. See 134k for current production topology.
+
 **Date**: Jul 9, 2026 (Wave 134h)
 **Context**: DNS/TLS cutover of primals.eco from GitHub Pages to golgi
 
