@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 28, 2026 (Wave 128 — topology cutover: Flint H1 plasma membrane, sporeGate ephemeral. petalTongue 360 tests, GPU compute topology, physical topology API. primalSpring 1,038 tests.)
+**Last Updated**: July 8, 2026 (Wave 134b — BUILD-DIV-01/02 resolved. 14/14 primals pass `cargo check --all-targets`. VPS-thin on golgi. Multi-builder authority. Mesh auto-distribution LIVE. Pre-push gates on songBird + bearDog.)
 
 ---
 
