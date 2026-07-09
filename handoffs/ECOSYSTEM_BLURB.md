@@ -1,8 +1,8 @@
-# ecoPrimals Ecosystem Blurb — Wave 134c
+# ecoPrimals Ecosystem Blurb — Wave 134d
 
-**Date**: Jul 9, 2026 08:15 EDT | **Wave**: 134c | **From**: eastGate overwatch
-**Posture**: **CONVERGING — Composition profiles formalized. Thin-relay is a fractal pattern. `membrane plasmid.composition` queries manifest.**
-Thin-relay pattern (golgi model) codified in `ecosystem_manifest.toml [compositions]` and in cellMembrane code. Any VPS/edge/HPC site can be a sovereign relay depot without a Rust toolchain. Ecobins arrive via mesh auto-fetch. `plasmid.composition` command live. BUILD-DIV-01/02 resolved. 14/14 pass `--all-targets`. sporeGate rebuilds in progress.
+**Date**: Jul 9, 2026 09:15 EDT | **Wave**: 134d | **From**: eastGate overwatch
+**Posture**: **CONVERGING — Cascaded all repos. sporePrint docs updated for NUCLEUS hosting path. Teams active: cellMembrane +970 tests, primalSpring +128th scenario, sporePrint thesis scaffolded (249 pages).**
+Cascade pulled all 16 repos. cellMembrane and primalSpring received upstream evolution (composition test coverage). sporePrint architecture docs updated with infrastructure compositions + thin-relay-to-NUCLEUS evolution path. sporePrint team building toward NUCLEUS for website hosting — nestGate serves the static site, with squirrel/petalTongue/barraCuda progressively added as the site evolves.
 
 ---
 
@@ -28,7 +28,23 @@ Thin-relay pattern (golgi model) codified in `ecosystem_manifest.toml [compositi
 ⚠️  sporeGate bearDog HEAD stale (f6924beb vs 579bc77f — cascade will resolve)
 ```
 
-**This wave (134c)**: Composition profiles + thin-relay fractal pattern + convergence.
+**This wave (134d)**: Cascade + sporePrint NUCLEUS evolution + team convergence.
+
+**Landed (134d)**:
+- **sporePrint architecture docs**: Infrastructure compositions added to COMPOSITION_PATTERNS, DEPLOYMENT_MODEL, and NUCLEUS_ARCHITECTURE — documenting the thin-relay-to-NUCLEUS growth path for website hosting
+- **cellMembrane upstream**: Team added 121 lines of composition test coverage (604 tests total, from 600)
+- **primalSpring upstream**: 128th validation scenario (`s_composition_profiles.rs`, 346 lines) — full composition manifest coverage
+- **sporePrint content**: 249 pages, thesis section scaffolded (16 chapters), lithoSpore product page
+
+**sporePrint NUCLEUS evolution path**:
+```
+Current: thin-relay (songBird + nestGate + membrane)
+  → nestGate serves sporePrint static site
+  → Add squirrel for AI chat / MCP tool integration
+  → Add petalTongue for rich content rendering
+  → Add toadStool + barraCuda for live GPU visualizations
+  → Full NUCLEUS for interactive scientific experiences
+```
 
 **Landed (134c)**:
 - **Composition profiles formalized**: `ecosystem_manifest.toml [compositions]` defines 5 fractal deployment patterns: `full`, `thin-relay`, `tower`, `compute`, `nest`
@@ -266,10 +282,10 @@ Copy this blurb to all active teams/gates:
 | **flockGate** | 134a WAN-DISPATCH-01 re-validation after full pepti rebuild | After pepti |
 | **ironGate** | Cascade refresh (stale Jul 4, 4+ days). strandGate enrollment prep. | Next SSH |
 | **bearDog** | 134b CryptoProvider fix (UNIT-DIV-04 — P1 for DNS cutover) | Code team |
-| **cellMembrane** | Composition profiles LIVE. Forgejo bare repo needs `git clone --mirror` recreate on golgi (shallow depth=1 broke on rebase). Origin (GitHub) current at `65aa790`. | **golgi op** |
-| **sporePrint** | 134b sovereignty sprint, DNS cutover, petalTongue rendering | After 134a |
+| **cellMembrane** | Composition profiles LIVE (604 tests). Forgejo bare repo needs `git clone --mirror` recreate on golgi. Origin current at `ad4e532`. | **golgi op** |
+| **sporePrint** | 249 pages, thesis scaffolded. Architecture docs updated for NUCLEUS hosting path. Evolving thin-relay → full NUCLEUS for website. Needs: squirrel AI integration, petalTongue rendering, live barraCuda viz as features mature. | **Active** |
 | **projectNUCLEUS** | Composition subtype manifests, deployment profiles | Ongoing |
-| **primalSpring** | 135+ SHOW_HN E-category prep (cold clone, CI badges, test naming) | Ongoing |
+| **primalSpring** | 128 validation scenarios (134c: `s_composition_profiles.rs`). SHOW_HN prep ongoing. | **Active** |
 
 ---
 
@@ -360,23 +376,20 @@ CI-DIV-01/02/03 absorbed into `ecosystem_manifest.toml` `[build.*]`. Remaining d
 
 ---
 
-## Gate Convergence (134c — 08:15 EDT)
+## Gate Convergence (134d — 09:15 EDT)
 
 ```
 CONVERGED + DEPLOYED:
-  ✅ sporeGate  — songBird + bearDog pushed to Forgejo. Pepti rebuilds in progress.
-                  cellMembrane Forgejo bare repo needs recreate (shallow broke on rebase).
-  ✅ golgiBody  — VPS-THIN (composition: thin-relay). Only wateringHole tracked.
-                  membrane + nestGate LIVE. sporePrint serving. E2E 200.
-  ✅ eastGate   — 12:15Z. 19 repos tracked. All 14 primals pass --all-targets.
-                  cellMembrane 65aa790 (composition profiles). Heads current.
+  ✅ sporeGate  — Pepti rebuilds in progress. cellMembrane Forgejo needs bare repo recreate.
+  ✅ golgiBody  — VPS-THIN (composition: thin-relay). sporePrint serving via nestGate. E2E 200.
+  ✅ eastGate   — 13:15Z. All repos cascaded. cellMembrane ad4e532, sporePrint 8e62093.
+                  604 membrane tests, 128 primalSpring scenarios, 249 sporePrint pages.
 
 ACTIVELY TESTING:
   🔄 flockGate  — WG UP. Drawbridge blocked pending sporeGate redeploy.
-                  songBird HEAD: truncated-zero SHA (needs deep fetch).
 
 STALE:
   ⚠️  ironGate   — Jul 4, 5+ days stale. Needs SSH access.
 ```
 
-*Wave 134c — Composition profiles formalized. Thin-relay is a deployable fractal pattern for any VPS/edge/HPC site. `membrane plasmid.composition` queries manifest. cellMembrane Forgejo needs golgi operator. ~12 primals remaining for pepti. Pipeline: **build → sync → announce → fetch → verify → deploy**.*
+*Wave 134d — Cascaded all 16 repos. Teams active: cellMembrane (604 tests), primalSpring (128 scenarios), sporePrint (249 pages + thesis). sporePrint evolving thin-relay → NUCLEUS for website hosting. Pipeline: **build → sync → announce → fetch → verify → deploy**.*
