@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 134d
+# ecoPrimals Ecosystem Blurb — Wave 134e
 
-**Date**: Jul 9, 2026 09:45 EDT | **Wave**: 134d | **From**: eastGate overwatch
-**Posture**: **CONVERGING — 14/14 primals clean. Composition profiles formalized. Pepti rebuilds and sovereignty sprint are the remaining gates.**
+**Date**: Jul 9, 2026 11:10 EDT | **Wave**: 134e | **From**: eastGate overwatch
+**Posture**: **CONVERGING — UNIT-DIV-04 RESOLVED (bearDog team confirmed). DNS cutover unblocked. Composition-scoped lifecycle in cellMembrane. Pepti rebuilds remain.**
 
 ---
 
@@ -11,14 +11,16 @@
 ✅ 14/14 primals pass cargo check --all-targets (zero BUILD-DIV)
 ✅ E2E: primals.eco → 200 (golgi VPS-thin)
 ✅ Composition profiles: full, thin-relay, tower, compute, nest (manifest + code)
+✅ Composition-scoped lifecycle: health, fetch, bootstrap, refresh, restart (cellMembrane 1be2b7f)
 ✅ Sovereign CI pipeline: plasmid.harvest → mesh.publish → auto_fetch (LIVE)
 ✅ Multi-builder authority: sporeGate + eastGate
 ✅ Pre-push gates: songBird + bearDog (.githooks/pre-push)
+✅ UNIT-DIV-04 RESOLVED (bearDog team: CryptoProvider idempotent since 132f)
+✅ bearDog gateway bind regression fixed (80c322d — error surfacing restored)
 ✅ 7/7 stadial criteria CLEAR
 ✅ WAN mesh: sporeGate ↔ flockGate (WireGuard, 72ms p50)
 ✅ LAN mesh: eastGate ↔ ironGate ↔ southGate (10G backbone)
 ⚠️  Pepti depot: ~9 primals still need rebuild on sporeGate
-⚠️  bearDog CryptoProvider panic (UNIT-DIV-04) — blocks DNS cutover
 ⚠️  ironGate: 5+ days stale (needs SSH)
 ⚠️  cellMembrane Forgejo bare repo: unpacker error (shallow broke on rebase)
 ```
@@ -40,18 +42,17 @@ NEXT:    skunkBat · coralReef · sweetGrass · biomeOS · toadStool
 **Command**: `membrane plasmid.harvest --all` on sporeGate
 **Unblocks**: flockGate WAN-DISPATCH-01, grapheneGate 13/13 redeploy
 
-### 2. bearDog CryptoProvider (UNIT-DIV-04) — P1
+### 2. DNS Cutover — primals.eco → bearDog ACME TLS
 
-`rustls-rustcrypto` CryptoProvider panics on install. Blocks Caddy → bearDog ACME TLS cutover.
-**File**: `crates/beardog-acme/src/` — `CryptoProvider::install()` call site
-**Likely cause**: Double-install or incompatible provider state (ES256 signing added Wave 132f)
-**Unblocks**: DNS cutover (`primals.eco` → bearDog TLS), sporePrint sovereignty
+UNIT-DIV-04 **RESOLVED** (bearDog team confirmed: idempotent `install_default()` since Wave 132f, self-healing fallback in `assert_installed()`). DNS cutover is unblocked once pepti delivers a current bearDog ecobin to golgi.
+**Path**: pepti rebuild bearDog → deploy to golgi → 7-day Caddy shadow → DNS flip
+**Unblocks**: sporePrint sovereignty (S-10)
 
 ### 3. cellMembrane Forgejo Bare Repo (golgi operator)
 
 Push rejected with `unresolved deltas` — shallow depth=1 bare repo broke after rebase.
 **Fix**: On golgi, delete and recreate with `git clone --mirror` from origin.
-**Origin (GitHub)** is current at `ad4e532` (604 tests, composition profiles).
+**Origin (GitHub)** is current at `1be2b7f` (composition-scoped lifecycle).
 
 ### 4. ironGate Cascade (SSH operator)
 
@@ -82,8 +83,8 @@ Drawbridge connection refused (waiting for sporeGate pepti redeploy). songBird H
 
 | Item | Status |
 |------|--------|
-| bearDog CryptoProvider fix (UNIT-DIV-04) | **P1 BLOCKER** |
-| DNS cutover: primals.eco → bearDog ACME TLS | After CryptoProvider |
+| ~~bearDog CryptoProvider fix (UNIT-DIV-04)~~ | **RESOLVED** (132f) |
+| DNS cutover: primals.eco → bearDog ACME TLS | **UNBLOCKED** — after pepti |
 | sporePrint: Caddy → bearDog TLS (7-day shadow) | After DNS cutover |
 | strandGate SSH enrollment | Pending hardware access |
 
@@ -102,10 +103,10 @@ All 28 rubric criteria targeting PASS. Key linkages:
 | Team | Work | Priority |
 |------|------|----------|
 | **sporeGate** | Pepti rebuilds (~9 remaining). cellMembrane Forgejo bare repo recreate. | **NOW** |
-| **bearDog** | CryptoProvider fix (UNIT-DIV-04). P1 for DNS cutover. | **P1** |
-| **sporePrint** | 249 pages, thesis scaffolded. Evolving thin-relay → NUCLEUS for hosting (nestGate → +squirrel → +petalTongue → +barraCuda). | Active |
-| **cellMembrane** | 604 tests. Composition profiles LIVE. Forgejo needs golgi operator. | Active |
-| **primalSpring** | 128 validation scenarios. SHOW_HN prep ongoing. | Active |
+| **bearDog** | ~~UNIT-DIV-04~~ **RESOLVED**. 13,884+ tests. Gateway bind regression fixed (`80c322d`). Ready for pepti + DNS cutover. | Ready |
+| **sporePrint** | 249+ pages, thesis scaffolded, SEO bridging landed. Evolving thin-relay → NUCLEUS. | Active |
+| **cellMembrane** | Composition-scoped lifecycle (`1be2b7f`): health, fetch, bootstrap, refresh, restart all composition-aware. Forgejo needs golgi operator. | Active |
+| **primalSpring** | Deep debt cleanup (`aa4f627`): `as` cast elimination across 15 files. 128 scenarios. | Active |
 | **ironGate** | Cascade refresh (5+ days stale). strandGate enrollment. | Next SSH |
 | **flockGate** | WAN-DISPATCH-01 re-validation after pepti. | After pepti |
 
@@ -146,11 +147,11 @@ sporePrint evolution: thin-relay → +squirrel → +petalTongue → +barraCuda �
 
 ---
 
-## Gate Convergence (134d — 09:45 EDT)
+## Gate Convergence (134e — 11:10 EDT)
 
 ```
 CONVERGED:
-  ✅ eastGate   — All repos cascaded. 604 membrane tests, 128 scenarios, 249 pages.
+  ✅ eastGate   — All 16 repos cascaded. cellMembrane 1be2b7f, bearDog ddabf6a, primalSpring aa4f627.
   ✅ golgiBody  — VPS-thin. sporePrint serving. E2E 200.
   ✅ sporeGate  — Pepti rebuilds in progress.
 
