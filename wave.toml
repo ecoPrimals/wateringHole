@@ -12,7 +12,7 @@
 id = 134
 sub = "h"
 date = "2026-07-09"
-posture = "NEAR-CONVERGED. All 5 gates green. SHALLOW-DIV-01/02 absorbed into code. Drawbridge env config + DNS cutover remain."
+posture = "NEAR-CONVERGED. All 5 gates green. Drawbridge configured. capability.call retest needed. DNS cutover is the last gate to stadial."
 publisher = "eastGate-overwatch"
 
 [gates]
