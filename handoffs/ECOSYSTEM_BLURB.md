@@ -1,92 +1,105 @@
-# ecoPrimals Ecosystem Blurb — Wave 134h
+# ecoPrimals Ecosystem Blurb — Wave 135a
 
-**Date**: Jul 9, 2026 13:15 EDT | **Wave**: 134h | **From**: eastGate overwatch
-**Posture**: **NEAR-CONVERGED — All 5 gates green. Drawbridge CONFIGURED on sporeGate. capability.call retest needed from flockGate. DNS cutover is the last gate to stadial.**
+**Date**: Jul 9, 2026 13:25 EDT | **Wave**: 135a | **From**: eastGate overwatch
+**Posture**: **CONVERGED — DNS cutover COMPLETE. primals.eco sovereign on bearDog TLS (golgi). S-10 CLOSED. petalTongue forward architecture for live.primals.eco defined.**
 
 ---
 
 ## Current State
 
 ```
+✅ primals.eco: SOVEREIGN — bearDog ACME TLS on golgi (:443/:80), LE cert
+✅ DNS cutover: GitHub Pages → golgi VPS (157.230.3.183), DNS-only Cloudflare
 ✅ 14/14 primals pass cargo check --all-targets
-✅ Pepti depot: 34/34 builds, 0 failures. 16 binaries × 2 triples.
+✅ Pepti depot: 34/34 builds, 0 failures
 ✅ WAN-DISPATCH-01 transport: PASS (10/10, 142ms p50)
-✅ Drawbridge: CONFIGURED on sporeGate (SONGBIRD_DRAWBRIDGE_ROUTES set)
-✅ songBird P2 fix deployed (82fb474 — origin-form)
-✅ SHALLOW-DIV-01/02 absorbed into cellMembrane code (dee3edb)
-✅ All operational fixes done (Forgejo, CI log, ironGate cascade)
-✅ Composition-scoped lifecycle LIVE
+✅ Drawbridge: CONFIGURED on sporeGate
+✅ All 5 gates converged
 ✅ 7/7 stadial criteria CLEAR
-✅ Zero TODO/FIXME in active primal code
-⚠️  capability.call("jupyter"): retest needed from flockGate (sporeGate says CONFIGURED)
-⚠️  DNS cutover: primals.eco → bearDog ACME TLS (unblocked)
+✅ S-10 (sporePrint sovereign): CLOSED
+✅ bearDog CSR SAN bug fixed (multi-domain ACME)
+⚠️  Caddy cert renewal blocked (bearDog owns :80) — existing certs valid until Aug 13
+⚠️  www.primals.eco serves 200 (same content) — no Host-header routing in bearDog yet
+⚠️  live.primals.eco: not yet configured — petalTongue NUCLEUS hosting is forward work
 ```
+
+---
+
+## Architecture (golgi — production)
+
+```
+Internet
+  │
+  ├─ :443 → bearDog (ACME TLS, LE cert for primals.eco + www)
+  │           └─ upstream → Caddy :8091
+  │                          └─ file_server /opt/ecoPrimals/sporePrint/public
+  │
+  ├─ :80  → bearDog (HTTP-01 challenges + HTTPS redirect)
+  │
+  └─ :8443 → Caddy (LE certs for subdomains)
+              ├─ membrane.primals.eco → nestGate cache + depot
+              ├─ git.primals.eco → Forgejo :3000
+              └─ lab.primals.eco → sporeGate :7780 (songBird drawbridge)
+```
+
+## Forward Architecture: live.primals.eco
+
+**Option B (recommended from sporeGate postmortem):**
+
+```
+primals.eco      → golgi Caddy :8091 (static Zola — always available)
+live.primals.eco → golgi bearDog → WireGuard → sporeGate petalTongue (dynamic, NUCLEUS)
+```
+
+Static site is always up. Dynamic version with live gate data, primal registry,
+and capability-backed APIs available when sporeGate is online.
+
+**petalTongue needs to become:**
+
+| Capability | Status |
+|------------|--------|
+| Serve Zola static content as baseline | Dashboard only today |
+| Gate topology API (`/api/gates`) | Exists in dashboard |
+| Composition health (`/api/health`) | Not exposed |
+| Ecosystem metrics (`/api/metrics`) | Not exposed |
+| Primal registry (`/api/primals`) | Not exposed |
+| pseudoSpore gallery (live) | Static today |
+| Validation parity with Zola site | Not tested |
+
+**Validation gate**: petalTongue on sporeGate must pass 6 checks (200 on `/`, CSS, RSS, API, content match, p99 ≤ 100ms) before serving production traffic.
 
 ---
 
 ## Remaining Work
 
-### 1. flockGate capability.call Retest
+### 1. Caddy Cert Renewal Strategy (before Aug 13)
 
-sporeGate confirms drawbridge is configured (`SONGBIRD_DRAWBRIDGE_ROUTES` set, HTTP 302 on all paths). flockGate heads still show `PENDING`. Need flockGate to retest `capability.call("jupyter")` for FULL PASS.
+bearDog owns :80, blocking Caddy HTTP-01 renewal for subdomains. Options:
+- Add DNS-01 support to bearDog ACME
+- Temporarily stop bearDog for Caddy renewal
+- bearDog Host-header routing (all domains on :443, eliminate :8443)
 
-### 2. DNS Cutover (Wave 135)
+### 2. live.primals.eco (petalTongue NUCLEUS)
 
-**Owner**: sporeGate / golgiBody operations team.
-All blockers cleared. Path: bearDog ACME on golgi → 7-day Caddy shadow → DNS flip.
-Closes S-10 (sporePrint sovereignty).
+Forward work for petalTongue team — evolve from dashboard-only to full sporePrint host with backend capabilities. Validate against static site, then deploy via bearDog → WireGuard → sporeGate.
 
-### 3. strandGate Enrollment
+### 3. capability.call Retest
 
-Pending physical access (house 2). Hardware team.
+sporeGate drawbridge configured. flockGate needs to retest for WAN-DISPATCH-01 FULL PASS.
+
+### 4. strandGate Enrollment
+
+Pending physical access (house 2).
 
 ---
 
-## Debt + Gap Review (approaching stadial gates)
+## Wave Plan
 
-### Resolved Debt (Wave 134)
-
-| ID | What | Status |
-|----|------|--------|
-| BUILD-DIV-01 | songBird used-but-unimplemented methods | **RESOLVED** + pre-push gate |
-| BUILD-DIV-02 | bearDog gateway module path | **RESOLVED** + regression fix |
-| CI-DIV-01/02/03 | Build workarounds (biomeOS, skunkBat, nestGate) | **RESOLVED** — manifest-driven |
-| UNIT-DIV-04 | bearDog CryptoProvider panic | **RESOLVED** (since 132f) |
-| SHALLOW-DIV-01 | Merge commits fail on shallow Forgejo | **ABSORBED** into cellMembrane |
-| SHALLOW-DIV-02 | UFW rules not in iptables | **ABSORBED** into cellMembrane |
-
-### Known Remaining Debt
-
-| ID | What | Severity | Owner |
-|----|------|----------|-------|
-| SHALLOW-DIV-03 | Blurb state lag — overwatch lists items as pending when already done by other gates | Low | Process: sporeGate push heads more frequently |
-| HARDCODED-IP | 2-3 VPS IPs in cellMembrane/esotericWebb Rust constants (default fallbacks) | Low | cellMembrane — acceptable as env-overridable defaults |
-| UNWRAP-DEBT | ~28 `unwrap()` calls in cellMembrane manifest reader | Low | cellMembrane — mostly test/parse code, not panic-critical |
-| NESTGATE-VENDOR | TODO/FIXME in vendored `rustls-webpki`/`rustls-rustcrypto` (upstream code) | Info | Not ours to fix — vendored for UNIT-DIV-04 investigation |
-| GLACIAL-STALE | GLACIAL_SHIFT_READINESS.md references "13/13", Wave 134b | Low | eastGate — needs refresh to 14/14, 134h |
-| AARCH64-ANDROID | NDK cross-compile pending for grapheneGate | Future | cellMembrane — unblocked but not started |
-| WASM-TARGETS | wasm32-wasi: 0/14, design phase | Future | Architecture team |
-
-### New Debt Discovered (Wave 134)
-
-| ID | What | Found by | Impact |
-|----|------|----------|--------|
-| SONGBIRD-ORIGIN-FORM | http.request sent absolute-form URI to HTTP/1.1 drawbridge proxy, causing 404 | flockGate WAN-DISPATCH-01 | **FIXED** (82fb474) |
-| GATEWAY-BIND-SILENT | BUILD-DIV-02 fix silenced gateway bind errors via tokio::spawn | bearDog team | **FIXED** (80c322d) |
-| UFW-PHANTOM-RULES | UFW rules present in config but missing from iptables | sporeGate ironGate fix | **ABSORBED** (dee3edb) |
-| FORGEJO-SHALLOW-MERGE | Merge commits create unresolvable deltas in depth=1 bare repos | sporeGate | **ABSORBED** — classified diagnostics + auto-reshallow |
-
-### Stadial Gate Checklist
-
-| Criterion | Status | Notes |
-|-----------|--------|-------|
-| S-6: Pepti current | ✅ | 34/34 builds, 0 failures |
-| S-8: Cross-gate dispatch | ⏳ | Transport PASS. capability.call retest pending. |
-| S-10: sporePrint sovereign | ⏳ | DNS cutover unblocked (Wave 135) |
-| 7/7 stadial criteria | ✅ | All CLEAR |
-| Pre-push CI gates | ✅ | songBird + bearDog |
-| Zero code debt | ✅ | 0 TODO/FIXME in active primal Rust code |
-| Test coverage | ✅ | 13,884+ bearDog, 1101+ primalSpring, 604+ cellMembrane |
+| Wave | Goal | Status |
+|------|------|--------|
+| **134** | Pepti + capability convergence + DNS cutover | **COMPLETE** |
+| **135** | petalTongue NUCLEUS hosting + cert renewal strategy | Starting |
+| **136+** | SHOW_HN readiness (28 rubric criteria) | S-6 ✅, S-8 retest pending, S-10 ✅ |
 
 ---
 
@@ -94,26 +107,27 @@ Pending physical access (house 2). Hardware team.
 
 | Team | State |
 |------|-------|
-| **sporeGate** | Converged. Drawbridge configured. Owns DNS cutover (135). |
-| **flockGate** | Retest capability.call — sporeGate says drawbridge is live. |
+| **sporeGate/golgi** | DNS cutover DONE. bearDog TLS live. Owns cert renewal strategy. |
+| **petalTongue** | Forward: evolve from dashboard to sporePrint NUCLEUS host for live.primals.eco. |
+| **flockGate** | Retest capability.call for FULL PASS. |
+| **bearDog** | CSR SAN bug fixed. Host-header routing needed for cert consolidation. |
 | **songBird** | P2 fix deployed. Ready. |
-| **bearDog** | Ready. 13,884+ tests. |
 | **cellMembrane** | SHALLOW-DIV absorbed. Composition lifecycle LIVE. |
-| **sporePrint** | 249+ pages. Thin-relay → NUCLEUS. |
+| **sporePrint** | 249+ pages. Static site live on primals.eco. NUCLEUS evolution → live.primals.eco. |
 | **primalSpring** | 1101+ tests. 128 scenarios. |
-| **ironGate** | 20 repos current. Resolved. |
+| **ironGate** | 20 repos current. |
 
 ---
 
-## Gate Convergence (134h)
+## Gate Convergence (135a)
 
 ```
-✅ eastGate   — All repos current. Heads published.
-✅ sporeGate  — Depot 100%. Drawbridge CONFIGURED.
-✅ golgiBody  — Thin relay. sporePrint serving. E2E 200.
+✅ eastGate   — All repos current.
+✅ sporeGate  — Depot 100%. Drawbridge configured.
+✅ golgiBody  — DNS cutover LIVE. bearDog TLS. sporePrint serving. E2E 200.
 ✅ flockGate  — WAN PASS. Retest capability.call.
 ✅ ironGate   — 20 repos current.
 🔧 strandGate — Enrollment pending (house 2).
 ```
 
-*Pipeline: push → harvest → checksum → mesh.publish → auto_fetch → verify → deploy*
+*primals.eco: bearDog TLS → Caddy static → sovereign. Pipeline: push → harvest → checksum → mesh.publish → auto_fetch → verify → deploy.*

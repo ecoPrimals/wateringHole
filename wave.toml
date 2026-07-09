@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 134
-sub = "h"
+id = 135
+sub = "a"
 date = "2026-07-09"
-posture = "NEAR-CONVERGED. All 5 gates green. Drawbridge configured. capability.call retest needed. DNS cutover is the last gate to stadial."
+posture = "CONVERGED. DNS cutover COMPLETE. primals.eco sovereign on bearDog TLS. S-10 CLOSED. petalTongue forward architecture for live.primals.eco defined."
 publisher = "eastGate-overwatch"
 
 [gates]
