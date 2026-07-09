@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-09T13:06:00Z
+# Gate: flockGate | Updated: 2026-07-09T15:35:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-09T13:06:00Z"
-wave = "134c"
+updated = "2026-07-09T15:35:00Z"
+wave = "134g"
 
 [heads]
-primalSpring = "d0181a1"
-wateringHole = "afadb762"
+primalSpring = "9117d1b"
+wateringHole = "55a3fa53"
 bearDog = "7e932000f393c1ab0b6f4ae4cd8009a0a537bd65"
 songBird = "05e2204300000000000000000000000000000000"
 toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
@@ -29,7 +29,8 @@ plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
 
 [mesh]
 node_id = "flockgate"
-uptime_seconds = 331824
+songbird_version = "0.2.1"
+uptime_seconds = 6840
 peers = 2
 peer_addresses = ["10.13.37.1:7700", "10.13.37.2:7700"]
 wireguard_status = "UP"
@@ -37,36 +38,29 @@ icmp_rtt_sporegate_ms = 69
 icmp_rtt_golgi_ms = 31
 
 [dispatch_validation]
-status = "PASS — HTTP DATA PATH PROVEN (capability.call protocol pending local songBird update)"
-wan_dispatch_01 = "PASS"
+status = "PASS — HTTP transport proven. capability.call pending sporeGate env config."
+wan_dispatch_01 = "PASS (transport)"
 http_transport_status = "PASS"
 http_response_body = '{"version": "5.4.5"}'
 http_response_code = 200
-capability_call_status = "FAIL — local songBird binary stale (truncated-zero SHA shallow clone)"
-capability_call_error = "No local or remote provider found for capability 'jupyter'"
-capability_call_blocker = "flockGate songBird needs deep fetch + rebuild from e5941eeb"
+capability_call_status = "PENDING — sporeGate needs SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter"
+remaining_blocker = "sporeGate env config (no code change, quick systemd edit)"
 
 [dispatch_validation.latency_direct_wg]
-path = "flockGate → WG 10.13.37.2:7780 → ironGate JupyterHub"
 samples = 10
 p50_ms = 142
 p95_ms = 152
-p99_ms = 152
 min_ms = 136
 max_ms = 152
-mean_ms = 143
 
 [dispatch_validation.latency_golgi_relay]
-path = "flockGate → golgi (lab.primals.eco) → sporeGate:7780 → ironGate"
 samples = 5
 p50_ms = 207
 cold_ms = 266
-warm_ms = 200
 
 [dispatch_validation.timing]
 tested_at = "2026-07-09T13:06:00Z"
 icmp_rtt_ms = 69
-note = "HTTP RTT ≈ 2x ICMP (TCP handshake + request/response = 2 round trips)"
 
 [primalspring]
 scenarios = 128
