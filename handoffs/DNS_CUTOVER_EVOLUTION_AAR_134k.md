@@ -6,264 +6,241 @@ every patch becomes a divergence for fractal/isomorphic evolution
 
 ---
 
-## What Worked
+## Sovereignty Model
 
-### 1. Caddy as Host-routing TLS front door
+The ecosystem has a consistent replacement pattern for external dependencies:
 
-Caddy on :443 handles all domains with zero configuration drama — ACME, HTTP/2,
-HTTP/3 alt-svc, Host-based routing, file serving, reverse proxy. Every gate
-deployment that needs a public TLS surface should use this pattern.
+```
+External tool         Sovereign replacement         Status
+─────────────────     ─────────────────────────     ──────────
+Cloudflare Tunnel  →  birdSong / darkForest         In progress
+Cloudflare DNS     →  birdSong / darkForest         In progress
+WireGuard          →  birdSong / darkForest         In progress
+Caddy (TLS+route)  →  Tower atomics (bearDog+song)  Divergences below
+Zola (static gen)  →  Sovereignty tool (depot)       Installed
+GitHub Pages       →  golgi + Caddy (done)           Done
+```
 
-**Fractal pattern**: `Caddy :443 → Host routing → backend dispatch`
+**Caddy is the parity target, not the permanent solution.** The tower atomics
+(bearDog for TLS/crypto/ACME, songBird for routing/discovery/dispatch) replace
+Caddy the same way birdSong/darkForest replaces WireGuard and Cloudflare.
 
-### 2. WireGuard backhaul mesh
-
-The `golgi → sporeGate → ironGate` path works. Caddy reverse-proxies
-`lab.primals.eco` through WireGuard to songBird's drawbridge on sporeGate,
-which capability-routes to JupyterHub on ironGate. Three hops, fully sovereign.
-
-**Fractal pattern**: `Public TLS → WireGuard → songBird capability routing → backend`
-
-### 3. Thin Forgejo relay (shallow repos)
-
-golgi disk went from 69% to 34% with depth=1 bare repos. Pushes work. Monthly
-re-shallowing timer keeps it thin. Full history lives on sporeGate.
-
-**Fractal pattern**: `Edge gate = shallow relay, compute gate = full history`
-
-### 4. pepti depot + sovereign CI
-
-All 15 primals cross-compiled for x86_64 + aarch64, checksummed, depot-synced
-to golgi. Binary deployment is `rsync` from depot.
-
-**Fractal pattern**: `sporeGate builds → depot → rsync to edge gates`
-
-### 5. bearDog ACME capability
-
-bearDog successfully obtained a Let's Encrypt certificate with multi-domain
-SANs. The ACME client works. The CSR SAN fix was absorbed into the codebase.
-
-**Fractal pattern**: `bearDog ACME = sovereign cert issuance per gate`
+Caddy stays operational as the **sovereign validation baseline** — the thing
+the tower stack must match and exceed before it takes over. Every divergence
+below is a gap between where the tower atomics are and where Caddy sits today.
 
 ---
 
-## What Broke — Each Patch Is a Divergence
+## What Worked
 
-Every item below was a runtime patch. Each one is now a divergence between
-the current operational state and what the infra/topology should be for
-fractal and isomorphic deployments.
+### 1. Tower atomics in partial operation
 
-### DIV-DNS-01: bearDog has no Host routing
+bearDog successfully issued a multi-domain Let's Encrypt certificate (ACME
+HTTP-01 with CSR SANs). songBird's drawbridge routes lab traffic from golgi
+through the mesh to ironGate. These are the two halves of the future TLS +
+routing stack — they work individually, they just don't compose as a full
+Caddy replacement yet.
+
+**Parity signal**: bearDog ACME ✓, songBird HTTP routing ✓, combined
+Host-dispatch TLS ✗
+
+### 2. Sovereignty path validated end-to-end
+
+The full path `DNS → golgi TLS → WireGuard → songBird → JupyterHub` works.
+No Cloudflare in the chain. The DNS cutover itself proved that the sovereign
+relay architecture can serve production traffic — the tooling just needs to
+mature from "Caddy does it" to "tower atomics do it."
+
+### 3. Thin Forgejo relay
+
+golgi disk 69% → 34% with depth=1 bare repos. Monthly re-shallowing timer.
+Full history on sporeGate. This pattern is fractal — any edge gate can run
+shallow relays.
+
+### 4. pepti depot + sovereign CI
+
+15 primals × 2 arches = 30 binaries, checksummed, depot-synced. Binary
+deployment is `rsync` from depot. This is the foundation for fractal gate
+provisioning — every gate pulls from the depot.
+
+### 5. bearDog ACME capability
+
+bearDog obtained a production Let's Encrypt cert with multi-domain SANs.
+The CSR SAN fix was absorbed. This is real sovereign cert issuance — no
+Cloudflare origin certs, no external CA integration.
+
+---
+
+## What Broke — Each Patch = Divergence from Tower Parity
+
+Every item below is a gap between the tower atomics and Caddy. The patch
+keeps things running on Caddy. The evolution closes the gap in the primals.
+
+### DIV-DNS-01: bearDog has no Host/SNI dispatch
 
 **What broke**: bearDog on :443 proxied all traffic to a single upstream.
-`git.primals.eco`, `membrane.primals.eco`, `lab.primals.eco` all got the
-sporePrint homepage.
+Every subdomain got sporePrint instead of its correct backend.
 
-**Patch**: Restored Caddy on :443.
+**Patch**: Caddy restored on :443 (Host-based routing).
 
-**Divergence**: bearDog's gatehouse mode is single-upstream TCP proxy. For
-isomorphic deployments, each gate needs to handle N domains on :443 — either
-bearDog learns SNI/Host dispatch, or every gate ships Caddy as the TLS front.
+**Caddy parity gap**: Caddy dispatches by Host header to N upstreams.
+bearDog dispatches to 1 upstream. This is the single biggest gap.
 
-**Evolution path**:
-- **Option A (bearDog evolves)**: Add `BEARDOG_GATEWAY_ROUTES` config —
-  SNI-based dispatch to multiple upstreams. Requires TLS termination +
-  HTTP parsing in bearDog.
-- **Option B (Caddy canonical)**: Accept Caddy as the sovereign TLS layer.
-  bearDog provides crypto identity + BTSP + ACME capability, Caddy does
-  the HTTP routing. This is where we are today.
-- **Recommended**: Option B now, Option A as a long-term bearDog milestone.
-  Caddy is battle-tested and gives us HTTP/2, HTTP/3, automatic ACME, and
-  Host routing. bearDog should focus on capabilities Caddy can't do (BTSP,
-  primal identity, mesh auth).
+**Tower evolution**:
+bearDog needs `BEARDOG_GATEWAY_ROUTES` — a route table mapping
+SNI/Host → upstream. Implementation path:
+1. TLS termination already works (rustls)
+2. After TLS, parse HTTP/1.1 Host or HTTP/2 :authority
+3. Dispatch to configured upstream per hostname
+4. Default upstream for unmatched hosts
+5. Config: env var or TOML route table
 
-**Isomorphic requirement**: Every gate's `provision-*.sh` must include Caddy
-with Host-routing Caddyfile as the TLS surface pattern.
+When bearDog can dispatch N hosts, it replaces Caddy's core function on
+every gate. This is the bearDog milestone that unblocks full tower TLS.
 
-### DIV-DNS-02: HTTP/2 / ALPN regression
+### DIV-DNS-02: No ALPN negotiation (HTTP/2 regression)
 
 **What broke**: bearDog's raw TCP proxy doesn't negotiate ALPN. Browsers
 fell back to HTTP/1.1.
 
-**Patch**: Caddy on :443 restored HTTP/2 + HTTP/3 alt-svc.
+**Patch**: Caddy restored (HTTP/2 + HTTP/3 alt-svc).
 
-**Divergence**: If bearDog ever takes TLS front-door duty, it must implement
-ALPN negotiation (h2, http/1.1) during TLS handshake.
+**Caddy parity gap**: Caddy negotiates h2/h1.1 via ALPN, serves HTTP/3
+via QUIC. bearDog does neither.
 
-**Evolution path**: bearDog's `rustls` already supports ALPN — surface it
-through the gatehouse config. Low priority while Caddy handles TLS.
+**Tower evolution**:
+bearDog's rustls already supports ALPN — needs to be surfaced:
+1. Set ALPN protocols `["h2", "http/1.1"]` in rustls ServerConfig
+2. After negotiation, if h2: use hyper h2 server; if h1.1: current path
+3. HTTP/3 (QUIC) is a later milestone — songBird's TURN relay may
+   inform the UDP transport layer
 
-### DIV-DNS-03: petalTongue assumed to be sporePrint file server
+### DIV-DNS-03: Static file serving gap
 
-**What broke**: The cutover plan pointed bearDog upstream at petalTongue
-(:8090), assuming it served the Zola static site. It serves a Gate Mesh
-dashboard instead.
+**What broke**: petalTongue serves its dashboard, not the Zola static site.
+No tower primal currently serves static files.
 
-**Patch**: Added Caddy :8091 for static file serving.
+**Patch**: Caddy :8091 serves sporePrint static files.
 
-**Divergence**: petalTongue's role was ambiguous. In the isomorphic topology,
-petalTongue is a **visualization primal** — it renders ecosystem dashboards,
-not static sites. The static site build pipeline (Zola) is a separate concern.
+**Caddy parity gap**: Caddy's `file_server` + `try_files` is the static
+serving baseline. No primal has an equivalent.
 
-**Evolution path**:
-- **Zola as sovereignty tool**: Zola is now installed on sporeGate (v0.22.1).
-  sporePrint builds locally. This means sporeGate can build + deploy the
-  static site without depending on golgi's Zola installation.
-- **petalTongue as dynamic overlay**: petalTongue serves `/api/gates`,
-  `/api/health`, `/api/metrics` on top of the Zola baseline. It's an
-  enhancement, not a replacement.
-- **Build pipeline**: `sovereign-ci` should include `zola build` as a cascade
-  step, triggered by sporePrint commits.
+**Tower evolution**:
+Two paths converge here:
+1. **petalTongue gains file_server mode** — serve Zola output as baseline
+   content, overlay with dynamic API endpoints. This makes petalTongue the
+   sporePrint host on any gate.
+2. **Zola as sovereignty tool** — Zola v0.22.1 is now installed on
+   sporeGate. sporePrint builds locally (239 pages, 15s). Build pipeline:
+   `sovereign-ci → zola build → rsync public/ → petalTongue serves it`.
 
-### DIV-DNS-04: Subdomain port displacement (:8443)
+Target: petalTongue serves static + dynamic, replaces Caddy file_server.
 
-**What broke**: Moving Caddy to :8443 broke all existing subdomain links.
-External users, bookmarks, search engines — all expect :443.
+### DIV-DNS-04: Port displacement (:8443)
 
-**Patch**: Caddy restored to :443, :8443 eliminated.
+**What broke**: Moving Caddy to non-standard :8443 broke all subdomain links.
 
-**Divergence**: Port displacement is never acceptable for public-facing
-services. The isomorphic topology must guarantee :443 for all TLS services
-via Host-based routing.
+**Patch**: Standard ports restored.
 
-**Evolution path**: Enforced in provisioning — `provision-*.sh` must never
-move public-facing services off standard ports.
+**Caddy parity gap**: None — this was an operational error, not a capability
+gap. The tower atomics must own :443 when they're ready, not share it.
+
+**Tower evolution**: Rule: the TLS front door is either Caddy OR bearDog on
+:443, never both. No port displacement. When bearDog reaches parity
+(DIV-DNS-01 + DIV-DNS-02), it takes :443 and Caddy retires.
 
 ### DIV-DNS-05: CSR SAN missing in bearDog ACME
 
-**What broke**: bearDog's `build_csr()` only set CN, not SAN extensions.
-Multi-domain ACME orders require SANs.
+**What broke**: `build_csr()` only set CN, not SAN extensions. Multi-domain
+ACME orders require SANs.
 
-**Patch**: Fixed `issuance.rs` to include `SubjectAltName` for all domains.
+**Patch**: Fixed `issuance.rs` with `SubjectAltName` extension.
 
-**Divergence**: This fix is in the codebase (`beardog-acme/src/client/issuance.rs`)
-but needs a test. The ACME test suite should include multi-domain CSR
-validation.
+**Caddy parity gap**: Caddy's ACME automatically handles multi-domain certs.
+bearDog now does too, but lacks test coverage.
 
-**Evolution path**: Add `#[test] fn csr_includes_all_sans()` to beardog-acme.
-Every primal that generates X.509 artifacts should validate SAN completeness.
+**Tower evolution**: Add `#[test] fn csr_includes_all_sans()` to
+beardog-acme. This is absorbed — the capability works, it just needs a
+regression gate.
 
-### DIV-DNS-06: Caddy cert renewal blocked by bearDog
+### DIV-DNS-06: Dual ACME ownership conflict
 
-**What broke**: When bearDog owned :80, Caddy couldn't renew its own LE
-certs via HTTP-01. The existing certs expire Aug 13.
+**What broke**: bearDog on :80 blocked Caddy's HTTP-01 cert renewal.
 
-**Patch**: Caddy back on :443/:80 — it renews its own certs now. Problem
-eliminated.
+**Patch**: Caddy owns :80 and :443, renews its own certs.
 
-**Divergence**: This was a consequence of DIV-DNS-01. In any dual-TLS-server
-topology, cert renewal ownership must be explicit. Either one server owns
-all ACME, or they use different challenge types (HTTP-01 vs DNS-01).
+**Caddy parity gap**: Caddy handles ACME for all domains on the IP.
+bearDog can only ACME for its configured domains.
 
-**Evolution path**: If bearDog ever takes :443 again, it must either:
-- Handle ACME for ALL domains on that IP, or
-- Support DNS-01 challenges so Caddy can renew independently
+**Tower evolution**: When bearDog takes :443 (post DIV-DNS-01), it must
+also handle ACME for ALL domains on that gate — not just primals.eco.
+`BEARDOG_ACME_DOMAINS` needs to cover every Host in the route table.
+Alternative: bearDog implements DNS-01 for domains it doesn't own :80 for.
 
-### DIV-DNS-07: Stale content references (Cloudflare Tunnel)
+### DIV-DNS-07: Content drift (stale Cloudflare references)
 
-**What broke**: `compute-access.md` still described Cloudflare Tunnel
-architecture. The contact page was missing from the source tree.
+**What broke**: compute-access.md still described Cloudflare Tunnel.
 
-**Patch**: Rewrote compute-access.md for songBird drawbridge. Created
-contact.md.
+**Patch**: Rewrote for songBird drawbridge architecture.
 
-**Divergence**: Content drift from infrastructure changes. The Zola site
-describes an architecture that evolves independently of the content.
+**Caddy parity gap**: N/A — content problem, not a tool gap.
 
-**Evolution path**: `spore-validate` should include a content-infra drift
-check — scan markdown for known-stale patterns (e.g., "Cloudflare Tunnel",
-"Cloudflare Access") and flag them. This is a natural extension of the
-existing validation pipeline.
+**Tower evolution**: `spore-validate` content-infra drift check. Scan for
+stale patterns ("Cloudflare Tunnel", "Cloudflare Access", ":8443") and
+flag. This is a natural validation pipeline extension.
 
-### DIV-DNS-08: Zola version skew (golgi 0.19.2 vs sporeGate 0.22.1)
+### DIV-DNS-08: Zola version skew
 
-**Discovery**: golgi runs Zola 0.19.2, sporeGate now has 0.22.1. The site
-builds on both, but template features and performance differ.
+**Discovery**: golgi Zola 0.19.2, sporeGate 0.22.1.
 
-**Divergence**: Tool version skew across gates.
-
-**Evolution path**: Zola becomes a pepti-managed binary. Each gate pulls
-Zola from the depot at a pinned version. `checksums.toml` includes `zola`
-alongside the primals.
+**Tower evolution**: Zola becomes a pepti-managed binary in the depot,
+pinned at 0.22.1 for both arches. Same sovereignty pattern as the primals.
 
 ---
 
-## Sovereignty Layer Status
+## Sovereignty Layer — Parity Targets
 
-The sovereignty goal: every tool in the build/deploy/serve pipeline is either
-a primal or a depot-managed binary. No external package managers, no cloud
-services, no vendor lock-in.
+Every external tool maps to either a primal replacement or a depot-managed
+sovereign tool. The DNS cutover exposed which tools still need parity:
 
-| Tool | Status | Gate(s) | Path to Sovereignty |
-|------|--------|---------|---------------------|
-| **Caddy** | Deployed | golgi | Add to pepti depot (static binary) |
-| **Zola** | Installed | sporeGate (0.22.1), golgi (0.19.2) | Add to pepti depot, pin version |
-| **Forgejo** | Deployed | golgi | Already managed via provision script |
-| **Rust/Cargo** | Installed | sporeGate | Build tool, stays on compute gate |
-| **cross** | Installed | sporeGate | Cross-compile tool, stays on compute gate |
-| **WireGuard** | Deployed | golgi, sporeGate, ironGate, flockGate | Kernel module + wg-quick |
-| **rsync** | System | all | Standard tool, no action needed |
-| **bearDog** | Depot binary | all | Already in pepti depot |
-| **songBird** | Depot binary | golgi, sporeGate | Already in pepti depot |
-| **membrane** | Depot binary | all | Already in pepti depot |
-| **JupyterHub** | pip install | ironGate | Stays as Python tool on compute gate |
-| **RustDesk** | Binary | golgi | Add to pepti depot |
+| External Tool | Sovereign Replacement | Parity Status |
+|---------------|----------------------|---------------|
+| **Caddy TLS** | bearDog ACME gateway | ACME ✓, Host routing ✗, ALPN ✗ |
+| **Caddy routing** | bearDog SNI dispatch | Not implemented |
+| **Caddy file_server** | petalTongue static mode | Not implemented |
+| **Caddy HTTP/2** | bearDog ALPN + hyper h2 | rustls ready, not surfaced |
+| **Caddy HTTP/3** | (future) | Not started |
+| **Cloudflare Tunnel** | birdSong / darkForest | In progress |
+| **Cloudflare DNS** | birdSong / darkForest | In progress |
+| **WireGuard** | birdSong / darkForest | In progress |
+| **Zola** | pepti depot binary | Installed, needs depot pin |
 
-### New sovereignty additions this wave:
+### Tower Atomic Parity Milestones
 
-1. **Zola v0.22.1** — installed on sporeGate at `/usr/local/bin/zola`. Can
-   build sporePrint locally (239 pages, 15s). Next: add to pepti depot as
-   `zola` binary for both x86_64 and aarch64.
-
-2. **Caddy** — should be depot-managed. Currently installed ad-hoc on golgi.
-   The static binary is ideal for pepti — no runtime dependencies.
-
----
-
-## Isomorphic Deployment Checklist
-
-For any new gate to be isomorphic with golgi, it needs:
+The tower atomics replace Caddy in phases:
 
 ```
-Gate Provisioning Isomorphism:
-  ☑ Caddy :443 with Host-routing Caddyfile
-  ☑ WireGuard backhaul to mesh
-  ☑ songBird for capability routing + federation
-  ☑ bearDog for crypto identity + BTSP
-  ☑ Forgejo shallow relay (if edge gate)
-  ☑ UFW with standard ports only (:443, :80, :2222, :51820)
-  ☑ pepti depot binaries for all services
-  ☐ Zola for sporePrint build (sovereignty layer)
-  ☐ sovereign-ci cascade trigger
-  ☐ automatic cert management (Caddy ACME)
+Phase 1 (current):  Caddy :443, bearDog standby
+                    bearDog ACME works, songBird routes work
+                    Gap: Host dispatch, ALPN, file serving
+
+Phase 2:            bearDog gains BEARDOG_GATEWAY_ROUTES
+                    SNI/Host → upstream dispatch
+                    Can serve N domains on :443
+                    Gap: ALPN, file serving
+
+Phase 3:            bearDog gains ALPN (h2 + h1.1)
+                    HTTP/2 parity with Caddy
+                    Gap: file serving
+
+Phase 4:            petalTongue gains file_server mode
+                    Static Zola content + dynamic API
+                    bearDog dispatches to petalTongue + Forgejo + songBird
+                    Caddy retires from production
+
+Phase 5:            birdSong / darkForest replaces WireGuard
+                    Full sovereign mesh — no external tools in the chain
 ```
-
-### Fractal Pattern: The "golgi Template"
-
-Every edge gate deployment should be derivable from `provision-golgi.sh` by
-changing:
-- Gate name and WireGuard keys
-- Domain names in Caddyfile
-- Upstream IPs for reverse proxy targets
-- Forgejo repo list (or skip Forgejo for non-forge gates)
-
-The script structure — install tools → configure services → write systemd
-units → enable firewall → enable services — is the fractal template.
-
----
-
-## Divergence Summary Table
-
-| ID | Severity | Patch Applied | Evolution Target |
-|----|----------|---------------|------------------|
-| DIV-DNS-01 | CRITICAL | Caddy restored :443 | bearDog SNI dispatch or Caddy canonical |
-| DIV-DNS-02 | HIGH | Caddy HTTP/2 | bearDog ALPN if/when it takes TLS |
-| DIV-DNS-03 | HIGH | Caddy :8091 static | Zola sovereignty + petalTongue overlay |
-| DIV-DNS-04 | HIGH | Standard ports restored | Provisioning rule: never displace ports |
-| DIV-DNS-05 | MEDIUM | CSR SAN fix | Add ACME test coverage |
-| DIV-DNS-06 | MEDIUM | Caddy owns ACME | Single ACME owner per IP |
-| DIV-DNS-07 | LOW | Content rewritten | spore-validate content drift checks |
-| DIV-DNS-08 | LOW | Zola installed both | Zola in pepti depot, pinned version |
 
 ---
 
@@ -274,30 +251,28 @@ Internet
   │
   └── golgi (157.230.3.183) — thin edge relay
       │
-      ├── Caddy :443 (ACME, HTTP/2, Host routing)
+      ├── Caddy :443 (PARITY TARGET — tower atomics replace this)
       │   ├── primals.eco      → file_server (Zola static)
       │   ├── www.primals.eco  → 301 → primals.eco
       │   ├── membrane.*       → depot + health + nestgate
       │   ├── git.*            → Forgejo :3000
       │   └── lab.*            → WireGuard → sporeGate songBird :7780
       │
-      ├── Caddy :80 (ACME HTTP-01 + HTTPS redirect)
+      ├── bearDog (standby, port 9999 — ACME ready, awaiting SNI dispatch)
       │
-      ├── bearDog (standby, port 9999)
-      │   └── ACME cert ready for primals.eco + www
+      ├── songBird (mesh federation — routing works, needs TLS integration)
       │
       ├── Forgejo :3000 / :2222 (shallow bare repos)
       │
-      ├── songBird (mesh federation + TURN relay)
-      │
-      └── WireGuard :51820 → sporeGate (10.13.37.2)
+      └── WireGuard :51820 (PARITY TARGET — birdSong/darkForest replaces this)
+          └── sporeGate (10.13.37.2)
 
 sporeGate (10.13.37.2) — sovereign compute
   │
   ├── Full git mirrors (/opt/forgejo-mirror/)
   ├── pepti depot (/opt/ecoPrimals/depot/)
   ├── Rust/Cargo/cross (build toolchain)
-  ├── Zola v0.22.1 (sporePrint builder) ← NEW
+  ├── Zola v0.22.1 (sovereignty tool — sporePrint builder)
   ├── songBird (drawbridge + capability routing)
   ├── sovereign-ci (build + deploy cascade)
   │
@@ -306,15 +281,31 @@ sporeGate (10.13.37.2) — sovereign compute
 
 ---
 
+## Divergence Summary
+
+| ID | Gap | Patch (Caddy) | Tower Evolution |
+|----|-----|---------------|-----------------|
+| DNS-01 | No Host dispatch | Caddy Host routing | bearDog GATEWAY_ROUTES |
+| DNS-02 | No ALPN/HTTP/2 | Caddy h2 | bearDog rustls ALPN + hyper h2 |
+| DNS-03 | No file serving | Caddy file_server | petalTongue static mode |
+| DNS-04 | Port displacement | Standard ports | Rule: :443 or nothing |
+| DNS-05 | CSR SAN missing | Code fix | bearDog ACME test suite |
+| DNS-06 | Dual ACME conflict | Caddy owns ACME | bearDog multi-domain ACME |
+| DNS-07 | Content drift | Manual rewrite | spore-validate drift check |
+| DNS-08 | Zola version skew | Both installed | Zola in pepti depot |
+
+---
+
 ## Next Steps
 
-1. **Add Zola to pepti depot** — download musl binaries for both arches,
-   checksum, add to `checksums.toml`. Pin at v0.22.1.
-2. **Add Caddy to pepti depot** — same pattern. Pin version.
-3. **Wire `zola build` into sovereign-ci** — cascade step triggered by
-   sporePrint commits. Build on sporeGate, rsync `public/` to golgi.
-4. **bearDog ACME tests** — multi-domain CSR validation test.
-5. **spore-validate content drift** — scan for stale infra references.
-6. **Upgrade golgi Zola** — 0.19.2 → 0.22.1 from pepti depot.
-7. **Provision template** — extract `provision-golgi.sh` into a
-   parameterized template for fractal gate deployment.
+1. **bearDog `GATEWAY_ROUTES`** — SNI/Host dispatch. This is the gate that
+   unblocks tower TLS ownership. Closes DNS-01.
+2. **bearDog ALPN** — surface rustls ALPN for h2/h1.1. Closes DNS-02.
+3. **petalTongue file_server mode** — serve Zola output + dynamic overlay.
+   Closes DNS-03.
+4. **Zola + Caddy in pepti depot** — pin versions, checksum, both arches.
+   Closes DNS-08. Caddy stays in depot as the parity reference even after
+   tower atomics replace it.
+5. **bearDog ACME tests** — multi-domain CSR regression gate. Closes DNS-05.
+6. **spore-validate content drift** — automated stale-pattern scan. Closes DNS-07.
+7. **Wire `zola build` into sovereign-ci** — build on sporeGate, deploy to gates.
