@@ -6,11 +6,11 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-09T00:24:16Z"
+updated = "2026-07-09T00:31:23Z"
 
 [heads]
 barraCuda = "3b8ea530296319cbc1d7395831ffcf8d8e0ab4ac"
-bearDog = "d594d877862a22f633db58de18f064e00e78a1fc"
+bearDog = "579bc77fea93ed77499f4d0e7e7a1ef7934f3294"
 biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
 cellMembrane = "5efff13dc64c9c56fc2c0c9060925898d6ff2121"
 coralReef = "2db3019ae57598a8bf558e8fc2b3b2bc9f4aece6"
