@@ -1,11 +1,11 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: sporeGate | Updated: 2026-07-09T15:20:00Z
+# Gate: sporeGate | Updated: 2026-07-09T15:40:00Z
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-09T15:20:00Z"
-wave = "134f"
+updated = "2026-07-09T15:40:00Z"
+wave = "134g"
 
 [heads]
 barraCuda = "3b8ea530296319cbc1d7395831ffcf8d8e0ab4ac"
@@ -18,21 +18,22 @@ nestGate = "f3006ccd6caee4c9b37141ac24e6301037cc3452"
 petalTongue = "ebaf483c72712ce353635d5ed74ce251a590746a"
 rhizoCrypt = "5a64407b4b7b93ce90e2c20582ddfac5cef7a571"
 skunkBat = "35326c39177770f935a944635b510cd220b6270b"
-songBird = "e5941eeb3223bd49728bc00a1eb4d027d6dd1537"
+songBird = "82fb474a38bbaf8893f5c1b50e6b4a879f9a2e6d"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
 sweetGrass = "bfac29311075bbe7a7875a1f267b49c43e0e61cf"
 toadStool = "002332e485cb1dea5e93a04ed656b727f5cb77a1"
-wateringHole = "212316c7639d43a57d65207a1f507d24a7821f82"
+wateringHole = "4f9a270f"
 
 [depot]
 status = "current"
 binaries = 16
 triples = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
-checksums_updated = "2026-07-09T15:10:00Z"
-note = "Full 30/30 sweep + bearDog ddabf6a + membrane 1be2b7f incremental rebuild"
+checksums_updated = "2026-07-09T15:40:00Z"
+note = "songBird 82fb474 P2 origin-form fix rebuilt and deployed"
 
 [services]
 songbird_gateway = "active"
+songbird_sha = "82fb474a"
 drawbridge = "0.0.0.0:7780"
 drawbridge_routes = "/hub=jupyter,/api=jupyter,/user=jupyter,/services=jupyter"
 federation = "0.0.0.0:7700"
