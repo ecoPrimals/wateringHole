@@ -10,10 +10,11 @@
 #                Bare repos are SHALLOW (depth=1) — full history lives on
 #                sporeGate at /opt/forgejo-mirror/. Pushes work normally;
 #                periodic re-shallowing keeps disk thin.
-#   - Caddy      (TLS termination, depot file_server, reverse proxy)
+#   - bearDog    (TLS gateway: ACME cert for primals.eco on :443/:80)
+#   - Caddy      (TLS for remaining subdomains on :8443, depot file_server)
 #   - membrane   (temporal.cascade — Forgejo→sporeGate sync + freshness)
 #   - songBird   (mesh federation hub + TURN relay)
-#   - bearDog    (crypto identity + BTSP security provider)
+#   - bearDog    (crypto identity + BTSP security provider + ACME TLS gateway)
 #   - WireGuard  (backhaul tunnel to sporeGate LAN)
 #   - fail2ban   (SSH brute-force protection)
 #
@@ -39,7 +40,7 @@
 #        rsync -avz /opt/forgejo-mirror/ root@$GOLGI_IP:/opt/forgejo/data/repositories/
 #   5. rsync pepti depot:
 #        rsync -avz /opt/ecoPrimals/depot/ root@$GOLGI_IP:/opt/ecoPrimals/depot/
-#   6. Start services: systemctl start forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer
+#   6. Start services: systemctl start forgejo caddy-tls beardog-membrane beardog-sporeprint songbird-membrane songbird-relay cascade-sense.timer
 
 set -euo pipefail
 
@@ -112,8 +113,13 @@ curl -sL "https://caddyserver.com/api/download?os=linux&arch=amd64" -o /opt/memb
 chmod +x /opt/membrane/caddy
 
 cat > /etc/membrane/Caddyfile << 'EOCADDY'
+# bearDog owns :443/:80 for primals.eco + www.primals.eco (ACME gateway).
+# Caddy handles remaining domains on :8443/:8880 with existing LE certs.
 {
     email ops@primals.eco
+    http_port 8880
+    https_port 8443
+    storage file_system /caddy
 }
 
 membrane.primals.eco {
@@ -133,18 +139,6 @@ membrane.primals.eco {
         file_server
         try_files {path} {path}/ /index.html
     }
-}
-
-primals.eco {
-    handle {
-        root * /opt/ecoPrimals/sporePrint/public
-        file_server
-        try_files {path} {path}/ /index.html
-    }
-}
-
-www.primals.eco {
-    redir https://primals.eco{uri} permanent
 }
 
 git.primals.eco {
@@ -216,16 +210,16 @@ EOSVC
 
 cat > /etc/systemd/system/caddy-tls.service << 'EOSVC'
 [Unit]
-Description=Channel 3 TLS Surface (Membrane — ACME + Reverse Proxy)
-After=network-online.target
+Description=Channel 3 TLS Surface (Caddy — subdomains on :8443)
+After=network-online.target beardog-sporeprint.service
 Wants=network-online.target
 
 [Service]
 Type=simple
 ExecStart=/opt/membrane/caddy run --config /etc/membrane/Caddyfile
+Environment=HOME=/root
 Restart=always
 RestartSec=5
-AmbientCapabilities=CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
 PrivateTmp=true
 MemoryMax=128M
@@ -253,6 +247,30 @@ NoNewPrivileges=true
 PrivateTmp=true
 MemoryMax=64M
 CPUQuota=25%
+
+[Install]
+WantedBy=multi-user.target
+EOSVC
+
+cat > /etc/systemd/system/beardog-sporeprint.service << 'EOSVC'
+[Unit]
+Description=bearDog ACME gateway (golgiBody — primals.eco sovereign TLS)
+After=network-online.target petaltongue-sporeprint.service
+Wants=network-online.target
+Requires=petaltongue-sporeprint.service
+
+[Service]
+Type=simple
+ExecStart=/opt/membrane/beardog server --bind-mode tcp --port 9999 --socket /run/membrane/beardog-gw.sock
+Environment=BEARDOG_GATEHOUSE_MODE=true
+Environment=BEARDOG_ACME_DOMAINS=primals.eco,www.primals.eco
+Environment=BEARDOG_ACME_EMAIL=ops@primals.eco
+Environment=BEARDOG_GATEWAY_UPSTREAM=127.0.0.1:8090
+Environment=BEARDOG_DATA_DIR=/var/lib/beardog
+Environment=GATE_NAME=golgiBody
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+Restart=always
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
@@ -402,8 +420,9 @@ echo "=== 9. FIREWALL ==="
 if command -v ufw &>/dev/null; then
     ufw allow 22/tcp     # SSH
     ufw allow 2222/tcp   # Forgejo SSH
-    ufw allow 80/tcp     # HTTP (ACME challenge)
-    ufw allow 443/tcp    # HTTPS (Caddy)
+    ufw allow 80/tcp     # HTTP (bearDog ACME + HTTPS redirect)
+    ufw allow 443/tcp    # HTTPS (bearDog TLS gateway — primals.eco)
+    ufw allow 8443/tcp   # HTTPS (Caddy — membrane/git/lab subdomains)
     ufw allow 51820/udp  # WireGuard
     ufw allow 7700/tcp   # SongBird federation
     ufw allow 3478/udp   # TURN relay
@@ -467,7 +486,7 @@ WantedBy=timers.target
 EOSVC
 
 echo "=== 11. ENABLE SERVICES ==="
-systemctl enable forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane fail2ban forgejo-reshallow.timer
+systemctl enable forgejo caddy-tls beardog-membrane beardog-sporeprint songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane fail2ban forgejo-reshallow.timer
 
 echo ""
 echo "========================================="
@@ -491,8 +510,8 @@ echo "  7. Add remote.primals.eco DNS record:"
 echo "       knotc zone-begin primals.eco"
 echo "       knotc zone-set primals.eco remote.primals.eco. 300 A <NEW_VPS_IP>"
 echo "       knotc zone-commit primals.eco"
-echo "  8. Start services: systemctl start forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane"
-echo "  9. Verify: curl https://membrane.primals.eco/health"
+echo "  8. Start services: systemctl start forgejo caddy-tls beardog-membrane beardog-sporeprint songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane"
+echo "  9. Verify: curl https://primals.eco && curl https://membrane.primals.eco:8443/health"
 echo ""
 echo "Estimated disk usage after restore: ~3.5GB of 10GB (35%)"
 echo "If golgi dies, re-run this script + rsync from sporeGate."
