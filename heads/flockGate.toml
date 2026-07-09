@@ -1,16 +1,17 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-09T15:35:00Z
+# Gate: flockGate | Updated: 2026-07-07T09:32:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-09T15:35:00Z"
-wave = "134g"
+updated = "2026-07-07T13:32:00Z"
 
 [heads]
-primalSpring = "9117d1b"
-wateringHole = "55a3fa53"
+nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
+wateringHole = "c67cc0a"
+plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
+primalSpring = "e5d569f"
 bearDog = "7e932000f393c1ab0b6f4ae4cd8009a0a537bd65"
 songBird = "05e2204300000000000000000000000000000000"
 toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
@@ -22,48 +23,27 @@ rhizoCrypt = "ff60767fcb8b86a18400a58a8c6bdfd3e02e0cfa"
 loamSpine = "e68873d2c3092f6947f98655b7adb62d905178d8"
 sweetGrass = "96d35e5506cdd8f8f4101eef1ccff0448ee07ab3"
 skunkBat = "6fbdc43a544351cd165b0abf11824143e05db701"
-nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
 cellMembrane = "c51d688a378fbbaf616fc639c9b0eec23f28de89"
 sporePrint = "52d1517ad8295b4418fd0693dcd393004878a619"
-plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
-
-[mesh]
-node_id = "flockgate"
-songbird_version = "0.2.1"
-uptime_seconds = 6840
-peers = 2
-peer_addresses = ["10.13.37.1:7700", "10.13.37.2:7700"]
-wireguard_status = "UP"
-icmp_rtt_sporegate_ms = 69
-icmp_rtt_golgi_ms = 31
 
 [dispatch_validation]
-status = "PASS — HTTP transport proven. capability.call pending sporeGate env config."
-wan_dispatch_01 = "PASS (transport)"
-http_transport_status = "PASS"
-http_response_body = '{"version": "5.4.5"}'
-http_response_code = 200
-capability_call_status = "PENDING — sporeGate needs SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter"
-remaining_blocker = "sporeGate env config (no code change, quick systemd edit)"
-
-[dispatch_validation.latency_direct_wg]
-samples = 10
-p50_ms = 142
-p95_ms = 152
-min_ms = 136
-max_ms = 152
-
-[dispatch_validation.latency_golgi_relay]
-samples = 5
-p50_ms = 207
-cold_ms = 266
-
-[dispatch_validation.timing]
-tested_at = "2026-07-09T13:06:00Z"
-icmp_rtt_ms = 69
-
-[primalspring]
-scenarios = 128
-tests = 1101
-failures = 0
-suite_status = "GREEN"
+status = "PARTIAL"
+capability_call_status = "FAIL"
+capability_call_error = "No local or remote provider found for capability 'jupyter' — peers do not advertise routable capabilities"
+mesh_http_transport_status = "PASS"
+mesh_http_response = "JupyterHub responding (HTTP 200, version 5.4.5)"
+rtt_p50_ms = 72
+rtt_p95_ms = 77
+rtt_p99_ms = 77
+rtt_mean_ms = 70.8
+rtt_min_ms = 65
+rtt_max_ms = 77
+rtt_samples = 10
+icmp_rtt_sporegate_ms = 69
+icmp_rtt_golgi_ms = 31
+tested_at = "2026-07-07T13:32:20Z"
+mesh_uptime_seconds = 160531
+mesh_peers = 2
+path = "flockGate → WireGuard (10.13.37.2) → sporeGate:7780 → ironGate JupyterHub"
+blocker = "sporeGate songBird does not register 'jupyter' as a provided mesh capability"
+notes = "Transport layer PROVEN (http.request routes correctly). Capability abstraction layer BLOCKED (no peer advertises routable capabilities). Connection pooling active — RTT matches raw ICMP baseline."
