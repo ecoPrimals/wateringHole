@@ -383,6 +383,13 @@ StandardOutput=journal
 StandardError=journal
 EOSVC
 
+# sporePrint auto-rebuild: after cascade pulls, rebuild Zola site
+mkdir -p /etc/systemd/system/cascade-sense.service.d
+cat > /etc/systemd/system/cascade-sense.service.d/zola-rebuild.conf << 'EODROP'
+[Service]
+ExecStartPost=/bin/sh -c "cd /opt/ecoPrimals/sporePrint && git fetch origin && git reset --hard origin/main && zola build --output-dir public --force >/dev/null 2>&1 || true"
+EODROP
+
 cat > /etc/systemd/system/cascade-sense.timer << 'EOSVC'
 [Unit]
 Description=Quorum Phase 1 — Cascade Sense Timer
@@ -473,9 +480,18 @@ cat > /usr/local/bin/forgejo-reshallow << 'EOSHALLOW'
 #!/usr/bin/env bash
 set -euo pipefail
 REPO_BASE="/opt/forgejo/data/repositories"
+
+# Repos that must keep full history (used as fetch origins by working copies)
+SKIP_REPOS="sporeprint"
+
 systemctl stop forgejo.service
 SAVED=0
 for repo_path in $(find "$REPO_BASE" -maxdepth 2 -name "*.git" -type d | sort); do
+  repo_name=$(basename "$repo_path" .git)
+  if echo "$SKIP_REPOS" | grep -qw "$repo_name"; then
+    echo "  SKIP (full): $repo_path"
+    continue
+  fi
   before=$(du -sm "$repo_path" | awk '{print $1}')
   tmpdir=$(mktemp -d)
   if git clone --bare --depth=1 "file://${repo_path}" "${tmpdir}/shallow.git" 2>/dev/null; then
@@ -490,7 +506,7 @@ for repo_path in $(find "$REPO_BASE" -maxdepth 2 -name "*.git" -type d | sort); 
   rm -rf "$tmpdir"
 done
 systemctl start forgejo.service
-echo "forgejo-reshallow: saved ~${SAVED}M"
+echo "forgejo-reshallow: saved ~${SAVED}M (skipped: $SKIP_REPOS)"
 EOSHALLOW
 chmod +x /usr/local/bin/forgejo-reshallow
 
@@ -552,6 +568,7 @@ echo "Estimated disk usage after restore: ~3.5GB of 10GB (35%)"
 echo "If golgi dies, re-run this script + rsync from sporeGate."
 echo ""
 echo "MAINTENANCE:"
-echo "  - forgejo-reshallow.timer runs monthly to keep repos at depth=1"
+echo "  - forgejo-reshallow.timer runs monthly to keep repos at depth=1 (except sporePrint)"
 echo "  - Full history lives on sporeGate at /opt/forgejo-mirror/"
+echo "  - sporePrint kept as full repo (docs, low churn, cascade fetch needs it)"
 echo "  - Manual re-shallow: forgejo-reshallow"
