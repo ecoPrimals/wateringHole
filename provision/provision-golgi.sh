@@ -56,7 +56,8 @@ apt-get install -y \
     rsync \
     jq \
     sqlite3 \
-    socat
+    socat \
+    zola
 
 echo "=== 2. CREATE USERS + DIRECTORIES ==="
 adduser --system --shell /bin/bash --home /opt/forgejo --group git 2>/dev/null || true

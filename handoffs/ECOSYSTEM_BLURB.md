@@ -125,10 +125,27 @@ Mesh
 ```
 ✅ eastGate   — All repos current. 135b evolution committed.
 ✅ sporeGate  — Depot 100%. Drawbridge configured. NUCLEUS host target.
-✅ golgiBody  — primals.eco LIVE (bearDog TLS). Thin relay.
+⚠️  golgiBody  — primals.eco LIVE but STALE. Site not rebuilding (fix landed — deploy needed).
 ✅ flockGate  — WAN PASS. capability.call retest pending.
 ✅ ironGate   — Current repos. Cascade active.
 🔧 strandGate — Enrollment pending (house 2).
 ```
 
-*Wave 135b: evolution is converging. Debt down, code cleaner. Coordination backend in place. Live site and SHOW_HN are the horizon.*
+---
+
+## DIVERGENCE FOUND: Site Rebuild Pipeline (P1)
+
+**Symptom**: sporeGate team pushes sporePrint content → Forgejo → golgi cascade pulls source → BUT `public/` never regenerates → Caddy serves stale HTML.
+
+**Root cause**: No `zola build` step in golgi's cascade pipeline. The `MEMBRANE_ZOLA_AUTO_BUILD` env var was never configured, and the old code only triggered conditionally. This predates the DNS cutover but became visible when content updates stopped appearing.
+
+**Fix delivered**: cellMembrane now auto-rebuilds sporePrint after cascade if `config.toml` exists in the content dir and `zola` is on PATH. Silent skip on non-content gates. Zero config needed.
+
+**Action required by sporeGate/golgi team**:
+1. Install Zola on golgi: `apt-get install -y zola`
+2. Deploy latest membrane binary (builds from `be276dd+`)
+3. Site will auto-rebuild on next cascade cycle (≤15 min)
+
+See: `handoffs/SITE_REBUILD_FIX_WAVE135B.md`
+
+*Wave 135b: Site rebuild divergence found and fixed in code. Pending deploy to golgi. Debt continues to decrease.*
