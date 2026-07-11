@@ -1,23 +1,21 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-11T01:55:00Z
+# Gate: flockGate | Updated: 2026-07-11T15:55:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-11T02:09:00Z"
-wave = "136a"
+updated = "2026-07-11T15:55:00Z"
+wave = "136b"
 
 [heads]
-primalSpring = "e0593a5"
-wateringHole = "55a3fa53"
-skunkBat = "f9154a8"
+primalSpring = "78ed218"
+wateringHole = "0a7f7a75"
 
 [mesh]
 node_id = "flockgate"
 songbird_version = "0.2.1"
 peers = 2
-peer_addresses = ["10.13.37.1:7700", "10.13.37.2:7700"]
 wireguard_status = "UP"
 icmp_rtt_sporegate_ms = 69
 
@@ -25,33 +23,26 @@ icmp_rtt_sporegate_ms = 69
 status = "PASS — HTTP transport proven. capability.call pending sporeGate env config."
 wan_dispatch_01 = "PASS (transport)"
 http_transport_status = "PASS"
-http_response_code = 200
 capability_call_status = "PENDING — sporeGate needs SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter"
 
 [dispatch_validation.latency_direct_wg]
-samples = 10
-p50_ms = 142
+p50_ms = 131
 p95_ms = 152
 
 [outer_membrane_validation]
 validated_at = "2026-07-11T01:50:00Z"
-primals_eco = "PASS — HSTS preload, X-Frame DENY, nosniff, permissions-policy"
-membrane_primals_eco = "PASS — same headers + H3 alt-svc"
-lab_primals_eco = "PASS — same headers + H3 alt-svc"
-git_primals_eco = "PASS — same headers"
-four_oh_four = "PASS — proper 404 response (not catch-all)"
+all_domains = "PASS — HSTS preload, X-Frame DENY, nosniff, permissions-policy"
+
+[footprint]
+status = "CLONED"
+path = "protists/footPrint"
+source = "git@github.com:protoKarya/footPrint.git"
+blocker = "npm not installed on flockGate — need Node.js toolchain for dev server"
+next_action = "Install Node.js, npm install, verify vite dev server runs"
 
 [primalspring]
 scenarios = 129
 tests = 1102
 failures = 0
 suite_status = "GREEN"
-new_scenario = "s_outer_membrane_posture (Wave 136a — security hardening contract)"
-
-[skunkbat]
-head = "f9154a8"
-tests = 553
-failures = 0
-suite_status = "GREEN"
-delivery = "SKUNY-OM — outer membrane HTTP anomaly detection"
-convergence = "BUILDABLE + RUNNABLE + TOOLCHAIN + CONFIG"
+fix = "protist category + optional forgejo_repo for composition targets"
