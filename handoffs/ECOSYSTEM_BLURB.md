@@ -1,96 +1,81 @@
 # ecoPrimals Ecosystem Blurb — Wave 136b
 
-**Date**: Jul 11, 2026 02:15 EDT | **Wave**: 136b | **From**: eastGate overwatch
-**Posture**: **HARDENED. Outer membrane sprint complete (9/14 exposures closed). ALL 8 GLACIAL CRITERIA CLEAR. skunkBat HTTP detection live. darkforest v3.0 active. Cooling sprint continues — remaining items are defense-in-depth.**
+**Date**: Jul 11, 2026 14:35 EDT | **Wave**: 136b | **From**: eastGate overwatch
+**Posture**: **HARDENED. ALL 8 STADIAL CRITERIA CLEAR. Outer membrane sprint complete (9/14 closed). darkforest v3.0 live scan 25/26 PASS. Cooling sprint continues.**
 
 ---
 
-## Wave 136a Sprint — COMPLETE (Jul 10)
+## Overnight Evolution (since 136b bump)
 
-Full outer membrane hardening sprint delivered across 4 gates in parallel:
+| Repo | Commit | What |
+|------|--------|------|
+| nestGate | `510d66f` | Deep debt sweep: typed errors, thiserror derives, modern idioms across 12 files |
+| primalSpring | `b10aad7` | darkforest v3.0 AAR (Wave 136c): TLS evolution + outer membrane live results, cross-spring parity scorecard updated |
 
-### Exposure Matrix — Closed (9/14)
+Both pulled clean (fast-forward). bearDog stale local revert discarded. **All 20+ repos at HEAD, zero dirty.**
 
-| ID | What | How | Gate |
-|----|------|-----|------|
-| EXP-01 | Security headers | HSTS preload (2yr), X-Frame DENY, nosniff, Permissions-Policy, `-Server` on all 5 Caddy blocks | sporeGate |
-| EXP-02 | 404 catch-all | `handle_errors` with Zola `404.html`, `try_files` SPA fallback removed | sporeGate |
-| EXP-03 | Cert lifecycle | Caddy ACME auto-renewal confirmed for all 5 domains | sporeGate |
-| EXP-04 | Forgejo SSH brute-force | fail2ban: port 2222, maxretry=3, ban 1h (already banning IPs) | sporeGate |
-| EXP-05 | Depot rate-limiting | iptables: 50 new HTTPS conn/10s per source IP | sporeGate |
-| CSP-01 | Content-Security-Policy | `(csp_static)` for Zola, `(csp_proxy)` for Forgejo/lab | sporeGate |
-| AUDIT-01 | Access logs | Caddy JSON → `/var/log/caddy/`, 50MiB roll, 30d | sporeGate |
-| EXP-07a | WireGuard key audit | `wg-key-audit` tool, 90d rotation policy, 4 peers healthy | sporeGate |
-| RF-01 | Cert renewal drill | ACME storage validated, all domain certs confirmed | sporeGate |
+---
 
-### Primal Evolution
+## Wave 136a Sprint — DELIVERED (Jul 10)
+
+### Exposure Matrix — 9/14 Closed
+
+| ID | What | Status |
+|----|------|--------|
+| EXP-01 | Security headers (HSTS, X-Frame, nosniff, Permissions-Policy) | CLOSED |
+| EXP-02 | 404 catch-all → proper `handle_errors` | CLOSED |
+| EXP-03 | Cert lifecycle (Caddy ACME, all 5 domains) | CLOSED |
+| EXP-04 | Forgejo SSH fail2ban (port 2222, 3-try ban) | CLOSED |
+| EXP-05 | Depot rate-limiting (iptables 50 conn/10s) | CLOSED |
+| CSP-01 | Content-Security-Policy (static + proxy policies) | CLOSED |
+| AUDIT-01 | JSON access logs (50MiB roll, 30d) | CLOSED |
+| EXP-07a | WireGuard key audit + 90d rotation policy | CLOSED |
+| RF-01 | Cert renewal drill validated | CLOSED |
+
+### Primal Evolution Absorbed
 
 | Primal | Commit | What |
 |--------|--------|------|
-| skunkBat | `f9154a8` | Outer membrane HTTP anomaly detection: `HttpObservation`, `ThreatType::HttpAnomaly`, `advisory_check_http()`, HTTP metrics. 553 tests. |
-| songBird | `eb4d0bed` | EXP-06: drawbridge auth-gate hardening (bearer tokens, trusted peers, public paths) |
-| cellMembrane | `c1fa85a` | SIGN-01: depot signing pipeline (BLAKE3 + ed25519). Security sprint: fetch verification, headers, cert monitoring. |
-| nestGate | `84a8712d` | Coord handler cleanup |
-| primalSpring | `e0593a5` | `s_outer_membrane_posture` scenario — 129 scenarios, 1102 tests, 0 fail |
-| projectNUCLEUS | `d35df65` | darkforest v3.0 — TLS + outer membrane pen-testing live |
+| skunkBat | `f9154a8` | HTTP anomaly detection: `HttpObservation`, `advisory_check_http()`. 553 tests. |
+| songBird | `eb4d0be` | EXP-06 drawbridge auth-gate hardening (code) |
+| cellMembrane | `c1fa85a` | SIGN-01 signing pipeline + security sprint |
+| nestGate | `510d66f` | Coord handlers + deep debt sweep (thiserror, typed errors) |
+| projectNUCLEUS | `d35df65` | darkforest v3.0 — TLS outer membrane pen-test (25/26 PASS live) |
+| primalSpring | `b10aad7` | `s_outer_membrane_posture` scenario (129 scenarios, 1102 tests) + darkforest AAR |
 
-### Exposure Matrix — Remaining
+### darkforest v3.0 Live Results (primals.eco)
 
-```
-ACCEPTABLE (4): EXP-08 (GitHub shadow), EXP-09 (VPS), EXP-10 (registrar), EXP-11 (AI crawlers)
-THEORETICAL (3): EXP-12 (physical), EXP-13 (BTSP), EXP-14 (darkForest beacon)
-DEFENSE-IN-DEPTH (2):
-  EXP-06  Lab auth-gate — songBird drawbridge auth (code landed, Caddy layer pending)
-  SIGN-01 Cascade output signing — pipeline landed, activation pending
-```
+25/26 checks PASS. One DARK_FOREST (ODN-02: DNSSEC not enabled on `primals.eco` — infrastructure gap, registrar-level). 6 outer modules: tls, http, depot, forge, dns, mesh. 149 Rust tests.
 
 ---
 
-## Glacial Shift — ALL 8 CRITERIA CLEAR
+## Remaining Work — 136b Sprint
 
-Criterion 8 added in Wave 136: outer membrane hardened for public exposure.
-**5/5 sub-criteria now met**: headers, 404, fail2ban, CSP, rate-limiting.
-SIGN-01 and EXP-06 are defense-in-depth, not stadial blockers.
+### HIGH Priority
 
-**The system is now stadial-ready across all criteria.**
+| ID | Task | Owner | Status |
+|----|------|-------|--------|
+| SIGN-01 | Cascade signing activation (deploy ed25519 key + verify in pipeline) | cellMembrane + sporeGate | Code landed, activation pending |
+| EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco` basic_auth or mTLS) | sporeGate | songBird code landed, Caddy wiring pending |
+| SITE-REBUILD | Deploy `content.rebuild` fix to golgi (Zola auto-build after cascade) | sporeGate | Code landed, membrane binary needs redeploy |
+| ODN-02 | DNSSEC on `primals.eco` (registrar-level) | operator | darkforest flagged |
 
----
+### MEDIUM Priority
 
-## Production Architecture (Hardened)
+| ID | Task | Owner | Status |
+|----|------|-------|--------|
+| SKUNY-INGEST | Wire Caddy JSON logs → skunkBat `baseline.observe` | skunkBat team | Logs flowing, ingestion pipeline not wired |
+| DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS | 25/26 PASS, report pending |
+| NESTGATE-DEBT | Continue nestGate deep debt sweep (thiserror landed, more modules to follow) | nestGate team | In progress |
 
-```
-Internet → golgi :443
-  │
-  ├── iptables: 50 new conn/10s per IP
-  │
-  ├── Caddy (ACME TLS, H2+H3, gzip)
-  │   ├── All blocks: security_headers (HSTS, X-Frame, nosniff, -Server)
-  │   │
-  │   ├── primals.eco      (csp_static) → sporePrint (301 pages, 404.html)
-  │   ├── www.primals.eco   → 301 redirect
-  │   ├── membrane.*        (csp_static) → depot + nestGate coordination API
-  │   ├── lab.*             (csp_proxy)  → WG → songBird drawbridge :7780
-  │   ├── git.*             (csp_proxy)  → Forgejo :3000
-  │   └── live.*            (csp_proxy)  → WG → petalTongue :9900
-  │
-  ├── fail2ban: sshd + forgejo-ssh (port 2222, 3-try ban)
-  ├── JSON access logs → /var/log/caddy/ (50MiB × 5, 30d)
-  └── WireGuard :51820 → 4 peers (90d rotation)
+### LOW Priority / Backlog
 
-Mesh: eastGate ↔ golgi ↔ ironGate + southGate | sporeGate ↔ flockGate (WAN)
-```
-
----
-
-## Wave 136b Scope
-
-| ID | Task | Owner | Priority |
-|----|------|-------|----------|
-| SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | HIGH |
-| EXP-06 | Lab auth-gate at Caddy layer (basic_auth or mTLS on lab.primals.eco) | sporeGate | HIGH |
-| SKUNY-INGEST | Wire Caddy JSON logs → skunkBat `baseline.observe` | skunkBat team | MEDIUM |
-| DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS | MEDIUM |
-| SITE-REBUILD | Deploy content.rebuild fix to golgi (Zola auto-build after cascade) | sporeGate | HIGH |
+| ID | Task | Owner |
+|----|------|-------|
+| ALERT-01 | Cert expiry alerting (7d warning via rootPulse) | nestGate |
+| SKUNY-HTTP-IDS | HTTP intrusion heuristics (path enumeration, method confusion) | skunkBat |
+| COORD-ACTIVATE | nestGate coordination backend activation (ingest pipeline + petalTongue dashboard) | nestGate + petalTongue |
+| LIVE-ACTIVATE | `live.primals.eco` petalTongue NUCLEUS hosting | sporeGate |
 
 ---
 
@@ -101,34 +86,26 @@ Mesh: eastGate ↔ golgi ↔ ironGate + southGate | sporeGate ↔ flockGate (WAN
 | primalSpring | 1,102 | 129 | **GREEN** |
 | groundSpring | 1,047+ | — | **GREEN** |
 | skunkBat | 553 | — | **GREEN** |
-
----
-
-## Team Dispatches
-
-| Team | Status | Next |
-|------|--------|------|
-| **sporeGate/golgi** | Sprint complete: 9 exposures closed, infra hardened | SIGN-01 activation, EXP-06 Caddy auth, site rebuild deploy |
-| **skunkBat** | HTTP anomaly detection live (553 tests) | Caddy log ingestion pipeline |
-| **darkforest** | v3.0 outer membrane pen-test active | Execution report |
-| **songBird** | Auth-gate code landed | Caddy integration for lab.primals.eco |
-| **cellMembrane** | SIGN-01 pipeline + content.rebuild landed | Deploy signing keys, deploy rebuilt membrane to golgi |
-| **sporePrint** | 301 pages live, auto-merge from groundSpring | Content evolution continues |
-| **primalSpring** | 1,102 tests, outer membrane scenario landed | SHOW_HN E-category evidence |
-| **nestGate** | Coordination backend operational | Cert expiry alerting (136d) |
+| projectNUCLEUS | 149 | — | **GREEN** (darkforest v3.0) |
 
 ---
 
 ## Gate Convergence
 
 ```
-✅ eastGate    — Overwatch consolidated. All repos current. 136b coordinated.
-✅ sporeGate   — Security hardened (9/14 closed). Depot 100%. Site live.
-✅ golgiBody   — Caddy hardened, certs renewing, fail2ban active, rate-limited.
-✅ flockGate   — WAN PASS. Outer membrane validation confirmed remotely.
-✅ ironGate    — darkforest v3.0 active. Heads published.
-🔧 strandGate  — Enrollment pending (house 2).
-📱 grapheneGate — Pending pepti pull + ADB deploy.
+✅ eastGate     — All 20+ repos at HEAD. Wave 136b coordinated. Zero dirty.
+✅ sporeGate    — Security hardened (9/14 closed). Depot 100%. Site live.
+✅ golgiBody    — Caddy hardened, certs renewing, fail2ban active, rate-limited.
+✅ flockGate    — WAN PASS. Outer membrane validation confirmed remotely.
+✅ ironGate     — darkforest v3.0 active. 25/26 PASS live.
+🔧 strandGate   — Enrollment pending (house 2).
+📱 grapheneGate  — Pending pepti pull + ADB deploy.
 ```
 
-*Wave 136b: Warming event fully contained. ALL 8 stadial criteria clear. Outer membrane hardened. Cooling sprint continues for defense-in-depth. System stable under public observation.*
+---
+
+## Glacial Shift
+
+**ALL 8 CRITERIA CLEAR.** Criterion 8 (outer membrane hardening) now 5/5 sub-criteria met. Remaining SIGN-01 + EXP-06 are defense-in-depth, not stadial blockers.
+
+*Wave 136b: System stable. Overnight evolution absorbed (nestGate debt sweep, darkforest AAR). Cooling sprint continues. No regressions.*

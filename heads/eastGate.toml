@@ -1,15 +1,15 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: eastGate | Updated: 2026-07-11T02:12:00Z
+# Gate: eastGate | Updated: 2026-07-11T14:35:00Z
 #
 # This file is owned exclusively by eastGate. No other gate writes here.
 # Updated automatically after each cascade or manually by overwatch.
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-11T02:12:00Z"
+updated = "2026-07-11T14:35:00Z"
 
 [heads]
-nestGate = "84a8712d5472b1c3f9d397025339b6b4541d152c"
+nestGate = "510d66ffc8e1b6d2ad5aff7f78cd3c17f631b83e"
 petalTongue = "e0f8a6334358a5bc53b0bdffaf1fd39d9e40ef7d"
 bearDog = "ab6fb59952f88d443c75e95c646ac109356ac4e6"
 songBird = "eb4d0bed515bf5a1ed3d646062c6969d489bd5c0"
@@ -23,5 +23,11 @@ sweetGrass = "bfac29311075bbe7a7875a1f267b49c43e0e61cf"
 squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
 sourDough = "406a57575265112106b405d897609a0948520927"
 cellMembrane = "c1fa85a7366fc36aac583706d9871082911298fd"
-primalSpring = "e0593a555f5b10664f799a2bcbac9d1fd435af1d"
-sporePrint = "be39f234d488e0b69d8cbbdab2c72af5baf8d83b"
+primalSpring = "b10aad76ce379a97ececff5da71c1d59fbd56189"
+sporePrint = "d3e84576ac0caa0b2656ba8c58b20c4379ba7486"
+biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
+groundSpring = "bb5489951131bfd97b67690448e966bb04b1575a"
+projectNUCLEUS = "d35df651112156f9977267878a5c49c1cc0d7217"
+wateringHole = "994da0cfb84fb8a3dc0913b750d651a8e15ded81"
+plasmidBin = "e0b20e0a96c5ae947ddb53230a581581ffb4b44c"
+whitePaper = "59db04d8d638bf9d2480b51a3f5d516e23e8dbd3"
