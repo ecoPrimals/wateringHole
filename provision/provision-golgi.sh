@@ -114,24 +114,46 @@ curl -sL "https://caddyserver.com/api/download?os=linux&arch=amd64" -o /opt/memb
 chmod +x /opt/membrane/caddy
 
 cat > /etc/membrane/Caddyfile << 'EOCADDY'
-# Caddy owns :443/:80 for ALL domains — Host-based routing, ACME, HTTP/2.
-# bearDog ACME gateway is preserved on internal port for future sovereign TLS.
+# Membrane Channel 3 — Caddy TLS Surface (Hardened — Wave 136a)
+#
+# Caddy handles :443 for ALL domains (Host-based routing, HTTP/2, ACME).
+# Security headers on all public-facing domains. bearDog ACME on standby.
 {
     email ops@primals.eco
     storage file_system /caddy
 }
 
+# Common security headers
+(security_headers) {
+    header {
+        Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        X-XSS-Protection "0"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        -Server
+    }
+}
+
 # Sovereign public surface — primals.eco (sporePrint Zola site)
 primals.eco {
+    import security_headers
+    encode gzip
+
     handle /lab/spores/* {
         root * /opt/ecoPrimals/sporePrint/spores
         file_server browse
-        try_files {path} {path}/ {path}/index.html
     }
     handle {
         root * /opt/ecoPrimals/sporePrint/public
         file_server
-        try_files {path} {path}/ /index.html
+    }
+
+    handle_errors {
+        rewrite * /404.html
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
     }
 }
 
@@ -141,6 +163,9 @@ www.primals.eco {
 
 # Primary sovereign surface — membrane
 membrane.primals.eco {
+    import security_headers
+    encode gzip
+
     handle /depot/* {
         uri strip_prefix /depot
         root * /opt/ecoPrimals/depot
@@ -158,12 +183,13 @@ membrane.primals.eco {
     handle {
         root * /var/cache/membrane/nestgate
         file_server
-        try_files {path} {path}/ /index.html
     }
 }
 
 # Lab — songBird drawbridge to sporeGate
 lab.primals.eco {
+    import security_headers
+
     reverse_proxy 10.13.37.2:7780 {
         header_up Host {host}
         header_up X-Real-IP {remote_host}
@@ -174,10 +200,15 @@ lab.primals.eco {
 
 # Forgejo — sovereign git forge
 git.primals.eco {
+    import security_headers
+
     reverse_proxy localhost:3000
 }
 
+# Live petalTongue — dynamic sporePrint overlay (sporeGate NUCLEUS)
 live.primals.eco {
+    import security_headers
+
     reverse_proxy 10.13.37.2:9900 {
         header_up Host {host}
         header_up X-Forwarded-Proto {scheme}
@@ -473,6 +504,22 @@ if command -v ufw &>/dev/null; then
     ufw allow 21117/tcp  # RustDesk relay
     ufw --force enable
 fi
+
+echo "=== 9b. FAIL2BAN — FORGEJO SSH HARDENING ==="
+
+cat > /etc/fail2ban/jail.d/forgejo-ssh.conf << 'EOFAIL'
+[forgejo-ssh]
+enabled = true
+port = 2222
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3
+bantime = 3600
+findtime = 600
+backend = systemd
+EOFAIL
+
+systemctl restart fail2ban
 
 echo "=== 10. FORGEJO RE-SHALLOW MAINTENANCE ==="
 
