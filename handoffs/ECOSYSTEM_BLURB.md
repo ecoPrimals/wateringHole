@@ -1,27 +1,28 @@
 # ecoPrimals Ecosystem Blurb — Wave 136b (cascade update)
 
-**Date**: Jul 11, 2026 16:10 EDT | **Wave**: 136b | **From**: eastGate overwatch
-**Posture**: **HARDENED + CONVERGING. ALL 8 STADIAL CRITERIA CLEAR. DNSSEC LIVE.** 3 cascades today. 12 repos evolved. Live threat data discovered (122 attacker IPs, 317 SSH attempts in 7 days). sporePrint dual-checkout divergence found and fixed. primalSpring v0.9.35 (1,104 tests, 132 scenarios). Every orthogonal dimension converging: hardware, topology, infra, LAN/WAN, HPC, security.
+**Date**: Jul 11, 2026 18:30 EDT | **Wave**: 136b | **From**: eastGate overwatch
+**Posture**: **HARDENED + CONVERGED. ALL 8 STADIAL CRITERIA CLEAR. DNSSEC LIVE.** 4 cascades today, 14 repos evolved. DUAL-CHECKOUT resolved. SIGN-01 blockers identified and handed off. darkforest 26/26 clean sweep. footPrint deep debt pass complete (46 tests, AGPL licensed, solver decomposed). flockGate WAN mesh gap surfaced. Every orthogonal dimension converging.
 
 ---
 
 ## Active Sprint — 136b
 
-### Cascade Results (Jul 11 — three cascades)
+### Cascade Results (Jul 11 — four cascades)
 
-12 repos evolved this wave. 0 conflicts. All repos clean and converged.
+14 repos evolved this wave. 0 conflicts. All repos clean and converged.
 
-| Repo | SHA | What Landed |
-|------|-----|-------------|
+| Repo | SHA | Key Evolution |
+|------|-----|---------------|
 | **bearDog** | `cb80ed2` | Hierarchy refactor, monitoring tests, deep debt |
-| **songBird** | `4300d89` | Drawbridge proxy + deep debt (CLI stubs → real probes, -672L) |
-| **nestGate** | `9a46433` | Coord backend + deep debt (self-knowledge, mocks, idiomatic Rust) |
-| **skunkBat** | `d9837a9` | skunky-ingest renamed + RuntimeVerifier wired, config hydration |
-| **cellMembrane** | `6db5055` | SIGN-01 contract + type-safe manifest (GateRole/CascadeSource enums) |
-| **primalSpring** | `d67ab40` | **v0.9.35** — 1,104 tests, 132 scenarios, chacha20 0.11, TOPO-VIS scenario |
-| **petalTongue** | `225e30f` | TOPO-VIS K-Derm topology viz + coord_handlers extraction |
-| **projectNUCLEUS** | `6a81bba` | DF-REPORT + footPrint graph + zombie script fossilization |
-| **wateringHole** | `348df71` | **EXP-06 basicauth on lab.primals.eco** + provision updates |
+| **songBird** | `4300d89` | Drawbridge proxy + CLI stubs → real TCP probes (-672L) |
+| **nestGate** | `9a46433` | Coord backend wired to all RPC + deep debt |
+| **skunkBat** | `d9837a9` | skunky-ingest + RuntimeVerifier + config hydration |
+| **cellMembrane** | `bfb1558` | **DUAL-CHECKOUT fixed** + type-safe manifest + harvest split |
+| **primalSpring** | `fb03030` | **v0.9.35** — 1,104 tests, 132 scenarios, checksums parser fix |
+| **petalTongue** | `225e30f` | TOPO-VIS coord_handlers + K-Derm topology viz |
+| **projectNUCLEUS** | `5e59790` | **26/26 clean sweep** — DNSSEC, K-Derm reaffirmed |
+| **footPrint** | `f258d42` | **Deep debt pass** — 46 tests, AGPL, solver decomposed, ESLint/Vitest |
+| **wateringHole** | `d64d8a9` | EXP-06 + flockGate divergence AAR + SIGN-01 discovery |
 
 ### New AARs from Upstream
 
@@ -98,16 +99,15 @@ SURGE-01 (CDN mirror) **dropped** — Cloudflare IS the CDN. New item: **CF-DATA
 
 | ID | Task | Owner | Priority |
 |----|------|-------|----------|
-| DUAL-CHECKOUT | Consolidate sporePrint to single checkout on golgi (P1 divergence AAR) | sporeGate | **CRITICAL** |
-| TOPO-VIS | sporePrint live topology viz — petalTongue `coord_handlers.rs` landed (`225e30f`) | petalTongue | HIGH |
-| SIGN-01-ACTIVATE | Deploy signing keys — wire contract aligned (`6db5055`), activation pending | cellMembrane + sporeGate | HIGH |
-| SITE-REBUILD-DEPLOY | Redeploy membrane binary to golgi with `content.rebuild` | sporeGate | HIGH |
-| THREAT-ACTIVATE | Feed live threat data (122 IPs, 317 attempts) into skunkBat `baseline.observe` | skunkBat | HIGH |
+| ~~DUAL-CHECKOUT~~ | ~~Consolidate sporePrint to single checkout~~ | cellMembrane | **DONE** (`4ce165a`) — orphan removed, service fixed, membrane redeployed |
+| SIGN-01-ACTIVATE | Deploy signing keys — **3 blockers identified** (see SIGN-01 AAR), handed off to cellMembrane | cellMembrane | HIGH |
+| FP-DEPLOY | Deploy footPrint SPA to golgi — serve at `primals.eco/footprint/` | sporeGate | HIGH |
+| TOPO-VIS | sporePrint live topology viz — petalTongue coord_handlers landed | petalTongue | HIGH |
+| FLOCKGATE-MESH | songBird mesh has **zero peers** from flockGate — port 7700 not reachable on WG overlay | mesh team | HIGH |
+| THREAT-ACTIVATE | Feed live threat data (122 IPs, 317 attempts) into skunkBat `baseline.observe` | skunkBat | MEDIUM |
 | CF-DATA | Cloudflare analytics → skunkBat (outer → inner data flow) | skunkBat | MEDIUM |
 | FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue | MEDIUM |
 | LIVE-ACTIVATE | `live.primals.eco` petalTongue NUCLEUS hosting | sporeGate | MEDIUM |
-| FP-DEPLOY | Deploy footPrint SPA to golgi — serve at `primals.eco/footprint/` | sporeGate | **HIGH** |
-| FP-CLONE | flockGate: clone footPrint, `npm install`, verify dev server | flockGate | MEDIUM |
 
 ---
 
@@ -115,20 +115,20 @@ SURGE-01 (CDN mirror) **dropped** — Cloudflare IS the CDN. New item: **CF-DATA
 
 9/14 exposures closed: security headers (HSTS, CSP, X-Frame, nosniff), 404 fix, fail2ban, depot rate-limiting, JSON access logs, WireGuard key audit, cert renewal drill. All validated live on primals.eco. Full AAR: `handoffs/OUTER_MEMBRANE_HARDENING_AAR_136a.md`.
 
-136b upstream evolution: skunkBat SKUNY-INGEST (`385f66f`), songBird drawbridge proxy (`87b7779`), nestGate coord backend (`b829eb9`), cellMembrane deep debt (`7ddc30b`), bearDog hierarchy refactor (`cb80ed2`), primalSpring protist freshness (`78ed218`), projectNUCLEUS DF-REPORT + footPrint (`5fdc3c9`).
+136b upstream evolution (4 cascades): cellMembrane DUAL-CHECKOUT fix + harvest split (`bfb1558`), projectNUCLEUS 26/26 clean sweep (`5e59790`), primalSpring checksums parser fix (`fb03030`), footPrint deep debt — 46 tests, AGPL, solver decomposed (`f258d42`), flockGate divergence + mesh gap AAR (`d64d8a9`). Earlier: skunkBat skunky-ingest, songBird drawbridge proxy, nestGate coord backend, bearDog hierarchy refactor.
 
 ---
 
 ## Gate Convergence
 
 ```
-eastGate     — Overwatch. All repos at HEAD. 136b coordinated.
-sporeGate    — Hardened (9/14 closed). Depot 100%. Site live.
-golgiBody    — Caddy hardened, fail2ban active, rate-limited.
-flockGate    — WAN PASS. footPrint gate owner. Clone + spin up.
-ironGate     — darkforest v3.0 active. 25/26 PASS live.
-strandGate   — Enrollment pending. REALWORLD: physical access (house 2, cable + power).
-grapheneGate — Pending pepti pull. REALWORLD: USB ADB cable + physical device.
+eastGate     — Overwatch. All 28 repos at HEAD. 4 cascades today. Converged.
+sporeGate    — Hardened. DUAL-CHECKOUT resolved. SIGN-01 handed off.
+golgiBody    — Caddy hardened, fail2ban active, rate-limited. sporePrint consolidated.
+flockGate    — footPrint deep debt complete. WAN mesh gap surfaced (port 7700).
+ironGate     — darkforest v3.0 active. projectNUCLEUS 26/26 clean sweep.
+strandGate   — Enrollment pending. REALWORLD: physical access.
+grapheneGate — Pending pepti pull. REALWORLD: ADB cable.
 ```
 
 ## Operator Task Audit — Agentic vs Realworld
@@ -177,7 +177,8 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 | primalSpring | 1,104 | 132 | GREEN (v0.9.35) |
 | groundSpring | 1,047+ | — | GREEN |
 | skunkBat | 563 | — | GREEN |
-| projectNUCLEUS | 149 | — | GREEN |
+| footPrint | 46 | — | GREEN (Vitest, V8 coverage) |
+| projectNUCLEUS | 149 | — | GREEN (26/26 clean sweep) |
 
 ## Glacial
 
@@ -195,10 +196,13 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 | `SKUNKBAT_OUTER_MEMBRANE_136a.md` | skunkBat HTTP detection spec |
 | `EXTERNAL_REVIEW_RESPONSE_136b.md` | Post-Cloudflare resilience analysis (corrected: CF never removed) |
 | `KDERM_REAFFIRMATION_WAVE136b.md` | K-Derm topology reaffirmation — team responsibilities + DNSSEC path |
-| `SPOREPRINT_DUAL_CHECKOUT_AAR_136b.md` | P1: dual checkout divergence — site 30 commits stale, fix + monitoring |
+| `SPOREPRINT_DUAL_CHECKOUT_AAR_136b.md` | P1: dual checkout divergence — **RESOLVED** by cellMembrane `4ce165a` |
+| `SPOREPRINT_CONSOLIDATION_SIGN01_AAR_136b.md` | DUAL-CHECKOUT resolution + SIGN-01 3-blocker analysis |
+| `FLOCKGATE_DIVERGENCE_TOPOLOGY_AAR_136b.md` | Checksums parser fix + WAN mesh gap (port 7700) |
+| `FOOTPRINT_COMPOSITION_AUDIT_AAR_WAVE136b.md` | Deep debt: 46 tests, AGPL, solver decomposed, ESLint/Vitest |
 | `LIVE_THREAT_DATA_ACTIVATION_AAR_136b.md` | 122 attacker IPs, 317 SSH attempts — real adversarial data for skunkBat |
-| `PRIMALSPRING_V0935_EVOLUTION_136b.md` | v0.9.35: 1,104 tests, 132 scenarios, TOPO-VIS scenario, dep evolution |
+| `PRIMALSPRING_V0935_EVOLUTION_136b.md` | v0.9.35: 1,104 tests, 132 scenarios, checksums parser fix |
 | `SKUNKY_INGEST_136b.md` | skunky-ingest operational spec |
 | `NESTGATE_SESSION106_COORD_ACTIVATE_DEEP_DEBT_JUL11_2026.md` | nestGate coord backend + deep debt AAR |
 
-*Wave 136b: 12 repos evolved across 3 cascades. 6 items closed (ODN-02, EXP-06, SKUNKY-INGEST, COORD-ACTIVATE, DF-REPORT, skuny→skunky rename). P1 sporePrint dual-checkout divergence found and fixed — consolidation needed. Live adversarial data discovered — real threat patterns for skunkBat. 4 HIGH remain (DUAL-CHECKOUT, TOPO-VIS, SIGN-01, SITE-REBUILD). DNSSEC live. K-Derm reaffirmed. Glacial: all 8 clear. Every orthogonal dimension converging.*
+*Wave 136b: 14 repos evolved across 4 cascades. DUAL-CHECKOUT **resolved** (cellMembrane `4ce165a`). SIGN-01 blockers identified and handed off. darkforest 26/26 clean sweep. footPrint deep debt complete (46 tests, AGPL, solver decomposed). flockGate WAN mesh gap surfaced (port 7700). DNSSEC live. K-Derm reaffirmed. Glacial: all 8 clear. 4 HIGH remain (SIGN-01-ACTIVATE, FP-DEPLOY, TOPO-VIS, FLOCKGATE-MESH). Every orthogonal dimension converging.*
