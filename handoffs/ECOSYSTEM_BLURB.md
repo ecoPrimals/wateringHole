@@ -1,35 +1,40 @@
 # ecoPrimals Ecosystem Blurb — Wave 136b (cascade update)
 
-**Date**: Jul 11, 2026 15:00 EDT | **Wave**: 136b | **From**: eastGate overwatch
-**Posture**: **HARDENED + CONVERGING. ALL 8 STADIAL CRITERIA CLEAR. DNSSEC LIVE.** 7 repos evolved upstream. Coordination backend wired. Caddy log tailer landed. Drawbridge proxy allowlist live. K-Derm diderm reaffirmed. footPrint composition target introduced.
+**Date**: Jul 11, 2026 15:30 EDT | **Wave**: 136b | **From**: eastGate overwatch
+**Posture**: **HARDENED + CONVERGING. ALL 8 STADIAL CRITERIA CLEAR. DNSSEC LIVE.** 11 repos evolved this wave (2 cascades). EXP-06 lab auth-gate LIVE. skunky-ingest renamed. SIGN-01 signing contract aligned. petalTongue + primalSpring evolving locally (TOPO-VIS + scenario hardening).
 
 ---
 
 ## Active Sprint — 136b
 
-### Cascade Results (Jul 11 15:00)
+### Cascade Results (Jul 11 — two cascades)
 
-7 repos pulled new upstream evolution. 0 conflicts. 0 dirty repos. All gates converged.
+11 repos evolved this wave across two cascades. 0 conflicts. 2 repos have active local evolution (petalTongue, primalSpring).
 
 | Repo | SHA | What Landed |
 |------|-----|-------------|
 | **bearDog** | `cb80ed2` | Hierarchy refactor, monitoring tests, deep debt reduction |
-| **songBird** | `87b7779` | Drawbridge external proxy allowlist (footPrint composition) |
+| **songBird** | `9e24af5` | Drawbridge proxy allowlist + REMAINING_WORK.md updated |
 | **nestGate** | `b829eb9` | Coordination backend wired to ALL RPC surfaces + thiserror sweep |
-| **skunkBat** | `3600a93` | **SKUNY-INGEST landed** — live Caddy log tailer for behavioral detection |
-| **cellMembrane** | `7ddc30b` | Deep debt: stub implementations, fail-closed sandbox, ELF validation, sovereign drift |
+| **skunkBat** | `67c8784` | skunky-ingest (renamed from skuny) — live Caddy log tailer |
+| **cellMembrane** | `d681466` | SIGN-01 bearDog wire contract aligned (message/base64 + hex decode) |
 | **primalSpring** | `78ed218` | Freshness scenario: protist category + optional forgejo for compositions |
 | **projectNUCLEUS** | `5fdc3c9` | DF-REPORT + footPrint composition target in deploy graph |
+| **wateringHole** | `348df71` | **EXP-06 basicauth on lab.primals.eco** + provision updates |
+
+**Active local evolution** (not yet committed):
+- **petalTongue** (`8528f27` + local): `coord_handlers.rs` (212 lines new) — TOPO-VIS K-Derm topology rendering
+- **primalSpring** (`d79db9b` + local): 27 files — nucleus launcher, scenarios, K-Derm/signing/freshness validation
 
 ### Hardening Status
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
 | ~~ODN-02~~ | ~~DNSSEC on `primals.eco`~~ | operator | **DONE** — CF DNSSEC enabled, DS at Porkbun (keyTag 2371, alg 13) |
-| SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Code landed (`c1fa85a`→`7ddc30b`), activation pending |
-| EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco`) | sporeGate | songBird drawbridge landed (`87b7779`), Caddy wiring pending |
+| SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Wire contract aligned (`d681466`), activation pending |
+| ~~EXP-06~~ | ~~Lab auth-gate at Caddy layer~~ | sporeGate | **DONE** — basicauth on lab.primals.eco (`348df71`). Creds: see sporeGate handoff |
 | SITE-REBUILD | Deploy `content.rebuild` to golgi (Zola auto-build) | sporeGate | Code landed, membrane redeploy needed |
-| ~~SKUNY-INGEST~~ | ~~Caddy JSON logs → skunkBat~~ | skunkBat | **DONE** — crate landed (`3600a93`, +843 lines). **skunkBat team: rename `skuny-ingest` → `skunky-ingest`** (typo in crate name) |
+| ~~SKUNKY-INGEST~~ | ~~Caddy JSON logs → skunkBat~~ | skunkBat | **DONE** — renamed from skuny → skunky (`67c8784`). Live Caddy log tailer operational. |
 | ~~COORD-ACTIVATE~~ | ~~nestGate coordination backend~~ | nestGate | **DONE** — wired to all RPC surfaces (`b829eb9`) |
 | ~~DF-REPORT~~ | ~~darkforest v3.0 outer membrane report~~ | projectNUCLEUS | **DONE** — report + footPrint graph (`5fdc3c9`) |
 
@@ -77,9 +82,8 @@ SURGE-01 (CDN mirror) **dropped** — Cloudflare IS the CDN. New item: **CF-DATA
 
 | ID | Task | Owner | Priority |
 |----|------|-------|----------|
-| TOPO-VIS | sporePrint live topology visualization (petalTongue + nestGate + songBird) | sporePrint + petalTongue | HIGH |
-| SIGN-01-ACTIVATE | Deploy signing keys to sporeGate, activate verify on cascade output | cellMembrane + sporeGate | HIGH |
-| EXP-06-CADDY | Wire songBird drawbridge auth to Caddy `lab.primals.eco` | sporeGate | HIGH |
+| TOPO-VIS | sporePrint live topology visualization — **petalTongue evolving locally** (coord_handlers.rs, 212 lines) | petalTongue | HIGH |
+| SIGN-01-ACTIVATE | Deploy signing keys to sporeGate, activate verify — **wire contract aligned** (`d681466`) | cellMembrane + sporeGate | HIGH |
 | SITE-REBUILD-DEPLOY | Redeploy membrane binary to golgi with `content.rebuild` | sporeGate | HIGH |
 | CF-DATA | Cloudflare analytics → skunkBat `baseline.observe` (outer → inner data flow) | skunkBat | MEDIUM |
 | FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue | MEDIUM |
@@ -173,4 +177,4 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 | `EXTERNAL_REVIEW_RESPONSE_136b.md` | Post-Cloudflare resilience analysis (corrected: CF never removed) |
 | `KDERM_REAFFIRMATION_WAVE136b.md` | K-Derm topology reaffirmation — team responsibilities + DNSSEC path |
 
-*Wave 136b cascade: 7 repos evolved, 3 backlog items closed by upstream teams (SKUNY-INGEST, COORD-ACTIVATE, DF-REPORT). ODN-02 DNSSEC closed by operator. 4 HIGH items remain (TOPO-VIS, SIGN-01, EXP-06, SITE-REBUILD). K-Derm diderm reaffirmed. Defense in depth, not obscurity. Glacial: all 8 criteria clear.*
+*Wave 136b: 11 repos evolved, 5 items closed (ODN-02, EXP-06, SKUNKY-INGEST, COORD-ACTIVATE, DF-REPORT). 3 HIGH remain (TOPO-VIS in progress, SIGN-01 wire contract aligned, SITE-REBUILD pending deploy). petalTongue + primalSpring evolving locally. K-Derm diderm reaffirmed. DNSSEC live. Defense in depth. Glacial: all 8 clear.*
