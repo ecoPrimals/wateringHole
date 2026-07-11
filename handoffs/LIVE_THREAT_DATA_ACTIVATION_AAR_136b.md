@@ -178,7 +178,7 @@ golgi outer membrane
 
 | System | Current state | Activation requirement |
 |--------|--------------|----------------------|
-| skunkBat `baseline.observe` | IPC method works; no data feed | SKUNY-INGEST log tailer |
+| skunkBat `baseline.observe` | Phase 1 code BUILT — `skunky-ingest` crate at `385f66f` | golgi systemd deploy (SKUNY-INGEST log tailer) |
 | skunkBat `HttpObservation` | Data model + profiler dimensions built (136a) | Same tailer, HTTP fields populated |
 | skunkBat `security.advisory` | Method works; always returns Allow | Baseline establishment (≥10 observations) |
 | skunkBat `advisory_check_http()` | Sync advisory path built | HTTP telemetry feed from gateway or tailer |

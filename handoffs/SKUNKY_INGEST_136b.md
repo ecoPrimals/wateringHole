@@ -2,7 +2,7 @@
 
 **Date**: 2026-07-11
 **Gate**: flockGate
-**Commit**: `67c8784` (skunkBat)
+**Commit**: `385f66f` (skunkBat)
 **Binary**: `skunky-ingest`
 **Scope**: Phase 1 of live threat ingestion — Caddy JSON access log → skunkBat behavioral profiler.
 
@@ -10,7 +10,7 @@
 
 ## Delivered
 
-New workspace crate: `crates/skunky-ingest` (843 lines, 10 tests)
+New workspace crate: `crates/skunky-ingest` (826 lines, 10 tests)
 
 | Component | What |
 |-----------|------|
@@ -102,7 +102,7 @@ WantedBy=multi-user.target
 Mock Caddy log (76 lines: 65 scanner probes from `203.0.113.50`, 10 legitimate from `10.13.37.1`, 1 trigger):
 
 ```
-INFO skuny_ingest: [dry-run] would send observation rate=1.0 err_4xx=1.0 paths=1
+INFO skunky_ingest: [dry-run] would send observation rate=1.0 err_4xx=1.0 paths=1
 ```
 
 Scanner IP correctly identified: 100% 4xx error rate, 1 req/sec, single path (`/wp-login.php`).
@@ -118,7 +118,7 @@ Scanner IP correctly identified: 100% 4xx error rate, 1 req/sec, single path (`/
 ## Test Summary
 
 - 10 new tests in `skunky-ingest` (parser, aggregation, flush, cursor, serialization)
-- 566 total workspace tests, 0 failures
+- 563 total workspace tests, 0 failures
 
 ---
 
