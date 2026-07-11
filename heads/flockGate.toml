@@ -5,30 +5,37 @@
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-11T19:56:00Z"
+updated = "2026-07-11T21:30:00Z"
 wave = "136b"
 
 [heads]
-primalSpring = "78ed218"
-wateringHole = "0a7f7a75"
+primalSpring = "d67ab40"
+wateringHole = "44ef51a7"
 skunkBat = "d9837a9"
 
 [mesh]
 node_id = "flockgate"
 songbird_version = "0.2.1"
-peers = 2
+songbird_pid = 2751057
+peers = 0
 wireguard_status = "UP"
-icmp_rtt_sporegate_ms = 69
+wg_peer = "golgiBody (10.13.37.1)"
+icmp_rtt_golgi_ms = 30
+federation_7700_reachable = false
+note = "songBird federation port not exposed on WG interface — mesh peer discovery blocked"
 
 [dispatch_validation]
-status = "PASS — HTTP transport proven. capability.call pending sporeGate env config."
+status = "PASS — HTTP transport proven. capability.call blocked (no mesh peers, federation port closed)."
 wan_dispatch_01 = "PASS (transport)"
 http_transport_status = "PASS"
-capability_call_status = "PENDING — sporeGate needs SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter"
+capability_call_status = "BLOCKED — federation_port 7700 not reachable on WG interface; 0 mesh peers"
+blockers = ["golgi: expose songBird 7700 on 10.13.37.1", "sporeGate: SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter"]
 
-[dispatch_validation.latency_direct_wg]
-p50_ms = 131
-p95_ms = 152
+[dispatch_validation.latency_wan_http]
+p50_ms = 138
+p95_ms = 150
+target = "membrane.primals.eco/depot/"
+samples = 5
 
 [outer_membrane_validation]
 validated_at = "2026-07-11T01:50:00Z"
@@ -44,7 +51,7 @@ vite_version = "6.4.1"
 vite_port = 5174
 dev_server_verified = true
 verified_at = "2026-07-11T17:14:00Z"
-next_action = "Begin composition audit — map Express endpoints to primal absorption targets"
+next_action = "FP-PARITY tracking — petalTongue Phase 1 landed (2d981fd), monitor composition serving"
 
 [skunkbat]
 head = "d9837a9"
@@ -58,8 +65,10 @@ new_crate = "skunky-ingest (843 lines, 10 tests)"
 deep_debt = "RuntimeVerifier wired, 5 test extractions, skunky-ingest thiserror, config hydration, API hygiene"
 
 [primalspring]
-scenarios = 129
-tests = 1102
+version = "v0.9.35"
+scenarios = 132
+tests = 1104
 failures = 0
 suite_status = "GREEN"
-fix = "protist category + optional forgejo_repo for composition targets"
+fix_136b = "checksums.toml parser — handle nested arch-keyed tables (cascade-provenance-match)"
+note = "ECOPRIMALS_ROOT + ECOPRIMALS_PLASMID_BIN required for full depot validation"
