@@ -5,12 +5,13 @@
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-11T01:55:00Z"
+updated = "2026-07-11T02:09:00Z"
 wave = "136a"
 
 [heads]
 primalSpring = "e0593a5"
 wateringHole = "55a3fa53"
+skunkBat = "f9154a8"
 
 [mesh]
 node_id = "flockgate"
@@ -46,3 +47,11 @@ tests = 1102
 failures = 0
 suite_status = "GREEN"
 new_scenario = "s_outer_membrane_posture (Wave 136a — security hardening contract)"
+
+[skunkbat]
+head = "f9154a8"
+tests = 553
+failures = 0
+suite_status = "GREEN"
+delivery = "SKUNY-OM — outer membrane HTTP anomaly detection"
+convergence = "BUILDABLE + RUNNABLE + TOOLCHAIN + CONFIG"
