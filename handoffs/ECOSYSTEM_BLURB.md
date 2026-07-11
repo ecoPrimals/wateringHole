@@ -34,10 +34,22 @@ The Express server disappears — primals absorb backend. Browser frontend (Leaf
 
 **RustScript** (12 Rust safety modules in TypeScript) is evidence FOR pure Rust, not a bridge to it. Added to gen3 thesis as §5.5. Blueprint available for anyone who wants safer TypeScript.
 
+### External Review: Post-Cloudflare Resilience
+
+External reviewer flagged DDoS/traffic-spike risk now that Cloudflare is removed. Key corrections and actions:
+
+- **Not residential**: golgi is a DigitalOcean VPS (NYC1), not a home box. DO provides upstream DDoS mitigation.
+- **lab.primals.eco HTTP**: was EXP-06 timing — Caddy terminates TLS, internal hop is WireGuard-encrypted. CSP + headers now deployed. Auth-gate (EXP-06) still pending.
+- **Real gap**: no CDN edge caching or enterprise DDoS absorption for HN-scale traffic spikes.
+- **Suggestion adopted**: evaluate GitHub Pages as static CDN mirror for sporePrint content (SURGE-01). Outer membrane absorbs spike, sovereign golgi serves live content. Compatible with diderm model.
+
+Full analysis: `handoffs/EXTERNAL_REVIEW_RESPONSE_136b.md`
+
 ### Backlog
 
 | ID | Task | Owner |
 |----|------|-------|
+| SURGE-01 | GitHub Pages as static CDN mirror for HN traffic spike | sporePrint + sporeGate |
 | SKUNY-INGEST | Caddy JSON logs → skunkBat `baseline.observe` | skunkBat |
 | DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS |
 | NESTGATE-DEBT | Deep debt sweep continuation (thiserror landed) | nestGate |
@@ -90,5 +102,6 @@ grapheneGate — Pending pepti pull + ADB deploy.
 | `FRAGO_PROTISTS_CATEGORY_136b.md` | Taxonomy: `protists/` = composition targets |
 | `OUTER_MEMBRANE_HARDENING_AAR_136a.md` | Full 136a security sprint AAR |
 | `SKUNKBAT_OUTER_MEMBRANE_136a.md` | skunkBat HTTP detection spec |
+| `EXTERNAL_REVIEW_RESPONSE_136b.md` | Post-Cloudflare resilience analysis + CDN mirror recommendation |
 
 *Wave 136b: Hardened and stable. footPrint introduced — first composition target. flockGate: clone and spin up. Teams: see your action items above.*
