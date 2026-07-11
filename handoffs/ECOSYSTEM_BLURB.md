@@ -68,20 +68,19 @@ Both pulled clean (fast-forward). bearDog stale local revert discarded. **All 20
 | DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS | 25/26 PASS, report pending |
 | NESTGATE-DEBT | Continue nestGate deep debt sweep (thiserror landed, more modules to follow) | nestGate team | In progress |
 
-### footPrint Protist — Spinning Up (flockGate)
+### footPrint — Primal Composition Target (flockGate)
 
-**New ecosystem layer**: `protists/` — protoKarya org repos, proto-organisms evolving toward primals.
+**New ecosystem layer**: `protists/` — protoKarya org repos. Not proto-primals — proto-compositions. Projects that will be *served by* primals, not *become* primals.
 
 | Item | Detail |
 |------|--------|
-| `protists/footPrint` | GIS home improvement planner (TypeScript/Leaflet/Vite). Cloned from `protoKarya/footPrint`. **Dev server verified** on eastGate (Vite `:5173` + Express `:3000`). Build passes (347 modules, 819KB). Zero TS errors. |
-| Architecture | Full ECS (entity-component-system), command pipeline with undo/redo, Gauss-Newton parametric constraint solver, reactive computation graph, 8 data source integrations (OSM, FEMA, parcels, zoning, USGS, soils, Michigan GIS, infrastructure), intelligence layer (proximity, conflicts, elevation), snap/grid/dimensions/terrain. |
-| RustScript | 12-module zero-dep TypeScript library encoding Rust safety primitives (Result, Option, Owned, RefCell, Iter, Vec, Cow, Channel, Brand, exhaustive). Compile-time + runtime enforcement. AI-translatable to Rust — validates gen3 constrained-evolution thesis. |
-| Gate owner | **flockGate** — WAN-accessible, can reach LAN HPC for compute-heavy operations (DEM processing, batch elevation). Registered in `ecosystem_manifest.toml` (repo 40/40). |
-| petalTongue target | 12 visual capability areas documented (`specs/PETALTONGUE_VISUAL_TARGETS.md`). petalTongue must achieve visual parity with footPrint, then exceed it with sovereign backend (nestGate CAS, rootPulse provenance, mesh federation). |
-| projectNUCLEUS target | footPrint validates the full rendering + data + persistence pipeline. projectNUCLEUS must package this as a deployable composition. The 4-phase evolution: visual parity → backend sovereignty → compute integration → full primal composition. |
+| `protists/footPrint` | GIS home improvement planner (TypeScript/Leaflet/Vite). Built in isolation as a practical tool, now introduced to the ecosystem. **Dev server verified** on eastGate. Build passes (347 modules, 819KB). Zero TS errors. |
+| Architecture | Full ECS, command pipeline with undo/redo, Gauss-Newton constraint solver, reactive graph, 8 data sources (OSM, FEMA, parcels, zoning, USGS, soils, Michigan GIS, infrastructure), intelligence layer, snap/grid/dimensions/terrain. |
+| RustScript | 12-module zero-dep TypeScript library encoding Rust safety primitives. **Not a bridge to Rust — evidence for pure Rust.** Shows that Rust constraints improve any language, but only native compile-time enforcement gives full safety. 3 constraints can't be expressed in TS at all (lifetimes, Send/Sync, zero-cost). 9 require runtime wrappers. This validates why primals are pure Rust. Section added to `CONSTRAINED_EVOLUTION_FORMAL.md` (§5.5). |
+| Gate owner | **flockGate** — WAN-accessible, LAN HPC reach. Registered in `ecosystem_manifest.toml` (repo 40/40). |
+| Composition target | footPrint is NOT a primal. It is a **primal composition**: petalTongue serves the frontend, nestGate provides CAS persistence, songBird proxies data sources. The Express server disappears — primals absorb its backend responsibilities. The browser frontend is the product. |
 
-**Evolution path**: TypeScript validation layer proves patterns → petalTongue absorbs frontend → server logic becomes Rust primal → RustScript becomes native compile-time enforcement. Just as sporePrint serves static content (301 pages), petalTongue will serve interactive tools — footPrint is the first.
+**Evolution**: Express goes away → primals take over backend → footPrint becomes first interactive tool on `live.primals.eco`. Static (sporePrint) and interactive (petalTongue/footPrint) are the twin public faces of the ecosystem. RustScript stays as a blueprint for anyone who wants safer TypeScript — for ecoPrimals, it's the control experiment that proved pure Rust is right.
 
 ### LOW Priority / Backlog
 
