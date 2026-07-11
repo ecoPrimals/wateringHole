@@ -6,6 +6,9 @@
 **Priority**: P1 — live adversarial traffic available now
 **Ref**: `LIVE_THREAT_DATA_ACTIVATION_AAR_136b.md`, `SKUNKBAT_OUTER_MEMBRANE_136a.md`
 
+> **STATUS: CLOSED** — Phase 1 code delivered at `385f66f` (Wave 136b).
+> Crate: `skunky-ingest`. golgi systemd deploy pending.
+
 ---
 
 ## Situation

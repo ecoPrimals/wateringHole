@@ -16,7 +16,7 @@
 | **bearDog** | `cb80ed2` | Hierarchy refactor, monitoring tests, deep debt reduction |
 | **songBird** | `9e24af5` | Drawbridge proxy allowlist + REMAINING_WORK.md updated |
 | **nestGate** | `b829eb9` | Coordination backend wired to ALL RPC surfaces + thiserror sweep |
-| **skunkBat** | `67c8784` | skunky-ingest (renamed from skuny) — live Caddy log tailer |
+| **skunkBat** | `385f66f` | skunky-ingest (renamed from skuny) — live Caddy log tailer |
 | **cellMembrane** | `d681466` | SIGN-01 bearDog wire contract aligned (message/base64 + hex decode) |
 | **primalSpring** | `78ed218` | Freshness scenario: protist category + optional forgejo for compositions |
 | **projectNUCLEUS** | `5fdc3c9` | DF-REPORT + footPrint composition target in deploy graph |
@@ -34,7 +34,7 @@
 | SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Wire contract aligned (`d681466`), activation pending |
 | ~~EXP-06~~ | ~~Lab auth-gate at Caddy layer~~ | sporeGate | **DONE** — basicauth on lab.primals.eco (`348df71`). Creds: see sporeGate handoff |
 | SITE-REBUILD | Deploy `content.rebuild` to golgi (Zola auto-build) | sporeGate | Code landed, membrane redeploy needed |
-| ~~SKUNKY-INGEST~~ | ~~Caddy JSON logs → skunkBat~~ | skunkBat | **DONE** — renamed from skuny → skunky (`67c8784`). Live Caddy log tailer operational. |
+| ~~SKUNKY-INGEST~~ | ~~Caddy JSON logs → skunkBat~~ | skunkBat | **DONE** — code complete, golgi deploy pending (`385f66f`). skunky-ingest crate delivered. |
 | ~~COORD-ACTIVATE~~ | ~~nestGate coordination backend~~ | nestGate | **DONE** — wired to all RPC surfaces (`b829eb9`) |
 | ~~DF-REPORT~~ | ~~darkforest v3.0 outer membrane report~~ | projectNUCLEUS | **DONE** — report + footPrint graph (`5fdc3c9`) |
 
@@ -96,7 +96,7 @@ SURGE-01 (CDN mirror) **dropped** — Cloudflare IS the CDN. New item: **CF-DATA
 
 9/14 exposures closed: security headers (HSTS, CSP, X-Frame, nosniff), 404 fix, fail2ban, depot rate-limiting, JSON access logs, WireGuard key audit, cert renewal drill. All validated live on primals.eco. Full AAR: `handoffs/OUTER_MEMBRANE_HARDENING_AAR_136a.md`.
 
-136b upstream evolution: skunkBat SKUNY-INGEST (`3600a93`), songBird drawbridge proxy (`87b7779`), nestGate coord backend (`b829eb9`), cellMembrane deep debt (`7ddc30b`), bearDog hierarchy refactor (`cb80ed2`), primalSpring protist freshness (`78ed218`), projectNUCLEUS DF-REPORT + footPrint (`5fdc3c9`).
+136b upstream evolution: skunkBat SKUNY-INGEST (`385f66f`), songBird drawbridge proxy (`87b7779`), nestGate coord backend (`b829eb9`), cellMembrane deep debt (`7ddc30b`), bearDog hierarchy refactor (`cb80ed2`), primalSpring protist freshness (`78ed218`), projectNUCLEUS DF-REPORT + footPrint (`5fdc3c9`).
 
 ---
 
@@ -157,7 +157,7 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 |-------|-------|-----------|--------|
 | primalSpring | 1,104 | 132 | GREEN (v0.9.35) |
 | groundSpring | 1,047+ | — | GREEN |
-| skunkBat | 553 | — | GREEN |
+| skunkBat | 563 | — | GREEN |
 | projectNUCLEUS | 149 | — | GREEN |
 
 ## Glacial
