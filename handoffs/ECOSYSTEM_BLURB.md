@@ -29,7 +29,7 @@
 | SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Code landed (`c1fa85a`→`7ddc30b`), activation pending |
 | EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco`) | sporeGate | songBird drawbridge landed (`87b7779`), Caddy wiring pending |
 | SITE-REBUILD | Deploy `content.rebuild` to golgi (Zola auto-build) | sporeGate | Code landed, membrane redeploy needed |
-| ~~SKUNY-INGEST~~ | ~~Caddy JSON logs → skunkBat~~ | skunkBat | **DONE** — `skuny-ingest` crate landed (`3600a93`, +843 lines) |
+| ~~SKUNY-INGEST~~ | ~~Caddy JSON logs → skunkBat~~ | skunkBat | **DONE** — crate landed (`3600a93`, +843 lines). **skunkBat team: rename `skuny-ingest` → `skunky-ingest`** (typo in crate name) |
 | ~~COORD-ACTIVATE~~ | ~~nestGate coordination backend~~ | nestGate | **DONE** — wired to all RPC surfaces (`b829eb9`) |
 | ~~DF-REPORT~~ | ~~darkforest v3.0 outer membrane report~~ | projectNUCLEUS | **DONE** — report + footPrint graph (`5fdc3c9`) |
 
