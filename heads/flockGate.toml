@@ -35,15 +35,15 @@ validated_at = "2026-07-11T01:50:00Z"
 all_domains = "PASS — HSTS preload, X-Frame DENY, nosniff, permissions-policy"
 
 [footprint]
-status = "RUNNING"
+status = "OPERATIONAL"
 path = "protists/footPrint"
 source = "git@github.com:protoKarya/footPrint.git"
-node_version = "v24.18.0"
-npm_version = "11.16.0"
-vite_port = 5173
-express_port = 3000
+node_version = "v22.22.0"
+npm_version = "9.2.0"
+vite_version = "6.4.1"
+vite_port = 5174
 dev_server_verified = true
-dependencies_installed = 276
+verified_at = "2026-07-11T17:14:00Z"
 next_action = "Begin composition audit — map Express endpoints to primal absorption targets"
 
 [skunkbat]
