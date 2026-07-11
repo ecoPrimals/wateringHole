@@ -1,30 +1,35 @@
 # ecoPrimals Ecosystem Blurb — Wave 136b (cascade update)
 
-**Date**: Jul 11, 2026 15:30 EDT | **Wave**: 136b | **From**: eastGate overwatch
-**Posture**: **HARDENED + CONVERGING. ALL 8 STADIAL CRITERIA CLEAR. DNSSEC LIVE.** 11 repos evolved this wave (2 cascades). EXP-06 lab auth-gate LIVE. skunky-ingest renamed. SIGN-01 signing contract aligned. petalTongue + primalSpring evolving locally (TOPO-VIS + scenario hardening).
+**Date**: Jul 11, 2026 16:10 EDT | **Wave**: 136b | **From**: eastGate overwatch
+**Posture**: **HARDENED + CONVERGING. ALL 8 STADIAL CRITERIA CLEAR. DNSSEC LIVE.** 3 cascades today. 12 repos evolved. Live threat data discovered (122 attacker IPs, 317 SSH attempts in 7 days). sporePrint dual-checkout divergence found and fixed. primalSpring v0.9.35 (1,104 tests, 132 scenarios). Every orthogonal dimension converging: hardware, topology, infra, LAN/WAN, HPC, security.
 
 ---
 
 ## Active Sprint — 136b
 
-### Cascade Results (Jul 11 — two cascades)
+### Cascade Results (Jul 11 — three cascades)
 
-11 repos evolved this wave across two cascades. 0 conflicts. 2 repos have active local evolution (petalTongue, primalSpring).
+12 repos evolved this wave. 0 conflicts. All repos clean and converged.
 
 | Repo | SHA | What Landed |
 |------|-----|-------------|
-| **bearDog** | `cb80ed2` | Hierarchy refactor, monitoring tests, deep debt reduction |
-| **songBird** | `9e24af5` | Drawbridge proxy allowlist + REMAINING_WORK.md updated |
-| **nestGate** | `b829eb9` | Coordination backend wired to ALL RPC surfaces + thiserror sweep |
-| **skunkBat** | `385f66f` | skunky-ingest (renamed from skuny) — live Caddy log tailer |
-| **cellMembrane** | `d681466` | SIGN-01 bearDog wire contract aligned (message/base64 + hex decode) |
-| **primalSpring** | `78ed218` | Freshness scenario: protist category + optional forgejo for compositions |
-| **projectNUCLEUS** | `5fdc3c9` | DF-REPORT + footPrint composition target in deploy graph |
+| **bearDog** | `cb80ed2` | Hierarchy refactor, monitoring tests, deep debt |
+| **songBird** | `4300d89` | Drawbridge proxy + deep debt (CLI stubs → real probes, -672L) |
+| **nestGate** | `9a46433` | Coord backend + deep debt (self-knowledge, mocks, idiomatic Rust) |
+| **skunkBat** | `d9837a9` | skunky-ingest renamed + RuntimeVerifier wired, config hydration |
+| **cellMembrane** | `6db5055` | SIGN-01 contract + type-safe manifest (GateRole/CascadeSource enums) |
+| **primalSpring** | `d67ab40` | **v0.9.35** — 1,104 tests, 132 scenarios, chacha20 0.11, TOPO-VIS scenario |
+| **petalTongue** | `225e30f` | TOPO-VIS K-Derm topology viz + coord_handlers extraction |
+| **projectNUCLEUS** | `6a81bba` | DF-REPORT + footPrint graph + zombie script fossilization |
 | **wateringHole** | `348df71` | **EXP-06 basicauth on lab.primals.eco** + provision updates |
 
-**Active local evolution** (not yet committed):
-- **petalTongue** (`8528f27` + local): `coord_handlers.rs` (212 lines new) — TOPO-VIS K-Derm topology rendering
-- **primalSpring** (`d79db9b` + local): 27 files — nucleus launcher, scenarios, K-Derm/signing/freshness validation
+### New AARs from Upstream
+
+**SPOREPRINT_DUAL_CHECKOUT (P1)**: golgi had TWO sporePrint checkouts — Caddy served one, rebuild hook updated the other. Site was **30 commits stale**. Fixed immediately. Requires permanent fix: consolidate to single checkout. guideStone Merkle root recommended as deployment health check. See `SPOREPRINT_DUAL_CHECKOUT_AAR_136b.md`.
+
+**LIVE THREAT DATA**: 122 unique attacker IPs, 317 SSH brute-force attempts in 7 days on golgi. Standard IoT botnet dictionary (admin, ubuntu, postgres, AdminGPON). HTTP scanning detected (wp-login, env probes, phpMyAdmin). fail2ban catching it. This is **real adversarial data** for skunkBat — replaces synthetic seed patterns. See `LIVE_THREAT_DATA_ACTIVATION_AAR_136b.md`.
+
+**PRIMALSPRING v0.9.35**: chacha20poly1305 0.11, TOPO-VIS scenario (#132), all deps current, all pure Rust. See `PRIMALSPRING_V0935_EVOLUTION_136b.md`.
 
 ### Hardening Status
 
@@ -82,10 +87,12 @@ SURGE-01 (CDN mirror) **dropped** — Cloudflare IS the CDN. New item: **CF-DATA
 
 | ID | Task | Owner | Priority |
 |----|------|-------|----------|
-| TOPO-VIS | sporePrint live topology visualization — **petalTongue evolving locally** (coord_handlers.rs, 212 lines) | petalTongue | HIGH |
-| SIGN-01-ACTIVATE | Deploy signing keys to sporeGate, activate verify — **wire contract aligned** (`d681466`) | cellMembrane + sporeGate | HIGH |
+| DUAL-CHECKOUT | Consolidate sporePrint to single checkout on golgi (P1 divergence AAR) | sporeGate | **CRITICAL** |
+| TOPO-VIS | sporePrint live topology viz — petalTongue `coord_handlers.rs` landed (`225e30f`) | petalTongue | HIGH |
+| SIGN-01-ACTIVATE | Deploy signing keys — wire contract aligned (`6db5055`), activation pending | cellMembrane + sporeGate | HIGH |
 | SITE-REBUILD-DEPLOY | Redeploy membrane binary to golgi with `content.rebuild` | sporeGate | HIGH |
-| CF-DATA | Cloudflare analytics → skunkBat `baseline.observe` (outer → inner data flow) | skunkBat | MEDIUM |
+| THREAT-ACTIVATE | Feed live threat data (122 IPs, 317 attempts) into skunkBat `baseline.observe` | skunkBat | HIGH |
+| CF-DATA | Cloudflare analytics → skunkBat (outer → inner data flow) | skunkBat | MEDIUM |
 | FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue | MEDIUM |
 | LIVE-ACTIVATE | `live.primals.eco` petalTongue NUCLEUS hosting | sporeGate | MEDIUM |
 | FP-CLONE | flockGate: clone footPrint, `npm install`, verify dev server | flockGate | MEDIUM |
@@ -176,5 +183,10 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 | `SKUNKBAT_OUTER_MEMBRANE_136a.md` | skunkBat HTTP detection spec |
 | `EXTERNAL_REVIEW_RESPONSE_136b.md` | Post-Cloudflare resilience analysis (corrected: CF never removed) |
 | `KDERM_REAFFIRMATION_WAVE136b.md` | K-Derm topology reaffirmation — team responsibilities + DNSSEC path |
+| `SPOREPRINT_DUAL_CHECKOUT_AAR_136b.md` | P1: dual checkout divergence — site 30 commits stale, fix + monitoring |
+| `LIVE_THREAT_DATA_ACTIVATION_AAR_136b.md` | 122 attacker IPs, 317 SSH attempts — real adversarial data for skunkBat |
+| `PRIMALSPRING_V0935_EVOLUTION_136b.md` | v0.9.35: 1,104 tests, 132 scenarios, TOPO-VIS scenario, dep evolution |
+| `SKUNKY_INGEST_136b.md` | skunky-ingest operational spec |
+| `NESTGATE_SESSION106_COORD_ACTIVATE_DEEP_DEBT_JUL11_2026.md` | nestGate coord backend + deep debt AAR |
 
-*Wave 136b: 11 repos evolved, 5 items closed (ODN-02, EXP-06, SKUNKY-INGEST, COORD-ACTIVATE, DF-REPORT). 3 HIGH remain (TOPO-VIS in progress, SIGN-01 wire contract aligned, SITE-REBUILD pending deploy). petalTongue + primalSpring evolving locally. K-Derm diderm reaffirmed. DNSSEC live. Defense in depth. Glacial: all 8 clear.*
+*Wave 136b: 12 repos evolved across 3 cascades. 6 items closed (ODN-02, EXP-06, SKUNKY-INGEST, COORD-ACTIVATE, DF-REPORT, skuny→skunky rename). P1 sporePrint dual-checkout divergence found and fixed — consolidation needed. Live adversarial data discovered — real threat patterns for skunkBat. 4 HIGH remain (DUAL-CHECKOUT, TOPO-VIS, SIGN-01, SITE-REBUILD). DNSSEC live. K-Derm reaffirmed. Glacial: all 8 clear. Every orthogonal dimension converging.*
