@@ -114,13 +114,22 @@ curl -sL "https://caddyserver.com/api/download?os=linux&arch=amd64" -o /opt/memb
 chmod +x /opt/membrane/caddy
 
 cat > /etc/membrane/Caddyfile << 'EOCADDY'
-# Membrane Channel 3 — Caddy TLS Surface (Hardened — Wave 136a)
+# Membrane Channel 3 — Caddy TLS Surface (Hardened — Wave 136a+)
 #
 # Caddy handles :443 for ALL domains (Host-based routing, HTTP/2, ACME).
-# Security headers on all public-facing domains. bearDog ACME on standby.
+# Security headers + CSP on all public-facing domains.
 {
     email ops@primals.eco
     storage file_system /caddy
+    log {
+        output file /var/log/caddy/access.log {
+            roll_size 50MiB
+            roll_keep 5
+            roll_keep_for 720h
+        }
+        format json
+        level INFO
+    }
 }
 
 # Common security headers
@@ -136,9 +145,20 @@ cat > /etc/membrane/Caddyfile << 'EOCADDY'
     }
 }
 
+# CSP for static Zola site (self-hosted assets + inline search/nav JS)
+(csp_static) {
+    header Content-Security-Policy "default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'none'; frame-ancestors 'none'; base-uri 'self'; manifest-src 'self'"
+}
+
+# CSP for reverse-proxied services (more permissive)
+(csp_proxy) {
+    header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' wss:; frame-ancestors 'none'"
+}
+
 # Sovereign public surface — primals.eco (sporePrint Zola site)
 primals.eco {
     import security_headers
+    import csp_static
     encode gzip
 
     handle /lab/spores/* {
@@ -164,6 +184,7 @@ www.primals.eco {
 # Primary sovereign surface — membrane
 membrane.primals.eco {
     import security_headers
+    import csp_static
     encode gzip
 
     handle /depot/* {
@@ -189,6 +210,7 @@ membrane.primals.eco {
 # Lab — songBird drawbridge to sporeGate
 lab.primals.eco {
     import security_headers
+    import csp_proxy
 
     reverse_proxy 10.13.37.2:7780 {
         header_up Host {host}
@@ -201,6 +223,7 @@ lab.primals.eco {
 # Forgejo — sovereign git forge
 git.primals.eco {
     import security_headers
+    import csp_proxy
 
     reverse_proxy localhost:3000
 }
@@ -208,6 +231,7 @@ git.primals.eco {
 # Live petalTongue — dynamic sporePrint overlay (sporeGate NUCLEUS)
 live.primals.eco {
     import security_headers
+    import csp_proxy
 
     reverse_proxy 10.13.37.2:9900 {
         header_up Host {host}
@@ -520,6 +544,54 @@ backend = systemd
 EOFAIL
 
 systemctl restart fail2ban
+
+echo "=== 9c. HTTPS RATE LIMITING ==="
+
+# Limit new HTTPS connections per IP (50 per 10 seconds)
+iptables -I INPUT 1 -p tcp --dport 443 -m conntrack --ctstate NEW -m recent --name https_flood --set
+iptables -I INPUT 2 -p tcp --dport 443 -m conntrack --ctstate NEW -m recent --name https_flood --update --seconds 10 --hitcount 50 -j DROP
+iptables-save > /etc/iptables.rules 2>/dev/null || true
+
+echo "=== 9d. CADDY ACCESS LOGS ==="
+
+mkdir -p /var/log/caddy
+
+echo "=== 9e. WIREGUARD KEY AUDIT TOOL ==="
+
+cat > /usr/local/bin/wg-key-audit << 'EOWGAUDIT'
+#!/usr/bin/env bash
+set -euo pipefail
+WG_CONF="/etc/wireguard/wg0.conf"
+ROTATION_DAYS=${1:-90}
+NOW=$(date +%s)
+
+echo "=== WireGuard Key Audit (rotation policy: ${ROTATION_DAYS}d) ==="
+echo
+conf_age=$(( (NOW - $(stat -c %Y "$WG_CONF")) / 86400 ))
+echo "Config last modified: ${conf_age}d ago"
+if [ "$conf_age" -gt "$ROTATION_DAYS" ]; then
+    echo "WARNING: Config older than ${ROTATION_DAYS}d — key rotation recommended"
+else
+    echo "OK: Within rotation window"
+fi
+echo
+echo "=== Active Peers ==="
+wg show wg0 dump | tail -n +2 | while IFS=$'\t' read -r pubkey psk endpoint aips handshake rx tx keepalive; do
+    hs_ago="never"
+    if [ "$handshake" != "0" ]; then
+        hs_ago="$(( (NOW - handshake) / 60 ))m ago"
+    fi
+    echo "  ${pubkey:0:20}...  endpoint=${endpoint}  handshake=${hs_ago}"
+done
+echo
+echo "=== Rotation Protocol ==="
+echo "1. Generate new keypair on EACH gate"
+echo "2. Exchange public keys via secure channel (SSH/WireGuard)"
+echo "3. Update configs on all peers simultaneously"
+echo "4. Reload: wg syncconf wg0 <(wg-quick strip wg0)"
+echo "5. Verify all handshakes within 2 minutes"
+EOWGAUDIT
+chmod +x /usr/local/bin/wg-key-audit
 
 echo "=== 10. FORGEJO RE-SHALLOW MAINTENANCE ==="
 
