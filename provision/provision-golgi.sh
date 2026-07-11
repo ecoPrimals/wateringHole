@@ -213,11 +213,15 @@ membrane.primals.eco {
     }
 }
 
-# Lab — songBird drawbridge to sporeGate
+# Lab — songBird drawbridge to sporeGate (EXP-06 auth-gated)
 lab.primals.eco {
     import security_headers
     import csp_proxy
     import access_log
+
+    basicauth {
+        sporegate {CADDY_LAB_BCRYPT_HASH}
+    }
 
     reverse_proxy 10.13.37.2:7780 {
         header_up Host {host}
