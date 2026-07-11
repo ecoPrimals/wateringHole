@@ -14,7 +14,7 @@
 | SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Code landed, activation pending |
 | EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco`) | sporeGate | songBird code landed, Caddy wiring pending |
 | SITE-REBUILD | Deploy `content.rebuild` to golgi (Zola auto-build) | sporeGate | Code landed, membrane redeploy needed |
-| ODN-02 | DNSSEC on `primals.eco` | operator (Cloudflare + Porkbun) | **IN PROGRESS** — enable in CF dashboard, add DS at Porkbun |
+| ~~ODN-02~~ | ~~DNSSEC on `primals.eco`~~ | operator | **DONE** — CF DNSSEC enabled, DS record at Porkbun (keyTag 2371, alg 13, SHA-256) |
 
 ### New: footPrint Composition (flockGate)
 
