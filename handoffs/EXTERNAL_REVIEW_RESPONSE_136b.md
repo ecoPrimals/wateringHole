@@ -117,16 +117,72 @@ The sovereign golgi would serve:
 as an "acceptable" trailing mirror. The suggestion is to make that mirror
 explicitly serve as the CDN front door for traffic spikes.
 
+## The MacGuffin Test: Defense in Depth, Not Obscurity
+
+The reviewer's instinct was to hide behind a CDN. The ecosystem's thesis is the
+opposite: **if the architecture is sound, showing it publicly is validation, not
+vulnerability.** Security through obscurity is the MacGuffin — a plot device
+that has no real substance.
+
+The ecosystem's security model is built on:
+- **Mathematics**: ChaCha20-Poly1305 (bearDog), BLAKE3 content-addressing
+  (rhizoCrypt), ed25519 signing (SIGN-01), formal proofs (gen3 thesis)
+- **Defense in depth**: diderm membranes, WireGuard overlay, fail2ban, CSP,
+  rate limiting, skunkBat anomaly detection — independent layers, each
+  sufficient without the others
+- **Transparency**: 301 pages of published architecture, thesis, lab notebooks.
+  The entire system design is on `primals.eco` for anyone to read.
+
+If we can't show how it works and remain secure, we don't have security — we
+have a MacGuffin. The answer to "what if someone reads the architecture docs
+and attacks us?" should be "then every layer holds independently."
+
+### sporePrint as Live Topology Visualization
+
+This framing elevates sporePrint from a static documentation site to a live
+proof of the system. The evolution target:
+
+```
+sporePrint today:    301 static pages (Zola)
+sporePrint target:   Live topology visualization
+                     — gate status (which gates are online)
+                     — mesh connectivity (WireGuard overlay map)
+                     — membrane layers (inner/outer, what each protects)
+                     — security posture (which exposures are closed)
+                     — wave state (current blurb, recent AARs)
+```
+
+This is the convergence point for:
+- **petalTongue** (dynamic rendering engine)
+- **nestGate coordination backend** (topology data store)
+- **songBird mesh** (live gate status via mesh heartbeats)
+- **footPrint** (GIS visualization tech — same approach applied to network topology)
+
+The live topology visualization IS the security argument. It shows an observer
+exactly how the system works and why each layer holds. This is the opposite of
+the CDN mirror suggestion — instead of hiding behind a CDN, we show the CDN
+is unnecessary because the architecture is self-evident.
+
+### CDN Mirror — Repositioned
+
+The CDN mirror (SURGE-01) remains valid but is repositioned: it's not about
+hiding the sovereign surface, it's about **availability** during traffic
+spikes. The CDN serves a cached copy of the public proof, not a substitute
+for it. The sovereign surface is the authoritative source.
+
 ## Recommended Actions
 
 | ID | Action | Owner | Priority |
 |----|--------|-------|----------|
-| SURGE-01 | Evaluate GitHub Pages as static CDN mirror for sporePrint content | sporePrint + sporeGate | MEDIUM |
+| TOPO-VIS | sporePrint live topology visualization (petalTongue + nestGate + songBird) | sporePrint + petalTongue | HIGH |
+| SURGE-01 | GitHub Pages as availability mirror (cached copy of sporePrint, not a hiding place) | sporePrint + sporeGate | LOW |
 | SURGE-02 | golgi connection capacity test (sustained load, DO bandwidth limits) | sporeGate | LOW |
 | EXP-06 | Lab auth-gate (already tracked) | sporeGate | HIGH |
 
 ---
 
-*External review absorbed. Architecture is sound — reviewer's residential assumption
-was incorrect (VPS, not residential). DDoS absorption gap is real but bounded by VPS
-provider upstream mitigation. CDN mirror suggestion is compatible with diderm model.*
+*External review absorbed as data point. Architecture is sound — reviewer's
+residential assumption was incorrect (VPS, not residential). DDoS gap is real
+but bounded by VPS upstream mitigation. Primary response: defense in depth and
+mathematics, not obscurity. sporePrint evolves to show the live topology as
+proof. If we can't show how it works, it's a MacGuffin.*

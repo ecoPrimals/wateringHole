@@ -34,28 +34,28 @@ The Express server disappears — primals absorb backend. Browser frontend (Leaf
 
 **RustScript** (12 Rust safety modules in TypeScript) is evidence FOR pure Rust, not a bridge to it. Added to gen3 thesis as §5.5. Blueprint available for anyone who wants safer TypeScript.
 
-### External Review: Post-Cloudflare Resilience
+### External Review: Post-Cloudflare Resilience → MacGuffin Test
 
-External reviewer flagged DDoS/traffic-spike risk now that Cloudflare is removed. Key corrections and actions:
+External reviewer flagged DDoS/traffic-spike risk post-Cloudflare. Corrections: golgi is a DO VPS (NYC1), not residential. lab.primals.eco HTTP was timing, now CSP/HSTS deployed. DDoS gap is real but bounded by DO upstream mitigation.
 
-- **Not residential**: golgi is a DigitalOcean VPS (NYC1), not a home box. DO provides upstream DDoS mitigation.
-- **lab.primals.eco HTTP**: was EXP-06 timing — Caddy terminates TLS, internal hop is WireGuard-encrypted. CSP + headers now deployed. Auth-gate (EXP-06) still pending.
-- **Real gap**: no CDN edge caching or enterprise DDoS absorption for HN-scale traffic spikes.
-- **Suggestion adopted**: evaluate GitHub Pages as static CDN mirror for sporePrint content (SURGE-01). Outer membrane absorbs spike, sovereign golgi serves live content. Compatible with diderm model.
+**Our response: defense in depth and mathematics, not obscurity.** If we can't show how the system works and remain secure, we have a MacGuffin, not security. The architecture is built on ChaCha20-Poly1305, BLAKE3, ed25519, diderm membranes, WireGuard overlay, CSP, rate limiting, skunkBat detection — independent layers, each sufficient without the others. 301 pages of published architecture already prove this.
 
-Full analysis: `handoffs/EXTERNAL_REVIEW_RESPONSE_136b.md`
+**The evolution target**: sporePrint becomes a **live topology visualization** — gate status, mesh connectivity, membrane layers, security posture, wave state — rendered by petalTongue from nestGate coordination data and songBird mesh heartbeats. This IS the security argument. Showing how it works is the proof. footPrint GIS visualization tech informs the approach.
+
+CDN mirror (SURGE-01) repositioned: availability during spikes, not a hiding place. Full analysis: `handoffs/EXTERNAL_REVIEW_RESPONSE_136b.md`
 
 ### Backlog
 
-| ID | Task | Owner |
-|----|------|-------|
-| SURGE-01 | GitHub Pages as static CDN mirror for HN traffic spike | sporePrint + sporeGate |
-| SKUNY-INGEST | Caddy JSON logs → skunkBat `baseline.observe` | skunkBat |
-| DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS |
-| NESTGATE-DEBT | Deep debt sweep continuation (thiserror landed) | nestGate |
-| FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue |
-| COORD-ACTIVATE | nestGate coordination backend activation | nestGate + petalTongue |
-| LIVE-ACTIVATE | `live.primals.eco` petalTongue NUCLEUS hosting | sporeGate |
+| ID | Task | Owner | Priority |
+|----|------|-------|----------|
+| TOPO-VIS | sporePrint live topology visualization (petalTongue + nestGate + songBird) | sporePrint + petalTongue | HIGH |
+| SKUNY-INGEST | Caddy JSON logs → skunkBat `baseline.observe` | skunkBat | MEDIUM |
+| DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS | MEDIUM |
+| NESTGATE-DEBT | Deep debt sweep continuation (thiserror landed) | nestGate | MEDIUM |
+| FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue | MEDIUM |
+| COORD-ACTIVATE | nestGate coordination backend activation | nestGate + petalTongue | MEDIUM |
+| LIVE-ACTIVATE | `live.primals.eco` petalTongue NUCLEUS hosting | sporeGate | MEDIUM |
+| SURGE-01 | GitHub Pages as availability mirror (cached sporePrint, not a hiding place) | sporePrint + sporeGate | LOW |
 
 ---
 
@@ -104,4 +104,4 @@ grapheneGate — Pending pepti pull + ADB deploy.
 | `SKUNKBAT_OUTER_MEMBRANE_136a.md` | skunkBat HTTP detection spec |
 | `EXTERNAL_REVIEW_RESPONSE_136b.md` | Post-Cloudflare resilience analysis + CDN mirror recommendation |
 
-*Wave 136b: Hardened and stable. footPrint introduced — first composition target. flockGate: clone and spin up. Teams: see your action items above.*
+*Wave 136b: Hardened and stable. Defense in depth and mathematics, not obscurity. sporePrint evolves to live topology visualization — if we can't show how it works, it's a MacGuffin. footPrint introduced as first composition target. flockGate: clone and spin up. Teams: see action items above.*
