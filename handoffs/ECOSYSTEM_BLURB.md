@@ -59,6 +59,17 @@ footPrint is a GIS home improvement planner built in isolation, now introduced t
 
 The Express server disappears — primals absorb backend. Browser frontend (Leaflet/Turf.js) is the product. Static (sporePrint, 301 pages) and interactive (petalTongue/footPrint) become the twin public faces of the ecosystem.
 
+**FP-DEPLOY: footPrint live on primals.eco** — The SPA is already built (`dist/client/` — index.html + Leaflet/Vite assets). Deployment path for sporeGate:
+
+```
+1. rsync dist/client/ to golgi:/opt/ecoPrimals/footPrint/
+2. Add Caddy block:  handle_path /footprint/* { root * /opt/ecoPrimals/footPrint  file_server }
+3. Proxy /api/* to songBird drawbridge on sporeGate (allowlist: OSM, FEMA, USGS, ArcGIS)
+4. Verify: https://primals.eco/footprint/
+```
+
+This makes footPrint the first live composition target — a real GIS tool served by sovereign infrastructure. The Express server is NOT deployed; API proxy goes through songBird drawbridge (`87b7779` already has the allowlist).
+
 **RustScript** (12 Rust safety modules in TypeScript) is evidence FOR pure Rust, not a bridge to it. Added to gen3 thesis as §5.5. Blueprint available for anyone who wants safer TypeScript.
 
 ### K-Derm Topology Reaffirmed — Cloudflare is the Outer Membrane
@@ -95,6 +106,7 @@ SURGE-01 (CDN mirror) **dropped** — Cloudflare IS the CDN. New item: **CF-DATA
 | CF-DATA | Cloudflare analytics → skunkBat (outer → inner data flow) | skunkBat | MEDIUM |
 | FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue | MEDIUM |
 | LIVE-ACTIVATE | `live.primals.eco` petalTongue NUCLEUS hosting | sporeGate | MEDIUM |
+| FP-DEPLOY | Deploy footPrint SPA to golgi — serve at `primals.eco/footprint/` | sporeGate | **HIGH** |
 | FP-CLONE | flockGate: clone footPrint, `npm install`, verify dev server | flockGate | MEDIUM |
 
 ---
