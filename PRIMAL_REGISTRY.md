@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: July 8, 2026 (Wave 134b — BUILD-DIV-01/02 resolved. 14/14 primals pass `cargo check --all-targets`. VPS-thin on golgi. Multi-builder authority. Mesh auto-distribution LIVE. Pre-push gates on songBird + bearDog.)
+**Last Updated**: June 11, 2026 (Wave 109 — guideStone deployment convergence. 13/13 primals CLEAN, 5-gate mesh LIVE, startup contract 5/6, HEALTH-01 10/13. biomeOS v4.22, sweetGrass v0.7.56, barraCuda v0.4.0, skunkBat v0.2.10, rhizoCrypt v0.14.7, loamSpine v0.9.16. grapheneGate 13/13 deployed. Criterion 7 convergence in progress.)
 
 ---
 
@@ -55,7 +55,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Network orchestration, discovery, and federation  
 **Phase**: Foundation  
-**Status**: Production Ready (S+, 100% BearDog delegation + Pure Rust Tor, 8,929+ tests, 73.41% coverage, 31 crates, ecoBin v3.0, zero-copy relay, WG mesh overlay, multi-tier zero-config mesh init (wg command + config file + mesh-peers.toml — works without root), topology-aware routing + path-optimal dispatch, zero hardcoded names, clippy --all-targets zero warnings — Wave 128 validation + hardening)
+**Status**: Production Ready (S+, 100% BearDog delegation + Pure Rust Tor, 9,969 tests, ~72% coverage, 30 crates, ecoBin v3.0)
 
 **Role**: Songbird is the nervous system of the ecosystem. It handles all network communication - TLS, discovery, NAT traversal, and federation. It is the only primal that speaks to the external network directly; all others route through Songbird when external connectivity is needed.
 
@@ -127,7 +127,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — S328+ (July 6, 2026) — 23,000+ workspace tests (9,175+ lib-only), clippy pedantic clean (zero warnings), all tests passing, **112 JSON-RPC methods** (17 capability groups), **~85%+ line coverage** (target 90%), 100% SPDX AGPL-3.0-or-later headers, zero production files >750L, zero hardcoded cross-primal names, zero production mocks/TODO/FIXME, zero production raw env string literals (`socket_env` SSOT, S321), dispatch hot-path zero-copy optimized, workspace dep drift zero (`bytes`/`ruzstd`/`serialport`/`ndarray` unified S321), Duration dedup (`CPU_USAGE_SAMPLE_WINDOW` + 8 named constants, S321), reagent module split (`capture.rs` + `mmiotrace.rs`, S321), client riboCipher mock fix (12 tests unblocked S322), composition tests graduated (+11 S322), ipc_watch coverage (9 tests S322), mmio/trials test extraction (S322), telemetry wire-contract constants (S322), test extraction complete (method_gate 644→279, job 652→277, shader_dispatch 590→471, S323), submit param split (642→487+174L, S323), cpu_resource resilience extraction (675→536+154L, S323), flaky test fix (background monitoring un-ignored, S323), edge communication coverage (+9 tests, S323), test graduation (6 un-ignored, S324), catalyst watchdog coverage (15 tests, S324), dispatcher mock E2E (7 tests, S324), MMIO split (613→275+179+194L, S324), `capability_registry.toml` authoritative. riboCipher: CLEAR (`0xEC`) + MitoBeacon (`0xED`) accepted; REJECT on unsignalled. gRPC + OpenCL **deleted** (S319). NUCLEUS 13/13 on eastGate (user systemd). BearDog crypto delegation enforced (Node Atomic), capability-based discovery, hw-learn pipeline, nvpmu BAR0→RegisterAccess, SPIR-V codegen safety, FirmwareInventory, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph, TOADSTOOL-AUTO-REGISTER (PCI sysfs GPU/NPU inventory)
+**Status**: Production Ready (A++ GOLD STANDARD) — S155b (March 15, 2026) — 20,843 workspace tests, clippy pedantic clean, all tests passing, 96+ JSON-RPC methods (dynamically built), ~83% line coverage (182K lines instrumented), BearDog crypto delegation enforced (Node Atomic), capability-based discovery, `dev-crypto` feature gate for dev/CI fallback, all files < 1000 lines, `SubstrateCapabilityKind::SovereignCompile` (groundSpring V100 absorption), all hardcoded primal names evolved to `interned_strings::*` constants, hw-learn pipeline (observe/distill/apply/share/status), nvpmu BAR0→RegisterAccess bridge, SPIR-V codegen safety (root-cause rename from nvvm_safety), FirmwareInventory in gpu.info, PrecisionBrain routing, NvkZeroGuard, VRAM-aware workload routing, ProviderRegistry, 6 SpringDomains + HealthSpring, PcieTopologyGraph stability. Key recent: +558 net new tests (12 new integration test files), dependency audit (Pure Rust mandate met), unsafe code audit (all hardware-justified), coverage expansion
 
 **Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
@@ -150,7 +150,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 | **Hardware Learning** | `compute.hardware.*` (observe/distill/apply/share_recipe/status), hw-learn pipeline, `RecipeStore`, `RegisterAccess` trait |
 | **Firmware Inventory** | `FirmwareInventory` (probe/compute_viable/compute_blockers/needs_software_pmu) via nvpmu |
 | **SPIR-V Codegen Safety** | `spirv_codegen_safety` module (`PrecisionBrain`, `NvkZeroGuard`, `HardwareCalibration`), root-cause rename from `nvvm_safety` |
-| **IPC** | 112 JSON-RPC 2.0 methods (17 capability groups), tarpc typed RPC, Unix socket standard |
+| **IPC** | 96+ JSON-RPC 2.0 methods (semantic naming), tarpc typed RPC, Unix socket standard |
 
 **Key principles**: Capability-based discovery (self-knowledge only), ecoBin compliant (pure Rust core), zero hardcoded primal names/ports, all unsafe blocks documented with `// SAFETY:`. Rust 1.82+ MSRV.
 
@@ -219,8 +219,8 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Primal orchestration and ecosystem coordination  
 **Phase**: Foundation  
-**Version**: v4.31  
-**Status**: Production Ready (A++, Security A++ LEGENDARY) — 8,351+ tests, 88% coverage, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, axum 0.8, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. guideStone startup contract SHIPPED. NUCLEUS supervision SHIPPED. TCP-only fallback SHIPPED + ALL ADOPTED. `primal.announce` self-registration. Zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps. riboCipher REJECT enforced. Post-boot topology.rescan for NeuralRouter auto-registration.
+**Version**: v4.22  
+**Status**: Production Ready (A++, Security A++ LEGENDARY) — 7,983+ tests, 26 workspace crates, 43+ deploy graphs, 19 composition graphs, 20 niche templates, 320+ capability translations, 27 capability domains, zero-copy `bytes::Bytes` + `Arc<str>`, Rust 2024 edition, rustix 1.x, clippy pedantic+nursery (0 warnings), `#[expect(reason)]` lint policy, ecoBin v3.0 compliant. NC-1 COMPLETE. guideStone startup contract SHIPPED (Wave 109, `--bind-mode` + HEALTH-01). NUCLEUS supervision SHIPPED (v4.17). TCP-only fallback SHIPPED + ALL ADOPTED. `primal.announce` self-registration. Zero >800L production files, zero unsafe/mocks/TODO in production, zero C deps
 
 **Role**: biomeOS is the orchestration substrate. It discovers primals by their capabilities at runtime, routes requests semantically via the Neural API, composes primals into atomics (Tower, Node, Nest, NUCLEUS), and coordinates higher-order patterns like RootPulse. It is the composer - primals are the instruments.
 
@@ -250,7 +250,7 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Universal User Interface — any computational universe → any modality → any user type  
 **Phase**: Post-NUCLEUS  
-**Status**: Production Ready (A+) — v1.6.6, 18 crates, 360 workspace tests, ~90% coverage, edition 2024, `#![forbid(unsafe_code)]` + `deny(unwrap/expect)`, zero C deps, AGPL-3.0-or-later, 56 IPC methods, 13 DataBinding variants, UUI glossary module, SAME DAVE model, client-side WASM rendering (14 exports), showcase fossilized (Wave 49), gate mesh topology visualization (Wave 116), single AEAD (XChaCha20-Poly1305), feature-gated TUI/UI (Wave 120), legacy renderers removed, GPU compute topology (Wave 124), physical topology API (Wave 128), Flint H1 plasma membrane topology cutover (Wave 128). See [PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md](petaltongue/PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md) for integration gaps
+**Status**: Production Ready (A+) — v1.6.6, 18 crates, 6,321+ tests, ~90% coverage, edition 2024, `#![forbid(unsafe_code)]` + `deny(unwrap/expect)`, zero C deps, AGPL-3.0-or-later, 55 IPC methods, 13 DataBinding variants, UUI glossary module, SAME DAVE model, client-side WASM rendering (14 exports), showcase fossilized (Wave 49). See [PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md](petaltongue/PETALTONGUE_NEEDS_FROM_ECOSYSTEM.md) for integration gaps
 
 **Role**: petalTongue is the Universal User Interface — translating any computational universe into any modality for any user type. It implements a composable **Grammar of Graphics** pipeline: any primal sends a declarative grammar expression (data + variable bindings + scales + geometry + coordinates), and petalTongue compiles it to the best available representation (desktop display, terminal, audio sonification, SVG, PNG, JSON API, haptic, braille). Tufte constraints (data-ink ratio, lie factor, accessibility) are machine-checked on every render. The **SAME DAVE** cognitive model (Sensory Afferent / Motor Efferent) provides bidirectional feedback loops. Heavy computation (statistics, 3D tessellation, physics) is offloaded to barraCuda via capability-based discovery. The grammar is domain-agnostic: the same pipeline renders ecosystem topology, clinical vitals, molecular structures, game worlds, and universe simulations. Accessibility is not a feature — it is the architecture: every modality is a first-class compilation target, serving sighted humans, blind hikers, paraplegic developers, AI agents, and beyond. Live ecosystem wiring enables 60 Hz sensor streaming, interaction broadcast, and Neural API self-registration with biomeOS.
 
@@ -281,8 +281,8 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
-**Version**: 0.14.17  
-**Status**: Production Ready (1,894 tests, 93.7% line coverage, clippy pedantic+nursery clean, Edition 2024, MSRV 1.87, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, AGPL-3.0-or-later + ORC + CC-BY-SA (scyBorg triple-copyleft), UniBin compliant, cargo-deny enforced, `niche.rs` self-knowledge with MCP tools, `capability_registry.toml` (37 methods, 7 domains) + deploy graph, `DagBackend` enum dispatch (redb default), GC sweeper, connect-probe liveness (v1.1.5), capability domain symlinks (v1.3.0), env-configurable operational tuning, adapter-agnostic runtime messaging, zero cross-primal compile deps — sovereign wire types)
+**Version**: 0.14.7  
+**Status**: Production Ready (1,412+ tests, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (16-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools, `capability_registry.toml` (27 methods, 8 domains) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types). **Wave 109 gap**: HEALTH-RC-01 — bare `"health"` response needs `primal`, `version`, `uptime_s` fields
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
@@ -436,7 +436,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S327+ (23,000+ tests / 9,171+ lib, 112 methods, zero-copy dispatch, riboCipher CLEAR+MITO, gRPC/OpenCL deleted, 100% SPDX, env SSOT, hot-path clone elimination, invariant tests, router decomposition, NUCLEUS 13/13 eastGate) |
+| ToadStool | S279+ (23,000+ tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety, FirmwareInventory, PrecisionBrain, PRIMAL_BIND_MODE adopted) |
 | hotSpring | v0.6.32 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch, guideStone L6 CERTIFIED) |
 | groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
@@ -444,7 +444,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.10.0 (911 lib + 311 integration + 61 forge tests, 97 binaries, 87 experiments, 14.3× CPU speedup, 10 MCP tools, Edition 2024) |
 | barraCuda | v0.4.0 (3,348+ tests, 803 shaders, AGPL-3.0-only, startup contract SHIPPED, method.describe 97 methods) |
 | coralReef | Phase 10 Iteration 59 (3,304+ tests, startup contract SHIPPED, tarpc skip on tcp_only) |
-| primalSpring | v0.9.33 Wave 123 (93 experiments, 21 tracks, 1017 tests, 490+ methods, 98 scenarios, 113 graph TOMLs, cross-gate BTSP, metallic bond, parallel graph scenarios. Zero unwrap/expect in prod lib) |
+| primalSpring | v0.9.31 Wave 109 (93 experiments, 21 tracks, 1,000+ tests, 490+ methods, 55 scenarios, 113 graph TOMLs, PlatformCapabilities::detect() SHIPPED, HEALTH-01 schema SHIPPED) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -528,7 +528,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
 **Phase**: Phase 60+ / Interstadial (87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.9.33 Wave 123 — 93 experiments (21 tracks), 1017 tests (980 lib + 16 trio-ops + 21 integration/ignored), 490+ methods, 98 scenarios (11 tracks, 3 tiers), 113 graph TOMLs (~80 deploy + 33 compositions). 5-node WireGuard mesh validated. Cross-gate BTSP, metallic bond, parallel graph scenarios shipped. `unsafe_code = "deny"` workspace-wide. Zero unwrap/expect in production lib. Zero TODO/FIXME/mocks in production
+**Status**: v0.9.31 Wave 67 — 93 experiments (21 tracks), 836 tests (805 lib + 10 integration + 4 binary + 17 doc, 2 ignored), 490+ methods, 58 scenarios (10 tracks, 3 tiers), 113 graph TOMLs (~80 deploy + 33 compositions). Phase 0 P0 blockers CLEARED (Songbird socket fix, biomeOS capability.call, bearDog S4). Phase 1 mesh validation NEXT. `#![forbid(unsafe_code)]` on all crate roots. Zero TODO/FIXME/unsafe/mocks in production
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
 

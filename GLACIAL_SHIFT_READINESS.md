@@ -374,6 +374,7 @@ inner membrane (`primal.eco`) must be fully sovereign; the outer membrane
 | 5 | DNS sovereign for inner membrane | `primal.eco` + `nestgate.io` on knot-dns. `primals.eco` on Cloudflare is acceptable. |
 | 6 | Inner membrane zero-commercial + cross-validation | Zero commercial services in `primal.eco` data path. Dual-path cross-membrane validation operational. |
 | 7 | guideStone-grade deployment across all gates | All NUCLEUS deployments satisfy 5 guideStone properties: deterministic, reference-traceable, self-verifying, environment-agnostic, tolerance-documented. Functionally identical from VPS authority. Standard startup contract, gate profiles, health endpoints, named tolerances. |
+| 8 | Outer membrane hardened for public exposure | Security headers deployed (HSTS, CSP, X-Frame-Options). darkforest v3.0 outer scope PASS. Failover scenarios RF-01–RF-05 validated. Zero CRITICAL exposures. Certificate lifecycle automated. Pen test cadence established. |
 
 **Key change from pre-Wave 77b**: Criterion 6 no longer requires
 Cloudflare removal from the outer membrane. Instead, it requires cross-
@@ -384,7 +385,18 @@ validator for content served by the outer membrane.
 be guideStone-grade — not just "working" but deterministic, traceable, self-verifying,
 environment-agnostic, and tolerance-documented. FRAGO: `wave109-guidestone-deployment-convergence`.
 
-**Current assessment (Wave 133d)**: **ZERO P1. 5-GATE MESH + WAN OVERLAY LIVE** (eastGate↔golgi↔ironGate+southGate + grapheneGate, WireGuard overlay flockGate↔sporeGate). **1098 tests, 125 scenarios, 0 fail** in primalSpring — composition subtypes landed. songBird drawbridge auto-advertisement evolved (coded, tested, pending pepti rebuild). WAN-DISPATCH-01 transport proven (72ms p50 RTT via mesh http.request), capability.call routing unblocked by songBird evolution. sporePrint NUCLEUS deployed on golgi (212 pages). **Criteria 1-7 status: ALL CLEAR for stadial entry.** Operational proof exercises pending: WAN-DISPATCH-01 FULL PASS (post pepti rebuild), strandGate enrollment, grapheneGate 13/13 from fresh pepti. **SHOW_HN publication rubric** (4 categories, 28 criteria) established as external stadial proof event — every S-category criterion maps to an existing stadial criterion or deployment goal.
+**Criterion 8 (Wave 136)**: Added after the warming event (public DNS exposure). Stadial
+criteria 1-7 prove the system *works* internally. Criterion 8 proves it *survives* externally.
+Triggered by: DNS cutover to sovereign Caddy, AI crawler enablement, 301-page sitemap
+indexed. Sprint: `handoffs/SECURITY_EXPOSURE_SPRINT_WAVE136.md`.
+
+**Current assessment (Wave 135b)**: **WARMING EVENT ACTIVE. PUBLIC EXPOSURE ACHIEVED.** DNS cutover complete — `primals.eco` served by sovereign Caddy on golgi (bearDog ACME TLS). 301 pages indexed. AI crawlers explicitly permitted (robots.txt). Site discoverable by search engines and AI systems. Handle registered on HN (silent, organic discovery strategy).
+
+**Criteria 1-7: ALL CLEAR** (unchanged since Wave 111). **Criterion 8: NOT MET** — outer membrane hardening sprint required. 3 CRITICAL exposures identified (no security headers, 404 catch-all masking, cert expiry Aug 13). 4 HIGH exposures (Forgejo SSH, depot rate-limiting, JupyterHub drawbridge auth, WireGuard peer rotation). Sprint plan: `handoffs/SECURITY_EXPOSURE_SPRINT_WAVE136.md`.
+
+**Risk posture**: The system achieved stadial entry in controlled conditions. Public exposure creates thermal stress before all surface hardening is complete. The substrate (inner membrane, mesh, primals) is solid. The outer membrane serving layer has known gaps that must be closed within Wave 136 before external probing discovers them. darkforest v3.0 (outer membrane scope) is the validation gate.
+
+**Previous assessment (Wave 133d)**: ZERO P1. 5-GATE MESH + WAN OVERLAY LIVE (eastGate↔golgi↔ironGate+southGate + grapheneGate, WireGuard overlay flockGate↔sporeGate). 1098 tests, 125 scenarios, 0 fail in primalSpring — composition subtypes landed. songBird drawbridge auto-advertisement evolved (coded, tested, pending pepti rebuild). WAN-DISPATCH-01 transport proven (72ms p50 RTT via mesh http.request), capability.call routing unblocked by songBird evolution. sporePrint NUCLEUS deployed on golgi (212 pages). Criteria 1-7 status: ALL CLEAR for stadial entry. Operational proof exercises pending: WAN-DISPATCH-01 FULL PASS (post pepti rebuild), strandGate enrollment, grapheneGate 13/13 from fresh pepti. SHOW_HN publication rubric (4 categories, 28 criteria) established as external stadial proof event.
 
 **Previous assessment (Wave 111)**: ZERO P1. 5-GATE ECOSYSTEM LIVE (eastGate↔golgiBody↔ironGate+southGate + grapheneGate). ironGate NUCLEUS DEPLOYED (13/13 systemd, benchScale validated). Criterion 7 COMPLETE — guideStone-grade deployment achieved (HEALTH-01 13/13, startup 6/6, deterministic, reference-traceable, self-verifying). riboCipher 9/9 CONVERGED — all primals signal transport intent. Criteria 1-7 status: ALL CLEAR for stadial entry.
 
