@@ -1,20 +1,37 @@
-# ecoPrimals Ecosystem Blurb — Wave 136b
+# ecoPrimals Ecosystem Blurb — Wave 136b (cascade update)
 
-**Date**: Jul 11, 2026 | **Wave**: 136b | **From**: eastGate overwatch
-**Posture**: **HARDENED. ALL 8 STADIAL CRITERIA CLEAR.** Outer membrane sprint complete (9/14 exposures closed). darkforest v3.0 live: 25/26 PASS. footPrint composition target introduced. Cooling sprint continues.
+**Date**: Jul 11, 2026 15:00 EDT | **Wave**: 136b | **From**: eastGate overwatch
+**Posture**: **HARDENED + CONVERGING. ALL 8 STADIAL CRITERIA CLEAR. DNSSEC LIVE.** 7 repos evolved upstream. Coordination backend wired. Caddy log tailer landed. Drawbridge proxy allowlist live. K-Derm diderm reaffirmed. footPrint composition target introduced.
 
 ---
 
 ## Active Sprint — 136b
 
-### Hardening (carry from 136a)
+### Cascade Results (Jul 11 15:00)
+
+7 repos pulled new upstream evolution. 0 conflicts. 0 dirty repos. All gates converged.
+
+| Repo | SHA | What Landed |
+|------|-----|-------------|
+| **bearDog** | `cb80ed2` | Hierarchy refactor, monitoring tests, deep debt reduction |
+| **songBird** | `87b7779` | Drawbridge external proxy allowlist (footPrint composition) |
+| **nestGate** | `b829eb9` | Coordination backend wired to ALL RPC surfaces + thiserror sweep |
+| **skunkBat** | `3600a93` | **SKUNY-INGEST landed** — live Caddy log tailer for behavioral detection |
+| **cellMembrane** | `7ddc30b` | Deep debt: stub implementations, fail-closed sandbox, ELF validation, sovereign drift |
+| **primalSpring** | `78ed218` | Freshness scenario: protist category + optional forgejo for compositions |
+| **projectNUCLEUS** | `5fdc3c9` | DF-REPORT + footPrint composition target in deploy graph |
+
+### Hardening Status
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
-| SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Code landed, activation pending |
-| EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco`) | sporeGate | songBird code landed, Caddy wiring pending |
+| ~~ODN-02~~ | ~~DNSSEC on `primals.eco`~~ | operator | **DONE** — CF DNSSEC enabled, DS at Porkbun (keyTag 2371, alg 13) |
+| SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Code landed (`c1fa85a`→`7ddc30b`), activation pending |
+| EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco`) | sporeGate | songBird drawbridge landed (`87b7779`), Caddy wiring pending |
 | SITE-REBUILD | Deploy `content.rebuild` to golgi (Zola auto-build) | sporeGate | Code landed, membrane redeploy needed |
-| ~~ODN-02~~ | ~~DNSSEC on `primals.eco`~~ | operator | **DONE** — CF DNSSEC enabled, DS record at Porkbun (keyTag 2371, alg 13, SHA-256) |
+| ~~SKUNY-INGEST~~ | ~~Caddy JSON logs → skunkBat~~ | skunkBat | **DONE** — `skuny-ingest` crate landed (`3600a93`, +843 lines) |
+| ~~COORD-ACTIVATE~~ | ~~nestGate coordination backend~~ | nestGate | **DONE** — wired to all RPC surfaces (`b829eb9`) |
+| ~~DF-REPORT~~ | ~~darkforest v3.0 outer membrane report~~ | projectNUCLEUS | **DONE** — report + footPrint graph (`5fdc3c9`) |
 
 ### New: footPrint Composition (flockGate)
 
@@ -56,19 +73,18 @@ SURGE-01 (CDN mirror) **dropped** — Cloudflare IS the CDN. New item: **CF-DATA
 
 **Defense in depth and mathematics, not obscurity.** If we can't show how all K-Derm layers work and remain secure, it's a MacGuffin. sporePrint evolves to live topology visualization — rendering all layers from nestGate data and songBird heartbeats.
 
-### Backlog
+### Remaining Work
 
 | ID | Task | Owner | Priority |
 |----|------|-------|----------|
 | TOPO-VIS | sporePrint live topology visualization (petalTongue + nestGate + songBird) | sporePrint + petalTongue | HIGH |
+| SIGN-01-ACTIVATE | Deploy signing keys to sporeGate, activate verify on cascade output | cellMembrane + sporeGate | HIGH |
+| EXP-06-CADDY | Wire songBird drawbridge auth to Caddy `lab.primals.eco` | sporeGate | HIGH |
+| SITE-REBUILD-DEPLOY | Redeploy membrane binary to golgi with `content.rebuild` | sporeGate | HIGH |
 | CF-DATA | Cloudflare analytics → skunkBat `baseline.observe` (outer → inner data flow) | skunkBat | MEDIUM |
-| SKUNY-INGEST | Caddy JSON logs → skunkBat `baseline.observe` | skunkBat | MEDIUM |
-| DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS | MEDIUM |
-| NESTGATE-DEBT | Deep debt sweep continuation (thiserror landed) | nestGate | MEDIUM |
 | FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue | MEDIUM |
-| COORD-ACTIVATE | nestGate coordination backend activation | nestGate + petalTongue | MEDIUM |
 | LIVE-ACTIVATE | `live.primals.eco` petalTongue NUCLEUS hosting | sporeGate | MEDIUM |
-| ~~SURGE-01~~ | ~~CDN mirror~~ — **REDUNDANT**: Cloudflare outer membrane provides edge caching + DDoS | — | DROPPED |
+| FP-CLONE | flockGate: clone footPrint, `npm install`, verify dev server | flockGate | MEDIUM |
 
 ---
 
@@ -76,7 +92,7 @@ SURGE-01 (CDN mirror) **dropped** — Cloudflare IS the CDN. New item: **CF-DATA
 
 9/14 exposures closed: security headers (HSTS, CSP, X-Frame, nosniff), 404 fix, fail2ban, depot rate-limiting, JSON access logs, WireGuard key audit, cert renewal drill. All validated live on primals.eco. Full AAR: `handoffs/OUTER_MEMBRANE_HARDENING_AAR_136a.md`.
 
-Primal evolution absorbed: skunkBat HTTP anomaly detection (`f9154a8`, 553 tests), songBird auth-gate hardening (`eb4d0be`), cellMembrane SIGN-01 pipeline (`c1fa85a`), nestGate deep debt sweep (`510d66f`), darkforest v3.0 (`d35df65`, 149 tests, 25/26 PASS live), primalSpring outer membrane scenario (`b10aad7`, 1102 tests, 129 scenarios).
+136b upstream evolution: skunkBat SKUNY-INGEST (`3600a93`), songBird drawbridge proxy (`87b7779`), nestGate coord backend (`b829eb9`), cellMembrane deep debt (`7ddc30b`), bearDog hierarchy refactor (`cb80ed2`), primalSpring protist freshness (`78ed218`), projectNUCLEUS DF-REPORT + footPrint (`5fdc3c9`).
 
 ---
 
@@ -102,7 +118,7 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 |------|--------------|------|
 | strandGate enrollment | Physical: cable ethernet, power on, OS install at house 2 | strandGate |
 | grapheneGate pepti deploy | Physical: USB ADB cable to Pixel 8a, `adb push` ecobins | grapheneGate |
-| ODN-02 DNSSEC | Cloudflare dashboard + Porkbun DS record — two web UIs, no API | golgiBody |
+| ~~ODN-02 DNSSEC~~ | ~~Cloudflare + Porkbun~~ — **DONE** (Jul 11) | golgiBody |
 | WireGuard key rotation (EXP-07a) | Key ceremony: generate on gate, exchange out-of-band, verify | mesh team |
 | Network failover drill (RF-02) | Physical cable moves, router config at physical hardware | LAN |
 | northGate/swiftGate/kinGate enrollment | Hardware ready but not deployed — physical setup | various |
@@ -157,4 +173,4 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 | `EXTERNAL_REVIEW_RESPONSE_136b.md` | Post-Cloudflare resilience analysis (corrected: CF never removed) |
 | `KDERM_REAFFIRMATION_WAVE136b.md` | K-Derm topology reaffirmation — team responsibilities + DNSSEC path |
 
-*Wave 136b: Hardened and stable. Defense in depth and mathematics, not obscurity. Operator tasks audited — 6 realworld (physical), 8 already agentic, 6 targeted for agentic evolution. sporePrint evolves to live topology visualization. footPrint introduced as first composition target. flockGate: clone and spin up.*
+*Wave 136b cascade: 7 repos evolved, 3 backlog items closed by upstream teams (SKUNY-INGEST, COORD-ACTIVATE, DF-REPORT). ODN-02 DNSSEC closed by operator. 4 HIGH items remain (TOPO-VIS, SIGN-01, EXP-06, SITE-REBUILD). K-Derm diderm reaffirmed. Defense in depth, not obscurity. Glacial: all 8 criteria clear.*
