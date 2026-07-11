@@ -60,34 +60,47 @@ This was intentional and planned — criterion 8 of the glacial shift. We harden
 the outer membrane (9/14 exposures closed) precisely because we knew we were
 losing Cloudflare's automatic protections.
 
-## What We Have (Post-Cloudflare)
+## Correction: Cloudflare Was Never Removed
 
-| Protection | Cloudflare (was) | Sovereign (now) |
-|-----------|------------------|-----------------|
-| TLS termination | Cloudflare edge | Caddy ACME on golgi |
-| DDoS | Cloudflare (enterprise-grade) | iptables 50 conn/10s per IP (basic) |
-| Edge caching | Cloudflare CDN (global) | None (golgi serves direct) |
-| WAF | Cloudflare (managed rules) | None (skunkBat HTTP anomaly detection, not inline) |
-| Bot management | Cloudflare (managed) | fail2ban on SSH, nothing on HTTP |
-| Security headers | Cloudflare (configured) | Caddy snippets (HSTS, CSP, X-Frame, etc.) |
-| HTTP/3 | Cloudflare | Caddy (H3 alt-svc announced) |
-| Cert management | Cloudflare (automatic) | Caddy ACME (automatic, validated) |
+**Update (2026-07-11)**: Porkbun dashboard confirms `primals.eco` nameservers are
+still `alfie.ns.cloudflare.com` / `serena.ns.cloudflare.com`. Cloudflare was not
+deprecated — it is the **external outer membrane (capsule)** in a three-layer
+diderm topology.
 
-## What We Lost and What Matters
+The "DNS cutover" in Wave 134h changed A records inside Cloudflare to point at
+golgi as the origin server. Cloudflare remains the authoritative DNS and edge
+proxy. This is intentional.
 
-**Lost — matters for HN moment**:
-- Enterprise DDoS absorption (the "hug of death" concern)
-- Global edge caching (latency for non-NYC visitors)
+## Three-Layer Membrane Topology
 
-**Lost — acceptable**:
-- Cloudflare WAF (we have skunkBat + CSP + rate limiting instead)
-- Bot management (robots.txt + fail2ban is sufficient for current scale)
+| Layer | Role | What It Provides |
+|-------|------|-----------------|
+| **Capsule** (Cloudflare) | External outer membrane, managed | DDoS absorption, edge caching, WAF, bot mgmt, global PoPs |
+| **Sovereign outer** (Rust) | Owned outer membrane | bearDog TLS, Caddy (CSP/HSTS/rate-limit), skunkBat HTTP detection, fail2ban |
+| **Inner** (Rust) | Sovereign compute | WireGuard mesh, songBird, nestGate, provenance trio, primals |
 
-**Retained or improved**:
-- TLS (Caddy ACME is as good as Cloudflare for cert management)
-- Security headers (CSP is stricter than what we had on Cloudflare)
-- HTTP/3 (Caddy announces H3 alt-svc)
-- SSH protection (fail2ban is active and already banning)
+Outer membrane data reinforces inner membrane: Cloudflare analytics → skunkBat
+baseline training. The sovereign outer membrane is the evolution target. As it
+achieves parity with Cloudflare's capabilities, the capsule becomes optional —
+defense in depth, not dependency.
+
+Porkbun is the **billboard** (registrar). NS can be redirected from Cloudflare
+to Porkbun (or anywhere) if the capsule needs to be dropped.
+
+## What We Have (Three Layers Active)
+
+| Protection | Capsule (Cloudflare) | Sovereign Outer (Rust) | Inner (Rust) |
+|-----------|---------------------|----------------------|-------------|
+| DDoS | Enterprise-grade | iptables 50 conn/10s | WireGuard (not exposed) |
+| TLS | Edge termination | Caddy ACME on golgi | WireGuard encryption |
+| Caching | Global CDN PoPs | — | — |
+| WAF | Managed rules | skunkBat HTTP anomaly | — |
+| Bot mgmt | Managed | fail2ban (SSH) | — |
+| Headers | — | CSP, HSTS, X-Frame, nosniff | — |
+| Cert mgmt | Automatic | Caddy ACME (automatic) | bearDog ACME |
+
+**Nothing was lost.** The reviewer's concern about DDoS/traffic spikes is moot —
+Cloudflare absorbs them. SURGE-01 (CDN mirror) is **redundant and dropped**.
 
 ## Reviewer's Suggestion: Static CDN Mirror
 
@@ -163,26 +176,26 @@ exactly how the system works and why each layer holds. This is the opposite of
 the CDN mirror suggestion — instead of hiding behind a CDN, we show the CDN
 is unnecessary because the architecture is self-evident.
 
-### CDN Mirror — Repositioned
+### CDN Mirror — DROPPED
 
-The CDN mirror (SURGE-01) remains valid but is repositioned: it's not about
-hiding the sovereign surface, it's about **availability** during traffic
-spikes. The CDN serves a cached copy of the public proof, not a substitute
-for it. The sovereign surface is the authoritative source.
+SURGE-01 (CDN mirror) is **redundant**. Cloudflare IS the CDN. It provides
+enterprise DDoS absorption and global edge caching already. No need for a
+second CDN layer on GitHub Pages.
 
 ## Recommended Actions
 
 | ID | Action | Owner | Priority |
 |----|--------|-------|----------|
+| ODN-02 | DNSSEC: enable in Cloudflare dashboard, add DS record at Porkbun | operator (REALWORLD) | HIGH |
 | TOPO-VIS | sporePrint live topology visualization (petalTongue + nestGate + songBird) | sporePrint + petalTongue | HIGH |
-| SURGE-01 | GitHub Pages as availability mirror (cached copy of sporePrint, not a hiding place) | sporePrint + sporeGate | LOW |
-| SURGE-02 | golgi connection capacity test (sustained load, DO bandwidth limits) | sporeGate | LOW |
 | EXP-06 | Lab auth-gate (already tracked) | sporeGate | HIGH |
+| CF-DATA | Cloudflare analytics → skunkBat baseline.observe (outer → inner data flow) | skunkBat | MEDIUM |
 
 ---
 
-*External review absorbed as data point. Architecture is sound — reviewer's
-residential assumption was incorrect (VPS, not residential). DDoS gap is real
-but bounded by VPS upstream mitigation. Primary response: defense in depth and
-mathematics, not obscurity. sporePrint evolves to show the live topology as
-proof. If we can't show how it works, it's a MacGuffin.*
+*External review absorbed as data point. Reviewer's model was incorrect:
+Cloudflare was never removed — it is the external outer membrane (capsule) in
+a three-layer diderm topology. DDoS/traffic-spike concern is already solved.
+Sovereign outer membrane (Rust) is the evolution target — as it achieves parity,
+the capsule becomes optional. Defense in depth and mathematics, not obscurity.
+If we can't show how all three layers work, it's a MacGuffin.*

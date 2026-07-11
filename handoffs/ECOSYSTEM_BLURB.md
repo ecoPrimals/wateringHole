@@ -14,7 +14,7 @@
 | SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Code landed, activation pending |
 | EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco`) | sporeGate | songBird code landed, Caddy wiring pending |
 | SITE-REBUILD | Deploy `content.rebuild` to golgi (Zola auto-build) | sporeGate | Code landed, membrane redeploy needed |
-| ODN-02 | DNSSEC on `primals.eco` | operator (registrar UI) | **REALWORLD** — registrar web portal, no API |
+| ODN-02 | DNSSEC on `primals.eco` | operator (Cloudflare + Porkbun) | **IN PROGRESS** — enable in CF dashboard, add DS at Porkbun |
 
 ### New: footPrint Composition (flockGate)
 
@@ -34,15 +34,37 @@ The Express server disappears — primals absorb backend. Browser frontend (Leaf
 
 **RustScript** (12 Rust safety modules in TypeScript) is evidence FOR pure Rust, not a bridge to it. Added to gen3 thesis as §5.5. Blueprint available for anyone who wants safer TypeScript.
 
-### External Review: Post-Cloudflare Resilience → MacGuffin Test
+### Membrane Topology Clarification — Three Layers
 
-External reviewer flagged DDoS/traffic-spike risk post-Cloudflare. Corrections: golgi is a DO VPS (NYC1), not residential. lab.primals.eco HTTP was timing, now CSP/HSTS deployed. DDoS gap is real but bounded by DO upstream mitigation.
+The diderm model extends to three concentric layers. Outer membrane data reinforces inner membrane awareness. The sovereign Rust outer membrane is the evolution target — Cloudflare is a managed capsule that can be dropped when sovereign parity is achieved.
 
-**Our response: defense in depth and mathematics, not obscurity.** If we can't show how the system works and remain secure, we have a MacGuffin, not security. The architecture is built on ChaCha20-Poly1305, BLAKE3, ed25519, diderm membranes, WireGuard overlay, CSP, rate limiting, skunkBat detection — independent layers, each sufficient without the others. 301 pages of published architecture already prove this.
+```
+┌─ Capsule: External Outer Membrane (Cloudflare) ─────────────────┐
+│  Managed, non-sovereign. DDoS absorption, edge caching, WAF.   │
+│  NS: alfie/serena.ns.cloudflare.com. Porkbun = billboard.      │
+│  DATA FLOWS INWARD → reinforces sovereign detection.            │
+│                                                                  │
+│  ┌─ Sovereign Outer Membrane (Rust) ─────────────────────────┐  │
+│  │  bearDog TLS, Caddy (CSP/HSTS/rate-limit), skunkBat HTTP  │  │
+│  │  anomaly detection, fail2ban, security headers.            │  │
+│  │  OWNED CODE. Evolution target: parity with Cloudflare.     │  │
+│  │                                                            │  │
+│  │  ┌─ Inner Membrane (Rust) ─────────────────────────────┐  │  │
+│  │  │  WireGuard mesh, songBird federation, nestGate CAS,  │  │  │
+│  │  │  rhizoCrypt DAG, loamSpine ledger, sweetGrass attr.  │  │  │
+│  │  │  Sovereign compute. The organism.                    │  │  │
+│  │  └──────────────────────────────────────────────────────┘  │  │
+│  └────────────────────────────────────────────────────────────┘  │
+└──────────────────────────────────────────────────────────────────┘
+```
 
-**The evolution target**: sporePrint becomes a **live topology visualization** — gate status, mesh connectivity, membrane layers, security posture, wave state — rendered by petalTongue from nestGate coordination data and songBird mesh heartbeats. This IS the security argument. Showing how it works is the proof. footPrint GIS visualization tech informs the approach.
+**Capsule (Cloudflare)**: Absorbs environmental stress. Traffic spikes, DDoS, bot floods hit here first. SURGE-01 (CDN mirror) is redundant — **dropped**. Cloudflare analytics/logs are a data source for skunkBat baseline training.
 
-CDN mirror (SURGE-01) repositioned: availability during spikes, not a hiding place. Full analysis: `handoffs/EXTERNAL_REVIEW_RESPONSE_136b.md`
+**Sovereign outer (Rust)**: The membrane we build. skunkBat HTTP detection, bearDog ACME TLS, Caddy hardening, rate limiting. As this layer achieves parity, Cloudflare becomes optional — defense in depth, not dependency.
+
+**Inner (Rust)**: The organism. Primals, mesh, provenance trio, sovereign compute. Protected by both outer layers independently.
+
+**Defense in depth and mathematics, not obscurity.** If we can't show how all three layers work and remain secure, it's a MacGuffin. 301 pages of published architecture prove this. sporePrint evolves to live topology visualization — rendering all three layers from nestGate data and songBird heartbeats.
 
 ### Backlog
 
@@ -55,7 +77,7 @@ CDN mirror (SURGE-01) repositioned: availability during spikes, not a hiding pla
 | FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue | MEDIUM |
 | COORD-ACTIVATE | nestGate coordination backend activation | nestGate + petalTongue | MEDIUM |
 | LIVE-ACTIVATE | `live.primals.eco` petalTongue NUCLEUS hosting | sporeGate | MEDIUM |
-| SURGE-01 | GitHub Pages as availability mirror (cached sporePrint, not a hiding place) | sporePrint + sporeGate | LOW |
+| ~~SURGE-01~~ | ~~CDN mirror~~ — **REDUNDANT**: Cloudflare outer membrane provides edge caching + DDoS | — | DROPPED |
 
 ---
 
@@ -89,7 +111,7 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 |------|--------------|------|
 | strandGate enrollment | Physical: cable ethernet, power on, OS install at house 2 | strandGate |
 | grapheneGate pepti deploy | Physical: USB ADB cable to Pixel 8a, `adb push` ecobins | grapheneGate |
-| ODN-02 DNSSEC | Registrar web portal (no API) — human clicks in Porkbun/Namecheap UI | golgiBody |
+| ODN-02 DNSSEC | Cloudflare dashboard + Porkbun DS record — two web UIs, no API | golgiBody |
 | WireGuard key rotation (EXP-07a) | Key ceremony: generate on gate, exchange out-of-band, verify | mesh team |
 | Network failover drill (RF-02) | Physical cable moves, router config at physical hardware | LAN |
 | northGate/swiftGate/kinGate enrollment | Hardware ready but not deployed — physical setup | various |
@@ -115,7 +137,7 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 | EXP-06 lab auth-gate | songBird code landed, Caddy config manual | `membrane caddy.configure` or template in provision script — Caddy API supports hot-reload | sporeGate |
 | SITE-REBUILD deploy | membrane binary on golgi needs update | `membrane plasmid.fetch` on golgi pulls new binary, systemd restart — fully agentic path exists | sporeGate |
 | Caddy config changes | Currently SSH + edit Caddyfile | Caddy has a REST API (`/config/`). cellMembrane could manage Caddy config via API calls | cellMembrane |
-| SURGE-01 static mirror | Manual GitHub Pages setup | GitHub Actions workflow: on sporePrint push, build Zola, deploy to gh-pages branch — fully automatable | sporePrint |
+| ~~SURGE-01~~ | ~~Manual GitHub Pages setup~~ | **DROPPED** — Cloudflare outer membrane already handles this | — |
 | RustDesk client config | Manual per-gate change to point at `remote.primals.eco` | cellMembrane `gate.configure` could template RustDesk config at enrollment time | cellMembrane |
 
 ## Tests
