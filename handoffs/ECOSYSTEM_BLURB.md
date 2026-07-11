@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 136b
 
-**Date**: Jul 11, 2026 14:35 EDT | **Wave**: 136b | **From**: eastGate overwatch
-**Posture**: **HARDENED. ALL 8 STADIAL CRITERIA CLEAR. Outer membrane sprint complete (9/14 closed). darkforest v3.0 live scan 25/26 PASS. Cooling sprint continues.**
+**Date**: Jul 11, 2026 15:30 EDT | **Wave**: 136b | **From**: eastGate overwatch
+**Posture**: **HARDENED. ALL 8 STADIAL CRITERIA CLEAR. Outer membrane sprint complete (9/14 closed). darkforest v3.0 live scan 25/26 PASS. footPrint protist spinning up — petalTongue visual parity target established. Cooling sprint continues.**
 
 ---
 
@@ -68,20 +68,28 @@ Both pulled clean (fast-forward). bearDog stale local revert discarded. **All 20
 | DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS | 25/26 PASS, report pending |
 | NESTGATE-DEBT | Continue nestGate deep debt sweep (thiserror landed, more modules to follow) | nestGate team | In progress |
 
-### New: protists/ Directory (protoKarya org)
+### footPrint Protist — Spinning Up (flockGate)
+
+**New ecosystem layer**: `protists/` — protoKarya org repos, proto-organisms evolving toward primals.
 
 | Item | Detail |
 |------|--------|
-| `protists/footPrint` | GIS home improvement planner (TypeScript/Leaflet/Vite). Cloned from `protoKarya/footPrint`. Features: satellite map drawing, property planning, data overlays (FEMA, OSM, parcels, zoning, soils, USGS), parametric constraint solver, ECS architecture. |
-| RustScript | 12-module zero-dep TypeScript library encoding Rust safety primitives (Result, Option, Owned, RefCell, Iter, Vec, Cow, Channel, Brand). Compile-time + runtime enforcement. AI-translatable to Rust. |
-| Evolution path | Proto-project evolving toward primal status. RustScript extractable as `@ecoprimals/rustscript`. GIS capabilities feed land/property intelligence into ecosystem. |
+| `protists/footPrint` | GIS home improvement planner (TypeScript/Leaflet/Vite). Cloned from `protoKarya/footPrint`. **Dev server verified** on eastGate (Vite `:5173` + Express `:3000`). Build passes (347 modules, 819KB). Zero TS errors. |
+| Architecture | Full ECS (entity-component-system), command pipeline with undo/redo, Gauss-Newton parametric constraint solver, reactive computation graph, 8 data source integrations (OSM, FEMA, parcels, zoning, USGS, soils, Michigan GIS, infrastructure), intelligence layer (proximity, conflicts, elevation), snap/grid/dimensions/terrain. |
+| RustScript | 12-module zero-dep TypeScript library encoding Rust safety primitives (Result, Option, Owned, RefCell, Iter, Vec, Cow, Channel, Brand, exhaustive). Compile-time + runtime enforcement. AI-translatable to Rust — validates gen3 constrained-evolution thesis. |
+| Gate owner | **flockGate** — WAN-accessible, can reach LAN HPC for compute-heavy operations (DEM processing, batch elevation). Registered in `ecosystem_manifest.toml` (repo 40/40). |
+| petalTongue target | 12 visual capability areas documented (`specs/PETALTONGUE_VISUAL_TARGETS.md`). petalTongue must achieve visual parity with footPrint, then exceed it with sovereign backend (nestGate CAS, rootPulse provenance, mesh federation). |
+| projectNUCLEUS target | footPrint validates the full rendering + data + persistence pipeline. projectNUCLEUS must package this as a deployable composition. The 4-phase evolution: visual parity → backend sovereignty → compute integration → full primal composition. |
 
-`protists/` is the new top-level directory for **protoKarya** org repos — proto-organisms evolving toward primals. Analogous to `primals/` (ecoPrimals), `gardens/` (syntheticChemistry), `springs/` (experimentation labs).
+**Evolution path**: TypeScript validation layer proves patterns → petalTongue absorbs frontend → server logic becomes Rust primal → RustScript becomes native compile-time enforcement. Just as sporePrint serves static content (301 pages), petalTongue will serve interactive tools — footPrint is the first.
 
 ### LOW Priority / Backlog
 
 | ID | Task | Owner |
 |----|------|-------|
+| FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue + projectNUCLEUS |
+| FP-CAS | footPrint project persistence → nestGate CAS migration | nestGate + petalTongue |
+| FP-MESH | Data source proxying through songBird drawbridge | songBird + footPrint |
 | ALERT-01 | Cert expiry alerting (7d warning via rootPulse) | nestGate |
 | SKUNY-HTTP-IDS | HTTP intrusion heuristics (path enumeration, method confusion) | skunkBat |
 | COORD-ACTIVATE | nestGate coordination backend activation (ingest pipeline + petalTongue dashboard) | nestGate + petalTongue |
@@ -106,7 +114,7 @@ Both pulled clean (fast-forward). bearDog stale local revert discarded. **All 20
 ✅ eastGate     — All 20+ repos at HEAD. Wave 136b coordinated. Zero dirty.
 ✅ sporeGate    — Security hardened (9/14 closed). Depot 100%. Site live.
 ✅ golgiBody    — Caddy hardened, certs renewing, fail2ban active, rate-limited.
-✅ flockGate    — WAN PASS. Outer membrane validation confirmed remotely.
+✅ flockGate    — WAN PASS. Outer membrane validated. footPrint gate owner (protist spinning up).
 ✅ ironGate     — darkforest v3.0 active. 25/26 PASS live.
 🔧 strandGate   — Enrollment pending (house 2).
 📱 grapheneGate  — Pending pepti pull + ADB deploy.
@@ -118,4 +126,18 @@ Both pulled clean (fast-forward). bearDog stale local revert discarded. **All 20
 
 **ALL 8 CRITERIA CLEAR.** Criterion 8 (outer membrane hardening) now 5/5 sub-criteria met. Remaining SIGN-01 + EXP-06 are defense-in-depth, not stadial blockers.
 
-*Wave 136b: System stable. Overnight evolution absorbed (nestGate debt sweep, darkforest AAR). Cooling sprint continues. No regressions.*
+## Team Dispatches
+
+| Team | Status | Next |
+|------|--------|------|
+| **petalTongue** | Coordination backend code landed | footPrint visual parity (12 VT areas) — first interactive tool for `live.primals.eco` |
+| **projectNUCLEUS** | darkforest v3.0 outer membrane 25/26 PASS | footPrint composition packaging, execution report |
+| **sporeGate/golgi** | Sprint complete: 9 exposures closed | SIGN-01 activation, EXP-06 Caddy auth, site rebuild deploy |
+| **flockGate** | WAN validated, footPrint gate owner | footPrint deployment, WAN accessibility for GIS tool |
+| **skunkBat** | HTTP anomaly detection live (553 tests) | Caddy log ingestion pipeline |
+| **songBird** | Auth-gate code landed | drawbridge proxy for footPrint data sources |
+| **cellMembrane** | SIGN-01 pipeline + content.rebuild | Deploy signing keys, deploy rebuilt membrane to golgi |
+| **nestGate** | Coord backend + deep debt sweep | CAS persistence for footPrint projects, cert alerting |
+| **sporePrint** | 301 pages live, auto-merge | Content evolution — static counterpart to petalTongue interactive |
+
+*Wave 136b: System stable. footPrint protist spinning up — petalTongue and projectNUCLEUS now have a concrete visual parity target. Cooling sprint continues. No regressions.*
