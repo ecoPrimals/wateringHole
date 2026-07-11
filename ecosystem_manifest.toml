@@ -865,7 +865,7 @@ repos = [
 # swiftGate — portable Windows/cross-platform target
 [gates.swiftGate]
 target = "x86_64-unknown-linux-musl"
-mobility = "portable"
+mobility = "mobile"
 bind_mode = "tcp_only"
 composition = "subset"
 transport = "lan"
