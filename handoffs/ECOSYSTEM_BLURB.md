@@ -1,151 +1,154 @@
-# ecoPrimals Ecosystem Blurb — Wave 135b
+# ecoPrimals Ecosystem Blurb — Wave 136a
 
-**Date**: Jul 9, 2026 21:44 EDT | **Wave**: 135b | **From**: eastGate overwatch
-**Posture**: **CONVERGING. Multi-primal evolution landed across bearDog, songBird, cellMembrane, sporePrint. Coordination backend delivered (Wave 135a). Debt systematically purged. SHOW_HN readiness advancing.**
+**Date**: Jul 10, 2026 21:38 EDT | **Wave**: 136a | **From**: eastGate overwatch
+**Posture**: **HARDENING. Outer membrane security headers, 404 fix, fail2ban deployed. Cert auto-renewal confirmed. Warming event (public exposure) contained — cooling sprint in progress. Remaining gaps scoped into 136b-d.**
 
 ---
 
-## Wave 135a Delivery (Jul 8–9)
+## Wave 136a Delivery (Jul 10)
+
+### Security Hardening — Outer Membrane (sporeGate)
+
+| Exposure | Fix | Status |
+|----------|-----|--------|
+| **EXP-01** No security headers | `(security_headers)` snippet on all 5 Caddy server blocks: HSTS preload (2yr), X-Frame DENY, nosniff, Permissions-Policy (camera/mic/geo denied), `-Server` | **LIVE** |
+| **EXP-02** 404 catch-all | `handle_errors` with Zola `404.html`, `try_files` removed from all blocks | **LIVE** |
+| **EXP-04** Forgejo SSH brute-force | `fail2ban` jail: port 2222, maxretry=3, ban 1h, findtime 600s | **CONFIGURED** |
+| **EXP-03** Cert lifecycle | Caddy ACME auto-renewal confirmed: `primals.eco` renewed Jul 9 (→Oct 7), `membrane` renews ~Jul 14, `git` ~Jul 27 | **SELF-RESOLVING** |
+
+### Infrastructure Evolution
 
 | Delivered | Details |
 |-----------|---------|
-| nestGate coordination backend | 14 JSON-RPC methods (`coord.*`), 6 HTTP routes (`/coord/*`), CAS-backed, rootPulse-traced |
-| petalTongue coordination dashboard | Wave status, gate heads, FRAGOs/AARs, depot status — reads nestGate CAS directly |
-| `live.primals.eco` routing | Caddy config on golgi → WireGuard → sporeGate petalTongue |
-| Manifest fixes | `[compositions.nest]` + `[gates.westGate].repos` corrected |
+| `ironGate` heads published | Wave 136 — darkforest v3.0 scope, projectNUCLEUS `85a1471`, primalSpring `15394dd` |
+| sporePrint auto-merge | groundSpring lab notebooks (29 experiments) synced to `primals.eco` |
+| Caddy gzip encoding | Enabled on `primals.eco` and `membrane.primals.eco` |
+| HTTP/3 confirmed | `alt-svc: h3=":443"` announced on all public domains |
 
-## Wave 135b Evolution (Jul 9 — this cascade)
+### Test Suite Health
 
-Multi-primal evolution across 6 repos, all on eastGate local:
-
-### bearDog
-- **Gateway simplified**: `bind_gateway_listener` + `start_https_gateway` merged into single `serve_https_gateway` — cleaner lifecycle, bind errors surface at call site
-- **ACME integration tests removed**: 3 flaky TCP integration tests (port races) purged — unit tests remain
-- **Doc comment cleanup**: Removed nested backticks from env key docs
-
-### songBird
-- **BUILD-DIV-01 glue cleaned**: `provided_capabilities()` and `announce_drawbridge_capabilities()` removed — mesh peer discovery now handles capability advertisement via `capabilities.list` introspection, no explicit announce needed
-- **Drawbridge simplified**: Removed absolute-form URI normalization (origin-form sufficient), simplified header cloning and format calls
-- **Test cleanup**: Removed `absolute_form_uri_normalized_to_path` test (code it tested was removed)
-
-### cellMembrane (membrane-shadow)
-- **Zola auto-build removed from cascade**: `should_rebuild_zola` + `run_zola_rebuild` purged — sporePrint builds are handled by the sporePrint team, not by cascade
-- **`is_valid_sha` validation removed**: Over-conservative SHA validation that rejected shallow-clone HEADs (caused truncated zero-tail false positives)
-- **`auto_commit_unified_freshness` removed**: Wrapper that added unnecessary complexity; direct `unify_freshness` call suffices
-- **Freshness simplification**: `auto_commit_gate_heads` return type simplified `Result<bool>` → `Result<()>`, depot freshness uses `nucleus_primals()` instead of per-gate resolution
-- **rootPulse persist simplified**: Removed redundant error warning (file write is best-effort)
-
-### petalTongue
-- **Gate mesh docs updated**: Clarified `ecosystem_manifest.toml` as authoritative source; compile-time constants are offline fallback only
-
-### sporePrint
-- **Template debt purged**: Simplified JSON-LD (removed verbose `@graph`), removed SEO keyword meta tag, removed "Story" nav item and thesis/story sidebar tree sections, simplified mobile nav toggle JS
-
-### sweetGrass
-- 2 committed but unpushed: postgres purge (`v0.7.61`) + Wave 133b pattern hardening — **needs push**
+| Spring | Tests | Result |
+|--------|-------|--------|
+| primalSpring | 1,101 | **0 fail** |
+| groundSpring | 1,047+ | **0 fail** |
 
 ---
 
-## Production Architecture
+## Remaining Gaps — Wave 136b-d Sprint (4-week timeline)
+
+### Wave 136b — Hardening Continuation (Week 1-2)
+
+| ID | Task | Owner | Priority |
+|----|------|-------|----------|
+| EXP-05 | Depot rate-limiting (abuse throttle on binary fetch) | sporeGate/golgi | HIGH |
+| CSP-01 | Content-Security-Policy header for static sites | sporeGate/golgi | MEDIUM |
+| EXP-07a | WireGuard peer key rotation policy (90-day cycle) | mesh team | HIGH |
+| SIGN-01 | Code/content signing on cascade output (BLAKE3 + ed25519) | cellMembrane | HIGH |
+
+### Wave 136c — Resilience & Pen Testing (Week 2-3)
+
+| ID | Task | Owner | Priority |
+|----|------|-------|----------|
+| DF-3.0 | `darkforest` v3.0 — outer membrane scope expansion | projectNUCLEUS | MEDIUM |
+| RF-01 | Cert revocation drill (Caddy failover to bearDog) | sporeGate | MEDIUM |
+| RF-02 | WireGuard hub failover (golgi → ironGate promotion) | mesh team | MEDIUM |
+| RF-03 | Forgejo corruption recovery (re-shallow + depot rebuild) | sporeGate | MEDIUM |
+| EXP-06 | Lab auth-gate hardening (songBird drawbridge) | songBird team | HIGH |
+
+### Wave 136d — Monitoring & Detection (Week 3-4)
+
+| ID | Task | Owner | Priority |
+|----|------|-------|----------|
+| SKUNY-OM | `skunkBat` outer membrane extension (HTTP anomaly detection) | skunkBat team | MEDIUM |
+| EXP-07b | Overlay IDS (WireGuard peer anomaly detection) | mesh team | MEDIUM |
+| AUDIT-01 | Caddy access log → structured audit trail | sporeGate | LOW |
+| ALERT-01 | Cert expiry alerting (7-day warning via rootPulse) | nestGate | LOW |
+
+---
+
+## Production Architecture (Post-Hardening)
 
 ```
-primals.eco (LIVE — sovereign)
-  :443 → bearDog ACME TLS → Caddy :8091 → sporePrint static (Zola)
-  :80  → bearDog HTTP-01 + redirect
+primals.eco (LIVE — sovereign, hardened)
+  :443 → Caddy (ACME TLS, H2+H3, security_headers)
+       → sporePrint static (Zola, 301 pages)
+       → proper 404 (no catch-all)
 
-Subdomains (:8443 Caddy)
-  membrane.primals.eco → nestGate depot + coordination API
-  git.primals.eco      → Forgejo
+Subdomains (all hardened — same security_headers snippet)
+  membrane.primals.eco → depot + nestGate coordination API
+  git.primals.eco      → Forgejo (fail2ban on SSH:2222)
   lab.primals.eco      → sporeGate songBird drawbridge
+  live.primals.eco     → petalTongue NUCLEUS (not yet active)
 
-Planned
-  live.primals.eco → golgi bearDog → WG → sporeGate petalTongue (NUCLEUS)
-
-Mesh
-  sporeGate ↔ flockGate (WireGuard, 142ms)
+Mesh (4-gate collective)
   eastGate ↔ golgi ↔ ironGate + southGate (covalent, <1ms)
+  sporeGate ↔ flockGate (WireGuard, 142ms)
 ```
 
 ---
 
-## Remaining Work (Wave 135+)
+## Exposure Triage Summary
 
-### P1 — Live Site & Coordination
-| Task | Owner | Status |
-|------|-------|--------|
-| `live.primals.eco` DNS + Caddy activation | sporeGate/golgi team | Handoff ready (LIVE_PRIMALS_ECO_ROUTING_WAVE135.md) |
-| petalTongue NUCLEUS: serve static content parity | petalTongue team | Dashboard exists, content rendering needed |
-| nestGate `coord.ingest` pipeline activation | nestGate team | Code landed, needs wateringHole artifacts ingested |
-| rootPulse provenance trio full integration | nestGate + rhizoCrypt/loamSpine/sweetGrass | Placeholders in coord.ingest |
+```
+PATCHED:     EXP-01, EXP-02, EXP-03 (auto), EXP-04
+QUEUED:      EXP-05, EXP-06, EXP-07, CSP-01, SIGN-01
+ACCEPTABLE:  EXP-08 (GitHub trailing shadow), EXP-09 (VPS provider risk),
+             EXP-10 (registrar — DNSSEC mitigates), EXP-11 (AI crawlers — intentional)
+THEORETICAL: EXP-12, EXP-13, EXP-14 (physical/crypto — defense exists)
+```
 
-### P2 — Cert & Security
-| Task | Owner | Status |
-|------|-------|--------|
-| bearDog cert consolidation (Host-header routing) | bearDog team | Before Aug 13 cert expiry |
-| bearDog gatehouse on golgi (long-term sovereign TLS) | sporeGate/golgi team | After cert consolidation |
+---
 
-### P3 — Mesh & Topology
-| Task | Owner | Status |
-|------|-------|--------|
-| `capability.call` FULL PASS | flockGate | sporeGate drawbridge configured; retest |
-| strandGate enrollment | hardware team | Pending physical access (house 2) |
-| grapheneGate: pull from pepti + ADB deploy + mesh.init | grapheneGate team | Pending |
-| Dark-forest re-enable | all gates | After all LAN peers have bearDog |
+## Site Content — primals.eco
 
-### P4 — SHOW_HN
-| Category | Status |
-|----------|--------|
-| S-6 (pepti current) | Done |
-| S-8 (cross-gate dispatch) | Retest pending |
-| S-10 (sporePrint sovereign) | Done |
-| E-1 through E-7 (evidence) | In progress (primalSpring) |
-| N-1 through N-6 (narrative) | Not started |
-| O-1 (karma buildup) | 3-6 month window active |
+| Section | Pages | Notes |
+|---------|-------|-------|
+| Philosophy | 14 | Incl. bibliography, atlasHugged stories |
+| Thesis | 17 | Full 16-chapter academic work + references |
+| Architecture | 24 | K-Derm, mesh, deployment, renvois |
+| Lab | 34 | 29 experiments + 5 synthesis notebooks |
+| Story | 3 | Builder narratives |
+| Springs | 8 | Per-spring profiles |
+| Technical | 8 | Deep-dives (GPU, neuro, sovereign) |
+| Audience | 6 | Faculty, students, hardware, compliance |
+| Guidestone | 5 | Verification artifacts |
+| **Total** | **301** | All rendering properly, SEO-aligned titles |
 
 ---
 
 ## Team Dispatches
 
-| Team | Wave 135b Work |
-|------|----------------|
-| **bearDog** | Gateway evolution landed. Cert consolidation strategy next. |
-| **songBird** | BUILD-DIV-01 glue fully cleaned — drawbridge simplified. Capability discovery now introspection-based. |
-| **cellMembrane** | Major debt purge: Zola auto-build, SHA validation, freshness wrappers all removed. Leaner cascade. |
-| **petalTongue** | Gate mesh docs clarified. NUCLEUS hosting next: content parity with static site. |
-| **sporePrint** | Template evolution: lighter JSON-LD, cleaner nav. Content evolution continues independently. |
-| **nestGate** | Coordination backend delivered (135a). Ingest pipeline activation next. |
-| **sweetGrass** | Postgres purge + pattern hardening committed — push to remotes pending. |
-| **sporeGate/golgi** | `live.primals.eco` handoff ready. NUCLEUS composition target. |
-| **primalSpring** | SHOW_HN readiness: E-category evidence gathering. |
+| Team | Wave 136a Status | Next |
+|------|-----------------|------|
+| **sporeGate/golgi** | Security headers + 404 + fail2ban deployed | Depot rate-limiting (136b), CSP |
+| **darkforest** | v3.0 scope published, HEAD registered in ironGate | Outer membrane test suite (136c) |
+| **skunkBat** | Inner membrane monitoring active | Extend to outer membrane HTTP (136d) |
+| **songBird** | Drawbridge functional | Auth-gate hardening (136c) |
+| **mesh team** | 4-gate collective stable | Peer rotation policy (136b), overlay IDS (136d) |
+| **cellMembrane** | Cascade lean + working | Signing pipeline (136b) |
+| **sporePrint** | 301 pages, auto-merge from groundSpring | Content evolution continues |
+| **primalSpring** | 1,101 tests, SHOW_HN E-category | Evidence gathering continues |
+| **groundSpring** | 1,047+ tests, lab notebooks live | Feeding sporePrint via auto-merge |
 
 ---
 
 ## Gate Convergence
 
 ```
-✅ eastGate   — All repos current. 135b evolution committed.
-✅ sporeGate  — Depot 100%. Drawbridge configured. NUCLEUS host target.
-⚠️  golgiBody  — primals.eco LIVE but STALE. Site not rebuilding (fix landed — deploy needed).
-✅ flockGate  — WAN PASS. capability.call retest pending.
-✅ ironGate   — Current repos. Cascade active.
-🔧 strandGate — Enrollment pending (house 2).
+✅ eastGate    — All repos current. Wave 136a coordinated.
+✅ sporeGate   — Security hardened. Depot 100%. Site live.
+✅ golgiBody   — Caddy hardened, certs auto-renewing, fail2ban active.
+✅ flockGate   — WAN PASS. Peer rotation pending (136b).
+✅ ironGate    — Heads published. darkforest v3.0 scope registered.
+🔧 strandGate  — Enrollment pending (house 2).
+📱 grapheneGate — Pending pepti pull + ADB deploy.
 ```
 
 ---
 
-## DIVERGENCE FOUND: Site Rebuild Pipeline (P1)
+## Glacial Update
 
-**Symptom**: sporeGate team pushes sporePrint content → Forgejo → golgi cascade pulls source → BUT `public/` never regenerates → Caddy serves stale HTML.
+Criterion 8 ("Outer membrane hardened for public exposure") added to `GLACIAL_SHIFT_READINESS.md`.
+Current state: **3/5 sub-criteria met** (headers, 404, fail2ban). Remaining: CSP, depot rate-limiting, signing.
 
-**Root cause**: No `zola build` step in golgi's cascade pipeline. The `MEMBRANE_ZOLA_AUTO_BUILD` env var was never configured, and the old code only triggered conditionally. This predates the DNS cutover but became visible when content updates stopped appearing.
-
-**Fix delivered**: cellMembrane now auto-rebuilds sporePrint after cascade if `config.toml` exists in the content dir and `zola` is on PATH. Silent skip on non-content gates. Zero config needed.
-
-**Action required by sporeGate/golgi team**:
-1. Install Zola on golgi: `apt-get install -y zola`
-2. Deploy latest membrane binary (builds from `be276dd+`)
-3. Site will auto-rebuild on next cascade cycle (≤15 min)
-
-See: `handoffs/SITE_REBUILD_FIX_WAVE135B.md`
-
-*Wave 135b: Site rebuild divergence found and fixed in code. Pending deploy to golgi. Debt continues to decrease.*
+*Wave 136a: Warming event contained. Critical exposures patched within hours of identification. Cooling sprint proceeds on 4-week cadence. System stable under public observation.*

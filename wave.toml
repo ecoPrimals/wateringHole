@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 135
-sub = "b"
-date = "2026-07-09"
-posture = "CONVERGING. Multi-primal evolution landed — bearDog gateway simplified, songBird drawbridge cleaned, cellMembrane debt purged. Coordination backend built. SHOW_HN readiness advancing."
+id = 136
+sub = "a"
+date = "2026-07-10"
+posture = "HARDENING. Outer membrane security headers, 404, fail2ban deployed (EXP-01/02/04 patched). Cert auto-renewal confirmed. CSP + depot rate-limiting + darkforest v3.0 queued. Warming event contained — cooling in progress."
 publisher = "eastGate-overwatch"
 
 [gates]
