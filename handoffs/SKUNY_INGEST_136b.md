@@ -2,15 +2,15 @@
 
 **Date**: 2026-07-11
 **Gate**: flockGate
-**Commit**: `3600a93` (skunkBat)
-**Binary**: `skuny-ingest`
+**Commit**: `67c8784` (skunkBat)
+**Binary**: `skunky-ingest`
 **Scope**: Phase 1 of live threat ingestion — Caddy JSON access log → skunkBat behavioral profiler.
 
 ---
 
 ## Delivered
 
-New workspace crate: `crates/skuny-ingest` (843 lines, 10 tests)
+New workspace crate: `crates/skunky-ingest` (843 lines, 10 tests)
 
 | Component | What |
 |-----------|------|
@@ -23,13 +23,13 @@ New workspace crate: `crates/skuny-ingest` (843 lines, 10 tests)
 ## CLI Interface
 
 ```
-skuny-ingest [OPTIONS]
+skunky-ingest [OPTIONS]
 
 Options:
   --log-path <PATH>           Caddy JSON access log [default: /var/log/caddy/access.log]
   --skunkbat-addr <HOST:PORT> skunkBat TCP address [default: 127.0.0.1:9750]
   --window-secs <N>           Aggregation window [default: 60]
-  --cursor-path <PATH>        Position cursor file [default: /var/lib/skuny-ingest/cursor.pos]
+  --cursor-path <PATH>        Position cursor file [default: /var/lib/skunky-ingest/cursor.pos]
   --poll-ms <N>               Tail poll interval [default: 500]
   --dry-run                   Parse and aggregate without sending
 ```
@@ -68,11 +68,11 @@ Uses existing skunkBat JSON-RPC 2.0 transport (NDJSON over TCP):
 ```
 golgi (10.13.37.1) ──WireGuard──▶ sporeGate (10.13.37.2:9750)
      │                                      │
-     │  skuny-ingest                        │  skunkBat
+     │  skunky-ingest                        │  skunkBat
      │  --log-path /var/log/caddy/access.log│  baseline.observe
      │  --skunkbat-addr 10.13.37.2:9750     │  → StatisticalProfiler
      │  --window-secs 60                    │  → BaselineStats
-     │  --cursor-path /var/lib/skuny-ingest/│  → detect_anomalies()
+     │  --cursor-path /var/lib/skunky-ingest/│  → detect_anomalies()
      │    cursor.pos                        │  → security.advisory
 ```
 
@@ -80,18 +80,18 @@ golgi (10.13.37.1) ──WireGuard──▶ sporeGate (10.13.37.2:9750)
 
 ```ini
 [Unit]
-Description=skuny-ingest — Caddy log tailer for skunkBat
+Description=skunky-ingest — Caddy log tailer for skunkBat
 After=network-online.target caddy.service
 Wants=network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/skuny-ingest \
+ExecStart=/usr/local/bin/skunky-ingest \
   --log-path /var/log/caddy/access.log \
   --skunkbat-addr 10.13.37.2:9750 \
   --window-secs 60
 Restart=always
 RestartSec=5
-StateDirectory=skuny-ingest
+StateDirectory=skunky-ingest
 
 [Install]
 WantedBy=multi-user.target
@@ -117,7 +117,7 @@ Scanner IP correctly identified: 100% 4xx error rate, 1 req/sec, single path (`/
 
 ## Test Summary
 
-- 10 new tests in `skuny-ingest` (parser, aggregation, flush, cursor, serialization)
+- 10 new tests in `skunky-ingest` (parser, aggregation, flush, cursor, serialization)
 - 566 total workspace tests, 0 failures
 
 ---

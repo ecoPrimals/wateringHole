@@ -5,13 +5,13 @@
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-11T17:26:00Z"
+updated = "2026-07-11T19:10:00Z"
 wave = "136b"
 
 [heads]
 primalSpring = "78ed218"
 wateringHole = "0a7f7a75"
-skunkBat = "3600a93"
+skunkBat = "67c8784"
 
 [mesh]
 node_id = "flockgate"
@@ -47,14 +47,14 @@ verified_at = "2026-07-11T17:14:00Z"
 next_action = "Begin composition audit — map Express endpoints to primal absorption targets"
 
 [skunkbat]
-head = "3600a93"
+head = "67c8784"
 tests = 566
 failures = 0
 suite_status = "GREEN"
 delivery_136a = "SKUNY-OM — outer membrane HTTP anomaly detection"
-delivery_136b = "SKUNY-INGEST — live Caddy log tailer for behavioral detection"
+delivery_136b = "SKUNKY-INGEST — live Caddy log tailer for behavioral detection"
 convergence = "BUILDABLE + RUNNABLE + TOOLCHAIN + CONFIG"
-new_crate = "skuny-ingest (843 lines, 10 tests)"
+new_crate = "skunky-ingest (843 lines, 10 tests)"
 
 [primalspring]
 scenarios = 129
