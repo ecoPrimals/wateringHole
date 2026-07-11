@@ -68,6 +68,16 @@ Both pulled clean (fast-forward). bearDog stale local revert discarded. **All 20
 | DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS | 25/26 PASS, report pending |
 | NESTGATE-DEBT | Continue nestGate deep debt sweep (thiserror landed, more modules to follow) | nestGate team | In progress |
 
+### New: protists/ Directory (protoKarya org)
+
+| Item | Detail |
+|------|--------|
+| `protists/footPrint` | GIS home improvement planner (TypeScript/Leaflet/Vite). Cloned from `protoKarya/footPrint`. Features: satellite map drawing, property planning, data overlays (FEMA, OSM, parcels, zoning, soils, USGS), parametric constraint solver, ECS architecture. |
+| RustScript | 12-module zero-dep TypeScript library encoding Rust safety primitives (Result, Option, Owned, RefCell, Iter, Vec, Cow, Channel, Brand). Compile-time + runtime enforcement. AI-translatable to Rust. |
+| Evolution path | Proto-project evolving toward primal status. RustScript extractable as `@ecoprimals/rustscript`. GIS capabilities feed land/property intelligence into ecosystem. |
+
+`protists/` is the new top-level directory for **protoKarya** org repos — proto-organisms evolving toward primals. Analogous to `primals/` (ecoPrimals), `gardens/` (syntheticChemistry), `springs/` (experimentation labs).
+
 ### LOW Priority / Backlog
 
 | ID | Task | Owner |
