@@ -6,11 +6,11 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-11T14:35:00Z"
+updated = "2026-07-11T19:15:00Z"
 
 [heads]
 nestGate = "510d66ffc8e1b6d2ad5aff7f78cd3c17f631b83e"
-petalTongue = "e0f8a6334358a5bc53b0bdffaf1fd39d9e40ef7d"
+petalTongue = "8528f27ae63ce2613cff803293738671ce757a35"
 bearDog = "cb80ed25905b4b763b334fc32d3a467ef2616107"
 songBird = "eb4d0bed515bf5a1ed3d646062c6969d489bd5c0"
 skunkBat = "f9154a8116af91e68cedb16293cad4b6dc00f3e6"
