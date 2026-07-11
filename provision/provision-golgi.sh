@@ -224,6 +224,7 @@ lab.primals.eco {
         header_up X-Real-IP {remote_host}
         header_up X-Forwarded-For {remote_host}
         header_up X-Forwarded-Proto {scheme}
+        header_down -Content-Security-Policy
     }
 }
 
@@ -236,17 +237,9 @@ git.primals.eco {
     reverse_proxy localhost:3000
 }
 
-# Live petalTongue — dynamic sporePrint overlay (sporeGate NUCLEUS)
-live.primals.eco {
-    import security_headers
-    import csp_proxy
-    import access_log
-
-    reverse_proxy 10.13.37.2:9900 {
-        header_up Host {host}
-        header_up X-Forwarded-Proto {scheme}
-    }
-}
+# live.primals.eco — reserved for petalTongue NUCLEUS on sporeGate.
+# Add back when DNS A record exists and petalTongue is serving on :9900.
+# See: LIVE-ACTIVATE in Wave 136b pending items.
 EOCADDY
 
 echo "=== 5. INSTALL RUSTDESK SERVER ==="
