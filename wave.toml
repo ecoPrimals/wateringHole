@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 136
-sub = "b"
+id = 137
+sub = "a"
 date = "2026-07-11"
-posture = "HARDENED. Outer membrane sprint complete (9/14 closed). skunkBat HTTP detection live. darkforest v3.0 active. SIGN-01 signing pipeline landed. Remaining: lab auth-gate (EXP-06) + cascade signing activation."
+posture = "CONVERGED. All 8 stadial criteria clear. Public threshold survivable. 2,930+ tests / 0 fail. 12 handoffs fossilized. Next: live compositions (FP-DEPLOY, SIGN-01, skunky-ingest, flockGate mesh)."
 publisher = "eastGate-overwatch"
 
 [gates]
