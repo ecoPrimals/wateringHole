@@ -830,7 +830,7 @@ repos = [
 [gates.northGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
-bind_mode = "tcp"
+bind_mode = "tcp_only"
 composition = "full"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
@@ -851,7 +851,7 @@ repos = [
 [gates.blueGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
-bind_mode = "tcp"
+bind_mode = "tcp_only"
 composition = "subset"
 transport = "lan"
 notes = "Windows machine. Cross-platform ecoBin validation (WSL2 or native)."
@@ -866,7 +866,7 @@ repos = [
 [gates.swiftGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "portable"
-bind_mode = "tcp"
+bind_mode = "tcp_only"
 composition = "subset"
 transport = "lan"
 notes = "Portable Windows target. Cross-platform testing. WiFi (LAN transport)."
