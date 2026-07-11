@@ -155,7 +155,7 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 
 | Suite | Tests | Scenarios | Status |
 |-------|-------|-----------|--------|
-| primalSpring | 1,102 | 129 | GREEN |
+| primalSpring | 1,104 | 132 | GREEN (v0.9.35) |
 | groundSpring | 1,047+ | — | GREEN |
 | skunkBat | 553 | — | GREEN |
 | projectNUCLEUS | 149 | — | GREEN |
