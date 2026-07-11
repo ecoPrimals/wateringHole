@@ -114,22 +114,14 @@ curl -sL "https://caddyserver.com/api/download?os=linux&arch=amd64" -o /opt/memb
 chmod +x /opt/membrane/caddy
 
 cat > /etc/membrane/Caddyfile << 'EOCADDY'
-# Membrane Channel 3 — Caddy TLS Surface (Hardened — Wave 136a+)
+# Membrane Channel 3 — Caddy TLS Surface (Hardened — Wave 136b)
 #
 # Caddy handles :443 for ALL domains (Host-based routing, HTTP/2, ACME).
 # Security headers + CSP on all public-facing domains.
+# Per-site JSON access logs feed skunkBat baseline.observe pipeline.
 {
     email ops@primals.eco
     storage file_system /caddy
-    log {
-        output file /var/log/caddy/access.log {
-            roll_size 50MiB
-            roll_keep 5
-            roll_keep_for 720h
-        }
-        format json
-        level INFO
-    }
 }
 
 # Common security headers
@@ -142,6 +134,18 @@ cat > /etc/membrane/Caddyfile << 'EOCADDY'
         Referrer-Policy "strict-origin-when-cross-origin"
         Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
         -Server
+    }
+}
+
+# Per-site structured access log (feeds skunkBat ingestion pipeline)
+(access_log) {
+    log {
+        output file /var/log/caddy/access.log {
+            roll_size 50MiB
+            roll_keep 5
+            roll_keep_for 720h
+        }
+        format json
     }
 }
 
@@ -159,6 +163,7 @@ cat > /etc/membrane/Caddyfile << 'EOCADDY'
 primals.eco {
     import security_headers
     import csp_static
+    import access_log
     encode gzip
 
     handle /lab/spores/* {
@@ -185,6 +190,7 @@ www.primals.eco {
 membrane.primals.eco {
     import security_headers
     import csp_static
+    import access_log
     encode gzip
 
     handle /depot/* {
@@ -211,6 +217,7 @@ membrane.primals.eco {
 lab.primals.eco {
     import security_headers
     import csp_proxy
+    import access_log
 
     reverse_proxy 10.13.37.2:7780 {
         header_up Host {host}
@@ -224,6 +231,7 @@ lab.primals.eco {
 git.primals.eco {
     import security_headers
     import csp_proxy
+    import access_log
 
     reverse_proxy localhost:3000
 }
@@ -232,6 +240,7 @@ git.primals.eco {
 live.primals.eco {
     import security_headers
     import csp_proxy
+    import access_log
 
     reverse_proxy 10.13.37.2:9900 {
         header_up Host {host}
