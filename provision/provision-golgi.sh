@@ -243,7 +243,7 @@ git.primals.eco {
 EOCADDY
 
 echo "=== 5. INSTALL RUSTDESK SERVER ==="
-RUSTDESK_VERSION="1.1.14"
+RUSTDESK_VERSION="1.1.15"
 curl -sL "https://github.com/rustdesk/rustdesk-server/releases/download/${RUSTDESK_VERSION}/rustdesk-server-linux-amd64.zip" \
     -o /tmp/rustdesk-server.zip
 unzip -o /tmp/rustdesk-server.zip -d /tmp/rustdesk-extract
@@ -253,6 +253,7 @@ chmod +x /opt/membrane/hbbs /opt/membrane/hbbr
 rm -rf /tmp/rustdesk-server.zip /tmp/rustdesk-extract
 
 mkdir -p /opt/membrane/rustdesk
+chmod 600 /opt/membrane/rustdesk/id_ed25519 2>/dev/null || true
 echo "RustDesk identity will be restored from pepti depot (see NEXT STEPS)"
 
 echo "=== 6. PULL BINARIES FROM SPOREGATE DEPOT ==="
@@ -470,7 +471,7 @@ StartLimitBurst=5
 
 [Service]
 Type=simple
-ExecStart=/bin/sh -c '/opt/membrane/hbbs -r $(hostname -I | awk "{print \\$1}")'
+ExecStart=/bin/sh -c '/opt/membrane/hbbs -k _ -r $(hostname -I | awk "{print \\$1}")'
 WorkingDirectory=/opt/membrane/rustdesk
 Restart=always
 RestartSec=5
@@ -552,6 +553,16 @@ echo "=== 9c. HTTPS RATE LIMITING ==="
 # Limit new HTTPS connections per IP (50 per 10 seconds)
 iptables -I INPUT 1 -p tcp --dport 443 -m conntrack --ctstate NEW -m recent --name https_flood --set
 iptables -I INPUT 2 -p tcp --dport 443 -m conntrack --ctstate NEW -m recent --name https_flood --update --seconds 10 --hitcount 50 -j DROP
+
+echo "=== 9c2. RUSTDESK RATE LIMITING ==="
+
+# Limit new RustDesk TCP connections per IP (20 per 10 seconds)
+iptables -I INPUT 1 -p tcp -m multiport --dports 21115,21116,21117,21118,21119 -m conntrack --ctstate NEW -m recent --name rustdesk_flood --set
+iptables -I INPUT 2 -p tcp -m multiport --dports 21115,21116,21117,21118,21119 -m conntrack --ctstate NEW -m recent --name rustdesk_flood --update --seconds 10 --hitcount 20 -j DROP
+# Limit RustDesk UDP NAT probe (30 packets per 10 seconds per IP)
+iptables -I INPUT 3 -p udp --dport 21116 -m recent --name rustdesk_udp --set
+iptables -I INPUT 4 -p udp --dport 21116 -m recent --name rustdesk_udp --update --seconds 10 --hitcount 30 -j DROP
+
 iptables-save > /etc/iptables.rules 2>/dev/null || true
 
 echo "=== 9d. CADDY ACCESS LOGS ==="
