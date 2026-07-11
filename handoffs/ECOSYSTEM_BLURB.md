@@ -14,7 +14,7 @@
 | SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Code landed, activation pending |
 | EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco`) | sporeGate | songBird code landed, Caddy wiring pending |
 | SITE-REBUILD | Deploy `content.rebuild` to golgi (Zola auto-build) | sporeGate | Code landed, membrane redeploy needed |
-| ODN-02 | DNSSEC on `primals.eco` | operator | darkforest flagged (registrar-level) |
+| ODN-02 | DNSSEC on `primals.eco` | operator (registrar UI) | **REALWORLD** — registrar web portal, no API |
 
 ### New: footPrint Composition (flockGate)
 
@@ -75,9 +75,48 @@ sporeGate    — Hardened (9/14 closed). Depot 100%. Site live.
 golgiBody    — Caddy hardened, fail2ban active, rate-limited.
 flockGate    — WAN PASS. footPrint gate owner. Clone + spin up.
 ironGate     — darkforest v3.0 active. 25/26 PASS live.
-strandGate   — Enrollment pending (house 2).
-grapheneGate — Pending pepti pull + ADB deploy.
+strandGate   — Enrollment pending. REALWORLD: physical access (house 2, cable + power).
+grapheneGate — Pending pepti pull. REALWORLD: USB ADB cable + physical device.
 ```
+
+## Operator Task Audit — Agentic vs Realworld
+
+Every task currently tagged "operator" or requiring manual intervention, classified:
+
+### REALWORLD — Physical/Hardware Required (cannot be agentic)
+
+| Task | Why Realworld | Gate |
+|------|--------------|------|
+| strandGate enrollment | Physical: cable ethernet, power on, OS install at house 2 | strandGate |
+| grapheneGate pepti deploy | Physical: USB ADB cable to Pixel 8a, `adb push` ecobins | grapheneGate |
+| ODN-02 DNSSEC | Registrar web portal (no API) — human clicks in Porkbun/Namecheap UI | golgiBody |
+| WireGuard key rotation (EXP-07a) | Key ceremony: generate on gate, exchange out-of-band, verify | mesh team |
+| Network failover drill (RF-02) | Physical cable moves, router config at physical hardware | LAN |
+| northGate/swiftGate/kinGate enrollment | Hardware ready but not deployed — physical setup | various |
+
+### AGENTIC NOW — Already Evolved (no operator needed)
+
+| Task | How It Became Agentic |
+|------|----------------------|
+| DNS NS cutover | Done (Wave 134h). Was manual registrar action, now complete. |
+| Temporal cascade sync | `membrane temporal.cascade` — was manual git loops, now agentic (Wave 84) |
+| Cert management | Caddy ACME auto-renewal — was manual certbot, now self-resolving |
+| sporePrint rebuild | `membrane content.rebuild` — was manual Zola build, now agentic (Wave 135b) |
+| Depot distribution | `membrane plasmid.harvest` + mesh auto-fetch — was manual scp, now agentic |
+| fail2ban monitoring | Systemd service, auto-banning — no operator intervention |
+| Security headers | Caddy snippets, auto-applied — no operator intervention |
+| Access log rotation | Caddy JSON logs, 50MiB roll, 30d retention — automatic |
+
+### EVOLVE TO AGENTIC — Can and should be automated
+
+| Task | Current State | Agentic Path | Owner |
+|------|--------------|-------------|-------|
+| SIGN-01 activation | Code landed, needs key deploy + verify on sporeGate | `membrane sign.activate` — generate keypair, distribute pubkey via mesh, verify round-trip | cellMembrane |
+| EXP-06 lab auth-gate | songBird code landed, Caddy config manual | `membrane caddy.configure` or template in provision script — Caddy API supports hot-reload | sporeGate |
+| SITE-REBUILD deploy | membrane binary on golgi needs update | `membrane plasmid.fetch` on golgi pulls new binary, systemd restart — fully agentic path exists | sporeGate |
+| Caddy config changes | Currently SSH + edit Caddyfile | Caddy has a REST API (`/config/`). cellMembrane could manage Caddy config via API calls | cellMembrane |
+| SURGE-01 static mirror | Manual GitHub Pages setup | GitHub Actions workflow: on sporePrint push, build Zola, deploy to gh-pages branch — fully automatable | sporePrint |
+| RustDesk client config | Manual per-gate change to point at `remote.primals.eco` | cellMembrane `gate.configure` could template RustDesk config at enrollment time | cellMembrane |
 
 ## Tests
 
@@ -104,4 +143,4 @@ grapheneGate — Pending pepti pull + ADB deploy.
 | `SKUNKBAT_OUTER_MEMBRANE_136a.md` | skunkBat HTTP detection spec |
 | `EXTERNAL_REVIEW_RESPONSE_136b.md` | Post-Cloudflare resilience analysis + CDN mirror recommendation |
 
-*Wave 136b: Hardened and stable. Defense in depth and mathematics, not obscurity. sporePrint evolves to live topology visualization — if we can't show how it works, it's a MacGuffin. footPrint introduced as first composition target. flockGate: clone and spin up. Teams: see action items above.*
+*Wave 136b: Hardened and stable. Defense in depth and mathematics, not obscurity. Operator tasks audited — 6 realworld (physical), 8 already agentic, 6 targeted for agentic evolution. sporePrint evolves to live topology visualization. footPrint introduced as first composition target. flockGate: clone and spin up.*
