@@ -10,9 +10,9 @@
 
 [wave]
 id = 136
-sub = "a"
-date = "2026-07-10"
-posture = "HARDENING. Outer membrane security headers, 404, fail2ban deployed (EXP-01/02/04 patched). Cert auto-renewal confirmed. CSP + depot rate-limiting + darkforest v3.0 queued. Warming event contained — cooling in progress."
+sub = "b"
+date = "2026-07-11"
+posture = "HARDENED. Outer membrane sprint complete (9/14 closed). skunkBat HTTP detection live. darkforest v3.0 active. SIGN-01 signing pipeline landed. Remaining: lab auth-gate (EXP-06) + cascade signing activation."
 publisher = "eastGate-overwatch"
 
 [gates]
