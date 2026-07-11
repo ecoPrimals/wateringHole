@@ -34,43 +34,34 @@ The Express server disappears — primals absorb backend. Browser frontend (Leaf
 
 **RustScript** (12 Rust safety modules in TypeScript) is evidence FOR pure Rust, not a bridge to it. Added to gen3 thesis as §5.5. Blueprint available for anyone who wants safer TypeScript.
 
-### Membrane Topology Clarification — Three Layers
+### K-Derm Topology Reaffirmed — Cloudflare is the Outer Membrane
 
-The diderm model extends to three concentric layers. Outer membrane data reinforces inner membrane awareness. The sovereign Rust outer membrane is the evolution target — Cloudflare is a managed capsule that can be dropped when sovereign parity is achieved.
+Porkbun dashboard confirms: `primals.eco` NS remains `alfie/serena.ns.cloudflare.com`. This is correct — it was never removed. The existing K-Derm diderm architecture (`DIDERM_DOMAIN_ARCHITECTURE.md`, `K_DERM_TOPOLOGY_STANDARD.md`) already defines this topology. The three-layer model maps directly to K-Derm layers:
 
 ```
-┌─ Capsule: External Outer Membrane (Cloudflare) ─────────────────┐
-│  Managed, non-sovereign. DDoS absorption, edge caching, WAF.   │
-│  NS: alfie/serena.ns.cloudflare.com. Porkbun = billboard.      │
-│  DATA FLOWS INWARD → reinforces sovereign detection.            │
-│                                                                  │
-│  ┌─ Sovereign Outer Membrane (Rust) ─────────────────────────┐  │
-│  │  bearDog TLS, Caddy (CSP/HSTS/rate-limit), skunkBat HTTP  │  │
-│  │  anomaly detection, fail2ban, security headers.            │  │
-│  │  OWNED CODE. Evolution target: parity with Cloudflare.     │  │
-│  │                                                            │  │
-│  │  ┌─ Inner Membrane (Rust) ─────────────────────────────┐  │  │
-│  │  │  WireGuard mesh, songBird federation, nestGate CAS,  │  │  │
-│  │  │  rhizoCrypt DAG, loamSpine ledger, sweetGrass attr.  │  │  │
-│  │  │  Sovereign compute. The organism.                    │  │  │
-│  │  └──────────────────────────────────────────────────────┘  │  │
-│  └────────────────────────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────────────────┘
+K-Derm Layer          │ What                        │ primals.eco Path
+──────────────────────┼─────────────────────────────┼──────────────────────────
+Extracellular         │ Public internet, crawlers   │ Hostile traffic
+Outer membrane (trans)│ Cloudflare proxy + Caddy    │ DDoS/CDN + TLS/CSP/HSTS
+Periplasm             │ golgi relay, sporeGate CI   │ WireGuard routing, build
+Plasma membrane       │ Gate firewall (Flint/UFW)   │ Boundary enforcement
+Cytoplasm             │ NUCLEUS primals, UDS IPC    │ Sovereign compute
 ```
 
-**Capsule (Cloudflare)**: Absorbs environmental stress. Traffic spikes, DDoS, bot floods hit here first. SURGE-01 (CDN mirror) is redundant — **dropped**. Cloudflare analytics/logs are a data source for skunkBat baseline training.
+**Outer membrane data reinforces inner membrane.** Per §Cross-Membrane Validation in `DIDERM_DOMAIN_ARCHITECTURE.md`: inner membrane validates outer membrane integrity (content hash, timing baseline, TLS cert, DNS consistency, route integrity). This is not a transitional state — **the dual membrane is the target architecture** (§Why This Is Stronger Than Eliminating Cloudflare).
 
-**Sovereign outer (Rust)**: The membrane we build. skunkBat HTTP detection, bearDog ACME TLS, Caddy hardening, rate limiting. As this layer achieves parity, Cloudflare becomes optional — defense in depth, not dependency.
+**The sovereign Rust outer membrane** (skunkBat HTTP detection, bearDog TLS, Caddy hardening, rate limiting, fail2ban) is the evolution target. As it achieves parity with Cloudflare's capabilities, the Cloudflare layer becomes **optional defense in depth**, not a dependency. Porkbun is the billboard — NS can redirect anywhere.
 
-**Inner (Rust)**: The organism. Primals, mesh, provenance trio, sovereign compute. Protected by both outer layers independently.
+SURGE-01 (CDN mirror) **dropped** — Cloudflare IS the CDN. New item: **CF-DATA** — Cloudflare analytics → skunkBat `baseline.observe` (outer → inner data flow).
 
-**Defense in depth and mathematics, not obscurity.** If we can't show how all three layers work and remain secure, it's a MacGuffin. 301 pages of published architecture prove this. sporePrint evolves to live topology visualization — rendering all three layers from nestGate data and songBird heartbeats.
+**Defense in depth and mathematics, not obscurity.** If we can't show how all K-Derm layers work and remain secure, it's a MacGuffin. sporePrint evolves to live topology visualization — rendering all layers from nestGate data and songBird heartbeats.
 
 ### Backlog
 
 | ID | Task | Owner | Priority |
 |----|------|-------|----------|
 | TOPO-VIS | sporePrint live topology visualization (petalTongue + nestGate + songBird) | sporePrint + petalTongue | HIGH |
+| CF-DATA | Cloudflare analytics → skunkBat `baseline.observe` (outer → inner data flow) | skunkBat | MEDIUM |
 | SKUNY-INGEST | Caddy JSON logs → skunkBat `baseline.observe` | skunkBat | MEDIUM |
 | DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS | MEDIUM |
 | NESTGATE-DEBT | Deep debt sweep continuation (thiserror landed) | nestGate | MEDIUM |
@@ -163,6 +154,7 @@ Every task currently tagged "operator" or requiring manual intervention, classif
 | `FRAGO_PROTISTS_CATEGORY_136b.md` | Taxonomy: `protists/` = composition targets |
 | `OUTER_MEMBRANE_HARDENING_AAR_136a.md` | Full 136a security sprint AAR |
 | `SKUNKBAT_OUTER_MEMBRANE_136a.md` | skunkBat HTTP detection spec |
-| `EXTERNAL_REVIEW_RESPONSE_136b.md` | Post-Cloudflare resilience analysis + CDN mirror recommendation |
+| `EXTERNAL_REVIEW_RESPONSE_136b.md` | Post-Cloudflare resilience analysis (corrected: CF never removed) |
+| `KDERM_REAFFIRMATION_WAVE136b.md` | K-Derm topology reaffirmation — team responsibilities + DNSSEC path |
 
 *Wave 136b: Hardened and stable. Defense in depth and mathematics, not obscurity. Operator tasks audited — 6 realworld (physical), 8 already agentic, 6 targeted for agentic evolution. sporePrint evolves to live topology visualization. footPrint introduced as first composition target. flockGate: clone and spin up.*
