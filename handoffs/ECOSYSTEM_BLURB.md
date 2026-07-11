@@ -1,142 +1,94 @@
 # ecoPrimals Ecosystem Blurb — Wave 136b
 
-**Date**: Jul 11, 2026 15:30 EDT | **Wave**: 136b | **From**: eastGate overwatch
-**Posture**: **HARDENED. ALL 8 STADIAL CRITERIA CLEAR. Outer membrane sprint complete (9/14 closed). darkforest v3.0 live scan 25/26 PASS. footPrint protist spinning up — petalTongue visual parity target established. Cooling sprint continues.**
+**Date**: Jul 11, 2026 | **Wave**: 136b | **From**: eastGate overwatch
+**Posture**: **HARDENED. ALL 8 STADIAL CRITERIA CLEAR.** Outer membrane sprint complete (9/14 exposures closed). darkforest v3.0 live: 25/26 PASS. footPrint composition target introduced. Cooling sprint continues.
 
 ---
 
-## Overnight Evolution (since 136b bump)
+## Active Sprint — 136b
 
-| Repo | Commit | What |
-|------|--------|------|
-| nestGate | `510d66f` | Deep debt sweep: typed errors, thiserror derives, modern idioms across 12 files |
-| primalSpring | `b10aad7` | darkforest v3.0 AAR (Wave 136c): TLS evolution + outer membrane live results, cross-spring parity scorecard updated |
-
-Both pulled clean (fast-forward). bearDog stale local revert discarded. **All 20+ repos at HEAD, zero dirty.**
-
----
-
-## Wave 136a Sprint — DELIVERED (Jul 10)
-
-### Exposure Matrix — 9/14 Closed
-
-| ID | What | Status |
-|----|------|--------|
-| EXP-01 | Security headers (HSTS, X-Frame, nosniff, Permissions-Policy) | CLOSED |
-| EXP-02 | 404 catch-all → proper `handle_errors` | CLOSED |
-| EXP-03 | Cert lifecycle (Caddy ACME, all 5 domains) | CLOSED |
-| EXP-04 | Forgejo SSH fail2ban (port 2222, 3-try ban) | CLOSED |
-| EXP-05 | Depot rate-limiting (iptables 50 conn/10s) | CLOSED |
-| CSP-01 | Content-Security-Policy (static + proxy policies) | CLOSED |
-| AUDIT-01 | JSON access logs (50MiB roll, 30d) | CLOSED |
-| EXP-07a | WireGuard key audit + 90d rotation policy | CLOSED |
-| RF-01 | Cert renewal drill validated | CLOSED |
-
-### Primal Evolution Absorbed
-
-| Primal | Commit | What |
-|--------|--------|------|
-| skunkBat | `f9154a8` | HTTP anomaly detection: `HttpObservation`, `advisory_check_http()`. 553 tests. |
-| songBird | `eb4d0be` | EXP-06 drawbridge auth-gate hardening (code) |
-| cellMembrane | `c1fa85a` | SIGN-01 signing pipeline + security sprint |
-| nestGate | `510d66f` | Coord handlers + deep debt sweep (thiserror, typed errors) |
-| projectNUCLEUS | `d35df65` | darkforest v3.0 — TLS outer membrane pen-test (25/26 PASS live) |
-| primalSpring | `b10aad7` | `s_outer_membrane_posture` scenario (129 scenarios, 1102 tests) + darkforest AAR |
-
-### darkforest v3.0 Live Results (primals.eco)
-
-25/26 checks PASS. One DARK_FOREST (ODN-02: DNSSEC not enabled on `primals.eco` — infrastructure gap, registrar-level). 6 outer modules: tls, http, depot, forge, dns, mesh. 149 Rust tests.
-
----
-
-## Remaining Work — 136b Sprint
-
-### HIGH Priority
+### Hardening (carry from 136a)
 
 | ID | Task | Owner | Status |
 |----|------|-------|--------|
-| SIGN-01 | Cascade signing activation (deploy ed25519 key + verify in pipeline) | cellMembrane + sporeGate | Code landed, activation pending |
-| EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco` basic_auth or mTLS) | sporeGate | songBird code landed, Caddy wiring pending |
-| SITE-REBUILD | Deploy `content.rebuild` fix to golgi (Zola auto-build after cascade) | sporeGate | Code landed, membrane binary needs redeploy |
-| ODN-02 | DNSSEC on `primals.eco` (registrar-level) | operator | darkforest flagged |
+| SIGN-01 | Cascade signing activation (ed25519 key deploy + verify) | cellMembrane + sporeGate | Code landed, activation pending |
+| EXP-06 | Lab auth-gate at Caddy layer (`lab.primals.eco`) | sporeGate | songBird code landed, Caddy wiring pending |
+| SITE-REBUILD | Deploy `content.rebuild` to golgi (Zola auto-build) | sporeGate | Code landed, membrane redeploy needed |
+| ODN-02 | DNSSEC on `primals.eco` | operator | darkforest flagged (registrar-level) |
 
-### MEDIUM Priority
+### New: footPrint Composition (flockGate)
 
-| ID | Task | Owner | Status |
-|----|------|-------|--------|
-| SKUNY-INGEST | Wire Caddy JSON logs → skunkBat `baseline.observe` | skunkBat team | Logs flowing, ingestion pipeline not wired |
-| DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS | 25/26 PASS, report pending |
-| NESTGATE-DEBT | Continue nestGate deep debt sweep (thiserror landed, more modules to follow) | nestGate team | In progress |
+footPrint is a GIS home improvement planner built in isolation, now introduced to the ecosystem as the first **primal composition target**. It is NOT a primal — it is a product that primals compose into.
 
-### footPrint — Primal Composition Target (flockGate)
+**flockGate overwatch**: clone `protoKarya/footPrint` to `protists/footPrint`, `npm install`, verify dev server runs. You own this composition. Manifest entry is live (repo 40/40, `evolution_target = "composition"`).
 
-**New ecosystem layer**: `protists/` — protoKarya org repos. Not proto-primals — proto-compositions. Projects that will be *served by* primals, not *become* primals.
-
-| Item | Detail |
+| Team | Action |
 |------|--------|
-| `protists/footPrint` | GIS home improvement planner (TypeScript/Leaflet/Vite). Built in isolation as a practical tool, now introduced to the ecosystem. **Dev server verified** on eastGate. Build passes (347 modules, 819KB). Zero TS errors. |
-| Architecture | Full ECS, command pipeline with undo/redo, Gauss-Newton constraint solver, reactive graph, 8 data sources (OSM, FEMA, parcels, zoning, USGS, soils, Michigan GIS, infrastructure), intelligence layer, snap/grid/dimensions/terrain. |
-| RustScript | 12-module zero-dep TypeScript library encoding Rust safety primitives. **Not a bridge to Rust — evidence for pure Rust.** Shows that Rust constraints improve any language, but only native compile-time enforcement gives full safety. 3 constraints can't be expressed in TS at all (lifetimes, Send/Sync, zero-cost). 9 require runtime wrappers. This validates why primals are pure Rust. Section added to `CONSTRAINED_EVOLUTION_FORMAL.md` (§5.5). |
-| Gate owner | **flockGate** — WAN-accessible, LAN HPC reach. Registered in `ecosystem_manifest.toml` (repo 40/40). |
-| Composition target | footPrint is NOT a primal. It is a **primal composition**: petalTongue serves the frontend, nestGate provides CAS persistence, songBird proxies data sources. The Express server disappears — primals absorb its backend responsibilities. The browser frontend is the product. |
+| **flockGate** | Clone repo, spin up dev server, own the composition going forward |
+| **petalTongue** | Serve footPrint frontend from Axum — 12 visual target areas define parity (`specs/PETALTONGUE_VISUAL_TARGETS.md`) |
+| **nestGate** | Replace Express project CRUD with CAS persistence (content-addressed, rootPulse-traced) |
+| **songBird** | Replace Express `/api/proxy` with drawbridge routing (same allowlist: OSM, FEMA, USGS, ArcGIS) |
+| **projectNUCLEUS** | Package as deployable composition (petalTongue + nestGate + songBird serving footPrint) |
 
-**Evolution**: Express goes away → primals take over backend → footPrint becomes first interactive tool on `live.primals.eco`. Static (sporePrint) and interactive (petalTongue/footPrint) are the twin public faces of the ecosystem. RustScript stays as a blueprint for anyone who wants safer TypeScript — for ecoPrimals, it's the control experiment that proved pure Rust is right.
+The Express server disappears — primals absorb backend. Browser frontend (Leaflet/Turf.js) is the product. Static (sporePrint, 301 pages) and interactive (petalTongue/footPrint) become the twin public faces of the ecosystem.
 
-### LOW Priority / Backlog
+**RustScript** (12 Rust safety modules in TypeScript) is evidence FOR pure Rust, not a bridge to it. Added to gen3 thesis as §5.5. Blueprint available for anyone who wants safer TypeScript.
+
+### Backlog
 
 | ID | Task | Owner |
 |----|------|-------|
-| FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue + projectNUCLEUS |
-| FP-CAS | footPrint project persistence → nestGate CAS migration | nestGate + petalTongue |
-| FP-MESH | Data source proxying through songBird drawbridge | songBird + footPrint |
-| ALERT-01 | Cert expiry alerting (7d warning via rootPulse) | nestGate |
-| SKUNY-HTTP-IDS | HTTP intrusion heuristics (path enumeration, method confusion) | skunkBat |
-| COORD-ACTIVATE | nestGate coordination backend activation (ingest pipeline + petalTongue dashboard) | nestGate + petalTongue |
+| SKUNY-INGEST | Caddy JSON logs → skunkBat `baseline.observe` | skunkBat |
+| DF-REPORT | darkforest v3.0 outer membrane execution report | projectNUCLEUS |
+| NESTGATE-DEBT | Deep debt sweep continuation (thiserror landed) | nestGate |
+| FP-PARITY | petalTongue visual parity with footPrint (12 VT areas) | petalTongue |
+| COORD-ACTIVATE | nestGate coordination backend activation | nestGate + petalTongue |
 | LIVE-ACTIVATE | `live.primals.eco` petalTongue NUCLEUS hosting | sporeGate |
 
 ---
 
-## Test Suite Health
+## 136a Delivery (Complete)
 
-| Spring/Primal | Tests | Scenarios | Status |
-|---------------|-------|-----------|--------|
-| primalSpring | 1,102 | 129 | **GREEN** |
-| groundSpring | 1,047+ | — | **GREEN** |
-| skunkBat | 553 | — | **GREEN** |
-| projectNUCLEUS | 149 | — | **GREEN** (darkforest v3.0) |
+9/14 exposures closed: security headers (HSTS, CSP, X-Frame, nosniff), 404 fix, fail2ban, depot rate-limiting, JSON access logs, WireGuard key audit, cert renewal drill. All validated live on primals.eco. Full AAR: `handoffs/OUTER_MEMBRANE_HARDENING_AAR_136a.md`.
+
+Primal evolution absorbed: skunkBat HTTP anomaly detection (`f9154a8`, 553 tests), songBird auth-gate hardening (`eb4d0be`), cellMembrane SIGN-01 pipeline (`c1fa85a`), nestGate deep debt sweep (`510d66f`), darkforest v3.0 (`d35df65`, 149 tests, 25/26 PASS live), primalSpring outer membrane scenario (`b10aad7`, 1102 tests, 129 scenarios).
 
 ---
 
 ## Gate Convergence
 
 ```
-✅ eastGate     — All 20+ repos at HEAD. Wave 136b coordinated. Zero dirty.
-✅ sporeGate    — Security hardened (9/14 closed). Depot 100%. Site live.
-✅ golgiBody    — Caddy hardened, certs renewing, fail2ban active, rate-limited.
-✅ flockGate    — WAN PASS. Outer membrane validated. footPrint gate owner (protist spinning up).
-✅ ironGate     — darkforest v3.0 active. 25/26 PASS live.
-🔧 strandGate   — Enrollment pending (house 2).
-📱 grapheneGate  — Pending pepti pull + ADB deploy.
+eastGate     — Overwatch. All repos at HEAD. 136b coordinated.
+sporeGate    — Hardened (9/14 closed). Depot 100%. Site live.
+golgiBody    — Caddy hardened, fail2ban active, rate-limited.
+flockGate    — WAN PASS. footPrint gate owner. Clone + spin up.
+ironGate     — darkforest v3.0 active. 25/26 PASS live.
+strandGate   — Enrollment pending (house 2).
+grapheneGate — Pending pepti pull + ADB deploy.
 ```
+
+## Tests
+
+| Suite | Tests | Scenarios | Status |
+|-------|-------|-----------|--------|
+| primalSpring | 1,102 | 129 | GREEN |
+| groundSpring | 1,047+ | — | GREEN |
+| skunkBat | 553 | — | GREEN |
+| projectNUCLEUS | 149 | — | GREEN |
+
+## Glacial
+
+**ALL 8 CRITERIA CLEAR.** Criterion 8 (outer membrane) 5/5 met. SIGN-01 + EXP-06 are defense-in-depth, not blockers.
 
 ---
 
-## Glacial Shift
+## Handoffs This Wave
 
-**ALL 8 CRITERIA CLEAR.** Criterion 8 (outer membrane hardening) now 5/5 sub-criteria met. Remaining SIGN-01 + EXP-06 are defense-in-depth, not stadial blockers.
+| Document | What |
+|----------|------|
+| `FOOTPRINT_COMPOSITION_WAVE136b.md` | Team actions for footPrint composition |
+| `FRAGO_PROTISTS_CATEGORY_136b.md` | Taxonomy: `protists/` = composition targets |
+| `OUTER_MEMBRANE_HARDENING_AAR_136a.md` | Full 136a security sprint AAR |
+| `SKUNKBAT_OUTER_MEMBRANE_136a.md` | skunkBat HTTP detection spec |
 
-## Team Dispatches
-
-| Team | Status | Next |
-|------|--------|------|
-| **petalTongue** | Coordination backend code landed | footPrint visual parity (12 VT areas) — first interactive tool for `live.primals.eco` |
-| **projectNUCLEUS** | darkforest v3.0 outer membrane 25/26 PASS | footPrint composition packaging, execution report |
-| **sporeGate/golgi** | Sprint complete: 9 exposures closed | SIGN-01 activation, EXP-06 Caddy auth, site rebuild deploy |
-| **flockGate** | WAN validated, footPrint gate owner | footPrint deployment, WAN accessibility for GIS tool |
-| **skunkBat** | HTTP anomaly detection live (553 tests) | Caddy log ingestion pipeline |
-| **songBird** | Auth-gate code landed | drawbridge proxy for footPrint data sources |
-| **cellMembrane** | SIGN-01 pipeline + content.rebuild | Deploy signing keys, deploy rebuilt membrane to golgi |
-| **nestGate** | Coord backend + deep debt sweep | CAS persistence for footPrint projects, cert alerting |
-| **sporePrint** | 301 pages live, auto-merge | Content evolution — static counterpart to petalTongue interactive |
-
-*Wave 136b: System stable. footPrint protist spinning up — petalTongue and projectNUCLEUS now have a concrete visual parity target. Cooling sprint continues. No regressions.*
+*Wave 136b: Hardened and stable. footPrint introduced — first composition target. flockGate: clone and spin up. Teams: see your action items above.*
