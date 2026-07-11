@@ -208,6 +208,50 @@ Legacy: `/tmp/petaltongue.sock`
 
 ---
 
+## Composition Serving (Wave 136b — FP-PARITY)
+
+petalTongue serves **primal compositions** — products that primals compose into.
+footPrint is the first composition target (GIS planner, Leaflet/Turf.js frontend).
+
+### How It Works
+
+petalTongue discovers composition bundles at runtime and serves them as SPAs at
+`/app/{name}/` with `index.html` fallback. The Express server disappears — Axum
+replaces it.
+
+### Configuration
+
+```bash
+# Explicit: name=path pairs (comma-separated)
+export PETALTONGUE_COMPOSITIONS=footprint=/opt/ecoPrimals/compositions/footprint/dist/client
+
+# Auto-discovery: scan a directory for composition bundles
+export PETALTONGUE_COMPOSITIONS_DIR=/opt/ecoPrimals/compositions
+# Each subdir with dist/client/ or index.html is mounted at /app/{dir_name}/
+```
+
+### Deployment Path (footPrint)
+
+```bash
+cd /opt/ecoPrimals/compositions/footprint
+npm run build   # produces dist/client/ (219 kB gzipped, 3 chunks)
+# petalTongue auto-discovers → serves at /app/footprint/
+petaltongue web
+```
+
+### Visual Target Parity
+
+12 visual targets defined in `specs/PETALTONGUE_VISUAL_TARGETS.md` (in footPrint repo):
+VT-1 (Map Engine), VT-2 (Drawing Tools), VT-3 (Layers), VT-4 (Data Sources),
+VT-5 (Measurement), VT-6 (Constraint Solver), VT-7 (Intelligence), VT-8 (Persistence),
+VT-9 (Snap/Grid), VT-10 (Status Bar), VT-11 (UI Theme), VT-12 (Agent Bridge).
+
+Phase 1 (current): Serve identical frontend from Axum — petalTongue replaces Express.
+Phase 2: Backend sovereignty — nestGate CAS, songBird drawbridge, bearDog TLS.
+Phase 3: HPC compute integration — mesh dispatch for DEM/terrain/soil batch processing.
+
+---
+
 ## Documents
 
 | Document | Purpose |
