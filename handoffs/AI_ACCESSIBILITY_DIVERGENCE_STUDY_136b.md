@@ -90,14 +90,75 @@ is more subtle and more broadly applicable.
 - [ ] Ordered list links survive text extraction
 - [ ] Taxonomy pages accessible
 
+## Wave 137a Update — Fetch Budget Exhaustion
+
+### New Finding
+
+After the table→list fix resolved the link stripping issue, the same Claude agent
+continued reviewing. After ~50 successful page fetches, the agent hit a hard wall:
+pages that loaded fine minutes earlier were no longer reachable, across unrelated
+sections. The agent correctly self-diagnosed:
+
+> "I've hit a real quota ceiling on fetches to this domain for this session,
+> not a site-side problem."
+
+### Verification
+
+- No rate limiting in Caddy config
+- No fail2ban HTTP jail (only SSH)
+- No `Crawl-delay` in robots.txt
+- `Allow: /` for all user agents
+
+The rate limit is Anthropic's `web_fetch` tool imposing per-domain session quotas.
+
+### Our Response
+
+Agent-side fetch quotas are accessibility constraints, not the agent's problem to fix.
+A screen reader with a limited buffer is not the screen reader's fault — it's ours
+to accommodate. Two new endpoints minimize fetches for comprehensive understanding:
+
+| Endpoint | What it provides | Fetches saved |
+|----------|-----------------|---------------|
+| `/llms.txt` | Structured site overview: sections, concepts, metrics, endpoints | Agent can prioritize 289 pages from 1 overview |
+| `/site-index/` | Auto-generated complete catalog: every page with title, description, URL | Full page discovery in 1 fetch instead of 10+ section indexes |
+
+An agent hitting quota at 50 requests can now get: `llms.txt` (1) + `site-index/` (1) +
+10 section indexes (10) + 38 specific pages = full comprehension within budget.
+
+### Updated Divergence Matrix
+
+| Client | Table links | Fetch quota | hasPart JSON-LD | llms.txt | site-index |
+|--------|-------------|-------------|-----------------|----------|------------|
+| Claude web_fetch | FIXED (lists) | ~50/session (agent-side) | Parseable | Available | Available |
+| Google Search AI | Works | Unlimited | Parseable | N/A | N/A |
+| curl | Works | Unlimited | Parseable | Available | Available |
+| Screen reader | Works (lists) | N/A | N/A | N/A | Available (semantic HTML) |
+
+### Updated Test Matrix
+
+- [ ] Can comprehend site structure from `/llms.txt` alone
+- [ ] Can discover all pages from `/site-index/` alone
+- [ ] Can discover child page URLs from section index
+- [ ] Can follow discovered URLs to leaf pages
+- [ ] JSON-LD `hasPart` parseable
+- [ ] `sitemap.xml` parseable
+- [ ] Content renders after `---` horizontal rules
+- [ ] Ordered list links survive text extraction
+- [ ] Taxonomy pages accessible
+- [ ] `<link rel="alternate">` for llms.txt discoverable from `<head>`
+
 ## Accessibility Principle
 
 > AI on behalf of users solves issues for all sorts of capability ranges.
 
 A blind developer using Claude to navigate primals.eco hits the same table-link
 stripping that the review agent hit. A motor-impaired scientist using an AI assistant
-to find the right essay hits the same cache behavior. Testing with AI agents IS
-testing assistive technology — the agents ARE the assistive technology.
+to find the right essay hits the same cache behavior. An agent hitting fetch quota
+after 50 pages is the same as a screen reader running out of buffer — the content
+must be reachable within the tool's constraints, not just reachable in theory.
+
+Testing with AI agents IS testing assistive technology — the agents ARE the
+assistive technology. Their constraints are accessibility constraints.
 
 This is not a separate concern from WCAG compliance. It is the same concern viewed
 through a different capability profile.
@@ -105,5 +166,7 @@ through a different capability profile.
 ## References
 
 - `SPOREPRINT_DUAL_CHECKOUT_AAR_136b.md` — pipeline divergence AAR
-- Commit `9948650` — ordered lists + JSON-LD hasPart fix
+- Commit `9948650` — ordered lists + JSON-LD hasPart fix (Wave 136b)
+- Commit `ddf8138` — 23 tables → lists across all section indexes (Wave 137a)
+- Commit `b82454c` — `/llms.txt` + `/site-index/` for fetch-constrained agents (Wave 137a)
 - `specs/EVOLUTION_QUEUE.md` P2 — accessibility test matrix target
