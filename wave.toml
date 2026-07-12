@@ -12,7 +12,7 @@
 id = 137
 sub = "b"
 date = "2026-07-12"
-posture = "NEURAL API LIVE. sporeGate activated — 19 primals routable, SIGN-01 E2E verified, depot signed. FLOCKGATE-MESH resolved (port 8080→7700, 4 overlay peers). cellMembrane systemd UMask permanent. 7/12 Phase 1 items DONE. Next: NAPI-SYSTEMD, lifecycle registration, golgi WG bind, bidirectional mesh."
+posture = "NEURAL API LIVE + MESH BIDIRECTIONAL. Phase 1 at 10/12. Neural API systemd on sporeGate (48 primals). songBird f05918a on 3 gates. Depot signed. 3,960+ tests / 0 fail / 141 scenarios. 25 debt items inventoried. Forgejo parity restored. ironGate overwatch split."
 publisher = "eastGate-overwatch"
 
 [gates]
