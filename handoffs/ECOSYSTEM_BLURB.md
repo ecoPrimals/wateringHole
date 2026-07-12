@@ -100,14 +100,20 @@
 | 22 | **NAPI-IRONGATE** | Deploy songBird `f05918a` + start `biomeos neural-api` on ironGate. | 1hr |
 | 23 | **SYSTEMD-UMASK** | Regenerate systemd units with new UMask via `membrane gate.bootstrap`. | 30min |
 
+### cellMembrane / sporeGate — Forgejo Relay
+
+| # | ID | What | Effort |
+|---|-----|------|--------|
+| 24 | **SHALLOW-PINGPONG** | Shallow Forgejo relay (depth=1 bare repos on golgi) causes SHA divergence on every rebase — `git push forgejo main` rejects because rebased commits get new SHAs even though content is identical. Burns cycles every cascade. Fix options: (a) convert golgi Forgejo repos to full-depth mirrors, (b) `cellMembrane` automates `--force-with-lease` for shallow relays, (c) move Forgejo to sporeGate where repos are full-depth. Affects: wateringHole, primalSpring, groundSpring, bearDog, nestGate, whitePaper, plasmidBin (7 repos observed). | 2-4hr |
+
 ### Discussion items (all teams)
 
 | # | ID | What |
 |---|-----|------|
-| 24 | **VERSION-SKEW** | 3 distinct version ranges (0.1-0.2, 0.4-0.9, 0.14). Coordinate a versioning strategy. |
-| 25 | **SHADER-SUPPORT** | `shader.list` / `trust.list` in capability_registry but no impl. Keep or remove? |
-| 26 | **CERT-OWNER** | Certificate owner shows `loamspine`, expected `beardog`. Clarify. |
-| 27 | **PEPTI-TARGETS** | Missing depot: `aarch64-linux-android`, `x86_64-unknown-linux-gnu`. |
+| 25 | **VERSION-SKEW** | 3 distinct version ranges (0.1-0.2, 0.4-0.9, 0.14). Coordinate a versioning strategy. |
+| 26 | **SHADER-SUPPORT** | `shader.list` / `trust.list` in capability_registry but no impl. Keep or remove? |
+| 27 | **CERT-OWNER** | Certificate owner shows `loamspine`, expected `beardog`. Clarify. |
+| 28 | **PEPTI-TARGETS** | Missing depot: `aarch64-linux-android`, `x86_64-unknown-linux-gnu`. |
 
 ---
 
@@ -147,4 +153,4 @@ grapheneGate — Tower live. REALWORLD: ADB.
 
 ---
 
-*Wave 137b: 10/12 Phase 1 done. 27 items remain across 11 teams. 3 critical, 7 high, 5 medium, 4 discussion. Clear by end of wave.*
+*Wave 137b: 10/12 Phase 1 done. 28 items remain across 11 teams. 3 critical, 8 high, 5 medium, 4 discussion. Clear by end of wave.*
