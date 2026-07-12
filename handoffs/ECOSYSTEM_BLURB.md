@@ -154,7 +154,7 @@ eastGate     — Overwatch. All 40 repos at HEAD. Neural API live (23+ days).
 sporeGate    — Build + NUCLEUS hub. Neural API LIVE (19 primals). SIGN-01 verified. FP-DEPLOY live.
 golgiBody    — Thin relay. sporePrint consolidated. Caddy hardened. WG bind gap (10.13.37.1:7700).
 flockGate    — footPrint owner. Mesh resolved (4 overlay peers). WAN validation complete.
-ironGate     — Node atomic. darkforest 26/26. JupyterHub live.
+ironGate     — Node atomic. Own overwatch agent (hardware + deployments). projectNUCLEUS = code only.
 strandGate   — REALWORLD: physical access for enrollment.
 grapheneGate — Tower live. REALWORLD: ADB for full pepti.
 ```
@@ -169,6 +169,7 @@ grapheneGate — Tower live. REALWORLD: ADB for full pepti.
 | `CELLMEMBRANE_NAPI_PERMS_DEEP_DEBT_AAR_137b.md` | **NEW** — permanent systemd UMask fix, bridge protocol aligned |
 | `FLOCKGATE_MESH_RESOLUTION_AAR_137a.md` | **NEW** — port 8080→7700 root cause, 4 peers connected |
 | `FLOCKGATE_WAN_OVERWATCH_AAR_137a.md` | **NEW** — WAN validation, FP-DEPLOY 114ms, 3 mesh blockers mapped, API surface for FP-API |
+| `IRONGATE_OVERWATCH_SPLIT_WAVE137b.md` | **NEW** — ironGate gets own overwatch agent; projectNUCLEUS = code only |
 | `NEURAL_API_DEPLOYMENT_AUTHORITY_WAVE137a.md` | Active — Phase 1 directive (largely complete) |
 | `AI_ACCESSIBILITY_DIVERGENCE_STUDY_136b.md` | Open — accessibility findings |
 
