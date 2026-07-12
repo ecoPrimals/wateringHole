@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-12T00:45:00Z
+# Gate: flockGate | Updated: 2026-07-12T14:10:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-12T00:45:00Z"
+updated = "2026-07-12T14:10:00Z"
 wave = "137a"
 
 [heads]
-primalSpring = "a2f1950"
-wateringHole = "168eaf54"
+primalSpring = "5b424f7"
+wateringHole = "41a92bc1"
 skunkBat = "d9837a9"
 
 [mesh]
@@ -21,43 +21,43 @@ peers_http_reachable = 2
 wireguard_status = "UP"
 wg_peer = "golgiBody (10.13.37.1)"
 icmp_rtt_golgi_ms = 31
-federation_golgi_7700 = "UNREACHABLE (bound to public IP only)"
-federation_sporegate_7700 = "REACHABLE (HTTP JSON-RPC at /jsonrpc works)"
+federation_sporegate_7700 = "REACHABLE"
 federation_eastgate_7700 = "REACHABLE"
+federation_golgi_7700 = "UNREACHABLE"
 federation_irongate_7700 = "UNREACHABLE"
-status = "PARTIAL — HTTP federation reachable but UDS mesh engine has 0 peers (protocol mismatch)"
+status = "PARTIAL — 2/4 peers federation-reachable, UDS mesh engine 0 peers"
 
 [dispatch_validation]
-status = "PARTIAL — HTTP to sporeGate federation works. UDS mesh peering blocked. capability.call blocked."
+status = "PARTIAL — HTTP federation works, UDS mesh peering blocked, capability.call blocked"
 wan_dispatch_01 = "PASS (transport)"
 http_transport_status = "PASS"
-http_federation_status = "PASS — curl to 10.13.37.2:7700/jsonrpc returns mesh.peers (3 peers online)"
-capability_call_status = "BLOCKED — 3 causes: golgi WG bind, UDS/HTTP protocol mismatch, missing DRAWBRIDGE_ROUTES"
-blockers = ["golgi: bind 7700 to wg0", "songBird: UDS↔HTTP federation peering", "sporeGate: DRAWBRIDGE_ROUTES=/hub=jupyter"]
+http_federation_status = "PASS — 10.13.37.2:7700/jsonrpc responds (3 peers, v0.2.1)"
+capability_call_status = "BLOCKED — golgi WG bind + UDS/HTTP mismatch + missing DRAWBRIDGE_ROUTES"
 aar = "FLOCKGATE_DIVERGENCE_TOPOLOGY_AAR_136b.md"
 
-[dispatch_validation.latency_wan_http]
-p50_ms = 138
-p95_ms = 172
-target = "membrane.primals.eco/depot/"
-samples = 5
-probed_at = "2026-07-12T00:45:00Z"
+[dispatch_validation.latency]
+wan_http_p50_ms = 126
+wg_icmp_p50_ms = 31
+footprint_p50_ms = 114
+probed_at = "2026-07-12T14:05:00Z"
 
 [outer_membrane_validation]
-validated_at = "2026-07-11T01:50:00Z"
-all_domains = "PASS — HSTS preload, X-Frame DENY, nosniff, permissions-policy"
+validated_at = "2026-07-12T14:05:00Z"
+primals_eco = "PASS — 200, CSP, X-Frame DENY"
+footprint = "PASS — 200, custom CSP (OSM/FEMA/USGS/ArcGIS allowlist)"
+lab = "PASS — 401 (basicauth EXP-06)"
+depot = "PASS — 200"
 
 [footprint]
-status = "OPERATIONAL"
+status = "LIVE ON SOVEREIGN INFRA"
 path = "protists/footPrint"
-source = "git@github.com:protoKarya/footPrint.git"
-node_version = "v22.22.0"
-npm_version = "9.2.0"
-vite_version = "6.4.1"
-vite_port = 5174
-dev_server_verified = true
-verified_at = "2026-07-11T17:14:00Z"
-next_action = "FP-DEPLOY tracking — awaiting rsync to golgi + Caddy handle_path"
+wan_url = "https://primals.eco/footprint/"
+wan_status = "200 OK"
+wan_size_bytes = 4154
+csp = "custom (OSM tiles, FEMA, USGS, ArcGIS allowed)"
+verified_from_wan_at = "2026-07-12T14:05:00Z"
+local_dev_port = 5174
+next_action = "FP-API — wire Express proxy endpoints through songBird drawbridge"
 
 [skunkbat]
 head = "d9837a9"
@@ -66,10 +66,9 @@ failures = 0
 suite_status = "GREEN"
 
 [primalspring]
-version = "v0.9.35"
-head = "a2f1950"
-scenarios = 133
+version = "v0.9.36"
+head = "5b424f7"
+scenarios = 136
 tests = 1106
 failures = 0
 suite_status = "GREEN"
-new_scenario = "s_federation_wan_readiness — validates port 7700 reachability per WAN peer"
