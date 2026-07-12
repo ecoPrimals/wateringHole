@@ -5,14 +5,14 @@
 
 [meta]
 gate = "ironGate"
-updated = "2026-07-12T14:15:00Z"
+updated = "2026-07-12T15:50:00Z"
 
 [heads]
 nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
 wateringHole = "d95c01200000000000000000000000000000000000"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
-primalSpring = "5b424f7"
-projectNUCLEUS = "cc0befd"
+primalSpring = "644e7ad"
+projectNUCLEUS = "14ee39a"
 bearDog = "f997a339009ec3ca8a1393748b8ac920a0d57150"
 songBird = "fc766dc959fd397ee6c119d552071ab5901bd4a8"
 toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
