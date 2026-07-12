@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-12T15:55:00Z
+# Gate: flockGate | Updated: 2026-07-12T16:20:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-12T15:55:00Z"
+updated = "2026-07-12T16:20:00Z"
 wave = "137b"
 
 [heads]
-primalSpring = "644e7ad"
-wateringHole = "2d6e2105"
+primalSpring = "f2efaf6"
+wateringHole = "b6411694"
 plasmidBin = "e0b20e0"
 skunkBat = "d9837a9"
 
@@ -63,8 +63,15 @@ next_action = "FP-API — wire proxy through drawbridge (Phase 2)"
 
 [primalspring]
 version = "v0.9.36"
-head = "644e7ad"
-scenarios = 138
-tests = 1123
+head = "f2efaf6"
+scenarios = 141
+tests = 1135
 failures = 0
+clippy_warnings = 0
 suite_status = "GREEN"
+
+[debt]
+depot_primal_count = "0/13 — only songBird binary in local depot"
+forgejo_parity = "DRIFTED — forgejo/main behind origin/main"
+local_gate_env = "GATE_NAME not set — s_federation_wan_readiness detects via hostname"
+wg0_registry_mismatch = "expected .5 (eastGate scenario default), actual .6 (flockGate) — false positive"
