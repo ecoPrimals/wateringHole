@@ -101,59 +101,114 @@ flockGate (NYC)
             └── Port 9090 (alt): TIMEOUT ✗
 ```
 
-### Root Cause (Compound)
+### Root Cause (Revised — Wave 137a probe)
 
-1. **UFW on golgi** does not allow port 7700 on the WireGuard interface (`wg0`). songBird federation listens on localhost or is not bound at all on golgi.
-2. **No songBird process running on golgi/sporeGate** with `--federation-port 7700` exposed to the mesh network.
-3. **Even if federation were exposed**, `SONGBIRD_DRAWBRIDGE_ROUTES` is not configured on sporeGate — so `capability.call("jupyter")` would still fail to route.
+**CORRECTION**: Initial AAR overstated the gap. Live TCP probes from flockGate (scenario `s_federation_wan_readiness`, commit `a2f1950`) reveal:
 
-### Impact
+| Peer | Address | Port 7700 | Status |
+|------|---------|-----------|--------|
+| golgi | 10.13.37.1 | UNREACHABLE | No federation listener on relay |
+| sporeGate | 10.13.37.2 | **REACHABLE** | Federation exposed |
+| eastGate | 10.13.37.5 | **REACHABLE** | Federation exposed |
+| ironGate | 10.13.37.7 | UNREACHABLE | No federation listener |
 
-- **capability.call is 100% non-functional from WAN** — not degraded, completely inoperative
-- The HTTP data path works fine (flockGate → Cloudflare → Caddy → backend) but this bypasses the mesh entirely
-- Mesh peer discovery, capability advertisement, and remote dispatch are all blocked by the same topology gap
+**2/4 WAN peers have federation port open.** The mesh is partially functional — the gap is specifically:
+1. **golgi** (the relay node all traffic traverses) does not have songBird federation listening on 7700
+2. **ironGate** does not expose 7700
 
-### Required Actions (sporeGate/golgi)
+sporeGate **does** have songBird federation running. The initial assessment that "no songBird process [is] running on golgi/sporeGate" was **incorrect for sporeGate**.
 
-| # | Action | Owner |
-|---|--------|-------|
-| 1 | Start songBird with `--federation-port 7700` on golgi | sporeGate |
-| 2 | UFW: `ufw allow in on wg0 to any port 7700 proto tcp` | sporeGate |
-| 3 | Set `SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter` in songBird env | sporeGate |
-| 4 | Verify from flockGate: `curl http://10.13.37.1:7700/` returns songBird handshake | flockGate |
+### Revised Root Cause (Wave 137a deep probe)
 
-### Workaround
+**Full topology observed via HTTP JSON-RPC to `http://10.13.37.2:7700/jsonrpc`:**
 
-HTTP transport via `membrane.primals.eco` works at ~138ms p50. Direct WireGuard ICMP at ~30ms. If songBird federation were exposed, mesh RTT should be ~30-35ms (WG direct) vs ~138ms (public internet + Cloudflare + Caddy overhead).
+sporeGate's songBird v0.2.1 is fully operational with 3 mesh peers:
+- `157.230.3.183:7700` (golgi public IP) — direct, reachable
+- `192.168.4.237:7700` (eastGate LAN) — direct, 0ms latency
+- `10.13.37.0:8080` (WG drawbridge) — direct, reachable
+
+eastGate's songBird sees golgi at 157.230.3.183:7700 (112ms latency).
+
+**Three distinct problems:**
+
+1. **golgi binds songBird federation to its public IP (157.230.3.183:7700) but NOT the WG interface (10.13.37.1:7700)**. From flockGate's WG overlay, 10.13.37.1:7700 is CONNECTION REFUSED. But sporeGate and eastGate reach golgi via its public IP.
+
+2. **flockGate's local songBird (UDS) cannot join the HTTP-based federation mesh.** `peer.connect` establishes a TCP channel (70ms latency, state "connected") but the mesh.peers list remains empty. The local songBird's mesh engine expects raw socket protocol for peer registration, but the remote federation endpoints serve HTTP JSON-RPC at `/jsonrpc`. This is a **protocol layer mismatch** between the UDS client and the HTTP federation server.
+
+3. **SONGBIRD_DRAWBRIDGE_ROUTES is NOT configured on sporeGate.** `discover_capabilities` on sporeGate returns songBird's built-in capabilities (http.*, relay.*, mesh.*, crypto.*) but NO `jupyter` capability. `capability.call("jupyter")` on sporeGate itself returns: "No local or remote provider found for capability 'jupyter'".
+
+### Impact (Wave 137a — Final Assessment)
+
+- **capability.call("jupyter") from flockGate**: BLOCKED at three levels
+  1. flockGate songBird has 0 mesh peers (protocol mismatch)
+  2. Even if peered, sporeGate doesn't advertise `jupyter` (missing DRAWBRIDGE_ROUTES)
+  3. Even if advertised, routing to ironGate would fail (ironGate port 7700 closed)
+- **HTTP transport workaround**: flockGate CAN reach sporeGate's federation directly via `curl -X POST http://10.13.37.2:7700/jsonrpc` — this proves the data path works at application level
+- **The mesh is operational** between sporeGate, eastGate, and golgi on the LAN/public-IP topology. The WAN overlay (WireGuard 10.13.37.x) is a secondary path that works for routing but not for federation binding on golgi.
+
+### Required Actions (Revised — Wave 137a)
+
+| # | Action | Owner | Priority |
+|---|--------|-------|----------|
+| 1 | Bind golgi songBird to wg0 interface (10.13.37.1:7700) in addition to public IP | golgi/sporeGate | **CRITICAL** |
+| 2 | Set `SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter` on sporeGate songBird | sporeGate | **CRITICAL** |
+| 3 | Investigate UDS ↔ HTTP federation protocol mismatch — flockGate `peer.connect` succeeds at TCP but mesh doesn't register the peer | songBird team | HIGH |
+| 4 | Expose songBird 7700 on ironGate (for direct capability routing) | ironGate | MEDIUM |
+| 5 | Consider `http.request` as interim workaround — flockGate can HTTP POST to sporeGate federation directly | flockGate | LOW |
+
+### Workaround (Proven)
+
+HTTP JSON-RPC to sporeGate's federation endpoint works from flockGate:
+```bash
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"mesh.peers","id":1}' \
+  http://10.13.37.2:7700/jsonrpc
+```
+
+This bypasses the local songBird UDS mesh engine and talks directly to sporeGate's federation. Latency: ~220ms (WG hop). Public HTTP path via membrane.primals.eco: ~138ms p50.
 
 ---
 
-## Latency Baseline (136b)
+## Latency Baseline (137a)
 
 | Path | p50 | p95 | Method |
 |------|-----|-----|--------|
-| flockGate → membrane.primals.eco (HTTPS) | 138ms | 150ms | curl to /depot/ (5 samples) |
-| flockGate → golgi (WireGuard ICMP) | 30ms | 32ms | ping -c3 10.13.37.1 |
-| flockGate → golgi (federation 7700) | — | — | UNREACHABLE |
-| flockGate → capability.call mesh | — | — | 0 PEERS |
+| flockGate → membrane.primals.eco (HTTPS) | 138ms | 172ms | curl to /depot/ (5 samples) |
+| flockGate → golgi (WireGuard ICMP) | 31ms | 34ms | ping -c3 10.13.37.1 |
+| flockGate → golgi (federation 10.13.37.1:7700) | — | — | CONNECTION REFUSED |
+| flockGate → sporeGate (federation 10.13.37.2:7700) | 220ms | — | HTTP JSON-RPC `/jsonrpc` |
+| flockGate → eastGate (federation 10.13.37.5:7700) | ~250ms | — | HTTP JSON-RPC `/jsonrpc` |
+| flockGate → sporeGate (peer.connect TCP) | 70ms | — | songBird peer.connect (connects but no mesh registration) |
+| flockGate → capability.call mesh (UDS) | — | — | 0 PEERS (protocol mismatch) |
 
 ---
 
-## Validation State
+## Validation State (137a)
 
 | Metric | Value |
 |--------|-------|
-| primalSpring SHA | `fb03030` |
-| Tests | 1,104 |
-| Scenarios | 132 |
+| primalSpring SHA | `a2f1950` |
+| Tests | 1,106 |
+| Scenarios | 133 |
 | Failures | 0 |
 | Suite | GREEN |
+| New scenario | `s_federation_wan_readiness` — validates port 7700 reachability |
 | Env required | `ECOPRIMALS_ROOT` + `ECOPRIMALS_PLASMID_BIN` |
 
 ---
 
 ## Summary
 
-The divergence was a parser bug — straightforward fix, now green. The topology gap is the same blocker from Wave 134c, now more precisely characterized: it's not just a missing env var, it's a completely absent federation listener on the WireGuard overlay. Until golgi/sporeGate exposes songBird federation on port 7700 over wg0, the mesh is WAN-partitioned and `capability.call` is dead from any external gate.
+**Divergence** (Issue 1): Parser bug, fixed in `fb03030`, now green.
 
-**Priority**: sporeGate should address items 1-3 above. flockGate will re-probe immediately upon notification.
+**Topology** (Issue 2): Fully characterized across 3 probe sessions. The mesh is NOT dead — it's operational between sporeGate, eastGate, and golgi on LAN/public-IP paths. The WAN gap has THREE compound causes:
+
+1. golgi binds to public IP only, not WG interface (prevents flockGate from reaching it)
+2. flockGate's UDS songBird can't join the HTTP-based federation (protocol layer mismatch)
+3. DRAWBRIDGE_ROUTES not set on sporeGate (no `jupyter` capability advertised)
+
+**Key finding**: flockGate CAN talk to sporeGate's federation via HTTP at `10.13.37.2:7700/jsonrpc` — the data path works, only the mesh registration protocol is incompatible with the local UDS client.
+
+**Priority**: Items 1-2 above are CRITICAL for mesh convergence. Item 3 is a songBird architectural question (UDS client → HTTP federation peering).
+
+**Scenario `s_federation_wan_readiness` (a2f1950)** will transition from partial-FAIL → full-PASS as fixes land.

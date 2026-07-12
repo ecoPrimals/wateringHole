@@ -9,27 +9,31 @@ updated = "2026-07-12T00:45:00Z"
 wave = "137a"
 
 [heads]
-primalSpring = "fb03030"
-wateringHole = "0d3409f9"
+primalSpring = "a2f1950"
+wateringHole = "168eaf54"
 skunkBat = "d9837a9"
 
 [mesh]
 node_id = "flockGate"
 songbird_version = "0.2.1"
-uptime_seconds = 11369
-peers = 0
+peers_uds = 0
+peers_http_reachable = 2
 wireguard_status = "UP"
 wg_peer = "golgiBody (10.13.37.1)"
 icmp_rtt_golgi_ms = 31
-federation_7700_reachable = false
-status = "BLOCKED — same topology gap as 136b. AAR open. Awaiting sporeGate/golgi action."
+federation_golgi_7700 = "UNREACHABLE (bound to public IP only)"
+federation_sporegate_7700 = "REACHABLE (HTTP JSON-RPC at /jsonrpc works)"
+federation_eastgate_7700 = "REACHABLE"
+federation_irongate_7700 = "UNREACHABLE"
+status = "PARTIAL — HTTP federation reachable but UDS mesh engine has 0 peers (protocol mismatch)"
 
 [dispatch_validation]
-status = "PASS — HTTP transport proven. capability.call blocked (federation port closed, 0 mesh peers)."
+status = "PARTIAL — HTTP to sporeGate federation works. UDS mesh peering blocked. capability.call blocked."
 wan_dispatch_01 = "PASS (transport)"
 http_transport_status = "PASS"
-capability_call_status = "BLOCKED — federation_port 7700 CONNECTION REFUSED on 10.13.37.1"
-blockers = ["golgi: expose songBird 7700 on wg0 (10.13.37.1)", "sporeGate: SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter"]
+http_federation_status = "PASS — curl to 10.13.37.2:7700/jsonrpc returns mesh.peers (3 peers online)"
+capability_call_status = "BLOCKED — 3 causes: golgi WG bind, UDS/HTTP protocol mismatch, missing DRAWBRIDGE_ROUTES"
+blockers = ["golgi: bind 7700 to wg0", "songBird: UDS↔HTTP federation peering", "sporeGate: DRAWBRIDGE_ROUTES=/hub=jupyter"]
 aar = "FLOCKGATE_DIVERGENCE_TOPOLOGY_AAR_136b.md"
 
 [dispatch_validation.latency_wan_http]
@@ -63,9 +67,9 @@ suite_status = "GREEN"
 
 [primalspring]
 version = "v0.9.35"
-head = "fb03030"
-scenarios = 132
-tests = 1104
+head = "a2f1950"
+scenarios = 133
+tests = 1106
 failures = 0
 suite_status = "GREEN"
-fix_136b = "checksums.toml parser — handle nested arch-keyed tables"
+new_scenario = "s_federation_wan_readiness — validates port 7700 reachability per WAN peer"
