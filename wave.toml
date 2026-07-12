@@ -10,9 +10,9 @@
 
 [wave]
 id = 137
-sub = "a"
-date = "2026-07-11"
-posture = "CONVERGED. All 8 stadial criteria clear. Public threshold survivable. 2,930+ tests / 0 fail. 12 handoffs fossilized. Next: live compositions (FP-DEPLOY, SIGN-01, skunky-ingest, flockGate mesh)."
+sub = "b"
+date = "2026-07-12"
+posture = "NEURAL API LIVE. sporeGate activated — 19 primals routable, SIGN-01 E2E verified, depot signed. FLOCKGATE-MESH resolved (port 8080→7700, 4 overlay peers). cellMembrane systemd UMask permanent. 7/12 Phase 1 items DONE. Next: NAPI-SYSTEMD, lifecycle registration, golgi WG bind, bidirectional mesh."
 publisher = "eastGate-overwatch"
 
 [gates]

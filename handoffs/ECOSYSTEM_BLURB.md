@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 137a
+# ecoPrimals Ecosystem Blurb — Wave 137b
 
-**Date**: Jul 12, 2026 09:45 EDT | **Wave**: 137a | **From**: eastGate overwatch
-**Posture**: **NEURAL API ACTIVATION IN PROGRESS.** cellMembrane wired `deploy.*` + `lifecycle.*` as Neural API front-end (443 LOC). SIGN-01 blockers resolved. FP-DEPLOY **LIVE** at primals.eco/footprint/. skunky-ingest deployed (dry-run). primalSpring v0.9.36 (1,106 tests, 136 scenarios). sporeGate AAR: Neural API not running yet (api ≠ neural-api), socket permissions cross-cutting blocker.
+**Date**: Jul 12, 2026 11:15 EDT | **Wave**: 137b | **From**: eastGate overwatch
+**Posture**: **NEURAL API LIVE ON SPOREGATE.** NAPI-START done. NAPI-PERMS done. SIGN-01 verified E2E (depot signed). FLOCKGATE-MESH root-caused and fixed (port 8080→7700, `f05918a`). 4 overlay peers connected from flockGate. FP-DEPLOY confirmed live from WAN (114ms NYC). cellMembrane systemd UMask fix permanent (`d5474df`). 19 primals routable via Neural API on sporeGate.
 
 ---
 
@@ -25,21 +25,24 @@ Wave 136b delivered across 4 cascades (Jul 11):
 
 ## Phase 1 — Neural API as Deployment Authority (NOW)
 
-**Critical shift**: biomeOS Neural API has been live on eastGate for **23 days** (musl binary, riboCipher enforced, 24/24 sockets healthy). 320+ capability translations, 171 route entries, L4 adaptive routing, LifecycleManager, graph-based deployment — all running, none used operationally. **Every ad-hoc deployment pattern has a Neural API equivalent. Time to use them.**
+**Neural API is LIVE on sporeGate.** 19 primals discovered and routable. `lifecycle.status`, `crypto.sign`, `topology.primals`, `graph.list`, `composition.deploy` all verified. Depot cryptographically signed via `sign.activate → beardog.sock → Ed25519 → signatures.toml → sign.verify PASS`. FLOCKGATE-MESH resolved — 4 overlay peers connected. cellMembrane systemd fix makes socket permissions permanent across all future bootstraps.
 
-See: `NEURAL_API_DEPLOYMENT_AUTHORITY_WAVE137a.md`
+See: `NEURAL_API_LIVE_AAR_137b.md`, `FLOCKGATE_MESH_RESOLUTION_AAR_137a.md`, `CELLMEMBRANE_NAPI_PERMS_DEEP_DEBT_AAR_137b.md`, `FLOCKGATE_WAN_OVERWATCH_AAR_137a.md`
 
 | ID | Action | Owner | Priority |
 |----|--------|-------|----------|
-| ~~NAPI-MEMBRANE~~ | ~~Wire `membrane deploy` to Neural API~~ | cellMembrane | **DONE** (`1df1cfe`) — `deploy_dispatch.rs` (443 LOC), `deploy.composition`, `deploy.graph`, `lifecycle.status` wired |
-| ~~SIGN-01-ACTIVATE~~ | ~~Resolve SIGN-01 activation blockers~~ | cellMembrane | **DONE** (`471ebf5`) — signing dispatch + deep debt resolved |
-| ~~FP-DEPLOY~~ | ~~Deploy footPrint SPA to primals.eco/footprint/~~ | sporeGate | **DONE** — Vite build, Caddy handle_path, CSP, 200 OK |
-| ~~SKUNKY-DEPLOY~~ | ~~Deploy skunky-ingest to golgi~~ | sporeGate | **DONE** — dry-run mode, systemd enabled, processing log backlog |
-| NAPI-START | **Start `biomeos neural-api` on sporeGate** — api ≠ neural-api (different modes). Neural API not running yet. Single command to activate | sporeGate | **CRITICAL** |
-| NAPI-PERMS | **Fix socket permissions** — `/run/membrane/*.sock` are `root:root srw-------`. Blocks Neural API routing. Same root cause as SIGN-01 | sporeGate + all gates | **CRITICAL** |
-| NAPI-LIFECYCLE | **LifecycleManager as primary supervisor** — systemd → biomeOS → primals | biomeOS | **HIGH** |
-| NAPI-CROSS-GATE | **Neural API on every NUCLEUS gate** — start on eastGate (already running), sporeGate (pending NAPI-START), ironGate, southGate | cellMembrane + all gates | **HIGH** |
-| FLOCKGATE-MESH | **Fix songBird federation port 7700 on WG overlay** — 0 mesh peers from flockGate | mesh team | **HIGH** |
+| ~~NAPI-MEMBRANE~~ | ~~Wire `membrane deploy` to Neural API~~ | cellMembrane | **DONE** (`1df1cfe`) |
+| ~~SIGN-01~~ | ~~Resolve SIGN-01 + verify E2E~~ | cellMembrane + sporeGate | **DONE** — depot signed, `sign.verify PASS` |
+| ~~FP-DEPLOY~~ | ~~Deploy footPrint SPA~~ | sporeGate | **DONE** — live at primals.eco/footprint/ (114ms WAN) |
+| ~~SKUNKY-DEPLOY~~ | ~~Deploy skunky-ingest~~ | sporeGate | **DONE** — dry-run, processing log backlog |
+| ~~NAPI-START~~ | ~~Start Neural API on sporeGate~~ | sporeGate | **DONE** — 19 primals, 156 translations, 33 capabilities |
+| ~~NAPI-PERMS~~ | ~~Fix socket permissions~~ | cellMembrane + sporeGate | **DONE** — runtime + permanent systemd UMask (`d5474df`) |
+| ~~FLOCKGATE-MESH~~ | ~~Fix songBird port 7700~~ | songBird | **DONE** (`f05918a`) — 4 overlay peers from flockGate |
+| NAPI-SYSTEMD | Promote Neural API to systemd service on sporeGate | sporeGate | **HIGH** |
+| NAPI-LIFECYCLE | LifecycleManager registration (lifecycle.status count=0) | biomeOS | **HIGH** |
+| GOLGI-WG-BIND | songBird on golgi: bind 10.13.37.1:7700 (currently public IP only) | golgi/sporeGate | **HIGH** |
+| NAPI-CROSS-GATE | Deploy songBird `f05918a` to sporeGate + eastGate for bidirectional mesh | all gates | **HIGH** |
+| SOCKET-DIR-UNIFY | Unify `/run/membrane/` and `/run/biomeos-root/` | biomeOS | MEDIUM |
 
 ## Phase 2 — Live Compositions + Visualization (1-2 weeks)
 
@@ -75,28 +78,30 @@ See: `NEURAL_API_DEPLOYMENT_AUTHORITY_WAVE137a.md`
 
 ---
 
-## Dimensional Summary (Wave 137a)
+## Dimensional Summary (Wave 137b)
 
 ### Glacial: ALL 8 CLEAR
 
 Stadial entry achieved. Criterion 8 (outer membrane hardened) 5/5 met. Remaining work is defense-in-depth evolution, not blockers.
 
-### Eco: 2,930+ tests / 0 fail
+### Eco: 3,935+ tests / 0 fail
 
 | Suite | Tests | Status |
 |-------|-------|--------|
 | primalSpring | 1,106 | GREEN (v0.9.36, 136 scenarios) |
+| cellMembrane | 1,024 | GREEN (pedantic, 0 clippy warnings) |
 | groundSpring | 1,047+ | GREEN |
 | skunkBat | 563 | GREEN |
 | projectNUCLEUS | 149 | GREEN (26/26) |
 | footPrint | 46 | GREEN (Vitest) |
 
-### Topo: 4-gate mesh + WG overlay
+### Topo: 5-gate mesh + WG overlay (FLOCKGATE-MESH RESOLVED)
 
 ```
 eastGate ↔ golgi ↔ ironGate + southGate (covalent mesh, <1ms LAN)
 sporeGate ↔ golgi (WireGuard, 30ms)
-flockGate ↔ golgi (WireGuard, 30ms — mesh gap: port 7700)
+flockGate → sporeGate + golgi + eastGate + ironGate (WG overlay, 4 peers, 31ms)
+  ↳ bidirectional pending: deploy songBird f05918a to sporeGate/eastGate
 grapheneGate (TCP-only, Tower atomic)
 ```
 
@@ -136,19 +141,19 @@ All primals at HEAD, all evolving, all sovereign CI capable.
 | Nest | Defined, westGate pending |
 | Compute | Defined, strandGate pending |
 
-### Temporal: Wave 137a
+### Temporal: Wave 137b
 
-4 cascades on Jul 11. 14 repos evolved. 0 conflicts. Rust cascade (`membrane temporal.cascade`) operational.
+5 cascades across Jul 11-12. 18+ repo evolutions absorbed. 0 conflicts. Neural API live on 2 gates (eastGate 23d, sporeGate 137b).
 
 ---
 
 ## Gate Convergence
 
 ```
-eastGate     — Overwatch. All 40 repos at HEAD. Converged.
-sporeGate    — Build hub. Hardened. SIGN-01 + FP-DEPLOY pending.
-golgiBody    — Thin relay. sporePrint consolidated. Caddy hardened.
-flockGate    — footPrint owner. Deep debt complete. Mesh gap (port 7700).
+eastGate     — Overwatch. All 40 repos at HEAD. Neural API live (23+ days).
+sporeGate    — Build + NUCLEUS hub. Neural API LIVE (19 primals). SIGN-01 verified. FP-DEPLOY live.
+golgiBody    — Thin relay. sporePrint consolidated. Caddy hardened. WG bind gap (10.13.37.1:7700).
+flockGate    — footPrint owner. Mesh resolved (4 overlay peers). WAN validation complete.
 ironGate     — Node atomic. darkforest 26/26. JupyterHub live.
 strandGate   — REALWORLD: physical access for enrollment.
 grapheneGate — Tower live. REALWORLD: ADB for full pepti.
@@ -160,12 +165,11 @@ grapheneGate — Tower live. REALWORLD: ADB for full pepti.
 
 | Document | Status |
 |----------|--------|
-| `NEURAL_API_DEPLOYMENT_AUTHORITY_WAVE137a.md` | Active — Phase 1 directive |
-| `NEURAL_API_ACTIVATION_ASSESSMENT_137a.md` | Active — sporeGate gap analysis, NAPI-START + NAPI-PERMS pending |
-| `FP_DEPLOY_SKUNKY_DEPLOY_AAR_137a.md` | **DONE** — footPrint live, skunky-ingest dry-run |
-| `PRIMALSPRING_V0936_WAVE137a.md` | **DONE** — 4 new scenarios, 1,106 tests |
-| `FLOCKGATE_DIVERGENCE_TOPOLOGY_AAR_136b.md` | Open — mesh gap unresolved |
-| `FOOTPRINT_COMPOSITION_AUDIT_AAR_WAVE136b.md` | Superseded by FP-DEPLOY AAR |
-| `FOOTPRINT_FLOCKGATE_SPINUP_136b.md` | Open — flockGate integration ongoing |
+| `NEURAL_API_LIVE_AAR_137b.md` | **NEW** — NAPI-START + NAPI-PERMS resolved, SIGN-01 E2E verified |
+| `CELLMEMBRANE_NAPI_PERMS_DEEP_DEBT_AAR_137b.md` | **NEW** — permanent systemd UMask fix, bridge protocol aligned |
+| `FLOCKGATE_MESH_RESOLUTION_AAR_137a.md` | **NEW** — port 8080→7700 root cause, 4 peers connected |
+| `FLOCKGATE_WAN_OVERWATCH_AAR_137a.md` | **NEW** — WAN validation, FP-DEPLOY 114ms, 3 mesh blockers mapped, API surface for FP-API |
+| `NEURAL_API_DEPLOYMENT_AUTHORITY_WAVE137a.md` | Active — Phase 1 directive (largely complete) |
+| `AI_ACCESSIBILITY_DIVERGENCE_STUDY_136b.md` | Open — accessibility findings |
 
-*Wave 137a: Neural API activation sprint. cellMembrane wired `deploy.*` + `lifecycle.*` (443 LOC, `1df1cfe`). SIGN-01 resolved (`471ebf5`). footPrint **LIVE** at primals.eco/footprint/ — first composition on sovereign infrastructure. skunky-ingest deployed (dry-run). primalSpring v0.9.36 (1,106 tests, 136 scenarios, +4 new). sporeGate AAR reveals critical gap: Neural API mode not started (api ≠ neural-api), socket permissions `root:root srw-------` block routing. NAPI-START + NAPI-PERMS are the critical path.*
+*Wave 137b: Neural API LIVE on sporeGate — 19 primals discovered, capability routing verified, depot cryptographically signed. FLOCKGATE-MESH root-caused and fixed (port 8080→7700). flockGate sees 4 overlay peers, WAN validation confirms 114ms to primals.eco/footprint/. cellMembrane systemd UMask fix makes socket permissions permanent. 7 Phase 1 items DONE, 5 remain (NAPI-SYSTEMD, lifecycle registration, golgi WG bind, bidirectional mesh deploy, socket directory unification). Phase 2 focus: live compositions, FP-API wiring, skunky-ingest live mode, topology visualization via Neural API.*
