@@ -1,41 +1,43 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-11T15:55:00Z
+# Gate: flockGate | Updated: 2026-07-12T00:45:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-11T21:30:00Z"
-wave = "136b"
+updated = "2026-07-12T00:45:00Z"
+wave = "137a"
 
 [heads]
-primalSpring = "d67ab40"
-wateringHole = "44ef51a7"
+primalSpring = "fb03030"
+wateringHole = "0d3409f9"
 skunkBat = "d9837a9"
 
 [mesh]
-node_id = "flockgate"
+node_id = "flockGate"
 songbird_version = "0.2.1"
-songbird_pid = 2751057
+uptime_seconds = 11369
 peers = 0
 wireguard_status = "UP"
 wg_peer = "golgiBody (10.13.37.1)"
-icmp_rtt_golgi_ms = 30
+icmp_rtt_golgi_ms = 31
 federation_7700_reachable = false
-note = "songBird federation port not exposed on WG interface — mesh peer discovery blocked"
+status = "BLOCKED — same topology gap as 136b. AAR open. Awaiting sporeGate/golgi action."
 
 [dispatch_validation]
-status = "PASS — HTTP transport proven. capability.call blocked (no mesh peers, federation port closed)."
+status = "PASS — HTTP transport proven. capability.call blocked (federation port closed, 0 mesh peers)."
 wan_dispatch_01 = "PASS (transport)"
 http_transport_status = "PASS"
-capability_call_status = "BLOCKED — federation_port 7700 not reachable on WG interface; 0 mesh peers"
-blockers = ["golgi: expose songBird 7700 on 10.13.37.1", "sporeGate: SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter"]
+capability_call_status = "BLOCKED — federation_port 7700 CONNECTION REFUSED on 10.13.37.1"
+blockers = ["golgi: expose songBird 7700 on wg0 (10.13.37.1)", "sporeGate: SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter"]
+aar = "FLOCKGATE_DIVERGENCE_TOPOLOGY_AAR_136b.md"
 
 [dispatch_validation.latency_wan_http]
 p50_ms = 138
-p95_ms = 150
+p95_ms = 172
 target = "membrane.primals.eco/depot/"
 samples = 5
+probed_at = "2026-07-12T00:45:00Z"
 
 [outer_membrane_validation]
 validated_at = "2026-07-11T01:50:00Z"
@@ -51,24 +53,19 @@ vite_version = "6.4.1"
 vite_port = 5174
 dev_server_verified = true
 verified_at = "2026-07-11T17:14:00Z"
-next_action = "FP-PARITY tracking — petalTongue Phase 1 landed (2d981fd), monitor composition serving"
+next_action = "FP-DEPLOY tracking — awaiting rsync to golgi + Caddy handle_path"
 
 [skunkbat]
 head = "d9837a9"
 tests = 563
 failures = 0
 suite_status = "GREEN"
-delivery_136a = "SKUNY-OM — outer membrane HTTP anomaly detection"
-delivery_136b = "SKUNKY-INGEST + DEEP-DEBT sweep + doc reconciliation"
-convergence = "BUILDABLE + RUNNABLE + TOOLCHAIN + CONFIG"
-new_crate = "skunky-ingest (843 lines, 10 tests)"
-deep_debt = "RuntimeVerifier wired, 5 test extractions, skunky-ingest thiserror, config hydration, API hygiene"
 
 [primalspring]
 version = "v0.9.35"
+head = "fb03030"
 scenarios = 132
 tests = 1104
 failures = 0
 suite_status = "GREEN"
-fix_136b = "checksums.toml parser — handle nested arch-keyed tables (cascade-provenance-match)"
-note = "ECOPRIMALS_ROOT + ECOPRIMALS_PLASMID_BIN required for full depot validation"
+fix_136b = "checksums.toml parser — handle nested arch-keyed tables"
