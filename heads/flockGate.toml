@@ -1,74 +1,70 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-12T14:10:00Z
+# Gate: flockGate | Updated: 2026-07-12T15:55:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-12T14:10:00Z"
-wave = "137a"
+updated = "2026-07-12T15:55:00Z"
+wave = "137b"
 
 [heads]
-primalSpring = "5b424f7"
-wateringHole = "41a92bc1"
+primalSpring = "644e7ad"
+wateringHole = "2d6e2105"
+plasmidBin = "e0b20e0"
 skunkBat = "d9837a9"
 
 [mesh]
 node_id = "flockGate"
 songbird_version = "0.2.1"
-peers_uds = 0
-peers_http_reachable = 2
+songbird_binary_hash = "695d0b929a43765925"
+songbird_binary_size = 23307408
+depot_binary_deployed = true
+peers_tcp_connected = 2
+peers_mesh_registered = 0
 wireguard_status = "UP"
 wg_peer = "golgiBody (10.13.37.1)"
 icmp_rtt_golgi_ms = 31
-federation_sporegate_7700 = "REACHABLE"
-federation_eastgate_7700 = "REACHABLE"
-federation_golgi_7700 = "UNREACHABLE"
+tcp_rtt_sporegate_ms = 66
+tcp_rtt_eastgate_ms = 62
+federation_sporegate_7700 = "TCP CONNECTED"
+federation_eastgate_7700 = "TCP CONNECTED"
+federation_golgi_7700 = "UNREACHABLE (GOLGI-WG-BIND pending)"
 federation_irongate_7700 = "UNREACHABLE"
-status = "PARTIAL — 2/4 peers federation-reachable, UDS mesh engine 0 peers"
+status = "UPGRADED — depot binary deployed, TCP connects succeed, mesh peering pending bidirectional f05918a deploy"
 
 [dispatch_validation]
-status = "PARTIAL — HTTP federation works, UDS mesh peering blocked, capability.call blocked"
+status = "PROGRESSING — FLOCKGATE-MESH fix landed (f05918a), bidirectional deploy pending"
 wan_dispatch_01 = "PASS (transport)"
 http_transport_status = "PASS"
-http_federation_status = "PASS — 10.13.37.2:7700/jsonrpc responds (3 peers, v0.2.1)"
-capability_call_status = "BLOCKED — golgi WG bind + UDS/HTTP mismatch + missing DRAWBRIDGE_ROUTES"
-aar = "FLOCKGATE_DIVERGENCE_TOPOLOGY_AAR_136b.md"
+http_federation_status = "PASS — 10.13.37.2:7700/jsonrpc responds (3 peers, 35 capabilities)"
+capability_call_status = "PENDING — mesh peering needs bidirectional f05918a + GOLGI-WG-BIND"
+neural_api_sporegate = "LIVE — 19 primals, 156 translations, 33 capabilities"
 
 [dispatch_validation.latency]
-wan_http_p50_ms = 126
+wan_http_p50_ms = 114
 wg_icmp_p50_ms = 31
-footprint_p50_ms = 114
-probed_at = "2026-07-12T14:05:00Z"
+tcp_peer_connect_ms = 64
+probed_at = "2026-07-12T15:50:00Z"
 
 [outer_membrane_validation]
 validated_at = "2026-07-12T14:05:00Z"
-primals_eco = "PASS — 200, CSP, X-Frame DENY"
-footprint = "PASS — 200, custom CSP (OSM/FEMA/USGS/ArcGIS allowlist)"
-lab = "PASS — 401 (basicauth EXP-06)"
+primals_eco = "PASS — 200, CSP"
+footprint = "PASS — 200, custom CSP"
+lab = "PASS — 401 (basicauth)"
 depot = "PASS — 200"
 
 [footprint]
 status = "LIVE ON SOVEREIGN INFRA"
-path = "protists/footPrint"
 wan_url = "https://primals.eco/footprint/"
 wan_status = "200 OK"
-wan_size_bytes = 4154
-csp = "custom (OSM tiles, FEMA, USGS, ArcGIS allowed)"
 verified_from_wan_at = "2026-07-12T14:05:00Z"
-local_dev_port = 5174
-next_action = "FP-API — wire Express proxy endpoints through songBird drawbridge"
-
-[skunkbat]
-head = "d9837a9"
-tests = 563
-failures = 0
-suite_status = "GREEN"
+next_action = "FP-API — wire proxy through drawbridge (Phase 2)"
 
 [primalspring]
 version = "v0.9.36"
-head = "5b424f7"
-scenarios = 136
-tests = 1106
+head = "644e7ad"
+scenarios = 138
+tests = 1123
 failures = 0
 suite_status = "GREEN"
