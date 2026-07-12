@@ -170,6 +170,13 @@ primals.eco {
         root * /opt/ecoPrimals/sporePrint/spores
         file_server browse
     }
+    handle_path /footprint/* {
+        root * /opt/ecoPrimals/compositions/footprint/dist/client
+        header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org https://*.arcgis.com; font-src 'self'; connect-src 'self' https://*.openstreetmap.org https://hazards.fema.gov https://epqs.nationalmap.gov https://*.arcgis.com; frame-ancestors 'none'"
+        encode gzip
+        try_files {path} /index.html
+        file_server
+    }
     handle {
         root * /opt/ecoPrimals/sporePrint/public
         file_server
@@ -465,6 +472,25 @@ RandomizedDelaySec=60
 WantedBy=timers.target
 EOSVC
 
+cat > /etc/systemd/system/skunky-ingest.service << 'EOSVC'
+[Unit]
+Description=skunky-ingest — Caddy JSON log tailer → skunkBat baseline.observe
+After=caddy-tls.service
+Wants=caddy-tls.service
+
+[Service]
+Type=simple
+ExecStart=/opt/membrane/skunky-ingest --dry-run
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+EOSVC
+mkdir -p /var/lib/skunky-ingest
+
 cat > /etc/systemd/system/hbbs-membrane.service << 'EOSVC'
 [Unit]
 Description=RustDesk Rendezvous Server (cellMembrane — remote.primals.eco)
@@ -672,7 +698,7 @@ WantedBy=timers.target
 EOSVC
 
 echo "=== 11. ENABLE SERVICES ==="
-systemctl enable forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane fail2ban forgejo-reshallow.timer
+systemctl enable forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane fail2ban forgejo-reshallow.timer skunky-ingest
 # beardog-sporeprint is NOT enabled — standby until bearDog gains Host routing
 
 echo ""
