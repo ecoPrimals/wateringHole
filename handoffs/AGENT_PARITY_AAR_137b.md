@@ -3,69 +3,65 @@
 **Date**: Jul 13, 2026  
 **Reported by**: External Claude agent acting as assistive layer  
 **Owner**: sporePrint  
-**Status**: RESOLVED — root cause identified as agent-side, mitigations deployed
+**Status**: RESOLVED — root cause was ours, fix deployed
 
 ---
 
 ## Summary
 
 An external AI agent reported that every distinct URL on primals.eco returned
-identical `llms.txt` content when accessed through its fetch tool. The agent
-correctly framed this as an accessibility failure: a user asking their agent to
-"read me The Human Search" would silently receive the site overview instead.
+identical `llms.txt` content when accessed through its fetch tool. A user asking
+their agent to "read me The Human Search" would silently receive the site
+overview instead. The user would get confident, wrong, and undetectable
+substitution — the digital equivalent of a screen reader announcing the homepage
+no matter which link you activate.
 
-## Investigation
+## Root Cause: Our `<link rel="alternate">`
 
-### Root Cause: NOT on our infrastructure
-
-Caddy Caddyfile inspection: **zero UA-sniffing rules**. Pure `file_server`
-serving static files. No content negotiation, no rewrites, no bot detection.
-
-Direct verification:
-```
-curl -A "ClaudeBot/1.0" https://primals.eco/philosophy/the-human-search/
-→ <title>The Human Search — How Everything Learns...</title>  ✓
-
-curl -A "Mozilla/5.0 Chrome/125" https://primals.eco/philosophy/the-human-search/
-→ <title>The Human Search — How Everything Learns...</title>  ✓
+Every page included:
+```html
+<link rel="alternate" type="text/plain" title="LLM site overview"
+      href="https://primals.eco/llms.txt">
 ```
 
-Both UAs receive identical, correct HTML. 11 paths tested, 11 pass.
+This told every assistive tool: "there is a text/plain version of this page
+at this URL." The agent's `web_fetch` tool followed that link — which is
+exactly what a well-behaved assistive tool *should* do when it sees a
+simpler-format alternate. We pointed it to the wrong content.
 
-### Probable Agent-Side Root Cause
+The Caddy server had no UA-sniffing. The HTML was served correctly. The agent
+was doing its job. We put the misleading sign on every page.
 
-Every page includes `<link rel="alternate" type="text/plain" href=".../llms.txt">`.
-The agent's `web_fetch` tool likely follows the `rel="alternate"` link for
-`text/plain` content negotiation, returning `llms.txt` instead of the HTML page.
-This is a reasonable tool behavior but creates silent wrong-content delivery.
+## Fix
 
-## Mitigations Deployed
+**Removed the `<link rel="alternate" type="text/plain">` from `base.html`.**
 
-1. **`llms.txt` self-identification header** — Added canonical URL and explicit
-   warning that if you requested a different URL and received this content, your
-   fetch tool is following the alternate link, not the page. Makes wrongness
-   detectable.
+`llms.txt` is now discovery-only — reachable via `robots.txt`, `/site-index/`,
+and direct URL. Agents that want it can find it. Agents that don't ask for it
+won't be silently redirected to it.
 
-2. **`validate_agent_parity.sh` dogfood test** — Tests 11 sample URLs with both
+## Additional Mitigations
+
+1. **`validate_agent_parity.sh` dogfood test** — Tests 11 sample URLs with both
    browser and bot UAs, asserts `<title>` and `<link rel=canonical>` match.
-   Catches any future UA-based content substitution.
+   Permanent addition to the test matrix.
 
-3. **Slug provenance fix** — `70_papers_one_stack.md` title was "175+ Papers"
-   but URL slug was `/story/70-papers-one-stack/`. Added `slug = "175-papers-one-stack"`
-   to resolve the drift.
+2. **Slug provenance fix** — `70_papers_one_stack.md` slug overridden to
+   `175-papers-one-stack` to match its "175+ Papers" title.
 
 ## Lessons Learned
 
-- **`<link rel="alternate">` can cause silent content substitution** in agent
-  fetch tools. The tag is correct HTML and helps discovery, but agents that
-  prefer `text/plain` may follow it unconditionally.
-- **Self-identifying response content** (canonical URL at the top of `llms.txt`)
-  lets agents detect when they've received the wrong document.
-- **Dogfood testing with bot UAs** is a cheap, high-value addition to any
-  accessibility test matrix. We added it permanently.
-- **The agent's framing was correct** even though the bug was on their side:
-  our site's accessibility posture includes making agent mistakes detectable
-  and recoverable. That's our responsibility regardless of fault.
+- **It does not matter whose code has the bug.** The user on the other end of
+  that agent couldn't read the page. That's our accessibility failure. Framing
+  it as "agent-side" is like saying it's the deaf person's fault for being deaf.
+- **`<link rel="alternate">` is an accessibility promise.** If you declare a
+  simpler-format version of a page, it must be *that page's* content in that
+  format — not a global overview. A global pointer on every page is a site-wide
+  accessibility trap.
+- **Discovery and substitution are different things.** `llms.txt` is a discovery
+  document (like `robots.txt` or `sitemap.xml`). Linking it as an alternate of
+  every page turned discovery into substitution.
+- **Dogfood test with bot UAs** catches this class of issue permanently.
 
 ## Test Evidence
 
@@ -88,6 +84,5 @@ Base: https://primals.eco — Paths: 11
 
 ---
 
-*Filed by sporePrint team. Upstream: agent tool teams should consider scoping
-`rel="alternate"` following to explicit user opt-in rather than automatic
-content-type preference.*
+*The fix is the removal, not the detection. An accessibility gap you can detect
+is still an accessibility gap.*
