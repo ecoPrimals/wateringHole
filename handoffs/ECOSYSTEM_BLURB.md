@@ -1,46 +1,50 @@
 # ecoPrimals Ecosystem Blurb — Wave 137b
 
-**Date**: Jul 13, 2026 08:05 EDT | **Wave**: 137b | **From**: eastGate overwatch
-**Posture**: **CONVERGING.** 20/28 debt items resolved. Phase 1 at 11/12. Neural API live on 2 gates. Mesh bidirectional. Depot signed. Forgejo full-depth. 7,750+ tests / 0 fail.
+**Date**: Jul 13, 2026 08:20 EDT | **Wave**: 137b | **From**: eastGate overwatch
+**Posture**: **CONVERGING.** 21/28 debt resolved. Phase 1 at 11/12. petalTongue TOPO-VIS evolution in progress (87 LOC dirty). Depot trust model gap identified (SIGN-VERIFY-ON-FETCH). Agent content parity AAR absorbed. 7,750+ tests / 0 fail.
 
 ---
 
-## Remaining — 8 action items + 3 discussion
+## Remaining — 9 action items + 3 discussion
 
 ### biomeOS — 3 items (1 CRITICAL)
 
 | ID | What | Effort |
 |----|------|--------|
-| **NAPI-LIFECYCLE** | LifecycleManager registration — `lifecycle.status` returns count=0. **Last CRITICAL item.** Blocks full Neural API authority. | 4-8hr |
-| **SOCKET-DIR-UNIFY** | Unify 3 socket dirs → `/run/membrane/` only. Currently bridged by ExecStartPre symlinks. | 2-4hr |
-| **SOCKET-UMASK** | Primals should `fchmod` sockets after bind (not rely on systemd UMask band-aid). | 2hr |
+| **NAPI-LIFECYCLE** | LifecycleManager registration — `lifecycle.status` returns count=0. **Last CRITICAL.** Blocks Neural API authority. | 4-8hr |
+| **SOCKET-DIR-UNIFY** | Unify 3 socket dirs → `/run/membrane/` only. | 2-4hr |
+| **SOCKET-UMASK** | Primals should `fchmod` sockets after bind. | 2hr |
 
-### songBird + flockGate — 1 item
+### cellMembrane — 1 item (pre-SHOW-HN)
 
 | ID | What | Effort |
 |----|------|--------|
-| **FP-API** | Wire footPrint `/api/proxy?url=` through drawbridge. Allowlist landed (`87b7779`). Caddy rewrite (quickfix) or client migration (clean). | 2-4hr |
+| **SIGN-VERIFY-ON-FETCH** | `plasmid.fetch` must verify `signatures.toml` (Ed25519 via bearDog) before deploying binaries. Currently: fetch → deploy. Required: fetch → verify → deploy (reject unsigned). The depot is intentionally public (defense = math, not obscurity). The trust chain is: `public depot (HTTPS) → SIGN-01 verify → deploy → riboCipher IPC`. The missing link is the verify step on fetch. | 4-8hr |
 
 ### sporeGate — 2 items
 
 | ID | What | Effort |
 |----|------|--------|
-| **DEPOT-REFRESH** | `plasmid.harvest` songBird — depot binary is from Jul 9, missing UDS-HTTP fix (`0d2895b5`, Jul 12) and mesh port fix (`f05918a`). Blocks SONGBIRD-EASTGATE. | 30min |
+| **DEPOT-REFRESH** | `plasmid.harvest` songBird — depot binary is from Jul 9, missing UDS-HTTP fix (Jul 12) and mesh port fix. Blocks SONGBIRD-EASTGATE. | 30min |
 | **LIVE-ACTIVATE** | Stand up `live.primals.eco` — petalTongue NUCLEUS on sporeGate. | 4-8hr |
 
-### petalTongue — 1 item
+### songBird + flockGate — 1 item
 
 | ID | What | Effort |
 |----|------|--------|
-| **TOPO-VIS** | Live topology viz — consume `topology.primals` + `routing_weights` from Neural API. | 8-16hr |
+| **FP-API** | Wire footPrint `/api/proxy?url=` through drawbridge. Allowlist landed. Caddy rewrite or client migration. | 2-4hr |
+
+### petalTongue — 1 item (IN PROGRESS)
+
+| ID | What | Effort |
+|----|------|--------|
+| **TOPO-VIS** | Live topology viz via Neural API. **Active evolution** — 11 files dirty, neural_api_provider/parse.rs + web_mode/handlers.rs + index.html being wired. | 8-16hr |
 
 ### eastGate (self) — 1 item
 
 | ID | What | Effort |
 |----|------|--------|
-| **SONGBIRD-EASTGATE** | Deploy songBird with UDS-HTTP fix. **BLOCKED**: pepti depot binary is from Jul 9, pre-dates fix (Jul 12). sporeGate needs `plasmid.harvest` to rebuild songBird to depot. | blocked |
-
-~~SPORE-OWNERSHIP~~ — **DONE**: `SPORE_OWNERSHIP_MATRIX.md` created in wateringHole root.
+| **SONGBIRD-EASTGATE** | Deploy songBird with UDS-HTTP fix. **BLOCKED** on DEPOT-REFRESH. | blocked |
 
 ### Discussion (all teams)
 
@@ -52,7 +56,23 @@
 
 ---
 
-## Wave 137b Delivery Log
+## Depot Trust Model (for reference)
+
+```
+Public depot (HTTPS)  →  SIGN-01 verify  →  deploy to /run/membrane/  →  riboCipher IPC
+    anyone can pull       math proves who      local trust boundary       runtime auth
+                          built it
+```
+
+- **Depot** is intentionally public — like apt/cargo/npm. Defense = mathematics, not obscurity.
+- **SIGN-01** provides Ed25519 signatures in `signatures.toml` — proves sporeGate built those bytes.
+- **SIGN-VERIFY-ON-FETCH** is the missing link: `plasmid.fetch` currently skips verification.
+- **riboCipher** authenticates post-deployment IPC on UDS sockets. Separate from depot trust.
+- **MacGuffin test**: if you can't show the whole depot publicly and still be secure, it's a MacGuffin.
+
+---
+
+## Wave 137b Delivery Log (21 items)
 
 | ID | Resolved By | Commit |
 |----|-------------|--------|
@@ -73,39 +93,29 @@
 | ~~BRIDGE-ERROR-PROP~~ | cellMembrane | `d5506a3` |
 | ~~NUCLEUS-MATRIX~~ | projectNUCLEUS | `ea57d6a` — U/V/W defined |
 | ~~BOND-METADATA~~ | projectNUCLEUS | `ea57d6a` — 19 graphs |
-| ~~THREAT-ACTIVATE~~ | skunkBat | `b708872` + SKUNKY-LIVE prep + CF-DATA groundwork |
+| ~~THREAT-ACTIVATE~~ | skunkBat | `b708872` + SKUNKY-LIVE prep + CF-DATA |
 | ~~DEPLOY-DISPATCH-XGATE~~ | cellMembrane | `d5506a3` |
 | ~~TIER-PRIORITY~~ | projectNUCLEUS | `ea57d6a` |
+| ~~SPORE-OWNERSHIP~~ | eastGate | `SPORE_OWNERSHIP_MATRIX.md` created |
 
 ---
 
 ## Status
 
-**7,750+ tests / 0 fail**
+**7,750+ tests / 0 fail** | **Mesh**: bidirectional | **Forgejo**: full-depth (20 repos)
 
-| Suite | Tests | Status |
-|-------|-------|--------|
-| nestGate | 3,790 | GREEN |
-| primalSpring | 1,131 (141 scenarios) | GREEN |
-| cellMembrane | 1,024 | GREEN |
-| groundSpring | 1,047+ | GREEN |
-| skunkBat | 567 | GREEN |
-| projectNUCLEUS | 149 (26/26) | GREEN |
-| footPrint | 46 | GREEN |
-
-**Mesh**: Bidirectional (sporeGate ↔ golgi ↔ LAN gates). flockGate → 4 WG peers. eastGate songBird upgrade pending.
-
-**Gates**:
 ```
-eastGate     — Overwatch. Neural API 24d. songBird upgrade pending.
+eastGate     — Overwatch. Neural API 24d. songBird blocked on depot.
 sporeGate    — NUCLEUS. Neural API systemd. Depot signed. Forgejo authority.
 golgiBody    — Full mirror. sporePrint + footPrint live. Auto-publishing heads.
 flockGate    — footPrint owner. Mesh resolved. WAN validated.
 ironGate     — Node atomic. Own overwatch agent.
+petalTongue  — TOPO-VIS active evolution (11 files, 87 LOC).
+sporePrint   — Content evolution + SHOW_HN_PUBLICATION.md drafted.
 ```
 
-**Active Handoffs**: `SHALLOW_PINGPONG_RESOLUTION_AAR_137b.md`, `NESTGATE_FP_PERSIST_WAVE137b_JUL12_2026.md`
+**Active Handoffs**: `SHALLOW_PINGPONG_RESOLUTION_AAR_137b.md`, `NESTGATE_FP_PERSIST_WAVE137b_JUL12_2026.md`, `AGENT_PARITY_AAR_137b.md`
 
 ---
 
-*Wave 137b: 20 items delivered by 7 teams. 8 remain + 3 discussion. 1 critical (NAPI-LIFECYCLE). Neural API live on 2 gates. Forgejo fixed. Mesh bidirectional. CAS persistence live. 7,750+ tests / 0 fail.*
+*Wave 137b: 21 delivered, 9 remain + 3 discussion. 1 critical (NAPI-LIFECYCLE). New: SIGN-VERIFY-ON-FETCH (depot trust model gap). petalTongue TOPO-VIS in active evolution. sporePrint drafting SHOW-HN publication. 7,750+ tests / 0 fail.*
