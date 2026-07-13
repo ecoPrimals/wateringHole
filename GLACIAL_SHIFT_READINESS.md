@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-07-11 (Wave 136b — **ALL 8 CRITERIA CLEAR.** 1102 tests, 129 scenarios, 0 fail. Outer membrane hardened: 9/14 exposures closed (security headers, CSP, fail2ban, rate-limiting, cert lifecycle, access logs, WireGuard audit). skunkBat HTTP anomaly detection live. darkforest v3.0 outer pen-test active. SIGN-01 pipeline landed. Criterion 8 MET.)
+**Last updated**: 2026-07-13 (Wave 137b — **ALL 8 CRITERIA CLEAR. PUBLIC EXPOSURE LIVE.** `live.primals.eco` serving TOPO-VIS dashboard. `primals.eco/footprint/` live. 3-gate WireGuard mesh (eastGate+sporeGate+golgi). Depot pipeline 100% Rust with `require-signed` enforced. 35 binaries / 3 architectures verified. Neural API systemd on sporeGate (48 primals). 7,750+ tests / 0 fail across springs. 2,801 lines of bash fossilized. Drawbridge weak bond pattern formalized. footPrint primal wiring complete. SIGN-VERIFY-ON-FETCH implemented. Phase 1 Neural API deployment authority: 12/12 COMPLETE.)
 
 ---
 
@@ -390,9 +390,11 @@ criteria 1-7 prove the system *works* internally. Criterion 8 proves it *survive
 Triggered by: DNS cutover to sovereign Caddy, AI crawler enablement, 301-page sitemap
 indexed. Sprint: `handoffs/SECURITY_EXPOSURE_SPRINT_WAVE136.md`.
 
-**Current assessment (Wave 136b)**: **HARDENED. WARMING EVENT CONTAINED.** DNS cutover complete — `primals.eco` served by sovereign Caddy on golgi (bearDog ACME TLS). 301 pages indexed. AI crawlers explicitly permitted. Security hardening sprint (Wave 136a) closed 9/14 exposure items within hours of identification. Outer membrane posture: HSTS preload, CSP, X-Frame DENY, nosniff, fail2ban, iptables rate-limiting, JSON access logs, WireGuard key audit, cert auto-renewal validated. darkforest v3.0 outer membrane pen-test active. skunkBat HTTP anomaly detection live.
+**Current assessment (Wave 137b)**: **PUBLIC + SOVEREIGN. PHASE 1 COMPLETE.** Two public surfaces live: `primals.eco` (sporePrint + footPrint SPA) and `live.primals.eco` (petalTongue TOPO-VIS dashboard — 7 mesh peers, SSE live push, TLS/HTTP2). Neural API deployment authority 12/12 complete. Depot trust chain fully enforced: `require-signed` system-wide, Ed25519 + BLAKE3 via native `membrane depot.integrity`. 2,801 lines of bash fossilized (6 scripts retired, 14 evolution targets identified). songBird drawbridge weak bond pattern formalized as K-Derm ion channel model. footPrint API abstraction layer complete (58 tests, zero raw fetch). Forgejo full-depth (21 repos, permissions fixed). 3-gate WireGuard mesh: eastGate (35ms) + sporeGate (71ms) + golgi bidirectional. flockGate WAN data plane proven (JupyterHub relay 202ms).
 
-**Criteria 1-7: ALL CLEAR** (unchanged since Wave 111). **Criterion 8: MET (5/5 sub-criteria)** — security headers, 404 fix, fail2ban, CSP, rate-limiting all deployed and validated live. Remaining items (SIGN-01 cascade signing, EXP-06 lab auth-gate) are defense-in-depth, not stadial blockers. darkforest v3.0 outer membrane test suite confirms posture. See: `handoffs/OUTER_MEMBRANE_HARDENING_AAR_136a.md`.
+**Criteria 1-7: ALL CLEAR** (unchanged since Wave 111). **Criterion 8: MET (5/5 sub-criteria)** — security headers, 404 fix, fail2ban, CSP, rate-limiting all deployed and validated live. SIGN-01 cascade signing now LIVE (`require-signed` enforced). SIGN-VERIFY-ON-FETCH implemented in cellMembrane (`89bf12f`). darkforest v3.0 confirms posture. **ALL 8 CRITERIA CLEAR FOR STADIAL ENTRY.**
+
+**Previous assessment (Wave 136b)**: HARDENED. WARMING EVENT CONTAINED. DNS cutover complete. 9/14 exposure items closed within hours. Outer membrane posture validated.
 
 **Risk posture**: Warming event contained. All critical and high-priority exposures patched. Cooling sprint continues on 4-week cadence (136b-d). Acceptable residual: GitHub trailing shadow (EXP-08), VPS provider risk (EXP-09), registrar (EXP-10, DNSSEC mitigates), AI crawlers (EXP-11, intentional). Theoretical: physical, cryptographic, dark-forest beacon — defenses exist. **ALL 8 CRITERIA CLEAR FOR STADIAL ENTRY.**
 
