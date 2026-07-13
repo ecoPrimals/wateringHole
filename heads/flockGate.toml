@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-13T15:10:00Z
+# Gate: flockGate | Updated: 2026-07-13T13:15:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-13T15:10:00Z"
+updated = "2026-07-13T13:15:00Z"
 wave = "137b"
 
 [heads]
-primalSpring = "a7cc98a"
-wateringHole = "09033c28"
+primalSpring = "62a7ad7"
+wateringHole = "65e93e5b"
 plasmidBin = "e0b20e0"
 skunkBat = "d9837a9"
 
@@ -18,29 +18,26 @@ skunkBat = "d9837a9"
 node_id = "flockGate"
 songbird_version = "0.2.1"
 depot_binary_deployed = true
-depot_binary_date = "2026-07-13T13:18:47Z"
-depot_binary_sha = "74cf7101"
 peers_tcp_connected = 2
-peers_mesh_registered = 2
+peers_mesh_registered = 0
 wireguard_status = "UP"
-wireguard_addr = "10.13.37.6/24"
-federation_sporegate_7700 = "HTTP JSON-RPC LIVE — mesh_registered=true, latency=68ms"
-federation_golgi_7700 = "HTTP JSON-RPC LIVE — mesh_registered=true, latency=24ms"
-status = "MESH PEERING OPERATIONAL — UDS-HTTP-PROTOCOL fix confirmed (0.2.1 / 74cf7101)"
+federation_sporegate_7700 = "HTTP JSON-RPC LIVE — 3 peers, v0.2.1"
+federation_golgi_7700 = "HTTP JSON-RPC LIVE — 4 overlay peers, v0.2.1"
+status = "BLOCKED ON DEPOT-REFRESH — depot songBird is Jul 9 build (pre-0d2895b5)"
 
 [dispatch_validation]
-status = "MESH PEERS REGISTERED. capability.call routes through 2 peers but DRAWBRIDGE-CAP blocks provider discovery."
-wan_dispatch_01 = "PASS (transport + peering)"
+status = "DATA PLANE PROVEN. Control plane awaits DEPOT-REFRESH + drawbridge capability advertising."
+wan_dispatch_01 = "PASS (transport)"
 jupyter_data_plane = "PROVEN — JupyterHub v5.4.5 via http.request relay (202ms WAN)"
-capability_call_status = "ROUTING WORKS — tried 2 peers, but no provider advertises 'jupyter' (DRAWBRIDGE-CAP)"
+capability_call_status = "BLOCKED — depot binary pre-fix, jupyter not in capabilities.list"
 
 [dispatch_validation.latency]
 wan_http_p50_ms = 114
 wg_icmp_golgi_ms = 31
-tcp_peer_sporegate_ms = 68
-tcp_peer_golgi_ms = 24
+tcp_peer_sporegate_ms = 62
+tcp_peer_golgi_ms = 29
 jupyter_relay_ms = 202
-probed_at = "2026-07-13T15:07:00Z"
+probed_at = "2026-07-13T12:10:00Z"
 
 [outer_membrane_validation]
 validated_at = "2026-07-12T14:05:00Z"
@@ -52,17 +49,16 @@ depot = "PASS"
 [footprint]
 status = "LIVE ON SOVEREIGN INFRA"
 wan_url = "https://primals.eco/footprint/"
-fp_api_scenario = "PASS — 13/13 checks (s_fp_api_proxy #143)"
-fp_api_caddy = "DRAFTED — fp-api-caddy.caddyfile ready for golgi deploy"
-drawbridge_bonds = "CREATED — drawbridge_bonds.toml with 10 bonds (s_drawbridge_bonds #144, 11/11 PASS)"
-phase_a = "Caddy reverse-proxy for all 10 GIS hosts — bypasses SOCKET-DIR-UNIFY"
-phase_b = "songBird drawbridge.fetch once SOCKET-DIR-UNIFY resolved"
+fp_api_scenario = "PASS — 13/13 checks (s_fp_api_proxy #142)"
+fp_api_wiring = "DESIGN COMPLETE — FP_API_WIRING_WAVE137b.md published"
+phase_a = "CSP expansion + direct fetch (6/10 hosts, shippable now)"
+phase_b = "songBird drawbridge proxy (4/10 hosts, blocked on SOCKET-DIR-UNIFY)"
 
 [primalspring]
 version = "v0.9.36"
-head = "a7cc98a"
-scenarios = 144
-tests = 1190
+head = "62a7ad7"
+scenarios = 142
+tests = 1176
 failures = 0
 clippy_warnings = 0
 suite_status = "GREEN"
