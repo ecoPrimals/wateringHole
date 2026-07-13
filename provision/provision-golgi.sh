@@ -59,6 +59,9 @@ apt-get install -y \
     socat \
     zola
 
+grep -q 'DEPOT_TRUST_POLICY' /etc/environment 2>/dev/null || \
+    echo 'DEPOT_TRUST_POLICY=require-signed' >> /etc/environment
+
 echo "=== 2. CREATE USERS + DIRECTORIES ==="
 adduser --system --shell /bin/bash --home /opt/forgejo --group git 2>/dev/null || true
 mkdir -p /opt/forgejo/{custom/conf,data/repositories}
