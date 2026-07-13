@@ -1,18 +1,19 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-13T13:15:00Z
+# Gate: flockGate | Updated: 2026-07-13T17:50:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-13T13:15:00Z"
+updated = "2026-07-13T17:50:00Z"
 wave = "137b"
 
 [heads]
-primalSpring = "62a7ad7"
-wateringHole = "65e93e5b"
+primalSpring = "e479a85"
+wateringHole = "ac60cf03"
 plasmidBin = "e0b20e0"
 skunkBat = "d9837a9"
+songBird = "624b0925"
 
 [mesh]
 node_id = "flockGate"
@@ -23,13 +24,13 @@ peers_mesh_registered = 0
 wireguard_status = "UP"
 federation_sporegate_7700 = "HTTP JSON-RPC LIVE — 3 peers, v0.2.1"
 federation_golgi_7700 = "HTTP JSON-RPC LIVE — 4 overlay peers, v0.2.1"
-status = "BLOCKED ON DEPOT-REFRESH — depot songBird is Jul 9 build (pre-0d2895b5)"
+status = "OPERATIONAL — DRAWBRIDGE-CAP resolved, capabilities.list dynamic"
 
 [dispatch_validation]
-status = "DATA PLANE PROVEN. Control plane awaits DEPOT-REFRESH + drawbridge capability advertising."
+status = "DATA + CONTROL PLANE LIVE. Drawbridge capability advertising operational."
 wan_dispatch_01 = "PASS (transport)"
 jupyter_data_plane = "PROVEN — JupyterHub v5.4.5 via http.request relay (202ms WAN)"
-capability_call_status = "BLOCKED — depot binary pre-fix, jupyter not in capabilities.list"
+capability_call_status = "RESOLVED — drawbridge caps in capabilities.list (commit 73b0c7d)"
 
 [dispatch_validation.latency]
 wan_http_p50_ms = 114
@@ -50,15 +51,15 @@ depot = "PASS"
 status = "LIVE ON SOVEREIGN INFRA"
 wan_url = "https://primals.eco/footprint/"
 fp_api_scenario = "PASS — 13/13 checks (s_fp_api_proxy #142)"
-fp_api_wiring = "DESIGN COMPLETE — FP_API_WIRING_WAVE137b.md published"
-phase_a = "CSP expansion + direct fetch (6/10 hosts, shippable now)"
-phase_b = "songBird drawbridge proxy (4/10 hosts, blocked on SOCKET-DIR-UNIFY)"
+fp_api_wiring = "COMPLETE — FP-API-CADDY deployed, 10 GIS proxy routes live"
+phase_a = "COMPLETE — Caddy GIS proxy snippet live on golgi"
+phase_b = "songBird HTTPS outbound proxy shipped (tokio-rustls). SOCKET-DIR-UNIFY P2."
 
 [primalspring]
 version = "v0.9.36"
-head = "62a7ad7"
-scenarios = 142
-tests = 1176
+head = "e479a85"
+scenarios = 144
+tests = 1190
 failures = 0
 clippy_warnings = 0
 suite_status = "GREEN"

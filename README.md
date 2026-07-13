@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: June 28, 2026 (Wave 128: Topology cutover complete — Flint H1 edge router, sporeGate ephemeral compute. 5 gates operational (golgi 18 svc, sporeGate/eastGate/flockGate 13/13, ironGate 12/12). primalSpring v0.9.33 — 110 scenarios, 1060 lib tests, KNOWN_DEBT=0. Deep debt: PORT_REGISTRY deprecated, BtspGuardError typed, 9 orphaned scenarios wired.)
+**Last Updated**: July 13, 2026 (Wave 137b: PUBLIC + SOVEREIGN. `live.primals.eco` + `primals.eco/footprint/` live. 3-gate WireGuard mesh (eastGate+sporeGate+golgi). Depot pipeline 100% Rust, `require-signed` enforced, 35 binaries / 3 architectures. Neural API systemd. primalSpring v0.9.36 — 144 scenarios, 1,190 lib tests. 7,750+ tests / 0 fail. All 8 glacial criteria CLEAR.)
 
 ---
 

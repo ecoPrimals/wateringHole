@@ -8,11 +8,13 @@
 
 ## Position
 
-The ecosystem has cleared the interstadial exit gate. **4-gate mesh collective LIVE**
-(eastGate↔golgiBody↔ironGate+southGate, deterministic deployment codified). 13/13 primals at zero
-debt. Full NUCLEUS deployed on eastGate (23 JSON-RPC + 3 tarpc), golgiBody VPS (13/13),
-ironGate (12/13), southGate (13/13 + distributed science pipeline). Transport injection
-at **11/11 non-exempt primals COMPLETE**. NUCLEUS supervision SHIPPED (biomeOS v4.17).
+The ecosystem has cleared the interstadial exit gate. **PUBLIC + SOVEREIGN.**
+3-gate WireGuard mesh (eastGate↔sporeGate↔golgi) with `live.primals.eco` and
+`primals.eco/footprint/` serving public traffic. 13/13 primals at zero debt. Full
+NUCLEUS deployed on eastGate, golgiBody VPS, ironGate (redeployed Jul 13, 13/13),
+sporeGate (build authority + NUCLEUS). Depot pipeline 100% Rust with `require-signed`
+enforced. Neural API authority: 12/12 COMPLETE. Transport injection at **11/11
+non-exempt primals COMPLETE**. NUCLEUS supervision SHIPPED (biomeOS v4.17).
 TCP-only fallback SHIPPED + ALL ADOPTED (grapheneGate 13/13 pending aarch64 rebuild).
 
 **Deployment surface (ecoBin target matrix)**:
