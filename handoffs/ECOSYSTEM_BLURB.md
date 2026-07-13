@@ -43,7 +43,12 @@ strandGate   — Dual EPYC 7452, 256GB ECC. Offline (enrollment pending).
 2. **Sovereign Outer** (Caddy + bearDog ACME + skunkBat) — HSTS preload, CSP, fail2ban, rate-limiting, security headers.
 3. **Inner** (primals, mesh, UDS IPC, riboCipher) — Zero commercial services in data path.
 
-**DNS**: `primals.eco` (Cloudflare, DNSSEC enabled). `primal.eco` + `nestgate.io` (sovereign knot-dns). DNSSEC active on all.
+**DNS**: `primals.eco` (Cloudflare wildcard `*.primals.eco` — Caddy is routing authority, no more per-subdomain Cloudflare changes). `primal.eco` + `nestgate.io` (sovereign knot-dns). DNSSEC active on all.
+
+**Domain identity** (long-term separation):
+- `primals.eco` = ecosystem platform (depot, forge, compositions, public tools)
+- `primal.eco` = personal sovereign substrate (sporePrint site, mesh API, HPC federation)
+- `nestgate.io` = federated data gateway (CAS backbone, drawbridge-registered weak bonds for NCBI, PubMed, USGS, etc.)
 
 **Sovereignty shadows**: S1-S4 ALL GRADUATED. S4 auth gate PASSED (Jun 9).
 
@@ -91,6 +96,7 @@ SHOW_HN publication rubric established (`whitePaper/gen5/thesis/SHOW_HN_PUBLICAT
 
 | ID | Owner | What | Effort |
 |----|-------|------|--------|
+| **DNS-WILDCARD** | Operator (REALWORLD) | Add `*.primals.eco` wildcard A record in Cloudflare, remove 5 individual records covered by wildcard. Caddy catch-all block ready in `provision-golgi.sh`. After this, no more Cloudflare visits for new subdomains. | 5min |
 | **FP-API-CADDY-DEPLOY** | sporeGate / golgi | Deploy flockGate's `fp-api-caddy.caddyfile` (130 LOC, 10 GIS hosts) to golgi. footPrint gets full GIS proxy. | 30min |
 | **DRAWBRIDGE-CAP** | songBird | Drawbridge routes not advertising as capabilities. Blocks `capability.call` for bridged services. | 2-4hr |
 | **NAPI-LIFECYCLE** | biomeOS | LifecycleManager registration — `lifecycle.status` count=0. Last piece for lifecycle authority. | 4-8hr |
@@ -127,4 +133,4 @@ From `SCRIPT_JELLYFISH_TRIAGE_AAR_137b.md`: 7 scripts (2,546 LOC) replaceable by
 
 ---
 
-*Wave 137b: PUBLIC + SOVEREIGN. All 8 glacial criteria CLEAR. 5 items remain (all independently actionable) + 3 discussion. Two public surfaces live. Depot pipeline fully sovereign Rust. 30+ items delivered this wave. 7,750+ tests / 0 fail.*
+*Wave 137b: PUBLIC + SOVEREIGN. All 8 glacial criteria CLEAR. 6 items remain (all independently actionable) + 3 discussion. DNS wildcard planned — Caddy becomes sole routing authority. Domain identity separation documented (primals.eco = platform, primal.eco = substrate, nestgate.io = data gateway). 7,750+ tests / 0 fail.*

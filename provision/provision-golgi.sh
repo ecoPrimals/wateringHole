@@ -264,6 +264,18 @@ live.primals.eco {
         header_up X-Forwarded-Proto {scheme}
     }
 }
+
+# Wildcard catch-all — sovereign routing authority.
+# Caddy handles all *.primals.eco routing via explicit blocks above.
+# DNS: single *.primals.eco wildcard A record in Cloudflare (DNS only).
+# New subdomains only need a Caddy block here — no Cloudflare changes.
+*.primals.eco {
+    tls {
+        on_demand
+    }
+    import security_headers
+    respond "Not found" 404
+}
 EOCADDY
 
 echo "=== 5. INSTALL RUSTDESK SERVER ==="

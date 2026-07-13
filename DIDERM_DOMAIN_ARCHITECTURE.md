@@ -76,14 +76,47 @@ The ecoPrimals diderm follows this pattern:
 
 | Domain | K-Derm Layer | DNS Authority | TLS Provider | Trust Level | Purpose |
 |--------|-------------|--------------|-------------|-------------|---------|
-| `primals.eco` | Outer (trans face) | Cloudflare | Cloudflare proxy | **Untrusted by inner membrane** | Public website, Forgejo web UI, ecosystem portal |
-| `primal.eco` | Inner (cis face) | Sovereign knot-dns | Sovereign Caddy + LE | **Full trust** — Dark Forest strict | Mesh API, relay, cross-gate coordination, HPC federation |
-| `nestgate.io` | Content organelle | Sovereign knot-dns | Sovereign Caddy + LE | **Content trust** — BLAKE3 integrity | CAS data objects: pseudoSpores, notebooks, datasets |
+| `primals.eco` | Outer (trans face) | Cloudflare (wildcard `*.primals.eco`) | Caddy + LE (per-site or on-demand) | **Untrusted by inner membrane** | Ecosystem platform: depot, forge, compositions, public tools |
+| `primal.eco` | Inner (cis face) | Sovereign knot-dns | Sovereign Caddy + LE | **Full trust** — Dark Forest strict | Personal substrate: sporePrint site, mesh API, relay, gate coordination, HPC federation |
+| `nestgate.io` | Content organelle (cytoplasm) | Sovereign knot-dns | Sovereign Caddy + LE | **Content trust** — BLAKE3 integrity | Federated data gateway: CAS backbone, drawbridge-registered weak bonds for external data (NCBI, PubMed, UniProt, USGS, FEMA, ArcGIS, etc.) |
+
+### Domain Identity (long-term)
+
+The three domains serve distinct roles that will diverge over time:
+
+- **`primals.eco`** — the ecosystem platform. The public face of ecoPrimals.
+  Anyone can pull depot binaries, browse the forge, use footPrint, view the
+  TOPO-VIS dashboard. Subdomains are sovereign-routed: `*.primals.eco` resolves
+  via a single Cloudflare wildcard A record, and Caddy on golgi handles all
+  per-hostname routing. New services only need a Caddy block — no DNS changes.
+- **`primal.eco`** — the personal sovereign substrate. sporePrint as the
+  owner's personal site and blog. Inner membrane coordination, mesh API, HPC
+  federation. This domain will stop mirroring `primals.eco` and become an
+  independent identity.
+- **`nestgate.io`** — the federated data gateway. nestGate CAS as the
+  content-addressed backbone. All external scientific and geospatial data
+  sources (NCBI, PubMed, UniProt, USGS, FEMA, ArcGIS, etc.) enter through
+  drawbridge-registered weak bonds and land in the CAS. When the federated
+  data mesh scales, `nestgate.io` is the single public entry point for
+  querying content-addressed sovereign data.
+
+### DNS Routing Model (Wave 137b+)
+
+| Record | Type | Content | Notes |
+|--------|------|---------|-------|
+| `primals.eco` | A | golgi VPS IP | Root domain (wildcard doesn't cover root) |
+| `*.primals.eco` | A | golgi VPS IP | Wildcard — Caddy is routing authority |
+| `www.primals.eco` | CNAME | `primals.eco` | www redirect |
+| `ns2.primals.eco` | A | sovereign DNS IP | Different IP — keep explicit |
+
+Caddy handles Host-header routing for all `*.primals.eco` subdomains.
+Explicit Caddy server blocks take precedence over the wildcard catch-all.
+Unknown subdomains return 404 via the catch-all block.
 
 ### Registrar
 
 All three domains are on Porkbun. NS records are set per-domain:
-- `primals.eco` → Cloudflare nameservers (outer membrane)
+- `primals.eco` → Cloudflare nameservers (outer membrane, wildcard DNS)
 - `primal.eco` → `ns1.primals.eco` / `ns2.primals.eco` (sovereign)
 - `nestgate.io` → `ns1.primals.eco` / `ns2.primals.eco` (sovereign)
 
