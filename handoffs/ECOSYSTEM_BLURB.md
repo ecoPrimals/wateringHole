@@ -1,122 +1,97 @@
-# ecoPrimals Ecosystem Blurb — Wave 137b (Deep Review)
+# ecoPrimals Ecosystem Blurb — Wave 138a
 
-**Date**: Jul 13, 2026 18:00 EDT | **Wave**: 137b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** Deep multi-dimensional review complete. 2 handoffs + 2 impulses fossilized. 5 stale docs updated. Hardware gaps inventoried. Forgejo perms recurrence flagged. 6 items remain + 4 hardware evolution targets.
+**Date**: Jul 13, 2026 18:10 EDT | **Wave**: 138a | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN.** Wave 137b closed. Domain identity formalized. Entropy ceremony and hardware sovereignty evolution begin. 6 carried items + 4 evolution targets.
 
 ---
 
-## Remaining — 6 operational items
+## Wave 137b Delivery Summary (closed)
 
-### P1
+Wave 137b delivered: DRAWBRIDGE-CAP resolved. DNS wildcard active. FP-API GIS proxy live. ironGate redeployed (14 binaries). 2,801 bash lines fossilized. `require-signed` system-wide. Terminology hardened (Loam Certificate vs TLS credential). Differential evolution versioning documented. Domain identity separation formalized (`primals.eco` public / `primal.eco` sovereign / `nestgate.io` federated data). 7 docs updated. 4 handoffs + 2 impulses fossilized. Multi-dimensional deep review complete.
+
+---
+
+## Wave 138 — Entropy Ceremonies + Hardware Sovereignty + Substrate Evolution
+
+### Theme
+
+The ecosystem is public and sovereign. The next evolution era is **hardware trust activation** — wiring the physical entropy sources (SoloKeys, Pixel StrongBox) that have been designed across 30+ whitePaper documents but never production-activated. Simultaneously, the domain identity separation enables `primal.eco` to become the sovereign ceremony host while `primals.eco` remains the public platform.
+
+### Priority Matrix
+
+#### P0 — Sovereignty Evolution (eastGate + hardware teams)
+
+| ID | Owner | What | Blocks |
+|----|-------|------|--------|
+| **SOLOKEY-CEREMONY** | bearDog + eastGate | Wire SoloKey FIDO2 → bearDog entropy mixing. Activate Tier 2 ceremony protocol. 4 keys exist, 2 plugged. Zero production crypto use today. | `primal.eco` sovereign identity |
+| **PIXEL-STRONGBOX** | bearDog + grapheneGate | Wire Titan M2 StrongBox → bearDog keystore. FAMILY_SEED + human entropy ceremonies. Fix 16 compile errors in `AndroidKeymaster` transport. | Dual-HSM ceremony, Tier 4 genetics carrier |
+
+#### P1 — Carried Infrastructure (team-owned)
 
 | ID | Owner | What |
 |----|-------|------|
 | **NAPI-LIFECYCLE** | biomeOS | LifecycleManager registration — `lifecycle.status` count=0. |
-| **FORGEJO-PERMS-RECUR** | sporeGate | Forgejo permission denied writing objects — recurrence of FORGEJO-PERMS pattern. |
+| **FORGEJO-PERMS-RECUR** | sporeGate | Forgejo `permission denied` writing objects — recurrence. Root cause: file ownership drift (`root:root` vs `git:git`). |
 
-### P2
+#### P2 — Carried Refinement (team-owned)
 
 | ID | Owner | What |
 |----|-------|------|
 | **SOCKET-DIR-UNIFY** | biomeOS | Unify socket dirs → `/run/membrane/` only. |
-| **BIOMEOS-TEMPLATE** | cellMembrane | `membrane-nucleus@.service` assumes `server` subcommand. biomeOS needs alias or exclusion. |
-| **STALE-PEERS** | wateringHole | Gate head files not refreshed by cascade (golgi 154hrs, sporeGate 68hrs). |
-
-### P3
-
-| ID | Owner | What |
-|----|-------|------|
+| **BIOMEOS-TEMPLATE** | cellMembrane | `membrane-nucleus@.service` assumes `server` subcommand. biomeOS needs alias or template exclusion. |
+| **STALE-PEERS** | wateringHole / cascade | Gate head files not refreshed by cascade. Needs automation or manual refresh protocol. |
 | **TARPC-BIND** | songBird | tarpc listener address-in-use on startup. Non-fatal. |
 
----
+#### Evolution Targets (Wave 138+)
 
-## Hardware Evolution Targets (new from deep review)
-
-| Target | What | Status |
-|--------|------|--------|
-| **SOLOKEY-CEREMONY** | Wire SoloKey FIDO2 → bearDog entropy mixing + Tier 2 ceremony. 4 keys exist (2 plugged: eastGate, ironGate). Zero production crypto use today. | ARCHITECTURE EXISTS — activation needed |
-| **PIXEL-STRONGBOX** | Wire grapheneGate Titan M2 StrongBox → bearDog keystore for FAMILY_SEED + human entropy ceremonies. | NOT STARTED (16 compile errors at Wave 106) |
-| **HW-INVENTORY-RECONCILE** | `HARDWARE_INVENTORY.md` (Wave 116) diverged from manifest + wave.toml. ironGate/eastGate specs conflict across 3 docs. Flint H1 router role undocumented. | Needs single-source reconciliation |
-| **UNIVERSAL-SUBSTRATE** | Next glacial goal. Android NDK, RISC-V, Windows, WASM, macOS Silicon depot targets. | Elevated to GLACIAL_SHIFT_READINESS |
+| ID | Owner | What | Horizon |
+|----|-------|------|---------|
+| **HW-INVENTORY-RECONCILE** | overwatch | Single-source hardware inventory. Resolve spec conflicts (ironGate 3 profiles, eastGate 2 profiles). Update `HARDWARE_INVENTORY.md` to be canonical. | 138a |
+| **UNIVERSAL-SUBSTRATE** | cellMembrane + depot | Multi-arch NUCLEUS: Android NDK, RISC-V, Windows, WASM, macOS Silicon. Next glacial goal. | 138–140 |
+| **PRIMAL-ECO-SEPARATION** | overwatch + sporeGate | `primal.eco` stops mirroring `primals.eco`. Own sporePrint instance, own Caddy routing, own ceremony endpoints. | 138–139 |
+| **BEARDOG-GATEHOUSE-CUTOVER** | bearDog + sporeGate | bearDog ACME replaces Caddy TLS. Shadow live since Wave 136. Full cutover. | 139+ |
 
 ---
 
-## Deep Review Findings (by dimension)
+## Domain Routing (formalized Wave 137b)
 
-### Temporal
-- Wave 137b. 5 stale docs updated (README, GLACIAL, manifest, flockGate head, impulses).
-- 2 handoffs fossilized (FOOTPRINT_WIRING, JELLYFISH_TRIAGE). Only ECOSYSTEM_BLURB active.
-- `DEPLOYMENT_INSTANCE.toml` still at Wave 134 — needs sporeGate/cellMembrane update.
+| Domain | Layer | Purpose | Key Evolution |
+|--------|-------|---------|--------------|
+| `primals.eco` | Outer membrane | Public platform: depot, forge, sporePrint, footPrint (public), TOPO-VIS | Wildcard DNS active. Caddy sole routing authority. |
+| `primal.eco` | Inner membrane | Sovereign substrate: key ceremonies, private footPrint, mesh API, HPC, personal sporePrint | Separation from primals.eco. Entropy ceremony host. |
+| `nestgate.io` | Content organelle | Federated data gateway: CAS backbone, drawbridge weak bonds (NCBI, PubMed, USGS, ArcGIS) | Long-horizon. Scales with federated data mesh. |
 
-### Ecological
-- 14 primals, 8 springs, 7 gardens, 6 infra, 1 protist.
-- Differential evolution rates documented (glossary). No primal at 1.0.
-- rhizoCrypt (0.14.17) most iterated. biomeOS (0.1.0) youngest.
-
-### Hardware / Topology
-- **Leveraged today**: 7 gates online (sporeGate, eastGate, ironGate, flockGate, golgi, grapheneGate + Flint H1 edge router).
-- **Present but not wired to trust model**: 2 SoloKeys plugged (eastGate, ironGate), Titan M2 (Pixel), 3 Akida NPU.
-- **Documented but idle**: westGate (76TB ZFS), biomeGate (HBM2), strandGate (EPYC — offline), fieldGate (dead CMOS), 3 Intel NUC6CAY.
-- **Spec conflicts**: ironGate listed as i9-14900K/96GB/5070 AND i9-12900K/128GB/5070Ti AND i9-12900K/96GB (3 different profiles across HARDWARE.md, manifest, Wave 137b).
-- Pixel is Tower live + USB tether. Its highest-value entropy role (StrongBox-backed FAMILY_SEED) is not started.
-
-### Sovereignty / Membranes
-- K-Derm diderm model operational. Cloudflare external capsule (drawbridge). Caddy sovereign outer membrane.
-- `*.primals.eco` wildcard DNS active — Caddy sole routing authority.
-- Domain identity separation documented: `primals.eco` / `primal.eco` / `nestgate.io`.
-- Loam Certificate vs TLS credential terminology fixed (glossary).
-
-### Depot / Build Pipeline
-- 100% Rust pipeline. `require-signed` enforced system-wide.
-- 35 binaries / 3 architectures (x86_64-musl, aarch64-musl, nucleus_launcher).
-- 2,801 lines of bash fossilized (jellyfish triage).
-- Depot layout fixed: `depot/primals/arch/binary`.
-
-### Website / Public Surfaces
-- `primals.eco` — sporePrint + footPrint GIS proxy (10 hosts). Live.
-- `live.primals.eco` — petalTongue TOPO-VIS dashboard. Live.
-- `git.primals.eco` — Forgejo. Healthy (minus PERMS recurrence).
-- `membrane.primals.eco` — Nest Atomic composition. Live.
-- MacGuffin test: topology visualization public on live.primals.eco.
-
-### Security
-- HSTS, CSP, X-Frame, nosniff on all domains. fail2ban on Forgejo SSH.
-- `require-signed` depot policy. SIGN-VERIFY-ON-FETCH in cellMembrane.
-- SoloKeys + Titan M2: **biggest hardware-security gap** — present, architected, not production-wired.
-- bearDog ACME gatehouse: shadow live, not cut over.
-
-### Glacial
-- ALL 8 CRITERIA CLEAR for stadial entry.
-- Next glacial goal: Universal Substrate Evolution (multi-arch NUCLEUS).
-- SHOW_HN publication rubric exists (whitePaper gen5/thesis/).
-
----
-
-## Docs Updated This Review
-
-| Doc | Action |
-|-----|--------|
-| `README.md` | Wave 128 → 137b header |
-| `GLACIAL_SHIFT_READINESS.md` | Body "4-gate" → "3-gate WG mesh, PUBLIC + SOVEREIGN" |
-| `GLOSSARY.md` | Loam Certificate entry, TLS credential distinction, versioning philosophy |
-| `ecosystem_manifest.toml` | v2.9.0, Wave 137, 40 repos |
-| `heads/flockGate.toml` | DRAWBRIDGE-CAP resolved, scenarios 144, tests 1190 |
-| `handoffs/` | 2 fossilized → archive |
-| `impulses/` | 2 discharged → archive (wave118, wave128) |
+**Same primals, different trust**: A footPrint on `primals.eco` = public GIS. A footPrint on `primal.eco` = private data + Loam Certificates + bearDog-signed sessions. The domain determines the membrane layer.
 
 ---
 
 ## Gate Status
 
 ```
-eastGate     — Overwatch. 13 primals. Clean. SoloKey plugged (not wired).
-sporeGate    — NUCLEUS. Public surfaces live. Depot 35/35. Forgejo PERMS recurrence.
+eastGate     — Overwatch. 13 primals. SoloKey plugged (ceremony target).
+sporeGate    — NUCLEUS. Public surfaces live. Depot 35/35. Forgejo PERMS to fix.
 golgiBody    — Full mirror. Wildcard DNS. Caddy routing authority.
-flockGate    — 144 scenarios / 1,190 tests. songBird deep debt shipped.
-ironGate     — REDEPLOYED Jul 13. 13/13. Mesh restored. SoloKey plugged.
-grapheneGate — Tower live. USB tether. StrongBox NOT STARTED.
+flockGate    — 144 scenarios / 1,190 tests. songBird DRAWBRIDGE-CAP shipped.
+ironGate     — REDEPLOYED. 13/13 active. Mesh restored. SoloKey plugged.
+grapheneGate — Tower live. USB tether. StrongBox ceremony target.
 ```
 
 ---
 
-*Wave 137b deep review: 6 operational items. 4 hardware evolution targets (SoloKey ceremony, Pixel StrongBox, inventory reconciliation, universal substrate). All 8 glacial criteria clear. 7,750+ tests / 0 fail.*
+## Dimensional Posture (entering Wave 138)
+
+| Dimension | Status |
+|-----------|--------|
+| **Temporal** | Wave 138a. All docs current. Only ECOSYSTEM_BLURB active. |
+| **Ecological** | 14 primals, 8 springs, 7 gardens, 6 infra, 1 protist. 40 repos. |
+| **Hardware** | 7 gates online. SoloKeys + StrongBox = biggest sovereignty gap. |
+| **Topology** | 3-gate WG mesh. Wildcard DNS. Domain identity separated. |
+| **Sovereignty** | K-Derm operational. Domain routing formalized. Ceremony activation next. |
+| **Depot** | 100% Rust. `require-signed`. 35 bins / 3 arch. |
+| **Security** | All headers. fail2ban. SIGN-VERIFY-ON-FETCH. HSM gap = P0 evolution. |
+| **Glacial** | ALL 8 CRITERIA CLEAR. Next goal: Universal Substrate. |
+| **Website** | 4 public surfaces live. MacGuffin test passing. |
+
+---
+
+*Wave 138a: entropy ceremonies and hardware sovereignty. The ecosystem is public and sovereign — now it evolves its physical trust roots. 7,750+ tests / 0 fail.*

@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 137
-sub = "b"
+id = 138
+sub = "a"
 date = "2026-07-13"
-posture = "PUBLIC + SOVEREIGN. Phase 1: 12/12 COMPLETE. live.primals.eco serving TOPO-VIS (TLS/HTTP2). primals.eco/footprint/ live. 3-gate WG mesh (eastGate+sporeGate+golgi). Depot 100% Rust pipeline, require-signed, 35 bins / 3 arch. 2,801 bash lines fossilized. Neural API systemd. 7,750+ tests / 0 fail. 5 items remain + 3 discussion."
+posture = "PUBLIC + SOVEREIGN. Wave 137b CLOSED — deep review complete, all discussion resolved, 7 docs updated, 4 handoffs/impulses fossilized. Domain identity formalized (primals.eco/primal.eco/nestgate.io). Wave 138: entropy ceremonies, hardware sovereignty, multi-arch substrate. 6 carried items + 4 evolution targets."
 publisher = "eastGate-overwatch"
 
 [gates]
