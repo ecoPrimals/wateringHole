@@ -21,10 +21,11 @@
 |----|------|--------|
 | **FP-API** | Wire footPrint `/api/proxy?url=` through drawbridge. Allowlist landed (`87b7779`). Caddy rewrite (quickfix) or client migration (clean). | 2-4hr |
 
-### sporeGate — 1 item
+### sporeGate — 2 items
 
 | ID | What | Effort |
 |----|------|--------|
+| **DEPOT-REFRESH** | `plasmid.harvest` songBird — depot binary is from Jul 9, missing UDS-HTTP fix (`0d2895b5`, Jul 12) and mesh port fix (`f05918a`). Blocks SONGBIRD-EASTGATE. | 30min |
 | **LIVE-ACTIVATE** | Stand up `live.primals.eco` — petalTongue NUCLEUS on sporeGate. | 4-8hr |
 
 ### petalTongue — 1 item
@@ -33,12 +34,13 @@
 |----|------|--------|
 | **TOPO-VIS** | Live topology viz — consume `topology.primals` + `routing_weights` from Neural API. | 8-16hr |
 
-### eastGate (self) — 2 items
+### eastGate (self) — 1 item
 
 | ID | What | Effort |
 |----|------|--------|
-| **SONGBIRD-EASTGATE** | Deploy songBird `0d2895b5` (includes UDS-HTTP fix). | 30min |
-| **SPORE-OWNERSHIP** | Create `SPORE_OWNERSHIP_MATRIX.md` — nestGate/rhizoCrypt/sweetGrass. | 1hr |
+| **SONGBIRD-EASTGATE** | Deploy songBird with UDS-HTTP fix. **BLOCKED**: pepti depot binary is from Jul 9, pre-dates fix (Jul 12). sporeGate needs `plasmid.harvest` to rebuild songBird to depot. | blocked |
+
+~~SPORE-OWNERSHIP~~ — **DONE**: `SPORE_OWNERSHIP_MATRIX.md` created in wateringHole root.
 
 ### Discussion (all teams)
 
