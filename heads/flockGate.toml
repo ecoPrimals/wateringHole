@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-13T12:15:00Z
+# Gate: flockGate | Updated: 2026-07-13T13:15:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-13T12:15:00Z"
+updated = "2026-07-13T13:15:00Z"
 wave = "137b"
 
 [heads]
 primalSpring = "62a7ad7"
-wateringHole = "49aac0c3"
+wateringHole = "65e93e5b"
 plasmidBin = "e0b20e0"
 skunkBat = "d9837a9"
 
@@ -21,55 +21,38 @@ depot_binary_deployed = true
 peers_tcp_connected = 2
 peers_mesh_registered = 0
 wireguard_status = "UP"
-wg_peer = "golgiBody (10.13.37.1)"
-icmp_rtt_golgi_ms = 31
-tcp_rtt_sporegate_ms = 62
-tcp_rtt_golgi_ms = 29
 federation_sporegate_7700 = "HTTP JSON-RPC LIVE — 3 peers, v0.2.1"
-federation_golgi_7700 = "HTTP JSON-RPC LIVE — 4 overlay peers, v0.2.1 (WG-BIND resolved)"
-federation_eastgate_7700 = "TCP CONNECTED"
-federation_irongate_7700 = "UNREACHABLE"
-status = "WAITING — depot binary is pre-0d2895b5, mesh peering blocked until depot updated"
-
-[mesh.characterization]
-sporegate_peers = 3
-golgi_peers = 4
-flockgate_peers = 0
-blocker = "Depot songBird binary (Jul 9 build) does not contain 0d2895b5 UDS-HTTP fix. peer.connect TCP succeeds (62ms) but BeaconMesh registration fails. Depot needs rebuild."
-sporegate_stale_peer = "10.13.37.0:8080 (pre-fix ghost entry, wastes capability.call cycles)"
-jupyter_data_plane = "PROVEN — http.request via sporeGate reaches ironGate JupyterHub (version 5.4.5, 202ms WAN RTT)"
+federation_golgi_7700 = "HTTP JSON-RPC LIVE — 4 overlay peers, v0.2.1"
+status = "BLOCKED ON DEPOT-REFRESH — depot songBird is Jul 9 build (pre-0d2895b5)"
 
 [dispatch_validation]
-status = "DATA PLANE PROVEN. Control plane awaits depot binary + DRAWBRIDGE-ROUTES."
+status = "DATA PLANE PROVEN. Control plane awaits DEPOT-REFRESH + drawbridge capability advertising."
 wan_dispatch_01 = "PASS (transport)"
-http_transport_status = "PASS — JupyterHub reachable via http.request relay"
-capability_call_status = "BLOCKED — jupyter not in capabilities.list (DRAWBRIDGE-ROUTES not advertising)"
-jupyter_version = "5.4.5"
-jupyter_relay_rtt_ms = 202
+jupyter_data_plane = "PROVEN — JupyterHub v5.4.5 via http.request relay (202ms WAN)"
+capability_call_status = "BLOCKED — depot binary pre-fix, jupyter not in capabilities.list"
 
 [dispatch_validation.latency]
 wan_http_p50_ms = 114
-wg_icmp_p50_ms = 31
-tcp_peer_connect_ms = 62
-http_jsonrpc_sporegate_ms = 207
-http_jsonrpc_golgi_ms = 87
+wg_icmp_golgi_ms = 31
+tcp_peer_sporegate_ms = 62
+tcp_peer_golgi_ms = 29
 jupyter_relay_ms = 202
 probed_at = "2026-07-13T12:10:00Z"
 
 [outer_membrane_validation]
 validated_at = "2026-07-12T14:05:00Z"
-primals_eco = "PASS — 200, CSP"
-footprint = "PASS — 200, custom CSP"
-lab = "PASS — 401 (basicauth)"
-depot = "PASS — 200"
+primals_eco = "PASS"
+footprint = "PASS"
+lab = "PASS"
+depot = "PASS"
 
 [footprint]
 status = "LIVE ON SOVEREIGN INFRA"
 wan_url = "https://primals.eco/footprint/"
-wan_status = "200 OK"
 fp_api_scenario = "PASS — 13/13 checks (s_fp_api_proxy #142)"
-tls_delegation_blocker = "songBird http.request fails HTTPS — security provider at wrong socket path"
-next_action = "Caddy quickfix or SOCKET-DIR-UNIFY for TLS delegation"
+fp_api_wiring = "DESIGN COMPLETE — FP_API_WIRING_WAVE137b.md published"
+phase_a = "CSP expansion + direct fetch (6/10 hosts, shippable now)"
+phase_b = "songBird drawbridge proxy (4/10 hosts, blocked on SOCKET-DIR-UNIFY)"
 
 [primalspring]
 version = "v0.9.36"
@@ -79,11 +62,3 @@ tests = 1176
 failures = 0
 clippy_warnings = 0
 suite_status = "GREEN"
-new_scenario = "s_fp_api_proxy — FP-API drawbridge wiring validation"
-
-[resolved_this_session]
-golgi_wg_bind_confirmed = "VERIFIED — golgi responds on 10.13.37.1:7700, 4 overlay peers"
-jupyter_data_plane = "PROVEN — flockGate→sporeGate→ironGate JupyterHub 5.4.5 (202ms)"
-fp_api_scenario = "CREATED — s_fp_api_proxy #142, 13 checks, all PASS"
-env_vars_persisted = "ECOPRIMALS_ROOT + ECOPRIMALS_PLASMID_BIN + GATE_NAME in .bashrc"
-depot_binaries = "13/13 resolve via discover_binary"
