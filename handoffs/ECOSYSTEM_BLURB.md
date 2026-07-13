@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 137b
 
-**Date**: Jul 13, 2026 11:10 EDT | **Wave**: 137b | **From**: eastGate overwatch
-**Posture**: **PHASE 1 COMPLETE. 3-GATE MESH LIVE.** eastGate deployed songBird `74cf7101` — mesh bidirectional across eastGate + sporeGate + golgi (35-71ms WG). Deployment AAR surfaced 3 divergences (depot checksum, fetch path, stale heads). 7,750+ tests / 0 fail.
+**Date**: Jul 13, 2026 11:15 EDT | **Wave**: 137b | **From**: eastGate overwatch
+**Posture**: **PHASE 1 COMPLETE. 3-GATE MESH LIVE.** eastGate songBird deployed. sporeGate sprint resolved STALE-PEER + FORGEJO-PERMS + DEPOT-POLICY (`require-signed` system-wide). primalSpring active local evolution (76 LOC, 6 scenarios). 7,750+ tests / 0 fail.
 
 ---
 
@@ -22,14 +22,13 @@
 | **DRAWBRIDGE-CAP** | Drawbridge routes not advertising as capabilities. `capabilities.list` shows 15 native caps, zero drawbridge caps. Blocks `capability.call` for drawbridge services. | 2-4hr |
 | **SONGBIRD-LOCAL** | Local drawbridge cleanup (header parsing, dead constant) — 1 file dirty, 27 ins / 129 del. Commit + push. | 30min |
 
-### sporeGate / golgi team — 4 items
+### sporeGate / golgi team — 1 item
 
 | ID | What | Effort |
 |----|------|--------|
-| **DEPOT-CHECKSUM** | **NEW.** Depot binary BLAKE3 doesn't match `checksums.toml`. Binary is unstripped (26.6MB), checksums were likely signed against stripped build. `VerifyIfPresent` will reject. Re-harvest: strip → checksum → sign → sync. | 30min |
-| **STALE-PEER** | Ghost peer `10.13.37.0:8080` in sporeGate mesh. `mesh.remove_peer` or restart. | 15min |
-| **FORGEJO-PERMS** | Forgejo on golgi: `Permission denied` writing objects. Blocks push alignment. | 30min |
-| **DEPOT-POLICY** | Promote trust default `VerifyIfPresent` → `RequireSigned` in gate units. Code ready (`89bf12f`), config decision. | 15min |
+| **DEPOT-CHECKSUM** | Depot binary BLAKE3 doesn't match `checksums.toml`. Binary is unstripped (26.6MB), checksums were likely signed against stripped build. `RequireSigned` (now active) will reject. Re-harvest: strip → checksum → sign → sync. | 30min |
+
+*Resolved this wave*: ~~STALE-PEER~~ (mesh re-init, ghost eliminated), ~~FORGEJO-PERMS~~ (`chown -R git:git` on 21 repos), ~~DEPOT-POLICY~~ (`require-signed` set system-wide).
 
 ### cellMembrane team — 1 item
 
@@ -63,14 +62,14 @@
 
 ```
 eastGate     — Overwatch. songBird LIVE (v0.2.1, 2 peers). Neural API 24d. All tasks DONE.
-sporeGate    — NUCLEUS. petalTongue :9900. Depot needs re-sign (checksum mismatch).
-golgiBody    — Full mirror. sporePrint + footPrint live. Forgejo perms + Caddy block ready.
+sporeGate    — NUCLEUS. petalTongue :9900. STALE-PEER+FORGEJO-PERMS+DEPOT-POLICY resolved. Depot re-sign needed.
+golgiBody    — Full mirror. Forgejo perms fixed. sporePrint + footPrint live. Caddy block ready.
 flockGate    — JupyterHub data plane proven. FP-API Caddy next.
 ironGate     — Node atomic. Own overwatch agent.
 ```
 
-**Active Handoffs**: `SONGBIRD_EASTGATE_DEPLOY_AAR_137b.md`, `DRAWBRIDGE_WEAK_BOND_PATTERN_AAR_137b.md`, `FLOCKGATE_WAN_OVERWATCH_AAR_137b.md`
+**Active Handoffs**: `SONGBIRD_EASTGATE_DEPLOY_AAR_137b.md`, `SPOREGATE_GOLGI_SPRINT_AAR_137b.md`, `DRAWBRIDGE_WEAK_BOND_PATTERN_AAR_137b.md`, `FLOCKGATE_WAN_OVERWATCH_AAR_137b.md`
 
 ---
 
-*Wave 137b: Phase 1 COMPLETE. 3-gate mesh operational. 12 items remain across 7 teams + 3 discussion. New: DEPOT-CHECKSUM (sporeGate), FETCH-PATH (cellMembrane). 7,750+ tests / 0 fail.*
+*Wave 137b: Phase 1 COMPLETE. 3-gate mesh live. 9 items remain across 6 teams + 3 discussion. sporeGate sprint closed 3 more. 7,750+ tests / 0 fail.*
