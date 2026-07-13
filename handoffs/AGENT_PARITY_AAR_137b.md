@@ -34,11 +34,15 @@ was doing its job. We put the misleading sign on every page.
 
 ## Fix
 
-**Removed the `<link rel="alternate" type="text/plain">` from `base.html`.**
+**Replaced `rel="alternate"` with `rel="describedby"` on `base.html`.**
 
-`llms.txt` is now discovery-only — reachable via `robots.txt`, `/site-index/`,
-and direct URL. Agents that want it can find it. Agents that don't ask for it
-won't be silently redirected to it.
+`rel="alternate"` means "this is the same content in a different format" — a
+lie that triggers content substitution in well-behaved assistive tools.
+`rel="describedby"` means "this resource describes the context you're in" —
+which is exactly what `llms.txt` is: a glossary, index, and topology map for
+the full site. An LLM agent can intake it once, embed the site structure, and
+then navigate efficiently to specific pages. That's leveraging what agents are
+good at — they're more capable than trawlers, not less.
 
 ## Additional Mitigations
 
@@ -54,13 +58,15 @@ won't be silently redirected to it.
 - **It does not matter whose code has the bug.** The user on the other end of
   that agent couldn't read the page. That's our accessibility failure. Framing
   it as "agent-side" is like saying it's the deaf person's fault for being deaf.
-- **`<link rel="alternate">` is an accessibility promise.** If you declare a
-  simpler-format version of a page, it must be *that page's* content in that
-  format — not a global overview. A global pointer on every page is a site-wide
-  accessibility trap.
-- **Discovery and substitution are different things.** `llms.txt` is a discovery
-  document (like `robots.txt` or `sitemap.xml`). Linking it as an alternate of
-  every page turned discovery into substitution.
+- **`rel="alternate"` vs `rel="describedby"` — semantics matter.** `alternate`
+  means "same content, different format" and triggers content substitution.
+  `describedby` means "context about this resource" and invites the agent to
+  intake a map without replacing the page. Same link, radically different
+  accessibility outcome.
+- **AI agents are more capable than trawlers.** An LLM can intake a context
+  document, embed the site topology, and navigate efficiently. `llms.txt` as
+  `describedby` leverages that capability — the agent gets the glossary, index,
+  and map in one fetch, then goes directly to what the user needs.
 - **Dogfood test with bot UAs** catches this class of issue permanently.
 
 ## Test Evidence
@@ -84,5 +90,5 @@ Base: https://primals.eco — Paths: 11
 
 ---
 
-*The fix is the removal, not the detection. An accessibility gap you can detect
-is still an accessibility gap.*
+*The fix is the semantics, not the removal. `llms.txt` is the map — it should
+help agents navigate, not replace what they're navigating to.*
