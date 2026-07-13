@@ -104,7 +104,7 @@
 
 | # | ID | What | Effort |
 |---|-----|------|--------|
-| 24 | **SHALLOW-PINGPONG** | Shallow Forgejo relay (depth=1 bare repos on golgi) causes SHA divergence on every rebase — `git push forgejo main` rejects because rebased commits get new SHAs even though content is identical. Burns cycles every cascade. Fix options: (a) convert golgi Forgejo repos to full-depth mirrors, (b) `cellMembrane` automates `--force-with-lease` for shallow relays, (c) move Forgejo to sporeGate where repos are full-depth. Affects: wateringHole, primalSpring, groundSpring, bearDog, nestGate, whitePaper, plasmidBin (7 repos observed). | 2-4hr |
+| 24 | **SHALLOW-PINGPONG** | Shallow Forgejo relay (depth=1 bare repos on golgi) causes SHA divergence on every rebase — burns cycles every cascade (7 repos affected). **Fix: move Forgejo authority to sporeGate** (full-depth repos, build authority). golgi becomes a thin read-only mirror that syncs from sporeGate — provides async WAN access without VPN (flockGate pushes in from outside, internal teams work from within). golgi Forgejo stays up as a mirror endpoint, but sporeGate is the source of truth. | 2-4hr |
 
 ### Discussion items (all teams)
 
