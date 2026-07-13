@@ -1,18 +1,18 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-12T16:20:00Z
+# Gate: flockGate | Updated: 2026-07-12T21:40:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-13T01:32:00Z"
+updated = "2026-07-12T21:40:00Z"
 wave = "137b"
 
 [heads]
-primalSpring = "f2efaf6"
-wateringHole = "b6411694"
+primalSpring = "445826b"
+wateringHole = "5743e32d"
 plasmidBin = "e0b20e0"
-skunkBat = "b708872"
+skunkBat = "d9837a9"
 
 [mesh]
 node_id = "flockGate"
@@ -25,27 +25,41 @@ peers_mesh_registered = 0
 wireguard_status = "UP"
 wg_peer = "golgiBody (10.13.37.1)"
 icmp_rtt_golgi_ms = 31
-tcp_rtt_sporegate_ms = 66
+tcp_rtt_sporegate_ms = 62
 tcp_rtt_eastgate_ms = 62
-federation_sporegate_7700 = "TCP CONNECTED"
+federation_sporegate_7700 = "HTTP JSON-RPC LIVE — 3 peers, v0.2.1"
+federation_golgi_7700 = "HTTP JSON-RPC LIVE — 4 overlay peers, v0.2.1 (GOLGI-WG-BIND RESOLVED)"
 federation_eastgate_7700 = "TCP CONNECTED"
-federation_golgi_7700 = "UNREACHABLE (GOLGI-WG-BIND pending)"
 federation_irongate_7700 = "UNREACHABLE"
-status = "UPGRADED — depot binary deployed, TCP connects succeed, mesh peering pending bidirectional f05918a deploy"
+status = "UDS-HTTP-PROTOCOL blocker — peer.connect TCP succeeds but mesh.peers stays empty"
+
+[mesh.characterization]
+golgi_wg_bind = "RESOLVED — golgi now responds on 10.13.37.1:7700"
+sporegate_node_id = "sporeGate"
+golgi_node_id = "membrane-relay"
+sporegate_peers = 3
+golgi_peers = 4
+flockgate_peers = 0
+blocker = "UDS mesh engine cannot complete handshake with HTTP federation peers. TCP channel opens (62ms latency) but peer registration never happens. Bidirectional mesh is live between HTTP-to-HTTP gates (sporeGate↔golgi). flockGate's UDS songBird is excluded."
+workaround = "Direct HTTP JSON-RPC calls to 10.13.37.2:7700/jsonrpc bypass local mesh entirely"
 
 [dispatch_validation]
-status = "PROGRESSING — FLOCKGATE-MESH fix landed (f05918a), bidirectional deploy pending"
+status = "BLOCKED ON UDS-HTTP-PROTOCOL (#7) — capability.call requires mesh peers"
 wan_dispatch_01 = "PASS (transport)"
 http_transport_status = "PASS"
-http_federation_status = "PASS — 10.13.37.2:7700/jsonrpc responds (3 peers, 35 capabilities)"
-capability_call_status = "PENDING — mesh peering needs bidirectional f05918a + GOLGI-WG-BIND"
-neural_api_sporegate = "LIVE — 19 primals, 156 translations, 33 capabilities"
+http_federation_status = "PASS — both sporeGate and golgi HTTP federation reachable"
+capability_call_status = "BLOCKED — 'jupyter' not in capabilities.list (DRAWBRIDGE-ROUTES #12 unset)"
+capability_call_via_http = "TESTED — returns 'No provider found', tried 3 peers, last error: stale 10.13.37.0:8080 entry"
+neural_api_sporegate = "LIVE — 48 primals discovered"
+drawbridge_routes_sporegate = "NOT SET — only 15 songBird-native caps advertised, no jupyter"
 
 [dispatch_validation.latency]
 wan_http_p50_ms = 114
 wg_icmp_p50_ms = 31
-tcp_peer_connect_ms = 64
-probed_at = "2026-07-12T15:50:00Z"
+tcp_peer_connect_ms = 62
+http_jsonrpc_sporegate_ms = 207
+http_jsonrpc_golgi_ms = 87
+probed_at = "2026-07-12T21:35:00Z"
 
 [outer_membrane_validation]
 validated_at = "2026-07-12T14:05:00Z"
@@ -59,29 +73,20 @@ status = "LIVE ON SOVEREIGN INFRA"
 wan_url = "https://primals.eco/footprint/"
 wan_status = "200 OK"
 verified_from_wan_at = "2026-07-12T14:05:00Z"
-next_action = "FP-API — wire proxy through drawbridge (Phase 2)"
+next_action = "FP-API — requires DRAWBRIDGE-ROUTES first, then wire proxy"
 
 [primalspring]
 version = "v0.9.36"
-head = "f2efaf6"
+head = "445826b"
 scenarios = 141
 tests = 1135
 failures = 0
 clippy_warnings = 0
 suite_status = "GREEN"
+env_configured = "ECOPRIMALS_ROOT + ECOPRIMALS_PLASMID_BIN + GATE_NAME all set"
 
-[skunkbat]
-head = "b708872"
-tests = 567
-failures = 0
-suite_status = "GREEN"
-delivery_136a = "SKUNY-OM — outer membrane HTTP anomaly detection"
-delivery_136b = "SKUNKY-INGEST + DEEP-DEBT sweep + doc reconciliation"
-delivery_137b = "THREAT-ACTIVATE (conditional baseline), SKUNKY-LIVE (B/s fix, safe RPC), CF-DATA stub"
-convergence = "BUILDABLE + RUNNABLE + TOOLCHAIN + CONFIG"
-
-[debt]
-depot_primal_count = "0/13 — only songBird binary in local depot"
-forgejo_parity = "DRIFTED — forgejo/main behind origin/main"
-local_gate_env = "GATE_NAME=flockGate set in .bashrc"
-wg0_registry_mismatch = "expected .5 (eastGate scenario default), actual .6 (flockGate) — false positive"
+[resolved_this_wave]
+gate_name_env = "SET — GATE_NAME=flockGate in .bashrc"
+depot_path = "FIXED — ECOPRIMALS_PLASMID_BIN points to triple-specific dir (13/13 binaries resolve)"
+golgi_wg_bind = "RESOLVED UPSTREAM — golgi now serves federation on 10.13.37.1:7700"
+clippy_clean = "FIXED — Duration::from_secs(2) in s_federation_wan_readiness"
