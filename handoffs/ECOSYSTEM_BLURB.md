@@ -1,132 +1,109 @@
 # ecoPrimals Ecosystem Blurb — Wave 137b
 
-**Date**: Jul 13, 2026 08:00 EDT | **Wave**: 137b | **From**: eastGate overwatch
-**Posture**: **DEBT BURN-DOWN ACCELERATING.** Overnight: 8 items resolved by 5 teams. UDS-HTTP-PROTOCOL fixed (songBird). FP-PERSIST landed (nestGate CAS). SHALLOW-PINGPONG eliminated (20 Forgejo repos full-depth). BRIDGE-ERROR-PROP done (cellMembrane). NUCLEUS-MATRIX + BOND-METADATA done (projectNUCLEUS). THREAT-ACTIVATE + SKUNKY-LIVE prep + CF-DATA groundwork landed (skunkBat). DRAWBRIDGE-ROUTES confirmed. Phase 1 at 11/12. 20/28 debt items resolved.
+**Date**: Jul 13, 2026 08:05 EDT | **Wave**: 137b | **From**: eastGate overwatch
+**Posture**: **CONVERGING.** 20/28 debt items resolved. Phase 1 at 11/12. Neural API live on 2 gates. Mesh bidirectional. Depot signed. Forgejo full-depth. 7,750+ tests / 0 fail.
 
 ---
 
-## Overnight Closures (Jul 12-13)
+## Remaining — 8 action items + 3 discussion
 
-| # | ID | Resolved By | Commit |
-|---|-----|-------------|--------|
-| 1 | ~~UDS-HTTP-PROTOCOL~~ | songBird | `0d2895b5` — `peer.connect` now registers peers in BeaconMesh |
-| 2 | ~~FP-PERSIST~~ | nestGate | `88dc4fa2` — CAS-backed project persistence, 5 RPC methods, 9 tests |
-| 3 | ~~SHALLOW-PINGPONG~~ | sporeGate/golgi | 20 Forgejo repos converted to full-depth mirrors. Thin relay pattern retired |
-| 4 | ~~DRAWBRIDGE-ROUTES~~ | sporeGate | Confirmed operational — `jupyter` is HTTP proxy route, not mesh cap (expected) |
-| 5 | ~~BRIDGE-ERROR-PROP~~ | cellMembrane | `d5506a3` — NeuralBridge propagates errors, plus deep debt |
-| 6 | ~~NUCLEUS-MATRIX~~ | projectNUCLEUS | `ea57d6a` — U/V/W columns defined |
-| 7 | ~~BOND-METADATA~~ | projectNUCLEUS | `ea57d6a` — `bond_type` on all 19 graphs |
-| 8 | ~~THREAT-ACTIVATE~~ | skunkBat | `b708872` — 122 attacker IPs, SKUNKY-LIVE prep, CF-DATA groundwork |
+### biomeOS — 3 items (1 CRITICAL)
 
-Also: golgiBody `heads/` auto-publishing is live (~130 commits overnight — automated gate health tracking).
+| ID | What | Effort |
+|----|------|--------|
+| **NAPI-LIFECYCLE** | LifecycleManager registration — `lifecycle.status` returns count=0. **Last CRITICAL item.** Blocks full Neural API authority. | 4-8hr |
+| **SOCKET-DIR-UNIFY** | Unify 3 socket dirs → `/run/membrane/` only. Currently bridged by ExecStartPre symlinks. | 2-4hr |
+| **SOCKET-UMASK** | Primals should `fchmod` sockets after bind (not rely on systemd UMask band-aid). | 2hr |
+
+### songBird + flockGate — 1 item
+
+| ID | What | Effort |
+|----|------|--------|
+| **FP-API** | Wire footPrint `/api/proxy?url=` through drawbridge. Allowlist landed (`87b7779`). Caddy rewrite (quickfix) or client migration (clean). | 2-4hr |
+
+### sporeGate — 1 item
+
+| ID | What | Effort |
+|----|------|--------|
+| **LIVE-ACTIVATE** | Stand up `live.primals.eco` — petalTongue NUCLEUS on sporeGate. | 4-8hr |
+
+### petalTongue — 1 item
+
+| ID | What | Effort |
+|----|------|--------|
+| **TOPO-VIS** | Live topology viz — consume `topology.primals` + `routing_weights` from Neural API. | 8-16hr |
+
+### eastGate (self) — 2 items
+
+| ID | What | Effort |
+|----|------|--------|
+| **SONGBIRD-EASTGATE** | Deploy songBird `0d2895b5` (includes UDS-HTTP fix). | 30min |
+| **SPORE-OWNERSHIP** | Create `SPORE_OWNERSHIP_MATRIX.md` — nestGate/rhizoCrypt/sweetGrass. | 1hr |
+
+### Discussion (all teams)
+
+| ID | What |
+|----|------|
+| **VERSION-SKEW** | 3 version ranges (0.1-0.2, 0.4-0.9, 0.14). Strategy needed. |
+| **CERT-OWNER** | Certificate shows `loamspine`, expected `beardog`. |
+| **PEPTI-TARGETS** | Missing depot: `aarch64-linux-android`, `x86_64-unknown-linux-gnu`. |
 
 ---
 
-## Remaining Debt — 8 items
+## Wave 137b Delivery Log
 
-### biomeOS team
-
-| # | ID | What | Effort |
-|---|-----|------|--------|
-| 1 | **NAPI-LIFECYCLE** | LifecycleManager registration — `lifecycle.status` returns count=0. Last CRITICAL item. | 4-8hr |
-| 2 | **SOCKET-DIR-UNIFY** | Unify `/run/membrane/`, `/run/biomeos-root/`, `/run/biomeos-default/` → single `/run/membrane/`. | 2-4hr |
-| 3 | **SOCKET-UMASK** | Primals should `fchmod` sockets after bind. | 2hr |
-
-### songBird + flockGate
-
-| # | ID | What | Effort |
-|---|-----|------|--------|
-| 4 | **FP-API** | Wire footPrint `/api/proxy?url=` through drawbridge. Caddy rewrite or client migration. | 2-4hr |
-
-### sporeGate
-
-| # | ID | What | Effort |
-|---|-----|------|--------|
-| 5 | **LIVE-ACTIVATE** | Stand up `live.primals.eco` — petalTongue NUCLEUS on sporeGate. | 4-8hr |
-
-### petalTongue team
-
-| # | ID | What | Effort |
-|---|-----|------|--------|
-| 6 | **TOPO-VIS** | Live topology viz — consume Neural API `topology.primals` + `routing_weights`. | 8-16hr |
-
-### eastGate overwatch (self)
-
-| # | ID | What | Effort |
-|---|-----|------|--------|
-| 7 | **SONGBIRD-EASTGATE** | Deploy songBird `0d2895b5` to eastGate. (Now includes UDS-HTTP fix.) | 30min |
-| 8 | **SPORE-OWNERSHIP** | Create `SPORE_OWNERSHIP_MATRIX.md`. | 1hr |
-
-### Cleared since last blurb
-
-| ID | Status |
-|----|--------|
-| ~~DEPLOY-DISPATCH-XGATE~~ | Absorbed into cellMembrane `d5506a3` |
-| ~~TIER-PRIORITY~~ | Absorbed into projectNUCLEUS `ea57d6a` |
-| ~~SKUNKY-LIVE~~ | Prep landed in skunkBat `b708872` |
-| ~~CF-DATA~~ | Groundwork landed in skunkBat `b708872` |
-| ~~DEPOT-POPULATE~~ | flockGate local |
-| ~~GATE-NAME-ENV~~ | flockGate local |
-| ~~NAPI-IRONGATE~~ | ironGate overwatch |
-| ~~SYSTEMD-UMASK~~ | ironGate overwatch |
-
-### Discussion items (all teams)
-
-| # | ID | What |
-|---|-----|------|
-| 9 | **VERSION-SKEW** | 3 version ranges. Coordinate strategy. |
-| 10 | **CERT-OWNER** | Certificate owner `loamspine` vs `beardog`. |
-| 11 | **PEPTI-TARGETS** | Missing depot targets. |
+| ID | Resolved By | Commit |
+|----|-------------|--------|
+| ~~NAPI-MEMBRANE~~ | cellMembrane | `1df1cfe` |
+| ~~SIGN-01~~ | cellMembrane + sporeGate | `471ebf5` — E2E verified |
+| ~~FP-DEPLOY~~ | sporeGate | primals.eco/footprint/ live (114ms WAN) |
+| ~~SKUNKY-DEPLOY~~ | sporeGate | dry-run on golgi |
+| ~~NAPI-START~~ | sporeGate | 48 primals, 156 translations |
+| ~~NAPI-PERMS~~ | cellMembrane + sporeGate | `d5474df` — systemd UMask permanent |
+| ~~FLOCKGATE-MESH~~ | songBird | `f05918a` — port 8080→7700 |
+| ~~NAPI-SYSTEMD~~ | sporeGate | `membrane-neural-api.service` |
+| ~~NAPI-CROSS-GATE~~ | sporeGate | songBird deployed to sporeGate + golgi |
+| ~~GOLGI-WG-BIND~~ | golgi | `0.0.0.0:7700` |
+| ~~UDS-HTTP-PROTOCOL~~ | songBird | `0d2895b5` — peers register in BeaconMesh |
+| ~~FP-PERSIST~~ | nestGate | `88dc4fa2` — CAS persistence, 5 RPC methods |
+| ~~SHALLOW-PINGPONG~~ | sporeGate/golgi | 20 repos full-depth, thin relay retired |
+| ~~DRAWBRIDGE-ROUTES~~ | sporeGate | Confirmed operational |
+| ~~BRIDGE-ERROR-PROP~~ | cellMembrane | `d5506a3` |
+| ~~NUCLEUS-MATRIX~~ | projectNUCLEUS | `ea57d6a` — U/V/W defined |
+| ~~BOND-METADATA~~ | projectNUCLEUS | `ea57d6a` — 19 graphs |
+| ~~THREAT-ACTIVATE~~ | skunkBat | `b708872` + SKUNKY-LIVE prep + CF-DATA groundwork |
+| ~~DEPLOY-DISPATCH-XGATE~~ | cellMembrane | `d5506a3` |
+| ~~TIER-PRIORITY~~ | projectNUCLEUS | `ea57d6a` |
 
 ---
 
 ## Status
 
-### Tests: 4,000+ / 0 fail
+**7,750+ tests / 0 fail**
 
 | Suite | Tests | Status |
 |-------|-------|--------|
+| nestGate | 3,790 | GREEN |
 | primalSpring | 1,131 (141 scenarios) | GREEN |
 | cellMembrane | 1,024 | GREEN |
 | groundSpring | 1,047+ | GREEN |
-| nestGate | 3,790 (73 ignored) | GREEN |
-| skunkBat | 567 (+4) | GREEN |
+| skunkBat | 567 | GREEN |
 | projectNUCLEUS | 149 (26/26) | GREEN |
 | footPrint | 46 | GREEN |
 
-### Mesh: Full bidirectional (pending eastGate songBird upgrade)
+**Mesh**: Bidirectional (sporeGate ↔ golgi ↔ LAN gates). flockGate → 4 WG peers. eastGate songBird upgrade pending.
 
+**Gates**:
 ```
-eastGate ↔ golgi ↔ ironGate + southGate  (LAN, <1ms)
-sporeGate ↔ golgi                        (WG, bidirectional, 30ms)
-flockGate → 4 overlay peers              (WG, 31ms)
-grapheneGate                             (TCP-only, Tower)
-```
-
-### Forgejo: RESOLVED — all 20 repos full-depth on golgi
-
-### Gate Status
-
-```
-eastGate     — Overwatch. Neural API live 24d. songBird upgrade pending.
-sporeGate    — NUCLEUS hub. Neural API systemd. Depot signed. Forgejo authority.
-golgiBody    — Full mirror (no longer shallow). sporePrint + footPrint live. Auto-publishing heads.
+eastGate     — Overwatch. Neural API 24d. songBird upgrade pending.
+sporeGate    — NUCLEUS. Neural API systemd. Depot signed. Forgejo authority.
+golgiBody    — Full mirror. sporePrint + footPrint live. Auto-publishing heads.
 flockGate    — footPrint owner. Mesh resolved. WAN validated.
 ironGate     — Node atomic. Own overwatch agent.
 ```
 
----
-
-## Active Handoffs
-
-| Document | Status |
-|----------|--------|
-| `SHALLOW_PINGPONG_RESOLUTION_AAR_137b.md` | **NEW** — 20 repos full-depth, thin relay retired |
-| `NESTGATE_FP_PERSIST_WAVE137b_JUL12_2026.md` | **NEW** — CAS persistence, 5 RPC methods |
-| `NAPI_SYSTEMD_MESH_DEPLOY_AAR_137b.md` | Phase 1 complete (absorbed) |
-| `NEURAL_API_LIVE_AAR_137b.md` | Phase 1 complete (absorbed) |
-| `CELLMEMBRANE_NAPI_PERMS_DEEP_DEBT_AAR_137b.md` | Done |
+**Active Handoffs**: `SHALLOW_PINGPONG_RESOLUTION_AAR_137b.md`, `NESTGATE_FP_PERSIST_WAVE137b_JUL12_2026.md`
 
 ---
 
-*Wave 137b: 20/28 debt items resolved. 8 remain (1 critical, 2 high, 2 medium, 3 discussion). Phase 1 at 11/12 — only NAPI-LIFECYCLE left. Forgejo shallow relay permanently fixed. UDS-HTTP mesh protocol fixed. nestGate CAS persistence live. 4,000+ tests / 0 fail. Teams are converging.*
+*Wave 137b: 20 items delivered by 7 teams. 8 remain + 3 discussion. 1 critical (NAPI-LIFECYCLE). Neural API live on 2 gates. Forgejo fixed. Mesh bidirectional. CAS persistence live. 7,750+ tests / 0 fail.*
