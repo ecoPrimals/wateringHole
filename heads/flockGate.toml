@@ -5,14 +5,14 @@
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-12T16:20:00Z"
+updated = "2026-07-13T01:32:00Z"
 wave = "137b"
 
 [heads]
 primalSpring = "f2efaf6"
 wateringHole = "b6411694"
 plasmidBin = "e0b20e0"
-skunkBat = "d9837a9"
+skunkBat = "b708872"
 
 [mesh]
 node_id = "flockGate"
@@ -70,8 +70,18 @@ failures = 0
 clippy_warnings = 0
 suite_status = "GREEN"
 
+[skunkbat]
+head = "b708872"
+tests = 567
+failures = 0
+suite_status = "GREEN"
+delivery_136a = "SKUNY-OM — outer membrane HTTP anomaly detection"
+delivery_136b = "SKUNKY-INGEST + DEEP-DEBT sweep + doc reconciliation"
+delivery_137b = "THREAT-ACTIVATE (conditional baseline), SKUNKY-LIVE (B/s fix, safe RPC), CF-DATA stub"
+convergence = "BUILDABLE + RUNNABLE + TOOLCHAIN + CONFIG"
+
 [debt]
 depot_primal_count = "0/13 — only songBird binary in local depot"
 forgejo_parity = "DRIFTED — forgejo/main behind origin/main"
-local_gate_env = "GATE_NAME not set — s_federation_wan_readiness detects via hostname"
+local_gate_env = "GATE_NAME=flockGate set in .bashrc"
 wg0_registry_mismatch = "expected .5 (eastGate scenario default), actual .6 (flockGate) — false positive"
