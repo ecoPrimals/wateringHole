@@ -488,6 +488,30 @@ biomeOS v4.18 (supervision + TCP fallback). Zero commercial services in inner me
 - ~~aarch64 sweep (P2)~~ — **COMPLETE** (Wave 105, 14/14 built). CM-CHECKSUM-MULTI-TARGET P2 pipeline fix needed.
 - Windows ecoBin (LOW) — named pipes IPC, MSVC target, design phase
 
+**Next glacial goal: Universal Substrate Evolution** (post-stadial)
+
+The ecoBin/uniBin/genomeBin system must evolve to full NUCLEUS deployments
+across all architectures — current, legacy, and future. The ecosystem is
+universal and architecture-agnostic by design (pure Rust, zero C-deps,
+musl-static). Achieving multi-arch depot parity unlocks the next real
+evolution era across substrates.
+
+| Target | Status | What It Unlocks |
+|--------|--------|----------------|
+| `x86_64-unknown-linux-musl` | **14/14 BUILT** | All current gates |
+| `aarch64-unknown-linux-musl` | **14/14 BUILT** | grapheneGate, ARM servers, Raspberry Pi |
+| `aarch64-linux-android` | UNBLOCKED | Native Android NUCLEUS (no Termux). NDK cross-compile. |
+| `x86_64-unknown-linux-gnu` | Partial | GPU primals (toadStool, barraCuda, coralReef) on ironGate. Glibc for CUDA drivers. |
+| `riscv64gc-unknown-linux-musl` | Design | RISC-V embedded gates, future SoCs |
+| `x86_64-pc-windows-msvc` | Design | Windows gates, named pipes IPC |
+| `wasm32-wasi` | Design | Browser/edge/embedded — primals as WebAssembly modules |
+| `aarch64-apple-darwin` | Design | macOS Silicon gates |
+
+Each new target is a new substrate the ecosystem can colonize — every
+architecture that can run a NUCLEUS is a potential sovereign node. This is
+the fractal deployment vision at its fullest: the same primals, the same
+mesh, the same depot pipeline, on any hardware that exists or will exist.
+
 Software items: **ZERO P1 blockers.** Transport 11/11 COMPLETE. Depot 14/14 x86_64 + 14/14 aarch64 BUILT.
 bearDog pure Rust SHIPPED. biomeOS v4.16 graph.deploy VALIDATED. WAN depot DEPLOYED. Cascade auto-resolve
 SHIPPED. aarch64 sweep COMPLETE. CM-CHECKSUM-MULTI-TARGET RESOLVED. CM-DEPOT-DIVERGENCE RESOLVED (was

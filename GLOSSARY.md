@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: July 7, 2026 (Wave 133d — gatehouse bond escalation broker, drawbridge capability advertisement, bonding model cross-references)
+**Last Updated**: July 13, 2026 (Wave 137b — Loam Certificate vs TLS credential distinction, differential evolution versioning philosophy, drawbridge/cellMembrane boundary terminology)
 
 ---
 
@@ -297,7 +297,7 @@ The three primals that together provide the project's memory and attribution:
 | Primal | Role | Temporal Domain |
 |--------|------|-----------------|
 | **rhizoCrypt** | Ephemeral memory | Present — working DAG, fast, lock-free |
-| **loamSpine** | Permanent memory | Past — immutable linear history, certificates |
+| **loamSpine** | Permanent memory | Past — immutable linear history, Loam Certificates |
 | **sweetGrass** | Attribution | Always — semantic provenance, W3C PROV-O braids |
 
 When composed by biomeOS, these three create **RootPulse** — distributed
@@ -553,7 +553,7 @@ indispensable, and structurally a single point of failure until replaced.
 
 The golden cage bars: GitHub (code, CI, releases), Cursor (AI development),
 Cloudflare (DNS, TLS proxy, tunnel), DigitalOcean (VPS), crates.io
-(dependency resolution), Let's Encrypt (TLS certificates), Python/GROMACS
+(dependency resolution), Let's Encrypt (TLS credentials), Python/GROMACS
 (science baseline validation).
 
 The **chrysalis thesis**: the cage is not the enemy — it is the bootstrap
@@ -576,8 +576,9 @@ to the internet. The gatehouse accepts all incoming traffic as **weak** interact
 (zero trust, passive diffusion) and validates/promotes them to stronger bond types
 as authentication is established.
 
-bearDog owns the gatehouse — exactly two ports (`:443` TLS, `:80` ACME). No other
-primal binds externally. skunkBat provides threat intelligence. The gatehouse is where
+bearDog owns the gatehouse — exactly two ports (`:443` TLS, `:80` ACME redirect). No
+other primal binds externally. skunkBat provides threat intelligence. The gatehouse
+manages **TLS credentials** (drawbridge transport, not Loam Certificates) and is where
 the K-Derm extracellular → outer membrane crossing happens.
 
 Bond escalation through the gatehouse:
@@ -662,8 +663,8 @@ weak to ionic to metallic to covalent bonding as they are absorbed into the
 sovereign infrastructure. Named after the biological process where independent
 organisms become organelles through progressive integration.
 
-Examples: Cloudflare TLS (weak) → bearDog ACME shadow (ionic) → bearDog standalone
-(covalent). GitHub Pages (weak) → Forgejo periplasmic mirror (metallic) → Forgejo
+Examples: Cloudflare TLS credentials (weak) → bearDog ACME shadow (ionic) → bearDog
+sovereign TLS (covalent). GitHub Pages (weak) → Forgejo periplasmic mirror (metallic) → Forgejo
 sovereign (covalent). Each sovereignty shadow track is an endosymbiosis in progress.
 
 See `K_DERM_RECONCILIATION.md` §K-Derm Extensions Not in Gen4.
@@ -692,7 +693,7 @@ were on which gate clear during early development. They correspond loosely to
 `gen2/` and `gen3/` in whitePaper. Not actively meaningful; treat them as
 historical scaffolding if encountered.
 
-### Version Numbers and Session Numbers
+### Version Numbers and Differential Evolution
 
 Springs and primals independently evolve their own progress markers. Some use
 **session numbers** (e.g., neuralSpring S145), some use **version numbers**
@@ -700,6 +701,26 @@ Springs and primals independently evolve their own progress markers. Some use
 intentional — AI-assisted development means each project self-flavors over
 time as its AI iterations accumulate. There is no global numbering standard
 because primal autonomy extends to how they count.
+
+**Differential evolution rates are biological, not bugs.** Archaea, microbes,
+and algae all evolved at different rates — depth reflects internal evolution
+pressure, not cross-system maturity parity. A primal at v0.14 has undergone
+more internal iteration than one at v0.2, but neither is "ahead" or "behind"
+— they serve different niches with different selection pressures. rhizoCrypt
+(0.14.17) has iterated heavily because DAG provenance is a complex domain.
+biomeOS (0.1.0) is young because orchestration crystallized later. Both are
+production-ready for their current role.
+
+No primal has reached 1.0. The 1.0 threshold means: API surface is stable,
+breaking changes require major version bumps, and the primal's niche is
+fully colonized. petalTongue (1.6.6) is the closest — its grammar pipeline
+has stabilized through heavy external-facing iteration.
+
+**Team guidance**: Version numbers should reflect the primal's own internal
+evolution cadence. Bump minor for capability additions, patch for fixes and
+refinements. Do not synchronize versions across primals. The ecosystem
+manifest (`ecosystem_manifest.toml`) and depot checksums are the cross-system
+coordination layer — not version alignment.
 
 ---
 
@@ -874,11 +895,47 @@ in computational terms.
 See `GUIDESTONE_STANDARD.md` for the specification.
 See `whitePaper/gen4/architecture/GUIDESTONE.md` for the concept paper.
 
+### Loam Certificate
+
+An **intracellular provenance artifact** — not a transport credential. Loam
+Certificates are the ecosystem's sovereign ownership, lending, and provenance
+mechanism. They are minted by loamSpine (`certificate.mint`), transferred
+(`certificate.transfer`), loaned (`certificate.loan`), escrowed
+(`certificate.escrow`), and returned. Their lifecycle is:
+DAG fermentation (rhizoCrypt) → dehydration → permanent spine (loamSpine) →
+attribution braid (sweetGrass).
+
+Loam Certificates live entirely within the cytoplasm. They never cross the
+drawbridge. They are the building blocks of Novel Ferment Transcripts.
+
+**Do not confuse with TLS credentials.** TLS/ACME x.509 certificates are
+*drawbridge transport credentials* — external golden cage artifacts managed
+by Caddy (current) or bearDog gatehouse (sovereignty target). TLS credentials
+mediate weak → ionic bond escalation at the outer membrane. Loam Certificates
+mediate ownership and provenance within the covalent interior. They share a
+word; they share nothing else.
+
+| | Loam Certificate | TLS Credential |
+|---|---|---|
+| **Owner** | loamSpine | Caddy / bearDog gatehouse |
+| **Layer** | Cytoplasm (intracellular) | Outer membrane (drawbridge) |
+| **Lifecycle** | mint → transfer → loan → return | issue → renew → revoke |
+| **Backing** | Provenance trio + rootPulse | Let's Encrypt / ACME (golden cage) |
+| **Bond type** | Covalent (sovereign) | Weak → ionic (endosymbiosis target) |
+| **Permanence** | Permanent (append-only spine) | Ephemeral (90-day rotation) |
+
 ### Novel Ferment Transcript (NFT)
 
-Memory-bound digital objects using the provenance trio. Not blockchain NFTs —
-ferment transcripts are provenance-tracked creative artifacts with attribution
-chains via sweetGrass and permanence via loamSpine.
+Memory-bound digital objects fermented through the provenance trio. Not
+blockchain NFTs — ferment transcripts are provenance-tracked creative artifacts
+with attribution chains via sweetGrass, permanence via loamSpine Certificates,
+and ephemeral workspace via rhizoCrypt DAGs. The fermentation is irreversible
+and time-bound: value accumulates from history, not artificial scarcity.
+
+A Novel Ferment Transcript is a Loam Certificate whose provenance chain
+records the full fermentation — every interaction, transformation, and
+attribution that shaped it. Game keys, scientific chain-of-custody records,
+sample provenance chains, and creative artifacts are all NFTs.
 
 ---
 
