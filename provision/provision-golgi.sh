@@ -162,6 +162,90 @@ cat > /etc/membrane/Caddyfile << 'EOCADDY'
     header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' wss:; frame-ancestors 'none'"
 }
 
+# footPrint GIS External Proxy — 10 upstream services via /footprint/ext/{service}/
+(footprint_gis_proxy) {
+    handle_path /footprint/ext/overpass/* {
+        reverse_proxy https://overpass-api.de {
+            header_up Host overpass-api.de
+            transport http {
+                tls
+            }
+        }
+    }
+    handle_path /footprint/ext/fema/* {
+        reverse_proxy https://hazards.fema.gov {
+            header_up Host hazards.fema.gov
+            transport http {
+                tls
+            }
+        }
+    }
+    handle_path /footprint/ext/arcgis1/* {
+        reverse_proxy https://services1.arcgis.com {
+            header_up Host services1.arcgis.com
+            transport http {
+                tls
+            }
+        }
+    }
+    handle_path /footprint/ext/arcgis2/* {
+        reverse_proxy https://services2.arcgis.com {
+            header_up Host services2.arcgis.com
+            transport http {
+                tls
+            }
+        }
+    }
+    handle_path /footprint/ext/nominatim/* {
+        reverse_proxy https://nominatim.openstreetmap.org {
+            header_up Host nominatim.openstreetmap.org
+            transport http {
+                tls
+            }
+        }
+    }
+    handle_path /footprint/ext/usgs/* {
+        reverse_proxy https://epqs.nationalmap.gov {
+            header_up Host epqs.nationalmap.gov
+            transport http {
+                tls
+            }
+        }
+    }
+    handle_path /footprint/ext/nrcs/* {
+        reverse_proxy https://sdmdataaccess.sc.egov.usda.gov {
+            header_up Host sdmdataaccess.sc.egov.usda.gov
+            transport http {
+                tls
+            }
+        }
+    }
+    handle_path /footprint/ext/michigan/* {
+        reverse_proxy https://gisagocss.state.mi.us {
+            header_up Host gisagocss.state.mi.us
+            transport http {
+                tls
+            }
+        }
+    }
+    handle_path /footprint/ext/mcgi/* {
+        reverse_proxy https://gisp.mcgi.state.mi.us {
+            header_up Host gisp.mcgi.state.mi.us
+            transport http {
+                tls
+            }
+        }
+    }
+    handle_path /footprint/ext/eastlansing/* {
+        reverse_proxy https://gis2.cityofeastlansing.com {
+            header_up Host gis2.cityofeastlansing.com
+            transport http {
+                tls
+            }
+        }
+    }
+}
+
 # Sovereign public surface — primals.eco (sporePrint Zola site)
 primals.eco {
     import security_headers
@@ -173,9 +257,10 @@ primals.eco {
         root * /opt/ecoPrimals/sporePrint/spores
         file_server browse
     }
+    import footprint_gis_proxy
     handle_path /footprint/* {
         root * /opt/ecoPrimals/compositions/footprint/dist/client
-        header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org https://*.arcgis.com; font-src 'self'; connect-src 'self' https://*.openstreetmap.org https://hazards.fema.gov https://epqs.nationalmap.gov https://*.arcgis.com; frame-ancestors 'none'"
+        header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.tile.openstreetmap.org https://*.arcgis.com; font-src 'self'; connect-src 'self'; frame-ancestors 'none'"
         encode gzip
         try_files {path} /index.html
         file_server
