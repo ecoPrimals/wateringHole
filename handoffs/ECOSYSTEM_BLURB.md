@@ -1,106 +1,63 @@
 # ecoPrimals Ecosystem Blurb — Wave 137b
 
-**Date**: Jul 13, 2026 09:50 EDT | **Wave**: 137b | **From**: eastGate overwatch
-**Posture**: **NEAR COMPLETE.** 26/28 original debt resolved + 3 new items landed and resolved. LIVE-ACTIVATE done (petalTongue NUCLEUS on sporeGate:9900, Caddy block ready, awaiting DNS). DEPOT-REFRESH done (songBird `74cf7101` in depot). SIGN-VERIFY-ON-FETCH already implemented in cellMembrane (`VerifyIfPresent` default). FP-API superseded by drawbridge weak bond pattern. Phase 1: 12/12 COMPLETE.
+**Date**: Jul 13, 2026 12:15 EDT | **Wave**: 137b | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN.** `live.primals.eco` serving TOPO-VIS. `primals.eco/footprint/` live. 3-gate mesh (eastGate + sporeGate + golgi). Depot pipeline 100% Rust (build → BLAKE3 → sign → verify → deploy). 2,801 lines of bash fossilized. `require-signed` active. 35 binaries / 3 architectures verified. primalSpring: 17 scenarios thickening locally (272 LOC). flockGate: 144 scenarios / 1,190 tests.
 
 ---
 
-## Phase 1: COMPLETE (12/12)
+## Remaining — 6 items + 3 discussion
 
-All Neural API deployment authority items resolved. No CRITICAL items remain.
+### P1 — Next capabilities
 
----
+| ID | Owner | What | Effort |
+|----|-------|------|--------|
+| **FP-API-CADDY-DEPLOY** | sporeGate / golgi | flockGate drafted `fp-api-caddy.caddyfile` (130 LOC). Deploy to golgi → footPrint gets full GIS proxy. | 30min |
+| **DRAWBRIDGE-CAP** | songBird | Drawbridge routes not advertising as capabilities. 15 native caps shown, zero drawbridge. Blocks `capability.call` for any bridged service. | 2-4hr |
+| **NAPI-LIFECYCLE** | biomeOS | LifecycleManager registration — `lifecycle.status` count=0. Last piece for full lifecycle authority. | 4-8hr |
 
-## Remaining — 5 action items + 3 discussion
+### P2 — Hardening
 
-### biomeOS — 3 items
+| ID | Owner | What | Effort |
+|----|-------|------|--------|
+| **SOCKET-DIR-UNIFY** | biomeOS | Unify socket dirs → `/run/membrane/` only. Unblocks songBird TLS delegation. | 2-4hr |
+| **SOCKET-UMASK** | biomeOS | Primals should `fchmod` sockets after bind. | 2hr |
 
-| ID | What | Effort |
-|----|------|--------|
-| **NAPI-LIFECYCLE** | LifecycleManager registration — `lifecycle.status` returns count=0. Blocks full lifecycle authority but no longer CRITICAL (Neural API routes all other capabilities). | 4-8hr |
-| **SOCKET-DIR-UNIFY** | Unify 3 socket dirs → `/run/membrane/` only. | 2-4hr |
-| **SOCKET-UMASK** | Primals should `fchmod` sockets after bind. | 2hr |
+### P3 — Cleanup
 
-### eastGate (self) — 1 item (UNBLOCKED)
+| ID | Owner | What | Effort |
+|----|-------|------|--------|
+| **SONGBIRD-LOCAL** | songBird | Drawbridge cleanup — 1 file dirty. Commit + push. | 30min |
 
-| ID | What | Effort |
-|----|------|--------|
-| **SONGBIRD-EASTGATE** | Deploy songBird `74cf7101` from pepti depot. **UNBLOCKED** — depot refreshed Jul 13. | 30min |
-
-### Operator — 1 item (REALWORLD)
-
-| ID | What | Effort |
-|----|------|--------|
-| **LIVE-DNS** | Add Cloudflare DNS `A live → 157.230.3.183` (grey cloud for ACME). Then reload Caddy on golgi. petalTongue NUCLEUS + Caddy block already configured. | 5min |
-
-### Discussion (all teams)
+### Discussion
 
 | ID | What |
 |----|------|
-| **VERSION-SKEW** | 3 version ranges. Strategy needed. |
+| **VERSION-SKEW** | 3 version ranges (0.1-0.2, 0.4-0.9, 0.14). Strategy needed. |
 | **CERT-OWNER** | Certificate shows `loamspine`, expected `beardog`. |
 | **PEPTI-TARGETS** | Missing depot: `aarch64-linux-android`, `x86_64-unknown-linux-gnu`. |
 
 ---
 
-## Wave 137b Delivery Log (26+ items)
+## Next Wave — Jellyfish Evolution Targets
 
-| ID | Resolved By | Commit/AAR |
-|----|-------------|------------|
-| ~~NAPI-MEMBRANE~~ | cellMembrane | `1df1cfe` |
-| ~~SIGN-01~~ | cellMembrane + sporeGate | `471ebf5` — E2E verified |
-| ~~FP-DEPLOY~~ | sporeGate | primals.eco/footprint/ live |
-| ~~SKUNKY-DEPLOY~~ | sporeGate | dry-run on golgi |
-| ~~NAPI-START~~ | sporeGate | 48 primals, 156 translations |
-| ~~NAPI-PERMS~~ | cellMembrane + sporeGate | `d5474df` — systemd UMask |
-| ~~FLOCKGATE-MESH~~ | songBird | `f05918a` — port 8080→7700 |
-| ~~NAPI-SYSTEMD~~ | sporeGate | `membrane-neural-api.service` |
-| ~~NAPI-CROSS-GATE~~ | sporeGate | songBird to sporeGate + golgi |
-| ~~GOLGI-WG-BIND~~ | golgi | `0.0.0.0:7700` |
-| ~~UDS-HTTP-PROTOCOL~~ | songBird | `0d2895b5` |
-| ~~FP-PERSIST~~ | nestGate | `88dc4fa2` — CAS, 5 RPC methods |
-| ~~SHALLOW-PINGPONG~~ | sporeGate/golgi | 20 repos full-depth |
-| ~~DRAWBRIDGE-ROUTES~~ | sporeGate | Confirmed |
-| ~~BRIDGE-ERROR-PROP~~ | cellMembrane | `d5506a3` |
-| ~~NUCLEUS-MATRIX~~ | projectNUCLEUS | `ea57d6a` |
-| ~~BOND-METADATA~~ | projectNUCLEUS | `ea57d6a` |
-| ~~THREAT-ACTIVATE~~ | skunkBat | `b708872` |
-| ~~DEPLOY-DISPATCH-XGATE~~ | cellMembrane | `d5506a3` |
-| ~~TIER-PRIORITY~~ | projectNUCLEUS | `ea57d6a` |
-| ~~SPORE-OWNERSHIP~~ | eastGate | `SPORE_OWNERSHIP_MATRIX.md` |
-| ~~SIGN-VERIFY-ON-FETCH~~ | cellMembrane | `89bf12f` — already implemented, `VerifyIfPresent` default |
-| ~~DEPOT-REFRESH~~ | sporeGate | songBird `74cf7101` + petalTongue `d79f096` built, signed, synced |
-| ~~LIVE-ACTIVATE~~ | sporeGate | petalTongue NUCLEUS on :9900, Caddy block configured |
-| ~~FP-API~~ | flockGate | Superseded by drawbridge weak bond pattern |
-| ~~AGENT-PARITY~~ | sporePrint | `llms.txt` self-identification + validate_agent_parity.sh |
+From `SCRIPT_JELLYFISH_TRIAGE_AAR_137b.md`: 7 scripts have Rust equivalents ready. 14 scripts need new Rust commands. See AAR for full ownership matrix.
+
+**cellMembrane** (next wave): deprecate `fetch.sh`, `update.sh`, `sync.sh`, `doctor.sh`, `validate_gate.sh`, `validate_mesh.sh`, `validate_composition.sh` — 2,546 lines replaceable by existing `membrane` CLI commands.
 
 ---
 
-## Depot Trust Model — VERIFIED
+## Gate Status
 
 ```
-Public depot (HTTPS)  →  SIGN-01 verify  →  deploy to /run/membrane/  →  riboCipher IPC
-    anyone can pull       VerifyIfPresent      local trust boundary       runtime auth
+eastGate     — Overwatch. 13 primals active. songBird v0.2.1 (2 peers). All tasks DONE.
+sporeGate    — NUCLEUS. live.primals.eco serving. Depot 35/35 verified. Jellyfish triaged.
+golgiBody    — Full mirror. Forgejo healthy. FP-API Caddy config ready to deploy.
+flockGate    — 144 scenarios / 1,190 tests. FP-API drafted. Mesh confirmed.
+ironGate     — Node atomic. Own overwatch. pS 818cf11, pN da2e4f0.
 ```
 
-cellMembrane `89bf12f` confirms the chain is implemented: `plasmid.fetch` → fetch `signatures.toml` → `verify_depot_with_policy()` → download binaries. Default policy `VerifyIfPresent` verifies when signatures exist (they do since SIGN-01). Promote to `RequireSigned` for full lockdown.
+**Active Handoff**: `SCRIPT_JELLYFISH_TRIAGE_AAR_137b.md` — evolution roadmap for 14 scripts across 4 teams.
 
 ---
 
-## Status
-
-**7,750+ tests / 0 fail** | **Phase 1: COMPLETE** | **Forgejo: full-depth**
-
-```
-eastGate     — Overwatch. Neural API 24d. songBird upgrade unblocked.
-sporeGate    — NUCLEUS. Neural API systemd. petalTongue NUCLEUS :9900. Depot signed+refreshed.
-golgiBody    — Full mirror. sporePrint + footPrint live. live.primals.eco Caddy block ready.
-flockGate    — footPrint owner. JupyterHub data plane proven. Drawbridge weak bond pattern.
-ironGate     — Node atomic. Own overwatch agent.
-```
-
-**Active Handoffs**: `LIVE_ACTIVATE_AAR_137b.md`, `DRAWBRIDGE_WEAK_BOND_PATTERN_AAR_137b.md`, `FLOCKGATE_WAN_OVERWATCH_AAR_137b.md`, `FP_API_WIRING_WAVE137b.md`
-
----
-
-*Wave 137b: Phase 1 COMPLETE (12/12). 26+ items delivered. 5 remain + 3 discussion. petalTongue NUCLEUS live on sporeGate awaiting DNS. Depot trust chain verified. Drawbridge weak bond pattern formalized. SHOW-HN publication drafted. 7,750+ tests / 0 fail.*
+*Wave 137b: 6 items remain + 3 discussion. P0 cleared (depot checksum + layout). Deployment pipeline fully sovereign Rust. 2,801 lines of bash retired. 35 depot binaries verified across 3 architectures.*
