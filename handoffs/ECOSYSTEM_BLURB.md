@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 137b
 
-**Date**: Jul 13, 2026 10:35 EDT | **Wave**: 137b | **From**: eastGate overwatch
-**Posture**: **PHASE 1 COMPLETE.** Neural API deployment authority: 12/12. 26+ debt items delivered. Depot trust chain verified (SIGN-01 + SIGN-VERIFY-ON-FETCH). petalTongue NUCLEUS live on sporeGate:9900 awaiting DNS. Drawbridge weak bond pattern formalized. 7,750+ tests / 0 fail.
+**Date**: Jul 13, 2026 11:10 EDT | **Wave**: 137b | **From**: eastGate overwatch
+**Posture**: **PHASE 1 COMPLETE. 3-GATE MESH LIVE.** eastGate deployed songBird `74cf7101` — mesh bidirectional across eastGate + sporeGate + golgi (35-71ms WG). Deployment AAR surfaced 3 divergences (depot checksum, fetch path, stale heads). 7,750+ tests / 0 fail.
 
 ---
 
@@ -12,41 +12,42 @@
 | ID | What | Effort |
 |----|------|--------|
 | **NAPI-LIFECYCLE** | LifecycleManager registration — `lifecycle.status` returns count=0. Last piece for full lifecycle authority. | 4-8hr |
-| **SOCKET-DIR-UNIFY** | Unify socket dirs → `/run/membrane/` only. Also unblocks songBird TLS delegation (hardcoded to `/var/run/biomeos/` but actual path is `/run/membrane/`). | 2-4hr |
+| **SOCKET-DIR-UNIFY** | Unify socket dirs → `/run/membrane/` only. Unblocks songBird TLS delegation (hardcoded `/var/run/biomeos/`, actual varies by gate). | 2-4hr |
 | **SOCKET-UMASK** | Primals should `fchmod` sockets after bind. | 2hr |
 
 ### songBird team — 2 items
 
 | ID | What | Effort |
 |----|------|--------|
-| **DRAWBRIDGE-CAP** | Drawbridge routes not advertising as capabilities. sporeGate's `capabilities.list` shows 15 native caps but no drawbridge-provided caps (e.g. `jupyter`). Env var `SONGBIRD_DRAWBRIDGE_ROUTES` may be set but routes aren't registering. Blocks `capability.call` for drawbridge services. | 2-4hr |
-| **SONGBIRD-LOCAL** | Local drawbridge cleanup (header parsing, dead constant) needs commit + push. 1 file dirty, 27 ins / 129 del. | 30min |
+| **DRAWBRIDGE-CAP** | Drawbridge routes not advertising as capabilities. `capabilities.list` shows 15 native caps, zero drawbridge caps. Blocks `capability.call` for drawbridge services. | 2-4hr |
+| **SONGBIRD-LOCAL** | Local drawbridge cleanup (header parsing, dead constant) — 1 file dirty, 27 ins / 129 del. Commit + push. | 30min |
 
-### sporeGate / golgi team — 3 items
+### sporeGate / golgi team — 4 items
 
 | ID | What | Effort |
 |----|------|--------|
-| **STALE-PEER** | Ghost peer `10.13.37.0:8080` (pre-port-fix) in sporeGate's mesh. `mesh.remove_peer` or songBird restart. Wastes time in `capability.call` routing. | 15min |
-| **FORGEJO-PERMS** | Forgejo on golgi has file permission errors (`unable to write file ./objects/…: Permission denied`). Blocks push alignment to forgejo remote. Origin (GitHub) unaffected. | 30min |
-| **DEPOT-POLICY** | Promote depot trust default from `VerifyIfPresent` → `RequireSigned` in gate systemd units. Code is ready (`89bf12f`), just a config decision. | 15min |
+| **DEPOT-CHECKSUM** | **NEW.** Depot binary BLAKE3 doesn't match `checksums.toml`. Binary is unstripped (26.6MB), checksums were likely signed against stripped build. `VerifyIfPresent` will reject. Re-harvest: strip → checksum → sign → sync. | 30min |
+| **STALE-PEER** | Ghost peer `10.13.37.0:8080` in sporeGate mesh. `mesh.remove_peer` or restart. | 15min |
+| **FORGEJO-PERMS** | Forgejo on golgi: `Permission denied` writing objects. Blocks push alignment. | 30min |
+| **DEPOT-POLICY** | Promote trust default `VerifyIfPresent` → `RequireSigned` in gate units. Code ready (`89bf12f`), config decision. | 15min |
+
+### cellMembrane team — 1 item
+
+| ID | What | Effort |
+|----|------|--------|
+| **FETCH-PATH** | **NEW.** `plasmid.fetch` creates doubled nested path (`primals/x86_64/primals/x86_64/`). Doesn't match systemd template `ExecStart` path. Manual binary placement required on eastGate. | 1-2hr |
 
 ### flockGate team — 1 item
 
 | ID | What | Effort |
 |----|------|--------|
-| **FP-API-CADDY** | Draft Caddy config snippet for footPrint GIS proxy route (10 HTTPS hosts). Caddy handles TLS natively — bypasses SOCKET-DIR-UNIFY blocker. Once live, footPrint has full GIS at `primals.eco/footprint/`. | 1-2hr |
-
-### eastGate (self) — 1 item
-
-| ID | What | Effort |
-|----|------|--------|
-| **SONGBIRD-EASTGATE** | Deploy songBird `74cf7101` from pepti depot. Unblocked since Jul 13 DEPOT-REFRESH. | 30min |
+| **FP-API-CADDY** | Caddy config for footPrint GIS proxy (10 HTTPS hosts). Bypasses SOCKET-DIR-UNIFY. | 1-2hr |
 
 ### Operator (REALWORLD) — 1 item
 
 | ID | What | Effort |
 |----|------|--------|
-| **LIVE-DNS** | Add Cloudflare DNS: `A live → 157.230.3.183` (grey cloud for ACME HTTP-01). Then reload Caddy on golgi. petalTongue NUCLEUS + Caddy block already configured on both sides. | 5min |
+| **LIVE-DNS** | Cloudflare DNS: `A live → 157.230.3.183` (grey cloud). Then reload Caddy on golgi. | 5min |
 
 ### Discussion (all teams)
 
@@ -61,15 +62,15 @@
 ## Gate Status
 
 ```
-eastGate     — Overwatch. Neural API 24d. songBird upgrade ready.
-sporeGate    — NUCLEUS. Neural API systemd. petalTongue :9900. Depot signed+refreshed.
-golgiBody    — Full mirror (20 repos). sporePrint + footPrint live. Forgejo perms issue.
-flockGate    — JupyterHub data plane proven (202ms WAN). FP-API Caddy next.
-ironGate     — Node atomic. Own overwatch agent. JupyterHub v5.4.5 reachable.
+eastGate     — Overwatch. songBird LIVE (v0.2.1, 2 peers). Neural API 24d. All tasks DONE.
+sporeGate    — NUCLEUS. petalTongue :9900. Depot needs re-sign (checksum mismatch).
+golgiBody    — Full mirror. sporePrint + footPrint live. Forgejo perms + Caddy block ready.
+flockGate    — JupyterHub data plane proven. FP-API Caddy next.
+ironGate     — Node atomic. Own overwatch agent.
 ```
 
-**Active Handoffs**: `DRAWBRIDGE_WEAK_BOND_PATTERN_AAR_137b.md`, `FLOCKGATE_WAN_OVERWATCH_AAR_137b.md`
+**Active Handoffs**: `SONGBIRD_EASTGATE_DEPLOY_AAR_137b.md`, `DRAWBRIDGE_WEAK_BOND_PATTERN_AAR_137b.md`, `FLOCKGATE_WAN_OVERWATCH_AAR_137b.md`
 
 ---
 
-*Wave 137b: Phase 1 COMPLETE. 11 items remain across 6 teams + 3 discussion. All are independently actionable — no cross-team blockers except SOCKET-DIR-UNIFY (biomeOS) which unblocks songBird TLS. 7,750+ tests / 0 fail.*
+*Wave 137b: Phase 1 COMPLETE. 3-gate mesh operational. 12 items remain across 7 teams + 3 discussion. New: DEPOT-CHECKSUM (sporeGate), FETCH-PATH (cellMembrane). 7,750+ tests / 0 fail.*
