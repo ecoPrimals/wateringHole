@@ -1,81 +1,122 @@
-# ecoPrimals Ecosystem Blurb — Wave 137b
+# ecoPrimals Ecosystem Blurb — Wave 137b (Deep Review)
 
-**Date**: Jul 13, 2026 17:50 EDT | **Wave**: 137b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** DRAWBRIDGE-CAP resolved (songBird). ironGate redeployed (14 binaries, 0 crash loops). 2 items remain + 4 new from ironGate triage. 7,750+ tests / 0 fail.
+**Date**: Jul 13, 2026 18:00 EDT | **Wave**: 137b | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN.** Deep multi-dimensional review complete. 2 handoffs + 2 impulses fossilized. 5 stale docs updated. Hardware gaps inventoried. Forgejo perms recurrence flagged. 6 items remain + 4 hardware evolution targets.
 
 ---
 
-## Remaining — 2 original + 4 new
+## Remaining — 6 operational items
 
 ### P1
 
-| ID | Owner | What | Effort |
-|----|-------|------|--------|
-| **NAPI-LIFECYCLE** | biomeOS | LifecycleManager registration — `lifecycle.status` count=0. Last piece for lifecycle authority. | 4-8hr |
+| ID | Owner | What |
+|----|-------|------|
+| **NAPI-LIFECYCLE** | biomeOS | LifecycleManager registration — `lifecycle.status` count=0. |
+| **FORGEJO-PERMS-RECUR** | sporeGate | Forgejo permission denied writing objects — recurrence of FORGEJO-PERMS pattern. |
 
 ### P2
 
-| ID | Owner | What | Effort |
-|----|-------|------|--------|
-| **SOCKET-DIR-UNIFY** | biomeOS | Unify socket dirs → `/run/membrane/` only. Unblocks songBird TLS delegation. | 2-4hr |
-| **BIOMEOS-TEMPLATE** | cellMembrane | `membrane-nucleus@.service` assumes `server` subcommand — biomeOS doesn't have one. Needs alias or template exclusion. | 1-2hr |
-| **STALE-PEERS** | wateringHole | Gate head files (golgi 154hrs, sporeGate 68hrs stale) not refreshed by cascade. | 2hr |
-| **ROGUE-BIN-PATH** | ironGate ops | `/usr/local/bin/songbird` rogue binary outside depot path caused port conflict. Remove + enforce depot-only path. | 30min |
+| ID | Owner | What |
+|----|-------|------|
+| **SOCKET-DIR-UNIFY** | biomeOS | Unify socket dirs → `/run/membrane/` only. |
+| **BIOMEOS-TEMPLATE** | cellMembrane | `membrane-nucleus@.service` assumes `server` subcommand. biomeOS needs alias or exclusion. |
+| **STALE-PEERS** | wateringHole | Gate head files not refreshed by cascade (golgi 154hrs, sporeGate 68hrs). |
 
 ### P3
 
-| ID | Owner | What | Effort |
-|----|-------|------|--------|
-| **TARPC-BIND** | songBird | `tarpc listener: Address in use` on startup. Non-fatal but logged as ERROR. | 1hr |
+| ID | Owner | What |
+|----|-------|------|
+| **TARPC-BIND** | songBird | tarpc listener address-in-use on startup. Non-fatal. |
 
 ---
 
-## Incoming This Cascade
+## Hardware Evolution Targets (new from deep review)
 
-### songBird — DRAWBRIDGE-CAP resolved (6 commits)
-
-| Commit | What |
-|--------|------|
-| `73b0c7d` | **DRAWBRIDGE-CAP**: Runtime caps in `capabilities.list`, `capability.call` drawbridge fallback, `capability.resolve` for proxy-router |
-| `74cf710` | HTTPS outbound proxy via `tokio-rustls` + system CA certs |
-| `a3c2871` | Per-request allocation elimination in drawbridge hot path |
-| `718d18d` + `6463876` | `to_lowercase()` elimination across 17 files / 5 crates (zero-alloc) |
-
-Drawbridge-served services (jupyter, inference, GIS proxy) now visible to `capability.call`. Three-layer solution: runtime cap merge, call fallback, resolve endpoint. Verified: 0 regressions, 0 blockers.
-
-### primalSpring — ironGate redeployment AAR
-
-14 binaries refreshed (31 days stale). 3 crash loops resolved (biomeOS template mismatch: 101,997 restarts, gate-watchdog path error: 52,233 restarts, stale forgejo-sync: disabled). Rogue songBird PID killed. Mesh restored (2 peers via WireGuard). 13/13 services active, 26 UDS sockets, 0 failures.
+| Target | What | Status |
+|--------|------|--------|
+| **SOLOKEY-CEREMONY** | Wire SoloKey FIDO2 → bearDog entropy mixing + Tier 2 ceremony. 4 keys exist (2 plugged: eastGate, ironGate). Zero production crypto use today. | ARCHITECTURE EXISTS — activation needed |
+| **PIXEL-STRONGBOX** | Wire grapheneGate Titan M2 StrongBox → bearDog keystore for FAMILY_SEED + human entropy ceremonies. | NOT STARTED (16 compile errors at Wave 106) |
+| **HW-INVENTORY-RECONCILE** | `HARDWARE_INVENTORY.md` (Wave 116) diverged from manifest + wave.toml. ironGate/eastGate specs conflict across 3 docs. Flint H1 router role undocumented. | Needs single-source reconciliation |
+| **UNIVERSAL-SUBSTRATE** | Next glacial goal. Android NDK, RISC-V, Windows, WASM, macOS Silicon depot targets. | Elevated to GLACIAL_SHIFT_READINESS |
 
 ---
 
-## Wave 137b Closures (cumulative)
+## Deep Review Findings (by dimension)
 
-| Item | Resolved By |
-|------|-------------|
-| ~~DRAWBRIDGE-CAP~~ | songBird — 3-layer runtime cap merge + `capability.call` fallback |
-| ~~DNS-WILDCARD~~ | Operator — `*.primals.eco` wildcard A record |
-| ~~FP-API-CADDY-DEPLOY~~ | sporeGate — 10 GIS proxy routes |
-| ~~SONGBIRD-LOCAL~~ | songBird — drawbridge cleanup + hot-path alloc elimination |
-| ~~CERT-OWNER~~ | Terminology fix — Loam Certificate vs TLS credential |
-| ~~VERSION-SKEW~~ | Documented as intentional differential evolution |
-| ~~PEPTI-TARGETS~~ | Elevated to next glacial goal — universal substrate evolution |
-| ~~ironGate crash loops~~ | ironGate — template mismatch, path error, stale script |
+### Temporal
+- Wave 137b. 5 stale docs updated (README, GLACIAL, manifest, flockGate head, impulses).
+- 2 handoffs fossilized (FOOTPRINT_WIRING, JELLYFISH_TRIAGE). Only ECOSYSTEM_BLURB active.
+- `DEPLOYMENT_INSTANCE.toml` still at Wave 134 — needs sporeGate/cellMembrane update.
+
+### Ecological
+- 14 primals, 8 springs, 7 gardens, 6 infra, 1 protist.
+- Differential evolution rates documented (glossary). No primal at 1.0.
+- rhizoCrypt (0.14.17) most iterated. biomeOS (0.1.0) youngest.
+
+### Hardware / Topology
+- **Leveraged today**: 7 gates online (sporeGate, eastGate, ironGate, flockGate, golgi, grapheneGate + Flint H1 edge router).
+- **Present but not wired to trust model**: 2 SoloKeys plugged (eastGate, ironGate), Titan M2 (Pixel), 3 Akida NPU.
+- **Documented but idle**: westGate (76TB ZFS), biomeGate (HBM2), strandGate (EPYC — offline), fieldGate (dead CMOS), 3 Intel NUC6CAY.
+- **Spec conflicts**: ironGate listed as i9-14900K/96GB/5070 AND i9-12900K/128GB/5070Ti AND i9-12900K/96GB (3 different profiles across HARDWARE.md, manifest, Wave 137b).
+- Pixel is Tower live + USB tether. Its highest-value entropy role (StrongBox-backed FAMILY_SEED) is not started.
+
+### Sovereignty / Membranes
+- K-Derm diderm model operational. Cloudflare external capsule (drawbridge). Caddy sovereign outer membrane.
+- `*.primals.eco` wildcard DNS active — Caddy sole routing authority.
+- Domain identity separation documented: `primals.eco` / `primal.eco` / `nestgate.io`.
+- Loam Certificate vs TLS credential terminology fixed (glossary).
+
+### Depot / Build Pipeline
+- 100% Rust pipeline. `require-signed` enforced system-wide.
+- 35 binaries / 3 architectures (x86_64-musl, aarch64-musl, nucleus_launcher).
+- 2,801 lines of bash fossilized (jellyfish triage).
+- Depot layout fixed: `depot/primals/arch/binary`.
+
+### Website / Public Surfaces
+- `primals.eco` — sporePrint + footPrint GIS proxy (10 hosts). Live.
+- `live.primals.eco` — petalTongue TOPO-VIS dashboard. Live.
+- `git.primals.eco` — Forgejo. Healthy (minus PERMS recurrence).
+- `membrane.primals.eco` — Nest Atomic composition. Live.
+- MacGuffin test: topology visualization public on live.primals.eco.
+
+### Security
+- HSTS, CSP, X-Frame, nosniff on all domains. fail2ban on Forgejo SSH.
+- `require-signed` depot policy. SIGN-VERIFY-ON-FETCH in cellMembrane.
+- SoloKeys + Titan M2: **biggest hardware-security gap** — present, architected, not production-wired.
+- bearDog ACME gatehouse: shadow live, not cut over.
+
+### Glacial
+- ALL 8 CRITERIA CLEAR for stadial entry.
+- Next glacial goal: Universal Substrate Evolution (multi-arch NUCLEUS).
+- SHOW_HN publication rubric exists (whitePaper gen5/thesis/).
+
+---
+
+## Docs Updated This Review
+
+| Doc | Action |
+|-----|--------|
+| `README.md` | Wave 128 → 137b header |
+| `GLACIAL_SHIFT_READINESS.md` | Body "4-gate" → "3-gate WG mesh, PUBLIC + SOVEREIGN" |
+| `GLOSSARY.md` | Loam Certificate entry, TLS credential distinction, versioning philosophy |
+| `ecosystem_manifest.toml` | v2.9.0, Wave 137, 40 repos |
+| `heads/flockGate.toml` | DRAWBRIDGE-CAP resolved, scenarios 144, tests 1190 |
+| `handoffs/` | 2 fossilized → archive |
+| `impulses/` | 2 discharged → archive (wave118, wave128) |
 
 ---
 
 ## Gate Status
 
 ```
-eastGate     — Overwatch. 13 primals. songBird v0.2.1 (2 peers). Clean.
-sporeGate    — NUCLEUS. live.primals.eco + FP-API live. Depot 35/35.
-golgiBody    — Full mirror. Wildcard DNS. Forgejo healthy.
-flockGate    — 144 scenarios / 1,190 tests. songBird deep debt AAR shipped.
-ironGate     — REDEPLOYED. 14 fresh binaries. 13/13 active. Mesh restored.
+eastGate     — Overwatch. 13 primals. Clean. SoloKey plugged (not wired).
+sporeGate    — NUCLEUS. Public surfaces live. Depot 35/35. Forgejo PERMS recurrence.
+golgiBody    — Full mirror. Wildcard DNS. Caddy routing authority.
+flockGate    — 144 scenarios / 1,190 tests. songBird deep debt shipped.
+ironGate     — REDEPLOYED Jul 13. 13/13. Mesh restored. SoloKey plugged.
+grapheneGate — Tower live. USB tether. StrongBox NOT STARTED.
 ```
-
-**Next Glacial Goal**: Universal Substrate Evolution — multi-arch NUCLEUS.
 
 ---
 
-*Wave 137b: 2 original items + 4 new from ironGate triage. DRAWBRIDGE-CAP resolved. ironGate redeployed. All repos clean. 7,750+ tests / 0 fail.*
+*Wave 137b deep review: 6 operational items. 4 hardware evolution targets (SoloKey ceremony, Pixel StrongBox, inventory reconciliation, universal substrate). All 8 glacial criteria clear. 7,750+ tests / 0 fail.*
