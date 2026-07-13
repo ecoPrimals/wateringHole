@@ -1,6 +1,8 @@
 # FP-API Wiring — Wave 137b
 
-**Date**: Jul 13, 2026 | **Owner**: flockGate + songBird | **Status**: DESIGN COMPLETE
+**Date**: Jul 13, 2026 | **Owner**: flockGate + songBird | **Status**: SUPERSEDED by DRAWBRIDGE_WEAK_BOND_PATTERN_AAR_137b.md
+
+> **Note**: The CSP-expansion approach below is superseded. The correct pattern is drawbridge weak bonds — see `DRAWBRIDGE_WEAK_BOND_PATTERN_AAR_137b.md`. The SPA should never fetch directly from external services.
 
 ---
 
