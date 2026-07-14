@@ -20,9 +20,17 @@ ClientPIN CBOR boilerplate DRY'd. PIN error misclassification fixed
 
 Overwatch now uses `membrane temporal.cascade --gate eastGate --with-rebuild`
 as the single entry point. No more ad-hoc `git fetch/pull/push` loops.
-The pipeline handles: sync all repos → auto-publish freshness/heads →
-detect divergence → harvest → sandbox → refresh → auto-fetch → content rebuild
-→ rootPulse sovereignty. This cascade: 36/38 synced at parity.
+
+### Cyclic Graph → DAG Fix (cellMembrane — NEW)
+
+Root cause of perpetual wateringHole divergence: `freshness.toml` recorded
+**commit SHAs** (graph-dependent) and included **self-reference** (wateringHole's
+own SHA). Commit SHAs encode parentage/timestamps, so identical file trees at
+different commit points produce different SHAs, creating an infinite fixpoint loop.
+
+Fix: record `HEAD^{tree}` (content-addressed) instead of `HEAD` (graph-addressed),
+and exclude wateringHole from its own freshness record. Identical file states now
+produce identical hashes regardless of commit history. This cascade: **38/38 parity.**
 
 ### sporePrint Content Auto-Merge
 
@@ -75,6 +83,7 @@ All tracked items resolved.
 - ~~BIOMEOS-TEMPLATE~~ — `service.template` subcommand implemented
 - ~~FIDO2-MONOLITH~~ — 897 LOC split into 8 focused modules
 - ~~AD-HOC-CASCADE~~ — overwatch now uses `membrane temporal.cascade`
+- ~~FRESHNESS-CYCLE~~ — tree hashes + no self-reference → cyclic graph becomes DAG
 - ~~NAPI-LIFECYCLE~~ — `primal.announce` + `topology.rescan` register with LifecycleManager
 - ~~SOCKET-DIR-UNIFY~~ — all sockets → `/run/membrane/`, legacy deprecated
 - ~~SOCKET-UMASK~~ — proper umask for IPC sockets
