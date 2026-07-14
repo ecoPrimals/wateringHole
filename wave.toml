@@ -9,12 +9,12 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 138
-sub = "b"
+id = 139
+sub = "a"
 date = "2026-07-14"
-posture = "PUBLIC + SOVEREIGN. 3 items remain. SoloKey physically tested (P0 HID fix identified). FORGEJO-PERMS permanently fixed. wateringHole distilled to 83 active docs. 147 scenarios, 1133 tests. ironGate redeployed + validated."
+posture = "PUBLIC + SOVEREIGN. Zero debt from Wave 138. Cascade DAG converged. 16/16 repos at parity. 3 live surfaces (primals.eco, footprint, live.primals.eco). Opening scope: northGate mesh, AlphaFold provenance, SoloKey ceremony, live compositions."
 publisher = "eastGate-overwatch"
 
 [gates]
-online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate"]
-offline = ["strandGate"]
+online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate", "northGate"]
+offline = ["strandGate", "westGate"]
