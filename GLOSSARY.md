@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: July 13, 2026 (Wave 137b — Loam Certificate vs TLS credential distinction, differential evolution versioning philosophy, drawbridge/cellMembrane boundary terminology)
+**Last Updated**: July 14, 2026 (Wave 138b — soundStage concept added)
 
 ---
 
@@ -310,6 +310,46 @@ coordination. RootPulse is not a VCS binary — it is what primals DO together:
 rhizoCrypt provides the workspace, loamSpine provides the history, sweetGrass
 provides the attribution, BearDog signs it, NestGate stores it, Songbird
 syncs it. biomeOS orchestrates the whole thing via Neural API.
+
+### soundStage
+
+The **transparent observation layer** for hardware trust ceremonies. soundStage
+makes ephemeral key generation visible — you watch the entropy flowing from each
+hardware source, see the mixing happen, observe the derivation, and validate the
+output. If you can't see it working, you're just trusting it's secure.
+
+soundStage is not a primal. It is an ecoPrimals **concept** — a capability that
+primals compose to provide live ceremony observability. The concept applies
+anywhere hardware trust operations happen (key generation, certificate minting,
+entropy ceremonies).
+
+Core abstractions:
+
+| Concept | Role | Analogy |
+|---------|------|---------|
+| **Channel** | A single observable entropy source (SoloKey, StrongBox, audio, getrandom) | A microphone in a recording studio |
+| **Mix bus** | Where channels converge — the mixing operation and its output | The mixing board |
+| **Monitor** | The derived key material's fingerprint (never the raw key) | Studio monitors (listen but don't broadcast) |
+| **Session** | A complete ceremony recording — all channels, mix, output timestamped | A session tape |
+| **Comparator** | Diffs sessions to prove independence or detect degenerate entropy | A/B comparison |
+
+Key properties:
+- **Multi-anchor**: Each hardware source is a separate channel (SoloKey, Pixel
+  StrongBox, audio mic, OS entropy)
+- **Multi-user**: Each user gets independent sessions — comparator verifies
+  independence across users
+- **Quality gates**: Require multi-source (≥2 anchors) and entropy floor
+  (>4.0 bits/byte Shannon) to pass
+- **Fingerprints only**: The monitor observes key derivation through BLAKE3
+  fingerprints — raw key material never leaves the ceremony
+- **Transparency over trust**: The entire point is to make the black box visible.
+  If a hardware source starts producing degenerate entropy, you see it immediately.
+
+soundStage is to key generation what darkforest is to network security: the tool
+that makes the invisible visible. darkforest reveals what probes the network.
+soundStage reveals what flows through the ceremony.
+
+See `primalSpring/ecoPrimal/src/soundstage/` for the reference implementation.
 
 ---
 
@@ -1093,6 +1133,7 @@ the validator assumes the network is hostile.
 | **pappusCast** | Auto-propagation daemon — dandelion-seed dispersal from workspace to observer surface |
 | **tunnelKeeper** | Rust crate for Cloudflare tunnel health, DNS resolution, config parsing |
 | **darkforest** | Pure Rust security validator — pen test + fuzz + crypto strength (939KB, zero deps) |
+| **soundStage** | Transparent ceremony observation — see entropy flowing, mixing, derivation. Anti-black-box. |
 | **Snapshot architecture** | Public surface holds managed copies, not live symlinks — stable observer view |
 | **Tiered validation** | Light (structural) → Medium (execution) → Heavy (regression) validation pipeline |
 | **plasmidBin** | Binary distribution repo — pre-built musl-static NUCLEUS primals, Rust CLI, automated harvest |
