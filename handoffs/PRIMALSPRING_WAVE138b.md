@@ -91,4 +91,18 @@ cascade pipeline (CI/CD)           ←──   deploy hardware-backed bearDog
 
 ---
 
-*Wave 138b: 147/147 scenarios active. 1,133 tests / 0 fail. All compile-debt resolved. primalSpring is the validation authority for the hardware trust pipeline. Local-first evolution leverages existing VPS/depot/mesh infrastructure.*
+## P0 HIDRAW-REPORT-ID — RESOLVED
+
+**Root cause**: `rk=true` (resident key) hardcoded in `build_make_credential_ext`. Solo 2 firmware ≥2.3 requires PIN for discoverable credentials. MakeCredential timed out silently because device rejected without proper PIN ceremony.
+
+**Fix**: `let rk = pin_uv_auth.is_some();` — non-discoverable credentials for entropy ceremony (credential_id stored in depot). PIN ceremony path available when discoverable credentials are needed.
+
+**Also shipped**: `client_pin.rs` (CTAP2 ClientPIN Protocol pinProtocol 1), `p256` with ecdh for key agreement, IPC handler accepts optional `pin` param.
+
+**Status**: Pushed to `origin/main` (`bearDog 94d58b6b2`). Forgejo sync deferred (diverged history).
+
+**Remaining items**: 2 (NAPI-LIFECYCLE P2, SOCKET-DIR-UNIFY P2). HID-BLOCKING-IO (P1) still open but non-blocking with EAGAIN retry works for ceremony.
+
+---
+
+*Wave 138b: 147/147 scenarios active. 1,133 tests / 0 fail. P0 HIDRAW-REPORT-ID resolved. All compile-debt resolved. primalSpring is the validation authority for the hardware trust pipeline. Local-first evolution leverages existing VPS/depot/mesh infrastructure.*
