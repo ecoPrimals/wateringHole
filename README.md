@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: July 13, 2026 (Wave 137b: PUBLIC + SOVEREIGN. `live.primals.eco` + `primals.eco/footprint/` live. 3-gate WireGuard mesh (eastGate+sporeGate+golgi). Depot pipeline 100% Rust, `require-signed` enforced, 35 binaries / 3 architectures. Neural API systemd. primalSpring v0.9.36 — 144 scenarios, 1,190 lib tests. 7,750+ tests / 0 fail. All 8 glacial criteria CLEAR.)
+**Last Updated**: July 14, 2026 (Wave 138a: PUBLIC + SOVEREIGN. Composition routing standard formalized. `*.primals.eco` wildcard DNS + Caddy sovereign routing. 5 live compositions (sporePrint, footPrint, TOPO-VIS, JupyterHub, Forgejo). 3-gate WireGuard mesh (eastGate+sporeGate+golgi). Depot pipeline 100% Rust, `require-signed` enforced. primalSpring v0.9.36 — 146 scenarios, 1,301 lib tests. All 8 glacial criteria CLEAR.)
 
 ---
 
@@ -368,6 +368,9 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - `LICENSING_AND_COPYLEFT.md` — Ecosystem copyleft framework
 - `ANCHORING_STANDARD.md` — Public chain anchoring guidance
 - `UPSTREAM_CONTRIBUTIONS.md` — Standalone crates for crates.io from ecoPrimals
+
+### Compositions & Routing
+- `COMPOSITION_ROUTING_STANDARD.md` — Live composition deployment: `*.primals.eco` subdomain registration, drawbridge capability exposure, data ingestion via weak bonds, trust levels by domain, composition lifecycle
 
 ### Sovereignty & Membrane
 - `K_DERM_TOPOLOGY_STANDARD.md` — K-Derm cell envelope model: monoderm/diderm, absolute layers, NUCLEUS atomic placement, bonding per boundary, channel proteins, braid policy
