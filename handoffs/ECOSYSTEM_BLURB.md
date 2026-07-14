@@ -1,103 +1,105 @@
-# ecoPrimals Ecosystem Blurb — Wave 138a
+# ecoPrimals Ecosystem Blurb — Wave 138b
 
-**Date**: Jul 14, 2026 07:30 EDT | **Wave**: 138a | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** Composition routing standard (whitePaper gen5 + wateringHole) shipped. SOLOKEY-CEREMONY wired. ABG JupyterHub access guide shipped. Collaborator activation track defined. 4 carried items.
-
----
-
-## Wave 138 — Three Tracks
-
-### Track 1: Hardware Trust (eastGate / primalSpring)
-SOLOKEY-CEREMONY code wired (`beardog.fido2.entropy` IPC). PIXEL-STRONGBOX unblocked (Android compile fixed). HW inventory reconciled. Physical SoloKey test next.
-
-### Track 2: K-Derm Extrication (sporeGate / golgi)
-`primal.eco` separation, bearDog gatehouse cutover, Forgejo PERMS permanent fix.
-
-### Track 3: Live Compositions + Collaborator Activation (NEW)
-
-**protoKarya projects as live compositions**: Each protoKarya project is a composition that consumes primal capabilities and registers its data feeds as drawbridge capabilities. Each gets a public subdomain via wildcard DNS.
-
-| Project | Subdomain | What It Provides | Consumes |
-|---------|-----------|-----------------|----------|
-| **footPrint** | `primals.eco/footprint/` | GIS visualization, spatial data feeds, live map layers | nestGate (CAS), songBird (proxy), petalTongue (SPA) |
-| **tideGlass** | `tideglass.primals.eco` | Drug perturbation reversal screening (GPS rebuild) | nestGate (compound data), barracuda (MATRIX), helixVision (expression) |
-| **JupyterHub** | `lab.primals.eco` | Shared compute for RNA-seq, NF mining, ABG science | ironGate (GPU), songBird (drawbridge), bearDog (auth) |
-
-**Data feeds register with drawbridge**: footPrint GIS data (USGS, ArcGIS, tile servers) enters through drawbridge weak bonds → NestGate CAS. Same data feeds serve NF spatial analysis, ABG environmental genomics, and the public GIS tool. The drawbridge is the universal data ingestion point.
-
-**Cross-feeding**: footPrint provides spatial visualization that NF and ABG work needs. tideGlass provides drug reversal data that feeds back into healthSpring. JupyterHub provides compute that both collaborator groups use. All register as mesh capabilities.
+**Date**: Jul 14, 2026 09:30 EDT | **Wave**: 138b | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN.** SoloKey physically tested — CTAPHID handshake proven, P0 HID bug identified. FORGEJO-PERMS-RECUR permanently fixed (3-layer defense). primalSpring health restored (125 scenarios, 1,107 tests). wateringHole distilled (83 active docs, 945 fossilized). 3 carried items.
 
 ---
 
-## Collaborator Activation
+## This Cascade — Wave 138b Incoming
 
-| Collaborator | Status | Product(s) | What's Live | Next |
-|-------------|--------|------------|------------|------|
-| **ABG** | Producing | initioChem, JupyterHub | `lab.primals.eco` access guide shipped | Create user accounts (REALWORLD). conda/bioconda RNA-seq setup. |
-| **Gonzales (NF)** | Engaged → producing | tideGlass, helixVision, healthSpring | 782/782 validated. Pre-grant pipeline. GPS assigned Jun 5. | tideGlass Phase 0 (Zenodo archaeology). NF Data Portal ingestion. sporePrint NF content. |
-| **Jones (Bluefish)** | Active | blueFish | Product spec from data dumps | PFAS ETL pipeline. EPA 1633A targets. |
-| **Chuna (QCD)** | Delivery-ready | hotSpring | guideStone 59/59. USB deployment. | TC delivery (REALWORLD). |
+### SoloKey Physical Test (sporeGate — AAR shipped)
 
-**sporePrint content needed**: NF case study, tideGlass product page, collaborator profiles, pre-grant pipeline methodology. These are public-facing pages that demonstrate ecosystem capability to PIs and foundations.
+First hardware trust ceremony in the ecosystem. SoloKey Solo 2 plugged
+into sporeGate NUC. Results:
+
+| Step | Result |
+|------|--------|
+| Device discovery (`beardog.fido2.discover`) | **PASS** — Solo 2 at `/dev/hidraw4` |
+| CTAPHID_INIT handshake | **PASS** — Channel 0x06, firmware 2.3.196, CBOR+WINK caps |
+| MakeCredential write | **PASS** — 4 packets, 208 bytes CBOR delivered |
+| MakeCredential response | **BLOCKED** — EAGAIN ×150, LED did not blink |
+| Build system (`cargo build --features fido2`) | **PASS** — 30 FIDO2 tests green |
+
+**Root cause**: `HIDRAW-REPORT-ID` — Linux hidraw requires 0x00 report ID
+prefix on writes for FIDO2 devices. bearDog sends 64 raw bytes, kernel
+expects 65 (0x00 + 64 payload). MakeCredential never reaches authenticator logic.
+
+**P0 Fix**: Prepend 0x00 in `LinuxHidDevice::write()`. One-line fix, gated
+on `has_report_id` flag from HID report descriptor.
+
+### bearDog FIDO2 Fixes (2 commits absorbed)
+
+- `CTAPHID_CBOR` command byte (0x90) for CTAP2 operations — was using MSG (0x83)
+- EAGAIN retry with `POLL_INTERVAL_MS` constant (200ms) for user-presence touch
+- Example compile fixes for test harness
+
+### cellMembrane Debt Sprint (2 commits absorbed)
+
+- `service.template` subcommand implemented (resolves BIOMEOS-TEMPLATE)
+- `freshness.toml` constants migrated
+- Visibility tightening round 2
+
+### primalSpring Health Restore (sporeGate — AAR shipped)
+
+- 20 phantom scenario registrations commented out (source files pending)
+- Drift tolerance fixed for multi-gate freshness
+- Stale socket guard for offline primals
+- Suite: **1,107 passed / 0 failed / 2 ignored**
+
+### FORGEJO-PERMS-RECUR Permanent Fix (sporeGate — AAR shipped)
+
+Three-layer defense deployed to golgi:
+1. `ExecStartPost` in `cascade-sense.service` — `chown -R git:git` after every cascade
+2. `/etc/tmpfiles.d/forgejo-perms.conf` — enforce on every boot
+3. `forgejo-perms.timer` — 6-hour safety net periodic enforcement
+
+### wateringHole Distillation (eastGate)
+
+- 980+ documents fossilized to `fossilRecord/wave138a_cleanup/`
+- Active docs: **83** (down from 1,027)
+- Root standards: **46** (down from 64)
+- README index restructured into 10 clean categories
 
 ---
 
-## Remaining — 4 carried items
+## Remaining — 3 items (was 4)
 
-| ID | Owner | What |
-|----|-------|------|
-| **NAPI-LIFECYCLE** | biomeOS | LifecycleManager registration. |
-| **FORGEJO-PERMS-RECUR** | sporeGate | Permanent fix for ownership drift. |
-| **SOCKET-DIR-UNIFY** | biomeOS | Socket dir consolidation. |
-| **BIOMEOS-TEMPLATE** | cellMembrane | Service template subcommand mismatch. |
+| ID | Owner | Priority | What |
+|----|-------|----------|------|
+| **HIDRAW-REPORT-ID** | bearDog | P0 | Prepend 0x00 report ID in HID writes — unblocks SoloKey ceremony |
+| **NAPI-LIFECYCLE** | biomeOS | P2 | LifecycleManager registration |
+| **SOCKET-DIR-UNIFY** | biomeOS | P2 | Socket dir consolidation |
+
+**Resolved this wave**:
+- ~~FORGEJO-PERMS-RECUR~~ — 3-layer permanent fix deployed to golgi
+- ~~BIOMEOS-TEMPLATE~~ — `service.template` subcommand implemented in cellMembrane
 
 ---
 
-## Architecture: protoKarya Composition Routing
+## SoloKey Ceremony Path (from AAR)
 
 ```
-                    *.primals.eco (wildcard DNS)
-                           │
-                     Caddy (golgi)
-                    ┌──────┼──────┐
-                    │      │      │
-        footprint/  │  tideglass  │  lab/
-        (GIS SPA)   │  (reversal) │  (JupyterHub)
-                    │      │      │
-              ┌─────┴──────┴──────┴─────┐
-              │     songBird mesh       │
-              │   drawbridge routing    │
-              │   capability.call()     │
-              └─────┬──────┬──────┬─────┘
-                    │      │      │
-              nestGate  barracuda  ironGate
-              (CAS)     (math)    (GPU/compute)
-              
-Data feeds:
-  USGS, ArcGIS, NF Portal, Pluto.bio, LINCS
-    → drawbridge weak bonds
-      → nestGate CAS (content-addressed, BLAKE3)
-        → available as capabilities across mesh
+DONE:   discover → CTAPHID_INIT → channel allocation → MakeCredential write
+NEXT:   HIDRAW-REPORT-ID fix → MakeCredential response → user presence touch
+THEN:   authenticate → entropy harvest → Loam Certificate mint
+FUTURE: USB topology as deployment primitive (SoloKey + NPU + compute = NUCLEUS kit)
 ```
 
-Each protoKarya project registers its data needs as drawbridge weak bonds. The data lands in NestGate CAS with full provenance (Loam Certificates). Other projects and springs consume it via `capability.call`. footPrint's GIS layers, tideGlass's compound libraries, and JupyterHub's datasets all live in the same CAS — different projects, same sovereign data mesh.
-
-**Docs shipped (Wave 138a)**:
-- `whitePaper/gen5/foundations/COMPOSITION_ROUTING_PATTERN.md` — full pattern (organelles + drawbridge + cross-feeding)
-- `wateringHole/COMPOSITION_ROUTING_STANDARD.md` — operational standard (checklist, manifest TOML, lifecycle)
-- `whitePaper/gen5/collaborators/README.md` — updated with live composition routing table
-- `whitePaper/gen5/README.md` — updated to Wave 138a with live compositions status
+Additional bearDog items from physical test:
+- `HID-BLOCKING-IO` (P1): Replace O_NONBLOCK with blocking I/O + spawn_blocking
+- `CTAPHID-PING-DIAG` (P2): Add CTAPHID_PING for transport-level diagnostics
+- `CTAP2-GETINFO-FIRST` (P2): Issue GetInfo before MakeCredential
 
 ---
 
 ## Gate Status
 
 ```
-eastGate     — PRIMARY. primalSpring + hardware coevolution. SoloKey ready.
-sporeGate    — NUCLEUS. K-Derm extrication. Depot authority.
-golgiBody    — Outer membrane. Wildcard DNS. Caddy routing for *.primals.eco.
-flockGate    — bearDog FIDO2 + primalSpring scenarios. 147 scenarios.
-ironGate     — ABG/NF compute. JupyterHub v5.4.5. GPU. 13/13.
+eastGate     — PRIMARY. Cascade absorbed. primalSpring 125 scenarios / 1,107 tests.
+sporeGate    — NUCLEUS. SoloKey physically tested. Depot authority. FORGEJO-PERMS fixed.
+golgiBody    — Outer membrane. Wildcard DNS. FORGEJO-PERMS 3-layer defense live.
+flockGate    — bearDog FIDO2 + primalSpring scenarios.
+ironGate     — ABG/NF compute. JupyterHub v5.4.5. 13/13 active.
 grapheneGate — StrongBox target. Android compile unblocked.
 ```
 
@@ -106,21 +108,20 @@ grapheneGate — StrongBox target. Android compile unblocked.
 ## Evolution Path
 
 ```
-NOW:    footPrint live at primals.eco/footprint/. JupyterHub at lab.primals.eco.
-        ironGate = single-node compute for ABG + NF.
-        tideGlass Phase 0 (GPS archaeology).
+NOW:    HIDRAW-REPORT-ID fix → SoloKey MakeCredential completes
+        bearDog FIDO2 ceremony: register → authenticate → entropy → Loam cert
+        Composition routing standard + pattern docs shipped
 
-NEXT:   tideGlass at tideglass.primals.eco.
-        NF Data Portal ingestion → NestGate CAS.
-        sporePrint: NF case study, collaborator profiles.
-        primal.eco separation (private compositions, ceremonies).
+NEXT:   Hardware entropy ceremonies (SoloKey + Pixel StrongBox)
+        primal.eco separation (private compositions, key ceremonies)
+        tideGlass Phase 0 (Zenodo GPS archaeology)
+        sporePrint: NF case study, collaborator profiles
 
-FUTURE: strandGate (EPYC + 256GB) as HPC backend.
-        ABG/Gonzales gates federated via primal.eco mesh.
-        nestgate.io as federated data gateway (NCBI, PubMed, USGS, CTF).
-        Universal substrate: NUCLEUS on any architecture.
+FUTURE: NUCLEUS USB kit (SoloKey + NPU + compute)
+        Universal substrate: NUCLEUS on any architecture
+        nestgate.io federated data gateway
 ```
 
 ---
 
-*Wave 138a: live compositions register with drawbridge. protoKarya projects get *.primals.eco subdomains. footPrint GIS feeds serve NF + ABG. Collaborator activation: ABG producing, Gonzales GPS assigned, Jones active, Chuna delivery-ready. 7,750+ tests / 0 fail.*
+*Wave 138b: SoloKey physically tested — first hardware trust ceremony. Protocol handshake proven, P0 HID bug identified (one-line fix). FORGEJO-PERMS permanently fixed. primalSpring health restored. wateringHole distilled to 83 active docs. 3 items remain.*
