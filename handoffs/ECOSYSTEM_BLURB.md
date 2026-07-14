@@ -1,9 +1,8 @@
 # ecoPrimals Ecosystem Blurb — Wave 138c
 
-**Date**: Jul 14, 2026 14:00 EDT | **Wave**: 138c | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** First FIDO2 credential minted. FIDO2 IPC handler
-refactored to 8 modules. Cascade pipeline convergence: overwatch now uses
-`membrane temporal.cascade` — no ad-hoc git ops. 2 items remain.
+**Date**: Jul 14, 2026 14:05 EDT | **Wave**: 138c | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN.** All tracked items resolved. biomeOS delivered
+NAPI-LIFECYCLE + SOCKET-DIR-UNIFY. 38/38 repos at parity. Zero remaining items.
 
 ---
 
@@ -58,19 +57,17 @@ discovered (requires physical replug after timeout).
 
 | Goal | Status | Next |
 |------|--------|------|
-| **NAPI-LIFECYCLE** | `lifecycle.status` count=0 (P2) | Wire registration |
-| **SOCKET-DIR-UNIFY** | Mixed socket dirs (P2) | Consolidate to `/run/membrane/` |
+| **NAPI-LIFECYCLE** | RESOLVED — `primal.announce` registers with LifecycleManager, `topology.rescan` auto-discovers | — |
+| **SOCKET-DIR-UNIFY** | RESOLVED — all sockets → `/run/membrane/`, legacy `biomeos` deprecated with backward-compat scan | — |
+| **SOCKET-UMASK** | RESOLVED — proper umask for IPC sockets | — |
 
 ### All other teams — no changes this cascade (status unchanged from prior blurb)
 
 ---
 
-## Remaining — 2 items
+## Remaining — 0 items
 
-| ID | Owner | P | What |
-|----|-------|---|------|
-| **NAPI-LIFECYCLE** | biomeOS | 2 | LifecycleManager registration |
-| **SOCKET-DIR-UNIFY** | biomeOS | 2 | Socket dir → `/run/membrane/` only |
+All tracked items resolved.
 
 **Resolved this wave**:
 - ~~HIDRAW-REPORT-ID~~ — 0x00 report ID prefix in HID writes
@@ -78,6 +75,9 @@ discovered (requires physical replug after timeout).
 - ~~BIOMEOS-TEMPLATE~~ — `service.template` subcommand implemented
 - ~~FIDO2-MONOLITH~~ — 897 LOC split into 8 focused modules
 - ~~AD-HOC-CASCADE~~ — overwatch now uses `membrane temporal.cascade`
+- ~~NAPI-LIFECYCLE~~ — `primal.announce` + `topology.rescan` register with LifecycleManager
+- ~~SOCKET-DIR-UNIFY~~ — all sockets → `/run/membrane/`, legacy deprecated
+- ~~SOCKET-UMASK~~ — proper umask for IPC sockets
 
 ---
 
@@ -107,6 +107,8 @@ DONE    *.primals.eco wildcard DNS
 DONE    FORGEJO-PERMS 3-layer defense
 DONE    100% Rust deployment pipeline
 DONE    BIOMEOS-TEMPLATE resolved
+DONE    NAPI-LIFECYCLE — LifecycleManager wired
+DONE    SOCKET-DIR-UNIFY — /run/membrane/ canonical
 NOW     primal.eco separation (inner membrane)
 GOAL    Full sovereign membrane parity
 ```
@@ -151,4 +153,4 @@ grapheneGate — StrongBox target. Android compile unblocked.
 
 ---
 
-*Wave 138c: FIDO2 IPC handler refactored to 8 modules (13,883 tests). Cascade pipeline converged — overwatch uses `membrane temporal.cascade`. SoloKeys as human proximity sensors and genetic generators. 2 items remain.*
+*Wave 138c: all tracked items resolved. biomeOS delivered NAPI-LIFECYCLE + SOCKET-DIR-UNIFY + SOCKET-UMASK. FIDO2 IPC refactored to 8 modules. Cascade pipeline converged. 38/38 repos at parity. Zero remaining items. Ready for next wave scope.*
