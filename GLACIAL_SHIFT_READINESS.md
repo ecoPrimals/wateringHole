@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-07-13 (Wave 137b — **ALL 8 CRITERIA CLEAR. PUBLIC EXPOSURE LIVE.** `live.primals.eco` serving TOPO-VIS dashboard. `primals.eco/footprint/` live. 3-gate WireGuard mesh (eastGate+sporeGate+golgi). Depot pipeline 100% Rust with `require-signed` enforced. 35 binaries / 3 architectures verified. Neural API systemd on sporeGate (48 primals). 7,750+ tests / 0 fail across springs. 2,801 lines of bash fossilized. Drawbridge weak bond pattern formalized. footPrint primal wiring complete. SIGN-VERIFY-ON-FETCH implemented. Phase 1 Neural API deployment authority: 12/12 COMPLETE.)
+**Last updated**: 2026-07-14 (Wave 139a — **ALL 8 CRITERIA CLEAR. PUBLIC EXPOSURE LIVE.** 3 live surfaces: `primals.eco` (sporePrint), `primals.eco/footprint/` (GIS), `live.primals.eco` (TOPO-VIS). Cascade DAG converged (tree hashes fix cyclic graph). 16/16 repos at parity. FIDO2 IPC refactored (8 modules, 13,883 tests). First FIDO2 credential minted. DNS wildcard deployed. RustScript architecture documented. footPrint deployed and functioning.)
 
 ---
 
