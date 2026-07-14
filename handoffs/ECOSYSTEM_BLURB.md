@@ -65,11 +65,20 @@ and brings the 5090 into the compute fabric.
 ### 4. Live Composition Advancement
 **Owner**: sporePrint team + protoKarya
 
+footPrint is **LIVE** at https://primals.eco/footprint/ — the first NUCLEUS
+composition target rendering on the public site. It intakes inner and outer
+membrane data via 10 drawbridge weak bond GIS proxies (OSM, FEMA, USGS, ArcGIS,
+Michigan GIS, etc.). This is the experiment substrate for testing weak atomic
+connections that are routine and expected (like NCBI, PubChem will be).
+
 | Step | What | Status |
 |------|------|--------|
+| footPrint live | GIS tool at primals.eco/footprint/ | **LIVE** |
+| footPrint base path | Vite base: /footprint/ for Caddy | **DONE** |
+| GIS proxy routes | 10 weak bond hosts via drawbridge | **LIVE** |
+| NCBI/PubChem bonds | Additional drawbridge registrations | TODO |
 | ABG user accounts | JupyterHub access for collaborators | TODO |
 | tideGlass Phase 0 | Sovereign GPS platform clone | TODO |
-| footPrint live data | GIS feeds into drawbridge data mesh | TODO |
 | primal.eco separation | Inner membrane personal substrate | TODO |
 
 ---
@@ -101,7 +110,9 @@ GOAL    Full sovereign membrane parity
 ### Track 3: Live Compositions → External Science Production
 
 ```
-DONE    footPrint GIS + JupyterHub + composition routing standard
+DONE    footPrint LIVE at primals.eco/footprint/ (10 GIS weak bonds)
+DONE    JupyterHub + composition routing standard
+NOW     NCBI/PubChem drawbridge bonds (routine outer membrane data)
 NOW     ABG user accounts, tideGlass Phase 0
 NOW     AlphaFold data → westGate → nestGate blob store
 GOAL    External science through sovereign compositions
