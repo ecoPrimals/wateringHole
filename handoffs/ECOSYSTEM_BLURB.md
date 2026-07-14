@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 138a
 
 **Date**: Jul 14, 2026 07:30 EDT | **Wave**: 138a | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** SOLOKEY-CEREMONY wired. protoKarya composition routing formalized. ABG JupyterHub access guide shipped. Collaborator activation track defined. 4 carried items.
+**Posture**: **PUBLIC + SOVEREIGN.** Composition routing standard (whitePaper gen5 + wateringHole) shipped. SOLOKEY-CEREMONY wired. ABG JupyterHub access guide shipped. Collaborator activation track defined. 4 carried items.
 
 ---
 
@@ -81,6 +81,12 @@ Data feeds:
 ```
 
 Each protoKarya project registers its data needs as drawbridge weak bonds. The data lands in NestGate CAS with full provenance (Loam Certificates). Other projects and springs consume it via `capability.call`. footPrint's GIS layers, tideGlass's compound libraries, and JupyterHub's datasets all live in the same CAS — different projects, same sovereign data mesh.
+
+**Docs shipped (Wave 138a)**:
+- `whitePaper/gen5/foundations/COMPOSITION_ROUTING_PATTERN.md` — full pattern (organelles + drawbridge + cross-feeding)
+- `wateringHole/COMPOSITION_ROUTING_STANDARD.md` — operational standard (checklist, manifest TOML, lifecycle)
+- `whitePaper/gen5/collaborators/README.md` — updated with live composition routing table
+- `whitePaper/gen5/README.md` — updated to Wave 138a with live compositions status
 
 ---
 
