@@ -1,10 +1,10 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-14T18:19:45Z
+# Gate: eastGate | Updated: 2026-07-14T22:33:41Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-14T18:19:45Z"
+updated = "2026-07-14T22:33:41Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
@@ -38,9 +38,9 @@ rustChip = "7b23442b5ebe43be64054457806e890447d37747"
 skunkBat = "ff4dc132fe6130655b42bccdbeebc15ee659d9ba"
 songBird = "1c0095dc1f6e720e8f4fed7665c31e78415961e9"
 sourDough = "ea4e603b98b6ea9096f9163b07b375e86b4760a7"
-sporePrint = "73f1ce51c5e0ece176c99123d8aee1c31c2dc73e"
+sporePrint = "accb283740d9973480d6655682a4b2dc8b8fa685"
 squirrel = "a104bfa77041f457e2024c4b192a36a415e7909c"
 sweetGrass = "9eb2b0d931c843348632ff2cfecab520a3c2054d"
 toadStool = "94377191f3ccd99277d6d6c6b31795eca5813ebe"
 wetSpring = "a26e7dc162bbc5dd6c3512a8a66e075617acad54"
-whitePaper = "dba00b07a1cf80e950e7d366b4985558a52964d2"
+whitePaper = "3ac30e766c6e971c32a319fa21bdc76a952e5cab"
