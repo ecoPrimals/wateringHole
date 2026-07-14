@@ -1,9 +1,9 @@
 # ecoPrimals Ecosystem Blurb — Wave 139a
 
-**Date**: Jul 14, 2026 18:30 EDT | **Wave**: 139a | **From**: eastGate overwatch
+**Date**: Jul 14, 2026 19:15 EDT | **Wave**: 139a | **From**: eastGate overwatch
 **Posture**: **PUBLIC + SOVEREIGN.** All Wave 138 items resolved. Zero remaining debt.
-Cascade pipeline converged (cyclic graph → DAG). 16/16 repos at parity across all remotes.
-3 live public surfaces. Opening new wave scope.
+Cascade pipeline converged (cyclic graph → DAG). 16/16 repos at parity (tree hash verified).
+3 live public surfaces. Identity anchoring deployed. Opening new wave scope.
 
 ---
 
@@ -46,13 +46,21 @@ Cascade pipeline converged (cyclic graph → DAG). 16/16 repos at parity across 
 - eastGate local has no plasmidBin directory (fetches from depot authority).
 - SIGN-VERIFY-ON-FETCH operational in cellMembrane.
 
-### 6. Website / Public Surface / Security
+### 6. Website / Public Surface / Security / Identity
 - `primals.eco` → 200 (sporePrint static site via Caddy)
 - `primals.eco/footprint/` → 200 (GIS composition, 10 weak bond proxies)
 - `live.primals.eco` → 200 (petalTongue TOPO-VIS dashboard)
 - Security headers deployed. fail2ban active. Rate limiting configured.
 - TLS auto-renewing via ACME/LE.
 - No new CRITICAL exposures.
+- **NEW: Identity anchoring deployed** (sporePrint Wave 138b):
+  - ORCID (0009-0004-2141-0321) wired into contact, llms.txt, JSON-LD
+  - Keyoxide ASPe profile + `.well-known/aspe` verification file
+  - `identity.json` schema.org JSON-LD graph (ecoPrimal + attsi dual-voice)
+  - Centralized `[extra.identity]` config block (single source of truth)
+  - Builder identity severed from personal identity (Kevin Mok → ecoPrimal chain)
+  - attsi identity model formalized (Locke/Demosthenes dual-voice architecture)
+  - `spore-validate` crate prepared for crates.io publishing
 
 ### 7. Glacial Shift
 - **ALL 8 CRITERIA CLEAR** for stadial entry (unchanged since Wave 111 for 1-7, Wave 136 for 8).
@@ -205,6 +213,7 @@ grapheneGate — StrongBox target. Android compile unblocked.
 
 ---
 
-*Wave 139a: zero code debt. 3 active divergences (depot layout, cascade push, cascade hang — all P2/P3).
+*Wave 139a: zero code debt. Identity anchoring deployed (ORCID, Keyoxide, JSON-LD, dual-voice model).
+3 active divergences (depot layout, cascade push, cascade hang — all P2/P3).
 New scope: northGate mesh, AlphaFold provenance, SoloKey ceremony, live compositions, depot reconciliation.
 Orthogonal dimensions review checklist added to wateringHole for future reassessment.*
