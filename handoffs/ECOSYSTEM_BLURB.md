@@ -62,21 +62,38 @@ and brings the 5090 into the compute fabric.
 | Loam cert seeding | Tier 1+2+3 → BLAKE3 → Loam cert seed | TODO |
 | Pixel StrongBox | ADB ceremony on grapheneGate | TODO |
 
-### 4. Live Composition Advancement
-**Owner**: sporePrint team + protoKarya
+### 4. Live Compositions + RustScript Architecture
+**Owner**: sporePrint team + protoKarya + petalTongue team
 
 footPrint is **LIVE** at https://primals.eco/footprint/ — the first NUCLEUS
-composition target rendering on the public site. It intakes inner and outer
-membrane data via 10 drawbridge weak bond GIS proxies (OSM, FEMA, USGS, ArcGIS,
-Michigan GIS, etc.). This is the experiment substrate for testing weak atomic
-connections that are routine and expected (like NCBI, PubChem will be).
+composition target. It intakes inner and outer membrane data via 10 drawbridge
+weak bond GIS proxies. This is the experiment substrate for routine outer
+membrane connections (NCBI, PubChem, etc. via drawbridge registration).
+
+**Architecture**: Pure Rust for everything backend and agentic (primals).
+UI aims for Rust via petalTongue. RustScript (footPrint's TypeScript library
+encoding Rust's safety constraints) is a portable frontend bridge — petalTongue
+may leverage it for rendering in time. RustScript itself is absorbable from
+footPrint for any composition needing frontend safety primitives.
+
+```
+Backend + Agentic:  Pure Rust (primals, nestGate, bearDog, biomeOS)
+UI/Rendering:       Rust via petalTongue (aim) / RustScript (bridge)
+Live compositions:  RustScript + drawbridge weak bonds (footPrint, tideGlass)
+Data pipelines:     Pure Rust (loamSpine provenance, nestGate blob store)
+```
+
+footPrint server-side (Express: project save/load, agent bridge) targets
+sporeGate NUCLEUS. Long-term: petalTongue/nestGate replaces Express with
+pure Rust. Client static is on golgi (thin relay, Caddy SPA + GIS proxy).
 
 | Step | What | Status |
 |------|------|--------|
-| footPrint live | GIS tool at primals.eco/footprint/ | **LIVE** |
-| footPrint base path | Vite base: /footprint/ for Caddy | **DONE** |
-| GIS proxy routes | 10 weak bond hosts via drawbridge | **LIVE** |
-| NCBI/PubChem bonds | Additional drawbridge registrations | TODO |
+| footPrint client live | GIS tool at primals.eco/footprint/ | **LIVE** |
+| GIS proxy routes | 10 weak bond hosts via Caddy drawbridge | **LIVE** |
+| footPrint server | Express on sporeGate (project save, agent bridge) | TODO |
+| NCBI/PubChem bonds | Drawbridge registrations for science APIs | TODO |
+| RustScript absorption | Extract lib for petalTongue/other compositions | TODO |
 | ABG user accounts | JupyterHub access for collaborators | TODO |
 | tideGlass Phase 0 | Sovereign GPS platform clone | TODO |
 | primal.eco separation | Inner membrane personal substrate | TODO |
@@ -112,10 +129,12 @@ GOAL    Full sovereign membrane parity
 ```
 DONE    footPrint LIVE at primals.eco/footprint/ (10 GIS weak bonds)
 DONE    JupyterHub + composition routing standard
+NOW     footPrint server on sporeGate (project persistence, agent bridge)
 NOW     NCBI/PubChem drawbridge bonds (routine outer membrane data)
-NOW     ABG user accounts, tideGlass Phase 0
-NOW     AlphaFold data → westGate → nestGate blob store
-GOAL    External science through sovereign compositions
+NOW     RustScript absorption for petalTongue UI safety primitives
+NEXT    ABG user accounts, tideGlass Phase 0
+NEXT    AlphaFold data → westGate → nestGate blob store
+GOAL    Pure Rust backend + RustScript UI bridge → sovereign compositions
 ```
 
 ---
