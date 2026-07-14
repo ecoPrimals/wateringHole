@@ -1,76 +1,86 @@
 # ecoPrimals Ecosystem Blurb — Wave 138a
 
-**Date**: Jul 13, 2026 19:00 EDT | **Wave**: 138a | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** SOLOKEY-CEREMONY wired (bearDog `fido2.entropy` IPC live). PIXEL-STRONGBOX unblocked (Android compile fixed). HW-INVENTORY reconciled. primalSpring at 147 scenarios / 1,306 tests. 4 carried items remain.
+**Date**: Jul 14, 2026 07:30 EDT | **Wave**: 138a | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN.** SOLOKEY-CEREMONY wired. protoKarya composition routing formalized. ABG JupyterHub access guide shipped. Collaborator activation track defined. 4 carried items.
 
 ---
 
-## Wave 138a Delivered (this wave)
+## Wave 138 — Three Tracks
 
-| Item | Delivered By | What |
-|------|-------------|------|
-| **SOLOKEY-CEREMONY** | bearDog (flockGate) | `beardog.fido2.entropy` IPC method wired. CTAP2 hmac-secret extension. Stateless `authenticate_with_credential()`. BLAKE3 entropy mixing of challenge + signature nonce. Pending: physical SoloKey test on eastGate. |
-| **PIXEL-STRONGBOX** | bearDog (flockGate) | Android `compile_error!` in beardog-hid fixed — returns empty gracefully. Cross-compile unblocked for aarch64-linux-android. Pixel depot builds now possible. |
-| **HW-INVENTORY-RECONCILE** | whitePaper | Canonical single-source inventory. Spec conflicts resolved (sporeGate RAM, ironGate ownership, subnet migration). pepti VPS added. |
-| **primalSpring scenarios** | primalSpring | +3 scenarios: `s_fido2_entropy_ceremony`, `s_hardware_trust_pipeline`, `s_keygen_interaction_surface`. 147 total / 1,306 tests / 0 failures. |
-| **bearDog** | bearDog | 11,175 tests / 0 fail. 6 files changed across FIDO2 stack. |
+### Track 1: Hardware Trust (eastGate / primalSpring)
+SOLOKEY-CEREMONY code wired (`beardog.fido2.entropy` IPC). PIXEL-STRONGBOX unblocked (Android compile fixed). HW inventory reconciled. Physical SoloKey test next.
+
+### Track 2: K-Derm Extrication (sporeGate / golgi)
+`primal.eco` separation, bearDog gatehouse cutover, Forgejo PERMS permanent fix.
+
+### Track 3: Live Compositions + Collaborator Activation (NEW)
+
+**protoKarya projects as live compositions**: Each protoKarya project is a composition that consumes primal capabilities and registers its data feeds as drawbridge capabilities. Each gets a public subdomain via wildcard DNS.
+
+| Project | Subdomain | What It Provides | Consumes |
+|---------|-----------|-----------------|----------|
+| **footPrint** | `primals.eco/footprint/` | GIS visualization, spatial data feeds, live map layers | nestGate (CAS), songBird (proxy), petalTongue (SPA) |
+| **tideGlass** | `tideglass.primals.eco` | Drug perturbation reversal screening (GPS rebuild) | nestGate (compound data), barracuda (MATRIX), helixVision (expression) |
+| **JupyterHub** | `lab.primals.eco` | Shared compute for RNA-seq, NF mining, ABG science | ironGate (GPU), songBird (drawbridge), bearDog (auth) |
+
+**Data feeds register with drawbridge**: footPrint GIS data (USGS, ArcGIS, tile servers) enters through drawbridge weak bonds → NestGate CAS. Same data feeds serve NF spatial analysis, ABG environmental genomics, and the public GIS tool. The drawbridge is the universal data ingestion point.
+
+**Cross-feeding**: footPrint provides spatial visualization that NF and ABG work needs. tideGlass provides drug reversal data that feeds back into healthSpring. JupyterHub provides compute that both collaborator groups use. All register as mesh capabilities.
+
+---
+
+## Collaborator Activation
+
+| Collaborator | Status | Product(s) | What's Live | Next |
+|-------------|--------|------------|------------|------|
+| **ABG** | Producing | initioChem, JupyterHub | `lab.primals.eco` access guide shipped | Create user accounts (REALWORLD). conda/bioconda RNA-seq setup. |
+| **Gonzales (NF)** | Engaged → producing | tideGlass, helixVision, healthSpring | 782/782 validated. Pre-grant pipeline. GPS assigned Jun 5. | tideGlass Phase 0 (Zenodo archaeology). NF Data Portal ingestion. sporePrint NF content. |
+| **Jones (Bluefish)** | Active | blueFish | Product spec from data dumps | PFAS ETL pipeline. EPA 1633A targets. |
+| **Chuna (QCD)** | Delivery-ready | hotSpring | guideStone 59/59. USB deployment. | TC delivery (REALWORLD). |
+
+**sporePrint content needed**: NF case study, tideGlass product page, collaborator profiles, pre-grant pipeline methodology. These are public-facing pages that demonstrate ecosystem capability to PIs and foundations.
 
 ---
 
 ## Remaining — 4 carried items
 
-### P1
-
 | ID | Owner | What |
 |----|-------|------|
-| **NAPI-LIFECYCLE** | biomeOS | LifecycleManager registration — `lifecycle.status` count=0. |
-| **FORGEJO-PERMS-RECUR** | sporeGate | Forgejo permission drift. Needs permanent fix (tmpfiles.d or hooks). |
-
-### P2
-
-| ID | Owner | What |
-|----|-------|------|
-| **SOCKET-DIR-UNIFY** | biomeOS | Unify socket dirs → `/run/membrane/`. |
+| **NAPI-LIFECYCLE** | biomeOS | LifecycleManager registration. |
+| **FORGEJO-PERMS-RECUR** | sporeGate | Permanent fix for ownership drift. |
+| **SOCKET-DIR-UNIFY** | biomeOS | Socket dir consolidation. |
 | **BIOMEOS-TEMPLATE** | cellMembrane | Service template subcommand mismatch. |
 
-*STALE-PEERS and TARPC-BIND absorbed into carried items — low priority, non-blocking.*
-
 ---
 
-## Next Steps (Phase 1 → Phase 2)
+## Architecture: protoKarya Composition Routing
 
-### Phase 1 remaining (local on eastGate)
+```
+                    *.primals.eco (wildcard DNS)
+                           │
+                     Caddy (golgi)
+                    ┌──────┼──────┐
+                    │      │      │
+        footprint/  │  tideglass  │  lab/
+        (GIS SPA)   │  (reversal) │  (JupyterHub)
+                    │      │      │
+              ┌─────┴──────┴──────┴─────┐
+              │     songBird mesh       │
+              │   drawbridge routing    │
+              │   capability.call()     │
+              └─────┬──────┬──────┬─────┘
+                    │      │      │
+              nestGate  barracuda  ironGate
+              (CAS)     (math)    (GPU/compute)
+              
+Data feeds:
+  USGS, ArcGIS, NF Portal, Pluto.bio, LINCS
+    → drawbridge weak bonds
+      → nestGate CAS (content-addressed, BLAKE3)
+        → available as capabilities across mesh
+```
 
-| Task | What | Status |
-|------|------|--------|
-| **SOLOKEY-PHYSICAL** | Plug SoloKey into eastGate, run `beardog.fido2.discover`, validate entropy harvest E2E. | Ready — code shipped, hardware present. |
-| **LOCAL-CEREMONY-E2E** | Full arc: SoloKey entropy + bearDog keygen → Loam Certificate mint (loamSpine). | Next — requires SOLOKEY-PHYSICAL. |
-| **PIXEL-ADB-CEREMONY** | Pixel StrongBox entropy via ADB port forward. Dual-HSM test with SoloKey. | After Android keystore transport wired. |
-
-### Phase 2 (primal.eco inner membrane — sporeGate/golgi team)
-
-| Task | What |
-|------|------|
-| **PRIMAL-ECO-SEPARATION** | `primal.eco` gets own Caddy routing, ceremony endpoints, private sporePrint. |
-| **BEARDOG-GATEHOUSE-CUTOVER** | bearDog ACME replaces Caddy TLS on `primal.eco` inner membrane. |
-| **PRIVATE-FOOTPRINT** | footPrint on `primal.eco` with Loam Certificate provenance for private data. |
-
-### Phase 3 (universal substrate — cellMembrane + depot)
-
-| Task | What |
-|------|------|
-| **ANDROID-NDK** | `aarch64-linux-android` depot target. Native NUCLEUS on Pixel. |
-| **RISC-V / WASM / macOS** | Expand depot target matrix. Next glacial goal. |
-
----
-
-## Team Model (Wave 138+)
-
-**eastGate = primalSpring + hardware** — singular coevolution. primalSpring on eastGate owns local hardware integration (SoloKey, Pixel ADB, USB devices). Physical proximity to operator enables ceremony testing. primalSpring scenarios validate each hardware interaction before it evolves outward.
-
-**sporeGate/golgi** — K-Derm extrication. `primal.eco` separation, bearDog gatehouse cutover, Forgejo permanent fix.
-
-**flockGate** — Validation + upstream primal evolution (bearDog FIDO2, songBird).
+Each protoKarya project registers its data needs as drawbridge weak bonds. The data lands in NestGate CAS with full provenance (Loam Certificates). Other projects and springs consume it via `capability.call`. footPrint's GIS layers, tideGlass's compound libraries, and JupyterHub's datasets all live in the same CAS — different projects, same sovereign data mesh.
 
 ---
 
@@ -78,13 +88,33 @@
 
 ```
 eastGate     — PRIMARY. primalSpring + hardware coevolution. SoloKey ready.
-sporeGate    — NUCLEUS + K-Derm extrication. Forgejo PERMS to fix.
-golgiBody    — Outer membrane. Wildcard DNS. Caddy routing.
-flockGate    — bearDog FIDO2 shipped. 147 scenarios. songBird deep debt.
-ironGate     — Compute. 13/13. SoloKey plugged (secondary).
+sporeGate    — NUCLEUS. K-Derm extrication. Depot authority.
+golgiBody    — Outer membrane. Wildcard DNS. Caddy routing for *.primals.eco.
+flockGate    — bearDog FIDO2 + primalSpring scenarios. 147 scenarios.
+ironGate     — ABG/NF compute. JupyterHub v5.4.5. GPU. 13/13.
 grapheneGate — StrongBox target. Android compile unblocked.
 ```
 
 ---
 
-*Wave 138a: SOLOKEY-CEREMONY wired, PIXEL-STRONGBOX unblocked, HW-INVENTORY reconciled. 4 carried items. Physical SoloKey test next. primalSpring + eastGate hardware = singular coevolution. 7,750+ tests / 0 fail.*
+## Evolution Path
+
+```
+NOW:    footPrint live at primals.eco/footprint/. JupyterHub at lab.primals.eco.
+        ironGate = single-node compute for ABG + NF.
+        tideGlass Phase 0 (GPS archaeology).
+
+NEXT:   tideGlass at tideglass.primals.eco.
+        NF Data Portal ingestion → NestGate CAS.
+        sporePrint: NF case study, collaborator profiles.
+        primal.eco separation (private compositions, ceremonies).
+
+FUTURE: strandGate (EPYC + 256GB) as HPC backend.
+        ABG/Gonzales gates federated via primal.eco mesh.
+        nestgate.io as federated data gateway (NCBI, PubMed, USGS, CTF).
+        Universal substrate: NUCLEUS on any architecture.
+```
+
+---
+
+*Wave 138a: live compositions register with drawbridge. protoKarya projects get *.primals.eco subdomains. footPrint GIS feeds serve NF + ABG. Collaborator activation: ABG producing, Gonzales GPS assigned, Jones active, Chuna delivery-ready. 7,750+ tests / 0 fail.*
