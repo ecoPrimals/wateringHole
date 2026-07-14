@@ -553,6 +553,7 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/membrane temporal.cascade --source forgejo
+ExecStartPost=/bin/chown -R git:git /opt/forgejo/data/repositories
 Environment=GATE_NAME=golgiBody
 Environment=FORGEJO_REPO_ROOT=/opt/forgejo/data/repositories
 User=root
@@ -807,8 +808,43 @@ RandomizedDelaySec=3600
 WantedBy=timers.target
 EOSVC
 
+echo "=== 10b. FORGEJO PERMISSION ENFORCEMENT (FORGEJO-PERMS-RECUR fix) ==="
+
+# tmpfiles.d ensures ownership is correct on every boot.
+cat > /etc/tmpfiles.d/forgejo-perms.conf << 'EOTMP'
+# Enforce git:git ownership on Forgejo repository directories.
+# Prevents permission drift from cascade-sense, reshallow, or any
+# root-owned operation touching /opt/forgejo/data/repositories/.
+Z /opt/forgejo/data/repositories - git git - -
+EOTMP
+
+# Apply immediately (don't wait for reboot)
+systemd-tmpfiles --create /etc/tmpfiles.d/forgejo-perms.conf
+
+# Periodic enforcement timer — runs every 6 hours as a safety net
+cat > /etc/systemd/system/forgejo-perms.service << 'EOSVC'
+[Unit]
+Description=Enforce git:git ownership on Forgejo repositories
+
+[Service]
+Type=oneshot
+ExecStart=/bin/chown -R git:git /opt/forgejo/data/repositories
+EOSVC
+
+cat > /etc/systemd/system/forgejo-perms.timer << 'EOSVC'
+[Unit]
+Description=Periodic Forgejo ownership enforcement (every 6h)
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=6h
+
+[Install]
+WantedBy=timers.target
+EOSVC
+
 echo "=== 11. ENABLE SERVICES ==="
-systemctl enable forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane fail2ban forgejo-reshallow.timer skunky-ingest
+systemctl enable forgejo caddy-tls beardog-membrane songbird-membrane songbird-relay cascade-sense.timer hbbs-membrane hbbr-membrane fail2ban forgejo-reshallow.timer forgejo-perms.timer skunky-ingest
 # beardog-sporeprint is NOT enabled — standby until bearDog gains Host routing
 
 echo ""
