@@ -350,6 +350,111 @@ live.primals.eco {
     }
 }
 
+# ── Subdomain composition aliases ──
+# Each subdomain serves the same Zola public/ directory but rewrites
+# the root to a specific section. Single build, single source of truth.
+# DNS: *.primals.eco wildcard A record — no Cloudflare changes needed.
+
+docs.primals.eco {
+    import security_headers
+    import csp_static
+    import access_log
+    encode gzip
+
+    handle / {
+        redir https://primals.eco/architecture/ permanent
+    }
+    handle /llms.txt {
+        root * /opt/ecoPrimals/sporePrint/public
+        rewrite * /llms-docs.txt
+        file_server
+    }
+    handle {
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
+    }
+    handle_errors {
+        rewrite * /404.html
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
+    }
+}
+
+science.primals.eco {
+    import security_headers
+    import csp_static
+    import access_log
+    encode gzip
+
+    handle / {
+        redir https://primals.eco/science/ permanent
+    }
+    handle /llms.txt {
+        root * /opt/ecoPrimals/sporePrint/public
+        rewrite * /llms-science.txt
+        file_server
+    }
+    handle {
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
+    }
+    handle_errors {
+        rewrite * /404.html
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
+    }
+}
+
+atlas.primals.eco {
+    import security_headers
+    import csp_static
+    import access_log
+    encode gzip
+
+    handle / {
+        redir https://primals.eco/architecture/atlas-memory-palace/ permanent
+    }
+    handle /llms.txt {
+        root * /opt/ecoPrimals/sporePrint/public
+        rewrite * /llms-atlas.txt
+        file_server
+    }
+    handle {
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
+    }
+    handle_errors {
+        rewrite * /404.html
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
+    }
+}
+
+products.primals.eco {
+    import security_headers
+    import csp_static
+    import access_log
+    encode gzip
+
+    handle / {
+        redir https://primals.eco/products/ permanent
+    }
+    handle /llms.txt {
+        root * /opt/ecoPrimals/sporePrint/public
+        rewrite * /llms-products.txt
+        file_server
+    }
+    handle {
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
+    }
+    handle_errors {
+        rewrite * /404.html
+        root * /opt/ecoPrimals/sporePrint/public
+        file_server
+    }
+}
+
 # Wildcard catch-all — sovereign routing authority.
 # Caddy handles all *.primals.eco routing via explicit blocks above.
 # DNS: single *.primals.eco wildcard A record in Cloudflare (DNS only).
