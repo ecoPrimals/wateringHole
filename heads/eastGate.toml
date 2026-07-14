@@ -6,12 +6,12 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-14T14:20:00Z"
+updated = "2026-07-14T16:00:00Z"
 
 [heads]
 nestGate = "510d66ffc8e1b6d2ad5aff7f78cd3c17f631b83e"
 petalTongue = "e80841ef2695dad18d6e90689ccd5f811267bbcc"
-bearDog = "55b73cc09369ae644b1b7b7b5ff2b883daf8d7d7"
+bearDog = "02fedd457a47e476636fd2945b725a9925070fca"
 songBird = "624b092591e913da3363fbb380b927cda2ff4c88"
 skunkBat = "f9154a8116af91e68cedb16293cad4b6dc00f3e6"
 barraCuda = "3b8ea530296319cbc1d7395831ffcf8d8e0ab4ac"
@@ -27,7 +27,7 @@ primalSpring = "2899b492ccc2d3993aefe5c1c276abe828364fd8"
 sporePrint = "d3e84576ac0caa0b2656ba8c58b20c4379ba7486"
 biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
 groundSpring = "bb5489951131bfd97b67690448e966bb04b1575a"
-projectNUCLEUS = "d35df651112156f9977267878a5c49c1cc0d7217"
-wateringHole = "2981d50a16a0597c68c47c748879e2052e763d73"
-plasmidBin = "e0b20e0a96c5ae947ddb53230a581581ffb4b44c"
+projectNUCLEUS = "8dd2775665f6366d1cfd5ac636b0570ddc49efaf"
+wateringHole = "f43150d4084fc503a944c1e0a213b0341b0310c3"
+plasmidBin = "f29195db9b8e47b1555e7299731acef95bfeb652"
 whitePaper = "9e2192199d81fa4613d02dc3bd83be207457ddae"
