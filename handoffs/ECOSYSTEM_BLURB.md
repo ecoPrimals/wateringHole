@@ -1,58 +1,42 @@
-# ecoPrimals Ecosystem Blurb — Wave 138b
+# ecoPrimals Ecosystem Blurb — Wave 138c
 
-**Date**: Jul 14, 2026 12:00 EDT | **Wave**: 138b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** First FIDO2 credential minted. Tap-sequence entropy ceremony built. SoloKeys are human proximity sensors and genetic generators at this layer. 2 items remain.
+**Date**: Jul 14, 2026 14:00 EDT | **Wave**: 138c | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN.** First FIDO2 credential minted. FIDO2 IPC handler
+refactored to 8 modules. Cascade pipeline convergence: overwatch now uses
+`membrane temporal.cascade` — no ad-hoc git ops. 2 items remain.
 
 ---
 
-## This Cascade — SoloKey Ceremony Breakthrough
+## This Cascade
 
-### First Credential Minted (bearDog)
+### bearDog: FIDO2 IPC Handler Split (NEW)
 
-```
-rp_id:     primals.eco
-algorithm: ES256 (P-256 / ECDSA)
-storage:   SoloKey Solo 2 secure element — private key never leaves chip
-```
+Monolithic `fido2.rs` (897 LOC) refactored into 8 focused modules:
+`discover`, `register`, `authenticate`, `ceremony`, `entropy`, `helpers`, `mod`, `tests`.
+ClientPIN CBOR boilerplate DRY'd. PIN error misclassification fixed
+(0x2C != PinNotSet). CTAPHID magic numbers replaced with named constants.
+13,883 tests pass, 0 clippy warnings.
 
-Four bugs fixed to get here: HIDRAW-REPORT-ID (0x00 prefix), CTAPHID_MSG vs CBOR
-(0x83 → 0x90), InvalidOption (`up:true` invalid for MakeCredential), EAGAIN busy-poll
-(300 attempts / 60s window).
+### Cascade Pipeline Convergence
 
-### Tap-Sequence Entropy Ceremony (bearDog — NEW)
+Overwatch now uses `membrane temporal.cascade --gate eastGate --with-rebuild`
+as the single entry point. No more ad-hoc `git fetch/pull/push` loops.
+The pipeline handles: sync all repos → auto-publish freshness/heads →
+detect divergence → harvest → sandbox → refresh → auto-fetch → content rebuild
+→ rootPulse sovereignty. This cascade: 36/38 synced at parity.
 
-`beardog.fido2.ceremony` — multi-tap entropy harvest via IPC:
+### sporePrint Content Auto-Merge
 
-```
-Layer 1: Transport timing — nanosecond capture of EAGAIN/keepalive/response
-Layer 2: Ceremony orchestrator — N GetAssertion calls with fresh OS-RNG challenges
-Layer 3: IPC + BLAKE3 mixing — per-tap (challenge + signature + reaction_ns + jitter)
-```
+sporePrint-bot auto-merged biomeOS lab page updates (v3.23.0). Branch-agnostic
+fetch, WCAG figure/table compliance, constant sweep.
 
-Returns 32 bytes of Tier 3 entropy: BLAKE3 keyed hash mixing OS RNG (Tier 1),
-hardware signature nonce (Tier 2), and human tap timing (Tier 3).
+### Prior (138b): SoloKey Ceremony Breakthrough
 
-### SoloKey as Human Proximity Sensor
-
-At this layer, SoloKeys are **human proximity sensors and genetic generators** —
-the tap proves a human is physically present, and the timing jitter generates
-entropy unique to that human-device interaction. This tests the full system
-interaction chain before later evolution locks keys to specific identities.
-The user is their own key in later stages.
-
-**Biological model**: Genetic diversity from multiple independent randomness sources:
-- Tier 1 (OS): Environmental noise (thermal, interrupt timing)
-- Tier 2 (Hardware): Internal mutation (hardware RNG in secure element)
-- Tier 3 (Human): Selection pressure (human temporal signature)
-
-No single compromised source can predict the seed.
-
-### SoloKey Firmware Issue Discovered (ERR_CHANNEL_BUSY)
-
-After CTAP2 timeout (no touch within 30s), SoloKey enters permanent
-`ERR_CHANNEL_BUSY (0x06)` — requires physical unplug/replug. USB reset
-does not clear. Confirmed with `python-fido2` reference library.
-Mitigation: `CTAPHID_CANCEL (0x91)` sent during init.
+First FIDO2 credential minted (primals.eco, ES256). Tap-sequence entropy
+ceremony built (3-layer: transport timing, orchestrator, BLAKE3 mixing).
+SoloKeys are **human proximity sensors and genetic generators** at this layer.
+4 bugs fixed. Tier 3 human entropy model. ERR_CHANNEL_BUSY firmware issue
+discovered (requires physical replug after timeout).
 
 ---
 
@@ -64,9 +48,9 @@ Mitigation: `CTAPHID_CANCEL (0x91)` sent during init.
 | Goal | Status | Next |
 |------|--------|------|
 | **First credential** | MINTED (primals.eco, ES256) | Authenticate → GetAssertion signature |
-| **Tap-sequence ceremony** | BUILT (3-layer: transport timing, orchestrator, BLAKE3 mixing) | Live 3-5 tap test after replug |
-| **HIDRAW-REPORT-ID** | RESOLVED (0x00 prefix) | — |
-| **Loam Certificate seeding** | Design: Tier 1+2+3 → BLAKE3 keyed hash → Loam cert seed | After ceremony validated |
+| **FIDO2 IPC refactor** | DONE (8 modules, 13,883 tests, 0 clippy) | — |
+| **Tap-sequence ceremony** | BUILT (3-layer entropy) | Live 3-5 tap test after replug |
+| **Loam Certificate seeding** | Design: Tier 1+2+3 → BLAKE3 → Loam cert seed | After ceremony validated |
 | **ERR_CHANNEL_BUSY** | Discovered + CTAPHID_CANCEL mitigation | Ceremony UX must account for replug |
 
 ### biomeOS team (orchestration)
@@ -92,6 +76,8 @@ Mitigation: `CTAPHID_CANCEL (0x91)` sent during init.
 - ~~HIDRAW-REPORT-ID~~ — 0x00 report ID prefix in HID writes
 - ~~FORGEJO-PERMS-RECUR~~ — 3-layer permanent fix deployed to golgi
 - ~~BIOMEOS-TEMPLATE~~ — `service.template` subcommand implemented
+- ~~FIDO2-MONOLITH~~ — 897 LOC split into 8 focused modules
+- ~~AD-HOC-CASCADE~~ — overwatch now uses `membrane temporal.cascade`
 
 ---
 
@@ -105,6 +91,7 @@ DONE    CTAPHID_INIT handshake (firmware 2.3.196, CBOR+WINK)
 DONE    HIDRAW-REPORT-ID fix (0x00 prefix)
 DONE    First credential minted (primals.eco, ES256)
 DONE    Tap-sequence ceremony built (3-layer entropy)
+DONE    FIDO2 IPC refactor → 8 modules (13,883 tests, 0 clippy)
 NOW     Authenticate: GetAssertion → verify credential works
 NOW     Live tap-sequence test (3-5 taps after replug)
 NEXT    Entropy harvest: Tier 1+2+3 → BLAKE3 → Loam cert seed
@@ -154,9 +141,9 @@ Mock (CI) + Live (gate with SoloKey) dual-mode via `/dev/hidraw` detection.
 ## Gate Status
 
 ```
-eastGate     — PRIMARY. Cascade absorbed. bearDog ceremony code merged.
+eastGate     — PRIMARY. Cascade via membrane pipeline. bearDog refactor absorbed.
 sporeGate    — NUCLEUS. SoloKey plugged. First credential minted. Depot authority.
-golgiBody    — Outer membrane. Wildcard DNS. FORGEJO-PERMS 3-layer defense.
+golgiBody    — Outer membrane. Wildcard DNS. Auto-publishing heads.
 flockGate    — bearDog FIDO2 + primalSpring scenarios.
 ironGate     — ABG/NF compute. JupyterHub. 13/13 active.
 grapheneGate — StrongBox target. Android compile unblocked.
@@ -164,4 +151,4 @@ grapheneGate — StrongBox target. Android compile unblocked.
 
 ---
 
-*Wave 138b: first FIDO2 credential minted on primals.eco. Tap-sequence entropy ceremony built — SoloKeys as human proximity sensors and genetic generators. 4 bugs fixed. Tier 3 human entropy model designed. ERR_CHANNEL_BUSY firmware issue discovered. 2 items remain.*
+*Wave 138c: FIDO2 IPC handler refactored to 8 modules (13,883 tests). Cascade pipeline converged — overwatch uses `membrane temporal.cascade`. SoloKeys as human proximity sensors and genetic generators. 2 items remain.*
