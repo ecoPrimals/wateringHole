@@ -1,127 +1,162 @@
 # ecoPrimals Ecosystem Blurb — Wave 138b
 
 **Date**: Jul 14, 2026 09:30 EDT | **Wave**: 138b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** SoloKey physically tested — CTAPHID handshake proven, P0 HID bug identified. FORGEJO-PERMS-RECUR permanently fixed (3-layer defense). primalSpring health restored (125 scenarios, 1,107 tests). wateringHole distilled (83 active docs, 945 fossilized). 3 carried items.
+**Posture**: **PUBLIC + SOVEREIGN.** 3 items remain. SoloKey physically tested (P0 HID fix identified). FORGEJO-PERMS permanently fixed. wateringHole distilled to 83 active docs.
 
 ---
 
-## This Cascade — Wave 138b Incoming
+## Teams, Code, and Goals
 
-### SoloKey Physical Test (sporeGate — AAR shipped)
+### bearDog team (crypto / hardware trust)
+**Code**: `primals/bearDog` — `beardog-hid`, `beardog-tunnel`, `beardog-security`
+**Gate**: sporeGate (physical SoloKey) + flockGate (scenarios)
 
-First hardware trust ceremony in the ecosystem. SoloKey Solo 2 plugged
-into sporeGate NUC. Results:
+| Goal | Status | Next |
+|------|--------|------|
+| **SoloKey FIDO2 ceremony** | CTAPHID handshake proven, MakeCredential blocked by `HIDRAW-REPORT-ID` (P0) | Fix report ID prefix → complete register → authenticate → entropy harvest |
+| **Loam Certificate from hardware** | Code path wired (`beardog.fido2.entropy` IPC) | Blocked on SoloKey ceremony completion |
+| **Pixel StrongBox entropy** | Android compile fixed, Titan M2 StrongBox API scaffolded | Physical test after SoloKey ceremony |
+| **HID transport hardening** | EAGAIN retry + CTAPHID_CBOR command byte fixed | `HID-BLOCKING-IO` (P1): blocking I/O + spawn_blocking |
 
-| Step | Result |
-|------|--------|
-| Device discovery (`beardog.fido2.discover`) | **PASS** — Solo 2 at `/dev/hidraw4` |
-| CTAPHID_INIT handshake | **PASS** — Channel 0x06, firmware 2.3.196, CBOR+WINK caps |
-| MakeCredential write | **PASS** — 4 packets, 208 bytes CBOR delivered |
-| MakeCredential response | **BLOCKED** — EAGAIN ×150, LED did not blink |
-| Build system (`cargo build --features fido2`) | **PASS** — 30 FIDO2 tests green |
+### cellMembrane team (deployment / operations)
+**Code**: `gardens/cellMembrane` — `membrane-shadow`, `membrane-nucleus`
+**Gate**: sporeGate + golgi (provisioning)
 
-**Root cause**: `HIDRAW-REPORT-ID` — Linux hidraw requires 0x00 report ID
-prefix on writes for FIDO2 devices. bearDog sends 64 raw bytes, kernel
-expects 65 (0x00 + 64 payload). MakeCredential never reaches authenticator logic.
+| Goal | Status | Next |
+|------|--------|------|
+| **100% Rust deployment** | Complete (bash fossilized Wave 137b) | Maintain |
+| **service.template subcommand** | Implemented this wave (resolves BIOMEOS-TEMPLATE) | — |
+| **FORGEJO-PERMS permanent fix** | 3-layer defense deployed to golgi | Monitor (6hr timer enforces) |
+| **Composition provisioning** | `provision-golgi.sh` with wildcard DNS + security headers | Add new Caddy blocks as compositions deploy |
 
-**P0 Fix**: Prepend 0x00 in `LinuxHidDevice::write()`. One-line fix, gated
-on `has_report_id` flag from HID report descriptor.
+### biomeOS team (orchestration / Neural API)
+**Code**: `primals/biomeOS` — Neural API, LifecycleManager, coordination patterns
+**Gate**: sporeGate (systemd) + eastGate (primalSpring validation)
 
-### bearDog FIDO2 Fixes (2 commits absorbed)
+| Goal | Status | Next |
+|------|--------|------|
+| **Neural API deployment authority** | 12/12 complete, 48 primals on sporeGate | Maintain |
+| **LifecycleManager registration** | `lifecycle.status` count=0 (NAPI-LIFECYCLE, P2) | Wire registration for primal lifecycle supervision |
+| **Socket dir unification** | Mixed `/run/membrane/` and `/run/biomeos/` (SOCKET-DIR-UNIFY, P2) | Consolidate to single dir, unblock songBird TLS delegation |
 
-- `CTAPHID_CBOR` command byte (0x90) for CTAP2 operations — was using MSG (0x83)
-- EAGAIN retry with `POLL_INTERVAL_MS` constant (200ms) for user-presence touch
-- Example compile fixes for test harness
+### songBird team (networking / mesh / drawbridge)
+**Code**: `primals/songBird` — mesh federation, drawbridge routing, TLS
+**Gate**: all gates (mesh peer)
 
-### cellMembrane Debt Sprint (2 commits absorbed)
+| Goal | Status | Next |
+|------|--------|------|
+| **3-gate WireGuard mesh** | eastGate ↔ sporeGate ↔ golgi operational | Expand to ironGate, strandGate |
+| **Drawbridge capability routing** | DRAWBRIDGE-CAP resolved (runtime cap merge + fallback + resolve) | Route new compositions as they deploy |
+| **Composition proxy** | footPrint (10 GIS hosts), JupyterHub, Forgejo proxied | tideGlass, helixVision when ready |
 
-- `service.template` subcommand implemented (resolves BIOMEOS-TEMPLATE)
-- `freshness.toml` constants migrated
-- Visibility tightening round 2
+### primalSpring team (validation / scenarios)
+**Code**: `springs/primalSpring` — ecoPrimal validation suite
+**Gate**: eastGate (primary) + flockGate (scenarios)
 
-### primalSpring Health Restore (sporeGate — AAR shipped)
+| Goal | Status | Next |
+|------|--------|------|
+| **Scenario coverage** | 125 active + 22 commented (source files landed, compilation pending) | Enable scenarios as compilation fixes land |
+| **Test health** | 1,107 passed / 0 failed / 2 ignored | Maintain zero-fail |
+| **Hardware trust validation** | `s_fido2_entropy_ceremony`, `s_hardware_trust_pipeline`, `s_keygen_interaction_surface` registered | Wire to live SoloKey after HIDRAW fix |
 
-- 20 phantom scenario registrations commented out (source files pending)
-- Drift tolerance fixed for multi-gate freshness
-- Stale socket guard for offline primals
-- Suite: **1,107 passed / 0 failed / 2 ignored**
+### sporePrint team (public site / content)
+**Code**: `infra/sporePrint` — Zola static site at `primals.eco`
+**Gate**: golgi (Caddy serving)
 
-### FORGEJO-PERMS-RECUR Permanent Fix (sporeGate — AAR shipped)
+| Goal | Status | Next |
+|------|--------|------|
+| **Public site live** | `primals.eco` + `primals.eco/footprint/` live | NF case study, tideGlass product page, collaborator profiles |
+| **Content pipeline** | `membrane content.rebuild` implemented | sporePrint content for pre-grant pipeline methodology |
 
-Three-layer defense deployed to golgi:
-1. `ExecStartPost` in `cascade-sense.service` — `chown -R git:git` after every cascade
-2. `/etc/tmpfiles.d/forgejo-perms.conf` — enforce on every boot
-3. `forgejo-perms.timer` — 6-hour safety net periodic enforcement
+### overwatch (eastGate — coordination / wateringHole)
+**Code**: `infra/wateringHole`, `infra/whitePaper`
+**Gate**: eastGate
 
-### wateringHole Distillation (eastGate)
-
-- 980+ documents fossilized to `fossilRecord/wave138a_cleanup/`
-- Active docs: **83** (down from 1,027)
-- Root standards: **46** (down from 64)
-- README index restructured into 10 clean categories
-
----
-
-## Remaining — 3 items (was 4)
-
-| ID | Owner | Priority | What |
-|----|-------|----------|------|
-| **HIDRAW-REPORT-ID** | bearDog | P0 | Prepend 0x00 report ID in HID writes — unblocks SoloKey ceremony |
-| **NAPI-LIFECYCLE** | biomeOS | P2 | LifecycleManager registration |
-| **SOCKET-DIR-UNIFY** | biomeOS | P2 | Socket dir consolidation |
-
-**Resolved this wave**:
-- ~~FORGEJO-PERMS-RECUR~~ — 3-layer permanent fix deployed to golgi
-- ~~BIOMEOS-TEMPLATE~~ — `service.template` subcommand implemented in cellMembrane
-
----
-
-## SoloKey Ceremony Path (from AAR)
-
-```
-DONE:   discover → CTAPHID_INIT → channel allocation → MakeCredential write
-NEXT:   HIDRAW-REPORT-ID fix → MakeCredential response → user presence touch
-THEN:   authenticate → entropy harvest → Loam Certificate mint
-FUTURE: USB topology as deployment primitive (SoloKey + NPU + compute = NUCLEUS kit)
-```
-
-Additional bearDog items from physical test:
-- `HID-BLOCKING-IO` (P1): Replace O_NONBLOCK with blocking I/O + spawn_blocking
-- `CTAPHID-PING-DIAG` (P2): Add CTAPHID_PING for transport-level diagnostics
-- `CTAP2-GETINFO-FIRST` (P2): Issue GetInfo before MakeCredential
+| Goal | Status | Next |
+|------|--------|------|
+| **wateringHole ownership** | Distilled: 83 active docs, 945 fossilized, 10-category index | Maintain, fossilize as waves close |
+| **Composition routing standard** | Shipped (whitePaper gen5 + wateringHole) | Evolve as compositions deploy |
+| **Collaborator activation** | ABG (producing), Gonzales (engaged), Jones (active), Chuna (delivery-ready) | ABG accounts (REALWORLD), tideGlass Phase 0, sporePrint content |
 
 ---
 
-## Gate Status
+## Three Tracks → Glacial Goals
+
+### Track 1: Hardware Trust → NUCLEUS USB Kit
+**Teams**: bearDog, primalSpring, eastGate overwatch
+**Code**: `beardog-hid`, `beardog-tunnel`, primalSpring scenarios
+**Path**:
 
 ```
-eastGate     — PRIMARY. Cascade absorbed. primalSpring 125 scenarios / 1,107 tests.
-sporeGate    — NUCLEUS. SoloKey physically tested. Depot authority. FORGEJO-PERMS fixed.
-golgiBody    — Outer membrane. Wildcard DNS. FORGEJO-PERMS 3-layer defense live.
-flockGate    — bearDog FIDO2 + primalSpring scenarios.
-ironGate     — ABG/NF compute. JupyterHub v5.4.5. 13/13 active.
-grapheneGate — StrongBox target. Android compile unblocked.
+DONE    beardog.fido2.entropy IPC wired
+DONE    SoloKey CTAPHID handshake proven (firmware 2.3.196)
+NOW     HIDRAW-REPORT-ID fix (P0, one-line)
+NEXT    MakeCredential → authenticate → entropy harvest
+THEN    Loam Certificate from hardware credential
+THEN    Pixel StrongBox ceremony (ADB, Titan M2)
+GOAL    USB topology as deployment primitive
+        SoloKey + NPU + compute = NUCLEUS kit
+        Any node gets hardware-attested identity from ceremony
+```
+
+### Track 2: K-Derm Extrication → Sovereign Membrane Parity
+**Teams**: cellMembrane, songBird, sporePrint
+**Code**: `cellMembrane`, `songBird`, `provision-golgi.sh`
+**Path**:
+
+```
+DONE    *.primals.eco wildcard DNS
+DONE    FORGEJO-PERMS 3-layer defense
+DONE    100% Rust deployment pipeline
+DONE    BIOMEOS-TEMPLATE resolved
+NOW     primal.eco separation (inner membrane for private compositions)
+NEXT    bearDog gatehouse cutover (sovereign TLS authority)
+GOAL    Outer membrane (primals.eco) fully sovereign
+        Inner membrane (primal.eco) for key ceremonies + private data
+        No external dependency for core operations
+```
+
+### Track 3: Live Compositions → External Science Production
+**Teams**: sporePrint, songBird, overwatch, collaborators
+**Code**: `protists/footPrint`, `protists/tideGlass`, JupyterHub, sporePrint
+**Path**:
+
+```
+DONE    footPrint GIS at primals.eco/footprint/
+DONE    JupyterHub at lab.primals.eco
+DONE    Composition routing standard + pattern shipped
+DONE    ABG access guide shipped
+NOW     ABG user accounts (REALWORLD)
+NOW     tideGlass Phase 0 (Zenodo GPS archaeology)
+NEXT    NF Data Portal ingestion → NestGate CAS
+NEXT    sporePrint: NF case study, collaborator profiles
+GOAL    External science ships through sovereign compositions
+        Collaborators consume compositions, never see primals
+        Data feeds register with drawbridge, cross-feed via mesh
+```
+
+### Glacial Goal: Universal Substrate Evolution
+**All teams**
+
+```
+DONE    x86_64 musl-static ecobins (35 binaries)
+DONE    aarch64 cross-compile (pepti warehouse)
+DONE    Android compile unblocked (grapheneGate)
+NEXT    RISC-V, Windows, WASM, macOS Silicon
+GOAL    NUCLEUS deploys on any architecture
+        Any substrate, any gate, same sovereign infrastructure
 ```
 
 ---
 
-## Evolution Path
+## Remaining — 3 items
 
-```
-NOW:    HIDRAW-REPORT-ID fix → SoloKey MakeCredential completes
-        bearDog FIDO2 ceremony: register → authenticate → entropy → Loam cert
-        Composition routing standard + pattern docs shipped
-
-NEXT:   Hardware entropy ceremonies (SoloKey + Pixel StrongBox)
-        primal.eco separation (private compositions, key ceremonies)
-        tideGlass Phase 0 (Zenodo GPS archaeology)
-        sporePrint: NF case study, collaborator profiles
-
-FUTURE: NUCLEUS USB kit (SoloKey + NPU + compute)
-        Universal substrate: NUCLEUS on any architecture
-        nestgate.io federated data gateway
-```
+| ID | Owner | P | What |
+|----|-------|---|------|
+| **HIDRAW-REPORT-ID** | bearDog | 0 | 0x00 report ID prefix in HID writes — unblocks SoloKey |
+| **NAPI-LIFECYCLE** | biomeOS | 2 | LifecycleManager registration |
+| **SOCKET-DIR-UNIFY** | biomeOS | 2 | Socket dir → `/run/membrane/` only |
 
 ---
 
-*Wave 138b: SoloKey physically tested — first hardware trust ceremony. Protocol handshake proven, P0 HID bug identified (one-line fix). FORGEJO-PERMS permanently fixed. primalSpring health restored. wateringHole distilled to 83 active docs. 3 items remain.*
+*Wave 138b: 7 teams, 3 tracks, 1 glacial goal. SoloKey one byte from ceremony. FORGEJO-PERMS permanently fixed. wateringHole distilled. 3 items remain.*
