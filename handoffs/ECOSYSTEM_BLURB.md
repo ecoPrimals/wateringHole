@@ -1,92 +1,76 @@
-# ecoPrimals Ecosystem Blurb — Wave 138c
+# ecoPrimals Ecosystem Blurb — Wave 139a
 
-**Date**: Jul 14, 2026 14:05 EDT | **Wave**: 138c | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** All tracked items resolved. biomeOS delivered
-NAPI-LIFECYCLE + SOCKET-DIR-UNIFY. 38/38 repos at parity. Zero remaining items.
-
----
-
-## This Cascade
-
-### bearDog: FIDO2 IPC Handler Split (NEW)
-
-Monolithic `fido2.rs` (897 LOC) refactored into 8 focused modules:
-`discover`, `register`, `authenticate`, `ceremony`, `entropy`, `helpers`, `mod`, `tests`.
-ClientPIN CBOR boilerplate DRY'd. PIN error misclassification fixed
-(0x2C != PinNotSet). CTAPHID magic numbers replaced with named constants.
-13,883 tests pass, 0 clippy warnings.
-
-### Cascade Pipeline Convergence
-
-Overwatch now uses `membrane temporal.cascade --gate eastGate --with-rebuild`
-as the single entry point. No more ad-hoc `git fetch/pull/push` loops.
-
-### Cyclic Graph → DAG Fix (cellMembrane — NEW)
-
-Root cause of perpetual wateringHole divergence: `freshness.toml` recorded
-**commit SHAs** (graph-dependent) and included **self-reference** (wateringHole's
-own SHA). Commit SHAs encode parentage/timestamps, so identical file trees at
-different commit points produce different SHAs, creating an infinite fixpoint loop.
-
-Fix: record `HEAD^{tree}` (content-addressed) instead of `HEAD` (graph-addressed),
-and exclude wateringHole from its own freshness record. Identical file states now
-produce identical hashes regardless of commit history. This cascade: **38/38 parity.**
-
-### sporePrint Content Auto-Merge
-
-sporePrint-bot auto-merged biomeOS lab page updates (v3.23.0). Branch-agnostic
-fetch, WCAG figure/table compliance, constant sweep.
-
-### Prior (138b): SoloKey Ceremony Breakthrough
-
-First FIDO2 credential minted (primals.eco, ES256). Tap-sequence entropy
-ceremony built (3-layer: transport timing, orchestrator, BLAKE3 mixing).
-SoloKeys are **human proximity sensors and genetic generators** at this layer.
-4 bugs fixed. Tier 3 human entropy model. ERR_CHANNEL_BUSY firmware issue
-discovered (requires physical replug after timeout).
+**Date**: Jul 14, 2026 14:30 EDT | **Wave**: 139a | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN.** All Wave 138 items resolved. Zero remaining debt.
+Cascade pipeline converged (cyclic graph → DAG). Opening new wave scope.
 
 ---
 
-## Teams, Code, and Goals
+## Wave 138 Summary (fossilized)
 
-### bearDog team (crypto / hardware trust)
-**Code**: `primals/bearDog` — `beardog-hid`, `beardog-tunnel`, `beardog-security`
+All items resolved: HIDRAW-REPORT-ID, FORGEJO-PERMS-RECUR, BIOMEOS-TEMPLATE,
+FIDO2-MONOLITH (8 modules, 13,883 tests), AD-HOC-CASCADE (membrane pipeline),
+FRESHNESS-CYCLE (tree hashes → DAG), NAPI-LIFECYCLE, SOCKET-DIR-UNIFY, SOCKET-UMASK.
 
-| Goal | Status | Next |
-|------|--------|------|
-| **First credential** | MINTED (primals.eco, ES256) | Authenticate → GetAssertion signature |
-| **FIDO2 IPC refactor** | DONE (8 modules, 13,883 tests, 0 clippy) | — |
-| **Tap-sequence ceremony** | BUILT (3-layer entropy) | Live 3-5 tap test after replug |
-| **Loam Certificate seeding** | Design: Tier 1+2+3 → BLAKE3 → Loam cert seed | After ceremony validated |
-| **ERR_CHANNEL_BUSY** | Discovered + CTAPHID_CANCEL mitigation | Ceremony UX must account for replug |
-
-### biomeOS team (orchestration)
-**Code**: `primals/biomeOS`
-
-| Goal | Status | Next |
-|------|--------|------|
-| **NAPI-LIFECYCLE** | RESOLVED — `primal.announce` registers with LifecycleManager, `topology.rescan` auto-discovers | — |
-| **SOCKET-DIR-UNIFY** | RESOLVED — all sockets → `/run/membrane/`, legacy `biomeos` deprecated with backward-compat scan | — |
-| **SOCKET-UMASK** | RESOLVED — proper umask for IPC sockets | — |
-
-### All other teams — no changes this cascade (status unchanged from prior blurb)
+First FIDO2 credential minted on primals.eco. Tap-sequence entropy ceremony built.
+38/38 repos at parity. Cascade runs via `membrane temporal.cascade`.
 
 ---
 
-## Remaining — 0 items
+## New Wave Scope — 139a
 
-All tracked items resolved.
+### 1. northGate Mesh Enrollment
+**Owner**: overwatch (eastGate) + songBird team
+**Target**: northGate (Windows, house1 MikroTik, 9950X3D / RTX 5090)
 
-**Resolved this wave**:
-- ~~HIDRAW-REPORT-ID~~ — 0x00 report ID prefix in HID writes
-- ~~FORGEJO-PERMS-RECUR~~ — 3-layer permanent fix deployed to golgi
-- ~~BIOMEOS-TEMPLATE~~ — `service.template` subcommand implemented
-- ~~FIDO2-MONOLITH~~ — 897 LOC split into 8 focused modules
-- ~~AD-HOC-CASCADE~~ — overwatch now uses `membrane temporal.cascade`
-- ~~FRESHNESS-CYCLE~~ — tree hashes + no self-reference → cyclic graph becomes DAG
-- ~~NAPI-LIFECYCLE~~ — `primal.announce` + `topology.rescan` register with LifecycleManager
-- ~~SOCKET-DIR-UNIFY~~ — all sockets → `/run/membrane/`, legacy deprecated
-- ~~SOCKET-UMASK~~ — proper umask for IPC sockets
+northGate is the primary remote access hub for all gates. Mesh enrollment via
+songBird Windows target. This proves cross-platform mesh (Linux ↔ Windows)
+and brings the 5090 into the compute fabric.
+
+| Step | What | Status |
+|------|------|--------|
+| songBird Windows build | Cross-compile or native build | TODO |
+| Mesh peer discovery | northGate ↔ eastGate on CRS310 backbone | TODO |
+| Capability registration | GPU compute, remote access relay | TODO |
+
+### 2. AlphaFold Data Migration + Provenance
+**Owner**: overwatch + nestGate team
+**Target**: northGate → westGate (when online)
+
+~1 TB AlphaFold data currently on northGate needs:
+- Move to westGate ZFS cold storage (76 TB capacity)
+- Reverse provenance trace via loamSpine (data lineage)
+- Content-address registration in nestGate blob store
+- drawbridge capability registration for ABG/NF access
+
+| Step | What | Status |
+|------|------|--------|
+| westGate online | Power on, ZFS health check | BLOCKED (hardware) |
+| Data inventory | Catalog AlphaFold datasets on northGate | TODO |
+| Transfer plan | rsync/zfs send over 10G backbone | TODO |
+| Provenance trace | loamSpine reverse lineage from download source | TODO |
+| nestGate registration | Content-addressed blob store | TODO |
+
+### 3. SoloKey Ceremony Completion
+**Owner**: bearDog team
+**Target**: sporeGate (SoloKey plugged) + eastGate
+
+| Step | What | Status |
+|------|------|--------|
+| Authenticate | GetAssertion → verify credential | TODO (needs replug) |
+| Tap-sequence test | Live 3-5 tap entropy harvest | TODO |
+| Loam cert seeding | Tier 1+2+3 → BLAKE3 → Loam cert seed | TODO |
+| Pixel StrongBox | ADB ceremony on grapheneGate | TODO |
+
+### 4. Live Composition Advancement
+**Owner**: sporePrint team + protoKarya
+
+| Step | What | Status |
+|------|------|--------|
+| ABG user accounts | JupyterHub access for collaborators | TODO |
+| tideGlass Phase 0 | Sovereign GPS platform clone | TODO |
+| footPrint live data | GIS feeds into drawbridge data mesh | TODO |
+| primal.eco separation | Inner membrane personal substrate | TODO |
 
 ---
 
@@ -95,29 +79,21 @@ All tracked items resolved.
 ### Track 1: Hardware Trust → NUCLEUS USB Kit
 
 ```
-DONE    beardog.fido2.discover → SoloKey enumeration
-DONE    CTAPHID_INIT handshake (firmware 2.3.196, CBOR+WINK)
-DONE    HIDRAW-REPORT-ID fix (0x00 prefix)
-DONE    First credential minted (primals.eco, ES256)
-DONE    Tap-sequence ceremony built (3-layer entropy)
-DONE    FIDO2 IPC refactor → 8 modules (13,883 tests, 0 clippy)
-NOW     Authenticate: GetAssertion → verify credential works
-NOW     Live tap-sequence test (3-5 taps after replug)
-NEXT    Entropy harvest: Tier 1+2+3 → BLAKE3 → Loam cert seed
-NEXT    Pixel StrongBox ceremony (ADB, Titan M2)
-GOAL    SoloKey = human proximity sensor + genetic generator
-        User is their own key. USB kit deploys NUCLEUS identity.
+DONE    First credential minted + tap-sequence ceremony
+DONE    FIDO2 IPC refactor (8 modules)
+NOW     Authenticate + live tap test → Loam cert seeding
+NOW     northGate mesh enrollment (Windows cross-platform)
+NEXT    Pixel StrongBox ceremony
+NEXT    AlphaFold data provenance
+GOAL    User is their own key. USB kit deploys NUCLEUS identity.
 ```
 
 ### Track 2: K-Derm Extrication → Sovereign Membrane Parity
 
 ```
-DONE    *.primals.eco wildcard DNS
-DONE    FORGEJO-PERMS 3-layer defense
-DONE    100% Rust deployment pipeline
-DONE    BIOMEOS-TEMPLATE resolved
-DONE    NAPI-LIFECYCLE — LifecycleManager wired
-DONE    SOCKET-DIR-UNIFY — /run/membrane/ canonical
+DONE    Wildcard DNS, FORGEJO-PERMS, BIOMEOS-TEMPLATE
+DONE    NAPI-LIFECYCLE + SOCKET-DIR-UNIFY
+DONE    Cyclic graph → DAG (freshness tree hashes)
 NOW     primal.eco separation (inner membrane)
 GOAL    Full sovereign membrane parity
 ```
@@ -125,41 +101,29 @@ GOAL    Full sovereign membrane parity
 ### Track 3: Live Compositions → External Science Production
 
 ```
-DONE    footPrint GIS at primals.eco/footprint/
-DONE    JupyterHub at lab.primals.eco
-DONE    Composition routing standard shipped
+DONE    footPrint GIS + JupyterHub + composition routing standard
 NOW     ABG user accounts, tideGlass Phase 0
+NOW     AlphaFold data → westGate → nestGate blob store
 GOAL    External science through sovereign compositions
 ```
-
----
-
-## primalSpring Scenarios to Write (from ceremony exploration)
-
-| Scenario | Validates |
-|----------|-----------|
-| `s_fido2_register_e2e` | MakeCredential → valid credential_id + COSE key |
-| `s_fido2_authenticate_e2e` | GetAssertion signature verifies against registered key |
-| `s_fido2_entropy_mixing` | Tier 1+2+3 mixed, output passes NIST SP 800-22 basics |
-| `s_fido2_tap_timing_entropy` | Nanosecond timing capture, non-zero values |
-| `s_fido2_ceremony_chain` | register → authenticate → entropy → Loam cert seed |
-| `s_fido2_timeout_tolerance` | UserActionTimeout handled gracefully |
-
-Mock (CI) + Live (gate with SoloKey) dual-mode via `/dev/hidraw` detection.
 
 ---
 
 ## Gate Status
 
 ```
-eastGate     — PRIMARY. Cascade via membrane pipeline. bearDog refactor absorbed.
-sporeGate    — NUCLEUS. SoloKey plugged. First credential minted. Depot authority.
-golgiBody    — Outer membrane. Wildcard DNS. Auto-publishing heads.
-flockGate    — bearDog FIDO2 + primalSpring scenarios.
+eastGate     — PRIMARY. Zero debt. Cascade pipeline converged.
+northGate    — Remote access hub. Windows mesh target. ~1TB AlphaFold data.
+sporeGate    — NUCLEUS. SoloKey plugged. Depot authority. Build authority.
+golgiBody    — Outer membrane. Wildcard DNS. Thin relay.
+westGate     — OFFLINE. 76TB ZFS cold storage. Pending power-on.
 ironGate     — ABG/NF compute. JupyterHub. 13/13 active.
+flockGate    — bearDog FIDO2 + primalSpring scenarios.
 grapheneGate — StrongBox target. Android compile unblocked.
 ```
 
 ---
 
-*Wave 138c: all tracked items resolved. biomeOS delivered NAPI-LIFECYCLE + SOCKET-DIR-UNIFY + SOCKET-UMASK. FIDO2 IPC refactored to 8 modules. Cascade pipeline converged. 38/38 repos at parity. Zero remaining items. Ready for next wave scope.*
+*Wave 139a: zero debt. Opening scope: northGate mesh enrollment (Windows cross-platform),
+AlphaFold data migration + provenance, SoloKey ceremony completion, live composition
+advancement. Cascade pipeline converged — tree hashes break the cycle.*
