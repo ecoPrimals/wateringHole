@@ -235,29 +235,21 @@ Report completion via commit message or handoff to overwatch.
 | toadStool | 4 | Small | **DONE** | `592248618` S329 Windows cargo check passes |
 | petalTongue | 1,5 | Medium | **DONE** | `0c65a57` cross-arch transport Windows+Android |
 | sourDough | 3 | Small | **DONE** | `320397e` Windows target support |
-| rhizoCrypt | 1 | Small | **DONE** | `feff297` unix_socket #[cfg(unix)], platform-aware AdapterFactory |
-| sweetGrass | 1 | Small-Med | TODO | |
-| loamSpine | 1,2 | Small | TODO | |
-| nestGate | 3 | Small | TODO | |
+| rhizoCrypt | 1 | Small | **DONE** | `feff297` cross-arch + deep debt |
+| sweetGrass | 1 | Small-Med | **DONE** | `d4f7da9` platform gates |
+| loamSpine | 1,2 | Small | **DONE** | `850252c` cfg-gate Unix IPC |
+| nestGate | 3 | Small | TODO | Platform FS (`rustix::fs::statfs`) |
 
-**Score: 10/14 adopted (up from 1/14). 4 remaining.**
+**Score: 13/14 adopted. Only nestGate remaining (Platform FS — 1 module).**
 
-Remaining are small-effort primals (rhizoCrypt 1 file, sweetGrass 2-3 files,
-loamSpine 3 files, nestGate 1 module). All mechanical — same pattern.
-
-Also delivered alongside cross-arch (deep debt sweeps):
-- barraCuda: LatencyModel enum dispatch, hardcode cleanup, GPU test pool
-- coralReef: split large files, namespace-agnostic paths (Wave 143 docs!)
-- skunkBat: deep debt sweep
-- songBird: zero-alloc patterns, to_lowercase elimination, 162 GiB cargo clean
-- toadStool: clone elimination, +31 tests, clippy zero (S330)
-- bearDog: sovereignty hardening, BTreeMap batch 3, test extraction
-- biomeOS: socket dir unification (/run/membrane/), capability-first discovery
-- squirrel: mock evolution, timeout threading, dead module purge
-- petalTongue: deps bumped, process_exists cross-platform
-- sourDough: safety + coverage + smart refactoring
+Deep debt delivered alongside cross-arch (Waves 141a-141b):
+- loamSpine: refactor, deprecation, clone reduction, test fix
+- rhizoCrypt: method_gate split, magic numbers, branch/vertex coverage
+- sweetGrass: postgres store purged (pure Rust dogma), cross-platform warnings suppressed
+- (Wave 141a): barraCuda, bearDog, biomeOS, coralReef, skunkBat, songBird,
+  squirrel, toadStool, petalTongue, sourDough — all delivered deep debt alongside cross-arch
 
 ---
 
-*Updated Wave 141a: 10/14 primals cross-arch adopted. 4 remaining (small effort).
-sporeGate harvest pending for all adopted primals.*
+*Updated Wave 141b: 13/14 primals cross-arch adopted. Only nestGate remaining.
+sporeGate Windows harvest pending for 13 adopted primals.*

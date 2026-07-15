@@ -3,9 +3,10 @@
 **Date**: Jul 15, 2026 16:50 EDT | **Wave**: 141b | **From**: eastGate overwatch
 **Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM CONVERGENCE ACCELERATING.**
 
-**This cascade**: 10 primals delivered cross-arch adoption + deep debt sweeps.
-Cross-platform score jumped **1/14 → 10/14**. 4 remaining (small effort).
-14/14 primals compile on native target. 39/39 repos synced.
+**This cascade**: loamSpine, rhizoCrypt, sweetGrass delivered cross-arch adoption.
+Cross-platform score now **13/14**. Only nestGate remains (Platform FS — 1 module).
+14/14 primals compile on native target. 39/39 repos synced. sporeGate Windows
+harvest pending for 13 adopted primals.
 
 ---
 
@@ -25,22 +26,18 @@ sporePrint root site returning 404 on `primals.eco`. `footprint/` and
 
 ### Goal 1: Silicon Atheism Convergence (P1 — PARALLEL SUBTASK, ACCELERATING)
 
-**Score: 10/14 primals cross-arch adopted. 4 remaining (all small effort).**
+**Score: 13/14 primals cross-arch adopted. Only nestGate remaining.**
 
-| Adopted (10) | Remaining (4) |
+| Adopted (13) | Remaining (1) |
 |-------------|--------------|
-| songBird (ref), bearDog, barraCuda, biomeOS, coralReef, skunkBat, squirrel, toadStool, petalTongue, sourDough | rhizoCrypt (1 file), sweetGrass (2-3), loamSpine (3), nestGate (1 module) |
+| songBird, bearDog, barraCuda, biomeOS, coralReef, skunkBat, squirrel, toadStool, petalTongue, sourDough, rhizoCrypt, sweetGrass, loamSpine | nestGate (Platform FS — 1 module) |
 
 | Work | Owner | Priority | Status |
 |------|-------|----------|--------|
-| 4 remaining primal adoptions | rhizoCrypt, sweetGrass, loamSpine, nestGate | P1 | TODO |
+| nestGate Platform FS adoption | nestGate team | P1 | TODO |
 | `portable-atomic` feature on tokio (PPC32 + consoles) | cellMembrane | P1 | FRAGO issued |
-| Full 14-primal Windows harvest (post adoption) | sporeGate | P1 | 10/14 ready |
+| Full 14-primal Windows harvest | sporeGate | P1 | 13/14 ready |
 | `full-cross-compile` primalSpring scenario | primalSpring | P2 | FRAGO issued |
-
-Deep debt delivered alongside cross-arch: LatencyModel dispatch (barraCuda),
-socket unification (biomeOS), zero-alloc patterns (songBird), +31 tests (toadStool),
-sovereignty hardening (bearDog), capability-first discovery (biomeOS).
 
 **Per-primal handoff**: `CROSS_ARCH_PER_PRIMAL_HANDOFFS.md`
 
@@ -153,9 +150,9 @@ grapheneGate — StrongBox target. 12/14 Android ecobins.
 ```
 DONE    45 signed ecobins, 4 architectures, 8 exotic validated
 DONE    OS Atheism Phases 1-2 (types + transport)
-DONE    Per-primal cross-arch adoption: 10/14 complete (9 this cascade!)
-NOW     4 remaining adoptions (rhizoCrypt, sweetGrass, loamSpine, nestGate)
-NOW     sporeGate Windows harvest for 10 adopted primals
+DONE    Per-primal cross-arch adoption: 13/14 complete (12 this wave!)
+NOW     nestGate Platform FS adoption (last primal)
+NOW     sporeGate Windows harvest for 13 adopted primals
 NOW     portable-atomic for PPC32 (consoles, embedded)
 NOW     northGate mesh enrollment
 GOAL    User is their own key. USB kit deploys NUCLEUS identity.
@@ -185,7 +182,7 @@ GOAL    Pure Rust backend + sovereign compositions + external science.
 
 ---
 
-*Wave 141b: Cross-arch adoption exploded — 10/14 primals adopted (9 this cascade).
-barraCuda, bearDog, biomeOS, coralReef, skunkBat, squirrel, toadStool, petalTongue,
-sourDough all delivered cross-arch + deep debt. 4 remaining (small effort). sporeGate
-Windows harvest pending for 10 adopted primals. P0: primals.eco still 404. 39/39 synced.*
+*Wave 141b: 13/14 cross-arch adopted. Only nestGate remaining (Platform FS — 1 module).
+12 primals delivered cross-arch + deep debt this wave. sweetGrass purged postgres store
+(pure Rust dogma). sporeGate Windows harvest pending for 13 primals. P0: primals.eco
+still 404. 39/39 synced. 2 active FRAGOs.*
