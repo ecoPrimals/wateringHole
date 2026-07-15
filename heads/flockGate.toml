@@ -1,16 +1,17 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-14T23:25:00Z
+# Gate: flockGate | Updated: 2026-07-15T15:30:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-14T23:25:00Z"
-wave = "139a"
+updated = "2026-07-15T15:30:00Z"
+wave = "140a"
 
 [heads]
-primalSpring = "65b9608"
-wateringHole = "e8ca4ddd"
+primalSpring = "b91dd41"
+wateringHole = "2e7d59c2"
+footPrint = "52437f1"
 plasmidBin = "e0b20e0"
 skunkBat = "d9837a9"
 
@@ -24,42 +25,33 @@ wireguard_status = "UP"
 wireguard_addr = "10.13.37.6/24"
 federation_sporegate_7700 = "LIVE — mesh_registered=true, latency=70ms"
 federation_golgi_7700 = "LIVE — mesh_registered=true, latency=25ms"
-status = "MESH OPERATIONAL — 2 peers, UDS-HTTP fix confirmed, DRAWBRIDGE-CAP awaiting songBird team"
-
-[dispatch_validation]
-status = "MESH ROUTING OPERATIONAL. capability.call routes through 2 peers. DRAWBRIDGE-CAP blocks provider discovery."
-wan_dispatch_01 = "PASS (transport + peering)"
-jupyter_data_plane = "PROVEN — JupyterHub v5.4.5 via http.request relay (202ms WAN)"
-capability_call_status = "ROUTING WORKS — no provider advertises drawbridge caps yet"
-
-[dispatch_validation.latency]
-tcp_peer_sporegate_ms = 70
-tcp_peer_golgi_ms = 25
-jupyter_relay_ms = 202
-probed_at = "2026-07-14T23:22:00Z"
+status = "MESH OPERATIONAL — 2 peers, UDS-HTTP fix confirmed"
 
 [outer_membrane_validation]
-validated_at = "2026-07-12T14:05:00Z"
+validated_at = "2026-07-15T15:30:00Z"
 primals_eco = "PASS"
 footprint = "PASS"
 lab = "PASS"
-depot = "404 — depot layout migration in progress"
+depot = "PASS — 45 binaries, 4 architectures"
 
 [footprint]
-status = "LIVE — GIS weak bonds operational"
+status = "LIVE — GIS weak bonds operational, RustScript extracted, deploy artifacts ready"
 wan_url = "https://primals.eco/footprint/"
 caddy_proxy = "LIVE — 10 GIS hosts via Caddy reverse proxy"
+server_deploy = "NOT_DEPLOYED — deploy/ artifacts ready for sporeGate"
+tests = 98
+rustscript_modules = 11
+rustscript_extraction = "READY — domain types decoupled from generic primitives"
 
 [drawbridge_bonds]
-status = "16 bonds declared (10 GIS + 6 science APIs)"
-science_apis = ["pubchem.ncbi.nlm.nih.gov", "eutils.ncbi.nlm.nih.gov", "api.ncbi.nlm.nih.gov", "rest.uniprot.org", "data.rcsb.org", "alphafold.ebi.ac.uk"]
+status = "17 bonds declared (10 GIS + 7 science APIs)"
+science_apis = ["pubchem.ncbi.nlm.nih.gov", "eutils.ncbi.nlm.nih.gov", "api.ncbi.nlm.nih.gov", "blast.ncbi.nlm.nih.gov", "rest.uniprot.org", "data.rcsb.org", "alphafold.ebi.ac.uk"]
 gis_apis = 10
 schema_version = 2
 
 [primalspring]
-version = "v0.9.33"
-head = "bfbe302"
-scenarios = 143
-tests = 1169
-failures = 0
-suite_status = "GREEN — re-enabled 11 commented scenarios + new s_drawbridge_bond_registry"
+version = "v0.9.34"
+head = "b91dd41"
+scenarios = 162
+tests = 1276
+suite_status = "GREEN — 8 new scenarios (depot, platform parity, science drawbridge)"
