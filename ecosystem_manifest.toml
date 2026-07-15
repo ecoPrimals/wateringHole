@@ -22,7 +22,7 @@ version = "3.0.0"
 generated = "2026-07-15"
 # DEPRECATED: wave ID now lives in wave.toml (overwatch sole writer).
 # This field is retained at last-known value for backward compat with older binaries.
-wave = 140
+wave = 141
 total_repos = 42
 
 # ═══════════════════════════════════════════════════════════════════

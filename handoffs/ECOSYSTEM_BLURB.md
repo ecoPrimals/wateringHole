@@ -1,238 +1,149 @@
-# ecoPrimals Ecosystem Blurb — Wave 140b
+# ecoPrimals Ecosystem Blurb — Wave 141a
 
-**Date**: Jul 15, 2026 12:58 EDT | **Wave**: 140b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. TANGIBLES MATURING + SILICON ATHEISM.**
+**Date**: Jul 15, 2026 14:00 EDT | **Wave**: 141a | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM CONVERGENCE.**
 
-Infrastructure debt cleared (Wave 139). Pipeline connected. Depot operational.
-OS Atheism Phases 1-2 shipped. Pivot focus: evolve protoKarya compositions into
-usable systems for the wider world, proven by spring mathematics. Manifest v3.0
-tracks 42 repos including 2 protists (footPrint, tideGlass).
-
-**This cascade**: Absorbed 3 team deliveries + 1 AAR.
-- **cellMembrane** deep debt delivery: OS Atheism Phase 2 (`TransportEndpoint::NamedPipe`,
-  `InitSystem::detect()`, platform-aware CSPRNG/chmod), `nix` crate eliminated,
-  1,074 tests, zero files >800L, stringly-typed→type-safe evolution.
-- **footPrint** deep debt cleanup: P0 discovery pipeline fix, XSS hardening,
-  turf tree-shake (349→190 modules), 300+ lines dead code removed, 98 tests green.
-- **petalTongue** handoff: 4 Gonzales chart scenes, manifest-driven handlers,
-  full workspace clippy pedantic+nursery clean (366 tests, 16 crates).
-- **Exotic Architecture AAR**: sporeGate now **13-target build authority** — 8/9 exotic
-  architectures compile (RISC-V, s390x, SPARC, ARM32/v7, PPC64 LE/BE, i686).
-  Only 32-bit PowerPC fails (AtomicU64). Silicon Atheism is achievable.
-
-**Impulse hygiene**: 3 duplicate wateringHole diverge impulses fossilized (CAC dedup
-evidence — the exact pattern our P2 impulse dedup fix addresses). OS Atheism Phase 1
-FRAGO fossilized (Phase 2 delivered by cellMembrane).
-
-**Standing architectural evolution**: CAC pattern formalized (140a), 2/6 layers solved.
+12-dimension orthogonal review completed. 7 handoffs + 6 impulses fossilized.
+14/14 primals compile. 39/39 repos synced. 45 depot binaries across 4 architectures.
+13-target build authority (8 exotic architectures validated). OS Atheism Phases 1-2
+shipped. 2 active FRAGOs. 9 active handoffs (down from 16).
 
 ---
 
-## Primary Focus: protoKarya Tangibles
+## P0: primals.eco Root 404
 
-### footPrint — GIS Home Planner (PARTIALLY LIVE)
+sporePrint root site returning 404 on `primals.eco`. `footprint/` and
+`live.primals.eco` both 200. Likely needs rebuild/rsync on golgi.
 
-| Surface | Status |
-|---------|--------|
-| Static SPA (`primals.eco/footprint/`) | **LIVE** |
-| GIS proxy (10 upstream hosts via Caddy) | **LIVE** |
-| Express backend (CRUD, agent WS, proxy) | **NOT DEPLOYED** — needs primal absorption |
-| RustScript (12 zero-dep TS safety modules) | **PROVEN** — 58 tests, used in `core/primal.ts` |
-| primalSpring scenarios (`fp-api-proxy`, `protokarya-composition-routing`) | **GREEN** (structural) |
-
-**Evolution path** (footPrint server → full composition):
-
-| Step | Owner | Status |
-|------|-------|--------|
-| Wire `PROXY_PATH` → songBird drawbridge | songBird + footPrint teams | TODO |
-| Wire `PROJECTS_PATH` → nestGate CAS | nestGate + footPrint teams | TODO |
-| Wire `WS_PATH` → agent bridge | petalTongue team | TODO |
-| Deploy footPrint composition on sporeGate | sporeGate hardware team | TODO |
-| Caddy block + drawbridge routes per COMPOSITION_ROUTING_STANDARD | cellMembrane team | TODO |
-| Create `footprint_composition.toml` manifest | overwatch | TODO |
-| primalSpring scenario: `footprint-drawbridge-live` (E2E) | primalSpring team | TODO |
-| Extract RustScript → `@protoKarya/rustscript` npm package | footPrint team | TODO |
-| Fix TLS handshake on `footprint.primals.eco` redirect | cellMembrane team | TODO |
-
-### tideGlass — Sovereign GPS Platform (PHASE 0)
-
-| Step | Owner | Status |
-|------|-------|--------|
-| Clone repo into `protists/tideGlass` | overwatch | TODO |
-| Phase 0: reproduce GPS paper figures vs Python baseline | tideGlass team (Gonzales) | TODO |
-| Implement 7 validation modules per guidestone spec | tideGlass team | TODO |
-| Caddy block at `tideglass.primals.eco` | cellMembrane team | TODO |
-| Drawbridge bonds (LINCS L1000, GEO, ChEMBL, NF Data Portal) | songBird team | TODO |
-| primalSpring scenario: `tideglass-composition-routing` | primalSpring team | TODO |
-| lithoSpore packaging for USB-deployable artifact | lithoSpore team | TODO |
-
-### Gonzales Interactive Explorer (EVOLVING)
-
-| Step | Owner | Status |
-|------|-------|--------|
-| petalTongue chart scenes (IC50, PK decay, tissue lattice, hormesis) | petalTongue team | **DONE** (Wave 140a) |
-| Replace removed Plotly UI with `visualization.render.graph` | petalTongue team | TODO |
-| NF Data Portal ingestion via drawbridge | songBird team | TODO |
-| CTF NDU grant alignment ($125K) | Gonzales + overwatch | IN PROGRESS |
-
-### helixVision — Structure Prediction (PRIMITIVES VALIDATED)
-
-| Phase | Status | What |
-|-------|--------|------|
-| A–B: Primitives | **VALIDATED** (154 checks, 1e-10) | All 6 AlphaFold primitives decomposed, validated vs NumPy |
-| C: Wire GEMM | TODO | barraCuda GEMM → Evoformer operations |
-| D: E2E pipeline | TODO | FASTA → structure → confidence → provenance |
-| E: LTEE analysis | TODO | 8.3M structure predictions |
-| F: Crate publish | TODO | `helix-vision` on crates.io |
+| Owner | Action |
+|-------|--------|
+| sporePrint team / golgi operator | Rebuild sporePrint and rsync `public/` to golgi |
+| cellMembrane team | Add `sporePrint` health check to cascade post-sync |
 
 ---
 
-## Spring Mathematics — Validation Coverage
+## Evolution Goals — Next Waves
 
-### Infrastructure (primalSpring — 162 scenarios)
+### Goal 1: Silicon Atheism Convergence (P1 — highest leverage)
 
-| Scenario | What it proves | Status |
-|----------|---------------|--------|
-| `protokarya-composition-routing` | Capability routing for footPrint/tideGlass deps | **GREEN** |
-| `fp-api-proxy` | Drawbridge port 7780, songBird ownership | **GREEN** |
-| `drawbridge-bond-registry` | 17 weak bonds (10 GIS + 7 science APIs) | **GREEN** |
-| `science-drawbridge-parity` | Registry ↔ Caddy ↔ songBird 3-way match | **GREEN** |
-| `depot-wan-serving` | WAN depot HTTPS + checksums | **GREEN** |
-| `platform-type-parity` | OS Atheism Phase 1 type coverage (39 checks) | **GREEN** |
-| `footprint-drawbridge-live` | E2E: USGS/FEMA via drawbridge → NestGate CAS | **MISSING** |
-| `tideglass-composition-routing` | tideGlass deploy graph + compute pipeline | **MISSING** |
-| `protokarya-cross-feed` | footPrint data consumed by tideGlass via capability.call | **MISSING** |
-| `drawbridge-consumer-parity` | songBird allowlist ↔ drawbridge_bonds.toml exact match | **MISSING** |
-| `protokarya-wan-deploy` | Caddy route + live composition on `*.primals.eco` | **MISSING** |
+**Score: 1/14 primals fully cross-platform. Target: 14/14.**
 
-### Domain Science (cross-spring)
+| Work | Owner | Priority | Status |
+|------|-------|----------|--------|
+| Publish `primal-transport` crate (extract from cellMembrane) | cellMembrane | P1 | FRAGO issued |
+| Transport adoption: 11 primals replace raw UDS → `TransportEndpoint` | all primal teams | P1 | 0/11 |
+| Signal adoption: 3 primals → `ProcessManager::wait_for_shutdown()` | loamSpine, skunkBat, barraCuda | P1 | 0/3 |
+| `portable-atomic` feature on tokio (PPC32 + consoles + 32-bit) | cellMembrane | P1 | FRAGO issued |
+| FS abstraction: 3 primals → `Platform::detect()` | nestGate, biomeOS, sourDough | P2 | FRAGO issued |
+| toadStool `hw-safe` → `linux-hw` feature-gate | toadStool | P2 | FRAGO issued |
+| Full 14-primal Windows harvest (post adoption) | sporeGate | P1 | blocked on adoption |
+| `full-cross-compile` primalSpring scenario | primalSpring | P2 | FRAGO issued |
 
-| Spring | Checks | Domain |
-|--------|--------|--------|
-| wetSpring | 782/782 | Gonzales published (Exp 273-286, G1-G6) |
-| healthSpring | 233/233 | PK/PD, population PK |
-| hotSpring | 500+ | FEL pipeline, CAZyme dynamics |
-| neuralSpring | 154 | AlphaFold primitive parity |
-| groundSpring | — | Geospatial (footPrint foundation) |
+`#[cfg()]` divergences are constrained evolution targets, not debt. Each
+platform-specific code path is tracked in Dimension 12 of the orthogonal review.
+
+**Handoff**: `SILICON_ATHEISM_CONVERGENCE_WAVE140b.md`
+
+### Goal 2: Content-Addressed Convergence (P1–P2)
+
+**Score: 2/6 layers solved.**
+
+| Layer | Fix | Priority | Status |
+|-------|-----|----------|--------|
+| Git repos (tree hashes) | freshness.toml `HEAD^{tree}` | — | **SOLVED** |
+| Depot binaries (BLAKE3) | depot_sync checksums | — | **SOLVED** |
+| Heads auto-publish | TreeParity before agentic dispatch | P1 | FRAGO issued |
+| Impulse dedup | Content-hash before creation | P2 | FRAGO issued |
+| rhizoCrypt DAG | SessionTreeHash primitive | P2 | FRAGO issued |
+| Cascade divergence | Tree-parity before policy | P1 | FRAGO issued |
+
+**Handoffs**: `CAC_CELLMEMBRANE_HANDOFF.md`, `CAC_RHIZOCRYPT_HANDOFF.md`
+
+### Goal 3: footPrint Full Composition (Track 3)
+
+| Step | Owner | Status |
+|------|-------|--------|
+| Wire `PROXY_PATH` → songBird drawbridge | songBird + footPrint | TODO |
+| Wire `PROJECTS_PATH` → nestGate CAS | nestGate + footPrint | TODO |
+| Wire `WS_PATH` → agent bridge | petalTongue | TODO |
+| Deploy composition on sporeGate | sporeGate hardware | TODO |
+| Caddy block + drawbridge routes | cellMembrane | TODO |
+| `footprint-drawbridge-live` scenario (E2E) | primalSpring | TODO |
+| RustScript → `@protoKarya/rustscript` | footPrint | TODO |
+
+**Handoff**: `FOOTPRINT_SERVER_DEPLOY_HANDOFF_139a.md`
+
+### Goal 4: tideGlass Phase 0
+
+| Step | Owner | Status |
+|------|-------|--------|
+| Clone into `protists/tideGlass` | overwatch | TODO |
+| Reproduce GPS paper figures vs Python baseline | Gonzales | TODO |
+| Caddy block at `tideglass.primals.eco` | cellMembrane | TODO |
+| Drawbridge bonds (LINCS, GEO, ChEMBL, NF Portal) | songBird | TODO |
 
 ---
 
-## Standing Infrastructure (from Wave 139)
+## Standing State
 
-### OS Atheism → Silicon Atheism
-
-| Phase | What | Blocks | Owner | Status |
-|-------|------|--------|-------|--------|
-| 1. Platform Types | TargetOs, CpuArch, LinkModel, Platform | — | overwatch | **SHIPPED** |
-| 2. Transport + Signals | `TransportEndpoint::NamedPipe`, `InitSystem::detect()`, `ProcessManager` | — | cellMembrane | **SHIPPED** |
-| 2b. Primal Adoption | Each primal replaces raw UDS with `TransportEndpoint` | 13 primals | all primal teams | **FRAGO issued (P1)** |
-| 2c. portable-atomic | `tokio` feature flag → PPC32 + all 32-bit targets | PPC32, consoles | cellMembrane | **FRAGO issued (P1)** |
-| 3. Shell-out + FS | openssl→rustls, PermissionsExt→cross-plat | 3 primals | cellMembrane | FRAGO issued |
-| 4. Gate bootstrap | Platform branching in 13-phase pipeline | isomorphic deploy | sporeGate + cellMembrane | FRAGO issued |
-| 5. Isomorphic depot | Platform-aware fetch→install→launch | auto-deploy | cellMembrane | FRAGO issued |
-| 6. NUCLEUS composition | deploy.graph canonical, bootstrap fallback | USB kit | all teams | FRAGO issued |
-
-**Critical insight**: Phase 2 shipped in cellMembrane but **1/14 primals adopted**.
-Transport adoption (2b) is the immediate P1 unlock — mechanical transformation,
-songBird is the reference. portable-atomic (2c) completes PPC32 for consoles.
-
-**Cross-compile score: 1/14 primals fully cross-platform. Target: 14/14.**
-
-### Depot State (post-AAR harvest + exotic validation)
+### Depot (45 binaries + 8 exotic validated)
 
 ```
-Architecture              Binaries  Status
-x86_64-unknown-linux-musl    16     FRESH (Jul 15)
-aarch64-unknown-linux-musl   16     FRESH (Jul 15)
-aarch64-linux-android        12     FRESH (Jul 15) — 2 failures (petalTongue, toadStool)
-x86_64-pc-windows-gnu         1     songbird.exe — Phase 2 transport NOW SHIPPED
-                              --
-Depot total:                  45     BLAKE3 + Ed25519 signed, VPS depot serving
+Depot (4 arch, 45 bins):
+  x86_64-linux-musl     16   FRESH
+  aarch64-linux-musl    16   FRESH
+  aarch64-android       12   FRESH (2 expected-fail: petalTongue, toadStool)
+  x86_64-windows-gnu     1   songbird.exe (13 blocked on transport adoption)
 
-Validated exotic (not yet in depot):
-  riscv64gc, powerpc64le, powerpc64, s390x, sparc64,
-  arm (32-bit), armv7, i686 — 8/9 compile, PPC32 FRAGO issued (portable-atomic)
-  PPC32 fix: tokio portable-atomic feature flag → consoles + embedded
-  RISC-V and ARMv7 are P2 depot candidates for Silicon Atheism.
+Exotic validated (songBird, not yet in depot):
+  riscv64gc  powerpc64le  powerpc64  s390x  sparc64  arm32  armv7  i686
+  PPC32 blocked (portable-atomic FRAGO issued)
 ```
-
-### Cross-Platform Parity (from AAR + convergence plan)
-
-| Failure Category | Primals Affected | Fix | cellMembrane | Primal Adoption |
-|-----------------|-----------------|-----|-------------|----------------|
-| UDS transport | 11 | `TransportEndpoint` | **SHIPPED** | 0/11 adopted |
-| Unix signals | 3 (loamSpine, skunkBat, barraCuda) | `ProcessManager` | **SHIPPED** | 0/3 adopted |
-| AtomicU64 (PPC32) | all (transitive via tokio) | `portable-atomic` feature | FRAGO issued | — |
-| Platform FS | 3 (nestGate, biomeOS, sourDough) | `Platform::detect()` | FRAGO issued | — |
-| Hardware/kernel | 1 (toadStool) | `linux-hw` feature-gate | FRAGO issued | — |
-| Android NDK | 1 (petalTongue) | cdylib target | — | expected-fail |
-
-### Subsystem Convergence Map
-
-| Subsystem | Current | Target | Scope |
-|-----------|---------|--------|-------|
-| Transport (IPC) | 11 primals use raw UDS | `primal-transport` crate | P1 — highest leverage |
-| Lifecycle (signals) | 3 primals use `signal::unix` | `ProcessManager` trait | P1 |
-| Data backends | Storage cross-plat, access via UDS | Transport convergence fixes this | P2 |
-| Discovery (paths) | Hardcoded unix paths | `Platform::socket_dir()` etc. | P2 |
 
 ### Pipeline
 
 | Component | Status |
 |-----------|--------|
-| `membrane` on sporeGate | CURRENT — OS Atheism Phase 2 shipped |
-| `depot_sync --push` | **OPERATIONAL** — builder→VPS, BLAKE3 diff, atomic rename |
+| `membrane` on sporeGate | CURRENT — Phase 2 shipped |
+| `depot_sync --push` | OPERATIONAL |
 | SSH sporeGate → golgi | CONNECTED |
-| Depot symlinks (both nodes) | ALIGNED |
-| `harvest --local` | SHIPPED |
-| FRAGO impulse system | OPERATIONAL |
-| cellMembrane health | 1,074 tests, clippy clean, `#![forbid(unsafe_code)]`, 0 `unwrap()`, 0 files >800L |
+| FRAGO impulse system | OPERATIONAL (2 active) |
+| cellMembrane health | 1,074 tests, clippy clean, `#![forbid(unsafe_code)]` |
 
----
+### Spring Mathematics
 
-## Content-Addressed Convergence (Newton-Leibniz Pattern)
+```
+Infrastructure: 162 scenarios, 1,194 tests (5 protoKarya gaps identified)
+Domain:         wetSpring 782, healthSpring 233, hotSpring 500+, neuralSpring 154
+```
 
-**Principle**: Content identity supersedes temporal identity for convergence.
-Two agents independently producing identical content = convergence, not conflict.
-The temporal ordering is provenance metadata, not identity.
+### Remaining Infrastructure Hygiene
 
-| Layer | Content Identity | Status |
-|-------|-----------------|--------|
-| Git repos | `HEAD^{tree}` tree hashes | **SOLVED** (Wave 138c) |
-| Depot binaries | BLAKE3 checksums | **SOLVED** (Wave 139e) |
-| Heads metadata | TreeParity for auto-publish | FRAGO issued (P1) |
-| Impulses | Content-hash dedup | FRAGO issued (P2) |
-| rhizoCrypt DAG | SessionTreeHash | FRAGO issued (P2) |
-| Cascade divergence | Tree-parity before policy | FRAGO issued (P1) |
-
-**Documents**: `whitePaper/gen5/foundations/CONTENT_ADDRESSED_CONVERGENCE.md`
-**Handoffs**: `CAC_CELLMEMBRANE_HANDOFF.md`, `CAC_RHIZOCRYPT_HANDOFF.md`
-
----
-
-## Remaining Scope (non-tangibles)
-
-### Infrastructure Hygiene
-| Step | Status |
+| Item | Status |
 |------|--------|
-| Re-publish sporePrint freshness (Wave 137 → 140a) | TODO |
-| ironGate/sporeGate head re-publish | TODO |
+| sporePrint rebuild on golgi (P0 — 404) | DIVERGENCE |
+| sporeGate head re-publish (stale Jul 6) | TODO |
+| freshness.toml re-publish (stale Wave 137) | TODO |
+| GLACIAL_SHIFT_READINESS.md update (stale 139c) | TODO |
 | DNSSEC on primals.eco | TODO |
 | primal.eco inner membrane separation | TODO |
-| ABG tiered accounts | TODO |
+| northGate mesh enrollment | TODO (songbird.exe ready) |
 
-### northGate Mesh Enrollment
-| Step | Status |
-|------|--------|
-| songbird.exe in VPS depot | **DONE** |
-| Deploy songbird.exe to northGate | TODO |
-| Mesh peer discovery | TODO |
+---
 
-### AlphaFold Data Migration
-| Step | Status |
-|------|--------|
-| westGate online | BLOCKED (hardware) |
-| Catalog datasets on northGate | TODO |
+## Gate Status
+
+```
+eastGate     — PRIMARY. Cascade authority. 42 repos. 39/39 synced.
+northGate    — Windows mesh target. songbird.exe in depot. RTX 5090. ~1TB AlphaFold.
+sporeGate    — NUCLEUS. 13-target build authority. Phase 2 shipped.
+                45 depot + 8 exotic. Head stale (Jul 6 — needs re-publish).
+golgiBody    — Outer membrane. footprint/ + live. serving (200). Root 404 (sporePrint).
+westGate     — OFFLINE. ZFS cold storage.
+ironGate     — ABG/NF compute. JupyterHub.
+flockGate    — WAN covalent. 16 bonds.
+grapheneGate — StrongBox target. 12/14 Android ecobins.
+```
 
 ---
 
@@ -240,62 +151,39 @@ The temporal ordering is provenance metadata, not identity.
 
 ### Track 1: Hardware Trust → NUCLEUS USB Kit
 ```
-DONE    First credential + FIDO2 + CTAP2 + depot: 45 signed ecobins (4 arch)
-DONE    Cross-Platform Parity Audit — failure categories mapped
-DONE    Phase 2 transport abstraction (TransportEndpoint, ProcessManager, CSPRNG)
-DONE    Exotic architecture validation — 13 compile targets (8/9 exotic OK)
-NOW     northGate mesh enrollment (songbird.exe ready)
-NOW     SoloKey authenticate + tap-sequence + Loam cert
-NOW     Phase 3 FS abstraction (3 primals) + full Windows harvest
+DONE    45 signed ecobins, 4 architectures, 8 exotic validated
+DONE    OS Atheism Phases 1-2 (types + transport)
+NOW     Per-primal transport adoption (1/14 → 14/14)
+NOW     portable-atomic for PPC32 (consoles, embedded)
+NOW     northGate mesh enrollment
 GOAL    User is their own key. USB kit deploys NUCLEUS identity.
 ```
 
 ### Track 2: K-Derm → Sovereign Membrane Parity
 ```
 DONE    Identity web + cascade convergence + depot alignment
-DONE    OS Atheism Phases 1-2 (platform types + transport)
-NOW     OS Atheism Phases 3-6 (FRAGO issued)
+DONE    CAC pattern formalized (2/6 layers solved)
+NOW     CAC layers 3-6 (heads, impulses, rhizoCrypt, cascade)
+NOW     sporePrint rebuild (P0)
 NOW     DNSSEC + primal.eco separation
-GOAL    Universal depot — same system for every gate and architecture
+GOAL    Universal depot — same system for every gate and architecture.
 ```
 
 ### Track 3: Live Compositions → External Science Production ← PRIMARY
 ```
-DONE    footPrint client LIVE + sporePrint (304 pages)
-DONE    footPrint deep debt: P0 discovery fix, XSS hardened, turf tree-shaken (349→190 modules)
-DONE    NCBI/PubChem drawbridge bonds (songBird 64393c2)
-DONE    DISCOVERED_BY standard (26 repos, 4 orgs)
-DONE    Manifest v3.0: protists registered (42 repos)
-DONE    Gonzales Interactive Explorer (4 chart scenes, manifest-driven handlers)
-DONE    petalTongue clippy pedantic+nursery clean (366 tests, 16 crates)
+DONE    footPrint client LIVE + deep debt cleaned (98 tests)
+DONE    Gonzales chart scenes (4) + petalTongue clippy clean (366 tests)
 NOW     footPrint server composition on sporeGate
 NOW     RustScript extraction to @protoKarya/rustscript
 NOW     Live drawbridge E2E (USGS/FEMA → songBird → NestGate CAS)
 NEXT    tideGlass Phase 0 (GPS paper reproduction)
 NEXT    helixVision Phase C (GEMM → Evoformer)
-GOAL    Pure Rust backend + sovereign compositions + external science
+GOAL    Pure Rust backend + sovereign compositions + external science.
 ```
 
 ---
 
-## Gate Status
-```
-eastGate     — PRIMARY. Cascade authority. 42 repos. 38/39 parity.
-northGate    — Windows mesh target. songbird.exe in depot. RTX 5090. ~1TB AlphaFold.
-sporeGate    — NUCLEUS. 13-target build authority. OS Atheism Phase 2 shipped.
-                45 depot binaries + 8 exotic architectures validated. depot_sync --push operational.
-                cellMembrane: 1,074 tests, clippy clean, zero unsafe, zero unwrap, zero files >800L.
-golgiBody    — Outer membrane. 3 live surfaces (200). Depot serving 45 binaries. Symlinks aligned.
-westGate     — OFFLINE. ZFS cold storage. Pending power-on.
-ironGate     — ABG/NF compute. JupyterHub. Head stale (Jul 4).
-flockGate    — WAN covalent. 16 bonds. 162 scenarios, 1194 tests green.
-grapheneGate — StrongBox target. 12/14 Android ecobins FRESH (petalTongue, toadStool expected failures).
-```
-
----
-
-*Wave 140b: 3 team deliveries absorbed + Exotic Architecture AAR. OS Atheism Phase 2 shipped.
-13-target build authority (8 exotic architectures validated). footPrint deep debt cleaned.
-petalTongue Gonzales scenes + clippy clean. cellMembrane at peak code health (1,074 tests,
-zero unsafe/unwrap, nix eliminated). Silicon Atheism achievable — RISC-V to mainframes.
-2 active FRAGOs (transport-abstract, CAC). 162 scenarios, 1194 tests.*
+*Wave 141a: 12-dimension review complete. 7 handoffs + 6 impulses fossilized.
+P0: primals.eco root 404. Silicon Atheism convergence: 1/14 primals cross-platform,
+13-target build authority, portable-atomic FRAGO for PPC32/consoles. CAC 2/6 layers
+solved. 2 active FRAGOs (silicon-atheism, CAC). 39/39 repos synced. 162 scenarios.*

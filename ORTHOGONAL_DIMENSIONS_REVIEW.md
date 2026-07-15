@@ -172,5 +172,5 @@ adapts to hardware reality. Track them:
 
 ---
 
-*Last used*: Wave 140b (Jul 15, 2026)
+*Last used*: Wave 141a (Jul 15, 2026)
 *Created*: Wave 139a
