@@ -1,21 +1,21 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-15T00:25:00Z
+# Gate: eastGate | Updated: 2026-07-14T23:30:00Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-15T00:25:00Z"
+updated = "2026-07-15T11:30:00Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
 airSpring = "6f0b98c8d6fab3deb44a26af1f95fcf9a85332f4"
 barraCuda = "1d6068459318bf74b08921c593abbec3fe9a4713"
-bearDog = "7acede91e2d4b47b3790030cab9613be005b68ac"
+bearDog = "5db229bb857dcae5b155e0d0d6642e6f5e42fb6e"
 benchScale = "ba5fa5426d6400d9bc3f642cd3a64e6244cabe22"
 bingoCube = "cf6b645e6531177eb5795d3e1da292f1ded2a243"
 biomeOS = "6d9300facad6f33af327512f2433e2c1d6c6da4a"
 blueFish = "c92df4a4046cec711cd98daac6800856a95d6bca"
-cellMembrane = "f48f47b1969c9a6821d2c4dcb41cbdc96dc65269"
+cellMembrane = "060b6458e736da780abdd4c50e57dafae5eb6113"
 coralReef = "372da16719951db62f092aeafccda6e92fdc2440"
 esotericWebb = "c9fed952223b110385fc6ec8baa6f4fdccdf1b13"
 groundSpring = "65066aac16e81bc3e369580864ce42ef0b39cb40"
@@ -26,17 +26,17 @@ initioChem = "854d801f2dcda904af07f4da9768d35de8534efd"
 lithoSpore = "8ba69e545a49c4974234440457b58854ee33dba4"
 loamSpine = "f1c6a44052914bed063c50f64a743ae402327947"
 ludoSpring = "f566b8265b7aa2a60d159a219306fce557dea1a0"
-nestGate = "e208d86d1e7541d50f3818df83a10e6e74fd62a9"
+nestGate = "2a6b21517b07fa2a145d3bdb653fad3e96b140cd"
 neuralSpring = "33a19d16eaacfaf276d5db989083d803493be600"
-petalTongue = "f8b1bfc42a10885fe278822f65d34df56ddd88e1"
+petalTongue = "8994ce549d2f860b56950f972f046516614a671a"
 plasmidBin = "60325220425b8a561e1fdb1ca806a05950f7cd7d"
-primalSpring = "01c09aed2d9544994d934e2437ca6eac12dd93ab"
+primalSpring = "6badcc0652f6aba25cc36643d8e968346c51ae6c"
 projectFOUNDATION = "4583164a5de4dbb1b426fc0afd427c44af7072e5"
 projectNUCLEUS = "bcb15980e8a59c270d6c180f57e2a98e21d29be4"
 rhizoCrypt = "a580796baaae8cc90024996f43ab4f7198183db8"
 rustChip = "7b23442b5ebe43be64054457806e890447d37747"
 skunkBat = "ff4dc132fe6130655b42bccdbeebc15ee659d9ba"
-songBird = "1c0095dc1f6e720e8f4fed7665c31e78415961e9"
+songBird = "64393c273ac470aa1d22b0ebb4f71dbfd96adeb8"
 sourDough = "ea4e603b98b6ea9096f9163b07b375e86b4760a7"
 sporePrint = "accb283740d9973480d6655682a4b2dc8b8fa685"
 squirrel = "a104bfa77041f457e2024c4b192a36a415e7909c"
