@@ -1,10 +1,10 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-14T23:30:00Z
+# Gate: eastGate | Updated: 2026-07-15T00:25:00Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-15T02:20:00Z"
+updated = "2026-07-15T00:25:00Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
@@ -15,7 +15,7 @@ benchScale = "ba5fa5426d6400d9bc3f642cd3a64e6244cabe22"
 bingoCube = "cf6b645e6531177eb5795d3e1da292f1ded2a243"
 biomeOS = "6d9300facad6f33af327512f2433e2c1d6c6da4a"
 blueFish = "c92df4a4046cec711cd98daac6800856a95d6bca"
-cellMembrane = "060b6458e736da780abdd4c50e57dafae5eb6113"
+cellMembrane = "f48f47b1969c9a6821d2c4dcb41cbdc96dc65269"
 coralReef = "372da16719951db62f092aeafccda6e92fdc2440"
 esotericWebb = "c9fed952223b110385fc6ec8baa6f4fdccdf1b13"
 groundSpring = "65066aac16e81bc3e369580864ce42ef0b39cb40"
@@ -28,15 +28,15 @@ loamSpine = "f1c6a44052914bed063c50f64a743ae402327947"
 ludoSpring = "f566b8265b7aa2a60d159a219306fce557dea1a0"
 nestGate = "e208d86d1e7541d50f3818df83a10e6e74fd62a9"
 neuralSpring = "33a19d16eaacfaf276d5db989083d803493be600"
-petalTongue = "8994ce549d2f860b56950f972f046516614a671a"
+petalTongue = "f8b1bfc42a10885fe278822f65d34df56ddd88e1"
 plasmidBin = "60325220425b8a561e1fdb1ca806a05950f7cd7d"
-primalSpring = "2e8a629278f24100ccb7241069e132f71643bdda"
+primalSpring = "01c09aed2d9544994d934e2437ca6eac12dd93ab"
 projectFOUNDATION = "4583164a5de4dbb1b426fc0afd427c44af7072e5"
 projectNUCLEUS = "bcb15980e8a59c270d6c180f57e2a98e21d29be4"
 rhizoCrypt = "a580796baaae8cc90024996f43ab4f7198183db8"
 rustChip = "7b23442b5ebe43be64054457806e890447d37747"
 skunkBat = "ff4dc132fe6130655b42bccdbeebc15ee659d9ba"
-songBird = "58b10e5fd5aaf10d95310b6c83fd137b5921724e"
+songBird = "1c0095dc1f6e720e8f4fed7665c31e78415961e9"
 sourDough = "ea4e603b98b6ea9096f9163b07b375e86b4760a7"
 sporePrint = "accb283740d9973480d6655682a4b2dc8b8fa685"
 squirrel = "a104bfa77041f457e2024c4b192a36a415e7909c"
