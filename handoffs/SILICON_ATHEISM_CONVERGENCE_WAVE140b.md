@@ -97,7 +97,7 @@ abstractions yet. They still import `tokio::net::UnixStream` directly.
 | coralReef | TODO (primal-rpc-client transport.rs:64) | N/A | N/A | BLOCKED |
 | barraCuda | TODO (ipc/btsp.rs, ipc/transport/server.rs) | TODO (main.rs:158) | N/A | BLOCKED |
 | petalTongue | TODO (transport.rs, biomeos_discovery/client.rs) | N/A | N/A | BLOCKED |
-| toadStool | N/A | N/A | N/A | SPECIAL (hw-safe feature-gate) |
+| toadStool | N/A | N/A | N/A | **DONE** (S329: 134 files `cfg`-gated, `cargo check --target x86_64-pc-windows-gnu` passes) |
 | sourDough | N/A | N/A | TODO (PermissionsExt) | BLOCKED |
 
 **Score: 1/14 primals fully cross-platform. 13 remaining.**
@@ -199,7 +199,7 @@ Each discovery function dispatches on `Platform::current()`.
 
 6. **Each primal with signals**: Adopt `ProcessManager::wait_for_shutdown()`
 7. **nestGate, biomeOS, sourDough**: Adopt `Platform::detect()` for FS ops
-8. **toadStool**: Feature-gate `hw-safe` behind `linux-hw`
+8. ~~**toadStool**: Feature-gate `hw-safe` behind `linux-hw`~~ **DONE** (S329: full workspace `cfg` gating)
 9. **sporeGate**: Full 14-primal harvest for all 13 architectures
 10. **primalSpring**: `depot-architecture-coverage` scenario
 
