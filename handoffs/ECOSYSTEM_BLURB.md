@@ -1,104 +1,120 @@
-# ecoPrimals Ecosystem Blurb — Wave 139a
+# ecoPrimals Ecosystem Blurb — Wave 139b
 
-**Date**: Jul 14, 2026 18:30 EDT | **Wave**: 139a | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN.** All Wave 138 items resolved. Zero remaining debt.
-Cascade pipeline converged (cyclic graph → DAG). 16/16 repos at parity across all remotes.
-3 live public surfaces. Opening new wave scope.
+**Date**: Jul 14, 2026 20:15 EDT | **Wave**: 139b | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN.** Significant upstream evolution absorbed.
+CASCADE-HANG + SPOREGATE-PUSH fixed by cellMembrane. songBird Windows cross-compile
+shipped. Identity anchoring deployed. sporePrint rebuild pushed (was 404).
+18/19 repos converged. 3 live surfaces restored (all 200).
 
 ---
 
-## Full Dimensions Review — Wave 139a
+## Incoming Evolution (this cascade)
+
+| Repo | Commit | What |
+|------|--------|------|
+| **bearDog** | 7acede9 | BTreeMap for wire types, remove orphan, `#[expect]` CTAP2 hardening |
+| **songBird** | 58b10e5 | **Windows cross-compile support** (northGate mesh enrollment prep) |
+| **nestGate** | 942e0c5 | Deep debt sweep round 2 — thiserror, `.into()`, const fn (3 commits) |
+| **cellMembrane** | 580a7e8 | **CASCADE-HANG + SPOREGATE-PUSH fixed** — skip non-bare repos, timeout reconciliation |
+| **primalSpring** | 5aff1b3 | +2 scenarios (ceremony tap-sequence, depot binary standard), merge resolution — 157 scenarios |
+| **sporePrint** | d37c2cc | **DISCOVERED_BY** audit — 26 repo descriptions + 4 org profiles sharpened + identity web |
+
+### Key Items
+
+- **CASCADE-HANG RESOLVED**: cellMembrane now skips non-bare repo push targets gracefully with timeout reconciliation. The cascade pipeline no longer hangs.
+- **SPOREGATE-PUSH RESOLVED**: Non-bare repo detection added to cascade push logic.
+- **songBird Windows**: Cross-compile support for x86_64-pc-windows-msvc target. This directly enables northGate mesh enrollment.
+- **DISCOVERED_BY Standard**: New passive-discovery model inverts SHOW_HN. All 26 public repo descriptions science-framed. All 4 org profiles updated with accurate counts and primals.eco website.
+- **sporePrint 404 FIXED**: Rebuilt locally (304 pages, 19 sections) and deployed to golgi. Root cause: identity scrub changes weren't in the golgi public dir.
+
+---
+
+## Full Orthogonal Dimensions Review — Wave 139b
 
 ### 1. Temporal
-- `wave.toml` bumped to 139a. 6 gate heads published (eastGate, sporeGate, golgi, golgiBody, ironGate, flockGate).
-- 7 active impulses — all wateringHole/plasmidBin divergence from today's cascade. Root cause: sporeGate-direct is a non-bare repo (push to checked-out branch rejected). Content is synced via origin (GitHub). **Not a data divergence — topology issue.**
-- `freshness.toml` uses tree hashes (DAG fix from Wave 138). No cyclic divergence.
+- `wave.toml` at 139a (bumping to 139b with this commit).
+- 6 gate heads published. sporeGate cascade timer inactive — cascade runs manually.
+- `freshness.toml` uses tree hashes (DAG). No cyclic divergence.
 
 ### 2. Ecological (Primal Health)
-- 16/16 repos fully converged (zero ahead/behind on all remotes).
-- Zero P1 blockers. Transport 11/11 adopted. Neural API 12/12 shipped.
-- Test counts stable. FIDO2 refactor added 13,883 new tests.
-- Key heads: bearDog f3ca8a0, biomeOS 6d88426, songBird 624b092, cellMembrane d11a407.
+- 18/19 repos converged (wateringHole sporeGate-direct is known non-bare topology issue — tree hashes match).
+- Zero P1 blockers. bearDog hardened (BTreeMap, orphan cleanup). nestGate debt swept (thiserror, const fn).
+- songBird Windows cross-compile shipped — new platform target.
+- primalSpring: 157 scenarios, ~1174 tests. 2 known debt items (sporeprint-pure-primal-parity:1, graphenegate-readiness:2).
+- sporePrint: 304 pages, 19 sections. Identity web complete.
 
 ### 3. Hardware / Topology
-- **sporeGate**: ONLINE. Build authority + NUCLEUS + SoloKey plugged. LAN 192.168.4.1/3.
+- **sporeGate**: ONLINE 8d. Build authority. SoloKey plugged. Load avg 1.6.
 - **eastGate**: ONLINE. Primary orchestrator. Zero debt.
-- **golgi**: ONLINE. VPS thin relay. Wildcard DNS. 3 live surfaces (200/200/200).
-- **ironGate**: ONLINE. ABG/NF compute. JupyterHub. 13/13.
-- **flockGate**: ONLINE. WAN covalent. sporePrint.
-- **grapheneGate**: ONLINE. StrongBox target. Android NUCLEUS.
-- **northGate**: NEW. Windows. Remote access hub. ~1TB AlphaFold. Mesh target.
-- **westGate**: OFFLINE. 76TB ZFS cold storage. Pending power-on.
-- SoloKeys: 1 on sporeGate, 1 on eastGate. First FIDO2 credential minted.
-- Network: CRS310 backbone (house1), Omada (house2), WireGuard overlay.
+- **golgi**: ONLINE. 3 surfaces restored (all 200). Identity scrub deployed.
+- **ironGate**: ONLINE. ABG/NF. JupyterHub.
+- **flockGate**: ONLINE. WAN covalent. 16 bonds, 143 scenarios green.
+- **grapheneGate**: ONLINE. StrongBox target.
+- **northGate**: NEW. Windows mesh target. songBird Windows build now available.
+- **westGate**: OFFLINE. ZFS cold storage.
 
 ### 4. Sovereignty / Membranes
-- K-Derm three-layer intact: Cloudflare (outer) → Caddy/bearDog (sovereign) → primals (inner).
-- S1-S4 ALL GRADUATED. DNSSEC enabled on primal.eco + nestgate.io.
-- Wildcard `*.primals.eco` deployed in Cloudflare.
-- Domain separation: primals.eco (ecosystem), primal.eco (personal sovereign), nestgate.io (federated data gateway).
-- Zero commercial services in inner membrane data path.
+- K-Derm three-layer intact. S1-S4 graduated.
+- **Identity web deployed**: ORCID, Keyoxide ASPe, JSON-LD schema.org graph, `.well-known/aspe`.
+- Builder identity severed from personal (ecoPrimal chain). attsi dual-voice formalized.
+- **DISCOVERED_BY standard**: passive-discovery scrutiny model for external exposure.
+- Domain separation operational: primals.eco / primal.eco / nestgate.io.
 
 ### 5. Depot / Build Pipeline
-- **DIVERGENCE FOUND**: sporeGate genomeBin depot has only 6/14 primals (songbird, beardog, biomeos, nestgate, squirrel, toadstool). Missing: barraCuda, coralReef, loamSpine, petalTongue, rhizoCrypt, skunkBat, sourDough, sweetGrass.
-- **DIVERGENCE FOUND**: genomeBin binaries are dynamically linked (gnu), not musl-static as post-primordial standard requires. This is the older depot layout — needs reconciliation with plasmidBin pipeline.
-- `checksums.toml` / `signatures.toml` not found on sporeGate genomeBin.
-- eastGate local has no plasmidBin directory (fetches from depot authority).
-- SIGN-VERIFY-ON-FETCH operational in cellMembrane.
+- DEPOT-LAYOUT divergence still active (sporeGate genomeBin 6/14, dynamically linked).
+- CASCADE-HANG **RESOLVED** by cellMembrane (skip non-bare, timeout reconciliation).
+- SPOREGATE-PUSH **RESOLVED** by cellMembrane (non-bare detection).
+- SIGN-VERIFY-ON-FETCH operational.
 
-### 6. Website / Public Surface / Security
-- `primals.eco` → 200 (sporePrint static site via Caddy)
-- `primals.eco/footprint/` → 200 (GIS composition, 10 weak bond proxies)
-- `live.primals.eco` → 200 (petalTongue TOPO-VIS dashboard)
-- Security headers deployed. fail2ban active. Rate limiting configured.
-- TLS auto-renewing via ACME/LE.
-- No new CRITICAL exposures.
+### 6. Website / Public Surface / Security / Identity
+- `primals.eco` → **200** (restored — sporePrint 304 pages rebuilt and deployed)
+- `primals.eco/footprint/` → **200** (GIS, 10 weak bond proxies)
+- `live.primals.eco` → **200** (petalTongue TOPO-VIS)
+- Identity web: ORCID + Keyoxide + JSON-LD + DISCOVERED_BY standard.
+- Security headers, fail2ban, rate limiting all active.
+- `spore-validate` crate prepared for crates.io publishing.
 
 ### 7. Glacial Shift
-- **ALL 8 CRITERIA CLEAR** for stadial entry (unchanged since Wave 111 for 1-7, Wave 136 for 8).
-- Next glacial goal: Universal Substrate Evolution (multi-arch depot parity).
-- SHOW_HN readiness rubric established (28 criteria, 4 categories).
+- **ALL 8 CRITERIA CLEAR** for stadial entry.
+- SHOW_HN rubric now complemented by DISCOVERED_BY passive-discovery standard.
 
 ### 8. Compositions / RustScript
-- footPrint LIVE at primals.eco/footprint/. GIS weak bonds functional.
-- RustScript architecture documented in gen5/foundations/RUSTSCRIPT_LAST_MILE.md.
-- Composition routing standard published in wateringHole.
-- JupyterHub access guide published for ABG collaborators.
-- tideGlass Phase 0 planned.
+- footPrint LIVE. tideGlass Phase 0 planned.
+- RustScript architecture documented in gen5/foundations/.
+- 10 drawbridge weak bond GIS proxies operational.
 
 ### 9. Documentation / Fossil Record
-- wateringHole distilled to ~83 active documents.
-- 14 gen5 foundation documents current.
-- ORTHOGONAL_DIMENSIONS_REVIEW.md created as reusable reassessment checklist.
-- Stale Wave 132-138 artifacts fossilized.
+- 3 new handoffs absorbed: SPOREPRINT_DISCOVERED_BY_AAR, NESTGATE_SESSION107, PRIMALSPRING_WAVE139a.
+- ORTHOGONAL_DIMENSIONS_REVIEW.md checklist active.
 
 ### 10. Cascade Pipeline / Convergence
-- `membrane temporal.cascade` ran but hung on sporeGate-direct wateringHole push rejection (non-bare repo).
-- All repos converged via origin (GitHub) — sporeGate pulls from origin.
-- Forgejo mirrors operational (38 repos).
-- Tree hash convergence working — no cyclic divergence.
-- **Action needed**: cascade should skip or gracefully handle non-bare direct push targets.
+- **CASCADE-HANG RESOLVED** — cellMembrane skips non-bare repos gracefully.
+- **SPOREGATE-PUSH RESOLVED** — non-bare detection in push logic.
+- Tree hash convergence operational. 18/19 converged via remotes.
 
 ---
 
 ## Active Divergences
 
-| ID | What | Severity | Owner |
-|----|------|----------|-------|
-| DEPOT-LAYOUT | genomeBin on sporeGate has 6/14 primals, dynamically linked | P2 | sporeGate + cellMembrane |
-| SPOREGATE-PUSH | Non-bare repo rejects push to checked-out branch | P3 | cellMembrane |
-| CASCADE-HANG | membrane cascade hangs after push rejection | P2 | cellMembrane |
+| ID | What | Severity | Owner | Status |
+|----|------|----------|-------|--------|
+| DEPOT-LAYOUT | genomeBin on sporeGate 6/14 primals, dynamically linked | P2 | sporeGate + cellMembrane | OPEN |
+| ~~CASCADE-HANG~~ | ~~cascade hangs after push rejection~~ | ~~P2~~ | cellMembrane | **RESOLVED** (580a7e8) |
+| ~~SPOREGATE-PUSH~~ | ~~non-bare repo rejects push~~ | ~~P3~~ | cellMembrane | **RESOLVED** (580a7e8) |
+| SPOREPRINT-REBUILD | golgi sporePrint rebuild incomplete after identity scrub | P3 | overwatch | **RESOLVED** (manual deploy) |
 
 ---
 
-## Wave 139a Scope
+## Wave 139b Remaining Scope
 
-### 1. northGate Mesh Enrollment
-**Owner**: overwatch (eastGate) + songBird team
+### 1. northGate Mesh Enrollment — **UNBLOCKED**
+**Owner**: overwatch + songBird team
+songBird Windows cross-compile now shipped. Ready to build and deploy.
 
 | Step | What | Status |
 |------|------|--------|
-| songBird Windows build | Cross-compile or native build | TODO |
+| songBird Windows build | Cross-compile shipped (58b10e5) | **READY** |
+| Native build on northGate | `cargo build --release --target x86_64-pc-windows-msvc` | TODO |
 | Mesh peer discovery | northGate ↔ eastGate on CRS310 backbone | TODO |
 | Capability registration | GPU compute, remote access relay | TODO |
 
@@ -109,9 +125,6 @@ Cascade pipeline converged (cyclic graph → DAG). 16/16 repos at parity across 
 |------|------|--------|
 | westGate online | Power on, ZFS health check | BLOCKED (hardware) |
 | Data inventory | Catalog AlphaFold datasets on northGate | TODO |
-| Transfer plan | rsync/zfs send over 10G backbone | TODO |
-| Provenance trace | loamSpine reverse lineage from download source | TODO |
-| nestGate registration | Content-addressed blob store | TODO |
 
 ### 3. SoloKey Ceremony Completion
 **Owner**: bearDog team
@@ -119,92 +132,77 @@ Cascade pipeline converged (cyclic graph → DAG). 16/16 repos at parity across 
 | Step | What | Status |
 |------|------|--------|
 | Authenticate | GetAssertion → verify credential | TODO |
-| Tap-sequence test | Live 3-5 tap entropy harvest | TODO |
+| Tap-sequence test | Live entropy harvest | TODO |
 | Loam cert seeding | Tier 1+2+3 → BLAKE3 → Loam cert seed | TODO |
-| Pixel StrongBox | ADB ceremony on grapheneGate | TODO |
 
-### 4. Live Compositions + RustScript
+### 4. Live Compositions
 **Owner**: sporePrint + protoKarya + petalTongue teams
 
 | Step | What | Status |
 |------|------|--------|
-| footPrint client live | GIS tool at primals.eco/footprint/ | **LIVE** |
-| GIS proxy routes | 10 weak bond hosts via Caddy drawbridge | **LIVE** |
-| footPrint server | Express on sporeGate (project save, agent bridge) | TODO |
-| NCBI/PubChem bonds | Drawbridge registrations for science APIs | TODO |
-| RustScript absorption | Extract lib for petalTongue/other compositions | TODO |
-| ABG user accounts | JupyterHub access for collaborators | TODO |
-| tideGlass Phase 0 | Sovereign GPS platform clone | TODO |
-| primal.eco separation | Inner membrane personal substrate | TODO |
+| footPrint client | primals.eco/footprint/ | **LIVE** |
+| footPrint server | Express on sporeGate | TODO |
+| NCBI/PubChem bonds | Drawbridge registrations | TODO |
+| RustScript absorption | Extract lib for petalTongue | TODO |
+| tideGlass Phase 0 | Sovereign GPS platform | TODO |
 
-### 5. Depot Reconciliation (from review)
+### 5. Depot Reconciliation
 **Owner**: sporeGate + cellMembrane teams
 
 | Step | What | Status |
 |------|------|--------|
-| Full 14/14 harvest | Build all primals musl-static on sporeGate | TODO |
-| Depot layout migration | genomeBin → plasmidBin standard layout | TODO |
+| Full 14/14 harvest | Build all primals musl-static | TODO |
+| Depot layout migration | genomeBin → plasmidBin standard | TODO |
 | Checksums + signatures | Generate checksums.toml + signatures.toml | TODO |
-| Cascade push fix | Handle non-bare repos gracefully | TODO |
 
 ---
 
 ## Three Tracks → Glacial Goals
 
 ### Track 1: Hardware Trust → NUCLEUS USB Kit
-
 ```
-DONE    First credential minted + tap-sequence ceremony
-DONE    FIDO2 IPC refactor (8 modules)
-NOW     Authenticate + live tap test → Loam cert seeding
-NOW     northGate mesh enrollment (Windows cross-platform)
+DONE    First credential minted + FIDO2 refactor + CTAP2 hardening
+NOW     northGate mesh enrollment (songBird Windows READY)
+NOW     SoloKey authenticate + tap-sequence + Loam cert
 NEXT    Pixel StrongBox ceremony
-NEXT    AlphaFold data provenance
 GOAL    User is their own key. USB kit deploys NUCLEUS identity.
 ```
 
-### Track 2: K-Derm Extrication → Sovereign Membrane Parity
-
+### Track 2: K-Derm → Sovereign Membrane Parity
 ```
-DONE    Wildcard DNS, FORGEJO-PERMS, BIOMEOS-TEMPLATE
-DONE    NAPI-LIFECYCLE + SOCKET-DIR-UNIFY
-DONE    Cyclic graph → DAG (freshness tree hashes)
+DONE    CASCADE-HANG + SPOREGATE-PUSH (cellMembrane 580a7e8)
+DONE    Identity web (ORCID, Keyoxide, JSON-LD, DISCOVERED_BY)
 NOW     Depot reconciliation (genomeBin → plasmidBin standard)
-NOW     primal.eco separation (inner membrane)
+NOW     primal.eco separation (inner membrane personal substrate)
 GOAL    Full sovereign membrane parity
 ```
 
 ### Track 3: Live Compositions → External Science Production
-
 ```
-DONE    footPrint LIVE at primals.eco/footprint/ (10 GIS weak bonds)
-DONE    JupyterHub + composition routing standard
-NOW     footPrint server on sporeGate (project persistence, agent bridge)
-NOW     NCBI/PubChem drawbridge bonds (routine outer membrane data)
-NOW     RustScript absorption for petalTongue UI safety primitives
-NEXT    ABG user accounts, tideGlass Phase 0
-NEXT    AlphaFold data → westGate → nestGate blob store
-GOAL    Pure Rust backend + RustScript UI bridge → sovereign compositions
+DONE    footPrint LIVE + sporePrint restored (304 pages)
+DONE    DISCOVERED_BY standard (26 repos, 4 orgs science-framed)
+NOW     footPrint server on sporeGate
+NOW     NCBI/PubChem drawbridge bonds
+NEXT    tideGlass Phase 0, ABG accounts
+GOAL    Pure Rust backend + sovereign compositions
 ```
 
 ---
 
 ## Gate Status
-
 ```
-eastGate     — PRIMARY. Zero debt. 16/16 repos converged.
-northGate    — NEW. Remote access hub. Windows mesh target. ~1TB AlphaFold.
-sporeGate    — NUCLEUS. SoloKey plugged. Depot authority. Build authority.
-                Depot divergence: genomeBin 6/14, needs full harvest.
-golgiBody    — Outer membrane. Wildcard DNS. Thin relay. 3 live surfaces.
-westGate     — OFFLINE. 76TB ZFS cold storage. Pending power-on.
-ironGate     — ABG/NF compute. JupyterHub. 13/13 active.
-flockGate    — WAN covalent. bearDog FIDO2 + primalSpring scenarios.
+eastGate     — PRIMARY. Zero debt. 18/19 converged. Cascade authority.
+northGate    — NEW. songBird Windows build READY. Mesh enrollment next.
+sporeGate    — NUCLEUS. SoloKey. Build auth. 8d uptime. Depot 6/14 (needs harvest).
+golgiBody    — Outer membrane. 3 live surfaces (all 200). sporePrint restored.
+westGate     — OFFLINE. ZFS cold storage. Pending power-on.
+ironGate     — ABG/NF compute. JupyterHub.
+flockGate    — WAN covalent. 16 bonds. 143 scenarios green.
 grapheneGate — StrongBox target. Android compile unblocked.
 ```
 
 ---
 
-*Wave 139a: zero code debt. 3 active divergences (depot layout, cascade push, cascade hang — all P2/P3).
-New scope: northGate mesh, AlphaFold provenance, SoloKey ceremony, live compositions, depot reconciliation.
-Orthogonal dimensions review checklist added to wateringHole for future reassessment.*
+*Wave 139b: CASCADE-HANG + SPOREGATE-PUSH resolved. songBird Windows shipped.
+sporePrint identity web deployed + DISCOVERED_BY standard. Site restored (304 pages).
+1 active divergence (DEPOT-LAYOUT P2). northGate mesh enrollment unblocked.*
