@@ -1,10 +1,10 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-15T16:55:58Z
+# Gate: eastGate | Updated: 2026-07-15T17:50:32Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-15T16:55:58Z"
+updated = "2026-07-15T17:50:32Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
@@ -15,7 +15,7 @@ benchScale = "ba5fa5426d6400d9bc3f642cd3a64e6244cabe22"
 bingoCube = "cf6b645e6531177eb5795d3e1da292f1ded2a243"
 biomeOS = "6d9300facad6f33af327512f2433e2c1d6c6da4a"
 blueFish = "c92df4a4046cec711cd98daac6800856a95d6bca"
-cellMembrane = "091571528b5113528efc4c481f9bd261467844f6"
+cellMembrane = "ad00ef400c637d4c2557627b9f3a0a20c32c718e"
 coralReef = "372da16719951db62f092aeafccda6e92fdc2440"
 esotericWebb = "c9fed952223b110385fc6ec8baa6f4fdccdf1b13"
 footPrint = "60bd86524321739d0b3d96fe9f1f784e5175e99e"
