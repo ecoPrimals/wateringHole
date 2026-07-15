@@ -18,12 +18,12 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.9.0"
-generated = "2026-07-13"
+version = "3.0.0"
+generated = "2026-07-15"
 # DEPRECATED: wave ID now lives in wave.toml (overwatch sole writer).
 # This field is retained at last-known value for backward compat with older binaries.
-wave = 137
-total_repos = 40
+wave = 140
+total_repos = 42
 
 # ═══════════════════════════════════════════════════════════════════
 # WaterFall Sync Configuration
@@ -534,6 +534,42 @@ github_repo = "sporeGarden/initioChem"
 forgejo_repo = "sporeGarden/initioChem"
 
 # ═══════════════════════════════════════════════════════════════════
+# Protists (protoKarya org — composition targets, external-facing tools)
+# ═══════════════════════════════════════════════════════════════════
+# Protists are protoKarya projects that consume primals via NUCLEUS
+# composition. They are the external-facing "tangible" products
+# proven by spring mathematics (primalSpring scenarios validate
+# infrastructure; domain springs validate science).
+
+[repos.footPrint]
+org = "protoKarya"
+local_path = "protists/footPrint"
+membrane = "trailing-mirror"
+sync_priority = "standard"
+category = "protist"
+description = "GIS home-improvement planner — satellite map, CAD drawing, public data overlays"
+github_repo = "protoKarya/footPrint"
+evolution_target = "composition"
+gate_owner = "flockGate"
+composition_url = "primals.eco/footprint/"
+composition_status = "partial"
+notes = "Static SPA LIVE at primals.eco/footprint/. 10 GIS proxy routes via Caddy. Express backend not yet absorbed by primals (nestGate CAS + songBird drawbridge). RustScript experiment substrate."
+
+[repos.tideGlass]
+org = "protoKarya"
+local_path = "protists/tideGlass"
+membrane = "trailing-mirror"
+sync_priority = "low"
+category = "protist"
+description = "Sovereign GPS platform — Gene Perturbation Simulator rebuild in pure Rust"
+github_repo = "protoKarya/tideGlass"
+evolution_target = "composition"
+gate_owner = "flockGate"
+composition_url = "tideglass.primals.eco"
+composition_status = "planned"
+notes = "GitHub repo seeded. Not yet cloned into workspace. Phase 0: reproduce GPS paper figures vs Python baseline. First Gonzales NF deliverable."
+
+# ═══════════════════════════════════════════════════════════════════
 # Infrastructure (mixed orgs)
 # ═══════════════════════════════════════════════════════════════════
 
@@ -688,6 +724,7 @@ repos = [
     "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint",
     "wetSpring", "neuralSpring", "hotSpring",
     "airSpring", "groundSpring", "healthSpring", "ludoSpring",
+    "footPrint",
 ]
 
 [gates.ironGate]

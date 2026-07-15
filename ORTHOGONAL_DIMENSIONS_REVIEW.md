@@ -75,9 +75,10 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 - [ ] Live compositions operational (footPrint, tideGlass status)
 - [ ] Drawbridge weak bond registrations current
 - [ ] RustScript absorption path documented
-- [ ] protoKarya projects registered in manifest
+- [x] protoKarya projects registered in manifest (Wave 140a — footPrint + tideGlass)
 - [ ] JupyterHub / ABG access operational
 - [ ] Composition routing standard applied
+- [ ] primalSpring E2E scenarios for protoKarya compositions (5 identified gaps)
 
 ## 9. Documentation / Fossil Record
 
@@ -97,5 +98,5 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ---
 
-*Last used*: Wave 139c (Jul 15, 2026)
+*Last used*: Wave 140a (Jul 15, 2026)
 *Created*: Wave 139a

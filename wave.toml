@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 139
-sub = "e"
+id = 140
+sub = "a"
 date = "2026-07-15"
-posture = "PUBLIC + SOVEREIGN. OS ATHEISM PHASE 1 SHIPPED. Platform type system (TargetOs, CpuArch, LinkModel, Platform) in cellmembrane-types. FRAGO issued for Phases 2-6. Pipeline connected, depot operational."
+posture = "PUBLIC + SOVEREIGN. TANGIBLES PIVOT. protoKarya compositions evolving to wider-world usability. footPrint server composition, RustScript extraction, tideGlass Phase 0 primary. Manifest v3.0 tracks 42 repos (2 protists). 5 primalSpring scenario gaps identified. Infrastructure debt cleared in 139."
 publisher = "eastGate-overwatch"
 
 [gates]
