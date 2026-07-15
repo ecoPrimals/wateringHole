@@ -93,8 +93,19 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 - [ ] `membrane temporal.cascade` runs without hanging
 - [ ] All repo remotes converged (zero ahead/behind)
 - [ ] sporeGate-direct push mechanism functional (or documented workaround)
-- [ ] No cyclic divergence in freshness records
+- [x] No cyclic divergence in freshness records (Wave 138c — tree hashes)
 - [ ] Forgejo mirrors operational (bidirectional repos functional)
+
+## 11. Content-Addressed Convergence (CAC — Newton-Leibniz Pattern)
+
+- [x] Git repos: tree hashes in freshness.toml (Wave 138c)
+- [x] Depot binaries: BLAKE3 diff in depot_sync --push (Wave 139e)
+- [ ] Heads metadata: TreeParity for auto-publish conflicts (FRAGO issued 140a)
+- [ ] Impulses: content-hash deduplication (FRAGO issued 140a)
+- [ ] rhizoCrypt: SessionTreeHash primitive (FRAGO issued 140a)
+- [ ] Cascade divergence: tree-parity before agentic policy dispatch (FRAGO issued 140a)
+- [ ] primalSpring: content-addressed-convergence scenario (FRAGO issued 140a)
+- [x] Pattern formalized in whitePaper/gen5/foundations/ (Wave 140a)
 
 ---
 

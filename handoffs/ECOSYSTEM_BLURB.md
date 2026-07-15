@@ -13,6 +13,12 @@ now tracks 42 repos including 2 protists (footPrint, tideGlass).
 primalSpring `platform-type-parity` scenario green (162 scenarios, 1194 tests).
 FRAGO issued disseminating TRANSPORT-ABSTRACT as P1 unlock for 11 Windows-blocked primals.
 
+**Architectural evolution**: Content-Addressed Convergence (CAC) pattern
+formalized — the Newton-Leibniz principle. Temporal divergence with content
+identity is convergence, not conflict. Pattern document + 3 team handoffs
++ FRAGO issued. Resolves persistent forgejo/GitHub divergence as isomorphic
+fractal deployment pattern. 2/6 layers solved, 4 FRAGOs issued.
+
 ---
 
 ## Primary Focus: protoKarya Tangibles
@@ -156,6 +162,26 @@ Total:                        45     BLAKE3 + Ed25519 signed, VPS depot serving
 
 ---
 
+## Content-Addressed Convergence (Newton-Leibniz Pattern)
+
+**Principle**: Content identity supersedes temporal identity for convergence.
+Two agents independently producing identical content = convergence, not conflict.
+The temporal ordering is provenance metadata, not identity.
+
+| Layer | Content Identity | Status |
+|-------|-----------------|--------|
+| Git repos | `HEAD^{tree}` tree hashes | **SOLVED** (Wave 138c) |
+| Depot binaries | BLAKE3 checksums | **SOLVED** (Wave 139e) |
+| Heads metadata | TreeParity for auto-publish | FRAGO issued (P1) |
+| Impulses | Content-hash dedup | FRAGO issued (P2) |
+| rhizoCrypt DAG | SessionTreeHash | FRAGO issued (P2) |
+| Cascade divergence | Tree-parity before policy | FRAGO issued (P1) |
+
+**Documents**: `whitePaper/gen5/foundations/CONTENT_ADDRESSED_CONVERGENCE.md`
+**Handoffs**: `CAC_CELLMEMBRANE_HANDOFF.md`, `CAC_RHIZOCRYPT_HANDOFF.md`
+
+---
+
 ## Remaining Scope (non-tangibles)
 
 ### Infrastructure Hygiene
@@ -234,7 +260,7 @@ grapheneGate — StrongBox target. 12/14 Android ecobins FRESH (petalTongue, toa
 
 ---
 
-*Wave 140a: Tangibles pivot + Cross-Platform Parity AAR absorbed. 45 depot binaries across
-4 architectures. depot_sync --push operational. TRANSPORT-ABSTRACT FRAGO disseminated to
-all 15 primal teams. Phase 2 unlocks 11/13 Windows primals. protoKarya compositions evolving.
-5 primalSpring scenario gaps documented. 162 scenarios, 1194 tests green.*
+*Wave 140a: Tangibles pivot + Cross-Platform Parity AAR + Content-Addressed Convergence.
+45 depot binaries, 4 architectures. Newton-Leibniz pattern formalized — temporal divergence
+with content identity is convergence. 3 FRAGOs issued (transport-abstract, cross-platform
+parity, CAC). 162 scenarios, 1194 tests. protoKarya evolving to wider-world usability.*
