@@ -43,14 +43,16 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ## 5. Depot / Build Pipeline
 
-- [ ] Depot authority identified and operational (sporeGate)
+- [ ] Depot authority identified and operational (sporeGate — 13-target build authority)
 - [ ] ecoBins built as musl-static stripped (post-primordial standard)
 - [ ] `checksums.toml` / `signatures.toml` current
 - [ ] `require-signed` enforced system-wide
 - [ ] SIGN-VERIFY-ON-FETCH operational in cellMembrane
-- [ ] All target architectures built (x86_64, aarch64 at minimum)
+- [ ] All 4 depot architectures built for all 14 primals (see Dimension 12 for matrix)
+- [ ] Exotic architectures expanded to depot as primal adoption completes
 - [ ] Depot layout consistent across depot authority and relay mirrors
 - [ ] `plasmid.harvest` → `plasmid.fetch` pipeline tested end-to-end
+- [ ] `depot_sync --push` operational (builder → VPS)
 
 ## 6. Website / Public Surface / Security
 
@@ -107,7 +109,68 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 - [ ] primalSpring: content-addressed-convergence scenario (FRAGO issued 140a)
 - [x] Pattern formalized in whitePaper/gen5/foundations/ (Wave 140a)
 
+## 12. Architecture / OS Parity (Silicon Atheism)
+
+### Depot Architectures (must compile ALL primals)
+
+- [ ] x86_64-unknown-linux-musl — 14/14 primals (reference architecture)
+- [ ] aarch64-unknown-linux-musl — 14/14 primals (Pixel, ARM gates)
+- [ ] aarch64-linux-android — 14/14 primals (grapheneGate, mobile)
+- [ ] x86_64-pc-windows-gnu — 14/14 primals (northGate, Windows mesh)
+
+### Validated Exotic (songBird proven — expand to all primals as adoption completes)
+
+- [ ] riscv64gc-unknown-linux-gnu — open silicon (StarFive, SiFive). P2 depot candidate
+- [ ] armv7-unknown-linux-gnueabihf — RPi/IoT/embedded. P2 depot candidate
+- [ ] arm-unknown-linux-gnueabihf — RPi Zero, industrial PLCs
+- [ ] i686-unknown-linux-gnu — legacy 32-bit desktops, thin clients
+- [ ] powerpc64le-unknown-linux-gnu — IBM POWER9/10 HPC, AI servers
+- [ ] powerpc64-unknown-linux-gnu — IBM POWER classic, PS3 Linux
+- [ ] s390x-unknown-linux-gnu — IBM Z mainframes (banks, airlines)
+- [ ] sparc64-unknown-linux-gnu — Sun/Oracle SPARC T-series
+
+### Blocked / Pending
+
+- [ ] powerpc-unknown-linux-gnu — 32-bit PPC (AtomicU64). Fix: tokio portable-atomic feature
+- [ ] wasm32-wasip2 — browser + edge computing. Untested but Rust target exists
+- [ ] aarch64-unknown-fuchsia — Google capability-based OS
+- [ ] x86_64-unknown-freebsd — BSD servers (Netflix CDN)
+- [ ] riscv64gc-unknown-none-elf — bare metal RISC-V (no OS)
+- [ ] loongarch64-unknown-linux-gnu — Chinese MIPS successor (Loongson)
+
+### Per-Primal Cross-Compile Adoption
+
+- [ ] Transport abstraction adopted: _/14 primals use `TransportEndpoint` (not raw UDS)
+- [ ] Signal abstraction adopted: _/3 affected primals use `ProcessManager`
+- [ ] FS abstraction adopted: _/3 affected primals use `Platform::detect()`
+- [ ] toadStool hw-safe feature-gated behind `linux-hw`
+- [ ] petalTongue Android target is cdylib (not binary)
+- [ ] portable-atomic feature enabled in all workspace Cargo.toml
+- [ ] primalSpring: `full-cross-compile` scenario (all primals, all depot architectures)
+- [ ] primalSpring: `depot-architecture-coverage` scenario (track expansion)
+
+### Code Divergence Tracking (constrained evolution)
+
+`#[cfg()]` boundaries are not technical debt — they are constrained evolution
+targets. Each platform-specific code path is a site where the ecosystem
+adapts to hardware reality. Track them:
+
+- [ ] `#[cfg(unix)]` / `#[cfg(windows)]` divergences documented per primal
+- [ ] Platform-specific code paths have paired tests on both sides
+- [ ] No `#[cfg()]` block exceeds 50 lines without extraction to platform module
+- [ ] Fallback paths exist for all `#[cfg()]` branches (no dead-end compile)
+- [ ] New architectures assessed at each wave boundary (RISC-V board availability, etc.)
+- [ ] Console/embedded targets assessed when hardware acquired
+
+### Subsystem Convergence
+
+- [ ] Transport: `primal-transport` crate published (UDS/NamedPipe/TCP dispatch)
+- [ ] Lifecycle: `ProcessManager` adopted by all signal-using primals
+- [ ] Discovery: `Platform::socket_dir()`, `Platform::config_dir()`, `Platform::bin_dir()`
+- [ ] Data backends: storage access via transport layer (not raw UDS)
+- [ ] Credential store: platform-aware (Keyring/Keychain/DPAPI)
+
 ---
 
-*Last used*: Wave 140a (Jul 15, 2026)
+*Last used*: Wave 140b (Jul 15, 2026)
 *Created*: Wave 139a
