@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document  
 **Phase**: Interstadial exit → Stadial entry  
-**Last updated**: 2026-07-14 (Wave 139a — **ALL 8 CRITERIA CLEAR. PUBLIC EXPOSURE LIVE.** 3 live surfaces: `primals.eco` (sporePrint), `primals.eco/footprint/` (GIS), `live.primals.eco` (TOPO-VIS). Cascade DAG converged (tree hashes fix cyclic graph). 16/16 repos at parity. FIDO2 IPC refactored (8 modules, 13,883 tests). First FIDO2 credential minted. DNS wildcard deployed. RustScript architecture documented. footPrint deployed and functioning.)
+**Last updated**: 2026-07-15 (Wave 139c — **ALL 8 CRITERIA CLEAR. PUBLIC EXPOSURE LIVE. DEPOT FULLY HARVESTED.** 3 live surfaces: `primals.eco` (sporePrint), `primals.eco/footprint/` (GIS), `live.primals.eco` (TOPO-VIS). Cascade DAG converged (tree hashes). 36 fresh ecobins across 4 architectures (x86_64-musl, aarch64-musl, Windows, Android). Ed25519 signed. NCBI/PubChem drawbridge bonds shipped. cellMembrane error taxonomy refactored. Zero active divergences. wateringHole fossilized and cleaned.)
 
 ---
 
