@@ -223,27 +223,41 @@ Report completion via commit message or handoff to overwatch.
 
 ## Completion Tracking
 
-| Primal | Categories | Files | Effort | Done |
-|--------|-----------|-------|--------|------|
-| songBird | — | — | — | **YES** (reference) |
-| bearDog | 1 | 1 | Small | **YES** (`1c3dc9d`) |
-| coralReef | 1 | 1 | Small | |
-| rhizoCrypt | 1 | 1 | Small | |
-| skunkBat | 1,2 | 2 | Small | |
-| loamSpine | 1,2 | 3 | Small | |
-| sweetGrass | 1 | 2-3 | Small-Med | |
-| squirrel | 1 | 4 | Small-Med | |
-| nestGate | 3 | 1 | Small | |
-| sourDough | 3 | 1 | Small | |
-| toadStool | 4 | 134 | Medium | **YES** (S329: full workspace `cfg` gating) |
-| petalTongue | 1,5 | 2+ | Medium | **CORE DONE** (f406982) |
-| biomeOS | 1,3 | 5-6 | Medium | |
-| barraCuda | 1,2 | 3 | Medium | |
+| Primal | Categories | Effort | Status | Commit |
+|--------|-----------|--------|--------|--------|
+| songBird | — | — | **DONE** (reference) | `2091974d` cfg gate evolution |
+| bearDog | 1 | Small | **DONE** | `1c3dc9de6` tower-atomic cross-platform IPC |
+| barraCuda | 1,2 | Medium | **DONE** | `7582ac73` Windows cross-compilation |
+| biomeOS | 1,3 | Medium | **DONE** | `16b25557` v4.34 cross-arch + capability discovery |
+| coralReef | 1 | Small | **DONE** | `da5afe1` cfg-gate Unix-only code |
+| skunkBat | 1,2 | Small | **DONE** | `6b3e6eb` cross-arch + deep debt sweep |
+| squirrel | 1 | Small-Med | **DONE** | `da54c045` UDS→platform transport gating |
+| toadStool | 4 | Small | **DONE** | `592248618` S329 Windows cargo check passes |
+| petalTongue | 1,5 | Medium | **DONE** | `0c65a57` cross-arch transport Windows+Android |
+| sourDough | 3 | Small | **DONE** | `320397e` Windows target support |
+| rhizoCrypt | 1 | Small | TODO | |
+| sweetGrass | 1 | Small-Med | TODO | |
+| loamSpine | 1,2 | Small | TODO | |
+| nestGate | 3 | Small | TODO | |
 
-**Total: ~28-35 files across 13 primals. Mostly mechanical.**
+**Score: 10/14 adopted (up from 1/14). 4 remaining.**
+
+Remaining are small-effort primals (rhizoCrypt 1 file, sweetGrass 2-3 files,
+loamSpine 3 files, nestGate 1 module). All mechanical — same pattern.
+
+Also delivered alongside cross-arch (deep debt sweeps):
+- barraCuda: LatencyModel enum dispatch, hardcode cleanup, GPU test pool
+- coralReef: split large files, namespace-agnostic paths (Wave 143 docs!)
+- skunkBat: deep debt sweep
+- songBird: zero-alloc patterns, to_lowercase elimination, 162 GiB cargo clean
+- toadStool: clone elimination, +31 tests, clippy zero (S330)
+- bearDog: sovereignty hardening, BTreeMap batch 3, test extraction
+- biomeOS: socket dir unification (/run/membrane/), capability-first discovery
+- squirrel: mock evolution, timeout threading, dead module purge
+- petalTongue: deps bumped, process_exists cross-platform
+- sourDough: safety + coverage + smart refactoring
 
 ---
 
-*Wave 141a: Per-primal cross-architecture handoffs. songBird is the reference.
-Each team picks up their section independently. Report completion to overwatch.
-sporeGate harvests Windows targets after each adoption.*
+*Updated Wave 141a: 10/14 primals cross-arch adopted. 4 remaining (small effort).
+sporeGate harvest pending for all adopted primals.*

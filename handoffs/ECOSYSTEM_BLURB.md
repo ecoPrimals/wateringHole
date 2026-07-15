@@ -1,12 +1,11 @@
-# ecoPrimals Ecosystem Blurb — Wave 141a
+# ecoPrimals Ecosystem Blurb — Wave 141b
 
-**Date**: Jul 15, 2026 14:00 EDT | **Wave**: 141a | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM CONVERGENCE.**
+**Date**: Jul 15, 2026 16:50 EDT | **Wave**: 141b | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM CONVERGENCE ACCELERATING.**
 
-12-dimension orthogonal review completed. 7 handoffs + 6 impulses fossilized.
-14/14 primals compile. 39/39 repos synced. 45 depot binaries across 4 architectures.
-13-target build authority (8 exotic architectures validated). OS Atheism Phases 1-2
-shipped. 2 active FRAGOs. 9 active handoffs (down from 16).
+**This cascade**: 10 primals delivered cross-arch adoption + deep debt sweeps.
+Cross-platform score jumped **1/14 → 10/14**. 4 remaining (small effort).
+14/14 primals compile on native target. 39/39 repos synced.
 
 ---
 
@@ -24,26 +23,26 @@ sporePrint root site returning 404 on `primals.eco`. `footprint/` and
 
 ## Evolution Goals — Next Waves
 
-### Goal 1: Silicon Atheism Convergence (P1 — PARALLEL SUBTASK)
+### Goal 1: Silicon Atheism Convergence (P1 — PARALLEL SUBTASK, ACCELERATING)
 
-**Score: 1/14 primals fully cross-platform. Target: 14/14.**
+**Score: 10/14 primals cross-arch adopted. 4 remaining (all small effort).**
 
-Per-primal cross-arch adoption runs in parallel with ecosystem evolution.
-Each primal team has a specific handoff with files to modify (~28-35 files
-total, mostly mechanical). songBird is the reference implementation.
+| Adopted (10) | Remaining (4) |
+|-------------|--------------|
+| songBird (ref), bearDog, barraCuda, biomeOS, coralReef, skunkBat, squirrel, toadStool, petalTongue, sourDough | rhizoCrypt (1 file), sweetGrass (2-3), loamSpine (3), nestGate (1 module) |
 
 | Work | Owner | Priority | Status |
 |------|-------|----------|--------|
-| Publish `primal-transport` crate (extract from cellMembrane) | cellMembrane | P1 | FRAGO issued |
-| Per-primal transport/signal/FS adoption (13 primals) | each primal team | P1 | 0/13 — **PARALLEL** |
+| 4 remaining primal adoptions | rhizoCrypt, sweetGrass, loamSpine, nestGate | P1 | TODO |
 | `portable-atomic` feature on tokio (PPC32 + consoles) | cellMembrane | P1 | FRAGO issued |
-| Full 14-primal Windows harvest (post adoption) | sporeGate | P1 | blocked on adoption |
+| Full 14-primal Windows harvest (post adoption) | sporeGate | P1 | 10/14 ready |
 | `full-cross-compile` primalSpring scenario | primalSpring | P2 | FRAGO issued |
 
-`#[cfg()]` divergences are constrained evolution targets, not debt.
+Deep debt delivered alongside cross-arch: LatencyModel dispatch (barraCuda),
+socket unification (biomeOS), zero-alloc patterns (songBird), +31 tests (toadStool),
+sovereignty hardening (bearDog), capability-first discovery (biomeOS).
 
 **Per-primal handoff**: `CROSS_ARCH_PER_PRIMAL_HANDOFFS.md`
-**Architecture handoff**: `SILICON_ATHEISM_CONVERGENCE_WAVE140b.md`
 
 ### Goal 2: Content-Addressed Convergence (P1–P2)
 
@@ -90,11 +89,11 @@ total, mostly mechanical). songBird is the reference implementation.
 ### Depot (45 binaries + 8 exotic validated)
 
 ```
-Depot (4 arch, 45 bins):
+Depot (4 arch, 45 bins — pending re-harvest for 10 adopted primals):
   x86_64-linux-musl     16   FRESH
   aarch64-linux-musl    16   FRESH
   aarch64-android       12   FRESH (2 expected-fail: petalTongue, toadStool)
-  x86_64-windows-gnu     2   songbird.exe, toadStool (S329 cross-arch: 134 files gated)
+  x86_64-windows-gnu     1   songbird.exe — 10 MORE now adoption-ready for harvest
 
 Exotic validated (songBird, not yet in depot):
   riscv64gc  powerpc64le  powerpc64  s390x  sparc64  arm32  armv7  i686
@@ -154,7 +153,9 @@ grapheneGate — StrongBox target. 12/14 Android ecobins.
 ```
 DONE    45 signed ecobins, 4 architectures, 8 exotic validated
 DONE    OS Atheism Phases 1-2 (types + transport)
-NOW     Per-primal transport adoption (1/14 → 14/14)
+DONE    Per-primal cross-arch adoption: 10/14 complete (9 this cascade!)
+NOW     4 remaining adoptions (rhizoCrypt, sweetGrass, loamSpine, nestGate)
+NOW     sporeGate Windows harvest for 10 adopted primals
 NOW     portable-atomic for PPC32 (consoles, embedded)
 NOW     northGate mesh enrollment
 GOAL    User is their own key. USB kit deploys NUCLEUS identity.
@@ -184,7 +185,7 @@ GOAL    Pure Rust backend + sovereign compositions + external science.
 
 ---
 
-*Wave 141a: 12-dimension review complete. 7 handoffs + 6 impulses fossilized.
-P0: primals.eco root 404. Silicon Atheism convergence: 1/14 primals cross-platform,
-13-target build authority, portable-atomic FRAGO for PPC32/consoles. CAC 2/6 layers
-solved. 2 active FRAGOs (silicon-atheism, CAC). 39/39 repos synced. 162 scenarios.*
+*Wave 141b: Cross-arch adoption exploded — 10/14 primals adopted (9 this cascade).
+barraCuda, bearDog, biomeOS, coralReef, skunkBat, squirrel, toadStool, petalTongue,
+sourDough all delivered cross-arch + deep debt. 4 remaining (small effort). sporeGate
+Windows harvest pending for 10 adopted primals. P0: primals.eco still 404. 39/39 synced.*
