@@ -4,7 +4,7 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-15T11:30:00Z"
+updated = "2026-07-15T13:10:00Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
@@ -15,7 +15,7 @@ benchScale = "ba5fa5426d6400d9bc3f642cd3a64e6244cabe22"
 bingoCube = "cf6b645e6531177eb5795d3e1da292f1ded2a243"
 biomeOS = "6d9300facad6f33af327512f2433e2c1d6c6da4a"
 blueFish = "c92df4a4046cec711cd98daac6800856a95d6bca"
-cellMembrane = "060b6458e736da780abdd4c50e57dafae5eb6113"
+cellMembrane = "04f6f9684b31debe8e3a583fcb8c876be99ec66c"
 coralReef = "372da16719951db62f092aeafccda6e92fdc2440"
 esotericWebb = "c9fed952223b110385fc6ec8baa6f4fdccdf1b13"
 groundSpring = "65066aac16e81bc3e369580864ce42ef0b39cb40"
@@ -30,7 +30,7 @@ nestGate = "2a6b21517b07fa2a145d3bdb653fad3e96b140cd"
 neuralSpring = "33a19d16eaacfaf276d5db989083d803493be600"
 petalTongue = "8994ce549d2f860b56950f972f046516614a671a"
 plasmidBin = "60325220425b8a561e1fdb1ca806a05950f7cd7d"
-primalSpring = "6badcc0652f6aba25cc36643d8e968346c51ae6c"
+primalSpring = "b91dd41d213faf71710fee170900691d997e180a"
 projectFOUNDATION = "4583164a5de4dbb1b426fc0afd427c44af7072e5"
 projectNUCLEUS = "bcb15980e8a59c270d6c180f57e2a98e21d29be4"
 rhizoCrypt = "a580796baaae8cc90024996f43ab4f7198183db8"
