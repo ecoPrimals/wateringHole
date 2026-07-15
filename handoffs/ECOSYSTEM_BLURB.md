@@ -24,25 +24,26 @@ sporePrint root site returning 404 on `primals.eco`. `footprint/` and
 
 ## Evolution Goals — Next Waves
 
-### Goal 1: Silicon Atheism Convergence (P1 — highest leverage)
+### Goal 1: Silicon Atheism Convergence (P1 — PARALLEL SUBTASK)
 
 **Score: 1/14 primals fully cross-platform. Target: 14/14.**
+
+Per-primal cross-arch adoption runs in parallel with ecosystem evolution.
+Each primal team has a specific handoff with files to modify (~28-35 files
+total, mostly mechanical). songBird is the reference implementation.
 
 | Work | Owner | Priority | Status |
 |------|-------|----------|--------|
 | Publish `primal-transport` crate (extract from cellMembrane) | cellMembrane | P1 | FRAGO issued |
-| Transport adoption: 11 primals replace raw UDS → `TransportEndpoint` | all primal teams | P1 | 0/11 |
-| Signal adoption: 3 primals → `ProcessManager::wait_for_shutdown()` | loamSpine, skunkBat, barraCuda | P1 | 0/3 |
-| `portable-atomic` feature on tokio (PPC32 + consoles + 32-bit) | cellMembrane | P1 | FRAGO issued |
-| FS abstraction: 3 primals → `Platform::detect()` | nestGate, biomeOS, sourDough | P2 | FRAGO issued |
-| toadStool `hw-safe` → `linux-hw` feature-gate | toadStool | P2 | FRAGO issued |
+| Per-primal transport/signal/FS adoption (13 primals) | each primal team | P1 | 0/13 — **PARALLEL** |
+| `portable-atomic` feature on tokio (PPC32 + consoles) | cellMembrane | P1 | FRAGO issued |
 | Full 14-primal Windows harvest (post adoption) | sporeGate | P1 | blocked on adoption |
 | `full-cross-compile` primalSpring scenario | primalSpring | P2 | FRAGO issued |
 
-`#[cfg()]` divergences are constrained evolution targets, not debt. Each
-platform-specific code path is tracked in Dimension 12 of the orthogonal review.
+`#[cfg()]` divergences are constrained evolution targets, not debt.
 
-**Handoff**: `SILICON_ATHEISM_CONVERGENCE_WAVE140b.md`
+**Per-primal handoff**: `CROSS_ARCH_PER_PRIMAL_HANDOFFS.md`
+**Architecture handoff**: `SILICON_ATHEISM_CONVERGENCE_WAVE140b.md`
 
 ### Goal 2: Content-Addressed Convergence (P1–P2)
 
