@@ -235,7 +235,7 @@ Report completion via commit message or handoff to overwatch.
 | toadStool | 4 | Small | **DONE** | `592248618` S329 Windows cargo check passes |
 | petalTongue | 1,5 | Medium | **DONE** | `0c65a57` cross-arch transport Windows+Android |
 | sourDough | 3 | Small | **DONE** | `320397e` Windows target support |
-| rhizoCrypt | 1 | Small | TODO | |
+| rhizoCrypt | 1 | Small | **DONE** | `feff297` unix_socket #[cfg(unix)], platform-aware AdapterFactory |
 | sweetGrass | 1 | Small-Med | TODO | |
 | loamSpine | 1,2 | Small | TODO | |
 | nestGate | 3 | Small | TODO | |
