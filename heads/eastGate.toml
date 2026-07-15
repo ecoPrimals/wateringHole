@@ -4,7 +4,7 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-15T15:40:00Z"
+updated = "2026-07-15T15:25:00Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
@@ -29,7 +29,7 @@ loamSpine = "f1c6a44052914bed063c50f64a743ae402327947"
 ludoSpring = "f566b8265b7aa2a60d159a219306fce557dea1a0"
 nestGate = "286bc878ff9a65d9cfc84d94c5f6843af012de2b"
 neuralSpring = "33a19d16eaacfaf276d5db989083d803493be600"
-petalTongue = "0d43e3504d12b5808b39bf8ef32d45ef85b93ec3"
+petalTongue = "dec1fc12a2a6ea08b03073adf143639273b00205"
 plasmidBin = "35b2e5713d1838da1a9fb2925425f8a6c91770a4"
 primalSpring = "a5b69b168995c47dc07a7586645c7254ed53667e"
 projectFOUNDATION = "4583164a5de4dbb1b426fc0afd427c44af7072e5"
