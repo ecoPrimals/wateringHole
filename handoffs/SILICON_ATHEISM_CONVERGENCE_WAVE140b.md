@@ -86,7 +86,7 @@ abstractions yet. They still import `tokio::net::UnixStream` directly.
 | Primal | UDS→Transport | Signals→ProcessManager | FS→Platform | Status |
 |--------|--------------|----------------------|-------------|--------|
 | songBird | **DONE** (reference impl) | **DONE** | N/A | **COMPLETE** |
-| bearDog | TODO (tower-atomic L61,L132-250) | N/A | N/A | BLOCKED |
+| bearDog | **DONE** (`1c3dc9d` IpcStream enum) | N/A | N/A | **COMPLETE** |
 | biomeOS | TODO (communication, capabilities, provider, tarpc_transport) | N/A | TODO (rustix::fs) | BLOCKED |
 | nestGate | N/A | N/A | TODO (rustix::fs statfs) | BLOCKED |
 | rhizoCrypt | TODO (unix_socket adapter L29,L144-170) | N/A | N/A | BLOCKED |
