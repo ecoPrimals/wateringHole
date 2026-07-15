@@ -12,12 +12,12 @@ wave = "141a"
 primalSpring = "6a1d6c6"
 wateringHole = "e44adf9b"
 plasmidBin = "e0b20e0"
-skunkBat = "6b3e6eb"
+skunkBat = "1a4c5b3"
 
 [skunkbat]
-head = "6b3e6eb"
+head = "1a4c5b3"
 tests = 567
-delivery_141a = "Cross-arch adoption (Windows): #[cfg] guards on UDS transport + Unix signals + deep debt (4 env-configurable timeouts, toadstool platform warnings, caddy latency wiring, session metrics)"
+delivery_141a = "Cross-arch adoption + deep debt + doc reconciliation (2 commits: 6b3e6eb code, 1a4c5b3 docs)"
 windows_target = "x86_64-pc-windows-gnu — cargo check PASS, 0 warnings"
 clippy = "CLEAN (-D warnings)"
 
