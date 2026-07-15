@@ -63,7 +63,7 @@ fractal deployment pattern. 2/6 layers solved, 4 FRAGOs issued.
 
 | Step | Owner | Status |
 |------|-------|--------|
-| petalTongue chart scenes (IC50, PK decay, tissue lattice, hormesis) | petalTongue team | TODO |
+| petalTongue chart scenes (IC50, PK decay, tissue lattice, hormesis) | petalTongue team | **DONE** (Wave 140a) |
 | Replace removed Plotly UI with `visualization.render.graph` | petalTongue team | TODO |
 | NF Data Portal ingestion via drawbridge | songBird team | TODO |
 | CTF NDU grant alignment ($125K) | Gonzales + overwatch | IN PROGRESS |
@@ -238,7 +238,7 @@ NOW     footPrint server composition on sporeGate
 NOW     RustScript extraction to @protoKarya/rustscript
 NOW     Live drawbridge E2E (USGS/FEMA → songBird → NestGate CAS)
 NEXT    tideGlass Phase 0 (GPS paper reproduction)
-NEXT    Gonzales Interactive Explorer (petalTongue chart scenes)
+DONE    Gonzales Interactive Explorer (4 chart scenes — IC50, PK decay, tissue lattice, hormesis)
 NEXT    helixVision Phase C (GEMM → Evoformer)
 GOAL    Pure Rust backend + sovereign compositions + external science
 ```
