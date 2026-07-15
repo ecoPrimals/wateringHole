@@ -236,7 +236,7 @@ Report completion via commit message or handoff to overwatch.
 | nestGate | 3 | 1 | Small | |
 | sourDough | 3 | 1 | Small | |
 | toadStool | 4 | 134 | Medium | **YES** (S329: full workspace `cfg` gating) |
-| petalTongue | 1,5 | 2+ | Medium | |
+| petalTongue | 1,5 | 2+ | Medium | **CORE DONE** (f406982) |
 | biomeOS | 1,3 | 5-6 | Medium | |
 | barraCuda | 1,2 | 3 | Medium | |
 
