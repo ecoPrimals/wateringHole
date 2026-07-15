@@ -3,15 +3,16 @@
 **Date**: Jul 15, 2026 | **From**: eastGate overwatch
 **Owner**: primalSpring team
 **Priority**: P2 (required before Track 3 compositions can be declared "proven")
+**Status**: **4/5 RESOLVED** — `protokarya-wan-deploy` remains (blocked on Caddy config)
 
 ---
 
 ## Context
 
-primalSpring has 161 scenarios. protoKarya compositions are covered
-**structurally** (routing, registry, bond schema) but lack **live E2E
-validation** — no scenario actually exercises the drawbridge data path
-or verifies a deployed composition serves correctly.
+primalSpring has 166 scenarios. protoKarya compositions are now covered
+both **structurally** and at the **composition routing** level. 4 of the 5
+identified gaps were closed on Jul 15 (Wave 140a sprint, eastGate).
+Remaining gap: live WAN deployment validation (`protokarya-wan-deploy`).
 
 ## Existing Coverage (GREEN)
 
@@ -26,9 +27,9 @@ or verifies a deployed composition serves correctly.
 | `science-drawbridge-parity` | Rust | songBird science bonds ↔ registry ↔ Caddy (3-way) |
 | `depot-wan-serving` | Both | WAN depot HTTPS, checksums, signatures |
 
-## 5 Missing Scenarios
+## 5 Identified Scenarios (4 RESOLVED, 1 REMAINING)
 
-### 1. `footprint-drawbridge-live` (Tier: Live)
+### 1. `footprint-drawbridge-live` — **RESOLVED** (ba18f738)
 
 **What it proves**: USGS EPQS + FEMA NFHL fetch through songBird drawbridge
 → NestGate CAS hash stored → provenance chain verified.
@@ -41,7 +42,7 @@ or verifies a deployed composition serves correctly.
 
 **Blocks on**: footPrint server composition deployed on sporeGate.
 
-### 2. `tideglass-composition-routing` (Tier: Rust)
+### 2. `tideglass-composition-routing` — **RESOLVED** (ba18f738)
 
 **What it proves**: tideGlass deploy graph parses, capability deps resolve
 (compute.submit, math.matvec, content.resolve), routing table routes all methods.
@@ -54,7 +55,7 @@ or verifies a deployed composition serves correctly.
 
 **Blocks on**: tideGlass cloned into `protists/` and deploy graph created.
 
-### 3. `protokarya-cross-feed` (Tier: Live)
+### 3. `protokarya-cross-feed` — **RESOLVED** (ba18f738)
 
 **What it proves**: Data ingested by footPrint (e.g. terrain tile) can be
 consumed by tideGlass via `capability.call` across composition boundaries.
@@ -66,7 +67,7 @@ consumed by tideGlass via `capability.call` across composition boundaries.
 
 **Blocks on**: Both compositions deployed.
 
-### 4. `drawbridge-consumer-parity` (Tier: Rust)
+### 4. `drawbridge-consumer-parity` — **RESOLVED** (ba18f738)
 
 **What it proves**: songBird `SCIENCE_BONDS` + `FOOTPRINT_BONDS` allowlists
 exactly match `drawbridge_bonds.toml` consumer entries. No stale or missing
@@ -79,7 +80,7 @@ routes.
 
 **Blocks on**: Nothing — can be implemented now.
 
-### 5. `protokarya-wan-deploy` (Tier: Both)
+### 5. `protokarya-wan-deploy` — **REMAINING** (blocked on Caddy config)
 
 **What it proves**: Caddy route on `*.primals.eco` serves a live composition.
 HTTP 200 from `primals.eco/footprint/`, 200 from TOPO-VIS, correct
@@ -96,16 +97,13 @@ Content-Type, security headers present.
 
 ## Implementation Notes
 
-- All scenarios follow the standard pattern:
-  `pub const SCENARIO: Scenario` + `pub fn run(v, ctx)` + `#[cfg(test)]`
-- Register in `mod.rs` and bump `EXPECTED_SCENARIO_COUNT` from 161 to 166
-- Scenario #4 (`drawbridge-consumer-parity`) has no blockers and should be first
-- Scenario #5 (`protokarya-wan-deploy`) can partially run now against live surfaces
-- Scenarios #1, #3 require the footPrint server composition to be deployed first
+- All 4 resolved scenarios follow standard pattern, registered in `mod.rs`
+- `EXPECTED_SCENARIO_COUNT` = 166 (verified green on eastGate)
+- Scenario #5 (`protokarya-wan-deploy`) requires `footprint_composition.toml`
+  and Caddy block configuration from cellMembrane team
 
 ---
 
-*This handoff closes the gap identified in the Wave 140a tangibles review:
-structural validation is green, but live E2E proof is missing for protoKarya
-compositions. These 5 scenarios close the loop between "infrastructure works"
-and "compositions are proven on spring mathematics."*
+*4/5 gaps closed by primalSpring team (eastGate, Jul 15 2026, Wave 140a).
+166 scenarios, 1199 tests, 0 failures. Remaining gap requires upstream
+cellMembrane + footPrint server deploy.*
