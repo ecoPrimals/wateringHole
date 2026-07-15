@@ -94,7 +94,7 @@ Depot (4 arch, 45 bins):
   x86_64-linux-musl     16   FRESH
   aarch64-linux-musl    16   FRESH
   aarch64-android       12   FRESH (2 expected-fail: petalTongue, toadStool)
-  x86_64-windows-gnu     1   songbird.exe (13 blocked on transport adoption)
+  x86_64-windows-gnu     2   songbird.exe, toadStool (S329 cross-arch: 134 files gated)
 
 Exotic validated (songBird, not yet in depot):
   riscv64gc  powerpc64le  powerpc64  s390x  sparc64  arm32  armv7  i686
