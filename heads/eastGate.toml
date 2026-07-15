@@ -1,10 +1,10 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-15T00:25:00Z
+# Gate: eastGate | Updated: 2026-07-14T23:30:00Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-15T00:25:00Z"
+updated = "2026-07-15T00:20:00Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
@@ -28,9 +28,9 @@ loamSpine = "f1c6a44052914bed063c50f64a743ae402327947"
 ludoSpring = "f566b8265b7aa2a60d159a219306fce557dea1a0"
 nestGate = "e208d86d1e7541d50f3818df83a10e6e74fd62a9"
 neuralSpring = "33a19d16eaacfaf276d5db989083d803493be600"
-petalTongue = "f8b1bfc42a10885fe278822f65d34df56ddd88e1"
+petalTongue = "8994ce549d2f860b56950f972f046516614a671a"
 plasmidBin = "60325220425b8a561e1fdb1ca806a05950f7cd7d"
-primalSpring = "01c09aed2d9544994d934e2437ca6eac12dd93ab"
+primalSpring = "2e8a629278f24100ccb7241069e132f71643bdda"
 projectFOUNDATION = "4583164a5de4dbb1b426fc0afd427c44af7072e5"
 projectNUCLEUS = "bcb15980e8a59c270d6c180f57e2a98e21d29be4"
 rhizoCrypt = "a580796baaae8cc90024996f43ab4f7198183db8"
