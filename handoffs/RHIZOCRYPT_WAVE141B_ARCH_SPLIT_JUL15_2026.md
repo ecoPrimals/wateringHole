@@ -1,6 +1,6 @@
 # rhizoCrypt — Wave 141b: Architecture Split + Coverage Expansion
 
-**Date**: Jul 15, 2026 | **Commit**: `adbf83d`
+**Date**: Jul 15, 2026 | **Commit**: `263d861` (doc sweep) / `adbf83d` (code)
 **Tests**: 1,894 → 1,911 (+17) | **Files**: 213 → 217 `.rs`
 
 ## Changes
@@ -33,6 +33,26 @@ New `rhizocrypt_tests_branch_vertex.rs` covers:
 - **vertex_ops** (6): query by type/agent/limit, merkle root, proof success/not-found
 
 Previously only tested indirectly through JSON-RPC handler tests.
+
+### SSOT Doc Sweep (263d861)
+
+- All metadata dates → Jul 15, 2026 (README, CONTEXT, DEPLOYMENT_CHECKLIST,
+  ENV_VARS, SPECS_INDEX, EVENT_TYPE_REFERENCE, deploy graph, sporeprint)
+- Spec count corrected: 12 → 10 active + 2 archived (3 files)
+- DEPLOYMENT_CHECKLIST wave reference: 128c → 141b
+- Dockerfile base image: `rust:1.87` → `rust:1.94` (match toolchain)
+- CONTEXT max file size: 786L → 468L (post method_gate split)
+- Coverage dates aligned across all docs
+
+### Debris Sweep Results
+
+- **0 TODO/FIXME/HACK/XXX markers** in production code
+- **0 stale scripts/Makefiles** — no `.sh`, `.py`, `.bash`, `Makefile`
+- **0 debris directories** — no showcase/, tmp/, old/, backup/
+- **0 orphaned test files** — all 53 `*_tests*.rs` properly wired
+- **0 empty/near-empty files**
+- **2 intentional `#[deprecated]` aliases** (SongbirdClient, SongbirdConfig) — forward-dated to 0.14.18
+- **`specs/archive/`** — 2 files, intentional fossil record
 
 ## Gate Results
 
