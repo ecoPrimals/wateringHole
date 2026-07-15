@@ -1,8 +1,17 @@
 # NestGate Session 108 — Deep Debt Sweep (Wave 140a)
 
-**Date**: Jul 15, 2026 | **Wave**: 140a | **Commit**: a546e8a9
+**Date**: Jul 15, 2026 | **Wave**: 140a | **Commit**: e05001e9
 
 ## Changes
+
+### Root Documentation Refresh
+- All 12 root docs synchronized to ground-truth test counts (3,790/73/1)
+  replacing stale 12,885/420/0 split that persisted since Session 101b
+- Wave/session/date stamps updated: 136b→140a, Session 106→108, Jul 11→Jul 15
+- Capability domain count corrected: 18/19→20 (matches actual registry)
+- `footprint.*` methods added to STATUS IPC route listing
+- `.gitignore`: removed misleading `Cargo.lock` entry (file is tracked per binary crate convention)
+- `cargo clean`: reclaimed 41 GiB (159K files)
 
 ### Test Fixture Gating (cert/utils.rs)
 - `create_test_certificate()` and `create_expired_certificate()` gated with `#[cfg(test)]`
