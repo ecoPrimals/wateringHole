@@ -3,10 +3,9 @@
 **Date**: Jul 15, 2026 16:50 EDT | **Wave**: 141b | **From**: eastGate overwatch
 **Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM CONVERGENCE ACCELERATING.**
 
-**This cascade**: loamSpine, rhizoCrypt, sweetGrass delivered cross-arch adoption.
-Cross-platform score now **13/14**. Only nestGate remains (Platform FS — 1 module).
-14/14 primals compile on native target. 39/39 repos synced. sporeGate Windows
-harvest pending for 13 adopted primals.
+**This cascade**: nestGate cross-arch confirmed (Session 109, `839122d2`).
+**ALL 14 PRIMALS CROSS-ARCHITECTURE COMPLETE.** 39/39 repos synced.
+sporeGate full Windows harvest ready — handoff issued.
 
 ---
 
@@ -26,18 +25,15 @@ sporePrint root site returning 404 on `primals.eco`. `footprint/` and
 
 ### Goal 1: Silicon Atheism Convergence (P1 — PARALLEL SUBTASK, ACCELERATING)
 
-**Score: 13/14 primals cross-arch adopted. Only nestGate remaining.**
-
-| Adopted (13) | Remaining (1) |
-|-------------|--------------|
-| songBird, bearDog, barraCuda, biomeOS, coralReef, skunkBat, squirrel, toadStool, petalTongue, sourDough, rhizoCrypt, sweetGrass, loamSpine | nestGate (Platform FS — 1 module) |
+**Score: 14/14 primals cross-architecture adopted. COMPLETE.**
 
 | Work | Owner | Priority | Status |
 |------|-------|----------|--------|
-| nestGate Platform FS adoption | nestGate team | P1 | TODO |
+| Full 14-primal Windows harvest | sporeGate | **P0** | **READY — handoff issued** |
+| Multi-arch harvest (Android, exotic) | sporeGate | P1 | ready |
 | `portable-atomic` feature on tokio (PPC32 + consoles) | cellMembrane | P1 | FRAGO issued |
-| Full 14-primal Windows harvest | sporeGate | P1 | 13/14 ready |
-| `full-cross-compile` primalSpring scenario | primalSpring | P2 | FRAGO issued |
+| `full-cross-compile` primalSpring scenario | primalSpring | P1 | FRAGO issued |
+| Cross-platform E2E test (UDS on Linux, NamedPipe on Windows, fs on Pixel) | primalSpring | P2 | NEW |
 
 **Per-primal handoff**: `CROSS_ARCH_PER_PRIMAL_HANDOFFS.md`
 
@@ -86,11 +82,11 @@ sporePrint root site returning 404 on `primals.eco`. `footprint/` and
 ### Depot (45 binaries + 8 exotic validated)
 
 ```
-Depot (4 arch, 45 bins — pending re-harvest for 10 adopted primals):
+Depot (4 arch, 45 bins — FULL HARVEST READY):
   x86_64-linux-musl     16   FRESH
   aarch64-linux-musl    16   FRESH
   aarch64-android       12   FRESH (2 expected-fail: petalTongue, toadStool)
-  x86_64-windows-gnu     1   songbird.exe — 10 MORE now adoption-ready for harvest
+  x86_64-windows-gnu     1   songbird.exe — ALL 14 now adoption-ready for harvest
 
 Exotic validated (songBird, not yet in depot):
   riscv64gc  powerpc64le  powerpc64  s390x  sparc64  arm32  armv7  i686
@@ -150,9 +146,9 @@ grapheneGate — StrongBox target. 12/14 Android ecobins.
 ```
 DONE    45 signed ecobins, 4 architectures, 8 exotic validated
 DONE    OS Atheism Phases 1-2 (types + transport)
-DONE    Per-primal cross-arch adoption: 13/14 complete (12 this wave!)
-NOW     nestGate Platform FS adoption (last primal)
-NOW     sporeGate Windows harvest for 13 adopted primals
+DONE    Per-primal cross-arch adoption: 14/14 COMPLETE
+NOW     sporeGate full Windows harvest (14 primals ready)
+NOW     Multi-arch harvest (Android, RISC-V, ARMv7 depot candidates)
 NOW     portable-atomic for PPC32 (consoles, embedded)
 NOW     northGate mesh enrollment
 GOAL    User is their own key. USB kit deploys NUCLEUS identity.
@@ -182,7 +178,7 @@ GOAL    Pure Rust backend + sovereign compositions + external science.
 
 ---
 
-*Wave 141b: 13/14 cross-arch adopted. Only nestGate remaining (Platform FS — 1 module).
-12 primals delivered cross-arch + deep debt this wave. sweetGrass purged postgres store
-(pure Rust dogma). sporeGate Windows harvest pending for 13 primals. P0: primals.eco
-still 404. 39/39 synced. 2 active FRAGOs.*
+*Wave 141b: 14/14 CROSS-ARCH COMPLETE. All primals adopted. sporeGate full Windows
+harvest ready — handoff issued. Next: multi-arch harvest (Android, RISC-V, ARMv7),
+portable-atomic for PPC32, cross-platform E2E testing (UDS vs NamedPipe vs Pixel FS).
+P0: primals.eco still 404. 39/39 synced. 2 active FRAGOs.*
