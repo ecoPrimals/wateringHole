@@ -238,18 +238,19 @@ Report completion via commit message or handoff to overwatch.
 | rhizoCrypt | 1 | Small | **DONE** | `feff297` cross-arch + deep debt |
 | sweetGrass | 1 | Small-Med | **DONE** | `d4f7da9` platform gates |
 | loamSpine | 1,2 | Small | **DONE** | `850252c` cfg-gate Unix IPC |
-| nestGate | 3 | Small | TODO | Platform FS (`rustix::fs::statfs`) |
+| nestGate | 3 | Small | **DONE** | `839122d2` cross-arch adoption (Session 109) |
 
-**Score: 13/14 adopted. Only nestGate remaining (Platform FS — 1 module).**
+**Score: 14/14 adopted. All primals cross-arch complete.**
 
 Deep debt delivered alongside cross-arch (Waves 141a-141b):
 - loamSpine: refactor, deprecation, clone reduction, test fix
 - rhizoCrypt: method_gate split, magic numbers, branch/vertex coverage
 - sweetGrass: postgres store purged (pure Rust dogma), cross-platform warnings suppressed
+- nestGate: Category 3 (rustix::fs::statvfs gated) + Category 1 (UDS transport gated across 9 files)
 - (Wave 141a): barraCuda, bearDog, biomeOS, coralReef, skunkBat, songBird,
   squirrel, toadStool, petalTongue, sourDough — all delivered deep debt alongside cross-arch
 
 ---
 
-*Updated Wave 141b: 13/14 primals cross-arch adopted. Only nestGate remaining.
-sporeGate Windows harvest pending for 13 adopted primals.*
+*Updated Wave 141b: 14/14 primals cross-arch adopted. nestGate completed Session 109 (commit 839122d2).
+sporeGate Windows harvest pending for 14 adopted primals.*
