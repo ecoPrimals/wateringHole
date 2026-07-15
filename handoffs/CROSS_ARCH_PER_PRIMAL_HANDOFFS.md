@@ -226,7 +226,7 @@ Report completion via commit message or handoff to overwatch.
 | Primal | Categories | Files | Effort | Done |
 |--------|-----------|-------|--------|------|
 | songBird | — | — | — | **YES** (reference) |
-| bearDog | 1 | 1 | Small | |
+| bearDog | 1 | 1 | Small | **YES** (`1c3dc9d`) |
 | coralReef | 1 | 1 | Small | |
 | rhizoCrypt | 1 | 1 | Small | |
 | skunkBat | 1,2 | 2 | Small | |
