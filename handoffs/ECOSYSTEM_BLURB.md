@@ -124,13 +124,19 @@ FRAGO fossilized (Phase 2 delivered by cellMembrane).
 | Phase | What | Blocks | Owner | Status |
 |-------|------|--------|-------|--------|
 | 1. Platform Types | TargetOs, CpuArch, LinkModel, Platform | — | overwatch | **SHIPPED** |
-| 2. Transport + Signals | `TransportEndpoint::NamedPipe`, `InitSystem::detect()`, `ProcessManager` | 11 Windows primals | cellMembrane | **SHIPPED** |
+| 2. Transport + Signals | `TransportEndpoint::NamedPipe`, `InitSystem::detect()`, `ProcessManager` | — | cellMembrane | **SHIPPED** |
+| 2b. Primal Adoption | Each primal replaces raw UDS with `TransportEndpoint` | 13 primals | all primal teams | **FRAGO issued (P1)** |
+| 2c. portable-atomic | `tokio` feature flag → PPC32 + all 32-bit targets | PPC32, consoles | cellMembrane | **FRAGO issued (P1)** |
 | 3. Shell-out + FS | openssl→rustls, PermissionsExt→cross-plat | 3 primals | cellMembrane | FRAGO issued |
 | 4. Gate bootstrap | Platform branching in 13-phase pipeline | isomorphic deploy | sporeGate + cellMembrane | FRAGO issued |
 | 5. Isomorphic depot | Platform-aware fetch→install→launch | auto-deploy | cellMembrane | FRAGO issued |
 | 6. NUCLEUS composition | deploy.graph canonical, bootstrap fallback | USB kit | all teams | FRAGO issued |
 
-**Critical insight**: Phase 2 alone unblocks 11/13 Windows primals. Highest leverage.
+**Critical insight**: Phase 2 shipped in cellMembrane but **1/14 primals adopted**.
+Transport adoption (2b) is the immediate P1 unlock — mechanical transformation,
+songBird is the reference. portable-atomic (2c) completes PPC32 for consoles.
+
+**Cross-compile score: 1/14 primals fully cross-platform. Target: 14/14.**
 
 ### Depot State (post-AAR harvest + exotic validation)
 
@@ -145,19 +151,30 @@ Depot total:                  45     BLAKE3 + Ed25519 signed, VPS depot serving
 
 Validated exotic (not yet in depot):
   riscv64gc, powerpc64le, powerpc64, s390x, sparc64,
-  arm (32-bit), armv7, i686 — 8/9 compile, PPC32 fails (AtomicU64)
+  arm (32-bit), armv7, i686 — 8/9 compile, PPC32 FRAGO issued (portable-atomic)
+  PPC32 fix: tokio portable-atomic feature flag → consoles + embedded
   RISC-V and ARMv7 are P2 depot candidates for Silicon Atheism.
 ```
 
-### Cross-Platform Parity (from AAR)
+### Cross-Platform Parity (from AAR + convergence plan)
 
-| Failure Category | Primals Affected | Fix Phase | Status |
-|-----------------|-----------------|-----------|--------|
-| UDS transport (`tokio::net::UnixStream`) | 11 | Phase 2: `TransportEndpoint` | **SHIPPED** |
-| Unix signals (`tokio::signal::unix`) | 3 (loamSpine, skunkBat, barraCuda) | Phase 2: `ProcessManager` | **SHIPPED** |
-| Platform FS (`rustix::fs`, `PermissionsExt`) | 3 (nestGate, biomeOS, sourDough) | Phase 3: FS abstraction | FRAGO issued |
-| Hardware/kernel (VFIO, mmap) | 1 (toadStool) | Feature-gate `linux-hw` | FRAGO issued |
-| Android NDK (android-activity) | 1 (petalTongue) | cdylib target | expected-fail |
+| Failure Category | Primals Affected | Fix | cellMembrane | Primal Adoption |
+|-----------------|-----------------|-----|-------------|----------------|
+| UDS transport | 11 | `TransportEndpoint` | **SHIPPED** | 0/11 adopted |
+| Unix signals | 3 (loamSpine, skunkBat, barraCuda) | `ProcessManager` | **SHIPPED** | 0/3 adopted |
+| AtomicU64 (PPC32) | all (transitive via tokio) | `portable-atomic` feature | FRAGO issued | — |
+| Platform FS | 3 (nestGate, biomeOS, sourDough) | `Platform::detect()` | FRAGO issued | — |
+| Hardware/kernel | 1 (toadStool) | `linux-hw` feature-gate | FRAGO issued | — |
+| Android NDK | 1 (petalTongue) | cdylib target | — | expected-fail |
+
+### Subsystem Convergence Map
+
+| Subsystem | Current | Target | Scope |
+|-----------|---------|--------|-------|
+| Transport (IPC) | 11 primals use raw UDS | `primal-transport` crate | P1 — highest leverage |
+| Lifecycle (signals) | 3 primals use `signal::unix` | `ProcessManager` trait | P1 |
+| Data backends | Storage cross-plat, access via UDS | Transport convergence fixes this | P2 |
+| Discovery (paths) | Hardcoded unix paths | `Platform::socket_dir()` etc. | P2 |
 
 ### Pipeline
 
