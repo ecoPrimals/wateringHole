@@ -98,7 +98,7 @@ shipped. Identity anchoring deployed. sporePrint rebuild pushed (was 404).
 
 | ID | What | Severity | Owner | Status |
 |----|------|----------|-------|--------|
-| DEPOT-LAYOUT | genomeBin on sporeGate 6/14 primals, dynamically linked | P2 | sporeGate + cellMembrane | OPEN |
+| DEPOT-COVERAGE | genomeBin on sporeGate has 6/14 primals — needs full harvest | P2 | sporeGate (builder) | OPEN |
 | ~~CASCADE-HANG~~ | ~~cascade hangs after push rejection~~ | ~~P2~~ | cellMembrane | **RESOLVED** (580a7e8) |
 | ~~SPOREGATE-PUSH~~ | ~~non-bare repo rejects push~~ | ~~P3~~ | cellMembrane | **RESOLVED** (580a7e8) |
 | SPOREPRINT-REBUILD | golgi sporePrint rebuild incomplete after identity scrub | P3 | overwatch | **RESOLVED** (manual deploy) |
@@ -146,14 +146,28 @@ songBird Windows cross-compile now shipped. Ready to build and deploy.
 | RustScript absorption | Extract lib for petalTongue | TODO |
 | tideGlass Phase 0 | Sovereign GPS platform | TODO |
 
-### 5. Depot Reconciliation
-**Owner**: sporeGate + cellMembrane teams
+### 5. genomeBin Depot Evolution — Universal Deployment
+**Owner**: sporeGate (builder) + cellMembrane (pipeline) + overwatch (coordination)
+
+sporeGate is the builder node. It builds, bundles, signs ecobins and pushes to
+the VPS depot for all gates to fetch. genomeBin is the evolving depot system —
+same deployment pipeline for Pixel (aarch64-android), northGate (Windows),
+golgi VPS (x86_64-musl), and all Linux gates.
+
+**sporeGate toolchain**: rustc 1.96.1, targets: x86_64-musl, x86_64-gnu,
+aarch64-musl, aarch64-gnu, aarch64-linux-android. Missing: x86_64-pc-windows-gnu.
 
 | Step | What | Status |
 |------|------|--------|
-| Full 14/14 harvest | Build all primals musl-static | TODO |
-| Depot layout migration | genomeBin → plasmidBin standard | TODO |
-| Checksums + signatures | Generate checksums.toml + signatures.toml | TODO |
+| Harvest 14/14 x86_64-musl | Build all primals on sporeGate | 6/14 done |
+| Harvest 14/14 aarch64-musl | Cross-compile all for Pixel/ARM | 5/14 done |
+| Add Windows target | `rustup target add x86_64-pc-windows-gnu` on sporeGate | TODO |
+| Harvest Windows ecobins | Cross-compile for northGate | TODO |
+| Push to VPS depot | rsync/scp genomeBin → golgi `/opt/ecoPrimals/depot/` | TODO |
+| checksums.toml | BLAKE3 checksums for all targets | TODO |
+| signatures.toml | Ed25519 signing via cellMembrane | TODO |
+| Auto-harvest pipeline | `membrane plasmid.harvest --all-targets` on sporeGate | TODO |
+| Depot serve via Caddy | `membrane.primals.eco/depot/` serving genomeBin | TODO |
 
 ---
 
@@ -172,9 +186,10 @@ GOAL    User is their own key. USB kit deploys NUCLEUS identity.
 ```
 DONE    CASCADE-HANG + SPOREGATE-PUSH (cellMembrane 580a7e8)
 DONE    Identity web (ORCID, Keyoxide, JSON-LD, DISCOVERED_BY)
-NOW     Depot reconciliation (genomeBin → plasmidBin standard)
+NOW     genomeBin full harvest (14/14 × all targets) on sporeGate
+NOW     genomeBin → VPS depot push (universal deployment for all gates)
 NOW     primal.eco separation (inner membrane personal substrate)
-GOAL    Full sovereign membrane parity
+GOAL    Same depot system for Pixel, northGate, VPS, and Linux gates
 ```
 
 ### Track 3: Live Compositions → External Science Production
@@ -193,7 +208,8 @@ GOAL    Pure Rust backend + sovereign compositions
 ```
 eastGate     — PRIMARY. Zero debt. 18/19 converged. Cascade authority.
 northGate    — NEW. songBird Windows build READY. Mesh enrollment next.
-sporeGate    — NUCLEUS. SoloKey. Build auth. 8d uptime. Depot 6/14 (needs harvest).
+sporeGate    — NUCLEUS. SoloKey. Build authority (rustc 1.96.1, 5 targets).
+                genomeBin 6/14 — needs full harvest + VPS depot push.
 golgiBody    — Outer membrane. 3 live surfaces (all 200). sporePrint restored.
 westGate     — OFFLINE. ZFS cold storage. Pending power-on.
 ironGate     — ABG/NF compute. JupyterHub.
@@ -204,5 +220,7 @@ grapheneGate — StrongBox target. Android compile unblocked.
 ---
 
 *Wave 139b: CASCADE-HANG + SPOREGATE-PUSH resolved. songBird Windows shipped.
-sporePrint identity web deployed + DISCOVERED_BY standard. Site restored (304 pages).
-1 active divergence (DEPOT-LAYOUT P2). northGate mesh enrollment unblocked.*
+sporePrint identity web + DISCOVERED_BY standard deployed. Site restored (304 pages).
+1 active divergence: genomeBin depot coverage (6/14, needs full harvest on sporeGate
+→ push to VPS → universal deployment for Pixel/northGate/VPS/Linux).
+northGate mesh enrollment unblocked.*
