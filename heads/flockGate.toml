@@ -1,57 +1,59 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-15T15:30:00Z
+# Gate: flockGate | Updated: 2026-07-15T15:46:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-15T15:30:00Z"
+updated = "2026-07-15T15:46:00Z"
 wave = "140a"
 
 [heads]
-primalSpring = "b91dd41"
-wateringHole = "2e7d59c2"
-footPrint = "52437f1"
+primalSpring = "6a1d6c6"
+wateringHole = "e44adf9b"
 plasmidBin = "e0b20e0"
 skunkBat = "d9837a9"
 
 [mesh]
 node_id = "flockGate"
 songbird_version = "0.2.1"
-depot_binary_deployed = true
-peers_tcp_connected = 2
+depot_binary_date = "2026-07-15T01:45:06Z"
+depot_binary_size = 18087712
 peers_mesh_registered = 2
 wireguard_status = "UP"
 wireguard_addr = "10.13.37.6/24"
-federation_sporegate_7700 = "LIVE — mesh_registered=true, latency=70ms"
-federation_golgi_7700 = "LIVE — mesh_registered=true, latency=25ms"
-status = "MESH OPERATIONAL — 2 peers, UDS-HTTP fix confirmed"
+federation_sporegate_7700 = "LIVE — mesh_registered=true, latency=69ms"
+federation_golgi_7700 = "LIVE — mesh_registered=true, latency=24ms"
+status = "MESH OPERATIONAL — depot refresh (Jul 15 stripped build)"
 
-[outer_membrane_validation]
-validated_at = "2026-07-15T15:30:00Z"
-primals_eco = "PASS"
-footprint = "PASS"
-lab = "PASS"
-depot = "PASS — 45 binaries, 4 architectures"
+[dispatch_validation]
+status = "MESH ROUTING OPERATIONAL. capability.call routes 2 peers. DRAWBRIDGE-CAP pending songBird team."
+capability_call_status = "ROUTING WORKS — no provider advertises drawbridge caps yet"
+jupyter_data_plane = "PROVEN — JupyterHub v5.4.5 via http.request relay (202ms WAN)"
+
+[dispatch_validation.latency]
+tcp_peer_sporegate_ms = 69
+tcp_peer_golgi_ms = 24
+jupyter_relay_ms = 202
+probed_at = "2026-07-15T15:46:00Z"
 
 [footprint]
-status = "LIVE — GIS weak bonds operational, RustScript extracted, deploy artifacts ready"
+status = "LIVE — full GIS composition"
 wan_url = "https://primals.eco/footprint/"
-caddy_proxy = "LIVE — 10 GIS hosts via Caddy reverse proxy"
-server_deploy = "NOT_DEPLOYED — deploy/ artifacts ready for sporeGate"
-tests = 98
-rustscript_modules = 11
-rustscript_extraction = "READY — domain types decoupled from generic primitives"
+wan_http_status = 200
+caddy_proxy_routes = 10
+composition_manifest = "config/compositions/footprint_composition.toml"
 
 [drawbridge_bonds]
-status = "17 bonds declared (10 GIS + 7 science APIs)"
-science_apis = ["pubchem.ncbi.nlm.nih.gov", "eutils.ncbi.nlm.nih.gov", "api.ncbi.nlm.nih.gov", "blast.ncbi.nlm.nih.gov", "rest.uniprot.org", "data.rcsb.org", "alphafold.ebi.ac.uk"]
-gis_apis = 10
+status = "16 bonds declared (10 GIS + 6 science APIs)"
 schema_version = 2
+consumer_parity = "3-way match: registry ↔ composition ↔ Caddy (10/10)"
 
 [primalspring]
-version = "v0.9.34"
-head = "b91dd41"
-scenarios = 162
-tests = 1276
-suite_status = "GREEN — 8 new scenarios (depot, platform parity, science drawbridge)"
+version = "v0.9.33"
+head = "6a1d6c6"
+scenarios = 164
+tests = 1196
+failures = 0
+suite_status = "GREEN"
+new_scenarios = ["drawbridge-consumer-parity", "protokarya-wan-deploy"]
