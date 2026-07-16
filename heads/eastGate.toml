@@ -1,19 +1,19 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-16T13:27:25Z
+# Gate: eastGate | Updated: 2026-07-16T14:24:29Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-16T13:27:25Z"
+updated = "2026-07-16T14:24:29Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
 airSpring = "6f0b98c8d6fab3deb44a26af1f95fcf9a85332f4"
 barraCuda = "6bc6d51227bb4e7381b57393bb58dac96408023f"
-bearDog = "27cf95c7843f121c445f50190c317a4a3ef66faa"
+bearDog = "97e94fe5481ecfe2662321bcc85d8b89bfec1ae7"
 benchScale = "ba5fa5426d6400d9bc3f642cd3a64e6244cabe22"
 bingoCube = "cf6b645e6531177eb5795d3e1da292f1ded2a243"
-biomeOS = "16b25557"
+biomeOS = "5677a3cec80a65811e0ffbba420440fb381f1708"
 blueFish = "c92df4a4046cec711cd98daac6800856a95d6bca"
 cellMembrane = "afe54c014004e73445f0392e786b55e34e7bac6f"
 coralReef = "c71b75ab88d9fc8c43f25501360f0c719a4fda93"
@@ -26,7 +26,7 @@ initioChem = "854d801f2dcda904af07f4da9768d35de8534efd"
 lithoSpore = "8ba69e545a49c4974234440457b58854ee33dba4"
 loamSpine = "37fa48aa49cf3c3281ababedbc3d064e1bb71b89"
 ludoSpring = "f566b8265b7aa2a60d159a219306fce557dea1a0"
-nestGate = "5ae033f6b76e0eafb715a05e28f8119797b8c629"
+nestGate = "86c2b626cc8d9996c5ee2de675219a1a437dbf3f"
 neuralSpring = "33a19d16eaacfaf276d5db989083d803493be600"
 petalTongue = "6f66959c6fed10bd68e2e91d8c9203b1bdbc4544"
 plasmidBin = "419f0c2eafdbe2538b559e6f7d1aab5423956b49"
