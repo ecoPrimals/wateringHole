@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 142
-sub = "b"
-date = "2026-07-16"
-posture = "PUBLIC + SOVEREIGN. SILICON ATHEISM PHASE 2: ABSTRACTION OVER GATING. Phase 1 COMPLETE (14/14 gated). Phase 2 ACTIVE (FRAGO issued). petalTongue petal-tongue-platform is reference. Per-primal remaining work blurbed. 39/39 synced."
+id = 140
+sub = "a"
+date = "2026-07-15"
+posture = "PUBLIC + SOVEREIGN. TANGIBLES PIVOT + CONTENT-ADDRESSED CONVERGENCE. protoKarya to wider world. Newton-Leibniz pattern formalized: temporal divergence with content identity = convergence. 45 depot binaries, 4 architectures. 3 FRAGOs active (transport-abstract, cross-platform parity, CAC). 162 scenarios, 1194 tests."
 publisher = "eastGate-overwatch"
 
 [gates]
