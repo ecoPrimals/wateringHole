@@ -251,7 +251,7 @@ fallback mode. Needs sporeGate harvest for Windows + Android binaries to verify.
 | coralReef | 1 | Small | **DONE** | `da5afe1` cfg-gate Unix-only code |
 | skunkBat | 1,2 | Small | **DONE** | `6b3e6eb` cross-arch + deep debt sweep |
 | squirrel | 1 | Small-Med | **DONE** | `110c9939` Windows harvest unblock + deep debt |
-| toadStool | 4 | Small | **DONE** | `592248618`→`05d6476` S329-S332 full cfg + Phase 2 GPU backends |
+| toadStool | 4 | Small | **DONE** | `592248618`→`05d6476` S329-S334 full cfg + Phase 2 GPU + structural debt (−1,888L extracted) |
 | petalTongue | 1,5 | Medium | **DONE** | `7abeb16` full workspace Windows cross-compile |
 | sourDough | 3 | Small | **DONE** | `6115e4a` Android platform parity (all 3 green) |
 | rhizoCrypt | 1 | Small | **DONE** | `614ef3e` cross-arch + Phase 2 transport + SessionTreeHash |
@@ -266,7 +266,7 @@ Deep debt delivered alongside cross-arch (Waves 141a-142a):
 - rhizoCrypt: method_gate split, magic numbers, branch/vertex coverage, Phase 2 transport, SessionTreeHash
 - sweetGrass: postgres store purged (pure Rust dogma), cross-platform warnings suppressed
 - nestGate: Category 3 (rustix::fs::statvfs gated) + Category 1 (UDS transport gated across 9 files)
-- toadStool: S329-S332 deep debt + Phase 2 GPU backends (`WgpuGpuDiscovery`, `PortableSwapExecutor`, `PortableResourceHandle`, +26 tests)
+- toadStool: S329-S334 deep debt + Phase 2 GPU backends + structural debt (11 files extracted, −1,888L, 750L gate cleared, dispatch clone polish)
 - bearDog: libc removal, BTreeMap batch 4, test extraction wave 2
 - squirrel: Windows harvest unblock + deep debt sweep
 - sourDough: Android platform parity (Os::Android + LibC::Bionic, 490 tests)
