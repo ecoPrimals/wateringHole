@@ -12,12 +12,12 @@ wave = "142b"
 primalSpring = "8df6b3f"
 wateringHole = "36c0fa56"
 plasmidBin = "e0b20e0"
-skunkBat = "ca51077"
+skunkBat = "022bf76"
 
 [skunkbat]
-head = "ca51077"
+head = "022bf76"
 tests = 567
-delivery_142b = "Phase 2 TransportEndpoint abstraction: all IPC dispatch evolved from #[cfg]-gated raw UDS to TransportEndpoint trait dispatch. Eliminated legacy rpc::call(), ResolvedTarget, ContentProtector raw fields. 14 files, -48 net lines."
+delivery_142b = "Phase 2 TransportEndpoint + deep debt: all IPC → TransportEndpoint dispatch (eliminated rpc::call, ResolvedTarget, ContentProtector raw fields). All #[allow] → #[expect] with reasons. Dead fields removed. Announce payload → named constants."
 windows_target = "x86_64-pc-windows-gnu — cargo check PASS, 0 warnings"
 clippy = "CLEAN (-D warnings)"
 
