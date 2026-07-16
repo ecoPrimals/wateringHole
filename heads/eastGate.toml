@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-16T14:24:29Z
+# Gate: eastGate | Updated: 2026-07-16T16:15:00Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-16T14:24:29Z"
+updated = "2026-07-16T16:15:00Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
 airSpring = "6f0b98c8d6fab3deb44a26af1f95fcf9a85332f4"
 barraCuda = "6bc6d51227bb4e7381b57393bb58dac96408023f"
-bearDog = "97e94fe5481ecfe2662321bcc85d8b89bfec1ae7"
+bearDog = "ec63f0c022d1d650196858d6306a1b41324f822b"
 benchScale = "ba5fa5426d6400d9bc3f642cd3a64e6244cabe22"
 bingoCube = "cf6b645e6531177eb5795d3e1da292f1ded2a243"
 biomeOS = "5677a3cec80a65811e0ffbba420440fb381f1708"
