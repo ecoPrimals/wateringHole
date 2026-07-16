@@ -106,12 +106,13 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 - [x] Git repos: tree hashes in freshness.toml (Wave 138c)
 - [x] Depot binaries: BLAKE3 diff in depot_sync --push (Wave 139e)
-- [ ] Heads metadata: TreeParity for auto-publish conflicts (FRAGO issued 140a)
+- [x] Heads metadata: TreeParity for auto-publish (cellMembrane Wave 143b — tree hashes in publish_gate_heads)
 - [x] Impulses: content-hash deduplication (cellMembrane f4da0ae, Wave 141b)
-- [ ] rhizoCrypt: SessionTreeHash primitive (FRAGO issued 140a)
-- [ ] Cascade divergence: tree-parity before agentic policy dispatch (FRAGO issued 140a)
+- [x] rhizoCrypt: SessionTreeHash primitive SHIPPED (Wave 143b — ce3d534, full RPC wire)
+- [x] Cascade divergence: tree-parity before policy dispatch (cellMembrane Wave 143b — try_local_tree_parity)
 - [ ] primalSpring: content-addressed-convergence scenario (FRAGO issued 140a)
 - [x] Pattern formalized in whitePaper/gen5/foundations/ (Wave 140a)
+- **ALL 6 IMPLEMENTATION LAYERS SOLVED (Wave 144a)**
 
 ## 12. Architecture / OS Parity (Silicon Atheism)
 
@@ -164,7 +165,7 @@ trait interfaces. Every platform is a first-class evolution substrate.
 - toadStool: glowplug `WgpuGpuDiscovery` Vulkan backend (S332)
 
 - [ ] Each primal audits `#[cfg()]` boundaries → identify abstraction candidates
-- [x] Transport: `TransportEndpoint` trait adopted by songBird, skunkBat (expanding)
+- [x] Transport: `TransportEndpoint` trait — 10/14 SHIPPED (songBird, skunkBat, sweetGrass, rhizoCrypt, coralReef, loamSpine, barraCuda, petalTongue, toadStool, cellMembrane)
 - [x] Device discovery: trait-based — toadStool glowplug Vulkan backend (S332)
 - [ ] Health monitoring: trait-based (not procfs-hardcoded)
 - [ ] Credential store: trait-based (fs/Keystore/DPAPI backends)
