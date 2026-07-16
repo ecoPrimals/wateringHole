@@ -1,18 +1,18 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: ironGate | Updated: 2026-07-16T12:00:00Z
+# Gate: ironGate | Updated: 2026-07-16T12:30:00Z
 #
 # This file is owned exclusively by ironGate. No other gate writes here.
 
 [meta]
 gate = "ironGate"
-updated = "2026-07-16T12:00:00Z"
+updated = "2026-07-16T12:30:00Z"
 
 [heads]
 nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
 wateringHole = "d95c01200000000000000000000000000000000000"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
 primalSpring = "8df6b3f"
-projectNUCLEUS = "42e5816"
+projectNUCLEUS = "04cc901"
 bearDog = "f997a339009ec3ca8a1393748b8ac920a0d57150"
 songBird = "fc766dc959fd397ee6c119d552071ab5901bd4a8"
 toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
