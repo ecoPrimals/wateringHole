@@ -9,7 +9,7 @@ shipped L5 (SessionTreeHash full RPC wire, 1,905 tests). Transport Phase 2 surge
 coralReef (client+server de-cfg-gated, 3,647 tests), loamSpine (endpoint dispatch
 wired, 1,704 tests), sweetGrass (SHIPPED — was incorrectly TODO), barraCuda
 (TransportListener unified accept, 5,153 tests). petalTongue: 163 bare unwrap
-eliminated. squirrel transport IN PROGRESS. toadStool S334: -1,888L.
+eliminated. squirrel transport IN PROGRESS. toadStool S336: security_impl migration, −3,164L extracted, 32GB cache freed.
 nestGate debris cleanup (6 dead files, 7 stubs, 44.9GB cache freed).
 
 ---
@@ -51,7 +51,7 @@ temporal identity at every layer of the ecosystem.
 | coralReef | **SHIPPED** | Client+server de-cfg-gated, `BoundAddr::Local` (3,647 tests) |
 | loamSpine | **SHIPPED** | Outbound dispatch wired, framing tests (1,704 tests) |
 | barraCuda | **SHIPPED** | `TransportListener` enum, unified accept (5,153 tests) |
-| toadStool | **SHIPPED** | glowplug Vulkan backend (S332-S334) |
+| toadStool | **SHIPPED** | glowplug Vulkan + security migration + structural debt (S332-S336) |
 | cellMembrane | **SHIPPED** | `getrandom` CSPRNG, registry filter (1,073 tests) |
 | squirrel | IN PROGRESS | 16 files modified, `endpoint.rs` added (uncommitted) |
 | biomeOS | Partial | TCP fallback exists, needs trait dispatch |
