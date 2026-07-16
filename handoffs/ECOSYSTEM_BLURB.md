@@ -1,213 +1,134 @@
-# ecoPrimals Ecosystem Blurb — Wave 143a
+# ecoPrimals Ecosystem Blurb — Wave 143b
 
-**Date**: Jul 16, 2026 09:35 EDT | **Wave**: 143a | **From**: eastGate overwatch
+**Date**: Jul 16, 2026 10:45 EDT | **Wave**: 143b | **From**: eastGate overwatch
 **Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM PHASE 2 IN MOTION.**
 
-**This cascade**: Teams responded to Phase 2 FRAGO. **Windows 14/14 COMPLETE —
-59 depot binaries** (confirmed). songBird shipped `IpcStream` platform
-abstraction. petalTongue shipped Phase 2 metrics trait + Android paths + WS
-bridge. skunkBat adopted `TransportEndpoint`. toadStool S332-S333: glowplug
-Vulkan backend + 9,232 tests. coralReef: 3,650 tests. Deep debt across 8
-primals. Manifest fixes (bind_mode/mobility enums). **RustDesk connectivity
-transient to ironGate + flockGate**. 38/39 synced (wateringHole diverge resolved).
+**This wave**: Full dimensional review. 24 stale handoffs fossilized.
+GLACIAL_SHIFT trimmed (551→90 lines). Active impulses: 7→2. Handoffs: 36→9.
+Manifest v3.1.0. Blurb reshaped to remaining work only.
+
+**Standing**: Windows 14/14 COMPLETE — 59 depot binaries. Phase 1 DONE.
+Phase 2 shipping: songBird `IpcStream`, petalTongue `PlatformLifecycle`,
+skunkBat `TransportEndpoint`, toadStool glowplug Vulkan. ALL 8 GLACIAL CRITERIA CLEAR.
 
 ---
 
-## Per-Primal Remaining Work
+## P0: sporePrint Root 404
 
-### petalTongue
+`primals.eco` root returns 404. sporePrint rebuild needed on golgi.
+`/footprint/` and `live.primals.eco` are serving. This is the only P0.
 
-| Work | Priority | Status |
-|------|----------|--------|
-| `petal-tongue-platform` — Phase 2 reference pattern | — | **SHIPPED** (`1af1a98`) |
-| Phase 2: metrics trait + Android paths + WS bridge | — | **SHIPPED** (`470d7b5`) |
-| Phase 2: `MeshTopologySource` abstraction + deep debt | — | **SHIPPED** (`337e1d0`) |
-| footPrint composition: wire `WS_PATH` → agent bridge | P2 | TODO |
-
-### toadStool
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 gating (`target_os = "linux"`) | — | **DONE** (S329) |
-| glowplug `WgpuGpuDiscovery` Vulkan backend | P1 | **DONE** (S332) |
-| glowplug `PortableSwapExecutor` compute backend | P1 | **DONE** (S332) |
-| ember `PortableResourceHandle` GPU handle abstraction | P2 | **DONE** (S332) |
-| Structural debt: 7 files refactored, primal name cleanup | — | **DONE** (S333) |
-| Deep debt: S329-S333 (clone elim, borrowed deser, test extraction, +57 tests) | — | **DONE** |
-
-### bearDog
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 IPC gating + libc removal | — | **DONE** (`5d4258d`) |
-| HSM provider → Android Keystore backend | P2 | NEW |
-| HSM provider → Windows DPAPI backend | P2 | NEW |
-| Deep debt: BTreeMap batch 4, test extraction wave 2 | — | **DONE** |
-
-### squirrel
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 Windows harvest unblock | — | **DONE** (`110c9939`) |
-| Credential store → Android Keystore backend | P2 | NEW |
-| Credential store → Windows Credential Manager backend | P2 | NEW |
-| Transport: raw UDS → `TransportEndpoint` trait | P2 | Phase 2 |
-
-### sourDough
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Android platform parity (Os::Android + LibC::Bionic) | — | **DONE** (`6115e4a`) |
-| All 3 cross-targets green, 490 tests | — | **DONE** |
-| Full genomeBin standard | — | **COMPLETE** |
-
-### songBird
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 reference implementation | — | **DONE** |
-| `IpcStream` platform abstraction (Phase 2 transport) | — | **SHIPPED** (`12099d84`) |
-| `drawbridge_auth` extraction | — | **SHIPPED** (`12099d84`) |
-| footPrint drawbridge wiring (`PROXY_PATH`) | P2 | TODO |
-| tideGlass drawbridge bonds (LINCS, GEO, ChEMBL, NF) | P2 | TODO |
-
-### nestGate
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 cross-arch (Session 109) | — | **DONE** |
-| Sessions 112-113: production mocks, visibility, String::from R7 | — | **DONE** (`9cfc2b07`) |
-| footPrint CAS wiring (`PROJECTS_PATH`) | P2 | TODO |
-
-### cellMembrane
-
-| Work | Priority | Status |
-|------|----------|--------|
-| `portable-atomic` | — | **SHIPPED** (`f4da0ae`) |
-| CAC impulse dedup (Layer 4) | — | **SHIPPED** (`f4da0ae`) |
-| sporePrint health check | — | **SHIPPED** (`f4da0ae`) |
-| CAC: TreeParity for heads auto-publish | P1 | FRAGO issued |
-| CAC: Tree-parity before cascade policy | P1 | FRAGO issued |
-| Caddy blocks for footPrint + tideGlass | P2 | TODO |
-
-### rhizoCrypt
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 cross-arch | — | **DONE** |
-| SSOT sweep (dates, line count, coverage alignment) | — | **DONE** (`35a58bd`) |
-| CAC: `SessionTreeHash` primitive | P2 | FRAGO issued |
-| Transport: raw UDS → `TransportEndpoint` trait | P2 | Phase 2 |
-
-### biomeOS
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 cross-arch | — | **DONE** (`16b25557`) |
-| Neural API transport → trait-based dispatch | P2 | Phase 2 (TCP fallback exists) |
-
-### skunkBat
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 cross-arch | — | **DONE** |
-| Phase 2: `TransportEndpoint` adoption | — | **SHIPPED** (`6ae036a`) |
-| Deep debt: `#[allow]` → `#[expect]`, dead fields, named constants | — | **DONE** (`022bf76`) |
-
-### coralReef
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 cross-arch | — | **DONE** |
-| Deep debt: error handling, de-hardcoding, deduplication | — | **DONE** (`d51bab4`) |
-| 3,650 tests (Wave 145 docs) | — | **DONE** |
-| Transport: raw UDS → `TransportEndpoint` trait | P2 | Phase 2 |
-
-### barraCuda / loamSpine / sweetGrass
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Phase 1 cross-arch | — | **DONE** (all) |
-| barraCuda: dead feature removal, safe u32 casts, visibility | — | **DONE** (`75c1c880`) |
-| loamSpine: async fs hygiene, base64 migration, clone reduction | — | **DONE** (`3cc9ceb`) |
-| sweetGrass: v0.7.62, deny.toml cleanup | — | **DONE** (`6344fdb`) |
-| Transport: raw UDS → `TransportEndpoint` trait | P2 | Phase 2 |
-
-### sporePrint
-
-| Work | Priority | Status |
-|------|----------|--------|
-| Rebuild on golgi (P0 — root 404) | **P0** | DIVERGENCE |
-
-### primalSpring
-
-| Work | Priority | Status |
-|------|----------|--------|
-| `full-cross-compile` scenario (all primals, all arch) | P1 | FRAGO issued |
-| `depot-architecture-coverage` scenario | P2 | TODO |
-| `footprint-drawbridge-live` scenario (E2E) | P2 | TODO |
+**Owner**: sporePrint + golgi operator | **Action**: `membrane content.rebuild`
 
 ---
 
-## sporeGate Hardware Team
+## Phase 2 Remaining Work (Abstraction Over Gating)
 
-| Work | Priority | Status |
-|------|----------|--------|
-| Windows 14/14 harvest | — | **COMPLETE** (59 depot binaries) |
-| northGate mesh enrollment (songbird.exe) | P1 | TODO |
-| footPrint server composition deploy | P2 | TODO |
+Each item below is the Phase 2 evolution where `#[cfg]` exclusion evolves
+to trait + backend pattern. Reference: petalTongue `petal-tongue-platform`.
+
+### Transport: `TransportEndpoint` ecosystem-wide adoption
+
+| Primal | Status |
+|--------|--------|
+| songBird | **SHIPPED** (`IpcStream`) |
+| skunkBat | **SHIPPED** (`TransportEndpoint`) |
+| squirrel | TODO |
+| rhizoCrypt | TODO |
+| coralReef | TODO |
+| barraCuda | TODO |
+| loamSpine | TODO |
+| sweetGrass | TODO |
+| biomeOS | TCP fallback exists, needs trait-based dispatch |
+
+### Platform-Specific Abstraction Targets
+
+| Primal | Abstraction | Priority |
+|--------|-------------|----------|
+| bearDog | HSM provider → Android Keystore backend | P2 |
+| bearDog | HSM provider → Windows DPAPI backend | P2 |
+| squirrel | Credential store → Android Keystore | P2 |
+| squirrel | Credential store → Windows Credential Manager | P2 |
+| petalTongue | Android cdylib Cargo.toml target config | P2 |
 
 ---
 
-## Standing State
+## Composition Wiring (footPrint + tideGlass)
 
-### Depot
+| Item | Owner | Priority |
+|------|-------|----------|
+| footPrint: `WS_PATH` → agent bridge | petalTongue | P2 |
+| footPrint: drawbridge wiring (`PROXY_PATH`) | songBird | P2 |
+| footPrint: CAS wiring (`PROJECTS_PATH`) | nestGate | P2 |
+| footPrint: server composition deploy | sporeGate ops | P2 |
+| tideGlass: drawbridge bonds (LINCS, GEO, ChEMBL, NF) | songBird | P2 |
+
+---
+
+## Content-Addressed Convergence (CAC — 3/6 layers solved)
+
+| Layer | Status | Owner |
+|-------|--------|-------|
+| L1: Git repos tree hashes | **SOLVED** | — |
+| L2: Depot BLAKE3 diff | **SOLVED** | — |
+| L4: Impulse dedup | **SOLVED** | cellMembrane |
+| L3: Heads TreeParity | FRAGO issued | cellMembrane |
+| L5: SessionTreeHash | FRAGO issued | rhizoCrypt |
+| L6: Cascade tree-parity policy | FRAGO issued | cellMembrane |
+
+---
+
+## Infrastructure / Ops
+
+| Item | Owner | Priority |
+|------|-------|----------|
+| northGate mesh enrollment (songbird.exe) | sporeGate ops | P1 |
+| DNSSEC on primals.eco | operator | P2 |
+| primal.eco inner membrane separation | operator | P2 |
+| RustDesk transient to ironGate + flockGate | investigate | P2 |
+| sporeGate Head re-publish (stale Jul 6) | sporeGate | P2 |
+
+---
+
+## primalSpring Validation Scenarios
+
+| Scenario | Priority | Status |
+|----------|----------|--------|
+| `full-cross-compile` (all primals, all arch) | P1 | FRAGO issued |
+| `depot-architecture-coverage` | P2 | TODO |
+| `footprint-drawbridge-live` (E2E) | P2 | TODO |
+| `content-addressed-convergence` | P2 | FRAGO issued |
+
+---
+
+## Depot (59 binaries — 4 architectures)
 
 ```
-59 depot binaries — Windows 14/14 COMPLETE. bearDog UDS fix on sporeGate.
-  x86_64-linux-musl     14   FRESH
-  aarch64-linux-musl    14   FRESH
-  aarch64-android       14   FRESH
-  x86_64-windows-gnu    14   FRESH (Wave 142b harvest)
-  BLAKE3 + Ed25519 signed. VPS depot serving.
+x86_64-linux-musl     14   FRESH
+aarch64-linux-musl    14   FRESH
+aarch64-android       14   FRESH
+x86_64-windows-gnu    14   FRESH
 
+BLAKE3 + Ed25519 signed. VPS depot serving.
 Exotic validated (songBird): riscv64gc powerpc64le powerpc64 s390x sparc64 arm32 armv7 i686
 ```
 
-### Topology Issues
-
-| Issue | Status |
-|-------|--------|
-| RustDesk transient connectivity to ironGate | ACTIVE — intermittent |
-| RustDesk transient connectivity to flockGate | ACTIVE — intermittent |
-| sporePrint rebuild on golgi (P0 — root 404) | DIVERGENCE |
-
-### Infrastructure Hygiene
-
-| Item | Status |
-|------|--------|
-| GLACIAL_SHIFT_READINESS.md update (stale 139c) | TODO |
-| DNSSEC on primals.eco | TODO |
-| primal.eco inner membrane separation | TODO |
-| ecosystem_manifest bind_mode/mobility fix | **FIXED** (this cascade) |
-
-### Gate Status
+## Gate Status
 
 ```
 eastGate     — PRIMARY. Cascade authority. 38/39 synced.
-northGate    — Windows mesh target. RTX 5090. ~1TB AlphaFold.
-sporeGate    — NUCLEUS. 13-target build authority. 59 depot bins. Windows 14/14.
-golgiBody    — Outer membrane. footprint/ + live. Root 404 (sporePrint).
-westGate     — OFFLINE. ZFS cold storage.
+sporeGate    — NUCLEUS. 13-target builder. 59 depot bins.
+golgiBody    — Outer membrane. footprint/ + live. ROOT 404 (P0).
 ironGate     — ABG/NF compute. JupyterHub. RustDesk transient.
 flockGate    — WAN covalent. 16 bonds. RustDesk transient.
+northGate    — Windows mesh target. RTX 5090. Enrollment pending.
 grapheneGate — StrongBox target. 14/14 Android ecobins.
+westGate     — OFFLINE. ZFS cold storage.
 ```
 
 ---
 
-*Wave 143a: Phase 2 FRAGO response — 3 primals shipping abstractions (songBird IpcStream,
-petalTongue metrics+Android+WS, skunkBat TransportEndpoint). Windows 14/14 COMPLETE (59
-depot bins). toadStool S332-S333 glowplug Vulkan + 9,232 tests. coralReef 3,650 tests.
-Deep debt across 8 primals. Manifest fixes. RustDesk transient to ironGate+flockGate.
-38/39 synced.*
+*Wave 143b: Dimensional review complete. 24 handoffs fossilized. GLACIAL_SHIFT
+trimmed. All 12 dimensions assessed. Phase 2 is the active evolution vector.
+P0 is sporePrint root 404. Next: teams evolve `TransportEndpoint` across
+remaining 7 primals while footPrint + tideGlass composition wiring proceeds.*

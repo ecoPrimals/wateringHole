@@ -18,8 +18,8 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "2.9.0"
-generated = "2026-07-11"
+version = "3.1.0"
+generated = "2026-07-16"
 # DEPRECATED: wave ID now lives in wave.toml (overwatch sole writer).
 # This field is retained at last-known value for backward compat with older binaries.
 wave = 136

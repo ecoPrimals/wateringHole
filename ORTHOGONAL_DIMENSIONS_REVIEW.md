@@ -7,29 +7,31 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ## 1. Temporal
 
-- [ ] `wave.toml` reflects current wave ID, sub, and posture
-- [ ] Gate heads published (`heads/*.toml`) — all active gates have recent timestamps
-- [ ] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
-- [ ] Active impulses triaged — stale impulses fossilized
-- [ ] No stale diverge impulses older than 2 waves
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 143a)
+- [x] Gate heads published (`heads/*.toml`) — all active gates have recent timestamps
+- [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
+- [x] Active impulses triaged — 5 stale fossilized, 2 active remain (CAC + Phase 2)
+- [x] No stale diverge impulses older than 2 waves
+- [x] ecosystem_manifest.toml version current (v3.1.0)
 
 ## 2. Ecological (Primal Health)
 
-- [ ] All primals compile (`cargo check` / `cargo test` green)
-- [ ] Zero P1 blockers in any primal
-- [ ] All primal repos converged across remotes (ahead=0, behind=0)
-- [ ] Transport injection adopted across all non-exempt primals
-- [ ] Neural API methods shipped by all primal teams
-- [ ] Test counts stable or increasing (no regression)
+- [x] All primals compile (`cargo check` / `cargo test` green) — all 4 depot arch
+- [x] Zero P1 blockers in any primal
+- [x] All primal repos converged across remotes (38/39 synced)
+- [x] Transport injection adopted across all non-exempt primals
+- [x] Neural API methods shipped by all primal teams
+- [x] Test counts stable or increasing (toadStool 9,232; coralReef 3,650; sourDough 490)
+- [x] Phase 2 abstraction shipping (songBird IpcStream, petalTongue platform, skunkBat TransportEndpoint)
 
 ## 3. Hardware / Topology
 
-- [ ] `HARDWARE_INVENTORY.md` reflects current physical state
-- [ ] All online gates reachable (SSH, mesh, or WireGuard)
-- [ ] Gate roles match manifest `[topology]` section
-- [ ] Network backbone operational (CRS310, MikroTik, switches)
-- [ ] Pending hardware actions documented (westGate power-on, etc.)
-- [ ] SoloKey / HSM / StrongBox status current
+- [x] `HARDWARE_INVENTORY.md` reflects current physical state
+- [ ] All online gates reachable — **RustDesk transient to ironGate + flockGate**
+- [x] Gate roles match manifest `[topology]` section
+- [x] Network backbone operational (CRS310, MikroTik, switches)
+- [x] Pending hardware actions documented (northGate enrollment, westGate offline)
+- [x] SoloKey / HSM / StrongBox status current
 
 ## 4. Sovereignty / Membranes
 
@@ -43,60 +45,62 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ## 5. Depot / Build Pipeline
 
-- [ ] Depot authority identified and operational (sporeGate — 13-target build authority)
-- [ ] ecoBins built as musl-static stripped (post-primordial standard)
-- [ ] `checksums.toml` / `signatures.toml` current
-- [ ] `require-signed` enforced system-wide
-- [ ] SIGN-VERIFY-ON-FETCH operational in cellMembrane
-- [ ] All 4 depot architectures built for all 14 primals (see Dimension 12 for matrix)
+- [x] Depot authority identified and operational (sporeGate — 13-target build authority)
+- [x] ecoBins built as musl-static stripped (post-primordial standard)
+- [x] `checksums.toml` / `signatures.toml` current (59 binaries, Wave 143a)
+- [x] `require-signed` enforced system-wide
+- [x] SIGN-VERIFY-ON-FETCH operational in cellMembrane
+- [x] All 4 depot architectures built for all 14 primals (Windows 14/14 COMPLETE)
 - [ ] Exotic architectures expanded to depot as primal adoption completes
-- [ ] Depot layout consistent across depot authority and relay mirrors
-- [ ] `plasmid.harvest` → `plasmid.fetch` pipeline tested end-to-end
-- [ ] `depot_sync --push` operational (builder → VPS)
+- [x] Depot layout consistent across depot authority and relay mirrors
+- [x] `plasmid.harvest` → `plasmid.fetch` pipeline tested end-to-end
+- [x] `depot_sync --push` operational (builder → VPS)
 
 ## 6. Website / Public Surface / Security
 
-- [ ] `primals.eco` returning 200 (sporePrint)
-- [ ] `primals.eco/footprint/` returning 200 (GIS composition)
-- [ ] `live.primals.eco` returning 200 (petalTongue dashboard)
-- [ ] Security headers deployed (HSTS, CSP, X-Frame-Options, X-Content-Type)
-- [ ] fail2ban active on SSH endpoints
-- [ ] Rate limiting configured
-- [ ] TLS certificates auto-renewing (ACME / Let's Encrypt)
-- [ ] No new CRITICAL exposures
+- [ ] `primals.eco` returning 200 — **P0: ROOT 404** (sporePrint rebuild needed)
+- [x] `primals.eco/footprint/` returning 200 (GIS composition)
+- [x] `live.primals.eco` returning 200 (petalTongue dashboard)
+- [x] Security headers deployed (HSTS, CSP, X-Frame-Options, X-Content-Type)
+- [x] fail2ban active on SSH endpoints
+- [x] Rate limiting configured
+- [x] TLS certificates auto-renewing (ACME / Let's Encrypt)
+- [x] No new CRITICAL exposures
 
 ## 7. Glacial Shift
 
-- [ ] All 8 glacial criteria assessed (document status in GLACIAL_SHIFT_READINESS.md)
-- [ ] No regression on previously cleared criteria
-- [ ] Next glacial goal (Universal Substrate Evolution) tracked
+- [x] All 8 glacial criteria assessed — ALL CLEAR (since Wave 137b)
+- [x] No regression on previously cleared criteria
+- [x] Next glacial goal (Universal Substrate Evolution) tracked
 - [ ] SHOW_HN readiness rubric updated
+- [x] GLACIAL_SHIFT_READINESS.md trimmed (551→90 lines, history fossilized)
 
 ## 8. Compositions / RustScript / External
 
-- [ ] Live compositions operational (footPrint, tideGlass status)
-- [ ] Drawbridge weak bond registrations current
-- [ ] RustScript absorption path documented
+- [x] footPrint LIVE at `primals.eco/footprint/` — client operational
+- [ ] tideGlass — Phase 0 not started (Gonzales NF)
+- [x] Drawbridge weak bond registrations current (songBird 16 bonds)
+- [x] RustScript absorption path documented (gen5/RUSTSCRIPT_LAST_MILE.md)
 - [x] protoKarya projects registered in manifest (Wave 140a — footPrint + tideGlass)
-- [ ] JupyterHub / ABG access operational
-- [ ] Composition routing standard applied
+- [ ] JupyterHub / ABG access — RustDesk transient to ironGate
+- [x] Composition routing standard applied
 - [ ] primalSpring E2E scenarios for protoKarya compositions (5 identified gaps)
 
 ## 9. Documentation / Fossil Record
 
-- [ ] Blurb reflects current wave scope and status
-- [ ] Stale handoffs fossilized
-- [ ] whitePaper gen5/ current with architectural state
-- [ ] wateringHole document count stable (no unbounded growth)
-- [ ] GLACIAL_SHIFT_READINESS.md last-updated date current
+- [x] Blurb reflects current wave scope and status (Wave 143a)
+- [x] Stale handoffs fossilized (21 handoffs → fossilRecord/wave143a_dimensional_review/)
+- [x] whitePaper gen5/ current with architectural state
+- [x] wateringHole document count stable (36→15 handoffs, 7→2 impulses)
+- [x] GLACIAL_SHIFT_READINESS.md last-updated date current (trimmed Wave 143a)
 
 ## 10. Cascade Pipeline / Convergence
 
-- [ ] `membrane temporal.cascade` runs without hanging
-- [ ] All repo remotes converged (zero ahead/behind)
-- [ ] sporeGate-direct push mechanism functional (or documented workaround)
+- [x] `membrane temporal.cascade` runs without hanging
+- [x] All repo remotes converged (38/39 synced — wateringHole diverge resolved)
+- [ ] sporeGate-direct push mechanism — shallow/non-ff rejected (workaround: forgejo)
 - [x] No cyclic divergence in freshness records (Wave 138c — tree hashes)
-- [ ] Forgejo mirrors operational (bidirectional repos functional)
+- [x] Forgejo mirrors operational (bidirectional repos functional)
 
 ## 11. Content-Addressed Convergence (CAC — Newton-Leibniz Pattern)
 
@@ -153,12 +157,18 @@ trait interfaces. Every platform is a first-class evolution substrate.
 
 **Reference implementation**: petalTongue `petal-tongue-platform` (`1af1a98`)
 
+**Shipping primals (Wave 143a)**:
+- songBird: `IpcStream` platform abstraction (`12099d84`)
+- petalTongue: Phase 2 metrics trait + Android paths + WS bridge (`337e1d0`)
+- skunkBat: `TransportEndpoint` adoption
+- toadStool: glowplug `WgpuGpuDiscovery` Vulkan backend (S332)
+
 - [ ] Each primal audits `#[cfg()]` boundaries → identify abstraction candidates
-- [ ] Transport: `TransportEndpoint` trait adopted ecosystem-wide (not raw UDS)
-- [ ] Device discovery: trait-based (not sysfs-hardcoded)
+- [x] Transport: `TransportEndpoint` trait adopted by songBird, skunkBat (expanding)
+- [x] Device discovery: trait-based — toadStool glowplug Vulkan backend (S332)
 - [ ] Health monitoring: trait-based (not procfs-hardcoded)
 - [ ] Credential store: trait-based (fs/Keystore/DPAPI backends)
-- [ ] Platform lifecycle: trait-based where applicable (embed pattern)
+- [x] Platform lifecycle: trait-based — petalTongue `PlatformLifecycle` trait shipped
 - [ ] No `#[cfg()]` block exceeds 50 lines without extraction to trait + backend module
 - [ ] Each `#[cfg()]` gated module has a corresponding platform backend (not empty stub)
 - [ ] New architectures assessed at each wave boundary
@@ -189,5 +199,5 @@ Phase 2: impl Transport for Uds { ... } // one backend among many
 
 ---
 
-*Last used*: Wave 141a (Jul 15, 2026)
+*Last used*: Wave 143a (Jul 16, 2026)
 *Created*: Wave 139a
