@@ -1,12 +1,39 @@
 # Cross-Architecture Adoption — Per-Primal Handoffs
 
-**Date**: Jul 15, 2026 | **Wave**: 141a | **From**: eastGate overwatch
+**Date**: Jul 16, 2026 | **Wave**: 142a | **From**: eastGate overwatch
 **Reference**: `SILICON_ATHEISM_CONVERGENCE_WAVE140b.md`, `CROSS_PLATFORM_PARITY_AAR_WAVE139e.md`
-**Pattern**: songBird (`NamedPipeServer`/`NamedPipeClient` behind `#[cfg(windows)]`)
+**Phase 2 reference**: petalTongue `petal-tongue-platform` (`1af1a98`)
 
-**Each primal team**: apply the transformations below to your codebase.
-When done, `cargo check --target x86_64-pc-windows-gnu` should succeed.
-Report completion via commit message or handoff to overwatch.
+## Guiding Principle: Abstraction Over Gating
+
+Phase 1 (`#[cfg]` gating) is **COMPLETE** — all 14 primals compile on all 4
+depot architectures. Phase 1 was necessary but insufficient: a headless binary
+that compiles but has no platform capabilities is not a useful system.
+
+**Phase 2**: Replace `#[cfg]` exclusion fences with **trait-based platform
+abstractions**. Every platform is a first-class evolution substrate. The same
+interface works everywhere; only the backend implementation changes.
+
+```
+BAD:  #[cfg(target_os = "linux")] pub mod vfio;     // absent on Android
+GOOD: trait DeviceDiscovery { fn discover(); }       // Vulkan on Android, sysfs on Linux
+
+BAD:  #[cfg(unix)] UnixStream::connect(path)         // absent on Windows
+GOOD: connect_transport(&TransportEndpoint::local())  // NamedPipe on Windows, UDS on Unix
+
+BAD:  #[cfg(target_os = "linux")] fn health_check()  // no health on Android
+GOOD: trait HealthProbe { fn check(); }               // HAL on Android, sysfs on Linux
+```
+
+**Reference implementation**: petalTongue `petal-tongue-platform`:
+- `Platform` enum with capability queries (not exclusion flags)
+- `PlatformLifecycle` trait (universal lifecycle, Android-modeled)
+- `EmbeddedRuntime` (same capabilities everywhere, different transport)
+- C-FFI surface (host embedding from any language)
+
+**Each primal team**: identify your `#[cfg]` boundaries and evolve them toward
+trait abstractions. The `#[cfg]` gate becomes one backend implementation among
+many — not the only path.
 
 ---
 

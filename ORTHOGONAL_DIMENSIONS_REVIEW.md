@@ -138,28 +138,45 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 - [ ] riscv64gc-unknown-none-elf — bare metal RISC-V (no OS)
 - [ ] loongarch64-unknown-linux-gnu — Chinese MIPS successor (Loongson)
 
-### Per-Primal Cross-Compile Adoption
+### Phase 1: Cross-Compile Adoption (COMPLETE — Wave 142a)
 
-- [ ] Transport abstraction adopted: _/14 primals use `TransportEndpoint` (not raw UDS)
-- [ ] Signal abstraction adopted: _/3 affected primals use `ProcessManager`
-- [ ] FS abstraction adopted: _/3 affected primals use `Platform::detect()`
-- [ ] toadStool hw-safe feature-gated behind `linux-hw`
-- [ ] petalTongue Android target is cdylib (not binary)
-- [ ] portable-atomic feature enabled in all workspace Cargo.toml
+- [x] 14/14 primals compile for all 4 depot architectures
+- [x] `#[cfg(target_os)]` gating applied where needed (Phase 1)
+- [x] portable-atomic feature shipped by cellMembrane
 - [ ] primalSpring: `full-cross-compile` scenario (all primals, all depot architectures)
 - [ ] primalSpring: `depot-architecture-coverage` scenario (track expansion)
 
+### Phase 2: Abstraction Over Gating (ACTIVE — Wave 142a+)
+
+**Principle**: Don't exclude systems via `#[cfg]` — abstract them to universal
+trait interfaces. Every platform is a first-class evolution substrate.
+
+**Reference implementation**: petalTongue `petal-tongue-platform` (`1af1a98`)
+
+- [ ] Each primal audits `#[cfg()]` boundaries → identify abstraction candidates
+- [ ] Transport: `TransportEndpoint` trait adopted ecosystem-wide (not raw UDS)
+- [ ] Device discovery: trait-based (not sysfs-hardcoded)
+- [ ] Health monitoring: trait-based (not procfs-hardcoded)
+- [ ] Credential store: trait-based (fs/Keystore/DPAPI backends)
+- [ ] Platform lifecycle: trait-based where applicable (embed pattern)
+- [ ] No `#[cfg()]` block exceeds 50 lines without extraction to trait + backend module
+- [ ] Each `#[cfg()]` gated module has a corresponding platform backend (not empty stub)
+- [ ] New architectures assessed at each wave boundary
+
 ### Code Divergence Tracking (constrained evolution)
 
-`#[cfg()]` boundaries are not technical debt — they are constrained evolution
-targets. Each platform-specific code path is a site where the ecosystem
-adapts to hardware reality. Track them:
+`#[cfg()]` boundaries are constrained evolution targets — sites where the
+ecosystem adapts to hardware reality. In Phase 2, these evolve from exclusion
+fences into trait backend selections:
 
-- [ ] `#[cfg(unix)]` / `#[cfg(windows)]` divergences documented per primal
-- [ ] Platform-specific code paths have paired tests on both sides
-- [ ] No `#[cfg()]` block exceeds 50 lines without extraction to platform module
-- [ ] Fallback paths exist for all `#[cfg()]` branches (no dead-end compile)
-- [ ] New architectures assessed at each wave boundary (RISC-V board availability, etc.)
+```
+Phase 1: #[cfg(unix)] mod uds;          // excluded on Windows
+Phase 2: impl Transport for Uds { ... } // one backend among many
+```
+
+- [ ] `#[cfg()]` divergences documented per primal (what → which trait)
+- [ ] Platform-specific backends have paired tests on each platform
+- [ ] Fallback paths exist (TCP fallback for transport, stub for missing HW)
 - [ ] Console/embedded targets assessed when hardware acquired
 
 ### Subsystem Convergence
