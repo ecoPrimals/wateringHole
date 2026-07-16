@@ -1,45 +1,68 @@
-# ecoPrimals Ecosystem Blurb — Wave 143b
+# ecoPrimals Ecosystem Blurb — Wave 144a
 
-**Date**: Jul 16, 2026 10:45 EDT | **Wave**: 143b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM PHASE 2 IN MOTION.**
+**Date**: Jul 16, 2026 13:00 EDT | **Wave**: 144a | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. CAC 6/6 SOLVED. PHASE 2 TRANSPORT SURGE.**
 
-**This wave**: Full dimensional review. 24 stale handoffs fossilized.
-GLACIAL_SHIFT trimmed (551→90 lines). Active impulses: 7→2. Handoffs: 36→9.
-Manifest v3.1.0. Blurb reshaped to remaining work only.
-
-**Standing**: Windows 14/14 COMPLETE — 59 depot binaries. Phase 1 DONE.
-Phase 2 shipping: songBird `IpcStream`, petalTongue `PlatformLifecycle`,
-skunkBat `TransportEndpoint`, toadStool glowplug Vulkan. ALL 8 GLACIAL CRITERIA CLEAR.
+**This cascade**: **CAC COMPLETE — all 6 layers solved.** cellMembrane delivered
+L3 (tree-parity heads) + L6 (cascade policy) + `getrandom` CSPRNG. rhizoCrypt
+shipped L5 (SessionTreeHash full RPC wire, 1,905 tests). Transport Phase 2 surge:
+coralReef (client+server de-cfg-gated, 3,647 tests), loamSpine (endpoint dispatch
+wired, 1,704 tests), sweetGrass (SHIPPED — was incorrectly TODO), barraCuda
+(TransportListener unified accept, 5,153 tests). petalTongue: 163 bare unwrap
+eliminated. squirrel transport IN PROGRESS. toadStool S334: -1,888L.
+nestGate debris cleanup (6 dead files, 7 stubs, 44.9GB cache freed).
 
 ---
 
 ## P0: sporePrint Root 404
 
-`primals.eco` root returns 404. sporePrint rebuild needed on golgi.
-`/footprint/` and `live.primals.eco` are serving. This is the only P0.
+`primals.eco` root returns 404. sporePrint shipped sidebar slim (37KB→4KB per
+page). `content.rebuild` needed on golgi to pick up the fix.
 
-**Owner**: sporePrint + golgi operator | **Action**: `membrane content.rebuild`
+**Owner**: golgi operator | **Action**: `membrane content.rebuild`
 
 ---
 
-## Phase 2 Remaining Work (Abstraction Over Gating)
+## CAC — Newton-Leibniz Pattern: 6/6 COMPLETE
 
-Each item below is the Phase 2 evolution where `#[cfg]` exclusion evolves
-to trait + backend pattern. Reference: petalTongue `petal-tongue-platform`.
+| Layer | What | Status |
+|-------|------|--------|
+| L1 | Git repos: tree hashes | **SOLVED** (Wave 138c) |
+| L2 | Depot: BLAKE3 diff | **SOLVED** (Wave 139e) |
+| L3 | Heads: TreeParity auto-publish | **SOLVED** (cellMembrane Wave 143b) |
+| L4 | Impulses: content-hash dedup | **SOLVED** (cellMembrane Wave 141b) |
+| L5 | rhizoCrypt: SessionTreeHash | **SOLVED** (rhizoCrypt Wave 143b — `ce3d534`) |
+| L6 | Cascade: tree-parity policy | **SOLVED** (cellMembrane Wave 143b) |
 
-### Transport: `TransportEndpoint` ecosystem-wide adoption
+**The Newton-Leibniz pattern is fully implemented.** Content identity supersedes
+temporal identity at every layer of the ecosystem.
 
-| Primal | Status |
-|--------|--------|
-| songBird | **SHIPPED** (`IpcStream`) |
-| skunkBat | **SHIPPED** (`TransportEndpoint`) |
-| squirrel | TODO |
-| rhizoCrypt | TODO |
-| coralReef | TODO |
-| barraCuda | TODO |
-| loamSpine | TODO |
-| sweetGrass | TODO |
-| biomeOS | TCP fallback exists, needs trait-based dispatch |
+---
+
+## Phase 2 Transport Adoption (Abstraction Over Gating)
+
+| Primal | Status | Detail |
+|--------|--------|--------|
+| songBird | **SHIPPED** | `IpcStream` platform abstraction |
+| skunkBat | **SHIPPED** | `TransportEndpoint` adoption |
+| petalTongue | **SHIPPED** | `PlatformLifecycle` + metrics + WS bridge |
+| sweetGrass | **SHIPPED** | `NestGateClient` + `transport_connect` (1,608 tests) |
+| rhizoCrypt | **SHIPPED** | `TransportHint` deleted, all on `TransportEndpoint` (1,905 tests) |
+| coralReef | **SHIPPED** | Client+server de-cfg-gated, `BoundAddr::Local` (3,647 tests) |
+| loamSpine | **SHIPPED** | Outbound dispatch wired, framing tests (1,704 tests) |
+| barraCuda | **SHIPPED** | `TransportListener` enum, unified accept (5,153 tests) |
+| toadStool | **SHIPPED** | glowplug Vulkan backend (S332-S334) |
+| cellMembrane | **SHIPPED** | `getrandom` CSPRNG, registry filter (1,073 tests) |
+| squirrel | IN PROGRESS | 16 files modified, `endpoint.rs` added (uncommitted) |
+| biomeOS | Partial | TCP fallback exists, needs trait dispatch |
+| bearDog | P2 | Test extraction wave 4 done, HSM abstraction pending |
+| nestGate | Clean | Session 114 PROJECTS_PATH CAS wiring |
+
+**10/14 primals SHIPPED Phase 2 transport.** 1 in progress (squirrel), 3 remaining.
+
+---
+
+## Remaining Work
 
 ### Platform-Specific Abstraction Targets
 
@@ -49,11 +72,10 @@ to trait + backend pattern. Reference: petalTongue `petal-tongue-platform`.
 | bearDog | HSM provider → Windows DPAPI backend | P2 |
 | squirrel | Credential store → Android Keystore | P2 |
 | squirrel | Credential store → Windows Credential Manager | P2 |
-| petalTongue | Android cdylib Cargo.toml target config | P2 |
+| squirrel | Transport: `TransportEndpoint` (in progress) | P1 |
+| biomeOS | Neural API transport → trait dispatch | P2 |
 
----
-
-## Composition Wiring (footPrint + tideGlass)
+### Composition Wiring
 
 | Item | Owner | Priority |
 |------|-------|----------|
@@ -63,41 +85,15 @@ to trait + backend pattern. Reference: petalTongue `petal-tongue-platform`.
 | footPrint: server composition deploy | sporeGate ops | P2 |
 | tideGlass: drawbridge bonds (LINCS, GEO, ChEMBL, NF) | songBird | P2 |
 
----
-
-## Content-Addressed Convergence (CAC — 3/6 layers solved)
-
-| Layer | Status | Owner |
-|-------|--------|-------|
-| L1: Git repos tree hashes | **SOLVED** | — |
-| L2: Depot BLAKE3 diff | **SOLVED** | — |
-| L4: Impulse dedup | **SOLVED** | cellMembrane |
-| L3: Heads TreeParity | FRAGO issued | cellMembrane |
-| L5: SessionTreeHash | FRAGO issued | rhizoCrypt |
-| L6: Cascade tree-parity policy | FRAGO issued | cellMembrane |
-
----
-
-## Infrastructure / Ops
+### Infrastructure / Ops
 
 | Item | Owner | Priority |
 |------|-------|----------|
+| sporePrint rebuild on golgi (P0 — 404) | golgi operator | **P0** |
 | northGate mesh enrollment (songbird.exe) | sporeGate ops | P1 |
 | DNSSEC on primals.eco | operator | P2 |
 | primal.eco inner membrane separation | operator | P2 |
 | RustDesk transient to ironGate + flockGate | investigate | P2 |
-| sporeGate Head re-publish (stale Jul 6) | sporeGate | P2 |
-
----
-
-## primalSpring Validation Scenarios
-
-| Scenario | Priority | Status |
-|----------|----------|--------|
-| `full-cross-compile` (all primals, all arch) | P1 | FRAGO issued |
-| `depot-architecture-coverage` | P2 | TODO |
-| `footprint-drawbridge-live` (E2E) | P2 | TODO |
-| `content-addressed-convergence` | P2 | FRAGO issued |
 
 ---
 
@@ -110,25 +106,24 @@ aarch64-android       14   FRESH
 x86_64-windows-gnu    14   FRESH
 
 BLAKE3 + Ed25519 signed. VPS depot serving.
-Exotic validated (songBird): riscv64gc powerpc64le powerpc64 s390x sparc64 arm32 armv7 i686
 ```
 
 ## Gate Status
 
 ```
-eastGate     — PRIMARY. Cascade authority. 38/39 synced.
+eastGate     — PRIMARY. Cascade authority.
 sporeGate    — NUCLEUS. 13-target builder. 59 depot bins.
 golgiBody    — Outer membrane. footprint/ + live. ROOT 404 (P0).
 ironGate     — ABG/NF compute. JupyterHub. RustDesk transient.
 flockGate    — WAN covalent. 16 bonds. RustDesk transient.
-northGate    — Windows mesh target. RTX 5090. Enrollment pending.
+northGate    — Windows mesh target. Enrollment pending.
 grapheneGate — StrongBox target. 14/14 Android ecobins.
 westGate     — OFFLINE. ZFS cold storage.
 ```
 
 ---
 
-*Wave 143b: Dimensional review complete. 24 handoffs fossilized. GLACIAL_SHIFT
-trimmed. All 12 dimensions assessed. Phase 2 is the active evolution vector.
-P0 is sporePrint root 404. Next: teams evolve `TransportEndpoint` across
-remaining 7 primals while footPrint + tideGlass composition wiring proceeds.*
+*Wave 144a: CAC 6/6 COMPLETE — Newton-Leibniz fully implemented. Phase 2 transport
+surge: 10/14 primals shipped. squirrel in progress. cellMembrane `getrandom` + L3/L6.
+rhizoCrypt SessionTreeHash L5 wired. coralReef full de-cfg-gate. barraCuda TransportListener.
+P0: sporePrint root 404 (sidebar slim shipped, rebuild needed).*

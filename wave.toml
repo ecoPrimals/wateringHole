@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 143
-sub = "b"
+id = 144
+sub = "a"
 date = "2026-07-16"
-posture = "PUBLIC + SOVEREIGN. PHASE 2 IN MOTION. Dimensional review complete. 24 handoffs fossilized, GLACIAL_SHIFT trimmed, 12 dimensions assessed. P0: sporePrint root 404. Next: TransportEndpoint across 7 primals + footPrint/tideGlass composition wiring."
+posture = "PUBLIC + SOVEREIGN. CAC 6/6 COMPLETE (Newton-Leibniz fully implemented). Phase 2 transport: 10/14 shipped. cellMembrane getrandom CSPRNG + L3/L6. rhizoCrypt SessionTreeHash L5 wired. coralReef full de-cfg-gate. barraCuda TransportListener. P0: sporePrint 404."
 publisher = "eastGate-overwatch"
 
 [gates]
