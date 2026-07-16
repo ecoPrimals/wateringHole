@@ -266,7 +266,7 @@ Deep debt delivered alongside cross-arch (Waves 141a-142a):
 - rhizoCrypt: method_gate split, magic numbers, branch/vertex coverage, Phase 2 transport, SessionTreeHash
 - sweetGrass: postgres store purged (pure Rust dogma), cross-platform warnings suppressed
 - nestGate: Category 3 (rustix::fs::statvfs gated) + Category 1 (UDS transport gated across 9 files)
-- toadStool: S329-S335 deep debt + Phase 2 GPU backends + structural debt (21 files extracted, −2,991L, doc-comment primal cleanup, dead code elimination)
+- toadStool: S329-S336 deep debt + Phase 2 GPU + structural debt (23 files extracted, −3,164L, security_impl migrated to crypto_integration, dead channels feature removed)
 - bearDog: libc removal, BTreeMap batch 4, test extraction wave 2
 - squirrel: Windows harvest unblock + deep debt sweep
 - sourDough: Android platform parity (Os::Android + LibC::Bionic, 490 tests)
