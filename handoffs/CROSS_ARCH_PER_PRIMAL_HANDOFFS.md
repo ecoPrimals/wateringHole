@@ -261,8 +261,8 @@ All 14 primals now compile for all 4 depot architectures:
 | coralReef | ✅ | ✅ | ✅ | ✅ | |
 | skunkBat | ✅ | ✅ | ✅ | ✅ | |
 | squirrel | ✅ | ✅ | ✅ | ✅ | Windows unblocked Wave 142a |
-| toadStool | ✅ | ✅ | ✅ | ✅ | Headless on non-Linux (no GPU/VFIO) |
-| petalTongue | ✅ | ✅ | ✅ | ✅ | Android cdylib config pending |
+| toadStool | ✅ | ✅ | ✅ | ✅ | Phase 1 (gating). Phase 2: abstract glowplug for Android GPU |
+| petalTongue | ✅ | ✅ | ✅ | ✅ | **Reference pattern**: petal-tongue-platform (cdylib + C-FFI + lifecycle) |
 | sourDough | ✅ | ✅ | ✅ | ✅ | 490 tests, all 3 green |
 | rhizoCrypt | ✅ | ✅ | ✅ | ✅ | |
 | sweetGrass | ✅ | ✅ | ✅ | ✅ | |
@@ -274,7 +274,46 @@ Expected result: **56 depot binaries** (14 × 4 architectures).
 
 ---
 
-*Updated Wave 142a: All 14 primals at full genomeBin standard. Windows: 14/14 ready
-(petalTongue, squirrel, bearDog resolved). Android: 14/14 ready (sourDough resolved,
-toadStool S329 gating covers Android via target_os="linux" exclusion). sporeGate
-full re-harvest will validate.*
+## Phase 2: Abstraction Over Gating (Silicon Atheism Maturation)
+
+**petalTongue established the reference pattern**: `petal-tongue-platform` (`1af1a98`).
+
+Phase 1 (DONE): `#[cfg(target_os)]` gating — systems compile everywhere, but
+platform-specific capabilities are excluded on non-native targets. This is
+necessary but insufficient. A "headless" binary is not a useful system.
+
+Phase 2 (NOW): **Universal platform abstraction** — don't exclude systems,
+abstract them. Every platform gets the same interface with platform-appropriate
+backends. petalTongue's pattern:
+
+```
+Platform enum    → capability queries (supports_uds?, prefers_tcp?, has_filesystem?)
+PlatformLifecycle trait → universal lifecycle (create/start/resume/pause/stop/destroy)
+EmbeddedRuntime  → same rendering + IPC everywhere, different transport per platform
+C-FFI surface    → host embedding from Kotlin, Swift, C#, or direct Rust
+cdylib + rlib    → shared library for host embedding AND Rust library for composition
+```
+
+### Primal abstraction targets (Phase 2)
+
+| Primal | What to abstract | From → To |
+|--------|-----------------|-----------|
+| toadStool | glowplug DeviceDiscovery | sysfs → Vulkan `VkPhysicalDevice` on Android |
+| toadStool | glowplug compute | VFIO/DRM → Vulkan compute shaders on Android/Windows |
+| toadStool | ember ResourceHandle | Linux fd → platform-specific GPU handle |
+| biomeOS | Neural API transport | tarpc unix → tarpc TCP (already done as fallback) |
+| bearDog | HSM provider | Linux HIDRAW → Android Keystore / Windows DPAPI |
+| squirrel | credential store | fs-based 0600 → Android Keystore / Windows DPAPI |
+
+The key insight: `#[cfg()]` gating treats non-Linux as second-class. Platform
+abstraction treats every target as a first-class evolution substrate. The
+platform-specific code is not technical debt — it is constrained evolution where
+the ecosystem adapts to hardware reality. But it should be **behind trait
+boundaries**, not behind `#[cfg()]` exclusion fences.
+
+---
+
+*Updated Wave 142a: petalTongue petal-tongue-platform establishes Phase 2 reference
+pattern (abstraction over gating). All 14 primals at genomeBin standard (Phase 1).
+Phase 2 evolution targets identified for toadStool glowplug, bearDog HSM, squirrel
+credentials.*
