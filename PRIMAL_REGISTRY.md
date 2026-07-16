@@ -127,7 +127,7 @@ These primals form the NUCLEUS deployment architecture. They are production-read
 
 **Domain**: Hardware discovery, capability probing, and compute orchestration  
 **Phase**: Foundation  
-**Status**: Production Ready (A++ GOLD STANDARD) — S330+ (Jul 15, 2026) — 23,000+ workspace tests (9,206+ lib-only), zero clippy warnings, 112 JSON-RPC methods (17 capability groups), ~85%+ line coverage (185K lines instrumented), cross-architecture (`cargo check --target x86_64-pc-windows-gnu` passes, S329), Linux hw crates `#[cfg(target_os = "linux")]`-gated, Unix IPC `#[cfg(unix)]`-gated, BearDog crypto delegation enforced (Node Atomic), capability-based discovery, zero production files >750L, zero production TODO/FIXME/HACK, 100% env centralized, zero `/tmp` hardcoding (3-tier: XDG > `/run/membrane` systemd > temp_dir), VFIO sovereign dispatch validated (Titan V), riboCipher CLEAR+MITO transport, Phase D live
+**Status**: Production Ready (A++ GOLD STANDARD) — S333+ (Jul 16, 2026) — 23,000+ workspace tests (9,232+ lib-only), zero clippy warnings, 112 JSON-RPC methods (17 capability groups), ~85%+ line coverage (185K lines instrumented), cross-architecture (`cargo check --target x86_64-pc-windows-gnu` passes, S329), Linux hw crates `#[cfg(target_os = "linux")]`-gated, Unix IPC `#[cfg(unix)]`-gated, BearDog crypto delegation enforced (Node Atomic), capability-based discovery, zero production files >750L, zero production TODO/FIXME/HACK, 100% env centralized, zero `/tmp` hardcoding (3-tier: XDG > `/run/membrane` systemd > temp_dir), VFIO sovereign dispatch validated (Titan V), riboCipher CLEAR+MITO transport, Phase D live. **S333 structural debt**: 7 large files refactored (test extraction, −2,188 production lines), hardcoded primal name cleanup
 
 **Role**: ToadStool is the hardware infrastructure primal. It discovers GPUs, NPUs, CPUs at runtime via sysfs/PCIe. It exposes compute substrates to the ecosystem via JSON-RPC 2.0 + tarpc IPC over Unix sockets. GPU job queue with cross-gate routing. Ollama model lifecycle management. Distributed workload dispatch across machines. Cloud cost estimation, compliance validation, and federation. Shader compilation proxy to coralReef with capability-based discovery and naga fallback. Cross-spring provenance tracking via `toadstool.provenance` method. BarraCuda (math dispatch) is a separate primal that consumes ToadStool's hardware capabilities via IPC.
 
@@ -436,7 +436,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S332+ (23,000+ workspace / 9,232+ lib, 112 methods, cross-arch adopted, Phase 2 GPU backends (`WgpuGpuDiscovery`, `PortableSwapExecutor`, `PortableResourceHandle`), zero clippy, PRIMAL_BIND_MODE adopted) |
+| ToadStool | S333+ (23,000+ workspace / 9,232+ lib, 112 methods, cross-arch adopted, Phase 2 GPU backends (`WgpuGpuDiscovery`, `PortableSwapExecutor`, `PortableResourceHandle`), S333 structural debt: 7 files refactored, hardcoded primal names → capability terms, zero clippy, PRIMAL_BIND_MODE adopted) |
 | hotSpring | v0.6.32 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch, guideStone L6 CERTIFIED) |
 | groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
