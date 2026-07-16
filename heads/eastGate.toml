@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-16T00:24:58Z
+# Gate: eastGate | Updated: 2026-07-16T11:21:41Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-16T00:24:58Z"
+updated = "2026-07-16T11:21:41Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
 airSpring = "6f0b98c8d6fab3deb44a26af1f95fcf9a85332f4"
 barraCuda = "52ccb926e8f98b8cc59f8d241767820b9333fde8"
-bearDog = "5d4258d9596f58afeac8833cbdc1b3e7e2581d00"
+bearDog = "20c18ee2b61efb6fcab6075ed29fac4ef54d5aff"
 benchScale = "ba5fa5426d6400d9bc3f642cd3a64e6244cabe22"
 bingoCube = "cf6b645e6531177eb5795d3e1da292f1ded2a243"
 biomeOS = "5677a3cec80a65811e0ffbba420440fb381f1708"
@@ -29,19 +29,19 @@ loamSpine = "f6a9b72a996e9f9f07ffe6c34f1e7a6f95d58340"
 ludoSpring = "f566b8265b7aa2a60d159a219306fce557dea1a0"
 nestGate = "bfe40eb907bb815ef56626ea347f5858c7bb41ff"
 neuralSpring = "33a19d16eaacfaf276d5db989083d803493be600"
-petalTongue = "42adc384dd1734620893e6df4404c7b3405d01de"
+petalTongue = "661da3475a0df36e6bda424803415f933f020089"
 plasmidBin = "e1cbd61b1347340d721b84eddf6236caedc4e7a0"
-primalSpring = "69a8df92d8df6577c06aa15ba5213bb3c096bdf7"
+primalSpring = "1fc91993fa9f7ff47b3ac8aba35b79aeacc42212"
 projectFOUNDATION = "4583164a5de4dbb1b426fc0afd427c44af7072e5"
 projectNUCLEUS = "e6605f940371da5326a88f3d09c6a03057b8c321"
 rhizoCrypt = "411f09bb7bcf624e1e1b8f0482b3b2a9fe951c28"
 rustChip = "7b23442b5ebe43be64054457806e890447d37747"
 skunkBat = "517d44bc79392078a98237f96b6b9580a847675c"
 songBird = "5a2ab4c64b44fcb7de1f932bddc3fb8179a80d1e"
-sourDough = "24ae12a27d288ffb788f2909daca1672441bf636"
+sourDough = "674d9d848eaf8a5d0873ecec4d5d76237c7ba894"
 sporePrint = "9335ac008f5b6803be03809ae1e325a1bb3933e3"
-squirrel = "f699942896da4fc632e0c9b9a2fe0134b2076219"
+squirrel = "1e470e7ea77ae9cf5dedf907f53ead8e27b4be56"
 sweetGrass = "c24ab07247aec9c667c42b46bb5f934b63e357f8"
-toadStool = "2ed821b021e96ef5f181d3e98b923e9b3dbdcb84"
+toadStool = "bf8b6ae9b0bdb8a547bee6118b41347103527f13"
 wetSpring = "a26e7dc162bbc5dd6c3512a8a66e075617acad54"
 whitePaper = "208f561fbd5a6bd2c48fc7fd787604fd6b1f353e"
