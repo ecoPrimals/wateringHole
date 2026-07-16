@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-15T18:35:00Z
+# Gate: flockGate | Updated: 2026-07-16T11:52:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-15T18:35:00Z"
-wave = "141a"
+updated = "2026-07-16T11:52:00Z"
+wave = "142b"
 
 [heads]
-primalSpring = "6a1d6c6"
-wateringHole = "e44adf9b"
+primalSpring = "8df6b3f"
+wateringHole = "36c0fa56"
 plasmidBin = "e0b20e0"
 skunkBat = "6b3e6eb"
 
@@ -31,7 +31,7 @@ wireguard_status = "UP"
 wireguard_addr = "10.13.37.6/24"
 federation_sporegate_7700 = "LIVE — mesh_registered=true, latency=69ms"
 federation_golgi_7700 = "LIVE — mesh_registered=true, latency=24ms"
-status = "MESH OPERATIONAL — depot refresh (Jul 15 stripped build)"
+status = "MESH OPERATIONAL — 2 peers, WAN covalent active"
 
 [dispatch_validation]
 status = "MESH ROUTING OPERATIONAL. capability.call routes 2 peers. DRAWBRIDGE-CAP pending songBird team."
@@ -56,11 +56,21 @@ status = "16 bonds declared (10 GIS + 6 science APIs)"
 schema_version = 2
 consumer_parity = "3-way match: registry ↔ composition ↔ Caddy (10/10)"
 
+[depot]
+status = "55/56 binaries — re-harvest pending"
+architectures = 4
+x86_64_musl = "14/14 ✓"
+aarch64_musl = "14/14 ✓"
+aarch64_android = "11/14 — petaltongue, toadstool, sourdough pending"
+x86_64_windows = "11/14 — beardog, petaltongue, squirrel pending"
+coverage_pct = 89
+
 [primalspring]
-version = "v0.9.33"
-head = "6a1d6c6"
-scenarios = 164
-tests = 1196
+version = "v0.9.39"
+head = "8df6b3f"
+scenarios = 169
+tests = 1202
 failures = 0
 suite_status = "GREEN"
-new_scenarios = ["drawbridge-consumer-parity", "protokarya-wan-deploy"]
+new_scenarios = ["depot-architecture-coverage", "full-cross-compile"]
+known_debt = ["graphenegate-readiness (14, no aarch64 local)", "full-cross-compile (3, pre-harvest gaps)"]
