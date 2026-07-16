@@ -18,12 +18,12 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "3.0.0"
-generated = "2026-07-15"
+version = "2.9.0"
+generated = "2026-07-11"
 # DEPRECATED: wave ID now lives in wave.toml (overwatch sole writer).
 # This field is retained at last-known value for backward compat with older binaries.
-wave = 141
-total_repos = 42
+wave = 136
+total_repos = 40
 
 # ═══════════════════════════════════════════════════════════════════
 # WaterFall Sync Configuration
@@ -99,7 +99,6 @@ notes = "f64 precision via SHADER_F64 feature on RTX 5070 Ti (ironGate). coralRe
 #   package      — Cargo package for `--package` flag (workspace primals)
 #   workspace    — Whether the primal uses a Cargo workspace
 #   cargo_config — Whether .cargo/config.toml has custom linker/target config
-#   gpu          — Whether this primal needs a glibc build for GPU/dlopen
 #   targets      — Supported build targets (x86_64-musl, aarch64-musl)
 #   notes        — CI quirks or build context
 #
@@ -221,7 +220,6 @@ category = "primal"
 description = "NestGate persistent storage + content-addressed crates"
 github_repo = "ecoPrimals/nestGate"
 forgejo_repo = "ecoPrimals/nestGate"
-# CI-DIV-03: RESOLVED Wave 133a — uses aarch64-linux-gnu-gcc, project .cargo/config.toml handles linker
 
 # ═══════════════════════════════════════════════════════════════════
 # Primals (ecoPrimals org)
@@ -266,7 +264,6 @@ category = "primal"
 description = "GPU compute dispatch"
 github_repo = "ecoPrimals/barraCuda"
 forgejo_repo = "ecoPrimals/barraCuda"
-gpu = true
 
 [repos.coralReef]
 org = "ecoPrimals"
@@ -277,7 +274,6 @@ category = "primal"
 description = "Sovereign WGSL/SPIR-V/GLSL shader compiler"
 github_repo = "ecoPrimals/coralReef"
 forgejo_repo = "ecoPrimals/coralReef"
-gpu = true
 
 [repos.rhizoCrypt]
 org = "ecoPrimals"
@@ -318,8 +314,6 @@ category = "primal"
 description = "Orchestration layer"
 github_repo = "ecoPrimals/biomeOS"
 forgejo_repo = "ecoPrimals/biomeOS"
-# CI-DIV-01: workspace binary crate differs from repo name
-package = "biomeos-unibin"
 
 [repos.squirrel]
 org = "ecoPrimals"
@@ -330,7 +324,6 @@ category = "primal"
 description = "AI/MCP orchestration"
 github_repo = "ecoPrimals/squirrel"
 forgejo_repo = "ecoPrimals/squirrel"
-package = "squirrel"
 
 [repos.petalTongue]
 org = "ecoPrimals"
@@ -351,8 +344,6 @@ category = "primal"
 description = "Defense/audit"
 github_repo = "ecoPrimals/skunkBat"
 forgejo_repo = "ecoPrimals/skunkBat"
-# CI-DIV-02: workspace binary crate differs from repo name
-package = "skunk-bat-server"
 
 [repos.sourDough]
 org = "ecoPrimals"
@@ -534,42 +525,6 @@ github_repo = "sporeGarden/initioChem"
 forgejo_repo = "sporeGarden/initioChem"
 
 # ═══════════════════════════════════════════════════════════════════
-# Protists (protoKarya org — composition targets, external-facing tools)
-# ═══════════════════════════════════════════════════════════════════
-# Protists are protoKarya projects that consume primals via NUCLEUS
-# composition. They are the external-facing "tangible" products
-# proven by spring mathematics (primalSpring scenarios validate
-# infrastructure; domain springs validate science).
-
-[repos.footPrint]
-org = "protoKarya"
-local_path = "protists/footPrint"
-membrane = "trailing-mirror"
-sync_priority = "standard"
-category = "protist"
-description = "GIS home-improvement planner — satellite map, CAD drawing, public data overlays"
-github_repo = "protoKarya/footPrint"
-evolution_target = "composition"
-gate_owner = "flockGate"
-composition_url = "primals.eco/footprint/"
-composition_status = "partial"
-notes = "Static SPA LIVE at primals.eco/footprint/. 10 GIS proxy routes via Caddy. Express backend not yet absorbed by primals (nestGate CAS + songBird drawbridge). RustScript experiment substrate."
-
-[repos.tideGlass]
-org = "protoKarya"
-local_path = "protists/tideGlass"
-membrane = "trailing-mirror"
-sync_priority = "low"
-category = "protist"
-description = "Sovereign GPS platform — Gene Perturbation Simulator rebuild in pure Rust"
-github_repo = "protoKarya/tideGlass"
-evolution_target = "composition"
-gate_owner = "flockGate"
-composition_url = "tideglass.primals.eco"
-composition_status = "planned"
-notes = "GitHub repo seeded. Not yet cloned into workspace. Phase 0: reproduce GPS paper figures vs Python baseline. First Gonzales NF deliverable."
-
-# ═══════════════════════════════════════════════════════════════════
 # Infrastructure (mixed orgs)
 # ═══════════════════════════════════════════════════════════════════
 
@@ -670,6 +625,78 @@ github_repo = "ecoPrimals/fossilRecord"
 forgejo_repo = "ecoPrimals/fossilRecord"
 
 # ═══════════════════════════════════════════════════════════════════
+# Protists — Proto-Projects Evolving Toward Primal Status
+# ═══════════════════════════════════════════════════════════════════
+#
+# protoKarya org repos. Proto-compositions — products that will be SERVED BY
+# primals, not become primals. Protists live in protists/ and are tracked
+# here for topology awareness.
+
+[repos.footPrint]
+org = "protoKarya"
+local_path = "protists/footPrint"
+membrane = "trailing-mirror"
+sync_source = "github"
+sync_priority = "standard"
+category = "protist"
+description = "GIS home improvement planner — primal composition target. Browser frontend (Leaflet/Turf.js) served by petalTongue, persistence by nestGate, proxy by songBird. RustScript validates pure Rust decision (gen3 §5.5)."
+github_repo = "protoKarya/footPrint"
+gate_owner = "flockGate"
+stack = "typescript"
+evolution_target = "composition"
+notes = "NOT a primal. Express server disappears — primals absorb backend. Browser frontend is the product. RustScript is evidence for pure Rust, not a bridge to it."
+
+# ═══════════════════════════════════════════════════════════════════
+# Composition Profiles — Fractal Deployment Patterns
+# ═══════════════════════════════════════════════════════════════════
+#
+# Each composition is a replicable deployment shape. The same manifest
+# drives any gate — the composition field selects which primals to run,
+# which services to start, and what role the gate plays in the mesh.
+#
+# Fractal principle: the pattern is the same shape at every scale.
+# A full NUCLEUS gate, a thin relay VPS, an HPC compute node, and a
+# mobile Tower all read from this manifest and deploy accordingly.
+
+[compositions.full]
+description = "Complete sovereign NUCLEUS — all 13+ primals, full mesh, build-capable"
+primals = ["bearDog", "songBird", "nestGate", "biomeOS", "toadStool", "squirrel", "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass", "petalTongue", "skunkBat"]
+services = ["ipc", "mesh", "drawbridge", "gateway", "depot", "cascade"]
+requires = ["rust", "musl-tools"]
+examples = ["eastGate", "ironGate", "southGate"]
+
+[compositions.thin-relay]
+description = "Sovereign relay — depot + sporePrint + mesh relay. No source repos. Receives ecobins from builders, serves via TLS. Deployable on any VPS or edge node."
+primals = ["songBird", "nestGate", "cellMembrane"]
+services = ["relay", "depot", "sporeprint", "cascade"]
+requires = []
+repos = ["wateringHole"]
+notes = "Fractal: deploy anywhere a sovereign presence is needed. HPC sites, edge locations, partner infrastructure. Receives pre-built ecobins via mesh.subscribe → plasmid.auto_fetch. No Rust toolchain required — runs pre-built binaries from depot."
+examples = ["golgiBody"]
+
+[compositions.tower]
+description = "Minimal secure mesh entry — bearDog TLS + songBird federation + skunkBat storage"
+primals = ["bearDog", "songBird", "skunkBat"]
+services = ["ipc", "mesh", "drawbridge", "gateway"]
+requires = []
+examples = ["grapheneGate"]
+
+[compositions.compute]
+description = "GPU/HPC compute dispatch — specialized ecobins for scientific workloads"
+primals = ["toadStool", "barraCuda", "coralReef", "biomeOS"]
+services = ["ipc", "mesh", "compute"]
+requires = ["gpu"]
+notes = "Specialized ecobins for HPC. A thin-relay at the HPC site provides depot access; compute nodes pull only the ecobins they need. coralReef handles shaders, barraCuda dispatches compute, toadStool orchestrates."
+examples = ["strandGate"]
+
+[compositions.nest]
+description = "Cold storage — archival, CAS, and full provenance trio"
+primals = ["nestGate", "rhizoCrypt", "loamSpine", "sweetGrass"]
+services = ["ipc", "storage"]
+requires = ["zfs"]
+examples = ["westGate"]
+
+# ═══════════════════════════════════════════════════════════════════
 # Gate Profiles
 # ═══════════════════════════════════════════════════════════════════
 # Which repos each gate cares about. cascade-pull uses these to
@@ -724,7 +751,6 @@ repos = [
     "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint",
     "wetSpring", "neuralSpring", "hotSpring",
     "airSpring", "groundSpring", "healthSpring", "ludoSpring",
-    "footPrint",
 ]
 
 [gates.ironGate]
@@ -812,6 +838,7 @@ repos = [
     "whitePaper", "benchScale", "agentReagents", "rustChip", "sporePrint",
     "wetSpring", "neuralSpring", "hotSpring",
     "airSpring", "groundSpring", "healthSpring", "ludoSpring",
+    "footPrint",
 ]
 
 # strandGate — ABG science, compChem, genomics, lithoSpore
@@ -859,7 +886,7 @@ notes = "i7-4771 + RTX 2070 Super + 76TB ZFS. Nest Atomic 7/7. Cold storage spec
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "biomeOS", "squirrel",
-    "sweetGrass", "loamSpine",
+    "rhizoCrypt", "loamSpine", "sweetGrass",
     "cellMembrane",
 ]
 
@@ -867,7 +894,7 @@ repos = [
 [gates.northGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
-bind_mode = "tcp_only"
+bind_mode = "tcp"
 composition = "full"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
@@ -888,7 +915,7 @@ repos = [
 [gates.blueGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
-bind_mode = "tcp_only"
+bind_mode = "tcp"
 composition = "subset"
 transport = "lan"
 notes = "Windows machine. Cross-platform ecoBin validation (WSL2 or native)."
@@ -902,8 +929,8 @@ repos = [
 # swiftGate — portable Windows/cross-platform target
 [gates.swiftGate]
 target = "x86_64-unknown-linux-musl"
-mobility = "mobile"
-bind_mode = "tcp_only"
+mobility = "portable"
+bind_mode = "tcp"
 composition = "subset"
 transport = "lan"
 notes = "Portable Windows target. Cross-platform testing. WiFi (LAN transport)."
@@ -922,18 +949,14 @@ host = "157.230.3.183"
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
 bind_mode = "uds"
-composition = "full"
+composition = "thin-relay"
 transport = "local"
 wg_ip = "10.13.37.1"
-roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "caddy_tls", "remote_access"]
+roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "caddy_tls", "remote_access", "sporeprint"]
 mesh_peer = "127.0.0.1:7700"
-notes = "VPS inner membrane — 13/13 NUCLEUS, Forgejo, Caddy"
+notes = "VPS-thin: relay + depot + sporePrint. Tracks wateringHole only. No primal source repos. Forgejo shallow relay (depth=1). Receives ecobins from builder gates, serves via Caddy TLS. Fractal pattern: deploy anywhere a sovereign relay is needed."
 repos = [
-    "nestGate", "wateringHole", "plasmidBin",
-    "cellMembrane", "projectNUCLEUS",
-    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
-    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
-    "petalTongue", "skunkBat",
+    "wateringHole",
 ]
 
 # golgiBody-ext (VPS, outer membrane) — public-facing, sporePrint, TURN relay
