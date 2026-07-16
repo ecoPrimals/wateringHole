@@ -5,19 +5,19 @@
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-16T11:52:00Z"
+updated = "2026-07-16T12:10:00Z"
 wave = "142b"
 
 [heads]
 primalSpring = "8df6b3f"
 wateringHole = "36c0fa56"
 plasmidBin = "e0b20e0"
-skunkBat = "6b3e6eb"
+skunkBat = "ca51077"
 
 [skunkbat]
-head = "6b3e6eb"
+head = "ca51077"
 tests = 567
-delivery_141a = "Cross-arch adoption (Windows): #[cfg] guards on UDS transport + Unix signals + deep debt (4 env-configurable timeouts, toadstool platform warnings, caddy latency wiring, session metrics)"
+delivery_142b = "Phase 2 TransportEndpoint abstraction: all IPC dispatch evolved from #[cfg]-gated raw UDS to TransportEndpoint trait dispatch. Eliminated legacy rpc::call(), ResolvedTarget, ContentProtector raw fields. 14 files, -48 net lines."
 windows_target = "x86_64-pc-windows-gnu — cargo check PASS, 0 warnings"
 clippy = "CLEAN (-D warnings)"
 
