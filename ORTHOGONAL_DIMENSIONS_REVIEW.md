@@ -103,7 +103,7 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 - [x] Git repos: tree hashes in freshness.toml (Wave 138c)
 - [x] Depot binaries: BLAKE3 diff in depot_sync --push (Wave 139e)
 - [ ] Heads metadata: TreeParity for auto-publish conflicts (FRAGO issued 140a)
-- [ ] Impulses: content-hash deduplication (FRAGO issued 140a)
+- [x] Impulses: content-hash deduplication (cellMembrane f4da0ae, Wave 141b)
 - [ ] rhizoCrypt: SessionTreeHash primitive (FRAGO issued 140a)
 - [ ] Cascade divergence: tree-parity before agentic policy dispatch (FRAGO issued 140a)
 - [ ] primalSpring: content-addressed-convergence scenario (FRAGO issued 140a)

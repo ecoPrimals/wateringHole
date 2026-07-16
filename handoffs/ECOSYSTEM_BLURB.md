@@ -3,9 +3,11 @@
 **Date**: Jul 15, 2026 16:50 EDT | **Wave**: 141b | **From**: eastGate overwatch
 **Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM CONVERGENCE ACCELERATING.**
 
-**This cascade**: nestGate cross-arch confirmed (Session 109, `839122d2`).
-**ALL 14 PRIMALS CROSS-ARCHITECTURE COMPLETE.** 39/39 repos synced.
-sporeGate full Windows harvest ready — handoff issued.
+**This cascade**: sporeGate executed Windows + Android re-harvest.
+**55 depot binaries** across 4 architectures (up from 45). Windows: 11/14.
+Android: 11/14. cellMembrane delivered CAC impulse dedup + portable-atomic
++ sporePrint health check (P0 detection). footPrint `@protokarya/rustscript`
+npm package finalized. 39/39 repos synced.
 
 ---
 
@@ -25,28 +27,31 @@ sporePrint root site returning 404 on `primals.eco`. `footprint/` and
 
 ### Goal 1: Silicon Atheism Convergence (P1 — PARALLEL SUBTASK, ACCELERATING)
 
-**Score: 14/14 primals cross-architecture adopted. COMPLETE.**
+**Adoption: 14/14 COMPLETE. Harvest: 55 binaries (11 Windows, 11 Android).**
 
 | Work | Owner | Priority | Status |
 |------|-------|----------|--------|
-| Full 14-primal Windows harvest | sporeGate | **P0** | **READY — handoff issued** |
-| Multi-arch harvest (Android, exotic) | sporeGate | P1 | ready |
-| `portable-atomic` feature on tokio (PPC32 + consoles) | cellMembrane | P1 | FRAGO issued |
+| Windows harvest | sporeGate | P0 | **11/14 DONE** — bearDog, squirrel, petalTongue pending |
+| Android harvest | sporeGate | P1 | **11/14 DONE** — petalTongue, toadStool, sourDough pending |
+| `portable-atomic` (PPC32 + consoles) | cellMembrane | P1 | **SHIPPED** (`f4da0ae`) |
+| CAC impulse dedup | cellMembrane | P1 | **SHIPPED** (`f4da0ae`) — Layer 4 solved |
+| sporePrint health check (P0 detection) | cellMembrane | P1 | **SHIPPED** (`f4da0ae`) |
+| Remaining 3 Windows primals (UDS abstraction) | bearDog, squirrel, petalTongue | P1 | TODO |
 | `full-cross-compile` primalSpring scenario | primalSpring | P1 | FRAGO issued |
-| Cross-platform E2E test (UDS on Linux, NamedPipe on Windows, fs on Pixel) | primalSpring | P2 | NEW |
+| Cross-platform E2E test | primalSpring | P2 | NEW |
 
 **Per-primal handoff**: `CROSS_ARCH_PER_PRIMAL_HANDOFFS.md`
 
 ### Goal 2: Content-Addressed Convergence (P1–P2)
 
-**Score: 2/6 layers solved.**
+**Score: 3/6 layers solved.**
 
 | Layer | Fix | Priority | Status |
 |-------|-----|----------|--------|
 | Git repos (tree hashes) | freshness.toml `HEAD^{tree}` | — | **SOLVED** |
 | Depot binaries (BLAKE3) | depot_sync checksums | — | **SOLVED** |
+| Impulse dedup | Content-hash before creation | — | **SOLVED** (`f4da0ae`) |
 | Heads auto-publish | TreeParity before agentic dispatch | P1 | FRAGO issued |
-| Impulse dedup | Content-hash before creation | P2 | FRAGO issued |
 | rhizoCrypt DAG | SessionTreeHash primitive | P2 | FRAGO issued |
 | Cascade divergence | Tree-parity before policy | P1 | FRAGO issued |
 
@@ -82,11 +87,12 @@ sporePrint root site returning 404 on `primals.eco`. `footprint/` and
 ### Depot (45 binaries + 8 exotic validated)
 
 ```
-Depot (4 arch, 45 bins — FULL HARVEST READY):
+Depot (4 arch, 55 bins — Wave 141b harvest):
   x86_64-linux-musl     16   FRESH
   aarch64-linux-musl    16   FRESH
-  aarch64-android       12   FRESH (2 expected-fail: petalTongue, toadStool)
-  x86_64-windows-gnu     1   songbird.exe — ALL 14 now adoption-ready for harvest
+  aarch64-android       11   FRESH (3 pending: petalTongue, toadStool, sourDough)
+  x86_64-windows-gnu    11   FRESH (3 pending: bearDog, squirrel, petalTongue — UDS abstraction)
+  BLAKE3 + Ed25519 signed. VPS depot serving.
 
 Exotic validated (songBird, not yet in depot):
   riscv64gc  powerpc64le  powerpc64  s390x  sparc64  arm32  armv7  i686
@@ -169,7 +175,7 @@ GOAL    Universal depot — same system for every gate and architecture.
 DONE    footPrint client LIVE + deep debt cleaned (98 tests)
 DONE    Gonzales chart scenes (4) + petalTongue clippy clean (366 tests)
 NOW     footPrint server composition on sporeGate
-NOW     RustScript extraction to @protoKarya/rustscript
+DONE    RustScript → @protokarya/rustscript npm package (47 files, 23.8 KB)
 NOW     Live drawbridge E2E (USGS/FEMA → songBird → NestGate CAS)
 NEXT    tideGlass Phase 0 (GPS paper reproduction)
 NEXT    helixVision Phase C (GEMM → Evoformer)
@@ -178,7 +184,7 @@ GOAL    Pure Rust backend + sovereign compositions + external science.
 
 ---
 
-*Wave 141b: 14/14 CROSS-ARCH COMPLETE. All primals adopted. sporeGate full Windows
-harvest ready — handoff issued. Next: multi-arch harvest (Android, RISC-V, ARMv7),
-portable-atomic for PPC32, cross-platform E2E testing (UDS vs NamedPipe vs Pixel FS).
-P0: primals.eco still 404. 39/39 synced. 2 active FRAGOs.*
+*Wave 141b: 55 depot binaries (11 Windows, 11 Android — up from 45). 14/14 cross-arch
+adopted. cellMembrane: CAC impulse dedup SHIPPED (3/6 layers solved), portable-atomic
+SHIPPED, sporePrint health check SHIPPED. RustScript npm package finalized. 3 Windows
++ 3 Android primals pending UDS/platform fixes. 39/39 synced. 2 active FRAGOs.*
