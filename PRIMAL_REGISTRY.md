@@ -436,7 +436,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Spring | Version |
 |--------|---------|
-| ToadStool | S330+ (23,000+ workspace / 9,206+ lib, 112 methods, cross-arch adopted, zero clippy, hw-learn/nvpmu/cylinder/display `cfg`-gated, PRIMAL_BIND_MODE adopted) |
+| ToadStool | S331+ (23,000+ workspace / 9,206+ lib, 112 methods, cross-arch adopted, zero clippy, borrowed-deser sweep, hw-learn/nvpmu/cylinder/display `cfg`-gated, PRIMAL_BIND_MODE adopted) |
 | hotSpring | v0.6.32 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch, guideStone L6 CERTIFIED) |
 | groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
