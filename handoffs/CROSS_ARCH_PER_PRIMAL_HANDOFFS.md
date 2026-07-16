@@ -227,6 +227,7 @@ many — not the only path.
 **Status**: DONE
 - `592248618` (S329): Windows cargo check passes
 - S330 + S331: Deep debt (clone elimination, borrowed deserialization, +31 tests, clippy zero)
+- S333: Structural debt — 7 large files refactored (test extraction, −2,188 production lines); hardcoded primal name cleanup in BTSP relay (capability terms)
 - hw-safe: All modules gated behind `#[cfg(target_os = "linux")]` — excludes BOTH Windows and Android
 - cylinder: VFIO gated behind `#[cfg(all(target_os = "linux", feature = "vfio"))]`
 - ember: vfio_anchor/vfio_handle/warm_keepalive all `#[cfg(target_os = "linux")]`
