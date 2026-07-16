@@ -1,79 +1,68 @@
-# ecoPrimals Ecosystem Blurb — Wave 144a
+# ecoPrimals Ecosystem Blurb — Wave 144b
 
-**Date**: Jul 16, 2026 13:00 EDT | **Wave**: 144a | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. CAC 6/6 SOLVED. PHASE 2 TRANSPORT SURGE.**
+**Date**: Jul 16, 2026 16:30 EDT | **Wave**: 144b | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. CAC 6/6 COMPLETE. PHASE 2: 12/14 SHIPPED.**
 
-**This cascade**: **CAC COMPLETE — all 6 layers solved.** cellMembrane delivered
-L3 (tree-parity heads) + L6 (cascade policy) + `getrandom` CSPRNG. rhizoCrypt
-shipped L5 (SessionTreeHash full RPC wire, 1,905 tests). Transport Phase 2 surge:
-coralReef (client+server de-cfg-gated, 3,647 tests), loamSpine (endpoint dispatch
-wired, 1,704 tests), sweetGrass (SHIPPED — was incorrectly TODO), barraCuda
-(TransportListener unified accept, 5,153 tests). petalTongue: 163 bare unwrap
-eliminated. squirrel transport IN PROGRESS. toadStool S336: security_impl migration, −3,164L extracted, 32GB cache freed.
-nestGate debris cleanup (6 dead files, 7 stubs, 44.9GB cache freed).
+**This cascade**: biomeOS v4.35 shipped full Phase 2 transport (TransportStream,
+TransportListener, trait dispatch — 42 files, 1,028 insertions). squirrel shipped
+Phase 2 transport + SecretStore trait + production mock evolution (7,171 tests).
+nestGate Session 115: ErrorContextExt trait (152 `map_err` sites evolved).
+toadStool S335-S336: security migration + structural debt + 32GB cache freed.
+cellMembrane round 2: ProbeResult + Priority::Urgent + dead code. bearDog: deep
+evolution (mock elimination + libc removal + handoff fossilization). footPrint:
+server validation + constants + dead code. songBird: IpcStream migration batch 2.
+
+**12/14 primals shipped Phase 2 transport.** Only bearDog and nestGate remain.
 
 ---
 
 ## P0: sporePrint Root 404
 
-`primals.eco` root returns 404. sporePrint shipped sidebar slim (37KB→4KB per
-page). `content.rebuild` needed on golgi to pick up the fix.
+`primals.eco` root returns 404. sporePrint sidebar slim (37KB→4KB) shipped.
+`content.rebuild` needed on golgi to deploy the fix.
 
 **Owner**: golgi operator | **Action**: `membrane content.rebuild`
 
 ---
 
-## CAC — Newton-Leibniz Pattern: 6/6 COMPLETE
+## Phase 2 Transport Status: 12/14 SHIPPED
 
-| Layer | What | Status |
-|-------|------|--------|
-| L1 | Git repos: tree hashes | **SOLVED** (Wave 138c) |
-| L2 | Depot: BLAKE3 diff | **SOLVED** (Wave 139e) |
-| L3 | Heads: TreeParity auto-publish | **SOLVED** (cellMembrane Wave 143b) |
-| L4 | Impulses: content-hash dedup | **SOLVED** (cellMembrane Wave 141b) |
-| L5 | rhizoCrypt: SessionTreeHash | **SOLVED** (rhizoCrypt Wave 143b — `ce3d534`) |
-| L6 | Cascade: tree-parity policy | **SOLVED** (cellMembrane Wave 143b) |
-
-**The Newton-Leibniz pattern is fully implemented.** Content identity supersedes
-temporal identity at every layer of the ecosystem.
-
----
-
-## Phase 2 Transport Adoption (Abstraction Over Gating)
-
-| Primal | Status | Detail |
-|--------|--------|--------|
-| songBird | **SHIPPED** | `IpcStream` platform abstraction |
-| skunkBat | **SHIPPED** | `TransportEndpoint` adoption |
-| petalTongue | **SHIPPED** | `PlatformLifecycle` + metrics + WS bridge |
-| sweetGrass | **SHIPPED** | `NestGateClient` + `transport_connect` (1,608 tests) |
-| rhizoCrypt | **SHIPPED** | `TransportHint` deleted, all on `TransportEndpoint` (1,905 tests) |
-| coralReef | **SHIPPED** | Client+server de-cfg-gated, `BoundAddr::Local` (3,647 tests) |
-| loamSpine | **SHIPPED** | Outbound dispatch wired, framing tests (1,704 tests) |
-| barraCuda | **SHIPPED** | `TransportListener` enum, unified accept (5,153 tests) |
-| toadStool | **SHIPPED** | glowplug Vulkan + security migration + structural debt (S332-S336) |
-| cellMembrane | **SHIPPED** | `getrandom` CSPRNG, registry filter (1,073 tests) |
-| squirrel | IN PROGRESS | 16 files modified, `endpoint.rs` added (uncommitted) |
-| biomeOS | Partial | TCP fallback exists, needs trait dispatch |
-| bearDog | P2 | Test extraction wave 4 done, HSM abstraction pending |
-| nestGate | Clean | Session 114 PROJECTS_PATH CAS wiring |
-
-**10/14 primals SHIPPED Phase 2 transport.** 1 in progress (squirrel), 3 remaining.
+| Primal | Status | Tests |
+|--------|--------|-------|
+| songBird | **SHIPPED** — IpcStream + batch 2 (9 crates) | — |
+| skunkBat | **SHIPPED** — TransportEndpoint | — |
+| petalTongue | **SHIPPED** — PlatformLifecycle + metrics + WS | — |
+| sweetGrass | **SHIPPED** — NestGateClient + transport_connect | 1,608 |
+| rhizoCrypt | **SHIPPED** — TransportHint deleted | 1,905 |
+| coralReef | **SHIPPED** — client+server de-cfg-gate | 3,647 |
+| loamSpine | **SHIPPED** — endpoint dispatch + framing | 1,704 |
+| barraCuda | **SHIPPED** — TransportListener unified | 5,153 |
+| toadStool | **SHIPPED** — glowplug Vulkan + S334-336 | 9,232 |
+| cellMembrane | **SHIPPED** — getrandom CSPRNG + registry | 1,073 |
+| squirrel | **SHIPPED** — TransportEndpoint + SecretStore | 7,171 |
+| biomeOS | **SHIPPED** — TransportStream + TransportListener | 1,001 |
+| bearDog | P2 — HSM abstraction pending | — |
+| nestGate | P2 — ErrorContextExt done, transport pending | 3,790 |
 
 ---
 
 ## Remaining Work
 
-### Platform-Specific Abstraction Targets
+### Phase 2 — Last 2 Primals
+
+| Primal | Work | Priority |
+|--------|------|----------|
+| bearDog | HSM provider → Android Keystore backend | P2 |
+| bearDog | HSM provider → Windows DPAPI backend | P2 |
+| bearDog | Transport: raw UDS → TransportEndpoint | P2 |
+| nestGate | Transport abstraction | P2 |
+
+### Platform-Specific Backends
 
 | Primal | Abstraction | Priority |
 |--------|-------------|----------|
-| bearDog | HSM provider → Android Keystore backend | P2 |
-| bearDog | HSM provider → Windows DPAPI backend | P2 |
-| squirrel | Credential store → Android Keystore | P2 |
-| squirrel | Credential store → Windows Credential Manager | P2 |
-| squirrel | Transport: `TransportEndpoint` (in progress) | P1 |
-| biomeOS | Neural API transport → trait dispatch | P2 |
+| squirrel | SecretStore → Android Keystore backend | P2 |
+| squirrel | SecretStore → Windows Credential Manager | P2 |
 
 ### Composition Wiring
 
@@ -81,19 +70,18 @@ temporal identity at every layer of the ecosystem.
 |------|-------|----------|
 | footPrint: `WS_PATH` → agent bridge | petalTongue | P2 |
 | footPrint: drawbridge wiring (`PROXY_PATH`) | songBird | P2 |
-| footPrint: CAS wiring (`PROJECTS_PATH`) | nestGate | P2 |
 | footPrint: server composition deploy | sporeGate ops | P2 |
-| tideGlass: drawbridge bonds (LINCS, GEO, ChEMBL, NF) | songBird | P2 |
+| tideGlass: drawbridge bonds | songBird | P2 |
 
 ### Infrastructure / Ops
 
-| Item | Owner | Priority |
-|------|-------|----------|
-| sporePrint rebuild on golgi (P0 — 404) | golgi operator | **P0** |
-| northGate mesh enrollment (songbird.exe) | sporeGate ops | P1 |
-| DNSSEC on primals.eco | operator | P2 |
-| primal.eco inner membrane separation | operator | P2 |
-| RustDesk transient to ironGate + flockGate | investigate | P2 |
+| Item | Priority |
+|------|----------|
+| sporePrint rebuild on golgi (P0 — 404) | **P0** |
+| northGate mesh enrollment | P1 |
+| DNSSEC on primals.eco | P2 |
+| primal.eco inner membrane separation | P2 |
+| RustDesk transient to ironGate + flockGate | P2 |
 
 ---
 
@@ -108,22 +96,9 @@ x86_64-windows-gnu    14   FRESH
 BLAKE3 + Ed25519 signed. VPS depot serving.
 ```
 
-## Gate Status
-
-```
-eastGate     — PRIMARY. Cascade authority.
-sporeGate    — NUCLEUS. 13-target builder. 59 depot bins.
-golgiBody    — Outer membrane. footprint/ + live. ROOT 404 (P0).
-ironGate     — ABG/NF compute. JupyterHub. RustDesk transient.
-flockGate    — WAN covalent. 16 bonds. RustDesk transient.
-northGate    — Windows mesh target. Enrollment pending.
-grapheneGate — StrongBox target. 14/14 Android ecobins.
-westGate     — OFFLINE. ZFS cold storage.
-```
-
 ---
 
-*Wave 144a: CAC 6/6 COMPLETE — Newton-Leibniz fully implemented. Phase 2 transport
-surge: 10/14 primals shipped. squirrel in progress. cellMembrane `getrandom` + L3/L6.
-rhizoCrypt SessionTreeHash L5 wired. coralReef full de-cfg-gate. barraCuda TransportListener.
-P0: sporePrint root 404 (sidebar slim shipped, rebuild needed).*
+*Wave 144b: Phase 2 transport 12/14 SHIPPED (biomeOS + squirrel this cascade).
+CAC 6/6 COMPLETE. bearDog and nestGate are the last 2 primals for transport.
+squirrel SecretStore trait lays credential store foundation. Active handoffs: 4.
+Active impulses: 1. P0: sporePrint root 404.*
