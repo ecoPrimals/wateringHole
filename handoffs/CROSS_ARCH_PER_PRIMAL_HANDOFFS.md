@@ -254,7 +254,7 @@ fallback mode. Needs sporeGate harvest for Windows + Android binaries to verify.
 | toadStool | 4 | Small | **DONE** | `592248618`→`782a207` S329-S331 full cfg + deep debt |
 | petalTongue | 1,5 | Medium | **DONE** | `7abeb16` full workspace Windows cross-compile |
 | sourDough | 3 | Small | **DONE** | `6115e4a` Android platform parity (all 3 green) |
-| rhizoCrypt | 1 | Small | **DONE** | `feff297` cross-arch + deep debt |
+| rhizoCrypt | 1 | Small | **DONE** | `614ef3e` cross-arch + Phase 2 transport + SessionTreeHash |
 | sweetGrass | 1 | Small-Med | **DONE** | `d4f7da9` platform gates |
 | loamSpine | 1,2 | Small | **DONE** | `850252c` cfg-gate Unix IPC |
 | nestGate | 3 | Small | **DONE** | `839122d2` cross-arch adoption (Session 109) |
@@ -263,7 +263,7 @@ fallback mode. Needs sporeGate harvest for Windows + Android binaries to verify.
 
 Deep debt delivered alongside cross-arch (Waves 141a-142a):
 - loamSpine: refactor, deprecation, clone reduction, test fix
-- rhizoCrypt: method_gate split, magic numbers, branch/vertex coverage
+- rhizoCrypt: method_gate split, magic numbers, branch/vertex coverage, Phase 2 transport, SessionTreeHash
 - sweetGrass: postgres store purged (pure Rust dogma), cross-platform warnings suppressed
 - nestGate: Category 3 (rustix::fs::statvfs gated) + Category 1 (UDS transport gated across 9 files)
 - toadStool: S329-S331 deep debt (clone elimination, borrowed deserialization, +31 tests, clippy zero)
@@ -291,7 +291,7 @@ All 14 primals now compile for all 4 depot architectures:
 | toadStool | ✅ | ✅ | ✅ | ✅ | Phase 1 (gating). Phase 2: abstract glowplug for Android GPU |
 | petalTongue | ✅ | ✅ | ✅ | ✅ | **Reference pattern**: petal-tongue-platform (cdylib + C-FFI + lifecycle) |
 | sourDough | ✅ | ✅ | ✅ | ✅ | 490 tests, all 3 green |
-| rhizoCrypt | ✅ | ✅ | ✅ | ✅ | |
+| rhizoCrypt | ✅ | ✅ | ✅ | ✅ | Phase 2: `from_transport` shipped, `TransportHint` convergence TODO |
 | sweetGrass | ✅ | ✅ | ✅ | ✅ | |
 | loamSpine | ✅ | ✅ | ✅ | ✅ | |
 | nestGate | ✅ | ✅ | ✅ | ✅ | |
