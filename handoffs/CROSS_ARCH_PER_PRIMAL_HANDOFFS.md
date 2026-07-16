@@ -10,18 +10,12 @@ Report completion via commit message or handoff to overwatch.
 
 ---
 
-## bearDog
+## bearDog — COMPLETE
 
-**Blocked by**: UDS transport (Category 1)
-**Files to modify**:
+**Status**: DONE (`1c3dc9d`, `5d4258d`)
+**Fix applied**: `IpcStream` enum dispatching to `UnixStream` on Unix and `TcpStream` on Windows. UDS code gated behind `#[cfg(unix)]`. `connect_tcp()` added for Windows path. `cargo check --target x86_64-pc-windows-gnu` passes.
 
-| Crate | File | Line(s) | Issue |
-|-------|------|---------|-------|
-| `beardog-tower-atomic` | `src/lib.rs` | L61, L132-250 | `tokio::net::UnixStream` |
-
-**Fix**: Replace `UnixStream` with `TransportEndpoint` dispatch or `#[cfg(unix)]`/`#[cfg(windows)]` guards. tower-atomic service layer needs platform-agnostic stream type.
-
-**Estimated effort**: Small (1 file)
+**Windows harvest**: Ready for sporeGate. No UDS abstraction gaps remain.
 
 ---
 
