@@ -25,11 +25,12 @@ Abstraction, not gating — every platform is first-class. FRAGO issued.
 
 | Work | Priority | Status |
 |------|----------|--------|
-| Phase 1 gating (`target_os = "linux"`) | — | **DONE** (S329-S331) |
-| glowplug `DeviceDiscovery` Vulkan backend (Android GPU) | P1 | NEW — traits ready |
-| glowplug `SwapExecutor` Vulkan compute backend | P1 | NEW — traits ready |
-| ember `ResourceHandle` → platform GPU handle abstraction | P2 | NEW |
-| Deep debt: S329-S331 (clone elim, borrowed deser, +31 tests) | — | **DONE** |
+| Phase 1 gating (`target_os = "linux"`) | — | **DONE** (S329) |
+| glowplug `WgpuGpuDiscovery` Vulkan backend | P1 | **DONE** (S332) |
+| glowplug `PortableSwapExecutor` compute backend | P1 | **DONE** (S332) |
+| ember `PortableResourceHandle` GPU handle abstraction | P2 | **DONE** (S332) |
+| Structural debt: 7 files refactored, primal name cleanup | — | **DONE** (S333) |
+| Deep debt: S329-S333 (clone elim, borrowed deser, test extraction, +57 tests) | — | **DONE** |
 
 ### bearDog
 
