@@ -1,7 +1,7 @@
 # cellMembrane Wave 143b Deep Debt
 
 **Date**: Jul 16, 2026 | **Wave**: 143b | **From**: eastGate cellMembrane team
-**Commit**: `e1b056e` | **Tests**: 1,073 | **Clippy**: 0 warnings
+**Commits**: `e1b056e`, `592685e` | **Tests**: 1,073 | **Clippy**: 0 warnings
 
 ---
 
@@ -47,11 +47,54 @@ Blurb CAC table should update L3 and L6 to SOLVED.
 
 ---
 
+## Round 2 (`592685e`) — Typed Probes + Dead Code Cleanup
+
+### `ProbeResult` Type (Structural)
+
+Replaced 9 functions returning `(bool, String)` tuples with a typed
+`ProbeResult { ok, detail }` struct providing `pass()` / `fail()`
+constructors. Affects `gate/health.rs`, `gate/verify.rs`, `gate/nucleus.rs`,
+`gate/mesh.rs`, and `gate/bootstrap.rs` consumption sites.
+
+### `Priority::Priority` → `Priority::Urgent`
+
+Eliminated `#[allow(clippy::enum_variant_names)]` by renaming the
+self-referential variant. Wire compatibility preserved via
+`#[serde(alias = "priority")]` and `FromStr` accepting both strings.
+
+### `format_bytes` Integer Math
+
+Removed `#[allow(clippy::cast_precision_loss)]` by replacing `as f64` casts
+with integer-only arithmetic using half-up rounding. Output unchanged.
+
+### `build_err` Consolidation
+
+Eliminated 3 identical `const fn build_err(msg: String)` helpers across
+`sandbox.rs`, `canary.rs`, `toolchain.rs` — now direct `ShadowError::Build(...)`.
+
+### Dead Code + `#[allow]` Cleanup
+
+- `DepotUpdatedNotification`: `pub`→`pub(crate)`, `from_json` returns `Self`
+  (removed `#[allow(dead_code)]` x2 + `#[allow(clippy::unnecessary_wraps)]`)
+- Webhook serde fields: `#[allow(dead_code)]` replaced with per-field
+  `reason` attributes documenting future consumption
+- Manifest API methods: `#[allow(dead_code)]` annotated with `reason`
+
+### Production Audit (No Action Needed)
+
+- Only 3 production `.expect()` calls — all in `ribocipher.rs` for infallible
+  HMAC-SHA256 construction. Justified.
+- `#![forbid(unsafe_code)]` on both crates — zero unsafe.
+- All external dependencies are pure Rust. No evolution needed.
+- All files <800L (largest: 762).
+
+---
+
 ## Remaining cellMembrane Deep Debt (P3)
 
 | Item | Priority | Notes |
 |------|----------|-------|
-| `build_err` → `impl Into<String>` | P3 | 4 call sites with `ShadowError::Build(format!(...))` |
 | Cytoplasm static IP table → manifest-only | P3 | Requires topology migration |
 | Named Pipe transport implementation | P3 | Windows parity — stub exists |
 | ribocipher nuclear tier | P3 | Deferred until per-peer lineage keys |
+| `(bool, String)` remaining in provision/ | P3 | Non-gate modules still use tuple pattern |
