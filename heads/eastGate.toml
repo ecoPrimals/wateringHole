@@ -1,10 +1,10 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: eastGate | Updated: 2026-07-16T11:21:41Z
+# Gate: eastGate | Updated: 2026-07-16T11:34:16Z
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-16T11:21:41Z"
+updated = "2026-07-16T11:34:16Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
@@ -29,7 +29,7 @@ loamSpine = "f6a9b72a996e9f9f07ffe6c34f1e7a6f95d58340"
 ludoSpring = "f566b8265b7aa2a60d159a219306fce557dea1a0"
 nestGate = "bfe40eb907bb815ef56626ea347f5858c7bb41ff"
 neuralSpring = "33a19d16eaacfaf276d5db989083d803493be600"
-petalTongue = "661da3475a0df36e6bda424803415f933f020089"
+petalTongue = "253663853940c596f118a68d74a1b7222cdf8a2a"
 plasmidBin = "e1cbd61b1347340d721b84eddf6236caedc4e7a0"
 primalSpring = "1fc91993fa9f7ff47b3ac8aba35b79aeacc42212"
 projectFOUNDATION = "4583164a5de4dbb1b426fc0afd427c44af7072e5"
