@@ -37,14 +37,31 @@ Destructured `MergeRequest` in `service_branch_ops.rs` to iterate metadata
 by value, eliminating unnecessary `String::clone()` calls on the merge
 hot path. `parents.clone()` retained (needed for both builder and merge call).
 
-## Remaining Phase 2 Work
+### Integration Trait Wiring (142b-2, `9c3789a`)
+
+All 3 capability provider traits now have production `impl` blocks:
+- `impl SigningProvider for SigningClient` (6 methods)
+- `impl PayloadStorageProvider for StorageClient` (3 methods)
+- `impl PermanentStorageProvider for PermanentStorageClient` (5 methods)
+
+Enables `Arc<dyn SigningProvider>` injection and mock substitution for
+production paths (dehydration, attestation) without feature flags.
+
+### Legacy Deprecation (142b-2)
+
+- `READ_TIMEOUT` / `WRITE_TIMEOUT` constants — `#[deprecated]` (dead)
+- `TransportHint` enum + `preferred_transport()` — `#[deprecated]`
+- Vendor wire types narrowed to `pub(crate)` in 4 HTTP client modules
+
+## Remaining Work
 
 | Item | Status |
 |------|--------|
-| `TransportHint` → `TransportEndpoint` convergence | TODO |
-| `MeshRelay` routing implementation | TODO (Phase 3) |
-| Integration trait wiring (`SigningProvider`, `PayloadStorageProvider`) | TODO |
-| Incremental `SessionTreeHash` on append | TODO |
+| `TransportHint` removal (deprecated this wave) | Follow-up |
+| `MeshRelay` routing implementation | Phase 3 |
+| `dehydration_ops.rs` → trait-based dispatch | Follow-up |
+| Incremental `SessionTreeHash` on append | Follow-up |
+| `CircuitBreaker` / `RetryPolicy` wiring in adapters | Follow-up |
 
 ## Gate Results
 
