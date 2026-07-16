@@ -1,12 +1,15 @@
-# ecoPrimals Ecosystem Blurb — Wave 142b
+# ecoPrimals Ecosystem Blurb — Wave 143a
 
-**Date**: Jul 16, 2026 07:50 EDT | **Wave**: 142b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM PHASE 2: ABSTRACTION OVER GATING.**
+**Date**: Jul 16, 2026 09:35 EDT | **Wave**: 143a | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. SILICON ATHEISM PHASE 2 IN MOTION.**
 
-Phase 1 complete: 14/14 primals compile for all 4 depot architectures.
-Phase 2 active: petalTongue `petal-tongue-platform` (`1af1a98`) is the reference.
-Abstraction, not gating — every platform is first-class. FRAGO issued.
-39/39 repos synced. 55 depot binaries, re-harvest pending (56 expected).
+**This cascade**: Teams responded to Phase 2 FRAGO. **Windows 14/14 COMPLETE —
+59 depot binaries** (confirmed). songBird shipped `IpcStream` platform
+abstraction. petalTongue shipped Phase 2 metrics trait + Android paths + WS
+bridge. skunkBat adopted `TransportEndpoint`. toadStool S332-S333: glowplug
+Vulkan backend + 9,232 tests. coralReef: 3,650 tests. Deep debt across 8
+primals. Manifest fixes (bind_mode/mobility enums). **RustDesk connectivity
+transient to ironGate + flockGate**. 38/39 synced (wateringHole diverge resolved).
 
 ---
 
@@ -17,9 +20,9 @@ Abstraction, not gating — every platform is first-class. FRAGO issued.
 | Work | Priority | Status |
 |------|----------|--------|
 | `petal-tongue-platform` — Phase 2 reference pattern | — | **SHIPPED** (`1af1a98`) |
-| Android cdylib Cargo.toml target config | P2 | TODO |
+| Phase 2: metrics trait + Android paths + WS bridge | — | **SHIPPED** (`470d7b5`) |
+| Phase 2: `MeshTopologySource` abstraction + deep debt | — | **SHIPPED** (`337e1d0`) |
 | footPrint composition: wire `WS_PATH` → agent bridge | P2 | TODO |
-| Audit remaining `#[cfg]` → evolve to trait backends | P2 | Phase 2 |
 
 ### toadStool
 
@@ -63,6 +66,8 @@ Abstraction, not gating — every platform is first-class. FRAGO issued.
 | Work | Priority | Status |
 |------|----------|--------|
 | Phase 1 reference implementation | — | **DONE** |
+| `IpcStream` platform abstraction (Phase 2 transport) | — | **SHIPPED** (`12099d84`) |
+| `drawbridge_auth` extraction | — | **SHIPPED** (`12099d84`) |
 | footPrint drawbridge wiring (`PROXY_PATH`) | P2 | TODO |
 | tideGlass drawbridge bonds (LINCS, GEO, ChEMBL, NF) | P2 | TODO |
 
@@ -70,7 +75,8 @@ Abstraction, not gating — every platform is first-class. FRAGO issued.
 
 | Work | Priority | Status |
 |------|----------|--------|
-| Phase 1 cross-arch (Session 109) | — | **DONE** (`839122d2`) |
+| Phase 1 cross-arch (Session 109) | — | **DONE** |
+| Sessions 112-113: production mocks, visibility, String::from R7 | — | **DONE** (`9cfc2b07`) |
 | footPrint CAS wiring (`PROJECTS_PATH`) | P2 | TODO |
 
 ### cellMembrane
@@ -88,7 +94,8 @@ Abstraction, not gating — every platform is first-class. FRAGO issued.
 
 | Work | Priority | Status |
 |------|----------|--------|
-| Phase 1 cross-arch | — | **DONE** (`feff297`) |
+| Phase 1 cross-arch | — | **DONE** |
+| SSOT sweep (dates, line count, coverage alignment) | — | **DONE** (`35a58bd`) |
 | CAC: `SessionTreeHash` primitive | P2 | FRAGO issued |
 | Transport: raw UDS → `TransportEndpoint` trait | P2 | Phase 2 |
 
@@ -99,11 +106,31 @@ Abstraction, not gating — every platform is first-class. FRAGO issued.
 | Phase 1 cross-arch | — | **DONE** (`16b25557`) |
 | Neural API transport → trait-based dispatch | P2 | Phase 2 (TCP fallback exists) |
 
-### sweetGrass / loamSpine / coralReef / skunkBat / barraCuda
+### skunkBat
+
+| Work | Priority | Status |
+|------|----------|--------|
+| Phase 1 cross-arch | — | **DONE** |
+| Phase 2: `TransportEndpoint` adoption | — | **SHIPPED** (`6ae036a`) |
+| Deep debt: `#[allow]` → `#[expect]`, dead fields, named constants | — | **DONE** (`022bf76`) |
+
+### coralReef
+
+| Work | Priority | Status |
+|------|----------|--------|
+| Phase 1 cross-arch | — | **DONE** |
+| Deep debt: error handling, de-hardcoding, deduplication | — | **DONE** (`d51bab4`) |
+| 3,650 tests (Wave 145 docs) | — | **DONE** |
+| Transport: raw UDS → `TransportEndpoint` trait | P2 | Phase 2 |
+
+### barraCuda / loamSpine / sweetGrass
 
 | Work | Priority | Status |
 |------|----------|--------|
 | Phase 1 cross-arch | — | **DONE** (all) |
+| barraCuda: dead feature removal, safe u32 casts, visibility | — | **DONE** (`75c1c880`) |
+| loamSpine: async fs hygiene, base64 migration, clone reduction | — | **DONE** (`3cc9ceb`) |
+| sweetGrass: v0.7.62, deny.toml cleanup | — | **DONE** (`6344fdb`) |
 | Transport: raw UDS → `TransportEndpoint` trait | P2 | Phase 2 |
 
 ### sporePrint
@@ -126,10 +153,9 @@ Abstraction, not gating — every platform is first-class. FRAGO issued.
 
 | Work | Priority | Status |
 |------|----------|--------|
-| Full re-harvest: 14 × 4 arch = 56 binaries | **P0** | **READY** — all blockers resolved |
+| Windows 14/14 harvest | — | **COMPLETE** (59 depot binaries) |
 | northGate mesh enrollment (songbird.exe) | P1 | TODO |
 | footPrint server composition deploy | P2 | TODO |
-| Head re-publish (stale Jul 6) | P1 | TODO |
 
 ---
 
@@ -138,41 +164,50 @@ Abstraction, not gating — every platform is first-class. FRAGO issued.
 ### Depot
 
 ```
-Current: 55 bins (11 Win + 11 Android). Re-harvest: 56 (14×4).
-  x86_64-linux-musl     14   READY
-  aarch64-linux-musl    14   READY
-  aarch64-android       14   READY (sourDough+toadStool resolved)
-  x86_64-windows-gnu    14   READY (petalTongue+squirrel+bearDog resolved)
+59 depot binaries — Windows 14/14 COMPLETE. bearDog UDS fix on sporeGate.
+  x86_64-linux-musl     14   FRESH
+  aarch64-linux-musl    14   FRESH
+  aarch64-android       14   FRESH
+  x86_64-windows-gnu    14   FRESH (Wave 142b harvest)
   BLAKE3 + Ed25519 signed. VPS depot serving.
 
 Exotic validated (songBird): riscv64gc powerpc64le powerpc64 s390x sparc64 arm32 armv7 i686
 ```
 
+### Topology Issues
+
+| Issue | Status |
+|-------|--------|
+| RustDesk transient connectivity to ironGate | ACTIVE — intermittent |
+| RustDesk transient connectivity to flockGate | ACTIVE — intermittent |
+| sporePrint rebuild on golgi (P0 — root 404) | DIVERGENCE |
+
 ### Infrastructure Hygiene
 
 | Item | Status |
 |------|--------|
-| sporePrint rebuild on golgi (P0 — 404) | DIVERGENCE |
 | GLACIAL_SHIFT_READINESS.md update (stale 139c) | TODO |
 | DNSSEC on primals.eco | TODO |
 | primal.eco inner membrane separation | TODO |
+| ecosystem_manifest bind_mode/mobility fix | **FIXED** (this cascade) |
 
 ### Gate Status
 
 ```
-eastGate     — PRIMARY. Cascade authority. 39/39 synced.
+eastGate     — PRIMARY. Cascade authority. 38/39 synced.
 northGate    — Windows mesh target. RTX 5090. ~1TB AlphaFold.
-sporeGate    — NUCLEUS. 13-target build authority. Re-harvest pending.
+sporeGate    — NUCLEUS. 13-target build authority. 59 depot bins. Windows 14/14.
 golgiBody    — Outer membrane. footprint/ + live. Root 404 (sporePrint).
 westGate     — OFFLINE. ZFS cold storage.
-ironGate     — ABG/NF compute. JupyterHub.
-flockGate    — WAN covalent. 16 bonds.
-grapheneGate — StrongBox target.
+ironGate     — ABG/NF compute. JupyterHub. RustDesk transient.
+flockGate    — WAN covalent. 16 bonds. RustDesk transient.
+grapheneGate — StrongBox target. 14/14 Android ecobins.
 ```
 
 ---
 
-*Wave 142b: Per-primal remaining work. Phase 1 COMPLETE (14/14 gated). Phase 2 ACTIVE
-(abstraction over gating — FRAGO issued). petalTongue petal-tongue-platform is reference.
-toadStool glowplug traits ready for Vulkan backends. sporeGate re-harvest: 56 bins.
-sporePrint P0 404 outstanding. 39/39 synced.*
+*Wave 143a: Phase 2 FRAGO response — 3 primals shipping abstractions (songBird IpcStream,
+petalTongue metrics+Android+WS, skunkBat TransportEndpoint). Windows 14/14 COMPLETE (59
+depot bins). toadStool S332-S333 glowplug Vulkan + 9,232 tests. coralReef 3,650 tests.
+Deep debt across 8 primals. Manifest fixes. RustDesk transient to ironGate+flockGate.
+38/39 synced.*

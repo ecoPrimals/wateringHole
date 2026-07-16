@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 140
+id = 143
 sub = "a"
-date = "2026-07-15"
-posture = "PUBLIC + SOVEREIGN. TANGIBLES PIVOT + CONTENT-ADDRESSED CONVERGENCE. protoKarya to wider world. Newton-Leibniz pattern formalized: temporal divergence with content identity = convergence. 45 depot binaries, 4 architectures. 3 FRAGOs active (transport-abstract, cross-platform parity, CAC). 162 scenarios, 1194 tests."
+date = "2026-07-16"
+posture = "PUBLIC + SOVEREIGN. PHASE 2 IN MOTION. Windows 14/14 COMPLETE (59 depot bins). songBird IpcStream, petalTongue metrics+Android+WS, skunkBat TransportEndpoint shipped. toadStool 9,232 tests. coralReef 3,650 tests. RustDesk transient to ironGate+flockGate. 38/39 synced."
 publisher = "eastGate-overwatch"
 
 [gates]
