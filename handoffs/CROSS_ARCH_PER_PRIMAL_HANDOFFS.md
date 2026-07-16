@@ -251,7 +251,7 @@ fallback mode. Needs sporeGate harvest for Windows + Android binaries to verify.
 | coralReef | 1 | Small | **DONE** | `da5afe1` cfg-gate Unix-only code |
 | skunkBat | 1,2 | Small | **DONE** | `6b3e6eb` cross-arch + deep debt sweep |
 | squirrel | 1 | Small-Med | **DONE** | `110c9939` Windows harvest unblock + deep debt |
-| toadStool | 4 | Small | **DONE** | `592248618`→`782a207` S329-S331 full cfg + deep debt |
+| toadStool | 4 | Small | **DONE** | `592248618`→`05d6476` S329-S332 full cfg + Phase 2 GPU backends |
 | petalTongue | 1,5 | Medium | **DONE** | `7abeb16` full workspace Windows cross-compile |
 | sourDough | 3 | Small | **DONE** | `6115e4a` Android platform parity (all 3 green) |
 | rhizoCrypt | 1 | Small | **DONE** | `614ef3e` cross-arch + Phase 2 transport + SessionTreeHash |
@@ -266,7 +266,7 @@ Deep debt delivered alongside cross-arch (Waves 141a-142a):
 - rhizoCrypt: method_gate split, magic numbers, branch/vertex coverage, Phase 2 transport, SessionTreeHash
 - sweetGrass: postgres store purged (pure Rust dogma), cross-platform warnings suppressed
 - nestGate: Category 3 (rustix::fs::statvfs gated) + Category 1 (UDS transport gated across 9 files)
-- toadStool: S329-S331 deep debt (clone elimination, borrowed deserialization, +31 tests, clippy zero)
+- toadStool: S329-S332 deep debt + Phase 2 GPU backends (`WgpuGpuDiscovery`, `PortableSwapExecutor`, `PortableResourceHandle`, +26 tests)
 - bearDog: libc removal, BTreeMap batch 4, test extraction wave 2
 - squirrel: Windows harvest unblock + deep debt sweep
 - sourDough: Android platform parity (Os::Android + LibC::Bionic, 490 tests)
@@ -288,7 +288,7 @@ All 14 primals now compile for all 4 depot architectures:
 | coralReef | ✅ | ✅ | ✅ | ✅ | |
 | skunkBat | ✅ | ✅ | ✅ | ✅ | |
 | squirrel | ✅ | ✅ | ✅ | ✅ | Windows unblocked Wave 142a |
-| toadStool | ✅ | ✅ | ✅ | ✅ | Phase 1 (gating). Phase 2: abstract glowplug for Android GPU |
+| toadStool | ✅ | ✅ | ✅ | ✅ | Phase 1 (gating) + Phase 2 (S332: `WgpuGpuDiscovery`, `PortableSwapExecutor`, `PortableResourceHandle`) |
 | petalTongue | ✅ | ✅ | ✅ | ✅ | **Reference pattern**: petal-tongue-platform (cdylib + C-FFI + lifecycle) |
 | sourDough | ✅ | ✅ | ✅ | ✅ | 490 tests, all 3 green |
 | rhizoCrypt | ✅ | ✅ | ✅ | ✅ | Phase 2: `from_transport` shipped, `TransportHint` convergence TODO |
@@ -325,9 +325,9 @@ cdylib + rlib    → shared library for host embedding AND Rust library for comp
 
 | Primal | What to abstract | From → To |
 |--------|-----------------|-----------|
-| toadStool | glowplug DeviceDiscovery | sysfs → Vulkan `VkPhysicalDevice` on Android |
-| toadStool | glowplug compute | VFIO/DRM → Vulkan compute shaders on Android/Windows |
-| toadStool | ember ResourceHandle | Linux fd → platform-specific GPU handle |
+| toadStool | glowplug DeviceDiscovery | sysfs → **`WgpuGpuDiscovery`** (S332: wgpu adapter enum, all platforms) |
+| toadStool | glowplug SwapExecutor | sysfs unbind/rebind → **`PortableSwapExecutor`** (S332: logical personality swap) |
+| toadStool | ember ResourceHandle | Linux VFIO fd → **`PortableResourceHandle`** (S332: `GpuBackend` enum, atomic liveness) |
 | biomeOS | Neural API transport | tarpc unix → tarpc TCP (already done as fallback) |
 | bearDog | HSM provider | Linux HIDRAW → Android Keystore / Windows DPAPI |
 | squirrel | credential store | fs-based 0600 → Android Keystore / Windows DPAPI |
