@@ -1,43 +1,57 @@
-# sporeGate Full Harvest — Wave 141b
+# sporeGate Full Harvest — Wave 142a
 
-**Date**: Jul 15, 2026 | **Wave**: 141b | **From**: eastGate overwatch
+**Date**: Jul 16, 2026 | **Wave**: 142a | **From**: eastGate overwatch
 **To**: sporeGate builder team
-**Priority**: P0 — all 14 primals have adopted cross-architecture support
+**Priority**: P0 — ALL BLOCKERS RESOLVED. Full genomeBin standard achieved.
 
 ---
 
 ## Directive
 
-All 14 primals now have `#[cfg()]`-gated platform code and cross-architecture
-adoption complete. Execute a full harvest across all depot architectures and
-validate on real hardware where available.
+All 14 primals now compile for all 4 depot architectures. Execute full re-harvest
+to produce **56 depot binaries** (14 primals × 4 architectures).
 
-## Phase 1: Windows Harvest (P0)
+### What changed since last harvest (Wave 141b → 142a):
+
+| Primal | Resolution | Commit |
+|--------|-----------|--------|
+| petalTongue | Full workspace Windows cross-compile (UDS abstraction) | `7abeb16` |
+| squirrel | Windows harvest unblocked | `110c9939` |
+| bearDog | libc removal (further Windows improvement) | `5d4258d95` |
+| sourDough | Android platform parity (Os::Android + LibC::Bionic) | `6115e4a` |
+| toadStool | S329 `#[cfg(target_os = "linux")]` confirmed to exclude Android | `592248618` |
+
+## Phase 1: Full 4-Architecture Harvest (P0)
 
 ```bash
-# On sporeGate, for each primal workspace:
+# Pull latest for all primals first
+membrane temporal.cascade
+
+# Windows — all 14 primals (was 11)
 membrane plasmid.harvest --target x86_64-pc-windows-gnu --local
+
+# Android — all 14 primals (was 11)
+membrane plasmid.harvest --target aarch64-linux-android --local
+
+# Linux (reference — verify still 14/14)
+membrane plasmid.harvest --target x86_64-unknown-linux-musl --local
+membrane plasmid.harvest --target aarch64-unknown-linux-musl --local
 ```
 
-**Expected result**: 14/14 Windows binaries (up from 1/14 songbird.exe).
+**Expected result**: 56 binaries (14 × 4 architectures).
 
-Known expected failures:
-- toadStool: `hw-safe` feature-gated behind `linux-hw` — may produce stub binary
-- petalTongue: Android cdylib target, Windows binary may be headless-only
+Known platform-specific behaviors (NOT failures):
+- toadStool on Windows/Android: headless mode (no GPU compute/VFIO — Linux kernel API)
+- petalTongue on Android: binary compiles, but NDK cdylib integration is Phase 2
 
 After harvest, push to VPS depot:
 ```bash
 membrane plasmid.depot_sync --push
 ```
 
-## Phase 2: Android Re-Harvest (P1)
+## Phase 2: Android Re-Harvest — SUPERSEDED
 
-Several primals had cross-arch changes that may improve Android results:
-```bash
-membrane plasmid.harvest --target aarch64-linux-android --local
-```
-
-**Current**: 12/14. Check if petalTongue or toadStool improved.
+Previous Phase 2 is now merged into Phase 1. All 14 primals Android-ready.
 
 ## Phase 3: Exotic Architecture Expansion (P2)
 
@@ -101,8 +115,9 @@ mesh. The transport layer dispatches correctly based on platform.
 ## Success Criteria
 
 ```
-Windows harvest:   14/14 binaries built (or documented expected-fail)
-Android harvest:   14/14 binaries built (or documented expected-fail)
+Windows harvest:   14/14 binaries built (up from 11/14)
+Android harvest:   14/14 binaries built (up from 11/14)
+Total depot:       56 binaries (14 × 4 architectures)
 Depot sync:        All binaries pushed to golgi VPS depot
 BLAKE3+Ed25519:    All binaries signed
 northGate test:    songbird.exe running, mesh enrolled
@@ -111,5 +126,5 @@ primalSpring:      full-cross-compile scenario GREEN
 
 ---
 
-*Wave 141b: All 14 primals cross-arch adopted. Execute full harvest.
-Test on real hardware. Validate transport dispatch across platforms.*
+*Wave 142a: ALL BLOCKERS RESOLVED. Full genomeBin standard achieved for all 14 primals
+across all 4 depot architectures. Execute full re-harvest. Target: 56 binaries.*
