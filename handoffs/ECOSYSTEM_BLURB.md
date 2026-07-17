@@ -1,84 +1,78 @@
-# ecoPrimals Ecosystem Blurb — Wave 147f
+# ecoPrimals Ecosystem Blurb — Wave 147g
 
-**Date**: Jul 17, 2026 14:50 EDT | **Wave**: 147f | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. GARDENS LIVE ON GATES.**
+**Date**: Jul 17, 2026 17:35 EDT | **Wave**: 147g | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT PATH CLEAR.**
 
-**This cascade**: Massive evolution wave. lithoSpore shipped pack/unpack +
-initioChem first consumer (pipeline proven end-to-end). esotericWebb V16:
-6/9 primals connected on flockGate in real-time — first live composition
-validated. cellMembrane shipped systemd units for footPrint + esotericWebb,
-esotericWebb Caddy block, zone House1 fix (1,100 tests). footPrint at 266
-tests, 0 internal debt — critical path entirely upstream. 5 handoffs
-fossilized. New ecosystem GAPs surfaced from live composition testing.
+**This cascade**: songBird shipped the P0 blocker — `PROXY_PATH` drawbridge
+route for footPrint, `/jsonrpc` endpoint (GAP-037 closed), and all 4 discovery
+schema methods (topology/health/query/bonds). esotericWebb V17 deep debt
+(smart refactoring, clone reduction, transport module extraction). lithoSpore
+deep debt (222 tests, named constants, tracing, feature-gated ring-free ecoBin).
+1 handoff fossilized. footPrint critical path now: sporeGate deploy only.
 
 ---
 
 ## Upstream Primal Demand Signal
 
-Accumulated needs from all downstream consumers. Each primal team: address
-your rows. This section grows as gardens evolve — that's the point.
+### songBird — **3 ITEMS CLOSED THIS WAVE**
 
-### songBird (3 consumers, highest demand)
-
-| Need | Consumer(s) | Priority | Detail |
+| Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| `PROXY_PATH` drawbridge route | **footPrint** | **P0** | Route `:7780/footprint/ext/*` → footPrint `:8090/ext`. **Blocks footPrint going live.** |
-| Raw JSON-RPC endpoint | **esotericWebb** | **P1** | GAP-037: TCP 7780 speaks HTTP, not NDJSON JSON-RPC. Webb (and sourDough-pattern consumers) can't health-check or call songBird. Expose NDJSON endpoint alongside HTTP. |
-| Confirm discovery response schemas | **esotericWebb** | P1 | `discovery.topology`, `discovery.health`, `discovery.query`, `discovery.bonds` — confirm shapes. |
-| BTSP → cellMembrane `gate.enroll` | enrollment | P1 | `mesh.enroll` method shipped — wire to cellMembrane. |
+| ~~`PROXY_PATH` drawbridge route~~ | footPrint | ~~P0~~ | **CLOSED** (147f) — `/footprint/*` → `:8090` |
+| ~~Raw JSON-RPC endpoint~~ | esotericWebb | ~~P1~~ | **CLOSED** (147f) — `POST /jsonrpc` on drawbridge |
+| ~~Confirm discovery schemas~~ | esotericWebb | ~~P1~~ | **CLOSED** (147f) — topology/health/query/bonds implemented |
+| BTSP → cellMembrane `gate.enroll` | enrollment | P1 | `mesh.enroll` shipped — integration pending |
 
 ### squirrel
 
-| Need | Consumer(s) | Priority | Detail |
+| Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| Accept `null` params on health methods | **esotericWebb** | P1 | GAP: `health.liveness` with `null` params returns `-32602`. JSON-RPC 2.0 allows `null`. Webb works around by sending `{}`. |
+| Accept `null` params on health methods | esotericWebb | P1 | Open (Webb works around with `{}`) |
 
 ### nestGate
 
-| Need | Consumer(s) | Priority | Detail |
+| Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| `PROJECTS_PATH` CAS wiring | **footPrint** | P1 | Project CRUD → nestGate CAS for content-addressed persistence. Filesystem works as fallback. |
+| `PROJECTS_PATH` CAS wiring | footPrint | P1 | Open (filesystem fallback works) |
 
 ### petalTongue
 
-| Need | Consumer(s) | Priority | Detail |
+| Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| `WS_PATH` agent bridge | **footPrint** | P1 | WebSocket command protocol at `/ws`. |
+| `WS_PATH` agent bridge | footPrint | P1 | Open (non-blocking for basic use) |
 
 ### bearDog
 
-| Need | Consumer(s) | Priority | Detail |
+| Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| Confirm crypto JSON-RPC sigs | **esotericWebb** | P1 | `crypto.sign`, `crypto.verify`, `crypto.hash` — confirm signatures match. |
-| HSM → Android Keystore | grapheneGate | P2 | Mobile hardware-backed key storage. |
+| Confirm crypto JSON-RPC sigs | esotericWebb | P1 | Open |
+| HSM → Android Keystore | grapheneGate | P2 | Open |
 
 ### sweetGrass
 
-| Need | Consumer(s) | Priority | Detail |
+| Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| Confirm `braid.create/query` | **esotericWebb** | P1 | Attribution tracking — confirm availability + response format. |
+| Confirm `braid.create/query` | esotericWebb | P1 | Open |
 
 ### biomeOS
 
-| Need | Consumer(s) | Priority | Detail |
+| Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| GAP-017: neural-api resurrection | **esotericWebb** | P2 | Neural API for orchestrated composition. |
-| GAP-018: executors not exposed | **esotericWebb** | P2 | Executor capabilities not reachable via JSON-RPC. |
+| GAP-017: neural-api resurrection | esotericWebb | P2 | Open |
+| GAP-018: executors not exposed | esotericWebb | P2 | Open |
 
 ### ALL primals (ecosystem convention)
 
-| Need | Consumer(s) | Priority | Detail |
+| Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| GAP-036: Socket naming convention | **esotericWebb** | P2 | Some primals register domain-named sockets (`ai.sock`), others primal-named (`rhizocrypt.sock`). Converge on one convention or create symlinks. |
-| GAP-038: Stale UDS socket cleanup | **esotericWebb** | P2 | rhizoCrypt and toadStool leave sockets on disk after exit. Trap SIGTERM/SIGINT and unlink, or have biomeOS gc. |
+| GAP-036: Socket naming convention | esotericWebb | P2 | Open |
+| GAP-038: Stale UDS socket cleanup | esotericWebb | P2 | Open |
 
 ---
 
 ## Path to Live — Downstream Projects
 
-### footPrint → `primals.eco/footprint/` (PARTIALLY LIVE)
-
-Static client served. Server not deployed. **0 internal debt remaining.**
+### footPrint → `primals.eco/footprint/` — **ONE STEP FROM LIVE**
 
 | Step | Status | Owner |
 |------|--------|-------|
@@ -86,52 +80,47 @@ Static client served. Server not deployed. **0 internal debt remaining.**
 | 2. Server binary (266 tests, 0 debt) | **DONE** | footPrint |
 | 3. Caddy path-based routing | **SHIPPED** | cellMembrane |
 | 4. NUCLEUS systemd service unit | **SHIPPED** | cellMembrane |
-| 5. **Deploy unit on sporeGate** | **NOT DEPLOYED** | sporeGate ops |
-| 6. **songBird drawbridge route** | **NOT STARTED** | songBird |
-| 7. nestGate CAS for projects | Not started (filesystem fallback works) | nestGate |
-| 8. petalTongue WS bridge | Not started (non-blocking) | petalTongue |
+| 5. songBird drawbridge route | **SHIPPED** | songBird |
+| 6. **Deploy on sporeGate** | **NOT DEPLOYED** | sporeGate ops |
+| 7. nestGate CAS for projects | Enhancement (filesystem works) | nestGate |
+| 8. petalTongue WS bridge | Enhancement (non-blocking) | petalTongue |
 
-**Critical path**: Steps 5 + 6. Service unit is written — deploy it. Wire drawbridge.
+**One action remains**: Deploy the service unit on sporeGate. Everything
+else is shipped and waiting.
 
-### esotericWebb → `primals.eco/webb/` (COMPOSING ON GATE)
+### esotericWebb → `primals.eco/webb/` — **COMPOSING, DEPLOY READY**
 
-V16 live on flockGate. 6/9 primals connected. First milestone nearly reached.
+V17 shipping. 6/9 primals connected. songBird now reachable via `/jsonrpc`.
 
 | Step | Status | Owner |
 |------|--------|-------|
-| 1. Binary compiled (471 tests) | **DONE** | esotericWebb |
+| 1. Binary compiled (471+ tests) | **DONE** | esotericWebb |
 | 2. Caddy block for `/webb/` | **SHIPPED** | cellMembrane |
 | 3. NUCLEUS systemd service unit | **SHIPPED** | cellMembrane |
-| 4. Live primal composition | **6/9 CONNECTED** | esotericWebb |
-| 5. songBird raw JSON-RPC endpoint | **BLOCKED** (GAP-037) | songBird |
-| 6. Deploy on sporeGate (WAN) | NOT DEPLOYED | sporeGate ops |
-| 7. Content bundles (YAML authoring) | Partial | esotericWebb |
+| 4. songBird discovery schemas | **SHIPPED** | songBird |
+| 5. songBird `/jsonrpc` endpoint | **SHIPPED** | songBird |
+| 6. Live primal composition | **6/9 CONNECTED** | esotericWebb |
+| 7. **Deploy on sporeGate** | **NOT DEPLOYED** | sporeGate ops |
+| 8. bearDog crypto sig confirmation | Waiting | bearDog |
+| 9. sweetGrass braid confirmation | Waiting | sweetGrass |
 
-**Connected**: squirrel, petalTongue, nestGate, loamSpine, sweetGrass, bearDog
-**Stale socket**: rhizoCrypt, toadStool (GAP-038)
-**Transport mismatch**: songBird (GAP-037)
+**One action remains**: Deploy on sporeGate. songBird P0/P1 blockers
+cleared. Confirmation requests are non-blocking.
 
-### lithoSpore → CLI tool (PIPELINE PROVEN)
-
-Pack/unpack shipped. initioChem is first consumer. Pipeline proven end-to-end.
+### lithoSpore → CLI tool — **PIPELINE PROVEN, DEEP DEBT CLEAR**
 
 | Step | Status | Owner |
 |------|--------|-------|
-| 1. Silicon Atheism Platform trait | **COMPLETE** (219 tests) | lithoSpore |
+| 1. Silicon Atheism Platform trait | **COMPLETE** | lithoSpore |
 | 2. `pseudospore pack` command | **SHIPPED** | lithoSpore |
 | 3. `pseudospore unpack` command | **SHIPPED** | lithoSpore |
-| 4. initioChem as first consumer | **SHIPPED** (2 tests) | initioChem |
-| 5. USB round-trip validation | NOT STARTED | lithoSpore + primalSpring |
-
-**Critical path**: Step 5 — primalSpring scenario for USB round-trip.
+| 4. initioChem first consumer | **SHIPPED** | initioChem |
+| 5. Deep debt evolution | **DONE** (222 tests, ring-free ecoBin, tracing) | lithoSpore |
+| 6. USB round-trip validation | NOT STARTED | lithoSpore + primalSpring |
 
 ### projectFOUNDATION → TBD (NOT STARTED)
 
-| Step | Status | Owner |
-|------|--------|-------|
-| 1. Thread lineage store design | NOT STARTED | projectFOUNDATION |
-| 2. nestGate CAS integration | NOT STARTED | nestGate + FOUNDATION |
-| 3. Provenance trio wiring | NOT STARTED | rhizoCrypt + loamSpine + sweetGrass |
+Blocked on design decisions. No primal team has received requests yet.
 
 ---
 
@@ -140,10 +129,10 @@ Pack/unpack shipped. initioChem is first consumer. Pipeline proven end-to-end.
 | Project | Tests | Clippy | Unsafe | Debt |
 |---------|-------|--------|--------|------|
 | cellMembrane | 1,100 | 0 | forbidden | 0 |
-| esotericWebb | 471 | 0 | forbidden | 0 |
+| esotericWebb | 471+ | 0 | forbidden | 0 |
 | songBird | full pass | 0 | forbidden | 0 |
 | footPrint | 266 | clean | N/A (TS) | 0 |
-| lithoSpore | 219 | 0 | forbidden | 0 |
+| lithoSpore | 222 | 0 | forbidden | 0 |
 | sporePrint | 289 | 0 | forbidden | 0 |
 | primalSpring | 1,203 | 0 | — | 1 |
 
@@ -157,10 +146,11 @@ Pack/unpack shipped. initioChem is first consumer. Pipeline proven end-to-end.
 | Content-Addressed Convergence (6/6) | **COMPLETE** |
 | Glacial Shift (8/8) | **ALL CLEAR** |
 | `gate.enroll` fully automated (7 phases) | **SHIPPED** |
-| lithoSpore pack/unpack + initioChem consumer | **SHIPPED** |
-| esotericWebb live composition (6/9 primals) | **VALIDATED** |
+| lithoSpore pack/unpack + initioChem | **SHIPPED** + deep debt clear |
+| esotericWebb live composition (6/9) | **VALIDATED** |
 | footPrint Caddy + NUCLEUS unit | **SHIPPED** |
 | esotericWebb Caddy + NUCLEUS unit | **SHIPPED** |
+| songBird PROXY_PATH + /jsonrpc + discovery | **SHIPPED** |
 | Depot (59 binaries, 4 arch) | **OPERATIONAL** |
 
 ---
@@ -169,19 +159,17 @@ Pack/unpack shipped. initioChem is first consumer. Pipeline proven end-to-end.
 
 ```
 golgiBody (10.13.37.1) — hub, VPS, relay
-  ├─ sporeGate (10.13.37.2) — builder, site router, [deploy target]
+  ├─ sporeGate (10.13.37.2) — builder, [DEPLOY TARGET: footPrint + Webb]
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
-  ├─ flockGate (10.13.37.6) — WAN gate, esotericWebb V16 [6/9 live]
-  ├─ ironGate  (10.13.37.7) — compute, ABG, lithoSpore [pipeline proven]
-  └─ northGate (10.13.37.8) — Windows, RTX 5090, zone House1
+  ├─ flockGate (10.13.37.6) — esotericWebb V17 [6/9 live]
+  ├─ ironGate  (10.13.37.7) — compute, lithoSpore [pipeline proven]
+  └─ northGate (10.13.37.8) — Windows, RTX 5090
 ```
 
 ---
 
-*Wave 147f: lithoSpore pack/unpack + initioChem consumer SHIPPED (pipeline
-proven). esotericWebb V16: 6/9 primals connected on flockGate (first live
-composition). cellMembrane: systemd units + Caddy for both footPrint and
-esotericWebb + zone House1 fix (1,100 tests). footPrint 266 tests, 0 internal
-debt — critical path entirely upstream. 3 new ecosystem GAPs from live
-composition (socket naming, songBird HTTP transport, stale UDS sockets).
-5 handoffs fossilized. Next: sporeGate deploy + songBird drawbridge route.*
+*Wave 147g: songBird closed all 3 P0/P1 demand-signal items (PROXY_PATH
+drawbridge, /jsonrpc endpoint, discovery schemas). esotericWebb V17 deep
+debt. lithoSpore deep debt (222 tests, ring-free ecoBin). footPrint and
+esotericWebb both ONE STEP from live — sporeGate deploy is the sole remaining
+action. 13 deliveries absorbed today across 7 sub-waves.*
