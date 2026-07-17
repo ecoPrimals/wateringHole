@@ -73,7 +73,7 @@ Static client is served. Server composition is not deployed.
 | Step | Status | Owner |
 |------|--------|-------|
 | 1. Static client on petalTongue | **LIVE** | — |
-| 2. Server binary compiled + in depot | **DONE** (243 tests, security hardened) | footPrint |
+| 2. Server binary compiled + in depot | **DONE** (266 tests, solver extracted, all routes wired) | footPrint |
 | 3. Caddy path-based routing config | **SHIPPED** (`/api/*`→8090, `/ws`→8080, static→8080) | cellMembrane |
 | 4. **NUCLEUS service unit on sporeGate** | **NOT DEPLOYED** | cellMembrane + sporeGate ops |
 | 5. **songBird drawbridge route for `/ext`** | **NOT STARTED** | songBird |
@@ -159,7 +159,7 @@ golgiBody (10.13.37.1) — hub, VPS, relay
 | songBird | full pass | 0 | forbidden | 0 |
 | esotericWebb | 373 | 0 | forbidden | 0 |
 | lithoSpore | 216 | 0 | forbidden | 0 |
-| footPrint | 243 | clean | N/A (TS) | 0 |
+| footPrint | 266 | clean | N/A (TS) | 0 |
 | sporePrint | 289 | 0 | forbidden | 0 |
 | primalSpring | 1,203 | 0 | — | 1 |
 
