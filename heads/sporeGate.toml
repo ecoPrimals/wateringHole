@@ -1,44 +1,48 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-16T15:15:00Z
+# Gate: sporeGate | Updated: 2026-07-17T22:00:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-16T15:15:00Z"
+updated = "2026-07-17T22:00:00Z"
 
 [heads]
 bearDog = "27cf95c7843f121c445f50190c317a4a3ef66faa"
-songBird = "b82f1d3472d1196b6bd3d51a245fd18f97325e09"
+songBird = "f1718630667582b4c111d4060d5572963f53a6e5"
 nestGate = "d46e5d94c8a3e6a60daf85a21afec9c659d32e05"
-biomeOS = "16b255576f4f2c1f3df5eb04a6adbfc55ca49c40"
+biomeOS = "489c7d57e66b59d13a3e3f6f6fb74e36326e5a50"
 rhizoCrypt = "35a58bd2cda07d5ec0f2b28f347b867876021750"
-squirrel = "0b446b7ac922ff929afa76d32332538c381bb228"
+squirrel = "84bb3c5b01da2fde9e11e46e259e8b2f7e8f45d3"
 sweetGrass = "2d73a07ab9accb730fc7634098dc8614fd4be491"
 loamSpine = "60a73b88e368939d85b5d5db8a5d5ebba66be48e"
-skunkBat = "6ae036a386919f3090fadb504239a3d12ed73566"
-coralReef = "c28980e7cfdc88963f19e633aefee5db61675c71"
-barraCuda = "a090b857655788726a1564342b75a59a7a44a2ff"
-petalTongue = "337e1d07c512245bc96078d4abd33f6f096fee46"
-toadStool = "7692a2de9f8de1a26276619dc8f2326fe019e985"
+skunkBat = "2999c1bce1269f6e7e3e8f82ffc71a8d9c7f59f2"
+coralReef = "e006441bad3bf0b3e2fc2918e6acb9ea94e8fd09"
+barraCuda = "aaf1e525c8a4cf2ef6b11e11d3cf43cf0a534cff"
+petalTongue = "3c30bd4fcc3a40c2e2c204b9879bd99bca3dc68b"
+toadStool = "d6d9f20f5d9c8032d3cbe9c0c55b1de0e53f3c2a"
 sourDough = "3a0b52df4b65a5436bfa87161e8cf181c4e85194"
-cellMembrane = "1620eb18003a10fbba327c97f4b03c628b7af8cc"
-primalSpring = "be7a536ebb0c558feaa812fcf3047754ec44c1ee"
-wateringHole = "859797aae42ab7460fa85b7411464d1659b8e9d6"
-sporePrint = "332906008fd3fe0c79bc29d671b703ee70292939"
+cellMembrane = "77e929649ada4df6ebe7b9d0c55a03f1c1524e80"
+primalSpring = "3c70240c2afdbc9dc5892d21342f3074683eb53c"
+wateringHole = "fca63a33834a40d13dcf84c3abf3efb93d67d87e"
+sporePrint = "25cab9c890ddce17ac2486ebb0de51e77a724cbb"
 
 [deploy]
-songbird_version = "0.3.0-ipc-stream"
+songbird_version = "0.3.1-drawbridge-proxy"
 beardog_version = "0.10.0-silicon-atheism"
-gateway_status = "SILICON_ATHEISM_PHASE1_COMPLETE"
-topology = "internet → golgi(Caddy TLS) → WG → sporeGate(NUCLEUS) → LAN mesh"
+gateway_status = "FOOTPRINT_LIVE_PHASE2_COMPLETE"
+topology = "internet → golgi(Caddy TLS) → WG → sporeGate(NUCLEUS+footPrint) → LAN mesh"
 depot_status = "LIVE — 59 binaries × 4 architectures (BLAKE3 + Ed25519 signed)"
 depot_architectures = "x86_64-musl, aarch64-musl, aarch64-android, x86_64-windows-gnu"
-mesh_status = "PEERED — sporeGate↔ironGate bidirectional (family: ecoPrimals)"
+mesh_status = "6-GATE MESH — golgi, sporeGate, eastGate, flockGate, ironGate, northGate"
 cascade_sense = "OPERATIONAL — auto-rebuild on golgi via zola-rebuild.conf"
+footprint_server = "LIVE on sporeGate:8090 — Node.js wrapper, 4h+ uptime, API 200"
 
 [resolved]
 sporePrint_404_p0 = "FIXED: Caddy try_files + cascade-sense manifest fixes (Wave 143b)"
-cascade_sense_config = "FIXED: bind_mode='tcp' → 'tcp_only', mobility='portable' → 'mobile'"
+cascade_sense_config = "FIXED: bind_mode, mobility, zone enum drift (Waves 143b-147e)"
 silicon_atheism_p1 = "COMPLETE: 14/14 primals × 4 architectures = 56 binaries + extras"
+silicon_atheism_p2 = "COMPLETE: 14/14 transport abstraction (trait + backend pattern)"
 windows_beardog = "FIXED: #[cfg(unix)] gating for UnixStream in beardog-ipc/core/tunnel/cli"
+footprint_deploy = "LIVE: Express server on sporeGate, Caddy proxy on golgi, API + WS routes"
+cac_6_6 = "COMPLETE: Content-Addressed Convergence all 6 layers solved"
