@@ -68,30 +68,31 @@ Corrected to `x86_64-pc-windows-gnu` to match actual hardware.
 | footPrint | protist | Composition target (flockGate) |
 | wateringHole | infra | eastGate overwatch |
 
-### Partially Assigned (need team clarification)
+### Gardens — Priority Order (P2, team pickup when ready)
 
-| Project | Type | Description | Status |
-|---------|------|-------------|--------|
-| tideGlass | protist | Sovereign GPS platform — gene perturbation | Phase 0 — not cloned |
-| benchScale | infra | Lab validation infrastructure | Available, needs northGate scenarios |
-| agentReagents | infra | Agent configuration reagents | Available, needs deployment validation |
-| bingoCube | infra | Validation framework | Available |
+| Priority | Project | What It Enables |
+|----------|---------|-----------------|
+| **1** | **lithoSpore** / pseudoSpore | Portability — makes any work USB-deployable and recreatable. All primals/gardens can become spores. initioChem made the first. |
+| **2** | **projectFOUNDATION** | Data layer — knowledge, thread lineage, validation evidence |
+| **3** | **esotericWebb** | Living game state — leverages petalTongue UI + primals for interactive experience |
+| 4 | initioChem | Computational chemistry (hotSpring consumer, first pseudoSpore) |
+| 5 | helixVision | Sovereign genomics discovery (16S/WGS → taxonomy) |
+| 6 | blueFish | Analytical chemistry ETL |
 
-### Unassigned (gardens — no active team)
+### Validation Infra (available, need northGate scenarios)
 
-| Project | Type | Description |
-|---------|------|-------------|
-| lithoSpore | garden | Verification chassis, USB-deployable validation |
-| projectFOUNDATION | garden | Knowledge layer, thread lineage, validation evidence |
-| esotericWebb | garden | UI/agentic interaction layer |
-| blueFish | garden | BlueFish analytical chemistry ETL |
-| helixVision | garden | Sovereign genomics discovery (16S/WGS → taxonomy) |
-| initioChem | garden | Computational chemistry (hotSpring science consumer) |
-| rustChip | infra | Rust toolchain chip |
+| Project | What |
+|---------|------|
+| benchScale | IPC compliance validation |
+| agentReagents | Agent configuration reagents |
+| bingoCube | Validation framework |
 
-These gardens and infra projects exist in the manifest and have repos but no
-active team assignment. They can be evolved when teams are available or when
-the ecosystem needs their capabilities.
+### Not Yet Cloned
+
+| Project | Status |
+|---------|--------|
+| tideGlass | Sovereign GPS platform — Phase 0 |
+| rustChip | Rust toolchain chip |
 
 ---
 
