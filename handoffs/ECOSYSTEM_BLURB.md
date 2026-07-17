@@ -103,6 +103,27 @@ golgiBody (10.13.37.1) — hub, VPS, relay
 | Depot carries enrollment config — atomic fetch + mesh | cellMembrane + depot |
 | northGate NUCLEUS deploy + benchScale validation | sporeGate ops |
 
+### ENROLLMENT STANDARD: Forgejo-First Remotes
+
+New gates joining the mesh MUST configure git remotes sovereign-first:
+
+```
+origin = ssh://git@git.primals.eco:2222/<org>/<repo>.git   (Forgejo — internal)
+github = git@github.com:<org>/<repo>.git                   (GitHub — external mirror)
+```
+
+**Why**: The forge is on the mesh. A student enrolling a laptop, an HPC node
+contracting compute, a field deployment bootstrapping from USB — all reach
+Forgejo directly via WireGuard. GitHub is the external membrane for public
+discovery. Internal operations pull from the sovereign forge.
+
+This is the git-layer expression of the K-Derm membrane model:
+- `origin` (Forgejo) = inner membrane (sovereign, mesh-reachable)
+- `github` = outer membrane (public, commercial)
+
+`cellMembrane gate.enroll` should automate this: generate WireGuard keys,
+peer with hub, configure git remotes Forgejo-first, fetch depot, deploy.
+
 ### FUTURE
 
 | Work | When |
