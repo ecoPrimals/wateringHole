@@ -51,15 +51,36 @@ Result: `enroll.rs` 503L, `wg.rs` 370L (both well under 800L threshold).
 | `crates/membrane-shadow/src/gate/enroll.rs` | Add `hub.peer` phase, import WG from `wg.rs` |
 | `crates/membrane-shadow/src/gate/wg.rs` | **NEW** — WG helpers + 7 tests |
 | `crates/membrane-shadow/src/gate/mod.rs` | Register `wg` module |
-| `README.md` | Wave 147b, 1083 tests |
+| `README.md` | Wave 147b, 1089 tests |
 | `GLACIAL_SHIFT_TRACKER.md` | Wave 147b entry |
 | `VPS_STATE.md`, `RUNBOOKS.md`, `IRONGATE_VERIFICATION.md` | Wave bump |
+| `lib.rs` | Add 4 timestamp helpers + 2 HTTP client helpers + 6 tests |
+| 14 files across plasmid/, gate/, cloudflare/, etc. | Replace inline chrono/reqwest with helpers |
+
+## Deep Debt: Timestamp Centralization
+
+12 inline `chrono::Utc::now().format(...)` and `.to_rfc3339()` sites → 4 centralized helpers:
+
+| Helper | Format | Sites replaced |
+|--------|--------|---------------|
+| `utc_now_iso8601()` | `2026-07-17T13:45:00Z` | 7 (integrity, drift, depot×2, signing, bootstrap, post_sync, wave×2) |
+| `utc_today()` | `2026-07-17` | 1 (freshness) |
+| `utc_now_rfc3339()` | `2026-07-17T13:45:00.123+00:00` | 3 (canary×2, canary_remote, provision) |
+| `utc_now_compact()` | `20260717T134500` | 2 (sovereignty_ledger×2) |
+
+## Deep Debt: HTTP Client Centralization
+
+8 `reqwest::Client::builder()` sites → 2 centralized helpers:
+
+| Helper | Purpose | Sites replaced |
+|--------|---------|---------------|
+| `http_client(timeout)` | Standard TLS client | 7 (cloudflare, sovereignty×2, checksum, download, signing, digitalocean) |
+| `http_client_insecure(timeout)` | Loopback testing only | 1 (gateway/shadow) |
 
 ## Test Coverage
 
-- **1,083 tests**, 0 failures, 0 clippy warnings (pedantic)
-- 3 new tests: `resolve_hub_ssh_target_returns_option`, `HUB_SSH_TIMEOUT` const assertion, `enroll_dry_run_includes_hub_peer_phase`
-- 7 WG tests migrated to `wg.rs` (unchanged behavior)
+- **1,089 tests**, 0 failures, 0 clippy warnings (pedantic)
+- Commits: `118f116` (hub.peer + WG refactor), `b5e7c51` (timestamp + HTTP dedup)
 
 ## Next
 
