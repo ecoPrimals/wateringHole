@@ -10,9 +10,9 @@
 
 [wave]
 id = 147
-sub = "g"
+sub = "h"
 date = "2026-07-17"
-posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT PATH CLEAR. songBird closed P0 PROXY_PATH + /jsonrpc + discovery schemas. footPrint + esotericWebb ONE STEP from live (sporeGate deploy). 13 deliveries absorbed today."
+posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT LIVE on sporeGate:8090 (Caddy TLS on golgi, API 200, 4h+ uptime). esotericWebb deploy ready. 14 deliveries absorbed today."
 publisher = "eastGate-overwatch"
 
 [gates]

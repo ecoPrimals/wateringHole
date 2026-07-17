@@ -1,14 +1,12 @@
-# ecoPrimals Ecosystem Blurb — Wave 147g
+# ecoPrimals Ecosystem Blurb — Wave 147h
 
-**Date**: Jul 17, 2026 17:35 EDT | **Wave**: 147g | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT PATH CLEAR.**
+**Date**: Jul 17, 2026 18:10 EDT | **Wave**: 147h | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT LIVE.**
 
-**This cascade**: songBird shipped the P0 blocker — `PROXY_PATH` drawbridge
-route for footPrint, `/jsonrpc` endpoint (GAP-037 closed), and all 4 discovery
-schema methods (topology/health/query/bonds). esotericWebb V17 deep debt
-(smart refactoring, clone reduction, transport module extraction). lithoSpore
-deep debt (222 tests, named constants, tracing, feature-gated ring-free ecoBin).
-1 handoff fossilized. footPrint critical path now: sporeGate deploy only.
+**This cascade**: sporeGate deployed footPrint server — **LIVE on sporeGate:8090**
+with Caddy TLS proxy on golgiBody. API returning HTTP 200, 4h+ uptime confirmed.
+`gateway_status = FOOTPRINT_LIVE_PHASE2_COMPLETE`. footPrint path-to-live is
+DONE — all 6 steps complete. sporeGate reporting issues (details incoming).
 
 ---
 
@@ -72,21 +70,21 @@ deep debt (222 tests, named constants, tracing, feature-gated ring-free ecoBin).
 
 ## Path to Live — Downstream Projects
 
-### footPrint → `primals.eco/footprint/` — **ONE STEP FROM LIVE**
+### footPrint → `primals.eco/footprint/` — **LIVE**
 
 | Step | Status | Owner |
 |------|--------|-------|
 | 1. Static client on petalTongue | **LIVE** | — |
 | 2. Server binary (266 tests, 0 debt) | **DONE** | footPrint |
-| 3. Caddy path-based routing | **SHIPPED** | cellMembrane |
-| 4. NUCLEUS systemd service unit | **SHIPPED** | cellMembrane |
-| 5. songBird drawbridge route | **SHIPPED** | songBird |
-| 6. **Deploy on sporeGate** | **NOT DEPLOYED** | sporeGate ops |
+| 3. Caddy path-based routing | **DEPLOYED** | cellMembrane |
+| 4. NUCLEUS systemd service unit | **DEPLOYED** | cellMembrane |
+| 5. songBird drawbridge route | **DEPLOYED** | songBird |
+| 6. Deploy on sporeGate | **LIVE** — 4h+ uptime, API 200 | sporeGate |
 | 7. nestGate CAS for projects | Enhancement (filesystem works) | nestGate |
 | 8. petalTongue WS bridge | Enhancement (non-blocking) | petalTongue |
 
-**One action remains**: Deploy the service unit on sporeGate. Everything
-else is shipped and waiting.
+**footPrint is LIVE.** Server on sporeGate:8090, Caddy TLS on golgiBody.
+Remaining items (7-8) are enhancements, not blockers.
 
 ### esotericWebb → `primals.eco/webb/` — **COMPOSING, DEPLOY READY**
 
@@ -148,7 +146,7 @@ Blocked on design decisions. No primal team has received requests yet.
 | `gate.enroll` fully automated (7 phases) | **SHIPPED** |
 | lithoSpore pack/unpack + initioChem | **SHIPPED** + deep debt clear |
 | esotericWebb live composition (6/9) | **VALIDATED** |
-| footPrint Caddy + NUCLEUS unit | **SHIPPED** |
+| **footPrint LIVE on sporeGate** | **LIVE** — 4h+ uptime |
 | esotericWebb Caddy + NUCLEUS unit | **SHIPPED** |
 | songBird PROXY_PATH + /jsonrpc + discovery | **SHIPPED** |
 | Depot (59 binaries, 4 arch) | **OPERATIONAL** |
