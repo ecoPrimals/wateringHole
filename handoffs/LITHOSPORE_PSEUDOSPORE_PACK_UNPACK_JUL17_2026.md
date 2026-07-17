@@ -58,8 +58,36 @@ Ready for initioChem as first external consumer.
 
 ---
 
+## initioChem Consumer (SHIPPED)
+
+initioChem is now the **first external pseudoSpore consumer**:
+- Added `pseudospore-core` as git dependency from lithoSpore
+- 5 CLI subcommands: `status`, `capabilities`, `view`, `validate`, `unpack`
+- `view` and `validate` use `PseudoSporeEnvelope` API with spec VALID tier checks
+- `unpack` extracts `.tar.gz` tarballs and validates in one step
+- 2 tests (envelope load + pack/unpack round-trip), 0 clippy, 0 fmt, 0 doc
+- Pushed to `origin main` (`328bc9a`)
+
+Pipeline proven end-to-end:
+```
+lithoSpore emit → pack → [distribute] → initioChem unpack → validate → view
+```
+
+## Blurb Status Update (revised)
+
+```
+### lithoSpore → CLI tool
+
+| Step | Status | Owner |
+|------|--------|-------|
+| 1. Silicon Atheism Platform trait | **COMPLETE** (219 tests) | lithoSpore |
+| 2. `pseudospore pack` command | **SHIPPED** | lithoSpore |
+| 3. `pseudospore unpack` command | **SHIPPED** | lithoSpore |
+| 4. initioChem as first consumer | **SHIPPED** (2 tests) | initioChem |
+| 5. USB round-trip validation | NOT STARTED | lithoSpore + primalSpring |
+```
+
 ## Next Steps
 
-1. initioChem consumer — clone garden, wire first pseudoSpore consumption
-2. USB round-trip validation — primalSpring scenario for pack → USB → unpack → validate cycle
-3. Upstream: no blocking needs from lithoSpore on any primal team
+1. USB round-trip validation — primalSpring scenario for pack → USB → unpack → validate cycle
+2. Upstream: no blocking needs from lithoSpore on any primal team
