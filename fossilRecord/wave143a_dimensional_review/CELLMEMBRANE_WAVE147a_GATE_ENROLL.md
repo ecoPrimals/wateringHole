@@ -1,7 +1,7 @@
 # cellMembrane Wave 147a Handoff — `gate.enroll` Automated Mesh Enrollment
 
 **Date**: 2026-07-17 | **Wave**: 147a | **From**: eastGate cellMembrane team
-**Commit**: `467560d`
+**Commits**: `467560d` (gate.enroll), `56f8c0c` (deep debt refinement)
 
 ---
 
