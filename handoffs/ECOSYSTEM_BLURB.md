@@ -1,12 +1,12 @@
-# ecoPrimals Ecosystem Blurb — Wave 146a
+# ecoPrimals Ecosystem Blurb — Wave 146b
 
-**Date**: Jul 17, 2026 07:30 EDT | **Wave**: 146a | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. PHASE 2 14/14 COMPLETE. CAC 6/6 COMPLETE.**
+**Date**: Jul 17, 2026 08:00 EDT | **Wave**: 146b | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. PHASE 2 14/14. CAC 6/6. northGate ENROLLING.**
 
-**This wave**: northGate deployment plan formalized — final validation target.
-benchScale + agentReagents validate before deployment. squirrel credential
-boundary absorbed (`c1203f9f`). Manifest fix: northGate target corrected
-`x86_64-unknown-linux-musl` → `x86_64-pc-windows-gnu`.
+**This wave**: northGate WireGuard peer added to golgiBody — tunnel activating.
+Rust 1.97.1 + GNU target installed. Workspace bootstrapped (June 6 repos).
+Gardens prioritized: lithoSpore/pseudoSpore → projectFOUNDATION → esotericWebb.
+Mesh enrollment convergence opportunity identified for cellMembrane + songBird.
 
 ---
 
@@ -19,92 +19,108 @@ boundary absorbed (`c1203f9f`). Manifest fix: northGate target corrected
 | Content-Addressed Convergence (6/6 layers) | **COMPLETE** |
 | Glacial Shift Criteria (8/8) | **ALL CLEAR** |
 | Depot (59 binaries, 4 architectures) | **OPERATIONAL** |
-| sporePrint root 404 | **RESOLVED** |
+| northGate mesh enrollment | **IN PROGRESS** — WG peer added, tunnel activating |
 
 ---
 
-## northGate Deployment — Final Validation Target
+## northGate Enrollment Status
 
-northGate (Ryzen 9950X3D, RTX 5090, 96GB, Windows) is the final
-ecosystem deployment target. It validates the full pipeline on Windows:
-depot fetch → binary deploy → mesh enrollment → IPC validation.
-
-### Validation Before Deployment
-
-| Tool | What It Validates | Status |
-|------|-------------------|--------|
-| **benchScale** | IPC compliance (liveness, readiness, capabilities) | Available — needs Windows scenario |
-| **agentReagents** | Agent configuration, deployment reagents | Available |
-| **primalSpring** | E2E scenarios (169 scenarios, 1,202 tests) | Available — `full-cross-compile` scenario |
-| **bingoCube** | Validation framework | Available |
-
-### northGate Deployment Steps
-
-1. `membrane plasmid.fetch` — pull 14 Windows ecobins from VPS depot
-2. benchScale: `validate ipc` against fetched binaries (pre-deploy smoke)
-3. Deploy NUCLEUS (songbird.exe → mesh enrollment → biomeOS orchestration)
-4. benchScale: `validate ipc` against live NUCLEUS (post-deploy compliance)
-5. primalSpring: run `full-cross-compile` + `benchscale-ipc-x86-uds` scenarios
-6. Validate cross-gate `capability.call` (northGate ↔ eastGate via mesh)
-
-### Manifest Fix
-
-northGate target was `x86_64-unknown-linux-musl` (copy-paste from Linux gates).
-Corrected to `x86_64-pc-windows-gnu` to match actual hardware.
-
----
-
-## Project Assignment Inventory
-
-### Assigned (active teams)
-
-| Project | Type | Team/Owner |
-|---------|------|------------|
-| 14 primals | primal | Individual primal teams |
-| cellMembrane | garden | cellMembrane team (sporeGate) |
-| projectNUCLEUS | garden | NUCLEUS team |
-| sporePrint | infra | sporePrint team (golgi) |
-| primalSpring | spring | primalSpring team (eastGate) |
-| footPrint | protist | Composition target (flockGate) |
-| wateringHole | infra | eastGate overwatch |
-
-### Gardens — Priority Order (P2, team pickup when ready)
-
-| Priority | Project | What It Enables |
-|----------|---------|-----------------|
-| **1** | **lithoSpore** / pseudoSpore | Portability — makes any work USB-deployable and recreatable. All primals/gardens can become spores. initioChem made the first. |
-| **2** | **projectFOUNDATION** | Data layer — knowledge, thread lineage, validation evidence |
-| **3** | **esotericWebb** | Living game state — leverages petalTongue UI + primals for interactive experience |
-| 4 | initioChem | Computational chemistry (hotSpring consumer, first pseudoSpore) |
-| 5 | helixVision | Sovereign genomics discovery (16S/WGS → taxonomy) |
-| 6 | blueFish | Analytical chemistry ETL |
-
-### Validation Infra (available, need northGate scenarios)
-
-| Project | What |
-|---------|------|
-| benchScale | IPC compliance validation |
-| agentReagents | Agent configuration reagents |
-| bingoCube | Validation framework |
-
-### Not Yet Cloned
-
-| Project | Status |
-|---------|--------|
-| tideGlass | Sovereign GPS platform — Phase 0 |
-| rustChip | Rust toolchain chip |
-
----
-
-## Remaining Work
-
-### bearDog Credential Authority (P2)
-
-| Work | Status |
+| Step | Status |
 |------|--------|
-| HSM → Windows DPAPI backend | **SHIPPED** |
-| HSM → Linux SecretService backend | **SHIPPED** |
-| HSM → Android Keystore backend | NEW |
+| WireGuard installed (winget, v1.1) | **DONE** |
+| Rust 1.97.1 + `x86_64-pc-windows-gnu` target | **DONE** |
+| Keypair generated, config created | **DONE** |
+| Peer added to golgiBody (`10.13.37.8/32`) | **DONE** |
+| Tunnel activated + verified | IN PROGRESS |
+| Repo sync (`git pull` all repos) | BLOCKED on tunnel |
+| Depot fetch (14 Windows ecobins) | NEXT |
+| benchScale IPC validation | NEXT |
+| NUCLEUS deploy + mesh.init | NEXT |
+
+---
+
+## Evolution Roadmap — Near-Term → Future
+
+### NOW: Garden Evolution (Wave 146+)
+
+These gardens are the next focused evolution targets — they extend the
+ecosystem from infrastructure into products and portability.
+
+#### 1. lithoSpore / pseudoSpore — Portability Layer
+
+**What**: Makes any ecosystem artifact USB-deployable and recreatable.
+A pseudoSpore is a self-contained package of code + data + config +
+validation evidence that can bootstrap an environment from nothing.
+
+**Why first**: Everything else benefits from being spore-able. initioChem
+made the first pseudoSpore — proving the pattern. Now it scales to all
+primals, gardens, springs, and compositions.
+
+**Enables**: USB-deployable NUCLEUS, offline field deployment, HPC site
+bootstrapping, disaster recovery, air-gapped science.
+
+#### 2. projectFOUNDATION — Data / Knowledge Layer
+
+**What**: Knowledge layer with thread lineage, validation evidence, and
+structured data foundations. The "memory" that persists across sessions
+and deployments.
+
+**Why second**: lithoSpore packages things; FOUNDATION provides the
+structured knowledge that those packages need to carry. Evidence chains,
+validation records, and lineage data flow through this layer.
+
+**Enables**: Reproducible science, audit trails, structured provenance
+beyond what rhizoCrypt's raw CAS provides.
+
+#### 3. esotericWebb — Living Game State
+
+**What**: UI/agentic interaction layer that leverages petalTongue +
+primals for an interactive experience. A "living game state" where the
+ecosystem's real-time data becomes navigable and interactive.
+
+**Why third**: Once the portability (lithoSpore) and data (FOUNDATION)
+layers exist, esotericWebb can present them as living, interactive
+surfaces. petalTongue provides the rendering; esotericWebb provides
+the game logic and agent interaction patterns.
+
+**Enables**: Interactive ecosystem visualization, agent-navigable state,
+gamified science workflows.
+
+#### 4. initioChem — First PseudoSpore
+
+**What**: Computational chemistry product, hotSpring science consumer.
+Made the first pseudoSpore — validates the lithoSpore pattern on real
+science workflows.
+
+**Relationship**: initioChem IS the proof that lithoSpore works. As
+lithoSpore evolves, initioChem is the first consumer and validator.
+
+### NEAR-TERM: Mesh Enrollment Convergence
+
+The northGate enrollment exposed an ad-hoc pattern: manual key exchange
+via SSH + `wg set`. This should converge to an automated protocol:
+
+| Phase | What | Owner |
+|-------|------|-------|
+| 1 | `cellMembrane gate.enroll` command — automates keygen + peer add | cellMembrane |
+| 2 | songBird mesh enrollment beacon — new node broadcasts, hub validates via BTSP | songBird + bearDog |
+| 3 | Depot carries enrollment config — fresh gate fetches ecobins + mesh config atomically | cellMembrane + depot |
+
+**Key insight**: Multiple HPC nodes on the same LAN need automated
+enrollment. SSH-into-hub doesn't scale. The depot/beacon model lets any
+gate self-enroll given identity proof (bearDog BTSP).
+
+### FUTURE: Full Garden Ecosystem
+
+| Project | When | What |
+|---------|------|------|
+| helixVision | Post-FOUNDATION | Sovereign genomics (16S/WGS → taxonomy) |
+| blueFish | Post-FOUNDATION | Analytical chemistry ETL |
+| tideGlass | Post-footPrint | Sovereign GPS platform (gene perturbation) |
+
+---
+
+## Remaining Infrastructure Work
 
 ### Composition Wiring (P2)
 
@@ -113,16 +129,15 @@ Corrected to `x86_64-pc-windows-gnu` to match actual hardware.
 | footPrint: `WS_PATH` → agent bridge | petalTongue |
 | footPrint: drawbridge wiring (`PROXY_PATH`) | songBird |
 | footPrint: server composition deploy | sporeGate ops |
-| tideGlass: drawbridge bonds | songBird |
 
-### Infrastructure / Ops
+### Ops (P2)
 
-| Item | Priority |
-|------|----------|
-| northGate deployment + validation | **P1** |
-| DNSSEC on primals.eco | P2 |
-| primal.eco inner membrane separation | P2 |
-| RustDesk transient to ironGate + flockGate | P2 |
+| Item | Status |
+|------|--------|
+| DNSSEC on primals.eco | TODO |
+| primal.eco inner membrane separation | TODO |
+| RustDesk transient to ironGate + flockGate | Investigate |
+| bearDog HSM → Android Keystore | NEW |
 
 ---
 
@@ -139,7 +154,8 @@ BLAKE3 + Ed25519 signed. VPS depot serving.
 
 ---
 
-*Wave 146a: northGate formalized as final validation target. benchScale +
-agentReagents + primalSpring validate before deployment. Manifest target
-corrected. 7 garden/infra projects identified as unassigned (available for
-team pickup). All milestones hold: Phase 2 14/14, CAC 6/6, Glacial 8/8.*
+*Wave 146b: northGate enrolling (WG peer added, tunnel activating). Gardens
+prioritized: lithoSpore/pseudoSpore (portability) → projectFOUNDATION (data) →
+esotericWebb (living game state). initioChem validates the spore pattern.
+Mesh enrollment convergence opportunity: cellMembrane gate.enroll + songBird
+beacon protocol for automated multi-node enrollment. All milestones hold.*
