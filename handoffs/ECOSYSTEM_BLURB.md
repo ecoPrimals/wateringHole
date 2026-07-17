@@ -158,8 +158,13 @@ BLAKE3 + Ed25519 signed. VPS depot serving.
 
 ---
 
-*Wave 147a: northGate ENROLLED — 6th mesh node (Windows 11, RTX 5090). 34-repo
-divergence audit complete (~1,250 commits behind from June baseline). Garden
-gate assignments: lithoSpore on ironGate (science), esotericWebb on flockGate
-(UI). Mesh enrollment convergence → cellMembrane gate.enroll evolution target.
-All milestones hold: Phase 2 14/14, CAC 6/6, Glacial 8/8.*
+*Wave 147b: cellMembrane shipped gate.enroll (5 phases, 753L, 8 tests) —
+automated mesh enrollment codifying the northGate AAR. Forgejo-first remote
+standard enforced. songBird final IpcStream cleanup. 3 handoffs fossilized.
+sporePrint deep debt sweep: spore-validate hardcoding evolved to agnostic
+(WELL_KNOWN_PEERS → peer_hints(), transport errors decoupled), dead code
+wired (edges_for_entity → isolated node report, is_warning → validation
+display), constants extracted, 289 tests passing, 0 warnings, 0 clippy.
+Root docs refreshed, content-manifest drift fixed, 1.8GB reclaimed.
+Next: northGate NUCLEUS deploy, garden evolution on ironGate (lithoSpore)
+and flockGate (esotericWebb).*
