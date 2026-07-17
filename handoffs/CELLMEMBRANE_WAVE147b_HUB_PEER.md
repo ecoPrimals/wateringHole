@@ -1,8 +1,8 @@
-# cellMembrane Wave 147b — Hub-Side Peer Addition + WG Refactor
+# cellMembrane Wave 147b — Hub-Side Peer Addition + Deep Debt + Doc Cleanup
 
 **Date:** 2026-07-17
 **From:** eastGate (primalSpring overwatch)
-**Commit:** `118f116` (cellMembrane main)
+**Commits:** `118f116` → `b5e7c51` → `5211016` (cellMembrane main)
 
 ---
 
@@ -77,10 +77,38 @@ Result: `enroll.rs` 503L, `wg.rs` 370L (both well under 800L threshold).
 | `http_client(timeout)` | Standard TLS client | 7 (cloudflare, sovereignty×2, checksum, download, signing, digitalocean) |
 | `http_client_insecure(timeout)` | Loopback testing only | 1 (gateway/shadow) |
 
+## Doc Cleanup (`5211016`)
+
+- `VPS_STATE.md`: 5-node → 6-node mesh (northGate was missing)
+- `IRONGATE_VERIFICATION.md`: 1089 tests, bearDog HSM replaces `share_credentials.sh`
+- `membrane.toml`: header updated from Wave 120/4-node to Wave 147b/6-node
+- `.forgejo/workflows/ci.yml`: removed decommissioned peptidoglycan runner reference
+- `RUNBOOKS.md`: `ecosystem_manifest.toml` replaces `nucleus_config.sh`
+- `plasmid-pipeline.service`: sporeGate replaces peptidoglycan
+- `experiments/` removed (fossil stub — full record in `fossilRecord/`)
+- `cargo clean`: 1.5 GiB reclaimed
+
 ## Test Coverage
 
 - **1,089 tests**, 0 failures, 0 clippy warnings (pedantic)
-- Commits: `118f116` (hub.peer + WG refactor), `b5e7c51` (timestamp + HTTP dedup)
+- All files under 800 lines, zero unsafe, zero mocks in production
+- 3 commits: `118f116` (hub.peer + WG), `b5e7c51` (timestamp + HTTP), `5211016` (doc cleanup)
+
+## Codebase Health Summary
+
+| Metric | Value |
+|--------|-------|
+| Tests | 1,089 |
+| Clippy warnings | 0 (pedantic + nursery) |
+| Unsafe code | Forbidden (`unsafe_code = "forbid"`) |
+| `#[allow]` overrides | 0 |
+| `.unwrap()` in production | 0 |
+| Mocks in production | 0 |
+| TODO/FIXME/HACK markers | 0 |
+| Hardcoded gate names | 0 |
+| Max file size | 762L (harvest.rs) |
+| Inline chrono formatting | 0 (centralized) |
+| Inline reqwest builders | 0 (centralized) |
 
 ## Next
 
