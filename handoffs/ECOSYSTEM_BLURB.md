@@ -1,17 +1,12 @@
-# ecoPrimals Ecosystem Blurb — Wave 145a (revised)
+# ecoPrimals Ecosystem Blurb — Wave 146a
 
-**Date**: Jul 17, 2026 07:30 EDT | **Wave**: 145a (revised) | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. PHASE 2 TRANSPORT: 14/14 COMPLETE. CAC 6/6 COMPLETE.**
+**Date**: Jul 17, 2026 07:30 EDT | **Wave**: 146a | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. PHASE 2 14/14 COMPLETE. CAC 6/6 COMPLETE.**
 
-**This revision**: Full dimension sweep across sporePrint + primalSpring.
-Re-emitted certification manifest (stale LOC/tests). Fixed page counts
-(lab 127, notebooks 98, guidestone 6). Fixed depot arch split to ground
-truth (16/16/13/14 = 59). Resolved primalSpring P0: 4 test failures
-from missing tideGlass in ecosystem_manifest.toml — now registered.
-Fossilized 268 lines of resolved Wave 6-12 content from PRIMAL_GAPS.
-bearDog shipped HSM platform backends (WindowsDpapi + LinuxSecretService).
-songBird at Wave 145b (AAR + last 3 inline cfg gates eliminated).
-sporePrint root 404 on golgi: **RESOLVED** (site serving 200, last-modified today).
+**This wave**: northGate deployment plan formalized — final validation target.
+benchScale + agentReagents validate before deployment. squirrel credential
+boundary absorbed (`c1203f9f`). Manifest fix: northGate target corrected
+`x86_64-unknown-linux-musl` → `x86_64-pc-windows-gnu`.
 
 ---
 
@@ -19,46 +14,96 @@ sporePrint root 404 on golgi: **RESOLVED** (site serving 200, last-modified toda
 
 | Milestone | Status |
 |-----------|--------|
-| Silicon Atheism Phase 1 (cross-compile 14/14) | **COMPLETE** (Wave 142a) |
-| Silicon Atheism Phase 2 (transport abstraction 14/14) | **COMPLETE** (Wave 145a) |
-| Content-Addressed Convergence (6/6 layers) | **COMPLETE** (Wave 144a) |
-| Glacial Shift Criteria (8/8) | **ALL CLEAR** (since Wave 137b) |
+| Silicon Atheism Phase 1 (cross-compile 14/14) | **COMPLETE** |
+| Silicon Atheism Phase 2 (transport abstraction 14/14) | **COMPLETE** |
+| Content-Addressed Convergence (6/6 layers) | **COMPLETE** |
+| Glacial Shift Criteria (8/8) | **ALL CLEAR** |
 | Depot (59 binaries, 4 architectures) | **OPERATIONAL** |
+| sporePrint root 404 | **RESOLVED** |
 
 ---
 
-## Phase 2 Transport — Final Tally (14/14)
+## northGate Deployment — Final Validation Target
 
-| Primal | Pattern | Tests |
-|--------|---------|-------|
-| songBird | `IpcStream` + batch 2 (9 crates) | — |
-| skunkBat | `TransportEndpoint` | — |
-| petalTongue | `PlatformLifecycle` + metrics + WS | — |
-| sweetGrass | `NestGateClient` + `transport_connect` | 1,608 |
-| rhizoCrypt | `TransportHint` deleted, all `TransportEndpoint` | 1,905 |
-| coralReef | client+server de-cfg-gate, `BoundAddr::Local` | 3,647 |
-| loamSpine | endpoint dispatch + framing tests | 1,704 |
-| barraCuda | `TransportListener` unified accept | 5,153 |
-| toadStool | glowplug Vulkan S332-S336 | 9,232 |
-| cellMembrane | `getrandom` CSPRNG + registry filter | 1,073 |
-| squirrel | `TransportEndpoint` + `SecretStore` | 7,171 |
-| biomeOS | `TransportStream` + `TransportListener` | 1,001 |
-| bearDog | raw UDS → `TransportEndpoint` dispatch | — |
-| nestGate | `TransportStream` + `TransportListener` | 3,790 |
+northGate (Ryzen 9950X3D, RTX 5090, 96GB, Windows) is the final
+ecosystem deployment target. It validates the full pipeline on Windows:
+depot fetch → binary deploy → mesh enrollment → IPC validation.
+
+### Validation Before Deployment
+
+| Tool | What It Validates | Status |
+|------|-------------------|--------|
+| **benchScale** | IPC compliance (liveness, readiness, capabilities) | Available — needs Windows scenario |
+| **agentReagents** | Agent configuration, deployment reagents | Available |
+| **primalSpring** | E2E scenarios (169 scenarios, 1,202 tests) | Available — `full-cross-compile` scenario |
+| **bingoCube** | Validation framework | Available |
+
+### northGate Deployment Steps
+
+1. `membrane plasmid.fetch` — pull 14 Windows ecobins from VPS depot
+2. benchScale: `validate ipc` against fetched binaries (pre-deploy smoke)
+3. Deploy NUCLEUS (songbird.exe → mesh enrollment → biomeOS orchestration)
+4. benchScale: `validate ipc` against live NUCLEUS (post-deploy compliance)
+5. primalSpring: run `full-cross-compile` + `benchscale-ipc-x86-uds` scenarios
+6. Validate cross-gate `capability.call` (northGate ↔ eastGate via mesh)
+
+### Manifest Fix
+
+northGate target was `x86_64-unknown-linux-musl` (copy-paste from Linux gates).
+Corrected to `x86_64-pc-windows-gnu` to match actual hardware.
+
+---
+
+## Project Assignment Inventory
+
+### Assigned (active teams)
+
+| Project | Type | Team/Owner |
+|---------|------|------------|
+| 14 primals | primal | Individual primal teams |
+| cellMembrane | garden | cellMembrane team (sporeGate) |
+| projectNUCLEUS | garden | NUCLEUS team |
+| sporePrint | infra | sporePrint team (golgi) |
+| primalSpring | spring | primalSpring team (eastGate) |
+| footPrint | protist | Composition target (flockGate) |
+| wateringHole | infra | eastGate overwatch |
+
+### Partially Assigned (need team clarification)
+
+| Project | Type | Description | Status |
+|---------|------|-------------|--------|
+| tideGlass | protist | Sovereign GPS platform — gene perturbation | Phase 0 — not cloned |
+| benchScale | infra | Lab validation infrastructure | Available, needs northGate scenarios |
+| agentReagents | infra | Agent configuration reagents | Available, needs deployment validation |
+| bingoCube | infra | Validation framework | Available |
+
+### Unassigned (gardens — no active team)
+
+| Project | Type | Description |
+|---------|------|-------------|
+| lithoSpore | garden | Verification chassis, USB-deployable validation |
+| projectFOUNDATION | garden | Knowledge layer, thread lineage, validation evidence |
+| esotericWebb | garden | UI/agentic interaction layer |
+| blueFish | garden | BlueFish analytical chemistry ETL |
+| helixVision | garden | Sovereign genomics discovery (16S/WGS → taxonomy) |
+| initioChem | garden | Computational chemistry (hotSpring science consumer) |
+| rustChip | infra | Rust toolchain chip |
+
+These gardens and infra projects exist in the manifest and have repos but no
+active team assignment. They can be evolved when teams are available or when
+the ecosystem needs their capabilities.
 
 ---
 
 ## Remaining Work
 
-### Platform-Specific Backend Evolution (P2)
+### bearDog Credential Authority (P2)
 
-| Primal | Abstraction | Status |
-|--------|-------------|--------|
-| bearDog | HSM provider → Windows DPAPI backend | **SHIPPED** (Wave 145a) |
-| bearDog | HSM provider → Linux SecretService backend | **SHIPPED** (Wave 145a) |
-| bearDog | HSM provider → Android Keystore backend | NEW |
-| squirrel | SecretStore → Android Keystore backend | Deferred to bearDog IPC |
-| squirrel | SecretStore → Windows Credential Manager | Deferred to bearDog IPC |
+| Work | Status |
+|------|--------|
+| HSM → Windows DPAPI backend | **SHIPPED** |
+| HSM → Linux SecretService backend | **SHIPPED** |
+| HSM → Android Keystore backend | NEW |
 
 ### Composition Wiring (P2)
 
@@ -71,13 +116,12 @@ sporePrint root 404 on golgi: **RESOLVED** (site serving 200, last-modified toda
 
 ### Infrastructure / Ops
 
-| Item | Priority | Status |
-|------|----------|--------|
-| ~~sporePrint rebuild on golgi (root 404)~~ | ~~P0~~ | **RESOLVED** — serving 200 |
-| northGate mesh enrollment | P1 | |
-| DNSSEC on primals.eco | P2 | |
-| primal.eco inner membrane separation | P2 | |
-| RustDesk transient to ironGate + flockGate | P2 | |
+| Item | Priority |
+|------|----------|
+| northGate deployment + validation | **P1** |
+| DNSSEC on primals.eco | P2 |
+| primal.eco inner membrane separation | P2 |
+| RustDesk transient to ironGate + flockGate | P2 |
 
 ---
 
@@ -94,46 +138,7 @@ BLAKE3 + Ed25519 signed. VPS depot serving.
 
 ---
 
-## Dimension Sweep Findings (July 17, 2026)
-
-### Resolved this sweep
-- sporePrint certification manifest: re-emitted (was stale — wrong LOC/tests/date)
-- sporePrint page counts: lab 132→127, notebooks 104→98, guidestone 7→6
-- sporePrint depot arch: "14×4" → ground truth 16/16/13/14
-- sporePrint Zola build: cleared warning (biomeos-validation-summary.md weight)
-- primalSpring 4 test failures: tideGlass registered in ecosystem_manifest.toml
-- primalSpring PRIMAL_GAPS: fossilized Waves 6-12 (268 lines → summary table)
-- primalSpring doc counts: tests 1284→1202, experiments 96→93, depot arch split
-
-### Known remaining drift (P2-P3)
-- primalSpring: 128 clippy warnings (mostly `missing_docs` on struct fields)
-- primalSpring README body: scenario count says 122 (header says 169 correctly)
-- primalSpring: CROSS_SPRING_EVOLUTION.md ecosystem table stale (v0.9.30)
-- sporePrint: 129 entity shortcodes in prose not reflected in page taxonomies
-
----
-
-## Ecosystem Totals (machine-verified July 17, 2026)
-
-| Metric | Value |
-|--------|-------|
-| LOC (Rust) | 3,571,808 |
-| Tests | 116,472 |
-| Repos | 42 |
-| Primals | 15 |
-| Springs | 8 |
-| Organizations | 4 |
-| sporePrint pages | 302 |
-| sporePrint entities | 79 |
-| primalSpring scenarios | 169 |
-| primalSpring lib tests | 1,202 |
-| Depot binaries | 59 (16+16+13+14) |
-
----
-
-*Wave 145a revised: Full dimension sweep complete. sporePrint certification
-re-emitted, page counts corrected, depot arch grounded. primalSpring P0
-(4 test failures) resolved — tideGlass registered in ecosystem manifest.
-bearDog shipped HSM platform backends. 268 lines fossilized from PRIMAL_GAPS.
-All milestones hold: Phase 2 14/14, CAC 6/6, Glacial 8/8. Next: northGate
-mesh enrollment, primalSpring clippy triage, remaining composition wiring.*
+*Wave 146a: northGate formalized as final validation target. benchScale +
+agentReagents + primalSpring validate before deployment. Manifest target
+corrected. 7 garden/infra projects identified as unassigned (available for
+team pickup). All milestones hold: Phase 2 14/14, CAC 6/6, Glacial 8/8.*

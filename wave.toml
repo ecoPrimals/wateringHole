@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 145
-sub = "b"
-date = "2026-07-16"
-posture = "PUBLIC + SOVEREIGN. PHASE 2 TRANSPORT 14/14 COMPLETE. CAC 6/6 COMPLETE. bearDog OS abstraction confirmed. squirrel credential boundary guidance issued. P0: sporePrint 404."
+id = 146
+sub = "a"
+date = "2026-07-17"
+posture = "PUBLIC + SOVEREIGN. PHASE 2 14/14 COMPLETE. CAC 6/6 COMPLETE. northGate final validation target formalized. benchScale + agentReagents + primalSpring validate before deploy. 7 unassigned projects inventoried."
 publisher = "eastGate-overwatch"
 
 [gates]
