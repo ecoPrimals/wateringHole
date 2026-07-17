@@ -2,7 +2,7 @@
 
 **Status**: Active tracking document
 **Phase**: Stadial — PUBLIC + SOVEREIGN
-**Last updated**: 2026-07-16 (Wave 143a — ALL 8 CRITERIA CLEAR. 59 depot binaries across 4 architectures. Silicon Atheism Phase 2 in motion. 3 primals shipping platform abstractions. 38/39 synced.)
+**Last updated**: 2026-07-17 (Wave 147b — ALL 8 CRITERIA CLEAR. 59 depot binaries across 4 architectures. Silicon Atheism Phase 2 COMPLETE 14/14 transport. CAC 6/6 COMPLETE. 6-gate mesh LIVE. gate.enroll SHIPPED.)
 
 ---
 
@@ -11,14 +11,15 @@
 **PUBLIC + SOVEREIGN.** ALL 8 CRITERIA CLEAR FOR STADIAL ENTRY (since Wave 137b).
 
 59 depot binaries across 4 architectures (Windows 14/14 COMPLETE). Silicon Atheism
-Phase 1 complete (14/14 primals compile for all depot architectures). Phase 2 active
-(abstraction over gating — songBird, petalTongue, skunkBat shipping).
+Phase 1 COMPLETE (14/14 primals, all depot architectures). Phase 2 COMPLETE
+(14/14 primals ship trait-based transport abstraction). CAC 6/6 COMPLETE.
 
-3 live surfaces: `primals.eco/footprint/` (GIS), `live.primals.eco` (TOPO-VIS).
-Root `primals.eco` 404 outstanding (sporePrint rebuild needed on golgi).
+4 live surfaces: `primals.eco/footprint/` (GIS), `live.primals.eco` (TOPO-VIS),
+`lab.primals.eco` (JupyterHub). Root `primals.eco` 404 outstanding.
 
+6-gate WireGuard mesh LIVE. gate.enroll automated enrollment shipped.
 Depot: 59 binaries, BLAKE3 + Ed25519 signed, VPS depot serving.
-Cascade: 38/39 synced. 2 active FRAGOs (CAC + Phase 2).
+All repos converged. 0 active impulses.
 
 ---
 
@@ -59,7 +60,7 @@ Exotic validated (songBird): riscv64gc powerpc64le powerpc64 s390x sparc64 arm32
 | golgiBody | VPS, outer membrane | footprint/ + live serving |
 | ironGate | ABG/NF compute, JupyterHub | OPERATIONAL (RustDesk transient) |
 | flockGate | WAN covalent, 16 bonds | OPERATIONAL (RustDesk transient) |
-| northGate | Windows mesh target, RTX 5090 | Enrollment pending |
+| northGate | Windows mesh target, RTX 5090 | ENROLLED (10.13.37.8) |
 | grapheneGate | Pixel 8, StrongBox target | 14/14 Android ecobins |
 | westGate | ZFS cold storage | OFFLINE |
 
@@ -77,12 +78,12 @@ Exotic validated (songBird): riscv64gc powerpc64le powerpc64 s390x sparc64 arm32
 | Item | Owner | Priority | Status |
 |------|-------|----------|--------|
 | sporePrint rebuild on golgi (P0 — 404) | sporePrint/golgi operator | **P0** | DIVERGENCE |
-| CAC layers 4-6 | cellMembrane + rhizoCrypt | P1-P2 | FRAGO issued |
-| Phase 2 platform abstraction ecosystem-wide | all primals | P2 | IN MOTION |
+| gate.enroll hub-side peer automation | cellMembrane | P1 | NEAR-TERM |
+| songBird beacon protocol (BTSP enrollment) | songBird | P1 | NEAR-TERM |
+| northGate NUCLEUS deploy + benchScale | sporeGate | P1 | NEXT |
 | DNSSEC on primals.eco | operator | P2 | TODO |
-| primal.eco inner membrane separation | operator | P2 | TODO |
-| northGate mesh enrollment | sporeGate | P1 | TODO |
-| footPrint server composition | multiple | P2 | TODO |
+| footPrint composition wiring (WS_PATH, PROXY_PATH) | petalTongue, songBird | P2 | TODO |
+| bearDog HSM → Android Keystore | bearDog | P2 | TODO |
 | tideGlass Phase 0 | overwatch + Gonzales | P2 | TODO |
 
 ## Next Glacial Goal: Universal Substrate Evolution

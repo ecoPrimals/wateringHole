@@ -7,10 +7,10 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ## 1. Temporal
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 143a)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 147b)
 - [x] Gate heads published (`heads/*.toml`) — all active gates have recent timestamps
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
-- [x] Active impulses triaged — 5 stale fossilized, 2 active remain (CAC + Phase 2)
+- [x] Active impulses triaged — 0 active, 26 fossilized
 - [x] No stale diverge impulses older than 2 waves
 - [x] ecosystem_manifest.toml version current (v3.1.0)
 
@@ -18,49 +18,60 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 - [x] All primals compile (`cargo check` / `cargo test` green) — all 4 depot arch
 - [x] Zero P1 blockers in any primal
-- [x] All primal repos converged across remotes (38/39 synced)
+- [x] All primal repos converged across remotes (all synced)
 - [x] Transport injection adopted across all non-exempt primals
 - [x] Neural API methods shipped by all primal teams
-- [x] Test counts stable or increasing (toadStool 9,232; coralReef 3,650; sourDough 490)
-- [x] Phase 2 abstraction shipping (songBird IpcStream, petalTongue platform, skunkBat TransportEndpoint)
+- [x] Test counts stable or increasing (~90,000+ ecosystem-wide)
+- [x] Phase 2 abstraction COMPLETE 14/14 — transport layer fully abstracted
+- [x] Silicon Atheism Phase 2 transport 14/14 COMPLETE
+- [x] CAC 6/6 COMPLETE
+- [x] Glacial Shift 8/8 ALL CLEAR
 
 ## 3. Hardware / Topology
 
-- [x] `HARDWARE_INVENTORY.md` reflects current physical state
-- [ ] All online gates reachable — **RustDesk transient to ironGate + flockGate**
+- [x] `ecosystem_manifest.toml` reflects current physical state
+- [x] 6-gate WireGuard mesh LIVE (golgi, sporeGate, eastGate, flockGate, ironGate, northGate)
 - [x] Gate roles match manifest `[topology]` section
-- [x] Network backbone operational (CRS310, MikroTik, switches)
-- [x] Pending hardware actions documented (northGate enrollment, westGate offline)
-- [x] SoloKey / HSM / StrongBox status current
+- [x] Network backbone operational (CRS310 10G trunk, MikroTik, switches)
+- [ ] RustDesk transient to ironGate + flockGate (intermittent — not blocking)
+- [x] northGate enrolled (10.13.37.8, Windows 11, RTX 5090)
+- [x] grapheneGate Tower LIVE (bearDog + songBird + skunkBat, 15/15 depot bins)
+- [ ] westGate OFFLINE (cold storage, 76TB ZFS — not blocking)
+- [ ] fieldGate OFFLINE (dead CMOS — hardware surgery needed)
+- [ ] strandGate enrollment pending (dual EPYC 7452, 256GB, RTX 3090)
+- [ ] biomeGate OFFLINE (kernel recovery)
 
 ## 4. Sovereignty / Membranes
 
-- [ ] K-Derm three-layer model intact (external outer → sovereign outer → inner)
-- [ ] Cloudflare outer membrane operational (wildcard DNS, DDoS protection)
-- [ ] Sovereign outer membrane operational (Caddy TLS, bearDog ACME)
-- [ ] Inner membrane zero-commercial (primal.eco data path)
-- [ ] S1-S4 sovereignty shadows all graduated
-- [ ] DNSSEC enabled on sovereign domains
-- [ ] Cross-membrane validation scenario operational
+- [x] K-Derm three-layer model intact (cytoplasm → periplasm → outer membrane)
+- [x] Forgejo sovereign inner membrane operational (git.primals.eco:2222)
+- [x] Forgejo-first remote standard formalized (origin=Forgejo, github=GitHub)
+- [x] gate.enroll automates membrane-correct enrollment (cellMembrane 467560d)
+- [x] Sovereign outer membrane operational (Caddy TLS, bearDog ACME)
+- [x] Inner membrane zero-commercial (primal.eco data path)
+- [x] S1-S4 sovereignty shadows ALL GRADUATED
+- [ ] DNSSEC enabled on sovereign domains (P2)
+- [ ] primal.eco inner membrane separation (P2)
 
 ## 5. Depot / Build Pipeline
 
-- [x] Depot authority identified and operational (sporeGate — 13-target build authority)
+- [x] Depot authority operational (sporeGate + eastGate — build authorities)
 - [x] ecoBins built as musl-static stripped (post-primordial standard)
-- [x] `checksums.toml` / `signatures.toml` current (59 binaries, Wave 143a)
+- [x] 59 depot binaries, BLAKE3 + Ed25519 signed, VPS depot serving
 - [x] `require-signed` enforced system-wide
 - [x] SIGN-VERIFY-ON-FETCH operational in cellMembrane
-- [x] All 4 depot architectures built for all 14 primals (Windows 14/14 COMPLETE)
-- [ ] Exotic architectures expanded to depot as primal adoption completes
+- [x] All 4 depot architectures: x86_64-musl(16) + aarch64-musl(16) + android(13) + windows(14)
 - [x] Depot layout consistent across depot authority and relay mirrors
 - [x] `plasmid.harvest` → `plasmid.fetch` pipeline tested end-to-end
 - [x] `depot_sync --push` operational (builder → VPS)
+- [ ] Exotic architectures expanded as adoption completes (riscv64, armv7, s390x validated by songBird)
 
 ## 6. Website / Public Surface / Security
 
-- [ ] `primals.eco` returning 200 — **P0: ROOT 404** (sporePrint rebuild needed)
-- [x] `primals.eco/footprint/` returning 200 (GIS composition)
-- [x] `live.primals.eco` returning 200 (petalTongue dashboard)
+- [ ] `primals.eco` root — sporePrint rebuild needed (P0)
+- [x] `primals.eco/footprint/` returning 200 (GIS composition LIVE)
+- [x] `live.primals.eco` returning 200 (petalTongue TOPO-VIS)
+- [x] `lab.primals.eco` returning 200 (JupyterHub on ironGate)
 - [x] Security headers deployed (HSTS, CSP, X-Frame-Options, X-Content-Type)
 - [x] fail2ban active on SSH endpoints
 - [x] Rate limiting configured
@@ -71,134 +82,66 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 - [x] All 8 glacial criteria assessed — ALL CLEAR (since Wave 137b)
 - [x] No regression on previously cleared criteria
-- [x] Next glacial goal (Universal Substrate Evolution) tracked
+- [x] GLACIAL_SHIFT_READINESS.md trimmed and current
 - [ ] SHOW_HN readiness rubric updated
-- [x] GLACIAL_SHIFT_READINESS.md trimmed (551→90 lines, history fossilized)
 
-## 8. Compositions / RustScript / External
+## 8. Compositions / Products / External
 
-- [x] footPrint LIVE at `primals.eco/footprint/` — client operational
-- [ ] tideGlass — Phase 0 not started (Gonzales NF)
+- [x] footPrint LIVE at `primals.eco/footprint/` — client operational (174 tests)
+- [ ] tideGlass — Phase 0 not started
 - [x] Drawbridge weak bond registrations current (songBird 16 bonds)
-- [x] RustScript absorption path documented (gen5/RUSTSCRIPT_LAST_MILE.md)
-- [x] protoKarya projects registered in manifest (Wave 140a — footPrint + tideGlass)
-- [ ] JupyterHub / ABG access — RustDesk transient to ironGate
+- [x] protoKarya projects registered in manifest (footPrint + tideGlass)
 - [x] Composition routing standard applied
-- [ ] primalSpring E2E scenarios for protoKarya compositions (5 identified gaps)
+- [ ] primalSpring `protokarya-wan-deploy` scenario (1/5 remaining)
+- [ ] footPrint composition wiring: WS_PATH (petalTongue), PROXY_PATH (songBird)
+- [x] JupyterHub LIVE on ironGate (lab.primals.eco)
 
 ## 9. Documentation / Fossil Record
 
-- [x] Blurb reflects current wave scope and status (Wave 143a)
-- [x] Stale handoffs fossilized (21 handoffs → fossilRecord/wave143a_dimensional_review/)
-- [x] whitePaper gen5/ current with architectural state
-- [x] wateringHole document count stable (36→15 handoffs, 7→2 impulses)
-- [x] GLACIAL_SHIFT_READINESS.md last-updated date current (trimmed Wave 143a)
+- [x] Blurb reflects current wave scope and status (Wave 147b)
+- [x] Stale handoffs fossilized (25+ handoffs in fossilRecord/)
+- [x] Active handoffs minimal: 3 (blurb, ABG guide, protokarya gaps)
+- [x] Active impulses: 0
+- [x] Team startup blurb template created (TEAM_STARTUP_BLURB_TEMPLATE.md)
+- [x] wateringHole standards stable (~30 standards documents)
 
 ## 10. Cascade Pipeline / Convergence
 
 - [x] `membrane temporal.cascade` runs without hanging
-- [x] All repo remotes converged (38/39 synced — wateringHole diverge resolved)
-- [ ] sporeGate-direct push mechanism — shallow/non-ff rejected (workaround: forgejo)
-- [x] No cyclic divergence in freshness records (Wave 138c — tree hashes)
+- [x] All repo remotes converged (primalSpring divergence resolved Wave 147b)
+- [x] No cyclic divergence in freshness records (tree hashes since Wave 138c)
 - [x] Forgejo mirrors operational (bidirectional repos functional)
+- [x] WaterFall sync pattern formalized (Forgejo-first K-Derm relay chain)
+- [x] gate.enroll automates Forgejo-first remote setup for new gates
 
-## 11. Content-Addressed Convergence (CAC — Newton-Leibniz Pattern)
+## 11. Content-Addressed Convergence (CAC — ALL 6 LAYERS COMPLETE)
 
-- [x] Git repos: tree hashes in freshness.toml (Wave 138c)
-- [x] Depot binaries: BLAKE3 diff in depot_sync --push (Wave 139e)
-- [x] Heads metadata: TreeParity for auto-publish (cellMembrane Wave 143b — tree hashes in publish_gate_heads)
-- [x] Impulses: content-hash deduplication (cellMembrane f4da0ae, Wave 141b)
-- [x] rhizoCrypt: SessionTreeHash primitive SHIPPED (Wave 143b — ce3d534, full RPC wire)
-- [x] Cascade divergence: tree-parity before policy dispatch (cellMembrane Wave 143b — try_local_tree_parity)
-- [ ] primalSpring: content-addressed-convergence scenario (FRAGO issued 140a)
+- [x] L1: Git repos — tree hashes in freshness.toml (Wave 138c)
+- [x] L2: Depot binaries — BLAKE3 diff in depot_sync --push (Wave 139e)
+- [x] L3: Heads metadata — TreeParity for auto-publish (cellMembrane Wave 143b)
+- [x] L4: Impulses — content-hash deduplication (cellMembrane f4da0ae, Wave 141b)
+- [x] L5: rhizoCrypt — SessionTreeHash primitive SHIPPED (Wave 143b — ce3d534)
+- [x] L6: Cascade divergence — tree-parity before policy dispatch (cellMembrane Wave 143b)
 - [x] Pattern formalized in whitePaper/gen5/foundations/ (Wave 140a)
-- **ALL 6 IMPLEMENTATION LAYERS SOLVED (Wave 144a)**
+- [ ] primalSpring: content-addressed-convergence scenario (FRAGO issued)
 
 ## 12. Architecture / OS Parity (Silicon Atheism)
 
-### Depot Architectures (must compile ALL primals)
-
-- [ ] x86_64-unknown-linux-musl — 14/14 primals (reference architecture)
-- [ ] aarch64-unknown-linux-musl — 14/14 primals (Pixel, ARM gates)
-- [ ] aarch64-linux-android — 14/14 primals (grapheneGate, mobile)
-- [ ] x86_64-pc-windows-gnu — 14/14 primals (northGate, Windows mesh)
-
-### Validated Exotic (songBird proven — expand to all primals as adoption completes)
-
-- [ ] riscv64gc-unknown-linux-gnu — open silicon (StarFive, SiFive). P2 depot candidate
-- [ ] armv7-unknown-linux-gnueabihf — RPi/IoT/embedded. P2 depot candidate
-- [ ] arm-unknown-linux-gnueabihf — RPi Zero, industrial PLCs
-- [ ] i686-unknown-linux-gnu — legacy 32-bit desktops, thin clients
-- [ ] powerpc64le-unknown-linux-gnu — IBM POWER9/10 HPC, AI servers
-- [ ] powerpc64-unknown-linux-gnu — IBM POWER classic, PS3 Linux
-- [ ] s390x-unknown-linux-gnu — IBM Z mainframes (banks, airlines)
-- [ ] sparc64-unknown-linux-gnu — Sun/Oracle SPARC T-series
-
-### Blocked / Pending
-
-- [ ] powerpc-unknown-linux-gnu — 32-bit PPC (AtomicU64). Fix: tokio portable-atomic feature
-- [ ] wasm32-wasip2 — browser + edge computing. Untested but Rust target exists
-- [ ] aarch64-unknown-fuchsia — Google capability-based OS
-- [ ] x86_64-unknown-freebsd — BSD servers (Netflix CDN)
-- [ ] riscv64gc-unknown-none-elf — bare metal RISC-V (no OS)
-- [ ] loongarch64-unknown-linux-gnu — Chinese MIPS successor (Loongson)
-
-### Phase 1: Cross-Compile Adoption (COMPLETE — Wave 142a)
-
+### Phase 1: Cross-Compile (COMPLETE — Wave 142a)
 - [x] 14/14 primals compile for all 4 depot architectures
-- [x] `#[cfg(target_os)]` gating applied where needed (Phase 1)
-- [x] portable-atomic feature shipped by cellMembrane
-- [ ] primalSpring: `full-cross-compile` scenario (all primals, all depot architectures)
-- [ ] primalSpring: `depot-architecture-coverage` scenario (track expansion)
 
-### Phase 2: Abstraction Over Gating (ACTIVE — Wave 142a+)
+### Phase 2: Abstraction Over Gating (COMPLETE — Wave 145a, 14/14 Transport)
+- [x] Transport: all 14 primals ship trait-based transport abstraction
+- [x] Device discovery: toadStool glowplug Vulkan backend
+- [x] Platform lifecycle: petalTongue `PlatformLifecycle` trait
+- [ ] Credential store: trait-based (bearDog authority + squirrel cache) — partially done
+- [ ] Health monitoring: trait-based (not procfs-hardcoded) — P2
+- [ ] Subsystem convergence: `primal-transport` crate publication — P2
 
-**Principle**: Don't exclude systems via `#[cfg]` — abstract them to universal
-trait interfaces. Every platform is a first-class evolution substrate.
-
-**Reference implementation**: petalTongue `petal-tongue-platform` (`1af1a98`)
-
-**Shipping primals (Wave 143a)**:
-- songBird: `IpcStream` platform abstraction (`12099d84`)
-- petalTongue: Phase 2 metrics trait + Android paths + WS bridge (`337e1d0`)
-- skunkBat: `TransportEndpoint` adoption
-- toadStool: glowplug `WgpuGpuDiscovery` Vulkan backend (S332)
-
-- [ ] Each primal audits `#[cfg()]` boundaries → identify abstraction candidates
-- [x] Transport: `TransportEndpoint` trait — 10/14 SHIPPED (songBird, skunkBat, sweetGrass, rhizoCrypt, coralReef, loamSpine, barraCuda, petalTongue, toadStool, cellMembrane)
-- [x] Device discovery: trait-based — toadStool glowplug Vulkan backend (S332)
-- [ ] Health monitoring: trait-based (not procfs-hardcoded)
-- [ ] Credential store: trait-based (fs/Keystore/DPAPI backends)
-- [x] Platform lifecycle: trait-based — petalTongue `PlatformLifecycle` trait shipped
-- [ ] No `#[cfg()]` block exceeds 50 lines without extraction to trait + backend module
-- [ ] Each `#[cfg()]` gated module has a corresponding platform backend (not empty stub)
-- [ ] New architectures assessed at each wave boundary
-
-### Code Divergence Tracking (constrained evolution)
-
-`#[cfg()]` boundaries are constrained evolution targets — sites where the
-ecosystem adapts to hardware reality. In Phase 2, these evolve from exclusion
-fences into trait backend selections:
-
-```
-Phase 1: #[cfg(unix)] mod uds;          // excluded on Windows
-Phase 2: impl Transport for Uds { ... } // one backend among many
-```
-
-- [ ] `#[cfg()]` divergences documented per primal (what → which trait)
-- [ ] Platform-specific backends have paired tests on each platform
-- [ ] Fallback paths exist (TCP fallback for transport, stub for missing HW)
-- [ ] Console/embedded targets assessed when hardware acquired
-
-### Subsystem Convergence
-
-- [ ] Transport: `primal-transport` crate published (UDS/NamedPipe/TCP dispatch)
-- [ ] Lifecycle: `ProcessManager` adopted by all signal-using primals
-- [ ] Discovery: `Platform::socket_dir()`, `Platform::config_dir()`, `Platform::bin_dir()`
-- [ ] Data backends: storage access via transport layer (not raw UDS)
-- [ ] Credential store: platform-aware (Keyring/Keychain/DPAPI)
+### Exotic Architectures (validated by songBird, not in depot yet)
+- riscv64gc, powerpc64le, powerpc64, s390x, sparc64, arm32, armv7, i686
 
 ---
 
-*Last used*: Wave 143a (Jul 16, 2026)
+*Last used*: Wave 147b (Jul 17, 2026)
 *Created*: Wave 139a
