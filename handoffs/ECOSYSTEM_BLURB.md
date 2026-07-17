@@ -1,43 +1,53 @@
-# ecoPrimals Ecosystem Blurb — Wave 147h
+# ecoPrimals Ecosystem Blurb — Wave 147i
 
-**Date**: Jul 17, 2026 18:10 EDT | **Wave**: 147h | **From**: eastGate overwatch
+**Date**: Jul 17, 2026 18:30 EDT | **Wave**: 147i | **From**: eastGate overwatch
 **Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT LIVE.**
 
-**This cascade**: sporeGate deployed footPrint server — **LIVE on sporeGate:8090**
-with Caddy TLS proxy on golgiBody. API returning HTTP 200, 4h+ uptime confirmed.
-`gateway_status = FOOTPRINT_LIVE_PHASE2_COMPLETE`. footPrint path-to-live is
-DONE — all 6 steps complete. sporeGate reporting issues (details incoming).
+**This cascade**: sporeGate AAR absorbed. footPrint **confirmed LIVE** — full
+path `primals.eco/footprint/` → client → API → drawbridge wired and serving.
+esotericWebb deploy **BLOCKED** — binary not in depot, repo not on sporeGate,
+flockGate:8080 not responding. sporePrint brief Cloudflare 404 during
+cascade-sense rebuild — resolved naturally, try_files fix holds. primalSpring
+green, KNOWN_DEBT stable at 2.
 
 ---
 
 ## Upstream Primal Demand Signal
 
-### songBird — **3 ITEMS CLOSED THIS WAVE**
+### esotericWebb team (DEPLOY BLOCKER)
+
+| Need | Consumer(s) | Priority | Detail |
+|------|-------------|----------|--------|
+| **Binary in depot** | sporeGate ops | **P0** | esotericWebb binary not in depot. sporeGate can't deploy what it can't fetch. Either add to depot via plasmidBin or provide build instructions. |
+| **Repo access on sporeGate** | sporeGate ops | **P0** | Repo not cloned on sporeGate or eastGate. sporeGate needs source or binary access. |
+| **flockGate:8080 health** | sporeGate ops | P1 | flockGate:8080 (where Webb is reportedly composing) not responding. Investigate — process may have exited. |
+
+### songBird (3 CLOSED, 1 open)
 
 | Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| ~~`PROXY_PATH` drawbridge route~~ | footPrint | ~~P0~~ | **CLOSED** (147f) — `/footprint/*` → `:8090` |
-| ~~Raw JSON-RPC endpoint~~ | esotericWebb | ~~P1~~ | **CLOSED** (147f) — `POST /jsonrpc` on drawbridge |
-| ~~Confirm discovery schemas~~ | esotericWebb | ~~P1~~ | **CLOSED** (147f) — topology/health/query/bonds implemented |
-| BTSP → cellMembrane `gate.enroll` | enrollment | P1 | `mesh.enroll` shipped — integration pending |
+| ~~`PROXY_PATH` drawbridge route~~ | footPrint | ~~P0~~ | **CLOSED** (147f) |
+| ~~Raw JSON-RPC endpoint~~ | esotericWebb | ~~P1~~ | **CLOSED** (147f) |
+| ~~Discovery schemas~~ | esotericWebb | ~~P1~~ | **CLOSED** (147f) |
+| BTSP → cellMembrane `gate.enroll` | enrollment | P1 | Pending integration |
 
 ### squirrel
 
 | Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| Accept `null` params on health methods | esotericWebb | P1 | Open (Webb works around with `{}`) |
+| Accept `null` params on health | esotericWebb | P1 | Open (Webb sends `{}`) |
 
 ### nestGate
 
 | Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| `PROJECTS_PATH` CAS wiring | footPrint | P1 | Open (filesystem fallback works) |
+| `PROJECTS_PATH` CAS wiring | footPrint | P1 | Open (filesystem works) |
 
 ### petalTongue
 
 | Need | Consumer(s) | Priority | Status |
 |------|-------------|----------|--------|
-| `WS_PATH` agent bridge | footPrint | P1 | Open (non-blocking for basic use) |
+| `WS_PATH` agent bridge | footPrint | P1 | Open (non-blocking) |
 
 ### bearDog
 
@@ -72,67 +82,66 @@ DONE — all 6 steps complete. sporeGate reporting issues (details incoming).
 
 ### footPrint → `primals.eco/footprint/` — **LIVE**
 
+| Step | Status |
+|------|--------|
+| 1. Static client on petalTongue | **LIVE** |
+| 2. Server binary (266 tests, 0 debt) | **DEPLOYED** |
+| 3. Caddy path-based routing | **DEPLOYED** |
+| 4. NUCLEUS systemd service unit | **DEPLOYED** |
+| 5. songBird drawbridge route | **DEPLOYED** |
+| 6. sporeGate deploy | **LIVE** — 4h+ uptime, API 200 |
+| 7. nestGate CAS for projects | Enhancement |
+| 8. petalTongue WS bridge | Enhancement |
+
+**Full path live**: `internet → golgi (Caddy TLS) → WG → sporeGate (footPrint:8090) → drawbridge`
+
+### esotericWebb → `primals.eco/webb/` — **DEPLOY BLOCKED**
+
+V17 code is ready. 6/9 primals were connected on flockGate. Deploy blocked
+on logistics — not code.
+
 | Step | Status | Owner |
 |------|--------|-------|
-| 1. Static client on petalTongue | **LIVE** | — |
-| 2. Server binary (266 tests, 0 debt) | **DONE** | footPrint |
-| 3. Caddy path-based routing | **DEPLOYED** | cellMembrane |
-| 4. NUCLEUS systemd service unit | **DEPLOYED** | cellMembrane |
-| 5. songBird drawbridge route | **DEPLOYED** | songBird |
-| 6. Deploy on sporeGate | **LIVE** — 4h+ uptime, API 200 | sporeGate |
-| 7. nestGate CAS for projects | Enhancement (filesystem works) | nestGate |
-| 8. petalTongue WS bridge | Enhancement (non-blocking) | petalTongue |
-
-**footPrint is LIVE.** Server on sporeGate:8090, Caddy TLS on golgiBody.
-Remaining items (7-8) are enhancements, not blockers.
-
-### esotericWebb → `primals.eco/webb/` — **COMPOSING, DEPLOY READY**
-
-V17 shipping. 6/9 primals connected. songBird now reachable via `/jsonrpc`.
-
-| Step | Status | Owner |
-|------|--------|-------|
-| 1. Binary compiled (471+ tests) | **DONE** | esotericWebb |
+| 1. Binary compiled (471+ tests) | **DONE** (on flockGate only) | esotericWebb |
 | 2. Caddy block for `/webb/` | **SHIPPED** | cellMembrane |
 | 3. NUCLEUS systemd service unit | **SHIPPED** | cellMembrane |
 | 4. songBird discovery schemas | **SHIPPED** | songBird |
 | 5. songBird `/jsonrpc` endpoint | **SHIPPED** | songBird |
-| 6. Live primal composition | **6/9 CONNECTED** | esotericWebb |
-| 7. **Deploy on sporeGate** | **NOT DEPLOYED** | sporeGate ops |
-| 8. bearDog crypto sig confirmation | Waiting | bearDog |
-| 9. sweetGrass braid confirmation | Waiting | sweetGrass |
+| 6. **Binary in depot** | **MISSING** — not in plasmidBin | esotericWebb |
+| 7. **Repo on sporeGate/eastGate** | **MISSING** — not cloned | esotericWebb |
+| 8. **flockGate:8080 health** | **NOT RESPONDING** | esotericWebb |
+| 9. Deploy on sporeGate | BLOCKED on 6+7 | sporeGate ops |
 
-**One action remains**: Deploy on sporeGate. songBird P0/P1 blockers
-cleared. Confirmation requests are non-blocking.
+**esotericWebb team**: Either push the binary to depot via `plasmidBin push`,
+or ensure the repo is cloneable from Forgejo so sporeGate can build it.
+Also investigate flockGate:8080 — the composition that was running may have
+exited.
 
 ### lithoSpore → CLI tool — **PIPELINE PROVEN, DEEP DEBT CLEAR**
 
-| Step | Status | Owner |
-|------|--------|-------|
-| 1. Silicon Atheism Platform trait | **COMPLETE** | lithoSpore |
-| 2. `pseudospore pack` command | **SHIPPED** | lithoSpore |
-| 3. `pseudospore unpack` command | **SHIPPED** | lithoSpore |
-| 4. initioChem first consumer | **SHIPPED** | initioChem |
-| 5. Deep debt evolution | **DONE** (222 tests, ring-free ecoBin, tracing) | lithoSpore |
-| 6. USB round-trip validation | NOT STARTED | lithoSpore + primalSpring |
+| Step | Status |
+|------|--------|
+| 1. Silicon Atheism Platform trait | **COMPLETE** |
+| 2-3. pseudospore pack/unpack | **SHIPPED** |
+| 4. initioChem first consumer | **SHIPPED** |
+| 5. Deep debt (222 tests, ring-free ecoBin) | **DONE** |
+| 6. USB round-trip validation | NOT STARTED |
 
 ### projectFOUNDATION → TBD (NOT STARTED)
-
-Blocked on design decisions. No primal team has received requests yet.
 
 ---
 
 ## Ecosystem Test Health
 
-| Project | Tests | Clippy | Unsafe | Debt |
-|---------|-------|--------|--------|------|
-| cellMembrane | 1,100 | 0 | forbidden | 0 |
-| esotericWebb | 471+ | 0 | forbidden | 0 |
-| songBird | full pass | 0 | forbidden | 0 |
-| footPrint | 266 | clean | N/A (TS) | 0 |
-| lithoSpore | 222 | 0 | forbidden | 0 |
-| sporePrint | 289 | 0 | forbidden | 0 |
-| primalSpring | 1,203 | 0 | — | 1 |
+| Project | Tests | Clippy | Debt |
+|---------|-------|--------|------|
+| cellMembrane | 1,100 | 0 | 0 |
+| esotericWebb | 471+ | 0 | 0 |
+| songBird | full pass | 0 | 0 |
+| footPrint | 266 | clean | 0 |
+| lithoSpore | 222 | 0 | 0 |
+| sporePrint | 289 | 0 | 0 |
+| primalSpring | 1,203 | 0 | 2 |
 
 ---
 
@@ -144,10 +153,8 @@ Blocked on design decisions. No primal team has received requests yet.
 | Content-Addressed Convergence (6/6) | **COMPLETE** |
 | Glacial Shift (8/8) | **ALL CLEAR** |
 | `gate.enroll` fully automated (7 phases) | **SHIPPED** |
-| lithoSpore pack/unpack + initioChem | **SHIPPED** + deep debt clear |
-| esotericWebb live composition (6/9) | **VALIDATED** |
-| **footPrint LIVE on sporeGate** | **LIVE** — 4h+ uptime |
-| esotericWebb Caddy + NUCLEUS unit | **SHIPPED** |
+| lithoSpore pack/unpack + initioChem | **SHIPPED** |
+| **footPrint LIVE** | **LIVE** — first composition product on sovereign mesh |
 | songBird PROXY_PATH + /jsonrpc + discovery | **SHIPPED** |
 | Depot (59 binaries, 4 arch) | **OPERATIONAL** |
 
@@ -156,18 +163,19 @@ Blocked on design decisions. No primal team has received requests yet.
 ## 6-Gate Mesh (LIVE)
 
 ```
-golgiBody (10.13.37.1) — hub, VPS, relay
-  ├─ sporeGate (10.13.37.2) — builder, [DEPLOY TARGET: footPrint + Webb]
+golgiBody (10.13.37.1) — hub, VPS, Caddy TLS
+  ├─ sporeGate (10.13.37.2) — builder, footPrint:8090 [LIVE]
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
-  ├─ flockGate (10.13.37.6) — esotericWebb V17 [6/9 live]
+  ├─ flockGate (10.13.37.6) — esotericWebb [NOT RESPONDING]
   ├─ ironGate  (10.13.37.7) — compute, lithoSpore [pipeline proven]
   └─ northGate (10.13.37.8) — Windows, RTX 5090
 ```
 
 ---
 
-*Wave 147g: songBird closed all 3 P0/P1 demand-signal items (PROXY_PATH
-drawbridge, /jsonrpc endpoint, discovery schemas). esotericWebb V17 deep
-debt. lithoSpore deep debt (222 tests, ring-free ecoBin). footPrint and
-esotericWebb both ONE STEP from live — sporeGate deploy is the sole remaining
-action. 13 deliveries absorbed today across 7 sub-waves.*
+*Wave 147i: sporeGate AAR absorbed. footPrint confirmed LIVE (full path
+wired and serving). esotericWebb deploy BLOCKED — binary not in depot,
+repo not on sporeGate, flockGate:8080 not responding. esotericWebb team
+needs to push binary to depot or provide repo access. sporePrint 404
+resolved. primalSpring green (KNOWN_DEBT 2). 14 deliveries + 1 AAR
+absorbed today across 8 sub-waves.*

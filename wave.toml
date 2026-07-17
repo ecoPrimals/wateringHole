@@ -10,9 +10,9 @@
 
 [wave]
 id = 147
-sub = "h"
+sub = "i"
 date = "2026-07-17"
-posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT LIVE on sporeGate:8090 (Caddy TLS on golgi, API 200, 4h+ uptime). esotericWebb deploy ready. 14 deliveries absorbed today."
+posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT LIVE. esotericWebb deploy BLOCKED (binary not in depot, repo not on sporeGate, flockGate:8080 not responding). primalSpring KNOWN_DEBT 2."
 publisher = "eastGate-overwatch"
 
 [gates]
