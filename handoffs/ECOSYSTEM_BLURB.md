@@ -108,5 +108,10 @@ BLAKE3 + Ed25519 signed. VPS depot serving.
 *Wave 147b: cellMembrane shipped gate.enroll (5 phases, 753L, 8 tests) —
 automated mesh enrollment codifying the northGate AAR. Forgejo-first remote
 standard enforced. songBird final IpcStream cleanup. 3 handoffs fossilized.
-4 active handoffs remain. Next: northGate NUCLEUS deploy, garden evolution
-on ironGate (lithoSpore) and flockGate (esotericWebb).*
+sporePrint deep debt sweep: spore-validate hardcoding evolved to agnostic
+(WELL_KNOWN_PEERS → peer_hints(), transport errors decoupled), dead code
+wired (edges_for_entity → isolated node report, is_warning → validation
+display), constants extracted, 289 tests passing, 0 warnings, 0 clippy.
+Root docs refreshed, content-manifest drift fixed, 1.8GB reclaimed.
+Next: northGate NUCLEUS deploy, garden evolution on ironGate (lithoSpore)
+and flockGate (esotericWebb).*
