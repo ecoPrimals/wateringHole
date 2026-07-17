@@ -906,7 +906,7 @@ repos = [
     "cellMembrane",
 ]
 
-# northGate — gaming/hobby gate (Windows), family validation LAST
+# northGate — gaming/hobby gate (Windows 11 Pro), family validation LAST
 [gates.northGate]
 target = "x86_64-pc-windows-gnu"
 mobility = "fixed"
@@ -914,10 +914,17 @@ bind_mode = "tcp_only"
 composition = "full"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
-zone = "backbone"
-hub_port = "etherX"
+zone = "house1"
+hub_port = "ethernet"
 link_speed_mbps = 2500
-notes = "Ryzen 9950X3D + RTX 5090. CRS310 backbone zone. Family validation — spare compute. LAST priority."
+ipv4 = "192.168.4.147"
+subnet = "192.168.4.0/22"
+router = "GL.iNet GL-MT6000"
+dns_suffix = "primals.local"
+os = "Windows 11 Pro Build 26100"
+workspace = 'C:\Users\mokke\Development\ecoPrimals'
+depot_drive = "M:"
+notes = "Ryzen 9950X3D + RTX 5090 + 96GB. GL-MT6000 router (house1). 837GB free on M:. RustDesk running. WireGuard needed for mesh. LAST priority."
 gate_class = "family"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
