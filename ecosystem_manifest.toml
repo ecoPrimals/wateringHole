@@ -644,7 +644,23 @@ github_repo = "protoKarya/footPrint"
 gate_owner = "flockGate"
 stack = "typescript"
 evolution_target = "composition"
+composition_url = "https://primals.eco/footprint/"
 notes = "NOT a primal. Express server disappears — primals absorb backend. Browser frontend is the product. RustScript is evidence for pure Rust, not a bridge to it."
+
+[repos.tideGlass]
+org = "protoKarya"
+local_path = "protists/tideGlass"
+membrane = "trailing-mirror"
+sync_source = "github"
+sync_priority = "standard"
+category = "protist"
+description = "Sovereign GPS platform — gene perturbation simulator for drug repurposing. barraCuda linear algebra, petalTongue visualization, songBird drawbridge bonds (LINCS, GEO, ChEMBL)."
+github_repo = "protoKarya/tideGlass"
+gate_owner = "flockGate"
+stack = "typescript"
+evolution_target = "composition"
+composition_url = "https://tideglass.primals.eco/"
+notes = "Phase 0 — GPS core. Science data via drawbridge bonds. Future: sovereign pallet hardware."
 
 # ═══════════════════════════════════════════════════════════════════
 # Composition Profiles — Fractal Deployment Patterns
