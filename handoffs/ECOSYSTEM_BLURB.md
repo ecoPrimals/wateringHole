@@ -7,7 +7,9 @@
 routing for `/api/*`, `/ws`, static — closing upstream gap from footPrint 145b).
 esotericWebb shipped V15 (373 tests, 9 domains, 32 bridge methods, voice
 interjection engine). footPrint shipped server security hardening (243 tests).
-sporePrint thesis content updating (uncommitted). 2 handoffs fossilized.
+sporePrint thesis metrics evolved to live shortcodes (43 entity_stat/total_stat
+calls replacing hardcoded numbers — committed + pushed). primalSpring stale
+KNOWN_DEBT comment cleaned. 2 handoffs fossilized.
 
 ---
 
@@ -124,6 +126,8 @@ BLAKE3 + Ed25519 signed. VPS depot serving.
 *Wave 147d: cellMembrane Caddy blocks for footPrint (path-based routing,
 typed GateRole variants, 1096 tests). esotericWebb V15 shipped (373 tests,
 9 domains, 32 bridge methods, voice interjection engine, RulesetCert
-validation). footPrint server security hardened (243 tests). 2 handoffs
-fossilized. 4 active remain. Gardens are evolving — esotericWebb is the
-first garden with active upstream requests to primal teams.*
+validation). footPrint server security hardened (243 tests). sporePrint
+overwatch AAR: thesis metrics evolved to 43 live shortcodes, deep debt
+sweep (289 tests, agnostic peer_hints), primalSpring KNOWN_DEBT cleaned.
+5 active handoffs. Gardens evolving — esotericWebb first garden with
+active upstream requests to primal teams.*
