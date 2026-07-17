@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 146
-sub = "b"
+id = 147
+sub = "a"
 date = "2026-07-17"
-posture = "PUBLIC + SOVEREIGN. PHASE 2 14/14. CAC 6/6. northGate enrolling (WG peered). Gardens prioritized: lithoSpore → FOUNDATION → esotericWebb. Mesh enrollment convergence identified."
+posture = "PUBLIC + SOVEREIGN. 6-GATE MESH LIVE. northGate enrolled (10.13.37.8, Windows 11). 34-repo divergence audit: ~1,250 commits behind from June. Gardens assigned: lithoSpore→ironGate, esotericWebb→flockGate."
 publisher = "eastGate-overwatch"
 
 [gates]
