@@ -1,13 +1,13 @@
-# ecoPrimals Ecosystem Blurb — Wave 147b
+# ecoPrimals Ecosystem Blurb — Wave 147a
 
-**Date**: Jul 17, 2026 09:10 EDT | **Wave**: 147b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. GATE.ENROLL SHIPPED.**
+**Date**: Jul 17, 2026 08:15 EDT | **Wave**: 147a | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. northGate ENROLLED. 6-GATE MESH LIVE.**
 
-**This cascade**: cellMembrane shipped `gate.enroll` — automated mesh enrollment
-(5 phases, 753L, 8 tests). Codifies the northGate AAR into a repeatable command:
-manifest.resolve → wg.keygen → wg.config → mesh.verify → forgejo.verify →
-git.remotes (Forgejo-first). songBird completed final cfg-gated IPC → IpcStream
-cleanup. 3 handoffs fossilized. northGate repos syncing.
+**This wave**: **northGate mesh enrollment COMPLETE.** WireGuard tunnel active
+(10.13.37.8, handshake confirmed). Forgejo SSH verified. 34-repo divergence
+audit: 30 repos behind (~1,250 commits from June 5-6 baseline). All remotes
+are GitHub — Forgejo mirrors not yet added. Pulling all repos to current.
+Garden gate assignments formalized.
 
 ---
 
@@ -18,39 +18,16 @@ cleanup. 3 handoffs fossilized. northGate repos syncing.
 | Silicon Atheism Phase 2 (14/14) | **COMPLETE** |
 | Content-Addressed Convergence (6/6) | **COMPLETE** |
 | Glacial Shift (8/8) | **ALL CLEAR** |
-| `gate.enroll` automated enrollment | **SHIPPED** (cellMembrane `467560d`) |
-| northGate mesh enrollment | **COMPLETE** — 6th node |
+| northGate mesh enrollment | **COMPLETE** — 6th mesh node |
 | Depot (59 binaries, 4 arch) | **OPERATIONAL** |
 
 ---
 
-## `gate.enroll` — Mesh Enrollment Convergence
-
-`membrane gate.enroll <name> [--dry-run]` replaces the ad-hoc manual
-enrollment process (northGate took ~30 min of operator SSH + key exchange).
-
-| Phase | What |
-|-------|------|
-| `manifest.resolve` | Read gate profile from manifest — IP, transport, roles |
-| `wg.keygen` | Generate WireGuard keypair (`0600` perms) |
-| `wg.config` | Render wg-quick config from manifest peers |
-| `mesh.verify` | Ping hub via WireGuard tunnel |
-| `forgejo.verify` | SSH test to Forgejo via mesh |
-| `git.remotes` | Configure Forgejo-first remotes on all repos |
-
-**Enrollment standard**: `origin` = Forgejo (inner membrane), `github` =
-GitHub (outer membrane). New gates are sovereign-first from minute zero.
-
-**Next**: Hub-side peer addition (currently requires SSH to golgiBody).
-songBird beacon protocol for trustless enrollment with BTSP identity proof.
-
----
-
-## 6-Gate Mesh (LIVE)
+## 6-Gate Mesh Topology (LIVE)
 
 ```
 golgiBody (10.13.37.1) — hub, VPS, relay
-  ├─ sporeGate (10.13.37.2) — builder, site router
+  ├─ sporeGate (10.13.37.2) — builder, site router (house1)
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
   ├─ flockGate (10.13.37.6) — WAN gate, 16 bonds
   ├─ ironGate  (10.13.37.7) — compute, ABG, JupyterHub
@@ -59,36 +36,112 @@ golgiBody (10.13.37.1) — hub, VPS, relay
 
 ---
 
-## Active Evolution Targets
+## northGate Divergence AAR
 
-### Gardens (P1 — assigned to gates)
+34 repos audited. 30 behind origin (baseline: June 5-6, 2026).
 
-| Garden | Gate | Status |
-|--------|------|--------|
-| **lithoSpore** / pseudoSpore | ironGate | Portability layer — makes any work USB-deployable. initioChem proved the pattern. |
-| **esotericWebb** | flockGate | Living game state — petalTongue UI + primals interactive experience |
-| **projectFOUNDATION** | TBD | Data/knowledge layer — thread lineage, validation evidence |
-| initioChem | ironGate | Computational chemistry, first pseudoSpore consumer |
+### Top divergence (>50 commits behind)
 
-### Infrastructure (P1-P2)
+| Repo | Behind | Notes |
+|------|--------|-------|
+| primalSpring | 204 | Heaviest evolution — scenarios, tests, wave tracking |
+| sporePrint | 163 | Site rebuilds, sidebar slim, identity anchoring |
+| songBird | 111 | IpcStream, drawbridge, mesh federation |
+| bearDog | 90 | Transport, HSM backends, test extraction |
+| plasmidBin | 64 | Depot evolution, multi-target checksums |
+| toadStool | 59 | Glowplug Vulkan, S329-S336 deep debt |
+| petalTongue | 54 | petal-tongue-platform, 163 unwrap elimination |
+| nestGate | 52 | Sessions 109-118, ErrorContextExt |
 
-| Item | Status |
-|------|--------|
-| northGate: repo sync + Forgejo-first remotes + depot fetch | IN PROGRESS |
-| northGate: NUCLEUS deploy + benchScale validation | NEXT |
-| `gate.enroll` hub-side peer addition (automation) | NEAR-TERM |
-| songBird beacon protocol (BTSP self-enrollment) | NEAR-TERM |
-| footPrint composition wiring (WS_PATH, PROXY_PATH) | P2 |
-| bearDog HSM → Android Keystore | P2 |
-| DNSSEC on primals.eco | P2 |
+### Findings
 
-### Future
+- **All remotes are GitHub** — no Forgejo remotes configured on northGate
+- **whitePaper dirty**: 3 files (gen5/README, collaborators/README, MITCHELL_BLUEGATE.md)
+- **lithoSpore**: HTTPS remote (not SSH) — anomaly from bootstrap
+- **Repos pulling to current** — northGate agent executing now
 
-| Item | When |
+### Convergence action items
+
+| Action | Owner |
+|--------|-------|
+| Pull all 30 repos to current | northGate agent (in progress) |
+| Add Forgejo as second remote on key repos | northGate agent (next) |
+| Resolve whitePaper dirty state | operator (stash + pull) |
+| Fix lithoSpore remote to SSH | northGate agent |
+
+---
+
+## Gate Assignments — Garden Evolution
+
+| Garden | Gate | Why |
+|--------|------|-----|
+| **lithoSpore** / pseudoSpore | **ironGate** | Co-located with ABG work, science validation, JupyterHub |
+| **esotericWebb** | **flockGate** | Co-located with footPrint, UI/interaction layer |
+| **projectFOUNDATION** | TBD | Data layer — could be ironGate (science) or eastGate (overwatch) |
+| initioChem | ironGate | hotSpring consumer, first pseudoSpore — co-located with science |
+
+---
+
+## Evolution Roadmap
+
+### NOW (Wave 147+)
+
+| Work | Gate | Priority |
+|------|------|----------|
+| northGate repo sync + depot fetch | northGate | **P0** |
+| lithoSpore/pseudoSpore evolution | ironGate | P1 |
+| esotericWebb + petalTongue UI | flockGate | P1 |
+| projectFOUNDATION data layer | TBD | P1 |
+| initioChem pseudoSpore validation | ironGate | P2 |
+
+### NEAR-TERM
+
+| Work | Owner |
+|------|-------|
+| `cellMembrane gate.enroll` — automated mesh enrollment | cellMembrane |
+| songBird beacon protocol — BTSP-validated self-enrollment | songBird + bearDog |
+| Depot carries enrollment config — atomic fetch + mesh | cellMembrane + depot |
+| northGate NUCLEUS deploy + benchScale validation | sporeGate ops |
+
+### ENROLLMENT STANDARD: Forgejo-First Remotes
+
+New gates joining the mesh MUST configure git remotes sovereign-first:
+
+```
+origin = ssh://git@git.primals.eco:2222/<org>/<repo>.git   (Forgejo — internal)
+github = git@github.com:<org>/<repo>.git                   (GitHub — external mirror)
+```
+
+**Why**: The forge is on the mesh. A student enrolling a laptop, an HPC node
+contracting compute, a field deployment bootstrapping from USB — all reach
+Forgejo directly via WireGuard. GitHub is the external membrane for public
+discovery. Internal operations pull from the sovereign forge.
+
+This is the git-layer expression of the K-Derm membrane model:
+- `origin` (Forgejo) = inner membrane (sovereign, mesh-reachable)
+- `github` = outer membrane (public, commercial)
+
+`cellMembrane gate.enroll` should automate this: generate WireGuard keys,
+peer with hub, configure git remotes Forgejo-first, fetch depot, deploy.
+
+### FUTURE
+
+| Work | When |
 |------|------|
 | helixVision (sovereign genomics) | Post-FOUNDATION |
 | blueFish (analytical chemistry) | Post-FOUNDATION |
 | tideGlass (sovereign GPS) | Post-footPrint |
+
+---
+
+## Remaining Infrastructure
+
+| Item | Priority |
+|------|----------|
+| footPrint composition wiring (WS_PATH, PROXY_PATH) | P2 |
+| bearDog HSM → Android Keystore | P2 |
+| DNSSEC on primals.eco | P2 |
+| primal.eco inner membrane separation | P2 |
 
 ---
 
@@ -105,8 +158,8 @@ BLAKE3 + Ed25519 signed. VPS depot serving.
 
 ---
 
-*Wave 147b: cellMembrane shipped gate.enroll (5 phases, 753L, 8 tests) —
-automated mesh enrollment codifying the northGate AAR. Forgejo-first remote
-standard enforced. songBird final IpcStream cleanup. 3 handoffs fossilized.
-4 active handoffs remain. Next: northGate NUCLEUS deploy, garden evolution
-on ironGate (lithoSpore) and flockGate (esotericWebb).*
+*Wave 147a: northGate ENROLLED — 6th mesh node (Windows 11, RTX 5090). 34-repo
+divergence audit complete (~1,250 commits behind from June baseline). Garden
+gate assignments: lithoSpore on ironGate (science), esotericWebb on flockGate
+(UI). Mesh enrollment convergence → cellMembrane gate.enroll evolution target.
+All milestones hold: Phase 2 14/14, CAC 6/6, Glacial 8/8.*
