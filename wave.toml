@@ -10,9 +10,9 @@
 
 [wave]
 id = 150
-sub = "d"
+sub = "e"
 date = "2026-07-18"
-posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. THREE-DOMAIN MODEL REFINED. primals.eco = intra-membrane (root → sporeprint.primals.eco). primal.eco = inner membrane (personal). nestgate.io = data service point. Deployment chain traced. 5 P0 routing items. DNSSEC: sovereign enabled, primals.eco P2."
+posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. ALL P0 CODE COMPLETE. Cascade: cellMembrane subdomain routing shipped, footPrint CSP shipped, songBird mesh.enroll ACTIVE, nestGate CAS COMPLETE. 3/4 P1 resolved. Ops deployment (Caddy + systemd) is the only remaining barrier to live products."
 publisher = "eastGate-overwatch"
 
 [gates]
