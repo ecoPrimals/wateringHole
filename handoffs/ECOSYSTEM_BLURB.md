@@ -48,8 +48,7 @@ fallback shipped. Caddy routes all traffic to footPrint:8090 (Express
 handles static + `/ext` proxy + `/api/*`). `/ws` → petalTongue:8080.
 
 **Remaining verification**: Map tiles (CSP allows tile domains — visual
-check needed). CAS consumer wiring (nestGate says COMPLETE, consumer
-side unverified).
+check needed).
 
 ### esotericWebb → `webb.primals.eco` — **V19.1, LIVE**
 
@@ -80,7 +79,8 @@ operational.
 | ~~BTSP `mesh.enroll`~~ | songBird | **ACTIVE** (Wave 150e) |
 | ~~`WS_PATH` agent bridge~~ | petalTongue | **SHIPPED** (Wave 150g — `/ws` on :8080, 7 methods, E2E tested) |
 
-footPrint consumer-side wiring for CAS + WS is the remaining integration step.
+footPrint consumer-side wiring for CAS + WS is **COMPLETE** (Wave 150g, commit 31476a2).
+petalTongue JSON-RPC client + nestGate CAS dual-write wired. 468 tests.
 
 ### P2 — Ecosystem Quality
 
@@ -90,7 +90,7 @@ footPrint consumer-side wiring for CAS + WS is the remaining integration step.
 | esotericWebb depot binary | sporeGate ops | V19.1 local build, not in depot |
 | `loginctl enable-linger` | flockGate ops | systemd user unit survives logout |
 | `primals.eco` DNSSEC | ops / Cloudflare | Enable via API |
-| footPrint CAS consumer verify | footPrint | nestGate says done, consumer unverified |
+| footPrint CAS consumer verify | footPrint | **WIRED** (dual-write to CAS, 31476a2) |
 | `footprint_composition.toml` URL | cellMembrane | Still has old path-based URL |
 | cellMembrane `gate.enroll` → `mesh.enroll` | cellMembrane | Call songBird's mesh.enroll |
 | HSM → Android Keystore | bearDog | grapheneGate mobile credential backend |
