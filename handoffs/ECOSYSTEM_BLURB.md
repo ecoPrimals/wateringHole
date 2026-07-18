@@ -79,7 +79,8 @@ Live visual rendering via petalTongue `ui.render` confirmed working
 | esotericWebb V21 depot binary | sporeGate ops | Local build, not in depot |
 | `loginctl enable-linger` | flockGate ops | systemd user unit persistence |
 | `primals.eco` DNSSEC | ops / Cloudflare | Enable via API |
-| petalTongue SceneGraph vs `ui.render` | petalTongue | Narrative composition format decision |
+| petalTongue scene unification (2D-as-3D-slice) | petalTongue | Transform3D on SceneNode, Camera+projection, grammar z-wiring (see handoff) |
+| esotericWebb `ui.render` → `visualization.render` | esotericWebb | Current `ui.render` usage is incorrect — switch to `game_scene` binding (P1 bug) |
 | `footprint_composition.toml` URL | cellMembrane | Update to subdomain URL |
 | cellMembrane `gate.enroll` → `mesh.enroll` | cellMembrane | Integration with songBird |
 | HSM → Android Keystore | bearDog | grapheneGate backend |
@@ -198,9 +199,11 @@ Offline: westGate, fieldGate, strandGate (pending), biomeGate
 
 ---
 
-*Wave 150h: NUCLEUS COMPOSITION WIRED. footPrint consumer-side wiring COMPLETE
-(petal-tongue.ts: 231L WS client, nestgate-cas.ts: 84L CAS client). esotericWebb
-V21: browser-navigable HTML frontend + petalTongue ui.render confirmed. nestGate
-Session 122: procfs consolidation. All P1 resolved on BOTH provider and consumer
-sides. 5 surfaces LIVE. 10 GREEN / 2 AMBER dimensions. 23,300+ tests. Demand
-signal P2-only. Next: visual verification, DNSSEC, pseudoSpore promotion.*
+*Wave 150h: NUCLEUS COMPOSITION WIRED. footPrint consumer-side wiring COMPLETE.
+esotericWebb V21 browser-navigable. Investigation revealed Webb's `ui.render`
+usage is incorrect (should be `visualization.render` with `game_scene` binding).
+Architectural evolution issued: petalTongue 2D-as-3D-slice unification —
+Transform3D on SceneNode, Camera+projection, grammar z-wiring. Makes petalTongue
+a universal rendering engine (narrative, scientific, geospatial, molecular).
+All non-breaking (2D = orthographic camera at z=0). 4-phase rollout specified.
+5 surfaces LIVE. 10 GREEN / 2 AMBER dimensions. 23,300+ tests.*
