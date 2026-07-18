@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-18T11:40:00Z"
+updated = "2026-07-18T12:10:00Z"
 
 [heads]
 bearDog = "27cf95c7843f121c445f50190c317a4a3ef66faa"
@@ -40,8 +40,9 @@ footprint_server = "LIVE on sporeGate:8090 — Node.js wrapper, 4h+ uptime, API 
 esotericwebb_caddy = "WIRED on golgi — primals.eco/webb/* → flockGate:8090 via WG. 502 until flockGate service starts."
 
 [resolved]
-sporePrint_404_p0 = "FIXED: Caddy try_files + cascade-sense manifest fixes (Wave 143b)"
+sporePrint_404_p0 = "RESOLVED: Atomic build-then-swap pipeline eliminates 404 gap (Wave 148c)"
 cascade_sense_config = "FIXED: bind_mode, mobility, zone enum drift (Waves 143b-147e)"
+atomic_deploy = "DEPLOYED: zola build -o public-next + rename() swap — zero-downtime proven"
 silicon_atheism_p1 = "COMPLETE: 14/14 primals × 4 architectures = 56 binaries + extras"
 silicon_atheism_p2 = "COMPLETE: 14/14 transport abstraction (trait + backend pattern)"
 windows_beardog = "FIXED: #[cfg(unix)] gating for UnixStream in beardog-ipc/core/tunnel/cli"
