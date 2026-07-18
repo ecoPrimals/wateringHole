@@ -1,109 +1,98 @@
-# ecoPrimals Ecosystem Blurb — Wave 150g
+# ecoPrimals Ecosystem Blurb — Wave 150h
 
-**Date**: Jul 18, 2026 16:30 EDT | **Wave**: 150g | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 5 SURFACES LIVE. ZERO P1.**
+**Date**: Jul 18, 2026 18:30 EDT | **Wave**: 150h | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FULL NUCLEUS COMPOSITION WIRED.**
 
-**This wave**: petalTongue shipped `/ws` WebSocket JSON-RPC bridge on port 8080.
-This resolves the LAST P1 inter-primal wiring item. All 4 P1 items now COMPLETE.
-Demand signal is P2-only. Products are live, wired, and tested.
+**This wave**: footPrint wired both consumer-side connections (petalTongue `/ws`
+JSON-RPC bridge + nestGate CAS client). esotericWebb shipped V21 — browser-
+navigable HTML frontend + live visual rendering via petalTongue `ui.render`.
+NUCLEUS composition is now end-to-end wired through live products. All P1
+items resolved on both provider AND consumer sides.
 
 ---
 
-## 1. DEPLOYMENT CHAIN — Validated End-to-End
+## 1. DEPLOYMENT CHAIN
 
 ```
-User → Cloudflare DNS (*.primals.eco wildcard → golgiBody VPS)
-  → Cloudflare CDN (outer membrane firebreak)
-    → Caddy on golgiBody (TLS termination, Host-header routing)
-      → reverse_proxy over WireGuard mesh to target gate
-        → Local service (footPrint:8090, esotericWebb:8090, etc.)
+User → Cloudflare (*.primals.eco wildcard → golgiBody)
+  → Caddy on golgiBody (TLS, Host-header routing)
+    → WireGuard mesh → target gate → service
 ```
 
-**URL Standard**: `prefix.primals.eco` (subdomain) REQUIRED. Root redirects
-to `sporeprint.primals.eco`.
+**URL Standard**: `prefix.primals.eco` subdomain. Root → `sporeprint.primals.eco`.
 
-**Three-Domain Model**:
-- `primals.eco` — **intra-membrane** (shared ecosystem)
-- `primal.eco` — **inner membrane** (personal sovereign)
-- `nestgate.io` — **data service point** (CAS, federated APIs)
+**Three-Domain Model**: `primals.eco` (intra-membrane) | `primal.eco` (inner) | `nestgate.io` (data service)
 
 ---
 
-## 2. LIVE SYSTEMS — WAN-Validated (Jul 18 11:00)
+## 2. LIVE SYSTEMS — WAN-Validated
 
-| Surface | URL | Code | Latency | Gate |
-|---------|-----|------|---------|------|
-| footPrint | `footprint.primals.eco` | **200** | 216ms | sporeGate |
-| esotericWebb | `webb.primals.eco` | **200** | 235ms | flockGate |
-| sporePrint | `sporeprint.primals.eco` | **200** | 524ms | golgiBody |
-| TOPO-VIS | `live.primals.eco` | **200** | 357ms | sporeGate |
-| Forgejo | `git.primals.eco` | **200** | 203ms | golgiBody |
-| JupyterHub | `lab.primals.eco` | **401** | 128ms | ironGate |
-| Root redirect | `primals.eco` | **301** | 139ms | golgiBody |
+| Surface | URL | Status | Gate |
+|---------|-----|--------|------|
+| footPrint | `footprint.primals.eco` | **LIVE — FULL NUCLEUS** | sporeGate |
+| esotericWebb | `webb.primals.eco` | **V21 LIVE — BROWSER-NAVIGABLE** | flockGate |
+| sporePrint | `sporeprint.primals.eco` | **LIVE** | golgiBody |
+| TOPO-VIS | `live.primals.eco` | **LIVE** | sporeGate |
+| Forgejo | `git.primals.eco` | **LIVE** | golgiBody |
+| JupyterHub | `lab.primals.eco` | **LIVE** | ironGate |
 
-### footPrint → `footprint.primals.eco` — **LIVE**
+### footPrint — **FULL NUCLEUS COMPOSITION WIRED**
 
-466 tests, responsive, a11y, ESLint clean. CSP + security headers + SPA
-fallback shipped. Caddy routes all traffic to footPrint:8090 (Express
-handles static + `/ext` proxy + `/api/*`). `/ws` → petalTongue:8080.
+466 tests. All composition layers connected:
 
-**Remaining verification**: Map tiles (CSP allows tile domains — visual
-check needed).
+| Layer | Primal | Wiring | Status |
+|-------|--------|--------|--------|
+| Data proxy | songBird | `/ext` drawbridge + weak bonds | LIVE |
+| Project storage | nestGate | CAS client (`/api/cas/`) — BLAKE3 content-addressed | **WIRED (Wave 150h)** |
+| Agent bridge | petalTongue | `/ws` WebSocket JSON-RPC (7 methods) | **WIRED (Wave 150h)** |
+| Static + API | footPrint Express | CSP + security headers + SPA fallback | LIVE |
 
-### esotericWebb → `webb.primals.eco` — **V19.1, LIVE**
+Consumer modules shipped: `petal-tongue.ts` (231L, auto-reconnecting WS client)
+and `nestgate-cas.ts` (84L, BLAKE3 content-addressed project persistence).
 
-HTTP-aware TCP listener (V19.1): detects HTTP framing, extracts JSON-RPC
-body, returns HTTP/1.1 200 with CORS. Both raw and HTTP protocols coexist
-on port 8090. systemd user unit enabled. 453 tests.
+### esotericWebb — **V21, BROWSER-NAVIGABLE + LIVE VISUALS**
 
-**Known limitations**:
-- GET returns 502 (only POST/JSON-RPC works — no browser navigation, P2)
-- V19.1 binary not in depot (local build only, P2)
-- `loginctl enable-linger` needed for service to survive logout
+453 tests. 6/9 primals connected. GET handler shipped — `webb.primals.eco/`
+now serves a self-contained HTML frontend (zero external JS/CSS dependencies).
+Live visual rendering via petalTongue `ui.render` confirmed working
+(`scene_pushed: true`). `session.poll_input` method for interaction loop.
 
-### sporePrint → `sporeprint.primals.eco` — **LIVE**
-
-302 pages, pseudoSpore gallery for all 7 springs. Root domain redirect
-operational.
+### Other surfaces: sporePrint (302 pages), TOPO-VIS, Forgejo, JupyterHub — all LIVE.
 
 ---
 
-## 3. PRIMAL DEMAND SIGNAL
+## 3. PRIMAL DEMAND SIGNAL — P2 ONLY
 
-### P1 — Inter-Primal Wiring — **ALL RESOLVED**
+### Inter-Primal Wiring — ALL COMPLETE
 
-| Need | Owner | Status |
-|------|-------|--------|
-| ~~`PROJECTS_PATH` CAS wiring~~ | nestGate | **COMPLETE** (Session 114) |
-| ~~`null` params on health~~ | squirrel | **FIXED** (Wave 150b) |
-| ~~BTSP `mesh.enroll`~~ | songBird | **ACTIVE** (Wave 150e) |
-| ~~`WS_PATH` agent bridge~~ | petalTongue | **SHIPPED** (Wave 150g — `/ws` on :8080, 7 methods, E2E tested) |
-
-footPrint consumer-side wiring for CAS + WS is **COMPLETE** (Wave 150g, commit 31476a2).
-petalTongue JSON-RPC client + nestGate CAS dual-write wired. 468 tests.
+| Item | Provider | Consumer | Status |
+|------|----------|----------|--------|
+| `PROJECTS_PATH` CAS | nestGate | footPrint | **COMPLETE** (both sides) |
+| `null` params on health | squirrel | esotericWebb | **FIXED** |
+| BTSP `mesh.enroll` | songBird | cellMembrane | **ACTIVE** |
+| `WS_PATH` agent bridge | petalTongue | footPrint | **COMPLETE** (both sides) |
 
 ### P2 — Ecosystem Quality
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| esotericWebb GET handler | esotericWebb | GET → 502 via Caddy (only POST works) |
-| esotericWebb depot binary | sporeGate ops | V19.1 local build, not in depot |
-| `loginctl enable-linger` | flockGate ops | systemd user unit survives logout |
+| esotericWebb V21 depot binary | sporeGate ops | Local build, not in depot |
+| `loginctl enable-linger` | flockGate ops | systemd user unit persistence |
 | `primals.eco` DNSSEC | ops / Cloudflare | Enable via API |
-| footPrint CAS consumer verify | footPrint | **WIRED** (dual-write to CAS, 31476a2) |
-| `footprint_composition.toml` URL | cellMembrane | Still has old path-based URL |
-| cellMembrane `gate.enroll` → `mesh.enroll` | cellMembrane | Call songBird's mesh.enroll |
-| HSM → Android Keystore | bearDog | grapheneGate mobile credential backend |
+| petalTongue SceneGraph vs `ui.render` | petalTongue | Narrative composition format decision |
+| `footprint_composition.toml` URL | cellMembrane | Update to subdomain URL |
+| cellMembrane `gate.enroll` → `mesh.enroll` | cellMembrane | Integration with songBird |
+| HSM → Android Keystore | bearDog | grapheneGate backend |
 | Credential store trait | bearDog + squirrel | Silicon Atheism Phase 2 |
-| Health monitoring trait | ecosystem | Not procfs-hardcoded |
+| Health monitoring trait | ecosystem | nestGate consolidated procfs (Session 122) |
 | `primal-transport` crate | ecosystem | Extract transport abstractions |
-| primalSpring CAC scenario | primalSpring | FRAGO issued, not implemented |
+| primalSpring CAC scenario | primalSpring | FRAGO issued |
 
 ### P2 — pseudoSpore Pipeline
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| `validation.json` per spore | 6 spring teams | Module validation results for promotion |
+| `validation.json` per spore | 6 spring teams | Module validation results |
 | Fix groundSpring `bingoCube/nautilus` dep | groundSpring | `cargo test` fails |
 | Bash → Rust orchestration | spring teams | 114+ shell scripts |
 
@@ -113,30 +102,29 @@ petalTongue JSON-RPC client + nestGate CAS dual-write wired. 468 tests.
 
 ### NOW
 
-- **Wire footPrint client** to petalTongue `/ws` bridge + nestGate CAS
-- **Verify footPrint tiles** — visual check at `footprint.primals.eco`
+- **Visual verification** — confirm footPrint tiles + CAS at `footprint.primals.eco`
+- **Visual verification** — confirm esotericWebb HTML frontend at `webb.primals.eco`
 - **Enable Cloudflare DNSSEC** for `primals.eco`
-- **Push esotericWebb V19.1 to depot**
+- **Push V21 to depot**
 
 ### NEAR TERM (next 2-4 weeks)
 
-- **esotericWebb GET handler**: make `webb.primals.eco/` browser-navigable
-- **Full NUCLEUS composition**: all primals interacting through live products
 - **pseudoSpore validation**: promote 6 pending spores
 - **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
 - **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
 - **`primal.eco` inner membrane separation**
+- **petalTongue scene format**: SceneGraph narrative variant or `ui.render` canonical
 
 ### FUTURE (quarter horizon)
 
 - **tideGlass composition**: computational chemistry product
 - **primal-transport crate**: publish shared transport abstraction
 - **SHOW_HN readiness**: rubric, narrative, demo path
-- **fieldGate/biomeGate recovery**: hardware surgery / kernel
+- **fieldGate/biomeGate recovery**
 
 ---
 
-## 5. DIMENSIONAL SCORECARD (Wave 150f)
+## 5. DIMENSIONAL SCORECARD (Wave 150h)
 
 | Project | Tests | Clippy | Fmt | Debt | Unsafe | >800L | Prod unwrap |
 |---------|-------|--------|-----|------|--------|-------|-------------|
@@ -151,7 +139,7 @@ petalTongue JSON-RPC client + nestGate CAS dual-write wired. 468 tests.
 | primalSpring | 1,203 | 0 | 0 | 0 | 0 | 0 | 0 |
 | sporePrint | 289 | — | — | 0 | — | 0 | — |
 
-**Ecosystem**: ~23,300+ tests tracked, 0 debt, 0 unsafe, 0 mocks.
+**Ecosystem**: ~23,300+ tests, 0 debt, 0 unsafe, 0 mocks.
 
 ---
 
@@ -159,23 +147,17 @@ petalTongue JSON-RPC client + nestGate CAS dual-write wired. 468 tests.
 
 | Milestone | Wave |
 |-----------|------|
-| **ALL P1 inter-primal wiring RESOLVED (4/4)** | **150g** |
-| **5 composition surfaces LIVE from WAN** | **150f** |
-| **Deployment chain validated end-to-end** | **150f** |
-| petalTongue `/ws` WebSocket JSON-RPC bridge shipped | 150g |
-| esotericWebb V19.1 LIVE at `webb.primals.eco` (systemd) | 150f |
-| lithoSpore `spore-status` dashboard command | 150f |
-| initioChem wired pseudospore-core as external consumer | 150f |
-| cellMembrane subdomain routing overhaul (5 compositions) | 150e |
-| footPrint CSP + SPA fallback for subdomain deployment | 150e |
-| songBird `mesh.enroll` ACTIVE (BTSP-verified proof flow) | 150e |
+| **FULL NUCLEUS COMPOSITION WIRED (footPrint CAS + WS consumer)** | **150h** |
+| **esotericWebb V21 — browser-navigable + live visuals** | **150h** |
+| ALL P1 inter-primal wiring RESOLVED (4/4, both sides) | 150g/h |
+| 5 composition surfaces LIVE from WAN | 150f |
+| Deployment chain validated end-to-end | 150f |
+| cellMembrane subdomain routing overhaul | 150e |
+| songBird `mesh.enroll` ACTIVE | 150e |
 | nestGate dimensional audit ALL CLEAR (1,710 tests) | 150e |
-| nestGate `PROJECTS_PATH` CAS complete | 150e |
-| squirrel null params fixed | 150b |
 | Silicon Atheism Phase 2 (14/14 + lithoSpore) | 145a |
 | Content-Addressed Convergence (6/6) | 143b |
 | Glacial Shift (8/8) ALL CLEAR | 137b |
-| `gate.enroll` fully automated (7 phases) | 147a |
 | lithoSpore ALL CLEAR + 7 pseudoSpores emitted | 150a |
 | GAP-036 + GAP-038 closed ecosystem-wide | 150a |
 | Depot operational (59+ binaries, 4 arch) | 142a |
@@ -186,39 +168,39 @@ petalTongue JSON-RPC client + nestGate CAS dual-write wired. 468 tests.
 
 ```
 golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, Cloudflare firebreak
-  ├─ sporeGate (10.13.37.2) — builder, footPrint:8090 [LIVE]
+  ├─ sporeGate (10.13.37.2) — builder, footPrint [FULL NUCLEUS]
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
-  ├─ flockGate (10.13.37.6) — esotericWebb:8090 [V19.1, LIVE]
+  ├─ flockGate (10.13.37.6) — esotericWebb [V21 LIVE]
   ├─ ironGate  (10.13.37.7) — compute, lithoSpore [ALL CLEAR]
   └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled]
 
-Offline: westGate (cold storage), fieldGate (dead CMOS),
-         strandGate (pending enrollment), biomeGate (kernel recovery)
+Offline: westGate, fieldGate, strandGate (pending), biomeGate
 ```
 
 ---
 
-## 8. ORTHOGONAL DIMENSIONS SUMMARY
+## 8. ORTHOGONAL DIMENSIONS
 
 | Dim | Area | Status | Open items |
 |-----|------|--------|------------|
 | 1 | Temporal | GREEN | — |
 | 2 | Ecological | GREEN | — |
-| 3 | Hardware | AMBER | 4 gates offline (not blocking) |
+| 3 | Hardware | AMBER | 4 gates offline |
 | 4 | Sovereignty | AMBER | `primals.eco` DNSSEC (P2) |
-| 5 | Depot | GREEN | esotericWebb V19.1 not in depot (P2) |
-| 6 | Public Surface | **GREEN** | 5 surfaces LIVE, root redirect working |
-| 7 | Glacial Shift | GREEN | SHOW_HN rubric (P3) |
-| 8 | Compositions | **GREEN** | Both products externally functional |
-| 9 | Documentation | GREEN | Standards current |
+| 5 | Depot | GREEN | esotericWebb V21 not in depot |
+| 6 | Public Surface | **GREEN** | 5+ surfaces LIVE |
+| 7 | Glacial Shift | GREEN | SHOW_HN rubric |
+| 8 | Compositions | **GREEN** | Both products fully wired |
+| 9 | Documentation | GREEN | — |
 | 10 | Cascade | GREEN | — |
 | 11 | CAC | GREEN | primalSpring scenario (P2) |
-| 12 | Silicon Atheism | GREEN | Credential trait, health trait (P2) |
+| 12 | Silicon Atheism | GREEN | Credential trait (P2) |
 
 ---
 
-*Wave 150g: petalTongue shipped /ws WebSocket JSON-RPC bridge on port 8080 —
-last P1 resolved. ALL 4 P1 inter-primal wiring items COMPLETE (nestGate CAS,
-squirrel null params, songBird mesh.enroll, petalTongue WS). 5 surfaces LIVE.
-10 GREEN / 2 AMBER dimensions. ZERO P1 items. Demand signal is P2-only.
-23,300+ ecosystem tests. footPrint client wiring for CAS + WS is next.*
+*Wave 150h: NUCLEUS COMPOSITION WIRED. footPrint consumer-side wiring COMPLETE
+(petal-tongue.ts: 231L WS client, nestgate-cas.ts: 84L CAS client). esotericWebb
+V21: browser-navigable HTML frontend + petalTongue ui.render confirmed. nestGate
+Session 122: procfs consolidation. All P1 resolved on BOTH provider and consumer
+sides. 5 surfaces LIVE. 10 GREEN / 2 AMBER dimensions. 23,300+ tests. Demand
+signal P2-only. Next: visual verification, DNSSEC, pseudoSpore promotion.*
