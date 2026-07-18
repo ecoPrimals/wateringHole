@@ -1,57 +1,72 @@
-# ecoPrimals Ecosystem Blurb — Wave 150b
+# ecoPrimals Ecosystem Blurb — Wave 150c
 
-**Date**: Jul 18, 2026 10:00 EDT | **Wave**: 150b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE.**
+**Date**: Jul 18, 2026 10:05 EDT | **Wave**: 150c | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. DEPLOYMENT ISSUES FOUND.**
 
-**This wave**: Full orthogonal dimensions review (12 dimensions, Wave 150a).
-Dimensional sweep absorbed — 15 teams responded. Demand signal closures
-catalogued. Blurb reshaped around live systems, strategic goals, and remaining
-primal work. Closed items consolidated. Forward path clarified.
+**This wave**: Operator verification of live surfaces exposed deployment gaps.
+footPrint and esotericWebb are NOT externally functional despite team reports
+of "LIVE". Code quality is excellent but the ops/routing layer has real bugs.
+Teams reporting "shipped" ≠ users can access it. Blurb corrected.
 
 ---
 
-## 1. LIVE SYSTEMS — Current State
+## 1. LIVE SYSTEMS — Actual State (Operator-Verified)
 
-### footPrint → `primals.eco/footprint/` — **LIVE + FULLY USABLE**
+### footPrint — **DEPLOYED ON GATE, NOT EXTERNALLY FUNCTIONAL**
 
-Sovereign GIS home planner on sporeGate. Responsive, accessible, 466 tests,
-all coverage thresholds passing. Known locations with descriptions, welcome
-overlay, modal system, favicon. Full NUCLEUS composition wired through
-songBird drawbridge.
+**Observed (Jul 18 10:00)**: UI shell loads but map tiles are gray/blank and
+geocoder returns no results. Product is not usable in current deployment.
 
-**Remaining wiring** (non-blocking — product is usable without these):
+**Root causes identified**:
 
-| Wiring | Primal | Priority | What it enables |
-|--------|--------|----------|-----------------|
-| `PROJECTS_PATH` CAS | nestGate | P1 | Content-addressed project storage (currently filesystem) |
-| `WS_PATH` agent bridge | petalTongue | P1 | Real-time AI agent via WebSocket (currently polling) |
+| Issue | Severity | Detail |
+|-------|----------|--------|
+| **URL mismatch** | P0 | Blurb said `primals.eco/footprint/` but cellMembrane generates Caddy for `footprint.primals.eco` (subdomain). Wrong URL has been in blurb since Wave 147. |
+| **Missing `/ext` route** | P0 | Caddy routes `/api/*` and `/ws` but the proxy path is `/ext` (not under `/api/`). Geocoder, data source fetches, and all drawbridge calls CANNOT work. |
+| **Catch-all → petalTongue** | P1 | Non-API requests (including `/ext`) fall through to petalTongue:8080 which doesn't handle proxy. |
+| **Map tiles blank** | P1 | Esri satellite tiles load directly in browser — may be CSP, rate limit, or DNS. Switch to Street layer to diagnose. |
 
-### esotericWebb → `primals.eco/webb/` — **V18, LIVE ON GATE**
+**Required fixes (cellMembrane + sporeGate ops)**:
 
-Cross-evolution CRPG on flockGate:8090. V18 with `demo` subcommand (8-step
-guided tour, JSON CI output). 472 tests. 6/9 primals connected. Content
-README for authors. Aldric NPC fixed.
+1. Caddy: add `/ext/*` sub-route → footPrint:8090 (or route ALL traffic to footPrint and let Express handle static + API)
+2. Verify correct URL: `footprint.primals.eco` or reconfigure for path-based `primals.eco/footprint/`
+3. Verify map tile CSP headers — Caddy must allow `img-src` from `*.arcgisonline.com` and `*.tile.openstreetmap.org`
+4. Confirm DNS: `footprint.primals.eco` must resolve and have a TLS cert
 
-**Blocking: ops persistence** — product runs but restarts require manual SSH.
+**Code health is strong** — 466 tests, responsive, a11y, ESLint clean. The issue
+is purely deployment routing, not application code.
 
-| Ops step | Command | Gate | Status |
-|----------|---------|------|--------|
-| systemd enable | `systemctl enable --now esotericwebb-server` | flockGate | **PENDING** |
-| Caddy route `/webb/` | Add reverse_proxy block → `flockGate:8090` | golgiBody | **PENDING** |
+### esotericWebb → `primals.eco/webb/` — **404, NOT ROUTED**
+
+**Observed**: `primals.eco/webb/` returns sporePrint 404 page.
+Caddy route on golgiBody was never created. esotericWebb runs on
+flockGate:8090 but is only accessible via mesh IP (`10.13.37.6:8090`).
+
+**Required fixes (sporeGate ops)**:
+
+1. `systemctl enable --now esotericwebb-server` on flockGate
+2. Add Caddy `/webb/*` reverse_proxy → `flockGate:8090` on golgiBody
 
 ### Other live surfaces
 
-| Surface | URL | Gate | Status |
-|---------|-----|------|--------|
-| sporePrint (docs) | `primals.eco` | golgiBody | LIVE — 302 pages, pseudoSpore gallery |
-| petalTongue TOPO-VIS | `live.primals.eco` | sporeGate | LIVE |
-| JupyterHub | `lab.primals.eco` | ironGate | LIVE |
+| Surface | URL | Gate | Verified |
+|---------|-----|------|----------|
+| sporePrint (docs) | `primals.eco` | golgiBody | LIVE ✓ (302 pages visible) |
+| petalTongue TOPO-VIS | `live.primals.eco` | sporeGate | LIVE (unchecked this wave) |
+| JupyterHub | `lab.primals.eco` | ironGate | LIVE (unchecked this wave) |
 
 ---
 
 ## 2. PRIMAL DEMAND SIGNAL — Remaining Work
 
-Items frontloaded by priority. Most Wave 149b P1 items are CLOSED.
+### P0 — Deployment Broken (blocks all external users)
+
+| Need | Owner | Detail |
+|------|-------|--------|
+| Fix footPrint Caddy routing (`/ext` + tiles) | cellMembrane + sporeGate ops | `/ext` not proxied to footPrint:8090. Map tiles may need CSP fix. |
+| Confirm footPrint URL (subdomain vs path) | cellMembrane + overwatch | `footprint.primals.eco` vs `primals.eco/footprint/` — pick one, wire it. |
+| Create esotericWebb Caddy route | sporeGate ops | `/webb/*` → `flockGate:8090` |
+| Enable esotericWebb systemd | sporeGate ops | `systemctl enable --now esotericwebb-server` on flockGate |
 
 ### P1 — Inter-Primal Wiring (blocks deeper composition)
 
