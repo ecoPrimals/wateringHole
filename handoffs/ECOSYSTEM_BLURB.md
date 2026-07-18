@@ -28,13 +28,13 @@ Each primal team: address your rows.
 | `cargo fmt` (10 files) | CI hygiene | P2 | Quick fix. |
 | BTSP → cellMembrane `gate.enroll` | enrollment | P1 | Pending. |
 
-### footPrint team (USABILITY — HIGH PRIORITY)
+### footPrint team (USABILITY — 3 P1 ITEMS SHIPPED)
 
 | Need | Consumer(s) | Priority | Detail |
 |------|-------------|----------|--------|
-| Responsive design (zero `@media` queries) | mobile users | **P1** | Toolbar overflows, sidebars fixed-width (240px/280px), geocoder 320px fixed. Add breakpoints, collapse sidebars to drawers below 768px. |
-| Accessibility pass (zero ARIA) | all users | **P1** | No `<label>`, no `aria-label`, no `role="dialog"` on modal, no focus trap. Icon-only buttons lack accessible names. |
-| ESLint gate (162 errors, 80 auto-fixable) | code quality | **P1** | Top: `no-non-null-assertion` (49), `array-type` (49). Run `--fix` first. |
+| ~~Responsive design~~ | mobile users | — | **SHIPPED** (`7d21b0e`). 3 breakpoints (1024/768/480px), slide-out sidebar drawers, toolbar wraps, hamburger toggle. |
+| ~~Accessibility pass~~ | all users | — | **SHIPPED** (`7d21b0e`). ARIA roles/labels/live regions, sr-only labels, aria-modal, aria-pressed, aria-expanded. |
+| ~~ESLint gate (162 errors)~~ | code quality | — | **SHIPPED** (`7d21b0e`). 0 errors. Auto-fixed 80, manually fixed 93. Test files: non-null-assertion allowed. |
 | Coverage below thresholds | test health | P2 | Statements 68.87%/80%, branches 44.48%/70%. `renderer.ts` at 2.23%. |
 | First-run guidance / onboarding | new users | P2 | No welcome overlay, help button, or getting-started prompt. |
 | Replace `alert()`/`prompt()` with modals | UX polish | P2 | Native dialogs for save/load/delete feel dated and block UI. |
@@ -130,7 +130,7 @@ Each primal team: address your rows.
 |---------|--------|-----|------|--------|-------|-------|-------------|-----------|
 | cellMembrane | 0 | 62 | 0 | 0 | 0 | 1,092 | 0 | — |
 | esotericWebb | 0 | 3 | 0 | 0 | 0 | 472 | 0 | NPC bug |
-| footPrint | 162 ESLint | — | 0 | — | 0 | 275 | — | **No resp/a11y** |
+| footPrint | **0** ESLint | — | 0 | — | 0 | 275 | — | **Responsive + a11y shipped** |
 | songBird | **556** | 10 | 0 | 0 | **2** | 14,322 | **81** | — |
 | sporePrint | — | — | 0 | — | 0 | 289 | — | Stale page |
 | lithoSpore | 308 | 0 | 0 | 0 | 0 | 199 | 0 | — |
@@ -177,7 +177,7 @@ is strong. No web frontend — terminal-only game via `preview` or JSON-RPC.
 |---------|-------|--------|-----|------|-------------|
 | cellMembrane | 1,092 | 0 | 62 | 0 | 0 |
 | esotericWebb | 472 | 0 | 3 | 0 | 0 |
-| footPrint | 275 | 162 ESLint | — | 0 | — |
+| footPrint | 275 | **0** ESLint | — | 0 | — |
 | songBird | 14,322 | 556 | 10 | 0 | 81 |
 | sporePrint | 289 | — | — | 0 | — |
 | lithoSpore | 199 | 308 | 0 | 0 | 0 |
