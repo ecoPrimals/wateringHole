@@ -1,38 +1,81 @@
-# ecoPrimals Ecosystem Blurb — Wave 149a
+# ecoPrimals Ecosystem Blurb — Wave 149b
 
-**Date**: Jul 18, 2026 08:40 EDT | **Wave**: 149a | **From**: eastGate overwatch
+**Date**: Jul 18, 2026 09:05 EDT | **Wave**: 149b | **From**: eastGate overwatch
 **Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE. E2E STANDARD ADOPTED.**
 
-**This cascade**: Both product teams responded to the E2E Tutorial Standard.
-footPrint shipped known locations + picker UI + URL hash deep-linking (275 tests,
-`5f449df`). esotericWebb shipped V18 — `esotericwebb demo` subcommand with YAML-driven
-guided tour (8 steps, 6/9 primals exercised, JSON output for CI). songBird fixed
-mutex poison cascade in persistence tests. sporePrint added `live` maturity level
-(green badge, 302 pages, 79 entities). primalSpring KNOWN_DEBT calibrated to 1.
-4 handoffs fossilized.
+**This cascade**: Full dimensional review completed across 7 projects (cellMembrane,
+esotericWebb, footPrint, songBird, sporePrint, lithoSpore, primalSpring). Code
+quality, debt, safety, file size, test coverage, hardcoded values, production
+panics, live service usability all audited. Zero debt markers and zero unsafe
+code ecosystem-wide. Key findings: songBird needs clippy + prod unwrap cleanup;
+footPrint needs responsive design + accessibility; esotericWebb demo has missing
+NPC bug. 18,000+ tests ecosystem-wide.
 
 ---
 
 ## Upstream Primal Demand Signal
 
-Accumulated needs from all downstream consumers. Each primal team: address
-your rows. This section grows as gardens evolve — that's the point.
+Accumulated needs from all downstream consumers and dimensional review findings.
+Each primal team: address your rows.
 
-### esotericWebb team (OPS — 2 remaining)
+### songBird (CODE QUALITY — HIGH PRIORITY)
 
 | Need | Consumer(s) | Priority | Detail |
 |------|-------------|----------|--------|
+| 556 clippy warnings (pedantic+nursery) | ecosystem quality | **P1** | 170 in orchestrator alone. Top: missing `# Errors` docs (130), `const fn` candidates (87), doc backticks (67). |
+| 81 production `unwrap()` calls | runtime safety | **P1** | 76 `writeln!` unwraps in `bin_interface/config.rs`, 5 `RwLock` unwraps in universal-ipc. |
+| 2 files over 800 lines | code standards | **P1** | `drawbridge.rs` (1,019), `mesh_seed.rs` (834). Split required. |
+| `cargo fmt` (10 files) | CI hygiene | P2 | Quick fix. |
+| BTSP → cellMembrane `gate.enroll` | enrollment | P1 | Pending. |
+
+### footPrint team (USABILITY — HIGH PRIORITY)
+
+| Need | Consumer(s) | Priority | Detail |
+|------|-------------|----------|--------|
+| Responsive design (zero `@media` queries) | mobile users | **P1** | Toolbar overflows, sidebars fixed-width (240px/280px), geocoder 320px fixed. Add breakpoints, collapse sidebars to drawers below 768px. |
+| Accessibility pass (zero ARIA) | all users | **P1** | No `<label>`, no `aria-label`, no `role="dialog"` on modal, no focus trap. Icon-only buttons lack accessible names. |
+| ESLint gate (162 errors, 80 auto-fixable) | code quality | **P1** | Top: `no-non-null-assertion` (49), `array-type` (49). Run `--fix` first. |
+| Coverage below thresholds | test health | P2 | Statements 68.87%/80%, branches 44.48%/70%. `renderer.ts` at 2.23%. |
+| First-run guidance / onboarding | new users | P2 | No welcome overlay, help button, or getting-started prompt. |
+| Replace `alert()`/`prompt()` with modals | UX polish | P2 | Native dialogs for save/load/delete feel dated and block UI. |
+| Favicon missing | branding | P3 | No icon in browser tabs. |
+| Location picker hides descriptions | usability | P3 | Rich `description` field exists but never shown to users. |
+
+### esotericWebb team (DEMO BUG + OPS)
+
+| Need | Consumer(s) | Priority | Detail |
+|------|-------------|----------|--------|
+| Missing `aldric` NPC in demo | E2E validity | **P1** | `guided_tour.yaml` step 6 talks to `aldric`, but no `content/npcs/aldric.yaml` exists. Step passes via false-positive string match. |
+| `cargo fmt` (3 files) | CI hygiene | P2 | `demo.rs`, `discovery.rs`, experiment file. |
 | systemd persistence on flockGate | sporeGate ops | P1 | cellMembrane unit FIXED (`33aa33a`). Deploy: `systemctl enable --now esotericwebb-server`. |
 | Caddy route `/webb/` on golgiBody | sporeGate ops | P1 | Caddy config FIXED. Route `/webb/` → `flockGate:8090`. |
+| `content/README.md` for authors | author onboarding | P2 | New authors must find `specs/` docs — discoverable README in `content/` would help. |
 
-### songBird (3 CLOSED, 1 open)
+### cellMembrane (FMT ONLY)
 
-| Need | Consumer(s) | Priority | Status |
+| Need | Consumer(s) | Priority | Detail |
 |------|-------------|----------|--------|
-| ~~`PROXY_PATH` drawbridge~~ | footPrint | — | **CLOSED** |
-| ~~`/jsonrpc` endpoint~~ | esotericWebb | — | **CLOSED** |
-| ~~Discovery schemas~~ | esotericWebb | — | **CLOSED** |
-| BTSP → cellMembrane `gate.enroll` | enrollment | P1 | Pending |
+| `cargo fmt` (62 files) | CI hygiene | P2 | Style-only diffs. All other dimensions clean. |
+
+### primalSpring (CODE QUALITY)
+
+| Need | Consumer(s) | Priority | Detail |
+|------|-------------|----------|--------|
+| 456 clippy warnings (pedantic+nursery) | code quality | P2 | 320 `doc_markdown` (batch-fixable), 19 `must_use_candidate`, 6 `expect_used`. |
+| `cargo fmt` (54 files) | CI hygiene | P2 | 222 diff hunks across scenario files. |
+| 4 production `unwrap()` calls | runtime safety | P2 | `s_protokarya_wan_deploy.rs` (1), `s_soundstage_ceremony_observation.rs` (3). |
+
+### lithoSpore (CODE QUALITY)
+
+| Need | Consumer(s) | Priority | Detail |
+|------|-------------|----------|--------|
+| 308 clippy warnings (pedantic+nursery) | code quality | P2 | 186 in `ltee-cli` (96 auto-fixable). `cargo clippy --fix` first. |
+
+### sporePrint (CONTENT FRESHNESS)
+
+| Need | Consumer(s) | Priority | Detail |
+|------|-------------|----------|--------|
+| esotericWebb.md: body says live, metadata doesn't | content integrity | P2 | Add `maturity = "live"` to frontmatter + manifest entry. |
 
 ### squirrel
 
@@ -81,31 +124,47 @@ your rows. This section grows as gardens evolve — that's the point.
 
 ---
 
+## Dimensional Scorecard (Wave 149b)
+
+| Project | Clippy | Fmt | Debt | Unsafe | >800L | Tests | Prod unwrap | Usability |
+|---------|--------|-----|------|--------|-------|-------|-------------|-----------|
+| cellMembrane | 0 | 62 | 0 | 0 | 0 | 1,092 | 0 | — |
+| esotericWebb | 0 | 3 | 0 | 0 | 0 | 472 | 0 | NPC bug |
+| footPrint | 162 ESLint | — | 0 | — | 0 | 275 | — | **No resp/a11y** |
+| songBird | **556** | 10 | 0 | 0 | **2** | 14,322 | **81** | — |
+| sporePrint | — | — | 0 | — | 0 | 289 | — | Stale page |
+| lithoSpore | 308 | 0 | 0 | 0 | 0 | 199 | 0 | — |
+| primalSpring | 456 | 54 | 0 | 0 | 0 | 1,274 | 4 | — |
+
+**Ecosystem totals**: 18,000+ tests, 0 debt markers, 0 unsafe blocks.
+
+---
+
 ## Path to Live — Downstream Projects
 
 ### footPrint → `primals.eco/footprint/` — **LIVE + E2E TUTORIAL SHIPPED**
 
-Full path wired. Known locations picker + URL hash deep-linking shipped.
-5 locations: MSU Campus, Downtown EL, Red Cedar River, Meridian Twp, Haslett Ag.
-**Next**: nestGate CAS wiring (P1), petalTongue WS bridge (P1).
+Known locations shipped. **Usability gap**: no responsive design, no accessibility,
+no onboarding. Desktop power-user tool — not yet usable on mobile or by new users.
+**Next**: responsive breakpoints, accessibility pass, ESLint cleanup.
 
-### esotericWebb → `primals.eco/webb/` — **V18, LIVE ON GATE, E2E DEMO SHIPPED**
+### esotericWebb → `primals.eco/webb/` — **V18, LIVE ON GATE, PERSISTENCE PENDING**
 
-V18, 472 tests, 6/9 primals connected, flockGate:8090. `esotericwebb demo`
-subcommand ships 8-step guided tour with verification. Deploy artifacts FIXED.
+Demo scenario shipped but has `aldric` NPC false-positive bug. CLI/operator UX
+is strong. No web frontend — terminal-only game via `preview` or JSON-RPC.
 
 | Step | Status | Owner |
 |------|--------|-------|
 | 1-6. Binary, Caddy unit, songBird, composition, Forgejo | **ALL DONE** | — |
 | 7. systemd enable on flockGate | **PENDING** | sporeGate ops |
 | 8. Caddy route on golgiBody | **PENDING** | sporeGate ops |
-| 9. E2E demo scenario | **SHIPPED** (V18, `18b8169`) | esotericWebb |
+| 9. E2E demo scenario | **SHIPPED** (V18) — aldric bug pending | esotericWebb |
 
 ### lithoSpore → CLI tool — **PIPELINE PROVEN, DEEP DEBT CLEAR**
 
 | Step | Status |
 |------|--------|
-| 1-5. Platform trait, pack/unpack, initioChem, deep debt | **ALL DONE** (222 tests) |
+| 1-5. Platform trait, pack/unpack, initioChem, deep debt | **ALL DONE** (199 tests) |
 | 6. USB round-trip validation | NOT STARTED |
 
 ### projectFOUNDATION → TBD (NOT STARTED)
@@ -114,15 +173,15 @@ subcommand ships 8-step guided tour with verification. Deploy artifacts FIXED.
 
 ## Ecosystem Test Health
 
-| Project | Tests | Clippy | Debt |
-|---------|-------|--------|------|
-| cellMembrane | 1,100 | 0 | 0 |
-| esotericWebb | 472 | 0 | 0 |
-| songBird | full pass | 0 | 0 |
-| footPrint | 275 | clean | 0 |
-| lithoSpore | 222 | 0 | 0 |
-| sporePrint | 289 | 0 | 0 |
-| primalSpring | 1,203 | 0 | 1 |
+| Project | Tests | Clippy | Fmt | Debt | Prod unwrap |
+|---------|-------|--------|-----|------|-------------|
+| cellMembrane | 1,092 | 0 | 62 | 0 | 0 |
+| esotericWebb | 472 | 0 | 3 | 0 | 0 |
+| footPrint | 275 | 162 ESLint | — | 0 | — |
+| songBird | 14,322 | 556 | 10 | 0 | 81 |
+| sporePrint | 289 | — | — | 0 | — |
+| lithoSpore | 199 | 308 | 0 | 0 | 0 |
+| primalSpring | 1,274 | 456 | 54 | 0 | 4 |
 
 ---
 
@@ -135,12 +194,13 @@ subcommand ships 8-step guided tour with verification. Deploy artifacts FIXED.
 | Glacial Shift (8/8) | **ALL CLEAR** |
 | `gate.enroll` fully automated (7 phases) | **SHIPPED** |
 | lithoSpore pack/unpack + initioChem | **SHIPPED** |
-| **footPrint LIVE** | **LIVE** — sovereign mesh + known locations E2E |
-| **esotericWebb LIVE on flockGate** | **V18** — 6/9 primals, demo scenario shipped |
+| **footPrint LIVE** | **LIVE** — known locations E2E shipped |
+| **esotericWebb LIVE on flockGate** | **V18** — demo scenario shipped |
 | **E2E Tutorial Standard adopted** | **SHIPPED** — both products compliant |
 | songBird drawbridge + /jsonrpc + discovery | **SHIPPED** |
-| sporePrint `live` maturity level | **SHIPPED** — green badge, 302 pages |
+| sporePrint `live` maturity level | **SHIPPED** — 302 pages |
 | Depot (59+ binaries, 4 arch) | **OPERATIONAL** |
+| **Dimensional review (7 projects)** | **COMPLETE** — 0 debt, 0 unsafe, 18k+ tests |
 
 ---
 
@@ -167,11 +227,10 @@ golgiBody (10.13.37.1) — hub, VPS, Caddy TLS
 
 ---
 
-*Wave 149a: E2E Tutorial Standard fully adopted — both live products compliant.
-footPrint shipped known locations + picker + hash deep-linking (5f449df, 275 tests).
-esotericWebb shipped V18 with `demo` subcommand — 8-step guided tour, JSON CI output,
-exercises 6/9 primals (18b8169). songBird fixed mutex poison cascade (f0025ee6).
-sporePrint added `live` maturity level (351c6cd). primalSpring KNOWN_DEBT → 1.
-4 handoffs fossilized. Remaining: ops persistence (systemd + Caddy) for esotericWebb,
-then primal-level demand signal items (nestGate CAS, petalTongue WS, squirrel null,
-bearDog sigs, sweetGrass braids).*
+*Wave 149b: Full 7-project dimensional review. 18,000+ tests, 0 debt markers,
+0 unsafe code ecosystem-wide. Critical findings: songBird needs clippy cleanup
+(556) + prod unwrap elimination (81) + file splits; footPrint needs responsive
+design + accessibility pass + ESLint fix (162); esotericWebb demo has missing
+aldric NPC (false-positive bug). All fmt drift is minor and auto-fixable.
+sporePrint esotericWebb.md metadata stale. lithoSpore + primalSpring have
+clippy backlogs (308, 456) — mostly doc_markdown, batch-fixable.*
