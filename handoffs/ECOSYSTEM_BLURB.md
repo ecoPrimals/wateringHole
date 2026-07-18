@@ -1,12 +1,11 @@
-# ecoPrimals Ecosystem Blurb — Wave 150f
+# ecoPrimals Ecosystem Blurb — Wave 150g
 
-**Date**: Jul 18, 2026 11:30 EDT | **Wave**: 150f | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 5 SURFACES LIVE.**
+**Date**: Jul 18, 2026 16:30 EDT | **Wave**: 150g | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 5 SURFACES LIVE. ZERO P1.**
 
-**This wave**: Cascade confirmed ALL 5 composition surfaces returning 200 from
-WAN. flockGate completed ops: esotericWebb V19.1 LIVE with systemd persistence.
-Deployment chain validated end-to-end (Cloudflare → Caddy → WireGuard → service).
-lithoSpore shipped `spore-status` dashboard. initioChem wired pseudospore-core.
+**This wave**: petalTongue shipped `/ws` WebSocket JSON-RPC bridge on port 8080.
+This resolves the LAST P1 inter-primal wiring item. All 4 P1 items now COMPLETE.
+Demand signal is P2-only. Products are live, wired, and tested.
 
 ---
 
@@ -72,16 +71,16 @@ operational.
 
 ## 3. PRIMAL DEMAND SIGNAL
 
-### P1 — Inter-Primal Wiring (1 item remaining)
+### P1 — Inter-Primal Wiring — **ALL RESOLVED**
 
 | Need | Owner | Status |
 |------|-------|--------|
-| `WS_PATH` agent bridge | petalTongue | **OPEN** — last remaining P1 |
+| ~~`PROJECTS_PATH` CAS wiring~~ | nestGate | **COMPLETE** (Session 114) |
+| ~~`null` params on health~~ | squirrel | **FIXED** (Wave 150b) |
+| ~~BTSP `mesh.enroll`~~ | songBird | **ACTIVE** (Wave 150e) |
+| ~~`WS_PATH` agent bridge~~ | petalTongue | **SHIPPED** (Wave 150g — `/ws` on :8080, 7 methods, E2E tested) |
 
-Previously P1, now resolved:
-- ~~nestGate `PROJECTS_PATH` CAS~~ → COMPLETE (Session 114)
-- ~~squirrel null params~~ → FIXED (Wave 150b)
-- ~~songBird BTSP mesh.enroll~~ → ACTIVE (Wave 150e)
+footPrint consumer-side wiring for CAS + WS is the remaining integration step.
 
 ### P2 — Ecosystem Quality
 
@@ -114,14 +113,13 @@ Previously P1, now resolved:
 
 ### NOW
 
+- **Wire footPrint client** to petalTongue `/ws` bridge + nestGate CAS
 - **Verify footPrint tiles** — visual check at `footprint.primals.eco`
-- **Verify footPrint CAS** — consumer-side wiring check
 - **Enable Cloudflare DNSSEC** for `primals.eco`
 - **Push esotericWebb V19.1 to depot**
 
 ### NEAR TERM (next 2-4 weeks)
 
-- **petalTongue WS bridge**: last open P1 inter-primal wiring item
 - **esotericWebb GET handler**: make `webb.primals.eco/` browser-navigable
 - **Full NUCLEUS composition**: all primals interacting through live products
 - **pseudoSpore validation**: promote 6 pending spores
@@ -161,8 +159,10 @@ Previously P1, now resolved:
 
 | Milestone | Wave |
 |-----------|------|
+| **ALL P1 inter-primal wiring RESOLVED (4/4)** | **150g** |
 | **5 composition surfaces LIVE from WAN** | **150f** |
 | **Deployment chain validated end-to-end** | **150f** |
+| petalTongue `/ws` WebSocket JSON-RPC bridge shipped | 150g |
 | esotericWebb V19.1 LIVE at `webb.primals.eco` (systemd) | 150f |
 | lithoSpore `spore-status` dashboard command | 150f |
 | initioChem wired pseudospore-core as external consumer | 150f |
@@ -217,10 +217,8 @@ Offline: westGate (cold storage), fieldGate (dead CMOS),
 
 ---
 
-*Wave 150f: 5 composition surfaces WAN-validated LIVE (footPrint 200, webb 200,
-sporeprint 200, live 200, git 200). esotericWebb V19.1 shipped HTTP-aware TCP
-listener for Caddy compatibility + systemd persistence. Deployment chain proven
-end-to-end. lithoSpore shipped spore-status dashboard. initioChem wired
-pseudospore-core as first external consumer. Dimensions 6+8 upgraded to GREEN.
-Only 1 P1 item remains (petalTongue WS bridge). 10 GREEN / 2 AMBER dimensions.
-23,300+ ecosystem tests. Demand signal condensed to P2 quality items.*
+*Wave 150g: petalTongue shipped /ws WebSocket JSON-RPC bridge on port 8080 —
+last P1 resolved. ALL 4 P1 inter-primal wiring items COMPLETE (nestGate CAS,
+squirrel null params, songBird mesh.enroll, petalTongue WS). 5 surfaces LIVE.
+10 GREEN / 2 AMBER dimensions. ZERO P1 items. Demand signal is P2-only.
+23,300+ ecosystem tests. footPrint client wiring for CAS + WS is next.*
