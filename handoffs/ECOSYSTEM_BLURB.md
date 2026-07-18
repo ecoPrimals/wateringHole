@@ -14,11 +14,11 @@ esotericWebb: guided demo scenario pattern specified.
 
 ## Upstream Primal Demand Signal
 
-### footPrint team (E2E TUTORIAL — NEW)
+### footPrint team (E2E TUTORIAL — SHIPPED)
 
 | Need | Consumer(s) | Priority | Detail |
 |------|-------------|----------|--------|
-| Known locations + picker UI | users + operators | **P1** | 5 locations in `constants.ts`, `<select>` picker in toolbar. Each location has `expectedSources` for E2E verification. See `LIVE_FRONTEND_E2E_TUTORIAL_STANDARD.md`. |
+| ~~Known locations + picker UI~~ | users + operators | — | **SHIPPED** (`5f449df`). 5 locations, `<select>` picker, URL hash deep-linking (#msu-campus), 9 new tests. |
 
 ### esotericWebb team (E2E TUTORIAL + OPS — NEW)
 
@@ -89,7 +89,7 @@ esotericWebb: guided demo scenario pattern specified.
 ### footPrint → `primals.eco/footprint/` — **LIVE**
 
 Full path wired. All 6 core steps complete.
-**Next**: Known locations + E2E tutorial (P1, see standard).
+**Next**: E2E test runner (Playwright or primalSpring scenario `footprint-known-locations-e2e`).
 
 ### esotericWebb → `primals.eco/webb/` — **LIVE ON GATE**
 
@@ -120,7 +120,7 @@ Full path wired. All 6 core steps complete.
 | cellMembrane | 1,100 | 0 | 0 |
 | esotericWebb | 472 | 0 | 0 |
 | songBird | full pass | 0 | 0 |
-| footPrint | 266 | clean | 0 |
+| footPrint | 275 | clean | 0 |
 | lithoSpore | 222 | 0 | 0 |
 | sporePrint | 289 | 0 | 0 |
 | primalSpring | 1,203 | 0 | 2 |
