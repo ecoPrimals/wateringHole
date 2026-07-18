@@ -35,7 +35,12 @@ Cloudflare absorbs DDoS and bot traffic. This is the **target architecture**
 
 **URL Standard**: `prefix.primals.eco` (subdomain) is REQUIRED for all
 compositions. Path-based routing (`primals.eco/path/`) is prohibited.
-Root domain reserved for sporePrint.
+Root domain (`primals.eco`) redirects to `sporeprint.primals.eco`.
+
+**Three-Domain Model**:
+- `primals.eco` — **intra-membrane** (shared ecosystem: compositions, depot, forge, docs)
+- `primal.eco` — **inner membrane** (personal sovereign: mesh, ceremonies, private compositions)
+- `nestgate.io` — **data service point** (CAS, federated APIs, weak bond data ingestion)
 
 ---
 
@@ -68,7 +73,7 @@ Root domain reserved for sporePrint.
 
 | Surface | URL | Gate | Status |
 |---------|-----|------|--------|
-| sporePrint | `primals.eco` | golgiBody | LIVE ✓ |
+| sporePrint | `sporeprint.primals.eco` | golgiBody | NEEDS MIGRATION (currently on root `primals.eco`) |
 | TOPO-VIS | `live.primals.eco` | sporeGate | LIVE |
 | JupyterHub | `lab.primals.eco` | ironGate | LIVE |
 | Forgejo | `git.primals.eco` | golgiBody | LIVE |
@@ -107,6 +112,7 @@ action but NOT required (outer membrane MAY use Cloudflare per diderm model).
 | Create `webb.primals.eco` Caddy vhost | cellMembrane + ops | Subdomain standard. `reverse_proxy 10.13.37.6:8090` on golgiBody. |
 | Change cellMembrane esotericWebb constant | cellMembrane | `ESOTERICWEBB_PATH → WEBB_DOMAIN = "webb.primals.eco"` (subdomain standard) |
 | Enable esotericWebb systemd | sporeGate ops | `systemctl enable --now esotericwebb-server` on flockGate |
+| Migrate sporePrint to `sporeprint.primals.eco` | cellMembrane + ops | Add `SPOREPRINT_DOMAIN` constant, Caddy vhost, root redirect |
 
 ### P1 — Inter-Primal Wiring
 
@@ -154,8 +160,9 @@ action but NOT required (outer membrane MAY use Cloudflare per diderm model).
 
 - **Fix deployment chain**: footPrint Caddy routing + CSP + songBird snippets
 - **Create `webb.primals.eco`**: Caddy vhost + systemd persistence
-- **Evolve cellMembrane**: esotericWebb subdomain constant, footPrint single-upstream
-- **Enable Cloudflare DNSSEC** for `primals.eco` (outer membrane, API-supported)
+- **Migrate sporePrint** to `sporeprint.primals.eco`, root domain redirect
+- **Evolve cellMembrane**: subdomain constants for all compositions
+- **Enable Cloudflare DNSSEC** for `primals.eco` (API-supported)
 
 ### NEAR TERM (next 2-4 weeks)
 
@@ -261,13 +268,12 @@ Offline: westGate (cold storage), fieldGate (dead CMOS),
 
 ---
 
-*Wave 150d: Deployment chain investigation. Operator verified both products
-non-functional externally. Subdomain standard formalized: `prefix.primals.eco`
-(wildcard DNS means Caddy-only changes). songBird role documented: inner
-membrane port solver (drawbridge :7780 → capability → port resolution).
-Cloudflare confirmed as outer membrane firebreak (target architecture, not
-transitional). DNSSEC: inner domains sovereign and enabled; outer `primals.eco`
-P2. Routing fix specified: footPrint needs single-upstream Caddy + CSP for
-tile domains. esotericWebb needs `webb.primals.eco` vhost (not path-based).
-cellMembrane constant change required. Standards updated: COMPOSITION_ROUTING
-now enforces subdomain pattern and CSP requirements.*
+*Wave 150d: Three-domain model refined. `primals.eco` = intra-membrane (shared
+ecosystem), `primal.eco` = inner membrane (personal sovereign), `nestgate.io` =
+data service point. Root domain redirects to `sporeprint.primals.eco`.
+All compositions use `prefix.primals.eco` subdomains. Deployment chain traced
+end-to-end: Cloudflare → Caddy → songBird drawbridge → service. songBird =
+inner membrane port solver. Cloudflare = outer firebreak (target architecture).
+DNSSEC: sovereign domains enabled, `primals.eco` P2. Both products deployed
+but not externally functional — 5 P0 routing/ops items issued. Standards
+updated: DIDERM_DOMAIN_ARCHITECTURE, COMPOSITION_ROUTING_STANDARD.*

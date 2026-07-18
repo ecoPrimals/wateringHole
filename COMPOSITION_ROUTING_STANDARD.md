@@ -47,6 +47,18 @@ Upstream MUST be the WireGuard mesh IP of the gate running the
 service (`10.13.37.x:PORT`), not `localhost`. Caddy on golgiBody
 proxies over the WireGuard mesh to the target gate.
 
+### Root Domain Redirect
+
+The root domain `primals.eco` redirects to `sporeprint.primals.eco`
+(the ecosystem's public face). No compositions serve from the root.
+
+```caddy
+primals.eco {
+    import security_headers
+    redir https://sporeprint.primals.eco{uri} permanent
+}
+```
+
 ### 2. Drawbridge Capability Registration
 
 Compositions that serve capabilities MUST register them via songBird
@@ -86,11 +98,11 @@ External API (USGS, NCBI, ArcGIS, etc.)
 
 ### 4. Domain Trust Levels
 
-| Domain | Trust Level | What Deploys Here |
-|--------|------------|-------------------|
-| `*.primals.eco` | Outer membrane (untrusted by inner) | Public compositions, shared data, demos |
-| `*.primal.eco` | Inner membrane (full trust) | Private compositions, ceremonies, sovereign data |
-| `*.nestgate.io` | Content organelle | Federated data gateway, CAS queries |
+| Domain | Layer | What Deploys Here |
+|--------|-------|-------------------|
+| `*.primals.eco` | Intra-membrane (shared ecosystem) | Public compositions, shared data, tools, docs |
+| `*.primal.eco` | Inner membrane (personal sovereign) | Private compositions, ceremonies, sovereign data |
+| `*.nestgate.io` | Data service point | Federated data gateway, CAS queries, API interactions |
 
 **Rule**: The same composition code can deploy to both domains. The
 domain determines the trust level, which determines what data is
@@ -206,7 +218,7 @@ routing and the JSON-RPC bridge.
 
 | Composition | Subdomain | Gate | Status | Capabilities |
 |------------|-----------|------|--------|-------------|
-| sporePrint | `primals.eco` (root) | golgiBody | LIVE | `content.serve` |
+| sporePrint | `sporeprint.primals.eco` | golgiBody | NEEDS MIGRATION (currently on root) | `content.serve` |
 | footPrint | `footprint.primals.eco` | sporeGate | DEPLOYED (routing broken) | GIS proxy (10 hosts) |
 | esotericWebb | `webb.primals.eco` | flockGate | DEPLOYED (Caddy missing) | `esotericwebb` |
 | TOPO-VIS | `live.primals.eco` | sporeGate | LIVE | `topo.visualize` |
@@ -235,3 +247,4 @@ routing and the JSON-RPC bridge.
 |------|--------|
 | 138a | Initial: formalized composition routing standard from ad-hoc footPrint and JupyterHub deployments. Wildcard DNS, drawbridge registration, data ingestion via weak bonds, trust levels by domain. |
 | 150c | Subdomain standard enforced: `prefix.primals.eco` is REQUIRED. Path-based routing prohibited for new compositions. footPrint corrected to `footprint.primals.eco`. esotericWebb changed from `/webb/` path to `webb.primals.eco` subdomain. CSP requirements strengthened. Deployment chain and songBird role documented. |
+| 150d | Root domain redirect: `primals.eco` → `sporeprint.primals.eco`. sporePrint gets own subdomain. Domain terminology refined: `primals.eco` = intra-membrane, `primal.eco` = inner membrane, `nestgate.io` = data service point. |

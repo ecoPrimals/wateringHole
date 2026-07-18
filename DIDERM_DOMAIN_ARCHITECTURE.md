@@ -76,45 +76,51 @@ The ecoPrimals diderm follows this pattern:
 
 | Domain | K-Derm Layer | DNS Authority | TLS Provider | Trust Level | Purpose |
 |--------|-------------|--------------|-------------|-------------|---------|
-| `primals.eco` | Outer (trans face) | Cloudflare (wildcard `*.primals.eco`) | Caddy + LE (per-site or on-demand) | **Untrusted by inner membrane** | Ecosystem platform: depot, forge, compositions, public tools |
-| `primal.eco` | Inner (cis face) | Sovereign knot-dns | Sovereign Caddy + LE | **Full trust** — Dark Forest strict | Personal substrate: sporePrint site, mesh API, relay, gate coordination, HPC federation |
-| `nestgate.io` | Content organelle (cytoplasm) | Sovereign knot-dns | Sovereign Caddy + LE | **Content trust** — BLAKE3 integrity | Federated data gateway: CAS backbone, drawbridge-registered weak bonds for external data (NCBI, PubMed, UniProt, USGS, FEMA, ArcGIS, etc.) |
+| `primals.eco` | Intra-membrane (shared ecosystem) | Cloudflare (wildcard `*.primals.eco`) | Caddy + LE (per-site or on-demand) | **Shared trust** — ecosystem services | Ecosystem platform: depot, forge, compositions, public tools, docs |
+| `primal.eco` | Inner membrane (personal sovereign) | Sovereign knot-dns | Sovereign Caddy + LE | **Full trust** — Dark Forest strict | Personal substrate: mesh API, relay, gate coordination, HPC federation, ceremonies |
+| `nestgate.io` | Data service point (interaction layer) | Sovereign knot-dns | Sovereign Caddy + LE | **Content trust** — BLAKE3 integrity | Data service interaction: CAS backbone, federated APIs, weak bond data ingestion |
 
-### Domain Identity (long-term)
+### Domain Identity
 
-The three domains serve distinct roles that will diverge over time:
+The three domains serve distinct roles:
 
-- **`primals.eco`** — the ecosystem platform. The public face of ecoPrimals.
-  Anyone can pull depot binaries, browse the forge, use public compositions
-  (footPrint with public data, TOPO-VIS dashboard), view sporePrint. Subdomains
-  are sovereign-routed: `*.primals.eco` resolves via a single Cloudflare
-  wildcard A record, and Caddy on golgi handles all per-hostname routing.
-  New services only need a Caddy block — no DNS changes. Public footPrint
-  instances (shared GIS data, demo projects) live here.
-- **`primal.eco`** — the personal sovereign substrate. The operator's own
-  network, LAN/WAN mesh, private compositions, and sovereign ceremony host.
-  Key creation ceremonies (SoloKey FIDO2 + Pixel StrongBox entropy mixing),
-  bearDog gatehouse, private footPrint instances (private property data,
-  personal GIS projects), HPC federation, and inner membrane coordination
-  live here. This is where cryptographic sovereignty is exercised — the
-  entropy ceremonies, FAMILY_SEED management, and BTSP authentication
-  authority all bind to `primal.eco`. sporePrint serves as the operator's
-  personal site and blog. This domain will stop mirroring `primals.eco`
-  and become a fully independent identity.
-- **`nestgate.io`** — the federated data gateway. nestGate CAS as the
-  content-addressed backbone. All external scientific and geospatial data
-  sources (NCBI, PubMed, UniProt, USGS, FEMA, ArcGIS, etc.) enter through
-  drawbridge-registered weak bonds and land in the CAS. When the federated
-  data mesh scales, `nestgate.io` is the single public entry point for
-  querying content-addressed sovereign data.
+- **`primals.eco`** — the **intra-membrane**. The ecosystem's shared
+  infrastructure and public face. Root domain redirects to
+  `sporeprint.primals.eco`. All compositions, tools, and services are
+  subdomains: `prefix.primals.eco`. Subdomains are sovereign-routed:
+  `*.primals.eco` resolves via a single Cloudflare wildcard A record,
+  and Caddy on golgi handles all per-hostname routing. New services
+  only need a Caddy block — no DNS changes. This is the layer between
+  the personal inner membrane and the hostile internet. Cloudflare
+  operates as the outer firebreak (DDoS, CDN), making `primals.eco`
+  an intra-membrane — not directly exposed, but publicly accessible
+  through the firebreak.
+- **`primal.eco`** — the **inner membrane**. The operator's personal
+  sovereign substrate. LAN/WAN mesh, private compositions, sovereign
+  ceremony host. Key creation ceremonies (SoloKey FIDO2 + Pixel
+  StrongBox entropy mixing), bearDog gatehouse, private compositions,
+  HPC federation, and inner membrane coordination. This is where
+  cryptographic sovereignty is exercised — entropy ceremonies,
+  FAMILY_SEED management, BTSP authentication authority. This domain
+  is a fully independent identity, not a mirror of `primals.eco`.
+- **`nestgate.io`** — the **data service interaction point**. nestGate
+  CAS as the content-addressed backbone. All external scientific and
+  geospatial data sources (NCBI, PubMed, UniProt, USGS, FEMA, ArcGIS,
+  etc.) enter through drawbridge-registered weak bonds and land in the
+  CAS. The single public entry point for querying content-addressed
+  sovereign data. The interaction layer for the ecosystem's data mesh.
 
 **Composition routing by domain**: The same primals serve both domains, but
-the trust level and data scope differ. A footPrint instance on `primals.eco`
-shows public GIS data (shared projects, demo tiles). A footPrint instance on
-`primal.eco` shows private property data, personal measurements, and
-sovereign coordinates — backed by Loam Certificates for provenance and
-bearDog-signed sessions for integrity. The domain determines the membrane
-layer, which determines the trust model.
+the trust level and data scope differ. A footPrint instance on
+`footprint.primals.eco` shows public GIS data (shared projects, demo tiles).
+A footPrint instance on `primal.eco` shows private property data, personal
+measurements, and sovereign coordinates — backed by Loam Certificates for
+provenance and bearDog-signed sessions for integrity. The domain determines
+the membrane layer, which determines the trust model.
+
+**Root domain standard**: `primals.eco` (bare) redirects to
+`sporeprint.primals.eco`. All compositions use `prefix.primals.eco`
+subdomains — no path-based routing on the root domain.
 
 ### DNS Routing Model (Wave 137b+)
 
@@ -426,6 +432,7 @@ deploy_membrane.sh --composition peptidoglycan --provider bare_metal --host floc
 |------|--------|
 | 77 | Initial: formalized diderm domain architecture with peptidoglycan trust barrier, Dark Forest membrane classification, cross-membrane validation pattern, revised glacial shift criteria. |
 | 137b | Wildcard `*.primals.eco` DNS active. Domain identity separation formalized: `primals.eco` (public platform), `primal.eco` (sovereign substrate + entropy ceremonies + private compositions), `nestgate.io` (federated data gateway). Composition routing by domain documented (same primals, different trust/data scope per domain). Loam Certificate vs TLS credential terminology applied. |
+| 150d | Domain terminology refined: `primals.eco` = intra-membrane (shared ecosystem), `primal.eco` = inner membrane (personal sovereign), `nestgate.io` = data service interaction point. Root domain redirect: `primals.eco` → `sporeprint.primals.eco`. Subdomain standard enforced for all compositions. sporePrint gets own subdomain. |
 
 ---
 
