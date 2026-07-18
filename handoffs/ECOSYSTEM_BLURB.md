@@ -65,11 +65,13 @@ Each primal team: address your rows.
 | `cargo fmt` (54 files) | CI hygiene | P2 | 222 diff hunks across scenario files. |
 | 4 production `unwrap()` calls | runtime safety | P2 | `s_protokarya_wan_deploy.rs` (1), `s_soundstage_ceremony_observation.rs` (3). |
 
-### lithoSpore (CODE QUALITY)
+### lithoSpore — **ALL CLEAR (Wave 149b AAR)**
 
 | Need | Consumer(s) | Priority | Detail |
 |------|-------------|----------|--------|
-| 308 clippy warnings (pedantic+nursery) | code quality | P2 | 186 in `ltee-cli` (96 auto-fixable). `cargo clippy --fix` first. |
+| ~~308 clippy warnings~~ | ~~code quality~~ | — | **RESOLVED** — workspace lints handle scientific casts; 4 real warnings fixed (`71438b8`). Clippy 0. |
+| ~~ring C/asm dependency~~ | ~~ecoBin purity~~ | — | **RESOLVED** — ring dropped, ureq replaced with curl subprocess (`1191c6e`). BearDog owns crypto. |
+| ~~USB round-trip validation~~ | ~~deployment~~ | — | **RESOLVED** — 6-step deploy-test cycle, 5 integration tests (`3c56fc4`). |
 
 ### sporePrint (CONTENT FRESHNESS)
 
@@ -133,7 +135,7 @@ Each primal team: address your rows.
 | footPrint | **0** ESLint | — | 0 | — | 0 | 275 | — | **Responsive + a11y shipped** |
 | songBird | **556** | 10 | 0 | 0 | **2** | 14,322 | **81** | — |
 | sporePrint | — | — | 0 | — | 0 | 289 | — | Stale page |
-| lithoSpore | 308 | 0 | 0 | 0 | 0 | 199 | 0 | — |
+| lithoSpore | **0** | 0 | 0 | 0 | 0 | **227** | 0 | **ALL CLEAR** |
 | primalSpring | 456 | 54 | 0 | 0 | 0 | 1,274 | 4 | — |
 
 **Ecosystem totals**: 18,000+ tests, 0 debt markers, 0 unsafe blocks.
@@ -160,12 +162,15 @@ is strong. No web frontend — terminal-only game via `preview` or JSON-RPC.
 | 8. Caddy route on golgiBody | **PENDING** | sporeGate ops |
 | 9. E2E demo scenario | **SHIPPED** (V18) — aldric bug pending | esotericWebb |
 
-### lithoSpore → CLI tool — **PIPELINE PROVEN, DEEP DEBT CLEAR**
+### lithoSpore → CLI tool — **ALL 6 STEPS COMPLETE**
 
 | Step | Status |
 |------|--------|
-| 1-5. Platform trait, pack/unpack, initioChem, deep debt | **ALL DONE** (199 tests) |
-| 6. USB round-trip validation | NOT STARTED |
+| 1-5. Platform trait, pack/unpack, initioChem, deep debt | **ALL DONE** |
+| 6. USB round-trip validation | **DONE** — 6-step deploy-test cycle (`3c56fc4`) |
+| 7. ring dropped (ecoBin purity) | **DONE** — curl subprocess, ring banned in deny.toml (`1191c6e`) |
+| 8. Clippy clean | **DONE** — workspace lints + 4 manual fixes (`71438b8`) |
+| **Total** | **227 tests, 0 clippy, 0 fmt, 0 debt, 0 unsafe, 0 prod unwrap** |
 
 ### projectFOUNDATION → TBD (NOT STARTED)
 
@@ -180,7 +185,7 @@ is strong. No web frontend — terminal-only game via `preview` or JSON-RPC.
 | footPrint | 275 | **0** ESLint | — | 0 | — |
 | songBird | 14,322 | 556 | 10 | 0 | 81 |
 | sporePrint | 289 | — | — | 0 | — |
-| lithoSpore | 199 | 308 | 0 | 0 | 0 |
+| lithoSpore | **227** | **0** | 0 | 0 | 0 |
 | primalSpring | 1,274 | 456 | 54 | 0 | 4 |
 
 ---
@@ -194,6 +199,7 @@ is strong. No web frontend — terminal-only game via `preview` or JSON-RPC.
 | Glacial Shift (8/8) | **ALL CLEAR** |
 | `gate.enroll` fully automated (7 phases) | **SHIPPED** |
 | lithoSpore pack/unpack + initioChem | **SHIPPED** |
+| **lithoSpore ring drop + USB round-trip + clippy clean** | **SHIPPED** (Wave 149b AAR) |
 | **footPrint LIVE** | **LIVE** — known locations E2E shipped |
 | **esotericWebb LIVE on flockGate** | **V18** — demo scenario shipped |
 | **E2E Tutorial Standard adopted** | **SHIPPED** — both products compliant |
@@ -221,7 +227,7 @@ golgiBody (10.13.37.1) — hub, VPS, Caddy TLS
   ├─ sporeGate (10.13.37.2) — builder, footPrint:8090 [LIVE]
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
   ├─ flockGate (10.13.37.6) — esotericWebb:8090 [V18, persistence pending]
-  ├─ ironGate  (10.13.37.7) — compute, lithoSpore [pipeline proven]
+  ├─ ironGate  (10.13.37.7) — compute, lithoSpore [ALL CLEAR, 227 tests]
   └─ northGate (10.13.37.8) — Windows, RTX 5090
 ```
 
@@ -232,5 +238,6 @@ golgiBody (10.13.37.1) — hub, VPS, Caddy TLS
 (556) + prod unwrap elimination (81) + file splits; footPrint needs responsive
 design + accessibility pass + ESLint fix (162); esotericWebb demo has missing
 aldric NPC (false-positive bug). All fmt drift is minor and auto-fixable.
-sporePrint esotericWebb.md metadata stale. lithoSpore + primalSpring have
-clippy backlogs (308, 456) — mostly doc_markdown, batch-fixable.*
+sporePrint esotericWebb.md metadata stale. lithoSpore clippy RESOLVED
+(0 warnings, workspace lints + 4 manual fixes). primalSpring has
+clippy backlog (456) — mostly doc_markdown, batch-fixable.*
