@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 148
-sub = "b"
+id = 149
+sub = "a"
 date = "2026-07-18"
-posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE. cellMembrane deploy fix shipped. Live Frontend E2E Tutorial Standard issued — known locations (footPrint) + demo scenarios (esotericWebb) required for all live frontends."
+posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE. E2E Tutorial Standard adopted — footPrint shipped known locations (5f449df), esotericWebb shipped V18 demo subcommand (18b8169). Both products E2E-compliant. Ops persistence pending."
 publisher = "eastGate-overwatch"
 
 [gates]

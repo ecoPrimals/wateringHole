@@ -1,30 +1,27 @@
-# ecoPrimals Ecosystem Blurb — Wave 148b
+# ecoPrimals Ecosystem Blurb — Wave 149a
 
-**Date**: Jul 18, 2026 07:55 EDT | **Wave**: 148b | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE.**
+**Date**: Jul 18, 2026 08:40 EDT | **Wave**: 149a | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE. E2E STANDARD ADOPTED.**
 
-**This cascade**: cellMembrane shipped esotericWebb deploy fix (correct port
-8090, ExecStart, WorkingDirectory, Caddy routing). Live Frontend E2E Tutorial
-Standard issued — all live frontends must have known locations / demo scenarios
-that double as E2E verification suites. footPrint: 5 known locations specified
-(MSU Campus, Downtown EL, Red Cedar flood, Meridian Twp, Haslett Ag).
-esotericWebb: guided demo scenario pattern specified.
+**This cascade**: Both product teams responded to the E2E Tutorial Standard.
+footPrint shipped known locations + picker UI + URL hash deep-linking (275 tests,
+`5f449df`). esotericWebb shipped V18 — `esotericwebb demo` subcommand with YAML-driven
+guided tour (8 steps, 6/9 primals exercised, JSON output for CI). songBird fixed
+mutex poison cascade in persistence tests. sporePrint added `live` maturity level
+(green badge, 302 pages, 79 entities). primalSpring KNOWN_DEBT calibrated to 1.
+4 handoffs fossilized.
 
 ---
 
 ## Upstream Primal Demand Signal
 
-### footPrint team (E2E TUTORIAL — SHIPPED)
+Accumulated needs from all downstream consumers. Each primal team: address
+your rows. This section grows as gardens evolve — that's the point.
+
+### esotericWebb team (OPS — 2 remaining)
 
 | Need | Consumer(s) | Priority | Detail |
 |------|-------------|----------|--------|
-| ~~Known locations + picker UI~~ | users + operators | — | **SHIPPED** (`5f449df`). 5 locations, `<select>` picker, URL hash deep-linking (#msu-campus), 9 new tests. |
-
-### esotericWebb team (E2E TUTORIAL + OPS — NEW)
-
-| Need | Consumer(s) | Priority | Detail |
-|------|-------------|----------|--------|
-| Guided demo scenario | users + operators | **P1** | `content/demos/` YAML walkthrough exercising all connected primals. See standard. |
 | systemd persistence on flockGate | sporeGate ops | P1 | cellMembrane unit FIXED (`33aa33a`). Deploy: `systemctl enable --now esotericwebb-server`. |
 | Caddy route `/webb/` on golgiBody | sporeGate ops | P1 | Caddy config FIXED. Route `/webb/` → `flockGate:8090`. |
 
@@ -86,21 +83,23 @@ esotericWebb: guided demo scenario pattern specified.
 
 ## Path to Live — Downstream Projects
 
-### footPrint → `primals.eco/footprint/` — **LIVE**
+### footPrint → `primals.eco/footprint/` — **LIVE + E2E TUTORIAL SHIPPED**
 
-Full path wired. All 6 core steps complete.
-**Next**: E2E test runner (Playwright or primalSpring scenario `footprint-known-locations-e2e`).
+Full path wired. Known locations picker + URL hash deep-linking shipped.
+5 locations: MSU Campus, Downtown EL, Red Cedar River, Meridian Twp, Haslett Ag.
+**Next**: nestGate CAS wiring (P1), petalTongue WS bridge (P1).
 
-### esotericWebb → `primals.eco/webb/` — **LIVE ON GATE**
+### esotericWebb → `primals.eco/webb/` — **V18, LIVE ON GATE, E2E DEMO SHIPPED**
 
-472 tests, 6/9 primals connected, flockGate:8090. Deploy artifacts FIXED.
+V18, 472 tests, 6/9 primals connected, flockGate:8090. `esotericwebb demo`
+subcommand ships 8-step guided tour with verification. Deploy artifacts FIXED.
 
 | Step | Status | Owner |
 |------|--------|-------|
-| 1-6. Binary, Caddy, unit, songBird, composition, Forgejo | **ALL DONE** | — |
+| 1-6. Binary, Caddy unit, songBird, composition, Forgejo | **ALL DONE** | — |
 | 7. systemd enable on flockGate | **PENDING** | sporeGate ops |
 | 8. Caddy route on golgiBody | **PENDING** | sporeGate ops |
-| 9. E2E demo scenario | **NOT STARTED** | esotericWebb |
+| 9. E2E demo scenario | **SHIPPED** (V18, `18b8169`) | esotericWebb |
 
 ### lithoSpore → CLI tool — **PIPELINE PROVEN, DEEP DEBT CLEAR**
 
@@ -123,7 +122,7 @@ Full path wired. All 6 core steps complete.
 | footPrint | 275 | clean | 0 |
 | lithoSpore | 222 | 0 | 0 |
 | sporePrint | 289 | 0 | 0 |
-| primalSpring | 1,203 | 0 | 2 |
+| primalSpring | 1,203 | 0 | 1 |
 
 ---
 
@@ -136,10 +135,22 @@ Full path wired. All 6 core steps complete.
 | Glacial Shift (8/8) | **ALL CLEAR** |
 | `gate.enroll` fully automated (7 phases) | **SHIPPED** |
 | lithoSpore pack/unpack + initioChem | **SHIPPED** |
-| **footPrint LIVE** | **LIVE** — sovereign mesh serving |
-| **esotericWebb LIVE on flockGate** | **LIVE** — 6/9 primals, persistence pending |
+| **footPrint LIVE** | **LIVE** — sovereign mesh + known locations E2E |
+| **esotericWebb LIVE on flockGate** | **V18** — 6/9 primals, demo scenario shipped |
+| **E2E Tutorial Standard adopted** | **SHIPPED** — both products compliant |
 | songBird drawbridge + /jsonrpc + discovery | **SHIPPED** |
+| sporePrint `live` maturity level | **SHIPPED** — green badge, 302 pages |
 | Depot (59+ binaries, 4 arch) | **OPERATIONAL** |
+
+---
+
+## Canonical Port Map
+
+| Port | Service | Gate | Protocol |
+|------|---------|------|----------|
+| 8080 | nestGate / petalTongue | sporeGate | HTTP (static + WS) |
+| 8090 | footPrint | sporeGate | HTTP (API, behind drawbridge) |
+| 8090 | esotericWebb | flockGate | HTTP (direct serve) |
 
 ---
 
@@ -149,16 +160,18 @@ Full path wired. All 6 core steps complete.
 golgiBody (10.13.37.1) — hub, VPS, Caddy TLS
   ├─ sporeGate (10.13.37.2) — builder, footPrint:8090 [LIVE]
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
-  ├─ flockGate (10.13.37.6) — esotericWebb:8090 [LIVE, persistence pending]
+  ├─ flockGate (10.13.37.6) — esotericWebb:8090 [V18, persistence pending]
   ├─ ironGate  (10.13.37.7) — compute, lithoSpore [pipeline proven]
   └─ northGate (10.13.37.8) — Windows, RTX 5090
 ```
 
 ---
 
-*Wave 148a: esotericWebb deploy blockers resolved — binary in depot (3.3M,
-plasmidBin V17), Forgejo synced, LIVE on flockGate:8090 (6/9 primals, 472
-tests, mesh-accessible). Port 8080 confusion clarified (nestGate, not Webb).
-cellMembrane/sporeGate ops: make it persistent (systemd unit + Caddy route).
-Two composition products now serving on sovereign mesh: footPrint (sporeGate)
-and esotericWebb (flockGate).*
+*Wave 149a: E2E Tutorial Standard fully adopted — both live products compliant.
+footPrint shipped known locations + picker + hash deep-linking (5f449df, 275 tests).
+esotericWebb shipped V18 with `demo` subcommand — 8-step guided tour, JSON CI output,
+exercises 6/9 primals (18b8169). songBird fixed mutex poison cascade (f0025ee6).
+sporePrint added `live` maturity level (351c6cd). primalSpring KNOWN_DEBT → 1.
+4 handoffs fossilized. Remaining: ops persistence (systemd + Caddy) for esotericWebb,
+then primal-level demand signal items (nestGate CAS, petalTongue WS, squirrel null,
+bearDog sigs, sweetGrass braids).*
