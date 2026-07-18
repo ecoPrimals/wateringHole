@@ -4,7 +4,7 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-18T14:02:00Z"
+updated = "2026-07-18T14:21:00Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
@@ -18,7 +18,7 @@ blueFish = "c92df4a4046cec711cd98daac6800856a95d6bca"
 cellMembrane = "0141c50c8267a2ec80328284f55be48198f6d447"
 coralReef = "57e3fe4fb3a5ae34c5bda76d6f6564e24613e488"
 esotericWebb = "c4c35dc5fcd598a8c35bc4720cefcddb8eb7c1ef"
-footPrint = "d79227754847aad6a0ed55952e83a7831c620bee"
+footPrint = "396906c"
 groundSpring = "65066aac16e81bc3e369580864ce42ef0b39cb40"
 healthSpring = "1ee03f65b5f66ddfdf3e1e393d1fda305cd6c7a7"
 helixVision = "8237d6e0f3aaa7a03553cc1b75916aff10be6c27"
