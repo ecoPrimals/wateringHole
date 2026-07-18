@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-17T22:00:00Z"
+updated = "2026-07-18T11:40:00Z"
 
 [heads]
 bearDog = "27cf95c7843f121c445f50190c317a4a3ef66faa"
@@ -37,6 +37,7 @@ depot_architectures = "x86_64-musl, aarch64-musl, aarch64-android, x86_64-window
 mesh_status = "6-GATE MESH — golgi, sporeGate, eastGate, flockGate, ironGate, northGate"
 cascade_sense = "OPERATIONAL — auto-rebuild on golgi via zola-rebuild.conf"
 footprint_server = "LIVE on sporeGate:8090 — Node.js wrapper, 4h+ uptime, API 200"
+esotericwebb_caddy = "WIRED on golgi — primals.eco/webb/* → flockGate:8090 via WG. 502 until flockGate service starts."
 
 [resolved]
 sporePrint_404_p0 = "FIXED: Caddy try_files + cascade-sense manifest fixes (Wave 143b)"
