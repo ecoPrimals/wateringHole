@@ -194,7 +194,7 @@ action but NOT required (outer membrane MAY use Cloudflare per diderm model).
 | esotericWebb | 472 | 0 | 0 | 0 | 0 | 0 | 0 |
 | footPrint | 466 | 0 | — | 0 | — | 0 | — |
 | songBird | 14,322 | swept | swept | 0 | 0 | swept | swept |
-| lithoSpore | 227 | 0 | 0 | 0 | 0 | 0 | 0 |
+| lithoSpore | 229 | 0 | 0 | 0 | 0 | 0 | 0 |
 | loamSpine | 1,702 | 0 | 0 | 0 | 0 | 0 | 0 |
 | rhizoCrypt | 1,878 | 0 | 0 | 0 | 0 | 0 | 0 |
 | nestGate | audit | 0 | 0 | 0 | 0 | audit | audit |
@@ -214,6 +214,7 @@ action but NOT required (outer membrane MAY use Cloudflare per diderm model).
 | Glacial Shift (8/8) ALL CLEAR | 137b |
 | `gate.enroll` fully automated (7 phases) | 147a |
 | lithoSpore ALL CLEAR (USB round-trip, ring dropped) | 150a |
+| pseudoSpore: 7 springs emitted + scope.toml + spore-status | 150d |
 | pseudoSpore pipeline: 7 springs emitted | 150a |
 | footPrint code complete (466 tests, responsive, a11y) — routing P0 | 150c |
 | esotericWebb V18 LIVE on flockGate (demo scenario) | 149a |
