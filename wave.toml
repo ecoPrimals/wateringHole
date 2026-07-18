@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 147
-sub = "i"
-date = "2026-07-17"
-posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT LIVE. esotericWebb deploy BLOCKED (binary not in depot, repo not on sporeGate, flockGate:8080 not responding). primalSpring KNOWN_DEBT 2."
+id = 148
+sub = "a"
+date = "2026-07-18"
+posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT LIVE. ESOTERICWEBB LIVE on flockGate:8090 (6/9 primals, 472 tests). Binary in depot. Persistence pending (cellMembrane/sporeGate ops)."
 publisher = "eastGate-overwatch"
 
 [gates]
