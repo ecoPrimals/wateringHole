@@ -10,9 +10,9 @@
 
 [wave]
 id = 150
-sub = "c"
+sub = "d"
 date = "2026-07-18"
-posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. DEPLOYMENT ISSUES FOUND. Operator verification exposed footPrint routing gaps (missing /ext proxy, URL mismatch) and esotericWebb 404 (Caddy route never created). Code is solid — ops/routing layer has real bugs. P0 items issued."
+posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. DEPLOYMENT CHAIN TRACED. Subdomain standard formalized (prefix.primals.eco). songBird inner membrane port solver documented. Cloudflare outer membrane firebreak confirmed. DNSSEC: inner sovereign+enabled, outer P2. Products deployed but not externally functional — P0 routing fixes specified."
 publisher = "eastGate-overwatch"
 
 [gates]

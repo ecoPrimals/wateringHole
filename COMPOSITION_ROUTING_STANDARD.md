@@ -27,6 +27,11 @@ Compositions receive subdomains through the `*.primals.eco` wildcard
 DNS. No Cloudflare changes are needed. Only a Caddy server block
 on golgi is required.
 
+**Standard**: `prefix.primals.eco` subdomain is the REQUIRED pattern
+for all live compositions. Path-based routing on the root domain
+(`primals.eco/path/`) is NOT standard and MUST NOT be used for new
+compositions. The root domain is reserved for sporePrint content.
+
 **Rule**: Add a Caddy block to `provision/provision-golgi.sh` with
 the `security_headers` import. The wildcard catch-all block returns
 404 for unclaimed subdomains.
@@ -34,17 +39,13 @@ the `security_headers` import. The wildcard catch-all block returns
 ```caddy
 myproject.primals.eco {
     import security_headers
-    reverse_proxy localhost:PORT
+    reverse_proxy MESH_IP:PORT
 }
 ```
 
-For path-based routing on the root domain:
-
-```caddy
-handle /myproject/* {
-    reverse_proxy localhost:PORT
-}
-```
+Upstream MUST be the WireGuard mesh IP of the gate running the
+service (`10.13.37.x:PORT`), not `localhost`. Caddy on golgiBody
+proxies over the WireGuard mesh to the target gate.
 
 ### 2. Drawbridge Capability Registration
 
@@ -104,7 +105,7 @@ capabilities, data sources, and primal dependencies:
 [composition]
 name = "footPrint"
 org = "protoKarya"
-subdomain = "primals.eco/footprint/"
+subdomain = "footprint.primals.eco"
 trust_level = "outer"
 
 [capabilities]
@@ -136,8 +137,17 @@ security headers snippet:
 }
 ```
 
-CSP (Content-Security-Policy) SHOULD be composition-specific to
-allow only the external origins the composition needs.
+CSP (Content-Security-Policy) MUST be composition-specific to
+allow the external origins the composition needs. Compositions
+loading external tiles, scripts, or images (e.g., Esri, OSM) MUST
+declare those origins in `img-src`, `script-src`, etc. A missing
+CSP allowlist will cause silent failures (blank maps, broken data).
+
+**footPrint CSP example** (tile and data sources):
+
+```caddy
+header Content-Security-Policy "default-src 'self'; img-src 'self' https://server.arcgisonline.com https://*.tile.openstreetmap.org https://tiles.arcgis.com; connect-src 'self' https://nominatim.openstreetmap.org https://overpass-api.de https://epqs.nationalmap.gov https://hazards.fema.gov https://sdmdataaccess.sc.egov.usda.gov https://gisagocss.state.mi.us https://gis2.cityofeastlansing.com"
+```
 
 ---
 
@@ -166,18 +176,45 @@ allow only the external origins the composition needs.
 
 ---
 
-## Current Compositions (Wave 138a)
+## Deployment Chain
 
-| Composition | Subdomain | Status | Capabilities |
-|------------|-----------|--------|-------------|
-| sporePrint | `primals.eco` | LIVE | `content.serve` |
-| footPrint | `primals.eco/footprint/` | LIVE | GIS proxy (10 hosts) |
-| TOPO-VIS | `live.primals.eco` | LIVE | `topo.visualize` |
-| JupyterHub | `lab.primals.eco` | LIVE | `jupyter` |
-| Forgejo | `git.primals.eco` | LIVE | `forge.serve` |
-| Nest Atomic | `membrane.primals.eco` | LIVE | Tower + Nest services |
-| tideGlass | `tideglass.primals.eco` | PLANNED | GPS reversal screening |
-| helixVision | `helix.primals.eco` | PLANNED | Expression analysis |
+The full path from user to service for `prefix.primals.eco`:
+
+```
+User browser
+  → DNS: *.primals.eco → golgiBody VPS (Cloudflare wildcard A record)
+    → Cloudflare (outer membrane firebreak — DDoS absorber, CDN)
+      → Caddy on golgiBody (TLS termination, Host-header routing)
+        → reverse_proxy MESH_IP:PORT (over WireGuard to target gate)
+          → songBird drawbridge (capability resolution, port solving)
+            → Local service (footPrint, esotericWebb, etc.)
+```
+
+**songBird's role**: The inner membrane port solver. Drawbridge
+listens at `:7780`, maps HTTP paths to capabilities via
+`SONGBIRD_DRAWBRIDGE_ROUTES`, resolves capabilities to local
+service URLs via `SONGBIRD_PROXY_ROUTES`, and optionally proxies
+external "weak bond" APIs through a domain-validated allowlist.
+
+**Production optimization**: For external HTTPS data sources (tiles,
+GIS APIs), Caddy handles the proxy directly via imported snippets
+from `songBird/infra/caddy/`. This avoids drawbridge overhead for
+high-volume tile traffic. Drawbridge handles internal capability
+routing and the JSON-RPC bridge.
+
+## Current Compositions (Wave 150c)
+
+| Composition | Subdomain | Gate | Status | Capabilities |
+|------------|-----------|------|--------|-------------|
+| sporePrint | `primals.eco` (root) | golgiBody | LIVE | `content.serve` |
+| footPrint | `footprint.primals.eco` | sporeGate | DEPLOYED (routing broken) | GIS proxy (10 hosts) |
+| esotericWebb | `webb.primals.eco` | flockGate | DEPLOYED (Caddy missing) | `esotericwebb` |
+| TOPO-VIS | `live.primals.eco` | sporeGate | LIVE | `topo.visualize` |
+| JupyterHub | `lab.primals.eco` | ironGate | LIVE | `jupyter` |
+| Forgejo | `git.primals.eco` | golgiBody | LIVE | `forge.serve` |
+| Nest Atomic | `membrane.primals.eco` | golgiBody | LIVE | Tower + Nest services |
+| tideGlass | `tideglass.primals.eco` | — | PLANNED | GPS reversal screening |
+| helixVision | `helix.primals.eco` | — | PLANNED | Expression analysis |
 
 ---
 
@@ -197,3 +234,4 @@ allow only the external origins the composition needs.
 | Wave | Change |
 |------|--------|
 | 138a | Initial: formalized composition routing standard from ad-hoc footPrint and JupyterHub deployments. Wildcard DNS, drawbridge registration, data ingestion via weak bonds, trust levels by domain. |
+| 150c | Subdomain standard enforced: `prefix.primals.eco` is REQUIRED. Path-based routing prohibited for new compositions. footPrint corrected to `footprint.primals.eco`. esotericWebb changed from `/webb/` path to `webb.primals.eco` subdomain. CSP requirements strengthened. Deployment chain and songBird role documented. |

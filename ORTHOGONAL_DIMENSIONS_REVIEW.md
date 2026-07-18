@@ -57,7 +57,8 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 - [x] Sovereign outer membrane operational (Caddy TLS, bearDog ACME)
 - [x] Inner membrane zero-commercial (primal.eco data path)
 - [x] S1-S4 sovereignty shadows ALL GRADUATED
-- [ ] DNSSEC enabled on sovereign domains (P2)
+- [x] DNSSEC enabled on sovereign domains — `primal.eco` + `nestgate.io` (knot-dns, sovereign NS)
+- [ ] DNSSEC on `primals.eco` — not enabled (P2, enable via Cloudflare API or NS cutover)
 - [ ] primal.eco inner membrane separation (P2)
 
 ## 5. Depot / Build Pipeline
@@ -76,11 +77,12 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ## 6. Website / Public Surface / Security
 
-- [ ] `primals.eco` root — sporePrint content current but needs Zola rebuild confirmation (P1)
-- [x] `primals.eco/footprint/` returning 200 (GIS composition LIVE + fully usable)
+- [x] `primals.eco` root — sporePrint content LIVE (302 pages)
+- [ ] `footprint.primals.eco` — Caddy routing broken: `/ext` not proxied, catch-all → wrong upstream, CSP missing for tile domains (P0)
 - [x] `live.primals.eco` returning 200 (petalTongue TOPO-VIS)
 - [x] `lab.primals.eco` returning 200 (JupyterHub on ironGate)
-- [ ] `primals.eco/webb/` — Caddy route pending (esotericWebb live on gate, not routed yet)
+- [ ] `webb.primals.eco` — Caddy vhost not created, cellMembrane still uses path-based `/webb/` constant (P0)
+- [x] Subdomain standard formalized: `prefix.primals.eco` REQUIRED (Wave 150d, COMPOSITION_ROUTING_STANDARD updated)
 - [x] Security headers deployed (HSTS, CSP, X-Frame-Options, X-Content-Type)
 - [x] fail2ban active on SSH endpoints
 - [x] Rate limiting configured
@@ -98,10 +100,9 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ## 8. Compositions / Products / Live Services
 
-- [x] footPrint LIVE at `primals.eco/footprint/` — responsive, a11y, 466 tests
-- [x] esotericWebb V18 LIVE on flockGate:8090 — demo scenario, persistence pending ops
-- [ ] esotericWebb Caddy route `/webb/` on golgiBody (P1 ops)
-- [ ] esotericWebb systemd persistence on flockGate (P1 ops)
+- [ ] footPrint at `footprint.primals.eco` — code complete (466 tests, responsive, a11y) but Caddy routing broken (P0)
+- [ ] esotericWebb at `webb.primals.eco` — V18 code complete but Caddy vhost missing (P0)
+- [ ] esotericWebb systemd persistence on flockGate (P0 ops)
 - [x] lithoSpore ALL CLEAR — USB round-trip validated, 227 tests
 - [x] pseudoSpore pipeline — 7 springs emitted (6 pending validation.json)
 - [ ] tideGlass — Phase 0 not started
@@ -167,5 +168,5 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ---
 
-*Last used*: Wave 150a (Jul 18, 2026)
+*Last used*: Wave 150d (Jul 18, 2026)
 *Created*: Wave 139a

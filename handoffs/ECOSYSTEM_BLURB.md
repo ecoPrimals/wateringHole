@@ -1,72 +1,121 @@
-# ecoPrimals Ecosystem Blurb — Wave 150c
+# ecoPrimals Ecosystem Blurb — Wave 150d
 
-**Date**: Jul 18, 2026 10:05 EDT | **Wave**: 150c | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. DEPLOYMENT ISSUES FOUND.**
+**Date**: Jul 18, 2026 10:20 EDT | **Wave**: 150d | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. DEPLOYMENT CHAIN TRACED.**
 
-**This wave**: Operator verification of live surfaces exposed deployment gaps.
-footPrint and esotericWebb are NOT externally functional despite team reports
-of "LIVE". Code quality is excellent but the ops/routing layer has real bugs.
-Teams reporting "shipped" ≠ users can access it. Blurb corrected.
-
----
-
-## 1. LIVE SYSTEMS — Actual State (Operator-Verified)
-
-### footPrint — **DEPLOYED ON GATE, NOT EXTERNALLY FUNCTIONAL**
-
-**Observed (Jul 18 10:00)**: UI shell loads but map tiles are gray/blank and
-geocoder returns no results. Product is not usable in current deployment.
-
-**Root causes identified**:
-
-| Issue | Severity | Detail |
-|-------|----------|--------|
-| **URL mismatch** | P0 | Blurb said `primals.eco/footprint/` but cellMembrane generates Caddy for `footprint.primals.eco` (subdomain). Wrong URL has been in blurb since Wave 147. |
-| **Missing `/ext` route** | P0 | Caddy routes `/api/*` and `/ws` but the proxy path is `/ext` (not under `/api/`). Geocoder, data source fetches, and all drawbridge calls CANNOT work. |
-| **Catch-all → petalTongue** | P1 | Non-API requests (including `/ext`) fall through to petalTongue:8080 which doesn't handle proxy. |
-| **Map tiles blank** | P1 | Esri satellite tiles load directly in browser — may be CSP, rate limit, or DNS. Switch to Street layer to diagnose. |
-
-**Required fixes (cellMembrane + sporeGate ops)**:
-
-1. Caddy: add `/ext/*` sub-route → footPrint:8090 (or route ALL traffic to footPrint and let Express handle static + API)
-2. Verify correct URL: `footprint.primals.eco` or reconfigure for path-based `primals.eco/footprint/`
-3. Verify map tile CSP headers — Caddy must allow `img-src` from `*.arcgisonline.com` and `*.tile.openstreetmap.org`
-4. Confirm DNS: `footprint.primals.eco` must resolve and have a TLS cert
-
-**Code health is strong** — 466 tests, responsive, a11y, ESLint clean. The issue
-is purely deployment routing, not application code.
-
-### esotericWebb → `primals.eco/webb/` — **404, NOT ROUTED**
-
-**Observed**: `primals.eco/webb/` returns sporePrint 404 page.
-Caddy route on golgiBody was never created. esotericWebb runs on
-flockGate:8090 but is only accessible via mesh IP (`10.13.37.6:8090`).
-
-**Required fixes (sporeGate ops)**:
-
-1. `systemctl enable --now esotericwebb-server` on flockGate
-2. Add Caddy `/webb/*` reverse_proxy → `flockGate:8090` on golgiBody
-
-### Other live surfaces
-
-| Surface | URL | Gate | Verified |
-|---------|-----|------|----------|
-| sporePrint (docs) | `primals.eco` | golgiBody | LIVE ✓ (302 pages visible) |
-| petalTongue TOPO-VIS | `live.primals.eco` | sporeGate | LIVE (unchecked this wave) |
-| JupyterHub | `lab.primals.eco` | ironGate | LIVE (unchecked this wave) |
+**This wave**: Deep investigation of deployment chain. Subdomain standard
+formalized (`prefix.primals.eco`). songBird's role as inner membrane port
+solver documented. Cloudflare outer membrane firebreak pattern confirmed.
+DNSSEC status clarified. Routing fixes specified with exact architectural
+context. Standards updated.
 
 ---
 
-## 2. PRIMAL DEMAND SIGNAL — Remaining Work
+## 1. DEPLOYMENT CHAIN — How Traffic Reaches Services
 
-### P0 — Deployment Broken (blocks all external users)
+```
+User → Cloudflare DNS (*.primals.eco wildcard → golgiBody VPS)
+  → Cloudflare CDN (outer membrane firebreak — absorbs hostile traffic)
+    → Caddy on golgiBody (TLS termination, Host-header routing)
+      → reverse_proxy over WireGuard mesh to target gate
+        → songBird drawbridge :7780 (capability → port resolution)
+          → Local service (footPrint:8090, esotericWebb:8090, etc.)
+```
+
+**songBird = inner membrane port solver.** Drawbridge maps paths to
+capabilities (`SONGBIRD_DRAWBRIDGE_ROUTES`), resolves capabilities to URLs
+(`SONGBIRD_PROXY_ROUTES`), and proxies external "weak bond" APIs through a
+domain-validated allowlist. Production optimization: Caddy handles external
+HTTPS proxying directly via songBird's `infra/caddy/` snippets.
+
+**Cloudflare = outer membrane firebreak.** Wildcard `*.primals.eco` resolves
+to golgiBody. No DNS changes needed for new subdomains — only a Caddy block.
+Cloudflare absorbs DDoS and bot traffic. This is the **target architecture**
+(diderm model), not transitional.
+
+**URL Standard**: `prefix.primals.eco` (subdomain) is REQUIRED for all
+compositions. Path-based routing (`primals.eco/path/`) is prohibited.
+Root domain reserved for sporePrint.
+
+---
+
+## 2. LIVE SYSTEMS — Actual State (Operator-Verified Jul 18)
+
+### footPrint → `footprint.primals.eco` — **DEPLOYED, NOT EXTERNALLY FUNCTIONAL**
+
+**Observed**: UI shell loads but map tiles gray/blank, geocoder non-functional.
+
+| Issue | Fix | Owner |
+|-------|-----|-------|
+| Caddy routes `/api/*` but proxy is at `/ext` | Route ALL `footprint.primals.eco` → footPrint:8090 (let Express handle everything) | cellMembrane |
+| Catch-all → petalTongue:8080 | Change catch-all upstream to footPrint:8090 | cellMembrane |
+| Map tiles blank (CSP or Esri) | Add CSP `img-src` for `*.arcgisonline.com`, `*.tile.openstreetmap.org` | cellMembrane |
+| songBird Caddy snippets not imported | Import `footprint-gis-proxy.Caddyfile` for production tile proxying | sporeGate ops |
+
+**Simplest fix**: Replace the three sub-routes with a single `reverse_proxy sporeGate:8090`. footPrint's Express server already handles static files, `/ext` proxy, `/api/*`, and would only need petalTongue for `/ws`.
+
+### esotericWebb → `webb.primals.eco` — **404, CADDY MISSING**
+
+**Observed**: `primals.eco/webb/` returns sporePrint 404.
+
+| Issue | Fix | Owner |
+|-------|-----|-------|
+| No Caddy vhost for `webb.primals.eco` | Add `webb.primals.eco { reverse_proxy 10.13.37.6:8090 }` to golgiBody | sporeGate ops |
+| cellMembrane uses path-based (`/webb/`) | Change `ESOTERICWEBB_PATH` to `WEBB_DOMAIN = "webb.primals.eco"` | cellMembrane |
+| No systemd persistence | `systemctl enable --now esotericwebb-server` on flockGate | sporeGate ops |
+
+### Verified live surfaces
+
+| Surface | URL | Gate | Status |
+|---------|-----|------|--------|
+| sporePrint | `primals.eco` | golgiBody | LIVE ✓ |
+| TOPO-VIS | `live.primals.eco` | sporeGate | LIVE |
+| JupyterHub | `lab.primals.eco` | ironGate | LIVE |
+| Forgejo | `git.primals.eco` | golgiBody | LIVE |
+| Depot | `depot.primals.eco` | golgiBody | LIVE |
+
+---
+
+## 3. DNSSEC + SOVEREIGNTY STATUS
+
+| Domain | Layer | DNS Authority | DNSSEC | Status |
+|--------|-------|--------------|--------|--------|
+| `primal.eco` | Inner membrane | knot-dns (sovereign) | **ENABLED** | Fully sovereign |
+| `nestgate.io` | Content organelle | knot-dns (sovereign) | **ENABLED** | Fully sovereign |
+| `primals.eco` | Outer membrane | Cloudflare (wildcard) | **NOT DONE** | P2 — enable via Cloudflare or NS cutover |
+
+**NS architecture**: Porkbun registrar. `primal.eco` + `nestgate.io` point to
+`ns1.primals.eco` / `ns2.primals.eco` (sovereign knot-dns on golgiBody).
+`primals.eco` points to Cloudflare nameservers. knot-dns runs with DNSSEC
+enabled on VPS; the `primals.eco` NS cutover to sovereign is pending registrar
+action but NOT required (outer membrane MAY use Cloudflare per diderm model).
+
+**DNSSEC options for `primals.eco`**:
+1. Enable DNSSEC through Cloudflare (quick — API-supported) — preserves CDN/DDoS
+2. Cutover NS to sovereign knot-dns — full sovereignty but loses Cloudflare protection
+3. Recommended: option 1 first (outer membrane MAY use commercial per diderm standard)
+
+---
+
+## 4. PRIMAL DEMAND SIGNAL
+
+### P0 — Deployment Broken (blocks external users)
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| Fix footPrint Caddy routing (`/ext` + tiles) | cellMembrane + sporeGate ops | `/ext` not proxied to footPrint:8090. Map tiles may need CSP fix. |
-| Confirm footPrint URL (subdomain vs path) | cellMembrane + overwatch | `footprint.primals.eco` vs `primals.eco/footprint/` — pick one, wire it. |
-| Create esotericWebb Caddy route | sporeGate ops | `/webb/*` → `flockGate:8090` |
+| Fix footPrint Caddy routing | cellMembrane | Route all `footprint.primals.eco` → sporeGate:8090. Add CSP for tile domains. Import songBird Caddy GIS snippets. |
+| Create `webb.primals.eco` Caddy vhost | cellMembrane + ops | Subdomain standard. `reverse_proxy 10.13.37.6:8090` on golgiBody. |
+| Change cellMembrane esotericWebb constant | cellMembrane | `ESOTERICWEBB_PATH → WEBB_DOMAIN = "webb.primals.eco"` (subdomain standard) |
 | Enable esotericWebb systemd | sporeGate ops | `systemctl enable --now esotericwebb-server` on flockGate |
+
+### P1 — Inter-Primal Wiring
+
+| Need | Owner | Consumer | Detail |
+|------|-------|----------|--------|
+| `PROJECTS_PATH` CAS wiring | nestGate | footPrint | Content-addressed project serving |
+| `WS_PATH` agent bridge | petalTongue | footPrint | WebSocket for real-time agent comms |
+| `null` params on health | squirrel | esotericWebb | Webb workaround: sends `{}` |
+| BTSP → `gate.enroll` | songBird | cellMembrane | Last enrollment automation primitive |
 
 ### P1 — Inter-Primal Wiring (blocks deeper composition)
 
@@ -103,9 +152,10 @@ flockGate:8090 but is only accessible via mesh IP (`10.13.37.6:8090`).
 
 ### NOW (this session / next cascade)
 
-- **Make esotericWebb persistent**: systemd + Caddy on flockGate/golgiBody
-- **Route remaining P1 wiring** to nestGate, petalTongue, squirrel, songBird
-- **Validate sporePrint root** — confirm primals.eco Zola rebuild current
+- **Fix deployment chain**: footPrint Caddy routing + CSP + songBird snippets
+- **Create `webb.primals.eco`**: Caddy vhost + systemd persistence
+- **Evolve cellMembrane**: esotericWebb subdomain constant, footPrint single-upstream
+- **Enable Cloudflare DNSSEC** for `primals.eco` (outer membrane, API-supported)
 
 ### NEAR TERM (next 2-4 weeks)
 
@@ -113,9 +163,9 @@ flockGate:8090 but is only accessible via mesh IP (`10.13.37.6:8090`).
 - **nestGate CAS + petalTongue WS**: complete footPrint's backend composition
 - **songBird BTSP**: fully automated mesh enrollment end-to-end
 - **pseudoSpore validation**: promote 6 pending spores from PENDING → COMPLETE
-- **sporePrint content sweep**: all entity maturity levels current
 - **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
 - **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
+- **`primal.eco` inner membrane separation**: fully independent identity
 
 ### FUTURE (quarter horizon)
 
@@ -123,7 +173,7 @@ flockGate:8090 but is only accessible via mesh IP (`10.13.37.6:8090`).
 - **primal-transport crate**: publish shared transport abstraction
 - **SHOW_HN readiness**: rubric, narrative, demo path
 - **Exotic depot architectures**: riscv64, armv7, s390x (validated, not shipping)
-- **DNSSEC + inner membrane separation**: sovereign DNS + primal.eco isolation
+- **NS cutover for primals.eco**: sovereign DNS if Cloudflare exits (optional)
 - **fieldGate recovery**: hardware surgery (dead CMOS)
 - **biomeGate recovery**: kernel recovery
 
@@ -158,7 +208,7 @@ flockGate:8090 but is only accessible via mesh IP (`10.13.37.6:8090`).
 | `gate.enroll` fully automated (7 phases) | 147a |
 | lithoSpore ALL CLEAR (USB round-trip, ring dropped) | 150a |
 | pseudoSpore pipeline: 7 springs emitted | 150a |
-| footPrint LIVE + FULLY USABLE (466 tests, responsive, a11y) | 150a |
+| footPrint code complete (466 tests, responsive, a11y) — routing P0 | 150c |
 | esotericWebb V18 LIVE on flockGate (demo scenario) | 149a |
 | E2E Tutorial Standard adopted (both products) | 149a |
 | Dimensional review sweep (15 teams responded) | 150a |
@@ -173,12 +223,12 @@ flockGate:8090 but is only accessible via mesh IP (`10.13.37.6:8090`).
 ## 6. MESH TOPOLOGY
 
 ```
-golgiBody (10.13.37.1) — hub, VPS, Caddy TLS
-  ├─ sporeGate (10.13.37.2) — builder, footPrint:8090 [LIVE]
+golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, Cloudflare firebreak
+  ├─ sporeGate (10.13.37.2) — builder, footPrint:8090 [routing broken]
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
-  ├─ flockGate (10.13.37.6) — esotericWebb:8090 [V18, persistence pending]
+  ├─ flockGate (10.13.37.6) — esotericWebb:8090 [Caddy missing]
   ├─ ironGate  (10.13.37.7) — compute, lithoSpore [ALL CLEAR]
-  └─ northGate (10.13.37.8) — Windows, RTX 5090
+  └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled]
 
 Offline: westGate (cold storage), fieldGate (dead CMOS),
          strandGate (pending enrollment), biomeGate (kernel recovery)
@@ -192,30 +242,32 @@ Offline: westGate (cold storage), fieldGate (dead CMOS),
 
 ---
 
-## 7. ORTHOGONAL DIMENSIONS SUMMARY (12/12 reviewed)
+## 8. ORTHOGONAL DIMENSIONS SUMMARY (12/12 reviewed)
 
 | Dim | Area | Status | Open items |
 |-----|------|--------|------------|
 | 1 | Temporal | GREEN | — |
-| 2 | Ecological | GREEN | — (dimensional sweep complete) |
+| 2 | Ecological | GREEN | — |
 | 3 | Hardware | AMBER | 4 gates offline (not blocking) |
-| 4 | Sovereignty | GREEN | DNSSEC (P2) |
+| 4 | Sovereignty | AMBER | `primals.eco` DNSSEC not enabled |
 | 5 | Depot | GREEN | Exotic arch (P3) |
-| 6 | Public Surface | AMBER | webb/ route pending, sporePrint root unconfirmed |
+| 6 | Public Surface | **RED** | footPrint routing broken, webb Caddy missing |
 | 7 | Glacial Shift | GREEN | SHOW_HN rubric (P3) |
-| 8 | Compositions | AMBER | Webb persistence, nestGate CAS, petalTongue WS |
-| 9 | Documentation | GREEN | — |
+| 8 | Compositions | **RED** | Neither product externally functional |
+| 9 | Documentation | GREEN | Standards updated (routing, CSP) |
 | 10 | Cascade | GREEN | songBird BTSP (P1) |
 | 11 | CAC | GREEN | primalSpring scenario (P2) |
 | 12 | Silicon Atheism | GREEN | Credential trait, health trait (P2) |
 
 ---
 
-*Wave 150b: Full 12-dimension orthogonal review. Blurb reshaped around live
-systems and strategic goals. 2 products LIVE (footPrint fully usable, esotericWebb
-persistence pending ops). Demand signal condensed — 4 P1 inter-primal wiring
-items remain (nestGate CAS, petalTongue WS, squirrel null, songBird BTSP).
-15 demand signal items closed in Wave 149b→150a sweep. lithoSpore ALL CLEAR +
-7 pseudoSpores emitted. 12 dimensions: 9 GREEN, 3 AMBER (hardware offline gates,
-public surface routing, composition wiring). Near-term: full NUCLEUS composition,
-projectFOUNDATION design, strandGate enrollment.*
+*Wave 150d: Deployment chain investigation. Operator verified both products
+non-functional externally. Subdomain standard formalized: `prefix.primals.eco`
+(wildcard DNS means Caddy-only changes). songBird role documented: inner
+membrane port solver (drawbridge :7780 → capability → port resolution).
+Cloudflare confirmed as outer membrane firebreak (target architecture, not
+transitional). DNSSEC: inner domains sovereign and enabled; outer `primals.eco`
+P2. Routing fix specified: footPrint needs single-upstream Caddy + CSP for
+tile domains. esotericWebb needs `webb.primals.eco` vhost (not path-based).
+cellMembrane constant change required. Standards updated: COMPOSITION_ROUTING
+now enforces subdomain pattern and CSP requirements.*
