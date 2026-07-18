@@ -191,7 +191,7 @@ action but NOT required (outer membrane MAY use Cloudflare per diderm model).
 | loamSpine | 1,702 | 0 | 0 | 0 | 0 | 0 | 0 |
 | rhizoCrypt | 1,878 | 0 | 0 | 0 | 0 | 0 | 0 |
 | nestGate | audit | 0 | 0 | 0 | 0 | audit | audit |
-| primalSpring | 1,203 | 82 | 0 | 0 | 0 | 0 | 0 |
+| primalSpring | 1,203 | **0** | 0 | 0 | 0 | 0 | 0 |
 | sporePrint | 289 | — | — | 0 | — | 0 | — |
 
 **Ecosystem**: 0 debt markers, 0 unsafe code, 0 mocks in production.
