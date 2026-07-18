@@ -1,11 +1,11 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-17T22:00:00Z
+# Gate: sporeGate | Updated: 2026-07-18T14:25:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-18T12:10:00Z"
+updated = "2026-07-18T14:25:00Z"
 
 [heads]
 bearDog = "27cf95c7843f121c445f50190c317a4a3ef66faa"
@@ -23,28 +23,40 @@ petalTongue = "3c30bd4fcc3a40c2e2c204b9879bd99bca3dc68b"
 toadStool = "d6d9f20f5d9c8032d3cbe9c0c55b1de0e53f3c2a"
 sourDough = "3a0b52df4b65a5436bfa87161e8cf181c4e85194"
 cellMembrane = "77e929649ada4df6ebe7b9d0c55a03f1c1524e80"
-primalSpring = "3c70240c2afdbc9dc5892d21342f3074683eb53c"
+primalSpring = "f238397a"
 wateringHole = "fca63a33834a40d13dcf84c3abf3efb93d67d87e"
 sporePrint = "25cab9c890ddce17ac2486ebb0de51e77a724cbb"
 
 [deploy]
 songbird_version = "0.3.1-drawbridge-proxy"
 beardog_version = "0.10.0-silicon-atheism"
-gateway_status = "FOOTPRINT_LIVE_PHASE2_COMPLETE"
-topology = "internet → golgi(Caddy TLS) → WG → sporeGate(NUCLEUS+footPrint) → LAN mesh"
+gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
+topology = "internet → Cloudflare → golgi(Caddy TLS, subdomain routing) → WG → gates"
 depot_status = "LIVE — 59 binaries × 4 architectures (BLAKE3 + Ed25519 signed)"
 depot_architectures = "x86_64-musl, aarch64-musl, aarch64-android, x86_64-windows-gnu"
 mesh_status = "6-GATE MESH — golgi, sporeGate, eastGate, flockGate, ironGate, northGate"
-cascade_sense = "OPERATIONAL — auto-rebuild on golgi via zola-rebuild.conf"
-footprint_server = "LIVE on sporeGate:8090 — Node.js wrapper, 4h+ uptime, API 200"
-esotericwebb_caddy = "WIRED on golgi — primals.eco/webb/* → flockGate:8090 via WG. 502 until flockGate service starts."
+cascade_sense = "OPERATIONAL — atomic build-then-swap (zero-downtime)"
+footprint_server = "LIVE on sporeGate:8090 — footprint.primals.eco → 200"
+esotericwebb_caddy = "WIRED — webb.primals.eco → flockGate:8090 via WG. 502 until flockGate service starts."
+sporeprint_subdomain = "LIVE — sporeprint.primals.eco → 200. Root primals.eco 301 redirects."
+
+[caddy_surfaces]
+primals_eco = "301 → sporeprint.primals.eco (root redirect)"
+sporeprint = "200 — sporePrint docs (302 pages)"
+footprint = "200 — GIS composition (Express API + static)"
+webb = "502 — route wired, awaiting flockGate persistence"
+live = "200 — petalTongue TOPO-VIS"
+membrane = "200 — depot + status"
+git = "200 — Forgejo"
+lab = "401 — JupyterHub (basicauth)"
 
 [resolved]
-sporePrint_404_p0 = "RESOLVED: Atomic build-then-swap pipeline eliminates 404 gap (Wave 148c)"
+sporePrint_404_p0 = "RESOLVED: Atomic build-then-swap pipeline (Wave 148c)"
+subdomain_standard = "DEPLOYED: All compositions on prefix.primals.eco subdomains (Wave 150d)"
+footprint_routing = "FIXED: Restructured deployment + subdomain vhost (Wave 150d)"
 cascade_sense_config = "FIXED: bind_mode, mobility, zone enum drift (Waves 143b-147e)"
 atomic_deploy = "DEPLOYED: zola build -o public-next + rename() swap — zero-downtime proven"
 silicon_atheism_p1 = "COMPLETE: 14/14 primals × 4 architectures = 56 binaries + extras"
 silicon_atheism_p2 = "COMPLETE: 14/14 transport abstraction (trait + backend pattern)"
 windows_beardog = "FIXED: #[cfg(unix)] gating for UnixStream in beardog-ipc/core/tunnel/cli"
-footprint_deploy = "LIVE: Express server on sporeGate, Caddy proxy on golgi, API + WS routes"
 cac_6_6 = "COMPLETE: Content-Addressed Convergence all 6 layers solved"
