@@ -39,7 +39,7 @@ Each primal team: address your rows.
 | ~~Replace `alert()`/`prompt()` with modals~~ | UX polish | — | **SHIPPED** (`40b9cd5`). Async modal.ts utility: `modalAlert`, `modalPrompt`, `modalConfirm`. Zero native dialogs. |
 | ~~Favicon missing~~ | branding | — | **SHIPPED** (`40b9cd5`). SVG favicon in browser tabs. |
 | ~~Location picker hides descriptions~~ | usability | — | **SHIPPED** (`40b9cd5`). Descriptions shown inline in dropdown options + title attribute. |
-| Coverage below thresholds | test health | P2 | Statements 68.87%/80%, branches 44.48%/70%. `renderer.ts` at 2.23%. |
+| ~~Coverage below thresholds~~ | test health | — | **SHIPPED** (`d792277`). 466 tests. Stmts 92.78%, branches 76.19%, lines 95.27%. All thresholds passing. |
 
 ### esotericWebb team (DEMO BUG + OPS)
 
@@ -132,7 +132,7 @@ Each primal team: address your rows.
 |---------|--------|-----|------|--------|-------|-------|-------------|-----------|
 | cellMembrane | 0 | 62 | 0 | 0 | 0 | 1,092 | 0 | — |
 | esotericWebb | 0 | 3 | 0 | 0 | 0 | 472 | 0 | NPC bug |
-| footPrint | **0** ESLint | — | 0 | — | 0 | 275 | — | **UX complete: responsive, a11y, modals, welcome, favicon** |
+| footPrint | **0** ESLint | — | 0 | — | 0 | **466** | — | **ALL CLEAR — UX + coverage complete** |
 | songBird | **556** | 10 | 0 | 0 | **2** | 14,322 | **81** | — |
 | sporePrint | — | — | 0 | — | 0 | 289 | — | Stale page |
 | lithoSpore | **0** | 0 | 0 | 0 | 0 | **227** | 0 | **ALL CLEAR** |
@@ -144,11 +144,11 @@ Each primal team: address your rows.
 
 ## Path to Live — Downstream Projects
 
-### footPrint → `primals.eco/footprint/` — **LIVE + FULL UX POLISH**
+### footPrint → `primals.eco/footprint/` — **LIVE + ALL CLEAR**
 
-Known locations shipped. Responsive design + accessibility pass + async modals +
-welcome overlay + favicon all shipped. Only remaining gap: test coverage below
-thresholds (statements 68.87%/80%, branches 44.48%/70%). Production-ready UX.
+All dimensional review items resolved: responsive design, accessibility, ESLint,
+modals, welcome overlay, favicon, location picker, and test coverage (466 tests,
+92.78% statements, 95.27% lines). Zero remaining gaps.
 
 ### esotericWebb → `primals.eco/webb/` — **V18, LIVE ON GATE, PERSISTENCE PENDING**
 
@@ -182,7 +182,7 @@ is strong. No web frontend — terminal-only game via `preview` or JSON-RPC.
 |---------|-------|--------|-----|------|-------------|
 | cellMembrane | 1,092 | 0 | 62 | 0 | 0 |
 | esotericWebb | 472 | 0 | 3 | 0 | 0 |
-| footPrint | 275 | **0** ESLint | — | 0 | — |
+| footPrint | **466** | **0** ESLint | — | 0 | — |
 | songBird | 14,322 | 556 | 10 | 0 | 81 |
 | sporePrint | 289 | — | — | 0 | — |
 | lithoSpore | **227** | **0** | 0 | 0 | 0 |
