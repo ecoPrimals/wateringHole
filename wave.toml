@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 149
-sub = "b"
+id = 150
+sub = "a"
 date = "2026-07-18"
-posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE. Full 7-project dimensional review complete. 18k+ tests, 0 debt, 0 unsafe. songBird (556 clippy, 81 prod unwrap), footPrint (no responsive/a11y), esotericWebb (aldric NPC bug) are top findings."
+posture = "PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE. Dimensional sweep complete — 15 teams responded. sweetGrass braids + bearDog crypto CONFIRMED. footPrint fully usable (466 tests). lithoSpore ALL CLEAR + 7 pseudoSpores emitted. GAP-036+038 closed ecosystem-wide."
 publisher = "eastGate-overwatch"
 
 [gates]
