@@ -28,18 +28,18 @@ Each primal team: address your rows.
 | `cargo fmt` (10 files) | CI hygiene | P2 | Quick fix. |
 | BTSP → cellMembrane `gate.enroll` | enrollment | P1 | Pending. |
 
-### footPrint team (USABILITY — 3 P1 ITEMS SHIPPED)
+### footPrint team (USABILITY — ALL P1 SHIPPED, P2/P3 IN PROGRESS)
 
 | Need | Consumer(s) | Priority | Detail |
 |------|-------------|----------|--------|
 | ~~Responsive design~~ | mobile users | — | **SHIPPED** (`7d21b0e`). 3 breakpoints (1024/768/480px), slide-out sidebar drawers, toolbar wraps, hamburger toggle. |
 | ~~Accessibility pass~~ | all users | — | **SHIPPED** (`7d21b0e`). ARIA roles/labels/live regions, sr-only labels, aria-modal, aria-pressed, aria-expanded. |
 | ~~ESLint gate (162 errors)~~ | code quality | — | **SHIPPED** (`7d21b0e`). 0 errors. Auto-fixed 80, manually fixed 93. Test files: non-null-assertion allowed. |
+| ~~First-run guidance / onboarding~~ | new users | — | **SHIPPED** (`40b9cd5`). Welcome overlay with 4-step guide, known locations summary, localStorage gate. |
+| ~~Replace `alert()`/`prompt()` with modals~~ | UX polish | — | **SHIPPED** (`40b9cd5`). Async modal.ts utility: `modalAlert`, `modalPrompt`, `modalConfirm`. Zero native dialogs. |
+| ~~Favicon missing~~ | branding | — | **SHIPPED** (`40b9cd5`). SVG favicon in browser tabs. |
+| ~~Location picker hides descriptions~~ | usability | — | **SHIPPED** (`40b9cd5`). Descriptions shown inline in dropdown options + title attribute. |
 | Coverage below thresholds | test health | P2 | Statements 68.87%/80%, branches 44.48%/70%. `renderer.ts` at 2.23%. |
-| First-run guidance / onboarding | new users | P2 | No welcome overlay, help button, or getting-started prompt. |
-| Replace `alert()`/`prompt()` with modals | UX polish | P2 | Native dialogs for save/load/delete feel dated and block UI. |
-| Favicon missing | branding | P3 | No icon in browser tabs. |
-| Location picker hides descriptions | usability | P3 | Rich `description` field exists but never shown to users. |
 
 ### esotericWebb team (DEMO BUG + OPS)
 
@@ -132,7 +132,7 @@ Each primal team: address your rows.
 |---------|--------|-----|------|--------|-------|-------|-------------|-----------|
 | cellMembrane | 0 | 62 | 0 | 0 | 0 | 1,092 | 0 | — |
 | esotericWebb | 0 | 3 | 0 | 0 | 0 | 472 | 0 | NPC bug |
-| footPrint | **0** ESLint | — | 0 | — | 0 | 275 | — | **Responsive + a11y shipped** |
+| footPrint | **0** ESLint | — | 0 | — | 0 | 275 | — | **UX complete: responsive, a11y, modals, welcome, favicon** |
 | songBird | **556** | 10 | 0 | 0 | **2** | 14,322 | **81** | — |
 | sporePrint | — | — | 0 | — | 0 | 289 | — | Stale page |
 | lithoSpore | **0** | 0 | 0 | 0 | 0 | **227** | 0 | **ALL CLEAR** |
@@ -144,11 +144,11 @@ Each primal team: address your rows.
 
 ## Path to Live — Downstream Projects
 
-### footPrint → `primals.eco/footprint/` — **LIVE + E2E TUTORIAL SHIPPED**
+### footPrint → `primals.eco/footprint/` — **LIVE + FULL UX POLISH**
 
-Known locations shipped. **Usability gap**: no responsive design, no accessibility,
-no onboarding. Desktop power-user tool — not yet usable on mobile or by new users.
-**Next**: responsive breakpoints, accessibility pass, ESLint cleanup.
+Known locations shipped. Responsive design + accessibility pass + async modals +
+welcome overlay + favicon all shipped. Only remaining gap: test coverage below
+thresholds (statements 68.87%/80%, branches 44.48%/70%). Production-ready UX.
 
 ### esotericWebb → `primals.eco/webb/` — **V18, LIVE ON GATE, PERSISTENCE PENDING**
 
