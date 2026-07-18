@@ -1,24 +1,32 @@
-# ecoPrimals Ecosystem Blurb — Wave 148a
+# ecoPrimals Ecosystem Blurb — Wave 148b
 
-**Date**: Jul 18, 2026 07:15 EDT | **Wave**: 148a | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FOOTPRINT LIVE. WEBB READY.**
+**Date**: Jul 18, 2026 07:55 EDT | **Wave**: 148b | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE.**
 
-**This cascade**: esotericWebb AAR resolved all 3 deploy blockers: binary in
-depot (3.3M stripped, plasmidBin manifest V17), Forgejo synced, **LIVE on
-flockGate:8090** (6/9 primals, 472 tests, mesh-accessible). Port confusion
-clarified (8080 = nestGate, not Webb). Deploy command and persistence
-requirements handed off to cellMembrane/sporeGate ops. plasmidBin manifest
-updated.
+**This cascade**: cellMembrane shipped esotericWebb deploy fix (correct port
+8090, ExecStart, WorkingDirectory, Caddy routing). Live Frontend E2E Tutorial
+Standard issued — all live frontends must have known locations / demo scenarios
+that double as E2E verification suites. footPrint: 5 known locations specified
+(MSU Campus, Downtown EL, Red Cedar flood, Meridian Twp, Haslett Ag).
+esotericWebb: guided demo scenario pattern specified.
 
 ---
 
 ## Upstream Primal Demand Signal
 
-### cellMembrane / sporeGate ops (DEPLOY)
+### footPrint team (E2E TUTORIAL — NEW)
 
 | Need | Consumer(s) | Priority | Detail |
 |------|-------------|----------|--------|
-| esotericWebb persistent deploy | **esotericWebb** | **P0** | Binary in depot, Caddy block SHIPPED, systemd unit SHIPPED. Deploy: `esotericwebb serve --content content/ --listen 0.0.0.0:8090`. Needs `Restart=on-failure`. Route `/webb/` → `flockGate:8090`. |
+| Known locations + picker UI | users + operators | **P1** | 5 locations in `constants.ts`, `<select>` picker in toolbar. Each location has `expectedSources` for E2E verification. See `LIVE_FRONTEND_E2E_TUTORIAL_STANDARD.md`. |
+
+### esotericWebb team (E2E TUTORIAL + OPS — NEW)
+
+| Need | Consumer(s) | Priority | Detail |
+|------|-------------|----------|--------|
+| Guided demo scenario | users + operators | **P1** | `content/demos/` YAML walkthrough exercising all connected primals. See standard. |
+| systemd persistence on flockGate | sporeGate ops | P1 | cellMembrane unit FIXED (`33aa33a`). Deploy: `systemctl enable --now esotericwebb-server`. |
+| Caddy route `/webb/` on golgiBody | sporeGate ops | P1 | Caddy config FIXED. Route `/webb/` → `flockGate:8090`. |
 
 ### songBird (3 CLOSED, 1 open)
 
@@ -80,29 +88,19 @@ updated.
 
 ### footPrint → `primals.eco/footprint/` — **LIVE**
 
-Full path wired: `internet → golgi (Caddy TLS) → WG → sporeGate:8090 → drawbridge`
+Full path wired. All 6 core steps complete.
+**Next**: Known locations + E2E tutorial (P1, see standard).
 
-All 6 core steps complete. Enhancements (nestGate CAS, petalTongue WS) open.
+### esotericWebb → `primals.eco/webb/` — **LIVE ON GATE**
 
-### esotericWebb → `primals.eco/webb/` — **LIVE ON GATE, PERSISTENCE PENDING**
-
-Running on flockGate:8090, mesh-accessible, 6/9 primals connected.
-Needs cellMembrane/sporeGate to make it persistent (systemd + Caddy).
+472 tests, 6/9 primals connected, flockGate:8090. Deploy artifacts FIXED.
 
 | Step | Status | Owner |
 |------|--------|-------|
-| 1. Binary (472 tests, 3.3M stripped) | **IN DEPOT** | esotericWebb |
-| 2. Caddy block for `/webb/` | **SHIPPED** | cellMembrane |
-| 3. NUCLEUS systemd service unit | **SHIPPED** | cellMembrane |
-| 4. songBird discovery + /jsonrpc | **SHIPPED** | songBird |
-| 5. Live primal composition | **6/9 CONNECTED** on flockGate | esotericWebb |
-| 6. Forgejo repo synced | **DONE** | esotericWebb |
-| 7. **Persistent deploy (systemd)** | **PENDING** | cellMembrane/sporeGate ops |
-| 8. **Caddy route live** | **PENDING** | cellMembrane/golgiBody ops |
-
-**Deploy command**: `esotericwebb serve --content content/ --listen 0.0.0.0:8090`
-**Service unit**: `deploy/systemd/esotericwebb-server.service` (already in cellMembrane)
-**Binary source**: `plasmidBin/primals/esotericwebb` or `cargo build --release`
+| 1-6. Binary, Caddy, unit, songBird, composition, Forgejo | **ALL DONE** | — |
+| 7. systemd enable on flockGate | **PENDING** | sporeGate ops |
+| 8. Caddy route on golgiBody | **PENDING** | sporeGate ops |
+| 9. E2E demo scenario | **NOT STARTED** | esotericWebb |
 
 ### lithoSpore → CLI tool — **PIPELINE PROVEN, DEEP DEBT CLEAR**
 
