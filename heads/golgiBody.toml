@@ -1,10 +1,10 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: golgiBody | Updated: 2026-07-18T03:22:24Z
+# Gate: golgiBody | Updated: 2026-07-18T03:37:34Z
 
 [meta]
 gate = "golgiBody"
-updated = "2026-07-18T03:22:24Z"
+updated = "2026-07-18T03:37:34Z"
 
 [heads]
-wateringHole = "794ac1053f089f91e5fedbf6dfe158c79cb708ac"
+wateringHole = "afc3c9d9e87b332afae119f8ab147d86cd40237a"
