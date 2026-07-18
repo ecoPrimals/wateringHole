@@ -6,20 +6,23 @@
 [meta]
 gate = "flockGate"
 updated = "2026-07-16T12:10:00Z"
-wave = "143b"
+wave = "149b"
 
 [heads]
 primalSpring = "8df6b3f"
 wateringHole = "36c0fa56"
 plasmidBin = "e0b20e0"
-skunkBat = "2999c1b"
+skunkBat = "a789891"
 
 [skunkbat]
-head = "2999c1b"
+head = "a789891"
 tests = 567
-delivery_143b = "New Clippy lints resolved (useless_conversion, duration_suboptimal_units). #[expect] vs #[cfg_attr(not(test),expect)] for test-visible dead code. Docs updated to 142b. cargo clean 3.8G."
+delivery_149b = "Eliminated 4 production unreachable!() panics in dispatch — evolved to METHOD_NOT_FOUND error responses. Zero production panic points remain (except futures invariant)."
 windows_target = "x86_64-pc-windows-gnu — cargo check PASS, 0 warnings"
 clippy = "CLEAN — workspace + all-targets (-D warnings)"
+prod_unreachable = 1
+prod_unwrap = 0
+prod_unsafe = 0
 
 [mesh]
 node_id = "flockGate"
