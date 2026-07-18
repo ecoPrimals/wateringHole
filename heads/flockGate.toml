@@ -1,62 +1,67 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-18T14:31:00Z
+# Gate: flockGate | Updated: 2026-07-18T15:06:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-18T14:31:00Z"
-wave = "150d"
+updated = "2026-07-18T15:06:00Z"
+wave = "150e"
 
 [heads]
-primalSpring = "abf58be"
-wateringHole = "b71594e8"
+primalSpring = "c677c3c"
+wateringHole = "a3052b57"
+esotericWebb = "08588d5"
 plasmidBin = "e0b20e0"
-skunkBat = "6b3e6eb"
 
 [mesh]
 node_id = "flockGate"
 songbird_version = "0.2.1"
 wireguard_status = "UP"
 wireguard_addr = "10.13.37.6/24"
-wireguard_last_handshake_s = 68
 peers_mesh_registered = 2
 federation_sporegate_7700 = "LIVE"
 federation_golgi_7700 = "LIVE"
-status = "6-GATE MESH OPERATIONAL — deployment chain traced"
+status = "6-GATE MESH OPERATIONAL"
 
 [esotericwebb]
-status = "RUNNING — JSON-RPC on 0.0.0.0:8090, no systemd unit"
-pid = 3578737
-binary = "target/release/esotericwebb serve --content content/ --listen 0.0.0.0:8090"
-protocol = "JSON-RPC over raw TCP (NOT HTTP)"
-systemd = "NOT CONFIGURED — runs from Cursor terminal"
+status = "LIVE — V19.1 HTTP+JSON-RPC on 0.0.0.0:8090"
+version = "V19.1"
+commit = "08588d5"
+pid = 123751
+systemd = "esotericwebb-server.service ENABLED (user unit)"
+protocol = "HTTP POST /jsonrpc + raw TCP JSON-RPC (dual protocol)"
+capabilities = 26
+primals_connected = 6
+primals_discovered = ["squirrel", "petaltongue", "nestgate", "loamspine", "sweetgrass", "beardog"]
 webb_domain = "webb.primals.eco"
-webb_domain_status = "502 — Caddy sends HTTP but esotericWebb speaks JSON-RPC"
-fix_required = "petalTongue HTTP frontend or songBird drawbridge HTTP→JSON-RPC translation"
-capabilities_confirmed = ["method_dispatch", "parse_error_on_invalid"]
+wan_status = "LIVE — 200 OK, 235ms WAN RTT"
 
 [wan_subdomain_posture]
-footprint_primals_eco = "200 — Caddy vhost LIVE, CSP includes tile domains"
-webb_primals_eco = "502 — Caddy vhost exists, upstream protocol mismatch"
-sporeprint_primals_eco = "200 — migrated from root, LIVE"
-live_primals_eco = "200 — TOPO-VIS LIVE"
-lab_primals_eco = "401 — JupyterHub auth gate"
-git_primals_eco = "200 — Forgejo LIVE"
-depot_primals_eco = "000 — not resolving (still at membrane.primals.eco/depot/)"
-old_path_footprint = "301 — redirects to subdomain (migration working)"
+footprint_primals_eco = "200 — 216ms"
+webb_primals_eco = "200 — 235ms (POST /jsonrpc)"
+sporeprint_primals_eco = "200 — 524ms"
+live_primals_eco = "200 — 357ms"
+git_primals_eco = "200 — 203ms"
+lab_primals_eco = "401 — auth gate (expected)"
+primals_eco_root = "301 → sporeprint.primals.eco"
+all_surfaces_responding = true
 
 [deployment_chain]
-architecture = "Cloudflare → Caddy (golgi) → WireGuard → songBird/service"
-subdomain_standard = "prefix.primals.eco (REQUIRED for compositions)"
-path_routing = "PROHIBITED — 301 redirects deployed"
+architecture = "Cloudflare → Caddy (golgi) → WireGuard (10.13.37.6) → esotericWebb:8090"
+subdomain_standard = "prefix.primals.eco (REQUIRED)"
+path_routing = "PROHIBITED — 301 redirects"
 three_domains = ["primals.eco (intra-membrane)", "primal.eco (inner membrane)", "nestgate.io (data service)"]
+
+[ops_completed]
+http_server_adapter = "V19.1 — detect HTTP on TCP, respond with HTTP/1.1 framing"
+systemd_enable = "esotericwebb-server.service enabled, active (running)"
+wan_verified = "webb.primals.eco end-to-end: Cloudflare → Caddy → WG → flockGate:8090 → 200 OK"
 
 [primalspring]
 version = "v0.9.39"
-head = "abf58be"
+head = "c677c3c"
 scenarios = 169
 tests = 1203
 failures = 0
 suite_status = "GREEN"
-wave_150d_fix = "s_protokarya_wan_deploy: evolved to subdomain standard (footprint.primals.eco + redirect check)"
