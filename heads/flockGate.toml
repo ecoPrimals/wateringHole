@@ -1,79 +1,62 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-16T11:52:00Z
+# Gate: flockGate | Updated: 2026-07-18T14:31:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-16T12:10:00Z"
-wave = "149b"
+updated = "2026-07-18T14:31:00Z"
+wave = "150d"
 
 [heads]
-primalSpring = "8df6b3f"
-wateringHole = "36c0fa56"
+primalSpring = "abf58be"
+wateringHole = "b71594e8"
 plasmidBin = "e0b20e0"
-skunkBat = "a789891"
-
-[skunkbat]
-head = "a789891"
-tests = 567
-delivery_149b = "Eliminated 4 production unreachable!() panics in dispatch — evolved to METHOD_NOT_FOUND error responses. Zero production panic points remain (except futures invariant)."
-windows_target = "x86_64-pc-windows-gnu — cargo check PASS, 0 warnings"
-clippy = "CLEAN — workspace + all-targets (-D warnings)"
-prod_unreachable = 1
-prod_unwrap = 0
-prod_unsafe = 0
+skunkBat = "6b3e6eb"
 
 [mesh]
 node_id = "flockGate"
 songbird_version = "0.2.1"
-depot_binary_date = "2026-07-15T01:45:06Z"
-depot_binary_size = 18087712
-peers_mesh_registered = 2
 wireguard_status = "UP"
 wireguard_addr = "10.13.37.6/24"
-federation_sporegate_7700 = "LIVE — mesh_registered=true, latency=69ms"
-federation_golgi_7700 = "LIVE — mesh_registered=true, latency=24ms"
-status = "MESH OPERATIONAL — 2 peers, WAN covalent active"
+wireguard_last_handshake_s = 68
+peers_mesh_registered = 2
+federation_sporegate_7700 = "LIVE"
+federation_golgi_7700 = "LIVE"
+status = "6-GATE MESH OPERATIONAL — deployment chain traced"
 
-[dispatch_validation]
-status = "MESH ROUTING OPERATIONAL. capability.call routes 2 peers. DRAWBRIDGE-CAP pending songBird team."
-capability_call_status = "ROUTING WORKS — no provider advertises drawbridge caps yet"
-jupyter_data_plane = "PROVEN — JupyterHub v5.4.5 via http.request relay (202ms WAN)"
+[esotericwebb]
+status = "RUNNING — JSON-RPC on 0.0.0.0:8090, no systemd unit"
+pid = 3578737
+binary = "target/release/esotericwebb serve --content content/ --listen 0.0.0.0:8090"
+protocol = "JSON-RPC over raw TCP (NOT HTTP)"
+systemd = "NOT CONFIGURED — runs from Cursor terminal"
+webb_domain = "webb.primals.eco"
+webb_domain_status = "502 — Caddy sends HTTP but esotericWebb speaks JSON-RPC"
+fix_required = "petalTongue HTTP frontend or songBird drawbridge HTTP→JSON-RPC translation"
+capabilities_confirmed = ["method_dispatch", "parse_error_on_invalid"]
 
-[dispatch_validation.latency]
-tcp_peer_sporegate_ms = 69
-tcp_peer_golgi_ms = 24
-jupyter_relay_ms = 202
-probed_at = "2026-07-15T15:46:00Z"
+[wan_subdomain_posture]
+footprint_primals_eco = "200 — Caddy vhost LIVE, CSP includes tile domains"
+webb_primals_eco = "502 — Caddy vhost exists, upstream protocol mismatch"
+sporeprint_primals_eco = "200 — migrated from root, LIVE"
+live_primals_eco = "200 — TOPO-VIS LIVE"
+lab_primals_eco = "401 — JupyterHub auth gate"
+git_primals_eco = "200 — Forgejo LIVE"
+depot_primals_eco = "000 — not resolving (still at membrane.primals.eco/depot/)"
+old_path_footprint = "301 — redirects to subdomain (migration working)"
 
-[footprint]
-status = "LIVE — full GIS composition"
-wan_url = "https://primals.eco/footprint/"
-wan_http_status = 200
-caddy_proxy_routes = 10
-composition_manifest = "config/compositions/footprint_composition.toml"
-
-[drawbridge_bonds]
-status = "16 bonds declared (10 GIS + 6 science APIs)"
-schema_version = 2
-consumer_parity = "3-way match: registry ↔ composition ↔ Caddy (10/10)"
-
-[depot]
-status = "55/56 binaries — re-harvest pending"
-architectures = 4
-x86_64_musl = "14/14 ✓"
-aarch64_musl = "14/14 ✓"
-aarch64_android = "11/14 — petaltongue, toadstool, sourdough pending"
-x86_64_windows = "11/14 — beardog, petaltongue, squirrel pending"
-coverage_pct = 89
+[deployment_chain]
+architecture = "Cloudflare → Caddy (golgi) → WireGuard → songBird/service"
+subdomain_standard = "prefix.primals.eco (REQUIRED for compositions)"
+path_routing = "PROHIBITED — 301 redirects deployed"
+three_domains = ["primals.eco (intra-membrane)", "primal.eco (inner membrane)", "nestgate.io (data service)"]
 
 [primalspring]
 version = "v0.9.39"
-head = "8df6b3f"
+head = "abf58be"
 scenarios = 169
-tests = 1202
+tests = 1203
 failures = 0
 suite_status = "GREEN"
-new_scenarios = ["depot-architecture-coverage", "full-cross-compile"]
-known_debt = ["graphenegate-readiness (14, no aarch64 local)", "full-cross-compile (3, pre-harvest gaps)"]
+wave_150d_fix = "s_protokarya_wan_deploy: evolved to subdomain standard (footprint.primals.eco + redirect check)"
