@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-18T15:06:00Z
+# Gate: flockGate | Updated: 2026-07-18T20:33:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-18T15:06:00Z"
-wave = "150e"
+updated = "2026-07-18T20:33:00Z"
+wave = "150g"
 
 [heads]
 primalSpring = "c677c3c"
-wateringHole = "a3052b57"
+wateringHole = "a70076f3"
 esotericWebb = "08588d5"
 plasmidBin = "e0b20e0"
 
@@ -22,41 +22,34 @@ wireguard_addr = "10.13.37.6/24"
 peers_mesh_registered = 2
 federation_sporegate_7700 = "LIVE"
 federation_golgi_7700 = "LIVE"
-status = "6-GATE MESH OPERATIONAL"
+status = "6-GATE MESH OPERATIONAL — ZERO P1"
 
 [esotericwebb]
-status = "LIVE — V19.1 HTTP+JSON-RPC on 0.0.0.0:8090"
+status = "LIVE — V19.1 HTTP+JSON-RPC, systemd + linger"
 version = "V19.1"
 commit = "08588d5"
-pid = 123751
-systemd = "esotericwebb-server.service ENABLED (user unit)"
-protocol = "HTTP POST /jsonrpc + raw TCP JSON-RPC (dual protocol)"
+systemd = "esotericwebb-server.service ENABLED"
+linger = "YES — survives logout"
+protocol = "HTTP POST /jsonrpc + raw TCP JSON-RPC (dual)"
 capabilities = 26
 primals_connected = 6
-primals_discovered = ["squirrel", "petaltongue", "nestgate", "loamspine", "sweetgrass", "beardog"]
 webb_domain = "webb.primals.eco"
-wan_status = "LIVE — 200 OK, 235ms WAN RTT"
+wan_status = "200 OK — 228ms WAN RTT"
 
 [wan_subdomain_posture]
-footprint_primals_eco = "200 — 216ms"
-webb_primals_eco = "200 — 235ms (POST /jsonrpc)"
-sporeprint_primals_eco = "200 — 524ms"
-live_primals_eco = "200 — 357ms"
-git_primals_eco = "200 — 203ms"
-lab_primals_eco = "401 — auth gate (expected)"
+footprint_primals_eco = "200 — 165ms"
+webb_primals_eco = "200 — 228ms (POST /jsonrpc)"
+sporeprint_primals_eco = "200 — 180ms"
+live_primals_eco = "200 — 311ms"
+git_primals_eco = "200 — 162ms"
 primals_eco_root = "301 → sporeprint.primals.eco"
-all_surfaces_responding = true
+all_surfaces_live = true
+p1_remaining = 0
 
 [deployment_chain]
-architecture = "Cloudflare → Caddy (golgi) → WireGuard (10.13.37.6) → esotericWebb:8090"
+architecture = "Cloudflare → Caddy (golgi) → WireGuard → service"
 subdomain_standard = "prefix.primals.eco (REQUIRED)"
-path_routing = "PROHIBITED — 301 redirects"
 three_domains = ["primals.eco (intra-membrane)", "primal.eco (inner membrane)", "nestgate.io (data service)"]
-
-[ops_completed]
-http_server_adapter = "V19.1 — detect HTTP on TCP, respond with HTTP/1.1 framing"
-systemd_enable = "esotericwebb-server.service enabled, active (running)"
-wan_verified = "webb.primals.eco end-to-end: Cloudflare → Caddy → WG → flockGate:8090 → 200 OK"
 
 [primalspring]
 version = "v0.9.39"
@@ -65,3 +58,8 @@ scenarios = 169
 tests = 1203
 failures = 0
 suite_status = "GREEN"
+
+[remaining_divergence]
+p0_items = 0
+p1_items = 0
+p2_items = ["esotericWebb GET handler", "V19.1 depot binary push", "primalSpring CAC scenario", "primals.eco DNSSEC", "footprint_composition.toml URL update"]
