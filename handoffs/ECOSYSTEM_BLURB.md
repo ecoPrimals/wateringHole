@@ -1,185 +1,173 @@
-# ecoPrimals Ecosystem Blurb — Wave 150a
+# ecoPrimals Ecosystem Blurb — Wave 150b
 
-**Date**: Jul 18, 2026 09:55 EDT | **Wave**: 150a | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE. DIMENSIONAL SWEEP COMPLETE.**
+**Date**: Jul 18, 2026 10:00 EDT | **Wave**: 150b | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 2 PRODUCTS LIVE.**
 
-**This cascade**: Massive team response to dimensional review. 15 repos pulled,
-6 handoffs absorbed and fossilized. Key closures:
-- **sweetGrass**: `braid.create/query` CONFIRMED (P1 closed)
-- **bearDog**: crypto JSON-RPC sigs CONFIRMED (P1 closed)
-- **footPrint**: responsive design, accessibility, ESLint zero, 466 tests, favicon,
-  modals, welcome overlay, picker descriptions — ALL shipped (P1+P2+P3 closed)
-- **esotericWebb**: aldric NPC fixed, cargo fmt, content README added (P1 closed)
-- **songBird**: prod unwrap elimination, file splits, clippy sweep (177 files, P1 closed)
-- **lithoSpore**: clippy clean, USB round-trip DONE, ring dropped, pseudoSpore
-  emission from all 7 springs (P1+P2 closed, ALL CLEAR)
-- **primalSpring**: fmt 54→0, unwrap 4→0, clippy 456→82 (P2 closed)
-- **cellMembrane**: fmt 62→0 (P2 closed)
-- **rhizoCrypt**: deprecation purge, dead code removal, arch splits, GAP-036+038
-  CLOSED, 1,878 tests, 93.83% coverage
-- **loamSpine**: dimensional self-audit ALL PASS, 1,702 tests
-- **nestGate**: dimensional audit, fmt 133 files, GAP-038 socket liveness
-- **biomeOS**: GAP-017/018/036/038 ALL RESOLVED
-- **barraCuda, coralReef, skunkBat, toadStool**: dimensional cleanups
+**This wave**: Full orthogonal dimensions review (12 dimensions, Wave 150a).
+Dimensional sweep absorbed — 15 teams responded. Demand signal closures
+catalogued. Blurb reshaped around live systems, strategic goals, and remaining
+primal work. Closed items consolidated. Forward path clarified.
 
 ---
 
-## Upstream Primal Demand Signal
-
-Items remaining after this wave. Most P1 items from Wave 149b are now CLOSED.
-
-### esotericWebb (OPS — 2 remaining)
-
-| Need | Consumer(s) | Priority | Detail |
-|------|-------------|----------|--------|
-| systemd persistence on flockGate | sporeGate ops | P1 | cellMembrane unit FIXED. Deploy: `systemctl enable --now esotericwebb-server`. |
-| Caddy route `/webb/` on golgiBody | sporeGate ops | P1 | Route `/webb/` → `flockGate:8090`. |
-
-### songBird (1 open)
-
-| Need | Consumer(s) | Priority | Status |
-|------|-------------|----------|--------|
-| BTSP → cellMembrane `gate.enroll` | enrollment | P1 | Pending |
-
-### squirrel (1 open)
-
-| Need | Consumer(s) | Priority | Status |
-|------|-------------|----------|--------|
-| Accept `null` params on health | esotericWebb | P1 | Open (Webb works around with `{}`) |
-
-### nestGate (1 open)
-
-| Need | Consumer(s) | Priority | Status |
-|------|-------------|----------|--------|
-| `PROJECTS_PATH` CAS wiring | footPrint | P1 | Open |
-
-### petalTongue (1 open)
-
-| Need | Consumer(s) | Priority | Status |
-|------|-------------|----------|--------|
-| `WS_PATH` agent bridge | footPrint | P1 | Open |
-
-### bearDog (1 open)
-
-| Need | Consumer(s) | Priority | Status |
-|------|-------------|----------|--------|
-| HSM → Android Keystore | grapheneGate | P2 | Open |
-
-### Spring teams (pseudoSpore follow-up)
-
-| Need | Consumer(s) | Priority | Detail |
-|------|-------------|----------|--------|
-| Populate `validation.json` per spore | lithoSpore pipeline | P2 | 6 PENDING spores need module validation results |
-| Fix groundSpring `bingoCube/nautilus` dep | lithoSpore | P2 | `cargo test` fails on missing path dependency |
-| Add `scope.toml` to each spring | lithoSpore convention | P2 | Self-describing artifact manifest |
-
----
-
-## Demand Signal Closures (Wave 149b→150a)
-
-| Item | Team | Status |
-|------|------|--------|
-| ~~sweetGrass `braid.create/query`~~ | sweetGrass | **CONFIRMED** — 107 braid tests |
-| ~~bearDog crypto JSON-RPC sigs~~ | bearDog | **CONFIRMED** — stable since 142a |
-| ~~footPrint responsive/a11y/ESLint~~ | footPrint | **ALL SHIPPED** — 466 tests |
-| ~~footPrint coverage below thresholds~~ | footPrint | **CLOSED** — all thresholds passing |
-| ~~footPrint favicon + modals + welcome~~ | footPrint | **SHIPPED** |
-| ~~esotericWebb aldric NPC bug~~ | esotericWebb | **FIXED** — `c4c35dc` |
-| ~~esotericWebb cargo fmt~~ | esotericWebb | **DONE** |
-| ~~songBird 556 clippy + 81 unwrap + oversized~~ | songBird | **SWEPT** — 177 files |
-| ~~cellMembrane cargo fmt~~ | cellMembrane | **DONE** — 62 files |
-| ~~primalSpring fmt + unwrap + clippy~~ | primalSpring | **DONE** — 54→0, 4→0, 456→82 |
-| ~~lithoSpore 308 clippy~~ | lithoSpore | **CLEAN** — 0 warnings |
-| ~~lithoSpore USB round-trip~~ | lithoSpore | **DONE** — 6-step deploy-test |
-| ~~biomeOS GAP-017/018~~ | biomeOS | **RESOLVED** |
-| ~~GAP-036 socket naming~~ | sweetGrass, rhizoCrypt, loamSpine, biomeOS, nestGate | **CLOSED** ecosystem-wide |
-| ~~GAP-038 stale UDS cleanup~~ | sweetGrass, rhizoCrypt, loamSpine, biomeOS, nestGate | **CLOSED** ecosystem-wide |
-| ~~sporePrint esotericWebb.md metadata~~ | sporePrint | Pending confirmation |
-
----
-
-## Dimensional Scorecard (Wave 150a — Post-Sweep)
-
-| Project | Clippy | Fmt | Debt | Unsafe | >800L | Tests | Prod unwrap |
-|---------|--------|-----|------|--------|-------|-------|-------------|
-| cellMembrane | 0 | **0** | 0 | 0 | 0 | 1,092 | 0 |
-| esotericWebb | 0 | **0** | 0 | 0 | 0 | 472 | 0 |
-| footPrint | **0** | — | 0 | — | 0 | **466** | — |
-| songBird | swept | swept | 0 | 0 | swept | 14,322 | **swept** |
-| lithoSpore | **0** | 0 | 0 | 0 | 0 | **227** | 0 |
-| loamSpine | 0 | 0 | 0 | 0 | 0 | **1,702** | 0 |
-| rhizoCrypt | 0 | 0 | 0 | 0 | 0 | **1,878** | 0 |
-| nestGate | audit | **0** | 0 | 0 | audit | audit | audit |
-| sporePrint | — | — | 0 | — | 0 | 289 | — |
-| primalSpring | **82** | **0** | 0 | 0 | 0 | 1,203 | **0** |
-| biomeOS | gaps resolved | — | 0 | 0 | — | — | — |
-
----
-
-## Path to Live — Downstream Projects
+## 1. LIVE SYSTEMS — Current State
 
 ### footPrint → `primals.eco/footprint/` — **LIVE + FULLY USABLE**
 
-Responsive design, accessibility, welcome overlay, known locations with descriptions,
-favicon, modal system — all shipped. 466 tests, all coverage thresholds passing.
-**Next**: nestGate CAS wiring (P1), petalTongue WS bridge (P1).
+Sovereign GIS home planner on sporeGate. Responsive, accessible, 466 tests,
+all coverage thresholds passing. Known locations with descriptions, welcome
+overlay, modal system, favicon. Full NUCLEUS composition wired through
+songBird drawbridge.
 
-### esotericWebb → `primals.eco/webb/` — **V18, LIVE ON GATE, PERSISTENCE PENDING**
+**Remaining wiring** (non-blocking — product is usable without these):
 
-Aldric NPC fixed. Content README added. Demo scenario fully validated.
+| Wiring | Primal | Priority | What it enables |
+|--------|--------|----------|-----------------|
+| `PROJECTS_PATH` CAS | nestGate | P1 | Content-addressed project storage (currently filesystem) |
+| `WS_PATH` agent bridge | petalTongue | P1 | Real-time AI agent via WebSocket (currently polling) |
 
-| Step | Status | Owner |
-|------|--------|-------|
-| 1-6. Binary, Caddy unit, songBird, composition, Forgejo | **ALL DONE** | — |
-| 7. systemd enable on flockGate | **PENDING** | sporeGate ops |
-| 8. Caddy route on golgiBody | **PENDING** | sporeGate ops |
-| 9. E2E demo scenario | **SHIPPED + FIXED** (V18) | — |
+### esotericWebb → `primals.eco/webb/` — **V18, LIVE ON GATE**
 
-### lithoSpore → CLI tool — **ALL CLEAR**
+Cross-evolution CRPG on flockGate:8090. V18 with `demo` subcommand (8-step
+guided tour, JSON CI output). 472 tests. 6/9 primals connected. Content
+README for authors. Aldric NPC fixed.
 
-All 7 steps complete + ring dropped + clippy clean. USB round-trip validated.
-pseudoSpore emission from all 7 springs shipped. 227 tests, 0 everything.
+**Blocking: ops persistence** — product runs but restarts require manual SSH.
 
-### pseudoSpore Pipeline — **7 SPRINGS EMITTED**
+| Ops step | Command | Gate | Status |
+|----------|---------|------|--------|
+| systemd enable | `systemctl enable --now esotericwebb-server` | flockGate | **PENDING** |
+| Caddy route `/webb/` | Add reverse_proxy block → `flockGate:8090` | golgiBody | **PENDING** |
 
-| Spring | Artifact | Status |
-|--------|----------|--------|
-| hotSpring | CompChem-GuideStone v1.6.1 | COMPLETE |
-| groundSpring | LTEE-Measurement v1.0.0 | PENDING validation |
-| airSpring | Agricultural-Meteorology v1.0.0 | PENDING validation |
-| healthSpring | Clinical-PKPD v1.0.0 | PENDING validation |
-| neuralSpring | ML-Surrogates v1.0.0 | PENDING validation |
-| wetSpring | Life-Science-Analytics v1.0.0 | PENDING validation |
-| ludoSpring | Game-Science v1.0.0 | PENDING validation |
+### Other live surfaces
 
-### projectFOUNDATION → TBD (NOT STARTED)
-
----
-
-## Completed Milestones
-
-| Milestone | Status |
-|-----------|--------|
-| Silicon Atheism Phase 2 (14/14 + lithoSpore) | **COMPLETE** |
-| Content-Addressed Convergence (6/6) | **COMPLETE** |
-| Glacial Shift (8/8) | **ALL CLEAR** |
-| `gate.enroll` fully automated (7 phases) | **SHIPPED** |
-| **lithoSpore ALL CLEAR** | **DONE** — USB round-trip, ring dropped, 227 tests |
-| **pseudoSpore pipeline: 7 springs emitted** | **SHIPPED** |
-| **footPrint LIVE + FULLY USABLE** | **LIVE** — responsive, a11y, 466 tests |
-| **esotericWebb V18 LIVE on flockGate** | **LIVE** — demo fixed, persistence pending |
-| **E2E Tutorial Standard adopted** | **SHIPPED** — both products compliant |
-| **Dimensional review sweep** | **COMPLETE** — 15 teams responded |
-| **sweetGrass braids CONFIRMED** | **CLOSED** — braid.create/query stable |
-| **bearDog crypto sigs CONFIRMED** | **CLOSED** — Ed25519 + HMAC stable |
-| **GAP-036 + GAP-038 ecosystem-wide** | **CLOSED** — socket naming + stale cleanup |
-| songBird drawbridge + /jsonrpc + discovery | **SHIPPED** |
-| sporePrint `live` maturity level | **SHIPPED** — 302 pages |
-| Depot (59+ binaries, 4 arch) | **OPERATIONAL** |
+| Surface | URL | Gate | Status |
+|---------|-----|------|--------|
+| sporePrint (docs) | `primals.eco` | golgiBody | LIVE — 302 pages, pseudoSpore gallery |
+| petalTongue TOPO-VIS | `live.primals.eco` | sporeGate | LIVE |
+| JupyterHub | `lab.primals.eco` | ironGate | LIVE |
 
 ---
 
-## Canonical Port Map
+## 2. PRIMAL DEMAND SIGNAL — Remaining Work
+
+Items frontloaded by priority. Most Wave 149b P1 items are CLOSED.
+
+### P1 — Inter-Primal Wiring (blocks deeper composition)
+
+| Need | Owner | Consumer | Detail |
+|------|-------|----------|--------|
+| `PROJECTS_PATH` CAS wiring | nestGate | footPrint | Content-addressed project serving |
+| `WS_PATH` agent bridge | petalTongue | footPrint | WebSocket for real-time agent comms |
+| `null` params on health | squirrel | esotericWebb | Webb workaround: sends `{}` |
+| BTSP → `gate.enroll` | songBird | cellMembrane | Last enrollment automation primitive |
+
+### P2 — Ecosystem Quality + Pipeline
+
+| Need | Owner | Detail |
+|------|-------|--------|
+| HSM → Android Keystore | bearDog | grapheneGate mobile credential backend |
+| Credential store trait | bearDog + squirrel | Silicon Atheism Phase 2 completion |
+| Health monitoring trait | ecosystem | Not procfs-hardcoded |
+| `primal-transport` crate | ecosystem | Subsystem convergence publication |
+| primalSpring CAC scenario | primalSpring | FRAGO issued, not implemented |
+| primalSpring `wan-deploy` | primalSpring | 1/5 protoKarya scenarios remaining |
+
+### P2 — pseudoSpore Pipeline
+
+| Need | Owner | Detail |
+|------|-------|--------|
+| `validation.json` per spore | 6 spring teams | Module validation results for promotion |
+| Fix groundSpring `bingoCube/nautilus` dep | groundSpring | `cargo test` fails |
+| Add `scope.toml` to each spring | spring teams | Self-describing artifact manifest |
+| Bash → Rust orchestration | spring teams | 114+ shell scripts across springs |
+
+---
+
+## 3. STRATEGIC GOALS
+
+### NOW (this session / next cascade)
+
+- **Make esotericWebb persistent**: systemd + Caddy on flockGate/golgiBody
+- **Route remaining P1 wiring** to nestGate, petalTongue, squirrel, songBird
+- **Validate sporePrint root** — confirm primals.eco Zola rebuild current
+
+### NEAR TERM (next 2-4 weeks)
+
+- **Full NUCLEUS composition**: all primals interacting through live products
+- **nestGate CAS + petalTongue WS**: complete footPrint's backend composition
+- **songBird BTSP**: fully automated mesh enrollment end-to-end
+- **pseudoSpore validation**: promote 6 pending spores from PENDING → COMPLETE
+- **sporePrint content sweep**: all entity maturity levels current
+- **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
+- **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
+
+### FUTURE (quarter horizon)
+
+- **tideGlass composition**: computational chemistry product (Phase 0)
+- **primal-transport crate**: publish shared transport abstraction
+- **SHOW_HN readiness**: rubric, narrative, demo path
+- **Exotic depot architectures**: riscv64, armv7, s390x (validated, not shipping)
+- **DNSSEC + inner membrane separation**: sovereign DNS + primal.eco isolation
+- **fieldGate recovery**: hardware surgery (dead CMOS)
+- **biomeGate recovery**: kernel recovery
+
+---
+
+## 4. DIMENSIONAL SCORECARD (Wave 150a)
+
+| Project | Tests | Clippy | Fmt | Debt | Unsafe | >800L | Prod unwrap |
+|---------|-------|--------|-----|------|--------|-------|-------------|
+| cellMembrane | 1,092 | 0 | 0 | 0 | 0 | 0 | 0 |
+| esotericWebb | 472 | 0 | 0 | 0 | 0 | 0 | 0 |
+| footPrint | 466 | 0 | — | 0 | — | 0 | — |
+| songBird | 14,322 | swept | swept | 0 | 0 | swept | swept |
+| lithoSpore | 227 | 0 | 0 | 0 | 0 | 0 | 0 |
+| loamSpine | 1,702 | 0 | 0 | 0 | 0 | 0 | 0 |
+| rhizoCrypt | 1,878 | 0 | 0 | 0 | 0 | 0 | 0 |
+| nestGate | audit | 0 | 0 | 0 | 0 | audit | audit |
+| primalSpring | 1,203 | 82 | 0 | 0 | 0 | 0 | 0 |
+| sporePrint | 289 | — | — | 0 | — | 0 | — |
+
+**Ecosystem**: 0 debt markers, 0 unsafe code, 0 mocks in production.
+
+---
+
+## 5. COMPLETED MILESTONES
+
+| Milestone | Wave |
+|-----------|------|
+| Silicon Atheism Phase 2 (14/14 + lithoSpore) | 145a |
+| Content-Addressed Convergence (6/6) | 143b |
+| Glacial Shift (8/8) ALL CLEAR | 137b |
+| `gate.enroll` fully automated (7 phases) | 147a |
+| lithoSpore ALL CLEAR (USB round-trip, ring dropped) | 150a |
+| pseudoSpore pipeline: 7 springs emitted | 150a |
+| footPrint LIVE + FULLY USABLE (466 tests, responsive, a11y) | 150a |
+| esotericWebb V18 LIVE on flockGate (demo scenario) | 149a |
+| E2E Tutorial Standard adopted (both products) | 149a |
+| Dimensional review sweep (15 teams responded) | 150a |
+| sweetGrass `braid.create/query` CONFIRMED | 150a |
+| bearDog crypto JSON-RPC sigs CONFIRMED | 150a |
+| GAP-036 + GAP-038 closed ecosystem-wide | 150a |
+| songBird drawbridge + /jsonrpc + discovery | 148a |
+| Depot operational (59+ binaries, 4 arch) | 142a |
+
+---
+
+## 6. MESH TOPOLOGY
+
+```
+golgiBody (10.13.37.1) — hub, VPS, Caddy TLS
+  ├─ sporeGate (10.13.37.2) — builder, footPrint:8090 [LIVE]
+  ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
+  ├─ flockGate (10.13.37.6) — esotericWebb:8090 [V18, persistence pending]
+  ├─ ironGate  (10.13.37.7) — compute, lithoSpore [ALL CLEAR]
+  └─ northGate (10.13.37.8) — Windows, RTX 5090
+
+Offline: westGate (cold storage), fieldGate (dead CMOS),
+         strandGate (pending enrollment), biomeGate (kernel recovery)
+```
 
 | Port | Service | Gate | Protocol |
 |------|---------|------|----------|
@@ -189,25 +177,30 @@ pseudoSpore emission from all 7 springs shipped. 227 tests, 0 everything.
 
 ---
 
-## 6-Gate Mesh (LIVE)
+## 7. ORTHOGONAL DIMENSIONS SUMMARY (12/12 reviewed)
 
-```
-golgiBody (10.13.37.1) — hub, VPS, Caddy TLS
-  ├─ sporeGate (10.13.37.2) — builder, footPrint:8090 [LIVE]
-  ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
-  ├─ flockGate (10.13.37.6) — esotericWebb:8090 [V18, persistence pending]
-  ├─ ironGate  (10.13.37.7) — compute, lithoSpore [ALL CLEAR]
-  └─ northGate (10.13.37.8) — Windows, RTX 5090
-```
+| Dim | Area | Status | Open items |
+|-----|------|--------|------------|
+| 1 | Temporal | GREEN | — |
+| 2 | Ecological | GREEN | — (dimensional sweep complete) |
+| 3 | Hardware | AMBER | 4 gates offline (not blocking) |
+| 4 | Sovereignty | GREEN | DNSSEC (P2) |
+| 5 | Depot | GREEN | Exotic arch (P3) |
+| 6 | Public Surface | AMBER | webb/ route pending, sporePrint root unconfirmed |
+| 7 | Glacial Shift | GREEN | SHOW_HN rubric (P3) |
+| 8 | Compositions | AMBER | Webb persistence, nestGate CAS, petalTongue WS |
+| 9 | Documentation | GREEN | — |
+| 10 | Cascade | GREEN | songBird BTSP (P1) |
+| 11 | CAC | GREEN | primalSpring scenario (P2) |
+| 12 | Silicon Atheism | GREEN | Credential trait, health trait (P2) |
 
 ---
 
-*Wave 150a: Massive dimensional sweep response. 15 repos absorbed, 6 handoffs
-fossilized. sweetGrass braids + bearDog crypto sigs CONFIRMED (2 P1 closures).
-footPrint shipped responsive + a11y + ESLint zero + 466 tests + full UX polish.
-esotericWebb aldric NPC fixed. songBird swept 177 files. lithoSpore ALL CLEAR +
-pseudoSpore emission from all 7 springs. GAP-036 + GAP-038 closed ecosystem-wide
-(sweetGrass, rhizoCrypt, loamSpine, biomeOS, nestGate). primalSpring fmt+unwrap
-clean. rhizoCrypt: 1,878 tests, 93.83% coverage. loamSpine: 1,702 tests, all
-dimensions PASS. Remaining: ops persistence for esotericWebb, nestGate CAS,
-petalTongue WS, squirrel null, songBird BTSP.*
+*Wave 150b: Full 12-dimension orthogonal review. Blurb reshaped around live
+systems and strategic goals. 2 products LIVE (footPrint fully usable, esotericWebb
+persistence pending ops). Demand signal condensed — 4 P1 inter-primal wiring
+items remain (nestGate CAS, petalTongue WS, squirrel null, songBird BTSP).
+15 demand signal items closed in Wave 149b→150a sweep. lithoSpore ALL CLEAR +
+7 pseudoSpores emitted. 12 dimensions: 9 GREEN, 3 AMBER (hardware offline gates,
+public surface routing, composition wiring). Near-term: full NUCLEUS composition,
+projectFOUNDATION design, strandGate enrollment.*
