@@ -1,23 +1,24 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-19T12:05:00Z
+# Gate: flockGate | Updated: 2026-07-19T13:18:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-19T12:05:00Z"
-wave = "150k"
+updated = "2026-07-19T13:18:00Z"
+wave = "150n"
 
 [heads]
-primalSpring = "c677c3c"
-wateringHole = "2916feb5"
-esotericWebb = "aaa1ffe"
+primalSpring = "ff32f32"
+wateringHole = "b0d58d02"
+esotericWebb = "98496ac"
+petalTongue = "c6baa1d"
 plasmidBin = "e0b20e0"
 
 [remotes]
 standard = "Forgejo-first (origin=Forgejo, github=mirror)"
 swap_completed = true
-repos_swapped = ["primalSpring", "wateringHole", "esotericWebb"]
+repos_swapped = ["primalSpring", "wateringHole", "esotericWebb", "petalTongue"]
 
 [mesh]
 node_id = "flockGate"
@@ -28,33 +29,43 @@ peers_mesh_registered = 2
 status = "6-GATE MESH OPERATIONAL"
 
 [esotericwebb]
-status = "LIVE — V22, scene binding fixed, browser-navigable"
+status = "LIVE — V22, scene graph pipeline ACTIVE via petalTongue v1.7"
 version = "V22"
-commit = "aaa1ffe"
+commit = "98496ac"
 systemd = "esotericwebb-server.service ENABLED + LINGER"
-pid = 1666053
 protocol = "HTTP POST /jsonrpc + GET / + raw TCP JSON-RPC"
 capabilities = 26
-primals_connected = 6
+primals_connected = 7
 webb_domain = "webb.primals.eco"
 wan_post = "200 OK — healthy"
-wan_get = "200 OK — browser-navigable (GET handler shipped)"
-scene_binding = "visualization.render.scene with game_scene SceneGraph + ui.render fallback"
+wan_get = "200 OK — browser-navigable"
+scene_binding = "visualization.render.scene via petalTongue UDS — game_scene SceneGraph + ui.render fallback"
+
+[petaltongue]
+status = "DEPLOYED — v1.7.0 IPC server active"
+version = "1.7.0"
+commit = "c6baa1d"
+systemd = "petaltongue-server.service ENABLED"
+port = 9100
+uds = "/run/user/1000/biomeos/petaltongue.sock"
+discovery = "esotericWebb auto-discovered via UDS"
+scene_graph_pipeline = "ACTIVE — 11 scenes, 8 abilities, 6 NPCs"
 
 [wan_subdomain_posture]
 footprint_primals_eco = "200 — FULL NUCLEUS"
-webb_primals_eco = "200 — V22 LIVE (POST + GET)"
+webb_primals_eco = "200 — V22 LIVE (POST + GET, petalTongue scene graph)"
 sporeprint_primals_eco = "200"
 live_primals_eco = "200"
 git_primals_eco = "200"
 all_surfaces_live = true
 
 [primalspring]
-head = "c677c3c"
+head = "ff32f32"
 scenarios = 169
 tests = 1206
 failures = 0
 suite_status = "GREEN"
+known_debt = ["graphenegate-readiness:14", "composition-access-control:15"]
 
 [esotericwebb_tests]
 tests = 453
@@ -64,4 +75,5 @@ suite_status = "GREEN"
 [remaining_divergence]
 p0_items = 0
 p1_items = 0
-p2_items = ["primals.eco DNSSEC", "deploy petalTongue v1.7+ (activates scene graph)", "cellMembrane unwrap audit (551)"]
+p2_items = ["primals.eco DNSSEC", "cellMembrane unwrap audit (551)"]
+resolved_this_wave = ["petalTongue v1.7 deployed — scene graph pipeline active"]
