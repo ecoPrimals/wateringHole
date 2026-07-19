@@ -1,18 +1,23 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-19T11:02:00Z
+# Gate: flockGate | Updated: 2026-07-19T12:05:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-19T11:02:00Z"
-wave = "150i"
+updated = "2026-07-19T12:05:00Z"
+wave = "150k"
 
 [heads]
 primalSpring = "c677c3c"
-wateringHole = "61125323"
-esotericWebb = "08588d5"
+wateringHole = "2916feb5"
+esotericWebb = "aaa1ffe"
 plasmidBin = "e0b20e0"
+
+[remotes]
+standard = "Forgejo-first (origin=Forgejo, github=mirror)"
+swap_completed = true
+repos_swapped = ["primalSpring", "wateringHole", "esotericWebb"]
 
 [mesh]
 node_id = "flockGate"
@@ -20,43 +25,43 @@ songbird_version = "0.2.1"
 wireguard_status = "UP"
 wireguard_addr = "10.13.37.6/24"
 peers_mesh_registered = 2
-federation_sporegate_7700 = "LIVE"
-federation_golgi_7700 = "LIVE"
-status = "6-GATE MESH OPERATIONAL — ZERO P1, systemd stable 10h+"
+status = "6-GATE MESH OPERATIONAL"
 
 [esotericwebb]
-status = "LIVE — V19.1 HTTP+JSON-RPC, systemd stable"
-version = "V19.1"
-commit = "08588d5"
+status = "LIVE — V22, scene binding fixed, browser-navigable"
+version = "V22"
+commit = "aaa1ffe"
 systemd = "esotericwebb-server.service ENABLED + LINGER"
-uptime = "10h+ (survived overnight, linger confirmed)"
-pid = 787002
-protocol = "HTTP POST /jsonrpc + raw TCP JSON-RPC (dual)"
+pid = 1666053
+protocol = "HTTP POST /jsonrpc + GET / + raw TCP JSON-RPC"
 capabilities = 26
 primals_connected = 6
 webb_domain = "webb.primals.eco"
-wan_status = "200 OK — healthy"
-v22_pending = "V22 source not yet pushed to origin — awaiting eastGate sync"
+wan_post = "200 OK — healthy"
+wan_get = "200 OK — browser-navigable (GET handler shipped)"
+scene_binding = "visualization.render.scene with game_scene SceneGraph + ui.render fallback"
 
 [wan_subdomain_posture]
-footprint_primals_eco = "200 — 155ms"
-webb_primals_eco = "200 — healthy (POST /jsonrpc)"
-sporeprint_primals_eco = "200 — 178ms"
-live_primals_eco = "200 — 316ms"
-git_primals_eco = "200 — 134ms"
+footprint_primals_eco = "200 — FULL NUCLEUS"
+webb_primals_eco = "200 — V22 LIVE (POST + GET)"
+sporeprint_primals_eco = "200"
+live_primals_eco = "200"
+git_primals_eco = "200"
 all_surfaces_live = true
-p1_remaining = 0
 
 [primalspring]
-version = "v0.9.39"
 head = "c677c3c"
 scenarios = 169
 tests = 1206
 failures = 0
 suite_status = "GREEN"
-note = "upstream at 171 scenarios (8a456bf) — CAC scenario not yet pushed to origin"
+
+[esotericwebb_tests]
+tests = 453
+failures = 0
+suite_status = "GREEN"
 
 [remaining_divergence]
 p0_items = 0
 p1_items = 0
-p2_items = ["esotericWebb V22 deploy (source not on origin)", "V19.1 depot binary", "primals.eco DNSSEC", "primalSpring CAC scenario (done upstream, not synced)"]
+p2_items = ["primals.eco DNSSEC", "deploy petalTongue v1.7+ (activates scene graph)", "cellMembrane unwrap audit (551)"]
