@@ -1,13 +1,15 @@
-# ecoPrimals Ecosystem Blurb — Wave 150h
+# ecoPrimals Ecosystem Blurb — Wave 150i
 
-**Date**: Jul 18, 2026 18:30 EDT | **Wave**: 150h | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FULL NUCLEUS COMPOSITION WIRED.**
+**Date**: Jul 18, 2026 21:10 EDT | **Wave**: 150i | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. SCENE UNIFICATION ALL 4 PHASES COMPLETE.**
 
-**This wave**: footPrint wired both consumer-side connections (petalTongue `/ws`
-JSON-RPC bridge + nestGate CAS client). esotericWebb shipped V21 — browser-
-navigable HTML frontend + live visual rendering via petalTongue `ui.render`.
-NUCLEUS composition is now end-to-end wired through live products. All P1
-items resolved on both provider AND consumer sides.
+**This wave**: petalTongue completed ALL 4 phases of scene unification — now a
+fully universal rendering engine (Sphere, Cylinder, Mesh3D, Ribbon, ErrorBar,
+Text; zero production stubs; 569 scene tests). esotericWebb shipped V22 — fixed
+P1 scene binding (`visualization.render.scene` with `game_scene` SceneGraph,
+`ui.render` fallback). cellMembrane shipped depot URL subdomain standard.
+Forward-compatible: when petalTongue v1.7+ deploys, Webb auto-activates the
+full scene graph pipeline without code changes.
 
 ---
 
@@ -30,7 +32,7 @@ User → Cloudflare (*.primals.eco wildcard → golgiBody)
 | Surface | URL | Status | Gate |
 |---------|-----|--------|------|
 | footPrint | `footprint.primals.eco` | **LIVE — FULL NUCLEUS** | sporeGate |
-| esotericWebb | `webb.primals.eco` | **V21 LIVE — BROWSER-NAVIGABLE** | flockGate |
+| esotericWebb | `webb.primals.eco` | **V22 LIVE — SCENE BINDING FIXED** | flockGate |
 | sporePrint | `sporeprint.primals.eco` | **LIVE** | golgiBody |
 | TOPO-VIS | `live.primals.eco` | **LIVE** | sporeGate |
 | Forgejo | `git.primals.eco` | **LIVE** | golgiBody |
@@ -50,12 +52,14 @@ User → Cloudflare (*.primals.eco wildcard → golgiBody)
 Consumer modules shipped: `petal-tongue.ts` (231L, auto-reconnecting WS client)
 and `nestgate-cas.ts` (84L, BLAKE3 content-addressed project persistence).
 
-### esotericWebb — **V21, BROWSER-NAVIGABLE + LIVE VISUALS**
+### esotericWebb — **V22, SCENE BINDING FIXED**
 
-453 tests. 6/9 primals connected. GET handler shipped — `webb.primals.eco/`
-now serves a self-contained HTML frontend (zero external JS/CSS dependencies).
-Live visual rendering via petalTongue `ui.render` confirmed working
-(`scene_pushed: true`). `session.poll_input` method for interaction loop.
+453 tests. 6/9 primals connected. V22 fixes P1 scene binding:
+`push_scene_to_ui()` now attempts `visualization.render.scene` with a
+`game_scene` SceneGraph (Transform3D at z=0) first, falls back to `ui.render`
+on rejection. Forward-compatible with petalTongue v1.7+ — scene graph pipeline
+auto-activates when the new binary deploys. Zero code changes needed on Webb
+side.
 
 ### Other surfaces: sporePrint (302 pages), TOPO-VIS, Forgejo, JupyterHub — all LIVE.
 
@@ -76,11 +80,12 @@ Live visual rendering via petalTongue `ui.render` confirmed working
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| esotericWebb V21 depot binary | sporeGate ops | Local build, not in depot |
+| esotericWebb V22 depot binary | sporeGate ops | Local build, not in depot |
 | `loginctl enable-linger` | flockGate ops | systemd user unit persistence |
 | `primals.eco` DNSSEC | ops / Cloudflare | Enable via API |
-| petalTongue scene unification (2D-as-3D-slice) | petalTongue | Transform3D on SceneNode, Camera+projection, grammar z-wiring (see handoff) |
-| esotericWebb `ui.render` → `visualization.render` | esotericWebb | Current `ui.render` usage is incorrect — switch to `game_scene` binding (P1 bug) |
+| ~~petalTongue scene unification~~ | petalTongue | **ALL 4 PHASES COMPLETE** — universal rendering engine, 569 scene tests, zero stubs |
+| ~~esotericWebb `ui.render` → `visualization.render`~~ | esotericWebb | **V22 FIXED** — `game_scene` SceneGraph + `ui.render` fallback |
+| Deploy petalTongue v1.7+ | sporeGate ops | Activates full scene graph pipeline for Webb (auto, no code changes) |
 | `footprint_composition.toml` URL | cellMembrane | Update to subdomain URL |
 | cellMembrane `gate.enroll` → `mesh.enroll` | cellMembrane | Integration with songBird |
 | HSM → Android Keystore | bearDog | grapheneGate backend |
@@ -103,10 +108,10 @@ Live visual rendering via petalTongue `ui.render` confirmed working
 
 ### NOW
 
-- **Visual verification** — confirm footPrint tiles + CAS at `footprint.primals.eco`
-- **Visual verification** — confirm esotericWebb HTML frontend at `webb.primals.eco`
+- **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph pipeline
+- **Push V22 to depot** — esotericWebb binary for reproducible deployment
 - **Enable Cloudflare DNSSEC** for `primals.eco`
-- **Push V21 to depot**
+- **Visual verification** — confirm footPrint tiles + CAS at `footprint.primals.eco`
 
 ### NEAR TERM (next 2-4 weeks)
 
@@ -114,7 +119,7 @@ Live visual rendering via petalTongue `ui.render` confirmed working
 - **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
 - **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
 - **`primal.eco` inner membrane separation**
-- **petalTongue scene format**: SceneGraph narrative variant or `ui.render` canonical
+- **petalTongue Phase 3-4 renderer integration**: SVG viewport from camera (done), 3D geometry in live renderers
 
 ### FUTURE (quarter horizon)
 
@@ -148,8 +153,10 @@ Live visual rendering via petalTongue `ui.render` confirmed working
 
 | Milestone | Wave |
 |-----------|------|
+| **petalTongue scene unification — ALL 4 PHASES COMPLETE** | **150i** |
+| **esotericWebb V22 — scene binding fixed (game_scene + fallback)** | **150i** |
+| **cellMembrane depot URL subdomain standard** | **150i** |
 | **FULL NUCLEUS COMPOSITION WIRED (footPrint CAS + WS consumer)** | **150h** |
-| **esotericWebb V21 — browser-navigable + live visuals** | **150h** |
 | ALL P1 inter-primal wiring RESOLVED (4/4, both sides) | 150g/h |
 | 5 composition surfaces LIVE from WAN | 150f |
 | Deployment chain validated end-to-end | 150f |
@@ -171,7 +178,7 @@ Live visual rendering via petalTongue `ui.render` confirmed working
 golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, Cloudflare firebreak
   ├─ sporeGate (10.13.37.2) — builder, footPrint [FULL NUCLEUS]
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
-  ├─ flockGate (10.13.37.6) — esotericWebb [V21 LIVE]
+  ├─ flockGate (10.13.37.6) — esotericWebb [V22 LIVE]
   ├─ ironGate  (10.13.37.7) — compute, lithoSpore [ALL CLEAR]
   └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled]
 
@@ -199,11 +206,12 @@ Offline: westGate, fieldGate, strandGate (pending), biomeGate
 
 ---
 
-*Wave 150h: NUCLEUS COMPOSITION WIRED. footPrint consumer-side wiring COMPLETE.
-esotericWebb V21 browser-navigable. Investigation revealed Webb's `ui.render`
-usage is incorrect (should be `visualization.render` with `game_scene` binding).
-Architectural evolution issued: petalTongue 2D-as-3D-slice unification —
-Transform3D on SceneNode, Camera+projection, grammar z-wiring. Makes petalTongue
-a universal rendering engine (narrative, scientific, geospatial, molecular).
-All non-breaking (2D = orthographic camera at z=0). 4-phase rollout specified.
-5 surfaces LIVE. 10 GREEN / 2 AMBER dimensions. 23,300+ tests.*
+*Wave 150i: SCENE UNIFICATION ALL 4 PHASES COMPLETE. petalTongue is a fully
+universal rendering engine — Sphere (UV tessellation), Cylinder (ring),
+Mesh3D (passthrough), Ribbon (confidence band), ErrorBar (whisker+caps), Text.
+Zero production stubs. 569 scene tests (19 new). SVG viewport reads camera
+projection. esotericWebb V22 fixed scene binding: `visualization.render.scene`
+with `game_scene` SceneGraph, `ui.render` fallback. Forward-compatible — when
+petalTongue v1.7+ deploys to flockGate, full scene graph pipeline auto-activates.
+cellMembrane shipped depot URL subdomain standard. 6 surfaces LIVE.
+10 GREEN / 2 AMBER dimensions. 23,300+ tests.*
