@@ -1,15 +1,14 @@
-# ecoPrimals Ecosystem Blurb — Wave 150l
+# ecoPrimals Ecosystem Blurb — Wave 150m
 
-**Date**: Jul 19, 2026 08:30 EDT | **Wave**: 150l | **From**: eastGate overwatch
+**Date**: Jul 19, 2026 08:40 EDT | **Wave**: 150m | **From**: eastGate overwatch
 **Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 4-ORG FORGEJO. STABILIZED.**
 
-**This wave**: Workspace and org reorganization for gate-team parity.
-**protoKarya** org created on Forgejo — footPrint + tideGlass repos registered,
-pushed, and push-mirrored. **cellMembrane** canonicalized under sporeGarden (stale
-ecoPrimals duplicate deleted). **metalForge** cloned to gardens/, **coralForge** to
-springs/ — both created on Forgejo with push mirrors. GitHub duplicates
-(ecoPrimals/{benchScale,agentReagents}) archived. Stale root dirs cleaned.
-**43/43 repos** across 4 orgs now Forgejo-first with push mirrors to GitHub.
+**This wave**: Workspace reorganization finalized — bingoCube moved to primals/
+(agnostic crypto tool, not infra), rustChip moved to springs/ (syntheticChemistry
+experiment). Broken path deps fixed (airSpring, groundSpring). Org mapping,
+scorecard, and manifest updated. Gate standardization instructions added below.
+Next focus: **bingoCube on primals.eco via petalTongue** — validates the scene
+graph rendering pipeline with an interactive cryptographic commitment widget.
 
 ---
 
@@ -28,15 +27,31 @@ User → Cloudflare (*.primals.eco wildcard → golgiBody)
 **Git Relay**: Forgejo (inner membrane, `git.primals.eco`) → push mirror → GitHub (outer membrane).
 Gates push to Forgejo only. golgiBody relays to GitHub on every commit. 43/43 repos mirrored.
 
-**Org ↔ Workspace Mapping** (canonical for all gates):
+### Canonical Workspace Layout (ALL GATES MUST MATCH)
 
-| Forgejo/GitHub Org | Local Dir | Role | Repos |
+| Forgejo/GitHub Org | Local Dir | Role | Count |
 |--------------------|-----------|------|-------|
-| ecoPrimals | `primals/` | Core primals | 14 |
-| sporeGarden | `gardens/` | Compositions, infrastructure | 9 |
-| syntheticChemistry | `springs/` | Springs, validation, chemistry | 12 |
-| protoKarya | `protists/` | Products (sovereign apps) | 2 |
-| ecoPrimals + synChem | `infra/` | Shared infrastructure | 9 |
+| ecoPrimals | `primals/` | Core primals (IPC daemons + agnostic tools) | 15 |
+| sporeGarden | `gardens/` | Compositions, infrastructure products | 9 |
+| syntheticChemistry | `springs/` | Springs, validation, chemistry, experiments | 10 |
+| protoKarya | `protists/` | Sovereign products (user-facing apps) | 2 |
+| ecoPrimals + synChem | `infra/` | Shared infrastructure (non-primal, non-product) | 7 |
+
+**Gate bootstrap** — to replicate this layout on any new gate:
+
+```bash
+mkdir -p ~/Development/ecoPrimals/{primals,gardens,springs,protists,infra}
+# Clone all repos from Forgejo (origin) — example for primals:
+for repo in barraCuda bearDog biomeOS bingoCube coralReef loamSpine \
+  nestGate petalTongue rhizoCrypt skunkBat songBird sourDough \
+  squirrel sweetGrass toadStool; do
+  git clone ssh://git@git.primals.eco:2222/ecoPrimals/$repo.git primals/$repo
+done
+# Repeat for gardens/ (sporeGarden org), springs/ (syntheticChemistry),
+# protists/ (protoKarya), infra/ (mixed orgs — see ecosystem_manifest.toml)
+# Then add github read-only remote:
+# git remote add github git@github.com:<org>/<repo>.git
+```
 
 ---
 
@@ -62,17 +77,11 @@ Gates push to Forgejo only. golgiBody relays to GitHub on every commit. 43/43 re
 | Agent bridge | petalTongue | `/ws` WebSocket JSON-RPC (7 methods) | **WIRED (Wave 150h)** |
 | Static + API | footPrint Express | CSP + security headers + SPA fallback | LIVE |
 
-Consumer modules shipped: `petal-tongue.ts` (231L, auto-reconnecting WS client)
-and `nestgate-cas.ts` (84L, BLAKE3 content-addressed project persistence).
-
 ### esotericWebb — **V22, SCENE BINDING FIXED**
 
 453 tests. 6/9 primals connected. V22 fixes P1 scene binding:
-`push_scene_to_ui()` now attempts `visualization.render.scene` with a
-`game_scene` SceneGraph (Transform3D at z=0) first, falls back to `ui.render`
-on rejection. Forward-compatible with petalTongue v1.7+ — scene graph pipeline
-auto-activates when the new binary deploys. Zero code changes needed on Webb
-side.
+Forward-compatible with petalTongue v1.7+ — scene graph pipeline
+auto-activates when the new binary deploys.
 
 ### Other surfaces: sporePrint (302 pages), TOPO-VIS, Forgejo, JupyterHub — all LIVE.
 
@@ -82,12 +91,16 @@ side.
 
 ### ~~P0 — Forgejo-First Remote Swap~~ **RESOLVED (Wave 150k)**
 
-All **39/39** repos now have `origin=Forgejo`, `github=GitHub`. Batch rename
-executed on 37 repos across primals/, gardens/, infra/, springs/.
+All **43/43** repos now have `origin=Forgejo`, `github=GitHub`.
 
 ### ~~P1 — Format Drift~~ **RESOLVED (Wave 150k)**
 
-`cargo fmt` applied and pushed: biomeOS (2,236→0), petalTongue (1,811→0), squirrel (41→0).
+`cargo fmt` applied and pushed: biomeOS, petalTongue, squirrel — all clean.
+
+### ~~P1 — Broken Path Deps~~ **RESOLVED (Wave 150l)**
+
+bingoCube path deps fixed in airSpring (`infra/`→`primals/`) and groundSpring
+(`primalTools/`→`primals/`). wetSpring was already correct.
 
 ### P1 — Production `.unwrap()` Hotspots
 
@@ -139,7 +152,6 @@ executed on 37 repos across primals/, gardens/, infra/, springs/.
 | Need | Owner | Detail |
 |------|-------|--------|
 | `validation.json` per spore | 6 spring teams | Module validation results |
-| Fix groundSpring `bingoCube/nautilus` dep | groundSpring | `cargo test` fails |
 | Bash → Rust orchestration | spring teams | 114+ shell scripts |
 
 ---
@@ -148,19 +160,22 @@ executed on 37 repos across primals/, gardens/, infra/, springs/.
 
 ### NOW
 
+- **bingoCube on primals.eco** — interactive crypto commitment widget via petalTongue
+  scene graph. Validates petalTongue rendering pipeline (SceneGraph → SVG/WebGL)
+  with real data before broader bingoCube deployment. Target: `bingo.primals.eco`
+  or sporePrint embed.
 - **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph pipeline
-- **flockGate rebuild** — esotericWebb V22 source now on Forgejo, flockGate rebuilds from source
+- **flockGate rebuild** — esotericWebb V22 from Forgejo source
 - **cellMembrane unwrap audit** — 551 production unwraps, highest in ecosystem
 
 ### NEAR TERM (next 2-4 weeks)
 
 - **Enable Cloudflare DNSSEC** for `primals.eco`
-- **cellMembrane unwrap audit** — 551 production unwraps, highest in ecosystem
 - **pseudoSpore validation**: promote 6 pending spores
 - **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
 - **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
 - **`primal.eco` inner membrane separation**
-- **petalTongue Phase 3-4 renderer integration**: SVG viewport from camera (done), 3D geometry in live renderers
+- **petalTongue live renderer integration**: 3D geometry in WebGL/canvas renderers
 
 ### FUTURE (quarter horizon)
 
@@ -171,14 +186,15 @@ executed on 37 repos across primals/, gardens/, infra/, springs/.
 
 ---
 
-## 5. DIMENSIONAL SCORECARD (Wave 150k — Full Ecosystem)
+## 5. DIMENSIONAL SCORECARD (Wave 150m — Full Ecosystem)
 
-### Primals (14)
+### Primals (15)
 
 | Project | Tests | Clippy | Fmt | TODO/FIXME | Unsafe | >800L | `.unwrap()` |
 |---------|-------|--------|-----|-----------|--------|-------|-------------|
 | barraCuda | 5,153 | 0 | 0 | 0 | 323 (GPU) | 0 | 0 |
 | bearDog | 13,884 | 0 | 0 | 0 | 0 | 0 | 57 (test) |
+| **bingoCube** | **73** | 0 | 0 | 0 | 0 | 0 | 0 |
 | biomeOS | 8,446 | 0 | 0 | 0 | 0 | 0 | 0 |
 | coralReef | 3,650 | 0 | 0 | 0 | 5 | 2 (gen) | 0 |
 | loamSpine | 1,702 | 0 | 0 | 0 | 0 | 0 | 0 |
@@ -192,9 +208,9 @@ executed on 37 repos across primals/, gardens/, infra/, springs/.
 | sweetGrass | 1,608 | 0 | 0 | 0 | 0 | 0 | 0 |
 | toadStool | 23,000 | 0 | 0 | 0 | 279 (GPU) | 0 | 0 |
 
-**Primals total**: ~84,700 tests. 0 clippy warnings. 0 TODO/FIXME/HACK.
+**Primals total**: ~84,773 tests. 0 clippy. 0 TODO/FIXME/HACK. 0 `forbid(unsafe)` violations.
 
-### Gardens (8)
+### Gardens (9)
 
 | Project | Tests | Clippy | Fmt | TODO/FIXME | Unsafe | >800L | `.unwrap()` |
 |---------|-------|--------|-----|-----------|--------|-------|-------------|
@@ -204,23 +220,25 @@ executed on 37 repos across primals/, gardens/, infra/, springs/.
 | helixVision | — | — | — | 0 | 0 | 0 | 0 |
 | initioChem | — | — | — | 0 | 0 | 0 | 0 |
 | lithoSpore | 227 | 0 | 0 | 0 | 0 | 0 | 147 |
+| **metalForge** | — | — | — | 0 | 0 | 0 | 0 |
 | projectFOUNDATION | — | 0 | 0 | 0 | 18 | 0 | 219 |
 | projectNUCLEUS | — | 0 | 0 | 0 | 0 | 0 | 0 |
 
-### Infra (8)
+### Springs (10) + Infra (7)
 
 | Project | Tests | Clippy | Fmt | TODO/FIXME | Unsafe | >800L | `.unwrap()` |
 |---------|-------|--------|-----|-----------|--------|-------|-------------|
+| **rustChip** | **370** | 0 | 0 | 0 | 0 | 0 | 0 |
+| **coralForge** | — | — | — | 0 | 0 | 0 | 0 |
 | sporePrint | 289 | — | — | 0 | 0 | 0 | 349 |
 | wateringHole | — | — | — | 0 | 0 | 0 | 0 |
 | plasmidBin | — | — | — | 0 | 0 | 0 | 16 |
 | agentReagents | — | — | — | 0 | 0 | 0 | 33 |
 | benchScale | — | — | — | 0 | 14 | 0 | 203 |
-| bingoCube | — | — | — | 0 | 0 | 0 | 0 |
 | fossilRecord | — | — | — | 0 | 0 | 8 (archive) | 0 |
 | whitePaper | — | — | — | 0 | 0 | 0 | 0 |
 
-**Ecosystem totals**: **~62,000+ tests** (tracked). 0 clippy warnings.
+**Ecosystem totals**: **~62,500+ tests** (tracked). 0 clippy warnings.
 0 TODO/FIXME/HACK. 0 mocks. `unsafe` concentrated in GPU primals
 (barraCuda 323, toadStool 279) and libvirt tooling (benchScale 14).
 
@@ -230,6 +248,7 @@ executed on 37 repos across primals/, gardens/, infra/, springs/.
 
 | Milestone | Wave |
 |-----------|------|
+| **Workspace reorg: bingoCube→primals, rustChip→springs, path deps fixed** | **150m** |
 | **4-org Forgejo: protoKarya created, 43/43 repos mirrored** | **150l** |
 | **cellMembrane canonicalized under sporeGarden** | **150l** |
 | **metalForge + coralForge cloned + registered on Forgejo** | **150l** |
@@ -248,15 +267,9 @@ executed on 37 repos across primals/, gardens/, infra/, springs/.
 | **FULL NUCLEUS COMPOSITION WIRED (footPrint CAS + WS consumer)** | **150h** |
 | ALL P1 inter-primal wiring RESOLVED (4/4, both sides) | 150g/h |
 | 5 composition surfaces LIVE from WAN | 150f |
-| Deployment chain validated end-to-end | 150f |
-| cellMembrane subdomain routing overhaul | 150e |
-| songBird `mesh.enroll` ACTIVE | 150e |
-| nestGate dimensional audit ALL CLEAR (1,710 tests) | 150e |
 | Silicon Atheism Phase 2 (14/14 + lithoSpore) | 145a |
 | Content-Addressed Convergence (6/6) | 143b |
 | Glacial Shift (8/8) ALL CLEAR | 137b |
-| lithoSpore ALL CLEAR + 7 pseudoSpores emitted | 150a |
-| GAP-036 + GAP-038 closed ecosystem-wide | 150a |
 | Depot operational (59+ binaries, 4 arch) | 142a |
 
 ---
@@ -281,26 +294,25 @@ Offline: westGate, fieldGate, strandGate (pending), biomeGate
 | Dim | Area | Status | Open items |
 |-----|------|--------|------------|
 | 1 | Temporal | GREEN | — |
-| 2 | Ecological | **GREEN** | fmt resolved, remote swap complete |
+| 2 | Ecological | GREEN | fmt clean, remote swap complete, path deps fixed |
 | 3 | Hardware | AMBER | 4 gates offline |
-| 4 | Sovereignty | **GREEN** | 39/39 Forgejo-first; DNSSEC remaining (P2) |
-| 5 | Depot | GREEN | 16 primals in depot, compositions build from source |
+| 4 | Sovereignty | GREEN | 43/43 Forgejo-first; DNSSEC remaining (P2) |
+| 5 | Depot | GREEN | 15 primals in depot, compositions build from source |
 | 6 | Public Surface | GREEN | 6 surfaces LIVE |
 | 7 | Glacial Shift | GREEN | SHOW_HN rubric |
 | 8 | Compositions | GREEN | Both products fully wired |
-| 9 | Documentation | GREEN | 4 active handoffs, 14 fossilized, 7 AARs fossilized |
-| 10 | Cascade | **GREEN** | All repos push to Forgejo; mirrors relay to GitHub |
+| 9 | Documentation | GREEN | 4 active handoffs, 14 fossilized, 8 AARs fossilized |
+| 10 | Cascade | GREEN | All repos push to Forgejo; mirrors relay to GitHub |
 | 11 | CAC | GREEN | primalSpring scenario (P2) |
 | 12 | Silicon Atheism | GREEN | Credential trait (P2) |
 
-**Summary**: 11 GREEN / 1 AMBER. Remote swap and format drift resolved. Only
-Hardware remains AMBER (4 gates offline — not blocking).
+**Summary**: 11 GREEN / 1 AMBER (hardware only — not blocking).
 
 ---
 
-*Wave 150l: 4-ORG FORGEJO. protoKarya org created — footPrint + tideGlass
-registered. cellMembrane canonicalized under sporeGarden. metalForge + coralForge
-cloned and registered. 43/43 repos Forgejo-first with push mirrors. GitHub
-duplicates archived. Workspace cleaned: 5 canonical dirs (primals/, gardens/,
-springs/, protists/, infra/). 62,000+ tests. 11/12 GREEN, 1 AMBER (hardware).
-Gate-team workspace parity achieved — any gate can clone the canonical layout.*
+*Wave 150m: WORKSPACE FINALIZED. bingoCube→primals/ (agnostic tool, not infra),
+rustChip→springs/ (syntheticChemistry experiment). Broken path deps fixed in
+airSpring + groundSpring. Gate standardization instructions published — canonical
+5-dir layout with bootstrap script. Next: bingoCube on primals.eco as interactive
+petalTongue widget — validates scene graph pipeline with real cryptographic data.
+43/43 repos across 4 Forgejo orgs. 62,500+ tests. 11/12 GREEN.*
