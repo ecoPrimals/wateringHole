@@ -87,7 +87,7 @@ Live visual rendering via petalTongue `ui.render` confirmed working
 | Credential store trait | bearDog + squirrel | Silicon Atheism Phase 2 |
 | Health monitoring trait | ecosystem | nestGate consolidated procfs (Session 122) |
 | `primal-transport` crate | ecosystem | Extract transport abstractions |
-| primalSpring CAC scenario | primalSpring | FRAGO issued |
+| primalSpring CAC scenario | primalSpring | **IMPLEMENTED** (171 scenarios, 15 known-debt, 8a456bf) |
 
 ### P2 — pseudoSpore Pipeline
 
