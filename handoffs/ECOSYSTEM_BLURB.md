@@ -5,11 +5,10 @@
 
 **This wave**: Full dimensional review across all 30+ projects. 7 stale AARs
 (Waves 139b–148c) and 1 stale handoff (PETALTONGUE_SCENE_UNIFICATION) fossilized.
-**P0 finding**: 28 of 30 repos still have `origin=GitHub` — only petalTongue and
-wateringHole are Forgejo-first. All 28 have the `forgejo` remote configured;
-swap is a rename operation. **P1 finding**: 3 repos have format drift (biomeOS
-2,236 diff lines, petalTongue 1,811, squirrel 41). Scorecard expanded from 10
-to 30 projects with actual data.
+**P0 RESOLVED**: All 39 repos now `origin=Forgejo` — batch rename executed on 37
+repos (petalTongue + wateringHole were already correct). **P1 RESOLVED**: `cargo
+fmt` applied to biomeOS (2,236→0), petalTongue (1,811→0), squirrel (41→0) —
+all committed and pushed to Forgejo. Scorecard expanded from 10 to 30 projects.
 
 ---
 
@@ -70,25 +69,14 @@ side.
 
 ## 3. EXPOSED ISSUES — ACCUMULATING
 
-### P0 — Forgejo-First Remote Swap (28 repos)
+### ~~P0 — Forgejo-First Remote Swap~~ **RESOLVED (Wave 150k)**
 
-Only **petalTongue** and **wateringHole** have `origin=Forgejo`. All other repos
-still push to GitHub as origin. Pattern: `git remote rename origin github &&
-git remote rename forgejo origin`.
+All **39/39** repos now have `origin=Forgejo`, `github=GitHub`. Batch rename
+executed on 37 repos across primals/, gardens/, infra/, springs/.
 
-| Category | Repos needing swap | Count |
-|----------|-------------------|-------|
-| primals/ | barraCuda, bearDog, biomeOS, coralReef, loamSpine, nestGate, rhizoCrypt, skunkBat, songBird, sourDough, squirrel, sweetGrass, toadStool | 13 |
-| gardens/ | cellMembrane, esotericWebb, blueFish, helixVision, initioChem, lithoSpore, projectFOUNDATION, projectNUCLEUS | 8 |
-| infra/ | sporePrint, plasmidBin, agentReagents, benchScale, bingoCube, fossilRecord, whitePaper | 7 |
+### ~~P1 — Format Drift~~ **RESOLVED (Wave 150k)**
 
-### P1 — Format Drift
-
-| Repo | `cargo fmt --check` diff lines |
-|------|-------------------------------|
-| biomeOS | 2,236 |
-| petalTongue | 1,811 |
-| squirrel | 41 |
+`cargo fmt` applied and pushed: biomeOS (2,236→0), petalTongue (1,811→0), squirrel (41→0).
 
 ### P1 — Production `.unwrap()` Hotspots
 
@@ -149,10 +137,9 @@ git remote rename forgejo origin`.
 
 ### NOW
 
-- **Forgejo-first remote swap** — batch rename `origin`→`github`, `forgejo`→`origin` on 28 repos
 - **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph pipeline
 - **flockGate rebuild** — esotericWebb V22 source now on Forgejo, flockGate rebuilds from source
-- **`cargo fmt`** on biomeOS, petalTongue, squirrel
+- **cellMembrane unwrap audit** — 551 production unwraps, highest in ecosystem
 
 ### NEAR TERM (next 2-4 weeks)
 
@@ -181,16 +168,16 @@ git remote rename forgejo origin`.
 |---------|-------|--------|-----|-----------|--------|-------|-------------|
 | barraCuda | 5,153 | 0 | 0 | 0 | 323 (GPU) | 0 | 0 |
 | bearDog | 13,884 | 0 | 0 | 0 | 0 | 0 | 57 (test) |
-| biomeOS | 8,446 | 0 | **2,236** | 0 | 0 | 0 | 0 |
+| biomeOS | 8,446 | 0 | 0 | 0 | 0 | 0 | 0 |
 | coralReef | 3,650 | 0 | 0 | 0 | 5 | 2 (gen) | 0 |
 | loamSpine | 1,702 | 0 | 0 | 0 | 0 | 0 | 0 |
 | nestGate | 1,710 | 0 | 0 | 0 | 0 | 0 | 0 |
-| petalTongue | 6,500 | 0 | **1,811** | 0 | 0 | 0 | 287 (test) |
+| petalTongue | 6,500 | 0 | 0 | 0 | 0 | 0 | 287 (test) |
 | rhizoCrypt | 1,878 | 0 | 0 | 0 | 0 | 0 | 0 |
 | skunkBat | 567 | 0 | 0 | 0 | 0 | 0 | 0 |
 | songBird | 8,929 | 0 | 0 | 0 | 0 | 0 | 32 (test) |
 | sourDough | 502 | 0 | 0 | 0 | 1 | 0 | 0 |
-| squirrel | 7,171 | 0 | **41** | 0 | 17 | 0 | 0 |
+| squirrel | 7,171 | 0 | 0 | 0 | 17 | 0 | 0 |
 | sweetGrass | 1,608 | 0 | 0 | 0 | 0 | 0 | 0 |
 | toadStool | 23,000 | 0 | 0 | 0 | 279 (GPU) | 0 | 0 |
 
@@ -232,6 +219,8 @@ git remote rename forgejo origin`.
 
 | Milestone | Wave |
 |-----------|------|
+| **Forgejo-first remote swap — 39/39 repos origin=Forgejo** | **150k** |
+| **cargo fmt — biomeOS, petalTongue, squirrel (0 drift)** | **150k** |
 | **Full dimensional review — 30 projects scored** | **150k** |
 | **7 AARs + 1 handoff fossilized (139b–150h)** | **150k** |
 | **Forgejo push mirrors — 39/39 repos, sync_on_commit** | **150j** |
@@ -276,25 +265,25 @@ Offline: westGate, fieldGate, strandGate (pending), biomeGate
 | Dim | Area | Status | Open items |
 |-----|------|--------|------------|
 | 1 | Temporal | GREEN | — |
-| 2 | Ecological | **AMBER** | 3 repos need `cargo fmt`; 28 repos wrong remote layout |
+| 2 | Ecological | **GREEN** | fmt resolved, remote swap complete |
 | 3 | Hardware | AMBER | 4 gates offline |
-| 4 | Sovereignty | **AMBER** | 28/30 repos still origin=GitHub; DNSSEC remaining |
+| 4 | Sovereignty | **GREEN** | 39/39 Forgejo-first; DNSSEC remaining (P2) |
 | 5 | Depot | GREEN | 16 primals in depot, compositions build from source |
 | 6 | Public Surface | GREEN | 6 surfaces LIVE |
 | 7 | Glacial Shift | GREEN | SHOW_HN rubric |
 | 8 | Compositions | GREEN | Both products fully wired |
 | 9 | Documentation | GREEN | 4 active handoffs, 14 fossilized, 7 AARs fossilized |
-| 10 | Cascade | **AMBER** | 28 repos push to wrong origin — cascades hit GitHub not Forgejo |
+| 10 | Cascade | **GREEN** | All repos push to Forgejo; mirrors relay to GitHub |
 | 11 | CAC | GREEN | primalSpring scenario (P2) |
 | 12 | Silicon Atheism | GREEN | Credential trait (P2) |
 
-**Summary**: 9 GREEN / 3 AMBER. The remote layout gap is the primary blocker —
-until all repos have `origin=Forgejo`, the Forgejo-first relay architecture is
-incomplete and cascades diverge through GitHub.
+**Summary**: 11 GREEN / 1 AMBER. Remote swap and format drift resolved. Only
+Hardware remains AMBER (4 gates offline — not blocking).
 
 ---
 
-*Wave 150k: FULL DIMENSIONAL REVIEW. 30 projects scored. 62,000+ tests tracked
-ecosystem-wide. 0 clippy warnings. 0 TODO/FIXME/HACK. P0: 28/30 repos need
-Forgejo-first remote swap (origin=GitHub → origin=Forgejo). P1: 3 repos need
-cargo fmt. 7 stale AARs + 1 handoff fossilized. 9/12 GREEN, 3 AMBER.*
+*Wave 150k: STABILIZED. 39/39 repos Forgejo-first (remote swap complete).
+cargo fmt resolved on biomeOS, petalTongue, squirrel (0 drift). 30 projects
+scored across 12 dimensions. 62,000+ tests. 0 clippy warnings. 0 TODO/FIXME/HACK.
+7 stale AARs + 1 handoff fossilized. 11/12 GREEN, 1 AMBER (hardware only).
+Ready for team handoffs.*
