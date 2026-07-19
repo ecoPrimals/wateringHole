@@ -80,8 +80,9 @@ side.
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| esotericWebb V22 depot binary | sporeGate ops | Local build, not in depot |
-| `loginctl enable-linger` | flockGate ops | systemd user unit persistence |
+| ~~esotericWebb V22 sync~~ | eastGate | **PUSHED** to both Forgejo and GitHub |
+| ~~primalSpring CAC sync~~ | eastGate | **PUSHED** `8a456bf` to both remotes |
+| `loginctl enable-linger` | flockGate ops | **DONE** — confirmed 10h+ uptime |
 | `primals.eco` DNSSEC | ops / Cloudflare | Enable via API |
 | ~~petalTongue scene unification~~ | petalTongue | **ALL 4 PHASES COMPLETE** — universal rendering engine, 569 scene tests, zero stubs |
 | ~~esotericWebb `ui.render` → `visualization.render`~~ | esotericWebb | **V22 FIXED** — `game_scene` SceneGraph + `ui.render` fallback |
@@ -109,7 +110,7 @@ side.
 ### NOW
 
 - **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph pipeline
-- **Push V22 to depot** — esotericWebb binary for reproducible deployment
+- **flockGate rebuild** — esotericWebb V22 source now on Forgejo, flockGate rebuilds from source
 - **Enable Cloudflare DNSSEC** for `primals.eco`
 - **Visual verification** — confirm footPrint tiles + CAS at `footprint.primals.eco`
 
@@ -195,7 +196,7 @@ Offline: westGate, fieldGate, strandGate (pending), biomeGate
 | 2 | Ecological | GREEN | — |
 | 3 | Hardware | AMBER | 4 gates offline |
 | 4 | Sovereignty | AMBER | `primals.eco` DNSSEC (P2) |
-| 5 | Depot | GREEN | esotericWebb V21 not in depot |
+| 5 | Depot | GREEN | 16 primals in depot, compositions build from source |
 | 6 | Public Surface | **GREEN** | 5+ surfaces LIVE |
 | 7 | Glacial Shift | GREEN | SHOW_HN rubric |
 | 8 | Compositions | **GREEN** | Both products fully wired |
