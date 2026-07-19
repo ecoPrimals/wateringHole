@@ -433,6 +433,7 @@ deploy_membrane.sh --composition peptidoglycan --provider bare_metal --host floc
 | 77 | Initial: formalized diderm domain architecture with peptidoglycan trust barrier, Dark Forest membrane classification, cross-membrane validation pattern, revised glacial shift criteria. |
 | 137b | Wildcard `*.primals.eco` DNS active. Domain identity separation formalized: `primals.eco` (public platform), `primal.eco` (sovereign substrate + entropy ceremonies + private compositions), `nestgate.io` (federated data gateway). Composition routing by domain documented (same primals, different trust/data scope per domain). Loam Certificate vs TLS credential terminology applied. |
 | 150d | Domain terminology refined: `primals.eco` = intra-membrane (shared ecosystem), `primal.eco` = inner membrane (personal sovereign), `nestgate.io` = data service interaction point. Root domain redirect: `primals.eco` → `sporeprint.primals.eco`. Subdomain standard enforced for all compositions. sporePrint gets own subdomain. |
+| 150j | **Git relay layer activated**: Forgejo (`git.primals.eco`) is sovereign primary for all source code. GitHub is subordinate outer membrane mirror. 39/39 repos have Forgejo push mirrors (`sync_on_commit: true`, HTTPS token auth via golgiBody). Gates push to Forgejo only — golgiBody relays to GitHub automatically on every commit. GitHub SSH surface consolidated from 12 per-gate keys to 2 (`forgejo-relay@golgiBody` + `golgiBody-ext@vps`). Sync divergence structurally eliminated. |
 
 ---
 

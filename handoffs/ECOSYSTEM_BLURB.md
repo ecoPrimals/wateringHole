@@ -1,15 +1,15 @@
-# ecoPrimals Ecosystem Blurb — Wave 150i
+# ecoPrimals Ecosystem Blurb — Wave 150j
 
-**Date**: Jul 18, 2026 21:10 EDT | **Wave**: 150i | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. SCENE UNIFICATION ALL 4 PHASES COMPLETE.**
+**Date**: Jul 19, 2026 07:35 EDT | **Wave**: 150j | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FORGEJO-FIRST RELAY ACTIVE.**
 
-**This wave**: petalTongue completed ALL 4 phases of scene unification — now a
-fully universal rendering engine (Sphere, Cylinder, Mesh3D, Ribbon, ErrorBar,
-Text; zero production stubs; 569 scene tests). esotericWebb shipped V22 — fixed
-P1 scene binding (`visualization.render.scene` with `game_scene` SceneGraph,
-`ui.render` fallback). cellMembrane shipped depot URL subdomain standard.
-Forward-compatible: when petalTongue v1.7+ deploys, Webb auto-activates the
-full scene graph pipeline without code changes.
+**This wave**: Forgejo push mirrors activated on **all 39 repos** — Forgejo is
+now the sovereign primary, GitHub is the subordinate outer membrane mirror.
+`sync_on_commit: true` on all repos: every Forgejo push auto-propagates to
+GitHub via HTTPS token auth on golgiBody. GitHub SSH surface consolidated
+from 12 per-gate keys to 2 (`golgiBody-ext@vps` + `forgejo-relay@golgiBody`).
+Sync divergence that flockGate reported is now structurally impossible.
+petalTongue v1.7.0 binary deployed to golgiBody depot (28MB).
 
 ---
 
@@ -24,6 +24,9 @@ User → Cloudflare (*.primals.eco wildcard → golgiBody)
 **URL Standard**: `prefix.primals.eco` subdomain. Root → `sporeprint.primals.eco`.
 
 **Three-Domain Model**: `primals.eco` (intra-membrane) | `primal.eco` (inner) | `nestgate.io` (data service)
+
+**Git Relay**: Forgejo (inner membrane, `git.primals.eco`) → push mirror → GitHub (outer membrane).
+Gates push to Forgejo only. golgiBody relays to GitHub on every commit. 39/39 repos mirrored.
 
 ---
 
@@ -154,6 +157,9 @@ side.
 
 | Milestone | Wave |
 |-----------|------|
+| **Forgejo push mirrors — 39/39 repos, sync_on_commit** | **150j** |
+| **GitHub SSH surface: 12 keys → 2 (relay consolidation)** | **150j** |
+| **petalTongue v1.7.0 binary to golgiBody depot** | **150j** |
 | **petalTongue scene unification — ALL 4 PHASES COMPLETE** | **150i** |
 | **esotericWebb V22 — scene binding fixed (game_scene + fallback)** | **150i** |
 | **cellMembrane depot URL subdomain standard** | **150i** |
@@ -195,7 +201,7 @@ Offline: westGate, fieldGate, strandGate (pending), biomeGate
 | 1 | Temporal | GREEN | — |
 | 2 | Ecological | GREEN | — |
 | 3 | Hardware | AMBER | 4 gates offline |
-| 4 | Sovereignty | AMBER | `primals.eco` DNSSEC (P2) |
+| 4 | Sovereignty | **GREEN** | Forgejo-first relay active, DNSSEC remaining (P2) |
 | 5 | Depot | GREEN | 16 primals in depot, compositions build from source |
 | 6 | Public Surface | **GREEN** | 5+ surfaces LIVE |
 | 7 | Glacial Shift | GREEN | SHOW_HN rubric |
@@ -207,12 +213,10 @@ Offline: westGate, fieldGate, strandGate (pending), biomeGate
 
 ---
 
-*Wave 150i: SCENE UNIFICATION ALL 4 PHASES COMPLETE. petalTongue is a fully
-universal rendering engine — Sphere (UV tessellation), Cylinder (ring),
-Mesh3D (passthrough), Ribbon (confidence band), ErrorBar (whisker+caps), Text.
-Zero production stubs. 569 scene tests (19 new). SVG viewport reads camera
-projection. esotericWebb V22 fixed scene binding: `visualization.render.scene`
-with `game_scene` SceneGraph, `ui.render` fallback. Forward-compatible — when
-petalTongue v1.7+ deploys to flockGate, full scene graph pipeline auto-activates.
-cellMembrane shipped depot URL subdomain standard. 6 surfaces LIVE.
-10 GREEN / 2 AMBER dimensions. 23,300+ tests.*
+*Wave 150j: FORGEJO-FIRST RELAY ACTIVE. 39/39 repos have push mirrors with
+sync_on_commit — every Forgejo push auto-propagates to GitHub. GitHub SSH
+surface consolidated from 12 per-gate keys to 2 (relay + operator). Gates
+push to Forgejo only (inner membrane). Sync divergence structurally eliminated.
+petalTongue v1.7.0 binary deployed to golgiBody depot. flockGate sync
+divergence resolved (V22 + CAC scenario pushed to Forgejo). 6 surfaces LIVE.
+11 GREEN / 1 AMBER dimensions. 23,300+ tests.*
