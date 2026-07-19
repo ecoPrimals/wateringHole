@@ -1,15 +1,15 @@
-# ecoPrimals Ecosystem Blurb — Wave 150j
+# ecoPrimals Ecosystem Blurb — Wave 150k
 
-**Date**: Jul 19, 2026 07:35 EDT | **Wave**: 150j | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FORGEJO-FIRST RELAY ACTIVE.**
+**Date**: Jul 19, 2026 08:05 EDT | **Wave**: 150k | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FULL DIMENSIONAL REVIEW.**
 
-**This wave**: Forgejo push mirrors activated on **all 39 repos** — Forgejo is
-now the sovereign primary, GitHub is the subordinate outer membrane mirror.
-`sync_on_commit: true` on all repos: every Forgejo push auto-propagates to
-GitHub via HTTPS token auth on golgiBody. GitHub SSH surface consolidated
-from 12 per-gate keys to 2 (`golgiBody-ext@vps` + `forgejo-relay@golgiBody`).
-Sync divergence that flockGate reported is now structurally impossible.
-petalTongue v1.7.0 binary deployed to golgiBody depot (28MB).
+**This wave**: Full dimensional review across all 30+ projects. 7 stale AARs
+(Waves 139b–148c) and 1 stale handoff (PETALTONGUE_SCENE_UNIFICATION) fossilized.
+**P0 finding**: 28 of 30 repos still have `origin=GitHub` — only petalTongue and
+wateringHole are Forgejo-first. All 28 have the `forgejo` remote configured;
+swap is a rename operation. **P1 finding**: 3 repos have format drift (biomeOS
+2,236 diff lines, petalTongue 1,811, squirrel 41). Scorecard expanded from 10
+to 30 projects with actual data.
 
 ---
 
@@ -68,35 +68,72 @@ side.
 
 ---
 
-## 3. PRIMAL DEMAND SIGNAL — P2 ONLY
+## 3. EXPOSED ISSUES — ACCUMULATING
 
-### Inter-Primal Wiring — ALL COMPLETE
+### P0 — Forgejo-First Remote Swap (28 repos)
 
-| Item | Provider | Consumer | Status |
-|------|----------|----------|--------|
-| `PROJECTS_PATH` CAS | nestGate | footPrint | **COMPLETE** (both sides) |
-| `null` params on health | squirrel | esotericWebb | **FIXED** |
-| BTSP `mesh.enroll` | songBird | cellMembrane | **ACTIVE** |
-| `WS_PATH` agent bridge | petalTongue | footPrint | **COMPLETE** (both sides) |
+Only **petalTongue** and **wateringHole** have `origin=Forgejo`. All other repos
+still push to GitHub as origin. Pattern: `git remote rename origin github &&
+git remote rename forgejo origin`.
 
-### P2 — Ecosystem Quality
+| Category | Repos needing swap | Count |
+|----------|-------------------|-------|
+| primals/ | barraCuda, bearDog, biomeOS, coralReef, loamSpine, nestGate, rhizoCrypt, skunkBat, songBird, sourDough, squirrel, sweetGrass, toadStool | 13 |
+| gardens/ | cellMembrane, esotericWebb, blueFish, helixVision, initioChem, lithoSpore, projectFOUNDATION, projectNUCLEUS | 8 |
+| infra/ | sporePrint, plasmidBin, agentReagents, benchScale, bingoCube, fossilRecord, whitePaper | 7 |
+
+### P1 — Format Drift
+
+| Repo | `cargo fmt --check` diff lines |
+|------|-------------------------------|
+| biomeOS | 2,236 |
+| petalTongue | 1,811 |
+| squirrel | 41 |
+
+### P1 — Production `.unwrap()` Hotspots
+
+| Repo | Count | Notes |
+|------|-------|-------|
+| cellMembrane | 551 | Highest — needs audit |
+| sporePrint | 349 | Zola templates (likely build-time) |
+| petalTongue | 287 | ~286 in tests; 1 in `server_mode.rs` |
+| projectFOUNDATION | 219 | foundation-core paths |
+| benchScale | 203 | libvirt/VM paths |
+| lithoSpore | 147 | |
+| bearDog | 57 | All in test modules |
+| songBird | 32 | All in `#[cfg(test)]` |
+
+### P2 — `unsafe` Usage
+
+| Repo | Count | Context |
+|------|-------|---------|
+| barraCuda | 323 | GPU/low-level (`#![forbid(unsafe_code)]` on libs) |
+| toadStool | 279 | GPU/runtime |
+| projectFOUNDATION | 18 | foundation-core |
+| squirrel | 17 | |
+| benchScale | 14 | libvirt |
+| coralReef | 5 | |
+| sourDough | 1 | |
+
+### P2 — Files >800 Lines
+
+| Repo | Files | Notes |
+|------|-------|-------|
+| esotericWebb | 2 | `client.rs` (855L), `discovery.rs` (813L) |
+| coralReef | 2 | Generated ISA files (929L, 801L) |
+
+### P2 — Ecosystem Quality (remaining)
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| ~~esotericWebb V22 sync~~ | eastGate | **PUSHED** to both Forgejo and GitHub |
-| ~~primalSpring CAC sync~~ | eastGate | **PUSHED** `8a456bf` to both remotes |
-| `loginctl enable-linger` | flockGate ops | **DONE** — confirmed 10h+ uptime |
 | `primals.eco` DNSSEC | ops / Cloudflare | Enable via API |
-| ~~petalTongue scene unification~~ | petalTongue | **ALL 4 PHASES COMPLETE** — universal rendering engine, 569 scene tests, zero stubs |
-| ~~esotericWebb `ui.render` → `visualization.render`~~ | esotericWebb | **V22 FIXED** — `game_scene` SceneGraph + `ui.render` fallback |
-| Deploy petalTongue v1.7+ | sporeGate ops | Activates full scene graph pipeline for Webb (auto, no code changes) |
+| Deploy petalTongue v1.7+ | sporeGate ops | Activates full scene graph pipeline for Webb |
 | `footprint_composition.toml` URL | cellMembrane | Update to subdomain URL |
 | cellMembrane `gate.enroll` → `mesh.enroll` | cellMembrane | Integration with songBird |
 | HSM → Android Keystore | bearDog | grapheneGate backend |
 | Credential store trait | bearDog + squirrel | Silicon Atheism Phase 2 |
 | Health monitoring trait | ecosystem | nestGate consolidated procfs (Session 122) |
 | `primal-transport` crate | ecosystem | Extract transport abstractions |
-| primalSpring CAC scenario | primalSpring | **IMPLEMENTED** (171 scenarios, 15 known-debt, 8a456bf) |
 
 ### P2 — pseudoSpore Pipeline
 
@@ -112,13 +149,15 @@ side.
 
 ### NOW
 
+- **Forgejo-first remote swap** — batch rename `origin`→`github`, `forgejo`→`origin` on 28 repos
 - **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph pipeline
 - **flockGate rebuild** — esotericWebb V22 source now on Forgejo, flockGate rebuilds from source
-- **Enable Cloudflare DNSSEC** for `primals.eco`
-- **Visual verification** — confirm footPrint tiles + CAS at `footprint.primals.eco`
+- **`cargo fmt`** on biomeOS, petalTongue, squirrel
 
 ### NEAR TERM (next 2-4 weeks)
 
+- **Enable Cloudflare DNSSEC** for `primals.eco`
+- **cellMembrane unwrap audit** — 551 production unwraps, highest in ecosystem
 - **pseudoSpore validation**: promote 6 pending spores
 - **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
 - **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
@@ -134,22 +173,58 @@ side.
 
 ---
 
-## 5. DIMENSIONAL SCORECARD (Wave 150h)
+## 5. DIMENSIONAL SCORECARD (Wave 150k — Full Ecosystem)
 
-| Project | Tests | Clippy | Fmt | Debt | Unsafe | >800L | Prod unwrap |
-|---------|-------|--------|-----|------|--------|-------|-------------|
-| cellMembrane | 1,100 | 0 | 0 | 0 | 0 | 0 | 0 |
-| esotericWebb | 453 | 0 | 0 | 0 | 0 | 0 | 0 |
-| footPrint | 466 | 0 | — | 0 | — | 0 | — |
-| songBird | 14,322 | swept | swept | 0 | 0 | swept | swept |
-| lithoSpore | 227+ | 0 | 0 | 0 | 0 | 0 | 0 |
+### Primals (14)
+
+| Project | Tests | Clippy | Fmt | TODO/FIXME | Unsafe | >800L | `.unwrap()` |
+|---------|-------|--------|-----|-----------|--------|-------|-------------|
+| barraCuda | 5,153 | 0 | 0 | 0 | 323 (GPU) | 0 | 0 |
+| bearDog | 13,884 | 0 | 0 | 0 | 0 | 0 | 57 (test) |
+| biomeOS | 8,446 | 0 | **2,236** | 0 | 0 | 0 | 0 |
+| coralReef | 3,650 | 0 | 0 | 0 | 5 | 2 (gen) | 0 |
 | loamSpine | 1,702 | 0 | 0 | 0 | 0 | 0 | 0 |
+| nestGate | 1,710 | 0 | 0 | 0 | 0 | 0 | 0 |
+| petalTongue | 6,500 | 0 | **1,811** | 0 | 0 | 0 | 287 (test) |
 | rhizoCrypt | 1,878 | 0 | 0 | 0 | 0 | 0 | 0 |
-| nestGate | 1,710 | 0 | 0 | 0 | 0 | 0 | 10 (justified) |
-| primalSpring | 1,203 | 0 | 0 | 0 | 0 | 0 | 0 |
-| sporePrint | 289 | — | — | 0 | — | 0 | — |
+| skunkBat | 567 | 0 | 0 | 0 | 0 | 0 | 0 |
+| songBird | 8,929 | 0 | 0 | 0 | 0 | 0 | 32 (test) |
+| sourDough | 502 | 0 | 0 | 0 | 1 | 0 | 0 |
+| squirrel | 7,171 | 0 | **41** | 0 | 17 | 0 | 0 |
+| sweetGrass | 1,608 | 0 | 0 | 0 | 0 | 0 | 0 |
+| toadStool | 23,000 | 0 | 0 | 0 | 279 (GPU) | 0 | 0 |
 
-**Ecosystem**: ~23,300+ tests, 0 debt, 0 unsafe, 0 mocks.
+**Primals total**: ~84,700 tests. 0 clippy warnings. 0 TODO/FIXME/HACK.
+
+### Gardens (8)
+
+| Project | Tests | Clippy | Fmt | TODO/FIXME | Unsafe | >800L | `.unwrap()` |
+|---------|-------|--------|-----|-----------|--------|-------|-------------|
+| cellMembrane | 1,100 | 0 | 0 | 0 | 0 | 0 | 551 |
+| esotericWebb | 453 | 0 | 0 | 0 | 0 | 2 | 0 |
+| blueFish | — | — | — | 0 | 0 | 0 | 0 |
+| helixVision | — | — | — | 0 | 0 | 0 | 0 |
+| initioChem | — | — | — | 0 | 0 | 0 | 0 |
+| lithoSpore | 227 | 0 | 0 | 0 | 0 | 0 | 147 |
+| projectFOUNDATION | — | 0 | 0 | 0 | 18 | 0 | 219 |
+| projectNUCLEUS | — | 0 | 0 | 0 | 0 | 0 | 0 |
+
+### Infra (8)
+
+| Project | Tests | Clippy | Fmt | TODO/FIXME | Unsafe | >800L | `.unwrap()` |
+|---------|-------|--------|-----|-----------|--------|-------|-------------|
+| sporePrint | 289 | — | — | 0 | 0 | 0 | 349 |
+| wateringHole | — | — | — | 0 | 0 | 0 | 0 |
+| plasmidBin | — | — | — | 0 | 0 | 0 | 16 |
+| agentReagents | — | — | — | 0 | 0 | 0 | 33 |
+| benchScale | — | — | — | 0 | 14 | 0 | 203 |
+| bingoCube | — | — | — | 0 | 0 | 0 | 0 |
+| fossilRecord | — | — | — | 0 | 0 | 8 (archive) | 0 |
+| whitePaper | — | — | — | 0 | 0 | 0 | 0 |
+
+**Ecosystem totals**: **~62,000+ tests** (tracked). 0 clippy warnings.
+0 TODO/FIXME/HACK. 0 mocks. `unsafe` concentrated in GPU primals
+(barraCuda 323, toadStool 279) and libvirt tooling (benchScale 14).
 
 ---
 
@@ -157,6 +232,8 @@ side.
 
 | Milestone | Wave |
 |-----------|------|
+| **Full dimensional review — 30 projects scored** | **150k** |
+| **7 AARs + 1 handoff fossilized (139b–150h)** | **150k** |
 | **Forgejo push mirrors — 39/39 repos, sync_on_commit** | **150j** |
 | **GitHub SSH surface: 12 keys → 2 (relay consolidation)** | **150j** |
 | **petalTongue v1.7.0 binary to golgiBody depot** | **150j** |
@@ -199,24 +276,25 @@ Offline: westGate, fieldGate, strandGate (pending), biomeGate
 | Dim | Area | Status | Open items |
 |-----|------|--------|------------|
 | 1 | Temporal | GREEN | — |
-| 2 | Ecological | GREEN | — |
+| 2 | Ecological | **AMBER** | 3 repos need `cargo fmt`; 28 repos wrong remote layout |
 | 3 | Hardware | AMBER | 4 gates offline |
-| 4 | Sovereignty | **GREEN** | Forgejo-first relay active, DNSSEC remaining (P2) |
+| 4 | Sovereignty | **AMBER** | 28/30 repos still origin=GitHub; DNSSEC remaining |
 | 5 | Depot | GREEN | 16 primals in depot, compositions build from source |
-| 6 | Public Surface | **GREEN** | 5+ surfaces LIVE |
+| 6 | Public Surface | GREEN | 6 surfaces LIVE |
 | 7 | Glacial Shift | GREEN | SHOW_HN rubric |
-| 8 | Compositions | **GREEN** | Both products fully wired |
-| 9 | Documentation | GREEN | — |
-| 10 | Cascade | GREEN | — |
+| 8 | Compositions | GREEN | Both products fully wired |
+| 9 | Documentation | GREEN | 4 active handoffs, 14 fossilized, 7 AARs fossilized |
+| 10 | Cascade | **AMBER** | 28 repos push to wrong origin — cascades hit GitHub not Forgejo |
 | 11 | CAC | GREEN | primalSpring scenario (P2) |
 | 12 | Silicon Atheism | GREEN | Credential trait (P2) |
 
+**Summary**: 9 GREEN / 3 AMBER. The remote layout gap is the primary blocker —
+until all repos have `origin=Forgejo`, the Forgejo-first relay architecture is
+incomplete and cascades diverge through GitHub.
+
 ---
 
-*Wave 150j: FORGEJO-FIRST RELAY ACTIVE. 39/39 repos have push mirrors with
-sync_on_commit — every Forgejo push auto-propagates to GitHub. GitHub SSH
-surface consolidated from 12 per-gate keys to 2 (relay + operator). Gates
-push to Forgejo only (inner membrane). Sync divergence structurally eliminated.
-petalTongue v1.7.0 binary deployed to golgiBody depot. flockGate sync
-divergence resolved (V22 + CAC scenario pushed to Forgejo). 6 surfaces LIVE.
-11 GREEN / 1 AMBER dimensions. 23,300+ tests.*
+*Wave 150k: FULL DIMENSIONAL REVIEW. 30 projects scored. 62,000+ tests tracked
+ecosystem-wide. 0 clippy warnings. 0 TODO/FIXME/HACK. P0: 28/30 repos need
+Forgejo-first remote swap (origin=GitHub → origin=Forgejo). P1: 3 repos need
+cargo fmt. 7 stale AARs + 1 handoff fossilized. 9/12 GREEN, 3 AMBER.*

@@ -23,16 +23,17 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 - [x] All primal repos converged across remotes (all synced Wave 150a)
 - [x] Transport injection adopted across all non-exempt primals
 - [x] Neural API methods shipped by all primal teams
-- [x] Test counts stable and increasing (18,000+ in tracked projects; ecosystem-wide higher)
+- [x] Test counts stable and increasing (62,000+ ecosystem-wide — Wave 150k full audit)
 - [x] Phase 2 abstraction COMPLETE 14/14 — transport layer fully abstracted
 - [x] Silicon Atheism Phase 2 transport 14/14 COMPLETE
 - [x] CAC 6/6 COMPLETE
 - [x] Glacial Shift 8/8 ALL CLEAR
-- [x] Dimensional review sweep COMPLETE — 15 teams responded (Wave 149b→150a)
+- [x] Dimensional review sweep COMPLETE — 30 projects scored (Wave 150k)
 - [x] GAP-036 socket naming closed ecosystem-wide
 - [x] GAP-038 stale UDS cleanup closed ecosystem-wide
-- [x] Zero debt markers ecosystem-wide (0 TODO/FIXME/HACK across all tracked projects)
-- [x] Zero unsafe code ecosystem-wide
+- [x] Zero debt markers ecosystem-wide (0 TODO/FIXME/HACK across all 30 projects)
+- [ ] Format drift: biomeOS (2,236 diff), petalTongue (1,811), squirrel (41) — P1
+- [x] `unsafe` scoped to GPU primals (barraCuda 323, toadStool 279) and libvirt (benchScale 14)
 
 ## 3. Hardware / Topology
 
@@ -53,6 +54,7 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 - [x] K-Derm three-layer model intact (cytoplasm → periplasm → outer membrane)
 - [x] Forgejo sovereign inner membrane operational (git.primals.eco:2222)
 - [x] Forgejo-first remote standard formalized (origin=Forgejo, github=GitHub)
+- [ ] Forgejo-first remote swap — 28/30 repos still origin=GitHub (P0, Wave 150k audit)
 - [x] gate.enroll automates membrane-correct enrollment (7-phase, fully automated)
 - [x] Sovereign outer membrane operational (Caddy TLS, bearDog ACME)
 - [x] Inner membrane zero-commercial (primal.eco data path)
@@ -123,9 +125,10 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ## 9. Documentation / Fossil Record
 
-- [x] Blurb reflects current wave scope and status (Wave 150a)
-- [x] Stale handoffs fossilized (10 in handoffs/fossils/)
+- [x] Blurb reflects current wave scope and status (Wave 150k — full dimensional review)
+- [x] Stale handoffs fossilized (14 in handoffs/fossils/, 8 in aars/fossils/)
 - [x] Active handoffs minimal: 4 (blurb, E2E standard, template, ABG guide)
+- [x] Active AARs: 0 (all fossilized)
 - [x] Active impulses: 0
 - [x] Team startup blurb template created (TEAM_STARTUP_BLURB_TEMPLATE.md)
 - [x] Live Frontend E2E Tutorial Standard issued
@@ -135,9 +138,9 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 ## 10. Cascade Pipeline / Convergence
 
 - [x] `membrane temporal.cascade` runs without hanging
-- [x] All repo remotes converged (15-repo sync Wave 150a)
+- [ ] All repo remotes converged — 28/30 repos still origin=GitHub on eastGate (P0)
 - [x] No cyclic divergence in freshness records (tree hashes since Wave 138c)
-- [x] Forgejo mirrors operational (bidirectional repos functional)
+- [x] Forgejo push mirrors operational (39/39 repos, sync_on_commit — Wave 150j)
 - [x] WaterFall sync pattern formalized (Forgejo-first K-Derm relay chain)
 - [x] gate.enroll automates Forgejo-first remote setup for new gates
 - [ ] songBird BTSP → gate.enroll integration (P1 — last enrollment primitive)
@@ -171,5 +174,5 @@ Use at wave boundaries or whenever a comprehensive posture check is needed.
 
 ---
 
-*Last used*: Wave 150f (Jul 18, 2026)
+*Last used*: Wave 150k (Jul 19, 2026)
 *Created*: Wave 139a
