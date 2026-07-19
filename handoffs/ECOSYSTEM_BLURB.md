@@ -1,14 +1,15 @@
-# ecoPrimals Ecosystem Blurb — Wave 150k
+# ecoPrimals Ecosystem Blurb — Wave 150l
 
-**Date**: Jul 19, 2026 08:05 EDT | **Wave**: 150k | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. FULL DIMENSIONAL REVIEW.**
+**Date**: Jul 19, 2026 08:30 EDT | **Wave**: 150l | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. 4-ORG FORGEJO. STABILIZED.**
 
-**This wave**: Full dimensional review across all 30+ projects. 7 stale AARs
-(Waves 139b–148c) and 1 stale handoff (PETALTONGUE_SCENE_UNIFICATION) fossilized.
-**P0 RESOLVED**: All 39 repos now `origin=Forgejo` — batch rename executed on 37
-repos (petalTongue + wateringHole were already correct). **P1 RESOLVED**: `cargo
-fmt` applied to biomeOS (2,236→0), petalTongue (1,811→0), squirrel (41→0) —
-all committed and pushed to Forgejo. Scorecard expanded from 10 to 30 projects.
+**This wave**: Workspace and org reorganization for gate-team parity.
+**protoKarya** org created on Forgejo — footPrint + tideGlass repos registered,
+pushed, and push-mirrored. **cellMembrane** canonicalized under sporeGarden (stale
+ecoPrimals duplicate deleted). **metalForge** cloned to gardens/, **coralForge** to
+springs/ — both created on Forgejo with push mirrors. GitHub duplicates
+(ecoPrimals/{benchScale,agentReagents}) archived. Stale root dirs cleaned.
+**43/43 repos** across 4 orgs now Forgejo-first with push mirrors to GitHub.
 
 ---
 
@@ -25,7 +26,17 @@ User → Cloudflare (*.primals.eco wildcard → golgiBody)
 **Three-Domain Model**: `primals.eco` (intra-membrane) | `primal.eco` (inner) | `nestgate.io` (data service)
 
 **Git Relay**: Forgejo (inner membrane, `git.primals.eco`) → push mirror → GitHub (outer membrane).
-Gates push to Forgejo only. golgiBody relays to GitHub on every commit. 39/39 repos mirrored.
+Gates push to Forgejo only. golgiBody relays to GitHub on every commit. 43/43 repos mirrored.
+
+**Org ↔ Workspace Mapping** (canonical for all gates):
+
+| Forgejo/GitHub Org | Local Dir | Role | Repos |
+|--------------------|-----------|------|-------|
+| ecoPrimals | `primals/` | Core primals | 14 |
+| sporeGarden | `gardens/` | Compositions, infrastructure | 9 |
+| syntheticChemistry | `springs/` | Springs, validation, chemistry | 12 |
+| protoKarya | `protists/` | Products (sovereign apps) | 2 |
+| ecoPrimals + synChem | `infra/` | Shared infrastructure | 9 |
 
 ---
 
@@ -219,9 +230,14 @@ executed on 37 repos across primals/, gardens/, infra/, springs/.
 
 | Milestone | Wave |
 |-----------|------|
-| **Forgejo-first remote swap — 39/39 repos origin=Forgejo** | **150k** |
+| **4-org Forgejo: protoKarya created, 43/43 repos mirrored** | **150l** |
+| **cellMembrane canonicalized under sporeGarden** | **150l** |
+| **metalForge + coralForge cloned + registered on Forgejo** | **150l** |
+| **GitHub duplicates archived (ecoPrimals/{benchScale,agentReagents})** | **150l** |
+| **Stale root dirs cleaned (fossilRecord/, primalTools/)** | **150l** |
+| **Forgejo-first remote swap — 43/43 repos origin=Forgejo** | **150k** |
 | **cargo fmt — biomeOS, petalTongue, squirrel (0 drift)** | **150k** |
-| **Full dimensional review — 30 projects scored** | **150k** |
+| **Full dimensional review — 30+ projects scored** | **150k** |
 | **7 AARs + 1 handoff fossilized (139b–150h)** | **150k** |
 | **Forgejo push mirrors — 39/39 repos, sync_on_commit** | **150j** |
 | **GitHub SSH surface: 12 keys → 2 (relay consolidation)** | **150j** |
@@ -282,8 +298,9 @@ Hardware remains AMBER (4 gates offline — not blocking).
 
 ---
 
-*Wave 150k: STABILIZED. 39/39 repos Forgejo-first (remote swap complete).
-cargo fmt resolved on biomeOS, petalTongue, squirrel (0 drift). 30 projects
-scored across 12 dimensions. 62,000+ tests. 0 clippy warnings. 0 TODO/FIXME/HACK.
-7 stale AARs + 1 handoff fossilized. 11/12 GREEN, 1 AMBER (hardware only).
-Ready for team handoffs.*
+*Wave 150l: 4-ORG FORGEJO. protoKarya org created — footPrint + tideGlass
+registered. cellMembrane canonicalized under sporeGarden. metalForge + coralForge
+cloned and registered. 43/43 repos Forgejo-first with push mirrors. GitHub
+duplicates archived. Workspace cleaned: 5 canonical dirs (primals/, gardens/,
+springs/, protists/, infra/). 62,000+ tests. 11/12 GREEN, 1 AMBER (hardware).
+Gate-team workspace parity achieved — any gate can clone the canonical layout.*
