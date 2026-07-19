@@ -15,10 +15,16 @@ graph rendering pipeline with an interactive cryptographic commitment widget.
 ## 1. DEPLOYMENT CHAIN
 
 ```
-User → Cloudflare (*.primals.eco wildcard → golgiBody)
+User → Cloudflare DNS (*.primals.eco wildcard → golgiBody 157.230.3.183)
   → Caddy on golgiBody (TLS, Host-header routing)
     → WireGuard mesh → target gate → service
 ```
+
+**Cloudflare status**: All records are **DNS-only** (grey cloud, not proxied).
+Wildcard `*.primals.eco` covers all new subdomains automatically — no DNS
+changes needed for new services. DNSSEC not yet enabled (P2).
+New subdomain routing is owned by **sporeGate hardware team** (Caddy config
+via cellMembrane shadow generation).
 
 **URL Standard**: `prefix.primals.eco` subdomain. Root → `sporeprint.primals.eco`.
 
@@ -138,12 +144,13 @@ bingoCube path deps fixed in airSpring (`infra/`→`primals/`) and groundSpring
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| `primals.eco` DNSSEC | ops / Cloudflare | Enable via API |
-| Deploy petalTongue v1.7+ | sporeGate ops | Activates full scene graph pipeline for Webb |
-| `footprint_composition.toml` URL | cellMembrane | Update to subdomain URL |
-| cellMembrane `gate.enroll` → `mesh.enroll` | cellMembrane | Integration with songBird |
-| HSM → Android Keystore | bearDog | grapheneGate backend |
-| Credential store trait | bearDog + squirrel | Silicon Atheism Phase 2 |
+| `primals.eco` DNSSEC | **operator** | Cloudflare dashboard → DNS → Enable DNSSEC |
+| Cloudflare proxy toggle | **operator** | Records are DNS-only; enable proxying for firebreak? |
+| Deploy petalTongue v1.7+ | **sporeGate team** | Activates full scene graph pipeline for Webb |
+| `footprint_composition.toml` URL | cellMembrane team | Update to subdomain URL |
+| cellMembrane `gate.enroll` → `mesh.enroll` | cellMembrane team | Integration with songBird |
+| HSM → Android Keystore | bearDog team | grapheneGate backend |
+| Credential store trait | bearDog + squirrel teams | Silicon Atheism Phase 2 |
 | Health monitoring trait | ecosystem | nestGate consolidated procfs (Session 122) |
 | `primal-transport` crate | ecosystem | Extract transport abstractions |
 
@@ -154,9 +161,42 @@ bingoCube path deps fixed in airSpring (`infra/`→`primals/`) and groundSpring
 | `validation.json` per spore | 6 spring teams | Module validation results |
 | Bash → Rust orchestration | spring teams | 114+ shell scripts |
 
+### OPERATOR-ONLY (requires human credentials/access)
+
+| Action | Where | Status |
+|--------|-------|--------|
+| ~~`sudo rm -rf wetSpring/`~~ | eastGate | **DONE** |
+| ~~Add northGate SSH key to Forgejo~~ | git.primals.eco | **DONE** (sporeGate) |
+| ~~Verify wildcard DNS for new subdomains~~ | Cloudflare | **CONFIRMED** — `*.primals.eco → 157.230.3.183` |
+| Enable DNSSEC on `primals.eco` | Cloudflare dashboard | **PENDING** |
+| Consider enabling Cloudflare proxy (orange cloud) | Cloudflare dashboard | **PENDING** — enables DDoS/WAF firebreak |
+| Verify push mirrors working | Spot-check GitHub repos | **PENDING** |
+
 ---
 
-## 4. STRATEGIC GOALS
+## 4. TEAM BLURB STATUS
+
+| Team/Project | Gate | State | Needs Blurb? | Priority Task |
+|--------------|------|-------|-------------|---------------|
+| **petalTongue** | sporeGate | Active, v1.7.0 | **YES** | bingoCube widget + deploy v1.7+ |
+| **bingoCube** | (unassigned) | Active, primals/ | **YES** | Interactive widget via petalTongue |
+| **cellMembrane** | sporeGate | Active, 1,100 tests | **YES** | Unwrap audit (551) + mesh.enroll |
+| **esotericWebb** | flockGate | V22 LIVE | **YES** | Rebuild from Forgejo, petalTongue v1.7+ |
+| **footPrint** | flockGate | LIVE, NUCLEUS | **YES** | E2E tutorial, visual verification |
+| **projectFOUNDATION** | (unassigned) | 9.5k LOC | **WHEN SPINNING UP** | Thread lineage design |
+| **projectNUCLEUS** | (unassigned) | 15k LOC | **WHEN SPINNING UP** | — |
+| **metalForge** | (unassigned) | 2.2k LOC | **WHEN SPINNING UP** | Compute node provisioning |
+| **initioChem** | (unassigned) | Early | **WHEN SPINNING UP** | pseudospore-core integration |
+| blueFish | — | Seed | NO | — |
+| helixVision | — | Seed | NO | — |
+| tideGlass | flockGate | Empty scaffold | NO | Phase 0 not started |
+| coralForge | — | Empty | NO | — |
+
+**Blurb template**: `handoffs/TEAM_STARTUP_BLURB_TEMPLATE.md`
+
+---
+
+## 5. STRATEGIC GOALS
 
 ### NOW
 
@@ -186,7 +226,7 @@ bingoCube path deps fixed in airSpring (`infra/`→`primals/`) and groundSpring
 
 ---
 
-## 5. DIMENSIONAL SCORECARD (Wave 150m — Full Ecosystem)
+## 6. DIMENSIONAL SCORECARD (Wave 150m — Full Ecosystem)
 
 ### Primals (15)
 
@@ -244,7 +284,7 @@ bingoCube path deps fixed in airSpring (`infra/`→`primals/`) and groundSpring
 
 ---
 
-## 6. COMPLETED MILESTONES
+## 7. COMPLETED MILESTONES
 
 | Milestone | Wave |
 |-----------|------|
@@ -274,7 +314,7 @@ bingoCube path deps fixed in airSpring (`infra/`→`primals/`) and groundSpring
 
 ---
 
-## 7. MESH TOPOLOGY
+## 8. MESH TOPOLOGY
 
 ```
 golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, Cloudflare firebreak
@@ -289,7 +329,7 @@ Offline: westGate, fieldGate, strandGate (pending), biomeGate
 
 ---
 
-## 8. ORTHOGONAL DIMENSIONS
+## 9. ORTHOGONAL DIMENSIONS
 
 | Dim | Area | Status | Open items |
 |-----|------|--------|------------|
