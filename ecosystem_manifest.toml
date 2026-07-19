@@ -595,22 +595,22 @@ forgejo_repo = "syntheticChemistry/agentReagents"
 
 [repos.rustChip]
 org = "syntheticChemistry"
-local_path = "infra/rustChip"
+local_path = "springs/rustChip"
 membrane = "trailing-mirror"
 sync_priority = "low"
-category = "infra"
-description = "Rust toolchain chip"
+category = "spring"
+description = "Standalone Akida NPU driver stack — science outreach extraction from toadStool"
 github_repo = "syntheticChemistry/rustChip"
 forgejo_repo = "syntheticChemistry/rustChip"
 exclude_remotes = ["upstream"]  # stale Brainchip fork — unrelated history
 
 [repos.bingoCube]
 org = "ecoPrimals"
-local_path = "infra/bingoCube"
+local_path = "primals/bingoCube"
 membrane = "trailing-mirror"
 sync_priority = "low"
-category = "infra"
-description = "Validation framework tool"
+category = "primal"
+description = "Human-verifiable cryptographic commitment system — agnostic tool leveraged by primals"
 github_repo = "ecoPrimals/bingoCube"
 forgejo_repo = "ecoPrimals/bingoCube"
 
