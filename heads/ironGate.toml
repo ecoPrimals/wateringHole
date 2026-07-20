@@ -1,27 +1,29 @@
-# Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: ironGate | Updated: 2026-07-16T12:30:00Z
+# Auto-published by ironGate cascade (Wave 150o)
+# Gate: ironGate | Updated: 2026-07-20T13:55:00Z
 #
 # This file is owned exclusively by ironGate. No other gate writes here.
 
 [meta]
 gate = "ironGate"
-updated = "2026-07-16T12:30:00Z"
+updated = "2026-07-20T13:55:00Z"
 
 [heads]
-nestGate = "17baed592d3ac930f4fbd0c971086f7db1d59555"
-wateringHole = "d95c01200000000000000000000000000000000000"
+primalSpring = "ff32f32cc91ab30f9f8a817ca7174a77ddaa30c3"
+cellMembrane = "77a82ea40c20e9f88820e6f79653e41db961cb3d"
+bearDog = "ddabf6a77c85980d91c46188cc3a373341b9b502"
+songBird = "e5941eeb3223bd49728bc00a1eb4d027d6dd1537"
+toadStool = "26695def0dd23b3283819b4f95f0196bcacdab81"
+biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
+squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
+barraCuda = "ab88db8d548784254ca1967d9dfe9e5f09b6e928"
+coralReef = "57e3fe4fb3a5ae34c5bda76d6f6564e24613e488"
+rhizoCrypt = "5a64407b4b7b93ce90e2c20582ddfac5cef7a571"
+loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
+sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
+skunkBat = "35326c39177770f935a944635b510cd220b6270b"
+nestGate = "bb30847842891f41c0e7d856a451b3545a6cc7d0"
+petalTongue = "ebaf483c72712ce353635d5ed74ce251a590746a"
+sourDough = "406a57575265112106b405d897609a0948520927"
+projectNUCLEUS = "04cc9019d225eb0332c17b6c33e307c08eeb6843"
+wateringHole = "c8b315384d219bda5944174ff34f4eeeee503558"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
-primalSpring = "8df6b3f"
-projectNUCLEUS = "04cc901"
-bearDog = "f997a339009ec3ca8a1393748b8ac920a0d57150"
-songBird = "fc766dc959fd397ee6c119d552071ab5901bd4a8"
-toadStool = "5903cf66bb2dc01d02b39450879a59baeb63daca"
-biomeOS = "1ce2a4c5be7c58b9cb2fa2be12a99329becb6485"
-squirrel = "bb3a91d93970a01fbec9fbbb0509dfc9f2943aaf"
-barraCuda = "cbb27045f113a51589cbade2d421596e0ce56562"
-coralReef = "2e357b9dca68e43696c0c3ce9f9e6a35cc3864df"
-rhizoCrypt = "ff60767fcb8b86a18400a58a8c6bdfd3e02e0cfa"
-loamSpine = "e68873d2c3092f6947f98655b7adb62d905178d8"
-sweetGrass = "96d35e5506cdd8f8f4101eef1ccff0448ee07ab3"
-skunkBat = "6fbdc43a544351cd165b0abf11824143e05db701"
-cellMembrane = "c51d688a378fbbaf616fc639c9b0eec23f28de89"
