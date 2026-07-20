@@ -1,23 +1,24 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-19T12:05:00Z
+# Gate: flockGate | Updated: 2026-07-20T13:58:00Z
 #
 # This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-19T12:05:00Z"
-wave = "150k"
+updated = "2026-07-20T13:58:00Z"
+wave = "150o"
 
 [heads]
-primalSpring = "c677c3c"
-wateringHole = "2916feb5"
-esotericWebb = "aaa1ffe"
+primalSpring = "ff32f32"
+wateringHole = "c98c200d"
+esotericWebb = "98496ac"
+petalTongue = "c6baa1d"
 plasmidBin = "e0b20e0"
 
 [remotes]
 standard = "Forgejo-first (origin=Forgejo, github=mirror)"
 swap_completed = true
-repos_swapped = ["primalSpring", "wateringHole", "esotericWebb"]
+repos_swapped = ["primalSpring", "wateringHole", "esotericWebb", "petalTongue"]
 
 [mesh]
 node_id = "flockGate"
@@ -25,36 +26,49 @@ songbird_version = "0.2.1"
 wireguard_status = "UP"
 wireguard_addr = "10.13.37.6/24"
 peers_mesh_registered = 2
-status = "6-GATE MESH OPERATIONAL"
+status = "5-GATE ACTIVE MESH OPERATIONAL"
 
 [esotericwebb]
-status = "LIVE — V22, scene binding fixed, browser-navigable"
+status = "LIVE — V22, scene graph pipeline ACTIVE via petalTongue v1.7"
 version = "V22"
-commit = "aaa1ffe"
+commit = "98496ac"
 systemd = "esotericwebb-server.service ENABLED + LINGER"
-pid = 1666053
+pid = 3541637
 protocol = "HTTP POST /jsonrpc + GET / + raw TCP JSON-RPC"
 capabilities = 26
 primals_connected = 6
 webb_domain = "webb.primals.eco"
 wan_post = "200 OK — healthy"
-wan_get = "200 OK — browser-navigable (GET handler shipped)"
-scene_binding = "visualization.render.scene with game_scene SceneGraph + ui.render fallback"
+wan_get = "200 OK — browser-navigable"
+scene_binding = "visualization.render.scene via petalTongue UDS — game_scene SceneGraph + ui.render fallback"
+p1_502_resolved = "stale nohup process killed — port conflict eliminated"
+
+[petaltongue]
+status = "DEPLOYED — v1.7.0 IPC server active"
+version = "1.7.0"
+commit = "c6baa1d"
+systemd = "petaltongue-server.service ENABLED"
+port = 9100
+uds = "/run/user/1000/biomeos/petaltongue.sock"
+discovery = "esotericWebb auto-discovered via UDS"
+uptime = "24h+ (stable since Wave 150n deploy)"
 
 [wan_subdomain_posture]
-footprint_primals_eco = "200 — FULL NUCLEUS"
-webb_primals_eco = "200 — V22 LIVE (POST + GET)"
-sporeprint_primals_eco = "200"
-live_primals_eco = "200"
-git_primals_eco = "200"
+footprint_primals_eco = "200 (154ms) — FULL NUCLEUS"
+webb_primals_eco = "200 (204ms) — V22 LIVE (POST + GET, petalTongue scene graph)"
+sporeprint_primals_eco = "200 (224ms)"
+live_primals_eco = "200 (349ms)"
+git_primals_eco = "200 (194ms)"
 all_surfaces_live = true
+surfaces_count = "6/6 (up from 5/6 — 502 resolved)"
 
 [primalspring]
-head = "c677c3c"
+head = "ff32f32"
 scenarios = 169
 tests = 1206
 failures = 0
 suite_status = "GREEN"
+known_debt = ["graphenegate-readiness:14", "composition-access-control:15"]
 
 [esotericwebb_tests]
 tests = 453
@@ -64,4 +78,5 @@ suite_status = "GREEN"
 [remaining_divergence]
 p0_items = 0
 p1_items = 0
-p2_items = ["primals.eco DNSSEC", "deploy petalTongue v1.7+ (activates scene graph)", "cellMembrane unwrap audit (551)"]
+p2_items = ["primals.eco DNSSEC", "cellMembrane unwrap audit (456)"]
+resolved_this_wave = ["esotericWebb 502 — stale nohup process competing for port 8090"]
