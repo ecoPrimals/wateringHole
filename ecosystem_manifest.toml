@@ -791,6 +791,16 @@ repos = [
 ]
 
 [gates.southGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "full"
+transport = "lan"
+mesh_peer = "157.230.3.183:7700"
+zone = "house2"
+wg_ip = "10.13.37.9"
+roles = ["node_atomic", "compute"]
+notes = "House 2 compute gate. Pending USB enrollment. Full NUCLEUS target."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
