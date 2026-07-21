@@ -120,21 +120,29 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
   nestGate's 27 are vendored upstream — un-vendor when `rustls-rustcrypto` ships past alpha.
 - **`unsafe`**: Concentrated in GPU primals, science FFI, crypto. See scorecard for counts.
 
-### Team Actions
+### Team Actions (Wave 150u — full blurbs in `WAVE150U_TEAM_EVOLUTION_BLURBS.md`)
 
-| Need | Owner | Detail |
-|------|-------|--------|
-| Deploy petalTongue v1.7+ | **sporeGate team** | Activates scene graph + WASM WebGL |
-| cellMembrane unwrap audit | cellMembrane team | 456 production unwraps |
-| ~~nestGate vendor elimination~~ | **DONE** | vendor/ removed, BLAKE3 consolidated (150u) |
-| HSM → Android Keystore | bearDog team | grapheneGate backend |
-| ~~Credential store trait~~ | **SHIPPED** | bearDog CredentialStore + FileVault, squirrel handoff (150u) |
-| `primal-transport` crate | ecosystem | Extract transport abstractions |
+| # | Need | Owner | Pri | Status |
+|---|------|-------|-----|--------|
+| 1 | Android Keystore backend + grapheneGate test | bearDog (southGate) | **P1** | NEW |
+| 2 | CredentialStore integration via `secrets.*` | squirrel (eastGate) | **P1** | Handoff issued |
+| 3 | Tower Atomic parity benchmark harness | songBird+bearDog+skunkBat | **P1** | Spec defined |
+| 4 | Deploy petalTongue v1.7+ to flockGate | sporeGate ops | **P1** | Binary in depot |
+| 5 | Lansing Scuffle pages + primal pipeline | sporePrint (flockGate) | **P1** | Blurb issued |
+| 6 | cellMembrane unwrap audit (456 prod) | cellMembrane (ironGate) | **P2** | NEW |
+| 7 | Promote 6 pending pseudoSpores | lithoSpore (strandGate) | **P2** | Stream std v1.0 |
+| 8 | bingoCube WASM WebGL widget | bingoCube (eastGate) | **P2** | Unblocked (150r) |
+| 9 | footPrint declarative source registry | footPrint (flockGate) | **P2** | Spec committed |
+| 10 | pseudoSpore Explorer prototype | esotericWebb (ironGate) | **P3** | Concept |
+| — | ~~nestGate vendor elimination~~ | **DONE** | — | vendor/ removed (150u) |
+| — | ~~Credential store trait~~ | **SHIPPED** | — | FileVault + secrets.* (150u) |
 
 ### Operator Actions
 
 | Action | Where | Status |
 |--------|-------|--------|
+| southGate USB enrollment | eastGate → house2 | **P1** — USB staged, .9 allocated |
+| strandGate enrollment | eastGate → strandGate | **P1** — dual EPYC, 256GB, pending |
 | Consider Cloudflare proxy (orange cloud) | Cloudflare dashboard | **PENDING** |
 | Verify push mirrors working | Spot-check GitHub repos | **PENDING** |
 
