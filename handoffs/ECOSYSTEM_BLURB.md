@@ -1,15 +1,13 @@
-# ecoPrimals Ecosystem Blurb — Wave 150s
+# ecoPrimals Ecosystem Blurb — Wave 150t
 
-**Date**: Jul 21, 2026 11:25 EDT | **Wave**: 150s | **From**: eastGate overwatch
-**Posture**: **SOVEREIGNTY EVOLUTION ROADMAP. DNSSEC 3/3. TOWER ATOMIC TARGETING WG.**
+**Date**: Jul 21, 2026 11:44 EDT | **Wave**: 150t | **From**: eastGate overwatch
+**Posture**: **STANDARDS REORGANIZED. SOVEREIGNTY ROADMAP ACTIVE. DNSSEC 3/3.**
 
-**This wave**: Sovereignty evolution roadmap formalized in Diderm architecture doc.
-Three-tier classification: **Replace** (WireGuard → Tower Atomic, Zola → primal
-sporePrint pipeline), **Late-Stage** (Forgejo → rootPulse, post-Provenance Trio),
-**Firebreak stays** (Cloudflare, Caddy, RustDesk AGPL-3.0, JupyterHub as outer
-membrane interface). DNSSEC 3/3 domains validated (primals.eco DS at Porkbun,
-primal.eco + nestgate.io sovereign-signed). JupyterHub repositioned: outer membrane
-interface for ABG users — actual compute always inner membrane primals.
+**This wave**: 37 wateringHole standards reorganized into 4 directories (`foundations/`,
+`protocols/`, `operations/`, `compositions/`). Root reduced from 41 .md files to 4.
+Cross-references updated across 8 files. Full dimensional review: 8 active (7 GREEN /
+1 AMBER hardware) + 5 fossilized (all GREEN). Sovereignty evolution roadmap active.
+DNSSEC validated on all 3 domains.
 
 ---
 
@@ -223,6 +221,7 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 | Milestone | Wave |
 |-----------|------|
+| Standards reorganized — 37 → 4 dirs, root 4 docs, full dimensional review | **150t** |
 | Sovereignty Evolution Roadmap — 3-tier classification, DNSSEC 3/3 | **150s** |
 | petalTongue WASM WebGL — browser-side 3D, bingoCube unblocked | **150r** |
 | nestGate vendor analysis — 27 TODOs = vendored upstream, 0 debt | **150q** |
@@ -249,7 +248,7 @@ Silicon Atheism P2 14/14 (145a), CAC 6/6 (143b), Depot (142a), Glacial Shift 8/8
 | 4 | Sovereignty | GREEN | DNSSEC 3/3; evolution roadmap: WG→Tower (P1), Zola→primal (P1), Forgejo→rootPulse (P2) |
 | 5 | Public Surface | GREEN | 6/6 surfaces healthy (webb recovered) |
 | 6 | Compositions | GREEN | pseudoSpore pipeline maturing, 6 validation.json pending |
-| 7 | Documentation | GREEN | 5 active handoffs, Lansing Scuffle blurb issued |
+| 7 | Documentation | GREEN | Standards reorganized (4 dirs), 5 handoffs, Scuffle blurb |
 | 8 | Campus/Physical | GREEN | Vision documented; sporePrint pages pending |
 
 ### Fossilized Dimensions (complete, not re-checked)
@@ -266,10 +265,8 @@ Silicon Atheism P2 14/14 (145a), CAC 6/6 (143b), Depot (142a), Glacial Shift 8/8
 
 ---
 
-*Wave 150s: SOVEREIGNTY EVOLUTION ROADMAP. Three-tier classification formalized in Diderm
-doc: Replace (WireGuard → Tower Atomic, Zola → primal sporePrint), Late-Stage (Forgejo →
-rootPulse post-Provenance Trio), Firebreak stays (Cloudflare, Caddy, RustDesk AGPL-3.0,
-JupyterHub as outer membrane interface for ABG users). DNSSEC 3/3 domains validated.
-Tower must meet/exceed WG performance before cutover. JupyterHub repositioned: interface
-only, compute always inner membrane primals. Next: Tower parity benchmark, sporePrint
-primal pipeline design, bingoCube widget, enroll southGate.*
+*Wave 150t: Standards reorganized — 37 standards into 4 directories (foundations/protocols/
+operations/compositions), root down to 4 docs. Full dimensional review: 7 GREEN / 1 AMBER.
+Sovereignty evolution roadmap active (WG→Tower P1, Zola→primal P1, Forgejo→rootPulse P2).
+DNSSEC 3/3 validated. Next: Tower parity benchmark, sporePrint primal pipeline, bingoCube
+widget, southGate enrollment, esotericWebb pseudoSpore exploration.*

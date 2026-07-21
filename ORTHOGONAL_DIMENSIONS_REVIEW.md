@@ -13,7 +13,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 150s)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 150t)
 - [x] Gate heads published (`heads/*.toml`)
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] Active impulses: 0 (26+ fossilized)
@@ -101,11 +101,14 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 7. Documentation / Fossil Record
 
-- [x] Blurb reflects current wave (150s) — trimmed from 435→275 lines
+- [x] Blurb reflects current wave (150t) — trimmed from 435→275 lines
 - [x] Active handoffs: 5 (blurb, E2E standard, template, ABG guide, Lansing Scuffle blurb)
 - [x] Active AARs: 0 (15 fossilized in `aars/fossils/`, ironGate 150o moved Wave 150s)
 - [x] Active impulses: 0
-- [x] wateringHole standards: 41 active (8 fossilized to `fossilRecord/wave150s_standards/`)
+- [x] wateringHole standards: 37 active in 4 directories + 4 root docs (8 fossilized to `fossilRecord/wave150s_standards/`)
+- [x] Standards reorganized into `foundations/` (9), `protocols/` (10), `operations/` (12), `compositions/` (6) — Wave 150t
+- [x] Root reduced from 41 .md files to 4 (README, GLOSSARY, STANDARDS_AND_EXPECTATIONS, ORTHOGONAL_DIMENSIONS_REVIEW)
+- [x] Cross-references updated in 8 files (README, STANDARDS_AND_EXPECTATIONS, GLOSSARY, template, 4 moved files)
 - [x] Team startup blurb template issued
 - [x] Lansing Scuffle blurb issued for sporePrint team
 - [x] Wave 150s housekeeping: blurb trimmed, struck-through items removed, scorecard collapsed,
@@ -205,6 +208,6 @@ No cyclic divergence. WaterFall sync pattern formalized.
 
 ---
 
-*Last used*: Wave 150s (Jul 21, 2026)
+*Last used*: Wave 150t (Jul 21, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
