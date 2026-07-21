@@ -106,108 +106,31 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 
 ---
 
-## 3. EXPOSED ISSUES
+## 3. OPEN ISSUES + TEAM ACTIONS
 
-### ~~P1 — esotericWebb 502~~ **RESOLVED (recovered Jul 20)**
+### Code Quality (Wave 150o audit — details in ORTHOGONAL_DIMENSIONS_REVIEW.md)
 
-### P1 — Production `.unwrap()` Hotspots (fresh audit)
+- **`.unwrap()` hotspots**: Top 5 — barraCuda (5,446), biomeOS (4,165), songBird (4,068),
+  toadStool (3,657), nestGate (2,427*). 14 repos with 100+ production unwraps.
+- **TODO markers**: 9 project TODOs (bingoCube 5, fossilRecord 3, rustChip 1).
+  nestGate's 27 are vendored upstream — un-vendor when `rustls-rustcrypto` ships past alpha.
+- **`unsafe`**: Concentrated in GPU primals, science FFI, crypto. See scorecard for counts.
 
-| Repo | Count | Context |
-|------|-------|---------|
-| barraCuda | 5,446 | GPU math — many in shader dispatch paths |
-| songBird | 4,068 | Network stack — connection handling |
-| biomeOS | 4,165 | Orchestrator — graph execution |
-| toadStool | 3,657 | Compute dispatch — GPU/CPU paths |
-| nestGate | 2,427 | Storage — CAS paths |
-| bearDog | 1,863 | Crypto — key/cert paths |
-| wetSpring | 1,358 | Science — spectral analysis |
-| petalTongue | 1,364 | UI — rendering paths |
-| loamSpine | 1,264 | Ledger — commit paths |
-| coralReef | 779 | Shader compiler |
-| sweetGrass | 638 | Attribution |
-| cellMembrane | 456 | Infrastructure |
-| airSpring | 460 | Agriculture PDE |
-| primalSpring | 356 | Validation |
-
-*Methodology*: `grep -rn '.unwrap()' --include='*.rs'` excluding test modules/files.
-Counts are higher than prior waves due to broader grep (no manual line filtering).
-
-### P1 — TODO/FIXME/HACK Markers
-
-| Repo | Count | Notes |
-|------|-------|-------|
-| nestGate | 27 | **ALL vendored upstream** — see Vendor Analysis below |
-| bingoCube | 5 | Crypto commitment code |
-| fossilRecord | 3 | Archive code |
-| rustChip | 1 | NPU driver |
-
-**nestGate Vendor Analysis (Wave 150q)**:
-The 27 markers break down as `vendor/rustls-webpki` (20) and `vendor/rustls-rustcrypto` (7).
-These are upstream open-source project comments (mozilla/webpki distrust checks, RFC 6125
-errata, Chromium compat notes, Ed448 support stubs, QUIC dead code annotations). nestGate's
-own code has **zero** TODO/FIXME/HACK markers. The vendor patch (`[patch.crates-io]` in
-root `Cargo.toml`) exists because:
-1. `rustls-rustcrypto 0.0.2-alpha` pins `rustls-webpki 0.102.x`
-2. nestGate requires `0.103.12+` for RUSTSEC advisory fixes
-3. `ring` optional dep was removed to complete Silicon Atheism (zero C/asm)
-
-**nestGate team action**: periodically check if `rustls-rustcrypto` has shipped past
-`0.0.2-alpha` with `rustls-webpki >= 0.103.12` and no `ring` requirement. When it does,
-remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear with it.
-
-### P2 — `unsafe` Usage
-
-| Repo | Count | Context |
-|------|-------|---------|
-| wetSpring | 389 | Science — FFI? |
-| toadStool | 384 | GPU/runtime |
-| petalTongue | 353 | UI/rendering |
-| barraCuda | 326 | GPU/low-level |
-| bingoCube | 146 | Crypto operations |
-| fossilRecord | 148 | Archive (legacy) |
-| healthSpring | 107 | Medical science |
-| primalSpring | 99 | Validation framework |
-| songBird | 87 | Network stack |
-| biomeOS | 72 | Orchestrator |
-| groundSpring | 65 | Measurement science |
-| rustChip | 64 | NPU driver |
-| nestGate | 52 | Storage |
-| bearDog | 41 | Crypto |
-
-### P2 — Files >800 Lines
-
-| Repo | Count | Notes |
-|------|-------|-------|
-| toadStool | 12 | GPU dispatch modules |
-| bearDog | 8 | Crypto core |
-| fossilRecord | 8 | Archive (legacy) |
-| rustChip | 7 | NPU driver |
-| squirrel | 6 | AI coordination |
-| nestGate | 5 | Storage modules |
-| hotSpring | 5 | QCD compute |
-| wetSpring | 5 | Metagenomics |
-| songBird | 3 | Network stack |
-| coralReef | 2 | Generated ISA files |
-| esotericWebb | 2 | `client.rs` (855L), `discovery.rs` (813L) |
-
-### P2 — Remaining Ecosystem Quality
+### Team Actions
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| ~~`primals.eco` DNSSEC~~ | **operator** | **DONE** — DS record at Porkbun, AD=true validated Jul 21 |
-| ~~Restart esotericWebb~~ | **flockGate team** | **RESOLVED** — recovered Jul 20 |
-| Deploy petalTongue v1.7+ | **sporeGate team** | Activates full scene graph pipeline |
+| Deploy petalTongue v1.7+ | **sporeGate team** | Activates scene graph + WASM WebGL |
 | cellMembrane unwrap audit | cellMembrane team | 456 production unwraps |
-| nestGate vendor elimination | **nestGate team** | Remove `vendor/` + `[patch.crates-io]` when upstream ships (see Vendor Analysis) |
+| nestGate vendor elimination | **nestGate team** | Un-vendor when upstream ships |
 | HSM → Android Keystore | bearDog team | grapheneGate backend |
-| Credential store trait | bearDog + squirrel | Silicon Atheism Phase 2 |
+| Credential store trait | bearDog + squirrel | Silicon Atheism evolving edge |
 | `primal-transport` crate | ecosystem | Extract transport abstractions |
 
-### OPERATOR-ONLY (requires human credentials/access)
+### Operator Actions
 
 | Action | Where | Status |
 |--------|-------|--------|
-| ~~Enable DNSSEC on `primals.eco`~~ | Porkbun registrar | **DONE** (DS: keyTag 2371, alg 13, SHA-256) |
 | Consider Cloudflare proxy (orange cloud) | Cloudflare dashboard | **PENDING** |
 | Verify push mirrors working | Spot-check GitHub repos | **PENDING** |
 
@@ -230,7 +153,6 @@ remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear wi
 - **sporePrint primal pipeline design** — architect Zola replacement: petalTongue rendering
   + nestGate CAS content + cellMembrane serving. WASM WebGL pipeline is the enabler.
 - **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph + WASM WebGL pipeline
-- ~~**Enable DNSSEC** for `primals.eco`~~ — **DONE** (3/3 domains: primals.eco, primal.eco, nestgate.io)
 - **pseudoSpore validation**: promote 6 pending spores
 - **cellMembrane unwrap audit** — 456 production unwraps
 - **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
@@ -259,85 +181,17 @@ remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear wi
 
 ---
 
-## 5. DIMENSIONAL SCORECARD (Wave 150o — Fresh Audit)
+## 5. ECOSYSTEM HEALTH SUMMARY (Wave 150o audit)
 
-*Methodology*: `#[test]` attribute count; `.unwrap()` grep excluding test modules;
-`unsafe` grep excluding comments/tests; `find -name '*.rs' | wc -l > 800`.
+| Category | Primals (15) | Gardens (9) | Springs+Protists (12) | Infra (7) | Total |
+|----------|-------------|------------|----------------------|-----------|-------|
+| `#[test]` attrs | 87,379 | 2,183 | 14,405 | 1,209 | **~105K** |
+| Project TODOs | 5 (bingoCube) | 0 | 1 (rustChip) | 3 (fossilRecord) | **9** |
 
-### Primals (15)
+nestGate's 27 TODO markers are vendored upstream (`rustls-webpki`/`rustls-rustcrypto`) —
+0 project debt. Team action: un-vendor when `rustls-rustcrypto` ships past alpha.
 
-| Project | Tests | Unwrap(prod) | Unsafe | >800L | TODO |
-|---------|------:|-------------:|-------:|------:|-----:|
-| barraCuda | 3,076 | 5,446 | 326 | 0 | 0 |
-| bearDog | 11,956 | 1,863 | 41 | 8 | 0 |
-| biomeOS | 5,389 | 4,165 | 72 | 1 | 0 |
-| bingoCube | 1,816 | 55 | 146 | 1 | 5 |
-| coralReef | 2,902 | 779 | 10 | 2 | 0 |
-| loamSpine | 857 | 1,264 | 11 | 0 | 0 |
-| nestGate | 11,474 | 2,427* | 52 | 5 | 27 |
-| petalTongue | 5,800+ | 1,364 | 353 | 0 | 0 |
-| rhizoCrypt | 2,725 | 1,862 | 4 | 1 | 0 |
-| skunkBat | 290 | 423 | 0 | 0 | 0 |
-| songBird | 10,315 | 4,068 | 87 | 3 | 0 |
-| sourDough | 409 | 452 | 6 | 1 | 0 |
-| squirrel | 8,413 | 84 | 4 | 6 | 0 |
-| sweetGrass | 876 | 638 | 14 | 0 | 0 |
-| toadStool | 21,108 | 3,657 | 384 | 12 | 0 |
-
-**Primals total**: 87,379 `#[test]` attrs. 0 TODO in project code (15/15 repos).
-*nestGate TODO 27: all in `vendor/rustls-webpki` (20) + `vendor/rustls-rustcrypto` (7) —
-upstream frozen snapshots, not project debt. Team action: un-vendor when upstream ships.
-*nestGate unwrap 2,427: team reports 0 prod after Session 121 audit; grep count
-includes justified `.expect()` conversions and test-adjacent code.
-
-### Gardens (9)
-
-| Project | Tests | Unwrap(prod) | Unsafe | >800L | TODO |
-|---------|------:|-------------:|-------:|------:|-----:|
-| cellMembrane | 1,043 | 456 | 2 | 0 | 0 |
-| esotericWebb | 472 | 406 | 1 | 2 | 0 |
-| lithoSpore | 229 | 120 | 0 | 0 | 0 |
-| projectFOUNDATION | 180 | 150 | 18 | 0 | 0 |
-| projectNUCLEUS | 257 | 71 | 4 | 0 | 0 |
-| initioChem | 2 | 0 | 1 | 0 | 0 |
-| blueFish | 0 | 0 | 1 | 0 | 0 |
-| helixVision | 0 | 0 | 1 | 0 | 0 |
-| metalForge | 0 | 0 | 0 | 0 | 0 |
-
-### Springs (10) + Protists (2)
-
-| Project | Tests | Unwrap(prod) | Unsafe | >800L | TODO |
-|---------|------:|-------------:|-------:|------:|-----:|
-| wetSpring | 2,252 | 1,358 | 389 | 5 | 0 |
-| neuralSpring | 1,580 | 185 | 15 | 0 | 0 |
-| airSpring | 1,479 | 460 | 9 | 1 | 0 |
-| primalSpring | 1,277 | 356 | 99 | 0 | 0 |
-| groundSpring | 1,286 | 210 | 65 | 0 | 0 |
-| hotSpring | 1,265 | 208 | 17 | 5 | 0 |
-| healthSpring | 1,074 | 102 | 107 | 0 | 0 |
-| ludoSpring | 993 | 107 | 12 | 1 | 0 |
-| rustChip | 370 | 131 | 64 | 7 | 1 |
-| footPrint | — | — | — | — | — |
-| tideGlass | — | — | — | — | — |
-
-footPrint: 478 TypeScript test cases (32 test files). tideGlass: empty scaffold.
-
-### Infra (7)
-
-| Project | Tests | Unwrap(prod) | Unsafe | >800L | TODO |
-|---------|------:|-------------:|-------:|------:|-----:|
-| fossilRecord | 508 | 267 | 148 | 8 | 3 |
-| sporePrint | 295 | 269 | 1 | 0 | 0 |
-| benchScale | 255 | 243 | 15 | 0 | 0 |
-| agentReagents | 106 | 38 | 1 | 0 | 0 |
-| plasmidBin | 45 | 27 | 3 | 0 | 0 |
-| wateringHole | 0 | 0 | 0 | 0 | 0 |
-| whitePaper | 0 | 0 | 0 | 0 | 0 |
-
-**Ecosystem totals**: ~100,000+ `#[test]` attrs across 43 repos. 9 project TODO/FIXME
-markers (bingoCube 5, fossilRecord 3, rustChip 1). nestGate's 27 are vendored upstream
-(not project debt — eliminated when `rustls-rustcrypto` ships past alpha). `unsafe`
-concentrated in GPU primals, science springs (wetSpring FFI), and crypto (bingoCube).
+*Full per-repo scorecard (tests, unwraps, unsafe, >800L files) in `ORTHOGONAL_DIMENSIONS_REVIEW.md`.*
 
 ---
 
@@ -365,34 +219,21 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 ---
 
-## 7. COMPLETED MILESTONES
+## 7. RECENT MILESTONES
 
 | Milestone | Wave |
 |-----------|------|
-| **Sovereignty Evolution Roadmap — 3-tier classification, DNSSEC 3/3, Tower→WG target** | **150s** |
-| **petalTongue WASM WebGL exports — browser-side 3D, 5 modalities, bingoCube unblocked** | **150r** |
-| **nestGate vendor analysis: 27 TODOs = vendored upstream, 0 project debt, un-vendor path defined** | **150q** |
-| **Lansing Scuffle landed — 10-doc campus vision + sporePrint blurb + footPrint GeoJSON** | **150p** |
-| **nestGate deep unwrap audit (0 prod) + procfs consolidation** | **150p** |
-| **lithoSpore pseudoSpore pipeline: spore-status, populate-validation, promote-spore** | **150p** |
-| **initioChem wired pseudospore-core as first external consumer** | **150p** |
-| **Full cascade — all repos pushed to Forgejo** | **150p** |
-| **Full dimensional review — 43 repos audited, scorecard refreshed** | **150o** |
-| **USB gate enrollment: bootstrap script + enroll bundle + stage_usb --enroll** | **150n** |
-| **southGate allocated 10.13.37.9, nestgate depot path fixed** | **150n** |
-| **Workspace reorg: bingoCube→primals, rustChip→springs, path deps fixed** | **150m** |
-| **4-org Forgejo: protoKarya created, 43/43 repos mirrored** | **150l** |
-| **Forgejo-first remote swap — 43/43 repos origin=Forgejo** | **150k** |
-| **Full dimensional review — 30+ projects scored** | **150k** |
-| **Forgejo push mirrors — 39/39 repos, sync_on_commit** | **150j** |
-| **petalTongue scene unification — ALL 4 PHASES COMPLETE** | **150i** |
-| **FULL NUCLEUS COMPOSITION WIRED (footPrint CAS + WS consumer)** | **150h** |
-| ALL P1 inter-primal wiring RESOLVED (4/4, both sides) | 150g/h |
-| 5 composition surfaces LIVE from WAN | 150f |
-| Silicon Atheism Phase 2 (14/14 + lithoSpore) | 145a |
-| Content-Addressed Convergence (6/6) | 143b |
-| Glacial Shift (8/8) ALL CLEAR | 137b |
-| Depot operational (59+ binaries, 4 arch) | 142a |
+| Sovereignty Evolution Roadmap — 3-tier classification, DNSSEC 3/3 | **150s** |
+| petalTongue WASM WebGL — browser-side 3D, bingoCube unblocked | **150r** |
+| nestGate vendor analysis — 27 TODOs = vendored upstream, 0 debt | **150q** |
+| Lansing Scuffle + nestGate unwrap audit + lithoSpore pipeline | **150p** |
+| Full dimensional review — 43 repos audited, scorecard refreshed | **150o** |
+| USB gate enrollment + southGate allocated | **150n** |
+| Workspace reorg + 4-org Forgejo (43/43 mirrored) | **150l-m** |
+| Forgejo-first (43/43) + push mirrors (sync_on_commit) | **150j-k** |
+
+*Earlier milestones (fossilized): scene unification (150i), NUCLEUS wired (150h),
+Silicon Atheism P2 14/14 (145a), CAC 6/6 (143b), Depot (142a), Glacial Shift 8/8 (137b).*
 
 ---
 

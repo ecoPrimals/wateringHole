@@ -101,14 +101,16 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 7. Documentation / Fossil Record
 
-- [x] Blurb reflects current wave (150s)
-- [x] Active handoffs: 5 (all current and actionable)
-- [x] Active AARs: 0 (all fossilized)
+- [x] Blurb reflects current wave (150s) — trimmed from 435→275 lines
+- [x] Active handoffs: 5 (blurb, E2E standard, template, ABG guide, Lansing Scuffle blurb)
+- [x] Active AARs: 0 (15 fossilized in `aars/fossils/`, ironGate 150o moved Wave 150s)
 - [x] Active impulses: 0
-- [x] wateringHole standards stable (~49 documents)
+- [x] wateringHole standards: 41 active (8 fossilized to `fossilRecord/wave150s_standards/`)
 - [x] Team startup blurb template issued
 - [x] Lansing Scuffle blurb issued for sporePrint team
-- [x] AARs in canonical `aars/fossils/` (housekeeping complete Wave 150o)
+- [x] Wave 150s housekeeping: blurb trimmed, struck-through items removed, scorecard collapsed,
+  8 standards fossilized (Glacial Shift, Silicon Atheism ×2, Depot, Cascade, Desktop Nucleus,
+  ecoBin, Workspace Dependency)
 
 ## 8. Campus / Physical Infrastructure (NEW — Wave 150p)
 
