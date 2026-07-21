@@ -1,15 +1,15 @@
-# Auto-published by ironGate cascade (Wave 150o)
-# Gate: ironGate | Updated: 2026-07-20T13:55:00Z
+# Auto-published by ironGate cascade (Wave 150t)
+# Gate: ironGate | Updated: 2026-07-21T16:43:00Z
 #
 # This file is owned exclusively by ironGate. No other gate writes here.
 
 [meta]
 gate = "ironGate"
-updated = "2026-07-20T13:55:00Z"
+updated = "2026-07-21T16:43:00Z"
 
 [heads]
-primalSpring = "ff32f32cc91ab30f9f8a817ca7174a77ddaa30c3"
-cellMembrane = "77a82ea40c20e9f88820e6f79653e41db961cb3d"
+primalSpring = "0b90b3a305bda2cd0b684061361c846d63c76d9e"
+cellMembrane = "5c5f8674aadc4ce985986ed48fe12c24a51eb0a9"
 bearDog = "ddabf6a77c85980d91c46188cc3a373341b9b502"
 songBird = "e5941eeb3223bd49728bc00a1eb4d027d6dd1537"
 toadStool = "26695def0dd23b3283819b4f95f0196bcacdab81"
@@ -21,9 +21,9 @@ rhizoCrypt = "5a64407b4b7b93ce90e2c20582ddfac5cef7a571"
 loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
 sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
 skunkBat = "35326c39177770f935a944635b510cd220b6270b"
-nestGate = "bb30847842891f41c0e7d856a451b3545a6cc7d0"
+nestGate = "33b15599b1be85ca8ab05aee2360f95c3861a2c5"
 petalTongue = "ebaf483c72712ce353635d5ed74ce251a590746a"
 sourDough = "406a57575265112106b405d897609a0948520927"
 projectNUCLEUS = "04cc9019d225eb0332c17b6c33e307c08eeb6843"
-wateringHole = "c8b315384d219bda5944174ff34f4eeeee503558"
+wateringHole = "a21c152b3bcee33ca5b5e3f0ccbe4eda2972de35"
 plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
