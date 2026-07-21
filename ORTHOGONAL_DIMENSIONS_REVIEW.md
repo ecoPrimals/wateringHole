@@ -13,7 +13,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 150p)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 150s)
 - [x] Gate heads published (`heads/*.toml`)
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] Active impulses: 0 (26+ fossilized)
@@ -62,6 +62,13 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] DNSSEC on `primal.eco` + `nestgate.io`
 - [x] DNSSEC on `primals.eco` — DS record at Porkbun (keyTag 2371, alg 13, SHA-256), AD=true validated Jul 21
 - [x] **DNSSEC 3/3 domains complete** — all validated via Google DNS (AD=true)
+- [x] Sovereignty Evolution Roadmap formalized in Diderm doc (Wave 150s)
+- [x] Three-tier classification: Replace / Late-Stage / Firebreak
+- [x] RustDesk confirmed AGPL-3.0 compliant — learn-from-leverage posture
+- [x] JupyterHub repositioned: outer membrane interface only, compute = inner membrane primals
+- [ ] **Phase 1: WireGuard → Tower Atomic** — Tower (bearDog + songBird + skunkBat) must meet/exceed WG performance. Parity benchmark needed.
+- [ ] **Phase 1: Zola → primal sporePrint** — petalTongue rendering + nestGate CAS content + cellMembrane serving. WASM WebGL pipeline enables.
+- [ ] **Phase 2: Forgejo → rootPulse** — sovereign version control over nestGate CAS + Provenance Trio. Late-stage, post-rootPulse.
 - [ ] `primal.eco` inner membrane separation (P2)
 
 ## 5. Public Surface / Security
@@ -84,15 +91,17 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] esotericWebb LIVE — V22, 472 tests, scene binding fixed (recovered from 502)
 - [x] lithoSpore ALL CLEAR — 235 tests, pseudoSpore pipeline matured (spore-status, populate-validation, promote-spore)
 - [x] initioChem wired pseudospore-core as first external consumer
-- [x] JupyterHub LIVE on ironGate
+- [x] JupyterHub LIVE on ironGate — repositioned as outer membrane interface (ABG users), compute = inner membrane
 - [x] pseudoSpore pipeline — 7 springs emitted
+- [x] petalTongue WASM WebGL pipeline shipped (Wave 150r) — enables sporePrint primal replacement
+- [ ] sporePrint primal pipeline: replace Zola with petalTongue + nestGate CAS + cellMembrane (Phase 1)
 - [ ] 6 springs pending `validation.json`
 - [ ] tideGlass — shelved (empty scaffold)
 - [ ] projectFOUNDATION — not started
 
 ## 7. Documentation / Fossil Record
 
-- [x] Blurb reflects current wave (150p)
+- [x] Blurb reflects current wave (150s)
 - [x] Active handoffs: 5 (all current and actionable)
 - [x] Active AARs: 0 (all fossilized)
 - [x] Active impulses: 0
@@ -194,6 +203,6 @@ No cyclic divergence. WaterFall sync pattern formalized.
 
 ---
 
-*Last used*: Wave 150r (Jul 21, 2026)
+*Last used*: Wave 150s (Jul 21, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p

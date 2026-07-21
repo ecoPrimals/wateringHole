@@ -1,8 +1,8 @@
 # Diderm Domain Architecture — Trust Barrier Model
 
 **Authority**: Overwatch + Ecosystem Convention  
-**Status**: Active (Wave 137b)  
-**Date**: 2026-07-13  
+**Status**: Active (Wave 150s)  
+**Date**: 2026-07-21  
 **Prerequisites**: `DARK_FOREST_GLACIAL_GATE_STANDARD.md`, `SOVEREIGNTY_STANDARDS.md`, `OVERWATCH_POSITION_STANDARD.md`
 
 ---
@@ -340,6 +340,107 @@ membrane stays honest.
 
 ---
 
+## Sovereignty Evolution Roadmap (Wave 150s)
+
+The ecosystem contains industry tools at various membrane layers. This
+roadmap classifies each by its evolution path: **Replace** (primal
+composition replaces the tool), **Late-Stage** (replacement blocked on
+a prerequisite primal), or **Firebreak** (stays on outer membrane by
+design — industry tools absorbing hostile traffic is the correct
+architecture).
+
+### Three-Tier Classification
+
+| Tool | Current Layer | Classification | Primal Path | Priority |
+|------|-------------- |---------------|-------------|----------|
+| **WireGuard** | Transport (kernel) | **REPLACE** | Tower Atomic (bearDog + songBird + skunkBat) | Phase 1 |
+| **Zola** | Build (sporePrint) | **REPLACE** | petalTongue rendering + nestGate CAS content | Phase 1 |
+| **Forgejo** | Intra-membrane (git hosting) | **LATE-STAGE** | rootPulse (nestGate CAS + Provenance Trio) | Phase 2 (post-rootPulse) |
+| **Cloudflare** | Outer membrane (DNS/DDoS) | **FIREBREAK** | N/A — this IS the firebreak | Stays |
+| **Caddy** | Outer membrane (TLS/proxy) | **FIREBREAK** | cellMembrane generates config; Caddy serves | Stays |
+| **Let's Encrypt** | Outer membrane (TLS certs) | **FIREBREAK** | ACME is the standard | Stays |
+| **Porkbun** | External (registrar) | **FIREBREAK** | Registrars are inherently external | Stays |
+| **RustDesk** | Outer membrane (human access) | **FIREBREAK** | AGPL-3.0 compliant; learn-from-leverage | Stays |
+| **JupyterHub** | Outer membrane (interface) | **FIREBREAK** | Interface only; compute is inner membrane | Stays (repositioned) |
+
+### Phase 1: Tower Atomic Supersedes WireGuard
+
+WireGuard currently provides the kernel-level encrypted mesh between
+gates. songBird already operates as a sovereign mesh overlay on top of
+WireGuard, and Tower Atomic (bearDog + songBird + skunkBat) handles
+authenticated encrypted transport end-to-end.
+
+The target: Tower Atomic **meets and exceeds** WireGuard's capabilities,
+making the kernel VPN redundant. When Tower can provide:
+
+| Capability | WireGuard Today | Tower Atomic Target |
+|-----------|----------------|-------------------- |
+| Encrypted tunnel | ChaCha20-Poly1305 (kernel) | BTSP ChaCha20-Poly1305 AEAD (userspace, sovereign keys) |
+| Peer discovery | Static config (`wg0.conf`) | songBird dynamic peer discovery + TURN relay |
+| Key management | Manual pubkey exchange | bearDog BTSP trust establishment, FAMILY_SEED rooted |
+| NAT traversal | Requires manual endpoint config | songBird TURN + skunkBat hole-punching |
+| Reconnection | Automatic (kernel) | songBird persistent mesh with exponential backoff |
+| Performance | Kernel-space, ~1 Gbps | Userspace — must benchmark to WG baseline |
+
+**Parity gate**: Tower must demonstrate equivalent throughput and latency
+on the LAN mesh before WireGuard can be removed. Performance benchmark
+is the only remaining criterion — all other capabilities are already
+sovereign.
+
+### Phase 1: Primal sporePrint Pipeline Replaces Zola
+
+sporePrint currently uses Zola (Rust static site generator) to build
+`sporeprint.primals.eco`. The primal replacement pipeline:
+
+```
+Content (markdown/data) → nestGate CAS (content-addressed storage)
+  → petalTongue (rendering: WASM WebGL + SVG + description)
+    → cellMembrane (serving: Caddy config generation)
+      → primals.eco (public surface)
+```
+
+petalTongue's WASM WebGL pipeline (Wave 150r) is the enabling step —
+browser-side rendering is now fully primal. The remaining work is
+wiring sporePrint's content pipeline to emit from CAS rather than
+Zola's file-based build.
+
+### Phase 2: rootPulse Replaces Forgejo (Late-Stage)
+
+Forgejo (`git.primals.eco`) is a solid intra-membrane tool — self-hosted,
+functional, not in the inner membrane data path. Replacement only happens
+when **rootPulse** is live:
+
+- rootPulse = sovereign version control backed by nestGate CAS +
+  Provenance Trio (rhizoCrypt lineage, loamSpine ledger, sweetGrass
+  attribution)
+- Git-compatible interface over CAS-backed storage
+- Loam Certificates for commit provenance (replacing GPG signatures)
+- This is explicitly **not a near-term priority** — Forgejo serves well
+
+### Firebreak Tools: Outer Membrane by Design
+
+**RustDesk** (AGPL-3.0): License-compliant with the ecosystem's
+open-source model. The ecosystem learns from and leverages RustDesk's
+relay architecture. It provides human-operator remote access on the
+outer membrane, coexisting with MitoBeacon (autonomous identity on the
+inner membrane). As MitoBeacon matures, RustDesk's role naturally
+narrows to human-in-the-loop scenarios.
+
+**JupyterHub**: Repositioned as **outer membrane interface only**.
+ABG members, external collaborators, and human scientists use JupyterHub
+as a web interface that submits work to inner membrane primals (biomeOS
+orchestration → toadStool dispatch → barraCuda compute). JupyterHub
+never processes sovereign data itself — it is a submission portal. The
+actual workload executes entirely within the inner membrane enclave.
+
+**Cloudflare, Caddy, Let's Encrypt, Porkbun**: These are the correct
+tools for absorbing hostile internet traffic. The outer membrane's job
+is to face the storm. The inner membrane's job is to coordinate the
+organism. Industry tools on the outer membrane are not debt — they are
+the firebreak.
+
+---
+
 ## Peptidoglycan Composition Specification
 
 ### membrane.toml Schema
@@ -434,6 +535,7 @@ deploy_membrane.sh --composition peptidoglycan --provider bare_metal --host floc
 | 137b | Wildcard `*.primals.eco` DNS active. Domain identity separation formalized: `primals.eco` (public platform), `primal.eco` (sovereign substrate + entropy ceremonies + private compositions), `nestgate.io` (federated data gateway). Composition routing by domain documented (same primals, different trust/data scope per domain). Loam Certificate vs TLS credential terminology applied. |
 | 150d | Domain terminology refined: `primals.eco` = intra-membrane (shared ecosystem), `primal.eco` = inner membrane (personal sovereign), `nestgate.io` = data service interaction point. Root domain redirect: `primals.eco` → `sporeprint.primals.eco`. Subdomain standard enforced for all compositions. sporePrint gets own subdomain. |
 | 150j | **Git relay layer activated**: Forgejo (`git.primals.eco`) is sovereign primary for all source code. GitHub is subordinate outer membrane mirror. 39/39 repos have Forgejo push mirrors (`sync_on_commit: true`, HTTPS token auth via golgiBody). Gates push to Forgejo only — golgiBody relays to GitHub automatically on every commit. GitHub SSH surface consolidated from 12 per-gate keys to 2 (`forgejo-relay@golgiBody` + `golgiBody-ext@vps`). Sync divergence structurally eliminated. |
+| 150s | **Sovereignty Evolution Roadmap**: Three-tier classification (Replace / Late-Stage / Firebreak). Phase 1: WireGuard → Tower Atomic, Zola → primal sporePrint pipeline. Phase 2: Forgejo → rootPulse (post-Provenance Trio). Firebreak stays: Cloudflare, Caddy, RustDesk (AGPL-3.0), JupyterHub (repositioned as outer membrane interface). DNSSEC 3/3 domains validated. |
 
 ---
 

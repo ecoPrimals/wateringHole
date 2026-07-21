@@ -1,14 +1,15 @@
-# ecoPrimals Ecosystem Blurb — Wave 150r
+# ecoPrimals Ecosystem Blurb — Wave 150s
 
-**Date**: Jul 21, 2026 10:50 EDT | **Wave**: 150r | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 5-GATE ACTIVE MESH. WASM WEBGL PIPELINE SHIPPED.**
+**Date**: Jul 21, 2026 11:25 EDT | **Wave**: 150s | **From**: eastGate overwatch
+**Posture**: **SOVEREIGNTY EVOLUTION ROADMAP. DNSSEC 3/3. TOWER ATOMIC TARGETING WG.**
 
-**This wave**: Cascade + review. petalTongue shipped WASM WebGL exports — browser-side
-3D rendering without server round-trip (`render_binding_webgl`, `render_color_grid_webgl`).
-5 modalities now available in WASM target (svg, webgl, description, terminal, audio).
-**bingoCube on primals.eco is now unblocked** — petalTongue provides the client-side
-rendering pipeline. All 43 repos synced to Forgejo (wateringHole converged after merge).
-6/6 surfaces healthy (Jul 21 probe). AAR from petalTongue team landed (AAR_WAVE150q.md).
+**This wave**: Sovereignty evolution roadmap formalized in Diderm architecture doc.
+Three-tier classification: **Replace** (WireGuard → Tower Atomic, Zola → primal
+sporePrint pipeline), **Late-Stage** (Forgejo → rootPulse, post-Provenance Trio),
+**Firebreak stays** (Cloudflare, Caddy, RustDesk AGPL-3.0, JupyterHub as outer
+membrane interface). DNSSEC 3/3 domains validated (primals.eco DS at Porkbun,
+primal.eco + nestgate.io sovereign-signed). JupyterHub repositioned: outer membrane
+interface for ABG users — actual compute always inner membrane primals.
 
 ---
 
@@ -224,6 +225,10 @@ remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear wi
 
 ### NEAR TERM (next 2-4 weeks)
 
+- **Tower Atomic parity assessment** — benchmark Tower (bearDog + songBird + skunkBat)
+  against WireGuard on LAN mesh. Throughput and latency must meet WG baseline before cutover.
+- **sporePrint primal pipeline design** — architect Zola replacement: petalTongue rendering
+  + nestGate CAS content + cellMembrane serving. WASM WebGL pipeline is the enabler.
 - **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph + WASM WebGL pipeline
 - ~~**Enable DNSSEC** for `primals.eco`~~ — **DONE** (3/3 domains: primals.eco, primal.eco, nestgate.io)
 - **pseudoSpore validation**: promote 6 pending spores
@@ -232,11 +237,25 @@ remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear wi
 
 ### FUTURE (quarter horizon)
 
+- **rootPulse design**: sovereign version control over nestGate CAS + Provenance Trio
+  (rhizoCrypt lineage, loamSpine ledger, sweetGrass attribution) — Forgejo replacement path
 - **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
 - **tideGlass composition**: computational chemistry product (shelved)
 - **primal-transport crate**: publish shared transport abstraction
 - **SHOW_HN readiness**: rubric, narrative, demo path
 - **`primal.eco` inner membrane separation**
+
+### SOVEREIGNTY EVOLUTION (Diderm Roadmap — Wave 150s)
+
+| Tier | Tool | Primal Path | Status |
+|------|------|-------------|--------|
+| **REPLACE** | WireGuard | Tower Atomic (bearDog + songBird + skunkBat) | Phase 1 — parity benchmark needed |
+| **REPLACE** | Zola | petalTongue + nestGate CAS + cellMembrane | Phase 1 — WASM WebGL pipeline enables |
+| **LATE-STAGE** | Forgejo | rootPulse (nestGate CAS + Provenance Trio) | Phase 2 — post-rootPulse |
+| **FIREBREAK** | Cloudflare | N/A — outer membrane by design | Stays |
+| **FIREBREAK** | Caddy | cellMembrane generates config | Stays |
+| **FIREBREAK** | RustDesk | AGPL-3.0 compliant; learn-from-leverage | Stays |
+| **FIREBREAK** | JupyterHub | Interface only; compute = inner membrane | Stays (repositioned) |
 
 ---
 
@@ -350,6 +369,7 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 | Milestone | Wave |
 |-----------|------|
+| **Sovereignty Evolution Roadmap — 3-tier classification, DNSSEC 3/3, Tower→WG target** | **150s** |
 | **petalTongue WASM WebGL exports — browser-side 3D, 5 modalities, bingoCube unblocked** | **150r** |
 | **nestGate vendor analysis: 27 TODOs = vendored upstream, 0 project debt, un-vendor path defined** | **150q** |
 | **Lansing Scuffle landed — 10-doc campus vision + sporePrint blurb + footPrint GeoJSON** | **150p** |
@@ -385,7 +405,7 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 | 1 | Temporal | GREEN | wave.toml current, 0 impulses, 5 handoffs |
 | 2 | Ecological | GREEN | 0 project TODOs (15/15 primals); nestGate vendor cleanup is team action |
 | 3 | Hardware | AMBER | 4 gates offline, southGate pending USB enrollment |
-| 4 | Sovereignty | GREEN | 43/43 Forgejo-first; **DNSSEC 3/3 domains** (primals.eco, primal.eco, nestgate.io) |
+| 4 | Sovereignty | GREEN | DNSSEC 3/3; evolution roadmap: WG→Tower (P1), Zola→primal (P1), Forgejo→rootPulse (P2) |
 | 5 | Public Surface | GREEN | 6/6 surfaces healthy (webb recovered) |
 | 6 | Compositions | GREEN | pseudoSpore pipeline maturing, 6 validation.json pending |
 | 7 | Documentation | GREEN | 5 active handoffs, Lansing Scuffle blurb issued |
@@ -405,10 +425,10 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 ---
 
-*Wave 150r: WASM WEBGL SHIPPED. petalTongue delivers browser-side 3D rendering (WebGL
-vertex/index buffers compiled client-side via WASM — no server round-trip). 5 modalities
-in WASM target (svg, webgl, description, terminal, audio). bingoCube on primals.eco is
-now UNBLOCKED — `render_color_grid_webgl` export ready for consumption. 43/43 repos
-synced. 6/6 surfaces healthy (Jul 21). 8 active dims (7 GREEN / 1 AMBER hw) + 5
-fossilized. petalTongue AAR landed. Next: bingoCube widget, sporePrint Scuffle pages,
-enroll southGate, deploy petalTongue v1.7+ to flockGate.*
+*Wave 150s: SOVEREIGNTY EVOLUTION ROADMAP. Three-tier classification formalized in Diderm
+doc: Replace (WireGuard → Tower Atomic, Zola → primal sporePrint), Late-Stage (Forgejo →
+rootPulse post-Provenance Trio), Firebreak stays (Cloudflare, Caddy, RustDesk AGPL-3.0,
+JupyterHub as outer membrane interface for ABG users). DNSSEC 3/3 domains validated.
+Tower must meet/exceed WG performance before cutover. JupyterHub repositioned: interface
+only, compute always inner membrane primals. Next: Tower parity benchmark, sporePrint
+primal pipeline design, bingoCube widget, enroll southGate.*
