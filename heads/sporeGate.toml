@@ -1,31 +1,31 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-18T14:25:00Z
+# Gate: sporeGate | Updated: 2026-07-21T16:45:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-18T14:25:00Z"
+updated = "2026-07-21T16:45:00Z"
 
 [heads]
 bearDog = "27cf95c7843f121c445f50190c317a4a3ef66faa"
-songBird = "f1718630667582b4c111d4060d5572963f53a6e5"
-nestGate = "d46e5d94c8a3e6a60daf85a21afec9c659d32e05"
-biomeOS = "489c7d57e66b59d13a3e3f6f6fb74e36326e5a50"
+songBird = "543b2a706b8e027a552a3d20f9309a6df6a69424"
+nestGate = "33b15599b1be85ca8ab05aee2360f95c3861a2c5"
+biomeOS = "c4455fa"
 rhizoCrypt = "35a58bd2cda07d5ec0f2b28f347b867876021750"
-squirrel = "84bb3c5b01da2fde9e11e46e259e8b2f7e8f45d3"
+squirrel = "29c8afb"
 sweetGrass = "2d73a07ab9accb730fc7634098dc8614fd4be491"
 loamSpine = "60a73b88e368939d85b5d5db8a5d5ebba66be48e"
 skunkBat = "2999c1bce1269f6e7e3e8f82ffc71a8d9c7f59f2"
 coralReef = "e006441bad3bf0b3e2fc2918e6acb9ea94e8fd09"
 barraCuda = "aaf1e525c8a4cf2ef6b11e11d3cf43cf0a534cff"
-petalTongue = "3c30bd4fcc3a40c2e2c204b9879bd99bca3dc68b"
+petalTongue = "3642dd4ea5486553acf2f67c65bab0bd07309236"
 toadStool = "d6d9f20f5d9c8032d3cbe9c0c55b1de0e53f3c2a"
 sourDough = "3a0b52df4b65a5436bfa87161e8cf181c4e85194"
-cellMembrane = "77e929649ada4df6ebe7b9d0c55a03f1c1524e80"
-primalSpring = "f238397a"
-wateringHole = "fca63a33834a40d13dcf84c3abf3efb93d67d87e"
-sporePrint = "25cab9c890ddce17ac2486ebb0de51e77a724cbb"
+cellMembrane = "5c5f8674aadc4ce985986ed48fe12c24a51eb0a9"
+primalSpring = "e87dd1eb115acf246ee17a19b10f2be5551ada2a"
+wateringHole = "74bfbcdfdd744c3a9939161d077c39e10eca8d01"
+sporePrint = "2efa8b6ae44970d6c087c8a33b2f453f8fa16637"
 
 [deploy]
 songbird_version = "0.3.1-drawbridge-proxy"
@@ -37,14 +37,15 @@ depot_architectures = "x86_64-musl, aarch64-musl, aarch64-android, x86_64-window
 mesh_status = "6-GATE MESH — golgi, sporeGate, eastGate, flockGate, ironGate, northGate"
 cascade_sense = "OPERATIONAL — atomic build-then-swap (zero-downtime)"
 footprint_server = "LIVE on sporeGate:8090 — footprint.primals.eco → 200"
-esotericwebb_caddy = "WIRED — webb.primals.eco → flockGate:8090 via WG. 502 until flockGate service starts."
+esotericwebb_caddy = "LIVE — webb.primals.eco → flockGate:8090 → 200"
 sporeprint_subdomain = "LIVE — sporeprint.primals.eco → 200. Root primals.eco 301 redirects."
+dnssec = "ENABLED — 3/3 domains validated (Jul 21)"
 
 [caddy_surfaces]
 primals_eco = "301 → sporeprint.primals.eco (root redirect)"
-sporeprint = "200 — sporePrint docs (302 pages)"
+sporeprint = "200 — sporePrint docs"
 footprint = "200 — GIS composition (Express API + static)"
-webb = "502 — route wired, awaiting flockGate persistence"
+webb = "200 — esotericWebb V22"
 live = "200 — petalTongue TOPO-VIS"
 membrane = "200 — depot + status"
 git = "200 — Forgejo"
@@ -60,3 +61,5 @@ silicon_atheism_p1 = "COMPLETE: 14/14 primals × 4 architectures = 56 binaries +
 silicon_atheism_p2 = "COMPLETE: 14/14 transport abstraction (trait + backend pattern)"
 windows_beardog = "FIXED: #[cfg(unix)] gating for UnixStream in beardog-ipc/core/tunnel/cli"
 cac_6_6 = "COMPLETE: Content-Addressed Convergence all 6 layers solved"
+webb_recovered = "LIVE: webb.primals.eco 200 — flockGate esotericWebb V22 (Wave 150t)"
+standards_reorg = "ACKNOWLEDGED: 37 standards → 4 directories (Wave 150t)"
