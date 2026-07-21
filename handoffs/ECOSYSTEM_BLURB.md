@@ -22,7 +22,7 @@ User → Cloudflare DNS (*.primals.eco wildcard → golgiBody 157.230.3.183)
 
 **Cloudflare status**: All records are **DNS-only** (grey cloud, not proxied).
 Wildcard `*.primals.eco` covers all new subdomains automatically — no DNS
-changes needed for new services. DNSSEC not yet enabled (P2).
+changes needed for new services. **DNSSEC enabled** (3/3 domains validated — Jul 21).
 
 **URL Standard**: `prefix.primals.eco` subdomain. Root → `sporeprint.primals.eco`.
 
@@ -193,7 +193,7 @@ remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear wi
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| `primals.eco` DNSSEC | **operator** | Cloudflare dashboard → Enable DNSSEC |
+| ~~`primals.eco` DNSSEC~~ | **operator** | **DONE** — DS record at Porkbun, AD=true validated Jul 21 |
 | ~~Restart esotericWebb~~ | **flockGate team** | **RESOLVED** — recovered Jul 20 |
 | Deploy petalTongue v1.7+ | **sporeGate team** | Activates full scene graph pipeline |
 | cellMembrane unwrap audit | cellMembrane team | 456 production unwraps |
@@ -206,7 +206,7 @@ remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear wi
 
 | Action | Where | Status |
 |--------|-------|--------|
-| Enable DNSSEC on `primals.eco` | Cloudflare dashboard | **PENDING** |
+| ~~Enable DNSSEC on `primals.eco`~~ | Porkbun registrar | **DONE** (DS: keyTag 2371, alg 13, SHA-256) |
 | Consider Cloudflare proxy (orange cloud) | Cloudflare dashboard | **PENDING** |
 | Verify push mirrors working | Spot-check GitHub repos | **PENDING** |
 
@@ -225,7 +225,7 @@ remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear wi
 ### NEAR TERM (next 2-4 weeks)
 
 - **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph + WASM WebGL pipeline
-- **Enable Cloudflare DNSSEC** for `primals.eco`
+- ~~**Enable DNSSEC** for `primals.eco`~~ — **DONE** (3/3 domains: primals.eco, primal.eco, nestgate.io)
 - **pseudoSpore validation**: promote 6 pending spores
 - **cellMembrane unwrap audit** — 456 production unwraps
 - **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
@@ -385,7 +385,7 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 | 1 | Temporal | GREEN | wave.toml current, 0 impulses, 5 handoffs |
 | 2 | Ecological | GREEN | 0 project TODOs (15/15 primals); nestGate vendor cleanup is team action |
 | 3 | Hardware | AMBER | 4 gates offline, southGate pending USB enrollment |
-| 4 | Sovereignty | GREEN | 43/43 Forgejo-first; DNSSEC `primals.eco` (P2) |
+| 4 | Sovereignty | GREEN | 43/43 Forgejo-first; **DNSSEC 3/3 domains** (primals.eco, primal.eco, nestgate.io) |
 | 5 | Public Surface | GREEN | 6/6 surfaces healthy (webb recovered) |
 | 6 | Compositions | GREEN | pseudoSpore pipeline maturing, 6 validation.json pending |
 | 7 | Documentation | GREEN | 5 active handoffs, Lansing Scuffle blurb issued |

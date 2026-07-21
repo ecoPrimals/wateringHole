@@ -60,7 +60,8 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Sovereign outer membrane operational (Caddy TLS)
 - [x] S1-S4 sovereignty shadows ALL GRADUATED
 - [x] DNSSEC on `primal.eco` + `nestgate.io`
-- [ ] DNSSEC on `primals.eco` (P2 — Cloudflare)
+- [x] DNSSEC on `primals.eco` — DS record at Porkbun (keyTag 2371, alg 13, SHA-256), AD=true validated Jul 21
+- [x] **DNSSEC 3/3 domains complete** — all validated via Google DNS (AD=true)
 - [ ] `primal.eco` inner membrane separation (P2)
 
 ## 5. Public Surface / Security
