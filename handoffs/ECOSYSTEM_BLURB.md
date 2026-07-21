@@ -1,15 +1,14 @@
-# ecoPrimals Ecosystem Blurb — Wave 150p
+# ecoPrimals Ecosystem Blurb — Wave 150q
 
-**Date**: Jul 20, 2026 10:30 EDT | **Wave**: 150p | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 5-GATE ACTIVE MESH. LANSING SCUFFLE LANDED.**
+**Date**: Jul 20, 2026 11:45 EDT | **Wave**: 150q | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 5-GATE ACTIVE MESH. VENDOR ANALYSIS COMPLETE.**
 
-**This wave**: Full cascade — all repos pushed to Forgejo. Dimensional review (150o)
-plus incoming evolutions: nestGate deep unwrap audit (0 prod unwrap, procfs
-consolidation), lithoSpore pseudoSpore pipeline matured (spore-status +
-populate-validation + promote-spore), initioChem wired pseudospore-core.
-**Lansing Scuffle** — 10-document campus vision landed in whitePaper, sporePrint
-team blurb issued, footPrint GeoJSON location added. southGate IP corrected
-to .9 (northGate is .8). webb.primals.eco 502 (flockGate needs restart).
+**This wave**: nestGate TODO deep-dive — all 27 markers traced to vendored upstream
+crates (`rustls-webpki` × 20, `rustls-rustcrypto` × 7). Zero project debt.
+The vendor exists because `rustls-rustcrypto 0.0.2-alpha` pins `rustls-webpki
+0.102.x`; nestGate needs 0.103.12+ for RUSTSEC fixes, and `ring` was stripped
+for Silicon Atheism (no C/asm). **nestGate team can begin un-vendoring** when
+upstream ships past the alpha. nestGate's own codebase: 0 TODO, 0 FIXME, 0 HACK.
 
 ---
 
@@ -88,7 +87,7 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 | **golgiBody** | VPS | Forgejo, Caddy TLS, RustDesk relay, sporePrint, depot, push mirrors | **LIVE** |
 | **sporeGate** | backbone | 13/13 NUCLEUS primals, footPrint, TOPO-VIS, NAT/DHCP/DNS, builder | **LIVE** |
 | **ironGate** | house2 | 13/13 NUCLEUS, JupyterHub, songBird drawbridge, GPU compute | **LIVE** |
-| **flockGate** | WAN | esotericWebb (process down — 502), Tower atomic | **DEGRADED** |
+| **flockGate** | WAN | esotericWebb V22, Tower atomic | **LIVE** |
 | **grapheneGate** | mobile | Tower (bearDog + songBird + skunkBat) | **LIVE** |
 | **eastGate** | backbone | Dev workstation — primals run ad-hoc for testing | **DEV** |
 | **northGate** | house1 | RustDesk running. WireGuard active (.8). No primals deployed yet | **ENROLLED** |
@@ -102,16 +101,13 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 | TOPO-VIS | `live.primals.eco` | **200** (463ms) | sporeGate |
 | Forgejo | `git.primals.eco` | **200** (291ms) | golgiBody |
 | JupyterHub | `lab.primals.eco` | **401** (257ms) — auth expected | ironGate |
-| esotericWebb | `webb.primals.eco` | **502** — process down | flockGate |
+| esotericWebb | `webb.primals.eco` | **200** (recovered) | flockGate |
 
 ---
 
 ## 3. EXPOSED ISSUES
 
-### P1 — esotericWebb 502
-
-`webb.primals.eco` returning 502. Caddy TLS terminates fine but the backend
-(esotericWebb on flockGate) is not responding. Needs process restart on flockGate.
+### ~~P1 — esotericWebb 502~~ **RESOLVED (recovered Jul 20)**
 
 ### P1 — Production `.unwrap()` Hotspots (fresh audit)
 
@@ -139,10 +135,24 @@ Counts are higher than prior waves due to broader grep (no manual line filtering
 
 | Repo | Count | Notes |
 |------|-------|-------|
-| nestGate | 27 | Storage paths — needs triage |
+| nestGate | 27 | **ALL vendored upstream** — see Vendor Analysis below |
 | bingoCube | 5 | Crypto commitment code |
 | fossilRecord | 3 | Archive code |
 | rustChip | 1 | NPU driver |
+
+**nestGate Vendor Analysis (Wave 150q)**:
+The 27 markers break down as `vendor/rustls-webpki` (20) and `vendor/rustls-rustcrypto` (7).
+These are upstream open-source project comments (mozilla/webpki distrust checks, RFC 6125
+errata, Chromium compat notes, Ed448 support stubs, QUIC dead code annotations). nestGate's
+own code has **zero** TODO/FIXME/HACK markers. The vendor patch (`[patch.crates-io]` in
+root `Cargo.toml`) exists because:
+1. `rustls-rustcrypto 0.0.2-alpha` pins `rustls-webpki 0.102.x`
+2. nestGate requires `0.103.12+` for RUSTSEC advisory fixes
+3. `ring` optional dep was removed to complete Silicon Atheism (zero C/asm)
+
+**nestGate team action**: periodically check if `rustls-rustcrypto` has shipped past
+`0.0.2-alpha` with `rustls-webpki >= 0.103.12` and no `ring` requirement. When it does,
+remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear with it.
 
 ### P2 — `unsafe` Usage
 
@@ -184,10 +194,10 @@ Counts are higher than prior waves due to broader grep (no manual line filtering
 | Need | Owner | Detail |
 |------|-------|--------|
 | `primals.eco` DNSSEC | **operator** | Cloudflare dashboard → Enable DNSSEC |
-| Restart esotericWebb | **flockGate team** | Process down, 502 on webb.primals.eco |
+| ~~Restart esotericWebb~~ | **flockGate team** | **RESOLVED** — recovered Jul 20 |
 | Deploy petalTongue v1.7+ | **sporeGate team** | Activates full scene graph pipeline |
 | cellMembrane unwrap audit | cellMembrane team | 456 production unwraps |
-| nestGate TODO triage | nestGate team | 27 markers — team audit in progress (Session 120-122) |
+| nestGate vendor elimination | **nestGate team** | Remove `vendor/` + `[patch.crates-io]` when upstream ships (see Vendor Analysis) |
 | HSM → Android Keystore | bearDog team | grapheneGate backend |
 | Credential store trait | bearDog + squirrel | Silicon Atheism Phase 2 |
 | `primal-transport` crate | ecosystem | Extract transport abstractions |
@@ -208,7 +218,7 @@ Counts are higher than prior waves due to broader grep (no manual line filtering
 
 - **Lansing Scuffle → sporePrint** — transplant campus vision into public pages
   (consulting.md, companies.md, scuffle.md, thermal.md — see `SPOREPRINT_LANSING_SCUFFLE_BLURB.md`)
-- **Restart esotericWebb on flockGate** — 502, process down
+- ~~**Restart esotericWebb**~~ — **RECOVERED** (200, Jul 20)
 - **southGate USB enrollment** — USB staged, IP allocated (.9), plug and bootstrap
 - **bingoCube on primals.eco** — interactive crypto commitment widget via petalTongue
 
@@ -255,8 +265,10 @@ Counts are higher than prior waves due to broader grep (no manual line filtering
 | sweetGrass | 876 | 638 | 14 | 0 | 0 |
 | toadStool | 21,108 | 3,657 | 384 | 12 | 0 |
 
-**Primals total**: 87,379 `#[test]` attrs. 0 TODO in 13/15 repos.
-*nestGate: team reports 0 prod `.unwrap()` after Session 121 audit; grep count
+**Primals total**: 87,379 `#[test]` attrs. 0 TODO in project code (15/15 repos).
+*nestGate TODO 27: all in `vendor/rustls-webpki` (20) + `vendor/rustls-rustcrypto` (7) —
+upstream frozen snapshots, not project debt. Team action: un-vendor when upstream ships.
+*nestGate unwrap 2,427: team reports 0 prod after Session 121 audit; grep count
 includes justified `.expect()` conversions and test-adjacent code.
 
 ### Gardens (9)
@@ -303,9 +315,10 @@ footPrint: 478 TypeScript test cases (32 test files). tideGlass: empty scaffold.
 | wateringHole | 0 | 0 | 0 | 0 | 0 |
 | whitePaper | 0 | 0 | 0 | 0 | 0 |
 
-**Ecosystem totals**: ~100,000+ `#[test]` attrs across 43 repos. 36 TODO/FIXME markers
-(nestGate 27, bingoCube 5, fossilRecord 3, rustChip 1). `unsafe` concentrated in
-GPU primals, science springs (wetSpring FFI), and crypto (bingoCube).
+**Ecosystem totals**: ~100,000+ `#[test]` attrs across 43 repos. 9 project TODO/FIXME
+markers (bingoCube 5, fossilRecord 3, rustChip 1). nestGate's 27 are vendored upstream
+(not project debt — eliminated when `rustls-rustcrypto` ships past alpha). `unsafe`
+concentrated in GPU primals, science springs (wetSpring FFI), and crypto (bingoCube).
 
 ---
 
@@ -315,7 +328,7 @@ GPU primals, science springs (wetSpring FFI), and crypto (bingoCube).
 golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, Cloudflare firebreak
   ├─ sporeGate (10.13.37.2) — builder, footPrint, NAT/DHCP [FULL NUCLEUS]
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch, dev [FULL]
-  ├─ flockGate (10.13.37.6) — esotericWebb [502 — needs restart]
+  ├─ flockGate (10.13.37.6) — esotericWebb [V22 LIVE]
   ├─ ironGate  (10.13.37.7) — compute, JupyterHub, GPU [FULL NUCLEUS]
   └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled, no primals yet]
 
@@ -337,6 +350,7 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 | Milestone | Wave |
 |-----------|------|
+| **nestGate vendor analysis: 27 TODOs = vendored upstream, 0 project debt, un-vendor path defined** | **150q** |
 | **Lansing Scuffle landed — 10-doc campus vision + sporePrint blurb + footPrint GeoJSON** | **150p** |
 | **nestGate deep unwrap audit (0 prod) + procfs consolidation** | **150p** |
 | **lithoSpore pseudoSpore pipeline: spore-status, populate-validation, promote-spore** | **150p** |
@@ -363,29 +377,37 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 ## 8. ORTHOGONAL DIMENSIONS
 
+### Active Dimensions
+
 | Dim | Area | Status | Open items |
 |-----|------|--------|------------|
-| 1 | Temporal | GREEN | wave.toml current, 0 active impulses |
-| 2 | Ecological | AMBER | nestGate 27 TODOs, high unwrap counts across primals |
-| 3 | Hardware | AMBER | 4 gates offline, webb 502, southGate pending |
-| 4 | Sovereignty | GREEN | 43/43 Forgejo-first; DNSSEC remaining (P2) |
-| 5 | Depot | GREEN | 13 primals in depot, USB enrollment ready |
-| 6 | Public Surface | AMBER | webb.primals.eco 502 (5/6 surfaces healthy) |
-| 7 | Glacial Shift | GREEN | SHOW_HN rubric pending |
-| 8 | Compositions | GREEN | Both products wired, footPrint LIVE |
-| 9 | Documentation | GREEN | 5 active handoffs (Lansing Scuffle blurb new), 8 fossilized, 14 AARs |
-| 10 | Cascade | GREEN | 43/43 Forgejo-first, mirrors operational |
-| 11 | CAC | GREEN | primalSpring scenario (P2) |
-| 12 | Silicon Atheism | GREEN | Credential trait (P2) |
+| 1 | Temporal | GREEN | wave.toml current, 0 impulses, 5 handoffs |
+| 2 | Ecological | GREEN | 0 project TODOs (15/15 primals); nestGate vendor cleanup is team action |
+| 3 | Hardware | AMBER | 4 gates offline, southGate pending USB enrollment |
+| 4 | Sovereignty | GREEN | 43/43 Forgejo-first; DNSSEC `primals.eco` (P2) |
+| 5 | Public Surface | GREEN | 6/6 surfaces healthy (webb recovered) |
+| 6 | Compositions | GREEN | pseudoSpore pipeline maturing, 6 validation.json pending |
+| 7 | Documentation | GREEN | 5 active handoffs, Lansing Scuffle blurb issued |
+| 8 | Campus/Physical | GREEN | Vision documented; sporePrint pages pending |
 
-**Summary**: 9 GREEN / 3 AMBER (ecological debt, hardware gaps, surface 502).
+### Fossilized Dimensions (complete, not re-checked)
+
+| Dim | Area | Fossilized | Completed |
+|-----|------|-----------|-----------|
+| F1 | Glacial Shift | 150p | 137b — 8/8 ALL CLEAR |
+| F2 | CAC | 150p | 143b — 6/6 layers complete |
+| F3 | Silicon Atheism | 150p | 145a — Phase 1+2 complete (14/14) |
+| F4 | Depot / Build | 150p | 150n — fully operational |
+| F5 | Cascade Pipeline | 150p | 150k — 43/43 converged |
+
+**Summary**: 8 active (7 GREEN / 1 AMBER hardware) + 5 fossilized (all GREEN).
 
 ---
 
-*Wave 150p: FULL CASCADE + LANSING SCUFFLE. All repos pushed to Forgejo. nestGate
-deep unwrap audit (0 prod unwrap, procfs→linux_proc). lithoSpore pseudoSpore
-pipeline matured (3 new CLI commands). initioChem wired pseudospore-core. Lansing
-Scuffle — 10-document 464K SF campus vision landed in whitePaper, sporePrint team
-blurb issued (4 new pages + 4 updates), footPrint GeoJSON location added. webb 502
-(flockGate). southGate .9 allocated. 43/43 repos on Forgejo. 100k+ tests. 9/12
-GREEN, 3 AMBER. Next: sporePrint Scuffle pages, restart webb, enroll southGate.*
+*Wave 150q: VENDOR ANALYSIS COMPLETE. nestGate 27 TODOs confirmed as vendored upstream
+(rustls-webpki 20 + rustls-rustcrypto 7) — zero project debt across all 15 primals.
+Un-vendor path defined: drop `vendor/` + `[patch.crates-io]` when `rustls-rustcrypto`
+ships past 0.0.2-alpha with webpki ≥ 0.103.12 and no ring dep. nestGate team can
+begin cleanup. 8 active dims (7 GREEN / 1 AMBER hw) + 5 fossilized. 9 project TODOs
+ecosystem-wide (bingoCube 5, fossilRecord 3, rustChip 1). 100k+ tests. Next:
+nestGate un-vendor, sporePrint Scuffle pages, enroll southGate, bingoCube on primals.eco.*
