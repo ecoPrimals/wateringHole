@@ -10,9 +10,9 @@
 
 [wave]
 id = 150
-sub = "q"
-date = "2026-07-20"
-posture = "VENDOR ANALYSIS COMPLETE. nestGate 27 TODOs confirmed vendored upstream (rustls-webpki/rustls-rustcrypto). 0 project debt. Team can begin un-vendoring when upstream rustls-rustcrypto ships past 0.0.2-alpha. 8 active dims (7 GREEN / 1 AMBER) + 5 fossilized."
+sub = "r"
+date = "2026-07-21"
+posture = "WASM WEBGL SHIPPED. petalTongue browser-side 3D (5 modalities). bingoCube on primals.eco UNBLOCKED. 43/43 synced. 6/6 surfaces healthy. 8 active (7 GREEN / 1 AMBER hw) + 5 fossilized."
 publisher = "eastGate-overwatch"
 
 [gates]

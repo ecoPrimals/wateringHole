@@ -1,14 +1,14 @@
-# ecoPrimals Ecosystem Blurb — Wave 150q
+# ecoPrimals Ecosystem Blurb — Wave 150r
 
-**Date**: Jul 20, 2026 11:45 EDT | **Wave**: 150q | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 5-GATE ACTIVE MESH. VENDOR ANALYSIS COMPLETE.**
+**Date**: Jul 21, 2026 10:50 EDT | **Wave**: 150r | **From**: eastGate overwatch
+**Posture**: **PUBLIC + SOVEREIGN. 5-GATE ACTIVE MESH. WASM WEBGL PIPELINE SHIPPED.**
 
-**This wave**: nestGate TODO deep-dive — all 27 markers traced to vendored upstream
-crates (`rustls-webpki` × 20, `rustls-rustcrypto` × 7). Zero project debt.
-The vendor exists because `rustls-rustcrypto 0.0.2-alpha` pins `rustls-webpki
-0.102.x`; nestGate needs 0.103.12+ for RUSTSEC fixes, and `ring` was stripped
-for Silicon Atheism (no C/asm). **nestGate team can begin un-vendoring** when
-upstream ships past the alpha. nestGate's own codebase: 0 TODO, 0 FIXME, 0 HACK.
+**This wave**: Cascade + review. petalTongue shipped WASM WebGL exports — browser-side
+3D rendering without server round-trip (`render_binding_webgl`, `render_color_grid_webgl`).
+5 modalities now available in WASM target (svg, webgl, description, terminal, audio).
+**bingoCube on primals.eco is now unblocked** — petalTongue provides the client-side
+rendering pipeline. All 43 repos synced to Forgejo (wateringHole converged after merge).
+6/6 surfaces healthy (Jul 21 probe). AAR from petalTongue team landed (AAR_WAVE150q.md).
 
 ---
 
@@ -92,16 +92,16 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 | **eastGate** | backbone | Dev workstation — primals run ad-hoc for testing | **DEV** |
 | **northGate** | house1 | RustDesk running. WireGuard active (.8). No primals deployed yet | **ENROLLED** |
 
-### Live Surfaces (WAN-validated Jul 20, 2026)
+### Live Surfaces (WAN-validated Jul 21, 2026)
 
 | Surface | URL | HTTP | Gate |
 |---------|-----|------|------|
-| sporePrint | `sporeprint.primals.eco` | **200** (266ms) | golgiBody |
-| footPrint | `footprint.primals.eco` | **200** (332ms) | sporeGate |
-| TOPO-VIS | `live.primals.eco` | **200** (463ms) | sporeGate |
-| Forgejo | `git.primals.eco` | **200** (291ms) | golgiBody |
-| JupyterHub | `lab.primals.eco` | **401** (257ms) — auth expected | ironGate |
-| esotericWebb | `webb.primals.eco` | **200** (recovered) | flockGate |
+| sporePrint | `sporeprint.primals.eco` | **200** (340ms) | golgiBody |
+| footPrint | `footprint.primals.eco` | **200** (368ms) | sporeGate |
+| TOPO-VIS | `live.primals.eco` | **200** (442ms) | sporeGate |
+| Forgejo | `git.primals.eco` | **200** (332ms) | golgiBody |
+| JupyterHub | `lab.primals.eco` | **401** (275ms) — auth expected | ironGate |
+| esotericWebb | `webb.primals.eco` | **200** (338ms) | flockGate |
 
 ---
 
@@ -216,15 +216,15 @@ remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear wi
 
 ### NOW
 
+- **bingoCube on primals.eco** — **UNBLOCKED** by petalTongue WASM WebGL (Wave 150r).
+  `render_color_grid_webgl` export ready. Needs bingoCube team to consume it.
 - **Lansing Scuffle → sporePrint** — transplant campus vision into public pages
   (consulting.md, companies.md, scuffle.md, thermal.md — see `SPOREPRINT_LANSING_SCUFFLE_BLURB.md`)
-- ~~**Restart esotericWebb**~~ — **RECOVERED** (200, Jul 20)
 - **southGate USB enrollment** — USB staged, IP allocated (.9), plug and bootstrap
-- **bingoCube on primals.eco** — interactive crypto commitment widget via petalTongue
 
 ### NEAR TERM (next 2-4 weeks)
 
-- **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph pipeline
+- **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph + WASM WebGL pipeline
 - **Enable Cloudflare DNSSEC** for `primals.eco`
 - **pseudoSpore validation**: promote 6 pending spores
 - **cellMembrane unwrap audit** — 456 production unwraps
@@ -256,7 +256,7 @@ remove `vendor/` and the `[patch.crates-io]` block — all 27 TODOs disappear wi
 | coralReef | 2,902 | 779 | 10 | 2 | 0 |
 | loamSpine | 857 | 1,264 | 11 | 0 | 0 |
 | nestGate | 11,474 | 2,427* | 52 | 5 | 27 |
-| petalTongue | 5,773 | 1,364 | 353 | 0 | 0 |
+| petalTongue | 5,800+ | 1,364 | 353 | 0 | 0 |
 | rhizoCrypt | 2,725 | 1,862 | 4 | 1 | 0 |
 | skunkBat | 290 | 423 | 0 | 0 | 0 |
 | songBird | 10,315 | 4,068 | 87 | 3 | 0 |
@@ -338,7 +338,7 @@ Pending USB enrollment:
 Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pending)
 ```
 
-**WG mesh health** (Jul 20, 2026): All 5 active peers have handshakes within 2 minutes.
+**WG mesh health** (Jul 21, 2026): All 5 active peers healthy. 6/6 surfaces 200.
 
 **WG IP allocation**:
 .1=golgiBody, .2=sporeGate, .5=eastGate, .6=flockGate, .7=ironGate,
@@ -350,6 +350,7 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 | Milestone | Wave |
 |-----------|------|
+| **petalTongue WASM WebGL exports — browser-side 3D, 5 modalities, bingoCube unblocked** | **150r** |
 | **nestGate vendor analysis: 27 TODOs = vendored upstream, 0 project debt, un-vendor path defined** | **150q** |
 | **Lansing Scuffle landed — 10-doc campus vision + sporePrint blurb + footPrint GeoJSON** | **150p** |
 | **nestGate deep unwrap audit (0 prod) + procfs consolidation** | **150p** |
@@ -404,10 +405,10 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 ---
 
-*Wave 150q: VENDOR ANALYSIS COMPLETE. nestGate 27 TODOs confirmed as vendored upstream
-(rustls-webpki 20 + rustls-rustcrypto 7) — zero project debt across all 15 primals.
-Un-vendor path defined: drop `vendor/` + `[patch.crates-io]` when `rustls-rustcrypto`
-ships past 0.0.2-alpha with webpki ≥ 0.103.12 and no ring dep. nestGate team can
-begin cleanup. 8 active dims (7 GREEN / 1 AMBER hw) + 5 fossilized. 9 project TODOs
-ecosystem-wide (bingoCube 5, fossilRecord 3, rustChip 1). 100k+ tests. Next:
-nestGate un-vendor, sporePrint Scuffle pages, enroll southGate, bingoCube on primals.eco.*
+*Wave 150r: WASM WEBGL SHIPPED. petalTongue delivers browser-side 3D rendering (WebGL
+vertex/index buffers compiled client-side via WASM — no server round-trip). 5 modalities
+in WASM target (svg, webgl, description, terminal, audio). bingoCube on primals.eco is
+now UNBLOCKED — `render_color_grid_webgl` export ready for consumption. 43/43 repos
+synced. 6/6 surfaces healthy (Jul 21). 8 active dims (7 GREEN / 1 AMBER hw) + 5
+fossilized. petalTongue AAR landed. Next: bingoCube widget, sporePrint Scuffle pages,
+enroll southGate, deploy petalTongue v1.7+ to flockGate.*
