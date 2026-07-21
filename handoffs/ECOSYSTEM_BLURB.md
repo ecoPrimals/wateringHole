@@ -218,6 +218,7 @@ action but NOT required (outer membrane MAY use Cloudflare per diderm model).
 | pseudoSpore: populate-validation + promote-spore pipeline complete | 150o |
 | pseudoSpore: init-validation + scope.toml interop (modules alias, spring fields) | 150q |
 | pseudoSpore: lifecycle integration tests (emit→init→populate→promote→status) | 150t |
+| pseudoSpore: validation data stream standard + convergence handoff issued | 150t |
 | pseudoSpore pipeline: 7 springs emitted | 150a |
 | footPrint code complete (466 tests, responsive, a11y) — routing P0 | 150c |
 | esotericWebb V18 LIVE on flockGate (demo scenario) | 149a |
