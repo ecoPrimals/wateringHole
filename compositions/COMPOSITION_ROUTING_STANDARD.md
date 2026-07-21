@@ -3,7 +3,7 @@
 **Authority**: Overwatch + Ecosystem Convention
 **Status**: Active (Wave 138a)
 **Date**: 2026-07-14
-**Prerequisites**: `GATEHOUSE_DARKFOREST_STANDARD.md`, `DIDERM_DOMAIN_ARCHITECTURE.md`
+**Prerequisites**: `../operations/GATEHOUSE_DARKFOREST_STANDARD.md`, `../foundations/DIDERM_DOMAIN_ARCHITECTURE.md`
 
 ---
 
@@ -232,9 +232,9 @@ routing and the JSON-RPC bridge.
 
 ## References
 
-- `GATEHOUSE_DARKFOREST_STANDARD.md` — Bond escalation, drawbridge spec
-- `DIDERM_DOMAIN_ARCHITECTURE.md` — Domain trust levels, membrane layers
-- `GLOSSARY.md` — Drawbridge, weak bonds, Loam Certificates
+- `../operations/GATEHOUSE_DARKFOREST_STANDARD.md` — Bond escalation, drawbridge spec
+- `../foundations/DIDERM_DOMAIN_ARCHITECTURE.md` — Domain trust levels, membrane layers
+- `../GLOSSARY.md` — Drawbridge, weak bonds, Loam Certificates
 - `whitePaper/gen5/foundations/COMPOSITION_ROUTING_PATTERN.md` — Full pattern documentation
 - `whitePaper/gen5/foundations/EXTERNAL_SOVEREIGNTY_PATTERN.md` — Collaborator gate routing
 - `provision/provision-golgi.sh` — Caddy configuration source of truth

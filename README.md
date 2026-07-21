@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: July 14, 2026 (Wave 138a: PUBLIC + SOVEREIGN. Composition routing standard formalized. `*.primals.eco` wildcard DNS + Caddy sovereign routing. 5 live compositions (sporePrint, footPrint, TOPO-VIS, JupyterHub, Forgejo). 3-gate WireGuard mesh (eastGate+sporeGate+golgi). Depot pipeline 100% Rust, `require-signed` enforced. primalSpring v0.9.36 — 146 scenarios, 1,301 lib tests. All 8 glacial criteria CLEAR.)
+**Last Updated**: July 21, 2026 (Wave 150s: Standards reorganized into `foundations/`, `protocols/`, `operations/`, `compositions/`. 41 active standards, 8 fossilized. Sovereignty evolution roadmap. DNSSEC 3/3 domains.)
 
 ---
 
@@ -207,19 +207,19 @@ These standards define how every primal is built, packaged, and deployed.
 
 One binary per primal, multiple operational modes via subcommands. Professional CLI with `--help`, `--version`, and structured error messages. Every primal is a single executable named after itself.
 
-**Specification**: `ECOBIN_ARCHITECTURE_STANDARD.md` (consolidated — UniBin is a subset of ecoBin)
+**Specification**: `fossilRecord/wave150s_standards/ECOBIN_ARCHITECTURE_STANDARD.md` (consolidated — UniBin is a subset of ecoBin)
 
 ### ecoBin - Universal Portability Standard
 
 ecoBin = UniBin + Pure Rust + Cross-Platform. Zero C dependencies in application code, cross-compiles to any Rust target with a single `cargo build` command, platform-agnostic IPC with runtime transport discovery.
 
-**Specification**: `ECOBIN_ARCHITECTURE_STANDARD.md`
+**Specification**: `fossilRecord/wave150s_standards/ECOBIN_ARCHITECTURE_STANDARD.md`
 
 ### genomeBin - Autonomous Deployment Standard
 
 genomeBin = ecoBin + deployment wrapper. Self-extracting archive that auto-detects the system, installs the correct binary, configures services, and validates health. One command installs on any system with zero manual configuration.
 
-**Specification**: See `ECOBIN_ARCHITECTURE_STANDARD.md` (genomeBin section)
+**Specification**: See `fossilRecord/wave150s_standards/ECOBIN_ARCHITECTURE_STANDARD.md` (genomeBin section)
 
 ### The Evolutionary Ladder
 
@@ -241,13 +241,13 @@ All ecoBins are UniBins. All genomeBins are ecoBins. Each stage adds capability 
 
 JSON-RPC 2.0 over platform-agnostic transports. Capability-based discovery with zero cross-embedding. Every primal implements its own IPC independently - standards define WHAT, primals implement HOW.
 
-**Specification**: `CAPABILITY_WIRE_STANDARD.md` (IPC protocol consolidated here)
+**Specification**: `protocols/CAPABILITY_WIRE_STANDARD.md` (IPC protocol consolidated here)
 
 ### Universal IPC Standard
 
 Behavioral specification for multi-transport IPC. Each primal discovers the best transport at runtime: Unix sockets on Linux/macOS, abstract sockets on Android, named pipes on Windows, TCP as universal fallback. No shared IPC crate - each primal owns its communication code.
 
-**Specification**: `CAPABILITY_BASED_DISCOVERY_STANDARD.md`
+**Specification**: `protocols/CAPABILITY_BASED_DISCOVERY_STANDARD.md`
 
 ### BirdSong Protocol
 
@@ -259,7 +259,7 @@ Encrypted UDP discovery protocol for auto-trust within genetic lineages. Songbir
 
 Method names describe intent, not implementation: `crypto.sign`, `tls.handshake`, `storage.put`. Domain namespaces enable Neural API translation and isomorphic evolution across primals.
 
-**Specification**: `SEMANTIC_METHOD_NAMING_STANDARD.md`
+**Specification**: `protocols/SEMANTIC_METHOD_NAMING_STANDARD.md`
 
 ---
 
@@ -313,7 +313,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 - **Songbird + Songbird**: Cross-tower federation, multi-family routing
 
-**Detail**: See primal composition maps in `PRIMAL_REGISTRY.md`
+**Detail**: See primal composition maps in `compositions/PRIMAL_REGISTRY.md`
 
 ---
 
@@ -333,88 +333,98 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 
 ## Document Index
 
-### Start Here
+### Root (always at top level)
 - **`STANDARDS_AND_EXPECTATIONS.md`** — Single-document reference for all standards, expectations, and conventions
 - **`GLOSSARY.md`** — Definitive ecosystem terminology
-- **`GLACIAL_SHIFT_READINESS.md`** — Stadial entry criteria tracking
-- **`PRIMAL_REGISTRY.md`** — Authoritative catalog of every primal, its primitives, and its role
+- **`ORTHOGONAL_DIMENSIONS_REVIEW.md`** — Active dimensional review tool
 
-### Architecture
-- `ECOBIN_ARCHITECTURE_STANDARD.md` — UniBin/ecoBin/genomeBin portability standard
-- `PRIMAL_SPRING_GARDEN_TAXONOMY.md` — Primal / spring / garden / tool taxonomy
-- `DESKTOP_NUCLEUS_DEPLOYMENT.md` — Single-machine NUCLEUS deployment
-- `DISTRIBUTED_COVALENT_DEPLOYMENT.md` — Multi-gate compute architecture
-- `DEPLOYMENT_VALIDATION_STANDARD.md` — Deployment validation protocol
+### `foundations/` — Architectural Invariants (9 standards)
 
-### Sovereignty & Membrane
-- `K_DERM_TOPOLOGY_STANDARD.md` — Cell envelope model (layers, bonding, channels)
-- `BONDING_MODEL_STANDARD.md` — Organo-metallo-salt bonding model
-- `DIDERM_DOMAIN_ARCHITECTURE.md` — Domain trust barriers (`primals.eco` / `primal.eco` / `nestgate.io`)
-- `GATEHOUSE_DARKFOREST_STANDARD.md` — Drawbridge + Dark Forest demarcation
-- `SOVEREIGNTY_STANDARDS.md` — Calibrate → shadow → cutover protocol
-- `MEMBRANE_CHANNEL_ARCHITECTURE.md` — 3 channels + RustDesk
-- `REPO_MEMBRANE_BOUNDARY.md` — Inner/outer membrane repo classification
+Long-term architectural standards — rarely change.
 
-### Compositions & Routing
-- `COMPOSITION_ROUTING_STANDARD.md` — Live composition deployment (wildcard DNS, drawbridge, CAS)
-- `COMPOSITION_HEALTH_STANDARD.md` — Composition health JSON-RPC
-- `COMPOSITION_TICK_MODEL_STANDARD.md` — Temporal tick model for compositions
-- `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` — rhizoCrypt + loamSpine + sweetGrass wiring
+| Standard | Summary |
+|----------|---------|
+| `DIDERM_DOMAIN_ARCHITECTURE.md` | Domain trust barriers (`primals.eco` / `primal.eco` / `nestgate.io`) + sovereignty evolution roadmap |
+| `DARK_FOREST_GLACIAL_GATE_STANDARD.md` | 5 security invariants |
+| `K_DERM_TOPOLOGY_STANDARD.md` | Cell envelope model (layers, bonding, channels) |
+| `BONDING_MODEL_STANDARD.md` | Organo-metallo-salt bonding model |
+| `SOVEREIGNTY_STANDARDS.md` | Calibrate → shadow → cutover protocol |
+| `OVERWATCH_POSITION_STANDARD.md` | Floating coordination position |
+| `LICENSING_AND_COPYLEFT.md` | scyBorg copyleft framework |
+| `PRIMAL_SPRING_GARDEN_TAXONOMY.md` | Primal / spring / garden / tool taxonomy |
+| `SECRETS_AND_SEEDS_STANDARD.md` | Seed and credential management |
 
-### Communication & IPC
-- `SEMANTIC_METHOD_NAMING_STANDARD.md` — `domain.verb` API naming
-- `CAPABILITY_WIRE_STANDARD.md` — Capability-based wire format
-- `CAPABILITY_BASED_DISCOVERY_STANDARD.md` — Runtime capability discovery
-- `CAPABILITY_DOMAIN_REGISTRY.md` — Canonical domain namespace registry
-- `ECOSYSTEM_COMMUNICATION_STANDARD.md` — Three-layer coordination (git + impulses + braids)
-- `IMPULSE_POTENTIAL_STANDARD.md` — Inter-gate impulse/potential coordination
-- `CONTEXT_BRAID_STANDARD.md` — Ephemeral developer-state weaving
-- `WATERFALL_PATTERN.md` — Sovereign gate sync pattern
+### `protocols/` — Wire Protocols & IPC (10 standards)
 
-### Security & Crypto
-- `BTSP_PROTOCOL_STANDARD.md` — BearDog Trust Security Protocol
-- `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md` — Transport signal routing (3 tiers)
-- `PURE_RUST_CRYPTO_PURITY_STANDARD.md` — Zero C crypto dependencies
-- `SECRETS_AND_SEEDS_STANDARD.md` — Seed and credential management
-- `DARK_FOREST_GLACIAL_GATE_STANDARD.md` — 5 security invariants
-- `birdsong/` — BirdSong protocol, Dark Forest beacon genetics, Tower Atomic TLS
-- `btsp/` — BearDog technical stack
+Stable once shipped — wire formats, capability system, coordination patterns.
 
-### Gates & Teams
-- `GATE_SPRING_OWNERSHIP.md` — Canonical gate-spring routing
-- `GATE_TEAM_COORDINATION_MATRIX.md` — Team-gate-hardware assignment
-- `GATE_SETUP_STANDARD.md` — Gate setup, sync, resync protocol
-- `GATE_NUCLEUS_SYSTEMD_STANDARD.md` — systemd deployment standard
-- `MESH_DEPLOYMENT_STANDARD.md` — Multi-gate mesh handoff
-- `GRAPHENEGATE_BOOTSTRAP_STANDARD.md` — Android Dark Forest bootstrap
-- `OVERWATCH_POSITION_STANDARD.md` — Floating coordination position
-- `SPORE_OWNERSHIP_MATRIX.md` — Spore/gate ownership assignments
-- `heads/` — Auto-published gate status files
+| Standard | Summary |
+|----------|---------|
+| `BTSP_PROTOCOL_STANDARD.md` | BearDog Trust Security Protocol |
+| `RIBOCIPHER_TRANSPORT_SIGNAL_STANDARD.md` | Transport signal routing (3 tiers) |
+| `CAPABILITY_WIRE_STANDARD.md` | Capability-based wire format |
+| `CAPABILITY_BASED_DISCOVERY_STANDARD.md` | Runtime capability discovery |
+| `CAPABILITY_DOMAIN_REGISTRY.md` | Canonical domain namespace registry |
+| `SEMANTIC_METHOD_NAMING_STANDARD.md` | `domain.verb` API naming |
+| `IMPULSE_POTENTIAL_STANDARD.md` | Inter-gate impulse/potential coordination |
+| `CONTEXT_BRAID_STANDARD.md` | Ephemeral developer-state weaving |
+| `ECOSYSTEM_COMMUNICATION_STANDARD.md` | Three-layer coordination (git + impulses + braids) |
+| `PROVENANCE_TRIO_INTEGRATION_GUIDE.md` | rhizoCrypt + loamSpine + sweetGrass wiring |
 
-### Deployment & Operations
-- `PLASMIDBIN_PUSH_AUTOMATION_STANDARD.md` — Depot push pipeline
-- `CROSS_SPRING_COORDINATION_STANDARD.md` — Cross-spring data flow
-- `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` — Sovereign GPU compute
-- `WORKSPACE_DEPENDENCY_STANDARD.md` — Cargo workspace deps
-- `LICENSING_AND_COPYLEFT.md` — scyBorg copyleft framework
-- `provision/` — golgi provisioning scripts + Caddyfiles
-- `systemd/` — Service templates + cascade timers
-- `graphs/` — Declarative deploy graph TOMLs
+### `operations/` — Gate Deployment & Mesh Ops (12 standards)
+
+Evolve with infrastructure — deployment, ownership, gate operations.
+
+| Standard | Summary |
+|----------|---------|
+| `GATE_SETUP_STANDARD.md` | Gate setup, sync, resync protocol |
+| `GATE_NUCLEUS_SYSTEMD_STANDARD.md` | systemd deployment standard |
+| `GATEHOUSE_DARKFOREST_STANDARD.md` | Drawbridge + Dark Forest demarcation |
+| `GRAPHENEGATE_BOOTSTRAP_STANDARD.md` | Android Dark Forest bootstrap |
+| `MESH_DEPLOYMENT_STANDARD.md` | Multi-gate mesh handoff |
+| `DEPLOYMENT_VALIDATION_STANDARD.md` | Deployment validation protocol |
+| `DISTRIBUTED_COVALENT_DEPLOYMENT.md` | Multi-gate compute architecture |
+| `GATE_SPRING_OWNERSHIP.md` | Canonical gate-spring routing |
+| `GATE_TEAM_COORDINATION_MATRIX.md` | Team-gate-hardware assignment |
+| `REPO_MEMBRANE_BOUNDARY.md` | Inner/outer membrane repo classification |
+| `DISCOVERED_BY_STANDARD.md` | Discovery narrative standard |
+| `SPORE_OWNERSHIP_MATRIX.md` | Spore/gate ownership assignments |
+
+### `compositions/` — Composition Patterns (6 standards)
+
+Evolve with products — routing, health, tick models.
+
+| Standard | Summary |
+|----------|---------|
+| `COMPOSITION_ROUTING_STANDARD.md` | Live composition deployment (wildcard DNS, drawbridge, CAS) |
+| `COMPOSITION_HEALTH_STANDARD.md` | Composition health JSON-RPC |
+| `COMPOSITION_TICK_MODEL_STANDARD.md` | Temporal tick model for compositions |
+| `CROSS_SPRING_COORDINATION_STANDARD.md` | Cross-spring data flow |
+| `MEMBRANE_CHANNEL_ARCHITECTURE.md` | 3 channels + RustDesk |
+| `PRIMAL_REGISTRY.md` | Authoritative primal/spring catalog |
 
 ### Per-Domain Guidance
+- `birdsong/` — BirdSong protocol, Dark Forest beacon genetics, Tower Atomic TLS
+- `btsp/` — BearDog technical stack
 - `sporePrint/` — Content guide + spring evolution targets
 - `petaltongue/` — Integration docs (7 files)
 - `airspring/` — Composition guidance
 - `healthspring/` — Composition guidance
 - `compute-sharing/` — Sovereign compute sharing + workload definitions
 
+### Infrastructure
+- `provision/` — golgi provisioning scripts + Caddyfiles
+- `systemd/` — Service templates + cascade timers
+- `graphs/` — Declarative deploy graph TOMLs
+- `heads/` — Auto-published gate status files
+
 ### Handoffs
 - `handoffs/ECOSYSTEM_BLURB.md` — Current wave blurb (dissemination artifact)
 - `handoffs/ABG_JUPYTERHUB_ACCESS_GUIDE.md` — Collaborator access guide
 
 ### Fossil Record
-- `fossilRecord/` — All archived content: 4,100+ documents across Waves 34–138a
-- See `fossilRecord/wave138a_cleanup/README.md` for the latest cleanup manifest
+- `fossilRecord/` — All archived content: 4,100+ documents across Waves 34–150s
+- `fossilRecord/wave150s_standards/` — 8 fossilized standards (superseded or dimension-complete)
 
 ---
 
@@ -423,12 +433,12 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 If you are a new primal entering the ecosystem:
 
 1. **Read this document** to understand the ecosystem you are joining
-2. **Review PRIMAL_REGISTRY.md** to see what capabilities already exist
+2. **Review `compositions/PRIMAL_REGISTRY.md`** to see what capabilities already exist
 3. **Follow UniBin standard** from day one (single binary, subcommands)
 4. **Target ecoBin** (Pure Rust, zero C deps, cross-compilation)
-5. **Implement IPC** following `CAPABILITY_WIRE_STANDARD.md` (JSON-RPC 2.0)
+5. **Implement IPC** following `protocols/CAPABILITY_WIRE_STANDARD.md` (JSON-RPC 2.0)
 6. **Advertise capabilities** so biomeOS can discover and coordinate you
-7. **Register your primal** in PRIMAL_REGISTRY.md with your primitives
+7. **Register your primal** in `compositions/PRIMAL_REGISTRY.md` with your primitives
 8. **Get your face together** — your repo should be reviewable by any of the four external audiences in 5 minutes (see `STANDARDS_AND_EXPECTATIONS.md`)
 
 You do not need to know about other primals. You need to know what you can do, and how to tell the ecosystem about it.

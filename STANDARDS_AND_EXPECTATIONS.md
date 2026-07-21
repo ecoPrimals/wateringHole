@@ -3,23 +3,23 @@
 **Purpose**: Single-document reference for what ecoPrimals expects of every primal,
 spring, contributor, and session.  Read this first, read everything else second.
 
-**Last Updated**: May 31, 2026 (Wave 63+)
+**Last Updated**: July 21, 2026 (Wave 150s — standards reorganized into `foundations/`, `protocols/`, `operations/`, `compositions/`)
 
 ---
 
 ## Companion Documents
 
 - **`GLOSSARY.md`** — Every term defined (gate, primal, spring, atomic, niche, etc.)
-- **`GATE_SPRING_OWNERSHIP.md`** — Gate-spring routing SSOT: ownership, hardware profiles, covalent evolution path
+- **`operations/GATE_SPRING_OWNERSHIP.md`** — Gate-spring routing SSOT: ownership, hardware profiles, covalent evolution path
 - **`TARGETED_GUIDESTONE_STANDARD.md`** — Self-contained scientific artifact packaging (USB/ecoBin)
 - **`DERIVATION_ANCHORING_STANDARD.md`** — Zero Magic Numbers: all numeric thresholds must be formally derived and runtime-enforced
 - **`LITHOSPORE_USB_DEPLOYMENT.md`** — Spore taxonomy: ColdSpore → LiveSpore → lithoSpore
 - **`PSEUDOSPORE_STANDARD.md`** — (canonical: `gardens/lithoSpore/specs/`) Braid-first proof artifacts
-- **`PRIMAL_REGISTRY.md`** — Authoritative primal/spring version catalog
-- **`ECOSYSTEM_COMMUNICATION_STANDARD.md`** — Three-layer coordination model (git/impulses/context)
-- **`IMPULSE_POTENTIAL_STANDARD.md`** — Inter-gate action potentials (rootPulse/quorumSignal)
-- **`CONTEXT_BRAID_STANDARD.md`** — Ephemeral developer-state weaving
-- **`GATE_SETUP_STANDARD.md`** — Gate setup, sync, and resync
+- **`compositions/PRIMAL_REGISTRY.md`** — Authoritative primal/spring version catalog
+- **`protocols/ECOSYSTEM_COMMUNICATION_STANDARD.md`** — Three-layer coordination model (git/impulses/context)
+- **`protocols/IMPULSE_POTENTIAL_STANDARD.md`** — Inter-gate action potentials (rootPulse/quorumSignal)
+- **`protocols/CONTEXT_BRAID_STANDARD.md`** — Ephemeral developer-state weaving
+- **`operations/GATE_SETUP_STANDARD.md`** — Gate setup, sync, and resync
 
 ---
 
@@ -50,7 +50,7 @@ genomeBin (deployment)  → + Auto-detection, service integration, health monito
 | Standard | File | Status |
 |----------|------|--------|
 | UniBin | `UNIBIN_ARCHITECTURE_STANDARD.md` | Ecosystem Standard |
-| ecoBin | `ECOBIN_ARCHITECTURE_STANDARD.md` | Ecosystem Standard v3.0 |
+| ecoBin | `fossilRecord/wave150s_standards/ECOBIN_ARCHITECTURE_STANDARD.md` | Ecosystem Standard v3.0 (fossilized — stable since v3.0) |
 | genomeBin | `GENOMEBIN_ARCHITECTURE_STANDARD.md` | Ecosystem Standard |
 
 **Expectation**: Every primal is a single self-contained binary. No shared libraries,
@@ -78,11 +78,11 @@ binary to `plasmidBin/primals/{name}` (for primals) or `plasmidBin/springs/{name
 | Standard | File | Summary |
 |----------|------|---------|
 | Primal IPC Protocol v3.0 | `PRIMAL_IPC_PROTOCOL.md` | JSON-RPC 2.0 + tarpc, platform-agnostic transports, runtime discovery |
-| Semantic Method Naming | `SEMANTIC_METHOD_NAMING_STANDARD.md` | `domain.verb` method names (`crypto.sign`, `storage.put`) |
+| Semantic Method Naming | `protocols/SEMANTIC_METHOD_NAMING_STANDARD.md` | `domain.verb` method names (`crypto.sign`, `storage.put`) |
 | Cross-Spring Data Flow | `CROSS_SPRING_DATA_FLOW_STANDARD.md` | Time series exchange format via `capability.call` |
-| Ecosystem Communication | `ECOSYSTEM_COMMUNICATION_STANDARD.md` | Three-layer coordination: git (permanent) + impulses (events) + context braids (state) |
-| impulsePotential | `IMPULSE_POTENTIAL_STANDARD.md` | Inter-gate action potentials mapped to Neural API Triad (rP/qS/wF) |
-| Context Braids | `CONTEXT_BRAID_STANDARD.md` | Ephemeral developer-state weaving across the gate mesh |
+| Ecosystem Communication | `protocols/ECOSYSTEM_COMMUNICATION_STANDARD.md` | Three-layer coordination: git (permanent) + impulses (events) + context braids (state) |
+| impulsePotential | `protocols/IMPULSE_POTENTIAL_STANDARD.md` | Inter-gate action potentials mapped to Neural API Triad (rP/qS/wF) |
+| Context Braids | `protocols/CONTEXT_BRAID_STANDARD.md` | Ephemeral developer-state weaving across the gate mesh |
 
 **Expectation**: Primals never import each other's code. All coordination is via
 JSON-RPC messages over IPC. Each primal owns its IPC implementation — no shared
@@ -119,7 +119,7 @@ authorities. Encrypted payloads are unreadable to outsiders. Zero metadata leaka
 | GPU f64 Stability | `GPU_F64_NUMERICAL_STABILITY.md` | Lessons from hotSpring Paper 44 — precision tiers |
 | Numerical Stability Plan | `NUMERICAL_STABILITY_EVOLUTION_PLAN.md` | Fast AND safe math — fallback chains |
 | Sovereign Compute | `SOVEREIGN_COMPUTE_EVOLUTION.md` | Pure Rust GPU stack — WGSL→native, no CUDA SDK |
-| Pure Rust Stack | `PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` | Cross-primal sovereign compute guidance |
+| Pure Rust Stack | `fossilRecord/wave150s_standards/PURE_RUST_SOVEREIGN_STACK_GUIDANCE.md` | Cross-primal sovereign compute guidance (fossilized) |
 | Cross-Spring Shaders | `CROSS_SPRING_SHADER_EVOLUTION.md` | How springs collectively evolve barraCuda |
 | Spring Validation | `SPRING_VALIDATION_ASSIGNMENTS.md` | Each spring validates specific barraCuda primitives |
 
@@ -148,7 +148,7 @@ Every experiment gets a number, every check gets counted. No hand-waving.
 
 | Document | File | Summary |
 |----------|------|---------|
-| Primal Registry | `PRIMAL_REGISTRY.md` | Authoritative catalog of every primal + primitives |
+| Primal Registry | `compositions/PRIMAL_REGISTRY.md` | Authoritative catalog of every primal + primitives |
 | Inter-Primal Interactions | `INTER_PRIMAL_INTERACTIONS.md` | What works today, what's wired, what's next |
 | Lysogeny Protocol | `LYSOGENY_PROTOCOL.md` | Area denial through open prior art (AGPL-3.0) |
 | scyBorg Licensing | `SCYBORG_PROVENANCE_TRIO_GUIDANCE.md` | AGPL + ORC + CC-BY-SA ecosystem licensing |

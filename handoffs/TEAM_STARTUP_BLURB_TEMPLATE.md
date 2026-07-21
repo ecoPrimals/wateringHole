@@ -11,8 +11,8 @@ a new team session for any primal, garden, protist, or spring.
 > Review `specs/` and our codebase and docs at root, and the docs found at our
 > parent `ecoPrimals/infra/wateringHole/` for inter-primal discussions and
 > standards. Start with `wateringHole/STANDARDS_AND_EXPECTATIONS.md`,
-> `ECOBIN_ARCHITECTURE_STANDARD.md`, `SEMANTIC_METHOD_NAMING_STANDARD.md`,
-> `LICENSING_AND_COPYLEFT.md`, and `handoffs/ECOSYSTEM_BLURB.md` for current
+> `fossilRecord/wave150s_standards/ECOBIN_ARCHITECTURE_STANDARD.md`, `protocols/SEMANTIC_METHOD_NAMING_STANDARD.md`,
+> `foundations/LICENSING_AND_COPYLEFT.md`, and `handoffs/ECOSYSTEM_BLURB.md` for current
 > ecosystem posture. Review primalSpring guidance in wateringHole/ as it
 > enables parallel evolution.
 >
@@ -33,8 +33,8 @@ a new team session for any primal, garden, protist, or spring.
 > - JSON-RPC AND tarpc first: all IPC is `json-rpc` wire + `tarpc` service trait.
 >   No raw TCP, no HTTP REST between primals.
 > - uniBin and ecoBin compliant: single-binary architecture per
->   `ECOBIN_ARCHITECTURE_STANDARD.md`
-> - Semantic method naming per `SEMANTIC_METHOD_NAMING_STANDARD.md`
+>   `fossilRecord/wave150s_standards/ECOBIN_ARCHITECTURE_STANDARD.md`
+> - Semantic method naming per `protocols/SEMANTIC_METHOD_NAMING_STANDARD.md`
 > - Zero-copy where possible: `Bytes`, `&[u8]`, avoid unnecessary clones
 > - Silicon Atheism: platform differences use trait-based abstraction
 >   (see `petal-tongue-platform` reference), NOT `#[cfg]` exclusion
@@ -55,7 +55,7 @@ a new team session for any primal, garden, protist, or spring.
 > - License: AGPL-3.0 / scyBorg triple-license (check `Cargo.toml` + `LICENSE`)
 > - No telemetry, no third-party analytics, no cloud lock-in
 > - Human dignity: no dark patterns, no surveillance, no data exfiltration
-> - Pure Rust crypto where possible (see `PURE_RUST_CRYPTO_PURITY_STANDARD.md`)
+> - Pure Rust crypto where possible (see `fossilRecord/wave150s_standards/PURE_RUST_CRYPTO_PURITY_STANDARD.md`)
 >
 > **What have we not completed?** Report all gaps, mocks standing in for real
 > integrations, TODOs, deep debt, and upstream blockers. Prioritize as P0/P1/P2.

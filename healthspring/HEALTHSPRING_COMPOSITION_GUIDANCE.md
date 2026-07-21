@@ -40,7 +40,7 @@ healthSpring is a health science compute primal. It owns the `health` domain and
 
 | Capability | Description |
 |-----------|-------------|
-| `composition.health_health` | Composition health per `COMPOSITION_HEALTH_STANDARD.md` (returns `healthy`, `deploy_graph`, `subsystems`) |
+| `composition.health_health` | Composition health per `compositions/COMPOSITION_HEALTH_STANDARD.md` (returns `healthy`, `deploy_graph`, `subsystems`) |
 | `capability.list` | Advertise all capabilities with operation dependencies and cost estimates |
 | `compute.offload` | Delegate GPU-eligible work to toadStool via Node Atomic |
 | `compute.shader_compile` | Coordinate shader compilation via coralReef |

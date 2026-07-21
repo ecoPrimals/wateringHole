@@ -22,8 +22,8 @@ membrane) and Forgejo (inner membrane, `git.primals.eco`):
 layer (golgiBody Phase A). GitHub is the trailing outer membrane mirror. Gates
 push to Forgejo via SSH; GitHub receives post-push mirrors via the K-Derm
 diderm relay chain. WaterFall sync (`membrane temporal.cascade`) pulls from
-the periplasm. See `WATERFALL_PATTERN.md` for the full sync model and
-`REPO_MEMBRANE_BOUNDARY.md` for per-repo classification: inner-only, trailing
+the periplasm. See `fossilRecord/wave150s_standards/WATERFALL_PATTERN.md` for the full sync model and
+`operations/REPO_MEMBRANE_BOUNDARY.md` for per-repo classification: inner-only, trailing
 mirror, or outer-only.
 
 **Why three orgs?** Primals build capabilities. Springs validate those capabilities
@@ -146,7 +146,7 @@ Each spring has:
 - A faculty anchor (a professor whose publications drive the science)
 - Gap discovery and wateringHole handoff authorship
 
-Springs are the gen3 layer (see `PRIMAL_SPRING_GARDEN_TAXONOMY.md`). They
+Springs are the gen3 layer (see `foundations/PRIMAL_SPRING_GARDEN_TAXONOMY.md`). They
 were initially standalone binaries validating science; they now compose FROM
 primals and validate that the composition works for their domain.
 
@@ -164,7 +164,7 @@ degradation when optional primals are absent, and product-level deploy graphs.
 Examples: esotericWebb (CRPG engine), blueFish (PFAS analytical chemistry),
 helixVision (genomics platform), initioChem (CompChem FEL explorer).
 
-See `PRIMAL_SPRING_GARDEN_TAXONOMY.md` for the full taxonomy and co-evolution
+See `foundations/PRIMAL_SPRING_GARDEN_TAXONOMY.md` for the full taxonomy and co-evolution
 contract between primals, springs, and gardens.
 
 ### Tool
@@ -181,7 +181,7 @@ infrastructure-only), or `sort-after/` (pending canonical location).
 Examples: bingoCube (crypto commitment), benchScale (lab substrate), agentReagents
 (VM image builder), rustChip (NPU characterization), sourDough (scaffolding).
 
-See `PRIMAL_SPRING_GARDEN_TAXONOMY.md` § Tools (gen2.5) for the full definition,
+See `foundations/PRIMAL_SPRING_GARDEN_TAXONOMY.md` § Tools (gen2.5) for the full definition,
 applicable compliance tiers, and ownership boundaries.
 
 ### Atomics
@@ -514,7 +514,7 @@ with pointer stub → push both repos**.
 A **wave** is a named coordination pulse across the ecosystem — a point
 where multiple primals and springs evolve together in response to a shared
 signal. Waves are numbered sequentially (Wave 47, 48, 49, 50, 51…) and
-tracked in `GLACIAL_SHIFT_READINESS.md`.
+tracked in `fossilRecord/wave150s_standards/GLACIAL_SHIFT_READINESS.md`.
 
 A wave is not a release. It is a *synchronization event* — a moment when
 the ecosystem converges on a shared standard, absorbs upstream changes,
@@ -633,7 +633,7 @@ Weak (extracellular) → bearDog TLS termination
 Only one gate runs gatehouse mode per deployment (sporeGate for the current mesh).
 All other gates are purely darkforest — zero exposed ports.
 
-See `GATEHOUSE_DARKFOREST_STANDARD.md`, `BONDING_MODEL_STANDARD.md`.
+See `operations/GATEHOUSE_DARKFOREST_STANDARD.md`, `foundations/BONDING_MODEL_STANDARD.md`.
 
 ### Darkforest
 
@@ -647,7 +647,7 @@ outside enters without passing through the gatehouse's bond escalation. The Dark
 Forest principle means everything starts untrusted. Trust is earned through
 progressively stronger authentication at each K-Derm layer crossing.
 
-See `GATEHOUSE_DARKFOREST_STANDARD.md`, `DARK_FOREST_GLACIAL_GATE_STANDARD.md`.
+See `operations/GATEHOUSE_DARKFOREST_STANDARD.md`, `foundations/DARK_FOREST_GLACIAL_GATE_STANDARD.md`.
 
 ### Drawbridge
 
@@ -671,7 +671,7 @@ SONGBIRD_DRAWBRIDGE_ROUTES=/hub=jupyter,/api=inference
 → remote capability.call discovers and routes to this drawbridge
 ```
 
-See `GATEHOUSE_DARKFOREST_STANDARD.md` §Drawbridge, §Capability advertisement.
+See `operations/GATEHOUSE_DARKFOREST_STANDARD.md` §Drawbridge, §Capability advertisement.
 
 ### Bond Escalation
 
@@ -694,7 +694,7 @@ traffic gaining trust), degradation is outward (sovereignty weakening as content
 moves toward the extracellular). The gatehouse brokers inward escalation. The
 VPS diderm envelope enforces outward degradation.
 
-See `BONDING_MODEL_STANDARD.md` §Bonding Escalation Path.
+See `foundations/BONDING_MODEL_STANDARD.md` §Bonding Escalation Path.
 
 ### Endosymbiosis
 
@@ -846,7 +846,7 @@ Current state (May 23, 2026):
 cellMembrane is operationally on GitHub Private and should migrate to
 Forgejo-only when covalent gates host Forgejo on sovereign infrastructure. It contains
 sensitive configuration (SSH keys, API tokens, deployment scripts) that
-MUST NOT leak to public repos. See `REPO_MEMBRANE_BOUNDARY.md` and
+MUST NOT leak to public repos. See `operations/REPO_MEMBRANE_BOUNDARY.md` and
 `CELLMEMBRANE_FIELDMOUSE_DEPLOYMENT.md`.
 
 ### fieldMouse
@@ -1120,7 +1120,7 @@ the validator assumes the network is hostile.
 | **cellMembrane** | Selective permeability layer — private ops repo deploying fieldMouse Tower to VPS for relay/TLS/content channels |
 | **fieldMouse** | Minimal deployable ecoPrimals — smallest atomic/chimera for embedded/sensor/edge niches |
 | **guideStone** | Verification class — ecoBin quality grade certifying reproducible, self-proving, reference-traceable output |
-| **Spore Ownership Matrix** | Three-way ownership split: domain science (springs), spore envelope (lithoSpore), NUCLEUS gateway (biomeOS). See `SPORE_OWNERSHIP_MATRIX.md` |
+| **Spore Ownership Matrix** | Three-way ownership split: domain science (springs), spore envelope (lithoSpore), NUCLEUS gateway (biomeOS). See `operations/SPORE_OWNERSHIP_MATRIX.md` |
 | **primalSpring** | Coordination spring — validates ecosystem composition, graph execution, emergent systems, bonding |
 | **BYOB** | Bring Your Own Binaries — gen4 products consume pre-built primal binaries, never source |
 | **Niche YAML** | YAML metadata declaring a composition's organisms, interactions, and customization options |

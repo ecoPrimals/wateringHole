@@ -226,13 +226,13 @@ adb shell plasmidbin bootstrap --from-graphene \
 
 | Standard | Relation |
 |----------|----------|
-| `DARK_FOREST_GLACIAL_GATE.md` | grapheneGate enforces all 5 pillars on mobile |
+| `../foundations/DARK_FOREST_GLACIAL_GATE_STANDARD.md` | grapheneGate enforces all 5 pillars on mobile |
 | `DARK_FOREST_BEACON_GENETICS_STANDARD.md` | Two-seed model: beacon (family) + lineage (device) |
-| `BTSP_PROTOCOL_STANDARD.md` | All grapheneGate sessions use BTSP |
-| `K_DERM_TOPOLOGY_STANDARD.md` | grapheneGate operates at plasma membrane boundary |
+| `../protocols/BTSP_PROTOCOL_STANDARD.md` | All grapheneGate sessions use BTSP |
+| `../foundations/K_DERM_TOPOLOGY_STANDARD.md` | grapheneGate operates at plasma membrane boundary |
 | `GATE_SETUP_STANDARD.md` | grapheneGate is a specialized gate; follows onboarding flow |
 | `DISTRIBUTED_COVALENT_DEPLOYMENT.md` | grapheneGate extends the WAN covalent pattern |
-| `ECOBIN_ARCHITECTURE_STANDARD.md` | ecoBin v2.0 abstract-socket already validated |
+| `../fossilRecord/wave150s_standards/ECOBIN_ARCHITECTURE_STANDARD.md` | ecoBin v2.0 abstract-socket already validated |
 
 ---
 
