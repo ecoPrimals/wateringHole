@@ -1,234 +1,201 @@
-# ecoPrimals Ecosystem Blurb — Wave 150d
+# ecoPrimals Ecosystem Blurb — Wave 150u
 
-**Date**: Jul 18, 2026 10:20 EDT | **Wave**: 150d | **From**: eastGate overwatch
-**Posture**: **PUBLIC + SOVEREIGN. 6-GATE MESH. DEPLOYMENT CHAIN TRACED.**
+**Date**: Jul 21, 2026 14:10 EDT | **Wave**: 150u | **From**: eastGate overwatch
+**Posture**: **CASCADE CONVERGENCE. VENDOR ELIMINATED. TOWER PARITY SPEC. CREDENTIAL STORE SHIPPED.**
 
-**This wave**: Deep investigation of deployment chain. Subdomain standard
-formalized (`prefix.primals.eco`). songBird's role as inner membrane port
-solver documented. Cloudflare outer membrane firebreak pattern confirmed.
-DNSSEC status clarified. Routing fixes specified with exact architectural
-context. Standards updated.
+**This wave**: Full cascade across 43 repos — 15 with incoming evolution pulled and
+converged. Major threads: **nestGate vendor elimination COMPLETE** (vendor/ dir removed,
+BLAKE3 crypto consolidated, 27 upstream TODOs gone). **bearDog CredentialStore trait
+shipped** (InMemory + FileVault backends, `secrets.*` JSON-RPC, squirrel handoff issued —
+Silicon Atheism evolving edge resolved). **songBird Tower Atomic convergence brief** —
+parity benchmark spec defined, `mesh.enroll` LIVE with BTSP-HMAC proof. **toadStool
+S337-S339** deep debt — hot-path `Cow<str>`, 3 structural splits, Rust 1.96 clippy sweep
+(251 files, 0 warnings). **lithoSpore Validation Data Stream standard v1.0** — contract
+for all spring teams. **footPrint** Lansing Scuffle GeoJSON + data layer primal abstraction
+spec. **loamSpine** doc trim (757→207L). **esotericWebb** IPC refactor (<800L). Standards
+reorganized (37 → 4 dirs). DNSSEC 3/3. 43/43 repos converged.
 
 ---
 
-## 1. DEPLOYMENT CHAIN — How Traffic Reaches Services
+## 1. DEPLOYMENT CHAIN
 
 ```
-User → Cloudflare DNS (*.primals.eco wildcard → golgiBody VPS)
-  → Cloudflare CDN (outer membrane firebreak — absorbs hostile traffic)
-    → Caddy on golgiBody (TLS termination, Host-header routing)
-      → reverse_proxy over WireGuard mesh to target gate
-        → songBird drawbridge :7780 (capability → port resolution)
-          → Local service (footPrint:8090, esotericWebb:8090, etc.)
+User → Cloudflare DNS (*.primals.eco wildcard → golgiBody 157.230.3.183)
+  → Caddy on golgiBody (TLS, Host-header routing)
+    → WireGuard mesh → target gate → service
 ```
 
-**songBird = inner membrane port solver.** Drawbridge maps paths to
-capabilities (`SONGBIRD_DRAWBRIDGE_ROUTES`), resolves capabilities to URLs
-(`SONGBIRD_PROXY_ROUTES`), and proxies external "weak bond" APIs through a
-domain-validated allowlist. Production optimization: Caddy handles external
-HTTPS proxying directly via songBird's `infra/caddy/` snippets.
+**Cloudflare status**: All records are **DNS-only** (grey cloud, not proxied).
+Wildcard `*.primals.eco` covers all new subdomains automatically — no DNS
+changes needed for new services. **DNSSEC enabled** (3/3 domains validated — Jul 21).
 
-**Cloudflare = outer membrane firebreak.** Wildcard `*.primals.eco` resolves
-to golgiBody. No DNS changes needed for new subdomains — only a Caddy block.
-Cloudflare absorbs DDoS and bot traffic. This is the **target architecture**
-(diderm model), not transitional.
+**URL Standard**: `prefix.primals.eco` subdomain. Root → `sporeprint.primals.eco`.
 
-**URL Standard**: `prefix.primals.eco` (subdomain) is REQUIRED for all
-compositions. Path-based routing (`primals.eco/path/`) is prohibited.
-Root domain (`primals.eco`) redirects to `sporeprint.primals.eco`.
+**Three-Domain Model**: `primals.eco` (intra-membrane) | `primal.eco` (inner) | `nestgate.io` (data service)
 
-**Three-Domain Model**:
-- `primals.eco` — **intra-membrane** (shared ecosystem: compositions, depot, forge, docs)
-- `primal.eco` — **inner membrane** (personal sovereign: mesh, ceremonies, private compositions)
-- `nestgate.io` — **data service point** (CAS, federated APIs, weak bond data ingestion)
+**Git Relay**: Forgejo (inner membrane, `git.primals.eco`) → push mirror → GitHub (outer membrane).
+Gates push to Forgejo only. golgiBody relays to GitHub on every commit. 43/43 repos mirrored.
 
----
+### Canonical Workspace Layout (ALL GATES MUST MATCH)
 
-## 2. LIVE SYSTEMS — Actual State (Operator-Verified Jul 18)
+| Forgejo/GitHub Org | Local Dir | Role | Count |
+|--------------------|-----------|------|-------|
+| ecoPrimals | `primals/` | Core primals (IPC daemons + agnostic tools) | 15 |
+| sporeGarden | `gardens/` | Compositions, infrastructure products | 9 |
+| syntheticChemistry | `springs/` | Springs, validation, chemistry, experiments | 10 |
+| protoKarya | `protists/` | Sovereign products (user-facing apps) | 2 |
+| ecoPrimals + synChem | `infra/` | Shared infrastructure (non-primal, non-product) | 7 |
 
-### footPrint → `footprint.primals.eco` — **DEPLOYED, NOT EXTERNALLY FUNCTIONAL**
+### Gate Bootstrap
 
-**Observed**: UI shell loads but map tiles gray/blank, geocoder non-functional.
+**USB enrollment** (new gates — offline bootstrap):
 
-| Issue | Fix | Owner |
-|-------|-----|-------|
-| Caddy routes `/api/*` but proxy is at `/ext` | Route ALL `footprint.primals.eco` → footPrint:8090 (let Express handle everything) | cellMembrane |
-| Catch-all → petalTongue:8080 | Change catch-all upstream to footPrint:8090 | cellMembrane |
-| Map tiles blank (CSP or Esri) | Add CSP `img-src` for `*.arcgisonline.com`, `*.tile.openstreetmap.org` | cellMembrane |
-| songBird Caddy snippets not imported | Import `footprint-gis-proxy.Caddyfile` for production tile proxying | sporeGate ops |
+```bash
+# 1. Stage USB on eastGate (or any builder gate)
+cd infra/plasmidBin
+./stage_usb.sh --dest /mnt/usb/ecoprimals --composition full --enroll --verify
 
-**Simplest fix**: Replace the three sub-routes with a single `reverse_proxy sporeGate:8090`. footPrint's Express server already handles static files, `/ext` proxy, `/api/*`, and would only need petalTongue for `/ws`.
+# 2. Edit enroll/gate-template.toml on USB with gate name + IP
+# 3. Plug USB into target, run:
+sudo ./gate-usb-bootstrap.sh
 
-### esotericWebb → `webb.primals.eco` — **404, CADDY MISSING**
+# Script installs WireGuard, configures mesh, deploys primal binaries,
+# installs + configures RustDesk pointing at relay (remote.primals.eco),
+# prints RustDesk ID + WG pubkey for operator.
+#
+# 4. Add WG peer on golgiBody (printed by script)
+# 5. RustDesk in, Cursor agent runs: membrane gate.enroll <name>
+# If automation fails: see enroll/RELAY_MANUAL.md
+```
 
-**Observed**: `primals.eco/webb/` returns sporePrint 404.
+**Manual clone** (for gates already on the mesh):
 
-| Issue | Fix | Owner |
-|-------|-----|-------|
-| No Caddy vhost for `webb.primals.eco` | Add `webb.primals.eco { reverse_proxy 10.13.37.6:8090 }` to golgiBody | sporeGate ops |
-| cellMembrane uses path-based (`/webb/`) | Change `ESOTERICWEBB_PATH` to `WEBB_DOMAIN = "webb.primals.eco"` | cellMembrane |
-| No systemd persistence | `systemctl enable --now esotericwebb-server` on flockGate | sporeGate ops |
-
-### Verified live surfaces
-
-| Surface | URL | Gate | Status |
-|---------|-----|------|--------|
-| sporePrint | `sporeprint.primals.eco` | golgiBody | NEEDS MIGRATION (currently on root `primals.eco`) |
-| TOPO-VIS | `live.primals.eco` | sporeGate | LIVE |
-| JupyterHub | `lab.primals.eco` | ironGate | LIVE |
-| Forgejo | `git.primals.eco` | golgiBody | LIVE |
-| Depot | `depot.primals.eco` | golgiBody | LIVE |
-
----
-
-## 3. DNSSEC + SOVEREIGNTY STATUS
-
-| Domain | Layer | DNS Authority | DNSSEC | Status |
-|--------|-------|--------------|--------|--------|
-| `primal.eco` | Inner membrane | knot-dns (sovereign) | **ENABLED** | Fully sovereign |
-| `nestgate.io` | Content organelle | knot-dns (sovereign) | **ENABLED** | Fully sovereign |
-| `primals.eco` | Outer membrane | Cloudflare (wildcard) | **NOT DONE** | P2 — enable via Cloudflare or NS cutover |
-
-**NS architecture**: Porkbun registrar. `primal.eco` + `nestgate.io` point to
-`ns1.primals.eco` / `ns2.primals.eco` (sovereign knot-dns on golgiBody).
-`primals.eco` points to Cloudflare nameservers. knot-dns runs with DNSSEC
-enabled on VPS; the `primals.eco` NS cutover to sovereign is pending registrar
-action but NOT required (outer membrane MAY use Cloudflare per diderm model).
-
-**DNSSEC options for `primals.eco`**:
-1. Enable DNSSEC through Cloudflare (quick — API-supported) — preserves CDN/DDoS
-2. Cutover NS to sovereign knot-dns — full sovereignty but loses Cloudflare protection
-3. Recommended: option 1 first (outer membrane MAY use commercial per diderm standard)
+```bash
+mkdir -p ~/Development/ecoPrimals/{primals,gardens,springs,protists,infra}
+for repo in barraCuda bearDog biomeOS bingoCube coralReef loamSpine \
+  nestGate petalTongue rhizoCrypt skunkBat songBird sourDough \
+  squirrel sweetGrass toadStool; do
+  git clone ssh://git@git.primals.eco:2222/ecoPrimals/$repo.git primals/$repo
+done
+# Repeat for gardens/ (sporeGarden org), springs/ (syntheticChemistry),
+# protists/ (protoKarya), infra/ (mixed orgs — see ecosystem_manifest.toml)
+```
 
 ---
 
-## 4. PRIMAL DEMAND SIGNAL
+## 2. RUNTIME — What's Actually Running Where
 
-### P0 — Deployment Broken (blocks external users)
+Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
+
+| Gate | Zone | Running Services | Status |
+|------|------|-----------------|--------|
+| **golgiBody** | VPS | Forgejo, Caddy TLS, RustDesk relay, sporePrint, depot, push mirrors | **LIVE** |
+| **sporeGate** | backbone | 13/13 NUCLEUS primals, footPrint, TOPO-VIS, NAT/DHCP/DNS, builder | **LIVE** |
+| **ironGate** | house2 | 13/13 NUCLEUS, JupyterHub, songBird drawbridge, GPU compute | **LIVE** |
+| **flockGate** | WAN | esotericWebb V22, Tower atomic | **LIVE** |
+| **grapheneGate** | mobile | Tower (bearDog + songBird + skunkBat) | **LIVE** |
+| **eastGate** | backbone | Dev workstation — primals run ad-hoc for testing | **DEV** |
+| **northGate** | house1 | RustDesk running. WireGuard active (.8). No primals deployed yet | **ENROLLED** |
+
+### Live Surfaces (WAN-validated Jul 21, 2026)
+
+| Surface | URL | HTTP | Gate |
+|---------|-----|------|------|
+| sporePrint | `sporeprint.primals.eco` | **200** (340ms) | golgiBody |
+| footPrint | `footprint.primals.eco` | **200** (368ms) | sporeGate |
+| TOPO-VIS | `live.primals.eco` | **200** (442ms) | sporeGate |
+| Forgejo | `git.primals.eco` | **200** (332ms) | golgiBody |
+| JupyterHub | `lab.primals.eco` | **401** (275ms) — auth expected | ironGate |
+| esotericWebb | `webb.primals.eco` | **200** (338ms) | flockGate |
+
+---
+
+## 3. OPEN ISSUES + TEAM ACTIONS
+
+### Code Quality (Wave 150o audit — details in ORTHOGONAL_DIMENSIONS_REVIEW.md)
+
+- **`.unwrap()` hotspots**: Top 5 — barraCuda (5,446), biomeOS (4,165), songBird (4,068),
+  toadStool (3,657), nestGate (2,427*). 14 repos with 100+ production unwraps.
+- **TODO markers**: 9 project TODOs (bingoCube 5, fossilRecord 3, rustChip 1).
+  nestGate's 27 are vendored upstream — un-vendor when `rustls-rustcrypto` ships past alpha.
+- **`unsafe`**: Concentrated in GPU primals, science FFI, crypto. See scorecard for counts.
+
+### Team Actions
 
 | Need | Owner | Detail |
 |------|-------|--------|
-| Fix footPrint Caddy routing | cellMembrane | Route all `footprint.primals.eco` → sporeGate:8090. Add CSP for tile domains. Import songBird Caddy GIS snippets. |
-| Create `webb.primals.eco` Caddy vhost | cellMembrane + ops | Subdomain standard. `reverse_proxy 10.13.37.6:8090` on golgiBody. |
-| Change cellMembrane esotericWebb constant | cellMembrane | `ESOTERICWEBB_PATH → WEBB_DOMAIN = "webb.primals.eco"` (subdomain standard) |
-| Enable esotericWebb systemd | sporeGate ops | `systemctl enable --now esotericwebb-server` on flockGate |
-| Migrate sporePrint to `sporeprint.primals.eco` | cellMembrane + ops | Add `SPOREPRINT_DOMAIN` constant, Caddy vhost, root redirect |
+| Deploy petalTongue v1.7+ | **sporeGate team** | Activates scene graph + WASM WebGL |
+| cellMembrane unwrap audit | cellMembrane team | 456 production unwraps |
+| ~~nestGate vendor elimination~~ | **DONE** | vendor/ removed, BLAKE3 consolidated (150u) |
+| HSM → Android Keystore | bearDog team | grapheneGate backend |
+| ~~Credential store trait~~ | **SHIPPED** | bearDog CredentialStore + FileVault, squirrel handoff (150u) |
+| `primal-transport` crate | ecosystem | Extract transport abstractions |
 
-### P1 — Inter-Primal Wiring
+### Operator Actions
 
-| Need | Owner | Consumer | Detail |
-|------|-------|----------|--------|
-| `PROJECTS_PATH` CAS wiring | nestGate | footPrint | Content-addressed project serving |
-| `WS_PATH` agent bridge | petalTongue | footPrint | WebSocket for real-time agent comms |
-| `null` params on health | squirrel | esotericWebb | Webb workaround: sends `{}` |
-| BTSP → `gate.enroll` | songBird | cellMembrane | Last enrollment automation primitive |
-
-### P1 — Inter-Primal Wiring (blocks deeper composition)
-
-| Need | Owner | Consumer | Detail |
-|------|-------|----------|--------|
-| `PROJECTS_PATH` CAS wiring | nestGate | footPrint | Content-addressed project serving |
-| `WS_PATH` agent bridge | petalTongue | footPrint | WebSocket for real-time agent comms |
-| `null` params on health | squirrel | esotericWebb | Webb workaround: sends `{}` |
-| BTSP → `gate.enroll` | songBird | cellMembrane | Last enrollment automation primitive |
-
-### P2 — Ecosystem Quality + Pipeline
-
-| Need | Owner | Detail |
-|------|-------|--------|
-| HSM → Android Keystore | bearDog | grapheneGate mobile credential backend |
-| Credential store trait | bearDog + squirrel | Silicon Atheism Phase 2 completion |
-| Health monitoring trait | ecosystem | Not procfs-hardcoded |
-| `primal-transport` crate | ecosystem | Subsystem convergence publication |
-| primalSpring CAC scenario | primalSpring | FRAGO issued, not implemented |
-| primalSpring `wan-deploy` | primalSpring | 1/5 protoKarya scenarios remaining |
-
-### P2 — pseudoSpore Pipeline
-
-| Need | Owner | Detail |
-|------|-------|--------|
-| `validation.json` per spore | 6 spring teams | Module validation results for promotion |
-| Fix groundSpring `bingoCube/nautilus` dep | groundSpring | `cargo test` fails |
-| Add `scope.toml` to each spring | spring teams | Self-describing artifact manifest |
-| Bash → Rust orchestration | spring teams | 114+ shell scripts across springs |
+| Action | Where | Status |
+|--------|-------|--------|
+| Consider Cloudflare proxy (orange cloud) | Cloudflare dashboard | **PENDING** |
+| Verify push mirrors working | Spot-check GitHub repos | **PENDING** |
 
 ---
 
-## 3. STRATEGIC GOALS
+## 4. STRATEGIC GOALS
 
-### NOW (this session / next cascade)
+### NOW
 
-- **Fix deployment chain**: footPrint Caddy routing + CSP + songBird snippets
-- **Create `webb.primals.eco`**: Caddy vhost + systemd persistence
-- **Migrate sporePrint** to `sporeprint.primals.eco`, root domain redirect
-- **Evolve cellMembrane**: subdomain constants for all compositions
-- **Enable Cloudflare DNSSEC** for `primals.eco` (API-supported)
+- **bingoCube on primals.eco** — **UNBLOCKED** by petalTongue WASM WebGL (Wave 150r).
+  `render_color_grid_webgl` export ready. Needs bingoCube team to consume it.
+- **Lansing Scuffle → sporePrint** — transplant campus vision into public pages
+  (consulting.md, companies.md, scuffle.md, thermal.md — see `SPOREPRINT_LANSING_SCUFFLE_BLURB.md`)
+- **southGate USB enrollment** — USB staged, IP allocated (.9), plug and bootstrap
 
 ### NEAR TERM (next 2-4 weeks)
 
-- **Full NUCLEUS composition**: all primals interacting through live products
-- **nestGate CAS + petalTongue WS**: complete footPrint's backend composition
-- **songBird BTSP**: fully automated mesh enrollment end-to-end
-- **pseudoSpore validation**: promote 6 pending spores from PENDING → COMPLETE
-- **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
+- **Tower Atomic parity assessment** — benchmark Tower (bearDog + songBird + skunkBat)
+  against WireGuard on LAN mesh. Throughput and latency must meet WG baseline before cutover.
+- **sporePrint primal pipeline design** — architect Zola replacement: petalTongue rendering
+  + nestGate CAS content + cellMembrane serving. WASM WebGL pipeline is the enabler.
+- **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph + WASM WebGL pipeline
+- **pseudoSpore validation**: promote 6 pending spores
+- **cellMembrane unwrap audit** — 456 production unwraps
 - **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
-- **`primal.eco` inner membrane separation**: fully independent identity
 
 ### FUTURE (quarter horizon)
 
-- **tideGlass composition**: computational chemistry product (Phase 0)
+- **rootPulse design**: sovereign version control over nestGate CAS + Provenance Trio
+  (rhizoCrypt lineage, loamSpine ledger, sweetGrass attribution) — Forgejo replacement path
+- **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
+- **tideGlass composition**: computational chemistry product (shelved)
 - **primal-transport crate**: publish shared transport abstraction
 - **SHOW_HN readiness**: rubric, narrative, demo path
-- **Exotic depot architectures**: riscv64, armv7, s390x (validated, not shipping)
-- **NS cutover for primals.eco**: sovereign DNS if Cloudflare exits (optional)
-- **fieldGate recovery**: hardware surgery (dead CMOS)
-- **biomeGate recovery**: kernel recovery
+- **`primal.eco` inner membrane separation**
+
+### SOVEREIGNTY EVOLUTION (Diderm Roadmap — Wave 150s)
+
+| Tier | Tool | Primal Path | Status |
+|------|------|-------------|--------|
+| **REPLACE** | WireGuard | Tower Atomic (bearDog + songBird + skunkBat) | Phase 1 — parity benchmark needed |
+| **REPLACE** | Zola | petalTongue + nestGate CAS + cellMembrane | Phase 1 — WASM WebGL pipeline enables |
+| **LATE-STAGE** | Forgejo | rootPulse (nestGate CAS + Provenance Trio) | Phase 2 — post-rootPulse |
+| **FIREBREAK** | Cloudflare | N/A — outer membrane by design | Stays |
+| **FIREBREAK** | Caddy | cellMembrane generates config | Stays |
+| **FIREBREAK** | RustDesk | AGPL-3.0 compliant; learn-from-leverage | Stays |
+| **FIREBREAK** | JupyterHub | Interface only; compute = inner membrane | Stays (repositioned) |
 
 ---
 
-## 4. DIMENSIONAL SCORECARD (Wave 150a)
+## 5. ECOSYSTEM HEALTH SUMMARY (Wave 150o audit)
 
-| Project | Tests | Clippy | Fmt | Debt | Unsafe | >800L | Prod unwrap |
-|---------|-------|--------|-----|------|--------|-------|-------------|
-| cellMembrane | 1,092 | 0 | 0 | 0 | 0 | 0 | 0 |
-| esotericWebb | 472 | 0 | 0 | 0 | 0 | 0 | 0 |
-| footPrint | 466 | 0 | — | 0 | — | 0 | — |
-| songBird | 14,322 | swept | swept | 0 | 0 | swept | swept |
-| lithoSpore | 242 | 0 | 0 | 0 | 0 | 0 | 0 |
-| loamSpine | 1,702 | 0 | 0 | 0 | 0 | 0 | 0 |
-| rhizoCrypt | 1,878 | 0 | 0 | 0 | 0 | 0 | 0 |
-| nestGate | audit | 0 | 0 | 0 | 0 | audit | audit |
-| primalSpring | 1,203 | **0** | 0 | 0 | 0 | 0 | 0 |
-| sporePrint | 289 | — | — | 0 | — | 0 | — |
+| Category | Primals (15) | Gardens (9) | Springs+Protists (12) | Infra (7) | Total |
+|----------|-------------|------------|----------------------|-----------|-------|
+| `#[test]` attrs | 87,379 | 2,183 | 14,405 | 1,209 | **~105K** |
+| Project TODOs | 5 (bingoCube) | 0 | 1 (rustChip) | 3 (fossilRecord) | **9** |
 
-**Ecosystem**: 0 debt markers, 0 unsafe code, 0 mocks in production.
+nestGate's 27 TODO markers are vendored upstream (`rustls-webpki`/`rustls-rustcrypto`) —
+0 project debt. Team action: un-vendor when `rustls-rustcrypto` ships past alpha.
 
----
-
-## 5. COMPLETED MILESTONES
-
-| Milestone | Wave |
-|-----------|------|
-| Silicon Atheism Phase 2 (14/14 + lithoSpore) | 145a |
-| Content-Addressed Convergence (6/6) | 143b |
-| Glacial Shift (8/8) ALL CLEAR | 137b |
-| `gate.enroll` fully automated (7 phases) | 147a |
-| lithoSpore ALL CLEAR (USB round-trip, ring dropped) | 150a |
-| pseudoSpore: 7 springs emitted + scope.toml + spore-status | 150d |
-| pseudoSpore: populate-validation + promote-spore pipeline complete | 150o |
-| pseudoSpore: init-validation + scope.toml interop (modules alias, spring fields) | 150q |
-| pseudoSpore: lifecycle integration tests (emit→init→populate→promote→status) | 150t |
-| pseudoSpore: validation data stream standard + convergence handoff issued | 150t |
-| pseudoSpore pipeline: 7 springs emitted | 150a |
-| footPrint code complete (466 tests, responsive, a11y) — routing P0 | 150c |
-| esotericWebb V18 LIVE on flockGate (demo scenario) | 149a |
-| E2E Tutorial Standard adopted (both products) | 149a |
-| Dimensional review sweep (15 teams responded) | 150a |
-| sweetGrass `braid.create/query` CONFIRMED | 150a |
-| bearDog crypto JSON-RPC sigs CONFIRMED | 150a |
-| GAP-036 + GAP-038 closed ecosystem-wide | 150a |
-| songBird drawbridge + /jsonrpc + discovery | 148a |
-| Depot operational (59+ binaries, 4 arch) | 142a |
+*Full per-repo scorecard (tests, unwraps, unsafe, >800L files) in `ORTHOGONAL_DIMENSIONS_REVIEW.md`.*
 
 ---
 
@@ -236,49 +203,80 @@ action but NOT required (outer membrane MAY use Cloudflare per diderm model).
 
 ```
 golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, Cloudflare firebreak
-  ├─ sporeGate (10.13.37.2) — builder, footPrint:8090 [routing broken]
-  ├─ eastGate  (10.13.37.5) — orchestrator, overwatch
-  ├─ flockGate (10.13.37.6) — esotericWebb:8090 [Caddy missing]
-  ├─ ironGate  (10.13.37.7) — compute, lithoSpore [ALL CLEAR]
-  └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled]
+  ├─ sporeGate (10.13.37.2) — builder, footPrint, NAT/DHCP [FULL NUCLEUS]
+  ├─ eastGate  (10.13.37.5) — orchestrator, overwatch, dev [FULL]
+  ├─ flockGate (10.13.37.6) — esotericWebb [V22 LIVE]
+  ├─ ironGate  (10.13.37.7) — compute, JupyterHub, GPU [FULL NUCLEUS]
+  └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled, no primals yet]
 
-Offline: westGate (cold storage), fieldGate (dead CMOS),
-         strandGate (pending enrollment), biomeGate (kernel recovery)
+Pending USB enrollment:
+  └─ southGate (10.13.37.9) — house2, full NUCLEUS [USB READY]
+
+Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pending)
 ```
 
-| Port | Service | Gate | Protocol |
-|------|---------|------|----------|
-| 8080 | nestGate / petalTongue | sporeGate | HTTP (static + WS) |
-| 8090 | footPrint | sporeGate | HTTP (API, behind drawbridge) |
-| 8090 | esotericWebb | flockGate | HTTP (direct serve) |
+**WG mesh health** (Jul 21, 2026): All 5 active peers healthy. 6/6 surfaces 200.
+
+**WG IP allocation**:
+.1=golgiBody, .2=sporeGate, .5=eastGate, .6=flockGate, .7=ironGate,
+.8=northGate, .9=southGate (pending). Available: .3, .4, .10+
 
 ---
 
-## 8. ORTHOGONAL DIMENSIONS SUMMARY (12/12 reviewed)
+## 7. RECENT MILESTONES
+
+| Milestone | Wave |
+|-----------|------|
+| Cascade convergence — vendor eliminated, credential store, Tower parity spec | **150u** |
+| Standards reorganized — 37 → 4 dirs, root 4 docs, full dimensional review | **150t** |
+| Sovereignty Evolution Roadmap — 3-tier classification, DNSSEC 3/3 | **150s** |
+| petalTongue WASM WebGL — browser-side 3D, bingoCube unblocked | **150r** |
+| nestGate vendor analysis — 27 TODOs = vendored upstream, 0 debt | **150q** |
+| Lansing Scuffle + nestGate unwrap audit + lithoSpore pipeline | **150p** |
+| Full dimensional review — 43 repos audited, scorecard refreshed | **150o** |
+| USB gate enrollment + southGate allocated | **150n** |
+| Workspace reorg + 4-org Forgejo (43/43 mirrored) | **150l-m** |
+| Forgejo-first (43/43) + push mirrors (sync_on_commit) | **150j-k** |
+
+*Earlier milestones (fossilized): scene unification (150i), NUCLEUS wired (150h),
+Silicon Atheism P2 14/14 (145a), CAC 6/6 (143b), Depot (142a), Glacial Shift 8/8 (137b).*
+
+---
+
+## 8. ORTHOGONAL DIMENSIONS
+
+### Active Dimensions
 
 | Dim | Area | Status | Open items |
 |-----|------|--------|------------|
-| 1 | Temporal | GREEN | — |
-| 2 | Ecological | GREEN | — |
-| 3 | Hardware | AMBER | 4 gates offline (not blocking) |
-| 4 | Sovereignty | AMBER | `primals.eco` DNSSEC not enabled |
-| 5 | Depot | GREEN | Exotic arch (P3) |
-| 6 | Public Surface | **RED** | footPrint routing broken, webb Caddy missing |
-| 7 | Glacial Shift | GREEN | SHOW_HN rubric (P3) |
-| 8 | Compositions | **RED** | Neither product externally functional |
-| 9 | Documentation | GREEN | Standards updated (routing, CSP) |
-| 10 | Cascade | GREEN | songBird BTSP (P1) |
-| 11 | CAC | GREEN | primalSpring scenario (P2) |
-| 12 | Silicon Atheism | GREEN | Credential trait, health trait (P2) |
+| 1 | Temporal | GREEN | wave.toml current, 0 impulses, 5 handoffs |
+| 2 | Ecological | GREEN | 0 project TODOs (15/15 primals); nestGate vendor cleanup is team action |
+| 3 | Hardware | AMBER | 4 gates offline, southGate pending USB enrollment |
+| 4 | Sovereignty | GREEN | DNSSEC 3/3; evolution roadmap: WG→Tower (P1), Zola→primal (P1), Forgejo→rootPulse (P2) |
+| 5 | Public Surface | GREEN | 6/6 surfaces healthy (webb recovered) |
+| 6 | Compositions | GREEN | pseudoSpore pipeline maturing, 6 validation.json pending |
+| 7 | Documentation | GREEN | Standards reorganized (4 dirs), 5 handoffs, Scuffle blurb |
+| 8 | Campus/Physical | GREEN | Vision documented; sporePrint pages pending |
+
+### Fossilized Dimensions (complete, not re-checked)
+
+| Dim | Area | Fossilized | Completed |
+|-----|------|-----------|-----------|
+| F1 | Glacial Shift | 150p | 137b — 8/8 ALL CLEAR |
+| F2 | CAC | 150p | 143b — 6/6 layers complete |
+| F3 | Silicon Atheism | 150p | 145a — Phase 1+2 complete (14/14) |
+| F4 | Depot / Build | 150p | 150n — fully operational |
+| F5 | Cascade Pipeline | 150p | 150k — 43/43 converged |
+
+**Summary**: 8 active (7 GREEN / 1 AMBER hardware) + 5 fossilized (all GREEN).
 
 ---
 
-*Wave 150d: Three-domain model refined. `primals.eco` = intra-membrane (shared
-ecosystem), `primal.eco` = inner membrane (personal sovereign), `nestgate.io` =
-data service point. Root domain redirects to `sporeprint.primals.eco`.
-All compositions use `prefix.primals.eco` subdomains. Deployment chain traced
-end-to-end: Cloudflare → Caddy → songBird drawbridge → service. songBird =
-inner membrane port solver. Cloudflare = outer firebreak (target architecture).
-DNSSEC: sovereign domains enabled, `primals.eco` P2. Both products deployed
-but not externally functional — 5 P0 routing/ops items issued. Standards
-updated: DIDERM_DOMAIN_ARCHITECTURE, COMPOSITION_ROUTING_STANDARD.*
+*Wave 150u: Cascade convergence — 15 repos pulled with incoming evolution. nestGate vendor
+elimination DONE (vendor/ removed). bearDog CredentialStore shipped (squirrel handoff).
+songBird Tower Atomic parity benchmark specified. toadStool S337-S339 deep debt (hot-path
+Cow, structural splits, Rust 1.96 clippy 251 files). lithoSpore Validation Data Stream v1.0.
+footPrint Lansing Scuffle GeoJSON + data layer primal abstraction. loamSpine doc trim.
+esotericWebb IPC refactor. Standards reorganized (150t). 43/43 repos converged at parity.
+Next: Tower parity benchmark execution, sporePrint primal pipeline, pseudoSpore promotions,
+southGate enrollment, esotericWebb pseudoSpore explorer.*

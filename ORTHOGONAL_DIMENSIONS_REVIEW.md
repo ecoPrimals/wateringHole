@@ -13,7 +13,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 150t)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 150u)
 - [x] Gate heads published (`heads/*.toml`)
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] Active impulses: 0 (26+ fossilized)
@@ -35,7 +35,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
 - [x] Format drift RESOLVED — all repos clean
 - [x] nestGate: deep unwrap audit complete (Session 121 — 0 prod unwrap)
-- [ ] nestGate vendor elimination: un-vendor when upstream `rustls-rustcrypto` ships past `0.0.2-alpha` with webpki ≥ 0.103.12 and no `ring` dep
+- [x] nestGate vendor elimination: **COMPLETE** (Wave 150u) — vendor/ removed, BLAKE3 crypto consolidated, 27 upstream markers gone
 - [ ] Production `.unwrap()` hotspots — ecosystem-wide counts high (broader grep). Top: barraCuda (5,446), biomeOS (4,165), songBird (4,068), toadStool (3,657)
 
 ## 3. Hardware / Topology
@@ -101,7 +101,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 7. Documentation / Fossil Record
 
-- [x] Blurb reflects current wave (150t) — trimmed from 435→275 lines
+- [x] Blurb reflects current wave (150u) — cascade convergence, vendor eliminated
 - [x] Active handoffs: 5 (blurb, E2E standard, template, ABG guide, Lansing Scuffle blurb)
 - [x] Active AARs: 0 (15 fossilized in `aars/fossils/`, ironGate 150o moved Wave 150s)
 - [x] Active impulses: 0
@@ -208,6 +208,6 @@ No cyclic divergence. WaterFall sync pattern formalized.
 
 ---
 
-*Last used*: Wave 150t (Jul 21, 2026)
+*Last used*: Wave 150u (Jul 21, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
