@@ -1,38 +1,46 @@
 # primalSpring AAR — Wave 150u: Tower Atomic Parity Scenario
 
 **Date**: 2026-07-22 | **Gate**: eastGate | **Version**: v0.9.42
-**Commit**: `1ab0bfea` | **Status**: STRUCTURAL VALIDATION COMPLETE
+**Commit**: `3de00e77` | **Status**: CONVERGENCE BRIEF INTEGRATED
 
 ---
 
 ## What Was Done
 
 primalSpring shipped the **Tower Atomic Parity Benchmark** scenario (item #3a
-from the Wave 150u team actions). This validates structural readiness for the
-WireGuard → Tower Atomic sovereignty cutover.
+from the Wave 150u team actions), then evolved it to integrate the full
+**songBird Parity Convergence Brief** (Wave 150t).
 
-### New Scenario: `tower-atomic-parity`
+### Scenario: `tower-atomic-parity` (evolved)
 
 | Property | Value |
 |----------|-------|
 | Track | Evolution |
 | Tier | Rust |
-| Checks | 21 (5 phases) |
+| Checks | 29 (6 phases) |
 | Result | ALL PASS |
 
-**Phase breakdown:**
+**Phase breakdown (updated per convergence brief):**
 
-1. **Composition primals** — bearDog BTSP auth + negotiate, songBird relay +
-   connect, skunkBat IDS/anomaly, Tower composition tier (5 signals), bootstrap
-   signal (two-phase cold-start)
-2. **Relay capabilities** — mesh.enroll/init (BTSP-HMAC proof), path finding,
-   peer roster, relay publish, BTSP escalation enforcement on relay methods
-3. **Benchmark topology** — ≥2 LAN peers with WG addresses, backbone zone peer
-   (eastGate/sporeGate), VPS hub (.1) for WAN relay, cross-zone peer (house2)
-4. **Parity spec** — latency targets (<5ms LAN, <50ms WAN), throughput targets
-   (>800 Mbps LAN, >50 Mbps WAN), tower.health signal for monitoring
-5. **Credential store** — secrets.* capability present (CredentialStore shipped
-   150u), btsp.server.status for runtime BTSP health
+1. **Tower Atomic stack** — bearDog crypto (Ed25519 + X25519 + ChaCha20-Poly1305),
+   songBird transport (relay + connect + peers), skunkBat protocol negotiation,
+   Tower composition tier, cold-start bootstrap signal
+2. **Transport layer** — 5-tier NAT traversal (direct→STUN→relay→TURN→tunnel),
+   BeaconMesh peer discovery, TURN relay (RFC 5766), drawbridge HTTP bridge,
+   BTSP encrypted framing enforcement
+3. **HMAC enrollment protocol** — mesh.enroll/init (LIVE), HMAC verification
+   chain (btsp.handshake + negotiate), btsp.server.status health, ≥6 gate roster
+4. **Benchmark topology** — LAN pair (sporeGate↔eastGate backbone), VPS hub
+   (golgiBody .1 TURN relay), WAN peer (flockGate)
+5. **Relative parity targets** (key change — per convergence brief):
+   - Throughput: ≥80% of WG baseline (not absolute Mbps)
+   - Latency: ≤2x WG RTT (WG ~0.3ms LAN → Tower ≤0.6ms)
+   - Connection setup: ≤500ms (vs WG ~50ms — 10x budget)
+   - Reconnect: ≤2s mesh re-discovery (WG is stateless/instant)
+   - CPU idle: ≤1% (WG ~0%)
+   - CPU saturated: ≤20% (WG ~5%)
+6. **Convergence gate** — CredentialStore shipped, mesh.announce for shadow mode,
+   capabilities_query for pre-activation check, Phase 0 confirmed
 
 ---
 
@@ -95,6 +103,15 @@ Once #3b and #3c report results, primalSpring will ship:
 - Updated sovereignty-roadmap scenario with benchmark PASS/FAIL gate
 
 ---
+
+## Upstream Gaps Tracked
+
+| Gap | Owner | Status |
+|-----|-------|--------|
+| `enrollment.verify` endpoint | bearDog (P1) | PENDING — needed for HMAC proof delegation |
+| `songbird benchmark` harness | songBird (P2) | TODO — throughput measurement tooling |
+| TURN relay deployment | ops/golgiBody (P2) | systemd unit ready, needs deploy |
+| `btsp.server.export_keys` | bearDog (P2) | Per-session key derivation for perf testing |
 
 ## Current Metrics
 
