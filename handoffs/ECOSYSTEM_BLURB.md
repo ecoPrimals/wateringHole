@@ -128,7 +128,7 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 | 3c | WAN benchmark — sporeGate peer | sporeGate team | **P1** | **READY** — Tower 3/3 LIVE, WG baseline 38ms, AAR filed |
 | 3d | **TURN relay deploy on golgiBody** | golgiBody ops / songBird | **P0** | **BLOCKER** — code complete, needs systemd unit |
 | 3e | **Benchmark harness** (`songbird benchmark`) | songBird (eastGate) | **P1** | **BLOCKER** — CLI not yet built |
-| 3f | LAN benchmark peer (Phase 2) | ironGate team | **P1** | Deferred — hw down |
+| 3f | LAN benchmark (sporeGate↔eastGate) | sporeGate + eastGate | **P1** | READY — same backbone LAN |
 | 3g | WAN latency target recalibration | primalSpring (eastGate) | **P3** | WG=68ms 2-hop, spec says <50ms |
 | 4 | Deploy petalTongue v1.7+ to flockGate | sporeGate ops | **P1** | Binary in depot |
 | 5 | Lansing Scuffle pages + primal pipeline | sporePrint (flockGate) | **P1** | Blurb issued |

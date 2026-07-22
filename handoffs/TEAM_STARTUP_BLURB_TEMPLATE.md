@@ -215,11 +215,11 @@ a new team session for any primal, garden, protist, or spring.
 >    - Compare against WireGuard WAN baseline on same path
 >    - Report: `TOWER_WAN_PARITY_RESULTS.md` in wateringHole handoffs
 >
-> 6. When ironGate comes back online, execute LAN parity benchmark:
->    - sporeGate (.2) ↔ eastGate (.5) on 1Gbps backbone
->    - Throughput: target >800 Mbps
->    - Latency: target <5ms RTT
->    - Compare against WireGuard LAN baseline
+> 6. Execute LAN parity benchmark (sporeGate ↔ eastGate — same backbone):
+>    - sporeGate (.2) ↔ eastGate (.5) on 1Gbps backbone LAN
+>    - Throughput: target ≥ WG baseline * 0.8x
+>    - Latency: target ≤ WG baseline * 1.5x
+>    - Compare against WireGuard LAN baseline on same link
 >    - Report: `TOWER_LAN_PARITY_RESULTS.md` in wateringHole handoffs
 >
 > **Parity spec** (must meet or exceed WG baseline):
@@ -238,7 +238,7 @@ a new team session for any primal, garden, protist, or spring.
 > WAN benchmark (NOW):
 >   sporeGate (.2) ←→ golgiBody TURN (.1) ←→ flockGate (.6)
 >
-> LAN benchmark (when ironGate returns):
+> LAN benchmark (READY NOW — same backbone):
 >   sporeGate (.2) ←→ Tower relay ←→ eastGate (.5)
 > ```
 >
@@ -431,9 +431,12 @@ a new team session for any primal, garden, protist, or spring.
 >
 > **Topology** (what you're enabling):
 > ```
-> WAN benchmark path (both teams READY, waiting on relay):
+> WAN benchmark (both gates READY, waiting on relay):
 >   sporeGate (.2) ←→ golgiBody TURN (.1) ←→ flockGate (.6)
 >                     ↑ YOU DEPLOY THIS
+>
+> LAN benchmark (READY NOW — same backbone):
+>   sporeGate (.2) ←→ Tower relay ←→ eastGate (.5)
 > ```
 >
 > **WAN latency targets** (relative to WG baseline, not absolute):
