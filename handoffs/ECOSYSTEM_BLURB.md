@@ -1,19 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 150v
 
-**Date**: Jul 22, 2026 07:20 EDT | **Wave**: 150v | **From**: eastGate overwatch
-**Posture**: **TOWER ATOMIC LIVE. STRUCTURAL 21/21 GREEN. WAN-FIRST BENCHMARK SPINNING UP.**
-
-**This wave**: **All 3 Tower Atomic primals evolved toward parity**. **bearDog**: deep debt
-pass — `enrollment.verify` endpoint shipped (HMAC proof for `mesh.enroll`), crypto throughput
-benchmark (`criterion`, 8 payload sizes, ChaCha20+Ed25519+X25519+HKDF+HMAC), `PerformanceAnalyzer`
-refactored, gateway isolation, orphan tests removed (2,277 LOC), 34 GiB cache reclaimed.
-**skunkBat**: Tower Atomic bond-type cipher enforcement — `BondType` (Covalent/Metallic/Ionic)
-now enforces minimum cipher in `btsp.negotiate`, `BTSP_PROTOCOL_VERSION` 1.0, fallback behavior,
-platform consolidation. **songBird**: v0.2.1-wave152 deep debt sweep — `security.rs` 761L split
-into module tree (`birdsong_provider`, `relay_authority`, `mock`), `production.rs` 754→370L (tests
-extracted), `virtual_relay.rs` 753→553L, 8 dead deps removed, 5 hardcoded literals→capability-based.
-sporeGate + flockGate AARs integrated. LAN benchmark: sporeGate↔eastGate (same backbone, READY NOW).
-43/43 repos converged.
+**Date**: Jul 22, 2026 11:40 EDT | **Wave**: 150v | **From**: eastGate overwatch
+**Posture**: **TOWER ATOMIC PARITY PIPELINE. 3/3 PRIMALS EVOLVED. GATES READY. TWO BLOCKERS.**
 
 ---
 
@@ -25,279 +13,158 @@ User → Cloudflare DNS (*.primals.eco wildcard → golgiBody 157.230.3.183)
     → WireGuard mesh → target gate → service
 ```
 
-**Cloudflare status**: All records are **DNS-only** (grey cloud, not proxied).
-Wildcard `*.primals.eco` covers all new subdomains automatically — no DNS
-changes needed for new services. **DNSSEC enabled** (3/3 domains validated — Jul 21).
+**Cloudflare**: DNS-only (grey cloud). Wildcard `*.primals.eco`. **DNSSEC 3/3** domains.
+**Three-Domain Model**: `primals.eco` (intra) | `primal.eco` (inner) | `nestgate.io` (data)
+**Git Relay**: Forgejo → push mirror → GitHub. 43/43 repos mirrored.
 
-**URL Standard**: `prefix.primals.eco` subdomain. Root → `sporeprint.primals.eco`.
+### Workspace Layout
 
-**Three-Domain Model**: `primals.eco` (intra-membrane) | `primal.eco` (inner) | `nestgate.io` (data service)
-
-**Git Relay**: Forgejo (inner membrane, `git.primals.eco`) → push mirror → GitHub (outer membrane).
-Gates push to Forgejo only. golgiBody relays to GitHub on every commit. 43/43 repos mirrored.
-
-### Canonical Workspace Layout (ALL GATES MUST MATCH)
-
-| Forgejo/GitHub Org | Local Dir | Role | Count |
-|--------------------|-----------|------|-------|
-| ecoPrimals | `primals/` | Core primals (IPC daemons + agnostic tools) | 15 |
-| sporeGarden | `gardens/` | Compositions, infrastructure products | 9 |
-| syntheticChemistry | `springs/` | Springs, validation, chemistry, experiments | 10 |
-| protoKarya | `protists/` | Sovereign products (user-facing apps) | 2 |
-| ecoPrimals + synChem | `infra/` | Shared infrastructure (non-primal, non-product) | 7 |
-
-### Gate Bootstrap
-
-**USB enrollment** (new gates — offline bootstrap):
-
-```bash
-# 1. Stage USB on eastGate (or any builder gate)
-cd infra/plasmidBin
-./stage_usb.sh --dest /mnt/usb/ecoprimals --composition full --enroll --verify
-
-# 2. Edit enroll/gate-template.toml on USB with gate name + IP
-# 3. Plug USB into target, run:
-sudo ./gate-usb-bootstrap.sh
-
-# Script installs WireGuard, configures mesh, deploys primal binaries,
-# installs + configures RustDesk pointing at relay (remote.primals.eco),
-# prints RustDesk ID + WG pubkey for operator.
-#
-# 4. Add WG peer on golgiBody (printed by script)
-# 5. RustDesk in, Cursor agent runs: membrane gate.enroll <name>
-# If automation fails: see enroll/RELAY_MANUAL.md
-```
-
-**Manual clone** (for gates already on the mesh):
-
-```bash
-mkdir -p ~/Development/ecoPrimals/{primals,gardens,springs,protists,infra}
-for repo in barraCuda bearDog biomeOS bingoCube coralReef loamSpine \
-  nestGate petalTongue rhizoCrypt skunkBat songBird sourDough \
-  squirrel sweetGrass toadStool; do
-  git clone ssh://git@git.primals.eco:2222/ecoPrimals/$repo.git primals/$repo
-done
-# Repeat for gardens/ (sporeGarden org), springs/ (syntheticChemistry),
-# protists/ (protoKarya), infra/ (mixed orgs — see ecosystem_manifest.toml)
-```
+| Org | Dir | Count |
+|-----|-----|-------|
+| ecoPrimals | `primals/` | 15 |
+| sporeGarden | `gardens/` | 9 |
+| syntheticChemistry | `springs/` | 10 |
+| protoKarya | `protists/` | 2 |
+| mixed | `infra/` | 7 |
 
 ---
 
-## 2. RUNTIME — What's Actually Running Where
+## 2. RUNTIME
 
-Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
-
-| Gate | Zone | Running Services | Status |
-|------|------|-----------------|--------|
-| **golgiBody** | VPS | Forgejo, Caddy TLS, RustDesk relay, sporePrint, depot, push mirrors | **LIVE** |
-| **sporeGate** | backbone | 13/13 NUCLEUS, footPrint, TOPO-VIS, NAT/DHCP/DNS, Tower 3/3, primalSpring | **LIVE** |
-| **ironGate** | house2 | 13/13 NUCLEUS, JupyterHub, songBird drawbridge, GPU compute | **DOWN** (hw) |
-| **flockGate** | WAN | esotericWebb V22, Tower 3/3 (since Jul 16), primalSpring | **LIVE** |
+| Gate | Zone | Services | Status |
+|------|------|----------|--------|
+| **golgiBody** | VPS | Forgejo, Caddy, RustDesk relay, sporePrint, depot | **LIVE** |
+| **sporeGate** | backbone | 13/13 NUCLEUS, footPrint, Tower 3/3, primalSpring | **LIVE** |
+| **flockGate** | WAN | esotericWebb V22, Tower 3/3, primalSpring | **LIVE** |
 | **grapheneGate** | mobile | Tower (bearDog + songBird + skunkBat) | **LIVE** |
-| **eastGate** | backbone | Dev workstation — primals run ad-hoc for testing | **DEV** |
-| **northGate** | house1 | RustDesk running. WireGuard active (.8). No primals deployed yet | **ENROLLED** |
+| **eastGate** | backbone | Dev workstation, overwatch | **DEV** |
+| **northGate** | house1 | RustDesk + WireGuard (.8) | **ENROLLED** |
+| **ironGate** | house2 | 13/13 NUCLEUS, JupyterHub, GPU | **DOWN** (hw) |
 
-### Live Surfaces (WAN-validated Jul 21, 2026)
-
-| Surface | URL | HTTP | Gate |
-|---------|-----|------|------|
-| sporePrint | `sporeprint.primals.eco` | **200** (340ms) | golgiBody |
-| footPrint | `footprint.primals.eco` | **200** (368ms) | sporeGate |
-| TOPO-VIS | `live.primals.eco` | **200** (442ms) | sporeGate |
-| Forgejo | `git.primals.eco` | **200** (332ms) | golgiBody |
-| JupyterHub | `lab.primals.eco` | **401** (275ms) — auth expected | ironGate |
-| esotericWebb | `webb.primals.eco` | **200** (338ms) | flockGate |
+**Surfaces**: 6/6 healthy (sporePrint, footPrint, TOPO-VIS, Forgejo, JupyterHub, esotericWebb).
 
 ---
 
-## 3. OPEN ISSUES + TEAM ACTIONS
+## 3. REMAINING WORK — BY TEAM
 
-### Code Quality (Wave 150o audit — details in ORTHOGONAL_DIMENSIONS_REVIEW.md)
+### P0 — BLOCKERS (unblock Tower Atomic benchmark)
 
-- **`.unwrap()` methodology corrected**: grep over-counts `#[cfg(test)]` module bodies.
-  Canonical: `cargo clippy -- -W clippy::unwrap_used`. Confirmed **0 prod unwraps**:
-  nestGate, loamSpine, toadStool, esotericWebb, cellMembrane. Remaining primals need audit.
-- **TODO markers**: 9 project TODOs (bingoCube 5, fossilRecord 3, rustChip 1).
-  nestGate's 27 are vendored upstream — un-vendor when `rustls-rustcrypto` ships past alpha.
-- **`unsafe`**: Concentrated in GPU primals, science FFI, crypto. See scorecard for counts.
+| # | Need | Owner | Detail |
+|---|------|-------|--------|
+| 1 | **Deploy TURN relay on golgiBody** | songBird (eastGate) + golgiBody ops | `songbird relay` code complete. Needs systemd unit on VPS. Unblocks WAN benchmark. |
+| 2 | **Build benchmark harness** | songBird (eastGate) | `songbird benchmark --mode tower-atomic/wireguard --peer <gate>`. JSON output for primalSpring. Any tractable first solution. |
 
-### Team Actions (Wave 150u — full blurbs in `WAVE150U_TEAM_EVOLUTION_BLURBS.md`)
+### P1 — Tower Atomic Parity
 
-| # | Need | Owner | Pri | Status |
-|---|------|-------|-----|--------|
-| 1 | Android Keystore backend + grapheneGate test | bearDog (southGate) | **P1** | NEW |
-| 2 | CredentialStore integration via `secrets.*` | squirrel (eastGate) | **P1** | Handoff issued |
-| 3a | Tower parity structural scenario | primalSpring (eastGate) | **P1** | **DONE** — 21/21 checks, AAR filed |
-| 3b | WAN benchmark — flockGate peer | flockGate team | **P1** | **READY** — Tower 3/3 LIVE, WG baseline 31ms, AAR filed |
-| 3c | WAN benchmark — sporeGate peer | sporeGate team | **P1** | **READY** — Tower 3/3 LIVE, WG baseline 38ms, AAR filed |
-| 3d | **TURN relay deploy on golgiBody** | golgiBody ops / songBird | **P0** | **BLOCKER** — code complete, needs systemd unit |
-| 3e | **Benchmark harness** (`songbird benchmark`) | songBird (eastGate) | **P1** | **BLOCKER** — CLI not yet built |
-| 3f | LAN benchmark (sporeGate↔eastGate) | sporeGate + eastGate | **P1** | READY — same backbone LAN |
-| 3g | WAN latency target recalibration | primalSpring (eastGate) | **P3** | WG=68ms 2-hop, spec says <50ms |
-| 4 | Deploy petalTongue v1.7+ to flockGate | sporeGate ops | **P1** | Binary in depot |
-| 5 | Lansing Scuffle pages + primal pipeline | sporePrint (flockGate) | **P1** | Blurb issued |
-| 6 | ~~cellMembrane unwrap audit~~ | **RESOLVED** | — | 0 prod unwraps (false positive) |
-| 7 | Promote 6 pending pseudoSpores | lithoSpore (strandGate) | **P2** | Stream std v1.0 |
-| 8 | bingoCube WASM WebGL widget | bingoCube (eastGate) | **P2** | Unblocked (150r) |
-| 9 | footPrint declarative source registry | footPrint (flockGate) | **P2** | Spec committed |
-| 10 | pseudoSpore Explorer prototype | esotericWebb (ironGate) | **P3** | Concept |
-| — | ~~nestGate vendor elimination~~ | **DONE** | — | vendor/ removed (150u) |
-| — | ~~Credential store trait~~ | **SHIPPED** | — | FileVault + secrets.* (150u) |
+| # | Need | Owner | Detail |
+|---|------|-------|--------|
+| 3 | LAN parity benchmark | sporeGate + eastGate | sporeGate (.2) ↔ eastGate (.5), same backbone. **READY NOW** — blocked on #2 (harness). |
+| 4 | WAN parity benchmark | sporeGate + flockGate | sporeGate (.2) → golgiBody TURN (.1) → flockGate (.6). Blocked on #1 + #2. |
+| 5 | Live-tier scenario | primalSpring (eastGate) | `s_tower_atomic_parity_live` — ships after benchmark results. Structural (21/21) already GREEN. |
+| 6 | WAN latency target | primalSpring (eastGate) | WG=68ms on 2-hop. Redefine as "Tower ≤ WG * 1.5x" not absolute <50ms. |
 
-### Operator Actions
+**Parity philosophy**: Initial goal is WireGuard parity — any tractable first solution.
+WG has years of dev time on us. We match first, then evolve past. Parity is the floor,
+not the ceiling. Targets are relative to WG baseline, not absolute.
 
-| Action | Where | Status |
-|--------|-------|--------|
-| southGate USB enrollment | eastGate → house2 | **P1** — USB staged, .9 allocated |
-| strandGate enrollment | eastGate → strandGate | **P1** — dual EPYC, 256GB, pending |
-| Consider Cloudflare proxy (orange cloud) | Cloudflare dashboard | **PENDING** |
-| Verify push mirrors working | Spot-check GitHub repos | **PENDING** |
+### P1 — Sovereignty Pipeline
+
+| # | Need | Owner | Detail |
+|---|------|-------|--------|
+| 7 | sporePrint primal pipeline | sporePrint (flockGate) | Zola replacement: petalTongue + nestGate CAS + cellMembrane. Lansing Scuffle pages first. |
+| 8 | Deploy petalTongue v1.7+ | sporeGate ops | Binary in depot. Activates Webb scene graph + WASM WebGL. |
+| 9 | Android Keystore + grapheneGate test | bearDog (southGate) | CredentialStore backend for TEE/StrongBox. bearDog evolved backend (150v). |
+| 10 | CredentialStore integration | squirrel (eastGate) | `secrets.*` JSON-RPC. Handoff issued. bearDog shipped trait + FileVault. |
+
+### P1 — Gate Enrollment (Operator)
+
+| # | Need | Owner | Detail |
+|---|------|-------|--------|
+| 11 | southGate USB enrollment | operator (eastGate) | USB staged, .9 allocated. Plug in and bootstrap. |
+| 12 | strandGate enrollment | operator (eastGate) | Dual EPYC 7452, 256GB RAM, RTX 3090. Pending physical access. |
+
+### P2 — Evolution
+
+| # | Need | Owner | Detail |
+|---|------|-------|--------|
+| 13 | Promote 6 pseudoSpores | lithoSpore (strandGate) | Validation Data Stream v1.0 standard defined. |
+| 14 | bingoCube WASM WebGL widget | bingoCube (eastGate) | Unblocked by petalTongue 150r. `render_color_grid_webgl` ready. |
+| 15 | footPrint declarative source registry | footPrint (flockGate) | DATA_LAYER_PRIMAL_ABSTRACTION spec committed. |
+| 16 | `.unwrap()` clippy audit — remaining primals | all teams | `cargo clippy -- -W clippy::unwrap_used`. 5 primals confirmed 0. |
+
+### P3 / FUTURE
+
+| # | Need | Owner | Detail |
+|---|------|-------|--------|
+| 17 | pseudoSpore Explorer | esotericWebb (ironGate) | Interactive visualization of pseudoSpore structures. Concept. |
+| 18 | rootPulse design | ecosystem | Sovereign VCS over nestGate CAS + Provenance Trio. Forgejo replacement. |
+| 19 | sporePrint pipeline design | ecosystem | Full Zola replacement architecture. |
+| 20 | SHOW_HN readiness | ecosystem | Rubric, narrative, demo path. |
 
 ---
 
-## 4. STRATEGIC GOALS
-
-### NOW
-
-- **bingoCube on primals.eco** — **UNBLOCKED** by petalTongue WASM WebGL (Wave 150r).
-  `render_color_grid_webgl` export ready. Needs bingoCube team to consume it.
-- **Lansing Scuffle → sporePrint** — transplant campus vision into public pages
-  (consulting.md, companies.md, scuffle.md, thermal.md — see `SPOREPRINT_LANSING_SCUFFLE_BLURB.md`)
-- **southGate USB enrollment** — USB staged, IP allocated (.9), plug and bootstrap
-
-### NEAR TERM (next 2-4 weeks)
-
-- **Tower Atomic parity assessment** — benchmark Tower (bearDog + songBird + skunkBat)
-  against WireGuard. Initial goal: **parity** (any tractable first solution). WireGuard has
-  years of dev time on us — we aim to match, then evolve past. Parity is the floor, not the
-  ceiling. **Blockers**: golgiBody TURN relay deploy (P0), benchmark harness build (P1).
-- **sporePrint primal pipeline design** — architect Zola replacement: petalTongue rendering
-  + nestGate CAS content + cellMembrane serving. WASM WebGL pipeline is the enabler.
-- **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph + WASM WebGL pipeline
-- **pseudoSpore validation**: promote 6 pending spores
-- ~~cellMembrane unwrap audit~~ — **RESOLVED** (0 prod unwraps, false positive)
-- **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
-
-### FUTURE (quarter horizon)
-
-- **rootPulse design**: sovereign version control over nestGate CAS + Provenance Trio
-  (rhizoCrypt lineage, loamSpine ledger, sweetGrass attribution) — Forgejo replacement path
-- **projectFOUNDATION design**: thread lineage store, nestGate CAS integration
-- **tideGlass composition**: computational chemistry product (shelved)
-- **primal-transport crate**: publish shared transport abstraction
-- **SHOW_HN readiness**: rubric, narrative, demo path
-- **`primal.eco` inner membrane separation**
-
-### SOVEREIGNTY EVOLUTION (Diderm Roadmap — Wave 150s)
+## 4. SOVEREIGNTY EVOLUTION
 
 | Tier | Tool | Primal Path | Status |
 |------|------|-------------|--------|
-| **REPLACE** | WireGuard | Tower Atomic (bearDog + songBird + skunkBat) | Phase 1 — parity first, then exceed. Gates READY, blockers: TURN + harness |
-| **REPLACE** | Zola | petalTongue + nestGate CAS + cellMembrane | Phase 1 — WASM WebGL pipeline enables |
-| **LATE-STAGE** | Forgejo | rootPulse (nestGate CAS + Provenance Trio) | Phase 2 — post-rootPulse |
-| **FIREBREAK** | Cloudflare | N/A — outer membrane by design | Stays |
-| **FIREBREAK** | Caddy | cellMembrane generates config | Stays |
-| **FIREBREAK** | RustDesk | AGPL-3.0 compliant; learn-from-leverage | Stays |
-| **FIREBREAK** | JupyterHub | Interface only; compute = inner membrane | Stays (repositioned) |
+| **REPLACE** | WireGuard | Tower Atomic (bearDog + songBird + skunkBat) | Gates READY. Blockers: TURN relay + harness. |
+| **REPLACE** | Zola | petalTongue + nestGate CAS + cellMembrane | WASM WebGL shipped. Pipeline design pending. |
+| **LATE-STAGE** | Forgejo | rootPulse (nestGate CAS + Provenance Trio) | Post-rootPulse. |
+| **FIREBREAK** | Cloudflare / Caddy / RustDesk / JupyterHub | Outer membrane | Stays. |
 
 ---
 
-## 5. ECOSYSTEM HEALTH SUMMARY (Wave 150o audit)
-
-| Category | Primals (15) | Gardens (9) | Springs+Protists (12) | Infra (7) | Total |
-|----------|-------------|------------|----------------------|-----------|-------|
-| `#[test]` attrs | 87,379 | 2,183 | 14,405 | 1,209 | **~105K** |
-| Project TODOs | 5 (bingoCube) | 0 | 1 (rustChip) | 3 (fossilRecord) | **9** |
-
-nestGate's 27 TODO markers are vendored upstream (`rustls-webpki`/`rustls-rustcrypto`) —
-0 project debt. Team action: un-vendor when `rustls-rustcrypto` ships past alpha.
-
-*Full per-repo scorecard (tests, unwraps, unsafe, >800L files) in `ORTHOGONAL_DIMENSIONS_REVIEW.md`.*
-
----
-
-## 6. MESH TOPOLOGY
+## 5. MESH TOPOLOGY
 
 ```
-golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, Cloudflare firebreak [TURN relay needed]
-  ├─ sporeGate (10.13.37.2) — builder, footPrint, Tower 3/3 [FULL NUCLEUS + BENCHMARK]
-  ├─ eastGate  (10.13.37.5) — orchestrator, overwatch, dev [FULL]
-  ├─ flockGate (10.13.37.6) — esotericWebb V22, Tower 3/3 [WAN PEER READY]
-  ├─ ironGate  (10.13.37.7) — compute, JupyterHub, GPU [DOWN — hw offline]
-  └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled, no primals yet]
+golgiBody (10.13.37.1) — hub, VPS, Caddy TLS [TURN relay needed]
+  ├─ sporeGate (10.13.37.2) — builder, Tower 3/3 [BENCHMARK PEER]
+  ├─ eastGate  (10.13.37.5) — orchestrator, dev [LAN BENCHMARK PEER]
+  ├─ flockGate (10.13.37.6) — esotericWebb V22, Tower 3/3 [WAN PEER]
+  ├─ ironGate  (10.13.37.7) — compute, GPU [DOWN — hw offline]
+  └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled]
 
-Pending USB enrollment:
-  └─ southGate (10.13.37.9) — house2, full NUCLEUS [USB READY]
-
-Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pending)
+Pending: southGate (.9), strandGate (pending)
+Offline: westGate, fieldGate, biomeGate
 ```
 
-**WG mesh health** (Jul 21, 2026): All 5 active peers healthy. 6/6 surfaces 200.
-
-**WG IP allocation**:
-.1=golgiBody, .2=sporeGate, .5=eastGate, .6=flockGate, .7=ironGate,
-.8=northGate, .9=southGate (pending). Available: .3, .4, .10+
+**WG IP allocation**: .1=golgi, .2=spore, .5=east, .6=flock, .7=iron, .8=north, .9=south. Available: .3, .4, .10+
 
 ---
 
-## 7. RECENT MILESTONES
+## 6. WHAT'S DONE (fossilized)
 
-| Milestone | Wave |
-|-----------|------|
-| Tower primals deep debt: bearDog enrollment.verify + crypto bench, skunkBat bond-type cipher, songBird relay refactor | **150v** |
-| Gate AARs: sporeGate + flockGate GREEN/READY, structural 21/21, WG baselines measured | **150v** |
-| Cascade convergence — vendor eliminated, credential store, Tower parity spec | **150u** |
-| Standards reorganized — 37 → 4 dirs, root 4 docs, full dimensional review | **150t** |
-| Sovereignty Evolution Roadmap — 3-tier classification, DNSSEC 3/3 | **150s** |
-| petalTongue WASM WebGL — browser-side 3D, bingoCube unblocked | **150r** |
-| nestGate vendor analysis — 27 TODOs = vendored upstream, 0 debt | **150q** |
-| Lansing Scuffle + nestGate unwrap audit + lithoSpore pipeline | **150p** |
-| Full dimensional review — 43 repos audited, scorecard refreshed | **150o** |
-| USB gate enrollment + southGate allocated | **150n** |
-| Workspace reorg + 4-org Forgejo (43/43 mirrored) | **150l-m** |
-| Forgejo-first (43/43) + push mirrors (sync_on_commit) | **150j-k** |
-
-*Earlier milestones (fossilized): scene unification (150i), NUCLEUS wired (150h),
-Silicon Atheism P2 14/14 (145a), CAC 6/6 (143b), Depot (142a), Glacial Shift 8/8 (137b).*
+| Achievement | Wave |
+|-------------|------|
+| Tower primals deep debt (enrollment.verify, crypto bench, bond-type cipher, relay refactor) | 150v |
+| Gate AARs GREEN/READY, structural 21/21, WG baselines, cellMembrane unwrap resolved | 150v |
+| Cascade convergence, vendor eliminated, credential store, Tower parity spec | 150u |
+| Standards reorganized (4 dirs), DNSSEC 3/3, Sovereignty roadmap | 150s-t |
+| petalTongue WASM WebGL, nestGate vendor analysis, full dimensional review | 150o-r |
+| USB enrollment, workspace reorg, Forgejo-first 43/43, push mirrors | 150j-n |
+| Scene unification, NUCLEUS wired, Silicon Atheism P2, CAC 6/6, Glacial Shift 8/8, Depot | ≤150i |
 
 ---
 
-## 8. ORTHOGONAL DIMENSIONS
+## 7. DIMENSIONS
 
-### Active Dimensions
+| Dim | Area | Status |
+|-----|------|--------|
+| 1 Temporal | GREEN | wave.toml current |
+| 2 Ecological | GREEN | 0 project TODOs (15/15 primals) |
+| 3 Hardware | AMBER | ironGate down, southGate + strandGate pending |
+| 4 Sovereignty | GREEN | DNSSEC 3/3, Tower parity pipeline active |
+| 5 Surfaces | GREEN | 6/6 healthy |
+| 6 Compositions | GREEN | pseudoSpore pipeline maturing |
+| 7 Documentation | GREEN | Standards reorganized, handoffs current |
+| 8 Campus | GREEN | Lansing Scuffle documented |
 
-| Dim | Area | Status | Open items |
-|-----|------|--------|------------|
-| 1 | Temporal | GREEN | wave.toml current, 0 impulses, 5 handoffs |
-| 2 | Ecological | GREEN | 0 project TODOs (15/15 primals); nestGate vendor cleanup is team action |
-| 3 | Hardware | AMBER | 4 gates offline, southGate pending USB enrollment |
-| 4 | Sovereignty | GREEN | DNSSEC 3/3; evolution roadmap: WG→Tower (P1), Zola→primal (P1), Forgejo→rootPulse (P2) |
-| 5 | Public Surface | GREEN | 6/6 surfaces healthy (webb recovered) |
-| 6 | Compositions | GREEN | pseudoSpore pipeline maturing, 6 validation.json pending |
-| 7 | Documentation | GREEN | Standards reorganized (4 dirs), 5 handoffs, Scuffle blurb |
-| 8 | Campus/Physical | GREEN | Vision documented; sporePrint pages pending |
-
-### Fossilized Dimensions (complete, not re-checked)
-
-| Dim | Area | Fossilized | Completed |
-|-----|------|-----------|-----------|
-| F1 | Glacial Shift | 150p | 137b — 8/8 ALL CLEAR |
-| F2 | CAC | 150p | 143b — 6/6 layers complete |
-| F3 | Silicon Atheism | 150p | 145a — Phase 1+2 complete (14/14) |
-| F4 | Depot / Build | 150p | 150n — fully operational |
-| F5 | Cascade Pipeline | 150p | 150k — 43/43 converged |
-
-**Summary**: 8 active (7 GREEN / 1 AMBER hardware) + 5 fossilized (all GREEN).
+**Fossilized**: Glacial Shift (137b), CAC (143b), Silicon Atheism (145a), Depot (150n), Cascade (150k).
+**Summary**: 7 GREEN / 1 AMBER (hardware) + 5 fossilized.
 
 ---
 
-*Wave 150v: All 3 Tower Atomic primals evolved toward parity. bearDog shipped
-enrollment.verify (HMAC proof for mesh.enroll) + crypto throughput benchmark (criterion,
-8 payload sizes). skunkBat shipped bond-type cipher enforcement (BondType minimum cipher
-in btsp.negotiate, BTSP_PROTOCOL_VERSION 1.0). songBird deep debt sweep (security.rs split,
-8 dead deps, hardcoding→capability-based, v0.2.1-wave152). Gate AARs integrated: sporeGate +
-flockGate GREEN/READY (3/3 LIVE, 21/21 structural, WG baselines measured). LAN benchmark
-path: sporeGate↔eastGate (same backbone, READY NOW). Parity philosophy: match WG first,
-evolve past — targets relative to baseline, not absolute. Remaining blockers: golgiBody
-TURN relay deploy (P0), benchmark harness build (P1). Next: deploy relay, build harness,
-execute LAN+WAN parity benchmarks, sporePrint pipeline, southGate enrollment.*
+*Wave 150v: Tower Atomic parity pipeline active. All 3 primals evolved (bearDog enrollment.verify
++ crypto bench, skunkBat bond-type cipher, songBird relay refactor). Gates GREEN/READY. Two
+blockers: golgiBody TURN relay (P0), benchmark harness (P1). LAN benchmark sporeGate↔eastGate
+READY NOW. Parity first, exceed later. 43/43 converged.*
