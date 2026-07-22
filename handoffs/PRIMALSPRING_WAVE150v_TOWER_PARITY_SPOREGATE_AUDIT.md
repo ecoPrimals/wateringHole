@@ -237,13 +237,13 @@ Phase D: Report
   2. Include raw numbers, pass/fail against spec, methodology
 ```
 
-### Parity Spec (from convergence brief)
+### Parity Spec (from updated convergence brief — relative targets)
 
 | Metric | WG Baseline (measured) | Tower Target |
 |--------|----------------------|--------------|
-| WAN RTT (to golgiBody) | **37.8ms** | <50ms |
-| WAN RTT (to flockGate) | **68.1ms** | <100ms (2-hop) |
-| WAN throughput | TBD (iperf3 needed) | ≥50 Mbps |
+| WAN RTT (to golgiBody) | **37.8ms** | ≤2x WG = ≤75.6ms |
+| WAN RTT (to flockGate) | **68.1ms** | ≤2x WG = ≤136.2ms |
+| WAN throughput | TBD (iperf3 needed) | ≥80% of WG |
 | Connection setup | ~50ms (WG handshake) | ≤500ms |
 | Reconnect | instant (WG stateless) | ≤2s |
 
@@ -272,12 +272,12 @@ are unreachable during `cargo test --lib`. Consider:
 1. Mock-backed integration tests for live probe paths
 2. Or accept that structural coverage (75.63%) is appropriate for a validation crate
 
-### P3: WAN Latency Observation
+### ~~P3: WAN Latency Observation~~ — RESOLVED
 
-flockGate WG RTT is 68ms (2-hop through golgiBody). The parity spec says "<50ms WAN."
-This target may need recalibration for 2-hop paths — WG itself exceeds 50ms on this path.
-**Recommendation**: Define WAN latency target as "Tower ≤ WG baseline * 1.5x" rather
-than absolute "<50ms" since the physical path already exceeds that.
+eastGate updated the convergence brief to use relative targets (≥80% of WG throughput,
+≤2x WG latency) instead of absolute thresholds. Our measured baselines (37.8ms to
+golgiBody, 68.1ms to flockGate) become the WG reference — Tower targets are relative
+to these, not fixed numbers. No action needed.
 
 ---
 

@@ -66,12 +66,12 @@ Two operational blockers prevent benchmark execution:
 `ecoPrimal/src/bin/nucleus_launcher/orchestrator/registry.rs:55` — unclosed HTML
 tag `Vec<domain>` should be `` `Vec<domain>` ``. Only real `cargo doc` warning.
 
-### P3: WAN Latency Target Recalibration
+### ~~P3: WAN Latency Target Recalibration~~ — RESOLVED
 
-Parity spec says "<50ms WAN RTT." WireGuard itself measures 68ms on the
-sporeGate → golgiBody → flockGate path. Recommend redefining WAN target as
-"Tower ≤ WG baseline * 1.5x" rather than absolute threshold, since the
-physical 2-hop path already exceeds 50ms even on WG.
+eastGate updated `TOWER_ATOMIC_CONVERGENCE.md` to use relative targets
+(≥80% of WG throughput, ≤2x WG latency) instead of absolute thresholds.
+Our measured WG baselines (37.8ms to golgiBody, 68.1ms to flockGate) are
+now the reference — Tower just needs to stay within 2x of those.
 
 ### Coverage Note
 
@@ -99,7 +99,7 @@ mock-backed integration tests or adjusted targets for harness crates.
 | Implement benchmark harness | eastGate songBird | **P1** |
 | Verify flockGate Tower peer status | flockGate team | **P1** |
 | Fix `Vec<domain>` doc warning | eastGate primalSpring | **P2** |
-| Recalibrate WAN latency target | eastGate primalSpring | **P3** |
+| ~~Recalibrate WAN latency target~~ | ~~eastGate~~ | **RESOLVED** — convergence brief updated to relative targets |
 | LAN benchmark (when ironGate returns) | sporeGate | **DEFERRED** |
 
 ---
