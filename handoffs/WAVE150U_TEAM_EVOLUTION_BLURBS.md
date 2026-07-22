@@ -70,39 +70,83 @@ self-contained blurb — paste the relevant section when spinning up a team sess
 
 ---
 
-## 3. songBird + bearDog + skunkBat teams — Tower Atomic Parity Benchmark
+## 3. Tower Atomic Parity — Multi-Gate Benchmark (primalSpring + ironGate + VPS)
 
-> **songBird** (southGate), **bearDog** (southGate), **skunkBat** (eastGate) —
-> Wave 150u joint evolution assignment.
+> **Tower Atomic Parity Benchmark** — Wave 150u joint assignment across 3 gates.
 >
 > **Context**: songBird has published the Tower Atomic Convergence Brief at
 > `primals/songBird/infra/wateringHole/TOWER_ATOMIC_CONVERGENCE.md`. All Tower
 > components are live independently. `mesh.enroll` with BTSP-HMAC is live.
 > The parity benchmark spec is defined but the harness is not implemented.
 >
-> **Assignment**: Build and execute the parity benchmark harness.
+> **Test topology**: 3 gates form the benchmark triangle — eastGate (orchestrator),
+> ironGate (LAN peer), golgiBody VPS (WAN peer). This covers both LAN and WAN
+> paths and exercises the full membrane traversal.
 >
-> **bearDog needs**:
-> - `enrollment.verify` endpoint (P1) — verify HMAC proofs during mesh.enroll
-> - ChaCha20-Poly1305 session key export (P2) — `btsp.server.export_keys`
-> - Throughput crypto benchmark (P2) — raw encrypt/decrypt measurement
+> ```
+> eastGate (10.13.37.5) ──── LAN ──── ironGate (10.13.37.7)
+>       │                                    │
+>       └──── WG mesh ──── golgiBody (10.13.37.1, VPS) ────┘
 >
-> **skunkBat needs**:
-> - Bond negotiation protocol (P2) — `btsp.negotiate` cipher suite selection
-> - Protocol version exchange (P2) — frame format agreement
+> Benchmark paths:
+>   A) eastGate ↔ ironGate  (LAN, same subnet)
+>   B) eastGate ↔ golgiBody (WAN, through VPS)
+>   C) ironGate ↔ golgiBody (WAN, through VPS)
+> ```
 >
-> **songBird delivers**:
-> - Benchmark harness: `songbird benchmark --mode tower-atomic/wireguard`
-> - Run on sporeGate↔ironGate LAN pair (both WG and Tower active)
+> ### primalSpring team (eastGate) — Orchestration + Atomic Testing
 >
-> **Parity targets** (from convergence brief):
+> primalSpring owns all composition validation. The Tower Atomic parity test
+> is a composition test — bearDog + songBird + skunkBat coordinating.
 >
-> | Metric | WireGuard Baseline | Tower Target |
-> |--------|-------------------|--------------|
-> | Throughput | ~900 Mbps | ≥80% (720 Mbps) |
-> | Latency | ~0.3ms | ≤0.6ms |
-> | Connection setup | ~50ms | ≤500ms |
-> | Reconnect | instant | ≤2s |
+> **Assignment**:
+> 1. Create a `tower_atomic_parity` primalSpring scenario that exercises
+>    Tower Atomic composition: enrollment, encrypted transport, cross-gate
+>    `capability.call`, and drawbridge routing
+> 2. Orchestrate the benchmark runs from eastGate — invoke songBird's
+>    benchmark harness against ironGate (LAN) and golgiBody (WAN)
+> 3. Validate Tower vs WireGuard results against parity targets
+> 4. Report pass/fail per metric
+>
+> **Parity targets**:
+>
+> | Metric | WireGuard Baseline | Tower Target | Path |
+> |--------|-------------------|--------------|------|
+> | Throughput | ~900 Mbps (LAN) | ≥720 Mbps | A (eastGate↔ironGate) |
+> | Latency | ~0.3ms (LAN) | ≤0.6ms | A |
+> | Throughput | ~100 Mbps (WAN est.) | ≥80 Mbps | B (eastGate↔golgiBody) |
+> | Connection setup | ~50ms | ≤500ms | A, B, C |
+> | Reconnect | instant | ≤2s | A |
+> | CPU (idle) | ~0% | ≤1% | A |
+> | CPU (saturated) | ~5% | ≤20% | A |
+>
+> ### ironGate team — Benchmark Peer + TURN Relay Test
+>
+> **Assignment**:
+> 1. Ensure Tower Atomic stack is running on ironGate (bearDog + songBird +
+>    skunkBat all active on UDS IPC)
+> 2. Accept benchmark connections from eastGate's primalSpring harness
+> 3. Run `iperf3` server for WireGuard baseline measurement
+> 4. Verify `mesh.enroll` works from eastGate → ironGate via Tower
+> 5. Report ironGate-side metrics (CPU, memory, connection stability)
+>
+> ### golgiBody VPS team — TURN Relay Deployment + WAN Benchmark
+>
+> **Assignment**:
+> 1. Deploy `songbird relay` on golgiBody VPS (systemd unit is ready,
+>    needs deployment — see convergence brief §Deployment/Ops)
+> 2. Set `SONGBIRD_DRAWBRIDGE_ADDR=0.0.0.0:7780` for cross-WG access
+> 3. Accept benchmark connections from eastGate for WAN path (B)
+> 4. Verify TURN relay handles NAT traversal for ironGate↔golgiBody path (C)
+> 5. Report VPS-side resource usage during benchmark
+>
+> ### Upstream primal needs (bearDog, skunkBat — existing assignments)
+>
+> bearDog (assignment #1 above) and skunkBat (eastGate) still need:
+> - bearDog: `enrollment.verify` endpoint (P1), session key export (P2)
+> - skunkBat: bond negotiation protocol (P2), version exchange (P2)
+> These are prerequisites — primalSpring scenarios should stub/mock initially,
+> then validate with real endpoints as they ship.
 >
 > **4-phase timeline**: Benchmark → Shadow (Tower alongside WG) → Cutover → WG removed
 
@@ -302,7 +346,9 @@ self-contained blurb — paste the relevant section when spinning up a team sess
 |---|------|------|-----------|----------|
 | 1 | bearDog | southGate | Android Keystore backend + grapheneGate testing | **P1** |
 | 2 | squirrel | eastGate | CredentialStore integration via `secrets.*` RPC | **P1** |
-| 3 | songBird+bearDog+skunkBat | southGate+eastGate | Tower Atomic parity benchmark | **P1** |
+| 3a | primalSpring | eastGate | Tower Atomic parity orchestration + scenario | **P1** |
+| 3b | ironGate team | ironGate | Tower benchmark LAN peer + Tower stack validation | **P1** |
+| 3c | golgiBody team | VPS | TURN relay deployment + WAN benchmark peer | **P1** |
 | 4 | sporeGate ops | sporeGate | Deploy petalTongue v1.7+ to flockGate | **P1** |
 | 5 | sporePrint | flockGate | Lansing Scuffle pages + primal pipeline design | **P1** |
 | 6 | cellMembrane | ironGate | Unwrap audit (456 production unwraps) | **P2** |
@@ -311,3 +357,9 @@ self-contained blurb — paste the relevant section when spinning up a team sess
 | 9 | footPrint | flockGate | Data layer → declarative source registry | **P2** |
 | 10 | esotericWebb | ironGate | pseudoSpore Explorer prototype | **P3** |
 | 11 | operator | eastGate | southGate + strandGate enrollment | **P1** |
+
+**Note**: All atomic composition testing (Tower Atomic, NUCLEUS compositions,
+cross-gate capability.call) is routed through **primalSpring** (eastGate).
+primalSpring is the coordination spring — it validates that compositions work,
+not the individual atoms. Individual primal teams ship their endpoints;
+primalSpring validates the composition.

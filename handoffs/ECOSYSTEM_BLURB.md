@@ -126,7 +126,9 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 |---|------|-------|-----|--------|
 | 1 | Android Keystore backend + grapheneGate test | bearDog (southGate) | **P1** | NEW |
 | 2 | CredentialStore integration via `secrets.*` | squirrel (eastGate) | **P1** | Handoff issued |
-| 3 | Tower Atomic parity benchmark harness | songBird+bearDog+skunkBat | **P1** | Spec defined |
+| 3a | Tower parity orchestration + scenario | primalSpring (eastGate) | **P1** | Spec defined |
+| 3b | Tower benchmark LAN peer + stack validation | ironGate team | **P1** | Spin-up needed |
+| 3c | TURN relay deploy + WAN benchmark peer | golgiBody team (VPS) | **P1** | Spin-up needed |
 | 4 | Deploy petalTongue v1.7+ to flockGate | sporeGate ops | **P1** | Binary in depot |
 | 5 | Lansing Scuffle pages + primal pipeline | sporePrint (flockGate) | **P1** | Blurb issued |
 | 6 | cellMembrane unwrap audit (456 prod) | cellMembrane (ironGate) | **P2** | NEW |
