@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-21T16:45:00Z"
+updated = "2026-07-22T10:50:00Z"
 
 [heads]
 bearDog = "27cf95c7843f121c445f50190c317a4a3ef66faa"
@@ -30,6 +30,7 @@ sporePrint = "2efa8b6ae44970d6c087c8a33b2f453f8fa16637"
 [deploy]
 songbird_version = "0.3.1-drawbridge-proxy"
 beardog_version = "0.10.0-silicon-atheism"
+petaltongue_version = "1.7.0"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
 topology = "internet → Cloudflare → golgi(Caddy TLS, subdomain routing) → WG → gates"
 depot_status = "LIVE — 59 binaries × 4 architectures (BLAKE3 + Ed25519 signed)"
@@ -38,6 +39,7 @@ mesh_status = "6-GATE MESH — golgi, sporeGate, eastGate, flockGate, ironGate, 
 cascade_sense = "OPERATIONAL — atomic build-then-swap (zero-downtime)"
 footprint_server = "LIVE on sporeGate:8090 — footprint.primals.eco → 200"
 esotericwebb_caddy = "LIVE — webb.primals.eco → flockGate:8090 → 200"
+petaltongue_deploy = "v1.7.0 deployed to sporeGate + flockGate (Wave 150u)"
 sporeprint_subdomain = "LIVE — sporeprint.primals.eco → 200. Root primals.eco 301 redirects."
 dnssec = "ENABLED — 3/3 domains validated (Jul 21)"
 
@@ -63,3 +65,4 @@ windows_beardog = "FIXED: #[cfg(unix)] gating for UnixStream in beardog-ipc/core
 cac_6_6 = "COMPLETE: Content-Addressed Convergence all 6 layers solved"
 webb_recovered = "LIVE: webb.primals.eco 200 — flockGate esotericWebb V22 (Wave 150t)"
 standards_reorg = "ACKNOWLEDGED: 37 standards → 4 directories (Wave 150t)"
+petaltongue_v17 = "DEPLOYED: v1.7.0 on sporeGate (PID 15815) + flockGate (systemd). Scene graph + WASM WebGL active. 56 capabilities. Unblocks: esotericWebb scene graph, bingoCube widget, sporePrint primal pipeline."
