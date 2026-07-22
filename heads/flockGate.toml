@@ -14,7 +14,7 @@ wateringHole = "41adba32"
 esotericWebb = "98496ac"
 petalTongue = "c6baa1d"
 plasmidBin = "e0b20e0"
-skunkBat = "c0b04c9"
+skunkBat = "b6448ea"
 
 [remotes]
 standard = "Forgejo-first (origin=Forgejo, github=mirror)"
@@ -75,12 +75,13 @@ p2_items = ["cellMembrane unwrap audit", "Tower parity benchmark (flockGate as W
 note = "petalTongue v1.7 already deployed on flockGate (150n) — blurb NEAR TERM item is stale"
 
 [skunkbat]
-head = "c0b04c9"
-tests = 570
+head = "b6448ea"
+tests = 571
 clippy = "CLEAN — workspace + all-targets (-D warnings)"
 windows = "x86_64-pc-windows-gnu cargo check PASS"
-posture = "GREEN — Tower Atomic ready. BondType cipher enforcement live."
-tower_atomic = "bond_type param in btsp.negotiate, protocol version 1.0, fallback documented"
+posture = "GREEN — Tower Atomic ready. Platform consolidated, zero #[allow] in production."
+tower_atomic = "bond_type cipher enforcement, protocol v1.0, fallback documented"
+deep_debt = "platform::system_load_normalized, ConfigDiff &'static str, lint hygiene complete"
 prod_unwrap = 0
 prod_unsafe = 0
 prod_unreachable = 1
