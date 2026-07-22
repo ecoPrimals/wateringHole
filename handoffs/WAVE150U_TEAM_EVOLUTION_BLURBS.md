@@ -79,20 +79,37 @@ self-contained blurb — paste the relevant section when spinning up a team sess
 > components are live independently. `mesh.enroll` with BTSP-HMAC is live.
 > The parity benchmark spec is defined but the harness is not implemented.
 >
-> **Test topology**: 3 gates form the benchmark triangle — eastGate (orchestrator),
-> ironGate (LAN peer), golgiBody VPS (WAN peer). This covers both LAN and WAN
-> paths and exercises the full membrane traversal.
+> **Test topology**: WAN-first. ironGate is temporarily down, so we start with
+> the WAN path (eastGate ↔ flockGate ↔ golgiBody) which traverses the full
+> membrane stack. LAN testing follows when ironGate returns. This is the
+> correct order anyway — LAN and WAN are simply different membrane layers.
+> If Tower can cross the outer membrane cleanly, the inner membrane (LAN) is
+> a subset of the same traversal with fewer hops.
 >
 > ```
-> eastGate (10.13.37.5) ──── LAN ──── ironGate (10.13.37.7)
->       │                                    │
->       └──── WG mesh ──── golgiBody (10.13.37.1, VPS) ────┘
+> Phase 1 — WAN (now):
+>
+> eastGate (10.13.37.5) ──── WG mesh ──── golgiBody (10.13.37.1, VPS)
+>       │                                        │
+>       └──── WG mesh ──── flockGate (10.13.37.6) ┘
 >
 > Benchmark paths:
->   A) eastGate ↔ ironGate  (LAN, same subnet)
->   B) eastGate ↔ golgiBody (WAN, through VPS)
->   C) ironGate ↔ golgiBody (WAN, through VPS)
+>   A) eastGate  ↔ flockGate  (WAN, cross-household)
+>   B) eastGate  ↔ golgiBody  (WAN, through VPS)
+>   C) flockGate ↔ golgiBody  (WAN, co-located outer membrane)
+>
+> Phase 2 — LAN (when ironGate returns):
+>
+> eastGate (10.13.37.5) ──── LAN ──── ironGate (10.13.37.7)
+>
+> Benchmark paths:
+>   D) eastGate ↔ ironGate (LAN, same subnet — cytoplasm-to-cytoplasm)
 > ```
+>
+> **Membrane mapping**: WAN paths cross outer membrane → peptidoglycan → inner
+> membrane (the full diderm traversal). LAN paths stay within the plasma
+> membrane (cytoplasm-to-cytoplasm, covalent bond). Tower must work at every
+> layer — proving WAN first proves the harder case.
 >
 > ### primalSpring team (eastGate) — Orchestration + Atomic Testing
 >
@@ -103,32 +120,33 @@ self-contained blurb — paste the relevant section when spinning up a team sess
 > 1. Create a `tower_atomic_parity` primalSpring scenario that exercises
 >    Tower Atomic composition: enrollment, encrypted transport, cross-gate
 >    `capability.call`, and drawbridge routing
-> 2. Orchestrate the benchmark runs from eastGate — invoke songBird's
->    benchmark harness against ironGate (LAN) and golgiBody (WAN)
-> 3. Validate Tower vs WireGuard results against parity targets
-> 4. Report pass/fail per metric
+> 2. Phase 1 (WAN): orchestrate benchmark runs against flockGate and golgiBody
+> 3. Phase 2 (LAN): orchestrate benchmark runs against ironGate when it returns
+> 4. Validate Tower vs WireGuard results against parity targets
+> 5. Report pass/fail per metric per membrane layer
 >
 > **Parity targets**:
 >
-> | Metric | WireGuard Baseline | Tower Target | Path |
-> |--------|-------------------|--------------|------|
-> | Throughput | ~900 Mbps (LAN) | ≥720 Mbps | A (eastGate↔ironGate) |
-> | Latency | ~0.3ms (LAN) | ≤0.6ms | A |
-> | Throughput | ~100 Mbps (WAN est.) | ≥80 Mbps | B (eastGate↔golgiBody) |
-> | Connection setup | ~50ms | ≤500ms | A, B, C |
-> | Reconnect | instant | ≤2s | A |
-> | CPU (idle) | ~0% | ≤1% | A |
-> | CPU (saturated) | ~5% | ≤20% | A |
+> | Metric | WG Baseline | Tower Target | Phase | Path |
+> |--------|-------------|--------------|-------|------|
+> | Throughput | ~100 Mbps (WAN est.) | ≥80 Mbps | **1 (WAN)** | A,B |
+> | Latency | ~20ms (WAN est.) | ≤40ms | **1 (WAN)** | A,B |
+> | Connection setup | ~50ms | ≤500ms | **1 (WAN)** | A,B,C |
+> | Reconnect | instant | ≤2s | **1 (WAN)** | A |
+> | CPU (idle) | ~0% | ≤1% | **1 (WAN)** | A |
+> | Throughput | ~900 Mbps (LAN) | ≥720 Mbps | 2 (LAN) | D |
+> | Latency | ~0.3ms (LAN) | ≤0.6ms | 2 (LAN) | D |
+> | CPU (saturated) | ~5% | ≤20% | 2 (LAN) | D |
 >
-> ### ironGate team — Benchmark Peer + TURN Relay Test
+> ### flockGate team — WAN Benchmark Peer
 >
 > **Assignment**:
-> 1. Ensure Tower Atomic stack is running on ironGate (bearDog + songBird +
->    skunkBat all active on UDS IPC)
+> 1. Ensure Tower Atomic stack is running on flockGate (bearDog + songBird +
+>    skunkBat — already running for esotericWebb)
 > 2. Accept benchmark connections from eastGate's primalSpring harness
 > 3. Run `iperf3` server for WireGuard baseline measurement
-> 4. Verify `mesh.enroll` works from eastGate → ironGate via Tower
-> 5. Report ironGate-side metrics (CPU, memory, connection stability)
+> 4. Verify `mesh.enroll` works from eastGate → flockGate via Tower
+> 5. Report flockGate-side metrics (CPU, memory, connection stability)
 >
 > ### golgiBody VPS team — TURN Relay Deployment + WAN Benchmark
 >
@@ -137,8 +155,16 @@ self-contained blurb — paste the relevant section when spinning up a team sess
 >    needs deployment — see convergence brief §Deployment/Ops)
 > 2. Set `SONGBIRD_DRAWBRIDGE_ADDR=0.0.0.0:7780` for cross-WG access
 > 3. Accept benchmark connections from eastGate for WAN path (B)
-> 4. Verify TURN relay handles NAT traversal for ironGate↔golgiBody path (C)
+> 4. Verify TURN relay handles NAT traversal for flockGate↔golgiBody path (C)
 > 5. Report VPS-side resource usage during benchmark
+>
+> ### ironGate team — LAN Benchmark Peer (Phase 2, when hardware returns)
+>
+> **Assignment** (deferred):
+> 1. Ensure Tower Atomic stack is running on ironGate
+> 2. Accept LAN benchmark connections from eastGate (path D)
+> 3. Run `iperf3` server for LAN WireGuard baseline
+> 4. Report ironGate-side metrics
 >
 > ### Upstream primal needs (bearDog, skunkBat — existing assignments)
 >
@@ -346,9 +372,10 @@ self-contained blurb — paste the relevant section when spinning up a team sess
 |---|------|------|-----------|----------|
 | 1 | bearDog | southGate | Android Keystore backend + grapheneGate testing | **P1** |
 | 2 | squirrel | eastGate | CredentialStore integration via `secrets.*` RPC | **P1** |
-| 3a | primalSpring | eastGate | Tower Atomic parity orchestration + scenario | **P1** |
-| 3b | ironGate team | ironGate | Tower benchmark LAN peer + Tower stack validation | **P1** |
-| 3c | golgiBody team | VPS | TURN relay deployment + WAN benchmark peer | **P1** |
+| 3a | primalSpring | eastGate | Tower parity orchestration — WAN first, LAN when ironGate returns | **P1** |
+| 3b | flockGate team | flockGate | WAN benchmark peer (Phase 1 — NOW) | **P1** |
+| 3c | golgiBody team | VPS | TURN relay deploy + WAN benchmark peer (Phase 1 — NOW) | **P1** |
+| 3d | ironGate team | ironGate | LAN benchmark peer (Phase 2 — when hardware returns) | **P1** deferred |
 | 4 | sporeGate ops | sporeGate | Deploy petalTongue v1.7+ to flockGate | **P1** |
 | 5 | sporePrint | flockGate | Lansing Scuffle pages + primal pipeline design | **P1** |
 | 6 | cellMembrane | ironGate | Unwrap audit (456 production unwraps) | **P2** |
