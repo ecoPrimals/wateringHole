@@ -154,9 +154,32 @@ a new team session for any primal, garden, protist, or spring.
 > sporeGate is a NUCLEUS builder with full primal stack — it serves as one
 > endpoint of the LAN benchmark pair (sporeGate ↔ eastGate on backbone).
 >
-> **Your mission**: Deploy and validate the Tower Atomic stack (bearDog +
-> songBird + skunkBat) on this gate, then execute the parity benchmark
-> against eastGate over the LAN backbone.
+> ---
+>
+> **CONVERGENCE RULE — READ THIS FIRST**
+>
+> **eastGate owns primalSpring's codebase.** You are a benchmark runner,
+> not a code evolver. Follow this workflow strictly:
+>
+> 1. **DO NOT** make significant code changes to primalSpring on this gate.
+> 2. **Minimal edits only**: config tweaks, tolerance values, benchmark
+>    harness scripts, and results files are acceptable local changes.
+> 3. **Report back**: File findings, benchmark results, and any proposed
+>    code changes as a **handoff** in `infra/wateringHole/handoffs/`.
+>    The eastGate primalSpring team will integrate and evolve the code.
+> 4. **Pull, don't push code**: `git pull` regularly to stay converged
+>    with eastGate's latest. Push only handoffs, results, and config to
+>    `wateringHole`. Do NOT push primalSpring code changes from this gate.
+> 5. If you discover a bug or need a code fix, document it in your handoff
+>    with file path, line, and proposed fix — eastGate will ship it.
+>
+> This ensures all primalSpring instances converge on the same codebase
+> and eastGate remains the single source of truth for code evolution.
+>
+> ---
+>
+> **Your mission**: Validate the Tower Atomic stack on this gate and
+> execute the parity benchmark against flockGate through golgiBody.
 >
 > **Context**: Tower Atomic is the sovereign transport composition replacing
 > WireGuard. primalSpring on eastGate already shipped the structural
@@ -166,7 +189,8 @@ a new team session for any primal, garden, protist, or spring.
 > **What to do (in order)**:
 >
 > 1. Review the standard blurb dimensions above (code quality, architecture,
->    tests, debt, sovereignty) — audit and fix what you can.
+>    tests, debt, sovereignty) — **audit and report** findings in your
+>    handoff. Do not fix primalSpring code directly; report to eastGate.
 >
 > 2. Read the Tower Atomic convergence brief at
 >    `primals/songBird/infra/wateringHole/TOWER_ATOMIC_CONVERGENCE.md`
@@ -222,7 +246,7 @@ a new team session for any primal, garden, protist, or spring.
 > skunkBat (protocol negotiation/IDS)
 > Key standards: `TOWER_ATOMIC_CONVERGENCE.md`, `COMPOSITION_ROUTING_STANDARD.md`,
 > `BTSP_PROTOCOL_STANDARD.md`
-> First milestone: WAN parity benchmark results filed as handoff
+> First milestone: WAN parity benchmark results filed as handoff in wateringHole
 
 ### primalSpring on flockGate (WAN peer — Tower Atomic benchmark)
 
@@ -233,9 +257,33 @@ a new team session for any primal, garden, protist, or spring.
 > It serves as the far-side WAN endpoint, reached through golgiBody's
 > TURN relay from backbone gates.
 >
-> **Your mission**: Deploy and validate the Tower Atomic stack on this gate,
-> then participate as the WAN peer in the parity benchmark against
-> sporeGate through golgiBody.
+> ---
+>
+> **CONVERGENCE RULE — READ THIS FIRST**
+>
+> **eastGate owns primalSpring's codebase.** You are a benchmark runner,
+> not a code evolver. Follow this workflow strictly:
+>
+> 1. **DO NOT** make significant code changes to primalSpring on this gate.
+> 2. **Minimal edits only**: config tweaks, tolerance values, benchmark
+>    harness scripts, and results files are acceptable local changes.
+> 3. **Report back**: File findings, benchmark results, and any proposed
+>    code changes as a **handoff** in `infra/wateringHole/handoffs/`.
+>    The eastGate primalSpring team will integrate and evolve the code.
+> 4. **Pull, don't push code**: `git pull` regularly to stay converged
+>    with eastGate's latest. Push only handoffs, results, and config to
+>    `wateringHole`. Do NOT push primalSpring code changes from this gate.
+> 5. If you discover a bug or need a code fix, document it in your handoff
+>    with file path, line, and proposed fix — eastGate will ship it.
+>
+> This ensures all primalSpring instances converge on the same codebase
+> and eastGate remains the single source of truth for code evolution.
+>
+> ---
+>
+> **Your mission**: Validate the Tower Atomic stack on this gate and
+> participate as the WAN peer in the parity benchmark against sporeGate
+> through golgiBody.
 >
 > **Context**: Tower Atomic is the sovereign transport composition replacing
 > WireGuard. primalSpring on eastGate already shipped the structural
@@ -247,7 +295,8 @@ a new team session for any primal, garden, protist, or spring.
 > **What to do (in order)**:
 >
 > 1. Review the standard blurb dimensions above (code quality, architecture,
->    tests, debt, sovereignty) — audit and fix what you can.
+>    tests, debt, sovereignty) — **audit and report** findings in your
+>    handoff. Do not fix primalSpring code directly; report to eastGate.
 >
 > 2. Read the Tower Atomic convergence brief at
 >    `primals/songBird/infra/wateringHole/TOWER_ATOMIC_CONVERGENCE.md`
@@ -296,4 +345,5 @@ a new team session for any primal, garden, protist, or spring.
 > skunkBat (protocol negotiation/IDS)
 > Key standards: `TOWER_ATOMIC_CONVERGENCE.md`, `COMPOSITION_ROUTING_STANDARD.md`,
 > `BTSP_PROTOCOL_STANDARD.md`
-> First milestone: WAN peer ready, responding to benchmark probes from sporeGate
+> First milestone: WAN peer ready, responding to benchmark probes from sporeGate.
+> File handoff with findings to wateringHole — eastGate integrates code.
