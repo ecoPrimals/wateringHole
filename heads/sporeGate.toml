@@ -1,31 +1,31 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-21T16:45:00Z
+# Gate: sporeGate | Updated: 2026-07-22T11:00:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-22T10:50:00Z"
+updated = "2026-07-22T11:00:00Z"
 
 [heads]
 bearDog = "27cf95c7843f121c445f50190c317a4a3ef66faa"
-songBird = "543b2a706b8e027a552a3d20f9309a6df6a69424"
-nestGate = "33b15599b1be85ca8ab05aee2360f95c3861a2c5"
-biomeOS = "c4455fa"
-rhizoCrypt = "35a58bd2cda07d5ec0f2b28f347b867876021750"
-squirrel = "29c8afb"
-sweetGrass = "2d73a07ab9accb730fc7634098dc8614fd4be491"
-loamSpine = "60a73b88e368939d85b5d5db8a5d5ebba66be48e"
-skunkBat = "2999c1bce1269f6e7e3e8f82ffc71a8d9c7f59f2"
-coralReef = "e006441bad3bf0b3e2fc2918e6acb9ea94e8fd09"
-barraCuda = "aaf1e525c8a4cf2ef6b11e11d3cf43cf0a534cff"
-petalTongue = "3642dd4ea5486553acf2f67c65bab0bd07309236"
-toadStool = "d6d9f20f5d9c8032d3cbe9c0c55b1de0e53f3c2a"
+songBird = "bf9988e4c7c90d866653daf5958a1e90bd893587"
+nestGate = "d5d45dfe167d552eb95b567f4ac4827da0a31a2f"
+biomeOS = "6ee3c1a7181ddc86a182d25132441eeb2e09cfa7"
+rhizoCrypt = "ae205a8"
+squirrel = "7097bd349caadbee2775e4436e49eb745013bc94"
+sweetGrass = "76dc35f"
+loamSpine = "cb1beb0"
+skunkBat = "1f341b92ec0240861514ab63586e40c2d1f8faed"
+coralReef = "2246ebf6a02184b6065124bb4087fb3f8462b6be"
+barraCuda = "3cfdf0eefdd25978adcb7bb45576de2acac43a44"
+petalTongue = "3227ea546b750af5c76f553fdf9f5a4c0bd6cae9"
+toadStool = "bfa963220b62dac92aa3034d35d7df73ce79b865"
 sourDough = "3a0b52df4b65a5436bfa87161e8cf181c4e85194"
-cellMembrane = "5c5f8674aadc4ce985986ed48fe12c24a51eb0a9"
-primalSpring = "e87dd1eb115acf246ee17a19b10f2be5551ada2a"
-wateringHole = "74bfbcdfdd744c3a9939161d077c39e10eca8d01"
-sporePrint = "2efa8b6ae44970d6c087c8a33b2f453f8fa16637"
+cellMembrane = "ac2d1f4"
+primalSpring = "39120d20360e6c767afe10fb92fbd580840c4e1a"
+wateringHole = "bcfda65"
+sporePrint = "8106d9c86561cdee95c3f9304a1eb6099bf12ddb"
 
 [deploy]
 songbird_version = "0.3.1-drawbridge-proxy"
@@ -48,7 +48,7 @@ primals_eco = "301 → sporeprint.primals.eco (root redirect)"
 sporeprint = "200 — sporePrint docs"
 footprint = "200 — GIS composition (Express API + static)"
 webb = "200 — esotericWebb V22"
-live = "200 — petalTongue TOPO-VIS"
+live = "200 — petalTongue TOPO-VIS v1.7.0"
 membrane = "200 — depot + status"
 git = "200 — Forgejo"
 lab = "401 — JupyterHub (basicauth)"
@@ -65,4 +65,6 @@ windows_beardog = "FIXED: #[cfg(unix)] gating for UnixStream in beardog-ipc/core
 cac_6_6 = "COMPLETE: Content-Addressed Convergence all 6 layers solved"
 webb_recovered = "LIVE: webb.primals.eco 200 — flockGate esotericWebb V22 (Wave 150t)"
 standards_reorg = "ACKNOWLEDGED: 37 standards → 4 directories (Wave 150t)"
-petaltongue_v17 = "DEPLOYED: v1.7.0 on sporeGate (PID 15815) + flockGate (systemd). Scene graph + WASM WebGL active. 56 capabilities. Unblocks: esotericWebb scene graph, bingoCube widget, sporePrint primal pipeline."
+petaltongue_v17 = "DEPLOYED: v1.7.0 on sporeGate + flockGate (Wave 150u). Scene graph + WASM WebGL active. 56 capabilities. Unblocks: esotericWebb, bingoCube, sporePrint pipeline."
+nestgate_vendor = "ACKNOWLEDGED: vendor/ removed, BLAKE3 consolidated (Wave 150u)"
+credential_store = "ACKNOWLEDGED: bearDog CredentialStore shipped, squirrel handoff issued (Wave 150u)"
