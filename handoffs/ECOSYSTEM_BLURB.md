@@ -3,14 +3,13 @@
 **Date**: Jul 22, 2026 07:20 EDT | **Wave**: 150v | **From**: eastGate overwatch
 **Posture**: **TOWER ATOMIC LIVE. STRUCTURAL 21/21 GREEN. WAN-FIRST BENCHMARK SPINNING UP.**
 
-**This wave**: primalSpring shipped the **Tower Atomic parity structural scenario** —
-21/21 checks ALL PASS across 5 phases (composition primals, relay capabilities, benchmark
-topology, parity spec, credential store). AAR filed. **cellMembrane unwrap audit RESOLVED**
-— the "456 production unwrap" count was a **false positive** from grep methodology; canonical
-audit via `cargo clippy -- -W clippy::unwrap_used` confirms 0 production unwraps (same as
-nestGate, loamSpine, toadStool, esotericWebb). **Spinning up primalSpring on sporeGate +
-flockGate** for WAN-first Tower Atomic parity benchmark (ironGate temporarily offline).
-golgiBody serves as TURN relay hub. 43/43 repos converged at Forgejo parity.
+**This wave**: **sporeGate + flockGate AARs received** — both gates Tower Atomic 3/3 LIVE,
+structural 21/21 GREEN, convergence rule followed (zero code changes). WG baselines measured:
+sporeGate→golgiBody 38ms, flockGate→golgiBody 31ms, end-to-end ~66-68ms. **esotericWebb V22
+confirmed healthy** on flockGate (was 502 in 150o — recovered). **Two blockers identified**:
+golgiBody TURN relay not deployed (code complete, needs systemd unit), benchmark harness not
+built (`songbird benchmark` CLI). primalSpring doc warning fixed (registry.rs:55). `cargo fmt`
+clean. cellMembrane unwrap RESOLVED (false positive). 43/43 repos converged.
 
 ---
 
@@ -87,9 +86,9 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 | Gate | Zone | Running Services | Status |
 |------|------|-----------------|--------|
 | **golgiBody** | VPS | Forgejo, Caddy TLS, RustDesk relay, sporePrint, depot, push mirrors | **LIVE** |
-| **sporeGate** | backbone | 13/13 NUCLEUS primals, footPrint, TOPO-VIS, NAT/DHCP/DNS, builder | **LIVE** |
-| **ironGate** | house2 | 13/13 NUCLEUS, JupyterHub, songBird drawbridge, GPU compute | **LIVE** |
-| **flockGate** | WAN | esotericWebb V22, Tower atomic | **LIVE** |
+| **sporeGate** | backbone | 13/13 NUCLEUS, footPrint, TOPO-VIS, NAT/DHCP/DNS, Tower 3/3, primalSpring | **LIVE** |
+| **ironGate** | house2 | 13/13 NUCLEUS, JupyterHub, songBird drawbridge, GPU compute | **DOWN** (hw) |
+| **flockGate** | WAN | esotericWebb V22, Tower 3/3 (since Jul 16), primalSpring | **LIVE** |
 | **grapheneGate** | mobile | Tower (bearDog + songBird + skunkBat) | **LIVE** |
 | **eastGate** | backbone | Dev workstation — primals run ad-hoc for testing | **DEV** |
 | **northGate** | house1 | RustDesk running. WireGuard active (.8). No primals deployed yet | **ENROLLED** |
@@ -125,9 +124,12 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 | 1 | Android Keystore backend + grapheneGate test | bearDog (southGate) | **P1** | NEW |
 | 2 | CredentialStore integration via `secrets.*` | squirrel (eastGate) | **P1** | Handoff issued |
 | 3a | Tower parity structural scenario | primalSpring (eastGate) | **P1** | **DONE** — 21/21 checks, AAR filed |
-| 3b | WAN benchmark peer | flockGate team | **P1** | Spin-up NOW |
-| 3c | TURN relay deploy + WAN peer | golgiBody team (VPS) | **P1** | Spin-up NOW |
-| 3d | LAN benchmark peer (Phase 2) | ironGate team | **P1** | Deferred — hw down |
+| 3b | WAN benchmark — flockGate peer | flockGate team | **P1** | **READY** — Tower 3/3 LIVE, WG baseline 31ms, AAR filed |
+| 3c | WAN benchmark — sporeGate peer | sporeGate team | **P1** | **READY** — Tower 3/3 LIVE, WG baseline 38ms, AAR filed |
+| 3d | **TURN relay deploy on golgiBody** | golgiBody ops / songBird | **P0** | **BLOCKER** — code complete, needs systemd unit |
+| 3e | **Benchmark harness** (`songbird benchmark`) | songBird (eastGate) | **P1** | **BLOCKER** — CLI not yet built |
+| 3f | LAN benchmark peer (Phase 2) | ironGate team | **P1** | Deferred — hw down |
+| 3g | WAN latency target recalibration | primalSpring (eastGate) | **P3** | WG=68ms 2-hop, spec says <50ms |
 | 4 | Deploy petalTongue v1.7+ to flockGate | sporeGate ops | **P1** | Binary in depot |
 | 5 | Lansing Scuffle pages + primal pipeline | sporePrint (flockGate) | **P1** | Blurb issued |
 | 6 | ~~cellMembrane unwrap audit~~ | **RESOLVED** | — | 0 prod unwraps (false positive) |
@@ -211,11 +213,11 @@ nestGate's 27 TODO markers are vendored upstream (`rustls-webpki`/`rustls-rustcr
 ## 6. MESH TOPOLOGY
 
 ```
-golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, Cloudflare firebreak
-  ├─ sporeGate (10.13.37.2) — builder, footPrint, NAT/DHCP [FULL NUCLEUS]
+golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, Cloudflare firebreak [TURN relay needed]
+  ├─ sporeGate (10.13.37.2) — builder, footPrint, Tower 3/3 [FULL NUCLEUS + BENCHMARK]
   ├─ eastGate  (10.13.37.5) — orchestrator, overwatch, dev [FULL]
-  ├─ flockGate (10.13.37.6) — esotericWebb [V22 LIVE]
-  ├─ ironGate  (10.13.37.7) — compute, JupyterHub, GPU [FULL NUCLEUS]
+  ├─ flockGate (10.13.37.6) — esotericWebb V22, Tower 3/3 [WAN PEER READY]
+  ├─ ironGate  (10.13.37.7) — compute, JupyterHub, GPU [DOWN — hw offline]
   └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled, no primals yet]
 
 Pending USB enrollment:
@@ -282,9 +284,11 @@ Silicon Atheism P2 14/14 (145a), CAC 6/6 (143b), Depot (142a), Glacial Shift 8/8
 
 ---
 
-*Wave 150v: Tower Atomic structural scenario shipped — 21/21 checks ALL PASS (primalSpring
-commit 1ab0bfea). cellMembrane unwrap audit RESOLVED (0 prod unwraps — grep false positive,
-canonical: clippy::unwrap_used). Spinning up primalSpring on sporeGate (backbone LAN peer)
-and flockGate (WAN peer) for WAN-first parity benchmark through golgiBody TURN relay.
-ironGate LAN benchmark deferred until hardware returns. Next: WAN benchmark results,
-sporePrint primal pipeline, pseudoSpore promotions, southGate enrollment.*
+*Wave 150v: sporeGate + flockGate AARs received — both gates Tower Atomic 3/3 LIVE,
+structural 21/21 GREEN, convergence rule followed (zero code changes). WG baselines:
+sporeGate→golgiBody 38ms, flockGate→golgiBody 31ms, end-to-end 66-68ms. esotericWebb V22
+healthy (recovered from 502). Two blockers: golgiBody TURN relay needs deploy (P0),
+benchmark harness needs build (P1). primalSpring doc warning fixed, cargo fmt clean.
+Flaky s_depot_architecture_coverage test noted (P2). WAN latency target may need
+recalibration (WG=68ms on 2-hop exceeds <50ms spec). Next: deploy TURN relay on golgiBody,
+build songbird benchmark CLI, execute WAN parity, sporePrint pipeline, southGate enrollment.*
