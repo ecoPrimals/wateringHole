@@ -394,17 +394,11 @@ a new team session for any primal, garden, protist, or spring.
 >    - `aars/FLOCKGATE_WAVE150v_TOWER_PARITY_AAR.md`
 >    - `TOWER_ATOMIC_CONVERGENCE.md` (songBird's own convergence brief)
 >
-> 3. **P0 — Deploy TURN relay on golgiBody**:
->    - songBird's `songbird-lineage-relay` crate has `relay_server/`,
->      `relay.rs`, `relay_handler.rs`, `relay_protocol.rs` — code complete
->    - Create/verify systemd unit for `songbird relay` on golgiBody VPS
->      (157.230.3.183, accessible via `ssh golgiBody` or WG 10.13.37.1)
->    - Relay must accept connections from sporeGate (.2) and flockGate (.6)
->    - Relay must route traffic between peers (TURN-style)
->    - Verify relay is reachable from both gates after deploy
->    - If the relay binary is not in plasmidBin depot, build and stage it
+> 3. **~~P0 — TURN relay~~**: RESOLVED. `songbird-relay.service` is
+>    already LIVE on golgiBody:3478 (PID 2140600, running since Jul 12).
+>    Verify it is reachable from sporeGate and flockGate, then proceed.
 >
-> 4. **P1 — Build benchmark harness** (`songbird benchmark` CLI):
+> 4. **P0 — Build benchmark harness** (`songbird benchmark` CLI) — **ONLY BLOCKER**:
 >    - The CLI already has a `tower.rs` command module in `songbird-cli`
 >    - Needs subcommands:
 >      ```

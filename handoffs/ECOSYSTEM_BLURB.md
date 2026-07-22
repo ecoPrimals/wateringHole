@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 150v
 
 **Date**: Jul 22, 2026 11:40 EDT | **Wave**: 150v | **From**: eastGate overwatch
-**Posture**: **TOWER ATOMIC PARITY PIPELINE. 3/3 PRIMALS EVOLVED. GATES READY. TWO BLOCKERS.**
+**Posture**: **TOWER ATOMIC PARITY PIPELINE. TURN RELAY LIVE (since Jul 12). ONE BLOCKER: BENCHMARK HARNESS.**
 
 ---
 
@@ -47,19 +47,19 @@ User → Cloudflare DNS (*.primals.eco wildcard → golgiBody 157.230.3.183)
 
 ## 3. REMAINING WORK — BY TEAM
 
-### P0 — BLOCKERS (unblock Tower Atomic benchmark)
+### P0 — BLOCKER (one remaining)
 
 | # | Need | Owner | Detail |
 |---|------|-------|--------|
-| 1 | **Deploy TURN relay on golgiBody** | songBird (eastGate) + golgiBody ops | `songbird relay` code complete. Needs systemd unit on VPS. Unblocks WAN benchmark. |
-| 2 | **Build benchmark harness** | songBird (eastGate) | `songbird benchmark --mode tower-atomic/wireguard --peer <gate>`. JSON output for primalSpring. Any tractable first solution. |
+| ~~1~~ | ~~Deploy TURN relay on golgiBody~~ | **RESOLVED** | `songbird-relay.service` LIVE on golgiBody:3478, PID 2140600, since Jul 12. |
+| 2 | **Build benchmark harness** | songBird (eastGate) | `songbird benchmark --mode tower-atomic/wireguard --peer <gate>`. JSON output for primalSpring. Any tractable first solution. **Only blocker.** |
 
 ### P1 — Tower Atomic Parity
 
 | # | Need | Owner | Detail |
 |---|------|-------|--------|
 | 3 | LAN parity benchmark | sporeGate + eastGate | sporeGate (.2) ↔ eastGate (.5), same backbone. **READY NOW** — blocked on #2 (harness). |
-| 4 | WAN parity benchmark | sporeGate + flockGate | sporeGate (.2) → golgiBody TURN (.1) → flockGate (.6). Blocked on #1 + #2. |
+| 4 | WAN parity benchmark | sporeGate + flockGate | sporeGate (.2) → golgiBody TURN (.1) → flockGate (.6). TURN relay LIVE. Blocked on #2 only. |
 | 5 | Live-tier scenario | primalSpring (eastGate) | `s_tower_atomic_parity_live` — ships after benchmark results. Structural (21/21) already GREEN. |
 | 6 | WAN latency target | primalSpring (eastGate) | WG=68ms on 2-hop. Redefine as "Tower ≤ WG * 1.5x" not absolute <50ms. |
 
@@ -107,7 +107,7 @@ not the ceiling. Targets are relative to WG baseline, not absolute.
 
 | Tier | Tool | Primal Path | Status |
 |------|------|-------------|--------|
-| **REPLACE** | WireGuard | Tower Atomic (bearDog + songBird + skunkBat) | Gates READY. Blockers: TURN relay + harness. |
+| **REPLACE** | WireGuard | Tower Atomic (bearDog + songBird + skunkBat) | Gates READY. TURN relay LIVE. Blocker: benchmark harness only. |
 | **REPLACE** | Zola | petalTongue + nestGate CAS + cellMembrane | WASM WebGL shipped. Pipeline design pending. |
 | **LATE-STAGE** | Forgejo | rootPulse (nestGate CAS + Provenance Trio) | Post-rootPulse. |
 | **FIREBREAK** | Cloudflare / Caddy / RustDesk / JupyterHub | Outer membrane | Stays. |
@@ -117,7 +117,7 @@ not the ceiling. Targets are relative to WG baseline, not absolute.
 ## 5. MESH TOPOLOGY
 
 ```
-golgiBody (10.13.37.1) — hub, VPS, Caddy TLS [TURN relay needed]
+golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, TURN relay LIVE (:3478)
   ├─ sporeGate (10.13.37.2) — builder, Tower 3/3 [BENCHMARK PEER]
   ├─ eastGate  (10.13.37.5) — orchestrator, dev [LAN BENCHMARK PEER]
   ├─ flockGate (10.13.37.6) — esotericWebb V22, Tower 3/3 [WAN PEER]
@@ -164,7 +164,8 @@ Offline: westGate, fieldGate, biomeGate
 
 ---
 
-*Wave 150v: Tower Atomic parity pipeline active. All 3 primals evolved (bearDog enrollment.verify
-+ crypto bench, skunkBat bond-type cipher, songBird relay refactor). Gates GREEN/READY. Two
-blockers: golgiBody TURN relay (P0), benchmark harness (P1). LAN benchmark sporeGate↔eastGate
-READY NOW. Parity first, exceed later. 43/43 converged.*
+*Wave 150v: Tower Atomic parity pipeline active. All 3 primals evolved. TURN relay confirmed
+LIVE on golgiBody since Jul 12 (was never a blocker — stale in earlier blurb). **Single
+remaining blocker: benchmark harness** (`songbird benchmark` CLI). Once built, LAN benchmark
+(sporeGate↔eastGate) and WAN benchmark (sporeGate→golgiBody→flockGate) can execute immediately.
+Parity first, exceed later. 43/43 converged.*
