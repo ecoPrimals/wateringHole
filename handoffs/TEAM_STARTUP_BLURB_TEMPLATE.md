@@ -1,6 +1,6 @@
 # Team Startup Blurb — Standard Template
 
-**Wave**: 147b | **From**: eastGate overwatch
+**Wave**: 150v | **From**: eastGate overwatch
 **Purpose**: Paste this (with project-specific section filled in) when spinning up
 a new team session for any primal, garden, protist, or spring.
 
@@ -141,3 +141,159 @@ a new team session for any primal, garden, protist, or spring.
 > DISTRIBUTED_COVALENT_DEPLOYMENT
 > First milestone: initioChem pseudoSpore that can be unpacked on any gate
 > with the right hardware and run a chemistry job end-to-end.
+
+---
+
+## Ready-to-Paste: Tower Atomic Parity — primalSpring Spin-Ups (Wave 150v)
+
+### primalSpring on sporeGate (backbone LAN peer — Tower Atomic benchmark)
+
+> **primalSpring** — Wave 150v, Tower Atomic parity benchmark spin-up.
+> Gate assignment: sporeGate (10.13.37.2, Backbone zone, 13/13 NUCLEUS LIVE)
+> Purpose: Run Tower Atomic parity benchmarks as the **backbone LAN peer**.
+> sporeGate is a NUCLEUS builder with full primal stack — it serves as one
+> endpoint of the LAN benchmark pair (sporeGate ↔ eastGate on backbone).
+>
+> **Your mission**: Deploy and validate the Tower Atomic stack (bearDog +
+> songBird + skunkBat) on this gate, then execute the parity benchmark
+> against eastGate over the LAN backbone.
+>
+> **Context**: Tower Atomic is the sovereign transport composition replacing
+> WireGuard. primalSpring on eastGate already shipped the structural
+> validation scenario (`tower-atomic-parity`, 21/21 checks GREEN,
+> commit `1ab0bfea`). This gate needs to run the **live benchmark**.
+>
+> **What to do (in order)**:
+>
+> 1. Review the standard blurb dimensions above (code quality, architecture,
+>    tests, debt, sovereignty) — audit and fix what you can.
+>
+> 2. Read the Tower Atomic convergence brief at
+>    `primals/songBird/infra/wateringHole/TOWER_ATOMIC_CONVERGENCE.md`
+>    and the primalSpring AAR at
+>    `infra/wateringHole/handoffs/PRIMALSPRING_WAVE150u_TOWER_PARITY_AAR.md`
+>
+> 3. Verify Tower Atomic primals are running on this gate:
+>    - bearDog: `security.sock` — BTSP handshake + negotiate
+>    - songBird: `songbird.sock` / `:7780` drawbridge — mesh.relay + mesh.connect
+>    - skunkBat: via songBird BTSP dispatch — audit/anomaly/threat
+>    If not running, deploy from plasmidBin depot.
+>
+> 4. Run the structural scenario to confirm local registry matches:
+>    ```
+>    cargo test --lib -- tower_atomic_parity
+>    ```
+>
+> 5. Execute WAN parity benchmark through golgiBody TURN relay:
+>    - sporeGate (.2) → golgiBody TURN (.1) → flockGate (.6)
+>    - Throughput: target >50 Mbps (iperf3-equivalent through Tower relay)
+>    - Latency: target <50ms RTT through Tower relay
+>    - Compare against WireGuard WAN baseline on same path
+>    - Report: `TOWER_WAN_PARITY_RESULTS.md` in wateringHole handoffs
+>
+> 6. When ironGate comes back online, execute LAN parity benchmark:
+>    - sporeGate (.2) ↔ eastGate (.5) on 1Gbps backbone
+>    - Throughput: target >800 Mbps
+>    - Latency: target <5ms RTT
+>    - Compare against WireGuard LAN baseline
+>    - Report: `TOWER_LAN_PARITY_RESULTS.md` in wateringHole handoffs
+>
+> **Parity spec** (must meet or exceed WG baseline):
+>
+> | Metric | WG Baseline | Tower Target |
+> |--------|-------------|--------------|
+> | LAN throughput | ~900 Mbps | ≥800 Mbps |
+> | LAN latency | ~0.3ms | <5ms |
+> | WAN throughput | ~50 Mbps | ≥50 Mbps |
+> | WAN latency | ~30ms | <50ms |
+> | Connection setup | ~50ms | ≤500ms |
+> | Reconnect | instant | ≤2s |
+>
+> **Topology**:
+> ```
+> WAN benchmark (NOW):
+>   sporeGate (.2) ←→ golgiBody TURN (.1) ←→ flockGate (.6)
+>
+> LAN benchmark (when ironGate returns):
+>   sporeGate (.2) ←→ Tower relay ←→ eastGate (.5)
+> ```
+>
+> Upstream primals consumed: bearDog (crypto/BTSP), songBird (transport/mesh),
+> skunkBat (protocol negotiation/IDS)
+> Key standards: `TOWER_ATOMIC_CONVERGENCE.md`, `COMPOSITION_ROUTING_STANDARD.md`,
+> `BTSP_PROTOCOL_STANDARD.md`
+> First milestone: WAN parity benchmark results filed as handoff
+
+### primalSpring on flockGate (WAN peer — Tower Atomic benchmark)
+
+> **primalSpring** — Wave 150v, Tower Atomic parity benchmark spin-up.
+> Gate assignment: flockGate (10.13.37.6, WAN zone, esotericWebb V22 LIVE)
+> Purpose: Run Tower Atomic parity benchmarks as the **WAN peer**.
+> flockGate is already running Tower Atomic (role=tower in mesh topology).
+> It serves as the far-side WAN endpoint, reached through golgiBody's
+> TURN relay from backbone gates.
+>
+> **Your mission**: Deploy and validate the Tower Atomic stack on this gate,
+> then participate as the WAN peer in the parity benchmark against
+> sporeGate through golgiBody.
+>
+> **Context**: Tower Atomic is the sovereign transport composition replacing
+> WireGuard. primalSpring on eastGate already shipped the structural
+> validation scenario (`tower-atomic-parity`, 21/21 checks GREEN,
+> commit `1ab0bfea`). ironGate is temporarily offline, so we are doing
+> **WAN-first testing** — flockGate is the WAN peer, golgiBody is the
+> TURN relay hub.
+>
+> **What to do (in order)**:
+>
+> 1. Review the standard blurb dimensions above (code quality, architecture,
+>    tests, debt, sovereignty) — audit and fix what you can.
+>
+> 2. Read the Tower Atomic convergence brief at
+>    `primals/songBird/infra/wateringHole/TOWER_ATOMIC_CONVERGENCE.md`
+>    and the primalSpring AAR at
+>    `infra/wateringHole/handoffs/PRIMALSPRING_WAVE150u_TOWER_PARITY_AAR.md`
+>
+> 3. Verify Tower Atomic primals are running on this gate:
+>    - bearDog: `security.sock` — BTSP handshake + negotiate
+>    - songBird: `songbird.sock` / `:7780` drawbridge — mesh.relay + mesh.connect
+>    - skunkBat: via songBird BTSP dispatch
+>    flockGate should already have role=tower. Verify with:
+>    ```
+>    songbird mesh.peers  # should show flockGate as tower role
+>    ```
+>    If not running, deploy from plasmidBin depot.
+>
+> 4. Run the structural scenario to confirm local registry matches:
+>    ```
+>    cargo test --lib -- tower_atomic_parity
+>    ```
+>
+> 5. Participate as WAN peer in parity benchmark:
+>    - flockGate (.6) ← golgiBody TURN (.1) ← sporeGate (.2)
+>    - Accept incoming Tower relay connections from sporeGate
+>    - Run iperf3-equivalent server mode for throughput measurement
+>    - Provide latency echo for RTT measurement
+>    - Also run same tests over WireGuard for baseline comparison
+>
+> 6. Coordinate with sporeGate team — they drive the benchmark, you
+>    serve as the far endpoint. Results go to sporeGate's report.
+>
+> **Additionally**: flockGate runs esotericWebb (webb.primals.eco). While
+> here, confirm esotericWebb V22 is healthy and no regressions from
+> Tower Atomic deployment. esotericWebb should not conflict — it runs
+> on different ports and uses songBird's drawbridge for its own IPC.
+>
+> **Topology**:
+> ```
+> WAN benchmark:
+>   sporeGate (.2) ←→ golgiBody TURN (.1) ←→ flockGate (.6) ← YOU ARE HERE
+>                     vs.
+>   sporeGate (.2) ←→ golgiBody WG hub (.1) ←→ flockGate (.6)
+> ```
+>
+> Upstream primals consumed: bearDog (crypto/BTSP), songBird (transport/mesh),
+> skunkBat (protocol negotiation/IDS)
+> Key standards: `TOWER_ATOMIC_CONVERGENCE.md`, `COMPOSITION_ROUTING_STANDARD.md`,
+> `BTSP_PROTOCOL_STANDARD.md`
+> First milestone: WAN peer ready, responding to benchmark probes from sporeGate

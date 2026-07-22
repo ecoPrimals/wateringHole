@@ -1,19 +1,16 @@
-# ecoPrimals Ecosystem Blurb — Wave 150u
+# ecoPrimals Ecosystem Blurb — Wave 150v
 
-**Date**: Jul 21, 2026 14:10 EDT | **Wave**: 150u | **From**: eastGate overwatch
-**Posture**: **CASCADE CONVERGENCE. VENDOR ELIMINATED. TOWER PARITY SPEC. CREDENTIAL STORE SHIPPED.**
+**Date**: Jul 22, 2026 07:20 EDT | **Wave**: 150v | **From**: eastGate overwatch
+**Posture**: **TOWER ATOMIC LIVE. STRUCTURAL 21/21 GREEN. WAN-FIRST BENCHMARK SPINNING UP.**
 
-**This wave**: Full cascade across 43 repos — 15 with incoming evolution pulled and
-converged. Major threads: **nestGate vendor elimination COMPLETE** (vendor/ dir removed,
-BLAKE3 crypto consolidated, 27 upstream TODOs gone). **bearDog CredentialStore trait
-shipped** (InMemory + FileVault backends, `secrets.*` JSON-RPC, squirrel handoff issued —
-Silicon Atheism evolving edge resolved). **songBird Tower Atomic convergence brief** —
-parity benchmark spec defined, `mesh.enroll` LIVE with BTSP-HMAC proof. **toadStool
-S337-S339** deep debt — hot-path `Cow<str>`, 3 structural splits, Rust 1.96 clippy sweep
-(251 files, 0 warnings). **lithoSpore Validation Data Stream standard v1.0** — contract
-for all spring teams. **footPrint** Lansing Scuffle GeoJSON + data layer primal abstraction
-spec. **loamSpine** doc trim (757→207L). **esotericWebb** IPC refactor (<800L). Standards
-reorganized (37 → 4 dirs). DNSSEC 3/3. 43/43 repos converged.
+**This wave**: primalSpring shipped the **Tower Atomic parity structural scenario** —
+21/21 checks ALL PASS across 5 phases (composition primals, relay capabilities, benchmark
+topology, parity spec, credential store). AAR filed. **cellMembrane unwrap audit RESOLVED**
+— the "456 production unwrap" count was a **false positive** from grep methodology; canonical
+audit via `cargo clippy -- -W clippy::unwrap_used` confirms 0 production unwraps (same as
+nestGate, loamSpine, toadStool, esotericWebb). **Spinning up primalSpring on sporeGate +
+flockGate** for WAN-first Tower Atomic parity benchmark (ironGate temporarily offline).
+golgiBody serves as TURN relay hub. 43/43 repos converged at Forgejo parity.
 
 ---
 
@@ -170,7 +167,7 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
   + nestGate CAS content + cellMembrane serving. WASM WebGL pipeline is the enabler.
 - **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph + WASM WebGL pipeline
 - **pseudoSpore validation**: promote 6 pending spores
-- **cellMembrane unwrap audit** — 456 production unwraps
+- ~~cellMembrane unwrap audit~~ — **RESOLVED** (0 prod unwraps, false positive)
 - **strandGate enrollment**: dual EPYC 7452, 256GB RAM, RTX 3090
 
 ### FUTURE (quarter horizon)
@@ -239,6 +236,7 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 | Milestone | Wave |
 |-----------|------|
+| Tower Atomic structural GREEN (21/21), cellMembrane unwrap resolved, WAN benchmark spin-up | **150v** |
 | Cascade convergence — vendor eliminated, credential store, Tower parity spec | **150u** |
 | Standards reorganized — 37 → 4 dirs, root 4 docs, full dimensional review | **150t** |
 | Sovereignty Evolution Roadmap — 3-tier classification, DNSSEC 3/3 | **150s** |
@@ -284,11 +282,9 @@ Silicon Atheism P2 14/14 (145a), CAC 6/6 (143b), Depot (142a), Glacial Shift 8/8
 
 ---
 
-*Wave 150u: Cascade convergence — 15 repos pulled with incoming evolution. nestGate vendor
-elimination DONE (vendor/ removed). bearDog CredentialStore shipped (squirrel handoff).
-songBird Tower Atomic parity benchmark specified. toadStool S337-S339 deep debt (hot-path
-Cow, structural splits, Rust 1.96 clippy 251 files). lithoSpore Validation Data Stream v1.0.
-footPrint Lansing Scuffle GeoJSON + data layer primal abstraction. loamSpine doc trim.
-esotericWebb IPC refactor. Standards reorganized (150t). 43/43 repos converged at parity.
-Next: Tower parity benchmark execution, sporePrint primal pipeline, pseudoSpore promotions,
-southGate enrollment, esotericWebb pseudoSpore explorer.*
+*Wave 150v: Tower Atomic structural scenario shipped — 21/21 checks ALL PASS (primalSpring
+commit 1ab0bfea). cellMembrane unwrap audit RESOLVED (0 prod unwraps — grep false positive,
+canonical: clippy::unwrap_used). Spinning up primalSpring on sporeGate (backbone LAN peer)
+and flockGate (WAN peer) for WAN-first parity benchmark through golgiBody TURN relay.
+ironGate LAN benchmark deferred until hardware returns. Next: WAN benchmark results,
+sporePrint primal pipeline, pseudoSpore promotions, southGate enrollment.*
