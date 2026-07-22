@@ -347,3 +347,107 @@ a new team session for any primal, garden, protist, or spring.
 > `BTSP_PROTOCOL_STANDARD.md`
 > First milestone: WAN peer ready, responding to benchmark probes from sporeGate.
 > File handoff with findings to wateringHole — eastGate integrates code.
+
+---
+
+## Ready-to-Paste: Tower Atomic Blockers (Wave 150v)
+
+### songBird on eastGate — TURN relay deploy + benchmark harness (P0/P1)
+
+> **songBird** — Wave 150v, Tower Atomic parity unblock.
+> Gate assignment: eastGate (code evolution) + golgiBody (TURN relay deploy)
+> Purpose: Unblock the Tower Atomic WAN parity benchmark by delivering the
+> two items both sporeGate and flockGate teams independently identified as
+> blocking: **TURN relay deployment** and **benchmark harness**.
+>
+> ---
+>
+> **PARITY PHILOSOPHY**
+>
+> Initial goal is **WireGuard parity** — any tractable first solution that
+> matches WG performance. WireGuard has years of development time on us.
+> We aim to match first, then evolve past. Parity is the floor, not the
+> ceiling. Targets are relative to WG baseline (not absolute thresholds),
+> since physical path characteristics vary by topology.
+>
+> ---
+>
+> **Context**: sporeGate and flockGate teams both completed Wave 150v audits.
+> Both gates have Tower Atomic 3/3 LIVE (bearDog, songBird, skunkBat — running
+> since Jul 16). WireGuard baselines are measured:
+>
+> | Path | WG RTT |
+> |------|--------|
+> | sporeGate → golgiBody | 38ms |
+> | flockGate → golgiBody | 31ms |
+> | sporeGate → flockGate (2-hop) | 68ms |
+>
+> Both teams are GREEN/READY and waiting on these two deliverables.
+>
+> **What to do (in order)**:
+>
+> 1. Review the standard blurb dimensions above (code quality, architecture,
+>    tests, debt, sovereignty) — audit and fix what you can.
+>
+> 2. Read the AARs from both benchmark gates:
+>    - `aars/PRIMALSPRING_SPOREGATE_AAR_150v.md`
+>    - `aars/FLOCKGATE_WAVE150v_TOWER_PARITY_AAR.md`
+>    - `TOWER_ATOMIC_CONVERGENCE.md` (songBird's own convergence brief)
+>
+> 3. **P0 — Deploy TURN relay on golgiBody**:
+>    - songBird's `songbird-lineage-relay` crate has `relay_server/`,
+>      `relay.rs`, `relay_handler.rs`, `relay_protocol.rs` — code complete
+>    - Create/verify systemd unit for `songbird relay` on golgiBody VPS
+>      (157.230.3.183, accessible via `ssh golgiBody` or WG 10.13.37.1)
+>    - Relay must accept connections from sporeGate (.2) and flockGate (.6)
+>    - Relay must route traffic between peers (TURN-style)
+>    - Verify relay is reachable from both gates after deploy
+>    - If the relay binary is not in plasmidBin depot, build and stage it
+>
+> 4. **P1 — Build benchmark harness** (`songbird benchmark` CLI):
+>    - The CLI already has a `tower.rs` command module in `songbird-cli`
+>    - Needs subcommands:
+>      ```
+>      songbird benchmark --mode tower-atomic --peer <gate> --duration <secs>
+>      songbird benchmark --mode wireguard --peer <gate> --duration <secs>
+>      songbird benchmark --compare --output <path.json>
+>      ```
+>    - Metrics to capture per the parity spec:
+>      - Throughput (iperf3-equivalent through relay stack)
+>      - Latency (RTT through relay)
+>      - Connection setup time (connect to first byte)
+>      - Reconnect time (mesh re-discovery after link drop)
+>      - CPU idle/saturated
+>    - Output should be structured JSON for primalSpring to consume
+>      in the `s_tower_atomic_parity_live` scenario
+>    - A simple initial implementation is fine — we evolve from parity
+>      toward exceeding WG. First working version unblocks everything.
+>
+> 5. **P2 — Flaky test** (from gate AARs):
+>    - `s_depot_architecture_coverage` in primalSpring passes alone but
+>      fails in full parallel suite — resource contention. Investigate
+>      and fix if tractable (may need test mutex or isolated temp dir).
+>      This is a primalSpring issue but songBird team may encounter it.
+>
+> **Topology** (what you're enabling):
+> ```
+> WAN benchmark path (both teams READY, waiting on relay):
+>   sporeGate (.2) ←→ golgiBody TURN (.1) ←→ flockGate (.6)
+>                     ↑ YOU DEPLOY THIS
+> ```
+>
+> **WAN latency targets** (relative to WG baseline, not absolute):
+>
+> | Metric | WG Baseline (measured) | Tower Target |
+> |--------|----------------------|--------------|
+> | RTT to golgiBody | 31-38ms | ≤ WG * 1.5x |
+> | RTT end-to-end (2-hop) | 66-68ms | ≤ WG * 1.5x |
+> | Throughput | TBD (iperf3) | ≥ WG * 0.8x |
+> | Connection setup | ~50ms | ≤500ms |
+> | Reconnect | instant | ≤2s |
+>
+> Upstream primals consumed: bearDog (crypto/BTSP), skunkBat (protocol)
+> Key standards: `TOWER_ATOMIC_CONVERGENCE.md`, `COMPOSITION_ROUTING_STANDARD.md`
+> First milestone: TURN relay live on golgiBody + `songbird benchmark` producing
+> a JSON report. Once delivered, sporeGate drives benchmark, flockGate responds,
+> primalSpring on eastGate ships the Live-tier scenario.

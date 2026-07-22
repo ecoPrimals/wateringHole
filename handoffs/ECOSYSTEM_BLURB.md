@@ -164,7 +164,9 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 ### NEAR TERM (next 2-4 weeks)
 
 - **Tower Atomic parity assessment** — benchmark Tower (bearDog + songBird + skunkBat)
-  against WireGuard on LAN mesh. Throughput and latency must meet WG baseline before cutover.
+  against WireGuard. Initial goal: **parity** (any tractable first solution). WireGuard has
+  years of dev time on us — we aim to match, then evolve past. Parity is the floor, not the
+  ceiling. **Blockers**: golgiBody TURN relay deploy (P0), benchmark harness build (P1).
 - **sporePrint primal pipeline design** — architect Zola replacement: petalTongue rendering
   + nestGate CAS content + cellMembrane serving. WASM WebGL pipeline is the enabler.
 - **Deploy petalTongue v1.7+** to flockGate — activates Webb's scene graph + WASM WebGL pipeline
@@ -186,7 +188,7 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 
 | Tier | Tool | Primal Path | Status |
 |------|------|-------------|--------|
-| **REPLACE** | WireGuard | Tower Atomic (bearDog + songBird + skunkBat) | Phase 1 — parity benchmark needed |
+| **REPLACE** | WireGuard | Tower Atomic (bearDog + songBird + skunkBat) | Phase 1 — parity first, then exceed. Gates READY, blockers: TURN + harness |
 | **REPLACE** | Zola | petalTongue + nestGate CAS + cellMembrane | Phase 1 — WASM WebGL pipeline enables |
 | **LATE-STAGE** | Forgejo | rootPulse (nestGate CAS + Provenance Trio) | Phase 2 — post-rootPulse |
 | **FIREBREAK** | Cloudflare | N/A — outer membrane by design | Stays |
