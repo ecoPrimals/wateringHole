@@ -14,7 +14,7 @@ wateringHole = "41adba32"
 esotericWebb = "98496ac"
 petalTongue = "c6baa1d"
 plasmidBin = "e0b20e0"
-skunkBat = "b6448ea"
+skunkBat = "d62dac7"
 
 [remotes]
 standard = "Forgejo-first (origin=Forgejo, github=mirror)"
@@ -75,7 +75,7 @@ p2_items = ["cellMembrane unwrap audit", "Tower parity benchmark (flockGate as W
 note = "petalTongue v1.7 already deployed on flockGate (150n) — blurb NEAR TERM item is stale"
 
 [skunkbat]
-head = "b6448ea"
+head = "d62dac7"
 tests = 571
 clippy = "CLEAN — workspace + all-targets (-D warnings)"
 windows = "x86_64-pc-windows-gnu cargo check PASS"
