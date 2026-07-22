@@ -3,13 +3,17 @@
 **Date**: Jul 22, 2026 07:20 EDT | **Wave**: 150v | **From**: eastGate overwatch
 **Posture**: **TOWER ATOMIC LIVE. STRUCTURAL 21/21 GREEN. WAN-FIRST BENCHMARK SPINNING UP.**
 
-**This wave**: **sporeGate + flockGate AARs received** — both gates Tower Atomic 3/3 LIVE,
-structural 21/21 GREEN, convergence rule followed (zero code changes). WG baselines measured:
-sporeGate→golgiBody 38ms, flockGate→golgiBody 31ms, end-to-end ~66-68ms. **esotericWebb V22
-confirmed healthy** on flockGate (was 502 in 150o — recovered). **Two blockers identified**:
-golgiBody TURN relay not deployed (code complete, needs systemd unit), benchmark harness not
-built (`songbird benchmark` CLI). primalSpring doc warning fixed (registry.rs:55). `cargo fmt`
-clean. cellMembrane unwrap RESOLVED (false positive). 43/43 repos converged.
+**This wave**: **All 3 Tower Atomic primals evolved toward parity**. **bearDog**: deep debt
+pass — `enrollment.verify` endpoint shipped (HMAC proof for `mesh.enroll`), crypto throughput
+benchmark (`criterion`, 8 payload sizes, ChaCha20+Ed25519+X25519+HKDF+HMAC), `PerformanceAnalyzer`
+refactored, gateway isolation, orphan tests removed (2,277 LOC), 34 GiB cache reclaimed.
+**skunkBat**: Tower Atomic bond-type cipher enforcement — `BondType` (Covalent/Metallic/Ionic)
+now enforces minimum cipher in `btsp.negotiate`, `BTSP_PROTOCOL_VERSION` 1.0, fallback behavior,
+platform consolidation. **songBird**: v0.2.1-wave152 deep debt sweep — `security.rs` 761L split
+into module tree (`birdsong_provider`, `relay_authority`, `mock`), `production.rs` 754→370L (tests
+extracted), `virtual_relay.rs` 753→553L, 8 dead deps removed, 5 hardcoded literals→capability-based.
+sporeGate + flockGate AARs integrated. LAN benchmark: sporeGate↔eastGate (same backbone, READY NOW).
+43/43 repos converged.
 
 ---
 
@@ -240,7 +244,8 @@ Offline: westGate, fieldGate (dead CMOS), biomeGate (kernel), strandGate (pendin
 
 | Milestone | Wave |
 |-----------|------|
-| Tower Atomic structural GREEN (21/21), cellMembrane unwrap resolved, WAN benchmark spin-up | **150v** |
+| Tower primals deep debt: bearDog enrollment.verify + crypto bench, skunkBat bond-type cipher, songBird relay refactor | **150v** |
+| Gate AARs: sporeGate + flockGate GREEN/READY, structural 21/21, WG baselines measured | **150v** |
 | Cascade convergence — vendor eliminated, credential store, Tower parity spec | **150u** |
 | Standards reorganized — 37 → 4 dirs, root 4 docs, full dimensional review | **150t** |
 | Sovereignty Evolution Roadmap — 3-tier classification, DNSSEC 3/3 | **150s** |
@@ -286,11 +291,13 @@ Silicon Atheism P2 14/14 (145a), CAC 6/6 (143b), Depot (142a), Glacial Shift 8/8
 
 ---
 
-*Wave 150v: sporeGate + flockGate AARs received — both gates Tower Atomic 3/3 LIVE,
-structural 21/21 GREEN, convergence rule followed (zero code changes). WG baselines:
-sporeGate→golgiBody 38ms, flockGate→golgiBody 31ms, end-to-end 66-68ms. esotericWebb V22
-healthy (recovered from 502). Two blockers: golgiBody TURN relay needs deploy (P0),
-benchmark harness needs build (P1). primalSpring doc warning fixed, cargo fmt clean.
-Flaky s_depot_architecture_coverage test noted (P2). WAN latency target may need
-recalibration (WG=68ms on 2-hop exceeds <50ms spec). Next: deploy TURN relay on golgiBody,
-build songbird benchmark CLI, execute WAN parity, sporePrint pipeline, southGate enrollment.*
+*Wave 150v: All 3 Tower Atomic primals evolved toward parity. bearDog shipped
+enrollment.verify (HMAC proof for mesh.enroll) + crypto throughput benchmark (criterion,
+8 payload sizes). skunkBat shipped bond-type cipher enforcement (BondType minimum cipher
+in btsp.negotiate, BTSP_PROTOCOL_VERSION 1.0). songBird deep debt sweep (security.rs split,
+8 dead deps, hardcoding→capability-based, v0.2.1-wave152). Gate AARs integrated: sporeGate +
+flockGate GREEN/READY (3/3 LIVE, 21/21 structural, WG baselines measured). LAN benchmark
+path: sporeGate↔eastGate (same backbone, READY NOW). Parity philosophy: match WG first,
+evolve past — targets relative to baseline, not absolute. Remaining blockers: golgiBody
+TURN relay deploy (P0), benchmark harness build (P1). Next: deploy relay, build harness,
+execute LAN+WAN parity benchmarks, sporePrint pipeline, southGate enrollment.*
