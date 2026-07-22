@@ -36,7 +36,8 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Format drift RESOLVED — all repos clean
 - [x] nestGate: deep unwrap audit complete (Session 121 — 0 prod unwrap)
 - [x] nestGate vendor elimination: **COMPLETE** (Wave 150u) — vendor/ removed, BLAKE3 crypto consolidated, 27 upstream markers gone
-- [ ] Production `.unwrap()` hotspots — ecosystem-wide counts high (broader grep). Top: barraCuda (5,446), biomeOS (4,165), songBird (4,068), toadStool (3,657)
+- [x] Production `.unwrap()` methodology corrected — grep over-counts inline `#[cfg(test)]` modules. `cargo clippy -- -W clippy::unwrap_used` is canonical. Confirmed 0 prod unwraps: nestGate, loamSpine, toadStool, esotericWebb, cellMembrane (Wave 150u)
+- [ ] Production `.unwrap()` — remaining primals need `clippy::unwrap_used` audit (grep counts are false positives)
 
 ## 3. Hardware / Topology
 

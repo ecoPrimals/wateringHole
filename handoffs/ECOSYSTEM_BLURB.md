@@ -114,8 +114,9 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 
 ### Code Quality (Wave 150o audit — details in ORTHOGONAL_DIMENSIONS_REVIEW.md)
 
-- **`.unwrap()` hotspots**: Top 5 — barraCuda (5,446), biomeOS (4,165), songBird (4,068),
-  toadStool (3,657), nestGate (2,427*). 14 repos with 100+ production unwraps.
+- **`.unwrap()` methodology corrected**: grep over-counts `#[cfg(test)]` module bodies.
+  Canonical: `cargo clippy -- -W clippy::unwrap_used`. Confirmed **0 prod unwraps**:
+  nestGate, loamSpine, toadStool, esotericWebb, cellMembrane. Remaining primals need audit.
 - **TODO markers**: 9 project TODOs (bingoCube 5, fossilRecord 3, rustChip 1).
   nestGate's 27 are vendored upstream — un-vendor when `rustls-rustcrypto` ships past alpha.
 - **`unsafe`**: Concentrated in GPU primals, science FFI, crypto. See scorecard for counts.
@@ -126,13 +127,13 @@ Dev (repos cloned) ≠ Runtime (services live). This section tracks **runtime**.
 |---|------|-------|-----|--------|
 | 1 | Android Keystore backend + grapheneGate test | bearDog (southGate) | **P1** | NEW |
 | 2 | CredentialStore integration via `secrets.*` | squirrel (eastGate) | **P1** | Handoff issued |
-| 3a | Tower parity orchestration (WAN first) | primalSpring (eastGate) | **P1** | Spec defined |
+| 3a | Tower parity structural scenario | primalSpring (eastGate) | **P1** | **DONE** — 21/21 checks, AAR filed |
 | 3b | WAN benchmark peer | flockGate team | **P1** | Spin-up NOW |
 | 3c | TURN relay deploy + WAN peer | golgiBody team (VPS) | **P1** | Spin-up NOW |
 | 3d | LAN benchmark peer (Phase 2) | ironGate team | **P1** | Deferred — hw down |
 | 4 | Deploy petalTongue v1.7+ to flockGate | sporeGate ops | **P1** | Binary in depot |
 | 5 | Lansing Scuffle pages + primal pipeline | sporePrint (flockGate) | **P1** | Blurb issued |
-| 6 | cellMembrane unwrap audit (456 prod) | cellMembrane (ironGate) | **P2** | NEW |
+| 6 | ~~cellMembrane unwrap audit~~ | **RESOLVED** | — | 0 prod unwraps (false positive) |
 | 7 | Promote 6 pending pseudoSpores | lithoSpore (strandGate) | **P2** | Stream std v1.0 |
 | 8 | bingoCube WASM WebGL widget | bingoCube (eastGate) | **P2** | Unblocked (150r) |
 | 9 | footPrint declarative source registry | footPrint (flockGate) | **P2** | Spec committed |
