@@ -150,4 +150,49 @@ Only the actual Tower Atomic probes matter for our mission.
 
 ---
 
+---
+
+## UPDATE — Jul 23 11:40 EDT (post-cascade)
+
+### Work Completed
+
+1. **Cascade sync**: 37/39 repos synced from Forgejo. flockGate converged.
+2. **Mesh enrollment FIXED**: Replaced stale `peers.toml` (old-peer, iron-gate, west-gate)
+   with current WG mesh gates (sporeGate, eastGate, golgiBody). Confirmed 3/3 online.
+3. **songbird.sock FIXED**: Removed stale directories, restarted songBird with proper
+   `SONGBIRD_SOCKET` env. Now a proper UDS socket file.
+4. **Drawbridge 502 ROOT-CAUSED**: `CapabilityProxyRouter` cannot proxy HTTP to JSON-RPC
+   backends. Needs songBird code change — drawbridge needs to speak JSON-RPC to backends
+   and translate to HTTP responses. Filed as upstream for eastGate.
+5. **Capability-aware routing PROVEN LIVE**: `capability.call` routes to correct providers
+   (skunkBat for health.check, sweetGrass for health.liveness). Tower Domain 1 confirmed.
+6. **Exploration scenario passes**: `s_tower_exceed_exploration` — all 6 domains structural GREEN.
+7. **primalSpring v0.9.42 pulled**: New scenarios `s_tower_atomic_parity` + `_live` + 
+   `s_sovereignty_roadmap` + `s_tower_exceed_exploration` all passing.
+
+### songBird Status (post-fix)
+
+```
+Node: flockgate
+Mesh: 3 peers, 3 online (sporeGate, eastGate, golgiBody)
+IPC:  12 services, 818+ capabilities
+Socket: /run/user/1000/biomeos/songbird.sock (UDS, proper file)
+Ports: :7700 (federation), :7780 (drawbridge), :8091 (mesh)
+Uptime: fresh restart, stable
+```
+
+### Remaining for eastGate
+
+| Item | Detail |
+|------|--------|
+| Drawbridge proxy model | Needs JSON-RPC → HTTP translation layer |
+| checksums.toml format | New membrane expects struct entries, depot has plain strings |
+| `membrane tower.shadow` | Still unimplemented |
+
+### Posture Update
+
+**flockGate: GREEN** — all P0 songBird issues resolved locally. Capability routing
+LIVE. Mesh enrolled. Shadow deploy still blocked on upstream tooling but Tower
+transport works end-to-end.
+
 *flockGate team, Wave 150w. Converging.*
