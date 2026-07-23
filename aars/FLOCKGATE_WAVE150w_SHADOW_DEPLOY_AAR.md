@@ -242,4 +242,49 @@ Tower **1.11x WG throughput** with sub-ms jitter advantage.
 **flockGate: FULL GREEN — Shadow deploy ACTIVE. Tower at parity/exceeds.
 Continuous metrics collecting every 60min. 46/46 scenarios PASS.**
 
-*flockGate team, Wave 150w. Shadow deployed. Converging toward cutover.*
+---
+
+## UPDATE — Jul 23 18:42 EDT (exploration domains advanced)
+
+### Domains 2 + 4 → PROVEN LIVE
+
+**Domain 2: Multi-stack routing** — songBird dispatches 6 traffic classes to
+5 different provider stacks through single mesh:
+- SECURITY → skunkbat | HEALTH → sweetgrass | PROVENANCE → sweetgrass
+- AI/INFER → squirrel | STORAGE → nestgate | VISUAL → petaltongue
+
+WireGuard: all 6 traverse same undifferentiated tunnel.
+
+**Domain 4: Secure compute mesh** — bearDog per-session BTSP crypto proven:
+- `btsp.server.create_session` returns per-session `challenge`, `server_ephemeral_pub`, `session_token`
+- skunkBat per-capability attestation active (threat_detection=true, defense=active)
+- Per-provider auth modes (permissive, btsp) — crypto policy per-capability
+
+WireGuard: one static key per tunnel for all traffic.
+
+### Exploration Scorecard
+
+| # | Domain | Status |
+|---|--------|--------|
+| 1 | Capability-aware routing | **PROVEN LIVE** |
+| 2 | Multi-stack routing | **PROVEN LIVE** |
+| 3 | Large data transfer | Structural GREEN |
+| 4 | Secure compute mesh | **PROVEN LIVE** |
+| 5 | Distributed compute | Structural GREEN |
+| 6 | Edge/SFF profile | Structural GREEN |
+
+### Shadow Timer Metrics (3 live runs collected)
+
+Timer fired 3x since enable. Consistent results across runs:
+- golgiBody: Tower 1.01x throughput, 0.99x latency (PARITY/EXCEEDS)
+- sporeGate: Tower 1.01x throughput, 1.00x latency (PARITY)
+- eastGate: Tower 0.91-1.00x throughput, 0.99x latency (PARITY)
+- 48 benchmark files total
+
+### Current Posture
+
+**flockGate: FULL GREEN. 3/6 exploration domains PROVEN LIVE.
+Shadow metrics collecting continuously. Tower stack 3/3 LIVE.
+Holding for Phase 3 cutover directive.**
+
+*flockGate team, Wave 150w. Exceeding.*
