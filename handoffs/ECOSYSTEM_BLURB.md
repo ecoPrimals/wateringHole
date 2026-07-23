@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 150w
 
 **Date**: Jul 23, 2026 08:50 EDT | **Wave**: 150w | **From**: eastGate overwatch
-**Posture**: **CONVERGING. Depot pipeline delivered. Parity benchmarks executing.**
+**Posture**: **TOWER ATOMIC PHASE 1 PASS. Full WireGuard parity on LAN + WAN.**
 
 ---
 
@@ -19,11 +19,12 @@
 
 | # | Task | Owner | Detail |
 |---|------|-------|--------|
-| 4 | **LAN parity benchmark** | sporeGate | `songbird benchmark` — sporeGate (.2) ↔ eastGate (.5), same backbone |
-| 5 | **WAN parity benchmark** | sporeGate | sporeGate (.2) → golgiBody TURN (.1) → flockGate (.6) |
-| 6 | Integrate benchmark results → `s_tower_atomic_parity_live` | eastGate | primalSpring live scenario, calibrate WAN targets |
-| 7 | sporePrint primal pipeline | eastGate | Zola replacement: petalTongue + nestGate CAS + cellMembrane |
-| 8 | CredentialStore squirrel integration | eastGate | `secrets.*` JSON-RPC, bearDog `FileVault` backend wired |
+| 4 | ~~LAN parity benchmark~~ | ~~sporeGate~~ | **PASS** — Tower 0.996x latency, 1.07x throughput vs WG |
+| 5 | ~~WAN parity benchmark~~ | ~~sporeGate~~ | **PASS** — Tower 0.992x latency, 0.993x throughput vs WG |
+| 6 | **Phase 2: Shadow mode** | eastGate | Tower runs alongside WG, live metrics comparison |
+| 7 | Integrate benchmark results → `s_tower_atomic_parity_live` | eastGate | primalSpring live scenario with actual measurements |
+| 8 | sporePrint primal pipeline | eastGate | Zola replacement: petalTongue + nestGate CAS + cellMembrane |
+| 9 | CredentialStore squirrel integration | eastGate | `secrets.*` JSON-RPC, bearDog `FileVault` backend wired |
 
 ### P2 — Queued
 
@@ -58,6 +59,7 @@
 
 | Achievement | Wave |
 |-------------|------|
+| Tower Atomic PHASE 1 PASS — full WG parity on LAN + WAN | 150w |
 | Sovereign depot pipeline (4 phases + deep debt sweep, 1110 tests) | 150w |
 | Benchmark harness shipped, TURN relay LIVE, all blockers cleared | 150v |
 | Tower primals deep debt, gate AARs GREEN, structural 21/21 | 150v |
@@ -84,7 +86,7 @@ Pending: southGate (.9), strandGate
 
 | Tier | Tool | Primal Path | Status |
 |------|------|-------------|--------|
-| **REPLACE** | WireGuard | Tower Atomic | Benchmarking |
+| **REPLACE** | WireGuard | Tower Atomic | **PHASE 1 PASS — parity proven, shadow mode next** |
 | **REPLACE** | Zola | petalTongue + nestGate CAS | Design pending |
 | **LATE-STAGE** | Forgejo | rootPulse | Post-rootPulse |
 | **FIREBREAK** | Cloudflare / Caddy / RustDesk / JupyterHub | Outer membrane | Stays |
@@ -93,5 +95,7 @@ Pending: southGate (.9), strandGate
 
 ---
 
-*Wave 150w: 3 P0 operator deploys, 5 P1 active tasks, 6 P2 queued, 4 P3 future.
-Depot pipeline delivered. Parity benchmarks executing. 43/43 converged.*
+*Wave 150w: TOWER ATOMIC PHASE 1 PASS — full WireGuard parity on LAN + WAN.
+Tower latency 0.99x WG, throughput 1.07x WG (LAN). Sovereign depot pipeline
+delivered. Shadow mode (Phase 2) next. Sovereign CI deployed on golgiBody.
+43/43 converged.*
