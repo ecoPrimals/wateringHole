@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 150v
 
-**Date**: Jul 22, 2026 11:40 EDT | **Wave**: 150v | **From**: eastGate overwatch
-**Posture**: **TOWER ATOMIC PARITY PIPELINE. TURN RELAY LIVE (since Jul 12). ONE BLOCKER: BENCHMARK HARNESS.**
+**Date**: Jul 23, 2026 07:05 EDT | **Wave**: 150v | **From**: eastGate overwatch
+**Posture**: **TOWER ATOMIC PARITY — ALL BLOCKERS RESOLVED. BENCHMARK HARNESS SHIPPED. READY TO EXECUTE.**
 
 ---
 
@@ -47,19 +47,19 @@ User → Cloudflare DNS (*.primals.eco wildcard → golgiBody 157.230.3.183)
 
 ## 3. REMAINING WORK — BY TEAM
 
-### P0 — BLOCKER (one remaining)
+### ~~P0~~ — ALL BLOCKERS RESOLVED
 
-| # | Need | Owner | Detail |
-|---|------|-------|--------|
-| ~~1~~ | ~~Deploy TURN relay on golgiBody~~ | **RESOLVED** | `songbird-relay.service` LIVE on golgiBody:3478, PID 2140600, since Jul 12. |
-| 2 | **Build benchmark harness** | songBird (eastGate) | `songbird benchmark --mode tower-atomic/wireguard --peer <gate>`. JSON output for primalSpring. Any tractable first solution. **Only blocker.** |
+| # | Need | Status | Detail |
+|---|------|--------|--------|
+| ~~1~~ | ~~TURN relay~~ | **RESOLVED** | `songbird-relay.service` LIVE on golgiBody:3478, since Jul 12. |
+| ~~2~~ | ~~Benchmark harness~~ | **SHIPPED** | `songbird benchmark` CLI: 3-phase (setup/latency/throughput), JSON+text output, p50/p95/p99. |
 
 ### P1 — Tower Atomic Parity
 
 | # | Need | Owner | Detail |
 |---|------|-------|--------|
-| 3 | LAN parity benchmark | sporeGate + eastGate | sporeGate (.2) ↔ eastGate (.5), same backbone. **READY NOW** — blocked on #2 (harness). |
-| 4 | WAN parity benchmark | sporeGate + flockGate | sporeGate (.2) → golgiBody TURN (.1) → flockGate (.6). TURN relay LIVE. Blocked on #2 only. |
+| 3 | **LAN parity benchmark** | sporeGate + eastGate | sporeGate (.2) ↔ eastGate (.5), same backbone. **UNBLOCKED — execute now.** |
+| 4 | **WAN parity benchmark** | sporeGate + flockGate | sporeGate (.2) → golgiBody TURN (.1) → flockGate (.6). **UNBLOCKED — execute now.** |
 | 5 | Live-tier scenario | primalSpring (eastGate) | `s_tower_atomic_parity_live` — ships after benchmark results. Structural (21/21) already GREEN. |
 | 6 | WAN latency target | primalSpring (eastGate) | WG=68ms on 2-hop. Redefine as "Tower ≤ WG * 1.5x" not absolute <50ms. |
 
@@ -164,8 +164,7 @@ Offline: westGate, fieldGate, biomeGate
 
 ---
 
-*Wave 150v: Tower Atomic parity pipeline active. All 3 primals evolved. TURN relay confirmed
-LIVE on golgiBody since Jul 12 (was never a blocker — stale in earlier blurb). **Single
-remaining blocker: benchmark harness** (`songbird benchmark` CLI). Once built, LAN benchmark
-(sporeGate↔eastGate) and WAN benchmark (sporeGate→golgiBody→flockGate) can execute immediately.
-Parity first, exceed later. 43/43 converged.*
+*Wave 150v: ALL BLOCKERS RESOLVED. songBird shipped `songbird benchmark` CLI — 3-phase harness
+(setup/latency/throughput), JSON+text output, p50/p95/p99 percentiles. TURN relay was already
+LIVE since Jul 12. Both LAN (sporeGate↔eastGate) and WAN (sporeGate→golgiBody→flockGate)
+benchmarks are UNBLOCKED and ready to execute. Parity first, exceed later. 43/43 converged.*
