@@ -1,45 +1,88 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# This file is owned exclusively by this gate. No other gate writes here.
-# Gate: flockGate | Updated: 2026-07-23T20:35:23Z
+# Gate: flockGate | Updated: 2026-07-23T20:48:00Z
+#
+# This file is owned exclusively by flockGate. No other gate writes here.
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-23T20:35:23Z"
+updated = "2026-07-23T20:48:00Z"
+wave = "150w"
 
 [heads]
-agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
-airSpring = "48e99734a579b5db563dfcc1b6fc24e18af511c7"
-barraCuda = "d61ae6cb1a41a069af0ac0834c7ccaa756e2a3a8"
-bearDog = "a0f5f8c49ee14e429c88a3f0814e38679219ce7d"
-benchScale = "692a7564f133425b021b9834bf7c24d41205980a"
-biomeOS = "237b2dad08807b74b9889431c6421f8078e9ba5d"
-blueFish = "c92df4a4046cec711cd98daac6800856a95d6bca"
-cellMembrane = "52a0f162c6f491dfb27b2fbc4daa4871fc6d9f8f"
-coralReef = "64be4a917881d62d7111324528db40e827f543a0"
-esotericWebb = "b35192a19d534df4b2e47e31f35a45978d1c1ab7"
-footPrint = "ad93bafbc460fe44081cc5bc9dff7acc18d1ae35"
-groundSpring = "838a590bb55026a3e696e96b069b5b40ba457ba4"
-healthSpring = "c9952c05576a51ad2a91f51c462d9dfacae5ab6c"
-helixVision = "8237d6e0f3aaa7a03553cc1b75916aff10be6c27"
-hotSpring = "b01f3d3e5011850b4a924dbbf22e790c22ffdf9c"
-initioChem = "4295d093ce03dbc8afdcf711f2fb91b0df35f0ab"
-lithoSpore = "c717d74357c7d76ded43ab8cbd60e46e0541d7ca"
-loamSpine = "846bd3713018e2b5ec54d897b37ff878fc4159c2"
-ludoSpring = "dac65e8fc0d45e9876e976d5c09a5eddc6534179"
-nestGate = "785eb882a12e56d3aca92cb58aba2cdeca592539"
-neuralSpring = "6a1d579ac1856293f10ef780c0857b8903a76294"
-petalTongue = "8d976cb8b6a4b1833c207c4058bdd27c7dafd39a"
-plasmidBin = "c2ef7bc218ae25853798f4c3d59e6c1d85f330de"
-primalSpring = "86f37da986f0a82a4f28b209c0d76d9e020c1e23"
-projectFOUNDATION = "2bcc3811b0106cd336e4ade070a124cfc80a8f16"
-projectNUCLEUS = "09c8e19a499fc77224339b6204f69d02a03f2208"
-rhizoCrypt = "151182026e93f78cf32662bfc2b620b5e5b4208a"
-skunkBat = "16ed615d56a6e0b89658db582647ff5b4b33b0a9"
-songBird = "0998d03dec2b196fb8932e893fac84fc7f86500a"
-sourDough = "89ea3d1c5e6dc03f22bb4c8b2bc8df29267973a5"
-sporePrint = "573c0db54b8eed0b5da486395bbb605b5219f5f6"
-squirrel = "48c515bbcdcb1b121cd11470a72d2afe1e3e0adc"
-sweetGrass = "3fd17f874c49395936125e91d6a1bf31a466df4a"
-toadStool = "dc16813059baadfd78ca9a9b64e58f5de49957a3"
-wetSpring = "7b2318a18cd5ea7d88117b19ccbe0b4afd98796c"
-whitePaper = "773af5ce6963c44927e63638869bb4b39b71b1b1"
+primalSpring = "41cb0a0"
+wateringHole = "ca95a3d8"
+esotericWebb = "2e5c2e5"
+songBird = "cfa84a2"
+petalTongue = "c6baa1d"
+
+[remotes]
+standard = "Forgejo-first (origin=Forgejo, github=mirror)"
+swap_completed = true
+
+[mesh]
+node_id = "flockGate"
+songbird_version = "0.2.1"
+wireguard_status = "UP"
+wireguard_addr = "10.13.37.6/24"
+songbird_peers_reachable = 4
+songbird_mesh_status = "initialized, 4 direct paths, relay enabled"
+status = "5-GATE ACTIVE MESH + SONGBIRD 4-PEER OPERATIONAL"
+
+[tower_shadow]
+status = "ACTIVE"
+interval = "60min"
+results = 16
+latest = "wireguard_southGate_20260723_163648.json"
+peers_benchmarked = ["golgi", "ironGate", "northGate", "southGate", "sporeGate"]
+
+[songbird]
+status = "LIVE — P0 fixes deployed, mesh 4/4 reachable"
+version = "0.2.1"
+commit = "cfa84a2"
+uds = "/run/user/1000/biomeos/songbird.sock"
+http_port = 7780
+federation_port = 7700
+peers_online = 4
+capability_routing = "PROVEN LIVE (Domain 1 confirmed)"
+fixes_deployed = ["mesh.prune_stale", "socket dir guard", "drawbridge diagnostics"]
+
+[esotericwebb]
+status = "LIVE — V22, scene graph pipeline ACTIVE via petalTongue v1.7"
+version = "V22"
+commit = "2e5c2e5"
+systemd = "esotericwebb-server.service ENABLED + LINGER"
+uptime = "3 days (stable since 150o fix)"
+primals_connected = 6
+webb_domain = "webb.primals.eco"
+wan_post = "200 OK (196ms)"
+wan_get = "200 OK (196ms)"
+
+[petaltongue]
+status = "DEPLOYED — v1.7.0 IPC server active"
+version = "1.7.0"
+commit = "c6baa1d"
+systemd = "petaltongue-server.service ENABLED"
+uptime = "1.5 days"
+uds = "/run/user/1000/biomeos/petaltongue.sock"
+
+[wan_subdomain_posture]
+webb_primals_eco = "200 (196ms)"
+footprint_primals_eco = "200 (203ms)"
+sporeprint_primals_eco = "200 (179ms)"
+git_primals_eco = "200 (160ms)"
+all_surfaces_live = true
+
+[primalspring]
+head = "41cb0a0"
+scenarios = 182
+tests = 1225
+failures = 0
+suite_status = "GREEN"
+new_scenarios = ["s_tower_capability_routing", "s_tower_multi_stack", "s_tower_large_data", "s_tower_secure_compute", "s_tower_compute_mesh", "s_tower_edge_profile"]
+known_debt = ["graphenegate-readiness:14", "composition-access-control:15", "arch-fitness:1"]
+
+[remaining_divergence]
+p0_items = 0
+p0_resolved = ["tower.shadow enabled (already active)", "songBird mesh fixed (4/4 reachable)"]
+p1_items = ["checksums.toml format migration (eastGate code task)", "drawbridge JSON-RPC→HTTP translation (eastGate)"]
+p2_items = ["Android Keystore + grapheneGate test", "footPrint declarative source registry"]
