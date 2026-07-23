@@ -54,17 +54,21 @@ Also completed:
 |---|------|-------|--------|
 | 1 | **Drawbridge JSON-RPC→HTTP translation** | eastGate / songBird | `CapabilityProxyRouter` needs to speak JSON-RPC to backends and translate to HTTP responses. Root-caused by flockGate. |
 | 2 | **`checksums.toml` format migration** | eastGate / cellMembrane | New membrane expects struct entries, depot has plain strings. depot.integrity DEGRADED on flockGate. |
-| 3 | **Enable `tower.shadow` on flockGate + golgiBody** | operator | Binary is in depot. Install and `membrane tower.shadow --enable` on remaining gates. |
+| 3 | **Enable `tower.shadow` on flockGate + golgiBody** | sporeGate topology | Binary is in depot. Install and `membrane tower.shadow --enable` on remaining gates. |
 
 ---
 
-## P1 — HARDWARE / OPERATOR
+## P1 — TOPOLOGY (sporeGate team)
 
-| # | Task | Owner | Detail |
-|---|------|-------|--------|
-| 1 | **Direct LAN peering** (sporeGate ↔ eastGate) | operator | Same /22 subnet but unreachable. VLAN/switch segment issue. Unlocks sub-1ms LAN benchmarks. |
-| 2 | **10G backbone cabling** | operator | 4 towers NIC'd. Cabling sole blocker for ≥1Gbps sustained. |
-| 3 | iperf3 sustained throughput baseline | sporeGate + flockGate ops | Deferred until direct LAN peering established. |
+All hardware, networking, and physical topology owned by sporeGate.
+
+| # | Task | Detail |
+|---|------|--------|
+| 1 | **MikroTik LAN peering** (sporeGate ↔ eastGate) | Both wired into same MikroTik. 192.168.4.3↔192.168.4.30 unreachable — check firewall rules, allow songBird ports (:7700, :7780) between LAN IPs. Unlocks sub-1ms benchmarks. |
+| 2 | **songBird LAN peer discovery** | Add `lan_addr` to `peers.toml` enrollment so songBird tries LAN path (priority 0) before WG overlay. songBird already prefers `EndpointType::Local` over all other paths. |
+| 3 | **10G backbone cabling** | 4 towers NIC'd (northGate, southGate, eastGate, westGate). Cabling sole blocker for ≥1Gbps sustained. |
+| 4 | iperf3 sustained throughput baseline | Deferred until LAN peering established. |
+| 5 | Gate enrollment (southGate, strandGate) | USB staged. Physical access required. |
 
 ---
 
@@ -112,13 +116,6 @@ Tower already **2x WG throughput on WAN**. Capability routing **proven live** on
 | 3 | pseudoSpore Explorer |
 | 4 | SHOW_HN readiness |
 
-### Gate Enrollment
-
-| Gate | Detail |
-|------|--------|
-| southGate | USB staged, .9 allocated |
-| strandGate | Dual EPYC, 256GB RAM, RTX 3090 |
-
 ---
 
 ## WHAT'S DONE
@@ -142,13 +139,13 @@ Tower already **2x WG throughput on WAN**. Capability routing **proven live** on
 ## TEAM TOPOLOGY
 
 ```
-eastGate (.5)    — primalSpring code hub (scenarios, integration, orchestration)
-sporeGate (.2)   — cellMembrane team (build authority, membrane commands, depot)
-flockGate (.6)   — songBird + Tower Atomic primal teams (transport, crypto, protocol)
+eastGate (.5)    — primalSpring code hub (scenarios, integration, overwatch)
+sporeGate (.2)   — cellMembrane + topology (build, membrane, hardware, networking)
+flockGate (.6)   — songBird + Tower Atomic primals (transport, crypto, protocol)
 golgiBody (.1)   — hub infrastructure (TURN relay, depot, CI hooks)
 
 Experiment coordination:
-  primalSpring on sporeGate — operator + benchmark execution, AARs
+  primalSpring on sporeGate — topology ops, benchmark execution, AARs
   primalSpring on flockGate — WAN peer, Tower primal validation
   primalSpring on eastGate  — code evolution, scenario authorship
 ```
@@ -175,4 +172,5 @@ golgiBody (10.13.37.1) — hub, VPS, TURN relay, CI 29/43, depot
 FIXED by flockGate team (mesh enrollment, socket, prune_stale). Capability
 routing proven LIVE — Domain 1 of 6 confirmed. Shadow deploy UNBLOCKED.
 Remaining P0: drawbridge JSON-RPC→HTTP translation, checksums.toml format.
-Hardware: direct LAN peering blocked by VLAN/switch segment. 43/43 converged.*
+Topology (sporeGate): MikroTik LAN peering + 10G cabling + gate enrollment.
+43/43 converged.*
