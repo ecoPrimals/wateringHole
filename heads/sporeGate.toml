@@ -5,26 +5,26 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-23T17:50:00Z"
+updated = "2026-07-23T20:37:00Z"
 
 [heads]
 bearDog = "1e3af8d"
-songBird = "9ba1bdf"
+songBird = "79bd244"
 nestGate = "d5d45df"
 biomeOS = "6ee3c1a"
 rhizoCrypt = "ae205a8"
 squirrel = "68c9e04"
 sweetGrass = "76dc35f"
 loamSpine = "cb1beb0"
-skunkBat = "d62dac7"
+skunkBat = "ae7267f"
 coralReef = "2246ebf"
 barraCuda = "3cfdf0e"
 petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
 cellMembrane = "f6b67ba"
-primalSpring = "ab206ff9"
-wateringHole = "ea6cc87"
+primalSpring = "41cb0a0"
+wateringHole = "a346c9a"
 sporePrint = "8106d9c"
 
 [deploy]
@@ -46,9 +46,9 @@ lan_throughput = "Tower 6.70 Mbps vs WG 6.24 Mbps (1.07x)"
 wan_latency = "Tower 133.3ms vs WG 134.4ms (0.992x — PARITY)"
 wan_throughput = "Tower 6.85 Mbps vs WG 6.90 Mbps (0.993x)"
 wan_jitter = "Tower 0.42ms vs WG 0.50ms (Tower lower)"
-membrane_version = "0.1.0 (f6b67ba) — tower.shadow DEPLOYED"
-tower_shadow = "FUNCTIONAL — 3/3 primals LIVE, Tower probes fail (remote gates not enrolled). WG probes healthy. Blocked on flockGate mesh.enroll."
-next = "Phase 2: Shadow mode — tower.shadow deployed, blocked on flockGate mesh enrollment"
+membrane_version = "0.1.0 (f6b67ba) — tower.shadow DEPLOYED on 3 gates"
+tower_shadow = "ACTIVE on sporeGate (60min), flockGate (60min, 7 peers), golgiBody (60min, 7 peers). songBird mesh enrollment FIXED by flockGate team. Shadow UNBLOCKED."
+next = "Phase 2 ACTIVE: Shadow mode live on 3 gates. Awaiting first full shadow cycle results."
 
 [hardware]
 lan_peering = "BLOCKED: eastGate (192.168.4.30) unreachable from sporeGate (192.168.4.3) LAN. Different VLAN or physical segment. Need cabling/switch config for direct sub-1ms peering."
@@ -62,8 +62,13 @@ live = "200"
 git = "200"
 lab = "401 (auth)"
 
+[primalspring]
+overwatch = "1225 passed, 0 failed, 2 ignored — 6 new Tower scenarios absorbed"
+scenarios = 176
+
 [resolved]
 tower_parity_p1 = "PHASE 1 PASS: Tower matches/exceeds WG (Wave 150w)"
 sovereign_ci_p0 = "DEPLOYED: CI hooks on 29 repos + BUILD_AUTHORITY active (Wave 150w)"
 petaltongue_v17 = "DEPLOYED: v1.7.0 on sporeGate + flockGate (Wave 150u)"
 turn_relay_p0 = "NOT_A_BLOCKER: already LIVE since Jul 12"
+shadow_deploy_p0 = "DEPLOYED: tower.shadow ACTIVE on 3 gates (sporeGate, flockGate, golgiBody) (Wave 150w)"
