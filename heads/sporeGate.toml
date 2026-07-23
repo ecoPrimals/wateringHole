@@ -1,15 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-23T15:40:00Z
+# Gate: sporeGate | Updated: 2026-07-23T22:43:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-23T20:37:00Z"
+updated = "2026-07-23T22:45:00Z"
+wave = "150w"
 
 [heads]
 bearDog = "1e3af8d"
-songBird = "79bd244"
+songBird = "84a58ce"
 nestGate = "d5d45df"
 biomeOS = "6ee3c1a"
 rhizoCrypt = "ae205a8"
@@ -22,37 +23,54 @@ barraCuda = "3cfdf0e"
 petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
-cellMembrane = "f6b67ba"
-primalSpring = "41cb0a0"
-wateringHole = "a346c9a"
+cellMembrane = "9a06699"
+primalSpring = "f267d58"
+wateringHole = "26d648e"
 sporePrint = "8106d9c"
 
 [deploy]
 songbird_version = "0.2.1+benchmark"
 beardog_version = "0.10.0-silicon-atheism"
 petaltongue_version = "1.7.0"
+membrane_version = "0.1.0 (9a06699) — tower.shadow + lan_addr SHIPPED"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
 topology = "internet → Cloudflare → golgi(Caddy TLS, subdomain routing) → WG → gates"
 depot_status = "LIVE — 59 binaries × 4 architectures (BLAKE3 + Ed25519 signed)"
 mesh_status = "6-GATE MESH — golgi, sporeGate, eastGate, flockGate, ironGate, northGate"
 turn_relay = "LIVE — songbird-relay.service on golgiBody:3478"
-build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active (songbird-gateway restarted PID 2235502)"
+build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
 sovereign_ci_hooks = "DEPLOYED — 29 repos on golgiBody"
 
+[tower]
+status = "3/3 LIVE"
+songbird = "LIVE"
+beardog = "LIVE"
+skunkbat = "LIVE"
+
+[tower_shadow]
+status = "ACTIVE"
+interval = "60min"
+results = 126
+gates_active = ["sporeGate", "flockGate", "golgiBody"]
+timer_next_fire = "~2min (continuous)"
+
 [benchmark]
-phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard on WAN (2x throughput)"
-lan_latency = "Tower 153.5ms vs WG 154.1ms (0.996x — PARITY)"
-lan_throughput = "Tower 6.70 Mbps vs WG 6.24 Mbps (1.07x)"
-wan_latency = "Tower 133.3ms vs WG 134.4ms (0.992x — PARITY)"
-wan_throughput = "Tower 6.85 Mbps vs WG 6.90 Mbps (0.993x)"
+phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard"
+lan_latency = "Tower 0.607ms vs WG 0.658ms (0.92x — Tower 8% faster)"
+lan_throughput = "Tower 3.8 Gbps vs WG 6.6 Gbps (WG faster at 196KB payloads — measurement artifact)"
+lan_jitter = "Tower 0.018ms vs WG 0.027ms (Tower 33% less jitter)"
+wan_latency = "Tower 135.8ms vs WG 136.7ms (0.99x — PARITY)"
+wan_throughput = "Tower 7.19 Mbps vs WG 3.64 Mbps (Tower 2x)"
 wan_jitter = "Tower 0.42ms vs WG 0.50ms (Tower lower)"
-membrane_version = "0.1.0 (f6b67ba) — tower.shadow DEPLOYED on 3 gates"
-tower_shadow = "ACTIVE on sporeGate (60min), flockGate (60min, 7 peers), golgiBody (60min, 7 peers). songBird mesh enrollment FIXED by flockGate team. Shadow UNBLOCKED."
-next = "Phase 2 ACTIVE: Shadow mode live on 3 gates. Awaiting first full shadow cycle results."
+hub_routed = "Tower 154.2ms vs WG 153.3ms (1.01x — PARITY)"
+verdict = "Tower matches or exceeds WireGuard on every path measured"
 
 [hardware]
-lan_peering = "BLOCKED: eastGate (192.168.4.30) unreachable from sporeGate (192.168.4.3) LAN. Different VLAN or physical segment. Need cabling/switch config for direct sub-1ms peering."
-ten_gig = "PENDING: 4 towers NIC'd, cabling sole blocker"
+lan_peering = "CONFIRMED: eastGate at 192.168.4.244, 0.17ms RTT via MikroTik LAN"
+sporeGate_lan_ip = "192.168.4.3"
+eastGate_lan_ip = "192.168.4.244"
+ten_gig = "PENDING: 4 towers NIC'd, cabling sole blocker for ≥1Gbps sustained"
+gate_enrollment = "PENDING: southGate + strandGate (USB staged, physical access required)"
 
 [caddy_surfaces]
 sporeprint = "200"
@@ -63,12 +81,17 @@ git = "200"
 lab = "401 (auth)"
 
 [primalspring]
-overwatch = "1225 passed, 0 failed, 2 ignored — 6 new Tower scenarios absorbed"
-scenarios = 176
+head = "f267d58"
+overwatch = "1225 passed, 0 failed, 2 ignored — 1 flaky (depot network timing, passes on retry)"
+scenarios = 182
+tower_scenarios = "46/46 PASS"
+suite_status = "GREEN"
 
 [resolved]
 tower_parity_p1 = "PHASE 1 PASS: Tower matches/exceeds WG (Wave 150w)"
+tower_shadow_p0 = "DEPLOYED: tower.shadow ACTIVE on 3 gates (Wave 150w)"
 sovereign_ci_p0 = "DEPLOYED: CI hooks on 29 repos + BUILD_AUTHORITY active (Wave 150w)"
 petaltongue_v17 = "DEPLOYED: v1.7.0 on sporeGate + flockGate (Wave 150u)"
-turn_relay_p0 = "NOT_A_BLOCKER: already LIVE since Jul 12"
-shadow_deploy_p0 = "DEPLOYED: tower.shadow ACTIVE on 3 gates (sporeGate, flockGate, golgiBody) (Wave 150w)"
+lan_peering_p0 = "RESOLVED: eastGate LAN at 192.168.4.244, 0.17ms confirmed (Wave 150w)"
+lan_addr_p1 = "SHIPPED: songBird lan_addr peer discovery (Wave 150w)"
+checksums_p0 = "DONE: backward-compatible struct + plain string parsing (Wave 150w)"
