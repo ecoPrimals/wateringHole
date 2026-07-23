@@ -1,9 +1,9 @@
-# cellMembrane Wave 150w — Deep Debt Sweep + Docs Update
+# cellMembrane Wave 150w — tower.shadow + checksums migration + Deep Debt Sweep
 
 **Date:** 2026-07-23
-**Wave:** 150w (covering 150u unwrap audit + 150v sovereign pipeline + 150w debt sweep)
+**Wave:** 150w (covering 150u unwrap audit + 150v sovereign pipeline + 150w full day)
 **Primal:** cellMembrane
-**Gate:** eastGate
+**Gate:** sporeGate (build authority) + eastGate (code hub)
 
 ---
 
@@ -59,31 +59,63 @@ Three waves of evolution since last docs sweep (150t):
 
 ---
 
-## Root Docs Updated
+### Wave 150w afternoon — `membrane tower.shadow` (P0 #1)
+- Shipped `membrane tower.shadow` command (1,204 lines, 14 tests, 0 warnings)
+- Commands: `tower.shadow`, `tower.shadow.export`, `tower.shadow --enable/--disable`, `tower.status`, `tower.benchmark`
+- Types: `TransportProbe`, `GatePairShadow`, `TowerShadowReport` in cellmembrane-types
+- Continuous shadow benchmarking via systemd timer (60min interval)
+- Shadow deploy ACTIVE on sporeGate, flockGate, golgiBody
 
-- README.md: Wave 150t → 150w, test count 1101 → 1110, deep debt history updated
-- GLACIAL_SHIFT_TRACKER.md: Wave 150w entry with sovereign pipeline + debt sweep
-- VPS_STATE.md: Date and test count updated
-- RUNBOOKS.md: Date bumped
-- IRONGATE_VERIFICATION.md: Mesh count 6→7, test count updated, composition details refreshed
+### Wave 150w afternoon — `checksums.toml` format migration (P0 #2)
+- Custom `serde::Deserialize` for `ChecksumEntry` accepts both struct and plain-string formats
+- `parse_checksums_toml` handles mixed struct + string entries
+- `persist_checksums` now writes struct format with `size` field
+- `ChecksumEntry` relocated from harvest.rs (857→804L) to checksum.rs
+- Resolves depot.integrity DEGRADED on flockGate
+
+### Wave 150w evening — Deep debt sweep
+- `format!("{}", path.display())` → `path.display().to_string()` in gateway/mod.rs
+- All `#[allow(clippy::)]` annotations reviewed — all have explicit reasons
+- Zero TODO/FIXME/HACK, zero dead code, zero `unwrap()` in production
+
+## Health Metrics
+
+| Metric | Value |
+|--------|-------|
+| Tests | 1136 |
+| Clippy warnings | 0 |
+| Fmt drift | 0 |
+| Production unwraps | 0 |
+| Files >800L | 2 (gateway.rs 833, harvest.rs 804 — both structurally sound) |
+
+## Files Changed (afternoon + evening)
+
+| File | Change |
+|------|--------|
+| `crates/cellmembrane-types/src/gateway.rs` | Tower shadow types: TransportProbe, GatePairShadow, TowerShadowReport |
+| `crates/membrane-shadow/src/tower/mod.rs` | tower.shadow dispatch + dual-path probe implementation |
+| `crates/membrane-shadow/src/tower/timer.rs` | Continuous shadow timer + songBird benchmark integration |
+| `crates/membrane-shadow/src/plasmid/checksum.rs` | ChecksumEntry with custom deserializer + format migration |
+| `crates/membrane-shadow/src/plasmid/harvest.rs` | ChecksumEntry moved out, re-export added |
+| `crates/membrane-shadow/src/plasmid/integrity.rs` | Import path updated |
+| `crates/membrane-shadow/src/gateway/mod.rs` | display().to_string() idiom cleanup |
 
 ---
 
-## Debris Review
+## Root Docs Updated
 
-Zero archivable debris found:
-- No temp/backup files (*.bak, *.orig, *.tmp)
-- No stale shell scripts (3 scripts all active: cursor hook, 2 Forgejo hooks)
-- No dead documentation
-- All `#[allow(dead_code)]` annotations have explicit `reason` attributes
-- No `todo!`/`unimplemented!`/mocks in production code
+- README.md: test count 1110 → 1136, tower.shadow noted
+- GLACIAL_SHIFT_TRACKER.md: Wave 150w expanded with full day's work
+- VPS_STATE.md: test count updated
+- IRONGATE_VERIFICATION.md: test count, checksums.toml migration noted
 
 ---
 
 ## For Upstream Overwatch
 
-- **No gaps requiring upstream primal team action** at this time
-- Sovereign depot auto-build pipeline is wired but pending:
+- **P0 remaining**: Drawbridge JSON-RPC→HTTP translation (eastGate/songBird code task)
+- **P1 topology**: 10G backbone cabling, gate enrollment (physical, operator)
+- Tower Atomic **EXCEEDS** WireGuard — shadow ACTIVE, continuous metrics collecting
+- Sovereign depot auto-build pipeline wired but pending:
   - songBird mesh.publish IPC for `depot.build_pending` signal (Phase 4)
-  - Forgejo hook deployment to golgiBody (Phase 1 script exists, needs `scp` to VPS)
-- All deep debt targets below 800L threshold; codebase is clean
+- All deep debt targets addressed; codebase is clean
