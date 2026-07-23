@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-23T15:40:00Z"
+updated = "2026-07-23T17:50:00Z"
 
 [heads]
 bearDog = "1e3af8d"
@@ -22,7 +22,7 @@ barraCuda = "3cfdf0e"
 petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
-cellMembrane = "2b447c6"
+cellMembrane = "f6b67ba"
 primalSpring = "ab206ff9"
 wateringHole = "ea6cc87"
 sporePrint = "8106d9c"
@@ -46,7 +46,9 @@ lan_throughput = "Tower 6.70 Mbps vs WG 6.24 Mbps (1.07x)"
 wan_latency = "Tower 133.3ms vs WG 134.4ms (0.992x — PARITY)"
 wan_throughput = "Tower 6.85 Mbps vs WG 6.90 Mbps (0.993x)"
 wan_jitter = "Tower 0.42ms vs WG 0.50ms (Tower lower)"
-next = "Phase 2: Shadow mode — blocked on membrane tower.shadow (cellMembrane P0)"
+membrane_version = "0.1.0 (f6b67ba) — tower.shadow DEPLOYED"
+tower_shadow = "FUNCTIONAL — 3/3 primals LIVE, Tower probes fail (remote gates not enrolled). WG probes healthy. Blocked on flockGate mesh.enroll."
+next = "Phase 2: Shadow mode — tower.shadow deployed, blocked on flockGate mesh enrollment"
 
 [hardware]
 lan_peering = "BLOCKED: eastGate (192.168.4.30) unreachable from sporeGate (192.168.4.3) LAN. Different VLAN or physical segment. Need cabling/switch config for direct sub-1ms peering."
