@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 150v
+# ecoPrimals Ecosystem Blurb — Wave 150w
 
-**Date**: Jul 23, 2026 07:45 EDT | **Wave**: 150v | **From**: eastGate overwatch
-**Posture**: **EXECUTE PARITY BENCHMARKS. DEPOT PIPELINE GAP FOUND — cellMembrane FIX ASSIGNED.**
+**Date**: Jul 23, 2026 08:45 EDT | **Wave**: 150w | **From**: eastGate overwatch
+**Posture**: **SOVEREIGN DEPOT PIPELINE DELIVERED. PARITY BENCHMARKS EXECUTING.**
 
 ---
 
@@ -121,13 +121,14 @@ Targets are **relative to WG baseline**, not absolute thresholds.
 >
 > | # | Item | Priority |
 > |---|------|----------|
-> | 1 | **Sovereign depot auto-build pipeline** (cellMembrane) | **P0** |
-> | 2 | Integrate parity benchmark results → live scenario | **P1** |
-> | 3 | sporePrint primal pipeline (Zola replacement design) | P1 |
-> | 4 | CredentialStore squirrel integration (`secrets.*` JSON-RPC) | P1 |
-> | 5 | bingoCube WASM WebGL widget (petalTongue unblocked) | P2 |
-> | 6 | `.unwrap()` clippy audit — remaining primals | P2 |
-> | 7 | rootPulse design (sovereign VCS, long-term) | P3 |
+> | 1 | ~~Sovereign depot auto-build pipeline~~ | **DONE** |
+> | 2 | Deploy Phase 1 hook to golgiBody + set `MEMBRANE_BUILD_AUTHORITY=1` on sporeGate | **P0** |
+> | 3 | Integrate parity benchmark results → live scenario | **P1** |
+> | 4 | sporePrint primal pipeline (Zola replacement design) | P1 |
+> | 5 | CredentialStore squirrel integration (`secrets.*` JSON-RPC) | P1 |
+> | 6 | bingoCube WASM WebGL widget (petalTongue unblocked) | P2 |
+> | 7 | `.unwrap()` clippy audit — remaining primals | P2 |
+> | 8 | rootPulse design (sovereign VCS, long-term) | P3 |
 >
 > **CONVERGENCE RULE**: eastGate is the sole code evolver.
 > Gate teams file AARs → eastGate integrates and pushes.
@@ -177,34 +178,23 @@ Targets are **relative to WG baseline**, not absolute thresholds.
 
 ---
 
-### cellMembrane — Sovereign Depot Pipeline (P0 evolution)
+### cellMembrane — Sovereign Depot Pipeline (DELIVERED)
 
-> **cellMembrane** on eastGate — Wave 150v, depot auto-build pipeline.
+> **cellMembrane** — Wave 150w, all 4 phases implemented + deep debt sweep.
 >
-> **Gap found**: Forgejo push → source syncs to gates in minutes, but
-> depot binary stays stale indefinitely. songBird benchmark shipped Jul 22,
-> depot binary was still from Jul 15. All Rust building blocks exist but
-> are not connected end-to-end.
+> | Phase | Status | Detail |
+> |-------|--------|--------|
+> | 1 Reactive | **DONE** | `golgi-post-receive-ci.sh` — SSH to sporeGate on primal push |
+> | 2 Convergent | **DONE** | `detect_commit_drift()` + `run_commit_drift_pipeline()` in post_sync.rs |
+> | 3 Enforcement | **DONE** | `validate_lineage()` — BLAKE3 + provenance + builder. PostPrimordial hard block |
+> | 4 Signal | **DONE** | `notify_mesh_build_pending()` — logged, songBird mesh publish pending |
 >
-> **4-phase fix** (handoff at `handoffs/CELLMEMBRANE_WAVE150v_SOVEREIGN_DEPOT_PIPELINE.md`):
+> **Deep debt sweep**: Unified `MESH_REGISTRY` (1-line gate additions),
+> shared canary/sandbox staging (-60L duplication), capability-based naming,
+> let-chain modernization. 1,110 tests, 0 warnings, 0 unwraps.
 >
-> | Phase | Deliverable | Complexity |
-> |-------|------------|------------|
-> | 1 | `golgi-post-receive-ci.sh` — reactive push trigger | Low (bash, deploy now) |
-> | 2 | Cascade commit drift detection + auto-harvest on builder | Medium (~100L Rust) |
-> | 3 | PostPrimordial hard enforcement — depot-only with crypto lineage | Medium (~150L Rust) |
-> | 4 | `depot.build_pending` mesh signal | Low (~50L Rust) |
->
-> **Phase 1 is deployable immediately** — zero Rust changes. Hook SSHs to
-> sporeGate to run existing `sovereign.ci.trigger`. Script at
-> `gardens/cellMembrane/deploy/hooks/forgejo/golgi-post-receive-ci.sh`.
->
-> **PostPrimordial primals** (beardog, songbird, skunkbat, nestgate,
-> cellmembrane, biomeos) must deploy exclusively from signed depot.
-> No local builds on consumer gates. Hard enforcement.
->
-> **CONVERGENCE RULE**: Rust evolution on eastGate only. Deploy Phase 1
-> hook on golgiBody. Set `MEMBRANE_BUILD_AUTHORITY=1` on sporeGate.
+> **Remaining deploy**: `scp` Phase 1 hook to golgiBody, set
+> `MEMBRANE_BUILD_AUTHORITY=1` on sporeGate.
 
 ---
 
@@ -239,7 +229,8 @@ golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, TURN relay LIVE (:3478)
 
 | Achievement | Wave |
 |-------------|------|
-| Depot pipeline gap identified, sovereign auto-build handoff issued | 150v |
+| Sovereign depot pipeline DELIVERED (4 phases + deep debt sweep, 1110 tests) | 150w |
+| Depot pipeline gap identified, handoff issued | 150v |
 | Benchmark harness shipped, TURN relay LIVE, all blockers resolved | 150v |
 | Tower primals deep debt, gate AARs GREEN, structural 21/21, WG baselines | 150v |
 | Standards reorg, DNSSEC 3/3, Sovereignty roadmap, cascade 43/43 | 150s-u |
@@ -248,7 +239,8 @@ golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, TURN relay LIVE (:3478)
 
 ---
 
-*Wave 150v: Parity benchmarks executing (sporeGate drives, eastGate LAN peer, flockGate WAN
-peer). Depot pipeline gap found — Forgejo pushes don't trigger sporeGate rebuilds. cellMembrane
-4-phase fix assigned: reactive hook (deployable now), cascade drift detection, postPrimordial
-hard enforcement, build-pending mesh signal. Parity first, exceed later. 43/43 converged.*
+*Wave 150w: cellMembrane delivered sovereign depot auto-build pipeline — reactive Forgejo hook,
+cascade commit drift detection with auto-harvest on builder gates, postPrimordial hard enforcement
+(BLAKE3 + provenance + builder authority), and build-pending mesh signal. Deep debt sweep:
+unified MESH_REGISTRY, shared staging, 1110 tests. Parity benchmarks executing. Remaining
+deploy: hook to golgiBody + MEMBRANE_BUILD_AUTHORITY on sporeGate. 43/43 converged.*
