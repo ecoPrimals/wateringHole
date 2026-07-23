@@ -1,57 +1,103 @@
 # ecoPrimals Ecosystem Blurb — Wave 150w
 
-**Date**: Jul 23, 2026 08:50 EDT | **Wave**: 150w | **From**: eastGate overwatch
-**Posture**: **TOWER ATOMIC PHASE 1 PASS. Full WireGuard parity on LAN + WAN.**
+**Date**: Jul 23, 2026 10:00 EDT | **Wave**: 150w | **From**: eastGate overwatch
+**Posture**: **PHASE 2 — SHADOW DEPLOY ALL LIVE TOPO. EXPLORE + EXCEED.**
 
 ---
 
-## REMAINING WORK
+## P0 — Shadow Deploy (all live gates)
 
-### P0 — Operator Deploy (no code, config only)
+Tower Atomic PHASE 1 PASS (Jul 23). Deploy shadow mode across all live topology.
+Tower runs alongside WireGuard — WG carries production, Tower carries mirrored
+traffic with continuous metrics. Both stacks active simultaneously.
+
+| Gate | IP | Role | Shadow Action |
+|------|----|------|---------------|
+| golgiBody | .1 | Hub, TURN relay | Deploy multi-stack routing (RPC + blob + relay profiles) |
+| sporeGate | .2 | Build authority | Shadow enable, benchmark driver |
+| eastGate | .5 | Code hub | Shadow enable, LAN peer to sporeGate |
+| flockGate | .6 | WAN peer | Shadow enable, WAN metrics collection |
+
+**Operator steps per gate**:
+1. `membrane tower.shadow --enable` — activates Tower transport on songBird mesh port
+2. Verify shadow metrics landing in `benchScale/tower_shadow/`
+3. Confirm WG production traffic unaffected
+
+### P0 — Operator Deploy (remaining)
 
 | # | Task | Owner | Detail |
 |---|------|-------|--------|
 | 1 | Deploy `golgi-post-receive-ci.sh` to golgiBody | operator | `scp` hook to each primal repo's `hooks/post-receive.d/30-sovereign-ci` |
 | 2 | Set `MEMBRANE_BUILD_AUTHORITY=1` on sporeGate | operator | systemd unit override or `membrane.env` |
-| 3 | Harvest songBird on sporeGate | sporeGate | `membrane plasmid.harvest --local --primal songbird --force && membrane plasmid.depot_sync --push` |
 
-### P1 — Active (in progress)
+---
+
+## P1 — Exploration (primalSpring teams evolve Tower Atomic)
+
+Tower Atomic is a *specialized* capability-routed mesh. WireGuard is a
+general-purpose kernel VPN. The specialization opens 6 domains where Tower
+can exceed WireGuard over time.
+
+| # | Domain | Scenario | What to Measure | Springs |
+|---|--------|----------|-----------------|---------|
+| 1 | **Capability-aware routing** | `s_tower_capability_routing` | Per-capability latency/throughput vs single WG tunnel | all |
+| 2 | **Multi-stack routing** | `s_tower_multi_stack` | N songBird instances on golgiBody, per-purpose tuning | songBird |
+| 3 | **Large data transfer** | `s_tower_large_data` | 100MB–10GB blobs: throughput, CPU, CAS dedup benefit | wetSpring, hotSpring, neuralSpring |
+| 4 | **Secure compute mesh** | `s_tower_secure_compute` | bearDog per-session keys vs WG tunnel crypto | bearDog, all |
+| 5 | **Distributed compute** | `s_tower_compute_mesh` | toadStool cross-gate dispatch latency + aggregation | hotSpring, groundSpring |
+| 6 | **Edge/SFF profile** | `s_tower_edge_profile` | songBird on NUC Celeron: idle CPU, memory, relay throughput | lithoSpore |
+
+### Why Tower can exceed WG
+
+| WireGuard | Tower Atomic |
+|-----------|-------------|
+| All packets same tunnel | Routes by capability — knows *what* the traffic is |
+| One tunnel per peer | N stacks per relay, each tuned for a traffic class |
+| Fixed MTU (1420) | Negotiable framing — jumbo on 10G, chunked on WAN |
+| No content awareness | CAS-aware blob routing to nearest cached copy |
+| Tunnel-level encryption | Per-capability crypto policy (PostPrimordial = strong) |
+| Just a pipe | Compute-aware: workloads route to right substrate |
+| Same overhead on Celeron as EPYC | Tunable: minimal relay profile for edge hardware |
+
+### Hardware targets for exploration
+
+| Workload | Path | Hardware |
+|----------|------|----------|
+| Large bioinformatics data | strandGate (EPYC, 256GB) ↔ eastGate | 10G backbone (when cabled) |
+| HBM2 compiler artifacts | biomeGate (Threadripper, Titan V) ↔ gates | 1G / 10G |
+| Multi-GPU compute | strandGate (3090+6950XT) ↔ biomeGate (Titan V) | Cross-gate GPU dispatch |
+| NPU coordination | eastGate ↔ strandGate ↔ biomeGate (3× Akida) | Neuromorphic mesh |
+| Edge relay | NUC Celerons + NucBox M6 | Minimal Tower profile |
+| WAN science | flockGate ↔ golgiBody TURN ↔ LAN gates | Multi-hop relay |
+
+---
+
+## P2 — Queued
 
 | # | Task | Owner | Detail |
 |---|------|-------|--------|
-| 4 | ~~LAN parity benchmark~~ | ~~sporeGate~~ | **PASS** — Tower 0.996x latency, 1.07x throughput vs WG |
-| 5 | ~~WAN parity benchmark~~ | ~~sporeGate~~ | **PASS** — Tower 0.992x latency, 0.993x throughput vs WG |
-| 6 | **Phase 2: Shadow mode** | eastGate | Tower runs alongside WG, live metrics comparison |
-| 7 | Integrate benchmark results → `s_tower_atomic_parity_live` | eastGate | primalSpring live scenario with actual measurements |
-| 8 | sporePrint primal pipeline | eastGate | Zola replacement: petalTongue + nestGate CAS + cellMembrane |
-| 9 | CredentialStore squirrel integration | eastGate | `secrets.*` JSON-RPC, bearDog `FileVault` backend wired |
+| 1 | sporePrint primal pipeline | eastGate | Zola replacement: petalTongue + nestGate CAS + cellMembrane |
+| 2 | CredentialStore squirrel integration | eastGate | `secrets.*` JSON-RPC, bearDog `FileVault` backend |
+| 3 | bingoCube WASM WebGL widget | eastGate | Unblocked by petalTongue 150r |
+| 4 | Android Keystore + grapheneGate test | bearDog | CredentialStore TEE/StrongBox backend |
+| 5 | Promote 6 pseudoSpores | lithoSpore | Validation Data Stream v1.0 |
+| 6 | footPrint declarative source registry | flockGate | DATA_LAYER_PRIMAL_ABSTRACTION spec |
 
-### P2 — Queued
-
-| # | Task | Owner | Detail |
-|---|------|-------|--------|
-| 9 | bingoCube WASM WebGL widget | eastGate | Unblocked by petalTongue 150r. `render_color_grid_webgl` ready |
-| 10 | `.unwrap()` clippy audit — remaining primals | all teams | `cargo clippy -- -W clippy::unwrap_used`. 5 confirmed 0. |
-| 11 | Deploy petalTongue v1.7+ on sporeGate | sporeGate ops | Binary in depot. Activates Webb scene + WASM WebGL |
-| 12 | Android Keystore + grapheneGate test | bearDog | CredentialStore TEE/StrongBox backend |
-| 13 | Promote 6 pseudoSpores | lithoSpore | Validation Data Stream v1.0 standard defined |
-| 14 | footPrint declarative source registry | flockGate | DATA_LAYER_PRIMAL_ABSTRACTION spec committed |
-
-### P3 / Future
-
-| # | Task | Owner | Detail |
-|---|------|-------|--------|
-| 15 | rootPulse design | ecosystem | Sovereign VCS over nestGate CAS + Provenance Trio |
-| 16 | sporePrint pipeline design | ecosystem | Full Zola replacement architecture |
-| 17 | pseudoSpore Explorer | esotericWebb | Interactive visualization concept |
-| 18 | SHOW_HN readiness | ecosystem | Rubric, narrative, demo path |
-
-### Gate Enrollment (operator, when physically accessible)
+## P3 / Future
 
 | # | Task | Detail |
 |---|------|--------|
-| 19 | southGate USB enrollment | USB staged, .9 allocated |
-| 20 | strandGate enrollment | Dual EPYC, 256GB RAM, RTX 3090. Pending physical access |
+| 1 | **Phase 3 cutover** | Tower replaces WG for inter-gate traffic (pending Phase 2) |
+| 2 | rootPulse design | Sovereign VCS over nestGate CAS + Provenance Trio |
+| 3 | pseudoSpore Explorer | esotericWebb interactive visualization |
+| 4 | SHOW_HN readiness | Rubric, narrative, demo path |
+
+### Gate Enrollment (operator, when physically accessible)
+
+| # | Gate | Detail |
+|---|------|--------|
+| 1 | southGate | USB staged, .9 allocated |
+| 2 | strandGate | Dual EPYC, 256GB RAM, RTX 3090. Pending physical access |
 
 ---
 
@@ -65,37 +111,39 @@
 | Tower primals deep debt, gate AARs GREEN, structural 21/21 | 150v |
 | Standards reorg, DNSSEC 3/3, Sovereignty roadmap, cascade 43/43 | 150s-u |
 | WASM WebGL, vendor analysis, USB enrollment, workspace reorg | ≤150r |
-| Scene unification, NUCLEUS, Silicon Atheism P2, CAC 6/6, Glacial 8/8, Depot | ≤150i |
+| Scene unification, NUCLEUS, Silicon Atheism P2, CAC 6/6, Glacial 8/8 | ≤150i |
+
+---
+
+## SOVEREIGNTY
+
+| Tier | Tool | Primal Path | Status |
+|------|------|-------------|--------|
+| **REPLACE** | WireGuard | Tower Atomic | **PHASE 1 PASS — shadow deploying, exploring exceeding** |
+| **REPLACE** | Zola | petalTongue + nestGate CAS | Design pending |
+| **LATE-STAGE** | Forgejo | rootPulse | Post-rootPulse |
+| **FIREBREAK** | Cloudflare / Caddy / RustDesk / JupyterHub | Outer membrane | Stays |
 
 ---
 
 ## TOPOLOGY
 
 ```
-golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, TURN relay (:3478), depot
-  ├─ sporeGate (10.13.37.2) — build authority, Tower 3/3
-  ├─ eastGate  (10.13.37.5) — orchestrator, code hub
-  ├─ flockGate (10.13.37.6) — esotericWebb V22, WAN peer
+golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, TURN relay, multi-stack target
+  ├─ sporeGate (10.13.37.2) — build authority, Tower 3/3, shadow driver
+  ├─ eastGate  (10.13.37.5) — orchestrator, code hub, Akida NPU
+  ├─ flockGate (10.13.37.6) — WAN peer, esotericWebb V22
   ├─ ironGate  (10.13.37.7) — compute, GPU [DOWN]
   └─ northGate (10.13.37.8) — Windows, RTX 5090 [enrolled]
 
-Pending: southGate (.9), strandGate
+Pending: southGate (.9), strandGate (EPYC, 256GB, 3090)
+10G backbone: 4 towers NIC'd, cabling pending (sole blocker for ≥1Gbps bench)
 ```
-
-**Sovereignty**:
-
-| Tier | Tool | Primal Path | Status |
-|------|------|-------------|--------|
-| **REPLACE** | WireGuard | Tower Atomic | **PHASE 1 PASS — parity proven, shadow mode next** |
-| **REPLACE** | Zola | petalTongue + nestGate CAS | Design pending |
-| **LATE-STAGE** | Forgejo | rootPulse | Post-rootPulse |
-| **FIREBREAK** | Cloudflare / Caddy / RustDesk / JupyterHub | Outer membrane | Stays |
-
-**Parity philosophy**: Match WireGuard first, exceed later. Targets relative to WG baseline.
 
 ---
 
-*Wave 150w: TOWER ATOMIC PHASE 1 PASS — full WireGuard parity on LAN + WAN.
-Tower latency 0.99x WG, throughput 1.07x WG (LAN). Sovereign depot pipeline
-delivered. Shadow mode (Phase 2) next. Sovereign CI deployed on golgiBody.
+*Wave 150w: TOWER ATOMIC PHASE 1 PASS. Shadow deploying across all live topo.
+primalSpring teams exploring 6 domains where Tower Atomic exceeds WireGuard:
+capability routing, multi-stack relay, large data, secure compute, distributed
+compute mesh, edge profiles. First tractable solution achieved — now evolve.
 43/43 converged.*
