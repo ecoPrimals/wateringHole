@@ -17,7 +17,7 @@ All infrastructure is LIVE. The `songbird benchmark` CLI harness is SHIPPED.
 |-----------|--------|--------|
 | Tower primals (3/3) | **LIVE** on sporeGate, flockGate, grapheneGate | bearDog, songBird, skunkBat |
 | TURN relay | **LIVE** on golgiBody:3478 | Since Jul 12, `songbird-relay.service` |
-| Benchmark harness | **SHIPPED** | `songbird benchmark` — setup/latency/throughput, JSON+text, p50/p95/p99 |
+| Benchmark harness | **SHIPPED** (in source) | `songbird benchmark` — setup/latency/throughput, JSON+text, p50/p95/p99. **Depot binary stale — sporeGate must harvest first.** |
 | Structural scenario | **GREEN** | 21/21 checks pass (`s_tower_atomic_parity`) |
 | WG baselines | **MEASURED** | sporeGate→golgi 38ms, flockGate→golgi 31ms, end-to-end 68ms |
 
@@ -36,6 +36,25 @@ Targets are **relative to WG baseline**, not absolute thresholds.
 > **primalSpring** on sporeGate — Wave 150v, parity execution.
 >
 > You drive both benchmarks. The harness and relay are LIVE.
+>
+> **STEP 0 — HARVEST (before anything else)**:
+> sporeGate is the build authority. The depot songbird binary is stale
+> (Jul 15, pre-benchmark). Harvest the current songBird from Forgejo,
+> build release, and sync to golgiBody depot so all gates get it:
+> ```
+> # Pull latest songBird source from Forgejo
+> cd ~/Development/ecoPrimals/primals/songBird && git pull
+>
+> # Build + stage to local depot
+> membrane plasmid.harvest --local --primal songbird --force
+>
+> # Verify benchmark subcommand exists
+> songbird benchmark --help
+>
+> # Push updated depot to golgiBody for flockGate + other gates
+> membrane plasmid.depot_sync --push
+> ```
+> Once `songbird benchmark --help` works, proceed to benchmarks.
 >
 > **LAN benchmark** (sporeGate ↔ eastGate, same backbone):
 > ```
@@ -122,14 +141,17 @@ Targets are **relative to WG baseline**, not absolute thresholds.
 > sporeGate drives, you respond.
 >
 > **What to do**:
-> 1. Verify Tower primals running (bearDog, songBird, skunkBat)
+> 1. Pull fresh songbird binary from depot (after sporeGate harvests):
 >    ```
->    # Check services
+>    membrane plasmid.fetch --source wan --primal songbird --force
+>    membrane plasmid.refresh --primal songbird
+>    songbird benchmark --help   # verify benchmark subcommand exists
+>    ```
+> 2. Verify Tower primals running (bearDog, songBird, skunkBat)
+>    ```
 >    systemctl status beardog songbird skunkbat
->    # Or check sockets
->    ls /run/user/$(id -u)/biomeos/security.sock
 >    ```
-> 2. Accept incoming benchmark probes from sporeGate (.2) via
+> 3. Accept incoming benchmark probes from sporeGate (.2) via
 >    golgiBody TURN relay (.1)
 > 3. Confirm esotericWebb V22 still healthy (webb.primals.eco)
 >    — should not conflict, different ports
