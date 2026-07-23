@@ -1,88 +1,45 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: flockGate | Updated: 2026-07-21T16:35:00Z
-#
-# This file is owned exclusively by flockGate. No other gate writes here.
+# This file is owned exclusively by this gate. No other gate writes here.
+# Gate: flockGate | Updated: 2026-07-23T15:34:40Z
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-21T16:35:00Z"
-wave = "150t"
+updated = "2026-07-23T15:34:40Z"
 
 [heads]
-primalSpring = "ff32f32"
-wateringHole = "41adba32"
-esotericWebb = "98496ac"
-petalTongue = "c6baa1d"
-plasmidBin = "e0b20e0"
-skunkBat = "d62dac7"
-
-[remotes]
-standard = "Forgejo-first (origin=Forgejo, github=mirror)"
-swap_completed = true
-
-[mesh]
-node_id = "flockGate"
-songbird_version = "0.2.1"
-wireguard_status = "UP"
-wireguard_addr = "10.13.37.6/24"
-peers_mesh_registered = 2
-status = "5-GATE ACTIVE MESH OPERATIONAL"
-
-[esotericwebb]
-status = "LIVE — V22, scene graph pipeline ACTIVE via petalTongue v1.7"
-version = "V22"
-commit = "98496ac"
-systemd = "esotericwebb-server.service ENABLED + LINGER"
-pid = 3541637
-uptime = "26h+ (stable since 150o fix)"
-protocol = "HTTP POST /jsonrpc + GET / + raw TCP JSON-RPC"
-primals_connected = 6
-webb_domain = "webb.primals.eco"
-wan_post = "200 OK (245ms)"
-wan_get = "200 OK (245ms)"
-
-[petaltongue]
-status = "DEPLOYED — v1.7.0 IPC server active"
-version = "1.7.0"
-commit = "c6baa1d"
-systemd = "petaltongue-server.service ENABLED"
-uptime = "2 days (stable since 150n deploy)"
-uds = "/run/user/1000/biomeos/petaltongue.sock"
-
-[wan_subdomain_posture]
-webb_primals_eco = "200 (245ms)"
-footprint_primals_eco = "200 (231ms)"
-sporeprint_primals_eco = "200 (181ms)"
-git_primals_eco = "200 (181ms)"
-all_surfaces_live = true
-
-[primalspring]
-head = "ff32f32"
-scenarios = 169
-tests = 1206
-failures = 0
-suite_status = "GREEN"
-
-[esotericwebb_tests]
-tests = 453
-failures = 0
-suite_status = "GREEN"
-
-[remaining_divergence]
-p0_items = 0
-p1_items = 0
-p2_items = ["cellMembrane unwrap audit", "Tower parity benchmark (flockGate as WAN-edge test node)"]
-note = "petalTongue v1.7 already deployed on flockGate (150n) — blurb NEAR TERM item is stale"
-
-[skunkbat]
-head = "d62dac7"
-tests = 571
-clippy = "CLEAN — workspace + all-targets (-D warnings)"
-windows = "x86_64-pc-windows-gnu cargo check PASS"
-posture = "GREEN — Tower Atomic ready. Platform consolidated, zero #[allow] in production."
-tower_atomic = "bond_type cipher enforcement, protocol v1.0, fallback documented"
-deep_debt = "platform::system_load_normalized, ConfigDiff &'static str, lint hygiene complete"
-prod_unwrap = 0
-prod_unsafe = 0
-prod_unreachable = 1
-prod_allow = 0
+agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
+airSpring = "48e99734a579b5db563dfcc1b6fc24e18af511c7"
+barraCuda = "d61ae6cb1a41a069af0ac0834c7ccaa756e2a3a8"
+bearDog = "a0f5f8c49ee14e429c88a3f0814e38679219ce7d"
+benchScale = "692a7564f133425b021b9834bf7c24d41205980a"
+biomeOS = "237b2dad08807b74b9889431c6421f8078e9ba5d"
+blueFish = "c92df4a4046cec711cd98daac6800856a95d6bca"
+cellMembrane = "389854f0b6bf627298c5b7fb2b546a4afedc13a6"
+coralReef = "64be4a917881d62d7111324528db40e827f543a0"
+esotericWebb = "b35192a19d534df4b2e47e31f35a45978d1c1ab7"
+footPrint = "ad93bafbc460fe44081cc5bc9dff7acc18d1ae35"
+groundSpring = "838a590bb55026a3e696e96b069b5b40ba457ba4"
+healthSpring = "c9952c05576a51ad2a91f51c462d9dfacae5ab6c"
+helixVision = "8237d6e0f3aaa7a03553cc1b75916aff10be6c27"
+hotSpring = "b01f3d3e5011850b4a924dbbf22e790c22ffdf9c"
+initioChem = "4295d093ce03dbc8afdcf711f2fb91b0df35f0ab"
+lithoSpore = "c717d74357c7d76ded43ab8cbd60e46e0541d7ca"
+loamSpine = "846bd3713018e2b5ec54d897b37ff878fc4159c2"
+ludoSpring = "dac65e8fc0d45e9876e976d5c09a5eddc6534179"
+nestGate = "785eb882a12e56d3aca92cb58aba2cdeca592539"
+neuralSpring = "6a1d579ac1856293f10ef780c0857b8903a76294"
+petalTongue = "8d976cb8b6a4b1833c207c4058bdd27c7dafd39a"
+plasmidBin = "c2ef7bc218ae25853798f4c3d59e6c1d85f330de"
+primalSpring = "86f37da986f0a82a4f28b209c0d76d9e020c1e23"
+projectFOUNDATION = "2bcc3811b0106cd336e4ade070a124cfc80a8f16"
+projectNUCLEUS = "09c8e19a499fc77224339b6204f69d02a03f2208"
+rhizoCrypt = "151182026e93f78cf32662bfc2b620b5e5b4208a"
+skunkBat = "02cc113cb5fa0eba34a629d509c23f88cd03da74"
+songBird = "d731f8dbc88ce7b74638b96a105bd8db3b61bf04"
+sourDough = "89ea3d1c5e6dc03f22bb4c8b2bc8df29267973a5"
+sporePrint = "573c0db54b8eed0b5da486395bbb605b5219f5f6"
+squirrel = "48c515bbcdcb1b121cd11470a72d2afe1e3e0adc"
+sweetGrass = "3fd17f874c49395936125e91d6a1bf31a466df4a"
+toadStool = "dc16813059baadfd78ca9a9b64e58f5de49957a3"
+wetSpring = "7b2318a18cd5ea7d88117b19ccbe0b4afd98796c"
+whitePaper = "773af5ce6963c44927e63638869bb4b39b71b1b1"
