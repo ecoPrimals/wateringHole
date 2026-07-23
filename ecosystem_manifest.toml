@@ -729,6 +729,7 @@ mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "ether8"
 wg_ip = "10.13.37.2"
+lan_ip = "192.168.4.3"
 roles = ["build_hub", "depot", "cascade_hub", "gateway", "http", "mesh_hub"]
 build_authority = true
 link_speed_mbps = 2500
@@ -753,10 +754,11 @@ mesh_peer = "157.230.3.183:7700"
 zone = "backbone"
 hub_port = "sfp+2"
 wg_ip = "10.13.37.5"
+lan_ip = "192.168.4.244"
 roles = ["overwatch", "primalspring_evolution", "meta_atomic", "build_hub"]
 build_authority = true
 link_speed_mbps = 10000
-notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch. Build-capable (Ryzen 9 7950X, 128GB RAM)."
+notes = "Primary development gate. CRS310 sfp+2 at 10G. primalSpring + overwatch. Build-capable (Ryzen 9 7950X, 128GB RAM). LAN: 192.168.4.244, confirmed 0.17ms from sporeGate."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
