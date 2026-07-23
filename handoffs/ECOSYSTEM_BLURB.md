@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 150v
 
-**Date**: Jul 23, 2026 07:15 EDT | **Wave**: 150v | **From**: eastGate overwatch
-**Posture**: **EXECUTE PARITY BENCHMARKS. ALL BLOCKERS RESOLVED.**
+**Date**: Jul 23, 2026 07:45 EDT | **Wave**: 150v | **From**: eastGate overwatch
+**Posture**: **EXECUTE PARITY BENCHMARKS. DEPOT PIPELINE GAP FOUND — cellMembrane FIX ASSIGNED.**
 
 ---
 
@@ -121,12 +121,13 @@ Targets are **relative to WG baseline**, not absolute thresholds.
 >
 > | # | Item | Priority |
 > |---|------|----------|
-> | 1 | Integrate parity benchmark results → live scenario | **P1** |
-> | 2 | sporePrint primal pipeline (Zola replacement design) | P1 |
-> | 3 | CredentialStore squirrel integration (`secrets.*` JSON-RPC) | P1 |
-> | 4 | bingoCube WASM WebGL widget (petalTongue unblocked) | P2 |
-> | 5 | `.unwrap()` clippy audit — remaining primals | P2 |
-> | 6 | rootPulse design (sovereign VCS, long-term) | P3 |
+> | 1 | **Sovereign depot auto-build pipeline** (cellMembrane) | **P0** |
+> | 2 | Integrate parity benchmark results → live scenario | **P1** |
+> | 3 | sporePrint primal pipeline (Zola replacement design) | P1 |
+> | 4 | CredentialStore squirrel integration (`secrets.*` JSON-RPC) | P1 |
+> | 5 | bingoCube WASM WebGL widget (petalTongue unblocked) | P2 |
+> | 6 | `.unwrap()` clippy audit — remaining primals | P2 |
+> | 7 | rootPulse design (sovereign VCS, long-term) | P3 |
 >
 > **CONVERGENCE RULE**: eastGate is the sole code evolver.
 > Gate teams file AARs → eastGate integrates and pushes.
@@ -176,6 +177,37 @@ Targets are **relative to WG baseline**, not absolute thresholds.
 
 ---
 
+### cellMembrane — Sovereign Depot Pipeline (P0 evolution)
+
+> **cellMembrane** on eastGate — Wave 150v, depot auto-build pipeline.
+>
+> **Gap found**: Forgejo push → source syncs to gates in minutes, but
+> depot binary stays stale indefinitely. songBird benchmark shipped Jul 22,
+> depot binary was still from Jul 15. All Rust building blocks exist but
+> are not connected end-to-end.
+>
+> **4-phase fix** (handoff at `handoffs/CELLMEMBRANE_WAVE150v_SOVEREIGN_DEPOT_PIPELINE.md`):
+>
+> | Phase | Deliverable | Complexity |
+> |-------|------------|------------|
+> | 1 | `golgi-post-receive-ci.sh` — reactive push trigger | Low (bash, deploy now) |
+> | 2 | Cascade commit drift detection + auto-harvest on builder | Medium (~100L Rust) |
+> | 3 | PostPrimordial hard enforcement — depot-only with crypto lineage | Medium (~150L Rust) |
+> | 4 | `depot.build_pending` mesh signal | Low (~50L Rust) |
+>
+> **Phase 1 is deployable immediately** — zero Rust changes. Hook SSHs to
+> sporeGate to run existing `sovereign.ci.trigger`. Script at
+> `gardens/cellMembrane/deploy/hooks/forgejo/golgi-post-receive-ci.sh`.
+>
+> **PostPrimordial primals** (beardog, songbird, skunkbat, nestgate,
+> cellmembrane, biomeos) must deploy exclusively from signed depot.
+> No local builds on consumer gates. Hard enforcement.
+>
+> **CONVERGENCE RULE**: Rust evolution on eastGate only. Deploy Phase 1
+> hook on golgiBody. Set `MEMBRANE_BUILD_AUTHORITY=1` on sporeGate.
+
+---
+
 ## CONTEXT (for reference)
 
 ### Deployment Chain
@@ -207,6 +239,7 @@ golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, TURN relay LIVE (:3478)
 
 | Achievement | Wave |
 |-------------|------|
+| Depot pipeline gap identified, sovereign auto-build handoff issued | 150v |
 | Benchmark harness shipped, TURN relay LIVE, all blockers resolved | 150v |
 | Tower primals deep debt, gate AARs GREEN, structural 21/21, WG baselines | 150v |
 | Standards reorg, DNSSEC 3/3, Sovereignty roadmap, cascade 43/43 | 150s-u |
@@ -215,7 +248,7 @@ golgiBody (10.13.37.1) — hub, VPS, Caddy TLS, TURN relay LIVE (:3478)
 
 ---
 
-*Wave 150v: ALL BLOCKERS RESOLVED. Three primalSpring teams executing Tower Atomic parity
-benchmarks. sporeGate drives (LAN + WAN), eastGate serves as LAN peer and code hub,
-flockGate serves as WAN peer. Results determine if Tower Atomic matches WireGuard.
-Parity first, exceed later. 43/43 converged.*
+*Wave 150v: Parity benchmarks executing (sporeGate drives, eastGate LAN peer, flockGate WAN
+peer). Depot pipeline gap found — Forgejo pushes don't trigger sporeGate rebuilds. cellMembrane
+4-phase fix assigned: reactive hook (deployable now), cascade drift detection, postPrimordial
+hard enforcement, build-pending mesh signal. Parity first, exceed later. 43/43 converged.*
