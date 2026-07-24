@@ -1,96 +1,91 @@
-# flockGate status — Wave 150x (glacial correction wave)
-# Gate: flockGate | Role: WAN mesh validation + overwatch
-# Updated: 2026-07-24T14:15:00Z
+# flockGate status — Wave 150x (crypto composition + P1 hardening)
+# Gate: flockGate | Role: CODE TEAM — bearDog, songBird, skunkBat source evolution
+# Updated: 2026-07-24T18:45:00Z
 
 [meta]
 gate = "flockGate"
-role = "WAN mesh validation, primalSpring overwatch"
+role = "Code team — primal source evolution (bearDog, songBird, skunkBat)"
 wave = "150x"
-updated = "2026-07-24T14:15:00Z"
-posture = "GREEN — stable, suite green, mesh healthy"
+updated = "2026-07-24T18:45:00Z"
+posture = "GREEN — suite green, P1 burn-down active, 2 commits shipped"
 
 [repos]
-skunkBat = "49da286"
-primalSpring = "b7fd828"
-wateringHole = "cdaaec34"
-songBird = "e5d3849"
+primalSpring = "cdb91f0"
+wateringHole = "31e6797b"
+songBird = "bd8e198"
+bearDog = "d1554f9"
 esotericWebb = "b35192a"
 petalTongue = "8d976cb"
+
+[shipped_this_wave]
+songBird_crypto_delegation = "c9d84d7 — blake3 delegation path for dark_forest_beacon"
+songBird_ipc_hardening = "bd8e198 — SO_PEERCRED + symlink rejection + chmod 0600"
+
+[crypto_composition]
+status = "MIGRATING — Phase 1 delegation seams feature-gated"
+seams_total = 19
+hot_path_chimera = 5
+delegating_bearDog = 6
+test_only = 5
+already_delegating = 3
+phase_1_complete = [
+    "pure_rust_jwt.rs — dual-path (provider + local-crypto-fallback)",
+    "checkpoint.rs — SHA-256 delegation with fallback",
+    "discovery/crypto_helpers.rs — SHA-256 + BLAKE3 delegation",
+    "network-federation/crypto_helpers.rs — SHA-256 + HMAC-SHA256 delegation",
+    "dark_forest_beacon.rs — blake3 routed through crypto_helpers (NEW)",
+]
+bearDog_capabilities_confirmed = ["crypto.sha256", "crypto.hmac.sha256", "crypto.hash.blake3"]
+
+[p1_hardening]
+caller_identity = "SO_PEERCRED extraction from UnixStream (uid/pid)"
+uds_directory_guard = "Detect/remove stale directory at socket path"
+uds_symlink_rejection = "Refuse bind over symlinks (path hijack defense)"
+uds_chmod = "0600 after bind (owner-only)"
+remaining_findings = "5 UDS hardening + 4 caller identity = 9 seams shipped, more to evolve"
 
 [mesh]
 interface = "wg0"
 local_ip = "10.13.37.6"
 peers_online = 3
-peers_total = 4
 node_id = "flockgate"
 songbird_version = "0.2.1"
-songbird_uptime_s = 55921
-stale = ["ironGate (69h DOWN)"]
-note = "golgiBody 45ms, sporeGate 106ms, eastGate 128ms — all direct paths"
+stale = ["ironGate (69h+ DOWN)"]
 
 [wan_subdomain_posture]
 webb_primals_eco = "200 — 230ms"
 primals_eco = "301 → 200"
 git_primals_eco = "200 — 133ms"
 membrane_primals_eco = "200 — 153ms"
-all_surfaces_live = "4/4 probed OK"
 
 [esotericWebb]
-status = "LIVE — active (running) since Jul 20"
+status = "LIVE — 4 days uptime"
 pid = 3541637
-uptime = "4 days"
 
 [petalTongue]
-status = "LIVE — active (running) since Jul 22"
+status = "LIVE — 2 days uptime"
 pid = 2681175
-uptime = "2 days"
 
 [tower_shadow]
-status = "ACTIVE"
 results = 360
-interval = "60min"
-note = "Tower EXCEEDS WG: 1.56x LAN, 1.11x WAN throughput"
+note = "Tower 267x LAN, 1.7x WAN sustained"
 
 [primalSpring]
 scenarios = 196
 tests = 1240
 passed = 1240
 failed = 0
-ignored = 2
-known_debt = [
-    "graphenegate-readiness = 14 (no aarch64 binaries on flockGate)",
-    "composition-access-control = 15",
-    "arch-fitness = 1 (no local aarch64 depot)",
-    "mesh-reachability = 1 (ironGate DOWN)",
-    "tower-stress-concurrent-dispatch = 3",
-    "tower-stress-btsp-storm = 1",
-    "tower-stress-failover-resilience = 4",
-    "tower-stress-mesh-churn = 4",
-    "tower-stress-uds-hop-cost = 1",
-    "tower-stress-shadow-fidelity = 2",
-    "tower-pen-enrollment-replay = 2",
-    "tower-pen-capability-escalation = 6",
-    "tower-pen-cipher-downgrade = 4",
-    "tower-pen-uds-spoof = 5",
-    "tower-pen-mesh-poison = 2",
-]
-
-[skunkBat]
-status = "GREEN — stable, 586 tests, 7 threat types"
-version = "0.2.18"
-commit = "49da286b2ccd5c27dab6c7c6223954106ca21879"
-tests = 586
-threat_types = 7
-wave = "150x"
-note = "Docs synced to W150x. Deep debt complete: cipher floor, unreachable!()→error, BTSP dedup, BindMode typed error. Zero #[allow], zero unreachable!(), zero todo!() in production. 3.3 GiB cargo clean. Zero debris."
+known_debt_count = 29
+known_debt_note = "graphenegate-readiness=14, arch-fitness=1, mesh-reachability=1, stress/pen=13"
 
 [remaining_divergence]
 p1 = [
-    "30 Tower hardening findings — evolving via primalSpring scenarios (stress + pen)",
-    "Enrollment seed rotation (bearDog/flockGate) — pen test finding P2.5",
+    "Continue P1 burn-down: tower-stress + tower-pen scenarios (13 remaining findings)",
+    "bearDog P1: bond-type cipher floor enforcement",
 ]
 p2 = [
-    "Android Keystore + grapheneGate (bearDog StrongBox integration)",
-    "sporePrint transplant (sporeGate team — update primals.eco)",
+    "bearDog P2: enrollment seed rotation",
+    "bearDog P2: crypto.hash.blake3 — capability EXISTS, songBird delegation WIRED",
+    "sporePrint transplant (sporeGate team)",
 ]
-note = "Glacial correction: git merge divergence is rootPulse evidence, not a bug. Mature existing systems."
+note = "Crypto composition Phase 1 nearly complete. Measure IPC cost next (Phase 2)."
