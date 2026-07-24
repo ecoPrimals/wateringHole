@@ -89,6 +89,8 @@ which exits 2 on every attempt.
 | `membrane-shadow/src/webhook/tests.rs` | **NEW** — extracted 360L webhook tests |
 | `membrane-shadow/src/manifest/mod.rs` | 785→333L after test extraction |
 | `membrane-shadow/src/webhook/mod.rs` | 703→345L after test extraction |
+| `cellmembrane-types/src/cytoplasm.rs` | `MESH_REGISTRY` + `lan_ip` field, `lan_address()` |
+| `cellmembrane-types/src/lib.rs` | Re-export `lan_address` |
 
 ---
 
@@ -111,7 +113,7 @@ Also added `membrane-nucleus-nosocket@.service` for `ServerNoSocket` primals.
 
 | Metric | Value |
 |--------|-------|
-| Tests | 1,146 (was 1,136) |
+| Tests | 1,150 (was 1,136) |
 | Clippy warnings | 0 |
 | `cargo fmt` drift | 0 |
 | Production `unwrap()` | 0 |

@@ -1,35 +1,35 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-24T12:59:00Z
+# Gate: sporeGate | Updated: 2026-07-24T18:42:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-24T14:30:00Z"
+updated = "2026-07-24T18:42:00Z"
 wave = "150x"
 
 [heads]
-bearDog = "02cf525"
-songBird = "2bb2f92"
+bearDog = "03082d4"
+songBird = "e1dc513"
 nestGate = "d5d45df"
 biomeOS = "c0f51e6"
 rhizoCrypt = "ae205a8"
 squirrel = "68c9e04"
 sweetGrass = "76dc35f"
 loamSpine = "cb1beb0"
-skunkBat = "4eef800"
+skunkBat = "49da286"
 coralReef = "2246ebf"
 barraCuda = "3cfdf0e"
 petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
-cellMembrane = "eee7e84"
-primalSpring = "f482073"
-wateringHole = "5982510"
+cellMembrane = "a372e7b"
+primalSpring = "cdb91f0"
+wateringHole = "31e6797"
 sporePrint = "67cc325"
 
 [deploy]
-songbird_version = "0.2.1 (rebuilt Jul 24 with lan_addr)"
+songbird_version = "0.2.1+sustained (deployed, crypto composition NOT yet deployed — mid-migration)"
 beardog_version = "0.10.0-silicon-atheism"
 petaltongue_version = "1.7.0"
 membrane_version = "0.1.0 (eee7e84) — tower.shadow + crash-loop breaker (deployed all 3 gates)"
@@ -47,10 +47,11 @@ mesh_peers = 3
 mesh_init = "ExecStartPost dropin (auto-seed regression workaround)"
 
 [tower_shadow]
-status = "ACTIVE"
+status = "ACTIVE — FIXED (was writing to /home/flockgate paths, now gate-agnostic)"
 interval = "60min"
-results = "130+"
+results = "130+ (6/12 per cycle: golgi, sporeGate, eastGate reachable)"
 gates_active = ["sporeGate", "flockGate", "golgiBody"]
+songbird_symlink = "/usr/local/bin/songbird → depot path (root access for systemd)"
 
 [benchmark]
 phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard"
@@ -58,12 +59,13 @@ lan_latency_tower = "0.61ms avg, 0.01ms jitter"
 lan_latency_wg = "0.60ms avg (direct LAN, same as Tower — PARITY)"
 wg_overlay_latency = "154.5ms avg (routes through golgiBody VPS)"
 lan_vs_overlay = "Tower LAN 253x faster than WG overlay — WG has no LAN awareness"
-wan_throughput = "Tower 7.19 Mbps vs WG 3.64 Mbps (Tower 2x)"
+wan_latency_tower = "76.8ms avg (golgi)"
+wan_throughput = "Tower 13.1 Mbps vs WG ~7 Mbps (Tower 1.7x)"
 
 [hardware]
 lan_peering = "CONFIRMED: eastGate at 192.168.4.244, 0.17ms RTT"
 lan_benchmark = "Tower 0.61ms / WG 0.60ms (LAN direct parity). WG overlay: 154ms (253x slower)"
-ten_gig = "10G+1G confirmed operational per blurb. Sustained throughput testing: songbird benchmark done."
+ten_gig = "10G+1G confirmed operational. Sustained throughput testing: songbird benchmark done."
 gate_enrollment = "PENDING: southGate + strandGate (USB staged, physical access required)"
 
 [crash_loop_breaker]
@@ -72,11 +74,20 @@ scanned = 14
 loops = 0
 
 [primalspring]
-head = "f482073"
-scenarios = 210
+head = "cdb91f0"
+scenarios = 196
+known_debt = "graphenegate-readiness=2, sporeprint-pure-primal-parity=1, + 9 tower stress/pen scenarios"
 tests = "1240 passed, 0 failed, 2 ignored"
 tower_scenarios = "46/46 PASS"
 suite_status = "GREEN"
+
+[surfaces]
+sporeprint = "200"
+footprint = "200"
+live = "200"
+webb = "200"
+git = "200"
+root = "301 (redirect to sporeprint)"
 
 [resolved]
 tower_parity_p1 = "PHASE 1 PASS (Wave 150w)"
@@ -85,6 +96,13 @@ lan_peering_p0 = "CONFIRMED (Wave 150w)"
 lan_addr_p1 = "SHIPPED (Wave 150w)"
 crash_loop_breaker = "DEPLOYED (Wave 150x) — 14 services scanned, 0 loops"
 songbird_mesh_init = "ExecStartPost dropin deployed — workaround for auto-seed regression"
-sustained_benchmark = "DONE — Tower 0.61ms LAN, WG overlay 154ms (253x gap)"
+sustained_benchmark = "DONE — Tower 267x LAN, 1.7x WAN sustained"
 sporeprint_transplant = "DONE — toweratomic entity fix (67cc325). eastGate shipped full transplant (b985c22)."
-golgi_shadow_fix = "DONE — golgiBody songbird updated, shadow now producing data (was 0/252, now 7/14 per cycle)"
+golgi_shadow_fix = "DONE — golgiBody songbird updated, shadow now producing data"
+shadow_script_fix = "DONE (Wave 150x) — gate-agnostic paths, /usr/local/bin symlink for root"
+
+[blocked_on_eastgate]
+iperf3_server = "P1 — needs iperf3 -s running on eastGate"
+ssh_key_auth = "P1 — no key auth sporeGate→eastGate"
+biomeos_beacon = "P1 — phantom unit (11,161 restarts), needs disable"
+manifest_ip = "P1 — correct 192.168.4.5 → 192.168.4.244 in ecosystem_manifest.toml"
