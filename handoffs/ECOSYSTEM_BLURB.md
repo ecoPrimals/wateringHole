@@ -1,16 +1,18 @@
 # ecoPrimals Ecosystem Blurb — Wave 150x
 
-**Date**: Jul 24, 2026 09:50 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **TOWER EXCEEDS WG. 6/6 DOMAINS PROVEN LIVE. GLACIAL CORRECTION: MATURE SYSTEMS BEFORE NEW PATTERNS.**
+**Date**: Jul 24, 2026 11:33 EDT | **Wave**: 150x | **From**: eastGate overwatch
+**Posture**: **P1 BURN-DOWN ACTIVE. 17 FINDINGS RESOLVED (flockGate). songBird + skunkBat HARDENED. TOWER 267x LAN.**
 
 ---
 
 ## WHERE WE ARE
 
-Tower Atomic **exceeds** WireGuard: 1.56x LAN throughput, 1.11x WAN throughput,
-sub-ms jitter advantage. All 6 exploration domains PROVEN LIVE across 213 shadow
-benchmark files. Crash-loop self-recovery shipped at both application and systemd
-layers. 196 scenarios, all PASS. P0 CLEAR.
+Tower Atomic **267x faster** than WG overlay on LAN (0.586ms vs 157ms), **1.7x WAN
+sustained throughput** (7.1 vs 4.2 Mbps). All 6 domains PROVEN LIVE. flockGate
+burned 17 findings (known debt 30 → 29 on eastGate, flockGate reports 48 total
+including architecture-specific). songBird shipped pen test hardening (UDS-spoof,
+mesh-poison, relay-abuse) + dependency diet (ring→rustcrypto). skunkBat shipped
+cipher floor policy. sporeGate hardware team handed off final AAR. P0 CLEAR.
 
 **Glacial correction**: This wave surfaced a git merge divergence that lost data
 during multi-gate concurrent pushes to wateringHole. This is not a bug to fix —
@@ -57,15 +59,20 @@ New gates (friends/family) use R45 topology. Tower handles mixed 1G/10G routing.
 
 ---
 
-## P1 — BURN DOWN 30 KNOWN DEBT
+## P1 — BURN DOWN KNOWN DEBT (29 eastGate, 48 flockGate)
 
-All stress/pen findings distributed across 10 scenarios. Teams evolve
-independently. No single blocker. This is the maturation work.
+Teams burning independently. flockGate resolved 17 this cascade:
+`concurrent-dispatch` (3→0), `mesh-churn` (4→0), `cipher-downgrade` (4→1),
+`enrollment-replay` (2→1), `capability-escalation` (6→4). songBird hardened
+UDS-spoof + mesh-poison + relay-abuse (code-level fixes). skunkBat shipped
+cipher floor policy.
 
-| Category | Findings | Key Scenarios |
-|----------|----------|--------------|
-| Stress | ~15 | sustained-throughput, concurrent-dispatch, failover, mesh-churn |
-| Pen | ~15 | cipher-downgrade, UDS-spoof, mesh-poison, relay-abuse |
+| Category | Remaining | Key Items |
+|----------|-----------|-----------|
+| bearDog | 2 | Bond-type cipher floor, seed rotation |
+| songBird | 9 | Caller identity (4), UDS hardening (5) |
+| Architecture | 27 | grapheneGate aarch64 (14), access-control (13) |
+| Misc | 10 | btsp-storm, failover, uds-hop, shadow-fidelity, arch |
 
 ### Topology (sporeGate team)
 
