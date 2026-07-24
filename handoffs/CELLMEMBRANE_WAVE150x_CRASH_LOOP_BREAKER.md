@@ -112,7 +112,8 @@ Also added `membrane-nucleus-nosocket@.service` for `ServerNoSocket` primals.
 | `cargo fmt` drift | 0 |
 | Production `unwrap()` | 0 |
 | `unsafe` blocks | 0 (`#![forbid(unsafe_code)]`) |
-| Files >800L | 2 (gateway.rs 833, harvest.rs 804 — structurally sound) |
+| Files >800L | 1 (gateway.rs 833 — types+tests, structurally sound) |
+| Test extraction | manifest/mod.rs 785→333L, webhook/mod.rs 703→345L |
 | `Restart=always` units | 0 (was 8+ across codebase) |
 | Disk reclaimed | 2.2 GiB (cargo clean) |
 
