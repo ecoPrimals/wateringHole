@@ -71,20 +71,21 @@ cipher floor policy.
 |----------|-----------|-----------|
 | bearDog | 2 | Bond-type cipher floor, seed rotation |
 | songBird | 9 | Caller identity (4), UDS hardening (5) |
-| **songBird crypto bypass** | **NEW** | **10+ crates embed sha2/hmac/ed25519/chacha — must route through bearDog UDS** |
+| songBird crypto composition | MIGRATING | 4 crates feature-gated, 6 delegation seams identified, 5 hot-path stays local |
 | Architecture | 27 | grapheneGate aarch64 (14), access-control (13) |
 | Misc | 10 | btsp-storm, failover, uds-hop, shadow-fidelity, arch |
 
-### Crypto Composition Divergence (P1 — NEW)
+### Crypto Composition (P1 — ACTIVELY MIGRATING)
 
-songBird embeds its own crypto across 10+ crates (`sha2`, `hmac`, `ed25519-dalek`,
-`chacha20poly1305`, `blake3`) instead of routing through bearDog's `crypto.*`
-capabilities via UDS. This bypasses the composition model and prevents us from
-validating the seams we need for chimera. The `rustls-rustcrypto` swap (ring removal)
-is correct for Silicon Atheism, but the inline crypto is the real debt.
+songBird responded same-day: `local-crypto-fallback` feature flags gate all inline
+crypto (`sha2`, `hmac`). 4 crates migrated to dual-path (bearDog UDS primary,
+local fallback behind feature flag). `CRYPTO_COMPOSITION.md` classifies every seam:
+- **MUST STAY LOCAL** (5 hot-path): ChaCha20/HKDF per-frame, TLS transcript, STUN wire format
+- **SHOULD DELEGATE** (6): JWT, checkpoints, discovery, federation — done/in-progress
+- **TEST-ONLY** (5): acceptable, no production impact
+- **ALREADY DELEGATING** (3): btsp_phase3, TLS record, IPC registry
 
-**Path**: composition first (songBird → bearDog UDS for crypto) → measure IPC cost
-at each seam → chimera where it matters (shared library, not IPC).
+**Path**: composition first → measure IPC cost → chimera hot-path only.
 
 ### Topology (sporeGate team)
 
