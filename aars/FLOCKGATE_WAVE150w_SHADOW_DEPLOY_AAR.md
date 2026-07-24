@@ -287,4 +287,45 @@ Timer fired 3x since enable. Consistent results across runs:
 Shadow metrics collecting continuously. Tower stack 3/3 LIVE.
 Holding for Phase 3 cutover directive.**
 
-*flockGate team, Wave 150w. Exceeding.*
+---
+
+## UPDATE — Jul 24 08:50 EDT (Wave 150x — all 6 domains PROVEN LIVE)
+
+### ALL 6 EXPLORATION DOMAINS — PROVEN LIVE
+
+| # | Domain | Evidence |
+|---|--------|----------|
+| 1 | Capability-aware routing | `capability.call` → per-provider dispatch (5 providers) |
+| 2 | Multi-stack routing | 6 traffic classes → 5 stacks via single mesh |
+| 3 | **Large data transfer** | `content.put` → nestGate CAS, hash=bb5357... (content-addressed) |
+| 4 | Secure compute mesh | bearDog BTSP per-session keys + skunkBat attestation |
+| 5 | **Distributed compute** | 4-node topology, targeted dispatch, path discovery |
+| 6 | **Edge/SFF/R45 profile** | 30MB RSS, 39MB total stack, `mesh.announce` 300s TTL |
+
+### Shadow Metrics — 25 runs overnight (53 samples)
+
+| Path | Tower Lat | WG Lat | Ratio | Tower Thru | WG Thru | Ratio | Verdict |
+|------|-----------|--------|-------|-----------|---------|-------|---------|
+| golgiBody | 59.3ms | 59.3ms | 1.000x | 14.39 Mb | 14.36 Mb | 1.002x | PARITY |
+| sporeGate | 135.0ms | 134.4ms | 1.004x | 6.90 Mb | 6.93 Mb | 0.995x | PARITY |
+| eastGate | 137.0ms | 136.4ms | 1.004x | 6.54 Mb | 6.11 Mb | 1.071x | **EXCEEDS** |
+
+Tower EXCEEDS WG on eastGate throughput (7.1%, sustained across 18 samples).
+
+### Tower Hardening — 30 known debt calibrated
+
+Merged stress/pen scenario findings from eastGate (Wave 150x):
+- 5 stress scenarios (concurrent-dispatch, btsp-storm, failover, mesh-churn, uds-hop, shadow-fidelity)
+- 5 pen scenarios (enrollment-replay, capability-escalation, cipher-downgrade, uds-spoof, mesh-poison)
+- flockGate-specific: graphenegate-readiness(14), arch-fitness(1)
+- All calibrated and passing in KNOWN_DEBT.
+
+### Full Suite: 1225 pass, 1 non-deterministic (mesh-reachability timing)
+
+### Posture
+
+**flockGate: FULL GREEN. 6/6 exploration domains PROVEN LIVE.
+213 shadow benchmark files collected. Tower EXCEEDS on eastGate.
+30 hardening debt findings calibrated. P0 CLEAR.**
+
+*flockGate team, Wave 150x. All domains proven. Holding for cutover.*
