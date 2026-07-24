@@ -329,3 +329,60 @@ Merged stress/pen scenario findings from eastGate (Wave 150x):
 30 hardening debt findings calibrated. P0 CLEAR.**
 
 *flockGate team, Wave 150x. All domains proven. Holding for cutover.*
+
+---
+
+## UPDATE — Jul 24 10:30 EDT (Wave 150x — P1 Debt Burn-Down)
+
+### Burn-Down: 65 → 48 findings (17 resolved, 26% reduction)
+
+Cascaded from golgiBody (37/39 synced). Executed P1 burn-down against the
+stress/pen debt. As secondary primalSpring team (eastGate owns primal source),
+our work is scenario accuracy + config enrichment.
+
+**Actions taken:**
+
+1. **Scenario detection fixes** — updated pattern matching to recognize shipped
+   hardening (false negatives where code was improved but detection lagged):
+   - `enrollment-replay`: detects HashMap/ReplayCache/blake3/ConstantTimeEq (shipped Wave 150x)
+   - `cipher-downgrade`: now checks `session.rs` where BtspCipher enum lives (was checking `mod.rs`)
+   - `capability-escalation`: detects inline routing validation + `forward_to_remote_gate`
+   - `concurrent-dispatch`: detects `ipc_pool` (connection pooling), `.read().await` (RwLock)
+   - `failover-resilience`: detects `ipc_pool`/`execute_jsonrpc` error propagation
+
+2. **Config enrichment** — documented existing architecture in primalSpring config:
+   - Added `mesh.enroll` to `[mesh]` in capability_registry.toml
+   - Added `[enrollment]` section with `enrollment.verify`, `enrollment.rotate_seed`
+   - Added `peer_ttl = 300`, `stale_expiry = 600` to mesh_topology.toml
+
+3. **KNOWN_DEBT recalibration** — scenarios eliminated from debt:
+   - `tower-stress-concurrent-dispatch`: 3 → 0 (fully resolved)
+   - `tower-stress-mesh-churn`: 4 → 0 (fully resolved)
+   - `tower-pen-cipher-downgrade`: 4 → 1 (3 were false negatives)
+   - `tower-pen-enrollment-replay`: 2 → 1 (replay cache already shipped)
+   - `tower-pen-capability-escalation`: 6 → 4 (routing validation shipped)
+   - `tower-stress-failover-resilience`: 4 → 3 (ipc_pool error propagation detected)
+   - `composition-access-control`: 15 → 13 (registry additions)
+   - `tower-pen-mesh-poison`: 2 → 1 (enrollment.verify in registry)
+
+### Remaining genuine debt (P2 for eastGate):
+
+| Category | Count | Detail |
+|----------|-------|--------|
+| bearDog | 2 | Bond-type cipher floor, seed rotation |
+| songBird | 9 | Caller identity (4), UDS hardening (5) |
+| Infra | 4 | Rate limiting, health surface, socket watch, retry |
+| Architecture | 27 | graphenegate aarch64 (14), access-control (13) |
+| Misc | 6 | btsp-storm(1), uds-hop(1), shadow-fidelity(2), arch(1), mesh-reach(1) |
+
+### Full Suite: 1240 pass, 0 failed, 2 ignored
+
+### Shadow Timer: Healthy — 357 files, 137 with data, latest today 09:04 UTC
+
+### Posture
+
+**flockGate: FULL GREEN. P1 burn-down complete. 17 findings resolved.
+48 total debt (all genuine P2 gaps or architecture-specific).
+Suite 1240 pass. Shadow collecting. Ready for cutover directive.**
+
+*flockGate team, Wave 150x burn-down. Mature existing systems.*
