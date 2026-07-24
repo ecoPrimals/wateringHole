@@ -1,38 +1,38 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-23T22:43:00Z
+# Gate: sporeGate | Updated: 2026-07-24T12:56:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-23T22:45:00Z"
-wave = "150w"
+updated = "2026-07-24T12:56:00Z"
+wave = "150x"
 
 [heads]
-bearDog = "1e3af8d"
-songBird = "84a58ce"
+bearDog = "4373fc7"
+songBird = "2bb2f92"
 nestGate = "d5d45df"
-biomeOS = "6ee3c1a"
+biomeOS = "c0f51e6"
 rhizoCrypt = "ae205a8"
 squirrel = "68c9e04"
 sweetGrass = "76dc35f"
 loamSpine = "cb1beb0"
-skunkBat = "ae7267f"
+skunkBat = "4eef800"
 coralReef = "2246ebf"
 barraCuda = "3cfdf0e"
 petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
-cellMembrane = "9a06699"
-primalSpring = "f267d58"
-wateringHole = "26d648e"
+cellMembrane = "eee7e84"
+primalSpring = "662480f"
+wateringHole = "0ccca08"
 sporePrint = "8106d9c"
 
 [deploy]
-songbird_version = "0.2.1+benchmark"
+songbird_version = "0.2.1+sustained"
 beardog_version = "0.10.0-silicon-atheism"
 petaltongue_version = "1.7.0"
-membrane_version = "0.1.0 (9a06699) — tower.shadow + lan_addr SHIPPED"
+membrane_version = "0.1.0 (eee7e84) — crash-loop breaker + checksums migration"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
 topology = "internet → Cloudflare → golgi(Caddy TLS, subdomain routing) → WG → gates"
 depot_status = "LIVE — 59 binaries × 4 architectures (BLAKE3 + Ed25519 signed)"
@@ -50,27 +50,25 @@ skunkbat = "LIVE"
 [tower_shadow]
 status = "ACTIVE"
 interval = "60min"
-results = 126
 gates_active = ["sporeGate", "flockGate", "golgiBody"]
-timer_next_fire = "~2min (continuous)"
 
 [benchmark]
-phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard"
-lan_latency = "Tower 0.607ms vs WG 0.658ms (0.92x — Tower 8% faster)"
-lan_throughput = "Tower 3.8 Gbps vs WG 6.6 Gbps (WG faster at 196KB payloads — measurement artifact)"
-lan_jitter = "Tower 0.018ms vs WG 0.027ms (Tower 33% less jitter)"
-wan_latency = "Tower 135.8ms vs WG 136.7ms (0.99x — PARITY)"
-wan_throughput = "Tower 7.19 Mbps vs WG 3.64 Mbps (Tower 2x)"
-wan_jitter = "Tower 0.42ms vs WG 0.50ms (Tower lower)"
-hub_routed = "Tower 154.2ms vs WG 153.3ms (1.01x — PARITY)"
-verdict = "Tower matches or exceeds WireGuard on every path measured"
+phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard (sustained + burst)"
+lan_latency = "Tower 0.586ms vs WG 157ms (267x — WG routes via WAN, Tower uses lan_addr)"
+lan_burst = "Tower 4,073 Mbps vs WG 6.76 Mbps (Tower LAN direct, WG WAN-bottlenecked)"
+lan_sustained = "Tower 6,139 Mbps vs WG 3.39 Mbps sustained"
+lan_jitter = "Tower 0.008ms vs WG 1.61ms"
+wan_latency = "Tower 133.9ms vs WG 134.0ms (PARITY)"
+wan_burst = "Tower 6.80 Mbps vs WG 7.22 Mbps (PARITY)"
+wan_sustained = "Tower 7.13 Mbps vs WG 4.19 Mbps (Tower 1.7x)"
+verdict = "Tower 267x faster LAN (lan_addr bypass). WAN sustained 1.7x. Jitter 200x better."
 
 [hardware]
 lan_peering = "CONFIRMED: eastGate at 192.168.4.244, 0.17ms RTT via MikroTik LAN"
 sporeGate_lan_ip = "192.168.4.3"
 eastGate_lan_ip = "192.168.4.244"
 ten_gig = "PENDING: 4 towers NIC'd, cabling sole blocker for ≥1Gbps sustained"
-gate_enrollment = "PENDING: southGate + strandGate (USB staged, physical access required)"
+gate_enrollment = "PENDING: southGate + strandGate (USB staged, R45 topology)"
 
 [caddy_surfaces]
 sporeprint = "200"
@@ -81,9 +79,9 @@ git = "200"
 lab = "401 (auth)"
 
 [primalspring]
-head = "f267d58"
-overwatch = "1225 passed, 0 failed, 2 ignored — 1 flaky (depot network timing, passes on retry)"
-scenarios = 182
+head = "662480f"
+overwatch = "1226 passed, 0 failed, 2 ignored"
+scenarios = 196
 tower_scenarios = "46/46 PASS"
 suite_status = "GREEN"
 
@@ -95,3 +93,5 @@ petaltongue_v17 = "DEPLOYED: v1.7.0 on sporeGate + flockGate (Wave 150u)"
 lan_peering_p0 = "RESOLVED: eastGate LAN at 192.168.4.244, 0.17ms confirmed (Wave 150w)"
 lan_addr_p1 = "SHIPPED: songBird lan_addr peer discovery (Wave 150w)"
 checksums_p0 = "DONE: backward-compatible struct + plain string parsing (Wave 150w)"
+crash_loop_p0 = "DEPLOYED: membrane eee7e84 crash-loop breaker on all 3 gates (Wave 150x)"
+sustained_bench = "DONE: Tower 267x LAN latency, 1.7x WAN sustained throughput (Wave 150x)"
