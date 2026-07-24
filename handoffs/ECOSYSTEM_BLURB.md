@@ -1,19 +1,24 @@
 # ecoPrimals Ecosystem Blurb — Wave 150x
 
-**Date**: Jul 24, 2026 08:37 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **DIMENSIONAL REVIEW COMPLETE. FOSSIL PASS DONE. TOWER HARDENING SHIPPED. 30 FINDINGS REMAIN.**
+**Date**: Jul 24, 2026 09:37 EDT | **Wave**: 150x | **From**: eastGate overwatch
+**Posture**: **SYSTEMD HARDENING SHIPPED. `Restart=always` ELIMINATED ECOSYSTEM-WIDE. CRASH-LOOP ROOT CAUSE CLOSED.**
 
 ---
 
 ## WHERE WE ARE
 
 Tower Atomic Phase 1 PASS (WG parity proven). Phase 2 shadow ACTIVE on 3 gates.
-Deep analysis complete: latency PROVEN, jitter PROVEN, throughput harness FIXED.
-All 4 teams converged rapidly on crash-loop divergence (1,838 lines shipped).
-P0 is CLEAR. P1 Tower Hardening FULLY SHIPPED (9/9). Known debt: 30 findings.
+All 4 teams converged on crash-loop divergence. cellMembrane now ships the
+**systemd-level fix**: every unit changed from `Restart=always` to `Restart=on-failure`
+with `StartLimitBurst=10` / `StartLimitIntervalSec=120`. The 29,081-restart
+pattern is now impossible at the unit level, not just detected by crash-loop breaker.
+
+bearDog AAR: security hardening documented (13,937 tests). eastGate AAR:
+**Tower 1.56x WG throughput on LAN** (6.49 vs 4.16 Gbps), LAN path 500x
+faster than WG overlay (0.15ms ICMP vs 78ms WG overlay). Shadow timer active.
 
 Dimensional review (150x): **8 GREEN / 1 AMBER (hardware — offline gates)**.
-5 fossilized dimensions stable. Fossil pass moved 27 stale docs to `fossilRecord/`.
+Fossil pass: 27 stale docs archived. P0 CLEAR. Known debt: 30 findings.
 
 ---
 
@@ -119,11 +124,15 @@ independently against them. No single blocker.
 | 150x | ALL 4 TEAMS CONVERGED: 1,838 lines, P1 Tower Hardening 9/9 SHIPPED |
 | 150x | Dimensional review: 8G/1A, 5 fossilized dimensions stable |
 | 150x | Fossil pass: 27 docs → fossilRecord, 6 handoffs + 6 AARs remain active |
+| 150x | **systemd hardening**: `Restart=always` → `on-failure` + StartLimitBurst ALL units |
+| 150x | **nestgate nosocket unit**: `membrane-nucleus-nosocket@.service` for evolved CLI |
+| 150x | **bearDog AAR**: security hardening documented (13,937 tests, 0 failures) |
 
 ---
 
-*Wave 150x: Full dimensional review + fossil pass. 27 stale docs archived to
-fossilRecord/wave150x_cleanup. Topology confirmed: 10G+1G mix is LIVE and DONE,
-new gates (friends/family) use R45. Tower must leverage mixed routing. P0 CLEAR.
-30 known debt findings across stress/pen scenarios. Chimera Phase 0 can begin.
-196 scenarios, all PASS. 43/43 converged.*
+*Wave 150x: cellMembrane eliminated `Restart=always` from ALL systemd units (12 files).
+Every unit now uses `Restart=on-failure` + `StartLimitBurst=10` + `StartLimitIntervalSec=120`.
+New `membrane-nucleus-nosocket@.service` for nestgate's evolved CLI. bearDog pushed
+AAR documenting enrollment replay protection + UDS connection cap (13,937 tests).
+Crash-loop root cause is now closed at both application (breaker) and systemd (limits) layers.
+P0 CLEAR. 30 known debt. 196 scenarios PASS. 43/43 converged.*
