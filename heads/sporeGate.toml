@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-24T12:59:00Z"
+updated = "2026-07-24T14:25:00Z"
 wave = "150x"
 
 [heads]
@@ -24,9 +24,9 @@ petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
 cellMembrane = "9a06699"
-primalSpring = "9827a91"
+primalSpring = "b7fd828"
 wateringHole = "0ccca08"
-sporePrint = "8106d9c"
+sporePrint = "67cc325"
 
 [deploy]
 songbird_version = "0.2.1 (rebuilt Jul 24 with lan_addr)"
@@ -72,7 +72,7 @@ scanned = 14
 loops = 0
 
 [primalspring]
-head = "9827a91"
+head = "b7fd828"
 scenarios = 196
 tests = "1226+"
 tower_scenarios = "46/46 PASS"
@@ -86,3 +86,4 @@ lan_addr_p1 = "SHIPPED (Wave 150w)"
 crash_loop_breaker = "DEPLOYED (Wave 150x) — 14 services scanned, 0 loops"
 songbird_mesh_init = "ExecStartPost dropin deployed — workaround for auto-seed regression"
 sustained_benchmark = "DONE — Tower 0.61ms LAN, WG overlay 154ms (253x gap)"
+sporeprint_transplant = "DONE — toweratomic entity fix (67cc325). eastGate shipped full transplant (b985c22)."
