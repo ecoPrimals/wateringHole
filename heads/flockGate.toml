@@ -10,7 +10,7 @@ updated = "2026-07-24T14:15:00Z"
 posture = "GREEN — stable, suite green, mesh healthy"
 
 [repos]
-skunkBat = "f4d0d90"
+skunkBat = "8d8f755"
 primalSpring = "b7fd828"
 wateringHole = "cdaaec34"
 songBird = "e5d3849"
@@ -78,11 +78,11 @@ known_debt = [
 [skunkBat]
 status = "GREEN — stable, 586 tests, 7 threat types"
 version = "0.2.18"
-commit = "f4d0d903da616d4415d5da9bd20841962fb392a3"
+commit = "8d8f755cb33efbc104744a274f56ba2df8a2db50"
 tests = 586
 threat_types = 7
 wave = "150x"
-note = "Cipher floor policy shipped (pen-test cipher-downgrade response). BindMode typed error. All production files ≤700L."
+note = "Deep debt: cipher floor, unreachable!()→error, BTSP handshake dedup, BindMode typed error. Zero #[allow], zero unreachable!(), zero todo!() in production."
 
 [remaining_divergence]
 p1 = [
