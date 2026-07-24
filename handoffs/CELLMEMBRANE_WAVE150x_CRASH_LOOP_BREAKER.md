@@ -81,6 +81,25 @@ which exits 2 on every attempt.
 | `membrane-shadow/src/gate/sporeprint.rs` | nestgate unit: `--socket` → env var |
 | `membrane-shadow/src/dispatch/gate.rs` | `gate.crash-loop` command dispatch |
 | `membrane-shadow/src/temporal/post_sync.rs` | Post-cascade crash-loop scan |
+| `membrane-shadow/src/gate/nucleus.rs` | RestartSec=3→5, add StartLimitBurst |
+| `membrane-shadow/src/provision/bootstrap.rs` | Restart=always→on-failure, burst limits |
+| `deploy/systemd/*.service` (7 files) | Restart=always→on-failure, burst limits |
+| `deploy/systemd/user/membrane-nucleus-nosocket@.service` | **NEW** — ServerNoSocket template |
+
+---
+
+### 3. Systemd Restart=always Elimination (deep debt)
+
+**Problem:** All systemd units used `Restart=always` + `RestartSec=3`, the exact
+configuration that caused 17,920 restarts in 15 hours.
+
+**Fix:** All units (code-generated and deploy templates) hardened:
+- `Restart=always` → `Restart=on-failure` (only restart on non-zero exit)
+- `RestartSec` standardized to 5s (was 3s in many places)
+- Added `StartLimitIntervalSec=120` + `StartLimitBurst=10` (max 10 restarts per 2 min)
+
+**Scope:** 12 files changed — 5 Rust-generated unit templates, 7 deploy templates.
+Also added `membrane-nucleus-nosocket@.service` for `ServerNoSocket` primals.
 
 ---
 
@@ -94,6 +113,8 @@ which exits 2 on every attempt.
 | Production `unwrap()` | 0 |
 | `unsafe` blocks | 0 (`#![forbid(unsafe_code)]`) |
 | Files >800L | 2 (gateway.rs 833, harvest.rs 804 — structurally sound) |
+| `Restart=always` units | 0 (was 8+ across codebase) |
+| Disk reclaimed | 2.2 GiB (cargo clean) |
 
 ---
 
