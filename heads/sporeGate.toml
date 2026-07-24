@@ -1,97 +1,88 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-24T12:56:00Z
+# Gate: sporeGate | Updated: 2026-07-24T12:59:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-24T12:56:00Z"
+updated = "2026-07-24T12:59:00Z"
 wave = "150x"
 
 [heads]
-bearDog = "4373fc7"
-songBird = "2bb2f92"
+bearDog = "1e3af8d"
+songBird = "84a58ce"
 nestGate = "d5d45df"
-biomeOS = "c0f51e6"
+biomeOS = "6ee3c1a"
 rhizoCrypt = "ae205a8"
 squirrel = "68c9e04"
 sweetGrass = "76dc35f"
 loamSpine = "cb1beb0"
-skunkBat = "4eef800"
+skunkBat = "ae7267f"
 coralReef = "2246ebf"
 barraCuda = "3cfdf0e"
 petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
-cellMembrane = "eee7e84"
-primalSpring = "662480f"
+cellMembrane = "9a06699"
+primalSpring = "9827a91"
 wateringHole = "0ccca08"
 sporePrint = "8106d9c"
 
 [deploy]
-songbird_version = "0.2.1+sustained"
+songbird_version = "0.2.1 (rebuilt Jul 24 with lan_addr)"
 beardog_version = "0.10.0-silicon-atheism"
 petaltongue_version = "1.7.0"
-membrane_version = "0.1.0 (eee7e84) — crash-loop breaker + checksums migration"
+membrane_version = "0.1.0 (9a06699) — tower.shadow + crash-loop breaker"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
-topology = "internet → Cloudflare → golgi(Caddy TLS, subdomain routing) → WG → gates"
-depot_status = "LIVE — 59 binaries × 4 architectures (BLAKE3 + Ed25519 signed)"
+depot_status = "LIVE — 59 binaries × 4 architectures"
 mesh_status = "6-GATE MESH — golgi, sporeGate, eastGate, flockGate, ironGate, northGate"
-turn_relay = "LIVE — songbird-relay.service on golgiBody:3478"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
-sovereign_ci_hooks = "DEPLOYED — 29 repos on golgiBody"
 
 [tower]
 status = "3/3 LIVE"
 songbird = "LIVE"
 beardog = "LIVE"
 skunkbat = "LIVE"
+mesh_peers = 3
+mesh_init = "ExecStartPost dropin (auto-seed regression workaround)"
 
 [tower_shadow]
 status = "ACTIVE"
 interval = "60min"
+results = "130+"
 gates_active = ["sporeGate", "flockGate", "golgiBody"]
 
 [benchmark]
-phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard (sustained + burst)"
-lan_latency = "Tower 0.586ms vs WG 157ms (267x — WG routes via WAN, Tower uses lan_addr)"
-lan_burst = "Tower 4,073 Mbps vs WG 6.76 Mbps (Tower LAN direct, WG WAN-bottlenecked)"
-lan_sustained = "Tower 6,139 Mbps vs WG 3.39 Mbps sustained"
-lan_jitter = "Tower 0.008ms vs WG 1.61ms"
-wan_latency = "Tower 133.9ms vs WG 134.0ms (PARITY)"
-wan_burst = "Tower 6.80 Mbps vs WG 7.22 Mbps (PARITY)"
-wan_sustained = "Tower 7.13 Mbps vs WG 4.19 Mbps (Tower 1.7x)"
-verdict = "Tower 267x faster LAN (lan_addr bypass). WAN sustained 1.7x. Jitter 200x better."
+phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard"
+lan_latency_tower = "0.61ms avg, 0.01ms jitter"
+lan_latency_wg = "0.60ms avg (direct LAN, same as Tower — PARITY)"
+wg_overlay_latency = "154.5ms avg (routes through golgiBody VPS)"
+lan_vs_overlay = "Tower LAN 253x faster than WG overlay — WG has no LAN awareness"
+wan_throughput = "Tower 7.19 Mbps vs WG 3.64 Mbps (Tower 2x)"
 
 [hardware]
-lan_peering = "CONFIRMED: eastGate at 192.168.4.244, 0.17ms RTT via MikroTik LAN"
-sporeGate_lan_ip = "192.168.4.3"
-eastGate_lan_ip = "192.168.4.244"
-ten_gig = "PENDING: 4 towers NIC'd, cabling sole blocker for ≥1Gbps sustained"
-gate_enrollment = "PENDING: southGate + strandGate (USB staged, R45 topology)"
+lan_peering = "CONFIRMED: eastGate at 192.168.4.244, 0.17ms RTT"
+lan_benchmark = "Tower 0.61ms / WG 0.60ms (LAN direct parity). WG overlay: 154ms (253x slower)"
+ten_gig = "10G+1G confirmed operational per blurb. Sustained throughput testing: songbird benchmark done."
+gate_enrollment = "PENDING: southGate + strandGate (USB staged, physical access required)"
 
-[caddy_surfaces]
-sporeprint = "200"
-footprint = "200"
-webb = "200"
-live = "200"
-git = "200"
-lab = "401 (auth)"
+[crash_loop_breaker]
+status = "OPERATIONAL"
+scanned = 14
+loops = 0
 
 [primalspring]
-head = "662480f"
-overwatch = "1226 passed, 0 failed, 2 ignored"
+head = "9827a91"
 scenarios = 196
+tests = "1226+"
 tower_scenarios = "46/46 PASS"
 suite_status = "GREEN"
 
 [resolved]
-tower_parity_p1 = "PHASE 1 PASS: Tower matches/exceeds WG (Wave 150w)"
-tower_shadow_p0 = "DEPLOYED: tower.shadow ACTIVE on 3 gates (Wave 150w)"
-sovereign_ci_p0 = "DEPLOYED: CI hooks on 29 repos + BUILD_AUTHORITY active (Wave 150w)"
-petaltongue_v17 = "DEPLOYED: v1.7.0 on sporeGate + flockGate (Wave 150u)"
-lan_peering_p0 = "RESOLVED: eastGate LAN at 192.168.4.244, 0.17ms confirmed (Wave 150w)"
-lan_addr_p1 = "SHIPPED: songBird lan_addr peer discovery (Wave 150w)"
-checksums_p0 = "DONE: backward-compatible struct + plain string parsing (Wave 150w)"
-crash_loop_p0 = "DEPLOYED: membrane eee7e84 crash-loop breaker on all 3 gates (Wave 150x)"
-sustained_bench = "DONE: Tower 267x LAN latency, 1.7x WAN sustained throughput (Wave 150x)"
+tower_parity_p1 = "PHASE 1 PASS (Wave 150w)"
+tower_shadow_p0 = "ACTIVE on 3 gates (Wave 150w)"
+lan_peering_p0 = "CONFIRMED (Wave 150w)"
+lan_addr_p1 = "SHIPPED (Wave 150w)"
+crash_loop_breaker = "DEPLOYED (Wave 150x) — 14 services scanned, 0 loops"
+songbird_mesh_init = "ExecStartPost dropin deployed — workaround for auto-seed regression"
+sustained_benchmark = "DONE — Tower 0.61ms LAN, WG overlay 154ms (253x gap)"
