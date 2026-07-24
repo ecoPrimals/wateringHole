@@ -5,11 +5,12 @@
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-23T22:38:00Z"
-wave = "150w"
+updated = "2026-07-24T11:45:00Z"
+wave = "150x"
 
 [heads]
 primalSpring = "f267d58"
+skunkBat = "4eef800"
 wateringHole = "cef85c30"
 esotericWebb = "2e5c2e5"
 songBird = "cfa84a2"
@@ -79,6 +80,18 @@ failures = 0
 suite_status = "GREEN"
 tower_scenarios = ["capability_routing PROVEN LIVE", "multi_stack GREEN", "large_data GREEN", "secure_compute GREEN", "compute_mesh GREEN", "edge_profile GREEN"]
 known_debt = ["graphenegate-readiness:14", "composition-access-control:15", "arch-fitness:1"]
+
+[skunkbat]
+status = "GREEN — 7 threat types, 580 tests, W150x spawn-rate anomaly shipped"
+version = "0.2.18"
+commit = "4eef800"
+tests = 580
+threat_types = 7
+unsafe_count = 0
+unwrap_count = 0
+allow_count = 0
+tower_atomic = "bond-type enforcement + protocol versioning ready"
+wave_150x = "ProcessSpawnAnomaly: /proc/stat fork rate → crash-loop detection"
 
 [remaining_divergence]
 p0_items = 0
