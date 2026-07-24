@@ -1,45 +1,86 @@
-# Auto-published by membrane temporal.cascade --publish-freshness
-# This file is owned exclusively by this gate. No other gate writes here.
-# Gate: flockGate | Updated: 2026-07-24T14:08:10Z
+# flockGate status — Wave 150x (glacial correction wave)
+# Gate: flockGate | Role: WAN mesh validation + overwatch
+# Updated: 2026-07-24T14:15:00Z
 
 [meta]
 gate = "flockGate"
-updated = "2026-07-24T14:08:10Z"
+role = "WAN mesh validation, primalSpring overwatch"
+wave = "150x"
+updated = "2026-07-24T14:15:00Z"
+posture = "GREEN — stable, suite green, mesh healthy"
 
-[heads]
-agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
-airSpring = "48e99734a579b5db563dfcc1b6fc24e18af511c7"
-barraCuda = "d61ae6cb1a41a069af0ac0834c7ccaa756e2a3a8"
-bearDog = "d1554f9a2fe892e8e161c7f9c075b3d6e0e7bcaf"
-benchScale = "692a7564f133425b021b9834bf7c24d41205980a"
-biomeOS = "237b2dad08807b74b9889431c6421f8078e9ba5d"
-blueFish = "c92df4a4046cec711cd98daac6800856a95d6bca"
-cellMembrane = "31246c04352b24be5e15e8a574729d3257ea60b7"
-coralReef = "64be4a917881d62d7111324528db40e827f543a0"
-esotericWebb = "b35192a19d534df4b2e47e31f35a45978d1c1ab7"
-footPrint = "ad93bafbc460fe44081cc5bc9dff7acc18d1ae35"
-groundSpring = "838a590bb55026a3e696e96b069b5b40ba457ba4"
-healthSpring = "c9952c05576a51ad2a91f51c462d9dfacae5ab6c"
-helixVision = "8237d6e0f3aaa7a03553cc1b75916aff10be6c27"
-hotSpring = "b01f3d3e5011850b4a924dbbf22e790c22ffdf9c"
-initioChem = "4295d093ce03dbc8afdcf711f2fb91b0df35f0ab"
-lithoSpore = "c717d74357c7d76ded43ab8cbd60e46e0541d7ca"
-loamSpine = "846bd3713018e2b5ec54d897b37ff878fc4159c2"
-ludoSpring = "dac65e8fc0d45e9876e976d5c09a5eddc6534179"
-nestGate = "785eb882a12e56d3aca92cb58aba2cdeca592539"
-neuralSpring = "6a1d579ac1856293f10ef780c0857b8903a76294"
-petalTongue = "8d976cb8b6a4b1833c207c4058bdd27c7dafd39a"
-plasmidBin = "c2ef7bc218ae25853798f4c3d59e6c1d85f330de"
-primalSpring = "63585458c1035b60a977d797116188dc1c1b687a"
-projectFOUNDATION = "2bcc3811b0106cd336e4ade070a124cfc80a8f16"
-projectNUCLEUS = "09c8e19a499fc77224339b6204f69d02a03f2208"
-rhizoCrypt = "151182026e93f78cf32662bfc2b620b5e5b4208a"
-skunkBat = "25413a01f3e6c1ab442e6d9d03af0f9677bc7cab"
-songBird = "e5d38498ece8e5d163bade747892e7dbfee3818c"
-sourDough = "89ea3d1c5e6dc03f22bb4c8b2bc8df29267973a5"
-sporePrint = "573c0db54b8eed0b5da486395bbb605b5219f5f6"
-squirrel = "48c515bbcdcb1b121cd11470a72d2afe1e3e0adc"
-sweetGrass = "3fd17f874c49395936125e91d6a1bf31a466df4a"
-toadStool = "dc16813059baadfd78ca9a9b64e58f5de49957a3"
-wetSpring = "7b2318a18cd5ea7d88117b19ccbe0b4afd98796c"
-whitePaper = "773af5ce6963c44927e63638869bb4b39b71b1b1"
+[repos]
+primalSpring = "b7fd828"
+wateringHole = "cdaaec34"
+songBird = "e5d3849"
+esotericWebb = "b35192a"
+petalTongue = "8d976cb"
+
+[mesh]
+interface = "wg0"
+local_ip = "10.13.37.6"
+peers_online = 3
+peers_total = 4
+node_id = "flockgate"
+songbird_version = "0.2.1"
+songbird_uptime_s = 55921
+stale = ["ironGate (69h DOWN)"]
+note = "golgiBody 45ms, sporeGate 106ms, eastGate 128ms — all direct paths"
+
+[wan_subdomain_posture]
+webb_primals_eco = "200 — 230ms"
+primals_eco = "301 → 200"
+git_primals_eco = "200 — 133ms"
+membrane_primals_eco = "200 — 153ms"
+all_surfaces_live = "4/4 probed OK"
+
+[esotericWebb]
+status = "LIVE — active (running) since Jul 20"
+pid = 3541637
+uptime = "4 days"
+
+[petalTongue]
+status = "LIVE — active (running) since Jul 22"
+pid = 2681175
+uptime = "2 days"
+
+[tower_shadow]
+status = "ACTIVE"
+results = 360
+interval = "60min"
+note = "Tower EXCEEDS WG: 1.56x LAN, 1.11x WAN throughput"
+
+[primalSpring]
+scenarios = 196
+tests = 1240
+passed = 1240
+failed = 0
+ignored = 2
+known_debt = [
+    "graphenegate-readiness = 14 (no aarch64 binaries on flockGate)",
+    "composition-access-control = 15",
+    "arch-fitness = 1 (no local aarch64 depot)",
+    "mesh-reachability = 1 (ironGate DOWN)",
+    "tower-stress-concurrent-dispatch = 3",
+    "tower-stress-btsp-storm = 1",
+    "tower-stress-failover-resilience = 4",
+    "tower-stress-mesh-churn = 4",
+    "tower-stress-uds-hop-cost = 1",
+    "tower-stress-shadow-fidelity = 2",
+    "tower-pen-enrollment-replay = 2",
+    "tower-pen-capability-escalation = 6",
+    "tower-pen-cipher-downgrade = 4",
+    "tower-pen-uds-spoof = 5",
+    "tower-pen-mesh-poison = 2",
+]
+
+[remaining_divergence]
+p1 = [
+    "30 Tower hardening findings — evolving via primalSpring scenarios (stress + pen)",
+    "Enrollment seed rotation (bearDog/flockGate) — pen test finding P2.5",
+]
+p2 = [
+    "Android Keystore + grapheneGate (bearDog StrongBox integration)",
+    "sporePrint transplant (sporeGate team — update primals.eco)",
+]
+note = "Glacial correction: git merge divergence is rootPulse evidence, not a bug. Mature existing systems."
