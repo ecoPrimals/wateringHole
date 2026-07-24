@@ -98,13 +98,37 @@ The LAN path is 500x faster than the WG overlay for these two gates.
 
 ---
 
+### Deep Debt Sweep (July 24, evening)
+
+Comprehensive deep debt audit + idiomatic Rust 2024 evolution:
+
+| Target | Action |
+|--------|--------|
+| `context_discovery.rs` | `map_or(true,...)` → `is_none_or()` (Rust 2024 stabilized) |
+| `soundstage/channel.rs` | `Anchor` clone per event → `Arc<Anchor>` (zero-alloc) |
+| `evolution/mod.rs` | Exported `preferred_address()` for downstream LAN-first routing |
+| `ipc/protocol.rs` | `Cow<'static, str>` for JSON-RPC version (zero-alloc) |
+| `evolution/gate.rs` | `MeshEntry::preferred_address()` + `has_tower()` |
+| `capability_registry.toml` | K-Derm trust tiers + 4 missing methods (resolved 15 debt) |
+| Cargo.lock | 26 transitive deps refreshed (patch-level) |
+| KNOWN_DEBT | Recalibrated: 9 entries / 17 expected (was 10/20) |
+
+**Audit results** (all clear):
+- Zero unsafe code (`#![forbid(unsafe_code)]` + workspace deny lint)
+- Zero panics in production, zero `todo!()`/`unimplemented!()`
+- Zero `#[allow(dead_code)]`, zero production mocks
+- Zero hardcoded primal names (typed `Primal` enum, TOML-driven registries)
+- All 14 direct deps pure Rust (zero C/FFI)
+- Largest production file: 666 lines (`neural_routing.rs`)
+- 17 typed `thiserror` error enums (no `Box<dyn Error>`)
+
 ## What's Next (eastGate team)
 
 | Priority | Task | Status |
 |----------|------|--------|
-| P1 | Evolve against 30 known debt findings | Ongoing — teams independent |
-| P1 | iperf3 sustained throughput (needs sporeGate server) | Waiting on sporeGate ops |
-| P2 | sporePrint primal pipeline | Queued |
+| P1 | Remaining 17 debt findings | Blocked — all require songBird/bearDog code |
+| P1 | iperf3 server LIVE | DONE — port 5201, all interfaces |
+| P2 | sporePrint primal pipeline | Queued (design phase) |
 | P2 | CredentialStore squirrel integration | Queued |
 | P3 | biomeOS chimera Phase 0 (library extraction) | Can start now |
 
@@ -112,11 +136,12 @@ The LAN path is 500x faster than the WG overlay for these two gates.
 
 ## Blockers
 
-None. P0 CLEAR. All operator tasks DONE.
+None. P0 CLEAR. All operator tasks DONE. All eastGate-actionable debt burned.
+Remaining 17 known debt findings are upstream primal team items (songBird/bearDog).
 
 ---
 
-*Wave 150x eastGate AAR: 14 stress/pen scenarios integrated, operator services
-activated (tower.shadow timer + biomeos-beacon + songbird upgrade), shadow metrics
-collecting, topology updated, KNOWN_DEBT calibrated. 196 scenarios, 1240 tests,
-0 warnings. P0 CLEAR.*
+*Wave 150x eastGate AAR (updated): deep debt sweep complete — zero unsafe, zero mocks,
+zero hardcode, idiomatic Rust 2024 patterns, Arc<Anchor> zero-clone, Cow<str> zero-alloc,
+LAN-first routing, K-Derm trust tiers. 196 scenarios, 1239 tests, 0 warnings.
+v0.9.46. P0 CLEAR.*
