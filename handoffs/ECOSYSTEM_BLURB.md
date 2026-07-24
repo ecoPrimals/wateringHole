@@ -114,17 +114,16 @@ independently. No single blocker. This is the maturation work.
 
 | # | Dimension | Status |
 |---|-----------|--------|
-| 1 | Temporal | GREEN — 43/43 synced |
-| 2 | Ecological | GREEN — 196 scenarios, 30 debt |
-| 3 | Hardware | AMBER — 4 offline gates |
-| 4 | Sovereignty | GREEN — DNSSEC 3/3, CI LIVE, Tower P1 PASS |
-| 5 | Public Surface | GREEN — 6/6 healthy |
-| 6 | Compositions | GREEN — footPrint + esotericWebb LIVE |
-| 7 | Documentation | GREEN — fossil pass complete |
-| 8 | Campus | GREEN — vision documented |
-| 9 | Tower Analysis | GREEN — honest data, chimera design |
+| 1 | Temporal/Coordination | GREEN — 43/43 synced, waterFall + impulse + braids active |
+| 2 | Ecological | GREEN — 196 scenarios, 30 debt, chimera Phase 0 ready |
+| 3 | Hardware | AMBER — 4 offline gates, topology LIVE |
+| 4 | Sovereignty | GREEN — Tower EXCEEDS WG, 6/6 domains, CI LIVE |
+| 5 | Public Surface | GREEN — 6/6 healthy, sporePrint transplant issued |
+| 6 | Compositions | GREEN — footPrint + esotericWebb LIVE, 6/6 Tower domains |
+| 7 | Documentation | GREEN — fossil pass complete, 7 handoffs + 4 AARs active |
+| 8 | Campus | GREEN — vision documented, pages pending |
 
-**Fossilized** (F1–F5): Glacial Shift, CAC, Silicon Atheism, Depot/Build, Cascade.
+**Fossilized** (F1–F6): Glacial Shift, CAC, Silicon Atheism, Depot/Build, Cascade, Tower Deep Analysis.
 
 ---
 

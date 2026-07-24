@@ -11,19 +11,25 @@ appears. This keeps the active review focused on evolving concerns.
 
 # ACTIVE DIMENSIONS
 
-## 1. Temporal
+## 1. Temporal / Coordination
 
 - [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 150x)
 - [x] Gate heads published (`heads/*.toml`)
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] Active impulses: 0 (26+ fossilized)
 - [x] ecosystem_manifest.toml version current (v3.1.0)
-- [x] Active handoffs: 6 (150w–150x era, post-fossilization)
-- [x] Active AARs: 6 (150w)
-- [x] 3 analysis docs (150w–150x: data analysis, composition map, chimera design)
 - [x] 43/43 repos synced with Forgejo
-- [x] Fossilized: 24 in `fossilRecord/wave150x_cleanup/`, 21 in `aars/fossils/`
+- [x] Active handoffs: 7 (150w–150x), Active AARs: 4 (150w–150x), Active analysis: 3
+- [x] Fossilized: 24 in `fossilRecord/wave150x_cleanup/`, 26 in `aars/fossils/`
+- [x] **waterFall** publish cascade defined (`graphs/waterfall_publish.toml`) — git → impulse → DAG → braid → anchor → relay
+- [x] **Impulse/Potential** standard active (Wave 63+) — TOML FRAGOs, auto-discovered via cascade
+- [x] **Context Braid** standard active (Wave 63+) — structured developer state, TTL auto-decay
+- [x] **Ecosystem Communication** standard active (Wave 68+) — three-artifact model (handoffs/FRAGOs/blurbs)
+- [x] NeuralBridge in membrane-shadow routes with try-primal-first semantics
+- [x] Glacial correction (150x): git merge divergence documented as rootPulse evidence
 - [ ] GLOSSARY.md stale (Wave 138b) — needs refresh to 150x terms
+- [ ] waterFall graph partially wired — full primal composition pending Provenance Trio maturity
+- [ ] Context braids not yet replacing blurb paste in practice — graduation path documented
 
 ## 2. Ecological (Primal Health)
 
@@ -33,34 +39,35 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] 100,000+ `#[test]` attrs across ecosystem (Wave 150o audit)
 - [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean (Wave 150q)
 - [x] nestGate vendor elimination COMPLETE (Wave 150u) — vendor/ removed
-- [x] Production `.unwrap()` — 0 prod unwraps confirmed: nestGate, loamSpine, toadStool, esotericWebb, cellMembrane (150u)
+- [x] Production `.unwrap()` — 0 prod unwraps confirmed: nestGate, loamSpine, toadStool, esotericWebb, cellMembrane
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
 - [x] Format drift RESOLVED — all repos clean
-- [x] songBird: 14,322+ tests, zero clippy warnings, zero unsafe (150x)
-- [x] bearDog: enrollment replay protection shipped (150x)
-- [x] skunkBat: spawn-rate anomaly detection shipped (150x)
-- [x] cellMembrane: crash-loop breaker shipped (150x)
-- [x] primalSpring: **196 scenarios**, all PASS, 30 known debt findings
+- [x] bearDog: 13,937 tests, enrollment replay protection, UDS connection cap (150x)
+- [x] songBird: 14,322+ tests, UDS connection pool, federation.broadcast, sustained benchmark (150x)
+- [x] skunkBat: spawn-rate anomaly detection (150x)
+- [x] cellMembrane: crash-loop breaker + systemd hardening — `Restart=always` eliminated ecosystem-wide (150x)
+- [x] primalSpring: **196 scenarios**, all PASS
+- [ ] **30 known debt findings** across 10 stress/pen scenarios — teams evolve independently
 - [ ] Production `.unwrap()` — remaining primals need `clippy::unwrap_used` audit
+- [ ] Chimera Phase 0: library extraction (pure refactoring, can begin now)
 
 ## 3. Hardware / Topology
 
-- [x] Mixed 10G + 1G topology LIVE — 10G backbone between houses/large compute, 1G via MikroTik for LAN gates
-- [x] sporeGate on R45 → MikroTik — intra-membrane coordinator, golgiBody WAN liaison
+- [x] Mixed 10G + 1G topology LIVE and DONE — 10G backbone between houses, 1G MikroTik for LAN
+- [x] sporeGate on R45 → MikroTik — intra-membrane coordinator, HPC interface, build authority
 - [x] eastGate on MikroTik LAN — code hub, LAN peer at 192.168.4.244 (0.17ms RTT)
 - [x] 5-gate WireGuard mesh LIVE (golgi, sporeGate, eastGate, flockGate, ironGate)
 - [x] northGate enrolled (10.13.37.8, Windows 11, RTX 5090, WireGuard active)
 - [x] grapheneGate Tower LIVE (bearDog + songBird + skunkBat)
-- [x] USB enrollment bundle staged for southGate (10.13.37.9)
-- [x] gate-usb-bootstrap.sh + enroll/ bundle operational
 - [x] Tower Atomic shadow ACTIVE on 3 gates (sporeGate, flockGate, golgiBody)
-- [x] LAN peering confirmed (sporeGate ↔ eastGate via MikroTik, 0.17ms)
+- [x] LAN peering confirmed (sporeGate ↔ eastGate, 0.17ms ICMP, 0.72ms Tower)
+- [x] USB enrollment bundle staged (gate-usb-bootstrap.sh + enroll/)
+- [x] New gates (friends/family) will use R45 — Tower handles mixed 1G/10G routing
 - [ ] southGate pending USB enrollment (house2, full NUCLEUS)
 - [ ] strandGate enrollment pending (dual EPYC 7452, 256GB, RTX 3090)
 - [ ] westGate OFFLINE (cold storage, 76TB ZFS — not blocking)
 - [ ] fieldGate OFFLINE (dead CMOS — hardware surgery)
 - [ ] biomeGate OFFLINE (kernel recovery)
-- [ ] New gates (friends/family) will use R45 topology — Tower must support
 
 ## 4. Sovereignty / Membranes
 
@@ -73,15 +80,15 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **DNSSEC 3/3 domains complete** (`primal.eco`, `nestgate.io`, `primals.eco`)
 - [x] Sovereignty Evolution Roadmap formalized in Diderm doc (Wave 150s)
 - [x] Three-tier classification: Replace / Late-Stage / Firebreak
-- [x] RustDesk confirmed AGPL-3.0 compliant — learn-from-leverage posture
-- [x] JupyterHub repositioned: outer membrane interface only, compute = inner membrane primals
+- [x] RustDesk AGPL-3.0 compliant — learn-from-leverage posture
 - [x] Sovereign depot auto-build pipeline DELIVERED (4 phases — Wave 150w)
-- [x] Crash-loop breaker — cellMembrane self-recovery for systemd storms (Wave 150x)
-- [x] Tower Atomic PHASE 1 PASS — exceeds WG on WAN throughput, LAN latency, jitter (150w)
-- [x] Tower Atomic P1 Hardening FULLY SHIPPED (9/9 tasks — 150x)
-- [ ] **Phase 2: Tower cutover** — shadow mode active, 30 stress/pen findings remaining, chimera design drafted
-- [ ] **Phase 1: Zola → primal sporePrint** — petalTongue rendering + nestGate CAS content + cellMembrane serving
-- [ ] **Phase 2: Forgejo → rootPulse** — late-stage, post-rootPulse maturity
+- [x] Crash-loop self-recovery LIVE — application (breaker) + systemd (StartLimitBurst) layers
+- [x] Tower Atomic PHASE 1 PASS — EXCEEDS WG (1.56x LAN throughput, 1.11x WAN)
+- [x] Tower P1 Hardening FULLY SHIPPED (9/9 tasks — 150x)
+- [x] **6/6 exploration domains PROVEN LIVE** (capability routing, multi-stack, large data, secure compute, distributed, edge/SFF)
+- [ ] **Phase 2: Tower cutover** — shadow active, 30 findings remaining, chimera design drafted
+- [ ] **Phase 1: Zola → sporePrint primal pipeline** — petalTongue + nestGate CAS + cellMembrane
+- [ ] **Phase 2: Forgejo → rootPulse** — DAG + linear + attribution over nestGate CAS + Provenance Trio
 - [ ] `primal.eco` inner membrane separation (P2)
 
 ## 5. Public Surface / Security
@@ -96,8 +103,9 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Security headers deployed (HSTS, CSP, X-Frame-Options)
 - [x] fail2ban + rate limiting active
 - [x] TLS auto-renewing (ACME)
-- [x] Tower Atomic pen test scenarios (7) — attack surface mapped, 30 findings tracked
-- [ ] Lansing Scuffle public pages pending (sporePrint team blurb issued)
+- [x] Tower pen test: 7 scenarios, attack surface mapped, 30 findings tracked
+- [x] sporePrint transplant guidance issued (Wave 150x) — Tower Atomic, topology, sovereign CI
+- [ ] sporePrint primals.eco update pending (team handed off)
 
 ## 6. Compositions / Products
 
@@ -107,24 +115,25 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] initioChem wired pseudospore-core as first external consumer
 - [x] JupyterHub LIVE on ironGate — outer membrane interface
 - [x] pseudoSpore pipeline — 7 springs emitted
-- [x] petalTongue WASM WebGL pipeline shipped (Wave 150r) + v1.7.0 deployed (150w)
-- [x] Tower Atomic exploration: 1/6 domains PROVEN LIVE, 5/6 structural GREEN
-- [ ] sporePrint primal pipeline: replace Zola with petalTongue + nestGate CAS (P2)
+- [x] petalTongue WASM WebGL pipeline shipped (150r) + v1.7.0 deployed (150w)
+- [x] Tower Atomic: **6/6 exploration domains PROVEN LIVE** — exceeds WG structurally
+- [ ] sporePrint primal pipeline: replace Zola (petalTongue + nestGate CAS + cellMembrane)
 - [ ] 6 springs pending `validation.json`
 - [ ] tideGlass — shelved (empty scaffold)
 - [ ] projectFOUNDATION — not started
 
 ## 7. Documentation / Fossil Record
 
-- [x] Blurb reflects current wave (150x)
-- [x] Active handoffs: 6 (150w–150x)
-- [x] Active AARs: 6 (150w)
+- [x] Blurb reflects current wave (150x) — glacial correction framing
+- [x] Active handoffs: 7 (150w–150x)
+- [x] Active AARs: 4 (150w–150x)
 - [x] Active analysis docs: 3 (150w–150x)
 - [x] Active impulses: 0
 - [x] wateringHole standards: 37 active in 4 directories + 4 root docs
-- [x] Standards reorganized into foundations/ (9), protocols/ (10), operations/ (12), compositions/ (6) — Wave 150t
+- [x] Standards reorganized: foundations/ (9), protocols/ (10), operations/ (12), compositions/ (6)
 - [x] 8 standards fossilized to `fossilRecord/wave150s_standards/`
 - [x] Team startup blurb template issued
+- [x] Wave 150x fossil pass: 24 handoffs + 26 AARs archived
 - [ ] GLOSSARY.md needs refresh (Wave 138b → 150x terms)
 - [ ] PRIMAL_REGISTRY.md needs refresh (Wave 109 → current 15-primal posture)
 - [ ] 18 standards with stale wave tags (evergreen content, headers need bump)
@@ -138,27 +147,8 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Thermal sovereignty loop designed (solar → compute → heat → water → gardens)
 - [x] footPrint GeoJSON location added (John Bean Building)
 - [x] sporePrint team blurb issued (4 new pages + 4 updates)
-- [ ] sporePrint public pages not yet created (consulting, companies, scuffle, thermal)
+- [ ] sporePrint public pages pending (team handed off with transplant guidance)
 - [ ] Building tour / physical access not yet arranged
-
-## 9. Tower Atomic Deep Analysis (NEW — Wave 150x)
-
-- [x] Honest data assessment: latency PROVEN, jitter PROVEN, throughput UNRELIABLE (duration_ms: 0)
-- [x] Composition cost map: 12 UDS seams, 4 hops per cross-gate call, IPC 3.5× network on LAN
-- [x] 7 stress test scenarios: sustained throughput, concurrent dispatch, BTSP storm, failover, churn, UDS hop cost, shadow fidelity
-- [x] 7 pen test scenarios: malformed RPC, enrollment replay, capability escalation, cipher downgrade, UDS spoof, mesh poison, relay abuse
-- [x] biomeOS chimera design: 6 requirements, 4-phase migration, performance targets
-- [x] All 4 teams converged: 1,838 lines shipped against findings (150x)
-- [x] Known debt reduced 36 → 30 in first cascade
-- [x] Benchmark harness fixed: `duration_us` + sustained streaming mode
-- [x] UDS connection pool shipped (songBird)
-- [x] Enrollment replay protection shipped (bearDog)
-- [x] federation.broadcast handler shipped (songBird) — gap from composition map resolved
-- [x] Crash-loop breaker shipped (cellMembrane) — self-recovery gap resolved
-- [x] Spawn-rate anomaly detection shipped (skunkBat)
-- [ ] 30 known debt findings across 10 stress/pen scenarios (teams evolving independently)
-- [ ] Chimera Phase 0: library extraction (can begin now — pure refactoring)
-- [ ] Sustained throughput validation (harness ready, can run on 1G LAN now)
 
 ---
 
@@ -200,14 +190,33 @@ Fully operational. Sovereign auto-build pipeline (Wave 150w) extends this.
 
 43/43 repos converged on Forgejo-first. Push mirrors relay to GitHub.
 
+## F6. Tower Atomic Deep Analysis (fossilized Wave 150x, completed Wave 150x)
+
+4-team convergence sprint shipped all analysis and hardening tasks.
+Remaining 30 debt findings tracked in Dim 2 (Ecological). Chimera evolution
+tracked in Dim 4 (Sovereignty). This dimension captured the investigation;
+the ongoing work lives in existing dimensions.
+
+- Honest data assessment: latency/jitter PROVEN, throughput harness FIXED
+- Composition cost map: 12 UDS seams, IPC 3.5× network on LAN
+- 14 new stress/pen scenarios (196 total), all PASS
+- biomeOS chimera design: 6 requirements, 4-phase migration
+- All 4 teams converged: 1,838 lines across 57 files
+- Known debt reduced 36 → 30
+- bearDog: replay protection + UDS cap
+- songBird: connection pool + federation.broadcast + sustained benchmark
+- cellMembrane: crash-loop breaker + systemd hardening
+- skunkBat: spawn-rate anomaly detection
+
 ---
 
-**Active**: 9 dimensions (1–9)
-**Fossilized**: 5 dimensions (F1–F5)
-**Summary**: All fossilized dimensions GREEN. Active: 8 GREEN / 1 AMBER (hardware — offline gates).
+**Active**: 8 dimensions (1–8)
+**Fossilized**: 6 dimensions (F1–F6)
+**Summary**: All fossilized dimensions GREEN. Active: 7 GREEN / 1 AMBER (hardware — offline gates).
 
 ---
 
 *Last used*: Wave 150x (Jul 24, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
+*Latest fossilization*: Wave 150x (F6 — Tower Atomic Deep Analysis)
