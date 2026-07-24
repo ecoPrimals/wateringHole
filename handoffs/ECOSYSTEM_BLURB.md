@@ -71,8 +71,20 @@ cipher floor policy.
 |----------|-----------|-----------|
 | bearDog | 2 | Bond-type cipher floor, seed rotation |
 | songBird | 9 | Caller identity (4), UDS hardening (5) |
+| **songBird crypto bypass** | **NEW** | **10+ crates embed sha2/hmac/ed25519/chacha — must route through bearDog UDS** |
 | Architecture | 27 | grapheneGate aarch64 (14), access-control (13) |
 | Misc | 10 | btsp-storm, failover, uds-hop, shadow-fidelity, arch |
+
+### Crypto Composition Divergence (P1 — NEW)
+
+songBird embeds its own crypto across 10+ crates (`sha2`, `hmac`, `ed25519-dalek`,
+`chacha20poly1305`, `blake3`) instead of routing through bearDog's `crypto.*`
+capabilities via UDS. This bypasses the composition model and prevents us from
+validating the seams we need for chimera. The `rustls-rustcrypto` swap (ring removal)
+is correct for Silicon Atheism, but the inline crypto is the real debt.
+
+**Path**: composition first (songBird → bearDog UDS for crypto) → measure IPC cost
+at each seam → chimera where it matters (shared library, not IPC).
 
 ### Topology (sporeGate team)
 
@@ -96,7 +108,7 @@ cipher floor policy.
 
 | # | Task | Depends On |
 |---|------|-----------|
-| 1 | **Chimera Phase 0** — library extraction | Can start now (pure refactoring) |
+| 1 | **Chimera Phase 0** — library extraction | After composition validated (bearDog UDS crypto must work first) |
 | 2 | Node Atomic (proton) | Tower chimera maturity |
 | 3 | Nest Atomic (neutron) | Node Atomic |
 | 4 | Phase 3 cutover — Tower replaces WG | Chimera + sustained validation |
