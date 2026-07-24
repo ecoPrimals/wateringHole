@@ -10,6 +10,7 @@ updated = "2026-07-24T14:15:00Z"
 posture = "GREEN — stable, suite green, mesh healthy"
 
 [repos]
+skunkBat = "f4d0d90"
 primalSpring = "b7fd828"
 wateringHole = "cdaaec34"
 songBird = "e5d3849"
@@ -73,6 +74,15 @@ known_debt = [
     "tower-pen-uds-spoof = 5",
     "tower-pen-mesh-poison = 2",
 ]
+
+[skunkBat]
+status = "GREEN — stable, 586 tests, 7 threat types"
+version = "0.2.18"
+commit = "f4d0d903da616d4415d5da9bd20841962fb392a3"
+tests = 586
+threat_types = 7
+wave = "150x"
+note = "Cipher floor policy shipped (pen-test cipher-downgrade response). BindMode typed error. All production files ≤700L."
 
 [remaining_divergence]
 p1 = [
