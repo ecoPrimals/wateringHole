@@ -10,7 +10,7 @@ updated = "2026-07-24T14:15:00Z"
 posture = "GREEN — stable, suite green, mesh healthy"
 
 [repos]
-skunkBat = "8d8f755"
+skunkBat = "49da286"
 primalSpring = "b7fd828"
 wateringHole = "cdaaec34"
 songBird = "e5d3849"
@@ -78,11 +78,11 @@ known_debt = [
 [skunkBat]
 status = "GREEN — stable, 586 tests, 7 threat types"
 version = "0.2.18"
-commit = "8d8f755cb33efbc104744a274f56ba2df8a2db50"
+commit = "49da286b2ccd5c27dab6c7c6223954106ca21879"
 tests = 586
 threat_types = 7
 wave = "150x"
-note = "Deep debt: cipher floor, unreachable!()→error, BTSP handshake dedup, BindMode typed error. Zero #[allow], zero unreachable!(), zero todo!() in production."
+note = "Docs synced to W150x. Deep debt complete: cipher floor, unreachable!()→error, BTSP dedup, BindMode typed error. Zero #[allow], zero unreachable!(), zero todo!() in production. 3.3 GiB cargo clean. Zero debris."
 
 [remaining_divergence]
 p1 = [
