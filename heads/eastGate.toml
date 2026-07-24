@@ -4,7 +4,7 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-21T17:00:00Z"
+updated = "2026-07-24T13:31:00Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
@@ -31,13 +31,13 @@ nestGate = "277fec21"
 neuralSpring = "19a6d6f64ab05cfb9a32e73fe6c5a215d07392dc"
 petalTongue = "d9c2ddba1f63b8fa74e0a4bd9d2f2e3dca839d91"
 plasmidBin = "419f0c2eafdbe2538b559e6f7d1aab5423956b49"
-primalSpring = "a515d8d"
+primalSpring = "b7fd8288"
 projectFOUNDATION = "4583164a5de4dbb1b426fc0afd427c44af7072e5"
 projectNUCLEUS = "93b114bb63a369a3fdd5c5414f3b0ef1a9475e1a"
 rhizoCrypt = "4f5008e9641746a467007355a8c836387fa52117"
 rustChip = "7b23442b5ebe43be64054457806e890447d37747"
 skunkBat = "a78989148c0ce830f0a0fa4066ae8aceb3b0a88f"
-songBird = "1d39704829f5b378b992b45a2cf869a13af35952"
+songBird = "2bb2f92d"
 sourDough = "89ea3d1c5e6dc03f22bb4c8b2bc8df29267973a5"
 sporePrint = "a941915f3858f2b5a22a9885e3361a3dd0199d60"
 squirrel = "9488d37d7ab9a5e37ead44df5403f29d68500686"
