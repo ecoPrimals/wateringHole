@@ -1,4 +1,4 @@
-# cellMembrane Wave 150x — Crash-Loop Breaker + nestgate Unit Fix
+# cellMembrane Wave 150x — Crash-Loop Breaker + Deep Debt Sweep
 
 **Date:** 2026-07-24
 **Wave:** 150x
@@ -125,6 +125,52 @@ Also added `membrane-nucleus-nosocket@.service` for `ServerNoSocket` primals.
 
 ---
 
+## Deep Debt Sweep (afternoon session)
+
+### Hardcode elimination (7 locations)
+
+| File | Old | New |
+|------|-----|-----|
+| `tower/timer.rs` | `"/run/membrane/beardog.sock"` | `DEFAULT_SOCKET_BASE` + `binary_for(CryptoSigner)` |
+| `tower/timer.rs` | `"/run/membrane/skunkbat.sock"` | `DEFAULT_SOCKET_BASE` + `binary_for(Observability)` |
+| `tower/timer.rs` | `.join("songbird")` | `binary_for(MeshRelay)` |
+| `tower/timer.rs` | `"/etc/systemd/system/"` | `SYSTEMD_UNIT_DIR` |
+| `gate/enroll.rs` | `"10.13.37.1"` | `mesh_address("golgi")` |
+| `tower/mod.rs` | `"/opt/ecoPrimals"` | `DEFAULT_ECOPRIMALS_ROOT` |
+| `relay.rs` | `"forgejo"` | `DEFAULT_SOVEREIGN_REMOTE` |
+
+### Bug-adjacent fix
+
+`temporal/resolve.rs` lines 187, 300: compared against literal `"forgejo"` while
+`sovereign_remote()` (which reads `MEMBRANE_SOVEREIGN_REMOTE` env) was defined in
+the same module. Now uses `sov` variable consistently. Would have broken if env
+var was ever set to override the default.
+
+### `as` casts → safe conversions
+
+- `tower/mod.rs`: `len() as u64` → `u64::try_from`, `PROBE_PAYLOAD_SIZE as u64` → `u64::try_from`
+- `gateway.rs`: `passed as f64 / total as f64` → `f64::from(u32::try_from(...))`
+- `gate/enroll.rs`: const `as u32` guarded by compile-time assertion
+
+### Idiomatic Rust
+
+- `gate/health.rs`, `plasmid/sandbox.rs`: replaced `.all().iter().find(|s| s.binary == ...)` with `for_binary()`
+- Removed unused `portable-atomic` dependency + `extra-platforms` feature
+
+### LAN peer discovery
+
+`MESH_REGISTRY` extended with `lan_ip` field: eastGate `192.168.4.244`,
+sporeGate `192.168.4.3`. New `lan_address()` public API + 4 tests.
+
+### Doc cleanup
+
+- Fixed stale 1146→1150 test counts across all root docs
+- Removed "NEW Wave 59" labels from VPS_STATE.md
+- Fixed Channel 1 Signal status in CELLMEMBRANE_ARCHITECTURE.md ("Planned" → "LIVE")
+- Updated RUNBOOKS.md date to Wave 150x
+
+---
+
 ## For Upstream Teams
 
 | Item | Owner | Action |
@@ -133,3 +179,5 @@ Also added `membrane-nucleus-nosocket@.service` for `ServerNoSocket` primals.
 | skunkBat process spawn rate anomaly | skunkBat (flockGate) | ThreatDetector category for rapid restarts |
 | CLI contract validation | cellMembrane | Future: test depot binaries against unit args before deploy |
 | Outbound connection monitoring | skunkBat | Future: detect anomalous outgoing connection rates |
+| eastGate LAN IP in manifest | wateringHole (upstream) | Set `lan_ip = "192.168.4.244"` for eastGate in `ecosystem_manifest.toml` |
+| specs/ re-validation | cellMembrane | 6 spec docs dated May 2026 — re-validate for Wave 150x reality |
