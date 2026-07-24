@@ -85,6 +85,10 @@ which exits 2 on every attempt.
 | `membrane-shadow/src/provision/bootstrap.rs` | Restart=always→on-failure, burst limits |
 | `deploy/systemd/*.service` (7 files) | Restart=always→on-failure, burst limits |
 | `deploy/systemd/user/membrane-nucleus-nosocket@.service` | **NEW** — ServerNoSocket template |
+| `membrane-shadow/src/manifest/tests.rs` | **NEW** — extracted 454L manifest tests |
+| `membrane-shadow/src/webhook/tests.rs` | **NEW** — extracted 360L webhook tests |
+| `membrane-shadow/src/manifest/mod.rs` | 785→333L after test extraction |
+| `membrane-shadow/src/webhook/mod.rs` | 703→345L after test extraction |
 
 ---
 
