@@ -1,38 +1,57 @@
-# flockGate status — Wave 150x (P0 CLEAR ALL GATES)
+# flockGate status — Wave 150x (Composition Validation)
 # Gate: flockGate | Role: CODE TEAM — bearDog, songBird, skunkBat
-# Updated: 2026-07-25T15:12:00Z
+# Updated: 2026-07-25T15:20:00Z
 
 [meta]
 gate = "flockGate"
 role = "Code team — primal source evolution"
 wave = "150x"
-updated = "2026-07-25T15:12:00Z"
-posture = "GREEN — P0 CLEAR, bearDog P2 clear, skunkBat public, suite green"
+updated = "2026-07-25T15:20:00Z"
+posture = "GREEN — P0 CLEAR, composition validated, blake3 method fix shipped"
 
 [repos]
 skunkBat = "a8cf5aa"
-primalSpring = "692a92e"
-wateringHole = "ecc9305f"
-songBird = "efabd5d"
+primalSpring = "1e809eb"
+wateringHole = "c36840c4"
+songBird = "f18fa87"
 bearDog = "d1554f9"
+
+[composition_validation]
+status = "VALIDATED — all 6 delegation seams confirmed LIVE"
+beardog_socket = "/run/user/1000/biomeos/beardog.sock"
+beardog_version = "0.9.0"
+beardog_health = "healthy"
+
+[composition_validation.seams]
+crypto_sha256 = "PASS — correct hash output"
+crypto_hmac_sha256 = "PASS — correct MAC output"
+crypto_blake3_hash = "PASS — correct hash (was broken: method name mismatch fixed in f18fa87)"
+crypto_sign_ed25519 = "PASS — valid signature produced"
+crypto_verify_ed25519 = "PASS — round-trip sign→verify confirmed"
+crypto_hkdf_sha256 = "PASS — correct OKM derivation"
+
+[composition_validation.finding]
+severity = "P1 (was silent failure)"
+description = "songBird called crypto.hash.blake3 but bearDog exposes crypto.blake3_hash"
+impact = "BLAKE3 delegation always fell back to local — composition was broken silently"
+fix = "f18fa87 — corrected method name in crypto_helpers.rs and docs"
+status = "SHIPPED"
 
 [code_team_status]
 bearDog_all_p1 = "DONE"
-bearDog_bond_type_cipher = "DONE — BtspBondType enum, per-type env keys, 6 tests"
-bearDog_backpressure = "DONE — SERVICE_OVERLOADED + Retry-After header"
-bearDog_publication_readiness = "P2 — full pen test + validation before going public"
+bearDog_bond_type_cipher = "DONE"
+bearDog_backpressure = "DONE"
+bearDog_publication_readiness = "P2 — pen test + validation before going public"
 songBird_caller_identity = "DONE"
 songBird_uds_hardening = "DONE"
 songBird_pen_hardening = "DONE"
 songBird_dep_diet = "DONE"
-songBird_crypto_delegation = "blake3 LIVE, 4 crates feature-gated, 6 seams remaining"
-songBird_lan_routing = "DONE — SONGBIRD_LOCAL_PEERS env + mesh.init lan_peers param"
-songBird_failover_retry = "P2 — transient restart = hard failure"
-songBird_health_check = "P2 — cellMembrane needs health probes"
-songBird_socket_watch = "P2 — reactive vs polling recovery"
-skunkBat = "PUBLIC — SPDX 71/71, cipher floor, deep debt, spawn-rate all done"
-skunkBat_capability_announcement = "P2 — trust-on-first-use needs verification"
-skunkBat_capability_revocation = "P2 — no mesh-wide revocation yet"
+songBird_crypto_delegation = "VALIDATED — all delegatable seams route through bearDog UDS"
+songBird_lan_routing = "DONE"
+songBird_failover_retry = "P2"
+songBird_health_check = "P2"
+songBird_socket_watch = "P2"
+skunkBat = "PUBLIC — cipher floor, deep debt, spawn-rate all done"
 
 [mesh]
 interface = "wg0"
@@ -51,13 +70,12 @@ known_debt_count = 11
 known_debt_note = "eastGate=9 + arch-fitness=1 + mesh-reachability=1 (flockGate-specific)"
 
 [forward_evolution]
-next = "Composition validation — bearDog UDS cold-path end-to-end"
-depends_on = "songBird crypto delegation (6 remaining seams)"
-chimera_phase_0 = "After composition validated — shared library extraction"
+next = "Phase 2: Measure IPC cost for each delegation seam (<1ms target)"
+chimera_phase_0 = "After IPC benchmarks — shared library extraction for hot-path crypto"
+note = "Composition validated. All Phase 1 seams confirmed LIVE. Ready for Phase 2 benchmarking."
 
 [remaining_divergence]
 p1 = [
-    "songBird: crypto delegation — 6 seams remaining (non-blocking, feature-gated)",
     "Topology P1s: sporeGate team (southGate, strandGate enrollment, songBird LAN deploy)",
 ]
 p2 = [
@@ -65,6 +83,7 @@ p2 = [
     "bearDog: Android Keystore + grapheneGate (hardware-blocked)",
     "songBird: failover retry, health check, socket watch",
     "skunkBat: capability announcement validation, revocation mechanism",
-    "Chimera Phase 0 (after composition validated end-to-end)",
+    "Phase 2: IPC cost benchmarking for crypto delegation seams",
+    "Chimera Phase 0 (after Phase 2 benchmarks)",
 ]
-note = "All P0s clear. bearDog P2 clear. skunkBat public. Debt 9 (11 local). 1241 tests green."
+note = "All P0s clear. Composition validated. Phase 1 complete. Code team P1 DONE. Debt 11 local."
