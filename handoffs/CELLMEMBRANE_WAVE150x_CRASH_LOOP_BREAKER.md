@@ -87,8 +87,12 @@ which exits 2 on every attempt.
 | `deploy/systemd/user/membrane-nucleus-nosocket@.service` | **NEW** — ServerNoSocket template |
 | `membrane-shadow/src/manifest/tests.rs` | **NEW** — extracted 454L manifest tests |
 | `membrane-shadow/src/webhook/tests.rs` | **NEW** — extracted 360L webhook tests |
+| `cellmembrane-types/src/gateway_tests.rs` | **NEW** — extracted 462L gateway tests |
+| `membrane-shadow/src/plasmid/harvest_tests.rs` | **NEW** — extracted 383L harvest tests |
 | `membrane-shadow/src/manifest/mod.rs` | 785→333L after test extraction |
 | `membrane-shadow/src/webhook/mod.rs` | 703→345L after test extraction |
+| `cellmembrane-types/src/gateway.rs` | 833→371L after test extraction |
+| `membrane-shadow/src/plasmid/harvest.rs` | 804→422L after test extraction |
 | `cellmembrane-types/src/cytoplasm.rs` | `MESH_REGISTRY` + `lan_ip` field, `lan_address()` |
 | `cellmembrane-types/src/lib.rs` | Re-export `lan_address` |
 
@@ -118,8 +122,8 @@ Also added `membrane-nucleus-nosocket@.service` for `ServerNoSocket` primals.
 | `cargo fmt` drift | 0 |
 | Production `unwrap()` | 0 |
 | `unsafe` blocks | 0 (`#![forbid(unsafe_code)]`) |
-| Files >800L | 1 (gateway.rs 833 — types+tests, structurally sound) |
-| Test extraction | manifest/mod.rs 785→333L, webhook/mod.rs 703→345L |
+| Files >800L | 0 (zero files exceed 800L) |
+| Test extraction | manifest 785→333L, webhook 703→345L, gateway 833→371L, harvest 804→422L |
 | `Restart=always` units | 0 (was 8+ across codebase) |
 | Disk reclaimed | 2.2 GiB (cargo clean) |
 
