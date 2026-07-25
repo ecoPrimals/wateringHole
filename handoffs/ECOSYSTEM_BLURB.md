@@ -25,11 +25,20 @@ Tower Atomic sprint (150v–150x) is **done**. Summary of what was delivered:
 | Scenarios | 197, all PASS |
 | P0 | CLEAR across all gates |
 
-**Remaining Tower work** (teams continue independently):
-- songBird: crypto delegation to bearDog (6 seams), failover retry, health surface
-- bearDog: Android Keystore validation (hardware), publication readiness (pen test)
-- skunkBat: capability announcement validation, revocation mechanism
-- Chimera Phase 0: library extraction (after composition validated)
+**Remaining Tower debt: 7 failures — 6 owned by songBird, 1 shared.**
+
+| # | Failure | Owner | What Must Evolve |
+|---|---------|-------|------------------|
+| 1 | bearDog retry on connect fail | songBird | `capability_dispatch.rs` — retry logic |
+| 2 | Health check in dispatch path | songBird | Expose for cellMembrane probes |
+| 3 | Socket filesystem watch | songBird | `socket_discovery.rs` — inotify vs polling |
+| 4 | UDS connect-per-call cost | songBird | Wire pool into dispatch path |
+| 5 | BTSP on local UDS | songBird + bearDog | Defense-in-depth crypto on local sockets |
+| 6 | Capability announcement validation | songBird | Verify before trust-on-first-use |
+| 7 | Capability revocation | songBird | Mesh-wide revocation mechanism |
+
+Plus continuing P1/P2: crypto delegation (6 seams), bearDog grapheneGate
+(hardware), bearDog publication pen test, chimera Phase 0 (post composition).
 
 ---
 
@@ -93,20 +102,34 @@ provides the data layer that makes both meaningful:
 
 ## CONTINUING WORK (all teams, parallel to Nest Atomic)
 
-### Tower Atomic (teams continue independently)
+### songBird (flockGate) — owns 6/7 remaining debt
 
-| Team | Remaining | Priority |
-|------|-----------|----------|
-| songBird (flockGate) | Crypto delegation (6 seams), failover, health | P1/P2 |
-| bearDog (flockGate) | grapheneGate validation, publication pen test | P2 |
-| skunkBat (flockGate) | Capability validation + revocation | P2 |
-| sporeGate | Gate enrollment (southGate, strandGate), songBird redeploy | P1 |
+| # | Task | Priority |
+|---|------|----------|
+| 1 | **Failover resilience** (retry, health, socket watch) | P1 |
+| 2 | **Capability trust** (announcement validation, revocation) | P1 |
+| 3 | Wire IPC pool into dispatch path | P2 |
+| 4 | Crypto delegation to bearDog (6 seams remaining) | P1 |
+
+### bearDog (flockGate) — 1 shared debt + P2
+
+| # | Task | Priority |
+|---|------|----------|
+| 1 | BTSP on local UDS (shared with songBird) | P2 |
+| 2 | grapheneGate Android Keystore validation | P2 |
+| 3 | Publication readiness pen test | P2 |
+
+### sporeGate — deployment
+
+| # | Task | Priority |
+|---|------|----------|
+| 1 | Gate enrollment (southGate, strandGate) | P1 |
+| 2 | Redeploy songBird with LAN dispatch + latest fixes | P1 |
 
 ### Chimera Phase 0 (gate: composition validated)
 
-Shared library extraction from Tower primals — bearDog crypto, songBird
-routing, skunkBat defense into `libtower.so`. Requires composition validation
-(songBird crypto delegation fully working through bearDog UDS).
+Shared library extraction — bearDog crypto, songBird routing, skunkBat
+defense into `libtower.so`. Blocked on songBird crypto delegation.
 
 ### sporePrint Pipeline (parallel)
 
