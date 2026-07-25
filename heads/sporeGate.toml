@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-25T00:20:00Z"
+updated = "2026-07-25T00:35:00Z"
 wave = "150x"
 
 [heads]
@@ -44,22 +44,23 @@ songbird = "LIVE"
 beardog = "LIVE"
 skunkbat = "LIVE"
 mesh_peers = 3
-mesh_init = "ExecStartPost dropin (auto-seed regression workaround)"
+mesh_init = "ExecStartPost dropin (auto-seed + LAN peer.connect for eastGate)"
 
 [tower_shadow]
 status = "ACTIVE — gate-agnostic script, /usr/local/bin symlink for root"
 interval = "60min"
-results = "130+ (6/12 per cycle: golgi, sporeGate, eastGate reachable)"
+results = "525 files (shadow timer + manual benchmarks)"
 gates_active = ["sporeGate", "flockGate", "golgiBody"]
 
 [benchmark]
 phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard"
-lan_latency_tower = "0.61ms avg, 0.01ms jitter"
-lan_latency_wg = "0.60ms avg (direct LAN, same as Tower — PARITY)"
-wg_overlay_latency = "154.5ms avg (routes through golgiBody VPS)"
-lan_vs_overlay = "Tower LAN 267x faster than WG overlay — WG has no LAN awareness"
-wan_latency_tower = "76.8ms avg (golgi)"
-wan_throughput = "Tower 13.1 Mbps vs WG ~7 Mbps (Tower 1.7x)"
+lan_latency_tower = "0.448ms avg, 0.006ms jitter (50 probes, Jul 25 00:23 UTC)"
+lan_latency_wg = "0.60ms avg (direct LAN, same subnet — PARITY)"
+wg_overlay_latency = "157.99ms avg, 0.634ms jitter (routes through golgiBody VPS)"
+lan_vs_overlay = "Tower LAN 353x faster than WG overlay (0.448ms vs 158ms)"
+wan_latency_tower = "137.9ms avg (flockGate WAN)"
+wan_latency_wg = "136.3ms avg (flockGate WAN — PARITY)"
+lan_discovery_gap = "peer.connect works (LAN TCP registered), but mesh.find_path still resolves overlay. mesh routing doesn't prefer EndpointType::Local — code fix needed in songBird."
 
 [hardware]
 lan_peering = "CONFIRMED: eastGate at 192.168.4.244, 0.17ms RTT"
@@ -95,13 +96,21 @@ tower_parity_p1 = "PHASE 1 PASS (Wave 150w)"
 tower_shadow_p0 = "ACTIVE on 3 gates (Wave 150w)"
 lan_peering_p0 = "CONFIRMED (Wave 150w)"
 crash_loop_breaker = "DEPLOYED (Wave 150x)"
-sustained_benchmark = "DONE — Tower 267x LAN, 1.7x WAN sustained"
+sustained_benchmark = "DONE — Tower 353x LAN (0.45ms vs 158ms), WAN parity (138ms vs 136ms)"
 sporeprint_transplant = "DONE"
 golgi_shadow_fix = "DONE — golgiBody songbird updated"
 shadow_script_fix = "DONE (Wave 150x) — gate-agnostic paths"
 
 [blocked_on_eastgate]
 iperf3_server = "P1 — needs iperf3 -s running on eastGate"
-ssh_key_auth = "P1 — no key auth sporeGate→eastGate"
+ssh_key_auth = "P1 — sporeGate SSH config + pubkey ready, eastGate needs: echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILU4i9hEtHJA02/JZ8XR/OHaR/bSiuAaDRMhdJX7zuRp sporegate-gate-v1' >> ~/.ssh/authorized_keys"
 biomeos_beacon = "P1 — phantom unit (11,161 restarts), needs disable"
-manifest_ip = "P1 — correct 192.168.4.5 → 192.168.4.244 in ecosystem_manifest.toml"
+manifest_ip = "RESOLVED — lan_ip = 192.168.4.244 confirmed in ecosystem_manifest.toml"
+
+[lan_discovery]
+status = "PARTIALLY WORKING"
+peer_connect = "SUCCESS — peer.connect creates LAN TCP (0.45ms), mesh_registered=true"
+mesh_routing = "GAP — mesh.find_path and mesh.peers still resolve overlay address (wireguard://10.13.37.5:7700)"
+root_cause = "songBird mesh routing doesn't prefer EndpointType::Local over overlay. Code fix needed."
+workaround = "mesh-init.sh issues peer.connect for LAN peers on startup. Direct benchmark via LAN IP works."
+impact = "353x latency advantage for direct TCP, but capability.call still routes through WG overlay"
