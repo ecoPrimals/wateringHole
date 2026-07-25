@@ -1,58 +1,70 @@
-# flockGate status — Wave 150x (LAN routing fix + convergence)
+# flockGate status — Wave 150x (P0 CLEAR ALL GATES)
 # Gate: flockGate | Role: CODE TEAM — bearDog, songBird, skunkBat
-# Updated: 2026-07-25T01:55:00Z
+# Updated: 2026-07-25T15:12:00Z
 
 [meta]
 gate = "flockGate"
 role = "Code team — primal source evolution"
 wave = "150x"
-updated = "2026-07-25T01:55:00Z"
-posture = "GREEN — P0 LAN routing fix shipped, known debt 30→10, suite green"
+updated = "2026-07-25T15:12:00Z"
+posture = "GREEN — P0 CLEAR, bearDog P2 clear, skunkBat public, suite green"
 
 [repos]
 skunkBat = "a8cf5aa"
-primalSpring = "cdb91f0"
-wateringHole = "4a4a68a2"
+primalSpring = "692a92e"
+wateringHole = "ecc9305f"
 songBird = "efabd5d"
 bearDog = "d1554f9"
 
-[p0_lan_routing_fix]
-commit = "218966d — register LAN peers during mesh.init"
-extension = "SONGBIRD_LOCAL_PEERS env for auto-seed path"
-root_cause = "WG auto-discovery only registered overlay endpoints, never Local"
-impact = "353x latency penalty for capability.call on same-switch peers"
-fix = "mesh.init now accepts lan_peers param + SONGBIRD_LOCAL_PEERS env merges with persisted"
-validation = "EndpointType::Local (priority 0) always wins over Overlay (priority 1) in update_best_path"
-
 [code_team_status]
 bearDog_all_p1 = "DONE"
+bearDog_bond_type_cipher = "DONE — BtspBondType enum, per-type env keys, 6 tests"
+bearDog_backpressure = "DONE — SERVICE_OVERLOADED + Retry-After header"
+bearDog_publication_readiness = "P2 — full pen test + validation before going public"
 songBird_caller_identity = "DONE"
 songBird_uds_hardening = "DONE"
 songBird_pen_hardening = "DONE"
 songBird_dep_diet = "DONE"
-songBird_crypto_delegation = "blake3 LIVE, 4 crates feature-gated"
-songBird_lan_routing = "FIXED — SONGBIRD_LOCAL_PEERS env + mesh.init lan_peers param"
-skunkBat = "CLEAN — publication self-review complete, SPDX 71/71, ready for public"
+songBird_crypto_delegation = "blake3 LIVE, 4 crates feature-gated, 6 seams remaining"
+songBird_lan_routing = "DONE — SONGBIRD_LOCAL_PEERS env + mesh.init lan_peers param"
+songBird_failover_retry = "P2 — transient restart = hard failure"
+songBird_health_check = "P2 — cellMembrane needs health probes"
+songBird_socket_watch = "P2 — reactive vs polling recovery"
+skunkBat = "PUBLIC — SPDX 71/71, cipher floor, deep debt, spawn-rate all done"
+skunkBat_capability_announcement = "P2 — trust-on-first-use needs verification"
+skunkBat_capability_revocation = "P2 — no mesh-wide revocation yet"
 
 [mesh]
 interface = "wg0"
 local_ip = "10.13.37.6"
 songbird_version = "0.2.1"
 peers_online = 8
+uptime_hours = 14.9
 stale = ["ironGate"]
 
 [primalSpring]
-scenarios = 196
-tests = 1240
-passed = 1240
+scenarios = 197
+tests = 1241
+passed = 1241
 failed = 0
-known_debt_count = 10
+known_debt_count = 11
+known_debt_note = "eastGate=9 + arch-fitness=1 + mesh-reachability=1 (flockGate-specific)"
+
+[forward_evolution]
+next = "Composition validation — bearDog UDS cold-path end-to-end"
+depends_on = "songBird crypto delegation (6 remaining seams)"
+chimera_phase_0 = "After composition validated — shared library extraction"
 
 [remaining_divergence]
-p1 = ["Topology P1s: sporeGate team (iperf3, southGate, strandGate, biomeos-beacon, SSH)"]
+p1 = [
+    "songBird: crypto delegation — 6 seams remaining (non-blocking, feature-gated)",
+    "Topology P1s: sporeGate team (southGate, strandGate enrollment, songBird LAN deploy)",
+]
 p2 = [
-    "bearDog: enrollment seed rotation",
+    "bearDog: publication readiness (pen test + validation)",
     "bearDog: Android Keystore + grapheneGate (hardware-blocked)",
+    "songBird: failover retry, health check, socket watch",
+    "skunkBat: capability announcement validation, revocation mechanism",
     "Chimera Phase 0 (after composition validated end-to-end)",
 ]
-note = "Code team P1 complete. LAN routing fix shipped. Debt 30→10."
+note = "All P0s clear. bearDog P2 clear. skunkBat public. Debt 9 (11 local). 1241 tests green."
