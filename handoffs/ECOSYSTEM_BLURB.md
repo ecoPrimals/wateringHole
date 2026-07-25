@@ -1,18 +1,18 @@
 # ecoPrimals Ecosystem Blurb — Wave 150x
 
-**Date**: Jul 24, 2026 20:01 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **RAPID CONVERGENCE. bearDog cipher floor + blake3. songBird caller identity + deep debt. cellMembrane LAN registry.**
+**Date**: Jul 24, 2026 20:45 EDT | **Wave**: 150x | **From**: eastGate overwatch
+**Posture**: **KNOWN DEBT 30→10. songBird CallerContext + UDS hardening resolved 7 pen scenarios. 653 shadow samples. blake3 delegation LIVE.**
 
 ---
 
 ## WHERE WE ARE
 
-Tower 267x LAN, 1.7x WAN. 6/6 domains PROVEN LIVE. All 3 code teams and
-cellMembrane shipped major evolution this cascade: bearDog delivered cipher
-floor enforcement + `crypto.hash.blake3` (songBird can now delegate blake3).
-songBird shipped caller identity verification + UDS hardening + dependency
-diet (chrono eliminated, rand→fastrand, 83 files touched). cellMembrane
-shipped deep debt sweep with LAN registry + test extraction. P0 CLEAR.
+Tower 267x LAN, 1.7x WAN. 6/6 domains PROVEN LIVE. **Known debt collapsed
+from 30 to 10 findings** — songBird's CallerContext + UDS hardening resolved
+`capability-escalation` (4→1), `uds-spoof` (5→1), and bearDog's cipher floor
+resolved pen findings. primalSpring pushed 10 hours of continuous shadow data
+(653 JSON samples across 6 gates). songBird wired blake3 delegation to
+bearDog via `crypto.hash.blake3` — crypto composition advancing. P0 CLEAR.
 
 ---
 
@@ -36,7 +36,7 @@ chimera extracts shared library.
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | **Crypto delegation to bearDog** | P1 | MIGRATING — blake3 delegation wired, 4 crates feature-gated |
+| 1 | **Crypto delegation to bearDog** | P1 | blake3 delegation LIVE (`dark_forest_beacon`), 4 crates feature-gated |
 | 2 | ~~Caller identity verification~~ | DONE | `CallerContext` wired into IPC connection + method gate |
 | 3 | ~~UDS hardening~~ | DONE | Socket permissions, peer cred verification |
 | 4 | ~~Pen test hardening~~ | DONE | UDS-spoof, mesh-poison, relay-abuse |
@@ -94,7 +94,7 @@ skunkBat is clean. No open P1. Future work: chimera integration.
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | primalSpring scenario debt burn-down | P1 | 29 known debt (196 scenarios, all PASS) |
+| 1 | primalSpring scenario debt burn-down | P1 | **10 known debt** (196 scenarios, all PASS) |
 | 2 | Unblock sporeGate (iperf3 server, SSH key, biomeos-beacon) | P1 | Ops tasks from sporeGate AAR |
 | 3 | sporePrint primal pipeline (Zola → petalTongue + nestGate CAS) | P2 | Design phase |
 | 4 | CredentialStore squirrel integration | P2 | bearDog `FileVault` + squirrel IPC |
@@ -134,7 +134,7 @@ skunkBat is clean. No open P1. Future work: chimera integration.
 | # | Dimension | Status |
 |---|-----------|--------|
 | 1 | Temporal/Coordination | GREEN — 43/43 synced |
-| 2 | Ecological | GREEN — 196 scenarios, 29 debt |
+| 2 | Ecological | GREEN — 196 scenarios, **10 debt** |
 | 3 | Hardware | AMBER — 4 offline gates |
 | 4 | Sovereignty | GREEN — Tower EXCEEDS WG, 6/6, CI LIVE |
 | 5 | Public Surface | GREEN — 6/6 healthy |
@@ -146,9 +146,8 @@ skunkBat is clean. No open P1. Future work: chimera integration.
 
 ---
 
-*Wave 150x: Tower 267x LAN, 1.7x WAN sustained. Crypto composition migration
-active — songBird feature-gating inline crypto, delegating cold-path to bearDog
-UDS. Composition first, measure, then chimera. Code teams (flockGate) evolving
-primals. Ops/deploy (sporeGate) blocked on eastGate access for iperf3 + SSH.
-Overwatch (eastGate) integrating scenarios + unblocking sporeGate. sporePrint
-transplant guidance issued. 196 scenarios PASS. 43/43 converged.*
+*Wave 150x: Known debt 30→10. songBird CallerContext + UDS hardening resolved
+7 pen scenarios. bearDog cipher floor + blake3 capability LIVE. songBird blake3
+delegation wired. 653 shadow samples across 6 gates (10 hours continuous).
+cellMembrane LAN registry + test extraction. Composition advancing. 196
+scenarios PASS. 43/43 converged.*
