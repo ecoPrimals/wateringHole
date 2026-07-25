@@ -1,163 +1,119 @@
 # ecoPrimals Ecosystem Blurb — Wave 150x
 
-**Date**: Jul 25, 2026 10:04 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **GENETIC ENROLLMENT LIVE. Tower 353x LAN. DEBT 30→9. LAN mesh.init shipped. enrollment-replay RESOLVED.**
+**Date**: Jul 25, 2026 10:14 EDT | **Wave**: 150x | **From**: eastGate overwatch
+**Posture**: **TOWER 353x LAN. GENETIC ENROLLMENT LIVE. 9 DEBT. CHIMERA PHASE 0 READY.**
 
 ---
 
 ## WHERE WE ARE
 
-**bearDog shipped full genetic enrollment** — two-layer model mirroring
-biological DNA: mitochondrial gate (FAMILY_SEED HMAC) + nuclear lineage
-distance (tree hops → trust tiers: identity/kin/sibling/extended/distant).
-Seed rotation via HKDF hierarchy, generation-based with grace period.
-+1168/-2582 lines (including chaos test cleanup).
-
-songBird shipped **LAN peer registration in `mesh.init`** — `lan_peers`
-parameter registers same-subnet peers as `EndpointType::Local` (priority 0),
-overlay peers demoted to priority 1. Persisted `peers.toml` LAN addrs
-auto-restored on restart. This addresses the 353x penalty gap.
-
-**Known debt 30→9.** `enrollment-replay` fully RESOLVED by genetic seed
-rotation. New scenario `mesh-lan-path-preference` added (2 known gap —
-`mesh.find_path` preference logic still needs evolution). P0 CLEAR.
+Tower Atomic exceeds WireGuard: **353x LAN** (0.45ms vs 158ms), **1.7x WAN**
+sustained. Genetic enrollment live — two-layer trust model (mito gate + nuclear
+lineage distance). LAN mesh.init shipped (priority routing). Known debt **9**
+(down from 36). 197 scenarios PASS. All code teams converged. P0: unblock
+sporeGate bilateral access (SSH key). Chimera Phase 0 unblocked.
 
 ---
 
-## CODE TEAMS (flockGate — primal source evolution)
+## P0 — BILATERAL BLOCKERS (eastGate action required)
+
+| # | Action | Unblocks |
+|---|--------|----------|
+| 1 | Add sporeGate SSH pubkey to eastGate `authorized_keys` | iperf3, biomeos-beacon fix, remote ops |
+| 2 | Disable `biomeos-beacon.service` on eastGate | Phantom unit (11,161 restarts) |
+
+---
+
+## CODE TEAMS (flockGate)
 
 ### bearDog — crypto primal
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | ~~Bond-type cipher floor enforcement~~ | DONE | BTSP negotiation rejects below floor |
-| 2 | ~~`crypto.hash.blake3` capability~~ | DONE | songBird can now delegate blake3 via UDS |
-| 3 | ~~Deep debt sweep~~ | DONE | Hardcoding eliminated, capability-based config |
-| 4 | ~~Enrollment seed rotation~~ | DONE | Genetic HKDF hierarchy, generation-based with grace period |
-| 5 | ~~Two-layer genetic enrollment~~ | DONE | Mito gate + nuclear lineage distance → trust tiers |
-| 6 | Android Keystore + grapheneGate validation | P2 | Code complete, awaiting hardware |
+| 1 | Bond-type cipher awareness in BTSP | P2 | Covalent > ionic floor differentiation |
+| 2 | Backpressure signaling | P2 | Callers need feedback when saturated |
+| 3 | Android Keystore + grapheneGate | P2 | Code complete, awaiting hardware |
 
-bearDog is the ecosystem crypto provider. All primals route crypto through
-bearDog UDS (`crypto.*` capabilities). Hot-path crypto stays local until
-chimera extracts shared library.
+All P1 DONE: cipher floor, blake3, genetic enrollment, seed rotation, deep debt.
 
 ### songBird — transport/routing primal
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | **Crypto delegation to bearDog** | P1 | blake3 delegation LIVE (`dark_forest_beacon`), 4 crates feature-gated |
-| 2 | ~~Caller identity verification~~ | DONE | `CallerContext` wired into IPC connection + method gate |
-| 3 | ~~UDS hardening~~ | DONE | Socket permissions, peer cred verification |
-| 4 | ~~Pen test hardening~~ | DONE | UDS-spoof, mesh-poison, relay-abuse |
-| 5 | ~~Dependency diet~~ | DONE | ring→rustcrypto, chrono eliminated, rand→fastrand, 83 files |
-| 6 | ~~Legacy env deprecation~~ | DONE | Name-based endpoints marked for removal |
+| 1 | Crypto delegation to bearDog | P1 | blake3 LIVE, 4 crates feature-gated, 6 seams remaining |
+| 2 | `mesh.find_path` LAN preference | P1 | Registration shipped — path selection logic needs evolution |
+| 3 | Failover retry (bearDog connection) | P2 | Transient restart = hard failure |
+| 4 | Health check surface in dispatch | P2 | cellMembrane needs health probes |
+| 5 | Socket filesystem watch | P2 | Reactive vs polling recovery |
 
-`CRYPTO_COMPOSITION.md` classifies 19 seams: 5 hot-path (chimera), 6 delegating
-(bearDog UDS), 5 test-only, 3 already delegating.
+CallerContext, UDS hardening, pen test hardening, dependency diet — all DONE.
 
 ### skunkBat — defense/protocol primal
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | Cipher floor policy | DONE | `SKUNKBAT_CIPHER_FLOOR` env, typed BindMode errors |
-| 2 | Deep debt sweep | DONE | `unreachable!()` eliminated, BTSP dedup |
-| 3 | Spawn-rate anomaly detection | DONE | Shipped 150x |
+| 1 | Capability announcement validation | P2 | Trust-on-first-use needs verification |
+| 2 | Capability revocation mechanism | P2 | No mesh-wide revocation yet |
 
-skunkBat is clean. No open P1. Future work: chimera integration.
+Cipher floor, deep debt, spawn-rate detection — all DONE. Clean for chimera.
 
 ---
 
-## DEPLOYMENT / OPS (sporeGate — build, deploy, hardware, topology)
+## DEPLOYMENT / OPS (sporeGate)
 
 ### cellMembrane — membrane coordinator
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | systemd hardening | DONE | `Restart=always` eliminated ecosystem-wide |
-| 2 | Crash-loop breaker | DONE | `gate.crash-loop` + auto-scan in cascade |
-| 3 | Sovereign CI pipeline | DONE | Forgejo hooks → build → depot → lineage |
-| 4 | `membrane-nucleus-nosocket@.service` | DONE | nestgate evolved CLI support |
-| 5 | ~~Deep debt sweep~~ | DONE | LAN registry, test extraction, safe casts, +960/-861 |
+All P1 DONE: systemd hardening, crash-loop breaker, sovereign CI, nestgate
+unit, LAN registry, deep debt sweep. cellMembrane is clean.
 
 ### Topology / Hardware
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | iperf3 sustained throughput | P1 | **BLOCKED** — needs eastGate iperf3 server or SSH access |
+| 1 | iperf3 sustained throughput | P1 | BLOCKED — needs eastGate SSH |
 | 2 | Gate enrollment (southGate) | P1 | USB staged, needs physical cabling |
-| 3 | Gate enrollment (strandGate) | P1 | USB staged, needs physical cabling + WG IP allocation |
-| 4 | songBird LAN peer discovery | P1 | `lan_peers` in mesh.init SHIPPED — `mesh.find_path` preference still needs evolution |
-| 5 | Fix biomeos-beacon unit (eastGate) | P1 | Disable phantom unit (11,161 restarts) |
-| 6 | SSH access sporeGate→eastGate | P1 | No key auth configured |
-| 7 | Manifest: eastGate LAN IP | P1 | Correct `192.168.4.5` → `192.168.4.244` |
+| 3 | Gate enrollment (strandGate) | P1 | USB staged, needs physical cabling |
+| 4 | `mesh.find_path` LAN preference deploy | P1 | Redeploy songBird with LAN mesh.init |
+| 5 | Manifest: eastGate LAN IP correction | P1 | `192.168.4.5` → `192.168.4.244` |
 
-### sporePrint — public face
+---
+
+## OVERWATCH (eastGate)
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | ~~Transplant to primals.eco~~ | DONE | Shipped by eastGate (b985c22, 18 files) + entity fix by sporeGate |
+| 1 | **Unblock sporeGate bilateral** | **P0** | SSH key + biomeos-beacon |
+| 2 | Scenario debt burn-down (9 remaining) | P1 | 197 scenarios, all PASS |
+| 3 | GLOSSARY.md refresh | P2 | Stale since Wave 138b |
+| 4 | PRIMAL_REGISTRY.md refresh | P2 | Stale since Wave 109 |
+| 5 | sporePrint impulse follow-up | P2 | 5 impulses for maturity badges |
 
 ---
 
-## SPOREPRINT (eastGate — public surface, credibility convergence)
+## FORWARD EVOLUTION (all teams)
 
-**Credibility audit landed** (`f3b710d`). External reviewer assessed
-primals.eco and identified claim-surface inflation as principal risk. Drove
-30-file sweep:
-
-- Spring count fixed 8→9 (rustChip), org count 3→4 (protoKarya)
-- 12 stale WGSL counts replaced with `{{ total_stat() }}` shortcodes
-- Homepage reframed: "produces self-contained scientific computations that
-  reproduce published results on commodity hardware and carry their
-  validation and provenance" (reviewer's stronger position)
-- `#![forbid(unsafe_code)]` scoped: "forbidden by default, isolated to
-  hardware-containment crates"
-- Products page reorganized: Deploy now / Research preview / Architectural direction
-- Evidence Snapshot gained Safety Model section
-
-**New standard**: `foundations/EXTERNAL_CLAIM_CONVERGENCE_STANDARD.md`
-**5 impulses issued**: biomeOS maturity labeling, barraCuda README WGSL count,
-ecoPrimals org profile unsafe scope, Tower source publication review,
-all-teams README maturity badge.
+| # | Task | Depends On | Owner |
+|---|------|-----------|-------|
+| 1 | **Composition validation** — bearDog UDS cold-path | songBird P1 crypto delegation | flockGate |
+| 2 | **Chimera Phase 0** — shared library extraction | Composition validated | eastGate |
+| 3 | **sporePrint primal pipeline** — Zola → petalTongue + nestGate CAS | Design phase | eastGate |
+| 4 | Node Atomic (proton) — nestGate + Provenance Trio | Tower chimera maturity | all |
+| 5 | Nest Atomic (neutron) — distributed state | Node Atomic | all |
+| 6 | Phase 3 cutover — Tower replaces WG | Chimera + sustained validation | all |
+| 7 | rootPulse sovereign VCS | Provenance Trio maturity + Tower | all |
 
 ---
 
-## OVERWATCH (eastGate — code hub, integration, scenarios)
+## EXPLORATION DOMAINS — ALL 6/6 PROVEN LIVE
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | primalSpring scenario debt burn-down | P1 | **9 known debt** (197 scenarios, all PASS) |
-| 2 | Unblock sporeGate (iperf3 server, SSH key, biomeos-beacon) | **P0** | **Bilateral**: add sporeGate pubkey to eastGate `authorized_keys` |
-| 3 | sporePrint primal pipeline (Zola → petalTongue + nestGate CAS) | P2 | Design phase |
-| 4 | CredentialStore squirrel integration | P2 | bearDog `FileVault` + squirrel IPC |
-| 5 | bingoCube WASM WebGL widget | P2 | Interactive commitment on primals.eco |
-| 6 | Chimera Phase 0 — library extraction | P3 | After bearDog UDS composition validated |
-
----
-
-## ATOMIC EVOLUTION (all teams)
-
-| # | Task | Depends On |
-|---|------|-----------|
-| 1 | **Composition validation** — bearDog UDS crypto works for all cold-path | Code teams (P1) |
-| 2 | **Chimera Phase 0** — shared library extraction | Composition validated |
-| 3 | Node Atomic (proton) | Tower chimera maturity |
-| 4 | Nest Atomic (neutron) | Node Atomic |
-| 5 | Phase 3 cutover — Tower replaces WG | Chimera + sustained validation |
-| 6 | rootPulse sovereign VCS | Provenance Trio maturity + Tower transport |
-
----
-
-## EXPLORATION DOMAINS — ALL PROVEN LIVE
-
-| # | Domain | Evidence | Where WG Cannot |
-|---|--------|----------|-----------------|
-| 1 | Capability-aware routing | 5 providers via `capability.call` | WG: all traffic in one tunnel |
-| 2 | Multi-stack routing | 6 classes → 5 stacks | WG: undifferentiated |
-| 3 | Large data transfer | `content.put` → nestGate CAS | WG: no content awareness |
-| 4 | Secure compute mesh | Per-session BTSP keys + attestation | WG: one static key per tunnel |
-| 5 | Distributed compute | 4-node targeted dispatch | WG: point-to-point only |
-| 6 | Edge/SFF/R45 profile | 30MB RSS, 39MB stack, 300s TTL | WG: kernel module required |
+| # | Domain | Where Tower Exceeds WG |
+|---|--------|------------------------|
+| 1 | Capability-aware routing | WG: all traffic in one tunnel |
+| 2 | Multi-stack routing | WG: undifferentiated |
+| 3 | Large data transfer | WG: no content awareness |
+| 4 | Secure compute mesh | WG: one static key per tunnel |
+| 5 | Distributed compute | WG: point-to-point only |
+| 6 | Edge/SFF/R45 profile | WG: kernel module required |
 
 ---
 
@@ -166,19 +122,20 @@ all-teams README maturity badge.
 | # | Dimension | Status |
 |---|-----------|--------|
 | 1 | Temporal/Coordination | GREEN — 43/43 synced |
-| 2 | Ecological | GREEN — 197 scenarios, **9 debt** |
+| 2 | Ecological | GREEN — 197 scenarios, 9 debt |
 | 3 | Hardware | AMBER — 4 offline gates |
-| 4 | Sovereignty | GREEN — Tower EXCEEDS WG, 6/6, CI LIVE |
-| 5 | Public Surface | GREEN — 6/6 healthy |
-| 6 | Compositions | GREEN — crypto composition migrating |
-| 7 | Documentation | GREEN — fossil pass complete |
+| 4 | Sovereignty | GREEN — Tower 353x, genetic enrollment, CI LIVE |
+| 5 | Public Surface | GREEN — 6/6 healthy, credibility audit done |
+| 6 | Compositions | GREEN — crypto composition advancing |
+| 7 | Documentation | GREEN — fossil pass complete, 33 docs archived |
 | 8 | Campus | GREEN — vision documented |
 
-**Fossilized** (F1–F6): Glacial Shift, CAC, Silicon Atheism, Depot/Build, Cascade, Tower Deep Analysis.
+**Fossilized** (F1–F7): Glacial Shift, CAC, Silicon Atheism, Depot/Build,
+Cascade, Tower Deep Analysis, sporePrint Transplant.
 
 ---
 
-*Wave 150x: bearDog genetic enrollment LIVE — two-layer model (mito gate +
-nuclear lineage distance → trust tiers). songBird LAN mesh.init shipped
-(lan_peers registration, priority 0). enrollment-replay RESOLVED. Known debt
-30→9. Tower 353x LAN. 197 scenarios PASS. 43/43 converged.*
+*Wave 150x: Tower 353x LAN. Genetic enrollment live (mito gate + nuclear
+lineage → trust tiers). Known debt 36→9. Chimera Phase 0 ready — composition
+validation is the gate. P0: eastGate bilateral (SSH key). 197 scenarios PASS.
+43/43 converged.*

@@ -19,8 +19,8 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Active impulses: 0 (26+ fossilized)
 - [x] ecosystem_manifest.toml version current (v3.1.0)
 - [x] 43/43 repos synced with Forgejo
-- [x] Active handoffs: 7 (150w–150x), Active AARs: 4 (150w–150x), Active analysis: 3
-- [x] Fossilized: 24 in `fossilRecord/wave150x_cleanup/`, 26 in `aars/fossils/`
+- [x] Active handoffs: 4, Active AARs: 5, Active analysis: 1
+- [x] Fossilized: 33 in `fossilRecord/wave150x_*`, 26 in `aars/fossils/`
 - [x] **waterFall** publish cascade defined (`graphs/waterfall_publish.toml`) — git → impulse → DAG → braid → anchor → relay
 - [x] **Impulse/Potential** standard active (Wave 63+) — TOML FRAGOs, auto-discovered via cascade
 - [x] **Context Braid** standard active (Wave 63+) — structured developer state, TTL auto-decay
@@ -42,12 +42,13 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Production `.unwrap()` — 0 prod unwraps confirmed: nestGate, loamSpine, toadStool, esotericWebb, cellMembrane
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
 - [x] Format drift RESOLVED — all repos clean
-- [x] bearDog: 13,937 tests, enrollment replay protection, UDS connection cap (150x)
-- [x] songBird: 14,322+ tests, UDS connection pool, federation.broadcast, sustained benchmark (150x)
-- [x] skunkBat: spawn-rate anomaly detection (150x)
-- [x] cellMembrane: crash-loop breaker + systemd hardening — `Restart=always` eliminated ecosystem-wide (150x)
-- [x] primalSpring: **196 scenarios**, all PASS
-- [ ] **30 known debt findings** across 10 stress/pen scenarios — teams evolve independently
+- [x] bearDog: 13,941 tests, **genetic enrollment** (mito gate + nuclear lineage distance → trust tiers), cipher floor, blake3 capability (150x)
+- [x] songBird: 14,322+ tests, **LAN mesh.init** (lan_peers priority 0), CallerContext + UDS hardening, blake3 delegation, dependency diet (150x)
+- [x] skunkBat: spawn-rate anomaly detection, cipher floor policy (150x)
+- [x] cellMembrane: crash-loop breaker + systemd hardening + LAN registry + test extraction (150x)
+- [x] primalSpring: **197 scenarios**, all PASS, `mesh-lan-path-preference` added
+- [x] `enrollment-replay` RESOLVED by genetic seed rotation
+- [ ] **9 known debt findings** across stress/pen scenarios — down from 30
 - [ ] Production `.unwrap()` — remaining primals need `clippy::unwrap_used` audit
 - [ ] Chimera Phase 0: library extraction (pure refactoring, can begin now)
 
@@ -59,8 +60,8 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] 5-gate WireGuard mesh LIVE (golgi, sporeGate, eastGate, flockGate, ironGate)
 - [x] northGate enrolled (10.13.37.8, Windows 11, RTX 5090, WireGuard active)
 - [x] grapheneGate Tower LIVE (bearDog + songBird + skunkBat)
-- [x] Tower Atomic shadow ACTIVE on 3 gates (sporeGate, flockGate, golgiBody)
-- [x] LAN peering confirmed (sporeGate ↔ eastGate, 0.17ms ICMP, 0.72ms Tower)
+- [x] Tower Atomic shadow ACTIVE on 3 gates (sporeGate, flockGate, golgiBody) — 700+ shadow samples
+- [x] LAN peering confirmed: **Tower 353x LAN** (0.45ms vs 158ms WG overlay, 50-probe)
 - [x] USB enrollment bundle staged (gate-usb-bootstrap.sh + enroll/)
 - [x] New gates (friends/family) will use R45 — Tower handles mixed 1G/10G routing
 - [ ] southGate pending USB enrollment (house2, full NUCLEUS)
@@ -83,10 +84,12 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] RustDesk AGPL-3.0 compliant — learn-from-leverage posture
 - [x] Sovereign depot auto-build pipeline DELIVERED (4 phases — Wave 150w)
 - [x] Crash-loop self-recovery LIVE — application (breaker) + systemd (StartLimitBurst) layers
-- [x] Tower Atomic PHASE 1 PASS — EXCEEDS WG (1.56x LAN throughput, 1.11x WAN)
+- [x] Tower Atomic PHASE 1 PASS — EXCEEDS WG (353x LAN latency, 1.7x WAN sustained throughput)
 - [x] Tower P1 Hardening FULLY SHIPPED (9/9 tasks — 150x)
 - [x] **6/6 exploration domains PROVEN LIVE** (capability routing, multi-stack, large data, secure compute, distributed, edge/SFF)
-- [ ] **Phase 2: Tower cutover** — shadow active, 30 findings remaining, chimera design drafted
+- [x] **Genetic enrollment** — two-layer trust model (mito gate + nuclear lineage → identity/kin/sibling/extended/distant)
+- [x] **LAN mesh.init** — `lan_peers` priority 0, overlay priority 1, persisted addrs restored
+- [ ] **Phase 2: Tower cutover** — shadow active, 9 findings remaining, chimera design drafted
 - [ ] **Phase 1: Zola → sporePrint primal pipeline** — petalTongue + nestGate CAS + cellMembrane
 - [ ] **Phase 2: Forgejo → rootPulse** — DAG + linear + attribution over nestGate CAS + Provenance Trio
 - [ ] `primal.eco` inner membrane separation (P2)
@@ -103,9 +106,10 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Security headers deployed (HSTS, CSP, X-Frame-Options)
 - [x] fail2ban + rate limiting active
 - [x] TLS auto-renewing (ACME)
-- [x] Tower pen test: 7 scenarios, attack surface mapped, 30 findings tracked
-- [x] sporePrint transplant guidance issued (Wave 150x) — Tower Atomic, topology, sovereign CI
-- [ ] sporePrint primals.eco update pending (team handed off)
+- [x] Tower pen test: 7 scenarios, attack surface mapped, **9 findings** remaining
+- [x] sporePrint transplant DONE (b985c22, 18 files + entity fix) — credibility audit landed
+- [x] External claim convergence standard issued (`EXTERNAL_CLAIM_CONVERGENCE_STANDARD.md`)
+- [ ] sporePrint ongoing: 5 impulses for README maturity badges, WGSL counts, unsafe scope
 
 ## 6. Compositions / Products
 
@@ -125,15 +129,13 @@ appears. This keeps the active review focused on evolving concerns.
 ## 7. Documentation / Fossil Record
 
 - [x] Blurb reflects current wave (150x) — glacial correction framing
-- [x] Active handoffs: 7 (150w–150x)
-- [x] Active AARs: 4 (150w–150x)
-- [x] Active analysis docs: 3 (150w–150x)
+- [x] Active handoffs: 4, Active AARs: 5, Active analysis: 1 (chimera design)
 - [x] Active impulses: 0
 - [x] wateringHole standards: 37 active in 4 directories + 4 root docs
 - [x] Standards reorganized: foundations/ (9), protocols/ (10), operations/ (12), compositions/ (6)
 - [x] 8 standards fossilized to `fossilRecord/wave150s_standards/`
 - [x] Team startup blurb template issued
-- [x] Wave 150x fossil pass: 24 handoffs + 26 AARs archived
+- [x] Wave 150x fossil passes: 33 docs archived across `wave150x_cleanup/` and `wave150x_dimensional/`
 - [ ] GLOSSARY.md needs refresh (Wave 138b → 150x terms)
 - [ ] PRIMAL_REGISTRY.md needs refresh (Wave 109 → current 15-primal posture)
 - [ ] 18 standards with stale wave tags (evergreen content, headers need bump)
@@ -146,8 +148,8 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] K-Derm zone mapping applied to building floors
 - [x] Thermal sovereignty loop designed (solar → compute → heat → water → gardens)
 - [x] footPrint GeoJSON location added (John Bean Building)
-- [x] sporePrint team blurb issued (4 new pages + 4 updates)
-- [ ] sporePrint public pages pending (team handed off with transplant guidance)
+- [x] sporePrint transplant DONE (b985c22) + credibility audit (f3b710d)
+- [ ] sporePrint ongoing: 5 impulses (maturity badges, WGSL counts, unsafe scope, Tower publication)
 - [ ] Building tour / physical access not yet arranged
 
 ---
@@ -193,30 +195,41 @@ Fully operational. Sovereign auto-build pipeline (Wave 150w) extends this.
 ## F6. Tower Atomic Deep Analysis (fossilized Wave 150x, completed Wave 150x)
 
 4-team convergence sprint shipped all analysis and hardening tasks.
-Remaining 30 debt findings tracked in Dim 2 (Ecological). Chimera evolution
-tracked in Dim 4 (Sovereignty). This dimension captured the investigation;
-the ongoing work lives in existing dimensions.
+Known debt reduced 36 → 9 through continued team evolution. Analysis docs
+and composition map fossilized to `wave150x_dimensional/`. Chimera design
+remains active analysis. Ongoing debt tracked in Dim 2 (Ecological).
 
 - Honest data assessment: latency/jitter PROVEN, throughput harness FIXED
 - Composition cost map: 12 UDS seams, IPC 3.5× network on LAN
-- 14 new stress/pen scenarios (196 total), all PASS
+- 14+1 stress/pen scenarios (197 total), all PASS
 - biomeOS chimera design: 6 requirements, 4-phase migration
-- All 4 teams converged: 1,838 lines across 57 files
-- Known debt reduced 36 → 30
-- bearDog: replay protection + UDS cap
-- songBird: connection pool + federation.broadcast + sustained benchmark
-- cellMembrane: crash-loop breaker + systemd hardening
-- skunkBat: spawn-rate anomaly detection
+- Known debt: 36 → 30 → 9 (genetic enrollment, CallerContext, UDS hardening, cipher floor)
+- bearDog: genetic enrollment (mito gate + nuclear lineage), cipher floor, blake3, seed rotation
+- songBird: LAN mesh.init, CallerContext, UDS hardening, blake3 delegation, dependency diet
+- cellMembrane: crash-loop breaker + systemd hardening + LAN registry
+- skunkBat: spawn-rate anomaly detection + cipher floor policy
+
+## F7. sporePrint Transplant (fossilized Wave 150x, completed Wave 150x)
+
+sporePrint transplant to primals.eco fully shipped. Credibility audit landed.
+External claim convergence standard established. Guidance, AAR, and analysis
+fossilized to `wave150x_dimensional/`. Ongoing impulse follow-ups tracked in
+Dim 5 (Public Surface).
+
+- Transplant: b985c22 (18 files) + entity fix by sporeGate
+- Credibility audit: f3b710d (30-file sweep, claim inflation fixed)
+- Standard: `EXTERNAL_CLAIM_CONVERGENCE_STANDARD.md`
+- 5 impulses issued for ecosystem-wide maturity alignment
 
 ---
 
 **Active**: 8 dimensions (1–8)
-**Fossilized**: 6 dimensions (F1–F6)
+**Fossilized**: 7 dimensions (F1–F7)
 **Summary**: All fossilized dimensions GREEN. Active: 7 GREEN / 1 AMBER (hardware — offline gates).
 
 ---
 
-*Last used*: Wave 150x (Jul 24, 2026)
+*Last used*: Wave 150x (Jul 25, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 150x (F6 — Tower Atomic Deep Analysis)
+*Latest fossilization*: Wave 150x (F7 — sporePrint Transplant)
