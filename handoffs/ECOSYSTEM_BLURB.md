@@ -1,13 +1,13 @@
 # ecoPrimals Ecosystem Blurb — Wave 151a
 
-**Date**: Jul 25, 2026 11:16 EDT | **Wave**: 151a | **From**: eastGate overwatch
-**Posture**: **NEST ATOMIC BEGINS. rootPulse via Provenance Trio + nestGate CAS + biomeOS. Tower (150) wrapping up.**
+**Date**: Jul 25, 2026 14:20 EDT | **Wave**: 151a | **From**: eastGate overwatch
+**Posture**: **TOWER ATOMIC COMPLETE. 7/7 debt RESOLVED. Known debt 9→1. bearDog defense-in-depth + enrollment decomposition. songBird 6/7 Tower failures resolved. Nest Atomic next.**
 
 ---
 
-## WAVE 150x HANDOFF — TOWER ATOMIC COMPLETE
+## WAVE 150 HANDOFF — TOWER ATOMIC DONE
 
-Tower Atomic sprint (150v–150x) is **done**. Summary of what was delivered:
+Tower Atomic sprint (150v–150x) is **DONE**. All 7 remaining debt items resolved:
 
 | Delivered | Evidence |
 |-----------|----------|
@@ -21,24 +21,35 @@ Tower Atomic sprint (150v–150x) is **done**. Summary of what was delivered:
 | Sovereign CI pipeline | Forgejo→build→depot→lineage, 4 phases |
 | 5 security architecture docs | whitePaper subGen/ (1,262 lines) |
 | Divergence AAR | 5 classes → rootPulse capability map |
-| Known debt | 36 → 9 findings |
+| Known debt | 36 → **1** (grapheneGate HSM only) |
 | Scenarios | 197, all PASS |
 | P0 | CLEAR across all gates |
 
-**Remaining Tower debt: 7 failures — 6 owned by songBird, 1 shared.**
+### Final Wave — 7/7 Remaining Debt RESOLVED
 
-| # | Failure | Owner | What Must Evolve |
-|---|---------|-------|------------------|
-| 1 | bearDog retry on connect fail | songBird | `capability_dispatch.rs` — retry logic |
-| 2 | Health check in dispatch path | songBird | Expose for cellMembrane probes |
-| 3 | Socket filesystem watch | songBird | `socket_discovery.rs` — inotify vs polling |
-| 4 | UDS connect-per-call cost | songBird | Wire pool into dispatch path |
-| 5 | BTSP on local UDS | songBird + bearDog | Defense-in-depth crypto on local sockets |
-| 6 | Capability announcement validation | songBird | Verify before trust-on-first-use |
-| 7 | Capability revocation | songBird | Mesh-wide revocation mechanism |
+| # | Was | Resolved By | How |
+|---|-----|-------------|-----|
+| 1 | bearDog retry on connect fail | songBird | `forward_to_local_provider_with_retry` — exponential backoff (100ms, 300ms) |
+| 2 | Health check in dispatch path | songBird | `capability.health` JSON-RPC — probes all providers, reports reachability + latency |
+| 3 | Socket filesystem watch | songBird | Adaptive socket watch: 2s poll empty → 30s populated (near-instant recovery) |
+| 4 | UDS connect-per-call cost | songBird | `ipc_pool.execute_jsonrpc` wired into dispatch path |
+| 5 | BTSP on local UDS | bearDog | `BEARDOG_UDS_REQUIRE_BTSP=1` — defense-in-depth, rejects plain JSON-RPC with `-32600` |
+| 6 | Capability announcement validation | songBird | `challenge_verify_capabilities` — probe peer after announce, `is_known_peer` gate |
+| 7 | Capability revocation | songBird | `mesh.capabilities_revoke` + `revoke_capabilities_to_peers()` — explicit mesh-wide withdrawal |
 
-Plus continuing P1/P2: crypto delegation (6 seams), bearDog grapheneGate
-(hardware), bearDog publication pen test, chimera Phase 0 (post composition).
+### bearDog Deep Debt Sweep (this cascade)
+
+| Item | Status |
+|------|--------|
+| `enrollment.rs` 1,061L monolith → 7 modules | SHIPPED |
+| `lineage_proof.rs` tests extracted | SHIPPED |
+| Hardcoded `"eth0"` → `BEARDOG_MDNS_INTERFACE` | SHIPPED |
+| Hardcoded `/tmp` → `std::env::temp_dir()` | SHIPPED |
+| All `redundant_pub_crate` clippy warnings | RESOLVED |
+| 13,973+ tests, 0 clippy warnings | CLEAN |
+
+Continuing P2: crypto delegation (6 seams), grapheneGate Android Keystore,
+bearDog publication pen test, chimera Phase 0 (post composition).
 
 ---
 
@@ -102,38 +113,39 @@ provides the data layer that makes both meaningful:
 
 ## CONTINUING WORK (all teams, parallel to Nest Atomic)
 
-### songBird (flockGate) — owns 6/7 remaining debt
+### songBird (flockGate) — Tower debt CLEAR, P2 remaining
 
-| # | Task | Priority |
-|---|------|----------|
-| 1 | **Failover resilience** (retry, health, socket watch) | P1 |
-| 2 | **Capability trust** (announcement validation, revocation) | P1 |
-| 3 | Wire IPC pool into dispatch path | P2 |
-| 4 | Crypto delegation to bearDog (6 seams remaining) | P1 |
+| # | Task | Priority | Status |
+|---|------|----------|--------|
+| 1 | ~~Failover resilience~~ | ~~P1~~ | **DONE** — retry, health, socket watch |
+| 2 | ~~Capability trust~~ | ~~P1~~ | **DONE** — announce validation, revocation |
+| 3 | ~~Wire IPC pool into dispatch~~ | ~~P2~~ | **DONE** — `ipc_pool.execute_jsonrpc` |
+| 4 | Crypto delegation to bearDog (6 seams remaining) | P1 | IN PROGRESS |
+| 5 | songBird `ClientHello` for BTSP strict mode | P2 | NEW — consumer-side of bearDog defense-in-depth |
 
-### bearDog (flockGate) — 1 shared debt + P2
+### bearDog (flockGate) — P2 remaining
 
-| # | Task | Priority |
-|---|------|----------|
-| 1 | BTSP on local UDS (shared with songBird) | P2 |
-| 2 | grapheneGate Android Keystore validation | P2 |
-| 3 | Publication readiness pen test | P2 |
+| # | Task | Priority | Status |
+|---|------|----------|--------|
+| 1 | ~~BTSP on local UDS~~ | ~~P2~~ | **DONE** — `BEARDOG_UDS_REQUIRE_BTSP=1` |
+| 2 | grapheneGate Android Keystore validation | P2 | Blocked on hardware |
+| 3 | Publication readiness pen test | P2 | Post crypto delegation |
 
 ### sporeGate — deployment
 
 | # | Task | Priority |
 |---|------|----------|
 | 1 | Gate enrollment (southGate, strandGate) | P1 |
-| 2 | Redeploy songBird with LAN dispatch + latest fixes | P1 |
+| 2 | Redeploy songBird + bearDog with latest fixes | P1 |
 
 ### Chimera Phase 0 (gate: composition validated)
 
 Shared library extraction — bearDog crypto, songBird routing, skunkBat
-defense into `libtower.so`. Blocked on songBird crypto delegation.
+defense into `libtower.so`. Blocked on songBird crypto delegation (6 seams).
 
 ### sporePrint Pipeline (parallel)
 
-Zola → petalTongue + nestGate CAS + cellMembrane. This converges with
+Zola → petalTongue + nestGate CAS + cellMembrane. Converges with
 Nest Atomic Phase 0 (nestGate CAS integration testing).
 
 ---
@@ -143,12 +155,12 @@ Nest Atomic Phase 0 (nestGate CAS integration testing).
 | # | Dimension | Status |
 |---|-----------|--------|
 | 1 | Temporal/Coordination | GREEN — 43/43 synced |
-| 2 | Ecological | GREEN — 197 scenarios, 9 debt |
+| 2 | Ecological | GREEN — 197 scenarios, **1 debt** (grapheneGate HSM) |
 | 3 | Hardware | AMBER — 4 offline gates |
-| 4 | Sovereignty | GREEN — Tower 353x, genetic enrollment, CI LIVE |
-| 5 | Public Surface | GREEN — 6/6 healthy, credibility audit done |
-| 6 | Compositions | GREEN — crypto composition advancing |
-| 7 | Documentation | GREEN — 33 docs archived, divergence AAR filed |
+| 4 | Sovereignty | GREEN — Tower 353x, defense-in-depth, CI LIVE |
+| 5 | Public Surface | GREEN — 6/6 healthy, skunkBat public |
+| 6 | Compositions | GREEN — Tower composition validated, chimera Phase 0 ready |
+| 7 | Documentation | GREEN — 33+ docs archived, deep debt swept |
 | 8 | Campus | GREEN — vision documented |
 
 **Fossilized** (F1–F7): Glacial Shift, CAC, Silicon Atheism, Depot/Build,
@@ -156,8 +168,9 @@ Cascade, Tower Deep Analysis, sporePrint Transplant.
 
 ---
 
-*Wave 151a: Nest Atomic begins. Tower Atomic (Wave 150) wrapping up — teams
-continue independently. nestGate CAS + Provenance Trio (rhizoCrypt, loamSpine,
-sweetGrass) + biomeOS = rootPulse. First target: golgiBody running rootPulse
-to solve the 5 waterFall cascade divergence classes. Real data + real
-encryption through Tower transport. 197 scenarios PASS. 43/43 converged.*
+*Wave 151a: **Tower Atomic COMPLETE** — 7/7 remaining debt resolved. Known debt
+9→1 (grapheneGate HSM only). bearDog defense-in-depth (BTSP on local UDS) +
+enrollment decomposition (1,061L→7 modules). songBird: retry, health probe,
+socket watch, IPC pool, challenge-verify, capability revocation all shipped.
+197 scenarios PASS, 0 failures. Nest Atomic begins: rootPulse via Provenance
+Trio + nestGate CAS. 43/43 converged.*
