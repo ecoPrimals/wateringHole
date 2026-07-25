@@ -99,6 +99,29 @@ skunkBat is clean. No open P1. Future work: chimera integration.
 
 ---
 
+## SPOREPRINT (eastGate — public surface, credibility convergence)
+
+**Credibility audit landed** (`f3b710d`). External reviewer assessed
+primals.eco and identified claim-surface inflation as principal risk. Drove
+30-file sweep:
+
+- Spring count fixed 8→9 (rustChip), org count 3→4 (protoKarya)
+- 12 stale WGSL counts replaced with `{{ total_stat() }}` shortcodes
+- Homepage reframed: "produces self-contained scientific computations that
+  reproduce published results on commodity hardware and carry their
+  validation and provenance" (reviewer's stronger position)
+- `#![forbid(unsafe_code)]` scoped: "forbidden by default, isolated to
+  hardware-containment crates"
+- Products page reorganized: Deploy now / Research preview / Architectural direction
+- Evidence Snapshot gained Safety Model section
+
+**New standard**: `foundations/EXTERNAL_CLAIM_CONVERGENCE_STANDARD.md`
+**5 impulses issued**: biomeOS maturity labeling, barraCuda README WGSL count,
+ecoPrimals org profile unsafe scope, Tower source publication review,
+all-teams README maturity badge.
+
+---
+
 ## OVERWATCH (eastGate — code hub, integration, scenarios)
 
 | # | Task | Priority | Status |

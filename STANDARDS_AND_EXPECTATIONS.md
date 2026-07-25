@@ -218,6 +218,21 @@ The archive is the project's geological record.
 
 ---
 
+## 13. External Claims & Maturity Labeling
+
+| Standard | File | Status |
+|----------|------|--------|
+| External Claim Convergence | `foundations/EXTERNAL_CLAIM_CONVERGENCE_STANDARD.md` | Ecosystem Standard (Wave 150x) |
+
+**Expectation**: Every public-facing README includes an external maturity label
+(`experimental`, `research-ready`, `deployment-ready`, `production-candidate`,
+`externally-validated`) and a metrics measurement date. Internal evolutionary
+grades (stadial, wave, A++) do not appear in the first 20 lines of public READMEs.
+All absolute claims (`zero`, `all`, `every`, `no`) state their scope in the same
+sentence. See the standard for full details.
+
+---
+
 ## Quick Reference: "Is my work ready?"
 
 Before pushing, verify:
