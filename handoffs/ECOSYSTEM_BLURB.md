@@ -1,135 +1,117 @@
-# ecoPrimals Ecosystem Blurb — Wave 150x
+# ecoPrimals Ecosystem Blurb — Wave 150y
 
-**Date**: Jul 25, 2026 10:57 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **P0 CLEAR ALL GATES. bearDog P2 CLEAR. skunkBat PUBLIC. DEBT 9. DIVERGENCE AAR FILED.**
-
----
-
-## WHERE WE ARE
-
-**P0 CLEAR across all gates.** Bilateral blockers were stale — SSH, iperf3,
-biomeos-beacon, manifest all verified LIVE for 48+ hours (eastGate AAR with
-evidence). bearDog shipped bond-type cipher + backpressure (13,973 tests).
-skunkBat now PUBLIC. songBird LAN dispatch priority shipped. whitePaper 5
-security docs. Divergence AAR filed — 5 classes map to rootPulse. Known
-debt **9**. GLOSSARY + PRIMAL_REGISTRY refreshed.
+**Date**: Jul 25, 2026 11:12 EDT | **Wave**: 150y | **From**: eastGate overwatch
+**Posture**: **WAVE 150x COMPLETE. NEST ATOMIC BEGINS. rootPulse via Provenance Trio + nestGate + biomeOS.**
 
 ---
 
-## ~~P0 — BILATERAL BLOCKERS~~ ALL RESOLVED
+## WAVE 150x HANDOFF — TOWER ATOMIC COMPLETE
 
-Per eastGate AAR (`EASTGATE_OVERWATCH_AAR_150x.md`):
-- SSH key: **DONE** since Jul 23, bidirectional verified
-- biomeos-beacon: **HEALTHY** — 25h uptime, 0 restarts (historical issue was fixed)
-- iperf3: **LIVE** — `0.0.0.0:5201`, 2.37 Gbps from sporeGate confirmed
-- Manifest LAN IP: **Already correct** (`192.168.4.244`)
+Tower Atomic sprint (150v–150x) is **done**. Summary of what was delivered:
 
-**P0 CLEAR across all gates.**
+| Delivered | Evidence |
+|-----------|----------|
+| Tower 353x LAN, 1.7x WAN | 700+ shadow samples, 50-probe benchmarks |
+| Genetic enrollment (two-layer) | Mito gate + nuclear lineage → trust tiers |
+| Bond-type cipher + backpressure | bearDog 13,973 tests, all P2 clear |
+| LAN mesh.init + dispatch priority | songBird peers sorted LAN→overlay→direct |
+| CallerContext + UDS hardening | 7 pen scenarios resolved |
+| skunkBat publication | SPDX + maturity badge, now public |
+| Crash-loop self-recovery | App breaker + systemd, ecosystem-wide |
+| Sovereign CI pipeline | Forgejo→build→depot→lineage, 4 phases |
+| 5 security architecture docs | whitePaper subGen/ (1,262 lines) |
+| Divergence AAR | 5 classes → rootPulse capability map |
+| Known debt | 36 → 9 findings |
+| Scenarios | 197, all PASS |
+| P0 | CLEAR across all gates |
 
----
-
-## CODE TEAMS (flockGate)
-
-### bearDog — crypto primal (PRIVATE — last to publish, post pen-test validation)
-
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | ~~Bond-type cipher awareness~~ | DONE | `BtspBondType` enum, per-type env keys, 6 tests |
-| 2 | ~~Backpressure signaling~~ | DONE | `SERVICE_OVERLOADED` + `Retry-After` header |
-| 3 | Android Keystore + grapheneGate | P2 | Code complete, awaiting hardware |
-| 4 | **Publication readiness** | P2 | Full pen test + validation before going public |
-
-**All blurbed items DONE.** 13,973 tests. Remains private — crypto root of
-trust goes public only after comprehensive pen testing and validation.
-
-### songBird — transport/routing primal
-
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | Crypto delegation to bearDog | P1 | blake3 LIVE, 4 crates feature-gated, 6 seams remaining |
-| 2 | ~~`mesh.find_path` LAN preference~~ | DONE | `remote_dispatch` sorts peers by priority (LAN→overlay→direct) |
-| 3 | Failover retry (bearDog connection) | P2 | Transient restart = hard failure |
-| 4 | Health check surface in dispatch | P2 | cellMembrane needs health probes |
-| 5 | Socket filesystem watch | P2 | Reactive vs polling recovery |
-
-CallerContext, UDS hardening, pen test hardening, dependency diet — all DONE.
-
-### skunkBat — defense/protocol primal (NOW PUBLIC)
-
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | ~~Publication self-review~~ | DONE | SPDX headers + .gitignore + maturity badge |
-| 2 | Capability announcement validation | P2 | Trust-on-first-use needs verification |
-| 3 | Capability revocation mechanism | P2 | No mesh-wide revocation yet |
-
-Cipher floor, deep debt, spawn-rate detection — all DONE. **Now public.**
-Clean for chimera.
+**Remaining Tower work** (teams continue independently):
+- songBird: crypto delegation to bearDog (6 seams), failover retry, health surface
+- bearDog: Android Keystore validation (hardware), publication readiness (pen test)
+- skunkBat: capability announcement validation, revocation mechanism
+- Chimera Phase 0: library extraction (after composition validated)
 
 ---
 
-## DEPLOYMENT / OPS (sporeGate)
+## NEXT WAVE: NEST ATOMIC — DATA + PROVENANCE + rootPulse
 
-### cellMembrane — membrane coordinator
+The Nest Atomic is the **neutron** — where Tower Atomic (electron) provides
+transport and Node Atomic (proton) provides coordination, the Nest Atomic
+provides the data layer that makes both meaningful:
 
-All P1 DONE: systemd hardening, crash-loop breaker, sovereign CI, nestgate
-unit, LAN registry, deep debt sweep. cellMembrane is clean.
+### What Nest Atomic Enables
 
-### Topology / Hardware
+1. **Real data movement + encryption** — content-addressed objects flowing
+   through Tower transport with bearDog per-object encryption, not just
+   ping/latency benchmarks
+2. **Provenance Trio fully composed** — `rhizoCrypt` (DAG lineage) +
+   `loamSpine` (ledger anchoring) + `sweetGrass` (semantic braids) working
+   together as a live composition
+3. **rootPulse via biomeOS** — the sovereign VCS that replaces the waterFall
+   cascade's git-based coordination with DAG-native operations
+4. **golgiBody rootPulse deployment** — golgiBody becomes the first gate
+   running rootPulse, solving the 5 divergence classes (140 merge commits,
+   34 calibration thrashes, 3 data losses) documented in the Wave 150x AAR
+5. **nestGate CAS as the backbone** — content-addressable storage provides
+   the substrate for both rootPulse (DAG state) and sporePrint pipeline
+   (replacing Zola)
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | ~~iperf3 sustained throughput~~ | DONE | 2.37 Gbps confirmed sporeGate→eastGate |
-| 2 | Gate enrollment (southGate) | P1 | USB staged, needs physical cabling |
-| 3 | Gate enrollment (strandGate) | P1 | USB staged, needs physical cabling |
-| 4 | Redeploy songBird with LAN dispatch | P1 | LAN priority sorting shipped in code — needs deploy |
-| 5 | ~~Manifest: eastGate LAN IP~~ | DONE | Already correct (`192.168.4.244`) |
+### Nest Atomic Composition
+
+| Primal | Role in Nest | Current Status |
+|--------|-------------|----------------|
+| nestGate | CAS backbone, data storage | LIVE, vendor-free (150u) |
+| rhizoCrypt | DAG lineage tracking | Design phase |
+| loamSpine | Ledger anchoring | Design phase |
+| sweetGrass | Semantic braids | Design phase |
+| biomeOS | Orchestration, rootPulse host | Beacon LIVE on eastGate |
+| bearDog | Per-object encryption | Genetic enrollment LIVE |
+| songBird | Transport for data objects | Tower 353x LAN |
+
+### Phase Plan
+
+| Phase | Scope | Teams |
+|-------|-------|-------|
+| 0 | nestGate CAS integration testing — put/get/verify cycle | eastGate + flockGate |
+| 1 | loamSpine prototype — append-only DAG ledger for gate heads | eastGate |
+| 2 | rhizoCrypt wiring — cross-repo dependency tracking in DAG | eastGate + flockGate |
+| 3 | sweetGrass semantic braids — per-gate attestations replacing KNOWN_DEBT | all |
+| 4 | rootPulse composition — biomeOS orchestrates Trio over Tower transport | all |
+| 5 | golgiBody deployment — rootPulse replaces waterFall cascade git workflow | sporeGate + golgiBody |
+
+### What This Solves (from Divergence AAR)
+
+| Divergence Class | Nest Atomic Solution |
+|-----------------|---------------------|
+| golgiBody auto-publish race | loamSpine append-only ledger (no merge) |
+| KNOWN_DEBT calibration thrash | sweetGrass per-gate attestations |
+| Blurb overwrite / data loss | rootPulse materialized views from impulses |
+| AAR temporal collision | Context braids with TTL (WIP visibility) |
+| Cross-repo semantic drift | rhizoCrypt DAG lineage (dep tracking) |
 
 ---
 
-## OVERWATCH (eastGate)
+## CONTINUING WORK (all teams, parallel to Nest Atomic)
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | ~~Unblock sporeGate bilateral~~ | DONE | SSH + iperf3 + beacon all LIVE |
-| 2 | Scenario debt burn-down (9 remaining) | P1 | 197 scenarios, all PASS |
-| 3 | **Divergence AAR** | DONE | 5 classes documented, rootPulse capability map |
-| 4 | ~~GLOSSARY.md refresh~~ | DONE | 9 terms added (Wave 138b → 150x) |
-| 5 | ~~PRIMAL_REGISTRY.md refresh~~ | DONE | v0.9.31→v0.9.46, 58→197 scenarios |
-| 6 | sporePrint impulse follow-up | P2 | 5 impulses for maturity badges |
+### Tower Atomic (teams continue independently)
 
----
+| Team | Remaining | Priority |
+|------|-----------|----------|
+| songBird (flockGate) | Crypto delegation (6 seams), failover, health | P1/P2 |
+| bearDog (flockGate) | grapheneGate validation, publication pen test | P2 |
+| skunkBat (flockGate) | Capability validation + revocation | P2 |
+| sporeGate | Gate enrollment (southGate, strandGate), songBird redeploy | P1 |
 
-## FORWARD EVOLUTION (all teams)
+### Chimera Phase 0 (gate: composition validated)
 
-| # | Task | Depends On | Owner |
-|---|------|-----------|-------|
-| 1 | **Composition validation** — bearDog UDS cold-path | songBird P1 crypto delegation | flockGate |
-| 2 | **Chimera Phase 0** — shared library extraction | Composition validated | eastGate |
-| 3 | **sporePrint primal pipeline** — Zola → petalTongue + nestGate CAS | Design phase | eastGate |
-| 4 | **rootPulse prototype** — loamSpine append-only ledger for gate heads | Divergence AAR evidence | eastGate |
-| 5 | Node Atomic (proton) — nestGate + Provenance Trio | Tower chimera maturity | all |
-| 6 | Nest Atomic (neutron) — distributed state | Node Atomic | all |
-| 7 | Phase 3 cutover — Tower replaces WG | Chimera + sustained validation | all |
+Shared library extraction from Tower primals — bearDog crypto, songBird
+routing, skunkBat defense into `libtower.so`. Requires composition validation
+(songBird crypto delegation fully working through bearDog UDS).
 
-### Divergence Evidence (rootPulse motivation)
+### sporePrint Pipeline (parallel)
 
-5 divergence classes documented in `WATERFALL_CASCADE_DIVERGENCE_AAR_150x.md`:
-140 merge commits, 34 KNOWN_DEBT recalibrations, 3 blurb data losses, 2
-duplicate work incidents. All map to rootPulse capabilities (loamSpine DAG
-ledger, sweetGrass semantic braids, rhizoCrypt cross-repo lineage).
-
----
-
-## EXPLORATION DOMAINS — ALL 6/6 PROVEN LIVE
-
-| # | Domain | Where Tower Exceeds WG |
-|---|--------|------------------------|
-| 1 | Capability-aware routing | WG: all traffic in one tunnel |
-| 2 | Multi-stack routing | WG: undifferentiated |
-| 3 | Large data transfer | WG: no content awareness |
-| 4 | Secure compute mesh | WG: one static key per tunnel |
-| 5 | Distributed compute | WG: point-to-point only |
-| 6 | Edge/SFF/R45 profile | WG: kernel module required |
+Zola → petalTongue + nestGate CAS + cellMembrane. This converges with
+Nest Atomic Phase 0 (nestGate CAS integration testing).
 
 ---
 
@@ -143,7 +125,7 @@ ledger, sweetGrass semantic braids, rhizoCrypt cross-repo lineage).
 | 4 | Sovereignty | GREEN — Tower 353x, genetic enrollment, CI LIVE |
 | 5 | Public Surface | GREEN — 6/6 healthy, credibility audit done |
 | 6 | Compositions | GREEN — crypto composition advancing |
-| 7 | Documentation | GREEN — fossil pass complete, 33 docs archived |
+| 7 | Documentation | GREEN — 33 docs archived, divergence AAR filed |
 | 8 | Campus | GREEN — vision documented |
 
 **Fossilized** (F1–F7): Glacial Shift, CAC, Silicon Atheism, Depot/Build,
@@ -151,7 +133,8 @@ Cascade, Tower Deep Analysis, sporePrint Transplant.
 
 ---
 
-*Wave 150x: bearDog P2 clear (13,973 tests). skunkBat public. songBird LAN
-dispatch. 5 divergence classes documented — 140 merge commits, 34 calibration
-thrashes, 3 data losses all map to rootPulse capabilities. Chimera Phase 0
-ready. P0: eastGate bilateral. 197 scenarios PASS. 43/43 converged.*
+*Wave 150y: Tower Atomic sprint COMPLETE (150v–150x). Nest Atomic begins —
+nestGate CAS + Provenance Trio (rhizoCrypt, loamSpine, sweetGrass) + biomeOS
+= rootPulse. First target: golgiBody running rootPulse to solve the 5
+waterFall cascade divergence classes. Real data + real encryption. 197
+scenarios PASS. 43/43 converged.*
