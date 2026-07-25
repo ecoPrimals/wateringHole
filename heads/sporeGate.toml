@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-24T18:42:00Z
+# Gate: sporeGate | Updated: 2026-07-25T00:20:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-24T18:42:00Z"
+updated = "2026-07-25T00:20:00Z"
 wave = "150x"
 
 [heads]
-bearDog = "03082d4"
-songBird = "e1dc513"
+bearDog = "45a6355"
+songBird = "0e0fc38"
 nestGate = "d5d45df"
 biomeOS = "c0f51e6"
 rhizoCrypt = "ae205a8"
@@ -23,14 +23,14 @@ barraCuda = "3cfdf0e"
 petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
-cellMembrane = "a372e7b"
-primalSpring = "cdb91f0"
-wateringHole = "31e6797"
+cellMembrane = "1855216"
+primalSpring = "c6f20ca"
+wateringHole = "ae160a1"
 sporePrint = "67cc325"
 
 [deploy]
 songbird_version = "0.2.1+sustained (deployed, crypto composition NOT yet deployed — mid-migration)"
-beardog_version = "0.10.0-silicon-atheism"
+beardog_version = "0.10.0-silicon-atheism (cipher floor + blake3 in source, not yet redeployed)"
 petaltongue_version = "1.7.0"
 membrane_version = "0.1.0 (eee7e84) — tower.shadow + crash-loop breaker (deployed all 3 gates)"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
@@ -47,24 +47,22 @@ mesh_peers = 3
 mesh_init = "ExecStartPost dropin (auto-seed regression workaround)"
 
 [tower_shadow]
-status = "ACTIVE — FIXED (was writing to /home/flockgate paths, now gate-agnostic)"
+status = "ACTIVE — gate-agnostic script, /usr/local/bin symlink for root"
 interval = "60min"
 results = "130+ (6/12 per cycle: golgi, sporeGate, eastGate reachable)"
 gates_active = ["sporeGate", "flockGate", "golgiBody"]
-songbird_symlink = "/usr/local/bin/songbird → depot path (root access for systemd)"
 
 [benchmark]
 phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard"
 lan_latency_tower = "0.61ms avg, 0.01ms jitter"
 lan_latency_wg = "0.60ms avg (direct LAN, same as Tower — PARITY)"
 wg_overlay_latency = "154.5ms avg (routes through golgiBody VPS)"
-lan_vs_overlay = "Tower LAN 253x faster than WG overlay — WG has no LAN awareness"
+lan_vs_overlay = "Tower LAN 267x faster than WG overlay — WG has no LAN awareness"
 wan_latency_tower = "76.8ms avg (golgi)"
 wan_throughput = "Tower 13.1 Mbps vs WG ~7 Mbps (Tower 1.7x)"
 
 [hardware]
 lan_peering = "CONFIRMED: eastGate at 192.168.4.244, 0.17ms RTT"
-lan_benchmark = "Tower 0.61ms / WG 0.60ms (LAN direct parity). WG overlay: 154ms (253x slower)"
 ten_gig = "10G+1G confirmed operational. Sustained throughput testing: songbird benchmark done."
 gate_enrollment = "PENDING: southGate + strandGate (USB staged, physical access required)"
 
@@ -74,11 +72,10 @@ scanned = 14
 loops = 0
 
 [primalspring]
-head = "cdb91f0"
+head = "c6f20ca"
 scenarios = 196
 known_debt = "graphenegate-readiness=2, sporeprint-pure-primal-parity=1, + 9 tower stress/pen scenarios"
 tests = "1240 passed, 0 failed, 2 ignored"
-tower_scenarios = "46/46 PASS"
 suite_status = "GREEN"
 
 [surfaces]
@@ -89,17 +86,19 @@ webb = "200"
 git = "200"
 root = "301 (redirect to sporeprint)"
 
+[golgi_health]
+load_spike = "2026-07-25T00:17Z — load avg 71.02, recovered to ~17 trailing. No root cause found, no crash. TCP connections stalled during spike but ICMP and WG-UDP unaffected."
+note = "All services (forgejo, caddy, songbird) remained active throughout."
+
 [resolved]
 tower_parity_p1 = "PHASE 1 PASS (Wave 150w)"
 tower_shadow_p0 = "ACTIVE on 3 gates (Wave 150w)"
 lan_peering_p0 = "CONFIRMED (Wave 150w)"
-lan_addr_p1 = "SHIPPED (Wave 150w)"
-crash_loop_breaker = "DEPLOYED (Wave 150x) — 14 services scanned, 0 loops"
-songbird_mesh_init = "ExecStartPost dropin deployed — workaround for auto-seed regression"
+crash_loop_breaker = "DEPLOYED (Wave 150x)"
 sustained_benchmark = "DONE — Tower 267x LAN, 1.7x WAN sustained"
-sporeprint_transplant = "DONE — toweratomic entity fix (67cc325). eastGate shipped full transplant (b985c22)."
-golgi_shadow_fix = "DONE — golgiBody songbird updated, shadow now producing data"
-shadow_script_fix = "DONE (Wave 150x) — gate-agnostic paths, /usr/local/bin symlink for root"
+sporeprint_transplant = "DONE"
+golgi_shadow_fix = "DONE — golgiBody songbird updated"
+shadow_script_fix = "DONE (Wave 150x) — gate-agnostic paths"
 
 [blocked_on_eastgate]
 iperf3_server = "P1 — needs iperf3 -s running on eastGate"
