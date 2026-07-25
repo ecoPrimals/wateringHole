@@ -1,17 +1,18 @@
 # ecoPrimals Ecosystem Blurb — Wave 150x
 
-**Date**: Jul 24, 2026 14:23 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **TOWER 267x LAN. CRYPTO COMPOSITION MIGRATING. P1 BURN-DOWN ACTIVE.**
+**Date**: Jul 24, 2026 20:01 EDT | **Wave**: 150x | **From**: eastGate overwatch
+**Posture**: **RAPID CONVERGENCE. bearDog cipher floor + blake3. songBird caller identity + deep debt. cellMembrane LAN registry.**
 
 ---
 
 ## WHERE WE ARE
 
-Tower Atomic **267x faster** than WG overlay on LAN, **1.7x WAN sustained**.
-6/6 exploration domains PROVEN LIVE. songBird crypto composition migration
-underway — `local-crypto-fallback` feature flags gate inline crypto, bearDog
-UDS delegation wired for cold-path. Crash-loop self-recovery LIVE at both
-app and systemd layers. P0 CLEAR.
+Tower 267x LAN, 1.7x WAN. 6/6 domains PROVEN LIVE. All 3 code teams and
+cellMembrane shipped major evolution this cascade: bearDog delivered cipher
+floor enforcement + `crypto.hash.blake3` (songBird can now delegate blake3).
+songBird shipped caller identity verification + UDS hardening + dependency
+diet (chrono eliminated, rand→fastrand, 83 files touched). cellMembrane
+shipped deep debt sweep with LAN registry + test extraction. P0 CLEAR.
 
 ---
 
@@ -21,10 +22,11 @@ app and systemd layers. P0 CLEAR.
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | Bond-type cipher floor enforcement | P1 | Queued |
-| 2 | Enrollment seed rotation | P2 | Queued |
-| 3 | `crypto.hash.blake3` capability | P2 | Needed for songBird delegation |
-| 4 | Android Keystore + grapheneGate validation | P2 | Code complete, awaiting hardware |
+| 1 | ~~Bond-type cipher floor enforcement~~ | DONE | BTSP negotiation rejects below floor |
+| 2 | ~~`crypto.hash.blake3` capability~~ | DONE | songBird can now delegate blake3 via UDS |
+| 3 | ~~Deep debt sweep~~ | DONE | Hardcoding eliminated, capability-based config |
+| 4 | Enrollment seed rotation | P2 | Queued |
+| 5 | Android Keystore + grapheneGate validation | P2 | Code complete, awaiting hardware |
 
 bearDog is the ecosystem crypto provider. All primals route crypto through
 bearDog UDS (`crypto.*` capabilities). Hot-path crypto stays local until
@@ -34,11 +36,12 @@ chimera extracts shared library.
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | **Crypto delegation to bearDog** | P1 | MIGRATING — 4 crates feature-gated, 6 seams identified |
-| 2 | Caller identity verification (4 findings) | P1 | Open |
-| 3 | UDS hardening (5 findings) | P1 | Open |
-| 4 | Pen test hardening shipped | DONE | UDS-spoof, mesh-poison, relay-abuse |
-| 5 | Dependency diet shipped | DONE | ring→rustcrypto, dep removal |
+| 1 | **Crypto delegation to bearDog** | P1 | MIGRATING — blake3 delegation wired, 4 crates feature-gated |
+| 2 | ~~Caller identity verification~~ | DONE | `CallerContext` wired into IPC connection + method gate |
+| 3 | ~~UDS hardening~~ | DONE | Socket permissions, peer cred verification |
+| 4 | ~~Pen test hardening~~ | DONE | UDS-spoof, mesh-poison, relay-abuse |
+| 5 | ~~Dependency diet~~ | DONE | ring→rustcrypto, chrono eliminated, rand→fastrand, 83 files |
+| 6 | ~~Legacy env deprecation~~ | DONE | Name-based endpoints marked for removal |
 
 `CRYPTO_COMPOSITION.md` classifies 19 seams: 5 hot-path (chimera), 6 delegating
 (bearDog UDS), 5 test-only, 3 already delegating.
@@ -65,6 +68,7 @@ skunkBat is clean. No open P1. Future work: chimera integration.
 | 2 | Crash-loop breaker | DONE | `gate.crash-loop` + auto-scan in cascade |
 | 3 | Sovereign CI pipeline | DONE | Forgejo hooks → build → depot → lineage |
 | 4 | `membrane-nucleus-nosocket@.service` | DONE | nestgate evolved CLI support |
+| 5 | ~~Deep debt sweep~~ | DONE | LAN registry, test extraction, safe casts, +960/-861 |
 
 ### Topology / Hardware
 
