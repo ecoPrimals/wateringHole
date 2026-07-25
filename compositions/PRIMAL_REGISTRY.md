@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: June 11, 2026 (Wave 109 — guideStone deployment convergence. 13/13 primals CLEAN, 5-gate mesh LIVE, startup contract 5/6, HEALTH-01 10/13. biomeOS v4.22, sweetGrass v0.7.56, barraCuda v0.4.0, skunkBat v0.2.10, rhizoCrypt v0.14.7, loamSpine v0.9.16. grapheneGate 13/13 deployed. Criterion 7 convergence in progress.)
+**Last Updated**: July 25, 2026 (Wave 150x — Tower 353x LAN, genetic enrollment LIVE, known debt 9, CallerContext + UDS hardening, 197 scenarios. primalSpring v0.9.46, 1240 tests, chimera Phase 0 ready.)
 
 ---
 
@@ -444,7 +444,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.10.0 (911 lib + 311 integration + 61 forge tests, 97 binaries, 87 experiments, 14.3× CPU speedup, 10 MCP tools, Edition 2024) |
 | barraCuda | v0.4.0 (3,348+ tests, 803 shaders, AGPL-3.0-only, startup contract SHIPPED, method.describe 97 methods) |
 | coralReef | Phase 10 Iteration 59 (3,304+ tests, startup contract SHIPPED, tarpc skip on tcp_only) |
-| primalSpring | v0.9.31 Wave 109 (93 experiments, 21 tracks, 1,000+ tests, 490+ methods, 55 scenarios, 113 graph TOMLs, PlatformCapabilities::detect() SHIPPED, HEALTH-01 schema SHIPPED) |
+| primalSpring | v0.9.46 Wave 150x (89 experiments, 21 tracks, 1,240 tests, 490+ methods, 197 scenarios, 113 graph TOMLs, Tower pen/stress/gap validation, deep debt sweep, LAN-first routing, zero unsafe/mocks/hardcode) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -527,26 +527,28 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 ### primalSpring - Coordination and Composition Validation
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
-**Phase**: Phase 60+ / Interstadial (87/87 gates, NUCLEUS VALIDATED)  
-**Status**: v0.9.31 Wave 67 — 93 experiments (21 tracks), 836 tests (805 lib + 10 integration + 4 binary + 17 doc, 2 ignored), 490+ methods, 58 scenarios (10 tracks, 3 tiers), 113 graph TOMLs (~80 deploy + 33 compositions). Phase 0 P0 blockers CLEARED (Songbird socket fix, biomeOS capability.call, bearDog S4). Phase 1 mesh validation NEXT. `#![forbid(unsafe_code)]` on all crate roots. Zero TODO/FIXME/unsafe/mocks in production
+**Phase**: Phase 60+ / Wave 150x (197 scenarios, TOWER EXCEEDS WG)  
+**Status**: v0.9.46 Wave 150x — 1240 tests, 197 scenarios (14 stress/pen + 1 LAN gap), 490+ methods, 113 graph TOMLs. Tower 353x LAN validated. Known debt 9 (all upstream). Deep debt sweep complete: zero unsafe, zero mocks, zero hardcode, idiomatic Rust 2024 (`is_none_or`, `Arc<Anchor>`, `Cow<str>`), K-Derm trust tiers, LAN-first routing. `#![forbid(unsafe_code)]` on all crate roots. Zero TODO/FIXME/unsafe/mocks in production. All 14 direct deps pure Rust.
 
-**Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC.
+**Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC. Wave 150x added Tower pen testing, stress testing, LAN routing gap validation, and deep debt evolution.
 
 **Capabilities**:
 
 | Category | Details |
 |----------|---------|
-| **Experiments** | 89 across 20 tracks: Atomic Composition, Graph Execution, Emergent Systems, Bonding & Plasmodium, Cross-Spring Coordination, Showcase-Mined, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, Frontier, Subsystem Decomposition, Signal Dispatch, and more. All use real `discover_by_capability()` with honest `check_skip` for live-IPC checks. |
-| **Graph TOMLs** | 113 (~80 deploy + 33 compositions): all parsed, structurally validated, topologically sorted via `topological_waves()` (Kahn's algorithm). All nodes have `by_capability` (enforced by test). Fragment-first composition with `resolve = true`. |
-| **Validation Scenarios** | 58 scenarios across 10 tracks, 3 tiers: atomic-compositions, meta-tier-compositions, agentic-tower, sovereignty (membrane composition, parity, content), composition dispatch parity, cross-gate, primal announce, ionic bond lifecycle, sporePrint pure-primal parity. |
-| **Niche Self-Knowledge** | 37+ capabilities (including ai.query, ai.health, composition.tower_squirrel_health), semantic mappings (7 domains), operation dependencies, cost estimates |
-| **RPC Methods** | 17+ methods: health.check, health.liveness, health.readiness, capabilities.list, coordination.validate_composition, coordination.deploy_atomic, coordination.bonding_test, coordination.neural_api_status, graph.list, graph.validate, graph.waves, graph.capabilities, lifecycle.status, mcp.tools.list |
-| **IPC Resilience** | IpcError (8 typed variants + IpcErrorPhase), CircuitBreaker, RetryPolicy, resilient_call(), DispatchOutcome\<T\>, extract_rpc_result/dispatch, 4-format capability parsing |
-| **Bonding** | Ionic bond runtime (IonicContractRegistry — propose/accept/reject/meter/modify/terminate/seal), covalent mesh, content distribution, graph metadata |
-| **Live Composition** | Tower STABLE (beardog + songbird + biomeOS, 24/24 gates). Squirrel AI composition (Tower + Squirrel + Anthropic Claude). biomeOS-orchestrated Tower deploy. 3-primal AI composition. |
-| **Emergent Systems Tested** | RootPulse (commit/branch/merge/diff/federate), RPGPT (60Hz tick + provenance), coralForge (neural object Pipeline graph), cross-spring ecology |
+| **Experiments** | 89 across 20 tracks: Atomic Composition, Graph Execution, Emergent Systems, Bonding & Plasmodium, Cross-Spring Coordination, Live Composition, Multi-Node Bonding, Cross-Gate Deployment, Frontier, Subsystem Decomposition, Signal Dispatch. All use `discover_by_capability()` with honest `check_skip` for live-IPC. |
+| **Graph TOMLs** | 113 (~80 deploy + 33 compositions): all parsed, validated, topologically sorted. All nodes have `by_capability`. Fragment-first with `resolve = true`. |
+| **Validation Scenarios** | 197 scenarios across 14 tracks: atomic-compositions, meta-tier, agentic-tower, sovereignty, dispatch parity, cross-gate, primal announce, ionic bond, sporePrint, Tower pen (7), Tower stress (7), exploration (6 proven live), LAN routing gap. |
+| **Tower Pen Testing** | 7 scenarios: capability-escalation, cipher-downgrade, enrollment-replay, malformed-rpc, mesh-poison, relay-abuse, uds-spoof. CallerContext + UDS hardening resolved 7 of 14 initial findings. |
+| **Tower Stress** | 7 scenarios: btsp-storm, concurrent-dispatch, failover-resilience, mesh-churn, shadow-fidelity, sustained-throughput, uds-hop-cost. |
+| **LAN Routing Gap** | `s_mesh_lan_path_preference` — validates `mesh.find_path` must prefer `EndpointType::Local` for same-switch (353x penalty, P0 for songBird). |
+| **IPC** | Zero-alloc JSON-RPC (`Cow<'static, str>`), 8 typed error variants + IpcErrorPhase, CircuitBreaker, RetryPolicy, DispatchOutcome, 4-format capability parsing |
+| **Evolution** | `MeshEntry::preferred_address()` LAN-first, `has_tower()`, K-Derm trust tiers, `Arc<Anchor>` zero-clone, `is_none_or()` Rust 2024, 26 dep refresh |
+| **Bonding** | Ionic bond runtime (IonicContractRegistry), covalent mesh, content distribution, graph metadata |
+| **Live Composition** | Tower EXCEEDS WG: 353x LAN (0.45ms vs 158ms), 1.7x WAN sustained. Shadow benchmark: 661 JSON files, continuous hourly. Genetic enrollment LIVE. |
+| **Emergent Systems** | RootPulse, RPGPT, coralForge, cross-spring ecology |
 
-**Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation), Squirrel (live AI composition)
+**Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation), Squirrel (live AI composition), Tower Atomic (shadow benchmark + pen test validation)
 
 ### ludoSpring - Game Design & Interaction Science
 

@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: July 14, 2026 (Wave 138b — soundStage concept added)
+**Last Updated**: July 25, 2026 (Wave 150x — genetic enrollment, Tower shadow, LAN routing, chimera)
 
 ---
 
@@ -348,6 +348,91 @@ Key properties:
 soundStage is to key generation what darkforest is to network security: the tool
 that makes the invisible visible. darkforest reveals what probes the network.
 soundStage reveals what flows through the ceremony.
+
+See `primalSpring/ecoPrimal/src/soundstage/` for the reference implementation.
+
+### Genetic Enrollment
+
+The **two-layer trust model** for gate-to-gate authentication:
+
+| Layer | What It Proves | Mechanism |
+|-------|---------------|-----------|
+| **Mito gate** | "I belong to this ecosystem" | Mitochondrial beacon seed — shared family secret |
+| **Nuclear lineage distance** | "I am N hops from the root" | Derivation chain from the nuclear seed → trust tier |
+
+Genetic enrollment replaces static shared secrets with a biological trust
+model: gates that share closer genetic lineage (shorter derivation distance)
+receive higher trust tiers. A gate proves enrollment by demonstrating
+knowledge of both its mito beacon membership AND its nuclear derivation chain.
+
+bearDog manages the genetic crypto (`genetic.*` capabilities). songBird
+consumes it for `enrollment.verify` during mesh join. The trust tiers feed
+into `capability.call` routing priority — genetically closer gates are
+preferred for capability dispatch.
+
+### Tower Shadow
+
+**Shadow deployment mode** for Tower Atomic — running the Tower transport
+stack alongside WireGuard, mirroring traffic to collect comparative metrics
+without affecting production routing.
+
+Key commands:
+- `membrane tower.shadow --enable` — activate shadow mode
+- `songbird benchmark --mode tower-atomic --peer <addr>` — measure Tower latency/throughput
+- `songbird benchmark --mode wireguard --peer <addr>` — WireGuard baseline
+
+Shadow deploy collects continuous metrics (latency, throughput, jitter) via
+a systemd timer (`tower-shadow.timer`) running every 60 minutes. Results are
+JSON files stored in `benchScale/tower_shadow/`. This data drives the Tower
+EXCEEDS claims (353x LAN, 1.7x WAN sustained).
+
+Shadow mode is the validation phase before Phase 3 cutover (Tower replaces WG).
+
+### LAN Mesh Routing
+
+The **LAN-first routing preference** for same-switch peers. When two gates
+are on the same physical switch (e.g., CRS310 backbone), `mesh.find_path`
+should return an `EndpointType::Local` path (sub-millisecond) rather than
+routing through the WG overlay (100–200ms RTT through VPS relay).
+
+`primalSpring` implements this via `MeshEntry::preferred_address()` which
+checks `lan_addr` before falling back to the WG overlay address.
+
+**P0 gap (Wave 150x)**: songBird's `mesh.find_path` does not yet honor
+`EndpointType::Local` — it returns the WG overlay for all peers regardless
+of LAN availability. This imposes a 353x–1200x latency penalty for
+`capability.call` dispatch between co-located gates.
+
+### CallerContext
+
+A **per-connection identity object** wired into songBird's IPC method gate.
+When a primal connects via UDS (Unix Domain Socket), the connection extracts
+`SO_PEERCRED` (Linux peer credentials: PID, UID, GID) and attaches a
+`CallerContext` to every subsequent method call on that connection.
+
+The method gate uses `CallerContext` to:
+- Verify the caller's PID maps to a known primal process
+- Enforce per-method access control (some methods are local-only)
+- Reject unauthenticated remote callers attempting local-only operations
+
+CallerContext + UDS hardening (socket permissions, symlink rejection, TOCTOU
+protection) together resolved 7 pen-test findings in Wave 150x.
+
+### Chimera Phase 0
+
+The **first step** in chimera evolution: extracting shared library code from
+primals that currently communicate exclusively via IPC. Phase 0 targets
+bearDog's crypto primitives — the hot-path crypto operations that every
+primal uses frequently enough to justify in-process linking over IPC overhead.
+
+Chimera Phase 0 prerequisites:
+1. Composition validation (bearDog UDS crypto works for all cold-path) ✓
+2. Hot-path identification (`CRYPTO_COMPOSITION.md` classifies 19 seams)
+3. Library extraction (bearDog → `beardog-core` crate)
+4. Feature-gate migration (primals opt-in to embedded crypto)
+
+Phase 0 is unblocked once composition validation is complete (songBird P1
+crypto delegation finishing).
 
 See `primalSpring/ecoPrimal/src/soundstage/` for the reference implementation.
 
@@ -1150,3 +1235,11 @@ the validator assumes the network is hostile.
 | **Bond degradation** | Outward trust weakening across VPS diderm: covalent (gate) → metallic (inner) → ionic (pepti) → weak (GitHub) |
 | **Endosymbiosis** | Progressive internalization of external systems into sovereign infrastructure (weak → covalent over time) |
 | **Capability advertisement** | Drawbridge auto-registers route capabilities into IPC registry and announces to mesh peers at startup (Wave 133d) |
+| **Genetic enrollment** | Two-layer trust: mito gate (family membership) + nuclear lineage distance (derivation hops → trust tier) |
+| **Tower Shadow** | Shadow deploy mode — Tower runs alongside WG, collects comparative metrics without affecting production |
+| **LAN mesh routing** | `preferred_address()` prefers `lan_addr` for same-switch peers over WG overlay (353x latency difference) |
+| **CallerContext** | Per-UDS-connection identity (SO_PEERCRED) wired into method gate for access control |
+| **Chimera Phase 0** | First chimera step — extract bearDog hot-path crypto into shared library for in-process use |
+| **EndpointType** | Routing variant: `Local` for LAN direct paths (sub-ms) vs `Overlay` for WG relay (100ms+) |
+| **K-Derm trust tiers** | Outer/inner/data domain classification in `capability_registry.toml` — method-level access control |
+| **Shadow benchmark** | Continuous Tower vs WG metrics collected by `tower-shadow.timer` (hourly, JSON output) |
