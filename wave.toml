@@ -12,7 +12,7 @@
 id = 151
 sub = "a"
 date = "2026-07-25"
-posture = "TOWER ATOMIC COMPLETE. P0 DEPOT DIVERGENCE: 12/13 binaries stale (Jun 15), no aarch64 target, builder unknown. cellMembrane: builder identity + full harvest + multi-target. sporeGate: full harvest + depot refresh + aarch64 cross-compile. grapheneGate: evolve to floating autonomous gate. 197 scenarios PASS, 1 debt (HSM). 43/43 converged."
+posture = "TOWER COMPLETE + DEPOT RESOLVED. 28 binaries × 2 arch (x86_64 + aarch64), provenance fresh, builder=sporeGate. songBird crypto delegation 6/6 DONE — chimera Phase 0 UNBLOCKED. bearDog dns_timeout bug fixed. 197 scenarios PASS, 1 debt (HSM). 43/43 converged."
 publisher = "eastGate-overwatch"
 
 [gates]

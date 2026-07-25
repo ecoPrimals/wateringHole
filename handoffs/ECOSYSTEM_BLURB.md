@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 151a
 
-**Date**: Jul 25, 2026 16:05 EDT | **Wave**: 151a | **From**: eastGate overwatch
-**Posture**: **TOWER ATOMIC COMPLETE. DEPOT DIVERGENCE P0: 12/13 primals stale (Jun 15), no aarch64 target. cellMembrane code + sporeGate full harvest required.**
+**Date**: Jul 25, 2026 19:10 EDT | **Wave**: 151a | **From**: eastGate overwatch
+**Posture**: **TOWER COMPLETE + DEPOT P0 RESOLVED. 28 binaries × 2 arch. songBird crypto delegation 6/6 DONE. Chimera Phase 0 unblocked.**
 
 ---
 
@@ -53,46 +53,37 @@ bearDog publication pen test, chimera Phase 0 (post composition).
 
 ---
 
-## P0 — DEPOT DIVERGENCE
+## P0 DEPOT DIVERGENCE — RESOLVED
 
-The `golgiBody` depot (`plasmidBin`) is **stale and incomplete**:
+| What | Before | After |
+|------|--------|-------|
+| Provenance age | 40 days (Jun 15) | 0 days (Jul 25) |
+| Builder identity | `"unknown"` | `"sporeGate"` |
+| x86_64 primals | 13 (12 stale) | 14 (all fresh) |
+| aarch64 primals | 0 (no directory) | 14 (all fresh) |
+| Total binaries | 13 | **28** (14 × 2 architectures) |
 
-| Problem | Evidence |
-|---------|----------|
-| `provenance.toml` generated **Jun 15** | 40 days stale |
-| Builder identity | `"unknown"` — no gate attribution |
-| 12/13 x86_64 binaries from Jul 15 or earlier | Predate Tower hardening, crash-loop breakers, deep debt |
-| songBird only recent rebuild (Jul 24) | All others lag by weeks |
-| **No aarch64 target directory** | grapheneGate has zero binaries |
-| bearDog binary predates defense-in-depth | Enrollment decomp, BTSP strict, genetic enrollment ALL missing |
-| skunkBat binary predates public release | Cipher floor, spawn-rate detection missing |
+**cellMembrane code** (this cascade): builder attribution via `resolve_local_gate_identity()`,
+multi-target harvest from manifest `targets` field, `plasmid.status` staleness
+alarm (>7 day warning). 1,156 tests, 0 clippy.
 
-**The sovereign CI pipeline (Phase 2 drift detection) should catch this**, but
-sporeGate hasn't run a full harvest since June. The pipeline only fires on
-push-triggered rebuilds (Phase 1), not periodic full sweeps.
+**sporeGate AAR**: Full manual harvest of 14 primals × 2 arch, depot refreshed
+to golgiBody. Cross-compile "just works" — zero source changes needed for
+Silicon Atheism. Rename trick required for live depot updates (ETXTBSY).
 
-### cellMembrane code (sporeGate team)
+**songBird crypto delegation** (this cascade): **6/6 seams COMPLETE**. JWT
+signing, checkpoint hashing, auth login all delegate HMAC-SHA256/SHA-256 to
+bearDog via `CryptoProvider` when reachable. Local fallback retained behind
+`local-crypto-fallback` feature flag. **Chimera Phase 0 unblocked.**
 
-| # | Task | Priority |
-|---|------|----------|
-| 1 | `provenance.toml` must record `builder = "<gate>"` on harvest | P0 |
-| 2 | `plasmid.harvest --all` command: full sweep of all 13 primals | P0 |
-| 3 | Multi-target harvest: `targets` field in manifest drives x86_64 + aarch64 | P1 |
-| 4 | Periodic drift alarm: `plasmid.status` warns when >7 days stale | P1 |
-
-### sporeGate topology/hardware (deployment)
-
-| # | Task | Priority |
-|---|------|----------|
-| 1 | Run `membrane plasmid.harvest --all` — full 13-primal rebuild for x86_64 | P0 |
-| 2 | Push to golgiBody depot: `membrane plasmid.refresh` | P0 |
-| 3 | Install `aarch64-unknown-linux-musl` rustup target + cross-linker | P1 |
-| 4 | Run `membrane plasmid.harvest --all --target aarch64-unknown-linux-musl` | P1 |
-| 5 | grapheneGate: deploy as floating gate (own cellMembrane, Tower Atomic, LAN/WAN mesh) | P2 |
+**bearDog** (this cascade): Fixed `dns_timeout` → `pool_size` mapping bug,
+`from_env()` wiring for `OperationRouterConfig`/`UniversalHsmConfig`,
+7 stale spec headers corrected.
 
 ### grapheneGate evolution path
 
-Current: ADB-tethered to eastGate → primalSpring validates via `PRIMAL_BIND_MODE=tcp_only`
+Current: ADB-tethered to eastGate → primalSpring validates via `PRIMAL_BIND_MODE=tcp_only`.
+aarch64 binaries now in depot.
 
 Target: Autonomous LAN/WAN gate → enrolled via `mesh.enroll` with BTSP HMAC,
 running Tower Atomic transport, own `cellMembrane` instance, Titan M2 HSM
@@ -161,15 +152,15 @@ provides the data layer that makes both meaningful:
 
 ## CONTINUING WORK (all teams, parallel to Nest Atomic)
 
-### songBird (flockGate) — Tower debt CLEAR, P2 remaining
+### songBird (flockGate) — Tower debt CLEAR, crypto delegation DONE
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | ~~Failover resilience~~ | ~~P1~~ | **DONE** — retry, health, socket watch |
-| 2 | ~~Capability trust~~ | ~~P1~~ | **DONE** — announce validation, revocation |
-| 3 | ~~Wire IPC pool into dispatch~~ | ~~P2~~ | **DONE** — `ipc_pool.execute_jsonrpc` |
-| 4 | Crypto delegation to bearDog (6 seams remaining) | P1 | IN PROGRESS |
-| 5 | songBird `ClientHello` for BTSP strict mode | P2 | NEW — consumer-side of bearDog defense-in-depth |
+| 1 | ~~Failover resilience~~ | ~~P1~~ | **DONE** |
+| 2 | ~~Capability trust~~ | ~~P1~~ | **DONE** |
+| 3 | ~~Wire IPC pool into dispatch~~ | ~~P2~~ | **DONE** |
+| 4 | ~~Crypto delegation to bearDog (6 seams)~~ | ~~P1~~ | **DONE** — JWT, checkpoint, auth all delegate |
+| 5 | songBird `ClientHello` for BTSP strict mode | P2 | Consumer-side of bearDog defense-in-depth |
 
 ### bearDog (flockGate) — P2 remaining
 
@@ -183,16 +174,16 @@ provides the data layer that makes both meaningful:
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | **Full depot harvest** (all 13 primals x86_64) | **P0** | 12/13 stale |
-| 2 | **Depot refresh** to golgiBody | **P0** | After harvest |
-| 3 | aarch64 cross-compile setup + harvest | P1 | No target dir |
-| 4 | Gate enrollment (southGate, strandGate) | P1 | |
-| 5 | grapheneGate as floating autonomous gate | P2 | ADB-only now |
+| 1 | ~~Full depot harvest (14 primals × 2 arch)~~ | ~~P0~~ | **DONE** — 28 binaries |
+| 2 | ~~Depot refresh to golgiBody~~ | ~~P0~~ | **DONE** — rsync complete |
+| 3 | ~~aarch64 cross-compile~~ | ~~P1~~ | **DONE** — zero build failures |
+| 4 | Gate enrollment (southGate, strandGate) | P1 | USB staged |
+| 5 | grapheneGate as floating autonomous gate | P2 | aarch64 binaries ready |
 
-### Chimera Phase 0 (gate: composition validated)
+### Chimera Phase 0 (gate: crypto delegation DONE)
 
 Shared library extraction — bearDog crypto, songBird routing, skunkBat
-defense into `libtower.so`. Blocked on songBird crypto delegation (6 seams).
+defense into `libtower.so`. **UNBLOCKED** — songBird crypto delegation 6/6 complete.
 
 ### sporePrint Pipeline (parallel)
 
@@ -208,7 +199,7 @@ Nest Atomic Phase 0 (nestGate CAS integration testing).
 | 1 | Temporal/Coordination | GREEN — 43/43 synced |
 | 2 | Ecological | GREEN — 197 scenarios, **1 debt** (grapheneGate HSM) |
 | 3 | Hardware | AMBER — 4 offline gates |
-| 4 | Sovereignty | **AMBER** — Tower 353x, CI LIVE, **depot 40 days stale** |
+| 4 | Sovereignty | GREEN — Tower 353x, CI LIVE, depot FRESH (28 binaries × 2 arch) |
 | 5 | Public Surface | GREEN — 6/6 healthy, skunkBat public |
 | 6 | Compositions | GREEN — Tower composition validated, chimera Phase 0 ready |
 | 7 | Documentation | GREEN — 33+ docs archived, deep debt swept |
