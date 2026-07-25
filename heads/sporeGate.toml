@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-25T15:15:00Z"
+updated = "2026-07-25T15:22:00Z"
 wave = "150x"
 
 [heads]
@@ -35,12 +35,12 @@ petaltongue_version = "1.7.0"
 membrane_version = "0.1.0 (eee7e84)"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
 depot_status = "LIVE — 59 binaries × 4 architectures"
-mesh_status = "6-GATE MESH"
+mesh_status = "6-GATE MESH — local:1, overlay:2 (LAN preference ACTIVE)"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
 
 [tower]
 status = "3/3 LIVE"
-songbird = "LIVE — LAN dispatch active, eastGate registered as LAN peer (192.168.4.244:7700)"
+songbird = "LIVE — LAN dispatch PROVEN. mesh.find_path returns local/priority=0 for eastGate (192.168.4.244:7700). mesh-init passes lan_peers param."
 beardog = "LIVE"
 skunkbat = "LIVE (now PUBLIC)"
 
@@ -51,7 +51,7 @@ gates_active = ["sporeGate", "flockGate", "golgiBody"]
 
 [benchmark]
 phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard"
-lan_tower = "0.45ms avg (353x vs WG overlay)"
+lan_tower = "0.454ms avg, 0.444ms p50, 0.019ms jitter (353x vs WG overlay) — post-LAN-dispatch deploy"
 wan_tower = "76.8ms avg, 1.7x sustained"
 iperf3_lan = "2.36 Gbps sporeGate→eastGate (CONFIRMED)"
 
@@ -71,7 +71,7 @@ git = "200"
 root = "301"
 
 [bilateral_verification]
-ssh = "CONFIRMED — eastgate@192.168.4.244 works (not sporegate@ or root@)"
+ssh = "CONFIRMED — eastgate@192.168.4.244 works. SSH config fixed (User=eastgate, not sporegate)."
 iperf3 = "CONFIRMED — 2.36 Gbps sporeGate→eastGate LAN"
 biomeos_beacon = "CONFIRMED GONE — unit removed entirely"
 manifest_ip = "CONFIRMED correct (192.168.4.244)"
@@ -80,7 +80,7 @@ manifest_ip = "CONFIRMED correct (192.168.4.244)"
 tower_353x = "PROVEN"
 known_debt_burn = "36→9"
 sporeprint_transplant = "DONE"
-songbird_lan_meshinit = "DEPLOYED + LAN peer registered"
+songbird_lan_meshinit = "DEPLOYED + VERIFIED — mesh.find_path=local/pri=0, 0.454ms avg LAN latency"
 genetic_enrollment = "LIVE in bearDog source"
 bilateral_blockers = "ALL RESOLVED — SSH, iperf3, biomeos-beacon, manifest IP"
 songbird_build_fix = "c520414 — closure return type fix in security_sovereign.rs"
