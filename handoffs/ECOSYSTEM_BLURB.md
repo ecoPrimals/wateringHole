@@ -88,9 +88,10 @@ unit, LAN registry, deep debt sweep. cellMembrane is clean.
 |---|------|----------|--------|
 | 1 | **Unblock sporeGate bilateral** | **P0** | SSH key + biomeos-beacon |
 | 2 | Scenario debt burn-down (9 remaining) | P1 | 197 scenarios, all PASS |
-| 3 | GLOSSARY.md refresh | P2 | Stale since Wave 138b |
-| 4 | PRIMAL_REGISTRY.md refresh | P2 | Stale since Wave 109 |
-| 5 | sporePrint impulse follow-up | P2 | 5 impulses for maturity badges |
+| 3 | **Divergence AAR** | DONE | 5 classes documented, rootPulse capability map |
+| 4 | GLOSSARY.md refresh | P2 | Stale since Wave 138b |
+| 5 | PRIMAL_REGISTRY.md refresh | P2 | Stale since Wave 109 |
+| 6 | sporePrint impulse follow-up | P2 | 5 impulses for maturity badges |
 
 ---
 
@@ -101,10 +102,17 @@ unit, LAN registry, deep debt sweep. cellMembrane is clean.
 | 1 | **Composition validation** — bearDog UDS cold-path | songBird P1 crypto delegation | flockGate |
 | 2 | **Chimera Phase 0** — shared library extraction | Composition validated | eastGate |
 | 3 | **sporePrint primal pipeline** — Zola → petalTongue + nestGate CAS | Design phase | eastGate |
-| 4 | Node Atomic (proton) — nestGate + Provenance Trio | Tower chimera maturity | all |
-| 5 | Nest Atomic (neutron) — distributed state | Node Atomic | all |
-| 6 | Phase 3 cutover — Tower replaces WG | Chimera + sustained validation | all |
-| 7 | rootPulse sovereign VCS | Provenance Trio maturity + Tower | all |
+| 4 | **rootPulse prototype** — loamSpine append-only ledger for gate heads | Divergence AAR evidence | eastGate |
+| 5 | Node Atomic (proton) — nestGate + Provenance Trio | Tower chimera maturity | all |
+| 6 | Nest Atomic (neutron) — distributed state | Node Atomic | all |
+| 7 | Phase 3 cutover — Tower replaces WG | Chimera + sustained validation | all |
+
+### Divergence Evidence (rootPulse motivation)
+
+5 divergence classes documented in `WATERFALL_CASCADE_DIVERGENCE_AAR_150x.md`:
+140 merge commits, 34 KNOWN_DEBT recalibrations, 3 blurb data losses, 2
+duplicate work incidents. All map to rootPulse capabilities (loamSpine DAG
+ledger, sweetGrass semantic braids, rhizoCrypt cross-repo lineage).
 
 ---
 
@@ -139,7 +147,7 @@ Cascade, Tower Deep Analysis, sporePrint Transplant.
 
 ---
 
-*Wave 150x: Tower 353x LAN. Genetic enrollment live (mito gate + nuclear
-lineage → trust tiers). Known debt 36→9. Chimera Phase 0 ready — composition
-validation is the gate. P0: eastGate bilateral (SSH key). 197 scenarios PASS.
-43/43 converged.*
+*Wave 150x: bearDog P2 clear (13,973 tests). skunkBat public. songBird LAN
+dispatch. 5 divergence classes documented — 140 merge commits, 34 calibration
+thrashes, 3 data losses all map to rootPulse capabilities. Chimera Phase 0
+ready. P0: eastGate bilateral. 197 scenarios PASS. 43/43 converged.*
