@@ -1,17 +1,17 @@
 # ecoPrimals Ecosystem Blurb — Wave 150x
 
-**Date**: Jul 25, 2026 10:14 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **TOWER 353x LAN. GENETIC ENROLLMENT LIVE. 9 DEBT. CHIMERA PHASE 0 READY.**
+**Date**: Jul 25, 2026 10:57 EDT | **Wave**: 150x | **From**: eastGate overwatch
+**Posture**: **bearDog P2 CLEAR. skunkBat PUBLIC. songBird LAN dispatch. DEBT 9. CHIMERA PHASE 0 READY.**
 
 ---
 
 ## WHERE WE ARE
 
-Tower Atomic exceeds WireGuard: **353x LAN** (0.45ms vs 158ms), **1.7x WAN**
-sustained. Genetic enrollment live — two-layer trust model (mito gate + nuclear
-lineage distance). LAN mesh.init shipped (priority routing). Known debt **9**
-(down from 36). 197 scenarios PASS. All code teams converged. P0: unblock
-sporeGate bilateral access (SSH key). Chimera Phase 0 unblocked.
+bearDog shipped bond-type cipher awareness + UDS backpressure — **all blurbed
+items DONE** (13,973 tests). skunkBat is now **PUBLIC** (SPDX headers + maturity
+badge). songBird shipped LAN path preference in `remote_dispatch` — peers
+sorted by priority (LAN 0 → overlay 1 → direct 2). whitePaper shipped 5
+security architecture docs (1,262 lines). Known debt **9**. P0: bilateral SSH.
 
 ---
 
@@ -30,37 +30,36 @@ sporeGate bilateral access (SSH key). Chimera Phase 0 unblocked.
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | Bond-type cipher awareness in BTSP | P2 | Covalent > ionic floor differentiation |
-| 2 | Backpressure signaling | P2 | Callers need feedback when saturated |
+| 1 | ~~Bond-type cipher awareness~~ | DONE | `BtspBondType` enum, per-type env keys, 6 tests |
+| 2 | ~~Backpressure signaling~~ | DONE | `SERVICE_OVERLOADED` + `Retry-After` header |
 | 3 | Android Keystore + grapheneGate | P2 | Code complete, awaiting hardware |
 | 4 | **Publication readiness** | P2 | Full pen test + validation before going public |
 
-All P1 DONE: cipher floor, blake3, genetic enrollment, seed rotation, deep debt.
-**Remains private** — crypto is the ecosystem root of trust. Goes public only
-after comprehensive pen testing and validation pass.
+**All blurbed items DONE.** 13,973 tests. Remains private — crypto root of
+trust goes public only after comprehensive pen testing and validation.
 
 ### songBird — transport/routing primal
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
 | 1 | Crypto delegation to bearDog | P1 | blake3 LIVE, 4 crates feature-gated, 6 seams remaining |
-| 2 | `mesh.find_path` LAN preference | P1 | Registration shipped — path selection logic needs evolution |
+| 2 | ~~`mesh.find_path` LAN preference~~ | DONE | `remote_dispatch` sorts peers by priority (LAN→overlay→direct) |
 | 3 | Failover retry (bearDog connection) | P2 | Transient restart = hard failure |
 | 4 | Health check surface in dispatch | P2 | cellMembrane needs health probes |
 | 5 | Socket filesystem watch | P2 | Reactive vs polling recovery |
 
 CallerContext, UDS hardening, pen test hardening, dependency diet — all DONE.
 
-### skunkBat — defense/protocol primal (PRIVATE → NEXT PUBLIC)
+### skunkBat — defense/protocol primal (NOW PUBLIC)
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | **Publication self-review** | **P1** | Team reviews code for public readiness |
+| 1 | ~~Publication self-review~~ | DONE | SPDX headers + .gitignore + maturity badge |
 | 2 | Capability announcement validation | P2 | Trust-on-first-use needs verification |
 | 3 | Capability revocation mechanism | P2 | No mesh-wide revocation yet |
 
-Cipher floor, deep debt, spawn-rate detection — all DONE. Clean for chimera.
-**Next to go public** — team should self-review before publication.
+Cipher floor, deep debt, spawn-rate detection — all DONE. **Now public.**
+Clean for chimera.
 
 ---
 
@@ -78,7 +77,7 @@ unit, LAN registry, deep debt sweep. cellMembrane is clean.
 | 1 | iperf3 sustained throughput | P1 | BLOCKED — needs eastGate SSH |
 | 2 | Gate enrollment (southGate) | P1 | USB staged, needs physical cabling |
 | 3 | Gate enrollment (strandGate) | P1 | USB staged, needs physical cabling |
-| 4 | `mesh.find_path` LAN preference deploy | P1 | Redeploy songBird with LAN mesh.init |
+| 4 | Redeploy songBird with LAN dispatch | P1 | LAN priority sorting shipped in code — needs deploy |
 | 5 | Manifest: eastGate LAN IP correction | P1 | `192.168.4.5` → `192.168.4.244` |
 
 ---
