@@ -10,6 +10,7 @@ updated = "2026-07-25T01:55:00Z"
 posture = "GREEN — P0 LAN routing fix shipped, known debt 30→10, suite green"
 
 [repos]
+skunkBat = "a8cf5aa"
 primalSpring = "cdb91f0"
 wateringHole = "4a4a68a2"
 songBird = "efabd5d"
@@ -31,7 +32,7 @@ songBird_pen_hardening = "DONE"
 songBird_dep_diet = "DONE"
 songBird_crypto_delegation = "blake3 LIVE, 4 crates feature-gated"
 songBird_lan_routing = "FIXED — SONGBIRD_LOCAL_PEERS env + mesh.init lan_peers param"
-skunkBat = "CLEAN"
+skunkBat = "CLEAN — publication self-review complete, SPDX 71/71, ready for public"
 
 [mesh]
 interface = "wg0"
