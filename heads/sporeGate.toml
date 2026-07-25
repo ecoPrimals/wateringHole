@@ -1,18 +1,18 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-25T15:15:00Z
+# Gate: sporeGate | Updated: 2026-07-25T18:55:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-25T15:22:00Z"
-wave = "150x"
+updated = "2026-07-25T18:55:00Z"
+wave = "151a"
 
 [heads]
-bearDog = "07e7f1e"
-songBird = "c520414"
+bearDog = "6a351b8"
+songBird = "59c221b"
 nestGate = "d5d45df"
-biomeOS = "c0f51e6"
+biomeOS = "3face71"
 rhizoCrypt = "ae205a8"
 squirrel = "68c9e04"
 sweetGrass = "76dc35f"
@@ -24,25 +24,25 @@ petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
 cellMembrane = "7c99900"
-primalSpring = "692a92e"
-wateringHole = "ecc9305"
+primalSpring = "32b225c"
+wateringHole = "6c11292"
 sporePrint = "67cc325"
 
 [deploy]
-songbird_version = "0.2.1 (c520414) — LAN mesh.init + blake3 + caller identity + UDS hardening DEPLOYED"
-beardog_version = "0.10.0-silicon-atheism (bond-type cipher + backpressure in source, deploy after pen test)"
+songbird_version = "0.2.1 (59c221b) — tower debt 6/7, blake3 method fix, mesh dedup"
+beardog_version = "0.9.0 (6a351b8) — enrollment decomp, BTSP UDS strict, genetic enrollment"
 petaltongue_version = "1.7.0"
-membrane_version = "0.1.0 (eee7e84)"
+membrane_version = "0.1.0 (7c99900)"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
-depot_status = "LIVE — 59 binaries × 4 architectures"
-mesh_status = "6-GATE MESH — local:1, overlay:2 (LAN preference ACTIVE)"
+depot_status = "FRESH — 14 primals × 2 architectures (x86_64 + aarch64), provenance tracked"
+mesh_status = "6-GATE MESH"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
 
 [tower]
-status = "3/3 LIVE"
-songbird = "LIVE — LAN dispatch PROVEN. mesh.find_path returns local/priority=0 for eastGate (192.168.4.244:7700). mesh-init passes lan_peers param."
-beardog = "LIVE"
-skunkbat = "LIVE (now PUBLIC)"
+status = "TOWER ATOMIC COMPLETE — 3/3 LIVE"
+songbird = "LIVE — LAN dispatch, tower debt 7/7 resolved"
+beardog = "LIVE — BTSP strict, genetic enrollment, enrollment decomp"
+skunkbat = "LIVE (PUBLIC)"
 
 [tower_shadow]
 status = "ACTIVE — hourly data"
@@ -51,15 +51,24 @@ gates_active = ["sporeGate", "flockGate", "golgiBody"]
 
 [benchmark]
 phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard"
-lan_tower = "0.454ms avg, 0.444ms p50, 0.019ms jitter (353x vs WG overlay) — post-LAN-dispatch deploy"
+lan_tower = "0.454ms avg (353x vs WG overlay)"
 wan_tower = "76.8ms avg, 1.7x sustained"
 iperf3_lan = "2.36 Gbps sporeGate→eastGate (CONFIRMED)"
 
+[harvest]
+wave = "151a"
+harvested = "2026-07-25T22:27:49Z"
+x86_64_primals = 14
+aarch64_primals = 14
+x86_64_status = "FRESH — all 14 primals rebuilt from HEAD"
+aarch64_status = "FRESH — all 14 primals cross-compiled, NEW target dir created"
+provenance = "builder=sporeGate, toolchain=rustc 1.94.0"
+golgi_pushed = "CONFIRMED — both architectures synced"
+
 [primalspring]
-head = "692a92e"
+head = "32b225c"
 scenarios = 197
-known_debt = "9 (graphenegate=2+sporeprint=1 sporeGate-specific, 7 tower stress/pen)"
-tests = "1241 passed, 0 failed, 2 ignored"
+known_debt = "1 (grapheneGate HSM) — per upstream calibration"
 suite_status = "GREEN"
 
 [surfaces]
@@ -71,24 +80,26 @@ git = "200"
 root = "301"
 
 [bilateral_verification]
-ssh = "CONFIRMED — eastgate@192.168.4.244 works. SSH config fixed (User=eastgate, not sporegate)."
+ssh = "CONFIRMED — eastgate@192.168.4.244"
 iperf3 = "CONFIRMED — 2.36 Gbps sporeGate→eastGate LAN"
-biomeos_beacon = "CONFIRMED GONE — unit removed entirely"
+biomeos_beacon = "CONFIRMED GONE"
 manifest_ip = "CONFIRMED correct (192.168.4.244)"
 
 [resolved]
+tower_atomic = "COMPLETE — 7/7 debt resolved (151a)"
+depot_divergence = "RESOLVED — full 14-primal harvest × 2 architectures, provenance tracked, golgiBody synced"
 tower_353x = "PROVEN"
-known_debt_burn = "36→9"
+known_debt_burn = "36→1 (grapheneGate HSM only)"
 sporeprint_transplant = "DONE"
-songbird_lan_meshinit = "DEPLOYED + VERIFIED — mesh.find_path=local/pri=0, 0.454ms avg LAN latency"
-genetic_enrollment = "LIVE in bearDog source"
-bilateral_blockers = "ALL RESOLVED — SSH, iperf3, biomeos-beacon, manifest IP"
-songbird_build_fix = "c520414 — closure return type fix in security_sovereign.rs"
-iperf3_throughput = "2.36 Gbps confirmed"
-skunkbat_public = "NOW PUBLIC (a8cf5aa)"
+songbird_lan_meshinit = "DEPLOYED"
+genetic_enrollment = "LIVE"
+bilateral_blockers = "ALL RESOLVED"
+songbird_build_fix = "c520414 → 59c221b (tower debt clear)"
+skunkbat_public = "PUBLIC (a8cf5aa)"
 
 [remaining]
 gate_enrollment_southgate = "P1 — USB staged, needs physical cabling"
 gate_enrollment_strandgate = "P1 — USB staged, needs physical cabling"
-songbird_crypto_delegation = "P1 — blake3 LIVE, 6 seams remaining (flockGate)"
+songbird_crypto_delegation = "P1 — 6 seams remaining (flockGate)"
 beardog_pen_test = "P2 — full pen test before publication"
+graphenegate_floating = "P2 — evolve from ADB peripheral to autonomous gate"
