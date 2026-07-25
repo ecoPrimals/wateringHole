@@ -26,15 +26,18 @@ sporeGate bilateral access (SSH key). Chimera Phase 0 unblocked.
 
 ## CODE TEAMS (flockGate)
 
-### bearDog — crypto primal
+### bearDog — crypto primal (PRIVATE — last to publish, post pen-test validation)
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
 | 1 | Bond-type cipher awareness in BTSP | P2 | Covalent > ionic floor differentiation |
 | 2 | Backpressure signaling | P2 | Callers need feedback when saturated |
 | 3 | Android Keystore + grapheneGate | P2 | Code complete, awaiting hardware |
+| 4 | **Publication readiness** | P2 | Full pen test + validation before going public |
 
 All P1 DONE: cipher floor, blake3, genetic enrollment, seed rotation, deep debt.
+**Remains private** — crypto is the ecosystem root of trust. Goes public only
+after comprehensive pen testing and validation pass.
 
 ### songBird — transport/routing primal
 
@@ -48,14 +51,16 @@ All P1 DONE: cipher floor, blake3, genetic enrollment, seed rotation, deep debt.
 
 CallerContext, UDS hardening, pen test hardening, dependency diet — all DONE.
 
-### skunkBat — defense/protocol primal
+### skunkBat — defense/protocol primal (PRIVATE → NEXT PUBLIC)
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | Capability announcement validation | P2 | Trust-on-first-use needs verification |
-| 2 | Capability revocation mechanism | P2 | No mesh-wide revocation yet |
+| 1 | **Publication self-review** | **P1** | Team reviews code for public readiness |
+| 2 | Capability announcement validation | P2 | Trust-on-first-use needs verification |
+| 3 | Capability revocation mechanism | P2 | No mesh-wide revocation yet |
 
 Cipher floor, deep debt, spawn-rate detection — all DONE. Clean for chimera.
+**Next to go public** — team should self-review before publication.
 
 ---
 
