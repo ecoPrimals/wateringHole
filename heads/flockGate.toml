@@ -1,67 +1,57 @@
-# flockGate status — Wave 150x (rapid convergence)
+# flockGate status — Wave 150x (LAN routing fix + convergence)
 # Gate: flockGate | Role: CODE TEAM — bearDog, songBird, skunkBat
-# Updated: 2026-07-25T00:30:00Z
+# Updated: 2026-07-25T01:55:00Z
 
 [meta]
 gate = "flockGate"
 role = "Code team — primal source evolution"
 wave = "150x"
-updated = "2026-07-25T00:30:00Z"
-posture = "GREEN — convergence confirmed, P1 code DONE, suite green"
+updated = "2026-07-25T01:55:00Z"
+posture = "GREEN — P0 LAN routing fix shipped, known debt 30→10, suite green"
 
 [repos]
 primalSpring = "cdb91f0"
-wateringHole = "ae160a19"
-songBird = "bd8e198"
+wateringHole = "4a4a68a2"
+songBird = "efabd5d"
 bearDog = "d1554f9"
 
+[p0_lan_routing_fix]
+commit = "218966d — register LAN peers during mesh.init"
+extension = "SONGBIRD_LOCAL_PEERS env for auto-seed path"
+root_cause = "WG auto-discovery only registered overlay endpoints, never Local"
+impact = "353x latency penalty for capability.call on same-switch peers"
+fix = "mesh.init now accepts lan_peers param + SONGBIRD_LOCAL_PEERS env merges with persisted"
+validation = "EndpointType::Local (priority 0) always wins over Overlay (priority 1) in update_best_path"
+
 [code_team_status]
-bearDog_cipher_floor = "DONE"
-bearDog_blake3 = "DONE"
-bearDog_deep_debt = "DONE"
-songBird_crypto_delegation = "MIGRATING — blake3 wired, 4 crates feature-gated"
+bearDog_all_p1 = "DONE"
 songBird_caller_identity = "DONE"
 songBird_uds_hardening = "DONE"
 songBird_pen_hardening = "DONE"
 songBird_dep_diet = "DONE"
-skunkBat = "CLEAN — no open P1"
+songBird_crypto_delegation = "blake3 LIVE, 4 crates feature-gated"
+songBird_lan_routing = "FIXED — SONGBIRD_LOCAL_PEERS env + mesh.init lan_peers param"
+skunkBat = "CLEAN"
 
 [mesh]
 interface = "wg0"
 local_ip = "10.13.37.6"
 songbird_version = "0.2.1"
-songbird_uptime = "fresh restart (socket cleanup)"
-peers_registered = 8
+peers_online = 8
 stale = ["ironGate"]
-
-[wan_subdomain_posture]
-webb_primals_eco = "200 — 227ms"
-git_primals_eco = "200 — 133ms"
-membrane_primals_eco = "200 — 127ms"
-
-[esotericWebb]
-status = "LIVE — 4+ days"
-pid = 3541637
-
-[petalTongue]
-status = "LIVE — 2+ days"
-pid = 2681175
-
-[tower_shadow]
-results = 360
-note = "267x LAN, 1.7x WAN sustained"
 
 [primalSpring]
 scenarios = 196
 tests = 1240
 passed = 1240
 failed = 0
-known_debt_count = 29
+known_debt_count = 10
 
 [remaining_divergence]
+p1 = ["Topology P1s: sporeGate team (iperf3, southGate, strandGate, biomeos-beacon, SSH)"]
 p2 = [
     "bearDog: enrollment seed rotation",
     "bearDog: Android Keystore + grapheneGate (hardware-blocked)",
     "Chimera Phase 0 (after composition validated end-to-end)",
 ]
-note = "P1 code team work DONE. Awaiting Phase 2 IPC benchmarking for chimera readiness."
+note = "Code team P1 complete. LAN routing fix shipped. Debt 30→10."
