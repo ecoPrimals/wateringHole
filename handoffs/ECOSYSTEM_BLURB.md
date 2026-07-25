@@ -1,19 +1,26 @@
 # ecoPrimals Ecosystem Blurb — Wave 150x
 
-**Date**: Jul 24, 2026 20:45 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **TOWER 353x LAN. KNOWN DEBT 30→10. LAN routing gap documented. 3 eastGate bilateral blockers.**
+**Date**: Jul 25, 2026 10:04 EDT | **Wave**: 150x | **From**: eastGate overwatch
+**Posture**: **GENETIC ENROLLMENT LIVE. Tower 353x LAN. DEBT 30→9. LAN mesh.init shipped. enrollment-replay RESOLVED.**
 
 ---
 
 ## WHERE WE ARE
 
-Tower **353x LAN** (0.45ms vs 158ms WG, 50-probe sporeGate→eastGate). WAN
-parity confirmed. **Known debt 30→10** — CallerContext + UDS hardening
-resolved 7 pen scenarios. blake3 delegation LIVE. **Key gap found**: songBird
-`mesh.find_path` returns WG overlay instead of LAN — `peer.connect` works but
-mesh routing doesn't prefer `EndpointType::Local`. 353x penalty for
-`capability.call` dispatch on same-switch peers. sporePrint transplant done.
-3 eastGate bilateral blockers (SSH key, iperf3, biomeos-beacon). P0 CLEAR.
+**bearDog shipped full genetic enrollment** — two-layer model mirroring
+biological DNA: mitochondrial gate (FAMILY_SEED HMAC) + nuclear lineage
+distance (tree hops → trust tiers: identity/kin/sibling/extended/distant).
+Seed rotation via HKDF hierarchy, generation-based with grace period.
++1168/-2582 lines (including chaos test cleanup).
+
+songBird shipped **LAN peer registration in `mesh.init`** — `lan_peers`
+parameter registers same-subnet peers as `EndpointType::Local` (priority 0),
+overlay peers demoted to priority 1. Persisted `peers.toml` LAN addrs
+auto-restored on restart. This addresses the 353x penalty gap.
+
+**Known debt 30→9.** `enrollment-replay` fully RESOLVED by genetic seed
+rotation. New scenario `mesh-lan-path-preference` added (2 known gap —
+`mesh.find_path` preference logic still needs evolution). P0 CLEAR.
 
 ---
 
@@ -26,8 +33,9 @@ mesh routing doesn't prefer `EndpointType::Local`. 353x penalty for
 | 1 | ~~Bond-type cipher floor enforcement~~ | DONE | BTSP negotiation rejects below floor |
 | 2 | ~~`crypto.hash.blake3` capability~~ | DONE | songBird can now delegate blake3 via UDS |
 | 3 | ~~Deep debt sweep~~ | DONE | Hardcoding eliminated, capability-based config |
-| 4 | Enrollment seed rotation | P2 | Queued |
-| 5 | Android Keystore + grapheneGate validation | P2 | Code complete, awaiting hardware |
+| 4 | ~~Enrollment seed rotation~~ | DONE | Genetic HKDF hierarchy, generation-based with grace period |
+| 5 | ~~Two-layer genetic enrollment~~ | DONE | Mito gate + nuclear lineage distance → trust tiers |
+| 6 | Android Keystore + grapheneGate validation | P2 | Code complete, awaiting hardware |
 
 bearDog is the ecosystem crypto provider. All primals route crypto through
 bearDog UDS (`crypto.*` capabilities). Hot-path crypto stays local until
@@ -78,7 +86,7 @@ skunkBat is clean. No open P1. Future work: chimera integration.
 | 1 | iperf3 sustained throughput | P1 | **BLOCKED** — needs eastGate iperf3 server or SSH access |
 | 2 | Gate enrollment (southGate) | P1 | USB staged, needs physical cabling |
 | 3 | Gate enrollment (strandGate) | P1 | USB staged, needs physical cabling + WG IP allocation |
-| 4 | songBird LAN peer discovery | **P0** | **GAP**: `mesh.find_path` returns overlay, not LAN — **flockGate code fix** |
+| 4 | songBird LAN peer discovery | P1 | `lan_peers` in mesh.init SHIPPED — `mesh.find_path` preference still needs evolution |
 | 5 | Fix biomeos-beacon unit (eastGate) | P1 | Disable phantom unit (11,161 restarts) |
 | 6 | SSH access sporeGate→eastGate | P1 | No key auth configured |
 | 7 | Manifest: eastGate LAN IP | P1 | Correct `192.168.4.5` → `192.168.4.244` |
@@ -95,7 +103,7 @@ skunkBat is clean. No open P1. Future work: chimera integration.
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | primalSpring scenario debt burn-down | P1 | **10 known debt** (196 scenarios, all PASS) |
+| 1 | primalSpring scenario debt burn-down | P1 | **9 known debt** (197 scenarios, all PASS) |
 | 2 | Unblock sporeGate (iperf3 server, SSH key, biomeos-beacon) | **P0** | **Bilateral**: add sporeGate pubkey to eastGate `authorized_keys` |
 | 3 | sporePrint primal pipeline (Zola → petalTongue + nestGate CAS) | P2 | Design phase |
 | 4 | CredentialStore squirrel integration | P2 | bearDog `FileVault` + squirrel IPC |
@@ -135,7 +143,7 @@ skunkBat is clean. No open P1. Future work: chimera integration.
 | # | Dimension | Status |
 |---|-----------|--------|
 | 1 | Temporal/Coordination | GREEN — 43/43 synced |
-| 2 | Ecological | GREEN — 196 scenarios, **10 debt** |
+| 2 | Ecological | GREEN — 197 scenarios, **9 debt** |
 | 3 | Hardware | AMBER — 4 offline gates |
 | 4 | Sovereignty | GREEN — Tower EXCEEDS WG, 6/6, CI LIVE |
 | 5 | Public Surface | GREEN — 6/6 healthy |
@@ -147,8 +155,7 @@ skunkBat is clean. No open P1. Future work: chimera integration.
 
 ---
 
-*Wave 150x: Tower 353x LAN (0.45ms vs 158ms). Known debt 30→10. LAN routing
-gap documented — `mesh.find_path` prefers overlay over LAN (353x penalty for
-capability dispatch). blake3 delegation LIVE. sporePrint transplant DONE. 3
-eastGate bilateral blockers (SSH key, iperf3, biomeos-beacon). 196 scenarios
-PASS. 43/43 converged.*
+*Wave 150x: bearDog genetic enrollment LIVE — two-layer model (mito gate +
+nuclear lineage distance → trust tiers). songBird LAN mesh.init shipped
+(lan_peers registration, priority 0). enrollment-replay RESOLVED. Known debt
+30→9. Tower 353x LAN. 197 scenarios PASS. 43/43 converged.*
