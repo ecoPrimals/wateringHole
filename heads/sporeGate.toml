@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-25T01:44:00Z
+# Gate: sporeGate | Updated: 2026-07-25T14:35:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-25T01:44:00Z"
+updated = "2026-07-25T14:35:00Z"
 wave = "150x"
 
 [heads]
-bearDog = "45a6355"
-songBird = "55d6420"
+bearDog = "b126e4f"
+songBird = "c520414"
 nestGate = "d5d45df"
 biomeOS = "c0f51e6"
 rhizoCrypt = "ae205a8"
@@ -24,54 +24,43 @@ petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
 cellMembrane = "7c99900"
-primalSpring = "cec1eb1"
-wateringHole = "4a4a68a"
+primalSpring = "b53d6bd"
+wateringHole = "4ad5a30"
 sporePrint = "67cc325"
 
 [deploy]
-songbird_version = "0.2.1+sustained (blake3 delegation in source 55d6420, not yet redeployed)"
-beardog_version = "0.10.0-silicon-atheism (cipher floor + blake3 in source 45a6355, not yet redeployed)"
+songbird_version = "0.2.1 (c520414) — LAN mesh.init + blake3 delegation + release build fix DEPLOYED"
+beardog_version = "0.10.0-silicon-atheism (cipher floor + blake3 + genetic enrollment in source, not yet redeployed)"
 petaltongue_version = "1.7.0"
 membrane_version = "0.1.0 (eee7e84)"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
 depot_status = "LIVE — 59 binaries × 4 architectures"
 mesh_status = "6-GATE MESH"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
-deploy_hold = "bearDog + songBird: crypto composition mid-migration, deploy after composition validation"
 
 [tower]
 status = "3/3 LIVE"
-songbird = "LIVE"
+songbird = "LIVE — restarted with LAN mesh.init fix"
 beardog = "LIVE"
 skunkbat = "LIVE"
 mesh_peers = 3
 
 [tower_shadow]
-status = "ACTIVE — gate-agnostic script producing data hourly"
+status = "ACTIVE — hourly data, 200+ results"
 interval = "60min"
 gates_active = ["sporeGate", "flockGate", "golgiBody"]
 
 [benchmark]
 phase = "PHASE 1 PASS — Tower EXCEEDS WireGuard"
-lan_tower = "0.45ms avg (50-probe sporeGate→eastGate)"
-lan_wg_overlay = "158ms avg (routes through golgiBody)"
-lan_ratio = "353x — Tower vs WG overlay on same-switch peers"
-wan_tower = "76.8ms avg (golgi)"
-wan_throughput = "Tower 13.1 Mbps vs WG ~7 Mbps (1.7x)"
-lan_routing_gap = "P0: mesh.find_path returns overlay not LAN — 353x penalty for capability.call dispatch (flockGate songBird fix)"
-
-[hardware]
-lan_peering = "CONFIRMED: eastGate at 192.168.4.244, 0.17ms RTT"
-gate_enrollment = "PENDING: southGate + strandGate (USB staged, physical access required)"
-
-[crash_loop_breaker]
-status = "OPERATIONAL"
+lan_tower = "0.45ms avg (353x vs WG overlay)"
+wan_tower = "76.8ms avg, 1.7x sustained"
+lan_routing_gap = "mesh.find_path LAN preference shipped (218966d7), deployed on sporeGate, path selection evolution needed (flockGate)"
 
 [primalspring]
-head = "cec1eb1"
-scenarios = 196
-known_debt = "10 (was 30 — CallerContext + UDS hardening resolved 7 pen scenarios)"
-tests = "1240 passed, 0 failed, 2 ignored"
+head = "b53d6bd"
+scenarios = 197
+known_debt = "9 (graphenegate=2+sporeprint=1 sporeGate-specific, 7 tower stress/pen)"
+tests = "1241 passed, 0 failed, 2 ignored"
 suite_status = "GREEN"
 
 [surfaces]
@@ -82,18 +71,20 @@ webb = "200"
 git = "200"
 root = "301"
 
+[actions_this_cascade]
+songbird_rebuild = "Fixed release build error in security_sovereign.rs (closure return type mismatch), rebuilt with LAN mesh.init + blake3 delegation + caller identity + UDS hardening, deployed and restarted"
+songbird_fix_pushed = "c520414 — fix(build): correct closure return types in security_sovereign connect()"
+
 [resolved]
-tower_parity_p1 = "PHASE 1 PASS"
-tower_shadow_p0 = "ACTIVE on 3 gates"
-lan_peering_p0 = "CONFIRMED"
-crash_loop_breaker = "DEPLOYED"
-sustained_benchmark = "DONE — Tower 353x LAN, 1.7x WAN"
-sporeprint_transplant = "DONE — eastGate (b985c22) + sporeGate entity fix"
-shadow_script_fix = "DONE — gate-agnostic paths"
-known_debt_burn = "30→10 (CallerContext + UDS hardening)"
+tower_353x = "PROVEN — 0.45ms vs 158ms overlay"
+known_debt_burn = "36→9"
+sporeprint_transplant = "DONE"
+shadow_benchmark = "ACTIVE 200+ results"
+songbird_lan_meshinit = "DEPLOYED (this cascade) — c520414"
+genetic_enrollment = "LIVE in bearDog source (b126e4f)"
 
 [blocked_on_eastgate]
-iperf3_server = "P1 — needs iperf3 -s on eastGate"
-ssh_key_auth = "P1 — no key auth sporeGate→eastGate"
-biomeos_beacon = "P1 — phantom unit, needs disable"
+ssh_key_auth = "P0 — bilateral blocker, no key auth sporeGate→eastGate"
+biomeos_beacon = "P0 — phantom unit, needs disable"
+iperf3_server = "P1 — needs iperf3 -s on eastGate (blocked by SSH)"
 manifest_ip = "P1 — correct 192.168.4.5 → 192.168.4.244"
