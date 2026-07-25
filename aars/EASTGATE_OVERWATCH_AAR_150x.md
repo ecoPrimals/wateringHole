@@ -1,7 +1,7 @@
 # eastGate Overwatch AAR — Wave 150x
 
-**Date**: July 25, 2026 10:33 EDT | **Wave**: 150x | **From**: eastGate (10.13.37.5)
-**Scope**: Bilateral blocker resolution, scenario debt, doc refresh, LAN routing gap
+**Date**: July 25, 2026 11:25 EDT | **Wave**: 150x | **From**: eastGate (10.13.37.5)
+**Scope**: 3 debt resolved (bearDog fixes), bilateral pushback, LAN gap, doc refresh
 
 ---
 
@@ -80,9 +80,9 @@ $ systemctl --user status biomeos-beacon
 
 ## What Was Actually Done This Session
 
-### 1. KNOWN_DEBT Recalibrated (36→9 entries, 13 failures)
+### 1. KNOWN_DEBT Burned Down (36→7 entries, 10 failures)
 
-CallerContext + UDS hardening (upstream songBird/bearDog) resolved 7 pen findings:
+**Phase A (Jul 24)**: CallerContext + UDS hardening resolved 7 pen findings:
 
 | Scenario | Before | After | Resolved By |
 |----------|--------|-------|-------------|
@@ -90,7 +90,15 @@ CallerContext + UDS hardening (upstream songBird/bearDog) resolved 7 pen finding
 | `tower-pen-capability-escalation` | 4 | 1 | CallerContext + method gate |
 | `tower-pen-mesh-poison` | 1 | 1 | (revocation still absent) |
 
-Remaining 9 failures are all upstream primal work.
+**Phase B (Jul 25)**: bearDog shipped bond-type, backpressure, genetic enrollment:
+
+| Scenario | Before | After | Resolved By |
+|----------|--------|-------|-------------|
+| `tower-pen-cipher-downgrade` | 1 | **0** | bearDog `BtspBondType` in negotiation.rs |
+| `tower-stress-btsp-storm` | 1 | **0** | bearDog `SERVICE_OVERLOADED` in server.rs |
+| `tower-pen-enrollment-replay` | 1 | **0** | bearDog genetic enrollment nonce |
+
+Remaining **7 entries / 10 failures** are all upstream primal work (songBird routing, mesh topology).
 
 ### 2. New Scenario: `s_mesh_lan_path_preference` (197th)
 
@@ -129,13 +137,13 @@ tests, Tower pen/stress/gap scenarios, deep debt attestation.
 |--------|-------|
 | Scenarios | **197** |
 | Tests | **1240** pass, 0 fail |
-| Known debt | 10 entries / 13 failures |
+| Known debt | **7 entries / 10 failures** (down from 36/~60 at wave start) |
 | Clippy | 0 warnings |
 | Shadow data | 661+ JSON files (hourly) |
 | Services | 4/4 active |
 | LAN throughput | 2.37 Gbps (confirmed from sporeGate) |
 | LAN latency | 0.15ms ICMP, 0.56ms Tower |
-| primalSpring | `a700f92a` (v0.9.46) |
+| primalSpring | `a33cf1b4` (v0.9.46) |
 
 ---
 
@@ -172,7 +180,8 @@ evidence for 48+ hours.
 
 ---
 
-*Wave 150x eastGate AAR: 197 scenarios, 1240 tests, 13 debt (all upstream).
+*Wave 150x eastGate AAR: 197 scenarios, 1240 tests, 10 debt (7 entries, all upstream).
+Debt 36→7: bearDog fixes resolved 3 more scenarios (cipher, storm, enrollment).
 "Bilateral blockers" RESOLVED for 48+ hours — pushback with evidence.
 GLOSSARY + PRIMAL_REGISTRY refreshed. LAN routing gap documented (1200x).
-v0.9.46. P0 CLEAR from eastGate.*
+v0.9.46 @ a33cf1b4. P0 CLEAR from eastGate.*
