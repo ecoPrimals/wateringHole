@@ -1,26 +1,30 @@
 # ecoPrimals Ecosystem Blurb — Wave 150x
 
 **Date**: Jul 25, 2026 10:57 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **bearDog P2 CLEAR. skunkBat PUBLIC. songBird LAN dispatch. DEBT 9. CHIMERA PHASE 0 READY.**
+**Posture**: **P0 CLEAR ALL GATES. bearDog P2 CLEAR. skunkBat PUBLIC. DEBT 9. DIVERGENCE AAR FILED.**
 
 ---
 
 ## WHERE WE ARE
 
-bearDog shipped bond-type cipher awareness + UDS backpressure — **all blurbed
-items DONE** (13,973 tests). skunkBat is now **PUBLIC** (SPDX headers + maturity
-badge). songBird shipped LAN path preference in `remote_dispatch` — peers
-sorted by priority (LAN 0 → overlay 1 → direct 2). whitePaper shipped 5
-security architecture docs (1,262 lines). Known debt **9**. P0: bilateral SSH.
+**P0 CLEAR across all gates.** Bilateral blockers were stale — SSH, iperf3,
+biomeos-beacon, manifest all verified LIVE for 48+ hours (eastGate AAR with
+evidence). bearDog shipped bond-type cipher + backpressure (13,973 tests).
+skunkBat now PUBLIC. songBird LAN dispatch priority shipped. whitePaper 5
+security docs. Divergence AAR filed — 5 classes map to rootPulse. Known
+debt **9**. GLOSSARY + PRIMAL_REGISTRY refreshed.
 
 ---
 
-## P0 — BILATERAL BLOCKERS (eastGate action required)
+## ~~P0 — BILATERAL BLOCKERS~~ ALL RESOLVED
 
-| # | Action | Unblocks |
-|---|--------|----------|
-| 1 | Add sporeGate SSH pubkey to eastGate `authorized_keys` | iperf3, biomeos-beacon fix, remote ops |
-| 2 | Disable `biomeos-beacon.service` on eastGate | Phantom unit (11,161 restarts) |
+Per eastGate AAR (`EASTGATE_OVERWATCH_AAR_150x.md`):
+- SSH key: **DONE** since Jul 23, bidirectional verified
+- biomeos-beacon: **HEALTHY** — 25h uptime, 0 restarts (historical issue was fixed)
+- iperf3: **LIVE** — `0.0.0.0:5201`, 2.37 Gbps from sporeGate confirmed
+- Manifest LAN IP: **Already correct** (`192.168.4.244`)
+
+**P0 CLEAR across all gates.**
 
 ---
 
@@ -74,11 +78,11 @@ unit, LAN registry, deep debt sweep. cellMembrane is clean.
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | iperf3 sustained throughput | P1 | BLOCKED — needs eastGate SSH |
+| 1 | ~~iperf3 sustained throughput~~ | DONE | 2.37 Gbps confirmed sporeGate→eastGate |
 | 2 | Gate enrollment (southGate) | P1 | USB staged, needs physical cabling |
 | 3 | Gate enrollment (strandGate) | P1 | USB staged, needs physical cabling |
 | 4 | Redeploy songBird with LAN dispatch | P1 | LAN priority sorting shipped in code — needs deploy |
-| 5 | Manifest: eastGate LAN IP correction | P1 | `192.168.4.5` → `192.168.4.244` |
+| 5 | ~~Manifest: eastGate LAN IP~~ | DONE | Already correct (`192.168.4.244`) |
 
 ---
 
@@ -86,11 +90,11 @@ unit, LAN registry, deep debt sweep. cellMembrane is clean.
 
 | # | Task | Priority | Status |
 |---|------|----------|--------|
-| 1 | **Unblock sporeGate bilateral** | **P0** | SSH key + biomeos-beacon |
+| 1 | ~~Unblock sporeGate bilateral~~ | DONE | SSH + iperf3 + beacon all LIVE |
 | 2 | Scenario debt burn-down (9 remaining) | P1 | 197 scenarios, all PASS |
 | 3 | **Divergence AAR** | DONE | 5 classes documented, rootPulse capability map |
-| 4 | GLOSSARY.md refresh | P2 | Stale since Wave 138b |
-| 5 | PRIMAL_REGISTRY.md refresh | P2 | Stale since Wave 109 |
+| 4 | ~~GLOSSARY.md refresh~~ | DONE | 9 terms added (Wave 138b → 150x) |
+| 5 | ~~PRIMAL_REGISTRY.md refresh~~ | DONE | v0.9.31→v0.9.46, 58→197 scenarios |
 | 6 | sporePrint impulse follow-up | P2 | 5 impulses for maturity badges |
 
 ---
