@@ -12,7 +12,7 @@
 id = 151
 sub = "a"
 date = "2026-07-25"
-posture = "TOWER ATOMIC COMPLETE. 7/7 remaining debt RESOLVED. Known debt 9→1 (grapheneGate HSM only). bearDog: BTSP defense-in-depth + enrollment decomposition (1,061L→7 modules). songBird: retry + health + socket watch + pool + challenge-verify + revocation ALL SHIPPED. 197 scenarios PASS, 0 failures. Nest Atomic begins. 43/43 converged."
+posture = "TOWER ATOMIC COMPLETE. P0 DEPOT DIVERGENCE: 12/13 binaries stale (Jun 15), no aarch64 target, builder unknown. cellMembrane: builder identity + full harvest + multi-target. sporeGate: full harvest + depot refresh + aarch64 cross-compile. grapheneGate: evolve to floating autonomous gate. 197 scenarios PASS, 1 debt (HSM). 43/43 converged."
 publisher = "eastGate-overwatch"
 
 [gates]
