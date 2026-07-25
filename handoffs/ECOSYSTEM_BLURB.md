@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 150y
+# ecoPrimals Ecosystem Blurb — Wave 151a
 
-**Date**: Jul 25, 2026 11:12 EDT | **Wave**: 150y | **From**: eastGate overwatch
-**Posture**: **WAVE 150x COMPLETE. NEST ATOMIC BEGINS. rootPulse via Provenance Trio + nestGate + biomeOS.**
+**Date**: Jul 25, 2026 11:16 EDT | **Wave**: 151a | **From**: eastGate overwatch
+**Posture**: **NEST ATOMIC BEGINS. rootPulse via Provenance Trio + nestGate CAS + biomeOS. Tower (150) wrapping up.**
 
 ---
 
@@ -133,8 +133,8 @@ Cascade, Tower Deep Analysis, sporePrint Transplant.
 
 ---
 
-*Wave 150y: Tower Atomic sprint COMPLETE (150v–150x). Nest Atomic begins —
-nestGate CAS + Provenance Trio (rhizoCrypt, loamSpine, sweetGrass) + biomeOS
-= rootPulse. First target: golgiBody running rootPulse to solve the 5
-waterFall cascade divergence classes. Real data + real encryption. 197
-scenarios PASS. 43/43 converged.*
+*Wave 151a: Nest Atomic begins. Tower Atomic (Wave 150) wrapping up — teams
+continue independently. nestGate CAS + Provenance Trio (rhizoCrypt, loamSpine,
+sweetGrass) + biomeOS = rootPulse. First target: golgiBody running rootPulse
+to solve the 5 waterFall cascade divergence classes. Real data + real
+encryption through Tower transport. 197 scenarios PASS. 43/43 converged.*
