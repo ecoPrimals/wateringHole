@@ -1,163 +1,163 @@
-# ecoPrimals Ecosystem Blurb — Wave 150x
+# ecoPrimals Ecosystem Blurb — Wave 151c
 
-**Date**: Jul 25, 2026 10:04 EDT | **Wave**: 150x | **From**: eastGate overwatch
-**Posture**: **GENETIC ENROLLMENT LIVE. Tower 353x LAN. DEBT 30→9. LAN mesh.init shipped. enrollment-replay RESOLVED.**
+**Date**: Jul 26, 2026 10:50 EDT | **Wave**: 151c | **From**: eastGate overwatch
+**Posture**: **BTSP SUB-WAVE LANDED. 9/13 primals shipped ClientHello. grapheneGate validated (10/13, software crypto PASS, HSM needs Keystore2 binder). ironGate BACK ONLINE. sporePrint SEO search doors + query routing shipped. Wave 150 wrapping.**
 
 ---
 
 ## WHERE WE ARE
 
-**bearDog shipped full genetic enrollment** — two-layer model mirroring
-biological DNA: mitochondrial gate (FAMILY_SEED HMAC) + nuclear lineage
-distance (tree hops → trust tiers: identity/kin/sibling/extended/distant).
-Seed rotation via HKDF hierarchy, generation-based with grace period.
-+1168/-2582 lines (including chaos test cleanup).
+Wave 150 (Tower Atomic) is closing out. The sub-wave 151b BTSP evolution
+landed across 9 primals in a single cascade cycle.
 
-songBird shipped **LAN peer registration in `mesh.init`** — `lan_peers`
-parameter registers same-subnet peers as `EndpointType::Local` (priority 0),
-overlay peers demoted to priority 1. Persisted `peers.toml` LAN addrs
-auto-restored on restart. This addresses the 353x penalty gap.
-
-**Known debt 30→9.** `enrollment-replay` fully RESOLVED by genetic seed
-rotation. New scenario `mesh-lan-path-preference` added (2 known gap —
-`mesh.find_path` preference logic still needs evolution). P0 CLEAR.
+| Metric | Value |
+|--------|-------|
+| Tower vs WireGuard | 353x LAN, 1.7x WAN |
+| Scenarios | 197, all PASS |
+| Known debt | **2** (grapheneGate provenance stale in git) |
+| BTSP primals | **9/13** shipped ClientHello (2 pending, 2 skip) |
+| Depot | 28 binaries × 2 arch (x86_64 + aarch64-musl) |
+| grapheneGate validation | 10/13 checks PASS |
 
 ---
 
-## CODE TEAMS (flockGate — primal source evolution)
+## THIS CASCADE — WHAT SHIPPED
 
-### bearDog — crypto primal
+### BTSP ClientHello (Sub-Wave 151b Response)
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | ~~Bond-type cipher floor enforcement~~ | DONE | BTSP negotiation rejects below floor |
-| 2 | ~~`crypto.hash.blake3` capability~~ | DONE | songBird can now delegate blake3 via UDS |
-| 3 | ~~Deep debt sweep~~ | DONE | Hardcoding eliminated, capability-based config |
-| 4 | ~~Enrollment seed rotation~~ | DONE | Genetic HKDF hierarchy, generation-based with grace period |
-| 5 | ~~Two-layer genetic enrollment~~ | DONE | Mito gate + nuclear lineage distance → trust tiers |
-| 6 | Android Keystore + grapheneGate validation | P2 | Code complete, awaiting hardware |
+| Primal | BTSP Status | Additional Work |
+|--------|-------------|-----------------|
+| songBird | **DONE** (reference) | Deep debt audit, doc refresh |
+| barraCuda | **DONE** | 3-stage BTSP, hardcode elimination, doc refresh |
+| coralReef | **DONE** | Deep debt dedup (Wave 152), 3669 tests |
+| loamSpine | **DONE** | ProviderConn wiring, TransportEndpoint compliance |
+| rhizoCrypt | **DONE** | NDJSON adapter, fail-closed transport, 1883 tests |
+| skunkBat | **DONE** | Duplicate getrandom eliminated |
+| sweetGrass | **DONE** | sporeprint validation updated |
+| cellMembrane | **DONE** | Deep debt sweep, hardcode elimination, getrandom 0.4 |
+| squirrel | PENDING | Needs BTSP ClientHello |
+| biomeOS | PENDING | Needs BTSP ClientHello |
+| nestGate | LOW | Can use local crypto |
+| toadStool | SKIP (S340-341 cleanup) | Stale refs, dead code, hardcoded economics fixed |
+| petalTongue | SKIP | No bearDog dependency |
 
-bearDog is the ecosystem crypto provider. All primals route crypto through
-bearDog UDS (`crypto.*` capabilities). Hot-path crypto stays local until
-chimera extracts shared library.
+### grapheneGate Validation (eastGate AAR)
 
-### songBird — transport/routing primal
+bearDog built for `aarch64-linux-android` and validated on Pixel 8a:
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | **Crypto delegation to bearDog** | P1 | blake3 delegation LIVE (`dark_forest_beacon`), 4 crates feature-gated |
-| 2 | ~~Caller identity verification~~ | DONE | `CallerContext` wired into IPC connection + method gate |
-| 3 | ~~UDS hardening~~ | DONE | Socket permissions, peer cred verification |
-| 4 | ~~Pen test hardening~~ | DONE | UDS-spoof, mesh-poison, relay-abuse |
-| 5 | ~~Dependency diet~~ | DONE | ring→rustcrypto, chrono eliminated, rand→fastrand, 83 files |
-| 6 | ~~Legacy env deprecation~~ | DONE | Name-based endpoints marked for removal |
+| Check | Result |
+|-------|--------|
+| bearDog starts on aarch64 | **PASS** |
+| Ed25519 keypair gen | **PASS** |
+| Sign/verify roundtrip | **PASS** |
+| AES-256-GCM encrypt/decrypt | **PASS** |
+| Store/retrieve/list/delete secret | **PASS** (4/4) |
+| HSM StrongBox registration | **FAIL** — needs JVM (Keystore2 binder is the path) |
+| Persistence across restart | **FAIL** — in-memory only |
+| Backend reports keystore | **FAIL** — in-memory |
 
-`CRYPTO_COMPOSITION.md` classifies 19 seams: 5 hot-path (chimera), 6 delegating
-(bearDog UDS), 5 test-only, 3 already delegating.
+**Score: 10/13. Software crypto fully operational. Hardware HSM blocked on
+Keystore2 binder IPC (Android 12+ exposes hardware keys without JVM).**
 
-### skunkBat — defense/protocol primal
+**4 depot deployment failures found**: wrong target triple (musl vs android),
+UDS bind failure (filesystem vs abstract socket), no HSM code compiled,
+binary identity drift. grapheneGate needs `aarch64-linux-android` as a
+**third depot architecture**.
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | Cipher floor policy | DONE | `SKUNKBAT_CIPHER_FLOOR` env, typed BindMode errors |
-| 2 | Deep debt sweep | DONE | `unreachable!()` eliminated, BTSP dedup |
-| 3 | Spawn-rate anomaly detection | DONE | Shipped 150x |
+### sporePrint (2 AARs)
 
-skunkBat is clean. No open P1. Future work: chimera integration.
+**SEO Search Doors (151b)**: 8 pages rewritten for unbranded search queries
+(e.g., "GPU-Accelerated DADA2 Benchmark"). 96 auto-gen descriptions replaced.
+Canonical URLs consolidated. Reproduce/Limitations sections added.
 
----
+**Query Routing (151c)**: Title templates specialized — only homepage has
+full keyword suffix. 313 pages, each with its own search contract. Sidebar
+compressed to contextual navigation.
 
-## DEPLOYMENT / OPS (sporeGate — build, deploy, hardware, topology)
+### ironGate BACK ONLINE
 
-### cellMembrane — membrane coordinator
+ironGate head published (Wave 150t, Jul 21). 4 days behind current HEAD.
+Running NUCLEUS services. **Future: self-recovery via mesh** — when a gate
+comes back online, cellMembrane should auto-cascade, detect drift, rebuild
+stale primals, and re-enroll without manual intervention.
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | systemd hardening | DONE | `Restart=always` eliminated ecosystem-wide |
-| 2 | Crash-loop breaker | DONE | `gate.crash-loop` + auto-scan in cascade |
-| 3 | Sovereign CI pipeline | DONE | Forgejo hooks → build → depot → lineage |
-| 4 | `membrane-nucleus-nosocket@.service` | DONE | nestgate evolved CLI support |
-| 5 | ~~Deep debt sweep~~ | DONE | LAN registry, test extraction, safe casts, +960/-861 |
+### Other
 
-### Topology / Hardware
-
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | iperf3 sustained throughput | P1 | **BLOCKED** — needs eastGate iperf3 server or SSH access |
-| 2 | Gate enrollment (southGate) | P1 | USB staged, needs physical cabling |
-| 3 | Gate enrollment (strandGate) | P1 | USB staged, needs physical cabling + WG IP allocation |
-| 4 | songBird LAN peer discovery | P1 | `lan_peers` in mesh.init SHIPPED — `mesh.find_path` preference still needs evolution |
-| 5 | Fix biomeos-beacon unit (eastGate) | P1 | Disable phantom unit (11,161 restarts) |
-| 6 | SSH access sporeGate→eastGate | P1 | No key auth configured |
-| 7 | Manifest: eastGate LAN IP | P1 | Correct `192.168.4.5` → `192.168.4.244` |
-
-### sporePrint — public face
-
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | ~~Transplant to primals.eco~~ | DONE | Shipped by eastGate (b985c22, 18 files) + entity fix by sporeGate |
+- **lithoSpore**: External claim convergence standard applied, deep debt sweep
+- **toadStool**: S340-341 cleanup (stale refs, dead code, hardcoded economics)
 
 ---
 
-## SPOREPRINT (eastGate — public surface, credibility convergence)
+## REMAINING — WAVE 150 CLOSE-OUT
 
-**Credibility audit landed** (`f3b710d`). External reviewer assessed
-primals.eco and identified claim-surface inflation as principal risk. Drove
-30-file sweep:
+### Code (flockGate + eastGate)
 
-- Spring count fixed 8→9 (rustChip), org count 3→4 (protoKarya)
-- 12 stale WGSL counts replaced with `{{ total_stat() }}` shortcodes
-- Homepage reframed: "produces self-contained scientific computations that
-  reproduce published results on commodity hardware and carry their
-  validation and provenance" (reviewer's stronger position)
-- `#![forbid(unsafe_code)]` scoped: "forbidden by default, isolated to
-  hardware-containment crates"
-- Products page reorganized: Deploy now / Research preview / Architectural direction
-- Evidence Snapshot gained Safety Model section
+| # | Task | Priority | Owner |
+|---|------|----------|-------|
+| 1 | squirrel BTSP ClientHello | P1 | squirrel (flockGate) |
+| 2 | biomeOS BTSP ClientHello | P1 | biomeOS (flockGate) |
+| 3 | bearDog Keystore2 binder IPC | P2 | bearDog (eastGate) |
+| 4 | `aarch64-linux-android` depot target | P2 | sporeGate + eastGate |
 
-**New standard**: `foundations/EXTERNAL_CLAIM_CONVERGENCE_STANDARD.md`
-**5 impulses issued**: biomeOS maturity labeling, barraCuda README WGSL count,
-ecoPrimals org profile unsafe scope, Tower source publication review,
-all-teams README maturity badge.
+### Deployment (sporeGate)
 
----
+| # | Task | Priority |
+|---|------|----------|
+| 1 | ironGate catch-up cascade (4 days behind) | P1 |
+| 2 | BTSP strict mode on remaining gates | P1 |
+| 3 | Gate enrollment (southGate, strandGate) | P1 |
+| 4 | provenance.toml commit on golgiBody | P1 |
 
-## OVERWATCH (eastGate — code hub, integration, scenarios)
+### User Tasks (from sporePrint AARs)
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | primalSpring scenario debt burn-down | P1 | **9 known debt** (197 scenarios, all PASS) |
-| 2 | Unblock sporeGate (iperf3 server, SSH key, biomeos-beacon) | **P0** | **Bilateral**: add sporeGate pubkey to eastGate `authorized_keys` |
-| 3 | sporePrint primal pipeline (Zola → petalTongue + nestGate CAS) | P2 | Design phase |
-| 4 | CredentialStore squirrel integration | P2 | bearDog `FileVault` + squirrel IPC |
-| 5 | bingoCube WASM WebGL widget | P2 | Interactive commitment on primals.eco |
-| 6 | Chimera Phase 0 — library extraction | P3 | After bearDog UDS composition validated |
+| # | Task | Priority |
+|---|------|----------|
+| 1 | Google Search Console: verify `sporeprint.primals.eco` ownership | P1 |
+| 2 | JOSS submission (barraCuda or wetSpring) | P2 |
+| 3 | crates.io releases (barraCuda, wetSpring) | P2 |
+| 4 | Scientific Computing in Rust Monthly submission | P3 |
+| 5 | DADA2 community engagement | P3 |
+| 6 | `eco.primal@primal.eco` activation | P3 |
 
----
+### Overwatch (eastGate)
 
-## ATOMIC EVOLUTION (all teams)
-
-| # | Task | Depends On |
-|---|------|-----------|
-| 1 | **Composition validation** — bearDog UDS crypto works for all cold-path | Code teams (P1) |
-| 2 | **Chimera Phase 0** — shared library extraction | Composition validated |
-| 3 | Node Atomic (proton) | Tower chimera maturity |
-| 4 | Nest Atomic (neutron) | Node Atomic |
-| 5 | Phase 3 cutover — Tower replaces WG | Chimera + sustained validation |
-| 6 | rootPulse sovereign VCS | Provenance Trio maturity + Tower transport |
+| # | Task | Priority |
+|---|------|----------|
+| 1 | GLOSSARY.md refresh | **DONE** (eastGate AAR) |
+| 2 | PRIMAL_REGISTRY.md refresh | **DONE** (eastGate AAR) |
 
 ---
 
-## EXPLORATION DOMAINS — ALL PROVEN LIVE
+## FORWARD — NEST ATOMIC + SELF-RECOVERY
 
-| # | Domain | Evidence | Where WG Cannot |
-|---|--------|----------|-----------------|
-| 1 | Capability-aware routing | 5 providers via `capability.call` | WG: all traffic in one tunnel |
-| 2 | Multi-stack routing | 6 classes → 5 stacks | WG: undifferentiated |
-| 3 | Large data transfer | `content.put` → nestGate CAS | WG: no content awareness |
-| 4 | Secure compute mesh | Per-session BTSP keys + attestation | WG: one static key per tunnel |
-| 5 | Distributed compute | 4-node targeted dispatch | WG: point-to-point only |
-| 6 | Edge/SFF/R45 profile | 30MB RSS, 39MB stack, 300s TTL | WG: kernel module required |
+### Chimera Phase 0 — UNBLOCKED
+
+`libtower.so`: bearDog crypto + songBird routing + skunkBat defense.
+Crypto delegation 6/6 validated. Pure refactoring.
+
+### grapheneGate → Standalone Android Platform
+
+**Phase 1 DONE**: Software crypto validated (10/13).
+**Phase 2**: Keystore2 binder for hardware HSM, `aarch64-linux-android` depot target.
+**Phase 3**: Full NUCLEUS deploy, mesh enrollment as autonomous peer.
+
+### ironGate Self-Recovery (new goal)
+
+When a gate comes back online after downtime, the mesh should detect it
+and the gate should self-heal: cascade, detect stale binaries, rebuild
+from depot, re-enroll services. This is a cellMembrane + biomeOS
+composition — auto-cascade on mesh reconnect.
+
+### Nest Atomic (Wave 151)
+
+| Phase | Scope | Teams |
+|-------|-------|-------|
+| 0 | nestGate CAS integration testing | eastGate + flockGate |
+| 1 | loamSpine prototype (DAG ledger) | eastGate |
+| 2 | rhizoCrypt wiring (dep tracking) | eastGate + flockGate |
+| 3 | sweetGrass semantic braids | all |
+| 4 | rootPulse composition | all |
+| 5 | golgiBody deployment | sporeGate |
 
 ---
 
@@ -166,49 +166,17 @@ all-teams README maturity badge.
 | # | Dimension | Status |
 |---|-----------|--------|
 | 1 | Temporal/Coordination | GREEN — 43/43 synced |
-| 2 | Ecological | GREEN — 197 scenarios, **9 debt** |
-| 3 | Hardware | AMBER — 4 offline gates |
-| 4 | Sovereignty | GREEN — Tower EXCEEDS WG, 6/6, CI LIVE |
-| 5 | Public Surface | GREEN — 6/6 healthy |
-| 6 | Compositions | GREEN — crypto composition migrating |
-| 7 | Documentation | GREEN — fossil pass complete |
-| 8 | Campus | GREEN — vision documented |
-
-**Fossilized** (F1–F6): Glacial Shift, CAC, Silicon Atheism, Depot/Build, Cascade, Tower Deep Analysis.
+| 2 | Ecological | GREEN — 197 scenarios, 2 debt, 9/13 BTSP |
+| 3 | Hardware | AMBER — ironGate BACK, 3 still offline |
+| 4 | Sovereignty | GREEN — BTSP strict LIVE, depot fresh |
+| 5 | Public Surface | GREEN — sporePrint SEO shipped |
+| 6 | Compositions | GREEN — chimera unblocked |
+| 7 | Documentation | GREEN — GLOSSARY + REGISTRY refreshed |
+| 8 | Campus | GREEN |
 
 ---
 
-## SPOREPRINT — Wave 151c
-
-**Query routing shipped.** External review confirmed ecoPrimals winning
-"self-hosted scientific computing" and "consumer-GPU lattice QCD" queries,
-but every page competed for the same title phrase. Fixed.
-
-### 151b (SEO search doors)
-- 8 page titles rewritten for unbranded search intent
-- 96 notebook descriptions → search-friendly
-- CITATION.cff, human-response signals, Karpathy invitation
-- All URLs consolidated to canonical sporeprint.primals.eco
-- "Reproduce It" + "Limitations" on 4 key pages
-
-### 151c (Query routing)
-- Title template: `Page Title | ecoPrimals` (was `Page Title — ecoPrimals — Self-Hosted Scientific Computing in Rust`)
-- Only homepage carries the full keyword title — 313 pages no longer compete
-- Sidebar compressed: 40+ page sections show subsections only, not individual pages
-- Subsection pages expand only when you're IN that subsection
-- JSON-LD author URLs → sporeprint.primals.eco
-- Last hardcoded count → shortcode
-- Caddy 301 redirect CONFIRMED LIVE since 150d (sporeGate team)
-
-**Upstream needs:** CITATION.cff in barraCuda + wetSpring repos,
-render-notebooks canonical URL, rustChip spring hub page.
-
-**User tasks:** Google Search Console (verify primals.eco, request re-crawl),
-JOSS submission, crates.io releases, independent reproduction seek,
-DADA2 community engagement, eco.primal@primal.eco activation.
-
----
-
-*Wave 151c: query routing LIVE. Each page has its own search contract.
-Sidebar is contextual navigation, not site map. Canonical identity
-consolidated across all layers. 313 pages, 0 errors.*
+*Wave 151c: BTSP sub-wave landed (9/13 primals). grapheneGate validated
+(10/13 software, HSM needs Keystore2 binder). ironGate back online.
+sporePrint SEO search doors + query routing shipped. 2 primals pending
+BTSP (squirrel, biomeOS). Then Nest Atomic. 197 scenarios. 43/43 converged.*
