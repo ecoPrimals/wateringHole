@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 151c
 
 **Date**: Jul 26, 2026 10:50 EDT | **Wave**: 151c | **From**: eastGate overwatch
-**Posture**: **BTSP SUB-WAVE LANDED. 9/13 primals shipped ClientHello. grapheneGate validated (10/13, software crypto PASS, HSM needs Keystore2 binder). ironGate BACK ONLINE. sporePrint SEO search doors + query routing shipped. Wave 150 wrapping.**
+**Posture**: **BTSP SUB-WAVE COMPLETE. 11/13 primals shipped ClientHello (2 skip — no bearDog dep). grapheneGate validated (10/13). ironGate BACK. sporePrint SEO shipped. Wave 150 DONE.**
 
 ---
 
@@ -15,7 +15,7 @@ landed across 9 primals in a single cascade cycle.
 | Tower vs WireGuard | 353x LAN, 1.7x WAN |
 | Scenarios | 197, all PASS |
 | Known debt | **2** (grapheneGate provenance stale in git) |
-| BTSP primals | **9/13** shipped ClientHello (2 pending, 2 skip) |
+| BTSP primals | **11/13** shipped ClientHello (2 skip — no bearDog dep) |
 | Depot | 28 binaries × 2 arch (x86_64 + aarch64-musl) |
 | grapheneGate validation | 10/13 checks PASS |
 
@@ -35,8 +35,8 @@ landed across 9 primals in a single cascade cycle.
 | skunkBat | **DONE** | Duplicate getrandom eliminated |
 | sweetGrass | **DONE** | sporeprint validation updated |
 | cellMembrane | **DONE** | Deep debt sweep, hardcode elimination, getrandom 0.4 |
-| squirrel | PENDING | Needs BTSP ClientHello |
-| biomeOS | PENDING | Needs BTSP ClientHello |
+| squirrel | **DONE** (eastGate) | Deep debt sweep, SDK alignment, Wave 152a |
+| biomeOS | **DONE** (eastGate) | Extensive BTSP support, 100% clippy clean, v4.41 |
 | nestGate | LOW | Can use local crypto |
 | toadStool | SKIP (S340-341 cleanup) | Stale refs, dead code, hardcoded economics fixed |
 | petalTongue | SKIP | No bearDog dependency |
@@ -94,8 +94,8 @@ stale primals, and re-enroll without manual intervention.
 
 | # | Task | Priority | Owner |
 |---|------|----------|-------|
-| 1 | squirrel BTSP ClientHello | P1 | squirrel (flockGate) |
-| 2 | biomeOS BTSP ClientHello | P1 | biomeOS (flockGate) |
+| 1 | ~~squirrel BTSP~~ | ~~P1~~ | **DONE** (eastGate) |
+| 2 | ~~biomeOS BTSP~~ | ~~P1~~ | **DONE** (eastGate) |
 | 3 | bearDog Keystore2 binder IPC | P2 | bearDog (eastGate) |
 | 4 | `aarch64-linux-android` depot target | P2 | sporeGate + eastGate |
 
@@ -166,7 +166,7 @@ composition — auto-cascade on mesh reconnect.
 | # | Dimension | Status |
 |---|-----------|--------|
 | 1 | Temporal/Coordination | GREEN — 43/43 synced |
-| 2 | Ecological | GREEN — 197 scenarios, 2 debt, 9/13 BTSP |
+| 2 | Ecological | GREEN — 197 scenarios, 2 debt, **11/13 BTSP** |
 | 3 | Hardware | AMBER — ironGate BACK, 3 still offline |
 | 4 | Sovereignty | GREEN — BTSP strict LIVE, depot fresh |
 | 5 | Public Surface | GREEN — sporePrint SEO shipped |
@@ -176,7 +176,7 @@ composition — auto-cascade on mesh reconnect.
 
 ---
 
-*Wave 151c: BTSP sub-wave landed (9/13 primals). grapheneGate validated
-(10/13 software, HSM needs Keystore2 binder). ironGate back online.
-sporePrint SEO search doors + query routing shipped. 2 primals pending
-BTSP (squirrel, biomeOS). Then Nest Atomic. 197 scenarios. 43/43 converged.*
+*Wave 151c: BTSP sub-wave COMPLETE — 11/13 primals shipped ClientHello
+(squirrel + biomeOS from eastGate, 2 skip). grapheneGate validated 10/13.
+ironGate back. sporePrint SEO shipped. All bearDog consumers authenticated.
+Nest Atomic next. 197 scenarios. 43/43 converged.*
