@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: July 25, 2026 (Wave 151a — Tower COMPLETE, crypto delegation 6/6, BTSP strict, chimera unblocked, Nest Atomic defined)
+**Last Updated**: July 25, 2026 (Wave 151a — Wave 150 complete, Nest Atomic ahead, grapheneGate validation)
 
 ---
 
@@ -1243,3 +1243,9 @@ the validator assumes the network is hostile.
 | **EndpointType** | Routing variant: `Local` for LAN direct paths (sub-ms) vs `Overlay` for WG relay (100ms+) |
 | **K-Derm trust tiers** | Outer/inner/data domain classification in `capability_registry.toml` — method-level access control |
 | **Shadow benchmark** | Continuous Tower vs WG metrics collected by `tower-shadow.timer` (hourly, JSON output) |
+| **Nest Atomic (expanded)** | Wave 151 data layer: nestGate CAS + loamSpine DAG + rhizoCrypt cross-repo + sweetGrass braids + rootPulse orchestration |
+| **rootPulse** | biomeOS-orchestrated Provenance Trio composition — replaces waterFall with content-addressed provenance |
+| **Keystore2 binder** | Android 12+ native API for hardware-backed key operations without JVM — production path for bearDog StrongBox |
+| **Crypto delegation** | songBird routes all crypto to bearDog over IPC — 6/6 seams validated Wave 150 (chimera-ready) |
+| **libtower.so** | Chimera Phase 0 extraction target — bearDog crypto + songBird routing + skunkBat defense as shared library |
+| **Silicon Atheism** | Platform-agnostic dispatch — code compiles for all targets, probes capabilities at runtime (no compile-time branching in business logic) |

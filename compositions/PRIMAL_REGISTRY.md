@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: July 25, 2026 (Wave 151a — Tower COMPLETE 353x LAN, genetic enrollment LIVE, known debt 1 (grapheneGate HSM), crypto delegation 6/6, chimera Phase 0 unblocked, 197 scenarios PASS, depot 28 bins × 2 arch)
+**Last Updated**: July 25, 2026 (Wave 151a — Wave 150 COMPLETE. Tower 353x LAN. Crypto delegation 6/6. Known debt 1 (grapheneGate HSM). 197 scenarios PASS. primalSpring v0.9.46, 1241 tests. grapheneGate ADB validation: software crypto 10/13 pass, hardware keystore needs Keystore2 binder. Chimera + Nest Atomic unblocked.)
 
 ---
 
@@ -444,7 +444,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.10.0 (911 lib + 311 integration + 61 forge tests, 97 binaries, 87 experiments, 14.3× CPU speedup, 10 MCP tools, Edition 2024) |
 | barraCuda | v0.4.0 (3,348+ tests, 803 shaders, AGPL-3.0-only, startup contract SHIPPED, method.describe 97 methods) |
 | coralReef | Phase 10 Iteration 59 (3,304+ tests, startup contract SHIPPED, tarpc skip on tcp_only) |
-| primalSpring | v0.9.46 Wave 150x (89 experiments, 21 tracks, 1,240 tests, 490+ methods, 197 scenarios, 113 graph TOMLs, Tower pen/stress/gap validation, deep debt sweep, LAN-first routing, zero unsafe/mocks/hardcode) |
+| primalSpring | v0.9.46 Wave 151a (89 experiments, 21 tracks, 1,241 tests, 490+ methods, 197 scenarios ALL PASS, known debt 1, grapheneGate ADB validation, crypto delegation 6/6, Nest Atomic Phase 0 ready) |
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
@@ -528,7 +528,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 **Domain**: Primal coordination, atomic composition, graph execution, emergent systems, multi-node bonding + federation  
 **Phase**: Phase 60+ / Wave 150x (197 scenarios, TOWER EXCEEDS WG)  
-**Status**: v0.9.46 Wave 150x — 1240 tests, 197 scenarios (14 stress/pen + 1 LAN gap), 490+ methods, 113 graph TOMLs. Tower 353x LAN validated. Known debt 9 (all upstream). Deep debt sweep complete: zero unsafe, zero mocks, zero hardcode, idiomatic Rust 2024 (`is_none_or`, `Arc<Anchor>`, `Cow<str>`), K-Derm trust tiers, LAN-first routing. `#![forbid(unsafe_code)]` on all crate roots. Zero TODO/FIXME/unsafe/mocks in production. All 14 direct deps pure Rust.
+**Status**: v0.9.46 Wave 151a — 1241 tests, 197 scenarios ALL PASS, known debt **1** (grapheneGate HSM — hardware gated). Tower 353x LAN proven. Crypto delegation 6/6 validated. Deep debt swept to zero. grapheneGate ADB validation complete (10/13 pass, Keystore2 binder path recommended). `#![forbid(unsafe_code)]` on all crate roots. Zero TODO/FIXME/unsafe/mocks in production. All 14 direct deps pure Rust. Idiomatic Rust 2024.
 
 **Role**: primalSpring is the spring whose domain IS coordination. Where other springs validate domain science via the ecoPrimals infrastructure, primalSpring validates the infrastructure itself — that biomeOS composes primals correctly, that NUCLEUS atomics deploy and degrade gracefully, that all 5 coordination patterns work with real primals, that Layer 3 emergent systems emerge correctly, and that cross-spring data flows maintain provenance. It has proven the full composition lifecycle — binary discovery, socket nucleation, topological startup, capability-based health validation, and multi-primal coordination with real IPC. Wave 150x added Tower pen testing, stress testing, LAN routing gap validation, and deep debt evolution.
 
