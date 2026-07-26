@@ -178,30 +178,37 @@ all-teams README maturity badge.
 
 ---
 
-## SPOREPRINT — Wave 151b
+## SPOREPRINT — Wave 151c
 
-**SEO search doors shipped.** 7 commits, 192 files changed. Site evolved
-from internal vocabulary to search-discoverable landing pages.
+**Query routing shipped.** External review confirmed ecoPrimals winning
+"self-hosted scientific computing" and "consumer-GPU lattice QCD" queries,
+but every page competed for the same title phrase. Fixed.
 
-Key changes:
-- 8 page titles rewritten for unbranded search intent (DADA2, lattice QCD,
-  WGSL, distributed compute, self-hosted bioinformatics, reproducible software)
-- 96 notebook descriptions updated from auto-generated to search-friendly
-- CITATION.cff added (GitHub renders "Cite this repository")
-- Human-response signal on 9 outreach pages
-- Karpathy invitation created (AI-assisted development existence proof)
-- GPU manufacturer brief expanded from scaffold to full page
+### 151b (SEO search doors)
+- 8 page titles rewritten for unbranded search intent
+- 96 notebook descriptions → search-friendly
+- CITATION.cff, human-response signals, Karpathy invitation
 - All URLs consolidated to canonical sporeprint.primals.eco
-- 4 key pages now have "Reproduce It" + "Limitations" sections
-- 9 broken companion URLs fixed, hardcoded counts → shortcodes
+- "Reproduce It" + "Limitations" on 4 key pages
 
-**Upstream needs:** Caddy 301 redirect primals.eco → sporeprint.primals.eco,
-CITATION.cff in barraCuda + wetSpring repos, render-notebooks canonical URL update.
+### 151c (Query routing)
+- Title template: `Page Title | ecoPrimals` (was `Page Title — ecoPrimals — Self-Hosted Scientific Computing in Rust`)
+- Only homepage carries the full keyword title — 313 pages no longer compete
+- Sidebar compressed: 40+ page sections show subsections only, not individual pages
+- Subsection pages expand only when you're IN that subsection
+- JSON-LD author URLs → sporeprint.primals.eco
+- Last hardcoded count → shortcode
+- Caddy 301 redirect CONFIRMED LIVE since 150d (sporeGate team)
 
-**User tasks:** JOSS submission, Search Console, crates.io releases,
-independent reproduction seek, DADA2 community engagement.
+**Upstream needs:** CITATION.cff in barraCuda + wetSpring repos,
+render-notebooks canonical URL, rustChip spring hub page.
+
+**User tasks:** Google Search Console (verify primals.eco, request re-crawl),
+JOSS submission, crates.io releases, independent reproduction seek,
+DADA2 community engagement, eco.primal@primal.eco activation.
 
 ---
 
-*Wave 150x → 151b: SEO search doors LIVE. 313 pages. 0 errors. Human-response
-signal on all named invitations. Canonical URLs consolidated.*
+*Wave 151c: query routing LIVE. Each page has its own search contract.
+Sidebar is contextual navigation, not site map. Canonical identity
+consolidated across all layers. 313 pages, 0 errors.*
