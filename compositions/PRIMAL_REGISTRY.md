@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: July 25, 2026 (Wave 150x — Tower 353x LAN, genetic enrollment LIVE, known debt 9, CallerContext + UDS hardening, 197 scenarios. primalSpring v0.9.46, 1240 tests, chimera Phase 0 ready.)
+**Last Updated**: July 25, 2026 (Wave 151a — Tower COMPLETE 353x LAN, genetic enrollment LIVE, known debt 1 (grapheneGate HSM), crypto delegation 6/6, chimera Phase 0 unblocked, 197 scenarios PASS, depot 28 bins × 2 arch)
 
 ---
 

@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: July 25, 2026 (Wave 150x — genetic enrollment, Tower shadow, LAN routing, chimera)
+**Last Updated**: July 25, 2026 (Wave 151a — Tower COMPLETE, crypto delegation 6/6, BTSP strict, chimera unblocked, Nest Atomic defined)
 
 ---
 
