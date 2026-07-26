@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
-**Last Updated**: July 25, 2026 (Wave 151a — Wave 150 COMPLETE. Tower 353x LAN. Crypto delegation 6/6. Known debt 1 (grapheneGate HSM). 197 scenarios PASS. primalSpring v0.9.46, 1241 tests. grapheneGate ADB validation: software crypto 10/13 pass, hardware keystore needs Keystore2 binder. Chimera + Nest Atomic unblocked.)
+**Last Updated**: July 26, 2026 (Wave 151b — BTSP standard ALL primals. Tower COMPLETE 353x LAN. Crypto delegation 6/6. Known debt 2 (provenance). Depot 28 bins × 2 arch. Chimera + Nest Atomic unblocked.)
 
 ---
 

@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: July 25, 2026 (Wave 151a — Wave 150 complete, Nest Atomic ahead, grapheneGate validation)
+**Last Updated**: July 26, 2026 (Wave 151b — BTSP standard all primals, Tower COMPLETE, chimera unblocked, Nest Atomic ahead)
 
 ---
 
