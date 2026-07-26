@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 151a
 
-**Date**: Jul 25, 2026 21:15 EDT | **Wave**: 151a | **From**: eastGate overwatch
-**Posture**: **WAVE 150 CODE COMPLETE. bearDog pen test SHIPPED (3 CRITICAL fixed). songBird BTSP ClientHello SHIPPED. flockGate code teams CLEAR. Forward: grapheneGate HSM → standalone Android gate, chimera, Nest Atomic.**
+**Date**: Jul 25, 2026 22:00 EDT | **Wave**: 151a | **From**: eastGate overwatch
+**Posture**: **WAVE 150 CODE COMPLETE. EXECUTING: primalSpring HSM validation (grapheneGate, depot aarch64 bins). BTSP ecosystem-wide rollout in parallel. Wave 151 (Nest Atomic) begins — Tower continues to evolve.**
 
 ---
 
@@ -32,29 +32,53 @@ Wave 150 (Tower Atomic) is **done**. Every P0 and P1 is resolved:
 
 ### flockGate code teams — ALL CLEAR
 
-No remaining code tasks. bearDog pen test and songBird BTSP ClientHello were
-the last two P2 items — both shipped this cascade.
+Zero remaining code tasks. bearDog and songBird continue to evolve Tower
+Atomic alongside Nest Atomic work — Tower is not frozen, it matures in
+parallel as we build the neutron layer on top of it.
 
-bearDog remaining HIGH items are **deployment config**, not code:
-- `BEARDOG_AUTH_MODE=enforced` (default Permissive)
-- `BEARDOG_UDS_REQUIRE_BTSP=1` (default OFF)
-- Per-method rate limiting (connection-level cap exists at 512)
+---
 
-### DEPLOYMENT (sporeGate)
+## EXECUTING NOW
+
+### primalSpring (eastGate) — grapheneGate HSM Validation
+
+Run bearDog `CredentialStore::AndroidKeystore` validation via grapheneGate (ADB).
+aarch64 depot binaries are fresh (Jul 25, 28 bins). bearDog Android compile
+fixes shipped this cascade. This resolves the **last known debt finding**.
+
+Steps:
+1. Pull fresh `beardog` aarch64 binary from depot to grapheneGate
+2. primalSpring `s_graphenegate_readiness` validates HSM key generation,
+   BTSP enrollment with Titan M2 hardware-backed keys
+3. On PASS → grapheneGate Phase 2 (full NUCLEUS, standalone gate)
+
+### BTSP Ecosystem-Wide Rollout (sporeGate)
+
+bearDog strict mode (`BEARDOG_UDS_REQUIRE_BTSP=1`) and auth enforcement
+(`BEARDOG_AUTH_MODE=enforced`) roll out across all live gates. songBird
+BTSP ClientHello is shipped — all consumers can authenticate.
+
+| # | Gate | Action |
+|---|------|--------|
+| 1 | sporeGate | Set `AUTH_MODE=enforced`, `REQUIRE_BTSP=1`, restart bearDog |
+| 2 | eastGate | Same — verify songBird authenticates via BTSP ClientHello |
+| 3 | flockGate | Same — verify shadow benchmarks still run under strict mode |
+| 4 | golgiBody | Same — verify depot operations work under auth |
+| 5 | Future gates | USB enrollment bundle updated with BTSP defaults |
+
+### Gate Enrollment (sporeGate)
 
 | # | Task | Priority |
 |---|------|----------|
-| 1 | Gate enrollment (southGate, strandGate) | P1 |
-| 2 | Deploy bearDog production hardening (`AUTH_MODE=enforced`, `REQUIRE_BTSP=1`) | P1 |
+| 1 | southGate enrollment (house2) | P1 |
+| 2 | strandGate enrollment (dual EPYC) | P1 |
 
-### OVERWATCH + HARDWARE (eastGate)
+### Overwatch (eastGate)
 
 | # | Task | Priority |
 |---|------|----------|
-| 1 | bearDog Android Keystore validation via grapheneGate (ADB) | P1 |
-| 2 | grapheneGate full NUCLEUS deploy → standalone Android gate | P1 |
-| 3 | GLOSSARY.md refresh (138b → 151a) | P2 |
-| 4 | PRIMAL_REGISTRY.md refresh (109 → 15 primals) | P2 |
+| 1 | GLOSSARY.md refresh (138b → 151a) | P2 |
+| 2 | PRIMAL_REGISTRY.md refresh (109 → 15 primals) | P2 |
 
 ---
 
@@ -69,14 +93,12 @@ hops into shared memory.
 
 ### grapheneGate → Standalone Android Platform
 
-**Phase 1** (eastGate, P1): primalSpring validates bearDog `CredentialStore::AndroidKeystore`
-via ADB — Titan M2 HSM key generation, BTSP enrollment with hardware-backed keys.
-Resolves last known debt finding (`graphenegate-readiness`).
+**Phase 1** (eastGate, NOW): HSM validation executing — see EXECUTING NOW above.
 
-**Phase 2** (eastGate + sporeGate, P1): Full NUCLEUS deploy — Tower Atomic transport,
-cellMembrane instance, depot-sourced aarch64 binaries, mesh enrollment as autonomous
-peer. grapheneGate becomes the ecosystem's Android platform, interfacing over
-LAN/WAN via Tower, not ADB.
+**Phase 2** (eastGate + sporeGate): Full NUCLEUS deploy — Tower Atomic transport,
+cellMembrane instance, depot-sourced aarch64 binaries, mesh enrollment as
+autonomous peer with BTSP strict mode from day one. grapheneGate becomes
+the ecosystem's Android platform — peer, not peripheral.
 
 ### Nest Atomic (Wave 151) — DATA + PROVENANCE + rootPulse
 
@@ -117,8 +139,7 @@ Cascade, Tower Deep Analysis, sporePrint Transplant, **Tower Completion + Depot*
 
 ---
 
-*Wave 150 CODE COMPLETE. flockGate code teams CLEAR — bearDog pen test
-shipped (3 CRITICAL), songBird BTSP ClientHello shipped. Remaining: eastGate
-grapheneGate HSM validation → standalone Android gate. sporeGate production
-hardening + gate enrollment. Then chimera Phase 0 and Nest Atomic. 197 scenarios
-PASS. 43/43 converged.*
+*Wave 150 CODE COMPLETE, EXECUTING hardware validation. primalSpring runs
+grapheneGate HSM (last debt). BTSP strict mode rolling out ecosystem-wide.
+Tower Atomic continues to evolve alongside Nest Atomic — electron matures as
+we build the neutron. 197 scenarios PASS. 43/43 converged.*
