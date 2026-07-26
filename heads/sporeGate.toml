@@ -1,16 +1,16 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-25T18:55:00Z
+# Gate: sporeGate | Updated: 2026-07-26T01:36:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-25T18:55:00Z"
+updated = "2026-07-26T01:36:00Z"
 wave = "151a"
 
 [heads]
-bearDog = "6a351b8"
-songBird = "59c221b"
+bearDog = "d528ef9"
+songBird = "9b7eb6e"
 nestGate = "d5d45df"
 biomeOS = "3face71"
 rhizoCrypt = "ae205a8"
@@ -23,25 +23,25 @@ barraCuda = "3cfdf0e"
 petalTongue = "3227ea5"
 toadStool = "bfa9632"
 sourDough = "3a0b52d"
-cellMembrane = "7c99900"
-primalSpring = "32b225c"
-wateringHole = "6c11292"
+cellMembrane = "2c13d20"
+primalSpring = "f26976c"
+wateringHole = "db192c7"
 sporePrint = "67cc325"
 
 [deploy]
-songbird_version = "0.2.1 (59c221b) — tower debt 6/7, blake3 method fix, mesh dedup"
-beardog_version = "0.9.0 (6a351b8) — enrollment decomp, BTSP UDS strict, genetic enrollment"
+songbird_version = "0.2.1 (9b7eb6e) — BTSP ClientHello LIVE, crypto delegation 6/6"
+beardog_version = "0.9.0 (d528ef9) — pen test SHIPPED (3 CRITICAL), AUTH_MODE=enforced, BTSP=required"
 petaltongue_version = "1.7.0"
-membrane_version = "0.1.0 (7c99900)"
+membrane_version = "0.1.0 (2c13d20)"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
-depot_status = "FRESH — 14 primals × 2 architectures (x86_64 + aarch64), provenance tracked"
+depot_status = "FRESH — 14 primals × 2 architectures, provenance tracked"
 mesh_status = "6-GATE MESH"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
 
 [tower]
-status = "TOWER ATOMIC COMPLETE — 3/3 LIVE"
-songbird = "LIVE — LAN dispatch, tower debt 7/7 resolved"
-beardog = "LIVE — BTSP strict, genetic enrollment, enrollment decomp"
+status = "TOWER ATOMIC COMPLETE — 3/3 LIVE, PRODUCTION HARDENED"
+songbird = "LIVE — BTSP ClientHello, crypto delegation 6/6, LAN dispatch"
+beardog = "LIVE — AUTH_MODE=enforced, BTSP UDS required, pen test hardened"
 skunkbat = "LIVE (PUBLIC)"
 
 [tower_shadow]
@@ -57,16 +57,23 @@ iperf3_lan = "2.36 Gbps sporeGate→eastGate (CONFIRMED)"
 
 [harvest]
 wave = "151a"
-harvested = "2026-07-25T22:27:49Z"
+harvested = "2026-07-26T01:36:00Z"
 x86_64_primals = 14
 aarch64_primals = 14
-x86_64_status = "FRESH — all 14 primals rebuilt from HEAD"
-aarch64_status = "FRESH — all 14 primals cross-compiled, NEW target dir created"
+x86_64_status = "FRESH — bearDog + songBird rebuilt with pen test + BTSP ClientHello"
+aarch64_status = "FRESH — bearDog + songBird rebuilt for aarch64"
 provenance = "builder=sporeGate, toolchain=rustc 1.94.0"
 golgi_pushed = "CONFIRMED — both architectures synced"
 
+[hardening]
+beardog_auth_mode = "enforced (was Permissive)"
+beardog_uds_btsp = "required (was OFF)"
+method = "systemd drop-in override (/etc/systemd/system/membrane-beardog.service.d/hardening.conf)"
+deployed = "2026-07-26T01:35:17Z"
+observation = "BTSP enforcement active — legacy plaintext UDS connections correctly rejected"
+
 [primalspring]
-head = "32b225c"
+head = "f26976c"
 scenarios = 197
 known_debt = "1 (grapheneGate HSM) — per upstream calibration"
 suite_status = "GREEN"
@@ -79,27 +86,20 @@ webb = "200"
 git = "200"
 root = "301"
 
-[bilateral_verification]
-ssh = "CONFIRMED — eastgate@192.168.4.244"
-iperf3 = "CONFIRMED — 2.36 Gbps sporeGate→eastGate LAN"
-biomeos_beacon = "CONFIRMED GONE"
-manifest_ip = "CONFIRMED correct (192.168.4.244)"
-
 [resolved]
-tower_atomic = "COMPLETE — 7/7 debt resolved (151a)"
-depot_divergence = "RESOLVED — full 14-primal harvest × 2 architectures, provenance tracked, golgiBody synced"
+tower_atomic = "COMPLETE — 7/7 debt resolved"
+depot_divergence = "RESOLVED — 28 binaries × 2 architectures"
 tower_353x = "PROVEN"
 known_debt_burn = "36→1 (grapheneGate HSM only)"
-sporeprint_transplant = "DONE"
-songbird_lan_meshinit = "DEPLOYED"
-genetic_enrollment = "LIVE"
+beardog_pen_test = "SHIPPED — 3 CRITICAL fixed (error sanitization, auth gating, cipher floor)"
+songbird_btsp_clienthello = "SHIPPED — full 4-step handshake, HMAC-SHA256"
+crypto_delegation = "6/6 seams DONE"
+production_hardening = "DEPLOYED — AUTH_MODE=enforced, BTSP=required"
 bilateral_blockers = "ALL RESOLVED"
-songbird_build_fix = "c520414 → 59c221b (tower debt clear)"
 skunkbat_public = "PUBLIC (a8cf5aa)"
 
 [remaining]
 gate_enrollment_southgate = "P1 — USB staged, needs physical cabling"
 gate_enrollment_strandgate = "P1 — USB staged, needs physical cabling"
-songbird_crypto_delegation = "P1 — 6 seams remaining (flockGate)"
-beardog_pen_test = "P2 — full pen test before publication"
 graphenegate_floating = "P2 — evolve from ADB peripheral to autonomous gate"
+chimera_phase0 = "P2 — libtower.so extraction, unblocked by crypto delegation"
