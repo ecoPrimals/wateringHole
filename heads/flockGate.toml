@@ -1,89 +1,70 @@
-# flockGate status — Wave 150x (Composition Validation)
+# flockGate status — Wave 151a (Wave 150 COMPLETE, Nest Atomic Phase 0 ready)
 # Gate: flockGate | Role: CODE TEAM — bearDog, songBird, skunkBat
-# Updated: 2026-07-25T15:20:00Z
+# Updated: 2026-07-26T00:40:00Z
 
 [meta]
 gate = "flockGate"
 role = "Code team — primal source evolution"
-wave = "150x"
-updated = "2026-07-25T15:20:00Z"
-posture = "GREEN — P0 CLEAR, composition validated, blake3 method fix shipped"
+wave = "151a"
+updated = "2026-07-26T00:40:00Z"
+posture = "GREEN — Wave 150 COMPLETE, composition validated, Nest Atomic Phase 0 ready"
 
 [repos]
 skunkBat = "a8cf5aa"
-primalSpring = "1e809eb"
-wateringHole = "c36840c4"
+primalSpring = "ba47959"
+wateringHole = "9eecac19"
 songBird = "f18fa87"
 bearDog = "d1554f9"
 
-[composition_validation]
-status = "VALIDATED — all 6 delegation seams confirmed LIVE"
-beardog_socket = "/run/user/1000/biomeos/beardog.sock"
-beardog_version = "0.9.0"
-beardog_health = "healthy"
+[wave_150_summary]
+status = "COMPLETE — all P0/P1 resolved"
+tower_vs_wg = "353x LAN, 1.7x WAN"
+crypto_delegation = "6/6 seams validated LIVE (bearDog UDS cold-path confirmed)"
+blake3_method_fix = "f18fa87 — crypto.hash.blake3 → crypto.blake3_hash (found during composition validation)"
+beardog_tests = "13,973+"
+songbird_tests = "14,332+"
 
-[composition_validation.seams]
-crypto_sha256 = "PASS — correct hash output"
-crypto_hmac_sha256 = "PASS — correct MAC output"
-crypto_blake3_hash = "PASS — correct hash (was broken: method name mismatch fixed in f18fa87)"
-crypto_sign_ed25519 = "PASS — valid signature produced"
-crypto_verify_ed25519 = "PASS — round-trip sign→verify confirmed"
-crypto_hkdf_sha256 = "PASS — correct OKM derivation"
+[nest_atomic_phase_0]
+status = "VALIDATED — CAS put/get/verify/dedup confirmed LIVE"
+nestgate_socket = "/run/user/1000/biomeos/nestgate.sock"
+nestgate_version = "0.5.0"
+cas_put = "PASS — content.put stores blob, returns BLAKE3 hash"
+cas_get = "PASS — content.get retrieves by hash, returns exact data"
+cas_exists = "PASS — content.exists confirms with metadata (size, stored_at)"
+cas_dedup = "PASS — content.put duplicate returns deduplicated=true"
+blake3_parity = "PASS — bearDog(crypto.blake3_hash) == nestGate(content.put hash)"
+primalSpring_scenario = "PASS — nestgate-content-pipeline (put/get/exists/list/resolve)"
 
-[composition_validation.finding]
-severity = "P1 (was silent failure)"
-description = "songBird called crypto.hash.blake3 but bearDog exposes crypto.blake3_hash"
-impact = "BLAKE3 delegation always fell back to local — composition was broken silently"
-fix = "f18fa87 — corrected method name in crypto_helpers.rs and docs"
-status = "SHIPPED"
-
-[code_team_status]
-bearDog_all_p1 = "DONE"
-bearDog_bond_type_cipher = "DONE"
-bearDog_backpressure = "DONE"
-bearDog_publication_readiness = "P2 — pen test + validation before going public"
-songBird_caller_identity = "DONE"
-songBird_uds_hardening = "DONE"
-songBird_pen_hardening = "DONE"
-songBird_dep_diet = "DONE"
-songBird_crypto_delegation = "VALIDATED — all delegatable seams route through bearDog UDS"
-songBird_lan_routing = "DONE"
-songBird_failover_retry = "P2"
-songBird_health_check = "P2"
-songBird_socket_watch = "P2"
-skunkBat = "PUBLIC — cipher floor, deep debt, spawn-rate all done"
-
-[mesh]
-interface = "wg0"
-local_ip = "10.13.37.6"
-songbird_version = "0.2.1"
-peers_online = 8
-uptime_hours = 14.9
-stale = ["ironGate"]
+[services]
+songbird = "v0.2.1 | 8 peers | 24.3h uptime"
+beardog = "v0.9.0 | healthy"
+nestgate = "v0.5.0 | UDS + TCP:8080 | CAS operational"
 
 [primalSpring]
 scenarios = 197
 tests = 1241
 passed = 1241
 failed = 0
-known_debt_count = 11
-known_debt_note = "eastGate=9 + arch-fitness=1 + mesh-reachability=1 (flockGate-specific)"
+known_debt_count = 3
+known_debt_note = "flockGate-specific: graphenegate=14, arch-fitness=1, mesh-reachability=1 (upstream=1)"
+
+[code_team_status]
+wave_150_p1 = "ALL DONE"
+songBird_btsp_clienthello = "P2 — strict mode (Wave 151)"
+bearDog_publication = "P2 — pen test before going public"
+skunkBat = "PUBLIC — all done"
 
 [forward_evolution]
-next = "Phase 2: Measure IPC cost for each delegation seam (<1ms target)"
-chimera_phase_0 = "After IPC benchmarks — shared library extraction for hot-path crypto"
-note = "Composition validated. All Phase 1 seams confirmed LIVE. Ready for Phase 2 benchmarking."
+current = "Nest Atomic Phase 0 — nestGate CAS integration testing VALIDATED"
+next = "Nest Atomic Phase 0 → Phase 1: loamSpine prototype (eastGate lead)"
+flockGate_role = "Phase 2: rhizoCrypt wiring (cross-repo DAG tracking)"
+chimera = "Phase 0 UNBLOCKED — shared library extraction ready"
 
 [remaining_divergence]
-p1 = [
-    "Topology P1s: sporeGate team (southGate, strandGate enrollment, songBird LAN deploy)",
-]
+p1 = ["Topology: sporeGate team (southGate/strandGate enrollment)"]
 p2 = [
-    "bearDog: publication readiness (pen test + validation)",
-    "bearDog: Android Keystore + grapheneGate (hardware-blocked)",
-    "songBird: failover retry, health check, socket watch",
-    "skunkBat: capability announcement validation, revocation mechanism",
-    "Phase 2: IPC cost benchmarking for crypto delegation seams",
-    "Chimera Phase 0 (after Phase 2 benchmarks)",
+    "songBird: BTSP ClientHello strict mode",
+    "bearDog: publication readiness (pen test)",
+    "Chimera Phase 0 (refactoring — UDS → shared memory)",
 ]
-note = "All P0s clear. Composition validated. Phase 1 complete. Code team P1 DONE. Debt 11 local."
+note = "Wave 150 COMPLETE. Nest Atomic Phase 0 CAS validated. Forward: chimera + loamSpine + rhizoCrypt."
