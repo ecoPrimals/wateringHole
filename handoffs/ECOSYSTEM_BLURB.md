@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 151a
 
-**Date**: Jul 25, 2026 19:30 EDT | **Wave**: 151a | **From**: eastGate overwatch
-**Posture**: **WAVE 150 COMPLETE. Tower 353x LAN. Crypto delegation 6/6. Depot 28 bins × 2 arch. Known debt 1. Chimera + Nest Atomic ahead.**
+**Date**: Jul 25, 2026 21:15 EDT | **Wave**: 151a | **From**: eastGate overwatch
+**Posture**: **WAVE 150 CODE COMPLETE. bearDog pen test SHIPPED (3 CRITICAL fixed). songBird BTSP ClientHello SHIPPED. flockGate code teams CLEAR. Forward: grapheneGate HSM → standalone Android gate, chimera, Nest Atomic.**
 
 ---
 
@@ -22,29 +22,39 @@ Wave 150 (Tower Atomic) is **done**. Every P0 and P1 is resolved:
 
 ---
 
-## REMAINING WORK — WAVE 150 CLOSE-OUT
+## THIS CASCADE — WHAT SHIPPED
 
-### CODE TEAMS (flockGate)
+| Primal | Delivery | Impact |
+|--------|----------|--------|
+| bearDog | Publication pen test (Wave 151d) | 3 CRITICAL fixed: error sanitization, auth gating, cipher floor. Android compile fixes for eastGate readiness |
+| songBird | BTSP `ClientHello` (268L) | Full 4-step handshake, HMAC-SHA256 challenge-response. Strict mode consumer-side DONE |
+| primalSpring | Shadow data + recalibration | 108 new shadow samples across 7 gates. KNOWN_DEBT recalibrated |
 
-| # | Task | Priority | Owner |
-|---|------|----------|-------|
-| 1 | songBird BTSP `ClientHello` for strict mode | P2 | songBird |
-| 2 | bearDog grapheneGate Android Keystore | P2 | bearDog (hardware-blocked) |
-| 3 | bearDog publication readiness pen test | P2 | bearDog |
+### flockGate code teams — ALL CLEAR
+
+No remaining code tasks. bearDog pen test and songBird BTSP ClientHello were
+the last two P2 items — both shipped this cascade.
+
+bearDog remaining HIGH items are **deployment config**, not code:
+- `BEARDOG_AUTH_MODE=enforced` (default Permissive)
+- `BEARDOG_UDS_REQUIRE_BTSP=1` (default OFF)
+- Per-method rate limiting (connection-level cap exists at 512)
 
 ### DEPLOYMENT (sporeGate)
 
 | # | Task | Priority |
 |---|------|----------|
 | 1 | Gate enrollment (southGate, strandGate) | P1 |
-| 2 | grapheneGate → floating autonomous gate | P2 |
+| 2 | Deploy bearDog production hardening (`AUTH_MODE=enforced`, `REQUIRE_BTSP=1`) | P1 |
 
-### OVERWATCH (eastGate)
+### OVERWATCH + HARDWARE (eastGate)
 
 | # | Task | Priority |
 |---|------|----------|
-| 1 | GLOSSARY.md refresh (138b → 151a) | P2 |
-| 2 | PRIMAL_REGISTRY.md refresh (109 → 15 primals) | P2 |
+| 1 | bearDog Android Keystore validation via grapheneGate (ADB) | P1 |
+| 2 | grapheneGate full NUCLEUS deploy → standalone Android gate | P1 |
+| 3 | GLOSSARY.md refresh (138b → 151a) | P2 |
+| 4 | PRIMAL_REGISTRY.md refresh (109 → 15 primals) | P2 |
 
 ---
 
@@ -57,13 +67,16 @@ defense → `libtower.so`. Crypto delegation 6/6 means composition model
 is validated. This is pure refactoring — no new APIs, just collapsing UDS
 hops into shared memory.
 
-### grapheneGate Evolution
+### grapheneGate → Standalone Android Platform
 
-Current: ADB-tethered, primalSpring validates via `PRIMAL_BIND_MODE=tcp_only`.
-aarch64 binaries now in depot.
+**Phase 1** (eastGate, P1): primalSpring validates bearDog `CredentialStore::AndroidKeystore`
+via ADB — Titan M2 HSM key generation, BTSP enrollment with hardware-backed keys.
+Resolves last known debt finding (`graphenegate-readiness`).
 
-Target: Autonomous LAN/WAN gate — BTSP mesh enrollment, Tower transport,
-own cellMembrane, Titan M2 HSM for bearDog AndroidKeystore. Peer, not peripheral.
+**Phase 2** (eastGate + sporeGate, P1): Full NUCLEUS deploy — Tower Atomic transport,
+cellMembrane instance, depot-sourced aarch64 binaries, mesh enrollment as autonomous
+peer. grapheneGate becomes the ecosystem's Android platform, interfacing over
+LAN/WAN via Tower, not ADB.
 
 ### Nest Atomic (Wave 151) — DATA + PROVENANCE + rootPulse
 
@@ -104,8 +117,8 @@ Cascade, Tower Deep Analysis, sporePrint Transplant, **Tower Completion + Depot*
 
 ---
 
-*Wave 150 COMPLETE. Tower Atomic proven (353x LAN, 1.7x WAN). Crypto
-delegation 6/6 — chimera Phase 0 unblocked. Depot converged (28 bins × 2 arch).
-Known debt: 1 (grapheneGate HSM). Forward: chimera extraction, grapheneGate
-autonomy, Nest Atomic (rootPulse via Provenance Trio). 197 scenarios PASS.
-43/43 converged.*
+*Wave 150 CODE COMPLETE. flockGate code teams CLEAR — bearDog pen test
+shipped (3 CRITICAL), songBird BTSP ClientHello shipped. Remaining: eastGate
+grapheneGate HSM validation → standalone Android gate. sporeGate production
+hardening + gate enrollment. Then chimera Phase 0 and Nest Atomic. 197 scenarios
+PASS. 43/43 converged.*

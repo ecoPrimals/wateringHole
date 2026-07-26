@@ -68,7 +68,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] aarch64 cross-compile working — zero source changes, zero build failures
 - [ ] southGate pending USB enrollment (house2, full NUCLEUS)
 - [ ] strandGate enrollment pending (dual EPYC 7452, 256GB, RTX 3090)
-- [ ] grapheneGate → autonomous floating gate (P2, aarch64 binaries ready)
+- [ ] grapheneGate → standalone Android platform (P1, eastGate validates HSM then full NUCLEUS deploy)
 - [ ] westGate OFFLINE (cold storage, 76TB ZFS)
 - [ ] fieldGate OFFLINE (dead CMOS)
 - [ ] biomeGate OFFLINE (kernel recovery)
