@@ -4,13 +4,13 @@
 
 [meta]
 gate = "eastGate"
-updated = "2026-07-25T15:25:00Z"
+updated = "2026-07-26T00:50:00Z"
 
 [heads]
 agentReagents = "1fb1a3f5d900a12a093d233d77621f58bfd34bea"
 airSpring = "0bbf268c08d3903f53cbd108470fb5833d786155"
 barraCuda = "ab88db8d548784254ca1967d9dfe9e5f09b6e928"
-bearDog = "27cf95c7843f121c445f50190c317a4a3ef66faa"
+bearDog = "f1b75a599"
 benchScale = "ba5fa5426d6400d9bc3f642cd3a64e6244cabe22"
 bingoCube = "cf6b645e6531177eb5795d3e1da292f1ded2a243"
 biomeOS = "b59c74ba8e43730277c4238ca9dcf151a44178dd"
