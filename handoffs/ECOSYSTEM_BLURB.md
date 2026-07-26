@@ -110,14 +110,14 @@ stale primals, and re-enroll without manual intervention.
 
 ### User Tasks (from sporePrint AARs)
 
-| # | Task | Priority |
-|---|------|----------|
-| 1 | Google Search Console: verify `sporeprint.primals.eco` ownership | P1 |
-| 2 | JOSS submission (barraCuda or wetSpring) | P2 |
-| 3 | crates.io releases (barraCuda, wetSpring) | P2 |
-| 4 | Scientific Computing in Rust Monthly submission | P3 |
-| 5 | DADA2 community engagement | P3 |
-| 6 | `eco.primal@primal.eco` activation | P3 |
+| # | Task | Priority | Status |
+|---|------|----------|--------|
+| 1 | ~~Google Search Console~~ | ~~P1~~ | **DONE** — service account provisioned, `membrane seo.*` handoff issued |
+| 2 | JOSS submission (barraCuda or wetSpring) | P2 | |
+| 3 | crates.io releases (barraCuda, wetSpring) | P2 | |
+| 4 | Scientific Computing in Rust Monthly submission | P3 | |
+| 5 | DADA2 community engagement | P3 | |
+| 6 | `eco.primal@primal.eco` activation | P3 | BLOCKED (infra) |
 
 ### Overwatch (eastGate)
 
