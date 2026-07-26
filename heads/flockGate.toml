@@ -10,7 +10,7 @@ updated = "2026-07-26T00:40:00Z"
 posture = "GREEN — Wave 150 COMPLETE, composition validated, Nest Atomic Phase 0 ready"
 
 [repos]
-skunkBat = "6b88390"
+skunkBat = "e708fa6"
 primalSpring = "ba47959"
 wateringHole = "9eecac19"
 songBird = "f18fa87"
@@ -52,7 +52,7 @@ known_debt_note = "flockGate-specific: graphenegate=14, arch-fitness=1, mesh-rea
 wave_150_p1 = "ALL DONE"
 songBird_btsp_clienthello = "P2 — strict mode (Wave 151)"
 bearDog_publication = "P2 — pen test before going public"
-skunkBat = "PUBLIC — BTSP ClientHello DONE (W151b), 597 tests"
+skunkBat = "PUBLIC — BTSP ClientHello + deep debt zero-baseline (W151b), 597 tests, 0 duplicates"
 
 [forward_evolution]
 current = "Nest Atomic Phase 0 — nestGate CAS integration testing VALIDATED"
