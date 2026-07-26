@@ -10,9 +10,9 @@
 
 [wave]
 id = 151
-sub = "a"
+sub = "b"
 date = "2026-07-25"
-posture = "WAVE 150 COMPLETE. Tower 353x LAN, 1.7x WAN. Crypto delegation 6/6. Depot 28 bins × 2 arch. Known debt 1 (HSM). Chimera Phase 0 UNBLOCKED. F8 fossilized (Tower Completion + Depot). Forward: chimera, grapheneGate autonomy, Nest Atomic (rootPulse). 197 scenarios PASS. 43/43 converged."
+posture = "SUB-WAVE 151b: BTSP STANDARD EVOLUTION. All primals evolve to BTSP ClientHello before Nest Atomic. sporeGate strict mode LIVE. bearDog transplanted to eastGate (grapheneGate HSM access). grapheneGate scenario evolved to golgiBody depot-sourced. Known debt 2 (provenance stale in git). 197 scenarios PASS. 43/43 converged."
 publisher = "eastGate-overwatch"
 
 [gates]
