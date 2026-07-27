@@ -1,205 +1,186 @@
-# ecoPrimals Ecosystem Blurb — Wave 155b
+# ecoPrimals Ecosystem Blurb — Wave 151a
 
-**Date**: Jul 27, 2026 12:52 EDT | **Wave**: 155b | **From**: eastGate overwatch
-**Posture**: **genomeBin CONVERGENCE — code teams evolved, jelly strings identified, cross-platform proof underway.**
-
-This is the single handoff document for every team — gate teams and code teams.
-Read "Where We Are", find "Your Team", act on your next work.
+**Date**: Jul 25, 2026 22:10 EDT | **Wave**: 151b | **From**: eastGate overwatch
+**Posture**: **grapheneGate scenario EVOLVED (golgiBody depot-sourced). bearDog TRANSPLANTED to eastGate for HSM access. SUB-WAVE 151b: all primals evolve to BTSP standard before Nest Atomic.**
 
 ---
 
 ## WHERE WE ARE
 
-Tracks A + B **converged**. 10 dimensions fossilized (F1-F10). Code teams
-responded to the Wave 155b blurb with evolution across 7 primals + cellMembrane.
-sporeGate AAR identifies 7 jelly strings in the deployment pipeline — the
-harvest/push/deploy chain is still shell scripts. That's the evolution frontier.
+Wave 150 (Tower Atomic) is **done**. Every P0 and P1 is resolved:
 
 | Metric | Value |
 |--------|-------|
-| Primal tests | **~78K** (rhizoCrypt +10, toadStool 9,232, loamSpine 1,732) |
-| Scenarios | 197, all PASS (primalSpring calibrated for 13-gate mesh) |
-| BTSP | **13/13** |
-| genomeBin depot | **39 binaries** (13 primals × 3 targets) on golgiBody |
-| Depot targets | x86_64-linux-musl + aarch64-linux-musl + **x86_64-windows-gnu** |
-| Gates ONLINE | **7** |
-| Gates HW READY | **5** |
-| Tower shadow | 24 new benchmark samples today (3 gates × 4 paths × 2 modes) |
+| Tower vs WireGuard | 353x LAN latency, 1.7x WAN throughput |
+| Scenarios | 197, all PASS |
+| Known debt | **2** (grapheneGate provenance stale in git — depot fresh on golgiBody) |
+| Depot | 28 binaries × 2 architectures, provenance fresh |
+| Crypto delegation | songBird → bearDog **6/6 seams DONE** |
+| bearDog tests | 13,973+ |
+| songBird tests | 14,332+ |
+| Fossilized docs | 42+ |
 
 ---
 
-## WHAT TEAMS SHIPPED THIS WAVE
+## THIS CASCADE — WHAT SHIPPED
 
-| Team | Evolution | Commit |
-|------|-----------|--------|
-| **songBird** | G1: First-class Windows named pipe IPC — `TransportEndpoint::NamedPipe` + `IpcStream::NamedPipe`. GateEnroll dispatch + drawbridge body-method fallback | `7e3517c8`, `c4c5d2d2` |
-| **rhizoCrypt** | G3: BTSP→DAG auth bridge — `ConnectionOrigin::BtspAuthenticated`. Federate hardening — source gate provenance, signature verification. 1,893 tests (+10) | `d4972b0` |
-| **nestGate** | G3: BTSP→CAS wiring + G4 cross-platform paths. Deep debt: capability probe, orphan cleanup, dep hygiene | `d0921a2b`, `9138068f` |
-| **loamSpine** | G3: Full certificate lifecycle E2E with seal. 6 dead-code stubs realigned to Nest Atomic Phase 0. 1,732 tests | `d1b1594` |
-| **toadStool** | S342: wgpu cross-platform GPU fallback (DX12/Vulkan/Metal). Doctor GPU check fix (Windows/macOS). SAFETY docs on MMIO ops. 9,232 tests | `64f661674` |
-| **skunkBat** | Refactor: frame crypto extracted from negotiate.rs into frame.rs | `578136c` |
-| **coralReef** | Test extraction: encoding.rs + op_misc modules separated | `40ea5b1` |
-| **cellMembrane** | G1: `InitSystem` dispatch — systemd/launchd/windows-service/bare process manager. 513 insertions | `cbadae4` |
-| **primalSpring** | Gate count calibrated for 13-gate mesh + sporePrint known debt fix | `05e72e46` |
-| **sporeGate** | AAR: 39 binaries (3 targets) harvested + pushed to golgiBody. 7 jelly strings triaged (J1-J7) | deployment |
+| Primal | Delivery | Impact |
+|--------|----------|--------|
+| bearDog | Publication pen test (Wave 151d) | 3 CRITICAL fixed: error sanitization, auth gating, cipher floor. Android compile fixes for eastGate readiness |
+| songBird | BTSP `ClientHello` (268L) | Full 4-step handshake, HMAC-SHA256 challenge-response. Strict mode consumer-side DONE |
+| primalSpring | Shadow data + recalibration | 108 new shadow samples across 7 gates. KNOWN_DEBT recalibrated |
 
----
+### flockGate code teams — ALL CLEAR
 
-## GLACIAL GOALS — UPDATED STATUS
+Zero remaining Tower code tasks. Tower continues to evolve alongside
+Nest Atomic — the electron matures as we build the neutron.
 
-| # | Goal | Status | What Landed This Wave |
-|---|------|--------|----------------------|
-| G1 | Tower on Windows | **IN PROGRESS** | songBird named pipes shipped. cellMembrane InitSystem dispatch shipped. toadStool wgpu GPU fallback shipped. |
-| G2 | Tower on Android | PENDING | — |
-| G3 | Nest Atomic Phase 0 | **IN PROGRESS** | rhizoCrypt BTSP→DAG bridge. loamSpine lifecycle E2E. nestGate BTSP→CAS wiring. |
-| G4 | Nest cross-platform | **IN PROGRESS** | nestGate cross-platform paths. rhizoCrypt federate hardening. |
-| G5 | Chimera Phase 0 | PENDING (blocked on G1 proof) | — |
-| G6 | bearDog public | READY (final audit) | — |
-| G7 | Gate enmeshment | **IN PROGRESS** | 39 binaries on golgiBody depot. Enrollment endpoint live. |
-| G8 | Plasmodium | PENDING (blocked on G7) | — |
-| G9 | JOSS publication | PENDING | — |
+### bearDog TRANSPLANTED to eastGate
+
+bearDog team now operates from **eastGate** — direct ADB access to
+grapheneGate (Pixel 8, Titan M2 HSM). This enables:
+- Hardware-backed `CredentialStore::AndroidKeystore` validation
+- Titan M2 key generation + BTSP enrollment with HSM keys
+- grapheneGate deployment testing without cross-gate coordination
 
 ---
 
-## JELLY STRINGS — DEPLOYMENT EVOLUTION PRIORITY
+## SUB-WAVE 151b — BTSP STANDARD EVOLUTION (ALL PRIMALS)
 
-From sporeGate AAR. These block the transition from "operator runs shell
-loops" to "gates self-heal via cascade":
+Before Nest Atomic begins, **every primal** that talks to bearDog must
+evolve to BTSP. sporeGate already deployed strict mode — legacy plaintext
+JSON-RPC is now **rejected**. Primals that don't evolve will lose bearDog
+crypto access in Nest Atomic.
 
-| # | What | Impact | Owner | Priority |
-|---|------|--------|-------|----------|
-| J1 | Harvest is shell loops | Blocks distributed building | cellMembrane | **P0** |
-| J2 | Depot push is rsync | No integrity verify, no atomic swap | cellMembrane | **P1** |
-| J3 | Service restart is manual | Blocks cascade-driven deployment | cellMembrane + songBird | **P1** |
-| J4 | Caddy config is manual | Blocks self-configuring routes | songBird | **P2** |
-| J5 | WG peer reg is ssh+wg set | Already coded, needs live test | songBird | **P2** |
-| J6 | systemd overrides manual | Blocks cross-platform service config | cellMembrane | **P2** |
-| J7 | Legacy service detection | One-time, low recurrence | cellMembrane | **P3** |
+### What Each Primal Needs
 
-**Convergence path**: J1 (Rust harvest command) → J2 (Rust depot push) → J3 (auto hot-swap) → self-healing cascade.
+Implement songBird-style BTSP `ClientHello` handshake (268 lines reference):
+1. Send `ClientHello { protocol: "btsp", version: 1, client_ephemeral_pub }`
+2. Read `ServerHello { challenge, session_id }`
+3. Compute `HMAC-SHA256(FAMILY_SEED, challenge)` → send `ChallengeResponse`
+4. Read `HandshakeComplete { cipher, session_id }`
 
----
+Reference: `primals/songBird/crates/songbird-crypto-provider/src/btsp_client.rs`
 
-## CODE TEAMS — PRIMAL STATUS + NEXT WORK
+### Primal BTSP Status
 
-### Tower Atomic
+| Primal | Uses bearDog? | BTSP Status | Action |
+|--------|--------------|-------------|--------|
+| songBird | Yes (crypto delegation 6/6) | **DONE** | Reference implementation |
+| barracuda | Yes (signing) | NEEDS EVOLUTION | Implement ClientHello |
+| loamSpine | Yes (DAG signing) | NEEDS EVOLUTION | Implement ClientHello |
+| sweetGrass | Yes (braid attestation) | NEEDS EVOLUTION | Implement ClientHello |
+| rhizoCrypt | Yes (lineage crypto) | NEEDS EVOLUTION | Implement ClientHello |
+| coralReef | Minimal | NEEDS EVOLUTION | Implement ClientHello |
+| squirrel | Yes (secrets) | NEEDS EVOLUTION | Implement ClientHello |
+| biomeOS | Yes (identity) | NEEDS EVOLUTION | Implement ClientHello |
+| nestGate | Minimal (CAS hashing) | LOW PRIORITY | Can use local crypto |
+| toadStool | No direct | SKIP | No bearDog dependency |
+| petalTongue | No direct | SKIP | No bearDog dependency |
+| skunkBat | Yes (cipher negotiation) | NEEDS EVOLUTION | Implement ClientHello |
+| cellMembrane | Yes (lineage validation) | NEEDS EVOLUTION | Implement ClientHello |
 
-| Primal | Version | Tests | This Wave | Next Work |
-|--------|---------|-------|-----------|-----------|
-| **bearDog** | 0.9.0 | 11,993 | — | G5: `beardog-core` crate extraction. G6: public flip audit. |
-| **songBird** | 0.2.1 | 10,335 | Named pipe IPC, GateEnroll dispatch | G1: Live test named pipes on blueGate/northGate. J4: native TLS (replace Caddy). J5: live enrollment validation. |
-| **skunkBat** | 0.2.18 | — | Frame crypto extraction | Stable. No active work. |
+### Deployment Rollout (sporeGate — ALREADY LIVE)
 
-### Provenance Trio + Nest Atomic
+sporeGate has already deployed `BEARDOG_AUTH_MODE=enforced` +
+`BEARDOG_UDS_REQUIRE_BTSP=1`. Remaining gates:
 
-| Primal | Version | Tests | This Wave | Next Work |
-|--------|---------|-------|-----------|-----------|
-| **nestGate** | 0.5.0 | 9,617 | BTSP→CAS wiring, cross-platform paths, dep hygiene | G3: Wire `connect_with_btsp` into priority CAS call sites. G4: Windows path handling (NTFS vs ext4). |
-| **rhizoCrypt** | 0.14.17 | 1,893 | BTSP→DAG bridge, federate hardening | G3: Cross-gate provenance chain with loamSpine+sweetGrass. |
-| **loamSpine** | 0.9.16 | 1,732 | Lifecycle E2E with seal, dead-code alignment | G3: MintingAuthority validation path. Coordinate with primalSpring for scenarios. |
-| **sweetGrass** | 0.7.63 | — | — | G3: Attribution braids for cross-gate provenance chains. Wire with rhizoCrypt federate. |
-
-### Compute Triangle
-
-| Primal | Version | Tests | This Wave | Next Work |
-|--------|---------|-------|-----------|-----------|
-| **toadStool** | 0.2.0 | 9,232 | wgpu GPU fallback, doctor fix, SAFETY docs | Windows-native enrichment: WMI `Win32_VideoController`, DXGI adapter enum. |
-| **barraCuda** | 0.4.0 | — | — | Stable. |
-| **coralReef** | 0.2.0 | — | Test extraction | Stable. Windows Vulkan path if needed. |
-
-### Data + Orchestration
-
-| Primal | Version | Tests | Next Work |
-|--------|---------|-------|-----------|
-| **biomeOS** | 0.1.0 | — | G8: Plasmodium multi-gate bonding (after G7). |
-| **squirrel** | 0.1.0 | — | Stable. Evolves with NUCLEUS. |
-| **petalTongue** | 1.7.0 | 5,812 | Stable. |
-
-### cellMembrane
-
-| Component | This Wave | Next Work |
-|-----------|-----------|-----------|
-| **membrane-shadow** | `InitSystem` dispatch (systemd/launchd/windows-service/bare) | **J1**: `plasmid.harvest` Rust command. **J2**: `plasmid.push` Rust command. **J3**: `deploy.hot-swap`. Gate service config from profile TOML. |
+| # | Gate | Status |
+|---|------|--------|
+| 1 | sporeGate | **DEPLOYED** |
+| 2 | eastGate | Deploy after bearDog team validates |
+| 3 | flockGate | Deploy after code teams evolve primals |
+| 4 | golgiBody | Deploy after confirming depot operations |
+| 5 | Future gates | USB bundle updated with BTSP defaults |
 
 ---
 
-## GATE TEAMS — STATUS + NEXT WORK
+## EXECUTING NOW
 
-### House 1
+### bearDog (eastGate) — grapheneGate HSM Validation
 
-| Gate | Status | Next Work |
-|------|--------|-----------|
-| **sporeGate** | ONLINE. 39 binaries × 3 targets harvested | J1: codify harvest loop into `membrane plasmid.harvest`. Foreman for blueGate. |
-| **eastGate** | ONLINE. Overwatch | Coordination. bearDog public flip. Cargo.toml metadata cascade (8 primals done). |
-| **northGate** | ONLINE. Windows, WG mesh | G1 validation: test songBird named pipe IPC live. Test Tower Atomic services on Windows. |
+Scenario `s_graphenegate_readiness` evolved to check golgiBody depot provenance
+(not local filesystem). Deploy path: golgiBody → eastGate → ADB → grapheneGate.
+Future: phone self-enrolls via Tower mesh.
 
-### House 2
+Remaining debt (2): provenance.toml stale in git (sporeGate refreshed via
+rsync but didn't commit). Resolve by committing provenance on golgiBody.
 
-| Gate | Status | Next Work |
-|------|--------|-----------|
-| **ironGate** | ONLINE. 4x HDD | HDD enclave model (LUKS per-disk). JupyterHub live. |
-| **strandGate** | HW READY | Enroll → Tower → compute workloads (bioinformatics, NF pipeline). |
-| **westGate** | HW READY | Enroll → Tower → Nest Atomic → ZFS CAS cold pool. |
-| **blueGate** | HW READY (Windows) | Enroll (`gate-enroll.ps1`) → Tower on Windows → distributed builder. G1 proof. |
-| **swiftGate** | HW READY (Windows) | Enroll (`gate-enroll.ps1`) → Full NUCLEUS on Windows. |
-| **southGate** | HW READY | Enroll → Full NUCLEUS → second sovereign site. |
+### Gate Enrollment (sporeGate)
 
-### Remote / Mobile
+| # | Task | Priority |
+|---|------|----------|
+| 1 | southGate enrollment (house2) | P1 |
+| 2 | strandGate enrollment (dual EPYC) | P1 |
 
-| Gate | Status | Next Work |
-|------|--------|-----------|
-| **golgiBody** | ONLINE. 39 binaries in depot | Serve genomeBins. Enrollment endpoint live. |
-| **flockGate** | ONLINE | G3: Nest Atomic Phase 0 validation (nestGate + provenance trio). |
-| **grapheneGate** | ONLINE | G2: Tower → full NUCLEUS on Android (after G1 proven). |
+### Overwatch (eastGate)
+
+| # | Task | Priority |
+|---|------|----------|
+| 1 | GLOSSARY.md refresh (138b → 151b) | P2 |
+| 2 | PRIMAL_REGISTRY.md refresh (109 → 15 primals) | P2 |
 
 ---
 
-## CROSS-CUTTING DEPENDENCIES
+## FORWARD WORK — CHIMERA + NEST ATOMIC
 
-```
-G7 (gate enmeshment) — 39 binaries on depot, enrollment live
- ├── G1 (Tower on Windows) — songBird pipes SHIPPED, cellMembrane InitSystem SHIPPED
- │    ├── blueGate + swiftGate enrollment
- │    └── northGate live validation
- ├── G3 (Nest Atomic Phase 0) — rhizoCrypt BTSP bridge SHIPPED, nestGate CAS wiring SHIPPED
- │    ├── loamSpine lifecycle E2E SHIPPED
- │    └── flockGate validation
- ├── G4 (Nest cross-platform) — nestGate paths SHIPPED
- │    └── westGate ZFS CAS
- └── J1 (harvest command) → J2 (depot push) → J3 (auto hot-swap) → self-healing cascade
+### Chimera Phase 0 — UNBLOCKED
 
-G5 (Chimera) ← G1 proven
-G6 (bearDog public) ← independent (ready)
-G8 (Plasmodium) ← G7 complete
-```
+Shared library extraction: bearDog crypto + songBird routing + skunkBat
+defense → `libtower.so`. Crypto delegation 6/6 means composition model
+is validated. This is pure refactoring — no new APIs, just collapsing UDS
+hops into shared memory.
 
----
+### grapheneGate → Standalone Android Platform
 
-## REMAINING HANDOFFS (active in handoffs/)
+**Phase 1** (eastGate, NOW): HSM validation executing — see EXECUTING NOW above.
 
-| File | Scope | Status |
-|------|-------|--------|
-| `ECOSYSTEM_BLURB.md` | This document — universal handoff | CURRENT |
-| `BLURB_TRACK_A_EVOLUTION.md` | Nest Atomic + Chimera scope reference | CONVERGED |
-| `BLURB_TRACK_B_FLEET_CONVERGENCE.md` | Enrollment phases reference | CONVERGED |
-| `BLURB_SPOREGATE_BUILD_MESH.md` | Build mesh + harvest topology | CURRENT |
-| `LOAMSPINE_WAVE155B_G3_READINESS_JUL27_2026.md` | G3 readiness detail | NEW |
-| `RHIZOCRYPT_WAVE155B_BTSP_DAG_BRIDGE_JUL27_2026.md` | BTSP→DAG bridge detail | NEW |
-| `TOADSTOOL_S342_CROSS_PLATFORM_GPU_JUL27_2026.md` | Cross-platform GPU detail | NEW |
-| `ABG_JUPYTERHUB_ACCESS_GUIDE.md` | Operational reference | STATIC |
-| `LIVE_FRONTEND_E2E_TUTORIAL_STANDARD.md` | Operational standard | STATIC |
-| `TEAM_STARTUP_BLURB_TEMPLATE.md` | Template | STATIC |
+**Phase 2** (eastGate + sporeGate): Full NUCLEUS deploy — Tower Atomic transport,
+cellMembrane instance, depot-sourced aarch64 binaries, mesh enrollment as
+autonomous peer with BTSP strict mode from day one. grapheneGate becomes
+the ecosystem's Android platform — peer, not peripheral.
 
-AAR in `aars/`:
-| File | Scope |
-|------|-------|
-| `SPOREGATE_DEPLOYMENT_EVOLUTION_155b_AAR.md` | Jelly string triage + isomorphic target |
+### Nest Atomic (Wave 151) — DATA + PROVENANCE + rootPulse
+
+The neutron layer: real data movement through Tower transport, per-object
+encryption via bearDog, content-addressed storage via nestGate CAS.
+
+| Phase | Scope | Teams |
+|-------|-------|-------|
+| 0 | nestGate CAS integration testing (put/get/verify) | eastGate + flockGate |
+| 1 | loamSpine prototype (append-only DAG ledger) | eastGate |
+| 2 | rhizoCrypt wiring (cross-repo DAG tracking) | eastGate + flockGate |
+| 3 | sweetGrass semantic braids (per-gate attestations) | all |
+| 4 | rootPulse composition (biomeOS orchestrates Trio) | all |
+| 5 | golgiBody deployment (rootPulse replaces waterFall) | sporeGate |
+
+### sporePrint Pipeline (parallel)
+
+Zola → petalTongue + nestGate CAS + cellMembrane. Converges with
+Nest Atomic Phase 0.
 
 ---
 
-*Wave 155b. Code teams accelerated: G1 (Tower on Windows) has 3 shipped components,
-G3 (Nest Atomic) has 3 shipped components, toadStool cross-platform GPU live.
-sporeGate depot has 39 binaries across 3 targets. 7 jelly strings triaged —
-J1 (Rust harvest) is the P0 that unblocks distributed building and cascade
-automation. The system is at the inflection point: primitives exist, orchestration
-needs codification.*
+## DIMENSIONAL SCORECARD
+
+| # | Dimension | Status |
+|---|-----------|--------|
+| 1 | Temporal/Coordination | GREEN — 43/43 synced |
+| 2 | Ecological | GREEN — 197 scenarios, 2 debt (provenance) |
+| 3 | Hardware | AMBER — 4 offline gates |
+| 4 | Sovereignty | GREEN — depot fresh, BTSP strict, chimera unblocked |
+| 5 | Public Surface | GREEN — 6/6 healthy |
+| 6 | Compositions | GREEN — crypto delegation validated |
+| 7 | Documentation | GREEN — 42+ docs fossilized |
+| 8 | Campus | GREEN — vision documented |
+
+**Fossilized** (F1–F8): Glacial Shift, CAC, Silicon Atheism, Depot/Build,
+Cascade, Tower Deep Analysis, sporePrint Transplant, **Tower Completion + Depot**.
+
+---
+
+*Sub-wave 151b: BTSP standard evolution across all primals before Nest Atomic.
+bearDog transplanted to eastGate for grapheneGate HSM access. grapheneGate
+scenario evolved to golgiBody depot-sourced deploy path. sporeGate BTSP strict
+mode LIVE. Tower matures as we build the neutron. 197 scenarios PASS.
+43/43 converged.*

@@ -1,12 +1,15 @@
-# ToadStool S342 — Cross-Platform GPU Discovery + SAFETY Docs
+# ToadStool S342–S343 — Cross-Platform GPU Pipeline
 
-**Date**: Jul 27, 2026 | **Session**: S342 | **Wave**: 155b
+**Date**: Jul 27, 2026 | **Sessions**: S342–S343 | **Wave**: 155b
 
 ## Summary
 
-Wired wgpu adapter enumeration into the self-knowledge pipeline as
+S342: Wired wgpu adapter enumeration into the self-knowledge pipeline as
 cross-platform GPU fallback. Fixed doctor false positives and documented
 unsafe MMIO operations.
+
+S343: Extended wgpu coverage to all GPU system query functions and dispatch
+capabilities. Every GPU detection path now has a cross-platform fallback.
 
 ## Changes
 
@@ -48,18 +51,36 @@ non-Linux. Platform-specific checks:
 - Zero clippy warnings (`-D warnings` on Rust 1.96)
 - Zero fmt diff
 
-## Cross-Platform Gap Analysis
+## S343 — GPU System Queries + Dispatch Capabilities
 
-Wave 155b identifies "Cross-platform hardware discovery (Windows GPU
-probing)" as toadStool's next work. Status after S342:
+### gpu_system.rs Evolutions
+
+- **`query_gpu_devices()`**: Static `"wgpu-default"` placeholder replaced
+  with real `wgpu::Instance::enumerate_adapters()`. Reports name, vendor ID,
+  device ID, backend, device type, driver for each adapter.
+- **`query_gpu_memory()`**: `nvidia-smi` invocation ungated — works on
+  Windows when NVIDIA drivers installed. No longer Linux-only.
+- **`query_available_backends()`**: Windows checks `d3d12.dll`/`vulkan-1.dll`;
+  macOS checks `Metal.framework`. No longer hardcoded.
+
+### dispatch/capabilities.rs Evolution
+
+When `sysmon::discover_gpus()` returns empty (non-Linux), falls back to
+wgpu adapter enumeration. New `wgpu_gpus` array in JSON-RPC response.
+`dispatch_modes` dynamically computed: `["vfio"]` / `["drm"]` / `["wgpu"]`
+/ `["cpu"]` based on what's actually detected.
+
+## Cross-Platform Gap Analysis (after S343)
 
 | Layer | Cross-platform? |
 |-------|-----------------|
-| capabilities/gpu.rs | **Yes** (wgpu fallback added S342) |
+| capabilities/gpu.rs | **Yes** (wgpu fallback, S342) |
+| gpu_system queries | **Yes** (wgpu + nvidia-smi, S343) |
+| dispatch/capabilities | **Yes** (wgpu fallback, S343) |
 | sysmon::discover_gpus | Linux-only (by design — reads procfs/sysfs) |
 | dispatch routing/state | Linux-only (VFIO/DRM kernel APIs) |
 | doctor check_gpu_available | **Yes** (fixed S342) |
 | resource_validator | **Yes** (wgpu probe with timeout) |
 
-Next: Windows-native enrichment (WMI `Win32_VideoController` for VRAM,
-DXGI adapter enumeration) to complement wgpu's name+vendor-only data.
+Next: WMI `Win32_VideoController` for VRAM enrichment when blueGate
+validates (requires live Windows hardware testing).
