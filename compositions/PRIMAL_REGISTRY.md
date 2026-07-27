@@ -2,7 +2,11 @@
 
 **Purpose**: Authoritative catalog of every primal, its primitives, its domain, and its role in the ecosystem  
 **Audience**: Any primal seeking to understand what capabilities exist  
+<<<<<<< Updated upstream:compositions/PRIMAL_REGISTRY.md
 **Last Updated**: July 26, 2026 (Wave 151b — BTSP standard ALL primals. Tower COMPLETE 353x LAN. Crypto delegation 6/6. Known debt 2 (provenance). Depot 28 bins × 2 arch. Chimera + Nest Atomic unblocked.)
+=======
+**Last Updated**: June 11, 2026 (Wave 109 — guideStone deployment convergence. 13/13 primals CLEAN, 5-gate mesh LIVE, startup contract 5/6, HEALTH-01 10/13. biomeOS v4.22, sweetGrass v0.7.56, barraCuda v0.4.0, skunkBat v0.2.10, rhizoCrypt v0.14.7, loamSpine v0.9.16. grapheneGate 13/13 deployed. Criterion 7 convergence in progress.)
+>>>>>>> Stashed changes:PRIMAL_REGISTRY.md
 
 ---
 
@@ -281,8 +285,13 @@ These primals build emergent behaviors on the NUCLEUS foundation. They compose i
 
 **Domain**: Content-addressed DAG engine for working memory  
 **Phase**: Post-NUCLEUS  
+<<<<<<< Updated upstream:compositions/PRIMAL_REGISTRY.md
 **Version**: 0.14.17  
 **Status**: Production Ready (1,878 tests, clippy pedantic+nursery clean, integration traits wired, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny CLEAN (RUSTSEC-2026-0204 fixed), `--fail-under-lines 90` CI gate (93.83%), cross-compile CI (musl x86_64/aarch64 + RISC-V + Windows GNU), `niche.rs` self-knowledge with MCP tools, `capability_registry.toml` (28 methods, 8 domains) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, SessionTreeHash CAC L5 with DashMap cache, zero deprecated API surface, zero dead code, zero cross-primal compile deps — sovereign wire types, capability-neutral naming throughout)
+=======
+**Version**: 0.14.7  
+**Status**: Production Ready (1,412+ tests, clippy pedantic+nursery clean, Edition 2024, `unsafe_code = "deny"` / `unwrap_used`+`expect_used = "deny"` workspace-wide, zero `unsafe` in tests (temp-env), AGPL-3.0-or-later, UniBin compliant, cargo-deny enforced (16-crate ecoBin ban list), `--fail-under-lines 90` CI gate, cross-compile CI (musl x86_64/aarch64 + RISC-V), `niche.rs` self-knowledge with MCP tools, `capability_registry.toml` (27 methods, 8 domains) + deploy graph with `fallback = "skip"`, `DagBackend` enum dispatch (redb default), GC sweeper, zero cross-primal compile deps — sovereign wire types). **Wave 109 gap**: HEALTH-RC-01 — bare `"health"` response needs `primal`, `version`, `uptime_s` fields
+>>>>>>> Stashed changes:PRIMAL_REGISTRY.md
 
 **Role**: rhizoCrypt provides the ephemeral workspace layer — a git-like DAG of content-addressed events that serves as working memory. Sessions are scoped, lock-free (DashMap), and real-time. Data lives here temporarily until it is either discarded or "dehydrated" (committed) to permanent storage. All inter-primal communication uses capability-based discovery — rhizoCrypt has zero hardcoded vendor references.
 
@@ -436,7 +445,11 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 
 | Spring | Version |
 |--------|---------|
+<<<<<<< Updated upstream:compositions/PRIMAL_REGISTRY.md
 | ToadStool | S333+ (23,000+ workspace / 9,232+ lib, 112 methods, cross-arch adopted, Phase 2 GPU backends (`WgpuGpuDiscovery`, `PortableSwapExecutor`, `PortableResourceHandle`), S333 structural debt: 7 files refactored, hardcoded primal names → capability terms, zero clippy, PRIMAL_BIND_MODE adopted) |
+=======
+| ToadStool | S279+ (23,000+ tests, hw-learn, nvpmu RegisterAccess, spirv_codegen_safety, FirmwareInventory, PrecisionBrain, PRIMAL_BIND_MODE adopted) |
+>>>>>>> Stashed changes:PRIMAL_REGISTRY.md
 | hotSpring | v0.6.32 (upstream sync v5, naga root-cause rename, BatchedComputeDispatch, guideStone L6 CERTIFIED) |
 | groundSpring | V103 |
 | neuralSpring | V98/S145 (GPU dispatch evolution, PipelineGraph ready for absorption) |
@@ -444,7 +457,11 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | airSpring | v0.10.0 (911 lib + 311 integration + 61 forge tests, 97 binaries, 87 experiments, 14.3× CPU speedup, 10 MCP tools, Edition 2024) |
 | barraCuda | v0.4.0 (3,348+ tests, 803 shaders, AGPL-3.0-only, startup contract SHIPPED, method.describe 97 methods) |
 | coralReef | Phase 10 Iteration 59 (3,304+ tests, startup contract SHIPPED, tarpc skip on tcp_only) |
+<<<<<<< Updated upstream:compositions/PRIMAL_REGISTRY.md
 | primalSpring | v0.9.46 Wave 151a (89 experiments, 21 tracks, 1,241 tests, 490+ methods, 197 scenarios ALL PASS, known debt 1, grapheneGate ADB validation, crypto delegation 6/6, Nest Atomic Phase 0 ready) |
+=======
+| primalSpring | v0.9.31 Wave 109 (93 experiments, 21 tracks, 1,000+ tests, 490+ methods, 55 scenarios, 113 graph TOMLs, PlatformCapabilities::detect() SHIPPED, HEALTH-01 schema SHIPPED) |
+>>>>>>> Stashed changes:PRIMAL_REGISTRY.md
 | ludoSpring | V30 (82 experiments, 675+19 tests, 42 Python parity, 91.27% coverage, thiserror, MCP tools, tarpc optional, handler architecture split, UniBin 7 subcommands, CI, deploy graph, scyBorg triple license) |
 
 ### airSpring - Ecological & Agricultural Sciences
