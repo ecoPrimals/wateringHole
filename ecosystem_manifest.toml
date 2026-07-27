@@ -802,7 +802,7 @@ mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 wg_ip = "10.13.37.9"
 roles = ["node_atomic", "compute"]
-notes = "House 2 compute gate. Pending USB enrollment. Full NUCLEUS target."
+notes = "House 2 sovereign site. Full NUCLEUS — second hub candidate. Omada 10G. Autonomous enrollment via gate-enroll.sh."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -869,8 +869,19 @@ repos = [
     "footPrint",
 ]
 
-# strandGate — ABG science, compChem, genomics, lithoSpore
+# strandGate — bioinformatics compute, Tower Atomic workhouse (house2)
+# Dual EPYC 7452 (128 threads), 256GB, RTX 3090. RJ45→Omada + RJ45→Flint2.
+# Intra-inner membrane: Tower Atomic only, unattended compute workloads.
 [gates.strandGate]
+target = "x86_64-unknown-linux-musl"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "compute"
+transport = "lan"
+mesh_peer = "157.230.3.183:7700"
+zone = "house2"
+roles = ["compute", "tower_atomic"]
+notes = "Dual EPYC 7452 128-thread + RTX 3090. Tower Atomic workhouse — not dev platform. Bioinformatics, NF pipeline. RJ45 to Omada (10G) + RJ45 to Flint 2 (2.5G bridge)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -902,7 +913,9 @@ repos = [
     "bearDog", "songBird", "skunkBat",
 ]
 
-# westGate — 76TB ZFS cold storage, Nest Atomic specialization
+# westGate — 76TB ZFS NAS, Nest composition, outer membrane exposed (house2)
+# Heavy open NAS — NestGate CAS backend, ecosystem archive. WAN mesh + Pi accessible.
+# K-Derm: periplasm (WAN-facing storage).
 [gates.westGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -910,7 +923,9 @@ bind_mode = "uds"
 composition = "nest"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
-notes = "i7-4771 + RTX 2070 Super + 76TB ZFS. Nest Atomic 7/7. Cold storage specialization."
+zone = "house2"
+roles = ["storage", "nest", "wan_validator"]
+notes = "i7-4771 + RTX 2070 Super + 76TB ZFS. Nest Atomic 7/7. Heavy open NAS — NestGate CAS backend, outer membrane exposed for WAN mesh access. Wired to Omada (10G)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "biomeOS", "squirrel",
@@ -946,34 +961,48 @@ repos = [
     "cellMembrane", "projectNUCLEUS",
 ]
 
-# blueGate — Windows cross-platform validation target
+# blueGate — distributed builder + media/gaming host (house2)
+# Tower Atomic workhouse + build node under sporeGate foreman.
+# Plex-like media server, Steam data host. Connected via Flint 2 (2.5G).
+# Intra-inner membrane: Tower Atomic only, user services.
 [gates.blueGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
-bind_mode = "tcp_only"
-composition = "subset"
+bind_mode = "uds"
+composition = "tower"
 transport = "lan"
-notes = "Windows machine. Cross-platform ecoBin validation (WSL2 or native)."
-gate_class = "family"
+mesh_peer = "157.230.3.183:7700"
+zone = "house2"
+build_authority = true
+roles = ["build", "tower_atomic"]
+notes = "Distributed builder (Node Atomic pattern). Tower Atomic workhouse — media/gaming/house2 services. Flint 2 bridge (2.5G). Build node under sporeGate foreman."
 repos = [
-    "wateringHole", "plasmidBin",
-    "bearDog", "songBird", "biomeOS",
-    "cellMembrane",
+    "nestGate", "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat",
+    "cellMembrane", "projectNUCLEUS",
 ]
 
-# swiftGate — portable Windows/cross-platform target
+# swiftGate — hobby/consumer computer, house2 (like northGate in house1)
+# Full NUCLEUS, gaming/desktop/family use. Connected via Flint 2 (2.5G).
 [gates.swiftGate]
 target = "x86_64-unknown-linux-musl"
-mobility = "mobile"
-bind_mode = "tcp_only"
-composition = "subset"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "full"
 transport = "lan"
-notes = "Portable Windows target. Cross-platform testing. WiFi (LAN transport)."
-gate_class = "portable_anchor"
+mesh_peer = "157.230.3.183:7700"
+zone = "house2"
+gate_class = "family"
+roles = ["node_atomic"]
+notes = "Hobby/consumer computer for house 2 (like northGate in house 1). Full NUCLEUS. Gaming, desktop, family. Flint 2 (2.5G)."
 repos = [
-    "wateringHole", "plasmidBin",
-    "bearDog", "songBird", "biomeOS",
-    "cellMembrane",
+    "nestGate", "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
+    "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
+    "petalTongue", "skunkBat",
+    "cellMembrane", "projectNUCLEUS",
 ]
 
 # golgiBody (sole VPS, inner membrane) — sovereign periplasm, Forgejo, relay, depot

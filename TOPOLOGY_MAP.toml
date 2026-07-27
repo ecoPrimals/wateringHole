@@ -66,9 +66,10 @@ ports = [
     "2.5G ports → compute towers, NUCs, fieldGate",
 ]
 expansion_switch = "TP-Link TL-SG605S-M2 (5-port 2.5G, off Omada)"
-gates = ["ironGate", "southGate", "strandGate", "fieldGate"]
+gates = ["ironGate", "southGate", "strandGate", "westGate", "fieldGate"]
 pending_gates = ["marshGate (future site router)"]
-note = "Basement HPC cluster. ironGate + southGate active, strandGate pending enrollment (physical access). More gates have SFP+ into Omada, coming online as hardware permits."
+flint2_bridge_gates = ["blueGate", "swiftGate"]
+note = "Basement HPC cluster + NAS + media. ironGate active, 5 gates enrolling via autonomous enrollment (Wave 155a). strandGate dual-RJ45 (Omada + Flint2). blueGate + swiftGate on Flint 2 bridge (2.5G). westGate NAS on Omada."
 
 [cytoplasm.zones.eero_wifi]
 hub_device = "Amazon Eero 6"
@@ -128,7 +129,7 @@ transport = "att_dhcp"
 description = "ATT native subnet — WiFi/Eero devices pending migration to 4.0/22"
 gateway = "192.168.1.254"
 note = "Bridged onto CRS310 via Eero. sporeGate proxy-ARPs for cross-subnet routing."
-gates = ["northGate", "blueGate"]
+gates = ["northGate"]
 
 [segments.eero_mesh]
 subnet = "192.168.1.0/24"
@@ -150,14 +151,14 @@ gates = ["flockGate"]
 
 [segments.portable]
 transport = "cellular_wifi"
-description = "Portable trust anchors — grapheneGate, swiftGate"
-gates = ["grapheneGate", "swiftGate"]
+description = "Portable trust anchors — grapheneGate"
+gates = ["grapheneGate"]
 
 [segments.family]
 transport = "lan_or_wifi"
-description = "Family gates — Windows nodes, spare compute when available"
-gates = ["northGate", "blueGate"]
-note = "Ancillary nodes. northGate = gaming (spare compute only). blueGate = Windows target."
+description = "Family/hobby gates — consumer compute, gaming, media"
+gates = ["northGate", "swiftGate"]
+note = "Hobby computers. northGate = house1 (gaming/GPU). swiftGate = house2 (gaming/desktop via Flint 2). blueGate graduated to builder role (house2)."
 
 [segments.cellular_failover]
 transport = "5g_cellular"
@@ -319,10 +320,14 @@ peers = [
     { gate = "eastGate", site = "house1", status = "live" },
     { gate = "golgi", site = "vps_do_nyc", status = "live" },
     { gate = "ironGate", site = "house2", status = "live" },
-    { gate = "southGate", site = "house2", status = "live" },
+    { gate = "southGate", site = "house2", status = "enrolling" },
+    { gate = "strandGate", site = "house2", status = "enrolling" },
+    { gate = "westGate", site = "house2", status = "enrolling" },
+    { gate = "blueGate", site = "house2", status = "enrolling" },
+    { gate = "swiftGate", site = "house2", status = "enrolling" },
     { gate = "grapheneGate", site = "portable", status = "live_tcp_only" },
 ]
-note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN."
+note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN. 5 house2 gates enrolling via autonomous enrollment (Wave 155a)."
 
 [mesh.wireguard_wan]
 description = "WireGuard point-to-point overlay — WAN gates into periplasm"

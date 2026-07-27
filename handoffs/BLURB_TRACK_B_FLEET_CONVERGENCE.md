@@ -1,10 +1,10 @@
 # Track B: Fleet Convergence — 5-Gate Enrollment + NUCLEUS Validation
 
-**Wave**: 155a | **Owner**: eastGate overwatch
+**Wave**: 155b | **Owner**: eastGate overwatch
 **Parallel with**: Track A (Evolution)
 **Track A dependency**: **NONE** — Track B is fully independent. The enrollment
 code (mesh.gate_enroll, gate-enroll.sh, FIDO2/beacon attestation) is shipped.
-What remains is golgiBody operational deployment.
+**Phase 0 COMPLETE** — enrollment endpoint LIVE on golgiBody, tested via WAN Caddy TLS.
 
 ---
 
@@ -21,81 +21,34 @@ Once validated, this is the template for enrolling any gate anywhere in the worl
 
 ---
 
-## PHASE 0: GOLGI DEPLOYMENT — MAKE THE ENDPOINT LIVE
+## PHASE 0: GOLGI DEPLOYMENT — **COMPLETE** (Wave 155b)
 
-The enrollment code is on Forgejo but golgiBody isn't running it yet.
-This is the only blocker for the entire track.
+The enrollment endpoint is LIVE on golgiBody.
 
-### 0a. Deploy Updated Binaries to golgiBody
+### What Was Done
 
-songBird and bearDog on golgiBody need the Wave 155a code. Two paths:
+1. **Binary deployed**: songBird 0.2.1 with `mesh.gate_enroll` handler + `load_family_seed_bytes()` file path support. Built from eastGate, deployed via SCP.
+2. **Drawbridge configured**: systemd drop-in at `/etc/systemd/system/songbird-membrane.service.d/enrollment.conf` with:
+   - `SONGBIRD_DRAWBRIDGE_ROUTES=/enroll=mesh!public`
+   - `SONGBIRD_PROXY_ROUTES=mesh=jsonrpc:///run/membrane/songbird.sock`
+   - `GATE_ENROLLMENT_TOKEN` (SHA-256 token)
+   - `FORGEJO_API_TOKEN` (Forgejo service account)
+3. **Caddy TLS**: `/enroll/*` reverse proxy to `:7780` in `/etc/membrane/Caddyfile`
+4. **Scripts staged**: `gate-enroll.sh` and `enroll-fleet.sh` at `membrane.primals.eco/depot/enroll/`
 
-```bash
-# Path 1: Depot rsync from sporeGate (production path — requires sporeGate rebuild first)
-ssh golgi
-rsync -az sporegate:/opt/ecoPrimals/depot/primals/x86_64-unknown-linux-musl/songbird /opt/membrane/
-rsync -az sporegate:/opt/ecoPrimals/depot/primals/x86_64-unknown-linux-musl/beardog /opt/membrane/
-systemctl restart songbird-membrane beardog-membrane
-
-# Path 2: Build on golgiBody from Forgejo source (self-sovereign, no sporeGate needed)
-ssh golgi
-cd /opt/ecoPrimals/primals/songBird && git pull origin main && cargo build --release
-cd /opt/ecoPrimals/primals/bearDog && git pull origin main && cargo build --release
-cp target/release/songbird target/release/beardog /opt/membrane/
-systemctl restart songbird-membrane beardog-membrane
-```
-
-### 0b. Configure Drawbridge Enrollment Route
-
-Patch `/etc/systemd/system/songbird-membrane.service` on golgiBody:
-
-```ini
-[Service]
-# ... existing config ...
-
-# Enrollment endpoint — WAN-reachable
-Environment=SONGBIRD_DRAWBRIDGE_ROUTES=/enroll=mesh!public
-Environment=SONGBIRD_PROXY_ROUTES=mesh=jsonrpc:///run/membrane/songbird.sock
-
-# Enrollment secrets
-Environment=GATE_ENROLLMENT_TOKEN=<generate-a-strong-token>
-Environment=FORGEJO_API_TOKEN=<forgejo-service-account-token>
-Environment=FAMILY_SEED=<from /etc/membrane/family/.beacon.seed>
-```
-
-Then reload:
-```bash
-systemctl daemon-reload && systemctl restart songbird-membrane
-```
-
-### 0c. Expose to WAN
-
-Choose one:
-
-**Option A — Caddy TLS proxy (preferred)**:
-Add to `/etc/membrane/Caddyfile` under `primals.eco`:
-```caddy
-handle /enroll {
-    reverse_proxy 127.0.0.1:7780
-}
-```
-Then `systemctl reload caddy`. Gates use `--hub primals.eco --port 443`.
-
-**Option B — Direct port 7780**:
-```bash
-ufw allow 7780/tcp
-# In songbird-membrane.service:
-Environment=SONGBIRD_DRAWBRIDGE_ADDR=0.0.0.0:7780
-```
-Gates use `--hub primals.eco --port 7780`.
-
-### 0d. Verify Enrollment Endpoint
+### Verification
 
 ```bash
-# On golgiBody — should return param validation error (not connection refused):
-curl -s http://127.0.0.1:7780/enroll \
+# Drawbridge routing (correct token → phases execute):
+curl -s -X POST http://127.0.0.1:7780/enroll/mesh.gate_enroll \
   -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","method":"mesh.gate_enroll","params":{},"id":1}'
+  -d '{"gate_name":"test","wg_public_key":"test","physical_proof":{"type":"token","token":"<token>"}}'
+
+# WAN path (Caddy TLS):
+curl -s -X POST https://primals.eco/enroll/mesh.gate_enroll \
+  -H "Content-Type: application/json" \
+  -d '{"gate_name":"test","wg_public_key":"test","physical_proof":{"type":"token","token":"wrong"}}'
+# → {"enrolled":false,"reason":"Physical proof verification failed"}
 
 # From eastGate over WG — should reach golgiBody:
 curl -s http://10.13.37.1:7780/enroll \
@@ -287,13 +240,13 @@ After simulation passes, enroll the actual 5 gates:
 
 ## PHASE 5: ENMESHMENT — GATES AS COMPUTE
 
-| Gate | Mesh IP | Role | Deployments |
-|------|---------|------|-------------|
-| strandGate | .20-.254 | Bioinformatics compute (128 threads, RTX 3090) | NF pipeline, wetSpring, neuralSpring |
-| westGate | .20-.254 | Cold storage archive (76TB ZFS) | NestGate CAS backend, ecosystem archive |
-| blueGate | .20-.254 | General compute (profile during enrollment) | Assigned based on capacity |
-| swiftGate | .20-.254 | General compute (profile during enrollment) | Assigned based on capacity |
-| southGate | .20-.254 | Full NUCLEUS — house2 sovereign site | 13-primal deployment, second hub candidate |
+| Gate | Mesh IP | Role | Composition | K-Derm | Deployments |
+|------|---------|------|-------------|--------|-------------|
+| strandGate | .20-.254 | Bioinformatics compute (128 threads, RTX 3090) | `compute` | intra-inner | Tower Atomic workhouse. NF pipeline, wetSpring, neuralSpring |
+| westGate | .20-.254 | 76TB ZFS NAS, outer membrane exposed | `nest` | periplasm | NestGate CAS backend, ecosystem archive, WAN mesh |
+| blueGate | .20-.254 | Distributed builder + media/gaming | `tower` | intra-inner | Tower Atomic workhouse. Build node under sporeGate foreman. Plex-like, Steam |
+| swiftGate | .20-.254 | Hobby/consumer (like northGate) | `full` | cytoplasm | Full NUCLEUS. Gaming, desktop, family use |
+| southGate | .20-.254 | Full NUCLEUS — house2 sovereign site | `full` | cytoplasm | 13-primal deployment, second hub candidate |
 
 ### Ongoing Updates from golgiBody
 
@@ -333,10 +286,10 @@ The only human action is giving the enrollee a trust token (or stronger: a SoloK
 
 ## SUCCESS CRITERIA — TRACK B COMPLETE WHEN:
 
-### Phase 0 (golgiBody live)
-- [ ] songBird + bearDog deployed with Wave 155a+ code
-- [ ] Drawbridge `/enroll` route exposed to WAN
-- [ ] Enrollment endpoint verified via curl
+### Phase 0 (golgiBody live) — **COMPLETE**
+- [x] songBird 0.2.1 with mesh.gate_enroll deployed (SCP from eastGate)
+- [x] Drawbridge `/enroll/*` route exposed via Caddy TLS (`primals.eco/enroll/mesh.gate_enroll`)
+- [x] Enrollment endpoint verified via curl — WAN + local, correct token → phases execute
 
 ### Phase 1 (enrollment)
 - [ ] All 5 gates enrolled (mesh IP, WG peer, Forgejo SSH, family seed)
@@ -361,6 +314,7 @@ The only human action is giving the enrollee a trust token (or stronger: a SoloK
 
 ---
 
-*Track B is independent of Track A. The only blocker is Phase 0: deploying
-the already-shipped code to golgiBody and exposing the enrollment endpoint.
-Once Phase 0 is done, gates anywhere in the world can self-enroll.*
+*Track B is independent of Track A. Phase 0 is COMPLETE — the enrollment
+endpoint is live on golgiBody. Gates anywhere in the world can self-enroll by
+fetching `gate-enroll.sh` from `membrane.primals.eco/depot/enroll/` and running
+with a valid enrollment token.*

@@ -93,11 +93,11 @@ appears. This keeps the active review focused on evolving concerns.
 | flockGate | ONLINE | 10.13.37.6 | Nest Atomic Phase 0 validation | WG mesh → Forgejo pull |
 | northGate | ONLINE | 10.13.37.8 | Windows 11, RTX 5090, GPU compute | WG mesh → Forgejo pull |
 | grapheneGate | ONLINE | 10.13.37.7 | Android, Tower LIVE, beacon seed source | WG mesh → Forgejo pull |
-| strandGate | ENROLLING | .20-.254 | Dual EPYC 7452, 256GB, RTX 3090 — bioinformatics compute | `gate-enroll.sh --token` → mesh → Forgejo |
-| westGate | ENROLLING | .20-.254 | 76TB ZFS — cold storage, NestGate CAS backend | `gate-enroll.sh --token` → mesh → Forgejo |
-| blueGate | ENROLLING | .20-.254 | General compute (profile pending) | `gate-enroll.sh --token` → mesh → Forgejo |
-| swiftGate | ENROLLING | .20-.254 | General compute (profile pending) | `gate-enroll.sh --token` → mesh → Forgejo |
-| southGate | ENROLLING | .20-.254 | House2, full NUCLEUS deployment | `gate-enroll.sh --token` → mesh → Forgejo |
+| strandGate | ENROLLING | .20-.254 | Dual EPYC 7452, 256GB, RTX 3090 — bioinformatics compute. Tower Atomic workhouse. RJ45→Omada + RJ45→Flint2 | `gate-enroll.sh --compose compute` → mesh → Forgejo |
+| westGate | ENROLLING | .20-.254 | 76TB ZFS NAS — NestGate CAS backend, outer membrane exposed for WAN. Omada 10G | `gate-enroll.sh --compose nest` → mesh → Forgejo |
+| blueGate | ENROLLING | .20-.254 | Distributed builder (sporeGate foreman), media/gaming, Tower Atomic workhouse. Flint2 2.5G | `gate-enroll.sh --compose tower` → mesh → Forgejo |
+| swiftGate | ENROLLING | .20-.254 | Hobby/consumer (like northGate), full NUCLEUS, gaming/desktop. Flint2 2.5G | `gate-enroll.sh --compose full` → mesh → Forgejo |
+| southGate | ENROLLING | .20-.254 | House2 full NUCLEUS — second sovereign site. Omada 10G | `gate-enroll.sh --compose full` → mesh → Forgejo |
 
 ### Post-Enrollment Convergence Path
 
@@ -110,8 +110,11 @@ Once a gate completes `gate-enroll.sh`, it has WG mesh + Forgejo SSH + family se
 
 ### Remaining Hardware Items
 
-- [ ] **5-gate fleet enrollment** — gates online via RustDesk, autonomous enrollment ready, execution pending
-- [ ] strandGate: bioinformatics compute role — primalSpring + wetSpring + neuralSpring deployment
+- [ ] **5-gate fleet enrollment** — endpoint live on golgiBody (Wave 155a), scripts staged at `membrane.primals.eco/depot/enroll/`, execution via RustDesk pending
+- [ ] strandGate: Tower Atomic workhouse — bearDog + songBird + skunkBat + compute workloads
+- [ ] blueGate: Distributed builder under sporeGate foreman (Node Atomic pattern). Media/gaming services
+- [ ] westGate: Nest composition — 76TB ZFS NAS, outer membrane, WAN mesh
+- [ ] swiftGate: Full NUCLEUS hobby computer — gaming/desktop/family
 - [ ] westGate: cold storage — NestGate CAS backend, 76TB ZFS for ecosystem archive
 - [ ] blueGate: profile and role assignment pending
 - [ ] swiftGate: profile and role assignment pending

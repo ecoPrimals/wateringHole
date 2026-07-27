@@ -10,9 +10,9 @@
 
 [wave]
 id = 155
-sub = "a"
+sub = "b"
 date = "2026-07-27"
-posture = "AUTONOMOUS ENROLLMENT LIVE. Zero-operator gate enrollment shipped — mesh.gate_enroll endpoint on golgiBody handles physical proof verification, IP allocation (.20-.254 pool), WG peer registration, Forgejo SSH key via API, family seed delivery. FIDO2 attestation + beacon proximity in enrollment chain. gate-enroll.sh client for remote self-enrollment. cellMembrane Phase 7 wired (gate.enroll → mesh.enroll). 5 gates enrolling. 13/13 BTSP. 197 scenarios. Known debt 2."
+posture = "FLEET CONVERGENCE STARTED. Enrollment endpoint LIVE on golgiBody (Caddy TLS + Drawbridge). gate-enroll.sh staged on depot. 5-gate roles finalized: strandGate=compute, blueGate=tower+builder, westGate=nest+NAS, swiftGate=full, southGate=full. Topology docs updated with house 2 fleet. Distributed build mesh pattern (Node Atomic) via blueGate under sporeGate foreman. 13/13 BTSP. 197 scenarios."
 publisher = "eastGate-overwatch"
 
 [gates]
