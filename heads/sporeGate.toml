@@ -5,8 +5,8 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-27T13:45:00Z"
-wave = "155a"
+updated = "2026-07-27T14:55:00Z"
+wave = "155b"
 
 [heads]
 bearDog = "a8bba76"
@@ -24,7 +24,7 @@ petalTongue = "f61c808"
 toadStool = "40d0ae3"
 sourDough = "3a0b52d"
 cellMembrane = "473fd7e"
-primalSpring = "3225202"
+primalSpring = "eb80f44"
 wateringHole = "b8ca9f7"
 sporePrint = "67cc325"
 
@@ -34,7 +34,7 @@ beardog_version = "0.9.0 (a8bba76) — FIDO2 + iosGate + HSM agnostic (Wave 152-
 petaltongue_version = "1.7.0"
 membrane_version = "0.1.0 (473fd7e)"
 gateway_status = "ENROLLMENT_ENDPOINT_LIVE"
-depot_status = "FRESH — 14 primals × 2 architectures, provenance tracked"
+depot_status = "FRESH — 13 primals × 2 architectures, Wave 155b, provenance tracked"
 mesh_status = "8-GATE MESH (5 enrolling)"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
 
@@ -75,11 +75,13 @@ wan_tower = "76.8ms avg, 1.7x sustained"
 iperf3_lan = "2.36 Gbps sporeGate→eastGate (CONFIRMED)"
 
 [harvest]
-wave = "155a"
-harvested = "2026-07-27T13:30:00Z"
-x86_64_primals = "songBird + bearDog rebuilt with enrollment code"
-provenance = "builder=sporeGate, toolchain=rustc 1.94.0"
-golgi_pushed = "CONFIRMED — runtime deployed, services restarted"
+wave = "155b"
+harvested = "2026-07-27T14:55:00Z"
+x86_64_primals = 13
+aarch64_primals = 13
+provenance = "builder=sporeGate, toolchain=rustc 1.96.1"
+golgi_pushed = "CONFIRMED — both architectures synced, provenance tracked"
+note = "Full fleet depot — all compositions covered (tower/compute/nest/full)"
 
 [hardening]
 beardog_auth_mode = "enforced (was Permissive)"
@@ -118,7 +120,7 @@ phase0_enrollment_endpoint = "LIVE — primals.eco/enroll, drawbridge + Caddy, 3
 
 [remaining]
 phase1_gate_enrollment = "P0 — 5 gates need enrollment (3 WG-keyed, 2 pending keygen)"
-depot_incremental_rebuild = "P1 — 12 repos updated since last harvest (non-songBird/bearDog)"
+bluegate_builder = "P1 — post-enrollment: set MEMBRANE_BUILD_AUTHORITY=1, verify toolchain"
 graphenegate_floating = "P2 — evolve from ADB peripheral to autonomous gate"
 chimera_phase0 = "P2 — libtower.so extraction"
 benchscale_validation = "P2 — Level 1-4 NUCLEUS validation (Track B Phase 3)"
