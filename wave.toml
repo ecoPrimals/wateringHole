@@ -9,12 +9,13 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 151
-sub = "c"
-date = "2026-07-26"
-posture = "BTSP SUB-WAVE LANDED: 9/13 primals shipped ClientHello. grapheneGate validated (10/13, software PASS, HSM needs Keystore2 binder). ironGate BACK. sporePrint SEO shipped (search doors + query routing). 2 primals pending BTSP (squirrel, biomeOS). Known debt 2. 197 scenarios PASS. 43/43 converged."
+id = 155
+sub = "a"
+date = "2026-07-27"
+posture = "AUTONOMOUS ENROLLMENT LIVE. Zero-operator gate enrollment shipped — mesh.gate_enroll endpoint on golgiBody handles physical proof verification, IP allocation (.20-.254 pool), WG peer registration, Forgejo SSH key via API, family seed delivery. FIDO2 attestation + beacon proximity in enrollment chain. gate-enroll.sh client for remote self-enrollment. cellMembrane Phase 7 wired (gate.enroll → mesh.enroll). 5 gates enrolling. 13/13 BTSP. 197 scenarios. Known debt 2."
 publisher = "eastGate-overwatch"
 
 [gates]
 online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate", "northGate"]
-offline = ["strandGate", "westGate"]
+enrolling = ["strandGate", "westGate", "blueGate", "swiftGate", "southGate"]
+offline = []

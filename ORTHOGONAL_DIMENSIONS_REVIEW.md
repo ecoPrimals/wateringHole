@@ -13,43 +13,53 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal / Coordination
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 151a)
-- [x] Gate heads published (`heads/*.toml`)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155a)
+- [x] Gate heads published (`heads/*.toml`) — eastGate, sporeGate, flockGate, ironGate, golgiBody
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] Active impulses: 0 (26+ fossilized)
 - [x] ecosystem_manifest.toml version current (v3.1.0)
 - [x] 43/43 repos synced with Forgejo
-- [x] Active handoffs: 4, Active AARs: 1, Active analysis: 1
-- [x] Fossilized: 42 docs across `fossilRecord/wave150x_*` and `wave151a_completion/`
+- [x] Active handoffs: 1 (postPrimordial 5-gate enrollment)
+- [x] Fossilized: 42+ docs across `fossilRecord/wave150x_*` and `wave151a_completion/`
 - [x] **waterFall** publish cascade defined — git → impulse → DAG → braid → anchor → relay
 - [x] **Impulse/Potential** standard active (Wave 63+)
 - [x] **Context Braid** standard active (Wave 63+)
 - [x] **Ecosystem Communication** standard active (Wave 68+)
 - [x] NeuralBridge in membrane-shadow routes with try-primal-first semantics
 - [x] Glacial correction (150x): git merge divergence documented as rootPulse evidence
-- [ ] GLOSSARY.md stale (Wave 138b) — needs refresh to 151a terms
+- [x] **whitePaper gen/ review COMPLETE** (Wave 151c) — gen0-gen5, waterFall, RootPulse, subGen assessed
+- [x] **JOSS publication strategy** defined — Gonzales NF pipeline as live system paper
+- [x] **Autonomous enrollment blurb** — ECOSYSTEM_BLURB.md updated with gate-enroll.sh workflow + trust tiers
+- [ ] GLOSSARY.md stale (Wave 138b) — needs refresh to 155a terms
 - [ ] waterFall graph partially wired — full composition pending Provenance Trio
 - [ ] Context braids not yet replacing blurb paste — graduation path documented
+- [ ] `freshness.toml` stale at Wave 137 — needs cascade publish to 155a
+- [ ] 5 enrolling gates have no published heads in `heads/*.toml`
 
 ## 2. Ecological (Primal Health)
 
 - [x] All primals compile — all 4 depot architectures
 - [x] Zero P0/P1 blockers in any primal
 - [x] 43/43 repos Forgejo-first
-- [x] 100,000+ `#[test]` attrs across ecosystem
-- [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean
+- [x] **75,199 `#[test]` attrs in primals alone** — ecosystem-wide 100K+
+- [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean (re-verified Wave 155a)
 - [x] nestGate vendor elimination COMPLETE (Wave 150u)
 - [x] Production `.unwrap()` — 0 in nestGate, loamSpine, toadStool, esotericWebb, cellMembrane, songBird
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
 - [x] Format drift RESOLVED — all repos clean
-- [x] bearDog: 13,973+ tests, genetic enrollment, cipher floor, blake3, BTSP defense-in-depth, enrollment decomposition (7 modules)
-- [x] songBird: 14,332+ tests, crypto delegation **6/6 COMPLETE**, retry, health, socket watch, IPC pool, challenge-verify, revocation
+- [x] bearDog: Wave 155a, **11,993 tests**, FIDO2 hardware + enrollment attestation, beacon proximity proof, iOS Secure Enclave, HSM agnostic, BTSP defense-in-depth
+- [x] songBird: **10,335 tests**, `mesh.gate_enroll` endpoint shipped, crypto delegation **6/6 COMPLETE**, dynamic IP pool allocation
 - [x] skunkBat: spawn-rate anomaly detection, cipher floor policy, now PUBLIC
-- [x] cellMembrane: 1,156 tests, builder identity, multi-target harvest, staleness alarm, crash-loop breaker
+- [x] cellMembrane: Phase 7 wired (gate.enroll → mesh.enroll via HMAC proof), builder identity, multi-target harvest, staleness alarm
+- [x] **nestGate: BTSP ClientHello SHIPPED** — 9,617 tests, 7-step outbound handshake, Nest Atomic P1 blocker RESOLVED
+- [x] **petalTongue: BTSP ClientHello SHIPPED** — 5,812 tests, outbound connections wired
+- [x] **toadStool**: 17,614 tests — largest primal test surface
 - [x] primalSpring: **197 scenarios**, all PASS
 - [x] Tower debt: 36 → **1** (grapheneGate HSM only)
 - [x] `enrollment-replay` RESOLVED
 - [x] songBird crypto delegation to bearDog: **6/6 seams DONE** (JWT, checkpoint, auth)
+- [x] **BTSP 13/13** — all primals shipped ClientHello (Wave 151d)
+- [x] **Cargo.toml metadata** — homepage + documentation standardized across all primals
 - [ ] **1 known debt finding**: grapheneGate-readiness (HSM not on eastGate)
 - [ ] Chimera Phase 0: library extraction (UNBLOCKED — crypto delegation done)
 
@@ -58,18 +68,55 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Mixed 10G + 1G topology LIVE — 10G backbone between houses, 1G MikroTik for LAN
 - [x] sporeGate on R45 → MikroTik — intra-membrane coordinator, HPC, build authority
 - [x] eastGate on MikroTik LAN — code hub, LAN peer at 192.168.4.244 (0.17ms RTT)
-- [x] 5-gate WireGuard mesh LIVE (golgi, sporeGate, eastGate, flockGate, ironGate)
+- [x] 7-gate WireGuard mesh LIVE (golgi, sporeGate, eastGate, flockGate, ironGate, northGate, grapheneGate)
 - [x] northGate enrolled (10.13.37.8, Windows 11, RTX 5090, WireGuard active)
 - [x] grapheneGate Tower LIVE (bearDog + songBird + skunkBat)
 - [x] Tower Atomic shadow ACTIVE on 3 gates — 700+ shadow samples
 - [x] LAN peering: **Tower 353x LAN** (0.45ms vs 158ms WG overlay)
-- [x] USB enrollment bundle staged (gate-usb-bootstrap.sh + enroll/)
 - [x] **Depot: 28 binaries × 2 architectures** (x86_64 + aarch64), all fresh Jul 25
 - [x] aarch64 cross-compile working — zero source changes, zero build failures
-- [ ] southGate pending USB enrollment (house2, full NUCLEUS)
-- [ ] strandGate enrollment pending (dual EPYC 7452, 256GB, RTX 3090)
+- [x] **5 gates back online** via RustDesk (strand, west, blue, swift, south) — Wave 109-114, ~40 waves behind
+- [x] **Autonomous enrollment SHIPPED** — `mesh.gate_enroll` endpoint on golgiBody + `gate-enroll.sh` client
+- [x] **Dynamic IP pool allocation** — .20-.254 range, scanned from `wg show wg0 allowed-ips`
+- [x] **Forgejo SSH key auto-registration** — REST API via enrollment endpoint
+- [x] **Family seed delivery** — encrypted to enrollee WG pubkey via bearDog
+- [x] **Trust tiers** — FIDO2/SoloKey (kin) > grapheneGate beacon (sibling) > token (extended)
+
+### Gate Fleet — Enrollment & Use-Case Matrix
+
+| Gate | Status | Mesh IP | Role / Capacity | golgiBody Update Path |
+|------|--------|---------|-----------------|----------------------|
+| golgiBody | ONLINE | 10.13.37.1 | Hub, enrollment authority, Forgejo, Drawbridge | Self (publisher) |
+| sporeGate | ONLINE | 10.13.37.2 | HPC build, depot authority, intra-membrane coord | WG mesh → Forgejo pull |
+| eastGate | ONLINE | 10.13.37.3 | Code hub, overwatch, LAN peer | WG mesh → Forgejo pull |
+| ironGate | ONLINE | 10.13.37.5 | JupyterHub, outer membrane, springs host | WG mesh → Forgejo pull |
+| flockGate | ONLINE | 10.13.37.6 | Nest Atomic Phase 0 validation | WG mesh → Forgejo pull |
+| northGate | ONLINE | 10.13.37.8 | Windows 11, RTX 5090, GPU compute | WG mesh → Forgejo pull |
+| grapheneGate | ONLINE | 10.13.37.7 | Android, Tower LIVE, beacon seed source | WG mesh → Forgejo pull |
+| strandGate | ENROLLING | .20-.254 | Dual EPYC 7452, 256GB, RTX 3090 — bioinformatics compute | `gate-enroll.sh --token` → mesh → Forgejo |
+| westGate | ENROLLING | .20-.254 | 76TB ZFS — cold storage, NestGate CAS backend | `gate-enroll.sh --token` → mesh → Forgejo |
+| blueGate | ENROLLING | .20-.254 | General compute (profile pending) | `gate-enroll.sh --token` → mesh → Forgejo |
+| swiftGate | ENROLLING | .20-.254 | General compute (profile pending) | `gate-enroll.sh --token` → mesh → Forgejo |
+| southGate | ENROLLING | .20-.254 | House2, full NUCLEUS deployment | `gate-enroll.sh --token` → mesh → Forgejo |
+
+### Post-Enrollment Convergence Path
+
+Once a gate completes `gate-enroll.sh`, it has WG mesh + Forgejo SSH + family seed. Convergence:
+1. `git clone git@forgejo:eco/<repo>.git` for all 43+ repos via mesh
+2. `cargo build --release` per primal using depot or source
+3. Run `springs/primalSpring` to validate local build
+4. Publish head to `wateringHole/heads/<gate>.toml`
+5. Gate online — receives wave updates via temporal cascade from golgiBody
+
+### Remaining Hardware Items
+
+- [ ] **5-gate fleet enrollment** — gates online via RustDesk, autonomous enrollment ready, execution pending
+- [ ] strandGate: bioinformatics compute role — primalSpring + wetSpring + neuralSpring deployment
+- [ ] westGate: cold storage — NestGate CAS backend, 76TB ZFS for ecosystem archive
+- [ ] blueGate: profile and role assignment pending
+- [ ] swiftGate: profile and role assignment pending
+- [ ] southGate: house2 full NUCLEUS — second sovereign site
 - [ ] grapheneGate → standalone Android platform (P1, eastGate validates HSM then full NUCLEUS deploy)
-- [ ] westGate OFFLINE (cold storage, 76TB ZFS)
 - [ ] fieldGate OFFLINE (dead CMOS)
 - [ ] biomeGate OFFLINE (kernel recovery)
 
@@ -78,7 +125,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] K-Derm three-layer model intact
 - [x] Forgejo sovereign inner membrane operational (43/43 repos)
 - [x] Push mirrors relay to GitHub on commit
-- [x] gate.enroll: 7-phase, fully automated
+- [x] gate.enroll: 7-phase, fully automated + Phase 7 mesh.enroll wired
 - [x] Sovereign outer membrane operational (Caddy TLS)
 - [x] S1-S4 sovereignty shadows ALL GRADUATED
 - [x] **DNSSEC 3/3 domains complete**
@@ -93,8 +140,14 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **BTSP defense-in-depth** — `BEARDOG_UDS_REQUIRE_BTSP=1` on local sockets
 - [x] **Depot provenance** — builder=sporeGate, staleness alarm, multi-target
 - [x] **Crypto delegation** — songBird delegates all crypto to bearDog, chimera unblocked
+- [x] **BTSP 13/13** — all primals enforce BTSP ClientHello on outbound connections
+- [x] **Autonomous enrollment** — K-Derm inward escalation: extracellular → cytoplasm via physical proof
+- [x] **FIDO2 enrollment attestation** — bearDog `fido2.attest_enrollment` + `verify_attestation` on trust roster
+- [x] **Beacon proximity proof** — grapheneGate BLE/NFC seed exchange → enrollment proof chain
+- [x] **Forgejo API auto-provisioning** — SSH key registration via `mesh.gate_enroll`
+- [x] **Family seed encrypted delivery** — bearDog `crypto.encrypt` to enrollee WG pubkey
 - [ ] **Phase 2: Tower cutover** — shadow active, chimera design drafted
-- [ ] **Phase 1: Zola → sporePrint primal pipeline**
+- [ ] **Phase 1: Zola → sporePrint primal pipeline** (crates.io a sub-goal of sovereignty)
 - [ ] **Phase 2: Forgejo → rootPulse** — via Nest Atomic
 - [ ] `primal.eco` inner membrane separation (P2)
 
@@ -126,14 +179,19 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 7. Documentation / Fossil Record
 
-- [x] Blurb reflects current wave (151a)
-- [x] Active handoffs: 4, Active AARs: 1, Active analysis: 1 (chimera design)
+- [x] Blurb reflects current wave (155a) — autonomous enrollment documented
+- [x] Active handoffs: 1 (postPrimordial 5-gate enrollment execution)
 - [x] Active impulses: 0
 - [x] wateringHole standards: 37 active in 4 directories
 - [x] Standards reorganized: foundations/ (9), protocols/ (10), operations/ (12), compositions/ (6)
 - [x] **42+ docs fossilized** across `wave150x_*` and `wave151a_completion/` (9 docs this pass)
 - [x] Team startup blurb template issued
-- [ ] GLOSSARY.md needs refresh (Wave 138b → 151a terms)
+- [x] **whitePaper GEN_REVIEW_151c.md** — full generational arc assessment (gen0-gen5 + siblings)
+- [x] **gen5/thesis/JOSS_PUBLICATION.md** — JOSS strategy for Gonzales NF live system
+- [x] **gen5/README.md** — updated to Wave 151c, tideGlass added, JOSS track, status current
+- [x] **gen5/products/NF_CASE_STUDY.md** — tideGlass Thread 0 reconciled, infrastructure section added
+- [x] **gate-enroll.sh** documented — self-enrolling client + trust tier table in blurb
+- [ ] GLOSSARY.md needs refresh (Wave 138b → 155a terms)
 - [ ] PRIMAL_REGISTRY.md needs refresh (Wave 109 → current 15-primal posture)
 - [ ] 18 standards with stale wave tags (headers need bump)
 
@@ -199,15 +257,25 @@ Tower Atomic sprint (150v–151a) fully resolved. All P0/P1 items closed:
 - cellMembrane: builder identity, multi-target harvest, staleness alarm
 - 9 docs fossilized to `wave151a_completion/`
 
+## F9. BTSP Sub-Wave + Publication Strategy (fossilized Wave 151d)
+
+BTSP sub-wave (151b–151d) fully resolved. All 13 primals shipped ClientHello:
+
+- **Wave 151b**: 9 primals shipped BTSP (songBird, barraCuda, coralReef, loamSpine, rhizoCrypt, skunkBat, sweetGrass, cellMembrane, toadStool)
+- **Wave 151c**: squirrel + biomeOS shipped from eastGate. grapheneGate validated (10/13, HSM blocked). sporePrint SEO shipped. ironGate back online.
+- **Wave 151d**: nestGate BTSP ClientHello (P1 Nest Atomic blocker RESOLVED — 1,630 tests, 7-step handshake). petalTongue BTSP ClientHello (6,589 tests, outbound wired).
+- **Publication strategy**: whitePaper gen/ review COMPLETE. Gonzales NF pipeline defined as gen5 JOSS proof case. JOSS_PUBLICATION.md created. NF_CASE_STUDY.md reconciled with tideGlass. crates.io publishing deferred to sovereignty outer-membrane track.
+- **Cargo.toml metadata**: homepage + documentation standardized across all primals.
+
 ---
 
 **Active**: 8 dimensions (1–8)
-**Fossilized**: 8 dimensions (F1–F8)
-**Summary**: All fossilized GREEN. Active: 7 GREEN / 1 AMBER (hardware — offline gates).
+**Fossilized**: 9 dimensions (F1–F9)
+**Summary**: All fossilized GREEN. Active: 7 GREEN / 1 AMBER→GREEN (hardware — autonomous enrollment shipped, 5 gates ready for execution, 7 gates fully meshed).
 
 ---
 
-*Last used*: Wave 151a (Jul 25, 2026)
+*Last used*: Wave 155a (Jul 27, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 151a (F8 — Tower Completion + Depot)
+*Latest fossilization*: Wave 151d (F9 — BTSP Sub-Wave + Publication Strategy)

@@ -1,163 +1,223 @@
-# ecoPrimals Ecosystem Blurb — Wave 151c
+# ecoPrimals Ecosystem Blurb — Wave 152a
 
-**Date**: Jul 26, 2026 10:50 EDT | **Wave**: 151c | **From**: eastGate overwatch
-**Posture**: **BTSP SUB-WAVE 11/13. nestGate + petalTongue need BTSP (nestGate critical for Nest Atomic encryption). grapheneGate validated (10/13). ironGate BACK. sporePrint SEO shipped.**
+**Date**: Jul 26, 2026 20:45 EDT | **Wave**: 152a | **From**: eastGate overwatch
+**Posture**: **GATE FLEET ONLINE. 5 gates (strand, west, blue, swift, south) back online via RustDesk — postPrimordial enrollment beginning. bearDog Wave 152-154 evolution pushed (FIDO2, iosGate, HSM agnostic). All gates to Forgejo-first, agentic catch-up from golgiBody.**
 
 ---
 
 ## WHERE WE ARE
 
-Wave 150 (Tower Atomic) is closing out. The sub-wave 151b BTSP evolution
-landed across 9 primals in a single cascade cycle.
+Waves 150-151 (Tower Atomic + BTSP sub-wave) are **fossilized**.
+bearDog has continued evolving on flockGate through Wave 154.
+5 previously-offline gates are **back online** and ready for postPrimordial enrollment.
 
 | Metric | Value |
 |--------|-------|
 | Tower vs WireGuard | 353x LAN, 1.7x WAN |
 | Scenarios | 197, all PASS |
 | Known debt | **2** (grapheneGate provenance stale in git) |
-| BTSP primals | **11/13** shipped ClientHello (nestGate + petalTongue pending) |
+| BTSP primals | **13/13** |
 | Depot | 28 binaries × 2 arch (x86_64 + aarch64-musl) |
-| grapheneGate validation | 10/13 checks PASS |
+| Gates online | **spore, east, iron, flock, golgi, graphene, north** + **5 rejoining** |
+| Gates rejoining | **strand, west, blue, swift, south** (Wave 109-114, ~40 waves behind) |
 
 ---
 
 ## THIS CASCADE — WHAT SHIPPED
 
-### BTSP ClientHello (Sub-Wave 151b Response)
+### bearDog Wave 152-154 Evolution (flockGate → pushed)
 
-| Primal | BTSP Status | Additional Work |
-|--------|-------------|-----------------|
-| songBird | **DONE** (reference) | Deep debt audit, doc refresh |
-| barraCuda | **DONE** | 3-stage BTSP, hardcode elimination, doc refresh |
-| coralReef | **DONE** | Deep debt dedup (Wave 152), 3669 tests |
-| loamSpine | **DONE** | ProviderConn wiring, TransportEndpoint compliance |
-| rhizoCrypt | **DONE** | NDJSON adapter, fail-closed transport, 1883 tests |
-| skunkBat | **DONE** | Duplicate getrandom eliminated |
-| sweetGrass | **DONE** | sporeprint validation updated |
-| cellMembrane | **DONE** | Deep debt sweep, hardcode elimination, getrandom 0.4 |
-| squirrel | **DONE** (eastGate) | Deep debt sweep, SDK alignment, Wave 152a |
-| biomeOS | **DONE** (eastGate) | Extensive BTSP support, 100% clippy clean, v4.41 |
-| nestGate | **NEEDS EVOLUTION** | Critical for Nest Atomic — per-object encryption via bearDog |
-| toadStool | **DONE** (S340-341) | Stale refs, dead code, hardcoded economics fixed |
-| petalTongue | **NEEDS EVOLUTION** | Content signing, authenticated serving |
+Three major waves landed since last blurb (`0cd6279ef`):
 
-### grapheneGate Validation (eastGate AAR)
+**Wave 152-153 — FIDO2 Hardware Integration + Deep Debt Sweep** (`b8b3e9136`)
+- FIDO2 hardware authenticator support wired
+- Deep debt sweep across the full crate
 
-bearDog built for `aarch64-linux-android` and validated on Pixel 8a:
+**Wave 153c/154 — iosGate Deployment + HSM Agnostic Evolution** (`0cd6279ef`)
+- **iOS Secure Enclave** wired to real Security.framework (P-256 ECDSA)
+- iOS IPC evolved from XPC stubs to Unix domain sockets in sandbox
+- HSM layer audit: eliminated production stubs, fixed module tree
+- **3,333 lines of orphaned/corrupted debris deleted** (unwired modules, broken extractions, dead stubs)
+- iosGate device registered, IPA build pipeline automated
+- Zero TODOs, zero warnings, clean cargo check
+- 112 files changed, 3,745 insertions, 5,173 deletions
 
-| Check | Result |
-|-------|--------|
-| bearDog starts on aarch64 | **PASS** |
-| Ed25519 keypair gen | **PASS** |
-| Sign/verify roundtrip | **PASS** |
-| AES-256-GCM encrypt/decrypt | **PASS** |
-| Store/retrieve/list/delete secret | **PASS** (4/4) |
-| HSM StrongBox registration | **FAIL** — needs JVM (Keystore2 binder is the path) |
-| Persistence across restart | **FAIL** — in-memory only |
-| Backend reports keystore | **FAIL** — in-memory |
+### Gate Fleet Return — 5 Gates Back Online
 
-**Score: 10/13. Software crypto fully operational. Hardware HSM blocked on
-Keystore2 binder IPC (Android 12+ exposes hardware keys without JVM).**
+**strand, west, blue, swift, south** all back online via RustDesk remote access.
+strandGate agent status report (representative of the fleet):
 
-**4 depot deployment failures found**: wrong target triple (musl vs android),
-UDS bind failure (filesystem vs abstract socket), no HSM code compiled,
-binary identity drift. grapheneGate needs `aarch64-linux-android` as a
-**third depot architecture**.
+- **Local repos**: Wave 109-114 (Jun 11-16), all clean, no uncommitted changes
+- **Remotes broken**: WireGuard mesh not up, GitHub SSH misconfigured
+- **USB BEA6-BBCE**: Staged today with 13/13 primals (Wave 142b binaries)
+- **Delta**: ~40 waves behind current (109 → 152a)
+- **Pre-cellMembrane**: gates predate SEO agentification and BTSP sub-wave
 
-### sporePrint (2 AARs)
-
-**SEO Search Doors (151b)**: 8 pages rewritten for unbranded search queries
-(e.g., "GPU-Accelerated DADA2 Benchmark"). 96 auto-gen descriptions replaced.
-Canonical URLs consolidated. Reproduce/Limitations sections added.
-
-**Query Routing (151c)**: Title templates specialized — only homepage has
-full keyword suffix. 313 pages, each with its own search contract. Sidebar
-compressed to contextual navigation.
-
-### ironGate BACK ONLINE
-
-ironGate head published (Wave 150t, Jul 21). 4 days behind current HEAD.
-Running NUCLEUS services. **Future: self-recovery via mesh** — when a gate
-comes back online, cellMembrane should auto-cascade, detect drift, rebuild
-stale primals, and re-enroll without manual intervention.
-
-### Other
-
-- **lithoSpore**: External claim convergence standard applied, deep debt sweep
-- **toadStool**: S340-341 cleanup (stale refs, dead code, hardcoded economics)
+**Enrollment strategy**: postPrimordial — Forgejo-first, agentic catch-up from golgiBody.
 
 ---
 
-## REMAINING — WAVE 150 CLOSE-OUT
+## AGENT BOOTSTRAP — Autonomous Gate Enrollment
 
-### Code (flockGate + eastGate)
+**Gate enrollment is now autonomous.** New or out-of-date gates self-enroll
+by contacting golgiBody's `mesh.gate_enroll` endpoint. No human-in-the-loop
+required (physical trust token provides proof of authorization).
 
-| # | Task | Priority | Owner |
-|---|------|----------|-------|
-| 1 | nestGate BTSP ClientHello | P1 | nestGate (flockGate) — **Nest Atomic blocker** |
-| 2 | petalTongue BTSP ClientHello | P1 | petalTongue (flockGate) |
-| 3 | bearDog Keystore2 binder IPC | P2 | bearDog (eastGate) |
-| 4 | `aarch64-linux-android` depot target | P2 | sporeGate + eastGate |
+### Autonomous Enrollment (preferred)
 
-### Deployment (sporeGate)
+Run the enrollment client on the new gate:
 
-| # | Task | Priority |
-|---|------|----------|
-| 1 | ironGate catch-up cascade (4 days behind) | P1 |
-| 2 | BTSP strict mode on remaining gates | P1 |
-| 3 | Gate enrollment (southGate, strandGate) | P1 |
-| 4 | provenance.toml commit on golgiBody | P1 |
+```bash
+# With a pre-shared enrollment token:
+./infra/plasmidBin/enroll/gate-enroll.sh --hub primals.eco --token <token>
 
-### User Tasks (from sporePrint AARs)
+# With a FIDO2 SoloKey (strongest tier — auto-enrolls as Kin):
+./infra/plasmidBin/enroll/gate-enroll.sh --hub primals.eco --fido2 <credential-id>
 
-| # | Task | Priority | Status |
-|---|------|----------|--------|
-| 1 | ~~Google Search Console~~ | ~~P1~~ | **DONE** — service account provisioned, `membrane seo.*` handoff issued |
-| 2 | JOSS submission (barraCuda or wetSpring) | P2 | |
-| 3 | crates.io releases (barraCuda, wetSpring) | P2 | |
-| 4 | Scientific Computing in Rust Monthly submission | P3 | |
-| 5 | DADA2 community engagement | P3 | |
-| 6 | `eco.primal@primal.eco` activation | P3 | BLOCKED (infra) |
+# With grapheneGate beacon proximity (medium tier — auto-enrolls as Sibling):
+./infra/plasmidBin/enroll/gate-enroll.sh --hub primals.eco --beacon <beacon-id>
+```
 
-### Overwatch (eastGate)
+The enrollment client handles everything: WG keypair generation, SSH key
+generation, contacting the enrollment endpoint, WireGuard configuration,
+Forgejo SSH setup, and family seed delivery.
 
-| # | Task | Priority |
-|---|------|----------|
-| 1 | GLOSSARY.md refresh | **DONE** (eastGate AAR) |
-| 2 | PRIMAL_REGISTRY.md refresh | **DONE** (eastGate AAR) |
+### What the Enrollment Endpoint Does (golgiBody)
+
+The `mesh.gate_enroll` JSON-RPC method on songBird orchestrates:
+
+1. **Verify physical proof** — FIDO2 attestation, beacon proximity, or token
+2. **Allocate mesh IP** — from the dynamic pool (`.20`–`.254`), checking `wg show wg0`
+3. **Register WG peer** — `wg set wg0 peer` on the hub
+4. **Register SSH key** — Forgejo API (`FORGEJO_API_TOKEN`)
+5. **Deliver family seed** — encrypted to enrollee's WG public key via bearDog
+6. **Genetic enrollment** — BTSP-verified `mesh.enroll` with HMAC proof
+
+### Trust Tiers (K-Derm Membrane Model)
+
+| Proof Type | Trust Tier | Auto-Enroll |
+|------------|-----------|-------------|
+| FIDO2/SoloKey attestation | **Kin** (tier 1) | Yes |
+| grapheneGate beacon proximity | **Sibling** (tier 2) | Yes |
+| Pre-shared enrollment token | **Extended** (tier 3-4) | Yes |
+| No physical proof | **Rejected** | No |
+
+### For Gates Already In-Progress (5-gate fleet)
+
+Gates that already have WG keys (south, strand, west) can call the enrollment
+endpoint retroactively — it will allocate their IP, register them, and deliver
+the family seed. Gates without keys (blue, swift) generate keys as part of the
+enrollment script.
+
+### Fallback: Manual Bootstrap (last resort)
+
+If the enrollment endpoint is unreachable, see `infra/plasmidBin/enroll/RELAY_MANUAL.md`
+for the manual WireGuard + Forgejo + RustDesk relay configuration.
+
+### Post-Enrollment Convergence
+
+After enrollment, the gate agent should:
+
+```bash
+# Clone or pull all repos from Forgejo
+for repo in primals/*/  springs/*/  infra/*/  gardens/*/; do
+  (cd "$repo" && git fetch origin && git merge --ff-only origin/main) 2>&1
+done
+
+# Build from source
+for primal in primals/*/; do
+  (cd "$primal" && cargo build --release 2>&1 | tail -1)
+done
+
+# Validate
+cd springs/primalSpring && cargo test --release
+```
+
+### Divergence Notes
+
+**westGate** has mixed-wave repos from partial GitHub pulls before the SSH key
+was revoked. Fast-forward from Forgejo HEAD should resolve most cases.
 
 ---
 
-## FORWARD — NEST ATOMIC + SELF-RECOVERY
+## WHAT'S DONE (FOSSILIZE)
 
-### Chimera Phase 0 — UNBLOCKED
+| Item | Evidence |
+|------|----------|
+| Tower Atomic (Wave 150) | 353x LAN, 1.7x WAN, 197 scenarios, chimera unblocked |
+| BTSP sub-wave (Wave 151b-d) | 13/13 primals shipped ClientHello |
+| bearDog production hardening (151c-d) | Mock elimination, encrypt-at-rest, pen test 3 CRITICALs closed |
+| bearDog FIDO2 + iosGate (152-154) | FIDO2 hardware, iOS Secure Enclave, HSM agnostic, 3,333L debris |
+| whitePaper gen/ review | GEN_REVIEW_151c.md + JOSS_PUBLICATION.md |
+| Cargo.toml metadata | All primals standardized |
+| Depot convergence | 28 bins × 2 arch, provenance fresh |
+| sporePrint SEO | Search doors + query routing shipped |
 
-`libtower.so`: bearDog crypto + songBird routing + skunkBat defense.
-Crypto delegation 6/6 validated. Pure refactoring.
+---
 
-### grapheneGate → Standalone Android Platform
+## REMAINING — FORWARD WORK
 
-**Phase 1 DONE**: Software crypto validated (10/13).
-**Phase 2**: Keystore2 binder for hardware HSM, `aarch64-linux-android` depot target.
-**Phase 3**: Full NUCLEUS deploy, mesh enrollment as autonomous peer.
+### P0 — PostPrimordial Gate Enrollment (5 gates)
 
-### ironGate Self-Recovery (new goal)
+Strategy: **autonomous enrollment** via `mesh.gate_enroll` endpoint on golgiBody.
+Each gate runs `gate-enroll.sh` with a physical proof token → zero human intervention.
 
-When a gate comes back online after downtime, the mesh should detect it
-and the gate should self-heal: cascade, detect stale binaries, rebuild
-from depot, re-enroll services. This is a cellMembrane + biomeOS
-composition — auto-cascade on mesh reconnect.
+| # | Gate | Status | Enrollment Path |
+|---|------|--------|-----------------|
+| 1 | southGate | WG keyed | `gate-enroll.sh --token <token>` (retroactive) |
+| 2 | strandGate | WG keyed | `gate-enroll.sh --token <token>` (retroactive) |
+| 3 | westGate | WG keyed | `gate-enroll.sh --token <token>` (divergence: mixed-wave repos) |
+| 4 | blueGate | Fresh | `gate-enroll.sh --token <token>` (full enrollment) |
+| 5 | swiftGate | Fresh | `gate-enroll.sh --token <token>` (full enrollment) |
 
-### Nest Atomic (Wave 151)
+See **AGENT BOOTSTRAP** section above for the enrollment client and trust tier details.
 
-| Phase | Scope | Teams |
-|-------|-------|-------|
-| 0 | nestGate CAS integration testing | eastGate + flockGate |
-| 1 | loamSpine prototype (DAG ledger) | eastGate |
-| 2 | rhizoCrypt wiring (dep tracking) | eastGate + flockGate |
-| 3 | sweetGrass semantic braids | all |
-| 4 | rootPulse composition | all |
-| 5 | golgiBody deployment | sporeGate |
+### P1 — bearDog Public Flip
+
+| # | Task | Owner | Status |
+|---|------|-------|--------|
+| 1 | bearDog pen test (3 CRITICALs) | bearDog (flockGate) | **DONE** |
+| 2 | bearDog production mock elimination | bearDog (flockGate) | **DONE** |
+| 3 | bearDog FIDO2 + iosGate + HSM agnostic | bearDog (flockGate) | **DONE** |
+| 4 | Flip bearDog repo to public | eastGate overwatch | **READY** (9/10) |
+
+### P1 — Nest Atomic Phase 0
+
+| # | Task | Owner |
+|---|------|-------|
+| 1 | Wire nestGate `connect_with_btsp` into priority call sites | nestGate (flockGate) |
+| 2 | nestGate CAS integration testing | eastGate + flockGate |
+| 3 | Nest Atomic Phase 0 validation | primalSpring (eastGate) |
+
+### P1 — Enmeshment Use Cases
+
+Once postPrimordial enrollment is complete, gates serve as compute:
+
+| Gate | Role |
+|------|------|
+| strandGate | Heavy bioinformatics compute (128 threads, RTX 3090) — NF pipeline candidate |
+| westGate | Cold storage archive (76TB ZFS) — NestGate CAS backend |
+| blueGate | TBD — profile pending |
+| swiftGate | TBD — profile pending |
+| southGate | Full NUCLEUS deployment (house2) |
+
+### P2 — Hardware
+
+| # | Task | Owner |
+|---|------|-------|
+| 1 | grapheneGate Keystore2 binder IPC | bearDog (eastGate) |
+| 2 | `aarch64-linux-android` depot target | sporeGate + eastGate |
+| 3 | grapheneGate full NUCLEUS deploy | eastGate |
+
+### Glacial Goals (projectFoundation/NUCLEUS)
+
+| # | Task | Owner |
+|---|------|-------|
+| 1 | crates.io publishes (all public primals) | eastGate overwatch |
+| 2 | JOSS paper — Gonzales NF live system | projectFoundation |
+| 3 | CTF NDU grant alignment | projectFoundation |
+| 4 | Show HN | projectFoundation |
+| 5 | tideGlass Phase 0 (GPS rebuild) | projectFoundation |
 
 ---
 
@@ -165,17 +225,19 @@ composition — auto-cascade on mesh reconnect.
 
 | # | Dimension | Status |
 |---|-----------|--------|
-| 1 | Temporal/Coordination | GREEN — 43/43 synced |
-| 2 | Ecological | GREEN — 197 scenarios, 2 debt, 11/13 BTSP (2 pending) |
-| 3 | Hardware | AMBER — ironGate BACK, 3 still offline |
-| 4 | Sovereignty | GREEN — BTSP strict LIVE, depot fresh |
+| 1 | Temporal/Coordination | GREEN — 43/43 synced, gen/ review COMPLETE |
+| 2 | Ecological | GREEN — 197 scenarios, 2 debt, **13/13 BTSP** |
+| 3 | Hardware | **AMBER → ADVANCING** — 5 gates rejoining, postPrimordial enrollment starting |
+| 4 | Sovereignty | GREEN — BTSP 13/13, Tower EXCEEDS WG, depot fresh |
 | 5 | Public Surface | GREEN — sporePrint SEO shipped |
-| 6 | Compositions | GREEN — chimera unblocked |
-| 7 | Documentation | GREEN — GLOSSARY + REGISTRY refreshed |
+| 6 | Compositions | GREEN — Nest Atomic Phase 0 UNBLOCKED |
+| 7 | Documentation | GREEN — gen/ review, JOSS strategy, NF case study reconciled |
 | 8 | Campus | GREEN |
 
 ---
 
-*Wave 151c: BTSP 11/13. nestGate + petalTongue pending — nestGate is a
-Nest Atomic blocker (per-object encryption via bearDog). grapheneGate 10/13.
-ironGate back. sporePrint SEO shipped. 197 scenarios. 43/43 converged.*
+*Wave 152a: GATE FLEET ONLINE. 5 gates (strand, west, blue, swift, south) back
+online via RustDesk — postPrimordial enrollment beginning via Forgejo-first agentic
+catch-up from golgiBody. bearDog Wave 152-154 evolution pushed (FIDO2 hardware,
+iOS Secure Enclave, HSM agnostic, 3,333L debris cleaned, iosGate registered).
+bearDog ready for public flip (9/10). 197 scenarios. 13/13 BTSP.*
