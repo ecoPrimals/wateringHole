@@ -1,7 +1,11 @@
 # Track A: Evolution — Nest Atomic + bearDog Public
 
+> **CONVERGED**: Tracks A and B merged into unified ECOSYSTEM_BLURB.md (Wave 155b).
+> This file retained as reference for Nest Atomic + Chimera scope. See ECOSYSTEM_BLURB.md
+> for current team assignments and glacial goals (G3, G5, G6).
+
 **Wave**: 155b | **Owner**: eastGate overwatch + flockGate
-**Parallel with**: Track B (Fleet Convergence)
+**Converged with**: Track B (Fleet Convergence) — see ECOSYSTEM_BLURB.md
 
 ---
 

@@ -1,9 +1,11 @@
 # Track B: Fleet Convergence — 5-Gate Enrollment + NUCLEUS Validation
 
+> **CONVERGED**: Tracks A and B merged into unified ECOSYSTEM_BLURB.md (Wave 155b).
+> This file retained as reference for enrollment phases and validation procedures.
+> See ECOSYSTEM_BLURB.md for current team assignments and glacial goals (G1, G4, G7).
+
 **Wave**: 155b | **Owner**: eastGate overwatch
-**Parallel with**: Track A (Evolution)
-**Track A dependency**: **NONE** — Track B is fully independent. The enrollment
-code (mesh.gate_enroll, gate-enroll.sh, FIDO2/beacon attestation) is shipped.
+**Converged with**: Track A (Evolution) — see ECOSYSTEM_BLURB.md
 **Phase 0 COMPLETE** — enrollment endpoint LIVE on golgiBody, tested via WAN Caddy TLS.
 
 ---
