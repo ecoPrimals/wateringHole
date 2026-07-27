@@ -97,8 +97,8 @@ Once Phase 0 is live, enrollment is one command per gate.
 | 1 | southGate | WG keyed, repos at Wave ~114 | `--token` retroactive | Fast-forward repos from Forgejo |
 | 2 | strandGate | WG keyed, repos at Wave ~114 | `--token` retroactive | Fast-forward repos from Forgejo |
 | 3 | westGate | WG keyed, mixed-wave repos | `--token` retroactive | **Divergence resolution** (see Phase 2) |
-| 4 | blueGate | Fresh, no WG keys | `--token` full enrollment | Clone all 43+ repos from Forgejo |
-| 5 | swiftGate | Fresh, no WG keys | `--token` full enrollment | Clone all 43+ repos from Forgejo |
+| 4 | blueGate | Fresh, no WG keys, **Windows** | `gate-enroll.ps1` full enrollment | Clone repos, genomeBins (.exe) from golgiBody |
+| 5 | swiftGate | Fresh, no WG keys, **Windows** | `gate-enroll.ps1` full enrollment | Clone repos, genomeBins (.exe) from golgiBody |
 
 ### Enrollment Success Criteria (per gate)
 
@@ -150,16 +150,21 @@ for repo in "$ECO_ROOT"/*/; do
 done
 ```
 
-### Binary Deployment from golgiBody Depot
+### genomeBin Deployment from golgiBody Depot
+
+golgiBody is the **sole depot**. No local depots. Gates fetch genomeBins
+for their architecture via WAN TLS or mesh.
 
 ```bash
-# Pull depot binaries — no local build needed for deployment
-mkdir -p /opt/ecoPrimals/primals
-scp "golgi:/opt/ecoPrimals/depot/primals/x86_64-unknown-linux-musl/*" \
-  /opt/ecoPrimals/primals/
+# gate.bootstrap auto-detects architecture and fetches from golgiBody:
+membrane gate.bootstrap <gate_name>
 
-# Or via plasmidBin:
-cd "$ECO_ROOT/infra/plasmidBin" && ./fetch.sh pull
+# Manual fetch (Linux):
+cd "$ECO_ROOT/infra/plasmidBin"
+PLASMIDBIN_RELEASE_URL="https://depot.primals.eco" ./fetch.sh pull
+
+# Windows: genomeBins are .exe, fetched via same depot path
+# primals/x86_64-pc-windows-gnu/beardog.exe, songbird.exe, etc.
 ```
 
 ### Source Build (validation only, not deployment)
@@ -242,11 +247,11 @@ After simulation passes, enroll the actual 5 gates:
 
 | Gate | Mesh IP | Role | Composition | K-Derm | Deployments |
 |------|---------|------|-------------|--------|-------------|
-| strandGate | .20-.254 | Bioinformatics compute (128 threads, RTX 3090) | `compute` | intra-inner | Tower Atomic workhouse. NF pipeline, wetSpring, neuralSpring |
-| westGate | .20-.254 | 76TB ZFS NAS, outer membrane exposed | `nest` | periplasm | NestGate CAS backend, ecosystem archive, WAN mesh |
-| blueGate | .20-.254 | Distributed builder + media/gaming | `tower` | intra-inner | Tower Atomic workhouse. Build node under sporeGate foreman. Plex-like, Steam |
-| swiftGate | .20-.254 | Hobby/consumer (like northGate) | `full` | cytoplasm | Full NUCLEUS. Gaming, desktop, family use |
-| southGate | .20-.254 | Full NUCLEUS — house2 sovereign site | `full` | cytoplasm | 13-primal deployment, second hub candidate |
+| strandGate | .20-.254 | Linux. Bioinformatics compute (128 threads, RTX 3090) | `compute` | intra-inner | Tower Atomic workhouse. NF pipeline, wetSpring, neuralSpring |
+| westGate | .20-.254 | Linux. 5x14TB HDD (70TB ZFS cold pool) | `nest` | periplasm | NestGate CAS backend, ecosystem archive, WAN mesh |
+| blueGate | .20-.254 | **Windows**. Distributed builder + media/gaming | `tower` | intra-inner | Tower Atomic (TCP). Build node under sporeGate foreman |
+| swiftGate | .20-.254 | **Windows**. Hobby/consumer (like northGate) | `full` | cytoplasm | Full NUCLEUS (TCP). Gaming, desktop, family use |
+| southGate | .20-.254 | Linux. Full NUCLEUS — house2 sovereign site | `full` | cytoplasm | 13-primal deployment, second hub candidate |
 
 ### Ongoing Updates from golgiBody
 

@@ -12,7 +12,7 @@
 id = 155
 sub = "b"
 date = "2026-07-27"
-posture = "FLEET CONVERGENCE STARTED. Enrollment endpoint LIVE on golgiBody (Caddy TLS + Drawbridge). gate-enroll.sh staged on depot. 5-gate roles finalized: strandGate=compute, blueGate=tower+builder, westGate=nest+NAS, swiftGate=full, southGate=full. Topology docs updated with house 2 fleet. Distributed build mesh pattern (Node Atomic) via blueGate under sporeGate foreman. 13/13 BTSP. 197 scenarios."
+posture = "genomeBin CONVERGENCE. 5 Tier 1 targets (Linux x86+ARM, Windows, Android, ARM IoT). Tower Atomic = OS abstraction layer. golgiBody sole depot. Self-enrollment (gates declare name+composition). Compositions fixed (compute/nest include Tower base). blueGate+swiftGate=Windows (tcp_only transitional). westGate ONLINE 70TB ZFS. ironGate 4x HDD enclave. cellMembrane pushed. 13/13 BTSP. 197 scenarios."
 publisher = "eastGate-overwatch"
 
 [gates]

@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 155a
+# ecoPrimals Ecosystem Blurb — Wave 155b
 
-**Date**: Jul 27, 2026 09:00 EDT | **Wave**: 155a | **From**: eastGate overwatch
-**Posture**: **AUTONOMOUS ENROLLMENT SHIPPED. Two parallel tracks: (A) evolution towards Nest Atomic + bearDog public flip, (B) fleet convergence — 5 gates enrolling, NUCLEUS validation via benchScale + agentReagents. All binaries from golgiBody. mesh.gate_enroll live. 13/13 BTSP. 197 scenarios. Known debt 2.**
+**Date**: Jul 27, 2026 10:54 EDT | **Wave**: 155b | **From**: eastGate overwatch
+**Posture**: **genomeBin CONVERGENCE. Silicon-deistic deployment: 5 Tier 1 target triples (Linux x86+ARM, Windows, Android, ARM IoT). Tower Atomic IS the OS abstraction layer. golgiBody sole depot. Self-enrollment pattern — gates declare name + composition, everything else intrinsic. Compositions fixed (compute/nest include Tower base). Windows gates (blueGate, swiftGate) + PowerShell enrollment. 13/13 BTSP. 197 scenarios.**
 
 ---
 
@@ -19,9 +19,10 @@ and Forgejo-pushed. Two parallel tracks now active.
 | Known debt | **2** (grapheneGate provenance stale in git) |
 | BTSP primals | **13/13** |
 | Primal tests | **75,199** (#[test] in primals alone) |
-| Depot | 28 binaries × 2 arch (x86_64 + aarch64-musl) |
+| genomeBin Tier 1 | **5 targets**: x86_64-linux-musl, aarch64-linux-musl, x86_64-windows-gnu, aarch64-android, armv7-linux-musl |
+| Depot | golgiBody sole depot — all genomeBins via Caddy TLS |
 | Gates online | **7** (spore, east, iron, flock, golgi, graphene, north) |
-| Gates enrolling | **5** (strand, west, blue, swift, south) |
+| Gates enrolling | **5** (strand, west[Linux], blue[Win], swift[Win], south) |
 
 ---
 
@@ -92,13 +93,15 @@ deployment pipeline end-to-end.
 | 3 | Hardware | **AMBER → GREEN** — autonomous enrollment shipped, 5 gates ready |
 | 4 | Sovereignty | GREEN — autonomous enrollment + FIDO2/beacon trust chain |
 | 5 | Public Surface | GREEN — sporePrint SEO shipped |
-| 6 | Compositions | GREEN — Nest Atomic Phase 0 UNBLOCKED |
+| 6 | Compositions | GREEN — Nest Atomic Phase 0 UNBLOCKED, compute/nest include Tower base |
 | 7 | Documentation | GREEN — enrollment documented, two parallel blurbs |
 | 8 | Campus | GREEN |
 
 ---
 
-*Wave 155a: AUTONOMOUS ENROLLMENT SHIPPED. mesh.gate_enroll live on golgiBody.
-Two parallel tracks: (A) evolution towards Nest Atomic + bearDog public flip,
-(B) fleet convergence — 5 gates enrolling from golgiBody, NUCLEUS validation
-via benchScale + agentReagents. 75,199 primal tests. 13/13 BTSP.*
+*Wave 155b: genomeBin CONVERGENCE. Tower Atomic is the universal OS abstraction —
+songBird universal-ipc already handles UDS (Linux), named pipes (Windows), abstract
+sockets (Android), XPC (iOS), TCP (fallback). `bind_mode` and `target` are transitional
+manifest fields — primals auto-detect via `Platform::detect()`. Five Tier 1 genomeBin
+targets. golgiBody sole depot. Self-enrollment pattern live. cellMembrane pushed.
+75,199 primal tests. 13/13 BTSP.*

@@ -70,8 +70,8 @@ golgiBody-ext = "137.184.197.151"
 # covalent (gate→inner) → ionic (inner→outer) → weak (outer→GitHub)
 [topology.roles]
 push_receiver = "golgiBody"           # cis face: receives gate pushes (Forgejo)
-build_authorities = ["sporeGate", "eastGate"]  # sovereign CI: any gate with Rust + musl-tools can build
-depot_server = "golgiBody"            # WAN depot: serves binaries via Caddy TLS
+build_authorities = ["sporeGate", "eastGate", "blueGate"]  # sovereign CI: any gate with Rust + musl-tools can build
+depot_server = "golgiBody"            # SOLE depot: all gates fetch from golgiBody via WAN TLS. No local depots.
 sync_mediator = "sporeGate"           # structural: sync hub + impulse cascade
 external_publisher = "golgiBody-ext"  # trans face: ships to GitHub (holds extracellular SSH keys)
 remote_access = "golgiBody"           # RustDesk hbbs+hbbr — sovereign remote desktop relay (remote.primals.eco)
@@ -698,18 +698,19 @@ requires = []
 examples = ["grapheneGate"]
 
 [compositions.compute]
-description = "GPU/HPC compute dispatch — specialized ecobins for scientific workloads"
-primals = ["toadStool", "barraCuda", "coralReef", "biomeOS"]
-services = ["ipc", "mesh", "compute"]
+description = "Node Atomic — Tower trust boundary + compute substrate for GPU/HPC workloads"
+primals = ["bearDog", "songBird", "skunkBat", "toadStool", "barraCuda", "coralReef", "biomeOS"]
+services = ["ipc", "mesh", "drawbridge", "compute"]
 requires = ["gpu"]
-notes = "Specialized ecobins for HPC. A thin-relay at the HPC site provides depot access; compute nodes pull only the ecobins they need. coralReef handles shaders, barraCuda dispatches compute, toadStool orchestrates."
+notes = "Tower Atomic base (crypto + mesh + audit) plus compute primals. Intra-inner membrane workhouse — unattended, accessible via RustDesk. Application workloads (NF pipelines, wetSpring, neuralSpring) run separately."
 examples = ["strandGate"]
 
 [compositions.nest]
-description = "Cold storage — archival, CAS, and full provenance trio"
-primals = ["nestGate", "rhizoCrypt", "loamSpine", "sweetGrass"]
-services = ["ipc", "storage"]
+description = "Nest Atomic — Tower trust boundary + storage/provenance trio for NAS/archive"
+primals = ["bearDog", "songBird", "skunkBat", "nestGate", "rhizoCrypt", "loamSpine", "sweetGrass"]
+services = ["ipc", "mesh", "drawbridge", "storage"]
 requires = ["zfs"]
+notes = "Tower Atomic base plus provenance trio. Outer membrane exposed for WAN mesh storage access."
 examples = ["westGate"]
 
 # ═══════════════════════════════════════════════════════════════════
@@ -781,7 +782,7 @@ transport = "lan"
 zone = "backbone"
 wg_ip = "10.13.37.7"
 roles = ["node_atomic", "compute", "gpu"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). 13/13 NUCLEUS. JupyterHub 5.4.5 LIVE on :8000. Binaries deploy from pepti warehouse (membrane.primals.eco/depot/x86_64-unknown-linux-gnu/). songBird drawbridge target. House 2 mesh anchor."
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). 13/13 NUCLEUS + 4x HDD enclave experiment (14TB + 1TB + 1TB + ~2TB — each disk an encrypted enclave for segregated compute/data). JupyterHub 5.4.5 LIVE on :8000. songBird drawbridge target. House 2 mesh anchor."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -925,7 +926,7 @@ transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 roles = ["storage", "nest", "wan_validator"]
-notes = "i7-4771 + RTX 2070 Super + 76TB ZFS. Nest Atomic 7/7. Heavy open NAS — NestGate CAS backend, outer membrane exposed for WAN mesh access. Wired to Omada (10G)."
+notes = "i7-4771 + RTX 2070 Super + 5x14TB HDD (70TB raw, ZFS cold pool). Nest Atomic 7/7. Cold storage — NestGate CAS backend, outer membrane exposed for WAN mesh access. Wired to Omada."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "biomeOS", "squirrel",
@@ -961,21 +962,21 @@ repos = [
     "cellMembrane", "projectNUCLEUS",
 ]
 
-# blueGate — distributed builder + media/gaming host (house2)
+# blueGate — distributed builder + media/gaming host (house2) — WINDOWS
 # Tower Atomic workhouse + build node under sporeGate foreman.
 # Plex-like media server, Steam data host. Connected via Flint 2 (2.5G).
 # Intra-inner membrane: Tower Atomic only, user services.
 [gates.blueGate]
-target = "x86_64-unknown-linux-musl"
+target = "x86_64-pc-windows-gnu"
 mobility = "fixed"
-bind_mode = "uds"
+bind_mode = "tcp_only"
 composition = "tower"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 build_authority = true
 roles = ["build", "tower_atomic"]
-notes = "Distributed builder (Node Atomic pattern). Tower Atomic workhouse — media/gaming/house2 services. Flint 2 bridge (2.5G). Build node under sporeGate foreman."
+notes = "Windows. Distributed builder (Node Atomic pattern). Tower Atomic workhouse — media/gaming/house2 services. Flint 2 bridge (2.5G). Build node under sporeGate foreman."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -984,19 +985,19 @@ repos = [
     "cellMembrane", "projectNUCLEUS",
 ]
 
-# swiftGate — hobby/consumer computer, house2 (like northGate in house1)
+# swiftGate — hobby/consumer computer, house2 (like northGate in house1) — WINDOWS
 # Full NUCLEUS, gaming/desktop/family use. Connected via Flint 2 (2.5G).
 [gates.swiftGate]
-target = "x86_64-unknown-linux-musl"
+target = "x86_64-pc-windows-gnu"
 mobility = "fixed"
-bind_mode = "uds"
+bind_mode = "tcp_only"
 composition = "full"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 gate_class = "family"
 roles = ["node_atomic"]
-notes = "Hobby/consumer computer for house 2 (like northGate in house 1). Full NUCLEUS. Gaming, desktop, family. Flint 2 (2.5G)."
+notes = "Windows. Hobby/consumer computer for house 2 (like northGate in house 1). Full NUCLEUS. Gaming, desktop, family. Flint 2 (2.5G)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
