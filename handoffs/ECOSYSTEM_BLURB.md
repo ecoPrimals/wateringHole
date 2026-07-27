@@ -220,7 +220,24 @@ G9 (JOSS) ← G3 + wetSpring (independent research track)
 
 ---
 
-*Wave 155b. Tracks converged. 10 fossilized dimensions. 9 glacial goals.
-Every team has next work. The frontier is cross-platform proof: Tower on
-Windows (blueGate), Nest Atomic (flockGate), then Plasmodium (multi-gate).
-All binaries from golgiBody. Self-enrollment. Pure Rust. Silicon-deistic.*
+## SPOREPRINT — Wave 155b
+
+**Wave 155b transplant shipped.** 10 files, 154 insertions, 106 deletions.
+
+- Entity registry updated: bearDog 11,993, songBird 10,335, nestGate 9,617,
+  toadStool 17,614, petalTongue 5,812. Total 93,700 tests
+- Tower Atomic: BTSP 13/13, genomeBin 5 targets, autonomous enrollment (F10),
+  glacial goals G1/G2/G5 documented
+- Gate mesh: 7 online + 5 HW ready gate table across tower_atomic, living-systems,
+  MESH_TOPOLOGY
+- Title templates specialized: `Page Title | ecoPrimals` (only homepage has full keywords)
+- Sidebar compressed: 40+ page sections show subsections only
+- Canonical host fully consolidated (Caddy 301 confirmed live 150d)
+
+**Divergence**: Blurb says primal_tests=75,199 but individual counts only
+updated for 5/15 primals. Entity sum is 82,124. Need `spore-validate refresh`.
+
+---
+
+*Wave 155b: 313 pages, 0 errors. Tracks converged. Ecosystem consolidated.
+The frontier is cross-platform proof: Tower on Windows, Nest Atomic, Chimera.*
