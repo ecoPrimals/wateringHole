@@ -3,7 +3,7 @@
 **Purpose**: Definitive terminology for the ecoPrimals ecosystem. If a term is used
 in any document, handoff, or conversation, its meaning is defined here.
 
-**Last Updated**: July 26, 2026 (Wave 151b — BTSP standard all primals, Tower COMPLETE, chimera unblocked, Nest Atomic ahead)
+**Last Updated**: July 27, 2026 (Wave 155b — genomeBin convergence, autonomous enrollment shipped, 5 Tier 1 targets, Tower Atomic = OS abstraction, gate enmeshment glacial)
 
 ---
 
@@ -46,44 +46,45 @@ See `LINK_INTEGRITY_STANDARD.md` for the full URL convention standard.
 
 A **gate** is a physical computer — a deployment target that runs the ecoPrimals
 stack. Gates are named using camelCase (`firstLast`) like all ecoPrimals entities.
-The project operates on 10 towers + 4 small form factor nodes:
+The project operates across multiple houses and platforms:
 
-| Gate | Display GPU | Work / HBM2 | Role |
-|------|-------------|-------------|------|
-| **northGate** | RTX 5090 | — | Flagship AI/LLM compute |
-| **southGate** | RTX 4060 | swappable | Gaming + heavy compute |
-| **eastGate** | RTX 4070 | — | Utility + neuromorphic (1× Akida) |
-| **strandGate** | — | RTX 3090 + RX 6950 XT | Bioinformatics (1× Akida) |
-| **biomeGate** | RTX 5060 | 1× Titan V + 1× Tesla K80 † | HBM2 test bench (1× Akida) |
-| **westGate** | RTX 2070S | — | Cold storage (76 TB ZFS) |
+| Gate | Platform | Composition | Role | Status |
+|------|----------|-------------|------|--------|
+| **golgiBody** | Linux (VPS) | thin-relay | Sole depot, enrollment, Forgejo, Drawbridge | ONLINE |
+| **sporeGate** | Linux | full | Build authority, cascade hub, HPC | ONLINE |
+| **eastGate** | Linux | full | Code hub, overwatch | ONLINE |
+| **ironGate** | Linux | full | GPU compute, 4x HDD enclave, JupyterHub | ONLINE |
+| **flockGate** | Linux | full | Nest Atomic validation | ONLINE |
+| **northGate** | Windows | full | RTX 5090, gaming/GPU compute | ONLINE |
+| **grapheneGate** | Android | tower | Beacon seed, mobile Tower | ONLINE |
+| **strandGate** | Linux | compute (7) | Dual EPYC, RTX 3090, bioinformatics | HW READY |
+| **westGate** | Linux | nest (7) | 5x14TB HDD (70TB ZFS cold pool) | HW READY |
+| **blueGate** | Windows | tower (3) | Distributed builder, media/gaming | HW READY |
+| **swiftGate** | Windows | full (13) | Hobby/consumer, house2 | HW READY |
+| **southGate** | Linux | full (13) | House2 sovereign site | HW READY |
 
-† biomeGate has 3-card limit. Float pool: 1× Titan V, 2× MI50, 1× RTX 3090.
-
-Each gate has a **display tier** (small GPU, permanent) and **PCIe slots for
-swappable work cards**. Every gate is a PCIe-parallelizable system — work cards
-physically move to where the science is.
-
-A gate runs an operating system (Pop!\_OS / Linux), a toolchain (Rust, Cursor),
-and the biomeOS substrate. Gates are sovereign — no cloud, no allocation queue,
-no institutional dependency. You own the hardware, you own the compute.
+Gates run any operating system — Linux, Windows, Android, macOS. Tower Atomic
+(bearDog + songBird + skunkBat) is the OS abstraction layer, handling IPC
+transport (UDS vs named pipes vs TCP), service management, and platform
+detection intrinsically. Gates self-enroll via `mesh.gate_enroll` — declaring
+name, composition, and physical proof. No manifest pre-definition needed.
 
 When Plasmodium is active, multiple gates bond into a collective. Any gate can
 query the collective; workloads route to the best gate by capability match.
 
 ### Operational Substrate
 
-The software environment a gate provides to the ecoPrimals stack:
+The software environment a gate provides to the ecoPrimals stack. Platform-
+specific details are handled by Tower Atomic — primals auto-detect via
+`Platform::detect()` at compile time.
 
-| Layer | Standard |
-|-------|----------|
-| **OS** | Pop!\_OS (Ubuntu-based, System76). Linux kernel. |
-| **Shell** | bash |
-| **Toolchain** | Rust (stable + nightly), `cargo`, `clippy`, `rustfmt` |
-| **Editor** | Cursor (VS Code fork with AI agent) |
-| **GPU** | Vulkan (via wgpu for portable path, VFIO for sovereign path) |
-| **NPU** | AKD1000 (BrainChip Akida) via pure Rust driver |
-| **Version control** | git, GitHub (SSH), one repo per primal/spring |
-| **Package manager** | apt (system), cargo (Rust), pip (Python cross-validation only) |
+| Layer | Linux | Windows | Android |
+|-------|-------|---------|---------|
+| **IPC** | UDS / abstract sockets | Named pipes / TCP | Abstract sockets / TCP |
+| **Shell** | bash | PowerShell | adb / Termux |
+| **Toolchain** | Rust stable, cargo, clippy, rustfmt | Same (via rustup) | Cross-compiled from Linux |
+| **Service mgmt** | systemd | Windows Service (planned) | Manual / init |
+| **GPU** | Vulkan (wgpu) | Vulkan / DirectX (wgpu) | Vulkan (wgpu) |
 
 No Docker. No Kubernetes. No cloud VMs. The gate IS the infrastructure.
 
@@ -919,14 +920,17 @@ The **selective permeability layer** of the ecosystem — a private operational
 repo managed by the **cellMembrane team (ironGate)** (sporeGarden org) that deploys the
 **fieldMouse Tower** composition to external substrate (VPS). cellMembrane
 controls what crosses between intracellular (LAN/gates) and extracellular
-(public internet) layers.
+(public internet) layers. Also provides the `membrane` CLI for gate operations:
+`gate.enroll`, `gate.bootstrap`, `temporal.cascade`, `plasmid.harvest`.
 
-Current state (May 23, 2026):
+Current state (Wave 155b):
 - **Channel 2 Relay** (Songbird TURN :3478): **LIVE**
 - **Channel 2b Remote** (RustDesk hbbs/hbbr :21115-21117): **LIVE**
-- **Channel 3 Surface** (Caddy TLS :80/:443, `membrane.primals.eco`): **LIVE** — Let's Encrypt E8, 19MB sporePrint cache, 68ms TTFB
-- **Channel 3 TLS shadow** (BearDog :8443): SHADOW — pending cutover
-- **Channel 1 Signal** (knot-dns :53): **PLANNED** — glacial shift blocker
+- **Channel 3 Surface** (Caddy TLS :80/:443, `membrane.primals.eco`): **LIVE**
+- **Enrollment** (`/enroll/*` → mesh.gate_enroll): **LIVE** on golgiBody
+- **Phase 7**: gate.enroll → mesh.enroll via HMAC-SHA256 proof
+- **Builder identity**: `plasmid.harvest` records builder gate + timestamp
+- **Checksum verify**: handles both plain-string and struct TOML formats
 
 cellMembrane is operationally on GitHub Private and should migrate to
 Forgejo-only when covalent gates host Forgejo on sovereign infrastructure. It contains
@@ -1169,6 +1173,81 @@ the validator assumes the network is hostile.
 
 ---
 
+## The Binary Evolution Ladder
+
+### ecoBin
+
+An **ecoBin** is a statically-linked, cross-compiled Rust binary — zero C
+dependencies on the critical path. ecoBins compile for all Cargo target triples
+and are the base unit of the depot system. Every primal binary is an ecoBin.
+
+### genomeBin
+
+A **genomeBin** is the evolved ecoBin — a binary that works across all deployed
+operating systems and architectures without code changes. The name reflects that
+the binary carries its full "genome" (capabilities, platform detection, IPC
+selection) intrinsically.
+
+genomeBin targets are tiered by deployment status:
+
+| Tier | Targets | Meaning |
+|------|---------|---------|
+| **Tier 1 genomeBin** | x86_64-linux-musl, aarch64-linux-musl, x86_64-windows-gnu, aarch64-android, armv7-linux-musl | MUST — deployed gates exist |
+| **Tier 2** | x86_64-apple-darwin, aarch64-apple-darwin | SHOULD — deployment imminent |
+| **Tier 3 PROVEN** | riscv64, ppc64le, s390x, sparc64, i686, arm32 | Compiled, no deployed gate |
+| **Tier 4 FUTURE** | wasm32-wasip1, loongarch64, freebsd, illumos, redox | Horizon |
+
+### Silicon-Deistic Deployment
+
+The architectural principle that **hardware is truth, OS is abstraction**.
+Tower Atomic (bearDog + songBird + skunkBat) is the universal platform layer.
+Just as songBird abstracts ports and mesh topology, Tower Atomic abstracts OS
+differences: UDS vs named pipes vs TCP, systemd vs Windows Service vs launchd,
+`/opt/membrane` vs `%APPDATA%`. Primals detect their platform at runtime and use
+the best available mechanism. `bind_mode`, `target`, and other OS-specific manifest
+fields are transitional — they document what primals auto-detect internally.
+
+Goal: a gate enrolls with only **name + composition + physical proof**. Everything
+else is intrinsic.
+
+### Autonomous Enrollment
+
+The **zero-operator gate provisioning system** shipped in Wave 155a. A gate
+self-enrolls by running `gate-enroll.sh` (Linux) or `gate-enroll.ps1` (Windows)
+with a hub address and physical proof (enrollment token, FIDO2 attestation, or
+beacon proximity). The enrollment endpoint on golgiBody (`mesh.gate_enroll`)
+handles: physical proof verification → IP pool allocation → WireGuard peer
+registration → Forgejo SSH key creation → family seed delivery → genetic
+enrollment.
+
+### Self-Registration
+
+Gates declare their own name and composition during enrollment. No manifest
+pre-definition is needed — `ecosystem_manifest.toml` gate entries are informational,
+not authoritative. Any hardware anywhere can become a gate by running the
+enrollment script with a valid trust token.
+
+### Composition
+
+A **composition** is a named set of primals that defines a gate's capabilities.
+Compositions are hierarchical — every composition includes Tower Atomic base:
+
+| Composition | Primals | Count | Use Case |
+|-------------|---------|-------|----------|
+| **tower** | bearDog, songBird, skunkBat | 3 | Minimal trust boundary |
+| **compute** | Tower + toadStool, barraCuda, coralReef, biomeOS | 7 | GPU/HPC workloads |
+| **nest** | Tower + nestGate, rhizoCrypt, loamSpine, sweetGrass | 7 | Content-addressed storage |
+| **full** | All 13 foundation primals + squirrel | 13 | Complete NUCLEUS |
+
+### BTSP (BearDog Trust Signaling Protocol)
+
+The **handshake protocol** all primals use for outbound connections. BTSP
+ClientHello is shipped on all 13/13 primals (Wave 151d). When
+`BEARDOG_UDS_REQUIRE_BTSP=1`, local UDS connections require BTSP proof before
+any method call is accepted.
+
+---
+
 ## Quick Lookup
 
 | Term | One-Line Definition |
@@ -1249,3 +1328,11 @@ the validator assumes the network is hostile.
 | **Crypto delegation** | songBird routes all crypto to bearDog over IPC — 6/6 seams validated Wave 150 (chimera-ready) |
 | **libtower.so** | Chimera Phase 0 extraction target — bearDog crypto + songBird routing + skunkBat defense as shared library |
 | **Silicon Atheism** | Platform-agnostic dispatch — code compiles for all targets, probes capabilities at runtime (no compile-time branching in business logic) |
+| **genomeBin** | Evolved ecoBin — binary carrying full platform awareness, working across all deployed OS/arch without code changes |
+| **Silicon-deistic deployment** | Hardware is truth, OS is abstraction. Tower Atomic handles platform differences intrinsically |
+| **Autonomous enrollment** | Zero-operator gate provisioning — `gate-enroll.sh`/`.ps1` → `mesh.gate_enroll` → meshed |
+| **Self-registration** | Gates declare name + composition during enrollment, no manifest pre-definition needed |
+| **Composition** | Named primal set: tower (3), compute (7), nest (7), full (13) — all include Tower base |
+| **BTSP** | BearDog Trust Signaling Protocol — handshake on all 13/13 primals, defense-in-depth |
+| **golgiBody depot** | Sole WAN depot — all genomeBins served via Caddy TLS at `depot.primals.eco` |
+| **Gate enmeshment** | Glacial goal — Tower Atomic deployment across all platforms, then Nest Atomic for data |

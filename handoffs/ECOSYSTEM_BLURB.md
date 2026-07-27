@@ -1,86 +1,114 @@
 # ecoPrimals Ecosystem Blurb — Wave 155b
 
-**Date**: Jul 27, 2026 10:54 EDT | **Wave**: 155b | **From**: eastGate overwatch
-**Posture**: **genomeBin CONVERGENCE. Silicon-deistic deployment: 5 Tier 1 target triples (Linux x86+ARM, Windows, Android, ARM IoT). Tower Atomic IS the OS abstraction layer. golgiBody sole depot. Self-enrollment pattern — gates declare name + composition, everything else intrinsic. Compositions fixed (compute/nest include Tower base). Windows gates (blueGate, swiftGate) + PowerShell enrollment. 13/13 BTSP. 197 scenarios.**
+**Date**: Jul 27, 2026 | **Wave**: 155b | **From**: eastGate overwatch
+**Posture**: **genomeBin CONVERGENCE — orthogonal review complete, fossilized, glacial goals set.**
 
 ---
 
 ## WHERE WE ARE
 
-Waves 150-151 (Tower Atomic + BTSP) **fossilized**. Wave 155a ships autonomous
-gate enrollment across three primals (cellMembrane Phase 7, songBird mesh.gate_enroll,
-bearDog FIDO2/beacon enrollment attestation). The enrollment system is code-complete
-and Forgejo-pushed. Two parallel tracks now active.
+The ecosystem is **consolidated**. Autonomous enrollment, Tower Atomic, BTSP
+13/13, and depot convergence are all **fossilized** (F1-F10). The active frontier
+is cross-platform deployment — proving Tower Atomic works on every OS where a
+gate runs.
 
 | Metric | Value |
 |--------|-------|
 | Tower vs WireGuard | 353x LAN, 1.7x WAN |
-| Scenarios | 197, all PASS |
-| Known debt | **2** (grapheneGate provenance stale in git) |
-| BTSP primals | **13/13** |
 | Primal tests | **75,199** (#[test] in primals alone) |
-| genomeBin Tier 1 | **5 targets**: x86_64-linux-musl, aarch64-linux-musl, x86_64-windows-gnu, aarch64-android, armv7-linux-musl |
+| Scenarios | 197, all PASS |
+| BTSP | **13/13** |
+| genomeBin Tier 1 | **5 targets** (Linux x86+ARM, Windows, Android, ARM IoT) |
 | Depot | golgiBody sole depot — all genomeBins via Caddy TLS |
-| Gates online | **7** (spore, east, iron, flock, golgi, graphene, north) |
-| Gates enrolling | **5** (strand, west[Linux], blue[Win], swift[Win], south) |
+| Gates ONLINE | **7** (spore, east, iron, flock, golgi, graphene, north) |
+| Gates HW READY | **5** (strand, west, blue[Win], swift[Win], south) |
+| Fossilized dimensions | **10** (F1-F10) |
+| Active dimensions | **9** (incl. new Dim 8: genomeBin) |
 
 ---
 
-## TWO PARALLEL TRACKS
+## GLACIAL GOALS — WHAT MATTERS LONG TERM
+
+These are the targets that hardware enmeshment validates. Gates are on, wired,
+and running. The work is proving the software stack works across platforms:
+
+| Goal | What It Proves | Blocks |
+|------|---------------|--------|
+| **Tower Atomic on Windows** | OS abstraction layer works (IPC, service, paths) | blueGate + swiftGate enmeshment |
+| **Tower Atomic on Android** | Mobile trust boundary (grapheneGate full NUCLEUS) | HSM + eastGate validation |
+| **Nest Atomic cross-platform** | Agnostic data systems (same as IPC abstraction) | NestGate CAS on all platforms |
+| **systemd → universal service mgmt** | cellMembrane `nucleus.rs` on Windows/launchd/init | Full NUCLEUS on non-Linux |
+| **Chimera Phase 0** | `libtower.so` — shared library for in-process crypto | Tower cutover, composition proof |
+| **bearDog public** | crates.io publish, sovereign outer membrane | Final audit sweep |
+| **JOSS publication** | Gonzales NF pipeline as live system paper | Nest Atomic + wetSpring |
+| **Plasmodium** | Multi-gate bonded compute (2+ NUCLEUS instances) | Full gate enmeshment |
+
+---
+
+## ACTIVE TRACKS
 
 ### Track A: Evolution — Nest Atomic + bearDog Public
 
-Continues the Wave 151 forward momentum. See `BLURB_TRACK_A_EVOLUTION.md`.
+See `BLURB_TRACK_A_EVOLUTION.md`. Capability evolution:
+- Nest Atomic Phase 0 (nestGate BTSP integration)
+- bearDog public flip (ready — final audit)
+- Chimera Phase 0 (libtower.so extraction)
+- Tower cutover shadow analysis
 
-**Scope**: Nest Atomic Phase 0, bearDog public flip, Chimera Phase 0 extraction,
-Tower cutover shadow analysis, crates.io publishing as sovereignty sub-goal.
+### Track B: Fleet Convergence — Gate Enmeshment (GLACIAL)
 
-### Track B: Fleet Convergence — 5-Gate Enrollment + NUCLEUS Validation
+See `BLURB_TRACK_B_FLEET_CONVERGENCE.md`. Operational validation:
+- 5-gate enrollment (enrollment system shipped, gates HW READY)
+- genomeBin depot for Windows + Linux from golgiBody
+- Tower Atomic cross-platform proof
+- benchScale + agentReagents NUCLEUS fleet validation
 
-Gets hardware online and validates the postPrimordial deployment system.
-See `BLURB_TRACK_B_FLEET_CONVERGENCE.md`.
+### sporeGate Build Mesh
 
-**Scope**: Complete 5-gate autonomous enrollment, resolve divergences (westGate
-mixed-wave repos), validate with benchScale + agentReagents NUCLEUS fleet.
-All binaries from golgiBody depot. Tests the membrane and postPrimordial
-deployment pipeline end-to-end.
-
----
-
-## THIS CASCADE — WHAT SHIPPED (Wave 155a)
-
-### Autonomous Gate Enrollment (cellMembrane + songBird + bearDog)
-
-| Component | Change |
-|-----------|--------|
-| cellMembrane | Phase 7 wired — `gate.enroll` → `mesh.enroll` via HMAC-SHA256 proof |
-| songBird | `mesh.gate_enroll` endpoint — 6-phase pipeline (proof → IP → WG → Forgejo → seed → genetic) |
-| songBird | Dynamic IP pool allocation (.20-.254 from `wg show wg0 allowed-ips`) |
-| bearDog | `fido2.attest_enrollment` + `fido2.verify_attestation` on trust roster |
-| bearDog | `beacon.prove_proximity` + `beacon.verify_proximity` for grapheneGate BLE/NFC |
-| plasmidBin | `gate-enroll.sh` — standalone client for zero-knowledge self-enrollment |
-
-### Trust Tiers (K-Derm Membrane Model)
-
-| Proof Type | Trust Tier | Auto-Enroll |
-|------------|-----------|-------------|
-| FIDO2/SoloKey attestation | **Kin** (tier 1) | Yes |
-| grapheneGate beacon proximity | **Sibling** (tier 2) | Yes |
-| Pre-shared enrollment token | **Extended** (tier 3-4) | Yes |
-| No physical proof | **Rejected** | No |
+See `BLURB_SPOREGATE_BUILD_MESH.md`. Infrastructure:
+- Composition profiles fixed (compute/nest include Tower)
+- blueGate distributed builder under sporeGate foreman
+- Windows genomeBin cross-compilation
+- Checksum verify fix shipped
 
 ---
 
-## WHAT'S DONE (FOSSILIZE)
+## TEAM ORIENTATION — WHO NEEDS WHAT
 
-| Item | Evidence |
-|------|----------|
-| Tower Atomic (Wave 150) | 353x LAN, 1.7x WAN, 197 scenarios, chimera unblocked |
-| BTSP sub-wave (Wave 151b-d) | 13/13 primals shipped ClientHello |
-| bearDog FIDO2 + iosGate (152-154) | FIDO2 hardware, iOS Secure Enclave, HSM agnostic |
-| Autonomous enrollment (Wave 155a) | mesh.gate_enroll + gate-enroll.sh + FIDO2/beacon attestation |
-| whitePaper gen/ review | GEN_REVIEW_151c.md + JOSS_PUBLICATION.md |
-| Depot convergence | 28 bins × 2 arch, provenance fresh |
+| Team / Gate | Current Blurb | Next Work | Needs New Blurb? |
+|-------------|--------------|-----------|-----------------|
+| **eastGate (overwatch)** | ECOSYSTEM_BLURB | Coordination, glacial tracking | No — this doc |
+| **flockGate (nestGate)** | Track A | Nest Atomic Phase 0, BTSP integration | No — Track A covers |
+| **sporeGate (build mesh)** | BLURB_SPOREGATE_BUILD_MESH | Windows cross-compile, depot refresh | No — current |
+| **ironGate (cellMembrane)** | — | HDD enclave model, nucleus.rs Windows path | **YES** |
+| **strandGate (compute)** | — | Tower enrollment → GPU workloads | **YES** |
+| **westGate (NAS)** | — | Tower enrollment → NestGate ZFS CAS | **YES** |
+| **blueGate (builder)** | sporeGate blurb | Tower on Windows, build authority | Covered by sporeGate |
+| **swiftGate (hobby)** | — | Full NUCLEUS on Windows | Covered by Track B |
+| **southGate (house2 hub)** | — | Full NUCLEUS, second sovereign site | Covered by Track B |
+
+Teams needing fresh blurbs: **ironGate** (HDD enclave + data systems),
+**strandGate** (compute workhouse), **westGate** (NAS + ZFS cold pool).
+
+---
+
+## WHAT'S FOSSILIZED (DON'T RE-CHECK)
+
+| F# | Dimension | Completed |
+|----|-----------|-----------|
+| F1 | Glacial Shift | Wave 137b |
+| F2 | Content-Addressed Convergence | Wave 143b |
+| F3 | Silicon Atheism | Wave 145a → evolved into Dim 8 (genomeBin) |
+| F4 | Depot / Build Pipeline | Wave 150n |
+| F5 | Cascade Pipeline | Wave 150k |
+| F6 | Tower Atomic Deep Analysis | Wave 150x |
+| F7 | sporePrint Transplant | Wave 150x |
+| F8 | Tower Atomic Completion | Wave 151a |
+| F9 | BTSP + Publication Strategy | Wave 151d |
+| F10 | Autonomous Gate Enrollment | Wave 155b |
+
+10 handoffs from Wave 151b-152a fossilized to `fossilRecord/wave155b_btsp_enrollment/`.
+7 active handoffs remain.
 
 ---
 
@@ -88,20 +116,18 @@ deployment pipeline end-to-end.
 
 | # | Dimension | Status |
 |---|-----------|--------|
-| 1 | Temporal/Coordination | GREEN — Wave 155a, 43/43 synced |
-| 2 | Ecological | GREEN — 75,199 tests, 2 debt, **13/13 BTSP** |
-| 3 | Hardware | **AMBER → GREEN** — autonomous enrollment shipped, 5 gates ready |
-| 4 | Sovereignty | GREEN — autonomous enrollment + FIDO2/beacon trust chain |
-| 5 | Public Surface | GREEN — sporePrint SEO shipped |
-| 6 | Compositions | GREEN — Nest Atomic Phase 0 UNBLOCKED, compute/nest include Tower base |
-| 7 | Documentation | GREEN — enrollment documented, two parallel blurbs |
-| 8 | Campus | GREEN |
+| 1 | Temporal/Coordination | GREEN — Wave 155b, 43/43 synced, GLOSSARY refreshed |
+| 2 | Ecological | GREEN — 75,199 tests, compositions fixed, checksum verify fix |
+| 3 | Hardware/Topology | GREEN — 7 online, 5 HW READY, autonomous enrollment fossilized |
+| 4 | Sovereignty | GREEN — F10 enrollment, golgiBody sole depot |
+| 5 | Public Surface | GREEN |
+| 6 | Compositions | GREEN — compute/nest include Tower base, profiles created |
+| 7 | Documentation | GREEN — GLOSSARY refreshed, 10 handoffs fossilized |
+| 8 | genomeBin / Cross-Platform | **NEW** — 5 Tier 1 targets, Windows genomeBins pending |
+| 9 | Campus | GREEN |
 
 ---
 
-*Wave 155b: genomeBin CONVERGENCE. Tower Atomic is the universal OS abstraction —
-songBird universal-ipc already handles UDS (Linux), named pipes (Windows), abstract
-sockets (Android), XPC (iOS), TCP (fallback). `bind_mode` and `target` are transitional
-manifest fields — primals auto-detect via `Platform::detect()`. Five Tier 1 genomeBin
-targets. golgiBody sole depot. Self-enrollment pattern live. cellMembrane pushed.
-75,199 primal tests. 13/13 BTSP.*
+*Wave 155b consolidated. 10 dimensions fossilized. Glacial goals set: Tower
+Atomic cross-platform → Nest Atomic agnostic data → Plasmodium. Gates are on,
+wired, running — the validation target is the software abstraction, not the hardware.*
