@@ -1,17 +1,17 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-27T01:17:00Z
+# Gate: sporeGate | Updated: 2026-07-27T13:45:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-27T01:17:00Z"
-wave = "152a"
+updated = "2026-07-27T13:45:00Z"
+wave = "155a"
 
 [heads]
-bearDog = "84d7b81"
-songBird = "81fc076"
-nestGate = "fe8c59a"
+bearDog = "a8bba76"
+songBird = "c4c5d2d"
+nestGate = "263e68a"
 biomeOS = "4667f58"
 rhizoCrypt = "3c71a44"
 squirrel = "a9493a8"
@@ -20,32 +20,43 @@ loamSpine = "e1a8749"
 skunkBat = "a872c84"
 coralReef = "94ee28a"
 barraCuda = "ceca2b1"
-petalTongue = "0e1cdcc"
+petalTongue = "f61c808"
 toadStool = "40d0ae3"
 sourDough = "3a0b52d"
-cellMembrane = "6b924e3"
+cellMembrane = "473fd7e"
 primalSpring = "3225202"
-wateringHole = "4bf1d7b"
+wateringHole = "b8ca9f7"
 sporePrint = "67cc325"
 
 [deploy]
-songbird_version = "0.2.1 (9b7eb6e) — BTSP ClientHello LIVE, crypto delegation 6/6"
-beardog_version = "0.9.0 (d528ef9) — pen test + AUTH_MODE=enforced + BTSP=required"
+songbird_version = "0.2.1 (c4c5d2d) — GateEnroll dispatch + drawbridge body-method fallback"
+beardog_version = "0.9.0 (a8bba76) — FIDO2 + iosGate + HSM agnostic (Wave 152-154)"
 petaltongue_version = "1.7.0"
-membrane_version = "0.1.0 (6b924e3)"
-gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
+membrane_version = "0.1.0 (473fd7e)"
+gateway_status = "ENROLLMENT_ENDPOINT_LIVE"
 depot_status = "FRESH — 14 primals × 2 architectures, provenance tracked"
-mesh_status = "8-GATE MESH (3 enrolling)"
+mesh_status = "8-GATE MESH (5 enrolling)"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
 
 [tower]
-status = "TOWER ATOMIC COMPLETE — 3/3 LIVE, PRODUCTION HARDENED"
-songbird = "LIVE — BTSP ClientHello, crypto delegation 6/6, LAN dispatch"
-beardog = "LIVE — AUTH_MODE=enforced, BTSP UDS required, pen test hardened"
+status = "TOWER ATOMIC COMPLETE — 3/3 LIVE, ENROLLMENT ENDPOINT DEPLOYED"
+songbird = "LIVE — GateEnroll wired, drawbridge /enroll active, Caddy TLS proxy"
+beardog = "LIVE — AUTH_MODE=enforced, FIDO2+iosGate shipped (Wave 154)"
 skunkbat = "LIVE (PUBLIC)"
 
+[enrollment_endpoint]
+status = "PHASE 0 COMPLETE — LIVE ON GOLGI"
+drawbridge_addr = "127.0.0.1:7780"
+caddy_route = "primals.eco/enroll → reverse_proxy 127.0.0.1:7780"
+method = "mesh.gate_enroll"
+local_test = "PASS — param validation (missing field gate_name)"
+wan_test = "PASS — HTTPS via Caddy (param validation)"
+token_test = "PASS — progresses to wg_public_key validation"
+legacy_gateway = "DISABLED — songbird-gateway.service replaced by songbird-membrane.service"
+forgejo_api_token = "gate-enrollment-service (write:admin,write:user,write:organization)"
+
 [mesh_enrollment]
-wave = "152a"
+wave = "155a"
 golgi_peers = 8
 registered = ["southGate (10.13.37.9)", "strandGate (10.13.37.10)", "westGate (10.13.37.11)"]
 pending_keygen = ["blueGate (10.13.37.12)", "swiftGate (10.13.37.13)"]
@@ -64,13 +75,11 @@ wan_tower = "76.8ms avg, 1.7x sustained"
 iperf3_lan = "2.36 Gbps sporeGate→eastGate (CONFIRMED)"
 
 [harvest]
-wave = "151a"
-harvested = "2026-07-26T01:36:00Z"
-x86_64_primals = 14
-aarch64_primals = 14
+wave = "155a"
+harvested = "2026-07-27T13:30:00Z"
+x86_64_primals = "songBird + bearDog rebuilt with enrollment code"
 provenance = "builder=sporeGate, toolchain=rustc 1.94.0"
-golgi_pushed = "CONFIRMED — both architectures synced"
-note = "12 repos updated since last harvest — incremental rebuild needed"
+golgi_pushed = "CONFIRMED — runtime deployed, services restarted"
 
 [hardening]
 beardog_auth_mode = "enforced (was Permissive)"
@@ -94,6 +103,7 @@ live = "200"
 webb = "200"
 git = "200"
 root = "301"
+enroll = "200 (JSON-RPC param validation)"
 
 [resolved]
 tower_atomic = "COMPLETE — 7/7 debt resolved"
@@ -104,11 +114,11 @@ beardog_152_154 = "FIDO2 + iosGate + HSM agnostic + 3333L debris cleaned"
 caddy_301 = "primals.eco → sporeprint.primals.eco (permanent, path-preserving)"
 northgate_dns = "FIXED — removed DNS=10.13.37.1 from WG config"
 gate_enrollment_3of5 = "southGate + strandGate + westGate WG peers REGISTERED on golgiBody"
+phase0_enrollment_endpoint = "LIVE — primals.eco/enroll, drawbridge + Caddy, 3/3 tests PASS"
 
 [remaining]
-gate_enrollment_bluegate = "P0 — pending keygen"
-gate_enrollment_swiftgate = "P0 — pending keygen"
-westgate_ssh_key = "P1 — needs Forgejo SSH key registration"
-depot_incremental_rebuild = "P1 — 12 repos updated since last harvest"
+phase1_gate_enrollment = "P0 — 5 gates need enrollment (3 WG-keyed, 2 pending keygen)"
+depot_incremental_rebuild = "P1 — 12 repos updated since last harvest (non-songBird/bearDog)"
 graphenegate_floating = "P2 — evolve from ADB peripheral to autonomous gate"
 chimera_phase0 = "P2 — libtower.so extraction"
+benchscale_validation = "P2 — Level 1-4 NUCLEUS validation (Track B Phase 3)"
