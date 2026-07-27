@@ -1,41 +1,41 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-26T01:36:00Z
+# Gate: sporeGate | Updated: 2026-07-27T01:17:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-26T01:36:00Z"
-wave = "151a"
+updated = "2026-07-27T01:17:00Z"
+wave = "152a"
 
 [heads]
-bearDog = "d528ef9"
-songBird = "9b7eb6e"
-nestGate = "d5d45df"
-biomeOS = "3face71"
-rhizoCrypt = "ae205a8"
-squirrel = "68c9e04"
-sweetGrass = "76dc35f"
-loamSpine = "cb1beb0"
-skunkBat = "a8cf5aa"
-coralReef = "2246ebf"
-barraCuda = "3cfdf0e"
-petalTongue = "3227ea5"
-toadStool = "bfa9632"
+bearDog = "84d7b81"
+songBird = "81fc076"
+nestGate = "fe8c59a"
+biomeOS = "4667f58"
+rhizoCrypt = "3c71a44"
+squirrel = "a9493a8"
+sweetGrass = "076337c"
+loamSpine = "e1a8749"
+skunkBat = "a872c84"
+coralReef = "94ee28a"
+barraCuda = "ceca2b1"
+petalTongue = "0e1cdcc"
+toadStool = "40d0ae3"
 sourDough = "3a0b52d"
-cellMembrane = "2c13d20"
-primalSpring = "f26976c"
-wateringHole = "db192c7"
+cellMembrane = "6b924e3"
+primalSpring = "3225202"
+wateringHole = "4bf1d7b"
 sporePrint = "67cc325"
 
 [deploy]
 songbird_version = "0.2.1 (9b7eb6e) — BTSP ClientHello LIVE, crypto delegation 6/6"
-beardog_version = "0.9.0 (d528ef9) — pen test SHIPPED (3 CRITICAL), AUTH_MODE=enforced, BTSP=required"
+beardog_version = "0.9.0 (d528ef9) — pen test + AUTH_MODE=enforced + BTSP=required"
 petaltongue_version = "1.7.0"
-membrane_version = "0.1.0 (2c13d20)"
+membrane_version = "0.1.0 (6b924e3)"
 gateway_status = "SUBDOMAIN_STANDARD_DEPLOYED"
 depot_status = "FRESH — 14 primals × 2 architectures, provenance tracked"
-mesh_status = "6-GATE MESH"
+mesh_status = "8-GATE MESH (3 enrolling)"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
 
 [tower]
@@ -43,6 +43,14 @@ status = "TOWER ATOMIC COMPLETE — 3/3 LIVE, PRODUCTION HARDENED"
 songbird = "LIVE — BTSP ClientHello, crypto delegation 6/6, LAN dispatch"
 beardog = "LIVE — AUTH_MODE=enforced, BTSP UDS required, pen test hardened"
 skunkbat = "LIVE (PUBLIC)"
+
+[mesh_enrollment]
+wave = "152a"
+golgi_peers = 8
+registered = ["southGate (10.13.37.9)", "strandGate (10.13.37.10)", "westGate (10.13.37.11)"]
+pending_keygen = ["blueGate (10.13.37.12)", "swiftGate (10.13.37.13)"]
+forgejo_ssh = "strandGate key registered (ID 12)"
+dns_advisory = "CRITICAL: enrollment template DNS=10.13.37.1 causes 3-5s lag — REMOVE"
 
 [tower_shadow]
 status = "ACTIVE — hourly data"
@@ -60,22 +68,23 @@ wave = "151a"
 harvested = "2026-07-26T01:36:00Z"
 x86_64_primals = 14
 aarch64_primals = 14
-x86_64_status = "FRESH — bearDog + songBird rebuilt with pen test + BTSP ClientHello"
-aarch64_status = "FRESH — bearDog + songBird rebuilt for aarch64"
 provenance = "builder=sporeGate, toolchain=rustc 1.94.0"
 golgi_pushed = "CONFIRMED — both architectures synced"
+note = "12 repos updated since last harvest — incremental rebuild needed"
 
 [hardening]
 beardog_auth_mode = "enforced (was Permissive)"
 beardog_uds_btsp = "required (was OFF)"
-method = "systemd drop-in override (/etc/systemd/system/membrane-beardog.service.d/hardening.conf)"
+method = "systemd drop-in override"
 deployed = "2026-07-26T01:35:17Z"
-observation = "BTSP enforcement active — legacy plaintext UDS connections correctly rejected"
+
+[credentials]
+gsc_service_account = "DEPLOYED to golgi:/opt/ecoPrimals/credentials/gsc-service-account.json (chmod 600)"
 
 [primalspring]
-head = "f26976c"
+head = "3225202"
 scenarios = 197
-known_debt = "1 (grapheneGate HSM) — per upstream calibration"
+known_debt = "2 (grapheneGate provenance stale in git)"
 suite_status = "GREEN"
 
 [surfaces]
@@ -89,17 +98,17 @@ root = "301"
 [resolved]
 tower_atomic = "COMPLETE — 7/7 debt resolved"
 depot_divergence = "RESOLVED — 28 binaries × 2 architectures"
-tower_353x = "PROVEN"
-known_debt_burn = "36→1 (grapheneGate HSM only)"
-beardog_pen_test = "SHIPPED — 3 CRITICAL fixed (error sanitization, auth gating, cipher floor)"
-songbird_btsp_clienthello = "SHIPPED — full 4-step handshake, HMAC-SHA256"
-crypto_delegation = "6/6 seams DONE"
 production_hardening = "DEPLOYED — AUTH_MODE=enforced, BTSP=required"
-bilateral_blockers = "ALL RESOLVED"
-skunkbat_public = "PUBLIC (a8cf5aa)"
+btsp_13_13 = "ALL 13 PRIMALS — ClientHello shipped"
+beardog_152_154 = "FIDO2 + iosGate + HSM agnostic + 3333L debris cleaned"
+caddy_301 = "primals.eco → sporeprint.primals.eco (permanent, path-preserving)"
+northgate_dns = "FIXED — removed DNS=10.13.37.1 from WG config"
+gate_enrollment_3of5 = "southGate + strandGate + westGate WG peers REGISTERED on golgiBody"
 
 [remaining]
-gate_enrollment_southgate = "P1 — USB staged, needs physical cabling"
-gate_enrollment_strandgate = "P1 — USB staged, needs physical cabling"
+gate_enrollment_bluegate = "P0 — pending keygen"
+gate_enrollment_swiftgate = "P0 — pending keygen"
+westgate_ssh_key = "P1 — needs Forgejo SSH key registration"
+depot_incremental_rebuild = "P1 — 12 repos updated since last harvest"
 graphenegate_floating = "P2 — evolve from ADB peripheral to autonomous gate"
-chimera_phase0 = "P2 — libtower.so extraction, unblocked by crypto delegation"
+chimera_phase0 = "P2 — libtower.so extraction"
