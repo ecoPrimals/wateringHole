@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 155d
+# ecoPrimals Ecosystem Blurb — Wave 155e
 
-**Date**: Jul 28, 2026 10:10 EDT | **Wave**: 155d | **From**: eastGate overwatch
-**Posture**: **TOWER ATOMIC HARDENING — frontloading infra stability + k-derm layers. Nest Atomic after Tower is stable on existing gates.**
+**Date**: Jul 28, 2026 11:10 EDT | **Wave**: 155e | **From**: eastGate overwatch
+**Posture**: **TOWER HARDENING ACCELERATING — J1+J2 CLOSED, 6/7 jelly strings resolved. songBird tower.health facade shipped. skunkBat k-derm detection live. sweetGrass CertificateRef shipped (G3 closer). Nest Atomic after Tower stable.**
 
 This is the single handoff document for every team — gate teams and code teams.
 Read "Where We Are", find "Your Team", act on your next work.
@@ -30,12 +30,13 @@ RustDesk. sporeGate diagnosed, golgiBody fixed. Three-layer k-derm model
 | Metric | Value |
 |--------|-------|
 | Signal graphs | **26** (Tower 8, Nest 8, Node 3, Meta 5, Braid 2) |
-| Primal test attributes | **~54K** (songBird 14K, toadStool 22K, nestGate 13K) |
+| Primal test attributes | **~56K** (toadStool 22K, songBird 14K, nestGate 13K) |
+| Jelly strings | **6/7 resolved** (J1-J5 CLOSED, J6 foundation, J7 low-pri) |
 | BTSP | **13/13** |
 | genomeBin depot | **39 binaries** (13 × 3 targets) |
 | Gates ONLINE | **7** + RustDesk restored |
-| RustDesk peers | **10** registered in hbbs DB |
-| Forgejo | **ONLINE** (was down ~12h yesterday) |
+| Threat categories | **9** (skunkBat `ConnectivityAnomaly` new) |
+| cellMembrane tests | **1,194** |
 
 ---
 
@@ -62,22 +63,22 @@ INNER MEMBRANE — Primal IPC (WireGuard wg0 + songBird :7700 + BTSP)
 
 ---
 
-## WHAT CODE TEAMS SHIPPED (cumulative Wave 155b-d)
+## WHAT CODE TEAMS SHIPPED (cumulative Wave 155b-e)
 
-| Team | Evolution | Commits |
-|------|-----------|---------|
-| **biomeOS** | neuralAPI: 7 new signal graphs, 19 atomic translations, platform_native transport | `a2fb6716`, `ef42a287` |
-| **songBird** | **J3+J4+J5**: cascade automation — `deploy.hot_swap`, route self-config via `route.rs`, WG peer hardening. Named pipe IPC. GateEnroll dispatch | `d4bffbbd`, `7e3517c8`, `c4c5d2d2` |
-| **rhizoCrypt** | **G3**: cross-gate provenance chain — `federate→sweetGrass` push + gateway witnesses. BTSP→DAG bridge | `ed81f19`, `d4972b0` |
-| **nestGate** | G3: BTSP peer wiring. G4: NTFS CAS safety. Dep evolution + stub cleanup + fabricated fallback cleanup | `219cca42`, `a6e9e10e`, `d0921a2b`, `9138068f` |
-| **loamSpine** | G3: semantic certificate checks + RPC surface + delegated minting builder. Deep debt — legacy manager, clone dedup, BTSP move semantics | `1eb6d09`, `29307d1`, `d1b1594` |
-| **toadStool** | S343: wgpu into system queries + dispatch. S342: GPU fallback + doctor fix | `b1d3cfa1b`, `64f661674` |
-| **sweetGrass** | G3 READY — cross-gate attribution types, BTSP ClientHello, PROV-O wiring all shipped. Waiting upstream trio | `fa253aa` |
-| **skunkBat** | Cargo update (34 deps). Frame crypto extraction | `349ec9f`, `578136c` |
-| **coralReef** | IPC merge resolution. Test extraction | `8ebd97d`, `40ea5b1` |
-| **cellMembrane** | `InitSystem` dispatch (systemd/launchd/windows-service/bare) | `cbadae4` |
-| **primalSpring** | 56 tower shadow benchmarks. Gate count calibrated | `1b731803`, `05e72e46` |
-| **sporeGate** | Peptidoglycan incident response. RUSTDESK_MEMBRANE chain. 39 binaries. 7 jelly strings | deployment |
+| Team | Latest Evolution | Key Commits |
+|------|------------------|-------------|
+| **songBird** | **`tower.health` + `tower.mesh_status` facade** for biomeOS signal graphs. J3+J4+J5 cascade automation. Named pipe IPC | `f2dacd62`, `d4bffbbd` |
+| **cellMembrane** | **J1+J2 CLOSED**: `plasmid.harvest --push`, `plasmid.push` first-class command, Rust depot_sync refactor. **J6 foundation**: `ServiceSpec` cross-platform model (systemd+launchd renderers). 6 deep debt fixes. 1,194 tests | `fc7c4d9`, `8a71345` |
+| **skunkBat** | **`ConnectivityAnomaly`** — 9th threat category for k-derm incident detection. `platform.rs` module. 182 new tests | `8d6a0de` |
+| **sweetGrass** | **G3: `CertificateRef`** structured type on braids. Backward-compat wire format. Version → 0.7.64 | `28092a8` |
+| **loamSpine** | Entry module extraction (`entry/types.rs`). Schema evolution `V2`. `certificate.history` RPC. 935 insertions | `b03ab3d` |
+| **rhizoCrypt** | SSOT sweep — 1,900 tests aligned. `method_gate_tests` consolidated. Cargo update | `904b17b`, `60f4e2a` |
+| **biomeOS** | neuralAPI: 7 signal graphs, 19 atomic translations, platform_native transport | `a2fb6716`, `ef42a287` |
+| **nestGate** | G3: BTSP peer wiring. G4: NTFS CAS safety. Dep + stub cleanup | `219cca42`, `a6e9e10e` |
+| **toadStool** | S343: wgpu into system queries + dispatch | `b1d3cfa1b` |
+| **coralReef** | IPC merge resolution | `8ebd97d` |
+| **primalSpring** | 56+ tower shadow benchmarks | `1b731803` |
+| **sporeGate** | Peptidoglycan incident response. RUSTDESK_MEMBRANE. 39 binaries | deployment |
 
 ---
 
@@ -128,19 +129,21 @@ Phase 3 (rootPulse): biomeOS orchestrates as unified data layer
 
 ---
 
-## JELLY STRINGS — UPDATED
+## JELLY STRINGS — 6 OF 7 RESOLVED
 
 | # | What | Status | Owner |
 |---|------|--------|-------|
-| J1 | Harvest is shell loops | OPEN | cellMembrane |
-| J2 | Depot push is rsync | OPEN | cellMembrane |
-| J3 | Service restart is manual | **SHIPPED** — `deploy.hot_swap` | songBird |
-| J4 | Caddy config is manual | **SHIPPED** — route self-config via `route.rs` | songBird |
-| J5 | WG peer reg is ssh+wg set | **HARDENED** — WG peer management evolution | songBird |
-| J6 | systemd overrides manual | OPEN | cellMembrane |
+| J1 | Harvest is shell loops | **CLOSED** — was already Rust, added `--push` | cellMembrane |
+| J2 | Depot push is rsync | **CLOSED** — `plasmid.push` + Rust depot_sync refactor | cellMembrane |
+| J3 | Service restart is manual | **CLOSED** — `deploy.hot_swap` | songBird |
+| J4 | Caddy config is manual | **CLOSED** — route self-config via `route.rs` | songBird |
+| J5 | WG peer reg is ssh+wg set | **HARDENED** — WG peer management | songBird |
+| J6 | systemd overrides manual | **FOUNDATION** — `ServiceSpec` model + renderers shipped | cellMembrane |
 | J7 | Legacy service detection | OPEN (low priority) | cellMembrane |
 
-**songBird closed 3 of 7 jelly strings in one commit.** J1+J2 remain as the P0 path for cellMembrane.
+**6/7 resolved.** `plasmid.harvest --all --local --push` is now a single command
+for the full harvest→push cycle. J6 has the `ServiceSpec` cross-platform model
+(systemd + launchd renderers). J7 is low priority / one-time.
 
 ---
 
@@ -166,8 +169,8 @@ From the incident AAR, sequenced:
 | Primal | Version | Next Work |
 |--------|---------|-----------|
 | **bearDog** | 0.9.0 | **G6: public flip audit.** G5: `beardog-core` extraction for Chimera. |
-| **songBird** | 0.2.1 | **J3/J4/J5 SHIPPED.** Live validation: named-pipe test on northGate, route self-config, `deploy.hot_swap` on house1 gates. |
-| **skunkBat** | 0.2.18 | Deps updated. Stable. Tower audit trail for k-derm incident detection (see AAR skunkBat targets). |
+| **songBird** | 0.2.1 | **`tower.health` + `tower.mesh_status` facades SHIPPED.** Live validation on northGate (named pipes) + house1 gates (`deploy.hot_swap`). |
+| **skunkBat** | 0.2.18 | **`ConnectivityAnomaly` SHIPPED** — 9th threat category. K-derm incident pattern detection live. 182 new tests. |
 
 ### Compute Triangle (Tower infra support)
 
@@ -179,26 +182,26 @@ From the incident AAR, sequenced:
 
 ### Provenance Trio + Nest Atomic (AFTER TOWER STABLE)
 
-| Primal | Version | Next Work (deferred) |
-|--------|---------|----------------------|
-| **nestGate** | 0.5.0 | G3: Wire `connect_with_btsp` into CAS call sites. G4: NTFS safety live test. |
-| **rhizoCrypt** | 0.14.17 | G3: Wire `loamSpine.certificate.verify` from DAG auth. Cross-gate provenance validation. |
-| **loamSpine** | 0.9.16 | G3: `MintingAuthority` validation in `mint_certificate`. Wire discovery callers. |
-| **sweetGrass** | 0.7.63 | G3: Add `CertificateId` to braid attestation. All upstream APIs ready — sweetGrass is the closer. |
+| Primal | Version | Status | Next Work (deferred) |
+|--------|---------|--------|----------------------|
+| **nestGate** | 0.5.0 | G3+G4 foundation shipped | Wire `connect_with_btsp` into CAS call sites. NTFS safety live test. |
+| **rhizoCrypt** | 0.14.17 | SSOT aligned, 1,900 tests | Wire `loamSpine.certificate.verify` from DAG auth. |
+| **loamSpine** | 0.9.16 | Entry extracted, `certificate.history` RPC | `MintingAuthority` validation. Wire discovery callers. |
+| **sweetGrass** | 0.7.64 | **`CertificateRef` SHIPPED** | G3 closer — structured certificate references on braids. Ready for Provenance Trio wiring. |
 
 ### Data + Orchestration
 
 | Primal | Version | Next Work |
 |--------|---------|-----------|
-| **biomeOS** | 0.1.0 | **Live signal graph validation**: `tower.health` + `tower.mesh_status` on online gates. |
+| **biomeOS** | 0.1.0 | **Live signal graph validation**: songBird now responds to `tower.health` — test on live gate. |
 | **squirrel** | 0.1.0 | Stable. |
 | **petalTongue** | 1.7.0 | Stable. |
 
 ### cellMembrane (FRONTLOADED — jelly strings)
 
-| Component | Next Work |
-|-----------|-----------|
-| **membrane-shadow** | **J1**: `plasmid.harvest` Rust command (P0). **J2**: `plasmid.push` (P1). J6: cross-platform service config. |
+| Component | Status | Next Work |
+|-----------|--------|-----------|
+| **membrane-shadow** | **J1+J2 CLOSED. J6 foundation shipped.** 1,194 tests | J6 completion: `gate.configure` / `gate.apply` declarative drop-in generation. |
 
 ---
 
@@ -249,18 +252,20 @@ PHASE 1: TOWER ATOMIC HARDENING (NOW)
  │    ├── G1 (Tower on Windows) — J3/J4/J5 SHIPPED
  │    │    ├── northGate: fix DNS → tower.health via named pipes
  │    │    └── blueGate: G1 proof → distributed builder
- │    └── J1 (harvest) → J2 (push) → self-healing cascade
+ │    └── J1+J2 CLOSED → J6 foundation → self-healing cascade
  │
  ├── G6 (bearDog public) — independent, ready
  │
- └── biomeOS: live signal graph validation (tower.health, tower.mesh_status)
+ ├── skunkBat: ConnectivityAnomaly k-derm detection LIVE
+ │
+ └── biomeOS + songBird: tower.health facade → live signal graph test
 
 PHASE 2: NEST ATOMIC (AFTER TOWER STABLE)
  │
  ├── G3 (Nest Atomic Phase 0) — Provenance Trio IPC wiring
  │    ├── rhizoCrypt: wire certificate.verify from DAG
- │    ├── sweetGrass: CertificateId on braids
- │    ├── loamSpine: MintingAuthority validation
+ │    ├── sweetGrass: CertificateRef SHIPPED → wire into cross-gate braids
+ │    ├── loamSpine: certificate.history RPC + MintingAuthority validation
  │    └── flockGate + westGate validation
  │
  ├── G4 (Nest cross-platform) — NTFS CAS validation
@@ -274,10 +279,25 @@ PHASE 3: FULL NUCLEUS
 
 ---
 
-*Wave 155d. Priority reoriented: Tower Atomic hardening first, Nest Atomic after
-stable. K-derm three-layer model documented (outer membrane / peptidoglycan /
-inner membrane). Peptidoglycan failure diagnosed and fixed. songBird closed
-J3+J4+J5 (cascade automation). G3 foundation is shipped but wiring deferred
-until Tower is proven on existing gates. Next immediate: DNS hardening across
-all gates, Tower Atomic live validation (tower.health, tower.enroll), house2
-RustDesk provisioning, and J1+J2 harvest/push codification.*
+---
+
+## HANDOFFS
+
+| File | Status |
+|------|--------|
+| `CELLMEMBRANE_WAVE155d_JELLY_STRING_CODIFICATION.md` | **NEW** — J1+J2 closed, J6 foundation |
+| `LOAMSPINE_WAVE155D_STRUCTURAL_EXTRACTION_SCHEMA_EVOLUTION_JUL28_2026.md` | **NEW** — entry extraction, schema V2 |
+| `SWEETGRASS_WAVE155b_G3_READINESS_JUL27_2026.md` | UPDATED — CertificateRef shipped |
+| `BLURB_SPOREGATE_BUILD_MESH.md` | CURRENT |
+
+AARs: `OUTER_MEMBRANE_TOPOLOGY_FAILURE_155b_AAR.md` | `PROVENANCE_TRIO_G3_CONVERGENCE_155b_AAR.md` | `SPOREGATE_DEPLOYMENT_EVOLUTION_155b_AAR.md`
+
+---
+
+*Wave 155e. Tower hardening accelerating. 6/7 jelly strings resolved — J1+J2
+CLOSED by cellMembrane (`plasmid.harvest --push` single command), J6 ServiceSpec
+foundation shipped. songBird `tower.health` facade ready for biomeOS signal graph
+live validation. skunkBat `ConnectivityAnomaly` 9th threat type for k-derm
+detection. sweetGrass `CertificateRef` shipped (G3 closer ready for Phase 2).
+loamSpine `certificate.history` RPC + entry extraction. rhizoCrypt SSOT aligned.
+Next: Tower live validation on gates, DNS hardening, house2 RustDesk provisioning.*

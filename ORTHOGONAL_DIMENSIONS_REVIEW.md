@@ -45,15 +45,15 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
 - [x] Format drift RESOLVED — all repos clean
 - [x] bearDog: 11,993 tests, FIDO2 hardware, beacon proximity, HSM agnostic
-- [x] songBird: 14,365 tests, `mesh.gate_enroll`, universal-ipc, **J3+J4+J5 cascade automation**
+- [x] songBird: 14,365 tests, `mesh.gate_enroll`, universal-ipc, J3+J4+J5, **`tower.health` facade**
 - [x] nestGate: 13,236 tests, BTSP ClientHello, BTSP→CAS wiring, NTFS CAS safety
 - [x] toadStool: 21,913 tests, wgpu cross-platform GPU, S343 dispatch pipeline
 - [x] rhizoCrypt: 1,456 tests, BTSP→DAG bridge, cross-gate provenance chain
 - [x] loamSpine: 1,702 tests, G3 verification path, delegated minting builder
-- [x] sweetGrass: 1,676 tests, cross-gate attribution types, PROV-O, BTSP ClientHello — **G3 READY**
+- [x] sweetGrass: 1,676 tests, cross-gate attribution, PROV-O, BTSP ClientHello, **`CertificateRef` SHIPPED** — G3 READY
 - [x] petalTongue: 5,812 tests, BTSP ClientHello
 - [x] primalSpring: 197 scenarios, all PASS, calibrated for 13-gate mesh
-- [x] skunkBat: spawn-rate anomaly detection, frame crypto extraction, PUBLIC
+- [x] skunkBat: spawn-rate anomaly detection, **`ConnectivityAnomaly` (9th threat)**, frame crypto, PUBLIC
 - [x] **BTSP 13/13** — all primals shipped ClientHello
 - [x] Tower debt: 36 → **1** (grapheneGate HSM only)
 - [x] songBird crypto delegation to bearDog: 6/6 seams DONE
@@ -250,15 +250,15 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 From sporeGate deployment AAR. These block "operator runs shell loops" →
 "gates self-heal via cascade":
 
-- [x] **J3: Service restart** — songBird `deploy.hot_swap` SHIPPED (`d4bffbbd`)
-- [x] **J4: Caddy config** — songBird route self-config via `route.rs` SHIPPED (`d4bffbbd`)
-- [x] **J5: WG peer reg** — songBird WG peer management hardened SHIPPED (`d4bffbbd`)
-- [ ] **J1: Harvest is shell loops** — blocks distributed building (cellMembrane P0)
-- [ ] **J2: Depot push is rsync** — no integrity verify, no atomic swap (cellMembrane P1)
-- [ ] **J6: systemd overrides manual** — blocks cross-platform service config (cellMembrane P2)
-- [ ] **J7: Legacy service detection** — one-time, low recurrence (cellMembrane P3)
+- [x] **J1: Harvest** — CLOSED. Was already Rust. `--push` flag added (`8a71345`)
+- [x] **J2: Depot push** — CLOSED. `plasmid.push` first-class + Rust depot_sync (`8a71345`)
+- [x] **J3: Service restart** — CLOSED. songBird `deploy.hot_swap` (`d4bffbbd`)
+- [x] **J4: Caddy config** — CLOSED. songBird route self-config via `route.rs` (`d4bffbbd`)
+- [x] **J5: WG peer reg** — HARDENED. songBird WG peer management (`d4bffbbd`)
+- [x] **J6: systemd overrides** — FOUNDATION. `ServiceSpec` model + renderers shipped (`fc7c4d9`)
+- [ ] **J7: Legacy service detection** — OPEN. One-time, low priority (cellMembrane P3)
 
-Convergence path: J1 (Rust harvest) → J2 (Rust depot push) → self-healing cascade.
+6/7 resolved. Harvest→push is now `membrane plasmid.harvest --all --local --push`.
 
 ## 11. Campus / Physical Infrastructure
 
