@@ -10,9 +10,9 @@
 
 [wave]
 id = 155
-sub = "e"
+sub = "f"
 date = "2026-07-28"
-posture = "TOWER HARDENING ACCELERATING. 6/7 jelly strings resolved (J1+J2 CLOSED by cellMembrane, J3-J5 by songBird, J6 foundation). songBird tower.health facade shipped. skunkBat ConnectivityAnomaly 9th threat type. sweetGrass CertificateRef (G3 closer). loamSpine entry extraction + certificate.history. rhizoCrypt SSOT sweep. Nest Atomic deferred until Tower stable on gates."
+posture = "GATE WORKLOAD DISTRIBUTION. Teams → gates: eastGate (overwatch+biomeOS+primalSpring), westGate (petalTongue+squirrel+Provenance Trio, tiered storage testbed), strandGate (compute trio on EPYC+3090). Migrations validate deployment pipeline. northGate+ironGate RustDesk degraded. Storage tiering: cache→RAM→NVMe→SSD→HDD. 6/7 jelly strings. Nest Atomic after Tower stable."
 publisher = "eastGate-overwatch"
 
 [gates]
