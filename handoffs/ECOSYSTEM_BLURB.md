@@ -97,7 +97,7 @@ can be validated against actual hardware variance — not simulated.
 
 ---
 
-## JELLY STRINGS — 6 OF 7 RESOLVED
+## JELLY STRINGS — 6 OF 8 RESOLVED
 
 | # | What | Status | Owner |
 |---|------|--------|-------|
@@ -108,6 +108,7 @@ can be validated against actual hardware variance — not simulated.
 | J5 | WG peer reg | **HARDENED** | songBird |
 | J6 | systemd overrides | **FOUNDATION** — `ServiceSpec` renderers | cellMembrane |
 | J7 | Legacy detection | OPEN (low priority) | cellMembrane |
+| J8 | Key enrollment portal | **OPEN** — SSH keys exchanged via chat, needs portal | songBird + cellMembrane |
 
 ---
 

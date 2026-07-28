@@ -257,8 +257,9 @@ From sporeGate deployment AAR. These block "operator runs shell loops" →
 - [x] **J5: WG peer reg** — HARDENED. songBird WG peer management (`d4bffbbd`)
 - [x] **J6: systemd overrides** — FOUNDATION. `ServiceSpec` model + renderers shipped (`fc7c4d9`)
 - [ ] **J7: Legacy service detection** — OPEN. One-time, low priority (cellMembrane P3)
+- [ ] **J8: Key enrollment portal** — OPEN. SSH keys currently exchanged via chat copy-paste. Needs a portal flow where gate submits key via `primals.eco/enroll`, human approves via Forgejo/portal, key is registered automatically. Sensitive credential data should not traverse chat logs. (songBird + cellMembrane)
 
-6/7 resolved. Harvest→push is now `membrane plasmid.harvest --all --local --push`.
+6/8 resolved. Harvest→push is now `membrane plasmid.harvest --all --local --push`.
 
 ## 11. Campus / Physical Infrastructure
 
@@ -337,11 +338,13 @@ Zero-operator postPrimordial enrollment fully shipped:
 **Summary**: K-Derm three-layer model now has its own dimension (D4). Jelly strings
 extracted as D10. Peptidoglycan hardening underway. Tower Atomic hardening is the
 frontloaded priority — Nest Atomic work begins after Tower is stable on existing
-gates. songBird closed J3+J4+J5 in a single commit.
+gates. songBird closed J3+J4+J5 in a single commit. J8 (key enrollment portal)
+opened — sensitive credential exchange needs to leave chat and move to a portal
+workflow.
 
 ---
 
-*Last used*: Wave 155d (Jul 28, 2026)
+*Last used*: Wave 155f (Jul 28, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155b (F10 — Autonomous Gate Enrollment)
