@@ -1,10 +1,10 @@
 # SweetGrass — Wave 155b: G3 Readiness AAR
 
-**Date**: Jul 27, 2026  
-**Wave**: 155b  
-**Version**: v0.7.63  
-**Commit**: `fa253aa`  
-**Status**: **READY — waiting on upstream trio integration surface**
+**Date**: Jul 28, 2026  
+**Wave**: 155d  
+**Version**: v0.7.64  
+**Commit**: `28092a8`  
+**Status**: **READY — `CertificateRef` type shipped, waiting on upstream trio IPC wiring**
 
 ---
 
@@ -12,12 +12,14 @@
 
 sweetGrass has shipped all prerequisites for Nest Atomic Phase 3
 (cross-gate attribution braids). No code debt, no blockers internal to
-sweetGrass.
+sweetGrass. G3 convergence gap #2 (`CertificateId` on braids) is resolved.
 
 | Capability | Status | Detail |
 |------------|--------|--------|
 | BTSP ClientHello | SHIPPED (Wave 151b) | `CryptoDelegate` auto-handshakes when `BEARDOG_UDS_REQUIRE_BTSP=1` |
 | Cross-gate attribution types | SHIPPED | `CrossGateAttribution`, 7 trust events, `source_gate` on braids |
+| **CertificateRef structured type** | **SHIPPED (Wave 155d)** | `id`, `issuing_gate`, `sealed`, `minting_authority`, `content_hash`. Backward-compat deser from plain strings |
+| **CertificateRef::cross_gate()** | **SHIPPED (Wave 155d)** | Constructor for cross-gate attestation braids with gate + authority |
 | Cross-gate query filter | SHIPPED | `QueryFilter::with_source_gate()` for gate-scoped provenance |
 | PROV-O activity wiring | SHIPPED | `CrossGateAttribution::to_activity()` maps trust events to W3C PROV |
 | Anchor signing (bearDog) | SHIPPED | `braid.anchor` signs via CryptoDelegate → bearDog `crypto.sign` |
