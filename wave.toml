@@ -10,12 +10,12 @@
 
 [wave]
 id = 155
-sub = "f"
+sub = "g"
 date = "2026-07-28"
-posture = "GATE WORKLOAD DISTRIBUTION. Teams → gates: eastGate (overwatch+biomeOS+primalSpring), westGate (petalTongue+squirrel+Provenance Trio, tiered storage testbed), strandGate (compute trio on EPYC+3090). Migrations validate deployment pipeline. northGate+ironGate RustDesk degraded. Storage tiering: cache→RAM→NVMe→SSD→HDD. 6/7 jelly strings. Nest Atomic after Tower stable."
+posture = "GATE WORKLOAD DISTRIBUTION LIVE. westGate Tower Atomic LIVE (bearDog+songBird+skunkBat systemd, UDS+federation :7700). strandGate synced (42 repos, compute trio ready). westGate hardware corrected: AMD Ryzen 7 5700X/64GB/2TB NVMe/5x14TB raw HDD (not i7-4771). Blurb validated: HTTPS public pull unblocks fresh gates without SSH. Shallow roots pattern confirmed — GitHub clones need fresh Forgejo clone. 6/8 jelly strings (J8 key portal opened). Nest Atomic after Tower stable."
 publisher = "eastGate-overwatch"
 
 [gates]
-online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate", "northGate"]
-enrolling = ["strandGate", "westGate", "blueGate", "swiftGate", "southGate"]
+online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate", "northGate", "westGate"]
+enrolling = ["strandGate", "blueGate", "swiftGate", "southGate"]
 offline = []

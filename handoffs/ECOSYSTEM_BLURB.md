@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 155f
+# ecoPrimals Ecosystem Blurb — Wave 155g
 
-**Date**: Jul 28, 2026 11:55 EDT | **Wave**: 155f | **From**: eastGate overwatch
-**Posture**: **GATE WORKLOAD DISTRIBUTION — teams moving to dedicated gates. Tower hardening validated through live deployment. Storage tiering model on westGate. Nest Atomic after Tower stable.**
+**Date**: Jul 28, 2026 13:30 EDT | **Wave**: 155g | **From**: eastGate overwatch
+**Posture**: **GATE DEPLOYMENT VALIDATED. westGate Tower Atomic LIVE (70 min from dead checkout). strandGate synced (42 repos converged). Startup blurb proven: HTTPS public pull, shallow roots handled, hardware divergences documented. Nest Atomic after Tower stable.**
 
 This is the single handoff document for every team — gate teams and code teams.
 Read "Where We Are", find "Your Team", act on your next work.
@@ -10,14 +10,19 @@ Read "Where We Are", find "Your Team", act on your next work.
 
 ## WHERE WE ARE
 
-**Priority shift**: We're distributing code teams across gates. This serves two
-purposes: (1) put workloads on the hardware that matches them, and (2) validate
-the deployment pipeline (enrollment, Tower Atomic, genomeBins, cascade) by
-actually moving work and observing divergences and failure patterns.
+**Status**: Gate deployment pipeline PROVEN. westGate went from 3-month-stale
+dead checkout to Tower Atomic LIVE in 70 minutes using the startup blurb.
+strandGate synced 42 repos with zero conflicts. Both gates filed detailed AARs.
+
+**Key learnings from deployment**:
+- HTTPS public pull unblocks fresh gates — no SSH key needed for initial sync
+- GitHub→Forgejo "shallow roots" — all old GitHub clones need fresh Forgejo clone
+- westGate hardware was wrong in all docs (AMD Ryzen 7 5700X, not i7-4771; 64GB RAM; 2TB NVMe; HDDs raw/no ZFS)
+- songBird startup race: `nucleus_launcher.sh` must export `BEARDOG_SOCKET` before starting songBird
+- Legacy federation probes on :7700 confirm peptidoglycan layer is active
 
 northGate and ironGate still have RustDesk remote issues — peptidoglycan work
-continues. westGate is back online with a clean HDD array and becomes the
-Nest Atomic testbed with tiered storage profiling.
+continues.
 
 **Gate-Team Assignments**:
 
@@ -29,15 +34,14 @@ Nest Atomic testbed with tiered storage profiling.
 
 ### Storage Tiering Model (westGate)
 
-westGate's 5x14TB HDD array plus additional drives (2.5" SSD can be added)
-creates a real-world tiered storage testbed for Nest Atomic:
+westGate's actual hardware (corrected from AAR):
 
 ```
-TIER 0 — AMD L3/L1 cache (if AMD CPU)     ← compute-adjacent, nanosecond
-TIER 1 — RAM (tmpfs / ramdisk)             ← volatile, microsecond
-TIER 2 — NVMe                              ← fast persistent, sub-millisecond
-TIER 3 — 2.5" SSD (SATA)                   ← mid persistent, millisecond
-TIER 4 — HDD (5x14TB array)               ← cold/bulk, multi-millisecond
+TIER 0 — AMD Ryzen 7 5700X L3 (32MB)      ← AVAILABLE (Zen 3 unified cache)
+TIER 1 — 64GB DDR4 RAM (tmpfs/ramdisk)    ← AVAILABLE
+TIER 2 — Samsung 970 EVO Plus 2TB NVMe    ← AVAILABLE (1.1TB free, root FS)
+TIER 3 — (absent — no SATA SSD)           ← NOT AVAILABLE
+TIER 4 — 5×14TB HDD (OOS14000G)           ← RAW/UNMOUNTED (needs ZFS pool)
 ```
 
 This lets nestGate's CAS profile real read/write latencies across all tiers.
@@ -45,11 +49,13 @@ The Nest Atomic signal graphs (`nest.store`, `nest.retrieve`, `nest.verify`)
 can be validated against actual hardware variance — not simulated.
 
 **Sequencing**:
-1. **NOW**: Distribute teams to gates (deployment validation)
-2. **NOW**: Tower Atomic on each gate (tower.health, tower.enroll)
-3. **NOW**: K-derm hardening continues (northGate/ironGate RustDesk, DNS)
-4. **THEN**: westGate storage tiering + Nest Atomic validation
-5. **THEN**: strandGate compute trio validation (node.compute, node.dispatch)
+1. **DONE**: westGate Tower Atomic deployed + verified (70 min, Wave 155f)
+2. **DONE**: strandGate synced (42 repos, zero conflicts)
+3. **NOW**: westGate code team spin-up (petalTongue, squirrel, Provenance Trio)
+4. **NOW**: strandGate Tower Atomic → Compute Trio deployment
+5. **NOW**: K-derm hardening continues (northGate/ironGate RustDesk, DNS)
+6. **NEXT**: westGate ZFS pool creation → Nest Atomic tiered storage validation
+7. **NEXT**: strandGate Node Atomic validation (node.compute on RTX 3090)
 
 | Metric | Value |
 |--------|-------|
@@ -58,7 +64,7 @@ can be validated against actual hardware variance — not simulated.
 | Jelly strings | **6/7 resolved** |
 | BTSP | **13/13** |
 | genomeBin depot | **39 binaries** (13 × 3 targets) |
-| Gates ONLINE | **7** (northGate + ironGate RustDesk degraded) |
+| Gates ONLINE | **8** (westGate Tower LIVE. northGate + ironGate RustDesk degraded) |
 | Threat categories | **9** (skunkBat ConnectivityAnomaly) |
 
 ---
@@ -136,12 +142,9 @@ can be validated against actual hardware variance — not simulated.
 | **loamSpine** | 0.9.16 | Certificate ledger | Deploy. `MintingAuthority` validation on real Nest. |
 | **sweetGrass** | 0.7.64 | Attribution braids | Deploy. `CertificateRef` integration with Provenance Trio. |
 
-westGate becomes the Nest Atomic testbed with tiered storage:
-- 5x14TB HDD array (TIER 4 — cold/bulk CAS)
-- 2.5" SSD available (TIER 3 — mid persistent)
-- NVMe if present (TIER 2 — fast persistent)
-- RAM cache (TIER 1 — volatile fast path)
-- AMD cache hierarchy if AMD CPU (TIER 0 — compute-adjacent)
+westGate Tower Atomic LIVE — Nest Atomic testbed with tiered storage:
+- AMD Ryzen 7 5700X, 64GB DDR4, 2TB NVMe, 5×14TB HDD (raw)
+- TIER 0-2 ready now. TIER 4 needs ZFS pool (human action). No SATA SSD.
 
 ### strandGate — Compute Trio (DEPLOYING)
 
@@ -171,8 +174,8 @@ strandGate hardware: Dual EPYC + RTX 3090 — purpose-built for the compute trio
 |------|--------|-------|-----------|
 | **blueGate** | ONLINE (Windows) | — | Peptidoglycan anchor H2. RustDesk provisioning for H2 Linux. G1 proof. |
 | **ironGate** | DEGRADED (RustDesk) | — | **Fix RustDesk.** Tower validation. HDD enclave later. |
-| **strandGate** | HW READY | **Compute trio** | Enroll → Tower → deploy toadStool+barraCuda+coralReef. Node Atomic validation. |
-| **westGate** | HW READY (5x14TB) | **Nest + data primals** | Enroll → Tower → deploy petal+squirrel+Provenance Trio. Storage tiering. |
+| **strandGate** | SYNCED (42 repos) | **Compute trio** | Tower Atomic → deploy toadStool+barraCuda+coralReef. Node Atomic validation. |
+| **westGate** | **TOWER LIVE** | **Nest + data primals** | Code team spin-up. ZFS pool creation → Nest Atomic tiered storage. |
 | **swiftGate** | ONLINE (Windows) | — | Tower on Windows → full NUCLEUS. |
 | **southGate** | HW READY | — | Enroll → Tower → full NUCLEUS → sovereign site. |
 
@@ -191,10 +194,10 @@ strandGate hardware: Dual EPYC + RTX 3090 — purpose-built for the compute trio
 ```
 PHASE 1: TOWER + GATE WORKLOAD DISTRIBUTION (NOW)
  │
- ├── GATE DEPLOYMENTS (validates pipeline)
- │    ├── westGate: enroll → Tower → deploy petalTongue + squirrel + Provenance Trio
- │    ├── strandGate: enroll → Tower → deploy compute trio (toadStool, barraCuda, coralReef)
- │    └── Observe divergences + failure patterns → harden deployment pipeline
+ ├── GATE DEPLOYMENTS (pipeline VALIDATED)
+ │    ├── westGate: ✅ Tower LIVE → code team spin-up → Nest Atomic
+ │    ├── strandGate: ✅ synced → Tower Atomic → compute trio (toadStool, barraCuda, coralReef)
+ │    └── AARs filed: startup blurb hardened, hardware profiles corrected
  │
  ├── K-DERM LAYERS
  │    ├── northGate + ironGate: fix RustDesk issues
@@ -231,20 +234,24 @@ PHASE 3: FULL NUCLEUS
 
 | File | Status |
 |------|--------|
+| `WESTGATE_OVERWATCH_SYNC_WAVE155f.md` | **NEW** — 41 repos synced, hardware divergences |
+| `STRANDGATE_OVERWATCH_SYNC_WAVE155f.md` | **NEW** — 42 repos synced, shallow roots documented |
 | `CELLMEMBRANE_WAVE155d_JELLY_STRING_CODIFICATION.md` | J1+J2 closed, J6 foundation |
 | `LOAMSPINE_WAVE155D_STRUCTURAL_EXTRACTION_SCHEMA_EVOLUTION_JUL28_2026.md` | Entry extraction, schema V2 |
 | `SWEETGRASS_WAVE155b_G3_READINESS_JUL27_2026.md` | CertificateRef shipped |
 | `BLURB_SPOREGATE_BUILD_MESH.md` | Build mesh topology |
 
-AARs: `OUTER_MEMBRANE_TOPOLOGY_FAILURE_155b_AAR.md` | `PROVENANCE_TRIO_G3_CONVERGENCE_155b_AAR.md` | `SPOREGATE_DEPLOYMENT_EVOLUTION_155b_AAR.md`
+AARs:
+- `WESTGATE_ENROLLMENT_WAVE155f_AAR.md` — **NEW** — hardware profile corrected, 6 divergences
+- `WESTGATE_TOWER_ATOMIC_DEPLOYMENT_155f_AAR.md` — **NEW** — Tower LIVE in 70 min, 8 issues (5 resolved)
+- `OUTER_MEMBRANE_TOPOLOGY_FAILURE_155b_AAR.md` | `PROVENANCE_TRIO_G3_CONVERGENCE_155b_AAR.md` | `SPOREGATE_DEPLOYMENT_EVOLUTION_155b_AAR.md`
 
 ---
 
-*Wave 155f. Teams distributing to dedicated gates: eastGate (overwatch +
-orchestration), westGate (Nest + data primals with tiered storage testbed),
-strandGate (compute trio on dual EPYC + RTX 3090). The migrations themselves
-validate the deployment pipeline — enrollment, Tower Atomic bootstrap, genomeBin
-fetch, cascade. Storage tiering model defined (cache → RAM → NVMe → SSD → HDD)
-for real Nest Atomic profiling. northGate + ironGate RustDesk still degraded —
-peptidoglycan work continues. 6/7 jelly strings resolved. Tower hardening
-through live gate deployment is the current posture.*
+*Wave 155g. Deployment pipeline PROVEN. westGate: dead checkout → Tower Atomic
+LIVE in 70 minutes (AMD Ryzen 7 5700X / 64GB / 2TB NVMe / 5×14TB raw HDD).
+strandGate: 42 repos synced, zero conflicts, compute trio ready. Startup blurb
+hardened with HTTPS fallback, shallow roots handling, symlink guards. 8 gates
+online (westGate promoted). J8 opened (key enrollment portal). Next: westGate
+code team spin-up, strandGate Tower Atomic, ZFS pool creation for Nest Atomic.
+northGate + ironGate RustDesk degraded. 6/8 jelly strings resolved.*

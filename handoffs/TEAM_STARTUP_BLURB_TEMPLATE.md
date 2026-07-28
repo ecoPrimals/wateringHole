@@ -98,8 +98,8 @@ Tower Atomic hardening first — Nest Atomic after Tower is stable.
 | BTSP | 13/13 — all primals ship bearDog ClientHello |
 | Signal graphs | 26 (Tower 8, Nest 8, Node 3, Meta 5, Braid 2) |
 | Depot | 39 genomeBins (13 primals × 3 targets) on golgiBody |
-| Gates online | 7 (northGate + ironGate RustDesk degraded) |
-| Jelly strings | 6/7 deployment automation items resolved |
+| Gates online | 8 (westGate Tower LIVE. northGate + ironGate RustDesk degraded) |
+| Jelly strings | 6/8 deployment automation items resolved |
 | Forgejo | `ssh://git@git.primals.eco:2222/` — canonical remote (PUBLIC) |
 
 ### Gate-Team Assignments
@@ -107,7 +107,7 @@ Tower Atomic hardening first — Nest Atomic after Tower is stable.
 | Gate | Teams / Primals | Hardware |
 |------|-----------------|----------|
 | **eastGate** | Overwatch, biomeOS, primalSpring, Tower stack, cellMembrane | Code hub, 10G SFP+ |
-| **westGate** | petalTongue, squirrel, nestGate, rhizoCrypt, loamSpine, sweetGrass | 5x14TB HDD, Nest testbed |
+| **westGate** | petalTongue, squirrel, nestGate, rhizoCrypt, loamSpine, sweetGrass | Ryzen 7 5700X, 64GB, 2TB NVMe, 5×14TB HDD. **Tower LIVE** |
 | **strandGate** | toadStool, barraCuda, coralReef | Dual EPYC, RTX 3090 |
 | **sporeGate** | Build authority, deployment foreman | Full NUCLEUS |
 | **golgiBody** | Depot, Forgejo, enrollment, relay | Sole depot (public VPS) |

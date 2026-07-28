@@ -67,7 +67,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] sporeGate on R45 → MikroTik — plasma membrane router (NAT/DHCP/DNS/nftables)
 - [x] eastGate on MikroTik LAN — code hub, 10G SFP+ direct
 - [x] northGate enrolled (Windows 11, RTX 5090, 2.5G ethernet)
-- [x] westGate ONLINE — 5x14TB HDD (70TB raw ZFS cold pool)
+- [x] westGate ONLINE — AMD Ryzen 7 5700X / 64GB DDR4 / 2TB NVMe / 5×14TB HDD raw (NOT i7-4771, NOT ZFS pooled)
 - [x] ironGate HDD — 14TB + 1TB + 1TB + ~2TB, enclave experiment planned
 - [x] blueGate + swiftGate: Windows, house2, 10G backbone proven
 - [x] grapheneGate: Android, Tower LIVE (bearDog + songBird + skunkBat)
@@ -89,8 +89,8 @@ appears. This keeps the active review focused on evolving concerns.
 | flockGate | ONLINE | Linux | 10.13.37.6 | full | Nest Atomic validation (after Tower stable) |
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090, G1 validation target |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
-| strandGate | HW READY | Linux | enrolling | compute (7) | Dual EPYC, RTX 3090, bioinformatics |
-| westGate | HW READY | Linux | enrolling | nest (7) | 70TB ZFS cold pool, NAS |
+| strandGate | SYNCED | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, 42 repos converged |
+| westGate | **TOWER LIVE** | Linux | 10.13.37.11 | nest (7) | AMD Ryzen 7 5700X, 64GB, 2TB NVMe, 5×14TB raw |
 | blueGate | HW READY | Windows | enrolling | tower (3) | Distributed builder, **peptidoglycan anchor H2** |
 | swiftGate | HW READY | Windows | enrolling | full (13) | Hobby/consumer, house2 |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
@@ -220,6 +220,11 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] `bind_mode` and `target` marked transitional in GateProfile
 - [x] PowerShell enrollment for Windows gates (`gate-enroll.ps1`)
 - [x] Self-registration — gates declare name + composition
+- [x] **Startup blurb PROVEN** — westGate: dead checkout → Tower LIVE in 70 min
+- [x] HTTPS public pull — zero-auth initial sync for fresh gates
+- [x] Shallow roots pattern documented — GitHub clones need fresh Forgejo clone
+- [x] `nucleus_launcher.sh` BEARDOG_SOCKET race fixed (westGate I5)
+- [ ] J8: Key enrollment portal — SSH keys still exchanged via chat
 - [x] Pure Rust across all primals — zero C deps on critical path
 - [x] toadStool wgpu cross-platform GPU (DX12/Vulkan/Metal)
 - [x] biomeOS platform_native transport on all 26 signal graphs

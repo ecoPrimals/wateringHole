@@ -914,8 +914,9 @@ repos = [
     "bearDog", "songBird", "skunkBat",
 ]
 
-# westGate — 76TB ZFS NAS, Nest composition, outer membrane exposed (house2)
-# Heavy open NAS — NestGate CAS backend, ecosystem archive. WAN mesh + Pi accessible.
+# westGate — Nest Atomic testbed, tiered storage (house2)
+# AMD Ryzen 7 5700X / 64GB DDR4 / 2TB NVMe / 5x14TB HDD raw.
+# Tower Atomic LIVE (Wave 155f). Storage tiering: TIER 0-2 active, TIER 4 needs ZFS pool.
 # K-Derm: periplasm (WAN-facing storage).
 [gates.westGate]
 target = "x86_64-unknown-linux-musl"
@@ -925,12 +926,14 @@ composition = "nest"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "house2"
-roles = ["storage", "nest", "wan_validator"]
-notes = "i7-4771 + RTX 2070 Super + 5x14TB HDD (70TB raw, ZFS cold pool). Nest Atomic 7/7. Cold storage — NestGate CAS backend, outer membrane exposed for WAN mesh access. Wired to Omada."
+wg_ip = "10.13.37.11"
+nucleus_status = "Tower LIVE (bearDog 0.9.0 + songBird 0.2.1 + skunkBat 0.2.18, systemd user units)"
+roles = ["storage", "nest", "nest_testbed", "tiered_storage"]
+notes = "AMD Ryzen 7 5700X (Zen 3, 8c/16t, 32MB L3) + 64GB DDR4 + Samsung 970 EVO Plus 2TB NVMe + 5x14TB HDD OOS14000G (raw, not yet ZFS pooled). No SATA SSD (TIER 3 absent). Tower Atomic LIVE 155f — systemd user units, UDS + federation :7700. Nest Atomic testbed with tiered storage profiling. Wired to Omada."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
-    "bearDog", "songBird", "biomeOS", "squirrel",
-    "rhizoCrypt", "loamSpine", "sweetGrass",
+    "bearDog", "songBird", "skunkBat", "biomeOS", "squirrel",
+    "petalTongue", "rhizoCrypt", "loamSpine", "sweetGrass",
     "cellMembrane",
 ]
 
