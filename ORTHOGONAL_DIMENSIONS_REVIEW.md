@@ -13,7 +13,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal / Coordination
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155d)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155h)
 - [x] Gate heads published (`heads/*.toml`) — golgiBody auto-publishing active
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] Active impulses: 0 (26+ fossilized)
@@ -28,38 +28,44 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] JOSS publication strategy defined
 - [x] GLOSSARY.md refreshed (Wave 155b)
 - [x] cellMembrane + plasmidBin cascaded to Forgejo
+- [x] **11 new handoff docs** delivered this wave (code team audits + execution + AARs)
 - [ ] waterFall graph partially wired — full composition pending Provenance Trio
 - [ ] Context braids not yet replacing blurb paste — graduation path documented
-- [ ] `freshness.toml` stale at Wave 137 — needs cascade publish to 155d
-- [ ] 5 enrolling gates have no published heads in `heads/*.toml`
+- [ ] `freshness.toml` stale at Wave 137 — needs cascade publish to 155h
+- [ ] 3 enrolling gates have no published heads in `heads/*.toml`
 
 ## 2. Ecological (Primal Health)
 
 - [x] All primals compile — 5 Tier 1 genomeBin architectures
-- [x] Zero P0/P1 blockers in any primal
+- [x] **P0: glibc depot target needed** — musl can't dlopen Vulkan ICD for GPU primals
 - [x] 43/43 repos Forgejo-first
-- [x] **~54K `#[test]` attrs** in primals (toadStool 22K, songBird 14K, nestGate 13K)
+- [x] **~70K+ `#[test]` attrs** in primals (toadStool 23K, songBird 14K+, nestGate 13K, bearDog 12K, biomeOS 8.5K, petalTongue 6.6K, barraCuda 5K, coralReef 3.5K)
 - [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean
 - [x] nestGate vendor elimination COMPLETE (Wave 150u)
 - [x] Production `.unwrap()` — 0 in critical-path primals
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
 - [x] Format drift RESOLVED — all repos clean
 - [x] bearDog: 11,993 tests, FIDO2 hardware, beacon proximity, HSM agnostic
-- [x] songBird: 14,365 tests, `mesh.gate_enroll`, universal-ipc, J3+J4+J5, **`tower.health` facade**
-- [x] nestGate: 13,236 tests, BTSP ClientHello, BTSP→CAS wiring, NTFS CAS safety
-- [x] toadStool: 21,913 tests, wgpu cross-platform GPU, S343 dispatch pipeline
+- [x] songBird: 14,835+ tests, `mesh.gate_enroll`, universal-ipc, J3+J4+J5, `tower.health` facade, **ACME HTTP-01 Phase 1**
+- [x] nestGate: **12,973** tests, **P0/P1 audit resolved**, live CLI health, FHS centralized, ZFS tier migration
+- [x] toadStool: **23,332** tests, **S344**: deny.toml expanded, overstep reduced, socket centralized
 - [x] rhizoCrypt: 1,456 tests, BTSP→DAG bridge, cross-gate provenance chain
-- [x] loamSpine: 1,702 tests, G3 verification path, delegated minting builder
-- [x] sweetGrass: 1,676 tests, cross-gate attribution, PROV-O, BTSP ClientHello, **`CertificateRef` SHIPPED** — G3 READY
-- [x] petalTongue: 5,812 tests, BTSP ClientHello
+- [x] loamSpine: **1,739** tests, **BTSP handshake dedup**: `verify_and_negotiate()` + `AsyncErrorSender`
+- [x] sweetGrass: 1,676 tests, cross-gate attribution, PROV-O, BTSP ClientHello, `CertificateRef` SHIPPED — G3 READY
+- [x] petalTongue: **6,605** tests, **topology→runtime manifest**, main.rs split, geometry module
+- [x] squirrel: **763** tests, **capability purification**: beardog→security_provider, adapter IPC
+- [x] barraCuda: **4,957** tests, **SIGSEGV fixed** (GPU_TEST_GUARD), BTSP env races, dead code (-1,200L)
+- [x] coralReef: **3,527** tests, **18/18 JSON-RPC dispatch**, BTSP Phase 3 encrypted transport
 - [x] primalSpring: 197 scenarios, all PASS, calibrated for 13-gate mesh
-- [x] skunkBat: spawn-rate anomaly detection, **`ConnectivityAnomaly` (9th threat)**, frame crypto, PUBLIC
+- [x] skunkBat: spawn-rate anomaly detection, `ConnectivityAnomaly` (9th threat), frame crypto, PUBLIC
 - [x] **BTSP 13/13** — all primals shipped ClientHello
 - [x] Tower debt: 36 → **1** (grapheneGate HSM only)
 - [x] songBird crypto delegation to bearDog: 6/6 seams DONE
 - [x] Compositions fixed: `compute` and `nest` include Tower Atomic base primals
+- [x] **cellMembrane**: **1,219** tests, **J6 CLOSED** (gate.configure/gate.apply), **J8 code shipped** (step-ca SSH certs)
 - [ ] **1 known debt finding**: grapheneGate-readiness (HSM not on eastGate)
 - [ ] Chimera Phase 0: library extraction (UNBLOCKED — crypto delegation done)
+- [ ] nestGate: ghost methods `content.repo.*`/`content.mirror.*` — implement or remove (P2)
 
 ## 3. Hardware / Physical Topology
 
@@ -89,7 +95,7 @@ appears. This keeps the active review focused on evolving concerns.
 | flockGate | ONLINE | Linux | 10.13.37.6 | full | Nest Atomic validation (after Tower stable) |
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090, G1 validation target |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
-| strandGate | SYNCED | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, 42 repos converged |
+| strandGate | **TOWER+COMPUTE LIVE** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, GPU verified, P0 glibc needed |
 | westGate | **TOWER LIVE** | Linux | 10.13.37.11 | nest (7) | AMD Ryzen 7 5700X, 64GB, 2TB NVMe, 5×14TB raw |
 | blueGate | HW READY | Windows | enrolling | tower (3) | Distributed builder, **peptidoglycan anchor H2** |
 | swiftGate | HW READY | Windows | enrolling | full (13) | Hobby/consumer, house2 |
@@ -150,14 +156,16 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 
 ### Inner Membrane
 
-- [x] 7-gate WireGuard mesh LIVE (golgi, sporeGate, eastGate, flockGate, ironGate, northGate, grapheneGate)
-- [x] Tower Atomic shadow active on 3 gates — 700+ samples
+- [x] **9-gate WireGuard mesh** — golgi, sporeGate, eastGate, flockGate, ironGate, northGate, grapheneGate, westGate, strandGate
+- [x] Tower Atomic shadow active — westGate + strandGate LIVE
 - [x] LAN peering: Tower 353x LAN (0.45ms vs 158ms WG overlay)
 - [x] songBird universal-ipc: UDS/named pipes/abstract sockets/TCP
 - [x] BTSP defense-in-depth: 13/13 primals
 - [x] **biomeOS neuralAPI**: 26 signal graphs, 19 atomic translations, platform_native transport
+- [x] **songBird ACME HTTP-01** challenge responder shipped — Phase 1 TLS elimination
 - [ ] Only 2 WG peers active in practice (enrollment pending for house2 gates)
 - [ ] Tower Atomic needs live validation on Windows gates before Nest Atomic starts
+- [ ] WireGuard DNS catch-all in wg0 template hijacks all resolution (strandGate AAR)
 
 ## 5. Sovereignty / Trust
 
@@ -224,7 +232,11 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] HTTPS public pull — zero-auth initial sync for fresh gates
 - [x] Shallow roots pattern documented — GitHub clones need fresh Forgejo clone
 - [x] `nucleus_launcher.sh` BEARDOG_SOCKET race fixed (westGate I5)
-- [ ] J8: Key enrollment portal — SSH keys still exchanged via chat
+- [x] **strandGate Compute Trio deployed** — Tower + barraCuda + coralReef LIVE
+- [x] barraCuda GPU verified on RTX 3090 (source build, SHADER_F64 enabled)
+- [x] coralReef 18/18 JSON-RPC dispatch complete (10 compile errors fixed, BTSP Phase 3)
+- [ ] **P0**: musl genomeBins can't `dlopen` glibc Vulkan ICD — need `x86_64-unknown-linux-gnu` depot target
+- [ ] J8: Key enrollment portal — code shipped, deployment pending
 - [x] Pure Rust across all primals — zero C deps on critical path
 - [x] toadStool wgpu cross-platform GPU (DX12/Vulkan/Metal)
 - [x] biomeOS platform_native transport on all 26 signal graphs
@@ -236,7 +248,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 
 ## 9. Documentation / Fossil Record
 
-- [x] Blurb reflects current wave (155d) — peptidoglycan recovery + acceleration
+- [x] Blurb reflects current wave (155h) — deep evolution wave cascade
 - [x] **ECOSYSTEM_BLURB.md** is universal handoff — Tracks A+B converged
 - [x] Active impulses: 0
 - [x] wateringHole standards: 37 active in 4 directories
@@ -260,11 +272,11 @@ From sporeGate deployment AAR. These block "operator runs shell loops" →
 - [x] **J3: Service restart** — CLOSED. songBird `deploy.hot_swap` (`d4bffbbd`)
 - [x] **J4: Caddy config** — CLOSED. songBird route self-config via `route.rs` (`d4bffbbd`)
 - [x] **J5: WG peer reg** — HARDENED. songBird WG peer management (`d4bffbbd`)
-- [x] **J6: systemd overrides** — FOUNDATION. `ServiceSpec` model + renderers shipped (`fc7c4d9`)
+- [x] **J6: systemd overrides** — **CLOSED**. `gate.configure` + `gate.apply` shipped (`c66a56e`). Init system dispatch: systemd/launchd/bare.
 - [ ] **J7: Legacy service detection** — OPEN. One-time, low priority (cellMembrane P3)
-- [ ] **J8: Key enrollment portal** — OPEN. SSH keys currently exchanged via chat copy-paste. Needs a portal flow where gate submits key via `primals.eco/enroll`, human approves via Forgejo/portal, key is registered automatically. Sensitive credential data should not traverse chat logs. (songBird + cellMembrane)
+- [x] **J8: Key enrollment portal** — **CODE SHIPPED**. step-ca SSH cert lifecycle in cellMembrane (`b13105b`). enroll phase 8 (`ssh_cert`). Non-fatal if CA not deployed. **Deployment pending** — sporeGate needs step-ca on golgiBody.
 
-6/8 resolved. Harvest→push is now `membrane plasmid.harvest --all --local --push`.
+7/8 resolved. J6 CLOSED (gate.configure/apply). J8 code shipped (step-ca lifecycle), deployment pending.
 
 ## 11. Campus / Physical Infrastructure
 
@@ -340,16 +352,18 @@ Zero-operator postPrimordial enrollment fully shipped:
 
 **Active**: 11 dimensions (1–11)
 **Fossilized**: 10 dimensions (F1–F10)
-**Summary**: K-Derm three-layer model now has its own dimension (D4). Jelly strings
-extracted as D10. Peptidoglycan hardening underway. Tower Atomic hardening is the
-frontloaded priority — Nest Atomic work begins after Tower is stable on existing
-gates. songBird closed J3+J4+J5 in a single commit. J8 (key enrollment portal)
-opened — sensitive credential exchange needs to leave chat and move to a portal
-workflow.
+**Summary**: Largest single-wave evolution. 9 primals + cellMembrane shipped deep
+debt sweeps and capability evolution. J6 CLOSED (gate.configure/apply). J8 code
+shipped (step-ca SSH certs, deployment pending). barraCuda SIGSEGV fixed. coralReef
+fully wired (18/18 dispatch). nestGate P0/P1 closed. petalTongue topology→runtime
+manifest. squirrel capability-purified (beardog→security_provider). toadStool
+deny.toml expanded. songBird ACME Phase 1. strandGate Tower + Compute Trio LIVE.
+P0: glibc depot target needed for GPU primals (musl can't dlopen Vulkan ICD).
+7/8 jelly strings resolved. ~70K+ tests across primals.
 
 ---
 
-*Last used*: Wave 155f (Jul 28, 2026)
+*Last used*: Wave 155h (Jul 28, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155b (F10 — Autonomous Gate Enrollment)

@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 155g
+# ecoPrimals Ecosystem Blurb — Wave 155h
 
-**Date**: Jul 28, 2026 13:30 EDT | **Wave**: 155g | **From**: eastGate overwatch
-**Posture**: **GATE DEPLOYMENT VALIDATED. westGate Tower Atomic LIVE (70 min from dead checkout). strandGate synced (42 repos converged). Startup blurb proven: HTTPS public pull, shallow roots handled, hardware divergences documented. Nest Atomic after Tower stable.**
+**Date**: Jul 28, 2026 19:45 EDT | **Wave**: 155h | **From**: eastGate overwatch
+**Posture**: **DEEP EVOLUTION WAVE LANDED. 9 primals + cellMembrane evolved. Code teams delivered across westGate + strandGate. J6 CLOSED, J8 code shipped. ACME TLS Phase 1 on songBird. strandGate Compute Trio deployment AAR filed. P0: musl depot can't dlopen GPU drivers — glibc target needed.**
 
 This is the single handoff document for every team — gate teams and code teams.
 Read "Where We Are", find "Your Team", act on your next work.
@@ -10,80 +10,58 @@ Read "Where We Are", find "Your Team", act on your next work.
 
 ## WHERE WE ARE
 
-**Status**: Gate deployment pipeline PROVEN. westGate went from 3-month-stale
-dead checkout to Tower Atomic LIVE in 70 minutes using the startup blurb.
-strandGate synced 42 repos with zero conflicts. Both gates filed detailed AARs.
+**Posture**: Largest single-session evolution wave. 9 primals shipped deep debt
+sweeps, bug fixes, and capability evolution across both gate deployments.
+Code teams on westGate (nestGate, petalTongue, squirrel) and strandGate
+(barraCuda, coralReef, toadStool) all delivered audit→execution cycles.
+cellMembrane closed J6 and shipped J8 code. songBird shipped ACME Phase 1.
 
-**Key learnings from deployment**:
-- HTTPS public pull unblocks fresh gates — no SSH key needed for initial sync
-- GitHub→Forgejo "shallow roots" — all old GitHub clones need fresh Forgejo clone
-- westGate hardware was wrong in all docs (AMD Ryzen 7 5700X, not i7-4771; 64GB RAM; 2TB NVMe; HDDs raw/no ZFS)
-- songBird startup race: `nucleus_launcher.sh` must export `BEARDOG_SOCKET` before starting songBird
-- Legacy federation probes on :7700 confirm peptidoglycan layer is active
-
-northGate and ironGate still have RustDesk remote issues — peptidoglycan work
-continues.
+**P0 OPEN**: musl genomeBins cannot `dlopen` glibc Vulkan ICD — compute primals
+(barraCuda, coralReef, toadStool) need `x86_64-unknown-linux-gnu` depot target
+for GPU workloads. sporeGate build team action.
 
 **Gate-Team Assignments**:
 
-| Gate | Teams / Primals | Why |
-|------|-----------------|-----|
-| **eastGate** | Overwatch, primalSpring, biomeOS | Code hub. Coordination. Signal graph validation. |
-| **westGate** | petalTongue, squirrel, nestGate (Nest Atomic testbed) | Clean HDD array → tiered storage profiling. Nest + data primals. |
-| **strandGate** | toadStool, barraCuda, coralReef (compute trio) | Dual EPYC + RTX 3090 → GPU compute workloads. |
-
-### Storage Tiering Model (westGate)
-
-westGate's actual hardware (corrected from AAR):
-
-```
-TIER 0 — AMD Ryzen 7 5700X L3 (32MB)      ← AVAILABLE (Zen 3 unified cache)
-TIER 1 — 64GB DDR4 RAM (tmpfs/ramdisk)    ← AVAILABLE
-TIER 2 — Samsung 970 EVO Plus 2TB NVMe    ← AVAILABLE (1.1TB free, root FS)
-TIER 3 — (absent — no SATA SSD)           ← NOT AVAILABLE
-TIER 4 — 5×14TB HDD (OOS14000G)           ← RAW/UNMOUNTED (needs ZFS pool)
-```
-
-This lets nestGate's CAS profile real read/write latencies across all tiers.
-The Nest Atomic signal graphs (`nest.store`, `nest.retrieve`, `nest.verify`)
-can be validated against actual hardware variance — not simulated.
+| Gate | Teams / Primals | Status |
+|------|-----------------|--------|
+| **eastGate** | Overwatch, primalSpring, biomeOS | Code hub. Coordination. |
+| **westGate** | petalTongue, squirrel, nestGate, Provenance Trio | **Tower LIVE. Code teams delivered.** |
+| **strandGate** | toadStool, barraCuda, coralReef | **Tower LIVE. Compute Trio deployed.** |
 
 **Sequencing**:
-1. **DONE**: westGate Tower Atomic deployed + verified (70 min, Wave 155f)
-2. **DONE**: strandGate synced (42 repos, zero conflicts)
-3. **NOW**: westGate code team spin-up (petalTongue, squirrel, Provenance Trio)
-4. **NOW**: strandGate Tower Atomic → Compute Trio deployment
-5. **NOW**: K-derm hardening continues (northGate/ironGate RustDesk, DNS)
-6. **NEXT**: westGate ZFS pool creation → Nest Atomic tiered storage validation
-7. **NEXT**: strandGate Node Atomic validation (node.compute on RTX 3090)
+1. **DONE**: westGate Tower Atomic + code team audits + execution
+2. **DONE**: strandGate sync + Tower Atomic + Compute Trio deployment
+3. **NOW**: P0 glibc depot target for GPU primals
+4. **NOW**: step-ca deployment on golgiBody (J8 deployment)
+5. **NOW**: K-derm hardening (northGate/ironGate RustDesk, DNS)
+6. **NEXT**: westGate ZFS pool → Nest Atomic tiered storage
+7. **NEXT**: strandGate Node Atomic validation (RTX 3090)
 
 | Metric | Value |
 |--------|-------|
 | Signal graphs | **26** (Tower 8, Nest 8, Node 3, Meta 5, Braid 2) |
-| Primal test attributes | **~56K** |
-| Jelly strings | **6/7 resolved** |
+| Primal tests | **~70K+** (toadStool 23K, songBird 14K+, nestGate 13K, bearDog 12K, biomeOS 8.5K, petalTongue 6.6K, barraCuda 5K, coralReef 3.5K) |
+| Jelly strings | **7/8 resolved** (J6 CLOSED, J7 low, J8 code shipped) |
 | BTSP | **13/13** |
-| genomeBin depot | **39 binaries** (13 × 3 targets) |
-| Gates ONLINE | **8** (westGate Tower LIVE. northGate + ironGate RustDesk degraded) |
+| genomeBin depot | **39 binaries** (13 × 3 musl targets) — glibc target NEEDED |
+| Gates ONLINE | **8** + strandGate Tower LIVE |
 | Threat categories | **9** (skunkBat ConnectivityAnomaly) |
 
 ---
 
-## WHAT CODE TEAMS SHIPPED (cumulative Wave 155b-e)
+## WHAT CODE TEAMS SHIPPED (Wave 155f-h)
 
 | Team | Latest Evolution | Key Commits |
 |------|------------------|-------------|
-| **songBird** | `tower.health` + `tower.mesh_status` facade. J3+J4+J5 cascade automation. Named pipe IPC | `f2dacd62`, `d4bffbbd` |
-| **cellMembrane** | J1+J2 CLOSED. J6 `ServiceSpec` foundation. 1,194 tests | `fc7c4d9`, `8a71345` |
-| **skunkBat** | `ConnectivityAnomaly` 9th threat type. 182 new tests | `8d6a0de` |
-| **sweetGrass** | G3: `CertificateRef` structured type on braids | `28092a8` |
-| **loamSpine** | Entry extraction, schema V2, `certificate.history` RPC | `b03ab3d` |
-| **rhizoCrypt** | SSOT sweep, 1,900 tests, method_gate consolidated | `904b17b`, `60f4e2a` |
-| **biomeOS** | neuralAPI: 7 signal graphs, 19 translations, platform_native | `a2fb6716`, `ef42a287` |
-| **nestGate** | BTSP peer wiring, NTFS CAS safety | `219cca42`, `a6e9e10e` |
-| **toadStool** | S343: wgpu system queries + dispatch | `b1d3cfa1b` |
-| **coralReef** | IPC merge resolution | `8ebd97d` |
-| **primalSpring** | 56+ tower shadow benchmarks | `1b731803` |
+| **songBird** | ACME HTTP-01 challenge responder, deep debt (fake metrics→errors), tower roundtrip tests | `305f5bee`, `0d6c0f55`, `c0096a17` |
+| **cellMembrane** | **J6 CLOSED**: `gate.configure`/`gate.apply`. **J8 shipped**: SSH cert lifecycle via step-ca. 1,219 tests | `c66a56e`, `b13105b` |
+| **barraCuda** | GPU SIGSEGV fix (`GPU_TEST_GUARD`), BTSP env races, ESN device crash, dead code removal (-1,200L). 4,957 tests | `042f1493` |
+| **coralReef** | 10 compile errors fixed, 18/18 JSON-RPC dispatch complete, BTSP Phase 3 encrypted transport. 3,527 tests | `3d969f8` |
+| **loamSpine** | BTSP handshake dedup: `verify_and_negotiate()` + `AsyncErrorSender`. 1,739 tests | `1ced08d` |
+| **nestGate** | P0/P1 audit sweep: test compilation fixed, live CLI health probes, FHS path centralization, ZFS tier migration. 12,973 tests | `3ca3e1bc` |
+| **petalTongue** | Topology → runtime `ecosystem_manifest.toml` loading. `main.rs` 727→199L split. Geometry module. 6,605 tests | `d60e67d` |
+| **squirrel** | Capability purification: `beardog`→`security_provider`, local crypto→delegation, adapter IPC wired. 763 tests | `acbe09e3` |
+| **toadStool** | S344: `deny.toml` expanded (Pure Rust Crypto), overstep reduction, socket centralization. 23,332 tests | `04fcb96e3` |
 
 ---
 
@@ -92,9 +70,9 @@ can be validated against actual hardware variance — not simulated.
 | # | Goal | Status | Gate |
 |---|------|--------|------|
 | G1 | Tower on Windows | **FRONTLOADED** | OPEN |
-| G7 | Gate enmeshment | **FRONTLOADED** | OPEN — workload distribution validates pipeline |
-| G6 | bearDog public | READY | OPEN |
-| G3 | Nest Atomic Phase 0 | CONVERGING | **AFTER TOWER** — westGate tiered storage testbed |
+| G7 | Gate enmeshment | **ADVANCING** | westGate+strandGate Tower LIVE |
+| G6 | bearDog public | READY | OPEN — songBird ACME Phase 1 unblocks TLS |
+| G3 | Nest Atomic Phase 0 | CONVERGING | westGate: nestGate P0/P1 closed, ZFS tier migration coded |
 | G4 | Nest cross-platform | IN PROGRESS | AFTER TOWER |
 | G5 | Chimera Phase 0 | PENDING | AFTER G1 |
 | G2 | Tower on Android | PENDING | AFTER G1 |
@@ -103,7 +81,7 @@ can be validated against actual hardware variance — not simulated.
 
 ---
 
-## JELLY STRINGS — 6 OF 8 RESOLVED
+## JELLY STRINGS — 7 OF 8 RESOLVED
 
 | # | What | Status | Owner |
 |---|------|--------|-------|
@@ -112,9 +90,9 @@ can be validated against actual hardware variance — not simulated.
 | J3 | Service restart | **CLOSED** — `deploy.hot_swap` | songBird |
 | J4 | Caddy config | **CLOSED** — route self-config | songBird |
 | J5 | WG peer reg | **HARDENED** | songBird |
-| J6 | systemd overrides | **FOUNDATION** — `ServiceSpec` renderers | cellMembrane |
+| J6 | systemd overrides | **CLOSED** — `gate.configure` + `gate.apply` | cellMembrane |
 | J7 | Legacy detection | OPEN (low priority) | cellMembrane |
-| J8 | Key enrollment portal | **OPEN** — SSH keys exchanged via chat, needs portal | songBird + cellMembrane |
+| J8 | Key enrollment portal | **CODE SHIPPED** — step-ca lifecycle. Deployment pending on golgiBody | cellMembrane + songBird |
 
 ---
 
@@ -124,37 +102,39 @@ can be validated against actual hardware variance — not simulated.
 
 | Primal | Version | Role | Next Work |
 |--------|---------|------|-----------|
-| **biomeOS** | 0.1.0 | Signal graph orchestrator | **Live `tower.health` validation** on gates as teams deploy. |
-| **primalSpring** | — | Scenario validation | Calibrate scenarios for distributed gate topology. |
-| **bearDog** | 0.9.0 | Trust foundation | G6: public flip audit. G5: `beardog-core` extraction. |
-| **songBird** | 0.2.1 | Discovery + IPC | `tower.health` facade shipped. Live validation on northGate. |
-| **skunkBat** | 0.2.18 | Defense | `ConnectivityAnomaly` detection. Monitor gate migrations. |
-| **cellMembrane** | — | Deployment fabric | J6 completion: `gate.configure` / `gate.apply`. |
+| **biomeOS** | 0.1.0 | Signal graph orchestrator | Live `tower.health` validation on westGate + strandGate. |
+| **primalSpring** | — | Scenario validation | Calibrate for distributed gate topology. |
+| **bearDog** | 0.9.0 | Trust foundation | ACME Phase 2 client (songBird needs it). G6 audit. |
+| **songBird** | 0.2.1 | Discovery + IPC | ACME shipped. bearDog Phase 2 blocked. Deep debt landed. |
+| **skunkBat** | 0.2.18 | Defense | Monitor gate migrations. |
+| **cellMembrane** | — | Deployment fabric | **J6 CLOSED.** J8 code shipped. step-ca deployment on golgiBody. |
 
-### westGate — Nest Atomic + Data (DEPLOYING)
+### westGate — Nest Atomic + Data (CODE TEAMS DELIVERED)
 
-| Primal | Version | Role | Next Work |
-|--------|---------|------|-----------|
-| **petalTongue** | 1.7.0 | Visualization + WASM | Deploy to westGate. Validate genomeBin deployment cycle. |
-| **squirrel** | 0.1.0 | AI + MCP | Deploy to westGate. Validate alongside petalTongue. |
-| **nestGate** | 0.5.0 | Content-addressed storage | **Storage tiering validation.** Profile CAS across HDD/SSD/NVMe tiers. |
-| **rhizoCrypt** | 0.14.17 | Lineage DAG | Deploy. G3 wiring with loamSpine after Tower stable. |
-| **loamSpine** | 0.9.16 | Certificate ledger | Deploy. `MintingAuthority` validation on real Nest. |
-| **sweetGrass** | 0.7.64 | Attribution braids | Deploy. `CertificateRef` integration with Provenance Trio. |
+| Primal | Version | Tests | Latest |
+|--------|---------|-------|--------|
+| **petalTongue** | 1.7.0 | 6,605 | Topology architecture, runtime manifest, geometry split |
+| **squirrel** | 0.1.0 | 763 | Capability purification, adapter IPC |
+| **nestGate** | 0.5.0 | 12,973 | P0/P1 closed, live CLI, ZFS tier migration |
+| **loamSpine** | 0.9.16 | 1,739 | BTSP handshake dedup |
+| **rhizoCrypt** | 0.14.17 | 1,456 | (no new evolution this wave) |
+| **sweetGrass** | 0.7.64 | 1,676 | (no new evolution this wave) |
 
-westGate Tower Atomic LIVE — Nest Atomic testbed with tiered storage:
-- AMD Ryzen 7 5700X, 64GB DDR4, 2TB NVMe, 5×14TB HDD (raw)
-- TIER 0-2 ready now. TIER 4 needs ZFS pool (human action). No SATA SSD.
+westGate Tower LIVE. Code teams have delivered audits + execution. Next:
+- ZFS pool creation (human) → Nest Atomic tiered storage validation
+- G3 Provenance Trio IPC wiring (after Tower proven stable)
 
-### strandGate — Compute Trio (DEPLOYING)
+### strandGate — Compute Trio (DEPLOYED)
 
-| Primal | Version | Role | Next Work |
-|--------|---------|------|-----------|
-| **toadStool** | 0.2.0 | Compute dispatch | Deploy. Validate `node.compute` + `node.dispatch` on real GPU. |
-| **barraCuda** | 0.4.0 | Tensor math | Deploy. RTX 3090 compute validation. |
-| **coralReef** | 0.2.0 | Shader compilation | Deploy. WGSL → SPIR-V on real hardware. |
+| Primal | Version | Tests | Latest |
+|--------|---------|-------|--------|
+| **toadStool** | 0.2.0 | 23,332 | S344 deny.toml, overstep reduction |
+| **barraCuda** | 0.4.0 | 4,957 | SIGSEGV fix, BTSP env races, dead code (-1,200L) |
+| **coralReef** | 0.2.0 | 3,527 | 18/18 dispatch, BTSP Phase 3 encrypted transport |
 
-strandGate hardware: Dual EPYC + RTX 3090 — purpose-built for the compute trio.
+strandGate Tower LIVE + Compute Trio deployed. **P0 blocker**: musl genomeBins
+can't `dlopen` glibc Vulkan ICD — source build works, depot binary doesn't.
+Need `x86_64-unknown-linux-gnu` glibc target in depot pipeline.
 
 ---
 
@@ -164,94 +144,65 @@ strandGate hardware: Dual EPYC + RTX 3090 — purpose-built for the compute trio
 
 | Gate | Status | Teams | Next Work |
 |------|--------|-------|-----------|
-| **sporeGate** | ONLINE. Anchor H1 | Build authority | DNS health all gates. Harvest + push to depot. Foreman. |
-| **eastGate** | ONLINE. Overwatch | biomeOS, primalSpring, Tower stack | Coordinate gate deployments. `tower.health` live test. |
-| **northGate** | DEGRADED (RustDesk) | — | **Fix RustDesk.** Fix DNS. G1 Tower validation (named pipes). |
+| **sporeGate** | ONLINE | Build authority | **P0**: Add glibc depot target for GPU primals. step-ca deploy. |
+| **eastGate** | ONLINE | Overwatch | Coordinate. bearDog ACME Phase 2. |
+| **northGate** | DEGRADED | — | Fix RustDesk. G1 Tower validation. |
 
 ### House 2 (peptidoglycan anchor: blueGate)
 
 | Gate | Status | Teams | Next Work |
 |------|--------|-------|-----------|
-| **blueGate** | ONLINE (Windows) | — | Peptidoglycan anchor H2. RustDesk provisioning for H2 Linux. G1 proof. |
-| **ironGate** | DEGRADED (RustDesk) | — | **Fix RustDesk.** Tower validation. HDD enclave later. |
-| **strandGate** | SYNCED (42 repos) | **Compute trio** | Tower Atomic → deploy toadStool+barraCuda+coralReef. Node Atomic validation. |
-| **westGate** | **TOWER LIVE** | **Nest + data primals** | Code team spin-up. ZFS pool creation → Nest Atomic tiered storage. |
-| **swiftGate** | ONLINE (Windows) | — | Tower on Windows → full NUCLEUS. |
-| **southGate** | HW READY | — | Enroll → Tower → full NUCLEUS → sovereign site. |
-
-### Remote / Mobile
-
-| Gate | Status | Next Work |
-|------|--------|-----------|
-| **golgiBody** | ONLINE | Serve depot. LOG before DROP. |
-| **flockGate** | ONLINE | Tower validation. Nest validation after Tower stable. |
-| **grapheneGate** | ONLINE | G2 (Tower on Android) after G1 proven. |
+| **strandGate** | **TOWER+COMPUTE LIVE** | Compute trio | Await glibc depot. Profile RTX 3090. |
+| **westGate** | **TOWER LIVE** | Nest + data | ZFS pool → Nest Atomic. G3 wiring. |
+| **blueGate** | ONLINE (Windows) | — | Peptidoglycan anchor H2. G1 proof. |
+| **ironGate** | DEGRADED (RustDesk) | — | Fix RustDesk. HDD enclave. |
+| **swiftGate** | ONLINE (Windows) | — | Tower on Windows. |
+| **southGate** | HW READY | — | Enroll → Tower → NUCLEUS. |
 
 ---
 
-## CROSS-CUTTING DEPENDENCIES — SEQUENCED
+## OPEN P0/P1 ROLLUP
 
-```
-PHASE 1: TOWER + GATE WORKLOAD DISTRIBUTION (NOW)
- │
- ├── GATE DEPLOYMENTS (pipeline VALIDATED)
- │    ├── westGate: ✅ Tower LIVE → code team spin-up → Nest Atomic
- │    ├── strandGate: ✅ synced → Tower Atomic → compute trio (toadStool, barraCuda, coralReef)
- │    └── AARs filed: startup blurb hardened, hardware profiles corrected
- │
- ├── K-DERM LAYERS
- │    ├── northGate + ironGate: fix RustDesk issues
- │    ├── Peptidoglycan: DNS all gates → port mapping
- │    └── Inner membrane: Tower validation on all online gates
- │
- ├── G7 (gate enmeshment) — tower.enroll on enrolling gates
- │    └── J1+J2 CLOSED → J6 foundation → self-healing cascade
- │
- ├── G6 (bearDog public) — independent, ready
- └── biomeOS + songBird: tower.health → live signal graph validation
-
-PHASE 2: NEST ATOMIC + COMPUTE (AFTER TOWER STABLE)
- │
- ├── westGate: storage tiering validation (HDD/SSD/NVMe/RAM/cache)
- │    ├── nest.store → nest.retrieve → nest.verify across tiers
- │    └── G3 Provenance Trio wiring (rhizoCrypt ↔ loamSpine ↔ sweetGrass)
- │
- ├── strandGate: Node Atomic validation
- │    └── node.compute → node.dispatch on RTX 3090
- │
- ├── G4 (Nest cross-platform)
- └── G5 (Chimera) ← G1 proven
-
-PHASE 3: FULL NUCLEUS
- │
- ├── G8 (Plasmodium) ← G7 complete
- └── G9 (JOSS) ← G3 + G7 complete
-```
+| # | Priority | Issue | Owner |
+|---|----------|-------|-------|
+| 1 | **P0** | glibc depot target for compute primals (musl can't dlopen Vulkan) | sporeGate build |
+| 2 | P1 | Deploy step-ca on golgiBody (J8 deployment) | sporeGate ops |
+| 3 | P1 | toadStool deployment model docs (no `server` subcommand) | toadStool |
+| 4 | P1 | hotSpring Forgejo pack corruption | eastGate admin |
+| 5 | P1 | westGate ZFS pool creation (5×14TB) | westGate human |
+| 6 | P1 | nestGate ghost methods `content.repo.*`/`content.mirror.*` | nestGate |
+| 7 | P1 | WireGuard DNS catch-all in wg0 template | cellMembrane |
 
 ---
 
-## HANDOFFS
+## HANDOFFS (newest first)
 
 | File | Status |
 |------|--------|
-| `WESTGATE_OVERWATCH_SYNC_WAVE155f.md` | **NEW** — 41 repos synced, hardware divergences |
-| `STRANDGATE_OVERWATCH_SYNC_WAVE155f.md` | **NEW** — 42 repos synced, shallow roots documented |
-| `CELLMEMBRANE_WAVE155d_JELLY_STRING_CODIFICATION.md` | J1+J2 closed, J6 foundation |
-| `LOAMSPINE_WAVE155D_STRUCTURAL_EXTRACTION_SCHEMA_EVOLUTION_JUL28_2026.md` | Entry extraction, schema V2 |
-| `SWEETGRASS_WAVE155b_G3_READINESS_JUL27_2026.md` | CertificateRef shipped |
-| `BLURB_SPOREGATE_BUILD_MESH.md` | Build mesh topology |
+| `SQUIRREL_WESTGATE_CODE_TEAM_AUDIT_WAVE155g.md` | Audit: 763 tests, clean |
+| `PETALTONGUE_WESTGATE_EVOLUTION_WAVE155g.md` | Topology architecture evolution |
+| `PETALTONGUE_WESTGATE_CODE_TEAM_AUDIT_WAVE155g.md` | Audit: 6,558 tests |
+| `NESTGATE_WESTGATE_CODE_TEAM_EXECUTION_WAVE155g.md` | P0/P1 resolved |
+| `NESTGATE_WESTGATE_CODE_TEAM_AUDIT_WAVE155g.md` | Audit: 12,973 tests |
+| `CORALREEF_WAVE155f_STRANDGATE_EXECUTION_JUL28_2026.md` | 18/18 dispatch, all P0 fixed |
+| `CORALREEF_WAVE155f_STRANDGATE_AUDIT_JUL28_2026.md` | 10 compile errors found |
+| `BARRACUDA_WAVE155f_STRANDGATE_DEEP_DEBT_JUL28_2026.md` | SIGSEGV + env races |
+| `CELLMEMBRANE_WAVE155f_J8_KEY_PORTAL.md` | step-ca SSH cert lifecycle |
+| `CELLMEMBRANE_WAVE155f_J6_COMPLETION.md` | gate.configure/gate.apply |
+| `SPOREGATE_J8_STEP_CA_DEPLOYMENT.md` | step-ca deployment guide |
 
 AARs:
-- `WESTGATE_ENROLLMENT_WAVE155f_AAR.md` — **NEW** — hardware profile corrected, 6 divergences
-- `WESTGATE_TOWER_ATOMIC_DEPLOYMENT_155f_AAR.md` — **NEW** — Tower LIVE in 70 min, 8 issues (5 resolved)
-- `OUTER_MEMBRANE_TOPOLOGY_FAILURE_155b_AAR.md` | `PROVENANCE_TRIO_G3_CONVERGENCE_155b_AAR.md` | `SPOREGATE_DEPLOYMENT_EVOLUTION_155b_AAR.md`
+- `STRANDGATE_COMPUTE_TRIO_DEPLOYMENT_155f_AAR.md` — Tower + Compute deployed, P0 musl/glibc
+- `WESTGATE_TOWER_ATOMIC_DEPLOYMENT_155f_AAR.md` — Tower LIVE in 70 min
+- `WESTGATE_ENROLLMENT_WAVE155f_AAR.md` — Hardware corrected
 
 ---
 
-*Wave 155g. Deployment pipeline PROVEN. westGate: dead checkout → Tower Atomic
-LIVE in 70 minutes (AMD Ryzen 7 5700X / 64GB / 2TB NVMe / 5×14TB raw HDD).
-strandGate: 42 repos synced, zero conflicts, compute trio ready. Startup blurb
-hardened with HTTPS fallback, shallow roots handling, symlink guards. 8 gates
-online (westGate promoted). J8 opened (key enrollment portal). Next: westGate
-code team spin-up, strandGate Tower Atomic, ZFS pool creation for Nest Atomic.
-northGate + ironGate RustDesk degraded. 6/8 jelly strings resolved.*
+*Wave 155h. Largest evolution wave: 9 primals + cellMembrane shipped. J6 CLOSED
+(gate.configure/apply). J8 code shipped (step-ca SSH certs). barraCuda SIGSEGV
+fixed. coralReef fully wired (18/18 dispatch). nestGate P0/P1 closed. petalTongue
+topology→runtime manifest. squirrel capability-purified. toadStool deny.toml
+expanded. songBird ACME Phase 1. strandGate Tower + Compute Trio deployed.
+P0: glibc depot target needed for GPU primals (musl can't dlopen Vulkan ICD).
+7/8 jelly strings resolved. ~70K+ tests across primals. Next: glibc depot,
+step-ca on golgiBody, ZFS pool on westGate, RTX 3090 profiling.*

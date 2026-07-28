@@ -1,4 +1,4 @@
-# Team Startup Blurb — Wave 155f
+# Team Startup Blurb — Wave 155h
 
 **From**: eastGate overwatch
 **Purpose**: Paste this into any new IDE session on any gate. It bootstraps
@@ -108,7 +108,7 @@ Tower Atomic hardening first — Nest Atomic after Tower is stable.
 |------|-----------------|----------|
 | **eastGate** | Overwatch, biomeOS, primalSpring, Tower stack, cellMembrane | Code hub, 10G SFP+ |
 | **westGate** | petalTongue, squirrel, nestGate, rhizoCrypt, loamSpine, sweetGrass | Ryzen 7 5700X, 64GB, 2TB NVMe, 5×14TB HDD. **Tower LIVE** |
-| **strandGate** | toadStool, barraCuda, coralReef | Dual EPYC, RTX 3090 |
+| **strandGate** | toadStool, barraCuda, coralReef | Dual EPYC, RTX 3090. **Tower+Compute LIVE** |
 | **sporeGate** | Build authority, deployment foreman | Full NUCLEUS |
 | **golgiBody** | Depot, Forgejo, enrollment, relay | Sole depot (public VPS) |
 
@@ -376,7 +376,7 @@ when the gate will run primals (Tower Atomic or higher).
 | flockGate | 10.13.37.6 | LIVE (WAN) |
 | ironGate | 10.13.37.7 | LIVE |
 | southGate | 10.13.37.9 | REGISTERED |
-| strandGate | 10.13.37.10 | REGISTERED |
+| strandGate | 10.13.37.10 | LIVE |
 | westGate | 10.13.37.11 | REGISTERED |
 | blueGate | 10.13.37.12 | PENDING KEYGEN |
 | swiftGate | 10.13.37.13 | PENDING KEYGEN |
@@ -525,33 +525,37 @@ is only needed when deploying primals to run as services.
 
 ### westGate: petalTongue
 
-> **petalTongue** — Wave 155f, deploying to westGate.
-> Version: 1.7.0 | Tests: 5,812 | Status: Stable
+> **petalTongue** — Wave 155h, **evolved** on westGate.
+> Version: 1.7.0 | Tests: 6,605 | Status: Stable
 > Purpose: Visualization engine — WASM WebGL rendering pipeline.
-> BTSP ClientHello: SHIPPED.
-> Next work: Validate genomeBin deployment cycle on westGate. Confirm WASM
-> pipeline runs correctly on westGate hardware. Report any platform divergences.
+> **Delivered**: Topology architecture → runtime `ecosystem_manifest.toml` loading.
+> `main.rs` 727→199L split into cli/bootstrap/dispatch modules. Geometry module
+> refactored into strategy pattern. Version drift fixed. 13 new FFI safety tests.
+> Next work: Validate WASM pipeline on westGate. Deploy genomeBin.
 > Upstream: bearDog (BTSP), songBird (discovery)
 
 ### westGate: squirrel
 
-> **squirrel** — Wave 155f, deploying to westGate.
-> Version: 0.1.0 | Status: Stable
+> **squirrel** — Wave 155h, **evolved** on westGate.
+> Version: 0.1.0 | Tests: 763 | Status: Stable
 > Purpose: AI assistant with MCP integration.
-> Next work: Deploy to westGate. Validate startup, capability registration
-> with biomeOS neuralAPI. Report deployment divergences.
+> **Delivered**: Capability purification — all `beardog` references → `security_provider`.
+> Local crypto/password hashing removed (delegates to security capability). Adapter
+> IPC wired (compute, storage, security, orchestration). Anomaly detection delegates
+> to `defense.*`. Deprecated `EcosystemPrimalType`/`PrimalType` enums.
+> Next work: Validate capability registration with biomeOS neuralAPI.
 > Upstream: bearDog (BTSP), songBird (discovery), biomeOS (orchestration)
 
 ### westGate: Provenance Trio (nestGate + rhizoCrypt + loamSpine + sweetGrass)
 
-> **Provenance Trio** — Wave 155f, deploying to westGate.
-> Status: G3 CONVERGING — foundation shipped, IPC wiring deferred until Tower stable.
+> **Provenance Trio** — Wave 155h, **code teams delivered** on westGate.
+> Status: G3 CONVERGING — P0/P1 audit items resolved. IPC wiring deferred until Tower stable.
 >
 > | Primal | Version | Tests | Key Delivery |
 > |--------|---------|-------|--------------|
-> | nestGate | 0.5.0 | 13,236 | BTSP peer wiring, NTFS CAS safety |
+> | nestGate | 0.5.0 | 12,973 | **P0/P1 closed**: test compilation fixed, live CLI health, FHS centralized, ZFS tier migration |
 > | rhizoCrypt | 0.14.17 | 1,456 | Cross-gate provenance chain, BTSP→DAG bridge |
-> | loamSpine | 0.9.16 | 1,702 | Entry extraction, certificate.history RPC, delegated minting |
+> | loamSpine | 0.9.16 | 1,739 | BTSP handshake dedup: `verify_and_negotiate()` + `AsyncErrorSender` |
 > | sweetGrass | 0.7.64 | 1,676 | CertificateRef on braids, cross-gate attribution, G3 READY |
 >
 > **Storage Tiering on westGate**: nestGate's CAS should be validated against
@@ -565,21 +569,21 @@ is only needed when deploying primals to run as services.
 
 ### strandGate: Compute Trio (toadStool + barraCuda + coralReef)
 
-> **Compute Trio** — Wave 155f, deploying to strandGate.
+> **Compute Trio** — Wave 155h, **DEPLOYED** on strandGate.
 > Hardware: Dual EPYC 7452 (64 cores) + RTX 3090 (24GB VRAM)
 >
 > | Primal | Version | Tests | Key Delivery |
 > |--------|---------|-------|--------------|
-> | toadStool | 0.2.0 | 17,614+ | S343 wgpu cross-platform GPU pipeline |
-> | barraCuda | 0.4.0 | 3,080 | BTSP client, tensor math, transport refactor |
-> | coralReef | 0.2.0 | 2,896 | WGSL → SPIR-V, IPC merge resolution |
+> | toadStool | 0.2.0 | 23,332 | S344: deny.toml expanded, overstep reduced, socket centralized |
+> | barraCuda | 0.4.0 | 4,957 | SIGSEGV fixed (GPU_TEST_GUARD), BTSP env races, dead code (-1,200L) |
+> | coralReef | 0.2.0 | 3,527 | 18/18 JSON-RPC dispatch, BTSP Phase 3 encrypted transport |
 >
-> Next work: Deploy all three. Validate `node.discover_hardware` signal graph —
-> toadStool should discover the RTX 3090 via wgpu. Run `node.compute` and
-> `node.dispatch` on real GPU workloads. Profile dispatch latency, shader
-> compile times, tensor throughput. Report via handoff.
+> **P0**: musl genomeBins can't `dlopen` glibc Vulkan ICD — source builds work,
+> depot binaries don't. Need `x86_64-unknown-linux-gnu` glibc target from sporeGate.
+> Next work: Await glibc depot target. Profile RTX 3090 compute with source-built
+> binaries. Validate `node.compute` and `node.dispatch` signal graphs on real GPU.
 >
-> See `handoffs/TOADSTOOL_S342_CROSS_PLATFORM_GPU_JUL27_2026.md` for GPU context.
+> See `aars/STRANDGATE_COMPUTE_TRIO_DEPLOYMENT_155f_AAR.md` for deployment details.
 
 ### eastGate: biomeOS (reference — already running)
 
@@ -598,15 +602,16 @@ is only needed when deploying primals to run as services.
 
 ### Any gate: Tower Atomic stack (bearDog + songBird + skunkBat)
 
-> **Tower Atomic** — required on every gate before anything else deploys.
+> **Tower Atomic** — Wave 155h. Required on every gate before anything else deploys.
 > This is the trust foundation. Deploy first, validate, then deploy workloads.
 >
 > | Primal | Version | Role |
 > |--------|---------|------|
 > | bearDog | 0.9.0 | Crypto, BTSP auth, FIDO2, beacon genetics |
-> | songBird | 0.2.1 | Discovery, mesh, IPC, relay, drawbridge |
+> | songBird | 0.2.1 | Discovery, mesh, IPC, relay, drawbridge, **ACME HTTP-01 Phase 1** |
 > | skunkBat | 0.2.18 | Anomaly detection, protocol audit, ConnectivityAnomaly |
 >
+> **Deployed LIVE**: westGate, strandGate, grapheneGate, eastGate, sporeGate.
 > Validate: `tower.health` should return `{ "status": "healthy" }` from songBird.
 > `tower.mesh_status` returns mesh peer count and transport info.
 > Fetch genomeBins from `https://depot.primals.eco`.

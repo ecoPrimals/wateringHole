@@ -882,7 +882,8 @@ transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 roles = ["compute", "tower_atomic"]
-notes = "Dual EPYC 7452 128-thread + RTX 3090. Tower Atomic workhouse — not dev platform. Bioinformatics, NF pipeline. RJ45 to Omada (10G) + RJ45 to Flint 2 (2.5G bridge)."
+nucleus_status = "Tower+Compute LIVE"
+notes = "Dual EPYC 7452 128-thread + RTX 3090. Tower Atomic + Compute Trio LIVE (Wave 155h). barraCuda GPU verified (SHADER_F64), coralReef 18/18 dispatch. P0: musl depot can't dlopen glibc Vulkan — source build works, glibc depot target needed."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
