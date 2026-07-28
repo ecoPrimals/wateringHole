@@ -1,17 +1,21 @@
-# AAR: Outer Membrane Topology Failure — RustDesk NAT Rate-Limit Collapse
+# AAR: Peptidoglycan Topology Failure — NAT Rate-Limit Collapse (UDP + TCP)
 
 **Date**: 2026-07-28 | **Gate**: sporeGate (incident), golgiBody (root cause) | **Wave**: 155b
-**Scope**: Full RustDesk outer membrane failure for house1 LAN gates, root cause analysis, architectural separation, recovery
-**Duration**: ~2 hours diagnosis, 5 minutes to fix once root cause identified
-**Severity**: P1 — complete loss of remote access to house1 gates (sporeGate, eastGate, northGate)
+**Scope**: Full outer membrane failure, two cascading rate-limit collapses, peptidoglycan-layer architecture, deployment vs topology ownership
+**Duration**: ~3 hours total (two incidents), 5 minutes to fix each once root cause identified
+**Severity**: P1 — complete loss of remote access to all house1+house2 gates (twice)
 
 ---
 
 ## EXECUTIVE SUMMARY
 
-All house1 RustDesk gates went offline while flockGate (different WAN) remained connected. After extensive debugging across client versions, configs, and protocol layers, the root cause was a **silent iptables rate-limit DROP** on golgiBody that punished NAT-clustered gates. Multiple gates behind one WAN IP collectively exceeded per-source-IP UDP thresholds. The firewall silently discarded all their traffic — no logs, no errors, no indication of the block.
+Two cascading failures exposed a fundamental gap in the ecosystem's **peptidoglycan layer** — the topology and connectivity fabric that sits between the outer membrane (RustDesk/human access) and the inner membrane (primals/service mesh).
 
-This AAR documents the failure, the diagnostic red herrings, and the architectural separation implemented to prevent recurrence.
+**Incident 1 (UDP)**: All house1 RustDesk gates went offline. Per-source-IP UDP rate limits on golgiBody (30/10s) were exceeded by NAT-clustered gates sharing one WAN IP. Silent DROP — no logs, no errors.
+
+**Incident 2 (TCP)**: After fixing UDP, all connections dropped again. RustDesk clients retry TCP to port 21114 (API server, no listener). Each retry = new TCP connection. 10 NATted clients × retries overwhelmed the 60/10s TCP rate limit, blocking ALL TCP to RustDesk ports including legitimate 21116 connections.
+
+Both failures share the same pattern: **per-IP rate limits assume one-client-per-IP, but NAT clusters amplify counts**. This AAR documents both incidents, the diagnostic journey, and the architectural separation that emerged — treating the LAN/HPC topology as a **peptidoglycan layer** with distinct ownership from both the outer membrane and the primals beneath.
 
 ---
 
@@ -68,6 +72,23 @@ sporeGate's `/etc/resolv.conf` pointed to `127.0.0.1` (dnsmasq) as primary DNS, 
 | T+95m | Check iptables | Rate limit: 30 UDP/10s per IP. House1 (3 gates, 1 NAT) exceeds it |
 | T+100m | Raise limits, flush recent tables | **ALL 9 house1 peers register within 4 seconds** |
 
+### Incident 2: TCP Rate-Limit Cascade (T+150m)
+
+After restoring UDP connectivity and creating the RUSTDESK_MEMBRANE chain, a service restart on northGate triggered the second collapse.
+
+| Time | Action | Finding |
+|------|--------|---------|
+| T+150m | Service restart on northGate | All RustDesk remotes go offline again |
+| T+152m | Check golgiBody | hbbs running, UDP flowing to flockGate — relay is healthy |
+| T+155m | sporeGate RustDesk log | `test nat: Failed to connect to 157.230.3.183:21116` |
+| T+157m | nc to ports 22, 443 | Both succeed instantly |
+| T+158m | nc to port 21116 | SYN-SENT, timeout — port-specific block |
+| T+160m | tcpdump sporeGate | SYNs leave 192.168.4.3 but never arrive at golgiBody |
+| T+162m | tcpdump golgiBody (any traffic from house1) | SSH traffic arrives, port 21114 SYNs arrive — but zero 21116 traffic |
+| T+163m | **Check RUSTDESK_MEMBRANE counters** | **Rule 5 (TCP DROP): 6267 packets dropped** |
+| T+164m | Root cause | Port 21114 (API server) has NO listener. Clients retry TCP → each retry = NEW connection. 10 NATted clients × retries > 60/10s limit → ALL TCP to 21115-21118 blocked |
+| T+165m | REJECT 21114 with tcp-reset, remove from rate limit, flush tables | **All connections restored** |
+
 ---
 
 ## WHAT WE FIXED
@@ -78,21 +99,23 @@ Created a dedicated iptables chain that isolates RustDesk traffic handling from 
 
 ```
 INPUT chain:
-  Rule 2: TCP 21114-21118 → jump RUSTDESK_MEMBRANE
-  Rule 3: UDP 21116      → jump RUSTDESK_MEMBRANE
+  Rule 2: TCP 21114 → REJECT --tcp-reset  (instant RST, stops retry storms)
+  Rule 3: TCP 21115-21118 → jump RUSTDESK_MEMBRANE
+  Rule 4: UDP 21116      → jump RUSTDESK_MEMBRANE
   (primals rules below — HTTPS, SSH, Forgejo — completely separate)
 
 RUSTDESK_MEMBRANE chain:
-  1. ACCEPT ESTABLISHED,RELATED
-  2. UDP 21116 recent SET rd_membrane_udp
-  3. UDP 21116 recent UPDATE 10s hitcount:120 → DROP
-  4. TCP 21114-21118 NEW recent SET rd_membrane_tcp
-  5. TCP 21114-21118 NEW recent UPDATE 10s hitcount:60 → DROP
-  6. ACCEPT TCP 21114-21118
-  7. ACCEPT UDP 21116
+  1. REJECT TCP 21114 with tcp-reset  (API port — no service, prevent retry storms)
+  2. ACCEPT ESTABLISHED,RELATED
+  3. UDP 21116 recent SET rd_membrane_udp
+  4. UDP 21116 recent UPDATE 10s hitcount:120 → DROP
+  5. ACCEPT UDP 21116
+  6. TCP 21115-21118 NEW recent SET rd_membrane_tcp
+  7. TCP 21115-21118 NEW recent UPDATE 10s hitcount:60 → DROP
+  8. ACCEPT TCP 21115-21118
 ```
 
-**NAT-aware limits**: 120 UDP/10s supports ~10 gates behind one NAT. 60 TCP new connections/10s is generous for legitimate use while still blocking scanners.
+**NAT-aware limits**: 120 UDP/10s supports ~10 gates behind one NAT. 60 TCP new connections/10s for legitimate use. Port 21114 (API) gets instant RST to prevent retry storms from poisoning the rate counter.
 
 ### 2. dnsmasq Re-enabled (sporeGate)
 
@@ -143,22 +166,79 @@ If a binary that should be making network calls shows zero sockets in `ss`, chec
 
 Add to gate health monitoring: if `/etc/resolv.conf` points to localhost but nothing binds port 53, flag immediately.
 
+### 6. "Dead listener port in rate-limited set" → REJECT, don't ignore
+
+If a port has no listener but is included in a rate-limit counter set, client retries create a denial-of-service against the other ports in the set. **Always REJECT (tcp-reset) ports with no listener** so clients stop immediately. Never let a dead port silently timeout behind a shared rate counter.
+
+### 7. "All connections drop after any service restart" → Check TCP rate limit counters
+
+If restarting any service causes all RustDesk connections to fail, check `iptables -L RUSTDESK_MEMBRANE -n -v` for high DROP counts on the TCP rate-limit rule. The restart may trigger reconnection storms that poison the rate counter.
+
 ---
 
-## ARCHITECTURAL INSIGHT: Membrane Independence
+## ARCHITECTURAL INSIGHT: The Peptidoglycan Layer
 
-The core learning: **the outer membrane (RustDesk) must be architecturally independent from the services it provides access to**. If the same firewall rules, DNS chain, or network path serves both RustDesk and primals, a failure in one domain cascades to the other — and you lose the ability to remotely fix the problem.
+### Three-Layer Model
 
-The separation is now:
+This incident revealed that the ecosystem has three distinct connectivity layers, not two:
 
 ```
-User → RustDesk (public internet, RUSTDESK_MEMBRANE chain, server key + password)
-     → Gate desktop
-     → WireGuard (10.13.37.x, separate tunnel)
-     → Primals (capability IPC, TLS, separate firewall rules)
+┌─────────────────────────────────────────────────────────┐
+│  OUTER MEMBRANE — Human access (RustDesk)               │
+│  Route: public internet → relay.primals.eco             │
+│  Auth: server key + per-gate password                   │
+│  Owner: golgiBody RUSTDESK_MEMBRANE chain               │
+├─────────────────────────────────────────────────────────┤
+│  PEPTIDOGLYCAN — LAN/HPC topology fabric                │
+│  Hardware: Flints, CRS310, Omada, 10G AOC trunk         │
+│  Services: NAT, DHCP (sporeGate), DNS (dnsmasq→stubby)  │
+│  Scope: 192.168.4.0/22 flat LAN, both houses            │
+│  Anchors: sporeGate (house1) + blueGate (house2)        │
+├─────────────────────────────────────────────────────────┤
+│  INNER MEMBRANE — Primal communications                 │
+│  Route: WireGuard wg0 (10.13.37.x) + songBird :7700    │
+│  Auth: capability IPC, TLS, BTSP                        │
+│  Owner: per-primal, coordinated by overwatch             │
+└─────────────────────────────────────────────────────────┘
 ```
 
-If WireGuard dies, RustDesk still works. If RustDesk's firewall rules need tuning, primals are untouched. The outer membrane is the sovereign fallback — the human hand reaching through.
+Both outer and inner membranes depend on the peptidoglycan, but must not share failure domains with it. The peptidoglycan is the physical/network reality — cables, switches, NAT, DNS — that everything rides on.
+
+### Why "Peptidoglycan"
+
+In cell biology, peptidoglycan is the rigid structural mesh between the inner and outer membranes of Gram-negative bacteria. It provides shape, mechanical strength, and acts as a sieve. In the ecosystem:
+
+- It provides **structure** — the physical network that gives gates their connectivity
+- It acts as a **sieve** — NAT, firewall, rate limits filter what passes through
+- It's **rigid** — hardware topology changes slowly (cable runs, switch configs)
+- It's **vulnerable to lysis** — rate limits, DNS failures, and topology changes can crack it, collapsing both membranes simultaneously
+
+### Deployment vs Topology: Ownership Model
+
+| Concern | Owner | Current State | Gap |
+|---------|-------|---------------|-----|
+| **Outer membrane firewall** | golgiBody (RUSTDESK_MEMBRANE) | Hardened (2 incidents fixed) | Needs LOG before DROP |
+| **Outer membrane clients** | Per-gate RustDesk config | house1 working, house2 Linux = provisioning gap | Standardized gate provisioning needed |
+| **Peptidoglycan: DNS** | sporeGate (dnsmasq→stubby) | sporeGate fixed, northGate likely broken | Per-gate DNS health check |
+| **Peptidoglycan: NAT/DHCP** | sporeGate (nftables membrane) | Working but enp1s0 DOWN, eno1 as both LAN+default | Clarify router architecture |
+| **Peptidoglycan: switching** | CRS310 (house1) + Omada (house2) | Working but port map incomplete | Full port→gate mapping |
+| **Peptidoglycan: trunk** | 10G AOC CRS310↔Omada | Proven (blueGate reaches relay) | Monitor link health |
+| **Peptidoglycan: WiFi bridge** | Flint 2 (house2) | blueGate/swiftGate working | Document config |
+| **Inner membrane: WireGuard** | sporeGate↔golgiBody | Proven (flockGate live) | Only 2 peers active |
+| **Inner membrane: songBird** | Per-primal | 13/13 BTSP | Gate enrollment pending for house2 |
+| **Primal deployment** | golgiBody depot + gate enrollment | Proven for house1 | House2 gates need RustDesk first |
+
+### Immediate Goal: Harden the Peptidoglycan
+
+Abstracting and hardening the LAN/HPC topology is the immediate prerequisite for everything else. The primals can't evolve if the connectivity fabric underneath is fragile. The outer membrane is the sovereign fallback for when the peptidoglycan cracks.
+
+**Anchor node model**: sporeGate (house1, manages entry — router/firewall/DNS) and blueGate (house2, manages compute farm) need end-to-end communication and shared ability to configure the hardware between them. This is the peptidoglycan management plane.
+
+**Sequencing**:
+1. Harden peptidoglycan (DNS per gate, port mappings, health checks)
+2. Provision outer membrane on all gates (RustDesk via relay.primals.eco)
+3. Resume inner membrane evolution (WireGuard enrollment, songBird mesh)
+4. Continue glacial primal goals (genomeBin convergence, etc.)
 
 ---
 
@@ -166,11 +246,27 @@ If WireGuard dies, RustDesk still works. If RustDesk's firewall rules need tunin
 
 - All house1 gates (sporeGate, eastGate, northGate) online and registered
 - flockGate remains online (was never affected)
+- blueGate + swiftGate (Windows, house2) online via backbone
+- house2 Linux gates (westGate, southGate, ironGate, strandGate) need RustDesk provisioning (network path proven via blueGate)
 - 10 total peers registered in hbbs DB
-- `relay.primals.eco` resolves via Cloudflare wildcard to 157.230.3.183
+- `relay.primals.eco` resolves via Cloudflare wildcard → 157.230.3.183
 - `https://relay.primals.eco` info page active (passphrase-gated bootstrap)
-- `RUSTDESK_MEMBRANE` chain saved via netfilter-persistent
+- `RUSTDESK_MEMBRANE` chain saved via netfilter-persistent (both UDP + TCP fixes)
+- Port 21114 REJECT with tcp-reset (prevents retry storm poisoning)
 - dnsmasq enabled and persistent on sporeGate
 - Cursor rule `.cursor/rules/outer-membrane-rustdesk.mdc` codifies the pattern
+- `TOPOLOGY_MAP.toml` has full physical layout but needs port-level completion
 
-*Outer membrane recovered. Topology trap documented. Separation achieved. — sporeGate, wave 155b*
+## OPEN ITEMS FOR OVERWATCH
+
+| Priority | Item | Owner |
+|----------|------|-------|
+| P0 | Harden peptidoglycan DNS: verify dnsmasq on all Linux gates | sporeGate (via blueGate bridge for house2) |
+| P1 | Provision RustDesk on house2 Linux gates | blueGate (local access) |
+| P1 | Complete port→gate mapping in TOPOLOGY_MAP.toml | overwatch |
+| P2 | Add LOG before DROP in RUSTDESK_MEMBRANE | golgiBody |
+| P2 | northGate DNS delay diagnosis (likely dead dnsmasq) | northGate (local) |
+| P2 | Document Flint H1 + Flint 2 + Omada configs | sporeGate + blueGate |
+| P3 | Standardized gate provisioning script (DNS + RustDesk + health checks) | wateringHole |
+
+*Peptidoglycan layer identified. Two rate-limit collapses diagnosed and fixed. Ownership model established. Ready for overwatch coordination. — sporeGate, wave 155b*
