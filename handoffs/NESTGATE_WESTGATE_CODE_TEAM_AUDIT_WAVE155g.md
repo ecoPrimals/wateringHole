@@ -56,14 +56,14 @@
 
 | Scope | Result |
 |-------|--------|
-| Full workspace (`cargo test --workspace`) | **FAILS** — `nestgate-api` test target has 308 type inference errors (E0282) |
-| Excluding `nestgate-api` | **PASSES** with 1 failure |
-| Failing test | `nestgate-security::cert::utils::tests::calculate_fingerprint_stable_for_same_bytes` — hardcoded SHA-256 expected value doesn't match BLAKE3 actual output |
+| Full workspace (`cargo test --workspace`) | **PASS** — 12,973 passed, 0 failed |
 | Ignored tests | ~80 (biomeOS integration, crypto provider, chaos, E2E) |
 
-**P0**: `nestgate-api` test compilation is broken — 308 errors in test files needing type annotations. This blocks CI for the entire workspace if run with `--workspace`.
+**P0 RESOLVED**: `nestgate-api` test compilation fixed — `pub use` re-exports added in 6 `mod.rs` files; test-only exports gated with `#[cfg(test)]`.
 
-**P1**: Security fingerprint test uses wrong expected hash — likely hash algorithm changed (SHA-256 → BLAKE3) without updating test assertion.
+**P1 RESOLVED**: Security fingerprint test updated — expected hash corrected to BLAKE3 output.
+
+See `NESTGATE_WESTGATE_CODE_TEAM_EXECUTION_WAVE155g.md` for full resolution details.
 
 ### Architecture Compliance
 
