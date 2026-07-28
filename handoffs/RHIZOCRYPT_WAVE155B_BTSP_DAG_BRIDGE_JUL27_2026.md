@@ -49,12 +49,13 @@ Dehydration path (gateway witnesses):
 
 | Metric | Value |
 |--------|-------|
-| Tests | 1,901 (+18 over pre-155b) |
+| Tests | 1,900 (155d: test consolidation, dep update) |
 | Source files | 225 `.rs` |
 | Lines | ~62,665 |
 | Coverage | 93.83% |
 | Clippy | 0 warnings |
 | cargo deny | CLEAN |
+| Head | `904b17b` |
 
 ## Upstream Status
 

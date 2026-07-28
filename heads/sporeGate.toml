@@ -5,8 +5,8 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-27T16:00:00Z"
-wave = "155b"
+updated = "2026-07-28T14:20:00Z"
+wave = "155d"
 
 [heads]
 bearDog = "a8bba76"
@@ -122,8 +122,31 @@ phase0_enrollment_endpoint = "LIVE — primals.eco/enroll, drawbridge + Caddy, 3
 windows_genomebins = "13/13 — first cross-compile harvest, rhizoCrypt cfg(unix) fix shipped"
 primalspring_gate_calibration = "gate count → >= 13, sporePrint known debt added"
 
+[deployment_155d]
+depot_primals_eco = "LIVE — Caddy site added on golgiBody, TLS cert acquired, 200 OK"
+socket_permissions = "FIXED — membrane group created, sockets 0660 root:membrane, tmpfiles.d persistent"
+gate_status = "13/13 primals alive, sovereignty s1+s2+s4 OK, service.crash-loop OK"
+caddy_deprecation = "basicauth → basic_auth pending (Caddy warns, still functional)"
+
+[peptidoglycan_prep]
+bluegate_anchor = "PREP — blueGate identified as house2 peptidoglycan anchor"
+bluegate_lan_candidates = ["192.168.4.200 (Dell)", "192.168.4.231 (Gigabyte)"]
+bluegate_flint2 = "192.168.4.250 (GL.iNet = Flint 2 bridge confirmed)"
+bluegate_wg_planned = "10.13.37.12 (pending keygen)"
+direct_lan_status = "DEGRADED — ICMP to house2 gates fails, backbone path needs audit"
+flint2_bridge = "CONFIRMED live at 192.168.4.250, bridges blueGate + swiftGate"
+house2_live_hosts = ["192.168.4.200", "192.168.4.214", "192.168.4.218 (ms-device-h2)", "192.168.4.231", "192.168.4.237 (irongate)", "192.168.4.244 (xbox-h2)"]
+next_steps = "Identify blueGate LAN IP via RustDesk session, assign DHCP reservation, WG keygen"
+
+[code_team_flags]
+checksums_format = "FLAGGED — membrane CLI expects ChecksumEntry struct, depot has plain strings (code team: cellMembrane)"
+s3_content_probe = "FLAGGED — gate.status s3_content probe returns 404 (path alignment: code team)"
+vcs_parity = "FLAGGED — 21/21 repos drifted (code team sync)"
+mesh_socket = "FLAGGED — mesh relay socket not wired on sporeGate (code team: cellMembrane)"
+
 [remaining]
 phase1_gate_enrollment = "P0 — 5 gates need enrollment (3 WG-keyed, 2 pending keygen)"
+bluegate_anchor_prep = "P0 — identify LAN IP, DHCP reservation, WG keygen, peptidoglycan mgmt plane"
 bluegate_builder = "P1 — post-enrollment: set MEMBRANE_BUILD_AUTHORITY=1, verify toolchain"
 graphenegate_floating = "P2 — evolve from ADB peripheral to autonomous gate"
 chimera_phase0 = "P2 — libtower.so extraction"
