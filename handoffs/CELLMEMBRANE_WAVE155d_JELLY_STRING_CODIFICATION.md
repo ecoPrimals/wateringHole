@@ -69,11 +69,39 @@ operation is individually observable, error-recoverable, and testable.
 
 ---
 
+### J6 Foundation: `ServiceSpec` Cross-Platform Config Model
+
+Introduced `ServiceSpec` in `cellmembrane-types/src/process.rs` — a unified,
+platform-agnostic service configuration struct:
+
+| Method | Output |
+|--------|--------|
+| `to_systemd_unit()` | Full `.service` unit file |
+| `to_systemd_override()` | Drop-in `override.conf` (env vars, env file) |
+| `to_launchd_plist()` | macOS plist XML (program, args, env, keep-alive) |
+| `from_membrane_service()` | Builder from registry + `ServerContract` + capability env |
+
+`nucleus.rs` `generate_unit_content()` now delegates to `ServiceSpec::to_systemd_unit()`
+instead of inline format strings.
+
+### Deep Debt Fixes
+
+| Fix | File | Detail |
+|-----|------|--------|
+| Dup federation port | `tower/mod.rs` | `SONGBIRD_FEDERATION_PORT` → `DEFAULT_FEDERATION_PORT` |
+| Hardcoded `:7700` | `gate/enroll.rs` | Literal → `DEFAULT_FEDERATION_PORT` |
+| Unguarded systemctl | `gate/crash_loop.rs` | `query_unit_restart_info` + `InitSystem` guard |
+| Unguarded systemctl | `tower/timer.rs` | `systemctl()` + `systemctl_is_active()` + `InitSystem` guard |
+| Domain fallback | `gateway/mod.rs` | `"primals.eco"` → `SURFACE_DOMAIN` |
+| Hardcoded arch | `tower/timer.rs` | `x86_64-unknown-linux-musl` → `detect_target_triple()` |
+
+---
+
 ## Health Metrics
 
 | Metric | Value |
 |--------|-------|
-| `cargo test` | **1,187** (up from 1,182) |
+| `cargo test` | **1,194** (up from 1,182) |
 | `cargo clippy` | 0 warnings |
 | `cargo fmt` | 0 drift |
 | Production `unwrap()` | 0 |
@@ -102,7 +130,7 @@ operation is individually observable, error-recoverable, and testable.
 | J3 | Service restart manual | **CLOSED** (songBird) | `deploy.hot_swap` |
 | J4 | Caddy config manual | **CLOSED** (songBird) | route self-config |
 | J5 | WG peer reg manual | **HARDENED** (songBird) | WG peer management |
-| J6 | systemd overrides manual | OPEN | Next: `InitSystem` config generation |
+| J6 | systemd overrides manual | **FOUNDATION** | `ServiceSpec` model + renderers shipped. Full drop-in generation next. |
 | J7 | Legacy service detection | OPEN (low priority) | |
 
 ---
@@ -111,7 +139,8 @@ operation is individually observable, error-recoverable, and testable.
 
 - **J1+J2 CLOSED** — `plasmid.harvest --all --local --push` is now a single
   command for the full harvest→push cycle. No more manual rsync to golgiBody.
-- **J6 (systemd overrides manual)** is the next cellMembrane jelly string.
-  Cross-platform groundwork is already laid (`InitSystem::detect()` from
-  Wave 155b). J6 would generate service configs for each init system.
+- **J6 FOUNDATION SHIPPED** — `ServiceSpec` cross-platform model + systemd/launchd
+  renderers landed. `nucleus.rs` wired. Next: `gate.configure` / `gate.apply`
+  commands for declarative drop-in override generation.
+- **Deep debt** — 6 hardcoding / self-knowledge / cross-platform fixes shipped.
 - **Tower Atomic hardening** posture maintained per Wave 155d sequencing.
