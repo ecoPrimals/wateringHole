@@ -176,38 +176,64 @@ done
 ### Step 1b: Repoint Remotes from GitHub to Forgejo
 
 Older gates may still point at GitHub. This script repoints all remotes to
-Forgejo using the correct org mapping:
+Forgejo using the correct org mapping.
+
+**WARNING — Shallow Roots**: GitHub-origin repos often have **incompatible
+commit histories** with Forgejo and cannot fast-forward. If `git pull` fails
+after repointing, you must **fresh clone** from Forgejo (back up the old
+directory first if it has local changes). strandGate hit this on 7/7 GitHub
+repos — all required fresh clones. westGate (31 GitHub repos) will likely
+need the same treatment. The script below handles this automatically:
 
 ```bash
 cd ~/Development/ecoPrimals
 
-repoint_remote() {
+repoint_or_reclone() {
   local dir="$1" org="$2" name=$(basename "$1")
-  if [ -d "$dir/.git" ]; then
-    local current=$(cd "$dir" && git remote get-url origin 2>/dev/null)
-    local target="ssh://git@git.primals.eco:2222/${org}/${name}.git"
-    if [ "$current" != "$target" ]; then
-      (cd "$dir" && git remote set-url origin "$target")
-      echo "REPOINTED: $name → $org"
+  if [ ! -d "$dir/.git" ]; then return; fi
+  local current=$(cd "$dir" && git remote get-url origin 2>/dev/null)
+  local target="ssh://git@git.primals.eco:2222/${org}/${name}.git"
+  if [ "$current" = "$target" ]; then return; fi
+
+  # Repoint
+  (cd "$dir" && git remote set-url origin "$target")
+  echo "REPOINTED: $name → $org"
+
+  # Test if histories are compatible
+  if ! (cd "$dir" && git fetch origin 2>/dev/null && git merge-base --is-ancestor HEAD origin/main 2>/dev/null); then
+    echo "  SHALLOW ROOTS: $name — histories incompatible, fresh cloning..."
+    local stash=""
+    local dirty=$(cd "$dir" && git status --porcelain 2>/dev/null | wc -l)
+    if [ "$dirty" -gt 0 ]; then
+      stash="${dir}.stash-$(date +%s)"
+      echo "  STASHING dirty files → $stash"
+      mkdir -p "$stash"
+      (cd "$dir" && git diff > "$stash/tracked.patch" 2>/dev/null)
+      (cd "$dir" && git status --porcelain | awk '{print $2}' | while read f; do
+        [ -f "$f" ] && cp --parents "$f" "$stash/" 2>/dev/null
+      done)
     fi
+    rm -rf "$dir"
+    git clone "$target" "$dir"
+    echo "  RECLONED: $name from Forgejo"
   fi
 }
 
 # primals → ecoPrimals org
-for d in primals/*; do repoint_remote "$d" "ecoPrimals"; done
+for d in primals/*; do repoint_or_reclone "$d" "ecoPrimals"; done
 
 # gardens → sporeGarden org
-for d in gardens/*; do repoint_remote "$d" "sporeGarden"; done
+for d in gardens/*; do repoint_or_reclone "$d" "sporeGarden"; done
 
 # springs → syntheticChemistry org
-for d in springs/*; do repoint_remote "$d" "syntheticChemistry"; done
+for d in springs/*; do repoint_or_reclone "$d" "syntheticChemistry"; done
 
 # infra — mixed orgs
 for d in wateringHole plasmidBin fossilRecord sporePrint whitePaper; do
-  repoint_remote "infra/$d" "ecoPrimals"
+  repoint_or_reclone "infra/$d" "ecoPrimals"
 done
 for d in agentReagents benchScale; do
-  repoint_remote "infra/$d" "syntheticChemistry"
+  repoint_or_reclone "infra/$d" "syntheticChemistry"
 done
 ```
 
@@ -602,6 +628,15 @@ Run Step 1a above — it renames `master` → `main`.
 **Q: I have extra directories like `archive/`, `sort-after/`, or `springs/` duplicates.**
 These are local artifacts from older waves. Safe to keep for reference, but
 they're not part of the canonical layout and won't sync.
+
+**Q: `gardens/projectFOUNDATION` is a symlink to `gardens/foundation`?**
+That's fine. Some gates have both names pointing at the same repo. The
+Forgejo name is `sporeGarden/projectFOUNDATION`. Keep the symlink.
+
+**Q: `git pull` fails with "shallow roots" or "unrelated histories" after repointing?**
+The GitHub and Forgejo copies diverged. Back up any dirty files, delete
+the directory, and fresh clone from Forgejo. The Step 1b script handles
+this automatically.
 
 **Q: What SSH key should I use?**
 `~/.ssh/id_ed25519_ecoPrimal` is the ecosystem key. If you have a gate-specific
