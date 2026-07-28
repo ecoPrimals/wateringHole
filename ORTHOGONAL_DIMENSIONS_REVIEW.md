@@ -13,29 +13,24 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal / Coordination
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155b)
-- [x] Gate heads published (`heads/*.toml`) — eastGate, sporeGate, flockGate, ironGate, golgiBody
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155d)
+- [x] Gate heads published (`heads/*.toml`) — golgiBody auto-publishing active
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] Active impulses: 0 (26+ fossilized)
 - [x] ecosystem_manifest.toml version current (v3.1.0)
 - [x] 43/43 repos synced with Forgejo
-- [x] Active handoffs: Track A (evolution), Track B (fleet convergence), sporeGate build mesh
+- [x] **ECOSYSTEM_BLURB.md** is the universal handoff (Tracks A+B converged)
 - [x] Fossilized: 42+ docs across `fossilRecord/wave150x_*` and `wave151a_completion/`
 - [x] **waterFall** publish cascade defined — git → impulse → DAG → braid → anchor → relay
-- [x] **Impulse/Potential** standard active (Wave 63+)
-- [x] **Context Braid** standard active (Wave 63+)
-- [x] **Ecosystem Communication** standard active (Wave 68+)
+- [x] Impulse/Potential, Context Braid, Ecosystem Communication standards active
 - [x] NeuralBridge in membrane-shadow routes with try-primal-first semantics
-- [x] Glacial correction (150x): git merge divergence documented as rootPulse evidence
-- [x] **whitePaper gen/ review COMPLETE** (Wave 151c)
-- [x] **JOSS publication strategy** defined — Gonzales NF pipeline as live system paper
-- [x] **Autonomous enrollment blurb** — ECOSYSTEM_BLURB.md updated with genomeBin convergence posture
-- [x] cellMembrane cascaded to Forgejo (Wave 155b)
-- [x] plasmidBin cascaded to Forgejo (Wave 155b)
-- [ ] GLOSSARY.md stale (Wave 138b) — needs refresh to 155b terms
+- [x] whitePaper gen/ review COMPLETE (Wave 151c)
+- [x] JOSS publication strategy defined
+- [x] GLOSSARY.md refreshed (Wave 155b)
+- [x] cellMembrane + plasmidBin cascaded to Forgejo
 - [ ] waterFall graph partially wired — full composition pending Provenance Trio
 - [ ] Context braids not yet replacing blurb paste — graduation path documented
-- [ ] `freshness.toml` stale at Wave 137 — needs cascade publish to 155b
+- [ ] `freshness.toml` stale at Wave 137 — needs cascade publish to 155d
 - [ ] 5 enrolling gates have no published heads in `heads/*.toml`
 
 ## 2. Ecological (Primal Health)
@@ -43,177 +38,229 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] All primals compile — 5 Tier 1 genomeBin architectures
 - [x] Zero P0/P1 blockers in any primal
 - [x] 43/43 repos Forgejo-first
-- [x] **75,199 `#[test]` attrs in primals alone** — ecosystem-wide 100K+
+- [x] **~54K `#[test]` attrs** in primals (toadStool 22K, songBird 14K, nestGate 13K)
 - [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean
 - [x] nestGate vendor elimination COMPLETE (Wave 150u)
-- [x] Production `.unwrap()` — 0 in nestGate, loamSpine, toadStool, esotericWebb, cellMembrane, songBird
+- [x] Production `.unwrap()` — 0 in critical-path primals
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
 - [x] Format drift RESOLVED — all repos clean
-- [x] bearDog: **11,993 tests**, FIDO2 hardware, enrollment attestation, beacon proximity, HSM agnostic
-- [x] songBird: **10,335 tests**, `mesh.gate_enroll`, universal-ipc (UDS/pipes/abstract/XPC/TCP)
-- [x] skunkBat: spawn-rate anomaly detection, cipher floor policy, PUBLIC
-- [x] cellMembrane: Phase 7 enrollment, builder identity, checksum verify fix (plain+struct format)
-- [x] **nestGate: BTSP ClientHello SHIPPED** — 9,617 tests
-- [x] **petalTongue: BTSP ClientHello SHIPPED** — 5,812 tests
-- [x] **toadStool**: 17,614 tests — largest primal test surface
-- [x] primalSpring: **197 scenarios**, all PASS
-- [x] Tower debt: 36 → **1** (grapheneGate HSM only)
-- [x] songBird crypto delegation to bearDog: **6/6 seams DONE**
+- [x] bearDog: 11,993 tests, FIDO2 hardware, beacon proximity, HSM agnostic
+- [x] songBird: 14,365 tests, `mesh.gate_enroll`, universal-ipc, **J3+J4+J5 cascade automation**
+- [x] nestGate: 13,236 tests, BTSP ClientHello, BTSP→CAS wiring, NTFS CAS safety
+- [x] toadStool: 21,913 tests, wgpu cross-platform GPU, S343 dispatch pipeline
+- [x] rhizoCrypt: 1,456 tests, BTSP→DAG bridge, cross-gate provenance chain
+- [x] loamSpine: 1,702 tests, G3 verification path, delegated minting builder
+- [x] sweetGrass: 1,676 tests, cross-gate attribution types, PROV-O, BTSP ClientHello — **G3 READY**
+- [x] petalTongue: 5,812 tests, BTSP ClientHello
+- [x] primalSpring: 197 scenarios, all PASS, calibrated for 13-gate mesh
+- [x] skunkBat: spawn-rate anomaly detection, frame crypto extraction, PUBLIC
 - [x] **BTSP 13/13** — all primals shipped ClientHello
+- [x] Tower debt: 36 → **1** (grapheneGate HSM only)
+- [x] songBird crypto delegation to bearDog: 6/6 seams DONE
 - [x] Compositions fixed: `compute` and `nest` include Tower Atomic base primals
-- [x] Checksum verify handles both plain-string and struct TOML formats
 - [ ] **1 known debt finding**: grapheneGate-readiness (HSM not on eastGate)
 - [ ] Chimera Phase 0: library extraction (UNBLOCKED — crypto delegation done)
 
-## 3. Hardware / Topology
+## 3. Hardware / Physical Topology
 
-- [x] Mixed 10G + 1G topology LIVE — 10G backbone between houses, 1G MikroTik for LAN
-- [x] sporeGate on R45 → MikroTik — intra-membrane coordinator, HPC, build authority
-- [x] eastGate on MikroTik LAN — code hub, LAN peer at 192.168.4.244 (0.17ms RTT)
-- [x] 7-gate WireGuard mesh LIVE (golgi, sporeGate, eastGate, flockGate, ironGate, northGate, grapheneGate)
-- [x] northGate enrolled (Windows 11, RTX 5090, WireGuard active)
-- [x] grapheneGate Tower LIVE (bearDog + songBird + skunkBat)
-- [x] Tower Atomic shadow ACTIVE on 3 gates — 700+ shadow samples
-- [x] LAN peering: **Tower 353x LAN** (0.45ms vs 158ms WG overlay)
-- [x] **Autonomous enrollment SHIPPED** — `mesh.gate_enroll` + `gate-enroll.sh` + `gate-enroll.ps1`
-- [x] **Dynamic IP pool allocation** — .20-.254 range
-- [x] **Forgejo SSH key auto-registration** — REST API via enrollment endpoint
-- [x] **Family seed delivery** — encrypted to enrollee WG pubkey via bearDog
-- [x] **Trust tiers** — FIDO2/SoloKey (kin) > grapheneGate beacon (sibling) > token (extended)
-- [x] **Self-registration pattern** — gates declare name + composition, manifest entries transitional
+- [x] Mixed 10G + 1G topology LIVE — 10G AOC backbone between houses, MikroTik CRS310 + Omada SX3008F
+- [x] sporeGate on R45 → MikroTik — plasma membrane router (NAT/DHCP/DNS/nftables)
+- [x] eastGate on MikroTik LAN — code hub, 10G SFP+ direct
+- [x] northGate enrolled (Windows 11, RTX 5090, 2.5G ethernet)
 - [x] westGate ONLINE — 5x14TB HDD (70TB raw ZFS cold pool)
 - [x] ironGate HDD — 14TB + 1TB + 1TB + ~2TB, enclave experiment planned
-- [x] blueGate + swiftGate identified as **Windows** deployments (`x86_64-pc-windows-gnu`)
+- [x] blueGate + swiftGate: Windows, house2, 10G backbone proven
+- [x] grapheneGate: Android, Tower LIVE (bearDog + songBird + skunkBat)
+- [x] 10G AOC trunk CRS310↔Omada proven (blueGate reaches relay via backbone)
+- [x] **TOPOLOGY_MAP.toml** has full physical layout with cytoplasm zone model
+- [ ] fieldGate OFFLINE (dead CMOS)
+- [ ] biomeGate OFFLINE (kernel recovery)
+- [ ] Complete port→gate mapping (CRS310 + Omada + TL-SG605S-M2)
+- [ ] Document Flint H1 + Flint 2 + Omada WiFi bridge configs
 
 ### Gate Fleet — Status Matrix
 
 | Gate | Status | Platform | Mesh IP | Composition | Role |
 |------|--------|----------|---------|-------------|------|
 | golgiBody | ONLINE | Linux | 10.13.37.1 | thin-relay | Sole depot, enrollment, Forgejo, Drawbridge |
-| sporeGate | ONLINE | Linux | 10.13.37.2 | full | Build authority, depot, cascade hub |
+| sporeGate | ONLINE | Linux | 10.13.37.2 | full | Build authority, depot, cascade hub, **peptidoglycan anchor H1** |
 | eastGate | ONLINE | Linux | 10.13.37.5 | full | Code hub, overwatch |
 | ironGate | ONLINE | Linux | 10.13.37.7 | full | GPU compute, 4x HDD enclave, JupyterHub |
-| flockGate | ONLINE | Linux | 10.13.37.6 | full | Nest Atomic validation |
-| northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090, gaming/GPU |
+| flockGate | ONLINE | Linux | 10.13.37.6 | full | Nest Atomic validation (after Tower stable) |
+| northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090, G1 validation target |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
 | strandGate | HW READY | Linux | enrolling | compute (7) | Dual EPYC, RTX 3090, bioinformatics |
 | westGate | HW READY | Linux | enrolling | nest (7) | 70TB ZFS cold pool, NAS |
-| blueGate | HW READY | Windows | enrolling | tower (3) | Distributed builder, media/gaming |
+| blueGate | HW READY | Windows | enrolling | tower (3) | Distributed builder, **peptidoglycan anchor H2** |
 | swiftGate | HW READY | Windows | enrolling | full (13) | Hobby/consumer, house2 |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
 
-### Glacial Goals — Gate Enmeshment
+## 4. K-Derm Layers — Connectivity Fabric (NEW — extracted from incidents + sovereignty)
 
-Gates are on, wired, and running. Enmeshment is a glacial validation target requiring:
+Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 
-1. **Tower Atomic deployment** across all platforms (Linux + Windows + Android)
-2. **Nest Atomic** for agnostic data systems (same OS abstraction as IPC)
-3. **genomeBin depot** on golgiBody with all Tier 1 architectures
-4. **Cross-platform validation** — Tower Atomic on Windows (blueGate, swiftGate) proves the abstraction
+```
+┌─────────────────────────────────────────────────────────┐
+│  OUTER MEMBRANE — Human access (RustDesk → relay)       │
+│  Route: public internet → relay.primals.eco             │
+│  Auth: server key + per-gate password                   │
+│  Owner: golgiBody RUSTDESK_MEMBRANE chain               │
+│  Failure: NAT rate-limit collapse (2 incidents, fixed)  │
+├─────────────────────────────────────────────────────────┤
+│  PEPTIDOGLYCAN — LAN/HPC topology fabric                │
+│  Hardware: Flints, CRS310, Omada, 10G AOC trunk         │
+│  Services: NAT (sporeGate), DHCP, DNS (dnsmasq→stubby)  │
+│  Scope: 192.168.4.0/22 flat LAN, both houses            │
+│  Anchors: sporeGate (H1) + blueGate (H2)               │
+│  Failure: dead dnsmasq on sporeGate (fixed)             │
+├─────────────────────────────────────────────────────────┤
+│  INNER MEMBRANE — Primal communications                 │
+│  Route: WireGuard wg0 (10.13.37.x) + songBird :7700    │
+│  Auth: capability IPC, TLS, BTSP (13/13)                │
+│  Owner: per-primal, coordinated by overwatch             │
+│  Status: 7-gate mesh, Tower Atomic shadow active         │
+└─────────────────────────────────────────────────────────┘
+```
 
-| Gate | Glacial Milestone | Blocker |
-|------|------------------|---------|
-| strandGate | Tower Atomic → compute workloads | Enrollment execution |
-| westGate | Tower Atomic → Nest Atomic (ZFS CAS) | Enrollment execution |
-| blueGate | Tower Atomic on Windows → build authority | Windows genomeBins in depot |
-| swiftGate | Full NUCLEUS on Windows | Windows genomeBins in depot |
-| southGate | Full NUCLEUS → second sovereign site | Enrollment execution |
-| ironGate | HDD enclave model (LUKS per-disk) | Physical HDD installation |
-| grapheneGate | Full NUCLEUS on Android | HSM + eastGate validation |
+### Outer Membrane
 
-- [ ] fieldGate OFFLINE (dead CMOS)
-- [ ] biomeGate OFFLINE (kernel recovery)
+- [x] RustDesk relay operational — `relay.primals.eco` → golgiBody
+- [x] **RUSTDESK_MEMBRANE iptables chain** — isolated from primal rules
+- [x] NAT-aware rate limits: 120 UDP/10s, 60 TCP new/10s
+- [x] Port 21114 REJECT with tcp-reset (prevents retry storm poisoning)
+- [x] 10 RustDesk peers registered in hbbs DB
+- [x] `https://relay.primals.eco` info page active (passphrase-gated bootstrap)
+- [x] Cursor rule `.cursor/rules/outer-membrane-rustdesk.mdc` codifies separation
+- [x] netfilter-persistent saves (both UDP + TCP fixes survive reboot)
+- [ ] LOG before DROP in RUSTDESK_MEMBRANE (visibility for future incidents)
+- [ ] House2 Linux gates need RustDesk provisioning (network path proven via blueGate)
 
-## 4. Sovereignty / Membranes
+### Peptidoglycan
 
-- [x] K-Derm three-layer model intact
+- [x] sporeGate is plasma membrane router — NAT/DHCP/DNS/nftables for house1
+- [x] **dnsmasq re-enabled** on sporeGate — sovereign DNS chain: dnsmasq → stubby → upstream
+- [x] 10G AOC backbone CRS310↔Omada proven and healthy
+- [x] Flat LAN 192.168.4.0/22 — both houses on same broadcast domain
+- [x] Anchor model defined: sporeGate (H1) + blueGate (H2)
+- [ ] DNS: verify dnsmasq on all Linux gates (sporeGate done, others PENDING)
+- [ ] northGate DNS delay diagnosis (likely dead dnsmasq)
+- [ ] Port→gate mapping incomplete (need physical audit)
+- [ ] WiFi bridge documentation (Flint H1 + Flint 2 configs)
+- [ ] Standardized gate provisioning script (DNS + RustDesk + health checks)
+
+### Inner Membrane
+
+- [x] 7-gate WireGuard mesh LIVE (golgi, sporeGate, eastGate, flockGate, ironGate, northGate, grapheneGate)
+- [x] Tower Atomic shadow active on 3 gates — 700+ samples
+- [x] LAN peering: Tower 353x LAN (0.45ms vs 158ms WG overlay)
+- [x] songBird universal-ipc: UDS/named pipes/abstract sockets/TCP
+- [x] BTSP defense-in-depth: 13/13 primals
+- [x] **biomeOS neuralAPI**: 26 signal graphs, 19 atomic translations, platform_native transport
+- [ ] Only 2 WG peers active in practice (enrollment pending for house2 gates)
+- [ ] Tower Atomic needs live validation on Windows gates before Nest Atomic starts
+
+## 5. Sovereignty / Trust
+
+- [x] K-Derm three-layer model intact (and now with peptidoglycan documented)
 - [x] Forgejo sovereign inner membrane operational (43/43 repos)
 - [x] Push mirrors relay to GitHub on commit
-- [x] gate.enroll: 7-phase, fully automated + Phase 7 mesh.enroll wired
 - [x] Sovereign outer membrane operational (Caddy TLS)
 - [x] S1-S4 sovereignty shadows ALL GRADUATED
 - [x] **DNSSEC 3/3 domains complete**
-- [x] Sovereignty Evolution Roadmap formalized
 - [x] RustDesk AGPL-3.0 compliant — learn-from-leverage posture
 - [x] Sovereign depot auto-build pipeline DELIVERED (4 phases)
 - [x] Crash-loop self-recovery LIVE — app breaker + systemd layers
 - [x] Tower Atomic EXCEEDS WG (353x LAN, 1.7x WAN)
-- [x] **6/6 exploration domains PROVEN LIVE**
-- [x] **Genetic enrollment** — two-layer trust
-- [x] **BTSP defense-in-depth** — `BEARDOG_UDS_REQUIRE_BTSP=1`
-- [x] **Depot provenance** — builder=sporeGate, staleness alarm, multi-target
-- [x] **Crypto delegation** — songBird → bearDog, chimera unblocked
-- [x] **BTSP 13/13**
-- [x] **Autonomous enrollment** — K-Derm inward escalation
-- [x] **FIDO2 enrollment attestation** + **beacon proximity proof**
-- [x] **golgiBody sole depot** — no local depots, all genomeBins served via Caddy TLS
-- [ ] **Phase 2: Tower cutover** — shadow active, chimera design drafted
-- [ ] **Phase 1: Zola → sporePrint primal pipeline** (crates.io a sub-goal of sovereignty)
-- [ ] **Phase 2: Forgejo → rootPulse** — via Nest Atomic
+- [x] 6/6 exploration domains PROVEN LIVE
+- [x] Genetic enrollment — two-layer trust
+- [x] BTSP defense-in-depth
+- [x] Depot provenance — builder=sporeGate, staleness alarm, multi-target
+- [x] Crypto delegation — songBird → bearDog, chimera unblocked
+- [x] golgiBody sole depot — no local depots, all genomeBins via Caddy TLS
+- [ ] Phase 2: Tower cutover — shadow active, chimera design drafted
+- [ ] Phase 1: Zola → sporePrint primal pipeline (crates.io a sub-goal)
+- [ ] Phase 2: Forgejo → rootPulse — via Nest Atomic (AFTER Tower stable)
 - [ ] `primal.eco` inner membrane separation (P2)
 
-## 5. Public Surface / Security
+## 6. Public Surface / Security
 
 - [x] 6/6 surfaces healthy (sporeprint, footprint, live, webb, lab, git)
 - [x] Security headers deployed (HSTS, CSP, X-Frame-Options)
 - [x] fail2ban + rate limiting active
 - [x] TLS auto-renewing (ACME)
-- [x] Tower pen test: 7 scenarios, all PASS, **0 remaining findings**
+- [x] Tower pen test: 7 scenarios, all PASS, 0 remaining findings
 - [x] sporePrint transplant DONE + credibility audit
 - [x] External claim convergence standard issued
 - [ ] sporePrint ongoing: 5 impulses for maturity badges
 
-## 6. Compositions / Products
+## 7. Compositions / Products
 
 - [x] footPrint LIVE — 478 TS test cases, FULL NUCLEUS composition
 - [x] esotericWebb LIVE — V22, 472 tests, scene binding fixed
 - [x] lithoSpore ALL CLEAR — 235 tests, pseudoSpore pipeline matured
 - [x] JupyterHub LIVE on ironGate — outer membrane interface
-- [x] pseudoSpore pipeline — 7 springs emitted
 - [x] petalTongue WASM WebGL pipeline shipped + v1.7.0 deployed
 - [x] Tower Atomic: 6/6 exploration domains PROVEN, chimera Phase 0 unblocked
 - [x] songBird crypto delegation 6/6 COMPLETE — composition model validated
-- [x] Composition profiles fixed: `compute` = Tower + node primals, `nest` = Tower + provenance trio
+- [x] Composition profiles fixed: `compute` = Tower + node, `nest` = Tower + provenance trio
 - [x] `tower-builder` profile created for distributed build mesh nodes
+- [x] **biomeOS neuralAPI**: Tower (8), Node (3), Nest (8) signal graphs with semantic dispatch
 - [ ] **Chimera Phase 0**: shared library extraction (`libtower.so`) — UNBLOCKED
 - [ ] sporePrint primal pipeline: replace Zola
 - [ ] 6 springs pending `validation.json`
 
-## 7. Documentation / Fossil Record
+## 8. genomeBin / Cross-Platform Deployment
 
-- [x] Blurb reflects current wave (155b) — genomeBin convergence posture
-- [x] Active handoffs: 3 (Track A evolution, Track B fleet, sporeGate build mesh)
+- [x] **5 Tier 1 genomeBin targets**: x86_64-linux-musl, aarch64-linux-musl, x86_64-windows-gnu, aarch64-android, armv7-linux-musl
+- [x] **8 Tier 3 PROVEN** exotic architectures
+- [x] songBird universal-ipc: UDS/named pipes/abstract sockets/XPC/TCP
+- [x] cellMembrane `Platform`: `TargetOs × CpuArch × LinkModel` with `detect()` at compile time
+- [x] cellMembrane `InitSystem` dispatch: systemd/launchd/windows-service/bare
+- [x] golgiBody sole depot — all genomeBins via `https://depot.primals.eco`
+- [x] `bind_mode` and `target` marked transitional in GateProfile
+- [x] PowerShell enrollment for Windows gates (`gate-enroll.ps1`)
+- [x] Self-registration — gates declare name + composition
+- [x] Pure Rust across all primals — zero C deps on critical path
+- [x] toadStool wgpu cross-platform GPU (DX12/Vulkan/Metal)
+- [x] biomeOS platform_native transport on all 26 signal graphs
+- [x] biomeOS cross-platform socket templates (named pipes + TCP fallback)
+- [ ] Windows genomeBins not yet in golgiBody depot (cross-compile needed)
+- [ ] macOS genomeBins — check-pass only, no linker for cross-build from Linux
+- [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
+- [ ] systemd abstraction for Windows Service / launchd paths (cellMembrane `InitSystem` foundation shipped)
+
+## 9. Documentation / Fossil Record
+
+- [x] Blurb reflects current wave (155d) — peptidoglycan recovery + acceleration
+- [x] **ECOSYSTEM_BLURB.md** is universal handoff — Tracks A+B converged
 - [x] Active impulses: 0
 - [x] wateringHole standards: 37 active in 4 directories
-- [x] **42+ docs fossilized** across `wave150x_*` and `wave151a_completion/`
+- [x] 42+ docs fossilized
 - [x] Team startup blurb template issued
-- [x] **whitePaper GEN_REVIEW_151c.md** — full generational arc assessment
-- [x] **gate-enroll.sh + gate-enroll.ps1** documented
-- [ ] GLOSSARY.md needs refresh (Wave 138b → 155b terms)
+- [x] whitePaper GEN_REVIEW_151c.md — full generational arc assessment
+- [x] gate-enroll.sh + gate-enroll.ps1 documented
+- [x] GLOSSARY.md refreshed (Wave 155b)
+- [x] **Peptidoglycan failure AAR** — full diagnostic, 7 skunkBat targets
+- [x] **Provenance Trio G3 convergence AAR** — 4 gaps, 8 action items, phased path
 - [ ] PRIMAL_REGISTRY.md needs refresh (Wave 109 → current 15-primal posture)
 - [ ] 18 standards with stale wave tags (headers need bump)
 
-## 8. genomeBin / Cross-Platform Deployment (NEW — extracted from Hardware + Ecological)
+## 10. Jelly Strings — Deployment Automation (NEW — extracted from sporeGate AAR)
 
-- [x] **5 Tier 1 genomeBin targets**: x86_64-linux-musl, aarch64-linux-musl, x86_64-windows-gnu, aarch64-android, armv7-linux-musl
-- [x] **8 Tier 3 PROVEN** exotic architectures (Wave 140a AAR — RISC-V, PPC64, s390x, SPARC64, i686, ARM32)
-- [x] **songBird universal-ipc**: UDS (Linux), named pipes (Windows), abstract sockets (Android), XPC (iOS), TCP (fallback)
-- [x] **cellMembrane `Platform`**: `TargetOs × CpuArch × LinkModel` decomposition with `detect()` at compile time
-- [x] **golgiBody sole depot** — all genomeBins served via `https://depot.primals.eco`
-- [x] **`bind_mode` and `target` marked transitional** in GateProfile — primals auto-detect
-- [x] **PowerShell enrollment** for Windows gates (`gate-enroll.ps1`)
-- [x] **Self-registration** — gates declare name + composition, no manifest pre-definition needed
-- [x] `deploy_gate.sh` supports `--build-authority` flag
-- [x] Pure Rust across all primals — zero C deps on critical path enables all targets
-- [ ] **Windows genomeBins** not yet in golgiBody depot — sporeGate needs to cross-compile
-- [ ] **macOS genomeBins** — check-pass only, no linker for cross-build from Linux
-- [ ] **`target` field removal** — primals auto-detect, depot negotiates by platform
-- [ ] **`bind_mode` field removal** — songBird universal-ipc auto-selects transport
-- [ ] **Nest Atomic cross-platform data** — NestGate CAS must be OS-agnostic (same as IPC)
-- [ ] **systemd abstraction** — cellMembrane `nucleus.rs` needs Windows Service / launchd / init paths
-- [ ] **WASM target** — check-pass, no deployed gate yet
+From sporeGate deployment AAR. These block "operator runs shell loops" →
+"gates self-heal via cascade":
 
-## 9. Campus / Physical Infrastructure
+- [x] **J3: Service restart** — songBird `deploy.hot_swap` SHIPPED (`d4bffbbd`)
+- [x] **J4: Caddy config** — songBird route self-config via `route.rs` SHIPPED (`d4bffbbd`)
+- [x] **J5: WG peer reg** — songBird WG peer management hardened SHIPPED (`d4bffbbd`)
+- [ ] **J1: Harvest is shell loops** — blocks distributed building (cellMembrane P0)
+- [ ] **J2: Depot push is rsync** — no integrity verify, no atomic swap (cellMembrane P1)
+- [ ] **J6: systemd overrides manual** — blocks cross-platform service config (cellMembrane P2)
+- [ ] **J7: Legacy service detection** — one-time, low recurrence (cellMembrane P3)
+
+Convergence path: J1 (Rust harvest) → J2 (Rust depot push) → self-healing cascade.
+
+## 11. Campus / Physical Infrastructure
 
 - [x] Lansing Scuffle vision documented (10 docs, 120K+ in whitePaper/lansingScuffle/)
 - [x] Property profile: 1305 S Cedar St, 464K SF, 8 MW, 600-ton HVAC
@@ -275,26 +322,26 @@ Publication strategy: whitePaper gen/ review COMPLETE, JOSS defined.
 
 Zero-operator postPrimordial enrollment fully shipped:
 
-- songBird `mesh.gate_enroll`: 6-phase pipeline (proof → IP → WG → Forgejo → seed → genetic)
+- songBird `mesh.gate_enroll`: 6-phase pipeline
 - bearDog FIDO2 enrollment attestation + beacon proximity proof
-- cellMembrane Phase 7: gate.enroll → mesh.enroll via HMAC proof
-- Dynamic IP pool allocation (.20-.254)
-- K-Derm inward escalation: extracellular → cytoplasm via physical proof
-- `gate-enroll.sh` (Linux) + `gate-enroll.ps1` (Windows) — self-enrollment clients
-- Trust tiers: FIDO2/SoloKey (kin) > beacon proximity (sibling) > token (extended)
+- cellMembrane Phase 7: gate.enroll → mesh.enroll
+- Dynamic IP pool, K-Derm inward escalation, trust tiers
+- `gate-enroll.sh` (Linux) + `gate-enroll.ps1` (Windows)
 - golgiBody drawbridge: Caddy TLS → `/enroll/*` → songBird
-- Self-registration: gates declare name + composition, no pre-definition needed
+- Self-registration: gates declare name + composition
 
 ---
 
-**Active**: 9 dimensions (1–9)
+**Active**: 11 dimensions (1–11)
 **Fossilized**: 10 dimensions (F1–F10)
-**Summary**: All fossilized GREEN. Active: 8 GREEN / 1 NEW (genomeBin — cross-platform deployment evolution).
-Glacial: gate enmeshment (Tower + Nest Atomic across Linux/Windows/Android).
+**Summary**: K-Derm three-layer model now has its own dimension (D4). Jelly strings
+extracted as D10. Peptidoglycan hardening underway. Tower Atomic hardening is the
+frontloaded priority — Nest Atomic work begins after Tower is stable on existing
+gates. songBird closed J3+J4+J5 in a single commit.
 
 ---
 
-*Last used*: Wave 155b (Jul 27, 2026)
+*Last used*: Wave 155d (Jul 28, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155b (F10 — Autonomous Gate Enrollment)
