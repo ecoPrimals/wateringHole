@@ -12,21 +12,35 @@ the gate through four phases: connectivity → sync → enrollment → code team
 
 ---
 
-## PHASE 0: CONNECTIVITY — Forgejo SSH Setup
+## PHASE 0: CONNECTIVITY — Forgejo Access
 
-Forgejo (`git.primals.eco`) runs on golgiBody, a **public VPS**. Port 2222 is
-open to the internet. You do NOT need WireGuard to pull repos. WireGuard is
-only needed later for inner membrane primal IPC.
+Forgejo (`git.primals.eco`) runs on golgiBody, a **public VPS**. You do NOT
+need WireGuard to access it. WireGuard is only needed later for inner membrane
+primal IPC. There are two access methods:
 
-### Step 0a: Add Forgejo Host Key
+### Option A: HTTPS (zero-config, read-only — start here)
+
+All ecoPrimals repos are public. HTTPS clone/pull works immediately with
+**no SSH key, no config, no registration**:
+
+```bash
+git clone https://git.primals.eco/ecoPrimals/bearDog.git primals/bearDog
+```
+
+Use this for initial sync if SSH isn't set up yet. You can repoint to SSH later
+when you need push access (only needed for wateringHole handoffs per convergence rule).
+
+### Option B: SSH (read + write — set up when needed)
+
+SSH gives push access for filing handoffs. Port 2222 is open to the internet.
+
+**Step 0b-1: Add host key**
 
 ```bash
 ssh-keyscan -p 2222 git.primals.eco >> ~/.ssh/known_hosts 2>/dev/null
 ```
 
-### Step 0b: SSH Config
-
-Add to `~/.ssh/config` (create if missing):
+**Step 0b-2: SSH config** — add to `~/.ssh/config` (create if missing):
 
 ```
 Host forgejo git.primals.eco
@@ -45,7 +59,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519_ecoPrimal -C "$(hostname)@primals.eco
 Then register the public key in Forgejo: `https://git.primals.eco` → Settings →
 SSH/GPG Keys → Add Key. Or ask eastGate overwatch to register it as a deploy key.
 
-### Step 0c: Verify
+**Step 0b-3: Verify**
 
 ```bash
 ssh -T git@git.primals.eco
@@ -53,7 +67,8 @@ ssh -T git@git.primals.eco
 ```
 
 If this fails with "Permission denied", your SSH key isn't registered in Forgejo.
-Ask eastGate overwatch to add it, or register at `https://git.primals.eco`.
+Use HTTPS (Option A) for now — you can pull everything read-only and set up SSH
+later when you need push access.
 
 ---
 
@@ -157,18 +172,26 @@ Older gate checkouts may have lowercase directory names. Fix them first:
 ```bash
 cd ~/Development/ecoPrimals
 
+# Remove symlinks that point at wrong-case targets (e.g. toadStool → toadstool)
+# Must happen BEFORE renames to avoid breaking the symlink target
+for d in primals/* gardens/* springs/* infra/*; do
+  [ -L "$d" ] && echo "REMOVING SYMLINK: $d → $(readlink $d)" && rm "$d"
+done
+
 # Fix case-mismatched primal directories (if they exist)
 [ -d primals/beardog ] && [ ! -d primals/bearDog ] && mv primals/beardog primals/bearDog
 [ -d primals/nestgate ] && [ ! -d primals/nestGate ] && mv primals/nestgate primals/nestGate
 [ -d primals/songbird ] && [ ! -d primals/songBird ] && mv primals/songbird primals/songBird
+[ -d primals/toadstool ] && [ ! -d primals/toadStool ] && mv primals/toadstool primals/toadStool
 
-# Remove known duplicates (if they exist)
+# Remove known duplicates (lowercase when camelCase already exists)
 [ -d primals/toadstool ] && [ -d primals/toadStool ] && rm -rf primals/toadstool
 [ -d springs/barraCuda ] && rm -rf springs/barraCuda
 
 # Fix branch names (master → main)
 for d in primals/* gardens/* springs/* infra/*; do
-  (cd "$d" 2>/dev/null && branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+  [ -d "$d/.git" ] || continue
+  (cd "$d" && branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
    [ "$branch" = "master" ] && git branch -m master main 2>/dev/null && echo "$(basename $d): master → main")
 done
 ```
@@ -188,24 +211,41 @@ need the same treatment. The script below handles this automatically:
 ```bash
 cd ~/Development/ecoPrimals
 
+# Detect SSH availability (set once, used by all functions)
+if ssh -T git@git.primals.eco 2>&1 | grep -q "successfully authenticated"; then
+  FORGEJO_PROTO="ssh"
+  echo "SSH authenticated — using SSH URLs"
+else
+  FORGEJO_PROTO="https"
+  echo "SSH not available — using HTTPS (read-only, push needs SSH later)"
+fi
+
+forgejo_url() {
+  local org="$1" name="$2"
+  if [ "$FORGEJO_PROTO" = "ssh" ]; then
+    echo "ssh://git@git.primals.eco:2222/${org}/${name}.git"
+  else
+    echo "https://git.primals.eco/${org}/${name}.git"
+  fi
+}
+
 repoint_or_reclone() {
   local dir="$1" org="$2" name=$(basename "$1")
   if [ ! -d "$dir/.git" ]; then return; fi
   local current=$(cd "$dir" && git remote get-url origin 2>/dev/null)
-  local target="ssh://git@git.primals.eco:2222/${org}/${name}.git"
+  local target=$(forgejo_url "$org" "$name")
   if [ "$current" = "$target" ]; then return; fi
 
   # Repoint
   (cd "$dir" && git remote set-url origin "$target")
-  echo "REPOINTED: $name → $org"
+  echo "REPOINTED: $name → $org ($FORGEJO_PROTO)"
 
   # Test if histories are compatible
   if ! (cd "$dir" && git fetch origin 2>/dev/null && git merge-base --is-ancestor HEAD origin/main 2>/dev/null); then
     echo "  SHALLOW ROOTS: $name — histories incompatible, fresh cloning..."
-    local stash=""
     local dirty=$(cd "$dir" && git status --porcelain 2>/dev/null | wc -l)
     if [ "$dirty" -gt 0 ]; then
-      stash="${dir}.stash-$(date +%s)"
+      local stash="${dir}.stash-$(date +%s)"
       echo "  STASHING dirty files → $stash"
       mkdir -p "$stash"
       (cd "$dir" && git diff > "$stash/tracked.patch" 2>/dev/null)
@@ -215,7 +255,7 @@ repoint_or_reclone() {
     fi
     rm -rf "$dir"
     git clone "$target" "$dir"
-    echo "  RECLONED: $name from Forgejo"
+    echo "  RECLONED: $name from Forgejo ($FORGEJO_PROTO)"
   fi
 }
 
@@ -248,7 +288,7 @@ clone_if_missing() {
   local dir="$1" org="$2" name="$3"
   if [ ! -d "$dir" ]; then
     echo "CLONING: $name → $dir"
-    git clone "ssh://git@git.primals.eco:2222/${org}/${name}.git" "$dir"
+    git clone "$(forgejo_url "$org" "$name")" "$dir"
   fi
 }
 
@@ -606,8 +646,10 @@ You only need inner membrane for primal-to-primal IPC and mesh enrollment.
 ## Appendix: Answers to Common Gate Questions
 
 **Q: Do I need WireGuard to pull repos?**
-No. Forgejo is on a public VPS. SSH to `git.primals.eco:2222` works from anywhere.
-WireGuard is only for inner membrane (primal IPC, `10.13.37.x` overlay).
+No. Forgejo is on a public VPS. HTTPS works with zero config:
+`git clone https://git.primals.eco/ecoPrimals/bearDog.git`. SSH (port 2222)
+works too once your key is registered. WireGuard is only for inner membrane
+(primal IPC, `10.13.37.x` overlay).
 
 **Q: My repos point at GitHub (`github-ecoPrimal`). What do I do?**
 Run Step 1b above. All canonical remotes are now on Forgejo. GitHub mirrors
