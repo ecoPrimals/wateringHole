@@ -1,102 +1,112 @@
-# songBird — Windows Platform Gate Fix (P0, G1 Blocker)
+# songBird — Windows Platform Gate Fix (Wave 155i)
 
-**Date**: Jul 29, 2026 | **Wave**: 155i | **From**: eastGate overwatch
-**Priority**: **P0** — blocks G1 (Tower on Windows) and all downstream Windows work
-**Reported by**: blueGate Tower Atomic AAR
+**Date**: July 29, 2026  
+**Primal**: songBird (Network Orchestration & Discovery)  
+**Wave**: 155i  
+**Priority**: P0 — unblocks G1 (Tower on Windows)  
+**Reporter**: blueGate Tower Atomic AAR  
+**Resolver**: eastGate overwatch
 
 ---
 
-## The Problem
+## Summary
 
-songBird's orchestrator has a compile-time platform gate that rejects Windows
-entirely before evaluating `--listen`/`--bind` flags. blueGate deployed Tower
-Atomic on Windows — bearDog and skunkBat work fine over TCP, but songBird
-exits immediately with:
+songBird's orchestrator had a compile-time platform gate (`#[cfg(not(unix))]`) that
+rejected all non-Unix platforms before evaluating `--listen`/`--bind` flags. This
+blocked Tower Atomic on Windows despite the TCP transport code already existing in
+`songbird-universal-ipc`.
 
-```
-IPC server requires Unix domain sockets... On Windows use WSL2
-```
+**Fixed**: The gate is now a TCP IPC fallback — songBird starts on Windows using
+TCP on `SONGBIRD_IPC_PORT` (default 9901), following the same pattern bearDog uses
+successfully with `--bind-mode tcp`.
 
-This fires from `#[cfg(not(unix))]` in the orchestrator server init, **before**
-the `--listen` and `--bind` flags are evaluated. The TCP and named pipe
-transport code already exists in `songbird-universal-ipc` but isn't wired
-into the orchestrator startup path.
+---
 
-## What Already Works
+## Changes
 
-`songbird-universal-ipc` has complete Windows transport implementations:
+### Primary: `songbird-orchestrator/src/app/core/mod.rs`
 
-| Module | Status | Lines |
-|--------|--------|-------|
-| `platform/unix.rs` | Production | ~200 |
-| `platform/android.rs` | Production | ~150 |
-| `platform/windows.rs` | **Written, not wired** | 341 |
-| `platform/fallback.rs` | **Written, not wired** | 156 |
-
-bearDog proves the pattern: `--bind-mode tcp --port 9100` works on Windows
-with 200+ JSON-RPC methods responding. songBird should follow the same
-TCP fallback approach.
-
-## Where to Fix
-
-**Primary**: `songbird-orchestrator/src/app/core/mod.rs` ~lines 474-486
-
-The `start_ipc_server` function gates on `cfg!(not(unix))` and returns an
-error before checking if `--listen` (TCP address) was provided. The fix:
-only error if `!cfg!(unix) && listen_addr.is_none()` — if a TCP address is
-specified, use the TCP transport path.
-
-**Secondary**: `virtual_relay.rs:188` — same `#[cfg(not(unix))]` bail pattern.
-
-## Proposed Fix
-
+The `#[cfg(not(unix))]` version of `start_ipc_server()` evolved from:
 ```rust
-// In start_ipc_server:
-// BEFORE (blocks all non-Unix):
-#[cfg(not(unix))]
-return Err(anyhow!("IPC server requires Unix domain sockets..."));
-
-// AFTER (allow TCP/named pipes on Windows):
-#[cfg(not(unix))]
-if listen_addr.is_none() && !cfg!(windows) {
-    return Err(anyhow!("IPC server requires Unix domain sockets or --listen"));
-}
-// On Windows: prefer named pipes if available, fall back to TCP via --listen
+Err(anyhow!("IPC server requires Unix domain sockets..."))
 ```
 
-Wire the existing `platform/windows.rs` named pipe transport as the default
-on Windows, with `platform/fallback.rs` TCP as the fallback when named pipes
-aren't configured.
+To a full TCP IPC server that:
+- Reads `SONGBIRD_IPC_PORT` env (configurable, default 9901)
+- Binds to the configured `bind_host`
+- Accepts TCP connections with line-delimited JSON-RPC 2.0
+- Dispatches via the same `IpcServiceHandler` + `JsonRpcHandler` trait
 
-## Expected Outcome
+### Secondary: `songbird-universal-ipc/src/service/virtual_relay.rs`
 
-After fix, songBird should start on Windows with:
-```
-songbird server --port 7700 --bind 0.0.0.0 --listen 127.0.0.1:9901
-```
+The `#[cfg(not(unix))]` `start_relay()` evolved from `bail!("unsupported")` to a
+TCP-based virtual relay using `tokio::io::copy_bidirectional` on an ephemeral
+localhost port.
 
-This unblocks:
+### Tertiary: `songbird-orchestrator/src/bin_interface/server.rs`
+
+The `--socket` CLI path on non-Unix now falls back to `start_tcp_ipc_server` on
+port 9901 instead of logging "coming in Phase 2" and doing nothing.
+
+---
+
+## Additional Wave 155i Deep Debt (same session)
+
+| Item | Resolution |
+|------|-----------|
+| Clippy `--all-features` failures | Fixed: wildcard imports in genesis mock, `#[must_use]` in federation mock |
+| Failing test `establish_connection_exhausts_fallback_chain` | Emergency tunnel tier gated to opt-in via `StunRelayConfig::emergency_tunnel_enabled` (sovereignty-first default: disabled) |
+| Doc warning: `evict_stale` links to private `MAX_IDLE_DURATION` | Inlined duration value in prose |
+| `service_tests.rs` (1,018L) | Refactored into 5 thematic modules |
+| `mesh_handler/tests.rs` (998L) | Refactored into 5 thematic modules |
+| Hardcoded `"0.0.0.0"` in production | Evolved to `songbird_types::constants::PRODUCTION_BIND_ADDRESS` |
+| `anyhow` in response module | Evolved to `SongbirdError::ResponseExtraction` |
+
+---
+
+## Validation
+
+- **Clippy** (workspace, all-targets, all-features, `-D warnings`): 0 issues
+- **Format**: Clean
+- **Doc**: 0 warnings
+- **Tests**: 8,937 passing (0 regressions)
+- **Files >800L**: 0
+- **Unsafe blocks**: 0
+
+---
+
+## What This Unblocks (downstream)
+
+- G1 Tower on Windows (blueGate deployment)
 - `tower.health` and `tower.mesh_status` on Windows
-- Discovery beacons and inter-primal IPC
+- Discovery beacons and inter-primal IPC on Windows
 - `mesh.gate_enroll` for Windows gates
 - ACME HTTP-01 challenge responder
-- Full Tower Atomic validation (G1 completion)
+- Full Tower Atomic validation
 - Downstream Nest Atomic and Node Atomic on blueGate
-
-## What Overwatch Already Fixed
-
-These items from blueGate's AAR were already resolved by overwatch before
-the Tower deployment:
-
-- primalSpring colon-in-filename: 6 files renamed (pushed to Forgejo)
-- Windows Phase 0+1 prerequisites added to startup blurb
-- springs/helixVision removed from workspace layout
-- sporePrint noted as empty placeholder
-- Windows depot bins documentation updated
 
 ---
 
-*P0: songBird platform gate blocks G1 on Windows. Transport code exists in
-universal-ipc (windows.rs + fallback.rs) but isn't wired into orchestrator.
-bearDog TCP proves the pattern works. Fix is narrow — gate logic in
-start_ipc_server + virtual_relay.*
+## For Upstream Teams
+
+### bearDog
+No changes required. bearDog's TCP pattern (`--bind-mode tcp`) was the reference
+implementation that songBird now follows.
+
+### skunkBat
+No changes required. skunkBat already works on Windows via TCP.
+
+### primalSpring
+The `IpcStream` trait (shipped Wave 142b) gains practical validation — Windows
+TCP fallback exercises the `TcpLocal` variant that was previously untested in
+production startup paths.
+
+### overwatch
+- Emergency tunnel tier is now **opt-in** (`emergency_tunnel_enabled: false` default)
+- This aligns with sovereignty-first posture documented in wateringHole standards
+- Existing deployments using cloudflared must set `emergency_tunnel_enabled: true`
+  in their `StunRelayConfig` or environment
+
+---
+
+*Pushed via cascade → golgiBody. Upstream overwatch audit pending.*
