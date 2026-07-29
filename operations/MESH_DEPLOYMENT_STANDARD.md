@@ -1,6 +1,6 @@
 # Mesh Deployment Standard — Team & Gate Handoff
 
-**Authority**: wateringHole consensus (Wave 66)
+**Authority**: wateringHole consensus (Wave 66, reviewed 155h)
 **Version**: 1.0.0
 **Applies to**: All gates, all teams, VPS nodes, new gate onboarding
 

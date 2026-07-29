@@ -1,8 +1,8 @@
 # Composition Routing Standard
 
 **Authority**: Overwatch + Ecosystem Convention
-**Status**: Active (Wave 138a)
-**Date**: 2026-07-14
+**Status**: Active (Wave 155h — reviewed, content current)
+**Date**: 2026-07-29
 **Prerequisites**: `../operations/GATEHOUSE_DARKFOREST_STANDARD.md`, `../foundations/DIDERM_DOMAIN_ARCHITECTURE.md`
 
 ---

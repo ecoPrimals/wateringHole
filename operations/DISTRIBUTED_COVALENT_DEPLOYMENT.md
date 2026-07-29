@@ -2,7 +2,7 @@
 
 **Status**: Architecture + implementation guide  
 **Scope**: Multi-household compute via covalent-bonded gates  
-**Last updated**: 2026-06-13 (Wave 111: **5-gate mesh LIVE** — eastGate↔golgiBody↔ironGate+southGate+grapheneGate. ironGate NUCLEUS deployed (13/13 systemd). Federation VALIDATED (64ms RTT, triad deployed, auto-reconnect). Gate expansion continuing: westGate, NUCs, canary pending.)
+**Last updated**: 2026-06-13 (Wave 111, reviewed 155h: **9-gate mesh LIVE** — westGate + strandGate Tower LIVE. Architecture still current. Gate fleet expanded.)
 
 ---
 

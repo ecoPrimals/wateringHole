@@ -31,7 +31,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **11 new handoff docs** delivered this wave (code team audits + execution + AARs)
 - [ ] waterFall graph partially wired — full composition pending Provenance Trio
 - [ ] Context braids not yet replacing blurb paste — graduation path documented
-- [ ] `freshness.toml` stale at Wave 137 — needs cascade publish to 155h
+- [x] `freshness.toml` updated to Wave 155h with 38 HEAD SHAs
 - [ ] 3 enrolling gates have no published heads in `heads/*.toml`
 
 ## 2. Ecological (Primal Health)
@@ -259,8 +259,9 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] GLOSSARY.md refreshed (Wave 155b)
 - [x] **Peptidoglycan failure AAR** — full diagnostic, 7 skunkBat targets
 - [x] **Provenance Trio G3 convergence AAR** — 4 gaps, 8 action items, phased path
-- [ ] PRIMAL_REGISTRY.md needs refresh (Wave 109 → current 15-primal posture)
-- [ ] 18 standards with stale wave tags (headers need bump)
+- [x] PRIMAL_REGISTRY.md refreshed — merge conflicts resolved, Wave 155h posture
+- [x] 12 standards wave tags reviewed and bumped (Wave 63–139 → reviewed 155h)
+- [ ] coralForge repo does not exist on Forgejo — needs creation or retirement decision
 
 ## 10. Jelly Strings — Deployment Automation (NEW — extracted from sporeGate AAR)
 

@@ -1,6 +1,6 @@
 # DISCOVERED_BY Standard — Passive Discovery Audit
 
-**Date**: 2026-07-14 (Wave 139a)
+**Date**: 2026-07-14 (Wave 139a, reviewed 155h)
 **Status**: Active standard
 **Owner**: sporePrint team + overwatch
 **Supersedes**: SHOW_HN_PUBLICATION.md as engagement strategy (that doc's rigor checklist is retained as internal quality bar only)

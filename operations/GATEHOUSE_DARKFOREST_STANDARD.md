@@ -1,6 +1,6 @@
 # Gatehouse / Darkforest — Sovereign Network Demarcation Standard
 
-**Wave**: 132g | **Authority**: eastGate overwatch
+**Wave**: 132g (reviewed 155h) | **Authority**: eastGate overwatch
 
 ---
 

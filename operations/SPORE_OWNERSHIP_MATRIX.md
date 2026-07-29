@@ -1,6 +1,6 @@
 # Spore Ownership Matrix
 
-**Authority**: eastGate overwatch | **Wave**: 137b | **Last updated**: Jul 13, 2026
+**Authority**: eastGate overwatch | **Wave**: 137b (reviewed 155h) | **Last updated**: Jul 13, 2026
 
 ---
 

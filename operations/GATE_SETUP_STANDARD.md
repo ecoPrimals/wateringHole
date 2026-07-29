@@ -1,6 +1,6 @@
 # Gate Setup, Sync, and Resync Standard
 
-**Authority**: wateringHole consensus (Wave 63)
+**Authority**: wateringHole consensus (Wave 63, reviewed 155h — superseded by TEAM_STARTUP_BLURB_TEMPLATE for new gates)
 **Applies to**: Physical gates (LAN/WAN), VPS proto-fieldMouse deployments
 **Prerequisites**: ecosystem_manifest.toml, K_DERM_TOPOLOGY_STANDARD.md
 

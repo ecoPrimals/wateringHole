@@ -1,6 +1,6 @@
 # grapheneGate Bootstrap Standard — Physical Dark Forest Protocol
 
-**Status**: LIVE (Wave 132h — Tower deployed, nucleus_launcher cross-compiled, ADB tether operational)
+**Status**: LIVE (Wave 132h, reviewed 155h — Tower deployed, nucleus_launcher cross-compiled, ADB tether operational)
 **Owner**: eastGate (overwatch)
 **Hardware**: Pixel 8a, Google Tensor G3, 8GB RAM, GrapheneOS
 **Gate class**: `portable_anchor`
