@@ -31,6 +31,8 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 | **westGate** | petalTongue, squirrel, nestGate, Provenance Trio | **NEST ATOMIC LIVE. 8 services, 3,119 CAS objects, ZFS 25.4TB.** |
 | **strandGate** | toadStool, barraCuda, coralReef | **Tower+Compute LIVE. RTX 3090 profiled. 5 primals, 17 sockets.** |
 | **sporeGate** | golgiBody depot, cellMembrane ops | **Depot refreshed. 9/11 health. 19 binaries current.** |
+| **blueGate** | **NEXT TARGET** — Windows. Full atomic stack proof. | **Tower → Nest → Node Atomic. Sub-builder. Inner membrane topo owner H2.** |
+| **northGate** | AlphaFold data (~1TB). Daily driver — DO NOT RISK. | Windows. Data source only. |
 
 **Sequencing**:
 1. **DONE**: westGate Tower Atomic + code team audits + execution
@@ -46,11 +48,15 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 11. **DONE**: sporeGate depot refresh — 19 binaries, BLAKE3 verified, health 5/11→9/11
 12. **DONE**: biomeOS BTSP session propagation in signal graph executor — SHIPPED (v4.45, `48cf9c33`)
 13. **DONE**: biomeOS riboCipher transport fix in CLI paths — SHIPPED (v4.45, `48cf9c33`)
-14. **NOW**: E2E `nest.ingest_dataset` live validation on westGate (UNBLOCKED)
-15. **NOW**: bearDog `crypto.sign_ed25519` implementation (blocks Provenance 7/7)
-16. **NOW**: sweetGrass depot binary refresh (v0.7.64→v0.8.0 for westGate live)
-17. **NOW**: biomeOS depot binary update on sporeGate (v4.45 composition broker)
-18. **NEXT**: AlphaFold bulk ingestion (~1TB) through Nest Atomic pipeline
+14. **NOW**: blueGate Tower Atomic deployment (Windows — G1 proof, inner membrane topo owner H2)
+15. **NOW**: blueGate sub-builder enrollment under sporeGate (accelerate depot binary production)
+16. **NOW**: bearDog `crypto.sign_ed25519` implementation (blocks Provenance 7/7)
+17. **NOW**: sweetGrass + biomeOS depot binary refresh on sporeGate
+18. **NEXT**: blueGate Nest Atomic (after Tower stable — biomeOS full composition broker role)
+19. **NEXT**: blueGate Node Atomic (after Nest stable)
+20. **NEXT**: swiftGate Tower Atomic deployment (Windows, second Windows proof)
+21. **NEXT**: AlphaFold bulk ingestion (~1TB) from northGate through Nest Atomic pipeline
+22. **NOTE**: northGate is daily driver — data source ONLY, do not deploy or risk breaking
 
 | Metric | Value |
 |--------|-------|
@@ -90,11 +96,12 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 | # | Goal | Status | Gate |
 |---|------|--------|------|
-| G1 | Tower on Windows | **FRONTLOADED** | OPEN |
-| G7 | Gate enmeshment | **ADVANCING** | westGate+strandGate Tower LIVE |
+| G1 | Tower on Windows | **ACTIVE — blueGate target** | blueGate first, swiftGate second |
+| G7 | Gate enmeshment | **ADVANCING** | westGate+strandGate LIVE. blueGate next (inner membrane topo owner H2) |
 | G6 | bearDog public | READY | OPEN — songBird ACME Phase 1 unblocks TLS |
-| G3 | Nest Atomic Phase 0 | **LIVE ON WESTGATE** | Provenance Trio CLOSED, ZFS online, 8 services, 1,704 capabilities. BTSP broker needed. |
-| G4 | Nest cross-platform | IN PROGRESS | AFTER TOWER |
+| G3 | Nest Atomic Phase 0 | **LIVE ON WESTGATE** | Provenance Trio 6/7, ZFS online, BTSP broker shipped. blueGate Nest Atomic is NEXT. |
+| G4 | Nest cross-platform | **ACTIVE** | blueGate (Windows) Nest Atomic after Tower stable — biomeOS full broker role |
+| G10 | Sub-builder mesh | **NEW** | blueGate as sub-builder under sporeGate — accelerate depot binary production |
 | G5 | Chimera Phase 0 | PENDING | AFTER G1 |
 | G2 | Tower on Android | PENDING | AFTER G1 |
 | G8 | Plasmodium | PENDING | AFTER G7 |
@@ -123,19 +130,19 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 | Gate | Status | NOW | NEXT |
 |------|--------|-----|------|
-| **sporeGate** | **9/11 HEALTHY** | Depot refresh DONE. Resolve remaining 2 degraded (mesh.reachability, rootpulse.ledger). | Continuous depot freshness |
-| **eastGate** | ONLINE | biomeOS composition broker SHIPPED (v4.45). Overwatch cascade. | E2E `nest.ingest_dataset` live fire on westGate |
-| **northGate** | ONLINE (Windows) | Tower assessment for AlphaFold federation | Stage ~1TB AlphaFold → westGate |
+| **sporeGate** | **9/11 HEALTHY** | Depot refresh DONE. Resolve remaining 2 degraded. Prepare blueGate sub-builder enrollment. | blueGate builder integration. biomeOS+sweetGrass depot rebuild. |
+| **eastGate** | ONLINE | biomeOS composition broker SHIPPED (v4.45). Overwatch cascade. | Coordinate blueGate Tower deployment |
+| **northGate** | ONLINE (Windows) | **DAILY DRIVER — DO NOT DEPLOY.** AlphaFold data source (~1TB). | Data staging to westGate/blueGate once Nest Atomic validated on target |
 
 ### House 2 (peptidoglycan anchor: blueGate)
 
 | Gate | Status | NOW | NEXT |
 |------|--------|-----|------|
+| **blueGate** | **NEXT TARGET** (Windows) | **Tower Atomic deployment. Inner membrane topo owner H2. Sub-builder enrollment under sporeGate.** | Nest Atomic (biomeOS full broker). Then Node Atomic. Full atomic stack proof on Windows. |
 | **strandGate** | **TOWER+COMPUTE LIVE** | Glibc depot received. Compute Trio validated. | Node Atomic profiling. Full BTSP validation. |
-| **westGate** | **NEST ATOMIC LIVE** | CAS on ZFS verified. biomeOS broker ready. | E2E `nest.ingest_dataset` live → AlphaFold ingestion (~11hr dsync, NVMe staging recommended) |
-| **blueGate** | ONLINE (Windows) | Peptidoglycan anchor H2 | G1 Tower on Windows proof |
+| **westGate** | **NEST ATOMIC LIVE** | CAS on ZFS verified. biomeOS broker ready. | E2E `nest.ingest_dataset` live. AlphaFold ingestion (~11hr dsync, NVMe staging recommended). |
+| **swiftGate** | ONLINE (Windows) | — | G1 Tower on Windows (second Windows proof after blueGate) |
 | **ironGate** | ONLINE | HDD enclave experiment | Nest Atomic secondary target |
-| **swiftGate** | ONLINE (Windows) | — | G1 Tower on Windows |
 | **southGate** | HW READY | — | Enroll → Tower |
 
 ---
@@ -196,9 +203,9 @@ NUCLEUS_ARCHITECTURE.md, CONTEXT.md, llms.txt, products/_index.md, architecture/
 ---
 
 *Wave 155i — Composition Broker + Deep Debt Wave. ZERO P0s. biomeOS v4.45 shipped
-composition broker (riboCipher framing + BTSP session propagation, 35 E2E tests).
-8 primals deep debt sweeps. CAS on ZFS verified (3,119 objects). RTX 3090 GPU
-profiled (FP64 ~104T). sporeGate depot refreshed (19 binaries, health 5/11→9/11).
-E2E signal graphs UNBLOCKED. AlphaFold ~1TB ingestion pipeline READY. 27 signal
-graphs. ~63K+ primal tests (biomeOS 8.6K, nestGate 13K+, barraCuda 5K, coralReef
-3.5K, sweetGrass 1.6K, cellMembrane 1.2K, toadStool 9.2K+). Next: live fire.*
+composition broker. 8 primals deep debt sweeps. CAS on ZFS verified (3,119 objects).
+RTX 3090 profiled (FP64 ~104T). sporeGate depot refreshed (19 binaries). E2E signal
+graphs UNBLOCKED. NEXT: blueGate (Windows) — Tower → Nest → Node Atomic, inner
+membrane topo owner H2, sub-builder under sporeGate. First full atomic stack proof
+on Windows with biomeOS in full composition broker role. northGate is daily driver —
+AlphaFold data source only, do not deploy. swiftGate follows blueGate. ~63K+ tests.*

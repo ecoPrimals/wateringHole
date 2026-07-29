@@ -102,12 +102,12 @@ appears. This keeps the active review focused on evolving concerns.
 | eastGate | ONLINE | Linux | 10.13.37.5 | full | Code hub, overwatch |
 | ironGate | ONLINE | Linux | 10.13.37.7 | full | GPU compute, 4x HDD enclave, JupyterHub |
 | flockGate | ONLINE | Linux | 10.13.37.6 | full | Nest Atomic validation (after Tower stable) |
-| northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090, G1 validation target |
+| northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090. **DAILY DRIVER — DO NOT DEPLOY.** AlphaFold data source (~1TB). |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
 | strandGate | **TOWER+COMPUTE LIVE** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, FP64 ~104T, 5 primals, 17 sockets, glibc trio shipped |
 | westGate | **NEST ATOMIC LIVE** | Linux | 10.13.37.11 | nest (8) | AMD Ryzen 7 5700X, 64GB, 2TB NVMe, ZFS 25.4TB, 3,119 CAS objects, Provenance 6/7 |
-| blueGate | HW READY | Windows | enrolling | tower (3) | Distributed builder, **peptidoglycan anchor H2** |
-| swiftGate | HW READY | Windows | enrolling | full (13) | Hobby/consumer, house2 |
+| blueGate | **NEXT TARGET** | Windows | enrolling | **full — Tower→Nest→Node** | **Inner membrane topo owner H2, sub-builder under sporeGate, first full Windows atomic proof** |
+| swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
 
 ## 4. K-Derm Layers — Connectivity Fabric (NEW — extracted from incidents + sovereignty)
