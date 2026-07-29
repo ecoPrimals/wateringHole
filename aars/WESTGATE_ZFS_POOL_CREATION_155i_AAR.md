@@ -114,15 +114,62 @@ standing up Nest Atomic on gates with existing infrastructure.
 
 ---
 
+## Update: Reboot + SSD Added (Jul 29 08:25 EDT)
+
+Gate rebooted. Tower Atomic survived reboot — all 3 systemd user units came
+back active (linger working as intended). ZFS pool required re-import.
+
+### ZFS Auto-Import Enabled
+
+Enabled `zfs-import-cache`, `zfs-mount`, and `zfs.target` systemd services.
+Pool will auto-import on future reboots.
+
+### SSD Added — TIER 3 Operational (Crucial BX500 2TB SATA)
+
+A **Crucial BX500 2TB SATA SSD** was plugged in (`/dev/sdf`). Old OS partitions
+wiped. Added to the `nestgate` pool as **L2ARC read cache** — ZFS will
+automatically cache hot CAS reads on the SSD, accelerating repeat access to
+frequently-queried objects without any application changes.
+
+```
+nestgate (ONLINE, 25.4TB + 1.82TB L2ARC)
+├── mirror-0 (sdd + sdb)            ← 12.7TB data
+├── mirror-1 (sda + sdc)            ← 12.7TB data
+├── cache
+│   └── ata-CT2000BX500SSD1_2452E99C5541  ← 1.82TB L2ARC read cache (TIER 3)
+└── spare
+    └── ata-OOS14000G_0007LBE0      ← hot spare
+```
+
+| Device | Model | Serial | Size | Role |
+|--------|-------|--------|------|------|
+| sdf | Crucial BX500 SSD | 2452E99C5541 | 2TB | L2ARC read cache |
+
+### Updated Tiering Profile (all tiers operational)
+
+```
+TIER 0 — AMD Ryzen 7 5700X L3 (32MB)     ← AVAILABLE
+TIER 1 — 64GB DDR4 RAM (ARC)              ← AVAILABLE (ZFS ARC uses RAM automatically)
+TIER 2 — Samsung 970 EVO Plus 2TB NVMe    ← AVAILABLE (root FS, 1.1TB free)
+TIER 3 — Crucial BX500 2TB SATA SSD       ← ONLINE (L2ARC read cache)
+TIER 4 — ZFS mirror pool, 25.4TB usable   ← ONLINE (2 mirror vdevs + spare)
+```
+
+**All 5 tiers are now operational.** The ZFS ARC (RAM) + L2ARC (SSD) + mirror
+vdevs (HDD) form a complete caching hierarchy that maps directly to Nest
+Atomic's storage tiering model.
+
+---
+
 ## Next Steps
 
 1. **Configure nestGate primal** to use `/mnt/nestgate/cold/zfs/cas/` as CAS root
 2. **E2E Nest Atomic validation** — small PDB ingestion test through the pipeline
-3. **NVMe cache tier** — configure `nestgate/cache` or tmpfs for TIER 1/2 hot path
-4. **AlphaFold bulk ingestion** (~1TB) from northGate through full pipeline
+3. **AlphaFold bulk ingestion** (~1TB) from northGate through full pipeline
 
 ---
 
-*westGate Wave 155i: ZFS pool ONLINE. 25.4TB usable (2 mirror vdevs + hot spare).
-CAS dataset layout created. TIER 4 operational. P1 #5 resolved. Tower still
-healthy. Ready for nestGate CAS configuration and E2E Nest Atomic validation.*
+*westGate Wave 155i: ZFS pool ONLINE. 25.4TB usable + 2TB SSD L2ARC cache.
+All 5 storage tiers operational (cache→RAM→NVMe→SSD→HDD). ZFS auto-import
+enabled. Tower survived reboot. P1 #5 resolved. Ready for nestGate CAS
+configuration and E2E Nest Atomic validation.*
