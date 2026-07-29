@@ -216,6 +216,18 @@ and test-passing. The remaining work is orchestration, signing, and depot freshn
 
 ---
 
+### SPOREPRINT (Wave 155i NUCLEUS convergence — Jul 29, 2026)
+
+sporePrint updated to reflect NUCLEUS convergence:
+- All three atomics proven: Tower (6 gates), Nest (2 gates incl. Windows), Node (1 gate)
+- biomeOS composition broker LIVE (704 caps COORDINATED). ZERO P0s. 10 gates online
+- NUCLEUS_ARCHITECTURE.md expanded: Node Atomic + NUCLEUS roadmap sections
+- Node Atomic added to products/Deploy Now shelf
+- Test counts: 92,454 total (deep debt extraction across primals)
+- Next milestone: biomeOS composition lifecycle → first NUCLEUS deployment
+
+---
+
 *Wave 155i — NUCLEUS convergence. Tower (6 gates), Nest (2 gates), Node (1 gate) all
 proven. biomeOS broker LIVE (704 caps). bearDog crypto blocks Provenance 7/7. Windows
 depot stale. Next: biomeOS composition lifecycle → first NUCLEUS deployment. ~63K+ tests.
