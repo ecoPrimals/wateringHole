@@ -12,10 +12,10 @@
 id = 155
 sub = "i"
 date = "2026-07-29"
-posture = "COMPOSITION BROKER SHIPPED. ZERO P0s. biomeOS v4.45: riboCipher framing + BTSP session propagation — both P0s RESOLVED. 8 primals deep debt wave. CAS on ZFS verified (3,119 objects). RTX 3090 profiled (FP64 ~104T). E2E signal graphs UNBLOCKED. AlphaFold pipeline READY. 27 signal graphs. ~63K+ tests."
+posture = "blueGate NEST 10/10 ON WINDOWS (first). westGate broker LIVE (704 caps, COORDINATED). strandGate Node Atomic (746 pipelines/sec). ZERO P0s. Windows depot stale (14 .exe 07/16). bearDog crypto blocks Provenance 7/7. 9 gates. ~63K+ tests. 27 signal graphs."
 publisher = "eastGate-overwatch"
 
 [gates]
-online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate", "northGate", "westGate", "strandGate"]
-enrolling = ["blueGate", "swiftGate", "southGate"]
+online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate", "northGate", "westGate", "strandGate", "blueGate"]
+enrolling = ["swiftGate", "southGate"]
 offline = []
