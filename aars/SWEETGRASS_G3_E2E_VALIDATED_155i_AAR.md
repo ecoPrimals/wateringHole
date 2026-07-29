@@ -1,7 +1,7 @@
 # sweetGrass — G3 E2E Validated — Wave 155i AAR
 
 **Date**: Jul 29, 2026 | **Wave**: 155i | **From**: sweetGrass team (eastGate)
-**Version**: v0.8.0 | **Tests**: 1,636 | **Commits**: `666dea5`, `b5d260d`, `ab887e8`
+**Version**: v0.8.0 | **Tests**: 1,639 | **Commits**: `666dea5`, `b5d260d`, `ab887e8`, `4b5167b`
 
 ---
 
@@ -80,6 +80,15 @@ Expected: `{"result":{"valid":true,"detail":"sealed in ledger"}}`
 1. `LOAMSPINE_SOCKET` env (explicit override)
 2. `{BIOMEOS_SOCKET_DIR}/loamspine-{FAMILY_ID}.sock` (family-scoped)
 3. `{BIOMEOS_SOCKET_DIR}/loamspine.sock` (standalone)
+
+---
+
+## P2 RESOLVED: braid_id → UUID mismatch (commit `4b5167b`)
+
+`BraidId::to_uuid()` now always returns a valid UUID for cross-primal
+correlation. Hash-based braid IDs (`urn:braid:sha256:...`) derive a
+deterministic UUID v5 instead of dumping the raw URN into the `uuid` field.
+loamSpine always receives a proper UUID in `braid.commit` payloads.
 
 ---
 
