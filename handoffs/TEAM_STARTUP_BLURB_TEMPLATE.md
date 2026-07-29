@@ -161,16 +161,36 @@ ecoPrimals/
 │   ├── healthSpring     # Health data
 │   ├── ludoSpring       # Game/simulation
 │   ├── neuralSpring     # Neural/NPU
-│   ├── helixVision      # Structure prediction / biomolecular validation
 │   └── rustChip         # Rust tooling
 └── infra/          # Infrastructure and documentation (mixed orgs — see mapping)
     ├── wateringHole      # Standards, handoffs, blurbs (ecoPrimals/)
     ├── plasmidBin        # Depot binaries + enrollment scripts (ecoPrimals/)
     ├── fossilRecord      # Archived/completed documentation (ecoPrimals/)
-    ├── sporePrint        # SEO / web presence (ecoPrimals/)
+    ├── sporePrint        # SEO / web presence (ecoPrimals/) — empty placeholder on Forgejo
     ├── whitePaper        # Research papers, JOSS publication (ecoPrimals/)
     ├── agentReagents     # Agent tooling (syntheticChemistry/)
     └── benchScale        # Topology benchmarking (syntheticChemistry/)
+```
+
+### Windows Prerequisites (blueGate, swiftGate, northGate)
+
+Windows gates need these steps before syncing:
+
+```powershell
+# Install Git if not present
+winget install Git.Git
+
+# Required: enable long paths (NTFS 260-char limit breaks fossilRecord)
+git config --global core.longpaths true
+
+# Required: disable credential manager prompts (blocks non-interactive sessions)
+$env:GIT_TERMINAL_PROMPT = 0
+$env:GCM_INTERACTIVE = "never"
+[Environment]::SetEnvironmentVariable("GIT_TERMINAL_PROMPT", "0", "User")
+[Environment]::SetEnvironmentVariable("GCM_INTERACTIVE", "never", "User")
+
+# Recommended: OS-level long path support (requires admin)
+# Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1
 ```
 
 ### Step 1a: Fix Naming Divergences
@@ -477,6 +497,10 @@ done
 ```
 
 **Windows:**
+
+All 14 primal `.exe` binaries are available on the depot (`x86_64-pc-windows-gnu`).
+No source build needed — download directly:
+
 ```powershell
 $depotBase = "https://depot.primals.eco/primals/x86_64-pc-windows-gnu"
 $binDir = "$env:USERPROFILE\.local\bin"
@@ -489,8 +513,7 @@ foreach ($primal in @("beardog", "songbird", "skunkbat")) {
 # [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$binDir", "User")
 ```
 
-**NOTE**: Windows genomeBins (`x86_64-pc-windows-gnu`) require the depot to
-have them built. If not yet available, build from source:
+If you need to build from source instead (e.g., testing local changes):
 ```powershell
 cd ~/Development/ecoPrimals/primals/bearDog
 cargo build --release

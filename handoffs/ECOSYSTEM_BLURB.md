@@ -138,7 +138,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 | Gate | Status | NOW | NEXT |
 |------|--------|-----|------|
-| **blueGate** | **NEXT TARGET** (Windows) | **Tower Atomic deployment. Inner membrane topo owner H2. Sub-builder enrollment under sporeGate.** | Nest Atomic (biomeOS full broker). Then Node Atomic. Full atomic stack proof on Windows. |
+| **blueGate** | **BOOTSTRAPPED** (Windows) | **40/40 repos synced. Tower bins verified. WG+SSH keys generated — awaiting registration.** | Tower Atomic deploy → Nest → Node. Sub-builder. Topo owner H2. |
 | **strandGate** | **TOWER+COMPUTE LIVE** | Glibc depot received. Compute Trio validated. | Node Atomic profiling. Full BTSP validation. |
 | **westGate** | **NEST ATOMIC LIVE** | CAS on ZFS verified. biomeOS broker ready. | E2E `nest.ingest_dataset` live. AlphaFold ingestion (~11hr dsync, NVMe staging recommended). |
 | **swiftGate** | ONLINE (Windows) | — | G1 Tower on Windows (second Windows proof after blueGate) |

@@ -106,7 +106,7 @@ appears. This keeps the active review focused on evolving concerns.
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
 | strandGate | **TOWER+COMPUTE LIVE** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, FP64 ~104T, 5 primals, 17 sockets, glibc trio shipped |
 | westGate | **NEST ATOMIC LIVE** | Linux | 10.13.37.11 | nest (8) | AMD Ryzen 7 5700X, 64GB, 2TB NVMe, ZFS 25.4TB, 3,119 CAS objects, Provenance 6/7 |
-| blueGate | **NEXT TARGET** | Windows | enrolling | **full — Tower→Nest→Node** | **Inner membrane topo owner H2, sub-builder under sporeGate, first full Windows atomic proof** |
+| blueGate | **BOOTSTRAPPED** | Windows | enrolling (WG key received) | **full — Tower→Nest→Node** | **40/40 repos synced, Tower bins verified, awaiting key registration. Topo owner H2, sub-builder.** |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
 
