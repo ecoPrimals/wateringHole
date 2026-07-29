@@ -186,6 +186,7 @@ Need `x86_64-unknown-linux-gnu` glibc target in depot pipeline.
 
 | File | Status |
 |------|--------|
+| `TOWER_ATOMIC_VALIDATION_WAVE155i.md` | **Tower health validation — all gates (prerequisite for Nest)** |
 | `NEST_ATOMIC_ALPHAFOLD_WAVE155i.md` | **Nest Atomic pipeline + AlphaFold ingestion plan** |
 | `SWEETGRASS_NEST_ATOMIC_G3_WIRING_WAVE155i.md` | **sweetGrass G3 wiring handoff** |
 | `SQUIRREL_WESTGATE_CODE_TEAM_AUDIT_WAVE155g.md` | Audit: 763 tests, clean |

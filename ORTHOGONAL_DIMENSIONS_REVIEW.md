@@ -13,7 +13,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal / Coordination
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155h)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155i)
 - [x] Gate heads published (`heads/*.toml`) — golgiBody auto-publishing active
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] Active impulses: 0 (26+ fossilized)
@@ -28,10 +28,12 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] JOSS publication strategy defined
 - [x] GLOSSARY.md refreshed (Wave 155b)
 - [x] cellMembrane + plasmidBin cascaded to Forgejo
-- [x] **11 new handoff docs** delivered this wave (code team audits + execution + AARs)
+- [x] **13 new handoff docs** delivered this wave (code team audits + execution + AARs + Nest Atomic pipeline)
 - [ ] waterFall graph partially wired — full composition pending Provenance Trio
 - [ ] Context braids not yet replacing blurb paste — graduation path documented
 - [x] `freshness.toml` updated to Wave 155h with 38 HEAD SHAs
+- [x] **Nest Atomic handoffs issued** (155i): pipeline coordination + sweetGrass G3 wiring
+- [ ] Tower Atomic validation handoff needed before Nest Atomic proceeds
 - [ ] 3 enrolling gates have no published heads in `heads/*.toml`
 
 ## 2. Ecological (Primal Health)
@@ -50,8 +52,8 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] nestGate: **12,973** tests, **P0/P1 audit resolved**, live CLI health, FHS centralized, ZFS tier migration
 - [x] toadStool: **23,332** tests, **S344**: deny.toml expanded, overstep reduced, socket centralized
 - [x] rhizoCrypt: 1,456 tests, BTSP→DAG bridge, cross-gate provenance chain
-- [x] loamSpine: **1,739** tests, **BTSP handshake dedup**: `verify_and_negotiate()` + `AsyncErrorSender`
-- [x] sweetGrass: 1,676 tests, cross-gate attribution, PROV-O, BTSP ClientHello, `CertificateRef` SHIPPED — G3 READY
+- [x] loamSpine: **1,739** tests, **BTSP handshake dedup**: `verify_and_negotiate()` + `AsyncErrorSender`. **155i**: registry drift fixed — `certificate.verify/lifecycle/history` discoverable
+- [x] sweetGrass: 1,676 tests, cross-gate attribution, PROV-O, BTSP ClientHello, `CertificateRef` SHIPPED — **G3 wiring handoff issued (155i)**
 - [x] petalTongue: **6,605** tests, **topology→runtime manifest**, main.rs split, geometry module
 - [x] squirrel: **763** tests, **capability purification**: beardog→security_provider, adapter IPC
 - [x] barraCuda: **4,957** tests, **SIGSEGV fixed** (GPU_TEST_GUARD), BTSP env races, dead code (-1,200L)
@@ -161,10 +163,10 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] LAN peering: Tower 353x LAN (0.45ms vs 158ms WG overlay)
 - [x] songBird universal-ipc: UDS/named pipes/abstract sockets/TCP
 - [x] BTSP defense-in-depth: 13/13 primals
-- [x] **biomeOS neuralAPI**: 26 signal graphs, 19 atomic translations, platform_native transport
+- [x] **biomeOS neuralAPI**: **27** signal graphs (nest.ingest_dataset added 155i), 19 atomic translations, platform_native transport
 - [x] **songBird ACME HTTP-01** challenge responder shipped — Phase 1 TLS elimination
 - [ ] Only 2 WG peers active in practice (enrollment pending for house2 gates)
-- [ ] Tower Atomic needs live validation on Windows gates before Nest Atomic starts
+- [ ] **Tower Atomic needs live validation on all LIVE gates** — `tower.health` signal graph dispatch on westGate + strandGate before Nest Atomic proceeds
 - [ ] WireGuard DNS catch-all in wg0 template hijacks all resolution (strandGate AAR)
 
 ## 5. Sovereignty / Trust
@@ -212,7 +214,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] songBird crypto delegation 6/6 COMPLETE — composition model validated
 - [x] Composition profiles fixed: `compute` = Tower + node, `nest` = Tower + provenance trio
 - [x] `tower-builder` profile created for distributed build mesh nodes
-- [x] **biomeOS neuralAPI**: Tower (8), Node (3), Nest (8) signal graphs with semantic dispatch
+- [x] **biomeOS neuralAPI**: Tower (8), Node (3), Nest (**9**) signal graphs with semantic dispatch
 - [ ] **Chimera Phase 0**: shared library extraction (`libtower.so`) — UNBLOCKED
 - [ ] sporePrint primal pipeline: replace Zola
 - [ ] 6 springs pending `validation.json`
@@ -239,7 +241,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [ ] J8: Key enrollment portal — code shipped, deployment pending
 - [x] Pure Rust across all primals — zero C deps on critical path
 - [x] toadStool wgpu cross-platform GPU (DX12/Vulkan/Metal)
-- [x] biomeOS platform_native transport on all 26 signal graphs
+- [x] biomeOS platform_native transport on all 27 signal graphs
 - [x] biomeOS cross-platform socket templates (named pipes + TCP fallback)
 - [ ] Windows genomeBins not yet in golgiBody depot (cross-compile needed)
 - [ ] macOS genomeBins — check-pass only, no linker for cross-build from Linux
@@ -359,16 +361,16 @@ All documentation infrastructure complete and current:
 
 **Active**: 10 dimensions (1–8, 10–11)
 **Fossilized**: 11 dimensions (F1–F11)
-**Summary**: Full orthogonal review at Wave 155h. D9 (Documentation) FOSSILIZED —
-all items resolved including PRIMAL_REGISTRY merge conflicts, freshness.toml
-refresh, 12 stale standards wave-bumped, coralForge retired (now helixVision).
+**Summary**: Orthogonal review at Wave 155i. Nest Atomic pipeline wiring begins:
+loamSpine registry drift fixed (certificate.verify discoverable), biomeOS
+nest.ingest_dataset signal graph created (27 total), sweetGrass G3 wiring handoff
+issued. Tower Atomic validation handoffs needed first (prerequisite for Nest Atomic).
 D10 (Jelly Strings) at 7/8 — only J7 (low priority P3) remains open. P0: glibc
-depot target for GPU primals. J6 CLOSED. J8 code shipped, deployment pending.
-westGate + strandGate Tower LIVE. ~70K+ tests.
+depot target still open. ~70K+ tests.
 
 ---
 
-*Last used*: Wave 155h (Jul 29, 2026)
+*Last used*: Wave 155i (Jul 29, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155h (F11 — Documentation / Fossil Record)
