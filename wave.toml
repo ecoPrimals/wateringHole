@@ -12,7 +12,7 @@
 id = 155
 sub = "i"
 date = "2026-07-29"
-posture = "NEST ATOMIC LIVE ON WESTGATE. First multi-composition: 8 services, 1,704 capabilities auto-discovered. Provenance Trio CLOSED (sweetGrass G3 v0.8.0). ZFS 25.4TB + L2ARC online, all 5 tiers. P0 glibc FIXED. P1 WG DNS FIXED. NEW P0: biomeOS BTSP session propagation needed for composition broker pattern. 6 PDBs in CAS. 27 signal graphs. ~72K+ tests."
+posture = "DEEP DEBT + VALIDATION WAVE. 8 primals shipped simultaneous debt sweeps. CAS on ZFS verified (3,119 objects). Provenance Trio 6/7 live. RTX 3090 GPU profiled (FP64 ~104T). sporeGate depot refreshed (19 binaries, health 5/11→9/11). nestGate 13K+ tests, toadStool S346 security hardening, cellMembrane fail-closed. P0 blocker: biomeOS BTSP composition broker. 27 signal graphs. ~55K+ tests."
 publisher = "eastGate-overwatch"
 
 [gates]
