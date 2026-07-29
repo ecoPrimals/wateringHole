@@ -39,7 +39,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **Deep debt wave**: 8 primals shipped simultaneous sweeps (nestGate, toadStool, cellMembrane, barraCuda, coralReef, sweetGrass, skunkBat, nestGate)
 - [x] sporeGate depot refresh: 19 binaries, BLAKE3 verified, health 5/11→9/11
 - [x] strandGate Compute Trio rebuilt from glibc source, RTX 3090 profiled
-- [ ] biomeOS composition broker handoff issued — BTSP session propagation needed (P0)
+- [x] ~~biomeOS composition broker~~ — **SHIPPED** (v4.45): riboCipher framing + BTSP executor, 35 E2E tests, 8,564 tests total
 - [ ] 3 enrolling gates have no published heads in `heads/*.toml`
 
 ## 2. Ecological (Primal Health)
@@ -170,12 +170,12 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] LAN peering: Tower 353x LAN (0.45ms vs 158ms WG overlay)
 - [x] songBird universal-ipc: UDS/named pipes/abstract sockets/TCP
 - [x] BTSP defense-in-depth: 13/13 primals
-- [x] **biomeOS neuralAPI**: **27** signal graphs, 19 atomic translations, platform_native transport. **1,704 capabilities auto-discovered on westGate.**
+- [x] **biomeOS neuralAPI**: **27** signal graphs, **composition broker SHIPPED** (riboCipher + BTSP), 8,564 tests, 1,704 capabilities on westGate
 - [x] **songBird ACME HTTP-01** challenge responder shipped — Phase 1 TLS elimination
 - [x] songBird mesh refactor: enrollment crypto + mesh helpers extracted, all files <800L
 - [x] sporeGate depot fully refreshed: health 5/11→9/11, 19 binaries, glibc compute trio shipped
-- [ ] **biomeOS BTSP session propagation** — signal graph executor needs BTSP handshakes when dispatching to primals that require auth (P0, handoff issued)
-- [ ] **biomeOS riboCipher transport** — CLI tools lack `[0xEC, 0x01]` framing (P0)
+- [x] ~~**biomeOS BTSP session propagation**~~ — **SHIPPED** (`48cf9c33`): `send_jsonrpc_async` is BTSP-aware, family-scoped socket trigger handshake
+- [x] ~~**biomeOS riboCipher transport**~~ — **SHIPPED** (`48cf9c33`): CLI + core IPC prepend `[0xEC, 0x01]` clear-tier signal
 - [ ] songBird probes without riboCipher → sweetGrass log noise every 30s (P1)
 - [ ] sporeGate mesh.reachability + rootpulse.ledger still degraded (2/11)
 - [ ] Only 2 WG peers active in practice (enrollment pending for house2 gates)
@@ -220,7 +220,7 @@ ALL SECURITY ITEMS RESOLVED. sporePrint impulses are an ongoing publishing caden
 - [x] Composition profiles fixed: `compute` = Tower + node, `nest` = Tower + provenance trio
 - [x] `tower-builder` profile created for distributed build mesh nodes
 - [x] **biomeOS neuralAPI**: Tower (8), Node (3), Nest (**9**) signal graphs with semantic dispatch. **1,704 capabilities auto-discovered on westGate.**
-- [ ] **biomeOS composition broker** — needs BTSP session propagation for multi-composition deployments (P0)
+- [x] ~~**biomeOS composition broker**~~ — **SHIPPED** (v4.45): riboCipher framing + BTSP executor + 35 E2E tests
 - [ ] **Chimera Phase 0**: shared library extraction (`libtower.so`) — UNBLOCKED
 - [ ] sporePrint primal pipeline: replace Zola
 - [ ] 6 springs pending `validation.json`
@@ -382,14 +382,13 @@ All security infrastructure complete and operational:
 
 **Active**: 9 dimensions (1–5, 7–8, 10–11)
 **Fossilized**: 12 dimensions (F1–F12)
-**Summary**: Deep debt + validation wave at 155i. 8 primals shipped simultaneous
-debt sweeps. CAS on ZFS verified (3,119 objects). Provenance Trio 6/7 live
-(bearDog signing stub blocks 7th). RTX 3090 GPU profiled (FP64 ~104 TFLOPS).
-sporeGate depot refreshed (19 binaries, health 5/11→9/11). nestGate ghost
-methods removed. toadStool S346 security hardening. cellMembrane sandbox
-fail-closed + registry-driven tower. coralReef 463 `.expect()` purged.
-P0 blocker: biomeOS BTSP composition broker. D10 Jelly Strings 7/8 code-complete
-(J8 now deployed). ~55K+ primal tests. 27 signal graphs.
+**Summary**: Composition broker + deep debt wave at 155i. **ZERO P0s.** biomeOS
+v4.45 shipped composition broker (riboCipher + BTSP, 35 E2E tests) — both P0s
+RESOLVED. 8 primals shipped debt sweeps. CAS on ZFS verified (3,119 objects).
+RTX 3090 profiled (FP64 ~104T). sporeGate depot refreshed (19 binaries, health
+5/11→9/11). E2E signal graphs UNBLOCKED. AlphaFold pipeline READY. D10 Jelly
+Strings 7/8 (J8 deployed, fossilization candidate). ~63K+ primal tests. 27 signal
+graphs. Next: live `nest.ingest_dataset` fire on westGate.
 
 ---
 
