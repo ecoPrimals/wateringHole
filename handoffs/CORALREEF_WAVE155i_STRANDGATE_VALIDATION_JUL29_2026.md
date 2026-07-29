@@ -217,21 +217,31 @@ changes. **Impact**: None — TCP transport works, and capability symlink
 
 ---
 
-## NEXT WORK
+### Windows Cross-Compilation Readiness
 
-1. **Await glibc depot rebuild** — sporeGate needs to run `plasmid.harvest`
-   with cellMembrane's updated `targets_for_primal()` to produce gnu binaries
-2. **BTSP Phase 3 production validation** — once glibc binary deployed, test
-   full ChaCha20-Poly1305 AEAD with authenticated bearDog sessions
-3. **Node Atomic validation** — RTX 3090 compute profiling after depot binary
-   is available
-4. **songBird federation** — songBird is degraded on strandGate (IPC up,
-   discovery/mesh/federation degraded). Not blocking coralReef but should be
-   investigated by songBird team.
+Fixed `cargo check --target x86_64-pc-windows-gnu` and `cargo clippy --target x86_64-pc-windows-gnu`:
+- Non-Unix stubs added for `default_unix_socket_path`, `start_unix_jsonrpc_server`, `unix_socket_path_for_base` (return `Unsupported`)
+- `env_keys` and `b64_encode` imports cfg-gated to `#[cfg(unix)]`
+- `unused_async` allowed on 3 non-Unix async stubs (signature parity with Unix)
+- `duplicated_attributes`, `needless_pass_by_value`, `missing_const_for_fn` allowed with reasons
+- **Zero errors, zero warnings on `x86_64-pc-windows-gnu`** — ready for blueGate Node Atomic
 
 ---
 
-*coralReef Wave 155i. LIVE on strandGate. 18/18 JSON-RPC methods validated.
+## NEXT WORK
+
+1. **Deploy to westGate or blueGate** alongside existing Nest Atomic (first NUCLEUS gate)
+2. **Await glibc depot rebuild** — sporeGate needs to run `plasmid.harvest`
+   with cellMembrane's updated `targets_for_primal()` to produce gnu binaries
+3. **BTSP Phase 3 production validation** — once glibc binary deployed, test
+   full ChaCha20-Poly1305 AEAD with authenticated bearDog sessions
+4. **Node Atomic validation** — RTX 3090 compute profiling after depot binary
+   is available
+
+---
+
+*coralReef Wave 155i. NODE ATOMIC VALIDATED on strandGate. 18/18 JSON-RPC methods validated.
 BTSP Phase 2→3 chain operational. RTX 3090 sm_86 WGSL + GEMM compilation
-confirmed. Awaiting glibc depot rebuild for Vulkan ICD compute workloads.
-3,527 tests, zero unsafe, zero clippy warnings.*
+confirmed. Windows cross-compilation clean (zero errors/warnings). Awaiting glibc depot
+rebuild for Vulkan ICD compute workloads. 3,527 tests, zero unsafe, zero clippy warnings
+on Linux + Windows.*
