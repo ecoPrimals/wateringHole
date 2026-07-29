@@ -5,8 +5,8 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-28T14:20:00Z"
-wave = "155d"
+updated = "2026-07-29T10:45:00Z"
+wave = "155h"
 
 [heads]
 bearDog = "a8bba76"
@@ -138,16 +138,24 @@ flint2_bridge = "CONFIRMED live at 192.168.4.250, bridges blueGate + swiftGate"
 house2_live_hosts = ["192.168.4.200", "192.168.4.214", "192.168.4.218 (ms-device-h2)", "192.168.4.231", "192.168.4.237 (irongate)", "192.168.4.244 (xbox-h2)"]
 next_steps = "Identify blueGate LAN IP via RustDesk session, assign DHCP reservation, WG keygen"
 
+[deployment_155h]
+step_ca = "LIVE — ca.primals.eco, step-ca v0.30.2, SSH CA enabled, host cert issued for golgiBody"
+step_ca_fingerprint = "566b6a6ef9611355c5697973a7c9d699acc06318ef918ce992cd4e7884581cd5"
+step_cli_sporeGate = "BOOTSTRAPPED — step-cli v0.30.6 installed"
+log_before_drop = "DONE — RUSTDESK_UDP_RATELIMIT + RUSTDESK_TCP_RATELIMIT LOG rules in RUSTDESK_MEMBRANE chain"
+glibc_depot_target = "IN PROGRESS — gpu=true added to sources.toml for compute trio, harvest building x86_64-unknown-linux-gnu"
+harvest_155h = "12/15 musl built + pushed (155f), glibc harvest running (155h)"
+
 [code_team_flags]
-checksums_format = "FLAGGED — membrane CLI expects ChecksumEntry struct, depot has plain strings (code team: cellMembrane)"
+checksums_format = "RESOLVED — new membrane binary handles both formats (155d)"
 s3_content_probe = "FLAGGED — gate.status s3_content probe returns 404 (path alignment: code team)"
 vcs_parity = "FLAGGED — 21/21 repos drifted (code team sync)"
 mesh_socket = "FLAGGED — mesh relay socket not wired on sporeGate (code team: cellMembrane)"
 
 [remaining]
+glibc_depot = "P0 — harvest running, compute trio (barraCuda, coralReef, toadStool) need x86_64-unknown-linux-gnu for Vulkan dlopen"
 phase1_gate_enrollment = "P0 — 5 gates need enrollment (3 WG-keyed, 2 pending keygen)"
 bluegate_anchor_prep = "P0 — identify LAN IP, DHCP reservation, WG keygen, peptidoglycan mgmt plane"
+northgate_irongate_rustdesk = "P1 — both LAN-reachable, RustDesk degraded, needs physical access"
 bluegate_builder = "P1 — post-enrollment: set MEMBRANE_BUILD_AUTHORITY=1, verify toolchain"
 graphenegate_floating = "P2 — evolve from ADB peripheral to autonomous gate"
-chimera_phase0 = "P2 — libtower.so extraction"
-benchscale_validation = "P2 — Level 1-4 NUCLEUS validation (Track B Phase 3)"
