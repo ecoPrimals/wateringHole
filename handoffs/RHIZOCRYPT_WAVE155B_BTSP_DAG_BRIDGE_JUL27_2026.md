@@ -49,21 +49,31 @@ Dehydration path (gateway witnesses):
 
 | Metric | Value |
 |--------|-------|
-| Tests | 1,900 (155d: test consolidation, dep update) |
+| Tests | 1,900 |
 | Source files | 225 `.rs` |
 | Lines | ~62,665 |
 | Coverage | 93.83% |
 | Clippy | 0 warnings |
 | cargo deny | CLEAN |
-| Head | `904b17b` |
+| Cross-compile | 4 targets, zero warnings (x86_64-linux, x86_64-windows-gnu, x86_64-musl, aarch64-musl) |
+| Head | `83ec60a` |
+
+## Wave 155i Update (Jul 29, 2026)
+
+- Zero-warning cross-compile across all 4 genomeBin targets
+- CLI `--bind` alias for `--host` (forward-compatible with ecosystem standardization P2)
+- NUCLEUS readiness verified: Neural API announce, capability manifest, biomeOS integration all clean
+- G3 CLOSED (per blurb 155i). Provenance Trio 6/7 — blocked on bearDog `crypto.sign_ed25519` only
 
 ## Upstream Status
 
-rhizoCrypt G3 work (Nest Atomic Phase 0) is **SHIPPED**:
+rhizoCrypt G3 work (Nest Atomic Phase 0) is **SHIPPED** and **CLOSED**:
 - BTSP → DAG bridge: **DONE**
 - Mesh poller signing: **DONE**
 - Federate hardening: **DONE**
 - Cross-repo provenance metadata: **DONE**
 - Federate → sweetGrass provenance push: **DONE**
 - Gateway-tier dehydration witnesses: **DONE**
-- Remaining for full G3: loamSpine certificate minting, sweetGrass attribution braids
+- Cross-compile hygiene (4 targets): **DONE**
+- NUCLEUS readiness (biomeOS integration surface): **DONE**
+- Remaining for Provenance 7/7: bearDog `crypto.sign_ed25519` (not rhizoCrypt)
