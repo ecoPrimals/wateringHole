@@ -124,7 +124,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 │  Route: WireGuard wg0 (10.13.37.x) + songBird :7700    │
 │  Auth: capability IPC, TLS, BTSP (13/13)                │
 │  Owner: per-primal, coordinated by overwatch             │
-│  Status: 7-gate mesh, Tower Atomic shadow active         │
+│  Status: 9-gate mesh, Tower Atomic LIVE on 5+ gates      │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -246,22 +246,9 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
 - [ ] systemd abstraction for Windows Service / launchd paths (cellMembrane `InitSystem` foundation shipped)
 
-## 9. Documentation / Fossil Record
+## ~~9. Documentation / Fossil Record~~ → **FOSSILIZED as F11** (Wave 155h)
 
-- [x] Blurb reflects current wave (155h) — deep evolution wave cascade
-- [x] **ECOSYSTEM_BLURB.md** is universal handoff — Tracks A+B converged
-- [x] Active impulses: 0
-- [x] wateringHole standards: 37 active in 4 directories
-- [x] 42+ docs fossilized
-- [x] Team startup blurb template issued
-- [x] whitePaper GEN_REVIEW_151c.md — full generational arc assessment
-- [x] gate-enroll.sh + gate-enroll.ps1 documented
-- [x] GLOSSARY.md refreshed (Wave 155b)
-- [x] **Peptidoglycan failure AAR** — full diagnostic, 7 skunkBat targets
-- [x] **Provenance Trio G3 convergence AAR** — 4 gaps, 8 action items, phased path
-- [x] PRIMAL_REGISTRY.md refreshed — merge conflicts resolved, Wave 155h posture
-- [x] 12 standards wave tags reviewed and bumped (Wave 63–139 → reviewed 155h)
-- [ ] coralForge repo does not exist on Forgejo — needs creation or retirement decision
+ALL ITEMS RESOLVED. Moved to Fossilized section below.
 
 ## 10. Jelly Strings — Deployment Automation (NEW — extracted from sporeGate AAR)
 
@@ -277,7 +264,9 @@ From sporeGate deployment AAR. These block "operator runs shell loops" →
 - [ ] **J7: Legacy service detection** — OPEN. One-time, low priority (cellMembrane P3)
 - [x] **J8: Key enrollment portal** — **CODE SHIPPED**. step-ca SSH cert lifecycle in cellMembrane (`b13105b`). enroll phase 8 (`ssh_cert`). Non-fatal if CA not deployed. **Deployment pending** — sporeGate needs step-ca on golgiBody.
 
-7/8 resolved. J6 CLOSED (gate.configure/apply). J8 code shipped (step-ca lifecycle), deployment pending.
+7/8 resolved. J6 CLOSED (gate.configure/apply). J8 code shipped (step-ca lifecycle),
+deployment pending. **Near-fossilization**: only J7 (legacy detection, P3) remains.
+Once step-ca is deployed on golgiBody, J8 graduates from "code shipped" to "CLOSED".
 
 ## 11. Campus / Physical Infrastructure
 
@@ -349,22 +338,37 @@ Zero-operator postPrimordial enrollment fully shipped:
 - golgiBody drawbridge: Caddy TLS → `/enroll/*` → songBird
 - Self-registration: gates declare name + composition
 
+## F11. Documentation / Fossil Record (fossilized Wave 155h)
+
+All documentation infrastructure complete and current:
+
+- ECOSYSTEM_BLURB.md universal handoff (Tracks A+B converged)
+- PRIMAL_REGISTRY.md refreshed — merge conflicts resolved, 15-primal posture
+- freshness.toml updated to Wave 155h (38 HEAD SHAs)
+- 12 standards wave tags reviewed and bumped (Wave 63–139 → 155h)
+- Team startup blurb template issued and validated (westGate + strandGate)
+- GLOSSARY.md refreshed (Wave 155b)
+- gate-enroll.sh + gate-enroll.ps1 documented
+- whitePaper gen/ review COMPLETE
+- 42+ docs fossilized in fossilRecord/
+- coralForge retired — vestigial name, now helixVision
+- Peptidoglycan + Provenance Trio AARs filed
+- 11+ new handoff docs from Wave 155f–h code teams
+
 ---
 
-**Active**: 11 dimensions (1–11)
-**Fossilized**: 10 dimensions (F1–F10)
-**Summary**: Largest single-wave evolution. 9 primals + cellMembrane shipped deep
-debt sweeps and capability evolution. J6 CLOSED (gate.configure/apply). J8 code
-shipped (step-ca SSH certs, deployment pending). barraCuda SIGSEGV fixed. coralReef
-fully wired (18/18 dispatch). nestGate P0/P1 closed. petalTongue topology→runtime
-manifest. squirrel capability-purified (beardog→security_provider). toadStool
-deny.toml expanded. songBird ACME Phase 1. strandGate Tower + Compute Trio LIVE.
-P0: glibc depot target needed for GPU primals (musl can't dlopen Vulkan ICD).
-7/8 jelly strings resolved. ~70K+ tests across primals.
+**Active**: 10 dimensions (1–8, 10–11)
+**Fossilized**: 11 dimensions (F1–F11)
+**Summary**: Full orthogonal review at Wave 155h. D9 (Documentation) FOSSILIZED —
+all items resolved including PRIMAL_REGISTRY merge conflicts, freshness.toml
+refresh, 12 stale standards wave-bumped, coralForge retired (now helixVision).
+D10 (Jelly Strings) at 7/8 — only J7 (low priority P3) remains open. P0: glibc
+depot target for GPU primals. J6 CLOSED. J8 code shipped, deployment pending.
+westGate + strandGate Tower LIVE. ~70K+ tests.
 
 ---
 
-*Last used*: Wave 155h (Jul 28, 2026)
+*Last used*: Wave 155h (Jul 29, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 155b (F10 — Autonomous Gate Enrollment)
+*Latest fossilization*: Wave 155h (F11 — Documentation / Fossil Record)

@@ -153,7 +153,7 @@ ecoPrimals/
 │   ├── healthSpring     # Health data
 │   ├── ludoSpring       # Game/simulation
 │   ├── neuralSpring     # Neural/NPU
-│   ├── coralForge       # Coral ecology
+│   ├── helixVision      # Structure prediction / biomolecular validation
 │   └── rustChip         # Rust tooling
 └── infra/          # Infrastructure and documentation (mixed orgs — see mapping)
     ├── wateringHole      # Standards, handoffs, blurbs (ecoPrimals/)
@@ -306,7 +306,7 @@ done
 
 # Springs
 for s in primalSpring hotSpring wetSpring airSpring groundSpring healthSpring \
-         ludoSpring neuralSpring coralForge rustChip; do
+         ludoSpring neuralSpring rustChip; do
   clone_if_missing "springs/$s" "syntheticChemistry" "$s"
 done
 

@@ -303,7 +303,7 @@ Zero C dependencies eliminates entire classes of memory safety vulnerabilities. 
 - **primalSpring + biomeOS**: Graph execution validation — all 5 coordination patterns with real primals
 - **primalSpring + Provenance Trio**: RootPulse emergent system validation (commit, branch, merge, diff, federate)
 - **primalSpring + Songbird Mesh**: Plasmodium formation, gate failure, capability aggregation
-- **primalSpring + neuralSpring + wetSpring + hotSpring + ToadStool + NestGate**: coralForge neural object pipeline
+- **primalSpring + neuralSpring + wetSpring + hotSpring + ToadStool + NestGate**: helixVision structure prediction pipeline
 - **primalSpring + airSpring + wetSpring + neuralSpring**: Cross-spring ecology data flow
 - **primalSpring + fieldMouse + NestGate + sweetGrass**: Edge data ingestion pipeline
 - **primalSpring + petalTongue**: SSE visualization pipeline

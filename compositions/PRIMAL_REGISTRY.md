@@ -522,7 +522,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 - NautilusBrain API for NPU integration, self-regulating drift monitor
 - AKD1000 int4 weight export with quantization validation (MSE=0.004)
 
-**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment). helixVision downstream (MD validation for coralForge structure prediction).
+**Participates In**: Node Atomic (via ToadStool compute), metalForge (NPU + multi-GPU), NUCLEUS (via biomeOS deployment). helixVision downstream (MD validation for structure prediction).
 
 ### primalSpring - Coordination and Composition Validation
 
@@ -546,7 +546,7 @@ These primals validate the ecoPrimals compute pipeline end-to-end by reproducing
 | **Evolution** | `MeshEntry::preferred_address()` LAN-first, `has_tower()`, K-Derm trust tiers, `Arc<Anchor>` zero-clone, `is_none_or()` Rust 2024, 26 dep refresh |
 | **Bonding** | Ionic bond runtime (IonicContractRegistry), covalent mesh, content distribution, graph metadata |
 | **Live Composition** | Tower EXCEEDS WG: 353x LAN (0.45ms vs 158ms), 1.7x WAN sustained. Shadow benchmark: 661 JSON files, continuous hourly. Genetic enrollment LIVE. |
-| **Emergent Systems** | RootPulse, RPGPT, coralForge, cross-spring ecology |
+| **Emergent Systems** | RootPulse, RPGPT, helixVision, cross-spring ecology |
 
 **Participates In**: biomeOS (primary test subject), all NUCLEUS primals (deploy + health), Provenance Trio (RootPulse validation), all springs (cross-spring coordination validation), Squirrel (live AI composition), Tower Atomic (shadow benchmark + pen test validation)
 
