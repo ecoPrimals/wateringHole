@@ -148,10 +148,27 @@ Awaiting sporeGate depot rebuild with glibc target (cellMembrane P0 code shipped
 
 ---
 
+## Multi-GPU Pool Wired (same wave)
+
+`MultiDevicePool` now wired into `BarraCudaPrimal::start()`:
+- Auto-discovers all GPUs at startup, logs pool summary
+- New `device.pool` IPC method (99th registered) — returns per-device diagnostics
+  (name, class, GFLOPS, VRAM, f64 builtins, allocation stats, usage %)
+- Health report includes pool summary and device count
+- Pool dropped on `stop()`
+- strandGate validates: RTX 3090 + RX 6950 XT (dual discrete, cross-vendor)
+
+P1 items resolved: 2-Gate Mesh (10-gate fleet), BatchedTridiagEigh (IPC shipped),
+Multi-GPU pool wiring (done), GPU test parallelism (SIGSEGV fixed Wave 155f).
+
+4,959 tests pass. Zero clippy warnings.
+
+---
+
 ## For Upstream
 
 - **Multi-GPU dispatch** (P3 roadmap): strandGate is ideal — two discrete GPUs from
-  different vendors. Cross-vendor workload distribution now has real hardware to target.
+  different vendors. Pool now wired into primal startup. Cross-vendor OOM migration ready.
 - **FHE on GPU**: Bit-perfect NTT round-trips confirmed. strandGate can serve as FHE
   compute target for Nest Atomic workloads via sovereign IPC.
 - **Compute Trio AAR**: `STRANDGATE_COMPUTE_TRIO_SILICON_UTILIZATION_155i_AAR.md` — full
