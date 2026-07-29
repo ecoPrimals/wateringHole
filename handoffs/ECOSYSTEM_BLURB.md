@@ -104,56 +104,7 @@ now auto-appends gnu for GPU primals unconditionally.
 | J5 | WG peer reg | **HARDENED** | songBird |
 | J6 | systemd overrides | **CLOSED** — `gate.configure` + `gate.apply` | cellMembrane |
 | J7 | Legacy detection | OPEN (low priority) | cellMembrane |
-| J8 | Key enrollment portal | **CODE SHIPPED** — step-ca lifecycle. Deployment pending on golgiBody | cellMembrane + songBird |
-
----
-
-## CODE TEAMS — PRIMAL STATUS + GATE ASSIGNMENT
-
-### eastGate — Overwatch + Orchestration
-
-| Primal | Version | Role | NOW | NEXT |
-|--------|---------|------|-----|------|
-| **biomeOS** | 0.1.0 | Signal graph orchestrator | **P0: BTSP session propagation** in signal graph executor. **P0: riboCipher transport** in CLI paths. | Composition broker pattern across all atomics |
-| **bearDog** | 0.9.0 | Trust foundation | ACME Phase 2 client (songBird needs it) | G6 public flip audit |
-| **songBird** | 0.2.1 | Discovery + IPC | Mesh refactor shipped. Awaiting bearDog ACME Phase 2 | Federation across Nest Atomic gates |
-| **cellMembrane** | — | Deployment fabric | **Rebuild membrane depot binary** (gate.configure/gate.apply). step-ca on golgiBody. | Composition-aware systemd generation |
-| **skunkBat** | 0.2.18 | Defense | Monitor Nest Atomic deployment | — |
-| **primalSpring** | — | Scenario validation | — | Calibrate for multi-composition topology |
-
-### westGate — NEST ATOMIC LIVE (8 services, 1,704 capabilities)
-
-| Primal | Version | Tests | NOW | NEXT |
-|--------|---------|-------|-----|------|
-| **nestGate** | 0.5.0 | 12,973 | Configure CAS on ZFS (`NESTGATE_STORAGE_PATH`) | Tier migration NVMe→ZFS. Ghost method cleanup. |
-| **sweetGrass** | **0.8.0** | **1,625** | **G3 DONE.** E2E test with loamSpine on westGate | Cross-gate attribution with northGate data |
-| **loamSpine** | 0.9.16 | 1,739 | Registry fixed. Ready for E2E with sweetGrass | Certificate lifecycle across compositions |
-| **rhizoCrypt** | 0.14.17 | 1,456 | DAG events working. Awaiting signal graph dispatch | — |
-| **petalTongue** | 1.7.0 | 6,605 | Topology delivered | Visualize Nest Atomic composition state |
-| **squirrel** | 0.1.0 | 763 | Capability purification done | — |
-
-westGate **NEST ATOMIC LIVE** — 8 services deployed, Provenance Trio CLOSED.
-ZFS 25.4TB + 2TB L2ARC online. All 5 storage tiers operational. 6 PDBs in CAS.
-
-**Blocked on**: biomeOS BTSP composition broker (P0) — signal graph dispatch
-fails at BTSP auth boundary. Individual primal IPC works, orchestrated
-pipelines need the Neural API to broker trust.
-
-**After BTSP broker**:
-1. E2E `nest.ingest_dataset` signal graph validation (small PDB test)
-2. AlphaFold bulk ingestion (~1TB from northGate)
-3. Tier migration profiling across all 5 storage tiers
-
-### strandGate — Compute Trio (TOWER+COMPUTE LIVE)
-
-| Primal | Version | Tests | NOW | NEXT |
-|--------|---------|-------|-----|------|
-| **toadStool** | 0.2.0 | 23,332 | Deployment docs needed | Node Atomic validation (RTX 3090) |
-| **barraCuda** | 0.4.0 | 4,957 | Await glibc depot rebuild | RTX 3090 compute profiling |
-| **coralReef** | 0.2.0 | 3,527 | Await glibc depot rebuild | BTSP Phase 3 production validation |
-
-**P0 glibc RESOLVED** — cellMembrane code shipped. sporeGate needs to rebuild
-depot binaries with glibc target to unblock compute workloads on RTX 3090.
+| J8 | Key enrollment portal | **DEPLOYED** — step-ca live at ca.primals.eco (see SPOREGATE_DEPLOYMENT_OPS_155h_AAR) | sporeGate ops |
 
 ---
 
@@ -182,17 +133,17 @@ depot binaries with glibc target to unblock compute workloads on RTX 3090.
 
 ## OPEN P0/P1 ROLLUP
 
-| # | Priority | Issue | Owner |
-|---|----------|-------|-------|
-| 1 | **P0** | biomeOS BTSP session propagation in signal graph executor | biomeOS |
-| 2 | **P0** | biomeOS riboCipher transport framing in CLI paths | biomeOS |
-| 3 | P1 | Rebuild membrane depot binary with gate.configure/gate.apply | cellMembrane/sporeGate |
-| 4 | P1 | Deploy step-ca on golgiBody (J8 deployment) | sporeGate ops |
-| 5 | P1 | toadStool deployment model docs (no `server` subcommand) | toadStool |
-| 6 | P1 | hotSpring Forgejo pack corruption | eastGate admin |
-| 7 | P1 | nestGate ghost methods `content.repo.*`/`content.mirror.*` | nestGate |
+| # | Priority | Issue | Owner | sporeGate Note |
+|---|----------|-------|-------|----------------|
+| 1 | **P0** | biomeOS BTSP session propagation in signal graph executor | biomeOS | Code team |
+| 2 | **P0** | biomeOS riboCipher transport framing in CLI paths | biomeOS | Code team |
+| 3 | P1 | Rebuild membrane depot binary with gate.configure/gate.apply | cellMembrane/sporeGate | **Our lane** |
+| 4 | ~~P1~~ | ~~Deploy step-ca on golgiBody (J8 deployment)~~ | ~~sporeGate ops~~ | **DONE (155h)** |
+| 5 | P1 | toadStool deployment model docs (no `server` subcommand) | toadStool | Code team |
+| 6 | P1 | hotSpring Forgejo pack corruption | eastGate admin | Not our lane |
+| 7 | P1 | nestGate ghost methods `content.repo.*`/`content.mirror.*` | nestGate | Code team |
 
-**Resolved this wave**: ~~P0 glibc depot~~ FIXED. ~~P1 WG DNS~~ FIXED. ~~P1 ZFS pool~~ ONLINE.
+**Resolved this wave**: ~~P0 glibc depot~~ FIXED. ~~P1 WG DNS~~ FIXED. ~~P1 ZFS pool~~ ONLINE. ~~P1 step-ca~~ DEPLOYED (155h).
 
 ---
 
@@ -205,26 +156,11 @@ depot binaries with glibc target to unblock compute workloads on RTX 3090.
 | `CELLMEMBRANE_WAVE155i_GLIBC_DEPOT_WG_DNS.md` | **P0 glibc FIXED + P1 WG DNS FIXED** |
 | `TOWER_ATOMIC_VALIDATION_WAVE155i.md` | Tower health validation — all gates |
 | `NEST_ATOMIC_ALPHAFOLD_WAVE155i.md` | Nest Atomic pipeline + AlphaFold ingestion plan |
-| `SWEETGRASS_NEST_ATOMIC_G3_WIRING_WAVE155i.md` | sweetGrass G3 wiring handoff (completed) |
-| `SQUIRREL_WESTGATE_CODE_TEAM_AUDIT_WAVE155g.md` | Audit: 763 tests, clean |
-| `PETALTONGUE_WESTGATE_EVOLUTION_WAVE155g.md` | Topology architecture evolution |
-| `PETALTONGUE_WESTGATE_CODE_TEAM_AUDIT_WAVE155g.md` | Audit: 6,558 tests |
-| `NESTGATE_WESTGATE_CODE_TEAM_EXECUTION_WAVE155g.md` | P0/P1 resolved |
-| `NESTGATE_WESTGATE_CODE_TEAM_AUDIT_WAVE155g.md` | Audit: 12,973 tests |
-| `CORALREEF_WAVE155f_STRANDGATE_EXECUTION_JUL28_2026.md` | 18/18 dispatch, all P0 fixed |
-| `CORALREEF_WAVE155f_STRANDGATE_AUDIT_JUL28_2026.md` | 10 compile errors found |
-| `BARRACUDA_WAVE155f_STRANDGATE_DEEP_DEBT_JUL28_2026.md` | SIGSEGV + env races |
-| `CELLMEMBRANE_WAVE155f_J8_KEY_PORTAL.md` | step-ca SSH cert lifecycle |
-| `CELLMEMBRANE_WAVE155f_J6_COMPLETION.md` | gate.configure/gate.apply |
-| `SPOREGATE_J8_STEP_CA_DEPLOYMENT.md` | step-ca deployment guide |
 
 AARs:
-- `WESTGATE_NEST_ATOMIC_MULTICOMP_155i_AAR.md` — **First multi-composition deployment. 8 services, 1,704 capabilities. BTSP boundary gap identified.**
+- `WESTGATE_NEST_ATOMIC_MULTICOMP_155i_AAR.md` — **First multi-composition deployment. 8 services, 1,704 capabilities.**
 - `WESTGATE_ZFS_POOL_CREATION_155i_AAR.md` — **ZFS 25.4TB + L2ARC online, all 5 tiers**
-- `SPOREGATE_DEPLOYMENT_OPS_155h_AAR.md` — P0 glibc + step-ca + depot + firewall
-- `STRANDGATE_COMPUTE_TRIO_DEPLOYMENT_155f_AAR.md` — Tower + Compute deployed
-- `WESTGATE_TOWER_ATOMIC_DEPLOYMENT_155f_AAR.md` — Tower LIVE in 70 min
-- `WESTGATE_ENROLLMENT_WAVE155f_AAR.md` — Hardware corrected
+- `SPOREGATE_DEPLOYMENT_OPS_155h_AAR.md` — P0 glibc + step-ca + depot + firewall (RESOLVED)
 
 ---
 

@@ -1,15 +1,15 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-27T13:45:00Z
+# Gate: sporeGate | Updated: 2026-07-29T14:10:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-29T10:45:00Z"
-wave = "155h"
+updated = "2026-07-29T14:10:00Z"
+wave = "155i"
 
 [heads]
-bearDog = "a8bba76"
+bearDog = "78b81e4"
 songBird = "c4c5d2d"
 nestGate = "263e68a"
 biomeOS = "4667f58"
@@ -23,19 +23,19 @@ barraCuda = "ceca2b1"
 petalTongue = "f61c808"
 toadStool = "40d0ae3"
 sourDough = "3a0b52d"
-cellMembrane = "473fd7e"
+cellMembrane = "8d9bb58"
 primalSpring = "05e72e4"
 wateringHole = "b8ca9f7"
 sporePrint = "67cc325"
 
 [deploy]
 songbird_version = "0.2.1 (c4c5d2d) — GateEnroll dispatch + drawbridge body-method fallback"
-beardog_version = "0.9.0 (a8bba76) — FIDO2 + iosGate + HSM agnostic (Wave 152-154)"
+beardog_version = "0.9.0 (78b81e4) — FIDO2 + iosGate + HSM agnostic (Wave 152-155i)"
 rhizocrypt_fix = "d4972b0 — Windows cross-compile (cfg(unix) gate on publish_capability_manifest)"
 petaltongue_version = "1.7.0"
-membrane_version = "0.1.0 (473fd7e)"
+membrane_version = "0.1.0 (8d9bb58) — gate.configure + gate.apply (J6 CLOSED)"
 gateway_status = "ENROLLMENT_ENDPOINT_LIVE"
-depot_status = "FRESH — 13 primals × 3 targets (x86_64-musl, aarch64-musl, x86_64-windows-gnu), provenance tracked"
+depot_status = "FRESH — 16 musl + 3 gnu binaries, BLAKE3 checksums verified, all 0 hash mismatches"
 mesh_status = "8-GATE MESH (5 enrolling)"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
 
@@ -50,11 +50,6 @@ status = "PHASE 0 COMPLETE — LIVE ON GOLGI"
 drawbridge_addr = "127.0.0.1:7780"
 caddy_route = "primals.eco/enroll → reverse_proxy 127.0.0.1:7780"
 method = "mesh.gate_enroll"
-local_test = "PASS — param validation (missing field gate_name)"
-wan_test = "PASS — HTTPS via Caddy (param validation)"
-token_test = "PASS — progresses to wg_public_key validation"
-legacy_gateway = "DISABLED — songbird-gateway.service replaced by songbird-membrane.service"
-forgejo_api_token = "gate-enrollment-service (write:admin,write:user,write:organization)"
 
 [mesh_enrollment]
 wave = "155a"
@@ -62,7 +57,6 @@ golgi_peers = 8
 registered = ["southGate (10.13.37.9)", "strandGate (10.13.37.10)", "westGate (10.13.37.11)"]
 pending_keygen = ["blueGate (10.13.37.12)", "swiftGate (10.13.37.13)"]
 forgejo_ssh = "strandGate key registered (ID 12)"
-dns_advisory = "CRITICAL: enrollment template DNS=10.13.37.1 causes 3-5s lag — REMOVE"
 
 [tower_shadow]
 status = "ACTIVE — hourly data"
@@ -76,20 +70,43 @@ wan_tower = "76.8ms avg, 1.7x sustained"
 iperf3_lan = "2.36 Gbps sporeGate→eastGate (CONFIRMED)"
 
 [harvest]
-wave = "155b"
-harvested = "2026-07-27T16:00:00Z"
-x86_64_musl = 13
-aarch64_musl = 13
-x86_64_windows = 13
+wave = "155i"
+harvested = "2026-07-29T14:06:00Z"
+x86_64_musl = 16
+x86_64_gnu = 3
 provenance = "builder=sporeGate, toolchain=rustc 1.96.1"
-golgi_pushed = "CONFIRMED — 3 targets synced (x86_64-musl, aarch64-musl, x86_64-windows-gnu)"
-note = "Full fleet depot — all compositions + Windows gates covered"
+golgi_pushed = "CONFIRMED — musl + gnu targets synced to depot.primals.eco"
+note = "Full compute trio glibc harvest + all primals refreshed from latest source"
+checksums = "BLAKE3 regenerated — 16 musl + 3 gnu verified, 0 mismatches"
+
+[gate_status]
+probes_ok = 9
+probes_degraded = 2
+total_probes = 11
+depot_integrity = "OK — 16 verified, 0 hash mismatch"
+primals_alive = "OK — 13/13"
+depot_freshness = "OK — oldest 3h"
+sovereignty_tls = "OK — depot.primals.eco 200"
+sovereignty_relay = "OK — RustDesk hbbs+hbbr operational"
+sovereignty_content = "OK — depot serving 8163KB"
+sovereignty_auth = "OK — beardog responding"
+service_crash_loop = "OK — 14 services, no crash loops"
+vcs_parity = "OK — 0 drifted"
+mesh_reachability = "DEGRADED — mesh relay socket not found (code team: songBird)"
+rootpulse_ledger = "DEGRADED — not yet implemented (code team: cellMembrane)"
+
+[services_golgi]
+caddy = "RUNNING — /opt/membrane/caddy, 12 sites"
+step_ca = "ACTIVE — ca.primals.eco, v0.30.2, SSH CA enabled"
+depot = "LIVE — depot.primals.eco, /depot/ prefix routing FIXED (155i)"
+rustdesk_hbbs = "OK"
+rustdesk_hbbr = "OK"
 
 [hardening]
 beardog_auth_mode = "enforced (was Permissive)"
 beardog_uds_btsp = "required (was OFF)"
 method = "systemd drop-in override"
-deployed = "2026-07-26T01:35:17Z"
+log_before_drop = "DONE — RUSTDESK_UDP_RATELIMIT + RUSTDESK_TCP_RATELIMIT LOG rules"
 
 [credentials]
 gsc_service_account = "DEPLOYED to golgi:/opt/ecoPrimals/credentials/gsc-service-account.json (chmod 600)"
@@ -108,54 +125,38 @@ webb = "200"
 git = "200"
 root = "301"
 enroll = "200 (JSON-RPC param validation)"
+depot = "200"
+ca = "200"
 
 [resolved]
 tower_atomic = "COMPLETE — 7/7 debt resolved"
-depot_divergence = "RESOLVED — 28 binaries × 2 architectures"
+depot_divergence = "RESOLVED — 16 musl + 3 gnu binaries"
 production_hardening = "DEPLOYED — AUTH_MODE=enforced, BTSP=required"
 btsp_13_13 = "ALL 13 PRIMALS — ClientHello shipped"
-beardog_152_154 = "FIDO2 + iosGate + HSM agnostic + 3333L debris cleaned"
 caddy_301 = "primals.eco → sporeprint.primals.eco (permanent, path-preserving)"
-northgate_dns = "FIXED — removed DNS=10.13.37.1 from WG config"
-gate_enrollment_3of5 = "southGate + strandGate + westGate WG peers REGISTERED on golgiBody"
-phase0_enrollment_endpoint = "LIVE — primals.eco/enroll, drawbridge + Caddy, 3/3 tests PASS"
-windows_genomebins = "13/13 — first cross-compile harvest, rhizoCrypt cfg(unix) fix shipped"
-primalspring_gate_calibration = "gate count → >= 13, sporePrint known debt added"
+gate_enrollment_3of5 = "southGate + strandGate + westGate WG peers REGISTERED"
+phase0_enrollment_endpoint = "LIVE — primals.eco/enroll, drawbridge + Caddy"
+windows_genomebins = "13/13 — first cross-compile harvest"
+glibc_depot_target = "DONE (155h) — barraCuda + coralReef + toadStool x86_64-unknown-linux-gnu built and pushed"
+step_ca_deployment = "DONE (155h) — ca.primals.eco LIVE, SSH CA enabled, sshd configured on golgiBody"
+depot_content_routing = "DONE (155i) — /depot/ prefix strip added to depot.primals.eco Caddy config"
+checksums_refresh = "DONE (155i) — BLAKE3 checksums regenerated for all 19 binaries"
+membrane_j6 = "DONE (155i) — gate.configure + gate.apply operational in depot binary"
 
-[deployment_155d]
-depot_primals_eco = "LIVE — Caddy site added on golgiBody, TLS cert acquired, 200 OK"
-socket_permissions = "FIXED — membrane group created, sockets 0660 root:membrane, tmpfiles.d persistent"
-gate_status = "13/13 primals alive, sovereignty s1+s2+s4 OK, service.crash-loop OK"
-caddy_deprecation = "basicauth → basic_auth pending (Caddy warns, still functional)"
+[deployment_155i]
+membrane_rebuild = "DONE — gate.configure/gate.apply operational (cellMembrane 8d9bb58)"
+full_harvest = "DONE — 16 musl + 3 gnu binaries rebuilt from latest source, pushed to golgiBody"
+depot_routing_fix = "DONE — /depot/ prefix handler added to depot.primals.eco Caddy"
+checksums_refresh = "DONE — BLAKE3 regenerated, 0 mismatches"
+gate_status_improvement = "5/11 → 9/11 OK probes (depot.integrity, depot.freshness, s3_content, vcs.parity all FIXED)"
+nestgate_binary = "DONE — freshly built from commit 263e68a3 (was 15d stale)"
+
+[code_team_flags]
+mesh_socket = "FLAGGED — mesh relay socket not wired on sporeGate (songBird)"
+rootpulse = "FLAGGED — no rootpulse session (cellMembrane)"
+biomeos_btsp_broker = "P0 — BTSP session propagation in signal graph executor (biomeOS)"
+biomeos_ribocipher = "P0 — riboCipher transport framing in CLI paths (biomeOS)"
 
 [peptidoglycan_prep]
 bluegate_anchor = "PREP — blueGate identified as house2 peptidoglycan anchor"
-bluegate_lan_candidates = ["192.168.4.200 (Dell)", "192.168.4.231 (Gigabyte)"]
-bluegate_flint2 = "192.168.4.250 (GL.iNet = Flint 2 bridge confirmed)"
 bluegate_wg_planned = "10.13.37.12 (pending keygen)"
-direct_lan_status = "DEGRADED — ICMP to house2 gates fails, backbone path needs audit"
-flint2_bridge = "CONFIRMED live at 192.168.4.250, bridges blueGate + swiftGate"
-house2_live_hosts = ["192.168.4.200", "192.168.4.214", "192.168.4.218 (ms-device-h2)", "192.168.4.231", "192.168.4.237 (irongate)", "192.168.4.244 (xbox-h2)"]
-next_steps = "Identify blueGate LAN IP via RustDesk session, assign DHCP reservation, WG keygen"
-
-[deployment_155h]
-step_ca = "LIVE — ca.primals.eco, step-ca v0.30.2, SSH CA enabled, host cert issued for golgiBody"
-step_ca_fingerprint = "566b6a6ef9611355c5697973a7c9d699acc06318ef918ce992cd4e7884581cd5"
-step_cli_sporeGate = "BOOTSTRAPPED — step-cli v0.30.6 installed"
-log_before_drop = "DONE — RUSTDESK_UDP_RATELIMIT + RUSTDESK_TCP_RATELIMIT LOG rules in RUSTDESK_MEMBRANE chain"
-glibc_depot_target = "IN PROGRESS — gpu=true added to sources.toml for compute trio, harvest building x86_64-unknown-linux-gnu"
-harvest_155h = "12/15 musl built + pushed (155f), glibc harvest running (155h)"
-
-[code_team_flags]
-checksums_format = "RESOLVED — new membrane binary handles both formats (155d)"
-s3_content_probe = "FLAGGED — gate.status s3_content probe returns 404 (path alignment: code team)"
-vcs_parity = "FLAGGED — 21/21 repos drifted (code team sync)"
-mesh_socket = "FLAGGED — mesh relay socket not wired on sporeGate (code team: cellMembrane)"
-
-[remaining]
-glibc_depot = "P0 — harvest running, compute trio (barraCuda, coralReef, toadStool) need x86_64-unknown-linux-gnu for Vulkan dlopen"
-phase1_gate_enrollment = "P0 — 5 gates need enrollment (3 WG-keyed, 2 pending keygen)"
-bluegate_anchor_prep = "P0 — identify LAN IP, DHCP reservation, WG keygen, peptidoglycan mgmt plane"
-northgate_irongate_rustdesk = "P1 — both LAN-reachable, RustDesk degraded, needs physical access"
-bluegate_builder = "P1 — post-enrollment: set MEMBRANE_BUILD_AUTHORITY=1, verify toolchain"
-graphenegate_floating = "P2 — evolve from ADB peripheral to autonomous gate"
