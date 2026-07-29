@@ -78,7 +78,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] sporeGate on R45 → MikroTik — plasma membrane router (NAT/DHCP/DNS/nftables)
 - [x] eastGate on MikroTik LAN — code hub, 10G SFP+ direct
 - [x] northGate enrolled (Windows 11, RTX 5090, 2.5G ethernet)
-- [x] westGate ONLINE — AMD Ryzen 7 5700X / 64GB DDR4 / 2TB NVMe / 5×14TB HDD raw (NOT i7-4771, NOT ZFS pooled)
+- [x] westGate ONLINE — AMD Ryzen 7 5700X / 64GB DDR4 / 2TB NVMe / **ZFS 25.4TB mirrors + 2TB L2ARC SSD, all 5 storage tiers operational**
 - [x] ironGate HDD — 14TB + 1TB + 1TB + ~2TB, enclave experiment planned
 - [x] blueGate + swiftGate: Windows, house2, 10G backbone proven
 - [x] grapheneGate: Android, Tower LIVE (bearDog + songBird + skunkBat)
@@ -100,8 +100,8 @@ appears. This keeps the active review focused on evolving concerns.
 | flockGate | ONLINE | Linux | 10.13.37.6 | full | Nest Atomic validation (after Tower stable) |
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090, G1 validation target |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
-| strandGate | **TOWER+COMPUTE LIVE** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, GPU verified, P0 glibc needed |
-| westGate | **TOWER LIVE** | Linux | 10.13.37.11 | nest (7) | AMD Ryzen 7 5700X, 64GB, 2TB NVMe, 5×14TB raw |
+| strandGate | **TOWER+COMPUTE LIVE** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, GPU verified, glibc FIXED |
+| westGate | **NEST ATOMIC LIVE** | Linux | 10.13.37.11 | nest (8) | AMD Ryzen 7 5700X, 64GB, 2TB NVMe, ZFS 25.4TB + L2ARC |
 | blueGate | HW READY | Windows | enrolling | tower (3) | Distributed builder, **peptidoglycan anchor H2** |
 | swiftGate | HW READY | Windows | enrolling | full (13) | Hobby/consumer, house2 |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
@@ -129,7 +129,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 │  Route: WireGuard wg0 (10.13.37.x) + songBird :7700    │
 │  Auth: capability IPC, TLS, BTSP (13/13)                │
 │  Owner: per-primal, coordinated by overwatch             │
-│  Status: 9-gate mesh, Tower Atomic LIVE on 5+ gates      │
+│  Status: 9-gate mesh, Tower LIVE on 5+ gates, Nest LIVE  │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -172,7 +172,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [ ] **biomeOS BTSP session propagation** — signal graph executor needs BTSP handshakes when dispatching to primals that require auth (P0, handoff issued)
 - [ ] **biomeOS riboCipher transport** — CLI tools lack `[0xEC, 0x01]` framing (P0)
 - [ ] Only 2 WG peers active in practice (enrollment pending for house2 gates)
-- [ ] WireGuard DNS catch-all in wg0 template hijacks all resolution (strandGate AAR)
+- [x] ~~WireGuard DNS catch-all~~ — **FIXED** (cellMembrane `8d9bb58`): `WgConfig.dns` field + `DNS=` in wg-quick output
 
 ## 5. Sovereignty / Trust
 
@@ -194,19 +194,12 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] golgiBody sole depot — no local depots, all genomeBins via Caddy TLS
 - [ ] Phase 2: Tower cutover — shadow active, chimera design drafted
 - [ ] Phase 1: Zola → sporePrint primal pipeline (crates.io a sub-goal)
-- [ ] Phase 2: Forgejo → rootPulse — via Nest Atomic (AFTER Tower stable)
+- [ ] Phase 2: Forgejo → rootPulse — via Nest Atomic (**Nest LIVE on westGate — unblocked after BTSP broker**)
 - [ ] `primal.eco` inner membrane separation (P2)
 
-## 6. Public Surface / Security
+## ~~6. Public Surface / Security~~ → **FOSSILIZED as F12** (Wave 155i)
 
-- [x] 6/6 surfaces healthy (sporeprint, footprint, live, webb, lab, git)
-- [x] Security headers deployed (HSTS, CSP, X-Frame-Options)
-- [x] fail2ban + rate limiting active
-- [x] TLS auto-renewing (ACME)
-- [x] Tower pen test: 7 scenarios, all PASS, 0 remaining findings
-- [x] sporePrint transplant DONE + credibility audit
-- [x] External claim convergence standard issued
-- [ ] sporePrint ongoing: 5 impulses for maturity badges
+ALL SECURITY ITEMS RESOLVED. sporePrint impulses are an ongoing publishing cadence, not a security concern — tracked under D11 (Campus). Moved to Fossilized section below.
 
 ## 7. Compositions / Products
 
@@ -272,9 +265,11 @@ From sporeGate deployment AAR. These block "operator runs shell loops" →
 - [ ] **J7: Legacy service detection** — OPEN. One-time, low priority (cellMembrane P3)
 - [x] **J8: Key enrollment portal** — **CODE SHIPPED**. step-ca SSH cert lifecycle in cellMembrane (`b13105b`). enroll phase 8 (`ssh_cert`). Non-fatal if CA not deployed. **Deployment pending** — sporeGate needs step-ca on golgiBody.
 
-7/8 resolved. J6 CLOSED (gate.configure/apply). J8 code shipped (step-ca lifecycle),
-deployment pending. **Near-fossilization**: only J7 (legacy detection, P3) remains.
-Once step-ca is deployed on golgiBody, J8 graduates from "code shipped" to "CLOSED".
+**7/8 code-complete.** J6 CLOSED. J8 code shipped (deployment is an ops task tracked
+in P0/P1 rollup as "step-ca on golgiBody"). Only J7 (legacy detection, one-time P3)
+remains as a code item. The jelly string dimension itself — codifying manual shell
+loops into Rust primals — is **ACHIEVED**. All deployment automation that was manual
+is now primal-native. Fossilization candidate once step-ca is deployed.
 
 ## 11. Campus / Physical Infrastructure
 
@@ -285,7 +280,7 @@ Once step-ca is deployed on golgiBody, J8 graduates from "code shipped" to "CLOS
 - [x] Thermal sovereignty loop designed
 - [x] footPrint GeoJSON location added
 - [x] sporePrint transplant + credibility audit DONE
-- [ ] sporePrint ongoing: 5 impulses
+- [ ] sporePrint ongoing: 5 impulses for maturity badges (migrated from D6)
 - [ ] Building tour / physical access not yet arranged
 
 ---
@@ -348,6 +343,7 @@ Zero-operator postPrimordial enrollment fully shipped:
 
 ## F11. Documentation / Fossil Record (fossilized Wave 155h)
 
+
 All documentation infrastructure complete and current:
 
 - ECOSYSTEM_BLURB.md universal handoff (Tracks A+B converged)
@@ -361,21 +357,36 @@ All documentation infrastructure complete and current:
 - 42+ docs fossilized in fossilRecord/
 - coralForge retired — vestigial name, now helixVision
 - Peptidoglycan + Provenance Trio AARs filed
-- 11+ new handoff docs from Wave 155f–h code teams
+- 17+ handoff docs from Wave 155f–i (code teams + AARs + Nest Atomic)
+
+## F12. Public Surface / Security (fossilized Wave 155i)
+
+All security infrastructure complete and operational:
+
+- 6/6 surfaces healthy (sporeprint, footprint, live, webb, lab, git)
+- Security headers deployed (HSTS, CSP, X-Frame-Options)
+- fail2ban + rate limiting active
+- TLS auto-renewing (ACME)
+- Tower pen test: 7 scenarios, all PASS, 0 remaining findings
+- sporePrint transplant DONE + credibility audit
+- External claim convergence standard issued
+- sporePrint impulses (ongoing cadence) tracked under D11 Campus
 
 ---
 
-**Active**: 10 dimensions (1–8, 10–11)
-**Fossilized**: 11 dimensions (F1–F11)
-**Summary**: Orthogonal review at Wave 155i. Nest Atomic LIVE on westGate — first
-multi-composition (8 services, 1,704 capabilities auto-discovered). Provenance Trio
-CLOSED (sweetGrass G3 v0.8.0). ZFS 25.4TB + L2ARC online, all 5 tiers. P0 glibc
-FIXED. P1 WG DNS FIXED. NEW P0: biomeOS needs BTSP session propagation in signal
-graph executor for composition broker pattern. 27 signal graphs. ~72K+ tests.
+**Active**: 9 dimensions (1–5, 7–8, 10–11)
+**Fossilized**: 12 dimensions (F1–F12)
+**Summary**: Full orthogonal review at Wave 155i. **D6 FOSSILIZED (F12)** — all
+public surface and security items resolved. Nest Atomic LIVE on westGate — first
+multi-composition (8 services, 1,704 capabilities). Provenance Trio CLOSED
+(sweetGrass G3 v0.8.0). ZFS 25.4TB + L2ARC online. P0 glibc FIXED. P1 WG DNS
+FIXED. NEW P0: biomeOS BTSP session propagation for composition broker. D10
+Jelly Strings 7/8 code-complete (fossilization candidate after step-ca deploy).
+27 signal graphs. ~72K+ tests.
 
 ---
 
 *Last used*: Wave 155i (Jul 29, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 155h (F11 — Documentation / Fossil Record)
+*Latest fossilization*: Wave 155i (F12 — Public Surface / Security)

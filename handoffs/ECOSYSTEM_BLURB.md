@@ -112,43 +112,48 @@ now auto-appends gnu for GPU primals unconditionally.
 
 ### eastGate — Overwatch + Orchestration
 
-| Primal | Version | Role | Next Work |
-|--------|---------|------|-----------|
-| **biomeOS** | 0.1.0 | Signal graph orchestrator | `nest.ingest_dataset` shipped. Live `tower.health` validation on westGate + strandGate. |
-| **primalSpring** | — | Scenario validation | Calibrate for distributed gate topology. |
-| **bearDog** | 0.9.0 | Trust foundation | ACME Phase 2 client (songBird needs it). G6 audit. |
-| **songBird** | 0.2.1 | Discovery + IPC | ACME shipped. bearDog Phase 2 blocked. Deep debt landed. |
-| **skunkBat** | 0.2.18 | Defense | Monitor gate migrations. |
-| **cellMembrane** | — | Deployment fabric | **J6 CLOSED.** J8 code shipped. **P0 glibc FIXED. P1 WG DNS FIXED.** step-ca on golgiBody pending. |
+| Primal | Version | Role | NOW | NEXT |
+|--------|---------|------|-----|------|
+| **biomeOS** | 0.1.0 | Signal graph orchestrator | **P0: BTSP session propagation** in signal graph executor. **P0: riboCipher transport** in CLI paths. | Composition broker pattern across all atomics |
+| **bearDog** | 0.9.0 | Trust foundation | ACME Phase 2 client (songBird needs it) | G6 public flip audit |
+| **songBird** | 0.2.1 | Discovery + IPC | Mesh refactor shipped. Awaiting bearDog ACME Phase 2 | Federation across Nest Atomic gates |
+| **cellMembrane** | — | Deployment fabric | **Rebuild membrane depot binary** (gate.configure/gate.apply). step-ca on golgiBody. | Composition-aware systemd generation |
+| **skunkBat** | 0.2.18 | Defense | Monitor Nest Atomic deployment | — |
+| **primalSpring** | — | Scenario validation | — | Calibrate for multi-composition topology |
 
-### westGate — Nest Atomic + Data (CODE TEAMS DELIVERED)
+### westGate — NEST ATOMIC LIVE (8 services, 1,704 capabilities)
 
-| Primal | Version | Tests | Latest |
-|--------|---------|-------|--------|
-| **petalTongue** | 1.7.0 | 6,605 | Topology architecture, runtime manifest, geometry split |
-| **squirrel** | 0.1.0 | 763 | Capability purification, adapter IPC |
-| **nestGate** | 0.5.0 | 12,973 | P0/P1 closed, live CLI, ZFS tier migration |
-| **loamSpine** | 0.9.16 | 1,739 | BTSP handshake dedup. **155i**: registry drift fixed — `certificate.verify/lifecycle/history` discoverable |
-| **rhizoCrypt** | 0.14.17 | 1,456 | (no new evolution this wave) |
-| **sweetGrass** | **0.8.0** | **1,625** | **G3 wiring COMPLETE** — `LedgerClient`, `braid.commit` → loamSpine, ledger proof. Provenance Trio CLOSED |
+| Primal | Version | Tests | NOW | NEXT |
+|--------|---------|-------|-----|------|
+| **nestGate** | 0.5.0 | 12,973 | Configure CAS on ZFS (`NESTGATE_STORAGE_PATH`) | Tier migration NVMe→ZFS. Ghost method cleanup. |
+| **sweetGrass** | **0.8.0** | **1,625** | **G3 DONE.** E2E test with loamSpine on westGate | Cross-gate attribution with northGate data |
+| **loamSpine** | 0.9.16 | 1,739 | Registry fixed. Ready for E2E with sweetGrass | Certificate lifecycle across compositions |
+| **rhizoCrypt** | 0.14.17 | 1,456 | DAG events working. Awaiting signal graph dispatch | — |
+| **petalTongue** | 1.7.0 | 6,605 | Topology delivered | Visualize Nest Atomic composition state |
+| **squirrel** | 0.1.0 | 763 | Capability purification done | — |
 
 westGate **NEST ATOMIC LIVE** — 8 services deployed, Provenance Trio CLOSED.
-ZFS 25.4TB + 2TB L2ARC online. All 5 storage tiers operational. 6 PDBs in CAS. Next:
-- **biomeOS BTSP composition broker** — signal graph executor needs BTSP propagation
-- **E2E Nest Atomic signal graph validation** — with BTSP working end-to-end
-- **AlphaFold bulk ingestion** → ~1TB from northGate through full pipeline
+ZFS 25.4TB + 2TB L2ARC online. All 5 storage tiers operational. 6 PDBs in CAS.
 
-### strandGate — Compute Trio (DEPLOYED)
+**Blocked on**: biomeOS BTSP composition broker (P0) — signal graph dispatch
+fails at BTSP auth boundary. Individual primal IPC works, orchestrated
+pipelines need the Neural API to broker trust.
 
-| Primal | Version | Tests | Latest |
-|--------|---------|-------|--------|
-| **toadStool** | 0.2.0 | 23,332 | S344 deny.toml, overstep reduction |
-| **barraCuda** | 0.4.0 | 4,957 | SIGSEGV fix, BTSP env races, dead code (-1,200L) |
-| **coralReef** | 0.2.0 | 3,527 | 18/18 dispatch, BTSP Phase 3 encrypted transport |
+**After BTSP broker**:
+1. E2E `nest.ingest_dataset` signal graph validation (small PDB test)
+2. AlphaFold bulk ingestion (~1TB from northGate)
+3. Tier migration profiling across all 5 storage tiers
 
-strandGate Tower LIVE + Compute Trio deployed. **P0 glibc RESOLVED** —
-cellMembrane `targets_for_primal()` now auto-appends gnu for GPU primals.
-Rebuild depot binaries on sporeGate to produce glibc genomeBins.
+### strandGate — Compute Trio (TOWER+COMPUTE LIVE)
+
+| Primal | Version | Tests | NOW | NEXT |
+|--------|---------|-------|-----|------|
+| **toadStool** | 0.2.0 | 23,332 | Deployment docs needed | Node Atomic validation (RTX 3090) |
+| **barraCuda** | 0.4.0 | 4,957 | Await glibc depot rebuild | RTX 3090 compute profiling |
+| **coralReef** | 0.2.0 | 3,527 | Await glibc depot rebuild | BTSP Phase 3 production validation |
+
+**P0 glibc RESOLVED** — cellMembrane code shipped. sporeGate needs to rebuild
+depot binaries with glibc target to unblock compute workloads on RTX 3090.
 
 ---
 
@@ -156,22 +161,22 @@ Rebuild depot binaries on sporeGate to produce glibc genomeBins.
 
 ### House 1 (peptidoglycan anchor: sporeGate)
 
-| Gate | Status | Teams | Next Work |
-|------|--------|-------|-----------|
-| **sporeGate** | ONLINE | Build authority | **P0**: Add glibc depot target for GPU primals. step-ca deploy. |
-| **eastGate** | ONLINE | Overwatch | Coordinate. bearDog ACME Phase 2. |
-| **northGate** | DEGRADED | — | Fix RustDesk. G1 Tower validation. |
+| Gate | Status | NOW | NEXT |
+|------|--------|-----|------|
+| **sporeGate** | ONLINE | Rebuild depot with glibc target. step-ca deploy on golgiBody. | Glibc genomeBins for strandGate compute |
+| **eastGate** | ONLINE | biomeOS BTSP broker evolution. bearDog ACME Phase 2. | Coordinate Nest Atomic validation fleet |
+| **northGate** | ONLINE (Windows) | Tower assessment for AlphaFold federation | Stage ~1TB AlphaFold → westGate |
 
 ### House 2 (peptidoglycan anchor: blueGate)
 
-| Gate | Status | Teams | Next Work |
-|------|--------|-------|-----------|
-| **strandGate** | **TOWER+COMPUTE LIVE** | Compute trio | Await glibc depot. Profile RTX 3090. |
-| **westGate** | **NEST ATOMIC LIVE** | Nest + data | biomeOS BTSP broker needed. E2E signal graph validation. AlphaFold ingestion. |
-| **blueGate** | ONLINE (Windows) | — | Peptidoglycan anchor H2. G1 proof. |
-| **ironGate** | DEGRADED (RustDesk) | — | Fix RustDesk. HDD enclave. |
-| **swiftGate** | ONLINE (Windows) | — | Tower on Windows. |
-| **southGate** | HW READY | — | Enroll → Tower → NUCLEUS. |
+| Gate | Status | NOW | NEXT |
+|------|--------|-----|------|
+| **strandGate** | **TOWER+COMPUTE LIVE** | Await glibc depot rebuild | RTX 3090 compute profiling. Node Atomic. |
+| **westGate** | **NEST ATOMIC LIVE** | Await biomeOS BTSP broker | E2E signal graph → AlphaFold ingestion |
+| **blueGate** | ONLINE (Windows) | Peptidoglycan anchor H2 | G1 Tower on Windows proof |
+| **ironGate** | ONLINE | HDD enclave experiment | Nest Atomic secondary target |
+| **swiftGate** | ONLINE (Windows) | — | G1 Tower on Windows |
+| **southGate** | HW READY | — | Enroll → Tower |
 
 ---
 
