@@ -131,10 +131,30 @@ Awaiting sporeGate depot rebuild with glibc target (cellMembrane P0 code shipped
 
 ---
 
+## Deep Debt Sweep (same wave)
+
+12-axis audit confirmed clean bill. Changes:
+
+| Item | Before | After |
+|------|--------|-------|
+| `ShaderValidationBackend::CoralReef` | Names providing primal | `SovereignCpu` — capability-based |
+| 10 batch functions (bessel/erf/activation) | Doc-only "deprecated" | Formal `#[deprecated(since = "0.4.1")]` |
+| `#![allow(clippy::unwrap_used)]` | Bare allow | `#![expect(..., reason)]` |
+| Production `unwrap()` | 0 | 0 (confirmed) |
+| `Result<T, String>` | 0 | 0 (confirmed) |
+| Cross-primal compile deps | 0 | 0 (confirmed) |
+| Production mocks | 0 | 0 (confirmed) |
+| Files > 800L | 0 | 0 (max 783L) |
+
+---
+
 ## For Upstream
 
 - **Multi-GPU dispatch** (P3 roadmap): strandGate is ideal — two discrete GPUs from
   different vendors. Cross-vendor workload distribution now has real hardware to target.
 - **FHE on GPU**: Bit-perfect NTT round-trips confirmed. strandGate can serve as FHE
   compute target for Nest Atomic workloads via sovereign IPC.
+- **Compute Trio AAR**: `STRANDGATE_COMPUTE_TRIO_SILICON_UTILIZATION_155i_AAR.md` — full
+  silicon utilization strategy for coordination across barraCuda + toadStool + coralReef.
+  Maps all GPU execution units, DF64 thesis, three-phase evolution roadmap.
 - **No gaps found** in barraCuda code — all validation passes on real hardware.
