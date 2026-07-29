@@ -138,7 +138,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 | Gate | Status | NOW | NEXT |
 |------|--------|-----|------|
-| **blueGate** | **ENROLLED** (Windows) | **WG peer #9 + Forgejo SSH registered. 40/40 repos. Tower bins ready. Activate tunnel → Tower Atomic.** | Nest → Node Atomic. Sub-builder. Topo owner H2. |
+| **blueGate** | **TOWER 2/3** (Windows) | **Mesh LIVE (3 peers). bearDog+skunkBat HEALTHY. songBird BLOCKED (platform gate P0).** | songBird fix → full Tower → Nest → Node. Sub-builder. Topo owner H2. |
 | **strandGate** | **TOWER+COMPUTE LIVE** | Glibc depot received. Compute Trio validated. | Node Atomic profiling. Full BTSP validation. |
 | **westGate** | **NEST ATOMIC LIVE** | CAS on ZFS verified. biomeOS broker ready. | E2E `nest.ingest_dataset` live. AlphaFold ingestion (~11hr dsync, NVMe staging recommended). |
 | **swiftGate** | ONLINE (Windows) | — | G1 Tower on Windows (second Windows proof after blueGate) |
@@ -151,16 +151,17 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 | # | Priority | Issue | Owner | Status |
 |---|----------|-------|-------|--------|
-| 1 | ~~**P0**~~ | ~~biomeOS BTSP session propagation~~ | ~~biomeOS~~ | **SHIPPED** (v4.45, `48cf9c33`) |
-| 2 | ~~**P0**~~ | ~~biomeOS riboCipher transport framing~~ | ~~biomeOS~~ | **SHIPPED** (v4.45, `48cf9c33`) |
-| 3 | P1 | bearDog `crypto.sign_ed25519` returns health stub, not signature | bearDog | Blocks Provenance Trio step 7/7 |
+| 1 | **P0** | **songBird Windows platform gate blocks G1** — orchestrator rejects Windows before evaluating --listen/--bind. Transport code exists in universal-ipc (windows.rs + fallback.rs) but not wired. | songBird | **Handoff issued** |
+| 2 | ~~**P0**~~ | ~~biomeOS BTSP session propagation~~ | ~~biomeOS~~ | **SHIPPED** (v4.45, `48cf9c33`) |
+| 3 | ~~**P0**~~ | ~~biomeOS riboCipher transport framing~~ | ~~biomeOS~~ | **SHIPPED** (v4.45, `48cf9c33`) |
+| 4 | P1 | bearDog `crypto.sign_ed25519` returns health stub, not signature | bearDog | Blocks Provenance Trio step 7/7 |
 | 4 | P1 | sweetGrass depot binary lag (v0.7.64 vs source v0.8.0) | sporeGate | Blocks westGate G3 live validation |
 | 5 | P1 | biomeOS depot binary lag — v4.45 composition broker not on sporeGate | sporeGate | Needed for live E2E |
 | 6 | P1 | sporeGate mesh.reachability + rootpulse.ledger degraded | sporeGate | 2/11 remaining |
 | 7 | P1 | songBird riboCipher probes → sweetGrass log noise (every 30s) | songBird | Low but annoying |
 | 8 | P1 | hotSpring Forgejo pack corruption | eastGate admin | Not our lane |
 
-**ZERO P0s.** Resolved: ~~P0 BTSP session propagation~~ SHIPPED. ~~P0 riboCipher transport~~ SHIPPED. ~~P0 glibc depot~~ FIXED. ~~P1 WG DNS~~ FIXED. ~~P1 ZFS pool~~ ONLINE. ~~P1 step-ca~~ DEPLOYED. ~~P1 membrane depot~~ REBUILT (J6). ~~P1 nestGate ghost methods~~ REMOVED. ~~P1 toadStool deployment docs~~ SHIPPED (S345). sporeGate health 5/11→9/11.
+**1 P0** (songBird Windows platform gate — G1 blocker). Resolved: ~~P0 BTSP session propagation~~ SHIPPED. ~~P0 riboCipher transport~~ SHIPPED. ~~P0 glibc depot~~ FIXED. ~~P1 WG DNS~~ FIXED. ~~P1 ZFS pool~~ ONLINE. ~~P1 step-ca~~ DEPLOYED. ~~P1 membrane depot~~ REBUILT (J6). ~~P1 nestGate ghost methods~~ REMOVED. ~~P1 toadStool deployment docs~~ SHIPPED (S345). sporeGate health 5/11→9/11.
 
 ---
 
@@ -168,7 +169,10 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 | File | Status |
 |------|--------|
-| `CELLMEMBRANE_WAVE155i_DEEP_DEBT_EVOLUTION.md` | **Deep debt: sandbox fail-closed, registry-driven tower** |
+| `SONGBIRD_WINDOWS_PLATFORM_GATE_WAVE155i.md` | **P0: songBird platform gate blocks G1 on Windows** |
+| `BLUEGATE_TOWER_ATOMIC_WAVE155i.md` | **Tower 2/3 on Windows. bearDog+skunkBat HEALTHY.** |
+| `BLUEGATE_WINDOWS_DEPLOYMENT_AAR_WAVE155i.md` | **15 Windows issues (2 P0, 5 P1, 8 P2)** |
+| `CELLMEMBRANE_WAVE155i_DEEP_DEBT_EVOLUTION.md` | Deep debt: sandbox fail-closed, registry-driven tower |
 | `NESTGATE_WAVE155i_DEEP_DEBT_CAS_JUL29_2026.md` | **CAS on ZFS verified, 13K+ tests, zero unsafe** |
 | `CORALREEF_WAVE155i_STRANDGATE_VALIDATION_JUL29_2026.md` | **18/18 methods, 463 .expect() purged, PTX modernized** |
 | `STRANDGATE_WAVE155i_COMPUTE_TRIO_VALIDATION.md` | **Compute Trio rebuilt, RTX 3090 profiled, 5 primals** |
@@ -177,6 +181,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 | `CELLMEMBRANE_WAVE155i_GLIBC_DEPOT_WG_DNS.md` | P0 glibc FIXED + P1 WG DNS FIXED |
 
 AARs:
+- `BLUEGATE_BOOTSTRAP_155i_AAR.md` — **First Windows gate: 40/40 repos, Tower bins, mesh LIVE**
 - `SWEETGRASS_G3_E2E_VALIDATED_155i_AAR.md` — **G3 E2E validated, 1,636 tests, v0.8.0**
 - `WESTGATE_CASCADE_REVIEW_ZFS_PROVENANCE_155i_AAR.md` — **CAS migration, Provenance 6/7, storage profiling**
 - `STRANDGATE_COMPUTE_TRIO_SILICON_UTILIZATION_155i_AAR.md` — **DF64 framing, RTX 3090 FP64 ~104T, silicon map**

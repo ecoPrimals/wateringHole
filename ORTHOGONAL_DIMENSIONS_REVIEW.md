@@ -106,7 +106,7 @@ appears. This keeps the active review focused on evolving concerns.
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
 | strandGate | **TOWER+COMPUTE LIVE** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, FP64 ~104T, 5 primals, 17 sockets, glibc trio shipped |
 | westGate | **NEST ATOMIC LIVE** | Linux | 10.13.37.11 | nest (8) | AMD Ryzen 7 5700X, 64GB, 2TB NVMe, ZFS 25.4TB, 3,119 CAS objects, Provenance 6/7 |
-| blueGate | **ENROLLED** | Windows | 10.13.37.12 | **full — Tower→Nest→Node** | **WG peer #9 + Forgejo SSH registered. 40/40 repos. Tower bins ready. Topo owner H2, sub-builder.** |
+| blueGate | **TOWER 2/3** | Windows | 10.13.37.12 | **full — Tower→Nest→Node** | **Mesh LIVE (3 peers). bearDog+skunkBat HEALTHY. songBird BLOCKED (platform gate P0). Topo H2, sub-builder.** |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
 
@@ -249,7 +249,8 @@ ALL SECURITY ITEMS RESOLVED. sporePrint impulses are an ongoing publishing caden
 - [x] toadStool wgpu cross-platform GPU (DX12/Vulkan/Metal)
 - [x] biomeOS platform_native transport on all 27 signal graphs
 - [x] biomeOS cross-platform socket templates (named pipes + TCP fallback)
-- [ ] Windows genomeBins not yet in golgiBody depot (cross-compile needed)
+- [x] ~~Windows genomeBins not yet in golgiBody depot~~ — **14 .exe binaries available** (blueGate verified)
+- [ ] **songBird Windows platform gate (P0)** — `#[cfg(not(unix))]` blocks before --listen evaluated. Transport code exists (windows.rs 341L, fallback.rs 156L) but not wired. Handoff issued.
 - [ ] macOS genomeBins — check-pass only, no linker for cross-build from Linux
 - [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
 - [ ] systemd abstraction for Windows Service / launchd paths (cellMembrane `InitSystem` foundation shipped)
