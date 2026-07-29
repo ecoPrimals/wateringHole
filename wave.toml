@@ -12,7 +12,7 @@
 id = 155
 sub = "i"
 date = "2026-07-29"
-posture = "NEST ATOMIC PIPELINE WIRING. loamSpine registry drift fixed (certificate.verify/lifecycle/history). biomeOS nest.ingest_dataset signal graph shipped. sweetGrass G3 wiring handoff issued (braid.commit → loamSpine). Tower health validation target: westGate + strandGate. AlphaFold ~1TB ingestion pipeline designed: northGate → westGate CAS with full Provenance Trio backtracking. westGate ZFS pool pending (5x14TB). P0: glibc depot target still open."
+posture = "NEST ATOMIC LIVE ON WESTGATE. First multi-composition: 8 services, 1,704 capabilities auto-discovered. Provenance Trio CLOSED (sweetGrass G3 v0.8.0). ZFS 25.4TB + L2ARC online, all 5 tiers. P0 glibc FIXED. P1 WG DNS FIXED. NEW P0: biomeOS BTSP session propagation needed for composition broker pattern. 6 PDBs in CAS. 27 signal graphs. ~72K+ tests."
 publisher = "eastGate-overwatch"
 
 [gates]

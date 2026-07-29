@@ -28,20 +28,23 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] JOSS publication strategy defined
 - [x] GLOSSARY.md refreshed (Wave 155b)
 - [x] cellMembrane + plasmidBin cascaded to Forgejo
-- [x] **13 new handoff docs** delivered this wave (code team audits + execution + AARs + Nest Atomic pipeline)
+- [x] **17+ new handoff docs** delivered this wave (code teams + AARs + Nest Atomic + composition broker)
 - [ ] waterFall graph partially wired — full composition pending Provenance Trio
 - [ ] Context braids not yet replacing blurb paste — graduation path documented
 - [x] `freshness.toml` updated to Wave 155h with 38 HEAD SHAs
-- [x] **Nest Atomic handoffs issued** (155i): pipeline coordination + sweetGrass G3 wiring
-- [ ] Tower Atomic validation handoff needed before Nest Atomic proceeds
+- [x] **Nest Atomic LIVE on westGate** — 8 services, Provenance Trio CLOSED, ZFS online
+- [x] sweetGrass G3 wiring COMPLETE (v0.8.0)
+- [x] westGate ZFS 25.4TB + 2TB L2ARC online, all 5 storage tiers operational
+- [x] P0 glibc depot FIXED (cellMembrane). P1 WG DNS FIXED.
+- [ ] biomeOS composition broker handoff issued — BTSP session propagation needed
 - [ ] 3 enrolling gates have no published heads in `heads/*.toml`
 
 ## 2. Ecological (Primal Health)
 
 - [x] All primals compile — 5 Tier 1 genomeBin architectures
-- [x] **P0: glibc depot target needed** — musl can't dlopen Vulkan ICD for GPU primals
+- [x] ~~P0: glibc depot target~~ — **FIXED** (cellMembrane `8d9bb58`): `targets_for_primal()` auto-appends gnu for GPU primals
 - [x] 43/43 repos Forgejo-first
-- [x] **~70K+ `#[test]` attrs** in primals (toadStool 23K, songBird 14K+, nestGate 13K, bearDog 12K, biomeOS 8.5K, petalTongue 6.6K, barraCuda 5K, coralReef 3.5K)
+- [x] **~72K+ `#[test]` attrs** in primals (toadStool 23K, songBird 14K+, nestGate 13K, bearDog 12K, biomeOS 8.5K, petalTongue 6.6K, barraCuda 5K, coralReef 3.5K, sweetGrass 1.6K, loamSpine 1.3K, cellMembrane 1.2K)
 - [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean
 - [x] nestGate vendor elimination COMPLETE (Wave 150u)
 - [x] Production `.unwrap()` — 0 in critical-path primals
@@ -53,7 +56,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] toadStool: **23,332** tests, **S344**: deny.toml expanded, overstep reduced, socket centralized
 - [x] rhizoCrypt: 1,456 tests, BTSP→DAG bridge, cross-gate provenance chain
 - [x] loamSpine: **1,739** tests, **BTSP handshake dedup**: `verify_and_negotiate()` + `AsyncErrorSender`. **155i**: registry drift fixed — `certificate.verify/lifecycle/history` discoverable
-- [x] sweetGrass: 1,676 tests, cross-gate attribution, PROV-O, BTSP ClientHello, `CertificateRef` SHIPPED — **G3 wiring handoff issued (155i)**
+- [x] sweetGrass: **1,625** tests, **v0.8.0**, **G3 wiring COMPLETE** — `LedgerClient`, `braid.commit` → loamSpine, ledger proof. Provenance Trio CLOSED
 - [x] petalTongue: **6,605** tests, **topology→runtime manifest**, main.rs split, geometry module
 - [x] squirrel: **763** tests, **capability purification**: beardog→security_provider, adapter IPC
 - [x] barraCuda: **4,957** tests, **SIGSEGV fixed** (GPU_TEST_GUARD), BTSP env races, dead code (-1,200L)
@@ -64,7 +67,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Tower debt: 36 → **1** (grapheneGate HSM only)
 - [x] songBird crypto delegation to bearDog: 6/6 seams DONE
 - [x] Compositions fixed: `compute` and `nest` include Tower Atomic base primals
-- [x] **cellMembrane**: **1,219** tests, **J6 CLOSED** (gate.configure/gate.apply), **J8 code shipped** (step-ca SSH certs)
+- [x] **cellMembrane**: **1,223** tests, **J6 CLOSED**, **J8 code shipped**, **P0 glibc FIXED**, **P1 WG DNS FIXED**
 - [ ] **1 known debt finding**: grapheneGate-readiness (HSM not on eastGate)
 - [ ] Chimera Phase 0: library extraction (UNBLOCKED — crypto delegation done)
 - [ ] nestGate: ghost methods `content.repo.*`/`content.mirror.*` — implement or remove (P2)
@@ -163,10 +166,12 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] LAN peering: Tower 353x LAN (0.45ms vs 158ms WG overlay)
 - [x] songBird universal-ipc: UDS/named pipes/abstract sockets/TCP
 - [x] BTSP defense-in-depth: 13/13 primals
-- [x] **biomeOS neuralAPI**: **27** signal graphs (nest.ingest_dataset added 155i), 19 atomic translations, platform_native transport
+- [x] **biomeOS neuralAPI**: **27** signal graphs, 19 atomic translations, platform_native transport. **1,704 capabilities auto-discovered on westGate.**
 - [x] **songBird ACME HTTP-01** challenge responder shipped — Phase 1 TLS elimination
+- [x] songBird mesh refactor: enrollment crypto + mesh helpers extracted, all files <800L
+- [ ] **biomeOS BTSP session propagation** — signal graph executor needs BTSP handshakes when dispatching to primals that require auth (P0, handoff issued)
+- [ ] **biomeOS riboCipher transport** — CLI tools lack `[0xEC, 0x01]` framing (P0)
 - [ ] Only 2 WG peers active in practice (enrollment pending for house2 gates)
-- [ ] **Tower Atomic needs live validation on all LIVE gates** — `tower.health` signal graph dispatch on westGate + strandGate before Nest Atomic proceeds
 - [ ] WireGuard DNS catch-all in wg0 template hijacks all resolution (strandGate AAR)
 
 ## 5. Sovereignty / Trust
@@ -214,7 +219,8 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] songBird crypto delegation 6/6 COMPLETE — composition model validated
 - [x] Composition profiles fixed: `compute` = Tower + node, `nest` = Tower + provenance trio
 - [x] `tower-builder` profile created for distributed build mesh nodes
-- [x] **biomeOS neuralAPI**: Tower (8), Node (3), Nest (**9**) signal graphs with semantic dispatch
+- [x] **biomeOS neuralAPI**: Tower (8), Node (3), Nest (**9**) signal graphs with semantic dispatch. **1,704 capabilities auto-discovered on westGate.**
+- [ ] **biomeOS composition broker** — needs BTSP session propagation for multi-composition deployments (P0)
 - [ ] **Chimera Phase 0**: shared library extraction (`libtower.so`) — UNBLOCKED
 - [ ] sporePrint primal pipeline: replace Zola
 - [ ] 6 springs pending `validation.json`
@@ -237,7 +243,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] **strandGate Compute Trio deployed** — Tower + barraCuda + coralReef LIVE
 - [x] barraCuda GPU verified on RTX 3090 (source build, SHADER_F64 enabled)
 - [x] coralReef 18/18 JSON-RPC dispatch complete (10 compile errors fixed, BTSP Phase 3)
-- [ ] **P0**: musl genomeBins can't `dlopen` glibc Vulkan ICD — need `x86_64-unknown-linux-gnu` depot target
+- [x] ~~P0 glibc~~ — **FIXED** (cellMembrane `8d9bb58`): `targets_for_primal()` auto-appends gnu for GPU primals. Depot rebuild needed on sporeGate.
 - [ ] J8: Key enrollment portal — code shipped, deployment pending
 - [x] Pure Rust across all primals — zero C deps on critical path
 - [x] toadStool wgpu cross-platform GPU (DX12/Vulkan/Metal)
@@ -361,12 +367,11 @@ All documentation infrastructure complete and current:
 
 **Active**: 10 dimensions (1–8, 10–11)
 **Fossilized**: 11 dimensions (F1–F11)
-**Summary**: Orthogonal review at Wave 155i. Nest Atomic pipeline wiring begins:
-loamSpine registry drift fixed (certificate.verify discoverable), biomeOS
-nest.ingest_dataset signal graph created (27 total), sweetGrass G3 wiring handoff
-issued. Tower Atomic validation handoffs needed first (prerequisite for Nest Atomic).
-D10 (Jelly Strings) at 7/8 — only J7 (low priority P3) remains open. P0: glibc
-depot target still open. ~70K+ tests.
+**Summary**: Orthogonal review at Wave 155i. Nest Atomic LIVE on westGate — first
+multi-composition (8 services, 1,704 capabilities auto-discovered). Provenance Trio
+CLOSED (sweetGrass G3 v0.8.0). ZFS 25.4TB + L2ARC online, all 5 tiers. P0 glibc
+FIXED. P1 WG DNS FIXED. NEW P0: biomeOS needs BTSP session propagation in signal
+graph executor for composition broker pattern. 27 signal graphs. ~72K+ tests.
 
 ---
 
