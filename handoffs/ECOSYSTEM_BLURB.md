@@ -202,6 +202,7 @@ Need `x86_64-unknown-linux-gnu` glibc target in depot pipeline.
 | `SPOREGATE_J8_STEP_CA_DEPLOYMENT.md` | step-ca deployment guide |
 
 AARs:
+- `SPOREGATE_DEPLOYMENT_OPS_155h_AAR.md` — **P0 glibc + step-ca + depot + firewall (RESOLVED)**
 - `STRANDGATE_COMPUTE_TRIO_DEPLOYMENT_155f_AAR.md` — Tower + Compute deployed, P0 musl/glibc
 - `WESTGATE_TOWER_ATOMIC_DEPLOYMENT_155f_AAR.md` — Tower LIVE in 70 min
 - `WESTGATE_ENROLLMENT_WAVE155f_AAR.md` — Hardware corrected
