@@ -1,4 +1,4 @@
-# Team Startup Blurb — Wave 155h
+# Team Startup Blurb — Wave 155i
 
 **From**: eastGate overwatch
 **Purpose**: Paste this into any new IDE session on any gate. It bootstraps
@@ -80,37 +80,45 @@ ecoPrimals is a sovereign, AGPL-3.0 mesh operating system built in pure Rust.
 13 primals (autonomous binaries) compose into **atomics**: Tower (security +
 discovery + defense), Node (Tower + compute), Nest (Tower + storage +
 provenance), and NUCLEUS (all 13). biomeOS orchestrates via a Neural API
-with 26 signal graphs and semantic dispatch (`tower.health`, `node.compute`,
-`nest.store`, etc.). All binaries ("genomeBins") are served from a single
-depot on golgiBody (`https://depot.primals.eco`). Gates are physical machines
-running Tower Atomic or higher compositions.
+with 27 signal graphs and semantic dispatch (`tower.health`, `node.compute`,
+`nest.store`, etc.). biomeOS is the **composition broker** — it propagates
+BTSP trust and riboCipher framing across atomic boundaries. All binaries
+("genomeBins") are served from a single depot on golgiBody
+(`https://depot.primals.eco`). Gates are physical machines running Tower
+Atomic or higher compositions.
 
-### Current State (Wave 155f)
+### Current State (Wave 155i)
 
-**Posture**: Gate workload distribution. Teams deploying to dedicated gates.
-Tower Atomic hardening first — Nest Atomic after Tower is stable.
+**Posture**: ZERO P0s. Composition broker SHIPPED (biomeOS v4.45). Nest Atomic
+LIVE on westGate. Deep debt wave complete — 8 primals shipped simultaneous
+sweeps. CAS on ZFS verified. RTX 3090 GPU profiled. sporeGate depot refreshed.
+**NEXT**: blueGate full atomic stack (Tower → Nest → Node) on Windows.
 
 | Fact | Value |
 |------|-------|
-| Wave | 155f |
+| Wave | 155i |
 | Primals | 15 (13 active + 2 dormant) |
-| Tests | ~56K `#[test]` attributes across primals |
+| Tests | ~63K+ `#[test]` attributes across primals |
 | BTSP | 13/13 — all primals ship bearDog ClientHello |
-| Signal graphs | 26 (Tower 8, Nest 8, Node 3, Meta 5, Braid 2) |
-| Depot | 39 genomeBins (13 primals × 3 targets) on golgiBody |
-| Gates online | 8 (westGate Tower LIVE. northGate + ironGate RustDesk degraded) |
-| Jelly strings | 6/8 deployment automation items resolved |
+| Signal graphs | 27 (Tower 8, Nest 9, Node 3, Meta 5, Braid 2) |
+| Depot | 19 binaries refreshed (16 musl + 3 glibc), BLAKE3 19/19 verified |
+| Gates online | 9+ (westGate Nest Atomic LIVE, strandGate Tower+Compute LIVE) |
+| Jelly strings | 7/8 resolved (J8 deployed) |
 | Forgejo | `ssh://git@git.primals.eco:2222/` — canonical remote (PUBLIC) |
+| P0s | **ZERO** — composition broker shipped, glibc fixed, WG DNS fixed |
 
 ### Gate-Team Assignments
 
-| Gate | Teams / Primals | Hardware |
-|------|-----------------|----------|
-| **eastGate** | Overwatch, biomeOS, primalSpring, Tower stack, cellMembrane | Code hub, 10G SFP+ |
-| **westGate** | petalTongue, squirrel, nestGate, rhizoCrypt, loamSpine, sweetGrass | Ryzen 7 5700X, 64GB, 2TB NVMe, 5×14TB HDD. **Tower LIVE** |
-| **strandGate** | toadStool, barraCuda, coralReef | Dual EPYC, RTX 3090. **Tower+Compute LIVE** |
-| **sporeGate** | Build authority, deployment foreman | Full NUCLEUS |
-| **golgiBody** | Depot, Forgejo, enrollment, relay | Sole depot (public VPS) |
+| Gate | Teams / Primals | Hardware | Status |
+|------|-----------------|----------|--------|
+| **eastGate** | Overwatch, biomeOS, primalSpring, Tower stack | Code hub, 10G SFP+ | ONLINE |
+| **westGate** | petalTongue, squirrel, nestGate, Provenance Trio | Ryzen 7 5700X, 64GB, 2TB NVMe, ZFS 25.4TB | **NEST ATOMIC LIVE** |
+| **strandGate** | toadStool, barraCuda, coralReef | Dual EPYC 7452, RTX 3090 (FP64 ~104T) | **TOWER+COMPUTE LIVE** |
+| **blueGate** | **NEXT TARGET** — full atomic stack | Windows, house2 | Tower → Nest → Node. Sub-builder. Topo owner H2. |
+| **sporeGate** | Build authority, cellMembrane ops | Full NUCLEUS, 9/11 healthy | Depot refreshed |
+| **golgiBody** | Depot, Forgejo, enrollment, relay | Sole depot (public VPS) | ONLINE |
+| **northGate** | AlphaFold data source (~1TB) | Windows, RTX 5090 | **DAILY DRIVER — DO NOT DEPLOY** |
+| **swiftGate** | Second Windows proof | Windows, house2 | After blueGate |
 
 ### Workspace Structure
 
@@ -337,7 +345,7 @@ After sync completes:
 
 1. Read `infra/wateringHole/handoffs/ECOSYSTEM_BLURB.md` — universal handoff
 2. Read `infra/wateringHole/wave.toml` — current wave and posture
-3. Read `infra/wateringHole/ORTHOGONAL_DIMENSIONS_REVIEW.md` — 11 active + 10 fossilized dimensions
+3. Read `infra/wateringHole/ORTHOGONAL_DIMENSIONS_REVIEW.md` — 9 active + 12 fossilized dimensions
 4. Check for remaining dirty repos:
 ```bash
 for d in primals/* gardens/* springs/* infra/*; do
@@ -350,7 +358,7 @@ done
 ### Step 1f: Report Divergences
 
 File your sync report as:
-`infra/wateringHole/handoffs/[GATE_NAME]_OVERWATCH_SYNC_WAVE155f.md`
+`infra/wateringHole/handoffs/[GATE_NAME]_OVERWATCH_SYNC_WAVE155i.md`
 
 Report:
 - Repos that failed to pull (merge conflicts, auth errors)
@@ -376,19 +384,19 @@ when the gate will run primals (Tower Atomic or higher).
 | flockGate | 10.13.37.6 | LIVE (WAN) |
 | ironGate | 10.13.37.7 | LIVE |
 | southGate | 10.13.37.9 | REGISTERED |
-| strandGate | 10.13.37.10 | LIVE |
-| westGate | 10.13.37.11 | REGISTERED |
-| blueGate | 10.13.37.12 | PENDING KEYGEN |
+| strandGate | 10.13.37.10 | LIVE (Tower+Compute) |
+| westGate | 10.13.37.11 | LIVE (Nest Atomic) |
+| blueGate | 10.13.37.12 | **ENROLLING — next target** |
 | swiftGate | 10.13.37.13 | PENDING KEYGEN |
 
-### Step 2a: WireGuard Setup (HUMAN — requires sudo)
+### Step 2a: WireGuard Setup (HUMAN — requires admin)
+
+**Linux:**
 
 ```bash
-# Generate keypair
 wg genkey | tee /etc/wireguard/privatekey | wg pubkey > /etc/wireguard/publickey
 chmod 600 /etc/wireguard/privatekey
 
-# Create wg0.conf (replace YOUR_IP with your gate's IP from table above)
 cat > /etc/wireguard/wg0.conf << 'WGEOF'
 [Interface]
 Address = YOUR_IP/24
@@ -403,29 +411,62 @@ AllowedIPs = 10.13.37.0/24
 PersistentKeepalive = 25
 WGEOF
 
-# Bring up
 sudo wg-quick up wg0
 sudo systemctl enable wg-quick@wg0
-
-# Verify
 ping -c 3 10.13.37.1
 ```
 
+**Windows (blueGate, swiftGate, northGate):**
+
+Install WireGuard from https://www.wireguard.com/install/. Then in the
+WireGuard GUI: Add Tunnel → Create from scratch. Paste this config
+(replace `YOUR_IP` and `YOUR_PRIVATE_KEY`):
+
+```ini
+[Interface]
+Address = YOUR_IP/24
+PrivateKey = YOUR_PRIVATE_KEY
+ListenPort = 51821
+
+[Peer]
+PublicKey = A2fvz3czkqRUuu2mzkSS6IVr/TCQcpsJX9HbDBa1FBc=
+Endpoint = 157.230.3.183:51820
+AllowedIPs = 10.13.37.0/24
+PersistentKeepalive = 25
+```
+
+Generate keys from PowerShell (admin):
+
+```powershell
+# WireGuard must be installed first
+& "C:\Program Files\WireGuard\wg.exe" genkey | Tee-Object -Variable privateKey | & "C:\Program Files\WireGuard\wg.exe" pubkey
+# Copy the public key output and send to eastGate overwatch
+```
+
+Activate the tunnel in WireGuard GUI. Verify: `ping 10.13.37.1`
+
 **IMPORTANT**: Send your public key to eastGate overwatch so it can be
 registered on golgiBody. If your gate is already REGISTERED in the table
-above, your peer config may already exist on golgiBody — just bring up wg0.
+above, your peer config may already exist on golgiBody — just bring up the tunnel.
 
 ### Step 2b: Set Hostname
 
+**Linux:**
 ```bash
 sudo hostnamectl set-hostname YOUR_GATE_NAME
+```
+
+**Windows:**
+```powershell
+Rename-Computer -NewName YOUR_GATE_NAME -Restart
 ```
 
 ### Step 2c: Deploy Tower Atomic
 
 Tower Atomic (bearDog + songBird + skunkBat) must be deployed before any
-workload primals. Fetch genomeBins from the depot:
+workload primals. Fetch genomeBins from the depot.
 
+**Linux:**
 ```bash
 mkdir -p ~/.local/bin
 for primal in beardog songbird skunkbat; do
@@ -435,11 +476,32 @@ for primal in beardog songbird skunkbat; do
 done
 ```
 
+**Windows:**
+```powershell
+$depotBase = "https://depot.primals.eco/primals/x86_64-pc-windows-gnu"
+$binDir = "$env:USERPROFILE\.local\bin"
+New-Item -ItemType Directory -Force -Path $binDir | Out-Null
+foreach ($primal in @("beardog", "songbird", "skunkbat")) {
+    Invoke-WebRequest -Uri "$depotBase/$primal.exe" -OutFile "$binDir\$primal.exe"
+    Write-Host "Downloaded: $primal.exe"
+}
+# Add to PATH if not already there:
+# [Environment]::SetEnvironmentVariable("Path", $env:Path + ";$binDir", "User")
+```
+
+**NOTE**: Windows genomeBins (`x86_64-pc-windows-gnu`) require the depot to
+have them built. If not yet available, build from source:
+```powershell
+cd ~/Development/ecoPrimals/primals/bearDog
+cargo build --release
+# Binary at target/release/beardog.exe
+```
+
 ### Step 2d: Validate Tower
 
 ```bash
-# Start Tower Atomic primals and verify health
-# (exact startup depends on composition — see cellMembrane docs)
+# Linux: Start Tower Atomic primals and verify health
+# Windows: Run from PowerShell or as Windows Service
 # Expected: tower.health returns { "status": "healthy" }
 # Expected: tower.mesh_status returns peer count and transport info
 ```
@@ -525,84 +587,72 @@ is only needed when deploying primals to run as services.
 
 ### westGate: petalTongue
 
-> **petalTongue** — Wave 155h, **evolved** on westGate.
+> **petalTongue** — Wave 155i, stable on westGate.
 > Version: 1.7.0 | Tests: 6,605 | Status: Stable
 > Purpose: Visualization engine — WASM WebGL rendering pipeline.
-> **Delivered**: Topology architecture → runtime `ecosystem_manifest.toml` loading.
-> `main.rs` 727→199L split into cli/bootstrap/dispatch modules. Geometry module
-> refactored into strategy pattern. Version drift fixed. 13 new FFI safety tests.
 > Next work: Validate WASM pipeline on westGate. Deploy genomeBin.
 > Upstream: bearDog (BTSP), songBird (discovery)
 
 ### westGate: squirrel
 
-> **squirrel** — Wave 155h, **evolved** on westGate.
+> **squirrel** — Wave 155i, stable on westGate.
 > Version: 0.1.0 | Tests: 763 | Status: Stable
 > Purpose: AI assistant with MCP integration.
-> **Delivered**: Capability purification — all `beardog` references → `security_provider`.
-> Local crypto/password hashing removed (delegates to security capability). Adapter
-> IPC wired (compute, storage, security, orchestration). Anomaly detection delegates
-> to `defense.*`. Deprecated `EcosystemPrimalType`/`PrimalType` enums.
 > Next work: Validate capability registration with biomeOS neuralAPI.
 > Upstream: bearDog (BTSP), songBird (discovery), biomeOS (orchestration)
 
 ### westGate: Provenance Trio (nestGate + rhizoCrypt + loamSpine + sweetGrass)
 
-> **Provenance Trio** — Wave 155h, **code teams delivered** on westGate.
-> Status: G3 CONVERGING — P0/P1 audit items resolved. IPC wiring deferred until Tower stable.
+> **Provenance Trio** — Wave 155i, **NEST ATOMIC LIVE** on westGate.
+> Status: **G3 CLOSED** (sweetGrass v0.8.0 E2E validated). Provenance 6/7 live.
 >
 > | Primal | Version | Tests | Key Delivery |
 > |--------|---------|-------|--------------|
-> | nestGate | 0.5.0 | 12,973 | **P0/P1 closed**: test compilation fixed, live CLI health, FHS centralized, ZFS tier migration |
+> | nestGate | 0.5.0 | 13,095+ | CAS on ZFS verified (3,119 objects), deep debt complete, zero unsafe, CLI evolved |
 > | rhizoCrypt | 0.14.17 | 1,456 | Cross-gate provenance chain, BTSP→DAG bridge |
-> | loamSpine | 0.9.16 | 1,739 | BTSP handshake dedup: `verify_and_negotiate()` + `AsyncErrorSender` |
-> | sweetGrass | 0.7.64 | 1,676 | CertificateRef on braids, cross-gate attribution, G3 READY |
+> | loamSpine | 0.9.16 | 1,285 | Registry drift fixed: certificate.verify/lifecycle/history discoverable |
+> | sweetGrass | 0.8.0 | 1,636 | **G3 E2E validated**: LedgerClient, 11 E2E ledger tests, mock loamSpine UDS |
 >
-> **Storage Tiering on westGate**: nestGate's CAS should be validated against
-> the real hardware — 5x14TB HDD (cold), plus SSD/NVMe if available.
-> Profile read/write latencies per tier. This data feeds Nest Atomic design.
->
-> **Deferred G3 work** (after Tower stable): Wire IPC callers between primals —
-> rhizoCrypt calls loamSpine.certificate.verify, sweetGrass links CertificateRef
-> to loamSpine certificates, loamSpine validates MintingAuthority.
-> See `aars/PROVENANCE_TRIO_G3_CONVERGENCE_155b_AAR.md` for convergence gaps.
+> **CAS on ZFS**: 3,119 objects on 25.4TB pool, 1.56× compression. NVMe 316 MB/s write.
+> ZFS HDD 25.5 MB/s dsync. ARC 100% hit rate. AlphaFold ~1TB: ~11hr at dsync rate.
+> **Provenance 7/7 blocked by**: bearDog `crypto.sign_ed25519` returns health stub.
 
 ### strandGate: Compute Trio (toadStool + barraCuda + coralReef)
 
-> **Compute Trio** — Wave 155h, **DEPLOYED** on strandGate.
+> **Compute Trio** — Wave 155i, **VALIDATED** on strandGate.
 > Hardware: Dual EPYC 7452 (64 cores) + RTX 3090 (24GB VRAM)
 >
 > | Primal | Version | Tests | Key Delivery |
 > |--------|---------|-------|--------------|
-> | toadStool | 0.2.0 | 23,332 | S344: deny.toml expanded, overstep reduced, socket centralized |
-> | barraCuda | 0.4.0 | 4,957 | SIGSEGV fixed (GPU_TEST_GUARD), BTSP env races, dead code (-1,200L) |
-> | coralReef | 0.2.0 | 3,527 | 18/18 JSON-RPC dispatch, BTSP Phase 3 encrypted transport |
+> | toadStool | 0.2.0 | 9,193+ | **S346**: security fail-closed, unsafe containment (hw-safe crate), 75 doc warnings fixed |
+> | barraCuda | 0.4.0 | 4,957 | **RTX 3090 profiled**: FP64 ~104T, DF64 framing corrected, deep debt sweep |
+> | coralReef | 0.2.0 | 3,527 | **Deep debt**: 463 .expect() purged, PTX modernized (-363L net) |
 >
-> **P0**: musl genomeBins can't `dlopen` glibc Vulkan ICD — source builds work,
-> depot binaries don't. Need `x86_64-unknown-linux-gnu` glibc target from sporeGate.
-> Next work: Await glibc depot target. Profile RTX 3090 compute with source-built
-> binaries. Validate `node.compute` and `node.dispatch` signal graphs on real GPU.
->
-> See `aars/STRANDGATE_COMPUTE_TRIO_DEPLOYMENT_155f_AAR.md` for deployment details.
+> **Glibc depot SHIPPED** by sporeGate (16 musl + 3 glibc, BLAKE3 verified).
+> RTX 3090 validated: tensor pipeline, linalg, spectral, shader compilation.
+> GPU-resident tensor IDs: ~813× speedup at 512×512 vs JSON serialization.
+> Next: Node Atomic profiling, full BTSP validation.
 
-### eastGate: biomeOS (reference — already running)
+### eastGate: biomeOS (reference — composition broker)
 
-> **biomeOS** — Wave 155f, eastGate overwatch hub.
-> Version: 0.1.0 | Tests: 8,522+ | Signal graphs: 26
-> Active work: Live `tower.health` signal graph validation as teams deploy
-> to gates. Monitor capability registration from deploying primals.
-> See `config/capability_registry.toml` for the 19 atomic-tier translations.
+> **biomeOS** — Wave 155i, eastGate. **COMPOSITION BROKER SHIPPED.**
+> Version: v4.45 | Tests: 8,564 | Signal graphs: 27
+> **Delivered**: riboCipher framing (`[0xEC, 0x01]` prefix), BTSP session
+> propagation in signal graph executor, 35 composition broker E2E tests,
+> connection pool IO evolution (BufReader), test monolith refactoring.
+> Both prior P0s RESOLVED. Zero unsafe, zero TODO/FIXME.
+> See `config/signal_tools.toml` for 27 signal graphs.
 
 ### eastGate: primalSpring (reference — already running)
 
-> **primalSpring** — Wave 155f, eastGate.
+> **primalSpring** — Wave 155i, eastGate.
 > 197 scenarios, all PASS. Calibrated for 13-gate mesh.
 > Active work: Calibrate scenarios for distributed gate topology.
-> Track deployment results from westGate and strandGate.
+> Track deployment results across westGate, strandGate, and blueGate.
 
 ### Any gate: Tower Atomic stack (bearDog + songBird + skunkBat)
 
-> **Tower Atomic** — Wave 155h. Required on every gate before anything else deploys.
+> **Tower Atomic** — Wave 155i. Required on every gate before anything else deploys.
 > This is the trust foundation. Deploy first, validate, then deploy workloads.
 >
 > | Primal | Version | Role |
@@ -615,6 +665,36 @@ is only needed when deploying primals to run as services.
 > Validate: `tower.health` should return `{ "status": "healthy" }` from songBird.
 > `tower.mesh_status` returns mesh peer count and transport info.
 > Fetch genomeBins from `https://depot.primals.eco`.
+> **Windows**: Use `x86_64-pc-windows-gnu` target or build from source with `cargo build --release`.
+
+### blueGate: Full Atomic Stack — Tower → Nest → Node (Windows)
+
+> **blueGate** — Wave 155i. **NEXT TARGET.** First full atomic stack on Windows.
+> OS: Windows. Peptidoglycan anchor House 2. Sub-builder under sporeGate.
+>
+> **Three roles**:
+> 1. **G1 proof**: Tower Atomic on Windows — first Windows Tower deployment
+> 2. **Inner membrane topo owner H2**: DNS, topology services for house2
+> 3. **Sub-builder**: Second build node under sporeGate — accelerates depot output
+>
+> **Deployment sequence**:
+> 1. Phase 0+1: Connectivity + sync (this blurb)
+> 2. Phase 2: WireGuard enrollment (IP: 10.13.37.12)
+> 3. Tower Atomic: bearDog + songBird + skunkBat (build from source if depot lacks Windows bins)
+> 4. Nest Atomic: + nestGate + rhizoCrypt + loamSpine + sweetGrass (after Tower stable)
+> 5. Node Atomic: + toadStool + barraCuda + coralReef (after Nest stable)
+> 6. biomeOS: Full composition broker role — orchestrates all atomics
+>
+> **biomeOS composition broker**: v4.45 ships riboCipher framing and BTSP session
+> propagation. This will be the first gate where biomeOS brokers trust across
+> Tower → Nest → Node Atomic composition transitions end-to-end.
+>
+> **Sub-builder setup**: After Tower stable, enroll as builder under sporeGate.
+> Build Windows-native genomeBins (`x86_64-pc-windows-gnu`) for all primals.
+> Push to golgiBody depot via `plasmid.push`.
+>
+> **Report**: File sync report and Tower validation as:
+> `infra/wateringHole/handoffs/BLUEGATE_TOWER_ATOMIC_WAVE155i.md`
 
 ---
 
@@ -626,8 +706,8 @@ PEPTIDOGLYCAN  — LAN/HPC topology fabric (NAT, DNS, switches, cabling)
 INNER MEMBRANE — Primal IPC (WireGuard wg0 + songBird :7700 + BTSP)
 ```
 
-northGate + ironGate have degraded outer membrane (RustDesk issues).
 Peptidoglycan anchors: sporeGate (house1) + blueGate (house2).
+biomeOS composition broker (v4.45) handles trust propagation across inner membrane.
 
 Forgejo access is OUTSIDE the inner membrane — it's public internet → golgiBody.
 You only need inner membrane for primal-to-primal IPC and mesh enrollment.
@@ -638,10 +718,12 @@ You only need inner membrane for primal-to-primal IPC and mesh enrollment.
 
 | # | Goal | Status |
 |---|------|--------|
-| G1 | Tower on Windows | FRONTLOADED |
-| G7 | Gate enmeshment | FRONTLOADED — workload distribution validates pipeline |
+| G1 | Tower on Windows | **ACTIVE — blueGate target** |
+| G7 | Gate enmeshment | **ADVANCING** — westGate+strandGate LIVE, blueGate next |
+| G3 | Nest Atomic Phase 0 | **LIVE ON WESTGATE** — blueGate Nest Atomic is NEXT |
+| G4 | Nest cross-platform | **ACTIVE** — blueGate (Windows) after Tower stable |
+| G10 | Sub-builder mesh | **NEW** — blueGate as sub-builder under sporeGate |
 | G6 | bearDog public (crates.io) | READY — final audit |
-| G3 | Nest Atomic Phase 0 | AFTER TOWER STABLE — westGate testbed |
 | G5 | Chimera (single-process Tower) | AFTER G1 |
 | G8 | Plasmodium (multi-gate bonding) | AFTER G7 |
 | G9 | JOSS publication | AFTER G3+G7 |
