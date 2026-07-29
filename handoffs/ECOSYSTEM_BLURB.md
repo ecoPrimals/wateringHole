@@ -228,6 +228,22 @@ AARs:
 
 ---
 
+### SPOREPRINT (Wave 155i transplant — Jul 29, 2026)
+
+sporePrint updated to reflect Wave 155i ecosystem state:
+- Nest Atomic LIVE on westGate: 8 services, 1,704 capabilities, ZFS, Provenance Trio CLOSED
+- strandGate Tower + Compute Trio LIVE promoted from HW READY
+- Test counts updated across 13 primals (105,568 total, validated by spore-validate)
+- 27 signal graphs documented, 39 genomeBin depot binaries
+- G3 glacial goal now LIVE, G7 ADVANCING
+- 8+ gates online (westGate, strandGate, blueGate, swiftGate all promoted)
+- Tower Atomic page updated with "Compositions built on Tower" section
+
+Files changed: config.toml, tower_atomic.md, living-systems.md, MESH_TOPOLOGY.md,
+NUCLEUS_ARCHITECTURE.md, CONTEXT.md, llms.txt, products/_index.md, architecture/_index.md, README.md
+
+---
+
 *Wave 155i. Nest Atomic LIVE on westGate — first multi-composition (8 services).
 biomeOS auto-discovered 1,704 capabilities. Provenance Trio CLOSED (sweetGrass G3
 wired, v0.8.0). ZFS 25.4TB + 2TB L2ARC online, all 5 storage tiers operational.
