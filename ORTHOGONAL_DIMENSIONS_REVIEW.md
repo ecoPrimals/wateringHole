@@ -104,9 +104,9 @@ appears. This keeps the active review focused on evolving concerns.
 | flockGate | ONLINE | Linux | 10.13.37.6 | full | Nest Atomic validation (after Tower stable) |
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090. **DAILY DRIVER — DO NOT DEPLOY.** AlphaFold data source (~1TB). |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
-| strandGate | **TOWER+COMPUTE LIVE** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, FP64 ~104T, 5 primals, 17 sockets, glibc trio shipped |
+| strandGate | **NODE ATOMIC VALIDATED** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, 450 methods, 746 pipelines/sec, sub-ms GPU dispatch |
 | westGate | **NEST ATOMIC LIVE** | Linux | 10.13.37.11 | nest (8) | AMD Ryzen 7 5700X, 64GB, 2TB NVMe, ZFS 25.4TB, 3,119 CAS objects, Provenance 6/7 |
-| blueGate | **TOWER 2/3** | Windows | 10.13.37.12 | **full — Tower→Nest→Node** | **Mesh LIVE. bearDog+skunkBat HEALTHY. songBird fix shipped — awaiting depot rebuild. Topo H2, sub-builder.** |
+| blueGate | **TOWER 2/3** | Windows | 10.13.37.12 | **full — Tower→Nest→Node** | **songBird depot rebuilt — pull for 3/3 Tower. Topo H2, sub-builder.** |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
 
@@ -250,7 +250,7 @@ ALL SECURITY ITEMS RESOLVED. sporePrint impulses are an ongoing publishing caden
 - [x] biomeOS platform_native transport on all 27 signal graphs
 - [x] biomeOS cross-platform socket templates (named pipes + TCP fallback)
 - [x] ~~Windows genomeBins not yet in golgiBody depot~~ — **14 .exe binaries available** (blueGate verified)
-- [x] ~~**songBird Windows platform gate (P0)**~~ — **FIXED** (`8c0adc8d`): TCP fallback on non-Unix, virtual relay TCP, deep debt (-2,077/+2,299). Depot rebuild pending.
+- [x] ~~**songBird Windows platform gate (P0)**~~ — **FIXED + DEPOT REBUILT** (`8c0adc8d`, 18,653 KB). TCP fallback on non-Unix, virtual relay TCP, deep debt.
 - [ ] macOS genomeBins — check-pass only, no linker for cross-build from Linux
 - [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
 - [ ] systemd abstraction for Windows Service / launchd paths (cellMembrane `InitSystem` foundation shipped)
