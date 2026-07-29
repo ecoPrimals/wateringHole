@@ -84,7 +84,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 | **coralReef** | **Deep debt**: 463 `.expect()` eliminated, PTX macro modernization (-363L net), capability-based env. 3,527 tests | `c6ab001` |
 | **toadStool** | **S346**: security fail-closed (macOS/Windows sandbox), unsafe containment (hw-safe crate), 75 doc warnings fixed. Doctor CLI bug fix. 9,193+ tests | `b9ded4280` |
 | **skunkBat** | Cargo update: tokio-macros 2.7.1→2.7.2 | `b0df971` |
-| **songBird** | Mesh refactor: enrollment crypto + mesh helpers extracted, all files <800L | `59f7ef75` |
+| **songBird** | **P0 FIXED**: Windows platform gate → TCP fallback. Deep debt: 2 test monoliths split (1,018L+998L→10 modules). Zero files >800L. | `8c0adc8d` |
 | **loamSpine** | Registry drift fixed: `certificate.verify/lifecycle/history` discoverable. 1,285 tests | `d79231a` |
 | **biomeOS** | **COMPOSITION BROKER SHIPPED**: riboCipher framing + BTSP executor, 35 E2E tests, connection pool IO, v4.45, 8,564 tests | `8cee1adb` |
 | **petalTongue** | Topology → runtime manifest, main.rs split, geometry module. 6,605 tests | `d60e67d` |
@@ -138,7 +138,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 | Gate | Status | NOW | NEXT |
 |------|--------|-----|------|
-| **blueGate** | **TOWER 2/3** (Windows) | **Mesh LIVE (3 peers). bearDog+skunkBat HEALTHY. songBird BLOCKED (platform gate P0).** | songBird fix → full Tower → Nest → Node. Sub-builder. Topo owner H2. |
+| **blueGate** | **TOWER 2/3** (Windows) | **Mesh LIVE (3 peers). bearDog+skunkBat HEALTHY. songBird fix SHIPPED — awaiting depot rebuild.** | Depot pull → full Tower → Nest → Node. Sub-builder. Topo owner H2. |
 | **strandGate** | **TOWER+COMPUTE LIVE** | Glibc depot received. Compute Trio validated. | Node Atomic profiling. Full BTSP validation. |
 | **westGate** | **NEST ATOMIC LIVE** | CAS on ZFS verified. biomeOS broker ready. | E2E `nest.ingest_dataset` live. AlphaFold ingestion (~11hr dsync, NVMe staging recommended). |
 | **swiftGate** | ONLINE (Windows) | — | G1 Tower on Windows (second Windows proof after blueGate) |
@@ -151,7 +151,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 | # | Priority | Issue | Owner | Status |
 |---|----------|-------|-------|--------|
-| 1 | **P0** | **songBird Windows platform gate blocks G1** — orchestrator rejects Windows before evaluating --listen/--bind. Transport code exists in universal-ipc (windows.rs + fallback.rs) but not wired. | songBird | **Handoff issued** |
+| 1 | ~~**P0**~~ | ~~songBird Windows platform gate blocks G1~~ | songBird | **FIXED** (`8c0adc8d`): TCP fallback on non-Unix, virtual relay TCP, deep debt. **Awaiting depot rebuild by sporeGate/cellMembrane.** |
 | 2 | ~~**P0**~~ | ~~biomeOS BTSP session propagation~~ | ~~biomeOS~~ | **SHIPPED** (v4.45, `48cf9c33`) |
 | 3 | ~~**P0**~~ | ~~biomeOS riboCipher transport framing~~ | ~~biomeOS~~ | **SHIPPED** (v4.45, `48cf9c33`) |
 | 4 | P1 | bearDog `crypto.sign_ed25519` returns health stub, not signature | bearDog | Blocks Provenance Trio step 7/7 |
@@ -161,7 +161,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 | 7 | P1 | songBird riboCipher probes → sweetGrass log noise (every 30s) | songBird | Low but annoying |
 | 8 | P1 | hotSpring Forgejo pack corruption | eastGate admin | Not our lane |
 
-**1 P0** (songBird Windows platform gate — G1 blocker). Resolved: ~~P0 BTSP session propagation~~ SHIPPED. ~~P0 riboCipher transport~~ SHIPPED. ~~P0 glibc depot~~ FIXED. ~~P1 WG DNS~~ FIXED. ~~P1 ZFS pool~~ ONLINE. ~~P1 step-ca~~ DEPLOYED. ~~P1 membrane depot~~ REBUILT (J6). ~~P1 nestGate ghost methods~~ REMOVED. ~~P1 toadStool deployment docs~~ SHIPPED (S345). sporeGate health 5/11→9/11.
+**ZERO P0s** (songBird platform gate FIXED in source, depot rebuild pending). Resolved: ~~P0 BTSP session propagation~~ SHIPPED. ~~P0 riboCipher transport~~ SHIPPED. ~~P0 glibc depot~~ FIXED. ~~P1 WG DNS~~ FIXED. ~~P1 ZFS pool~~ ONLINE. ~~P1 step-ca~~ DEPLOYED. ~~P1 membrane depot~~ REBUILT (J6). ~~P1 nestGate ghost methods~~ REMOVED. ~~P1 toadStool deployment docs~~ SHIPPED (S345). sporeGate health 5/11→9/11.
 
 ---
 
