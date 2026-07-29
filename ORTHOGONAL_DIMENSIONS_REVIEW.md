@@ -106,7 +106,7 @@ appears. This keeps the active review focused on evolving concerns.
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
 | strandGate | **TOWER+COMPUTE LIVE** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, FP64 ~104T, 5 primals, 17 sockets, glibc trio shipped |
 | westGate | **NEST ATOMIC LIVE** | Linux | 10.13.37.11 | nest (8) | AMD Ryzen 7 5700X, 64GB, 2TB NVMe, ZFS 25.4TB, 3,119 CAS objects, Provenance 6/7 |
-| blueGate | **BOOTSTRAPPED** | Windows | enrolling (WG key received) | **full — Tower→Nest→Node** | **40/40 repos synced, Tower bins verified, awaiting key registration. Topo owner H2, sub-builder.** |
+| blueGate | **ENROLLED** | Windows | 10.13.37.12 | **full — Tower→Nest→Node** | **WG peer #9 + Forgejo SSH registered. 40/40 repos. Tower bins ready. Topo owner H2, sub-builder.** |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
 
@@ -165,7 +165,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 
 ### Inner Membrane
 
-- [x] **9-gate WireGuard mesh** — golgi, sporeGate, eastGate, flockGate, ironGate, northGate, grapheneGate, westGate, strandGate
+- [x] **10-gate WireGuard mesh** — golgi, sporeGate, eastGate, flockGate, ironGate, northGate, grapheneGate, westGate, strandGate, **blueGate** (peer #9)
 - [x] Tower Atomic shadow active — westGate + strandGate LIVE
 - [x] LAN peering: Tower 353x LAN (0.45ms vs 158ms WG overlay)
 - [x] songBird universal-ipc: UDS/named pipes/abstract sockets/TCP

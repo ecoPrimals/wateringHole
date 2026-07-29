@@ -406,7 +406,7 @@ when the gate will run primals (Tower Atomic or higher).
 | southGate | 10.13.37.9 | REGISTERED |
 | strandGate | 10.13.37.10 | LIVE (Tower+Compute) |
 | westGate | 10.13.37.11 | LIVE (Nest Atomic) |
-| blueGate | 10.13.37.12 | **ENROLLING — next target** |
+| blueGate | 10.13.37.12 | **ENROLLED** (peer #9, SSH key ID 14) |
 | swiftGate | 10.13.37.13 | PENDING KEYGEN |
 
 ### Step 2a: WireGuard Setup (HUMAN — requires admin)
