@@ -175,7 +175,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 ### Inner Membrane
 
 - [x] **10-gate WireGuard mesh** — golgi, sporeGate, eastGate, flockGate, ironGate, northGate, grapheneGate, westGate, strandGate, **blueGate** (peer #9)
-- [x] Tower Atomic shadow active — westGate + strandGate LIVE
+- [x] Tower Atomic LIVE on 6+ gates — westGate, strandGate, grapheneGate, eastGate, sporeGate, blueGate (Windows)
 - [x] LAN peering: Tower 353x LAN (0.45ms vs 158ms WG overlay)
 - [x] songBird universal-ipc: UDS/named pipes/abstract sockets/TCP
 - [x] BTSP defense-in-depth: 13/13 primals
@@ -217,7 +217,26 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 
 ALL SECURITY ITEMS RESOLVED. sporePrint impulses are an ongoing publishing cadence, not a security concern — tracked under D11 (Campus). Moved to Fossilized section below.
 
-## 7. Compositions / Products
+## 7. Compositions / Products — NUCLEUS Convergence
+
+### Atomic Composition Status
+
+```
+NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
+        = bearDog + songBird + skunkBat           (Tower — security + discovery + defense)
+        + nestGate + rhizoCrypt + loamSpine + sweetGrass  (Nest — storage + provenance)
+        + toadStool + barraCuda + coralReef        (Node — compute + GPU + shaders)
+        + biomeOS                                  (orchestrator — all 13)
+```
+
+| Composition | Status | Gates Proven | biomeOS Orchestrated? |
+|-------------|--------|--------------|----------------------|
+| **Tower Atomic** (3) | LIVE | westGate, strandGate, grapheneGate, eastGate, sporeGate, **blueGate (Windows)** | Signal graphs: 8. Direct IPC: YES. |
+| **Nest Atomic** (7+Tower) | LIVE | westGate (ZFS+CAS), **blueGate (Windows, 10/10)** | Signal graphs: 9. Capability routing: YES. Graph execution: P2 (riboCipher). |
+| **Node Atomic** (3+Tower) | VALIDATED | strandGate (746 pipelines/sec, sub-ms GPU) | Signal graphs: 3. Not yet orchestrated live. |
+| **NUCLEUS** (13) | **NOT YET** | — | All 27 signal graphs defined. E2E orchestration: **NEXT TARGET** |
+
+### What's proven
 
 - [x] footPrint LIVE — 478 TS test cases, FULL NUCLEUS composition
 - [x] esotericWebb LIVE — V22, 472 tests, scene binding fixed
@@ -228,11 +247,24 @@ ALL SECURITY ITEMS RESOLVED. sporePrint impulses are an ongoing publishing caden
 - [x] songBird crypto delegation 6/6 COMPLETE — composition model validated
 - [x] Composition profiles fixed: `compute` = Tower + node, `nest` = Tower + provenance trio
 - [x] `tower-builder` profile created for distributed build mesh nodes
-- [x] **biomeOS neuralAPI**: Tower (8), Node (3), Nest (**9**) signal graphs with semantic dispatch. **704 capabilities registered on westGate in COORDINATED mode.** E2E routing proven (`content.put`, `storage.put`).
 - [x] ~~**biomeOS composition broker**~~ — **SHIPPED** (v4.45): riboCipher framing + BTSP executor + 35 E2E tests
-- [ ] **Chimera Phase 0**: shared library extraction (`libtower.so`) — UNBLOCKED
+- [x] **biomeOS capability routing E2E**: `content.put` → nestGate, `storage.put` → nestGate, signal graph dispatch routing works
+- [x] **westGate COORDINATED mode**: 704 capabilities, 390 translations, 70 signal graphs loaded
+- [x] **blueGate Nest 10/10 on Windows** — first multi-composition non-Linux deployment
+
+### Path to NUCLEUS
+
+- [ ] **biomeOS graph executor riboCipher fix** — one-line (`send_ribocipher_jsonrpc_request()`). Blocks orchestrated graph execution across compositions.
+- [ ] **biomeOS socket unification** — `biomeos/` vs `membrane/` split causes symlink workarounds
+- [ ] **biomeOS socket evaporation** — Neural API restart wipes capabilities, sockets disappear
+- [ ] **biomeOS full composition lifecycle** — startup ordering, health gating, composition transitions (Tower→Nest→Node→NUCLEUS) managed by biomeOS, not shell scripts
+- [ ] **bearDog `crypto.sign_ed25519`** — real signing (blocks Provenance Trio 7/7, blocks Nest Atomic full E2E)
+- [ ] **Node Atomic live on westGate or blueGate** — toadStool + barraCuda + coralReef added to existing Nest deployment
+- [ ] **NUCLEUS live on one gate** — all 13 primals under biomeOS orchestration with composition transitions
+- [ ] **Chimera Phase 0**: shared library extraction (`libtower.so`) — UNBLOCKED, deferred
 - [ ] sporePrint primal pipeline: replace Zola
 - [ ] 6 springs pending `validation.json`
+- [ ] **Primal CLI flag standardization** — inconsistent bind flags across Nest primals (--bind vs --host vs --bind-address vs --http-port)
 
 ## 8. genomeBin / Cross-Platform Deployment
 
@@ -270,24 +302,9 @@ ALL SECURITY ITEMS RESOLVED. sporePrint impulses are an ongoing publishing caden
 
 ALL ITEMS RESOLVED. Moved to Fossilized section below.
 
-## 10. Jelly Strings — Deployment Automation (NEW — extracted from sporeGate AAR)
+## ~~10. Jelly Strings — Deployment Automation~~ → **FOSSILIZED as F13** (Wave 155i)
 
-From sporeGate deployment AAR. These block "operator runs shell loops" →
-"gates self-heal via cascade":
-
-- [x] **J1: Harvest** — CLOSED. Was already Rust. `--push` flag added (`8a71345`)
-- [x] **J2: Depot push** — CLOSED. `plasmid.push` first-class + Rust depot_sync (`8a71345`)
-- [x] **J3: Service restart** — CLOSED. songBird `deploy.hot_swap` (`d4bffbbd`)
-- [x] **J4: Caddy config** — CLOSED. songBird route self-config via `route.rs` (`d4bffbbd`)
-- [x] **J5: WG peer reg** — HARDENED. songBird WG peer management (`d4bffbbd`)
-- [x] **J6: systemd overrides** — **CLOSED**. `gate.configure` + `gate.apply` shipped (`c66a56e`). Init system dispatch: systemd/launchd/bare.
-- [ ] **J7: Legacy service detection** — OPEN. One-time, low priority (cellMembrane P3)
-- [x] **J8: Key enrollment portal** — **DEPLOYED**. step-ca live at ca.primals.eco (SPOREGATE_DEPLOYMENT_OPS_155h_AAR). SSH cert lifecycle in cellMembrane. enroll phase 8 (`ssh_cert`). Non-fatal if CA not deployed.
-
-**7/8 code-complete + deployed.** J6 CLOSED. J8 DEPLOYED. Only J7 (legacy detection,
-one-time P3) remains. The jelly string dimension — codifying manual shell loops into
-Rust primals — is **ACHIEVED**. All deployment automation that was manual is now
-primal-native. **FOSSILIZATION CANDIDATE** — only J7 (low-priority one-time) open.
+Manual deployment loops → primal-native automation: **ACHIEVED**. Moved to Fossilized section below.
 
 ## 11. Campus / Physical Infrastructure
 
@@ -390,22 +407,34 @@ All security infrastructure complete and operational:
 - External claim convergence standard issued
 - sporePrint impulses (ongoing cadence) tracked under D11 Campus
 
+## F13. Jelly Strings — Deployment Automation (fossilized Wave 155i)
+
+Manual deployment shell loops → primal-native Rust automation: **ACHIEVED**.
+
+- J1–J6: ALL CLOSED (harvest, depot push, service restart, Caddy config, WG peer reg, systemd overrides)
+- J7: Legacy detection — one-time P3, deprioritized (does not block any deployment)
+- J8: Key enrollment portal — DEPLOYED (step-ca live at ca.primals.eco)
+
+7/8 code-complete + deployed. All deployment automation that was manual is now
+primal-native. J7 is a one-time cleanup task that does not affect the dimension's
+completeness.
+
 ---
 
-**Active**: 9 dimensions (1–5, 7–8, 10–11)
-**Fossilized**: 12 dimensions (F1–F12)
-**Summary**: Wave 155i — multi-gate validation wave. **ZERO P0s.** blueGate achieved
-NEST 10/10 on Windows (historic first). westGate composition broker LIVE (biomeOS
-v4.45, 704 capabilities, COORDINATED, E2E routing). strandGate Node Atomic validated
-(450 methods, 746 pipelines/sec, sub-ms GPU). RTX 3090 + RX 6950 XT dual-GPU proven.
-Linux depot 19/19 current. **New systemic P1s**: Windows depot stale (14 .exe from
-07/16), no Windows CI gate. bearDog crypto.sign blocks Provenance 7/7. D10 Jelly
-Strings 7/8 (fossilization candidate). ~63K+ primal tests. 27 signal graphs. 9 gates.
-Next: Windows depot pipeline, bearDog crypto, graph executor riboCipher fix.
+**Active**: 8 dimensions (1–5, 7–8, 11)
+**Fossilized**: 13 dimensions (F1–F13)
+**Summary**: Wave 155i — NUCLEUS convergence wave. **ZERO P0s.** All three atomic
+compositions proven: Tower (6 gates), Nest (westGate + blueGate), Node (strandGate).
+biomeOS composition broker LIVE (704 caps, COORDINATED, E2E routing). D10 Jelly
+Strings FOSSILIZED (F13). **Remaining path to NUCLEUS**: biomeOS full composition
+lifecycle (graph executor riboCipher fix, socket unification, startup ordering),
+bearDog `crypto.sign_ed25519` (Provenance 7/7), Windows depot pipeline, Node Atomic
+added to existing Nest deployments, then NUCLEUS = all 13 under biomeOS orchestration.
+8 active dimensions, 13 fossilized. ~63K+ tests. 27 signal graphs. 10 gates (9 Linux/Windows + 1 Android).
 
 ---
 
 *Last used*: Wave 155i (Jul 29, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 155i (F12 — Public Surface / Security)
+*Latest fossilization*: Wave 155i (F13 — Jelly Strings)
