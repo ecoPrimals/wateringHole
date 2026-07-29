@@ -67,7 +67,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 | genomeBin depot | **19 binaries refreshed** (16 musl + 3 glibc). BLAKE3 checksums 19/19 verified |
 | Gates ONLINE | **8** + strandGate Tower+Compute LIVE, westGate Nest Atomic LIVE |
 | Threat categories | **9** (skunkBat ConnectivityAnomaly) |
-| CAS objects on ZFS | **3,119** objects, 25.4TB pool, 1.56× compression |
+| CAS objects on ZFS | **3,119** objects, 25.4TB pool, 1.56x compression |
 | GPU validation | RTX 3090 FP32 96T / FP64 104T / DF64 92T — strandGate |
 | sporeGate health | **9/11** OK (was 5/11) |
 
@@ -92,23 +92,6 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 ---
 
-## GLACIAL GOALS — SEQUENCED
-
-| # | Goal | Status | Gate |
-|---|------|--------|------|
-| G1 | Tower on Windows | **ACTIVE — blueGate target** | blueGate first, swiftGate second |
-| G7 | Gate enmeshment | **ADVANCING** | westGate+strandGate LIVE. blueGate next (inner membrane topo owner H2) |
-| G6 | bearDog public | READY | OPEN — songBird ACME Phase 1 unblocks TLS |
-| G3 | Nest Atomic Phase 0 | **LIVE ON WESTGATE** | Provenance Trio 6/7, ZFS online, BTSP broker shipped. blueGate Nest Atomic is NEXT. |
-| G4 | Nest cross-platform | **ACTIVE** | blueGate (Windows) Nest Atomic after Tower stable — biomeOS full broker role |
-| G10 | Sub-builder mesh | **NEW** | blueGate as sub-builder under sporeGate — accelerate depot binary production |
-| G5 | Chimera Phase 0 | PENDING | AFTER G1 |
-| G2 | Tower on Android | PENDING | AFTER G1 |
-| G8 | Plasmodium | PENDING | AFTER G7 |
-| G9 | JOSS publication | PENDING | AFTER G3+G7 |
-
----
-
 ## JELLY STRINGS — 7 OF 8 RESOLVED
 
 | # | What | Status | Owner |
@@ -120,7 +103,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 | J5 | WG peer reg | **HARDENED** | songBird |
 | J6 | systemd overrides | **CLOSED** — `gate.configure` + `gate.apply` | cellMembrane |
 | J7 | Legacy detection | OPEN (low priority) | cellMembrane |
-| J8 | Key enrollment portal | **DEPLOYED** — step-ca live at ca.primals.eco (see SPOREGATE_DEPLOYMENT_OPS_155h_AAR) | sporeGate ops |
+| J8 | Key enrollment portal | **DEPLOYED** — step-ca live at ca.primals.eco | sporeGate ops |
 
 ---
 
@@ -140,7 +123,7 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 |------|--------|-----|------|
 | **blueGate** | **TOWER 2/3** (Windows) | **Mesh LIVE (3 peers). bearDog+skunkBat HEALTHY. songBird fix SHIPPED — awaiting depot rebuild.** | Depot pull → full Tower → Nest → Node. Sub-builder. Topo owner H2. |
 | **strandGate** | **TOWER+COMPUTE LIVE** | Glibc depot received. Compute Trio validated. | Node Atomic profiling. Full BTSP validation. |
-| **westGate** | **NEST ATOMIC LIVE** | CAS on ZFS verified. biomeOS broker ready. | E2E `nest.ingest_dataset` live. AlphaFold ingestion (~11hr dsync, NVMe staging recommended). |
+| **westGate** | **NEST ATOMIC LIVE** | CAS on ZFS verified. biomeOS broker ready. | E2E nest.ingest_dataset live. AlphaFold ingestion. |
 | **swiftGate** | ONLINE (Windows) | — | G1 Tower on Windows (second Windows proof after blueGate) |
 | **ironGate** | ONLINE | HDD enclave experiment | Nest Atomic secondary target |
 | **southGate** | HW READY | — | Enroll → Tower |
@@ -151,59 +134,15 @@ E2E tests validate nest topology, BTSP routing, and riboCipher framing.
 
 | # | Priority | Issue | Owner | Status |
 |---|----------|-------|-------|--------|
-| 1 | ~~**P0**~~ | ~~songBird Windows platform gate blocks G1~~ | songBird | **FIXED** (`8c0adc8d`): TCP fallback on non-Unix, virtual relay TCP, deep debt. **Awaiting depot rebuild by sporeGate/cellMembrane.** |
-| 2 | ~~**P0**~~ | ~~biomeOS BTSP session propagation~~ | ~~biomeOS~~ | **SHIPPED** (v4.45, `48cf9c33`) |
-| 3 | ~~**P0**~~ | ~~biomeOS riboCipher transport framing~~ | ~~biomeOS~~ | **SHIPPED** (v4.45, `48cf9c33`) |
-| 4 | P1 | bearDog `crypto.sign_ed25519` returns health stub, not signature | bearDog | Blocks Provenance Trio step 7/7 |
-| 4 | P1 | sweetGrass depot binary lag (v0.7.64 vs source v0.8.0) | sporeGate | Blocks westGate G3 live validation |
-| 5 | P1 | biomeOS depot binary lag — v4.45 composition broker not on sporeGate | sporeGate | Needed for live E2E |
-| 6 | P1 | sporeGate mesh.reachability + rootpulse.ledger degraded | sporeGate | 2/11 remaining |
-| 7 | P1 | songBird riboCipher probes → sweetGrass log noise (every 30s) | songBird | Low but annoying |
-| 8 | P1 | hotSpring Forgejo pack corruption | eastGate admin | Not our lane |
+| 1 | P1 | songBird Windows fix awaiting depot rebuild | sporeGate | **Our lane** |
+| 2 | P1 | bearDog crypto.sign_ed25519 returns health stub | bearDog | Code team |
+| 3 | P1 | sweetGrass depot binary lag (v0.7.64 vs v0.8.0) | sporeGate | **Our lane** |
+| 4 | P1 | biomeOS depot binary lag (v4.45 not on sporeGate) | sporeGate | **Our lane** |
+| 5 | P1 | sporeGate mesh.reachability + rootpulse.ledger | sporeGate | Code team items |
+| 6 | P1 | songBird riboCipher probe noise (every 30s) | songBird | Code team |
+| 7 | P1 | hotSpring Forgejo pack corruption | eastGate admin | Not our lane |
 
-**ZERO P0s** (songBird platform gate FIXED in source, depot rebuild pending). Resolved: ~~P0 BTSP session propagation~~ SHIPPED. ~~P0 riboCipher transport~~ SHIPPED. ~~P0 glibc depot~~ FIXED. ~~P1 WG DNS~~ FIXED. ~~P1 ZFS pool~~ ONLINE. ~~P1 step-ca~~ DEPLOYED. ~~P1 membrane depot~~ REBUILT (J6). ~~P1 nestGate ghost methods~~ REMOVED. ~~P1 toadStool deployment docs~~ SHIPPED (S345). sporeGate health 5/11→9/11.
-
----
-
-## HANDOFFS (newest first)
-
-| File | Status |
-|------|--------|
-| `SONGBIRD_WINDOWS_PLATFORM_GATE_WAVE155i.md` | **P0: songBird platform gate blocks G1 on Windows** |
-| `BLUEGATE_TOWER_ATOMIC_WAVE155i.md` | **Tower 2/3 on Windows. bearDog+skunkBat HEALTHY.** |
-| `BLUEGATE_WINDOWS_DEPLOYMENT_AAR_WAVE155i.md` | **15 Windows issues (2 P0, 5 P1, 8 P2)** |
-| `CELLMEMBRANE_WAVE155i_DEEP_DEBT_EVOLUTION.md` | Deep debt: sandbox fail-closed, registry-driven tower |
-| `NESTGATE_WAVE155i_DEEP_DEBT_CAS_JUL29_2026.md` | **CAS on ZFS verified, 13K+ tests, zero unsafe** |
-| `CORALREEF_WAVE155i_STRANDGATE_VALIDATION_JUL29_2026.md` | **18/18 methods, 463 .expect() purged, PTX modernized** |
-| `STRANDGATE_WAVE155i_COMPUTE_TRIO_VALIDATION.md` | **Compute Trio rebuilt, RTX 3090 profiled, 5 primals** |
-| `BIOMEOS_TOWER_ATOMIC_COMPOSITION_BROKER_WAVE155i.md` | biomeOS BTSP composition broker (P0) |
-| `SWEETGRASS_G3_WIRING_COMPLETE_WAVE155i.md` | sweetGrass G3 COMPLETE — Provenance Trio CLOSED |
-| `CELLMEMBRANE_WAVE155i_GLIBC_DEPOT_WG_DNS.md` | P0 glibc FIXED + P1 WG DNS FIXED |
-
-AARs:
-- `BLUEGATE_BOOTSTRAP_155i_AAR.md` — **First Windows gate: 40/40 repos, Tower bins, mesh LIVE**
-- `SWEETGRASS_G3_E2E_VALIDATED_155i_AAR.md` — **G3 E2E validated, 1,636 tests, v0.8.0**
-- `WESTGATE_CASCADE_REVIEW_ZFS_PROVENANCE_155i_AAR.md` — **CAS migration, Provenance 6/7, storage profiling**
-- `STRANDGATE_COMPUTE_TRIO_SILICON_UTILIZATION_155i_AAR.md` — **DF64 framing, RTX 3090 FP64 ~104T, silicon map**
-- `SPOREGATE_DEPLOYMENT_OPS_155i_AAR.md` — **Depot refresh 19 binaries, health 5/11→9/11**
-- `WESTGATE_NEST_ATOMIC_MULTICOMP_155i_AAR.md` — First multi-composition. 8 services, 1,704 capabilities.
-- `WESTGATE_ZFS_POOL_CREATION_155i_AAR.md` — ZFS 25.4TB + L2ARC online, all 5 tiers
-
----
-
-### SPOREPRINT (Wave 155i transplant — Jul 29, 2026)
-
-sporePrint updated to reflect Wave 155i ecosystem state:
-- Nest Atomic LIVE on westGate: 8 services, 1,704 capabilities, ZFS, Provenance Trio CLOSED
-- strandGate Tower + Compute Trio LIVE promoted from HW READY
-- Test counts updated across 13 primals (105,568 total, validated by spore-validate)
-- 27 signal graphs documented, 39 genomeBin depot binaries
-- G3 glacial goal now LIVE, G7 ADVANCING
-- 8+ gates online (westGate, strandGate, blueGate, swiftGate all promoted)
-- Tower Atomic page updated with "Compositions built on Tower" section
-
-Files changed: config.toml, tower_atomic.md, living-systems.md, MESH_TOPOLOGY.md,
-NUCLEUS_ARCHITECTURE.md, CONTEXT.md, llms.txt, products/_index.md, architecture/_index.md, README.md
+**ZERO P0s.** All prior P0s resolved.
 
 ---
 
@@ -211,6 +150,4 @@ NUCLEUS_ARCHITECTURE.md, CONTEXT.md, llms.txt, products/_index.md, architecture/
 composition broker. 8 primals deep debt sweeps. CAS on ZFS verified (3,119 objects).
 RTX 3090 profiled (FP64 ~104T). sporeGate depot refreshed (19 binaries). E2E signal
 graphs UNBLOCKED. NEXT: blueGate (Windows) — Tower → Nest → Node Atomic, inner
-membrane topo owner H2, sub-builder under sporeGate. First full atomic stack proof
-on Windows with biomeOS in full composition broker role. northGate is daily driver —
-AlphaFold data source only, do not deploy. swiftGate follows blueGate. ~63K+ tests.*
+membrane topo owner H2, sub-builder under sporeGate.*
