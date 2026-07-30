@@ -94,6 +94,8 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 | cellMembrane not in sources.toml | Blocks sovereign CI self-rebuild | — | **P3 OPEN** (sporeGate AAR) |
 | /run/membrane tmpfiles.d rule | Reboot loses socket dir permissions | — | **P3 OPEN** (sporeGate AAR) |
 | rootpulse.ledger not implemented | Sole degraded probe on sporeGate | — | **P2 OPEN** (sporeGate AAR) |
+| sandbox false positive for broker primals | biomeOS fails standalone health check → blocks auto-deploy | — | **P2 OPEN** (sporeGate v4.50 AAR) |
+| golgi post-receive hook not auto-firing | biomeOS push didn't trigger CI automatically | — | **P3 OPEN** (sporeGate v4.50 AAR) |
 
 ---
 
@@ -224,7 +226,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Provenance Trio | **7/7 COMPLETE** — live E2E signed chain on westGate (ZFS) + blueGate (Windows) |
 | Sovereign CI | **LIVE** — push-to-deploy, J9+J10+J11 killed |
 | sweetGrass P2 UUID | **FIXED** (`4b5167b`) |
-| biomeOS | **v4.47 NUCLEUS orchestrator** (`bd202674`) |
+| biomeOS | **v4.50** — socket evap + binary path FIXED (`06ed323f`). Deployed on sporeGate. |
 | bearDog | **14,019 tests**, crypto.sign + Windows gate shipped |
 | cellMembrane boot_order | **SHIPPED** (b7707ee) |
 | cellMembrane dns.configure | **SHIPPED** (2b82722, 1,247 tests) |
@@ -234,7 +236,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
 | P2s | **3 OPEN** — socket ownership, checksums.toml, rootpulse.ledger (operational, not code) |
 | P3s | **2 OPEN** — cellMembrane self-CI, tmpfiles.d rule (operational) |
-| Depot | **34** binaries: 16 musl + 3 gnu + 15 windows (all BLAKE3 verified, Wave 155m) |
+| Depot | **35** binaries: 16 musl + **4** gnu + 15 windows (biomeOS gnu NEW, all BLAKE3 verified) |
 
 ---
 
