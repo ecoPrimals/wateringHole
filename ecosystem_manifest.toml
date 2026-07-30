@@ -1010,18 +1010,39 @@ repos = [
     "cellMembrane", "projectNUCLEUS",
 ]
 
-# iosGate — macOS gate, darwin genomeBins, Tower → full
-# Mac hardware. First darwin target. Validates songBird universal-ipc on macOS.
-# launchd service management, UDS transport, Mach-O binaries.
+# iosGate — iPhone, iOS mesh gate (GLACIAL)
+# Apple walled garden: no background services, no port listening, sandboxed IPC.
+# Requires Apple Developer Program ($99/yr) + Mac for signing.
+# Silicon deism obligation: Apple Silicon exists, we must honor it.
+# Sequencing: Mac Mini acquisition → darwin genomeBins → macOS gate → iOS companion.
 [gates.iosGate]
+target = "aarch64-apple-ios"
+mobility = "mobile"
+bind_mode = "tcp_only"
+composition = "tower"
+transport = "lan"
+roles = ["mobile_anchor", "ios_validation"]
+glacial = true
+notes = "iPhone. iOS is hostile to mesh gate workloads (no background services, sandboxed, no IPC). Silicon deism demands we learn from the architecture. Requires: (1) Mac Mini for darwin builds + signing, (2) Apple Developer Program, (3) architectural workarounds for iOS lifecycle. Long-term goal. Cross-platform lessons from Linux↔Windows apply — Apple is the next frontier."
+repos = [
+    "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "skunkBat",
+]
+
+# darwinGate — macOS gate (Mac Mini), darwin genomeBin builder (GLACIAL — needs HW acquisition)
+# Prerequisite for iosGate. First darwin target. Self-builds aarch64-apple-darwin.
+# launchd service management, UDS transport, Mach-O binaries.
+# Silicon deism: Apple Silicon is truth. We must compile for it.
+[gates.darwinGate]
 target = "aarch64-apple-darwin"
 mobility = "fixed"
 bind_mode = "uds"
 composition = "tower"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
-roles = ["tower_atomic", "darwin_validation"]
-notes = "macOS gate. First aarch64-apple-darwin deployment. Validates Tower Atomic on darwin: launchd, UDS, Mach-O. Can self-build darwin genomeBins (can't cross-compile darwin from Linux)."
+glacial = true
+roles = ["tower_atomic", "darwin_builder", "darwin_validation"]
+notes = "Mac Mini (M-series). First darwin deployment. Self-builds darwin genomeBins (can't cross-compile from Linux). Validates Tower Atomic on macOS: launchd, UDS, Mach-O, Keychain. Prerequisite for iosGate. Acquisition needed (~$500 used M1)."
 repos = [
     "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat",

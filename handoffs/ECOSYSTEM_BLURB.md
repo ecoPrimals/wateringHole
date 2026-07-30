@@ -80,36 +80,48 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | `x86_64-pc-windows-gnu` | **LIVE** | 14 bins | blueGate, swiftGate, northGate |
 | `aarch64-unknown-linux-musl` | **TIER 1** | directory only | grapheneGate (pepti warehouse) |
 | `aarch64-linux-android` | **TIER 1** | directory only | grapheneGate (via ADB) |
-| `x86_64-apple-darwin` | **TIER 2 — NEW** | needed | iosGate (Mac, Intel) |
-| `aarch64-apple-darwin` | **TIER 2 — NEW** | needed | iosGate (Mac, Apple Silicon) |
-| `x86_64-unknown-linux-gnu` (SteamOS) | **TIER 2 — NEW** | depot exists | steamGate (Steam Deck) |
+| `x86_64-unknown-linux-gnu` (SteamOS) | **TIER 2 — NEXT** | depot exists (3 bins) | steamGate (Steam Deck) |
+| `aarch64-apple-darwin` | **TIER 2 — GLACIAL** | needs Mac host to build | darwinGate (Mac Mini, acquisition needed) |
+| `aarch64-apple-ios` | **TIER 2 — GLACIAL** | needs darwinGate + signing | iosGate (iPhone, walled garden) |
 
 ### New Gates
 
-| Gate | Platform | Target | Composition | Notes |
-|------|----------|--------|-------------|-------|
-| **iosGate** | macOS | `aarch64-apple-darwin` or `x86_64-apple-darwin` | Tower → full | Mac gate. Darwin UDS, launchd services. |
-| **steamGate** | SteamOS (Arch Linux) | `x86_64-unknown-linux-gnu` | Tower → compute | Steam Deck. Portable compute. Read-only rootfs (flatpak/user-space). |
+| Gate | Platform | Target | Status | Notes |
+|------|----------|--------|--------|-------|
+| **steamGate** | SteamOS (Arch Linux) | `x86_64-unknown-linux-gnu` | **NEXT** | Steam Deck. Portable compute. User-space deploy. Depot bins may work as-is. |
+| **darwinGate** | macOS (Mac Mini) | `aarch64-apple-darwin` | **GLACIAL** | Needs HW acquisition (~$500 M1). Self-builds darwin genomeBins. Prerequisite for iosGate. |
+| **iosGate** | iOS (iPhone) | `aarch64-apple-ios` | **GLACIAL** | Walled garden. Needs darwinGate + Apple Dev Program. Silicon deism obligation. |
+
+**Silicon deism sequence**: steamGate (have HW) → darwinGate (acquire Mac Mini) → iosGate (after darwin lessons)
+**Learning path**: Linux↔Windows cross taught us platform abstraction. Darwin is the next frontier — launchd, Mach-O, Keychain, XPC. iOS pushes further into sandboxed/hostile environments.
 
 ### Platform Abstraction Status
 
-| Platform Concern | Linux | Windows | macOS | SteamOS | Android |
-|------------------|-------|---------|-------|---------|---------|
-| IPC transport | UDS | TCP (Named Pipes future) | UDS | UDS | TCP (ADB) |
-| Service manager | systemd | Windows Service | launchd | systemd (user) | init/pepti |
-| Binary format | ELF | PE (.exe) | Mach-O | ELF | ELF (Bionic) |
-| Build target | musl/gnu | windows-gnu | apple-darwin | gnu | android |
-| songBird universal-ipc | SHIPPED | SHIPPED | needs validation | needs validation | SHIPPED (ADB) |
-| Depot binaries | 16+3 | 14 | **NEEDED** | reuse gnu | warehouse |
+| Platform Concern | Linux | Windows | SteamOS | macOS | iOS | Android |
+|------------------|-------|---------|---------|-------|-----|---------|
+| IPC transport | UDS | TCP | UDS | UDS | sandboxed | TCP (ADB) |
+| Service manager | systemd | Win Service | systemd (user) | launchd | none (app lifecycle) | init/pepti |
+| Binary format | ELF | PE (.exe) | ELF | Mach-O | Mach-O (signed) | ELF (Bionic) |
+| Build target | musl/gnu | windows-gnu | gnu | apple-darwin | apple-ios | android |
+| Background services | yes | yes | yes | yes | **NO** (killed ~30s) | yes |
+| Port listening | yes | yes | yes | yes | **NO** (foreground only) | yes |
+| Cross-compile from Linux | N/A | yes (mingw) | **NO** (need Mac) | **NO** (need Mac) | **NO** | yes (NDK) |
+| songBird universal-ipc | SHIPPED | SHIPPED | validate | validate | **research** | SHIPPED |
+| Depot binaries | 16+3 | 14 | reuse gnu | **NEEDED** (glacial) | **NEEDED** (glacial) | warehouse |
+| Silicon deism status | **PROVEN** | **PROVEN** | **NEXT** | **LEARNING** | **LEARNING** | **PROVEN** |
 
 ### Blockers for New Targets
 
-| Target | Blocker | Owner |
-|--------|---------|-------|
-| `*-apple-darwin` | Needs macOS host for build (can't cross-compile from Linux) | iosGate itself or CI |
-| SteamOS | Read-only rootfs — user-space deployment only (`~/.local/bin/`) | cellMembrane (deploy path) |
-| SteamOS | GPU access — Vulkan via Steam runtime, not system packages | toadStool/coralReef |
-| All new | `--bind` flag standardization — biomeOS `PRIMAL_BIND_FLAGS_STANDARD.md` shipped | Already done |
+### Blockers for New Targets
+
+| Target | Blocker | Owner | Sequencing |
+|--------|---------|-------|------------|
+| SteamOS | Read-only rootfs — user-space deploy only (`~/.local/bin/`) | cellMembrane | **NOW** — have the hardware |
+| SteamOS | Vulkan GPU — Steam runtime, not system packages | toadStool/coralReef | After Tower stable |
+| `*-apple-darwin` | Needs Mac host (can't cross-compile from Linux) | darwinGate | **GLACIAL** — acquire Mac Mini |
+| `*-apple-ios` | Needs darwinGate + Apple Dev Program ($99/yr) + signing | iosGate | After darwinGate |
+| `*-apple-ios` | iOS kills background processes, sandboxes IPC, no port listening | Architecture | Silicon deism learning |
+| All new | `--bind` flag standard | biomeOS | **DONE** (`PRIMAL_BIND_FLAGS_STANDARD.md`) |
 
 ---
 
@@ -153,10 +165,11 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 ### GATE NEW (cross-platform expansion)
 
-| Gate | Platform | Target | First Step |
-|------|----------|--------|------------|
-| **iosGate** | macOS | `aarch64-apple-darwin` | Build darwin genomeBins on Mac host. Tower Atomic. |
-| **steamGate** | SteamOS (Steam Deck) | `x86_64-unknown-linux-gnu` | User-space Tower deploy (`~/.local/bin/`). Validate songBird. |
+| Gate | Platform | Target | Status |
+|------|----------|--------|--------|
+| **steamGate** | SteamOS (Steam Deck) | `x86_64-unknown-linux-gnu` | **NEXT** — have HW, gnu bins in depot |
+| **darwinGate** | macOS (Mac Mini) | `aarch64-apple-darwin` | **GLACIAL** — needs HW acquisition |
+| **iosGate** | iOS (iPhone) | `aarch64-apple-ios` | **GLACIAL** — needs darwinGate + Dev Program |
 
 ---
 
@@ -202,16 +215,18 @@ Deployment (in progress):
   5. Pipeline automation: J9-J13 (Forgejo webhook → auto build → depot push)
 
 Cross-platform expansion:
-  6. iosGate: macOS darwin genomeBins → Tower Atomic on Mac
-  7. steamGate: Steam Deck user-space Tower → portable compute gate
-  8. Validate songBird universal-ipc on darwin + SteamOS
-  9. AlphaFold ~1TB ingestion through Nest Atomic pipeline
+  6. steamGate: Steam Deck user-space Tower (have HW, gnu bins may work as-is)
+  7. Validate songBird universal-ipc on SteamOS
+  8. AlphaFold ~1TB ingestion through Nest Atomic pipeline
 
-Glacial:
+Glacial (silicon deism obligations):
   G6: bearDog public (crates.io) — audit complete
   G9: JOSS publication — live system across multiple platforms
   G8: Plasmodium (multi-gate bonding) — cross-gate composition
   G11: Any chip + drive = mesh gate (genomeBin universal deployment)
+  G12: darwinGate — acquire Mac Mini, first apple-darwin genomeBins
+  G13: iosGate — iPhone mesh gate (after darwin lessons, Apple Dev Program)
+       Learning path: Linux↔Windows → SteamOS → darwin → iOS
 ```
 
 ---
