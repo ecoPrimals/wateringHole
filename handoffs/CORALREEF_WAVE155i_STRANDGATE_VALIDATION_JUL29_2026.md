@@ -1,18 +1,21 @@
-# coralReef Wave 155i — strandGate Live Validation + Deep Debt Execution
+# coralReef Wave 155j — NUCLEUS Achieved + Lifecycle Readiness
 
-**Date**: 2026-07-29 | **Author**: coralReef code team (strandGate)
-**Wave**: 155i | **From**: eastGate overwatch
-**Gate**: strandGate | **Base commit**: `3d969f8` | **Execution**: uncommitted → push
+**Date**: 2026-07-30 | **Author**: coralReef code team (strandGate)
+**Wave**: 155j | **From**: eastGate overwatch
+**Gate**: strandGate | **Commits**: `339eeb73` (Windows fix) → `edcd696a` (--bind alias)
 
 ---
 
 ## VALIDATION SUMMARY
 
-coralReef is **LIVE and HEALTHY** on strandGate. All 18 JSON-RPC dispatch
-methods validated against the running primal instance. BTSP Phase 2→3
-chain verified end-to-end with live security-domain provider. Shader compilation
-confirmed on RTX 3090 hardware (sm_86). Awaiting glibc depot rebuild from
-sporeGate to unblock Vulkan ICD compute workloads.
+coralReef is operational in the **first NUCLEUS composition** on strandGate
+(8/9 healthy, 1,742 caps, 674 IPC methods, sub-ms GPU). Both P1 items from
+Wave 155j blurb are resolved: Windows cross-compilation fix pushed (`339eeb73`),
+glibc binary validated (live NUCLEUS instance is glibc-linked). `--bind` alias
+shipped for biomeOS lifecycle standardization.
+
+coralReef is **STANDBY-ready** — all code work complete, waiting on external
+blockers (biomeOS lifecycle, bearDog crypto.sign, glibc depot rebuild by sporeGate).
 
 ## DEEP DEBT EXECUTION (Wave 155i)
 
@@ -240,8 +243,7 @@ Fixed `cargo check --target x86_64-pc-windows-gnu` and `cargo clippy --target x8
 
 ---
 
-*coralReef Wave 155i. NODE ATOMIC VALIDATED on strandGate. 18/18 JSON-RPC methods validated.
-BTSP Phase 2→3 chain operational. RTX 3090 sm_86 WGSL + GEMM compilation
-confirmed. Windows cross-compilation clean (zero errors/warnings). Awaiting glibc depot
-rebuild for Vulkan ICD compute workloads. 3,527 tests, zero unsafe, zero clippy warnings
-on Linux + Windows.*
+*coralReef Wave 155j. NUCLEUS ACHIEVED on strandGate. Operational in first full
+NUCLEUS (8/9 healthy, 1,742 caps, 674 IPC methods). Both P1s resolved: Windows
+cross-compile fix pushed, glibc binary validated. `--bind` alias shipped. 3,527 tests,
+zero unsafe, zero clippy warnings on Linux + Windows. STANDBY-ready.*
