@@ -1,32 +1,41 @@
 # ecoPrimals Ecosystem Blurb — Wave 155k
 
-**Date**: Jul 30, 2026 09:20 EDT | **Wave**: 155k | **From**: eastGate overwatch
-**Posture**: **ALL CHAINS CLOSED. Depot 14/14 REBUILT by sporeGate (Jul 30). biomeOS v4.47 + bearDog crypto.sign DEPLOYED. Cross-platform mesh expansion: iosGate (macOS), steamGate (Steam Deck) joining. Provenance 7/7 UNBLOCKED. Pipeline automation J9–J13 in progress. 12 teams STANDBY. ZERO P0/P1s. Anything with a chip and a drive is a gate.**
+**Date**: Jul 30, 2026 10:10 EDT | **Wave**: 155k | **From**: eastGate overwatch
+**Posture**: **PROVENANCE 7/7 COMPLETE. westGate NUCLEUS (second gate, 13/13, 654 caps, Provenance 7/7 first-ever full signed chain on live hardware). blueGate NUCLEUS refreshed (14/14 depot, 131 MB, Provenance 7/7 validated on Windows). SOVEREIGN CI LIVE on sporeGate (J9+J10+J11 killed — push-to-deploy automated). ZERO P0s. 1 P1 (membrane.exe Windows cross-compile). 12 teams STANDBY.**
 
 ---
 
 ## NUCLEUS — ACHIEVED
 
-strandGate is the first gate to run all 13 primals as a full NUCLEUS composition:
+Three gates now running full NUCLEUS. Provenance 7/7 validated on two platforms.
 
 ```
-strandGate NUCLEUS (Jul 29, 19:20 EDT):
-  Tower:  bearDog ✓  songBird ~ (degraded)  skunkBat ✓
+westGate NUCLEUS (Jul 30 — PROVENANCE 7/7 COMPLETE):
+  Tower:  bearDog ✓  songBird ✓  skunkBat ✓
   Nest:   nestGate ✓  loamSpine ✓  sweetGrass ✓  rhizoCrypt ✓
-  Node:   barraCuda ✓  coralReef ✓
-  Orch:   biomeOS ✓ (COORDINATED, 1,742 caps, 20 ACTIVE endpoints)
-  Score:  8/9 healthy | 25 sockets | 674 direct IPC methods
-  GPU:    RTX 3090 matmul p50 0.30ms | Pipeline ~2,000 ops/sec
+  Node:   toadStool ✓  barraCuda ✓  coralReef ✓
+  Viz:    petalTongue ✓  squirrel ✓
+  Orch:   biomeOS ✓ (v4.47 COORDINATED, 654 caps)
+  Score:  13/13 | 29 sockets | Provenance 7/7 LIVE
+  ZFS:    25.4TB ONLINE, 3,252 CAS objects, 1.56× compression
+
+blueGate NUCLEUS (Jul 30 — Windows, Provenance 7/7 VALIDATED):
+  13/13 primals, 131.1 MB (down from 147.5 MB), TCP-only
+  bearDog crypto.sign LIVE, Provenance 7/7 E2E on Windows
+  DID key: did:key:z6Mkryaa7n6hfpSbGaZwbqPMD6MzXukgdQK3XRKzwFSgce8o
+
+strandGate NUCLEUS (Jul 29 — first gate, manual startup):
+  8/9 healthy | 1,742 caps | 674 IPC methods | RTX 3090 sub-ms GPU
+
+sporeGate SOVEREIGN CI LIVE:
+  Push to Forgejo → auto build → sandbox validate → depot push → HTTPS serve
+  J9+J10+J11 KILLED. Zero human intervention for musl builds.
 ```
 
-blueGate followed with 13/13 primals on Windows (147.5 MB, TCP-only, all stable 2+ hours).
-
-**What NUCLEUS proved**: cross-atomic IPC at sub-ms latency, biomeOS discovers all primals
-and transitions endpoints to ACTIVE, GPU compute pipelines work, BTSP trust chain holds.
-
-**What NUCLEUS exposed**: startup ordering is critical (Tower → Nest → Node → biomeOS LAST),
-biomeOS graph executor can't reach primals with riboCipher enforcement, bearDog crypto.sign
-still returns health stub, songBird TCP registration not wired.
+**What NUCLEUS + Provenance proved**: full 7-step provenance chain (CAS → DAG → Merkle →
+Spine → Ed25519 signature → Attribution braid) works on live hardware with ZFS backend.
+Portable across Linux and Windows. Boot order discipline (Tower → Nest → Node → biomeOS)
+is the deployment standard. Sovereign CI automates the pipeline end-to-end.
 
 ---
 
@@ -44,28 +53,40 @@ All blocking code work is done. 50 handoffs fossilized to `fossilRecord/wave155k
 
 ## NEXT PHASES — Deployment + Expansion
 
-### Phase A: Gate Deployment (in progress)
+### Phase A: Gate Deployment — MOSTLY COMPLETE
 
 | # | Target | What | Status |
 |---|--------|------|--------|
-| A1 | **westGate** | Deploy biomeOS v4.47 + Compute Trio → second lifecycle-managed NUCLEUS | NEXT |
-| A2 | **Provenance 7/7** | Live validation: sweetGrass + loamSpine + bearDog crypto.sign E2E | After A1 |
-| A3 | **blueGate** | Pull fresh `.exe` from depot → lifecycle-managed NUCLEUS on Windows | After A1 |
-| A4 | **strandGate** | Redeploy with biomeOS v4.47 (lifecycle-managed restart) | After A1 |
+| A1 | **westGate** | biomeOS v4.47 + Compute Trio → NUCLEUS | **DONE** — 13/13, 654 caps, 29 sockets |
+| A2 | **Provenance 7/7** | Live E2E validation | **DONE** — westGate (Linux) + blueGate (Windows) |
+| A3 | **blueGate** | Fresh depot → NUCLEUS on Windows | **DONE** — 131.1 MB, 14/14 depot, crypto.sign LIVE |
+| A4 | **strandGate** | Redeploy with biomeOS v4.47 | NEXT — lowest urgency, already NUCLEUS |
 
-### Phase B: Pipeline Automation (J9–J13) — **3 of 5 KILLED by sporeGate**
+### Phase B: Pipeline Automation — 3/5 KILLED
 
-| Jelly String | What | Owner | Status |
-|-------------|------|-------|--------|
-| J9 | Forgejo push → `sovereign.ci.trigger` | sporeGate | **KILLED** — golgi hook installed on 20 repos, SSH key plumbed, validated E2E |
-| J10 | Post-cascade diff → auto `plasmid.harvest --push` | sporeGate | **KILLED** — `MEMBRANE_BUILD_AUTHORITY=1` set, drift pipeline active |
-| J11 | Manifest-driven multi-target builds | sporeGate | **KILLED** — manifest `[build.*].targets` verified for all primals |
-| J12 | blueGate sub-builder dispatch via songBird IPC | sporeGate + blueGate | BLOCKED — blueGate NUCLEUS not live, membrane.exe won't compile |
-| J13 | Continuous depot freshness probe / mesh.build_pending | cellMembrane | ~20 LOC — `depot.updated` works, `build_pending` is stub-only |
+| Jelly String | What | Status |
+|-------------|------|--------|
+| ~~J9~~ | Forgejo webhook → auto cascade | **KILLED** — golgi post-receive hook → SSH → sporeGate |
+| ~~J10~~ | Drift detection → auto harvest | **KILLED** — `sovereign.ci.trigger` on push |
+| ~~J11~~ | Multi-target manifest build | **KILLED** — integrated into sovereign.ci |
+| J12 | blueGate sub-builder dispatch | **BLOCKED** — membrane.exe won't cross-compile (P1) |
+| J13 | Depot freshness probe | ~20 LOC — `mesh.build_pending` wire needed |
 
-**Sovereign CI is LIVE**: `git push` to Forgejo → auto build → sandbox → depot push → HTTPS. Validated with squirrel (E2E via golgi SSH) and songBird (harvest --push, TCP registration fix deployed).
+Handoff: `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` (3 items: build_pending 20 LOC, webhook listener 200 LOC, membrane.exe P1)
 
-Handoffs: `SPOREGATE_SOVEREIGN_CI_ACTIVATION_155k_AAR.md`, `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md`
+### Divergences Found (P2 — upstream teams)
+
+| Issue | Gate | Owner | Priority |
+|-------|------|-------|----------|
+| bearDog dual-socket footgun (`default` vs `family-scoped` have different capabilities) | westGate | bearDog | P2 |
+| bearDog `FAMILY_SEED` now required (breaking change from 155i) | blueGate | bearDog (docs) | P2 |
+| `PRIMAL_BIND_MODE` — `tcp_only` silently falls back to `auto` (should be `tcp`) | blueGate | All primals | P2 |
+| biomeOS capability wipe cycle (654→0→187→654 over ~60s on rescan) | westGate | biomeOS | P2 |
+| biomeOS Neural API socket still hardcoded to `membrane/` (not unified) | westGate | biomeOS | P2 |
+| toadStool tarpc-only (no JSON-RPC health endpoint) | westGate | toadStool | P2 |
+| petalTongue rejects `--family-id` flag | westGate | petalTongue | P2 |
+| biomeOS API 403 on all non-/health endpoints (BTSP auth enforced) | blueGate | biomeOS (docs) | P2 |
+| membrane.exe `UnixStream` not `#[cfg(unix)]` gated | sporeGate | cellMembrane | **P1** |
 
 ---
 
@@ -151,10 +172,11 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Gate | Status | Resume When |
 |------|--------|-------------|
-| **strandGate** | **NUCLEUS ACHIEVED.** Maintain composition. | biomeOS v4.47 redeploy (lifecycle-managed). |
-| **blueGate** | **13/13 Windows.** Depot now 14/14 fresh. | Pull fresh `.exe`, sub-builder activation. |
-| **swiftGate** | HW ready. Windows. | After blueGate NUCLEUS stable. |
-| **ironGate** | Online. 14TB+1TB+1TB+2TB. | Tower + HDD enclave experiment. |
+| **strandGate** | **NUCLEUS** (manual startup). | biomeOS v4.47 redeploy. |
+| **blueGate** | **NUCLEUS** (14/14 fresh, Provenance 7/7 validated). | Sub-builder (needs membrane.exe P1). |
+| **westGate** | **NUCLEUS** (Provenance 7/7 COMPLETE, ZFS 25.4TB). | AlphaFold ~1TB ingestion. |
+| **swiftGate** | HW ready. Windows. | After blueGate sub-builder stable. |
+| **ironGate** | Online. 14TB+1TB+1TB+2TB. | Tower + HDD enclave. |
 | **southGate** | HW ready. | Enrollment. |
 | **grapheneGate** | Tower LIVE (Pixel 8a). | ADB mesh expansion. |
 
@@ -162,9 +184,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Gate | Status | Next |
 |------|--------|------|
-| **eastGate** | Overwatch. All code teams delivered. | Cross-platform expansion coordination. |
-| **westGate** | Broker LIVE. 704 caps. 3,216 CAS. | **biomeOS v4.47 + Compute Trio → NUCLEUS.** Provenance 7/7. AlphaFold. |
-| **sporeGate** | **Sovereign CI LIVE.** J9+J10+J11 killed. songBird TCP fix deployed. 10/11 probes OK. | J12 blueGate sub-builder (blocked on NUCLEUS). Polish. |
+| **eastGate** | Overwatch. | Cross-platform expansion. Disseminate P2 divergences. |
+| **sporeGate** | **Sovereign CI LIVE.** Push-to-deploy automated. | J12 (blueGate sub-builder, blocked on membrane.exe). J13 polish. |
 
 ### GATE NEW (cross-platform expansion)
 
@@ -180,7 +201,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Metric | Value |
 |--------|-------|
-| NUCLEUS gates | **1** (strandGate) + 1 infrastructure proof (blueGate) |
+| NUCLEUS gates | **3** (westGate + blueGate + strandGate) + sporeGate (CI) |
+| Provenance 7/7 | **COMPLETE** — validated on Linux (westGate) + Windows (blueGate) |
 | Primal tests | **~63K+** |
 | Signal graphs | **27** |
 | BTSP | **13/13** |
@@ -192,7 +214,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | strandGate IPC methods | **674** |
 | GPU | RTX 3090 matmul p50 **0.30ms**, pipeline **~2,000 ops/sec** |
 | CAS objects (westGate) | **3,216** on ZFS 25.3TB |
-| Provenance Trio | **7/7 UNBLOCKED** (bearDog crypto.sign shipped `3739e7078`) |
+| Provenance Trio | **7/7 COMPLETE** — live E2E signed chain on westGate (ZFS) + blueGate (Windows) |
+| Sovereign CI | **LIVE** — push-to-deploy, J9+J10+J11 killed |
 | sweetGrass P2 UUID | **FIXED** (`4b5167b`) |
 | biomeOS | **v4.47 NUCLEUS orchestrator** (`bd202674`) |
 | bearDog | **14,019 tests**, crypto.sign + Windows gate shipped |
@@ -201,41 +224,40 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Active dimensions | **9** (D10 Jelly Strings REOPENED for J9–J13) |
 | Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
-| P1s | **ZERO** — all chains closed |
+| P1s | **1** — membrane.exe Windows cross-compile (blocks blueGate sub-builder) |
 
 ---
 
-## WHAT'S NEXT — CROSS-PLATFORM MESH EXPANSION
+## WHAT'S NEXT
 
 ```
-All code shipped. Zero P0s. Zero P1s. Depot 14/14 REBUILT. 12 teams STANDBY.
+NUCLEUS: 3 gates. Provenance 7/7: COMPLETE. Sovereign CI: LIVE. 1 P1 remaining.
 
-Deployment (in progress):
-  1. ✓ sporeGate depot 14/14 rebuilt + biomeOS v4.47 deployed
-  2. westGate: biomeOS v4.47 + Compute Trio → second NUCLEUS
-  3. Provenance 7/7 live validation (sweetGrass + loamSpine + bearDog crypto.sign)
-  4. blueGate: pull fresh .exe → lifecycle-managed NUCLEUS on Windows + sub-builder
-  5. Pipeline automation: J9-J13 (Forgejo webhook → auto build → depot push)
+Done this wave:
+  ✓ westGate NUCLEUS (13/13, 654 caps, 29 sockets, Provenance 7/7)
+  ✓ blueGate NUCLEUS refreshed (131 MB, Provenance 7/7 on Windows)
+  ✓ Sovereign CI on sporeGate (J9+J10+J11 killed, push-to-deploy live)
+  ✓ Depot 14/14 rebuilt + BLAKE3 verified
 
-Cross-platform expansion:
-  6. steamGate: Steam Deck user-space Tower (have HW, gnu bins may work as-is)
-  7. Validate songBird universal-ipc on SteamOS
-  8. AlphaFold ~1TB ingestion through Nest Atomic pipeline
+Active:
+  1. P1: membrane.exe Windows cross-compile (blocks blueGate sub-builder J12)
+  2. P2 divergences: bearDog dual-socket, FAMILY_SEED, capability wipe cycle (9 items)
+  3. strandGate: redeploy with biomeOS v4.47
+  4. AlphaFold ~1TB ingestion through westGate Nest Atomic
+  5. steamGate: Steam Deck user-space Tower (have HW, gnu bins in depot)
 
-Glacial (silicon deism obligations):
-  G6: bearDog public (crates.io) — audit complete
-  G9: JOSS publication — live system across multiple platforms
-  G8: Plasmodium (multi-gate bonding) — cross-gate composition
-  G11: Any chip + drive = mesh gate (genomeBin universal deployment)
-  G12: darwinGate — acquire Mac Mini, first apple-darwin genomeBins
-  G13: iosGate — iPhone mesh gate (after darwin lessons, Apple Dev Program)
-       Learning path: Linux↔Windows → SteamOS → darwin → iOS
+Glacial:
+  G6:  bearDog public (crates.io)
+  G9:  JOSS publication — live multi-platform NUCLEUS with Provenance 7/7
+  G8:  Plasmodium (multi-gate bonding)
+  G11: Any chip + drive = mesh gate
+  G12: darwinGate — Mac Mini acquisition
+  G13: iosGate — iPhone (after darwin)
 ```
 
 ---
 
-*Wave 155k — ALL CHAINS CLOSED. Depot 14/14 REBUILT. biomeOS v4.47 + bearDog crypto.sign
-DEPLOYED on sporeGate. Cross-platform expansion: iosGate (macOS), steamGate (Steam Deck).
-5 depot targets, 33+ binaries. Pipeline automation J9–J13 identified. Provenance 7/7
-UNBLOCKED. ZERO P0/P1s. 12 teams STANDBY. ~63K+ tests. 10+ gates. Anything with a chip
-and a drive is a mesh gate.*
+*Wave 155k — PROVENANCE 7/7 COMPLETE. 3 NUCLEUS gates (westGate, blueGate, strandGate).
+Sovereign CI LIVE (push-to-deploy). westGate: first full signed provenance chain on live
+ZFS hardware. blueGate: Provenance 7/7 on Windows. J9+J10+J11 killed. 1 P1 (membrane.exe).
+9 P2 divergences cataloged. 33+ binaries, 5 targets. ~63K+ tests. 10+ gates.*
