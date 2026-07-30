@@ -13,59 +13,24 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal / Coordination
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155j)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155k)
 - [x] Gate heads published (`heads/*.toml`) — golgiBody auto-publishing active
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
-- [x] Active impulses: 0 (26+ fossilized)
-- [x] ecosystem_manifest.toml version current (v3.1.0)
-- [x] 43/43 repos synced with Forgejo
 - [x] **ECOSYSTEM_BLURB.md** is the universal handoff (Tracks A+B converged)
-- [x] Fossilized: 42+ docs across `fossilRecord/wave150x_*` and `wave151a_completion/`
-- [x] **waterFall** publish cascade defined — git → impulse → DAG → braid → anchor → relay
-- [x] Impulse/Potential, Context Braid, Ecosystem Communication standards active
-- [x] NeuralBridge in membrane-shadow routes with try-primal-first semantics
-- [x] whitePaper gen/ review COMPLETE (Wave 151c)
-- [x] JOSS publication strategy defined
-- [x] GLOSSARY.md refreshed (Wave 155b)
-- [x] cellMembrane + plasmidBin cascaded to Forgejo
-- [x] **30+ handoff docs + AARs** delivered Wave 155f–i (code teams, gate AARs, Nest Atomic, composition broker, deep debt sweeps, Windows deployment)
-- [ ] waterFall graph partially wired — full composition pending Provenance Trio
+- [x] **54 handoff docs + AARs** delivered Wave 155b–k
+- [x] **ALL P0s RESOLVED. ALL P1s RESOLVED.** 12 teams STANDBY.
+- [x] **NUCLEUS ACHIEVED** — strandGate (8/9, 1,742 caps), blueGate (13/13 Windows infra)
+- [x] **Depot 14/14 REBUILT** by sporeGate (Jul 30) — 33 binaries, 5 targets, BLAKE3 verified
+- [x] **biomeOS v4.47 NUCLEUS orchestrator DEPLOYED** on sporeGate — composition lifecycle, socket unification, capability persistence
+- [x] **bearDog crypto.sign_ed25519 SHIPPED** (`3739e7078`) + Windows platform gating (`d6b1003bb`)
+- [x] **Provenance 7/7 UNBLOCKED** — pending live validation
+- [x] **Cross-platform expansion**: steamGate (Steam Deck) NEXT, darwinGate + iosGate GLACIAL
+- [x] **Pipeline automation J9–J13** identified and handed off to sporeGate/cellMembrane
+- [x] D10 (Jelly Strings) REOPENED for J9–J13
+- [ ] waterFall graph partially wired — full composition pending Provenance Trio live validation
 - [ ] Context braids not yet replacing blurb paste — graduation path documented
-- [x] `freshness.toml` updated to Wave 155h with 38 HEAD SHAs
-- [x] **Nest Atomic LIVE on westGate** — 8 services, Provenance Trio 6/7 live, ZFS online
-- [x] sweetGrass G3 E2E validated (v0.8.0, 1,636 tests, mock loamSpine UDS)
-- [x] westGate CAS on ZFS verified — 3,216 objects, 25.3TB pool, 1.50× compression, ARC 99.98% hit
-- [x] P0 glibc depot FIXED. P1 WG DNS FIXED. P1 membrane depot REBUILT (J6).
-- [x] **Deep debt wave**: 8 primals shipped simultaneous sweeps (nestGate, toadStool, cellMembrane, barraCuda, coralReef, sweetGrass, skunkBat, nestGate)
-- [x] sporeGate depot refresh: Linux 19/19 binaries, BLAKE3 verified, health 5/11→9/11
-- [x] strandGate Compute Trio rebuilt from glibc source, RTX 3090 profiled
-- [x] ~~biomeOS composition broker~~ — **SHIPPED** (v4.45): riboCipher framing + BTSP executor, 35 E2E tests, 8,564 tests total
-- [x] **blueGate Tower G1 COMPLETE** — 3/3 primals on Windows (source build, 3m 56s)
-- [x] **blueGate Nest Atomic VALIDATED** — 10/10 primals on Windows, 107.6 MB, TCP-only
-- [x] **westGate composition broker LIVE** — biomeOS v4.45 deployed, 704 capabilities, COORDINATED mode, E2E routing proven
-- [x] songBird 3 follow-up Windows compile fixes shipped (`d9bda555`)
-- [x] cellMembrane 45+ magic numbers centralized to `constants.rs` (1,221 tests)
-- [x] strandGate **Node Atomic VALIDATED** — 450 methods, 746 pipelines/sec, sub-ms GPU dispatch
-- [x] barraCuda RTX 3090 + RX 6950 XT dual-GPU validated — FHE bit-perfect, cdist 65× SciPy
-- [x] toadStool S346 deep evolution + deployment docs (9,193+ tests, doctor CLI fixed)
-- [x] **strandGate NUCLEUS ACHIEVED** — first full NUCLEUS (8/9 healthy, 1,742 caps, 674 IPC methods, sub-ms GPU)
-- [x] **blueGate 13/13 on Windows** — infrastructure proof, 147 MB, 2+ hours stable
-- [x] sporeGate Windows depot rebuilt — **11/14 fresh** (3 blocked on code-team platform gates)
-- [x] sweetGrass braid_id→UUID mismatch FIXED (`4b5167b`)
-- [x] cellMembrane boot_order enforcement SHIPPED (b7707ee) — systemd `After=` deps from `CompositionSpec`
-- [x] loamSpine `--bind` alias for biomeOS CLI standardization
-- [x] rhizoCrypt cross-compile hygiene — 4 targets, zero warnings, `--bind` alias
-- [x] coralReef Windows cross-compilation — zero errors/warnings on `x86_64-pc-windows-gnu`
-- [x] barraCuda `MultiDevicePool` wired into primal startup (`device.pool` IPC method)
-- [x] sporeGate DNS/DHCP topology fixes (dnsmasq, DHCP DNS option, `sporegate.primals.local`)
 - [ ] 2 enrolling gates have no published heads in `heads/*.toml`
-- [x] toadStool S347 Windows cross-compile fix shipped (`2df71399b`) — `toadstool.exe` depot unblocked
-- [x] coralReef Windows fix + `--bind` alias shipped (`edcd696`) — `coralreef.exe` depot unblocked
-- [x] cellMembrane `dns.configure`/`dns.apply` SHIPPED (2b82722) — manifest-driven zone generation, 1,247 tests
-- [ ] **Windows depot 1/14 stale** — only beardog.exe blocked (`UnixStream` not gated)
 - [ ] **Windows CI gate** — `cargo check --target x86_64-pc-windows-gnu` not yet in CI
-- [ ] **biomeOS composition lifecycle** — boot_order shipped but biomeOS doesn't consume it yet
-- [ ] **DNS manifest/generator gap** — topology drifts from manifest (sporeGate AAR)
 
 ## 2. Ecological (Primal Health)
 
@@ -78,7 +43,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Production `.unwrap()` — 0 in critical-path primals
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
 - [x] Format drift RESOLVED — all repos clean
-- [x] bearDog: 11,993 tests, FIDO2 hardware, beacon proximity, HSM agnostic
+- [x] bearDog: **14,019** tests, FIDO2 hardware, beacon proximity, HSM agnostic, **crypto.sign_ed25519 SHIPPED**, Windows platform gating SHIPPED
 - [x] songBird: 14,835+ tests, `mesh.gate_enroll`, universal-ipc, J3+J4+J5, `tower.health` facade, **ACME HTTP-01 Phase 1**
 - [x] nestGate: **13,095+** tests, CAS on ZFS verified (3,119 objects), deep debt complete, zero unsafe, zero panics, ghost methods removed, CLI evolved
 - [x] toadStool: **9,193+** tests, **S346**: security fail-closed (macOS/Windows sandbox), unsafe containment (hw-safe crate), 75 doc warnings fixed, doctor CLI bug fix
@@ -97,9 +62,9 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Compositions fixed: `compute` and `nest` include Tower Atomic base primals
 - [x] **cellMembrane**: **1,221** tests, **deep debt**: sandbox fail-closed, registry-driven tower status (no hardcoded names), 5 dedup extractions (-135 net lines)
 - [x] ~~nestGate: ghost methods `content.repo.*`/`content.mirror.*`~~ — **REMOVED** (capability_registry cleaned)
+- [x] ~~bearDog `crypto.sign_ed25519` returns health stub~~ — **SHIPPED** (`3739e7078`) — Provenance 7/7 UNBLOCKED
 - [ ] **1 known debt finding**: grapheneGate-readiness (HSM not on eastGate)
 - [ ] Chimera Phase 0: library extraction (UNBLOCKED — crypto delegation done)
-- [ ] bearDog `crypto.sign_ed25519` returns health stub — blocks Provenance Trio 7/7 live on westGate
 
 ## 3. Hardware / Physical Topology
 
@@ -113,6 +78,9 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] grapheneGate: Android, Tower LIVE (bearDog + songBird + skunkBat)
 - [x] 10G AOC trunk CRS310↔Omada proven (blueGate reaches relay via backbone)
 - [x] **TOPOLOGY_MAP.toml** has full physical layout with cytoplasm zone model
+- [ ] **steamGate** (Steam Deck) — NEXT cross-platform gate. SteamOS (Arch, glibc). User-space deploy.
+- [ ] **darwinGate** (Mac Mini) — GLACIAL. Needs HW acquisition. First apple-darwin target.
+- [ ] **iosGate** (iPhone) — GLACIAL. Needs darwinGate + Apple Dev Program. Walled garden research.
 - [ ] fieldGate OFFLINE (dead CMOS)
 - [ ] biomeGate OFFLINE (kernel recovery)
 - [ ] Complete port→gate mapping (CRS310 + Omada + TL-SG605S-M2)
@@ -130,10 +98,13 @@ appears. This keeps the active review focused on evolving concerns.
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090. **DAILY DRIVER — DO NOT DEPLOY.** AlphaFold data source (~1TB). |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
 | strandGate | **NUCLEUS** | Linux | 10.13.37.10 | **NUCLEUS (13)** | **FIRST NUCLEUS.** 8/9 healthy, 1,742 caps, 674 IPC methods, RTX 3090 sub-ms GPU. STANDBY. |
-| westGate | **BROKER LIVE** | Linux | 10.13.37.11 | nest (8) | biomeOS v4.45 COORDINATED, 704 caps, 3,216 CAS objects. **Add Compute Trio → second NUCLEUS.** |
-| blueGate | **13/13 WINDOWS** | Windows | 10.13.37.12 | **NUCLEUS infra** | **13/13 primals, 147 MB, TCP-only, 2+ hours stable. Awaiting biomeOS orchestration. STANDBY.** |
+| westGate | **BROKER LIVE** | Linux | 10.13.37.11 | nest (8) | **Deploy v4.47 + Compute Trio → second NUCLEUS.** 704 caps, 3,216 CAS. |
+| blueGate | **13/13 WINDOWS** | Windows | 10.13.37.12 | **NUCLEUS infra** | Depot 14/14 fresh. Pull new bins → lifecycle-managed NUCLEUS. |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
+| **steamGate** | **NEXT** | SteamOS | — | tower (3) | Steam Deck. Portable compute. gnu bins in depot. |
+| **darwinGate** | **GLACIAL** | macOS | — | tower (3) | Mac Mini (acquire). apple-darwin builder. |
+| **iosGate** | **GLACIAL** | iOS | — | tower (3) | iPhone. After darwinGate. Silicon deism. |
 
 ## 4. K-Derm Layers — Connectivity Fabric (NEW — extracted from incidents + sovereignty)
 
@@ -248,9 +219,9 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 | Composition | Status | Gates Proven | biomeOS Orchestrated? |
 |-------------|--------|--------------|----------------------|
 | **Tower Atomic** (3) | LIVE | 6 gates (incl. Windows, Android) | Signal graphs: 8. Direct IPC: YES. |
-| **Nest Atomic** (7+Tower) | LIVE | westGate (ZFS+CAS), blueGate (Windows) | Signal graphs: 9. Capability routing: YES. Graph execution: P1 (riboCipher). |
+| **Nest Atomic** (7+Tower) | LIVE | westGate (ZFS+CAS), blueGate (Windows) | Signal graphs: 9. Graph execution: **FIXED** (v4.47 riboCipher). |
 | **Node Atomic** (3+Tower) | VALIDATED | strandGate (746 pipelines/sec, sub-ms GPU) | Signal graphs: 3. |
-| **NUCLEUS** (13) | **ACHIEVED** | **strandGate** (8/9, 1,742 caps, 674 methods), **blueGate** (13/13, infra proof) | 27 signal graphs. Lifecycle: NOT YET (manual startup). |
+| **NUCLEUS** (13) | **ACHIEVED** | **strandGate** (8/9, 1,742 caps), **blueGate** (13/13 infra), **sporeGate** (v4.47 deployed) | 27 signal graphs. Lifecycle: **SHIPPED** (composition.start, boot_order). |
 
 ### What's proven
 
@@ -268,20 +239,27 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [x] **westGate COORDINATED mode**: 704 capabilities, 390 translations, 70 signal graphs loaded
 - [x] **blueGate Nest 10/10 on Windows** — first multi-composition non-Linux deployment
 
-### Path to NUCLEUS
+### Path to NUCLEUS — ALL CODE SHIPPED
 
-- [ ] **biomeOS graph executor riboCipher fix** — one-line (`send_ribocipher_jsonrpc_request()`). Blocks orchestrated graph execution across compositions.
-- [ ] **biomeOS socket unification** — `biomeos/` vs `membrane/` split causes symlink workarounds
-- [ ] **biomeOS socket evaporation** — Neural API restart wipes capabilities, sockets disappear
-- [ ] **biomeOS full composition lifecycle** — startup ordering, health gating, composition transitions (Tower→Nest→Node→NUCLEUS) managed by biomeOS, not shell scripts
-- [ ] **bearDog `crypto.sign_ed25519`** — real signing (blocks Provenance Trio 7/7, blocks Nest Atomic full E2E)
+- [x] ~~**biomeOS graph executor riboCipher fix**~~ — **SHIPPED** (v4.47 `bd202674`)
+- [x] ~~**biomeOS socket unification**~~ — **SHIPPED** (unified to `membrane/`, 22 graph TOMLs)
+- [x] ~~**biomeOS socket evaporation**~~ — **SHIPPED** (capability persistence to disk)
+- [x] ~~**biomeOS full composition lifecycle**~~ — **SHIPPED** (`composition.start` RPC + boot_order integration)
+- [x] ~~**bearDog `crypto.sign_ed25519`**~~ — **SHIPPED** (`3739e7078`) — Provenance 7/7 UNBLOCKED
 - [x] ~~**Node Atomic live**~~ — strandGate VALIDATED (746 pipelines/sec)
-- [x] ~~**NUCLEUS live on one gate**~~ — **strandGate ACHIEVED** (8/9, 1,742 caps, manual startup). blueGate 13/13 infra proof.
-- [ ] **NUCLEUS lifecycle** — biomeOS auto-startup via boot_order + health gates (cellMembrane shipped boot_order, biomeOS must consume)
+- [x] ~~**NUCLEUS live on one gate**~~ — strandGate + blueGate + sporeGate (v4.47 deployed)
+- [x] ~~**NUCLEUS lifecycle**~~ — **SHIPPED** (biomeOS `composition.start` + cellMembrane boot_order)
+- [x] ~~**Primal CLI flag standardization**~~ — **SHIPPED** (`specs/PRIMAL_BIND_FLAGS_STANDARD.md`)
+
+### Remaining (deployment + glacial)
+
+- [ ] **Provenance 7/7 live validation** — sweetGrass + loamSpine + bearDog crypto.sign E2E on a running gate
+- [ ] **westGate NUCLEUS** — deploy biomeOS v4.47 + Compute Trio → second lifecycle-managed NUCLEUS
+- [ ] **blueGate lifecycle NUCLEUS** — pull fresh depot bins → biomeOS-orchestrated startup
+- [ ] **Cross-platform gates** — steamGate (NEXT), darwinGate (GLACIAL), iosGate (GLACIAL)
 - [ ] **Chimera Phase 0**: shared library extraction (`libtower.so`) — UNBLOCKED, deferred
 - [ ] sporePrint primal pipeline: replace Zola
 - [ ] 6 springs pending `validation.json`
-- [ ] **Primal CLI flag standardization** — inconsistent bind flags across Nest primals (--bind vs --host vs --bind-address vs --http-port)
 
 ## 8. genomeBin / Cross-Platform Deployment
 
@@ -307,14 +285,15 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [x] toadStool wgpu cross-platform GPU (DX12/Vulkan/Metal)
 - [x] biomeOS platform_native transport on all 27 signal graphs
 - [x] biomeOS cross-platform socket templates (named pipes + TCP fallback)
-- [x] ~~Windows genomeBins stale~~ — **11/14 fresh** (sporeGate rebuilt Wave 155j). 3 blocked on code-team platform gates.
-- [x] ~~**songBird Windows platform gate (P0)**~~ — **FIXED + IN DEPOT** (`d9bda555`, 21.3 MB)
-- [x] ~~toadstool.exe blocked~~ — **FIXED** (S347 `2df71399b`). ~~coralreef.exe blocked~~ — **FIXED** (`edcd696`)
-- [ ] **1 Windows binary blocked**: beardog.exe (`UnixStream` not `#[cfg(unix)]` gated)
-- [ ] **No Windows CI gate** — `cargo check --target x86_64-pc-windows-gnu` would catch platform gates
-- [ ] macOS genomeBins — check-pass only, no linker for cross-build from Linux
+- [x] ~~Windows genomeBins stale~~ — **14/14 REBUILT** (sporeGate Jul 30). ALL platform gates fixed.
+- [x] ~~**songBird Windows platform gate (P0)**~~ — **FIXED + IN DEPOT** (`d9bda555`)
+- [x] ~~toadstool.exe blocked~~ — **FIXED** (S347 `2df71399b`). ~~coralreef.exe blocked~~ — **FIXED** (`edcd696`). ~~beardog.exe blocked~~ — **FIXED** (`d6b1003bb`)
+- [x] **Depot: 33 binaries across 5 target directories** (musl, gnu, windows-gnu, aarch64-musl, aarch64-android)
+- [ ] **No Windows CI gate** — `cargo check --target x86_64-pc-windows-gnu` not yet in CI
+- [ ] **macOS genomeBins** — can't cross-compile from Linux. Needs darwinGate (Mac Mini) to self-build.
+- [ ] **SteamOS validation** — gnu depot bins may work as-is on Steam Deck (user-space deploy)
 - [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
-- [ ] systemd abstraction for Windows Service / launchd paths (cellMembrane `InitSystem` foundation shipped)
+- [ ] systemd abstraction for launchd paths (cellMembrane `InitSystem` foundation shipped, darwin untested)
 
 ## ~~9. Documentation / Fossil Record~~ → **FOSSILIZED as F11** (Wave 155h)
 
@@ -456,13 +435,12 @@ completeness.
 
 **Active**: 9 dimensions (1–5, 7–8, 10–11)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155k — **ALL CHAINS CLOSED.** biomeOS v4.47 NUCLEUS orchestrator
-shipped (riboCipher fix, socket unification, capability persistence, composition lifecycle).
-bearDog crypto.sign_ed25519 + Windows platform gating shipped. 14/14 Windows platform gates
-fixed (sporeGate rebuild pending). Provenance 7/7 UNBLOCKED. ZERO P0s. ZERO P1s.
-12 teams STANDBY. Jelly Strings D10 REOPENED for J9–J13 (automated depot pipeline).
-Next: sporeGate depot rebuild, NUCLEUS redeploy with v4.47, Provenance 7/7 live validation.
-9 active dimensions, 13 fossilized. ~63K+ tests. 10 gates.
+**Summary**: Wave 155k — **ALL CODE SHIPPED. ZERO P0/P1s.** Depot 14/14 REBUILT.
+biomeOS v4.47 NUCLEUS orchestrator + bearDog crypto.sign DEPLOYED on sporeGate.
+Provenance 7/7 UNBLOCKED. 12 teams STANDBY. D7 (Compositions) has no blocking code items —
+all remaining work is deployment + validation. Cross-platform expansion: steamGate NEXT,
+darwinGate + iosGate GLACIAL (silicon deism obligations). D10 REOPENED for J9–J13 pipeline
+automation. 9 active dimensions, 13 fossilized. ~63K+ tests. 10+ gates (3 new planned).
 
 ---
 

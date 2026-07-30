@@ -30,39 +30,40 @@ still returns health stub, songBird TCP registration not wired.
 
 ---
 
-## REMAINING WORK — 3 CHAINS
+## COMPLETED — All Code Chains CLOSED (Wave 155k)
 
-### ~~Chain 1: biomeOS Orchestration Lifecycle~~ — **CLOSED**
+All blocking code work is done. 50 handoffs fossilized to `fossilRecord/wave155k_all_chains_closed/`.
 
-All items SHIPPED in biomeOS v4.47 (`bd202674`, +566/−160 lines, 8,564 tests):
+| Chain | What Shipped | Key Commits |
+|-------|-------------|-------------|
+| biomeOS lifecycle | NUCLEUS orchestrator v4.47: riboCipher, sockets, persistence, composition.start, bind flags, boot_order | `bd202674`, `076d4743` |
+| bearDog crypto | crypto.sign_ed25519 + Windows platform gating | `3739e7078`, `d6b1003bb` |
+| Windows depot | 14/14 rebuilt by sporeGate, BLAKE3 verified | Jul 30 08:50 EDT |
 
-| # | Item | Status |
-|---|------|--------|
-| 1 | Graph executor riboCipher fix | **SHIPPED** — `send_ribocipher_jsonrpc_request()` |
-| 2 | Socket unification | **SHIPPED** — unified to `membrane/`, 22 graph TOML files updated |
-| 3 | Capability persistence | **SHIPPED** — registry persists to disk, loads on restart |
-| 4 | Composition lifecycle | **SHIPPED** — `composition.start` RPC with health-gated prerequisites |
-| 5 | Primal bind flag standard | **SHIPPED** — `specs/PRIMAL_BIND_FLAGS_STANDARD.md` |
+---
 
-Also shipped: cellMembrane boot_order integration (`076d4743`), deep debt cleanup, test extraction.
+## NEXT PHASES — Deployment + Expansion
 
-### ~~Chain 2: bearDog Crypto + Provenance 7/7~~ — **CLOSED**
+### Phase A: Gate Deployment (in progress)
 
-Both P1s SHIPPED:
+| # | Target | What | Status |
+|---|--------|------|--------|
+| A1 | **westGate** | Deploy biomeOS v4.47 + Compute Trio → second lifecycle-managed NUCLEUS | NEXT |
+| A2 | **Provenance 7/7** | Live validation: sweetGrass + loamSpine + bearDog crypto.sign E2E | After A1 |
+| A3 | **blueGate** | Pull fresh `.exe` from depot → lifecycle-managed NUCLEUS on Windows | After A1 |
+| A4 | **strandGate** | Redeploy with biomeOS v4.47 (lifecycle-managed restart) | After A1 |
 
-| # | Item | Status | Commit |
-|---|------|--------|--------|
-| 1 | `crypto.sign_ed25519` real signing | **SHIPPED** | `3739e7078` |
-| 2 | Windows platform gating | **SHIPPED** | `d6b1003bb` |
+### Phase B: Pipeline Automation (J9–J13)
 
-bearDog: 14,019 tests, 0 clippy warnings. Provenance 7/7 UNBLOCKED.
+| Jelly String | What | Owner |
+|-------------|------|-------|
+| J9 | Forgejo webhook → auto `temporal.cascade` | cellMembrane |
+| J10 | Post-cascade diff → auto `plasmid.harvest --push` | cellMembrane |
+| J11 | Manifest-driven multi-target builds | sporeGate |
+| J12 | blueGate sub-builder dispatch via songBird IPC | sporeGate + blueGate |
+| J13 | Continuous depot freshness probe | cellMembrane |
 
-### ~~Chain 3: Windows Depot Freshness~~ — **CLOSED** (rebuilt)
-
-sporeGate rebuilt all 3 `.exe` (Jul 30 08:50 EDT). 14/14 Windows depot CURRENT.
-biomeOS v4.47 + bearDog crypto.sign deployed on sporeGate. BLAKE3 verified.
-
-**Pipeline automation** (J9–J13): `SPOREGATE_DEPOT_REBUILD_NUCLEUS_PIPELINE_WAVE155k.md`
+Handoff: `SPOREGATE_DEPOT_REBUILD_NUCLEUS_PIPELINE_WAVE155k.md`
 
 ---
 
