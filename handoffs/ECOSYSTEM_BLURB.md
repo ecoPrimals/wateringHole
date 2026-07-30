@@ -89,13 +89,13 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 | cellMembrane reqwest dep | Purged → sovereign HTTP/1.1 client (pure-Rust TLS) | `4e77ffd` | **FIXED** |
 | biomeOS socket evaporation (health ping format) | Any successful `call_btsp()` = alive (v4.50) | `06ed323f` | **FIXED** |
 | biomeOS binary path retention | Discovery probes plasmidBin dirs, stores resolved path | `06ed323f` | **FIXED** |
-| Socket ownership on creation (biomeOS) | Needs `chown :membrane` or `MEMBRANE_SOCKET_GROUP` | — | **P2 OPEN** (sporeGate AAR) |
-| checksums.toml partial update on harvest | Needs full regeneration after staging | — | **P2 OPEN** (sporeGate AAR) |
-| cellMembrane not in sources.toml | Blocks sovereign CI self-rebuild | — | **P3 OPEN** (sporeGate AAR) |
-| /run/membrane tmpfiles.d rule | Reboot loses socket dir permissions | — | **P3 OPEN** (sporeGate AAR) |
-| rootpulse.ledger not implemented | Sole degraded probe on sporeGate | — | **P2 OPEN** (sporeGate AAR) |
-| sandbox false positive for broker primals | biomeOS fails standalone health check → blocks auto-deploy | — | **P2 OPEN** (sporeGate v4.50 AAR) |
-| golgi post-receive hook not auto-firing | biomeOS push didn't trigger CI automatically | — | **P3 OPEN** (sporeGate v4.50 AAR) |
+| Socket ownership for multi-user IPC | biomeOS socket bind now `0666` | `0e45262f` | **FIXED** |
+| checksums.toml partial update on harvest | `finalize_depot()` full disk scan | `0cfcce5` | **FIXED** |
+| /run/membrane tmpfiles.d rule | `deploy/systemd/tmpfiles.d/membrane.conf` shipped | `0cfcce5` | **FIXED** |
+| rootpulse.ledger degraded probe | Returns ok=true advisory when no session | `0cfcce5` | **FIXED** |
+| sandbox false positive for broker primals | `ServerContract` resolution for biomeOS | `0cfcce5` | **FIXED** |
+| cellMembrane not in sources.toml | Blocks sovereign CI self-rebuild | — | **P3 OPEN** |
+| golgi post-receive hook not auto-firing | biomeOS push didn't trigger CI | — | **P3 OPEN** |
 
 ---
 
@@ -234,8 +234,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
 | P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
-| P2s | **3 OPEN** — socket ownership, checksums.toml, rootpulse.ledger (operational, not code) |
-| P3s | **2 OPEN** — cellMembrane self-CI, tmpfiles.d rule (operational) |
+| P2s | **ZERO** |
+| P3s | **2 OPEN** — cellMembrane self-CI, golgi hook auto-fire |
 | Depot | **35** binaries: 16 musl + **4** gnu + 15 windows (biomeOS gnu NEW, all BLAKE3 verified) |
 
 ---
@@ -252,10 +252,10 @@ Done this wave:
   ✓ Depot 14/14 rebuilt + BLAKE3 verified
 
 Active:
-  1. Gate redeployments: westGate, strandGate, blueGate — depot is fresh, biomeOS v4.50 ready
+  1. Gate redeployments: westGate, strandGate, blueGate — fresh v4.50 bins + cellMembrane fixes
   2. J12: blueGate sub-builder enrollment under sporeGate
   3. steamGate: cellMembrane user-space deploy ready — Steam Deck Tower Atomic
-  4. Operational polish: socket ownership, checksums.toml, tmpfiles.d, rootpulse.ledger
+  4. sporePrint refresh: live science surfaces (subGen → public, gen4 COMPLETE)
   5. AlphaFold ~1TB ingestion through westGate Nest Atomic
 
 Glacial:
@@ -269,9 +269,8 @@ Glacial:
 
 ---
 
-*Wave 155m — ALL blocking divergences CLOSED. biomeOS v4.50 fixes socket evaporation +
-binary path retention. sporeGate Sovereign CI rebuilt all 5 team shipments — depot 34
-binaries, 15/15 Windows, all BLAKE3 verified. membrane.exe depot-deployed. cellMembrane
-purged reqwest → sovereign HTTP. sporeGate gate health 10/11. ZERO P0/P1s. 3 operational
-P2s + 2 P3s remaining (socket ownership, checksums, rootpulse, self-CI, tmpfiles). 3
-NUCLEUS gates. steamGate + blueGate sub-builder UNBLOCKED. ~63K+ tests. 10+ gates.*
+*Wave 155m — ALL P0/P1/P2 DIVERGENCES CLOSED. biomeOS v4.50 socket ownership + evaporation
+FIXED. cellMembrane shipped 4 AAR fixes (checksums, sandbox, rootpulse, tmpfiles). Depot
+35 binaries (16 musl + 4 gnu + 15 windows). sporeGate gate health 10/11→11/11 path clear.
+whitePaper gen4 COMPLETE, subGen sporePrint live science strategy shipped. 2 P3s remaining
+(self-CI, hook auto-fire). 3 NUCLEUS gates. steamGate UNBLOCKED. ~63K+ tests. 10+ gates.*

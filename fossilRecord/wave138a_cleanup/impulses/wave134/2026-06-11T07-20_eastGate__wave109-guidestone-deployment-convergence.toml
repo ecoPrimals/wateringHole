@@ -54,24 +54,21 @@ cross_topology = """ALL VALIDATED:
   WAN x86_64: flockGate (4/5 — federation.enabled=false, songBird protocol gap, see FLOCKGATE-WAN-FEDERATION)
   ARM aarch64: grapheneGate (13/13 deployed + alive, Wave 108)
   VPS: golgiBody (13/13, depot authority)"""
-depot = """14/14 aarch64 VERIFIED (checksums match).
-x86_64 depot STALE — binaries from Jun 9 dev build, checksums.toml references older VPS build.
-ROOT CAUSE: BUILD-ELF-01 was rejecting static-pie linked binaries (Rust 1.96+ musl output).
-FIX LANDED: cellMembrane 975d45a accepts static-pie. harvest --all (3784903) added.
-✅ RESOLVED: `membrane plasmid.harvest --all` executed (c8e0c94, 2026-06-11T19:58:49Z). 10 rebuilt, all 13 primals at HEAD. plasmid.refresh pushed to VPS. checksums + provenance committed."""
-mesh = "5-gate: eastGate↔golgiBody↔ironGate+southGate + grapheneGate standalone. flockGate federation fix deployed, handshake retest pending."
+depot = "14/14 aarch64 + 13/13 x86_64, BLAKE3 verified. VPS synced. checksums.toml + provenance.toml current."
+mesh = "5-gate: eastGate↔golgiBody↔ironGate+southGate + grapheneGate standalone. flockGate blocked on federation protocol."
 sovereignty = "S1-S4 ALL GRADUATED."
 deployment_model = """postPrimordial ENFORCED. gate.bootstrap shipped (6-phase + deployment.toml emission).
-guideStone convergence Wave 109→110 — NEAR COMPLETE:
-  ✅ CLOSED (Stream 1): 6/6 startup contract — ALL primals standardized.
+guideStone convergence Wave 109→110:
+  ✅ CLOSED (Stream 1): 6/6 startup contract — bearDog SHIPPED (945de60f, Wave 110).
+  ✅ CLOSED (Stream 1): PlatformCapabilities::detect() landed in primalSpring ipc crate.
   ✅ CLOSED (Stream 2): FULLY RESOLVED (6/6). plasmid.build, gate profiles, gate engine all wired.
-  ✅ CLOSED (Stream 3): 13/13 HEALTH-01 GRADUATED — rhizoCrypt + petalTongue shipped.
-  ✅ CLOSED (Stream 4): BTSP TCP E2E + grapheneGate validation documented.
-  ✅ CLOSED (Stream 5 core): dual_checksum, cascade_restart, agentic_resolve ALL DONE.
-  ✅ FIXED (flockGate): federation.enabled root cause FOUND + FIXED (471ed43b). Deployed to VPS.
-  ✅ DONE: x86_64 depot rebuilt (c8e0c94, all 13 from HEAD). Sandbox + canary pipeline shipped.
-  REMAINING (Wave 111): gate expansion (northGate/westGate), federation status wire fix,
-             flockGate mesh.init handshake, qS/rP/freshness deferred."""
+  PARTIAL (Stream 3): 2/13 primals remain (rhizoCrypt, petalTongue). 11/13 HEALTH-01 compliant.
+                       songBird SHIPPED (471ed43b, Wave 110). LAUNCHER-01 remains.
+  PARTIAL (Stream 4): bearDog BTSP TCP E2E test SHIPPED (945de60f). sweetGrass server-side READY.
+                       Full cross-primal handshake untested.
+  ✅ CLOSED (Stream 5 core): dual_checksum, cascade_restart, process_version, deployment_manifest,
+                       agentic_resolve ALL DONE. Remaining: qs/rp/freshness → Wave 111+.
+  FIXED (flockGate): federation.enabled root cause FOUND + FIXED (471ed43b). Handshake retest needed."""
 
 # ──────────────────────────────────────────────────────────────
 # STREAM 1: Standard Primal Startup Contract (AAR Gaps 1+2)
@@ -140,10 +137,10 @@ description = """Standard health endpoint across all primals. On-device orchestr
 grapheneGate. Named tolerances for deployment lifecycle."""
 
 [stream3.items]
-health_rhizocrypt = "✅ RESOLVED (Wave 110): HEALTH-RC-01 — rhizoCrypt converged, 13/13 HEALTH-01 GRADUATED."
-health_petaltongue = "✅ RESOLVED (2dba46f, Wave 110): HEALTH-PT-01 — petalTongue bare 'health' + enriched schema."
+health_rhizocrypt = "REMAINING: HEALTH-RC-01: rhizocrypt converge on JSON-RPC health (different protocol currently)"
+health_petaltongue = "REMAINING: HEALTH-PT-01: petaltongue converge on JSON-RPC health (different protocol currently)"
 health_songbird = "✅ RESOLVED (471ed43b, Wave 110): HEALTH-SB-01 — bare 'health' → {status, primal, version, uptime_s}. federation.enabled root cause fixed."
-launcher = "✅ RESOLVED (79bdc82, Wave 110): LAUNCHER-01 — family-scoped PID isolation, no cross-family kill. aarch64 cross-compile deferred to depot rebuild."
+launcher = "REMAINING: LAUNCHER-01: nucleus_launcher cross-compiled for aarch64 — dependency-ordered startup, health gating"
 tolerances = """REMAINING: Named tolerances need codification in deployment.toml:
   depot_freshness_max = 24h, mesh_handshake_timeout = 30s,
   health_convergence_window = 60s, primal_startup_timeout = 10s"""
@@ -169,8 +166,8 @@ sweetGrass/petalTongue accept authenticated requests. Currently: rejection confi
 successful handshake untested."""
 
 [stream4.items]
-btsp_handshake = "✅ RESOLVED (79bdc82, Wave 110): BTSP cross-primal E2E — 17/20 pass. bearDog handshake PROVEN. sweetGrass/songBird respond via authenticated context. Documented gaps: discovery/attribution plaintext fallback (BTSP server not yet in songBird/sweetGrass)."
-btsp_graphenegate = "✅ RESOLVED (Wave 110): grapheneGate TCP BTSP validated — security model PROVEN (sweetGrass gates, bearDog serves, Tower crypto operational). Full handshake blocked by stale binaries (Feb 2026), fix = depot rebuild."
+btsp_handshake = "REMAINING: BTSP-E2E-01: validate full handshake from bearDog key → client → sweetGrass/petalTongue (sweetGrass server-side READY)"
+btsp_graphenegate = "REMAINING: validate BTSP on grapheneGate TCP-only transport (no UDS involved)"
 
 [stream4.resolved]
 sweetgrass_btsp = "RESOLVED (a675425): sweetGrass v0.7.56 BTSP E2E readiness — BEARDOG_SOCKET resolution, 88 BTSP tests"
@@ -207,22 +204,16 @@ freshness_mesh = "DEFERRED → Wave 111+. move freshness.toml → songbird mesh.
 id = "FLOCKGATE-WAN-FEDERATION"
 owner = "songBird team + flockGate ops"
 priority = "P2"
-description = """ROOT CAUSE FOUND + FIXED + DEPLOYED (Wave 110, 471ed43b):
+description = """ROOT CAUSE FOUND + FIXED (Wave 110, 471ed43b):
 federation.status was reporting `enabled: fed_stats.total_nodes > 0` — a CONNECTIVITY metric,
-not a CONFIGURATION flag. Fix: `enabled` now reflects startup configuration.
-DEPLOYED to VPS via cascade (confirmed by wateringHole commit abc03e9).
-REMAINING: retest flockGate handshake — does active_connections > 0?
+not a CONFIGURATION flag. Fix: `enabled` now reflects startup configuration
+(self.federation_state is Some → true). Federation activation conditions documented.
+REMAINING: deploy fix to VPS + retest actual handshake on flockGate.
 See impulse: wave110-songbird-health-federation-fix"""
-action = """STATUS (2026-06-11T23:53Z):
-1. ✅ Deploy songBird to VPS golgiBody — DONE (harvest c8e0c94 + refresh)
-2. ✅ HEALTH-01 PASS on VPS (uptime_s confirmed in response)
-3. ⚠️ federation.status still reports enabled=false DESPITE env var being set.
-   ROOT CAUSE: songBird v0.2.1 does NOT read SONGBIRD_FEDERATION_ENABLED into the
-   RPC response. Port :7700 IS bound and mesh.init succeeds — federation is
-   MECHANICALLY WORKING but status reporting is incorrect.
-4. WORKAROUND: call mesh.init on flockGate with peers=157.230.3.183:7700 to
-   trigger outbound handshake (works regardless of status response).
-5. FIX NEEDED: songBird team wire env var into federation.status enabled field."""
+action = """REMAINING:
+1. Deploy songBird 471ed43b to VPS golgiBody (next cascade --with-rebuild)
+2. Retest flockGate: does federation handshake complete? (active_connections > 0?)
+3. If not: investigate join protocol (POST /api/federation/join response from VPS)"""
 
 # ──────────────────────────────────────────────────────────────
 # LOW
@@ -239,7 +230,7 @@ description = "sourdough validate depot crashes (segfault). Manual b3sum fallbac
 # ──────────────────────────────────────────────────────────────
 
 [resolved_summary]
-count = 59
+count = 53
 detail = """Waves 106-110 resolved:
   Wave 106-108 (26): grapheneGate 13/13, VPS songbird restart, BM-UDS-01, CR-TARPC-01,
     NG-DOWNCAST-01, aarch64 rebuild, NDK, SONGBIRD-IPC, BARRACUDA-METHOD-DESCRIBE,
@@ -249,21 +240,15 @@ detail = """Waves 106-110 resolved:
     (primalSpring ipc), plasmid.build (cellMembrane), deployment.toml emission,
     gate profile infra, health.sweep JSON-RPC, HEALTH-01 sweetGrass, HEALTH-01 biomeOS,
     sweetGrass BTSP readiness.
-  Wave 110 (18): STARTUP-BD-01 (bearDog 945de60f — 6/6 startup contract COMPLETE),
+  Wave 110 (14): STARTUP-BD-01 (bearDog 945de60f — 6/6 startup contract COMPLETE),
     STARTUP-PS-01 (primalSpring post-primordial reversal — binary deleted),
     HEALTH-PS-01 (primalSpring no longer serves — arena role),
     HEALTH-SB-01 (songBird 471ed43b — 11/13 HEALTH-01),
-    HEALTH-PT-01 (petalTongue 2dba46f — 12/13 HEALTH-01),
-    HEALTH-RC-01 (rhizoCrypt — 13/13 HEALTH-01 GRADUATED),
     federation.enabled root cause fix (songBird 471ed43b),
     bearDog BTSP-E2E TCP handshake test (945de60f),
-    BTSP cross-primal E2E validated (primalSpring 79bdc82 — 17/20, documented gaps),
-    LAUNCHER-01 family-scoped PID isolation (primalSpring 79bdc82),
-    proto-nucleate manifest 7/7 complete (primalSpring 79bdc82),
     primalSpring #[allow] zero, clippy -D warnings all-targets clean,
-    tolerances centralization (5 thresholds + SCENARIO_DISPATCH_LATENCY_MAX_MS),
-    primal_names::Atomic enriched, bonding::GateSpecialization added,
-    dual_checksum (cellMembrane 6f26089), cascade_restart (cellMembrane 6f26089),
-    agentic_resolve (cellMembrane 1be6358).
+    tolerances centralization (5 thresholds), primal_names::Atomic enriched,
+    bonding::GateSpecialization added, dual_checksum (cellMembrane 6f26089),
+    cascade_restart (cellMembrane 6f26089), agentic_resolve (cellMembrane 1be6358).
 Full detail: archive/wave107/, archive/wave108/, impulses/resolved/,
     handoffs/AAR_PRIMALSPRING_WAVE110_POST_PRIMORDIAL_EVOLUTION_JUN11_2026.md"""
