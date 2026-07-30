@@ -352,44 +352,90 @@ jelly string to kill.
 
 **Owner**: cellMembrane (J13, J16, J18) + sporeGate (J12) + blueGate (J12 sub-builder)
 
-## 12. gen5 Critical Path — External Science + Live Science Surfaces (NEW)
+## 12. gen5 — Full NUCLEUS as Live Platform (NEW)
 
-The project has crossed the **gen4 → gen5 boundary**. gen4 is COMPLETE (3 NUCLEUS gates,
-Provenance 7/7, Sovereign CI, biomeOS v4.50). gen5's defining deliverable: someone else's
-science exits the ecosystem as a verifiable artifact.
+gen4 is COMPLETE (3 NUCLEUS gates, Provenance 7/7, Sovereign CI, biomeOS v4.50).
+gen5 is **NUCLEUS as a usable platform** — all 13 primals composing into a live system
+that serves real workloads: science, visualization, games, AI agents, and provenance-tracked
+artifacts. The science pipeline is one track through the platform, not the only one.
 
-### gen5 Critical Chain (Steps 1-2 DONE, 3-8 remaining)
+### The Full NUCLEUS Stack
 
-- [x] **Step 1**: bearDog `crypto.sign_ed25519` — **DONE** (`3739e7078`, Wave 155j)
-- [x] **Step 2**: Provenance 7/7 — **DONE** (westGate + blueGate, Wave 155k)
-- [ ] **Step 3**: tideGlass Phase 0 — archaeology (Zenodo v5/v6, GPS deps, LINCS/ChEMBL). **NEXT. SOLE BOTTLENECK.**
-- [ ] **Step 4**: tideGlass Phase 1 — reproduce (RCL SNR, GPS4Drug, figures). Blocked on Step 3.
-- [ ] **Step 5**: NF Data Portal ingestion through Nest Atomic. Can start data download in parallel.
-- [ ] **Step 6**: NF reversal screen (RGES, ZINC, Anderson d_eff). Blocked on Steps 4-5.
-- [ ] **Step 7**: One NF pseudoSpore — self-verifying USB artifact. **THE gen5 ARTIFACT.**
-- [ ] **Step 8**: JOSS paper + CTF NDU prelim data. Blocked on Step 7.
+```
+┌─────────────────────────────────────────────────────────┐
+│  squirrel — AI agent frontend                           │
+│  MCP integration, capability discovery, natural         │
+│  language → biomeOS neuralAPI semantic dispatch          │
+├─────────────────────────────────────────────────────────┤
+│  biomeOS — orchestration backend                        │
+│  27 signal graphs, 654+ capabilities, composition       │
+│  lifecycle, semantic dispatch (tower.*, nest.*, node.*) │
+├─────────────────────────────────────────────────────────┤
+│  petalTongue — rendering + visualization                │
+│  WebGL/WASM pipeline, real-time viz, game rendering     │
+│  Works WITH Node Atomics for GPU-accelerated output     │
+├─────────────────────────────────────────────────────────┤
+│  Node Atomics — GPU compute + shaders                   │
+│  toadStool (dispatch) + barraCuda (tensor math) +       │
+│  coralReef (shaders/WGSL/SPIR-V) = QCD to videogames   │
+├─────────────────────────────────────────────────────────┤
+│  Nest Atomics — storage + provenance                    │
+│  nestGate (CAS) + Provenance Trio (7/7 COMPLETE)        │
+│  Every object has lineage, every computation has proof   │
+├─────────────────────────────────────────────────────────┤
+│  Tower Atomics — trust + discovery + defense             │
+│  bearDog + songBird + skunkBat = foundation layer       │
+└─────────────────────────────────────────────────────────┘
+```
 
-**Timeline**: Optimistic late Sept 2026, realistic Dec 2026 for NF pseudoSpore.
+### What NUCLEUS Enables — gen5 Workloads
 
-### sporePrint — Live Science as Public Surface
+| Workload | Stack | Gate(s) | Status |
+|----------|-------|---------|--------|
+| **Scientific visualization** | hotSpring → toadStool → petalTongue (QCD, molecular) | westGate, strandGate | Node Atomic validated, petalTongue WASM ready |
+| **Game engine / creative** | esotericWebb → petalTongue → coralReef (shaders, WebGL) | flockGate | V22 live, 472 tests, scene binding |
+| **AI agent orchestration** | squirrel → biomeOS neuralAPI → any primal | any NUCLEUS gate | Capability routing proven (654+ caps) |
+| **Genomics pipeline** | wetSpring → toadStool → nestGate (16S rRNA, GPU) | strandGate (RTX 3090) | Pipeline validated, cold (needs data) |
+| **NF drug reversal** | tideGlass → Nest Atomic → Provenance Trio | westGate | Steps 1-2 DONE, Phase 0 NEXT |
+| **GIS data** | footPrint → nestGate → petalTongue | flockGate | Running (primals.eco/footprint/) |
+| **Protein structure** | AlphaFold ~1TB → Nest Atomic CAS → provenance | westGate (ZFS 25.4TB) | Data on northGate, pipeline READY |
+| **helixVision** | Genomics + AlphaFold + rendering | multi-gate | Orchestrator role, absorbed coralForge |
+| **Cross-platform deploy** | cellMembrane → depot → any chip + drive | all gates | 35 binaries, 3 platforms proven |
 
-sporePrint is subGen presented to the world. Design principle: **science first, infrastructure second**.
+### Platform Readiness — What's Wired vs What Needs Wiring
 
-Visitor flow: live science → commodity hardware → pseudoSpore grab → discover mesh.
+| Component | Proven? | What's Next |
+|-----------|---------|-------------|
+| biomeOS neuralAPI dispatch | YES (654 caps, 27 graphs) | squirrel → neuralAPI agent integration |
+| petalTongue WebGL/WASM | YES (6,605 tests, v1.7.0) | Live renders fed by Node Atomic GPU output |
+| toadStool GPU dispatch | YES (746 pipes/sec, sub-ms) | petalTongue consumer pipeline |
+| coralReef shaders | YES (WGSL/SPIR-V/PTX) | esotericWebb game shader pipeline |
+| barraCuda tensor math | YES (FP64 104T, RTX 3090) | hotSpring QCD live computation |
+| squirrel AI agent | PARTIAL (763 tests, MCP) | biomeOS neuralAPI routing, user-facing agent |
+| Nest Atomic CAS | YES (3,252 objects, ZFS) | Data ingestion pipelines (AlphaFold, NF) |
+| Provenance Trio | YES (7/7 E2E) | Every workload gets provenance tracking |
 
-| Surface | What | Team | Status |
-|---------|------|------|--------|
-| hotSpring → petalTongue | Lattice QCD WebGL visualization | westGate | Not started |
-| footPrint | Live GIS data acquisition | flockGate | Running (primals.eco/footprint/) |
-| esotericWebb | Graphics engine challenge | flockGate | V22 live |
-| wetSpring | GPU-accelerated 16S rRNA pipeline | ironGate | Cold (needs Rust port) |
-| pseudoSpore grab pattern | Download + validate + grow | lithoSpore | Chassis exists (USB to Barrick) |
+### gen5 Science Pipeline (one track through the platform)
+
+- [x] **Step 1**: bearDog `crypto.sign_ed25519` — **DONE**
+- [x] **Step 2**: Provenance 7/7 — **DONE**
+- [ ] **Step 3**: tideGlass Phase 0 — archaeology. **NEXT.**
+- [ ] **Step 4-6**: Reproduce → NF ingestion → reversal screen
+- [ ] **Step 7**: One NF pseudoSpore — **THE gen5 ARTIFACT.**
+- [ ] **Step 8**: JOSS paper + CTF NDU
+
+### sporePrint — Live Platform as Public Surface
+
+sporePrint is subGen presented to the world. Design: **science first, infrastructure second**.
+But the infrastructure IS the product — NUCLEUS running live workloads, not a static site.
+
+Visitor flow: see live science → notice it runs on commodity HW → grab pseudoSpore → discover mesh.
 
 **Sequencing**:
-1. Phase 1 (NOW): Update sporePrint content to Wave 155m reality
-2. Phase 2: Live science surfaces (QCD viz, footPrint, wetSpring)
+1. Phase 1 (NOW): sporePrint content refresh to Wave 155m reality
+2. Phase 2: Live workload surfaces (QCD viz, game engine, GIS, genomics)
 3. Phase 3: PseudoSpore grab pattern (NF as first downloadable artifact)
-4. Phase 4: projectFOUNDATION auto-feeds site from provenance
+4. Phase 4: projectFOUNDATION auto-feeds from provenance
 
 ### Glacial Goals — Updated
 
@@ -409,6 +455,9 @@ Visitor flow: live science → commodity hardware → pseudoSpore grab → disco
 | G15 | tideGlass Phase 0 (NF archaeology) | **NEW** — NEXT | eastGate / dedicated gate |
 | G16 | pseudoSpore grab pattern on web | **NEW** — after NF data | lithoSpore + sporePrint |
 | G17 | Portability — reconstitute from cold | **NEW** — J18 + lithoSpore | cellMembrane site-profile |
+| G18 | squirrel → biomeOS agent orchestration | **NEW** | squirrel + biomeOS neuralAPI |
+| G19 | petalTongue + Node Atomics live rendering | **NEW** | petalTongue + toadStool + coralReef |
+| G20 | esotericWebb game engine on NUCLEUS | **NEW** | esotericWebb + petalTongue + GPU trio |
 
 ## 11. Campus / Physical Infrastructure
 
@@ -531,16 +580,16 @@ completeness.
 Depot 35 binaries. biomeOS v4.50. Provenance 7/7 COMPLETE. 3 NUCLEUS gates. Sovereign CI LIVE.
 6/10 jelly strings killed (J9–J11, J14–J15, J17). 4 remaining (J12, J13, J16, J18).
 
-**gen5 critical path**: Steps 1-2 DONE. Step 3 (tideGlass Phase 0) is the **sole bottleneck**.
-No infrastructure blockers remain. The work is now science pipeline execution.
+**gen5 vision**: NUCLEUS IS THE PLATFORM. squirrel (AI agent) → biomeOS (orchestration
+backend) → petalTongue + Node Atomics (rendering + GPU) = from QCD simulations to
+videogames. The science pipeline (tideGlass → NF pseudoSpore) is one track through the
+platform. Platform wiring (G18-G20) runs in parallel with science execution.
 
 **Sovereignty posture**: ALIGNED on 7/9. 2 PARTIAL: portable mesh (J18 gate coupling) and
-self-healing (socket ownership FIXED, tmpfiles.d FIXED, but site-profile abstraction missing).
+self-healing (socket ownership FIXED, tmpfiles.d FIXED, site-profile abstraction missing).
 
-**Live science**: sporePrint refresh (G14) is Phase 1 NOW. Live science surfaces (QCD, GIS,
-genomics) are Phase 2. PseudoSpore grab pattern is Phase 3 (after NF data exists).
-
-**Glacial goals**: 17 tracked (G3-G4 COMPLETE, G7/G9/G11 ACTIVE, G14-G17 NEW).
+**Glacial goals**: 20 tracked (G3-G4 COMPLETE, G18-G20 NEW: agent orchestration, live
+rendering pipeline, game engine on NUCLEUS).
 
 ---
 

@@ -243,7 +243,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 ## WHAT'S NEXT
 
 ```
-gen4: COMPLETE. gen5: INFRASTRUCTURE READY. Science pipeline is sole bottleneck.
+gen4: COMPLETE. gen5: NUCLEUS IS THE PLATFORM. squirrel + biomeOS + petalTongue + Node Atomics.
 
 Done this wave:
   ✓ ALL P0/P1/P2 divergences RESOLVED (11/11 fixed by 5 code teams + biomeOS + cellMembrane)
@@ -256,23 +256,33 @@ Done this wave:
   ✓ whitePaper gen4 COMPLETE checkpoint, sporePrint live science strategy
   ✓ 6/10 jelly strings killed (J9–J11, J14–J15, J17)
 
-GEN5 CRITICAL PATH (infrastructure DONE — science pipeline is sole bottleneck):
-  Step 3: tideGlass Phase 0 — GPS archaeology, Zenodo download, deps. NEXT.
-  Step 5: NF Data Portal ingestion through Nest Atomic (can start data download now)
-  Step 7: One NF pseudoSpore — the gen5 artifact
-  Step 8: JOSS paper + CTF NDU prelim data
-  Timeline: pseudoSpore late Sep (optimistic) / Dec 2026 (realistic)
+NUCLEUS AS LIVE PLATFORM (gen4 DONE — gen5 is the platform serving real workloads):
+  squirrel (AI agent) → biomeOS (backend) → petalTongue + Node Atomics (rendering + GPU)
+  = science visualization, game engines, AI agents, provenance-tracked artifacts
+
+  PLATFORM WIRING:
+    G18: squirrel → biomeOS neuralAPI agent orchestration (natural language → dispatch)
+    G19: petalTongue + Node Atomics live rendering pipeline (GPU → WebGL/WASM output)
+    G20: esotericWebb game engine on NUCLEUS (shaders, scene composition, creative surface)
+
+  SCIENCE PIPELINE (one track through the platform):
+    Step 3: tideGlass Phase 0 — GPS archaeology, Zenodo download. NEXT.
+    Steps 4-7: Reproduce → NF ingestion → reversal screen → NF pseudoSpore
+    Step 8: JOSS paper + CTF NDU
+    Timeline: pseudoSpore late Sep (optimistic) / Dec 2026 (realistic)
+
+  DATA INGESTION:
+    G7:  AlphaFold ~1TB through westGate Nest Atomic (pipeline READY)
 
 DEPLOYMENT + EXPANSION:
-  1. Gate redeployments: westGate, strandGate, blueGate — fresh v4.50 + cellMembrane fixes
-  2. J12: blueGate sub-builder enrollment under sporeGate
+  1. Gate redeployments: v4.50 + cellMembrane fixes to westGate, strandGate, blueGate
+  2. J12: blueGate sub-builder enrollment
   3. steamGate: Steam Deck Tower Atomic (cellMembrane user-space deploy ready)
-  4. AlphaFold ~1TB ingestion through westGate Nest Atomic (G7)
 
 LIVE SCIENCE (sporePrint = subGen presented to the world):
-  G14: sporePrint content refresh to Wave 155m reality (Phase 1 — NOW)
-  G16: pseudoSpore grab pattern on web (Phase 3 — after NF data)
-  Surfaces: hotSpring QCD viz, footPrint GIS, wetSpring genomics, esotericWebb
+  G14: sporePrint content refresh (Phase 1 NOW)
+  G16: pseudoSpore grab pattern on web (Phase 3, after NF data)
+  Surfaces: QCD viz, game engine, GIS, genomics — all powered by NUCLEUS
 
 GLACIAL:
   G6:  bearDog public (crates.io)
@@ -280,13 +290,14 @@ GLACIAL:
   G11: Any chip + drive = mesh gate (steamGate NEXT)
   G12: darwinGate — Mac Mini acquisition
   G13: iosGate — iPhone (after darwin)
-  G17: Portability — reconstitute from cold (cellMembrane site-profile + pseudoSpore)
+  G17: Portability — reconstitute from cold (pseudoSpore pack/unpack)
 ```
 
 ---
 
-*Wave 155m — gen4 COMPLETE. gen5 infrastructure READY. ZERO P0/P1/P2. 11/11 divergences
-FIXED. 6/10 jelly strings killed. Depot 35 binaries. biomeOS v4.50. Provenance 7/7. 3
-NUCLEUS gates. Sovereign CI LIVE. sporePrint live science strategy shipped. gen5 critical
-path: tideGlass Phase 0 is sole bottleneck (Steps 1-2 DONE, 6 remaining). pseudoSpore
-target: late Sep (optimistic) / Dec 2026 (realistic). 2 P3s remaining. ~63K+ tests.*
+*Wave 155m — gen4 COMPLETE. NUCLEUS IS THE PLATFORM: squirrel (AI agent) → biomeOS (backend)
+→ petalTongue + Node Atomics (rendering + GPU) = science to videogames. ZERO P0/P1/P2.
+11/11 divergences FIXED. 6/10 jelly strings killed. Depot 35 binaries. biomeOS v4.50.
+Provenance 7/7. 3 NUCLEUS gates. Sovereign CI LIVE. 20 glacial goals (G3-G4 COMPLETE,
+G18-G20 NEW: agent orchestration, live rendering, game engine). Science pipeline: tideGlass
+Phase 0 NEXT. pseudoSpore target: late Sep / Dec 2026. ~63K+ tests.*
