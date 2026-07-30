@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-30T13:00:00Z"
+updated = "2026-07-30T13:45:00Z"
 wave = "155k"
 
 [heads]
@@ -35,7 +35,7 @@ biomeos_version = "4.47 (4e8f00c) — NUCLEUS orchestrator, riboCipher fix, sock
 membrane_version = "0.1.0 (2b82722) — dns.configure/dns.apply + magic number centralization"
 depot_status = "FRESH — 16 musl + 3 gnu + 14 windows binaries, ALL targets current, BLAKE3 verified"
 mesh_status = "9-GATE MESH (blueGate enrolled, handshake active)"
-build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
+build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active — sovereign CI LIVE"
 
 [tower]
 status = "TOWER ATOMIC LIVE — 3/3 restarted with Wave 155k binaries"
@@ -109,13 +109,13 @@ dhcp_dns_fix = "DONE (155i) — DHCP DNS option corrected"
 
 [pipeline_automation]
 wave = "155k"
-status = "AUDIT COMPLETE — 3 config fixes activate sovereign CI. Ad-hoc 85% redundant."
-j9_push_trigger = "READY — golgi hook installed on 20 repos + sovereign.ci.trigger implemented. BLOCKED: SSH key git@golgi → root@sporeGate"
-j10_cascade_auto_harvest = "READY — post_sync drift pipeline implemented. BLOCKED: MEMBRANE_BUILD_AUTHORITY=1 not set"
-j11_multi_target = "READY — targets_for_primal() reads manifest [build.*].targets. Verify manifest entries."
+status = "SOVEREIGN CI LIVE — J9+J10+J11 killed. Push-to-deploy automated. Validated E2E."
+j9_push_trigger = "KILLED — SSH key plumbed, hook fires, sovereign.ci.trigger validated E2E"
+j10_cascade_auto_harvest = "KILLED — MEMBRANE_BUILD_AUTHORITY=1 set, drift pipeline active"
+j11_multi_target = "KILLED — manifest [build.*].targets verified for all primals"
 j12_sub_builder = "BLOCKED — blueGate NUCLEUS not live + membrane.exe won't compile (code team P1). SSH dispatch pattern ready."
 j13_mesh_notify = "PARTIAL — depot.updated WORKS (songBird UDS). build_pending is stub-only (~20 LOC to wire)."
-phase_a = "IMMEDIATE — SSH key + env var + membrane binary update → J9+J10+J11 killed"
+phase_a = "DONE — SSH key + env var + membrane binary + cargo symlinks + /etc/environment. Validated: squirrel build+sandbox+push E2E"
 phase_b = "WAITING — blueGate NUCLEUS live → SSH dispatch for Windows builds → J12 killed"
 phase_c = "POLISH — HTTP webhook listener, build queue, provenance signing chain"
 
