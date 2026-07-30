@@ -12,7 +12,7 @@
 id = 155
 sub = "m"
 date = "2026-07-30"
-posture = "PROVENANCE 7/7 COMPLETE. 3 NUCLEUS gates (westGate+blueGate+strandGate). Sovereign CI LIVE. 5 code teams shipped P2 divergence fixes: bearDog dual-socket+FAMILY_SEED, biomeOS capability wipe v4.49, toadStool JSON-RPC, petalTongue --family-id, cellMembrane membrane.exe+steamGate+reqwest purge. ZERO P0/P1s. 2 P2s open (biomeOS socket evaporation). steamGate UNBLOCKED."
+posture = "ALL DIVERGENCES CLOSED. biomeOS v4.50 (socket evaporation + binary path FIXED). sporeGate Sovereign CI rebuilt depot: 34 binaries (16 musl + 3 gnu + 15 windows), BLAKE3 verified. membrane.exe deployed. ZERO P0/P1/blocking-P2. 3 operational P2s + 2 P3s. 3 NUCLEUS gates. steamGate + blueGate sub-builder UNBLOCKED."
 publisher = "eastGate-overwatch"
 
 [gates]

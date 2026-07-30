@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 155k
+# ecoPrimals Ecosystem Blurb — Wave 155m
 
-**Date**: Jul 30, 2026 12:00 EDT | **Wave**: 155m | **From**: eastGate overwatch
-**Posture**: **ALL 9 P2 DIVERGENCES ADDRESSED. 5 code teams shipped simultaneously: bearDog (dual-socket fix + 94 orphan files purged), biomeOS (capability wipe cycle fix v4.49), toadStool (JSON-RPC health endpoint + S349 deep debt), petalTongue (--family-id + BIND_MODE fix), cellMembrane (membrane.exe P1 FIXED + steamGate user-space deploy + reqwest purged). strandGate deployed NUCLEUS via `biomeos nucleus start` (depot-path, lifecycle-managed). ZERO P0s. ZERO P1s. Socket evaporation P2 remains (biomeOS health ping format).**
+**Date**: Jul 30, 2026 13:00 EDT | **Wave**: 155m | **From**: eastGate overwatch
+**Posture**: **ALL P2 DIVERGENCES CLOSED. biomeOS v4.50 ships socket evaporation fix + binary path retention (BOTH P2s FIXED). sporeGate Sovereign CI cascaded all 5 team shipments — depot rebuilt: 34 binaries (16 musl + 3 gnu + 15 windows), all BLAKE3 verified. membrane.exe depot-deployed (15/15 Windows). cellMembrane deep debt + self-knowledge. sporeGate gate health 10/11 (rootpulse.ledger not implemented). ZERO P0s. ZERO P1s. ZERO blocking P2s. 8 operational P2/P3s from sporeGate AAR.**
 
 ---
 
@@ -87,8 +87,13 @@ Handoff: `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` (3 items: build_pending 
 | membrane.exe `UnixStream` P1 | `#[cfg(unix)]` gates + Windows stubs | `4ccbab1` | **FIXED** |
 | cellMembrane steamGate user-space | Deploy path readiness for `~/.local/bin/` | `4a7391d` | **FIXED** |
 | cellMembrane reqwest dep | Purged → sovereign HTTP/1.1 client (pure-Rust TLS) | `4e77ffd` | **FIXED** |
-| biomeOS socket evaporation (health ping format) | Needs RPC ping tolerance (plain JSON-RPC fallback) | — | **P2 OPEN** |
-| biomeOS binary path retention | Lost during auto-discovery, blocks resurrection | — | **P2 OPEN** |
+| biomeOS socket evaporation (health ping format) | Any successful `call_btsp()` = alive (v4.50) | `06ed323f` | **FIXED** |
+| biomeOS binary path retention | Discovery probes plasmidBin dirs, stores resolved path | `06ed323f` | **FIXED** |
+| Socket ownership on creation (biomeOS) | Needs `chown :membrane` or `MEMBRANE_SOCKET_GROUP` | — | **P2 OPEN** (sporeGate AAR) |
+| checksums.toml partial update on harvest | Needs full regeneration after staging | — | **P2 OPEN** (sporeGate AAR) |
+| cellMembrane not in sources.toml | Blocks sovereign CI self-rebuild | — | **P3 OPEN** (sporeGate AAR) |
+| /run/membrane tmpfiles.d rule | Reboot loses socket dir permissions | — | **P3 OPEN** (sporeGate AAR) |
+| rootpulse.ledger not implemented | Sole degraded probe on sporeGate | — | **P2 OPEN** (sporeGate AAR) |
 
 ---
 
@@ -227,7 +232,9 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
 | P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
-| P2s | **2 OPEN** — biomeOS socket evaporation + binary path retention |
+| P2s | **3 OPEN** — socket ownership, checksums.toml, rootpulse.ledger (operational, not code) |
+| P3s | **2 OPEN** — cellMembrane self-CI, tmpfiles.d rule (operational) |
+| Depot | **34** binaries: 16 musl + 3 gnu + 15 windows (all BLAKE3 verified, Wave 155m) |
 
 ---
 
@@ -243,10 +250,10 @@ Done this wave:
   ✓ Depot 14/14 rebuilt + BLAKE3 verified
 
 Active:
-  1. biomeOS P2: RPC ping tolerance (plain JSON-RPC fallback) + binary path retention
-  2. Sovereign CI: rebuild depot with all 5 team fixes (auto via push-to-deploy)
-  3. J12: blueGate sub-builder now UNBLOCKED (membrane.exe P1 fixed)
-  4. steamGate: cellMembrane user-space deploy ready — Steam Deck Tower Atomic
+  1. Gate redeployments: westGate, strandGate, blueGate — depot is fresh, biomeOS v4.50 ready
+  2. J12: blueGate sub-builder enrollment under sporeGate
+  3. steamGate: cellMembrane user-space deploy ready — Steam Deck Tower Atomic
+  4. Operational polish: socket ownership, checksums.toml, tmpfiles.d, rootpulse.ledger
   5. AlphaFold ~1TB ingestion through westGate Nest Atomic
 
 Glacial:
@@ -260,8 +267,9 @@ Glacial:
 
 ---
 
-*Wave 155m — 9/9 P2 divergences FIXED by 5 code teams (bearDog, biomeOS, toadStool,
-petalTongue, cellMembrane). membrane.exe P1 FIXED. strandGate deployed NUCLEUS via
-`biomeos nucleus start`. Sovereign CI LIVE. ZERO P0/P1s. 2 P2s open (biomeOS socket
-evaporation). cellMembrane steamGate user-space deploy ready. reqwest purged → sovereign
-HTTP client. ~63K+ tests. 3 NUCLEUS gates. 10+ gates.*
+*Wave 155m — ALL blocking divergences CLOSED. biomeOS v4.50 fixes socket evaporation +
+binary path retention. sporeGate Sovereign CI rebuilt all 5 team shipments — depot 34
+binaries, 15/15 Windows, all BLAKE3 verified. membrane.exe depot-deployed. cellMembrane
+purged reqwest → sovereign HTTP. sporeGate gate health 10/11. ZERO P0/P1s. 3 operational
+P2s + 2 P3s remaining (socket ownership, checksums, rootpulse, self-CI, tmpfiles). 3
+NUCLEUS gates. steamGate + blueGate sub-builder UNBLOCKED. ~63K+ tests. 10+ gates.*
