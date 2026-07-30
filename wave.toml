@@ -10,9 +10,9 @@
 
 [wave]
 id = 155
-sub = "k"
+sub = "m"
 date = "2026-07-30"
-posture = "ALL CHAINS CLOSED. biomeOS v4.47 NUCLEUS orchestrator (riboCipher, socket unification, capability persistence, composition lifecycle). bearDog crypto.sign + Windows gate. 14/14 Windows platform gates fixed. Provenance 7/7 UNBLOCKED. ZERO P0s. ZERO P1s. 12 teams STANDBY. ~63K+ tests. 10 gates."
+posture = "PROVENANCE 7/7 COMPLETE. 3 NUCLEUS gates (westGate+blueGate+strandGate). Sovereign CI LIVE. 5 code teams shipped P2 divergence fixes: bearDog dual-socket+FAMILY_SEED, biomeOS capability wipe v4.49, toadStool JSON-RPC, petalTongue --family-id, cellMembrane membrane.exe+steamGate+reqwest purge. ZERO P0/P1s. 2 P2s open (biomeOS socket evaporation). steamGate UNBLOCKED."
 publisher = "eastGate-overwatch"
 
 [gates]
