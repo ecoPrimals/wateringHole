@@ -5,12 +5,12 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-30T13:45:00Z"
+updated = "2026-07-30T14:10:00Z"
 wave = "155k"
 
 [heads]
 bearDog = "d6b1003"
-songBird = "d9bda55"
+songBird = "9046664"
 nestGate = "6b6d484"
 biomeOS = "4e8f00c"
 rhizoCrypt = "d4972b0"
@@ -29,7 +29,7 @@ wateringHole = "0bf147c"
 sporePrint = "67cc325"
 
 [deploy]
-songbird_version = "0.2.1 (d9bda55) — 3 Windows compile fixes + deep debt"
+songbird_version = "0.2.1+ (9046664) — TCP registration fix + shared ServiceRegistry + Windows maturity"
 beardog_version = "0.9.0 (d6b1003) — crypto.sign_ed25519 real signing + Windows platform gating"
 biomeos_version = "4.47 (4e8f00c) — NUCLEUS orchestrator, riboCipher fix, socket unification, composition lifecycle"
 membrane_version = "0.1.0 (2b82722) — dns.configure/dns.apply + magic number centralization"
@@ -39,24 +39,24 @@ build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active — sovereign CI LIVE"
 
 [tower]
 status = "TOWER ATOMIC LIVE — 3/3 restarted with Wave 155k binaries"
-songbird = "LIVE — 0.2.1, TCP :7700, federation active"
+songbird = "LIVE — 90466648, TCP :7700, federation active, TCP registration fix deployed"
 beardog = "LIVE — 0.9.0, crypto.sign_ed25519 REAL SIGNING (d6b1003)"
 skunkbat = "LIVE (PUBLIC)"
 
 [gate_status]
-probes_ok = 6
-probes_degraded = 5
+probes_ok = 10
+probes_degraded = 1
 total_probes = 11
-depot_integrity = "OK — 16 verified, 0 hash mismatch"
-primals_alive = "DEGRADED — primals running but probe needs shell group refresh"
-depot_freshness = "DEGRADED — workspace plasmidBin path mismatch (binaries current in /opt/ecoPrimals/depot)"
+depot_integrity = "OK — 16 verified, 0 hash mismatch (checksums regenerated after sovereign CI rebuilds)"
+primals_alive = "OK — 13/13 alive"
+depot_freshness = "OK — 13/13 binaries present"
 sovereignty_tls = "OK — depot.primals.eco 200"
 sovereignty_relay = "OK — RustDesk hbbs+hbbr"
 sovereignty_content = "OK — depot serving 8543KB"
 sovereignty_auth = "OK — beardog responding via neuralAPI"
 service_crash_loop = "OK — 14 services scanned, no crash loops"
-vcs_parity = "DEGRADED — needs full cascade (petalTongue, barraCuda pulled, others pending)"
-mesh_reachability = "DEGRADED — songbird socket perm (shell group not refreshed)"
+vcs_parity = "OK — 0 repos drifted (full cascade completed)"
+mesh_reachability = "OK — 3 peers, 3 reachable"
 rootpulse_ledger = "DEGRADED — not yet implemented (cellMembrane)"
 
 [harvest]

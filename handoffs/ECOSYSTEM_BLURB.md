@@ -53,17 +53,19 @@ All blocking code work is done. 50 handoffs fossilized to `fossilRecord/wave155k
 | A3 | **blueGate** | Pull fresh `.exe` from depot → lifecycle-managed NUCLEUS on Windows | After A1 |
 | A4 | **strandGate** | Redeploy with biomeOS v4.47 (lifecycle-managed restart) | After A1 |
 
-### Phase B: Pipeline Automation (J9–J13)
+### Phase B: Pipeline Automation (J9–J13) — **3 of 5 KILLED by sporeGate**
 
-| Jelly String | What | Owner |
-|-------------|------|-------|
-| J9 | Forgejo webhook → auto `temporal.cascade` | cellMembrane |
-| J10 | Post-cascade diff → auto `plasmid.harvest --push` | cellMembrane |
-| J11 | Manifest-driven multi-target builds | sporeGate |
-| J12 | blueGate sub-builder dispatch via songBird IPC | sporeGate + blueGate |
-| J13 | Continuous depot freshness probe | cellMembrane |
+| Jelly String | What | Owner | Status |
+|-------------|------|-------|--------|
+| J9 | Forgejo push → `sovereign.ci.trigger` | sporeGate | **KILLED** — golgi hook installed on 20 repos, SSH key plumbed, validated E2E |
+| J10 | Post-cascade diff → auto `plasmid.harvest --push` | sporeGate | **KILLED** — `MEMBRANE_BUILD_AUTHORITY=1` set, drift pipeline active |
+| J11 | Manifest-driven multi-target builds | sporeGate | **KILLED** — manifest `[build.*].targets` verified for all primals |
+| J12 | blueGate sub-builder dispatch via songBird IPC | sporeGate + blueGate | BLOCKED — blueGate NUCLEUS not live, membrane.exe won't compile |
+| J13 | Continuous depot freshness probe / mesh.build_pending | cellMembrane | ~20 LOC — `depot.updated` works, `build_pending` is stub-only |
 
-Handoff: `SPOREGATE_DEPOT_REBUILD_NUCLEUS_PIPELINE_WAVE155k.md`
+**Sovereign CI is LIVE**: `git push` to Forgejo → auto build → sandbox → depot push → HTTPS. Validated with squirrel (E2E via golgi SSH) and songBird (harvest --push, TCP registration fix deployed).
+
+Handoffs: `SPOREGATE_SOVEREIGN_CI_ACTIVATION_155k_AAR.md`, `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md`
 
 ---
 
@@ -162,7 +164,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 |------|--------|------|
 | **eastGate** | Overwatch. All code teams delivered. | Cross-platform expansion coordination. |
 | **westGate** | Broker LIVE. 704 caps. 3,216 CAS. | **biomeOS v4.47 + Compute Trio → NUCLEUS.** Provenance 7/7. AlphaFold. |
-| **sporeGate** | **Depot 14/14 REBUILT.** biomeOS v4.47 deployed. | Pipeline automation (J9–J13). blueGate sub-builder. |
+| **sporeGate** | **Sovereign CI LIVE.** J9+J10+J11 killed. songBird TCP fix deployed. 10/11 probes OK. | J12 blueGate sub-builder (blocked on NUCLEUS). Polish. |
 
 ### GATE NEW (cross-platform expansion)
 
