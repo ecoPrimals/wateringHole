@@ -109,12 +109,15 @@ dhcp_dns_fix = "DONE (155i) — DHCP DNS option corrected"
 
 [pipeline_automation]
 wave = "155k"
-status = "ARCHITECTURE DEFINED — J9-J13 jelly strings identified"
-j9_cascade_trigger = "NEXT — Forgejo webhook POST → temporal.cascade"
-j10_build_trigger = "NEXT — post-cascade diff detection → auto plasmid.harvest"
-j11_multi_target = "PLANNED — manifest-driven target selection"
-j12_sub_builder = "PLANNED — sporeGate dispatches Windows builds to blueGate"
-j13_freshness_probe = "PLANNED — continuous depot vs heads SHA comparison"
+status = "AUDIT COMPLETE — 3 config fixes activate sovereign CI. Ad-hoc 85% redundant."
+j9_push_trigger = "READY — golgi hook installed on 20 repos + sovereign.ci.trigger implemented. BLOCKED: SSH key git@golgi → root@sporeGate"
+j10_cascade_auto_harvest = "READY — post_sync drift pipeline implemented. BLOCKED: MEMBRANE_BUILD_AUTHORITY=1 not set"
+j11_multi_target = "READY — targets_for_primal() reads manifest [build.*].targets. Verify manifest entries."
+j12_sub_builder = "BLOCKED — blueGate NUCLEUS not live + membrane.exe won't compile (code team P1). SSH dispatch pattern ready."
+j13_mesh_notify = "PARTIAL — depot.updated WORKS (songBird UDS). build_pending is stub-only (~20 LOC to wire)."
+phase_a = "IMMEDIATE — SSH key + env var + membrane binary update → J9+J10+J11 killed"
+phase_b = "WAITING — blueGate NUCLEUS live → SSH dispatch for Windows builds → J12 killed"
+phase_c = "POLISH — HTTP webhook listener, build queue, provenance signing chain"
 
 [code_team_flags]
 mesh_socket = "FLAGGED — songBird mesh relay socket"
