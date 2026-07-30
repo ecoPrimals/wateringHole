@@ -243,34 +243,50 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 ## WHAT'S NEXT
 
 ```
-NUCLEUS: 3 gates. Provenance 7/7: COMPLETE. Sovereign CI: LIVE. 1 P1 remaining.
+gen4: COMPLETE. gen5: INFRASTRUCTURE READY. Science pipeline is sole bottleneck.
 
 Done this wave:
-  ✓ westGate NUCLEUS (13/13, 654 caps, 29 sockets, Provenance 7/7)
-  ✓ blueGate NUCLEUS refreshed (131 MB, Provenance 7/7 on Windows)
-  ✓ Sovereign CI on sporeGate (J9+J10+J11 killed, push-to-deploy live)
-  ✓ Depot 14/14 rebuilt + BLAKE3 verified
+  ✓ ALL P0/P1/P2 divergences RESOLVED (11/11 fixed by 5 code teams + biomeOS + cellMembrane)
+  ✓ 3 NUCLEUS gates (westGate, blueGate, strandGate) — Provenance 7/7 on 2 platforms
+  ✓ Sovereign CI LIVE — push-to-deploy automated (J9+J10+J11 killed)
+  ✓ Depot 35 binaries (16 musl + 4 gnu + 15 windows) — biomeOS gnu NEW, BLAKE3 verified
+  ✓ biomeOS v4.50 socket ownership + evaporation + binary path + capability wipe ALL FIXED
+  ✓ cellMembrane: membrane.exe P1, checksums, sandbox, rootpulse, tmpfiles, reqwest purge
+  ✓ toadStool S349, petalTongue --family-id, bearDog dual-socket + FAMILY_SEED + 94 files
+  ✓ whitePaper gen4 COMPLETE checkpoint, sporePrint live science strategy
+  ✓ 6/10 jelly strings killed (J9–J11, J14–J15, J17)
 
-Active:
-  1. Gate redeployments: westGate, strandGate, blueGate — fresh v4.50 bins + cellMembrane fixes
+GEN5 CRITICAL PATH (infrastructure DONE — science pipeline is sole bottleneck):
+  Step 3: tideGlass Phase 0 — GPS archaeology, Zenodo download, deps. NEXT.
+  Step 5: NF Data Portal ingestion through Nest Atomic (can start data download now)
+  Step 7: One NF pseudoSpore — the gen5 artifact
+  Step 8: JOSS paper + CTF NDU prelim data
+  Timeline: pseudoSpore late Sep (optimistic) / Dec 2026 (realistic)
+
+DEPLOYMENT + EXPANSION:
+  1. Gate redeployments: westGate, strandGate, blueGate — fresh v4.50 + cellMembrane fixes
   2. J12: blueGate sub-builder enrollment under sporeGate
-  3. steamGate: cellMembrane user-space deploy ready — Steam Deck Tower Atomic
-  4. sporePrint refresh: live science surfaces (subGen → public, gen4 COMPLETE)
-  5. AlphaFold ~1TB ingestion through westGate Nest Atomic
+  3. steamGate: Steam Deck Tower Atomic (cellMembrane user-space deploy ready)
+  4. AlphaFold ~1TB ingestion through westGate Nest Atomic (G7)
 
-Glacial:
+LIVE SCIENCE (sporePrint = subGen presented to the world):
+  G14: sporePrint content refresh to Wave 155m reality (Phase 1 — NOW)
+  G16: pseudoSpore grab pattern on web (Phase 3 — after NF data)
+  Surfaces: hotSpring QCD viz, footPrint GIS, wetSpring genomics, esotericWebb
+
+GLACIAL:
   G6:  bearDog public (crates.io)
-  G9:  JOSS publication — live multi-platform NUCLEUS with Provenance 7/7
   G8:  Plasmodium (multi-gate bonding)
-  G11: Any chip + drive = mesh gate
+  G11: Any chip + drive = mesh gate (steamGate NEXT)
   G12: darwinGate — Mac Mini acquisition
   G13: iosGate — iPhone (after darwin)
+  G17: Portability — reconstitute from cold (cellMembrane site-profile + pseudoSpore)
 ```
 
 ---
 
-*Wave 155m — ALL P0/P1/P2 DIVERGENCES CLOSED. biomeOS v4.50 socket ownership + evaporation
-FIXED. cellMembrane shipped 4 AAR fixes (checksums, sandbox, rootpulse, tmpfiles). Depot
-35 binaries (16 musl + 4 gnu + 15 windows). sporeGate gate health 10/11→11/11 path clear.
-whitePaper gen4 COMPLETE, subGen sporePrint live science strategy shipped. 2 P3s remaining
-(self-CI, hook auto-fire). 3 NUCLEUS gates. steamGate UNBLOCKED. ~63K+ tests. 10+ gates.*
+*Wave 155m — gen4 COMPLETE. gen5 infrastructure READY. ZERO P0/P1/P2. 11/11 divergences
+FIXED. 6/10 jelly strings killed. Depot 35 binaries. biomeOS v4.50. Provenance 7/7. 3
+NUCLEUS gates. Sovereign CI LIVE. sporePrint live science strategy shipped. gen5 critical
+path: tideGlass Phase 0 is sole bottleneck (Steps 1-2 DONE, 6 remaining). pseudoSpore
+target: late Sep (optimistic) / Dec 2026 (realistic). 2 P3s remaining. ~63K+ tests.*

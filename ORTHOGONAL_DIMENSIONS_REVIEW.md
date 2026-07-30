@@ -340,17 +340,75 @@ jelly string to kill.
 - [ ] **J12**: Sub-builder dispatch — **UNBLOCKED** (membrane.exe P1 fixed). sporeGate → blueGate Windows builds via songBird IPC
 - [ ] **J13**: Depot freshness probe — continuous SHA comparison + mesh alert on drift (~20 LOC `mesh.build_pending` wire)
 
-**New operational jelly strings (from sporeGate AAR)**:
+**Operational jelly strings (from sporeGate AAR)**:
 
-- [ ] **J14**: Socket ownership — biomeOS sockets created as root, non-root primals need manual `chown :membrane`
-- [ ] **J15**: checksums.toml — harvest pipeline partial update, needs full regeneration
+- [x] ~~**J14**: Socket ownership~~ — **KILLED** (biomeOS `0e45262f`: bind now `0666` for multi-user IPC)
+- [x] ~~**J15**: checksums.toml~~ — **KILLED** (cellMembrane `0cfcce5`: `finalize_depot()` full disk scan)
 - [ ] **J16**: cellMembrane self-CI — not in `sources.toml`, can't auto-rebuild via sovereign CI
-- [ ] **J17**: `/run/membrane` tmpfiles.d — reboot loses socket directory permissions
-- [ ] **J18**: `/etc/environment` gate coupling — `RUSTUP_HOME`, `CARGO_HOME`, SSH aliases are gate-specific
+- [x] ~~**J17**: `/run/membrane` tmpfiles.d~~ — **KILLED** (cellMembrane `0cfcce5`: `membrane.conf` shipped)
+- [ ] **J18**: `/etc/environment` gate coupling — `RUSTUP_HOME`, `CARGO_HOME`, SSH aliases are gate-specific (portability risk)
 
-**Pipeline status**: Forgejo push → cascade → diff → build → checksum → depot push → verify. **3/5 AUTOMATED (J9–J11). 2 remaining (J12 sub-builder, J13 freshness).**
+**Pipeline status**: Forgejo push → cascade → diff → build → checksum → depot push → verify. **6/10 KILLED (J9–J11, J14–J15, J17). 4 remaining (J12 sub-builder, J13 freshness, J16 self-CI, J18 gate coupling).**
 
-**Owner**: cellMembrane (J13, J15, J16, J17, J18) + sporeGate (J12) + biomeOS (J14) + blueGate (J12 sub-builder)
+**Owner**: cellMembrane (J13, J16, J18) + sporeGate (J12) + blueGate (J12 sub-builder)
+
+## 12. gen5 Critical Path — External Science + Live Science Surfaces (NEW)
+
+The project has crossed the **gen4 → gen5 boundary**. gen4 is COMPLETE (3 NUCLEUS gates,
+Provenance 7/7, Sovereign CI, biomeOS v4.50). gen5's defining deliverable: someone else's
+science exits the ecosystem as a verifiable artifact.
+
+### gen5 Critical Chain (Steps 1-2 DONE, 3-8 remaining)
+
+- [x] **Step 1**: bearDog `crypto.sign_ed25519` — **DONE** (`3739e7078`, Wave 155j)
+- [x] **Step 2**: Provenance 7/7 — **DONE** (westGate + blueGate, Wave 155k)
+- [ ] **Step 3**: tideGlass Phase 0 — archaeology (Zenodo v5/v6, GPS deps, LINCS/ChEMBL). **NEXT. SOLE BOTTLENECK.**
+- [ ] **Step 4**: tideGlass Phase 1 — reproduce (RCL SNR, GPS4Drug, figures). Blocked on Step 3.
+- [ ] **Step 5**: NF Data Portal ingestion through Nest Atomic. Can start data download in parallel.
+- [ ] **Step 6**: NF reversal screen (RGES, ZINC, Anderson d_eff). Blocked on Steps 4-5.
+- [ ] **Step 7**: One NF pseudoSpore — self-verifying USB artifact. **THE gen5 ARTIFACT.**
+- [ ] **Step 8**: JOSS paper + CTF NDU prelim data. Blocked on Step 7.
+
+**Timeline**: Optimistic late Sept 2026, realistic Dec 2026 for NF pseudoSpore.
+
+### sporePrint — Live Science as Public Surface
+
+sporePrint is subGen presented to the world. Design principle: **science first, infrastructure second**.
+
+Visitor flow: live science → commodity hardware → pseudoSpore grab → discover mesh.
+
+| Surface | What | Team | Status |
+|---------|------|------|--------|
+| hotSpring → petalTongue | Lattice QCD WebGL visualization | westGate | Not started |
+| footPrint | Live GIS data acquisition | flockGate | Running (primals.eco/footprint/) |
+| esotericWebb | Graphics engine challenge | flockGate | V22 live |
+| wetSpring | GPU-accelerated 16S rRNA pipeline | ironGate | Cold (needs Rust port) |
+| pseudoSpore grab pattern | Download + validate + grow | lithoSpore | Chassis exists (USB to Barrick) |
+
+**Sequencing**:
+1. Phase 1 (NOW): Update sporePrint content to Wave 155m reality
+2. Phase 2: Live science surfaces (QCD viz, footPrint, wetSpring)
+3. Phase 3: PseudoSpore grab pattern (NF as first downloadable artifact)
+4. Phase 4: projectFOUNDATION auto-feeds site from provenance
+
+### Glacial Goals — Updated
+
+| ID | Goal | Status | Dependency |
+|----|------|--------|------------|
+| G3 | Provenance Trio 7/7 | **COMPLETE** | — |
+| G4 | NUCLEUS on multiple gates | **COMPLETE** (×3) | — |
+| G6 | bearDog public (crates.io) | GLACIAL | crates.io publishing |
+| G7 | AlphaFold ~1TB ingestion | ACTIVE | Nest Atomic on westGate (READY) |
+| G8 | Plasmodium (multi-gate bonding) | GLACIAL | biomeOS v4.50+ |
+| G9 | JOSS publication | ACTIVE (Step 8) | NF pseudoSpore |
+| G10 | Sub-builder mesh | UNBLOCKED (J12) | blueGate enrollment |
+| G11 | Any chip + drive = mesh gate | IN PROGRESS | steamGate NEXT |
+| G12 | darwinGate (Mac Mini) | GLACIAL | HW acquisition |
+| G13 | iosGate (iPhone) | GLACIAL | darwinGate + Dev Program |
+| G14 | sporePrint live science refresh | **NEW** — Phase 1 NOW | sporePrint team |
+| G15 | tideGlass Phase 0 (NF archaeology) | **NEW** — NEXT | eastGate / dedicated gate |
+| G16 | pseudoSpore grab pattern on web | **NEW** — after NF data | lithoSpore + sporePrint |
+| G17 | Portability — reconstitute from cold | **NEW** — J18 + lithoSpore | cellMembrane site-profile |
 
 ## 11. Campus / Physical Infrastructure
 
@@ -467,21 +525,22 @@ completeness.
 
 ---
 
-**Active**: 9 dimensions (1–5, 7–8, 10–11)
+**Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155m — **ALL CODE SHIPPED. ALL BLOCKING P2s FIXED. ZERO P0/P1s.**
-Depot 34 binaries (16 musl + 3 gnu + 15 windows). biomeOS v4.50 socket evaporation +
-binary path retention FIXED. Provenance 7/7 COMPLETE. 3 NUCLEUS gates. Sovereign CI LIVE.
-membrane.exe FIXED. steamGate UNBLOCKED. 12 teams STANDBY.
+**Summary**: Wave 155m — **ZERO P0/P1/P2. gen4 COMPLETE. gen5 INFRASTRUCTURE READY.**
+Depot 35 binaries. biomeOS v4.50. Provenance 7/7 COMPLETE. 3 NUCLEUS gates. Sovereign CI LIVE.
+6/10 jelly strings killed (J9–J11, J14–J15, J17). 4 remaining (J12, J13, J16, J18).
 
-**Sovereignty posture**: ALIGNED on 7/9 principles. 2 PARTIAL: portable mesh (gate configs
-still convenience-coupled to current LAN) and self-healing (socket ownership, tmpfiles.d).
-**Portability risk**: project cannot yet shut down and reconstitute on new HPC mesh without
-manual per-gate fixup. Key gaps: site-profile abstraction, WireGuard auto-discovery, depot
-mirror/relocate, pseudoSpore pack/unpack.
+**gen5 critical path**: Steps 1-2 DONE. Step 3 (tideGlass Phase 0) is the **sole bottleneck**.
+No infrastructure blockers remain. The work is now science pipeline execution.
 
-D10 has 10 jelly strings: 3 killed (J9–J11), 2 active (J12–J13), 5 new operational (J14–J18).
-Cross-platform: steamGate NEXT (UNBLOCKED), darwinGate + iosGate GLACIAL.
+**Sovereignty posture**: ALIGNED on 7/9. 2 PARTIAL: portable mesh (J18 gate coupling) and
+self-healing (socket ownership FIXED, tmpfiles.d FIXED, but site-profile abstraction missing).
+
+**Live science**: sporePrint refresh (G14) is Phase 1 NOW. Live science surfaces (QCD, GIS,
+genomics) are Phase 2. PseudoSpore grab pattern is Phase 3 (after NF data exists).
+
+**Glacial goals**: 17 tracked (G3-G4 COMPLETE, G7/G9/G11 ACTIVE, G14-G17 NEW).
 
 ---
 
