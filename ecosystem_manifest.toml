@@ -1010,6 +1010,40 @@ repos = [
     "cellMembrane", "projectNUCLEUS",
 ]
 
+# iosGate — macOS gate, darwin genomeBins, Tower → full
+# Mac hardware. First darwin target. Validates songBird universal-ipc on macOS.
+# launchd service management, UDS transport, Mach-O binaries.
+[gates.iosGate]
+target = "aarch64-apple-darwin"
+mobility = "fixed"
+bind_mode = "uds"
+composition = "tower"
+transport = "lan"
+mesh_peer = "157.230.3.183:7700"
+roles = ["tower_atomic", "darwin_validation"]
+notes = "macOS gate. First aarch64-apple-darwin deployment. Validates Tower Atomic on darwin: launchd, UDS, Mach-O. Can self-build darwin genomeBins (can't cross-compile darwin from Linux)."
+repos = [
+    "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "skunkBat",
+]
+
+# steamGate — Steam Deck, portable compute gate
+# SteamOS (Arch-based). Read-only rootfs — user-space deployment only.
+# x86_64-unknown-linux-gnu target (glibc, same as compute trio).
+# Vulkan GPU access via Steam runtime. Portable mesh gate.
+[gates.steamGate]
+target = "x86_64-unknown-linux-gnu"
+mobility = "portable"
+bind_mode = "uds"
+composition = "tower"
+transport = "lan"
+roles = ["tower_atomic", "portable_compute"]
+notes = "Steam Deck. SteamOS (Arch-based, read-only rootfs). User-space deploy to ~/.local/bin/. Vulkan GPU via Steam runtime. Portable compute gate — mesh from anywhere with WiFi."
+repos = [
+    "wateringHole", "plasmidBin",
+    "bearDog", "songBird", "skunkBat",
+]
+
 # golgiBody (sole VPS, inner membrane) — sovereign periplasm, Forgejo, relay, depot
 [gates.golgiBody]
 kderm_layer = "inner_membrane"

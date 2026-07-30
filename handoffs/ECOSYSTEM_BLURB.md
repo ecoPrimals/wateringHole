@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155k
 
-**Date**: Jul 30, 2026 08:20 EDT | **Wave**: 155k | **From**: eastGate overwatch
-**Posture**: **ALL CHAINS CLOSED. biomeOS NUCLEUS orchestrator SHIPPED (riboCipher fix, socket unification, capability persistence, composition lifecycle — v4.47, `bd202674`). bearDog crypto.sign_ed25519 SHIPPED (`3739e7078`) + Windows platform gating SHIPPED (`d6b1003bb`). Windows depot 14/14 ready (all code-team gates fixed). Provenance 7/7 UNBLOCKED. 12 teams STANDBY. 0 blocking P1s.**
+**Date**: Jul 30, 2026 09:20 EDT | **Wave**: 155k | **From**: eastGate overwatch
+**Posture**: **ALL CHAINS CLOSED. Depot 14/14 REBUILT by sporeGate (Jul 30). biomeOS v4.47 + bearDog crypto.sign DEPLOYED. Cross-platform mesh expansion: iosGate (macOS), steamGate (Steam Deck) joining. Provenance 7/7 UNBLOCKED. Pipeline automation J9–J13 in progress. 12 teams STANDBY. ZERO P0/P1s. Anything with a chip and a drive is a gate.**
 
 ---
 
@@ -57,21 +57,59 @@ Both P1s SHIPPED:
 
 bearDog: 14,019 tests, 0 clippy warnings. Provenance 7/7 UNBLOCKED.
 
-### ~~Chain 3: Windows Depot Freshness~~ — **CLOSED** (code-team side)
+### ~~Chain 3: Windows Depot Freshness~~ — **CLOSED** (rebuilt)
 
-All platform gates fixed. sporeGate needs to rebuild 3 `.exe` files:
+sporeGate rebuilt all 3 `.exe` (Jul 30 08:50 EDT). 14/14 Windows depot CURRENT.
+biomeOS v4.47 + bearDog crypto.sign deployed on sporeGate. BLAKE3 verified.
 
-| # | Binary | Fix Commit | Status |
-|---|--------|------------|--------|
-| 1 | beardog.exe | `d6b1003bb` | Ready for rebuild |
-| 2 | toadstool.exe | `2df71399b` | Ready for rebuild |
-| 3 | coralreef.exe | `edcd696` | Ready for rebuild |
+**Pipeline automation** (J9–J13): `SPOREGATE_DEPOT_REBUILD_NUCLEUS_PIPELINE_WAVE155k.md`
 
-Windows depot: **14/14 code-ready.** sporeGate rebuild pending.
+---
 
-**Handoff**: `SPOREGATE_DEPOT_REBUILD_NUCLEUS_PIPELINE_WAVE155k.md` — 4 phases:
-rebuild 3 `.exe`, redeploy NUCLEUS with biomeOS v4.47, wire automated publish
-pipeline (J9–J13), enable blueGate as sub-builder.
+## CROSS-PLATFORM EXPANSION — genomeBin Mesh
+
+**Principle**: anything with a chip and a drive is a mesh gate. The genomeBin
+standard + Tower Atomic abstraction means one codebase → any platform.
+
+### Depot Targets — Current vs Needed
+
+| Target Triple | Status | Depot | Gates |
+|---------------|--------|-------|-------|
+| `x86_64-unknown-linux-musl` | **LIVE** | 16 bins | eastGate, sporeGate, westGate, strandGate, ironGate, flockGate |
+| `x86_64-unknown-linux-gnu` | **LIVE** | 3 bins (GPU trio) | strandGate (GPU) |
+| `x86_64-pc-windows-gnu` | **LIVE** | 14 bins | blueGate, swiftGate, northGate |
+| `aarch64-unknown-linux-musl` | **TIER 1** | directory only | grapheneGate (pepti warehouse) |
+| `aarch64-linux-android` | **TIER 1** | directory only | grapheneGate (via ADB) |
+| `x86_64-apple-darwin` | **TIER 2 — NEW** | needed | iosGate (Mac, Intel) |
+| `aarch64-apple-darwin` | **TIER 2 — NEW** | needed | iosGate (Mac, Apple Silicon) |
+| `x86_64-unknown-linux-gnu` (SteamOS) | **TIER 2 — NEW** | depot exists | steamGate (Steam Deck) |
+
+### New Gates
+
+| Gate | Platform | Target | Composition | Notes |
+|------|----------|--------|-------------|-------|
+| **iosGate** | macOS | `aarch64-apple-darwin` or `x86_64-apple-darwin` | Tower → full | Mac gate. Darwin UDS, launchd services. |
+| **steamGate** | SteamOS (Arch Linux) | `x86_64-unknown-linux-gnu` | Tower → compute | Steam Deck. Portable compute. Read-only rootfs (flatpak/user-space). |
+
+### Platform Abstraction Status
+
+| Platform Concern | Linux | Windows | macOS | SteamOS | Android |
+|------------------|-------|---------|-------|---------|---------|
+| IPC transport | UDS | TCP (Named Pipes future) | UDS | UDS | TCP (ADB) |
+| Service manager | systemd | Windows Service | launchd | systemd (user) | init/pepti |
+| Binary format | ELF | PE (.exe) | Mach-O | ELF | ELF (Bionic) |
+| Build target | musl/gnu | windows-gnu | apple-darwin | gnu | android |
+| songBird universal-ipc | SHIPPED | SHIPPED | needs validation | needs validation | SHIPPED (ADB) |
+| Depot binaries | 16+3 | 14 | **NEEDED** | reuse gnu | warehouse |
+
+### Blockers for New Targets
+
+| Target | Blocker | Owner |
+|--------|---------|-------|
+| `*-apple-darwin` | Needs macOS host for build (can't cross-compile from Linux) | iosGate itself or CI |
+| SteamOS | Read-only rootfs — user-space deployment only (`~/.local/bin/`) | cellMembrane (deploy path) |
+| SteamOS | GPU access — Vulkan via Steam runtime, not system packages | toadStool/coralReef |
+| All new | `--bind` flag standardization — biomeOS `PRIMAL_BIND_FLAGS_STANDARD.md` shipped | Already done |
 
 ---
 
@@ -98,19 +136,27 @@ pipeline (J9–J13), enable blueGate as sub-builder.
 
 | Gate | Status | Resume When |
 |------|--------|-------------|
-| **strandGate** | **NUCLEUS ACHIEVED.** Maintain composition. | NUCLEUS lifecycle ships (biomeOS manages startup). |
-| **blueGate** | **13/13 Windows.** Infrastructure proof. | biomeOS orchestration + fresh depot (3 binaries). |
-| **swiftGate** | HW ready. | After blueGate NUCLEUS stable. |
-| **ironGate** | Online. | Tower + HDD enclave experiment. |
+| **strandGate** | **NUCLEUS ACHIEVED.** Maintain composition. | biomeOS v4.47 redeploy (lifecycle-managed). |
+| **blueGate** | **13/13 Windows.** Depot now 14/14 fresh. | Pull fresh `.exe`, sub-builder activation. |
+| **swiftGate** | HW ready. Windows. | After blueGate NUCLEUS stable. |
+| **ironGate** | Online. 14TB+1TB+1TB+2TB. | Tower + HDD enclave experiment. |
 | **southGate** | HW ready. | Enrollment. |
+| **grapheneGate** | Tower LIVE (Pixel 8a). | ADB mesh expansion. |
 
 ### GATE ACTIVE
 
 | Gate | Status | Next |
 |------|--------|------|
-| **eastGate** | Overwatch. All code teams delivered. | Windows CI gate. Coordinate NUCLEUS lifecycle deployment. |
-| **westGate** | Broker LIVE. 704 caps. 3,216 CAS. | **Deploy biomeOS v4.47 + Compute Trio → NUCLEUS.** Provenance 7/7 validation. AlphaFold. |
-| **sporeGate** | 9/11 healthy. Depot 33 binaries. | **Rebuild beardog.exe + toadstool.exe + coralreef.exe** (all 3 fixes shipped). → 14/14 Windows depot. |
+| **eastGate** | Overwatch. All code teams delivered. | Cross-platform expansion coordination. |
+| **westGate** | Broker LIVE. 704 caps. 3,216 CAS. | **biomeOS v4.47 + Compute Trio → NUCLEUS.** Provenance 7/7. AlphaFold. |
+| **sporeGate** | **Depot 14/14 REBUILT.** biomeOS v4.47 deployed. | Pipeline automation (J9–J13). blueGate sub-builder. |
+
+### GATE NEW (cross-platform expansion)
+
+| Gate | Platform | Target | First Step |
+|------|----------|--------|------------|
+| **iosGate** | macOS | `aarch64-apple-darwin` | Build darwin genomeBins on Mac host. Tower Atomic. |
+| **steamGate** | SteamOS (Steam Deck) | `x86_64-unknown-linux-gnu` | User-space Tower deploy (`~/.local/bin/`). Validate songBird. |
 
 ---
 
@@ -123,7 +169,8 @@ pipeline (J9–J13), enable blueGate as sub-builder.
 | Signal graphs | **27** |
 | BTSP | **13/13** |
 | Linux depot | **19/19** (16 musl + 3 glibc) |
-| Windows depot | **14/14 code-ready** (all platform gates fixed; sporeGate rebuild pending) |
+| Windows depot | **14/14 CURRENT** (rebuilt Jul 30 — zero blocked) |
+| Depot targets | **5** (musl, gnu, windows-gnu, aarch64-musl, aarch64-android) |
 | Gates online | **10** |
 | strandGate NUCLEUS caps | **1,742** |
 | strandGate IPC methods | **674** |
@@ -142,28 +189,35 @@ pipeline (J9–J13), enable blueGate as sub-builder.
 
 ---
 
-## WHAT'S NEXT — DEPLOYMENT WAVE
+## WHAT'S NEXT — CROSS-PLATFORM MESH EXPANSION
 
 ```
-All code shipped. Zero P0s. Zero P1s. 12 teams STANDBY.
+All code shipped. Zero P0s. Zero P1s. Depot 14/14 REBUILT. 12 teams STANDBY.
 
-Deployment:
-  1. sporeGate rebuilds 3 Windows .exe (beardog, toadstool, coralreef) → 14/14 depot
-  2. westGate deploys biomeOS v4.47 + Compute Trio → second NUCLEUS (lifecycle-managed)
+Deployment (in progress):
+  1. ✓ sporeGate depot 14/14 rebuilt + biomeOS v4.47 deployed
+  2. westGate: biomeOS v4.47 + Compute Trio → second NUCLEUS
   3. Provenance 7/7 live validation (sweetGrass + loamSpine + bearDog crypto.sign)
-  4. blueGate deploys fresh depot binaries → lifecycle-managed NUCLEUS on Windows
-  5. AlphaFold ~1TB ingestion through Nest Atomic pipeline with full provenance
+  4. blueGate: pull fresh .exe → lifecycle-managed NUCLEUS on Windows + sub-builder
+  5. Pipeline automation: J9-J13 (Forgejo webhook → auto build → depot push)
+
+Cross-platform expansion:
+  6. iosGate: macOS darwin genomeBins → Tower Atomic on Mac
+  7. steamGate: Steam Deck user-space Tower → portable compute gate
+  8. Validate songBird universal-ipc on darwin + SteamOS
+  9. AlphaFold ~1TB ingestion through Nest Atomic pipeline
 
 Glacial:
-  G6: bearDog public (crates.io) — audit complete, ready to publish
-  G9: JOSS publication — live system demonstration with NUCLEUS
-  G8: Plasmodium (multi-gate bonding) — cross-gate composition coordination
+  G6: bearDog public (crates.io) — audit complete
+  G9: JOSS publication — live system across multiple platforms
+  G8: Plasmodium (multi-gate bonding) — cross-gate composition
+  G11: Any chip + drive = mesh gate (genomeBin universal deployment)
 ```
 
 ---
 
-*Wave 155k — ALL CHAINS CLOSED. biomeOS v4.47 NUCLEUS orchestrator shipped. bearDog
-crypto.sign + Windows gate shipped. All 14 Windows platform gates fixed. Provenance 7/7
-UNBLOCKED. ZERO P0s. ZERO P1s. 12 teams STANDBY. Next: sporeGate depot rebuild (3 .exe),
-westGate NUCLEUS deployment, Provenance 7/7 live validation, AlphaFold ingestion.
-~63K+ tests. 10 gates. 13 fossilized dimensions.*
+*Wave 155k — ALL CHAINS CLOSED. Depot 14/14 REBUILT. biomeOS v4.47 + bearDog crypto.sign
+DEPLOYED on sporeGate. Cross-platform expansion: iosGate (macOS), steamGate (Steam Deck).
+5 depot targets, 33+ binaries. Pipeline automation J9–J13 identified. Provenance 7/7
+UNBLOCKED. ZERO P0/P1s. 12 teams STANDBY. ~63K+ tests. 10+ gates. Anything with a chip
+and a drive is a mesh gate.*
