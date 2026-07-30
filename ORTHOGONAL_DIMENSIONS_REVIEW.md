@@ -13,7 +13,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal / Coordination
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155i)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 155j)
 - [x] Gate heads published (`heads/*.toml`) — golgiBody auto-publishing active
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] Active impulses: 0 (26+ fossilized)
@@ -48,8 +48,21 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] strandGate **Node Atomic VALIDATED** — 450 methods, 746 pipelines/sec, sub-ms GPU dispatch
 - [x] barraCuda RTX 3090 + RX 6950 XT dual-GPU validated — FHE bit-perfect, cdist 65× SciPy
 - [x] toadStool S346 deep evolution + deployment docs (9,193+ tests, doctor CLI fixed)
-- [ ] 3 enrolling gates have no published heads in `heads/*.toml`
-- [ ] **Windows depot stale** — 14 `.exe` from 07/16, no Windows CI gate
+- [x] **strandGate NUCLEUS ACHIEVED** — first full NUCLEUS (8/9 healthy, 1,742 caps, 674 IPC methods, sub-ms GPU)
+- [x] **blueGate 13/13 on Windows** — infrastructure proof, 147 MB, 2+ hours stable
+- [x] sporeGate Windows depot rebuilt — **11/14 fresh** (3 blocked on code-team platform gates)
+- [x] sweetGrass braid_id→UUID mismatch FIXED (`4b5167b`)
+- [x] cellMembrane boot_order enforcement SHIPPED (b7707ee) — systemd `After=` deps from `CompositionSpec`
+- [x] loamSpine `--bind` alias for biomeOS CLI standardization
+- [x] rhizoCrypt cross-compile hygiene — 4 targets, zero warnings, `--bind` alias
+- [x] coralReef Windows cross-compilation — zero errors/warnings on `x86_64-pc-windows-gnu`
+- [x] barraCuda `MultiDevicePool` wired into primal startup (`device.pool` IPC method)
+- [x] sporeGate DNS/DHCP topology fixes (dnsmasq, DHCP DNS option, `sporegate.primals.local`)
+- [ ] 2 enrolling gates have no published heads in `heads/*.toml`
+- [ ] **Windows depot 3/14 stale** — bearDog, toadStool, coralReef need platform gating fixes
+- [ ] **Windows CI gate** — `cargo check --target x86_64-pc-windows-gnu` not yet in CI
+- [ ] **biomeOS composition lifecycle** — boot_order shipped but biomeOS doesn't consume it yet
+- [ ] **DNS manifest/generator gap** — topology drifts from manifest (sporeGate AAR)
 
 ## 2. Ecological (Primal Health)
 
@@ -113,9 +126,9 @@ appears. This keeps the active review focused on evolving concerns.
 | flockGate | ONLINE | Linux | 10.13.37.6 | full | Nest Atomic validation (after Tower stable) |
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090. **DAILY DRIVER — DO NOT DEPLOY.** AlphaFold data source (~1TB). |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
-| strandGate | **NODE ATOMIC VALIDATED** | Linux | 10.13.37.10 | compute (7) | Dual EPYC 7452, RTX 3090, 450 methods, 746 pipelines/sec, sub-ms GPU dispatch |
-| westGate | **BROKER LIVE** | Linux | 10.13.37.11 | nest (8) | biomeOS v4.45 COORDINATED, 704 capabilities, 3,216 CAS objects, 20 sockets, Provenance 6/7 |
-| blueGate | **NEST 10/10** | Windows | 10.13.37.12 | **full — Tower→Nest→Node** | **G1 DONE. Nest 10/10 (107.6 MB, TCP-only). Built from source. Node Atomic NEXT. Topo H2, sub-builder.** |
+| strandGate | **NUCLEUS** | Linux | 10.13.37.10 | **NUCLEUS (13)** | **FIRST NUCLEUS.** 8/9 healthy, 1,742 caps, 674 IPC methods, RTX 3090 sub-ms GPU. STANDBY. |
+| westGate | **BROKER LIVE** | Linux | 10.13.37.11 | nest (8) | biomeOS v4.45 COORDINATED, 704 caps, 3,216 CAS objects. **Add Compute Trio → second NUCLEUS.** |
+| blueGate | **13/13 WINDOWS** | Windows | 10.13.37.12 | **NUCLEUS infra** | **13/13 primals, 147 MB, TCP-only, 2+ hours stable. Awaiting biomeOS orchestration. STANDBY.** |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
 
@@ -231,10 +244,10 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 
 | Composition | Status | Gates Proven | biomeOS Orchestrated? |
 |-------------|--------|--------------|----------------------|
-| **Tower Atomic** (3) | LIVE | westGate, strandGate, grapheneGate, eastGate, sporeGate, **blueGate (Windows)** | Signal graphs: 8. Direct IPC: YES. |
-| **Nest Atomic** (7+Tower) | LIVE | westGate (ZFS+CAS), **blueGate (Windows, 10/10)** | Signal graphs: 9. Capability routing: YES. Graph execution: P2 (riboCipher). |
-| **Node Atomic** (3+Tower) | VALIDATED | strandGate (746 pipelines/sec, sub-ms GPU) | Signal graphs: 3. Not yet orchestrated live. |
-| **NUCLEUS** (13) | **NOT YET** | — | All 27 signal graphs defined. E2E orchestration: **NEXT TARGET** |
+| **Tower Atomic** (3) | LIVE | 6 gates (incl. Windows, Android) | Signal graphs: 8. Direct IPC: YES. |
+| **Nest Atomic** (7+Tower) | LIVE | westGate (ZFS+CAS), blueGate (Windows) | Signal graphs: 9. Capability routing: YES. Graph execution: P1 (riboCipher). |
+| **Node Atomic** (3+Tower) | VALIDATED | strandGate (746 pipelines/sec, sub-ms GPU) | Signal graphs: 3. |
+| **NUCLEUS** (13) | **ACHIEVED** | **strandGate** (8/9, 1,742 caps, 674 methods), **blueGate** (13/13, infra proof) | 27 signal graphs. Lifecycle: NOT YET (manual startup). |
 
 ### What's proven
 
@@ -259,8 +272,9 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [ ] **biomeOS socket evaporation** — Neural API restart wipes capabilities, sockets disappear
 - [ ] **biomeOS full composition lifecycle** — startup ordering, health gating, composition transitions (Tower→Nest→Node→NUCLEUS) managed by biomeOS, not shell scripts
 - [ ] **bearDog `crypto.sign_ed25519`** — real signing (blocks Provenance Trio 7/7, blocks Nest Atomic full E2E)
-- [ ] **Node Atomic live on westGate or blueGate** — toadStool + barraCuda + coralReef added to existing Nest deployment
-- [ ] **NUCLEUS live on one gate** — all 13 primals under biomeOS orchestration with composition transitions
+- [x] ~~**Node Atomic live**~~ — strandGate VALIDATED (746 pipelines/sec)
+- [x] ~~**NUCLEUS live on one gate**~~ — **strandGate ACHIEVED** (8/9, 1,742 caps, manual startup). blueGate 13/13 infra proof.
+- [ ] **NUCLEUS lifecycle** — biomeOS auto-startup via boot_order + health gates (cellMembrane shipped boot_order, biomeOS must consume)
 - [ ] **Chimera Phase 0**: shared library extraction (`libtower.so`) — UNBLOCKED, deferred
 - [ ] sporePrint primal pipeline: replace Zola
 - [ ] 6 springs pending `validation.json`
@@ -290,10 +304,10 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [x] toadStool wgpu cross-platform GPU (DX12/Vulkan/Metal)
 - [x] biomeOS platform_native transport on all 27 signal graphs
 - [x] biomeOS cross-platform socket templates (named pipes + TCP fallback)
-- [x] ~~Windows genomeBins not yet in golgiBody depot~~ — **14 .exe exist but STALE** (all from 07/16, pre-P0-fix). Nest primals work; songBird doesn't.
-- [x] ~~**songBird Windows platform gate (P0)**~~ — **FIXED** (`8c0adc8d` + `d9bda555`). TCP fallback + 3 follow-up compile fixes. Linux depot rebuilt; **Windows depot NOT rebuilt.**
-- [ ] **Windows depot pipeline** — sporeGate only rebuilds Linux (musl/glibc). No Windows cross-build. blueGate can serve as sub-builder.
-- [ ] **No Windows CI gate** — `cargo check --target x86_64-pc-windows-gnu` on Linux CI would catch compile errors before depot
+- [x] ~~Windows genomeBins stale~~ — **11/14 fresh** (sporeGate rebuilt Wave 155j). 3 blocked on code-team platform gates.
+- [x] ~~**songBird Windows platform gate (P0)**~~ — **FIXED + IN DEPOT** (`d9bda555`, 21.3 MB)
+- [ ] **3 Windows binaries blocked**: beardog.exe (UnixStream), toadstool.exe (GPU module), coralreef.exe (unix_jsonrpc)
+- [ ] **No Windows CI gate** — `cargo check --target x86_64-pc-windows-gnu` would catch platform gates
 - [ ] macOS genomeBins — check-pass only, no linker for cross-build from Linux
 - [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
 - [ ] systemd abstraction for Windows Service / launchd paths (cellMembrane `InitSystem` foundation shipped)
@@ -423,14 +437,13 @@ completeness.
 
 **Active**: 8 dimensions (1–5, 7–8, 11)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155i — NUCLEUS convergence wave. **ZERO P0s.** All three atomic
-compositions proven: Tower (6 gates), Nest (westGate + blueGate), Node (strandGate).
-biomeOS composition broker LIVE (704 caps, COORDINATED, E2E routing). D10 Jelly
-Strings FOSSILIZED (F13). **Remaining path to NUCLEUS**: biomeOS full composition
-lifecycle (graph executor riboCipher fix, socket unification, startup ordering),
-bearDog `crypto.sign_ed25519` (Provenance 7/7), Windows depot pipeline, Node Atomic
-added to existing Nest deployments, then NUCLEUS = all 13 under biomeOS orchestration.
-8 active dimensions, 13 fossilized. ~63K+ tests. 27 signal graphs. 10 gates (9 Linux/Windows + 1 Android).
+**Summary**: Wave 155j — **NUCLEUS ACHIEVED** on strandGate (first gate: 8/9 healthy,
+1,742 caps, 674 IPC methods, sub-ms GPU). blueGate 13/13 on Windows (147 MB, infra proof).
+Windows depot 11/14 fresh. sweetGrass P2 UUID fixed. cellMembrane boot_order shipped.
+**Remaining**: biomeOS composition lifecycle (consume boot_order, riboCipher graph executor,
+socket fixes), bearDog `crypto.sign_ed25519` (Provenance 7/7), 3 Windows platform gates
+(bearDog, toadStool, coralReef), DNS manifest generators. 7 teams STANDBY, 5 ACTIVE.
+8 active dimensions, 13 fossilized. ~63K+ tests. 10 gates.
 
 ---
 
