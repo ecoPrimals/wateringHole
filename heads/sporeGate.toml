@@ -96,6 +96,19 @@ sweetgrass_depot_lag = "DONE (155i) — v0.8.0 G3 E2E binary in depot (ab887e8)"
 deep_debt_refresh = "DONE (155i) — 8 primals rebuilt from deep-debt commits"
 windows_depot_rebuild = "DONE (155i-nucleus) — 11/14 freshly built, 3 blocked by code team platform gating"
 songbird_d9bda555 = "DONE (155i-nucleus) — pulled 3 Windows compile fixes, rebuilt .exe"
+dhcp_dns_fix = "DONE (155i-nucleus) — DHCP DNS option → sporeGate (was router), sporegate.primals.local fixed"
+
+[topology_divergence]
+wave = "155i-nucleus"
+dhcp_dns = "FIXED — option:dns-server → 192.168.4.3 (was .1 router, 2-4x slower)"
+sporegate_dns = "FIXED — sporegate.primals.local → 192.168.4.3 (was .1)"
+manifest_roles_missing = "nat_firewall, dhcp, dns_primary not declared in sporeGate gate profile"
+northgate_dns = "MISSING — no DHCP reservation, no address= entry, DHCP hostname is DESKTOP-9QG6LQL"
+mesh_dns = "MISSING — 10.13.37.x peers have no DNS names (*.mesh.primals.local)"
+golgi_dns_sovereignty = "MISSING — uses DigitalOcean default resolvers, no dnsmasq/stubby"
+blocklist_vcs = "MISSING — 101K-entry blocklist not version-controlled"
+cellmembrane_gap = "GateRole::{DnsPrimary,Dhcp,NatFirewall} typed but no dns.configure/dns.apply generators"
+evolution = "agnostic (manifest-derived) → fractal (same pattern every scale) → isomorphic (same template, different params)"
 
 [code_team_flags]
 mesh_socket = "FLAGGED — songBird mesh relay socket"
@@ -105,3 +118,4 @@ beardog_windows = "P1 — UnixStream not #[cfg(unix)] gated, Windows cross-compi
 toadstool_windows = "P1 — toadstool_runtime_gpu module missing for Windows target"
 coralreef_windows = "P1 — unix_jsonrpc imports not platform-gated"
 membrane_windows = "P1 — UnixStream + handshake_async not #[cfg(unix)] gated"
+dns_configure = "EVOLUTION — cellMembrane needs dns.configure/dns.apply (manifest → dnsmasq+stubby)"
