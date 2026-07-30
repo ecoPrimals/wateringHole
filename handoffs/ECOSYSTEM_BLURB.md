@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155j
 
 **Date**: Jul 29, 2026 20:30 EDT | **Wave**: 155j | **From**: eastGate overwatch
-**Posture**: **NUCLEUS ACHIEVED. strandGate: first full NUCLEUS (8/9 healthy, 1,742 capabilities, 674 IPC methods, sub-ms GPU). blueGate: 13/13 on Windows (147 MB). Remaining work is orchestration lifecycle, crypto signing, and 3 Windows platform gates. 7 teams STANDBY. 5 teams ACTIVE.**
+**Posture**: **NUCLEUS ACHIEVED. Active teams delivered: toadStool S347 Windows fix, coralReef `--bind` alias + Windows fix, cellMembrane `dns.configure`/`dns.apply` shipped. Windows depot 13/14 ready (only beardog.exe stale). 10 teams STANDBY. 2 teams ACTIVE (biomeOS + bearDog). Remaining: biomeOS lifecycle + bearDog crypto.sign.**
 
 ---
 
@@ -49,41 +49,41 @@ still returns health stub, songBird TCP registration not wired.
 | 1 | **`crypto.sign_ed25519` real signing** | P1 | Sole blocker for Provenance Trio 7/7 |
 | 2 | **bearDog Windows platform gating** | P1 | `UnixStream` not gated — blocks depot `beardog.exe` |
 
-### Chain 3: Windows Depot Freshness (3 stale binaries)
+### Chain 3: Windows Depot Freshness (1 stale binary)
 
-| # | Item | Priority | Owner |
-|---|------|----------|-------|
-| 1 | **beardog.exe** — `UnixStream` not `#[cfg(unix)]` gated | P1 | bearDog |
-| 2 | **toadstool.exe** — `toadstool_runtime_gpu` unavailable on Windows | P1 | toadStool |
-| 3 | **coralreef.exe** — `unix_jsonrpc` imports not gated | P1 | coralReef |
+| # | Item | Priority | Owner | Status |
+|---|------|----------|-------|--------|
+| 1 | **beardog.exe** — `UnixStream` not `#[cfg(unix)]` gated | P1 | bearDog | **OPEN** |
+| 2 | ~~**toadstool.exe** — GPU module~~ | ~~P1~~ | ~~toadStool~~ | **FIXED** (S347, `2df71399b`) |
+| 3 | ~~**coralreef.exe** — unix_jsonrpc~~ | ~~P1~~ | ~~coralReef~~ | **FIXED** (`339eeb7` + `edcd696`) |
 
-Windows depot: **11/14 fresh** (sporeGate rebuilt). 3 blocked on code-team platform fixes.
+Windows depot: **13/14 ready** (toadStool + coralReef fixed, sporeGate can rebuild). Only beardog.exe remains blocked.
 
 ---
 
 ## TEAMS — ACTIVE vs STANDBY
 
-### ACTIVE (5 teams — blocking NUCLEUS lifecycle or depot)
+### ACTIVE (2 teams — blocking NUCLEUS lifecycle)
 
 | Team | Gate | What They Must Do |
 |------|------|-------------------|
 | **biomeOS** | eastGate | **P1**: Graph executor riboCipher fix. BTSP composition broker. Consume cellMembrane boot_order for composition lifecycle. Socket unification + evaporation. |
-| **bearDog** | eastGate | **P1**: `crypto.sign_ed25519` (Provenance 7/7). Windows platform gating (`UnixStream`). |
-| **cellMembrane** | sporeGate | **P1**: DNS manifest/generators (`dns.configure`/`dns.apply`). Composition lifecycle integration with biomeOS. boot_order enforcement SHIPPED (b7707ee). |
-| **toadStool** | strandGate | **P1**: Windows GPU module stub (blocks `toadstool.exe` in depot). |
-| **coralReef** | strandGate | **P1**: Push Windows cross-compile fixes (blocks `coralreef.exe` in depot). glibc depot validation. |
+| **bearDog** | eastGate | **P1**: `crypto.sign_ed25519` (Provenance 7/7). Windows platform gating (`UnixStream` → beardog.exe, last stale depot binary). |
 
-### STANDBY (7 teams — work complete, close IDE until needed)
+### STANDBY (10 teams — work complete, close IDE until needed)
 
 | Team | Gate | Why Standby | Resume When |
 |------|------|-------------|-------------|
-| **songBird** | eastGate | P0 fixed. `d9bda555` shipped. 14,835 tests. Operational on all gates. | biomeOS composition lifecycle needs TCP registration (P2). |
-| **sweetGrass** | westGate | G3 E2E validated. braid_id→UUID fix shipped (`4b5167b`). 1,639 tests. | bearDog crypto.sign ships (Provenance 7/7). |
-| **rhizoCrypt** | westGate | G3 closed. Cross-compile clean (4 targets). `--bind` alias shipped. 1,900 tests, 93.8% coverage. | NUCLEUS lifecycle integration testing. |
-| **loamSpine** | westGate | Registry drift fixed. `--bind` alias shipped. 1,739 tests. | bearDog crypto.sign ships (Provenance 7/7). |
-| **nestGate** | westGate | CAS on ZFS verified. 13,095+ tests. Deep debt complete. Zero unsafe. | AlphaFold ingestion pipeline. |
-| **petalTongue** | westGate | Stable. 6,605 tests. v1.7.0. | WASM pipeline validation on deployed gates. |
-| **squirrel** | westGate | Stable. 763 tests. | Capability registration testing with biomeOS. |
+| **cellMembrane** | sporeGate | boot_order SHIPPED (b7707ee). `dns.configure`/`dns.apply` SHIPPED (2b82722, 1,247 tests). | biomeOS needs composition lifecycle integration. |
+| **toadStool** | strandGate | S347 Windows fix SHIPPED (`2df71399b`). 9,193 tests. depot unblocked. | sporeGate depot rebuild of `toadstool.exe`. |
+| **coralReef** | strandGate | Windows fix + `--bind` alias SHIPPED (`edcd696`). 3,527 tests. STANDBY-ready. | sporeGate depot rebuild of `coralreef.exe`. |
+| **songBird** | eastGate | P0 fixed. `d9bda555` shipped. 14,835 tests. | biomeOS TCP registration (P2). |
+| **sweetGrass** | westGate | G3 E2E + UUID fix shipped. 1,639 tests. | bearDog crypto.sign (Provenance 7/7). |
+| **rhizoCrypt** | westGate | Cross-compile clean. `--bind` alias. 1,900 tests, 93.8% coverage. | NUCLEUS lifecycle testing. |
+| **loamSpine** | westGate | Registry fixed. `--bind` alias. 1,739 tests. | bearDog crypto.sign (Provenance 7/7). |
+| **nestGate** | westGate | CAS verified. 13,095+ tests. Zero unsafe. | AlphaFold ingestion. |
+| **petalTongue** | westGate | Stable. 6,605 tests. v1.7.0. | WASM validation. |
+| **squirrel** | westGate | Stable. 763 tests. | Capability testing. |
 
 ### GATE STANDBY
 
@@ -101,7 +101,7 @@ Windows depot: **11/14 fresh** (sporeGate rebuilt). 3 blocked on code-team platf
 |------|--------|------|
 | **eastGate** | Overwatch. | Coordinate biomeOS + bearDog. Windows CI gate. |
 | **westGate** | Broker LIVE. 704 caps. 3,216 CAS. | **Add Compute Trio → second NUCLEUS.** Then AlphaFold. |
-| **sporeGate** | 9/11 healthy. Depot 33 binaries. | DNS manifest fixes. Await 3 code-team platform gates. |
+| **sporeGate** | 9/11 healthy. Depot 33 binaries. | **Rebuild toadstool.exe + coralreef.exe** (fixes shipped). Await beardog.exe. |
 
 ---
 
@@ -114,7 +114,7 @@ Windows depot: **11/14 fresh** (sporeGate rebuilt). 3 blocked on code-team platf
 | Signal graphs | **27** |
 | BTSP | **13/13** |
 | Linux depot | **19/19** (16 musl + 3 glibc) |
-| Windows depot | **11/14 fresh** (3 blocked on platform gating) |
+| Windows depot | **13/14 ready** (toadStool + coralReef fixed; beardog.exe stale) |
 | Gates online | **10** |
 | strandGate NUCLEUS caps | **1,742** |
 | strandGate IPC methods | **674** |
@@ -123,6 +123,7 @@ Windows depot: **11/14 fresh** (sporeGate rebuilt). 3 blocked on code-team platf
 | Provenance Trio | **6/7** (bearDog crypto blocks 7/7) |
 | sweetGrass P2 UUID | **FIXED** (`4b5167b`) |
 | cellMembrane boot_order | **SHIPPED** (b7707ee) |
+| cellMembrane dns.configure | **SHIPPED** (2b82722, 1,247 tests) |
 | Fossilized dimensions | **13** |
 | P0s | **ZERO** |
 
@@ -148,7 +149,7 @@ End state:   NUCLEUS self-managing on multiple gates via biomeOS
 
 ---
 
-*Wave 155j — NUCLEUS ACHIEVED on strandGate (8/9 healthy, 1,742 caps, sub-ms GPU).
-blueGate 13/13 on Windows. sweetGrass P2 fixed. cellMembrane boot_order shipped.
-Windows depot 11/14. 7 teams STANDBY, 5 ACTIVE. Remaining: biomeOS lifecycle,
-bearDog crypto.sign, 3 Windows platform gates. ~63K+ tests. 10 gates.*
+*Wave 155j — NUCLEUS ACHIEVED. toadStool S347 + coralReef --bind + cellMembrane
+dns.configure all shipped. Windows depot 13/14 ready. 10 teams STANDBY, 2 ACTIVE
+(biomeOS + bearDog). Remaining: biomeOS composition lifecycle, bearDog crypto.sign +
+Windows platform gate. ~63K+ tests. 10 gates. 13 fossilized dimensions.*

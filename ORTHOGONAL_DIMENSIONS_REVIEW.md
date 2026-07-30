@@ -59,7 +59,10 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] barraCuda `MultiDevicePool` wired into primal startup (`device.pool` IPC method)
 - [x] sporeGate DNS/DHCP topology fixes (dnsmasq, DHCP DNS option, `sporegate.primals.local`)
 - [ ] 2 enrolling gates have no published heads in `heads/*.toml`
-- [ ] **Windows depot 3/14 stale** — bearDog, toadStool, coralReef need platform gating fixes
+- [x] toadStool S347 Windows cross-compile fix shipped (`2df71399b`) — `toadstool.exe` depot unblocked
+- [x] coralReef Windows fix + `--bind` alias shipped (`edcd696`) — `coralreef.exe` depot unblocked
+- [x] cellMembrane `dns.configure`/`dns.apply` SHIPPED (2b82722) — manifest-driven zone generation, 1,247 tests
+- [ ] **Windows depot 1/14 stale** — only beardog.exe blocked (`UnixStream` not gated)
 - [ ] **Windows CI gate** — `cargo check --target x86_64-pc-windows-gnu` not yet in CI
 - [ ] **biomeOS composition lifecycle** — boot_order shipped but biomeOS doesn't consume it yet
 - [ ] **DNS manifest/generator gap** — topology drifts from manifest (sporeGate AAR)
@@ -306,7 +309,8 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [x] biomeOS cross-platform socket templates (named pipes + TCP fallback)
 - [x] ~~Windows genomeBins stale~~ — **11/14 fresh** (sporeGate rebuilt Wave 155j). 3 blocked on code-team platform gates.
 - [x] ~~**songBird Windows platform gate (P0)**~~ — **FIXED + IN DEPOT** (`d9bda555`, 21.3 MB)
-- [ ] **3 Windows binaries blocked**: beardog.exe (UnixStream), toadstool.exe (GPU module), coralreef.exe (unix_jsonrpc)
+- [x] ~~toadstool.exe blocked~~ — **FIXED** (S347 `2df71399b`). ~~coralreef.exe blocked~~ — **FIXED** (`edcd696`)
+- [ ] **1 Windows binary blocked**: beardog.exe (`UnixStream` not `#[cfg(unix)]` gated)
 - [ ] **No Windows CI gate** — `cargo check --target x86_64-pc-windows-gnu` would catch platform gates
 - [ ] macOS genomeBins — check-pass only, no linker for cross-build from Linux
 - [ ] `target`/`bind_mode` field removal — primals auto-detect, depot negotiates
