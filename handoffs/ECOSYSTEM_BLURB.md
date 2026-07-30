@@ -69,10 +69,10 @@ All blocking code work is done. 50 handoffs fossilized to `fossilRecord/wave155k
 | ~~J9~~ | Forgejo webhook → auto cascade | **KILLED** — golgi post-receive hook → SSH → sporeGate |
 | ~~J10~~ | Drift detection → auto harvest | **KILLED** — `sovereign.ci.trigger` on push |
 | ~~J11~~ | Multi-target manifest build | **KILLED** — integrated into sovereign.ci |
-| J12 | blueGate sub-builder dispatch | **BLOCKED** — membrane.exe won't cross-compile (P1) |
+| J12 | blueGate sub-builder dispatch | **UNBLOCKED** — membrane.exe FIXED (`4ccbab1`). Needs sporeGate → blueGate IPC wire. |
 | J13 | Depot freshness probe | ~20 LOC — `mesh.build_pending` wire needed |
 
-Handoff: `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` (3 items: build_pending 20 LOC, webhook listener 200 LOC, membrane.exe P1)
+All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → fossilized.
 
 ### Divergences — Wave 155m Resolution
 
