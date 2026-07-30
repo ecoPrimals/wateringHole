@@ -1,58 +1,58 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-30T13:00:00Z
+# Gate: sporeGate | Updated: 2026-07-30T16:40:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-30T14:10:00Z"
-wave = "155k"
+updated = "2026-07-30T16:40:00Z"
+wave = "155m"
 
 [heads]
-bearDog = "d6b1003"
+bearDog = "5e80b53"
 songBird = "9046664"
 nestGate = "6b6d484"
-biomeOS = "4e8f00c"
+biomeOS = "b0b6046"
 rhizoCrypt = "d4972b0"
 squirrel = "a9493a8"
 sweetGrass = "ab887e8"
-loamSpine = "d79231a"
+loamSpine = "5b3cabf"
 skunkBat = "b0df971"
 coralReef = "edcd696"
 barraCuda = "3460368"
-petalTongue = "f61c808"
-toadStool = "2df7139"
+petalTongue = "71c95c7"
+toadStool = "92aeb14"
 sourDough = "3a0b52d"
-cellMembrane = "2b82722"
+cellMembrane = "4e77ffd"
 primalSpring = "05e72e4"
-wateringHole = "0bf147c"
+wateringHole = "428c3d1"
 sporePrint = "67cc325"
 
 [deploy]
-songbird_version = "0.2.1+ (9046664) — TCP registration fix + shared ServiceRegistry + Windows maturity"
-beardog_version = "0.9.0 (d6b1003) — crypto.sign_ed25519 real signing + Windows platform gating"
-biomeos_version = "4.47 (4e8f00c) — NUCLEUS orchestrator, riboCipher fix, socket unification, composition lifecycle"
-membrane_version = "0.1.0 (2b82722) — dns.configure/dns.apply + magic number centralization"
-depot_status = "FRESH — 16 musl + 3 gnu + 14 windows binaries, ALL targets current, BLAKE3 verified"
+songbird_version = "0.2.1+ (9046664) — TCP registration fix + shared ServiceRegistry"
+beardog_version = "0.9.0+ (5e80b53) — dual-socket fix + 94 orphan files purged (-19,214 lines)"
+biomeos_version = "4.49 (b0b6046) — capability wipe cycle fix, 3-strike prune threshold"
+membrane_version = "0.1.0 (4e77ffd) — reqwest purged, sovereign HTTP client, steamGate user-space, membrane.exe FIXED"
+depot_status = "FRESH — 16 musl + 3 gnu + 15 windows = 34 x86_64 binaries, ALL targets current, BLAKE3 verified"
 mesh_status = "9-GATE MESH (blueGate enrolled, handshake active)"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active — sovereign CI LIVE"
 
 [tower]
-status = "TOWER ATOMIC LIVE — 3/3 restarted with Wave 155k binaries"
-songbird = "LIVE — 90466648, TCP :7700, federation active, TCP registration fix deployed"
-beardog = "LIVE — 0.9.0, crypto.sign_ed25519 REAL SIGNING (d6b1003)"
+status = "TOWER ATOMIC — biomeOS v4.49 + bearDog 155m deployed"
+songbird = "LIVE — 9046664, TCP :7700, federation active"
+beardog = "DEPLOYED — 5e80b53, dual-socket fix, crypto.sign_ed25519"
 skunkbat = "LIVE (PUBLIC)"
 
 [gate_status]
 probes_ok = 10
 probes_degraded = 1
 total_probes = 11
-depot_integrity = "OK — 16 verified, 0 hash mismatch (checksums regenerated after sovereign CI rebuilds)"
+depot_integrity = "OK — 16 verified, 0 hash mismatch"
 primals_alive = "OK — 13/13 alive"
 depot_freshness = "OK — 13/13 binaries present"
 sovereignty_tls = "OK — depot.primals.eco 200"
 sovereignty_relay = "OK — RustDesk hbbs+hbbr"
-sovereignty_content = "OK — depot serving 8543KB"
+sovereignty_content = "OK — depot serving 8459KB"
 sovereignty_auth = "OK — beardog responding via neuralAPI"
 service_crash_loop = "OK — 14 services scanned, no crash loops"
 vcs_parity = "OK — 0 repos drifted (full cascade completed)"
@@ -60,28 +60,28 @@ mesh_reachability = "OK — 3 peers, 3 reachable"
 rootpulse_ledger = "DEGRADED — not yet implemented (cellMembrane)"
 
 [harvest]
-wave = "155k"
-harvested = "2026-07-30T12:50:00Z"
+wave = "155m"
+harvested = "2026-07-30T16:35:00Z"
 x86_64_musl = 16
 x86_64_gnu = 3
-x86_64_windows = 14
+x86_64_windows = 15
 provenance = "builder=sporeGate, toolchain=rustc 1.96.1, mingw=x86_64-w64-mingw32-gcc"
-golgi_pushed = "CONFIRMED — all 3 targets synced"
-rebuilt = "beardog(d6b1003), biomeos(4e8f00c), toadstool(2df7139), coralreef(edcd696), membrane(2b82722) for musl+gnu+windows"
-note = "Wave 155k: 3 previously blocked Windows .exe now compile (beardog, toadstool, coralreef). biomeOS v4.47 NUCLEUS orchestrator. bearDog crypto.sign_ed25519. cellMembrane dns.configure/dns.apply."
-checksums = "BLAKE3 regenerated — 33 binaries verified (16 musl + 3 gnu + 14 windows)"
+golgi_pushed = "CONFIRMED — all 3 targets synced + membrane.exe NEW"
+rebuilt = "beardog(5e80b53), biomeos(b0b6046), toadstool(92aeb14), petaltongue(71c95c7), membrane(4e77ffd) for musl+gnu+windows"
+note = "Wave 155m: 5 code team shipments rebuilt. membrane.exe NOW COMPILES (P1 fixed). Depot 15/15 Windows .exe. biomeOS v4.49. bearDog orphan purge."
+checksums = "BLAKE3 regenerated — 34 x86_64 binaries verified (16 musl + 3 gnu + 15 windows)"
 
 [nucleus_redeploy]
-wave = "155k"
-biomeos = "v4.47 (4e8f00c) — NUCLEUS orchestrator deployed, COORDINATED MODE active"
-beardog = "0.9.0 (d6b1003) — crypto.sign_ed25519 real signing deployed"
-membrane = "0.1.0 (2b82722) — dns.configure/dns.apply installed locally + depot"
-tower_status = "LIVE — beardog + songbird + skunkbat restarted with new binaries"
+wave = "155m"
+biomeos = "v4.49 (b0b6046) — capability wipe cycle fix, 3-strike prune threshold, deployed"
+beardog = "0.9.0+ (5e80b53) — dual-socket fix + orphan purge, deployed"
+membrane = "0.1.0 (4e77ffd) — reqwest purged, sovereign HTTP, steamGate user-space, membrane.exe P1 FIXED"
+tower_status = "DEPLOYED — biomeOS v4.49 + bearDog 155m + songBird TCP fix"
 
 [services_golgi]
-caddy = "RUNNING — /opt/membrane/caddy, 12 sites, /depot/ prefix routing"
+caddy = "RUNNING — /opt/membrane/caddy, 12 sites"
 step_ca = "ACTIVE — ca.primals.eco, v0.30.2, SSH CA enabled"
-depot = "LIVE — depot.primals.eco, 200 OK, all 3 target dirs serving"
+depot = "LIVE — depot.primals.eco, 200 OK, 15/15 Windows .exe serving (membrane.exe NEW)"
 rustdesk_hbbs = "OK"
 rustdesk_hbbr = "OK"
 
@@ -90,8 +90,8 @@ wave = "155i"
 wg_peer = "REGISTERED"
 wg_status = "LIVE — handshake active"
 ssh_key = "REGISTERED — Forgejo key ID 14"
-tower_status = "READY — all Windows .exe now in depot (beardog, toadstool, coralreef unblocked)"
-sub_builder = "READY — G10 goal, blueGate as Windows build accelerator"
+tower_status = "READY — 15/15 Windows .exe in depot (membrane.exe NOW AVAILABLE)"
+sub_builder = "UNBLOCKED — membrane.exe compiles, blueGate can run membrane natively"
 
 [resolved]
 tower_atomic = "COMPLETE — 7/7 debt resolved"
@@ -101,26 +101,32 @@ depot_content_routing = "DONE (155i) — /depot/ prefix strip"
 membrane_j6 = "DONE (155i) — gate.configure + gate.apply"
 songbird_windows_p0 = "DONE (155i) — depot binary rebuilt with TCP fallback"
 deep_debt_refresh = "DONE (155i) — 8 primals rebuilt from deep-debt commits"
-windows_depot_14_14 = "DONE (155k) — ALL 14 Windows .exe compile and serve (beardog, toadstool, coralreef unblocked)"
-biomeos_v447 = "DONE (155k) — NUCLEUS orchestrator deployed (riboCipher fix, socket unification, composition lifecycle)"
-beardog_crypto_sign = "DONE (155k) — crypto.sign_ed25519 real signing deployed (Provenance 7/7 unblock)"
-membrane_dns = "DONE (155k) — dns.configure/dns.apply generators shipped (2b82722)"
+windows_depot_14_14 = "DONE (155k) → 15/15 (155m) — membrane.exe P1 FIXED"
+biomeos_v447 = "DONE (155k) → v4.49 (155m) — capability wipe cycle fix"
+beardog_crypto_sign = "DONE (155k) — crypto.sign_ed25519 + dual-socket fix (155m)"
+membrane_dns = "DONE (155k) — dns.configure/dns.apply generators shipped"
 dhcp_dns_fix = "DONE (155i) — DHCP DNS option corrected"
+sovereign_ci = "DONE (155k) — J9+J10+J11 killed, push-to-deploy live"
+membrane_exe_p1 = "DONE (155m) — UnixStream #[cfg(unix)] gated, membrane.exe compiles + in depot"
+beardog_orphan_purge = "DONE (155m) — 94 files, -19,214 lines"
+reqwest_purge = "DONE (155m) — sovereign HTTP/1.1 client, pure-Rust TLS"
 
 [pipeline_automation]
-wave = "155k"
-status = "SOVEREIGN CI LIVE — J9+J10+J11 killed. Push-to-deploy automated. Validated E2E."
+wave = "155m"
+status = "SOVEREIGN CI LIVE — J9+J10+J11 killed. J12 UNBLOCKED (membrane.exe fixed)."
 j9_push_trigger = "KILLED — SSH key plumbed, hook fires, sovereign.ci.trigger validated E2E"
 j10_cascade_auto_harvest = "KILLED — MEMBRANE_BUILD_AUTHORITY=1 set, drift pipeline active"
 j11_multi_target = "KILLED — manifest [build.*].targets verified for all primals"
-j12_sub_builder = "BLOCKED — blueGate NUCLEUS not live + membrane.exe won't compile (code team P1). SSH dispatch pattern ready."
+j12_sub_builder = "UNBLOCKED — membrane.exe P1 FIXED (4ccbab1). SSH dispatch pattern ready. Needs blueGate NUCLEUS."
 j13_mesh_notify = "PARTIAL — depot.updated WORKS (songBird UDS). build_pending is stub-only (~20 LOC to wire)."
-phase_a = "DONE — SSH key + env var + membrane binary + cargo symlinks + /etc/environment. Validated: squirrel build+sandbox+push E2E"
-phase_b = "WAITING — blueGate NUCLEUS live → SSH dispatch for Windows builds → J12 killed"
+phase_a = "DONE — sovereign CI live, validated E2E"
+phase_b = "UNBLOCKED — membrane.exe compiles. blueGate can run membrane natively. Need SSH dispatch wiring."
 phase_c = "POLISH — HTTP webhook listener, build queue, provenance signing chain"
 
 [code_team_flags]
 mesh_socket = "FLAGGED — songBird mesh relay socket"
 rootpulse = "FLAGGED — cellMembrane rootpulse not implemented"
-membrane_windows = "P1 — UnixStream + handshake_async not #[cfg(unix)] gated (membrane.exe still blocked)"
-dns_configure = "SHIPPED (155k) — cellMembrane dns.configure/dns.apply in 2b82722"
+membrane_windows = "RESOLVED (155m) — membrane.exe compiles and serves from depot"
+dns_configure = "SHIPPED (155k) — cellMembrane dns.configure/dns.apply"
+socket_evaporation = "P2 OPEN — biomeOS health ping format needs RPC tolerance"
+binary_path_retention = "P2 OPEN — biomeOS loses binary path during auto-discovery"
