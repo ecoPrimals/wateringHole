@@ -320,9 +320,24 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 
 ALL ITEMS RESOLVED. Moved to Fossilized section below.
 
-## ~~10. Jelly Strings — Deployment Automation~~ → **FOSSILIZED as F13** (Wave 155i)
+## 10. Jelly Strings — Deployment Automation (**REOPENED** Wave 155k)
 
-Manual deployment loops → primal-native automation: **ACHIEVED**. Moved to Fossilized section below.
+J1–J8 fossilized as F13 (Wave 155i). New jelly strings identified in the depot
+publish pipeline — every manual `plasmid.harvest` and `temporal.cascade` is a
+jelly string to kill.
+
+**New jelly strings (Wave 155k)**:
+
+- [ ] **J9**: Cascade trigger — Forgejo webhook → auto `temporal.cascade` (cellMembrane `webhook/pipeline.rs`)
+- [ ] **J10**: Build trigger — post-cascade diff detection → auto `plasmid.harvest --primal <changed> --push`
+- [ ] **J11**: Multi-target build — manifest-driven target selection (read gate compositions, build all needed arches)
+- [ ] **J12**: Sub-builder dispatch — sporeGate dispatches Windows builds to blueGate via songBird IPC
+- [ ] **J13**: Depot freshness probe — continuous SHA comparison (heads/*.toml vs depot provenance) + mesh alert on drift
+
+**Pipeline target**: Forgejo push → cascade → diff → build → checksum → depot push → verify. Zero human.
+
+**Owner**: cellMembrane (J9, J10, J13) + sporeGate (J11, J12) + blueGate (J12 sub-builder)
+**Handoff**: `SPOREGATE_DEPOT_REBUILD_NUCLEUS_PIPELINE_WAVE155k.md`
 
 ## 11. Campus / Physical Infrastructure
 
@@ -439,19 +454,20 @@ completeness.
 
 ---
 
-**Active**: 8 dimensions (1–5, 7–8, 11)
+**Active**: 9 dimensions (1–5, 7–8, 10–11)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155j — **NUCLEUS ACHIEVED** on strandGate (first gate: 8/9 healthy,
-1,742 caps, 674 IPC methods, sub-ms GPU). blueGate 13/13 on Windows (147 MB, infra proof).
-Windows depot 11/14 fresh. sweetGrass P2 UUID fixed. cellMembrane boot_order shipped.
-**Remaining**: biomeOS composition lifecycle (consume boot_order, riboCipher graph executor,
-socket fixes), bearDog `crypto.sign_ed25519` (Provenance 7/7), 3 Windows platform gates
-(bearDog, toadStool, coralReef), DNS manifest generators. 7 teams STANDBY, 5 ACTIVE.
-8 active dimensions, 13 fossilized. ~63K+ tests. 10 gates.
+**Summary**: Wave 155k — **ALL CHAINS CLOSED.** biomeOS v4.47 NUCLEUS orchestrator
+shipped (riboCipher fix, socket unification, capability persistence, composition lifecycle).
+bearDog crypto.sign_ed25519 + Windows platform gating shipped. 14/14 Windows platform gates
+fixed (sporeGate rebuild pending). Provenance 7/7 UNBLOCKED. ZERO P0s. ZERO P1s.
+12 teams STANDBY. Jelly Strings D10 REOPENED for J9–J13 (automated depot pipeline).
+Next: sporeGate depot rebuild, NUCLEUS redeploy with v4.47, Provenance 7/7 live validation.
+9 active dimensions, 13 fossilized. ~63K+ tests. 10 gates.
 
 ---
 
-*Last used*: Wave 155i (Jul 29, 2026)
+*Last used*: Wave 155k (Jul 30, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 155i (F13 — Jelly Strings)
+*Latest fossilization*: Wave 155i (F13 — Jelly Strings J1–J8)
+*Latest reopen*: Wave 155k (D10 — Jelly Strings J9–J13)

@@ -92,20 +92,21 @@ Atomic or higher compositions.
 **Posture**: ZERO P0s. Composition broker SHIPPED (biomeOS v4.45). Nest Atomic
 LIVE on westGate. Deep debt wave complete — 8 primals shipped simultaneous
 sweeps. CAS on ZFS verified. RTX 3090 GPU profiled. sporeGate depot refreshed.
-**NEXT**: blueGate full atomic stack (Tower → Nest → Node) on Windows.
+**NEXT**: sporeGate depot rebuild + automated pipeline. westGate second NUCLEUS.
 
 | Fact | Value |
 |------|-------|
-| Wave | 155i |
+| Wave | 155k |
 | Primals | 15 (13 active + 2 dormant) |
 | Tests | ~63K+ `#[test]` attributes across primals |
 | BTSP | 13/13 — all primals ship bearDog ClientHello |
 | Signal graphs | 27 (Tower 8, Nest 9, Node 3, Meta 5, Braid 2) |
-| Depot | 19 binaries refreshed (16 musl + 3 glibc), BLAKE3 19/19 verified |
-| Gates online | 9+ (westGate Nest Atomic LIVE, strandGate Tower+Compute LIVE) |
-| Jelly strings | 7/8 resolved (J8 deployed) |
+| Depot | 33 binaries (16 musl + 3 glibc + 14 Windows), 14/14 Windows code-ready |
+| Gates online | 10 (strandGate NUCLEUS, blueGate 13/13 Windows) |
+| Jelly strings | J1–J8 CLOSED (F13). J9–J13 OPEN (automated depot pipeline) |
 | Forgejo | `ssh://git@git.primals.eco:2222/` — canonical remote (PUBLIC) |
-| P0s | **ZERO** — composition broker shipped, glibc fixed, WG DNS fixed |
+| P0s | **ZERO** |
+| P1s | **ZERO** — all chains closed |
 
 ### Gate-Team Assignments
 

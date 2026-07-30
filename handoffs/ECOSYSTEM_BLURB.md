@@ -69,6 +69,10 @@ All platform gates fixed. sporeGate needs to rebuild 3 `.exe` files:
 
 Windows depot: **14/14 code-ready.** sporeGate rebuild pending.
 
+**Handoff**: `SPOREGATE_DEPOT_REBUILD_NUCLEUS_PIPELINE_WAVE155k.md` — 4 phases:
+rebuild 3 `.exe`, redeploy NUCLEUS with biomeOS v4.47, wire automated publish
+pipeline (J9–J13), enable blueGate as sub-builder.
+
 ---
 
 ## TEAMS — ACTIVE vs STANDBY
@@ -131,7 +135,8 @@ Windows depot: **14/14 code-ready.** sporeGate rebuild pending.
 | bearDog | **14,019 tests**, crypto.sign + Windows gate shipped |
 | cellMembrane boot_order | **SHIPPED** (b7707ee) |
 | cellMembrane dns.configure | **SHIPPED** (2b82722, 1,247 tests) |
-| Fossilized dimensions | **13** |
+| Active dimensions | **9** (D10 Jelly Strings REOPENED for J9–J13) |
+| Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
 | P1s | **ZERO** — all chains closed |
 
