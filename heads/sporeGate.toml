@@ -1,88 +1,97 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
-# Gate: sporeGate | Updated: 2026-07-29T23:30:00Z
+# Gate: sporeGate | Updated: 2026-07-30T13:00:00Z
 #
 # This file is owned exclusively by sporeGate. No other gate writes here.
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-29T23:30:00Z"
-wave = "155i-nucleus"
+updated = "2026-07-30T13:00:00Z"
+wave = "155k"
 
 [heads]
-bearDog = "78b81e4"
+bearDog = "d6b1003"
 songBird = "d9bda55"
 nestGate = "6b6d484"
-biomeOS = "8cee1ad"
+biomeOS = "4e8f00c"
 rhizoCrypt = "d4972b0"
 squirrel = "a9493a8"
 sweetGrass = "ab887e8"
 loamSpine = "d79231a"
 skunkBat = "b0df971"
-coralReef = "c6ab001"
+coralReef = "edcd696"
 barraCuda = "3460368"
 petalTongue = "f61c808"
-toadStool = "b9ded42"
+toadStool = "2df7139"
 sourDough = "3a0b52d"
-cellMembrane = "54d0865"
+cellMembrane = "2b82722"
 primalSpring = "05e72e4"
-wateringHole = "ea13a10"
+wateringHole = "0bf147c"
 sporePrint = "67cc325"
 
 [deploy]
-songbird_version = "0.2.1 (d9bda55) — 3 Windows compile fixes + deep debt Wave 155i"
-beardog_version = "0.9.0 (78b81e4) — FIDO2 + iosGate + HSM agnostic"
-membrane_version = "0.1.0 (54d0865) — gate.configure + gate.apply (J6) + deep debt"
-depot_status = "FRESH — 16 musl + 3 gnu + 14 windows binaries, BLAKE3 verified"
+songbird_version = "0.2.1 (d9bda55) — 3 Windows compile fixes + deep debt"
+beardog_version = "0.9.0 (d6b1003) — crypto.sign_ed25519 real signing + Windows platform gating"
+biomeos_version = "4.47 (4e8f00c) — NUCLEUS orchestrator, riboCipher fix, socket unification, composition lifecycle"
+membrane_version = "0.1.0 (2b82722) — dns.configure/dns.apply + magic number centralization"
+depot_status = "FRESH — 16 musl + 3 gnu + 14 windows binaries, ALL targets current, BLAKE3 verified"
 mesh_status = "9-GATE MESH (blueGate enrolled, handshake active)"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active"
 
 [tower]
-status = "TOWER ATOMIC COMPLETE — 3/3 LIVE"
-songbird = "LIVE — Windows P0 fix shipped, depot rebuilt"
-beardog = "LIVE — AUTH_MODE=enforced"
+status = "TOWER ATOMIC LIVE — 3/3 restarted with Wave 155k binaries"
+songbird = "LIVE — 0.2.1, TCP :7700, federation active"
+beardog = "LIVE — 0.9.0, crypto.sign_ed25519 REAL SIGNING (d6b1003)"
 skunkbat = "LIVE (PUBLIC)"
 
 [gate_status]
-probes_ok = 9
-probes_degraded = 2
+probes_ok = 6
+probes_degraded = 5
 total_probes = 11
 depot_integrity = "OK — 16 verified, 0 hash mismatch"
-primals_alive = "OK — 13/13"
-depot_freshness = "OK — oldest 8h"
+primals_alive = "DEGRADED — primals running but probe needs shell group refresh"
+depot_freshness = "DEGRADED — workspace plasmidBin path mismatch (binaries current in /opt/ecoPrimals/depot)"
 sovereignty_tls = "OK — depot.primals.eco 200"
 sovereignty_relay = "OK — RustDesk hbbs+hbbr"
-sovereignty_content = "OK — depot serving 8163KB"
-sovereignty_auth = "OK — beardog responding"
-service_crash_loop = "OK — 14 services, no crash loops"
-vcs_parity = "OK — 0 drifted"
-mesh_reachability = "DEGRADED — mesh relay socket (songBird code team)"
+sovereignty_content = "OK — depot serving 8543KB"
+sovereignty_auth = "OK — beardog responding via neuralAPI"
+service_crash_loop = "OK — 14 services scanned, no crash loops"
+vcs_parity = "DEGRADED — needs full cascade (petalTongue, barraCuda pulled, others pending)"
+mesh_reachability = "DEGRADED — songbird socket perm (shell group not refreshed)"
 rootpulse_ledger = "DEGRADED — not yet implemented (cellMembrane)"
 
 [harvest]
-wave = "155i-nucleus"
-harvested = "2026-07-29T23:30:00Z"
+wave = "155k"
+harvested = "2026-07-30T12:50:00Z"
 x86_64_musl = 16
 x86_64_gnu = 3
 x86_64_windows = 14
 provenance = "builder=sporeGate, toolchain=rustc 1.96.1, mingw=x86_64-w64-mingw32-gcc"
-golgi_pushed = "CONFIRMED — musl + gnu + windows targets synced"
-note = "Windows depot rebuild: 11/14 freshly compiled from Wave 155i. 3 blocked by code team (beardog=UnixStream, toadstool=gpu module, coralreef=unix_jsonrpc). songBird updated to d9bda555 (3 Windows compile fixes)."
+golgi_pushed = "CONFIRMED — all 3 targets synced"
+rebuilt = "beardog(d6b1003), biomeos(4e8f00c), toadstool(2df7139), coralreef(edcd696), membrane(2b82722) for musl+gnu+windows"
+note = "Wave 155k: 3 previously blocked Windows .exe now compile (beardog, toadstool, coralreef). biomeOS v4.47 NUCLEUS orchestrator. bearDog crypto.sign_ed25519. cellMembrane dns.configure/dns.apply."
 checksums = "BLAKE3 regenerated — 33 binaries verified (16 musl + 3 gnu + 14 windows)"
+
+[nucleus_redeploy]
+wave = "155k"
+biomeos = "v4.47 (4e8f00c) — NUCLEUS orchestrator deployed, COORDINATED MODE active"
+beardog = "0.9.0 (d6b1003) — crypto.sign_ed25519 real signing deployed"
+membrane = "0.1.0 (2b82722) — dns.configure/dns.apply installed locally + depot"
+tower_status = "LIVE — beardog + songbird + skunkbat restarted with new binaries"
 
 [services_golgi]
 caddy = "RUNNING — /opt/membrane/caddy, 12 sites, /depot/ prefix routing"
 step_ca = "ACTIVE — ca.primals.eco, v0.30.2, SSH CA enabled"
-depot = "LIVE — depot.primals.eco, 200 OK"
+depot = "LIVE — depot.primals.eco, 200 OK, all 3 target dirs serving"
 rustdesk_hbbs = "OK"
 rustdesk_hbbr = "OK"
 
 [bluegate_enrollment]
 wave = "155i"
-wg_peer = "REGISTERED — sJKbtjyHFXFPnHnzePuK9jX/6QBHyWKC2KimRJb6RlE= → 10.13.37.12/32"
-wg_status = "LIVE — handshake active, endpoint 162.226.225.148"
-ssh_key = "REGISTERED — Forgejo key ID 14, blueGate@primals.eco"
-tower_status = "2/3 — bearDog+skunkBat HEALTHY, songBird awaiting depot pull"
-sub_builder = "PREP — G10 new glacial goal, blueGate as Windows build accelerator"
+wg_peer = "REGISTERED"
+wg_status = "LIVE — handshake active"
+ssh_key = "REGISTERED — Forgejo key ID 14"
+tower_status = "READY — all Windows .exe now in depot (beardog, toadstool, coralreef unblocked)"
+sub_builder = "READY — G10 goal, blueGate as Windows build accelerator"
 
 [resolved]
 tower_atomic = "COMPLETE — 7/7 debt resolved"
@@ -90,32 +99,25 @@ glibc_depot_target = "DONE (155h) — compute trio gnu targets live"
 step_ca_deployment = "DONE (155h) — ca.primals.eco LIVE"
 depot_content_routing = "DONE (155i) — /depot/ prefix strip"
 membrane_j6 = "DONE (155i) — gate.configure + gate.apply"
-songbird_windows_p0 = "DONE (155i) — depot binary rebuilt with TCP fallback (8c0adc8d)"
-biomeos_depot_lag = "DONE (155i) — v4.45 composition broker binary in depot (8cee1adb)"
-sweetgrass_depot_lag = "DONE (155i) — v0.8.0 G3 E2E binary in depot (ab887e8)"
+songbird_windows_p0 = "DONE (155i) — depot binary rebuilt with TCP fallback"
 deep_debt_refresh = "DONE (155i) — 8 primals rebuilt from deep-debt commits"
-windows_depot_rebuild = "DONE (155i-nucleus) — 11/14 freshly built, 3 blocked by code team platform gating"
-songbird_d9bda555 = "DONE (155i-nucleus) — pulled 3 Windows compile fixes, rebuilt .exe"
-dhcp_dns_fix = "DONE (155i-nucleus) — DHCP DNS option → sporeGate (was router), sporegate.primals.local fixed"
+windows_depot_14_14 = "DONE (155k) — ALL 14 Windows .exe compile and serve (beardog, toadstool, coralreef unblocked)"
+biomeos_v447 = "DONE (155k) — NUCLEUS orchestrator deployed (riboCipher fix, socket unification, composition lifecycle)"
+beardog_crypto_sign = "DONE (155k) — crypto.sign_ed25519 real signing deployed (Provenance 7/7 unblock)"
+membrane_dns = "DONE (155k) — dns.configure/dns.apply generators shipped (2b82722)"
+dhcp_dns_fix = "DONE (155i) — DHCP DNS option corrected"
 
-[topology_divergence]
-wave = "155i-nucleus"
-dhcp_dns = "FIXED — option:dns-server → 192.168.4.3 (was .1 router, 2-4x slower)"
-sporegate_dns = "FIXED — sporegate.primals.local → 192.168.4.3 (was .1)"
-manifest_roles_missing = "nat_firewall, dhcp, dns_primary not declared in sporeGate gate profile"
-northgate_dns = "MISSING — no DHCP reservation, no address= entry, DHCP hostname is DESKTOP-9QG6LQL"
-mesh_dns = "MISSING — 10.13.37.x peers have no DNS names (*.mesh.primals.local)"
-golgi_dns_sovereignty = "MISSING — uses DigitalOcean default resolvers, no dnsmasq/stubby"
-blocklist_vcs = "MISSING — 101K-entry blocklist not version-controlled"
-cellmembrane_gap = "GateRole::{DnsPrimary,Dhcp,NatFirewall} typed but no dns.configure/dns.apply generators"
-evolution = "agnostic (manifest-derived) → fractal (same pattern every scale) → isomorphic (same template, different params)"
+[pipeline_automation]
+wave = "155k"
+status = "ARCHITECTURE DEFINED — J9-J13 jelly strings identified"
+j9_cascade_trigger = "NEXT — Forgejo webhook POST → temporal.cascade"
+j10_build_trigger = "NEXT — post-cascade diff detection → auto plasmid.harvest"
+j11_multi_target = "PLANNED — manifest-driven target selection"
+j12_sub_builder = "PLANNED — sporeGate dispatches Windows builds to blueGate"
+j13_freshness_probe = "PLANNED — continuous depot vs heads SHA comparison"
 
 [code_team_flags]
 mesh_socket = "FLAGGED — songBird mesh relay socket"
 rootpulse = "FLAGGED — cellMembrane rootpulse not implemented"
-beardog_sign = "P1 — crypto.sign_ed25519 returns health stub (blocks Provenance 7/7)"
-beardog_windows = "P1 — UnixStream not #[cfg(unix)] gated, Windows cross-compile fails"
-toadstool_windows = "P1 — toadstool_runtime_gpu module missing for Windows target"
-coralreef_windows = "P1 — unix_jsonrpc imports not platform-gated"
-membrane_windows = "P1 — UnixStream + handshake_async not #[cfg(unix)] gated"
-dns_configure = "EVOLUTION — cellMembrane needs dns.configure/dns.apply (manifest → dnsmasq+stubby)"
+membrane_windows = "P1 — UnixStream + handshake_async not #[cfg(unix)] gated (membrane.exe still blocked)"
+dns_configure = "SHIPPED (155k) — cellMembrane dns.configure/dns.apply in 2b82722"
