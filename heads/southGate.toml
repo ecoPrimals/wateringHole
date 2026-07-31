@@ -1,0 +1,73 @@
+# Gate: southGate | Enrolled: Wave 155n
+# PostPrimordial enrollment via agentic cascade from golgiBody.
+# Full NUCLEUS deployment target (house2).
+
+[meta]
+gate = "southGate"
+updated = "2026-07-31T16:40:00Z"
+wave = "155n"
+enrollment_wave = "155n"
+
+[heads]
+bearDog = "5e80b53"
+songBird = "9046664"
+nestGate = "6b6d484"
+biomeOS = "34d4ef7"
+rhizoCrypt = "4716bf5"
+squirrel = "4bcf79e"
+sweetGrass = "4b5167b"
+loamSpine = "5b3cabf"
+skunkBat = "b0df971"
+coralReef = "edcd696"
+barraCuda = "d2ccce4"
+petalTongue = "b135400"
+toadStool = "92aeb14"
+sourDough = "3a0b52d"
+cellMembrane = "111c7d2"
+primalSpring = "1cfee8c"
+wateringHole = "1f76f8c"
+plasmidBin = "f0d5432"
+
+[hardware]
+cpu = "AMD Ryzen 7 5800X3D (8c/16t, 3D V-Cache)"
+gpu = "NVIDIA GeForce RTX 4060 (8GB, Ada Lovelace)"
+ram_gb = 128
+storage = "1TB + 4TB NVMe (Samsung 990 EVO Plus)"
+os = "Pop!_OS 22.04 LTS"
+driver = "NVIDIA 580.126.18"
+
+[deploy]
+biomeos_version = "4.55.0"
+beardog_version = "0.9.0"
+songbird_version = "0.2.1"
+squirrel_version = "0.1.0"
+depot_source = "depot.primals.eco (sovereign HTTPS)"
+binary_count = 16
+binary_target = "x86_64-unknown-linux-musl"
+install_path = "~/.local/bin/"
+
+[mesh]
+wg_ip = "10.13.37.9"
+wg_status = "CONFIGURED — pubkey registered, conf pending sudo wg-quick up"
+wg_pubkey = "vd3Y4Ts84It+/Goh5mQ++yuuSR1fOi271iQYKU5TkEg="
+forgejo_ssh = "LIVE — authenticated as golgiAdmin via git.primals.eco:2222"
+
+[composition]
+target = "full_nucleus"
+primals = 13
+status = "BINARIES DEPLOYED — ready for NUCLEUS launch"
+
+[enrollment]
+step1_mesh = "PARTIAL — WG tools installed, pubkey generated, conf not yet written (needs sudo)"
+step2_forgejo = "DONE — SSH key authenticated, all repos reachable"
+step3_remotes = "DONE — 33 repos origin → Forgejo, github as push mirror"
+step4_converge = "DONE — 32/33 repos at Wave 155n HEAD (foundation not on Forgejo, non-blocking)"
+step5_binaries = "DONE — 16 musl binaries fetched from depot.primals.eco, installed to ~/.local/bin/"
+step6_validate = "PENDING — NUCLEUS launch + gate validation"
+step7_announce = "THIS FILE"
+
+[remaining]
+wg_conf_write = "needs sudo bash to write /etc/wireguard/wg0.conf (10.13.37.9/24)"
+wg_peer_add = "needs root@golgiBody: wg set wg0 peer vd3Y4Ts84It+/Goh5mQ++yuuSR1fOi271iQYKU5TkEg= allowed-ips 10.13.37.9/32"
+nucleus_launch = "binaries in place — boot order: Tower → Nest → Node → biomeOS"
+gate_validate = "after NUCLEUS stable, run primalSpring gate probe"
