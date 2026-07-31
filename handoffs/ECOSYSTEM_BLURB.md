@@ -78,8 +78,8 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 
 | Issue | Evidence | Owner | Status |
 |-------|----------|-------|--------|
-| **Respawn storm** — riboCipher-only health pings caused DEGRADED cycling → unbounded process accumulation | strandGate: 175 procs / 14 min, 538 resurrections. | **biomeOS** | **FIXED in v4.54** (`88785daf`) — dual-protocol ping: plain JSON-RPC first, BTSP fallback |
-| **Socket file deletion** — biomeOS unlinked sockets for primals that failed health ping | westGate: 31→16 sockets in 3 min (50% survival). | **biomeOS** | **FIXED in v4.54** (`88785daf`) — PID ownership + confirmed kill before unlink. Never removes sockets it didn't create. |
+| **Respawn storm** — riboCipher-only health pings caused DEGRADED cycling → unbounded process accumulation | strandGate: 175→**13** procs (1 per primal). **GATE VALIDATED.** | **biomeOS** | **FIXED + VALIDATED** v4.55 — dual-protocol ping. Kill-before-spawn. |
+| **Socket file deletion** — biomeOS unlinked sockets for primals that failed health ping | westGate: **31/31 sockets held 225+ sec** (was 31→16 in 3 min). **GATE VALIDATED.** | **biomeOS** | **FIXED + VALIDATED** v4.55 — PID ownership guard. 0% socket loss. |
 
 **Root cause for both P1s**: riboCipher and plain JSON-RPC are **facets of the same protocol layer** (riboCipher is the intra-functional framing of mitoBeacon genetics). biomeOS health monitor must speak both — ping with riboCipher first, fall back to plain JSON-RPC, or primals declare their protocol at registration. biomeOS must NEVER unlink a socket it didn't create.
 
@@ -213,8 +213,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 |------|--------|------|
 | **eastGate** | Overwatch. biomeOS + squirrel + petalTongue local. | Platform wiring (G18-G20). |
 | **sporeGate** | **11/11 HEALTHY** (perm drift to 8/11). Golgi hook FIXED (3 bugs). Depot rebuilt: 35 bins, all current. | biomeOS composition authority evolution. |
-| **westGate** | **NUCLEUS.** Prov 7/7. v4.50 deployed. Needs `999044e7` redeploy. | Redeploy biomeOS + AlphaFold ingestion. |
-| **strandGate** | **NUCLEUS.** v4.50 deployed (source). Needs `999044e7` redeploy. | Redeploy biomeOS. |
+| **westGate** | **NUCLEUS v4.55.** 31/31 sockets stable 225s. Prov 7/7 (5th pass). 835 caps. **Both P1s VALIDATED FIXED.** | AlphaFold ingestion. |
+| **strandGate** | **NUCLEUS v4.55.** 12/12 HEALTHY. 1,017 methods. 13 procs (1 each). RTX 3090 p50=0.33ms. **P1 VALIDATED FIXED.** | Node Atomic profiling. |
 | **blueGate** | **NUCLEUS** (15/15 fresh, Prov 7/7). Sub-builder UNBLOCKED. | J12 enrollment under sporeGate. |
 | **flockGate** | **DOWN** — rebooted, RustDesk locked out. May be on mesh. | **esotericWebb → ironGate** (LAN). |
 | **ironGate** | Online. 14TB+1TB+1TB+2TB. **Takes esotericWebb from flockGate.** | Tower + esotericWebb + HDD enclave. |
