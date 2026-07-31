@@ -295,6 +295,14 @@ GLACIAL:
 
 ---
 
+### SPOREPRINT (Wave 155m NUCLEUS ACHIEVED — Jul 30, 2026)
+
+sporePrint updated: NUCLEUS ACHIEVED on 3 gates, Provenance 7/7 COMPLETE,
+gen4 COMPLETE. NUCLEUS promoted to Deploy Now. 94,927 tests. ZERO P0/P1/P2.
+Next: gen5 — NUCLEUS as platform, steamGate, AlphaFold, JOSS.
+
+---
+
 *Wave 155m — gen4 COMPLETE. NUCLEUS IS THE PLATFORM: squirrel (AI agent) → biomeOS (backend)
 → petalTongue + Node Atomics (rendering + GPU) = science to videogames. ZERO P0/P1/P2.
 11/11 divergences FIXED. 6/10 jelly strings killed. Depot 35 binaries. biomeOS v4.50.
