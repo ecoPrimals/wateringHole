@@ -315,3 +315,27 @@ southGate ENROLLED (5th NUCLEUS gate pending launch). NODE ATOMIC LANDMARK: stra
 RTX 3090 — 2,130 matmul/sec, cross-atomic provenance chain E2E, W3C PROV-O, AlphaFold
 20-30/day capacity. gen5 thesis VALIDATED: "this is no longer a whitePaper." Coevolution
 COMPLETE (G21). G22 NEW: whitePaper API convergence. 9/11 jelly strings KILLED. ~101K+ tests.*
+
+---
+
+### SPOREPRINT (Wave 155n — Jul 31, 2026)
+
+**Site restructure: conceptual era → demonstration era:**
+- **Nav triage**: Top nav → Lab | Science | Architecture | Products | Get Started
+- 47 pages marked `foundation = true` (design docs, proven patterns — still accessible, not in nav)
+- Thesis/philosophy/story → Backstory section; audience/outreach/collaborators → Foundation section
+- Architecture section: 15 live pages remain, 29 design docs move to foundation
+- 4 cortical folds (down from 5), 23 sections (up from 20)
+- **Live evidence updates**: NUCLEUS maturity → "live", VALIDATED badges on 4 baseCamp papers
+  (Paper 10: QCD, Paper 14: hardware, Paper 21: provenance, Paper 24: all-silicon)
+- **barracuda_compute_gaps**: retitled "98 Capabilities LIVE", gaps → COMPLETE
+- **Homepage hero**: "NUCLEUS Is Running" — 3 gates, 13 primals, Provenance 7/7
+- **Get Started section**: deploy NUCLEUS on your hardware
+- Test totals updated: squirrel 7,138 (deep debt wave), total 101,308
+- Gate table updated: sporeGate 11/11 HEALTHY, blueGate NUCLEUS, flockGate DOWN
+
+**Remaining Phase 2/3 work (future waves):**
+- Live dashboard pages (gate status, GPU benchmarks, provenance — needs petalTongue IPC)
+- VALIDATED badges for remaining baseCamp papers with live evidence
+- Getting Started section expansion (southGate on-ramp, USB deployment guide)
+- Foundation/backstory section templates (collapsible listings, browsable archive)
