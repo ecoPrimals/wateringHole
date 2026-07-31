@@ -97,9 +97,9 @@ appears. This keeps the active review focused on evolving concerns.
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
 | strandGate | **NUCLEUS v4.55** | Linux | 10.13.37.10 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 12/12 HEALTHY, 1,017 methods, 13 procs. RTX 3090 p50=0.33ms. |
 | westGate | **NUCLEUS v4.55** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 31/31 sockets 225s. Prov 7/7 (5th pass). 835 caps. ZFS 25.4TB. |
-| blueGate | **NUCLEUS** | Windows | 10.13.37.12 | **NUCLEUS (13)** | Provenance 7/7 on Windows. 15/15 depot. Sub-builder UNBLOCKED. |
+| blueGate | **NUCLEUS v4.55** | Windows | 10.13.37.12 | **NUCLEUS (13)** | biomeOS v4.55 deployed. Prov 7/7. membrane.exe first run. **P2: platform detection.** |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
-| southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
+| southGate | **ENROLLED** | Linux | 10.13.37.9 | full (target) | 5800X3D + RTX 4060 + 128GB. 32/33 repos. 16 bins deployed. WG pending sudo. |
 | **steamGate** | **NEXT** | SteamOS | — | tower (3) | Steam Deck. Portable compute. gnu bins in depot. |
 | **darwinGate** | **GLACIAL** | macOS | — | tower (3) | Mac Mini (acquire). apple-darwin builder. |
 | **iosGate** | **GLACIAL** | iOS | — | tower (3) | iPhone. After darwinGate. Silicon deism. |
@@ -357,10 +357,10 @@ jelly string to kill.
 
 ## 12. gen5 — Full NUCLEUS as Live Platform (NEW)
 
-gen4 is COMPLETE (3 NUCLEUS gates, Provenance 7/7, Sovereign CI, biomeOS v4.50).
-gen5 is **NUCLEUS as a usable platform** — all 13 primals composing into a live system
-that serves real workloads: science, visualization, games, AI agents, and provenance-tracked
-artifacts. The science pipeline is one track through the platform, not the only one.
+gen4 is COMPLETE (4 NUCLEUS gates on v4.55, Provenance 7/7, Sovereign CI, coevolution).
+gen5 is **NUCLEUS as a usable platform** — validated by strandGate Node Atomic landmark:
+2,130 matmul/sec, cross-atomic provenance E2E (GPU→sign→verify→DAG→attribution→Merkle),
+W3C PROV-O, AlphaFold 20-30 structures/day capacity. **gen5 thesis VALIDATED.**
 
 ### The Full NUCLEUS Stack
 
@@ -581,11 +581,13 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155n — **ZERO P0 / ZERO P1 / ZERO P2. gen4 COMPLETE. gen5 INFRASTRUCTURE READY. BOTH P1s GATE VALIDATED.**
+**Summary**: Wave 155n — **ZERO P0/P1. 1 P2 (membrane.exe platform). gen4 COMPLETE. gen5 THESIS VALIDATED.**
 
-biomeOS v4.55 in depot (rebuilt 11:11 EDT Jul 31). All P1 fixes confirmed on production hardware:
-- westGate: 31/31 sockets stable 225s (was 50% loss). Provenance 7/7 (5th pass). 835 caps.
-- strandGate: 13 procs exactly (was 175 in 14 min). 12/12 HEALTHY. 1,017 methods. RTX 3090.
+ALL 4 NUCLEUS gates on biomeOS v4.55. southGate ENROLLED (5th gate pending launch).
+- westGate: 31/31 sockets stable 225s. Provenance 7/7 (5th pass). 835 caps.
+- strandGate: NODE ATOMIC LANDMARK — 2,130 matmul/sec, cross-atomic provenance E2E, AlphaFold ready.
+- blueGate: v4.55 deployed, membrane.exe first Windows run. P2: platform detection blocks J12.
+- southGate: 5800X3D + RTX 4060, 128GB, 5TB NVMe. 16 depot binaries installed. WG pending sudo.
 
 Coevolution COMPLETE (G21): biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`.
 Sovereign CI fully automated for ALL 13 primals including biomeOS. Pipeline E2E validated.

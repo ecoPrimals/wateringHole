@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155n
 
-**Date**: Jul 31, 2026 12:20 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **ZERO P0/P1/P2. BOTH P1s GATE VALIDATED (westGate + strandGate). Coevolution COMPLETE (G21). biomeOS v4.55 in depot. Sovereign CI automated for ALL 13 primals. 9/11 jelly strings killed. 4 NUCLEUS gates gate-validated. 22 glacial goals (G22 NEW: whitePaper API convergence). Pipeline E2E proven.**
+**Date**: Jul 31, 2026 13:10 EDT | **Wave**: 155n | **From**: eastGate overwatch
+**Posture**: **ZERO P0/P1. 1 P2 (membrane.exe platform detection, blocks J12). ALL 4 NUCLEUS gates on v4.55. southGate ENROLLED. NODE ATOMIC LANDMARK: strandGate 2,130 matmul/sec, cross-atomic provenance E2E. Coevolution COMPLETE (G21). G22 NEW: whitePaper API convergence. gen5 thesis VALIDATED.**
 
 ---
 
@@ -16,13 +16,18 @@ westGate NUCLEUS v4.55 — P1 GATE VALIDATED (Jul 31):
   ZFS: 25.4TB ONLINE, 3,256 CAS objects, 1.56× compression
   Mode gap fix verified: Neural API Coordinated, 13 primals ACTIVE.
 
-strandGate NUCLEUS v4.55 — P1 GATE VALIDATED (Jul 31):
+strandGate NUCLEUS v4.55 — NODE ATOMIC LANDMARK (Jul 31):
   12/12 HEALTHY | 1,017 methods | 30 sockets | 13 processes (1 per primal)
-  Was: 175 procs / 14 min, 538 resurrections. Now: exactly 1 each, stable 5+ min.
-  RTX 3090 matmul p50=0.33ms. songBird stable for first time since 155i.
+  RTX 3090: 2,130 matmul/sec, SVD 128×128 in 48.7ms, FFT 4096 in 11.6ms
+  Concurrent 4-primal: 5,268 ops/sec, 0 errors. 56+ min stable.
+  Cross-atomic IPC E2E: GPU→sign→verify→DAG→attribution→Merkle. W3C PROV-O.
+  AlphaFold: 20-30 structures/day capacity, reduced DB fits (1.3TB free).
+  "This is no longer a whitePaper. This is a working system."
 
-blueGate NUCLEUS (Jul 30 — Windows, Provenance 7/7 VALIDATED):
-  13/13 primals, 131.1 MB, TCP-only, crypto.sign LIVE
+blueGate NUCLEUS v4.55 (Jul 31 — Windows, biomeOS v4.55.0 deployed):
+  13/13 primals, 173.6 MB warm. Prov 7/7 E2E. crypto.sign LIVE.
+  membrane.exe first Windows run: networking OK, local probes P2 (linux-musl target).
+  ⚠ P2: membrane.exe embeds linux-musl target triple — blocks J12 sub-builder.
 
 sporeGate SOVEREIGN CI LIVE (Jul 31 — golgi hook FIXED):
   11/11 HEALTHY | 35 depot bins | Golgi hook E2E verified
@@ -57,7 +62,7 @@ All blocking code work is done. 50 handoffs fossilized to `fossilRecord/wave155k
 |---|--------|------|--------|
 | A1 | **westGate** | biomeOS v4.47 + Compute Trio → NUCLEUS | **DONE** — 13/13, 654 caps, 29 sockets |
 | A2 | **Provenance 7/7** | Live E2E validation | **DONE** — westGate (Linux) + blueGate (Windows) |
-| A3 | **blueGate** | Fresh depot → NUCLEUS on Windows | **DONE** — 131.1 MB, 14/14 depot, crypto.sign LIVE |
+| A3 | **blueGate** | biomeOS v4.55 + membrane.exe on Windows | **DONE** — v4.55.0 deployed, membrane first run. P2: platform detection. |
 | A4 | **strandGate** | Redeploy with biomeOS v4.55 | **DONE** — P1 GATE VALIDATED: 12/12, 1,017 methods, 1 proc/primal |
 
 ### Phase B: Pipeline Automation — 3/5 KILLED
@@ -215,11 +220,11 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | **sporeGate** | **11/11 HEALTHY** (perm drift to 8/11). Golgi hook FIXED (3 bugs). Depot rebuilt: 35 bins, all current. | biomeOS composition authority evolution. |
 | **westGate** | **NUCLEUS v4.55.** 31/31 sockets stable 225s. Prov 7/7 (5th pass). 835 caps. **Both P1s VALIDATED FIXED.** | AlphaFold ingestion. |
 | **strandGate** | **NUCLEUS v4.55.** 12/12 HEALTHY. 1,017 methods. 13 procs (1 each). RTX 3090 p50=0.33ms. **P1 VALIDATED FIXED.** | Node Atomic profiling. |
-| **blueGate** | **NUCLEUS** (15/15 fresh, Prov 7/7). Sub-builder UNBLOCKED. | J12 enrollment under sporeGate. |
+| **blueGate** | **NUCLEUS v4.55** (13/13). Prov 7/7. membrane.exe first Windows run. **P2: platform detection** (linux-musl embedded in Windows binary). | cellMembrane platform fix → J12 sub-builder. |
 | **flockGate** | **DOWN** — rebooted, RustDesk locked out. May be on mesh. | **esotericWebb → ironGate** (LAN). |
 | **ironGate** | Online. 14TB+1TB+1TB+2TB. **Takes esotericWebb from flockGate.** | Tower + esotericWebb + HDD enclave. |
 | **swiftGate** | HW ready. Windows. | After blueGate sub-builder stable. |
-| **southGate** | HW ready. | Enrollment. |
+| **southGate** | **ENROLLED** — 32/33 repos at 155n HEAD. 16 musl binaries deployed (biomeOS v4.55). 5800X3D + RTX 4060 + 128GB + 5TB NVMe. WG peer add pending (sudo). | NUCLEUS launch + gate validation. |
 | **grapheneGate** | Tower LIVE (Pixel 8a). | ADB mesh expansion. |
 
 ### GATE NEW (cross-platform expansion)
@@ -236,7 +241,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Metric | Value |
 |--------|-------|
-| NUCLEUS gates | **4 — GATE VALIDATED** (westGate v4.55, strandGate v4.55, blueGate, sporeGate) |
+| NUCLEUS gates | **4 — ALL v4.55** (westGate, strandGate, blueGate, sporeGate) + **southGate ENROLLED** |
 | Provenance 7/7 | **COMPLETE** — westGate (5th consecutive pass) + blueGate (Windows) |
 | Primal tests | **~101K+** |
 | Signal graphs | **27** |
@@ -249,8 +254,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | sporeGate | **11/11 HEALTHY**, golgi hook FIXED, Sovereign CI E2E verified for ALL 13 primals |
 | P0s | **ZERO** |
 | P1s | **ZERO** — both GATE VALIDATED (westGate: 0% socket loss, strandGate: 1 proc/primal) |
-| P2s | **ZERO** — coevolution COMPLETE (G21) |
-| P3s | **3 P3** — /run/membrane perm reset, bearDog dual-socket, GNU depot incomplete |
+| P2s | **1 NEW** — membrane.exe platform detection (linux-musl on Windows, blocks J12) |
+| P3s | **6 P3** — /run/membrane perms, bearDog dual-socket, songBird PID, rhizoCrypt double-port, coralReef --version log, petalTongue TCP close |
 | Jelly strings | **9/11 KILLED.** 2 remaining: J12 (sub-builder), J18 (gate coupling/portability) |
 | Glacial goals | **22** tracked (G3+G4+G21 COMPLETE, **G22 NEW: whitePaper API convergence**) |
 
@@ -273,11 +278,12 @@ whitePaper CONVERGENCE (G22 — NEW CONCEPTUAL GOAL):
     - P3 cleanup: /run/membrane perms, bearDog dual-socket, socket dir mismatch
 
 PRIORITY 2 — FLEET EXPANSION:
-  1. blueGate: redeploy v4.55 (Windows, depot binaries current)
-  2. ironGate: takes esotericWebb from flockGate (LAN)
-  3. steamGate: Steam Deck Tower Atomic (gnu bins in depot, user-space deploy)
-  4. J12: blueGate sub-builder enrollment under sporeGate
-  5. J18: /etc/environment abstraction (last portability jelly string)
+  1. southGate: WG peer add (sudo) → NUCLEUS launch → gate validation (5800X3D + RTX 4060)
+  2. cellMembrane: P2 membrane.exe platform detection fix (blocks J12)
+  3. ironGate: takes esotericWebb from flockGate (LAN)
+  4. steamGate: Steam Deck Tower Atomic (gnu bins in depot, user-space deploy)
+  5. J12: blueGate sub-builder after membrane.exe platform fix
+  6. J18: /etc/environment abstraction (last portability jelly string)
 
 PRIORITY 3 — PLATFORM WIRING (gen5):
   G18: squirrel → biomeOS neuralAPI agent orchestration
@@ -296,8 +302,8 @@ GLACIAL:
 
 ---
 
-*Wave 155n — ZERO P0/P1/P2. BOTH P1s GATE VALIDATED (westGate: 0% socket loss, strandGate:
-1 proc/primal). Coevolution COMPLETE (G21). biomeOS v4.55 in depot. Sovereign CI automated
-for ALL 13 primals. 9/11 jelly strings KILLED. 4 NUCLEUS gates gate-validated. Provenance
-7/7 (5th pass). 35 depot binaries. 22 glacial goals (G22 NEW: whitePaper API convergence —
-biomeOS api + neuralAPI merge, long-term conceptual goal now achievable). ~101K+ tests.*
+*Wave 155n — ZERO P0/P1. 1 P2 (membrane.exe platform). ALL 4 NUCLEUS gates on v4.55.
+southGate ENROLLED (5th NUCLEUS gate pending launch). NODE ATOMIC LANDMARK: strandGate
+RTX 3090 — 2,130 matmul/sec, cross-atomic provenance chain E2E, W3C PROV-O, AlphaFold
+20-30/day capacity. gen5 thesis VALIDATED: "this is no longer a whitePaper." Coevolution
+COMPLETE (G21). G22 NEW: whitePaper API convergence. 9/11 jelly strings KILLED. ~101K+ tests.*
