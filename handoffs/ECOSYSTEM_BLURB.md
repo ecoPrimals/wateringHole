@@ -295,11 +295,22 @@ GLACIAL:
 
 ---
 
-### SPOREPRINT (Wave 155m NUCLEUS ACHIEVED — Jul 30, 2026)
+### SPOREPRINT (Wave 155m — Jul 30, 2026)
 
-sporePrint updated: NUCLEUS ACHIEVED on 3 gates, Provenance 7/7 COMPLETE,
-gen4 COMPLETE. NUCLEUS promoted to Deploy Now. 94,927 tests. ZERO P0/P1/P2.
-Next: gen5 — NUCLEUS as platform, steamGate, AlphaFold, JOSS.
+**NUCLEUS transplant + root doc cleanup:**
+- NUCLEUS ACHIEVED on 3 gates, Provenance 7/7, gen4 COMPLETE
+- NUCLEUS promoted to Deploy Now shelf, architecture index leads with it
+- 94,927 tests, ZERO P0/P1/P2. bearDog 14,019, rhizoCrypt 1,900
+- README: canonical URL fixed, NUCLEUS/Provenance/SovCI milestones marked done
+- CITATION.cff date updated, EVOLUTION_QUEUE refreshed to 155m state
+- cargo clean: removed 1.3G build artifacts
+- No stale scripts, orphan pages, or debris found. All TODOs in content are
+  legitimate (documenting "zero TODO in primals", not actual action items)
+
+**Upstream gaps for primal teams:**
+- barraCuda/wetSpring: JOSS-ready? Need published release (crates.io or Zenodo)
+- All springs: "Reproduce It" sections still needed in READMEs (per SEO standard)
+- wateringHole PRIMAL_EMOJI_STANDARD: sporePrint entity registry needs cross-check
 
 ---
 
