@@ -1,33 +1,33 @@
-# ecoPrimals Ecosystem Blurb — Wave 155m
+# ecoPrimals Ecosystem Blurb — Wave 155n
 
-**Date**: Jul 31, 2026 09:15 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **ZERO P0/P1/P2. COEVOLUTION COMPLETE. biomeOS mode gap FIXED (`652cf8a7`): Neural API accepts plain JSON-RPC (btsp_optional=true). composition.test_swap E2E path OPEN. Depot rebuilt at 11:11 EDT with mode gap fix. Sovereign CI fully automated for ALL 13 primals including biomeOS. 9/11 jelly strings killed. 4 NUCLEUS gates. Depot 35 binaries current.**
+**Date**: Jul 31, 2026 12:20 EDT | **Wave**: 155n | **From**: eastGate overwatch
+**Posture**: **ZERO P0/P1/P2. BOTH P1s GATE VALIDATED (westGate + strandGate). Coevolution COMPLETE (G21). biomeOS v4.55 in depot. Sovereign CI automated for ALL 13 primals. 9/11 jelly strings killed. 4 NUCLEUS gates gate-validated. 22 glacial goals (G22 NEW: whitePaper API convergence). Pipeline E2E proven.**
 
 ---
 
 ## NUCLEUS — ACHIEVED
 
-Three gates now running full NUCLEUS. Provenance 7/7 validated on two platforms.
+Four gates running full NUCLEUS. Both P1s gate-validated. Provenance 7/7 on two platforms.
 
 ```
-westGate NUCLEUS (Jul 31 — v4.51 deployed, PROVENANCE 7/7 COMPLETE):
-  13/13 alive | 835 peak caps | Provenance 7/7 (4 consecutive passes)
+westGate NUCLEUS v4.55 — P1 GATE VALIDATED (Jul 31):
+  31/31 sockets stable 225s (was 31→16 in 3 min on v4.51). 0% socket loss.
+  835 peak caps | Provenance 7/7 (5th consecutive pass)
   ZFS: 25.4TB ONLINE, 3,256 CAS objects, 1.56× compression
-  ⚠ Socket evaporation P1: 31→16 sockets in 3 min (50% survival)
-  ⚠ membrane/ vs biomeos/ socket dir mismatch (symlink workaround)
+  Mode gap fix verified: Neural API Coordinated, 13 primals ACTIVE.
+
+strandGate NUCLEUS v4.55 — P1 GATE VALIDATED (Jul 31):
+  12/12 HEALTHY | 1,017 methods | 30 sockets | 13 processes (1 per primal)
+  Was: 175 procs / 14 min, 538 resurrections. Now: exactly 1 each, stable 5+ min.
+  RTX 3090 matmul p50=0.33ms. songBird stable for first time since 155i.
 
 blueGate NUCLEUS (Jul 30 — Windows, Provenance 7/7 VALIDATED):
   13/13 primals, 131.1 MB, TCP-only, crypto.sign LIVE
 
-strandGate NUCLEUS (Jul 31 — v4.51 depot deploy, 999044e7 confirmed):
-  11/12 healthy | 912 methods | 27 sockets
-  ⚠ RESPAWN STORM P1: 175 procs / 14 min, 538 resurrections
-  ⚠ riboCipher health ping → plain JSON-RPC primals = DEGRADED → respawn loop
-
 sporeGate SOVEREIGN CI LIVE (Jul 31 — golgi hook FIXED):
   11/11 HEALTHY | 35 depot bins | Golgi hook E2E verified
-  Push to Forgejo → auto build → sandbox → depot push → HTTPS serve
-  J9+J10+J11 KILLED. Zero human intervention for non-broker primals.
+  Push → build → sandbox → composition.test_swap → depot push → HTTPS serve
+  9/11 jelly strings KILLED. Fully automated for ALL 13 primals.
 ```
 
 **What NUCLEUS + Provenance proved**: full 7-step provenance chain (CAS → DAG → Merkle →
@@ -58,7 +58,7 @@ All blocking code work is done. 50 handoffs fossilized to `fossilRecord/wave155k
 | A1 | **westGate** | biomeOS v4.47 + Compute Trio → NUCLEUS | **DONE** — 13/13, 654 caps, 29 sockets |
 | A2 | **Provenance 7/7** | Live E2E validation | **DONE** — westGate (Linux) + blueGate (Windows) |
 | A3 | **blueGate** | Fresh depot → NUCLEUS on Windows | **DONE** — 131.1 MB, 14/14 depot, crypto.sign LIVE |
-| A4 | **strandGate** | Redeploy with biomeOS v4.47 | NEXT — lowest urgency, already NUCLEUS |
+| A4 | **strandGate** | Redeploy with biomeOS v4.55 | **DONE** — P1 GATE VALIDATED: 12/12, 1,017 methods, 1 proc/primal |
 
 ### Phase B: Pipeline Automation — 3/5 KILLED
 
@@ -98,13 +98,13 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 | golgi post-receive hook | 3 bugs fixed (dispatcher, case, category) | sporeGate 155n | E2E verified (squirrel auto-built) |
 | GATE_NAME vs MEMBRANE_GATE_NAME | MEMBRANE_* env standardization + fallback | `4a2b39c` | cellMembrane shipped |
 
-#### PARTIAL — needs convergence
+#### CONVERGENCE — legacy items resolved or P3
 
 | Issue | Status | Detail |
 |-------|--------|--------|
-| bearDog dual-socket | **PARTIAL** | Default socket still separate listener returning stubs. Family socket works. Workaround: set `BEARDOG_SOCKET`. |
-| Socket evaporation (binary discovery) | **PARTIAL** | Binary discovery FIXED (999044e7). But socket file deletion is a separate code path — biomeOS unlinks sockets regardless. |
-| membrane/ vs biomeos/ socket dir | **OPEN** | Primals create in `/run/user/1000/biomeos/`, Neural API scans `/run/user/1000/membrane/`. Workaround: symlink bridge. |
+| bearDog dual-socket | **P3** | Default socket still separate listener returning stubs. Family socket works. Workaround: set `BEARDOG_SOCKET`. Non-blocking. |
+| ~~Socket evaporation~~ | **FIXED + VALIDATED** | PID ownership guard (`88785daf`): 0% socket loss on westGate (225s test). |
+| membrane/ vs biomeos/ socket dir | **P3** | Symlink bridge works. Will converge when biomeOS owns socket namespace (G22 API convergence). |
 
 #### P3 — Tracked
 
@@ -236,69 +236,68 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Metric | Value |
 |--------|-------|
-| NUCLEUS gates | **4** (westGate + blueGate + strandGate + sporeGate 11/11 HEALTHY) |
-| Provenance 7/7 | **COMPLETE** — validated on Linux (westGate, 4 consecutive passes) + Windows (blueGate) |
-| Primal tests | **~101K+** (squirrel 7,138 was undercounted previously) |
+| NUCLEUS gates | **4 — GATE VALIDATED** (westGate v4.55, strandGate v4.55, blueGate, sporeGate) |
+| Provenance 7/7 | **COMPLETE** — westGate (5th consecutive pass) + blueGate (Windows) |
+| Primal tests | **~101K+** |
 | Signal graphs | **27** |
 | BTSP | **13/13** |
-| Depot | **35** binaries: 16 musl + 4 gnu + 15 windows, BLAKE3 verified |
+| Depot | **35** binaries: 16 musl + 4 gnu + 15 windows. biomeOS v4.55 rebuilt 11:11 EDT. BLAKE3 verified. |
 | Gates online | **9** (flockGate DOWN) |
-| biomeOS | **v4.54** on Forgejo — both P1s FIXED + 5 P3s. **v4.51 in depot** (sandbox P2 blocks). |
+| biomeOS | **v4.55** in depot — both P1s GATE VALIDATED + coevolution + mode gap fix. |
 | squirrel | **7,138 tests**, 90.1% cov, 0 unsafe, 0 clippy, all IPC wired |
-| cellMembrane | **1,273 tests**, MEMBRANE_* standardization, crypto dedup, init-scope sockets |
-| sporeGate | **11/11 HEALTHY**, golgi hook FIXED (3 bugs), Sovereign CI E2E verified |
+| cellMembrane | **1,281+ tests**, `validate_with_deps`, registry API hardened, J19+J16+J13 killed |
+| sporeGate | **11/11 HEALTHY**, golgi hook FIXED, Sovereign CI E2E verified for ALL 13 primals |
 | P0s | **ZERO** |
-| P1s | **ZERO** — both FIXED in biomeOS v4.54 (`88785daf`) |
-| P2s | **ZERO** — sandbox P2 FIXED (composition.test_swap coevolution shipped) |
-| P3s | **2 OPEN** — /run/membrane perm reset, GNU depot incomplete |
-| Jelly strings | **9/11 KILLED** (J13, J16, J19 killed this session). 2 remaining: J12 sub-builder, J18 gate coupling |
-| Glacial goals | **21** tracked (G3-G4 COMPLETE, G21 NEW: coevolution contract) |
+| P1s | **ZERO** — both GATE VALIDATED (westGate: 0% socket loss, strandGate: 1 proc/primal) |
+| P2s | **ZERO** — coevolution COMPLETE (G21) |
+| P3s | **3 P3** — /run/membrane perm reset, bearDog dual-socket, GNU depot incomplete |
+| Jelly strings | **9/11 KILLED.** 2 remaining: J12 (sub-builder), J18 (gate coupling/portability) |
+| Glacial goals | **22** tracked (G3+G4+G21 COMPLETE, **G22 NEW: whitePaper API convergence**) |
 
 ---
 
 ## WHAT'S NEXT
 
 ```
-COEVOLUTION — COMPLETE (G21):
-  biomeOS v4.55+ (652cf8a7): Neural API btsp_optional=true, plain JSON-RPC accepted.
-  cellMembrane: validate_with_deps() → composition.test_swap → live validation.
-  Sovereign CI: FULLY AUTOMATED for ALL 13 primals including biomeOS.
-  Depot: rebuilt with mode gap fix at 11:11 EDT Jul 31.
+whitePaper CONVERGENCE (G22 — NEW CONCEPTUAL GOAL):
+  biomeOS API + neuralAPI merge into single process.
+  Long-term whitePaper goal now suddenly achievable: coevolution (G21) proved
+  that biomeOS can speak both riboCipher and plain JSON-RPC natively via
+  btsp_optional=true. The dual-service architecture was transitional scaffold.
+  One biomeOS process = one socket namespace = full composition authority.
 
-  CONVERGENCE PATH (next evolution):
-    - Merge api + neural-api into single biomeOS process (eliminate dual-service)
+  CONVERGENCE STEPS:
+    - Merge api + neural-api into single biomeOS process
+    - biomeOS owns /run/membrane socket namespace
     - Sovereign CI trigger: git pull before build (source tree divergence fix)
-    - biomeOS owns /run/membrane socket namespace (composition authority)
+    - P3 cleanup: /run/membrane perms, bearDog dual-socket, socket dir mismatch
 
-PRIORITY 2 — GATE REDEPLOYMENTS:
-  1. westGate + strandGate: redeploy biomeOS v4.54 from depot (after J19 resolved)
-  2. ironGate: takes esotericWebb from flockGate (LAN, no RustDesk dependency)
-  3. steamGate: Steam Deck Tower Atomic (cellMembrane user-space deploy READY)
+PRIORITY 2 — FLEET EXPANSION:
+  1. blueGate: redeploy v4.55 (Windows, depot binaries current)
+  2. ironGate: takes esotericWebb from flockGate (LAN)
+  3. steamGate: Steam Deck Tower Atomic (gnu bins in depot, user-space deploy)
   4. J12: blueGate sub-builder enrollment under sporeGate
+  5. J18: /etc/environment abstraction (last portability jelly string)
 
 PRIORITY 3 — PLATFORM WIRING (gen5):
   G18: squirrel → biomeOS neuralAPI agent orchestration
   G19: petalTongue + Node Atomics live rendering pipeline
-  G20: esotericWebb game engine on NUCLEUS (ironGate, moved from flockGate)
+  G20: esotericWebb game engine on NUCLEUS (ironGate)
 
-SCIENCE PIPELINE (one track through the platform):
+SCIENCE PIPELINE:
   Step 3: tideGlass Phase 0 — archaeology. NEXT.
   Steps 4-8: Reproduce → NF → pseudoSpore → JOSS. Target: late Sep / Dec 2026.
   G7: AlphaFold ~1TB through westGate Nest Atomic (pipeline READY)
 
-LIVE SCIENCE:
-  G14: sporePrint content refresh
-  G16: pseudoSpore grab pattern on web (after NF data)
-
 GLACIAL:
-  G6: bearDog public (crates.io) | G8: Plasmodium | G11: steamGate
+  G6: bearDog public | G8: Plasmodium | G11: steamGate
   G12: darwinGate | G13: iosGate | G17: Portability
 ```
 
 ---
 
-*Wave 155n — ZERO P0/P1/P2. COEVOLUTION COMPLETE: biomeOS mode gap FIXED (652cf8a7) —
-Neural API accepts plain JSON-RPC. composition.test_swap E2E path OPEN. Sovereign CI
-fully automated for ALL 13 primals. Depot rebuilt with fix. 9/11 jelly strings KILLED.
-Both P1s FIXED. 4 NUCLEUS gates (sporeGate 11/11). Provenance 7/7. 35 depot binaries.
-21 glacial goals (G21 COMPLETE). ~101K+ tests. flockGate DOWN → esotericWebb to ironGate.*
+*Wave 155n — ZERO P0/P1/P2. BOTH P1s GATE VALIDATED (westGate: 0% socket loss, strandGate:
+1 proc/primal). Coevolution COMPLETE (G21). biomeOS v4.55 in depot. Sovereign CI automated
+for ALL 13 primals. 9/11 jelly strings KILLED. 4 NUCLEUS gates gate-validated. Provenance
+7/7 (5th pass). 35 depot binaries. 22 glacial goals (G22 NEW: whitePaper API convergence —
+biomeOS api + neuralAPI merge, long-term conceptual goal now achievable). ~101K+ tests.*

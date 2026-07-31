@@ -18,18 +18,19 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] **ECOSYSTEM_BLURB.md** is the universal handoff (Tracks A+B converged)
 - [x] **70+ handoff docs + AARs** delivered Wave 155b–n. 10 AARs + 2 handoffs fossilized this wave.
-- [x] **ALL P0s RESOLVED. ALL P1s RESOLVED (v4.54).** 1 P2 OPEN (sandbox blocks depot).
-- [x] **NUCLEUS ACHIEVED on 3 gates** + sporeGate (11/11 HEALTHY)
-- [x] **Depot 35 binaries REBUILT** — 16 musl + 4 gnu + 15 windows, BLAKE3 verified
-- [x] **biomeOS v4.54 SHIPPED** — dual-protocol health ping, socket ownership guard, 5 P3s fixed. On Forgejo.
+- [x] **ZERO P0 / ZERO P1 / ZERO P2.** All P1s GATE VALIDATED on westGate + strandGate. P2 sandbox FIXED.
+- [x] **NUCLEUS ACHIEVED on 4 gates** — westGate, strandGate, blueGate, sporeGate. Gate validation AARs filed.
+- [x] **Depot 35 binaries CURRENT** — biomeOS v4.55 rebuilt 11:11 EDT Jul 31. BLAKE3 verified.
+- [x] **biomeOS v4.55 SHIPPED + GATE VALIDATED** — westGate: 0% socket loss (225s). strandGate: 13 procs (1 each, was 175).
 - [x] **Golgi post-receive hook FIXED** (3 bugs: dispatcher, case, category). Sovereign CI E2E verified.
-- [x] **cellMembrane MEMBRANE_* standardization** — env var unification, crypto dedup, smart splits. 1,273 tests.
+- [x] **cellMembrane 1,281+ tests** — MEMBRANE_*, crypto dedup, J16+J13+J19 killed, registry API hardened.
 - [x] **squirrel 7,138 tests** — 90.1% coverage, 0 unsafe, universal-constants extraction
-- [x] **Provenance 7/7 COMPLETE** — E2E validated on westGate (Linux/ZFS) + blueGate (Windows)
-- [x] **Sovereign CI LIVE** — push-to-deploy E2E verified for non-broker primals
-- [ ] **P2: Sandbox false positive** — biomeOS can't self-validate in isolation → depot still serves v4.51
-- [ ] **Coevolution contract** — biomeOS (composition authority) + cellMembrane (build authority) = composition.test_swap
+- [x] **Provenance 7/7 COMPLETE** — E2E validated on westGate (5th consecutive pass) + blueGate (Windows)
+- [x] **Sovereign CI LIVE** — push-to-deploy E2E verified for ALL 13 primals including biomeOS (coevolution).
+- [x] **Coevolution contract COMPLETE (G21)** — biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`. Mode gap FIXED (`652cf8a7`).
+- [x] **6 AARs + 6 superseded AARs fossilized** this wave. 6 current 155n AARs active.
 - [ ] **Portability checkpoint** — can we shut down and reconstitute on a new HPC mesh?
+- [ ] **whitePaper convergence**: biomeOS API + neuralAPI merge = long-term conceptual goal now achievable
 
 ## 2. Ecological (Primal Health)
 
@@ -45,11 +46,11 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] songBird: 14,835+ tests, universal-ipc, ACME HTTP-01, TCP registration fix
 - [x] nestGate: **13,095+** tests, CAS on ZFS verified, deep debt complete, zero unsafe
 - [x] toadStool: **9,193+** tests, **S349**: JSON-RPC health endpoint, dead deps purged, stubs fail-closed, hardcoding consolidated (**Wave 155m**)
-- [x] biomeOS: **8,570** tests, **v4.54**: dual-protocol health ping (P1 FIXED), socket ownership guard (P1 FIXED), zombie reaping, virtual service churn fix, graphs_dir XDG fallback, riboCipher log level fix, --version 4.54.0. 15 dead deps removed. (**Wave 155n**)
+- [x] biomeOS: **8,570** tests, **v4.55**: dual-protocol health ping (P1 GATE VALIDATED), socket ownership guard (P1 GATE VALIDATED), `composition.test_swap` (coevolution), mode gap fix (`btsp_optional=true`), zombie reaping, 15 dead deps removed. (**Wave 155n**)
 - [x] petalTongue: **6,605** tests, modern idiom evolution pass, debris audit (**Wave 155n**)
 - [x] barraCuda: **4,957** tests, RTX 3090 profiled
 - [x] coralReef: **3,527** tests, 463 `.expect()` purged, PTX modernized
-- [x] cellMembrane: **1,273** tests, MEMBRANE_* env standardization, crypto dedup (shared HKDF/HMAC), bootstrap split (738→291L), plasmid smart split (-310L), init-scope socket discovery (**Wave 155n**)
+- [x] cellMembrane: **1,281+** tests, MEMBRANE_* env standardization, crypto dedup, `validate_with_deps()` → `composition.test_swap`, J19+J16+J13 killed, registry API hardened (`require_capability`/`require_binary`) (**Wave 155n**)
 - [x] rhizoCrypt: 1,900 tests, BTSP→DAG bridge, cross-gate provenance
 - [x] loamSpine: **1,739** tests, registry drift fixed, `--bind` alias
 - [x] sweetGrass: **1,636** tests, G3 E2E validated, UUID fix
@@ -94,8 +95,8 @@ appears. This keeps the active review focused on evolving concerns.
 | flockGate | **DOWN** | Linux | 10.13.37.6 | full | Rebooted, RustDesk locked out. esotericWebb → **ironGate** |
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090. **DAILY DRIVER — DO NOT DEPLOY.** AlphaFold data source (~1TB). |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
-| strandGate | **NUCLEUS** | Linux | 10.13.37.10 | **NUCLEUS (13)** | v4.47 depot deploy via `nucleus start`. Socket evaporation P2. RTX 3090. |
-| westGate | **NUCLEUS** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **Provenance 7/7 COMPLETE.** 654 caps, 29 sockets, ZFS 25.4TB, 3,252 CAS. |
+| strandGate | **NUCLEUS v4.55** | Linux | 10.13.37.10 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 12/12 HEALTHY, 1,017 methods, 13 procs. RTX 3090 p50=0.33ms. |
+| westGate | **NUCLEUS v4.55** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 31/31 sockets 225s. Prov 7/7 (5th pass). 835 caps. ZFS 25.4TB. |
 | blueGate | **NUCLEUS** | Windows | 10.13.37.12 | **NUCLEUS (13)** | Provenance 7/7 on Windows. 15/15 depot. Sub-builder UNBLOCKED. |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
 | southGate | HW READY | Linux | enrolling | full (13) | House2 sovereign site |
@@ -163,7 +164,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] LAN peering: Tower 353x LAN (0.45ms vs 158ms WG overlay)
 - [x] songBird universal-ipc: UDS/named pipes/abstract sockets/TCP
 - [x] BTSP defense-in-depth: 13/13 primals
-- [x] **biomeOS neuralAPI**: **27** signal graphs, **v4.54**: dual-protocol health ping, socket ownership guard, zombie reaping (8,570 tests)
+- [x] **biomeOS neuralAPI**: **27** signal graphs, **v4.55**: dual-protocol health ping, socket ownership guard, `composition.test_swap`, mode gap fix (`btsp_optional=true`). GATE VALIDATED. (8,570 tests)
 - [x] **songBird ACME HTTP-01** challenge responder shipped — Phase 1 TLS elimination
 - [x] songBird mesh refactor: enrollment crypto + mesh helpers extracted, all files <800L
 - [x] sporeGate depot fully refreshed: health **11/11 HEALTHY**, **35 binaries** (16 musl + 4 gnu + 15 windows), BLAKE3 verified
@@ -171,8 +172,8 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] ~~WireGuard DNS catch-all~~ — **FIXED** (cellMembrane `8d9bb58`)
 - [x] ~~Socket ownership P2~~ — **FIXED** (biomeOS `0e45262f` + v4.54 socket ownership guard)
 - [x] ~~rootpulse.ledger~~ — **FIXED** (cellMembrane `0cfcce5`: advisory OK)
-- [ ] **P2: Sandbox false positive** — biomeOS v4.54 built by Sovereign CI but can't self-validate → depot stale
-- [ ] `/run/membrane` permission reset — biomeOS resets dir to 0770 at runtime
+- [x] ~~**P2: Sandbox false positive**~~ — **FIXED** (coevolution: cellMembrane `validate_with_deps()` → biomeOS `composition.test_swap`). Depot now serves v4.55.
+- [ ] `/run/membrane` permission reset — biomeOS resets dir to 0770 at runtime (P3)
 
 ## 5. Sovereignty / Trust — postPrimordial Alignment Check
 
@@ -188,7 +189,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 | **Zero telemetry** | **ALIGNED** | No telemetry, no analytics, no cloud lock-in across all primals. |
 | **AGPL-3.0** | **ALIGNED** | All primals, gardens, springs. scyBorg triple-license framework defined. |
 | **Pure Rust crypto** | **ALIGNED** | bearDog Ed25519 signing, BTSP 13/13, riboCipher transport. |
-| **Self-healing** | **ALIGNED** | biomeOS v4.54: dual-protocol health ping, PID-aware kill-before-spawn, socket ownership guard, zombie reaping. No more manual socket fixup. |
+| **Self-healing** | **ALIGNED + GATE VALIDATED** | biomeOS v4.55: dual-protocol health ping, PID-aware kill-before-spawn, socket ownership guard. westGate: 0% socket loss. strandGate: 1 proc/primal. |
 
 ### Interstitial Goals — Alignment
 
@@ -247,7 +248,7 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 | **Tower Atomic** (3) | LIVE | 6 gates (incl. Windows, Android) | Signal graphs: 8. Direct IPC: YES. |
 | **Nest Atomic** (7+Tower) | LIVE | westGate (ZFS+CAS), blueGate (Windows) | Signal graphs: 9. Graph execution: **FIXED** (v4.47 riboCipher). |
 | **Node Atomic** (3+Tower) | VALIDATED | strandGate (746 pipelines/sec, sub-ms GPU) | Signal graphs: 3. |
-| **NUCLEUS** (13) | **ACHIEVED ×4** | **westGate** (835 caps, Prov 7/7), **strandGate** (912 caps, depot deploy), **blueGate** (Windows, Prov 7/7), **sporeGate** (11/11 HEALTHY, CI) | 27 signal graphs. biomeOS v4.54 lifecycle (v4.51 in depot, v4.54 blocked by sandbox P2). |
+| **NUCLEUS** (13) | **ACHIEVED ×4 — GATE VALIDATED** | **westGate** (835 caps, Prov 7/7 ×5, 0% socket loss), **strandGate** (1,017 methods, 1 proc/primal), **blueGate** (Windows, Prov 7/7), **sporeGate** (11/11, CI) | 27 signal graphs. biomeOS v4.55 in depot. Coevolution COMPLETE (G21). |
 
 ### What's proven
 
@@ -282,8 +283,8 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [x] ~~Provenance 7/7 live validation~~ — **COMPLETE** on westGate (Linux/ZFS) + blueGate (Windows)
 - [x] ~~westGate NUCLEUS~~ — **DONE** (13/13, 654 caps, 29 sockets, Prov 7/7)
 - [x] ~~blueGate lifecycle NUCLEUS~~ — **DONE** (14/14 depot, Prov 7/7 on Windows)
-- [x] ~~strandGate redeploy~~ — v4.51 depot deploy, 999044e7 binary discovery CONFIRMED. v4.54 pending depot.
-- [ ] **Coevolution**: biomeOS (composition authority) + cellMembrane (build authority) → `composition.test_swap`
+- [x] ~~strandGate redeploy~~ — **v4.55 depot deploy, P1 GATE VALIDATED**: 12/12 HEALTHY, 1,017 methods, 13 procs (1 each).
+- [x] ~~**Coevolution (G21)**~~ — **COMPLETE**: biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`. Mode gap FIXED. Depot rebuilt.
 - [ ] **Cross-platform gates** — steamGate (NEXT, UNBLOCKED), darwinGate (GLACIAL), iosGate (GLACIAL)
 - [ ] **Chimera Phase 0**: shared library extraction (`libtower.so`) — UNBLOCKED, deferred
 - [ ] sporePrint primal pipeline: replace Zola
@@ -339,23 +340,20 @@ jelly string to kill.
 - [x] ~~**J10**: Build trigger~~ — **KILLED** (`MEMBRANE_BUILD_AUTHORITY=1`, drift pipeline active)
 - [x] ~~**J11**: Multi-target build~~ — **KILLED** (`targets_for_primal()` reads manifest, auto musl+gnu)
 - [ ] **J12**: Sub-builder dispatch — **UNBLOCKED** (membrane.exe P1 fixed). sporeGate → blueGate Windows builds via songBird IPC
-- [ ] **J13**: Depot freshness probe — continuous SHA comparison + mesh alert on drift (~20 LOC `mesh.build_pending` wire)
+- [x] ~~**J13**: Depot freshness probe~~ — **KILLED** (cellMembrane `0d39075`: `plasmid.staleness --publish` mesh broadcast)
 
 **Operational jelly strings (from sporeGate AAR)**:
 
 - [x] ~~**J14**: Socket ownership~~ — **KILLED** (biomeOS `0e45262f`: bind now `0666` for multi-user IPC)
 - [x] ~~**J15**: checksums.toml~~ — **KILLED** (cellMembrane `0cfcce5`: `finalize_depot()` full disk scan)
-- [ ] **J16**: cellMembrane self-CI — not in `sources.toml`, can't auto-rebuild via sovereign CI
+- [x] ~~**J16**: cellMembrane self-CI~~ — **KILLED** (cellMembrane `0d39075`: `sources.toml` garden self-enrollment)
 - [x] ~~**J17**: `/run/membrane` tmpfiles.d~~ — **KILLED** (cellMembrane `0cfcce5`: `membrane.conf` shipped)
 - [ ] **J18**: `/etc/environment` gate coupling — `RUSTUP_HOME`, `CARGO_HOME`, SSH aliases are gate-specific (portability risk)
+- [x] ~~**J19**: biomeOS sandbox bypass~~ — **KILLED** (cellMembrane `00c6800`: `validate_with_deps()` → biomeOS `composition.test_swap`)
 
-**New jelly string (Wave 155n)**:
+**Pipeline status**: Forgejo push → cascade → diff → build → checksum → depot push → verify. **9/11 KILLED (J9–J11, J13–J17, J19). 2 remaining: J12 (sub-builder dispatch), J18 (gate coupling).**
 
-- [ ] **J19**: biomeOS sandbox bypass — broker primals can't self-validate in standalone sandbox. Blocks biomeOS depot deploy. Needs `composition.test_swap` or broker exemption.
-
-**Pipeline status**: Forgejo push → cascade → diff → build → checksum → depot push → verify. **6/10 KILLED (J9–J11, J14–J15, J17). 5 remaining (J12 sub-builder, J13 freshness, J16 self-CI, J18 gate coupling, J19 sandbox bypass).**
-
-**Owner**: cellMembrane (J13, J16, J18, J19) + biomeOS (J19) + sporeGate (J12) + blueGate (J12 sub-builder)
+**Owner**: sporeGate + blueGate (J12 sub-builder) + cellMembrane (J18 portability)
 
 ## 12. gen5 — Full NUCLEUS as Live Platform (NEW)
 
@@ -463,7 +461,8 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G18 | squirrel → biomeOS agent orchestration | **NEW** | squirrel + biomeOS neuralAPI |
 | G19 | petalTongue + Node Atomics live rendering | **NEW** | petalTongue + toadStool + coralReef |
 | G20 | esotericWebb game engine on NUCLEUS | **NEW** | esotericWebb + petalTongue + GPU trio |
-| G21 | biomeOS-cellMembrane coevolution — composition.test_swap | **NEW — P2 BLOCKER** | biomeOS (composition authority) + cellMembrane (build authority). Unblocks J19 sandbox. |
+| G21 | biomeOS-cellMembrane coevolution — composition.test_swap | **COMPLETE** | biomeOS (composition authority) + cellMembrane (build authority). J19 KILLED. Gate validated. |
+| G22 | biomeOS API + neuralAPI convergence — whitePaper milestone | **NEW — CONCEPTUAL** | Merge dual-service (api + neural-api) into single biomeOS process. Long-term whitePaper goal now achievable. |
 
 ## 11. Campus / Physical Infrastructure
 
@@ -582,25 +581,30 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155n — **ZERO P0/P1. 1 P2 (sandbox blocks biomeOS depot). gen4 COMPLETE. gen5 INFRASTRUCTURE READY.**
-biomeOS v4.54 on Forgejo (v4.51 in depot — sandbox P2 blocks). Depot 35 binaries. Provenance 7/7 COMPLETE.
-4 NUCLEUS gates (sporeGate 11/11 HEALTHY). Sovereign CI E2E verified. Golgi hook FIXED.
-6/11 jelly strings killed (J9–J11, J14–J15, J17). 5 remaining (J12, J13, J16, J18, **J19 sandbox**).
+**Summary**: Wave 155n — **ZERO P0 / ZERO P1 / ZERO P2. gen4 COMPLETE. gen5 INFRASTRUCTURE READY. BOTH P1s GATE VALIDATED.**
 
-**Coevolution contract**: biomeOS becomes **composition authority** (start/stop/health/lifecycle/
-socket namespace/hot-swap). cellMembrane stays **build authority** (compile/sandbox/depot push).
-`sovereign.ci.trigger` delegates validation to running biomeOS via `composition.test_swap`.
-This resolves J19 (sandbox), /run/membrane permissions, and enables zero-downtime deploys.
-biomeOS also manages cellMembrane as a composition member. **G21 tracks this.**
+biomeOS v4.55 in depot (rebuilt 11:11 EDT Jul 31). All P1 fixes confirmed on production hardware:
+- westGate: 31/31 sockets stable 225s (was 50% loss). Provenance 7/7 (5th pass). 835 caps.
+- strandGate: 13 procs exactly (was 175 in 14 min). 12/12 HEALTHY. 1,017 methods. RTX 3090.
 
-**gen5 vision**: NUCLEUS IS THE PLATFORM. squirrel (7,138 tests, 90.1% cov) → biomeOS →
-petalTongue + Node Atomics = from QCD simulations to videogames. Platform wiring (G18-G21).
+Coevolution COMPLETE (G21): biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`.
+Sovereign CI fully automated for ALL 13 primals including biomeOS. Pipeline E2E validated.
 
-**Sovereignty posture**: ALIGNED on 8/9. 1 PARTIAL: portable mesh (J18 gate coupling,
-site-profile abstraction missing). Self-healing NOW ALIGNED (v4.54).
+**9/11 jelly strings KILLED.** 2 remaining: J12 (sub-builder), J18 (gate coupling/portability).
 
-**Glacial goals**: 21 tracked (G3-G4 COMPLETE, G18-G21: agent orchestration, live
-rendering, game engine, coevolution contract).
+**whitePaper convergence (G22)**: biomeOS API + neuralAPI merging into single process is a
+long-term whitePaper conceptual goal that the coevolution work has made suddenly achievable.
+The dual-service architecture (api mode + neural-api mode) was a transitional scaffold.
+With `btsp_optional=true` and `composition.test_swap`, the two modes can converge into one
+biomeOS process that speaks both riboCipher and plain JSON-RPC natively.
+
+**gen5 vision**: NUCLEUS IS THE PLATFORM. squirrel → biomeOS → petalTongue + Node Atomics
+= from QCD simulations to videogames. Platform wiring (G18-G22).
+
+**Sovereignty posture**: ALIGNED on 8/9. 1 PARTIAL: portable mesh (J18 gate coupling).
+Self-healing ALIGNED + GATE VALIDATED (v4.55).
+
+**Glacial goals**: 22 tracked (G3-G4-G21 COMPLETE, G22 NEW: whitePaper API convergence).
 
 ---
 
@@ -608,4 +612,5 @@ rendering, game engine, coevolution contract).
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155i (F13 — Jelly Strings J1–J8)
+*Latest fossilization (AARs)*: Wave 155n (6 superseded 155m AARs → fossilRecord/wave155n_gate_validated/)
 *Latest reopen*: Wave 155k (D10 — Jelly Strings J9–J13, extended to J14–J19 in 155n)
