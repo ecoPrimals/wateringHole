@@ -136,10 +136,20 @@ phase_c = "POLISH — HTTP webhook listener, build queue, provenance signing cha
 
 [divergences]
 golgi_hook_p2 = "FIXED (155n) — 3 bugs: missing post-receive dispatcher, repo name case mismatch, category singular/plural"
-coevolution_mode_gap = "FIXED (652cf8a7) — Neural API now accepts plain JSON-RPC (btsp_optional=true) AND registers composition.test_swap. E2E VALIDATED on sporeGate."
-sandbox_broker_workaround = "RESOLVED — composition.test_swap accessible via neural-api socket. Candidate self_test probe needs primal env setup (P3)."
+coevolution_mode_gap = "FIXED (652cf8a7) — Neural API btsp_optional=true + composition.test_swap registered. E2E VALIDATED."
 gate_name_env_var = "FIXED (155n) — MEMBRANE_* standardization shipped in cellMembrane 4a2b39c"
-run_membrane_permissions = "RECURRING — /run/membrane resets to 0770 after biomeOS restart. Manual chmod 1777 required."
+
+# RECURRING — resolve with G22 steps 3-5
+d1_socket_evaporation_restart = "RECURRING — biomeOS restart clears primal sockets in /run/membrane. Requires restart of all primal services. Owner: biomeOS (G22 step 3+4)."
+d2_run_membrane_permissions = "RECURRING — biomeOS resets /run/membrane to 0770. gate.status gets Permission denied. Workaround: sudo chmod 0777. Owner: biomeOS (G22 step 4)."
+
+# P3 — need evolution
+d3_checksums_format_drift = "P3 — manual checksums.toml regeneration hits wrong TOML format. Needs codified depot.seal command. Owner: sporeGate/cellMembrane."
+d4_candidate_self_test = "P3 — composition.test_swap dispatches but candidate probe fails (no env: FAMILY_ID, sockets). Needs lightweight version-check or env passthrough. Owner: biomeOS."
+d5_ci_source_tree = "P3 — sovereign CI builds from /opt/ecoPrimals (stale). Needs git pull before build. Owner: sporeGate."
+d6_dual_service_scaffold = "TRANSITIONAL — biomeOS runs as 2 systemd units (api + neural-api). G22 step 3 merges into single process."
+d7_sporeprint_manual_publish = "P3 — zola build requires manual SSH to golgi. Needs Forgejo post-receive hook. Owner: sporeGate."
+d8_neural_api_routing_gaps = "P3 — gate.status shows capability not registered for several primals via neural-api. Primals need to register with coordinator. Owner: biomeOS (G22)."
 
 [code_team_flags]
 mesh_socket = "FLAGGED — songBird mesh relay socket"
