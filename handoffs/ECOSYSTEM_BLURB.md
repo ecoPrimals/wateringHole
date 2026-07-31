@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155m
 
 **Date**: Jul 31, 2026 09:15 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **ZERO P0/P1/P2. Coevolution 95% — biomeOS v4.55 + cellMembrane `validate_with_deps` both deployed to sporeGate + depot. Mode gap (~10 LOC): `composition.test_swap` registered in `api` mode but cellMembrane calls `neural-api` mode. Fix: register endpoint in neural-api dispatcher. Once fixed, Sovereign CI is fully automated for ALL 13 primals including biomeOS. 9/11 jelly strings killed. 4 NUCLEUS gates. Depot 35 binaries current.**
+**Posture**: **ZERO P0/P1/P2. COEVOLUTION COMPLETE. biomeOS mode gap FIXED (`652cf8a7`): Neural API accepts plain JSON-RPC (btsp_optional=true). composition.test_swap E2E path OPEN. Depot rebuilt at 11:11 EDT with mode gap fix. Sovereign CI fully automated for ALL 13 primals including biomeOS. 9/11 jelly strings killed. 4 NUCLEUS gates. Depot 35 binaries current.**
 
 ---
 
@@ -187,8 +187,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Team | Tests | Wave 155m/n Delivery | Next |
 |------|-------|---------------------|------|
-| **biomeOS** | 8,570 | **v4.55** deployed to sporeGate + depot. `composition.test_swap` shipped but **mode gap**: endpoint registered in `api` mode (riboCipher), not `neural-api` mode (plain JSON-RPC). ~10 LOC fix: register in neural-api mode. | Register `composition.test_swap` in neural-api dispatcher. |
-| **cellMembrane** | 1,281 | J19 + J16 + J13 shipped. `validate_with_deps()` ready — waiting on biomeOS mode gap fix to complete E2E. | STANDBY (no changes needed from cellMembrane). |
+| **biomeOS** | 8,570 | **v4.55+** (`652cf8a7`): mode gap FIXED — Neural API `btsp_optional=true`, accepts plain JSON-RPC. `composition.test_swap` E2E path OPEN. Depot rebuilt 11:11 EDT. | Convergence: merge api + neural-api into single process. |
+| **cellMembrane** | 1,281+ | Registry API hardened (`require_capability`/`require_binary`). `validate_via_composition` test hardened. J19+J16+J13 shipped. | STANDBY — coevolution complete from cellMembrane side. |
 | **squirrel** | 7,138 | Deep debt: 150+ clippy, universal-constants, Cargo.lock purge. 90.1% coverage. 0 unsafe. | G18: biomeOS neuralAPI agent integration |
 | **petalTongue** | 6,605 | Modern idiom pass, debris audit | G19: Node Atomic live rendering pipeline |
 
@@ -259,20 +259,16 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 ## WHAT'S NEXT
 
 ```
-PRIORITY 1 — COEVOLUTION MODE GAP (~10 LOC): biomeOS
+COEVOLUTION — COMPLETE (G21):
+  biomeOS v4.55+ (652cf8a7): Neural API btsp_optional=true, plain JSON-RPC accepted.
+  cellMembrane: validate_with_deps() → composition.test_swap → live validation.
+  Sovereign CI: FULLY AUTOMATED for ALL 13 primals including biomeOS.
+  Depot: rebuilt with mode gap fix at 11:11 EDT Jul 31.
 
-  STATUS: composition.test_swap shipped in BOTH biomeOS v4.55 and cellMembrane 0d39075.
-  Both deployed to sporeGate + depot. 95% done.
-
-  THE GAP:
-    cellMembrane → plain JSON-RPC → neural-api-default.sock
-    BUT composition.test_swap only registered in api mode (requires riboCipher)
-    FIX: Register composition.test_swap in neural-api RPC dispatcher (~10 LOC)
-
-  STRATEGIC CONVERGENCE (after mode gap):
-    - Merge api + neural-api into single biomeOS process
-    - Sovereign CI trigger: git pull before build (source tree divergence)
-    - biomeOS owns /run/membrane socket namespace
+  CONVERGENCE PATH (next evolution):
+    - Merge api + neural-api into single biomeOS process (eliminate dual-service)
+    - Sovereign CI trigger: git pull before build (source tree divergence fix)
+    - biomeOS owns /run/membrane socket namespace (composition authority)
 
 PRIORITY 2 — GATE REDEPLOYMENTS:
   1. westGate + strandGate: redeploy biomeOS v4.54 from depot (after J19 resolved)
@@ -301,9 +297,8 @@ GLACIAL:
 
 ---
 
-*Wave 155n — ZERO P0/P1/P2. COEVOLUTION SHIPPED: biomeOS v4.55 (composition.test_swap) +
-cellMembrane (validate_with_deps + J16 self-CI + J13 freshness). 9/11 jelly strings KILLED.
-Both P1s FIXED (dual-protocol health ping + socket ownership guard). 5 P3s FIXED.
-4 NUCLEUS gates (sporeGate 11/11 HEALTHY). Sovereign CI E2E verified. Golgi hook FIXED.
-Provenance 7/7. 35 depot binaries. 21 glacial goals (G21 coevolution COMPLETE).
-~101K+ tests. flockGate DOWN → esotericWebb to ironGate.*
+*Wave 155n — ZERO P0/P1/P2. COEVOLUTION COMPLETE: biomeOS mode gap FIXED (652cf8a7) —
+Neural API accepts plain JSON-RPC. composition.test_swap E2E path OPEN. Sovereign CI
+fully automated for ALL 13 primals. Depot rebuilt with fix. 9/11 jelly strings KILLED.
+Both P1s FIXED. 4 NUCLEUS gates (sporeGate 11/11). Provenance 7/7. 35 depot binaries.
+21 glacial goals (G21 COMPLETE). ~101K+ tests. flockGate DOWN → esotericWebb to ironGate.*
