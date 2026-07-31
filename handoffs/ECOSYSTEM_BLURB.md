@@ -1,100 +1,120 @@
-# ecoPrimals Ecosystem Blurb — Wave 155n Checkpoint
+# ecoPrimals Ecosystem Blurb — Wave 155n Checkpoint (Updated)
 
-**Date**: Jul 31, 2026 16:45 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **ZERO P0/P1/P2. gen4 COMPLETE. gen5 VALIDATED. Clearing final deployment items before springs+gardens evolution.**
+**Date**: Jul 31, 2026 17:50 EDT | **Wave**: 155n | **From**: eastGate overwatch
+**Posture**: **ZERO P0/P1/P2. 3 of 4 MUST-CLEAR items RESOLVED. G22 single-process merge is the sole remaining gate to springs+gardens.**
 
 ---
 
 ## WHERE WE ARE
 
-NUCLEUS is achieved and gate-validated on 4 gates. Sovereign CI is automated for all 13
-primals. Provenance 7/7 is proven on Linux and Windows. biomeOS v4.56 is shipping G22
-convergence. All code-level P0/P1/P2 issues are resolved. 14 AARs + 1 handoff fossilized.
+All three blurbed teams delivered. The runway to springs+gardens is nearly clear.
 
-**This is the inflection point**: primals are stable enough to build on. The next evolution
-phase is springs and gardens — using the primals as foundation, not fixing them.
+```
+CHECKPOINT STATUS:
+  ✓ Item 1: G22 steps 3-5 — COMPLETE (biomeOS b82f0925, westGate v4.56 deployed,
+            Prov 7/7 ×8, 835 caps, dual-protocol in both modes)
+  ◻ Item 2: J12 sub-builder wire — UNBLOCKED (P2 FIXED, blueGate validated).
+            Next: songBird IPC message format for build dispatch.
+  ✓ Item 3: sporePrint publish — CLEARED (313 pages LIVE, demonstration era)
+  ✓ Item 4: J18 gate coupling — CODE SHIPPED (cellMembrane 882ad09: env_or
+            migration + gate-name identity bridge). Needs gate validation.
+```
+
+**What changed since last cascade:**
+
+| Team | Delivery | Impact |
+|------|----------|--------|
+| **biomeOS** | G22 COMPLETE (`b82f0925`): api + neural-api → dual-protocol in both modes. `neural-api` subcommand deprecated. | Springs can build against ANY biomeOS entry point. Socket evaporation on restart → resolved by single-process. |
+| **cellMembrane** | J18 gate coupling FIX (`882ad09`): `env_or()` migration, gate-name identity bridge. User-space deploy paths resolve correctly. | southGate, steamGate can bootstrap without `/etc/environment` jelly strings. |
+| **sporeGate** | sporePrint published (313 pages). GNU depot COMPLETE (5→15 bins). Total depot: **46 binaries** (16 musl + 15 gnu + 15 windows). | Public face LIVE. steamGate/strandGate have all gnu bins. |
+| **westGate** | biomeOS v4.56 G22-complete deployed. Prov 7/7 pass #8. 30/30 sockets stable. 835 caps. | First gate with full G22 convergence validated. |
+| **blueGate** | Platform detection P2 CONFIRMED FIXED. biomeOS v4.56 deployed. 13/13 NUCLEUS. Target triple: `x86_64-pc-windows-gnu`. | J12 at platform layer is DONE. Remaining: IPC transport TCP fallback. |
 
 ---
 
 ## REMAINING BEFORE SPRINGS+GARDENS
 
-### MUST CLEAR (code + deployment)
-
-| # | Item | Owner | Status | Why It Blocks |
-|---|------|-------|--------|---------------|
-| 1 | **G22 steps 3-5**: single-process merge (api+neural-api → one biomeOS unit) | biomeOS | Steps 1+2 SHIPPED (v4.56: 244 caps, unified namespace). 3 steps left. | Springs need a stable, single biomeOS process to build against. Socket evaporation on restart blocks reliable composition. |
-| 2 | **J12**: blueGate sub-builder IPC wire | sporeGate + blueGate | UNBLOCKED (P2 platform detection FIXED `d7026d7`). Needs songBird IPC wire. | Windows genomeBin builds need automated pipeline, not manual. |
-| 3 | **sporePrint publish**: `zola build` on golgi VPS | sporeGate | Content pushed to Forgejo. Static site not rebuilt. | Public face is stale. Live evidence (NUCLEUS, Provenance, Node Atomic) not visible. |
-| 4 | **J18**: `/etc/environment` gate coupling | cellMembrane | `RUSTUP_HOME`, `CARGO_HOME`, SSH aliases are gate-specific. | Portability risk — can't reconstitute a gate from seed without manual env setup. |
-
-### SHOULD CLEAR (deployment hardening)
+### MUST CLEAR
 
 | # | Item | Owner | Status |
 |---|------|-------|--------|
-| 5 | southGate NUCLEUS launch + bonding validation | eastGate | ENROLLED. HW ready (5800X3D, RTX 4060, 128GB). External deployment proof. |
-| 6 | ironGate: esotericWebb migration from flockGate | eastGate | flockGate DOWN. esotericWebb needs a home. |
-| 7 | P3 cleanup: `/run/membrane` perms, bearDog dual-socket, socket dir mismatch | biomeOS | G22 step 4 resolves socket dir. Others are non-blocking workarounds. |
-| 8 | GNU depot completeness | sporeGate | 4/16 musl targets have gnu builds. Blocks steamGate full deploy. |
+| ~~1~~ | ~~G22 steps 3-5~~ | ~~biomeOS~~ | **COMPLETE** — `b82f0925`. Deployed on westGate + sporeGate. |
+| 2 | **J12**: blueGate sub-builder IPC wire | sporeGate + blueGate | UNBLOCKED. Next: songBird IPC message format → sporeGate dispatch → blueGate `plasmid.harvest` → results push to depot. |
+| ~~3~~ | ~~sporePrint publish~~ | ~~sporeGate~~ | **CLEARED** — 313 pages LIVE at `sporeprint.primals.eco`. |
+| ~~4~~ | ~~J18 gate coupling~~ | ~~cellMembrane~~ | **CODE SHIPPED** (`882ad09`). Needs gate-level validation (southGate, steamGate). |
 
-### READY TO START (springs+gardens)
+**Sole remaining blocker: J12 sub-builder wire.** Everything else is shipped or validated.
 
-Once items 1-4 are clear, these open up:
+### SHOULD CLEAR (before fleet expansion)
 
-| Goal | What | Teams Involved |
-|------|------|----------------|
-| **G18**: squirrel → biomeOS agent orchestration | AI agent frontend routes to biomeOS neuralAPI. Springs (hotSpring, wetSpring, etc.) dispatch through this path. | squirrel + biomeOS |
-| **G19**: petalTongue + Node Atomics rendering | Live science visualization pipeline. Gardens (tideGlass, helixVision) render through petalTongue. | petalTongue + toadStool + barraCuda + coralReef |
-| **G20**: esotericWebb game engine on NUCLEUS | Full game engine on ironGate using NUCLEUS GPU stack. | esotericWebb + petalTongue + GPU trio |
-| **Science pipeline**: tideGlass Phase 0 → NF → pseudoSpore → JOSS | The gen5 artifact. First real spring workload through NUCLEUS. | tideGlass + Nest Atomic + Provenance Trio |
-| **AlphaFold ingestion**: ~23 TB through westGate CAS | westGate ZFS now has 50.7 TB. Pipeline is ready. | nestGate + westGate |
+| # | Item | Owner | Status |
+|---|------|-------|--------|
+| 5 | southGate NUCLEUS launch + J18 validation | eastGate | ENROLLED. Validates portability + bonding + J18 fix. |
+| 6 | ironGate: esotericWebb from flockGate | eastGate | flockGate DOWN. |
+| 7 | strandGate v4.56 redeploy | strandGate | Still on v4.51. Needs G22 convergence. |
+| 8 | sporePrint auto-publish hook | sporeGate | D7: Forgejo post-receive → `zola build`. Quick win. |
+| 9 | checksums.toml automation | sporeGate/cellMembrane | D3: `depot.seal` command. Manual format is error-prone. |
+| 10 | Sovereign CI source tree fix | sporeGate | D5: CI trigger needs `git pull` before build. |
+
+### DIVERGENCES (10 documented by sporeGate)
+
+| ID | Issue | Resolves With |
+|----|-------|---------------|
+| D1 | Socket evaporation on biomeOS restart | G22 step 3 (COMPLETE) — validate |
+| D2 | `/run/membrane` permission reset | G22 step 4 (biomeOS owns lifecycle) |
+| D3 | checksums.toml format drift | `depot.seal` command codification |
+| D4 | Candidate self-test probe fails | Lightweight version-check probe |
+| D5 | Sovereign CI source tree divergence | `git pull` in CI trigger |
+| D6 | Dual-service architecture | G22 step 3 (COMPLETE) — validate |
+| D7 | sporePrint publish not automated | Forgejo post-receive hook |
+| D8 | Neural API capability routing gaps | Primal capability registration |
+| D9 | `nucleus_launcher` GNU build missing | Extract from biomeOS workspace |
+| D10 | Zola warnings (4 lab pages) | Frontmatter fix (trivial) |
 
 ---
 
 ## GATE STATUS
 
-| Gate | Status | Next |
-|------|--------|------|
-| **sporeGate** | 11/11 HEALTHY. v4.56 deployed. Depot current. | J12 wire + sporePrint `zola build`. |
-| **westGate** | NUCLEUS. Prov 7/7. ZFS raidz1 50.7 TB. | AlphaFold ingestion. |
-| **strandGate** | NUCLEUS. 12/12 HEALTHY. RTX 3090. Node Atomic Landmark. | Science workloads. |
-| **blueGate** | NUCLEUS. Prov 7/7. membrane.exe LIVE. P2 FIXED. J12 UNBLOCKED. | J12 sub-builder IPC. |
-| **southGate** | VALIDATION GATE. 5800X3D + RTX 4060, 128GB, 5TB NVMe. Off WireGuard. | NUCLEUS launch + bonding proof. |
-| **ironGate** | Online. 14TB HDD. | esotericWebb + Tower + enclave. |
-| **flockGate** | DOWN. | Recover or decommission. |
-| **eastGate** | Overwatch. | Springs+gardens coordination. |
+| Gate | biomeOS | Status | Next |
+|------|---------|--------|------|
+| **westGate** | **v4.56 G22** | NUCLEUS. Prov 7/7 ×8. 30/30 sockets. ZFS 50.7 TB. | AlphaFold ingestion. |
+| **sporeGate** | v4.56 | 11/11 HEALTHY. 46 depot bins. sporePrint LIVE. | J12 wire + auto-publish hook. |
+| **blueGate** | v4.56 | NUCLEUS 13/13. P2 FIXED. Target triple correct. | J12 IPC transport (TCP fallback). |
+| **strandGate** | v4.51 | NUCLEUS 12/12. RTX 3090. Node Atomic Landmark. | v4.56 redeploy. |
+| **southGate** | — | VALIDATION GATE. HW enrolled. | NUCLEUS launch + J18 + bonding. |
+| **ironGate** | — | Online. 14TB HDD. | esotericWebb + Tower. |
+| **flockGate** | — | DOWN. | Recover or decommission. |
 
 ---
 
 ## TEAM POSTURE
 
-### ACTIVE (finishing deployment items)
+### ACTIVE (one item left)
 
-| Team | Tests | Current Work | Transition to Springs+Gardens |
-|------|-------|-------------|-------------------------------|
-| **biomeOS** | 8,570 | G22 steps 3-5 (single-process merge) | Stable biomeOS = foundation for ALL springs. |
-| **cellMembrane** | 1,281+ | J12 sub-builder wire, J18 portability | Deployment automation enables garden CI. |
+| Team | Delivery This Wave | Remaining |
+|------|-------------------|-----------|
+| **sporeGate** | sporePrint LIVE + GNU depot 46 bins | J12 sub-builder wire (sole MUST-CLEAR). |
 
-### READY FOR NEXT PHASE
+### SHIPPED — READY FOR SPRINGS+GARDENS
 
-| Team | Tests | Springs+Gardens Role |
-|------|-------|---------------------|
-| **squirrel** | 7,138 | G18: AI agent frontend → biomeOS dispatch. Route spring workloads. |
-| **petalTongue** | 6,605 | G19: Rendering pipeline. Visualize science output from springs. |
-| **toadStool** | 9,193 | G19/G20: GPU compute dispatch for springs+gardens. |
-| **barraCuda** | 4,957 | G19: Tensor math backend. Science computation. |
-| **coralReef** | 3,527 | G20: Shader pipeline. Game + visualization rendering. |
-| **nestGate** | 13,095+ | Data ingestion. AlphaFold, NF data through CAS. |
+| Team | What They Shipped | Springs+Gardens Role |
+|------|-------------------|---------------------|
+| **biomeOS** | G22 COMPLETE (v4.56, dual-protocol, 244 caps) | Foundation for ALL spring dispatch. |
+| **cellMembrane** | J18 gate coupling fix + P2 platform fix | Gate provisioning + garden CI. |
+| **squirrel** | 7,138 tests, 90.1% cov, 0 unsafe | G18: AI agent → biomeOS dispatch. |
+| **petalTongue** | 6,605 tests, modern idiom pass | G19: Rendering pipeline. |
+| **toadStool** | 9,193 tests | G19/G20: GPU compute dispatch. |
+| **barraCuda** | 4,957 tests | G19: Tensor math. |
+| **coralReef** | 3,527 tests | G20: Shader pipeline. |
+| **nestGate** | 13,095+ tests | AlphaFold ingestion (50.7 TB ready). |
 
-### STANDBY (resume for specific garden needs)
+### STANDBY
 
-| Team | Tests | Resume When |
-|------|-------|-------------|
-| **bearDog** | 14,019 | Garden-specific crypto needs |
-| **songBird** | 14,835 | J12 sub-builder IPC wire (then standby) |
-| **sweetGrass** | 1,639 | Garden provenance wiring |
-| **rhizoCrypt** | 1,900 | Garden provenance wiring |
-| **loamSpine** | 1,739 | Garden provenance wiring |
-| **skunkBat** | — | Threat detection expansion |
+| Team | Resume When |
+|------|-------------|
+| bearDog (14,019) | Garden-specific crypto |
+| songBird (14,835) | J12 IPC wire (then standby) |
+| sweetGrass / rhizoCrypt / loamSpine | Garden provenance wiring |
 
 ---
 
@@ -103,40 +123,47 @@ Once items 1-4 are clear, these open up:
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| P3s | 6 (non-blocking, most resolve with G22) |
-| NUCLEUS gates | 4 validated + southGate enrolled |
-| biomeOS | v4.56 (G22 convergence, 244 caps) |
-| Primal tests | ~101K+ |
-| Depot | 35 binaries, 3 platforms, BLAKE3 verified |
-| Jelly strings | 9/11 KILLED. J12 (UNBLOCKED), J18 open. |
-| Glacial goals | 23 tracked. G3+G4+G21 COMPLETE. G22 IN PROGRESS. G23 NEW. |
-| AARs fossilized | 14 → `wave155n_checkpoint/` |
+| MUST-CLEAR items | **3/4 RESOLVED** (J12 wire remaining) |
+| Depot | **46 binaries** (16 musl + 15 gnu + 15 windows). BLAKE3 verified. |
+| biomeOS | **v4.56 G22 COMPLETE** — dual-protocol, 244 caps, unified namespace |
+| Gates current (v4.56) | westGate + sporeGate + blueGate. strandGate needs redeploy. |
+| Provenance 7/7 | westGate pass #8 (consecutive across v4.50→v4.56) |
+| Jelly strings | **10/11 KILLED** (J18 CODE SHIPPED). J12 open (UNBLOCKED). |
+| Divergences | 10 documented. D1+D6 resolve with G22 validation. D3+D5+D7 are ops debt. |
+| Glacial goals | 23 tracked. G3+G4+G21+G22 COMPLETE. G23 NEW. |
 
 ---
 
-## GLACIAL GOALS — CHECKPOINT
+## WHAT'S NEXT
 
-| ID | Goal | Status |
-|----|------|--------|
-| G3 | Provenance Trio 7/7 | **COMPLETE** |
-| G4 | NUCLEUS on multiple gates | **COMPLETE** (×4) |
-| G7 | AlphaFold ingestion | READY (westGate ZFS 50.7 TB) |
-| G8 | Plasmodium bonding | VALIDATING (southGate) |
-| G9 | JOSS publication | Step 3 NEXT (tideGlass) |
-| G10 | Sub-builder mesh | UNBLOCKED (J12) |
-| G11 | Any chip + drive = gate | steamGate NEXT |
-| G14 | sporePrint live refresh | Content ready, needs `zola build` |
-| G17 | Portability | VALIDATING (southGate) |
-| G18 | squirrel → biomeOS agent | **NEXT PHASE** |
-| G19 | petalTongue + Node Atomics | **NEXT PHASE** |
-| G20 | esotericWebb game engine | **NEXT PHASE** |
-| G21 | Coevolution contract | **COMPLETE** |
-| G22 | whitePaper API convergence | **IN PROGRESS** (3 steps remain) |
-| G23 | nestGate CAS-layer redundancy | NEW |
+```
+IMMEDIATE:
+  J12 sub-builder wire (sporeGate → blueGate via songBird IPC)
+  — sole MUST-CLEAR before springs+gardens
+
+GATE OPS:
+  strandGate v4.56 redeploy
+  southGate NUCLEUS launch + J18 validation + bonding proof
+  ironGate esotericWebb migration
+  sporePrint auto-publish hook (D7)
+
+SPRINGS+GARDENS (NEXT PHASE):
+  G18: squirrel → biomeOS agent orchestration
+  G19: petalTongue + Node Atomics live rendering pipeline
+  G20: esotericWebb game engine on NUCLEUS (ironGate)
+  Science: tideGlass Phase 0 → NF → pseudoSpore → JOSS
+  Data: AlphaFold ~23 TB through westGate Nest Atomic CAS
+
+GLACIAL:
+  G6: bearDog public | G8: Plasmodium (southGate) | G11: steamGate
+  G12: darwinGate | G13: iosGate | G17: Portability (southGate)
+  G23: nestGate CAS-layer fractional replication
+```
 
 ---
 
-*Wave 155n checkpoint — ZERO P0/P1/P2. gen4 COMPLETE. gen5 VALIDATED. 14 AARs fossilized.
-biomeOS v4.56 G22 convergence in progress. 4 items to clear before springs+gardens phase:
-G22 single-process merge, J12 sub-builder wire, sporePrint publish, J18 gate coupling.
-Then: G18 (squirrel agent), G19 (petalTongue rendering), G20 (esotericWebb), science pipeline.*
+*Wave 155n — ZERO P0/P1/P2. G22 COMPLETE. 3/4 MUST-CLEAR items RESOLVED.
+sporePrint LIVE (313 pages). J18 CODE SHIPPED. GNU depot COMPLETE (46 bins).
+Sole remaining gate to springs+gardens: J12 sub-builder wire.
+biomeOS v4.56 dual-protocol deployed on westGate (Prov 7/7 ×8), sporeGate, blueGate.
+~101K+ tests. 23 glacial goals (4 COMPLETE). gen5 VALIDATED.*
