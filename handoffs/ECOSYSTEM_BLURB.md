@@ -236,116 +236,84 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Metric | Value |
 |--------|-------|
-| NUCLEUS gates | **3** (westGate + blueGate + strandGate) + sporeGate (CI) |
-| Provenance 7/7 | **COMPLETE** — validated on Linux (westGate) + Windows (blueGate) |
-| Primal tests | **~63K+** |
+| NUCLEUS gates | **4** (westGate + blueGate + strandGate + sporeGate 11/11 HEALTHY) |
+| Provenance 7/7 | **COMPLETE** — validated on Linux (westGate, 4 consecutive passes) + Windows (blueGate) |
+| Primal tests | **~101K+** (squirrel 7,138 was undercounted previously) |
 | Signal graphs | **27** |
 | BTSP | **13/13** |
-| Linux depot | **19/19** (16 musl + 3 glibc) |
-| Windows depot | **14/14 CURRENT** (rebuilt Jul 30 — zero blocked) |
-| Depot targets | **5** (musl, gnu, windows-gnu, aarch64-musl, aarch64-android) |
-| Gates online | **10** |
-| strandGate NUCLEUS caps | **1,742** |
-| strandGate IPC methods | **674** |
-| GPU | RTX 3090 matmul p50 **0.30ms**, pipeline **~2,000 ops/sec** |
-| CAS objects (westGate) | **3,216** on ZFS 25.3TB |
-| Provenance Trio | **7/7 COMPLETE** — live E2E signed chain on westGate (ZFS) + blueGate (Windows) |
-| Sovereign CI | **LIVE** — push-to-deploy, J9+J10+J11 killed |
-| sweetGrass P2 UUID | **FIXED** (`4b5167b`) |
-| biomeOS | **v4.51** — 14 unused deps removed, registry perf fix. Socket evap P2 REOPENED (non-sporeGate deploys). |
-| squirrel | **7,138 tests** (Wave 155n). 90.1% coverage. 0 unsafe. 0 clippy. All IPC adapters wired. |
-| sporeGate | **11/11 HEALTHY** — first clean gate health. biomeOS v4.51 deployed. |
-| bearDog | **14,019 tests**, crypto.sign + Windows gate shipped |
-| cellMembrane boot_order | **SHIPPED** (b7707ee) |
-| cellMembrane dns.configure | **SHIPPED** (2b82722, 1,247 tests) |
-| Active dimensions | **9** (D10 Jelly Strings REOPENED for J9–J13) |
-| Fossilized dimensions | **13** (F13 covers J1–J8 only) |
+| Depot | **35** binaries: 16 musl + 4 gnu + 15 windows, BLAKE3 verified |
+| Gates online | **9** (flockGate DOWN) |
+| biomeOS | **v4.54** on Forgejo — both P1s FIXED + 5 P3s. **v4.51 in depot** (sandbox P2 blocks). |
+| squirrel | **7,138 tests**, 90.1% cov, 0 unsafe, 0 clippy, all IPC wired |
+| cellMembrane | **1,273 tests**, MEMBRANE_* standardization, crypto dedup, init-scope sockets |
+| sporeGate | **11/11 HEALTHY**, golgi hook FIXED (3 bugs), Sovereign CI E2E verified |
 | P0s | **ZERO** |
-| P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
-| P1s | **ZERO** — both FIXED in biomeOS v4.54 (`88785daf`): dual-protocol ping + socket ownership guard |
-| P2s | **1** — sandbox false positive blocks biomeOS depot deploy (v4.54 built but not served) |
-| P3s | **2 OPEN** — cellMembrane self-CI, golgi hook auto-fire |
-| Depot | **35** binaries: 16 musl + **4** gnu + 15 windows (biomeOS gnu NEW, all BLAKE3 verified) |
+| P1s | **ZERO** — both FIXED in biomeOS v4.54 (`88785daf`) |
+| P2s | **1** — sandbox false positive blocks biomeOS depot deploy |
+| P3s | **3 OPEN** — cellMembrane self-CI, /run/membrane perm reset, GNU depot incomplete |
+| Jelly strings | **6/11 KILLED**. 5 remaining: J12, J13, J16, J18, **J19 sandbox** |
+| Glacial goals | **21** tracked (G3-G4 COMPLETE, G21 NEW: coevolution contract) |
 
 ---
 
 ## WHAT'S NEXT
 
 ```
-gen4: COMPLETE. gen5: NUCLEUS IS THE PLATFORM. squirrel + biomeOS + petalTongue + Node Atomics.
+PRIORITY 1 — COEVOLUTION CONTRACT (G21, J19): biomeOS + cellMembrane
 
-Done this wave:
-  ✓ ALL P0/P1/P2 divergences RESOLVED (11/11 fixed by 5 code teams + biomeOS + cellMembrane)
-  ✓ 3 NUCLEUS gates (westGate, blueGate, strandGate) — Provenance 7/7 on 2 platforms
-  ✓ Sovereign CI LIVE — push-to-deploy automated (J9+J10+J11 killed)
-  ✓ Depot 35 binaries (16 musl + 4 gnu + 15 windows) — biomeOS gnu NEW, BLAKE3 verified
-  ✓ biomeOS v4.50 socket ownership + evaporation + binary path + capability wipe ALL FIXED
-  ✓ cellMembrane: membrane.exe P1, checksums, sandbox, rootpulse, tmpfiles, reqwest purge
-  ✓ toadStool S349, petalTongue --family-id, bearDog dual-socket + FAMILY_SEED + 94 files
-  ✓ whitePaper gen4 COMPLETE checkpoint, sporePrint live science strategy
-  ✓ 6/10 jelly strings killed (J9–J11, J14–J15, J17)
+  biomeOS = COMPOSITION AUTHORITY:
+    - composition.test_swap: hot-swap binary, validate in live composition, rollback on failure
+    - Own /run/membrane socket namespace (create dir, set perms, manage lifecycle)
+    - Manage cellMembrane as a composition member
+    - Self-takeover: running biomeOS orchestrates its own replacement
 
-NUCLEUS AS LIVE PLATFORM (gen4 DONE — gen5 is the platform serving real workloads):
-  squirrel (AI agent) → biomeOS (backend) → petalTongue + Node Atomics (rendering + GPU)
-  = science visualization, game engines, AI agents, provenance-tracked artifacts
+  cellMembrane = BUILD AUTHORITY:
+    - sovereign.ci.trigger: build binary, delegate validation to running biomeOS via neural-api
+    - Depot push after biomeOS confirms composition health
+    - sources.toml self-enrollment (J16)
+    - MEMBRANE_GATE_NAME standardization (DONE in 4a2b39c)
 
-  PLATFORM WIRING:
-    G18: squirrel → biomeOS neuralAPI agent orchestration (natural language → dispatch)
-    G19: petalTongue + Node Atomics live rendering pipeline (GPU → WebGL/WASM output)
-    G20: esotericWebb game engine on NUCLEUS (shaders, scene composition, creative surface)
+  DELIVERABLES:
+    biomeOS:  composition.test_swap capability + cellMembrane in composition graph
+    cellMembrane: sovereign.ci.trigger → neural-api delegation (replaces standalone sandbox)
 
-  SCIENCE PIPELINE (one track through the platform):
-    Step 3: tideGlass Phase 0 — GPS archaeology, Zenodo download. NEXT.
-    Steps 4-7: Reproduce → NF ingestion → reversal screen → NF pseudoSpore
-    Step 8: JOSS paper + CTF NDU
-    Timeline: pseudoSpore late Sep (optimistic) / Dec 2026 (realistic)
+  UNBLOCKS:
+    ✓ J19 sandbox false positive → biomeOS v4.54 reaches depot
+    ✓ /run/membrane permission fights → biomeOS owns namespace
+    ✓ Zero-downtime deploys → hot-swap with rollback
+    ✓ biomeOS self-rebuild → full autonomous pipeline
 
-  DATA INGESTION:
-    G7:  AlphaFold ~1TB through westGate Nest Atomic (pipeline READY)
+PRIORITY 2 — GATE REDEPLOYMENTS:
+  1. westGate + strandGate: redeploy biomeOS v4.54 from depot (after J19 resolved)
+  2. ironGate: takes esotericWebb from flockGate (LAN, no RustDesk dependency)
+  3. steamGate: Steam Deck Tower Atomic (cellMembrane user-space deploy READY)
+  4. J12: blueGate sub-builder enrollment under sporeGate
 
-DEPLOYMENT + EXPANSION:
-  1. Gate redeployments: v4.50 + cellMembrane fixes to westGate, strandGate, blueGate
-  2. J12: blueGate sub-builder enrollment
-  3. steamGate: Steam Deck Tower Atomic (cellMembrane user-space deploy ready)
+PRIORITY 3 — PLATFORM WIRING (gen5):
+  G18: squirrel → biomeOS neuralAPI agent orchestration
+  G19: petalTongue + Node Atomics live rendering pipeline
+  G20: esotericWebb game engine on NUCLEUS (ironGate, moved from flockGate)
 
-LIVE SCIENCE (sporePrint = subGen presented to the world):
-  G14: sporePrint content refresh (Phase 1 NOW)
-  G16: pseudoSpore grab pattern on web (Phase 3, after NF data)
-  Surfaces: QCD viz, game engine, GIS, genomics — all powered by NUCLEUS
+SCIENCE PIPELINE (one track through the platform):
+  Step 3: tideGlass Phase 0 — archaeology. NEXT.
+  Steps 4-8: Reproduce → NF → pseudoSpore → JOSS. Target: late Sep / Dec 2026.
+  G7: AlphaFold ~1TB through westGate Nest Atomic (pipeline READY)
+
+LIVE SCIENCE:
+  G14: sporePrint content refresh
+  G16: pseudoSpore grab pattern on web (after NF data)
 
 GLACIAL:
-  G6:  bearDog public (crates.io)
-  G8:  Plasmodium (multi-gate bonding)
-  G11: Any chip + drive = mesh gate (steamGate NEXT)
-  G12: darwinGate — Mac Mini acquisition
-  G13: iosGate — iPhone (after darwin)
-  G17: Portability — reconstitute from cold (pseudoSpore pack/unpack)
+  G6: bearDog public (crates.io) | G8: Plasmodium | G11: steamGate
+  G12: darwinGate | G13: iosGate | G17: Portability
 ```
 
 ---
 
-### SPOREPRINT (Wave 155m — Jul 30, 2026)
-
-**NUCLEUS transplant + root doc cleanup:**
-- NUCLEUS ACHIEVED on 3 gates, Provenance 7/7, gen4 COMPLETE
-- NUCLEUS promoted to Deploy Now shelf, architecture index leads with it
-- 94,927 tests, ZERO P0/P1/P2. bearDog 14,019, rhizoCrypt 1,900
-- README: canonical URL fixed, NUCLEUS/Provenance/SovCI milestones marked done
-- CITATION.cff date updated, EVOLUTION_QUEUE refreshed to 155m state
-- cargo clean: removed 1.3G build artifacts
-- No stale scripts, orphan pages, or debris found. All TODOs in content are
-  legitimate (documenting "zero TODO in primals", not actual action items)
-
-**Upstream gaps for primal teams:**
-- barraCuda/wetSpring: JOSS-ready? Need published release (crates.io or Zenodo)
-- All springs: "Reproduce It" sections still needed in READMEs (per SEO standard)
-- wateringHole PRIMAL_EMOJI_STANDARD: sporePrint entity registry needs cross-check
-
----
-
-*Wave 155m — gen4 COMPLETE. NUCLEUS IS THE PLATFORM: squirrel (AI agent) → biomeOS (backend)
-→ petalTongue + Node Atomics (rendering + GPU) = science to videogames. ZERO P0/P1/P2.
-11/11 divergences FIXED. 6/10 jelly strings killed. Depot 35 binaries. biomeOS v4.50.
-Provenance 7/7. 3 NUCLEUS gates. Sovereign CI LIVE. 20 glacial goals (G3-G4 COMPLETE,
-G18-G20 NEW: agent orchestration, live rendering, game engine). Science pipeline: tideGlass
-Phase 0 NEXT. pseudoSpore target: late Sep / Dec 2026. ~63K+ tests.*
+*Wave 155n — gen4 COMPLETE. biomeOS v4.54: both P1s FIXED (dual-protocol health ping +
+socket ownership guard) + 5 P3s FIXED. On Forgejo, blocked from depot by sandbox P2 (J19).
+COEVOLUTION CONTRACT: biomeOS (composition authority) + cellMembrane (build authority) =
+composition.test_swap. Resolves sandbox, permissions, enables zero-downtime hot-swap.
+4 NUCLEUS gates (sporeGate 11/11 HEALTHY). Sovereign CI E2E verified. Golgi hook FIXED.
+Provenance 7/7. 35 depot binaries. 6/11 jelly strings killed. 21 glacial goals (G21 NEW).
+~101K+ tests. flockGate DOWN → esotericWebb to ironGate.*

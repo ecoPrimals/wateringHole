@@ -10,12 +10,13 @@
 
 [wave]
 id = 155
-sub = "m"
-date = "2026-07-30"
-posture = "ALL DIVERGENCES CLOSED. biomeOS v4.50 (socket evaporation + binary path FIXED). sporeGate Sovereign CI rebuilt depot: 34 binaries (16 musl + 3 gnu + 15 windows), BLAKE3 verified. membrane.exe deployed. ZERO P0/P1/blocking-P2. 3 operational P2s + 2 P3s. 3 NUCLEUS gates. steamGate + blueGate sub-builder UNBLOCKED."
+sub = "n"
+date = "2026-07-31"
+posture = "biomeOS v4.54: both P1s FIXED (dual-protocol health ping + socket ownership guard). Sandbox P2 blocks depot deploy. COEVOLUTION CONTRACT: biomeOS (composition authority) + cellMembrane (build authority) → composition.test_swap. 4 NUCLEUS gates (sporeGate 11/11). Sovereign CI E2E verified. Golgi hook FIXED. 35 depot binaries. 6/11 jelly strings killed. 21 glacial goals."
 publisher = "eastGate-overwatch"
 
 [gates]
-online = ["sporeGate", "eastGate", "ironGate", "flockGate", "golgi", "grapheneGate", "northGate", "westGate", "strandGate", "blueGate"]
+online = ["sporeGate", "eastGate", "ironGate", "golgi", "grapheneGate", "northGate", "westGate", "strandGate", "blueGate"]
+degraded = ["flockGate"]
 enrolling = ["swiftGate", "southGate"]
 offline = []
