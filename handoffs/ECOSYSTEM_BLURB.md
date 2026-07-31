@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155n
 
-**Date**: Jul 31, 2026 14:15 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **ZERO P0/P1/P2. ALL 4 NUCLEUS gates on v4.55. westGate ZFS rebuilt 50.7 TB. P2 platform detection FIXED (J12 UNBLOCKED). southGate VALIDATION GATE. Coevolution COMPLETE (G21). G22: whitePaper API convergence. G23 NEW: nestGate application-managed redundancy. gen5 thesis VALIDATED.**
+**Date**: Jul 31, 2026 14:30 EDT | **Wave**: 155n | **From**: eastGate overwatch
+**Posture**: **ZERO P0/P1/P2. biomeOS v4.56 (G22 convergence steps 1+2: unified namespace, 244 caps, 47 deps removed). ALL 4 NUCLEUS gates current. westGate ZFS 50.7 TB. P2 platform detection FIXED (J12 UNBLOCKED). southGate VALIDATION GATE. G22 IN PROGRESS. G23 NEW: nestGate CAS-layer redundancy. gen5 thesis VALIDATED.**
 
 ---
 
@@ -195,7 +195,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Team | Tests | Wave 155m/n Delivery | Next |
 |------|-------|---------------------|------|
-| **biomeOS** | 8,570 | **v4.55+** (`652cf8a7`): mode gap FIXED — Neural API `btsp_optional=true`, accepts plain JSON-RPC. `composition.test_swap` E2E path OPEN. Depot rebuilt 11:11 EDT. | Convergence: merge api + neural-api into single process. |
+| **biomeOS** | 8,570 | **v4.56** (G22 convergence steps 1+2): unified socket namespace (`membrane/`), 244 caps (up from 51). 47 dead deps removed. `composition.test_swap` backward-compatible. 6 bins rebuilt for all targets. | G22 step 3: single-process merge (api + neural-api → one unit). |
 | **cellMembrane** | 1,281+ | **P2 platform detection FIXED** (`d7026d7`: `Platform::detect` target triple). `TargetArch` deprecated → `Platform::detect()`. `resolve_xdg_runtime_dir` deduped. J12 UNBLOCKED. | J12 sub-builder wire (blueGate IPC). |
 | **squirrel** | 7,138 | Deep debt: 150+ clippy, universal-constants, Cargo.lock purge. 90.1% coverage. 0 unsafe. | G18: biomeOS neuralAPI agent integration |
 | **petalTongue** | 6,605 | Modern idiom pass, debris audit | G19: Node Atomic live rendering pipeline |
@@ -220,7 +220,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Gate | Status | Next |
 |------|--------|------|
 | **eastGate** | Overwatch. biomeOS + squirrel + petalTongue local. | Platform wiring (G18-G20). |
-| **sporeGate** | **11/11 HEALTHY** (perm drift to 8/11). Golgi hook FIXED (3 bugs). Depot rebuilt: 35 bins, all current. | biomeOS composition authority evolution. |
+| **sporeGate** | **11/11 HEALTHY**. biomeOS v4.56 + cellMembrane P2 fix deployed. 6 bins rebuilt (3 targets × 2). Depot current. | J12 sub-builder wire + sporePrint `zola build`. |
 | **westGate** | **NUCLEUS v4.55.** 31/31 sockets stable 225s. Prov 7/7 (5th pass). 835 caps. **ZFS rebuilt: mirror→raidz1, 25.4→50.7 TB usable.** | AlphaFold ingestion (50.7 TB ready). |
 | **strandGate** | **NUCLEUS v4.55.** 12/12 HEALTHY. 1,017 methods. 13 procs (1 each). RTX 3090 p50=0.33ms. **P1 VALIDATED FIXED.** | Node Atomic profiling. |
 | **blueGate** | **NUCLEUS v4.55** (13/13). Prov 7/7. membrane.exe LIVE. **P2 FIXED** (`d7026d7`). J12 UNBLOCKED. | J12 sub-builder IPC wire. |
@@ -251,7 +251,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | BTSP | **13/13** |
 | Depot | **35** binaries: 16 musl + 4 gnu + 15 windows. biomeOS v4.55 rebuilt 11:11 EDT. BLAKE3 verified. |
 | Gates online | **9** (flockGate DOWN) |
-| biomeOS | **v4.55** in depot — both P1s GATE VALIDATED + coevolution + mode gap fix. |
+| biomeOS | **v4.56** in depot — G22 convergence steps 1+2, unified namespace, 244 caps, 47 deps removed. |
 | squirrel | **7,138 tests**, 90.1% cov, 0 unsafe, 0 clippy, all IPC wired |
 | cellMembrane | **1,281+ tests**, `validate_with_deps`, registry API hardened, J19+J16+J13 killed |
 | sporeGate | **11/11 HEALTHY**, golgi hook FIXED, Sovereign CI E2E verified for ALL 13 primals |
@@ -267,18 +267,16 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 ## WHAT'S NEXT
 
 ```
-whitePaper CONVERGENCE (G22 — NEW CONCEPTUAL GOAL):
-  biomeOS API + neuralAPI merge into single process.
-  Long-term whitePaper goal now suddenly achievable: coevolution (G21) proved
-  that biomeOS can speak both riboCipher and plain JSON-RPC natively via
-  btsp_optional=true. The dual-service architecture was transitional scaffold.
-  One biomeOS process = one socket namespace = full composition authority.
-
-  CONVERGENCE STEPS:
-    - Merge api + neural-api into single biomeOS process
-    - biomeOS owns /run/membrane socket namespace
-    - Sovereign CI trigger: git pull before build (source tree divergence fix)
-    - P3 cleanup: /run/membrane perms, bearDog dual-socket, socket dir mismatch
+whitePaper CONVERGENCE (G22 — IN PROGRESS):
+  biomeOS v4.56 shipped steps 1+2:
+    ✓ Step 1: Began unifying api + neural-api capabilities (4b48b83b)
+    ✓ Step 2: Unified socket namespace — all paths use membrane/ (bd33e17d)
+    ✓ 244 caps registered (was 51). 47 dead deps removed.
+  REMAINING:
+    - Step 3: Merge api + neural-api into single process (single systemd unit)
+    - Step 4: biomeOS owns /run/membrane lifecycle
+    - Step 5: Eliminate socket evaporation on restart
+    - P3 cleanup: /run/membrane perms, bearDog dual-socket
 
 PRIORITY 2 — VALIDATION + FLEET EXPANSION:
   1. southGate VALIDATION GATE — external deployment proof:
@@ -314,12 +312,10 @@ GLACIAL:
 
 ---
 
-*Wave 155n — ZERO P0/P1/P2. ALL 4 NUCLEUS gates on v4.55. westGate ZFS rebuilt 50.7 TB.
-cellMembrane P2 platform detection FIXED (J12 UNBLOCKED). southGate VALIDATION GATE.
-NODE ATOMIC LANDMARK: strandGate RTX 3090 — 2,130 matmul/sec, cross-atomic provenance
-chain E2E, W3C PROV-O, AlphaFold 20-30/day capacity. gen5 thesis VALIDATED.
-Coevolution COMPLETE (G21). G22: whitePaper API convergence. G23 NEW: nestGate
-application-managed redundancy. 9/11 jelly strings KILLED. ~101K+ tests.*
+*Wave 155n — ZERO P0/P1/P2. biomeOS v4.56 G22 convergence (244 caps, unified namespace).
+westGate ZFS 50.7 TB. P2 platform detection FIXED (J12 UNBLOCKED). southGate VALIDATION GATE.
+sporePrint content on golgi, needs zola build to publish. gen5 thesis VALIDATED.
+G22 IN PROGRESS (3 steps remaining). G23 NEW: nestGate CAS-layer redundancy. ~101K+ tests.*
 
 ---
 
