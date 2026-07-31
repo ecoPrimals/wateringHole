@@ -95,7 +95,7 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 | rootpulse.ledger degraded probe | Returns ok=true advisory when no session | `0cfcce5` | **FIXED** |
 | sandbox false positive for broker primals | `ServerContract` resolution for biomeOS | `0cfcce5` | **FIXED** |
 | cellMembrane not in sources.toml | Blocks sovereign CI self-rebuild | — | **P3 OPEN** |
-| golgi post-receive hook not auto-firing | biomeOS push didn't trigger CI | — | **P3 OPEN** |
+| golgi post-receive hook not auto-firing | biomeOS `999044e7` pushed to Forgejo 22:14 EDT Jul 30 — depot still has 20:15 build. Pipeline broken. | — | **P2 ESCALATED** |
 
 ---
 
@@ -239,7 +239,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
 | P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
-| P2s | **ZERO** — socket evaporation FIXED for all deploy paths (`999044e7`) |
+| P2s | **1** — golgi post-receive hook not triggering Sovereign CI (depot stale: `999044e7` not built) |
 | P3s | **2 OPEN** — cellMembrane self-CI, golgi hook auto-fire |
 | Depot | **35** binaries: 16 musl + **4** gnu + 15 windows (biomeOS gnu NEW, all BLAKE3 verified) |
 
