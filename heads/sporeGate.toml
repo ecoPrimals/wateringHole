@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-31T17:55:00Z"
+updated = "2026-07-31T18:10:00Z"
 wave = "155n"
 
 [heads]
@@ -25,8 +25,8 @@ toadStool = "92aeb14"
 sourDough = "3a0b52d"
 cellMembrane = "d7026d7"
 primalSpring = "05e72e4"
-wateringHole = "4299c8d"
-sporePrint = "67cc325"
+wateringHole = "4d1f34b"
+sporePrint = "d66b6b9"
 
 [deploy]
 songbird_version = "0.2.1+ (9046664) — TCP registration fix + shared ServiceRegistry"
@@ -77,10 +77,22 @@ biomeos = "v4.56 (6a69807) — G22 convergence step 1+2: unified socket namespac
 membrane = "d7026d7 — P2 platform detection FIXED (detect_target_triple via Platform::detect, J12 unblock) + registry API hardened"
 tower_status = "DEPLOYED — biomeOS v4.56 G22 convergence + cellMembrane d7026d7 P2 platform fix — 11/11 HEALTHY"
 
+[sporeprint]
+wave = "155n"
+status = "LIVE — sporeprint.primals.eco, 313 pages, 23 sections, zola 0.19.2"
+published = "2026-07-31T18:05:00Z"
+commit = "d66b6b9"
+restructure = "conceptual era → demonstration era: Lab | Science | Architecture | Products | Get Started"
+hero = "NUCLEUS Is Running — 3 gates, 13 primals, Provenance 7/7"
+foundation_pages = 47
+new_sections = "backstory, foundation, getting-started"
+validated_papers = "Paper 10 (QCD), Paper 14 (hardware), Paper 21 (provenance), Paper 24 (all-silicon)"
+
 [services_golgi]
-caddy = "RUNNING — /opt/membrane/caddy, 12 sites"
+caddy = "RUNNING — /etc/membrane/Caddyfile, 12 sites"
 step_ca = "ACTIVE — ca.primals.eco, v0.30.2, SSH CA enabled"
 depot = "LIVE — depot.primals.eco, 200 OK, 35 x86_64 binaries (16 musl + 4 gnu + 15 windows)"
+sporeprint = "LIVE — sporeprint.primals.eco, 313 pages, zola built from d66b6b9"
 rustdesk_hbbs = "OK"
 rustdesk_hbbr = "OK"
 
