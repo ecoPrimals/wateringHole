@@ -87,8 +87,8 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 | membrane.exe `UnixStream` P1 | `#[cfg(unix)]` gates + Windows stubs | `4ccbab1` | **FIXED** |
 | cellMembrane steamGate user-space | Deploy path readiness for `~/.local/bin/` | `4a7391d` | **FIXED** |
 | cellMembrane reqwest dep | Purged → sovereign HTTP/1.1 client (pure-Rust TLS) | `4e77ffd` | **FIXED** |
-| biomeOS socket evaporation (health ping format) | v4.50 fix works on sporeGate (plasmidBin paths). **NOT FIXED on user-space deploys** (westGate, strandGate) | `06ed323f` | **P2 REOPENED** |
-| biomeOS binary path retention | Discovery probes plasmidBin dirs, stores resolved path | `06ed323f` | **PARTIAL** (only plasmidBin, not ~/.local/bin/) |
+| biomeOS socket evaporation (health ping format) | v4.50 sporeGate fix + `999044e7` user-space discovery: probes plasmidBin, ~/.local/bin, ~/.cargo/bin, $PATH | `999044e7` | **FIXED** |
+| biomeOS binary path retention | Unified binary_search_dirs() SSOT: 5-tier probe (explicit → depot → XDG → cargo → PATH) | `999044e7` | **FIXED** |
 | Socket ownership for multi-user IPC | biomeOS socket bind now `0666` | `0e45262f` | **FIXED** |
 | checksums.toml partial update on harvest | `finalize_depot()` full disk scan | `0cfcce5` | **FIXED** |
 | /run/membrane tmpfiles.d rule | `deploy/systemd/tmpfiles.d/membrane.conf` shipped | `0cfcce5` | **FIXED** |
@@ -164,7 +164,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Team | Tests | Wave 155m/n Delivery | Next |
 |------|-------|---------------------|------|
-| **biomeOS** | 8,570 | v4.51: socket ownership, evap fix (sporeGate only), 14 deps removed, registry perf | **P2 REOPENED**: socket evaporation on user-space deploys (westGate, strandGate) |
+| **biomeOS** | 8,570 | v4.51+ P2 socket evap **FIXED all paths** (`999044e7`): 5-tier binary discovery (plasmidBin, ~/.local/bin, ~/.cargo/bin, $PATH). 14 deps removed, registry perf. | G18: neuralAPI agent orchestration |
 | **cellMembrane** | 1,263 | 4 AAR fixes (checksums, sandbox, rootpulse, tmpfiles), socket unification, dispatch split | Socket discovery for non-plasmidBin deploy paths |
 | **squirrel** | 7,138 | Deep debt: 150+ clippy, universal-constants, Cargo.lock purge. 90.1% coverage. 0 unsafe. | G18: biomeOS neuralAPI agent integration |
 | **petalTongue** | 6,605 | Modern idiom pass, debris audit | G19: Node Atomic live rendering pipeline |
@@ -190,8 +190,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 |------|--------|------|
 | **eastGate** | Overwatch. biomeOS + squirrel + petalTongue local. | Platform wiring (G18-G20). |
 | **sporeGate** | **11/11 HEALTHY.** Sovereign CI LIVE. biomeOS v4.51 deployed. | J12 sub-builder. Depot rebuilt. |
-| **westGate** | **NUCLEUS.** Prov 7/7. v4.50 deployed. **Socket evaporation P2.** | biomeOS user-space deploy fix. |
-| **strandGate** | **NUCLEUS.** v4.50 deployed (source). **Socket evaporation P2.** | biomeOS user-space deploy fix. |
+| **westGate** | **NUCLEUS.** Prov 7/7. v4.50 deployed. Needs `999044e7` redeploy. | Redeploy biomeOS + AlphaFold ingestion. |
+| **strandGate** | **NUCLEUS.** v4.50 deployed (source). Needs `999044e7` redeploy. | Redeploy biomeOS. |
 | **blueGate** | **NUCLEUS** (15/15 fresh, Prov 7/7). Sub-builder UNBLOCKED. | J12 enrollment under sporeGate. |
 | **flockGate** | **DOWN** — rebooted, RustDesk locked out. May be on mesh. | **esotericWebb → ironGate** (LAN). |
 | **ironGate** | Online. 14TB+1TB+1TB+2TB. **Takes esotericWebb from flockGate.** | Tower + esotericWebb + HDD enclave. |
@@ -239,7 +239,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
 | P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
-| P2s | **1 REOPENED** — socket evaporation on non-sporeGate deploy paths (westGate, strandGate confirm) |
+| P2s | **ZERO** — socket evaporation FIXED for all deploy paths (`999044e7`) |
 | P3s | **2 OPEN** — cellMembrane self-CI, golgi hook auto-fire |
 | Depot | **35** binaries: 16 musl + **4** gnu + 15 windows (biomeOS gnu NEW, all BLAKE3 verified) |
 
