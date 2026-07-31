@@ -87,8 +87,8 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 | membrane.exe `UnixStream` P1 | `#[cfg(unix)]` gates + Windows stubs | `4ccbab1` | **FIXED** |
 | cellMembrane steamGate user-space | Deploy path readiness for `~/.local/bin/` | `4a7391d` | **FIXED** |
 | cellMembrane reqwest dep | Purged → sovereign HTTP/1.1 client (pure-Rust TLS) | `4e77ffd` | **FIXED** |
-| biomeOS socket evaporation (health ping format) | Any successful `call_btsp()` = alive (v4.50) | `06ed323f` | **FIXED** |
-| biomeOS binary path retention | Discovery probes plasmidBin dirs, stores resolved path | `06ed323f` | **FIXED** |
+| biomeOS socket evaporation (health ping format) | v4.50 fix works on sporeGate (plasmidBin paths). **NOT FIXED on user-space deploys** (westGate, strandGate) | `06ed323f` | **P2 REOPENED** |
+| biomeOS binary path retention | Discovery probes plasmidBin dirs, stores resolved path | `06ed323f` | **PARTIAL** (only plasmidBin, not ~/.local/bin/) |
 | Socket ownership for multi-user IPC | biomeOS socket bind now `0666` | `0e45262f` | **FIXED** |
 | checksums.toml partial update on harvest | `finalize_depot()` full disk scan | `0cfcce5` | **FIXED** |
 | /run/membrane tmpfiles.d rule | `deploy/systemd/tmpfiles.d/membrane.conf` shipped | `0cfcce5` | **FIXED** |
@@ -160,41 +160,44 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 ## TEAMS — ACTIVE vs STANDBY
 
-### ALL TEAMS STANDBY (12 teams — all P1s shipped)
+### ACTIVE CODE TEAMS
 
-| Team | Tests | Key Delivery | Resume When |
-|------|-------|-------------|-------------|
-| **biomeOS** | 8,564 | **NUCLEUS orchestrator v4.47**: riboCipher fix, socket unification, capability persistence, composition lifecycle, bind flag standard | NUCLEUS E2E validation on gates |
-| **bearDog** | 14,019 | **crypto.sign_ed25519** + Windows platform gating. ACME Phase 2 crypto delegation. | Provenance 7/7 live validation |
-| **cellMembrane** | 1,247 | boot_order + `dns.configure`/`dns.apply` | Composition lifecycle gate deployment |
-| **toadStool** | 9,193 | S347 Windows cross-compile fix | sporeGate depot rebuild |
-| **coralReef** | 3,527 | Windows fix + `--bind` alias | sporeGate depot rebuild |
-| **songBird** | 14,835 | P0 Windows fix + deep debt | biomeOS TCP registration |
-| **sweetGrass** | 1,639 | G3 E2E + UUID fix | Provenance 7/7 live validation |
-| **rhizoCrypt** | 1,900 | Cross-compile clean + `--bind` | NUCLEUS lifecycle testing |
-| **loamSpine** | 1,739 | Registry fixed + `--bind` | Provenance 7/7 live validation |
-| **nestGate** | 13,095+ | CAS on ZFS verified | AlphaFold ingestion |
-| **petalTongue** | 6,605 | Stable v1.7.0 | WASM validation |
-| **squirrel** | 763 | Stable | Capability testing |
+| Team | Tests | Wave 155m/n Delivery | Next |
+|------|-------|---------------------|------|
+| **biomeOS** | 8,570 | v4.51: socket ownership, evap fix (sporeGate only), 14 deps removed, registry perf | **P2 REOPENED**: socket evaporation on user-space deploys (westGate, strandGate) |
+| **cellMembrane** | 1,263 | 4 AAR fixes (checksums, sandbox, rootpulse, tmpfiles), socket unification, dispatch split | Socket discovery for non-plasmidBin deploy paths |
+| **squirrel** | 7,138 | Deep debt: 150+ clippy, universal-constants, Cargo.lock purge. 90.1% coverage. 0 unsafe. | G18: biomeOS neuralAPI agent integration |
+| **petalTongue** | 6,605 | Modern idiom pass, debris audit | G19: Node Atomic live rendering pipeline |
 
-### GATE STANDBY
+### STANDBY CODE TEAMS (all P1s shipped)
 
-| Gate | Status | Resume When |
-|------|--------|-------------|
-| **strandGate** | **NUCLEUS** (v4.47 depot deploy, `nucleus start`). Socket evaporation P2. | biomeOS v4.49 ping tolerance fix. |
-| **blueGate** | **NUCLEUS** (14/14 fresh, Provenance 7/7 validated). | Sub-builder (needs membrane.exe P1). |
-| **westGate** | **NUCLEUS** (Provenance 7/7 COMPLETE, ZFS 25.4TB). | AlphaFold ~1TB ingestion. |
-| **swiftGate** | HW ready. Windows. | After blueGate sub-builder stable. |
-| **ironGate** | Online. 14TB+1TB+1TB+2TB. | Tower + HDD enclave. |
-| **southGate** | HW ready. | Enrollment. |
-| **grapheneGate** | Tower LIVE (Pixel 8a). | ADB mesh expansion. |
+| Team | Tests | Resume When |
+|------|-------|-------------|
+| **bearDog** | 14,019 | STANDBY — all P1s shipped |
+| **songBird** | 14,835 | STANDBY |
+| **toadStool** | 9,193 | G19/G20 rendering + game pipeline |
+| **coralReef** | 3,527 | G20 shader pipeline |
+| **barraCuda** | 4,957 | G19 tensor computation |
+| **sweetGrass** | 1,639 | STANDBY |
+| **rhizoCrypt** | 1,900 | STANDBY |
+| **loamSpine** | 1,739 | STANDBY |
+| **nestGate** | 13,095+ | AlphaFold ingestion |
+| **skunkBat** | — | STANDBY |
 
-### GATE ACTIVE
+### GATE STATUS
 
 | Gate | Status | Next |
 |------|--------|------|
-| **eastGate** | Overwatch. | Cross-platform expansion. Disseminate P2 divergences. |
-| **sporeGate** | **Sovereign CI LIVE.** Push-to-deploy automated. | J12 (blueGate sub-builder, blocked on membrane.exe). J13 polish. |
+| **eastGate** | Overwatch. biomeOS + squirrel + petalTongue local. | Platform wiring (G18-G20). |
+| **sporeGate** | **11/11 HEALTHY.** Sovereign CI LIVE. biomeOS v4.51 deployed. | J12 sub-builder. Depot rebuilt. |
+| **westGate** | **NUCLEUS.** Prov 7/7. v4.50 deployed. **Socket evaporation P2.** | biomeOS user-space deploy fix. |
+| **strandGate** | **NUCLEUS.** v4.50 deployed (source). **Socket evaporation P2.** | biomeOS user-space deploy fix. |
+| **blueGate** | **NUCLEUS** (15/15 fresh, Prov 7/7). Sub-builder UNBLOCKED. | J12 enrollment under sporeGate. |
+| **flockGate** | **DOWN** — rebooted, RustDesk locked out. May be on mesh. | **esotericWebb → ironGate** (LAN). |
+| **ironGate** | Online. 14TB+1TB+1TB+2TB. **Takes esotericWebb from flockGate.** | Tower + esotericWebb + HDD enclave. |
+| **swiftGate** | HW ready. Windows. | After blueGate sub-builder stable. |
+| **southGate** | HW ready. | Enrollment. |
+| **grapheneGate** | Tower LIVE (Pixel 8a). | ADB mesh expansion. |
 
 ### GATE NEW (cross-platform expansion)
 
@@ -226,7 +229,9 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Provenance Trio | **7/7 COMPLETE** — live E2E signed chain on westGate (ZFS) + blueGate (Windows) |
 | Sovereign CI | **LIVE** — push-to-deploy, J9+J10+J11 killed |
 | sweetGrass P2 UUID | **FIXED** (`4b5167b`) |
-| biomeOS | **v4.50** — socket evap + binary path FIXED (`06ed323f`). Deployed on sporeGate. |
+| biomeOS | **v4.51** — 14 unused deps removed, registry perf fix. Socket evap P2 REOPENED (non-sporeGate deploys). |
+| squirrel | **7,138 tests** (Wave 155n). 90.1% coverage. 0 unsafe. 0 clippy. All IPC adapters wired. |
+| sporeGate | **11/11 HEALTHY** — first clean gate health. biomeOS v4.51 deployed. |
 | bearDog | **14,019 tests**, crypto.sign + Windows gate shipped |
 | cellMembrane boot_order | **SHIPPED** (b7707ee) |
 | cellMembrane dns.configure | **SHIPPED** (2b82722, 1,247 tests) |
@@ -234,7 +239,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
 | P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
-| P2s | **ZERO** |
+| P2s | **1 REOPENED** — socket evaporation on non-sporeGate deploy paths (westGate, strandGate confirm) |
 | P3s | **2 OPEN** — cellMembrane self-CI, golgi hook auto-fire |
 | Depot | **35** binaries: 16 musl + **4** gnu + 15 windows (biomeOS gnu NEW, all BLAKE3 verified) |
 

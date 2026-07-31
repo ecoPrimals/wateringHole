@@ -80,31 +80,30 @@ gate_playbook = """When gate comes online:
 [validation.wan_x86_64]
 description = "WAN gates (flockGate) — x86_64-musl, depot via HTTPS, mesh via VPS relay"
 proven_on = ["flockGate (4/5 e2e PASS — fetch BLAKE3-VERIFIED, launch OK, mesh.init OK, health OK)"]
-needs_validation = ["flockGate bidirectional handshake — VPS songbird RESTARTED (Wave 108), awaiting flockGate auto-retry"]
-blocker = """RESOLVED (Wave 108): VPS songbird RESTARTED on golgiBody.
-Old stale processes (PID 408850, 642360) killed. Fresh binary (Jun 10 21:55 UTC) now running
-as PID 645362/645363. Federation port 7700 bound to 0.0.0.0, confirmed REACHABLE from eastGate.
+needs_validation = ["flockGate bidirectional handshake — VPS songbird PROCESS must be restarted (depot binary fresh, running process stale)"]
+blocker = """CRITICAL: VPS songbird process on golgiBody has NOT been restarted.
+The depot FILE was refreshed Jun 10 02:28 UTC (BLAKE3 03775a3f... verified).
+But the RUNNING PROCESS is still the pre-federation-fix binary (predates 1df7ef90).
 
-flockGate tested TWICE before restart (11:40 UTC + 17:26 UTC):
+flockGate tested TWICE (11:40 UTC + 17:26 UTC):
 - TCP to 157.230.3.183:7700: CONNECTS (32ms RTT)
 - mesh.init: ACKNOWLEDGED by VPS
-- After 67s+: latency_ms remains null — no bidirectional protocol handshake (stale binary)
+- After 67s+: latency_ms remains null — no bidirectional protocol handshake
 
 The 4-gate LAN collective works because LAN gates connected differently.
 WAN requires the federation fix in the running process.
 
-EXECUTED (Wave 108, 2026-06-11 00:30 UTC):
-  Stale PIDs 408850, 642360 killed.
-  Fresh /opt/membrane/songbird (Jun 10 21:55 UTC) launched: PID 645362, 645363.
-  Federation port 7700 bound *:7700, confirmed REACHABLE from eastGate (76ms).
-  Relay (PID 642395, port 3478) left untouched.
+FIX (cellMembrane on golgiBody VPS):
+  kill $(pgrep songbird)
+  SONGBIRD_FEDERATION_PORT=7700 /opt/ecoPrimals/plasmidBin/x86_64-unknown-linux-musl/songbird server --port 7700 --bind 0.0.0.0 --socket /run/user/1000/biomeos/songbird.sock &
 
 flockGate side is READY (songbird running, port 7700 bound, mesh.init will auto-retry).
-Expect latency_ms ≈ 30-35ms → 5/5 → stadial criterion 4."""
-gate_playbook = """VPS songbird RESTARTED (Wave 108). flockGate should auto-mesh:
+Once VPS restarts: expect latency_ms ≈ 30-35ms → 5/5 → stadial criterion 4."""
+gate_playbook = """flockGate READY — waiting on VPS process restart only.
+After VPS restarts songbird:
   1. flockGate mesh.init auto-retries (already running)
-  2. Verify latency_ms becomes non-null (expect ~30ms)
-  3. Verify discovery.peers shows eastGate transitively
+  2. Verify latency_ms becomes non-null
+  3. Verify discovery.peers shows transitive peer discovery
   4. Full NUCLEUS health sweep → 5/5 WAN e2e"""
 
 [validation.aarch64_musl]
@@ -125,47 +124,46 @@ proven_on = ["golgiBody (13/13 running, songbird:7700 mesh LIVE)"]
 needs_validation = ["Automated refresh when peptidoglycan builds new binaries"]
 
 # ──────────────────────────────────────────────────────────────
-# REMAINING WORK (1 P2 pending validation, 1 LOW — zero P1)
+# REMAINING WORK (2 P2 ops, 1 LOW — zero P1, zero primal code)
 # ──────────────────────────────────────────────────────────────
 
-# --- P2: Awaiting validation ---
+# --- P2: Operational (no code changes needed) ---
 
 [remaining.flockgate_wan_e2e]
 id = "FLOCKGATE-WAN-E2E"
-owner = "flockGate ops"
+owner = "cellMembrane ops (golgiBody VPS)"
 priority = "P2"
-description = "VPS songbird RESTARTED. flockGate reported issues — awaiting 5/5 confirmation"
-why = """VPS songbird process restarted (Wave 108, fresh binary, PIDs 645362/645363).
-Federation port 7700 bound 0.0.0.0, reachable from eastGate.
-flockGate tried WAN earlier and reported issues (pre-restart).
-Need flockGate to re-test now that VPS is fresh."""
-action = """flockGate to re-test:
-1. mesh.init to 157.230.3.183:7700
-2. Verify latency_ms non-null (~30ms expected)
-3. Verify discovery.peers shows eastGate transitively
-4. If PASS → 5/5 WAN e2e → stadial criterion 4 VALIDATED
-If still failing → file impulse with error details."""
+description = "flockGate WAN 4/5 — blocked on VPS songbird PROCESS restart (stale binary running)"
+why = """flockGate tested twice (11:40 UTC + 17:26 UTC Jun 10). TCP to 157.230.3.183:7700
+CONNECTS (32ms RTT). mesh.init ACKNOWLEDGED. But after 67s+ latency_ms stays null —
+no bidirectional handshake. The VPS depot FILE was refreshed (BLAKE3 verified) but the
+RUNNING PROCESS is still pre-federation-fix (predates 1df7ef90). LAN collective works
+because LAN gates connected differently. WAN requires the fix in the running process."""
+action = """cellMembrane ops on golgiBody VPS:
+  kill $(pgrep songbird)
+  SONGBIRD_FEDERATION_PORT=7700 /opt/ecoPrimals/plasmidBin/x86_64-unknown-linux-musl/songbird server --port 7700 --bind 0.0.0.0 --socket /run/user/1000/biomeos/songbird.sock &
 
-# --- RESOLVED (Wave 108) ---
+flockGate side is READY — songbird running, port 7700 bound, mesh.init will auto-retry.
+Once VPS restarts: expect latency_ms ~30-35ms → 5/5 → stadial criterion 4 VALIDATED."""
 
-[resolved.graphenegate_deploy]
+[remaining.graphenegate_rebuild]
 id = "GRAPHENEGATE-REBUILD"
 owner = "primalSpring evolution team (eastGate)"
-priority = "DONE"
-description = "DEPLOYED AND VALIDATED (Wave 108). 13/13 primals ALIVE on Pixel 8a."
-resolution = """aarch64 depot rebuilt on peptidoglycan. coralReef required local rebuild
-(build-primal.sh staging cache stale). 13/13 confirmed via pgrep + TCP probe + JSON-RPC.
-AAR: AAR_GRAPHENEGATE_WAVE108_13_OF_13_DEPLOYED_JUN10_2026.md
-Evolution gaps identified: 7 (standard startup contract, platform capability detection,
-Rust build pipeline, gate profiles, on-device orchestration, standard health endpoint,
-BTSP e2e validation)."""
+priority = "P2"
+description = "aarch64 REBUILT (Wave 108). Pixel 8 redeploy pending — connect device + deploy_pixel.sh"
+why = """All 13 primals now have bind_transport() / TCP-only fallback adopted:
+- coralReef (27b4bb3): PRIMAL_BIND_MODE in resolve_bind()
+- nestGate (9f15143a): is_platform_constraint() honors PRIMAL_BIND_MODE=fallback
+- petalTongue (e5a65e0): EACCES→TCP 9900 fallback
+- biomeOS (v4.18, b8ddf351): native TCP-only fallback
+Development is COMPLETE. Rebuild DONE (Wave 108). Only hardware deploy remains.
+Owned by primalSpring evolution team on eastGate (system with Pixel 8a)."""
+action = """1. ✅ Rebuild all 13 primals for aarch64-unknown-linux-musl on peptidoglycan (Wave 108)
+2. ✅ checksums.toml updated + pushed (516879f)
+3. primalSpring evolution team: deploy to Pixel 8a via deploy_pixel.sh (PRIMAL_BIND_MODE=fallback)
+4. primalSpring evolution team: verify 13/13 alive on grapheneGate"""
 
-[resolved.vps_songbird_restart]
-id = "VPS-SONGBIRD-RESTART"
-owner = "cellMembrane ops"
-priority = "DONE"
-description = "VPS songbird process restarted (Wave 108). Fresh binary running, port 7700 confirmed."
-resolution = "Stale PIDs 408850+642360 killed. Fresh binary (Jun 10 21:55 UTC) → PIDs 645362+645363."
+# --- RESOLVED (this wave) ---
 
 [resolved.biomeos_neural_api_bind]
 id = "BM-UDS-01"
@@ -193,10 +191,8 @@ action = "Run under RUST_BACKTRACE=1, investigate and fix."
 # ──────────────────────────────────────────────────────────────
 
 [resolved_summary]
-count = 26
+count = 23
 detail = """
-Wave 108: grapheneGate 13/13 DEPLOYED + VALIDATED (Pixel 8a), VPS songbird RESTARTED,
-  BM-UDS-01 SHIPPED (biomeOS v4.20+v4.21), aarch64 rebuild + NDK pipeline.
 Wave 106: strandGate LAN re-enrollment, ironGate 3rd mesh node, gate.bootstrap SHIPPED,
   plasmid.fetch fix, cascade auto-fetch, mesh persistence, federation port fix,
   NUCLEUS supervision (biomeOS v4.17), TCP-only fallback, deterministic deployment codified.
