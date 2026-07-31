@@ -95,7 +95,7 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 | rootpulse.ledger degraded probe | Returns ok=true advisory when no session | `0cfcce5` | **FIXED** |
 | sandbox false positive for broker primals | `ServerContract` resolution for biomeOS | `0cfcce5` | **FIXED** |
 | cellMembrane not in sources.toml | Blocks sovereign CI self-rebuild | — | **P3 OPEN** |
-| golgi post-receive hook not auto-firing | biomeOS `999044e7` pushed to Forgejo 22:14 EDT Jul 30 — depot still has 20:15 build. Pipeline broken. | — | **P2 ESCALATED** |
+| golgi post-receive hook not auto-firing | biomeOS `999044e7` (22:14 Jul 30) + cellMembrane `301e236` (Jul 31) both pushed — depot still has 20:15 Jul 30 build. Pipeline broken. 2 critical fixes not reaching gates. | — | **P2 ESCALATED** |
 
 ---
 
@@ -165,7 +165,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Team | Tests | Wave 155m/n Delivery | Next |
 |------|-------|---------------------|------|
 | **biomeOS** | 8,570 | v4.51+ P2 socket evap **FIXED all paths** (`999044e7`): 5-tier binary discovery (plasmidBin, ~/.local/bin, ~/.cargo/bin, $PATH). 14 deps removed, registry perf. | G18: neuralAPI agent orchestration |
-| **cellMembrane** | 1,263 | 4 AAR fixes (checksums, sandbox, rootpulse, tmpfiles), socket unification, dispatch split | Socket discovery for non-plasmidBin deploy paths |
+| **cellMembrane** | 1,266 | Init-scope-aware socket discovery (`resolve_socket_base()`), gate identity consolidation (3→1), plasmid smart split (-310L). Unblocks steamGate user-space deploys. | Depot rebuild needed (golgi hook P2). |
 | **squirrel** | 7,138 | Deep debt: 150+ clippy, universal-constants, Cargo.lock purge. 90.1% coverage. 0 unsafe. | G18: biomeOS neuralAPI agent integration |
 | **petalTongue** | 6,605 | Modern idiom pass, debris audit | G19: Node Atomic live rendering pipeline |
 
