@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155m
 
 **Date**: Jul 31, 2026 09:15 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **P1 OPEN: biomeOS respawn storm — riboCipher health pings fail on plain JSON-RPC primals → DEGRADED → unbounded process accumulation (175 procs/14 min on strandGate). Socket evaporation confirmed on westGate (50% survival). Root cause: riboCipher and plain JSON-RPC are facets of the same protocol layer, not competing systems — biomeOS health monitor must speak both. Golgi hook P2 FIXED (3 bugs). Depot rebuilt with 999044e7 + 301e236. Sovereign CI E2E verified. cellMembrane shipped MEMBRANE_* env standardization + crypto dedup. 6 P3s tracked.**
+**Posture**: **biomeOS v4.54 shipped BOTH P1 fixes (dual-protocol health ping + socket ownership guard) + 5 P3 fixes. Code is on Forgejo. BUT sandbox false positive BLOCKS depot deploy (P2 ESCALATED) — Sovereign CI builds biomeOS but sandbox rejects the orchestrator because it can't self-validate in isolation. Depot still serves v4.51. cellMembrane needs broker-primal exemption or composition.test_swap to unblock. Golgi hook FIXED. 3 P3s remain.**
 
 ---
 
@@ -78,8 +78,8 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 
 | Issue | Evidence | Owner | Status |
 |-------|----------|-------|--------|
-| **Respawn storm** — biomeOS health pings use riboCipher framing, most primals speak plain JSON-RPC → every primal cycles DEGRADED every ~90s → unbounded process accumulation | strandGate: 175 procs / 14 min, 538 resurrections. Kill-before-spawn doesn't reliably reap old instances. | **biomeOS** | **P1 OPEN** |
-| **Socket file deletion** — biomeOS unlinks socket files for primals that fail health ping, even though processes are alive | westGate: 31→16 sockets in 3 min (50% survival). All procs alive, sockets deleted. 3 versions, same result. | **biomeOS** | **P1 OPEN** |
+| **Respawn storm** — riboCipher-only health pings caused DEGRADED cycling → unbounded process accumulation | strandGate: 175 procs / 14 min, 538 resurrections. | **biomeOS** | **FIXED in v4.54** (`88785daf`) — dual-protocol ping: plain JSON-RPC first, BTSP fallback |
+| **Socket file deletion** — biomeOS unlinked sockets for primals that failed health ping | westGate: 31→16 sockets in 3 min (50% survival). | **biomeOS** | **FIXED in v4.54** (`88785daf`) — PID ownership + confirmed kill before unlink. Never removes sockets it didn't create. |
 
 **Root cause for both P1s**: riboCipher and plain JSON-RPC are **facets of the same protocol layer** (riboCipher is the intra-functional framing of mitoBeacon genetics). biomeOS health monitor must speak both — ping with riboCipher first, fall back to plain JSON-RPC, or primals declare their protocol at registration. biomeOS must NEVER unlink a socket it didn't create.
 
@@ -110,15 +110,15 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 
 | Issue | Owner | Status |
 |-------|-------|--------|
+| **biomeOS sandbox false positive** | cellMembrane + biomeOS | **P2 ESCALATED** — blocks depot deploy. v4.54 P1 fix built by Sovereign CI but sandbox rejects biomeOS (orchestrator can't self-validate in isolation). Needs broker-primal exemption or composition.test_swap. |
 | cellMembrane not in sources.toml | cellMembrane | Blocks self-CI |
-| biomeOS sandbox false positive for broker primals | biomeOS + cellMembrane | Needs composition.test_swap |
 | /run/membrane permission reset at runtime | biomeOS | Resets dir to 0770 on connection |
-| Zombie process reaping | biomeOS | waitpid() / SIGCHLD handler needed |
-| Virtual service DEGRADED churn | biomeOS | Exclude aggregate capability sockets from health monitor |
-| graphs_dir default path | biomeOS | Falls back to $CWD/graphs, missing on non-sporeGate |
-| riboCipher rejection at ERROR level | biomeOS | Should be WARN/DEBUG for protocol negotiation |
-| biomeOS `--version` reports 0.1.0 | biomeOS | Version not set during CI build |
 | GNU depot incomplete | sporeGate | 4/16 musl targets have gnu builds |
+| ~~Zombie process reaping~~ | ~~biomeOS~~ | **FIXED in v4.54** (`88785daf`) — background child.wait() |
+| ~~Virtual service DEGRADED churn~~ | ~~biomeOS~~ | **FIXED in v4.54** — skip resurrection for external primals |
+| ~~graphs_dir default path~~ | ~~biomeOS~~ | **FIXED in v4.54** — XDG fallback + BIOMEOS_GRAPHS_DIR env |
+| ~~riboCipher rejection at ERROR level~~ | ~~biomeOS~~ | **FIXED in v4.54** — demoted to debug |
+| ~~biomeOS `--version` reports 0.1.0~~ | ~~biomeOS~~ | **FIXED in v4.54** — workspace version 4.54.0 |
 
 ---
 
@@ -187,7 +187,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Team | Tests | Wave 155m/n Delivery | Next |
 |------|-------|---------------------|------|
-| **biomeOS** | 8,570 | v4.51+ binary discovery FIXED (`999044e7`). 14 deps removed. **TWO P1s OPEN**: (1) respawn storm — kill-before-spawn + protocol negotiation; (2) socket file deletion — never unlink a socket biomeOS didn't create. riboCipher health pings must fall back to plain JSON-RPC. | **P1 FIX** |
+| **biomeOS** | 8,570 | **v4.54** (`88785daf`): both P1s FIXED (dual-protocol ping + socket ownership), 5 P3s FIXED (zombie reaping, virtual service churn, graphs_dir, riboCipher log level, --version). On Forgejo. **Blocked from depot by sandbox false positive (P2).** | Sandbox exemption needed from cellMembrane. |
 | **cellMembrane** | 1,273 | MEMBRANE_* env standardization (GATE_NAME P3 FIXED), crypto dedup (HKDF/HMAC consolidated), bootstrap 738→291L + phases split, plasmid smart split (-310L). | sources.toml self-enrollment. |
 | **squirrel** | 7,138 | Deep debt: 150+ clippy, universal-constants, Cargo.lock purge. 90.1% coverage. 0 unsafe. | G18: biomeOS neuralAPI agent integration |
 | **petalTongue** | 6,605 | Modern idiom pass, debris audit | G19: Node Atomic live rendering pipeline |
@@ -262,8 +262,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
 | P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
-| P1s | **2 OPEN** — biomeOS respawn storm + socket file deletion (riboCipher health ping mismatch) |
-| P2s | **ZERO** — golgi hook FIXED (3 bugs), depot rebuilt with `999044e7` + `301e236` |
+| P1s | **ZERO** — both FIXED in biomeOS v4.54 (`88785daf`): dual-protocol ping + socket ownership guard |
+| P2s | **1** — sandbox false positive blocks biomeOS depot deploy (v4.54 built but not served) |
 | P3s | **2 OPEN** — cellMembrane self-CI, golgi hook auto-fire |
 | Depot | **35** binaries: 16 musl + **4** gnu + 15 windows (biomeOS gnu NEW, all BLAKE3 verified) |
 
