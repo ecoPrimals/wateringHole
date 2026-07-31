@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155m
 
-**Date**: Jul 30, 2026 13:00 EDT | **Wave**: 155m | **From**: eastGate overwatch
-**Posture**: **ALL P2 DIVERGENCES CLOSED. biomeOS v4.50 ships socket evaporation fix + binary path retention (BOTH P2s FIXED). sporeGate Sovereign CI cascaded all 5 team shipments — depot rebuilt: 34 binaries (16 musl + 3 gnu + 15 windows), all BLAKE3 verified. membrane.exe depot-deployed (15/15 Windows). cellMembrane deep debt + self-knowledge. sporeGate gate health 10/11 (rootpulse.ledger not implemented). ZERO P0s. ZERO P1s. ZERO blocking P2s. 8 operational P2/P3s from sporeGate AAR.**
+**Date**: Jul 31, 2026 09:15 EDT | **Wave**: 155n | **From**: eastGate overwatch
+**Posture**: **P1 OPEN: biomeOS respawn storm — riboCipher health pings fail on plain JSON-RPC primals → DEGRADED → unbounded process accumulation (175 procs/14 min on strandGate). Socket evaporation confirmed on westGate (50% survival). Root cause: riboCipher and plain JSON-RPC are facets of the same protocol layer, not competing systems — biomeOS health monitor must speak both. Golgi hook P2 FIXED (3 bugs). Depot rebuilt with 999044e7 + 301e236. Sovereign CI E2E verified. cellMembrane shipped MEMBRANE_* env standardization + crypto dedup. 6 P3s tracked.**
 
 ---
 
@@ -10,26 +10,24 @@
 Three gates now running full NUCLEUS. Provenance 7/7 validated on two platforms.
 
 ```
-westGate NUCLEUS (Jul 30 — PROVENANCE 7/7 COMPLETE):
-  Tower:  bearDog ✓  songBird ✓  skunkBat ✓
-  Nest:   nestGate ✓  loamSpine ✓  sweetGrass ✓  rhizoCrypt ✓
-  Node:   toadStool ✓  barraCuda ✓  coralReef ✓
-  Viz:    petalTongue ✓  squirrel ✓
-  Orch:   biomeOS ✓ (v4.47 COORDINATED, 654 caps)
-  Score:  13/13 | 29 sockets | Provenance 7/7 LIVE
-  ZFS:    25.4TB ONLINE, 3,252 CAS objects, 1.56× compression
+westGate NUCLEUS (Jul 31 — v4.51 deployed, PROVENANCE 7/7 COMPLETE):
+  13/13 alive | 835 peak caps | Provenance 7/7 (4 consecutive passes)
+  ZFS: 25.4TB ONLINE, 3,256 CAS objects, 1.56× compression
+  ⚠ Socket evaporation P1: 31→16 sockets in 3 min (50% survival)
+  ⚠ membrane/ vs biomeos/ socket dir mismatch (symlink workaround)
 
 blueGate NUCLEUS (Jul 30 — Windows, Provenance 7/7 VALIDATED):
-  13/13 primals, 131.1 MB (down from 147.5 MB), TCP-only
-  bearDog crypto.sign LIVE, Provenance 7/7 E2E on Windows
-  DID key: did:key:z6Mkryaa7n6hfpSbGaZwbqPMD6MzXukgdQK3XRKzwFSgce8o
+  13/13 primals, 131.1 MB, TCP-only, crypto.sign LIVE
 
-strandGate NUCLEUS (Jul 29 — first gate, manual startup):
-  8/9 healthy | 1,742 caps | 674 IPC methods | RTX 3090 sub-ms GPU
+strandGate NUCLEUS (Jul 31 — v4.51 depot deploy, 999044e7 confirmed):
+  11/12 healthy | 912 methods | 27 sockets
+  ⚠ RESPAWN STORM P1: 175 procs / 14 min, 538 resurrections
+  ⚠ riboCipher health ping → plain JSON-RPC primals = DEGRADED → respawn loop
 
-sporeGate SOVEREIGN CI LIVE:
-  Push to Forgejo → auto build → sandbox validate → depot push → HTTPS serve
-  J9+J10+J11 KILLED. Zero human intervention for musl builds.
+sporeGate SOVEREIGN CI LIVE (Jul 31 — golgi hook FIXED):
+  11/11 HEALTHY | 35 depot bins | Golgi hook E2E verified
+  Push to Forgejo → auto build → sandbox → depot push → HTTPS serve
+  J9+J10+J11 KILLED. Zero human intervention for non-broker primals.
 ```
 
 **What NUCLEUS + Provenance proved**: full 7-step provenance chain (CAS → DAG → Merkle →
@@ -74,32 +72,53 @@ All blocking code work is done. 50 handoffs fossilized to `fossilRecord/wave155k
 
 All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → fossilized.
 
-### Divergences — Wave 155m Resolution
+### Divergences — Wave 155n
 
-| Issue | Fix | Commit | Status |
-|-------|-----|--------|--------|
-| bearDog dual-socket footgun | Default socket now aliases family-scoped | `a875d463` | **FIXED** |
-| bearDog `FAMILY_SEED` required | Precedence: env → file → auto-generate | `a875d463` | **FIXED** |
-| `PRIMAL_BIND_MODE` `tcp_only` fallback | petalTongue accepts `tcp` semantics | `551e781` | **FIXED** |
-| biomeOS capability wipe cycle | 3-strike prune threshold (v4.49) | `f2d4c4b3` | **FIXED** |
-| toadStool tarpc-only | Legacy symlink → JSON-RPC `compute.sock` | `5053e0bc` | **FIXED** |
-| petalTongue rejects `--family-id` | `--family-id` propagation added | `551e781` | **FIXED** |
-| membrane.exe `UnixStream` P1 | `#[cfg(unix)]` gates + Windows stubs | `4ccbab1` | **FIXED** |
-| cellMembrane steamGate user-space | Deploy path readiness for `~/.local/bin/` | `4a7391d` | **FIXED** |
-| cellMembrane reqwest dep | Purged → sovereign HTTP/1.1 client (pure-Rust TLS) | `4e77ffd` | **FIXED** |
-| biomeOS socket evaporation (health ping format) | v4.50 sporeGate fix + `999044e7` user-space discovery: probes plasmidBin, ~/.local/bin, ~/.cargo/bin, $PATH | `999044e7` | **FIXED** |
-| biomeOS binary path retention | Unified binary_search_dirs() SSOT: 5-tier probe (explicit → depot → XDG → cargo → PATH) | `999044e7` | **FIXED** |
-| Socket ownership for multi-user IPC | biomeOS socket bind now `0666` | `0e45262f` | **FIXED** |
-| checksums.toml partial update on harvest | `finalize_depot()` full disk scan | `0cfcce5` | **FIXED** |
-| /run/membrane tmpfiles.d rule | `deploy/systemd/tmpfiles.d/membrane.conf` shipped | `0cfcce5` | **FIXED** |
-| rootpulse.ledger degraded probe | Returns ok=true advisory when no session | `0cfcce5` | **FIXED** |
-| sandbox false positive for broker primals | `ServerContract` resolution for biomeOS | `0cfcce5` | **FIXED** |
-| cellMembrane not in sources.toml | Blocks sovereign CI self-rebuild | — | **P3 OPEN** |
-| biomeOS sandbox false positive | Orchestrator can't self-validate in isolation — needs composition.test_swap | — | **P3 OPEN** |
-| /run/membrane permission reset | biomeOS resets dir to 0770 on connection — sporegate user loses access | — | **P3 OPEN** |
-| GATE_NAME vs MEMBRANE_GATE_NAME | cellMembrane uses GATE_NAME, /etc/environment has MEMBRANE_GATE_NAME | — | **P3 OPEN** |
-| GNU depot incomplete | 4/16 targets built (biomeOS only + cellMembrane + petalTongue + squirrel) | — | **P3 OPEN** |
-| golgi post-receive hook not auto-firing | **FIXED** — 3 bugs: missing dispatcher, case mismatch, category plural. E2E verified (squirrel auto-built). | sporeGate 155n | **FIXED** |
+#### P1 — MUST FIX
+
+| Issue | Evidence | Owner | Status |
+|-------|----------|-------|--------|
+| **Respawn storm** — biomeOS health pings use riboCipher framing, most primals speak plain JSON-RPC → every primal cycles DEGRADED every ~90s → unbounded process accumulation | strandGate: 175 procs / 14 min, 538 resurrections. Kill-before-spawn doesn't reliably reap old instances. | **biomeOS** | **P1 OPEN** |
+| **Socket file deletion** — biomeOS unlinks socket files for primals that fail health ping, even though processes are alive | westGate: 31→16 sockets in 3 min (50% survival). All procs alive, sockets deleted. 3 versions, same result. | **biomeOS** | **P1 OPEN** |
+
+**Root cause for both P1s**: riboCipher and plain JSON-RPC are **facets of the same protocol layer** (riboCipher is the intra-functional framing of mitoBeacon genetics). biomeOS health monitor must speak both — ping with riboCipher first, fall back to plain JSON-RPC, or primals declare their protocol at registration. biomeOS must NEVER unlink a socket it didn't create.
+
+#### Previously FIXED (confirmed on gates)
+
+| Issue | Fix | Commit | Gate Validation |
+|-------|-----|--------|-----------------|
+| bearDog `FAMILY_SEED` precedence | env → file → auto-generate | `a875d463` | westGate CONFIRMED |
+| `PRIMAL_BIND_MODE` `tcp_only` fallback | petalTongue accepts `tcp` semantics | `551e781` | westGate CONFIRMED |
+| petalTongue `--family-id` propagation | Global flag (before subcommand) | `551e781` | westGate CONFIRMED (caveat: global not subcommand) |
+| biomeOS capability wipe cycle | 3-strike prune threshold | `f2d4c4b3` | westGate: retention 30s→165s (+450%). Still cycles. |
+| toadStool JSON-RPC | compute.sock responds | `5053e0bc` | westGate: works via riboCipher prefix |
+| membrane.exe `UnixStream` P1 | `#[cfg(unix)]` gates + Windows stubs | `4ccbab1` | blueGate CONFIRMED |
+| cellMembrane reqwest purge | Sovereign HTTP/1.1 client | `4e77ffd` | westGate: binary -2MB CONFIRMED |
+| biomeOS binary path retention | 5-tier probe | `999044e7` | strandGate: all primals found in ~/.local/bin/ |
+| golgi post-receive hook | 3 bugs fixed (dispatcher, case, category) | sporeGate 155n | E2E verified (squirrel auto-built) |
+| GATE_NAME vs MEMBRANE_GATE_NAME | MEMBRANE_* env standardization + fallback | `4a2b39c` | cellMembrane shipped |
+
+#### PARTIAL — needs convergence
+
+| Issue | Status | Detail |
+|-------|--------|--------|
+| bearDog dual-socket | **PARTIAL** | Default socket still separate listener returning stubs. Family socket works. Workaround: set `BEARDOG_SOCKET`. |
+| Socket evaporation (binary discovery) | **PARTIAL** | Binary discovery FIXED (999044e7). But socket file deletion is a separate code path — biomeOS unlinks sockets regardless. |
+| membrane/ vs biomeos/ socket dir | **OPEN** | Primals create in `/run/user/1000/biomeos/`, Neural API scans `/run/user/1000/membrane/`. Workaround: symlink bridge. |
+
+#### P3 — Tracked
+
+| Issue | Owner | Status |
+|-------|-------|--------|
+| cellMembrane not in sources.toml | cellMembrane | Blocks self-CI |
+| biomeOS sandbox false positive for broker primals | biomeOS + cellMembrane | Needs composition.test_swap |
+| /run/membrane permission reset at runtime | biomeOS | Resets dir to 0770 on connection |
+| Zombie process reaping | biomeOS | waitpid() / SIGCHLD handler needed |
+| Virtual service DEGRADED churn | biomeOS | Exclude aggregate capability sockets from health monitor |
+| graphs_dir default path | biomeOS | Falls back to $CWD/graphs, missing on non-sporeGate |
+| riboCipher rejection at ERROR level | biomeOS | Should be WARN/DEBUG for protocol negotiation |
+| biomeOS `--version` reports 0.1.0 | biomeOS | Version not set during CI build |
+| GNU depot incomplete | sporeGate | 4/16 musl targets have gnu builds |
 
 ---
 
@@ -113,8 +132,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Target Triple | Status | Depot | Gates |
 |---------------|--------|-------|-------|
 | `x86_64-unknown-linux-musl` | **LIVE** | 16 bins | eastGate, sporeGate, westGate, strandGate, ironGate, flockGate |
-| `x86_64-unknown-linux-gnu` | **LIVE** | 3 bins (GPU trio) | strandGate (GPU) |
-| `x86_64-pc-windows-gnu` | **LIVE** | 14 bins | blueGate, swiftGate, northGate |
+| `x86_64-unknown-linux-gnu` | **LIVE** | 4 bins (biomeOS + cellMembrane + petalTongue + squirrel) | strandGate (GPU) |
+| `x86_64-pc-windows-gnu` | **LIVE** | 15 bins | blueGate, swiftGate, northGate |
 | `aarch64-unknown-linux-musl` | **TIER 1** | directory only | grapheneGate (pepti warehouse) |
 | `aarch64-linux-android` | **TIER 1** | directory only | grapheneGate (via ADB) |
 | `x86_64-unknown-linux-gnu` (SteamOS) | **TIER 2 — NEXT** | depot exists (3 bins) | steamGate (Steam Deck) |
@@ -168,8 +187,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Team | Tests | Wave 155m/n Delivery | Next |
 |------|-------|---------------------|------|
-| **biomeOS** | 8,570 | v4.51+ P2 socket evap **FIXED all paths** (`999044e7`): 5-tier binary discovery (plasmidBin, ~/.local/bin, ~/.cargo/bin, $PATH). 14 deps removed, registry perf. | G18: neuralAPI agent orchestration |
-| **cellMembrane** | 1,266 | Init-scope-aware socket discovery (`resolve_socket_base()`), gate identity consolidation (3→1), plasmid smart split (-310L). Unblocks steamGate user-space deploys. | Depot rebuild needed (golgi hook P2). |
+| **biomeOS** | 8,570 | v4.51+ binary discovery FIXED (`999044e7`). 14 deps removed. **TWO P1s OPEN**: (1) respawn storm — kill-before-spawn + protocol negotiation; (2) socket file deletion — never unlink a socket biomeOS didn't create. riboCipher health pings must fall back to plain JSON-RPC. | **P1 FIX** |
+| **cellMembrane** | 1,273 | MEMBRANE_* env standardization (GATE_NAME P3 FIXED), crypto dedup (HKDF/HMAC consolidated), bootstrap 738→291L + phases split, plasmid smart split (-310L). | sources.toml self-enrollment. |
 | **squirrel** | 7,138 | Deep debt: 150+ clippy, universal-constants, Cargo.lock purge. 90.1% coverage. 0 unsafe. | G18: biomeOS neuralAPI agent integration |
 | **petalTongue** | 6,605 | Modern idiom pass, debris audit | G19: Node Atomic live rendering pipeline |
 
@@ -243,6 +262,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
 | P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
+| P1s | **2 OPEN** — biomeOS respawn storm + socket file deletion (riboCipher health ping mismatch) |
 | P2s | **ZERO** — golgi hook FIXED (3 bugs), depot rebuilt with `999044e7` + `301e236` |
 | P3s | **2 OPEN** — cellMembrane self-CI, golgi hook auto-fire |
 | Depot | **35** binaries: 16 musl + **4** gnu + 15 windows (biomeOS gnu NEW, all BLAKE3 verified) |
