@@ -5,14 +5,14 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-30T17:10:00Z"
+updated = "2026-07-31T00:30:00Z"
 wave = "155m"
 
 [heads]
 bearDog = "5e80b53"
 songBird = "9046664"
 nestGate = "6b6d484"
-biomeOS = "b290cc8"
+biomeOS = "0e45262"
 rhizoCrypt = "d4972b0"
 squirrel = "a9493a8"
 sweetGrass = "ab887e8"
@@ -23,7 +23,7 @@ barraCuda = "3460368"
 petalTongue = "71c95c7"
 toadStool = "92aeb14"
 sourDough = "3a0b52d"
-cellMembrane = "4e77ffd"
+cellMembrane = "0cfcce5"
 primalSpring = "05e72e4"
 wateringHole = "428c3d1"
 sporePrint = "67cc325"
@@ -31,21 +31,21 @@ sporePrint = "67cc325"
 [deploy]
 songbird_version = "0.2.1+ (9046664) — TCP registration fix + shared ServiceRegistry"
 beardog_version = "0.9.0+ (5e80b53) — dual-socket fix + 94 orphan files purged (-19,214 lines)"
-biomeos_version = "4.50 (b290cc8) — socket evaporation FIXED + binary path retention FIXED"
-membrane_version = "0.1.0 (4e77ffd) — reqwest purged, sovereign HTTP client, steamGate user-space, membrane.exe FIXED"
+biomeos_version = "4.51 (0e45262) — socket ownership 0660+chown:membrane, evaporation FIXED, binary path FIXED"
+membrane_version = "0.1.0 (0cfcce5) — checksums full scan, sandbox ServerContract, rootpulse advisory, tmpfiles.d"
 depot_status = "FRESH — 16 musl + 4 gnu + 15 windows = 35 x86_64 binaries, ALL targets current, BLAKE3 verified"
 mesh_status = "9-GATE MESH (blueGate enrolled, handshake active)"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active — sovereign CI LIVE"
 
 [tower]
-status = "TOWER ATOMIC — biomeOS v4.50 + bearDog 155m deployed"
+status = "TOWER ATOMIC — biomeOS v4.51 + bearDog 155m deployed — 11/11 HEALTHY"
 songbird = "LIVE — 9046664, TCP :7700, federation active"
 beardog = "DEPLOYED — 5e80b53, dual-socket fix, crypto.sign_ed25519"
 skunkbat = "LIVE (PUBLIC)"
 
 [gate_status]
-probes_ok = 10
-probes_degraded = 1
+probes_ok = 11
+probes_degraded = 0
 total_probes = 11
 depot_integrity = "OK — 16 verified, 0 hash mismatch"
 primals_alive = "OK — 13/13 alive"
@@ -57,26 +57,26 @@ sovereignty_auth = "OK — beardog responding via neuralAPI"
 service_crash_loop = "OK — 14 services scanned, no crash loops"
 vcs_parity = "OK — 0 repos drifted (full cascade completed)"
 mesh_reachability = "OK — 3 peers, 3 reachable"
-rootpulse_ledger = "DEGRADED — not yet implemented (cellMembrane)"
+rootpulse_ledger = "OK — advisory (no session yet, populates on cascade)"
 
 [harvest]
 wave = "155m"
-harvested = "2026-07-30T16:35:00Z"
+harvested = "2026-07-31T00:15:00Z"
 x86_64_musl = 16
 x86_64_gnu = 4
 x86_64_windows = 15
 provenance = "builder=sporeGate, toolchain=rustc 1.96.1, mingw=x86_64-w64-mingw32-gcc"
 golgi_pushed = "CONFIRMED — all 3 targets synced + membrane.exe NEW"
-rebuilt = "beardog(5e80b53), biomeos(b290cc8), toadstool(92aeb14), petaltongue(71c95c7), membrane(4e77ffd) for musl+gnu+windows"
-note = "Wave 155m+: biomeOS v4.50 live pipeline test. P2 socket evap + binary path FIXED. Depot 35 x86_64 (gnu biomeOS added). sandbox::validate divergence found."
+rebuilt = "biomeos(0e45262) for musl+gnu+windows, membrane(0cfcce5) for musl+windows"
+note = "Wave 155m final: biomeOS v4.51 socket ownership + cellMembrane 4 AAR fixes. 11/11 HEALTHY. All P2s resolved."
 checksums = "BLAKE3 regenerated — 35 x86_64 binaries verified (16 musl + 4 gnu + 15 windows)"
 
 [nucleus_redeploy]
 wave = "155m"
-biomeos = "v4.50 (b290cc8) — socket evaporation FIXED + binary path retention FIXED, deployed via systemd"
+biomeos = "v4.51 (0e45262) — socket ownership 0660+chown:membrane, socket evap + binary path FIXED"
 beardog = "0.9.0+ (5e80b53) — dual-socket fix + orphan purge, deployed"
-membrane = "0.1.0 (4e77ffd) — reqwest purged, sovereign HTTP, steamGate user-space, membrane.exe P1 FIXED"
-tower_status = "DEPLOYED — biomeOS v4.50 + bearDog 155m + songBird TCP fix"
+membrane = "0.1.0 (0cfcce5) — checksums full scan, sandbox ServerContract, rootpulse advisory, tmpfiles.d"
+tower_status = "DEPLOYED — biomeOS v4.51 + bearDog 155m + songBird TCP fix — 11/11 HEALTHY"
 
 [services_golgi]
 caddy = "RUNNING — /opt/membrane/caddy, 12 sites"
@@ -102,7 +102,7 @@ membrane_j6 = "DONE (155i) — gate.configure + gate.apply"
 songbird_windows_p0 = "DONE (155i) — depot binary rebuilt with TCP fallback"
 deep_debt_refresh = "DONE (155i) — 8 primals rebuilt from deep-debt commits"
 windows_depot_14_14 = "DONE (155k) → 15/15 (155m) — membrane.exe P1 FIXED"
-biomeos_v447 = "DONE (155k) → v4.49 (155m) → v4.50 (155m+) — socket evap + binary path FIXED"
+biomeos_v447 = "DONE (155k) → v4.49 → v4.50 → v4.51 (155m final) — socket ownership + evap + binary path ALL FIXED"
 beardog_crypto_sign = "DONE (155k) — crypto.sign_ed25519 + dual-socket fix (155m)"
 membrane_dns = "DONE (155k) — dns.configure/dns.apply generators shipped"
 dhcp_dns_fix = "DONE (155i) — DHCP DNS option corrected"
@@ -125,10 +125,12 @@ phase_c = "POLISH — HTTP webhook listener, build queue, provenance signing cha
 
 [code_team_flags]
 mesh_socket = "FLAGGED — songBird mesh relay socket"
-rootpulse = "FLAGGED — cellMembrane rootpulse not implemented"
+rootpulse = "RESOLVED (155m final) — advisory OK mode (0cfcce5)"
 membrane_windows = "RESOLVED (155m) — membrane.exe compiles and serves from depot"
 dns_configure = "SHIPPED (155k) — cellMembrane dns.configure/dns.apply"
 socket_evaporation = "RESOLVED (155m+) — biomeOS v4.50 (06ed323f), any Ok(btsp) = alive"
 binary_path_retention = "RESOLVED (155m+) — biomeOS v4.50 (06ed323f), probe_binary() during discovery"
-sandbox_false_positive = "P2 NEW — sandbox::validate can't health-check broker primals (biomeOS). Needs orchestrator bypass."
-socket_bind_permissions = "P2 KNOWN — primals bind sockets 0600, breaks cross-user probes. Needs umask-aware bind."
+sandbox_false_positive = "RESOLVED (155m final) — ServerContract resolution (0cfcce5)"
+socket_bind_permissions = "RESOLVED (155m final) — biomeOS 0660+chown:membrane (0e45262f)"
+checksums_partial = "RESOLVED (155m final) — finalize_depot() full disk scan (0cfcce5)"
+tmpfiles_d = "RESOLVED (155m final) — membrane.conf installed (0cfcce5)"
