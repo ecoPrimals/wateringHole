@@ -149,24 +149,83 @@ What's missing:
 
 ---
 
+## THE SITE IS TOO BIG FOR A FRONT DOOR
+
+334 pages made sense when sporePrint was the **proof the system could exist**. You needed
+the philosophy essays, the architecture deep-dives, the methodology explanations — because
+there was nothing running to point at. The site WAS the product.
+
+Now the running system is the product. The site's job changes.
+
+### Current breakdown — what stays, what goes
+
+| Section | Pages | Role | Verdict |
+|---------|-------|------|---------|
+| **Lab** (notebooks + springs) | 136 | Science evidence | **STAYS** — core value |
+| **Science** (baseCamp papers) | 34 | Research foundation | **STAYS** — add "VALIDATED" badges |
+| **Architecture** | 44 | Explains how it works | **~15 stay, ~29 fossilize** — running system explains itself |
+| **Thesis** | 18 | PhD dissertation | **Keep but static** — finished work, not prominent |
+| **Philosophy** | 15 | Why it matters | **Keep but static** — atlasHugged is done |
+| **Methodology** | 15 | How to build | **~5 stay, ~10 fossilize** — constrained evolution is proven |
+| **Outreach** | 15 | Partnership briefs | **Stale** — written for a pitch, not a running system |
+| **Products** | 12 | What it makes | **~6 stay, ~6 fossilize** — live products only |
+| **Technical** | 9 | Hardware/grants | **Update or fossilize** — numbers are all different now |
+| **Audience** | 7 | PI/student/builder guides | **Rewrite** — audience is now "people who want to run it" |
+| **Other** | 29 | Guidestone, story, vision, glossary | **Mixed** |
+
+### Target: ~120-150 pages (from 334)
+
+A focused site where the system IS the proof:
+
+- **Lab** (~100 pages) — the science. Notebooks, spring hubs, experiments.
+- **Science** (~34 pages) — baseCamp papers with "VALIDATED" badges.
+- **Architecture** (~10 pages) — operational documentation, not design documents. Updated with live evidence. 3-5 pages with live dashboards replace 44 design docs.
+- **Products** (~6 pages) — live products only (footPrint, esotericWebb, tideGlass, helixVision, lithoSpore, pseudoSpore).
+- **Getting Started** (~5 pages) — replaces audience/outreach/methodology. "Here's how to deploy on your hardware." The southGate validation gate story becomes the on-ramp.
+
+The ~180 pages that leave prominent navigation either:
+1. Move to a `/foundation/` or `/archive/` section (still accessible, not prominent)
+2. Get merged into the pages that remain
+3. Stay as static backstory (thesis, philosophy) but off the main nav
+
+The 15 philosophy essays and 18 thesis chapters are **finished works**. They don't
+need updating, but they don't need to be top-level navigation for someone who wants
+to see what NUCLEUS does. They're the backstory, not the front page.
+
+The 44 architecture pages are the real problem. Most were design documents. They
+should be replaced by **3-5 pages with live dashboards** showing what the system
+actually does, fed by petalTongue from primal APIs.
+
+**The site isn't too big for an archive. It's too big for a front door.**
+
+---
+
 ## PRIORITY FOR sporePrint TEAM
 
 ```
-1. UPDATE stale architecture pages with live evidence
-   (NUCLEUS, Tower Atomic, Sovereign CI, Mesh Topology, Neural API)
+PHASE 1 — TRIAGE (now):
+  1. Move ~29 architecture + ~10 methodology + ~15 outreach + ~6 products
+     to /foundation/ section (still built, not in main nav)
+  2. Move thesis + philosophy to /backstory/ section (finished works)
+  3. Main nav becomes: Lab | Science | Architecture (live) | Products (live) | Get Started
 
-2. ADD live evidence pages (gate status, GPU benchmarks, provenance dashboard)
+PHASE 2 — LIVE EVIDENCE:
+  4. Replace stale architecture pages with live dashboards (petalTongue + primal APIs)
+  5. Add gate status, GPU benchmarks, provenance dashboard pages
+  6. Add "VALIDATED ON LIVE HARDWARE" badges to baseCamp papers
 
-3. FOSSILIZE conceptual pages that are now proven
-   (~8 architecture + 2 products = 10 pages → fossilized section or badges)
+PHASE 3 — ON-RAMP:
+  7. Write "Getting Started" section: deploy NUCLEUS on your hardware
+  8. southGate validation gate story = the on-ramp for external deployments
+  9. pseudoSpore grab pattern = the downloadable artifact
 
-4. UPDATE baseCamp papers with "VALIDATED ON LIVE HARDWARE" markers
-
-5. EVOLVE toward Tier 3: petalTongue live dashboards from primal APIs
+TARGET: 334 pages → ~120-150 in main nav, ~180 in foundation/backstory.
+Same content, better front door.
 ```
 
 ---
 
 *sporePrint Wave 155n — 334 pages, ~31K lines. The site was built to prove the concept
 could work. Now it needs to prove the system IS working. The conceptual era is over.
-The demonstration era begins.*
+The demonstration era begins. The front door needs to shrink so the running system
+can speak for itself.*
