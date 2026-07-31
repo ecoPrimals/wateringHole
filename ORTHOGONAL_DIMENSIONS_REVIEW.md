@@ -99,7 +99,7 @@ appears. This keeps the active review focused on evolving concerns.
 | westGate | **NUCLEUS v4.55** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 31/31 sockets 225s. Prov 7/7 (5th pass). 835 caps. ZFS 25.4TB. |
 | blueGate | **NUCLEUS v4.55** | Windows | 10.13.37.12 | **NUCLEUS (13)** | biomeOS v4.55 deployed. Prov 7/7. membrane.exe first run. **P2: platform detection.** |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
-| southGate | **ENROLLED** | Linux | 10.13.37.9 | full (target) | 5800X3D + RTX 4060 + 128GB. 32/33 repos. 16 bins deployed. WG pending sudo. |
+| southGate | **VALIDATION GATE** | Linux | **NO WG** (deliberate) | full (target) | 5800X3D + RTX 4060 + 128GB + 5TB NVMe. External deploy proof. Own lineage. Bonding + encryption validation. |
 | **steamGate** | **NEXT** | SteamOS | — | tower (3) | Steam Deck. Portable compute. gnu bins in depot. |
 | **darwinGate** | **GLACIAL** | macOS | — | tower (3) | Mac Mini (acquire). apple-darwin builder. |
 | **iosGate** | **GLACIAL** | iOS | — | tower (3) | iPhone. After darwinGate. Silicon deism. |
@@ -184,7 +184,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 | **No external dependencies** | **ALIGNED** | cellMembrane purged reqwest → sovereign HTTP/1.1 client. Pure-Rust TLS. Zero C deps on critical path. |
 | **Single source of truth** | **ALIGNED** | Forgejo (golgiBody) is sole canonical remote. GitHub is push-mirror only. |
 | **Sole depot** | **ALIGNED** | All genomeBins from `depot.primals.eco`. Sovereign CI auto-publishes. |
-| **Portable mesh** | **PARTIAL** | NUCLEUS proven on 3 gates. But cellMembrane has gate-specific configs, /etc/environment vars, manual SSH setup. See portability audit below. |
+| **Portable mesh** | **VALIDATING** | NUCLEUS proven on 4 gates. **southGate = validation gate**: deliberately off WireGuard, deploys from public depot, own genetic lineage, bonding/encryption validation across trust boundary. Proves portability for external deployments. |
 | **Silicon deism** | **PROVEN on 3 platforms** | Linux (musl+gnu), Windows (windows-gnu), Android (aarch64). SteamOS NEXT, darwin/iOS GLACIAL. |
 | **Zero telemetry** | **ALIGNED** | No telemetry, no analytics, no cloud lock-in across all primals. |
 | **AGPL-3.0** | **ALIGNED** | All primals, gardens, springs. scyBorg triple-license framework defined. |
@@ -195,8 +195,8 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 
 | Goal | Status | Notes |
 |------|--------|-------|
-| **Reconstitutable from cold** | **NOT YET** | Depot has all binaries, Forgejo has all source. But bootstrap requires manual SSH setup, `/etc/environment` vars, WireGuard key exchange. No single `pseudoSpore unpack` yet. |
-| **Move to new HPC mesh** | **PARTIAL** | golgiBody VPS is portable (snapshot + restore). Gate enrollment is semi-automated. But peptidoglycan layer is hardcoded to current LAN (192.168.4.0/22). Need: (1) cellMembrane site-profile abstraction, (2) WireGuard endpoint auto-discovery, (3) depot mirror/relocate. |
+| **Reconstitutable from cold** | **VALIDATING (southGate)** | Depot has all binaries, Forgejo has all source. southGate is testing: deploy from public depot, own keys, no WireGuard, no `/etc/environment` inheritance. If NUCLEUS launches clean, reconstitution is proven. |
+| **Move to new HPC mesh** | **VALIDATING (southGate)** | southGate = "friend's LAN pool" archetype. Deliberately off WireGuard. If it can bond, accept encrypted work, and return signed results across a trust boundary, the system is portable to any network. |
 | **Shut down and restart** | **PARTIAL** | biomeOS `nucleus start` works. But `/run/membrane` is tmpfs, socket permissions reset, no systemd tmpfiles.d. Each gate restart requires manual fixup. |
 | **No convenience coupling** | **RISK** | sporeGate's `/etc/environment` with `RUSTUP_HOME`, `CARGO_HOME`, `ECOPRIMALS_ROOT` is gate-specific. SSH key aliases (`golgi`) are in user-specific configs. These are jelly strings. |
 
@@ -448,7 +448,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G4 | NUCLEUS on multiple gates | **COMPLETE** (×3) | — |
 | G6 | bearDog public (crates.io) | GLACIAL | crates.io publishing |
 | G7 | AlphaFold ~1TB ingestion | ACTIVE | Nest Atomic on westGate (READY) |
-| G8 | Plasmodium (multi-gate bonding) | GLACIAL | biomeOS v4.50+ |
+| G8 | Plasmodium (multi-gate bonding) | **VALIDATING (southGate)** | southGate validation gate: encrypted work handoff across trust boundary, own lineage, bonding proof. |
 | G9 | JOSS publication | ACTIVE (Step 8) | NF pseudoSpore |
 | G10 | Sub-builder mesh | UNBLOCKED (J12) | blueGate enrollment |
 | G11 | Any chip + drive = mesh gate | IN PROGRESS | steamGate NEXT |
@@ -457,7 +457,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G14 | sporePrint live science refresh | **NEW** — Phase 1 NOW | sporePrint team |
 | G15 | tideGlass Phase 0 (NF archaeology) | **NEW** — NEXT | eastGate / dedicated gate |
 | G16 | pseudoSpore grab pattern on web | **NEW** — after NF data | lithoSpore + sporePrint |
-| G17 | Portability — reconstitute from cold | **NEW** — J18 + lithoSpore | cellMembrane site-profile |
+| G17 | Portability — reconstitute from cold | **VALIDATING (southGate)** | southGate = external deployment proof. No WireGuard. Public depot. Own lineage. agentReagents provisioning. |
 | G18 | squirrel → biomeOS agent orchestration | **NEW** | squirrel + biomeOS neuralAPI |
 | G19 | petalTongue + Node Atomics live rendering | **NEW** | petalTongue + toadStool + coralReef |
 | G20 | esotericWebb game engine on NUCLEUS | **NEW** | esotericWebb + petalTongue + GPU trio |

@@ -224,7 +224,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | **flockGate** | **DOWN** — rebooted, RustDesk locked out. May be on mesh. | **esotericWebb → ironGate** (LAN). |
 | **ironGate** | Online. 14TB+1TB+1TB+2TB. **Takes esotericWebb from flockGate.** | Tower + esotericWebb + HDD enclave. |
 | **swiftGate** | HW ready. Windows. | After blueGate sub-builder stable. |
-| **southGate** | **ENROLLED** — 32/33 repos at 155n HEAD. 16 musl binaries deployed (biomeOS v4.55). 5800X3D + RTX 4060 + 128GB + 5TB NVMe. WG peer add pending (sudo). | NUCLEUS launch + gate validation. |
+| **southGate** | **VALIDATION GATE** — deliberately OFF WireGuard mesh. 16 musl bins deployed from public depot. 5800X3D + RTX 4060 + 128GB + 5TB NVMe. Own genetic lineage. | External deployment proof + bonding/encryption validation + enclave work handoff. |
 | **grapheneGate** | Tower LIVE (Pixel 8a). | ADB mesh expansion. |
 
 ### GATE NEW (cross-platform expansion)
@@ -277,13 +277,21 @@ whitePaper CONVERGENCE (G22 — NEW CONCEPTUAL GOAL):
     - Sovereign CI trigger: git pull before build (source tree divergence fix)
     - P3 cleanup: /run/membrane perms, bearDog dual-socket, socket dir mismatch
 
-PRIORITY 2 — FLEET EXPANSION:
-  1. southGate: WG peer add (sudo) → NUCLEUS launch → gate validation (5800X3D + RTX 4060)
+PRIORITY 2 — VALIDATION + FLEET EXPANSION:
+  1. southGate VALIDATION GATE — external deployment proof:
+     - Deliberately OFF WireGuard. Deploys from public depot only.
+     - Own genetic lineage (FAMILY_SEED, own keys, not inherited).
+     - mitoBeacon federation via songBird public endpoint.
+     - agentReagents gate-nucleus-full.yaml provisioning.
+     - BONDING VALIDATION: encrypted work handoff across trust boundary.
+       Send enclaved task → southGate processes → returns signed + clean.
+       Proves G8 Plasmodium bonding + BTSP + bearDog crypto + riboCipher
+       work across non-mesh gates. If this works, anyone's LAN pool works.
+     - benchScale / primalSpring validation of the external deployment.
   2. cellMembrane: P2 membrane.exe platform detection fix (blocks J12)
   3. ironGate: takes esotericWebb from flockGate (LAN)
-  4. steamGate: Steam Deck Tower Atomic (gnu bins in depot, user-space deploy)
+  4. steamGate: Steam Deck Tower Atomic (gnu bins in depot)
   5. J12: blueGate sub-builder after membrane.exe platform fix
-  6. J18: /etc/environment abstraction (last portability jelly string)
 
 PRIORITY 3 — PLATFORM WIRING (gen5):
   G18: squirrel → biomeOS neuralAPI agent orchestration

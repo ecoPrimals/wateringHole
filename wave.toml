@@ -18,5 +18,6 @@ publisher = "eastGate-overwatch"
 [gates]
 online = ["sporeGate", "eastGate", "ironGate", "golgi", "grapheneGate", "northGate", "westGate", "strandGate", "blueGate"]
 degraded = ["flockGate"]
-enrolling = ["swiftGate", "southGate"]
+validation = ["southGate"]
+enrolling = ["swiftGate"]
 offline = []
