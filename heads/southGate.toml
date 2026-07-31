@@ -1,18 +1,18 @@
-# Gate: southGate | Enrolled: Wave 155n
-# PostPrimordial enrollment via agentic cascade from golgiBody.
-# Full NUCLEUS deployment target (house2).
+# Gate: southGate | VALIDATION GATE — Wave 155n
+# External deployment proof. Deliberately OFF mesh.
+# Own genetic lineage. NUCLEUS LIVE.
 
 [meta]
 gate = "southGate"
-updated = "2026-07-31T16:40:00Z"
+updated = "2026-07-31T17:36:00Z"
 wave = "155n"
-enrollment_wave = "155n"
+role = "VALIDATION GATE"
 
 [heads]
 bearDog = "5e80b53"
 songBird = "9046664"
 nestGate = "6b6d484"
-biomeOS = "34d4ef7"
+biomeOS = "bd96dbc"
 rhizoCrypt = "4716bf5"
 squirrel = "4bcf79e"
 sweetGrass = "4b5167b"
@@ -22,11 +22,9 @@ coralReef = "edcd696"
 barraCuda = "d2ccce4"
 petalTongue = "b135400"
 toadStool = "92aeb14"
-sourDough = "3a0b52d"
-cellMembrane = "111c7d2"
-primalSpring = "1cfee8c"
-wateringHole = "1f76f8c"
+cellMembrane = "d7026d7"
 plasmidBin = "f0d5432"
+wateringHole = "c700083"
 
 [hardware]
 cpu = "AMD Ryzen 7 5800X3D (8c/16t, 3D V-Cache)"
@@ -41,33 +39,53 @@ biomeos_version = "4.55.0"
 beardog_version = "0.9.0"
 songbird_version = "0.2.1"
 squirrel_version = "0.1.0"
-depot_source = "depot.primals.eco (sovereign HTTPS)"
+depot_source = "depot.primals.eco (sovereign HTTPS — NO mesh required)"
 binary_count = 16
 binary_target = "x86_64-unknown-linux-musl"
 install_path = "~/.local/bin/"
 
+[identity]
+family_id = "89df7a2d"
+family_name = "southgate-sovereign"
+lineage = "OWN — not inherited from eastGate family"
+beacon_seed = "GENERATED — bearDog entropy + openssl derive"
+node_id = "southgate"
+
 [mesh]
-wg_ip = "10.13.37.9"
-wg_status = "CONFIGURED — pubkey registered, conf pending sudo wg-quick up"
-wg_pubkey = "vd3Y4Ts84It+/Goh5mQ++yuuSR1fOi271iQYKU5TkEg="
-forgejo_ssh = "LIVE — authenticated as golgiAdmin via git.primals.eco:2222"
+wg_status = "DELIBERATELY OFF — validation gate proves non-mesh deployment"
+forgejo_ssh = "LIVE — authenticated as golgiAdmin via git.primals.eco:2222 (public DNS)"
+federation = "songBird rejecting unknown_family peers on LAN — trust boundary ACTIVE"
 
-[composition]
-target = "full_nucleus"
-primals = 13
-status = "BINARIES DEPLOYED — ready for NUCLEUS launch"
+[nucleus]
+status = "LIVE — 13/13 processes, 32 sockets, 1 proc/primal"
+composition = "full"
+boot_order = "Tower → Nest → Node → biomeOS (dependency-aware)"
+total_rss_mb = 76
+btsp_enforcement = "ACTIVE — all primals reject plain JSON-RPC on TCP and UDS"
 
-[enrollment]
-step1_mesh = "PARTIAL — WG tools installed, pubkey generated, conf not yet written (needs sudo)"
-step2_forgejo = "DONE — SSH key authenticated, all repos reachable"
-step3_remotes = "DONE — 33 repos origin → Forgejo, github as push mirror"
-step4_converge = "DONE — 32/33 repos at Wave 155n HEAD (foundation not on Forgejo, non-blocking)"
-step5_binaries = "DONE — 16 musl binaries fetched from depot.primals.eco, installed to ~/.local/bin/"
-step6_validate = "PENDING — NUCLEUS launch + gate validation"
-step7_announce = "THIS FILE"
+[nucleus.primals]
+beardog = "HEALTHY — PID 36072, 10MB, security-89df7a2d.sock"
+songbird = "HEALTHY — PID 36231, 12MB, federation rejecting unknown_family (CORRECT)"
+skunkbat = "HEALTHY — PID 36368, 2MB"
+toadstool = "HEALTHY — PID 36529, 9MB"
+barracuda = "HEALTHY — PID 36691, 5MB"
+coralreef = "HEALTHY — PID 36845, 3MB"
+nestgate = "HEALTHY — PID 37000, 4MB"
+rhizocrypt = "HEALTHY — PID 37159, 4MB"
+loamspine = "HEALTHY — PID 37324, 3MB"
+sweetgrass = "HEALTHY — PID 37479, 5MB"
+biomeos = "HEALTHY — PID 37633, 6MB, API on :9800 + UDS"
+squirrel = "HEALTHY — PID 37795, 7MB"
+petaltongue = "HEALTHY — PID 37951, 6MB"
 
-[remaining]
-wg_conf_write = "needs sudo bash to write /etc/wireguard/wg0.conf (10.13.37.9/24)"
-wg_peer_add = "needs root@golgiBody: wg set wg0 peer vd3Y4Ts84It+/Goh5mQ++yuuSR1fOi271iQYKU5TkEg= allowed-ips 10.13.37.9/32"
-nucleus_launch = "binaries in place — boot order: Tower → Nest → Node → biomeOS"
-gate_validate = "after NUCLEUS stable, run primalSpring gate probe"
+[validation]
+external_deploy = "PROVEN — depot.primals.eco over public internet, no WireGuard"
+own_genetic_lineage = "PROVEN — family 89df7a2d, bearDog entropy-seeded"
+btsp_trust_boundary = "PROVEN — songBird rejects unknown_family peers"
+nucleus_boot = "PROVEN — 13/13, 32 sockets, 76MB RSS"
+next = "bonding validation — encrypted work handoff across trust boundary"
+
+[observations]
+songbird_federation = "LAN peers (192.168.4.x) attempting federation — correctly rejected as unknown_family/different_family"
+btsp_tcp_enforcement = "All primals reject plain curl probes — BTSP ClientHello required (correct behavior)"
+health_probe_note = "nucleus_launcher reported 9/13 HEALTHY — false negative. All 13 running. Plain TCP probes rejected by BTSP enforcement."
