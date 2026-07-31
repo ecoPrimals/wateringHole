@@ -18,19 +18,20 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] **ECOSYSTEM_BLURB.md** is the universal handoff (Tracks A+B converged)
 - [x] **70+ handoff docs + AARs** delivered Wave 155b–n. 10 AARs + 2 handoffs fossilized this wave.
-- [x] **ZERO P0 / ZERO P1 / ZERO P2.** All P1s GATE VALIDATED on westGate + strandGate. P2 sandbox FIXED.
-- [x] **NUCLEUS ACHIEVED on 4 gates** — westGate, strandGate, blueGate, sporeGate. Gate validation AARs filed.
-- [x] **Depot 35 binaries CURRENT** — biomeOS v4.55 rebuilt 11:11 EDT Jul 31. BLAKE3 verified.
-- [x] **biomeOS v4.55 SHIPPED + GATE VALIDATED** — westGate: 0% socket loss (225s). strandGate: 13 procs (1 each, was 175).
+- [x] **ZERO P0 / ZERO P1 / ZERO P2.** All P1s GATE VALIDATED. P2 platform detection FIXED (`d7026d7`).
+- [x] **NUCLEUS ACHIEVED on 4 gates** — westGate, strandGate, blueGate, sporeGate. Gate validation AARs fossilized.
+- [x] **Depot 35 binaries CURRENT** — biomeOS v4.56 + cellMembrane latest rebuilt. BLAKE3 verified.
+- [x] **biomeOS v4.56 SHIPPED** — G22 convergence steps 1+2: unified namespace, 244 caps, 47 deps removed.
+- [x] **westGate ZFS rebuilt** — mirror → raidz1, 25.4 → 50.7 TB usable. AlphaFold DB fits.
 - [x] **Golgi post-receive hook FIXED** (3 bugs: dispatcher, case, category). Sovereign CI E2E verified.
 - [x] **cellMembrane 1,281+ tests** — MEMBRANE_*, crypto dedup, J16+J13+J19 killed, registry API hardened.
 - [x] **squirrel 7,138 tests** — 90.1% coverage, 0 unsafe, universal-constants extraction
 - [x] **Provenance 7/7 COMPLETE** — E2E validated on westGate (5th consecutive pass) + blueGate (Windows)
 - [x] **Sovereign CI LIVE** — push-to-deploy E2E verified for ALL 13 primals including biomeOS (coevolution).
 - [x] **Coevolution contract COMPLETE (G21)** — biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`. Mode gap FIXED (`652cf8a7`).
-- [x] **6 AARs + 6 superseded AARs fossilized** this wave. 6 current 155n AARs active.
-- [ ] **Portability checkpoint** — can we shut down and reconstitute on a new HPC mesh?
-- [ ] **whitePaper convergence**: biomeOS API + neuralAPI merge = long-term conceptual goal now achievable
+- [x] **14 AARs + 1 handoff fossilized** to `wave155n_checkpoint/`. Zero active AARs.
+- [x] **whitePaper convergence (G22)**: IN PROGRESS — biomeOS v4.56 shipped steps 1+2 (unified namespace, 244 caps). 3 steps remaining.
+- [ ] **Portability checkpoint** — southGate VALIDATING. Can we shut down and reconstitute on a new HPC mesh?
 
 ## 2. Ecological (Primal Health)
 
@@ -46,11 +47,11 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] songBird: 14,835+ tests, universal-ipc, ACME HTTP-01, TCP registration fix
 - [x] nestGate: **13,095+** tests, CAS on ZFS verified, deep debt complete, zero unsafe
 - [x] toadStool: **9,193+** tests, **S349**: JSON-RPC health endpoint, dead deps purged, stubs fail-closed, hardcoding consolidated (**Wave 155m**)
-- [x] biomeOS: **8,570** tests, **v4.55**: dual-protocol health ping (P1 GATE VALIDATED), socket ownership guard (P1 GATE VALIDATED), `composition.test_swap` (coevolution), mode gap fix (`btsp_optional=true`), zombie reaping, 15 dead deps removed. (**Wave 155n**)
+- [x] biomeOS: **8,570** tests, **v4.56**: G22 convergence steps 1+2 (unified namespace, 244 caps, 47 deps removed), dual-protocol health ping, socket ownership guard, `composition.test_swap`. (**Wave 155n**)
 - [x] petalTongue: **6,605** tests, modern idiom evolution pass, debris audit (**Wave 155n**)
 - [x] barraCuda: **4,957** tests, RTX 3090 profiled
 - [x] coralReef: **3,527** tests, 463 `.expect()` purged, PTX modernized
-- [x] cellMembrane: **1,281+** tests, MEMBRANE_* env standardization, crypto dedup, `validate_with_deps()` → `composition.test_swap`, J19+J16+J13 killed, registry API hardened (`require_capability`/`require_binary`) (**Wave 155n**)
+- [x] cellMembrane: **1,281+** tests, **P2 platform detection FIXED** (`d7026d7`), `TargetArch` deprecated → `Platform::detect()`, `validate_with_deps()`, J19+J16+J13 killed, registry API hardened. (**Wave 155n**)
 - [x] rhizoCrypt: 1,900 tests, BTSP→DAG bridge, cross-gate provenance
 - [x] loamSpine: **1,739** tests, registry drift fixed, `--bind` alias
 - [x] sweetGrass: **1,636** tests, G3 E2E validated, UUID fix
@@ -70,7 +71,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] sporeGate on R45 → MikroTik — plasma membrane router (NAT/DHCP/DNS/nftables)
 - [x] eastGate on MikroTik LAN — code hub, 10G SFP+ direct
 - [x] northGate enrolled (Windows 11, RTX 5090, 2.5G ethernet)
-- [x] westGate ONLINE — AMD Ryzen 7 5700X / 64GB DDR4 / 2TB NVMe / **ZFS 25.4TB mirrors + 2TB L2ARC SSD, all 5 storage tiers operational**
+- [x] westGate ONLINE — AMD Ryzen 7 5700X / 64GB DDR4 / 2TB NVMe / **ZFS raidz1 50.7TB usable (rebuilt from mirrors) + 2TB L2ARC SSD**
 - [x] ironGate HDD — 14TB + 1TB + 1TB + ~2TB, enclave experiment planned
 - [x] blueGate + swiftGate: Windows, house2, 10G backbone proven
 - [x] grapheneGate: Android, Tower LIVE (bearDog + songBird + skunkBat)
@@ -96,8 +97,8 @@ appears. This keeps the active review focused on evolving concerns.
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090. **DAILY DRIVER — DO NOT DEPLOY.** AlphaFold data source (~1TB). |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
 | strandGate | **NUCLEUS v4.55** | Linux | 10.13.37.10 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 12/12 HEALTHY, 1,017 methods, 13 procs. RTX 3090 p50=0.33ms. |
-| westGate | **NUCLEUS v4.55** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 31/31 sockets 225s. Prov 7/7 (5th pass). 835 caps. ZFS 25.4TB. |
-| blueGate | **NUCLEUS v4.55** | Windows | 10.13.37.12 | **NUCLEUS (13)** | biomeOS v4.55 deployed. Prov 7/7. membrane.exe first run. **P2: platform detection.** |
+| westGate | **NUCLEUS v4.55** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 31/31 sockets 225s. Prov 7/7. ZFS raidz1 50.7TB. |
+| blueGate | **NUCLEUS v4.55** | Windows | 10.13.37.12 | **NUCLEUS (13)** | biomeOS v4.55 deployed. Prov 7/7. membrane.exe LIVE. **P2 FIXED.** J12 UNBLOCKED. |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
 | southGate | **VALIDATION GATE** | Linux | **NO WG** (deliberate) | full (target) | 5800X3D + RTX 4060 + 128GB + 5TB NVMe. External deploy proof. Own lineage. Bonding + encryption validation. |
 | **steamGate** | **NEXT** | SteamOS | — | tower (3) | Steam Deck. Portable compute. gnu bins in depot. |
@@ -164,7 +165,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] LAN peering: Tower 353x LAN (0.45ms vs 158ms WG overlay)
 - [x] songBird universal-ipc: UDS/named pipes/abstract sockets/TCP
 - [x] BTSP defense-in-depth: 13/13 primals
-- [x] **biomeOS neuralAPI**: **27** signal graphs, **v4.55**: dual-protocol health ping, socket ownership guard, `composition.test_swap`, mode gap fix (`btsp_optional=true`). GATE VALIDATED. (8,570 tests)
+- [x] **biomeOS neuralAPI**: **27** signal graphs, **v4.56**: G22 convergence (unified namespace, 244 caps), dual-protocol health ping, socket ownership guard, `composition.test_swap`. (8,570 tests)
 - [x] **songBird ACME HTTP-01** challenge responder shipped — Phase 1 TLS elimination
 - [x] songBird mesh refactor: enrollment crypto + mesh helpers extracted, all files <800L
 - [x] sporeGate depot fully refreshed: health **11/11 HEALTHY**, **35 binaries** (16 musl + 4 gnu + 15 windows), BLAKE3 verified
@@ -248,7 +249,7 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 | **Tower Atomic** (3) | LIVE | 6 gates (incl. Windows, Android) | Signal graphs: 8. Direct IPC: YES. |
 | **Nest Atomic** (7+Tower) | LIVE | westGate (ZFS+CAS), blueGate (Windows) | Signal graphs: 9. Graph execution: **FIXED** (v4.47 riboCipher). |
 | **Node Atomic** (3+Tower) | VALIDATED | strandGate (746 pipelines/sec, sub-ms GPU) | Signal graphs: 3. |
-| **NUCLEUS** (13) | **ACHIEVED ×4 — GATE VALIDATED** | **westGate** (835 caps, Prov 7/7 ×5, 0% socket loss), **strandGate** (1,017 methods, 1 proc/primal), **blueGate** (Windows, Prov 7/7), **sporeGate** (11/11, CI) | 27 signal graphs. biomeOS v4.55 in depot. Coevolution COMPLETE (G21). |
+| **NUCLEUS** (13) | **ACHIEVED ×4 — GATE VALIDATED** | **westGate** (835 caps, Prov 7/7, ZFS 50.7TB), **strandGate** (1,017 methods, 1 proc/primal), **blueGate** (Windows, Prov 7/7, P2 FIXED), **sporeGate** (11/11, CI) | 27 signal graphs. biomeOS v4.56 in depot. G22 IN PROGRESS. |
 
 ### What's proven
 
@@ -462,7 +463,8 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G19 | petalTongue + Node Atomics live rendering | **NEW** | petalTongue + toadStool + coralReef |
 | G20 | esotericWebb game engine on NUCLEUS | **NEW** | esotericWebb + petalTongue + GPU trio |
 | G21 | biomeOS-cellMembrane coevolution — composition.test_swap | **COMPLETE** | biomeOS (composition authority) + cellMembrane (build authority). J19 KILLED. Gate validated. |
-| G22 | biomeOS API + neuralAPI convergence — whitePaper milestone | **NEW — CONCEPTUAL** | Merge dual-service (api + neural-api) into single biomeOS process. Long-term whitePaper goal now achievable. |
+| G22 | biomeOS API + neuralAPI convergence — whitePaper milestone | **IN PROGRESS** | Steps 1+2 SHIPPED (unified namespace, 244 caps, 47 deps removed). 3 steps remaining: single-process, lifecycle, restart. |
+| G23 | nestGate application-managed fractional replication | **NEW** | CAS-layer data redundancy. Make system data-redundancy-agnostic (bare metal, cloud, mesh). Schema exists in nestGate. |
 
 ## 11. Campus / Physical Infrastructure
 
@@ -581,38 +583,27 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155n — **ZERO P0/P1. 1 P2 (membrane.exe platform). gen4 COMPLETE. gen5 THESIS VALIDATED.**
+**Summary**: Wave 155n — **ZERO P0/P1/P2. gen4 COMPLETE. gen5 THESIS VALIDATED. PREPARING FOR SPRINGS+GARDENS PHASE.**
 
-ALL 4 NUCLEUS gates on biomeOS v4.55. southGate ENROLLED (5th gate pending launch).
-- westGate: 31/31 sockets stable 225s. Provenance 7/7 (5th pass). 835 caps.
-- strandGate: NODE ATOMIC LANDMARK — 2,130 matmul/sec, cross-atomic provenance E2E, AlphaFold ready.
-- blueGate: v4.55 deployed, membrane.exe first Windows run. P2: platform detection blocks J12.
-- southGate: 5800X3D + RTX 4060, 128GB, 5TB NVMe. 16 depot binaries installed. WG pending sudo.
+ALL 4 NUCLEUS gates current. biomeOS v4.56 in depot. 14 AARs + 1 handoff fossilized to `wave155n_checkpoint/`.
+- westGate: ZFS raidz1 50.7 TB. Prov 7/7. AlphaFold ready.
+- strandGate: Node Atomic Landmark. 2,130 matmul/sec. Cross-atomic provenance E2E.
+- blueGate: P2 platform detection FIXED. J12 sub-builder UNBLOCKED. membrane.exe LIVE.
+- southGate: VALIDATION GATE — external deployment proof, bonding, encryption.
 
-Coevolution COMPLETE (G21): biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`.
-Sovereign CI fully automated for ALL 13 primals including biomeOS. Pipeline E2E validated.
+**G22 IN PROGRESS**: biomeOS v4.56 shipped steps 1+2 (unified namespace, 244 caps). 3 steps remaining.
+**G23 NEW**: nestGate CAS-layer application-managed fractional replication.
 
-**9/11 jelly strings KILLED.** 2 remaining: J12 (sub-builder), J18 (gate coupling/portability).
+**9/11 jelly strings KILLED.** 2 remaining: J12 (sub-builder UNBLOCKED), J18 (gate coupling/portability).
+**23 glacial goals** tracked (G3+G4+G21 COMPLETE, G22 IN PROGRESS, G23 NEW).
 
-**whitePaper convergence (G22)**: biomeOS API + neuralAPI merging into single process is a
-long-term whitePaper conceptual goal that the coevolution work has made suddenly achievable.
-The dual-service architecture (api mode + neural-api mode) was a transitional scaffold.
-With `btsp_optional=true` and `composition.test_swap`, the two modes can converge into one
-biomeOS process that speaks both riboCipher and plain JSON-RPC natively.
-
-**gen5 vision**: NUCLEUS IS THE PLATFORM. squirrel → biomeOS → petalTongue + Node Atomics
-= from QCD simulations to videogames. Platform wiring (G18-G22).
-
-**Sovereignty posture**: ALIGNED on 8/9. 1 PARTIAL: portable mesh (J18 gate coupling).
-Self-healing ALIGNED + GATE VALIDATED (v4.55).
-
-**Glacial goals**: 22 tracked (G3-G4-G21 COMPLETE, G22 NEW: whitePaper API convergence).
+**NEXT PHASE**: Clear remaining deployment issues (G22 completion, J12 wire, sporePrint publish,
+southGate validation), then transition to **springs and gardens evolution** using primals as foundation.
 
 ---
 
-*Last used*: Wave 155n (Jul 31, 2026)
+*Last used*: Wave 155n checkpoint (Jul 31, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 155i (F13 — Jelly Strings J1–J8)
-*Latest fossilization (AARs)*: Wave 155n (6 superseded 155m AARs → fossilRecord/wave155n_gate_validated/)
+*Latest fossilization*: Wave 155n checkpoint (14 AARs + 1 handoff → fossilRecord/wave155n_checkpoint/)
 *Latest reopen*: Wave 155k (D10 — Jelly Strings J9–J13, extended to J14–J19 in 155n)
