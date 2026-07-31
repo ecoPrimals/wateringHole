@@ -5,14 +5,14 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-31T12:15:00Z"
+updated = "2026-07-31T15:15:00Z"
 wave = "155n"
 
 [heads]
 bearDog = "5e80b53"
 songBird = "9046664"
 nestGate = "6b6d484"
-biomeOS = "999044e"
+biomeOS = "5e54022"
 rhizoCrypt = "d4972b0"
 squirrel = "4bcf79e"
 sweetGrass = "ab887e8"
@@ -23,22 +23,22 @@ barraCuda = "3460368"
 petalTongue = "b135400"
 toadStool = "92aeb14"
 sourDough = "3a0b52d"
-cellMembrane = "301e236"
+cellMembrane = "0d39075"
 primalSpring = "05e72e4"
-wateringHole = "11740a6"
+wateringHole = "73fbe58"
 sporePrint = "67cc325"
 
 [deploy]
 songbird_version = "0.2.1+ (9046664) — TCP registration fix + shared ServiceRegistry"
 beardog_version = "0.9.0+ (5e80b53) — dual-socket fix + 94 orphan files purged (-19,214 lines)"
-biomeos_version = "4.51+ (999044e) — 5-tier binary discovery, 14 deps removed, registry perf"
-membrane_version = "0.1.0 (301e236) — init-scope socket discovery, gate identity consolidation (3→1), plasmid smart split"
+biomeos_version = "4.55.0 (5e54022) — composition.test_swap, dual-protocol health, socket ownership guard, 15 dead deps removed"
+membrane_version = "0.1.0 (0d39075) — validate_with_deps (J19), sources.toml self-enrollment (J16), freshness mesh publish (J13)"
 depot_status = "FRESH — 16 musl + 4 gnu + 15 windows = 35 x86_64 binaries, ALL targets current, BLAKE3 verified"
 mesh_status = "9-GATE MESH (blueGate enrolled, handshake active)"
 build_authority = "MEMBRANE_BUILD_AUTHORITY=1 active — sovereign CI LIVE"
 
 [tower]
-status = "TOWER ATOMIC — biomeOS 999044e + cellMembrane 301e236 deployed — 11/11 HEALTHY"
+status = "TOWER ATOMIC — biomeOS v4.55 (5e54022) + cellMembrane (0d39075) deployed — 11/11 HEALTHY"
 songbird = "LIVE — 9046664, TCP :7700, federation active"
 beardog = "DEPLOYED — 5e80b53, dual-socket fix, crypto.sign_ed25519"
 skunkbat = "LIVE (PUBLIC)"
@@ -61,23 +61,21 @@ rootpulse_ledger = "OK — advisory (no session yet, populates on cascade)"
 
 [harvest]
 wave = "155n"
-harvested = "2026-07-31T12:10:00Z"
+harvested = "2026-07-31T15:12:00Z"
 x86_64_musl = 16
 x86_64_gnu = 4
 x86_64_windows = 15
 provenance = "builder=sporeGate, toolchain=rustc 1.96.1, mingw=x86_64-w64-mingw32-gcc"
-golgi_pushed = "CONFIRMED — all 3 targets synced, sovereign CI E2E validated"
-rebuilt = "biomeos(999044e) musl+gnu+windows, membrane(301e236) musl+windows, petalTongue(b135400) musl+windows, squirrel(4bcf79e) musl+windows"
-note = "Wave 155n: P2 golgi hook FIXED (3 bugs), sovereign CI E2E verified for non-broker primals, 4 primals rebuilt+deployed"
+golgi_pushed = "CONFIRMED — biomeOS v4.55 + membrane 0d39075 on all 3 targets"
+rebuilt = "biomeos(5e54022) musl+gnu+windows, membrane(0d39075) musl+windows"
+note = "Wave 155n coevolution: biomeOS v4.55 composition.test_swap + cellMembrane validate_with_deps. J19 code shipped but api/neural-api mode gap prevents E2E. Manual deploy verified."
 checksums = "BLAKE3 regenerated — 35 x86_64 binaries verified (16 musl + 4 gnu + 15 windows)"
 
 [nucleus_redeploy]
 wave = "155n"
-biomeos = "999044e — 5-tier binary discovery (plasmidBin→~/.local/bin→~/.cargo/bin→$PATH), 14 deps removed"
-membrane = "301e236 — init-scope socket discovery (steamGate unblock), gate identity 3→1, -310L plasmid split"
-petaltongue = "b135400 — modern idiom pass, debris audit"
-squirrel = "4bcf79e — clippy deep debt, universal-constants, Cargo.lock purge, 7138 tests"
-tower_status = "DEPLOYED — biomeOS 999044e + cellMembrane 301e236 — 11/11 HEALTHY"
+biomeos = "v4.55 (5e54022) — composition.test_swap, dual-protocol health ping, socket ownership guard, both P1s FIXED, 5 P3s FIXED"
+membrane = "0d39075 — validate_with_deps (J19 broker delegation), J16 sources.toml self-enrollment, J13 freshness mesh publish"
+tower_status = "DEPLOYED — biomeOS v4.55 + cellMembrane 0d39075 — 11/11 HEALTHY"
 
 [services_golgi]
 caddy = "RUNNING — /opt/membrane/caddy, 12 sites"
@@ -126,9 +124,10 @@ phase_c = "POLISH — HTTP webhook listener, build queue, provenance signing cha
 
 [divergences]
 golgi_hook_p2 = "FIXED (155n) — 3 bugs: missing post-receive dispatcher, repo name case mismatch, category singular/plural"
-sandbox_broker_primals = "P3 OPEN — biomeOS/broker primals still fail sandbox::validate (can't standalone health-check)"
-gate_name_env_var = "P3 OPEN — sovereign.ci.trigger uses GATE_NAME, /etc/environment has MEMBRANE_GATE_NAME. Code team should unify."
-run_membrane_permissions = "RECURRING — /run/membrane resets to 0750 after biomeOS restart. tmpfiles.d sets 0755 at boot. needs biomeOS bind to chown dir."
+coevolution_mode_gap = "P3 OPEN — composition.test_swap registered in api mode (requires riboCipher), cellMembrane connects via neural-api (plain JSON-RPC). Needs api to accept plain OR neural-api to register test_swap."
+sandbox_broker_workaround = "WORKAROUND — biomeOS deployed manually since sandbox can't reach composition.test_swap. Depot correct (v4.55)."
+gate_name_env_var = "FIXED (155n) — MEMBRANE_* standardization shipped in cellMembrane 4a2b39c"
+run_membrane_permissions = "RECURRING — /run/membrane resets to 0770 after biomeOS restart. Manual chmod 1777 required."
 
 [code_team_flags]
 mesh_socket = "FLAGGED — songBird mesh relay socket"
