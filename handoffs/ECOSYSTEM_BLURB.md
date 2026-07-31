@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155m
 
 **Date**: Jul 31, 2026 09:15 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **ZERO P0/P1/P2. COEVOLUTION SHIPPED. biomeOS v4.55 (`composition.test_swap`) + cellMembrane (`validate_with_deps`) = broker primals validated via live composition. J19 sandbox KILLED. J16 self-CI KILLED. J13 freshness KILLED. 9/11 jelly strings dead. Golgi hook FIXED. biomeOS v4.55 on Forgejo — pending depot rebuild to validate full pipeline E2E.**
+**Posture**: **ZERO P0/P1/P2. Coevolution 95% — biomeOS v4.55 + cellMembrane `validate_with_deps` both deployed to sporeGate + depot. Mode gap (~10 LOC): `composition.test_swap` registered in `api` mode but cellMembrane calls `neural-api` mode. Fix: register endpoint in neural-api dispatcher. Once fixed, Sovereign CI is fully automated for ALL 13 primals including biomeOS. 9/11 jelly strings killed. 4 NUCLEUS gates. Depot 35 binaries current.**
 
 ---
 
@@ -187,8 +187,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Team | Tests | Wave 155m/n Delivery | Next |
 |------|-------|---------------------|------|
-| **biomeOS** | 8,570 | **v4.55** (`5e540221`): `composition.test_swap` shipped — running biomeOS validates its own replacement binary. Both P1s + 5 P3s FIXED. On Forgejo. | Depot rebuild (J19 should be unblocked). |
-| **cellMembrane** | 1,281 | **J19 FIXED**: `validate_with_deps()` delegates broker primals to running biomeOS via `composition.test_swap`. **J16 FIXED**: `sources.toml` garden self-enrollment. **J13**: `plasmid.staleness --publish` mesh broadcast. Sandbox commit-suffix fix. Socket-base init-scope migration. | Depot rebuild validation. |
+| **biomeOS** | 8,570 | **v4.55** deployed to sporeGate + depot. `composition.test_swap` shipped but **mode gap**: endpoint registered in `api` mode (riboCipher), not `neural-api` mode (plain JSON-RPC). ~10 LOC fix: register in neural-api mode. | Register `composition.test_swap` in neural-api dispatcher. |
+| **cellMembrane** | 1,281 | J19 + J16 + J13 shipped. `validate_with_deps()` ready — waiting on biomeOS mode gap fix to complete E2E. | STANDBY (no changes needed from cellMembrane). |
 | **squirrel** | 7,138 | Deep debt: 150+ clippy, universal-constants, Cargo.lock purge. 90.1% coverage. 0 unsafe. | G18: biomeOS neuralAPI agent integration |
 | **petalTongue** | 6,605 | Modern idiom pass, debris audit | G19: Node Atomic live rendering pipeline |
 
@@ -259,29 +259,20 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 ## WHAT'S NEXT
 
 ```
-PRIORITY 1 — COEVOLUTION CONTRACT (G21, J19): biomeOS + cellMembrane
+PRIORITY 1 — COEVOLUTION MODE GAP (~10 LOC): biomeOS
 
-  biomeOS = COMPOSITION AUTHORITY:
-    - composition.test_swap: hot-swap binary, validate in live composition, rollback on failure
-    - Own /run/membrane socket namespace (create dir, set perms, manage lifecycle)
-    - Manage cellMembrane as a composition member
-    - Self-takeover: running biomeOS orchestrates its own replacement
+  STATUS: composition.test_swap shipped in BOTH biomeOS v4.55 and cellMembrane 0d39075.
+  Both deployed to sporeGate + depot. 95% done.
 
-  cellMembrane = BUILD AUTHORITY:
-    - sovereign.ci.trigger: build binary, delegate validation to running biomeOS via neural-api
-    - Depot push after biomeOS confirms composition health
-    - sources.toml self-enrollment (J16)
-    - MEMBRANE_GATE_NAME standardization (DONE in 4a2b39c)
+  THE GAP:
+    cellMembrane → plain JSON-RPC → neural-api-default.sock
+    BUT composition.test_swap only registered in api mode (requires riboCipher)
+    FIX: Register composition.test_swap in neural-api RPC dispatcher (~10 LOC)
 
-  DELIVERABLES:
-    biomeOS:  composition.test_swap capability + cellMembrane in composition graph
-    cellMembrane: sovereign.ci.trigger → neural-api delegation (replaces standalone sandbox)
-
-  UNBLOCKS:
-    ✓ J19 sandbox false positive → biomeOS v4.54 reaches depot
-    ✓ /run/membrane permission fights → biomeOS owns namespace
-    ✓ Zero-downtime deploys → hot-swap with rollback
-    ✓ biomeOS self-rebuild → full autonomous pipeline
+  STRATEGIC CONVERGENCE (after mode gap):
+    - Merge api + neural-api into single biomeOS process
+    - Sovereign CI trigger: git pull before build (source tree divergence)
+    - biomeOS owns /run/membrane socket namespace
 
 PRIORITY 2 — GATE REDEPLOYMENTS:
   1. westGate + strandGate: redeploy biomeOS v4.54 from depot (after J19 resolved)
