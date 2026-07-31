@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155m
 
 **Date**: Jul 31, 2026 09:15 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **biomeOS v4.54 shipped BOTH P1 fixes (dual-protocol health ping + socket ownership guard) + 5 P3 fixes. Code is on Forgejo. BUT sandbox false positive BLOCKS depot deploy (P2 ESCALATED) — Sovereign CI builds biomeOS but sandbox rejects the orchestrator because it can't self-validate in isolation. Depot still serves v4.51. cellMembrane needs broker-primal exemption or composition.test_swap to unblock. Golgi hook FIXED. 3 P3s remain.**
+**Posture**: **ZERO P0/P1/P2. COEVOLUTION SHIPPED. biomeOS v4.55 (`composition.test_swap`) + cellMembrane (`validate_with_deps`) = broker primals validated via live composition. J19 sandbox KILLED. J16 self-CI KILLED. J13 freshness KILLED. 9/11 jelly strings dead. Golgi hook FIXED. biomeOS v4.55 on Forgejo — pending depot rebuild to validate full pipeline E2E.**
 
 ---
 
@@ -110,8 +110,8 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 
 | Issue | Owner | Status |
 |-------|-------|--------|
-| **biomeOS sandbox false positive** | cellMembrane + biomeOS | **P2 ESCALATED** — blocks depot deploy. v4.54 P1 fix built by Sovereign CI but sandbox rejects biomeOS (orchestrator can't self-validate in isolation). Needs broker-primal exemption or composition.test_swap. |
-| cellMembrane not in sources.toml | cellMembrane | Blocks self-CI |
+| ~~biomeOS sandbox false positive~~ | ~~cellMembrane + biomeOS~~ | **FIXED** — cellMembrane `00c6800` wires `composition.test_swap` delegation. biomeOS `5e540221` implements the endpoint. J19 KILLED. |
+| ~~cellMembrane not in sources.toml~~ | ~~cellMembrane~~ | **FIXED** — `0d39075` garden self-enrollment in `provision_sources_from_manifest()`. J16 KILLED. |
 | /run/membrane permission reset at runtime | biomeOS | Resets dir to 0770 on connection |
 | GNU depot incomplete | sporeGate | 4/16 musl targets have gnu builds |
 | ~~Zombie process reaping~~ | ~~biomeOS~~ | **FIXED in v4.54** (`88785daf`) — background child.wait() |
@@ -187,8 +187,8 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 
 | Team | Tests | Wave 155m/n Delivery | Next |
 |------|-------|---------------------|------|
-| **biomeOS** | 8,570 | **v4.54** (`88785daf`): both P1s FIXED (dual-protocol ping + socket ownership), 5 P3s FIXED (zombie reaping, virtual service churn, graphs_dir, riboCipher log level, --version). On Forgejo. **Blocked from depot by sandbox false positive (P2).** | Sandbox exemption needed from cellMembrane. |
-| **cellMembrane** | 1,273 | MEMBRANE_* env standardization (GATE_NAME P3 FIXED), crypto dedup (HKDF/HMAC consolidated), bootstrap 738→291L + phases split, plasmid smart split (-310L). | sources.toml self-enrollment. |
+| **biomeOS** | 8,570 | **v4.55** (`5e540221`): `composition.test_swap` shipped — running biomeOS validates its own replacement binary. Both P1s + 5 P3s FIXED. On Forgejo. | Depot rebuild (J19 should be unblocked). |
+| **cellMembrane** | 1,281 | **J19 FIXED**: `validate_with_deps()` delegates broker primals to running biomeOS via `composition.test_swap`. **J16 FIXED**: `sources.toml` garden self-enrollment. **J13**: `plasmid.staleness --publish` mesh broadcast. Sandbox commit-suffix fix. Socket-base init-scope migration. | Depot rebuild validation. |
 | **squirrel** | 7,138 | Deep debt: 150+ clippy, universal-constants, Cargo.lock purge. 90.1% coverage. 0 unsafe. | G18: biomeOS neuralAPI agent integration |
 | **petalTongue** | 6,605 | Modern idiom pass, debris audit | G19: Node Atomic live rendering pipeline |
 
@@ -249,9 +249,9 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | sporeGate | **11/11 HEALTHY**, golgi hook FIXED (3 bugs), Sovereign CI E2E verified |
 | P0s | **ZERO** |
 | P1s | **ZERO** — both FIXED in biomeOS v4.54 (`88785daf`) |
-| P2s | **1** — sandbox false positive blocks biomeOS depot deploy |
-| P3s | **3 OPEN** — cellMembrane self-CI, /run/membrane perm reset, GNU depot incomplete |
-| Jelly strings | **6/11 KILLED**. 5 remaining: J12, J13, J16, J18, **J19 sandbox** |
+| P2s | **ZERO** — sandbox P2 FIXED (composition.test_swap coevolution shipped) |
+| P3s | **2 OPEN** — /run/membrane perm reset, GNU depot incomplete |
+| Jelly strings | **9/11 KILLED** (J13, J16, J19 killed this session). 2 remaining: J12 sub-builder, J18 gate coupling |
 | Glacial goals | **21** tracked (G3-G4 COMPLETE, G21 NEW: coevolution contract) |
 
 ---
@@ -310,10 +310,9 @@ GLACIAL:
 
 ---
 
-*Wave 155n — gen4 COMPLETE. biomeOS v4.54: both P1s FIXED (dual-protocol health ping +
-socket ownership guard) + 5 P3s FIXED. On Forgejo, blocked from depot by sandbox P2 (J19).
-COEVOLUTION CONTRACT: biomeOS (composition authority) + cellMembrane (build authority) =
-composition.test_swap. Resolves sandbox, permissions, enables zero-downtime hot-swap.
+*Wave 155n — ZERO P0/P1/P2. COEVOLUTION SHIPPED: biomeOS v4.55 (composition.test_swap) +
+cellMembrane (validate_with_deps + J16 self-CI + J13 freshness). 9/11 jelly strings KILLED.
+Both P1s FIXED (dual-protocol health ping + socket ownership guard). 5 P3s FIXED.
 4 NUCLEUS gates (sporeGate 11/11 HEALTHY). Sovereign CI E2E verified. Golgi hook FIXED.
-Provenance 7/7. 35 depot binaries. 6/11 jelly strings killed. 21 glacial goals (G21 NEW).
+Provenance 7/7. 35 depot binaries. 21 glacial goals (G21 coevolution COMPLETE).
 ~101K+ tests. flockGate DOWN → esotericWebb to ironGate.*
