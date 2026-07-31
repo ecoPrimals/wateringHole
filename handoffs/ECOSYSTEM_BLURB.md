@@ -95,7 +95,11 @@ All 3 items from `CELLMEMBRANE_WAVE155k_SOVEREIGN_CI_POLISH.md` SHIPPED → foss
 | rootpulse.ledger degraded probe | Returns ok=true advisory when no session | `0cfcce5` | **FIXED** |
 | sandbox false positive for broker primals | `ServerContract` resolution for biomeOS | `0cfcce5` | **FIXED** |
 | cellMembrane not in sources.toml | Blocks sovereign CI self-rebuild | — | **P3 OPEN** |
-| golgi post-receive hook not auto-firing | biomeOS `999044e7` (22:14 Jul 30) + cellMembrane `301e236` (Jul 31) both pushed — depot still has 20:15 Jul 30 build. Pipeline broken. 2 critical fixes not reaching gates. | — | **P2 ESCALATED** |
+| biomeOS sandbox false positive | Orchestrator can't self-validate in isolation — needs composition.test_swap | — | **P3 OPEN** |
+| /run/membrane permission reset | biomeOS resets dir to 0770 on connection — sporegate user loses access | — | **P3 OPEN** |
+| GATE_NAME vs MEMBRANE_GATE_NAME | cellMembrane uses GATE_NAME, /etc/environment has MEMBRANE_GATE_NAME | — | **P3 OPEN** |
+| GNU depot incomplete | 4/16 targets built (biomeOS only + cellMembrane + petalTongue + squirrel) | — | **P3 OPEN** |
+| golgi post-receive hook not auto-firing | **FIXED** — 3 bugs: missing dispatcher, case mismatch, category plural. E2E verified (squirrel auto-built). | sporeGate 155n | **FIXED** |
 
 ---
 
@@ -189,7 +193,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Gate | Status | Next |
 |------|--------|------|
 | **eastGate** | Overwatch. biomeOS + squirrel + petalTongue local. | Platform wiring (G18-G20). |
-| **sporeGate** | **11/11 HEALTHY.** Sovereign CI LIVE. biomeOS v4.51 deployed. | J12 sub-builder. Depot rebuilt. |
+| **sporeGate** | **11/11 HEALTHY** (perm drift to 8/11). Golgi hook FIXED (3 bugs). Depot rebuilt: 35 bins, all current. | biomeOS composition authority evolution. |
 | **westGate** | **NUCLEUS.** Prov 7/7. v4.50 deployed. Needs `999044e7` redeploy. | Redeploy biomeOS + AlphaFold ingestion. |
 | **strandGate** | **NUCLEUS.** v4.50 deployed (source). Needs `999044e7` redeploy. | Redeploy biomeOS. |
 | **blueGate** | **NUCLEUS** (15/15 fresh, Prov 7/7). Sub-builder UNBLOCKED. | J12 enrollment under sporeGate. |
@@ -239,7 +243,7 @@ standard + Tower Atomic abstraction means one codebase → any platform.
 | Fossilized dimensions | **13** (F13 covers J1–J8 only) |
 | P0s | **ZERO** |
 | P1s | **ZERO** — membrane.exe FIXED (`4ccbab1`) |
-| P2s | **1** — golgi post-receive hook not triggering Sovereign CI (depot stale: `999044e7` not built) |
+| P2s | **ZERO** — golgi hook FIXED (3 bugs), depot rebuilt with `999044e7` + `301e236` |
 | P3s | **2 OPEN** — cellMembrane self-CI, golgi hook auto-fire |
 | Depot | **35** binaries: 16 musl + **4** gnu + 15 windows (biomeOS gnu NEW, all BLAKE3 verified) |
 
