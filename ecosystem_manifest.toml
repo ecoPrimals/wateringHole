@@ -793,6 +793,7 @@ composition = "full"
 transport = "lan"
 zone = "backbone"
 wg_ip = "10.13.37.7"
+lan_ip = "192.168.4.237"
 roles = ["node_atomic", "compute", "gpu"]
 notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). 13/13 NUCLEUS + 4x HDD enclave experiment (14TB + 1TB + 1TB + ~2TB — each disk an encrypted enclave for segregated compute/data). JupyterHub 5.4.5 LIVE on :8000. songBird drawbridge target. House 2 mesh anchor."
 repos = [
@@ -893,9 +894,11 @@ composition = "compute"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "house2"
+wg_ip = "10.13.37.10"
+lan_ip = "192.168.4.169"
 roles = ["compute", "tower_atomic"]
 nucleus_status = "Tower+Compute LIVE"
-notes = "Dual EPYC 7452 128-thread + RTX 3090. Tower Atomic + Compute Trio LIVE (Wave 155h). barraCuda GPU verified (SHADER_F64), coralReef 18/18 dispatch. P0: musl depot can't dlopen glibc Vulkan — source build works, glibc depot target needed."
+notes = "Dual EPYC 7452 128-thread + RTX 3090. Tower Atomic + Compute Trio LIVE (Wave 155h). barraCuda GPU verified (SHADER_F64), coralReef 18/18 dispatch. P0: musl depot can't dlopen glibc Vulkan — source build works, glibc depot target needed. DNS fixed post-155n (systemd-resolved bypassed)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -990,9 +993,11 @@ composition = "tower"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
 zone = "house2"
+wg_ip = "10.13.37.12"
+lan_ip = "192.168.4.210"
 build_authority = true
 roles = ["build", "tower_atomic"]
-notes = "Windows. Distributed builder (Node Atomic pattern). Tower Atomic workhouse — media/gaming/house2 services. Flint 2 bridge (2.5G). Build node under sporeGate foreman."
+notes = "Windows. Distributed builder (Node Atomic pattern). Tower Atomic workhouse — media/gaming/house2 services. Flint 2 bridge (2.5G). Build node under sporeGate foreman. J12 LIVE E2E. Peptidoglycan anchor H2."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
