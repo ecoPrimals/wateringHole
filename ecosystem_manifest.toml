@@ -104,26 +104,38 @@ notes = "f64 precision via SHADER_F64 feature on RTX 5070 Ti (ironGate). coralRe
 #
 # Resolves: CI-DIV-01 (biomeOS), CI-DIV-02 (skunkBat), CI-DIV-03 (nestGate)
 
+# ── Sub-builder dispatch (J12) ───────────────────────────────────
+# Maps target triples to the gate that builds them. The foreman
+# (sporeGate) dispatches via SSH when sovereign CI encounters a
+# target it cannot build locally.
+
+[sub_builders."x86_64-pc-windows-gnu"]
+gate = "blueGate"
+ssh_host = "blueGate"
+membrane_bin = "membrane.exe"
+
+# ── Per-primal build configs ─────────────────────────────────────
+
 [build.beardog]
 binary_name = "beardog"
 package = "beardog"
 workspace = false
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.songbird]
 binary_name = "songbird"
 package = "songbird"
 workspace = false
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.toadstool]
 binary_name = "toadstool"
 package = "toadstool-cli"
 workspace = true
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.barracuda]
 binary_name = "barracuda"
@@ -131,7 +143,7 @@ package = "barracuda-core"
 workspace = true
 cargo_config = false
 gpu = true
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.coralreef]
 binary_name = "coralreef"
@@ -139,35 +151,35 @@ package = "coralreef-core"
 workspace = true
 cargo_config = false
 gpu = true
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.rhizocrypt]
 binary_name = "rhizocrypt"
 package = "rhizocrypt-service"
 workspace = true
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.loamspine]
 binary_name = "loamspine"
 package = "loamspine-service"
 workspace = true
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.sweetgrass]
 binary_name = "sweetgrass"
 package = "sweet-grass-service"
 workspace = true
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.biomeos]
 binary_name = "biomeos"
 package = "biomeos-unibin"
 workspace = true
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 notes = "CI-DIV-01: workspace has multiple binaries — requires --package biomeos-unibin"
 
 [build.squirrel]
@@ -175,21 +187,21 @@ binary_name = "squirrel"
 package = "squirrel"
 workspace = true
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.petaltongue]
 binary_name = "petaltongue"
 package = "petaltongue-workspace"
 workspace = true
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 [build.skunkbat]
 binary_name = "skunkbat"
 package = "skunk-bat-server"
 workspace = true
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 notes = "CI-DIV-02: workspace root is test-only — requires --package skunk-bat-server"
 
 [build.nestgate]
@@ -197,7 +209,7 @@ binary_name = "nestgate"
 package = "nestgate"
 workspace = false
 cargo_config = true
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 notes = "Custom .cargo/config.toml with link-self-contained and relocation-model=static for musl (CI-DIV-03 resolved Wave 133a)"
 
 [build.sourdough]
@@ -205,7 +217,7 @@ binary_name = "sourdough"
 package = "sourdough"
 workspace = true
 cargo_config = false
-targets = ["x86_64-unknown-linux-musl", "aarch64-unknown-linux-musl"]
+targets = ["x86_64-unknown-linux-musl", "x86_64-unknown-linux-gnu", "x86_64-pc-windows-gnu", "aarch64-unknown-linux-musl"]
 
 # ═══════════════════════════════════════════════════════════════════
 # Repositories
