@@ -5,7 +5,7 @@
 
 [meta]
 gate = "sporeGate"
-updated = "2026-07-31T23:45:00Z"
+updated = "2026-08-01T02:10:00Z"
 wave = "155n"
 
 [heads]
@@ -102,7 +102,7 @@ wg_peer = "REGISTERED"
 wg_status = "LIVE — handshake active"
 ssh_key = "REGISTERED — Forgejo key ID 14"
 tower_status = "READY — 15/15 Windows .exe in depot (membrane.exe NOW AVAILABLE)"
-sub_builder = "UNBLOCKED — membrane.exe compiles, blueGate can run membrane natively"
+sub_builder = "PROVEN — blueGate SSH dispatch + Windows build validated. squirrel: 24MB BLAKE3 verified."
 
 [resolved]
 tower_atomic = "COMPLETE — 7/7 debt resolved"
@@ -128,10 +128,10 @@ status = "SOVEREIGN CI LIVE — P2 golgi hook FIXED (3 bugs). Full E2E verified 
 j9_push_trigger = "KILLED — 3 hook bugs fixed (no dispatcher, case mismatch, category mismatch). Verified E2E."
 j10_cascade_auto_harvest = "KILLED — MEMBRANE_BUILD_AUTHORITY=1 set, drift pipeline active"
 j11_multi_target = "KILLED — manifest [build.*].targets verified for all primals"
-j12_sub_builder = "WIRED — foreman dispatch in sovereign.rs. SSH config for blueGate (192.168.4.237). Dry-run validated. Blocked on blueGate SSH key enrollment."
+j12_sub_builder = "PROVEN E2E — foreman dispatch in sovereign.rs. SSH to blueGate (192.168.4.210). squirrel built on blueGate: 24MB, BLAKE3 verified. --push return path needs polish."
 j13_mesh_notify = "PARTIAL — depot.updated WORKS (songBird UDS). build_pending is stub-only (~20 LOC to wire)."
 phase_a = "DONE — sovereign CI live, validated E2E, hook bugs FIXED"
-phase_b = "WIRED — foreman dispatch in sovereign.rs. blueGate LAN 192.168.4.237. SSH dispatch validated (dry-run). Blocked on blueGate key enrollment."
+phase_b = "PROVEN — foreman dispatch LIVE. blueGate LAN 192.168.4.210. SSH enrolled. squirrel E2E built. --push return path needs depot sync config."
 phase_c = "POLISH — HTTP webhook listener, build queue, provenance signing chain"
 
 [divergences]
