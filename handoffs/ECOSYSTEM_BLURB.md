@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 155n Checkpoint (Updated)
 
-**Date**: Jul 31, 2026 19:50 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **ZERO P0/P1/P2. G22 VALIDATED on sporeGate (single-process, no socket evaporation). 5/10 divergences resolved. sporePrint auto-publish wired. Sovereign CI cloning fixed. Sole gate to springs+gardens: J12 sub-builder wire.**
+**Date**: Jul 31, 2026 20:10 EDT | **Wave**: 155n | **From**: eastGate overwatch
+**Posture**: **ZERO P0/P1/P2. J12 sub-builder WIRED (sporeGate dispatch) + PROVEN (blueGate local build). SSH key enrollment is the last thread. Springs+gardens gate is opening.**
 
 ---
 
@@ -10,14 +10,12 @@
 All three blurbed teams delivered. The runway to springs+gardens is nearly clear.
 
 ```
-CHECKPOINT STATUS:
-  ✓ Item 1: G22 — COMPLETE + VALIDATED (biomeOS single-process on sporeGate,
-            no socket evaporation, Prov 7/7 ×8 on westGate)
-  ◻ Item 2: J12 sub-builder wire — SOLE REMAINING. sporeGate → blueGate
-            via songBird IPC. All blockers cleared.
-  ✓ Item 3: sporePrint publish — CLEARED + AUTO-PUBLISH WIRED (D7 resolved,
-            Forgejo post-receive hook → zola build on push)
-  ✓ Item 4: J18 gate coupling — CODE SHIPPED (882ad09). Needs gate validation.
+CHECKPOINT STATUS — ALL 4 MUST-CLEAR ITEMS RESOLVED:
+  ✓ Item 1: G22 — COMPLETE + VALIDATED (single-process, no socket evaporation)
+  ✓ Item 2: J12 — WIRED (sporeGate foreman dispatch) + PROVEN (blueGate local build).
+            Remaining: SSH key enrollment on blueGate, then live E2E test.
+  ✓ Item 3: sporePrint — LIVE + AUTO-PUBLISH WIRED (Forgejo hook)
+  ✓ Item 4: J18 — CODE SHIPPED (882ad09). Gate validation pending.
 ```
 
 **What changed since last cascade:**
@@ -38,12 +36,12 @@ CHECKPOINT STATUS:
 
 | # | Item | Owner | Status |
 |---|------|-------|--------|
-| ~~1~~ | ~~G22 steps 3-5~~ | ~~biomeOS~~ | **COMPLETE** — `b82f0925`. Deployed on westGate + sporeGate. |
-| 2 | **J12**: blueGate sub-builder IPC wire | sporeGate + blueGate | UNBLOCKED. Next: songBird IPC message format → sporeGate dispatch → blueGate `plasmid.harvest` → results push to depot. |
-| ~~3~~ | ~~sporePrint publish~~ | ~~sporeGate~~ | **CLEARED** — 313 pages LIVE at `sporeprint.primals.eco`. |
-| ~~4~~ | ~~J18 gate coupling~~ | ~~cellMembrane~~ | **CODE SHIPPED** (`882ad09`). Needs gate-level validation (southGate, steamGate). |
+| ~~1~~ | ~~G22 steps 3-5~~ | ~~biomeOS~~ | **COMPLETE + VALIDATED** — single-process on sporeGate + westGate. |
+| ~~2~~ | ~~J12 sub-builder~~ | ~~sporeGate + blueGate~~ | **WIRED + PROVEN.** sporeGate: foreman dispatch in sovereign CI, dry-run validated. blueGate: local build proof (skunkBat 2.6 MB, matches depot), IPC caps registered. **Remaining**: SSH key enrollment on blueGate → live E2E test. |
+| ~~3~~ | ~~sporePrint publish~~ | ~~sporeGate~~ | **CLEARED + AUTO-PUBLISH** — Forgejo hook wired. |
+| ~~4~~ | ~~J18 gate coupling~~ | ~~cellMembrane~~ | **CODE SHIPPED** (`882ad09`). Gate validation pending. |
 
-**Sole remaining blocker: J12 sub-builder wire.** Everything else is shipped or validated.
+**All 4 MUST-CLEAR items are resolved at the code level.** J12 needs SSH key enrollment (manual) then live E2E validation.
 
 ### SHOULD CLEAR (before fleet expansion)
 
@@ -78,8 +76,8 @@ CHECKPOINT STATUS:
 | Gate | biomeOS | Status | Next |
 |------|---------|--------|------|
 | **westGate** | **v4.56 G22** | NUCLEUS. Prov 7/7 ×8. 30/30 sockets. ZFS 50.7 TB. | AlphaFold ingestion. |
-| **sporeGate** | v4.56 G22 | 11/11 HEALTHY. 46 depot bins. G22 single-process VALIDATED. Auto-publish wired. Sovereign CI fixed. | J12 sub-builder wire. |
-| **blueGate** | v4.56 | NUCLEUS 13/13. P2 FIXED. Target triple correct. | J12 IPC transport (TCP fallback). |
+| **sporeGate** | v4.56 G22 | 11/11 HEALTHY. 46 depot bins. G22 VALIDATED. Auto-publish. Sovereign CI fixed. J12 foreman dispatch WIRED. | SSH key enrollment on blueGate → live E2E. |
+| **blueGate** | v4.56 | NUCLEUS 13/13. P2 FIXED. J12 local build PROVEN (skunkBat matches depot). 11 IPC services, 37 caps. `blueGate-builder` registered. | SSH key enrollment → receive sporeGate dispatch. |
 | **strandGate** | v4.51 | NUCLEUS 12/12. RTX 3090. Node Atomic Landmark. | v4.56 redeploy. |
 | **southGate** | — | VALIDATION GATE. HW enrolled. | NUCLEUS launch + J18 + bonding. |
 | **ironGate** | — | Online. 14TB HDD. | esotericWebb + Tower. |
@@ -123,12 +121,12 @@ CHECKPOINT STATUS:
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| MUST-CLEAR items | **3/4 RESOLVED** (J12 wire remaining) |
+| MUST-CLEAR items | **4/4 CODE RESOLVED** — J12 needs SSH key enrollment + live E2E |
 | Depot | **46 binaries** (16 musl + 15 gnu + 15 windows). BLAKE3 verified. |
 | biomeOS | **v4.56 G22 COMPLETE** — dual-protocol, 244 caps, unified namespace |
 | Gates current (v4.56) | westGate + sporeGate + blueGate. strandGate needs redeploy. |
 | Provenance 7/7 | westGate pass #8 (consecutive across v4.50→v4.56) |
-| Jelly strings | **10/11 KILLED** (J18 CODE SHIPPED). J12 open (UNBLOCKED). |
+| Jelly strings | **10/11 KILLED** (J18 CODE SHIPPED). J12 WIRED (SSH key enrollment pending). |
 | Divergences | **5/10 RESOLVED** (D1, D5, D6, D7 fully; D2 partially). 5 open: D3, D4, D8 (ops/biomeOS), D9, D10 (trivial). |
 | Glacial goals | 23 tracked. G3+G4+G21+G22 COMPLETE. G23 NEW. |
 
@@ -137,9 +135,10 @@ CHECKPOINT STATUS:
 ## WHAT'S NEXT
 
 ```
-IMMEDIATE:
-  J12 sub-builder wire (sporeGate → blueGate via songBird IPC)
-  — sole MUST-CLEAR before springs+gardens
+IMMEDIATE (loose threads):
+  J12 SSH key enrollment on blueGate (2 keys provided by sporeGate)
+  J12 live E2E dispatch test (sporeGate → blueGate → depot push)
+  J18 gate validation on southGate/steamGate
 
 GATE OPS:
   strandGate v4.56 redeploy
@@ -162,9 +161,8 @@ GLACIAL:
 
 ---
 
-*Wave 155n — ZERO P0/P1/P2. G22 COMPLETE + VALIDATED (sporeGate single-process,
-no socket evaporation). 3/4 MUST-CLEAR resolved. 5/10 divergences resolved.
-sporePrint auto-publish wired. Sovereign CI cloning fixed. 46 depot bins.
-Sole remaining gate to springs+gardens: J12 sub-builder wire.
-biomeOS v4.56 on westGate (Prov 7/7 ×8) + sporeGate (G22 validated) + blueGate.
-~101K+ tests. 23 glacial goals (4 COMPLETE). gen5 VALIDATED.*
+*Wave 155n — ZERO P0/P1/P2. ALL 4 MUST-CLEAR CODE RESOLVED. G22 VALIDATED.
+J12 sub-builder WIRED (sporeGate) + PROVEN (blueGate). sporePrint auto-publish.
+Sovereign CI fixed. 5/10 divergences resolved. 46 depot bins. Loose threads:
+SSH key enrollment on blueGate, J18 gate validation, strandGate v4.56 redeploy.
+Springs+gardens gate is opening. ~101K+ tests. 23 glacial goals (4 COMPLETE).*
