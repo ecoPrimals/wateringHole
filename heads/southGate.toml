@@ -1,18 +1,19 @@
-# Gate: southGate | VALIDATION GATE — Wave 155n
-# External deployment proof. Deliberately OFF mesh.
-# Own genetic lineage. NUCLEUS LIVE.
+# Gate: southGate | POST-THRESHOLD — Wave 155n
+# Validation gate PROVEN (22/22). GPU compute UNLOCKED. NUCLEUS 21h+ stable.
+# Own genetic lineage (89df7a2d). Springs-ready.
 
 [meta]
 gate = "southGate"
-updated = "2026-07-31T17:36:00Z"
-wave = "155n"
-role = "VALIDATION GATE"
+updated = "2026-08-01T14:55:00Z"
+wave = "155n-post-threshold"
+role = "VALIDATION GATE + COMPUTE NODE"
+posture = "Post-threshold. GPU unlocked. Springs-ready."
 
 [heads]
 bearDog = "5e80b53"
 songBird = "9046664"
 nestGate = "6b6d484"
-biomeOS = "bd96dbc"
+biomeOS = "7ccd8ae"
 rhizoCrypt = "4716bf5"
 squirrel = "4bcf79e"
 sweetGrass = "4b5167b"
@@ -22,27 +23,32 @@ coralReef = "edcd696"
 barraCuda = "d2ccce4"
 petalTongue = "b135400"
 toadStool = "92aeb14"
-cellMembrane = "d7026d7"
+cellMembrane = "882ad09"
 plasmidBin = "f0d5432"
-wateringHole = "c700083"
+wateringHole = "07218f2"
 
 [hardware]
 cpu = "AMD Ryzen 7 5800X3D (8c/16t, 3D V-Cache)"
-gpu = "NVIDIA GeForce RTX 4060 (8GB, Ada Lovelace)"
+gpu = "NVIDIA GeForce RTX 4060 (8GB, Ada Lovelace, SHADER_F64)"
+gpu_vulkan = "Vulkan 1.4.312, NVIDIA 580.126.18"
 ram_gb = 128
-storage = "1TB + 4TB NVMe (Samsung 990 EVO Plus)"
+storage = "1TB NVMe (479GB free)"
 os = "Pop!_OS 22.04 LTS"
-driver = "NVIDIA 580.126.18"
+driver = "NVIDIA 580.126.18, CUDA 13.0"
 
 [deploy]
 biomeos_version = "4.55.0"
 beardog_version = "0.9.0"
 songbird_version = "0.2.1"
+barracuda_version = "0.4.0"
+toadstool_version = "0.2.0"
 squirrel_version = "0.1.0"
+rhizocrypt_version = "0.14.x"
 depot_source = "depot.primals.eco (sovereign HTTPS — NO mesh required)"
 binary_count = 16
-binary_target = "x86_64-unknown-linux-musl"
+binary_target = "x86_64-unknown-linux-musl (NUCLEUS) + x86_64-unknown-linux-gnu (GPU compute)"
 install_path = "~/.local/bin/"
+gpu_binary = "~/.local/bin/gnu/barracuda (dynamically linked for Vulkan dlopen)"
 
 [identity]
 family_id = "89df7a2d"
@@ -57,35 +63,65 @@ forgejo_ssh = "LIVE — authenticated as golgiAdmin via git.primals.eco:2222 (pu
 federation = "songBird rejecting unknown_family peers on LAN — trust boundary ACTIVE"
 
 [nucleus]
-status = "LIVE — 13/13 processes, 32 sockets, 1 proc/primal"
+status = "LIVE — 13/13 processes, 32 sockets, 86MB RSS, 21h+ uptime"
 composition = "full"
 boot_order = "Tower → Nest → Node → biomeOS (dependency-aware)"
-total_rss_mb = 76
+total_rss_mb = 86
 btsp_enforcement = "ACTIVE — all primals reject plain JSON-RPC on TCP and UDS"
+ipc_latency_ms = 0.1
+uptime_hours = 21.4
 
 [nucleus.primals]
-beardog = "HEALTHY — PID 36072, 10MB, security-89df7a2d.sock"
-songbird = "HEALTHY — PID 36231, 12MB, federation rejecting unknown_family (CORRECT)"
-skunkbat = "HEALTHY — PID 36368, 2MB"
-toadstool = "HEALTHY — PID 36529, 9MB"
-barracuda = "HEALTHY — PID 36691, 5MB"
-coralreef = "HEALTHY — PID 36845, 3MB"
-nestgate = "HEALTHY — PID 37000, 4MB"
-rhizocrypt = "HEALTHY — PID 37159, 4MB"
-loamspine = "HEALTHY — PID 37324, 3MB"
-sweetgrass = "HEALTHY — PID 37479, 5MB"
-biomeos = "HEALTHY — PID 37633, 6MB, API on :9800 + UDS"
-squirrel = "HEALTHY — PID 37795, 7MB"
-petaltongue = "HEALTHY — PID 37951, 6MB"
+beardog = "HEALTHY — alive v0.9.0, security-89df7a2d.sock"
+songbird = "HEALTHY — alive, federation rejecting unknown_family (CORRECT)"
+skunkbat = "HEALTHY — BTSP enforcement active"
+toadstool = "HEALTHY — riboCipher enforcement (sovereign compute router)"
+barracuda = "HEALTHY — 90+ RPC methods, 24 capability domains, sub-ms IPC"
+coralreef = "HEALTHY — shader dispatch core"
+nestgate = "HEALTHY — BTSP authentication required (CAS authority)"
+rhizocrypt = "HEALTHY — alive, uptime 77,129s, provenance authority"
+loamspine = "HEALTHY — method routing active"
+sweetgrass = "HEALTHY — riboCipher enforcement (data braid)"
+biomeos = "HEALTHY — v4.55.0, API on :9800 + UDS, 7 modes available"
+squirrel = "HEALTHY — alive v0.1.0, agent orchestration"
+petaltongue = "HEALTHY — alive, rendering coordinator"
+
+[gpu]
+status = "UNLOCKED — gnu-linked barracuda detects RTX 4060 via Vulkan"
+device = "NVIDIA GeForce RTX 4060 (DiscreteGpu)"
+backend = "Vulkan"
+shader_f64 = "YES — 14/9 builtins native"
+max_buffer_size_mb = 1024
+max_workgroup_x = 256
+bcs_throughput = "2.1M nuclei/sec (batch 8192)"
+eigensolve_throughput = "14,941 matrices/sec (512×30dim)"
+l2_hfb_pipeline = "RUNNING — GPU-resident HFB nuclear physics"
+
+[tower_atomic_benchmark]
+mode = "loopback (127.0.0.1:7700)"
+latency_avg_ms = 0.134
+latency_p50_ms = 0.131
+latency_p95_ms = 0.186
+setup_avg_ms = 0.074
+throughput_mbps = 17242
 
 [validation]
+gate_deployment = "PROVEN — 22/22 PASS (Wave 155n)"
 external_deploy = "PROVEN — depot.primals.eco over public internet, no WireGuard"
 own_genetic_lineage = "PROVEN — family 89df7a2d, bearDog entropy-seeded"
-btsp_trust_boundary = "PROVEN — songBird rejects unknown_family peers"
-nucleus_boot = "PROVEN — 13/13, 32 sockets, 76MB RSS"
-next = "bonding validation — encrypted work handoff across trust boundary"
+btsp_trust_boundary = "PROVEN — 29,294 foreign peer rejections"
+nucleus_boot = "PROVEN — 13/13, 32 sockets, 86MB RSS, 21h stable"
+gpu_compute = "PROVEN — RTX 4060 via gnu barracuda, BCS + eigensolve validated"
+ipc_round_trip = "PROVEN — sub-ms JSON-RPC to all 13 primals"
+j18_portability = "PROVEN — user-space paths, XDG runtime, no system dirs"
+g17_reconstitution = "PROVEN — public depot + own lineage + no mesh"
+
+[springs_readiness]
+hotspring = "READY — RTX 4060 GPU compute validated, guideStone suite running"
+footprint = "READY — NUCLEUS operational, nestGate + petalTongue alive"
+science_pipeline = "READY — 128GB RAM, 479GB free storage, CAS primals live"
 
 [observations]
-songbird_federation = "LAN peers (192.168.4.x) attempting federation — correctly rejected as unknown_family/different_family"
-btsp_tcp_enforcement = "All primals reject plain curl probes — BTSP ClientHello required (correct behavior)"
-health_probe_note = "nucleus_launcher reported 9/13 HEALTHY — false negative. All 13 running. Plain TCP probes rejected by BTSP enforcement."
+musl_vs_gnu = "musl static for portability (NUCLEUS), gnu dynamic for GPU dlopen — dual-binary pattern proven"
+gpu_note = "RTX 4060 Ada Lovelace: same arch as strandGate RTX 3090 (Ampere validated), southGate extends validation to Ada generation"
+next_steps = "hotSpring guideStone 59/59, L2 HFB GPU pipeline completion, footPrint GIS activation"
