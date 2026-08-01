@@ -1,13 +1,13 @@
 # Gate: southGate | POST-THRESHOLD — Wave 155n
-# Validation gate PROVEN (22/22). GPU compute UNLOCKED. NUCLEUS 21h+ stable.
-# Own genetic lineage (89df7a2d). Springs-ready.
+# Validation gate PROVEN. GPU compute ACTIVE. arXiv data PRODUCED.
+# NUCLEUS 27.8h stable. Own genetic lineage (89df7a2d).
 
 [meta]
 gate = "southGate"
-updated = "2026-08-01T14:55:00Z"
+updated = "2026-08-01T21:10:00Z"
 wave = "155n-post-threshold"
-role = "VALIDATION GATE + COMPUTE NODE"
-posture = "Post-threshold. GPU unlocked. Springs-ready."
+role = "VALIDATION GATE + COMPUTE NODE + ARXIV DATA PRODUCTION"
+posture = "Post-threshold. GPU HMC benchmark complete. arXiv Section 3.4 data ready."
 
 [heads]
 bearDog = "5e80b53"
@@ -23,9 +23,11 @@ coralReef = "edcd696"
 barraCuda = "d2ccce4"
 petalTongue = "b135400"
 toadStool = "92aeb14"
-cellMembrane = "882ad09"
+cellMembrane = "d350601"
 plasmidBin = "f0d5432"
-wateringHole = "07218f2"
+wateringHole = "93052bd"
+hotSpring = "4dbd778"
+primalSpring = "1cfee8c"
 
 [hardware]
 cpu = "AMD Ryzen 7 5800X3D (8c/16t, 3D V-Cache)"
@@ -63,13 +65,13 @@ forgejo_ssh = "LIVE — authenticated as golgiAdmin via git.primals.eco:2222 (pu
 federation = "songBird rejecting unknown_family peers on LAN — trust boundary ACTIVE"
 
 [nucleus]
-status = "LIVE — 13/13 processes, 32 sockets, 86MB RSS, 21h+ uptime"
+status = "LIVE — 13/13 processes, 32 sockets, 86MB RSS, 27.8h uptime"
 composition = "full"
 boot_order = "Tower → Nest → Node → biomeOS (dependency-aware)"
 total_rss_mb = 86
 btsp_enforcement = "ACTIVE — all primals reject plain JSON-RPC on TCP and UDS"
 ipc_latency_ms = 0.1
-uptime_hours = 21.4
+uptime_hours = 27.8
 
 [nucleus.primals]
 beardog = "HEALTHY — alive v0.9.0, security-89df7a2d.sock"
@@ -87,15 +89,19 @@ squirrel = "HEALTHY — alive v0.1.0, agent orchestration"
 petaltongue = "HEALTHY — alive, rendering coordinator"
 
 [gpu]
-status = "UNLOCKED — gnu-linked barracuda detects RTX 4060 via Vulkan"
-device = "NVIDIA GeForce RTX 4060 (DiscreteGpu)"
-backend = "Vulkan"
+status = "ACTIVE — arXiv data produced, HMC benchmark complete"
+device = "NVIDIA GeForce RTX 4060 (DiscreteGpu, SM89 Ada Lovelace)"
+backend = "Vulkan 1.4.312"
 shader_f64 = "YES — 14/9 builtins native"
 max_buffer_size_mb = 1024
 max_workgroup_x = 256
 bcs_throughput = "2.1M nuclei/sec (batch 8192)"
 eigensolve_throughput = "14,941 matrices/sec (512×30dim)"
-l2_hfb_pipeline = "RUNNING — GPU-resident HFB nuclear physics"
+l2_hfb_pipeline = "COMPLETE — 18 nuclei/eval, 434s/eval, GPU-resident"
+hmc_8x4 = "39.6 ms/traj (32.3× speedup vs CPU)"
+hmc_16x4 = "551.3 ms/traj (37.5× speedup vs CPU)"
+hmc_32x8 = "2199.5 ms/traj (37.5× speedup vs CPU)"
+hmc_strategy = "DF64 on FP32 cores — Concurrent (Omelyan, n_md=10, β=6.0)"
 
 [tower_atomic_benchmark]
 mode = "loopback (127.0.0.1:7700)"
@@ -116,12 +122,25 @@ ipc_round_trip = "PROVEN — sub-ms JSON-RPC to all 13 primals"
 j18_portability = "PROVEN — user-space paths, XDG runtime, no system dirs"
 g17_reconstitution = "PROVEN — public depot + own lineage + no mesh"
 
+[guidestone]
+status = "59/59 ALL CHECKS PASSED"
+papers = "43 (Wilson Gradient Flow), 44 (BGK Dielectric), 45 (Kinetic-Fluid Coupling)"
+runtime_seconds = 546
+precision_highlight = "gradient_flow_unitarity = 2.23e-13 (tol: 1e-10)"
+
+[arxiv_contribution]
+section = "3.4 Multi-Vendor Benchmarks"
+paper = "SU(2) Lattice QCD on Consumer GPU"
+data_ready = true
+gpu_row = "RTX 4060 | SM89 Ada Lovelace | 8 GB | 39.6 ms (8⁴) | 551.3 ms (16⁴)"
+
 [springs_readiness]
-hotspring = "READY — RTX 4060 GPU compute validated, guideStone suite running"
+hotspring = "ACTIVE — arXiv data produced, full HMC scaling, guideStone 59/59"
 footprint = "READY — NUCLEUS operational, nestGate + petalTongue alive"
 science_pipeline = "READY — 128GB RAM, 479GB free storage, CAS primals live"
 
 [observations]
-musl_vs_gnu = "musl static for portability (NUCLEUS), gnu dynamic for GPU dlopen — dual-binary pattern proven"
-gpu_note = "RTX 4060 Ada Lovelace: same arch as strandGate RTX 3090 (Ampere validated), southGate extends validation to Ada generation"
-next_steps = "hotSpring guideStone 59/59, L2 HFB GPU pipeline completion, footPrint GIS activation"
+dual_binary_pattern = "musl static (NUCLEUS IPC) + gnu dynamic (GPU Vulkan) — same depot, different linkage"
+gpu_generation_proof = "Ada Lovelace (SM89) validates alongside Ampere (SM86) — same WGSL shaders, same physics"
+arxiv_status = "RTX 4060 row ready for hotSpring team integration into whitePaper/subGen/"
+next_steps = "footPrint GIS, hotSpring QCD production, Aug 2 interruption readiness"
