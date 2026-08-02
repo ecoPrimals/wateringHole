@@ -67,7 +67,9 @@ def rpc(primal, method, params=None, timeout=30):
 
 
 def blake3_hash(filepath):
-    r = subprocess.run(["b3sum", "--no-names", str(filepath)], capture_output=True, text=True, timeout=300)
+    size_gb = filepath.stat().st_size / (1024**3)
+    timeout = max(300, int(size_gb * 60) + 120)
+    r = subprocess.run(["b3sum", "--no-names", str(filepath)], capture_output=True, text=True, timeout=timeout)
     return r.stdout.strip()
 
 
