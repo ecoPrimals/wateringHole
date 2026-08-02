@@ -18,11 +18,11 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "3.2.0"
-generated = "2026-08-01"
+version = "3.1.0"
+generated = "2026-07-16"
 # DEPRECATED: wave ID now lives in wave.toml (overwatch sole writer).
 # This field is retained at last-known value for backward compat with older binaries.
-wave = 155
+wave = 136
 total_repos = 40
 
 # ═══════════════════════════════════════════════════════════════════
@@ -858,25 +858,19 @@ repos = [
     "wetSpring", "neuralSpring",
 ]
 
-# biomeGate — GPU crankshaft node, coralReef diesel engine, hotSpring compute
-# Rebuilt Aug 1, 2026: Threadripper 3970X (32c/64t), RTX 5060 (8GB), 128GB DDR4
-# Planned GPU additions: Tesla + Titan V for multi-vendor validation
-# SSH key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPnxJIzG134WkzUerZbThhIyrAIkpx8lKHEQBb4SzjxK biomegate@primals.eco
-# WG pubkey: ZRbD3VDxzxhQ3gbNzLoIIP5MYMvF7gVM7G9AmIRLEnY=
+# biomeGate — HBM2 test bench, vendor cracking, Threadripper 3970X (House 2)
 [gates.biomeGate]
 target = "x86_64-unknown-linux-musl"
-mobility = "fixed"
-bind_mode = "uds"
-composition = "compute"
-transport = "lan"
-mesh_peer = "157.230.3.183:7700"
-zone = "backbone"
 wg_ip = "10.13.37.3"
-roles = ["compute", "gpu_crankshaft", "shader_validation"]
-link_speed_mbps = 2500
-kderm_role = "cytoplasm"
-nucleus_status = "Tower Atomic STAGED"
-notes = "REBUILT Aug 1, 2026. Threadripper 3970X (32c/64t), 128GB DDR4, ZFS rpool 886GB. Ubuntu 24.04.3 LTS. Rust 1.97.1. GPU CRANKSHAFT LIVE: RTX 5060 (host/wgpu) + Titan V (GV100 SM70, VFIO /dev/vfio/49) + K80 (GK210×2 SM37, VFIO /dev/vfio/35+36). toadStool + hotSpring built. coralReef 3,553 tests PASS. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever hardware run queued."
+lan_ip = "192.168.4.199"
+ssh_user = "biomegate"
+mobility = "fixed"
+composition = "full"
+transport = "lan"
+zone = "house2"
+roles = ["node_atomic", "compute", "gpu", "hbm2"]
+ssh_agentic = true
+notes = "Threadripper 3970X + RTX 5060 + Titan V + Tesla K80. Forgejo push enrolled. WG mesh LIVE. SSH agentic from sporeGate. 3 VFIO GPUs (/dev/vfio/{35,36,49}). Vendor cracking active (coralReef diesel engine)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -1008,6 +1002,7 @@ repos = [
 # northGate — gaming/hobby gate (Windows 11 Pro), family validation LAST
 [gates.northGate]
 target = "x86_64-pc-windows-gnu"
+wg_ip = "10.13.37.8"
 mobility = "fixed"
 bind_mode = "tcp_only"
 composition = "full"
@@ -1023,7 +1018,7 @@ dns_suffix = "primals.local"
 os = "Windows 11 Pro Build 26100"
 workspace = 'C:\Users\mokke\Development\ecoPrimals'
 depot_drive = "M:"
-notes = "Ryzen 9950X3D + RTX 5090 + 96GB. GL-MT6000 router (house1). 837GB free on M:. RustDesk running. WireGuard needed for mesh. LAST priority."
+notes = "Ryzen 9950X3D + RTX 5090 + 96GB. WG mesh LIVE (10.13.37.8). No SSH on tunnel (Windows). LAST priority."
 gate_class = "family"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
