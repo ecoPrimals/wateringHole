@@ -4,7 +4,7 @@
 **Connection**: 1 Gbps fiber (residential — avoid saturation)
 **Policy**: Download in batches, off-peak preferred, never >80% sustained for >1h
 **Every byte with provenance = latent value (zero egress at 10G LAN)**
-**Updated**: Aug 2, 2026 10:50 EDT
+**Updated**: Aug 2, 2026 11:20 EDT
 
 ---
 
@@ -42,7 +42,8 @@
 | Molecular Force Fields (CHARMM36) | 1.1 MB | 1 | FULL | MacKerell Lab |
 | PhysioNet PTB-XL | 1.5 GB | 1 | FULL | PhysioNet |
 | NF Data Portal — NF1 drug screen + NF2 kinomics | 666 MB | 658 | FULL | Synapse |
-| **TOTAL COMPLETE** | **~356 GB** | **~259K** | | |
+| BindingDB (All + Assays + rsid mappings, 202608) | 583 MB | 3 | FULL | BindingDB |
+| **TOTAL COMPLETE** | **~357 GB** | **~259K** | | |
 
 ---
 
@@ -57,14 +58,13 @@ None currently running — all in-flight downloads completed.
 | Dataset | Est. Size | Priority | Spring/Garden | Notes |
 |---------|-----------|----------|---------------|-------|
 | GEO SOFT (curated subset) | ~50 GB | P1 | wetSpring | API crawl |
-| PubChem BioAssay full SDF | ~15 GB | P2 | healthSpring | FTP |
-| BRENDA enzyme kinetics | ~2 GB | P2 | hotSpring | Requires registration |
+| BRENDA enzyme kinetics | ~2 GB | P2 | hotSpring | Needs SOAP API password |
+| COSMIC somatic mutations | ~5 GB | P1 | healthSpring/tideGlass | Needs COSMIC password |
 | EPA CompTox PFAS | ~1 GB | P1 | wetSpring PFAS | Needs browser session |
-| BindingDB | ~1 GB | P2 | healthSpring | Needs browser session |
 | NIST PFAS Reference Data | ~500 MB | P1 | wetSpring PFAS | |
 | EcoCyc E. coli metabolism | ~1 GB | P2 | hotSpring | Requires license |
 | Dryad LTEE fitness data | <1 GB | P1 | wetSpring lithoSpore | DOI changed |
-| **Batch 2/3 remaining** | **~72 GB** | | | |
+| **Batch 2/3 remaining** | **~60 GB** | | | |
 
 ## Batch 4 — Over 2 weeks
 
@@ -86,7 +86,7 @@ None currently running — all in-flight downloads completed.
 | AlphaFold DB v4 | ~23 TB | P2 | neuralSpring |
 | NCBI SRA (curated BioProjects) | ~2 TB | P2 | wetSpring |
 | SalmoBase genomes | ~20 GB | P2 | wetSpring ABG |
-| ERA5-Land (Copernicus) | ~3 TB | P3 | airSpring |
+| ERA5-Land (Copernicus) | ~3 TB | P3 | airSpring | API key configured, needs licence accept |
 | **Batch 5 total** | **~29 TB** | | |
 
 ---
@@ -105,8 +105,8 @@ None currently running — all in-flight downloads completed.
 
 | Milestone | Cumulative | % of ZFS | When |
 |-----------|-----------|----------|------|
-| Current (complete) | ~356 GB | 0.70% | Done |
-| After Batch 2/3 | ~428 GB | 0.84% | This week |
+| Current (complete) | ~357 GB | 0.70% | Done |
+| After Batch 2/3 | ~417 GB | 0.82% | This week |
 | After Batch 4 | ~640 GB | 1.26% | +2 weeks |
 | After Batch 5 | ~30 TB | 59% | +1 month |
 
