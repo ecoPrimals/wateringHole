@@ -4,137 +4,186 @@
 **Connection**: 1 Gbps fiber (residential — avoid saturation)
 **Policy**: Download in batches, off-peak preferred, never >80% sustained for >1h
 **Every byte with provenance = latent value (zero egress at 10G LAN)**
-**Updated**: Aug 2, 2026 13:15 EDT
+**Updated**: Aug 2, 2026 17:45 EDT
 
 ---
 
 ## COMPLETED (on ZFS with full provenance)
 
-| Dataset | Size | Files | Provenance | Source |
-|---------|------|-------|-----------|--------|
-| UniProt TrEMBL FASTA + DAT | 110 GB | 1 | FULL | UniProt FTP |
-| PDB mmCIF (full mirror) | 88 GB | 257,179 | Manifest + BLAKE3 | RCSB rsync |
-| UniRef90 | 68 GB | 2 | FULL | UniProt FTP |
-| AlphaFold v6 (10 model species) | 28 GB | 10 | FULL | EBI FTP |
-| PDB70 HHsearch profiles | 27 GB | 1 | FULL | MPI Bioinformatics |
-| LINCS L1000 Level 5 + metadata | 20 GB | 6 | FULL | NCBI GEO |
-| ChEMBL 37 | 15 GB | 2 | FULL | EBI |
-| TCGA Pan-Cancer (Xena + GDC) | 15 GB | 9 | FULL | UCSC Xena / GDC |
-| InterPro protein-domain annotations | 13 GB | 1 | FULL | EBI FTP |
-| PubChem (SMILES + InChI-Key + Synonym + Mass) | 11 GB | 5 | FULL | NCBI FTP |
-| PubChem BioAssay | 11 GB | 5 | FULL | NCBI FTP |
-| NCBI Gene (Info+GO+Acc) | 7.0 GB | 3 | FULL | NCBI FTP |
-| COSMIC v104 (CGC + Genome/Targeted Screens + Breakpoints) | 4.7 GB | 5 | FULL | Sanger Institute |
-| NOAA GHCND | 3.5 GB | 3 | FULL | NOAA |
-| GEO SOFT (cancer curated original) | 3.0 GB | 11 | FULL | NCBI GEO |
-| GTEx V8 expression | 2.4 GB | 4 | FULL | GTEx Portal |
-| PhysioNet PTB-XL | 1.8 GB | 1 | FULL | PhysioNet |
-| dbSNP common variants (GRCh38) | 1.5 GB | 1 | FULL | NCBI FTP |
-| RefSeq Human GRCh38 + GTF | 981 MB | 2 | FULL | NCBI FTP |
-| UniProt Swiss-Prot | 764 MB | 3 | FULL | UniProt FTP |
-| NF Data Portal — NF1 drug screen + NF2 kinomics | 666 MB | 658 | FULL | Synapse |
-| BindingDB (All + Assays + rsid mappings, 202608) | 583 MB | 3 | FULL | BindingDB |
-| GEO SOFT expanded (HCC + Renal + IPF + Bladder + Lung) | 564 MB | 9 | FULL | NCBI GEO |
-| Pfam-A domain HMM profiles | 399 MB | 1 | FULL | EBI FTP |
-| PDB structures (506 individual) | 361 MB | 506 | FULL | RCSB |
-| SILVA 138.1 (16S ref) | 188 MB | 1 | FULL | SILVA |
-| ClinVar clinical variants (GRCh38) | 184 MB | 1 | FULL | NCBI FTP |
-| ZINC20 SMILES (drug-like subset) | 160 MB | 110 | FULL | ZINC20 |
-| USDA NASS Census 2017 | 132 MB | 1 | FULL | USDA |
-| MONDO disease ontology | 103 MB | 1 | FULL | MONDO |
-| Reactome pathways | 96 MB | 3 | FULL | Reactome |
-| STRING v12.0 human protein interactions | 80 MB | 1 | FULL | STRING-DB |
-| NCBI Taxonomy | 72 MB | 1 | FULL | NCBI FTP |
-| MassBank NIST reference spectra | 63 MB | 1 | FULL | MassBank |
-| Ensembl GRCh38.113 human GTF | 62 MB | 1 | FULL | Ensembl FTP |
-| PDB mmCIF manifests | 35 MB | 3 | FULL | RCSB |
-| Reactome pathways | 24 MB | 3 | FULL | Reactome |
-| PhysioNet MIT-BIH | 22 MB | 1 | FULL | PhysioNet |
-| Gene Ontology (OBO + human annotations) | 20 MB | 2 | FULL | GO Consortium |
-| HGNC gene nomenclature | 7.0 MB | 1 | FULL | HGNC (GCS) |
-| PDBe SIFTS PDB-UniProt mappings | 5.8 MB | 1 | FULL | EBI FTP |
-| LTEE REL606 genome | 5.8 MB | 1 | FULL | NCBI |
-| USGS earthquake catalog (monthly) | 2.4 MB | 2 | FULL | USGS |
-| KEGG (pathways + compounds + reactions + enzymes) | 1.9 MB | 5 | FULL | KEGG REST |
-| Molecular Force Fields (CHARMM36) | 1.1 MB | 2 | FULL | MacKerell Lab |
-| AME2020 nuclear masses | 641 KB | 2 | FULL | IAEA/NDS |
-| BRENDA enzyme kinetics (Km, kcat, Ki for 20 EC classes) | 633 KB | 74 | FULL | BRENDA SOAP API |
-| **TOTAL COMPLETE** | **~435 GB** | **~258K** | | **47 datasets** |
+### Proteomics & Structural Biology (282 GB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| UniProt TrEMBL FASTA + DAT | 110 GB | 1 | UniProt FTP |
+| PDB mmCIF (full mirror) | 88 GB | 257,179 | RCSB rsync |
+| UniRef90 | 68 GB | 2 | UniProt FTP |
+| AlphaFold v6 (10 model species) | 28 GB | 10 | EBI FTP |
+| PDB70 HHsearch profiles | 27 GB | 1 | MPI |
+| InterPro protein-domain annotations | 13 GB | 1 | EBI FTP |
+| NCBI CDD (Conserved Domain DB) | 4.4 GB | 1 | NCBI FTP |
+| OrthoDB v11 gene orthology | 1.8 GB | 2 | OrthoDB |
+| IntAct molecular interactions | 1.3 GB | 1 | EBI FTP |
+| UniProt Swiss-Prot + proteomes | 876 MB | 5 | UniProt FTP |
+| Pfam-A domain HMMs | 399 MB | 1 | EBI FTP |
+| PDB structures (506 individual) | 361 MB | 506 | RCSB |
+| BioGRID protein interactions | 173 MB | 1 | BioGRID |
+| STRING v12.0 human PPIs | 80 MB | 1 | STRING-DB |
+| PDBe SIFTS mappings | 5.8 MB | 1 | EBI FTP |
+
+### Genomics & Variants (24 GB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| NCBI Gene (Info+GO+Acc) | 7.0 GB | 3 | NCBI FTP |
+| dbSNP common variants (GRCh38) | 1.5 GB | 1 | NCBI FTP |
+| RefSeq Human GRCh38 + GTF | 981 MB | 2 | NCBI FTP |
+| GBIF backbone taxonomy | 926 MB | 1 | GBIF |
+| ClinVar clinical variants | 184 MB | 1 | NCBI FTP |
+| GENCODE v46 (GTF + transcripts) | 95 MB | 2 | EBI FTP |
+| gnomAD v4.1 constraints | 91 MB | 1 | Google Cloud |
+| GWAS Catalog (studies+ancestry+traits) | 184 MB | 4 | EBI FTP |
+| GIAB HG001 benchmark (VCF + BED) | 135 MB | 2 | NCBI |
+| NCBI Taxonomy | 72 MB | 1 | NCBI FTP |
+| Ensembl GRCh38.113 (GTF + regulatory) | 69 MB | 2 | Ensembl FTP |
+| ENCODE cCREs (1M elements) | 61 MB | 1 | SCREEN |
+| HGNC gene nomenclature | 16 MB | 1 | HGNC |
+| GTDB bacterial+archaeal taxonomy | 9.7 MB | 2 | GTDB |
+
+### Drug Discovery & Chemistry (47 GB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| LINCS L1000 Level 5 + metadata | 20 GB | 6 | NCBI GEO |
+| ChEMBL 37 | 15 GB | 2 | EBI |
+| PubChem (SMILES+InChI+Synonym+Mass) | 11 GB | 5 | NCBI FTP |
+| PubChem BioAssay | 11 GB | 4 | NCBI FTP |
+| BindingDB (All+Assays+rsid) | 583 MB | 3 | BindingDB |
+| ZINC20 SMILES (drug-like) | 244 MB | 110 | ZINC20 |
+| ChEBI (OBO + SDF) | 129 MB | 3 | EBI FTP |
+
+### Cancer & Disease (24 GB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| TCGA Pan-Cancer (expression+mutation+methylation+protein+clinical) | 15 GB | 9 | Xena/GDC |
+| COSMIC v104 (CGC+screens+resistance+breakpoints) | 5.2 GB | 7 | Sanger |
+| GEO SOFT cancer expression (original+expanded) | 3.6 GB | 20 | NCBI GEO |
+| Open Targets Platform v26.06 | 1.2 GB | 18 | EBI FTP |
+| NF Data Portal (NF1 drugs + NF2 kinomics) | 666 MB | 658 | Synapse |
+| TCGA Xena (supplementary) | 461 MB | 4 | UCSC Xena |
+
+### Transcriptomics & Expression (2.5 GB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| GTEx V8 expression | 2.4 GB | 4 | GTEx Portal |
+| Human Protein Atlas tissue data | 7.1 MB | 1 | HPA |
+
+### Ontologies & Annotations (350 MB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| Rfam RNA families (CMs + regions) | 163 MB | 2 | EBI FTP |
+| MONDO disease ontology | 103 MB | 1 | MONDO |
+| Reactome pathways | 96 MB | 3 | Reactome |
+| HPO (OBO + annotations) | 45 MB | 2 | HPO |
+| Gene Ontology (OBO + human annotations) | 41 MB | 2 | GO Consortium |
+| ExPASy (ENZYME + PROSITE) | 33 MB | 2 | ExPASy |
+| MGI mouse gene models | 17 MB | 2 | Jackson Lab |
+| MSigDB gene sets (5 collections) | 15 MB | 5 | Broad |
+| Uberon anatomy ontology | 13 MB | 1 | OBO Foundry |
+| miRBase microRNA sequences | 13 MB | 2 | miRBase |
+| Disease Ontology (DOID) | 6.8 MB | 1 | DO |
+| KEGG (pathways+compounds+reactions+enzymes) | 4.4 MB | 5 | KEGG REST |
+| Cell Ontology | 3.5 MB | 1 | OBO Foundry |
+
+### Metabolism & Enzymes (2 MB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| BRENDA enzyme kinetics (Km/kcat/Ki) | 633 KB | 74 | BRENDA SOAP |
+| Molecular Force Fields (CHARMM36) | 1.1 MB | 2 | MacKerell Lab |
+| AME2020 nuclear masses | 641 KB | 2 | IAEA/NDS |
+
+### Clinical & Pharmacogenomics (1.1 MB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| ClinGen gene-disease validity | 1.1 MB | 1 | ClinGen |
+
+### Environment & Ecology (5.4 GB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| NOAA GHCND | 3.5 GB | 3 | NOAA |
+| PhysioNet PTB-XL | 1.8 GB | 1 | PhysioNet |
+| USDA NASS Census 2017 | 132 MB | 1 | USDA |
+| MassBank spectra | 115 MB | 1 | MassBank |
+| SILVA 138.1 (16S ref) | 188 MB | 1 | SILVA |
+| PhysioNet MIT-BIH | 22 MB | 1 | PhysioNet |
+| USGS earthquake catalog (2000-2026) | 10 MB | 29 | USGS |
+| NASA GISS temperature anomalies | 23 KB | 2 | NASA GISS |
+| NOAA GML CO2+CH4 | 87 KB | 3 | NOAA GML |
+
+### Ecology & Evolution (5.8 MB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| LTEE REL606 genome | 5.8 MB | 1 | NCBI |
 
 ---
 
-## IN PROGRESS
-
-None currently running — all in-flight downloads completed.
+| **GRAND TOTAL** | **~429 GB** | **~258K files** | **73 datasets** |
 
 ---
 
-## REMAINING — Batch 2/3 (this week)
+## BLOCKED — Needs User Intervention
 
-| Dataset | Est. Size | Priority | Spring/Garden | Notes |
-|---------|-----------|----------|---------------|-------|
-| COSMIC Resistance Mutations + VCF | ~2 GB | P2 | healthSpring | Some paths give 500 |
-| EPA CompTox PFAS | ~1 GB | P1 | wetSpring PFAS | Needs browser session |
-| NIST PFAS Reference Data | ~500 MB | P1 | wetSpring PFAS | |
-| EcoCyc E. coli metabolism | ~1 GB | P2 | hotSpring | Requires license |
-| Dryad LTEE fitness data | <1 GB | P1 | wetSpring lithoSpore | DOI changed |
-| BRENDA full flat file (remaining enzymes) | ~2 GB | P3 | hotSpring | SOAP API working |
-| CCLE/DepMap (expression + CRISPR) | ~5 GB | P1 | healthSpring | Needs browser/figshare |
-| HMDB metabolites | ~3 GB | P2 | hotSpring | Cloudflare protection |
-| DisGeNET gene-disease | ~1 GB | P2 | healthSpring | Needs registration |
-| Open Targets associations | ~5 GB | P2 | healthSpring | Needs parquet URL |
-| **Batch 2/3 remaining** | **~21 GB** | | | |
+See `data_blockers.md` for full details. Key items:
 
-## Batch 4 — Over 2 weeks
+1. **Copernicus ERA5**: Accept licence on website
+2. **DepMap/CCLE**: Browser download (Cloudflare)
+3. **HMDB**: Browser download (Cloudflare)
+4. **DisGeNET**: Free registration
+5. **EPA CompTox PFAS**: Browser session
+6. **OMIM**: API key registration
+7. **DrugBank**: Academic registration
+8. **AmeriFlux**: Registration
+9. **PharmGKB**: Terms acceptance
 
-| Dataset | Est. Size | Priority | Spring/Garden |
-|---------|-----------|----------|---------------|
-| AmeriFlux eddy covariance | ~10 GB | P2 | airSpring |
-| IRIS FDSN catalogs | ~2 GB | P1 | groundSpring |
-| ERA5-Land (Copernicus) | ~100 GB subset | P2 | airSpring | Needs licence accept |
-| **Batch 4 total** | **~112 GB** | | |
+## REMAINING — Open Access (retry later)
+
+| Dataset | Est. Size | Notes |
+|---------|-----------|-------|
+| GWAS Catalog associations | ~500 MB | EBI API outage — retry |
+| COSMIC additional files | ~2 GB | Some API paths error |
+| Open Targets (more entities) | ~5 GB | Got core 4 entities, can expand |
+| GEO SOFT (more series) | ~50 GB | NCBI rate limiting |
+| NCBI SRA (curated BioProjects) | ~2 TB | Large, batch over weeks |
 
 ## Batch 5 — Month-scale
 
-| Dataset | Est. Size | Priority | Spring/Garden |
-|---------|-----------|----------|---------------|
-| HMP Phase II (gut microbiome) | ~500 GB | P2 | wetSpring |
-| Cell x Gene (scRNA-seq) | ~500 GB | P3 | wetSpring |
-| Earth Microbiome Project | ~200 GB | P2 | wetSpring |
-| MalariaGEN Pf6 | ~50 GB | P2 | wetSpring ABG |
-| AlphaFold DB v6 (full — 214M structures) | ~23 TB | P2 | neuralSpring |
-| NCBI SRA (curated BioProjects) | ~2 TB | P2 | wetSpring |
-| SalmoBase genomes | ~20 GB | P2 | wetSpring ABG |
-| ERA5-Land full (Copernicus) | ~3 TB | P3 | airSpring |
-| **Batch 5 total** | **~29 TB** | | |
+| Dataset | Est. Size | Priority |
+|---------|-----------|----------|
+| AlphaFold DB v6 (full — 214M structures) | ~23 TB | P2 |
+| HMP Phase II (gut microbiome) | ~500 GB | P2 |
+| Cell x Gene (scRNA-seq) | ~500 GB | P3 |
+| ERA5-Land (Copernicus) | ~3 TB | P3 |
+| Earth Microbiome Project | ~200 GB | P2 |
 
 ---
 
-## Bandwidth Management
+## Running Total
 
-- 1 Gbps theoretical = ~120 MB/s actual
-- Residential: other users on same connection
-- Policy: max 80% sustained (~96 MB/s) during off-peak, 50% during peak
-- Large downloads (>100 GB): schedule overnight/weekends
-- Small downloads (<10 GB): anytime, invisible impact
-- Monitor: `nload` or `iftop` during large transfers
-
-## Running Total Projection
-
-| Milestone | Cumulative | % of ZFS | When |
-|-----------|-----------|----------|------|
-| Current (complete) | ~435 GB | 0.86% | Done |
-| After Batch 2/3 | ~456 GB | 0.90% | This week |
-| After Batch 4 | ~568 GB | 1.12% | +2 weeks |
-| After Batch 5 | ~30 TB | 59% | +1 month |
-
-Even at full capacity, we use ~60% of ZFS. The pool can grow (more HDDs) and
-the data grows in latent value — every byte is one less egress charge, one more
-dataset available at 10G to the mesh.
+| Milestone | Cumulative | % of ZFS |
+|-----------|-----------|----------|
+| Current | ~429 GB | 0.84% |
+| After user registrations | ~440 GB | 0.87% |
+| After retry round | ~500 GB | 0.99% |
+| After month-scale batch | ~28 TB | 55% |
 
 ## Credential Vault
 
 Encrypted API keys stored on golgiBody in `wateringHole/vault/`:
 - NCBI, Synapse, Copernicus CDS, COSMIC, BRENDA
 - AES-256 encrypted, ecosystem passphrase
-- Any gate can clone and decrypt to bootstrap data access
