@@ -144,12 +144,35 @@ Section 4 (discussion) can note the PRNG finding as:
 - Evidence that vendor-agnostic lattice QCD is viable
 - The transcendental polyfill issue is shader-language-specific, not GPU-architecture-specific
 
-## 8. Recommended follow-up
+## 8. Quantified PRNG bias (strandGate validation, Aug 2)
+
+Direct measurement of GPU Box-Muller output distribution (1,228,800 samples,
+61,440 off-diagonal su(3) components, dispatched on both RTX 3090 and RX 6950 XT):
+
+| Metric | GPU (WGSL) | CPU (native) | Expected |
+|--------|-----------|-------------|----------|
+| σ | 0.6727 | 0.7079 | 0.7071 |
+| ⟨p²⟩ | 0.4525 | 0.5011 | 0.5000 |
+| Variance bias | **−9.50%** | +0.23% | 0% |
+| Excess kurtosis | +0.84 | −0.003 | 0 |
+
+Both GPUs produce **bit-identical** wrong output — confirming this is a
+shader compiler/driver issue in WGSL f64 transcendental implementation,
+not hardware-specific. The 9.5% kinetic energy deficit explains the
+observed plaquette equilibrium shift (0.507 vs 0.151 at β=2.3).
+
+Additional finding: the composed pipeline (prng_pcg_f64.wgsl + su3_random_momenta_f64.wgsl)
+silently fails due to duplicate function definitions, producing all-zero output.
+Only the standalone shader or the dynamical/unidirectional variants (which compose differently)
+produce actual PRNG output.
+
+## 9. Recommended follow-up
 
 | Priority | Task | Owner |
 |---|---|---|
+| P1 | Fix composed pipeline duplicate-definition bug | hotSpring |
 | P1 | Validate `log_f64` polyfill output vs `f64::ln()` for 10⁶ samples | hotSpring |
-| P1 | Chi-squared test on GPU Box-Muller output distribution | hotSpring |
+| P1 | Chi-squared test on GPU Box-Muller output distribution | **DONE** (9.5% variance deficit confirmed) |
 | P2 | Investigate TMU-accelerated PRNG path (hardware transcendentals via texture lookups) | toadStool |
 | P3 | Port CPU `lcg_gaussian` to WGSL without transcendental polyfills (ziggurat method) | barraCuda |
 | P3 | Implement barraCuda single-dispatch HMC composition | Node Atomic team |
