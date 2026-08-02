@@ -104,6 +104,33 @@ notes = "f64 precision via SHADER_F64 feature on RTX 5070 Ti (ironGate). coralRe
 #
 # Resolves: CI-DIV-01 (biomeOS), CI-DIV-02 (skunkBat), CI-DIV-03 (nestGate)
 
+# ── Network Topology (G34/G35) ──────────────────────────────────
+#
+# Physical egress:
+#   Internet ← ATT Box (192.168.4.1, ISP-owned, NAT) ← Flint (192.168.4.111, owned)
+#                                                      ← flat LAN (192.168.4.0/22)
+#
+# The ATT box is untrusted ISP hardware. It sees traffic metadata
+# (destinations, ports, timing) even when content is encrypted.
+# G34 moves the Flint into the routing path so ATT sees only a
+# single opaque WireGuard tunnel — no protocol fingerprinting.
+#
+# Agentic access: sporeGate has SSH key enrollment on all gates
+# marked ssh_agentic = true. No manual credentials required.
+
+[network]
+att_gateway = "192.168.4.1"
+flint_router = "192.168.4.111"
+lan_subnet = "192.168.4.0/22"
+wg_subnet = "10.13.37.0/24"
+wg_hub = "golgiBody"
+external_ip = "162.226.225.148"
+
+[network.egress]
+current = "att_direct"
+target = "flint_tunnel"
+notes = "G34: route all egress through Flint → single WG tunnel to golgi. ATT becomes dumb pipe."
+
 # ── Sub-builder dispatch (J12) ───────────────────────────────────
 # Maps target triples to the gate that builds them. The foreman
 # (sporeGate) dispatches via SSH when sovereign CI encounters a
@@ -743,6 +770,7 @@ zone = "backbone"
 hub_port = "ether8"
 wg_ip = "10.13.37.2"
 lan_ip = "192.168.4.3"
+ssh_agentic = true
 roles = ["build_hub", "depot", "cascade_hub", "gateway", "http", "mesh_hub"]
 build_authority = true
 link_speed_mbps = 2500
@@ -761,6 +789,8 @@ repos = [
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
 bind_mode = "uds"
+ssh_agentic = true
+ssh_user = "eastgate"
 composition = "full"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
@@ -789,6 +819,8 @@ target = "x86_64-unknown-linux-musl"
 gpu_target = "x86_64-unknown-linux-gnu"
 mobility = "fixed"
 bind_mode = "uds"
+ssh_agentic = true
+ssh_user = "irongate"
 composition = "full"
 transport = "lan"
 zone = "backbone"
@@ -890,6 +922,8 @@ repos = [
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
 bind_mode = "uds"
+ssh_agentic = true
+ssh_user = "strandgate"
 composition = "compute"
 transport = "lan"
 mesh_peer = "157.230.3.183:7700"
@@ -987,6 +1021,8 @@ repos = [
 # Intra-inner membrane: Tower Atomic only, user services.
 [gates.blueGate]
 target = "x86_64-pc-windows-gnu"
+ssh_agentic = true
+ssh_user = "user"
 mobility = "fixed"
 bind_mode = "tcp_only"
 composition = "tower"
@@ -1093,6 +1129,8 @@ bind_mode = "uds"
 composition = "thin-relay"
 transport = "local"
 wg_ip = "10.13.37.1"
+ssh_agentic = true
+ssh_user = "root"
 roles = ["forgejo", "relay", "depot", "dns_primary", "wg_hub", "caddy_tls", "remote_access", "sporeprint"]
 mesh_peer = "127.0.0.1:7700"
 notes = "VPS-thin: relay + depot + sporePrint. Tracks wateringHole only. No primal source repos. Forgejo shallow relay (depth=1). Receives ecobins from builder gates, serves via Caddy TLS. Fractal pattern: deploy anywhere a sovereign relay is needed."
@@ -1105,6 +1143,8 @@ repos = [
 kderm_layer = "outer_membrane"
 bond_types = ["ionic", "weak"]
 host = "137.184.197.151"
+ssh_agentic = true
+ssh_user = "root"
 repos = [
     "sporePrint", "wateringHole",
 ]
