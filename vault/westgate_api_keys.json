@@ -1,0 +1,41 @@
+{
+  "gate": "westGate",
+  "updated": "2026-08-02T16:00:00Z",
+  "credentials": {
+    "ncbi": {
+      "type": "api_key",
+      "key": "cbab06bda0108d9cbbde6dc9d2dad26d4009",
+      "account": "ecoprimal@orcid",
+      "orcid": "0009-0004-2141-0321",
+      "rate_limit": "10 req/s",
+      "config_path": "~/.ncbi_api_key"
+    },
+    "synapse": {
+      "type": "personal_access_token",
+      "account": "ecoPrimal",
+      "config_path": "~/.synapseConfig",
+      "note": "JWT PAT — view/download/modify scopes"
+    },
+    "copernicus_cds": {
+      "type": "api_key",
+      "key": "681d5bf2-7670-4e51-ae26-5596c4cb17d2",
+      "url": "https://cds.climate.copernicus.eu/api",
+      "account": "eco Primal (eco.primal@pm.me)",
+      "config_path": "~/.cdsapirc",
+      "note": "Needs ERA5 licence acceptance on website"
+    },
+    "cosmic": {
+      "type": "basic_auth",
+      "account": "mokkevin@msu.edu",
+      "license": "ACADEMIC",
+      "org": "Michigan State University",
+      "note": "3-step scripted download: base64 auth → temp URL → download"
+    },
+    "brenda": {
+      "type": "soap_api",
+      "account": "eco.primal@pm.me",
+      "endpoint": "https://www.brenda-enzymes.org/soap/brenda_server.php",
+      "note": "SOAP API uses email + SHA256(password)"
+    }
+  }
+}
