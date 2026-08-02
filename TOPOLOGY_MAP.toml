@@ -13,7 +13,7 @@
 version = "4.3.0"
 wave = 155
 measured_by = "manual + discovery.peers (planned)"
-last_updated = "2026-07-27"
+last_updated = "2026-08-02"
 wan_model = "single_exit_star"
 site_topology = "star_with_10g_backbone"
 neighborhood = "Old Everett, Lansing MI"
@@ -46,7 +46,7 @@ ports = [
     "ether8 ← sporeGate eno1 (2.5G uplink from plasma membrane)",
 ]
 gates = ["sporeGate", "eastGate", "northGate", "biomeGate"]
-note = "biomeGate OFFLINE (kernel recovery). sporeGate is the plasma membrane router (NAT/DHCP/nftables)."
+note = "biomeGate ONLINE — GPU crankshaft (3 VFIO GPUs, PLX keepalive, WG 10.13.37.3). sporeGate is the plasma membrane router (NAT/DHCP/nftables)."
 
 [cytoplasm.zones.house2]
 hub_device = "TP-Link Omada SX3008F"
@@ -326,8 +326,9 @@ peers = [
     { gate = "blueGate", site = "house2", status = "enrolling" },
     { gate = "swiftGate", site = "house2", status = "enrolling" },
     { gate = "grapheneGate", site = "portable", status = "live_tcp_only" },
+    { gate = "biomeGate", site = "house1", status = "enrolling" },
 ]
-note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN. 5 house2 gates enrolling via autonomous enrollment (Wave 155a)."
+note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN. biomeGate enrolling (GPU crankshaft). 5 house2 gates enrolling via autonomous enrollment (Wave 155a)."
 
 [mesh.wireguard_wan]
 description = "WireGuard star overlay — golgiBody hub, all gates peer through"
@@ -339,6 +340,7 @@ hub_ip = "10.13.37.1"
 peers = [
     { gate = "golgiBody",  ip = "10.13.37.1",  endpoint = "157.230.3.183:51820", status = "hub" },
     { gate = "sporeGate",  ip = "10.13.37.2",  endpoint = "162.226.225.148:51821", status = "live", ssh = true },
+    { gate = "biomeGate",  ip = "10.13.37.3",  endpoint = "162.226.225.148:51821", status = "live", ssh = true },
     { gate = "eastGate",   ip = "10.13.37.5",  endpoint = "162.226.225.148:52089", status = "live", ssh = true },
     { gate = "flockGate",  ip = "10.13.37.6",  endpoint = "24.128.136.74:51820", status = "dead_3d" },
     { gate = "ironGate",   ip = "10.13.37.7",  endpoint = "162.226.225.148:51820", status = "live", ssh = true },
@@ -347,9 +349,8 @@ peers = [
     { gate = "strandGate", ip = "10.13.37.10", endpoint = "162.226.225.148:1491", status = "live", ssh = true },
     { gate = "westGate",   ip = "10.13.37.11", endpoint = "none", status = "never" },
     { gate = "blueGate",   ip = "10.13.37.12", endpoint = "162.226.225.148:50794", status = "live", ssh = true },
-    { gate = "biomeGate",  ip = "10.13.37.3",  endpoint = "pending", status = "enrolled", ssh = false },
 ]
-note = "Full mesh audit Aug 2 2026: 7/10 peers LIVE. biomeGate enrolled (golgi peer added, awaiting WG bringup). southGate/westGate NEVER connected. flockGate DEAD 3d."
+note = "Full mesh audit Aug 2 2026: 8/11 peers LIVE. biomeGate LIVE (WG handshake confirmed, 37ms RTT to golgi). southGate/westGate NEVER connected. flockGate DEAD 3d."
 
 [mesh.capability_routing]
 description = "capability.call dispatch layer — routes by advertised capability, not by gate"
