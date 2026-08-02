@@ -4,7 +4,7 @@
 **Connection**: 1 Gbps fiber (residential — avoid saturation)
 **Policy**: Download in batches, off-peak preferred, never >80% sustained for >1h
 **Every byte with provenance = latent value (zero egress at 10G LAN)**
-**Updated**: Aug 1, 2026 21:30 EDT
+**Updated**: Aug 2, 2026 10:50 EDT
 
 ---
 
@@ -29,19 +29,26 @@
 | AME2020 nuclear masses | 1.2 MB | 2 | FULL | IAEA/NDS |
 | LTEE REL606 genome | 5.8 MB | 1 | FULL | NCBI |
 | USGS earthquake catalog (monthly) | 2.1 MB | 1 | FULL | USGS |
-| **TOTAL COMPLETE** | **~172 GB** | **~258K** | | |
+| UniProt TrEMBL FASTA + DAT | 148 GB | 2 | FULL | UniProt FTP |
+| PDB70 HHsearch profiles | 27 GB | 1 | FULL | MPI Bioinformatics |
+| GEO SOFT (cancer curated) | 3.0 GB | 4 | FULL | NCBI GEO |
+| TCGA Pan-Cancer (Xena) | 449 MB | 3 | FULL | UCSC Xena |
+| PubChem BioAssay | 11 GB | 5 | FULL | NCBI FTP |
+| NCBI Taxonomy | 74 MB | 1 | FULL | NCBI FTP |
+| NCBI Gene (Info+GO+Acc) | 7.0 GB | 3 | FULL | NCBI FTP |
+| RefSeq Human GRCh38 + GTF | 981 MB | 2 | FULL | NCBI FTP |
+| Reactome pathways | 96 MB | 2 | FULL | Reactome |
+| MONDO disease ontology | 103 MB | 1 | FULL | MONDO |
+| Molecular Force Fields (CHARMM36) | 1.1 MB | 1 | FULL | MacKerell Lab |
+| PhysioNet PTB-XL | 1.5 GB | 1 | FULL | PhysioNet |
+| NF Data Portal — NF1 drug screen + NF2 kinomics | 666 MB | 658 | FULL | Synapse |
+| **TOTAL COMPLETE** | **~356 GB** | **~259K** | | |
 
 ---
 
-## IN PROGRESS (downloading now)
+## IN PROGRESS
 
-| Dataset | Est. Size | Downloaded | ETA | Spring/Garden |
-|---------|-----------|-----------|-----|---------------|
-| UniProt TrEMBL FASTA | 37.7 GB | ~1 GB | ~12 min | wetSpring |
-| UniProt TrEMBL DAT | 109 GB | ~1 GB | ~35 min | wetSpring |
-| PDB70 HHsearch profiles | 26.6 GB | ~500 MB | ~5.5h | neuralSpring |
-
-**Total in-flight**: ~173 GB
+None currently running — all in-flight downloads completed.
 
 ---
 
@@ -98,10 +105,9 @@
 
 | Milestone | Cumulative | % of ZFS | When |
 |-----------|-----------|----------|------|
-| Current (complete) | ~172 GB | 0.34% | Done |
-| After in-flight | ~345 GB | 0.68% | Tonight |
-| After Batch 2/3 | ~417 GB | 0.82% | This week |
-| After Batch 4 | ~629 GB | 1.24% | +2 weeks |
+| Current (complete) | ~356 GB | 0.70% | Done |
+| After Batch 2/3 | ~428 GB | 0.84% | This week |
+| After Batch 4 | ~640 GB | 1.26% | +2 weeks |
 | After Batch 5 | ~30 TB | 59% | +1 month |
 
 Even at full capacity, we use ~60% of ZFS. The pool can grow (more HDDs) and
