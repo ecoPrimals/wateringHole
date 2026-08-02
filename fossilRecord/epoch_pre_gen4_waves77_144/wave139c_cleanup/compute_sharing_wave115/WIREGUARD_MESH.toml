@@ -1,0 +1,227 @@
+# WireGuard Mesh Topology — Multi-Site Sovereign Overlay
+#
+# Defines the encrypted overlay network connecting all sites regardless of
+# physical transport. WireGuard provides the identity/encryption layer that
+# makes any IP-bearing transport (fiber, cellular, P2P radio, VPS) equivalent.
+#
+# The mesh is hub-and-spoke with golgiBody as the relay hub for NAT traversal,
+# but supports direct peer connections when both endpoints have public IPs.
+#
+# Last updated: 2026-06-23 (Wave 124)
+# Authority: sporeGate (routing) + bearDog (key management)
+
+[meta]
+version = "3.0.0"
+wave = 124
+overlay_subnet = "10.13.37.0/24"
+port = 51821
+key_management = "wg genkey (manual, pre-bearDog integration)"
+status = "LIVE — 5-node mesh: golgiBody ↔ sporeGate ↔ eastGate ↔ flockGate ↔ ironGate"
+last_deployed = "2026-06-23T08:30:00-04:00"
+active_peers = 5
+pending_peers = 0
+hub_forwarding = "enabled (sysctl net.ipv4.ip_forward=1 on golgiBody)"
+build_authority = "sporeGate (sovereign CI — all 13 primals built locally, synced to golgi depot)"
+
+# ═══════════════════════════════════════════════════════════════
+# Mesh Peers
+# ═══════════════════════════════════════════════════════════════
+
+[peers.golgi_body]
+role = "hub"
+status = "LIVE"
+endpoint = "157.230.3.183:51820"
+overlay_ip = "10.13.37.1/24"
+public_ip = "157.230.3.183"
+public_key = "A2fvz3czkqRUuu2mzkSS6IVr/TCQcpsJX9HbDBa1FBc="
+nat_traversal = "not needed (public IP)"
+allowed_ips = ["10.13.37.0/24", "192.168.4.0/22", "192.168.5.0/24", "192.168.6.0/24", "192.168.7.0/24"]
+keepalive_seconds = 25
+services = ["relay", "forgejo", "hbbs", "hbbr", "dns"]
+note = "Central hub. All peers that can't reach each other directly relay through here."
+
+[peers.sporegate]
+role = "site_router"
+status = "LIVE"
+endpoint = "162.226.225.148:51821"
+overlay_ip = "10.13.37.2/24"
+public_ip = "162.226.225.148 (ATT IP Passthrough active Jun 22)"
+public_key = "obCKmO89eCvh106gUdqu77L4F1ViASdDirGEddqyYSA="
+nat_traversal = "not needed (public IP via passthrough)"
+allowed_ips = ["10.13.37.2/32", "192.168.4.0/22"]
+site_subnet = "192.168.4.0/22"
+keepalive_seconds = 25
+measured_latency_ms = 30
+note = "Primary LAN router. ATT IP Passthrough gives public IP. WG port 51821 (BGW320 UDP 51820 bug). Routes House 1+2 subnet into mesh."
+
+[peers.marshgate]
+role = "site_router"
+endpoint = "dynamic (planned — behind ATT NAT or direct)"
+overlay_ip = "10.13.37.3/24"
+public_ip = "none (planned)"
+nat_traversal = "persistent keepalive to golgiBody OR direct via 10G trunk"
+allowed_ips = ["10.13.37.3/32", "192.168.5.0/24"]
+site_subnet = "192.168.5.0/24"
+keepalive_seconds = 25
+status = "planned"
+note = "House 2 router. When deployed, carves 192.168.5.0/24 from the current /22."
+
+[peers.eastgate]
+role = "compute_node"
+status = "LIVE"
+endpoint = "dynamic (LAN — behind sporeGate NAT)"
+overlay_ip = "10.13.37.5/24"
+public_ip = "none (LAN)"
+public_key = "V8Xy1uRFArEz8DseZhdAQmNdOr2TJ3Q/OhfilK3mDlA="
+nat_traversal = "persistent keepalive to golgiBody (25s)"
+allowed_ips = ["10.13.37.5/32"]
+keepalive_seconds = 25
+status_detail = "LIVE — 11/13 NUCLEUS via user-level systemd, WG handshake active, golgi peered"
+note = "Primary compute gate. i9-12900K, 32GB, 10G SFP+. CRS310 backbone zone."
+
+[peers.flockgate]
+role = "wan_gate"
+status = "LIVE"
+endpoint = "dynamic (behind NAT — keepalive punches through)"
+overlay_ip = "10.13.37.6/24"
+public_ip = "none (behind NAT)"
+public_key = "kP9qOx3E7QDGfnNfuRyHE0yhPbzUBPnjOlJ1T5Lgoh4="
+nat_traversal = "persistent keepalive to golgiBody (25s)"
+allowed_ips = ["10.13.37.6/32"]
+keepalive_seconds = 25
+measured_latency_to_golgi_ms = 32
+measured_latency_to_sporegate_ms = 72
+status_detail = "LIVE — 11/13 NUCLEUS via user-level systemd, WG handshake active, Tower atomic assigned"
+note = "WAN gate (192.168.60.0/24). i9-13900K, 62GB, 1.9TB NVMe. Tower atomic (BearDog, Songbird, SkunkBat). Enrolled Jun 19 via golgi ProxyJump."
+
+[peers.irongate]
+role = "compute_gate"
+status = "LIVE"
+endpoint = "dynamic (behind NAT — keepalive punches through)"
+overlay_ip = "10.13.37.7/24"
+public_ip = "none (LAN 192.168.4.237)"
+public_key = "A4MpSecI1N5+fS5tizkhiumcbb8ZLMYwRXa/1AZvEgQ="
+nat_traversal = "persistent keepalive to golgiBody (25s)"
+allowed_ips = ["10.13.37.7/32"]
+keepalive_seconds = 25
+status_detail = "LIVE — WG handshake active, 12/12 NUCLEUS, GPU validated (RTX 5070 f64)"
+note = "Node atomic (ToadStool, BarraCuda, CoralReef). Pop!_OS. Backbone zone. Enrolled Wave 120. GPU pipeline validated Wave 123."
+
+[peers.neighborhood_node]
+role = "expansion_site"
+endpoint = "dynamic"
+overlay_ip = "10.13.37.10/24"
+site_subnet = "192.168.6.0/24"
+allowed_ips = ["10.13.37.10/32", "192.168.6.0/24"]
+keepalive_seconds = 25
+status = "planned"
+note = "First neighborhood expansion node. NUC at adjacent house."
+
+[peers.remote_contract]
+role = "contract_compute"
+endpoint = "dynamic"
+overlay_ip = "10.13.37.20/24"
+site_subnet = "192.168.7.0/24"
+allowed_ips = ["10.13.37.20/32", "192.168.7.0/24"]
+keepalive_seconds = 25
+status = "planned"
+note = "Institute or friend-house compute node. Full primals, limited trust tier."
+
+# ═══════════════════════════════════════════════════════════════
+# Routing Design
+# ═══════════════════════════════════════════════════════════════
+
+[routing]
+model = "hub_and_spoke_with_direct_shortcuts"
+hub = "golgi_body"
+
+[routing.rules]
+note = """
+1. All peers maintain persistent tunnel to golgiBody (hub).
+2. If two peers are on the same L2 segment (e.g. sporeGate + marshGate via 10G trunk),
+   they establish a DIRECT peer connection (no relay needed, sub-1ms).
+3. If both peers have public IPs, they can peer directly (skip hub).
+4. All other traffic relays through golgiBody.
+5. Site routers advertise their site subnet into the mesh.
+6. biomeOS uses overlay IP for primal-to-primal RPC when cross-site.
+"""
+
+[routing.site_subnets]
+house1 = "192.168.4.0/24"
+house2 = "192.168.5.0/24"
+neighborhood = "192.168.6.0/24"
+institute = "192.168.7.0/24"
+overlay = "10.13.37.0/24"
+
+[routing.failover]
+note = """
+If ATT fiber at House 1 dies:
+  1. sporeGate detects WAN loss (no DHCP renewal or gateway ping failure)
+  2. sporeGate's cellular failover (Mint Mobile) activates (metric 500)
+  3. WireGuard tunnel to golgiBody re-establishes via cellular
+  4. All LAN devices keep working — traffic exits via cellular WAN
+  5. If marshGate is deployed with House 2 fiber: traffic can also route
+     sporeGate → 10G trunk → marshGate → House 2 ATT fiber → internet
+"""
+
+# ═══════════════════════════════════════════════════════════════
+# sporeGate WireGuard Config (deployable)
+# ═══════════════════════════════════════════════════════════════
+
+[config.sporegate]
+interface_name = "wg0"
+listen_port = 51821
+config_path = "/etc/wireguard/wg0.conf"
+systemd_unit = "wg-quick@wg0.service"
+
+[config.sporegate.interface]
+address = "10.13.37.2/24"
+private_key_path = "/etc/wireguard/private.key"
+dns = "10.13.37.1"
+post_up = ["ip route add 192.168.5.0/24 dev wg0", "ip route add 192.168.6.0/24 dev wg0", "ip route add 192.168.7.0/24 dev wg0"]
+post_down = ["ip route del 192.168.5.0/24 dev wg0", "ip route del 192.168.6.0/24 dev wg0", "ip route del 192.168.7.0/24 dev wg0"]
+
+[config.sporegate.peer_golgi]
+public_key = "A2fvz3czkqRUuu2mzkSS6IVr/TCQcpsJX9HbDBa1FBc="
+endpoint = "157.230.3.183:51820"
+allowed_ips = ["10.13.37.0/24", "192.168.5.0/24", "192.168.6.0/24", "192.168.7.0/24"]
+persistent_keepalive = 25
+
+[config.sporegate.peer_marshgate]
+public_key = "generated when marshGate deploys"
+endpoint = "192.168.4.x:51820"
+allowed_ips = ["10.13.37.3/32", "192.168.5.0/24"]
+persistent_keepalive = 0
+note = "Direct peer over 10G trunk — no keepalive needed (same L2)"
+status = "planned"
+
+# ═══════════════════════════════════════════════════════════════
+# Subnet Carving Strategy
+# ═══════════════════════════════════════════════════════════════
+
+[subnet_carving]
+note = """
+Current state: flat 192.168.4.0/22 (all 1022 hosts in one broadcast domain).
+This works fine for single-site. When marshGate deploys at House 2, carve:
+
+Phase 1 (now): Keep flat /22. All devices get IPs from sporeGate DHCP.
+Phase 2 (marshGate deploys): 
+  - sporeGate DHCP shrinks to 192.168.4.0/24 (House 1 only)
+  - marshGate DHCP serves 192.168.5.0/24 (House 2)
+  - Inter-site routing via WireGuard overlay OR direct 10G trunk route
+Phase 3 (neighborhood):
+  - New gate serves 192.168.6.0/24
+  - Joins mesh via P2P radio or Cat6a
+Phase 4 (institute):
+  - Remote gate serves 192.168.7.0/24
+  - Joins mesh via WireGuard only
+
+Migration path: No disruption. Existing /22 clients keep working.
+New /24 carving only applies to NEW sites. House 1 stays .4.0/24 forever.
+"""
+
+[subnet_carving.dhcp_migration]
+house1_current_pool = "192.168.4.100-249"
+house1_post_carve_pool = "192.168.4.100-249"
+house2_post_carve_pool = "192.168.5.100-249"
+note = "No change for House 1 clients. House 2 clients get new range from marshGate."

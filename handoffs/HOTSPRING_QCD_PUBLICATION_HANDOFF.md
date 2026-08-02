@@ -1,205 +1,85 @@
-# Handoff: hotSpring QCD → arXiv Publication
+# Handoff: hotSpring → Rung 1 arXiv Submission
 
-**Date**: Aug 1, 2026 | **Wave**: post-155n
-**From**: sporePrint team | **To**: hotSpring team (strandGate)
-**Pattern**: `wateringHole/protocols/PUBLICATION_PIPELINE_STANDARD.md`
+**Date**: Aug 2, 2026 PM | **Wave**: post-155n
+**From**: sporePrint team | **To**: hotSpring team (strandGate + biomeGate)
+**Status**: Paper reframed. 5/5 sections filled. Experiment queue is the ONLY blocker.
 
 ---
 
 ## TL;DR
 
-**ALL DATA SECTIONS COMPLETE** (Aug 2). hotSpring filled all 5 remaining sections
-with production data from strandGate (RTX 3090 + RX 6950 XT). Key results:
-- Plaquette |Δ|/σ < 1 vs CPU reference at 4⁴ and 8⁴ (Section 3.2)
-- DF64 ~9 significant digits for accumulated observables (Section 3.3)
-- AMD RX 6950 XT: 190× speedup at 8⁴, cross-GPU agreement 3.1e-9 (Section 3.4)
-- Autocorrelation τ_int = 1.63 (4⁴), 3.37 (8⁴) (Section 3.5)
-- Three-path validation methodology isolating PRNG from MD (Section 4.2)
+The arXiv paper has been **reframed from "lattice QCD paper" to "Rung 1 of a lattice QCD
+program: SU(2) execution and arithmetic validation."** An AI review correctly identified
+every overclaim. The existing data (plaquette at β=2.3, DF64 precision, multi-vendor
+agreement, autocorrelation, three-path PRNG validation) is solid. But reviewers will
+want more: β-scan, increased statistics, HMC diagnostics.
 
-**Paper is COMPLETE. Zero [TODO] markers. Ready for LaTeX conversion.**
+**The experiment queue in `HOTSPRING_RUNG1_EXPERIMENT_QUEUE.md` is the critical path.**
+Complete those 7 experiments, push results to whitePaper, and sporePrint submits.
 
-This is the first ecoPrimals publication under ORCID 0009-0004-2141-0321.
+LaTeX source: `whitePaper/subGen/lattice_qcd_consumer_gpu.tex`
+Experiment queue: `wateringHole/handoffs/HOTSPRING_RUNG1_EXPERIMENT_QUEUE.md`
+6-rung ladder: `wateringHole/handoffs/OVERWATCH_LATTICE_QCD_LADDER.md`
 
 ---
 
-## What's Already Done (sporePrint owns)
+## What Changed (Rung 1 Reframing)
 
-| Deliverable | Location | Status |
-|-------------|----------|--------|
-| arXiv draft (structure) | `whitePaper/subGen/LATTICE_QCD_CONSUMER_GPU_ARXIV.md` | DONE |
-| pseudoSpore site page | `sporeprint.primals.eco/pseudospore/hotspring-qcd-su2/` | LIVE |
-| Verification guide | `sporeprint.primals.eco/pseudospore/verify/` | LIVE |
-| Data catalog page | `sporeprint.primals.eco/pseudospore/` | LIVE |
-| GPU compute page | `sporeprint.primals.eco/lab/gpu-compute-live/` | LIVE |
-| Publication pipeline standard | `wateringHole/protocols/PUBLICATION_PIPELINE_STANDARD.md` | DONE |
+| Change | Old | New |
+|--------|-----|-----|
+| Title | "Vendor-Agnostic Lattice QCD..." | "**Toward** Vendor-Agnostic Lattice QCD: SU(2) HMC..." |
+| Abstract | Claims 4⁴–16⁴ production | Restricted to 4⁴ and 8⁴ |
+| Scope | Implicit full QCD | Explicit 6-rung ladder (Table 1) |
+| Plaquette | No normalization equation | Equation 2 defines P explicitly |
+| Precision | No component breakdown | Precision path matrix (Table 3) |
+| Limitations | List of weaknesses | "Limitations of the Present Result" + experiment queue |
+| Cost analysis | 16⁴ 10K-trajectory specific claim | Removed |
+| Conclusion | "demonstrated lattice gauge theory" | "demonstrated SU(2)... Rung 1 of a lattice QCD program" |
 
 ---
 
 ## What hotSpring Needs to Deliver
 
-### 1. Plaquette Measurements (Section 3.2)
+### MUST COMPLETE (preprint blockers)
 
-**What**: Average plaquette ⟨P⟩ values at specified β for each lattice volume.
+See `HOTSPRING_RUNG1_EXPERIMENT_QUEUE.md` for full details. Summary:
 
-**Format** — fill this table:
+| # | Experiment | Deliverable |
+|---|-----------|-------------|
+| 1 | β-scan (1.8–2.5) at 8⁴ | Table: ⟨P⟩_GPU vs ⟨P⟩_CPU per β |
+| 2 | 4-8 seeds × 1000 traj at 8⁴ β=2.3 | Per-chain means + bootstrap error |
+| 3 | HMC diagnostics | ΔH histogram, Creutz equality, reversibility, unitarity/det drift |
+| 4 | PRNG QQ plots | Gaussian QQ of GPU Box-Muller, tail stats, variance comparison |
+| 5 | Plaquette normalization check | Cold start = 1, hot ≈ 0, compare vs published SU(2) data |
 
-```markdown
-| Lattice | β   | ⟨P⟩ (DF64 GPU) | ⟨P⟩ (f64 CPU) | |Δ| / σ | Trajectories | Thermalization |
-|---------|-----|-----------------|----------------|---------|--------------|----------------|
-| 8^4     | 2.3 |                 |                |         |              |                |
-| 16^4    | 2.3 |                 |                |         |              |                |
-```
+### SHOULD COMPLETE
 
-**Why**: Standard validation in every lattice paper. Reviewers will check ⟨P⟩
-against known Wilson action results. The GPU vs CPU comparison proves DF64
-precision is sufficient for physics observables.
-
-**How to produce**: Run production HMC at β=2.3, measure plaquette after
-thermalization, compute mean + standard error. Compare DF64 GPU values
-against f64 CPU reference values computed on the same configurations.
+| # | Experiment | Deliverable |
+|---|-----------|-------------|
+| 6 | 12⁴ and 16⁴ production | Plaquette + autocorrelation at larger volumes |
+| 7 | pseudoSpore signed release | v1.0.0-rung1, bearDog signature, validate.sh |
 
 ---
 
-### 2. DF64 vs f64 Precision Comparison (Section 3.3)
+## Handoff Protocol
 
-**What**: ULP (Unit in Last Place) analysis comparing DF64 arithmetic against
-native f64 reference on the same inputs.
-
-**Format** — fill this table:
-
-```markdown
-| Operation        | Max |Δ| (ULP) | Mean |Δ| (ULP) | Digits Agreement |
-|------------------|----------------|----------------|------------------|
-| Addition         |                |                |                  |
-| Multiplication   |                |                |                  |
-| Division         |                |                |                  |
-| SU(2) multiply   |                |                |                  |
-| Plaquette accum  |                |                |                  |
-```
-
-**Why**: Establishes the precision floor. Reviewers need to know exactly how
-many digits DF64 preserves for each operation class.
-
-**How to produce**: Run the same sequence of operations in DF64 (GPU) and
-native f64 (CPU). Compare bit-for-bit. Report max and mean ULP deviation.
+1. Run experiments on strandGate (cpu_mom path, all standard volumes)
+2. Push results to whitePaper repo in table format (markdown or CSV)
+3. File completion AAR in `wateringHole/aars/`
+4. sporePrint integrates into LaTeX + site pages
+5. sporePrint runs final hype compliance review
+6. arXiv submission to hep-lat (cross-list cs.DC)
 
 ---
 
-### 3. Autocorrelation Analysis (Section 3.5)
+## Key Insight
 
-**What**: Integrated autocorrelation time τ_int for the plaquette observable
-at each lattice volume.
-
-**Format** — fill this table:
-
-```markdown
-| Lattice | β   | τ_int (plaquette) | Effective independent configs | Method |
-|---------|-----|-------------------|------------------------------|--------|
-| 8^4     | 2.3 |                   |                              |        |
-| 16^4    | 2.3 |                   |                              |        |
-```
-
-**Why**: Autocorrelation determines how many trajectories are needed for
-independent measurements. Critical for error bar validity.
-
-**How to produce**: Standard Γ-method or binning analysis on plaquette
-time series. Madras-Sokal or Wolff windowing algorithm.
+The AI review pattern: **the code is real, the comparisons are hype.** Every falsifiable
+claim checked out. The framing was the problem. Fix: name what you proved (SU(2) HMC,
+DF64 arithmetic, multi-vendor portability), not what you plan to prove (lattice QCD).
+The experiment queue closes the gap between "promising first result" and "rigorous preprint."
 
 ---
 
-### 4. Multi-Vendor Benchmarks (Section 3.4)
-
-**What**: Same lattice scaling benchmarks on non-NVIDIA GPUs.
-
-**Format** — fill this table:
-
-```markdown
-| GPU           | Architecture | VRAM  | GPU ms/traj (8^4) | GPU ms/traj (16^4) |
-|---------------|-------------|-------|--------------------|--------------------|
-| RTX 3090      | SM86        | 24 GB | 25.8 (done)        | 625.9 (done)       |
-| RTX 4060      | SM89        | 8 GB  |                    |                    |
-| RTX 5090      | SM100       | 32 GB |                    |                    |
-| RX 6950 XT    | RDNA2       | 16 GB |                    |                    |
-```
-
-**Why**: The paper's key claim is vendor neutrality. At minimum one AMD
-result is needed. Intel Arc would strengthen the argument but is optional.
-
-**Owner**: This may require Node Atomic team coordination if AMD hardware
-is on a different gate. RTX 4060/5090 results can come from any gate with
-those GPUs.
-
----
-
-### 5. Thermalization Figure (Optional but Strong)
-
-**What**: Plot of plaquette value vs trajectory number showing convergence
-from hot start to equilibrium.
-
-**Format**: SVG or high-res PNG. X-axis: trajectory number. Y-axis: ⟨P⟩.
-Show thermalization region and production region with a vertical line.
-
-**Why**: Visual proof of correct HMC behavior. Reviewers expect this.
-
----
-
-## How to Fill the Draft
-
-1. Open `whitePaper/subGen/LATTICE_QCD_CONSUMER_GPU_ARXIV.md`
-2. Search for `[TODO]` — there are 5 markers
-3. Replace `[pending]` cells with measured values
-4. Remove the `[TODO]` marker line when the section is complete
-5. Commit to whitePaper main and push to Forgejo
-6. File a completion AAR in `wateringHole/aars/`
-
-**Do not change the structure.** The sections, headings, and table columns
-are already formatted for the target venue. Just fill the data cells.
-
----
-
-## Hype Cleanup Reminders
-
-These rules apply to every number in the paper:
-
-- **GPU vs CPU speedup**: Always specify "same hardware, same algorithm"
-- **DF64 precision**: Say "~14 significant digits" not "f64 precision"
-- **No theoretical TFLOPS**: Use measured trajectories/hour
-- **Accept rates**: Report actual measured rates, not theoretical
-- **Error bars**: Standard error of the mean, not standard deviation
-
----
-
-## Publication Path
-
-```
-hotSpring fills [TODO] sections          ← DONE (Aug 2)
-    ↓
-sporePrint reviews for hype compliance   ← DONE (Aug 2)
-    ↓
-Convert markdown → LaTeX (REVTeX4-2)     ← NEXT
-    ↓
-Submit to arXiv hep-lat (cross-list cs.DC)
-    ↓
-sporePrint updates site page with arXiv ID
-    ↓
-JOSS submission (software paper) after arXiv acceptance
-```
-
-**Target venues**:
-- **arXiv hep-lat** — primary (lattice QCD audience)
-- **cs.DC** — cross-list (distributed computing / GPU methodology)
-- **JOSS** — secondary (software paper for the barraCuda + coralReef stack)
-- **Computer Physics Communications** — stretch (if reviewers want journal)
-
----
-
-## Contact
-
-sporePrint team monitors this handoff. All data sections are now filled.
-Next step: sporePrint converts markdown → LaTeX (REVTeX4-2) and prepares
-the arXiv submission package.
-
----
-
-*First publication for ecoPrimals ORCID. All data complete.
-Ready for LaTeX conversion and arXiv hep-lat submission.*
+*Rung 1. The β-scan and HMC validation are the highest priority. sporePrint
+has the LaTeX ready to accept the data. Push results, file AAR, we submit.*

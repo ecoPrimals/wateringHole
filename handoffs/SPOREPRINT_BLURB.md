@@ -1,79 +1,88 @@
-# sporePrint Blurb — Demonstration Era LIVE + arXiv Pipeline
+# sporePrint Blurb — Rung 1 Validation + Data Braids v2
 
-**Date**: Aug 1, 2026 | **Wave**: post-155n | **From**: eastGate overwatch
-**Posture**: Demonstration era transition COMPLETE. pseudoSpore LIVE. First arXiv draft scaffolded. **Waiting on hotSpring data to submit.**
-
----
-
-## COMPLETED THIS SESSION
-
-| Phase | Status | What |
-|-------|--------|------|
-| Phase 1: Nav triage | **DONE** | 334→190 active. 79→foundation. 36→backstory. |
-| Phase 2: pseudoSpore section | **LIVE** | Lead nav item. Data catalog. QCD page. Verification guide. |
-| Phase 2: Live dashboards | **LIVE (static)** | Gate status, GPU compute, provenance, depot — petalTongue-ready. |
-| Phase 2: Hype cleanup | **DONE** | 20 files. All comparative claims qualified. |
-| Metric refresh | **DONE** | 116,930 tests (was 101K). 53 metrics synced. |
-| Platform resume | **LIVE** | primals.eco/resume/ |
-| arXiv draft | **DONE (scaffold)** | `whitePaper/subGen/LATTICE_QCD_CONSUMER_GPU_ARXIV.md` |
+**Date**: Aug 2, 2026 PM | **Wave**: 155n | **From**: eastGate overwatch
+**Posture**: arXiv reframed to "Toward Vendor-Agnostic Lattice QCD" (Rung 1 of 6). Experiment queue ACTIVE — β-scan, HMC diagnostics, increased stats must complete before submission. Data Braids updated: 356 GB / 32 datasets / 14 domains. LaTeX updated with Rung 1 corrections.
 
 ---
 
-## PRIORITY: pseudoSpore Downloads + arXiv Data
+## WHAT JUST HAPPENED
 
-### pseudoSpore #1 — Science Data Catalog (westGate)
+| Event | Status |
+|-------|--------|
+| **arXiv Rung 1 reframing** | AI review was right: SU(2), not QCD. Paper retitled, scope ladder added, precision matrix added, 16⁴ overclaims removed, limitations reframed. |
+| **LaTeX updated** | Title, abstract, Section 1.2 (scope ladder), plaquette normalization eq (Section 2.1), precision matrix (Section 2.2), experiment queue table (Section 4.4), conclusion reframed. |
+| **Experiment queue created** | 7 experiments for hotSpring: β-scan, increased statistics, HMC diagnostics, PRNG isolation, plaquette normalization, larger volumes, pseudoSpore freeze. |
+| **6-rung ladder defined** | SU(2) → SU(3) → quenched QCD → dynamical fermions → (2+1)-flavor → hot QCD. Each rung gets its own preprint. |
+| **Data Braids v2** | Updated catalog to 356 GB / 32 datasets / 14 domains. 16 site pages (4 new domain pages). westGate tideGlass 7/7 COMPLETE. |
+| **Phase 1-3** | COMPLETE: nav triage, pseudoSpore section, dashboards, hype cleanup, `/data/` section. |
 
-38.2 GB ingested. 11 datasets. 4,752 CAS objects. 100% provenance. All live on the pseudoSpore page.
+---
 
-**Next**: Package downloadable bundles (data + provenance manifest + `validate.sh`). Needs tideGlass + lithoSpore for archive packaging, or a simpler tar+manifest approach.
-
-### pseudoSpore #2 — hotSpring QCD Results (strandGate)
-
-GPU-computed SU(2) lattice QCD trajectories with full provenance. The system producing science, not just storing it.
-
-**Bundle contents**: trajectories, benchmarks, WGSL shaders, hardware profile, full provenance chain, `validate.sh`.
-
-**Update**: arXiv **4/5 sections FILLED** with 8⁴ SU(2) production data. 82× GPU speedup. P2 root-caused (PRNG polyfill bias). `cpu_mom` validated.
-
-**Remaining**: AMD RX 6950 XT benchmarks for Section 3.4 (multi-vendor proof) → sporePrint LaTeX → submit.
-
-### arXiv Publication Path
+## CRITICAL PATH: Rung 1 arXiv Submission
 
 ```
-AMD benchmarks (Section 3.4) ← LAST BLOCKER
+Experiment queue (strandGate/hotSpring)
+    ↓  β-scan, HMC diagnostics, increased stats, PRNG QQ plots
+sporePrint integrates data into paper tables
+    ↓  update LaTeX with experiment results
+Final hype compliance review
     ↓
-sporePrint reviews for hype compliance
+arXiv hep-lat submission (cross-list cs.DC)
     ↓
-markdown → LaTeX (REVTeX4-2)
-    ↓
-arXiv hep-lat (cross-list cs.DC)
-    ↓
-sporePrint updates site with arXiv ID
-    ↓
-JOSS submission (software paper)
+Update site with arXiv ID + pseudoSpore v1.0.0-rung1
 ```
 
-**Target**: arXiv hep-lat. First publication under ORCID 0009-0004-2141-0321.
+### What sporePrint is Waiting For
+
+| Experiment | From | Priority | What sporePrint Does With It |
+|-----------|------|----------|------------------------------|
+| β-scan (1.8–2.5) | hotSpring/strandGate | MUST | New table in Section 3 — validates engine across coupling range |
+| 4-8 seeds × 1000 traj | hotSpring/strandGate | MUST | Replace N_eff=30 with bootstrap errors |
+| HMC diagnostics | hotSpring/strandGate | MUST | New ΔH histogram figure, Creutz equality number |
+| PRNG QQ plots | hotSpring/strandGate | MUST | Quantify GPU polyfill defect rigorously |
+| 12⁴ / 16⁴ production | hotSpring/strandGate | Should | Extend scaling table or restrict claims |
+
+### What sporePrint Can Do Now (while waiting)
+
+- Final hype compliance pass on current LaTeX
+- WCAG 2.2 AAA accessibility audit
+- Begin Rung 2 paper scaffold (SU(3) pure gauge) when barraCuda starts
+- Regenerate site pages as experiment data arrives
+- Populate pseudoSpore bundles with westGate data
+
+---
+
+## DATA BRAIDS — `/data/` (v2)
+
+356 GB across 32 datasets in 14 science domains. All with full Provenance Trio provenance on westGate.
+
+**New datasets since v1**: UniProt TrEMBL (148 GB), PDB70 (27 GB), BindingDB (583 MB), NF Data Portal (666 MB), GEO SOFT cancer (3 GB), TCGA Xena (449 MB), MONDO (103 MB), Reactome (96 MB), RefSeq GRCh38 (981 MB), NCBI Gene (7 GB).
+
+**New domain pages**: Cancer Genomics, Disease Ontology, Genomic Reference, plus updates to Structural Biology, Drug Discovery, Gene Expression.
+
+**tideGlass 7/7 COMPLETE** — all base data modules have data on ZFS with provenance.
 
 ---
 
 ## REMAINING WORK
 
-| Task | Owner | Blocks | Priority |
-|------|-------|--------|----------|
-| ~~hotSpring arXiv data~~ | hotSpring team | **4/5 FILLED** — AMD multi-vendor (Section 3.4) remaining | NEARLY DONE |
-| AMD GPU benchmarks (RX 6950 XT) | Node Atomic / strandGate | arXiv Section 3.4 | **HIGH** |
-| pseudoSpore download packaging | sporePrint + lithoSpore | Download links on catalog page | MEDIUM |
-| Live dashboards → petalTongue | petalTongue G19 | Dynamic dashboards | MEDIUM |
-| ~~golgi auto-publish~~ | ~~eastGate ops~~ | **FIXED** — 3 compounding bugs resolved | DONE |
-| WCAG 2.2 AAA | sporePrint (own) | Accessibility compliance | LOW |
+| Task | Owner | Priority |
+|------|-------|----------|
+| **Rung 1 experiment queue completion** | hotSpring (strandGate) | **CRITICAL** — blocks arXiv |
+| **Integrate experiment data into LaTeX** | sporePrint | **HIGH** — after experiments |
+| Bundle data population | westGate | HIGH |
+| Bundle upload to depot | sporePrint + lithoSpore | HIGH |
+| pseudoSpore v1.0.0-rung1 signed release | Node Atomic | MEDIUM |
+| Live dashboards → petalTongue (G19) | petalTongue | MEDIUM |
+| Rung 2 paper scaffold | sporePrint | LOW (after Rung 1 submits) |
+| WCAG 2.2 AAA | sporePrint | LOW |
 
 ---
 
-## OPS NOTE
+## KEY INSIGHT
 
-golgi auto-publish is **FIXED** (sporeGate AAR, Aug 1 PM). Three bugs resolved: worktree ownership (`git:git` vs `root:root`), missing `--force` on `zola build`, SSH config pointing at wrong golgi IP. sporePrint now deploys correctly to both inner and outer membrane.
+The AI review pattern holds for the third time: **the code is real, the comparisons are hype.** The engineering (plaquette values, precision, multi-vendor, provenance) all checked out. The framing (calling it "lattice QCD," claiming 16⁴ production) was the problem. Fix: name what you proved, not what you plan to prove. Rung 1 is SU(2) execution and arithmetic validation. That's a strong preprint on its own merits.
 
 ---
 
-*Demonstration era is live. P2 resolved. Production data unblocked. The arXiv paper is waiting for validated `cpu_mom` physics data.*
+*Rung 1 reframed. LaTeX updated. Experiment queue is the critical path — sporePrint waits for hotSpring data, then integrates and submits. Data Braids doubled to 356 GB / 32 datasets. The 6-rung lattice QCD ladder gives the research program structure. Each rung gets its own paper.*

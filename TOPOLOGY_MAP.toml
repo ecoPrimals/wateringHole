@@ -13,7 +13,7 @@
 version = "4.3.0"
 wave = 155
 measured_by = "manual + discovery.peers (planned)"
-last_updated = "2026-07-27"
+last_updated = "2026-08-01"
 wan_model = "single_exit_star"
 site_topology = "star_with_10g_backbone"
 neighborhood = "Old Everett, Lansing MI"
@@ -46,7 +46,7 @@ ports = [
     "ether8 ← sporeGate eno1 (2.5G uplink from plasma membrane)",
 ]
 gates = ["sporeGate", "eastGate", "northGate", "biomeGate"]
-note = "biomeGate OFFLINE (kernel recovery). sporeGate is the plasma membrane router (NAT/DHCP/nftables)."
+note = "biomeGate REBUILT (4×32GB, 128GB — GPU crankshaft, coralReef diesel engine). sporeGate is the plasma membrane router (NAT/DHCP/nftables/DNS). G29 COMPLETE: 3-way DNS (sporeGate + blueGate H2 + golgi mesh)."
 
 [cytoplasm.zones.house2]
 hub_device = "TP-Link Omada SX3008F"
@@ -85,8 +85,9 @@ note = "Bridge mode ACTIVE (Jun 17 18:30). WiFi clients get 192.168.4.x from spo
 
 [sites.house1]
 address = "4422 Southgate Ave, Lansing MI 48910"
-description = "Corner lot, 1920 build. ATT fiber drop, CRS310, sporeGate router."
+description = "Corner lot, 1920 build. ATT fiber drop, CRS310, sporeGate router. PLANNED: ATT gateway + DS224+ moving to basement Aug 2."
 role = "primary_periplasm"
+planned_move = "Aug 2, 2026: ATT BGW320 + Synology DS224+ relocating from 1st floor to basement. Planned eth disruption window for troubleshooting + G29 validation. Post-move: all house1 infrastructure in basement (ATT gateway, CRS310, sporeGate) except WiFi/Eero on 1st floor."
 
 [sites.house2]
 address = "641 Samantha Ave, Lansing MI 48910"
@@ -320,36 +321,28 @@ peers = [
     { gate = "eastGate", site = "house1", status = "live" },
     { gate = "golgi", site = "vps_do_nyc", status = "live" },
     { gate = "ironGate", site = "house2", status = "live" },
-    { gate = "southGate", site = "house2", status = "enrolling" },
-    { gate = "strandGate", site = "house2", status = "enrolling" },
-    { gate = "westGate", site = "house2", status = "enrolling" },
-    { gate = "blueGate", site = "house2", status = "enrolling" },
+    { gate = "southGate", site = "house2", status = "live_validation_gate" },
+    { gate = "strandGate", site = "house2", status = "live" },
+    { gate = "westGate", site = "house2", status = "live" },
+    { gate = "blueGate", site = "house2", status = "live" },
+    { gate = "biomeGate", site = "house1", status = "tower_staged" },
     { gate = "swiftGate", site = "house2", status = "enrolling" },
     { gate = "grapheneGate", site = "portable", status = "live_tcp_only" },
 ]
 note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN. 5 house2 gates enrolling via autonomous enrollment (Wave 155a)."
 
 [mesh.wireguard_wan]
-description = "WireGuard star overlay — golgiBody hub, all gates peer through"
+description = "WireGuard point-to-point overlay — WAN gates into periplasm"
 transport = "wireguard"
 subnet = "10.13.37.0/24"
 trust = "metallic"
-hub = "golgiBody"
-hub_ip = "10.13.37.1"
 peers = [
-    { gate = "golgiBody",  ip = "10.13.37.1",  endpoint = "157.230.3.183:51820", status = "hub" },
-    { gate = "sporeGate",  ip = "10.13.37.2",  endpoint = "162.226.225.148:51821", status = "live", ssh = true },
-    { gate = "eastGate",   ip = "10.13.37.5",  endpoint = "162.226.225.148:52089", status = "live", ssh = true },
-    { gate = "flockGate",  ip = "10.13.37.6",  endpoint = "24.128.136.74:51820", status = "dead_3d" },
-    { gate = "ironGate",   ip = "10.13.37.7",  endpoint = "162.226.225.148:51820", status = "live", ssh = true },
-    { gate = "northGate",  ip = "10.13.37.8",  endpoint = "162.226.225.148:53885", status = "live", ssh = false },
-    { gate = "southGate",  ip = "10.13.37.9",  endpoint = "none", status = "never" },
-    { gate = "strandGate", ip = "10.13.37.10", endpoint = "162.226.225.148:1491", status = "live", ssh = true },
-    { gate = "westGate",   ip = "10.13.37.11", endpoint = "none", status = "never" },
-    { gate = "blueGate",   ip = "10.13.37.12", endpoint = "162.226.225.148:50794", status = "live", ssh = true },
-    { gate = "biomeGate",  ip = "10.13.37.3",  endpoint = "162.226.225.148:51821", status = "live", ssh = true },
+    { gate = "sporeGate", ip = "10.13.37.1", endpoint = "residential_att", status = "live" },
+    { gate = "flockGate", ip = "10.13.37.2", endpoint = "residential_spectrum", status = "down" },
+    { gate = "biomeGate", ip = "10.13.37.3", endpoint = "lan_backbone", status = "enrolling" },
 ]
-note = "Mesh audit Aug 2 2026: 8/10 peers LIVE. biomeGate fully enrolled (WG + SSH agentic). southGate/westGate NEVER connected. flockGate DEAD."
+measured_rtt_ms = 72.0
+note = "flockGate↔sporeGate proven (Wave 133c). songBird connection pooling active — RTT matches raw WireGuard ICMP baseline."
 
 [mesh.capability_routing]
 description = "capability.call dispatch layer — routes by advertised capability, not by gate"
