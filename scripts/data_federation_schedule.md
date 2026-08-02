@@ -4,7 +4,7 @@
 **Connection**: 1 Gbps fiber (residential — avoid saturation)
 **Policy**: Download in batches, off-peak preferred, never >80% sustained for >1h
 **Every byte with provenance = latent value (zero egress at 10G LAN)**
-**Updated**: Aug 2, 2026 11:20 EDT
+**Updated**: Aug 2, 2026 11:45 EDT
 
 ---
 
@@ -43,7 +43,9 @@
 | PhysioNet PTB-XL | 1.5 GB | 1 | FULL | PhysioNet |
 | NF Data Portal — NF1 drug screen + NF2 kinomics | 666 MB | 658 | FULL | Synapse |
 | BindingDB (All + Assays + rsid mappings, 202608) | 583 MB | 3 | FULL | BindingDB |
-| **TOTAL COMPLETE** | **~357 GB** | **~259K** | | |
+| COSMIC v104 (CGC + Genome/Targeted Screens + Breakpoints) | 4.6 GB | 5 | FULL | Sanger Institute |
+| BRENDA enzyme kinetics (Km, kcat, Ki for 20 EC classes) | 1.6 MB | 74 | FULL | BRENDA SOAP API |
+| **TOTAL COMPLETE** | **~362 GB** | **~260K** | | |
 
 ---
 
@@ -58,8 +60,8 @@ None currently running — all in-flight downloads completed.
 | Dataset | Est. Size | Priority | Spring/Garden | Notes |
 |---------|-----------|----------|---------------|-------|
 | GEO SOFT (curated subset) | ~50 GB | P1 | wetSpring | API crawl |
-| BRENDA enzyme kinetics | ~2 GB | P2 | hotSpring | Needs SOAP API password |
-| COSMIC somatic mutations | ~5 GB | P1 | healthSpring/tideGlass | Needs COSMIC password |
+| BRENDA full flat file (remaining enzymes) | ~2 GB | P3 | hotSpring | SOAP API working, can expand |
+| COSMIC Resistance Mutations + VCF | ~2 GB | P2 | healthSpring | Some paths give 500 |
 | EPA CompTox PFAS | ~1 GB | P1 | wetSpring PFAS | Needs browser session |
 | NIST PFAS Reference Data | ~500 MB | P1 | wetSpring PFAS | |
 | EcoCyc E. coli metabolism | ~1 GB | P2 | hotSpring | Requires license |
@@ -105,7 +107,7 @@ None currently running — all in-flight downloads completed.
 
 | Milestone | Cumulative | % of ZFS | When |
 |-----------|-----------|----------|------|
-| Current (complete) | ~357 GB | 0.70% | Done |
+| Current (complete) | ~362 GB | 0.71% | Done |
 | After Batch 2/3 | ~417 GB | 0.82% | This week |
 | After Batch 4 | ~640 GB | 1.26% | +2 weeks |
 | After Batch 5 | ~30 TB | 59% | +1 month |
