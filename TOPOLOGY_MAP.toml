@@ -330,16 +330,26 @@ peers = [
 note = "LAN peers discover via bootstrap_peers. VPS peer (golgi) relays for cross-WAN. 5 house2 gates enrolling via autonomous enrollment (Wave 155a)."
 
 [mesh.wireguard_wan]
-description = "WireGuard point-to-point overlay — WAN gates into periplasm"
+description = "WireGuard star overlay — golgiBody hub, all gates peer through"
 transport = "wireguard"
 subnet = "10.13.37.0/24"
 trust = "metallic"
+hub = "golgiBody"
+hub_ip = "10.13.37.1"
 peers = [
-    { gate = "sporeGate", ip = "10.13.37.1", endpoint = "residential_att", status = "live" },
-    { gate = "flockGate", ip = "10.13.37.2", endpoint = "residential_spectrum", status = "live" },
+    { gate = "golgiBody",  ip = "10.13.37.1",  endpoint = "157.230.3.183:51820", status = "hub" },
+    { gate = "sporeGate",  ip = "10.13.37.2",  endpoint = "162.226.225.148:51821", status = "live", ssh = true },
+    { gate = "eastGate",   ip = "10.13.37.5",  endpoint = "162.226.225.148:52089", status = "live", ssh = true },
+    { gate = "flockGate",  ip = "10.13.37.6",  endpoint = "24.128.136.74:51820", status = "dead_3d" },
+    { gate = "ironGate",   ip = "10.13.37.7",  endpoint = "162.226.225.148:51820", status = "live", ssh = true },
+    { gate = "northGate",  ip = "10.13.37.8",  endpoint = "162.226.225.148:53885", status = "live", ssh = false },
+    { gate = "southGate",  ip = "10.13.37.9",  endpoint = "none", status = "never" },
+    { gate = "strandGate", ip = "10.13.37.10", endpoint = "162.226.225.148:1491", status = "live", ssh = true },
+    { gate = "westGate",   ip = "10.13.37.11", endpoint = "none", status = "never" },
+    { gate = "blueGate",   ip = "10.13.37.12", endpoint = "162.226.225.148:50794", status = "live", ssh = true },
+    { gate = "biomeGate",  ip = "10.13.37.3",  endpoint = "pending", status = "enrolled", ssh = false },
 ]
-measured_rtt_ms = 72.0
-note = "flockGate↔sporeGate proven (Wave 133c). songBird connection pooling active — RTT matches raw WireGuard ICMP baseline."
+note = "Full mesh audit Aug 2 2026: 7/10 peers LIVE. biomeGate enrolled (golgi peer added, awaiting WG bringup). southGate/westGate NEVER connected. flockGate DEAD 3d."
 
 [mesh.capability_routing]
 description = "capability.call dispatch layer — routes by advertised capability, not by gate"

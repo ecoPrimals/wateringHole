@@ -858,7 +858,18 @@ repos = [
     "wetSpring", "neuralSpring",
 ]
 
+# biomeGate — HBM2 test bench, vendor cracking, Threadripper 3970X (House 2)
 [gates.biomeGate]
+target = "x86_64-unknown-linux-musl"
+wg_ip = "10.13.37.3"
+lan_ip = "192.168.4.199"
+ssh_user = "biomegate"
+mobility = "fixed"
+composition = "full"
+transport = "lan"
+zone = "house2"
+roles = ["node_atomic", "compute", "gpu", "hbm2"]
+notes = "Threadripper 3970X + RTX 5060 + Titan V + Tesla K80. Forgejo push enrolled (biomegate user). WG peer added to golgi hub. Vendor cracking active (coralReef diesel engine)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -990,6 +1001,7 @@ repos = [
 # northGate — gaming/hobby gate (Windows 11 Pro), family validation LAST
 [gates.northGate]
 target = "x86_64-pc-windows-gnu"
+wg_ip = "10.13.37.8"
 mobility = "fixed"
 bind_mode = "tcp_only"
 composition = "full"
@@ -1005,7 +1017,7 @@ dns_suffix = "primals.local"
 os = "Windows 11 Pro Build 26100"
 workspace = 'C:\Users\mokke\Development\ecoPrimals'
 depot_drive = "M:"
-notes = "Ryzen 9950X3D + RTX 5090 + 96GB. GL-MT6000 router (house1). 837GB free on M:. RustDesk running. WireGuard needed for mesh. LAST priority."
+notes = "Ryzen 9950X3D + RTX 5090 + 96GB. WG mesh LIVE (10.13.37.8). No SSH on tunnel (Windows). LAST priority."
 gate_class = "family"
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
