@@ -19,8 +19,8 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **ECOSYSTEM_BLURB.md** is the universal handoff (Tracks A+B converged)
 - [x] **70+ handoff docs + AARs** delivered Wave 155b–n. 10 AARs + 2 handoffs fossilized this wave.
 - [x] **ZERO P0 / ZERO P1 / ZERO P2.** All P1s GATE VALIDATED. P2 platform detection FIXED (`d7026d7`).
-- [x] **NUCLEUS ACHIEVED on 4 gates** — westGate, strandGate, blueGate, sporeGate. Gate validation AARs fossilized.
-- [x] **Depot 35 binaries CURRENT** — biomeOS v4.56 + cellMembrane latest rebuilt. BLAKE3 verified.
+- [x] **NUCLEUS ACHIEVED on 5 gates** — westGate, strandGate, blueGate, sporeGate, **southGate (VALIDATION GATE 22/22 PASS)**. Gate validation AARs fossilized.
+- [x] **Depot 46 binaries CURRENT** (16 musl + 15 gnu + 15 windows). biomeOS v4.56 + cellMembrane latest. BLAKE3 verified.
 - [x] **biomeOS v4.56 SHIPPED** — G22 convergence steps 1+2: unified namespace, 244 caps, 47 deps removed.
 - [x] **westGate ZFS rebuilt** — mirror → raidz1, 25.4 → 50.7 TB usable. AlphaFold DB fits.
 - [x] **Golgi post-receive hook FIXED** (3 bugs: dispatcher, case, category). Sovereign CI E2E verified.
@@ -29,9 +29,21 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **Provenance 7/7 COMPLETE** — E2E validated on westGate (5th consecutive pass) + blueGate (Windows)
 - [x] **Sovereign CI LIVE** — push-to-deploy E2E verified for ALL 13 primals including biomeOS (coevolution).
 - [x] **Coevolution contract COMPLETE (G21)** — biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`. Mode gap FIXED (`652cf8a7`).
-- [x] **14 AARs + 1 handoff fossilized** to `wave155n_checkpoint/`. Zero active AARs.
-- [x] **whitePaper convergence (G22)**: IN PROGRESS — biomeOS v4.56 shipped steps 1+2 (unified namespace, 244 caps). 3 steps remaining.
-- [ ] **Portability checkpoint** — southGate VALIDATING. Can we shut down and reconstitute on a new HPC mesh?
+- [x] **42 files fossilized** across 3 checkpoints: `wave155n_checkpoint/` (25), `wave155n_gate_validated/` (2), `wave155n_springs_entry/` (17 — AARs + stale docs + impulses + context braids). Zero active AARs. Zero stale impulses.
+- [x] **whitePaper convergence (G22)**: **COMPLETE** — biomeOS v4.56 single-process merge. Dual-protocol (riboCipher + JSON-RPC) in one process. Validated on westGate + sporeGate.
+- [x] **Portability checkpoint (G17) — PROVEN.** southGate 22/22 PASS. NUCLEUS from public depot, own entropy, user-space paths, no WireGuard, no inherited identity. 20h stable, 32 sockets, 76MB RSS, 29,294 foreign peer rejections.
+- [x] **DATA FEDERATION BATCH 1 (westGate)** — 11 datasets, 38.2 GB, 4,752 CAS objects, 6 science domains, 100% provenance. LINCS L1000 (19.86 GB) unblocks tideGlass. PDB bulk rsync (~60 GB) running. `bulk_ingest.py` + `data_federation_schedule.md` shipped.
+- [x] **Peptidoglycan DNS G29 COMPLETE** — 3-way redundancy: sporeGate dnsmasq (primary) + blueGate dnsproxy H2 secondary (LIVE) + golgi mesh DNS. Confirmed by sporeGate infrastructure verification.
+- [x] **strandGate v4.56 DEPLOYED** — Carry-forward resolved. G22 confirmed. GPU QCD: 38-58× speedup, 5,500 traj/hr. hotSpring composition validated on live NUCLEUS.
+- [x] **sporePrint DEMONSTRATION ERA** — 334→190 pages. pseudoSpore LIVE at primals.eco/pseudospore/. Hype cleaned (20 files). Tests: 116,930. First arXiv draft scaffolded.
+- [x] **First arXiv draft READY** — `LATTICE_QCD_CONSUMER_GPU_ARXIV.md`. SU(2) lattice QCD on consumer GPU. RTX 3090 + RTX 4060 scaling data complete. 5 `[TODO]` sections for hotSpring.
+- [x] **westGate persistence HARDENED** — ZFS auto-import, 13/13 NUCLEUS units enabled, boot dependency chain, daily snapshots, monthly scrub. 9/9 boot check PASS.
+- [x] **hotSpring v0.6.32** — Deep debt clear. 627 tests, 0 clippy. thiserror migration. Files refactored.
+- [x] **publications/ directory** — Auditable data transfer point for papers + pseudoSpore. Lattice QCD data centralized with full audit trail.
+- [x] **golgi auto-publish fix** — THREE compounding bugs fixed: (1) worktree ownership mismatch (`git:git` vs `root:root`), (2) missing `--force` flag on `zola build`, (3) SSH config pointing at wrong golgi IP. sporePrint now deploys correctly to both inner and outer membrane.
+- [x] **ironGate ONLINE** — Dev loop validated. Tower Atomic deployed (bearDog 10.6 MB + songBird 16.7 MB + skunkBat 2.6 MB). Forgejo SSH + HTTPS + depot all verified. 42 repos synced. Mesh: golgi 38ms, sporeGate 77ms, eastGate 78ms. **Ready for esotericWebb (G20).**
+- [x] **P2 RESOLVED: GPU PRNG polyfill bias** — Root cause: WGSL transcendental polyfills (`log_f64`, `sqrt_f64`, `cos_f64`) in Box-Muller momentum shader produced wrong variance. Three-path comparison proves GPU MD pipeline is correct (bit-exact 4e-17). `cpu_mom` workaround deployed — CPU generates momenta, GPU does all MD at full speed. Section 3.2 UNBLOCKED. Finding strengthens the paper (validation methodology).
+- [ ] **PLANNED SERVICE INTERRUPTION (Aug 2)** — ATT gateway + DS224+ moving to basement. steamGate + reefGate enrollment queued post-move.
 
 ## 2. Ecological (Primal Health)
 
@@ -81,7 +93,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [ ] **darwinGate** (Mac Mini) — GLACIAL. Needs HW acquisition. First apple-darwin target.
 - [ ] **iosGate** (iPhone) — GLACIAL. Needs darwinGate + Apple Dev Program. Walled garden research.
 - [ ] fieldGate OFFLINE (dead CMOS)
-- [ ] biomeGate OFFLINE (kernel recovery)
+- [x] **biomeGate GPU CRANKSHAFT LIVE** — Threadripper 3970X, 128GB. 3 GPUs on VFIO: RTX 5060 (host/wgpu) + Titan V (GV100 SM70) + K80 (GK210×2 SM37, **unretired**). toadStool + hotSpring built. coralReef **3,553 tests PASS**. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever hardware run queued.
 - [ ] Complete port→gate mapping (CRS310 + Omada + TL-SG605S-M2)
 - [ ] Document Flint H1 + Flint 2 + Omada WiFi bridge configs
 
@@ -92,15 +104,16 @@ appears. This keeps the active review focused on evolving concerns.
 | golgiBody | ONLINE | Linux | 10.13.37.1 | thin-relay | Sole depot, enrollment, Forgejo, Drawbridge |
 | sporeGate | ONLINE | Linux | 10.13.37.2 | full | Build authority, depot, cascade hub, **peptidoglycan anchor H1** |
 | eastGate | ONLINE | Linux | 10.13.37.5 | full | Code hub, overwatch |
-| ironGate | ONLINE | Linux | 10.13.37.7 | full | GPU compute, 4x HDD enclave, JupyterHub |
+| ironGate | **NUCLEUS (13)** | Linux | 10.13.37.7 | **NUCLEUS (13)** | 21/21 sockets HEALTHY. i9-14900K, RTX 5070 (Blackwell). esotericWebb (G20) + ProjectFOUNDATION + lithoSpore. 913 garden tests PASS. |
 | flockGate | **DOWN** | Linux | 10.13.37.6 | full | Rebooted, RustDesk locked out. esotericWebb → **ironGate** |
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090. **DAILY DRIVER — DO NOT DEPLOY.** AlphaFold data source (~1TB). |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
 | strandGate | **NUCLEUS v4.55** | Linux | 10.13.37.10 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 12/12 HEALTHY, 1,017 methods, 13 procs. RTX 3090 p50=0.33ms. |
-| westGate | **NUCLEUS v4.55** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 31/31 sockets 225s. Prov 7/7. ZFS raidz1 50.7TB. |
-| blueGate | **NUCLEUS v4.55** | Windows | 10.13.37.12 | **NUCLEUS (13)** | biomeOS v4.55 deployed. Prov 7/7. membrane.exe LIVE. **P2 FIXED.** J12 UNBLOCKED. |
+| westGate | **NUCLEUS v4.56** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **G22 COMPLETE.** 835 caps. 30/30 sockets. Prov 7/7 (8th pass). ZFS raidz1 50.7TB. |
+| blueGate | **NUCLEUS v4.56** | Windows | 10.13.37.12 | **NUCLEUS (13)** | biomeOS v4.56 deployed. Prov 7/7. membrane.exe LIVE. **P2 FIXED.** J12 LIVE E2E. |
+| biomeGate | **GPU CRANKSHAFT LIVE** | Linux | 10.13.37.3 | compute | Threadripper 3970X, 128GB. **3 VFIO GPUs**: RTX 5060 (host) + Titan V (SM70) + K80×2 (SM37). coralReef 3,553 tests. 44-experiment matrix. G32 silicon deism. |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
-| southGate | **VALIDATION GATE** | Linux | **NO WG** (deliberate) | full (target) | 5800X3D + RTX 4060 + 128GB + 5TB NVMe. External deploy proof. Own lineage. Bonding + encryption validation. |
+| southGate | **NUCLEUS — VALIDATION GATE 22/22 PASS** | Linux | **NO WG** (deliberate) | **NUCLEUS (13)** | 5800X3D + RTX 4060 + 128GB + 5TB NVMe. **G17 PROVEN. G8 PROVEN.** 20h stable, 32 sockets, 76MB RSS. Own family (89df7a2d). |
 | **steamGate** | **NEXT** | SteamOS | — | tower (3) | Steam Deck. Portable compute. gnu bins in depot. |
 | **darwinGate** | **GLACIAL** | macOS | — | tower (3) | Mac Mini (acquire). apple-darwin builder. |
 | **iosGate** | **GLACIAL** | iOS | — | tower (3) | iPhone. After darwinGate. Silicon deism. |
@@ -152,8 +165,12 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] 10G AOC backbone CRS310↔Omada proven and healthy
 - [x] Flat LAN 192.168.4.0/22 — both houses on same broadcast domain
 - [x] Anchor model defined: sporeGate (H1) + blueGate (H2)
+- [ ] **G29 — Peptidoglycan isomorphism**: DNS is a recurring SPOF. sporeGate dnsmasq dies → all LAN gates lose resolution. strandGate DNS dead (Aug 1). northGate 2-3s page delays (DNS timeout + fallback). Not fully isomorphic yet.
 - [ ] DNS: verify dnsmasq on all Linux gates (sporeGate done, others PENDING)
-- [ ] northGate DNS delay diagnosis (likely dead dnsmasq)
+- [ ] northGate DNS delay diagnosis (DNS timeout pattern — likely single-DNS DHCP + slow fallback)
+- [ ] strandGate DNS dead (Aug 1, 2026) — systemd-resolved has no working upstream. sporeGate dnsmasq likely down again.
+- [ ] Redundant DNS: DHCP should hand out 2+ DNS servers (sporeGate dnsmasq + 1.1.1.1 fallback)
+- [ ] dnsmasq health monitor + auto-restart on sporeGate (systemd watchdog or cellMembrane health check)
 - [ ] Port→gate mapping incomplete (need physical audit)
 - [ ] WiFi bridge documentation (Flint H1 + Flint 2 configs)
 - [ ] Standardized gate provisioning script (DNS + RustDesk + health checks)
@@ -168,7 +185,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d):
 - [x] **biomeOS neuralAPI**: **27** signal graphs, **v4.56**: G22 convergence (unified namespace, 244 caps), dual-protocol health ping, socket ownership guard, `composition.test_swap`. (8,570 tests)
 - [x] **songBird ACME HTTP-01** challenge responder shipped — Phase 1 TLS elimination
 - [x] songBird mesh refactor: enrollment crypto + mesh helpers extracted, all files <800L
-- [x] sporeGate depot fully refreshed: health **11/11 HEALTHY**, **35 binaries** (16 musl + 4 gnu + 15 windows), BLAKE3 verified
+- [x] sporeGate depot fully refreshed: health **11/11 HEALTHY**, **46 binaries** (16 musl + 15 gnu + 15 windows), BLAKE3 verified
 - [x] **Sovereign CI LIVE** — push-to-deploy E2E verified. **Golgi hook FIXED** (3 bugs: dispatcher, case, category).
 - [x] ~~WireGuard DNS catch-all~~ — **FIXED** (cellMembrane `8d9bb58`)
 - [x] ~~Socket ownership P2~~ — **FIXED** (biomeOS `0e45262f` + v4.54 socket ownership guard)
@@ -249,7 +266,7 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 | **Tower Atomic** (3) | LIVE | 6 gates (incl. Windows, Android) | Signal graphs: 8. Direct IPC: YES. |
 | **Nest Atomic** (7+Tower) | LIVE | westGate (ZFS+CAS), blueGate (Windows) | Signal graphs: 9. Graph execution: **FIXED** (v4.47 riboCipher). |
 | **Node Atomic** (3+Tower) | VALIDATED | strandGate (746 pipelines/sec, sub-ms GPU) | Signal graphs: 3. |
-| **NUCLEUS** (13) | **ACHIEVED ×4 — GATE VALIDATED** | **westGate** (835 caps, Prov 7/7, ZFS 50.7TB), **strandGate** (1,017 methods, 1 proc/primal), **blueGate** (Windows, Prov 7/7, P2 FIXED), **sporeGate** (11/11, CI) | 27 signal graphs. biomeOS v4.56 in depot. G22 IN PROGRESS. |
+| **NUCLEUS** (13) | **ACHIEVED ×4 — GATE VALIDATED** | **westGate** (835 caps, Prov 7/7, ZFS 50.7TB), **strandGate** (1,017 methods, 1 proc/primal), **blueGate** (Windows, Prov 7/7, P2 FIXED), **sporeGate** (11/11, CI) | 27 signal graphs. biomeOS v4.56 in depot. **G22 COMPLETE.** |
 
 ### What's proven
 
@@ -318,7 +335,7 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [x] ~~Windows genomeBins stale~~ — **15/15 REBUILT** (sporeGate Jul 30). membrane.exe NEW. ALL platform gates fixed.
 - [x] ~~**songBird Windows platform gate (P0)**~~ — **FIXED + IN DEPOT** (`d9bda555`)
 - [x] ~~toadstool.exe~~ **FIXED**. ~~coralreef.exe~~ **FIXED**. ~~beardog.exe~~ **FIXED**. ~~membrane.exe~~ **FIXED** (`4ccbab1`)
-- [x] **Depot: 35 binaries across 5 target directories** (16 musl, 4 gnu, 15 windows-gnu, + aarch64-musl, aarch64-android dirs)
+- [x] **Depot: 46 binaries across 5 target directories** (16 musl, 15 gnu, 15 windows-gnu, + aarch64-musl, aarch64-android dirs)
 - [ ] **No Windows CI gate** — `cargo check --target x86_64-pc-windows-gnu` not yet in CI
 - [ ] **macOS genomeBins** — can't cross-compile from Linux. Needs darwinGate (Mac Mini) to self-build.
 - [ ] **SteamOS validation** — gnu depot bins may work as-is on Steam Deck (user-space deploy)
@@ -340,7 +357,7 @@ jelly string to kill.
 - [x] ~~**J9**: Cascade trigger~~ — **KILLED** (golgi post-receive hook → SSH → sporeGate `sovereign.ci.trigger`)
 - [x] ~~**J10**: Build trigger~~ — **KILLED** (`MEMBRANE_BUILD_AUTHORITY=1`, drift pipeline active)
 - [x] ~~**J11**: Multi-target build~~ — **KILLED** (`targets_for_primal()` reads manifest, auto musl+gnu)
-- [ ] **J12**: Sub-builder dispatch — **UNBLOCKED** (membrane.exe P1 fixed). sporeGate → blueGate Windows builds via songBird IPC
+- [x] ~~**J12**: Sub-builder dispatch~~ — **LIVE E2E** (SSH jelly-string-first). sporeGate foreman dispatch WIRED + blueGate local build PROVEN. SSH key enrolled. Evolution: SSH → songBird IPC (primal-native, deprecate SSH like WireGuard)
 - [x] ~~**J13**: Depot freshness probe~~ — **KILLED** (cellMembrane `0d39075`: `plasmid.staleness --publish` mesh broadcast)
 
 **Operational jelly strings (from sporeGate AAR)**:
@@ -349,10 +366,10 @@ jelly string to kill.
 - [x] ~~**J15**: checksums.toml~~ — **KILLED** (cellMembrane `0cfcce5`: `finalize_depot()` full disk scan)
 - [x] ~~**J16**: cellMembrane self-CI~~ — **KILLED** (cellMembrane `0d39075`: `sources.toml` garden self-enrollment)
 - [x] ~~**J17**: `/run/membrane` tmpfiles.d~~ — **KILLED** (cellMembrane `0cfcce5`: `membrane.conf` shipped)
-- [ ] **J18**: `/etc/environment` gate coupling — `RUSTUP_HOME`, `CARGO_HOME`, SSH aliases are gate-specific (portability risk)
+- [x] ~~**J18**: `/etc/environment` gate coupling~~ — **CODE SHIPPED** (`882ad09`): `env_or()` migration + gate-name identity bridge. Gate validation pending.
 - [x] ~~**J19**: biomeOS sandbox bypass~~ — **KILLED** (cellMembrane `00c6800`: `validate_with_deps()` → biomeOS `composition.test_swap`)
 
-**Pipeline status**: Forgejo push → cascade → diff → build → checksum → depot push → verify. **9/11 KILLED (J9–J11, J13–J17, J19). 2 remaining: J12 (sub-builder dispatch), J18 (gate coupling).**
+**Pipeline status**: Forgejo push → cascade → diff → build → checksum → depot push → verify. **11/11 KILLED or LIVE E2E (J9–J19).** J12 is SSH jelly-string-first; evolution path → songBird IPC.
 
 **Owner**: sporeGate + blueGate (J12 sub-builder) + cellMembrane (J18 portability)
 
@@ -441,30 +458,56 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 3. Phase 3: PseudoSpore grab pattern (NF as first downloadable artifact)
 4. Phase 4: projectFOUNDATION auto-feeds from provenance
 
-### Glacial Goals — Updated
+### Glacial Goals — Post-Threshold Checkpoint (Aug 1, 2026)
+
+**COMPLETE (8 goals — proven on live hardware):**
+
+| ID | Goal | Evidence |
+|----|------|----------|
+| G3 | Provenance Trio 7/7 | 8th consecutive pass. First real data (PDB+ChEMBL) at 100% provenance. |
+| G4 | NUCLEUS on multiple gates | **×6**: westGate, strandGate, blueGate, sporeGate, southGate, **ironGate** (21/21 HEALTHY). |
+| G8 | Plasmodium (multi-gate bonding) | southGate 22/22 PASS. BTSP trust without WireGuard. 29,294 foreign rejections. |
+| G10 | Sub-builder mesh | J12 LIVE E2E. sporeGate → blueGate → BLAKE3 verified. |
+| G17 | Portability — reconstitute from cold | southGate: public depot + own entropy + user-space + no WG = 20h NUCLEUS. |
+| G21 | biomeOS-cellMembrane coevolution | composition.test_swap + validate_with_deps. |
+| G22 | biomeOS API convergence | Single-process dual-protocol. Validated on 3 gates. |
+| G29 | Peptidoglycan isomorphism | 3-way DNS: sporeGate + blueGate H2 + golgi mesh. |
+
+**ACTIVE (13 goals — in progress or unblocked):**
+
+| ID | Goal | Status | Next Step |
+|----|------|--------|-----------|
+| G7 | Science data ingestion | **71.4 GB on ZFS** (PDB 50% rsync) | Full PDB → UniRef90 → AlphaFold 23TB |
+| G9 | arXiv + JOSS publication | **4/5 sections FILLED** | AMD multi-vendor benchmarks (Section 3.4) → LaTeX → submit |
+| G11 | Any chip + drive = mesh gate | ACTIVE | biomeGate + ironGate proved. steamGate NEXT. |
+| G14 | sporePrint live science refresh | ACTIVE | pseudoSpore LIVE. Auto-publish FIXED. |
+| G15 | tideGlass Phase 0 (NF archaeology) | **UNBLOCKED** | ChEMBL+PDB in CAS. Spin up tideGlass on westGate. |
+| G18 | squirrel → biomeOS agent orchestration | ACTIVE | Springs+gardens: wire neuralAPI dispatch. |
+| G19 | petalTongue + Node Atomics live rendering | ACTIVE | hotSpring QCD viz + esotericWebb. |
+| G20 | esotericWebb game engine on NUCLEUS | **ACTIVE on ironGate** | 472 tests PASS. NUCLEUS substrate live. RTX 5070 ready. |
+| G30 | westGate data federation root | **ACTIVE** | 71.4 GB, ~98K files. PDB rsync completing. `pdb_manifest_ingest.py` shipped. |
+| G31 | Batch RPC for provenance pipeline | ACTIVE | loamSpine/bearDog/sweetGrass batch ops → 10× faster ingestion. |
+| G32 | Silicon deism vendor cracking | **NEW — biomeGate** | 3-GPU bench (RTX 5060 + Tesla + Titan V). coralReef diesel engine. hotSpring cross-vendor validation. |
+| G34 | Outer membrane egress masking | **SPEC** | Flint as boundary router. Single opaque tunnel to golgi. ATT box sees nothing. |
+| G35 | Fully agentic LAN | **6/8 DONE** | sporeGate SSH to all gates. northGate + flockGate blocked (physical access). `membrane remote.enroll` proposed. |
+
+**GLACIAL (13 goals — future phases):**
 
 | ID | Goal | Status | Dependency |
 |----|------|--------|------------|
-| G3 | Provenance Trio 7/7 | **COMPLETE** | — |
-| G4 | NUCLEUS on multiple gates | **COMPLETE** (×3) | — |
 | G6 | bearDog public (crates.io) | GLACIAL | crates.io publishing |
-| G7 | AlphaFold ~1TB ingestion | ACTIVE | Nest Atomic on westGate (READY) |
-| G8 | Plasmodium (multi-gate bonding) | **VALIDATING (southGate)** | southGate validation gate: encrypted work handoff across trust boundary, own lineage, bonding proof. |
-| G9 | JOSS publication | ACTIVE (Step 8) | NF pseudoSpore |
-| G10 | Sub-builder mesh | UNBLOCKED (J12) | blueGate enrollment |
-| G11 | Any chip + drive = mesh gate | IN PROGRESS | steamGate NEXT |
-| G12 | darwinGate (Mac Mini) | GLACIAL | HW acquisition |
+| G12 | darwinGate (Mac Mini) | GLACIAL | HW acquisition → iOS + Sovereign Identity |
 | G13 | iosGate (iPhone) | GLACIAL | darwinGate + Dev Program |
-| G14 | sporePrint live science refresh | **NEW** — Phase 1 NOW | sporePrint team |
-| G15 | tideGlass Phase 0 (NF archaeology) | **NEW** — NEXT | eastGate / dedicated gate |
-| G16 | pseudoSpore grab pattern on web | **NEW** — after NF data | lithoSpore + sporePrint |
-| G17 | Portability — reconstitute from cold | **VALIDATING (southGate)** | southGate = external deployment proof. No WireGuard. Public depot. Own lineage. agentReagents provisioning. |
-| G18 | squirrel → biomeOS agent orchestration | **NEW** | squirrel + biomeOS neuralAPI |
-| G19 | petalTongue + Node Atomics live rendering | **NEW** | petalTongue + toadStool + coralReef |
-| G20 | esotericWebb game engine on NUCLEUS | **NEW** | esotericWebb + petalTongue + GPU trio |
-| G21 | biomeOS-cellMembrane coevolution — composition.test_swap | **COMPLETE** | biomeOS (composition authority) + cellMembrane (build authority). J19 KILLED. Gate validated. |
-| G22 | biomeOS API + neuralAPI convergence — whitePaper milestone | **IN PROGRESS** | Steps 1+2 SHIPPED (unified namespace, 244 caps, 47 deps removed). 3 steps remaining: single-process, lifecycle, restart. |
-| G23 | nestGate application-managed fractional replication | **NEW** | CAS-layer data redundancy. Make system data-redundancy-agnostic (bare metal, cloud, mesh). Schema exists in nestGate. |
+| G16 | pseudoSpore grab pattern on web | GLACIAL | After NF data + tideGlass |
+| G23 | nestGate CAS fractional replication | GLACIAL | Data redundancy schema exists |
+| G24 | Sovereign Identity Garden | CONCEPT | Gate-first (cameras/sensors), phone later |
+| G25 | bearDog StrongBox/Secure Enclave | GLACIAL | Gate-connected first, phone later |
+| G26 | sweetGrass zero-knowledge attestations | GLACIAL | Prove encrypted data properties |
+| G27 | mitoBeacon identity genetics | GLACIAL | Person-level cryptographic DNA |
+| G28 | Cross-platform sovereign identity | GLACIAL | Depends on G12 + G13 |
+| — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
+| — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
+| — | 6 springs pending validation.json | GLACIAL | Springs+gardens phase |
 
 ## 11. Campus / Physical Infrastructure
 
@@ -583,27 +626,39 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155n — **ZERO P0/P1/P2. gen4 COMPLETE. gen5 THESIS VALIDATED. PREPARING FOR SPRINGS+GARDENS PHASE.**
+**Summary**: Wave 155n PUBLICATION PHASE — **ZERO P0. ONE P2 (plaquette normalization). gen5 THESIS PROVEN. First arXiv draft READY. pseudoSpore LIVE. 116,930 tests. 38.2 GB science data. GPU QCD producing real physics.**
 
-ALL 4 NUCLEUS gates current. biomeOS v4.56 in depot. 14 AARs + 1 handoff fossilized to `wave155n_checkpoint/`.
-- westGate: ZFS raidz1 50.7 TB. Prov 7/7. AlphaFold ready.
-- strandGate: Node Atomic Landmark. 2,130 matmul/sec. Cross-atomic provenance E2E.
-- blueGate: P2 platform detection FIXED. J12 sub-builder UNBLOCKED. membrane.exe LIVE.
-- southGate: VALIDATION GATE — external deployment proof, bonding, encryption.
+**Phase shift**: From infrastructure validation to **publication and production**. sporePrint demonstration era live. First arXiv paper scaffolded. Two GPUs benchmarked (RTX 3090 + RTX 4060). P2 normalization divergence caught by cross-validation — hotSpring tracking, favoring barraCuda math.
 
-**G22 IN PROGRESS**: biomeOS v4.56 shipped steps 1+2 (unified namespace, 244 caps). 3 steps remaining.
-**G23 NEW**: nestGate CAS-layer application-managed fractional replication.
+**60 files fossilized** across 5 checkpoints (35 in wave155n_springs_entry). 9 active AARs, 4 active handoffs.
+- **biomeGate: GPU CRANKSHAFT LIVE.** 3 VFIO GPUs (RTX 5060 + Titan V + K80×2). coralReef 3,553 tests. toadStool + hotSpring built. 44-experiment revalidation matrix. Exp 231 queued.
+- westGate: **v4.56.** Data federation batch 1: 38.2 GB, 4,752 CAS, 11 datasets. Boot persistence hardened. PDB bulk rsync running.
+- strandGate: **v4.56 DEPLOYED.** GPU QCD: 38-58× speedup. **P2 ROOT-CAUSED** — GPU PRNG polyfill bias. `cpu_mom` workaround deployed. Section 3.2 UNBLOCKED.
+- blueGate: **v4.56.** G29 H2 DNS secondary LIVE. Springs phase.
+- sporeGate: **v4.56.** G29 3-way DNS COMPLETE. Topology corrections shipped. 814 tests.
+- southGate: **NUCLEUS 22/22 PASS.** RTX 4060 arXiv data produced. 27.8h uptime. guideStone 59/59 PASS.
+- ironGate: **NUCLEUS 13/13.** 21/21 sockets HEALTHY. i9-14900K, RTX 5070. esotericWebb (G20) + ProjectFOUNDATION + lithoSpore. 913 garden tests PASS.
 
-**9/11 jelly strings KILLED.** 2 remaining: J12 (sub-builder UNBLOCKED), J18 (gate coupling/portability).
-**23 glacial goals** tracked (G3+G4+G21 COMPLETE, G22 IN PROGRESS, G23 NEW).
+**11 gates ONLINE** (6 NUCLEUS, 1 Tower staged, 4 other). **8 glacial goals COMPLETE** (G3, G4, G8, G10, G17, G21, G22, G29).
+**13 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G31, **G32**, **G34**, **G35**).
+**13 GLACIAL** (future phases).
+**34 total glacial goals** tracked.
 
-**NEXT PHASE**: Clear remaining deployment issues (G22 completion, J12 wire, sporePrint publish,
-southGate validation), then transition to **springs and gardens evolution** using primals as foundation.
+**Publication phase ACTIVE.** arXiv **4/5 sections FILLED** (8⁴ production data). Section 3.4 (multi-vendor) pending.
+**Silicon deism vendor cracking ACTIVE.** biomeGate: RTX 5060 + Tesla + Titan V — 3-generation GPU test bench.
+
+**Open items:**
+- G32: coralReef diesel engine — biomeGate 3-GPU vendor solve (Blackwell + Kepler + Volta)
+- G34: Outer membrane egress masking — Flint boundary router spec ready
+- G35: Fully agentic LAN — 6/8 gates SSH'd, northGate + flockGate blocked
+- AMD RX 6950 XT benchmark — arXiv Section 3.4 multi-vendor proof (strandGate)
+- Aug 2 service interruption — ATT + DS224+ basement move
+- steamGate + reefGate enrollment post-move
 
 ---
 
-*Last used*: Wave 155n checkpoint (Jul 31, 2026)
+*Last used*: Wave 155n silicon deism + publication (Aug 2, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 155n checkpoint (14 AARs + 1 handoff → fossilRecord/wave155n_checkpoint/)
+*Latest fossilization*: Wave 155n springs-entry (58 files across 5 checkpoints)
 *Latest reopen*: Wave 155k (D10 — Jelly Strings J9–J13, extended to J14–J19 in 155n)

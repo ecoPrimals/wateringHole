@@ -18,7 +18,7 @@ Bond type to inner membrane: **covalent**.
 | eastGate | Primary dev | LAN | Full ecosystem |
 | ironGate | Server | LAN | Core primals + health/ludo |
 | southGate | Dev | LAN | Core primals + wet/neural |
-| biomeGate | Dev | LAN | Core primals + hot |
+| biomeGate | GPU crankshaft (TR 3970X, RTX 5060, 128GB) | LAN | Core primals + hot + coralReef diesel engine |
 | strandGate | ABG science | LAN | Science suite + genomics |
 | westGate | 76TB ZFS cold storage | LAN | Nest Atomic + sporePrint + fossilRecord |
 | flockGate | WAN shadow | WAN | sporePrint + full validation |

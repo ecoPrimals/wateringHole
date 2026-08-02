@@ -2,7 +2,7 @@
 
 **Purpose**: Authoritative project guidance for every primal in the ecoPrimals ecosystem  
 **Audience**: Any primal, at any point in its evolution — and four external audiences (PIs, students, builders, compliance)  
-**Last Updated**: July 21, 2026 (Wave 150s: Standards reorganized into `foundations/`, `protocols/`, `operations/`, `compositions/`. 41 active standards, 8 fossilized. Sovereignty evolution roadmap. DNSSEC 3/3 domains.)
+**Last Updated**: Aug 1, 2026 (Wave 155n post-threshold: gen5 THESIS PROVEN ON LIVE DATA. 5 NUCLEUS gates. 7 glacial goals COMPLETE. 31 tracked. biomeOS v4.56 G22 COMPLETE. 46 depot bins. 35 docs fossilized.)
 
 ---
 
@@ -55,7 +55,7 @@ These primals form the NUCLEUS deployment architecture. They are the bedrock of 
 | **BarraCuda** | Pure Math | 806 WGSL f64 shaders (the mathematics), naga-IR optimisation (FMA fusion, DCE), precision strategy (f64/DF64/f32). Writes the math; coralReef compiles it; toadStool runs it. Budded from ToadStool (S93). v0.3.5, 3,400+ tests | Production (A+) |
 | **coralReef** | Shader Compilation | Sovereign WGSL→native shader compiler. naga parser + lowering passes (f64, FMA fusion, dead expression elimination). JSON-RPC IPC via XDG discovery. AMD E2E proven, NVIDIA SM70-SM89. coral-gpu unified compute abstraction. VFIO dispatch with PFIFO channel + V2 MMU + USERD_TARGET fix. **coral-glowplug** production-grade boot-persistent PCIe device lifecycle broker (systemd daemon, personality hot-swap, health monitor, auto-D0 recovery, VFIO-first boot, graceful shutdown, DRM render node fencing, IOMMU group handling). **FECS firmware direct execution proven** (LS bypass on clean falcon). SEC2 EMEM breakthrough (Exp 066-069). D3hot→D0 sovereign VRAM recovery. Sovereign power management designed (5-state model). Reproducibility checklist for adding new GPUs | Production (Phase 10, Iter 52) |
 | **Squirrel** | AI Coordination | Sovereign AI model context protocol, multi-MCP coordination, vendor-agnostic inference | Production (A++) |
-| **biomeOS** | Orchestration | Composition primal: Neural API (320+ translations, 27 domains), 5 coordination patterns (Sequential, Parallel, ConditionalDag, Pipeline streaming, Continuous 60Hz), capability routing, NUCLEUS composition, PathwayLearner optimization, NDJSON streaming, bonding model, Dark Forest coordination, provenance trio wiring, `signal.dispatch` composition collapse, `primal.announce` atomic self-registration, `composition.status` pipelines, enrichment module, `NucleusMode::Full` (13 primals), 16 braid signal graphs, `spore.instantiate`, stability tiers (114 annotations), adaptive routing weights (redb-persistent), weight health introspection, composition intelligence, capability utilization tracking, guideStone startup contract (`--bind-mode`), HEALTH-01 compliant, Duration constants centralized | Production (v4.23, Security A++ LEGENDARY) |
+| **biomeOS** | Orchestration | Composition primal: v4.56 G22 COMPLETE — single-process dual-protocol (riboCipher + JSON-RPC), 244 capabilities, 27 signal graphs, 5 coordination patterns, capability routing, NUCLEUS composition, PathwayLearner, bonding model, Dark Forest, provenance trio wiring, `signal.dispatch`, `primal.announce`, `composition.test_swap`, stability tiers, adaptive routing weights, composition intelligence, guideStone contract | Production (v4.56, Security A++ LEGENDARY) |
 
 ### Post-NUCLEUS Primals
 
@@ -418,13 +418,19 @@ Evolve with products — routing, health, tick models.
 - `graphs/` — Declarative deploy graph TOMLs
 - `heads/` — Auto-published gate status files
 
+### Publications
+- `publications/` — Auditable data transfers for papers and pseudoSpore
+- `publications/LATTICE_QCD_CONSUMER_GPU_DATA.md` — SU(2) HMC results (arXiv hep-lat)
+
 ### Handoffs
 - `handoffs/ECOSYSTEM_BLURB.md` — Current wave blurb (dissemination artifact)
-- `handoffs/ABG_JUPYTERHUB_ACCESS_GUIDE.md` — Collaborator access guide
+- `handoffs/SPOREPRINT_BLURB.md` — sporePrint demonstration era blurb
+- `handoffs/TEAM_STARTUP_BLURB_TEMPLATE.md` — Gate/code team bootstrapping
 
 ### Fossil Record
-- `fossilRecord/` — All archived content: 4,100+ documents across Waves 34–150s
-- `fossilRecord/wave150s_standards/` — 8 fossilized standards (superseded or dimension-complete)
+- `fossilRecord/` — All archived content across Waves 34–155n
+- 24 checkpoint directories spanning gen1→gen5 threshold crossing
+- 35+ files fossilized in Wave 155n alone across 3 checkpoints
 
 ---
 

@@ -8,10 +8,15 @@
 
 ## TL;DR
 
-sporePrint has scaffolded an arXiv paper draft and pseudoSpore site page for the
-SU(2) lattice QCD results on consumer GPU. **The structure, benchmarks, and
-framing are done.** The hotSpring team needs to fill 5 data sections marked
-`[TODO]` in the draft. When those are filled, the paper is ready for submission.
+**ALL DATA SECTIONS COMPLETE** (Aug 2). hotSpring filled all 5 remaining sections
+with production data from strandGate (RTX 3090 + RX 6950 XT). Key results:
+- Plaquette |Δ|/σ < 1 vs CPU reference at 4⁴ and 8⁴ (Section 3.2)
+- DF64 ~9 significant digits for accumulated observables (Section 3.3)
+- AMD RX 6950 XT: 190× speedup at 8⁴, cross-GPU agreement 3.1e-9 (Section 3.4)
+- Autocorrelation τ_int = 1.63 (4⁴), 3.37 (8⁴) (Section 3.5)
+- Three-path validation methodology isolating PRNG from MD (Section 4.2)
+
+**Paper is COMPLETE. Zero [TODO] markers. Ready for LaTeX conversion.**
 
 This is the first ecoPrimals publication under ORCID 0009-0004-2141-0321.
 
@@ -167,11 +172,11 @@ These rules apply to every number in the paper:
 ## Publication Path
 
 ```
-hotSpring fills [TODO] sections
+hotSpring fills [TODO] sections          ← DONE (Aug 2)
     ↓
-sporePrint reviews for hype compliance
+sporePrint reviews for hype compliance   ← DONE (Aug 2)
     ↓
-Convert markdown → LaTeX (standard REVTeX4-2 template)
+Convert markdown → LaTeX (REVTeX4-2)     ← NEXT
     ↓
 Submit to arXiv hep-lat (cross-list cs.DC)
     ↓
@@ -190,11 +195,11 @@ JOSS submission (software paper) after arXiv acceptance
 
 ## Contact
 
-sporePrint team monitors this handoff. When hotSpring data is ready,
-push to whitePaper and file AAR. sporePrint will review within 24 hours
-and prepare the LaTeX conversion.
+sporePrint team monitors this handoff. All data sections are now filled.
+Next step: sporePrint converts markdown → LaTeX (REVTeX4-2) and prepares
+the arXiv submission package.
 
 ---
 
-*First publication for ecoPrimals ORCID. The scaffold is ready.
-The engineering is proven. The physics data completes the paper.*
+*First publication for ecoPrimals ORCID. All data complete.
+Ready for LaTeX conversion and arXiv hep-lat submission.*

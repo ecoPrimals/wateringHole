@@ -11,13 +11,13 @@
 [wave]
 id = 155
 sub = "n"
-date = "2026-07-31"
-posture = "ZERO P0/P1/P2. gen4 COMPLETE. gen5 VALIDATED. biomeOS v4.56 (G22 IN PROGRESS). P2 platform detection FIXED (J12 UNBLOCKED). westGate ZFS 50.7 TB. southGate VALIDATION GATE. 14 AARs fossilized. 9/11 jelly strings killed. 23 glacial goals. Clearing deployment items → springs+gardens phase."
+date = "2026-08-01"
+posture = "WAVE 155n SILICON DEISM LIVE. ZERO P0/P1/P2. biomeGate: 3 VFIO GPUs, 44-experiment matrix, coralReef 3,553 tests. strandGate: dual CPU + NVIDIA + AMD math validation. arXiv 4/5 FILLED. 71.4 GB data. 8 glacial COMPLETE, 34 tracked. 60 files fossilized."
 publisher = "eastGate-overwatch"
 
 [gates]
-online = ["sporeGate", "eastGate", "ironGate", "golgi", "grapheneGate", "northGate", "westGate", "strandGate", "blueGate"]
+online = ["sporeGate", "eastGate", "ironGate", "golgi", "grapheneGate", "northGate", "westGate", "strandGate", "blueGate", "southGate", "biomeGate"]
 degraded = ["flockGate"]
-validation = ["southGate"]
-enrolling = ["swiftGate"]
+validation = []
+enrolling = ["swiftGate", "steamGate", "reefGate"]
 offline = []

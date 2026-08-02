@@ -1,5 +1,0 @@
-# Depot binaries — built by build-local.sh, synced to golgi via rsync.
-# Do NOT commit binaries to git.
-primals/
-checksums.toml
-provenance.toml

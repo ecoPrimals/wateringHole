@@ -1,118 +1,109 @@
-# ecoPrimals Ecosystem Blurb — Wave 155n Checkpoint (Updated)
+# ecoPrimals Ecosystem Blurb — Silicon Deism + Publication Phase
 
-**Date**: Jul 31, 2026 20:10 EDT | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **ZERO P0/P1/P2. J12 sub-builder WIRED (sporeGate dispatch) + PROVEN (blueGate local build). SSH key enrollment is the last thread. Springs+gardens gate is opening.**
-
----
-
-## WHERE WE ARE
-
-All three blurbed teams delivered. The runway to springs+gardens is nearly clear.
-
-```
-CHECKPOINT STATUS — ALL 4 MUST-CLEAR ITEMS RESOLVED:
-  ✓ Item 1: G22 — COMPLETE + VALIDATED (single-process, no socket evaporation)
-  ✓ Item 2: J12 — WIRED (sporeGate foreman dispatch) + PROVEN (blueGate local build).
-            Remaining: SSH key enrollment on blueGate, then live E2E test.
-  ✓ Item 3: sporePrint — LIVE + AUTO-PUBLISH WIRED (Forgejo hook)
-  ✓ Item 4: J18 — CODE SHIPPED (882ad09). Gate validation pending.
-```
-
-**What changed since last cascade:**
-
-| Team | Delivery | Impact |
-|------|----------|--------|
-| **biomeOS** | G22 COMPLETE (`b82f0925`): api + neural-api → dual-protocol in both modes. `neural-api` subcommand deprecated. | Springs can build against ANY biomeOS entry point. Socket evaporation on restart → resolved by single-process. |
-| **cellMembrane** | J18 gate coupling FIX (`882ad09`): `env_or()` migration, gate-name identity bridge. User-space deploy paths resolve correctly. | southGate, steamGate can bootstrap without `/etc/environment` jelly strings. |
-| **sporeGate** | sporePrint published + auto-publish hook wired (D7). GNU depot COMPLETE (46 bins). Sovereign CI cloning fixed (D5). **G22 single-process VALIDATED** (D1+D6 resolved). | 5/10 divergences resolved this wave. |
-| **westGate** | biomeOS v4.56 G22-complete deployed. Prov 7/7 pass #8. 30/30 sockets stable. 835 caps. | First gate with full G22 convergence validated. |
-| **blueGate** | Platform detection P2 CONFIRMED FIXED. biomeOS v4.56 deployed. 13/13 NUCLEUS. Target triple: `x86_64-pc-windows-gnu`. | J12 at platform layer is DONE. Remaining: IPC transport TCP fallback. |
+**Date**: Aug 2, 2026 AM | **Wave**: 155n | **From**: eastGate overwatch
+**Posture**: **P0/P1/P2: ZERO. 11 gates ONLINE (6 NUCLEUS + biomeGate crankshaft). arXiv 4/5 FILLED. biomeGate: 3 VFIO GPUs LIVE, 44-experiment matrix staged, coralReef 3,553 tests. strandGate: dual CPU + NVIDIA + AMD GPU — math validation across all. 8 glacial COMPLETE, 34 tracked.**
 
 ---
 
-## REMAINING BEFORE SPRINGS+GARDENS
+## WHAT'S ACTIVE NOW
 
-### MUST CLEAR
-
-| # | Item | Owner | Status |
-|---|------|-------|--------|
-| ~~1~~ | ~~G22 steps 3-5~~ | ~~biomeOS~~ | **COMPLETE + VALIDATED** — single-process on sporeGate + westGate. |
-| ~~2~~ | ~~J12 sub-builder~~ | ~~sporeGate + blueGate~~ | **WIRED + PROVEN.** sporeGate: foreman dispatch in sovereign CI, dry-run validated. blueGate: local build proof (skunkBat 2.6 MB, matches depot), IPC caps registered. **Remaining**: SSH key enrollment on blueGate → live E2E test. |
-| ~~3~~ | ~~sporePrint publish~~ | ~~sporeGate~~ | **CLEARED + AUTO-PUBLISH** — Forgejo hook wired. |
-| ~~4~~ | ~~J18 gate coupling~~ | ~~cellMembrane~~ | **CODE SHIPPED** (`882ad09`). Gate validation pending. |
-
-**All 4 MUST-CLEAR items are resolved at the code level.** J12 needs SSH key enrollment (manual) then live E2E validation.
-
-### SHOULD CLEAR (before fleet expansion)
-
-| # | Item | Owner | Status |
-|---|------|-------|--------|
-| 5 | southGate NUCLEUS launch + J18 validation | eastGate | ENROLLED. Validates portability + bonding + J18 fix. |
-| 6 | ironGate: esotericWebb from flockGate | eastGate | flockGate DOWN. |
-| 7 | strandGate v4.56 redeploy | strandGate | Still on v4.51. Needs G22 convergence. |
-| ~~8~~ | ~~sporePrint auto-publish hook~~ | ~~sporeGate~~ | **RESOLVED** (D7) — Forgejo post-receive hook wired. |
-| 9 | checksums.toml automation | sporeGate/cellMembrane | D3: `depot.seal` command. Manual format is error-prone. |
-| ~~10~~ | ~~Sovereign CI source tree fix~~ | ~~sporeGate~~ | **RESOLVED** (D5) — root SSH key + fresh clone on trigger. |
-
-### DIVERGENCES (10 documented by sporeGate)
-
-| ID | Issue | Resolves With |
-|----|-------|---------------|
-| ~~D1~~ | ~~Socket evaporation on biomeOS restart~~ | **VALIDATED RESOLVED** (G22 single-process on sporeGate) |
-| D2 | `/run/membrane` permission reset | **PARTIALLY RESOLVED** — group perms work. Needs biomeOS socket `0660` config. |
-| D3 | checksums.toml format drift | `depot.seal` command codification (ops debt) |
-| D4 | Candidate self-test probe fails | Lightweight version-check probe (biomeOS) |
-| ~~D5~~ | ~~Sovereign CI source tree divergence~~ | **RESOLVED** — root SSH key registered on Forgejo, fresh clone on trigger |
-| ~~D6~~ | ~~Dual-service architecture~~ | **VALIDATED RESOLVED** (G22 single-process on sporeGate) |
-| ~~D7~~ | ~~sporePrint publish not automated~~ | **RESOLVED** — Forgejo post-receive hook wired |
-| D8 | Neural API capability routing gaps | Primal capability registration (biomeOS) |
-| D9 | `nucleus_launcher` GNU build missing | Extract from biomeOS workspace (low priority) |
-| D10 | Zola warnings (4 lab pages) | Frontmatter fix (trivial) |
+| Track | Status | Gate |
+|-------|--------|------|
+| **GPU vendor cracking (G32)** | **3 VFIO GPUs LIVE.** RTX 5060 (host) + Titan V (SM70, VFIO) + K80×2 (SM37, VFIO). toadStool + hotSpring + coralReef built. 44-experiment revalidation matrix staged. Exp 231 (K80 cross-gen quench) first-ever HW run. | **biomeGate** |
+| **Math validation across all** | Dual EPYC (128 threads) + RTX 3090 (NVIDIA) + RX 6950 XT (AMD). CPU reference + GPU validation. arXiv 4/5 sections filled. 82× speedup proven. | **strandGate** |
+| **arXiv paper** | **4/5 sections FILLED.** 8⁴ SU(2) production data. Section 3.4 (AMD multi-vendor) remaining. | strandGate |
+| **Data federation (G7/G30)** | **71.4 GB on ZFS.** PDB rsync 50%. `pdb_manifest_ingest.py` shipped. | westGate |
+| **esotericWebb (G20)** | NUCLEUS 13/13 LIVE. 21/21 sockets. 472 tests. RTX 5070. | ironGate |
+| **Membrane hardening (G34/G35)** | G34 egress spec. G35 agentic LAN 6/8. | sporeGate |
 
 ---
 
-## GATE STATUS
+## TEAM ASSIGNMENTS — BY GATE
 
-| Gate | biomeOS | Status | Next |
-|------|---------|--------|------|
-| **westGate** | **v4.56 G22** | NUCLEUS. Prov 7/7 ×8. 30/30 sockets. ZFS 50.7 TB. | AlphaFold ingestion. |
-| **sporeGate** | v4.56 G22 | 11/11 HEALTHY. 46 depot bins. G22 VALIDATED. Auto-publish. Sovereign CI fixed. J12 foreman dispatch WIRED. | SSH key enrollment on blueGate → live E2E. |
-| **blueGate** | v4.56 | NUCLEUS 13/13. P2 FIXED. J12 local build PROVEN (skunkBat matches depot). 11 IPC services, 37 caps. `blueGate-builder` registered. | SSH key enrollment → receive sporeGate dispatch. |
-| **strandGate** | v4.51 | NUCLEUS 12/12. RTX 3090. Node Atomic Landmark. | v4.56 redeploy. |
-| **southGate** | — | VALIDATION GATE. HW enrolled. | NUCLEUS launch + J18 + bonding. |
-| **ironGate** | — | Online. 14TB HDD. | esotericWebb + Tower. |
-| **flockGate** | — | DOWN. | Recover or decommission. |
+### biomeGate — GPU Vendor Cracking (G32)
+
+**Hardware**: Threadripper 3970X (32c/64t), 128GB, 3 GPUs on VFIO
+**Mission**: Crack silicon deism — make the diesel engine see all GPUs the same
+
+| Phase | Experiments | What |
+|-------|-------------|------|
+| 1: Safety | 193, 200, 214 | PLX D3cold keepalive, power profiles, D-state hardening |
+| 2: Sovereign init | 197, 199, 201, 204 | Cold probe all BDFs, VBIOS interpreter |
+| 3: Warm handoff | 213, 219, 227, 230 | Titan V catalyst, tier classification |
+| 4: K80 cross-gen | **231**, 182, 183, 184 | **First-ever K80 hardware run**, FECS boot, GR init |
+| 5: Dispatch | 234, 228, 191 | Catalyst warm handoff, WGSL→SPIR-V, compute trio |
+| 6: QCD science | hotspring_unibin validate | 18 scenarios, Yukawa + Wilson, PRNG polyfill validation |
+
+**coralReef**: 3,553 tests passing. toadStool + hotSpring release binaries built.
+**Blocker**: Forgejo SSH push still pending (key registered in manifest, needs admin enrollment).
+
+### strandGate — Math Validation + arXiv
+
+**Hardware**: Dual EPYC 7452 (128 threads), RTX 3090 (NVIDIA SM86), RX 6950 XT (AMD RDNA2)
+**Mission**: Validate physics math across CPU + 2 GPU vendors. Complete arXiv.
+
+| Task | What | Status |
+|------|------|--------|
+| AMD RX 6950 XT benchmarks | Section 3.4 multi-vendor proof | **LAST arXiv BLOCKER** |
+| Cross-vendor plaquette comparison | Same HMC on CPU vs RTX 3090 vs RX 6950 XT | NEXT |
+| PRNG polyfill comparison | CPU Box-Muller vs GPU polyfills per vendor | VALIDATION |
+| hotSpring `cpu_mom` on AMD | Confirm `cpu_mom` workaround works on AMD path | VALIDATION |
+
+### westGate — Data Federation (G7/G30)
+
+| Task | Status |
+|------|--------|
+| PDB rsync completion (~120K files remaining) | RUNNING |
+| PDB provenance ingestion (220K structures → CAS) | AFTER rsync |
+| Batch 2: UniRef90 (100 GB), PDB70 (15 GB) | NEXT |
+
+### ironGate — esotericWebb + Gardens (G20)
+
+| Task | Status |
+|------|--------|
+| esotericWebb live composition (petalTongue → GPU rendering) | READY — NUCLEUS substrate live |
+| ProjectFOUNDATION thread lineage | READY (199 tests) |
+| lithoSpore pseudoSpore lifecycle | READY (242 tests) |
+
+### sporeGate — Membrane Hardening (G34/G35)
+
+| Task | Status |
+|------|--------|
+| G34: Flint egress boundary (ATT box opacity) | SPEC |
+| G35: northGate SSH enrollment | BLOCKED (physical — Windows SSH) |
+| G35: flockGate WG reboot | BLOCKED (physical) |
 
 ---
 
-## TEAM POSTURE
+## GATE FLEET (11 online)
 
-### ACTIVE (one item left)
+| Gate | Composition | Role |
+|------|-------------|------|
+| **biomeGate** | **GPU Crankshaft** | 3 VFIO GPUs. coralReef diesel engine. 44-experiment matrix. **G32 silicon deism.** |
+| **strandGate** | NUCLEUS v4.56 | Dual EPYC + RTX 3090 + RX 6950 XT. Math validation. arXiv 4/5. |
+| **westGate** | NUCLEUS v4.56 | Data federation root. 71.4 GB, 50.7 TB ZFS. |
+| **ironGate** | NUCLEUS 13/13 | i9-14900K, RTX 5070. esotericWebb (G20). 913 garden tests. |
+| **blueGate** | NUCLEUS v4.56 | Windows sub-builder. G29 H2 DNS. |
+| **sporeGate** | Sovereign CI | Build authority. G34/G35 spec. |
+| **southGate** | NUCLEUS 22/22 | Validation. G17+G8 PROVEN. RTX 4060. |
+| eastGate | NUCLEUS | Overwatch. 128GB. |
+| northGate | NUCLEUS | Windows. RTX 5090. |
+| grapheneGate | Tower (TCP) | Pixel 8a. Mobile anchor. |
+| golgi | thin-relay | VPS. Forgejo + depot + sporePrint. |
 
-| Team | Delivery This Wave | Remaining |
-|------|-------------------|-----------|
-| **sporeGate** | sporePrint LIVE + GNU depot 46 bins | J12 sub-builder wire (sole MUST-CLEAR). |
+---
 
-### SHIPPED — READY FOR SPRINGS+GARDENS
+## DORMANT — CAN SPIN UP
 
-| Team | What They Shipped | Springs+Gardens Role |
-|------|-------------------|---------------------|
-| **biomeOS** | G22 COMPLETE (v4.56, dual-protocol, 244 caps) | Foundation for ALL spring dispatch. |
-| **cellMembrane** | J18 gate coupling fix + P2 platform fix | Gate provisioning + garden CI. |
-| **squirrel** | 7,138 tests, 90.1% cov, 0 unsafe | G18: AI agent → biomeOS dispatch. |
-| **petalTongue** | 6,605 tests, modern idiom pass | G19: Rendering pipeline. |
-| **toadStool** | 9,193 tests | G19/G20: GPU compute dispatch. |
-| **barraCuda** | 4,957 tests | G19: Tensor math. |
-| **coralReef** | 3,527 tests | G20: Shader pipeline. |
-| **nestGate** | 13,095+ tests | AlphaFold ingestion (50.7 TB ready). |
-
-### STANDBY
-
-| Team | Resume When |
-|------|-------------|
-| bearDog (14,019) | Garden-specific crypto |
-| songBird (14,835) | J12 IPC wire (then standby) |
-| sweetGrass / rhizoCrypt / loamSpine | Garden provenance wiring |
+| Spring/Garden | Best Gate | Why |
+|---------------|-----------|-----|
+| **tideGlass** | westGate | Gen5 Step 3. Data in CAS. Highest priority dormant. |
+| wetSpring | strandGate | Breseq/LTEE. EPYC compute. |
+| neuralSpring | strandGate | AI/ML validation. |
+| ludoSpring | northGate/blueGate | Game engine. Windows + GPU. |
+| healthSpring | ironGate | Clinical data. |
+| airSpring | any (needs SDR) | ADS-B atmospheric. |
+| groundSpring | westGate | Geospatial + storage. |
 
 ---
 
@@ -121,48 +112,15 @@ CHECKPOINT STATUS — ALL 4 MUST-CLEAR ITEMS RESOLVED:
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| MUST-CLEAR items | **4/4 CODE RESOLVED** — J12 needs SSH key enrollment + live E2E |
-| Depot | **46 binaries** (16 musl + 15 gnu + 15 windows). BLAKE3 verified. |
-| biomeOS | **v4.56 G22 COMPLETE** — dual-protocol, 244 caps, unified namespace |
-| Gates current (v4.56) | westGate + sporeGate + blueGate. strandGate needs redeploy. |
-| Provenance 7/7 | westGate pass #8 (consecutive across v4.50→v4.56) |
-| Jelly strings | **10/11 KILLED** (J18 CODE SHIPPED). J12 WIRED (SSH key enrollment pending). |
-| Divergences | **5/10 RESOLVED** (D1, D5, D6, D7 fully; D2 partially). 5 open: D3, D4, D8 (ops/biomeOS), D9, D10 (trivial). |
-| Glacial goals | 23 tracked. G3+G4+G21+G22 COMPLETE. G23 NEW. |
+| Gates online | **11** (6 NUCLEUS + biomeGate crankshaft + 4 other) |
+| Primal tests | **116,930** + coralReef **3,553** on biomeGate |
+| Science data | **71.4 GB** on ZFS |
+| CAS objects | **4,760** |
+| Glacial goals | **34 tracked** (8 COMPLETE, 13 ACTIVE, 13 GLACIAL) |
+| Fossilized | **60 files** |
+| arXiv | **4/5 sections FILLED** |
+| Active AARs | **9** |
 
 ---
 
-## WHAT'S NEXT
-
-```
-IMMEDIATE (loose threads):
-  J12 SSH key enrollment on blueGate (2 keys provided by sporeGate)
-  J12 live E2E dispatch test (sporeGate → blueGate → depot push)
-  J18 gate validation on southGate/steamGate
-
-GATE OPS:
-  strandGate v4.56 redeploy
-  southGate NUCLEUS launch + J18 validation + bonding proof
-  ironGate esotericWebb migration
-  sporePrint auto-publish hook (D7)
-
-SPRINGS+GARDENS (NEXT PHASE):
-  G18: squirrel → biomeOS agent orchestration
-  G19: petalTongue + Node Atomics live rendering pipeline
-  G20: esotericWebb game engine on NUCLEUS (ironGate)
-  Science: tideGlass Phase 0 → NF → pseudoSpore → JOSS
-  Data: AlphaFold ~23 TB through westGate Nest Atomic CAS
-
-GLACIAL:
-  G6: bearDog public | G8: Plasmodium (southGate) | G11: steamGate
-  G12: darwinGate | G13: iosGate | G17: Portability (southGate)
-  G23: nestGate CAS-layer fractional replication
-```
-
----
-
-*Wave 155n — ZERO P0/P1/P2. ALL 4 MUST-CLEAR CODE RESOLVED. G22 VALIDATED.
-J12 sub-builder WIRED (sporeGate) + PROVEN (blueGate). sporePrint auto-publish.
-Sovereign CI fixed. 5/10 divergences resolved. 46 depot bins. Loose threads:
-SSH key enrollment on blueGate, J18 gate validation, strandGate v4.56 redeploy.
-Springs+gardens gate is opening. ~101K+ tests. 23 glacial goals (4 COMPLETE).*
+*Silicon deism is live. biomeGate runs 44 experiments across 3 GPU generations. strandGate validates math across CPU + NVIDIA + AMD. The paper is one benchmark away. The diesel engine doesn't care what card it's talking to.*
