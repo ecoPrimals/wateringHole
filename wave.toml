@@ -12,7 +12,7 @@
 id = 155
 sub = "n"
 date = "2026-08-02"
-posture = "WAVE 155n CHECKPOINT. ZERO P0/P1/P2. arXiv Rung 1 reframed — experiment queue ACTIVE. 362 GB / 38 datasets / 17 domains on mesh. tideGlass 7/7 COMPLETE. biomeGate fully agentic. Inter-gate experiment comms via 10G LAN ENABLED. 8 glacial COMPLETE, 34 tracked."
+posture = "WAVE 155n PRIMAL WORK FRONTLOADED. barraCuda YELLOW (subgroup shader unmerged, PRNG broken). Inter-gate content.get UNTESTED E2E. G18 squirrel dispatch unwired. G31 batch provenance pending. 116,930 tests 12/13 GREEN. Springs-to-NUCLEUS mesh COMPLETE. Gauge group mismatch blocks arXiv (SU(3) code, SU(2) paper). 48 goals. 362 GB / 38 datasets / 17 domains."
 publisher = "eastGate-overwatch"
 
 [gates]

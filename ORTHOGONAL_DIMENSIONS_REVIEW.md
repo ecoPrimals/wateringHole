@@ -43,6 +43,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **golgi auto-publish fix** — THREE compounding bugs fixed: (1) worktree ownership mismatch (`git:git` vs `root:root`), (2) missing `--force` flag on `zola build`, (3) SSH config pointing at wrong golgi IP. sporePrint now deploys correctly to both inner and outer membrane.
 - [x] **ironGate ONLINE** — Dev loop validated. Tower Atomic deployed (bearDog 10.6 MB + songBird 16.7 MB + skunkBat 2.6 MB). Forgejo SSH + HTTPS + depot all verified. 42 repos synced. Mesh: golgi 38ms, sporeGate 77ms, eastGate 78ms. **Ready for esotericWebb (G20).**
 - [x] **P2 RESOLVED: GPU PRNG polyfill bias** — Root cause: WGSL transcendental polyfills (`log_f64`, `sqrt_f64`, `cos_f64`) in Box-Muller momentum shader produced wrong variance. Three-path comparison proves GPU MD pipeline is correct (bit-exact 4e-17). `cpu_mom` workaround deployed — CPU generates momenta, GPU does all MD at full speed. Section 3.2 UNBLOCKED. Finding strengthens the paper (validation methodology).
+- [x] **SPRINGS-TO-NUCLEUS MESH (Aug 2)** — All 10 springs/gardens assigned to gates by hardware specialization. Cell graphs v2.0.0 (content.get + provenance trio + gate metadata). tideGlass Cargo workspace LIVE. biomeOS deploy graphs v2.0.0. Inter-gate CAS data access config created. ecosystem_manifest v3.3.0 with spring_mesh assignments.
 - [ ] **PLANNED SERVICE INTERRUPTION (Aug 2)** — ATT gateway + DS224+ moving to basement. steamGate + reefGate enrollment queued post-move.
 
 ## 2. Ecological (Primal Health)
@@ -61,8 +62,9 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] toadStool: **9,193+** tests, **S349**: JSON-RPC health endpoint, dead deps purged, stubs fail-closed, hardcoding consolidated (**Wave 155m**)
 - [x] biomeOS: **8,570** tests, **v4.56**: G22 convergence steps 1+2 (unified namespace, 244 caps, 47 deps removed), dual-protocol health ping, socket ownership guard, `composition.test_swap`. (**Wave 155n**)
 - [x] petalTongue: **6,605** tests, modern idiom evolution pass, debris audit (**Wave 155n**)
-- [x] barraCuda: **4,957** tests, RTX 3090 profiled
-- [x] coralReef: **3,527** tests, 463 `.expect()` purged, PTX modernized
+- [x] barraCuda: **4,959** tests, RTX 3090 profiled
+- [ ] **barraCuda YELLOW**: subgroup reduction shader fix (`sum_reduce_subgroup_f64.wgsl` entry point mismatch) verified on biomeGate but **NOT MERGED upstream**. GPU scalar readbacks return 0.0 on SM100+ devices. GPU PRNG path broken (duplicate-definition bug, 9.5% KE deficit from polyfill). `cpu_mom` workaround deployed.
+- [x] coralReef: **3,553** tests on biomeGate revalidation, 463 `.expect()` purged, PTX modernized
 - [x] cellMembrane: **1,281+** tests, **P2 platform detection FIXED** (`d7026d7`), `TargetArch` deprecated → `Platform::detect()`, `validate_with_deps()`, J19+J16+J13 killed, registry API hardened. (**Wave 155n**)
 - [x] rhizoCrypt: 1,900 tests, BTSP→DAG bridge, cross-gate provenance
 - [x] loamSpine: **1,739** tests, registry drift fixed, `--bind` alias
@@ -74,6 +76,9 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] Tower debt: 36 → **1** (grapheneGate HSM only)
 - [x] songBird crypto delegation to bearDog: 6/6 seams DONE
 - [x] Compositions fixed: `compute` and `nest` include Tower Atomic base primals
+- [ ] **Inter-gate content.get E2E UNTESTED**: cell graphs say "WIRED" (v2.0.0), `intergate_data_access.toml` exists, but no live roundtrip validated. Need: mesh connectivity, 1 GB roundtrip >800 MB/s, provenance chain intact across gate boundary. Blocks all data-remote springs.
+- [ ] **G31 batch provenance pipeline**: sweetGrass/loamSpine/rhizoCrypt each have batch RPC individually. Need coordinated cross-primal batch ops for 10× faster bulk ingestion. Current ~30 ms/object bottleneck at scale.
+- [ ] **G18 squirrel dispatch**: `signal.plan`, `provider.register`, `SpringToolDiscovery` exist. Need end-to-end spring invocation through biomeOS signal graphs (not just direct primal RPC).
 - [ ] **1 known debt finding**: grapheneGate-readiness (HSM not on eastGate)
 - [ ] Chimera Phase 0: library extraction (UNBLOCKED — crypto delegation done)
 
@@ -108,8 +113,8 @@ appears. This keeps the active review focused on evolving concerns.
 | flockGate | **DOWN** | Linux | 10.13.37.6 | full | Rebooted, RustDesk locked out. esotericWebb → **ironGate** |
 | northGate | ONLINE | Windows | 10.13.37.8 | full | RTX 5090. **DAILY DRIVER — DO NOT DEPLOY.** AlphaFold data source (~1TB). |
 | grapheneGate | ONLINE | Android | 10.13.37.7 | tower | Beacon seed, mobile Tower |
-| strandGate | **NUCLEUS v4.55** | Linux | 10.13.37.10 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 12/12 HEALTHY, 1,017 methods, 13 procs. RTX 3090 p50=0.33ms. |
-| westGate | **NUCLEUS v4.56** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **G22 COMPLETE.** 835 caps. Prov 7/7. ZFS raidz1 50.7TB. **356 GB / 32 datasets. tideGlass 7/7 COMPLETE.** |
+| strandGate | **NUCLEUS v4.56** | Linux | 10.13.37.10 | **NUCLEUS (13)** | **P1 GATE VALIDATED.** 12/12 HEALTHY, 1,017 methods, 13 procs. RTX 3090 p50=0.33ms. |
+| westGate | **NUCLEUS v4.56** | Linux | 10.13.37.11 | **NUCLEUS (13)** | **G22 COMPLETE.** 835 caps. Prov 7/7. ZFS raidz1 50.7TB. **362 GB / 38 datasets. tideGlass 7/7 COMPLETE.** |
 | blueGate | **NUCLEUS v4.56** | Windows | 10.13.37.12 | **NUCLEUS (13)** | biomeOS v4.56 deployed. Prov 7/7. membrane.exe LIVE. **P2 FIXED.** J12 LIVE E2E. |
 | biomeGate | **GPU CRANKSHAFT + FULLY AGENTIC** | Linux | 10.13.37.3 | compute | Threadripper 3970X, 128GB. 3 VFIO GPUs. coralReef 3,553 tests. 44-experiment matrix. **WG mesh LIVE, 8/10 peers, Forgejo SSH working.** G32 silicon deism. |
 | swiftGate | HW READY | Windows | enrolling | tower (3) | Second Windows proof (after blueGate) |
@@ -283,6 +288,7 @@ NUCLEUS = Tower Atomic + Nest Atomic + Node Atomic + biomeOS orchestration
 - [x] **biomeOS capability routing E2E**: `content.put` → nestGate, `storage.put` → nestGate, signal graph dispatch routing works
 - [x] **westGate COORDINATED mode**: 704 capabilities, 390 translations, 70 signal graphs loaded
 - [x] **blueGate Nest 10/10 on Windows** — first multi-composition non-Linux deployment
+- [x] **Springs-to-NUCLEUS mesh** — 10 springs/gardens assigned to 5 gates. Cell graphs v2.0.0 with content.get/content.put. biomeOS deploy graphs v2.0.0. tideGlass Cargo workspace created. Inter-gate CAS data access documented.
 
 ### Path to NUCLEUS — ALL CODE SHIPPED
 
@@ -478,7 +484,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | ID | Goal | Status | Next Step |
 |----|------|--------|-----------|
 | G7 | Science data ingestion | **362 GB on ZFS** — 38 datasets, 17 domains, ~260K files. tideGlass 7/7 COMPLETE. COSMIC v104 + BRENDA + CHARMM36 + PTB-XL acquired. | Inter-gate experiment comms ENABLED. AlphaFold 23TB eventual. |
-| G9 | arXiv + JOSS publication | **Rung 1 REFRAMED.** "Toward Vendor-Agnostic Lattice QCD." Experiment queue ACTIVE (β-scan, HMC diagnostics, increased stats). | hotSpring completes queue → sporePrint submits. |
+| G9 | arXiv + JOSS publication | **GAUGE GROUP MISMATCH BLOCKER.** Code is SU(3), paper says SU(2). ⟨P⟩≈0.15 correct for SU(3) at β=2.3. Paper must be relabeled. 6-rung ladder collapses (rung 1 IS SU(3) pure gauge). Experiment queue continues. | Relabel paper SU(2)→SU(3). Reframe as SU(3) pure gauge result. β-scan + HMC diagnostics remain. |
 | G11 | Any chip + drive = mesh gate | ACTIVE | biomeGate + ironGate proved. steamGate NEXT. |
 | G14 | sporePrint live science refresh | ACTIVE | pseudoSpore LIVE. Auto-publish FIXED. |
 | G15 | tideGlass Phase 0 (NF archaeology) | **UNBLOCKED** | ChEMBL+PDB in CAS. Spin up tideGlass on westGate. |
@@ -490,8 +496,15 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G32 | Silicon deism vendor cracking | **NEW — biomeGate** | 3-GPU bench (RTX 5060 + Tesla + Titan V). coralReef diesel engine. hotSpring cross-vendor validation. |
 | G34 | Outer membrane egress masking | **SPEC** | Flint as boundary router. Single opaque tunnel to golgi. ATT box sees nothing. |
 | G35 | Fully agentic LAN | **7/8 DONE** (biomeGate joined mesh). | northGate + flockGate blocked (physical access). `membrane remote.enroll` proposed. |
+| G36 | tideGlass Phase 1 — GPS reproduction | **ACTIVE** (G15 done) | RGES r=0.52, RCL SNR >1.5×, GPS4Drug R² within 5%. Cargo workspace LIVE. |
+| G37 | NF Reversal Screen | **ACTIVE** | RGES vs LINCS, ZINC compound screening, MEK inhibitors (selumetinib) in top-100. Depends G36. |
+| G38 | NF PseudoSpore artifact | **ACTIVE** | Self-verifying USB: data + code + provenance. `./validate` runs 7 tideGlass modules. |
+| G39 | CTF NDU grant ($125K) | **ACTIVE** | Preliminary data package for Children's Tumor Foundation NDU. |
+| G43 | steamGate — immutable OS handheld | **ACTIVE** | Steam Deck OLED. User-space musl deploy on read-only SteamOS. G17 pattern. |
+| G44 | reefGate — paired intelligence/storage | **ACTIVE** | DDR3 NUC + Synology DS224+ NFS. G23 fractional replication target. |
+| G45 | Lattice QCD Rungs 2–6 | **ACTIVE** (Rung 2 next) | SU(3) → quenched → dynamical → (2+1)-flavor → finite-T. Beyond G9 Rung 1. |
 
-**GLACIAL (13 goals — future phases):**
+**GLACIAL (20 goals — future phases):**
 
 | ID | Goal | Status | Dependency |
 |----|------|--------|------------|
@@ -505,9 +518,18 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G26 | sweetGrass zero-knowledge attestations | GLACIAL | Prove encrypted data properties |
 | G27 | mitoBeacon identity genetics | GLACIAL | Person-level cryptographic DNA |
 | G28 | Cross-platform sovereign identity | GLACIAL | Depends on G12 + G13 |
+| G40 | cloudGate — WAN enrollment validation | GLACIAL | Oracle ARM VM, NAT traversal, trust-boundary crossing |
+| G41 | piGate — resource-constrained ARM proof | GLACIAL | RPi 5, ~$125 edge gate |
+| G42 | riscGate — RISC-V third ISA | GLACIAL | StarFive VisionFive 2, open-ISA |
+| G46 | Show HN public launch | GLACIAL | 28-item rubric. Blocked until NF pseudoSpore + sporePrint |
+| G47 | projectFOUNDATION auto-feed | CONCEPT | Provenance-driven knowledge layer, thread lineage |
+| G48 | projectNUCLEUS product packaging | CONCEPT | NUCLEUS product + pseudoSpore delivery pipeline |
+| G49 | lab.primals.eco periplasmic JupyterHub | ACTIVE | Reviewer-access interactive compute on ironGate |
+| G50 | initioChem pseudoSpore (ABG track) | ACTIVE | Whole-cell expression artifact |
+| G51 | Inkfish/Valve marine collaboration | CONCEPT | Marine genomics, coral holobiont science |
+| G52 | blueFish PFAS QC (Jones track) | GLACIAL | EPA 1633A open PFAS QC |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
-| — | 6 springs pending validation.json | GLACIAL | Springs+gardens phase |
 
 ## 11. Campus / Physical Infrastructure
 
@@ -626,40 +648,42 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155n RUNG 1 VALIDATION + DATA FEDERATION — **ZERO P0/P1/P2. arXiv reframed to "Toward Vendor-Agnostic Lattice QCD" (Rung 1 of 6). Experiment queue ACTIVE. 356 GB / 32 datasets / 14 domains. tideGlass 7/7 COMPLETE. biomeGate fully agentic. 116,930 tests.**
+**Summary**: Wave 155n SPRINGS-TO-NUCLEUS MESH — **ZERO P0/P1/P2. ALL 10 springs/gardens assigned to gates. Cell graphs v2.0.0. tideGlass Cargo workspace LIVE. Inter-gate CAS data access WIRED. 362 GB / 38 datasets / 17 domains. 20 ACTIVE glacial goals (7 new from subGen). ecosystem_manifest v3.3.0. 116,930 tests.**
 
-**Phase shift**: From "AMD benchmarks as last blocker" to **"experiment queue as critical path."** AI review correctly reframed SU(2) result. sporePrint demonstration era live. Data Braids doubled (172 GB → 356 GB). biomeGate joined mesh (7/8 agentic).
+**Phase shift**: From "primordial spring isolation" to **"NUCLEUS-orchestrated distributed science."** Springs run inside NUCLEUS compositions on assigned gates, accessing 362 GB of braided data via content.get over 10G LAN. Hardware specialization drives assignment.
 
 **60 files fossilized** across 5 checkpoints. 12 active AARs, 5 active handoffs.
+- **Springs-to-NUCLEUS mesh**: 10 springs/gardens assigned to 5 gates. Cell graphs v2.0.0. Deploy graphs v2.0.0. tideGlass Cargo workspace. Inter-gate CAS access wired.
 - **biomeGate: FULLY AGENTIC.** WG mesh LIVE (8/10 peers). 3 VFIO GPUs. coralReef 3,553 tests. 44-experiment matrix.
-- westGate: **356 GB / 32 datasets.** tideGlass 7/7 COMPLETE. NCBI + Synapse API keys live. CAS 5,500+.
-- strandGate: **Rung 1 experiment queue ACTIVE.** β-scan, HMC diagnostics, increased stats. Dual EPYC + RTX 3090 + RX 6950 XT.
-- ironGate: **Session 3 complete.** Tier 2 deep debt cleared. Pure Rust evolution.
+- westGate: **362 GB / 38 datasets / 17 domains.** tideGlass 7/7 + Cargo workspace. 4 springs assigned (tideGlass, wetSpring, groundSpring, airSpring).
+- strandGate: **Rung 1 experiment queue ACTIVE.** 3 springs assigned (hotSpring, neuralSpring, wetSpring dispatch). Dual EPYC + RTX 3090 + RX 6950 XT.
+- ironGate: 3 springs/gardens assigned (healthSpring, lithoSpore, esotericWebb). RTX 5070.
 - sporePrint: **Data Braids v2.** 16 site pages. LaTeX updated with Rung 1 reframing.
-- blueGate: **v4.56.** G29 H2 DNS secondary LIVE.
+- blueGate: **v4.56.** ludoSpring assigned. G29 H2 DNS secondary LIVE.
 - sporeGate: **v4.56.** G29 3-way DNS COMPLETE.
 - southGate: **NUCLEUS 22/22 PASS.** Validation gate.
 
 **11 gates ONLINE** (6 NUCLEUS, 1 crankshaft + agentic, 4 other). **8 glacial goals COMPLETE** (G3, G4, G8, G10, G17, G21, G22, G29).
-**13 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G31, **G32**, **G34**, **G35**).
-**13 GLACIAL** (future phases).
-**34 total glacial goals** tracked.
+**20 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G31, G32, G34, G35, **G36**, **G37**, **G38**, **G39**, **G43**, **G44**, **G45**).
+**20 GLACIAL/CONCEPT** (future phases).
+**48 total glacial goals** tracked.
 
-**Rung 1 experiment queue ACTIVE.** 6-rung lattice QCD ladder defined. SU(2) → SU(3) → quenched → dynamical → (2+1) → hot QCD.
-**Silicon deism vendor cracking ACTIVE.** biomeGate: 3-GPU VFIO bench. strandGate: CPU + NVIDIA + AMD validation.
-**Data federation: 362 GB.** tideGlass 7/7 COMPLETE. 38 braided datasets across 17 domains. Inter-gate experiment comms ENABLED via 10G LAN.
+**subGen integration complete.** 14 new goals (G36–G52) from whitePaper/subGen/ scanned and tracked. Gen5 science chain (G36–G39), silicon deism gates (G40–G44), publication ladder (G45–G48), collaborator tracks (G49–G52).
+
+**GAUGE GROUP MISMATCH BLOCKER (G9):** Code audit reveals hotSpring engine is **SU(3)** throughout — `Su3Matrix` (3×3), `Re Tr / 3`, `β/3` force. Paper says SU(2). ⟨P⟩≈0.15 at β=2.3 IS the correct SU(3) value. The ×4 gap vs published SU(2) ~0.60 is gauge group physics, not a measurement bug. Cold lattice gives P=1.0 (normalization confirmed correct). 6-rung ladder collapses: "Rung 1 SU(2)" was actually SU(3) pure gauge all along. This is stronger science but paper, site pages, and audit trail must be relabeled.
 
 **Open items:**
-- Rung 1 experiment queue (β-scan, HMC diagnostics, increased statistics) — blocks arXiv submission
+- **BLOCKER: Relabel paper SU(2) → SU(3)** — title, abstract, section 2.1, shader references, 6-rung table, sporePrint site pages, audit trail
+- Experiment queue continues (β-scan against published SU(3) data, HMC diagnostics, increased stats)
+- tideGlass Phase 1 (G36) — RGES pipeline. Cargo workspace ready, 13 datasets local
 - G32: coralReef diesel engine — biomeGate 3-GPU vendor solve
 - G34: Outer membrane egress masking — Flint boundary router spec ready
 - G35: Fully agentic LAN — 7/8 gates SSH'd, flockGate blocked
-- Bundle data population (westGate → pseudoSpore bundles)
-- tideGlass spin-up — 7/7 data COMPLETE, highest priority dormant
+- Spring team spin-up — 5 springs need teams (tideGlass, wetSpring, neuralSpring, healthSpring, lithoSpore)
 
 ---
 
-*Last used*: Wave 155n silicon deism + publication (Aug 2, 2026)
+*Last used*: Wave 155n gauge group mismatch discovery + subGen integration (Aug 2, 2026)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155n springs-entry (58 files across 5 checkpoints)

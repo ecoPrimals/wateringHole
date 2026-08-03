@@ -18,8 +18,8 @@
 #   default_branch — Git branch name (default: "main")
 
 [meta]
-version = "3.2.0"
-generated = "2026-08-01"
+version = "3.3.0"
+generated = "2026-08-02"
 # DEPRECATED: wave ID now lives in wave.toml (overwatch sole writer).
 # This field is retained at last-known value for backward compat with older binaries.
 wave = 155
@@ -84,8 +84,8 @@ remote_access = "golgiBody"           # RustDesk hbbs+hbbr — sovereign remote 
 SHADER_F64 = true
 precision_tiers = ["f32", "f64"]
 shader_backends = ["wgsl", "spirv", "glsl"]
-gpu_gates = ["ironGate"]
-notes = "f64 precision via SHADER_F64 feature on RTX 5070 Ti (ironGate). coralReef compiles shaders. barraCuda dispatches compute. Precision routing: barraCuda.precision.route selects f32/f64 path based on device capability."
+gpu_gates = ["ironGate", "strandGate", "biomeGate"]
+notes = "f64 precision via SHADER_F64 on RTX 5070 Ti (ironGate), RTX 3090 (strandGate), 3 VFIO GPUs (biomeGate). coralReef compiles shaders. barraCuda dispatches compute. Precision routing: barraCuda.precision.route selects f32/f64 path based on device capability."
 
 # ═══════════════════════════════════════════════════════════════════
 # Build Metadata — Sovereign CI Pipeline (plasmid.harvest)
@@ -702,6 +702,32 @@ composition_url = "https://tideglass.primals.eco/"
 notes = "Phase 0 — GPS core. Science data via drawbridge bonds. Future: sovereign pallet hardware."
 
 # ═══════════════════════════════════════════════════════════════════
+# Spring-to-Gate Assignments — NUCLEUS Mesh Composition
+# ═══════════════════════════════════════════════════════════════════
+# Springs run as NUCLEUS compositions on assigned gates. Data flows
+# from westGate CAS via songBird mesh. Compute dispatches across
+# gate boundaries via toadStool.
+
+[spring_mesh]
+version = "1.0.0"
+updated = "2026-08-02"
+data_root = "westGate"
+backbone = "10G_LAN"
+config = "configs/intergate_data_access.toml"
+
+[spring_mesh.assignments]
+hotSpring = { gate = "strandGate", data_gate = "westGate", tier = 1, access = "batch_read" }
+tideGlass = { gate = "westGate", data_gate = "westGate", tier = 1, access = "local" }
+wetSpring = { gate = "westGate", compute_gate = "strandGate", data_gate = "westGate", tier = 1, access = "local" }
+healthSpring = { gate = "ironGate", data_gate = "westGate", tier = 2, access = "batch_read" }
+neuralSpring = { gate = "strandGate", data_gate = "westGate", tier = 2, access = "streaming" }
+lithoSpore = { gate = "ironGate", data_gate = "westGate", tier = 2, access = "batch_read" }
+groundSpring = { gate = "westGate", data_gate = "westGate", tier = 3, access = "local" }
+airSpring = { gate = "westGate", data_gate = "westGate", tier = 3, access = "local" }
+ludoSpring = { gate = "blueGate", fallback = "northGate", tier = 3, access = "none" }
+esotericWebb = { gate = "ironGate", fallback = "blueGate", tier = 2, access = "none" }
+
+# ═══════════════════════════════════════════════════════════════════
 # Composition Profiles — Fractal Deployment Patterns
 # ═══════════════════════════════════════════════════════════════════
 #
@@ -826,8 +852,10 @@ transport = "lan"
 zone = "backbone"
 wg_ip = "10.13.37.7"
 lan_ip = "192.168.4.237"
-roles = ["node_atomic", "compute", "gpu"]
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). 13/13 NUCLEUS + 4x HDD enclave experiment (14TB + 1TB + 1TB + ~2TB — each disk an encrypted enclave for segregated compute/data). JupyterHub 5.4.5 LIVE on :8000. songBird drawbridge target. House 2 mesh anchor."
+roles = ["node_atomic", "compute", "gpu", "spring_host"]
+spring_assignments = ["healthSpring", "lithoSpore"]
+data_gate = "westGate"
+notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). 13/13 NUCLEUS + 4x HDD enclave experiment (14TB + 1TB + 1TB + ~2TB — each disk an encrypted enclave for segregated compute/data). JupyterHub 5.4.5 LIVE on :8000. songBird drawbridge target. House 2 mesh anchor. Spring assignments: healthSpring (clinical data), lithoSpore (pseudoSpore lifecycle), esotericWebb (CRPG garden)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
@@ -936,6 +964,7 @@ repos = [
 # strandGate — bioinformatics compute, Tower Atomic workhouse (house2)
 # Dual EPYC 7452 (128 threads), 256GB, RTX 3090. RJ45→Omada + RJ45→Flint2.
 # Intra-inner membrane: Tower Atomic only, unattended compute workloads.
+# Spring assignments: hotSpring (QCD), neuralSpring (ML), wetSpring (compute dispatch)
 [gates.strandGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -948,16 +977,19 @@ mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 wg_ip = "10.13.37.10"
 lan_ip = "192.168.4.169"
-roles = ["compute", "tower_atomic"]
+roles = ["compute", "tower_atomic", "spring_host"]
 nucleus_status = "Tower+Compute LIVE"
-notes = "Dual EPYC 7452 128-thread + RTX 3090. Tower Atomic + Compute Trio LIVE (Wave 155h). barraCuda GPU verified (SHADER_F64), coralReef 18/18 dispatch. P0: musl depot can't dlopen glibc Vulkan — source build works, glibc depot target needed. DNS fixed post-155n (systemd-resolved bypassed)."
+spring_assignments = ["hotSpring", "neuralSpring"]
+compute_dispatch_for = ["wetSpring"]
+data_gate = "westGate"
+notes = "Dual EPYC 7452 128-thread + RTX 3090 + RX 6950 XT. Tower Atomic + Compute Trio LIVE (Wave 155h). barraCuda GPU verified (SHADER_F64), coralReef 18/18 dispatch. P0: musl depot can't dlopen glibc Vulkan — source build works, glibc depot target needed. DNS fixed post-155n (systemd-resolved bypassed). Spring assignments: hotSpring (QCD experiment queue), neuralSpring (ML inference), wetSpring (compute dispatch from westGate)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
     "barraCuda", "coralReef", "rhizoCrypt", "loamSpine", "sweetGrass",
     "petalTongue", "skunkBat",
     "cellMembrane", "projectNUCLEUS", "lithoSpore",
-    "hotSpring", "wetSpring",
+    "hotSpring", "wetSpring", "neuralSpring",
     "helixVision", "initioChem", "blueFish", "esotericWebb",
 ]
 
@@ -982,10 +1014,11 @@ repos = [
     "bearDog", "songBird", "skunkBat",
 ]
 
-# westGate — Nest Atomic testbed, tiered storage (house2)
-# AMD Ryzen 7 5700X / 64GB DDR4 / 2TB NVMe / 5x14TB HDD raw.
-# Tower Atomic LIVE (Wave 155f). Storage tiering: TIER 0-2 active, TIER 4 needs ZFS pool.
+# westGate — Nest Atomic + Data Federation Root (house2)
+# AMD Ryzen 7 5700X / 64GB DDR4 / 2TB NVMe / 50.7 TB ZFS raidz1.
+# Tower Atomic LIVE (Wave 155f). Data federation root: 362 GB / 38 datasets / 17 domains.
 # K-Derm: periplasm (WAN-facing storage).
+# Spring assignments: tideGlass (primary), wetSpring (primary), groundSpring, airSpring
 [gates.westGate]
 target = "x86_64-unknown-linux-musl"
 mobility = "fixed"
@@ -996,13 +1029,15 @@ mesh_peer = "157.230.3.183:7700"
 zone = "house2"
 wg_ip = "10.13.37.11"
 nucleus_status = "Tower LIVE (bearDog 0.9.0 + songBird 0.2.1 + skunkBat 0.2.18, systemd user units)"
-roles = ["storage", "nest", "nest_testbed", "tiered_storage"]
-notes = "AMD Ryzen 7 5700X (Zen 3, 8c/16t, 32MB L3) + 64GB DDR4 + Samsung 970 EVO Plus 2TB NVMe + 5x14TB HDD OOS14000G (raw, not yet ZFS pooled). No SATA SSD (TIER 3 absent). Tower Atomic LIVE 155f — systemd user units, UDS + federation :7700. Nest Atomic testbed with tiered storage profiling. Wired to Omada."
+roles = ["storage", "nest", "data_federation_root", "spring_host"]
+spring_assignments = ["tideGlass", "wetSpring", "groundSpring", "airSpring"]
+notes = "AMD Ryzen 7 5700X (Zen 3, 8c/16t, 32MB L3) + 96GB DDR5 + Samsung 970 EVO Plus 2TB NVMe + 50.7 TB ZFS raidz1. 362 GB / 38 datasets / 17 domains. Tower Atomic LIVE 155f — systemd user units, UDS + federation :7700. Data federation root (G30). Springs with data-local access: tideGlass (drug repurposing), wetSpring (metagenomics), groundSpring (geoscience), airSpring (agriculture)."
 repos = [
     "nestGate", "wateringHole", "plasmidBin",
     "bearDog", "songBird", "skunkBat", "biomeOS", "squirrel",
     "petalTongue", "rhizoCrypt", "loamSpine", "sweetGrass",
-    "cellMembrane",
+    "cellMembrane", "toadStool", "barraCuda",
+    "wetSpring", "groundSpring", "airSpring",
 ]
 
 # northGate — gaming/hobby gate (Windows 11 Pro), family validation LAST
