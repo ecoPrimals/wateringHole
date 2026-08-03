@@ -71,7 +71,7 @@ This tests and matures:
 - Mature petalTongue G19 live render with actual game/GIS consumers
 
 ### Phase 4: westGate science springs (no mesh needed)
-- Boot tideGlass on westGate (519 GB data local, Cargo workspace ready)
+- Boot tideGlass on westGate (519 GB data local, **UniBin COMPLETE — 9 crates, 147 tests, 92.71% coverage**)
 - Boot groundSpring + airSpring on westGate (NOAA/USGS/USDA local)
 - First science spring compositions with real data
 - ludoSpring on blueGate (pure composition, no deps)
@@ -157,9 +157,10 @@ This tests and matures:
 | **rhizoCrypt** | 1,900 | GREEN | G31 batch | zero-warn 4-target cross-compile |
 | **loamSpine** | 1,740 | GREEN | G31 batch | certificate.history RPC |
 | **sweetGrass** | 1,644 | GREEN | G31 cross-primal | batch pipeline shipped |
+| **tideGlass** | **147** | GREEN | biomeOS cell boot, CAS wiring | **Full Rust rebuild: 9 crates, UniBin, 92.71% coverage** |
 | **cellMembrane** | 1,281+ | GREEN | Portability | — |
 
-**Total**: **~123,000+ tests**. 12/13 GREEN. neuralSpring adds 1,518 (V183 deep debt). airSpring 1,157. footPrint 526. bearDog top 3 at 14,019.
+**Total**: **~123,150+ tests**. 12/13 GREEN. tideGlass adds 147 (full rebuild). neuralSpring adds 1,518 (V183 deep debt). airSpring 1,157. footPrint 526. bearDog top 3 at 14,019.
 
 ---
 
@@ -188,7 +189,7 @@ This tests and matures:
 
 | Component | Status | Next |
 |-----------|--------|------|
-| **tideGlass** (protist) | Specs shipped. Cargo workspace seeded. Phase 0 checklist ready. | Zenodo inventory + RGES Python reproduction |
+| **tideGlass** (protist) | **Full Rust rebuild COMPLETE.** 9 crates, UniBin, 11 IPC methods, 147 tests, 92.71% coverage. Phase 4 — Package. | biomeOS cell boot on westGate. nestGate CAS wiring for LINCS/ChEMBL. Chen 2017 benchmark (r >= 0.52). |
 | **westGate data** | 519 GB / 130 datasets. NF-relevant datasets identified. | Ingest NF expression profiles |
 | **footPrint** (GPS viz) | 526 tests PASS on ironGate. Cloned. Express 5 fix applied. | Caddy routing → `footprint.primals.eco`. Experiment with petalTongue scene push for GIS overlays. |
 | **petalTongue** (viz) | G19 PROVEN. `visualization.render.scene` live. WebGL compiler. | Wire footPrint → petalTongue for GPS visualization (volcano plots, heatmaps, enrichment curves). G53 maturation. |
