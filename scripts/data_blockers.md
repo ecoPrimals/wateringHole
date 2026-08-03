@@ -2,7 +2,7 @@
 
 **Gate**: westGate
 **Started**: Aug 2, 2026
-**Updated**: Aug 3, 2026 02:30 EDT
+**Updated**: Aug 3, 2026 07:25 EDT
 
 Track failures, user-intervention items, and issues to circle back to.
 
@@ -29,30 +29,30 @@ Track failures, user-intervention items, and issues to circle back to.
 
 | # | Dataset | Issue | Error | Retry Strategy | Status |
 |---|---------|-------|-------|---------------|--------|
-| 1 | GWAS Catalog associations | EBI API returns Tomcat 500 | 992 bytes HTML error | Retry later — EBI service outage | OPEN |
+| 1 | GWAS Catalog associations | EBI API returns Tomcat 500 | 992 bytes HTML error | Used FTP rsync — 700 MB full release | **RESOLVED** |
 | 2 | GEO GSE62944 (TCGA recount) | NCBI FTP returns tiny stub | 200 OK, 2.5 KB | GEO supplementary files available separately | WONTFIX |
-| 3 | NIST PFAS SRD | API endpoint wrong/moved | 154 bytes | Research correct data.nist.gov endpoint | OPEN |
+| 3 | NIST PFAS SRD | API endpoint wrong/moved | 154 bytes | Found via data.nist.gov JSON API — 1.1 MB XLSX | **RESOLVED** |
 | 4 | Open Targets | FTP path structure changed | 404 on json/ directory | Find current release parquet/json paths | RESOLVED |
-| 5 | Dryad LTEE fitness (Wiser 2013) | API returns 401/403 | Auth/redirect broken | Need Dryad API token or manual download | OPEN |
+| 5 | Dryad LTEE fitness (Wiser 2013) | API returns 401/403 | Auth/redirect broken | Dryad API v2 finds files but download endpoint returns 401 | OPEN |
 | 6 | HomoloGene | NCBI FTP 404 | Possibly discontinued | Replaced with OrthoDB v11 | RESOLVED |
 | 7 | Ensembl regulatory build | Specific file path 404 | 196 bytes | Find current release filename | RESOLVED |
 | 8 | PDB validation summary | RCSB URL changed | 323 bytes redirect | Find new reports URL | LOW |
-| 9 | SIGNOR signaling | Download requires POST/JS | Returns HTML page | Need API or browser | LOW |
-| 10 | CORUM complexes | Download page changed | 0 bytes | Find current release URL | LOW |
-| 11 | Pathway Commons | URL structure changed (v12/v13 both 404) | 693 bytes | Research new download location | LOW |
-| 12 | dbNSFP | S3 bucket "dbnsfp" no longer exists | NoSuchBucket error | Find current hosting (maybe Google Drive?) | OPEN |
+| 9 | SIGNOR signaling | Download requires POST/JS | Returns HTML page | Found REST API (getData.php) — 21 MB TSV | **RESOLVED** |
+| 10 | CORUM complexes | Download page changed | 0 bytes | Site returns 0 bytes for all download URLs | OPEN |
+| 11 | Pathway Commons | URL structure changed (v12/v13 both 404) | 693 bytes | Moved to download.baderlab.org — v14 downloaded (10 MB) | **RESOLVED** |
+| 12 | dbNSFP | S3 bucket "dbnsfp" no longer exists | NoSuchBucket error | Google Sites page returns JS blob, no direct link found | OPEN |
 | 13 | BOLD Systems API | API returns partial HTML | 10 KB mixed HTML/TSV | May need smaller taxonomic queries | LOW |
 | 14 | BioModels SBML | Download endpoint changed | 0 bytes | Research current EBI BioModels API | LOW |
 | 15 | TAIR GO annotations | Requires authentication | 118 byte redirect | Register at arabidopsis.org | LOW |
-| 16 | MalariaGEN Pf6 metadata | Site redesigned, all URLs return HTML | 42 KB HTML | Use malariagen Python package or GCS VObs | OPEN |
+| 16 | MalariaGEN Pf6 metadata | Site redesigned, all URLs return HTML | 42 KB HTML | GCS bucket also gone (NoSuchBucket) | OPEN |
 | 17 | Michigan EGLE PFAS GIS | ArcGIS API returns empty/error | 11-72 bytes | Need correct FeatureServer URL | OPEN |
-| 18 | EPA UCMR5 PFAS | URL rotates with each data release | 6.5 KB HTML | Research current year's URL | OPEN |
-| 19 | CAZy/dbCAN HMMs | URL structure changed | 18 KB HTML | Research bcb.unl.edu/dbCAN2 current paths | OPEN |
-| 20 | HMP gene catalog | NCBI HMPDACC FTP returns XML | 990 bytes | Need correct HMP2 data URL | OPEN |
-| 21 | BioGRID chemicals | Download URL returns HTML | 7 KB | Need current version number | LOW |
+| 18 | EPA UCMR5 PFAS | URL rotates with each data release | 6.5 KB HTML | Found 2023-08 URLs on EPA site — 26 MB downloaded | **RESOLVED** |
+| 19 | CAZy/dbCAN HMMs | URL structure changed | 18 KB HTML | Downloaded run_dbcan v4.1.4 (718 KB) from GitHub releases | **RESOLVED** |
+| 20 | HMP gene catalog | NCBI HMPDACC FTP returns XML | 990 bytes | HMP portal API also non-functional | OPEN |
+| 21 | BioGRID chemicals | Download URL returns HTML | 7 KB | Release archive page returns empty listings | LOW |
 | 22 | USDA PLANTS | CSV URL changed/requires AJAX | 710 bytes HTML | Use alternative botanical data source | LOW |
 | 23 | FEMA NFHL | REST endpoint returns HTML | 1.5 KB | Need current ArcGIS service URL | LOW |
-| 24 | Human Cell Atlas | API endpoint changed | 130 bytes | Research current HCA Data Explorer API | LOW |
+| 24 | Human Cell Atlas | API endpoint changed | 130 bytes | Found correct API (dcp60 catalog) — 532 projects, 25 saved | **RESOLVED** |
 
 ## TECHNICAL ISSUES
 
@@ -67,7 +67,7 @@ Track failures, user-intervention items, and issues to circle back to.
 
 | Issue | Resolution |
 |-------|------------|
-| AlphaFold version mismatch | URLs were v4, current is v6 — fixed and downloaded 10 species |
+| AlphaFold version mismatch | URLs were v4, current is v6 — all 46 proteomes downloaded |
 | ChEBI SDF filename | Was `ChEBI_complete_3star.sdf.gz`, actual is `chebi_3_stars.sdf.gz` |
 | COSMIC cell lines API | API path returns ServerError for cell lines product |
 | USGS query limit | 20K event limit — split into yearly queries (27 files) |
@@ -102,12 +102,21 @@ Track failures, user-intervention items, and issues to circle back to.
 - **Success rate**: ~60% (rest blocked by auth, Cloudflare, URL changes, rate limits)
 - **Data volume this session**: ~67 GB new data
 
+### Session 3 (Aug 3, 2026 morning — blocker resolution + AlphaFold full sync)
+
+- **Blockers resolved**: 7 (GWAS Catalog, NIST PFAS, SIGNOR, Pathway Commons, EPA UCMR5, dbCAN, HCA)
+- **New datasets**: 6 provenance-tracked
+- **AlphaFold full sync**: Started via rsync with systemd timer (restart-safe). Swiss-Prot CIF (37 GB) + PDB (27 GB) + sequences.fasta (118 GB) + metadata downloading.
+- **GWAS Catalog**: Full FTP release (700 MB) via rsync — bypassed broken API
+
 ### Running Total
 
-- **Grand total**: 515 GB, 130 datasets, 535 files
-- **ZFS usage**: 1.02% of 50.7 TB
+- **Grand total**: ~790 GB, 136 datasets, 1325+ files
+- **ZFS usage**: 1.25% of 50.0 TB
+- **AlphaFold full sync**: In progress (~195 GB remaining → will reach ~980 GB)
+- **Blockers remaining**: 5 OPEN download failures, 12 need-user items
+- **Blockers resolved this session**: 7 of 24
 
 *Circle back to NEEDS USER items when user has time for registrations.*
-*Circle back to OPEN items on next data session — most are URL research tasks.*
-*NCBI FTP: wait 10+ minutes between bulk download batches to avoid 403.*
-*SRA BioProject FASTQ downloads (Tier B) are the next major data volume opportunity (~1 TB).*
+*Remaining OPEN items: Dryad LTEE, CORUM, dbNSFP, MalariaGEN, EGLE PFAS, HMP — all require deeper API research or have moved.*
+*AlphaFold full sync runs daily at 3 AM via systemd timer — fully restart-safe.*
