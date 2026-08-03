@@ -4,7 +4,7 @@
 **Connection**: 1 Gbps fiber (residential — avoid saturation)
 **Policy**: Download in batches, off-peak preferred, never >80% sustained for >1h
 **Every byte with provenance = latent value (zero egress at 10G LAN)**
-**Updated**: Aug 3, 2026 02:20 EDT
+**Updated**: Aug 3, 2026 02:30 EDT
 
 ---
 
@@ -17,7 +17,7 @@
 | UniProt TrEMBL FASTA + DAT | 110 GB | 1 | UniProt FTP |
 | PDB mmCIF (full mirror) | 88 GB | 257,179 | RCSB rsync |
 | UniRef90 | 68 GB | 2 | UniProt FTP |
-| AlphaFold v6 (10 model species) | 28 GB | 10 | EBI FTP |
+| AlphaFold v6 (42/46 ref proteomes) | 73 GB | 42 | EBI FTP |
 | PDB70 HHsearch profiles | 27 GB | 1 | MPI |
 | InterPro protein-domain annotations | 13 GB | 1 | EBI FTP |
 | NCBI CDD (Conserved Domain DB) | 4.4 GB | 1 | NCBI FTP |
@@ -230,11 +230,13 @@ See `data_blockers.md` for full details. Key items:
 
 | Milestone | Cumulative | % of ZFS |
 |-----------|-----------|----------|
-| Current | ~515 GB | 1.02% |
-| After user registrations | ~385 GB | 0.76% |
-| After retry round | ~500 GB | 0.99% |
-| After SRA BioProject FASTQ | ~1.5 TB | 3.0% |
-| After month-scale batch | ~28 TB | 55% |
+| Current (Aug 3 02:30) | **~519 GB** (130 datasets, 535+ files) | 1.02% |
+| After AlphaFold complete (4 remaining) | ~524 GB | 1.03% |
+| After user P1 registrations | ~525 GB | 1.04% |
+| After SRA FASTQ batch (5 BioProjects) | ~740 GB | 1.46% |
+| After GEO SOFT + TCGA full expansion | ~990 GB | 1.95% |
+| After SRA curated BioProjects (2 TB) | ~3 TB | 5.9% |
+| After month-scale batch (AlphaFold full) | ~26 TB | 51% |
 
 ## Credential Vault
 
