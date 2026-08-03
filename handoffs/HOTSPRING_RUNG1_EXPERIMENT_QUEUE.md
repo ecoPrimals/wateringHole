@@ -1,23 +1,65 @@
 # Experiment Queue: Rung 1 Preprint Validation
 
-**Date**: Aug 2, 2026 | **Wave**: post-155n
+**Date**: Aug 2, 2026 (updated) | **Wave**: post-155n
 **From**: sporePrint team | **To**: hotSpring team (strandGate)
-**Context**: AI review identified validation gaps in SU(2) preprint.
-**Priority**: Complete before arXiv submission.
+**Context**: Two AI reviews identified validation gaps in SU(2) preprint.
+**Priority**: **BLOCKED** — resolve plaquette ×4 normalization FIRST.
 
 ---
 
 ## TL;DR
 
-The paper has been reframed from "lattice QCD paper" to "Rung 1 of a
-lattice QCD program: SU(2) execution and arithmetic validation." The
-existing data (plaquette at β=2.3, DF64 precision, multi-vendor, autocorrelation,
-three-path validation) is solid. The following experiments will close the
-remaining gaps identified in the AI review.
+A second AI review identified that the reported plaquette values (~0.15
+at β=2.3) are **exactly 1/4** of published SU(2) values (~0.60). This
+must be resolved before any further production runs. The diagnostic
+tests below take ~30 minutes of compute, not days.
+
+**Do NOT run long statistics campaigns until the normalization is confirmed.**
 
 ---
 
-## MUST COMPLETE (preprint blockers)
+## IMMEDIATE — RESOLVE FIRST
+
+### 0. Plaquette ×4 normalization (BLOCKER)
+
+**The problem**: 4 × 0.15024 = 0.60096. Published SU(2) at β=2.3 gives
+≈ 0.60. The GPU-CPU agreement does not resolve this because both
+implementations share the same normalization convention.
+
+**Quick diagnostics** (run these first, ~30 min total):
+
+**A. Cold-lattice check**: On a cold 4⁴ lattice (U=I), run the exact
+production measurement path. Must report P=1.0. If it reports P=0.25,
+the measurement divides by 24V instead of 6V (or applies 1/N twice).
+
+**B. Code audit**: Search for every use of β, N, 6V, 24V in:
+- Wilson action computation
+- Gauge force computation
+- Metropolis ΔH computation
+- Plaquette measurement
+
+Look for: β/2 vs β, N=2 applied twice, division by 4 dimensions,
+averaging over directions in kernel AND on host, `4V` used where
+`6V` is needed, quaternion Tr/2 conventions.
+
+**C. Numerical force derivative**: For one random link component q:
+```
+F_code = your force function
+F_num  = -(S(q+ε) - S(q-ε)) / 2ε
+```
+If F_code = F_num/4, the force has a missing factor. If equal, the
+force is correct and the bug is in measurement only.
+
+**D. Quick β-scan**: At 8⁴, run 50+50 trajectories at β = 1.0, 2.0,
+2.3, 3.0. Plot plaquette. If ×4 repairs the curve, it's measurement.
+If not, fix the action.
+
+**Report**: Is P=0.25 or P=1.0 on cold lattice? That single number
+tells us which class of bug this is.
+
+---
+
+## MUST COMPLETE (after normalization resolved)
 
 ### 1. β-scan — verify engine follows the theory
 
