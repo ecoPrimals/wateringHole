@@ -59,6 +59,9 @@ Multi-session dehydration:
 - 7 deps updated to latest patches, pedantic clippy sweep clean
 - `#[allow]`/`#[expect]` audit: all justified with reason strings
 - Zero debt markers, zero hardcoded values, zero mocks in production
+- Root docs + crate READMEs: 6 stale "37 methods" refs corrected to 39, CHANGELOG heading hierarchy fixed
+- Stability tiers updated: 31 stable, 8 evolving (was 6 — added `trigger_batch`, `pipeline.ingest`)
+- Debris audit: zero scripts, zero stale files, zero empty files, `cargo clean` 28.5 GiB reclaimed
 
 ## What Remains for G31
 
