@@ -17,7 +17,7 @@
 | UniProt TrEMBL FASTA + DAT | 110 GB | 1 | UniProt FTP |
 | PDB mmCIF (full mirror) | 88 GB | 257,179 | RCSB rsync |
 | UniRef90 | 68 GB | 2 | UniProt FTP |
-| AlphaFold v6 (42/46 ref proteomes) | 73 GB | 42 | EBI FTP |
+| AlphaFold v6 (46/46 ref proteomes, COMPLETE) | 79 GB | 46 | EBI FTP |
 | PDB70 HHsearch profiles | 27 GB | 1 | MPI |
 | InterPro protein-domain annotations | 13 GB | 1 | EBI FTP |
 | NCBI CDD (Conserved Domain DB) | 4.4 GB | 1 | NCBI FTP |
@@ -230,8 +230,8 @@ See `data_blockers.md` for full details. Key items:
 
 | Milestone | Cumulative | % of ZFS |
 |-----------|-----------|----------|
-| Current (Aug 3 02:30) | **~519 GB** (130 datasets, 535+ files) | 1.02% |
-| After AlphaFold complete (4 remaining) | ~524 GB | 1.03% |
+| Current (Aug 3 02:36) | **~525 GB** (130 datasets, 535+ files) | 1.04% |
+| ~~AlphaFold complete~~ | ~~46/46~~ | **DONE** |
 | After user P1 registrations | ~525 GB | 1.04% |
 | After SRA FASTQ batch (5 BioProjects) | ~740 GB | 1.46% |
 | After GEO SOFT + TCGA full expansion | ~990 GB | 1.95% |
