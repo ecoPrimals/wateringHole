@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — ironGate Downstream Hosting
 
 **Date**: Aug 3, 2026 5PM | **Wave**: 155q/156b | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. G19 MILESTONE: petalTongue scene push PROVEN on ironGate. esotericWebb V26 (V22→V26 in one day): 471 tests, 22/22 exp006 PASS, enrichment FIRING. 8/9 primals compose zero-config. NUCLEUS 26/27 HEALTHY. airSpring deep debt CLEAN (1,157 tests, workspace consolidated). footPrint blocked on Forgejo repo creation. ~121K+ tests, 12/13 GREEN.**
+**Posture**: **P0/P1/P2: ZERO. G19 MILESTONE: petalTongue scene push PROVEN on ironGate. esotericWebb V26 (V22→V26 in one day): 471 tests, 22/22 exp006 PASS, enrichment FIRING. 8/9 primals compose zero-config. NUCLEUS 26/27 HEALTHY. airSpring deep debt CLEAN (1,157 tests, workspace consolidated). footPrint Forgejo repo FOUND (protoKarya org — ironGate searched wrong orgs). ~121K+ tests, 12/13 GREEN.**
 
 ---
 
@@ -35,7 +35,7 @@ biomeOS (composition) → graph.execute + cell graph deploy
 petalTongue (rendering) → WebGL/WASM live render on RTX 5070
     │
 ├── esotericWebb (CRPG game garden) — V26, 471 tests, G19 scene push PROVEN
-└── footPrint (GIS protist) — Nest Atomic + drawbridge, 478 TS tests (blocked: Forgejo repo)
+└── footPrint (GIS protist) — Nest Atomic + drawbridge, 478 TS tests (protoKarya/footPrint)
 ```
 
 This tests and matures:
@@ -92,7 +92,7 @@ This tests and matures:
 | Workload | Gate | Type | Mesh? | Blocker | Status |
 |----------|------|------|-------|---------|--------|
 | **esotericWebb** | **ironGate** | Garden | **No** | biomeOS live deploy (**V26, 471 tests, G19 scene push PROVEN**) | **FIRST BOOT TARGET** |
-| **footPrint** | **ironGate** | Protist | **No** | **Forgejo repo creation** + Caddy routing (478 TS tests) | Phase 2 — BLOCKED |
+| **footPrint** | **ironGate** | Protist | **No** | Caddy routing (478 TS tests). Repo: `protoKarya/footPrint` | Phase 2 — UNBLOCKED |
 
 ### Next — Local Data, Same Gate (Phase 4)
 
@@ -179,4 +179,4 @@ This tests and matures:
 
 ---
 
-*G19 MILESTONE HIT. petalTongue scene push is firing on ironGate — esotericWebb exp006 went from 21/22 PASS (1 skip) to 22/22 PASS (0 skip) in Session 4. Game scenes are being pushed via `visualization.render.scene` through the NUCLEUS IPC layer to the RTX 5070. This is the first proven GPU render pipeline on a downstream host. esotericWebb completed a V22→V26 evolution in one day (BTSP transport, membrane discovery, cell graph support, deep debt CLEAN — 471 tests, 0 clippy, 8/9 primals zero-config). airSpring finished deep debt on westGate (workspace consolidated, pure-Rust curve fitting, 1,157 tests, 84% coverage). blueGate sub-builder divergences at 8/10 resolved. CI-DIV-06 resolved (golgi webhook pipeline live). The ecosystem is at ~121K+ tests across 12/13 GREEN primals. Upstream action items: (1) toadStool systemd ExecStart fix for 9/9 membrane composition, (2) membrane socket permissions for non-root UDS access, (3) BTSP `0xEC 0x01` transport signal documentation. footPrint still blocked on Forgejo repo creation. Critical path: biomeOS live cell boot on ironGate (infrastructure ready, code team has V24+ cell graph), then footPrint Forgejo unblock, then squirrel G18 integration with real consumers.*
+*G19 MILESTONE HIT. petalTongue scene push is firing on ironGate — esotericWebb exp006 went from 21/22 PASS (1 skip) to 22/22 PASS (0 skip) in Session 4. Game scenes are being pushed via `visualization.render.scene` through the NUCLEUS IPC layer to the RTX 5070. This is the first proven GPU render pipeline on a downstream host. esotericWebb completed a V22→V26 evolution in one day (BTSP transport, membrane discovery, cell graph support, deep debt CLEAN — 471 tests, 0 clippy, 8/9 primals zero-config). airSpring finished deep debt on westGate (workspace consolidated, pure-Rust curve fitting, 1,157 tests, 84% coverage). blueGate sub-builder divergences at 8/10 resolved. CI-DIV-06 resolved (golgi webhook pipeline live). The ecosystem is at ~121K+ tests across 12/13 GREEN primals. Upstream action items: (1) toadStool systemd ExecStart fix for 9/9 membrane composition, (2) membrane socket permissions for non-root UDS access, (3) BTSP `0xEC 0x01` transport signal documentation. footPrint Forgejo repo FOUND at `protoKarya/footPrint` (ironGate team searched `ecoPrimals` and `sporeGarden` — wrong orgs). Phase 2 UNBLOCKED. Critical path: biomeOS live cell boot on ironGate (infrastructure ready, code team has V24+ cell graph), then footPrint Forgejo unblock, then squirrel G18 integration with real consumers.*

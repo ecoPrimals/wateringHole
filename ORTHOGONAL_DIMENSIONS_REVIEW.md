@@ -673,10 +673,10 @@ completeness.
 **Fossilized**: 13 dimensions (F1–F13)
 **Summary**: Wave 155r/156b — **G19 MILESTONE PROVEN.** petalTongue scene push firing on ironGate (exp006 22/22 PASS). esotericWebb V22→V26 in one day (471 tests, 8/9 primals zero-config, deep debt CLEAN). airSpring deep debt CLEAN (1,157 tests, workspace consolidated). CI-DIV-06 resolved (webhook E2E live). Dual-science mid-term goals defined (Tracks A+B). ZERO P0/P1/P2. ~121K+ tests. 12/13 GREEN. 50 glacial goals tracked (8 COMPLETE, 22 ACTIVE, 20 GLACIAL/CONCEPT).
 
-**Phase shift**: G19 proven on ironGate. **First GPU render pipeline on a downstream host.** Phase 1 cell boot infrastructure ready (V24+ cell graph). footPrint blocked on Forgejo repo creation. Upstream: toadStool ExecStart fix (9/9 membrane), socket perms, BTSP doc.
+**Phase shift**: G19 proven on ironGate. **First GPU render pipeline on a downstream host.** Phase 1 cell boot infrastructure ready (V24+ cell graph). footPrint UNBLOCKED (protoKarya org found). Upstream: toadStool ExecStart fix (9/9 membrane), socket perms, BTSP doc.
 
 **60 files fossilized** across 5 checkpoints. 12+ active AARs, 8+ active handoffs.
-- **ironGate: PRIMARY DOWNSTREAM HOST.** NUCLEUS 26/27 HEALTHY. G19 scene push PROVEN. esotericWebb V26 (471 tests). footPrint blocked (Forgejo repo). RTX 5070 idle 42°C. i9-14900K, 94 GB DDR5, 3.4 TB NVMe.
+- **ironGate: PRIMARY DOWNSTREAM HOST.** NUCLEUS 26/27 HEALTHY. G19 scene push PROVEN. esotericWebb V26 (471 tests). footPrint UNBLOCKED (protoKarya org). RTX 5070 idle 42°C. i9-14900K, 94 GB DDR5, 3.4 TB NVMe.
 - westGate: **DATA NAS. 519 GB / 130 datasets.** tideGlass + wetSpring + groundSpring + airSpring. airSpring deep debt CLEAN (1,157 tests).
 - strandGate: **COMPUTE DEV.** hotSpring + neuralSpring. P0 fixes AAR. Experiment queue.
 - biomeGate: **GPU LAB.** 3 VFIO GPUs. G32 silicon deism.
@@ -699,7 +699,7 @@ completeness.
 - **ironGate first cell boot** (esotericWebb) — G19 PROVEN, infrastructure ready, code team has V24+ cell graph. Need biomeOS live deploy ops.
 - **toadStool ExecStart fix** — membrane unit `--foreground` rejected. Fix: `toadstool up <manifest>`. BLOCKING 9/9 composition.
 - **membrane socket permissions** — `/run/membrane/*.sock` is root:root. Needs group-writable for `biomeos` group (UDS composition without privilege escalation).
-- **footPrint Forgejo repo creation** — repo does not exist on Forgejo. BLOCKING Phase 2.
+- ~~**footPrint Forgejo repo creation**~~ — RESOLVED. Repo exists at `protoKarya/footPrint` (ironGate searched wrong orgs). Phase 2 UNBLOCKED.
 - **tideGlass Phase 0** — Zenodo inventory + RGES reproduction (Track A critical path)
 - **arXiv paper relabel** SU(2) → SU(3) + β-scan (Track B critical path)
 - squirrel → biomeOS G18 integration test (both sides wired)
