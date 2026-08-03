@@ -191,7 +191,7 @@ As we move to deploying across ironGate, biomeGate, strandGate routinely:
 | **P2** | CI-DIV-05: Silent parse failure | One bad field breaks all | 30 min | **RESOLVED** (warning log) |
 | **P2** | CI-DIV-08: Cross-target builds | GPU primals need gnu | 1h | **PARTIAL** (blueGate sub-builder proven E2E) |
 | **P2** | CI-DIV-09: NUCLEUS restart | Manual step easy to forget | 1h | **RESOLVED** (`--with-restart`) |
-| **P3** | CI-DIV-06: No webhook trigger | Manual bottleneck | 4h | **PARTIAL** (CI-EVO-01 scheduler + ingest wired) |
+| **P3** | CI-DIV-06: No webhook trigger | Manual bottleneck | 4h | **RESOLVED** (git hooks + Caddy + UDS listener) |
 | **P3** | CI-DIV-07: No gate notification | Gates run stale | 2h | OPEN |
 | **P3** | CI-DIV-10: Dry-run incomplete | False confidence | 1h | **RESOLVED** (validates --local path) |
 
@@ -211,7 +211,8 @@ As we move to deploying across ironGate, biomeGate, strandGate routinely:
 
 ---
 
-*10 divergences documented. **8/10 resolved** (Aug 3, 2026). Remaining: CI-DIV-07
-(gate notification via mesh.publish) and CI-DIV-08 (full multi-target automation —
-blueGate sub-builder proven but not yet in scheduled pipeline). CI-EVO-01 harvest
-scheduler shipped for the webhook → schedule path (CI-DIV-06 partial).*
+*10 divergences documented. **9/10 resolved** (Aug 3, 2026). Remaining: CI-DIV-07
+(gate notification via mesh.publish — P3). blueGate sub-builder E2E proven. golgi
+post-receive hooks evolved to use harvest scheduler (CI-EVO-01). Caddy → UDS webhook
+listener deployed as systemd service. CI-DIV-08 partial: blueGate windows-gnu
+sub-builder proven, multi-target in scheduled pipeline pending.*
