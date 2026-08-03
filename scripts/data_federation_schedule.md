@@ -230,8 +230,9 @@ See `data_blockers.md` for full details. Key items:
 
 | Milestone | Cumulative | % of ZFS |
 |-----------|-----------|----------|
-| Current (Aug 3 02:36) | **~525 GB** (130 datasets, 535+ files) | 1.04% |
-| ~~AlphaFold complete~~ | ~~46/46~~ | **DONE** |
+| Current (Aug 3 06:30) | **~782 GB** (130 datasets, 1315+ files) | 1.24% |
+| ~~AlphaFold 46/46~~ | 79 GB | **DONE** |
+| ~~SRA FASTQ 5 BioProjects~~ | 267 GB | **DONE** |
 | After user P1 registrations | ~525 GB | 1.04% |
 | After SRA FASTQ batch (5 BioProjects) | ~740 GB | 1.46% |
 | After GEO SOFT + TCGA full expansion | ~990 GB | 1.95% |
