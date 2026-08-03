@@ -1,164 +1,152 @@
-# ecoPrimals Ecosystem Blurb — Primal Infrastructure Frontloaded
+# ecoPrimals Ecosystem Blurb — ironGate Downstream Hosting
 
-**Date**: Aug 3, 2026 AM | **Wave**: 155n | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. 11 gates ONLINE. PRIMAL WORK FRONTLOADED — barraCuda subgroup fix unmerged, inter-gate content.get E2E untested, G31 batch provenance pending, G18 squirrel dispatch unwired. Springs-to-NUCLEUS mesh COMPLETE (cell graphs v2.0.0, deploy graphs v2.0.0). Gauge group mismatch (SU(3) code / SU(2) paper) blocks arXiv. 362 GB / 38 datasets / 17 domains.**
+**Date**: Aug 3, 2026 | **Wave**: 155p/156a | **From**: eastGate overwatch
+**Posture**: **P0/P1/P2: ZERO. ironGate designated PRIMARY DOWNSTREAM HOST (esotericWebb + footPrint). Other gates serve as primal dev environments. westGate is data NAS (519 GB / 130 datasets). ~119K+ tests, 12/13 GREEN. First live cell boot target: esotericWebb on ironGate.**
 
 ---
 
-## PRIMALS THAT NEED WORK
+## GATE ROLE TAXONOMY
 
-Infrastructure that must land before springs can run distributed science at production quality.
+| Gate | Role | What Runs | Why |
+|------|------|-----------|-----|
+| **ironGate** | **Downstream host** | esotericWebb + footPrint + squirrel + petalTongue live render | NUCLEUS 13/13 LIVE. i9-14900K, RTX 5070, 94GB. Pure compositions — no mesh needed. First live consumer environment. Matures squirrel (G18) + petalTongue (G19). |
+| **westGate** | **Data NAS** | tideGlass + wetSpring + groundSpring + airSpring | 519 GB / 130 datasets on ZFS. All data local. Science springs boot here without mesh. |
+| **strandGate** | **Compute dev** | hotSpring + neuralSpring | Dual EPYC, RTX 3090, RX 6950 XT. GPU compute + experiment queue. Data from westGate via mesh. |
+| **biomeGate** | **GPU lab** | G32 silicon deism. 3 VFIO GPUs. | Threadripper 3970X. coralReef diesel engine. Cross-vendor validation. |
+| **blueGate** | **Windows dev** | ludoSpring. Windows NUCLEUS. | G29 H2 DNS. Windows sub-builder. |
+| **sporeGate** | **CI / membrane** | Sovereign CI. G34/G35. | Build authority. Depot. DNS. |
+| **southGate** | **Validation** | NUCLEUS 22/22 reference gate. | G17+G8 PROVEN. |
+| **eastGate** | **Overwatch** | squirrel (local dev). | PrimalType elimination, signal.dispatch. |
+| **northGate** | **Windows dev** | RTX 5090. Daily driver. | AlphaFold data source. |
+| **grapheneGate** | **Mobile** | Tower (TCP). Pixel 8a. | Beacon seed. |
+| **golgi** | **VPS relay** | Forgejo + depot + sporePrint. | Thin-relay composition. |
 
-### P0 — Blocks Active Science
+---
 
-| # | Primal | What | Unblocks | Size |
-|---|--------|------|----------|------|
-| 1 | **barraCuda** | Merge subgroup reduction shader fix (`sum_reduce_subgroup_f64.wgsl` entry point `fn main()` → `fn sum_reduce_f64()`). GPU scalar readbacks return **0.0** on SM100+ devices. Verified on biomeGate but **not merged upstream**. | hotSpring QCD production on biomeGate, G32 cross-vendor, all GPU springs on newer GPUs | **S** |
-| 2 | **barraCuda** | GPU PRNG pipeline: composed shader duplicate-definition bug (all-zero output), 9.5% kinetic energy deficit from polyfill `log_f64`/`sqrt_f64`/`cos_f64`. `cpu_mom` workaround deployed. | Full GPU HMC path, throughput claims, G32 validation | **L** |
-| 3 | **barraCuda** (paper) | Gauge group relabeling — code is **SU(3)** throughout (`Su3Matrix`, `Re Tr/3`, `β/3`). Paper says SU(2). ⟨P⟩≈0.15 is correct SU(3) at β=2.3. Paper, site pages, audit trail must be corrected. | G9 arXiv submission, sporePrint credibility | **M** |
+## ironGate DOWNSTREAM STACK
 
-### P1 — Spring Mesh & Data Access
+ironGate creates a vertical slice through the entire primal-to-product stack:
 
-| # | Primal | What | Unblocks | Size |
-|---|--------|------|----------|------|
-| 4 | **nestGate + songBird + biomeOS** | Live inter-gate `content.get` E2E validation. Cell graphs say "WIRED" but no live roundtrip tested. Need: mesh connectivity check, 1 GB roundtrip >800 MB/s on 10G, provenance chain intact across gate boundary. | All data-remote springs (hotSpring, neuralSpring, wetSpring dispatch, healthSpring, lithoSpore) | **M** |
-| 5 | **nestGate** | Production-scale CAS federation. `content.get`/`content.put`/`content.replicate` implemented. Need sustained cross-gate replication validation, streaming for neuralSpring's 293 GB structural biology datasets. | neuralSpring (PDB/mmCIF/UniRef), healthSpring (ChEMBL/COSMIC) | **M** |
-| 6 | **squirrel + biomeOS** | G18 agent dispatch → springs. squirrel has `signal.plan`, `provider.register`, `SpringToolDiscovery`, neuralAPI socket discovery. Need: end-to-end spring invocation through biomeOS signal graphs, not just direct primal RPC. | G18, tideGlass agent workflows, cross-spring orchestration | **L** |
-| 7 | **sweetGrass + loamSpine + rhizoCrypt** | G31 batch provenance pipeline. Each primal has batch RPC individually. Need: coordinated cross-primal batch ops for 10× faster bulk ingestion (38 datasets, PDB 220K structures). Current: ~30 ms/object. | G31, westGate PDB ingest, tideGlass data prep, G7 federation scale | **L** |
+```
+squirrel (agent dispatch) → signal.plan + signal.dispatch
+    │
+biomeOS (composition) → graph.execute + cell graph deploy
+    │
+petalTongue (rendering) → WebGL/WASM live render on RTX 5070
+    │
+├── esotericWebb (CRPG game garden) — pure composition, 472 tests
+└── footPrint (GIS protist) — Nest Atomic + drawbridge, 478 TS tests
+```
 
-### P2 — GPU/Silicon & Deploy
+This tests and matures:
+- **squirrel**: G18 signal dispatch with real consumers, not mocks
+- **petalTongue**: G19 live render pipeline with actual GPU output on RTX 5070
+- **biomeOS**: First real multi-composition deployment on a single gate
+- **nestGate**: CAS project persistence for footPrint (local, no mesh needed)
 
-| # | Primal | What | Unblocks | Size |
-|---|--------|------|----------|------|
-| 8 | **toadStool** | VFIO ember service (fd broker for GPU passthrough). K80 GK210 firmware empty (`/lib/firmware/nvidia/gk210/`). Exp 182/184/227/234 blocked. | G32 VFIO experiments, cross-vendor QCD, multi-GPU | **M** |
-| 9 | **coralReef + toadStool** | 44-experiment revalidation matrix on biomeGate. Compute Trio IPC validation (all 3 as services, not standalone). | G32 silicon deism, G45 hardware diversity | **L** |
-| 10 | **biomeOS** | Multi-gate deploy validation. 7/7 deploy graphs written, 10/10 cell graphs at v2.0.0. Need: actual deploy execution on assigned gates with provenance trio + Node Atomic where specified. | All 10 spring/garden gate boots | **M** |
+**Why no mesh needed**: Both esotericWebb and footPrint are pure primal compositions with no external data gate dependency. All primals run on ironGate's NUCLEUS. External GIS data (USGS, FEMA, OSM) comes via songBird drawbridge (internet, not mesh).
 
-### P3 — Hardening & Portability
+---
 
-| # | Primal | What | Unblocks | Size |
-|---|--------|------|----------|------|
-| 11 | **cellMembrane** | Site-profile abstraction (decouple from `192.168.4.0/22` hardcoding). `/run/membrane` permission reset on restart (tmpfiles.d shipped but biomeOS resets to 0770). | G11 portability, gate restart, G29 DNS Phase 2 | **M** |
-| 12 | **petalTongue** | G19 live rendering consumer pipeline — wire petalTongue to consume Node Atomic GPU output (hotSpring QCD viz, esotericWebb shaders). | G19, hotSpring visualization, esotericWebb game shaders | **M** |
-| 13 | **mitoBeacon** (bearDog layer) | Validate all 13 primals pass `probe_ribocipher_acceptance()` on live NUCLEUS post-depot rebuild. | Secure inter-gate RPC, G35 agentic LAN | **S** |
+## 5-PHASE EXECUTION SEQUENCE
+
+### Phase 1: First live cell boot — esotericWebb on ironGate
+- Run biomeOS deploy executor with `esotericwebb_cell.toml` on ironGate
+- Validate all 13 primals + esotericWebb garden compose correctly
+- Wire petalTongue live render for game shaders (RTX 5070)
+- **This is the first-ever live cell composition boot in the ecosystem**
+- Blockers: biomeOS live deploy (executor shipped, needs ops)
+
+### Phase 2: footPrint on ironGate
+- Deploy footPrint frontend (TypeScript/Vite/Leaflet) via petalTongue on `:8080`
+- Wire nestGate CAS for project persistence (replacing Express CRUD)
+- Wire songBird drawbridge for external GIS sources (USGS, FEMA, OSM, Esri)
+- Update Caddy / DNS to route `footprint.primals.eco` to ironGate
+- Blockers: Express API deployment, Caddy routing
+
+### Phase 3: squirrel + petalTongue integration
+- Test squirrel `signal.dispatch` → biomeOS `graph.execute` on ironGate
+- esotericWebb + footPrint as live dispatch targets
+- Validate the 4-strategy dispatch cascade with real providers
+- Mature petalTongue G19 live render with actual game/GIS consumers
+
+### Phase 4: westGate science springs (no mesh needed)
+- Boot tideGlass on westGate (519 GB data local, Cargo workspace ready)
+- Boot groundSpring + airSpring on westGate (NOAA/USGS/USDA local)
+- First science spring compositions with real data
+- ludoSpring on blueGate (pure composition, no deps)
+
+### Phase 5: Inter-gate mesh validation
+- Run songBird `mesh.connectivity_check` + `mesh.throughput` between ironGate ↔ westGate
+- Validate content.get roundtrip with provenance chain across gate boundary
+- Unblock healthSpring + lithoSpore on ironGate (data from westGate)
+- Unblock neuralSpring on strandGate (293 GB streaming from westGate)
+- Unblock wetSpring compute dispatch (westGate → strandGate)
+
+---
+
+## SPRING STARTUP READINESS
+
+### Immediate — No Mesh Needed (Phase 1-2)
+
+| Workload | Gate | Type | Mesh? | Blocker | Status |
+|----------|------|------|-------|---------|--------|
+| **esotericWebb** | **ironGate** | Garden | **No** | biomeOS live deploy | **FIRST BOOT TARGET** |
+| **footPrint** | **ironGate** | Protist | **No** | Express API + Caddy routing | Phase 2 |
+
+### Next — Local Data, Same Gate (Phase 4)
+
+| Workload | Gate | Type | Mesh? | Blocker |
+|----------|------|------|-------|---------|
+| **tideGlass** | westGate | Protist | **No** | biomeOS live deploy |
+| **groundSpring** | westGate | Spring | **No** | biomeOS live deploy |
+| **airSpring** | westGate | Spring | **No** | biomeOS live deploy |
+| **ludoSpring** | blueGate | Spring | **No** | biomeOS live deploy |
+
+### Later — Need Mesh Validation (Phase 5)
+
+| Workload | Gate | Data From | Mesh? | Blocker |
+|----------|------|-----------|-------|---------|
+| **healthSpring** | ironGate | westGate | **Yes** | content.get E2E |
+| **lithoSpore** | ironGate | westGate | **Yes** | content.get E2E + G31 batch |
+| **neuralSpring** | strandGate | westGate | **Yes** | content.get E2E (293 GB streaming) |
+| **hotSpring** | strandGate | westGate | **Yes** | experiment queue + content.get |
+| **wetSpring** | westGate→strandGate | westGate | **Partial** | compute dispatch test |
+
+---
+
+## WHAT JUST HAPPENED (overnight evolution)
+
+| Event | Primal | Impact |
+|-------|--------|--------|
+| **barraCuda P0 shader fixes** | barraCuda | Subgroup entry point FIXED. PRNG compose FIXED. **5,037 tests.** Still YELLOW (PRNG validation Week 3+). |
+| **songBird mesh probes** | songBird | `mesh.connectivity_check` + `mesh.throughput` SHIPPED. **20 mesh methods, 14,840+ tests.** |
+| **biomeOS spring dispatch** | biomeOS | Deploy graph executor SHIPPED. Deep debt CLEAN. **8,570+ tests, zero debt.** |
+| **squirrel signal.dispatch (G18)** | squirrel | 4-strategy dispatch cascade WIRED. **7,243 tests, 90.1% coverage.** |
+| **sweetGrass G31 batch** | sweetGrass | `braid.batch_create` + `braid.batch_commit` SHIPPED. **42 methods, 1,644 tests.** |
+| **westGate data campaign** | westGate | **519 GB / 130 datasets.** AlphaFold v6 42/46 proteomes. |
+| **Gauge group resolved** | hotSpring | SU(3) code, SU(2) paper. arXiv UNBLOCKED. Paper relabel pending. |
 
 ---
 
 ## PRIMAL HEALTH DASHBOARD
 
-| Primal | Tests | Version | Health | Gap |
-|--------|-------|---------|--------|-----|
-| **biomeOS** | 8,570+ | v4.56.0 | GREEN | Multi-gate deploy E2E |
-| **toadStool** | 9,193+ | — | GREEN | VFIO ember service (G32) |
-| **songBird** | 14,835+ | 0.2.x | GREEN | Inter-gate E2E validation |
-| **nestGate** | 13,095+ | — | GREEN | Cross-gate CAS at scale |
-| **squirrel** | 7,138 | 0.1.0 | GREEN | G18 spring dispatch wiring |
-| **barraCuda** | 4,959 | 0.4.0 | **YELLOW** | Subgroup shader unmerged; PRNG path broken |
-| **petalTongue** | 6,755 | 1.7.0 | GREEN | G19 live render consumer |
-| **coralReef** | 3,553 | 0.2.0 | GREEN | G32 VFIO diesel experiments |
-| **rhizoCrypt** | 1,900 | 0.14.17 | GREEN | G31 batch coordination |
-| **loamSpine** | 1,740 | 0.9.16 | GREEN | G31 batch coordination |
-| **sweetGrass** | 1,636 | 0.8.0 | GREEN | G31 batch coordination |
-| **cellMembrane** | 1,281+ | — | GREEN | Portability abstraction |
-| **mitoBeacon** | — | protocol | GLACIAL | G27 identity genetics |
+| Primal | Tests | Health | Gap |
+|--------|-------|--------|-----|
+| **songBird** | 14,840+ | GREEN | E2E live test |
+| **nestGate** | 13,095+ | GREEN | CAS at 519 GB |
+| **toadStool** | 9,193+ | GREEN | VFIO ember |
+| **biomeOS** | 8,570+ | GREEN | **Live deploy on ironGate** |
+| **squirrel** | 7,243 | GREEN | **G18 integration on ironGate** |
+| **petalTongue** | 6,755 | GREEN | **G19 live render on ironGate** |
+| **barraCuda** | 5,037 | **YELLOW** | PRNG validation |
+| **coralReef** | 3,553 | GREEN | G32 VFIO |
+| **rhizoCrypt** | 1,900 | GREEN | G31 batch |
+| **loamSpine** | 1,740 | GREEN | G31 batch |
+| **sweetGrass** | 1,644 | GREEN | G31 cross-primal |
+| **cellMembrane** | 1,281+ | GREEN | Portability |
 
-**Total**: ~116,930 tests. 12/13 GREEN. 1 YELLOW (barraCuda — unmerged fix).
-
----
-
-## RECOMMENDED EXECUTION ORDER
-
-```
-Week 1 — Critical path:
-  1. barraCuda subgroup fix merge           [S, blocks GPU readback on new silicon]
-  2. Inter-gate content.get E2E test        [M, unblocks all data-remote springs]
-  3. Gauge group paper relabel SU(2)→SU(3)  [M, unblocks arXiv G9]
-
-Week 2 — Spring activation:
-  4. biomeOS multi-gate deploy validation   [M, unblocks spring boot on gates]
-  5. G31 batch provenance pipeline          [L, unblocks bulk ingest at scale]
-  6. squirrel G18 neuralAPI dispatch        [L, unblocks agent orchestration]
-
-Week 3+ — Silicon & hardening:
-  7. toadStool ember + K80 firmware         [M, unblocks G32 VFIO]
-  8. coralReef 44-experiment matrix         [L, G32 silicon deism]
-  9. GPU PRNG fix (barraCuda)               [L, production HMC path]
-```
-
----
-
-## WHAT JUST HAPPENED
-
-| Event | Impact |
-|-------|--------|
-| **Springs assigned to NUCLEUS gates** | All 10 springs/gardens on 5 gates by hardware specialization. Cell graphs v2.0.0. Deploy graphs v2.0.0. |
-| **Gauge group mismatch discovered** | Code audit: engine is SU(3), paper says SU(2). ⟨P⟩≈0.15 is correct SU(3). Cold lattice P=1.0. NOT a ×4 measurement bug. 6→5 rung ladder. |
-| **sporePrint plaquette ×4 AAR** | Correctly identified discrepancy. Root cause: gauge group mismatch, not normalization. Diagnostic protocol Tests A-D valuable for confirmation. |
-| **tideGlass Cargo workspace** | Rust workspace at `protists/tideGlass/` with RGES scaffold. `cargo check` passes. |
-| **Inter-gate data access config** | `intergate_data_access.toml` documents spring→dataset access matrix. Pattern exists, live E2E untested. |
-| **ecosystem_manifest.toml v3.3.0** | Spring-to-gate assignment table. Gate profiles expanded. |
-| **48 glacial goals tracked** | subGen scan added G36–G52 (gen5 chain, silicon gates, publication, collaborators). |
-
----
-
-## SPRING STATUS (context — primals must land first)
-
-### Tier 1 — Active
-
-| Spring | Gate | Data Gate | Mission | Blocked By |
-|--------|------|-----------|---------|------------|
-| **hotSpring** | strandGate | westGate | SU(3) pure gauge HMC, experiment queue | barraCuda subgroup fix (#1), paper relabel (#3) |
-| **tideGlass** | westGate | westGate (local) | RGES drug repurposing | biomeOS deploy validation (#10), G31 batch ingest (#7) |
-| **wetSpring** | westGate | westGate (local) | Metagenomics, breseq/LTEE | squirrel dispatch (#6), compute dispatch to strandGate (#4) |
-
-### Tier 2 — Spin Up Next
-
-| Spring | Gate | Data Gate | Blocked By |
-|--------|------|-----------|------------|
-| healthSpring | ironGate | westGate | Inter-gate content.get (#4), nestGate CAS scale (#5) |
-| neuralSpring | strandGate | westGate | Inter-gate content.get (#4), nestGate streaming (#5) — 293 GB |
-| lithoSpore | ironGate | westGate | Inter-gate content.get (#4) |
-
-### Tier 3 — When Ready
-
-| Spring | Gate | Blocked By |
-|--------|------|------------|
-| groundSpring | westGate | biomeOS deploy (#10) |
-| airSpring | westGate | biomeOS deploy (#10) |
-| ludoSpring | blueGate | biomeOS deploy (#10) |
-| esotericWebb | ironGate | petalTongue live render (#12) |
-
----
-
-## LATTICE QCD PROGRAM (LADDER COLLAPSED)
-
-Code is **SU(3)** throughout. Paper says SU(2). Ladder collapses from 6 rungs to 5.
-
-| Rung | Physics | Status | Owner |
-|------|---------|--------|-------|
-| **1** | **SU(3) pure gauge HMC** | **This is what the code does.** Experiment queue active. | hotSpring + barraCuda |
-| 2 | Quenched QCD (Dirac operator) | Planned | hotSpring + barraCuda |
-| 3 | Dynamical fermions (full QCD) | Planned | hotSpring + barraCuda |
-| 4 | (2+1)-flavor QCD | Planned | hotSpring |
-| 5 | Finite-temperature QCD | Planned | hotSpring |
-
----
-
-## GATE FLEET (11 online)
-
-| Gate | Composition | Role |
-|------|-------------|------|
-| **biomeGate** | GPU Crankshaft + Agentic | 3 VFIO GPUs. WG mesh LIVE. 8/10 peers. G32 silicon deism. |
-| **strandGate** | NUCLEUS v4.56 | Dual EPYC + RTX 3090 + RX 6950 XT. hotSpring + neuralSpring. |
-| **westGate** | NUCLEUS v4.56 | Data federation root. 362 GB / 38 datasets / 17 domains. tideGlass + wetSpring. |
-| **ironGate** | NUCLEUS 13/13 | i9-14900K, RTX 5070. healthSpring + lithoSpore + esotericWebb. |
-| **blueGate** | NUCLEUS v4.56 | Windows sub-builder. ludoSpring. G29 H2 DNS. |
-| **sporeGate** | Sovereign CI | Build authority. G34/G35 spec. |
-| **southGate** | NUCLEUS 22/22 | Validation. G17+G8 PROVEN. RTX 4060. |
-| eastGate | NUCLEUS | Overwatch. 128GB. |
-| northGate | NUCLEUS | Windows. RTX 5090. |
-| grapheneGate | Tower (TCP) | Pixel 8a. Mobile anchor. |
-| golgi | thin-relay | VPS. Forgejo + depot + sporePrint. |
+**Total**: ~119,000+ tests. 12/13 GREEN. 3 primals have ironGate as their maturation target (biomeOS, squirrel, petalTongue).
 
 ---
 
@@ -167,17 +155,18 @@ Code is **SU(3)** throughout. Paper says SU(2). Ladder collapses from 6 rungs to
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| Gates online | **11** (6 NUCLEUS + biomeGate crankshaft + 4 other) |
-| Primal tests | **116,930** (12 GREEN, 1 YELLOW) |
-| Primal needing fix | **barraCuda** — subgroup shader unmerged, PRNG path broken |
-| Springs assigned | **10** across **5 gates** |
-| Cell/deploy graphs | **10/10** cell v2.0.0, **7/7** deploy v2.0.0 |
-| Science data | **362 GB** on ZFS (38 datasets, 17 domains, ~5,800 CAS objects) |
-| Inter-gate data access | Config WIRED, live E2E **UNTESTED** |
-| Glacial goals | **48 tracked** (8 COMPLETE, 20 ACTIVE, 20 GLACIAL/CONCEPT) |
-| arXiv | **BLOCKED** — gauge group mismatch (SU(3) code, SU(2) paper) |
-| ecosystem_manifest.toml | **v3.3.0** |
+| Gates online | **11** |
+| Downstream host | **ironGate** (esotericWebb + footPrint) |
+| Data NAS | **westGate** (519 GB / 130 datasets / 17+ domains) |
+| Primal tests | **~119,000+** |
+| Springs/products bootable NOW (no mesh) | **6** (esotericWebb, footPrint, tideGlass, groundSpring, airSpring, ludoSpring) |
+| Springs needing mesh | **5** (healthSpring, lithoSpore, neuralSpring, hotSpring, wetSpring dispatch) |
+| First boot target | **esotericWebb on ironGate** |
+| G18 integration target | **squirrel → biomeOS on ironGate** |
+| G19 render target | **petalTongue on ironGate (RTX 5070)** |
+| Glacial goals | 48 tracked |
+| arXiv | UNBLOCKED (paper relabel pending) |
 
 ---
 
-*Primals are the substrate. 116,930 tests, 12/13 GREEN. The infrastructure is proven — NUCLEUS runs on 6 gates, provenance trio is 7/7, mesh connects 11 nodes. What's missing is the wiring between proven primals and assigned springs: barraCuda's subgroup fix blocks GPU readback on new silicon. Inter-gate content.get is configured but untested end-to-end. squirrel can discover springs but can't dispatch through biomeOS signal graphs yet. The provenance trio works per-object but not in coordinated batch. Fix these primal gaps and springs can boot inside NUCLEUS compositions and start running distributed science across the 10G LAN backbone.*
+*ironGate becomes the primary downstream hosting machine — the first gate running live cell compositions for real users. esotericWebb (pure CRPG garden) and footPrint (GIS protist) need no inter-gate mesh, no external data gates, just the 13 primals already running on ironGate's NUCLEUS. This creates the environment to mature squirrel (G18 dispatch with real consumers), petalTongue (G19 live render on RTX 5070), and biomeOS (first multi-composition deployment). Other gates stay as dev: strandGate for compute, biomeGate for GPU experiments, westGate as the 519 GB data NAS. The mesh matures in parallel — when content.get E2E validates, healthSpring and lithoSpore join ironGate with westGate data. The first live cell boot (esotericWebb) proves the entire deploy chain end-to-end.*

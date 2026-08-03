@@ -10,9 +10,9 @@
 
 [wave]
 id = 155
-sub = "n"
-date = "2026-08-02"
-posture = "WAVE 155n PRIMAL WORK FRONTLOADED. barraCuda YELLOW (subgroup shader unmerged, PRNG broken). Inter-gate content.get UNTESTED E2E. G18 squirrel dispatch unwired. G31 batch provenance pending. 116,930 tests 12/13 GREEN. Springs-to-NUCLEUS mesh COMPLETE. Gauge group mismatch blocks arXiv (SU(3) code, SU(2) paper). 48 goals. 362 GB / 38 datasets / 17 domains."
+sub = "p"
+date = "2026-08-03"
+posture = "WAVE 155p/156a ironGATE DOWNSTREAM HOST. esotericWebb + footPrint on ironGate (pure compositions, no mesh needed). First live cell boot target. Matures squirrel (G18), petalTongue (G19), biomeOS (multi-composition). westGate data NAS 519 GB / 130 datasets. ~119K tests 12/13 GREEN. 5-phase execution: ironGate boot → footPrint → squirrel integration → westGate springs → mesh validation."
 publisher = "eastGate-overwatch"
 
 [gates]

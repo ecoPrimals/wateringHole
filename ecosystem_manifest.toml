@@ -709,10 +709,21 @@ notes = "Phase 0 — GPS core. Science data via drawbridge bonds. Future: sovere
 # gate boundaries via toadStool.
 
 [spring_mesh]
-version = "1.0.0"
-updated = "2026-08-02"
+version = "2.0.0"
+updated = "2026-08-03"
 data_root = "westGate"
 backbone = "10G_LAN"
+downstream_host = "ironGate"
+
+[spring_mesh.gate_roles]
+ironGate = "downstream_host"
+westGate = "data_nas"
+strandGate = "compute_dev"
+biomeGate = "gpu_lab"
+blueGate = "windows_dev"
+sporeGate = "ci_membrane"
+southGate = "validation"
+eastGate = "overwatch"
 config = "configs/intergate_data_access.toml"
 
 [spring_mesh.assignments]
@@ -725,7 +736,8 @@ lithoSpore = { gate = "ironGate", data_gate = "westGate", tier = 2, access = "ba
 groundSpring = { gate = "westGate", data_gate = "westGate", tier = 3, access = "local" }
 airSpring = { gate = "westGate", data_gate = "westGate", tier = 3, access = "local" }
 ludoSpring = { gate = "blueGate", fallback = "northGate", tier = 3, access = "none" }
-esotericWebb = { gate = "ironGate", fallback = "blueGate", tier = 2, access = "none" }
+esotericWebb = { gate = "ironGate", fallback = "blueGate", tier = 1, access = "none", role = "downstream_product" }
+footPrint = { gate = "ironGate", tier = 1, access = "none", role = "downstream_product", type = "protist" }
 
 # ═══════════════════════════════════════════════════════════════════
 # Composition Profiles — Fractal Deployment Patterns
@@ -852,10 +864,11 @@ transport = "lan"
 zone = "backbone"
 wg_ip = "10.13.37.7"
 lan_ip = "192.168.4.237"
-roles = ["node_atomic", "compute", "gpu", "spring_host"]
-spring_assignments = ["healthSpring", "lithoSpore"]
+roles = ["node_atomic", "compute", "gpu", "spring_host", "downstream_host"]
+spring_assignments = ["esotericWebb", "footPrint", "healthSpring", "lithoSpore"]
 data_gate = "westGate"
-notes = "Node atomic (ToadStool, BarraCuda, CoralReef). i9-12900K + RTX 5070 Ti (CUDA). 13/13 NUCLEUS + 4x HDD enclave experiment (14TB + 1TB + 1TB + ~2TB — each disk an encrypted enclave for segregated compute/data). JupyterHub 5.4.5 LIVE on :8000. songBird drawbridge target. House 2 mesh anchor. Spring assignments: healthSpring (clinical data), lithoSpore (pseudoSpore lifecycle), esotericWebb (CRPG garden)."
+downstream_products = ["esotericWebb", "footPrint"]
+notes = "PRIMARY DOWNSTREAM HOST. i9-14900K + RTX 5070 (Blackwell, 12GB VRAM). 94GB DDR5. 3.6TB NVMe. 13/13 NUCLEUS, 21/21 sockets HEALTHY. First gate running live cell compositions. esotericWebb (CRPG garden, pure composition) + footPrint (GIS protist, Nest Atomic + petalTongue + drawbridge). Matures squirrel (G18 dispatch), petalTongue (G19 live render), biomeOS (multi-composition deploy). healthSpring + lithoSpore join when content.get E2E validates. JupyterHub 5.4.5 LIVE on :8000."
 repos = [
     "nestGate", "wateringHole", "plasmidBin", "primalSpring",
     "bearDog", "songBird", "toadStool", "biomeOS", "squirrel",
