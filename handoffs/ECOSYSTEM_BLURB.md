@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — ironGate Downstream Hosting
 
-**Date**: Aug 3, 2026 5PM | **Wave**: 155q/156b | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. G19 MILESTONE: petalTongue scene push PROVEN on ironGate. esotericWebb V26 (V22→V26 in one day): 471 tests, 22/22 exp006 PASS, enrichment FIRING. 8/9 primals compose zero-config. NUCLEUS 26/27 HEALTHY. airSpring deep debt CLEAN (1,157 tests, workspace consolidated). footPrint Forgejo repo FOUND (protoKarya org — ironGate searched wrong orgs). ~121K+ tests, 12/13 GREEN.**
+**Date**: Aug 3, 2026 7PM | **Wave**: 155s/156b | **From**: eastGate overwatch
+**Posture**: **P0/P1/P2: ZERO. G19 PROVEN. ironGate Session 5: footPrint UNBLOCKED (526 TS tests PASS), Phase 1 structurally ready (cell graph dry-run OK). esotericWebb V26 (471 tests, 8/9 zero-config). neuralSpring V183 deep debt CLEAN (1,518 tests, 87% coverage). BTSP transport signal SPEC shipped. 14 docs fossilized. ~123K+ tests, 12/13 GREEN.**
 
 ---
 
@@ -35,7 +35,7 @@ biomeOS (composition) → graph.execute + cell graph deploy
 petalTongue (rendering) → WebGL/WASM live render on RTX 5070
     │
 ├── esotericWebb (CRPG game garden) — V26, 471 tests, G19 scene push PROVEN
-└── footPrint (GIS protist) — Nest Atomic + drawbridge, 478 TS tests (protoKarya/footPrint)
+└── footPrint (GIS protist) — Nest Atomic + drawbridge, 526 TS tests (protoKarya/footPrint, cloned on ironGate)
 ```
 
 This tests and matures:
@@ -55,14 +55,14 @@ This tests and matures:
 - Validate all 13 primals + esotericWebb garden compose correctly
 - Wire petalTongue live render for game shaders (RTX 5070)
 - **This is the first-ever live cell composition boot in the ecosystem**
-- Blockers: biomeOS live deploy (executor shipped, needs ops)
+- **STATUS**: Structurally ready. Dry-run OK. esotericwebb.sock LIVE. Cell attachment (`--mode attach`) is the remaining ops gap.
 
 ### Phase 2: footPrint on ironGate
 - Deploy footPrint frontend (TypeScript/Vite/Leaflet) via petalTongue on `:8080`
 - Wire nestGate CAS for project persistence (replacing Express CRUD)
 - Wire songBird drawbridge for external GIS sources (USGS, FEMA, OSM, Esri)
 - Update Caddy / DNS to route `footprint.primals.eco` to ironGate
-- Blockers: Express API deployment, Caddy routing
+- **STATUS**: UNBLOCKED. Cloned, 526 tests PASS. Express 5 wildcard fix applied locally (needs upstream). Node.js 22 installed. Remaining: Caddy routing.
 
 ### Phase 3: squirrel + petalTongue integration
 - Test squirrel `signal.dispatch` → biomeOS `graph.execute` on ironGate
@@ -92,7 +92,7 @@ This tests and matures:
 | Workload | Gate | Type | Mesh? | Blocker | Status |
 |----------|------|------|-------|---------|--------|
 | **esotericWebb** | **ironGate** | Garden | **No** | biomeOS live deploy (**V26, 471 tests, G19 scene push PROVEN**) | **FIRST BOOT TARGET** |
-| **footPrint** | **ironGate** | Protist | **No** | Caddy routing (478 TS tests). Repo: `protoKarya/footPrint` | Phase 2 — UNBLOCKED |
+| **footPrint** | **ironGate** | Protist | **No** | Caddy routing (**526 TS tests PASS**, cloned). Express 5 wildcard fix needed upstream | Phase 2 — UNBLOCKED |
 
 ### Next — Local Data, Same Gate (Phase 4)
 
@@ -115,26 +115,29 @@ This tests and matures:
 
 ---
 
-## RECENT EVOLUTION (Wave 155p → 155q/156b)
+## RECENT EVOLUTION (Wave 155p → 155s/156b)
 
 | Event | Component | Impact |
 |-------|-----------|--------|
-| **G19 MILESTONE: scene push PROVEN** | ironGate | **petalTongue receiving game scenes from esotericWebb via `visualization.render.scene` on ironGate.** exp006 22/22 PASS, 0 skip. First proven GPU render pipeline on a downstream host. |
-| **esotericWebb V22→V26** | esotericWebb | 4-version deep debt pass in one day. V23: pure Rust deps. V24: BTSP transport + membrane discovery + cell graph. V25–V26: deep debt CLEAN. **471 tests, 0 clippy, 0 unsafe, 0 C deps.** 8/9 primals compose zero-config. |
-| **ironGate Session 4 AAR** | ironGate | NUCLEUS **26/27 HEALTHY**. RTX 5070 idle 42°C. 7 repos synced. V24 cell graph support ready for Phase 1 live boot. footPrint still blocked on Forgejo repo. |
-| **airSpring deep debt CLEAN** | airSpring | Workspace consolidated (5-member root Cargo.toml). Pure-Rust curve fitting (5 functions). `gpu_or_skip!` macro (52/60 GPU tests). **1,157 tests, 84.3% coverage, 0 stubs, 0 hardcoded.** |
-| **blueGate sub-builder coevolution** | blueGate | Divergence status: 8/10 resolved. Windows sub-builder + G29 H2 DNS progress. |
-| **CI-DIV-06 resolved** | sporeGate | Golgi post-receive hooks + Caddy webhook + scheduler ingest wired. Webhook E2E verified. |
-| **squirrel Wave 156b** | squirrel | **Test perf 400s→16s** — `without_discovery()` factories. **4,613 tests, 34→1 binaries.** |
-| **squirrel Wave 156a** | squirrel | PrimalType eliminated → `CapabilityIdentifier`. Build artifacts **9.5→4.1 GiB.** |
-| **projectNUCLEUS deep debt** | projectNUCLEUS | Workspace unified. Tier 2 pure Rust. **265 tests.** 9 ext systems mapped. |
-| **barraCuda P0 fixes** | barraCuda | Subgroup + PRNG compose FIXED. **5,037 tests.** YELLOW (PRNG validation). |
-| **songBird mesh probes** | songBird | `mesh.connectivity_check` + `mesh.throughput` SHIPPED. **14,840+ tests.** |
-| **biomeOS spring dispatch** | biomeOS | Deploy graph executor SHIPPED. Deep debt CLEAN. **8,570+ tests.** |
-| **sweetGrass G31 batch** | sweetGrass | `braid.batch_create` + `braid.batch_commit`. **1,644 tests.** |
-| **westGate data campaign** | westGate | **519 GB / 130 datasets.** 9 domains. 50+ sources. |
-| **coralReef deep debt** | coralReef | Wave 156a+156b dedup. **-770 LOC.** **3,553 tests.** |
-| **bearDog 155m orphan purge** | bearDog | **94 orphan files** purged. **14,019 tests, 236 methods.** |
+| **ironGate Session 5** | ironGate | footPrint UNBLOCKED + cloned (**526 TS tests PASS**). Phase 1 cell graph dry-run OK. esotericwebb.sock LIVE. Cell attachment (`--mode attach`) only remaining gap. Express 5 wildcard fix applied. |
+| **neuralSpring V183 deep debt** | neuralSpring | 3 monolithic files split (>1100L→focused submodules). 5 prod stubs→real implementations. Capability discovery replaces hardcoded routing. **1,518 tests, 87.25% coverage.** Phase 5 dependent (needs mesh). |
+| **BTSP transport signal SPEC** | cellMembrane | `0xEC 0x01` prefix documented. 7 protocol bytes defined. Per-primal transport requirements table. Discovery+fallback sequence codified. |
+| **G19 MILESTONE: scene push PROVEN** | ironGate | petalTongue receiving game scenes via `visualization.render.scene`. exp006 **22/22 PASS**. First GPU render pipeline on downstream host. |
+| **esotericWebb V22→V26** | esotericWebb | Deep debt CLEAN. **471 tests, 0 clippy, 0 unsafe.** 8/9 primals compose zero-config. |
+| **airSpring deep debt CLEAN** | airSpring | Workspace consolidated. Pure-Rust curve fitting. **1,157 tests, 84.3% coverage.** |
+| **groundSpring deep debt** | groundSpring | Pipeline types evolved. westGate deployment ready. |
+| **blueGate sub-builder** | blueGate | Divergences 8/10 resolved. |
+| **CI-DIV-06 resolved** | sporeGate | Webhook pipeline live. |
+| **squirrel 156b** | squirrel | Test perf 400s→16s. **4,613 tests, 34→1 binaries.** |
+| **projectNUCLEUS debt** | projectNUCLEUS | Workspace unified. **265 tests.** 9 ext systems. |
+| **barraCuda P0** | barraCuda | Subgroup+PRNG FIXED. **5,037 tests.** YELLOW. |
+| **songBird mesh** | songBird | Probes shipped. **14,840+ tests.** |
+| **biomeOS dispatch** | biomeOS | Executor shipped. **8,570+ tests.** |
+| **sweetGrass G31** | sweetGrass | Batch pipeline. **1,644 tests.** |
+| **westGate data** | westGate | **519 GB / 130 datasets.** |
+| **coralReef dedup** | coralReef | -770 LOC. **3,553 tests.** |
+| **bearDog purge** | bearDog | 94 orphans deleted. **14,019 tests.** |
+| **14 docs fossilized** | overwatch | ironGate S2/S3, biomeGate wave155n cluster, squirrel 155p, 5 AARs → `wave155r_absorbed/` |
 
 ---
 
@@ -156,7 +159,7 @@ This tests and matures:
 | **sweetGrass** | 1,644 | GREEN | G31 cross-primal | batch pipeline shipped |
 | **cellMembrane** | 1,281+ | GREEN | Portability | — |
 
-**Total**: **~121,000+ tests**. 12/13 GREEN. airSpring adds 1,157 tests (deep debt CLEAN). esotericWebb now 471 (V26). bearDog top 3 at 14,019.
+**Total**: **~123,000+ tests**. 12/13 GREEN. neuralSpring adds 1,518 (V183 deep debt). airSpring 1,157. footPrint 526. bearDog top 3 at 14,019.
 
 ---
 
@@ -168,7 +171,7 @@ This tests and matures:
 | Gates online | **11** |
 | Downstream host | **ironGate** (esotericWebb + footPrint) |
 | Data NAS | **westGate** (519 GB / 130 datasets / 17+ domains) |
-| Primal tests | **~121,000+** |
+| Primal tests | **~123,000+** |
 | Springs/products bootable NOW (no mesh) | **6** (esotericWebb, footPrint, tideGlass, groundSpring, airSpring, ludoSpring) |
 | Springs needing mesh | **5** (healthSpring, lithoSpore, neuralSpring, hotSpring, wetSpring dispatch) |
 | First boot target | **esotericWebb on ironGate** |
@@ -179,4 +182,79 @@ This tests and matures:
 
 ---
 
-*G19 MILESTONE HIT. petalTongue scene push is firing on ironGate — esotericWebb exp006 went from 21/22 PASS (1 skip) to 22/22 PASS (0 skip) in Session 4. Game scenes are being pushed via `visualization.render.scene` through the NUCLEUS IPC layer to the RTX 5070. This is the first proven GPU render pipeline on a downstream host. esotericWebb completed a V22→V26 evolution in one day (BTSP transport, membrane discovery, cell graph support, deep debt CLEAN — 471 tests, 0 clippy, 8/9 primals zero-config). airSpring finished deep debt on westGate (workspace consolidated, pure-Rust curve fitting, 1,157 tests, 84% coverage). blueGate sub-builder divergences at 8/10 resolved. CI-DIV-06 resolved (golgi webhook pipeline live). The ecosystem is at ~121K+ tests across 12/13 GREEN primals. Upstream action items: (1) toadStool systemd ExecStart fix for 9/9 membrane composition, (2) membrane socket permissions for non-root UDS access, (3) BTSP `0xEC 0x01` transport signal documentation. footPrint Forgejo repo FOUND at `protoKarya/footPrint` (ironGate team searched `ecoPrimals` and `sporeGarden` — wrong orgs). Phase 2 UNBLOCKED. Critical path: biomeOS live cell boot on ironGate (infrastructure ready, code team has V24+ cell graph), then footPrint Forgejo unblock, then squirrel G18 integration with real consumers.*
+## DUAL-SCIENCE INCREMENTAL STATUS
+
+### Track A: NF Drug Repurposing (Gonzales / Bin Chen)
+
+| Component | Status | Next |
+|-----------|--------|------|
+| **tideGlass** (protist) | Specs shipped. Cargo workspace seeded. Phase 0 checklist ready. | Zenodo inventory + RGES Python reproduction |
+| **westGate data** | 519 GB / 130 datasets. NF-relevant datasets identified. | Ingest NF expression profiles |
+| **footPrint** (GPS viz) | 526 tests PASS on ironGate. Cloned. Express 5 fix applied. | Caddy routing → `footprint.primals.eco`. Experiment with petalTongue scene push for GIS overlays. |
+| **petalTongue** (viz) | G19 PROVEN. `visualization.render.scene` live. WebGL compiler. | Wire footPrint → petalTongue for GPS visualization (volcano plots, heatmaps, enrichment curves). G53 maturation. |
+| **nestGate** (CAS) | 13K+ tests. CAS on ZFS verified. | CAS project persistence for tideGlass provenance chain |
+| **Provenance trio** | 7/7 COMPLETE. sweetGrass batch pipeline. | Provenance per RGES execution |
+
+### Track B: Lattice QCD on Consumer GPUs (Murillo / Chuna)
+
+| Component | Status | Next |
+|-----------|--------|------|
+| **hotSpring** (spring) | arXiv beta scan binary. riboCipher transport enforced. | Rung 1: reproduce plaquette normalization. SU(2)→SU(3) relabel. |
+| **barraCuda** (GPU math) | 5,037 tests. P0 fixes landed. MultiDevicePool wired. YELLOW (PRNG). | PRNG validation. WGSL shader source for lattice ops. |
+| **coralReef** (shaders) | 3,553 tests. -770 LOC dedup. Windows cross-compile. | WGSL compilation for QCD kernels. G32 VFIO diesel. |
+| **toadStool** (compute) | 9,193+ tests. S349 deep debt. | compute.dispatch for GPU lattice execution |
+| **esotericWebb** (viz) | V26, 471 tests. Scene push FIRING on ironGate. | Experiment with petalTongue for QCD visualization (lattice configs, Wilson loops, β-scan plots). |
+| **strandGate** (gate) | Dual EPYC + RTX 3090 + RX 6950 XT. | Experiment queue for hotSpring. Needs mesh for 293 GB streaming. |
+
+### Support → Science Convergence (G53 / G54)
+
+**footPrint + esotericWebb on ironGate → mature petalTongue G19 → reusable viz for both tracks.**
+
+- footPrint matures petalTongue's GIS/spatial rendering → GPS platform for NF drug screen
+- esotericWebb matures petalTongue's scene graph + interaction → lattice visualization for QCD
+- Both exercise squirrel G18 dispatch, biomeOS composition, nestGate CAS — the full stack
+- petalTongue becomes a **live science exploration tool**, not just a presentation layer
+
+---
+
+## petalTongue GAME ENGINE EVOLUTION — STRATEGIC DIRECTION
+
+### Current Architecture (v1.7.0)
+
+petalTongue is a **Universal User Interface** — 19 crates, 6,755 tests, 56 JSON-RPC methods, 7 modality compilers (SVG, WebGL, terminal, audio, braille, haptic, description). It renders ecosystem state but delegates heavy compute to toadStool/barraCuda/coralReef.
+
+**Already present (game-adjacent):**
+- egui/eframe desktop GUI + glow (OpenGL)
+- Declarative scene graph with 3D primitives (Sphere, Cylinder, Mesh3D, Camera, Projection)
+- Manim-style animation system
+- Bidirectional interaction engine (SAME DAVE cognitive model)
+- Physics bridge → toadStool compute dispatch (CPU fallback)
+- Texture attach for external framebuffers (`memfd://godot-fb-0` URIs)
+- WebGL compiler (browser GPU path without wgpu)
+- Platform embedding: WASM, Android/iOS cdylib, cross-arch
+
+### Evolution Paths
+
+| Path | What | Leverage |
+|------|------|---------|
+| **WebGPU via wgpu** | Native GPU render loop in-process. Replaces glow/OpenGL with modern GPU API. | toadStool already has wgpu. Wire `GpuCompiler` → coralReef shader compilation → toadStool display backend. |
+| **egui + wgpu** | egui already supports wgpu backend. Switch from eframe/glow to egui-wgpu for native WGSL shader execution. | Minimal — egui_wgpu is a drop-in backend. Enables custom render passes for science viz. |
+| **Godot interop** | Godot as external game runtime. petalTongue feeds scene data via texture attach + IPC. Godot handles physics, animation, multiplayer. | `visualization.texture.attach` already accepts Godot memfd URIs. GDScript ↔ JSON-RPC bridge is straightforward. |
+| **VR/AR (OpenXR)** | New modality compiler + display backend. Stereo rendering via dual Camera/Projection. Head/hand tracking as sensory input adapters. | Scene graph with 3D + Camera/Projection already exists. Sensory Capability Matrix can extend to XR device profiles. Multi-perspective interaction is an architectural precursor. |
+| **Live science exploration** | petalTongue as the entry point for exploring NF drug data (GPS maps, volcano plots, enrichment curves) and QCD lattice configurations (Wilson loops, β-scan, plaquette distributions) in real-time. | Grammar of Graphics Phase 4–5. barraCuda offload. coralReef shader compilation. All IPC contracts exist. |
+
+### Recommended Strategy
+
+**petalTongue renders; other primals provide capabilities.** The path is not "replace Godot/Unity inside petalTongue" but:
+
+1. **Wire `GpuCompiler` → coralReef → toadStool** for native WGSL shader execution (today: WebGL draw commands only)
+2. **Add egui-wgpu backend** alongside glow — enables custom render passes for science visualization
+3. **Godot as an optional game runtime** — petalTongue feeds scene data, Godot handles physics/animation/multiplayer. Texture attach mechanism exists.
+4. **XR as a new modality** — extend scene graph Camera/Projection for stereo, add OpenXR display backend, sensory input adapters for controllers/hand tracking
+5. **Keep game/science logic in springs** — esotericWebb, hotSpring, tideGlass own domain logic. petalTongue stays the universal renderer.
+
+This makes petalTongue a **live science exploration platform** (VR/AR/desktop/browser/mobile) that can visualize lattice QCD configurations and NF drug repurposing results in real-time, with the GPU compute stack (barraCuda → coralReef → toadStool) providing the actual shader execution.
+
+---
+
+*Wave 155s/156b cascade. ironGate Session 5 confirmed footPrint UNBLOCKED (526 TS tests PASS, Express 5 wildcard fixed locally, Node.js 22 installed). Phase 1 cell graph dry-run OK — biomeOS deploy executor parses the graph, esotericwebb.sock is LIVE, cell attachment CLI is the single remaining gap. neuralSpring V183 completed deep debt (1,518 tests, 87% coverage, 3 monolithic files split, 5 stubs→real implementations, capability discovery replaces hardcoding). BTSP transport signal spec shipped — `0xEC 0x01` prefix, 7 protocol bytes, per-primal requirements table. 14 docs fossilized to `wave155r_absorbed/`. Both science tracks advancing: Track A (NF/GPS) has tideGlass specs + 519 GB data + footPrint on ironGate for GPS viz maturation; Track B (QCD) has hotSpring arXiv ready + barraCuda GPU math + esotericWebb on ironGate for lattice viz. petalTongue's evolution toward a full science exploration platform (WebGPU/egui-wgpu, Godot interop, VR/AR via OpenXR) is strategically mapped — the path is capability delegation through the GPU stack (barraCuda→coralReef→toadStool), not engine replacement. ~123K+ tests across 12/13 GREEN primals. Critical path: biomeOS cell attachment CLI for Phase 1 live boot, then footPrint Caddy routing, then squirrel G18 integration with both consumers driving petalTongue G53 maturation.*

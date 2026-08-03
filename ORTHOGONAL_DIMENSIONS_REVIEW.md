@@ -671,14 +671,14 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155r/156b — **G19 MILESTONE PROVEN.** petalTongue scene push firing on ironGate (exp006 22/22 PASS). esotericWebb V22→V26 in one day (471 tests, 8/9 primals zero-config, deep debt CLEAN). airSpring deep debt CLEAN (1,157 tests, workspace consolidated). CI-DIV-06 resolved (webhook E2E live). Dual-science mid-term goals defined (Tracks A+B). ZERO P0/P1/P2. ~121K+ tests. 12/13 GREEN. 50 glacial goals tracked (8 COMPLETE, 22 ACTIVE, 20 GLACIAL/CONCEPT).
+**Summary**: Wave 155s/156b — **G19 PROVEN + DUAL-SCIENCE INCREMENTALS.** ironGate Session 5: footPrint 526 tests PASS, Phase 1 dry-run OK. neuralSpring V183 deep debt (1,518 tests, 87% coverage). BTSP transport signal spec shipped. 14 docs fossilized. petalTongue game engine evolution strategically mapped (WebGPU/Godot/VR-AR via GPU stack delegation). ZERO P0/P1/P2. ~123K+ tests. 12/13 GREEN. 50 glacial goals tracked (8 COMPLETE, 22 ACTIVE, 20 GLACIAL/CONCEPT).
 
-**Phase shift**: G19 proven on ironGate. **First GPU render pipeline on a downstream host.** Phase 1 cell boot infrastructure ready (V24+ cell graph). footPrint UNBLOCKED (protoKarya org found). Upstream: toadStool ExecStart fix (9/9 membrane), socket perms, BTSP doc.
+**Phase shift**: G19 proven. Phase 1 structurally ready (dry-run OK, cell attachment CLI is the gap). footPrint 526 tests on ironGate. Both science tracks have incrementals advancing. petalTongue game engine path mapped.
 
-**60 files fossilized** across 5 checkpoints. 12+ active AARs, 8+ active handoffs.
-- **ironGate: PRIMARY DOWNSTREAM HOST.** NUCLEUS 26/27 HEALTHY. G19 scene push PROVEN. esotericWebb V26 (471 tests). footPrint UNBLOCKED (protoKarya org). RTX 5070 idle 42°C. i9-14900K, 94 GB DDR5, 3.4 TB NVMe.
-- westGate: **DATA NAS. 519 GB / 130 datasets.** tideGlass + wetSpring + groundSpring + airSpring. airSpring deep debt CLEAN (1,157 tests).
-- strandGate: **COMPUTE DEV.** hotSpring + neuralSpring. P0 fixes AAR. Experiment queue.
+**74 files fossilized** across 6 checkpoints (14 new in `wave155r_absorbed/`). 14+ active AARs, 10+ active handoffs.
+- **ironGate: PRIMARY DOWNSTREAM HOST.** NUCLEUS 26/27 HEALTHY. G19 PROVEN. esotericWebb V26 (471 tests). footPrint cloned (526 tests). Phase 1 dry-run OK. RTX 5070. Node.js 22.
+- westGate: **DATA NAS. 519 GB / 130 datasets.** airSpring deep debt CLEAN (1,157). groundSpring evolved.
+- strandGate: **COMPUTE DEV.** neuralSpring V183 (1,518 tests). hotSpring arXiv ready. Experiment queue.
 - biomeGate: **GPU LAB.** 3 VFIO GPUs. G32 silicon deism.
 - eastGate: **squirrel LOCAL** — 156b test perf 400s→16s, 34→1 binaries, 4,613 tests.
 - blueGate: **WINDOWS DEV.** ludoSpring. Sub-builder divergences 8/10 resolved.
@@ -696,23 +696,24 @@ completeness.
 **Gauge group resolved in code** (G9): SU(3) labels disambiguated in barraCuda/hotSpring. Paper/site relabel still needed (sporePrint scope). arXiv UNBLOCKED.
 
 **Open items — prioritized by science track impact:**
-- **ironGate first cell boot** (esotericWebb) — G19 PROVEN, infrastructure ready, code team has V24+ cell graph. Need biomeOS live deploy ops.
+- **biomeOS cell attachment CLI** — `biomeos deploy --mode attach` needs `[cell]` schema. Dry-run OK, cell parsing not wired. **SINGLE remaining gap for Phase 1.**
 - **toadStool ExecStart fix** — membrane unit `--foreground` rejected. Fix: `toadstool up <manifest>`. BLOCKING 9/9 composition.
-- **membrane socket permissions** — `/run/membrane/*.sock` is root:root. Needs group-writable for `biomeos` group (UDS composition without privilege escalation).
-- ~~**footPrint Forgejo repo creation**~~ — RESOLVED. Repo exists at `protoKarya/footPrint` (ironGate searched wrong orgs). Phase 2 UNBLOCKED.
+- **membrane socket permissions** — `/run/membrane/*.sock` is root:root. Needs group-writable for `biomeos` group.
+- **footPrint Express 5 wildcard** — `/api/cas/*` → `/api/cas/{*path}` (path-to-regexp v8). Fixed locally on ironGate, needs upstream commit.
 - **tideGlass Phase 0** — Zenodo inventory + RGES reproduction (Track A critical path)
 - **arXiv paper relabel** SU(2) → SU(3) + β-scan (Track B critical path)
+- **petalTongue WebGPU/wgpu evolution** — wire GpuCompiler → coralReef → toadStool. Add egui-wgpu backend. (G53 maturation + science viz)
 - squirrel → biomeOS G18 integration test (both sides wired)
-- Inter-gate content.get live test (songBird probes ready)
+- Inter-gate content.get live test (songBird probes ready, neuralSpring needs it for Phase 5)
 - G31 loamSpine + rhizoCrypt batch coordination (sweetGrass done)
 - G32: coralReef VFIO diesel — toadStool ember + K80 firmware
 - barraCuda PRNG full validation (Week 3+)
-- BTSP `0xEC 0x01` transport signal documentation (ecosystem-wide adoption)
+- ~~BTSP transport signal documentation~~ — SHIPPED as `specs/BTSP_TRANSPORT_SIGNAL_SPEC.md`
 
 ---
 
-*Last used*: Wave 155r/156b cascade — G19 PROVEN, esotericWebb V26, airSpring deep debt, CI-DIV-06 resolved (Aug 3, 2026 PM)
+*Last used*: Wave 155s/156b cascade — Session 5 absorbed, neuralSpring V183, BTSP spec, 14 docs fossilized, dual-science incrementals + petalTongue game engine strategy (Aug 3, 2026 7PM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 155n springs-entry (58 files across 5 checkpoints)
+*Latest fossilization*: Wave 155s — 14 files to `wave155r_absorbed/` (74 total across 6 checkpoints)
 *Latest reopen*: Wave 155k (D10 — Jelly Strings J9–J13, extended to J14–J19 in 155n)
