@@ -1,186 +1,130 @@
-# ecoPrimals Ecosystem Blurb — Publication Phase (Primal Handoffs)
+# ecoPrimals Ecosystem Blurb — Rung 1 Validation + Data Federation
 
-**Date**: Aug 3, 2026 AM | **Wave**: 155n | **From**: strandGate → eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. arXiv 5/5 FILLED (Rung 1 experiment queue ACTIVE). GPU PRNG bias QUANTIFIED: 9.5% variance deficit, bit-identical NVIDIA + AMD. Multi-vendor proof LIVE (190× CPU speedup on AMD RDNA2). 11 gates ONLINE.**
-
----
-
-## PRIMAL HANDOFFS — ACTION REQUIRED
-
-These are the primal-level evolution targets derived from strandGate's math validation
-and PRNG root-cause analysis. Each handoff is scoped to a specific primal and can be
-executed independently.
+**Date**: Aug 2, 2026 PM | **Wave**: 155n | **From**: eastGate overwatch
+**Posture**: **P0/P1/P2: ZERO. 11 gates ONLINE (6 NUCLEUS + biomeGate crankshaft). arXiv Rung 1 reframed. westGate: 362 GB / 38 datasets / tideGlass 7/7 COMPLETE. biomeGate fully agentic. CHECKPOINT: data on mesh — inter-gate primal IPC over 10G LAN backbone READY for distributed experiments.**
 
 ---
 
-### HANDOFF 1: barraCuda — WGSL Transcendental Validation Layer [P1]
+## WHAT JUST HAPPENED
 
-**Finding**: WGSL `log(f64)` and `cos(f64)` produce a **9.5% variance deficit** in
-Box-Muller output. Both NVIDIA (naga → SPIR-V → PTX) and AMD (naga → SPIR-V → RDNA IL)
-produce **bit-identical** wrong output. This is a naga shader compiler or driver
-transcendental implementation bug, not hardware-specific.
-
-| Metric | GPU (WGSL) | CPU (IEEE 754) | Expected |
-|--------|-----------|---------------|----------|
-| σ | 0.6727 | 0.7079 | 0.7071 |
-| ⟨p²⟩ | 0.4525 | 0.5011 | 0.5000 |
-| Excess kurtosis | +0.84 | −0.003 | 0 |
-
-**Action items**:
-
-1. **Add `math::transcendental` module** to barraCuda with three paths:
-   - `Validated`: Taylor series polyfill with known error bounds (correct, ~2× slower)
-   - `Hardware`: f32 TMU → f64 promotion (fast, ~7-digit precision, adequate for PRNG)
-   - `Native`: bare WGSL `log`/`cos` (broken on current drivers — document as hazard)
-
-2. **Implement ziggurat PRNG** in pure WGSL (integer + f64 arithmetic, zero transcendentals).
-   This eliminates the polyfill risk entirely. Reference: Marsaglia & Tsang (2000).
-
-3. **Add distribution validation gate** to barraCuda CI:
-   dispatch PRNG → readback → assert σ within 1% of expected.
-
-**Affected gates**: ALL gates running physics via WGSL f64 transcendentals.
-**Data**: `hotSpring/barracuda/src/bin/prng_polyfill_validation.rs` (ready to run anywhere).
-**AAR**: `wateringHole/aars/STRANDGATE_PLAQUETTE_DIVERGENCE_ROOT_CAUSE_AAR.md`
+| Event | Impact |
+|-------|--------|
+| **arXiv Rung 1 reframing** | AI review correctly identified paper as SU(2), not full QCD. Retitled to "Toward Vendor-Agnostic Lattice QCD." Scope ladder (6 rungs), plaquette normalization equation, precision path matrix added. Experiment queue created for hotSpring. |
+| **westGate → 356 GB / 32 datasets** | NF Data Portal (666 MB, 658 files), BindingDB (583 MB), NCBI Gene (7 GB), RefSeq GRCh38, MONDO, Reactome acquired. tideGlass 7/7 modules COMPLETE. Synapse + NCBI API keys configured. |
+| **biomeGate fully agentic** | SSH key exchanged with all gates. WG mesh LIVE (8/10 peers). Forgejo SSH working. Can push AARs directly. |
+| **ironGate Session 3** | Tier 2 deep debt cleared. Pure Rust evolution continuing. |
+| **Data Braids catalog v2** | Updated to 32 datasets / 356 GB / 14 domains. 16 site pages. `data_catalog.toml` v2.0.0. |
+| **LaTeX Rung 1 update** | Title, abstract, scope ladder table, plaquette normalization eq, precision matrix, experiment queue table, limitations reframed. |
 
 ---
 
-### HANDOFF 2: hotSpring — Shader Composition Refactor [P1]
+## WHAT'S ACTIVE NOW
 
-**Finding**: `GpuHmcStreamingPipelines::new()` composes the PRNG pipeline as:
-```
-format!("{WGSL_PRNG_PCG_F64}\n{WGSL_SU3_RANDOM_MOMENTA_F64}")
-```
-
-Both files define `pcg_hash`, `hash_u32`, `uniform_f64`. The **duplicate definitions
-cause silent compilation failure** — the pipeline produces all-zero output with no
-error from wgpu/naga.
-
-**Action items**:
-
-1. **Separate header from consumer**: `su3_random_momenta_f64.wgsl` should NOT
-   self-contain the hash functions. It should assume `pcg_hash`, `hash_u32`,
-   `uniform_f64` are provided by the composition header.
-
-2. **Unify composition across all HMC modes**: Quenched streaming, dynamical,
-   unidirectional, and Hamiltonian variants all compose shaders differently.
-   ONE composition function, multiple consumer shaders.
-
-3. **Add shader smoke test**: Dispatch → readback → assert non-zero. Catches
-   silent compilation failures. Add to hotSpring CI.
-
-4. **Share thermalized lattice**: The GPU production function re-thermalizes
-   from scratch. Accept a pre-thermalized `Lattice` as argument to halve runtime.
-
-**Affected files**:
-- `barraCuda/…/shaders/lattice/su3_random_momenta_f64.wgsl` (remove self-contained funcs)
-- `barraCuda/…/shaders/lattice/prng_pcg_f64.wgsl` (canonical header)
-- `hotSpring/barracuda/src/lattice/gpu_hmc/streaming.rs` (composition)
-- `hotSpring/barracuda/src/lattice/gpu_hmc/dynamical.rs` (composition)
+| Track | Status | Gate |
+|-------|--------|------|
+| **Rung 1 experiment queue** | **CRITICAL PATH.** β-scan (1.8–2.5), increased stats (4-8 seeds, 1000 traj), HMC diagnostics (ΔH, reversibility), PRNG QQ plots. All must complete before arXiv submission. | **strandGate (hotSpring)** |
+| **GPU vendor cracking (G32)** | 3 VFIO GPUs LIVE. 44-experiment matrix. coralReef 3,553 tests. | **biomeGate** |
+| **Data federation (G7/G30)** | **362 GB on ZFS.** 38 datasets with FULL provenance. tideGlass 7/7 COMPLETE. COSMIC, BRENDA, CHARMM36, PTB-XL, PubChem BioAssay, NCBI Taxonomy newly acquired. | **westGate** |
+| **Data Braids on sporePrint** | **LIVE.** 362 GB / 38 datasets / 17 domains. 16+ site pages. 5 bundle scaffolds. | **sporePrint + westGate** |
+| **Inter-gate experiment comms** | **ENABLED.** Data on mesh + 10G LAN backbone + primal IPC = distributed experiments at LAN speed. | **all NUCLEUS gates** |
+| **esotericWebb (G20)** | NUCLEUS 13/13 LIVE. 21/21 sockets. 472 tests. RTX 5070. | **ironGate** |
+| **Membrane hardening (G34/G35)** | G34 egress spec. G35 agentic LAN 7/8 (biomeGate joined). | **sporeGate** |
 
 ---
 
-### HANDOFF 3: hotSpring — Rung 1 Experiment Queue [P1 — arXiv blocker]
+## TEAM ASSIGNMENTS — BY GATE
 
-**Status**: 5/5 data sections filled. Rung 1 reframing applied. Experiment queue
-is the remaining critical path per sporePrint AI review.
+### strandGate — Rung 1 Experiment Queue (arXiv CRITICAL PATH)
 
-| # | Experiment | Deliverable | strandGate Status |
-|---|-----------|-------------|-------------------|
-| 1 | β-scan (1.8, 2.0, 2.2, 2.3, 2.4, 2.5) at 8⁴ | ⟨P⟩_GPU vs ⟨P⟩_CPU per β | READY — binary exists |
-| 2 | 4-8 seeds × 1000 traj at 8⁴ β=2.3 | Per-chain means + bootstrap | READY — needs param change |
-| 3 | HMC diagnostics (ΔH histogram, reversibility) | Creutz equality check | READY |
-| 4 | PRNG QQ plots + tail statistics | Distribution validation | **DONE** (polyfill validation) |
-| 5 | Plaquette normalization check (cold/hot) | Diagnostic | **DONE** (bit-exact: 4e-17) |
-| 6 | 12⁴ and 16⁴ production | Extended scaling | GPU-only feasible |
-| 7 | pseudoSpore signed release | v1.0.0-rung1 | Needs sweetGrass |
+**Hardware**: Dual EPYC 7452 (128 threads), RTX 3090 (NVIDIA SM86), RX 6950 XT (AMD RDNA2)
+**Mission**: Complete experiment queue. Validate Rung 1 claims for arXiv submission.
 
-**Note**: Experiments 4 and 5 are COMPLETE from our PRNG validation and static
-plaquette diagnostic. Experiments 1-3 and 6 are straightforward extensions of the
-existing `arxiv_production_run` binary.
+| # | Experiment | Priority | Status |
+|---|-----------|----------|--------|
+| 1 | β-scan (1.8, 2.0, 2.2, 2.3, 2.4, 2.5) at 8⁴ | MUST | Queued |
+| 2 | 4-8 seeds × 1000 trajectories at 8⁴ β=2.3 | MUST | Queued |
+| 3 | HMC diagnostics (ΔH histogram, Creutz equality, reversibility) | MUST | Queued |
+| 4 | PRNG QQ plots + tail statistics | MUST | Queued |
+| 5 | Plaquette normalization check (cold/hot) | MUST | Queued |
+| 6 | 12⁴ and 16⁴ full production | Should | Queued |
+| 7 | pseudoSpore signed release (v1.0.0-rung1) | Should | Queued |
 
----
+### biomeGate — GPU Vendor Cracking (G32)
 
-### HANDOFF 4: toadStool / coralReef — Statistical Shader Validation [P2]
+**Hardware**: Threadripper 3970X (32c/64t), 128GB, 3 VFIO GPUs
+**Status**: Fully agentic. WG mesh LIVE. 8/10 peers.
 
-**Finding**: The current shader validation only checks for compilation success and
-crashes, not output correctness. A shader can compile, dispatch, and produce
-statistically wrong results with zero errors.
+| Phase | What |
+|-------|------|
+| Safety + sovereign init | PLX keepalive, cold probe, VBIOS interpreter |
+| K80 cross-gen | First-ever K80 hardware run (Exp 231) |
+| QCD science | 18 scenarios, Yukawa + Wilson, PRNG polyfill validation |
 
-**Action items**:
+### westGate — Data Federation Root (G7/G30)
 
-1. **Add stochastic shader validation** to toadStool's test harness: for any shader
-   producing random output, run dispatch → readback → moment test (mean, variance,
-   skewness, kurtosis against expected distribution).
+**Hardware**: i9-14900K, 96 GB DDR5, 50.4 TB ZFS raidz1 (356 GB used)
 
-2. **Cross-vendor regression matrix**: Same shader, dispatch on all available adapters,
-   compare output statistics. The `prng_polyfill_validation` binary is a template.
+| Metric | Value |
+|--------|-------|
+| Datasets | 32 directories on ZFS |
+| Size | 356 GB (0.70% of pool) |
+| CAS objects | 5,500+ |
+| Files with provenance | ~260K |
+| tideGlass modules | **7/7 COMPLETE** |
+| API keys configured | NCBI (10 req/s), Synapse (NF Portal) |
 
-3. **biomeGate opportunity**: Titan V (SM70, FP64 1:2 rate) may produce CORRECT
-   `log(f64)` via hardware transcendentals. Testing would determine if the bug is
-   naga-specific or driver-specific. K80 (SM37, FP64 1:3) adds another data point.
+### ironGate — esotericWebb + Gardens (G20)
 
----
+NUCLEUS 13/13. 913 garden tests. Session 3 cleared Tier 2 deep debt. Pure Rust evolution.
 
-### HANDOFF 5: sporePrint — LaTeX + Publication [READY]
+### sporeGate — Membrane Hardening + CI
 
-**Status**: arXiv draft is publication-ready for Rung 1 scope.
-
-| Deliverable | Status |
-|-------------|--------|
-| LaTeX conversion (REVTeX4-2) | READY — `whitePaper/subGen/lattice_qcd_consumer_gpu.tex` exists |
-| Rung 1 experiment queue completion | BLOCKED on hotSpring (experiments 1-3, 6) |
-| Hype compliance review | READY (reframing already applied) |
-| PRNG advisory (standalone short note) | OPTIONAL — 9.5% bias finding is independently publishable |
+G34 egress spec drafted. G35 agentic LAN now 7/8 with biomeGate joining mesh.
 
 ---
 
-### HANDOFF 6: sweetGrass — pseudoSpore Release [P3]
+## GATE FLEET (11 online)
 
-Sign and publish `v1.0.0-rung1` pseudoSpore artifact containing:
-- Raw trajectory data (4⁴ + 8⁴ at β=2.3, 200 trajectories each)
-- Benchmark CSVs (RTX 3090 + RX 6950 XT + CPU timings)
-- WGSL compute shaders (as shipped)
-- PRNG polyfill validation output
-- Full provenance chain (CAS → DAG → Merkle → Spine → Ed25519)
-
----
-
-## ECOSYSTEM-WIDE ADVISORY
-
-**WGSL f64 transcendental hazard**: Any gate running Monte Carlo or stochastic
-physics via WGSL f64 `log`/`cos`/`sin`/`exp` MUST validate output distributions.
-The `cpu_mom` pattern (generate random numbers on CPU, upload to GPU) is the
-standard workaround until barraCuda provides a validated transcendental layer.
-
-**Applies to**: hotSpring (HMC momenta), any future spring using GPU random sampling,
-biomeGate's 44-experiment matrix (QCD science phase).
+| Gate | Composition | Role |
+|------|-------------|------|
+| **biomeGate** | **GPU Crankshaft + Agentic** | 3 VFIO GPUs. WG mesh LIVE. 8/10 peers. G32 silicon deism. |
+| **strandGate** | NUCLEUS v4.56 | Dual EPYC + RTX 3090 + RX 6950 XT. **Rung 1 experiment queue.** |
+| **westGate** | NUCLEUS v4.56 | Data federation root. **356 GB / 32 datasets.** tideGlass 7/7. |
+| **ironGate** | NUCLEUS 13/13 | i9-14900K, RTX 5070. esotericWebb (G20). Session 3 complete. |
+| **blueGate** | NUCLEUS v4.56 | Windows sub-builder. G29 H2 DNS. |
+| **sporeGate** | Sovereign CI | Build authority. G34/G35 spec. |
+| **southGate** | NUCLEUS 22/22 | Validation. G17+G8 PROVEN. RTX 4060. |
+| eastGate | NUCLEUS | Overwatch. 128GB. |
+| northGate | NUCLEUS | Windows. RTX 5090. |
+| grapheneGate | Tower (TCP) | Pixel 8a. Mobile anchor. |
+| golgi | thin-relay | VPS. Forgejo + depot + sporePrint. |
 
 ---
 
-## WHAT STRANDGATE PROVED
+## DORMANT — CAN SPIN UP
 
-| Claim | Evidence |
-|-------|---------|
-| **Vendor-agnostic physics** | Same WGSL → same ⟨P⟩ on NVIDIA + AMD (\|Δ\|/σ = 0.82, cross-GPU Δ = 3.1e-9) |
-| **Consumer GPU viable** | 190× CPU speedup on RX 6950 XT, 47× on RTX 3090 |
-| **DF64 precision sufficient** | 9-digit accumulated (DF64), 15-digit (native f64), both >> σ_stat |
-| **PRNG is the sole failure mode** | Three-path proof: MD bit-exact, PRNG produces 9.5% variance deficit |
-| **Bug is shader-compiler, not hardware** | Bit-identical wrong output on NVIDIA + AMD |
-| **`cpu_mom` is correct + fast** | Full GPU speed with CPU-generated momenta, <2% overhead |
+| Spring/Garden | Best Gate | Why |
+|---------------|-----------|-----|
+| **tideGlass** | westGate | Gen5 Step 3. **tideGlass 7/7 data COMPLETE.** Highest priority dormant. |
+| wetSpring | strandGate | Breseq/LTEE. EPYC compute. |
+| neuralSpring | strandGate | AI/ML validation. |
+| ludoSpring | northGate/blueGate | Game engine. Windows + GPU. |
+| healthSpring | ironGate | Clinical data. |
+| airSpring | any (needs SDR) | ADS-B atmospheric. |
+| groundSpring | westGate | Geospatial + storage. |
 
 ---
 
-## GATE FLEET (unchanged)
+## 6-RUNG LATTICE QCD PROGRAM
 
-| Gate | Role | Active Track |
-|------|------|-------------|
-| **biomeGate** | GPU Crankshaft | G32 silicon deism + Titan V PRNG validation opportunity |
-| **strandGate** | Math Validation | Rung 1 experiment queue + PRNG characterization DONE |
-| **westGate** | Data Federation | 362 GB / 38 datasets. tideGlass 7/7. |
-| **ironGate** | esotericWebb | NUCLEUS 13/13. G20. Session 3 complete. |
-| **sporeGate** | CI + Membrane | G34/G35. Agentic LAN 7/8. |
-| **southGate** | Validation | G17+G8 PROVEN. RTX 4060 arXiv data (pending). |
+| Rung | Physics | Status | Owner |
+|------|---------|--------|-------|
+| **1** | **SU(2) pure gauge HMC** | **Experiment queue active** | hotSpring + sporePrint |
+| 2 | SU(3) pure gauge | Planned | hotSpring + barraCuda |
+| 3 | Quenched QCD (Dirac operator) | Planned | hotSpring + barraCuda |
+| 4 | Dynamical fermions (full QCD) | Planned | hotSpring + barraCuda |
+| 5 | (2+1)-flavor QCD | Planned | hotSpring |
+| 6 | Finite-temperature QCD | Planned | hotSpring |
 
 ---
 
@@ -189,16 +133,20 @@ biomeGate's 44-experiment matrix (QCD science phase).
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| arXiv | **5/5 sections FILLED.** Rung 1 experiment queue: 2/7 DONE, 5 remaining. |
-| PRNG bias | **QUANTIFIED**: 9.5% variance deficit, bit-identical cross-vendor |
-| Multi-vendor | **PROVEN**: RTX 3090 + RX 6950 XT, same physics |
-| Primal handoffs | **6 active** (2× P1 barraCuda/hotSpring, 1× P1 arXiv, 1× P2 toadStool, 1× sporePrint, 1× sweetGrass) |
-| Gates online | **11** |
-| Science data | **362 GB** on ZFS |
+| Gates online | **11** (6 NUCLEUS + biomeGate crankshaft + 4 other) |
+| Primal tests | **116,930** + coralReef **3,553** on biomeGate |
+| Science data | **362 GB** on ZFS (38 datasets, 17 domains) |
+| CAS objects | **~5,800** |
+| Data Braids | **38 datasets** with FULL sweetGrass provenance |
+| tideGlass modules | **7/7 COMPLETE** |
+| sporePrint data pages | **16+** (index + domains + provenance + possible) |
+| Inter-gate comms | **ENABLED** — 10G LAN backbone + primal IPC |
+| Glacial goals | **34 tracked** (8 COMPLETE, 13 ACTIVE, 13 GLACIAL) |
+| Fossilized | **60 files** |
+| arXiv | **Rung 1 reframed.** Experiment queue active. |
+| Lattice QCD program | **6 rungs defined.** SU(2) → SU(3) → quenched → dynamical → 2+1 → hot QCD |
+| Active AARs | **12** |
 
 ---
 
-*Handoffs frontloaded. The primals know what they need to evolve. barraCuda owns the
-transcendental fix. hotSpring owns the composition refactor and experiment queue.
-sporePrint is ready when the data lands. The diesel engine works — the transcendentals
-just need to tell the truth.*
+*Checkpoint: 362 GB of braided data on the mesh. 38 datasets across 17 domains. tideGlass 7/7 COMPLETE. Inter-gate primal IPC over 10G LAN is ENABLED — strandGate compute can reach westGate data via songBird mesh at LAN speed. The ecosystem shifts from ingestion to distributed experiments. Rung 1 experiment queue is the publication critical path. tideGlass is the science product critical path. The 10G backbone is the connective tissue.*

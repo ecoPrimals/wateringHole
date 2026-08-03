@@ -1,0 +1,22 @@
+# Legacy freshness protocol — superseded by wave.toml + ecosystem_manifest.toml
+# Retained for backward compatibility with s_ecosystem_freshness.rs validation.
+
+[wave]
+id = 155
+date = "2026-08-03"
+posture = "nominal"
+
+[heads]
+biomeOS = "v4.56.0"
+barraCuda = "v0.4.0"
+songBird = "v0.2.x"
+nestGate = "v0.1.0"
+squirrel = "v0.1.0"
+coralReef = "v0.2.0"
+petalTongue = "v1.7.0"
+toadStool = "v0.1.0"
+rhizoCrypt = "v0.14.17"
+loamSpine = "v0.9.16"
+sweetGrass = "v0.8.0"
+cellMembrane = "v0.1.0"
+mitoBeacon = "v0.1.0"
