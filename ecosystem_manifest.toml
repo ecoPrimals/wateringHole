@@ -1053,6 +1053,21 @@ repos = [
     "wetSpring", "groundSpring", "airSpring",
 ]
 
+[gates.westGate.network]
+ingress_capacity_mbps = 1000
+egress_capacity_mbps = 1000
+lan_capacity_mbps = 10000
+
+[gates.westGate.network.budgets]
+data_acquisition_pct = 50
+federation_pct = 30
+reserved_pct = 20
+
+[gates.westGate.network.limits]
+per_operation_max_mbps = 200
+max_concurrent_streams = 10
+backpressure_latency_ms = 100
+
 # northGate — gaming/hobby gate (Windows 11 Pro), family validation LAST
 [gates.northGate]
 target = "x86_64-pc-windows-gnu"

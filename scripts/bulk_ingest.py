@@ -1,19 +1,21 @@
 #!/usr/bin/env python3
 """
-Bulk Data Ingestion Pipeline — westGate CAS + Provenance Trio
+Bulk Data Ingestion Pipeline — westGate CAS + Full Provenance Trio
 
-Generalized ingestion for large datasets through the full provenance chain:
-  BLAKE3 hash → nestGate CAS → rhizoCrypt DAG → loamSpine Merkle
-  → bearDog Ed25519 → sweetGrass attribution
+Ingests datasets through the REAL provenance chain:
+  BLAKE3 hash → nestGate CAS → rhizoCrypt DAG session (events per file)
+  → loamSpine entry.append (DataAnchor per file)
+  → dag.dehydration.trigger (Merkle root) → loamSpine session.commit
+  → bearDog Ed25519 signature → sweetGrass attribution braid
 
-Handles both:
-  - Single large files (databases, archives)
-  - Directories of files (with manifest)
+One DAG session per dataset. One spine per dataset. Partial dehydration
+checkpoints every N files for long-running ingestions.
 
 Usage:
   python3 bulk_ingest.py --files /path/to/data.db --dataset "ChEMBL 37"
   python3 bulk_ingest.py --dir /path/to/lincs/ --dataset "LINCS L1000"
   python3 bulk_ingest.py --files a.gz,b.gz --dataset "MyData" --license CC-BY-4.0
+  python3 bulk_ingest.py --dir /data/pdb/ --dataset "PDB" --checkpoint 500
 """
 
 import argparse
@@ -37,14 +39,16 @@ SOCKETS = {
     "beardog":    f"{MEMBRANE}/beardog-westgate-tower-155f.sock",
 }
 
-MAX_CAS_SIZE = 100 * 1024 * 1024  # 100 MB — CAS content.put limit per call
+MAX_CAS_SIZE = 100 * 1024 * 1024
+COMMITTER_DID = "did:eco:westgate"
 
 
 def rpc(primal, method, params=None, timeout=30):
+    """JSON-RPC 2.0 call over UDS with ribocipher prefix."""
     sock = SOCKETS[primal]
     req = json.dumps({"jsonrpc": "2.0", "method": method, "params": params or {}, "id": 1})
     use_prefix = primal != "beardog"
-    data = (RIBOCIPHER_PREFIX if use_prefix else b"") + req.encode()
+    data = (RIBOCIPHER_PREFIX if use_prefix else b"") + req.encode() + b"\n"
 
     r = subprocess.run(
         ["socat", "-t10", "-", f"UNIX-CONNECT:{sock}"],
@@ -66,10 +70,26 @@ def rpc(primal, method, params=None, timeout=30):
     return None
 
 
+def rpc_result(primal, method, params=None, timeout=30):
+    """Call RPC and return just the result, or None on error."""
+    r = rpc(primal, method, params, timeout)
+    if r and "result" in r:
+        return r["result"]
+    return None
+
+
+def hex_to_content_hash(hex_str):
+    """Convert 64-char hex BLAKE3 hash to [u8; 32] byte array for ContentHash serde."""
+    return list(bytes.fromhex(hex_str))
+
+
 def blake3_hash(filepath):
     size_gb = filepath.stat().st_size / (1024**3)
     timeout = max(300, int(size_gb * 60) + 120)
-    r = subprocess.run(["b3sum", "--no-names", str(filepath)], capture_output=True, text=True, timeout=timeout)
+    r = subprocess.run(
+        ["b3sum", "--no-names", str(filepath)],
+        capture_output=True, text=True, timeout=timeout,
+    )
     return r.stdout.strip()
 
 
@@ -78,8 +98,10 @@ def cas_put(filepath, b3hash):
     size = filepath.stat().st_size
     if size <= MAX_CAS_SIZE:
         file_b64 = base64.b64encode(filepath.read_bytes()).decode()
-        r = rpc("nestgate", "content.put", {"data": file_b64, "hash_type": "blake3"}, timeout=60)
-        if r and "result" in r:
+        r = rpc_result("nestgate", "content.put", {
+            "data": file_b64, "hash_type": "blake3",
+        }, timeout=60)
+        if r:
             return True, "stored"
         return False, "rpc_fail"
     else:
@@ -91,41 +113,12 @@ def cas_put(filepath, b3hash):
             "gate": "westgate",
         }).encode()
         ref_b64 = base64.b64encode(ref).decode()
-        r = rpc("nestgate", "content.put", {"data": ref_b64, "hash_type": "blake3"}, timeout=30)
-        if r and "result" in r:
+        r = rpc_result("nestgate", "content.put", {
+            "data": ref_b64, "hash_type": "blake3",
+        }, timeout=30)
+        if r:
             return True, "reference"
         return False, "rpc_fail"
-
-
-def provenance_chain(name, b3hash, size, dataset, license_id, mime_type):
-    """Run the 4-step provenance chain (DAG → spine → sign → braid). Returns step results."""
-    steps = {}
-
-    r = rpc("rhizocrypt", "health.check")
-    steps["rhizocrypt"] = "PASS" if (r and "result" in r) else "FAIL"
-
-    r = rpc("loamspine", "spine.create", {"name": f"{dataset}-{name}", "owner": "westgate"})
-    steps["spine.create"] = "PASS" if (r and "result" in r) else "FAIL"
-
-    sign_msg = base64.b64encode(f"{dataset}:{name}:{b3hash}".encode()).decode()
-    r = rpc("beardog", "crypto.sign_ed25519", {"message": sign_msg})
-    if r and "result" in r:
-        sig = r["result"]
-        sig_val = sig.get("signature", "") if isinstance(sig, dict) else str(sig)
-        steps["sign_ed25519"] = "PASS" if len(sig_val) > 20 else "FAIL"
-    else:
-        steps["sign_ed25519"] = "FAIL"
-
-    r = rpc("sweetgrass", "braid.create", {
-        "data_hash": b3hash,
-        "author": "westgate",
-        "license": license_id,
-        "mime_type": mime_type,
-        "size": size,
-    })
-    steps["braid.create"] = "PASS" if (r and "result" in r) else "FAIL"
-
-    return steps
 
 
 def guess_mime(filepath):
@@ -144,10 +137,129 @@ def guess_mime(filepath):
         ".sdf": "chemical/x-mdl-sdfile",
         ".pdb": "chemical/x-pdb",
         ".cif": "chemical/x-cif",
+        ".fasta": "application/x-fasta",
+        ".fastq": "application/x-fastq",
+        ".h5": "application/x-hdf5",
+        ".hdf5": "application/x-hdf5",
+        ".obo": "application/x-obo",
+        ".owl": "application/rdf+xml",
+        ".xml": "application/xml",
+        ".zip": "application/zip",
+        ".bz2": "application/x-bzip2",
+        ".xz": "application/x-xz",
     }.get(ext, "application/octet-stream")
 
 
-def ingest_file(filepath, dataset, license_id):
+# ── rhizoCrypt DAG operations ──────────────────────────────────────
+
+def dag_session_create(dataset):
+    """Open a DAG session for this dataset ingestion."""
+    return rpc_result("rhizocrypt", "dag.session.create", {
+        "session_type": "General",
+        "description": f"Data federation ingest: {dataset}",
+    })
+
+
+def dag_event_append(session_id, b3hash, filename, size, dataset):
+    """Append a data-ingested event to the DAG session."""
+    return rpc_result("rhizocrypt", "dag.event.append", {
+        "session_id": session_id,
+        "event_type": {"DataCreate": {}},
+        "metadata": [
+            ["dataset", dataset],
+            ["filename", filename],
+            ["blake3", b3hash],
+            ["size", str(size)],
+        ],
+        "payload_ref": b3hash,
+        "parents": [],
+    })
+
+
+def dag_partial_dehydrate(session_id):
+    """Compute partial Merkle root without closing session."""
+    return rpc_result("rhizocrypt", "dag.partial_dehydrate", {
+        "session_id": session_id,
+    })
+
+
+def dag_dehydrate(session_id):
+    """Finalize DAG session → 64-char hex Merkle root. Closes session."""
+    return rpc_result("rhizocrypt", "dag.dehydration.trigger", {
+        "session_id": session_id,
+    })
+
+
+# ── loamSpine ledger operations ────────────────────────────────────
+
+def spine_create(dataset):
+    """Create a spine for this dataset."""
+    return rpc_result("loamspine", "spine.create", {
+        "name": f"federation:{dataset}",
+        "owner": "westgate",
+    })
+
+
+def spine_entry_append(spine_id, b3hash, mime_type, size):
+    """Append a DataAnchor entry to the spine."""
+    return rpc_result("loamspine", "entry.append", {
+        "spine_id": spine_id,
+        "entry_type": {
+            "DataAnchor": {
+                "data_hash": hex_to_content_hash(b3hash),
+                "mime_type": mime_type,
+                "size": size,
+            },
+        },
+    })
+
+
+def spine_session_commit(spine_id, session_id, merkle_root_hex, vertex_count):
+    """Commit the DAG session's Merkle root to the spine."""
+    return rpc_result("loamspine", "session.commit", {
+        "spine_id": spine_id,
+        "session_id": session_id,
+        "session_hash": hex_to_content_hash(merkle_root_hex),
+        "vertex_count": vertex_count,
+        "committer": COMMITTER_DID,
+    })
+
+
+# ── bearDog + sweetGrass ───────────────────────────────────────────
+
+def sign_merkle_root(merkle_root_hex, dataset):
+    """Sign the dataset's Merkle root via bearDog Ed25519."""
+    sign_msg = base64.b64encode(
+        f"federation:{dataset}:{merkle_root_hex}".encode()
+    ).decode()
+    result = rpc_result("beardog", "crypto.sign_ed25519", {"message": sign_msg})
+    if result:
+        sig = result.get("signature", "") if isinstance(result, dict) else str(result)
+        return sig if len(sig) > 20 else None
+    return None
+
+
+def braid_create(b3hash, mime_type, size, dataset, license_id, session_id=None, merkle_root=None):
+    """Create an attribution braid via sweetGrass, linked to DAG session."""
+    params = {
+        "data_hash": b3hash,
+        "mime_type": mime_type,
+        "size": size,
+        "name": dataset,
+        "description": f"Data federation: {dataset}",
+        "tags": ["data-federation", "westgate"],
+    }
+    if session_id:
+        params["source_session"] = session_id
+    if merkle_root:
+        params["source_merkle_root"] = merkle_root
+    return rpc_result("sweetgrass", "braid.create", params)
+
+
+# ── Per-file ingestion ─────────────────────────────────────────────
+
+def ingest_file(filepath, dataset, license_id, session_id, spine_id):
+    """Ingest one file through CAS + DAG event + spine entry."""
     filepath = Path(filepath)
     result = {"file": filepath.name, "path": str(filepath), "steps": {}}
     t0 = time.time()
@@ -168,14 +280,22 @@ def ingest_file(filepath, dataset, license_id):
     result["cas_mode"] = mode
 
     mime = guess_mime(filepath)
-    prov_steps = provenance_chain(filepath.name, b3, size, dataset, license_id, mime)
-    result["steps"].update(prov_steps)
+
+    vertex_id = dag_event_append(session_id, b3, filepath.name, size, dataset)
+    result["steps"]["dag.event.append"] = "PASS" if vertex_id else "FAIL"
+    if vertex_id:
+        result["vertex_id"] = vertex_id
+
+    entry = spine_entry_append(spine_id, b3, mime, size)
+    result["steps"]["entry.append"] = "PASS" if entry else "FAIL"
 
     result["elapsed_ms"] = int((time.time() - t0) * 1000)
     return result
 
 
-def run(files, dataset, license_id):
+# ── Dataset-level orchestration ────────────────────────────────────
+
+def run(files, dataset, license_id, checkpoint_interval=1000):
     total = len(files)
     results = []
     total_bytes = 0
@@ -184,10 +304,32 @@ def run(files, dataset, license_id):
     print(f"\n{'=' * 70}")
     print(f"  BULK INGESTION — {dataset}")
     print(f"  Files: {total}")
-    print(f"  Pipeline: BLAKE3 → CAS → DAG → Merkle → sign → braid")
+    print(f"  Pipeline: BLAKE3 → CAS → DAG session → spine entries")
+    print(f"            → dehydrate → session.commit → sign → braid")
     print(f"  License: {license_id}")
+    print(f"  Checkpoint every: {checkpoint_interval} files")
     print(f"{'=' * 70}\n")
 
+    # 1. Create DAG session
+    print("  [INIT] Creating rhizoCrypt DAG session...", end="", flush=True)
+    session_id = dag_session_create(dataset)
+    if not session_id:
+        print(" FAIL — rhizoCrypt unreachable or session creation failed")
+        sys.exit(1)
+    print(f" {session_id}")
+
+    # 2. Create loamSpine
+    print("  [INIT] Creating loamSpine...", end="", flush=True)
+    spine_id = spine_create(dataset)
+    if not spine_id:
+        print(" FAIL — loamSpine unreachable or spine creation failed")
+        sys.exit(1)
+    print(f" {spine_id}")
+
+    print()
+
+    # 3. Ingest each file
+    event_count = 0
     for i, f in enumerate(files):
         f = Path(f)
         if not f.exists():
@@ -195,14 +337,17 @@ def run(files, dataset, license_id):
             results.append({"file": f.name, "steps": {"fetch": "SKIP"}})
             continue
 
-        result = ingest_file(f, dataset, license_id)
+        result = ingest_file(f, dataset, license_id, session_id, spine_id)
         results.append(result)
         total_bytes += result.get("size", 0)
+
+        if result["steps"].get("dag.event.append") == "PASS":
+            event_count += 1
 
         steps = result.get("steps", {})
         passed = sum(1 for v in steps.values() if v == "PASS")
         total_s = len(steps)
-        status = f"{passed}/{total_s}" if passed < total_s else "FULL PROVENANCE"
+        status = f"{passed}/{total_s}" if passed < total_s else "FULL CHAIN"
 
         print(f"  [{i+1}/{total}] {result['file']:50s} {result['size']/1024/1024:>10.1f} MB  "
               f"{result['elapsed_ms']:>6d}ms  {status}")
@@ -211,25 +356,93 @@ def run(files, dataset, license_id):
         if failures:
             print(f"           FAILED: {', '.join(failures)}")
 
+        # 4. Partial dehydration checkpoint
+        if checkpoint_interval > 0 and event_count > 0 and event_count % checkpoint_interval == 0:
+            print(f"\n  [CHECKPOINT] Partial dehydration at {event_count} events...", end="", flush=True)
+            partial = dag_partial_dehydrate(session_id)
+            if partial:
+                merkle = partial.get("merkle_root", partial) if isinstance(partial, dict) else partial
+                sealed = partial.get("sealed_count", "?") if isinstance(partial, dict) else "?"
+                print(f" root={str(merkle)[:16]}... sealed={sealed}")
+            else:
+                print(" FAIL (non-fatal, continuing)")
+            print()
+
+    # 5. Final dehydration — close session, get Merkle root
+    print(f"\n  [FINALIZE] Dehydrating DAG session ({event_count} events)...", end="", flush=True)
+    merkle_root = dag_dehydrate(session_id)
+    if merkle_root:
+        merkle_hex = merkle_root if isinstance(merkle_root, str) else str(merkle_root)
+        print(f" root={merkle_hex[:16]}...")
+    else:
+        merkle_hex = None
+        print(" FAIL (session may already be closed)")
+
+    # 6. Commit session to loamSpine
+    if merkle_hex and spine_id:
+        print(f"  [FINALIZE] Committing session to loamSpine...", end="", flush=True)
+        commit = spine_session_commit(spine_id, session_id, merkle_hex, event_count)
+        if commit:
+            print(f" committed (index={commit.get('index', '?') if isinstance(commit, dict) else '?'})")
+        else:
+            print(" FAIL")
+
+    # 7. Sign the Merkle root
+    signature = None
+    if merkle_hex:
+        print(f"  [FINALIZE] Signing Merkle root via bearDog...", end="", flush=True)
+        signature = sign_merkle_root(merkle_hex, dataset)
+        print(" PASS" if signature else " FAIL")
+
+    # 8. Create attribution braid
+    print(f"  [FINALIZE] Creating sweetGrass attribution braid...", end="", flush=True)
+    braid = braid_create(
+        b3hash=merkle_hex or "0" * 64,
+        mime_type="application/x-dataset",
+        size=total_bytes,
+        dataset=dataset,
+        license_id=license_id,
+        session_id=session_id,
+        merkle_root=merkle_hex,
+    )
+    print(" PASS" if braid else " FAIL")
+
     wall = time.time() - t_start
 
+    # ── Summary ──
     print(f"\n{'=' * 70}")
     print(f"  RESULTS — {dataset}")
     print(f"{'=' * 70}")
-    print(f"  Files:      {total}")
-    print(f"  Total data: {total_bytes:,} bytes ({total_bytes/1024/1024/1024:.2f} GB)")
-    print(f"  Wall time:  {wall:.1f}s")
+    print(f"  Files:         {total}")
+    print(f"  Total data:    {total_bytes:,} bytes ({total_bytes/1024/1024/1024:.2f} GB)")
+    print(f"  Wall time:     {wall:.1f}s")
+    print(f"  DAG session:   {session_id}")
+    print(f"  Spine:         {spine_id}")
+    print(f"  DAG events:    {event_count}")
+    print(f"  Merkle root:   {merkle_hex or 'NONE'}")
+    print(f"  Signature:     {'PRESENT' if signature else 'NONE'}")
+    print(f"  Braid:         {'CREATED' if braid else 'NONE'}")
 
-    step_names = ["cas", "rhizocrypt", "spine.create", "sign_ed25519", "braid.create"]
-    print(f"\n  Step-level results:")
+    step_names = ["cas", "dag.event.append", "entry.append"]
+    print(f"\n  Per-file step results:")
     for step in step_names:
         p = sum(1 for r in results if r.get("steps", {}).get(step) == "PASS")
-        print(f"    {step:20s}  {p}/{total}")
+        print(f"    {step:25s}  {p}/{total}")
 
-    cas_count_r = rpc("nestgate", "health.check")
-    if cas_count_r and "result" in cas_count_r:
-        h = cas_count_r["result"]
-        print(f"\n  nestGate: v{h.get('version')}, uptime {int(h.get('uptime_s', 0))//3600}h")
+    finalize_steps = {
+        "dag.dehydration.trigger": "PASS" if merkle_hex else "FAIL",
+        "session.commit":          "PASS" if (merkle_hex and commit) else "FAIL",
+        "crypto.sign_ed25519":     "PASS" if signature else "FAIL",
+        "braid.create":            "PASS" if braid else "FAIL",
+    }
+    print(f"\n  Dataset-level finalization:")
+    for step, status in finalize_steps.items():
+        print(f"    {step:25s}  {status}")
+
+    cas_info = rpc_result("nestgate", "health.check")
+    if cas_info:
+        print(f"\n  nestGate: v{cas_info.get('version')}, "
+              f"uptime {int(cas_info.get('uptime_s', 0))//3600}h")
 
     print(f"{'=' * 70}")
 
@@ -241,9 +454,15 @@ def run(files, dataset, license_id):
             "gate": "westGate",
             "dataset": dataset,
             "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+            "session_id": session_id,
+            "spine_id": spine_id,
+            "merkle_root": merkle_hex,
+            "event_count": event_count,
             "count": len(results),
             "total_bytes": total_bytes,
             "wall_seconds": wall,
+            "signature": "present" if signature else None,
+            "braid": "created" if braid else None,
             "results": results,
         }, fp, indent=2)
     print(f"\n  Report: {report}")
@@ -252,12 +471,16 @@ def run(files, dataset, license_id):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Bulk data ingestion through westGate provenance pipeline")
+    parser = argparse.ArgumentParser(
+        description="Bulk data ingestion through westGate full provenance pipeline"
+    )
     parser.add_argument("--files", type=str, help="Comma-separated file paths")
     parser.add_argument("--dir", type=str, help="Directory of files to ingest")
-    parser.add_argument("--dataset", type=str, required=True, help="Dataset name (e.g. 'LINCS L1000')")
-    parser.add_argument("--license", type=str, default="CC0-1.0", help="License identifier")
-    parser.add_argument("--glob", type=str, default="*", help="Glob pattern for --dir mode")
+    parser.add_argument("--dataset", type=str, required=True, help="Dataset name")
+    parser.add_argument("--license", type=str, default="CC0-1.0", help="License ID")
+    parser.add_argument("--glob", type=str, default="*", help="Glob pattern for --dir")
+    parser.add_argument("--checkpoint", type=int, default=1000,
+                        help="Partial dehydration every N files (0 = disabled)")
     args = parser.parse_args()
 
     if args.files:
@@ -274,7 +497,7 @@ def main():
         sys.exit(1)
 
     print(f"Found {len(files)} files to ingest")
-    run(files, args.dataset, args.license)
+    run(files, args.dataset, args.license, args.checkpoint)
 
 
 if __name__ == "__main__":
