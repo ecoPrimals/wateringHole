@@ -10,9 +10,9 @@
 
 [wave]
 id = 155
-sub = "p"
+sub = "q"
 date = "2026-08-03"
-posture = "WAVE 155p/156a ironGATE DOWNSTREAM HOST. esotericWebb + footPrint on ironGate (pure compositions, no mesh needed). First live cell boot target. Matures squirrel (G18), petalTongue (G19), biomeOS (multi-composition). westGate data NAS 519 GB / 130 datasets. ~119K tests 12/13 GREEN. 5-phase execution: ironGate boot → footPrint → squirrel integration → westGate springs → mesh validation."
+posture = "WAVE 155q/156b DUAL-SCIENCE MID-TERM GOALS. Track A (NF/GPS — Gonzales/Bin): tideGlass specs shipped, 519 GB ready, Cell 2026 rebuild. Track B (QCD — Murillo/Chuna): arXiv Rung 1 unblocked, 6-rung program. G53: footPrint+esotericWebb on ironGate mature petalTongue → GPS viz + QCD viz. 50 glacial goals (8 COMPLETE, 22 ACTIVE). ~120K tests 12/13 GREEN. Full ortho+glacial review DONE."
 publisher = "eastGate-overwatch"
 
 [gates]

@@ -6,9 +6,9 @@
 # Provenance: sweetGrass braid follows data across gate boundary
 
 [meta]
-version = "1.0.0"
+version = "1.1.0"
 description = "Inter-gate CAS data access routing for spring compositions"
-updated = "2026-08-02"
+updated = "2026-08-03"
 
 [data_root]
 gate = "westGate"
@@ -17,9 +17,9 @@ transport = "songbird_mesh"
 backbone = "10G_LAN"
 cas_primal = "nestgate"
 provenance_trio = ["rhizocrypt", "loamspine", "sweetgrass"]
-total_size_gb = 362.0
-total_datasets = 38
-total_domains = 17
+total_size_gb = 519.0
+total_datasets = 130
+total_domains = 9
 
 # Spring-to-dataset access matrix
 # Each spring lists which datasets it needs from westGate CAS
