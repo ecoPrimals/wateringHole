@@ -2,7 +2,7 @@
 
 **Gate**: westGate
 **Started**: Aug 2, 2026
-**Updated**: Aug 2, 2026 17:45 EDT
+**Updated**: Aug 2, 2026 20:45 EDT
 
 Track failures, user-intervention items, and issues to circle back to.
 
@@ -32,20 +32,27 @@ Track failures, user-intervention items, and issues to circle back to.
 | 1 | GWAS Catalog associations | EBI API returns Tomcat 500 | 992 bytes HTML error | Retry later — EBI service outage | OPEN |
 | 2 | GEO GSE62944 (TCGA recount) | NCBI FTP returns tiny stub | 200 OK, 2.5 KB | GEO supplementary files available separately | WONTFIX |
 | 3 | NIST PFAS SRD | API endpoint wrong/moved | 154 bytes | Research correct data.nist.gov endpoint | OPEN |
-| 4 | Open Targets | FTP path structure changed | 404 on json/ directory | Find current release parquet/json paths | OPEN |
-| 5 | Dryad LTEE fitness | DOI redirect broken | not-found | Find direct download link or contact authors | OPEN |
-| 6 | HomoloGene | NCBI FTP 404 | Possibly discontinued | Use OrthoDB or OMA as alternative | OPEN |
-| 7 | Ensembl regulatory build | Specific file path 404 | 196 bytes | Find current release filename | LOW |
+| 4 | Open Targets | FTP path structure changed | 404 on json/ directory | Find current release parquet/json paths | RESOLVED |
+| 5 | Dryad LTEE fitness (Wiser 2013) | API returns 401/403 | Auth/redirect broken | Need Dryad API token or manual download | OPEN |
+| 6 | HomoloGene | NCBI FTP 404 | Possibly discontinued | Replaced with OrthoDB v11 | RESOLVED |
+| 7 | Ensembl regulatory build | Specific file path 404 | 196 bytes | Find current release filename | RESOLVED |
 | 8 | PDB validation summary | RCSB URL changed | 323 bytes redirect | Find new reports URL | LOW |
 | 9 | SIGNOR signaling | Download requires POST/JS | Returns HTML page | Need API or browser | LOW |
 | 10 | CORUM complexes | Download page changed | 0 bytes | Find current release URL | LOW |
 | 11 | Pathway Commons | URL structure changed (v12/v13 both 404) | 693 bytes | Research new download location | LOW |
 | 12 | dbNSFP | S3 bucket "dbnsfp" no longer exists | NoSuchBucket error | Find current hosting (maybe Google Drive?) | OPEN |
-| 13 | SIGNOR signaling | Download requires POST/JS interaction | Returns HTML login page | Need browser or API approach | LOW |
-| 14 | CORUM complexes | Download page changed/empty | 0 bytes | Find current Helmholtz MIPS URL | LOW |
-| 15 | BOLD Systems API | API returns partial HTML | 10 KB mixed HTML/TSV | May need smaller taxonomic queries | LOW |
-| 16 | BioModels SBML | Download endpoint changed | 0 bytes | Research current EBI BioModels API | LOW |
-| 17 | TAIR GO annotations | Requires authentication | 118 byte redirect | Register at arabidopsis.org | LOW |
+| 13 | BOLD Systems API | API returns partial HTML | 10 KB mixed HTML/TSV | May need smaller taxonomic queries | LOW |
+| 14 | BioModels SBML | Download endpoint changed | 0 bytes | Research current EBI BioModels API | LOW |
+| 15 | TAIR GO annotations | Requires authentication | 118 byte redirect | Register at arabidopsis.org | LOW |
+| 16 | MalariaGEN Pf6 metadata | Site redesigned, all URLs return HTML | 42 KB HTML | Use malariagen Python package or GCS VObs | OPEN |
+| 17 | Michigan EGLE PFAS GIS | ArcGIS API returns empty/error | 11-72 bytes | Need correct FeatureServer URL | OPEN |
+| 18 | EPA UCMR5 PFAS | URL rotates with each data release | 6.5 KB HTML | Research current year's URL | OPEN |
+| 19 | CAZy/dbCAN HMMs | URL structure changed | 18 KB HTML | Research bcb.unl.edu/dbCAN2 current paths | OPEN |
+| 20 | HMP gene catalog | NCBI HMPDACC FTP returns XML | 990 bytes | Need correct HMP2 data URL | OPEN |
+| 21 | BioGRID chemicals | Download URL returns HTML | 7 KB | Need current version number | LOW |
+| 22 | USDA PLANTS | CSV URL changed/requires AJAX | 710 bytes HTML | Use alternative botanical data source | LOW |
+| 23 | FEMA NFHL | REST endpoint returns HTML | 1.5 KB | Need current ArcGIS service URL | LOW |
+| 24 | Human Cell Atlas | API endpoint changed | 130 bytes | Research current HCA Data Explorer API | LOW |
 
 ## TECHNICAL ISSUES
 
@@ -70,17 +77,37 @@ Track failures, user-intervention items, and issues to circle back to.
 | Uberon/CL ontology | raw.githubusercontent.com 404 — used purl.obolibrary.org instead |
 | MSigDB | Full JSON needs login — individual GMT collections downloadable without auth |
 | HomoloGene | Discontinued by NCBI — replaced with OrthoDB v11 |
+| Sarkas ZIP 14 bytes | GitHub `main` branch → `master` branch fixed download |
+| SRA RunInfo API | Old Trace API returns HTML — switched to Entrez esearch+efetch |
+| NCBI gene expansions | Added gene2go (1.3 GB) + gene2pubmed (268 MB) via FTP |
+| Tabula Muris data | Found 290 MB FACS + 4 MB annotations on Figshare via API |
+| SILVA NR99 expansion | Added 197 MB NR99 SSURef to existing SILVA 138.1 |
 
 ---
 
 ## SESSION STATS
 
+### Session 2 (Aug 2, 2026 evening — contacts + baseCamp sweep)
+
+- **Source**: Deep scan of `attsi/non-anon/contact/`, baseCamp papers, garden scopes
+- **New datasets acquired**: 30+ (GPS Platform, Murillo Plasma+Surrogate, Jones PFAS, Tabula Muris, EMP, PLUMED-NEST, breseq, CQ.AAT1, SEPP/SATe, HotQCD, PhyNetPy, NCBI Assembly, Ensembl Compara, OSM, MIMIC demo, plus expansions to gene_info/gene2go/gene2pubmed, GOA, SILVA NR99, Reactome interactors, Rfam clans, OBO ontologies, and SRA metadata for 12 BioProjects)
+- **Data volume added**: ~8 GB new + expansions
+- **Provenance**: 100% — all 30+ datasets through full 5-step chain
+- **Grand total**: 373 GB, 118 datasets, 473 files
+
+### Session 1 (Aug 2, 2026 — initial sweep)
+
 - **Datasets attempted**: ~50
 - **Datasets acquired**: 30+ new
 - **Success rate**: ~60% (rest blocked by auth, Cloudflare, URL changes, rate limits)
 - **Data volume this session**: ~67 GB new data
-- **Grand total**: 429 GB, 73 datasets, ~258K files
+
+### Running Total
+
+- **Grand total**: 373 GB, 118 datasets, 473 files
+- **ZFS usage**: 0.74% of 50.7 TB
 
 *Circle back to NEEDS USER items when user has time for registrations.*
 *Circle back to OPEN items on next data session — most are URL research tasks.*
 *NCBI FTP: wait 10+ minutes between bulk download batches to avoid 403.*
+*SRA BioProject FASTQ downloads (Tier B) are the next major data volume opportunity (~1 TB).*

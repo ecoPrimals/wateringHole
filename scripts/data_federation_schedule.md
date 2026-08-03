@@ -4,13 +4,13 @@
 **Connection**: 1 Gbps fiber (residential — avoid saturation)
 **Policy**: Download in batches, off-peak preferred, never >80% sustained for >1h
 **Every byte with provenance = latent value (zero egress at 10G LAN)**
-**Updated**: Aug 2, 2026 17:45 EDT
+**Updated**: Aug 2, 2026 20:45 EDT
 
 ---
 
 ## COMPLETED (on ZFS with full provenance)
 
-### Proteomics & Structural Biology (282 GB)
+### Proteomics & Structural Biology (283 GB)
 
 | Dataset | Size | Files | Source |
 |---------|------|-------|--------|
@@ -24,20 +24,26 @@
 | OrthoDB v11 gene orthology | 1.8 GB | 2 | OrthoDB |
 | IntAct molecular interactions | 1.3 GB | 1 | EBI FTP |
 | UniProt Swiss-Prot + proteomes | 876 MB | 5 | UniProt FTP |
+| Ensembl Compara protein homologies | 198 MB | 1 | Ensembl FTP |
 | Pfam-A domain HMMs | 399 MB | 1 | EBI FTP |
 | PDB structures (506 individual) | 361 MB | 506 | RCSB |
+| Tabula Muris FACS scRNA-seq atlas | 294 MB | 3 | Figshare |
 | BioGRID protein interactions | 173 MB | 1 | BioGRID |
+| ProteomeXchange PXD005353+PXD002089 | 15 KB | 2 | PRIDE API |
 | STRING v12.0 human PPIs | 80 MB | 1 | STRING-DB |
 | PDBe SIFTS mappings | 5.8 MB | 1 | EBI FTP |
 
-### Genomics & Variants (24 GB)
+### Genomics & Variants (27 GB)
 
 | Dataset | Size | Files | Source |
 |---------|------|-------|--------|
-| NCBI Gene (Info+GO+Acc) | 7.0 GB | 3 | NCBI FTP |
+| NCBI Gene (Info+GO+Acc+gene2go+gene2pubmed) | 9.3 GB | 6 | NCBI FTP |
+| NCBI Assembly summaries (RefSeq+GenBank) | 1.8 GB | 2 | NCBI FTP |
 | dbSNP common variants (GRCh38) | 1.5 GB | 1 | NCBI FTP |
 | RefSeq Human GRCh38 + GTF | 981 MB | 2 | NCBI FTP |
 | GBIF backbone taxonomy | 926 MB | 1 | GBIF |
+| Atlantic salmon genome Ssal_v3.1 | 715 MB | 1 | NCBI FTP |
+| NCBI Bacteria assembly summary | 218 MB | 1 | NCBI FTP |
 | ClinVar clinical variants | 184 MB | 1 | NCBI FTP |
 | GENCODE v46 (GTF + transcripts) | 95 MB | 2 | EBI FTP |
 | gnomAD v4.1 constraints | 91 MB | 1 | Google Cloud |
@@ -46,10 +52,12 @@
 | NCBI Taxonomy | 72 MB | 1 | NCBI FTP |
 | Ensembl GRCh38.113 (GTF + regulatory) | 69 MB | 2 | Ensembl FTP |
 | ENCODE cCREs (1M elements) | 61 MB | 1 | SCREEN |
+| PlasmoDB P. falciparum 3D7 (genome+GFF+proteome) | 35 MB | 3 | VEuPathDB |
 | HGNC gene nomenclature | 16 MB | 1 | HGNC |
 | GTDB bacterial+archaeal taxonomy | 9.7 MB | 2 | GTDB |
+| SRA BioProject metadata (12 projects) | 1 MB | 13 | NCBI Entrez |
 
-### Drug Discovery & Chemistry (47 GB)
+### Drug Discovery & Chemistry (48 GB)
 
 | Dataset | Size | Files | Source |
 |---------|------|-------|--------|
@@ -57,9 +65,11 @@
 | ChEMBL 37 | 15 GB | 2 | EBI |
 | PubChem (SMILES+InChI+Synonym+Mass) | 11 GB | 5 | NCBI FTP |
 | PubChem BioAssay | 11 GB | 4 | NCBI FTP |
+| GPS Platform v5+v6 (Gonzales tideGlass) | 1.5 GB | 8 | Zenodo 17653393+17956238 |
 | BindingDB (All+Assays+rsid) | 583 MB | 3 | BindingDB |
 | ZINC20 SMILES (drug-like) | 244 MB | 110 | ZINC20 |
 | ChEBI (OBO + SDF) | 129 MB | 3 | EBI FTP |
+| Every Cure MATRIX Knowledge Graph | 51 MB | 1 | GitHub |
 
 ### Cancer & Disease (24 GB)
 
@@ -79,20 +89,22 @@
 | GTEx V8 expression | 2.4 GB | 4 | GTEx Portal |
 | Human Protein Atlas tissue data | 7.1 MB | 1 | HPA |
 
-### Ontologies & Annotations (350 MB)
+### Ontologies & Annotations (580 MB)
 
 | Dataset | Size | Files | Source |
 |---------|------|-------|--------|
-| Rfam RNA families (CMs + regions) | 163 MB | 2 | EBI FTP |
+| Reactome pathways + interactors | 295 MB | 4 | Reactome |
+| SILVA 138.1 SSURef NR99 | 188 MB | 1 | arb-silva.de |
+| Rfam RNA families (CMs + regions + clans) | 163 MB | 3 | EBI FTP |
 | MONDO disease ontology | 103 MB | 1 | MONDO |
-| Reactome pathways | 96 MB | 3 | Reactome |
 | HPO (OBO + annotations) | 45 MB | 2 | HPO |
-| Gene Ontology (OBO + human annotations) | 41 MB | 2 | GO Consortium |
+| Gene Ontology (OBO + human GAF + GOA) | 52 MB | 3 | GO Consortium |
 | ExPASy (ENZYME + PROSITE) | 33 MB | 2 | ExPASy |
 | MGI mouse gene models | 17 MB | 2 | Jackson Lab |
 | MSigDB gene sets (5 collections) | 15 MB | 5 | Broad |
 | Uberon anatomy ontology | 13 MB | 1 | OBO Foundry |
 | miRBase microRNA sequences | 13 MB | 2 | miRBase |
+| OBO Ontologies (Sequence Ontology, ENVO) | 10 MB | 2 | OBO Foundry |
 | Disease Ontology (DOID) | 6.8 MB | 1 | DO |
 | KEGG (pathways+compounds+reactions+enzymes) | 4.4 MB | 5 | KEGG REST |
 | Cell Ontology | 3.5 MB | 1 | OBO Foundry |
@@ -111,7 +123,7 @@
 |---------|------|-------|--------|
 | ClinGen gene-disease validity | 1.1 MB | 1 | ClinGen |
 
-### Environment & Ecology (5.4 GB)
+### Environment & Climate (5.6 GB)
 
 | Dataset | Size | Files | Source |
 |---------|------|-------|--------|
@@ -119,21 +131,62 @@
 | PhysioNet PTB-XL | 1.8 GB | 1 | PhysioNet |
 | USDA NASS Census 2017 | 132 MB | 1 | USDA |
 | MassBank spectra | 115 MB | 1 | MassBank |
-| SILVA 138.1 (16S ref) | 188 MB | 1 | SILVA |
 | PhysioNet MIT-BIH | 22 MB | 1 | PhysioNet |
 | USGS earthquake catalog (2000-2026) | 10 MB | 29 | USGS |
 | NASA GISS temperature anomalies | 23 KB | 2 | NASA GISS |
 | NOAA GML CO2+CH4 | 87 KB | 3 | NOAA GML |
 
-### Ecology & Evolution (5.8 MB)
+### Ecology & Evolution (261 MB)
 
 | Dataset | Size | Files | Source |
 |---------|------|-------|--------|
+| Earth Microbiome Project 16S BIOM | 110 MB | 1 | Qiita FTP |
+| PLUMED-NEST data repository | 142 MB | 1 | GitHub |
 | LTEE REL606 genome | 5.8 MB | 1 | NCBI |
+| Tara Oceans station data | 3.9 MB | 1 | Pangaea |
+
+### Physics & Computation (330 MB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| Murillo Surrogate Learning (Zenodo) | 251 MB | 1 | Zenodo 10908462 |
+| Murillo Dense Plasma DB | 77 MB | 1 | GitHub |
+| HotQCD EOS Analysis | 2.5 MB | 2 | GitHub |
+
+### Evolutionary & Computational Biology (173 MB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| PhyNetPy gene trees (NakhlehLab) | 81 MB | 1 | GitHub |
+| breseq (Barrick Lab) | 47 MB | 1 | GitHub |
+| SEPP/SATe phylogenetic alignments (Liu) | 27 MB | 1 | GitHub |
+| Sarkas MD engine (Murillo Group) | 22 MB | 1 | GitHub |
+| CQ.AAT1 chloroquine resistance (ABG) | 17 MB | 2 | GitHub |
+| Multi-BGK kinetic solver (LANL) | 0.2 MB | 1 | GitHub |
+
+### Environmental & Public Health (3 MB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| Jones PFAS MS Library | 0.2 MB | 3 | Zenodo 14341321 |
+| KBS LTER main cropping yields | 0.1 MB | 1 | MSU LTER |
+
+### Clinical Databases (11 MB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| MIMIC-III Clinical Demo | 10.8 MB | 1 | PhysioNet |
+
+### Geospatial & Infrastructure (17 MB)
+
+| Dataset | Size | Files | Source |
+|---------|------|-------|--------|
+| OSM Protected Areas (global) | 17 MB | 1 | Overpass API |
+| USGS 3DEP elevation metadata | 0.04 MB | 1 | USGS |
 
 ---
 
-| **GRAND TOTAL** | **~429 GB** | **~258K files** | **73 datasets** |
+| **GRAND TOTAL** | **~373 GB** | **~473 files** | **118 datasets** |
 
 ---
 
@@ -177,9 +230,10 @@ See `data_blockers.md` for full details. Key items:
 
 | Milestone | Cumulative | % of ZFS |
 |-----------|-----------|----------|
-| Current | ~429 GB | 0.84% |
-| After user registrations | ~440 GB | 0.87% |
+| Current | ~373 GB | 0.74% |
+| After user registrations | ~385 GB | 0.76% |
 | After retry round | ~500 GB | 0.99% |
+| After SRA BioProject FASTQ | ~1.5 TB | 3.0% |
 | After month-scale batch | ~28 TB | 55% |
 
 ## Credential Vault
