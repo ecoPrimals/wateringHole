@@ -182,18 +182,18 @@ manifest parses, the local_path exists, etc.) before reporting "would build."
 
 As we move to deploying across ironGate, biomeGate, strandGate routinely:
 
-| Priority | Divergence | Impact | Effort |
-|----------|-----------|--------|--------|
-| **P1** | CI-DIV-02: ECOPRIMALS_ROOT | Blocks every harvest | 5 min (bashrc) or 1h (auto-detect) |
-| **P1** | CI-DIV-03: Four depot paths | Split-brain risk | 2h (unify + atomic install) |
-| **P1** | CI-DIV-01: staleness vs status | False "current" reports | 2h (add local commit check) |
-| **P2** | CI-DIV-04: membrane not harvested | Stale tooling on gates | 2h (add to cycle) |
-| **P2** | CI-DIV-05: Silent parse failure | One bad field breaks all | 30 min (add warning log) |
-| **P2** | CI-DIV-08: Cross-target builds | GPU primals need gnu | 1h (multi-target flag) |
-| **P2** | CI-DIV-09: NUCLEUS restart | Manual step easy to forget | 1h (wire --with-restart) |
-| **P3** | CI-DIV-06: No webhook trigger | Manual bottleneck | 4h (Forgejo webhook) |
-| **P3** | CI-DIV-07: No gate notification | Gates run stale | 2h (mesh.publish reliability) |
-| **P3** | CI-DIV-10: Dry-run incomplete | False confidence | 1h (resolve in dry-run) |
+| Priority | Divergence | Impact | Effort | Status |
+|----------|-----------|--------|--------|--------|
+| **P1** | CI-DIV-02: ECOPRIMALS_ROOT | Blocks every harvest | 5 min | **RESOLVED** (bashrc) |
+| **P1** | CI-DIV-03: Four depot paths | Split-brain risk | 2h | **RESOLVED** (`--with-restart`) |
+| **P1** | CI-DIV-01: staleness vs status | False "current" reports | 2h | **RESOLVED** (drift detection) |
+| **P2** | CI-DIV-04: membrane not harvested | Stale tooling on gates | 2h | **RESOLVED** (manual rebuild + depot push) |
+| **P2** | CI-DIV-05: Silent parse failure | One bad field breaks all | 30 min | **RESOLVED** (warning log) |
+| **P2** | CI-DIV-08: Cross-target builds | GPU primals need gnu | 1h | **PARTIAL** (blueGate sub-builder proven E2E) |
+| **P2** | CI-DIV-09: NUCLEUS restart | Manual step easy to forget | 1h | **RESOLVED** (`--with-restart`) |
+| **P3** | CI-DIV-06: No webhook trigger | Manual bottleneck | 4h | **PARTIAL** (CI-EVO-01 scheduler + ingest wired) |
+| **P3** | CI-DIV-07: No gate notification | Gates run stale | 2h | OPEN |
+| **P3** | CI-DIV-10: Dry-run incomplete | False confidence | 1h | **RESOLVED** (validates --local path) |
 
 ---
 
@@ -211,7 +211,7 @@ As we move to deploying across ironGate, biomeGate, strandGate routinely:
 
 ---
 
-*10 divergences documented. P1 items (env var, depot path, staleness detection) are
-quick fixes that eliminate the most common operator friction. P2 items (membrane build,
-cross-target, auto-restart) unlock routine multi-gate deployment. P3 items (webhooks,
-notifications) enable zero-touch CI — the sovereign CI endgame.*
+*10 divergences documented. **8/10 resolved** (Aug 3, 2026). Remaining: CI-DIV-07
+(gate notification via mesh.publish) and CI-DIV-08 (full multi-target automation —
+blueGate sub-builder proven but not yet in scheduled pipeline). CI-EVO-01 harvest
+scheduler shipped for the webhook → schedule path (CI-DIV-06 partial).*
