@@ -4,7 +4,7 @@
 **Connection**: 1 Gbps fiber (residential — avoid saturation)
 **Policy**: Download in batches, off-peak preferred, never >80% sustained for >1h
 **Every byte with provenance = latent value (zero egress at 10G LAN)**
-**Updated**: Aug 2, 2026 20:45 EDT
+**Updated**: Aug 3, 2026 02:20 EDT
 
 ---
 
@@ -186,7 +186,7 @@
 
 ---
 
-| **GRAND TOTAL** | **~373 GB** | **~473 files** | **118 datasets** |
+| **GRAND TOTAL** | **~515 GB** | **~535 files** | **130 datasets** |
 
 ---
 
@@ -230,7 +230,7 @@ See `data_blockers.md` for full details. Key items:
 
 | Milestone | Cumulative | % of ZFS |
 |-----------|-----------|----------|
-| Current | ~373 GB | 0.74% |
+| Current | ~515 GB | 1.02% |
 | After user registrations | ~385 GB | 0.76% |
 | After retry round | ~500 GB | 0.99% |
 | After SRA BioProject FASTQ | ~1.5 TB | 3.0% |

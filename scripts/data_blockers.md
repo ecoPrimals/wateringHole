@@ -2,7 +2,7 @@
 
 **Gate**: westGate
 **Started**: Aug 2, 2026
-**Updated**: Aug 2, 2026 20:45 EDT
+**Updated**: Aug 3, 2026 02:20 EDT
 
 Track failures, user-intervention items, and issues to circle back to.
 
@@ -93,7 +93,7 @@ Track failures, user-intervention items, and issues to circle back to.
 - **New datasets acquired**: 30+ (GPS Platform, Murillo Plasma+Surrogate, Jones PFAS, Tabula Muris, EMP, PLUMED-NEST, breseq, CQ.AAT1, SEPP/SATe, HotQCD, PhyNetPy, NCBI Assembly, Ensembl Compara, OSM, MIMIC demo, plus expansions to gene_info/gene2go/gene2pubmed, GOA, SILVA NR99, Reactome interactors, Rfam clans, OBO ontologies, and SRA metadata for 12 BioProjects)
 - **Data volume added**: ~8 GB new + expansions
 - **Provenance**: 100% — all 30+ datasets through full 5-step chain
-- **Grand total**: 373 GB, 118 datasets, 473 files
+- **Grand total**: 515 GB, 130 datasets, 535 files
 
 ### Session 1 (Aug 2, 2026 — initial sweep)
 
@@ -104,8 +104,8 @@ Track failures, user-intervention items, and issues to circle back to.
 
 ### Running Total
 
-- **Grand total**: 373 GB, 118 datasets, 473 files
-- **ZFS usage**: 0.74% of 50.7 TB
+- **Grand total**: 515 GB, 130 datasets, 535 files
+- **ZFS usage**: 1.02% of 50.7 TB
 
 *Circle back to NEEDS USER items when user has time for registrations.*
 *Circle back to OPEN items on next data session — most are URL research tasks.*
