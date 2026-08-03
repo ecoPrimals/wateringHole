@@ -1,6 +1,6 @@
 # ironGate Local Overwatch — Code Team Blurb
 
-**Date**: 2026-08-03 17:10 EDT (updated PM)
+**Date**: 2026-08-03 19:12 EDT (Session 5 update)
 **Gate**: ironGate (10.13.37.7) — PRIMARY DOWNSTREAM HOST
 **Wave**: 155q/156b
 **Audience**: esotericWebb code team + footPrint code team (parallel IDE sessions)
@@ -16,11 +16,12 @@ available for petalTongue rendering and toadStool/coralReef compute dispatch.
 
 ```
 NUCLEUS HEALTH: 26/27 HEALTHY (1 missing: network.sock — non-blocking)
-GPU:            RTX 5070 / 12 GB / CUDA 12.8 / 42°C idle
+GPU:            RTX 5070 / 12 GB / CUDA 12.8 / 61°C under load
 RAM:            94 GB DDR5 (82 GB available)
 CPU:            i9-14900K (24c/32t)
-Disk:           3.4 TB available of 3.6 TB NVMe (~18 GB freed by cargo clean)
+Disk:           3.4 TB available of 3.6 TB NVMe
 Rust:           1.96.0
+Node.js:        22.23.2 (NEW — for footPrint)
 ```
 
 ### Primal Sockets Available (for IPC)
@@ -64,10 +65,11 @@ gardens/esotericWebb/
 ### Current State
 
 - **Version**: V26 (V22→V23→V24→V25→V26 absorbed Aug 3)
-- **Tests**: 471 pass (452 lib + 18 integration + 1 doc)
+- **Tests**: 455 lib pass (release mode), 22/22 exp006 pass
 - **Clippy**: 0 warnings (pedantic + nursery)
 - **Live composition**: exp006 PROVEN — 22 pass, 0 fail, 0 skip
 - **G19 MILESTONE**: petalTongue scene push is FIRING on ironGate
+- **HEAD**: `5083c88` (V26)
 
 ### What exp006 Shows (as of V24+)
 
@@ -112,34 +114,64 @@ enrichment path firing (squirrel AI narration + petalTongue scene push).
 
 ## footPrint CODE TEAM
 
-### BLOCKER: Repo Not On Forgejo
+### Status: UNBLOCKED — Repo Cloned + Tests PASS
 
-footPrint does not have a repo on Forgejo yet. Checked all three orgs
-(`ecoPrimals`, `sporeGarden`, `syntheticChemistry`) — no `footPrint` repo exists.
+footPrint is now on ironGate. Repo found at `protoKarya/footPrint` on Forgejo
+(we previously searched wrong orgs: `ecoPrimals`, `sporeGarden`, `syntheticChemistry`).
 
-The product page exists on sporePrint (`content/products/footprint.md`) and the
-site is live at `primals.eco/footprint/` (301 redirect).
+### Your Working Directory
 
-**Action needed from eastGate overwatch:**
-1. Create `sporeGarden/footPrint` on Forgejo (or identify correct org)
-2. Push the 478 TS test codebase
-3. Then ironGate can clone and the code team can begin
+```
+gardens/footPrint/
+├── src/             # TypeScript source (Vite frontend + Express server)
+├── projects/        # GeoJSON project data (Lansing Scuffle, etc.)
+├── public/          # Static assets
+├── deploy/          # Deploy configuration
+├── specs/           # Specifications
+├── vitest.config.ts # Test config
+└── package.json     # 347 deps, Node 22.23.2
+```
 
-### What We Know About footPrint (from cascade)
+### Current State
 
-- **Type**: GIS protist (garden)
-- **Stack**: TypeScript/Vite/Leaflet frontend + Nest Atomic CAS persistence
-- **Tests**: 478 (TypeScript)
-- **Primal deps**: nestGate (CAS), songBird (drawbridge for external GIS), petalTongue (rendering)
-- **External data**: USGS, FEMA, OSM, Esri — via songBird drawbridge (internet, not mesh)
-- **No mesh needed**: All primals run locally on ironGate's NUCLEUS
+- **Tests**: **526 PASS** (33 test files, vitest 4.1.10, 697ms)
+- **Stack**: TypeScript / Vite / Leaflet (frontend) + Express/tsx (server)
+- **HEAD**: `0cf0a22` — docs update, deploy config, data layer audit
+- **Node.js**: v22.23.2 (installed this session)
+- **Deps**: 347 packages installed (npm install)
 
-### footPrint Deploy Plan (Phase 2, after repo exists)
+### Dev Server
 
-1. Frontend on `:8080` via petalTongue
-2. nestGate CAS for project persistence (replacing Express CRUD)
-3. songBird drawbridge for external GIS
-4. Caddy/DNS routing: `footprint.primals.eco` → ironGate
+```bash
+cd gardens/footPrint && npm run dev
+# Runs concurrently: tsx watch src/server.ts + vite
+# Frontend: http://localhost:5173
+# Server: http://localhost:3000 (Express API)
+```
+
+### Phase 2 Deploy Plan
+
+1. Wire nestGate CAS for project persistence (replacing Express CRUD)
+2. Wire songBird drawbridge for external GIS sources (USGS, FEMA, OSM, Esri)
+3. Configure Caddy reverse proxy: `footprint.primals.eco` → `:5173` (frontend) + `:3000` (API)
+4. petalTongue rendering integration for map tile compositing
+
+### Primal Deps Available on NUCLEUS
+
+| Primal | Socket | Purpose |
+|--------|--------|---------|
+| nestGate | `permanence.sock` | CAS project persistence |
+| songBird | `network.sock` (missing) / Neural API | Drawbridge for external GIS |
+| petalTongue | `shader.sock` | Map rendering |
+| bearDog | `crypto.sock` | Content signing |
+
+### Open Gaps
+
+| Gap | What | Priority |
+|-----|------|----------|
+| Caddy routing | `footprint.primals.eco` DNS + reverse proxy | P1 (ops) |
+| Express→nestGate | Replace Express CRUD with CAS persistence | P2 (code) |
+| network.sock | songBird external drawbridge socket missing | P2 (infra) |
 
 ---
 
@@ -163,9 +195,9 @@ For code changes, document in a handoff and eastGate will integrate.
 ## HARDWARE TEAM STATUS
 
 - NUCLEUS: 26/27 HEALTHY, monitoring socket stability
-- GPU: available, idle (42C, 30W)
+- GPU: available, 61°C under load (530 MiB VRAM used)
 - Network: WireGuard live (golgi 38ms, sporeGate 77ms, eastGate 78ms)
-- Disk: ~18 GB freed by cargo clean + debris removal
+- Node.js: v22.23.2 (installed for footPrint)
 - Binary freshness: sweetGrass (0.7.56 → 0.8.0 in source) and rhizoCrypt
   (0.14.8 → 0.14.17 in source) are behind — depot rebuild pending
 
@@ -176,4 +208,4 @@ ping the hardware team (this IDE session or wateringHole handoff).
 
 *ironGate local overwatch. Wave 155q/156b. NUCLEUS 26/27 HEALTHY. GPU ready.
 esotericWebb V26: live cell boot ready, scene push PROVEN.
-footPrint: blocked on Forgejo repo creation.*
+footPrint: UNBLOCKED — 526 tests PASS, dev server ready.*
