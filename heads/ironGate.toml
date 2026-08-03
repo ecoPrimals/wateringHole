@@ -1,29 +1,32 @@
-# Auto-published by ironGate cascade (Wave 150t)
-# Gate: ironGate | Updated: 2026-07-21T16:43:00Z
+# Auto-published by ironGate cascade (Wave 155q/156b)
+# Gate: ironGate | Updated: 2026-08-03T21:08:49Z
 #
 # This file is owned exclusively by ironGate. No other gate writes here.
 
 [meta]
 gate = "ironGate"
-updated = "2026-07-21T16:43:00Z"
+updated = "2026-08-03T21:08:49Z"
 
 [heads]
-primalSpring = "0b90b3a305bda2cd0b684061361c846d63c76d9e"
-cellMembrane = "5c5f8674aadc4ce985986ed48fe12c24a51eb0a9"
-bearDog = "ddabf6a77c85980d91c46188cc3a373341b9b502"
-songBird = "e5941eeb3223bd49728bc00a1eb4d027d6dd1537"
-toadStool = "26695def0dd23b3283819b4f95f0196bcacdab81"
-biomeOS = "39a1118ddb1fe504057a95e3afe6cf66eddf5cc5"
-squirrel = "45b186bb4af977a702ef87138af8c65d20656c7f"
-barraCuda = "ab88db8d548784254ca1967d9dfe9e5f09b6e928"
-coralReef = "57e3fe4fb3a5ae34c5bda76d6f6564e24613e488"
-rhizoCrypt = "5a64407b4b7b93ce90e2c20582ddfac5cef7a571"
-loamSpine = "63e21d1062e091cc392cc06c014a0aa8793e97b5"
-sweetGrass = "bab46579dcfa1faa88a380657552e820a402d324"
-skunkBat = "35326c39177770f935a944635b510cd220b6270b"
-nestGate = "33b15599b1be85ca8ab05aee2360f95c3861a2c5"
-petalTongue = "ebaf483c72712ce353635d5ed74ce251a590746a"
-sourDough = "406a57575265112106b405d897609a0948520927"
-projectNUCLEUS = "04cc9019d225eb0332c17b6c33e307c08eeb6843"
-wateringHole = "a21c152b3bcee33ca5b5e3f0ccbe4eda2972de35"
-plasmidBin = "60bf2dcf063b5f7c6448ed3127f56bfac27b739d"
+barraCuda = "d9533b917306902d458a0e281922436527f40f1b"
+bearDog = "5e80b5364f3262a0f1a675469f9bcd2e2a1c9436"
+bingoCube = "c9f54107d99899f0016e83988f40922b217cdf2f"
+biomeOS = "0e617e24fc39c19a915c764ba06063662987611c"
+coralReef = "61a7023f7fc4cad942eb44afaa2e79567f95f95a"
+loamSpine = "5b3cabf4d848de266adfde663958969400c760ce"
+nestGate = "cc86fa399a1843631473837e551cdf2fb29e1cc8"
+petalTongue = "b1354006d11e2a8d7c4acb2e5773a81be6248225"
+rhizoCrypt = "0479eaaa8829829716731e9539dadae39c8d77a7"
+skunkBat = "b0df971ce9b2a04c15994744ef6a481aec96147f"
+songBird = "1b3ce7027d4d02dc5ece40a61b1251f08210b637"
+sourDough = "3a0b52df4b65a5436bfa87161e8cf181c4e85194"
+squirrel = "fad2bc4e5ac18d10f717cc5902d6ad31aafa8ffe"
+sweetGrass = "ef890871ea4c6c28f358bca10e3533e68d4940ef"
+toadStool = "81286af57caa59f587938a81228d8981f7b0a423"
+cellMembrane = "2360b5d206f7b90ef570f488e4cd06bdc5e11cf9"
+esotericWebb = "958d5b37cf639ef7a49e0fc99212c5147f40a22f"
+lithoSpore = "1407b3d4c703162a641ae66d29339f3075971d48"
+projectFOUNDATION = "5b3426bddaf4579165fae10003faf98cbb5c2c6b"
+projectNUCLEUS = "f488d7f5ad5add83e1365ae54d684afccde73237"
+wateringHole = "e8b4378f18ec2e28785f552744617d640c002420"
+plasmidBin = "f0d543270b789a381d4f27aeefbedc3393f2b202"
