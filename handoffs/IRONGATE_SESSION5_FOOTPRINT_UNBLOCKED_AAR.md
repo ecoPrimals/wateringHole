@@ -30,6 +30,8 @@ Cell attachment mode (`[cell]` schema) is the remaining ops gap.
    - 347 npm packages installed
    - **526 tests PASS** (vitest 4.1.10, 697ms)
    - Latest commit: `0cf0a22` — docs update, deploy config, data layer audit
+   - **FIX APPLIED**: Express 5 wildcard syntax (`/api/cas/*` → `/api/cas/{*path}`,
+     `*` → `{*path}`) for `path-to-regexp` v8 compatibility. Tests still pass.
 
 3. **Node.js installed**: v22.23.2 LTS (nodesource)
 
@@ -100,9 +102,12 @@ endpoints active. Integration testing can begin when Phase 1 cell attachment is 
    schema (currently only `[graph]`). The executor scaffolding is shipped but cell parsing
    isn't wired. This is the single remaining gap for Phase 1 live cell boot.
 
-2. **toadStool systemd ExecStart**: Needed for 9/9 membrane composition (8/9 today).
+2. **footPrint Express 5 wildcard**: Fixed locally (`/api/cas/*` → `/api/cas/{*path}`).
+   Needs upstream commit in `protoKarya/footPrint`. Tests pass with fix.
 
-3. **membrane socket permissions**: Non-root UDS access for `network.sock` (the 1 missing socket).
+3. **toadStool systemd ExecStart**: Needed for 9/9 membrane composition (8/9 today).
+
+4. **membrane socket permissions**: Non-root UDS access for `network.sock` (the 1 missing socket).
 
 ---
 
@@ -111,6 +116,7 @@ endpoints active. Integration testing can begin when Phase 1 cell attachment is 
 | Item | Owner | Priority |
 |------|-------|----------|
 | Wire `[cell]` schema parsing in `biomeos deploy` | biomeOS team | P1 — Phase 1 critical |
+| footPrint Express 5 wildcard fix (`/api/cas/*` → `/api/cas/{*path}`) | footPrint team | P1 — server won't start without it |
 | toadStool systemd ExecStart fix | toadStool team | P2 |
 | membrane UDS permissions (network.sock) | cellMembrane team | P2 |
 | BTSP `0xEC 0x01` transport signal docs | bearDog team | P3 |
