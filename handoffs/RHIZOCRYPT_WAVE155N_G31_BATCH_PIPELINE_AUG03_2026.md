@@ -1,6 +1,6 @@
 # rhizoCrypt Wave 155n — G31 Batch Provenance Pipeline
 
-**Date**: Aug 3, 2026 | **Wave**: 155n | **Head**: `5908997`
+**Date**: Aug 3, 2026 | **Wave**: 155n | **Head**: `0356187`
 
 ## Summary
 
@@ -45,13 +45,20 @@ Multi-session dehydration:
 |--------|-------|
 | Tests | 1,914 (+14) |
 | Source files | 225 `.rs` |
-| Lines | ~63,410 |
+| Lines | ~63,520 |
 | Coverage | 93.83% |
 | Clippy | 0 warnings |
 | cargo deny | CLEAN |
 | Cross-compile | 4 targets, zero warnings |
 | Methods | 39 (METHOD_CATALOG) |
-| Head | `5908997` |
+| Head | `0356187` |
+
+## Deep Debt (Wave 155n late)
+
+- **12 pre-existing test failures fixed**: BTSP FAMILY_ID env leaked from gate deployment into tests
+- 7 deps updated to latest patches, pedantic clippy sweep clean
+- `#[allow]`/`#[expect]` audit: all justified with reason strings
+- Zero debt markers, zero hardcoded values, zero mocks in production
 
 ## What Remains for G31
 
