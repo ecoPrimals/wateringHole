@@ -671,17 +671,17 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155q/156b — DUAL-SCIENCE MID-TERM GOALS DEFINED. **Track A (NF/GPS — Gonzales/Bin)**: tideGlass specs shipped, 519 GB data ready, Cell 2026 rebuild → NF drug screen → CTF NDU grant. **Track B (QCD — Murillo/Chuna)**: arXiv Rung 1 unblocked (SU(3) confirmed), 6-rung lattice QCD program. **Support→Science**: footPrint + esotericWebb on ironGate mature petalTongue G19 → reusable GPS viz + QCD viz. ZERO P0/P1/P2. ~120K+ tests. 12/13 GREEN. 50 glacial goals tracked (8 COMPLETE, 22 ACTIVE, 20 GLACIAL/CONCEPT).
+**Summary**: Wave 155r/156b — **G19 MILESTONE PROVEN.** petalTongue scene push firing on ironGate (exp006 22/22 PASS). esotericWebb V22→V26 in one day (471 tests, 8/9 primals zero-config, deep debt CLEAN). airSpring deep debt CLEAN (1,157 tests, workspace consolidated). CI-DIV-06 resolved (webhook E2E live). Dual-science mid-term goals defined (Tracks A+B). ZERO P0/P1/P2. ~121K+ tests. 12/13 GREEN. 50 glacial goals tracked (8 COMPLETE, 22 ACTIVE, 20 GLACIAL/CONCEPT).
 
-**Phase shift**: From "integrate and test" to **"ironGate downstream hosting."** First live cell compositions target ironGate. Pure primal compositions (no mesh) prove the full deploy chain.
+**Phase shift**: G19 proven on ironGate. **First GPU render pipeline on a downstream host.** Phase 1 cell boot infrastructure ready (V24+ cell graph). footPrint blocked on Forgejo repo creation. Upstream: toadStool ExecStart fix (9/9 membrane), socket perms, BTSP doc.
 
-**60 files fossilized** across 5 checkpoints. 12+ active AARs, 5+ active handoffs.
-- **ironGate: PRIMARY DOWNSTREAM HOST.** esotericWebb + footPrint. First live cell boot target. Matures squirrel (G18), petalTongue (G19), biomeOS (deploy). RTX 5070.
-- westGate: **DATA NAS. 519 GB / 130 datasets.** tideGlass + wetSpring + groundSpring + airSpring.
+**60 files fossilized** across 5 checkpoints. 12+ active AARs, 8+ active handoffs.
+- **ironGate: PRIMARY DOWNSTREAM HOST.** NUCLEUS 26/27 HEALTHY. G19 scene push PROVEN. esotericWebb V26 (471 tests). footPrint blocked (Forgejo repo). RTX 5070 idle 42°C. i9-14900K, 94 GB DDR5, 3.4 TB NVMe.
+- westGate: **DATA NAS. 519 GB / 130 datasets.** tideGlass + wetSpring + groundSpring + airSpring. airSpring deep debt CLEAN (1,157 tests).
 - strandGate: **COMPUTE DEV.** hotSpring + neuralSpring. P0 fixes AAR. Experiment queue.
 - biomeGate: **GPU LAB.** 3 VFIO GPUs. G32 silicon deism.
 - eastGate: **squirrel LOCAL** — 156b test perf 400s→16s, 34→1 binaries, 4,613 tests.
-- blueGate: **WINDOWS DEV.** ludoSpring.
+- blueGate: **WINDOWS DEV.** ludoSpring. Sub-builder divergences 8/10 resolved.
 
 **11 gates ONLINE** (6 NUCLEUS, 1 crankshaft + agentic, 4 other). **8 glacial goals COMPLETE** (G3, G4, G8, G10, G17, G21, G22, G29).
 **22 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G31, G32, G34, G35, G36, G37, G38, G39, G43, G44, G45, **G53**, **G54**).
@@ -696,19 +696,22 @@ completeness.
 **Gauge group resolved in code** (G9): SU(3) labels disambiguated in barraCuda/hotSpring. Paper/site relabel still needed (sporePrint scope). arXiv UNBLOCKED.
 
 **Open items — prioritized by science track impact:**
-- **ironGate first cell boot** (esotericWebb) — biomeOS live deploy (G53 enabler for both tracks)
+- **ironGate first cell boot** (esotericWebb) — G19 PROVEN, infrastructure ready, code team has V24+ cell graph. Need biomeOS live deploy ops.
+- **toadStool ExecStart fix** — membrane unit `--foreground` rejected. Fix: `toadstool up <manifest>`. BLOCKING 9/9 composition.
+- **membrane socket permissions** — `/run/membrane/*.sock` is root:root. Needs group-writable for `biomeos` group (UDS composition without privilege escalation).
+- **footPrint Forgejo repo creation** — repo does not exist on Forgejo. BLOCKING Phase 2.
 - **tideGlass Phase 0** — Zenodo inventory + RGES reproduction (Track A critical path)
 - **arXiv paper relabel** SU(2) → SU(3) + β-scan (Track B critical path)
 - squirrel → biomeOS G18 integration test (both sides wired)
 - Inter-gate content.get live test (songBird probes ready)
 - G31 loamSpine + rhizoCrypt batch coordination (sweetGrass done)
-- footPrint on ironGate (Phase 2 — petalTongue maturation for G53)
 - G32: coralReef VFIO diesel — toadStool ember + K80 firmware
 - barraCuda PRNG full validation (Week 3+)
+- BTSP `0xEC 0x01` transport signal documentation (ecosystem-wide adoption)
 
 ---
 
-*Last used*: Wave 155q/156b full orthogonal + glacial review — dual-science mid-term goals (Aug 3, 2026)
+*Last used*: Wave 155r/156b cascade — G19 PROVEN, esotericWebb V26, airSpring deep debt, CI-DIV-06 resolved (Aug 3, 2026 PM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155n springs-entry (58 files across 5 checkpoints)
