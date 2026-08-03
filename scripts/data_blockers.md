@@ -15,11 +15,11 @@ Track failures, user-intervention items, and issues to circle back to.
 | 1 | Copernicus ERA5 | Licence not accepted | Visit [ERA5 licence page](https://cds.climate.copernicus.eu/datasets/reanalysis-era5-single-levels?tab=download#manage-licences), click Accept | P2 |
 | 2 | DepMap/CCLE | Cloudflare bot protection | Download via browser from [DepMap portal](https://depmap.org/portal/download/all/), grab CCLE_expression.csv + CRISPRGeneEffect.csv | P1 |
 | 3 | HMDB metabolites | Cloudflare bot protection | Download via browser from [HMDB downloads](https://hmdb.ca/downloads), grab hmdb_metabolites.zip (~3 GB) | P2 |
-| 4 | DisGeNET | Requires free registration | Register at [DisGeNET](https://www.disgenet.org/signup/), then download curated_gene_disease_associations.tsv.gz | P2 |
+| 4 | DisGeNET | API key obtained but REST API serves React SPA | API key: `6763ddf4...fc37d`. All download endpoints return HTML. **Need browser download** of SQLite DB from [DisGeNET downloads](https://www.disgenet.org/downloads) | P2 |
 | 5 | EPA CompTox PFAS | Browser-only download | Download PFAS compound list from [CompTox Dashboard](https://comptox.epa.gov/dashboard/) | P1 |
-| 6 | EcoCyc E. coli | Academic licence required | Request at [EcoCyc](https://ecocyc.org/) | P3 |
-| 7 | OMIM genemap2 | Requires API key | Register at [OMIM API](https://omim.org/api) for free academic key | P2 |
-| 8 | MSigDB full JSON | Requires Broad login | Register at [GSEA-MSigDB](https://www.gsea-msigdb.org/gsea/msigdb/) — we got individual GMT files without auth | P3 |
+| 6 | EcoCyc E. coli | Registered (mokkevin@msu.edu, expires 2027-08-02) | Flat file download needs browser auth at [BioCyc downloads](https://biocyc.org/download-flatfiles.shtml). **Need browser download**. | P3 |
+| 7 | OMIM genemap2 | API request submitted (mokkevin@msu.edu) | Awaiting approval — JHU responds within 2 business days. Once key arrives, download via REST API. | P2 |
+| 8 | MSigDB full JSON | Registered (mokkevin@msu.edu) | **RESOLVED** — Downloaded all 35 GMT + JSON collections for v2026.1.Hs (70+ files, 44+ MB). Full XML still needs login. | **DONE** |
 | 9 | DrugBank | Requires academic registration | Register at [DrugBank](https://go.drugbank.com/releases/latest) for download access | P2 |
 | 10 | Bgee expression | Cloudflare bot protection | Download via browser from [Bgee](https://bgee.org/?page=download) | P3 |
 | 11 | AmeriFlux BASE | Requires registration | Register at [AmeriFlux](https://ameriflux.lbl.gov/) for BASE data access | P2 |
