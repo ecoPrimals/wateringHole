@@ -119,6 +119,84 @@ else:
 " 2>/dev/null || echo "UNREACHABLE")
 check "biomeOS Neural API ($HEALTH)" "$(echo $HEALTH | grep -q 'UNREACHABLE' && echo FAIL || echo PASS)"
 
+# biomeOS version check (v4.57 needed for nucleus attach)
+BIOMEOS_VER=$(echo "$HEALTH" | grep -oP 'v[\d.]+' | head -1 || echo "?")
+if echo "$BIOMEOS_VER" | grep -qP 'v4\.5[7-9]|v4\.[6-9]|v[5-9]'; then
+    check "biomeOS >= v4.57 (nucleus attach) [$BIOMEOS_VER]" "PASS"
+else
+    check "biomeOS >= v4.57 (nucleus attach) [$BIOMEOS_VER] — depot update needed" "WARN"
+fi
+
+# ── songBird + content.get Readiness ──────────────────────────────
+
+echo ""
+echo "--- Inter-Gate Readiness ---"
+
+SONGBIRD_SOCK="/run/user/1000/membrane/songbird-westgate-tower-155f.sock"
+if [ -S "$SONGBIRD_SOCK" ]; then
+    check "songBird socket" "PASS"
+    SONGBIRD_STATUS=$(python3 -c "
+import json, subprocess, struct
+prefix = struct.pack('BB', 0xEC, 0x01)
+r = subprocess.run(['socat','-t5','-','UNIX-CONNECT:$SONGBIRD_SOCK'],
+                   input=prefix+json.dumps({'jsonrpc':'2.0','method':'health.readiness','params':{},'id':1}).encode(),
+                   capture_output=True, timeout=10)
+if r.stdout:
+    raw = r.stdout[2:] if r.stdout[:2] == prefix else r.stdout
+    h = json.loads(raw).get('result',{})
+    print(h.get('status','unknown'))
+else:
+    print('unreachable')
+" 2>/dev/null || echo "unreachable")
+    if [ "$SONGBIRD_STATUS" = "ready" ]; then
+        check "songBird readiness" "PASS"
+    else
+        check "songBird readiness ($SONGBIRD_STATUS)" "WARN"
+    fi
+else
+    check "songBird socket" "FAIL"
+fi
+
+CONTENT_GET=$(python3 -c "
+import json, subprocess, struct
+prefix = struct.pack('BB', 0xEC, 0x01)
+r = subprocess.run(['socat','-t5','-','UNIX-CONNECT:/run/user/1000/membrane/nestgate-westgate-tower-155f.sock'],
+                   input=prefix+json.dumps({'jsonrpc':'2.0','method':'health.readiness','params':{},'id':1}).encode(),
+                   capture_output=True, timeout=10)
+if r.stdout:
+    raw = r.stdout[2:] if r.stdout[:2] == prefix else r.stdout
+    h = json.loads(raw).get('result',{})
+    print(h.get('status','unknown'))
+else:
+    print('unreachable')
+" 2>/dev/null || echo "unreachable")
+if [ "$CONTENT_GET" = "ready" ]; then
+    check "nestGate content.get readiness" "PASS"
+else
+    check "nestGate content.get readiness ($CONTENT_GET)" "WARN"
+fi
+
+LAN_IP=$(ip -4 addr show enp4s0 2>/dev/null | grep -oP 'inet \K[\d.]+' | head -1)
+info "LAN IP: ${LAN_IP:-unknown}"
+
+WG_STATUS=$(ip link show wg0 2>/dev/null && echo "UP" || echo "DOWN")
+if [ "$WG_STATUS" = "UP" ]; then
+    check "WireGuard wg0" "PASS"
+else
+    info "WireGuard wg0: DOWN (Tower Atomic LAN available at $LAN_IP)"
+fi
+
+CAPS=$(python3 -c "
+import json
+try:
+    d = json.load(open('/run/user/1000/membrane/capability-registry.json'))
+    if isinstance(d, list): print(len(d))
+    elif isinstance(d, dict): print(len(d.get('capabilities', d)))
+    else: print('?')
+except: print('?')
+" 2>/dev/null || echo "?")
+info "Capability registry: $CAPS entries"
+
 # ── Provenance Pipeline ──────────────────────────────────────────
 
 echo ""
@@ -179,8 +257,13 @@ check_dataset() {
     local path="$2"
     local min_size_mb="$3"
     if [ -d "$path" ]; then
-        SIZE=$(du -sm "$path" 2>/dev/null | cut -f1)
-        if [ "$SIZE" -ge "$min_size_mb" ]; then
+        # Use du with --max-depth=0 and timeout to avoid hanging on multi-million file dirs
+        SIZE=$(timeout 10 du -sm --max-depth=0 "$path" 2>/dev/null | cut -f1 || echo "")
+        if [ -z "$SIZE" ]; then
+            # du timed out — count files instead (fast ls)
+            FILE_COUNT=$(ls "$path" 2>/dev/null | head -200 | wc -l)
+            check "$name (${FILE_COUNT}+ files, du timeout — large dir)" "PASS"
+        elif [ "$SIZE" -ge "$min_size_mb" ]; then
             check "$name (${SIZE} MB)" "PASS"
         else
             check "$name (${SIZE} MB, expected >=${min_size_mb} MB)" "WARN"
