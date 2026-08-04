@@ -1,6 +1,6 @@
 # rhizoCrypt Wave 155n — G31 Batch Provenance Pipeline
 
-**Date**: Aug 4, 2026 | **Wave**: 156c | **Head**: `cce0cb9`
+**Date**: Aug 4, 2026 | **Wave**: 156d | **Head**: `ed67a9d`
 
 ## Summary
 
@@ -51,7 +51,7 @@ Multi-session dehydration:
 | cargo deny | CLEAN |
 | Cross-compile | 4 targets, zero warnings |
 | Methods | 39 (METHOD_CATALOG) |
-| Head | `cce0cb9` |
+| Head | `ed67a9d` |
 
 ## Deep Debt (Wave 155n late)
 
@@ -62,6 +62,15 @@ Multi-session dehydration:
 - Root docs + crate READMEs: 6 stale "37 methods" refs corrected to 39, CHANGELOG heading hierarchy fixed
 - Stability tiers updated: 31 stable, 8 evolving (was 6 — added `trigger_batch`, `pipeline.ingest`)
 - Debris audit: zero scripts, zero stale files, zero empty files, `cargo clean` 28.5 GiB reclaimed
+
+## Wave 156d — Root Doc Cleanup + Debris Audit (Aug 4, 2026)
+
+- Stale metrics scrubbed from DEPLOYMENT_CHECKLIST (1,914→1,785 tests, 225→214 files, Wave 151b→156c)
+- Stale metrics scrubbed from RHIZOCRYPT_SPECIFICATION (1,914→1,785 tests)
+- Stale frontmatter scrubbed from validation-summary.md (1,914→1,785 tests, date updated)
+- Debris audit: zero backup/temp/log/empty/orphan files, proptest-regressions valid (7 lines)
+- False-positive scan: zero stale TODOs in `.rs`, 1 valid spec evolution item (`Arc<str>`), operator checklists correct
+- `cargo clean`: 20,935 files, 14.9 GiB reclaimed
 
 ## Wave 156c — RPC Integration Port Isolation + Deep Debt Gate (Aug 4, 2026)
 
