@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — ironGate Downstream Hosting
 
 **Date**: Aug 4, 2026 PM | **Wave**: 155v/156d | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. nestgate.io LIVE ON MESH — petalTongue v1.7.0 serving peptidoglycan surface from sporeGate NUCLEUS via WG mesh (golgi TLS → sporeGate :8190). THREE-DOMAIN TOPOLOGY OPERATIONAL: primals.eco (outer, Zola) / nestgate.io (peti, petalTongue mesh-hosted) / primal.eco (inner, WG). ironGate Session 6: esotericWebb V30d validated (482 tests, exp006 22/22), footPrint 628 tests validated, 17 repos pulled, NUCLEUS 26/27 HEALTHY. strandGate 12⁴ PAPER-READY + parallel thermalization spec (279→95 min). Provenance RESOLVED (122×). blueGate sub-builder UNBLOCKED (SSH key + Forgejo). Full harvest running (52 builds). ~135K+ tests, 13/13 GREEN.**
+**Posture**: **P0/P1/P2: ZERO. K-DERM DNS SEPARATION COMPLETE — 3/3 layers separated. primals.eco LIVE (Cloudflare, 14 Caddy routes). nestgate.io LIVE (sovereign Knot DNS, petalTongue v1.7.0 mesh-hosted from sporeGate). primal.eco SEALED (6 A records removed, dnsmasq deployed — inner membrane invisible to public internet). DNSSEC verified (DS 2371/13/2). Full harvest COMPLETE (52/52 builds, 0 failures). Depot fully fresh across musl/windows/aarch64. blueGate sub-builder LIVE. ~135K+ tests, 13/13 GREEN.**
 
 ---
 
