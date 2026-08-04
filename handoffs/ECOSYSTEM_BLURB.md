@@ -152,7 +152,7 @@ tideGlass full Rust rebuild (161 tests, CAS wiring, 6 divergences). footPrint de
 | **rhizoCrypt** | 1,900 | GREEN | G31 batch | zero-warn 4-target cross-compile |
 | **loamSpine** | 1,740 | GREEN | G31 batch | certificate.history RPC |
 | **sweetGrass** | 1,644 | GREEN | G31 cross-primal | batch pipeline shipped |
-| **tideGlass** | **164** | GREEN | biomeOS cell boot, GPS JSON conversion | **G56 Neural API routing. Convergence gate. 9 crates.** |
+| **tideGlass** | **176** | GREEN | biomeOS cell boot, GPS JSON conversion | **Deep debt clean. Centralized identity. 0 clippy warnings.** |
 | **cellMembrane** | 1,281+ | GREEN | Portability | — |
 
 **Total**: **~130,000+ tests**. **13/13 GREEN** (barraCuda PRNG FIXED → GREEN). esotericWebb V29. hotSpring arXiv production. nestGate content.fetch. biomeOS signal graphs.
@@ -184,7 +184,7 @@ tideGlass full Rust rebuild (161 tests, CAS wiring, 6 divergences). footPrint de
 
 | Component | Status | Next |
 |-----------|--------|------|
-| **tideGlass** (protist) | **FULL RUST REBUILD.** 9 crates, 7 science modules, 11 IPC methods. **164 tests.** G56 Neural API routing COMPLETE. Provenance convergence gate (`is_dataset_converged`). CAS wiring LIVE with graceful degradation. 6 divergences documented (DIV-1→6). | Convert GPS NumPy/pickle → JSON. Chen 2017 benchmark (r >= 0.52). Wire provenance write via Neural API. |
+| **tideGlass** (protist) | **FULL RUST REBUILD.** 9 crates, 7 science modules, 11 IPC methods. **176 tests, 0 clippy warnings.** G56 Neural API routing. Convergence gate. Provenance write path. 21 deps pure Rust. CAS wiring LIVE with graceful degradation. | Convert GPS NumPy/pickle → JSON. Chen 2017 benchmark (r >= 0.52). biomeOS cell boot. |
 | **westGate data** | 519 GB / 130 datasets. GPS platform data in CAS (8 files, 1.4 GB, NumPy/pickle). | Python converter → JSON → CAS re-ingest with derivation lineage. |
 | **footPrint** (GPS viz) | **563 tests.** 10/10 constraints. nestGate CAS + petalTongue RPC wired. JSON-RPC 2.0 agent bridge. Runtime SourceManifest. | Route CAS via **Neural API** (capability-based, not direct nestGate). Caddy routing. |
 | **petalTongue** (viz) | G19 PROVEN. Wave 156b pushed (**6,755 tests, 0 doc warnings**). | footPrint + tideGlass consume via Neural API. G53 maturation. |
