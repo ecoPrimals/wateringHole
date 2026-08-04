@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — ironGate Downstream Hosting
 
-**Date**: Aug 3, 2026 7PM | **Wave**: 155s/156b | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. G19 PROVEN. ironGate Session 5: footPrint UNBLOCKED (526 TS tests PASS), Phase 1 structurally ready (cell graph dry-run OK). esotericWebb V26 (471 tests, 8/9 zero-config). neuralSpring V183 deep debt CLEAN (1,518 tests, 87% coverage). BTSP transport signal SPEC shipped. 14 docs fossilized. ~123K+ tests, 12/13 GREEN.**
+**Date**: Aug 3, 2026 9PM | **Wave**: 155t/156b | **From**: eastGate overwatch
+**Posture**: **P0/P1/P2: ZERO. G19 PROVEN. tideGlass FULL RUST REBUILD: 9 crates, 161 tests, 93% coverage, CAS wiring LIVE (6 divergences documented). footPrint deep debt: 563 tests, 10/10 constraints, JSON-RPC 2.0 agent bridge, nestGate CAS + petalTongue RPC wired. wetSpring V211c: 2,210 tests, 186 casts migrated. strandGate silicon deism VALIDATION COMPLETE (dual-GPU parity). petalTongue Wave 156b pushed (6,755 tests, 0 doc warnings). ~128K+ tests, 12/13 GREEN.**
 
 ---
 
@@ -35,7 +35,7 @@ biomeOS (composition) → graph.execute + cell graph deploy
 petalTongue (rendering) → WebGL/WASM live render on RTX 5070
     │
 ├── esotericWebb (CRPG game garden) — V26, 471 tests, G19 scene push PROVEN
-└── footPrint (GIS protist) — Nest Atomic + drawbridge, 526 TS tests (protoKarya/footPrint, cloned on ironGate)
+└── footPrint (GIS protist) — 563 tests, nestGate CAS + petalTongue RPC wired, 10/10 constraints
 ```
 
 This tests and matures:
@@ -92,7 +92,7 @@ This tests and matures:
 | Workload | Gate | Type | Mesh? | Blocker | Status |
 |----------|------|------|-------|---------|--------|
 | **esotericWebb** | **ironGate** | Garden | **No** | biomeOS live deploy (**V26, 471 tests, G19 scene push PROVEN**) | **FIRST BOOT TARGET** |
-| **footPrint** | **ironGate** | Protist | **No** | Caddy routing (**526 TS tests PASS**, cloned). Express 5 wildcard fix needed upstream | Phase 2 — UNBLOCKED |
+| **footPrint** | **ironGate** | Protist | **No** | Caddy routing (**563 tests**, CAS+petalTongue wired). Express absorb into Neural API routing. | Phase 2 — READY |
 
 ### Next — Local Data, Same Gate (Phase 4)
 
@@ -115,29 +115,22 @@ This tests and matures:
 
 ---
 
-## RECENT EVOLUTION (Wave 155p → 155s/156b)
+## RECENT EVOLUTION (Wave 155s → 155t/156b)
 
 | Event | Component | Impact |
 |-------|-----------|--------|
-| **ironGate Session 5** | ironGate | footPrint UNBLOCKED + cloned (**526 TS tests PASS**). Phase 1 cell graph dry-run OK. esotericwebb.sock LIVE. Cell attachment (`--mode attach`) only remaining gap. Express 5 wildcard fix applied. |
-| **neuralSpring V183 deep debt** | neuralSpring | 3 monolithic files split (>1100L→focused submodules). 5 prod stubs→real implementations. Capability discovery replaces hardcoded routing. **1,518 tests, 87.25% coverage.** Phase 5 dependent (needs mesh). |
-| **BTSP transport signal SPEC** | cellMembrane | `0xEC 0x01` prefix documented. 7 protocol bytes defined. Per-primal transport requirements table. Discovery+fallback sequence codified. |
-| **G19 MILESTONE: scene push PROVEN** | ironGate | petalTongue receiving game scenes via `visualization.render.scene`. exp006 **22/22 PASS**. First GPU render pipeline on downstream host. |
-| **esotericWebb V22→V26** | esotericWebb | Deep debt CLEAN. **471 tests, 0 clippy, 0 unsafe.** 8/9 primals compose zero-config. |
-| **airSpring deep debt CLEAN** | airSpring | Workspace consolidated. Pure-Rust curve fitting. **1,157 tests, 84.3% coverage.** |
-| **groundSpring deep debt** | groundSpring | Pipeline types evolved. westGate deployment ready. |
-| **blueGate sub-builder** | blueGate | Divergences 8/10 resolved. |
-| **CI-DIV-06 resolved** | sporeGate | Webhook pipeline live. |
-| **squirrel 156b** | squirrel | Test perf 400s→16s. **4,613 tests, 34→1 binaries.** |
-| **projectNUCLEUS debt** | projectNUCLEUS | Workspace unified. **265 tests.** 9 ext systems. |
-| **barraCuda P0** | barraCuda | Subgroup+PRNG FIXED. **5,037 tests.** YELLOW. |
-| **songBird mesh** | songBird | Probes shipped. **14,840+ tests.** |
-| **biomeOS dispatch** | biomeOS | Executor shipped. **8,570+ tests.** |
-| **sweetGrass G31** | sweetGrass | Batch pipeline. **1,644 tests.** |
-| **westGate data** | westGate | **519 GB / 130 datasets.** |
-| **coralReef dedup** | coralReef | -770 LOC. **3,553 tests.** |
-| **bearDog purge** | bearDog | 94 orphans deleted. **14,019 tests.** |
-| **14 docs fossilized** | overwatch | ironGate S2/S3, biomeGate wave155n cluster, squirrel 155p, 5 AARs → `wave155r_absorbed/` |
+| **tideGlass FULL RUST REBUILD** | tideGlass | Phase 0→Phase 4 in one session. 9 crates, 7 science modules, 11 IPC methods. **161 tests, 93% coverage.** CAS wiring to nestGate LIVE with graceful degradation. 6 divergences documented (DIV-1 through DIV-6). |
+| **tideGlass CAS DIVERGENCES** | tideGlass/nestGate | DIV-1: hash format wrong in specs. DIV-2: no query-by-tag API. DIV-3: nonexistent streaming method in docs. DIV-4: GPS data is NumPy/pickle (needs conversion). DIV-5: stale CAS clients in groundSpring/airSpring. DIV-6: 64 MiB inline limit. **Recommend: nestGate canonical client crate.** |
+| **footPrint deep debt CLEAN** | footPrint | **563 tests** (was 526). 10/10 constraint types (3 stubs→real Jacobians). JSON-RPC 2.0 agent bridge. Runtime SourceManifest. Full nestGate CAS integration. petalTongue RPC wired. 103/103 SPDX headers. CSS 1290L→5 modules. |
+| **wetSpring V211c deep debt** | wetSpring | 7 work streams: capability discovery, 186 casts migrated, idiom modernization, mock isolation, dep evolution. **2,210 tests.** Wire methods → capability domains (`toadstool.validate` → `compute.validate`). |
+| **strandGate silicon deism VALIDATION** | strandGate | ALL high-priority validation COMPLETE. Action-force test (6 sig figs). Creutz equality (5 sig figs). **Dual-GPU parity: RTX 3090 + RX 6950 XT, |ΔP| < 10⁻³.** β-scan matches published SU(3) data. **PAPER SUBMISSION-READY.** |
+| **petalTongue Wave 156b** | petalTongue | 3 commits pushed from local. Documentation hygiene: 9 broken intra-doc links fixed. G19 PROVEN + ironGate downstream host status updated. **6,755 tests, 0 clippy, 0 doc warnings.** |
+| **sporePrint Data Braids** | sporePrint | 16 domain pages, inline W3C PROV-O JSON-LD braids, transplant page. Data nav item. 519 GB catalog synced. |
+| **nestgate.io routing handoff** | sporeGate | Data identity surface needs DNS + Caddy routing to sporePrint `/data/` pages. |
+| **overwatch audit** | overwatch | Full posture review. nestgate.io gap, plaquette ×4 normalization gap (BLOCKS arXiv), pseudoSpore bundles empty. |
+
+### Previous wave highlights (155p → 155s)
+G19 PROVEN (Session 4). ironGate Session 5 (footPrint unblocked). esotericWebb V22→V26. neuralSpring V183 (1,518 tests). BTSP spec shipped. airSpring deep debt (1,157 tests). 14 docs fossilized. squirrel 156b (400s→16s). Full history in ortho review.
 
 ---
 
@@ -150,7 +143,7 @@ This tests and matures:
 | **nestGate** | 13,095+ | GREEN | CAS at 519 GB | — |
 | **toadStool** | 9,193+ | GREEN | VFIO ember | 48 dead deps removed |
 | **biomeOS** | 8,570+ | GREEN | **Live deploy on ironGate** | spring dispatch, deep debt CLEAN |
-| **petalTongue** | 6,755 | GREEN | **G19 PROVEN on ironGate** | scene push FIRING (exp006) |
+| **petalTongue** | 6,755 | GREEN | **G19 PROVEN on ironGate** | Wave 156b doc hygiene, 0 doc warnings |
 | **barraCuda** | 5,037 | **YELLOW** | PRNG validation | P0 shader fixes landed |
 | **squirrel** | **4,613** | GREEN | **G18 integration on ironGate** | 156b: 400s→16s, 34→1 binaries |
 | **coralReef** | 3,553 | GREEN | G32 VFIO | -770 LOC dedup |
@@ -160,7 +153,7 @@ This tests and matures:
 | **tideGlass** | **147** | GREEN | biomeOS cell boot, CAS wiring | **Full Rust rebuild: 9 crates, UniBin, 92.71% coverage** |
 | **cellMembrane** | 1,281+ | GREEN | Portability | — |
 
-**Total**: **~123,150+ tests**. 12/13 GREEN. tideGlass adds 147 (full rebuild). neuralSpring adds 1,518 (V183 deep debt). airSpring 1,157. footPrint 526. bearDog top 3 at 14,019.
+**Total**: **~128,000+ tests**. 12/13 GREEN. wetSpring 2,210 (V211c). neuralSpring 1,518. airSpring 1,157. footPrint 563. tideGlass 161.
 
 ---
 
@@ -172,7 +165,7 @@ This tests and matures:
 | Gates online | **11** |
 | Downstream host | **ironGate** (esotericWebb + footPrint) |
 | Data NAS | **westGate** (519 GB / 130 datasets / 17+ domains) |
-| Primal tests | **~123,000+** |
+| Primal tests | **~128,000+** |
 | Springs/products bootable NOW (no mesh) | **6** (esotericWebb, footPrint, tideGlass, groundSpring, airSpring, ludoSpring) |
 | Springs needing mesh | **5** (healthSpring, lithoSpore, neuralSpring, hotSpring, wetSpring dispatch) |
 | First boot target | **esotericWebb on ironGate** |
@@ -189,23 +182,25 @@ This tests and matures:
 
 | Component | Status | Next |
 |-----------|--------|------|
-| **tideGlass** (protist) | **Full Rust rebuild COMPLETE.** 9 crates, UniBin, 11 IPC methods, 147 tests, 92.71% coverage. Phase 4 — Package. | biomeOS cell boot on westGate. nestGate CAS wiring for LINCS/ChEMBL. Chen 2017 benchmark (r >= 0.52). |
-| **westGate data** | 519 GB / 130 datasets. NF-relevant datasets identified. | Ingest NF expression profiles |
-| **footPrint** (GPS viz) | 526 tests PASS on ironGate. Cloned. Express 5 fix applied. | Caddy routing → `footprint.primals.eco`. Experiment with petalTongue scene push for GIS overlays. |
-| **petalTongue** (viz) | G19 PROVEN. `visualization.render.scene` live. WebGL compiler. | Wire footPrint → petalTongue for GPS visualization (volcano plots, heatmaps, enrichment curves). G53 maturation. |
-| **nestGate** (CAS) | 13K+ tests. CAS on ZFS verified. | CAS project persistence for tideGlass provenance chain |
-| **Provenance trio** | 7/7 COMPLETE. sweetGrass batch pipeline. | Provenance per RGES execution |
+| **tideGlass** (protist) | **FULL RUST REBUILD.** 9 crates, 7 science modules, 11 IPC methods. **161 tests, 93% cov.** CAS wiring LIVE with graceful degradation. 6 divergences documented (DIV-1→6). | Convert GPS NumPy/pickle → JSON. Chen 2017 benchmark (r >= 0.52). nestGate canonical client crate. |
+| **westGate data** | 519 GB / 130 datasets. GPS platform data in CAS (8 files, 1.4 GB, NumPy/pickle). | Python converter → JSON → CAS re-ingest with derivation lineage. |
+| **footPrint** (GPS viz) | **563 tests.** 10/10 constraints. nestGate CAS + petalTongue RPC wired. JSON-RPC 2.0 agent bridge. Runtime SourceManifest. | Route CAS via **Neural API** (capability-based, not direct nestGate). Caddy routing. |
+| **petalTongue** (viz) | G19 PROVEN. Wave 156b pushed (**6,755 tests, 0 doc warnings**). | footPrint + tideGlass consume via Neural API. G53 maturation. |
+| **nestGate** (CAS) | 13K+ tests. CAS on ZFS. DIV-2: no query-by-tag API. Stale client patterns in other primals. | `content.query` method. Canonical Rust client crate for ecosystem. |
+| **Provenance trio** | 7/7 COMPLETE. sweetGrass batch pipeline. | Provenance per tideGlass RGES execution. |
 
 ### Track B: Lattice QCD on Consumer GPUs (Murillo / Chuna)
 
 | Component | Status | Next |
 |-----------|--------|------|
-| **hotSpring** (spring) | arXiv beta scan binary. riboCipher transport enforced. | Rung 1: reproduce plaquette normalization. SU(2)→SU(3) relabel. |
-| **barraCuda** (GPU math) | 5,037 tests. P0 fixes landed. MultiDevicePool wired. YELLOW (PRNG). | PRNG validation. WGSL shader source for lattice ops. |
-| **coralReef** (shaders) | 3,553 tests. -770 LOC dedup. Windows cross-compile. | WGSL compilation for QCD kernels. G32 VFIO diesel. |
-| **toadStool** (compute) | 9,193+ tests. S349 deep debt. | compute.dispatch for GPU lattice execution |
-| **esotericWebb** (viz) | V26, 471 tests. Scene push FIRING on ironGate. | Experiment with petalTongue for QCD visualization (lattice configs, Wilson loops, β-scan plots). |
-| **strandGate** (gate) | Dual EPYC + RTX 3090 + RX 6950 XT. | Experiment queue for hotSpring. Needs mesh for 293 GB streaming. |
+| **strandGate VALIDATION** | **ALL high-priority validation COMPLETE.** Action-force (6 sig figs). Creutz equality (5 sig figs). **Dual-GPU parity: RTX 3090 + RX 6950 XT, |ΔP| < 10⁻³.** β-scan matches SU(3) published data. **PAPER SUBMISSION-READY.** | Resolve plaquette ×4 normalization. Then Rung 1 production campaign. |
+| **hotSpring** (spring) | arXiv beta scan binary. riboCipher transport enforced. | Rung 1 BLOCKED on plaquette normalization. SU(2)→SU(3) relabel. |
+| **barraCuda** (GPU math) | 5,037 tests. P0 fixes. MultiDevicePool wired. YELLOW (PRNG). | PRNG validation. |
+| **coralReef** (shaders) | 3,553 tests. Windows cross-compile. | WGSL compilation for QCD kernels. |
+| **toadStool** (compute) | 9,193+ tests. S349 deep debt. | compute.dispatch for GPU lattice. |
+| **esotericWebb** (viz) | V26, 471 tests. Scene push FIRING. | QCD visualization via petalTongue. |
+| **wetSpring** (spring) | **2,210 tests.** V211c deep debt. 186 casts migrated. Capability discovery. | westGate deployment. |
+| **strandGate** (gate) | Dual EPYC + RTX 3090 + RX 6950 XT. | Experiment queue. Needs mesh for 293 GB streaming. |
 
 ### Support → Science Convergence (G53 / G54)
 
@@ -215,6 +210,12 @@ This tests and matures:
 - esotericWebb matures petalTongue's scene graph + interaction → lattice visualization for QCD
 - Both exercise squirrel G18 dispatch, biomeOS composition, nestGate CAS — the full stack
 - petalTongue becomes a **live science exploration tool**, not just a presentation layer
+
+**Neural API routing pattern**: footPrint and tideGlass CAS data should flow through the **biomeOS Neural API** (`neural-api-default.sock`) for capability-based routing rather than connecting directly to `nestgate.sock`. This means:
+- No hardcoded primal socket paths in consumer code
+- biomeOS routes `content.get`/`content.put` to nestGate automatically via capability discovery
+- When nestGate evolves (e.g., `content.query` method), consumers get it without rewiring
+- Same pattern applies to all primal interactions — consumers talk to Neural API, not individual primals
 
 ---
 
@@ -258,4 +259,4 @@ This makes petalTongue a **live science exploration platform** (VR/AR/desktop/br
 
 ---
 
-*Wave 155s/156b cascade. ironGate Session 5 confirmed footPrint UNBLOCKED (526 TS tests PASS, Express 5 wildcard fixed locally, Node.js 22 installed). Phase 1 cell graph dry-run OK — biomeOS deploy executor parses the graph, esotericwebb.sock is LIVE, cell attachment CLI is the single remaining gap. neuralSpring V183 completed deep debt (1,518 tests, 87% coverage, 3 monolithic files split, 5 stubs→real implementations, capability discovery replaces hardcoding). BTSP transport signal spec shipped — `0xEC 0x01` prefix, 7 protocol bytes, per-primal requirements table. 14 docs fossilized to `wave155r_absorbed/`. Both science tracks advancing: Track A (NF/GPS) has tideGlass specs + 519 GB data + footPrint on ironGate for GPS viz maturation; Track B (QCD) has hotSpring arXiv ready + barraCuda GPU math + esotericWebb on ironGate for lattice viz. petalTongue's evolution toward a full science exploration platform (WebGPU/egui-wgpu, Godot interop, VR/AR via OpenXR) is strategically mapped — the path is capability delegation through the GPU stack (barraCuda→coralReef→toadStool), not engine replacement. ~123K+ tests across 12/13 GREEN primals. Critical path: biomeOS cell attachment CLI for Phase 1 live boot, then footPrint Caddy routing, then squirrel G18 integration with both consumers driving petalTongue G53 maturation.*
+*Wave 155t/156b cascade. Massive evolution absorbed. tideGlass went from Phase 0 specs to FULL RUST REBUILD in one session — 9 crates, 7 science modules, 161 tests, 93% coverage, CAS wiring to nestGate LIVE with graceful degradation and 6 divergences documented (hash format, no query-by-tag, stale specs, NumPy format, stale clients, 64 MiB limit). footPrint deep debt eliminated 19 ESLint errors, 76 Prettier violations, implemented 3 stubbed constraints (tangent/symmetric/setback with Jacobians), wired JSON-RPC 2.0 agent bridge, full nestGate CAS integration, and petalTongue RPC — 563 tests, 103/103 SPDX headers. wetSpring V211c completed 7 work streams (186 casts migrated, capability discovery, idiom modernization) — 2,210 tests. strandGate silicon deism validation COMPLETE: action-force test (6 sig figs), Creutz equality (5 sig figs), dual-GPU parity RTX 3090 + RX 6950 XT (|ΔP| < 10⁻³), β-scan matches published SU(3). PAPER SUBMISSION-READY pending plaquette ×4 normalization. petalTongue Wave 156b pushed from local (6,755 tests, 9 broken intra-doc links fixed, 0 doc warnings). Key architectural insight: footPrint and tideGlass CAS data should route through biomeOS Neural API for capability-based discovery rather than direct nestGate socket connections — this is the ecosystem pattern. ~128K+ tests across 12/13 GREEN primals. Critical path: plaquette normalization for arXiv, biomeOS cell attachment for Phase 1, GPS NumPy→JSON conversion for tideGlass CAS, nestGate canonical client crate.*
