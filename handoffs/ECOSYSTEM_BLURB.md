@@ -10,7 +10,7 @@
 | Gate | Role | What Runs | Why |
 |------|------|-----------|-----|
 | **ironGate** | **Downstream host** | esotericWebb + footPrint + squirrel + petalTongue live render | NUCLEUS 13/13 LIVE. i9-14900K, RTX 5070, 94GB. Pure compositions — no mesh needed. First live consumer environment. Matures squirrel (G18) + petalTongue (G19). |
-| **westGate** | **Data NAS** | tideGlass + wetSpring + groundSpring + airSpring | 519 GB / 130 datasets on ZFS. All data local. Science springs boot here without mesh. |
+| **westGate** | **Data NAS** | tideGlass + wetSpring + groundSpring + airSpring | 3.65 TB / 154 datasets on ZFS. All data local. Science springs boot here without mesh. Provenance pipeline at 43/s (canonical). |
 | **strandGate** | **Compute dev** | hotSpring + neuralSpring | Dual EPYC, RTX 3090, RX 6950 XT. GPU compute + experiment queue. Data from westGate via mesh. |
 | **biomeGate** | **GPU lab** | G32 silicon deism. 3 VFIO GPUs. | Threadripper 3970X. coralReef diesel engine. Cross-vendor validation. |
 | **blueGate** | **Windows dev** | ludoSpring. Windows NUCLEUS. | G29 H2 DNS. Windows sub-builder. |
@@ -71,7 +71,7 @@ This tests and matures:
 - Mature petalTongue G19 live render with actual game/GIS consumers
 
 ### Phase 4: westGate science springs (no mesh needed)
-- Boot tideGlass on westGate (519 GB data local, **UniBin COMPLETE — 9 crates, 164 tests, Neural API routing, convergence gate**)
+- Boot tideGlass on westGate (3.65 TB data local, **UniBin COMPLETE — 9 crates, 164 tests, Neural API routing, convergence gate**)
 - Boot groundSpring + airSpring on westGate (NOAA/USGS/USDA local)
 - First science spring compositions with real data
 - ludoSpring on blueGate (pure composition, no deps)
@@ -155,7 +155,7 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 |--------|-------|--------|-----|--------|
 | **songBird** | 14,840+ | GREEN | E2E live test | mesh probes shipped |
 | **bearDog** | **14,019** | GREEN | — | 94 orphan files purged (155m) |
-| **nestGate** | 13,095+ | GREEN | CAS at 519 GB | — |
+| **nestGate** | 13,095+ | GREEN | CAS at 3.65 TB | — |
 | **toadStool** | 9,193+ | GREEN | VFIO ember | 48 dead deps removed |
 | **biomeOS** | 8,570+ | GREEN | **Live deploy on ironGate** | spring dispatch, deep debt CLEAN |
 | **petalTongue** | 6,755 | GREEN | **G19 PROVEN on ironGate** | Wave 156b doc hygiene, 0 doc warnings |
@@ -179,7 +179,7 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 | P0/P1/P2 | **ZERO** |
 | Gates online | **11** |
 | Downstream host | **ironGate** (esotericWebb + footPrint) |
-| Data NAS | **westGate** (519 GB / 130 datasets / 17+ domains) |
+| Data NAS | **westGate** (3.65 TB / 154 datasets / 17+ domains) |
 | Primal tests | **~135,000+** |
 | Springs/products bootable NOW (no mesh) | **6** (esotericWebb, footPrint, tideGlass, groundSpring, airSpring, ludoSpring) |
 | Springs needing mesh | **5** (healthSpring, lithoSpore, neuralSpring, hotSpring, wetSpring dispatch) |
@@ -200,7 +200,7 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 | Component | Status | Next |
 |-----------|--------|------|
 | **tideGlass** (protist) | **FULL RUST REBUILD.** 9 crates, 7 science modules, 11 IPC methods. **176 tests, 0 clippy warnings.** G56 Neural API routing. Convergence gate. Provenance write path. 21 deps pure Rust. CAS wiring LIVE with graceful degradation. | Convert GPS NumPy/pickle → JSON. Chen 2017 benchmark (r >= 0.52). biomeOS cell boot. |
-| **westGate data** | 519 GB / 130 datasets. GPS platform data in CAS (8 files, 1.4 GB, NumPy/pickle). | Python converter → JSON → CAS re-ingest with derivation lineage. |
+| **westGate data** | 3.65 TB / 154 datasets. GPS platform data in CAS (8 files, 1.4 GB, NumPy/pickle). | Python converter → JSON → CAS re-ingest with derivation lineage. |
 | **footPrint** (GPS viz) | **628 tests.** Manifest-driven source registration. Dynamic category boosts. Constants centralized. riboCipher UDS transport. ironGate Phase 2 DEPLOY READY (port 3002, validated against live NUCLEUS). | BTSP local-trust for CAS write. Caddy routing. |
 | **petalTongue** (viz) | G19 PROVEN. Wave 156b pushed (**6,755 tests, 0 doc warnings**). | footPrint + tideGlass consume via Neural API. G53 maturation. |
 | **nestGate** (CAS) | 13K+ tests. CAS on ZFS. DIV-2: no query-by-tag API. Stale client patterns in other primals. | `content.query` method. Canonical Rust client crate for ecosystem. |

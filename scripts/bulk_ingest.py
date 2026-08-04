@@ -226,20 +226,6 @@ def spine_create(dataset):
     })
 
 
-def spine_entry_append(spine_id, b3hash, mime_type, size):
-    """Append a DataAnchor entry to the spine."""
-    return rpc_result("loamspine", "entry.append", {
-        "spine_id": spine_id,
-        "entry_type": {
-            "DataAnchor": {
-                "data_hash": hex_to_content_hash(b3hash),
-                "mime_type": mime_type,
-                "size": size,
-            },
-        },
-    })
-
-
 def spine_session_commit(spine_id, session_id, merkle_root_hex, vertex_count):
     """Commit the DAG session's Merkle root to the spine."""
     return rpc_result("loamspine", "session.commit", {

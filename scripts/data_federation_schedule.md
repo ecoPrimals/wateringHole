@@ -4,7 +4,7 @@
 **Connection**: 1 Gbps fiber (residential — avoid saturation)
 **Policy**: Download in batches, off-peak preferred, never >80% sustained for >1h
 **Every byte with provenance = latent value (zero egress at 10G LAN)**
-**Updated**: Aug 3, 2026 02:30 EDT
+**Updated**: Aug 4, 2026 (stats current; dataset table reflects Sessions 1-3)
 
 ---
 
@@ -186,7 +186,8 @@
 
 ---
 
-| **GRAND TOTAL** | **~515 GB** | **~535 files** | **130 datasets** |
+| **Session 1-2 subtotal** | **~515 GB** | **~535 files** | **130 datasets** |
+| **Current (Aug 4, 2026)** | **~3.65 TB** | **~1500+ files** | **154 datasets** |
 
 ---
 
@@ -230,14 +231,14 @@ See `data_blockers.md` for full details. Key items:
 
 | Milestone | Cumulative | % of ZFS |
 |-----------|-----------|----------|
-| Current (Aug 3 06:30) | **~782 GB** (130 datasets, 1315+ files) | 1.24% |
+| Current (Aug 4, 2026) | **~3.65 TB** (154 datasets, ZFS 63.7 TB pool) | 5.7% |
 | ~~AlphaFold 46/46~~ | 79 GB | **DONE** |
 | ~~SRA FASTQ 5 BioProjects~~ | 267 GB | **DONE** |
-| After user P1 registrations | ~525 GB | 1.04% |
-| After SRA FASTQ batch (5 BioProjects) | ~740 GB | 1.46% |
-| After GEO SOFT + TCGA full expansion | ~990 GB | 1.95% |
-| After SRA curated BioProjects (2 TB) | ~3 TB | 5.9% |
-| After month-scale batch (AlphaFold full) | ~26 TB | 51% |
+| ~~AlphaFold full sync (v1-v6 + metadata)~~ | ~2.5 TB | **DONE** (trailer braiding at 43/s) |
+| After user P1 registrations | +~5 GB | — |
+| After GEO SOFT + TCGA full expansion | +~50 GB | — |
+| After SRA curated BioProjects (2 TB) | ~6 TB | ~9.4% |
+| After month-scale batch (AlphaFold full 214M) | ~26 TB | ~41% |
 
 ## Credential Vault
 

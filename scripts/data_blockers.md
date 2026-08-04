@@ -2,7 +2,7 @@
 
 **Gate**: westGate
 **Started**: Aug 2, 2026
-**Updated**: Aug 3, 2026 07:25 EDT
+**Updated**: Aug 4, 2026
 
 Track failures, user-intervention items, and issues to circle back to.
 
@@ -109,13 +109,13 @@ Track failures, user-intervention items, and issues to circle back to.
 - **AlphaFold full sync**: Started via rsync with systemd timer (restart-safe). Swiss-Prot CIF (37 GB) + PDB (27 GB) + sequences.fasta (118 GB) + metadata downloading.
 - **GWAS Catalog**: Full FTP release (700 MB) via rsync — bypassed broken API
 
-### Running Total
+### Running Total (Aug 4, 2026)
 
-- **Grand total**: ~790 GB, 136 datasets, 1325+ files
-- **ZFS usage**: 1.25% of 50.0 TB
-- **AlphaFold full sync**: In progress (~195 GB remaining → will reach ~980 GB)
+- **Grand total**: ~3.65 TB, 154 datasets on ZFS (63.7 TB pool, 5.7% used)
+- **AlphaFold full sync**: COMPLETE (v1-v6 + metadata). Provenance trailer braiding at 43/s (canonical pipeline).
+- **Provenance**: 122x throughput improvement after spine alignment (Wave 155u)
 - **Blockers remaining**: 5 OPEN download failures, 12 need-user items
-- **Blockers resolved this session**: 7 of 24
+- **Blockers resolved (Sessions 1-3)**: 7 of 24
 
 *Circle back to NEEDS USER items when user has time for registrations.*
 *Remaining OPEN items: Dryad LTEE, CORUM, dbNSFP, MalariaGEN, EGLE PFAS, HMP — all require deeper API research or have moved.*

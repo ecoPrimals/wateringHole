@@ -3,8 +3,9 @@
 # Prevents saturating the home internet connection
 # Rate limit: 50 MB/s (~400 Mbps) leaves headroom for other devices
 #
-# Provenance is INLINE: every downloaded file is immediately BLAKE3-hashed,
-# CAS-put, DAG-evented, and braided. No separate revalidation pass needed.
+# Provenance is POST-DOWNLOAD: after each dataset downloads, revalidate_data.py
+# runs batch provenance (BLAKE3 → CAS → DAG → session.commit → braid).
+# Superseded by manifest_download.py for new acquisitions.
 #
 # Usage: metered_download.sh
 # Runs sequentially through the download queue, skipping completed items.

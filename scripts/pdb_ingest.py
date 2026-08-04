@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-PDB Structure Ingestion Pipeline — westGate CAS + Provenance Trio
+PDB Structure Ingestion — westGate CAS smoke test
 
-Fetches PDB structures from RCSB, ingests through the full provenance chain:
+Fetches individual PDB structures from RCSB and runs a partial pipeline:
   fetch → BLAKE3 hash → nestGate CAS (content.put)
-  → rhizoCrypt DAG event → loamSpine Merkle certificate
-  → bearDog Ed25519 signature → sweetGrass attribution braid
+  → health.check on rhizoCrypt/loamSpine (connectivity only)
+
+Per-structure smoke test. For batch ingestion with full provenance,
+use pdb_manifest_ingest.py or bulk_ingest.py.
 
 Usage:
   python3 pdb_ingest.py --ids 2D24,1XYN,1QWN       # specific IDs

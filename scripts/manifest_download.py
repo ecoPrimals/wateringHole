@@ -3,10 +3,13 @@
 Manifest-Driven Data Acquisition — replaces metered_download.sh
 
 Reads DataManifest TOML files and executes the full acquisition pipeline:
-  1. nest.declare_dataset (pre-braid)
-  2. For each entry: fetch → BLAKE3 → CAS → DAG event → spine entry
+  1. nest.declare_dataset (DAG session + spine creation)
+  2. For each entry: fetch → BLAKE3 → CAS → DAG event (no per-file spine)
   3. Partial dehydration checkpoints
-  4. nest.complete_dataset (final braid)
+  4. nest.complete_dataset (dehydrate → session.commit → sign → braid)
+
+Canonical provenance: per-file CAS+DAG only, session-level spine commit.
+See PROVENANCE_TRIO_ARCHITECTURE.md for the canonical pipeline.
 
 Bandwidth governance: respects rate_limit_mbps from manifest and queries
 topology.bandwidth.budget before starting (when available).
@@ -33,9 +36,9 @@ except ImportError:
 
 sys.path.insert(0, str(Path(__file__).parent))
 from bulk_ingest import (
-    rpc, rpc_result, blake3_hash, cas_put, guess_mime,
+    rpc, rpc_result, blake3_hash, cas_put,
     dag_session_create, dag_event_append, dag_partial_dehydrate,
-    dag_dehydrate, spine_create, spine_entry_append,
+    dag_dehydrate, spine_create,
     spine_session_commit, sign_merkle_root, braid_create,
     hex_to_content_hash,
 )
@@ -271,14 +274,10 @@ def run_manifest(manifest_path):
         # CAS store
         cas_put(file_path, b3)
 
-        # DAG event
+        # DAG event (per-file; spine commit is session-level at dehydration)
         vertex = dag_event_append(session_id, b3, file_path.name, size, dataset)
         if vertex:
             event_count += 1
-
-        # Spine entry
-        mime = guess_mime(file_path)
-        spine_entry_append(spine_id, b3, mime, size)
 
         acquired += 1
 

@@ -1,8 +1,10 @@
 #!/bin/bash
-# AlphaFold DB — Full 214M+ structure bulk downloader
+# SUPERSEDED by alphafold_bulk_download.py (async Python, systemd alphafold-bulk.service)
+# Kept as fossil — bash+xargs prototype, no .prov_queue integration.
+#
+# AlphaFold DB — Full 214M+ structure bulk downloader (original bash version)
 # Downloads every predicted structure CIF from the AlphaFold API
 # Restart-safe: tracks completed accessions, skips already-downloaded files
-# Run via systemd timer for persistence across reboots
 #
 # URL pattern: https://alphafold.ebi.ac.uk/files/AF-{ID}-F1-model_v6.cif
 # Source manifest: accession_ids.csv (8.7 GB, ~217M entries)

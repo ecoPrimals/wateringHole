@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 """
-PDB Manifest-Based Batch Ingestion — westGate CAS + Provenance Trio
+PDB Manifest-Based Batch Ingestion — westGate CAS + Provenance
 
 Handles 257K+ PDB mmCIF files efficiently:
   1. Parallel BLAKE3 hashing via b3sum (multi-threaded, ~2 GB/s)
   2. Build JSON manifest mapping hash → path → size
   3. Store manifest in CAS
-  4. Run provenance chain on manifest (one DAG event, one cert, one sig, one braid)
+  4. Run spine.create + health.check (connectivity smoke test)
   5. Optionally batch individual file CAS registration
 
-This avoids 1.2M+ individual RPC calls by treating the entire PDB mirror
-as a single provenance-tracked dataset with per-file integrity via BLAKE3.
+Note: This script tests CAS + spine creation but does not run the full
+canonical pipeline (DAG session → dehydrate → session.commit → sign → braid).
+For full provenance, use bulk_ingest.py or revalidate_data.py.
 
 Usage:
   python3 pdb_manifest_ingest.py --pdb-dir /mnt/nestgate/cold/zfs/data/pdb_mmcif/
