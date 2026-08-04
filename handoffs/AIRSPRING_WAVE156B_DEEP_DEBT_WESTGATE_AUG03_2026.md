@@ -4,16 +4,18 @@
 **Gate**: westGate (Data NAS)
 **Wave**: 156b
 **Primal**: airSpring
-**Commit**: pending (cascade push)
+**Commit**: 308a3b0+ (pushed to golgiBody)
 
 ---
 
 ## Summary
 
-Full deep-debt resolution session on airSpring. Workspace consolidated to root
-`Cargo.toml` (WORKSPACE_DEPENDENCY_STANDARD), all production stubs evolved to
-pure-Rust, hardcoded primal names eliminated, GPU test patterns centralized,
-large files refactored, docs updated for westGate deployment context.
+Full deep-debt resolution + evolution session on airSpring. Workspace consolidated
+to root `Cargo.toml` (WORKSPACE_DEPENDENCY_STANDARD), ALL production stubs evolved
+to pure-Rust (incl. SPI/gamma CDF + inverse normal), panicking constructors
+eliminated, hardcoded primal names removed, GPU test patterns centralized, large
+files refactored, `#[allow]` → `#[expect(reason)]` throughout, docs bulk-synced for
+westGate deployment context. Zero remaining debt.
 
 ## Deep Debt Completed
 
@@ -67,27 +69,59 @@ Added `gpu_or_skip!` macro in `testutil/mod.rs`. Replaced 52/60 inline
 
 Zero files over 800L target.
 
+### SPI/Gamma Pure-Rust Evolution
+
+`barracuda/src/eco/drought_index.rs` had `cfg(not(feature = "local"))` stubs
+returning `f64::NAN` for gamma CDF and SPI. Replaced with pure-Rust:
+- Regularized lower incomplete gamma function (series + continued fraction)
+- Lanczos `ln_gamma` approximation (7-coefficient)
+- Abramowitz & Stegun inverse normal CDF (probit)
+
+All SPI/drought tests now run in IPC-only builds. Feature-gated `barracuda::special::gamma`
+and `barracuda::stats::normal` imports removed. +8 new tests.
+
+### Panicking Constructor Evolution
+
+`OpenMeteoProvider::new()` and `NassProvider::new()` evolved from `.expect()` panic
+to fallible `Result<Self, DataError>`. Removed unused `Default` impl. Zero panicking
+constructors remain in library code. Zero callers broke (none existed).
+
+### Lint Hygiene
+
+- `tests/common/mod.rs`: 3× `#[allow]` → `#[expect(reason)]`
+- `exp003`: 2× `#[allow(dead_code)]` → `#[expect(dead_code, reason)]`
+- `provenance_tests.rs`: camelCase string literals → `primal_names::*` constants
+
 ### Unsafe Review
 
 `EnvGuard` in `testutil/env_guard.rs` uses `unsafe` for `env::set_var`/`remove_var`
 (Rust 2024). Confirmed correct: test-only, `#[serial]`, RAII guard, production
 builds have `#![forbid(unsafe_code)]`. No changes needed.
 
+### Doc Bulk Sync
+
+12+ active documentation files updated from stale `1,061 lib + 316 integration +
+69 forge = 1,446` pattern to current `1,172 lib + 68 forge = 1,240 workspace`:
+whitePaper (README, STUDY, METHODOLOGY, baseCamp), specs (README, CROSS_SPRING,
+NUCLEUS, BARRACUDA_REQUIREMENTS), sporeprint/validation-summary.
+
 ## Metrics
 
 | Metric | Value |
 |--------|-------|
-| Lib tests (barracuda) | **1,089 passed** |
+| Lib tests (barracuda) | **1,172 passed** |
 | Forge tests | **68 passed** |
-| Total | **1,157** |
-| Clippy | **0 warnings** (pedantic + nursery) |
-| Fmt | **Clean** |
-| Rustdoc | **0 warnings** |
+| Total | **1,240** |
+| Clippy | **0 warnings** (pedantic + nursery, workspace) |
+| Fmt | **Clean** (workspace) |
+| Rustdoc | **0 warnings** (workspace) |
 | Line coverage | **84.30%** |
 | Function coverage | **87.83%** |
 | Files >800L | **0** |
 | TODOs in production | **0** |
-| Stubs in production | **0** |
+| Stubs in production | **0** (incl. SPI/gamma — pure-Rust) |
+| Panicking ctors | **0** |
+| `#[allow]` in prod | **0** (all `#[expect(reason)]`) |
 | Hardcoded primals | **0** |
 | Unsafe in production | **0** |
 
