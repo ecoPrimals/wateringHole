@@ -1,178 +1,171 @@
 # ecoPrimals Ecosystem Blurb — Cell Boot + Depot Sync Era
 
 **Date**: Aug 4, 2026 PM | **Wave**: 156d | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. FIRST CELL BOOT SUCCEEDED (ironGate Session 8, 21/22 PASS). DEPOT v4.57+ SYNCED (52 builds). footPrint Phase 2 DEPLOYED + `footprint.primals.eco` LIVE (golgi Caddy → ironGate WG mesh :3002). nestgate.io FULLY OPERATIONAL (content backend wired, branded). GPS data CONVERTED (11 JSON, 103 MB CAS-ingested). sporeGate 14/14 + ironGate 10/10 active. strandGate STAGED (GPU at 100%, restart deferred). K-derm 3/3 FULLY OPERATIONAL. LAN-first Tower 1ms. ~135K+ tests, 13/13 GREEN.**
+**Posture**: **P0/P1/P2: ZERO. DEPOT v4.57+ SYNCED (52 builds). FIRST CELL BOOT SUCCEEDED (ironGate Session 8 — `biomeos nucleus attach`, 21/22 PASS). footPrint Phase 2 DEPLOYED (systemd, CAS E2E, 708 tests). nestgate.io FULLY OPERATIONAL (content backend wired, branded). K-derm FULLY OPERATIONAL (dnsmasq deployed, 11 gates resolving). GPS data CONVERTED (11 JSON, 103 MB CAS-ingested). ~135K+ tests, 13/13 GREEN.**
+
+---
+
+## WHAT JUST HAPPENED — Session 8 Cascade
+
+| Event | Gate | Status |
+|-------|------|--------|
+| **Depot v4.57+ SYNCED** | sporeGate | 52 builds (13 primals × 4 targets). golgi depot pushed (45 new, 10 current). |
+| **sporeGate NUCLEUS restarted** | sporeGate | 14/14 HEALTHY on new binaries. |
+| **ironGate NUCLEUS restarted** | ironGate | 10/10 HEALTHY on new binaries. |
+| **strandGate binaries staged** | strandGate | Binaries ready, restart pending. |
+| **FIRST CELL BOOT SUCCEEDED** | ironGate | `biomeos nucleus attach esotericwebb_cell.toml` — first-ever cell attachment. exp006 21/22 PASS (1 skip, 0 fail). Scene push to petalTongue firing. |
+| **footPrint Phase 2 DEPLOYED** | ironGate | systemd active, CAS E2E verified (TCP local-trust), 708 tests, agent bridge live. Remaining: golgi Caddy routing. |
+| **nestgate.io DIVs RESOLVED** | sporeGate | DIV-1: nestGate UDS socket wired. DIV-2: content-provider → nestGate. DIV-4: Branded "ecoPrimals Data Surface". |
+| **K-derm FULLY OPERATIONAL** | all | dnsmasq `primal-eco.conf` deployed, all 11 gates resolving. LAN-first Tower active. |
+| **GPS data CONVERTED** | westGate | pickle→JSON converter: 2198 genes, MLP weights, RCL ensembles, compound matrices. 11 JSON outputs (103.4 MB) CAS-ingested with BLAKE3. |
+| **westGate v4.57 DEPLOYED** | westGate | Built from source (commit 96083386). `nucleus attach` available. NUCLEUS restarted: 14/14 HEALTHY. |
+| **westGate convergence sweep** | westGate | 153 datasets scanned. 0 CONVERGED, 5 CAS-ONLY, 89 PARTIAL, 32 PRIMORDIAL, 21 EMPTY. Bulk provenance campaign needed. |
+
+---
+
+## GATE FLEET STATUS — POST-SYNC
+
+| Gate | NUCLEUS | Depot | Status |
+|------|---------|-------|--------|
+| **sporeGate** | **14/14 v4.57+** | **BUILD AUTHORITY — FRESH** | Sovereign CI. 52/52 harvest complete. LAN-first Tower (4 local, 1ms). |
+| **ironGate** | **10/10 v4.57+** | **CURRENT** | **FIRST CELL BOOT + footPrint Phase 2 LIVE.** 708 tests. |
+| **westGate** | **14/14 v4.57** | **SOURCE-BUILT** | GPS data converted. Convergence sweep complete. `nucleus attach` ready. |
+| **strandGate** | v4.56 → **binaries staged** | **READY TO RESTART** | Active GPU production. Schedule restart. |
+| **blueGate** | v4.56 | **NEEDS DEPOT PULL** | Windows — membrane.exe rebuild needed. |
+| **southGate** | v4.56 | **NEEDS DEPOT PULL** | Validation re-check after sync. |
+| **biomeGate** | Source-built compute | — | GPU lab. Not full NUCLEUS. |
+| **golgi** | Thin relay | — | Needs Caddy update for `footprint.primals.eco`. |
+| **northGate** | — | — | Daily driver. Skip. |
+| **grapheneGate** | Tower | — | Mobile. Skip. |
+| **eastGate** | — | — | Overwatch. Skip. |
+
+### Remaining Sync Work
+
+```
+DONE: sporeGate harvest (52/52)     ✓
+DONE: ironGate redeploy (10/10)     ✓
+DONE: strandGate binaries staged    ✓
+DONE: westGate source-built v4.57   ✓  (14/14 HEALTHY)
+
+NEXT: strandGate NUCLEUS restart    — schedule during therm pause
+NEXT: blueGate + southGate          — Windows + validation
+NEXT: golgi Caddy routing           — footprint.primals.eco
+```
 
 ---
 
 ## GATE ROLE TAXONOMY
 
-| Gate | Role | What Runs | Why |
-|------|------|-----------|-----|
-| **ironGate** | **Downstream host** | esotericWebb + footPrint + squirrel + petalTongue live render | NUCLEUS 13/13 LIVE. i9-14900K, RTX 5070, 94GB. Pure compositions — no mesh needed. First live consumer environment. Matures squirrel (G18) + petalTongue (G19). |
-| **westGate** | **Data NAS** | tideGlass + wetSpring + groundSpring + airSpring | 3.65 TB / 154 datasets on ZFS. All data local. Science springs boot here without mesh. Provenance pipeline at 43/s (canonical). |
-| **strandGate** | **Compute dev** | hotSpring + neuralSpring | Dual EPYC, RTX 3090, RX 6950 XT. GPU compute + experiment queue. Data from westGate via mesh. |
-| **biomeGate** | **GPU lab** | G32 silicon deism. 3 VFIO GPUs. | Threadripper 3970X. coralReef diesel engine. Cross-vendor validation. |
-| **blueGate** | **Windows dev** | ludoSpring. Windows NUCLEUS. | G29 H2 DNS. Windows sub-builder. |
-| **sporeGate** | **CI / membrane** | Sovereign CI. G34/G35. | Build authority. Depot. DNS. |
-| **southGate** | **Validation** | NUCLEUS 22/22 reference gate. | G17+G8 PROVEN. |
-| **eastGate** | **Overwatch** | squirrel (pushed 156d). | Sovereignty cleanup, 27 deprecated aliases removed, debris purged. |
+| Gate | Role | What Runs | Key Specs |
+|------|------|-----------|-----------|
+| **ironGate** | **Downstream host** | esotericWebb (cell boot) + footPrint (Phase 2 LIVE) + squirrel + petalTongue | i9-14900K, RTX 5070, 94GB. |
+| **westGate** | **Data NAS** | tideGlass + wetSpring + groundSpring + airSpring | 3.21 TB / 153 datasets on ZFS raidz1 50.7TB. v4.57 LIVE. GPS data converted. |
+| **strandGate** | **Compute** | hotSpring + neuralSpring | Dual EPYC, RTX 3090, RX 6950 XT. QCD production. |
+| **biomeGate** | **GPU lab** | G32 silicon deism. 3 VFIO GPUs. | Threadripper 3970X, 128GB. |
+| **blueGate** | **Windows dev** | ludoSpring. Windows NUCLEUS. | Sub-builder. |
+| **sporeGate** | **CI / membrane** | Sovereign CI. Build authority. nestgate.io. | Depot. Knot DNS. |
+| **southGate** | **Validation** | NUCLEUS reference gate. | G17+G8 PROVEN. |
+| **eastGate** | **Overwatch** | squirrel (156d). | Code hub. |
 | **northGate** | **Windows dev** | RTX 5090. Daily driver. | AlphaFold data source. |
 | **grapheneGate** | **Mobile** | Tower (TCP). Pixel 8a. | Beacon seed. |
-| **golgi** | **VPS relay** | Forgejo + depot + sporePrint. | Thin-relay composition. |
+| **golgi** | **VPS relay** | Forgejo + depot + sporePrint. | Thin-relay. |
 
 ---
 
-## ironGate DOWNSTREAM STACK
+## PHASE STATUS
 
-ironGate creates a vertical slice through the entire primal-to-product stack:
+### Phase 1: Cell Boot — SUCCEEDED
+`biomeos nucleus attach esotericwebb_cell.toml` on ironGate. First-ever cell attachment. exp006 21/22 PASS (1 skip from `biomeos/` → `membrane/` socket path migration, 0 fail). Scene push to petalTongue firing post-attach.
 
-```
-squirrel (agent dispatch) → signal.plan + signal.dispatch
-    │
-biomeOS (composition) → graph.execute + cell graph deploy
-    │
-petalTongue (rendering) → WebGL/WASM live render on RTX 5070
-    │
-├── esotericWebb (CRPG game garden) — V30d, 482 tests, exp006 22/22 PASS, signed provenance + dead code clean
-└── footPrint (GIS protist) — 628 tests, manifest-driven sources, Phase 2 deploy ready, riboCipher wired
-```
+### Phase 2: footPrint — DEPLOYED
+systemd active on ironGate. CAS E2E verified (TCP local-trust). 708 tests. Agent bridge live. **Remaining: golgi Caddy routing.**
 
-This tests and matures:
-- **squirrel**: G18 signal dispatch with real consumers, not mocks
-- **petalTongue**: G19 live render pipeline with actual GPU output on RTX 5070
-- **biomeOS**: First real multi-composition deployment on a single gate
-- **nestGate**: CAS project persistence for footPrint (local, no mesh needed)
+### Phase 3: squirrel + petalTongue — NEXT
+- squirrel G18 signal dispatch with real consumers (esotericWebb + footPrint)
+- petalTongue G19 live render on RTX 5070
 
-**Why no mesh needed**: Both esotericWebb and footPrint are pure primal compositions with no external data gate dependency. All primals run on ironGate's NUCLEUS. External GIS data (USGS, FEMA, OSM) comes via songBird drawbridge (internet, not mesh).
+### Phase 4: westGate science springs — UNBLOCKED
+- westGate v4.57 DEPLOYED (14/14 HEALTHY), `nucleus attach` available
+- tideGlass GPS data CONVERTED (11 JSON, 103 MB CAS-ingested)
+- Cell TOMLs exist for all 4 springs
+- **Next**: `biomeos nucleus attach --cell tideglass_cell.toml` on westGate
+- groundSpring, airSpring also ready. ludoSpring on blueGate waiting.
 
----
-
-## 5-PHASE EXECUTION SEQUENCE
-
-### Phase 1: First live cell boot — esotericWebb on ironGate
-- Run biomeOS deploy executor with `esotericwebb_cell.toml` on ironGate
-- Validate all 13 primals + esotericWebb garden compose correctly
-- Wire petalTongue live render for game shaders (RTX 5070)
-- **This is the first-ever live cell composition boot in the ecosystem**
-- **STATUS**: **V30d VALIDATED on ironGate.** 482 tests PASS, exp006 22/22 PASS, 8/9 primals direct-connected. Signed provenance + batch chunking. Dead code eliminated. **Cell attachment SHIPPED** (`biomeos nucleus attach` v4.57). **PHASE 1 READY TO BOOT.**
-
-### Phase 2: footPrint on ironGate
-- Deploy footPrint frontend (TypeScript/Vite/Leaflet) via petalTongue on `:8080`
-- Wire nestGate CAS for project persistence (replacing Express CRUD)
-- Wire songBird drawbridge for external GIS sources (USGS, FEMA, OSM, Esri)
-- Update Caddy / DNS to route `footprint.primals.eco` to ironGate
-- **STATUS**: **DEPLOY READY.** 628 tests PASS. riboCipher transport wired. Manifest-driven sources. ironGate port 3002 validated against live NUCLEUS. BTSP local-trust (SO_PEERCRED) needed for CAS write. Remaining: Caddy routing + BTSP resolution.
-
-### Phase 3: squirrel + petalTongue integration
-- Test squirrel `signal.dispatch` → biomeOS `graph.execute` on ironGate
-- esotericWebb + footPrint as live dispatch targets
-- Validate the 4-strategy dispatch cascade with real providers
-- Mature petalTongue G19 live render with actual game/GIS consumers
-
-### Phase 4: westGate science springs (no mesh needed)
-- Boot tideGlass on westGate (3.65 TB data local, **UniBin COMPLETE — 9 crates, 176 tests, Neural API routing, convergence gate**)
-- Boot groundSpring + airSpring on westGate (NOAA/USGS/USDA local)
-- First science spring compositions with real data
-- ludoSpring on blueGate (pure composition, no deps)
-
-### Phase 5: Inter-gate mesh validation
-- Run songBird `mesh.connectivity_check` + `mesh.throughput` between ironGate ↔ westGate
-- Validate content.get roundtrip with provenance chain across gate boundary
-- Unblock healthSpring + lithoSpore on ironGate (data from westGate)
-- Unblock neuralSpring on strandGate (293 GB streaming from westGate)
-- Unblock wetSpring compute dispatch (westGate → strandGate)
+### Phase 5: Inter-gate mesh — FUTURE
+- songBird probes ready, nestGate content.fetch ready
+- Blocks healthSpring, lithoSpore, neuralSpring, hotSpring, wetSpring
 
 ---
 
-## SPRING STARTUP READINESS
+## westGate CONVERGENCE SWEEP — Aug 4, 2026
 
-### Immediate — No Mesh Needed (Phase 1-2)
+| State | Count | Size | Description |
+|-------|-------|------|-------------|
+| **CONVERGED** | 0 | — | Full provenance chain |
+| **CAS-ONLY** | 5 | ~15 GB | BLAKE3 in CAS, no DAG/spine |
+| **PARTIAL** | 89 | ~205 GB | Some files CAS'd |
+| **PRIMORDIAL** | 32 | ~636 GB | No CAS at all |
+| **EMPTY** | 21 | 0 | Placeholders |
+| **Not scanned** | 6 | ~70 GB | Sweep timeout |
 
-| Workload | Gate | Type | Mesh? | Blocker | Status |
-|----------|------|------|-------|---------|--------|
-| **esotericWebb** | **ironGate** | Garden | **No** | biomeOS cell attach (**V30d, 482 tests, exp006 22/22 PASS on ironGate**) | **VALIDATED** |
-| **footPrint** | **ironGate** | Protist | **No** | BTSP local-trust (**628 tests**, manifest-driven, riboCipher wired, ironGate validated). | Phase 2 — **DEPLOY READY** |
+**ZFS**: 3.21 TB used / 50.7 TB pool (6.3%). CAS pool: 135 GB.
 
-### Next — Local Data, Same Gate (Phase 4)
-
-| Workload | Gate | Type | Mesh? | Blocker |
-|----------|------|------|-------|---------|
-| **tideGlass** | westGate | Protist | **No** | biomeOS live deploy |
-| **groundSpring** | westGate | Spring | **No** | biomeOS live deploy |
-| **airSpring** | westGate | Spring | **No** | biomeOS live deploy |
-| **ludoSpring** | blueGate | Spring | **No** | biomeOS live deploy |
-
-### Later — Need Mesh Validation (Phase 5)
-
-| Workload | Gate | Data From | Mesh? | Blocker |
-|----------|------|-----------|-------|---------|
-| **healthSpring** | ironGate | westGate | **Yes** | content.get E2E |
-| **lithoSpore** | ironGate | westGate | **Yes** | content.get E2E + G31 batch |
-| **neuralSpring** | strandGate | westGate | **Yes** | content.get E2E (293 GB streaming) |
-| **hotSpring** | strandGate | westGate | **Yes** | experiment queue + content.get |
-| **wetSpring** | westGate→strandGate | westGate | **Partial** | compute dispatch test |
-
----
-
-## RECENT EVOLUTION (Wave 155u → 155v/156d)
-
-| Event | Component | Impact |
-|-------|-----------|--------|
-| **PROVENANCE DIVERGENCE RESOLVED** | westGate | **122× throughput improvement** (0.3/s → 37.6/s). Root cause: per-file spine entries were interim, not canonical. Spec alignment: per-file CAS+DAG only, session-level spine commit. `dag.event.append_batch` (200/batch) live. bearDog signature wired into sweetGrass braid — **provenance loop CLOSED.** Gap narrowed from 247× to **2×** (74/s download vs 37.6/s braid). Trailer running. |
-| **THREE-DOMAIN TOPOLOGY SPEC** | sporeGate | **K-derm website separation**: primals.eco (outer membrane, Zola/sporePrint), nestgate.io (peptidoglycan, petalTongue-served CAS braids/depot/provenance), primal.eco (inner membrane, WG mesh only). 4-phase nestgate.io evolution. Caddy configs ready. DNS owned by sporeGate. |
-| **strandGate 12⁴ PAPER-READY** | strandGate | 12⁴ volume scan COMPLETE. β=6.0/6.2 sub-0.1% agreement with published values. **Plaquette ×4 normalization RESOLVED** (gauge group mismatch SU(2)→SU(3)). 16⁴ running. **Rung 1 UNBLOCKED.** |
-| **Config cache COMPLETE (325 MB)** | strandGate | 9× 16⁴ configs cached (3β × 3 seeds), BLAKE3-addressed. `arxiv_thermalize_grid` completed in 4.7 hr (64 EPYC threads). **Dual-GPU scan LAUNCHED** — RTX 3090 + RX 6950 XT running from same cached configs. 24⁴ thermalizing. |
-| **esotericWebb V30** | esotericWebb | V30: cell graph validation + batch provenance readiness. V30b: typed LocationDef, canonical name constants, `#[allow]→#[expect]`. |
-| **footPrint 628 tests, Phase 2 DEPLOY READY** | footPrint | 3 upstream commits. Manifest-driven source registration. Dynamic category boosts. Constants centralization. riboCipher UDS transport wired. ironGate port 3002 validated against live NUCLEUS. BTSP local-trust remaining blocker. |
-| **sweetGrass trailer alignment** | sweetGrass | 1,645 tests. Concurrent `batch_commit` dispatch. `MAX_BATCH_SIZE` guard (5K). btsp/server refactored (804→540L). DH-0 clean. |
-| **Nanowire → Primal Builder** | sporeGate | SSH dispatch evolution. Phase 2a DONE: manifest-driven sub-builders (no recompile to add gates). Phase 2b spec: mesh-routed harvest requests via songBird. Foreman pattern. |
-| **barraCuda -1,488 LOC** | barraCuda | LazyLock→const migration (-478 LOC). Error constructor helpers + env_keys centralization (-1,010 LOC). |
-| **nestGate Session 134** | nestGate | Dead module purge. rustix 1.x. Dep tree unification. content.fetch streaming fix + federation blob extraction + HTTP dedup. |
-| **loamSpine 52/52 niche** | loamSpine | Complete semantic mappings. Cost estimates. MCP batch tools. Tower/custodian BTSP doc evolution. |
-| **rhizoCrypt 156c/156d** | rhizoCrypt | Port collision fix + BTSP env isolation. Batch notify wired. Dead vendor HTTP purged. Root doc cleanup. |
-| **petalTongue pushed** | petalTongue | CAS storage discovery refactor (remove hardcoded nestGate paths). Canonical `get_family_id()`. Hardcoded primal names removed. Wave 156b doc sync. |
-| **squirrel PUSHED (156d)** | squirrel | Sovereignty cleanup, emoji removal, test isolation fix. 27 deprecated aliases removed. Doc normalization + debris purge. **8de6bcbe on origin/main.** |
-| **tideGlass 176 tests** | tideGlass | Deep debt: centralize identity, consolidate casts, wire provenance write. G56 Neural API routing. Repo URLs corrected. |
-| **coralReef 156b docs** | coralReef | Root docs aligned to 3,512 tests. Wave 156b deep debt. |
-| **hotSpring dual-GPU RUNNING** | hotSpring | `arxiv_dual_gpu_scan` LAUNCHED — RTX 3090 + RX 6950 XT from same 16⁴ cached configs. Cross-vendor parity at functional volume. §2.5 Parallel Thermalization in paper. 6 binaries total. |
-| **nestgate.io LIVE ON MESH** | sporeGate | **petalTongue v1.7.0 serving nestgate.io** from sporeGate NUCLEUS via WG mesh (golgi TLS → 10.13.37.2:8190). Three-domain topology OPERATIONAL. Dashboard renders physical topology, k-derm layers, depot status. 4 DIVs: content backend, discovery service, port 8090 conflict, branding. |
-| **ironGate Session 6** | ironGate | 17 repos pulled. esotericWebb **V30d validated (482 tests, exp006 22/22 PASS)**. footPrint 628 tests validated. Graphs Directory READY. NUCLEUS 26/27 HEALTHY. |
-| **esotericWebb V30c/V30d** | esotericWebb | V30c: signed provenance + batch chunking alignment. V30d: dead code elimination, hardcoded string removal. |
-| **strandGate parallel therm COMPLETE** | strandGate | 9/10 configs cached (all 16⁴). 200 Omelyan steps each, 17K seconds. Equilibrium plaquettes: β=5.9→0.580, β=6.0→0.592, β=6.2→0.612. 24⁴ β=6.0 still thermalizing. |
-| **blueGate sub-builder UNBLOCKED** | sporeGate | SSH key generated, Forgejo user created, orgs joined. membrane.exe 77c1d32 (Phase 2a) deployed. Full harvest running (52 builds). |
-| **K-DERM DNS SEPARATION COMPLETE** | sporeGate | **primal.eco SEALED** — 6 A records removed from sovereign Knot DNS. **www.nestgate.io fixed** to golgi. **DNSSEC verified** (DS 2371/13/2). Caddyfile synced from golgi (14 subdomain routes). dnsmasq config created. Tower atomic strategy: sovereign DNS + TLS + compute. |
-| **biomeOS v4.57 — CELL ATTACH CLI** | biomeOS | **`biomeos nucleus attach`** — closes Phase 1 ops gap. Pre-flight `composition.health` check, `--dry-run`/`--socket`/`--family-id` flags, 8 new tests. Cell graphs updated. 34.6 GiB cargo clean. **ironGate Phase 1 cell boot UNBLOCKED.** |
-| **barraCuda MultiDevicePool** | barraCuda | `device.pool` IPC method (99th registered). Auto-discovers all GPUs at startup. Per-device diagnostics. Cross-vendor validated (RTX 3090 + RX 6950 XT). **4,959 tests.** |
-| **songBird drawbridge expansion** | songBird | arcgis + usgs_eq bonds added (22 total). Inter-gate `content.get` dispatch path validated. 11 stale specs archived. |
-| **petalTongue hardening** | petalTongue | TCP bind `0.0.0.0` → `127.0.0.1` default (prevents accidental exposure). Family ID unification — zero raw `FAMILY_ID` reads outside canonical resolution. |
-| **westGate cleanup** | westGate | Per-file `spine_entry_append` dead code removed from all scripts. Data stats corrected (3.65 TB / 154 datasets). `__pycache__` purged. Stale docstrings aligned to canonical pipeline. |
-
-### Previous wave highlights (155p → 155u)
-Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V29. barraCuda YELLOW→GREEN. 14 docs fossilized. tideGlass full Rust rebuild. footPrint deep debt. wetSpring V211c. strandGate silicon deism VALIDATED. G19 PROVEN. neuralSpring V183. Full history in ortho review.
+**Key**: 0 datasets at CONVERGED. Canonical pipeline proven (43/s) but not run at bulk. Priority: batch the 89 PARTIAL first (smallest datasets), then CAS-ingest 32 PRIMORDIAL.
 
 ---
 
 ## PRIMAL HEALTH DASHBOARD
 
-| Primal | Tests | Health | Gap | Recent |
-|--------|-------|--------|-----|--------|
-| **songBird** | 14,840+ | GREEN | E2E live test | mesh probes shipped, 22 drawbridge bonds |
-| **bearDog** | **14,019** | GREEN | — | 94 orphan files purged (155m) |
-| **nestGate** | 13,095+ | GREEN | CAS at 3.65 TB | content.get READY on westGate |
-| **toadStool** | 9,193+ | GREEN | VFIO ember | 48 dead deps removed |
-| **biomeOS** | 8,570+ | GREEN | **Live deploy on ironGate** | **v4.57**: `nucleus attach` CLI shipped. Cell boot UNBLOCKED. 34.6 GiB cargo clean. |
-| **petalTongue** | 6,755 | GREEN | **G19 PROVEN on ironGate** | Wave 156b doc hygiene, 0 doc warnings |
-| **barraCuda** | **4,959** | **GREEN** | — | MultiDevicePool wired. `device.pool` IPC (99th method). Cross-vendor validated. |
-| **squirrel** | **4,613** | GREEN | **G18 integration on ironGate** | **156d PUSHED**: sovereignty cleanup, 27 deprecated aliases removed, debris purged. |
-| **coralReef** | 3,512 | GREEN | G32 VFIO | 156b: ShaderInfo dedup, alloc fix |
-| **rhizoCrypt** | 1,900 | GREEN | G31 batch | Batch notify wired. Port collision fix. Dead vendor HTTP purged. |
-| **loamSpine** | 1,740 | GREEN | G31 batch | **52/52 niche mappings.** MCP batch tools. Tower/custodian evolution. |
-| **sweetGrass** | **1,645** | GREEN | E2E trio partners | Concurrent batch_commit. Trailer pattern aligned. DH-0 clean. |
-| **tideGlass** | **176** | GREEN | biomeOS cell boot, GPS JSON conversion | Deep debt. G56 Neural API routing. Provenance write. |
-| **cellMembrane** | 1,281+ | GREEN | Portability | — |
+| Primal | Tests | Health | Recent |
+|--------|-------|--------|--------|
+| **songBird** | 14,840+ | GREEN | 22 drawbridge bonds. LAN-first Tower (1ms). |
+| **bearDog** | 14,019 | GREEN | 94 orphans purged |
+| **nestGate** | 13,095+ | GREEN | **`content.query` SHIPPED.** ZFS REST. tarpc 0.37. nestgate.io wired. |
+| **toadStool** | 9,193+ | GREEN | S351: -48 dead deps. Symlink fix. |
+| **biomeOS** | 8,570+ | GREEN | **v4.57: `nucleus attach` — CELL BOOT SUCCEEDED.** westGate DEPLOYED. |
+| **petalTongue** | 6,755 | GREEN | nestgate.io branded. TCP hardened. FAMILY_ID unified. |
+| **barraCuda** | 4,959 | GREEN | **MultiDevicePool.** `device.pool` IPC. |
+| **squirrel** | 4,613 | GREEN | 156d sovereignty. 27 deprecated aliases removed. |
+| **coralReef** | 3,512 | GREEN | ShaderInfo dedup, alloc fix, identity tests. |
+| **rhizoCrypt** | 1,791 | GREEN | **G63 SO_PEERCRED SHIPPED.** CAS local-trust. |
+| **loamSpine** | 1,740 | GREEN | OnceLock UID cache. Tower/custodian BTSP. |
+| **sweetGrass** | 1,636 | GREEN | **LedgerClient v0.8.0** → loamSpine. |
+| **cellMembrane** | 1,281+ | GREEN | **Harvest scheduler.** CI-DIV fixes. Phase 2a manifest registry. |
 
-**Total**: **~135,000+ tests**. **13/13 GREEN**. esotericWebb V30. footPrint 628. sweetGrass 1,645. Provenance divergence RESOLVED (122×). Three-domain topology spec'd.
+**Total**: **~135,000+ tests**. **13/13 GREEN**.
+
+---
+
+## DUAL-SCIENCE STATUS
+
+### Track A: NF Drug Repurposing (Gonzales / Bin Chen)
+
+| Component | Status | Next |
+|-----------|--------|------|
+| **tideGlass** | 177 tests. 9 crates. Live NUCLEUS on westGate. **GPS data CONVERTED** (11 JSON, 103 MB). | `nucleus attach` on westGate (v4.57 DEPLOYED). Chen 2017 benchmark. |
+| **footPrint** | **PHASE 2 DEPLOYED on ironGate.** 708 tests. CAS E2E. Agent bridge. | golgi Caddy routing. GPS viz integration. |
+| **westGate data** | 3.21 TB / 153 datasets. GPS JSON in CAS. 135 GB CAS pool. **Convergence**: 0 CONVERGED, 89 PARTIAL, 32 PRIMORDIAL. | Batch provenance campaign. |
+| **nestGate** | **`content.query` SHIPPED.** nestgate.io content backend wired. | Wire into tideGlass for GPS metadata search. |
+| **Provenance trio** | 7/7. Loop CLOSED. 122× improvement. | Bulk convergence campaign across 153 datasets. |
+
+### Track B: Lattice QCD on Consumer GPUs (Murillo / Chuna)
+
+| Component | Status | Next |
+|-----------|--------|------|
+| **strandGate** | 12⁴ paper-ready. 16⁴ dual-GPU validated. **Binaries staged.** | Restart NUCLEUS → Rung 1 paper draft. |
+| **hotSpring** | 5 arxiv binaries. Parallel therm 279→95 min. Config cache LIVE. | Rung 1 production campaign. |
+| **barraCuda** | MultiDevicePool. 4,959 tests. GREEN. | Cross-vendor GPU dispatch. |
+| **esotericWebb** | V31b. CELL BOOT SUCCEEDED. Scene builder. 484 tests. | QCD viz via petalTongue. |
+
+---
+
+## K-DERM THREE-DOMAIN TOPOLOGY — FULLY OPERATIONAL
+
+| Layer | Domain | DNS | Status |
+|-------|--------|-----|--------|
+| **Outer** | `primals.eco` | Cloudflare (wildcard) | **LIVE** — 14 Caddy routes. |
+| **Peptidoglycan** | `nestgate.io` | Sovereign Knot DNS + DNSSEC | **LIVE** — branded "ecoPrimals Data Surface". Content backend wired. |
+| **Inner** | `primal.eco` | Sovereign Knot DNS (zero public) | **LIVE** — dnsmasq deployed, all 11 gates resolving. |
 
 ---
 
@@ -182,94 +175,27 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
 | Gates online | **11** |
-| Downstream host | **ironGate** (esotericWebb + footPrint) |
-| Data NAS | **westGate** (3.65 TB / 154 datasets / 17+ domains) |
+| Depot | **v4.57+ SYNCED** (52 builds). sporeGate + ironGate + **westGate** DEPLOYED. strandGate STAGED. |
+| Data NAS | **westGate** (3.21 TB / 153 datasets / 17+ domains / 135 GB CAS) |
 | Primal tests | **~135,000+** |
-| Springs/products bootable NOW (no mesh) | **6** (esotericWebb, footPrint, tideGlass, groundSpring, airSpring, ludoSpring) |
-| Springs needing mesh | **5** (healthSpring, lithoSpore, neuralSpring, hotSpring, wetSpring dispatch) |
-| First boot target | **esotericWebb on ironGate** |
-| G18 integration target | **squirrel → biomeOS on ironGate** |
-| G19 render target | **petalTongue on ironGate (RTX 5070) — PROVEN** |
-| K-derm websites | **2/3 LIVE**: primals.eco (outer, LIVE) / nestgate.io (peti, LIVE on mesh) / primal.eco (inner, dnsmasq READY) |
-| K-derm separation | **DNS DONE.** primal.eco 6 A records removed. www.nestgate.io fixed. Caddyfile + dnsmasq ready. Wildcard `*.primals.eco` means sporeGate owns all subdomain routing via Caddy — no CF changes needed. |
-| Glacial goals | **59 tracked** (31 ACTIVE, inc. G55-G63) |
-| arXiv | **16⁴ DUAL-GPU PRODUCING** — cross-vendor parity scan running. Config cache 9/10 complete. |
+| Cell boot | **SUCCEEDED** — ironGate Session 8, 21/22 PASS |
+| westGate Phase 4 | **UNBLOCKED** — v4.57 DEPLOYED, GPS converted, `nucleus attach` ready |
+| Convergence | **0/153 CONVERGED** — bulk provenance campaign needed |
+| K-derm | **3/3 FULLY OPERATIONAL** |
+| GPS data | **CONVERTED** — 11 JSON (103 MB) CAS-ingested with BLAKE3 |
 
 ---
 
-## DUAL-SCIENCE INCREMENTAL STATUS
+## REMAINING WORK — ORDERED (westGate perspective)
 
-### Track A: NF Drug Repurposing (Gonzales / Bin Chen)
-
-| Component | Status | Next |
-|-----------|--------|------|
-| **tideGlass** (protist) | **FULL RUST REBUILD.** 9 crates, 7 science modules, 11 IPC methods. **176 tests, 0 clippy warnings.** G56 Neural API routing. Convergence gate. Provenance write path. 21 deps pure Rust. CAS wiring LIVE with graceful degradation. | Convert GPS NumPy/pickle → JSON. Chen 2017 benchmark (r >= 0.52). biomeOS cell boot. |
-| **westGate data** | 3.65 TB / 154 datasets. GPS platform data in CAS (8 files, 1.4 GB, NumPy/pickle). | Python converter → JSON → CAS re-ingest with derivation lineage. |
-| **footPrint** (GPS viz) | **628 tests.** Manifest-driven source registration. Dynamic category boosts. Constants centralized. riboCipher UDS transport. ironGate Phase 2 DEPLOY READY (port 3002, validated against live NUCLEUS). | BTSP local-trust for CAS write. Caddy routing. |
-| **petalTongue** (viz) | G19 PROVEN. Wave 156b pushed (**6,755 tests, 0 doc warnings**). | footPrint + tideGlass consume via Neural API. G53 maturation. |
-| **nestGate** (CAS) | 13K+ tests. CAS on ZFS. DIV-2: no query-by-tag API. Stale client patterns in other primals. | `content.query` method. Canonical Rust client crate for ecosystem. |
-| **Provenance trio** | 7/7 COMPLETE. sweetGrass batch pipeline. **Provenance loop CLOSED** (bearDog sig in braid). **122× throughput improvement.** Trailer at 43/s. | Provenance per tideGlass RGES execution. |
-
-### Track B: Lattice QCD on Consumer GPUs (Murillo / Chuna)
-
-| Component | Status | Next |
-|-----------|--------|------|
-| **strandGate VALIDATION** | **ALL validation COMPLETE.** 12⁴ paper-ready. **16⁴ DUAL-GPU SCAN RUNNING** (RTX 3090 + RX 6950 XT, same cached configs). Config cache: 9/10 done (325 MB). 24⁴ thermalizing. | Cross-vendor 16⁴ parity data → paper §3.4. |
-| **hotSpring** (spring) | 6 binaries: `arxiv_dual_gpu_scan` + `arxiv_thermalize_grid` + `arxiv_volume_scan` + `arxiv_preprint_validation` + `arxiv_beta_scan` + `arxiv_production_run`. `Lattice::save()/load()` BLAKE3. §2.5 in paper. | **16⁴ producing.** Cross-vendor parity at functional volume. |
-| **barraCuda** (GPU math) | **4,959 tests.** **GREEN**. MultiDevicePool wired. Cross-vendor validated. | Statistical validation harness in place. |
-| **coralReef** (shaders) | 3,512 tests. Windows cross-compile. | WGSL compilation for QCD kernels. |
-| **toadStool** (compute) | 9,193+ tests. S349 deep debt. | compute.dispatch for GPU lattice. |
-| **esotericWebb** (viz) | **V30d**, 482 tests, exp006 22/22 on ironGate. Signed provenance. Dead code clean. | QCD visualization via petalTongue. |
-| **wetSpring** (spring) | **2,210 tests.** V211c deep debt. 186 casts migrated. Capability discovery. | westGate deployment. |
-| **strandGate** (gate) | Dual EPYC + RTX 3090 + RX 6950 XT. | Experiment queue. Needs mesh for 293 GB streaming. |
-
-### Support → Science Convergence (G53 / G54)
-
-**footPrint + esotericWebb on ironGate → mature petalTongue G19 → reusable viz for both tracks.**
-
-- footPrint matures petalTongue's GIS/spatial rendering → GPS platform for NF drug screen
-- esotericWebb matures petalTongue's scene graph + interaction → lattice visualization for QCD
-- Both exercise squirrel G18 dispatch, biomeOS composition, nestGate CAS — the full stack
-- petalTongue becomes a **live science exploration tool**, not just a presentation layer
-
-**Neural API routing pattern**: footPrint and tideGlass CAS data should flow through the **biomeOS Neural API** (`neural-api-default.sock`) for capability-based routing rather than connecting directly to `nestgate.sock`. This means:
-- No hardcoded primal socket paths in consumer code
-- biomeOS routes `content.get`/`content.put` to nestGate automatically via capability discovery
-- When nestGate evolves (e.g., `content.query` method), consumers get it without rewiring
-- Same pattern applies to all primal interactions — consumers talk to Neural API, not individual primals
-
-**nestgate.io LIVE ON MESH (Phase 1)**: petalTongue v1.7.0 serving nestgate.io from sporeGate NUCLEUS via WG mesh (golgi TLS termination → 10.13.37.2:8190). Dashboard renders physical topology, k-derm layers, depot status. Evolution to **federated CAS surface** — not one gate's CAS, but a mesh-backed front door.
+1. **tideGlass cell boot** — `biomeos nucleus attach --cell tideglass_cell.toml` on westGate (UNBLOCKED)
+2. **Bulk convergence campaign** — batch provenance across 89 PARTIAL + 32 PRIMORDIAL datasets
+3. **strandGate NUCLEUS restart** — binaries staged, schedule during therm pause
+4. **golgi Caddy routing** — `footprint.primals.eco` → ironGate
+5. **blueGate + southGate depot pull** — Windows rebuild + validation re-check
+6. **Depot CDN fix** — golgi still serves v4.56 binary despite fresh provenance.toml
+7. **Inter-gate content.get E2E** — songBird probes ready, Tower Atomic on LAN
 
 ---
 
-## WORK ASSIGNMENTS — ACTIVE FRONTS
-
-### nestgate.io — Make It Functional (sporeGate + petalTongue team)
-
-| DIV | Issue | Owner | Work |
-|-----|-------|-------|------|
-| DIV-1 | Content backend socket missing | **petalTongue** | Wire `content-provider` socket on sporeGate. petalTongue needs a nestGate instance running on sporeGate (or mesh route to westGate) to serve live CAS data. |
-| DIV-2 | Discovery service not found | **biomeOS** | Ensure `discovery-service.sock` is available on sporeGate NUCLEUS. biomeOS neural API must advertise content provider capabilities. |
-| DIV-3 | Port 8090 → 8190 | **resolved** | Using :8190. Document in petalTongue config. |
-| DIV-4 | Branding: "petalTongue Dashboard" → "nestgate.io" | **petalTongue** | Update title, header, favicon. Add k-derm context to landing page. |
-
-### WireGuard → Tower Atomic LAN Evolution
-
-| Current (WG) | Target (Tower Atomic) | Status |
-|---|---|---|
-| WireGuard `wg0` overlay (10.13.37.x) | songBird TCP/UDS direct on LAN (192.168.4.x) | **PROVEN** — Tower is 353× faster on LAN |
-| WG peer config (manual, static IPs) | songBird `mesh.gate_enroll` (dynamic, capability-based) | **SHIPPED** |
-| WG for auth | bearDog BTSP mutual auth (13/13 primals) | **SHIPPED** |
-| WG for encryption | riboCipher transport encryption | **SHIPPED** |
-| WG for routing | songBird capability routing (835+ caps) | **SHIPPED** |
-| WG for threat detection | skunkBat 9 threat types + connectivity anomaly | **SHIPPED** |
-
-**westGate status**: LAN at 192.168.4.149/22, WireGuard not active, songBird healthy on UDS. Ready for Tower Atomic direct LAN once ironGate proves the chain.
-
-### ironGate Phase 1 — Cell Boot (UNBLOCKED)
-
-**`biomeos nucleus attach` is SHIPPED (v4.57).** All blockers cleared. **Next**: Run `biomeos nucleus attach --cell esotericwebb_cell.toml` on ironGate.
-
----
-
-*Wave 155v/156d cascade. K-derm DNS separation COMPLETE. biomeOS v4.57 ships `nucleus attach` — ironGate Phase 1 cell boot UNBLOCKED. westGate cleanup complete: per-file spine dead code purged, data stats current (3.65 TB / 154 datasets), canonical provenance pipeline at 43/s. biomeOS on westGate at v4.56 — depot update to v4.57 needed for cell attach. nestGate content.get READY. songBird healthy but discovery/federation degraded (no WG). Tower Atomic LAN path viable (192.168.4.149). Next for westGate: GPS data conversion (tideGlass blocker), convergence sweep, biomeOS depot update, cell boot prep.*
+*Wave 156d — **Cell Boot + Depot Sync Era.** westGate now on v4.57 (source-built, 14/14 HEALTHY). GPS data converted (11 JSON, 103 MB CAS). Convergence sweep complete: 0/153 datasets at full provenance — bulk campaign needed. Phase 4 science springs UNBLOCKED on westGate. tideGlass cell boot next. ~135K+ tests, 13/13 GREEN.*

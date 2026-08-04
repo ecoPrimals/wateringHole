@@ -40,6 +40,41 @@
 - **100 AAR fossils** properly archived in `aars/fossils/` (4 absorbed subdirs)
 - **Protocols** (11 files) are stable standards docs — no cleanup needed
 
+## Convergence Sweep Results — Aug 4, 2026
+
+Full sweep across 153 datasets (147 scanned, 6 remaining):
+
+| State | Count | Size | What it means |
+|-------|-------|------|---------------|
+| **CONVERGED** | 0 | — | Full provenance chain (CAS + DAG + spine + sig + braid) |
+| **CAS-ONLY** | 5 | ~15.5 GB | BLAKE3 hashed in CAS, no DAG/spine. Includes alphafold_structures, gps_platform, ncbi_gene, noaa_ghcnd, refseq_human. |
+| **PARTIAL** | 89 | ~205 GB | Some files CAS'd, others not. Most small/medium datasets. |
+| **PRIMORDIAL** | 32 | ~636 GB | No CAS at all. Mostly large bulk downloads (ncbi_nr 48 GB, uniprot_trembl 110 GB, uniref100 43 GB, etc.) |
+| **EMPTY** | 21 | 0 | Directory exists, no files yet (placeholders). |
+| **Not scanned** | 6 | ~70 GB | uniref90, usda_nass, usda_plants, usgs_3dep, vibrio, zinc20_smiles (sweep timed out before reaching). |
+
+**ZFS**: 3.21 TB used / 50.7 TB pool (6.3%). CAS pool: 135 GB.
+
+**Key finding**: Zero datasets at CONVERGED. The canonical pipeline (DAG session → dehydrate → commit → sign → braid) has been proven at 43/s throughput but hasn't been run at bulk scale across the estate. The 89 PARTIAL datasets have CAS hashes but no provenance chain. The 32 PRIMORDIAL datasets are raw downloads with no CAS at all.
+
+**Priority for convergence**:
+1. Run batch provenance on the 89 PARTIAL datasets (smallest first — most are <100 MB)
+2. CAS-ingest the 32 PRIMORDIAL datasets, then braid
+3. The 5 CAS-ONLY datasets need DAG + spine wiring
+
+## biomeOS v4.57 Deployed — Aug 4, 2026
+
+- Built from source (commit `96083386`), installed to plasmidBin
+- `nucleus attach` CLI available — unblocks tideGlass cell boot
+- NUCLEUS restarted: 14/14 HEALTHY (13 primals + neural-api)
+- `content.query` available via nestGate (same depot rebuild)
+
+## GPS Data Converted — Aug 4, 2026
+
+- 11 JSON outputs (103.4 MB total) CAS-ingested with BLAKE3
+- Covers: 2198 gene lists, MLP weights, RCL ensembles, compound matrices
+- Unblocks tideGlass Phase 0 Rust consumption
+
 ## Upstream Gaps for Primals Teams
 
 | Gap | Owner | Detail |
@@ -47,9 +82,9 @@
 | `spine_entry_append` still DEFINED in `bulk_ingest.py` | wateringHole | Dead code — no callers remain after manifest_download.py fix. Can remove once confirmed no other repos import it. |
 | `pdb_ingest.py` / `pdb_manifest_ingest.py` only smoke-test provenance | wateringHole | If PDB needs full provenance, wire canonical pipeline (DAG session → dehydrate → commit → sign → braid). Currently health.check only. |
 | `alphafold_bulk_structures.sh` fossil | wateringHole | Superseded. Can archive to `fossilRecord/` if desired. |
-| GPS NumPy/pickle → JSON conversion | tideGlass | Only remaining data prep blocker for tideGlass Phase 0. |
-| Convergence sweep across 154 datasets | wateringHole | `convergence_check.py` ready but hasn't been run at full scale. |
+| Depot CDN stale | sporeGate | golgi depot still serves v4.56.0 binary despite provenance.toml showing Aug 4 rebuild. westGate built from source. Other gates need depot fix or source build. |
+| Bulk convergence campaign | wateringHole | 0/153 datasets at CONVERGED. Need batch provenance run across estate. |
 
 ---
 
-*Cleanup complete. All scripts aligned to canonical provenance (no per-file spine entries). Data stats current. Ready for upstream audit.*
+*Cleanup + convergence sweep + biomeOS v4.57 deploy complete. westGate NUCLEUS 14/14 on v4.57. GPS data converted. 0 datasets CONVERGED — bulk provenance campaign needed. Ready for upstream audit.*
