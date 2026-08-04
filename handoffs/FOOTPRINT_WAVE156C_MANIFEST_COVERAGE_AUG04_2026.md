@@ -119,3 +119,42 @@ After this pass, footPrint's production code:
 ---
 
 *Sources are discovered, not hardcoded. Registration is conditional, not imperative.*
+
+---
+
+## Addendum: TCP Local-Trust Discovery (2026-08-04 09:45)
+
+**Critical finding**: BTSP is enforced on UDS only. TCP JSON-RPC (port 8080) provides
+full `content.*` access without authentication — this is the designed "local-trust" pattern
+for same-gate services.
+
+| Transport | Auth Required | Use Case |
+|-----------|---------------|----------|
+| UDS (`nestgate.sock`) | **BTSP** (X25519 + ChaCha20-Poly1305) | Inter-primal IPC |
+| TCP (`localhost:8080`) | **None** (loopback local-trust) | Same-gate services (footPrint, tideGlass) |
+
+### BTSP Handshake Protocol (documented from binary analysis)
+
+1. Client → `ClientHello` (JSON-line): `{type, client_ephemeral_pub, protocol: "btsp-v1", family_id}`
+2. Server → `ServerHello` (JSON-line): `{version, server_ephemeral_pub, challenge}`
+3. Client → `ChallengeResponse`: `{type, response: sig(challenge), public_key}`
+4. Server verifies via bearDog `btsp.session.verify` (family membership check)
+5. Post-handshake: ChaCha20-Poly1305 encrypted tunnel (Phase 3)
+
+The `family` key in bearDog (`key_id: "family"`) can sign challenges, but verification
+requires the public key to be registered as a family member — not just a valid signature.
+
+### Resolution
+
+footPrint's Neural API client now defaults to TCP transport. Env resolution:
+`NESTGATE_RPC_URL` → `NESTGATE_RPC_PORT` → `MEMBRANE_SOCKET` (UDS) → TCP `:8080`
+
+**Live validated**: Full CAS put/get/list round-trip against production nestGate
+(v0.5.0, FAMILY_ID=e8b62b6e) on ironGate over TCP. Two objects stored successfully.
+
+### Upstream Note for nestGate Team
+
+The BTSP UDS gate blocks ALL methods except `health.check` — even `btsp.verify` and
+`auth.*` methods are behind the gate, creating a bootstrap paradox for new clients.
+The TCP path resolves this for same-gate services, but remote clients would need a
+bootstrap mechanism (perhaps a pre-shared session token or out-of-band key exchange).
