@@ -1,6 +1,6 @@
 # rhizoCrypt Wave 155n — G31 Batch Provenance Pipeline
 
-**Date**: Aug 3, 2026 | **Wave**: 155n | **Head**: `0356187`
+**Date**: Aug 4, 2026 | **Wave**: 156b | **Head**: `275ac42`
 
 ## Summary
 
@@ -43,15 +43,15 @@ Multi-session dehydration:
 
 | Metric | Value |
 |--------|-------|
-| Tests | 1,914 (+14) |
-| Source files | 225 `.rs` |
-| Lines | ~63,520 |
+| Tests | 1,782 (-132 dead vendor) |
+| Source files | 214 `.rs` (-11 dead) |
+| Lines | ~59,500 |
 | Coverage | 93.83% |
 | Clippy | 0 warnings |
 | cargo deny | CLEAN |
 | Cross-compile | 4 targets, zero warnings |
 | Methods | 39 (METHOD_CATALOG) |
-| Head | `0356187` |
+| Head | `275ac42` |
 
 ## Deep Debt (Wave 155n late)
 
@@ -62,6 +62,14 @@ Multi-session dehydration:
 - Root docs + crate READMEs: 6 stale "37 methods" refs corrected to 39, CHANGELOG heading hierarchy fixed
 - Stability tiers updated: 31 stable, 8 evolving (was 6 — added `trigger_batch`, `pipeline.ingest`)
 - Debris audit: zero scripts, zero stale files, zero empty files, `cargo clean` 28.5 GiB reclaimed
+
+## Wave 156b — Batch Notify Wire + Dead Code Purge (Aug 4, 2026)
+
+- **`notify_dehydration_batch` wired**: `dehydrate_batch()` now sends 1 sweetGrass RPC (was N per-session)
+- `dehydrate_core()` private method: shared pipeline for single + batch callers
+- `RpcClient`: add `dehydrate_batch()` + `pipeline_ingest()` typed API
+- Deploy graph + MCP tools: 3 batch capabilities + `dag.partial_dehydrate` added
+- **Dead vendor HTTP purge**: 5 modules, 11 files, ~4,100 lines, 132 dead tests removed
 
 ## What Remains for G31
 
