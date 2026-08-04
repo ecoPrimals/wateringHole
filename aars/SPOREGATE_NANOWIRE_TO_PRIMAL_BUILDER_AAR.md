@@ -180,9 +180,39 @@ This is the same pattern as the outer membrane / inner membrane duality:
 |----|--------|--------|
 | NW-01 | bearDog sovereign.ci.trigger with blueGate dispatch | RUNNING |
 | NW-02 | Fix git_success() error suppression (log stderr on failure) | SPEC |
-| NW-03 | Move SUB_BUILDERS to ecosystem_manifest.toml (Phase 2a) | SPEC |
+| NW-03 | Move SUB_BUILDERS to ecosystem_manifest.toml (Phase 2a) | **DONE** |
 | NW-04 | Document nanowire SSH dispatch as BTSP transport variant | SPEC |
 | NW-05 | Prove biomeGate as second sub-builder (linux-gnu) | PENDING |
+
+### NW-03 Implementation Detail
+
+The hardcoded `const SUB_BUILDERS` in `sovereign.rs` has been replaced with
+`load_sub_builders()`, which reads from the manifest's `[sub_builders]` section:
+
+```rust
+fn load_sub_builders() -> Vec<ResolvedSubBuilder> {
+    // Read from ecosystem_manifest.toml [sub_builders] section
+    // Falls back to hardcoded blueGate if manifest unavailable
+}
+```
+
+**Manifest TOML** (already present):
+```toml
+[sub_builders."x86_64-pc-windows-gnu"]
+gate = "blueGate"
+ssh_host = "blueGate"
+membrane_bin = "membrane.exe"
+```
+
+**To add biomeGate** (NW-05), just add to manifest:
+```toml
+[sub_builders."x86_64-unknown-linux-gnu"]
+gate = "biomeGate"
+ssh_host = "10.13.37.3"
+membrane_bin = "membrane"
+```
+
+No recompile needed. Tests pass (33/33).
 
 ## Convergence With Existing Work
 

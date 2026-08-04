@@ -1,6 +1,6 @@
 # rhizoCrypt Wave 155n — G31 Batch Provenance Pipeline
 
-**Date**: Aug 4, 2026 | **Wave**: 156b | **Head**: `275ac42`
+**Date**: Aug 4, 2026 | **Wave**: 156c | **Head**: `cce0cb9`
 
 ## Summary
 
@@ -43,7 +43,7 @@ Multi-session dehydration:
 
 | Metric | Value |
 |--------|-------|
-| Tests | 1,782 (-132 dead vendor) |
+| Tests | 1,785 (all green) |
 | Source files | 214 `.rs` (-11 dead) |
 | Lines | ~59,500 |
 | Coverage | 93.83% |
@@ -51,7 +51,7 @@ Multi-session dehydration:
 | cargo deny | CLEAN |
 | Cross-compile | 4 targets, zero warnings |
 | Methods | 39 (METHOD_CATALOG) |
-| Head | `275ac42` |
+| Head | `cce0cb9` |
 
 ## Deep Debt (Wave 155n late)
 
@@ -62,6 +62,13 @@ Multi-session dehydration:
 - Root docs + crate READMEs: 6 stale "37 methods" refs corrected to 39, CHANGELOG heading hierarchy fixed
 - Stability tiers updated: 31 stable, 8 evolving (was 6 — added `trigger_batch`, `pipeline.ingest`)
 - Debris audit: zero scripts, zero stale files, zero empty files, `cargo clean` 28.5 GiB reclaimed
+
+## Wave 156c — RPC Integration Port Isolation + Deep Debt Gate (Aug 4, 2026)
+
+- **Port collision fix**: live `rhizocrypt` on port 19501 caused test to connect to gate instance; remapped all 10 tarpc test ports to 197xx
+- `temp_env::with_vars(BTSP_CLEAR_ENV)` isolation on all tarpc integration tests
+- `cargo update`: regex-automata 0.4.16 → 0.4.17
+- Full deep debt gate: 0 clippy warnings, fmt clean, deny clean, 0 unsafe, 0 debt markers, cross-compile clean (windows-gnu, musl)
 
 ## Wave 156b — Batch Notify Wire + Dead Code Purge (Aug 4, 2026)
 
