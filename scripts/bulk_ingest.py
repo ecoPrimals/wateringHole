@@ -2,14 +2,14 @@
 """
 Bulk Data Ingestion Pipeline — westGate CAS + Full Provenance Trio
 
-Ingests datasets through the REAL provenance chain:
-  BLAKE3 hash → nestGate CAS → rhizoCrypt DAG session (events per file)
-  → loamSpine entry.append (DataAnchor per file)
-  → dag.dehydration.trigger (Merkle root) → loamSpine session.commit
-  → bearDog Ed25519 signature → sweetGrass attribution braid
+Ingests datasets through the canonical provenance chain:
+  Per file: BLAKE3 hash → nestGate CAS → rhizoCrypt DAG event (4ms, O(1))
+  Per dataset (once): dehydrate → loamSpine session.commit
+    → bearDog Ed25519 signature → sweetGrass attribution braid
 
-One DAG session per dataset. One spine per dataset. Partial dehydration
-checkpoints every N files for long-running ingestions.
+Per-file spine entries are NOT created — the DAG Merkle root cryptographically
+binds all files. loamSpine receives one SessionCommit at dehydration time.
+See PROVENANCE_TRIO_ARCHITECTURE.md for architectural rationale.
 
 Usage:
   python3 bulk_ingest.py --files /path/to/data.db --dataset "ChEMBL 37"
@@ -176,6 +176,32 @@ def dag_event_append(session_id, b3hash, filename, size, dataset):
     })
 
 
+def dag_event_append_batch(session_id, events):
+    """Append multiple events in a single RPC call (G31 batch).
+    
+    events: list of (b3hash, filename, size, dataset) tuples.
+    Returns list of vertex IDs or None on failure.
+    """
+    requests = [
+        {
+            "session_id": session_id,
+            "event_type": {"DataCreate": {}},
+            "metadata": [
+                ["dataset", dataset],
+                ["filename", filename],
+                ["blake3", b3hash],
+                ["size", str(size)],
+            ],
+            "payload_ref": b3hash,
+            "parents": [],
+        }
+        for b3hash, filename, size, dataset in events
+    ]
+    return rpc_result("rhizocrypt", "dag.event.append_batch", {
+        "requests": requests,
+    })
+
+
 def dag_partial_dehydrate(session_id):
     """Compute partial Merkle root without closing session."""
     return rpc_result("rhizocrypt", "dag.partial_dehydrate", {
@@ -239,8 +265,13 @@ def sign_merkle_root(merkle_root_hex, dataset):
     return None
 
 
-def braid_create(b3hash, mime_type, size, dataset, license_id, session_id=None, merkle_root=None):
-    """Create an attribution braid via sweetGrass, linked to DAG session."""
+def braid_create(b3hash, mime_type, size, dataset, license_id,
+                 session_id=None, merkle_root=None, signature=None):
+    """Create an attribution braid via sweetGrass, linked to DAG session.
+    
+    When signature is provided, it's included in the braid metadata to close
+    the provenance loop (bearDog Ed25519 over Merkle root).
+    """
     params = {
         "data_hash": b3hash,
         "mime_type": mime_type,
@@ -253,13 +284,17 @@ def braid_create(b3hash, mime_type, size, dataset, license_id, session_id=None, 
         params["source_session"] = session_id
     if merkle_root:
         params["source_merkle_root"] = merkle_root
+    if signature:
+        params["ed25519_signature"] = signature
+        params["signature_scope"] = "merkle_root"
+        params["signer"] = "did:eco:westgate:beardog"
     return rpc_result("sweetgrass", "braid.create", params)
 
 
 # ── Per-file ingestion ─────────────────────────────────────────────
 
-def ingest_file(filepath, dataset, license_id, session_id, spine_id):
-    """Ingest one file through CAS + DAG event + spine entry."""
+def ingest_file(filepath, dataset, license_id, session_id):
+    """Ingest one file through CAS + DAG event (canonical per-file path)."""
     filepath = Path(filepath)
     result = {"file": filepath.name, "path": str(filepath), "steps": {}}
     t0 = time.time()
@@ -279,15 +314,10 @@ def ingest_file(filepath, dataset, license_id, session_id, spine_id):
     result["steps"]["cas"] = "PASS" if ok else "FAIL"
     result["cas_mode"] = mode
 
-    mime = guess_mime(filepath)
-
     vertex_id = dag_event_append(session_id, b3, filepath.name, size, dataset)
     result["steps"]["dag.event.append"] = "PASS" if vertex_id else "FAIL"
     if vertex_id:
         result["vertex_id"] = vertex_id
-
-    entry = spine_entry_append(spine_id, b3, mime, size)
-    result["steps"]["entry.append"] = "PASS" if entry else "FAIL"
 
     result["elapsed_ms"] = int((time.time() - t0) * 1000)
     return result
@@ -304,8 +334,8 @@ def run(files, dataset, license_id, checkpoint_interval=1000):
     print(f"\n{'=' * 70}")
     print(f"  BULK INGESTION — {dataset}")
     print(f"  Files: {total}")
-    print(f"  Pipeline: BLAKE3 → CAS → DAG session → spine entries")
-    print(f"            → dehydrate → session.commit → sign → braid")
+    print(f"  Pipeline: BLAKE3 → CAS → DAG event (per file)")
+    print(f"            → dehydrate → session.commit → sign → braid (per dataset)")
     print(f"  License: {license_id}")
     print(f"  Checkpoint every: {checkpoint_interval} files")
     print(f"{'=' * 70}\n")
@@ -337,7 +367,7 @@ def run(files, dataset, license_id, checkpoint_interval=1000):
             results.append({"file": f.name, "steps": {"fetch": "SKIP"}})
             continue
 
-        result = ingest_file(f, dataset, license_id, session_id, spine_id)
+        result = ingest_file(f, dataset, license_id, session_id)
         results.append(result)
         total_bytes += result.get("size", 0)
 
@@ -394,7 +424,7 @@ def run(files, dataset, license_id, checkpoint_interval=1000):
         signature = sign_merkle_root(merkle_hex, dataset)
         print(" PASS" if signature else " FAIL")
 
-    # 8. Create attribution braid
+    # 8. Create attribution braid (with signature to close provenance loop)
     print(f"  [FINALIZE] Creating sweetGrass attribution braid...", end="", flush=True)
     braid = braid_create(
         b3hash=merkle_hex or "0" * 64,
@@ -404,6 +434,7 @@ def run(files, dataset, license_id, checkpoint_interval=1000):
         license_id=license_id,
         session_id=session_id,
         merkle_root=merkle_hex,
+        signature=signature,
     )
     print(" PASS" if braid else " FAIL")
 
@@ -423,7 +454,7 @@ def run(files, dataset, license_id, checkpoint_interval=1000):
     print(f"  Signature:     {'PRESENT' if signature else 'NONE'}")
     print(f"  Braid:         {'CREATED' if braid else 'NONE'}")
 
-    step_names = ["cas", "dag.event.append", "entry.append"]
+    step_names = ["cas", "dag.event.append"]
     print(f"\n  Per-file step results:")
     for step in step_names:
         p = sum(1 for r in results if r.get("steps", {}).get(step) == "PASS")
@@ -474,9 +505,8 @@ def fetch_and_ingest(url, dest_dir, dataset, filename=None, license_id="CC0-1.0"
                      rate_limit="50M", timeout=600):
     """Download a URL and immediately ingest through the full provenance chain.
     
-    This is the standard acquisition pattern: every byte fetched is immediately
-    BLAKE3-hashed, CAS-put, DAG-evented, spine-entered, signed, and braided.
-    No separate revalidation pass needed.
+    Per-file: BLAKE3 hash, CAS put, DAG event. Per-dataset: dehydrate,
+    session.commit, sign, braid. No per-file spine entries.
     """
     dest = Path(dest_dir)
     dest.mkdir(parents=True, exist_ok=True)

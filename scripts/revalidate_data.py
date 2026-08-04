@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 """
-Data Revalidation — Re-ingest existing datasets through the REAL provenance chain.
+Data Revalidation — Re-ingest existing datasets through the canonical provenance chain.
 
 Walks all dataset directories on ZFS and creates genuine:
   - rhizoCrypt DAG sessions with per-file events
-  - loamSpine spines with DataAnchor entries
   - DAG dehydration (Merkle roots)
-  - loamSpine session commits
+  - loamSpine session commits (one per dataset, carries Merkle root)
   - bearDog Ed25519 signatures
   - sweetGrass attribution braids with source_session linking
 
-This replaces the stub provenance (health.check + empty spines) from the
-initial data federation campaign with real cryptographic provenance.
+No per-file spine entries — the DAG Merkle root binds all files.
+See PROVENANCE_TRIO_ARCHITECTURE.md for architectural rationale.
 
 Usage:
   python3 revalidate_data.py                    # all datasets
@@ -29,9 +28,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 from bulk_ingest import (
-    rpc_result, blake3_hash, cas_put, guess_mime,
+    rpc_result, blake3_hash, cas_put,
     dag_session_create, dag_event_append, dag_partial_dehydrate,
-    dag_dehydrate, spine_create, spine_entry_append,
+    dag_dehydrate, spine_create,
     spine_session_commit, sign_merkle_root, braid_create,
 )
 
@@ -88,7 +87,6 @@ def revalidate_dataset(dataset_name, dataset_path, max_files=None):
     cas_ok = 0
     cas_fail = 0
     dag_ok = 0
-    spine_ok = 0
     t_start = time.time()
 
     for i, filepath in enumerate(files):
@@ -114,17 +112,11 @@ def revalidate_dataset(dataset_name, dataset_path, max_files=None):
             dag_ok += 1
             event_count += 1
 
-        # Spine entry
-        mime = guess_mime(filepath)
-        entry = spine_entry_append(spine_id, b3, mime, size)
-        if entry:
-            spine_ok += 1
-
         # Progress every 50 files or at boundaries
         if (i + 1) % 50 == 0 or i == total - 1:
             elapsed = time.time() - t_start
             rate = (i + 1) / elapsed if elapsed > 0 else 0
-            print(f"  [{i+1}/{total}] cas={cas_ok} dag={dag_ok} spine={spine_ok} "
+            print(f"  [{i+1}/{total}] cas={cas_ok} dag={dag_ok} "
                   f"({rate:.1f} files/s)")
 
         # Checkpoint
@@ -160,6 +152,7 @@ def revalidate_dataset(dataset_name, dataset_path, max_files=None):
         license_id="CC0-1.0",
         session_id=session_id,
         merkle_root=merkle_hex,
+        signature=sig,
     )
     print(f" {'OK' if braid else 'FAIL'}")
 
@@ -173,7 +166,6 @@ def revalidate_dataset(dataset_name, dataset_path, max_files=None):
         "cas_ok": cas_ok,
         "cas_fail": cas_fail,
         "dag_events": dag_ok,
-        "spine_entries": spine_ok,
         "session_id": session_id,
         "spine_id": spine_id,
         "merkle_root": merkle_hex,
@@ -185,7 +177,7 @@ def revalidate_dataset(dataset_name, dataset_path, max_files=None):
 
     print(f"  RESULT: {result['status'].upper()} | "
           f"merkle={str(merkle_hex)[:16]}... | "
-          f"dag={dag_ok}/{total} spine={spine_ok}/{total} | "
+          f"dag={dag_ok}/{total} | "
           f"{wall:.1f}s")
 
     return result
@@ -235,8 +227,8 @@ def main():
     print(f"\n{'#' * 70}")
     print(f"  DATA REVALIDATION — Real Provenance Chain")
     print(f"  Datasets: {len(datasets)}")
-    print(f"  Pipeline: BLAKE3 → CAS → DAG session → spine entries")
-    print(f"            → dehydrate → session.commit → sign → braid")
+    print(f"  Pipeline: BLAKE3 → CAS → DAG event (per file)")
+    print(f"            → dehydrate → session.commit → sign → braid (per dataset)")
     print(f"{'#' * 70}")
 
     for idx, (name, path) in enumerate(datasets):

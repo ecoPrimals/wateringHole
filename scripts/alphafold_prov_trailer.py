@@ -8,7 +8,8 @@ it can seek past already-processed entries on restart.
 
 Architecture:
   - Downloader appends to .prov_queue at download speed (43-74/s)
-  - This trailer reads from .prov_queue and runs BLAKE3→CAS→DAG→spine
+  - This trailer reads from .prov_queue and runs BLAKE3 → CAS → DAG event
+  - No per-file spine entries — the DAG Merkle root binds all files
   - The trailer processes at UDS RPC speed (~30-40/s) and catches up during pauses
   - Every CHECKPOINT_INTERVAL files, the DAG is partially dehydrated
   - Provenance state is persisted for restart safety
@@ -24,8 +25,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from bulk_ingest import (
     blake3_hash, cas_put,
-    dag_session_create, dag_event_append, dag_partial_dehydrate,
-    dag_dehydrate, spine_create, spine_entry_append,
+    dag_session_create, dag_event_append, dag_event_append_batch,
+    dag_partial_dehydrate,
+    dag_dehydrate, spine_create,
     spine_session_commit, sign_merkle_root, braid_create,
 )
 
@@ -125,24 +127,37 @@ def main():
             time.sleep(POLL_INTERVAL)
             continue
 
+        dag_batch = []
         for fp, sz, line_num in batch:
             try:
                 h = blake3_hash(fp)
                 cas_put(fp, h)
-                dag_event_append(session_id, h, fp.name, sz, DATASET_NAME)
-                spine_entry_append(spine_id, h, "chemical/x-cif", sz)
-                event_count += 1
-                total_braided += 1
+                dag_batch.append((h, fp.name, sz, DATASET_NAME))
                 lines_processed = line_num
-
-                if event_count % CHECKPOINT_INTERVAL == 0:
-                    dag_partial_dehydrate(session_id)
-                    save_state(session_id, spine_id, event_count, lines_processed, byte_offset)
-                    print(f"  [CHECKPOINT] events={event_count:,} "
-                          f"line={lines_processed:,}", flush=True)
             except Exception as e:
                 errors += 1
                 lines_processed = line_num
+
+        if dag_batch:
+            result = dag_event_append_batch(session_id, dag_batch)
+            if result:
+                count = len(result) if isinstance(result, list) else 1
+                event_count += count
+                total_braided += count
+            else:
+                for h, fname, sz, ds in dag_batch:
+                    vertex = dag_event_append(session_id, h, fname, sz, ds)
+                    if vertex:
+                        event_count += 1
+                        total_braided += 1
+                    else:
+                        errors += 1
+
+            if event_count > 0 and event_count % CHECKPOINT_INTERVAL < len(dag_batch):
+                dag_partial_dehydrate(session_id)
+                save_state(session_id, spine_id, event_count, lines_processed, byte_offset)
+                print(f"  [CHECKPOINT] events={event_count:,} "
+                      f"line={lines_processed:,}", flush=True)
 
         save_state(session_id, spine_id, event_count, lines_processed, byte_offset)
 

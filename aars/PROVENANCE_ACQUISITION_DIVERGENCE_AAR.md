@@ -82,17 +82,71 @@ This is the correct pattern for small-to-medium datasets (<1000 files).
 
 ---
 
+## Phase 5: Canonical Architecture Alignment (RESOLVED)
+
+**UPDATE (Aug 4, 2026)**: Deep spec review revealed the root cause was not
+a performance bug — it was an architectural misalignment. **Per-file spine
+entries were never the canonical provenance architecture.**
+
+The specs (`PROVENANCE_TRIO_INTEGRATION_GUIDE.md` v2.0,
+`loamSpine/specs/INTEGRATION_SPECIFICATION.md` §3,
+`loamSpine/specs/API_SPECIFICATION.md` §3.4) all describe the canonical flow as:
+
+- Per file: `BLAKE3 → CAS → dag.event.append` (4ms, O(1))
+- Per dataset (once): `dehydrate → session.commit → sign → braid`
+
+Per-file `DataAnchor` spine entries are an **interim federation-layer pattern**
+from `nest_acquire_file.toml`, not the canonical trio flow. The `rootpulse_commit`
+and `nest.complete_dataset` signal graphs both finalize with one `session.commit`,
+not per-file `entry.append`.
+
+The patterns in the biomeOS signal graph specs — session-level commits, Merkle
+root binding, deferred permanence — were theory until this moment. When wired
+correctly, they deliver the throughput the architecture promises.
+
+### What Changed
+
+1. **Removed `spine_entry_append` from per-file loops** in `bulk_ingest.py`,
+   `revalidate_data.py`, and `alphafold_prov_trailer.py`. The DAG Merkle root
+   cryptographically binds all files — per-file spine entries are redundant.
+
+2. **Wired bearDog signature into sweetGrass braid** — `braid_create()` now
+   includes `ed25519_signature`, `signature_scope`, and `signer` fields.
+   The provenance loop is closed: hash → DAG → Merkle root → signature → braid.
+
+3. **Added `dag.event.append_batch`** to the trailer — 200 events per RPC call
+   instead of individual appends. (`dag.pipeline.ingest` is specced in G31 but
+   not in the running binary; `dag.event.append_batch` is available and tested.)
+
+### Result
+
+```
+BEFORE (per-file spine entries):
+  Provenance rate:   0.3 files/s  (loamSpine O(n) bottleneck at 187K entries)
+  Time for 6.1M queue: 243 days
+  Time for 240M files: ~27 years
+
+AFTER (canonical architecture, no per-file spine):
+  Provenance rate:   37.6 files/s sustained, 0 errors
+  Time for 6.1M queue: ~45 hours
+  Time for 240M files: ~74 days
+```
+
+**122× throughput improvement.** The trailer is running and braiding at the
+rate the architecture was designed for.
+
+---
+
 ## Current State
 
 | Component | Status | Detail |
 |-----------|--------|--------|
-| AlphaFold bulk download | RUNNING | 5.84M done, 240M remaining, 63/s |
-| AlphaFold prov trailer | STOPPED | Needs progress-file-driven scan |
-| AlphaFold revalidation (old) | RUNNING | PID 133597, processing existing 575K structures |
-| Remaining braid job | RUNNING | alphafold proteomes (1.1 TB), nist_pfas, pdb_mmcif_manifests |
+| AlphaFold bulk download | RUNNING | 6.1M done, 240M remaining, 63/s |
+| AlphaFold prov trailer | **RUNNING** | **37.6 files/s**, canonical pipeline (CAS + batch DAG) |
 | nestGate CAS | HEALTHY | v0.5.0 |
 | metered_download.sh | UPDATED | Inline provenance per download |
-| bulk_ingest.py | UPDATED | `fetch_and_ingest()` convenience function |
+| bulk_ingest.py | UPDATED | Canonical pipeline, `fetch_and_ingest()`, batch DAG |
+| revalidate_data.py | UPDATED | Canonical pipeline (no per-file spine) |
 
 ### Provenance Coverage
 
@@ -100,26 +154,31 @@ This is the correct pattern for small-to-medium datasets (<1000 files).
 |------------|-------|----------|--------|
 | Priority datasets (14) | ~33K | YES | CAS ingest script |
 | SRA FASTQ (785 files) | 785 | YES | Revalidation complete |
-| AlphaFold structures (5.84M) | 5.84M | PARTIAL | Revalidation running (~13K done) |
-| AlphaFold proteomes (1,145) | 1,145 | IN PROGRESS | Background braid job |
-| PDB mmCIF manifests | small | IN PROGRESS | Background braid job |
+| AlphaFold structures (6.1M) | 6.1M | **BRAIDING** | Trailer at 37.6/s (~45h ETA) |
+| AlphaFold proteomes (1,145) | 1,145 | COMPLETE | Background braid job |
 | New downloads (metered) | varies | YES | metered_download.sh inline |
-| New AlphaFold structures | 240M+ | NO | Awaiting trailer fix |
+| New AlphaFold structures | 240M+ | TRAILER ACTIVE | Continuous braiding behind downloader |
 
 ---
 
-## The Divergence Problem (for upstream)
+## The Divergence Problem (NARROWED)
 
-The core issue is architectural:
+The original divergence:
 
 ```
 Acquisition rate:    74 files/s  (bounded by network + API)
-Provenance rate:     30-40 files/s  (bounded by sequential UDS RPC)
+Provenance rate:     37.6 files/s  (canonical pipeline: CAS + batch DAG)
 Gap:                 ~2× at current scale
 ```
 
-At 240M files, this gap compounds into months of divergence. The provenance
-chain can never catch up if downloads run continuously.
+The gap is now **2× instead of 247×** (74/s vs 0.3/s). The trailer pattern
+handles this: download fast, braid behind, catch up during pauses. At 37.6/s
+the trailer keeps pace with most data sources and converges during any
+download pause.
+
+The remaining 2× gap is bounded by BLAKE3 hashing + CAS put + batch DAG RPC —
+real work, not a serialization bug. Further optimization would require
+streaming DAG or direct CAS writes, which are evolution-path items for upstream.
 
 ### Why This Matters Beyond AlphaFold
 
@@ -250,11 +309,12 @@ This becomes the gate between "data available" and "data trusted."
 | File | Change |
 |------|--------|
 | `scripts/alphafold_bulk_download.py` | Reverted to clean download-only (removed inline prov) |
-| `scripts/alphafold_prov_trailer.py` | NEW — companion provenance service |
+| `scripts/alphafold_prov_trailer.py` | Canonical pipeline: CAS + batch DAG, no per-file spine |
+| `scripts/bulk_ingest.py` | Canonical pipeline, `dag_event_append_batch()`, signature in braid |
+| `scripts/revalidate_data.py` | Canonical pipeline: no per-file spine, signature in braid |
 | `scripts/metered_download.sh` | Added inline provenance per download |
-| `scripts/bulk_ingest.py` | Added `fetch_and_ingest()` standard pattern |
 | `scripts/alphafold_full_sync.sh` | Added provenance pass after sync |
-| `systemd/alphafold-prov.service` | NEW — trailer service unit |
+| `systemd/alphafold-prov.service` | Trailer service unit |
 
 ---
 
@@ -276,26 +336,44 @@ This becomes the gate between "data available" and "data trusted."
 
 ## Lessons
 
-1. **Provenance at machine speed is an unsolved problem** in the current
-   architecture. UDS RPC is perfect for human-speed, breaks at bulk speed.
-   This is the same class of problem that databases solved with WAL batching
-   and LSM trees — the answer is always batching.
+1. **Read the spec before optimizing.** The 122× improvement came not from
+   clever batching or sharding, but from aligning with the canonical
+   architecture. Per-file spine entries were an interim federation pattern,
+   not the designed flow. The specs had the answer the whole time.
 
-2. **The trailer pattern works** as a bridge. Download fast, braid later,
-   but always braid. No data should exist on ZFS without eventually getting
-   a Merkle root and braid. The "eventually" is the gap to close.
+2. **Spec patterns are often theory until load proves them.** The biomeOS
+   signal graphs described session-level commits, Merkle root binding, and
+   deferred permanence — but nobody had pushed 187K entries through loamSpine
+   before. Real load exposed the gap between "this should work" and "this
+   does work." When wired correctly, the architecture delivers.
 
-3. **Mixed provenance is a real state** that the system needs to handle
-   gracefully. Springs should check convergence before trusting data.
-   The primordial → braided promotion path is well-defined and automated.
+3. **The trailer pattern works** as a bridge. Download fast, braid behind,
+   catch up during pauses. With the canonical pipeline at 37.6/s, the trailer
+   keeps pace with most data sources. No data exists on ZFS without eventually
+   getting a Merkle root and braid.
 
-4. **The `fetch_and_ingest()` pattern is the right default** for everything
+4. **Mixed provenance is a real state** that the system handles gracefully.
+   The trio is explicitly non-atomic with graceful degradation — partial
+   states (DAG-only, CAS-only, fully braided) are valid. The convergence
+   check pattern gates spring consumption.
+
+5. **The `fetch_and_ingest()` pattern is the right default** for everything
    except bulk downloads. One function call: download + full provenance.
    All future acquisition scripts should use it.
 
+6. **Close the provenance loop.** bearDog signatures were being computed but
+   orphaned — not attached to the sweetGrass braid. The signature is the
+   cryptographic proof that the Merkle root is authentic. Without it in the
+   braid, the chain has a gap. Now closed.
+
+7. **`dag.event.append_batch` already exists.** rhizoCrypt's G31 batch
+   operations were implemented but not used by westGate scripts. The trailer
+   now sends 200 events per RPC call. The infrastructure was ahead of the
+   consumption patterns.
+
 ---
 
-*The divergence between acquisition speed and provenance speed is the first
-real-world scaling challenge for the primal composition model. Solving it
-with batch RPCs will benefit every gate, every spring, and every future
-data federation operation.*
+*The provenance divergence was the first real-world scaling test for the
+primal composition model. The resolution proves the architecture: when
+wired canonically, five primals compose at machine speed. The specs weren't
+aspirational — they were right.*
