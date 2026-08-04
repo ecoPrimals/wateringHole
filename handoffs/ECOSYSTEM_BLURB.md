@@ -16,7 +16,7 @@
 | **blueGate** | **Windows dev** | ludoSpring. Windows NUCLEUS. | G29 H2 DNS. Windows sub-builder. |
 | **sporeGate** | **CI / membrane** | Sovereign CI. G34/G35. | Build authority. Depot. DNS. |
 | **southGate** | **Validation** | NUCLEUS 22/22 reference gate. | G17+G8 PROVEN. |
-| **eastGate** | **Overwatch** | squirrel (local dev). | 156b: test perf 400s→16s, 34→1 binaries. |
+| **eastGate** | **Overwatch** | squirrel (pushed 156d). | Sovereignty cleanup, 27 deprecated aliases removed, debris purged. |
 | **northGate** | **Windows dev** | RTX 5090. Daily driver. | AlphaFold data source. |
 | **grapheneGate** | **Mobile** | Tower (TCP). Pixel 8a. | Beacon seed. |
 | **golgi** | **VPS relay** | Forgejo + depot + sporePrint. | Thin-relay composition. |
@@ -132,7 +132,7 @@ This tests and matures:
 | **loamSpine 52/52 niche** | loamSpine | Complete semantic mappings. Cost estimates. MCP batch tools. Tower/custodian BTSP doc evolution. |
 | **rhizoCrypt 156c/156d** | rhizoCrypt | Port collision fix + BTSP env isolation. Batch notify wired. Dead vendor HTTP purged. Root doc cleanup. |
 | **petalTongue pushed** | petalTongue | CAS storage discovery refactor (remove hardcoded nestGate paths). Canonical `get_family_id()`. Hardcoded primal names removed. Wave 156b doc sync. |
-| **squirrel local (156d)** | squirrel | Sovereignty cleanup, emoji removal, test isolation fix. 27 deprecated aliases removed. 5 root docs modified (not yet pushed). |
+| **squirrel PUSHED (156d)** | squirrel | Sovereignty cleanup, emoji removal, test isolation fix. 27 deprecated aliases removed. Doc normalization + debris purge. **8de6bcbe on origin/main.** |
 | **tideGlass 176 tests** | tideGlass | Deep debt: centralize identity, consolidate casts, wire provenance write. G56 Neural API routing. Repo URLs corrected. |
 | **coralReef 156b docs** | coralReef | Root docs aligned to 3,512 tests. Wave 156b deep debt. |
 | **hotSpring arXiv production** | hotSpring | `arxiv_volume_scan` (12⁴/16⁴/24⁴). `arxiv_preprint_validation` (action-force, ΔH, Creutz). Provenance trio wired (NFT pattern). `arxiv_beta_scan` (SU(3) phase structure). |
@@ -153,7 +153,7 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 | **biomeOS** | 8,570+ | GREEN | **Live deploy on ironGate** | spring dispatch, deep debt CLEAN |
 | **petalTongue** | 6,755 | GREEN | **G19 PROVEN on ironGate** | Wave 156b doc hygiene, 0 doc warnings |
 | **barraCuda** | 5,037+ | **GREEN** | — | -1,488 LOC (LazyLock→const, error helpers, env_keys). |
-| **squirrel** | **4,613** | GREEN | **G18 integration on ironGate** | 156d: sovereignty cleanup, 27 deprecated aliases removed. |
+| **squirrel** | **4,613** | GREEN | **G18 integration on ironGate** | **156d PUSHED**: sovereignty cleanup, 27 deprecated aliases removed, debris purged. |
 | **coralReef** | 3,512 | GREEN | G32 VFIO | 156b: ShaderInfo dedup, alloc fix |
 | **rhizoCrypt** | 1,900 | GREEN | G31 batch | Batch notify wired. Port collision fix. Dead vendor HTTP purged. |
 | **loamSpine** | 1,740 | GREEN | G31 batch | **52/52 niche mappings.** MCP batch tools. Tower/custodian evolution. |
@@ -180,7 +180,7 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 | G18 integration target | **squirrel → biomeOS on ironGate** |
 | G19 render target | **petalTongue on ironGate (RTX 5070) — PROVEN** |
 | K-derm websites | **3 domains spec'd**: primals.eco / nestgate.io / primal.eco |
-| Glacial goals | **55 tracked** (27 ACTIVE, inc. G55-G59 data pipeline + topology) |
+| Glacial goals | **59 tracked** (31 ACTIVE, inc. G55-G63) |
 | arXiv | **UNBLOCKED** (plaquette normalization RESOLVED, 12⁴ paper-ready) |
 
 ---
