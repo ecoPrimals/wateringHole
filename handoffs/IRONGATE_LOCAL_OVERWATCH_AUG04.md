@@ -1,6 +1,6 @@
 # ironGate Local Overwatch — Code Team Blurb
 
-**Date**: 2026-08-04 10:38 EDT (Session 7 update)
+**Date**: 2026-08-04 13:28 EDT (Session 8 — FIRST CELL BOOT)
 **Gate**: ironGate (10.13.37.7) — PRIMARY DOWNSTREAM HOST
 **Wave**: 155v/156d
 **Audience**: esotericWebb code team + footPrint code team (parallel IDE sessions)
@@ -15,9 +15,12 @@ primals are deployed and responding. The RTX 5070 (12 GB VRAM, CUDA 12.8) is
 available for petalTongue rendering and toadStool/coralReef compute dispatch.
 
 ```
-NUCLEUS HEALTH: 26/27 HEALTHY (1 missing: network.sock — non-blocking)
-GRAPHS DIR:     READY (newly functional this wave)
-GPU:            RTX 5070 / 12 GB / CUDA 12.8 / 60°C idle
+biomeOS:        v4.57.0 (nucleus attach SHIPPED)
+CELL:           esotericwebb_cell ATTACHED (first-ever live cell boot)
+NUCLEUS:        v4.57 Neural API on /run/user/1000/membrane/
+SOCKETS:        27 primal sockets + 2 v4.57 membrane sockets
+GRAPHS:         45 found in Graphs Directory
+GPU:            RTX 5070 / 12 GB / CUDA 12.8 / 46°C
 RAM:            94 GB DDR5 (82 GB available)
 CPU:            i9-14900K (24c/32t)
 Disk:           3.4 TB available of 3.6 TB NVMe
@@ -112,10 +115,12 @@ Enrichment: FIRING — scene pushed to petalTongue on both examine and navigate
 
 ### Your Priority
 
-**Phase 1: First live cell boot.** Cell graph is structurally validated. All primal
-sockets are live. esotericwebb.sock is healthy. The gap is `biomeos deploy --mode attach`
-cell-schema parsing (upstream biomeOS team). Run `exp006` to validate your changes
-against the live NUCLEUS.
+**Phase 1: CELL BOOT COMPLETE.** `esotericwebb_cell` attached to NUCLEUS via
+`biomeos nucleus attach` (v4.57). exp006: 21/22 PASS (1 skip due to socket path
+migration, 0 failures). Scene push to petalTongue FIRING. The cell is live.
+
+Next: explore enrichment paths, test batch provenance (V30 feature), iterate on
+game content. Run `exp006` after changes to validate against the live composition.
 
 ---
 
@@ -138,7 +143,7 @@ gardens/footPrint/
 
 ### Current State
 
-- **Tests**: **677 PASS** (48 test files, vitest 4.1.10, 1.11s)
+- **Tests**: **708 PASS** (53 test files, vitest 4.1.10, 1.02s)
 - **Stack**: TypeScript / Vite / Leaflet (frontend) + Express/tsx (server)
 - **HEAD**: `52b78b1` — manifest-driven sources, riboCipher UDS transport
 - **Node.js**: v22.23.2
@@ -217,7 +222,7 @@ ping the hardware team (this IDE session or wateringHole handoff).
 
 ---
 
-*ironGate local overwatch. Wave 155v/156d. NUCLEUS 26/27 HEALTHY. 13/13 GREEN. GPU ready.
-K-derm DNS 3/3 verified. 10 composition graphs ready.
-esotericWebb V30d: signed prov + dead code clean, exp006 22/22 PASS.
-footPrint: 677 tests, Phase 2 DEPLOY READY, port 3002 validated.*
+*ironGate local overwatch. Wave 155v/156d. biomeOS v4.57. FIRST CELL BOOT COMPLETE.
+esotericwebb_cell attached to NUCLEUS. 45 graphs, 13/13 GREEN. GPU ready.
+esotericWebb V30d: exp006 21/22 PASS (1 skip, 0 fail), scene push FIRING.
+footPrint: 708 tests, Phase 2 DEPLOY READY, port 3002 validated.*
