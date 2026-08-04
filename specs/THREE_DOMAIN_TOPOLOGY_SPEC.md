@@ -96,7 +96,37 @@ Add depot and provenance inspection:
 - `/provenance/` — full provenance chain viewer (CAS → DAG → spine)
 - `/provenance/{hash}` — single-object provenance tree
 
-### Phase 3: Validation Endpoint
+### Phase 3: Federated CAS + Compute Memoization
+
+nestgate.io becomes the **data federation surface** — not just one gate's CAS,
+but a federated view across all gates:
+
+- `/cas/{hash}` — retrieve any CAS object by BLAKE3 hash, federated across gates
+- `/cas/{hash}/provenance` — full provenance chain (DAG → spine → Merkle → braid)
+- `/cas/{hash}/replicate` — replication instructions (which gates hold copies)
+- `/compute/configs/` — memoized compute configurations (thermalized lattices, etc.)
+- `/compute/configs/{hash}` — retrieve a cached compute config with its provenance
+
+**Data Federation Pattern**: nestgate.io resolves CAS queries by consulting
+nestGate instances on multiple gates via songBird mesh. A request for a hash
+checks westGate (data NAS), strandGate (compute configs), ironGate (consumer
+data), and any gate with a local CAS. The first gate holding the object serves
+it. This is the same content-addressed pattern as git — the hash is the address,
+the gate is an implementation detail.
+
+**Compute Memoization for QCD**: strandGate's thermalized lattice configs
+(38 MB at 16⁴, deterministic on `dims,β,seed,n_therm,integrator`) are CAS
+objects with provenance braids. hotSpring can request a config via nestgate.io
+and get it from whichever gate holds it — strandGate (origin), biomeGate
+(cross-vendor validation), or any future compute gate. The 37-minute CPU
+thermalization becomes a one-time cost stored forever.
+
+**Replication**: Any researcher can hit `/cas/{hash}/replicate` to get:
+1. The object itself (or a download link to the gate holding it)
+2. The full provenance chain proving its lineage
+3. Instructions to reproduce it independently (parameters, code commit, gate)
+
+### Phase 4: Validation Endpoint
 
 Public validation API:
 - `/validate/cas/{hash}` — verify a CAS object exists and return its provenance
@@ -106,7 +136,7 @@ Public validation API:
 This is what makes nestgate.io the "trust surface" — external researchers can
 independently verify that the data they received matches the provenance chain.
 
-### Phase 4: git Migration
+### Phase 5: git Migration
 
 Move `git.primals.eco` under nestgate.io:
 - `nestgate.io/git/` or `git.nestgate.io` — Forgejo
@@ -131,6 +161,59 @@ nestgate.io {
     }
 }
 ```
+
+---
+
+## Data Federation Architecture
+
+nestgate.io is not a single-gate service — it's a **federated CAS front door**
+backed by nestGate instances running on every NUCLEUS gate:
+
+```
+                    nestgate.io (golgi / petalTongue)
+                         │
+              ┌──────────┼──────────────┐
+              │          │              │
+         westGate    strandGate     ironGate
+         (data NAS)  (compute)     (consumer)
+         519 GB       lattice       footPrint
+         130 datasets configs       projects
+         AlphaFold    QCD memos     GIS cache
+```
+
+### Federation Flow
+
+1. **Request**: `GET nestgate.io/cas/{hash}`
+2. **Resolve**: petalTongue queries local nestGate → not found →
+   songBird `content.locate` mesh broadcast → westGate responds "I have it"
+3. **Serve**: petalTongue proxies the response from westGate's nestGate
+4. **Cache**: golgi optionally caches hot objects locally (L1 cache for public)
+
+### What Lives Where
+
+| Gate | CAS Contents | Federation Role |
+|------|-------------|-----------------|
+| **westGate** | 519 GB science data, AlphaFold, LINCS, PDB, SRA | Primary data origin |
+| **strandGate** | Thermalized lattice configs, QCD production results | Compute memoization origin |
+| **ironGate** | footPrint GIS projects, esotericWebb game state | Consumer data origin |
+| **golgi** | Hot object cache, depot binaries | Public edge / L1 cache |
+| **biomeGate** | Cross-vendor validation configs | Compute validation |
+
+### Why This Matters
+
+- **For hotSpring QCD**: thermalized configs computed on strandGate are available
+  to any gate via nestgate.io. biomeGate can pull a config for cross-vendor
+  parity checks. A future compute gate joins the mesh and immediately has access
+  to all cached configs — no manual transfer.
+
+- **For tideGlass NF**: GPS platform data on westGate is retrievable from any
+  gate via nestgate.io. When tideGlass runs on ironGate (or any future gate),
+  it fetches data by hash, not by knowing which gate has it.
+
+- **For replication**: A reviewer hits `nestgate.io/cas/{hash}` with a hash
+  from a paper. nestgate.io resolves it across the mesh and returns the object
+  with its full provenance chain. The reviewer can independently verify that
+  the data is what the paper claims.
 
 ---
 

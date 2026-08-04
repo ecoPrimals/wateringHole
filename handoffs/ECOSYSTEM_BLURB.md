@@ -226,6 +226,12 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 - When nestGate evolves (e.g., `content.query` method), consumers get it without rewiring
 - Same pattern applies to all primal interactions — consumers talk to Neural API, not individual primals
 
+**nestgate.io as federated CAS surface**: nestgate.io is not one gate's CAS — it's a **federated front door** backed by nestGate instances on every NUCLEUS gate. A CAS hash request resolves across the mesh (westGate data, strandGate compute configs, ironGate consumer data). This enables:
+- **QCD compute memoization**: strandGate's thermalized lattice configs (37 min → instant) available to any gate via hash. biomeGate pulls for cross-vendor parity. Future compute gates get instant access.
+- **NF data federation**: tideGlass on any gate fetches GPS data by hash, not by knowing which gate has it.
+- **Replication**: Reviewers verify data provenance via `nestgate.io/cas/{hash}` — the trust surface for publications.
+- **Data federation pattern development**: the `content.locate` → songBird mesh broadcast → first-responder-serves pattern applies to all inter-gate data access.
+
 ---
 
 ## petalTongue GAME ENGINE EVOLUTION — STRATEGIC DIRECTION
