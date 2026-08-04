@@ -1,64 +1,57 @@
-# sporePrint Blurb — Data Braids Visibility + Demonstration Era
+# sporePrint Blurb — Phase 1 Cell Boot Era
 
-**Date**: Aug 3, 2026 PM | **Wave**: 155q/156b | **From**: eastGate overwatch
-**Posture**: Data Braids now first-class — inline W3C PROV-O braids on every dataset, transplant page for PIs, "Data" in main nav. 519 GB / 130+ datasets / 17+ domains. 338 pages, 11 gates online, 121K+ tests. nestgate.io handoff prepared for sporeGate.
+**Date**: Aug 4, 2026 PM | **Wave**: 155v/156d | **From**: eastGate overwatch
+**Posture**: biomeOS v4.57 `nucleus attach` SHIPPED — ironGate Phase 1 cell boot UNBLOCKED. K-Derm DNS COMPLETE (3/3 separated). nestgate.io LIVE. 519 GB / 130+ datasets. 338 pages, 11 gates, 135K+ tests, 13/13 GREEN.
 
 ---
 
-## WHAT JUST HAPPENED
+## WHAT JUST SHIPPED
 
 | Event | Status |
 |-------|--------|
-| **arXiv Rung 1 reframing** | AI review was right: SU(2), not QCD. Paper retitled, scope ladder added, precision matrix added, 16⁴ overclaims removed, limitations reframed. |
-| **LaTeX updated** | Title, abstract, Section 1.2 (scope ladder), plaquette normalization eq (Section 2.1), precision matrix (Section 2.2), experiment queue table (Section 4.4), conclusion reframed. |
-| **Experiment queue created** | 7 experiments for hotSpring: β-scan, increased statistics, HMC diagnostics, PRNG isolation, plaquette normalization, larger volumes, pseudoSpore freeze. |
-| **6-rung ladder defined** | SU(2) → SU(3) → quenched QCD → dynamical fermions → (2+1)-flavor → hot QCD. Each rung gets its own preprint. |
-| **Data Braids v2** | Updated catalog to 356 GB / 32 datasets / 14 domains. 16 site pages (4 new domain pages). westGate tideGlass 7/7 COMPLETE. |
-| **Phase 1-3** | COMPLETE: nav triage, pseudoSpore section, dashboards, hype cleanup, `/data/` section. |
+| **biomeOS v4.57** | `nucleus attach` CLI — first-ever cell boot mechanism |
+| **esotericWebb V30d** | 482 tests, exp006 22/22 PASS on ironGate, signed provenance |
+| **footPrint 628 tests** | Manifest-driven sources, riboCipher wired, Phase 2 DEPLOY READY |
+| **Provenance loop CLOSED** | 122× throughput improvement, bearDog sig in braid, trailer at 37.6/s |
+| **arXiv UNBLOCKED** | Plaquette normalization RESOLVED. 12⁴ paper-ready. 16⁴ running. |
+| **K-Derm DNS COMPLETE** | 3/3 layers separated. primal.eco sealed. DNSSEC verified. |
+| **nestgate.io LIVE** | petalTongue v1.7.0 via sporeGate NUCLEUS + WG mesh |
+| **14 Caddy subsites** | golgi wildcard `*.primals.eco` — sporeGate owns routing |
+| **songBird drawbridge** | 22 bonds. Inter-gate content.get dispatch validated. |
+| **barraCuda MultiDevicePool** | 4,959 tests. Cross-vendor. `device.pool` IPC (99th method). |
 
 ---
 
-## CRITICAL PATH: Rung 1 arXiv Submission
+## CRITICAL PATH: ironGate Phase 1 Cell Boot
 
 ```
-Experiment queue (strandGate/hotSpring)
-    ↓  β-scan, HMC diagnostics, increased stats, PRNG QQ plots
-sporePrint integrates data into paper tables
-    ↓  update LaTeX with experiment results
-Final hype compliance review
+biomeos nucleus attach --cell esotericwebb_cell.toml  (on ironGate)
+    ↓  First-ever live cell composition boot
+squirrel G18 signal dispatch with real consumers
     ↓
-arXiv hep-lat submission (cross-list cs.DC)
+petalTongue G19 live render on RTX 5070
     ↓
-Update site with arXiv ID + pseudoSpore v1.0.0-rung1
+footPrint Phase 2 deploy (628 tests, Caddy routing)
+    ↓
+westGate science springs (tideGlass, groundSpring, airSpring — no mesh)
+    ↓
+Inter-gate mesh validation (songBird content.get E2E)
 ```
 
-### What sporePrint is Waiting For
+### What sporePrint Shows
 
-| Experiment | From | Priority | What sporePrint Does With It |
-|-----------|------|----------|------------------------------|
-| β-scan (1.8–2.5) | hotSpring/strandGate | MUST | New table in Section 3 — validates engine across coupling range |
-| 4-8 seeds × 1000 traj | hotSpring/strandGate | MUST | Replace N_eff=30 with bootstrap errors |
-| HMC diagnostics | hotSpring/strandGate | MUST | New ΔH histogram figure, Creutz equality number |
-| PRNG QQ plots | hotSpring/strandGate | MUST | Quantify GPU polyfill defect rigorously |
-| 12⁴ / 16⁴ production | hotSpring/strandGate | Should | Extend scaling table or restrict claims |
-
-### What sporePrint Can Do Now (while waiting)
-
-- Final hype compliance pass on current LaTeX
-- WCAG 2.2 AAA accessibility audit
-- Begin Rung 2 paper scaffold (SU(3) pure gauge) when barraCuda starts
-- Regenerate site pages as experiment data arrives
-- Populate pseudoSpore bundles with westGate data
+| Page | Reflects |
+|------|----------|
+| **Homepage** | 135K+ tests, cell attach SHIPPED, nestgate.io LIVE |
+| **Gate Status** | Phase 1 UNBLOCKED, 14 subsites, 26/27 HEALTHY |
+| **Data Braids** | 519 GB / 130+ datasets, 22 braids across 13 domains |
+| **llms.txt** | Phase 1 UNBLOCKED, 14 Caddy subsites |
 
 ---
 
 ## DATA BRAIDS — `/data/` (v3)
 
-519 GB across 130+ datasets in 17+ science domains. All with full Provenance Trio provenance on westGate.
-
-**New in v3 (Aug 3)**: inline W3C PROV-O JSON-LD braids on every dataset entry (22 braids across 13 domain pages). Transplant page explaining pseudoSpore/lithoSpore paths for PIs. 3 stubs upgraded to full domain pages (cancer-genomics, disease-ontology, genomic-reference). "Data" added to top nav. nestgate.io routing handoff created for sporeGate.
-
-**tideGlass 7/7 COMPLETE** — all base data modules have data on ZFS with provenance.
+519 GB across 130+ datasets in 17+ science domains. Inline W3C PROV-O JSON-LD braids on every dataset entry. Transplant page for PIs. 3 upgraded domain pages. nestgate.io as future data identity surface.
 
 ---
 
@@ -66,21 +59,15 @@ Update site with arXiv ID + pseudoSpore v1.0.0-rung1
 
 | Task | Owner | Priority |
 |------|-------|----------|
-| **Rung 1 experiment queue completion** | hotSpring (strandGate) | **CRITICAL** — blocks arXiv |
-| **Integrate experiment data into LaTeX** | sporePrint | **HIGH** — after experiments |
-| Bundle data population | westGate | HIGH |
-| Bundle upload to depot | sporePrint + lithoSpore | HIGH |
-| pseudoSpore v1.0.0-rung1 signed release | Node Atomic | MEDIUM |
-| Live dashboards → petalTongue (G19) | petalTongue | MEDIUM |
-| Rung 2 paper scaffold | sporePrint | LOW (after Rung 1 submits) |
-| WCAG 2.2 AAA | sporePrint | LOW |
+| **Phase 1 cell boot on ironGate** | biomeOS/ironGate | **CRITICAL** — next action |
+| **nestgate.io content backend** | sporeGate | **HIGH** — 4 DIVs |
+| **dnsmasq deploy** | sporeGate | HIGH |
+| **Inter-gate content.get E2E** | songBird/nestGate | HIGH |
+| **footPrint Caddy routing** | sporeGate/ironGate | MEDIUM |
+| **Rung 1 production campaign** | hotSpring/strandGate | MEDIUM |
+| **Compute config caching** | hotSpring/strandGate | MEDIUM |
+| **tideGlass GPS JSON conversion** | westGate | MEDIUM |
 
 ---
 
-## KEY INSIGHT
-
-The AI review pattern holds for the third time: **the code is real, the comparisons are hype.** The engineering (plaquette values, precision, multi-vendor, provenance) all checked out. The framing (calling it "lattice QCD," claiming 16⁴ production) was the problem. Fix: name what you proved, not what you plan to prove. Rung 1 is SU(2) execution and arithmetic validation. That's a strong preprint on its own merits.
-
----
-
-*Data Braids v3 complete — 519 GB / 130+ datasets, inline provenance on every entry, transplant concept documented. Rung 1 experiment queue still BLOCKED on plaquette ×4 normalization — sporePrint waits for hotSpring data. nestgate.io routing is sporeGate's deliverable. The site is 338 pages, 11 gates, zero P0/P1/P2.*
+*Phase 1 cell boot era. biomeOS `nucleus attach` SHIPPED. All blockers cleared for first live cell composition on ironGate. 338 pages, 11 gates, zero P0/P1/P2. Site current at Wave 155v/156d.*
