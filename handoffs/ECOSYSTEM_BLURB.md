@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — ironGate Downstream Hosting
 
 **Date**: Aug 4, 2026 AM | **Wave**: 155u/156b | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. PROVENANCE × ACQUISITION DIVERGENCE: 12× throughput gap discovered (74 files/s download vs 6 files/s with inline provenance). Trailer pattern + batch RPC proposal. Massive overnight upstream: esotericWebb V29 (8 commits), hotSpring 13 commits (arXiv production), barraCuda PRNG GREEN (9 commits), nestGate content.fetch, coralReef 156b, biomeOS signal graphs. Mixed provenance states (primordial/CAS-only/braided) — convergence path defined. ~130K+ tests, 12/13 GREEN.**
+**Posture**: **P0/P1/P2: ZERO. PROVENANCE × ACQUISITION DIVERGENCE: 12× throughput gap discovered (74 files/s download vs 6 files/s with inline provenance). Trailer pattern + batch RPC proposal. Massive overnight upstream: esotericWebb V29 (8 commits), hotSpring 13 commits (arXiv production), barraCuda PRNG GREEN (9 commits), nestGate content.fetch, coralReef 156b, biomeOS signal graphs. Mixed provenance states (primordial/CAS-only/braided) — convergence path defined. ~130K+ tests, 13/13 GREEN.**
 
 ---
 
@@ -173,7 +173,7 @@ tideGlass full Rust rebuild (161 tests, CAS wiring, 6 divergences). footPrint de
 | First boot target | **esotericWebb on ironGate** |
 | G18 integration target | **squirrel → biomeOS on ironGate** |
 | G19 render target | **petalTongue on ironGate (RTX 5070) — PROVEN** |
-| Glacial goals | **50 tracked** (22 ACTIVE, inc. G53/G54 dual-science) |
+| Glacial goals | **54 tracked** (26 ACTIVE, inc. G55-G58 data pipeline evolution) |
 | arXiv | UNBLOCKED (paper relabel pending) |
 
 ---
