@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """
 AlphaFold DB — Async bulk structure downloader.
+
 Downloads all 214M+ predicted protein structures from the AlphaFold API.
+Provenance runs as a companion service (alphafold-prov-trailer) that follows
+behind, braiding newly downloaded files without slowing the download pipeline.
 
 Restart-safe: tracks completed accessions in a progress file.
 Designed for long-running unattended operation via systemd.
@@ -23,8 +26,8 @@ ACCESSIONS = Path("/mnt/nestgate/cold/zfs/data/alphafold/accession_ids.csv")
 PROGRESS_FILE = DEST / ".progress"
 BASE_URL = "https://alphafold.ebi.ac.uk/files"
 
-CONCURRENCY = 20  # conservative — share the pipe with the household
-REPORT_INTERVAL = 60  # seconds between progress reports
+CONCURRENCY = 20
+REPORT_INTERVAL = 60
 RETRY_LIMIT = 3
 TIMEOUT = aiohttp.ClientTimeout(total=30, connect=10)
 CONNECTOR_LIMIT = 30
@@ -127,6 +130,7 @@ async def main():
     print(f"Total in manifest: {total_all:,}")
     print(f"Remaining: {len(entries):,}")
     print(f"Concurrency: {CONCURRENCY}")
+
     print(f"Starting download...\n", flush=True)
 
     stats = {
@@ -161,14 +165,12 @@ async def main():
     elapsed = time.time() - start_time
     gb = stats["bytes"] / (1024 ** 3)
     print(f"\n{'='*60}")
-    print(f"COMPLETE in {elapsed/3600:.1f}h")
+    print(f"DOWNLOAD COMPLETE in {elapsed/3600:.1f}h")
     print(f"Downloaded: {stats['success']:,} structures ({gb:.2f} GB)")
     print(f"Skipped (already had): {stats['skipped']:,}")
     print(f"Not found (404): {stats['not_found']:,}")
     print(f"Failed: {stats['failed']:,}")
     print(f"Rate: {stats['success']/elapsed:.0f}/s")
-    disk = sum(f.stat().st_size for f in DEST.rglob("*.cif"))
-    print(f"Total on disk: {disk / (1024**4):.2f} TB")
     print(f"{'='*60}")
 
 

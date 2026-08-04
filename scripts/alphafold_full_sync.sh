@@ -49,3 +49,10 @@ for VER in v1 v2 v3 v4 v5 v6; do
   echo "$VER: $(du -sh "$DEST/$VER" 2>/dev/null | cut -f1) ($(ls "$DEST/$VER" 2>/dev/null | wc -l) files)" | tee -a "$LOG"
 done
 echo "Total: $(du -sh "$DEST" | cut -f1)" | tee -a "$LOG"
+
+echo "$(date '+%Y-%m-%d %H:%M:%S') — Running inline provenance for alphafold proteomes" | tee -a "$LOG"
+SCRIPTS="$(cd "$(dirname "$0")" && pwd)"
+PYTHONUNBUFFERED=1 python3 "$SCRIPTS/revalidate_data.py" --dataset alphafold --max-files 5000 2>&1 | tee -a "$LOG" || {
+  echo "WARNING: provenance braid incomplete for alphafold (non-fatal)" | tee -a "$LOG"
+}
+echo "$(date '+%Y-%m-%d %H:%M:%S') — Provenance pass complete" | tee -a "$LOG"

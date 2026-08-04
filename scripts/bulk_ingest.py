@@ -470,6 +470,38 @@ def run(files, dataset, license_id, checkpoint_interval=1000):
     return results
 
 
+def fetch_and_ingest(url, dest_dir, dataset, filename=None, license_id="CC0-1.0",
+                     rate_limit="50M", timeout=600):
+    """Download a URL and immediately ingest through the full provenance chain.
+    
+    This is the standard acquisition pattern: every byte fetched is immediately
+    BLAKE3-hashed, CAS-put, DAG-evented, spine-entered, signed, and braided.
+    No separate revalidation pass needed.
+    """
+    dest = Path(dest_dir)
+    dest.mkdir(parents=True, exist_ok=True)
+    fname = filename or url.rsplit("/", 1)[-1]
+    outfile = dest / fname
+
+    if outfile.exists() and outfile.stat().st_size > 100:
+        print(f"  EXISTS: {outfile} ({outfile.stat().st_size} bytes)")
+    else:
+        print(f"  FETCH: {url} → {outfile}")
+        result = subprocess.run([
+            "curl", "-fSL", "--limit-rate", rate_limit,
+            "-A", "ecoPrimals/1.0 (sovereign-science; westGate)",
+            "--connect-timeout", "15", "--max-time", str(timeout),
+            "-o", str(outfile), url,
+        ], capture_output=True, text=True, timeout=timeout + 30)
+        if result.returncode != 0 or not outfile.exists() or outfile.stat().st_size < 100:
+            print(f"  FAIL: download failed (rc={result.returncode})")
+            if outfile.exists() and outfile.stat().st_size < 100:
+                outfile.unlink()
+            return None
+
+    return run([str(outfile)], dataset, license_id)
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Bulk data ingestion through westGate full provenance pipeline"
