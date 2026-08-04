@@ -1,33 +1,35 @@
-# Auto-published by ironGate cascade (Wave 155q/156b)
-# Gate: ironGate | Updated: 2026-08-03T23:12:00Z
+# Auto-published by ironGate cascade (Wave 155v/156d)
+# Gate: ironGate | Updated: 2026-08-04T13:15:00Z
 #
 # This file is owned exclusively by ironGate. No other gate writes here.
 
 [meta]
 gate = "ironGate"
-updated = "2026-08-03T23:12:00Z"
+updated = "2026-08-04T13:15:00Z"
 
 [heads]
-airSpring = "ba90435d2c1a39ff33c1af995f2c522412b7d6e1"
-barraCuda = "c0224885b01ee94e4ea39f41801803b727b27e4f"
+airSpring = "8025c0c42a21fc3cb66b225b44978e270c08e15f"
+barraCuda = "aab0d810aea35ee84c898bc5415ed8860cad32a9"
 bearDog = "5e80b5364f3262a0f1a675469f9bcd2e2a1c9436"
-biomeOS = "0e617e24fc39c19a915c764ba06063662987611c"
-cellMembrane = "2360b5d206f7b90ef570f488e4cd06bdc5e11cf9"
+biomeOS = "269416e66aad89544ba629f5a337c6c41bae216c"
+cellMembrane = "77c1d32c8b79b1e430e1ff0de7b0a7e45c86f218"
 coralReef = "61a7023f7fc4cad942eb44afaa2e79567f95f95a"
-esotericWebb = "5083c88bfee585e2bfa8f244eb35d81b0fca6340"
-footPrint = "0cf0a22420272d960aadb3bffb95403bc1faa125"
-groundSpring = "7e5a4ade95c40ecb6acc07ce31c72029bb41f8da"
-loamSpine = "5b3cabf4d848de266adfde663958969400c760ce"
-nestGate = "cc86fa399a1843631473837e551cdf2fb29e1cc8"
-petalTongue = "b1354006d11e2a8d7c4acb2e5773a81be6248225"
+esotericWebb = "8d4181b02f99f9f7a1fb502dff4c62d63fb313cd"
+footPrint = "badea22fbfda3f5637ed0d2c25f9c0935931745a"
+groundSpring = "8d789b43a69f68cbe2a15708438e1bee8dfcfffd"
+hotSpring = "df8259e9a351b50b704157b1efba73eb967633a9"
+loamSpine = "d5b878736f10153b5ed878ae8b3a2491a17b57bd"
+nestGate = "8ec30b5fbbe430e1e0f3b50012078d65d6d45b8c"
+neuralSpring = "2d7ae2ed4c0190e4c3c2a8eba0c1807219b516a9"
+petalTongue = "8474be8245acd80a80d54abbfb0023b16b6fae71"
 plasmidBin = "f0d543270b789a381d4f27aeefbedc3393f2b202"
 projectFOUNDATION = "5b3426bddaf4579165fae10003faf98cbb5c2c6b"
 projectNUCLEUS = "f488d7f5ad5add83e1365ae54d684afccde73237"
-rhizoCrypt = "0479eaaa8829829716731e9539dadae39c8d77a7"
+rhizoCrypt = "ed67a9dd1b1a344a1e9a8d07cd98a98ec1e35f0b"
 skunkBat = "b0df971ce9b2a04c15994744ef6a481aec96147f"
 songBird = "1b3ce7027d4d02dc5ece40a61b1251f08210b637"
-squirrel = "fad2bc4e5ac18d10f717cc5902d6ad31aafa8ffe"
-sweetGrass = "ef890871ea4c6c28f358bca10e3533e68d4940ef"
+squirrel = "8de6bcbe600de060e4045f77c0415620a1f7279e"
+sweetGrass = "50bd0440387267ac518cd33504f5fd2502752e4d"
 toadStool = "81286af57caa59f587938a81228d8981f7b0a423"
-wateringHole = "f97e0d9cbc196f35e63da7f085d504e62167ae59"
-wetSpring = "1aa78d67f06928a914c3c863888b4ed1cc4a638c"
+wateringHole = "90c39bd334cea3ab0af17bd99af71ad2c91af576"
+wetSpring = "aa881af6f6728f3f28a14700cbfb6e9ff634e0ea"
