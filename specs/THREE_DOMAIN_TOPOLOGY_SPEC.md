@@ -84,9 +84,18 @@ Service: `petaltongue-web.service` (systemd user, lingering enabled)
 **Live now**: Physical topology, K-Derm layers, hardening controls, depot status,
 ecosystem coordination — all rendered from manifest data.
 
-**DIVs**: Content backend not wired (content-provider socket missing), discovery
-service not found, port 8090 conflict (using 8190), title says "petalTongue
-Dashboard" not "nestgate.io".
+**DIVs resolved**:
+- DIV-1 FIXED: nestGate `--socket /run/membrane/nestgate-e8b62b6e.sock` added via systemd drop-in.
+  Neural API `capability.resolve("content.get")` now routes to nestGate.
+- DIV-2 FIXED: Symlink `/run/user/1000/biomeos/content-provider-e8b62b6e.sock → nestgate-e8b62b6e.sock`.
+  Persisted via `ExecStartPost` in `membrane-nestgate.service.d/uds-socket.conf`.
+- DIV-3 ACCEPTED: Port 8190 (8090 occupied). No action needed.
+- DIV-4 FIXED: Title branded "nestgate.io — ecoPrimals Data Surface", h1 "nestgate.io".
+  petalTongue v1.7.0 rebuilt with branding and deployed.
+
+**Remaining**: CAS content data not yet populated on sporeGate (WG overlay shows
+"Not Found" — this is a CAS miss, not a socket error). Needs CAS population from
+westGate or mesh-replicated data braids.
 
 ### Phase 1 COMPLETE: petalTongue Mesh Surface
 
