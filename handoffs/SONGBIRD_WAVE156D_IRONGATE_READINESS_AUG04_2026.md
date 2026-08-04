@@ -89,4 +89,21 @@ All ops, not code:
 
 ---
 
-*songBird Wave 156d — ironGate downstream READY. GIS bonds expanded. content.get cross-gate path VERIFIED. Phase 5 mesh probes SHIPPED. Zero P0s. 14,840+ tests, 31/31 crates clippy-clean.*
+---
+
+## Doc & Spec Hygiene (Wave 156d cleanup pass)
+
+| Action | Count | Detail |
+|--------|-------|--------|
+| Specs archived | 11 | Stale Jan 2025 "Week X" specs, completed impl specs, superseded designs → `specs/archived/` |
+| Specs remaining (active) | 20 | Production-relevant protocol/architecture specs |
+| Root docs updated | 4 | README, REMAINING_WORK, CONTEXT, CONTRIBUTING — dates, versions, metrics |
+| Crate READMEs fixed | 1 | `songbird-universal-ipc/README.md` — Windows Named Pipes marked implemented |
+| Specs index rebuilt | 1 | `00_SPECIFICATIONS_INDEX.md` — reflects archival |
+| TODO/FIXME in Rust source | 0 | Confirmed zero |
+| Temp/backup debris | 0 | Clean workspace |
+| `cargo clean` | 60.8 GiB | 54,083 build artifacts removed |
+
+---
+
+*songBird Wave 156d — ironGate downstream READY. GIS bonds expanded. content.get cross-gate path VERIFIED. Phase 5 mesh probes SHIPPED. 11 stale specs archived. 60.8 GiB cleaned. Zero P0s. 14,840+ tests, 31/31 crates clippy-clean.*
