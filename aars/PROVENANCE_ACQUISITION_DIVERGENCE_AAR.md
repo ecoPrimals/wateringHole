@@ -32,22 +32,24 @@ download .cif → BLAKE3 hash → CAS put → DAG event → spine entry
 
 Each provenance step is a synchronous UDS RPC call:
 
-| Operation | Target Socket | ~Latency |
-|-----------|--------------|----------|
-| `blake3_hash` | local CPU | < 1ms (300 KB file) |
-| `cas_put` | nestgate.sock | 5–10ms |
-| `dag_event_append` | rhizocrypt.sock | 5–10ms |
-| `spine_entry_append` | loamspine.sock | 5–10ms |
+| Operation | Target Socket | ~Latency (fresh) | Latency at 187K entries |
+|-----------|--------------|-------------------|------------------------|
+| `blake3_hash` | local CPU | < 1ms (300 KB file) | < 1ms |
+| `cas_put` | nestgate.sock | 5–10ms | 54ms |
+| `dag_event_append` | rhizocrypt.sock | 5–10ms | 4ms |
+| `spine_entry_append` | loamspine.sock | 5–10ms | **3,536ms** |
 
-Total provenance per file: ~20–30ms. But the RPC calls are serialized on the
-UDS socket — even with 8 parallel provenance workers in a thread pool executor,
-the sockets serialize requests. The async download pipeline (20 concurrent HTTP
-connections) produces files at 74/s, but the provenance chain can only consume
-~30–40/s through its single-threaded UDS handlers.
+**UPDATE (Aug 4 AM)**: The real bottleneck is `spine_entry_append` at scale.
+At 187K spine entries, each append takes **3.5 seconds** — this is the dominant
+cost, not UDS serialization. At 3.5s/file, the trailer can process 0.3 files/s.
+For 6M already-downloaded files, that's 243 days. For 240M remaining, it's
+literally years.
+
+Total provenance per file: 3.6s (dominated by loamSpine append).
 
 **This is the acquisition-provenance divergence**: download throughput scales
-with network concurrency, but provenance throughput is bounded by sequential
-UDS RPC latency.
+with network concurrency, but provenance throughput is bounded by loamSpine's
+O(n) spine entry append at scale.
 
 ### Phase 2: Trailer Architecture
 
@@ -153,6 +155,24 @@ acquisition.
 5. **Sharded provenance**: Multiple DAG sessions running in parallel on
    different socket endpoints. Each provenance worker gets its own session.
    Sessions merge at dehydration time.
+
+### CRITICAL: loamSpine O(n) Append
+
+The loamSpine `spine.entry.append` method degrades from 5ms (fresh spine)
+to **3,536ms** at 187K entries. This is likely an O(n) scan or Merkle tree
+rebuild on each append. At AlphaFold scale (240M files), this makes per-file
+spine entries architecturally infeasible. Options:
+
+1. **Batch spine entries**: Accept arrays of entries in one call, rebuild
+   the Merkle tree once per batch instead of per entry.
+2. **Sharded spines**: One spine per subdirectory or per 10K files. Merge
+   spine roots into a super-spine at dehydration time.
+3. **Deferred spining**: Skip spine entries during acquisition. Create the
+   spine from the DAG session at dehydration time (DAG already has all hashes).
+
+Option 3 is the most radical but may be correct — the spine's purpose is
+Merkle certification of the dataset. If the DAG already tracks every hash,
+the spine can be derived from the DAG rather than built incrementally.
 
 ### Recommended for biomeOS Signal Team
 

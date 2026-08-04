@@ -2,22 +2,21 @@
 """
 AlphaFold provenance trailer — follows the bulk downloader and braids files.
 
-Watches the alphafold_structures directory for new .cif files that haven't
-been braided yet. Maintains its own progress file tracking braided files.
-Runs as a companion systemd service alongside alphafold-bulk.
+Reads the .prov_queue file (written by the downloader) which contains one
+line per downloaded file: filepath<TAB>size. Tracks braided line count so
+it can seek past already-processed entries on restart.
 
 Architecture:
-  - Downloader writes .cif files at 74/s (full speed, no provenance overhead)
-  - This trailer reads newly appeared files and runs BLAKE3→CAS→DAG→spine
-  - The trailer can fall behind temporarily; it catches up during pauses
+  - Downloader appends to .prov_queue at download speed (43-74/s)
+  - This trailer reads from .prov_queue and runs BLAKE3→CAS→DAG→spine
+  - The trailer processes at UDS RPC speed (~30-40/s) and catches up during pauses
   - Every CHECKPOINT_INTERVAL files, the DAG is partially dehydrated
-  - On clean shutdown, the DAG is fully dehydrated, spine committed, signed, braided
+  - Provenance state is persisted for restart safety
 
-Restart-safe: persists provenance session IDs and braided file set.
+Restart-safe: persists line offset + provenance session IDs.
 """
 
 import json
-import os
 import sys
 import time
 from pathlib import Path
@@ -31,18 +30,17 @@ from bulk_ingest import (
 )
 
 DEST = Path("/mnt/nestgate/cold/zfs/data/alphafold_structures")
-DOWNLOAD_PROGRESS = DEST / ".progress"
-PROV_PROGRESS = DEST / ".prov_braided"
+PROV_QUEUE = DEST / ".prov_queue"
 PROV_STATE = DEST / ".prov_state"
 DATASET_NAME = "alphafold_structures_v6"
 
-BATCH_SIZE = 500
+BATCH_SIZE = 200
 CHECKPOINT_INTERVAL = 2000
-SCAN_INTERVAL = 30
-REPORT_INTERVAL = 300
+POLL_INTERVAL = 15
+REPORT_INTERVAL = 60
 
 
-def load_prov_state():
+def load_state():
     if PROV_STATE.exists():
         try:
             return json.loads(PROV_STATE.read_text())
@@ -51,26 +49,24 @@ def load_prov_state():
     return None
 
 
-def save_prov_state(session_id, spine_id, event_count):
+def save_state(session_id, spine_id, event_count, lines_processed, byte_offset=0):
     PROV_STATE.write_text(json.dumps({
         "session_id": session_id,
         "spine_id": spine_id,
         "event_count": event_count,
+        "lines_processed": lines_processed,
+        "byte_offset": byte_offset,
     }))
 
 
-def load_braided_set():
-    if PROV_PROGRESS.exists():
-        return set(PROV_PROGRESS.read_text().splitlines())
-    return set()
-
-
 def init_provenance():
-    state = load_prov_state()
+    state = load_state()
     if state and state.get("session_id") and state.get("spine_id"):
-        print(f"Resuming provenance: session={state['session_id'][:16]}... "
-              f"events={state.get('event_count', 0)}")
-        return state["session_id"], state["spine_id"], state.get("event_count", 0)
+        print(f"Resuming: session={state['session_id'][:16]}... "
+              f"events={state.get('event_count', 0)} "
+              f"lines={state.get('lines_processed', 0)}")
+        return (state["session_id"], state["spine_id"],
+                state.get("event_count", 0), state.get("lines_processed", 0))
 
     session_id = dag_session_create(DATASET_NAME)
     spine_result = spine_create(DATASET_NAME)
@@ -78,94 +74,87 @@ def init_provenance():
     if not session_id or not spine_id:
         print("FATAL: provenance init failed", file=sys.stderr)
         sys.exit(1)
-    save_prov_state(session_id, spine_id, 0)
+    save_state(session_id, spine_id, 0, 0)
     print(f"Provenance started: session={session_id[:16]}... spine={spine_id[:16]}...")
-    return session_id, spine_id, 0
-
-
-def find_unbraided(braided_set, batch_size=500):
-    """Find .cif files on disk that haven't been braided yet."""
-    unbraided = []
-    for subdir in sorted(DEST.iterdir()):
-        if not subdir.is_dir() or subdir.name.startswith("."):
-            continue
-        for f in subdir.iterdir():
-            if f.suffix == ".cif" and f.name not in braided_set:
-                unbraided.append(f)
-                if len(unbraided) >= batch_size:
-                    return unbraided
-    return unbraided
-
-
-def braid_batch(files, session_id, spine_id, event_count, braided_set, prov_fh):
-    """Braid a batch of files through the full provenance chain."""
-    ok = 0
-    for fp in files:
-        try:
-            sz = fp.stat().st_size
-            h = blake3_hash(fp)
-            cas_put(fp, h)
-            dag_event_append(session_id, h, fp.name, sz, DATASET_NAME)
-            spine_entry_append(spine_id, h, "chemical/x-cif", sz)
-            event_count += 1
-            ok += 1
-            braided_set.add(fp.name)
-            prov_fh.write(fp.name + "\n")
-
-            if event_count % CHECKPOINT_INTERVAL == 0:
-                dag_partial_dehydrate(session_id)
-                save_prov_state(session_id, spine_id, event_count)
-                prov_fh.flush()
-                print(f"  [CHECKPOINT] {event_count:,} events", flush=True)
-        except Exception as e:
-            print(f"  ERR: {fp.name}: {e}", flush=True)
-    return ok, event_count
+    return session_id, spine_id, 0, 0
 
 
 def main():
     print(f"AlphaFold provenance trailer starting", flush=True)
-    print(f"Directory: {DEST}", flush=True)
 
-    session_id, spine_id, event_count = init_provenance()
-    braided_set = load_braided_set()
-    print(f"Previously braided: {len(braided_set):,} files", flush=True)
-
+    session_id, spine_id, event_count, lines_processed = init_provenance()
+    state = load_state() or {}
+    byte_offset = state.get("byte_offset", 0)
     total_braided = 0
+    errors = 0
     t_start = time.time()
     last_report = t_start
 
-    with open(PROV_PROGRESS, "a") as prov_fh:
-        while True:
-            files = find_unbraided(braided_set, BATCH_SIZE)
-            if not files:
-                time.sleep(SCAN_INTERVAL)
-                now = time.time()
-                if now - last_report > REPORT_INTERVAL:
-                    elapsed = now - t_start
-                    print(f"[{time.strftime('%H:%M:%S')}] "
-                          f"braided={total_braided:,} total={len(braided_set):,} "
-                          f"events={event_count:,} "
-                          f"rate={total_braided/elapsed:.1f}/s "
-                          f"(waiting for new files)", flush=True)
-                    last_report = now
-                continue
+    while True:
+        if not PROV_QUEUE.exists():
+            time.sleep(POLL_INTERVAL)
+            continue
 
-            ok, event_count = braid_batch(
-                files, session_id, spine_id, event_count, braided_set, prov_fh,
-            )
-            total_braided += ok
-            save_prov_state(session_id, spine_id, event_count)
-            prov_fh.flush()
+        batch = []
+        with open(PROV_QUEUE, "rb") as f:
+            f.seek(byte_offset)
+            for raw_line in f:
+                line = raw_line.decode("utf-8", errors="replace").strip()
+                lines_processed += 1
+                parts = line.split("\t")
+                if len(parts) != 2:
+                    continue
+                filepath, size_str = parts
+                batch.append((Path(filepath), int(size_str), lines_processed))
+                if len(batch) >= BATCH_SIZE:
+                    byte_offset = f.tell()
+                    break
+            else:
+                byte_offset = f.tell()
 
+        if not batch:
             now = time.time()
             if now - last_report > REPORT_INTERVAL:
                 elapsed = now - t_start
+                rate = total_braided / elapsed if elapsed > 0 else 0
                 print(f"[{time.strftime('%H:%M:%S')}] "
-                      f"braided={total_braided:,} total={len(braided_set):,} "
-                      f"events={event_count:,} "
-                      f"rate={total_braided/elapsed:.1f}/s",
-                      flush=True)
+                      f"braided={total_braided:,} events={event_count:,} "
+                      f"line={lines_processed:,} rate={rate:.1f}/s "
+                      f"err={errors} (idle)", flush=True)
                 last_report = now
+            time.sleep(POLL_INTERVAL)
+            continue
+
+        for fp, sz, line_num in batch:
+            try:
+                h = blake3_hash(fp)
+                cas_put(fp, h)
+                dag_event_append(session_id, h, fp.name, sz, DATASET_NAME)
+                spine_entry_append(spine_id, h, "chemical/x-cif", sz)
+                event_count += 1
+                total_braided += 1
+                lines_processed = line_num
+
+                if event_count % CHECKPOINT_INTERVAL == 0:
+                    dag_partial_dehydrate(session_id)
+                    save_state(session_id, spine_id, event_count, lines_processed, byte_offset)
+                    print(f"  [CHECKPOINT] events={event_count:,} "
+                          f"line={lines_processed:,}", flush=True)
+            except Exception as e:
+                errors += 1
+                lines_processed = line_num
+
+        save_state(session_id, spine_id, event_count, lines_processed, byte_offset)
+
+        now = time.time()
+        if now - last_report > REPORT_INTERVAL:
+            elapsed = now - t_start
+            rate = total_braided / elapsed if elapsed > 0 else 0
+            print(f"[{time.strftime('%H:%M:%S')}] "
+                  f"braided={total_braided:,} events={event_count:,} "
+                  f"line={lines_processed:,} rate={rate:.1f}/s "
+                  f"err={errors}", flush=True)
+            last_report = now
 
 
 if __name__ == "__main__":

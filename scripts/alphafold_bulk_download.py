@@ -24,6 +24,7 @@ import aiohttp
 DEST = Path("/mnt/nestgate/cold/zfs/data/alphafold_structures")
 ACCESSIONS = Path("/mnt/nestgate/cold/zfs/data/alphafold/accession_ids.csv")
 PROGRESS_FILE = DEST / ".progress"
+PROV_QUEUE_FILE = DEST / ".prov_queue"
 BASE_URL = "https://alphafold.ebi.ac.uk/files"
 
 CONCURRENCY = 20
@@ -40,6 +41,7 @@ async def download_one(
     af_id: str,
     version: str,
     progress_fh,
+    prov_queue_fh,
     stats: dict,
 ):
     prefix = uniprot_id[:2]
@@ -61,6 +63,7 @@ async def download_one(
                         data = await resp.read()
                         outfile.write_bytes(data)
                         progress_fh.write(f"{uniprot_id}\n")
+                        prov_queue_fh.write(f"{outfile}\t{len(data)}\n")
                         stats["success"] += 1
                         stats["bytes"] += len(data)
                         return
@@ -149,16 +152,18 @@ async def main():
     reporter = asyncio.create_task(progress_reporter(stats, total_all, start_time))
 
     async with aiohttp.ClientSession(connector=conn, timeout=TIMEOUT) as session:
-        with open(PROGRESS_FILE, "a") as progress_fh:
+        with open(PROGRESS_FILE, "a") as progress_fh, \
+             open(PROV_QUEUE_FILE, "a") as prov_queue_fh:
             batch_size = 5000
             for i in range(0, len(entries), batch_size):
                 batch = entries[i : i + batch_size]
                 tasks = [
-                    download_one(session, sem, uid, af_id, ver, progress_fh, stats)
+                    download_one(session, sem, uid, af_id, ver, progress_fh, prov_queue_fh, stats)
                     for uid, af_id, ver in batch
                 ]
                 await asyncio.gather(*tasks)
                 progress_fh.flush()
+                prov_queue_fh.flush()
 
     reporter.cancel()
 
