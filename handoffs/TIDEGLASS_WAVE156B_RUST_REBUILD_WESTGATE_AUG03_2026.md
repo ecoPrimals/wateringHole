@@ -12,9 +12,11 @@
 
 Full Rust rebuild of tideGlass from Phase 0 doc scaffold to Phase 4 production-ready
 UniBin. Seven science modules implemented as library crates composing into a single
-`tideglass` binary with UDS JSON-RPC 2.0 server. 147 tests, 92.71% region coverage,
-94.11% line coverage. All quality gates green. Documentation fully reconciled to
-as-built state. Ready for westGate deployment pending biomeOS cell boot.
+`tideglass` binary with UDS JSON-RPC 2.0 server. 164 tests. G56 Neural API routing
+implemented (prefers `neural-api-default.sock`, falls back to direct nestGate).
+Provenance convergence gate (`is_dataset_converged`) for mixed-state data on westGate.
+All quality gates green. Documentation fully reconciled to as-built state.
+Ready for westGate deployment pending biomeOS cell boot.
 
 ## Crate Architecture
 
