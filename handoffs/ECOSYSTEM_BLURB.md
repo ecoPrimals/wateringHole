@@ -71,7 +71,7 @@ This tests and matures:
 - Mature petalTongue G19 live render with actual game/GIS consumers
 
 ### Phase 4: westGate science springs (no mesh needed)
-- Boot tideGlass on westGate (3.65 TB data local, **UniBin COMPLETE — 9 crates, 164 tests, Neural API routing, convergence gate**)
+- Boot tideGlass on westGate (3.65 TB data local, **UniBin COMPLETE — 9 crates, 177 tests, live NUCLEUS validated, Neural API + direct fallback**)
 - Boot groundSpring + airSpring on westGate (NOAA/USGS/USDA local)
 - First science spring compositions with real data
 - ludoSpring on blueGate (pure composition, no deps)
@@ -133,7 +133,7 @@ This tests and matures:
 | **rhizoCrypt 156c/156d** | rhizoCrypt | Port collision fix + BTSP env isolation. Batch notify wired. Dead vendor HTTP purged. Root doc cleanup. |
 | **petalTongue pushed** | petalTongue | CAS storage discovery refactor (remove hardcoded nestGate paths). Canonical `get_family_id()`. Hardcoded primal names removed. Wave 156b doc sync. |
 | **squirrel PUSHED (156d)** | squirrel | Sovereignty cleanup, emoji removal, test isolation fix. 27 deprecated aliases removed. Doc normalization + debris purge. **8de6bcbe on origin/main.** |
-| **tideGlass 176 tests** | tideGlass | Deep debt: centralize identity, consolidate casts, wire provenance write. G56 Neural API routing. Repo URLs corrected. |
+| **tideGlass 177 tests** | tideGlass | Live NUCLEUS validated. Socket discovery (DIV-7). Neural API fallback (DIV-8). Cell graph updated for `nucleus attach`. |
 | **coralReef 156b docs** | coralReef | Root docs aligned to 3,512 tests. Wave 156b deep debt. |
 | **hotSpring arXiv production** | hotSpring | `arxiv_volume_scan` (12⁴/16⁴/24⁴). `arxiv_preprint_validation` (action-force, ΔH, Creutz). Provenance trio wired (NFT pattern). `arxiv_beta_scan` (SU(3) phase structure). |
 
@@ -165,7 +165,7 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 | **rhizoCrypt** | 1,900 | GREEN | G31 batch | Batch notify wired. Port collision fix. Dead vendor HTTP purged. |
 | **loamSpine** | 1,740 | GREEN | G31 batch | **52/52 niche mappings.** MCP batch tools. Tower/custodian evolution. |
 | **sweetGrass** | **1,645** | GREEN | E2E trio partners | Concurrent batch_commit. Trailer pattern aligned. DH-0 clean. |
-| **tideGlass** | **176** | GREEN | biomeOS cell boot, GPS JSON conversion | Deep debt. G56 Neural API routing. Provenance write. |
+| **tideGlass** | **177** | GREEN | biomeOS cell boot (`nucleus attach` v4.57), GPS JSON conversion | **Live NUCLEUS validated.** Socket discovery fixed. Neural API fallback. 8 DIVs documented. |
 | **cellMembrane** | 1,281+ | GREEN | Portability | — |
 
 **Total**: **~135,000+ tests**. **13/13 GREEN**. esotericWebb V30. footPrint 628. sweetGrass 1,645. Provenance divergence RESOLVED (122×). Three-domain topology spec'd.
@@ -199,7 +199,7 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 
 | Component | Status | Next |
 |-----------|--------|------|
-| **tideGlass** (protist) | **FULL RUST REBUILD.** 9 crates, 7 science modules, 11 IPC methods. **176 tests, 0 clippy warnings.** G56 Neural API routing. Convergence gate. Provenance write path. 21 deps pure Rust. CAS wiring LIVE with graceful degradation. | Convert GPS NumPy/pickle → JSON. Chen 2017 benchmark (r >= 0.52). biomeOS cell boot. |
+| **tideGlass** (protist) | **FULL RUST REBUILD.** 9 crates, 7 science modules, 11 IPC methods. **177 tests, 0 clippy warnings.** Live NUCLEUS validated on westGate (333K CAS objects). Socket discovery fixed for `membrane/` layout (DIV-7). Neural API fallback when `content.*` not proxied (DIV-8). Cell graph updated for `nucleus attach`. 21 deps pure Rust. | GPS NumPy/pickle → JSON conversion. Chen 2017 benchmark (r >= 0.52). `biomeos nucleus attach` when v4.57 arrives on westGate. |
 | **westGate data** | 3.65 TB / 154 datasets. GPS platform data in CAS (8 files, 1.4 GB, NumPy/pickle). | Python converter → JSON → CAS re-ingest with derivation lineage. |
 | **footPrint** (GPS viz) | **628 tests.** Manifest-driven source registration. Dynamic category boosts. Constants centralized. riboCipher UDS transport. ironGate Phase 2 DEPLOY READY (port 3002, validated against live NUCLEUS). | BTSP local-trust for CAS write. Caddy routing. |
 | **petalTongue** (viz) | G19 PROVEN. Wave 156b pushed (**6,755 tests, 0 doc warnings**). | footPrint + tideGlass consume via Neural API. G53 maturation. |
