@@ -551,6 +551,10 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G52 | blueFish PFAS QC (Jones track) | GLACIAL | EPA 1633A open PFAS QC |
 | G53 | petalTongue maturation via downstream consumers | **ACTIVE** | footPrint (GIS/Leaflet) + esotericWebb (game/WebGL) on ironGate evolve petalTongue G19 live render → mature visualization becomes GPS viz for tideGlass NF (G37) + QCD viz for hotSpring (G45). **Support structures feed science.** |
 | G54 | Dual-science mid-term convergence | **ACTIVE** | **Track A (NF/GPS — Gonzales/Bin)**: tideGlass rebuilds Cell 2026 paper → NF drug repurposing → CTF NDU grant. **Track B (QCD — Murillo/Chuna)**: hotSpring arXiv Rung 1 → 6-rung lattice QCD program. Both tracks consume barraCuda (GPU math), petalTongue (viz), provenance trio (chains), nestGate (data). Infrastructure evolves toward both simultaneously. |
+| G55 | Provenance batch RPCs (braids at machine speed) | **ACTIVE** | `dag.event.batch` in rhizoCrypt + `spine.entry.batch` in loamSpine. Closes 12× throughput gap (74/s acquisition vs 6/s provenance). Enables bulk data ingress with inline braiding. Trailer pattern is bridge; batch RPCs are permanent fix. Affects AlphaFold (240M structures), ENA/SRA, PDB, LINCS, all mesh federation. |
+| G56 | Neural API activation (capability routing everywhere) | **ACTIVE** | All consumers route through biomeOS Neural API (`neural-api-default.sock`) instead of direct primal sockets. footPrint, tideGlass, esotericWebb, all springs. Eliminates hardcoded socket paths. biomeOS routes `content.get`/`content.put`/`visualization.render` etc. via capability discovery. When primals evolve (e.g., nestGate adds `content.query`), consumers get it without rewiring. |
+| G57 | nestgate.io data identity surface | **ACTIVE** | nestgate.io serves CAS data catalog (519 GB, 130+ datasets). DNS + Caddy routing to sporePrint `/data/` pages (Phase 1). Live CAS API queries (Phase 2). sweetGrass braid queries (Phase 3). sporePrint regenerates from live CAS/braid state (Phase 4). The PI-facing front door for "what data do you have and how do I get it." |
+| G58 | Mixed provenance convergence | **ACTIVE** | Promote all westGate data from primordial/CAS-only to fully braided. `is_dataset_converged()` gate for springs. Revalidation running for priority + AlphaFold. All spring-critical data fully braided before Phase 4 boot. |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -671,22 +675,22 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155s/156b — **G19 PROVEN + DUAL-SCIENCE INCREMENTALS.** ironGate Session 5: footPrint 526 tests PASS, Phase 1 dry-run OK. neuralSpring V183 deep debt (1,518 tests, 87% coverage). BTSP transport signal spec shipped. 14 docs fossilized. petalTongue game engine evolution strategically mapped (WebGPU/Godot/VR-AR via GPU stack delegation). ZERO P0/P1/P2. ~123K+ tests. 12/13 GREEN. 50 glacial goals tracked (8 COMPLETE, 22 ACTIVE, 20 GLACIAL/CONCEPT).
+**Summary**: Wave 155u/156b — **PROVENANCE × ACQUISITION DIVERGENCE + 13/13 GREEN.** 12× throughput gap discovered; trailer pattern + batch RPC proposal (G55). Neural API activation everywhere (G56). nestgate.io data identity surface (G57). Mixed provenance convergence (G58). barraCuda PRNG FIXED (YELLOW→GREEN — **13/13 GREEN first time**). esotericWebb V29. hotSpring arXiv production (13 commits). nestGate content.fetch. tideGlass full rebuild (161 tests). footPrint deep debt (563 tests). wetSpring V211c (2,210 tests). strandGate silicon deism VALIDATED (paper-ready). ZERO P0/P1/P2. ~130K+ tests. **54 glacial goals** tracked (8 COMPLETE, **26 ACTIVE**, 20 GLACIAL/CONCEPT).
 
-**Phase shift**: G19 proven. Phase 1 structurally ready (dry-run OK, cell attachment CLI is the gap). footPrint 526 tests on ironGate. Both science tracks have incrementals advancing. petalTongue game engine path mapped.
+**Phase shift**: From "prove the stack" to **"solve data ingress and activate the composition layer."** The infrastructure works (13/13 GREEN, G19 proven, cell graphs validated). Now: batch RPCs for provenance at machine speed, Neural API as the universal routing layer, nestgate.io as the data front door, mixed provenance convergence. Springs can't boot on unbraided data.
 
-**74 files fossilized** across 6 checkpoints (14 new in `wave155r_absorbed/`). 14+ active AARs, 10+ active handoffs.
-- **ironGate: PRIMARY DOWNSTREAM HOST.** NUCLEUS 26/27 HEALTHY. G19 PROVEN. esotericWebb V26 (471 tests). footPrint cloned (526 tests). Phase 1 dry-run OK. RTX 5070. Node.js 22.
-- westGate: **DATA NAS. 519 GB / 130 datasets.** airSpring deep debt CLEAN (1,157). groundSpring evolved.
-- strandGate: **COMPUTE DEV.** neuralSpring V183 (1,518 tests). hotSpring arXiv ready. Experiment queue.
+**74 files fossilized** across 6 checkpoints. 15+ active AARs, 12+ active handoffs.
+- **ironGate: PRIMARY DOWNSTREAM HOST.** NUCLEUS 26/27 HEALTHY. G19 PROVEN. esotericWebb V29. footPrint 563 tests. Phase 1 structurally ready. RTX 5070.
+- westGate: **DATA NAS. 519 GB / 130 datasets.** Provenance divergence AAR. 3 provenance states converging. tideGlass 161 tests (CAS wired). airSpring 1,157. wetSpring 2,210.
+- strandGate: **COMPUTE DEV.** Silicon deism VALIDATED (paper-ready). hotSpring arXiv production. neuralSpring V183 (1,518 tests).
 - biomeGate: **GPU LAB.** 3 VFIO GPUs. G32 silicon deism.
-- eastGate: **squirrel LOCAL** — 156b test perf 400s→16s, 34→1 binaries, 4,613 tests.
+- eastGate: **squirrel LOCAL** — 156b test perf 400s→16s, 4,613 tests.
 - blueGate: **WINDOWS DEV.** ludoSpring. Sub-builder divergences 8/10 resolved.
 
 **11 gates ONLINE** (6 NUCLEUS, 1 crankshaft + agentic, 4 other). **8 glacial goals COMPLETE** (G3, G4, G8, G10, G17, G21, G22, G29).
-**22 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G31, G32, G34, G35, G36, G37, G38, G39, G43, G44, G45, **G53**, **G54**).
+**26 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G31, G32, G34, G35, G36, G37, G38, G39, G43, G44, G45, G53, G54, **G55**, **G56**, **G57**, **G58**).
 **20 GLACIAL/CONCEPT** (future phases).
-**50 total glacial goals** tracked.
+**54 total glacial goals** tracked.
 
 **MID-TERM SCIENCE TRACKS**:
 - **Track A (NF/GPS)**: G15→G36→G37→G38→G39. Gonzales/Bin Chen. tideGlass rebuilds Cell 2026 → NF reversal screen → CTF NDU $125K.
@@ -695,24 +699,25 @@ completeness.
 
 **Gauge group resolved in code** (G9): SU(3) labels disambiguated in barraCuda/hotSpring. Paper/site relabel still needed (sporePrint scope). arXiv UNBLOCKED.
 
-**Open items — prioritized by science track impact:**
-- **biomeOS cell attachment CLI** — `biomeos deploy --mode attach` needs `[cell]` schema. Dry-run OK, cell parsing not wired. **SINGLE remaining gap for Phase 1.**
-- **toadStool ExecStart fix** — membrane unit `--foreground` rejected. Fix: `toadstool up <manifest>`. BLOCKING 9/9 composition.
-- **membrane socket permissions** — `/run/membrane/*.sock` is root:root. Needs group-writable for `biomeos` group.
-- **footPrint Express 5 wildcard** — `/api/cas/*` → `/api/cas/{*path}` (path-to-regexp v8). Fixed locally on ironGate, needs upstream commit.
-- **tideGlass Phase 0** — Zenodo inventory + RGES reproduction (Track A critical path)
-- **arXiv paper relabel** SU(2) → SU(3) + β-scan (Track B critical path)
-- **petalTongue WebGPU/wgpu evolution** — wire GpuCompiler → coralReef → toadStool. Add egui-wgpu backend. (G53 maturation + science viz)
-- squirrel → biomeOS G18 integration test (both sides wired)
-- Inter-gate content.get live test (songBird probes ready, neuralSpring needs it for Phase 5)
-- G31 loamSpine + rhizoCrypt batch coordination (sweetGrass done)
-- G32: coralReef VFIO diesel — toadStool ember + K80 firmware
-- barraCuda PRNG full validation (Week 3+)
-- ~~BTSP transport signal documentation~~ — SHIPPED as `specs/BTSP_TRANSPORT_SIGNAL_SPEC.md`
+**Open items — prioritized by data pipeline + springs readiness:**
+- **G55: Batch RPCs for provenance** — `dag.event.batch` (rhizoCrypt) + `spine.entry.batch` (loamSpine). **Single highest-impact evolution** for data throughput. Closes 12× gap. Trailer pattern is the bridge.
+- **G56: Neural API activation** — route footPrint, tideGlass, esotericWebb, all springs through `neural-api-default.sock`. Eliminate hardcoded socket paths. biomeOS signal graphs already wired for data federation.
+- **G57: nestgate.io** — DNS + Caddy routing to sporePrint `/data/`. Phase 1: redirect. Phase 2: live CAS API. Phase 3: braid queries. PI-facing data front door.
+- **G58: Mixed provenance convergence** — promote primordial → braided for all spring-critical data. `is_dataset_converged()` gate. Revalidation running.
+- **nestGate canonical client crate** — 6 tideGlass CAS divergences (DIV-1→6). groundSpring + airSpring have stale CAS clients. One crate for all.
+- **biomeOS cell attachment CLI** — `biomeos deploy --mode attach` needs `[cell]` schema. Phase 1 gap.
+- **toadStool ExecStart fix** — BLOCKING 9/9 membrane composition.
+- **membrane socket permissions** — root:root → group-writable for `biomeos`.
+- **arXiv plaquette ×4 normalization** — BLOCKING paper submission (strandGate validation otherwise COMPLETE).
+- squirrel → biomeOS G18 integration test (V29 has signal.dispatch inbound)
+- Inter-gate content.get live test (songBird probes + nestGate content.fetch ready)
+- petalTongue WebGPU/wgpu evolution (G53 maturation)
+- ~~barraCuda PRNG validation~~ — **FIXED** (YELLOW→GREEN, statistical validation harness)
+- ~~BTSP transport signal documentation~~ — SHIPPED
 
 ---
 
-*Last used*: Wave 155s/156b cascade — Session 5 absorbed, neuralSpring V183, BTSP spec, 14 docs fossilized, dual-science incrementals + petalTongue game engine strategy (Aug 3, 2026 7PM)
+*Last used*: Wave 155u/156b — provenance divergence AAR, 13/13 GREEN, G55-G58 added (batch RPCs, Neural API, nestgate.io, provenance convergence) (Aug 4, 2026 AM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155s — 14 files to `wave155r_absorbed/` (74 total across 6 checkpoints)
