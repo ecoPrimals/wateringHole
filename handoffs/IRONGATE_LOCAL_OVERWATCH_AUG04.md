@@ -1,6 +1,6 @@
 # ironGate Local Overwatch — Code Team Blurb
 
-**Date**: 2026-08-04 09:15 EDT
+**Date**: 2026-08-04 10:38 EDT (Session 7 update)
 **Gate**: ironGate (10.13.37.7) — PRIMARY DOWNSTREAM HOST
 **Wave**: 155v/156d
 **Audience**: esotericWebb code team + footPrint code team (parallel IDE sessions)
@@ -68,12 +68,14 @@ gardens/esotericWebb/
 
 ### Current State
 
-- **Version**: V30 (V26→V27→V28→V29→V30 absorbed Aug 4)
+- **Version**: V30d (V26→V30d absorbed Aug 4)
 - **Tests**: 482 pass (463 lib + 18 integration + 1 doc)
 - **Clippy**: 0 warnings (pedantic + nursery)
 - **Live composition**: exp006 PROVEN — 22 pass, 0 fail, 0 skip
 - **G19 MILESTONE**: petalTongue scene push FIRING on ironGate
-- **HEAD**: `8d4181b` (V30)
+- **V30c**: signed provenance + batch chunking alignment
+- **V30d**: dead code elimination, hardcoded string removal
+- **HEAD**: `1406259` (V30d)
 
 ### V30 Evolution
 
@@ -81,6 +83,8 @@ gardens/esotericWebb/
 - **V29**: deep debt refactor + docs refresh
 - **V30**: cell graph validation + batch provenance readiness
 - **V30b**: typed LocationDef, canonical name constants, `#[allow]→#[expect]`
+- **V30c**: signed provenance + batch chunking alignment
+- **V30d**: dead code elimination, hardcoded string removal
 
 ### What exp006 Shows (V30)
 
@@ -134,9 +138,9 @@ gardens/footPrint/
 
 ### Current State
 
-- **Tests**: **628 PASS** (43 test files, vitest 4.1.10, 1.17s)
+- **Tests**: **677 PASS** (48 test files, vitest 4.1.10, 1.11s)
 - **Stack**: TypeScript / Vite / Leaflet (frontend) + Express/tsx (server)
-- **HEAD**: `badea22` — manifest-driven sources, riboCipher UDS transport
+- **HEAD**: `52b78b1` — manifest-driven sources, riboCipher UDS transport
 - **Node.js**: v22.23.2
 - **Deps**: 347 packages
 
@@ -200,12 +204,13 @@ For code changes, document in a handoff and eastGate will integrate.
 
 ## HARDWARE TEAM STATUS
 
-- NUCLEUS: 26/27 HEALTHY, Graphs Directory newly READY
-- GPU: RTX 5070, 60°C idle, 5% util, 524 MiB VRAM
-- Network: WireGuard live (golgi 38ms, sporeGate 77ms, eastGate 78ms)
+- NUCLEUS: 26/27 HEALTHY, 10 composition graphs in Graphs Directory
+- GPU: RTX 5070, 60°C idle, 5% util
+- Network: WireGuard live (sporeGate 73ms)
 - Port allocation: 3000 reserved, 3001 petalTongue, 3002 footPrint
-- All 13/13 primals GREEN (barraCuda was YELLOW, now GREEN)
-- Three-domain topology spec absorbed (primals.eco / nestgate.io / primal.eco)
+- All 13/13 primals GREEN
+- K-derm DNS verified: primals.eco (200), nestgate.io (200), primal.eco (SEALED)
+- Three-domain topology spec operational
 
 If you need a primal restarted, a socket investigated, or GPU access configured,
 ping the hardware team (this IDE session or wateringHole handoff).
@@ -213,5 +218,6 @@ ping the hardware team (this IDE session or wateringHole handoff).
 ---
 
 *ironGate local overwatch. Wave 155v/156d. NUCLEUS 26/27 HEALTHY. 13/13 GREEN. GPU ready.
-esotericWebb V30: cell graph validation + batch prov, exp006 22/22 PASS.
-footPrint: 628 tests, Phase 2 DEPLOY READY, port 3002 validated.*
+K-derm DNS 3/3 verified. 10 composition graphs ready.
+esotericWebb V30d: signed prov + dead code clean, exp006 22/22 PASS.
+footPrint: 677 tests, Phase 2 DEPLOY READY, port 3002 validated.*
