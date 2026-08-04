@@ -10,9 +10,9 @@
 
 [wave]
 id = 155
-sub = "u"
+sub = "v"
 date = "2026-08-04"
-posture = "WAVE 155u/156b PROVENANCE x ACQUISITION DIVERGENCE. 12x throughput gap — trailer pattern + batch RPC proposal (dag.event.batch, spine.entry.batch). Mixed provenance states converging. 13/13 GREEN (barraCuda PRNG FIXED). esotericWebb V29, hotSpring arXiv production (13 commits), nestGate content.fetch, biomeOS signal graphs. ~130K tests."
+posture = "WAVE 155v/156d PROVENANCE DIVERGENCE RESOLVED (122x improvement, 0.3/s->37.6/s, canonical architecture). THREE-DOMAIN TOPOLOGY SPEC (primals.eco/nestgate.io/primal.eco k-derm). strandGate 12^4 PAPER-READY, plaquette normalization RESOLVED, Rung 1 UNBLOCKED. esotericWebb V30, footPrint 628 tests (Phase 2 deploy ready), petalTongue pushed (CAS refactor). Nanowire->Primal Builder Phase 2a DONE. sweetGrass trailer aligned (1,645 tests). Provenance loop CLOSED (bearDog sig in braid). ~135K tests, 13/13 GREEN."
 publisher = "eastGate-overwatch"
 
 [gates]

@@ -51,7 +51,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] All primals compile — 5 Tier 1 genomeBin architectures
 - [x] ~~P0: glibc depot target~~ — **FIXED** (cellMembrane `8d9bb58`): `targets_for_primal()` auto-appends gnu for GPU primals
 - [x] 43/43 repos Forgejo-first
-- [x] **~119K+ primal tests validated this wave** (songBird 14,840, bearDog 14K, nestGate 13K, toadStool 9.2K, biomeOS 8,570, squirrel 7,243, petalTongue 6,755, barraCuda 5,037, coralReef 3,553, rhizoCrypt 1,900, loamSpine 1,740, sweetGrass 1,644, cellMembrane 1,281+, primalSpring 197, skunkBat)
+- [x] **~135K+ primal tests validated this wave** (songBird 14,840, bearDog 14K, nestGate 13K, toadStool 9.2K, biomeOS 8,570, petalTongue 6,755, barraCuda 5,037, squirrel 4,613, coralReef 3,512, rhizoCrypt 1,900, loamSpine 1,740, sweetGrass 1,645, cellMembrane 1,281+, tideGlass 176, primalSpring 197, skunkBat, footPrint 628, esotericWebb V30)
 - [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean
 - [x] Production `.unwrap()` — 0 in critical-path primals
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
@@ -61,9 +61,9 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] nestGate: **13,095+** tests, CAS on ZFS verified, deep debt complete, zero unsafe
 - [x] toadStool: **9,193+** tests, **S349**: JSON-RPC health endpoint, dead deps purged, stubs fail-closed, hardcoding consolidated (**Wave 155m**)
 - [x] biomeOS: **8,570+** tests, **v4.56**: G22 convergence, spring deploy graph executor SHIPPED, deep debt audit CLEAN (zero debt all categories), 139.2 GiB recovered. (**Wave 155p**)
-- [x] petalTongue: **6,605** tests, modern idiom evolution pass, debris audit (**Wave 155n**)
+- [x] petalTongue: **6,755** tests, CAS storage discovery refactor, canonical `get_family_id()`, hardcoded primal names removed (**Wave 156b**)
 - [x] barraCuda: **5,037** tests, RTX 3090 profiled, **P0 shader fixes SHIPPED**: subgroup entry point `main→sum_reduce_f64` FIXED, PRNG compose duplicate-definition FIXED, `diversity_f64.wgsl` self-recursion FIXED. (**Wave 155p**)
-- [ ] **barraCuda YELLOW**: P0 shader fixes landed but full GPU PRNG validation pending (KE deficit may be subgroup readback artifact — re-test needed). `cpu_mom` remains production HMC path. Week 3+ for full PRNG fix.
+- [x] ~~**barraCuda YELLOW**~~ → **GREEN**: PRNG half-range fixed (xoshiro 52→53 bits). Statistical validation harness. -1,488 LOC (LazyLock→const, error helpers). `cpu_mom` remains production HMC path (Box-Muller transcendental polyfill, not PRNG).
 - [x] coralReef: **3,553** tests on biomeGate revalidation, 463 `.expect()` purged, PTX modernized
 - [x] cellMembrane: **1,281+** tests, **P2 platform detection FIXED** (`d7026d7`), `TargetArch` deprecated → `Platform::detect()`, `validate_with_deps()`, J19+J16+J13 killed, registry API hardened. (**Wave 155n**)
 - [x] rhizoCrypt: 1,900 tests, BTSP→DAG bridge, cross-gate provenance
@@ -123,9 +123,10 @@ appears. This keeps the active review focused on evolving concerns.
 | **darwinGate** | **GLACIAL** | macOS | — | tower (3) | Mac Mini (acquire). apple-darwin builder. |
 | **iosGate** | **GLACIAL** | iOS | — | tower (3) | iPhone. After darwinGate. Silicon deism. |
 
-## 4. K-Derm Layers — Connectivity Fabric (NEW — extracted from incidents + sovereignty)
+## 4. K-Derm Layers — Connectivity Fabric + Three-Domain Topology
 
-Three-layer model identified by peptidoglycan failure incident (Wave 155d):
+Three-layer model identified by peptidoglycan failure incident (Wave 155d).
+**Wave 155v**: formalized as **THREE-DOMAIN TOPOLOGY SPEC** (`specs/THREE_DOMAIN_TOPOLOGY_SPEC.md`) mapping each k-derm layer to a DNS domain: primals.eco (outer), nestgate.io (peptidoglycan), primal.eco (inner).
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -555,6 +556,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G56 | Neural API activation (capability routing everywhere) | **ACTIVE** | All consumers route through biomeOS Neural API (`neural-api-default.sock`) instead of direct primal sockets. footPrint, tideGlass, esotericWebb, all springs. Eliminates hardcoded socket paths. biomeOS routes `content.get`/`content.put`/`visualization.render` etc. via capability discovery. When primals evolve (e.g., nestGate adds `content.query`), consumers get it without rewiring. |
 | G57 | nestgate.io data identity surface | **ACTIVE** | nestgate.io serves CAS data catalog (519 GB, 130+ datasets). DNS + Caddy routing to sporePrint `/data/` pages (Phase 1). Live CAS API queries (Phase 2). sweetGrass braid queries (Phase 3). sporePrint regenerates from live CAS/braid state (Phase 4). The PI-facing front door for "what data do you have and how do I get it." |
 | G58 | Mixed provenance convergence | **ACTIVE** | Promote all westGate data from primordial/CAS-only to fully braided. `is_dataset_converged()` gate for springs. Revalidation running for priority + AlphaFold. All spring-critical data fully braided before Phase 4 boot. |
+| G59 | Three-domain topology (k-derm website separation) | **ACTIVE** | primals.eco (outer membrane, Zola/sporePrint), nestgate.io (peptidoglycan, petalTongue-served CAS braids/depot/provenance/validation), primal.eco (inner membrane, WG mesh only). 4-phase nestgate.io evolution: redirect (LIVE) → petalTongue data surface → depot+provenance browser → validation API. Caddy configs ready. DNS owned by sporeGate. `THREE_DOMAIN_TOPOLOGY_SPEC.md` committed. |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -675,9 +677,9 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155u/156b — **PROVENANCE × ACQUISITION DIVERGENCE + 13/13 GREEN.** 12× throughput gap discovered; trailer pattern + batch RPC proposal (G55). Neural API activation everywhere (G56). nestgate.io data identity surface (G57). Mixed provenance convergence (G58). barraCuda PRNG FIXED (YELLOW→GREEN — **13/13 GREEN first time**). esotericWebb V29. hotSpring arXiv production (13 commits). nestGate content.fetch. tideGlass full rebuild (161 tests). footPrint deep debt (563 tests). wetSpring V211c (2,210 tests). strandGate silicon deism VALIDATED (paper-ready). ZERO P0/P1/P2. ~130K+ tests. **54 glacial goals** tracked (8 COMPLETE, **26 ACTIVE**, 20 GLACIAL/CONCEPT).
+**Summary**: Wave 155v/156d — **PROVENANCE DIVERGENCE RESOLVED (122×) + THREE-DOMAIN TOPOLOGY + 13/13 GREEN.** Canonical architecture alignment: per-file spine entries removed, session-level commits, `dag.event.append_batch` live — 0.3/s → 37.6/s. Three-domain topology spec: primals.eco (outer) / nestgate.io (peptidoglycan) / primal.eco (inner). strandGate 12⁴ PAPER-READY, plaquette ×4 normalization RESOLVED. esotericWebb V30. footPrint 628 tests (Phase 2 deploy ready). petalTongue pushed (CAS refactor). squirrel local (156d sovereignty). sweetGrass 1,645 tests (trailer aligned). Nanowire→Primal Builder Phase 2a DONE. Provenance loop CLOSED. ZERO P0/P1/P2. ~135K+ tests. **55 glacial goals** tracked (8 COMPLETE, **27 ACTIVE**, 20 GLACIAL/CONCEPT).
 
-**Phase shift**: From "prove the stack" to **"solve data ingress and activate the composition layer."** The infrastructure works (13/13 GREEN, G19 proven, cell graphs validated). Now: batch RPCs for provenance at machine speed, Neural API as the universal routing layer, nestgate.io as the data front door, mixed provenance convergence. Springs can't boot on unbraided data.
+**Phase shift**: From "solve data ingress" to **"activate and connect."** Provenance divergence RESOLVED (122× improvement — canonical architecture proved). Three-domain topology spec separates public face from trust surface from mesh. Now: wire nestgate.io as live CAS surface (petalTongue-served), Neural API as universal routing, k-derm website separation. 12⁴ arXiv data is paper-ready. Springs can boot on braided data.
 
 **74 files fossilized** across 6 checkpoints. 15+ active AARs, 12+ active handoffs.
 - **ironGate: PRIMARY DOWNSTREAM HOST.** NUCLEUS 26/27 HEALTHY. G19 PROVEN. esotericWebb V29. footPrint 563 tests. Phase 1 structurally ready. RTX 5070.
@@ -688,9 +690,9 @@ completeness.
 - blueGate: **WINDOWS DEV.** ludoSpring. Sub-builder divergences 8/10 resolved.
 
 **11 gates ONLINE** (6 NUCLEUS, 1 crankshaft + agentic, 4 other). **8 glacial goals COMPLETE** (G3, G4, G8, G10, G17, G21, G22, G29).
-**26 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G31, G32, G34, G35, G36, G37, G38, G39, G43, G44, G45, G53, G54, **G55**, **G56**, **G57**, **G58**).
+**27 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G31, G32, G34, G35, G36, G37, G38, G39, G43, G44, G45, G53, G54, **G55**, **G56**, **G57**, **G58**, **G59**).
 **20 GLACIAL/CONCEPT** (future phases).
-**54 total glacial goals** tracked.
+**55 total glacial goals** tracked.
 
 **MID-TERM SCIENCE TRACKS**:
 - **Track A (NF/GPS)**: G15→G36→G37→G38→G39. Gonzales/Bin Chen. tideGlass rebuilds Cell 2026 → NF reversal screen → CTF NDU $125K.
@@ -700,7 +702,8 @@ completeness.
 **Gauge group resolved in code** (G9): SU(3) labels disambiguated in barraCuda/hotSpring. Paper/site relabel still needed (sporePrint scope). arXiv UNBLOCKED.
 
 **Open items — prioritized by data pipeline + springs readiness:**
-- **G55: Batch RPCs for provenance** — `dag.event.batch` (rhizoCrypt) + `spine.entry.batch` (loamSpine). **Single highest-impact evolution** for data throughput. Closes 12× gap. Trailer pattern is the bridge.
+- **G55: Batch RPCs for provenance** — `dag.event.append_batch` already LIVE (200/batch). Per-file spine entries REMOVED (canonical architecture). Gap narrowed to 2× (37.6/s vs 74/s). Remaining: `spine.entry.batch` for edge cases.
+- **G59: Three-domain topology** — `THREE_DOMAIN_TOPOLOGY_SPEC.md` committed. nestgate.io redirect LIVE. Next: petalTongue data surface (Phase 1), depot+provenance browser (Phase 2), validation API (Phase 3).
 - **G56: Neural API activation** — route footPrint, tideGlass, esotericWebb, all springs through `neural-api-default.sock`. Eliminate hardcoded socket paths. biomeOS signal graphs already wired for data federation.
 - **G57: nestgate.io** — DNS + Caddy routing to sporePrint `/data/`. Phase 1: redirect. Phase 2: live CAS API. Phase 3: braid queries. PI-facing data front door.
 - **G58: Mixed provenance convergence** — promote primordial → braided for all spring-critical data. `is_dataset_converged()` gate. Revalidation running.
@@ -708,8 +711,8 @@ completeness.
 - **biomeOS cell attachment CLI** — `biomeos deploy --mode attach` needs `[cell]` schema. Phase 1 gap.
 - **toadStool ExecStart fix** — BLOCKING 9/9 membrane composition.
 - **membrane socket permissions** — root:root → group-writable for `biomeos`.
-- **arXiv plaquette ×4 normalization** — BLOCKING paper submission (strandGate validation otherwise COMPLETE).
-- squirrel → biomeOS G18 integration test (V29 has signal.dispatch inbound)
+- ~~arXiv plaquette ×4 normalization~~ — **RESOLVED** (gauge group mismatch SU(2)→SU(3). 12⁴ data paper-ready. Rung 1 UNBLOCKED).
+- squirrel → biomeOS G18 integration test (V30 has cell graph validation + batch prov)
 - Inter-gate content.get live test (songBird probes + nestGate content.fetch ready)
 - petalTongue WebGPU/wgpu evolution (G53 maturation)
 - ~~barraCuda PRNG validation~~ — **FIXED** (YELLOW→GREEN, statistical validation harness)
@@ -717,7 +720,7 @@ completeness.
 
 ---
 
-*Last used*: Wave 155u/156b — provenance divergence AAR, 13/13 GREEN, G55-G58 added (batch RPCs, Neural API, nestgate.io, provenance convergence) (Aug 4, 2026 AM)
+*Last used*: Wave 155v/156d — provenance divergence RESOLVED (122×), three-domain topology spec, 12⁴ paper-ready, G59 added (k-derm websites), plaquette normalization RESOLVED, barraCuda GREEN (Aug 4, 2026 PM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155s — 14 files to `wave155r_absorbed/` (74 total across 6 checkpoints)
