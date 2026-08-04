@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — ironGate Downstream Hosting
+# ecoPrimals Ecosystem Blurb — First Cell Boot Era
 
-**Date**: Aug 4, 2026 PM | **Wave**: 155v/156d | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. biomeOS v4.57 — `nucleus attach` SHIPPED, ironGate Phase 1 UNBLOCKED. K-DERM FULLY OPERATIONAL — nestgate.io branded + content backend wired (3/4 DIVs resolved), primal.eco dnsmasq DEPLOYED (11 gates resolving). LAN-FIRST TOWER TRANSPORT DEPLOYED — songBird 1ms vs WG 77ms (sporeGate 4 local, ironGate 3 local). Harvest 52/52 COMPLETE. barraCuda MultiDevicePool (4,959 tests). songBird drawbridge 22 bonds. ~135K+ tests, 13/13 GREEN.**
+**Date**: Aug 4, 2026 PM | **Wave**: 156d | **From**: eastGate overwatch
+**Posture**: **P0/P1/P2: ZERO. DEPOT v4.57+ FULLY SYNCED — 13 primals × 4 targets = 52 builds. sporeGate NUCLEUS 14/14 active. ironGate DEPLOYED (10/10 active, cell boot ready). strandGate STAGED (v4.57+ installed). golgi depot pushed (45 new). nestgate.io BRANDED + content backend WIRED (nestGate UDS socket → Neural API → petalTongue). LAN-first Tower 1ms vs WG 77ms. K-derm 3/3 separated. ~135K+ tests, 13/13 GREEN.**
 
 ---
 
