@@ -1,6 +1,6 @@
-# Overwatch Audit Handoff — Wave 155q/156b
+# Overwatch Audit Handoff — Wave 155u/156b
 
-**Date**: Aug 3, 2026 PM | **Wave**: 155q/156b | **From**: eastGate overwatch
+**Date**: Aug 4, 2026 AM | **Wave**: 155u/156b | **From**: eastGate overwatch
 **Purpose**: Current state summary, team handoffs, gaps for upstream audit.
 
 ---
@@ -11,10 +11,13 @@
 |--------|-------|
 | **P0/P1/P2** | ZERO |
 | **NUCLEUS gates** | 11 online (eastGate, westGate, blueGate, strandGate, southGate, sporeGate, flockGate, golgiBody, biomeGate, ironGate, redGate) |
-| **Total tests** | 121,000+ across 15 primals + 9 springs |
+| **Total tests** | ~130,000+ across 15 primals + 9 springs |
+| **Primal health** | **13/13 GREEN** (barraCuda PRNG FIXED — last holdout) |
 | **Data** | 519 GB / 130+ datasets / 17+ domains on westGate ZFS |
 | **sporePrint** | 338 pages, 25 sections, live at sporeprint.primals.eco |
-| **esotericWebb** | V26, 471 tests, 8/9 primals zero-config on ironGate |
+| **esotericWebb** | V29, 471 tests, 8/9 primals zero-config on ironGate |
+| **arXiv** | UNBLOCKED (paper relabel pending, strandGate validation COMPLETE) |
+| **Provenance** | 12× throughput gap discovered (trailer pattern + batch RPC fix path) |
 
 ---
 
@@ -32,13 +35,13 @@ The Data Braids section at `/data/` is live on sporePrint. sporeGate needs to:
 The user can then discover datasets, see inline provenance braids, and
 download pseudoSpores — all via nestgate.io as the data identity surface.
 
-### hotSpring — Plaquette Normalization (BLOCKS arXiv)
+### hotSpring — arXiv UNBLOCKED, Paper Relabel Pending
 
 **Handoff doc**: `handoffs/HOTSPRING_RUNG1_EXPERIMENT_QUEUE.md`
 
-arXiv submission is BLOCKED on the ×4 plaquette normalization discrepancy.
-The 4-step diagnostic protocol is documented. Must resolve before any
-long production campaigns.
+strandGate validation ALL high-priority COMPLETE. Action-force (6 sig figs).
+Creutz equality (5 sig figs). Dual-GPU parity confirmed. β-scan matches
+published data. Paper relabel (SU(2)→SU(3) terminology) pending.
 
 ### Node Atomic — pseudoSpore v1.0.0-rung1
 
@@ -67,9 +70,11 @@ pages on sporePrint are the current read-only view. Next steps:
 | Gap | Owner | Detail |
 |-----|-------|--------|
 | **nestgate.io DNS not routed** | sporeGate | DNS + Caddy config needed |
-| **Plaquette ×4 normalization** | hotSpring | BLOCKS arXiv submission |
+| **Paper relabel (SU(2)→SU(3))** | hotSpring | arXiv UNBLOCKED — relabel pending |
 | **pseudoSpore bundles empty** | westGate/lithoSpore | Bundle `data/` dirs have provenance but no actual files |
 | **6 validate.sh copies identical** | sporePrint | Deduplicate to single template |
+| **Provenance × Acquisition 12× gap** | rhizoCrypt/sweetGrass | Batch RPCs (`dag.event.batch` + `spine.entry.batch`) needed |
+| **Mixed provenance states** | westGate | 3 states (primordial/CAS-only/braided) — convergence path defined |
 | **strandGate DNS dead** | sporeGate | ORTHOGONAL_DIMENSIONS G29 — may still be open |
 
 ### Medium Priority
@@ -105,6 +110,17 @@ pages on sporePrint are the current read-only view. Next steps:
 
 ---
 
-*Wave 155q/156b clean. ZERO P0/P1/P2. overwatch can begin handing off
+## Wave 155u/156b Updates (Aug 4)
+
+8. **13/13 GREEN** — barraCuda PRNG FIXED, last holdout resolved
+9. **130K+ tests** — up from 121K+
+10. **esotericWebb V29** — G18 signal dispatch, petalTongue live site, deep debt
+11. **arXiv UNBLOCKED** — strandGate validation COMPLETE, paper relabel pending
+12. **Provenance divergence documented** — gate-status page updated with 3-state table + fix path
+13. **squirrel perf** — 400s→16s, 34→1 binaries
+
+---
+
+*Wave 155u/156b clean. ZERO P0/P1/P2. 13/13 GREEN. overwatch can hand off
 to other teams. The CAS data on westGate is the living database —
 nestgate.io is the front door sporeGate needs to wire up.*
