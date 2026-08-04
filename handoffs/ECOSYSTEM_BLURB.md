@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — First Cell Boot Era
+# ecoPrimals Ecosystem Blurb — Cell Boot + Depot Sync Era
 
 **Date**: Aug 4, 2026 PM | **Wave**: 156d | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. DEPOT v4.57+ FULLY SYNCED — 13 primals × 4 targets = 52 builds. sporeGate NUCLEUS 14/14 active. ironGate DEPLOYED (10/10 active, cell boot ready). strandGate STAGED (v4.57+ installed). golgi depot pushed (45 new). nestgate.io BRANDED + content backend WIRED (nestGate UDS socket → Neural API → petalTongue). LAN-first Tower 1ms vs WG 77ms. K-derm 3/3 separated. ~135K+ tests, 13/13 GREEN.**
+**Posture**: **P0/P1/P2: ZERO. FIRST CELL BOOT SUCCEEDED (ironGate Session 8, 21/22 PASS). DEPOT v4.57+ SYNCED (52 builds). footPrint Phase 2 DEPLOYED + `footprint.primals.eco` LIVE (golgi Caddy → ironGate WG mesh :3002). nestgate.io FULLY OPERATIONAL (content backend wired, branded). GPS data CONVERTED (11 JSON, 103 MB CAS-ingested). sporeGate 14/14 + ironGate 10/10 active. strandGate STAGED (GPU at 100%, restart deferred). K-derm 3/3 FULLY OPERATIONAL. LAN-first Tower 1ms. ~135K+ tests, 13/13 GREEN.**
 
 ---
 
