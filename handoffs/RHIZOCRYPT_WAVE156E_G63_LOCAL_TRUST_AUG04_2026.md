@@ -1,6 +1,6 @@
 # rhizoCrypt Wave 156e — G63 BTSP Local-Trust via SO_PEERCRED
 
-**Date**: Aug 4, 2026 | **Wave**: 156e | **Head**: `ab701b0`
+**Date**: Aug 4, 2026 | **Wave**: 156f | **Head**: `c0abe75`
 
 ## Summary
 
@@ -53,6 +53,15 @@ authentication plus kernel-verified identity.
 **Upstream consumers**: Any primal calling `auth.peer_info` over UDS will now
 see `peer_uid`/`peer_gid`/`peer_pid` in the response. Method gate policy
 evolution can use these for access control decisions.
+
+## Wave 156f — Root Doc Cleanup + Dep Update (Aug 4, 2026)
+- Scrub line counts: ~59,500 → ~59,700 in CONTEXT.md + validation-summary
+- Update deployment checklist date (Aug 3 → Aug 4)
+- `cargo update`: regex-automata 0.4.17 → 0.4.18
+- Debris audit: zero backup/temp/log/empty/orphan files, zero scripts
+- TODO/marker scan: zero in .rs, zero in docs (excl CHANGELOG fossil)
+- `cargo clean`: reclaimed 13.7 GiB
+- `specs/archive/` properly labeled (2 docs, both with status headers)
 
 ## Remaining (not rhizoCrypt scope)
 
