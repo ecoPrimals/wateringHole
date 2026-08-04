@@ -1,8 +1,8 @@
 # Three-Domain Topology Spec
 
-**Date**: Aug 4, 2026 | **Wave**: 156b | **From**: sporeGate (eastGate overwatch)
+**Date**: Aug 4, 2026 | **Wave**: 155v/156d | **From**: sporeGate (eastGate overwatch)
 **Owner**: sporeGate topology team
-**Status**: **OPERATIONAL** — 3/3 layers separated. nestgate.io LIVE on mesh (petalTongue v1.7.0). primal.eco SEALED (dnsmasq deployed).
+**Status**: OPERATIONAL — ALL 3 LAYERS SEPARATED. primals.eco LIVE (Zola, Cloudflare), nestgate.io LIVE (petalTongue mesh, sovereign DNS), primal.eco SEALED (0 public A records, dnsmasq-only)
 
 ---
 
@@ -12,35 +12,44 @@ The ecoPrimals ecosystem operates across three distinct DNS domains,
 each mapped to a K-Derm envelope layer:
 
 ```
-┌────────────────────────────────────────────────────────────────┐
-│                     INTERNET (public)                          │
-│                                                                │
-│  primals.eco ─────────── OUTER MEMBRANE                        │
-│  ├── sporeprint.primals.eco   Public research site (Zola)      │
-│  ├── lab.primals.eco          Lab gateway (Caddy → Tower)      │
-│  └── *.primals.eco            Public-facing services           │
-│                                                                │
-│  nestgate.io ────────── PEPTIDOGLYCAN LAYER                    │
-│  ├── git.primals.eco          Forgejo (sovereign git)          │
-│  ├── nestgate.io/data/        CAS data braids (petalTongue)    │
-│  ├── nestgate.io/depot/       Binary depot browser             │
-│  ├── nestgate.io/provenance/  Provenance chain viewer          │
-│  └── nestgate.io/validate/    Replication validation endpoint  │
-│                                                                │
-│  primal.eco ─────────── INNER MEMBRANE                         │
-│  ├── WireGuard mesh only      Gate-to-gate (10.13.37.0/24)     │
-│  ├── UDS/JSON-RPC             Primal-to-primal IPC             │
-│  └── songBird mesh            Federation + drawbridge           │
-└────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────────┐
+│                          INTERNET (public)                               │
+│                                                                          │
+│  primals.eco ──────────── OUTER MEMBRANE (Cloudflare DNS)                │
+│  ├── sporeprint.primals.eco   Public research site (Zola, 302 pages)     │
+│  ├── footprint.primals.eco    GIS composition (→ sporeGate :8090)        │
+│  ├── webb.primals.eco         CRPG game garden (→ ironGate :8090)        │
+│  ├── live.primals.eco         petalTongue TOPO-VIS (→ sporeGate :9900)   │
+│  ├── lab.primals.eco          JupyterHub gateway (→ sporeGate :7780)     │
+│  ├── membrane.primals.eco     Depot, hooks, status                       │
+│  ├── depot.primals.eco        Binary depot browser                       │
+│  ├── ca.primals.eco           SSH CA (step-ca)                           │
+│  ├── relay.primals.eco        RustDesk MitoBeacon                        │
+│  ├── git.primals.eco          Forgejo (localhost:3000)                    │
+│  └── *.primals.eco            Wildcard → golgi (157.230.3.183)           │
+│                                                                          │
+│  nestgate.io ──────────── PEPTIDOGLYCAN (Sovereign Knot DNS + DNSSEC)    │
+│  ├── nestgate.io              petalTongue mesh (→ sporeGate :8190)       │
+│  ├── www.nestgate.io          → redirect to nestgate.io                  │
+│  ├── (future) /cas/           Federated CAS browser                      │
+│  ├── (future) /depot/         Binary depot (migration from membrane)     │
+│  ├── (future) /provenance/    Provenance chain viewer                    │
+│  └── (future) /validate/      Replication validation endpoint            │
+│                                                                          │
+│  primal.eco ───────────── INNER MEMBRANE (Sovereign Knot DNS, NO A recs) │
+│  ├── *.primal.eco             dnsmasq only (10.13.37.0/24 WG mesh)       │
+│  ├── UDS/JSON-RPC             Primal-to-primal IPC                       │
+│  └── songBird mesh            Federation + drawbridge                    │
+└──────────────────────────────────────────────────────────────────────────┘
 ```
 
 ### Domain Responsibilities
 
-| Domain | Envelope | Serves | Served By | DNS |
-|--------|----------|--------|-----------|-----|
-| **primals.eco** | Outer membrane | Public site, publications, lab access | sporePrint (Zola) + Caddy | Cloudflare |
-| **nestgate.io** | Peptidoglycan | CAS braids, depot, provenance, validation, git | petalTongue + Forgejo + Caddy | Porkbun/CF |
-| **primal.eco** | Inner membrane | Mesh-only gate comms, NUCLEUS IPC | WireGuard + UDS + songBird | Internal only |
+| Domain | Envelope | Serves | Served By | DNS | Public A Records |
+|--------|----------|--------|-----------|-----|-----------------|
+| **primals.eco** | Outer membrane | Public site, publications, lab access | sporePrint (Zola) + Caddy | Cloudflare | golgi `157.230.3.183` + wildcard |
+| **nestgate.io** | Peptidoglycan | CAS braids, depot, provenance, validation, git | petalTongue + Forgejo + Caddy | **Sovereign Knot DNS** | golgi `157.230.3.183` |
+| **primal.eco** | Inner membrane | Mesh-only gate comms, NUCLEUS IPC | WireGuard + UDS + songBird | **Sovereign Knot DNS** | **NONE** (all removed) |
 
 ### Why Three Domains
 
@@ -60,36 +69,29 @@ each mapped to a K-Derm envelope layer:
 
 ## nestgate.io Evolution Plan
 
-### Current State: Phase 1 COMPLETE
+### Current State (LIVE — Aug 4, 2026)
 
-nestgate.io is served by petalTongue v1.7.0 on sporeGate via WG mesh:
+nestgate.io is served by petalTongue v1.7.0 on sporeGate NUCLEUS via WG mesh:
 ```
-nestgate.io → golgi Caddy (TLS) → WG mesh (10.13.37.1→10.13.37.2) → petalTongue :8190 on sporeGate
+nestgate.io → golgi Caddy (TLS termination)
+           → WG mesh 10.13.37.1 → 10.13.37.2:8190
+           → petalTongue (web + IPC mode) on sporeGate
 ```
 
-DNS: A record → 157.230.3.183 (golgi), TLS: Let's Encrypt via Caddy, DNSSEC: DS 2371/13/2 verified.
+DNS: A record → 157.230.3.183 (golgi), TLS: Let's Encrypt via Caddy, DNSSEC: ON
+Service: `petaltongue-web.service` (systemd user, lingering enabled)
 
-#### Deployed Components
-- **petalTongue v1.7.0** — `petaltongue-web.service` (systemd user, enabled, lingering)
-- **Caddy reverse proxy** — golgi `nestgate.io { reverse_proxy 10.13.37.2:8190 }`
-- **Dashboard** — Physical topology, K-Derm layers, hardening controls, depot status, 13 primals
+**Live now**: Physical topology, K-Derm layers, hardening controls, depot status,
+ecosystem coordination — all rendered from manifest data.
 
-#### Phase 1 Remaining DIVs
-- **DIV-1**: Content backend not wired (`content-provider-e8b62b6e.sock` missing)
-- **DIV-2**: Discovery service not found (no live primal discovery)
-- **DIV-3**: Port 8090 occupied (using 8190 instead)
-- **DIV-4**: Title says "petalTongue Dashboard" — needs branding as "nestgate.io"
+**DIVs**: Content backend not wired (content-provider socket missing), discovery
+service not found, port 8090 conflict (using 8190), title says "petalTongue
+Dashboard" not "nestgate.io".
 
-### Phase 1b: petalTongue Data Surface (NEXT)
+### Phase 1 COMPLETE: petalTongue Mesh Surface
 
-Wire petalTongue to serve CAS data braids natively:
-- `/data/` — CAS-backed data domain browser (W3C PROV-O braids inline)
-- `/data/{domain}/` — per-domain page with dataset provenance
-- `/data/transplant/` — pseudoSpore/lithoSpore replication guide
-
-**Advantage**: Data pages are served by a primal, not a static site. petalTongue
-can query nestGate CAS in real-time, showing live provenance chains, BLAKE3
-verification results, and dataset freshness.
+petalTongue serves nestgate.io natively from sporeGate. No more redirect.
+Data pages will be served by a primal, not a static site.
 
 ### Phase 2: Depot + Provenance Browser
 
@@ -147,26 +149,32 @@ Move `git.primals.eco` under nestgate.io:
 
 ---
 
-## Caddy Configuration (golgi)
+## Caddy Configuration (golgi — LIVE)
 
-### Current (LIVE — mesh reverse proxy)
-```
-nestgate.io {
-    import security_headers
-    import access_log
-    reverse_proxy 10.13.37.2:8190 {
-        header_up Host {upstream_hostport}
-        header_up X-Real-IP {remote_host}
-        header_up X-Forwarded-For {remote_host}
-        header_up X-Forwarded-Proto {scheme}
-    }
-}
-```
+Source of truth: `/etc/membrane/Caddyfile` on golgi.
+Version-controlled copy: `infra/plasmidBin/membrane/Caddyfile` (synced Aug 4, 2026).
 
-### Architecture
-golgi terminates TLS (Let's Encrypt) and proxies to sporeGate's petalTongue
-instance on the WireGuard mesh. golgi remains a thin relay / firebreak.
-sporeGate NUCLEUS does all compute.
+golgi does TLS termination (Let's Encrypt auto-cert, CAA-locked).
+Security headers, CSP, access logging, gzip on all blocks.
+
+### Routing Table (LIVE)
+
+| Subdomain | Backend | Port | Gate | Notes |
+|-----------|---------|------|------|-------|
+| `primals.eco` | redirect → `sporeprint.primals.eco` | — | golgi | + `/enroll` → 127.0.0.1:7780 |
+| `www.primals.eco` | redirect → `sporeprint.primals.eco` | — | golgi | |
+| `sporeprint.primals.eco` | Zola static | filesystem | golgi | 302 pages, pseudoSpore gallery |
+| `footprint.primals.eco` | reverse_proxy | :8090 | sporeGate `10.13.37.2` | GIS composition |
+| `webb.primals.eco` | reverse_proxy | :8090 | ironGate `10.13.37.7` | CRPG game garden |
+| `live.primals.eco` | reverse_proxy | :9900 | sporeGate `10.13.37.2` | petalTongue TOPO-VIS |
+| `lab.primals.eco` | reverse_proxy | :7780 | sporeGate `10.13.37.2` | JupyterHub (basicauth) |
+| `membrane.primals.eco` | mixed | — | golgi | depot, hooks, status |
+| `depot.primals.eco` | filesystem | — | golgi | binary depot browser |
+| `ca.primals.eco` | reverse_proxy | :9443 | golgi (localhost) | step-ca SSH CA |
+| `relay.primals.eco` | static | — | golgi | RustDesk page (basicauth) |
+| `git.primals.eco` | reverse_proxy | :3000 | golgi (localhost) | Forgejo + webhook handler |
+| **`nestgate.io`** | reverse_proxy | :8190 | **sporeGate `10.13.37.2`** | **petalTongue mesh** |
+| `www.nestgate.io` | redirect → `nestgate.io` | — | golgi | |
 
 ---
 
@@ -241,39 +249,107 @@ consuming CAS data. **Owned by upstream overwatch, not sporeGate topology.**
 
 ---
 
-## primal.eco Inner Membrane DNS
+## DNS Ownership
 
-**Status**: DEPLOYED — `/etc/dnsmasq.d/primal-eco.conf` on sporeGate (Aug 4, 2026)
+| Domain | Registrar | DNS Provider | Nameservers | Managed By |
+|--------|-----------|--------------|-------------|------------|
+| primals.eco | Porkbun | **Cloudflare** | albertus/serena.cloudflare.com | User via CF dashboard |
+| nestgate.io | Porkbun | **Sovereign Knot DNS** | ns1/ns2.primals.eco (golgi/golgi-ext) | sporeGate via `knotc` |
+| primal.eco | Porkbun | **Sovereign Knot DNS** | ns1/ns2.primals.eco (golgi/golgi-ext) | sporeGate via `knotc` |
 
-6 public A records **removed** from Knot DNS. primal.eco is invisible externally.
-Resolution is LAN-only via sporeGate dnsmasq:
+Sovereign DNS: Knot DNS with automatic DNSSEC (ECDSA P-256). Master on golgi
+(`157.230.3.183`), slave on golgi-ext (`137.184.197.151`). Zone transfers via AXFR/IXFR.
 
-| Name | WG IP | Status |
-|------|-------|--------|
-| golgi.primal.eco | 10.13.37.1 | hub |
-| sporegate.primal.eco | 10.13.37.2 | active |
-| biomegate.primal.eco | 10.13.37.3 | enrolled |
-| eastgate.primal.eco | 10.13.37.5 | active |
-| flockgate.primal.eco | 10.13.37.6 | enrolled |
-| irongate.primal.eco | 10.13.37.7 | active |
-| northgate.primal.eco | 10.13.37.8 | active |
-| southgate.primal.eco | 10.13.37.9 | enrolled |
-| strandgate.primal.eco | 10.13.37.10 | active |
-| graphenegate.primal.eco | 10.13.37.11 | enrolled |
-| bluegate.primal.eco | 10.13.37.12 | active |
-| primal.eco (bare) | 10.13.37.2 | sporeGate |
-
-`local=/primal.eco/` prevents forwarding to upstream resolvers.
+Cloudflare only used for primals.eco (outer membrane). Inner two layers are fully
+sovereign — no external DNS dependency.
 
 ---
 
-## DNS Ownership
+## K-Derm Separation — Operational Plan
 
-| Domain | Registrar | DNS Provider | Separation | Managed By |
-|--------|-----------|--------------|------------|------------|
-| primals.eco | Porkbun | Cloudflare | Outer membrane | sporeGate |
-| nestgate.io | Porkbun | Knot DNS (sovereign) + Cloudflare | Peptidoglycan | sporeGate |
-| primal.eco | Porkbun | dnsmasq (LAN only) | Inner membrane | sporeGate |
+### Current DNS Records (Cloudflare)
 
-All DNS changes flow through sporeGate topology team.
-DNSSEC verified end-to-end: DS 2371/13/2 (Porkbun → .eco TLD → resolvers).
+**primals.eco** (LIVE — outer membrane):
+```
+A       primals.eco           → 157.230.3.183 (golgi)        ✓ LIVE
+CNAME   sporeprint            → primals.eco                   ✓ LIVE
+CNAME   lab                   → primals.eco                   ✓ LIVE
+CNAME   relay                 → primals.eco                   ✓ LIVE
+CNAME   ca                    → primals.eco                   ✓ LIVE
+CNAME   depot                 → primals.eco                   ✓ LIVE
+A       git.primals.eco       → 157.230.3.183 (golgi)        ✓ LIVE (Forgejo)
+```
+
+**nestgate.io** (LIVE — peptidoglycan):
+```
+A       nestgate.io           → 157.230.3.183 (golgi)        ✓ LIVE (→ petalTongue via mesh)
+```
+
+**primal.eco** (NOT YET SEPARATED — inner membrane):
+```
+(no public DNS records — internal resolution only)
+```
+
+### What sporeGate Owns (no user action needed)
+
+| Task | What | Status |
+|------|------|--------|
+| **golgi Caddy routing** | All Caddyfile changes for primals.eco + nestgate.io | sporeGate SSHs into golgi |
+| **sporeGate petalTongue** | `petaltongue-web.service` serving nestgate.io on :8190 | LIVE |
+| **dnsmasq LAN resolution** | Internal `*.primal.eco` resolution for mesh gates | sporeGate dnsmasq config |
+| **Forgejo config** | git.primals.eco backend on golgi | sporeGate manages |
+| **Let's Encrypt certs** | Auto-renewed by Caddy for all public domains | Automatic |
+| **nestgate.io content evolution** | Wire biomeOS content provider, branding, CAS federation | sporeGate + petalTongue team |
+
+### What Needs User Action (Porkbun / Cloudflare)
+
+| Task | Where | What | Priority |
+|------|-------|------|----------|
+| **KD-01: Verify nestgate.io DNSSEC** | Cloudflare | Confirm DNSSEC is ON for nestgate.io zone (should be, but verify) | P2 |
+| **KD-02: Add nestgate.io subdomains** | Cloudflare | When ready: `git.nestgate.io` CNAME → nestgate.io (Phase 5 — git migration) | FUTURE |
+| **KD-03: primal.eco — remove any public A records** | Porkbun/Cloudflare | If primal.eco has any public A/CNAME records, remove them. Inner membrane must NOT be publicly resolvable. | **P1** |
+| **KD-04: primal.eco — verify nameservers** | Porkbun | If primal.eco is on Cloudflare, consider removing it from CF entirely (no public DNS needed). OR keep it on CF with zero records (domain parked). | **P1** |
+| **KD-05: footprint.primals.eco** | Cloudflare | Add CNAME `footprint` → `primals.eco` (for ironGate routing via golgi) | **P1** |
+| **KD-06: Verify primals.eco DNSSEC** | Cloudflare | Confirm DNSSEC chain is intact (Porkbun DS records → Cloudflare) | P2 |
+
+### primal.eco Internal Resolution (sporeGate dnsmasq)
+
+sporeGate's dnsmasq provides internal resolution for the inner membrane:
+
+```
+# /etc/dnsmasq.d/primal-eco.conf (sporeGate)
+
+# Inner membrane — gate names resolve to WireGuard IPs
+address=/golgi.primal.eco/10.13.37.1
+address=/sporegate.primal.eco/10.13.37.2
+address=/biomegate.primal.eco/10.13.37.3
+address=/eastgate.primal.eco/10.13.37.5
+address=/flockgate.primal.eco/10.13.37.6
+address=/irongate.primal.eco/10.13.37.7
+address=/northgate.primal.eco/10.13.37.8
+address=/strandgate.primal.eco/10.13.37.10
+address=/westgate.primal.eco/10.13.37.11
+address=/bluegate.primal.eco/10.13.37.12
+```
+
+Gates that use sporeGate as DNS (via DHCP or manual) get `*.primal.eco`
+resolution for free. Gates off the LAN resolve via WireGuard mesh +
+songBird discovery (no DNS needed — UDS sockets).
+
+### Separation Checklist
+
+- [x] **primals.eco (outer)** — LIVE. Zola + Caddy on golgi. DNS on Cloudflare.
+- [x] **nestgate.io (peti)** — LIVE. petalTongue on sporeGate via mesh. Sovereign Knot DNS.
+- [x] **primal.eco (inner)** — SEALED. All 6 public A records REMOVED from Knot DNS zone.
+- [x] **www.nestgate.io** — Fixed to golgi (157.230.3.183). Caddy redirect added.
+- [x] **Caddyfile** — nestgate.io + www.nestgate.io + sporeprint.primals.eco blocks added.
+- [x] **primal.eco dnsmasq config** — Created. Ready to deploy to sporeGate.
+- [x] **golgi SSH host key** — Fixed. Master DNS accessible.
+- [ ] **KD-04**: Decide primal.eco nameserver posture (keep sovereign or park) — P3
+- [x] ~~**KD-05**~~: `footprint.primals.eco` — NOT NEEDED, wildcard `*.primals.eco` covers all subdomains. sporeGate owns routing via Caddy.
+- [x] **KD-06**: primals.eco DNSSEC chain VERIFIED — DS 2371/13/2 matches at .eco TLD and Porkbun
+- [ ] **Deploy Caddyfile** to golgi — sporeGate team
+- [ ] **Deploy dnsmasq config** to sporeGate — sporeGate team
+- [ ] **Wire biomeOS content provider** for nestgate.io (DIV-1)
+- [ ] **Brand nestgate.io** — title, header, favicon (DIV-4)
+- [ ] **git.nestgate.io** migration (Phase 5, FUTURE)

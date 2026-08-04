@@ -127,6 +127,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 Three-layer model identified by peptidoglycan failure incident (Wave 155d).
 **Wave 155v**: formalized as **THREE-DOMAIN TOPOLOGY SPEC** (`specs/THREE_DOMAIN_TOPOLOGY_SPEC.md`) mapping each k-derm layer to a DNS domain: primals.eco (outer), nestgate.io (peptidoglycan), primal.eco (inner).
+**Wave 155v/156d**: **K-DERM SEPARATION COMPLETE** — primal.eco 6 A records REMOVED from sovereign Knot DNS (inner membrane SEALED). nestgate.io LIVE on mesh (petalTongue v1.7.0). DNSSEC verified. Caddyfile synced from golgi (14 subdomain routes). dnsmasq config ready for inner membrane resolution. `KDERM_DNS_ACTIONS.md` documents remaining ops items.
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -229,7 +230,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d).
 - [x] Push mirrors relay to GitHub on commit
 - [x] Sovereign outer membrane operational (Caddy TLS)
 - [x] S1-S4 sovereignty shadows ALL GRADUATED
-- [x] **DNSSEC 3/3 domains complete**
+- [x] **DNSSEC 3/3 domains complete** — primals.eco DS 2371/13/2 chain VERIFIED (Porkbun → .eco TLD → Cloudflare KSK). nestgate.io + primal.eco signed by sovereign Knot DNS (ECDSA P-256, auto re-sign).
 - [x] RustDesk AGPL-3.0 compliant — learn-from-leverage posture
 - [x] **Sovereign CI LIVE** — push-to-deploy, depot auto-built, BLAKE3 verified
 - [x] Crash-loop self-recovery LIVE — app breaker + systemd layers
@@ -249,7 +250,7 @@ Three-layer model identified by peptidoglycan failure incident (Wave 155d).
 - [ ] Phase 2: Tower cutover — shadow active, chimera design drafted
 - [ ] Phase 1: Zola → sporePrint primal pipeline (crates.io a sub-goal)
 - [ ] Phase 2: Forgejo → rootPulse — via Nest Atomic
-- [ ] `primal.eco` inner membrane separation (P2)
+- [x] `primal.eco` inner membrane separation — **COMPLETE.** 6 A records removed from Knot DNS. Zero public records. dnsmasq config ready for LAN resolution. Inner membrane SEALED.
 
 ## ~~6. Public Surface / Security~~ → **FOSSILIZED as F12** (Wave 155i)
 
@@ -554,9 +555,9 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G54 | Dual-science mid-term convergence | **ACTIVE** | **Track A (NF/GPS — Gonzales/Bin)**: tideGlass rebuilds Cell 2026 paper → NF drug repurposing → CTF NDU grant. **Track B (QCD — Murillo/Chuna)**: hotSpring arXiv Rung 1 → 6-rung lattice QCD program. Both tracks consume barraCuda (GPU math), petalTongue (viz), provenance trio (chains), nestGate (data). Infrastructure evolves toward both simultaneously. |
 | G55 | Provenance batch RPCs (braids at machine speed) | **LARGELY RESOLVED** | `dag.event.append_batch` LIVE (200/batch, rhizoCrypt). Per-file spine entries REMOVED (canonical architecture alignment — 122× improvement). Trailer at 37.6/s sustained. Gap narrowed to 2× (vs 247× before). bearDog signature wired into sweetGrass braid — provenance loop CLOSED. Remaining: `spine.entry.batch` for future edge cases. |
 | G56 | Neural API activation (capability routing everywhere) | **ACTIVE** | All consumers route through biomeOS Neural API (`neural-api-default.sock`) instead of direct primal sockets. footPrint, tideGlass, esotericWebb, all springs. Eliminates hardcoded socket paths. biomeOS routes `content.get`/`content.put`/`visualization.render` etc. via capability discovery. When primals evolve (e.g., nestGate adds `content.query`), consumers get it without rewiring. |
-| G57 | nestgate.io data identity surface | **ACTIVE** | nestgate.io serves CAS data catalog (519 GB, 130+ datasets). DNS + Caddy routing to sporePrint `/data/` pages (Phase 1). Live CAS API queries (Phase 2). sweetGrass braid queries (Phase 3). sporePrint regenerates from live CAS/braid state (Phase 4). The PI-facing front door for "what data do you have and how do I get it." |
+| G57 | nestgate.io data identity surface | **PHASE 1 LIVE** | **nestgate.io LIVE on mesh** — petalTongue v1.7.0 on sporeGate, sovereign Knot DNS, DNSSEC. Serves dashboard (topology, k-derm, depot). 4 DIVs remaining: content backend socket, discovery service, port 8090→8190, branding. Phase 2: depot+provenance browser. Phase 3: federated CAS. Phase 4: validation API. |
 | G58 | Mixed provenance convergence | **ACTIVE** | Promote all westGate data from primordial/CAS-only to fully braided. `is_dataset_converged()` gate for springs. Revalidation running for priority + AlphaFold. All spring-critical data fully braided before Phase 4 boot. |
-| G59 | Three-domain topology (k-derm website separation) | **ACTIVE** | primals.eco (outer membrane, Zola/sporePrint), nestgate.io (peptidoglycan, petalTongue-served CAS braids/depot/provenance/validation), primal.eco (inner membrane, WG mesh only). 5-phase nestgate.io evolution: redirect (LIVE) → petalTongue data surface → federated CAS + compute memoization → validation API → git migration. Caddy configs ready. DNS owned by sporeGate. `THREE_DOMAIN_TOPOLOGY_SPEC.md` committed. |
+| G59 | Three-domain topology (k-derm website separation) | **DNS COMPLETE** | **ALL 3 LAYERS SEPARATED.** primals.eco LIVE (Cloudflare, 14 Caddy routes). nestgate.io LIVE (sovereign Knot DNS, petalTongue mesh). primal.eco SEALED (6 A records removed, dnsmasq-only). DNSSEC verified. Caddyfile version-controlled. Remaining: deploy dnsmasq config, wire nestgate.io content backend (4 DIVs), brand nestgate.io. |
 | G60 | Federated CAS (nestgate.io cross-gate data surface) | **ACTIVE** | nestgate.io as federated CAS front door — hash requests resolve across mesh (westGate data, strandGate compute configs, ironGate consumer data). `content.locate` → songBird mesh broadcast → first-responder-serves. L1 cache on golgi for hot objects. Enables cross-gate data retrieval without knowing which gate holds data. Replication endpoint for reviewers. |
 | G61 | Compute memoization via provenance trio | **ACTIVE** | strandGate thermalized lattice configs as CAS objects with provenance braids. 37 min CPU thermalization → instant on cache hit. Same BLAKE3→CAS→DAG→braid pattern as data acquisition. Cross-gate: biomeGate pulls configs for parity checks. Parallel pipeline: GPU produces while CPU thermalizes next β. NFT-style braids for both config and production results. |
 | G62 | Nanowire → Primal Builder (mesh-routed builds) | **ACTIVE** | Phase 2a DONE: manifest-driven sub-builders (no recompile to add gates). Phase 2b SPEC: songBird mesh-routed `harvest.request`/`harvest.complete`. Foreman pattern: symmetric — any gate can request, any gate can build. Capability advertisement on startup. Parallel dispatch. biomeGate as second sub-builder (NW-05 pending). |
@@ -681,9 +682,9 @@ completeness.
 
 **Active**: 10 dimensions (1–5, 7–8, 10–12)
 **Fossilized**: 13 dimensions (F1–F13)
-**Summary**: Wave 155v/156d — **PROVENANCE RESOLVED (122×) + THREE-DOMAIN TOPOLOGY + FEDERATED CAS + 13/13 GREEN.** Canonical architecture alignment (37.6/s sustained). Three-domain topology + federated CAS front door spec'd. strandGate 12⁴ paper-ready. esotericWebb V30. footPrint 628 tests. squirrel pushed (156d sovereignty). G60-G63 added (federated CAS, compute memoization, primal builder, BTSP local-trust). 20 docs fossilized (94 total). ZERO P0/P1/P2. ~135K+ tests. **59 glacial goals** tracked (8 COMPLETE, **31 ACTIVE**, 20 GLACIAL/CONCEPT).
+**Summary**: Wave 155v/156d — **K-DERM SEPARATION COMPLETE + 13/13 GREEN.** All 3 DNS layers separated: primals.eco (Cloudflare, 14 Caddy routes), nestgate.io (sovereign Knot DNS, petalTongue mesh LIVE), primal.eco (SEALED — 6 A records removed, dnsmasq-only). DNSSEC verified (DS 2371/13/2). Caddyfile version-controlled from golgi. Provenance RESOLVED (122×). strandGate 12⁴ paper-ready. esotericWebb V30d. footPrint 628 tests. squirrel pushed (156d). G60-G63 added. 20 docs fossilized (94 total). ZERO P0/P1/P2. ~135K+ tests. **59 glacial goals** tracked (8 COMPLETE, **31 ACTIVE**, 20 GLACIAL/CONCEPT).
 
-**Phase shift**: From "solve data ingress" to **"activate and connect."** Provenance divergence RESOLVED (122× improvement — canonical architecture proved). Three-domain topology spec separates public face from trust surface from mesh. Now: wire nestgate.io as live CAS surface (petalTongue-served), Neural API as universal routing, k-derm website separation. 12⁴ arXiv data is paper-ready. Springs can boot on braided data.
+**Phase shift**: From "separate and spec" to **"wire and activate."** K-derm DNS separation DONE — all 3 layers have distinct DNS postures (Cloudflare / sovereign / sealed). Now: wire nestgate.io content backend (4 DIVs), deploy dnsmasq for inner membrane, Neural API everywhere, inter-gate content.get E2E, first spring boots. 12⁴ arXiv data is paper-ready. Springs can boot on braided data.
 
 **94 files fossilized** across 7 checkpoints (`wave155v_absorbed/` = 20 files: 15 handoffs + 5 AARs). 20 active AARs, 16 active handoffs.
 - **ironGate: PRIMARY DOWNSTREAM HOST.** NUCLEUS 26/27 HEALTHY. G19 PROVEN. esotericWebb V29. footPrint 563 tests. Phase 1 structurally ready. RTX 5070.
@@ -707,9 +708,9 @@ completeness.
 
 **Open items — prioritized by data pipeline + springs readiness:**
 - **G55: Batch RPCs for provenance** — `dag.event.append_batch` already LIVE (200/batch). Per-file spine entries REMOVED (canonical architecture). Gap narrowed to 2× (37.6/s vs 74/s). Remaining: `spine.entry.batch` for edge cases.
-- **G59: Three-domain topology** — `THREE_DOMAIN_TOPOLOGY_SPEC.md` committed. nestgate.io redirect LIVE. Next: petalTongue data surface (Phase 1), depot+provenance browser (Phase 2), validation API (Phase 3).
+- ~~**G59: Three-domain topology**~~ — **DNS SEPARATION COMPLETE.** All 3 layers separated. primal.eco SEALED (6 A records removed). nestgate.io LIVE on mesh. DNSSEC verified. Remaining: deploy dnsmasq, wire content backend, brand nestgate.io.
 - **G56: Neural API activation** — route footPrint, tideGlass, esotericWebb, all springs through `neural-api-default.sock`. Eliminate hardcoded socket paths. biomeOS signal graphs already wired for data federation.
-- **G57: nestgate.io** — DNS + Caddy routing to sporePrint `/data/`. Phase 1: redirect. Phase 2: live CAS API. Phase 3: braid queries. PI-facing data front door.
+- **G57: nestgate.io** — **PHASE 1 LIVE** (petalTongue mesh). 4 DIVs: content backend, discovery service, port conflict, branding. Phase 2: depot+provenance browser. Phase 3: federated CAS API.
 - **G58: Mixed provenance convergence** — promote primordial → braided for all spring-critical data. `is_dataset_converged()` gate. Revalidation running.
 - **nestGate canonical client crate** — 6 tideGlass CAS divergences (DIV-1→6). groundSpring + airSpring have stale CAS clients. One crate for all.
 - **biomeOS cell attachment CLI** — `biomeos deploy --mode attach` needs `[cell]` schema. Phase 1 gap.
@@ -724,7 +725,7 @@ completeness.
 
 ---
 
-*Last used*: Wave 155v/156d — full orthogonal review. G60-G63 added (federated CAS, compute memoization, primal builder, BTSP local-trust). 20 docs fossilized (94 total). squirrel pushed (156d). G9/G31/G55 status updated. (Aug 4, 2026 PM)
+*Last used*: Wave 155v/156d — full orthogonal review + k-derm cascade. K-DERM DNS SEPARATION COMPLETE (primal.eco 6 A records removed, nestgate.io LIVE on mesh, DNSSEC verified, Caddyfile synced). G59 DNS COMPLETE. G57 PHASE 1 LIVE. primal.eco sovereignty item closed. (Aug 4, 2026 AM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 155v — 20 files to `wave155v_absorbed/` (94 total across 7 checkpoints)

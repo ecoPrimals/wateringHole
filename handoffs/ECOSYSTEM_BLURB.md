@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — ironGate Downstream Hosting
 
 **Date**: Aug 4, 2026 PM | **Wave**: 155v/156d | **From**: eastGate overwatch
-**Posture**: **P0/P1/P2: ZERO. K-DERM DNS SEPARATION COMPLETE — 3/3 layers separated. primals.eco LIVE (Cloudflare, 14 Caddy routes). nestgate.io LIVE (sovereign Knot DNS, petalTongue v1.7.0 mesh-hosted from sporeGate). primal.eco SEALED (6 A records removed, dnsmasq deployed — inner membrane invisible to public internet). DNSSEC verified (DS 2371/13/2). Full harvest COMPLETE (52/52 builds, 0 failures). Depot fully fresh across musl/windows/aarch64. blueGate sub-builder LIVE. ~135K+ tests, 13/13 GREEN.**
+**Posture**: **P0/P1/P2: ZERO. K-DERM DNS SEPARATION COMPLETE — 3/3 layers separated. primals.eco LIVE (Cloudflare, 14 Caddy routes). nestgate.io LIVE (sovereign Knot DNS, petalTongue mesh). primal.eco SEALED (6 A records removed from Knot DNS, inner membrane invisible). DNSSEC verified (DS 2371/13/2). Caddyfile synced from golgi (version-controlled). dnsmasq config ready. ~135K+ tests, 13/13 GREEN.**
 
 ---
 
@@ -122,7 +122,7 @@ This tests and matures:
 | **PROVENANCE DIVERGENCE RESOLVED** | westGate | **122× throughput improvement** (0.3/s → 37.6/s). Root cause: per-file spine entries were interim, not canonical. Spec alignment: per-file CAS+DAG only, session-level spine commit. `dag.event.append_batch` (200/batch) live. bearDog signature wired into sweetGrass braid — **provenance loop CLOSED.** Gap narrowed from 247× to **2×** (74/s download vs 37.6/s braid). Trailer running. |
 | **THREE-DOMAIN TOPOLOGY SPEC** | sporeGate | **K-derm website separation**: primals.eco (outer membrane, Zola/sporePrint), nestgate.io (peptidoglycan, petalTongue-served CAS braids/depot/provenance), primal.eco (inner membrane, WG mesh only). 4-phase nestgate.io evolution. Caddy configs ready. DNS owned by sporeGate. |
 | **strandGate 12⁴ PAPER-READY** | strandGate | 12⁴ volume scan COMPLETE. β=6.0/6.2 sub-0.1% agreement with published values. **Plaquette ×4 normalization RESOLVED** (gauge group mismatch SU(2)→SU(3)). 16⁴ running. **Rung 1 UNBLOCKED.** |
-| **Compute config cache IMPLEMENTED** | strandGate | Thermalized lattice configs as BLAKE3-addressed CAS objects. `Lattice::save()`/`Lattice::load()` in wilson.rs. `arxiv_thermalize_grid` binary: rayon across 64 EPYC threads. Cache-aware `arxiv_volume_scan` loads configs instantly on hit. **10 configs thermalizing in parallel** (9× 16⁴ × 3 seeds + 1× 24⁴). |
+| **Compute config cache concept** | strandGate | Thermalized lattice configs as CAS objects (same provenance trio pattern as data). 37-min CPU thermalization → instant on cache hit. Parallel pipeline: GPU produces while CPU thermalizes next β. |
 | **esotericWebb V30** | esotericWebb | V30: cell graph validation + batch provenance readiness. V30b: typed LocationDef, canonical name constants, `#[allow]→#[expect]`. |
 | **footPrint 628 tests, Phase 2 DEPLOY READY** | footPrint | 3 upstream commits. Manifest-driven source registration. Dynamic category boosts. Constants centralization. riboCipher UDS transport wired. ironGate port 3002 validated against live NUCLEUS. BTSP local-trust remaining blocker. |
 | **sweetGrass trailer alignment** | sweetGrass | 1,645 tests. Concurrent `batch_commit` dispatch. `MAX_BATCH_SIZE` guard (5K). btsp/server refactored (804→540L). DH-0 clean. |
@@ -135,13 +135,14 @@ This tests and matures:
 | **squirrel PUSHED (156d)** | squirrel | Sovereignty cleanup, emoji removal, test isolation fix. 27 deprecated aliases removed. Doc normalization + debris purge. **8de6bcbe on origin/main.** |
 | **tideGlass 176 tests** | tideGlass | Deep debt: centralize identity, consolidate casts, wire provenance write. G56 Neural API routing. Repo URLs corrected. |
 | **coralReef 156b docs** | coralReef | Root docs aligned to 3,512 tests. Wave 156b deep debt. |
-| **hotSpring arXiv production** | hotSpring | `arxiv_volume_scan` (cache-aware) + `arxiv_thermalize_grid` (parallel rayon). `arxiv_preprint_validation` (action-force, ΔH, Creutz). Provenance trio wired (NFT pattern). `arxiv_beta_scan` (SU(3) phase structure). Pushed `a7a8087`. |
+| **hotSpring arXiv production** | hotSpring | `arxiv_volume_scan` (12⁴/16⁴/24⁴). `arxiv_preprint_validation` (action-force, ΔH, Creutz). Provenance trio wired (NFT pattern). `arxiv_beta_scan` (SU(3) phase structure). |
 
 | **nestgate.io LIVE ON MESH** | sporeGate | **petalTongue v1.7.0 serving nestgate.io** from sporeGate NUCLEUS via WG mesh (golgi TLS → 10.13.37.2:8190). Three-domain topology OPERATIONAL. Dashboard renders physical topology, k-derm layers, depot status. 4 DIVs: content backend, discovery service, port 8090 conflict, branding. |
 | **ironGate Session 6** | ironGate | 17 repos pulled. esotericWebb **V30d validated (482 tests, exp006 22/22 PASS)**. footPrint 628 tests validated. Graphs Directory READY. NUCLEUS 26/27 HEALTHY. |
 | **esotericWebb V30c/V30d** | esotericWebb | V30c: signed provenance + batch chunking alignment. V30d: dead code elimination, hardcoded string removal. |
-| **strandGate parallel thermalization LIVE** | strandGate | Producer-consumer decomposition IMPLEMENTED. `arxiv_thermalize_grid` binary: 10 configs thermalizing across 64 rayon threads (999% CPU, 1.5 GB RSS). Cache-aware `arxiv_volume_scan` loads on hit. 279 min serial → ~95 min parallel for 3-β sweep at 16⁴. |
+| **strandGate parallel thermalization** | strandGate | Producer-consumer decomposition: CPU thermalizer feeds GPU consumer. 279 min → ~95 min for 3-β sweep at 16⁴. 128 EPYC threads available, currently using <1%. |
 | **blueGate sub-builder UNBLOCKED** | sporeGate | SSH key generated, Forgejo user created, orgs joined. membrane.exe 77c1d32 (Phase 2a) deployed. Full harvest running (52 builds). |
+| **K-DERM DNS SEPARATION COMPLETE** | sporeGate | **primal.eco SEALED** — 6 A records removed from sovereign Knot DNS. **www.nestgate.io fixed** to golgi. **DNSSEC verified** (DS 2371/13/2). Caddyfile synced from golgi (14 subdomain routes). dnsmasq config created. Tower atomic strategy: sovereign DNS + TLS + compute. |
 
 ### Previous wave highlights (155p → 155u)
 Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V29. barraCuda YELLOW→GREEN. 14 docs fossilized. tideGlass full Rust rebuild. footPrint deep debt. wetSpring V211c. strandGate silicon deism VALIDATED. G19 PROVEN. neuralSpring V183. Full history in ortho review.
@@ -185,9 +186,10 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 | First boot target | **esotericWebb on ironGate** |
 | G18 integration target | **squirrel → biomeOS on ironGate** |
 | G19 render target | **petalTongue on ironGate (RTX 5070) — PROVEN** |
-| K-derm websites | **3 domains spec'd**: primals.eco / nestgate.io / primal.eco |
+| K-derm websites | **2/3 LIVE**: primals.eco (outer, LIVE) / nestgate.io (peti, LIVE on mesh) / primal.eco (inner, dnsmasq READY) |
+| K-derm separation | **DNS DONE.** primal.eco 6 A records removed. www.nestgate.io fixed. Caddyfile + dnsmasq ready. Wildcard `*.primals.eco` means sporeGate owns all subdomain routing via Caddy — no CF changes needed. |
 | Glacial goals | **59 tracked** (31 ACTIVE, inc. G55-G63) |
-| arXiv | **UNBLOCKED** (plaquette normalization RESOLVED, 12⁴ paper-ready, parallel thermalization LIVE) |
+| arXiv | **UNBLOCKED** (plaquette normalization RESOLVED, 12⁴ paper-ready) |
 
 ---
 
@@ -208,8 +210,8 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 
 | Component | Status | Next |
 |-----------|--------|------|
-| **strandGate VALIDATION** | **ALL high-priority validation COMPLETE.** Action-force (6 sig figs). Creutz equality (5 sig figs). **Dual-GPU parity.** **12⁴ volume scan COMPLETE** — β=6.0/6.2 sub-0.1% agreement with published. **Plaquette ×4 normalization RESOLVED**. **PAPER SUBMISSION-READY.** 16⁴ parallel therm LIVE. | Rung 1 production campaign. Config cache completing (~90 min). |
-| **hotSpring** (spring) | `arxiv_volume_scan` (cache-aware) + `arxiv_thermalize_grid` (parallel rayon) + `arxiv_preprint_validation` + `arxiv_beta_scan`. Provenance trio wired (NFT pattern). `Lattice::save()/load()` with BLAKE3. | **Rung 1 UNBLOCKED.** 12⁴ paper-ready. 16⁴/24⁴ parallel therm in flight. |
+| **strandGate VALIDATION** | **ALL high-priority validation COMPLETE.** Action-force (6 sig figs). Creutz equality (5 sig figs). **Dual-GPU parity.** **12⁴ volume scan COMPLETE** — β=6.0/6.2 sub-0.1% agreement with published. **Plaquette ×4 normalization RESOLVED** (gauge group mismatch). **PAPER SUBMISSION-READY.** 16⁴ running. | Rung 1 production campaign. Compute config caching (37 min → instant). |
+| **hotSpring** (spring) | `arxiv_volume_scan` + `arxiv_preprint_validation` + `arxiv_beta_scan` binaries. Provenance trio wired (NFT pattern). riboCipher enforced. | **Rung 1 UNBLOCKED.** 12⁴ data paper-ready. 16⁴/24⁴ production running. |
 | **barraCuda** (GPU math) | 5,037+ tests. **GREEN** (PRNG FIXED). Shader -182 LOC. RK4 zero-alloc. | Statistical validation harness in place. |
 | **coralReef** (shaders) | 3,553 tests. Windows cross-compile. | WGSL compilation for QCD kernels. |
 | **toadStool** (compute) | 9,193+ tests. S349 deep debt. | compute.dispatch for GPU lattice. |
@@ -280,4 +282,15 @@ This makes petalTongue a **live science exploration platform** (VR/AR/desktop/br
 
 ---
 
-*Wave 155v/156d cascade. The three-domain topology is now **OPERATIONAL** — nestgate.io is live on the mesh, served by petalTongue v1.7.0 on sporeGate's NUCLEUS via WireGuard (golgi does TLS termination, sporeGate does compute). This is the peptidoglycan layer running as a primal composition, not a static site. ironGate Session 6 validated the full cascade: esotericWebb V30d (482 tests, exp006 22/22 PASS, signed provenance, dead code eliminated), footPrint 628 tests (manifest-driven, riboCipher wired), 17 repos pulled, NUCLEUS 26/27 HEALTHY. strandGate is exploring parallel thermalization — the dual EPYC has 128 threads but thermalizes on 1, so a producer-consumer decomposition could cut 16⁴ sweep time from 279→95 min. blueGate sub-builder is UNBLOCKED (SSH key + Forgejo access resolved), full harvest running (52 builds across 13 primals × 4 targets). The provenance divergence remains RESOLVED at 122× improvement. 59 glacial goals (31 ACTIVE). 94 docs fossilized. ~135K+ tests, 13/13 GREEN. The ecosystem has crossed from "prove and stabilize" into **"activate and connect"** — the three websites are separating, the trust surface is primal-served, and the downstream products are validated on live hardware.*
+*Wave 155v/156d — K-derm DNS separation **COMPLETE**. All three layers are now properly separated: primals.eco (outer membrane, Cloudflare, Zola + 14 Caddy-routed subdomains), nestgate.io (peptidoglycan, sovereign Knot DNS with DNSSEC, petalTongue v1.7.0 on sporeGate via WG mesh), primal.eco (inner membrane, sovereign Knot DNS, **6 public A records REMOVED** — inner membrane is now invisible to the public internet, resolves only via LAN dnsmasq). DNSSEC chain verified end-to-end (DS 2371/13/2, Porkbun → .eco TLD → Cloudflare KSK). Caddyfile synced from live golgi to version control. Wildcard `*.primals.eco` means sporeGate owns all subdomain routing autonomously via Caddy blocks — no Cloudflare changes needed for new services.*
+
+*Remaining work to move forward:*
+- *Deploy dnsmasq config to sporeGate (`primal-eco.dnsmasq.conf` → `/etc/dnsmasq.d/`)*
+- *Wire nestgate.io content backend (4 DIVs: content-provider socket, discovery service, port 8190, branding)*
+- *Inter-gate content.get E2E test (songBird probes ready, nestGate content.fetch ready)*
+- *biomeOS cell attachment CLI (`--mode attach`) for Phase 1 spring boot*
+- *BTSP local-trust (G63) for footPrint/tideGlass CAS write on same gate*
+- *arXiv Rung 1 production campaign (12⁴ paper-ready, 16⁴ running)*
+- *tideGlass Phase 0 on westGate (GPS data conversion, Zenodo inventory)*
+
+*59 glacial goals (31 ACTIVE). 94 docs fossilized. ~135K+ tests, 13/13 GREEN.*
