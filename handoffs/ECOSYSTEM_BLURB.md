@@ -122,7 +122,7 @@ This tests and matures:
 | **PROVENANCE DIVERGENCE RESOLVED** | westGate | **122× throughput improvement** (0.3/s → 37.6/s). Root cause: per-file spine entries were interim, not canonical. Spec alignment: per-file CAS+DAG only, session-level spine commit. `dag.event.append_batch` (200/batch) live. bearDog signature wired into sweetGrass braid — **provenance loop CLOSED.** Gap narrowed from 247× to **2×** (74/s download vs 37.6/s braid). Trailer running. |
 | **THREE-DOMAIN TOPOLOGY SPEC** | sporeGate | **K-derm website separation**: primals.eco (outer membrane, Zola/sporePrint), nestgate.io (peptidoglycan, petalTongue-served CAS braids/depot/provenance), primal.eco (inner membrane, WG mesh only). 4-phase nestgate.io evolution. Caddy configs ready. DNS owned by sporeGate. |
 | **strandGate 12⁴ PAPER-READY** | strandGate | 12⁴ volume scan COMPLETE. β=6.0/6.2 sub-0.1% agreement with published values. **Plaquette ×4 normalization RESOLVED** (gauge group mismatch SU(2)→SU(3)). 16⁴ running. **Rung 1 UNBLOCKED.** |
-| **Compute config cache concept** | strandGate | Thermalized lattice configs as CAS objects (same provenance trio pattern as data). 37-min CPU thermalization → instant on cache hit. Parallel pipeline: GPU produces while CPU thermalizes next β. |
+| **Compute config cache LIVE** | strandGate | `Lattice::save()/load()` with BLAKE3. `arxiv_thermalize_grid` (rayon, 64 threads). Cache-aware `arxiv_volume_scan`. **16⁴ step 150/200 on all 9 configs.** RTX 3090 GPU production running (100%, 85°C). |
 | **esotericWebb V30** | esotericWebb | V30: cell graph validation + batch provenance readiness. V30b: typed LocationDef, canonical name constants, `#[allow]→#[expect]`. |
 | **footPrint 628 tests, Phase 2 DEPLOY READY** | footPrint | 3 upstream commits. Manifest-driven source registration. Dynamic category boosts. Constants centralization. riboCipher UDS transport wired. ironGate port 3002 validated against live NUCLEUS. BTSP local-trust remaining blocker. |
 | **sweetGrass trailer alignment** | sweetGrass | 1,645 tests. Concurrent `batch_commit` dispatch. `MAX_BATCH_SIZE` guard (5K). btsp/server refactored (804→540L). DH-0 clean. |
@@ -140,7 +140,7 @@ This tests and matures:
 | **nestgate.io LIVE ON MESH** | sporeGate | **petalTongue v1.7.0 serving nestgate.io** from sporeGate NUCLEUS via WG mesh (golgi TLS → 10.13.37.2:8190). Three-domain topology OPERATIONAL. Dashboard renders physical topology, k-derm layers, depot status. 4 DIVs: content backend, discovery service, port 8090 conflict, branding. |
 | **ironGate Session 6** | ironGate | 17 repos pulled. esotericWebb **V30d validated (482 tests, exp006 22/22 PASS)**. footPrint 628 tests validated. Graphs Directory READY. NUCLEUS 26/27 HEALTHY. |
 | **esotericWebb V30c/V30d** | esotericWebb | V30c: signed provenance + batch chunking alignment. V30d: dead code elimination, hardcoded string removal. |
-| **strandGate parallel thermalization** | strandGate | Producer-consumer decomposition: CPU thermalizer feeds GPU consumer. 279 min → ~95 min for 3-β sweep at 16⁴. 128 EPYC threads available, currently using <1%. |
+| **strandGate parallel thermalization LIVE** | strandGate | `arxiv_thermalize_grid`: 10 configs × 64 EPYC threads (999% CPU). 16⁴ at step 150/200. Plaquettes converging: β=5.9→0.578, β=6.0→0.591, β=6.2→0.612. Serial scan GPU production active (400/1000 traj). |
 | **blueGate sub-builder UNBLOCKED** | sporeGate | SSH key generated, Forgejo user created, orgs joined. membrane.exe 77c1d32 (Phase 2a) deployed. Full harvest running (52 builds). |
 | **K-DERM DNS SEPARATION COMPLETE** | sporeGate | **primal.eco SEALED** — 6 A records removed from sovereign Knot DNS. **www.nestgate.io fixed** to golgi. **DNSSEC verified** (DS 2371/13/2). Caddyfile synced from golgi (14 subdomain routes). dnsmasq config created. Tower atomic strategy: sovereign DNS + TLS + compute. |
 
@@ -210,8 +210,8 @@ Provenance divergence discovered (12× → 122× resolved). esotericWebb V22→V
 
 | Component | Status | Next |
 |-----------|--------|------|
-| **strandGate VALIDATION** | **ALL high-priority validation COMPLETE.** Action-force (6 sig figs). Creutz equality (5 sig figs). **Dual-GPU parity.** **12⁴ volume scan COMPLETE** — β=6.0/6.2 sub-0.1% agreement with published. **Plaquette ×4 normalization RESOLVED** (gauge group mismatch). **PAPER SUBMISSION-READY.** 16⁴ running. | Rung 1 production campaign. Compute config caching (37 min → instant). |
-| **hotSpring** (spring) | `arxiv_volume_scan` + `arxiv_preprint_validation` + `arxiv_beta_scan` binaries. Provenance trio wired (NFT pattern). riboCipher enforced. | **Rung 1 UNBLOCKED.** 12⁴ data paper-ready. 16⁴/24⁴ production running. |
+| **strandGate VALIDATION** | **ALL high-priority validation COMPLETE.** 12⁴ paper-ready. **16⁴ GPU PRODUCTION ACTIVE** (RTX 3090, 100% util, 400/1000 traj β=5.9). Parallel therm: 9× 16⁴ at step 150/200, plaquettes converging. | Config cache completing. Dual-GPU production (MultiDevicePool). |
+| **hotSpring** (spring) | `arxiv_volume_scan` (cache-aware) + `arxiv_thermalize_grid` (parallel rayon) + `arxiv_preprint_validation` + `arxiv_beta_scan`. `Lattice::save()/load()` BLAKE3. §2.5 in paper. | **Rung 1 PRODUCING.** 16⁴ GPU prod active. Parallel therm completing. |
 | **barraCuda** (GPU math) | 5,037+ tests. **GREEN** (PRNG FIXED). Shader -182 LOC. RK4 zero-alloc. | Statistical validation harness in place. |
 | **coralReef** (shaders) | 3,553 tests. Windows cross-compile. | WGSL compilation for QCD kernels. |
 | **toadStool** (compute) | 9,193+ tests. S349 deep debt. | compute.dispatch for GPU lattice. |
