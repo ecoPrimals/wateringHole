@@ -13,8 +13,9 @@
 Full Rust rebuild of tideGlass from Phase 0 doc scaffold to Phase 4
 production-ready UniBin. Seven science modules implemented as library crates
 composing into a single `tideglass` binary with UDS JSON-RPC 2.0 server.
-176 tests, zero clippy warnings, zero TODOs. G56 Neural API routing
-(`neural-api-default.sock`) with direct fallback. Provenance convergence gate
+177 tests, zero clippy warnings, zero TODOs. G56 Neural API routing
+with direct fallback. **Validated against live 13-primal NUCLEUS on westGate** —
+first RGES computation executed on live hardware (333K CAS objects, 54.9 GB). Provenance convergence gate
 for mixed-state data on westGate. CAS wiring live with graceful degradation.
 All 21 transitive dependencies verified pure Rust. Documentation fully
 reconciled. Ready for westGate cell boot.
@@ -51,12 +52,14 @@ reconciled. Ready for westGate cell boot.
 
 ## CAS Integration
 
-- Neural API routing: `NEURAL_API_SOCKET` → `neural-api-default.sock` → `neural-api.sock` → direct fallback
+- Neural API routing: `NEURAL_API_SOCKET` → `$XDG/membrane/neural-api-*.sock` → direct fallback
+- Socket discovery: prefix-glob scan of `membrane/` then `biomeos/` dirs (family-ID naming)
 - `CasClient` over UDS: `content.get`, `content.exists`, `content.list`, `content.put`
-- `load_from_cas()` on server startup with graceful degradation
+- `load_from_cas()` with `health.check` probe (not content.list — 30 MB on 333K store)
+- Neural API → direct nestGate automatic fallback when Neural API is unresponsive
 - `store_pipeline_result()` for provenance write-back
 - `is_dataset_converged()` gate for mixed provenance states
-- 6 divergences documented (DIV-1→6) in CAS AAR handoff
+- 8 divergences documented (DIV-1→8) in CAS AAR handoff
 
 ## Deep Debt Completed
 
@@ -93,7 +96,7 @@ reconciled. Ready for westGate cell boot.
 | Total LOC | ~7,000 |
 | Largest file | dispatch.rs (611 lines, 270L code + 340L tests) |
 | External deps | 6 direct, 21 transitive |
-| Test count | 176 |
+| Test count | 177 |
 | Clippy warnings | 0 |
 | Unsafe code | forbidden |
 
@@ -106,7 +109,9 @@ reconciled. Ready for westGate cell boot.
 
 ## Upstream Review Requests
 
-- **overwatch**: Audit 176-test UniBin for deployment readiness
+- **overwatch**: Audit 177-test UniBin — first live validation on westGate hardware
+- **biomeOS team**: Neural API needs `content.*` method routing to nestGate (DIV-8)
+- **biomeOS team**: Document canonical socket layout (`membrane/` vs `biomeos/`, family-ID naming) (DIV-7)
 - **nestGate team**: Canonical Rust CAS client crate for ecosystem (DIV-5)
 - **biomeOS**: Review `tideglass_cell.toml` for live cell boot
-- **westGate data team**: GPS NumPy/pickle → JSON conversion priority
+- **westGate data team**: GPS NumPy/pickle → JSON conversion priority (DIV-4)

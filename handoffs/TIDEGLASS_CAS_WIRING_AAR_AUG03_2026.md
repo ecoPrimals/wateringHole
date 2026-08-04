@@ -1,8 +1,8 @@
 # tideGlass CAS Wiring AAR — First Primal Live Data Integration
 
-**Date**: Aug 3, 2026
+**Date**: Aug 3–4, 2026
 **Gate**: westGate
-**Wave**: 156b
+**Wave**: 156b → 156d
 **Primal**: tideGlass
 **Context**: First primal to wire live nestGate CAS data. Divergences documented for upstream teams.
 
@@ -11,10 +11,14 @@
 ## Summary
 
 Wired tideGlass UniBin to discover and connect to nestGate CAS on startup.
-Dispatch handlers now fall through from CAS-loaded data to caller-supplied params
+Dispatch handlers fall through from CAS-loaded data to caller-supplied params
 gracefully. Health triad reports CAS connection status and loaded dataset counts.
 
-**161 tests passing. Clippy pedantic+nursery clean. All quality gates green.**
+**Aug 4 update**: Validated against **live NUCLEUS on westGate**. Socket discovery
+fixed for actual deployment layout. Neural API fallback to direct nestGate wired.
+First live RGES computation executed on westGate hardware.
+
+**177 tests passing. Clippy pedantic+nursery clean. All quality gates green.**
 
 ---
 
@@ -111,6 +115,63 @@ returns an error — streaming not yet implemented.
 **Fix**: Implement `content.retrieve_stream` + `content.retrieve_stream_chunk` protocol.
 This is non-trivial (requires maintaining a streaming session across multiple RPC calls).
 
+### DIV-7: Socket discovery path and naming convention mismatch
+
+**Documentation/spec assumed**:
+- Sockets in `$XDG_RUNTIME_DIR/biomeos/`
+- Fixed filenames: `neural-api-default.sock`, `nestgate.sock`
+
+**Actual live NUCLEUS on westGate**:
+- Sockets in `$XDG_RUNTIME_DIR/membrane/`
+- Family-ID naming: `neural-api-westgate-tower-155f.sock`, `nestgate-westgate-tower-155f.sock`
+- Capability aliases via symlinks: `dag.sock` → rhizocrypt, `provenance.sock` → sweetgrass
+
+**Impact**: Any primal using `biomeos/neural-api-default.sock` will never find the socket.
+**Fix**: tideGlass discovery rewritten to scan `membrane/` then `biomeos/` with prefix-glob
+matching (`neural-api-*`, `nestgate-*`). `find_socket_by_prefix()` exposed as public API.
+**Upstream**: Document canonical socket layout. Other primals likely have this same issue.
+
+### DIV-8: Neural API socket does not proxy CAS methods
+
+**Problem**: The Neural API socket (`neural-api-westgate-tower-155f.sock`) responds to
+`health.check` (returns nestGate v4.56.0) but returns **empty responses** for
+`content.exists`, `content.list`, and other CAS data methods. The direct nestGate socket
+(`nestgate-westgate-tower-155f.sock`) responds correctly to all CAS methods.
+
+**Impact**: Primals relying on Neural API routing for CAS data will get empty responses
+and silently fail. tideGlass health.check reported "healthy" via Neural API while
+data calls returned nothing.
+
+**Fix**: tideGlass wired fallback: if Neural API health succeeds but data loading
+gets errors, automatically falls through to direct nestGate socket discovery.
+**Upstream**: biomeOS Neural API needs `content.*` method routing to nestGate.
+This is the headline divergence — the G56 Neural API routing pattern is not
+fully wired for CAS data methods yet.
+
+---
+
+## Live Validation (Aug 4, westGate)
+
+Tested tideGlass binary against live 13-primal NUCLEUS on westGate:
+
+| Test | Result |
+|------|--------|
+| Socket discovery | Found `neural-api-westgate-tower-155f.sock` in `$XDG_RUNTIME_DIR/membrane/` |
+| Neural API health.check | `nestGate v4.56.0` (healthy) |
+| Neural API content.exists | Empty response (DIV-8) |
+| Direct nestGate health.check | `nestGate v0.5.0` (healthy) |
+| Direct nestGate content.exists | Working — returns validation error for bad hash |
+| Direct nestGate content.list | Working — **333,695 CAS objects**, 30 MB response |
+| Fallback: Neural API → direct | Automatic — server retries on direct socket |
+| Server startup | `tideglass run --socket /tmp/tideglass-test.sock` — listening |
+| health.liveness | `{"alive": true}` |
+| health.check | CAS connected, routing `neural-api`, 0 datasets loaded, 6 load errors |
+| science.rges_screen | **First live RGES computation**: sorafenib + doxorubicin scored with 10K permutations each |
+
+**CAS store**: 333,695 objects on ZFS (54.9 GB CAS, 2.97 TB data, 47.7 TB free).
+GPS platform data is in CAS but in NumPy/pickle format (DIV-4) — JSON conversion
+is the remaining data task before real drug repurposing computation.
+
 ---
 
 ## Architecture Decisions
@@ -122,26 +183,26 @@ CAS request/response types (`CasGetResponse`, `CasPutResponse`, etc.) live in
 lives in `tideglass-bin/src/cas_client.rs`. This keeps tideglass-core free of
 tokio dependency while allowing other crates to use the types.
 
-### Graceful degradation, not hard dependency
+### Graceful degradation with Neural API fallback
 
 The server starts with or without CAS:
-1. Discovers nestGate socket via env var / XDG / membrane paths
-2. If found: connects, calls `content.list`, attempts data loading
-3. If not found: starts with empty `ModuleData`, all modules accept caller params
-4. Dispatch handlers check CAS-loaded data first, fall through to caller params
+1. Discovers socket via env var / `$XDG_RUNTIME_DIR/membrane/` / `biomeos/` (prefix glob)
+2. If Neural API found: connects, calls `health.check` to verify connectivity
+3. If Neural API health succeeds but data loading fails: falls back to direct nestGate
+4. If no socket found: starts with empty `ModuleData`, all modules accept caller params
+5. Dispatch handlers check CAS-loaded data first, fall through to caller params
 
-This means tideGlass works in development (no nestGate) and production (with nestGate)
-without configuration changes.
+### Health triad reports CAS routing
 
-### Health triad reports CAS status
-
-`health.check` now includes a `cas` section:
+`health.check` includes CAS routing mode and convergence status:
 ```json
 {
   "cas": {
     "connected": true,
-    "datasets_loaded": 3,
-    "load_errors": 0
+    "routing": "neural-api",
+    "datasets_loaded": 0,
+    "load_errors": 6,
+    "converged_datasets": 0
   }
 }
 ```
