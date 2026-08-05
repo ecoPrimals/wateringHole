@@ -10,9 +10,9 @@
 
 [wave]
 id = 156
-sub = "f"
+sub = "g"
 date = "2026-08-05"
-posture = "WAVE 156f DEBT CLEARING + DEPOT READINESS. 12/26 debt items cleared (S1-S7, B1-B2, O1/O3/O4/O8, S4-S5 pre-shipped). sweetGrass 1,655 tests (convergence.check + braid.list). nestGate 1,630 tests (94 methods, 21 domains, Neural API). loamSpine 1,752 tests (spine.status). toadStool B1/B2 socket perms FIXED. petalTongue mesh.peers LIVE. coralReef 3,525 tests (6 commits). squirrel 7,140 tests (156j). rhizoCrypt S4/S5 VERIFIED. 15/15 compile clean. DEPOT REBUILD READY. ~140K tests, 15/15 GREEN."
+posture = "WAVE 156g REMAINING WORK FOCUS. 14/26 debt cleared. DEPOT REBUILT (26 bins, blueGate 15/15 Windows). nestgate.io 10/12 (health.liveness S8). toadStool Akida driver (7,755 lines). 12 items remain: 3 ops (E2 squirrel, D1 tideGlass boot, O5 nestGate TCP), 5 integration, 2 feature, 2 ongoing. No code blockers. ~140K tests, 15/15 GREEN."
 publisher = "eastGate-overwatch"
 
 [gates]
