@@ -1,11 +1,11 @@
-# Auto-published by ironGate cascade (Wave 155v/156d)
-# Gate: ironGate | Updated: 2026-08-04T17:28:00Z
+# Auto-published by ironGate cascade (Wave 156d)
+# Gate: ironGate | Updated: 2026-08-04T18:34:00Z
 #
 # This file is owned exclusively by ironGate. No other gate writes here.
 
 [meta]
 gate = "ironGate"
-updated = "2026-08-04T17:28:00Z"
+updated = "2026-08-04T18:34:00Z"
 
 [heads]
 airSpring = "8025c0c42a21fc3cb66b225b44978e270c08e15f"
@@ -14,22 +14,22 @@ bearDog = "5e80b5364f3262a0f1a675469f9bcd2e2a1c9436"
 biomeOS = "96083386c1094c1b044a4e000e04d6b21d771002"
 cellMembrane = "77c1d32c8b79b1e430e1ff0de7b0a7e45c86f218"
 coralReef = "61a7023f7fc4cad942eb44afaa2e79567f95f95a"
-esotericWebb = "1d8a4d727bcaf6d690969dd0eff714cfcd25cddf"
+esotericWebb = "5902a6fd02a2847bae5bb9d3b121f693fcb55940"
 footPrint = "a498566ea0253de525a0145533f9a7e443e8fb88"
 groundSpring = "8d789b43a69f68cbe2a15708438e1bee8dfcfffd"
-hotSpring = "a7a808769c4a508277a9cb07aad97f049e2377f4"
+hotSpring = "6370dcf4a1db32278d846ae02bf81577e3d1d0da"
 loamSpine = "d5b878736f10153b5ed878ae8b3a2491a17b57bd"
 nestGate = "97f95bc2e7f74f7a961dc430a25253c8b7106cca"
 neuralSpring = "2d7ae2ed4c0190e4c3c2a8eba0c1807219b516a9"
-petalTongue = "09c60aa7499e344a980ead17f7df54087a193b27"
+petalTongue = "e534a5904c1b59769235068e763096e13f7e1753"
 plasmidBin = "f0d543270b789a381d4f27aeefbedc3393f2b202"
 projectFOUNDATION = "5b3426bddaf4579165fae10003faf98cbb5c2c6b"
-projectNUCLEUS = "f0b5ea793c74372bcf9d6f15dcdd6f168802bb60"
+projectNUCLEUS = "7a43d72007a625a46767896b54613f7ed51ecdf9"
 rhizoCrypt = "c0abe7560980302d6e9f02dd4c6ae1728923e13f"
 skunkBat = "b0df971ce9b2a04c15994744ef6a481aec96147f"
 songBird = "110ca75425b3249adabc856591bca5e4a4e1452d"
 squirrel = "8de6bcbe600de060e4045f77c0415620a1f7279e"
 sweetGrass = "50bd0440387267ac518cd33504f5fd2502752e4d"
 toadStool = "81286af57caa59f587938a81228d8981f7b0a423"
-wateringHole = "835d5274c7c04c0639080a53e0ef83b8350d32ad"
+wateringHole = "05ed7de67152df5dd46594c9f1506ddb78de6417"
 wetSpring = "aa881af6f6728f3f28a14700cbfb6e9ff634e0ea"

@@ -27,12 +27,7 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from bulk_ingest import (
-    rpc_result, blake3_hash, cas_put,
-    dag_session_create, dag_event_append, dag_partial_dehydrate,
-    dag_dehydrate, spine_create,
-    spine_session_commit, sign_merkle_root, braid_create,
-)
+from prov_inline import InlineBraid
 
 DATA_ROOT = Path("/mnt/nestgate/cold/zfs/data")
 REPORT_DIR = Path("/tmp/revalidation_reports")
@@ -49,7 +44,7 @@ def scan_dataset(dataset_path):
 
 
 def revalidate_dataset(dataset_name, dataset_path, max_files=None):
-    """Re-ingest a single dataset through the full provenance chain."""
+    """Re-ingest a single dataset through the full provenance chain via InlineBraid."""
     files = scan_dataset(dataset_path)
     if not files:
         return None
@@ -65,122 +60,55 @@ def revalidate_dataset(dataset_name, dataset_path, max_files=None):
     print(f"  Files: {total}  |  Size: {total_bytes / 1024 / 1024:.1f} MB")
     print(f"  {'=' * 60}")
 
-    # Create DAG session
-    session_id = dag_session_create(dataset_name)
-    if not session_id:
-        print(f"  FAIL: Could not create DAG session")
-        return {"dataset": dataset_name, "status": "fail", "reason": "dag_session"}
+    try:
+        braid = InlineBraid(dataset_name, checkpoint_interval=CHECKPOINT_INTERVAL)
+    except RuntimeError as e:
+        print(f"  FAIL: {e}")
+        return {"dataset": dataset_name, "status": "fail", "reason": str(e)}
 
-    # Create spine
-    spine_id_result = spine_create(dataset_name)
-    spine_id = None
-    if isinstance(spine_id_result, dict):
-        spine_id = spine_id_result.get("spine_id")
-    elif isinstance(spine_id_result, str):
-        spine_id = spine_id_result
-
-    if not spine_id:
-        print(f"  FAIL: Could not create spine")
-        return {"dataset": dataset_name, "status": "fail", "reason": "spine_create"}
-
-    event_count = 0
-    cas_ok = 0
-    cas_fail = 0
-    dag_ok = 0
     t_start = time.time()
 
     for i, filepath in enumerate(files):
-        size = filepath.stat().st_size
-
-        # BLAKE3 hash
         try:
-            b3 = blake3_hash(filepath)
+            braid.ingest_file(filepath)
         except Exception as e:
-            print(f"  [{i+1}/{total}] {filepath.name}  HASH FAIL: {e}")
+            print(f"  [{i+1}/{total}] {filepath.name}  FAIL: {e}")
             continue
 
-        # CAS put (will dedup since data already exists)
-        ok, mode = cas_put(filepath, b3)
-        if ok:
-            cas_ok += 1
-        else:
-            cas_fail += 1
-
-        # DAG event
-        vertex = dag_event_append(session_id, b3, filepath.name, size, dataset_name)
-        if vertex:
-            dag_ok += 1
-            event_count += 1
-
-        # Progress every 50 files or at boundaries
         if (i + 1) % 50 == 0 or i == total - 1:
             elapsed = time.time() - t_start
             rate = (i + 1) / elapsed if elapsed > 0 else 0
-            print(f"  [{i+1}/{total}] cas={cas_ok} dag={dag_ok} "
+            stats = braid.stats()
+            print(f"  [{i+1}/{total}] events={stats['event_count']} "
                   f"({rate:.1f} files/s)")
 
-        # Checkpoint
-        if CHECKPOINT_INTERVAL > 0 and event_count > 0 and event_count % CHECKPOINT_INTERVAL == 0:
-            partial = dag_partial_dehydrate(session_id)
-            if partial and isinstance(partial, dict):
-                print(f"  [CHECKPOINT] {event_count} events, "
-                      f"root={partial.get('merkle_root', '?')[:16]}...")
+    print(f"  [FINALIZE] Dehydrating {braid.event_count} events...", flush=True)
+    result = braid.finalize()
 
-    # Finalize
-    print(f"  [FINALIZE] Dehydrating {event_count} events...", end="", flush=True)
-    merkle_root = dag_dehydrate(session_id)
-    merkle_hex = merkle_root if isinstance(merkle_root, str) else str(merkle_root) if merkle_root else None
-    print(f" {'OK' if merkle_hex else 'FAIL'}")
-
-    commit_ok = False
-    if merkle_hex:
-        print(f"  [FINALIZE] Session commit...", end="", flush=True)
-        commit = spine_session_commit(spine_id, session_id, merkle_hex, event_count)
-        commit_ok = commit is not None
-        print(f" {'OK' if commit_ok else 'FAIL'}")
-
-    print(f"  [FINALIZE] Signing...", end="", flush=True)
-    sig = sign_merkle_root(merkle_hex or "0" * 64, dataset_name)
-    print(f" {'OK' if sig else 'FAIL'}")
-
-    print(f"  [FINALIZE] Braid...", end="", flush=True)
-    braid = braid_create(
-        b3hash=merkle_hex or "0" * 64,
-        mime_type="application/x-dataset",
-        size=total_bytes,
-        dataset=dataset_name,
-        license_id="CC0-1.0",
-        session_id=session_id,
-        merkle_root=merkle_hex,
-        signature=sig,
-    )
-    print(f" {'OK' if braid else 'FAIL'}")
-
+    merkle_hex = result.get("merkle_root")
     wall = time.time() - t_start
 
-    result = {
+    summary = {
         "dataset": dataset_name,
         "status": "ok" if merkle_hex else "partial",
         "files": total,
         "total_bytes": total_bytes,
-        "cas_ok": cas_ok,
-        "cas_fail": cas_fail,
-        "dag_events": dag_ok,
-        "session_id": session_id,
-        "spine_id": spine_id,
+        "dag_events": result["event_count"],
+        "session_id": result["session_id"],
+        "spine_id": result["spine_id"],
         "merkle_root": merkle_hex,
-        "signed": bool(sig),
-        "braided": bool(braid),
-        "committed": commit_ok,
+        "signed": bool(result.get("signature")),
+        "braided": bool(result.get("braid")),
+        "errors": result["errors"],
         "wall_seconds": round(wall, 1),
     }
 
-    print(f"  RESULT: {result['status'].upper()} | "
+    print(f"  RESULT: {summary['status'].upper()} | "
           f"merkle={str(merkle_hex)[:16]}... | "
-          f"dag={dag_ok}/{total} | "
+          f"events={summary['dag_events']}/{total} | "
           f"{wall:.1f}s")
 
-    return result
+    return summary
 
 
 def main():

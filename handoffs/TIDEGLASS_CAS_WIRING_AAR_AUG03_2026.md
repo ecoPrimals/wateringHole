@@ -18,7 +18,18 @@ gracefully. Health triad reports CAS connection status and loaded dataset counts
 fixed for actual deployment layout. Neural API fallback to direct nestGate wired.
 First live RGES computation executed on westGate hardware.
 
-**177 tests passing. Clippy pedantic+nursery clean. All quality gates green.**
+**Aug 4 PM update (Wave 156d)**: `content.query` wired — nestGate v4.57+ shipped
+metadata search (DIV-2 RESOLVED). GPS data CONVERTED by westGate team (11 JSON files,
+103 MB, CAS-ingested with BLAKE3). `resolve_dataset_hash()` evolved from dead
+`const fn -> None` to live `query_dataset_hash()` using `content.query` by pipeline tag.
+5 P0 visualization scenes wired via petalTongue IPC client.
+
+**220 tests passing. Clippy pedantic+nursery clean. All quality gates green.**
+
+**Aug 5 update (Wave 156d)**: `PetalTongueClient` activated — instantiated at startup
+when socket discovered, viz scenes forwarded to petalTongue via `render_scene()`.
+`ServerContext` replaces separate `Arc<ModuleData>`. Server extracts method name and
+fire-and-forget forwards viz results. Cell graph updated for westGate 3.21 TB / 452 GB CAS.
 
 ---
 

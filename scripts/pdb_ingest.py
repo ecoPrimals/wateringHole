@@ -27,44 +27,10 @@ import time
 import urllib.request
 from pathlib import Path
 
-MEMBRANE = "/run/user/1000/membrane"
-RIBOCIPHER_PREFIX = struct.pack("BB", 0xEC, 0x01)
+sys.path.insert(0, str(Path(__file__).parent))
+from prov_inline import _rpc as rpc, _rpc_result, SOCKETS
+
 STAGING = Path("/tmp/pdb_ingest_staging")
-
-SOCKETS = {
-    "nestgate":   f"{MEMBRANE}/nestgate-westgate-tower-155f.sock",
-    "rhizocrypt": f"{MEMBRANE}/rhizocrypt-westgate-tower-155f.sock",
-    "loamspine":  f"{MEMBRANE}/loamspine-westgate-tower-155f.sock",
-    "sweetgrass": f"{MEMBRANE}/sweetgrass-westgate-tower-155f.sock",
-    "beardog":    f"{MEMBRANE}/beardog-westgate-tower-155f.sock",
-}
-
-
-def rpc(primal, method, params=None):
-    """Send JSON-RPC to a primal socket. bearDog uses plain JSON-RPC; others use riboCipher prefix."""
-    sock = SOCKETS[primal]
-    req = json.dumps({"jsonrpc": "2.0", "method": method, "params": params or {}, "id": 1})
-    use_prefix = primal != "beardog"
-    data = (RIBOCIPHER_PREFIX if use_prefix else b"") + req.encode()
-
-    r = subprocess.run(
-        ["socat", "-t10", "-", f"UNIX-CONNECT:{sock}"],
-        input=data, capture_output=True, timeout=15,
-    )
-    if not r.stdout:
-        return None
-
-    raw = r.stdout
-    if raw[:2] == RIBOCIPHER_PREFIX:
-        raw = raw[2:]
-    for line in raw.split(b"\n"):
-        line = line.strip()
-        if line:
-            try:
-                return json.loads(line)
-            except json.JSONDecodeError:
-                continue
-    return None
 
 
 def fetch_pdb(pdb_id, fmt="pdb"):
@@ -82,10 +48,12 @@ def fetch_pdb(pdb_id, fmt="pdb"):
         return None
 
 
+import blake3 as _blake3
+
+
 def blake3_hash(filepath):
-    """Compute BLAKE3 hash of a file using b3sum."""
-    r = subprocess.run(["b3sum", "--no-names", str(filepath)], capture_output=True, text=True)
-    return r.stdout.strip()
+    """In-process BLAKE3 hash — no b3sum subprocess."""
+    return _blake3.blake3(Path(filepath).read_bytes()).hexdigest()
 
 
 def get_top_pdb_ids(count=100):

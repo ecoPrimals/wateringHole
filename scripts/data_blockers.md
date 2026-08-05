@@ -109,11 +109,16 @@ Track failures, user-intervention items, and issues to circle back to.
 - **AlphaFold full sync**: Started via rsync with systemd timer (restart-safe). Swiss-Prot CIF (37 GB) + PDB (27 GB) + sequences.fasta (118 GB) + metadata downloading.
 - **GWAS Catalog**: Full FTP release (700 MB) via rsync — bypassed broken API
 
-### Running Total (Aug 4, 2026)
+### Running Total (Aug 5, 2026 AM)
 
-- **Grand total**: ~3.65 TB, 154 datasets on ZFS (63.7 TB pool, 5.7% used)
-- **AlphaFold full sync**: COMPLETE (v1-v6 + metadata). Provenance trailer braiding at 43/s (canonical pipeline).
-- **Provenance**: 122x throughput improvement after spine alignment (Wave 155u)
+- **Grand total**: ~3.21 TB used, 153 datasets on ZFS (50.7 TB pool, 6.3% used)
+- **CAS pool**: ~452 GB (grown from 135 GB via provenance trailer)
+- **AlphaFold full sync**: COMPLETE (v1-v6 + metadata). Provenance convoy braiding at **145/s** (4-worker native socket).
+- **Provenance**: 460x total throughput improvement (0.3/s → 38/s spine alignment → 145/s native socket convoy)
+- **Convoy AAR**: Primals never the bottleneck. nestGate 16K RPCs/s, rhizoCrypt <1ms batch. Socat subprocess spawning was the glue bottleneck.
+- **Convergence sweep**: 0 CONVERGED, 5 CAS-ONLY, 89 PARTIAL, 32 PRIMORDIAL, 21 EMPTY
+- **GPS data**: CONVERTED (11 JSON, 103 MB CAS-ingested with BLAKE3)
+- **biomeOS**: v4.57 deployed (source-built), 14/14 HEALTHY, `nucleus attach` available
 - **Blockers remaining**: 5 OPEN download failures, 12 need-user items
 - **Blockers resolved (Sessions 1-3)**: 7 of 24
 

@@ -1,31 +1,31 @@
-# Gate: southGate | POST-THRESHOLD — Wave 155n
-# Validation gate PROVEN. GPU compute ACTIVE. arXiv data PRODUCED.
-# NUCLEUS 27.8h stable. Own genetic lineage (89df7a2d).
+# Gate: southGate | DEPOT SYNCED — Wave 156d
+# v4.57+ deployed. NUCLEUS restarted. 13/13 GREEN. GPU validated.
+# Own genetic lineage (89df7a2d). Validation gate + compute node.
 
 [meta]
 gate = "southGate"
-updated = "2026-08-01T21:10:00Z"
-wave = "155n-post-threshold"
-role = "VALIDATION GATE + COMPUTE NODE + ARXIV DATA PRODUCTION"
-posture = "Post-threshold. GPU HMC benchmark complete. arXiv Section 3.4 data ready."
+updated = "2026-08-04T18:38:00Z"
+wave = "156d"
+role = "VALIDATION GATE + COMPUTE NODE"
+posture = "Depot v4.57+ synced. NUCLEUS fresh restart. 13/13 GREEN. GPU operational."
 
 [heads]
 bearDog = "5e80b53"
-songBird = "9046664"
-nestGate = "6b6d484"
-biomeOS = "7ccd8ae"
+songBird = "110ca75"
+nestGate = "97f95bc"
+biomeOS = "9608338"
 rhizoCrypt = "4716bf5"
 squirrel = "4bcf79e"
 sweetGrass = "4b5167b"
 loamSpine = "5b3cabf"
 skunkBat = "b0df971"
 coralReef = "edcd696"
-barraCuda = "d2ccce4"
+barraCuda = "aab0d81"
 petalTongue = "b135400"
-toadStool = "92aeb14"
-cellMembrane = "d350601"
+toadStool = "81286af"
+cellMembrane = "77c1d32"
 plasmidBin = "f0d5432"
-wateringHole = "93052bd"
+wateringHole = "05ed7de"
 hotSpring = "4dbd778"
 primalSpring = "1cfee8c"
 
@@ -39,14 +39,15 @@ os = "Pop!_OS 22.04 LTS"
 driver = "NVIDIA 580.126.18, CUDA 13.0"
 
 [deploy]
-biomeos_version = "4.55.0"
+biomeos_version = "4.56.0"
 beardog_version = "0.9.0"
 songbird_version = "0.2.1"
 barracuda_version = "0.4.0"
 toadstool_version = "0.2.0"
 squirrel_version = "0.1.0"
-rhizocrypt_version = "0.14.x"
-depot_source = "depot.primals.eco (sovereign HTTPS — NO mesh required)"
+rhizocrypt_version = "0.14.17"
+depot_source = "depot.primals.eco (sovereign HTTPS — v4.57+ sync wave 156d)"
+depot_sync_date = "2026-08-04"
 binary_count = 16
 binary_target = "x86_64-unknown-linux-musl (NUCLEUS) + x86_64-unknown-linux-gnu (GPU compute)"
 install_path = "~/.local/bin/"
@@ -65,13 +66,14 @@ forgejo_ssh = "LIVE — authenticated as golgiAdmin via git.primals.eco:2222 (pu
 federation = "songBird rejecting unknown_family peers on LAN — trust boundary ACTIVE"
 
 [nucleus]
-status = "LIVE — 13/13 processes, 32 sockets, 86MB RSS, 27.8h uptime"
+status = "LIVE — 13/13 processes, 34 sockets, 98MB RSS, FRESH (v4.57+ restart)"
 composition = "full"
 boot_order = "Tower → Nest → Node → biomeOS (dependency-aware)"
-total_rss_mb = 86
+total_rss_mb = 98
 btsp_enforcement = "ACTIVE — all primals reject plain JSON-RPC on TCP and UDS"
 ipc_latency_ms = 0.1
-uptime_hours = 27.8
+previous_uptime_hours = 97.0
+restart_reason = "Depot v4.57+ sync — 10/13 binaries updated"
 
 [nucleus.primals]
 beardog = "HEALTHY — alive v0.9.0, security-89df7a2d.sock"
@@ -105,11 +107,12 @@ hmc_strategy = "DF64 on FP32 cores — Concurrent (Omelyan, n_md=10, β=6.0)"
 
 [tower_atomic_benchmark]
 mode = "loopback (127.0.0.1:7700)"
-latency_avg_ms = 0.134
-latency_p50_ms = 0.131
-latency_p95_ms = 0.186
-setup_avg_ms = 0.074
-throughput_mbps = 17242
+latency_avg_ms = 0.151
+latency_p50_ms = 0.148
+latency_p95_ms = 0.188
+setup_avg_ms = 0.066
+throughput_mbps = 19036
+benchmark_date = "2026-08-04 (v4.57+)"
 
 [validation]
 gate_deployment = "PROVEN — 22/22 PASS (Wave 155n)"
@@ -140,7 +143,8 @@ footprint = "READY — NUCLEUS operational, nestGate + petalTongue alive"
 science_pipeline = "READY — 128GB RAM, 479GB free storage, CAS primals live"
 
 [observations]
+depot_sync = "v4.57+ pulled Aug 4 — 10/13 binaries changed (biomeOS 21→16MB, squirrel 4.4→8.7MB, coralReef 7.5→8.9MB)"
 dual_binary_pattern = "musl static (NUCLEUS IPC) + gnu dynamic (GPU Vulkan) — same depot, different linkage"
 gpu_generation_proof = "Ada Lovelace (SM89) validates alongside Ampere (SM86) — same WGSL shaders, same physics"
-arxiv_status = "RTX 4060 row ready for hotSpring team integration into whitePaper/subGen/"
-next_steps = "footPrint GIS, hotSpring QCD production, Aug 2 interruption readiness"
+arxiv_status = "RTX 4060 row delivered for Section 3.4. Precision tiers 7/7 for Section 3.3."
+next_steps = "Cell boot validation (biomeos nucleus attach), footPrint integration, inter-gate content.get"

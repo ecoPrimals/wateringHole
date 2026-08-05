@@ -35,43 +35,49 @@ import tempfile
 import time
 from pathlib import Path
 
-MEMBRANE = "/run/user/1000/membrane"
-RIBOCIPHER_PREFIX = struct.pack("BB", 0xEC, 0x01)
+sys.path.insert(0, str(Path(__file__).parent))
+from prov_inline import _rpc as rpc_native, _rpc_result, SOCKETS, RIBOCIPHER_PREFIX
 
-SOCKETS = {
-    "nestgate":   f"{MEMBRANE}/nestgate-westgate-tower-155f.sock",
-    "rhizocrypt": f"{MEMBRANE}/rhizocrypt-westgate-tower-155f.sock",
-    "loamspine":  f"{MEMBRANE}/loamspine-westgate-tower-155f.sock",
-    "sweetgrass": f"{MEMBRANE}/sweetgrass-westgate-tower-155f.sock",
-    "beardog":    f"{MEMBRANE}/beardog-westgate-tower-155f.sock",
-}
+MEMBRANE = "/run/user/1000/membrane"
 
 
 def rpc(primal, method, params=None, timeout=30, socket_override=None):
-    """JSON-RPC 2.0 call over UDS."""
-    sock = socket_override or SOCKETS[primal]
-    req = json.dumps({"jsonrpc": "2.0", "method": method, "params": params or {}, "id": 1})
-    use_prefix = primal != "beardog"
-    data = (RIBOCIPHER_PREFIX if use_prefix else b"") + req.encode() + b"\n"
+    """JSON-RPC 2.0 call over UDS — native socket, no socat."""
+    if socket_override:
+        import socket as _socket
+        sock_path = socket_override
+        req = json.dumps({"jsonrpc": "2.0", "method": method, "params": params or {}, "id": 1})
+        use_prefix = primal != "beardog"
+        wire = (RIBOCIPHER_PREFIX if use_prefix else b"") + req.encode() + b"\n"
+        s = _socket.socket(_socket.AF_UNIX, _socket.SOCK_STREAM)
+        s.settimeout(timeout)
+        try:
+            s.connect(sock_path)
+            s.sendall(wire)
+            buf = b""
+            while True:
+                chunk = s.recv(65536)
+                if not chunk:
+                    break
+                buf += chunk
+                if b"\n" in buf:
+                    break
+        except Exception:
+            s.close()
+            return None
+        s.close()
+        raw = buf
+        if raw[:2] == RIBOCIPHER_PREFIX:
+            raw = raw[2:]
+        try:
+            return json.loads(raw.decode("utf-8", errors="replace"))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            return None
+    return rpc_native(primal, method, params, timeout)
 
-    r = subprocess.run(
-        ["socat", "-t10", "-", f"UNIX-CONNECT:{sock}"],
-        input=data, capture_output=True, timeout=timeout,
-    )
-    if not r.stdout:
-        return None
 
-    raw = r.stdout
-    if raw[:2] == RIBOCIPHER_PREFIX:
-        raw = raw[2:]
-    for line in raw.split(b"\n"):
-        line = line.strip()
-        if line:
-            try:
-                return json.loads(line)
-            except json.JSONDecodeError:
-                continue
-    return None
+# Keep socat import path for backward compat but it's no longer used
+_SOCAT_REMOVED = True
 
 
 def result(primal, method, params=None, **kwargs):

@@ -28,44 +28,10 @@ import sys
 import time
 from pathlib import Path
 
-MEMBRANE = "/run/user/1000/membrane"
-RIBOCIPHER_PREFIX = struct.pack("BB", 0xEC, 0x01)
-
-SOCKETS = {
-    "nestgate":   f"{MEMBRANE}/nestgate-westgate-tower-155f.sock",
-    "rhizocrypt": f"{MEMBRANE}/rhizocrypt-westgate-tower-155f.sock",
-    "loamspine":  f"{MEMBRANE}/loamspine-westgate-tower-155f.sock",
-    "sweetgrass": f"{MEMBRANE}/sweetgrass-westgate-tower-155f.sock",
-    "beardog":    f"{MEMBRANE}/beardog-westgate-tower-155f.sock",
-}
+sys.path.insert(0, str(Path(__file__).parent))
+from prov_inline import _rpc as rpc, _rpc_result, SOCKETS
 
 MANIFEST_DIR = Path("/mnt/nestgate/cold/zfs/data/pdb_mmcif_manifests")
-
-
-def rpc(primal, method, params=None, timeout=30):
-    sock = SOCKETS[primal]
-    req = json.dumps({"jsonrpc": "2.0", "method": method, "params": params or {}, "id": 1})
-    use_prefix = primal != "beardog"
-    data = (RIBOCIPHER_PREFIX if use_prefix else b"") + req.encode()
-
-    r = subprocess.run(
-        ["socat", "-t10", "-", f"UNIX-CONNECT:{sock}"],
-        input=data, capture_output=True, timeout=timeout,
-    )
-    if not r.stdout:
-        return None
-
-    raw = r.stdout
-    if raw[:2] == RIBOCIPHER_PREFIX:
-        raw = raw[2:]
-    for line in raw.split(b"\n"):
-        line = line.strip()
-        if line:
-            try:
-                return json.loads(line)
-            except json.JSONDecodeError:
-                continue
-    return None
 
 
 def phase1_hash_all(pdb_dir):
