@@ -10,9 +10,9 @@
 
 [wave]
 id = 156
-sub = "e"
+sub = "f"
 date = "2026-08-05"
-posture = "WAVE 156e LAN HPC ENMESHMENT ERA. nestgate.io 20 primals 8/12 live. footPrint petal-bridge wired (dual-socket WS↔UDS). tideGlass PetalTongueClient ACTIVATED (220 tests). hotSpring SU(N) N=2→8 (87 configs, 652 tests). westGate 4-tier storage (NVMe 217/s, inline 265/s). Next: squirrel deploy on ironGate, tideGlass cell boot westGate, SU(N) data tables, nestgate.io mesh.peers. ~136K tests, 13/13 GREEN."
+posture = "WAVE 156f DEBT CLEARING + DEPOT READINESS. 12/26 debt items cleared (S1-S7, B1-B2, O1/O3/O4/O8, S4-S5 pre-shipped). sweetGrass 1,655 tests (convergence.check + braid.list). nestGate 1,630 tests (94 methods, 21 domains, Neural API). loamSpine 1,752 tests (spine.status). toadStool B1/B2 socket perms FIXED. petalTongue mesh.peers LIVE. coralReef 3,525 tests (6 commits). squirrel 7,140 tests (156j). rhizoCrypt S4/S5 VERIFIED. 15/15 compile clean. DEPOT REBUILD READY. ~140K tests, 15/15 GREEN."
 publisher = "eastGate-overwatch"
 
 [gates]

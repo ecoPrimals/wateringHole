@@ -25,7 +25,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **westGate ZFS rebuilt** — mirror → raidz1, 25.4 → 50.7 TB usable. AlphaFold DB fits.
 - [x] **Golgi post-receive hook FIXED** (3 bugs: dispatcher, case, category). Sovereign CI E2E verified.
 - [x] **cellMembrane 1,281+ tests** — MEMBRANE_*, crypto dedup, J16+J13+J19 killed, registry API hardened.
-- [x] **squirrel 4,613 tests** (consolidated 34→1 binary) — 90.1% coverage, 0 unsafe, Wave 156d sovereignty cleanup + 27 deprecated aliases removed
+- [x] **squirrel 7,140 tests** (Waves 156e→156j deep debt sweep — AIToolsError, PrimalType dedup, EcosystemPrimalType→String, port elimination). 0 unsafe, 0 clippy.
 - [x] **Provenance 7/7 COMPLETE** — E2E validated on westGate (5th consecutive pass) + blueGate (Windows)
 - [x] **Sovereign CI LIVE** — push-to-deploy E2E verified for ALL 13 primals including biomeOS (coevolution).
 - [x] **Coevolution contract COMPLETE (G21)** — biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`. Mode gap FIXED (`652cf8a7`).
@@ -51,25 +51,25 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] All primals compile — 5 Tier 1 genomeBin architectures
 - [x] ~~P0: glibc depot target~~ — **FIXED** (cellMembrane `8d9bb58`): `targets_for_primal()` auto-appends gnu for GPU primals
 - [x] 43/43 repos Forgejo-first
-- [x] **~135K+ primal tests validated this wave** (songBird 14,840, bearDog 14K, nestGate 13K, toadStool 9.2K, biomeOS 8,570, petalTongue 6,755, barraCuda 4,959, squirrel 4,613, coralReef 3,512, rhizoCrypt 1,791, loamSpine 1,740, sweetGrass 1,636, cellMembrane 1,281+, **tideGlass 214**, primalSpring 197, skunkBat, **footPrint 708**, **esotericWebb V31b (484)**)
+- [x] **~140K+ primal tests validated this wave** (songBird 14,840, bearDog 14,019, nestGate 1,630+, toadStool 9,193+, biomeOS 8,570+, squirrel 7,140, petalTongue 6,606, barraCuda 4,959, coralReef 3,525, rhizoCrypt 1,791, loamSpine 1,752, sweetGrass 1,655, cellMembrane 1,281+, **tideGlass 220**, primalSpring 197, skunkBat 609, sourDough 502, **footPrint 708**, **esotericWebb V31b (484)**, bingoCube 31)
 - [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean
 - [x] Production `.unwrap()` — 0 in critical-path primals
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
 - [x] Format drift RESOLVED — all repos clean
 - [x] bearDog: **14,019** tests, crypto.sign SHIPPED, dual-socket fix, FAMILY_SEED precedence, 94 orphan files purged (**Wave 155m**)
 - [x] songBird: **14,840+** tests, universal-ipc, ACME HTTP-01, TCP registration fix, **`mesh.connectivity_check` + `mesh.throughput` SHIPPED (20 mesh methods)** (**Wave 155p**)
-- [x] nestGate: **13,095+** tests, CAS on ZFS verified, deep debt complete, zero unsafe
-- [x] toadStool: **9,193+** tests, **S349**: JSON-RPC health endpoint, dead deps purged, stubs fail-closed, hardcoding consolidated (**Wave 155m**)
+- [x] nestGate: **1,630+** tests (94 IPC methods, 21 capability domains), `content.ingest` + `dataset.convergence` + dual-path CAS + Neural API wiring (O1/O3/O4/O8 CLEARED)
+- [x] toadStool: **9,193+** tests, **B1/B2: membrane socket perms FIXED** (dir 0o750, socket 0o660, cell boot unblocked on all gates) (**Wave 156e**)
 - [x] biomeOS: **8,570+** tests, **v4.56**: G22 convergence, spring deploy graph executor SHIPPED, deep debt audit CLEAN (zero debt all categories), 139.2 GiB recovered. (**Wave 155p**)
 - [x] petalTongue: **6,755** tests, CAS storage discovery refactor, canonical `get_family_id()`, hardcoded primal names removed (**Wave 156b**)
 - [x] barraCuda: **5,037** tests, RTX 3090 profiled, **P0 shader fixes SHIPPED**: subgroup entry point `main→sum_reduce_f64` FIXED, PRNG compose duplicate-definition FIXED, `diversity_f64.wgsl` self-recursion FIXED. (**Wave 155p**)
 - [x] ~~**barraCuda YELLOW**~~ → **GREEN**: PRNG half-range fixed (xoshiro 52→53 bits). Statistical validation harness. -1,488 LOC (LazyLock→const, error helpers). `cpu_mom` remains production HMC path (Box-Muller transcendental polyfill, not PRNG).
-- [x] coralReef: **3,553** tests on biomeGate revalidation, 463 `.expect()` purged, PTX modernized
+- [x] coralReef: **3,525** tests (3,519 pass, 6 HW-gated), VOP3 opcode split (929→523 LOC), WGSL double-parse eliminated, SM20 f64 legalize hardened, compile-path heap allocs eliminated (**Wave 156g**)
 - [x] cellMembrane: **1,281+** tests, **P2 platform detection FIXED** (`d7026d7`), `TargetArch` deprecated → `Platform::detect()`, `validate_with_deps()`, J19+J16+J13 killed, registry API hardened. (**Wave 155n**)
 - [x] rhizoCrypt: 1,900 tests, BTSP→DAG bridge, cross-gate provenance
-- [x] loamSpine: **1,739** tests, registry drift fixed, `--bind` alias
-- [x] sweetGrass: **1,645** tests, G3 E2E validated, **G31 batch pipeline SHIPPED** + concurrent `batch_commit` + trailer pattern alignment. DH-0 clean. (**Wave 156b**)
-- [x] squirrel: **4,613 tests** (consolidated from 7,243 — 34→1 binaries), 90.1% coverage, 0 unsafe, 0 clippy, **`signal.dispatch` WIRED (G18)**, **156b test perf 400s→16s**, build 9.5→4.1 GiB (**Wave 155p→156b**)
+- [x] loamSpine: **1,752** tests, `spine.status` SHIPPED (53 methods, S6 CLEARED), zero unsafe/unwrap/TODO
+- [x] sweetGrass: **1,655** tests (47 methods + 11 aliases), `convergence.check` + `braid.list` SHIPPED (S1/S2/S3 CLEARED). LedgerClient refactor compiles clean. (**Wave 156f**)
+- [x] squirrel: **7,140 tests** (Waves 156e→156j: AIToolsError migration, PrimalType dedup, EcosystemPrimalType→String, port elimination, sync_manager cleanup -546 LOC). 0 unsafe, 0 clippy. **`signal.dispatch` WIRED (G18).** (**Wave 156j**)
 - [x] primalSpring: 197 scenarios, all PASS
 - [x] skunkBat: 9 threat types, ConnectivityAnomaly, frame crypto, PUBLIC
 - [x] **BTSP 13/13** — all primals shipped ClientHello
@@ -556,7 +556,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G54 | Dual-science mid-term convergence | **ACTIVE** | **Track A (NF/GPS — Gonzales/Bin)**: tideGlass rebuilds Cell 2026 paper → NF drug repurposing → CTF NDU grant. **Track B (QCD — Murillo/Chuna)**: hotSpring arXiv Rung 1 → 6-rung lattice QCD program. Both tracks consume barraCuda (GPU math), petalTongue (viz), provenance trio (chains), nestGate (data). Infrastructure evolves toward both simultaneously. |
 | G55 | Provenance batch RPCs (braids at machine speed) | **RESOLVED — 700x** | **217/s on NVMe hot tier** (4-worker convoy). Inline braiding **265/s** (warm). 4-tier storage: RAM ARC (98%) → NVMe (1.7 GB/s) → SSD L2ARC (65.9%) → HDD cold. Primal time ~5ms/file. 11M+ files, ~14h ETA. |
 | G56 | Neural API activation (capability routing everywhere) | **ACTIVE** | All consumers route through biomeOS Neural API (`neural-api-default.sock`) instead of direct primal sockets. footPrint, tideGlass, esotericWebb, all springs. Eliminates hardcoded socket paths. biomeOS routes `content.get`/`content.put`/`visualization.render` etc. via capability discovery. When primals evolve (e.g., nestGate adds `content.query`), consumers get it without rewiring. |
-| G57 | nestgate.io data identity surface | **PHASE 2 — 20 primals, 8/12 sections** | Neural API bridge LIVE. Symlink fix for socket discovery. Tower Atomic architecture view, Neural API routing table, namespace distribution, data braids section. **7 divergences** (NG-01→07). NEXT: `mesh.peers` for gate table, health liveness per primal, CAS content browse. |
+| G57 | nestgate.io data identity surface | **PHASE 2 — 20 primals, 9/12 sections** | Neural API bridge LIVE. **mesh.peers WIRED** (S7 — live songBird UDS query + static fallback). Tower Atomic view, routing table, namespace chart, data braids, **gate mesh table** all functional. **6 divergences remaining** (NG-02→07). NEXT: health liveness per primal (S8/NG-03), CAS content browse. |
 | G58 | Mixed provenance convergence | **ACTIVE** | Promote all westGate data from primordial/CAS-only to fully braided. `is_dataset_converged()` gate for springs. Revalidation running for priority + AlphaFold. All spring-critical data fully braided before Phase 4 boot. |
 | G59 | Three-domain topology (k-derm website separation) | **DNS COMPLETE** | **ALL 3 LAYERS SEPARATED.** primals.eco LIVE (Cloudflare, 14 Caddy routes). nestgate.io LIVE (sovereign Knot DNS, petalTongue mesh). primal.eco SEALED (6 A records removed, dnsmasq-only). DNSSEC verified. Caddyfile version-controlled. Remaining: deploy dnsmasq config, wire nestgate.io content backend (4 DIVs), brand nestgate.io. |
 | G60 | Federated CAS (nestgate.io cross-gate data surface) | **ACTIVE** | nestgate.io as federated CAS front door — hash requests resolve across mesh (westGate data, strandGate compute configs, ironGate consumer data). `content.locate` → songBird mesh broadcast → first-responder-serves. L1 cache on golgi for hot objects. Enables cross-gate data retrieval without knowing which gate holds data. Replication endpoint for reviewers. |
@@ -688,12 +688,12 @@ completeness.
 **Phase shift**: From "wire bridges" to **"enmesh the LAN HPC."** biomeOS Neural API is the routing backbone — all consumers discover primals through it. squirrel agent system is the next unlock: deploy on ironGate, connect petal-bridge, agent panel goes live. strandGate thermalizes SU(N) ladder. westGate convoy running on NVMe. nestgate.io evolves toward live mesh topology and CAS content browse.
 
 **151 files fossilized** across 10 checkpoints (1,472 total records). Active handoffs: 7.
-- **ironGate: PRIMARY DOWNSTREAM HOST.** G18 DISPATCH LIVE (9 providers). 12.7 TB CAS. footPrint **petal-bridge WIRED** (dual-socket WS↔UDS). Auto-load. 708 tests. esotericWebb V31b (484 tests, cell boot). RTX 5070.
-- westGate: **DATA NAS. 3.21 TB / 153 datasets.** **4-tier storage** (NVMe 217/s, inline 265/s). tideGlass **220 tests** (PetalTongueClient ACTIVATED). Convoy running.
-- strandGate: **COMPUTE.** **SU(N) GENERALIZED** (N=2→8, 87-config grid, 652 tests). 16⁴ dual-GPU CONFIRMED. `arxiv_measure_battery` ready. ~2wk thermalization on 64 EPYC threads.
-- **sporeGate: CI + MEMBRANE.** **nestgate.io 20 primals, 8/12 sections.** Neural API bridge. Tower Atomic dashboard. Caddy cleaned.
-- biomeGate: **GPU LAB.** 3 VFIO GPUs. G32 silicon deism.
-- eastGate: **OVERWATCH.** Conjugation architecture established. RustScript extraction queued.
+- **ironGate: PRIMARY DOWNSTREAM HOST.** G18 DISPATCH LIVE (9 providers). 12.7 TB CAS. footPrint petal-bridge WIRED. esotericWebb V31b cell boot. RTX 5070.
+- westGate: **DATA NAS. 3.21 TB / 153 datasets.** 4-tier storage (NVMe 217/s, inline 265/s). tideGlass 220 tests (PetalTongueClient ACTIVATED). Convoy running.
+- strandGate: **COMPUTE.** SU(N) GENERALIZED (N=2→8, 87-config grid, 652 tests). 16⁴ dual-GPU CONFIRMED.
+- **sporeGate: CI + MEMBRANE.** nestgate.io 20 primals, **9/12 sections** (mesh.peers WIRED). sweetGrass convergence.check + braid.list. loamSpine spine.status.
+- biomeGate: **GPU LAB.** toadStool B1/B2 socket perms FIXED. coralReef 3,525 tests (6 evolution commits).
+- eastGate: **OVERWATCH.** squirrel 7,140 tests (deep debt sweep 156e→156j). Conjugation architecture.
 - blueGate: **WINDOWS DEV.** v4.57+ SYNCED. 14/14 HEALTHY. UniBin CLI migration.
 - southGate: **VALIDATION.** v4.57+ re-validated (13/13, Tower 0.15ms, 19 Gbps).
 
@@ -702,15 +702,23 @@ completeness.
 **20 GLACIAL/CONCEPT** (future phases).
 **59 total glacial goals** tracked.
 
-**LAN HPC ENMESHMENT** — current phase:
-- ~~footPrint petal-bridge~~ — **WIRED** (dual-socket WS↔UDS, auto-load, CSP dedup)
-- ~~tideGlass PetalTongueClient~~ — **ACTIVATED** (dead_code removed, viz forwarding live)
-- ~~nestgate.io Neural API bridge~~ — **20 primals, 8/12 sections**
-- **squirrel deploy on ironGate** — petal-bridge routes agent.* but squirrel needs systemd service
-- **tideGlass cell boot on westGate** — CAS client + PetalTongueClient ready, needs `nucleus attach`
-- **nestgate.io mesh.peers + health** — gate table, per-primal liveness
+**DEBT CLEARING + DEPOT READINESS** — current phase:
+- ~~S1: sweetGrass compile fix~~ — **RESOLVED** (LedgerClient clean, 1,655 tests)
+- ~~S2: convergence.check~~ — **SHIPPED** (one-call chain verification + batch_check)
+- ~~S3: braid.list~~ — **SHIPPED** (lightweight enumeration with filters)
+- ~~S6: loamSpine spine.status~~ — **SHIPPED** (53 methods, full-stack wiring)
+- ~~S7: nestgate.io mesh.peers~~ — **SHIPPED** (songBird UDS, fallback, live pill)
+- ~~B1+B2: toadStool socket perms~~ — **FIXED** (0o750 dir, 0o660 socket, cell boot unblocked)
+- ~~O1: nestGate content.ingest~~ — **SHIPPED** (9 tests, eliminates revalidate_data.py)
+- ~~O3: nestGate dataset.convergence~~ — **SHIPPED** (10 tests, trust gate for springs)
+- ~~O4: nestGate dual-path CAS~~ — **SHIPPED** (warm/cold env vars, 7 handlers)
+- ~~O8: nestGate Neural API wiring~~ — **SHIPPED** (5 domains, 6 federation methods, coordinator routing)
+- **E2: squirrel deploy on ironGate** — petal-bridge routes agent.* but squirrel needs systemd service
+- **D1: tideGlass cell boot on westGate** — CAS client + PetalTongueClient ready, needs `nucleus attach`
+- **S8: nestgate.io health liveness** — per-primal liveness query via UDS
 - **SU(N) thermalization** — 87-config grid running, ~2wk
-- westGate federation unblock (nestGate TCP + songBird content capability)
+- westGate federation unblock (O5: nestGate TCP + songBird content capability)
+- **ALL 15 PRIMALS COMPILE CLEAN. DEPOT REBUILD READY.**
 
 ### LIVE SITE ASSESSMENT (Aug 5 PM)
 
@@ -718,7 +726,7 @@ completeness.
 |------|-----|------|-------------|---------------|
 | **sporePrint** | `sporeprint.primals.eco` | 200 | **YES** | Zola static — renders well, claims verifiable, science content accurate |
 | **footPrint** | `footprint.primals.eco` | 200 | **YES (auto-loads)** | `petal-bridge.ts` wired (dual-socket WS↔UDS). `autoLoadDefaultProject()` → map loads on first visit. `SKIP_CSP=1` deduplicates headers. **Remaining**: squirrel UDS socket for agent panel. |
-| **nestgate.io** | `nestgate.io` | 200 | **YES (8/12 sections)** | Neural API bridge LIVE — **20 primals discovered.** Tower Atomic layers, routing table, namespace chart, data braids. **Remaining**: `mesh.peers` for gate table (NG-01), health liveness (NG-03), bearDog routing stub (NG-04). |
+| **nestgate.io** | `nestgate.io` | 200 | **YES (9/12 sections)** | Neural API bridge LIVE — **20 primals discovered.** Tower Atomic layers, routing table, namespace chart, data braids, **gate mesh table** (mesh.peers WIRED via songBird UDS). **Remaining**: health liveness (NG-03), bearDog routing stub (NG-04), CAS content browse. |
 | **esotericWebb** | `webb.primals.eco` | GET 200 / HEAD 502 | **PARTIAL** | HTML served (11,768 B). HEAD method missing in handler (NG-06). Needs petalTongue WebGL pipeline (G19) for live game surface. |
 
 **MID-TERM SCIENCE TRACKS**:
@@ -734,15 +742,14 @@ completeness.
 - **G56: Neural API activation** — route footPrint, tideGlass, esotericWebb, all springs through `neural-api-default.sock`. Eliminate hardcoded socket paths. biomeOS signal graphs already wired for data federation.
 - **G57: nestgate.io** — **PHASE 1 LIVE** (petalTongue mesh). 4 DIVs: content backend, discovery service, port conflict, branding. Phase 2: depot+provenance browser. Phase 3: federated CAS API.
 - **G58: Mixed provenance convergence** — promote primordial → braided for all spring-critical data. `is_dataset_converged()` gate. Revalidation running.
-- **nestGate canonical client crate** — 6 tideGlass CAS divergences (DIV-1→6). groundSpring + airSpring have stale CAS clients. One crate for all.
+- ~~**nestGate canonical client crate (O8)**~~ — **RESOLVED.** Reframed as Neural API wiring — consumers use `capability.call("content", "get", ...)` through coordinator. No primal-specific crate needed. 5 domains, 6 federation methods, MeshRelay transport wired.
 - ~~**biomeOS cell attachment CLI**~~ — **SHIPPED** (`biomeos nucleus attach`, v4.57).
-- **toadStool ExecStart fix** — BLOCKING 9/9 membrane composition.
-- **membrane socket permissions** — root:root → group-writable for `biomeos`.
+- ~~**toadStool ExecStart fix + socket perms (B1+B2)**~~ — **FIXED.** Dir 0o750 (group-traversable), socket 0o660 (group-connectable). Cell boot unblocked on all gates.
 - ~~**footPrint CSP + auto-load**~~ — **RESOLVED.** `petal-bridge.ts` wired. `SKIP_CSP=1`. `autoLoadDefaultProject()`. Remaining: squirrel UDS socket on ironGate.
-- **esotericWebb HEAD method** — GET 200 / HEAD 502. HTTP handler missing HEAD support (NG-06). petalTongue WebGL pipeline still needed for live game surface.
-- ~~**nestgate.io mesh bridge**~~ — **PHASE 2 LIVE.** Neural API bridge discovers 20 primals, 8/12 sections functional. Remaining: `mesh.peers` for gate table (NG-01), health liveness per primal (NG-03), bearDog routing stub (NG-04).
-- **squirrel deploy on ironGate** — petal-bridge routes `agent.*` → squirrel UDS but squirrel process needs to be running. Deploy as systemd service with `squirrel.sock` at canonical path.
-- **nestGate dual-path CAS** — `NESTGATE_HOT_PATH` + `NESTGATE_COLD_PATH` for permanent 2-tier storage. Proposed by westGate convoy AAR.
+- **esotericWebb HEAD method (E3)** — GET 200 / HEAD 502. HTTP handler missing HEAD support (NG-06). petalTongue WebGL pipeline still needed for live game surface.
+- ~~**nestgate.io mesh bridge + mesh.peers (S7)**~~ — **PHASE 2 LIVE.** Neural API bridge discovers 20 primals, **9/12 sections** functional. mesh.peers WIRED (songBird UDS). Remaining: health liveness per primal (S8/NG-03), bearDog routing stub (NG-04).
+- **squirrel deploy on ironGate (E2)** — petal-bridge routes `agent.*` → squirrel UDS but squirrel process needs to be running. Deploy as systemd service with `squirrel.sock` at canonical path.
+- ~~**nestGate dual-path CAS (O4)**~~ — **SHIPPED.** `NESTGATE_WARM_PATHS` + `NESTGATE_COLD_PATHS` for 2-tier. 7 CAS handlers updated. Backward-compatible.
 - ~~arXiv plaquette ×4 normalization~~ — **RESOLVED** (gauge group mismatch SU(2)→SU(3). 12⁴ data paper-ready. Rung 1 UNBLOCKED).
 - ~~squirrel → biomeOS G18 integration~~ — **LIVE on ironGate** (Session 10). 9 providers, cross-primal dispatch validated.
 - Inter-gate content.get live test (songBird probes + nestGate content.fetch ready)
@@ -752,7 +759,7 @@ completeness.
 
 ---
 
-*Last used*: Wave 156e — LAN HPC ENMESHMENT ERA. nestgate.io 20 primals 8/12 live. footPrint petal-bridge WIRED. tideGlass PetalTongueClient ACTIVATED (220 tests). hotSpring SU(N) N=2→8 (87 configs, 652 tests). westGate 4-tier NVMe 217/s (700x). Caddy cleaned. (Aug 5, 2026 PM)
+*Last used*: Wave 156f — DEBT CLEARING + DEPOT READINESS. 10/26 debt items cleared. sweetGrass convergence.check+braid.list. nestGate content.ingest+dataset.convergence+dual-path CAS+Neural API. loamSpine spine.status. toadStool B1/B2 socket perms. petalTongue mesh.peers. coralReef 6 evolution commits. squirrel 7,140 tests (156j debt sweep). 15/15 compile clean. ~140K tests, 15/15 GREEN. (Aug 5, 2026 EVE)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 156e — 8 files to `wave156d_data_flow_activation/` (151 total across 10 checkpoints, 1,472 total records)
