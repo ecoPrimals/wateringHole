@@ -86,23 +86,11 @@ nestGate.storage.retrieve(key) → stream chunks → process
 **Fix**: tideGlass CAS client handles streaming redirect (`use_streaming: true` response).
 Error returned until streaming client is implemented.
 
-### DIV-4: GPS platform data format is NumPy/pickle
+### DIV-4: GPS platform data format is NumPy/pickle — **RESOLVED**
 
-**Problem**: The 8 GPS platform CAS objects contain Python-serialized data (NumPy arrays,
-pickle files inside zip archives: `RCL.zip`, `GPS4Drugs.zip`, `MolSearch.zip`, etc.).
-There is no pure Rust parser for NumPy `.npy` or Python pickle format.
-
-**Impact**: tideGlass cannot directly deserialize GPS platform data from CAS. A conversion
-step is needed: Python script reads the CAS objects, converts to JSON/CSV, and re-ingests
-into CAS in a Rust-parseable format.
-
-**Options**:
-1. Python one-shot converter: read CAS → parse NumPy → write JSON → re-ingest to CAS
-2. Add `npy` crate (pure Rust NumPy reader) — handles `.npy` but not pickle
-3. Store pre-converted JSON alongside original CAS objects with derivation lineage
-
-**Recommended**: Option 3. The converter can stamp `parent_hash` and `derivation_depth`
-to maintain provenance from the original Zenodo archives to the JSON representation.
+**RESOLVED** (Wave 156d): westGate data team ran pickle→JSON converter. 11 JSON outputs
+(103.4 MB) CAS-ingested with BLAKE3 provenance. 2198 genes, MLP weights, RCL ensembles,
+compound matrices. tideGlass now discovers these via `content.query` by pipeline tag.
 
 ### DIV-5: Other primals have stale CAS client code
 
@@ -130,7 +118,7 @@ This is non-trivial (requires maintaining a streaming session across multiple RP
 
 **Documentation/spec assumed**:
 - Sockets in `$XDG_RUNTIME_DIR/biomeos/`
-- Fixed filenames: `neural-api-default.sock`, `nestgate.sock`
+- Fixed filenames: `neural-api-default.sock`, `nestgate.sock` (stale — live uses `neural-api-<family-id>.sock`)
 
 **Actual live NUCLEUS on westGate**:
 - Sockets in `$XDG_RUNTIME_DIR/membrane/`
@@ -180,7 +168,7 @@ Tested tideGlass binary against live 13-primal NUCLEUS on westGate:
 | science.rges_screen | **First live RGES computation**: sorafenib + doxorubicin scored with 10K permutations each |
 
 **CAS store**: 333,695 objects on ZFS (54.9 GB CAS, 2.97 TB data, 47.7 TB free).
-GPS platform data is in CAS but in NumPy/pickle format (DIV-4) — JSON conversion
+GPS platform data converted to JSON and CAS-ingested (DIV-4 RESOLVED) — benchmark
 is the remaining data task before real drug repurposing computation.
 
 ---

@@ -106,7 +106,7 @@ reconciled. Ready for westGate cell boot (pending depot pull).
 ## Phase 4 Blockers (Not tideGlass)
 
 1. **biomeOS cell boot on westGate** — first cell composition deploy
-2. **GPS NumPy/pickle → JSON** — data team conversion task
+2. ~~**GPS NumPy/pickle → JSON**~~ — **DONE** (11 JSON files, 103 MB, CAS-ingested)
 3. **Chen 2017 benchmark** — RGES correlation target r >= 0.52 (needs converted data)
 4. **Provenance write chain** — rhizoCrypt → loamSpine → sweetGrass (needs NUCLEUS primals)
 
@@ -117,4 +117,4 @@ reconciled. Ready for westGate cell boot (pending depot pull).
 - **biomeOS team**: Document canonical socket layout (`membrane/` vs `biomeos/`, family-ID naming) (DIV-7)
 - **nestGate team**: Canonical Rust CAS client crate for ecosystem (DIV-5)
 - **biomeOS**: Review `tideglass_cell.toml` for live cell boot
-- **westGate data team**: GPS NumPy/pickle → JSON conversion priority (DIV-4)
+- ~~**westGate data team**: GPS NumPy/pickle → JSON conversion~~ — **DONE** (DIV-4 RESOLVED)
