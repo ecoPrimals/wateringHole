@@ -142,10 +142,10 @@ systemd active on ironGate. CAS E2E verified (TCP local-trust). 708 tests. Agent
 
 | Component | Status | Next |
 |-----------|--------|------|
-| **tideGlass** | 177 tests. 9 crates. Live NUCLEUS on westGate. **GPS data CONVERTED** (11 JSON, 103 MB). | `nucleus attach` on westGate (v4.57 DEPLOYED). Chen 2017 benchmark. |
+| **tideGlass** | **214 tests.** 9 crates. 17 IPC methods. Live NUCLEUS on westGate. **GPS data CONVERTED** (11 JSON, 103 MB). `content.query` WIRED. 5 P0 viz scenes. | `nucleus attach` on westGate. Chen 2017 benchmark. |
 | **footPrint** | **PHASE 2 DEPLOYED on ironGate.** 708 tests. CAS E2E. Agent bridge. | golgi Caddy routing. GPS viz integration. |
 | **westGate data** | 3.21 TB / 153 datasets. GPS JSON in CAS. 135 GB CAS pool. **Convergence**: 0 CONVERGED, 89 PARTIAL, 32 PRIMORDIAL. | Batch provenance campaign. |
-| **nestGate** | **`content.query` SHIPPED.** nestgate.io content backend wired. | Wire into tideGlass for GPS metadata search. |
+| **nestGate** | **`content.query` SHIPPED.** nestgate.io content backend wired. | tideGlass `content.query` **WIRED** — metadata search operational. |
 | **Provenance trio** | 7/7. Loop CLOSED. 122× improvement. | Bulk convergence campaign across 153 datasets. |
 
 ### Track B: Lattice QCD on Consumer GPUs (Murillo / Chuna)
