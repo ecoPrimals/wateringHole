@@ -1,6 +1,6 @@
 # ironGate Local Overwatch — Code Team Blurb
 
-**Date**: 2026-08-05 08:30 EDT (Session 12 — NUCLEUS Storage LIVE)
+**Date**: 2026-08-05 09:30 EDT (Session 13 — Data Flow Wiring)
 **Gate**: ironGate (10.13.37.7) — PRIMARY DOWNSTREAM HOST
 **Wave**: 156d
 **Audience**: esotericWebb code team + footPrint code team (parallel IDE sessions)
@@ -13,6 +13,7 @@
 ironGate is running **full NUCLEUS v4.57+** with **live CAS on 12.7 TB ext4**.
 nestGate v0.5.0 running with BLAKE3 content-addressed storage.
 9 cross-primal providers registered. songBird federation to westGate configured.
+**footPrint → squirrel bridge WIRED.** petalTongue scene passthrough LIVE.
 
 ```
 biomeOS:        v4.57.0 (nucleus attach SHIPPED)
@@ -23,9 +24,9 @@ PROVIDERS:      9 registered (rhizoCrypt, bearDog, nestGate, nestGate-tcp,
                 petalTongue, sweetGrass, loamSpine, toadStool, songBird)
 SONGBIRD:       v0.2.1 — federation ENABLED, 1 peer (westGate LAN)
 NUCLEUS:        v4.57 Neural API on /run/user/1000/membrane/
-SOCKETS:        4 membrane + 29 biomeos
+SOCKETS:        4 membrane + 27 biomeos
 GPU:            RTX 5070 / 12 GB / CUDA 12.8
-RAM:            94 GB DDR5 (81 GB available)
+RAM:            94 GB DDR5 (78 GB available)
 CPU:            i9-14900K (24c/32t)
 Disk (NVMe):    3.3 TB available of 3.6 TB
 Disk (CAS):     12 TB available of 12.7 TB ext4 (/mnt/nestgate)
@@ -33,17 +34,15 @@ Rust:           1.96.0
 Node.js:        22.23.2
 ```
 
-### What Changed Since Session 10
+### What Changed Since Session 12
 
-- **12.7 TB CAS disk mounted** — `/dev/sdc1` at `/mnt/nestgate`, fstab persistent
-- **nestGate v0.5.0 running** — UDS + TCP (SO_PEERCRED local-trust on port 8080)
-- **CAS write/read roundtrip proven** — BLAKE3 content.put → content.get
-- **footPrint CAS E2E validated** — `createNeuralApiClient()` → TCP:8080 → nestGate
-- **esotericWebb nest.store decomposition validated** — content.put + dag.event.append
-- **songBird federation configured** — westGate reachable on LAN, federation enabled
-- **9 providers** — nestGate (UDS + TCP) and songBird added to squirrel
-- **Cell graphs updated** — both include `verify_nestgate` preflight
-- **biomeos doctor** — 4/4 healthy including nestGate
+- **footPrint → squirrel bridge WIRED** — petal-bridge.ts routes `agent.*` to
+  squirrel UDS, `visualization.*` to petalTongue UDS. 708 tests PASS.
+- **tideGlass PetalTongueClient ACTIVATED** — dead_code removed, client created
+  from discovery, dispatch loop forwards viz scenes to petalTongue. 83 tests PASS.
+- **petalTongue scene passthrough ADDED** — handle_render_scene now accepts both
+  SceneGraph and declarative `{ scene, data, format }` from springs. Build clean.
+- **tideGlass cloned** — `springs/tideGlass/` from protoKarya/tideGlass on golgiBody
 
 ---
 
@@ -70,59 +69,20 @@ gardens/esotericWebb/
 - **Live composition**: exp006 19/22 PASS, 0 fail, 3 skip (socket migration)
 - **G19**: petalTongue scene push FIRING on ironGate
 
-### NEW: G18 Signal Dispatch Is Available
+### What's New for You (Session 13)
 
-Your `PrimalBridge` already has `signal_plan()` (line 196 in `domains.rs`). It
-calls `signal.plan` on the squirrel socket. **This is now live on ironGate.**
+**petalTongue now accepts your scene JSON directly.** The `visualization.render.scene`
+handler has passthrough mode for declarative `{ "scene": "...", "data": {...} }` format.
+No need to convert to full SceneGraph — your scene push via cell graph will land.
 
-**What you can do now:**
-
-1. **Wire `signal_plan` into the enrichment pipeline** — have squirrel decompose
-   player intent into atomic session actions:
-
-   ```rust
-   let tools = vec![
-       ToolDef {
-           name: "session.act".into(),
-           description: "Perform a player action".into(),
-           parameters: serde_json::json!({"type":"object","properties":{"kind":{"type":"string"},"id":{"type":"string"}}}),
-       },
-   ];
-   let plan = bridge.signal_plan("Player wants to explore the forest", &tools)?;
-   ```
-
-2. **Use `signal.dispatch` for cross-primal orchestration** — dispatch to any
-   registered provider through squirrel:
-   - `dag.session.create` → rhizoCrypt (provenance)
-   - `crypto.hash` → bearDog (content hashing)
-   - `braid.create` → sweetGrass (attribution)
-   - `cert.mint` → loamSpine (certificates)
-
-3. **LLM provider needed for AI features** — `ai.query`, `ai.narrate`,
-   `signal.plan` all need an `AI_PROVIDER_SOCKETS` config pointing to an LLM.
-   Without one, these degrade gracefully. To activate:
-   ```bash
-   export AI_PROVIDER_SOCKETS="http://localhost:11434"  # e.g. Ollama
-   ```
-
-### NEW: Live CAS Is Available
-
-nestGate is running with 12.7 TB backing. Your `nest_store` signal (line 652 in
-`domains.rs`) now has a **real CAS** behind it. Session provenance gets real persistence.
-
-**What's changed for you:**
-
-1. **`nest_store` fires to live CAS** — content.put stores BLAKE3-addressed blobs
-   on the 12.7 TB disk. No more in-memory only.
-2. **DAG provenance tracks content hashes** — `dag.event.append` with `DataCreate`
-   links to CAS hashes, creating a full provenance chain.
-3. **TCP local-trust (port 8080)** bypasses BTSP — same-gate services don't need
-   bearDog auth. UDS still requires BTSP for cross-gate calls.
+Scenes submitted with declarative format get stored with `label: "spring:<slug>"` and
+the raw data as `data_source` on the root node. The render pipeline can inspect this
+for scene-specific rendering.
 
 ### Your Priority
 
-**Phase 1 DONE, G18 DONE, CAS LIVE.** Next steps:
-1. Test `nest_store` with real session data (session provenance → CAS → DAG)
+**Phase 1 DONE, G18 DONE, CAS LIVE, passthrough LIVE.** Next steps:
+1. Test scene push with declarative format to petalTongue
 2. Wire `signal_plan` into enrichment pipeline
 3. Explore LLM provider setup for live AI narration
 4. Continue game content iteration
@@ -139,6 +99,7 @@ gardens/footPrint/
 │   ├── agent/       # Agent bridge (server-bridge.ts, protocol.ts)
 │   ├── rustscript/  # Rust safety primitives
 │   ├── core/        # Store, renderer, solver, constraints
+│   ├── petal-bridge.ts   # NEW: dual-socket relay (squirrel + petalTongue)
 │   └── server.ts    # Express server + WebSocket bridge + agent API
 ├── projects/        # GeoJSON project data
 ├── deploy/          # systemd unit + Caddy snippet + README
@@ -148,64 +109,43 @@ gardens/footPrint/
 ### Current State
 
 - **Tests**: **708 PASS** (53 test files, vitest 4.1.10, 1.04s)
-- **Server**: LIVE on :3002 (`status: ok, version: 2.0.0`, uptime: 2h+)
-- **Agent bridge**: WebSocket at `/ws/bridge` — READY, `agentConnected: false`
+- **Server**: LIVE on :3002 (`status: ok, version: 2.0.0`)
+- **Agent bridge**: WebSocket at `/ws/bridge` — READY
 - **HEAD**: `a498566`
 
-### NEW: Squirrel Dispatch Infrastructure Is Ready
+### What's New for You (Session 13)
 
-The squirrel G18 dispatch is live on ironGate. Your agent bridge protocol
-(JSON-RPC 2.0 over WebSocket) is already defined in `src/agent/protocol.ts`.
+**petal-bridge.ts now routes `agent.*` methods to squirrel.** The bridge connects
+two UDS sockets simultaneously:
 
-**What you need to wire:**
+| Method prefix | Target | Socket |
+|---------------|--------|--------|
+| `agent.*`, `bridge.*` | squirrel | `/run/user/1000/biomeos/squirrel.sock` |
+| everything else | petalTongue | `/run/membrane/petaltongue.sock` |
 
-1. **Connect squirrel to the agent bridge** — squirrel needs a WebSocket client
-   that connects to `ws://localhost:3002/ws/bridge` and can issue `project.command`
-   requests:
+Method translation:
+- `agent.query` / `agent.stream` → squirrel `ai.query`
+- `agent.cancel` → squirrel `ai.cancel`
+- `agent.status` → squirrel `health.check`
+- `agent.capabilities` → squirrel `capabilities.list`
 
-   ```typescript
-   // From squirrel's perspective (or a footPrint agent adapter):
-   const ws = new WebSocket('ws://localhost:3002/ws/bridge');
-   ws.send(JSON.stringify({
-     jsonrpc: '2.0',
-     method: 'project.command',
-     params: { payload: { action: 'add-entity', kind: 'point', ... } },
-     id: 1,
-   }));
-   ```
+**The agent panel chat now reaches squirrel.** When the browser connects to `/ws`
+and sends `agent.query`, it goes through Express → petal-bridge → squirrel UDS.
+Squirrel responds with a valid JSON-RPC response.
 
-2. **Signal dispatch path** — footPrint can use squirrel's `signal.dispatch`
-   for cross-primal calls via UDS:
-
-   ```bash
-   echo '{"jsonrpc":"2.0","method":"signal.dispatch","params":{"signal":"content.query","params":{"query":"GPS NF1"}},"id":1}' | \
-     socat - UNIX-CONNECT:/run/user/1000/biomeos/squirrel.sock
-   ```
-
-3. **Available providers via squirrel**:
-   - `content.query` → nestGate (GPS metadata search)
-   - `crypto.hash` → bearDog (BLAKE3 hashing)
-   - `dag.event.append` → rhizoCrypt (provenance)
-   - `compute.submit` → toadStool (GPU compute)
-
-### NEW: Live CAS Is Available
-
-nestGate is running on `TCP localhost:8080` with SO_PEERCRED local-trust. Your
-`createNeuralApiClient()` defaults to this — **zero config, it just works.**
-
-**Proven E2E**: `contentPut({family:'9b32f3a8', content_base64:...})` → stored → 
-`contentGet({hash:..., family:'9b32f3a8'})` → retrieved. Data on 12.7 TB disk.
-
-**westGate federation**: songBird configured, LAN reachable. When westGate
-exposes its nestGate TCP, `content.replicate.pull` will pull GPS datasets.
+**LLM backend needed for real AI responses.** Without `AI_PROVIDER_SOCKETS`, squirrel
+returns "No providers available". To activate:
+```bash
+export AI_PROVIDER_SOCKETS="http://localhost:11434"  # e.g. Ollama
+```
 
 ### Your Priority
 
-**Phase 2 DEPLOYED, CAS LIVE, federation CONFIGURED.** Next steps:
-1. Wire CAS persistence into project save/load (content.put for GeoJSON)
-2. Wire a squirrel → agent bridge connector (WebSocket client)
-3. Test `content.query` dispatch for GPS dataset discovery from westGate
-4. Remaining: golgi Caddy routing for public HTTPS (`footprint.primals.eco`)
+**Phase 2 DEPLOYED, squirrel bridge WIRED, CAS LIVE.** Next steps:
+1. Restart footPrint server to pick up petal-bridge changes
+2. Test agent panel in browser — status dot should turn green when squirrel connects
+3. Wire CAS persistence into project save/load
+4. Set up LLM provider for live AI agent responses
 
 ### Remaining Blockers
 
@@ -214,9 +154,10 @@ exposes its nestGate TCP, `content.replicate.pull` will pull GPS datasets.
 | ~~BTSP local-trust~~ | ~~SO_PEERCRED for CAS write~~ | — | **CLEARED** (rhizoCrypt G63) |
 | ~~G18 dispatch~~ | ~~Signal dispatch infra~~ | — | **CLEARED** (Session 10) |
 | ~~CAS not running~~ | ~~nestGate not started~~ | — | **CLEARED** (Session 12) |
-| Caddy routing | DNS + reverse proxy for `footprint.primals.eco` | sporeGate | **PENDING** |
+| ~~squirrel→bridge~~ | ~~petal-bridge squirrel routing~~ | — | **CLEARED** (Session 13) |
+| petalTongue UDS | petalTongue needs live/server mode for UDS | hw team | **PENDING** |
 | westGate federation | nestGate TCP + content capability | westGate hw | **BLOCKED** |
-| Squirrel→bridge connector | WebSocket client from squirrel to footPrint | footPrint team | Next code task |
+| LLM provider | AI_PROVIDER_SOCKETS for squirrel | footPrint team | Next code task |
 
 ---
 
@@ -227,5 +168,6 @@ exposes its nestGate TCP, `content.replicate.pull` will pull GPS datasets.
 | Session 8 | FIRST CELL BOOT — esotericWebb attached to NUCLEUS |
 | Session 9 | Depot sync validated, 6/8 blockers cleared |
 | Session 10 | G18 signal dispatch LIVE — 7 providers, cross-primal dispatch |
-| Session 12 (now) | **NUCLEUS STORAGE LIVE** — 12.7 TB CAS, federation configured |
-| Next | Code teams wire CAS persistence + signal.plan |
+| Session 12 | NUCLEUS STORAGE LIVE — 12.7 TB CAS, federation configured |
+| Session 13 (now) | **DATA FLOW WIRING** — squirrel bridge, tideGlass→petalTongue, passthrough |
+| Next | Code teams restart server, test agent panel, wire CAS persistence |
