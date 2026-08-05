@@ -152,6 +152,26 @@ Four workers hit **145/s** combined — the remaining limit is spinning disk I/O
   events. Worth monitoring but not blocking — it doesn't affect per-file
   throughput since the canonical pipeline doesn't call loamSpine per-file.
 
+### Inline Braid — New Default Pattern (Aug 5, 2026)
+
+Validated that inline Python blake3 produces identical CAS content addresses
+to trailer b3sum (`deduplicated=True` on all 5 test files). Trailer and
+inline are provably equivalent at the CAS and DAG layers.
+
+**New module**: `prov_inline.py` — `InlineBraid` class. Any download script
+imports it and calls `braid.ingest(data, filename)` from the download buffer.
+Native socket RPC, in-process BLAKE3, single file read for hash + CAS.
+
+**Wired into**: `manifest_download.py` — now uses `InlineBraid` instead of
+separate `blake3_hash` → `cas_put` → `dag_event_append` calls via socat.
+4-step pipeline collapsed to `braid.ingest_file(path)`.
+
+| Pattern | Per-file overhead | Rate | When to use |
+|---------|-------------------|------|-------------|
+| **Inline** (prov_inline.py) | 3.5ms (native socket) | 265/s | Default for all new downloads |
+| **Convoy** (alphafold_prov_convoy.py) | 3.5ms + cold read | 32/s/worker | Retrospective bulk braiding |
+| **Socat trailer** (alphafold_prov_trailer.py) | ~26ms (subprocess) | 38/s | Legacy, superseded |
+
 ### Convoy Balance Plan
 Once the 7.9M backlog clears (~15h), restart the AlphaFold downloader.
 A single native-socket trailer at 265/s will outpace downloads at 74/s
