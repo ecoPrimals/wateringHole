@@ -1,7 +1,7 @@
-# sporePrint Blurb — Phase 1 Cell Boot Era
+# sporePrint Blurb — Data Flow Activation Era
 
-**Date**: Aug 4, 2026 PM | **Wave**: 155v/156d | **From**: eastGate overwatch
-**Posture**: biomeOS v4.57 `nucleus attach` SHIPPED — ironGate Phase 1 cell boot UNBLOCKED. K-Derm DNS COMPLETE (3/3 separated). nestgate.io LIVE. 519 GB / 130+ datasets. 338 pages, 11 gates, 135K+ tests, 13/13 GREEN.
+**Date**: Aug 5, 2026 AM | **Wave**: 156d | **From**: eastGate overwatch
+**Posture**: G18 signal dispatch LIVE on ironGate. Phase 1 cell boot SUCCEEDED. footPrint Phase 2 DEPLOYED. All 6 NUCLEUS gates v4.57+. 3.21 TB / 153 datasets. Convoy at 145/s. 16⁴ dual-GPU data COMPLETE. 338 pages, 11 gates, 135K+ tests, 13/13 GREEN.
 
 ---
 
@@ -9,31 +9,30 @@
 
 | Event | Status |
 |-------|--------|
-| **biomeOS v4.57** | `nucleus attach` CLI — first-ever cell boot mechanism |
-| **esotericWebb V30d** | 482 tests, exp006 22/22 PASS on ironGate, signed provenance |
-| **footPrint 628 tests** | Manifest-driven sources, riboCipher wired, Phase 2 DEPLOY READY |
-| **Provenance loop CLOSED** | 122× throughput improvement, bearDog sig in braid, trailer at 37.6/s |
-| **arXiv UNBLOCKED** | Plaquette normalization RESOLVED. 12⁴ paper-ready. 16⁴ running. |
-| **K-Derm DNS COMPLETE** | 3/3 layers separated. primal.eco sealed. DNSSEC verified. |
-| **nestgate.io LIVE** | petalTongue v1.7.0 via sporeGate NUCLEUS + WG mesh |
-| **14 Caddy subsites** | golgi wildcard `*.primals.eco` — sporeGate owns routing |
-| **songBird drawbridge** | 22 bonds. Inter-gate content.get dispatch validated. |
-| **barraCuda MultiDevicePool** | 4,959 tests. Cross-vendor. `device.pool` IPC (99th method). |
+| **G18 SIGNAL DISPATCH LIVE** | ironGate, 9 providers, cross-primal routing validated |
+| **Phase 1 cell boot SUCCEEDED** | First-ever cell attachment (esotericWebb V31b, 484 tests) |
+| **footPrint Phase 2 DEPLOYED** | 708 tests, CAS E2E, golgi Caddy routing DONE |
+| **ironGate NUCLEUS storage** | 12.7 TB CAS, nestGate v0.5.0, songBird federation |
+| **All 6 NUCLEUS gates v4.57+** | 52/52 harvest complete |
+| **16⁴ dual-GPU data COMPLETE** | +0.01% at β=6.0, 6 ppm cross-vendor, reviewer rubric (42 items) |
+| **Convoy provenance 145/s** | 460× total. CAS pool 452 GB. Disk I/O sole bottleneck. |
+| **tideGlass 214 tests** | 17 IPC methods, GPS converted, content.query wired |
+| **nestGate `content.query` SHIPPED** | ZFS REST, nestgate.io content backend |
+| **rhizoCrypt G63 SO_PEERCRED** | CAS local-trust for Phase 2 |
+| **3.21 TB / 153 datasets** | westGate ZFS (was 519 GB / 130) |
 
 ---
 
-## CRITICAL PATH: ironGate Phase 1 Cell Boot
+## CRITICAL PATH: Data Flow Activation
 
 ```
-biomeos nucleus attach --cell esotericwebb_cell.toml  (on ironGate)
-    ↓  First-ever live cell composition boot
-squirrel G18 signal dispatch with real consumers
+tideGlass cell boot on westGate (GPS data converted, 214 tests)
     ↓
-petalTongue G19 live render on RTX 5070
+footPrint → squirrel wiring (G18 dispatch LIVE, agent bridge exists)
     ↓
-footPrint Phase 2 deploy (628 tests, Caddy routing)
+westGate federation unblock (nestGate TCP + songBird capability)
     ↓
-westGate science springs (tideGlass, groundSpring, airSpring — no mesh)
+petalTongue viz pipeline (5 tideGlass scenes, footPrint map overlays)
     ↓
 Inter-gate mesh validation (songBird content.get E2E)
 ```
@@ -42,16 +41,11 @@ Inter-gate mesh validation (songBird content.get E2E)
 
 | Page | Reflects |
 |------|----------|
-| **Homepage** | 135K+ tests, cell attach SHIPPED, nestgate.io LIVE |
-| **Gate Status** | Phase 1 UNBLOCKED, 14 subsites, 26/27 HEALTHY |
-| **Data Braids** | 519 GB / 130+ datasets, 22 braids across 13 domains |
-| **llms.txt** | Phase 1 UNBLOCKED, 14 Caddy subsites |
-
----
-
-## DATA BRAIDS — `/data/` (v3)
-
-519 GB across 130+ datasets in 17+ science domains. Inline W3C PROV-O JSON-LD braids on every dataset entry. Transplant page for PIs. 3 upgraded domain pages. nestgate.io as future data identity surface.
+| **Homepage** | 3.21 TB, G18 dispatch LIVE, Phase 1 SUCCEEDED, convoy 145/s |
+| **Gate Status** | Full fleet table, phase execution status, live sites |
+| **Data Braids** | 3.21 TB / 153 datasets, inline provenance braids |
+| **hotSpring QCD** | 16⁴ dual-GPU COMPLETE, reviewer rubric, config cache |
+| **llms.txt** | Data Flow Activation Era, all new metrics |
 
 ---
 
@@ -59,15 +53,14 @@ Inter-gate mesh validation (songBird content.get E2E)
 
 | Task | Owner | Priority |
 |------|-------|----------|
-| **Phase 1 cell boot on ironGate** | biomeOS/ironGate | **CRITICAL** — next action |
-| **nestgate.io content backend** | sporeGate | **HIGH** — 4 DIVs |
-| **dnsmasq deploy** | sporeGate | HIGH |
-| **Inter-gate content.get E2E** | songBird/nestGate | HIGH |
-| **footPrint Caddy routing** | sporeGate/ironGate | MEDIUM |
-| **Rung 1 production campaign** | hotSpring/strandGate | MEDIUM |
-| **Compute config caching** | hotSpring/strandGate | MEDIUM |
-| **tideGlass GPS JSON conversion** | westGate | MEDIUM |
+| **tideGlass cell boot** | westGate | **CRITICAL** — next action |
+| **footPrint → squirrel wiring** | ironGate | **HIGH** |
+| **westGate federation unblock** | westGate/songBird | HIGH |
+| **petalTongue viz scenes** | ironGate/petalTongue | HIGH |
+| **arXiv rubric MUST-fix items** | strandGate/hotSpring | HIGH — 12 MUST-fix |
+| **RustScript extraction** | eastGate | MEDIUM |
+| **Convoy convergence** | westGate | MEDIUM — 7.9M files, ~15h |
 
 ---
 
-*Phase 1 cell boot era. biomeOS `nucleus attach` SHIPPED. All blockers cleared for first live cell composition on ironGate. 338 pages, 11 gates, zero P0/P1/P2. Site current at Wave 155v/156d.*
+*Data Flow Activation Era. Infrastructure deployed. Data flows need activation. 338 pages, 11 gates, zero P0/P1/P2. Site current at Wave 156d.*
