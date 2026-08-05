@@ -551,7 +551,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G50 | initioChem pseudoSpore (ABG track) | ACTIVE | Whole-cell expression artifact |
 | G51 | Inkfish/Valve marine collaboration | CONCEPT | Marine genomics, coral holobiont science |
 | G52 | blueFish PFAS QC (Jones track) | GLACIAL | EPA 1633A open PFAS QC |
-| G53 | petalTongue maturation via downstream consumers | **ACTIVE** | footPrint (GIS/Leaflet) + esotericWebb (game/WebGL) on ironGate evolve petalTongue G19 live render → mature visualization becomes GPS viz for tideGlass NF (G37) + QCD viz for hotSpring (G45). **Support structures feed science.** |
+| G53 | petalTongue maturation via downstream consumers | **ACTIVE** | footPrint (GIS/Leaflet) + esotericWebb (game/WebGL) on ironGate evolve petalTongue G19 live render → mature visualization becomes GPS viz for tideGlass NF (G37) + QCD viz for hotSpring (G45). **Conjugation architecture**: RustScript (`@protokarya/rustscript`) is the TypeScript conjugation layer, not scaffolding — 11 modules encoding Rust safety patterns (Result, Option, Owned, RefCell, Iter, Brand, Channel) for browser/TS-native targets. petalTongue owns render; RustScript conjugates safety across the language boundary. |
 | G54 | Dual-science mid-term convergence | **ACTIVE** | **Track A (NF/GPS — Gonzales/Bin)**: tideGlass rebuilds Cell 2026 paper → NF drug repurposing → CTF NDU grant. **Track B (QCD — Murillo/Chuna)**: hotSpring arXiv Rung 1 → 6-rung lattice QCD program. Both tracks consume barraCuda (GPU math), petalTongue (viz), provenance trio (chains), nestGate (data). Infrastructure evolves toward both simultaneously. |
 | G55 | Provenance batch RPCs (braids at machine speed) | **LARGELY RESOLVED** | `dag.event.append_batch` LIVE (200/batch, rhizoCrypt). Per-file spine entries REMOVED (canonical architecture alignment — 122× improvement). Trailer at 37.6/s sustained. Gap narrowed to 2× (vs 247× before). bearDog signature wired into sweetGrass braid — provenance loop CLOSED. Remaining: `spine.entry.batch` for future edge cases. |
 | G56 | Neural API activation (capability routing everywhere) | **ACTIVE** | All consumers route through biomeOS Neural API (`neural-api-default.sock`) instead of direct primal sockets. footPrint, tideGlass, esotericWebb, all springs. Eliminates hardcoded socket paths. biomeOS routes `content.get`/`content.put`/`visualization.render` etc. via capability discovery. When primals evolve (e.g., nestGate adds `content.query`), consumers get it without rewiring. |
@@ -731,7 +731,7 @@ completeness.
 - ~~arXiv plaquette ×4 normalization~~ — **RESOLVED** (gauge group mismatch SU(2)→SU(3). 12⁴ data paper-ready. Rung 1 UNBLOCKED).
 - ~~squirrel → biomeOS G18 integration~~ — **LIVE on ironGate** (Session 10). 9 providers, cross-primal dispatch validated.
 - Inter-gate content.get live test (songBird probes + nestGate content.fetch ready)
-- petalTongue WebGPU/wgpu evolution (G53 maturation)
+- petalTongue WebGPU/wgpu evolution (G53 maturation) — conjugation layer (RustScript) established, petalTongue render pipeline is the remaining gap
 - ~~barraCuda PRNG validation~~ — **FIXED** (YELLOW→GREEN, statistical validation harness)
 - ~~BTSP transport signal documentation~~ — SHIPPED
 
