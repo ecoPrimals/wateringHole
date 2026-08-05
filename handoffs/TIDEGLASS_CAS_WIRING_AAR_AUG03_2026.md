@@ -24,7 +24,12 @@ metadata search (DIV-2 RESOLVED). GPS data CONVERTED by westGate team (11 JSON f
 `const fn -> None` to live `query_dataset_hash()` using `content.query` by pipeline tag.
 5 P0 visualization scenes wired via petalTongue IPC client.
 
-**214 tests passing. Clippy pedantic+nursery clean. All quality gates green.**
+**220 tests passing. Clippy pedantic+nursery clean. All quality gates green.**
+
+**Aug 5 update (Wave 156d)**: `PetalTongueClient` activated — instantiated at startup
+when socket discovered, viz scenes forwarded to petalTongue via `render_scene()`.
+`ServerContext` replaces separate `Arc<ModuleData>`. Server extracts method name and
+fire-and-forget forwards viz results. Cell graph updated for westGate 3.21 TB / 452 GB CAS.
 
 ---
 

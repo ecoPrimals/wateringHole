@@ -13,7 +13,7 @@
 Full Rust rebuild of tideGlass from Phase 0 doc scaffold to Phase 4
 production-ready UniBin. Seven science modules implemented as library crates
 composing into a single `tideglass` binary with UDS JSON-RPC 2.0 server.
-214 tests, zero clippy warnings, zero TODOs. G56 Neural API routing
+220 tests, zero clippy warnings, zero TODOs. G56 Neural API routing
 with direct fallback. **Validated against live 13-primal NUCLEUS on westGate** —
 first RGES computation executed on live hardware (333K CAS objects, 54.9 GB). Provenance convergence gate
 for mixed-state data on westGate. CAS wiring live with graceful degradation.
