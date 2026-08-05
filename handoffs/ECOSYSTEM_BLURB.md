@@ -16,6 +16,7 @@
 | **petalTongue S7 CLEARED** | overwatch | `mesh.peers` handler now queries songBird at `/run/membrane/songbird.sock` via JSON-RPC. Falls back to static manifest when UDS unavailable. Dashboard shows "songBird live" pill, peer address, priority, transport type. |
 | **coralReef 6 COMMITS** | biomeGate | VOP3 opcode split (929→523 LOC). Compile-path heap alloc elimination. SM20 f64 legalize tests hardened. WGSL double-parse eliminated for emit_spirv. Registry drift + fossil cleanup. **3,525 tests (3,519 pass, 6 ignored HW-gated).** |
 | **squirrel DEEP DEBT SWEEP** | eastGate | Waves 156e→156j: `AIError` → `AIToolsError` migration. `PrimalType` dedup. Hardcoded port elimination. `EcosystemPrimalType` → String migration (9 fields across 5 files). `sync_manager_tests.rs` deleted (546 lines). Context quality improvements (Copy derives, clone elimination). **7,140 tests (handoff) / 6,269 unique (measured).** |
+| **AKD1000 NPU ONLINE** | strandGate | VFIO bound (IOMMU group 92), pure Rust, 80 NPs, 10 MB SRAM. toadStool ← rustChip synced (7,755 lines, 9 new modules absorbed upstream). metalForge 42/42 revalidated (zero Python). `sun_npu_monitor`: SU(N) phase classification at 66 µs/sample on AKD1000 hardware. **AAR**: `AKIDA_NPU_EXPLORATION_AAR_AUG05_2026.md` |
 
 ---
 
@@ -26,7 +27,7 @@
 | **sporeGate** | **14/14 v4.57+** | **BUILD AUTHORITY — FRESH** | Sovereign CI. 52/52 harvest complete. LAN-first Tower (4 local, 1ms). |
 | **ironGate** | **10/10 v4.57+** | **CURRENT** | **G18 DISPATCH LIVE (9 providers). NUCLEUS storage 12.7 TB CAS. songBird federation to westGate.** 708 tests. |
 | **westGate** | **14/14 v4.57** | **SOURCE-BUILT** | GPS data converted. Convergence sweep complete. `nucleus attach` ready. |
-| **strandGate** | **v4.57+ (restart deferred)** | **CURRENT** | GPU at 100% QCD production. Config cache COMPLETE (9/10, 325 MB). Dual-GPU scan LAUNCHED. |
+| **strandGate** | **v4.57+ (restart deferred)** | **CURRENT** | GPU at 100% QCD production. Config cache COMPLETE. Dual-GPU scan LAUNCHED. **AKD1000 NPU ONLINE** (VFIO, 97% phase accuracy, 66 µs). toadStool ← rustChip synced. |
 | **blueGate** | **14/14 v4.57+** | **CURRENT** | Depot sync done. UniBin CLI migration documented. |
 | **southGate** | **13/13 v4.57+** | **CURRENT** | Re-validated after 97h uptime. Tower 0.15ms avg, 19 Gbps. RTX 4060 Vulkan healthy. |
 | **biomeGate** | Source-built compute | — | GPU lab. Not full NUCLEUS. |
