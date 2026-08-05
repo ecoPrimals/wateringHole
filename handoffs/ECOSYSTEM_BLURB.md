@@ -106,9 +106,9 @@ systemd active on ironGate. CAS E2E verified (TCP local-trust). 708 tests. Agent
 | **EMPTY** | 21 | 0 | Placeholders |
 | **Not scanned** | 6 | ~70 GB | Sweep timeout |
 
-**ZFS**: 3.21 TB used / 50.7 TB pool (6.3%). CAS pool: 135 GB.
+**ZFS**: 3.21 TB used / 50.7 TB pool (6.3%). CAS pool: **452 GB** (convoy at 145/s).
 
-**Key**: 0 datasets at CONVERGED. Canonical pipeline proven (43/s) but not run at bulk. Priority: batch the 89 PARTIAL first (smallest datasets), then CAS-ingest 32 PRIMORDIAL.
+**Key**: 0 datasets at CONVERGED. Convoy ACTIVE (145/s, ~15h ETA for 7.9M remaining files). Priority: batch the 89 PARTIAL first (smallest datasets), then CAS-ingest 32 PRIMORDIAL.
 
 ---
 
@@ -251,4 +251,4 @@ The infrastructure is deployed. Data flows need to be turned on. petalTongue nee
 
 *Wave 156d — **Data Flow Activation Era.** Infrastructure deployed across all 6 NUCLEUS gates. G18 signal dispatch LIVE (9 providers). ironGate 12.7 TB CAS + westGate 452 GB CAS. Convoy at 145/s (460x). 16⁴ dual-GPU data COMPLETE (6 ppm, +0.01%). Reviewer rubric 42 items. **Next phase**: activate data flows (tideGlass cell boot, footPrint→squirrel, federation unblock), wire petalTongue as visualization layer (5 tideGlass scenes, footPrint map overlays), establish RustScript as the conjugation layer (`@protokarya/rustscript` → `@protokarya/petaltongue-client`). footPrint evolved from TS exploration to primal evolution target; RustScript is the acceptable frontend for the browser boundary, not scaffolding.*
 
-*59 glacial goals (9 COMPLETE, 30 ACTIVE). 139 docs fossilized. ~135K+ tests, 13/13 GREEN.*
+*59 glacial goals (9 COMPLETE, 30 ACTIVE). 145 docs fossilized (1,462 total records, 10 checkpoints). ~135K+ tests, 13/13 GREEN.*

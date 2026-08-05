@@ -5,7 +5,7 @@
 **Wave**: 156d
 **Primal**: tideGlass
 **Repo**: `protoKarya/tideGlass`
-**Status**: 220 tests, 0 clippy warnings, live NUCLEUS validated, all quality gates GREEN
+**Status**: 214 tests, 0 clippy warnings, live NUCLEUS validated, all quality gates GREEN
 
 ---
 
@@ -67,19 +67,18 @@ the limit, but this remains a concern for raw data formats.
 
 **Owner**: tideGlass (code) + nestGate (protocol).
 
-### 5. petalTongue Co-Deployment on westGate
+### 5. petalTongue Not Co-Deployed on westGate
 
-**Problem**: `PetalTongueClient` is activated (instantiated at startup, viz scenes
-forwarded via `render_scene()` fire-and-forget). However, petalTongue may not
-be in the westGate NUCLEUS yet.
+**Problem**: Visualization scenes are wired and dispatch handlers return scene JSON,
+but petalTongue is not in the westGate NUCLEUS. Scene forwarding requires
+co-deployment.
 
-**Required**: petalTongue in westGate NUCLEUS. Cell graph already declares it as
-a dependency. Server discovers socket automatically via `membrane/` scan.
+**Required**: petalTongue in westGate NUCLEUS, or expose scenes via `tideglass.primals.eco`
+on golgi Caddy routing.
 
-**Impact**: When petalTongue is present, viz scenes are forwarded automatically.
-When absent, scenes still returned as JSON to the caller (graceful).
+**Impact**: Scenes returned as JSON only — no live WebGL render until petalTongue is present.
 
-**Owner**: Ops.
+**Owner**: Ops (cell graph already declares petalTongue dependency).
 
 ---
 
@@ -88,7 +87,7 @@ When absent, scenes still returned as JSON to the caller (graceful).
 | Aspect | Status |
 |--------|--------|
 | Rust workspace | 9 crates, 7 science modules, 2.0 MB release binary |
-| Tests | **220**, all green |
+| Tests | **214**, all green |
 | Clippy | pedantic + nursery, zero warnings |
 | Unsafe code | `#![forbid(unsafe_code)]` on all crates |
 | Dependencies | 6 direct, 21 transitive, all pure Rust |
