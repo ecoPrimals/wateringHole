@@ -202,26 +202,53 @@ Primals are Rust. Browser surfaces need TypeScript. The boundary between them is
 
 ---
 
-## REMAINING WORK — ORDERED
+## NEXT PHASE: DATA FLOW ACTIVATION + PETAL VIS
 
-1. **arXiv Rung 1 → reviewers** — 16⁴ data COMPLETE. Address 12 MUST-fix rubric items (figures, jackknife errors, abstract, references, jargon). LaTeX regen → Murillo/Chuna/Bazavov.
-2. **westGate federation unblock** — expose nestGate TCP, register content capability with songBird. Required for ironGate content.replicate.pull.
-3. **tideGlass cell boot on westGate** — `biomeos nucleus attach` (GPS data converted, v4.57 LIVE)
-4. **Convoy convergence** — 7.9M files at 145/s (ETA ~15h). CAS pool at 452 GB.
-5. **footPrint refinement** — auto-load default project, connect squirrel (G18 now LIVE), deduplicate CSP.
-6. **petalTongue WebGL pipeline (G19)** — required for esotericWebb web surface and nestgate.io mesh bridge.
+The infrastructure is deployed. Data flows need to be turned on. petalTongue needs to become the visualization layer. RustScript is the conjugation structure for the browser boundary.
+
+### Gate Team Assignments
+
+**westGate team** (Data NAS):
+
+1. **tideGlass cell boot** — `biomeos nucleus attach --cell ~/graphs/tideglass_cell.toml`. GPS data is converted (11 JSON, 103 MB in CAS). Verify tideGlass discovers nestGate socket via Neural API scan. Test `content.query` against 452 GB CAS pool. Run one end-to-end: `science.rges_screen` → `viz.rges_volcano` → scene JSON.
+2. **Federation unblock** — expose nestGate on TCP (same pattern as ironGate :8080 local-trust). Register `content` capability with songBird. This unblocks ironGate's `content.replicate.pull`.
+3. **Convoy convergence** — 7.9M files at 145/s (~15h ETA). CAS pool at 452 GB. Monitor and report completion.
+
+**ironGate team** (Downstream host):
+
+1. **footPrint → squirrel** — G18 signal dispatch is LIVE with 9 providers. footPrint's `petal-tongue.ts` WebSocket client points at petalTongue `:3001/ws`. Wire the agent panel: `agentConnected` should become `true` when squirrel registers as a provider. The WebSocket bridge exists — it needs the connection to succeed.
+2. **tideGlass PetalTongueClient activation** — in `tideglass-bin/src/petaltongue.rs`, the client is `#[allow(dead_code)]`. Remove `dead_code`, instantiate in the dispatch loop (`dispatch.rs`). When a petalTongue socket is discovered, the 5 viz handlers (`viz.rges_volcano`, `viz.enrichment_curve`, `viz.gps4drug_scatter`, `viz.mcts_trace`, `viz.nf_dashboard`) should forward their scene JSON to `PetalTongueClient::render_scene()` in addition to returning it.
+3. **petalTongue scene passthrough** — `visualization.render.scene` handler already accepts `SceneGraph` JSON via UDS. Verify it can accept tideGlass's declarative format (`{ "scene": "rges_volcano", "data": {...}, "format": "webgl", "interactive": true }`). If the format doesn't match `SceneGraph`, add a passthrough mode for declarative scene JSON.
+
+**strandGate team** (Compute):
+
+1. **arXiv Rung 1 rubric** — 16⁴ data COMPLETE. Address 12 MUST-fix items from `whitePaper/subGen/ARXIV_REVIEWER_RUBRIC.md` (figures, jackknife errors, 1-paragraph abstract, 25-30 references, genericize ecosystem jargon, remove gauge group audit appendix, fix pseudoSpore URL to `su3`). LaTeX regen via tectonic. Target: send PDF to Murillo/Chuna/Bazavov.
+
+**eastGate overwatch** (You):
+
+1. **RustScript extraction** — `protists/footPrint/src/rustscript/` already has `package.json` for `@protokarya/rustscript`. Publish as standalone npm package. This is the conjugation layer for all TypeScript consumers of primals.
+2. **petalTongue TypeScript SDK** — create `@protokarya/petaltongue-client` wrapping `petal-tongue.ts` with RustScript types. Scene handles become `Result<SceneHandle, RpcError>`. This becomes the standard browser ↔ primal bridge for any TS project (footPrint, nestgate.io, future mobile).
+
+### Data Flow Map — Target State
+
+| Consumer | Data Source | Transport | Viz Layer | Status |
+|----------|-----------|-----------|-----------|--------|
+| **tideGlass** | westGate CAS (452 GB, GPS) | UDS `CasClient` → nestGate | 5 petalTongue scenes (volcano, enrichment, scatter, MCTS, NF) | **READY — needs cell boot** |
+| **footPrint** | ironGate CAS (12.7 TB) | TCP :8080 `NeuralApiClient` | petalTongue WebSocket → map overlays (conjugated via RustScript) | **CAS E2E works — needs squirrel + petal wiring** |
+| **esotericWebb** | ironGate CAS via squirrel | UDS signal dispatch | petalTongue `visualization.render.scene` via cell graph | **IPC works — needs petalTongue WebGL pipeline (G19)** |
+| **nestgate.io** | sporeGate mesh | HTTP (public) | petalTongue SSR or WebSocket bridge | **Dashboard loads — needs mesh bridge** |
 
 ### LIVE SITE ASSESSMENT
 
 | Site | URL | Status | Issue |
 |------|-----|--------|-------|
 | **sporePrint** | `sporeprint.primals.eco` | **LIVE, renders well** | Zola static site. Science content. Claims verifiable. |
-| **footPrint** | `footprint.primals.eco` | **LIVE, serves 200** | API works (health OK, CAS 3 objects, 1 real project). Map UI loads empty — no auto-load, squirrel disconnected (`agentConnected:false`). Dual CSP headers (Express + Caddy both emit). Refinement: auto-load default project, connect squirrel, deduplicate CSP. |
-| **nestgate.io** | `nestgate.io` | **LIVE, serves 200** | Dashboard loads but all sections show "Loading..." — petalTongue on sporeGate cannot reach live mesh data from public internet path. Needs either SSR pre-render or WebSocket bridge to mesh. |
-| **esotericWebb** | `webb.primals.eco` | **502 Bad Gateway** | Cell boot succeeded (IPC level) but no web-facing surface. esotericWebb is a Rust CRPG engine with IPC/session logic — it has no HTTP server or browser client. A live game requires petalTongue WebGL rendering pipeline. |
+| **footPrint** | `footprint.primals.eco` | **LIVE, serves 200** | CAS works (3 objects, 1 real project). Map empty — no auto-load, `agentConnected:false`. Wire squirrel → petal WebSocket. |
+| **nestgate.io** | `nestgate.io` | **LIVE, serves 200** | Dashboard "Loading..." — needs petalTongue mesh bridge or SSR pre-render. |
+| **esotericWebb** | `webb.primals.eco` | **502** | IPC-only CRPG engine. Needs petalTongue WebGL pipeline (G19) for browser surface. |
 
 ---
 
-*Wave 156d — **Signal Dispatch + Federation Era.** G18 signal dispatch LIVE on ironGate (9 providers, cross-primal routing). ironGate NUCLEUS storage LIVE (12.7 TB CAS, songBird federation to westGate configured). Convoy provenance at 145/s (460x total improvement from 0.3/s — disk I/O sole bottleneck). 16⁴ dual-GPU data COMPLETE: β=6.0 +0.01% vs published, β=6.2 -0.04%, cross-vendor 6 ppm. AMD RX 6950 XT 9.4x faster than RTX 3090 at 16⁴. Reviewer rubric shipped (42 items for Bazavov/Chuna/Murillo). tideGlass at 214 tests, 17 IPC methods, 5 viz scenes. footPrint at 708 tests with manifest-driven sources.*
+*Wave 156d — **Data Flow Activation Era.** Infrastructure deployed across all 6 NUCLEUS gates. G18 signal dispatch LIVE (9 providers). ironGate 12.7 TB CAS + westGate 452 GB CAS. Convoy at 145/s (460x). 16⁴ dual-GPU data COMPLETE (6 ppm, +0.01%). Reviewer rubric 42 items. **Next phase**: activate data flows (tideGlass cell boot, footPrint→squirrel, federation unblock), wire petalTongue as visualization layer (5 tideGlass scenes, footPrint map overlays), establish RustScript as the conjugation layer (`@protokarya/rustscript` → `@protokarya/petaltongue-client`). footPrint evolved from TS exploration to primal evolution target; RustScript is the acceptable frontend for the browser boundary, not scaffolding.*
 
-*59 glacial goals (9 COMPLETE, 30 ACTIVE). 129 docs fossilized. ~135K+ tests, 13/13 GREEN.*
+*59 glacial goals (9 COMPLETE, 30 ACTIVE). 139 docs fossilized. ~135K+ tests, 13/13 GREEN.*
