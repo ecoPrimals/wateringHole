@@ -216,12 +216,20 @@ def cas_ingest_json(json_path, dataset_key, parent_zip_hash=None, dry_run=False)
         return
 
     try:
-        from bulk_ingest import blake3_hash, cas_put
+        import blake3 as _blake3
+        from prov_inline import _rpc_result
+        import base64
+
         path = Path(json_path)
-        b3 = blake3_hash(path)
-        ok, mode = cas_put(path, b3)
-        status = "PASS" if ok else "FAIL"
-        size_kb = path.stat().st_size / 1024
+        data = path.read_bytes()
+        b3 = _blake3.blake3(data).hexdigest()
+        result = _rpc_result("nestgate", "content.put", {
+            "data": base64.b64encode(data).decode(),
+            "hash_type": "blake3",
+        })
+        status = "PASS" if result else "FAIL"
+        mode = "dedup" if (isinstance(result, dict) and result.get("deduplicated")) else "stored"
+        size_kb = len(data) / 1024
         print(f"  CAS {status}: {dataset_key} → {b3[:16]}... ({size_kb:.0f} KB, {mode})")
     except Exception as e:
         print(f"  CAS SKIP: {dataset_key} — {e}")

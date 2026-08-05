@@ -24,7 +24,14 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from bulk_ingest import rpc_result, blake3_hash
+from prov_inline import _rpc_result as rpc_result
+
+import blake3 as _blake3
+
+
+def blake3_hash(filepath):
+    """In-process BLAKE3 hash — no b3sum subprocess."""
+    return _blake3.blake3(filepath.read_bytes()).hexdigest()
 
 DATA_ROOT = Path("/mnt/nestgate/cold/zfs/data")
 
