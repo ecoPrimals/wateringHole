@@ -84,7 +84,22 @@
 5. **llms.txt**: Data Flow Activation Era, corrected test counts, live sites
 6. **EVOLUTION_QUEUE**: Wave 156d current state, demonstration era collapsed
 7. **CONTEXT**: Data Flow Activation Era header, all metrics current
+8. **README**: milestones updated (Phase 1 SUCCEEDED, G18 LIVE, footPrint DEPLOYED), 135K+ tests
+9. **CHANGELOG**: [3.25.0] Data Flow Activation Era entry
+10. **CONTENT_MAP**: reviewed at Wave 156d
+11. **EVOLUTION_QUEUE audit**: 5 stale TODOs closed (mesh capabilities SHIPPED, cross-gate trust SHIPPED, LICENSING_STRATEGY fossil, PRIMAL_EMOJI_STANDARD superseded, deploy.yml annotated)
+
+## Root Doc Audit Results
+
+| Doc | Status |
+|-----|--------|
+| **README.md** | Current — 3.21 TB, 135K+, milestones reflect 156d |
+| **CHANGELOG.md** | [3.25.0] added for Data Flow Activation Era |
+| **CONTENT_MAP.md** | Reviewed at Wave 156d |
+| **CONTEXT.md** | Data Flow Activation Era header, all metrics current |
+| **EVOLUTION_QUEUE.md** | 5 stale TODOs closed. 20 open items remain (valid: a11y, search, gallery, gen3 primals, UX) |
+| **Build debris** | Clean — no cargo targets, no pycache, no stale public/ |
 
 ---
 
-*Wave 156d clean. ZERO P0/P1/P2. 13/13 GREEN. Infrastructure deployed — data flows need activation. overwatch can hand off to gate teams.*
+*Wave 156d clean. ZERO P0/P1/P2. 13/13 GREEN. Infrastructure deployed — data flows need activation. Root docs audited. overwatch can hand off to gate teams.*
