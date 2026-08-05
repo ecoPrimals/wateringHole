@@ -14,6 +14,7 @@
 | **songBird FEDERATION to westGate** | ironGate → westGate | songBird configured with `SONGBIRD_PEERS=westgate@192.168.4.149:7700`. LAN mesh connected. Blocked: westGate needs to expose nestGate TCP + register content capability. |
 | **CONVOY PROVENANCE 145/s** | westGate | 4-worker native socket convoy replaces socat subprocess. 460x total improvement (0.3/s → 145/s). CAS pool now 452 GB. Disk I/O is sole bottleneck (15.4% iowait on spinning raidz1). |
 | **16⁴ DUAL-GPU DATA COMPLETE** | strandGate | RTX 3090 + RX 6950 XT from same cached configs. β=6.0: +0.01% vs published. β=6.2: -0.04%. Cross-vendor: 6 ppm at β=6.2. AMD 9.4x faster at 16⁴. |
+| **hotSpring SU(N) GENERALIZED** | strandGate | **GaugeGroup trait** abstracts SU(N) for N=2,3,4,5,6,8. `GenericLattice<G>` — HMC + observables generic over gauge group. SU(2) `Su2Matrix`, SU(N≥4) `SuNMatrix` (heap). Cayley exp, Creutz ratios. **652 lib tests.** `arxiv_thermalize_sun` running 87-config grid. `arxiv_measure_battery` ready. Paper reframed to full SU(N) ladder. **AAR**: `HOTSPRING_SUN_MEMO_TABLE_AAR_AUG05_2026.md` |
 | **tideGlass 214 TESTS** | westGate | content.query wired, 17 IPC methods, 5 petalTongue viz scenes. GPS data converted. |
 | **footPrint 708 TESTS** | ironGate | Deep-debt: manifest-driven sources, riboCipher UDS, CAS TCP transport, neural-api client. |
 | **REVIEWER RUBRIC SHIPPED** | eastGate | 42-item quality gate for arXiv Rung 1 (Bazavov 12, Chuna 10, Murillo 10, cross 10). 12 MUST-fix items. |
@@ -150,8 +151,8 @@ systemd active on ironGate. CAS E2E verified (TCP local-trust). 708 tests. Agent
 
 | Component | Status | Next |
 |-----------|--------|------|
-| **strandGate** | 12⁴ paper-ready. **16⁴ DUAL-GPU DATA COMPLETE** — β=6.0 +0.01%, β=6.2 -0.04% vs published. Cross-vendor 6 ppm. AMD 9.4x faster. | Rubric items → LaTeX → reviewer send → arXiv submit. |
-| **hotSpring** | 5 arxiv binaries. Parallel therm 279→95 min. Config cache LIVE. | Rung 1 production campaign. |
+| **strandGate** | 12⁴ paper-ready. **16⁴ DUAL-GPU DATA COMPLETE** (6 ppm, +0.01%). **SU(N) GENERALIZED** — GaugeGroup trait covers N=2,3,4,5,6,8. 87-config thermalization grid RUNNING. Paper reframed: "Vendor-Agnostic SU(N) Lattice Gauge Theory on Consumer GPUs." | Populate SU(N) data tables. 32⁴ minimal publishable target. |
+| **hotSpring** | 8 arxiv binaries inc. `arxiv_thermalize_sun` + `arxiv_measure_battery`. GaugeGroup trait + GenericLattice\<G\>. **652 lib tests.** Config cache LIVE. | SU(2) thermalizing. SU(3)→SU(8) queued. |
 | **barraCuda** | MultiDevicePool. 4,959 tests. GREEN. | Cross-vendor GPU dispatch. |
 | **esotericWebb** | V31b. CELL BOOT SUCCEEDED. Scene builder. 484 tests. | QCD viz via petalTongue. |
 
@@ -195,7 +196,7 @@ Primals are Rust. Browser surfaces need TypeScript. The boundary between them is
 | Primal tests | **~135,000+** |
 | Signal dispatch | **G18 LIVE** — ironGate, 9 providers, cross-primal routing validated |
 | Convoy provenance | **145/s** (460x total improvement). Disk I/O sole bottleneck. |
-| arXiv Rung 1 | **16⁴ DATA COMPLETE** — +0.01% at β=6.0, 6 ppm cross-vendor. 42-item reviewer rubric. |
+| arXiv | **SU(N) GENERALIZED** (N=2,3,4,5,6,8). 16⁴ dual-GPU CONFIRMED (6 ppm). Paper reframed. 87-config grid RUNNING. 32⁴ target. 42-item rubric. |
 | Convergence | **convoy running** — 7.9M files, ETA ~15h at 145/s |
 | K-derm | **3/3 FULLY OPERATIONAL** |
 | GPS data | **CONVERTED** — 11 JSON (103 MB) CAS-ingested with BLAKE3 |
@@ -222,7 +223,8 @@ The infrastructure is deployed. Data flows need to be turned on. petalTongue nee
 
 **strandGate team** (Compute):
 
-1. **arXiv Rung 1 rubric** — 16⁴ data COMPLETE. Address 12 MUST-fix items from `whitePaper/subGen/ARXIV_REVIEWER_RUBRIC.md` (figures, jackknife errors, 1-paragraph abstract, 25-30 references, genericize ecosystem jargon, remove gauge group audit appendix, fix pseudoSpore URL to `su3`). LaTeX regen via tectonic. Target: send PDF to Murillo/Chuna/Bazavov.
+1. **SU(N) thermalization** — 87-config grid running (SU(2) first wave, then SU(3)→SU(8)). Monitor `arxiv_thermalize_sun`. Run `arxiv_measure_battery` as configs land to populate paper data tables.
+2. **arXiv Rung 1 rubric** — Paper reframed to "Vendor-Agnostic SU(N) Lattice Gauge Theory." Address 12 MUST-fix items. Populate SU(N) data sections (large-N scaling, deconfinement, Creutz ratios). 32⁴ is minimal publishable target. Target: send PDF to Murillo/Chuna/Bazavov.
 
 **eastGate overwatch** (You):
 
