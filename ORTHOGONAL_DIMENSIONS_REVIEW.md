@@ -79,6 +79,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [ ] **Inter-gate content.get E2E — READY TO TEST**: songBird `mesh.connectivity_check` + `mesh.throughput` SHIPPED. biomeOS routing READY. Need **live operational test** on actual gates (not code — ops). Blocks all data-remote springs.
 - [x] **G31 batch provenance — STRUCTURALLY COMPLETE**: `dag.event.append_batch` LIVE (200/batch). sweetGrass concurrent `batch_commit`. Per-file spine entries removed (canonical architecture — 122× improvement). Provenance loop CLOSED (bearDog sig in sweetGrass braid). Remaining: `spine.entry.batch` for edge cases, E2E trio validation on westGate.
 - [x] **G18 squirrel → biomeOS integration — LIVE ON IRONGATE**: squirrel rebuilt from source, `signal.dispatch` operational with 9 primal providers. Cross-primal routing validated (squirrel → rhizoCrypt 1ms, squirrel → bearDog crypto). esotericWebb + footPrint infrastructure confirmed ready. **NEXT**: wire footPrint agent panel (WebSocket → petal → squirrel).
+- [ ] **CODE OWNERSHIP DISCIPLINE**: sweetGrass had broken WIP on eastGate (not its primary team). Rule: only primary team leaves uncommitted changes. Primary teams: sporeGate (provenance trio), biomeGate (Node Atomics), eastGate (Tower+agent), overwatch (orchestration+discovery). Discarded WIP, documented in blurb.
 - [ ] **1 known debt finding**: grapheneGate-readiness (HSM not on eastGate)
 - [ ] Chimera Phase 0: library extraction (UNBLOCKED — crypto delegation done)
 

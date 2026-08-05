@@ -69,6 +69,25 @@ ALL 6 NUCLEUS GATES SYNCED TO v4.57+.
 
 ---
 
+## CODE OWNERSHIP — WHO PUBLISHES WHAT
+
+Each primal has a **primary team** responsible for committing working code and pushing to Forgejo. sporeGate + blueGate rebuild the depot from Forgejo. Other gates can read, review, and push fixes, but the primary team owns compilation health and publish responsibility.
+
+**Rule**: Only the primary team should have uncommitted changes for their primal. If you're not the owner, don't leave dirty working directories — commit and push, or discard.
+
+| Primary Gate | Primals | Basis |
+|-------------|---------|-------|
+| **sporeGate** | sweetGrass, loamSpine, rhizoCrypt | Provenance trio. Active refactoring (LedgerClient, batch pipeline). |
+| **biomeGate** | toadStool, barraCuda, coralReef | Node Atomics + GPU compute. 2,100+ toadStool commits. |
+| **eastGate** | bearDog, skunkBat, squirrel, sourDough, bingoCube | Tower security + agent + tools. |
+| **overwatch** | biomeOS, songBird, nestGate, petalTongue, cellMembrane | Orchestration + discovery + storage + render + CI. Multiple gates contribute; overwatch merges. |
+
+**Depot flow**: Primary team commits → pushes to Forgejo → sporeGate sovereign CI rebuilds → depot updates → gates deploy via `plasmid.harvest`.
+
+**What broke**: sweetGrass had uncommitted WIP on eastGate (LedgerClient refactor removing `handle_braid_batch_create`/`handle_braid_batch_commit` from `braid.rs` but not `registry.rs`). This is sporeGate's responsibility — eastGate discarded the WIP. sporeGate team should complete and push when ready.
+
+---
+
 ## PHASE STATUS
 
 ### Phase 1: Cell Boot — SUCCEEDED
