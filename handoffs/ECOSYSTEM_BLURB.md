@@ -319,3 +319,4 @@ Remaining critical path:
 *All 15 primals compile clean and are pushed to Forgejo. Depot rebuild can proceed immediately. Next unlock: squirrel deploy on ironGate (agent panel goes live), tideGlass cell boot on westGate (Track A science starts), inter-gate federation (O5+O7).*
 
 *59 glacial goals (9 COMPLETE, 30 ACTIVE). 151 docs fossilized (1,472 total records, 10 checkpoints). ~140K+ tests, 15/15 GREEN.*
+
