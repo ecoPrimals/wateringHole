@@ -1,6 +1,6 @@
 # ironGate Local Overwatch — Code Team Blurb
 
-**Date**: 2026-08-04 15:45 EDT (Session 10 — G18 Dispatch LIVE)
+**Date**: 2026-08-05 08:30 EDT (Session 12 — NUCLEUS Storage LIVE)
 **Gate**: ironGate (10.13.37.7) — PRIMARY DOWNSTREAM HOST
 **Wave**: 156d
 **Audience**: esotericWebb code team + footPrint code team (parallel IDE sessions)
@@ -10,32 +10,40 @@
 
 ## SUBSTRATE STATE — What You're Building On
 
-ironGate is running **full NUCLEUS v4.57+** with G18 signal dispatch LIVE.
-Squirrel rebuilt from source and redeployed with `signal.dispatch` + `signal.plan`.
-7 cross-primal providers registered. RTX 5070 stable at 42°C.
+ironGate is running **full NUCLEUS v4.57+** with **live CAS on 12.7 TB ext4**.
+nestGate v0.5.0 running with BLAKE3 content-addressed storage.
+9 cross-primal providers registered. songBird federation to westGate configured.
 
 ```
 biomeOS:        v4.57.0 (nucleus attach SHIPPED)
 CELL:           esotericwebb_cell ATTACHED (exp006: 19/22 PASS, 0 fail)
-SQUIRREL:       REBUILT — signal.dispatch + signal.plan LIVE
-PROVIDERS:      7 registered (rhizoCrypt, bearDog, nestGate, petalTongue,
-                sweetGrass, loamSpine, toadStool)
+SQUIRREL:       signal.dispatch + signal.plan LIVE
+NESTGATE:       v0.5.0 — CAS on 12.7 TB ext4 (sdc1), family 9b32f3a8
+PROVIDERS:      9 registered (rhizoCrypt, bearDog, nestGate, nestGate-tcp,
+                petalTongue, sweetGrass, loamSpine, toadStool, songBird)
+SONGBIRD:       v0.2.1 — federation ENABLED, 1 peer (westGate LAN)
 NUCLEUS:        v4.57 Neural API on /run/user/1000/membrane/
-SOCKETS:        2 membrane + 27 legacy (migration in progress)
-GPU:            RTX 5070 / 12 GB / CUDA 12.8 / 42°C
+SOCKETS:        4 membrane + 29 biomeos
+GPU:            RTX 5070 / 12 GB / CUDA 12.8
 RAM:            94 GB DDR5 (81 GB available)
 CPU:            i9-14900K (24c/32t)
-Disk:           3.3 TB available of 3.6 TB NVMe
+Disk (NVMe):    3.3 TB available of 3.6 TB
+Disk (CAS):     12 TB available of 12.7 TB ext4 (/mnt/nestgate)
 Rust:           1.96.0
 Node.js:        22.23.2
 ```
 
-### What Changed Since Session 9
+### What Changed Since Session 10
 
-- **Squirrel rebuilt from source** — `signal.dispatch` + `signal.plan` now operational
-- **7 providers registered** — cross-primal dispatch validated
-- **Cross-primal dispatch proven** — squirrel → rhizoCrypt (DAG), squirrel → bearDog (crypto)
-- **SO_PEERCRED, content.query, K-derm** — all confirmed SHIPPED and operational
+- **12.7 TB CAS disk mounted** — `/dev/sdc1` at `/mnt/nestgate`, fstab persistent
+- **nestGate v0.5.0 running** — UDS + TCP (SO_PEERCRED local-trust on port 8080)
+- **CAS write/read roundtrip proven** — BLAKE3 content.put → content.get
+- **footPrint CAS E2E validated** — `createNeuralApiClient()` → TCP:8080 → nestGate
+- **esotericWebb nest.store decomposition validated** — content.put + dag.event.append
+- **songBird federation configured** — westGate reachable on LAN, federation enabled
+- **9 providers** — nestGate (UDS + TCP) and songBird added to squirrel
+- **Cell graphs updated** — both include `verify_nestgate` preflight
+- **biomeos doctor** — 4/4 healthy including nestGate
 
 ---
 
@@ -97,11 +105,25 @@ calls `signal.plan` on the squirrel socket. **This is now live on ironGate.**
    export AI_PROVIDER_SOCKETS="http://localhost:11434"  # e.g. Ollama
    ```
 
+### NEW: Live CAS Is Available
+
+nestGate is running with 12.7 TB backing. Your `nest_store` signal (line 652 in
+`domains.rs`) now has a **real CAS** behind it. Session provenance gets real persistence.
+
+**What's changed for you:**
+
+1. **`nest_store` fires to live CAS** — content.put stores BLAKE3-addressed blobs
+   on the 12.7 TB disk. No more in-memory only.
+2. **DAG provenance tracks content hashes** — `dag.event.append` with `DataCreate`
+   links to CAS hashes, creating a full provenance chain.
+3. **TCP local-trust (port 8080)** bypasses BTSP — same-gate services don't need
+   bearDog auth. UDS still requires BTSP for cross-gate calls.
+
 ### Your Priority
 
-**Phase 1 DONE, Phase 3 (G18) infrastructure DONE.** Next steps:
-1. Test `signal_plan` integration in exp006 or a new experiment
-2. Wire provenance (DAG) into session lifecycle via `signal.dispatch`
+**Phase 1 DONE, G18 DONE, CAS LIVE.** Next steps:
+1. Test `nest_store` with real session data (session provenance → CAS → DAG)
+2. Wire `signal_plan` into enrichment pipeline
 3. Explore LLM provider setup for live AI narration
 4. Continue game content iteration
 
@@ -166,12 +188,23 @@ The squirrel G18 dispatch is live on ironGate. Your agent bridge protocol
    - `dag.event.append` → rhizoCrypt (provenance)
    - `compute.submit` → toadStool (GPU compute)
 
+### NEW: Live CAS Is Available
+
+nestGate is running on `TCP localhost:8080` with SO_PEERCRED local-trust. Your
+`createNeuralApiClient()` defaults to this — **zero config, it just works.**
+
+**Proven E2E**: `contentPut({family:'9b32f3a8', content_base64:...})` → stored → 
+`contentGet({hash:..., family:'9b32f3a8'})` → retrieved. Data on 12.7 TB disk.
+
+**westGate federation**: songBird configured, LAN reachable. When westGate
+exposes its nestGate TCP, `content.replicate.pull` will pull GPS datasets.
+
 ### Your Priority
 
-**Phase 2 DEPLOYED, G18 infrastructure READY.** Next steps:
-1. Wire a squirrel → agent bridge connector (WebSocket client in squirrel or adapter)
-2. Test `content.query` dispatch for GPS dataset discovery
-3. Wire SO_PEERCRED (now SHIPPED in rhizoCrypt G63) for authenticated CAS writes
+**Phase 2 DEPLOYED, CAS LIVE, federation CONFIGURED.** Next steps:
+1. Wire CAS persistence into project save/load (content.put for GeoJSON)
+2. Wire a squirrel → agent bridge connector (WebSocket client)
+3. Test `content.query` dispatch for GPS dataset discovery from westGate
 4. Remaining: golgi Caddy routing for public HTTPS (`footprint.primals.eco`)
 
 ### Remaining Blockers
@@ -180,8 +213,10 @@ The squirrel G18 dispatch is live on ironGate. Your agent bridge protocol
 |---------|------|-------|--------|
 | ~~BTSP local-trust~~ | ~~SO_PEERCRED for CAS write~~ | — | **CLEARED** (rhizoCrypt G63) |
 | ~~G18 dispatch~~ | ~~Signal dispatch infra~~ | — | **CLEARED** (Session 10) |
-| Caddy routing | DNS + reverse proxy for `footprint.primals.eco` | sporeGate | **PENDING** — only remaining P1 |
-| Squirrel→bridge connector | WebSocket client from squirrel to footPrint | footPrint team | **NEW** — next code task |
+| ~~CAS not running~~ | ~~nestGate not started~~ | — | **CLEARED** (Session 12) |
+| Caddy routing | DNS + reverse proxy for `footprint.primals.eco` | sporeGate | **PENDING** |
+| westGate federation | nestGate TCP + content capability | westGate hw | **BLOCKED** |
+| Squirrel→bridge connector | WebSocket client from squirrel to footPrint | footPrint team | Next code task |
 
 ---
 
@@ -189,7 +224,8 @@ The squirrel G18 dispatch is live on ironGate. Your agent bridge protocol
 
 | When | What |
 |------|------|
-| Session 8 (today) | FIRST CELL BOOT — esotericWebb attached to NUCLEUS |
-| Session 9 (today) | Depot sync validated, 6/8 blockers cleared |
-| Session 10 (now) | G18 signal dispatch LIVE — 7 providers, cross-primal dispatch |
-| Next | Code teams wire signal.plan + agent bridge |
+| Session 8 | FIRST CELL BOOT — esotericWebb attached to NUCLEUS |
+| Session 9 | Depot sync validated, 6/8 blockers cleared |
+| Session 10 | G18 signal dispatch LIVE — 7 providers, cross-primal dispatch |
+| Session 12 (now) | **NUCLEUS STORAGE LIVE** — 12.7 TB CAS, federation configured |
+| Next | Code teams wire CAS persistence + signal.plan |
