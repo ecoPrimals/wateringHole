@@ -220,39 +220,72 @@ Primals are Rust. Browser surfaces need TypeScript. The boundary between them is
 
 ---
 
-## NEXT PHASE: DATA FLOW ACTIVATION + PETAL VIS
+## DEBT CLEARING — PER-TEAM PUNCH LIST
 
-The infrastructure is deployed. Data flows need to be turned on. petalTongue needs to become the visualization layer. RustScript is the conjugation structure for the browser boundary.
+Clear all debt so we can focus on downstream gate deployments and science pipelines. Each item is assigned to its **code owner** per the ownership table above. Commit clean, push to Forgejo, depot rebuilds automatically.
 
-### Gate Team Assignments
+### sporeGate team — Provenance Trio (sweetGrass, loamSpine, rhizoCrypt)
 
-**westGate team** (Data NAS):
+| # | Item | Primal | Blocks |
+|---|------|--------|--------|
+| S1 | **sweetGrass `LedgerClient` refactor** — complete the WIP: `handle_braid_batch_create` + `handle_braid_batch_commit` removed from `braid.rs` but `registry.rs` still references them. Either restore or remove dispatch entries. **Must compile before push.** | sweetGrass | Depot rebuild |
+| S2 | **sweetGrass `convergence.check`** — one-call provenance chain verification (CAS → DAG → spine → braid → signed?). Eliminates `convergence_check.py` (183 lines). This is the trust gate for spring data consumption. | sweetGrass | Spring boots |
+| S3 | **sweetGrass `braid.list`** — enumerate braids by dataset, time range, committer. No way to audit braids currently. | sweetGrass | Observability |
+| S4 | **rhizoCrypt `dag.pipeline.ingest`** — full pipeline in one RPC: file list → session → batch events → dehydrate → Merkle root. Eliminates multi-step Python glue. | rhizoCrypt | westGate scripts |
+| S5 | **rhizoCrypt `dag.session.list`** — enumerate active/completed sessions with stats. | rhizoCrypt | Observability |
+| S6 | **loamSpine `spine.status`** — report entry count, last commit, Merkle root, associated sessions. | loamSpine | Observability |
+| S7 | **nestgate.io NG-01: `mesh.peers`** — wire songBird query into `/api/gate-mesh`. songBird at `/run/membrane/songbird.sock`. | petalTongue (web) | Dashboard |
+| S8 | **nestgate.io NG-03: health liveness** — query `health.liveness` per primal via UDS. | petalTongue (web) | Dashboard |
+| S9 | **Neural API symlink pattern** — document as canonical. Currently a sporeGate workaround; should be replicated on all NUCLEUS gates. | biomeOS (ops) | Gate deploys |
 
-1. **tideGlass cell boot** — `biomeos nucleus attach --cell ~/graphs/tideglass_cell.toml`. GPS data is converted (11 JSON, 103 MB in CAS). Verify tideGlass discovers nestGate socket via Neural API scan. Test `content.query` against 452 GB CAS pool. Run one end-to-end: `science.rges_screen` → `viz.rges_volcano` → scene JSON.
-2. **Federation unblock** — expose nestGate on TCP (same pattern as ironGate :8080 local-trust). Register `content` capability with songBird. This unblocks ironGate's `content.replicate.pull`.
-3. **Convoy convergence** — 11M+ files at **217/s on NVMe hot tier** (~14h ETA). Post-convoy: rsync NVMe→HDD cold, restore `NESTGATE_STORAGE_PATH`. Evaluate nestGate dual-path CAS (`NESTGATE_HOT_PATH` + `NESTGATE_COLD_PATH`) as upstream feature.
+### biomeGate team — Node Atomics (toadStool, barraCuda, coralReef)
 
-**ironGate team** (Downstream host):
+| # | Item | Primal | Blocks |
+|---|------|--------|--------|
+| B1 | **toadStool `ExecStart` fix** — BLOCKING 9/9 membrane composition. systemd unit doesn't start correctly. | toadStool | Cell boot on all gates |
+| B2 | **membrane socket permissions** — `/run/membrane/` sockets are `root:root`. Need group-writable for `biomeos` user. Affects all gates. | toadStool / biomeOS | Cell boot |
+| B3 | **coralReef SU(N≥4) shader generalization** — WGSL shaders hardcoded for 3×3 (SU(3)). GPU rendering of SU(4+) needs templated or runtime-generated shaders. Not blocking Rung 1 (CPU measurement suffices) but blocks GPU-accelerated higher-N. | coralReef | G45 Rung 2+ |
 
-1. ~~**footPrint → squirrel**~~ — **BRIDGE WIRED.** `petal-bridge.ts` dual-socket relay: `agent.*` → squirrel, viz → petalTongue. `autoLoadDefaultProject()` → map auto-loads. `SKIP_CSP=1`. **Remaining**: squirrel needs to be running and expose UDS at `/run/user/1000/biomeos/squirrel.sock`. Deploy squirrel as systemd service on ironGate. Test `agent.query` → `ai.query` translation end-to-end.
-2. ~~**tideGlass PetalTongueClient**~~ — **ACTIVATED.** `dead_code` removed. Instantiated at startup. `ServerContext` carries `Arc<PetalTongueClient>`. `is_viz_method()` gates forwarding. 220 tests. **Remaining**: deploy updated tideGlass binary to westGate and verify viz forwarding with live petalTongue.
-3. **petalTongue scene passthrough** — Verify petalTongue can accept tideGlass's declarative format. If not, add a passthrough mode. This is now the main remaining gap for viz pipeline.
+### eastGate team — Tower + Agent (bearDog, skunkBat, squirrel)
 
-**strandGate team** (Compute):
+| # | Item | Primal | Blocks |
+|---|------|--------|--------|
+| E1 | **bearDog Neural API routing stub** — bearDog doesn't register a capability routing stub with Neural API (NG-04). Other primals do. Means nestgate.io can't show bearDog in the routing table. | bearDog | nestgate.io |
+| E2 | **squirrel systemd service on ironGate** — petal-bridge routes `agent.*` → squirrel UDS (`/run/user/1000/biomeos/squirrel.sock`). squirrel needs to be running. Create `squirrel.service`, deploy, validate `agent.query` → `ai.query` translation. | squirrel | Agent panel LIVE |
+| E3 | **esotericWebb HEAD method** — `webb.primals.eco` GET=200 but HEAD=502. HTTP handler missing HEAD support (NG-06). | esotericWebb | Live site |
 
-1. **SU(N) thermalization** — 87-config grid running (SU(2) first wave, then SU(3)→SU(8)). Monitor `arxiv_thermalize_sun`. Run `arxiv_measure_battery` as configs land to populate paper data tables.
-2. **arXiv Rung 1 rubric** — Paper reframed to "Vendor-Agnostic SU(N) Lattice Gauge Theory." Address 12 MUST-fix items. Populate SU(N) data sections (large-N scaling, deconfinement, Creutz ratios). 32⁴ is minimal publishable target. Target: send PDF to Murillo/Chuna/Bazavov.
+### overwatch — Orchestration (biomeOS, songBird, nestGate, petalTongue, cellMembrane)
 
-**sporeGate team** (CI / Membrane / K-derm):
+| # | Item | Primal | Blocks |
+|---|------|--------|--------|
+| O1 | **nestGate `content.ingest`** — scan directory, hash all files, bulk store. Eliminates `revalidate_data.py`. **P1 upstream gap.** | nestGate | westGate scripts |
+| O2 | **nestGate `content.fetch`** — download URL directly into CAS. Fetch→hash→store in one RPC. Eliminates download-then-ingest scripts. **P2 upstream gap.** | nestGate | Data pipelines |
+| O3 | **nestGate `dataset.convergence`** — report provenance state per dataset path in one call. **P1 upstream gap.** | nestGate | Spring trust gate |
+| O4 | **nestGate dual-path CAS** — `NESTGATE_HOT_PATH` (NVMe) + `NESTGATE_COLD_PATH` (HDD) for permanent 2-tier. Proposed by westGate convoy AAR. | nestGate | 4-tier storage |
+| O5 | **nestGate TCP on westGate** — expose :8080 local-trust (same pattern as ironGate). Register `content` capability with songBird. Unblocks federation. | nestGate + songBird | Inter-gate CAS |
+| O6 | **petalTongue scene passthrough** — accept tideGlass declarative format (`{ "scene": "rges_volcano", ... }`). If `SceneGraph` format doesn't match, add passthrough mode. | petalTongue | Viz pipeline |
+| O7 | **Inter-gate `content.get` E2E** — live operational test on actual gates (songBird probes ready, nestGate `content.fetch` ready). First test: ironGate pulls object from westGate CAS. | songBird + nestGate | All data-remote springs |
+| O8 | **nestGate canonical client crate** — 6 tideGlass CAS divergences (DIV-1→6). groundSpring + airSpring have stale CAS clients. One crate for all consumers. | nestGate | Spring standardization |
 
-1. **nestgate.io Phase 2 — gate mesh** — Wire `mesh.peers` songBird query into `/api/gate-mesh` endpoint (songBird at `/run/membrane/songbird.sock`, confirmed 6 online peers). Populate gate table and WG overlay visualization.
-2. **Health liveness** — Query each discovered primal's `health.liveness` via UDS. Replace "unknown" with actual status in dashboard.
-3. **K-derm abstraction** — Continue evolving the three-domain topology. nestgate.io is the peptidoglycan data surface; abstract the Neural API bridge pattern for reuse on other gates. Document the symlink discovery pattern as canonical.
+### Downstream / Gate Deployment (not code debt — ops)
 
-**eastGate overwatch** (You):
+| # | Item | Gate | Blocks |
+|---|------|------|--------|
+| D1 | **tideGlass cell boot** on westGate — `biomeos nucleus attach`. GPS data ready. | westGate | Track A science |
+| D2 | **squirrel deploy** on ironGate — systemd service + UDS socket. | ironGate | Agent system |
+| D3 | **Convoy completion** — 11M+ files at 217/s on NVMe. Post-convoy: rsync hot→cold. | westGate | Data convergence |
+| D4 | **SU(N) thermalization** — 87-config grid running. Monitor + measure as configs land. | strandGate | Track B paper |
 
-1. **RustScript extraction** — `protists/footPrint/src/rustscript/` already has `package.json` for `@protokarya/rustscript`. Publish as standalone npm package. This is the conjugation layer for all TypeScript consumers of primals.
-2. **petalTongue TypeScript SDK** — create `@protokarya/petaltongue-client` wrapping `petal-tongue.ts` with RustScript types. Scene handles become `Result<SceneHandle, RpcError>`. This becomes the standard browser ↔ primal bridge for any TS project (footPrint, nestgate.io, future mobile).
+### Priority for Depot Rebuild
+
+The depot is **currently up to date** — no code debt blocks deployments right now. The items above are feature gaps and WIP that should land cleanly:
+
+1. **S1 (sweetGrass compile fix)** — must land first. Broken WIP must not be pushed.
+2. **B1+B2 (toadStool ExecStart + socket perms)** — unblocks clean cell boot on all gates.
+3. **E2 (squirrel service)** — unblocks agent panel on ironGate.
+4. **O5 (nestGate TCP on westGate)** — unblocks inter-gate federation.
+
+Everything else is P2/P3 feature work that can land incrementally without blocking gate deployments.
 
 ### Data Flow Map — Target State
 
