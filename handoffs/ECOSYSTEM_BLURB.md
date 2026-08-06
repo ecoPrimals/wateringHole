@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Cephalization Era
 
-**Date**: Aug 6, 2026 4:45PM | **Wave**: 156n | **From**: eastGate overwatch
-**Posture**: **G65 SHIPPING — 4 primals converged.** C2 14/15 (bingoCube last). ZERO P0/P1/P2. 15/15 GREEN. **nestGate ships G65** (4th primal — single-socket protocol negotiation). rhizoCrypt + sweetGrass shipped G65 (sporeGate leading). squirrel is G65 reference origin (432 lines). sourDough next as standards reference. **squirrel cleanup guidance issued** — ~35K lines of upstream absorption candidates identified for excision. All primals + cellMembrane first, then downstream.
+**Date**: Aug 6, 2026 4:45PM | **Wave**: 156o | **From**: eastGate overwatch
+**Posture**: **C2 COMPLETE (15/15). G65 at 8/15.** ZERO P0/P1/P2. 15/15 GREEN. **bingoCube shipped C2 — C2 IS DONE.** G65 protocol negotiation shipped by 8 primals: squirrel (origin), rhizoCrypt, sweetGrass, bearDog, biomeOS, petalTongue, nestGate, sourDough (C7 reference). **sourDough is now the G65 reference implementation.** squirrel C8 cleanup guidance issued (~35K lines). All primals + cellMembrane first, then downstream.
 
 ---
 
@@ -37,22 +37,20 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. Each pr
 | Phase | Pattern | Sockets | Status |
 |-------|---------|---------|--------|
 | **Phase 1** | JSON-RPC only (`.sock`) | 1 | COMPLETE — all 15 |
-| **Phase 2 (C2)** | Dual-socket (`.sock` + `.tarpc.sock`) | 2 | **14/15** (bingoCube remains) |
-| **Phase 3 (G65)** | Protocol negotiation on single socket | 1 | **4/15** — squirrel (origin), rhizoCrypt, sweetGrass, nestGate |
+| **Phase 2 (C2)** | Dual-socket (`.sock` + `.tarpc.sock`) | 2 | **15/15 COMPLETE** |
+| **Phase 3 (G65)** | Protocol negotiation on single socket | 1 | **8/15** — squirrel, rhizoCrypt, sweetGrass, bearDog, biomeOS, petalTongue, nestGate, sourDough |
 
 **G65 — Protocol Negotiation** (`specs/PROTOCOL_NEGOTIATION_SPEC.md`):
 Client sends `PROTOCOLS: tarpc,jsonrpc\n`, server selects best match. No negotiation = JSON-RPC (backward-compatible). Eliminates socket proliferation (30→15). Protocol-transparent for songBird routing. Extensible to future protocols. squirrel has 432-line reference impl with full test coverage.
 
 | tarpc State | Primals | Count |
 |-------------|---------|-------|
-| **G65 protocol negotiation SHIPPED** | **squirrel** (origin, 432 lines), **rhizoCrypt** (789 lines), **sweetGrass** (495 lines), **nestGate** (758 lines) | 4 |
-| **tarpc-CONVERGED** (full domain parity) | **loamSpine** (37/53), **bearDog** (30 methods) | 2 |
-| **C2 dual-socket SHIPPED** | songBird, petalTongue, coralReef, barraCuda, toadStool, skunkBat, biomeOS, sourDough, loamSpine | 9 |
-| **C2 REMAINING** | **bingoCube** | 1 |
+| **G65 protocol negotiation SHIPPED** | **squirrel** (origin), **rhizoCrypt**, **sweetGrass**, **bearDog**, **biomeOS**, **petalTongue**, **nestGate**, **sourDough** (C7 reference) | 8 |
+| **C2 complete, G65 REMAINING** | songBird, coralReef, barraCuda, toadStool, skunkBat, loamSpine, bingoCube | 7 |
 
 **Convergence blockers**:
 1. ~~**tarpc 0.34 → 0.37**~~ — **RESOLVED.** All 15 primals on tarpc 0.37.
-2. ~~**UDS protocol fragmentation**~~ — **NEARLY RESOLVED.** C2 shipped on 14/15 (bingoCube remains).
+2. ~~**UDS protocol fragmentation**~~ — **RESOLVED.** C2 shipped on **15/15**. G65 at 8/15.
 3. **G65 reference impl**: sourDough implements protocol negotiation as ecosystem reference by example. Each primal implements independently — no shared crate (primal violation).
 4. **Port-agnostic routing**: songBird moves from port assignments to capability routing. cellMembrane has tarpc-aware discovery.
 
@@ -64,12 +62,12 @@ Client sends `PROTOCOLS: tarpc,jsonrpc\n`, server selects best match. No negotia
 |---|------|--------|-------|--------|
 | ~~**C1a**~~ | ~~tarpc 0.34→0.37~~ — **DONE.** | songBird | eastGate | **DONE** |
 | ~~**C1b**~~ | ~~tarpc 0.34→0.37~~ — **DONE.** | petalTongue | eastGate | **DONE** |
-| **C2** | **UDS dual-socket pattern** — **14/15 DONE.** Remaining: | **bingoCube** (eastGate) | eastGate | 1 primal left |
+| ~~**C2**~~ | ~~UDS dual-socket pattern~~ — **15/15 DONE.** | all | all | **COMPLETE** |
 | **C3** | **JSON-RPC health shim** alongside tarpc primary | coralReef | biomeGate | nestgate.io 13/13 |
 | **C4** | **Deploy restart** — `sudo systemctl restart membrane-toadstool` | toadStool | sporeGate (ops) | nestgate.io 13/13 |
 | ~~**C5**~~ | ~~rustChip → Forgejo~~ — **RESOLVED.** | toadStool | biomeGate | **DONE** |
 | ~~**C6**~~ | ~~sourDough cephalization~~ — **DONE.** C2 dual-socket shipped. | sourDough | eastGate | **DONE** |
-| **C7** | **G65 protocol negotiation** — sourDough implements the pattern as reference by example (no shared crate — primal violation). Each primal then implements independently. **3 shipped** (squirrel, rhizoCrypt, sweetGrass). | sourDough (reference), then remaining 12 + cellMembrane | eastGate | Phase 3 — 3/15 shipped |
+| ~~**C7**~~ | ~~G65 protocol negotiation~~ — **sourDough reference DONE.** 8/15 shipped. Remaining 7 + cellMembrane implement independently. | per-primal owner | convergent | Phase 3 — **8/15 shipped** |
 | **C8** | **squirrel upstream absorption excision** — ~35K lines of songBird/bearDog/toadStool scaffolding absorbed during early development. Not called from production startup path. See guidance below. | squirrel | eastGate | -35K lines, clean domain boundary |
 
 ### C8 — squirrel Upstream Absorption Excision Guidance
@@ -184,19 +182,19 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 | Primal | HEAD | Key Change (this wave) |
 |--------|------|------------|
 | **barraCuda** | `7a11e4e` | C2 dual-socket + GPU buffer alignment fix + 13 test promotions + 214 clippy fixes |
-| **bearDog** | `68f5a8e` | tarpc 7→30 methods + entropy evolution + parking_lot unification. grapheneGate. |
+| **bearDog** | `754b1a9` | **G65 shipped.** tarpc 7→30 methods + entropy + grapheneGate. |
 | **coralReef** | `d929879` | C2 dual-socket + SPIR-V + dispatch refactor + adapter inference tests. 3,644 tests. |
 | **loamSpine** | `ac52498` | C2 dual-socket + doc hygiene. FIRST tarpc-CONVERGED (37 methods). |
-| **nestGate** | `e295572` | C2 dual-socket + Session 138 deep debt sweep. Multi-tier CAS. |
+| **nestGate** | `262406c` | **G65 shipped.** Session 139 protocol negotiation. +758 lines. |
 | **rhizoCrypt** | `0961875` | C2 dual-socket (`tarpc_uds.rs`) + cargo update. |
 | **sweetGrass** | `5e3ba35` | C2 dual-socket + `convergence.pressure` backpressure wired. |
 | **toadStool** | `50d6205` | C2 dual-socket + S352-S355 deep debt (hardcoded names, fake data, dead code). |
 | **squirrel** | `917a9c9` | Waves 156q→156z: -48,672 lines. 3 orphan crates excised. 157 de-asynced. |
 | songBird | `ab8d174` | C1a DONE — tarpc 0.37 + dual-socket UDS. |
-| petalTongue | `b44b5b5` | C1b+C2 DONE — tarpc 0.37 + tarpc server module. 6,615 tests. |
-| biomeOS | `5972f6e` | C2 dual-socket. Arc\<str\> hot paths. 3 flaky tests fixed. |
-| sourDough | `c91e2e6` | C2 shipped. Composition test for bingoCube. |
-| bingoCube | `c9f5410` | Pin egui/eframe 0.28. **C2 REMAINING.** |
+| petalTongue | `507541d` | **G65 shipped.** tarpc 0.37 + protocol negotiation. |
+| biomeOS | `52f7f9e` | **G65 shipped.** Protocol negotiation + Arc\<str\> hot paths. |
+| sourDough | `d3d125f` | **C7 G65 reference impl DONE.** Standards holder. |
+| bingoCube | `5885d88` | **C2 SHIPPED.** v0.2.0. |
 | skunkBat | HEAD | **C2 SHIPPED.** tarpc 0.37 dual-socket (11 methods). 626 tests. |
 
 **Non-primal evolution**: cellMembrane G64 cephalization (tarpc-aware discovery, typed dispatch). hotSpring arXiv measurement binaries. ChunkedBraid AAR (71/153 braided). whitePaper topology + measurement battery.
@@ -283,7 +281,7 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 | P0/P1/P2 | **ZERO** |
 | Debt items | **12/26 CLEARED** (S1–S7, B1–B2, O1, O3–O4, O8; S4–S5 verified pre-shipped) |
 | Gates online | **11** |
-| Depot | **v4.57+ SYNCED — ALL 6 NUCLEUS GATES. 15/15 GREEN at HEAD. REBUILD NEEDED (9 primals advanced since last build).** |
+| Depot | **v4.57+ SYNCED — ALL 6 NUCLEUS GATES. 15/15 GREEN at HEAD. REBUILD NEEDED (all primals advanced — C2 complete + G65 wave).** |
 | Data NAS | **westGate** (3.21 TB / 153 datasets / 17+ domains / **452 GB CAS**) |
 | ironGate storage | **12.7 TB CAS LIVE** — `/mnt/nestgate`, nestGate v0.5.0, 9 squirrel providers |
 | Primal tests | **~140,000+** |
@@ -310,4 +308,4 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 
 ---
 
-*Wave 156n — **G65 Shipping (3/15).** rhizoCrypt + sweetGrass shipped G65 protocol negotiation (sporeGate leading convergent evolution). squirrel is G65 origin (432 lines). C2 at 14/15 (bingoCube last). C8: squirrel upstream absorption excision guidance issued — ~35K lines of songBird/bearDog/toadStool scaffolding identified for removal. sourDough next as G65 reference implementation. 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
+*Wave 156o — **C2 COMPLETE (15/15). G65 at 8/15.** bingoCube shipped C2 — Phase 2 DONE. G65 protocol negotiation shipped by 8 primals: squirrel (origin), rhizoCrypt, sweetGrass, bearDog, biomeOS, petalTongue, nestGate, sourDough (C7 reference). 7 remaining for G65: songBird, coralReef, barraCuda, toadStool, skunkBat, loamSpine, bingoCube. C8: squirrel ~35K excision guidance issued. 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
