@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Deployment Wave
 
 **Date**: Aug 6, 2026 EVE | **Wave**: 156r | **From**: eastGate overwatch → sporeGate depot rebuild
-**Posture**: **DEPOT REBUILT. GOLGI UPDATED. DEPLOY.** 15/15 G65 musl binaries on golgi. sporeGate local: 12/13 ALIVE. blueGate Windows builds in progress.
+**Posture**: **DEPOT REBUILT. GOLGI UPDATED. DEPLOY.** 16/16 G65 binaries on golgi (15 primals + cellMembrane). sporeGate local: 12/13 ALIVE. blueGate Windows builds in progress.
 
 ---
 
@@ -10,13 +10,36 @@
 | Step | Status |
 |------|--------|
 | Pull all 15 primals to G65 HEADs | **DONE** — all verified against blurb |
-| Pull all 15 on blueGate | **DONE** |
-| blueGate Windows builds (15) | **RUNNING** (sequential) |
+| cellMembrane f6f1e62 | **BUILT + PUSHED** (16.8MB) |
 | sporeGate musl harvest (15) | **DONE** — 15/15 built |
 | Deploy to sporeGate NUCLEUS | **DONE** — 14/14 system + user petalTongue |
 | petalTongue G65 health evolution | **DONE** — BTSP+plain fallback, 12/13 alive |
-| Push depot to golgi | **DONE** — 15/15 fresh musl binaries |
-| petalTongue commit `6c47ae0` | **PUSHED** to Forgejo |
+| Push depot to golgi | **DONE** — 16/16 fresh binaries (15 primals + membrane) |
+| petalTongue commit `6c47ae0` | **PUSHED** — G65-aware health with BTSP+plain fallback |
+| blueGate Windows builds (15) | **RUNNING** (re-dispatched after session crash) |
+
+---
+
+## GOLGI DEPOT — ALL MUSL BINARIES CURRENT
+
+| Binary | Size | Date |
+|--------|------|------|
+| barracuda | 11.0M | Aug 6 |
+| beardog | 7.8M | Aug 6 |
+| bingocube | 10.5M | Aug 6 |
+| biomeos | 15.6M | Aug 6 |
+| coralreef | 8.6M | Aug 6 |
+| loamspine | 4.8M | Aug 6 |
+| **membrane** | **16.1M** | **Aug 6** |
+| nestgate | 8.5M | Aug 6 |
+| petaltongue | 28.3M | Aug 6 |
+| rhizocrypt | 7.6M | Aug 6 |
+| skunkbat | 3.2M | Aug 6 |
+| songbird | 17.5M | Aug 6 |
+| sourdough | 3.0M | Aug 6 |
+| squirrel | 8.0M | Aug 6 |
+| sweetgrass | 8.1M | Aug 6 |
+| toadstool | 11.6M | Aug 6 |
 
 ---
 
@@ -42,13 +65,13 @@
 
 ## DIVERGENCES — G65 TRANSPORT SIGNAL
 
-G65 protocol negotiation is NOT uniform. Three categories emerged:
+G65 protocol negotiation is NOT uniform. Three categories:
 
 1. **BTSP Required**: sweetgrass, biomeos — reject plain JSON, require `0xEC 0x01` signal
 2. **Full BTSP Handshake**: beardog — requires ClientHello, `-default.sock` fallback
 3. **Plain JSON-RPC**: coralReef, barracuda, squirrel — accept `{` directly
 
-petalTongue health module now handles all three: BTSP first, plain fallback.
+petalTongue health module handles all three: BTSP first, plain fallback.
 
 ---
 
@@ -66,4 +89,4 @@ golgi depot updated Aug 6. Gate teams: pull and deploy.
 
 ---
 
-*Wave 156r — sporeGate depot rebuild COMPLETE. 15/15 G65 musl on golgi. 12/13 alive on sporeGate. Gate teams: deploy.*
+*Wave 156r — sporeGate depot rebuild COMPLETE. 16/16 G65 binaries on golgi. 12/13 alive on sporeGate. Gate teams: deploy.*
