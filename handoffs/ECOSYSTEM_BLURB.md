@@ -42,7 +42,8 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. JSON-RP
 | **tarpc-CONVERGED** (full domain parity) | **loamSpine** (37 tarpc / 53 JSON-RPC) | 1 |
 | **tarpc-default** (server + client, default feature) | coralReef, barraCuda, toadStool, nestGate, squirrel | 5 |
 | **tarpc-wired** (service definitions, optional) | songBird, sweetGrass, rhizoCrypt, petalTongue, biomeOS | 5 |
-| **tarpc dep only** (not yet serving) | bearDog, skunkBat, sourDough, bingoCube | 4 |
+| **tarpc dep only** (not yet serving) | bearDog, skunkBat, bingoCube | 3 |
+| **NEXT to CONVERGE** (C6 — reference impl) | **sourDough** (standards holder, nascent spawning primal) | 1 |
 
 **Convergence blockers**:
 1. **tarpc 0.34 → 0.37**: songBird + petalTongue stuck on 0.34 (bincode 1.3→2.x).
@@ -53,13 +54,15 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. JSON-RP
 
 ### Primal Mountain Work Items
 
-| # | Item | Owner | Impact |
-|---|------|-------|--------|
-| **C1** | **tarpc version alignment** — upgrade songBird + petalTongue to tarpc 0.37. Requires bincode 2.x migration. | overwatch + sporeGate | Unblocks cephalization Phase 1 |
-| **C2** | **UDS protocol convergence** — canonical dual-socket pattern: JSON-RPC on `.sock`, tarpc on `.tarpc.sock`. Each primal, same pattern. | all teams | Port-agnostic routing |
-| **C3** | **coralReef JSON-RPC health shim** — add minimal JSON-RPC `health.liveness` responder so nestgate.io shows 13/13. tarpc primary stays. | biomeGate | nestgate.io 13/13 alive |
-| **C4** | **toadStool deploy restart** — running binary on sporeGate predates depot B1/B2 fix. `sudo systemctl restart membrane-toadstool`. | sporeGate | nestgate.io 13/13 alive |
-| ~~**C5**~~ | ~~**rustChip → Forgejo**~~ — **RESOLVED.** Neuromorphic crates excluded from default workspace members. Cross-gate builds unblocked. rustChip publication is now optional (won't block anything). | biomeGate | ~~Cross-gate toadStool dev~~ **DONE** |
+| # | Item | Primal | Owner | Impact |
+|---|------|--------|-------|--------|
+| **C1a** | **tarpc 0.34→0.37** + bincode 2.x migration | songBird | overwatch | Cephalization version alignment |
+| **C1b** | **tarpc 0.34→0.37** + bincode 2.x migration | petalTongue | overwatch | Cephalization version alignment |
+| **C2** | **UDS dual-socket pattern** — JSON-RPC on `.sock`, tarpc on `.tarpc.sock` | sourDough (reference impl), then: bearDog, songBird, skunkBat, nestGate, rhizoCrypt, loamSpine, sweetGrass, toadStool, barraCuda, coralReef, petalTongue, biomeOS, squirrel, bingoCube | per-primal owner | Port-agnostic routing |
+| **C3** | **JSON-RPC health shim** alongside tarpc primary | coralReef | biomeGate | nestgate.io 13/13 alive |
+| **C4** | **Deploy restart** — running binary predates B1/B2 fix. `sudo systemctl restart membrane-toadstool`. | toadStool | sporeGate (ops) | nestgate.io 13/13 alive |
+| ~~**C5**~~ | ~~rustChip → Forgejo~~ — **RESOLVED.** Neuromorphic excluded from workspace. | toadStool | biomeGate | **DONE** |
+| **C6** | **sourDough cephalization** — reference primal gets dual-protocol first. tarpc service definitions for all standard methods. sourDough sets the pattern, others follow. | sourDough | eastGate | **Reference implementation** for G64 |
 
 ---
 
