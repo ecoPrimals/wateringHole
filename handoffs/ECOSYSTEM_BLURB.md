@@ -13,7 +13,7 @@
 | **squirrel -48,672 lines** | eastGate | Waves 156q→156z: excise 3 orphan crates, de-async 157 functions, PluginV2 dead code elimination, PrimalType fossil, EcosystemPrimalType fossil, config crate. 313 files changed. |
 | **bearDog tarpc 7→30 methods** | eastGate | G64 cephalization convergence push + entropy evolution + parking_lot unification. grapheneGate validation + mobile HSM. |
 | **barraCuda C2 + bug fix** | biomeGate | C2 dual-socket. GPU buffer alignment panic FIXED. 13 ignored tests promoted to active. 214 clippy needless_borrow warnings eliminated. |
-| **coralReef +690 lines** | biomeGate | C2 dual-socket. SPIR-V extraction. Binary ops + memory ops test coverage. 3,580 tests. |
+| **coralReef +690 lines** | biomeGate | C2 dual-socket. SPIR-V extraction. Binary/memory/cast ops test coverage. 3,596 tests. |
 | **nestGate C2 + deep debt** | overwatch | Session 138: C2 dual-socket cephalization + comprehensive debt sweep. |
 | **loamSpine C2** | sporeGate | C2 dual-socket tarpc UDS server alongside JSON-RPC UDS. Doc hygiene. |
 | **rhizoCrypt C2** | sporeGate | tarpc binary UDS dual-socket pattern + cargo update. |
@@ -152,7 +152,7 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 |--------|------|------------|
 | **barraCuda** | `7a11e4e` | C2 dual-socket + GPU buffer alignment fix + 13 test promotions + 214 clippy fixes |
 | **bearDog** | `68f5a8e` | tarpc 7→30 methods + entropy evolution + parking_lot unification. grapheneGate. |
-| **coralReef** | `9f0b32b` | C2 dual-socket + SPIR-V + binary/memory ops coverage. 3,580 tests. |
+| **coralReef** | `4983d08` | C2 dual-socket + SPIR-V + cast/conversion coverage + visibility narrowing. 3,596 tests. |
 | **loamSpine** | `ac52498` | C2 dual-socket + doc hygiene. FIRST tarpc-CONVERGED (37 methods). |
 | **nestGate** | `e295572` | C2 dual-socket + Session 138 deep debt sweep. Multi-tier CAS. |
 | **rhizoCrypt** | `0961875` | C2 dual-socket (`tarpc_uds.rs`) + cargo update. |
