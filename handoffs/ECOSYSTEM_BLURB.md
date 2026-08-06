@@ -13,7 +13,7 @@
 | **petalTongue C1b+C2 DONE** | eastGate (local push) | **tarpc 0.37 + dual-socket server.** `petal-tongue-ipc` tarpc server module (209 lines). `socket_path.rs` (94 lines). 133 tarpc tests. 6,615 total tests. |
 | **bearDog grapheneGate** | eastGate (local push) | grapheneGate validation + vendor-agnostic mobile HSM abstraction (`mobile_hsm.rs` 135 lines). iOS Secure Enclave `HsmKeyProvider`. +911 lines. |
 | **squirrel 156q→156r** | eastGate (local push) | PluginMetadata Uuid→String migration. AIError deletion. Deprecated blanket elimination. Port constants. -908 net lines. 5 stale handoffs archived. |
-| **coralReef SPIR-V** | biomeGate | SPIR-V module extraction (`spirv.rs` 117 lines). Control flow test coverage (+521 lines, `tests_control_flow.rs`). +674/-122 lines. |
+| **coralReef 156j** | biomeGate | SPIR-V extraction, control flow tests, C2 dual-socket (`.tarpc.sock`), binary ops coverage (+23), memory ops coverage (+15), copy_src_ref removal. 3,580 tests. Full deep debt audit clean. |
 | **arXiv 40/42 (95%)** | strandGate | GPU benchmark data: **54× at 8³×4, 37× at 16⁴**. DF64 4-8× faster than native f64. Provenance overhead ~2%. 4 figures generated. Chuna email drafted. |
 | **Cross-gate provenance AAR** | strandGate | westGate × strandGate provenance convergence architecture. Data × compute braiding pattern. |
 | **sweetGrass backpressure** | westGate | Convergence lag as pressure signal DESIGNED. 5-stage convergence tracking. Backpressure gate for download pipelines. |
