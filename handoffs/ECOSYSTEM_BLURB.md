@@ -28,7 +28,7 @@ Every primal and cellMembrane listed with what they need to do to be fully cepha
 | Primal | HEAD | Owner | What's needed | Complexity |
 |--------|------|-------|---------------|------------|
 | **songBird** | `ab8d174` | overwatch | G65 protocol negotiation on primary UDS. songBird already has tarpc 0.37 + dual-socket (C1a). Add negotiation to JSON-RPC listener. **Also**: songBird gains protocol-transparent cross-gate routing as G65 bonus. | Medium — songBird's routing layer benefits most from G65 |
-| **coralReef** | `d929879` | biomeGate | G65 protocol negotiation. **Also C3**: JSON-RPC health shim alongside tarpc primary (coralReef is tarpc-first — needs JSON-RPC `health.liveness` response for nestgate.io 13/13). 3,644 tests. | Medium — tarpc vanguard needs JSON-RPC shim too |
+| **coralReef** | `dcb092a` | biomeGate | **G65 SHIPPED.** Protocol negotiation on UDS. JSON-RPC health shim via G65 backward compat (C3 resolved). 3,686 tests. | **DONE** |
 | **barraCuda** | `7e82341` | biomeGate | G65 protocol negotiation. G65 readiness docs already shipped. Has C2 dual-socket + tarpc default. | Low — readiness docs done, just implement |
 | **toadStool** | `8fdc98c` | biomeGate | G65 protocol negotiation. **Also C4**: sporeGate ops restart (`sudo systemctl restart membrane-toadstool`) to pick up socket perms fix for nestgate.io 13/13. | Low (code) + ops (restart) |
 | **loamSpine** | `96ea990` | sporeGate | G65 protocol negotiation. Already tarpc-CONVERGED (37 methods, full domain parity). tarpc test coverage + UDS E2E just shipped. | Low — most tarpc-mature primal |
@@ -69,7 +69,7 @@ squirrel's true domain: AI coordination, tool routing, signal dispatch, G65 RPC,
 | **Phase 3 (G65)** | Protocol negotiation — **9/15 shipped, 6 remaining** |
 | **C8** | squirrel excision — **~35K lines identified, guidance issued** |
 | **cellMembrane** | Discovery evolution — **tarpc-aware registry done, G65-aware pending** |
-| **C3** | coralReef JSON-RPC health shim — **pending** |
+| **C3** | coralReef JSON-RPC health shim — **RESOLVED** (G65 backward-compat JSON-RPC fallback) |
 | **C4** | toadStool deploy restart — **pending (ops)** |
 | **Depot rebuild** | All primals advanced — **rebuild needed after G65 closes** |
 
@@ -108,7 +108,7 @@ Depot rebuild → gate deployment → springs activation → science.
 | Primary Gate | Primals | G65 Status |
 |-------------|---------|------------|
 | **sporeGate** | sweetGrass ✅, rhizoCrypt ✅, loamSpine ❌ | 2/3 |
-| **biomeGate** | toadStool ❌, barraCuda ❌, coralReef ❌ | 0/3 |
+| **biomeGate** | toadStool ❌, barraCuda ❌, coralReef ✅ | 1/3 |
 | **eastGate** | bearDog ✅, squirrel ✅, sourDough ✅, skunkBat ✅, bingoCube ❌ | 4/5 |
 | **overwatch** | biomeOS ✅, petalTongue ✅, nestGate ✅, songBird ❌, cellMembrane ❌ | 3/5 |
 
@@ -140,4 +140,4 @@ Depot rebuild → gate deployment → springs activation → science.
 
 ---
 
-*Wave 156q — **Cephalization Punch List.** C2 15/15 COMPLETE. G65 9/15 (squirrel, sourDough, bearDog, biomeOS, petalTongue, nestGate, rhizoCrypt, sweetGrass, skunkBat). 6 primals remaining for G65 (songBird, coralReef, barraCuda, toadStool, loamSpine, bingoCube). cellMembrane G65-aware discovery pending. C8 squirrel ~35K excision guidance issued. C3 coralReef health shim + C4 toadStool restart pending. Once clear: deploy rebuild → downstream → science. 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
+*Wave 156q — **Cephalization Punch List.** C2 15/15 COMPLETE. G65 10/15 (squirrel, sourDough, bearDog, biomeOS, petalTongue, nestGate, rhizoCrypt, sweetGrass, skunkBat, coralReef). 5 primals remaining for G65 (songBird, barraCuda, toadStool, loamSpine, bingoCube). cellMembrane G65-aware discovery pending. C8 squirrel ~35K excision guidance issued. C3 RESOLVED. C4 toadStool restart pending. Once clear: deploy rebuild → downstream → science. 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
