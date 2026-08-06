@@ -10,9 +10,9 @@
 
 [wave]
 id = 156
-sub = "q"
+sub = "r"
 date = "2026-08-06"
-posture = "WAVE 156q FULL CEPHALIZATION ACHIEVED. G65 15/15 COMPLETE. C2 15/15 COMPLETE. C8 DONE (-67K lines). cellMembrane G65 shipped. All primals clear. Pivot to deploy+downstream. C3+C4+depot remain. 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K tests, 15/15 GREEN."
+posture = "WAVE 156r PRIMALS CLEAR. DEPLOY. G65 15/15. C2 15/15. C8 DONE. C3 VERIFIED. cellMembrane shipped. All cephalization closed. Depot rebuild required. Gate deployment next. 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K tests, 15/15 GREEN."
 publisher = "eastGate-overwatch"
 
 [gates]
