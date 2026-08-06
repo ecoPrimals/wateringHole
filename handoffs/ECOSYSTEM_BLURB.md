@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Cephalization Era
 
-**Date**: Aug 6, 2026 4:30PM | **Wave**: 156n | **From**: eastGate overwatch
-**Posture**: **G65 SHIPPING — 3 primals converged.** C2 14/15 (bingoCube last). ZERO P0/P1/P2. 15/15 GREEN. **rhizoCrypt + sweetGrass shipped G65** (protocol negotiation on single socket — sporeGate leading). squirrel is G65 reference origin (432 lines). sourDough next as standards reference. **squirrel cleanup guidance issued** — ~35K lines of upstream absorption candidates identified for excision. All primals + cellMembrane first, then downstream.
+**Date**: Aug 6, 2026 4:45PM | **Wave**: 156n | **From**: eastGate overwatch
+**Posture**: **G65 SHIPPING — 4 primals converged.** C2 14/15 (bingoCube last). ZERO P0/P1/P2. 15/15 GREEN. **nestGate ships G65** (4th primal — single-socket protocol negotiation). rhizoCrypt + sweetGrass shipped G65 (sporeGate leading). squirrel is G65 reference origin (432 lines). sourDough next as standards reference. **squirrel cleanup guidance issued** — ~35K lines of upstream absorption candidates identified for excision. All primals + cellMembrane first, then downstream.
 
 ---
 
@@ -14,7 +14,7 @@
 | **bearDog tarpc 7→30 methods** | eastGate | G64 cephalization convergence push + entropy evolution + parking_lot unification. grapheneGate validation + mobile HSM. |
 | **barraCuda C2 + bug fix** | biomeGate | C2 dual-socket. GPU buffer alignment panic FIXED. 13 ignored tests promoted to active. 214 clippy needless_borrow warnings eliminated. |
 | **coralReef +690 lines** | biomeGate | C2 dual-socket. SPIR-V extraction. Dispatch refactor + adapter inference tests. 3,644 tests. |
-| **nestGate C2 + deep debt** | overwatch | Session 138: C2 dual-socket cephalization + comprehensive debt sweep. |
+| **nestGate G65 + deep debt** | overwatch | Session 139: G65 protocol negotiation (Phase 3 cephalization) — single-socket tarpc+jsonrpc negotiation on primary UDS; C2 retained for backward compat. |
 | **loamSpine C2** | sporeGate | C2 dual-socket tarpc UDS server alongside JSON-RPC UDS. Doc hygiene. |
 | **rhizoCrypt C2** | sporeGate | tarpc binary UDS dual-socket pattern + cargo update. |
 | **sweetGrass C2 + backpressure** | sporeGate | C2 dual-socket + `convergence.pressure` backpressure wired. |
@@ -38,16 +38,16 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. Each pr
 |-------|---------|---------|--------|
 | **Phase 1** | JSON-RPC only (`.sock`) | 1 | COMPLETE — all 15 |
 | **Phase 2 (C2)** | Dual-socket (`.sock` + `.tarpc.sock`) | 2 | **14/15** (bingoCube remains) |
-| **Phase 3 (G65)** | Protocol negotiation on single socket | 1 | **3 SHIPPED** (squirrel origin, rhizoCrypt, sweetGrass) |
+| **Phase 3 (G65)** | Protocol negotiation on single socket | 1 | **4/15** — squirrel (origin), rhizoCrypt, sweetGrass, nestGate |
 
 **G65 — Protocol Negotiation** (`specs/PROTOCOL_NEGOTIATION_SPEC.md`):
 Client sends `PROTOCOLS: tarpc,jsonrpc\n`, server selects best match. No negotiation = JSON-RPC (backward-compatible). Eliminates socket proliferation (30→15). Protocol-transparent for songBird routing. Extensible to future protocols. squirrel has 432-line reference impl with full test coverage.
 
 | tarpc State | Primals | Count |
 |-------------|---------|-------|
-| **G65 protocol negotiation SHIPPED** | **squirrel** (origin, 432 lines), **rhizoCrypt** (789 lines), **sweetGrass** (495 lines) | 3 |
+| **G65 protocol negotiation SHIPPED** | **squirrel** (origin, 432 lines), **rhizoCrypt** (789 lines), **sweetGrass** (495 lines), **nestGate** (758 lines) | 4 |
 | **tarpc-CONVERGED** (full domain parity) | **loamSpine** (37/53), **bearDog** (30 methods) | 2 |
-| **C2 dual-socket SHIPPED** | songBird, petalTongue, coralReef, barraCuda, toadStool, nestGate, skunkBat, biomeOS, sourDough, loamSpine | 10 |
+| **C2 dual-socket SHIPPED** | songBird, petalTongue, coralReef, barraCuda, toadStool, skunkBat, biomeOS, sourDough, loamSpine | 9 |
 | **C2 REMAINING** | **bingoCube** | 1 |
 
 **Convergence blockers**:
