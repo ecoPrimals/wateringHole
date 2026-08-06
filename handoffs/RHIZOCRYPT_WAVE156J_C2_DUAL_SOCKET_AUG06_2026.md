@@ -1,6 +1,6 @@
 # rhizoCrypt Wave 156j — G64 C2 Dual-Socket Pattern (Aug 6, 2026)
 
-**Date**: Aug 6, 2026 | **Wave**: 156j | **Head**: `711cc8e`
+**Date**: Aug 6, 2026 | **Wave**: 156j | **Head**: `0961875`
 
 ## What Was Done
 
@@ -62,11 +62,20 @@ rhizocrypt.tarpc.sock → tarpc binary  (high-frequency primal-to-primal, sub-ms
 2. **Ecosystem convergence**: Other primals on tarpc 0.37 can connect to `rhizocrypt.tarpc.sock` for direct binary RPC
 3. **Cross-gate elevated path** (Phase 2): With all primals on tarpc 0.37 + dual-socket, songBird relay can bridge tarpc connections across gates
 
+## Wave 156j Late — Clean Audit (Aug 6, 2026)
+
+- Fix stale SPDX file count in CONTEXT.md (214 → 215)
+- `cargo update`: clap 4.6.5→4.6.6, zerocopy 0.8.55→0.8.56
+- Full debris scan: zero backup/temp/log/empty/orphan files, zero scripts, zero stale TODOs
+- Zero debt markers in all 215 `.rs` files
+- `cargo clean`: 10.6 GiB reclaimed
+- All gates green: 1,794 tests, 0 clippy warnings, cargo deny clean
+
 ## Recent History
 
 | Wave | Head | Key Changes |
 |------|------|-------------|
-| **156j** | **`711cc8e`** | **G64 C2 dual-socket: tarpc binary UDS + JSON-RPC UDS** |
+| **156j** | **`0961875`** | **G64 C2 dual-socket: tarpc binary UDS + JSON-RPC UDS**, clean audit, dep update |
 | 156h | `061acfa` | G64 cephalization audit (confirmed tarpc-wired), blake3 1.8.6 |
 | 156e | `ab701b0` | G63 SO_PEERCRED: peer credential extraction on UDS |
 | 156c | `cce0cb9` | RPC integration port collision fix, BTSP env isolation |

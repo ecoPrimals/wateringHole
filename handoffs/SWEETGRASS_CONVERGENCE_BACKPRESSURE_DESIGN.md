@@ -1,8 +1,10 @@
 # sweetGrass Convergence Backpressure — Design
 
-**Status**: DESIGN | **Wave**: 156d | **Date**: Aug 6, 2026
-**Gate**: westGate | **Team**: Hardware / Overwatch
+**Status**: IMPLEMENTED | **Wave**: 156d→156j | **Date**: Aug 6, 2026
+**Gate**: westGate (design) → eastGate (implementation)
+**Team**: Hardware / Overwatch (design), sporeGate (impl)
 **Audience**: Download pipeline authors, sweetGrass / nestGate primal teams
+**Implementation**: sweetGrass `convergence.pressure` method — see `SWEETGRASS_WAVE156J_C2_BACKPRESSURE_AUG06_2026.md`
 
 ---
 
