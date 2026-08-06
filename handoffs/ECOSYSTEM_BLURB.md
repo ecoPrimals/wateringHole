@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Cephalization Era
 
 **Date**: Aug 6, 2026 1:30PM | **Wave**: 156l | **From**: eastGate overwatch
-**Posture**: **G65 PROTOCOL NEGOTIATION STANDARD PUBLISHED.** C2 13/15. 15/15 GREEN. ZERO P0/P1/P2. **NEW: G65 spec — single-socket protocol negotiation replaces dual-socket as Phase 3.** squirrel has reference impl (432 lines). All primals + cellMembrane evolve first, then downstream. strandGate + westGate subprojects continue in background.
+**Posture**: **G65 PROTOCOL NEGOTIATION STANDARD PUBLISHED.** C2 **14/15** (skunkBat shipped). 15/15 GREEN. ZERO P0/P1/P2. **NEW: G65 spec — single-socket protocol negotiation replaces dual-socket as Phase 3.** squirrel has reference impl (432 lines). All primals + cellMembrane evolve first, then downstream. strandGate + westGate subprojects continue in background.
 
 ---
 
@@ -9,7 +9,7 @@
 
 | Event | Source | Impact |
 |-------|--------|--------|
-| **C2 DUAL-SOCKET 13/15** | ecosystem-wide | barraCuda, coralReef, loamSpine, nestGate, rhizoCrypt, sweetGrass, toadStool all shipped C2 this wave. Combined with prior: songBird, petalTongue, bearDog, biomeOS, sourDough, squirrel. **Only skunkBat + bingoCube remain.** |
+| **C2 DUAL-SOCKET 14/15** | ecosystem-wide | skunkBat C2 shipped (tarpc 0.37 + bincode UDS, 11 tarpc methods, 626 tests). Combined with prior wave: barraCuda, coralReef, loamSpine, nestGate, rhizoCrypt, sweetGrass, toadStool, songBird, petalTongue, bearDog, biomeOS, sourDough, squirrel. **Only bingoCube remains.** |
 | **squirrel -48,672 lines** | eastGate | Waves 156q→156z: excise 3 orphan crates, de-async 157 functions, PluginV2 dead code elimination, PrimalType fossil, EcosystemPrimalType fossil, config crate. 313 files changed. |
 | **bearDog tarpc 7→30 methods** | eastGate | G64 cephalization convergence push + entropy evolution + parking_lot unification. grapheneGate validation + mobile HSM. |
 | **barraCuda C2 + bug fix** | biomeGate | C2 dual-socket. GPU buffer alignment panic FIXED. 13 ignored tests promoted to active. 214 clippy needless_borrow warnings eliminated. |
@@ -37,7 +37,7 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. Each pr
 | Phase | Pattern | Sockets | Status |
 |-------|---------|---------|--------|
 | **Phase 1** | JSON-RPC only (`.sock`) | 1 | COMPLETE — all 15 |
-| **Phase 2 (C2)** | Dual-socket (`.sock` + `.tarpc.sock`) | 2 | **13/15** (skunkBat + bingoCube remain) |
+| **Phase 2 (C2)** | Dual-socket (`.sock` + `.tarpc.sock`) | 2 | **14/15** (bingoCube remains) |
 | **Phase 3 (G65)** | Protocol negotiation on single socket | 1 | **REFERENCE IMPL** in squirrel |
 
 **G65 — Protocol Negotiation** (`specs/PROTOCOL_NEGOTIATION_SPEC.md`):
@@ -48,7 +48,8 @@ Client sends `PROTOCOLS: tarpc,jsonrpc\n`, server selects best match. No negotia
 | **G65 protocol negotiation** (reference impl) | **squirrel** | 1 |
 | **tarpc-CONVERGED** (full domain parity) | **loamSpine** (37/53), **bearDog** (30 methods) | 2 |
 | **C2 dual-socket SHIPPED** | songBird, petalTongue, coralReef, barraCuda, toadStool, nestGate, sweetGrass, rhizoCrypt, biomeOS, sourDough | 10 |
-| **C2 REMAINING** | **skunkBat**, **bingoCube** | 2 |
+| **C2 SHIPPED** (this wave) | **skunkBat** | 1 |
+| **C2 REMAINING** | **bingoCube** | 1 |
 
 **Convergence blockers**:
 1. ~~**tarpc 0.34 → 0.37**~~ — **RESOLVED.** All 15 primals on tarpc 0.37.
@@ -64,7 +65,7 @@ Client sends `PROTOCOLS: tarpc,jsonrpc\n`, server selects best match. No negotia
 |---|------|--------|-------|--------|
 | ~~**C1a**~~ | ~~tarpc 0.34→0.37~~ — **DONE.** | songBird | eastGate | **DONE** |
 | ~~**C1b**~~ | ~~tarpc 0.34→0.37~~ — **DONE.** | petalTongue | eastGate | **DONE** |
-| **C2** | **UDS dual-socket pattern** — **13/15 DONE.** Remaining: | **skunkBat** (eastGate), **bingoCube** (eastGate) | eastGate | 2 primals left |
+| **C2** | **UDS dual-socket pattern** — **14/15 DONE.** Remaining: | **bingoCube** (eastGate) | eastGate | 1 primal left |
 | **C3** | **JSON-RPC health shim** alongside tarpc primary | coralReef | biomeGate | nestgate.io 13/13 |
 | **C4** | **Deploy restart** — `sudo systemctl restart membrane-toadstool` | toadStool | sporeGate (ops) | nestgate.io 13/13 |
 | ~~**C5**~~ | ~~rustChip → Forgejo~~ — **RESOLVED.** | toadStool | biomeGate | **DONE** |
@@ -163,7 +164,7 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 | biomeOS | `5972f6e` | C2 dual-socket. Arc\<str\> hot paths. 3 flaky tests fixed. |
 | sourDough | `c91e2e6` | C2 shipped. Composition test for bingoCube. |
 | bingoCube | `c9f5410` | Pin egui/eframe 0.28. **C2 REMAINING.** |
-| skunkBat | `b0df971` | Cargo update. **C2 REMAINING.** |
+| skunkBat | HEAD | **C2 SHIPPED.** tarpc 0.37 dual-socket (11 methods). 626 tests. |
 
 **Non-primal evolution**: cellMembrane G64 cephalization (tarpc-aware discovery, typed dispatch). hotSpring arXiv measurement binaries. ChunkedBraid AAR (71/153 braided). whitePaper topology + measurement battery.
 
@@ -276,4 +277,4 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 
 ---
 
-*Wave 156l — **G65 Protocol Negotiation Standard.** Phase 3 of cephalization formalized: single-socket protocol negotiation replaces C2 dual-socket. squirrel reference impl (432 lines). Spec published at `specs/PROTOCOL_NEGOTIATION_SPEC.md`. C7 work item: extract to sourDough, then all 15 primals + cellMembrane adopt. Priority: primals + cellMembrane evolve first, strandGate + westGate subprojects in background. C2 at 13/15 (skunkBat + bingoCube remain). 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
+*Wave 156l — **G65 Protocol Negotiation Standard.** Phase 3 of cephalization formalized: single-socket protocol negotiation replaces C2 dual-socket. squirrel reference impl (432 lines). Spec published at `specs/PROTOCOL_NEGOTIATION_SPEC.md`. C7 work item: extract to sourDough, then all 15 primals + cellMembrane adopt. Priority: primals + cellMembrane evolve first, strandGate + westGate subprojects in background. C2 at **14/15** (bingoCube remains). 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
