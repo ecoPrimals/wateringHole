@@ -166,25 +166,31 @@ uses its own bincode framing directly on the stream.
 
 ## Adoption Plan
 
-### Phase 1: Extract to Shared Crate
+### Phase 1: sourDough Reference Implementation
 
-squirrel's `protocol_negotiation.rs` (432 lines, fully tested) becomes
-the reference. Extract into a shared location accessible to all primals:
+sourDough (standards holder, nascent spawning primal) implements protocol
+negotiation as its own code — the **reference by example**. sourDough does
+NOT publish a shared crate. Each primal reads the pattern and implements
+it independently in their own codebase. This is how primals work: no
+cross-primal code dependencies. Convergent evolution, not shared libraries.
 
-- **Option A**: `sourDough` (standards holder, nascent spawning primal)
-  publishes the negotiation crate as part of its reference implementation
-- **Option B**: `cellMembrane` absorbs the negotiation logic into its
-  service registry, making it available to all primals via membrane types
+squirrel's existing `protocol_negotiation.rs` (432 lines) serves as the
+prior art. sourDough's implementation becomes the canonical pattern that
+other teams study when adding G65 to their primal.
 
-### Phase 2: Primal Adoption
+### Phase 2: Primal Adoption (Convergent Evolution)
 
 Each primal adds protocol negotiation to its existing UDS listener.
-Convergent evolution — each team implements on their own timeline:
+Each team implements on their own timeline, reading the sourDough
+reference and adapting to their own domain:
 
 1. Add negotiation to the JSON-RPC socket listener (server side)
 2. The existing tarpc server logic (from C2) handles tarpc connections
 3. Remove the separate `.tarpc.sock` listener once negotiation is stable
 4. cellMembrane registry drops `has_tarpc` field — all sockets negotiate
+
+No primal imports code from another primal. The pattern propagates by
+example, like bats, birds, and insects each evolving flight independently.
 
 ### Phase 3: cellMembrane Discovery Evolution
 

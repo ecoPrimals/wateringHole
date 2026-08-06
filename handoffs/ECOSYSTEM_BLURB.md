@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Cephalization Era
 
-**Date**: Aug 6, 2026 1:30PM | **Wave**: 156l | **From**: eastGate overwatch
-**Posture**: **G65 PROTOCOL NEGOTIATION STANDARD PUBLISHED.** C2 **14/15** (skunkBat shipped). 15/15 GREEN. ZERO P0/P1/P2. **NEW: G65 spec — single-socket protocol negotiation replaces dual-socket as Phase 3.** squirrel has reference impl (432 lines). All primals + cellMembrane evolve first, then downstream. strandGate + westGate subprojects continue in background.
+**Date**: Aug 6, 2026 3:45PM | **Wave**: 156m | **From**: eastGate overwatch
+**Posture**: **C2 14/15 + G65 STANDARD.** ZERO P0/P1/P2. 15/15 GREEN. skunkBat shipped C2 (only bingoCube remains). G65 spec corrected: sourDough is reference by example, NOT a shared crate (primal violation). barraCuda 182-file fmt + G65 readiness. coralReef cast/conversion coverage. loamSpine deep debt clean. toadStool test isolation fix. cellMembrane signing extraction. whitePaper dual-GPU scan results. All primals + cellMembrane first, then downstream.
 
 ---
 
@@ -54,7 +54,7 @@ Client sends `PROTOCOLS: tarpc,jsonrpc\n`, server selects best match. No negotia
 **Convergence blockers**:
 1. ~~**tarpc 0.34 → 0.37**~~ — **RESOLVED.** All 15 primals on tarpc 0.37.
 2. ~~**UDS protocol fragmentation**~~ — **NEARLY RESOLVED.** C2 shipped on 13/15.
-3. **G65 extraction**: squirrel's negotiation logic needs extraction to sourDough (reference primal) or cellMembrane for ecosystem-wide adoption.
+3. **G65 reference impl**: sourDough implements protocol negotiation as ecosystem reference by example. Each primal implements independently — no shared crate (primal violation).
 4. **Port-agnostic routing**: songBird moves from port assignments to capability routing. cellMembrane has tarpc-aware discovery.
 
 **Performance thesis**: convoy at 217/s is ~5ms/file JSON-RPC IPC. tarpc binary framing eliminates serde roundtrip — composition goes exponential for high-frequency patterns (provenance braiding, CAS ops, GPU dispatch).
@@ -70,7 +70,7 @@ Client sends `PROTOCOLS: tarpc,jsonrpc\n`, server selects best match. No negotia
 | **C4** | **Deploy restart** — `sudo systemctl restart membrane-toadstool` | toadStool | sporeGate (ops) | nestgate.io 13/13 |
 | ~~**C5**~~ | ~~rustChip → Forgejo~~ — **RESOLVED.** | toadStool | biomeGate | **DONE** |
 | ~~**C6**~~ | ~~sourDough cephalization~~ — **DONE.** C2 dual-socket shipped. | sourDough | eastGate | **DONE** |
-| **C7** | **G65 protocol negotiation extraction** — extract squirrel's `protocol_negotiation.rs` to sourDough (reference primal). Then all primals + cellMembrane adopt. Single socket replaces dual-socket. | sourDough → all 15 + cellMembrane | eastGate | Phase 3 destination |
+| **C7** | **G65 protocol negotiation** — sourDough implements the pattern as reference by example (no shared crate — primal violation). Each primal then implements independently, reading sourDough's pattern. Single socket replaces dual-socket. | sourDough (reference), then all 15 + cellMembrane independently | eastGate | Phase 3 destination |
 
 ---
 
@@ -277,4 +277,4 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 
 ---
 
-*Wave 156l — **G65 Protocol Negotiation Standard.** Phase 3 of cephalization formalized: single-socket protocol negotiation replaces C2 dual-socket. squirrel reference impl (432 lines). Spec published at `specs/PROTOCOL_NEGOTIATION_SPEC.md`. C7 work item: extract to sourDough, then all 15 primals + cellMembrane adopt. Priority: primals + cellMembrane evolve first, strandGate + westGate subprojects in background. C2 at **14/15** (bingoCube remains). 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
+*Wave 156m — **C2 14/15 + G65 Standard.** skunkBat shipped C2 (only bingoCube remains). G65 spec corrected: sourDough is reference by example, NOT a shared crate (primal violation). barraCuda 182-file fmt + G65 readiness. coralReef cast/conversion coverage. loamSpine deep debt clean. toadStool test isolation fix. cellMembrane signing extraction + visibility narrowing. whitePaper dual-GPU scan results complete. C7: sourDough implements G65 as reference, each primal follows independently. 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
