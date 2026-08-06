@@ -34,7 +34,7 @@ import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
-from prov_inline import InlineBraid, convergence_gate
+from prov_inline import InlineBraid, ChunkedBraid, convergence_gate
 
 DATA_ROOT = Path("/mnt/nestgate/cold/zfs/data")
 STAGE_ROOT = Path("/mnt/cas-hot/_stage")
@@ -43,7 +43,8 @@ SKIP_PREFIXES = (".", "_")
 REPORT_INTERVAL = 15
 STAGE_MIN_FREE_GB = 20
 
-ALWAYS_SKIP = {"alphafold_structures"}
+ALWAYS_SKIP = set()
+CHUNK_STAGE_THRESHOLD = 50000
 
 shutdown = False
 
@@ -82,11 +83,9 @@ def dataset_size_bytes(ds_path):
     return total
 
 
-def stage_dataset(dataset_name):
-    """rsync dataset from cold HDD to NVMe staging. Returns staging path."""
-    src = DATA_ROOT / dataset_name
-    dst = STAGE_ROOT / dataset_name
-
+def stage_path(src, dst_name):
+    """rsync a path from cold HDD to NVMe staging. Returns staging path."""
+    dst = STAGE_ROOT / dst_name
     dst.mkdir(parents=True, exist_ok=True)
 
     result = subprocess.run(
@@ -100,6 +99,11 @@ def stage_dataset(dataset_name):
     return dst
 
 
+def stage_dataset(dataset_name):
+    """rsync entire dataset from cold HDD to NVMe staging."""
+    return stage_path(DATA_ROOT / dataset_name, dataset_name)
+
+
 def unstage_dataset(dataset_name):
     """Remove NVMe staging copy."""
     dst = STAGE_ROOT / dataset_name
@@ -107,13 +111,156 @@ def unstage_dataset(dataset_name):
         shutil.rmtree(dst, ignore_errors=True)
 
 
+def has_subdirs(ds_path):
+    """Check if dataset has subdirectory structure (prefix dirs)."""
+    for entry in ds_path.iterdir():
+        if entry.is_dir() and not entry.name.startswith("."):
+            return True
+    return False
+
+
+def braid_chunked(dataset_name, use_staging=True):
+    """Braid a large dataset using ChunkedBraid — one spine, N sessions.
+
+    Each subdirectory becomes a chunk with its own rhizoCrypt session,
+    dehydrated and committed to a shared loamSpine. Crash-resumable via
+    .braid_state persisted after each chunk commit.
+    """
+    ds_path = DATA_ROOT / dataset_name
+    marker = ds_path / ".braided"
+    if marker.exists():
+        return {"dataset": dataset_name, "status": "skipped", "reason": "already braided"}
+
+    tag = f"[{dataset_name}]"
+    subdirs = sorted(
+        d.name for d in ds_path.iterdir()
+        if d.is_dir() and not d.name.startswith(".")
+    )
+
+    cb = ChunkedBraid(dataset_name, state_dir=ds_path)
+    already_done = sum(1 for s in subdirs if cb.is_chunk_done(s))
+
+    print(f"{tag} Chunked braid: {len(subdirs)} subdirectories, "
+          f"{already_done} already committed (resume)", flush=True)
+
+    t_start = time.time()
+
+    for si, subdir_name in enumerate(subdirs):
+        if shutdown:
+            break
+        if cb.is_chunk_done(subdir_name):
+            continue
+
+        subdir_src = ds_path / subdir_name
+        chunk_tag = f"{tag}[{subdir_name} {si+1}/{len(subdirs)}]"
+
+        braid_root = subdir_src
+        staged = False
+        if use_staging:
+            free = nvme_free_gb()
+            if free < STAGE_MIN_FREE_GB:
+                print(f"{chunk_tag} NVMe {free:.0f} GB free — reading from HDD", flush=True)
+            else:
+                print(f"{chunk_tag} Staging → NVMe...", flush=True)
+                t_stg = time.time()
+                try:
+                    braid_root = stage_path(subdir_src, f"{dataset_name}/{subdir_name}")
+                    staged = True
+                    print(f"{chunk_tag} Staged in {time.time() - t_stg:.0f}s", flush=True)
+                except Exception as e:
+                    print(f"{chunk_tag} Stage failed ({e}), HDD fallback", flush=True)
+                    braid_root = subdir_src
+
+        files = sorted(
+            f for f in braid_root.rglob("*")
+            if f.is_file() and not should_skip_file(f)
+        )
+
+        cb.begin_chunk(subdir_name)
+        chunk_files = 0
+        for fi, fp in enumerate(files):
+            if shutdown:
+                break
+            try:
+                cb.ingest_file(fp)
+                chunk_files += 1
+            except Exception as e:
+                cb.total_errors += 1
+                if cb.total_errors <= 10:
+                    print(f"{chunk_tag} Error: {fp.name}: {e}", flush=True)
+            if (fi + 1) % 500 == 0:
+                elapsed = time.time() - t_start
+                total_so_far = cb.total_files + chunk_files
+                rate = total_so_far / elapsed if elapsed > 0 else 0
+                print(f"{chunk_tag} [{fi+1}/{len(files)}] "
+                      f"total={total_so_far} ({rate:.1f}/s)", flush=True)
+
+        result = cb.commit_chunk()
+        elapsed = time.time() - t_start
+        rate = cb.total_files / elapsed if elapsed > 0 else 0
+        print(f"{chunk_tag} Committed: {result['files']} files, "
+              f"root={str(result.get('merkle_root', ''))[:16]}... "
+              f"({rate:.1f}/s cumulative)", flush=True)
+
+        if staged:
+            staged_chunk = STAGE_ROOT / dataset_name / subdir_name
+            if staged_chunk.exists():
+                shutil.rmtree(staged_chunk, ignore_errors=True)
+
+    if shutdown:
+        print(f"{tag} Interrupted — {len(cb.completed_chunks)}/{len(subdirs)} "
+              f"chunks committed to spine. Resume will continue.", flush=True)
+        unstage_dataset(dataset_name)
+        return {
+            "dataset": dataset_name,
+            "status": "interrupted",
+            "chunks_done": len(cb.completed_chunks),
+            "chunks_total": len(subdirs),
+            "files": cb.total_files,
+            "errors": cb.total_errors,
+        }
+
+    result = cb.finalize()
+
+    marker_data = {
+        "braided_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "files": result["total_files"],
+        "errors": result["total_errors"],
+        "elapsed_s": round(time.time() - t_start),
+        "spine_id": result["spine_id"],
+        "chunk_count": result["chunk_count"],
+        "signature": result.get("signature"),
+    }
+    with open(marker, "w") as f:
+        json.dump(marker_data, f, indent=2)
+
+    elapsed = time.time() - t_start
+    print(f"{tag} COMPLETE: {result['total_files']} files across "
+          f"{result['chunk_count']} chunks, {result['total_errors']} errors, "
+          f"{elapsed:.0f}s", flush=True)
+
+    unstage_dataset(dataset_name)
+    return {
+        "dataset": dataset_name,
+        "status": "complete",
+        "files": result["total_files"],
+        "errors": result["total_errors"],
+        "chunk_count": result["chunk_count"],
+        "elapsed_s": round(elapsed),
+        "spine_id": result["spine_id"],
+    }
+
+
 def braid_dataset(dataset_name, dry_run=False, use_staging=True):
-    """Braid a single dataset. Returns result dict."""
+    """Braid a single dataset. Routes to chunked braiding for large datasets."""
     ds_path = DATA_ROOT / dataset_name
     marker = ds_path / ".braided"
 
     if marker.exists():
         return {"dataset": dataset_name, "status": "skipped", "reason": "already braided"}
+
+    if has_subdirs(ds_path) and not dry_run:
+        return braid_chunked(dataset_name, use_staging=use_staging)
 
     files_src = sorted(
         f for f in ds_path.rglob("*")
@@ -175,7 +322,8 @@ def braid_dataset(dataset_name, dry_run=False, use_staging=True):
     last_report = t_start
 
     try:
-        braid = InlineBraid(dataset_name)
+        braid = ChunkedBraid(dataset_name, state_dir=ds_path)
+        braid.begin_chunk("_flat")
     except RuntimeError as e:
         print(f"{tag} FATAL: {e}", file=sys.stderr, flush=True)
         if staged_path:
@@ -190,8 +338,8 @@ def braid_dataset(dataset_name, dry_run=False, use_staging=True):
         try:
             braid.ingest_file(fp)
         except Exception as e:
-            braid.errors += 1
-            if braid.errors <= 5:
+            braid.total_errors += 1
+            if braid.total_errors <= 5:
                 print(f"{tag} Error on {fp.name}: {e}", file=sys.stderr, flush=True)
 
         now = time.time()
@@ -207,6 +355,7 @@ def braid_dataset(dataset_name, dry_run=False, use_staging=True):
         unstage_dataset(dataset_name)
 
     if shutdown:
+        braid.commit_chunk()
         return {
             "dataset": dataset_name,
             "status": "interrupted",
@@ -221,30 +370,29 @@ def braid_dataset(dataset_name, dry_run=False, use_staging=True):
     marker.write_text(json.dumps({
         "dataset": dataset_name,
         "file_count": len(files),
-        "event_count": result.get("event_count", 0),
-        "merkle_root": str(result.get("merkle_root", "")),
-        "session_id": result.get("session_id", ""),
+        "total_files": result.get("total_files", 0),
         "spine_id": result.get("spine_id", ""),
+        "chunk_count": result.get("chunk_count", 1),
         "braided_at": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
         "elapsed_s": round(elapsed, 1),
         "rate": round(rate, 1),
-        "errors": result.get("errors", 0),
+        "errors": result.get("total_errors", 0),
         "staged": bool(staged_path),
     }, indent=2) + "\n")
 
-    print(f"{tag} DONE: {result.get('event_count', 0)} events, "
-          f"{rate:.1f}/s, {result.get('errors', 0)} errors, "
+    print(f"{tag} DONE: {result.get('total_files', 0)} events, "
+          f"{rate:.1f}/s, {result.get('total_errors', 0)} errors, "
           f"{elapsed:.0f}s {'(NVMe)' if staged_path else '(HDD)'}", flush=True)
 
     return {
         "dataset": dataset_name,
         "status": "braided",
         "file_count": len(files),
-        "event_count": result.get("event_count", 0),
+        "total_files": result.get("total_files", 0),
         "rate": round(rate, 1),
         "elapsed": round(elapsed, 1),
-        "errors": result.get("errors", 0),
-        "merkle_root": str(result.get("merkle_root", "")),
+        "errors": result.get("total_errors", 0),
+        "spine_id": result.get("spine_id", ""),
         "staged": bool(staged_path),
     }
 
@@ -261,14 +409,17 @@ def main():
     signal.signal(signal.SIGTERM, handle_signal)
     signal.signal(signal.SIGINT, handle_signal)
 
-    all_datasets = sorted(
-        d.name for d in DATA_ROOT.iterdir()
-        if d.is_dir() and d.name not in ALWAYS_SKIP
-    )
-
     if args.only:
         selected = set(args.only.split(","))
-        all_datasets = [d for d in all_datasets if d in selected]
+        all_datasets = sorted(
+            d.name for d in DATA_ROOT.iterdir()
+            if d.is_dir() and d.name in selected
+        )
+    else:
+        all_datasets = sorted(
+            d.name for d in DATA_ROOT.iterdir()
+            if d.is_dir() and d.name not in ALWAYS_SKIP
+        )
 
     if args.skip:
         skip = set(args.skip.split(","))
@@ -309,7 +460,7 @@ def main():
         results.append(braid_dataset(ds, use_staging=not args.no_stage))
 
     wall = time.time() - t_start
-    braided = [r for r in results if r["status"] == "braided"]
+    braided = [r for r in results if r["status"] in ("braided", "complete")]
     errors = [r for r in results if r["status"] == "error"]
     skipped = [r for r in results if r["status"] == "skipped"]
 
@@ -319,7 +470,7 @@ def main():
     print(f"Errors:   {len(errors)}", flush=True)
     print(f"Wall:     {wall:.0f}s ({wall/3600:.1f}h)", flush=True)
 
-    total_events = sum(r.get("event_count", 0) for r in braided)
+    total_events = sum(r.get("total_files", r.get("event_count", 0)) for r in braided)
     total_errors = sum(r.get("errors", 0) for r in braided)
     print(f"Total events: {total_events:,}", flush=True)
     print(f"Total file errors: {total_errors}", flush=True)
