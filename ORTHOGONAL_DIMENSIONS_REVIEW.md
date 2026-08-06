@@ -563,6 +563,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G61 | Compute memoization via provenance trio | **ACTIVE** | strandGate thermalized lattice configs as CAS objects with provenance braids. 37 min CPU thermalization → instant on cache hit. Same BLAKE3→CAS→DAG→braid pattern as data acquisition. Cross-gate: biomeGate pulls configs for parity checks. Parallel pipeline: GPU produces while CPU thermalizes next β. NFT-style braids for both config and production results. |
 | G62 | Nanowire → Primal Builder (mesh-routed builds) | **ACTIVE** | Phase 2a DONE: manifest-driven sub-builders (no recompile to add gates). Phase 2b SPEC: songBird mesh-routed `harvest.request`/`harvest.complete`. Foreman pattern: symmetric — any gate can request, any gate can build. Capability advertisement on startup. Parallel dispatch. biomeGate as second sub-builder (NW-05 pending). |
 | G63 | BTSP local-trust (SO_PEERCRED for same-gate UDS) | **ACTIVE** | nestGate accepts same-gate callers without full BTSP X25519 handshake. Process-level auth via `SO_PEERCRED` — membrane group callers are trusted by filesystem perms. Unblocks footPrint CAS write, tideGlass CAS integration, all gardens/protists on same gate. Zero config, maximally primal-like. Proposed in footPrint Phase 2 deploy ready handoff. |
+| G64 | **Cephalization — tarpc convergent evolution** | **ACTIVE** | All 15 primals converge to dual-protocol (JSON-RPC + tarpc) on their own timeline via their own code — convergent evolution (bats/birds/insects all fly differently). **Phase 1 (intra-gate)**: primals on same gate compose via tarpc UDS (binary, zero-copy, sub-ms). Eliminates Tower Atomic port assignments — songBird routes, port-agnostic. **Phase 2 (inter-gate)**: cross-gate starts JSON-RPC on songBird mesh, upgrades to tarpc when trust established. **Version gap**: songBird + petalTongue on tarpc 0.34, all others 0.37 (bincode 1.3→2.x blocks alignment). **Current**: 5 primals tarpc-default (coralReef, barraCuda, toadStool, nestGate, squirrel). All 15 have tarpc dep. 11 have `#[tarpc::service]`. coralReef is tarpc-first (vanguard). **Thesis**: westGate convoy 217/s was ~5ms/file JSON-RPC IPC. tarpc binary framing eliminates serde roundtrip — composition goes exponential. |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -700,7 +701,7 @@ completeness.
 **11 gates ONLINE** (6 NUCLEUS at v4.57+, 1 crankshaft + agentic, 4 other). **9 glacial goals COMPLETE** (G3, G4, G8, G10, G17, G21, G22, G29, G63).
 **30 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G31, G32, G34, G35, G36, G37, G38, G39, G43, G44, G45, G53, G54, G55, G56, G57, G58, G59, G60, G61, G62).
 **20 GLACIAL/CONCEPT** (future phases).
-**59 total glacial goals** tracked.
+**60 total glacial goals** tracked.
 
 **DEBT CLEARING + DEPOT READINESS** — current phase:
 - ~~S1: sweetGrass compile fix~~ — **RESOLVED** (LedgerClient clean, 1,655 tests)

@@ -53,6 +53,39 @@ All code-level blockers (S1–S8, B1–B2, O1/O3/O4/O8, S4–S5) are **cleared**
 
 ---
 
+## CEPHALIZATION — G64: tarpc CONVERGENT EVOLUTION
+
+The ecosystem is dual-protocol by design: JSON-RPC is the discovery/bootstrap layer, tarpc is the performance composition layer. Like biological cephalization — organisms developing centralized coordination — all primals converge to a common tarpc composition pattern while evolving through their own code independently. Bats, birds, and insects all fly, but each evolved flight on their own terms.
+
+### Inter-Membrane Transport Layers
+
+| Layer | Protocol | Scope | Speed | When |
+|-------|----------|-------|-------|------|
+| **Intra-gate** | tarpc UDS (binary) | Primals on same NUCLEUS | sub-ms, zero serde | Phase 1 (NOW — 5 primals ready) |
+| **Cross-gate bootstrap** | JSON-RPC over songBird mesh | Gate-to-gate discovery | ~1-5ms | Current (LIVE) |
+| **Cross-gate elevated** | tarpc over songBird relay | Gate-to-gate composition | sub-ms binary | Phase 2 (after version convergence) |
+| **Browser/diagnostic** | JSON-RPC / REST | Dashboards, health, tools | ~10ms | Permanent (conjugation layer) |
+
+### Current tarpc Readiness
+
+| State | Primals | Count |
+|-------|---------|-------|
+| **tarpc-default** (server + client, default feature) | coralReef, barraCuda, toadStool, nestGate, squirrel | 5 |
+| **tarpc-wired** (service definitions, optional) | songBird, sweetGrass, loamSpine, rhizoCrypt, petalTongue, biomeOS | 6 |
+| **tarpc dep only** (not yet serving) | bearDog, skunkBat, sourDough, bingoCube | 4 |
+
+### Convergence Blockers
+
+1. **tarpc version split**: songBird + petalTongue on **0.34**, all others on **0.37**. bincode 1.3→2.x compatibility blocks upgrade.
+2. **UDS protocol fragmentation**: 6 divergences documented (DIV-1→6). Some primals use BTSP framing, some don't. songBird uses plain JSON on UDS.
+3. **Port-agnostic routing**: Tower Atomic currently assigns ports. Cephalization eliminates this — songBird discovers and routes by capability, not port.
+
+### Performance Thesis
+
+westGate convoy achieves 217 files/s with JSON-RPC IPC (~5ms/file primal time). tarpc binary framing eliminates the JSON serde roundtrip entirely. For intra-gate composition (same UDS, same machine), this could push primal-to-primal calls below 100µs — **potentially 50x improvement** for high-frequency composition patterns like provenance braiding, CAS operations, and GPU dispatch chains.
+
+---
+
 ## DEPOT STATUS
 
 All 15 primals compile clean at HEAD. Pushed to Forgejo. **Depot REBUILT** — 26 binaries on golgi. blueGate sub-builder proven (15/15 Windows).
