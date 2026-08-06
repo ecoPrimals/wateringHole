@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Cephalization Era
 
-**Date**: Aug 6, 2026 4:50PM | **Wave**: 156p | **From**: eastGate overwatch
-**Posture**: **CEPHALIZATION PUNCH LIST.** C2 15/15 COMPLETE. G65 8/15. ZERO P0/P1/P2. 15/15 GREEN. This blurb is the remaining work list to fully cephalize all primals + cellMembrane. Once clear, we pivot to deploy + downstream. strandGate + westGate subprojects continue in background.
+**Date**: Aug 6, 2026 5:10PM | **Wave**: 156q | **From**: eastGate overwatch
+**Posture**: **CEPHALIZATION PUNCH LIST.** C2 15/15 COMPLETE. G65 9/15. ZERO P0/P1/P2. 15/15 GREEN. skunkBat G65 shipped. This blurb is the remaining work list to fully cephalize all primals + cellMembrane. Once clear, we pivot to deploy + downstream. strandGate + westGate subprojects continue in background.
 
 ---
 
@@ -9,7 +9,7 @@
 
 Every primal and cellMembrane listed with what they need to do to be fully cephalized. Read sourDough (`d3d125f`) as the G65 reference implementation. Read `specs/PROTOCOL_NEGOTIATION_SPEC.md` for the standard.
 
-### G65 DONE (8/15) — no remaining cephalization work
+### G65 DONE (9/15) — no remaining cephalization work
 
 | Primal | HEAD | G65 | Owner | Notes |
 |--------|------|-----|-------|-------|
@@ -21,8 +21,9 @@ Every primal and cellMembrane listed with what they need to do to be fully cepha
 | **nestGate** | `262406c` | SHIPPED | overwatch | G65 Session 139. +758 lines. Multi-tier CAS. |
 | **rhizoCrypt** | `a269b2c` | SHIPPED | sporeGate | G65 + tarpc UDS. +789 lines. |
 | **sweetGrass** | `f1efb27` | SHIPPED | sporeGate | G65 + `convergence.pressure` backpressure. +495 lines. |
+| **skunkBat** | G65 | SHIPPED | eastGate | G65 protocol negotiation. 643 tests. |
 
-### G65 REMAINING (7/15) — each primal implements protocol negotiation independently
+### G65 REMAINING (6/15) — each primal implements protocol negotiation independently
 
 | Primal | HEAD | Owner | What's needed | Complexity |
 |--------|------|-------|---------------|------------|
@@ -31,7 +32,6 @@ Every primal and cellMembrane listed with what they need to do to be fully cepha
 | **barraCuda** | `7e82341` | biomeGate | G65 protocol negotiation. G65 readiness docs already shipped. Has C2 dual-socket + tarpc default. | Low — readiness docs done, just implement |
 | **toadStool** | `8fdc98c` | biomeGate | G65 protocol negotiation. **Also C4**: sporeGate ops restart (`sudo systemctl restart membrane-toadstool`) to pick up socket perms fix for nestgate.io 13/13. | Low (code) + ops (restart) |
 | **loamSpine** | `96ea990` | sporeGate | G65 protocol negotiation. Already tarpc-CONVERGED (37 methods, full domain parity). tarpc test coverage + UDS E2E just shipped. | Low — most tarpc-mature primal |
-| **skunkBat** | `46eb963` | eastGate | G65 protocol negotiation. Has C2 dual-socket + tarpc 11 methods. 626 tests. | Low — simple threat primal |
 | **bingoCube** | `5885d88` | eastGate | G65 protocol negotiation. Just shipped C2 (v0.2.0). | Low — smallest primal |
 
 ### cellMembrane — discovery evolution for G65
@@ -66,7 +66,7 @@ squirrel's true domain: AI coordination, tool routing, signal dispatch, G65 RPC,
 |-------|--------|
 | ~~Phase 1~~ | JSON-RPC only — **15/15 COMPLETE** |
 | ~~Phase 2 (C2)~~ | Dual-socket — **15/15 COMPLETE** |
-| **Phase 3 (G65)** | Protocol negotiation — **8/15 shipped, 7 remaining** |
+| **Phase 3 (G65)** | Protocol negotiation — **9/15 shipped, 6 remaining** |
 | **C8** | squirrel excision — **~35K lines identified, guidance issued** |
 | **cellMembrane** | Discovery evolution — **tarpc-aware registry done, G65-aware pending** |
 | **C3** | coralReef JSON-RPC health shim — **pending** |
@@ -109,7 +109,7 @@ Depot rebuild → gate deployment → springs activation → science.
 |-------------|---------|------------|
 | **sporeGate** | sweetGrass ✅, rhizoCrypt ✅, loamSpine ❌ | 2/3 |
 | **biomeGate** | toadStool ❌, barraCuda ❌, coralReef ❌ | 0/3 |
-| **eastGate** | bearDog ✅, squirrel ✅, sourDough ✅, skunkBat ❌, bingoCube ❌ | 3/5 |
+| **eastGate** | bearDog ✅, squirrel ✅, sourDough ✅, skunkBat ✅, bingoCube ❌ | 4/5 |
 | **overwatch** | biomeOS ✅, petalTongue ✅, nestGate ✅, songBird ❌, cellMembrane ❌ | 3/5 |
 
 ---
@@ -119,7 +119,7 @@ Depot rebuild → gate deployment → springs activation → science.
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| Cephalization | **C2 15/15 COMPLETE. G65 8/15. C8 guidance issued. cellMembrane pending.** |
+| Cephalization | **C2 15/15 COMPLETE. G65 9/15. C8 guidance issued. cellMembrane pending.** |
 | Gates online | **11** |
 | Depot | **REBUILD NEEDED** (all primals advanced — C2 + G65 wave) |
 | Primal tests | **~140,000+** |
@@ -140,4 +140,4 @@ Depot rebuild → gate deployment → springs activation → science.
 
 ---
 
-*Wave 156p — **Cephalization Punch List.** C2 15/15 COMPLETE. G65 8/15 (squirrel, sourDough, bearDog, biomeOS, petalTongue, nestGate, rhizoCrypt, sweetGrass). 7 primals remaining for G65 (songBird, coralReef, barraCuda, toadStool, loamSpine, skunkBat, bingoCube). cellMembrane G65-aware discovery pending. C8 squirrel ~35K excision guidance issued. C3 coralReef health shim + C4 toadStool restart pending. Once clear: deploy rebuild → downstream → science. 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
+*Wave 156q — **Cephalization Punch List.** C2 15/15 COMPLETE. G65 9/15 (squirrel, sourDough, bearDog, biomeOS, petalTongue, nestGate, rhizoCrypt, sweetGrass, skunkBat). 6 primals remaining for G65 (songBird, coralReef, barraCuda, toadStool, loamSpine, bingoCube). cellMembrane G65-aware discovery pending. C8 squirrel ~35K excision guidance issued. C3 coralReef health shim + C4 toadStool restart pending. Once clear: deploy rebuild → downstream → science. 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*
