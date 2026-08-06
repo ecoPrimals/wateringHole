@@ -1,6 +1,6 @@
 # rhizoCrypt Wave 156f — Clean Audit (Aug 5, 2026)
 
-**Date**: Aug 5, 2026 | **Wave**: 156f | **Head**: `c0abe75`
+**Date**: Aug 5, 2026 | **Wave**: 156h | **Head**: `061acfa`
 
 ## Status
 
@@ -27,16 +27,24 @@ verification pass only.
 
 | Wave | Head | Key Changes |
 |------|------|-------------|
+| 156h | `061acfa` | G64 cephalization audit (confirmed tarpc-wired), blake3 1.8.6 |
 | 156f | `c0abe75` | Line count scrub, regex-automata 0.4.18, debris audit |
 | 156e | `ab701b0` | **G63 SO_PEERCRED**: peer credential extraction on UDS, `auth.peer_info` enriched |
-| 156d | `ed67a9d` | Root doc cleanup, deployment checklist, debris audit |
 | 156c | `cce0cb9` | RPC integration port collision fix, BTSP env isolation |
 | 156b | `275ac42` | Wire `notify_dehydration_batch` (N→1 RPC), dead vendor HTTP purge (-4,100 lines) |
 | 155n | `0356187` | BTSP test isolation, dep update, deep debt audit |
 
+## G64 Cephalization Posture
+
+rhizoCrypt is **tarpc-wired** — dual-protocol already complete:
+- **tarpc 0.37** service (28 ops) via `rhizo-crypt-rpc`
+- **JSON-RPC 2.0** handler (39 methods, 7 domains) with HTTP + NDJSON + UDS
+- **BTSP Phase 2+3** + **G63 SO_PEERCRED** local-trust on UDS
+- No version migration needed (already on tarpc 0.37 + bincode 2.x)
+
 ## Remaining (not rhizoCrypt scope)
 
-- **S1**: sweetGrass `LedgerClient` refactor (sporeGate team — compile fix)
-- **S2/S3**: sweetGrass `convergence.check` + `braid.list` (sporeGate team)
-- **S6**: loamSpine `spine.status` (sporeGate team)
-- Method gate **policy** to use G63 peer_uid for access decisions (G63 phase 2)
+- **S1–S3**: sweetGrass items SHIPPED this wave (convergence.check, braid.list, LedgerClient)
+- **S6**: loamSpine `spine.status` SHIPPED this wave
+- **G63 phase 2**: method gate policy to use `peer_uid` for access decisions
+- **G64 C1**: tarpc version alignment for songBird + petalTongue (not rhizoCrypt)
