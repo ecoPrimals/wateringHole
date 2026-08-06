@@ -188,13 +188,13 @@ Remaining 7 primals (songBird, bearDog, biomeOS, barraCuda, cellMembrane, skunkB
 
 ### Track B: Lattice QCD (Murillo / Chuna)
 
-| Step | Status | Next |
-|------|--------|------|
-| barraCuda DF64 | **DONE** (FP64 104T RTX 3090) | — |
-| hotSpring SU(N) | **GENERALIZED** (N=2→8, +4,361 lines). GaugeGroup trait, GenericLattice, `tile_from()` DP, NPU phase classifier. | — |
-| 16⁴ dual-GPU | **CONFIRMED** (6 ppm cross-vendor) | — |
-| **arXiv Rung 1** | 42-item rubric. Murillo/Chuna/Bazavov panel. | **12 MUST-fix → LaTeX → send** |
-| SU(N) thermalization | 87-config grid + NPU monitor + metalforge experiment | ~2wk |
+| Component | Status | Next |
+|-----------|--------|------|
+| **strandGate** | **arXiv rubric 40/42 (95%).** 16⁴ DUAL-GPU DATA COMPLETE (6 ppm, +0.01%). **GPU BENCHMARK**: 37× speedup at 16⁴, peak 54× at 8⁴. DF64 proven 4–8× faster than native f64 on consumer GPUs. Full cost-performance table with real ms/traj data. **SU(N) GENERALIZED** — GaugeGroup trait covers N=2,3,4,5,6,8. 87-config memo table RUNNING. | 2 external items → 42/42 → submit. SU(N) data tables populate as configs land. |
+| **hotSpring** | 8 arxiv binaries. GaugeGroup trait + GenericLattice\<G\>. **652 lib tests.** Config cache LIVE. `bench_gpu_hmc` COMPLETE (6 volumes, CPU+GPU). `arxiv_reversibility_test` COMPLETE (dt² scaling confirmed). `arxiv_jackknife_stats` COMPLETE (bin-size jackknife, thermalization history). | SU(2) thermalizing. SU(3)→SU(8) queued. ~17 days full coverage. |
+| **barraCuda** | MultiDevicePool. 4,959 tests. GREEN. | Cross-vendor GPU dispatch. SU(N≥4) shader generalization needed (B3). |
+| **esotericWebb** | V31b. CELL BOOT SUCCEEDED. Scene builder. 484 tests. | QCD viz via petalTongue. |
+| **Provenance** | Compute CAS pattern validated. Cross-gate AAR written. Same BLAKE3/braid as westGate data CAS. **~2% overhead** (12 ms provenance / 639 ms trajectory). 0/87 configs fully braided (NFT wired, sweep pending). | Cross-frontier braid: strandGate compute → ironGate product CAS. |
 
 ---
 
@@ -227,6 +227,29 @@ Remaining 7 primals (songBird, bearDog, biomeOS, barraCuda, cellMembrane, skunkB
 | **biomeGate** | toadStool, barraCuda, coralReef |
 | **eastGate** | bearDog, skunkBat, squirrel, sourDough, bingoCube |
 | **overwatch** | biomeOS, songBird, nestGate, petalTongue, cellMembrane |
+
+---
+
+## METRICS
+
+| Metric | Value |
+|--------|-------|
+| P0/P1/P2 | **ZERO** |
+| Debt items | **12/26 CLEARED** (S1–S7, B1–B2, O1, O3–O4, O8; S4–S5 verified pre-shipped) |
+| Gates online | **11** |
+| Depot | **v4.57+ SYNCED — ALL 6 NUCLEUS GATES. 15/15 primals compile clean at HEAD. REBUILD READY.** |
+| Data NAS | **westGate** (3.21 TB / 153 datasets / 17+ domains / **452 GB CAS**) |
+| ironGate storage | **12.7 TB CAS LIVE** — `/mnt/nestgate`, nestGate v0.5.0, 9 squirrel providers |
+| Primal tests | **~140,000+** |
+| Signal dispatch | **G18 LIVE** — ironGate, 9 providers, cross-primal routing validated |
+| Convoy provenance | **217/s on NVMe** (700× total). Inline braiding 265/s. 4-tier storage. Cross-gate AAR: strandGate compute CAS × westGate data CAS converged. |
+| arXiv | **40/42 RUBRIC (95%).** GPU benchmarked (37× at 16⁴, 54× at 8⁴). DF64 > native f64 (4–8× on consumer GPUs). SU(N) N=2–8. 87-config memo grid RUNNING. 2 external items remain (URL + upstream bug). |
+| Convergence | **convoy running** — 11M+ files, ~14h ETA at 217/s on NVMe |
+| K-derm | **3/3 FULLY OPERATIONAL** |
+| GPS data | **CONVERTED** — 11 JSON (103 MB) CAS-ingested with BLAKE3 |
+| nestGate IPC | **94 methods, 21 capability domains** (content.ingest, dataset.convergence, dual-path CAS) |
+| sweetGrass | **47 methods + 11 aliases** (convergence.check, braid.list, compute_depth) |
+| loamSpine | **53 methods** (spine.status, full observability) |
 
 ---
 
