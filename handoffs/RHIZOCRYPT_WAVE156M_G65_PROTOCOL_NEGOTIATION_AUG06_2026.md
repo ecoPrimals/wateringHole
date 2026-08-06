@@ -1,6 +1,6 @@
 # rhizoCrypt Wave 156m — G65 Protocol Negotiation (Aug 6, 2026)
 
-**Date**: Aug 6, 2026 | **Wave**: 156m | **Head**: *(pending commit)*
+**Date**: Aug 6, 2026 | **Wave**: 156m | **Head**: `a269b2c`
 
 ## What Was Done
 
@@ -65,7 +65,7 @@ No negotiation = JSON-RPC (full backward compatibility with existing clients).
 
 | Wave | Head | Key Changes |
 |------|------|-------------|
-| **156m** | *(pending)* | **G65 protocol negotiation on single socket** (Phase 3 of G64) |
+| **156m** | `a269b2c` | **G65 protocol negotiation on single socket** (Phase 3 of G64) |
 | 156j | `0961875` | G64 C2 dual-socket: tarpc binary UDS + JSON-RPC UDS, clean audit |
 | 156h | `061acfa` | G64 cephalization audit (confirmed tarpc-wired), blake3 1.8.6 |
 | 156e | `ab701b0` | G63 SO_PEERCRED: peer credential extraction on UDS |
