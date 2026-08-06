@@ -13,7 +13,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal / Coordination
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 156h)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 156i)
 - [x] Gate heads published (`heads/*.toml`) — golgiBody auto-publishing active
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] **ECOSYSTEM_BLURB.md** is the universal handoff (Tracks A+B converged)
@@ -67,7 +67,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] coralReef: **3,525** tests (3,519 pass, 6 HW-gated), VOP3 opcode split (929→523 LOC), WGSL double-parse eliminated, SM20 f64 legalize hardened, compile-path heap allocs eliminated (**Wave 156g**)
 - [x] cellMembrane: **1,281+** tests, **P2 platform detection FIXED** (`d7026d7`), `TargetArch` deprecated → `Platform::detect()`, `validate_with_deps()`, J19+J16+J13 killed, registry API hardened. (**Wave 155n**)
 - [x] rhizoCrypt: 1,900 tests, BTSP→DAG bridge, cross-gate provenance
-- [x] loamSpine: **1,752** tests, `spine.status` SHIPPED (53 methods, S6 CLEARED), zero unsafe/unwrap/TODO
+- [x] loamSpine: **1,752** tests, `spine.status` SHIPPED (53 JSON-RPC + **37 tarpc** methods, S6 CLEARED), **G64 tarpc-CONVERGED** (first primal with full domain parity), zero unsafe/unwrap/TODO
 - [x] sweetGrass: **1,655** tests (47 methods + 11 aliases), `convergence.check` + `braid.list` SHIPPED (S1/S2/S3 CLEARED). LedgerClient refactor compiles clean. (**Wave 156f**)
 - [x] squirrel: **7,140 tests** (Waves 156e→156j: AIToolsError migration, PrimalType dedup, EcosystemPrimalType→String, port elimination, sync_manager cleanup -546 LOC). 0 unsafe, 0 clippy. **`signal.dispatch` WIRED (G18).** (**Wave 156j**)
 - [x] primalSpring: 197 scenarios, all PASS
@@ -540,7 +540,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G61 | Compute memoization via provenance trio | **ACTIVE** | strandGate thermalized lattice configs as CAS objects with provenance braids. 37 min CPU thermalization → instant on cache hit. Same BLAKE3→CAS→DAG→braid pattern as data acquisition. Cross-gate: biomeGate pulls configs for parity checks. Parallel pipeline: GPU produces while CPU thermalizes next β. NFT-style braids for both config and production results. |
 | G62 | Nanowire → Primal Builder (mesh-routed builds) | **ACTIVE** | Phase 2a DONE: manifest-driven sub-builders (no recompile to add gates). Phase 2b SPEC: songBird mesh-routed `harvest.request`/`harvest.complete`. Foreman pattern: symmetric — any gate can request, any gate can build. Capability advertisement on startup. Parallel dispatch. biomeGate as second sub-builder (NW-05 pending). |
 | G63 | BTSP local-trust (SO_PEERCRED for same-gate UDS) | **ACTIVE** | nestGate accepts same-gate callers without full BTSP X25519 handshake. Process-level auth via `SO_PEERCRED` — membrane group callers are trusted by filesystem perms. Unblocks footPrint CAS write, tideGlass CAS integration, all gardens/protists on same gate. Zero config, maximally primal-like. Proposed in footPrint Phase 2 deploy ready handoff. |
-| G64 | **Cephalization — tarpc convergent evolution** | **ACTIVE** | All 15 primals converge to dual-protocol (JSON-RPC + tarpc) on their own timeline via their own code — convergent evolution (bats/birds/insects all fly differently). **Phase 1 (intra-gate)**: primals on same gate compose via tarpc UDS (binary, zero-copy, sub-ms). Eliminates Tower Atomic port assignments — songBird routes, port-agnostic. **Phase 2 (inter-gate)**: cross-gate starts JSON-RPC on songBird mesh, upgrades to tarpc when trust established. **Version gap**: songBird + petalTongue on tarpc 0.34, all others 0.37 (bincode 1.3→2.x blocks alignment). **Current**: 5 primals tarpc-default (coralReef, barraCuda, toadStool, nestGate, squirrel). All 15 have tarpc dep. 11 have `#[tarpc::service]`. coralReef is tarpc-first (vanguard). **Thesis**: westGate convoy 217/s was ~5ms/file JSON-RPC IPC. tarpc binary framing eliminates serde roundtrip — composition goes exponential. |
+| G64 | **Cephalization — tarpc convergent evolution** | **ACTIVE — FIRST CONVERGENCE** | **loamSpine is first tarpc-CONVERGED primal** (37 tarpc methods, full domain parity with 53 JSON-RPC methods). All 15 primals converge to dual-protocol on their own timeline — convergent evolution (bats/birds/insects). **Phase 1 (intra-gate)**: tarpc UDS (binary, zero-copy, sub-ms). **Phase 2 (inter-gate)**: JSON-RPC → tarpc elevation via songBird. **Version gap**: songBird + petalTongue on 0.34, rest 0.37 (bincode 1.3→2.x). **Current**: 1 CONVERGED (loamSpine), 5 tarpc-default (coralReef, barraCuda, toadStool, nestGate, squirrel), 5 tarpc-wired, 4 tarpc-dep. coralReef tarpc-first (vanguard). **Thesis**: convoy 217/s at ~5ms JSON-RPC IPC → tarpc binary goes exponential. |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -673,9 +673,9 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 **Active**: 9 dimensions (1–5, 7–8, 11–12)
 **Fossilized**: 14 dimensions (F1–F14)
-**Summary**: Wave 156h — **CEPHALIZATION ERA.** 15/15 GREEN. Depot REBUILT (26 binaries). nestgate.io 10/12. G64 cephalization goal established (tarpc convergent evolution). 3 glacial goals graduated (G31 batch RPCs, G55 provenance 700x, G59 three-domain topology). D10 jelly strings FOSSILIZED (F14). **Priority sequence**: primal mountain (tarpc convergence) → sporeGate deploy → NUCLEUS springs + cross-gate → ironGate as downstream CAS depot. ZERO P0/P1/P2. ~140K+ tests. **60 glacial goals** tracked (12 COMPLETE, **25 ACTIVE**, 23 GLACIAL/CONCEPT).
+**Summary**: Wave 156i — **CEPHALIZATION ERA — CONVOY COMPLETE.** 15/15 GREEN. **D3 convoy 100% (10.99M events braided).** Multi-tier CAS LIVE on westGate. loamSpine first tarpc-CONVERGED primal (37 methods). toadStool C5 RESOLVED. hotSpring +4,361 lines SU(N) science. esotericWebb V31c. ZERO P0/P1/P2. ~140K+ tests. **60 glacial goals** tracked (12 COMPLETE, **25 ACTIVE**, 23 GLACIAL/CONCEPT).
 
-**Phase shift**: From "enmesh the LAN HPC" to **"cephalize — converge to tarpc composition."** JSON-RPC is the bootstrap/discovery layer. tarpc is the performance/composition layer. songBird handles routing, port-agnostic. Each primal converges on its own timeline. westGate convoy + strandGate hotSpring continue background work. ironGate becomes the downstream surface (NF GPS, ABG, MILC, novel ferment transcript depot).
+**Phase shift**: **"Cephalize — converge to tarpc composition."** loamSpine achieved first convergence (37/53 methods on tarpc). JSON-RPC bootstraps, tarpc composes. westGate convoy DONE, multi-tier CAS LIVE. strandGate hotSpring pushing SU(N) science (+4,361 lines: GaugeGroup, tile_from, NPU). ironGate = downstream surface (NF GPS, ABG, MILC, novel ferment transcript depot).
 
 **151 files fossilized** across 11 checkpoints (1,472 total records). Active handoffs: 7.
 - **ironGate: DOWNSTREAM SURFACE.** NF GPS + ABG + MILC targets. Novel ferment transcript CAS depot (complements westGate data braids). G18 LIVE. 12.7 TB CAS. RTX 5070.
@@ -749,7 +749,7 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 ---
 
-*Last used*: Wave 156h — CEPHALIZATION ERA. Full orthogonal review. D10 fossilized (F14). G31+G55+G59 graduated to COMPLETE. G64 cephalization added. Priority reshaped: primal mountain → sporeGate deploy → NUCLEUS springs/cross-gate → ironGate downstream surface. 12 COMPLETE, 25 ACTIVE, 23 GLACIAL. ~140K tests, 15/15 GREEN. (Aug 5, 2026 LATE)
+*Last used*: Wave 156i — CEPHALIZATION ERA — CONVOY COMPLETE. D3 convoy 100% (10.99M events). Multi-tier CAS LIVE. loamSpine tarpc-CONVERGED (37 methods). toadStool C5 resolved. hotSpring +4,361 lines. esotericWebb V31c. 12 COMPLETE, 25 ACTIVE, 23 GLACIAL. ~140K tests, 15/15 GREEN. (Aug 6, 2026 AM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 156h — D10 Jelly Strings J9-J19 fossilized as F14. G31+G55+G59 graduated to COMPLETE. (151 total across 11 checkpoints, 1,472 total records)

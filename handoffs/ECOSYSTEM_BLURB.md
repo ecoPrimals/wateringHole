@@ -1,7 +1,24 @@
 # ecoPrimals Ecosystem Blurb — Cephalization Era
 
-**Date**: Aug 5, 2026 LATE | **Wave**: 156h | **From**: eastGate overwatch
-**Posture**: **CEPHALIZATION ERA.** ZERO P0/P1/P2. Depot REBUILT (26 binaries). 15/15 GREEN. ~140K+ tests. 14/26 debt items CLEARED. D10 fossilized (F14). G31+G55+G59 graduated COMPLETE. G64 cephalization goal ACTIVE. Priority sequence: primal mountain → sporeGate deploy → NUCLEUS springs/cross-gate → ironGate downstream surface. westGate CAS + strandGate hotSpring continue background.
+**Date**: Aug 6, 2026 AM | **Wave**: 156i | **From**: eastGate overwatch
+**Posture**: **CEPHALIZATION ERA — CONVOY COMPLETE.** ZERO P0/P1/P2. 15/15 GREEN. ~140K+ tests. **D3 convoy 100% — 10.99M provenance events braided.** Multi-tier CAS LIVE on westGate (ENOSPC→fix in one session). loamSpine tarpc-CONVERGED (37 methods). toadStool C5 RESOLVED (neuromorphic excluded from workspace). hotSpring +4,361 lines SU(N) science. esotericWebb V31c (bridge reconnect). Priority: primal mountain → sporeGate deploy → NUCLEUS springs → ironGate surface.
+
+---
+
+## LATEST ARRIVALS (since 156h)
+
+| Event | Source | Impact |
+|-------|--------|--------|
+| **D3 CONVOY 100% COMPLETE** | westGate | **10,994,802 provenance events braided** across 11,119,514 queue lines. All 4 workers finished. Queue fully processed. D3 CLOSED. |
+| **ENOSPC → Multi-tier CAS LIVE** | westGate | NVMe hot tier hit 100% at 313/s. Same-session fix: `SubstrateTiers` wired into `content.put`. Cross-tier dedup + 10 GB backpressure guard DEPLOYED. |
+| **loamSpine tarpc-CONVERGED** | sporeGate | G64 first convergence: 24→37 tarpc methods. All domain ops have tarpc parity. loamSpine moves from "tarpc-wired" to "tarpc-converged". |
+| **toadStool C5 RESOLVED** | biomeGate | Neuromorphic crates excluded from default workspace (-1,265 lines). Cross-gate builds unblocked without rustChip. |
+| **hotSpring +4,361 lines** | strandGate | SU(N) GaugeGroup trait + GenericLattice. `tile_from()` dynamic programming (bootstrap larger from cached). NPU phase classifier + thermalization monitor. |
+| **esotericWebb V31c** | ironGate | Bridge reconnection for stale primal connections. Documents `/run/membrane` socket permissions P1. |
+| **coralReef compiler evolution** | biomeGate | CFG block-id verify helper + `Src::without_modifier`. |
+| **rhizoCrypt** | sporeGate | blake3 1.8.5→1.8.6 dep update. |
+| **Compute Memoization doc** | whitePaper | NFT pattern formalized. Dynamic programming: tile 16⁴→32⁴ from cached configs. |
+| **Ephemeral tier AAR** | wateringHole | Full incident writeup. Lessons: backpressure > monitoring, nest atomic owns its pools. |
 
 ---
 
@@ -22,9 +39,10 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. JSON-RP
 
 | tarpc State | Primals | Count |
 |-------------|---------|-------|
-| **tarpc-default** | coralReef, barraCuda, toadStool, nestGate, squirrel | 5 |
-| **tarpc-wired** | songBird, sweetGrass, loamSpine, rhizoCrypt, petalTongue, biomeOS | 6 |
-| **tarpc dep only** | bearDog, skunkBat, sourDough, bingoCube | 4 |
+| **tarpc-CONVERGED** (full domain parity) | **loamSpine** (37 tarpc / 53 JSON-RPC) | 1 |
+| **tarpc-default** (server + client, default feature) | coralReef, barraCuda, toadStool, nestGate, squirrel | 5 |
+| **tarpc-wired** (service definitions, optional) | songBird, sweetGrass, rhizoCrypt, petalTongue, biomeOS | 5 |
+| **tarpc dep only** (not yet serving) | bearDog, skunkBat, sourDough, bingoCube | 4 |
 
 **Convergence blockers**:
 1. **tarpc 0.34 → 0.37**: songBird + petalTongue stuck on 0.34 (bincode 1.3→2.x).
@@ -41,7 +59,7 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. JSON-RP
 | **C2** | **UDS protocol convergence** — canonical dual-socket pattern: JSON-RPC on `.sock`, tarpc on `.tarpc.sock`. Each primal, same pattern. | all teams | Port-agnostic routing |
 | **C3** | **coralReef JSON-RPC health shim** — add minimal JSON-RPC `health.liveness` responder so nestgate.io shows 13/13. tarpc primary stays. | biomeGate | nestgate.io 13/13 alive |
 | **C4** | **toadStool deploy restart** — running binary on sporeGate predates depot B1/B2 fix. `sudo systemctl restart membrane-toadstool`. | sporeGate | nestgate.io 13/13 alive |
-| **C5** | **rustChip → Forgejo** — biomeGate-local repo, blocks toadStool workspace builds on other gates. | biomeGate | Cross-gate toadStool dev |
+| ~~**C5**~~ | ~~**rustChip → Forgejo**~~ — **RESOLVED.** Neuromorphic crates excluded from default workspace members. Cross-gate builds unblocked. rustChip publication is now optional (won't block anything). | biomeGate | ~~Cross-gate toadStool dev~~ **DONE** |
 
 ---
 
@@ -82,10 +100,11 @@ These teams continue their own project work independently.
 
 | Gate | Project | Status | ETA |
 |------|---------|--------|-----|
-| **westGate** | Convoy — 11M+ files at 217/s on NVMe hot tier | Running | ~14h |
-| **strandGate** | SU(N) thermalization — 87-config grid, 64 EPYC threads | Running | ~2wk |
-| **westGate** | Data braids convergence — promote primordial → fully braided | Post-convoy | After convoy |
-| **strandGate** | hotSpring SU(N) measurement battery | After thermalization | After grid |
+| ~~**westGate**~~ | ~~Convoy~~ — **100% COMPLETE. 10.99M events braided.** | **DONE** | — |
+| **westGate** | Multi-tier CAS drain: warm→cold rsync + `content.archive` wiring | NEXT | Post-drain |
+| **westGate** | Data braids convergence — promote primordial → fully braided | NEXT | After drain |
+| **strandGate** | SU(N) thermalization — 87-config grid + NPU phase classification | Running | ~2wk |
+| **strandGate** | hotSpring SU(N) measurement battery + `tile_from()` bootstrapping | After thermalization | After grid |
 
 ---
 
@@ -120,16 +139,18 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 
 | Primal | HEAD | Key Change |
 |--------|------|------------|
+| nestGate | `ad3923e` | **Multi-tier CAS** — warm writes, cross-tier dedup, backpressure (ENOSPC fix) |
+| loamSpine | `f7213cb` | **G64 tarpc-CONVERGED** — 24→37 tarpc domain methods |
+| toadStool | `22116a4` | **C5 RESOLVED** — neuromorphic excluded from workspace (-1,265 lines) |
+| coralReef | `15aab6f` | CFG block-id verify + `Src::without_modifier` |
+| rhizoCrypt | `061acfa` | blake3 1.8.5→1.8.6 |
 | sweetGrass | `4a6ec48` | convergence.check + braid.list (S1–S3) |
-| nestGate | `cbeb328` | content.ingest + dataset.convergence + Neural API (O1/O3/O4/O8) |
-| loamSpine | `ede1b65` | spine.status (S6) |
-| toadStool | `da284da` | socket perms (B1/B2) + Akida driver absorption |
 | petalTongue | `783aaac` | mesh.peers (S7) + health.liveness (S8) |
-| coralReef | `e5ff9a8` | VOP3 split, WGSL optimization (6 commits) |
-| squirrel | `d752462` | deep debt sweep 156e→156j |
-| rhizoCrypt | `c0abe75` | S4/S5 verified, clean audit |
+| squirrel | `d752462` | deep debt sweep 156e→156j (+local WIP: error refactor -978 lines) |
 
 Remaining 7 primals (songBird, bearDog, biomeOS, barraCuda, cellMembrane, skunkBat, sourDough, bingoCube) — depot-current, no changes this cascade.
+
+**Non-primal evolution**: hotSpring +4,361 lines (SU(N) GaugeGroup, NPU integration, tile_from()), esotericWebb V31c (bridge reconnect), whitePaper (compute memoization + ephemeral tier docs).
 
 ---
 
@@ -139,8 +160,8 @@ Remaining 7 primals (songBird, bearDog, biomeOS, barraCuda, cellMembrane, skunkB
 |------|---------|------|------------|
 | **sporeGate** | 14/14 v4.57+ | CI / membrane | Depot REBUILT. nestgate.io 10/12. **NEXT: toadStool restart (C4)** |
 | **ironGate** | 10/10 v4.57+ | **Downstream surface** | NF GPS + ABG + MILC. 12.7 TB CAS. footPrint LIVE. **NEXT: squirrel deploy (E2)** |
-| **westGate** | 14/14 v4.57 | **Data braids depot** | 3.21 TB / 452 GB CAS. Convoy running. **NEXT: nestGate TCP (O5), tideGlass boot (D1)** |
-| **strandGate** | v4.57+ (deferred) | Compute | SU(N) 87-config grid. Dual-GPU. Background. |
+| **westGate** | 14/14 v4.57 | **Data braids depot** | 3.21 TB / 452 GB CAS. **CONVOY COMPLETE (10.99M events).** Multi-tier CAS LIVE. **NEXT: drain warm→cold, nestGate TCP (O5), tideGlass boot (D1)** |
+| **strandGate** | v4.57+ (deferred) | Compute | SU(N) 87-config grid + NPU phase classifier + tile_from() DP. Background. |
 | **blueGate** | 14/14 v4.57+ | Windows dev | Sub-builder PROVEN (15/15). |
 | **southGate** | 13/13 v4.57+ | Validation | G17+G8 proven. |
 | **biomeGate** | Source-built | GPU lab | Akida. rustChip local. 3 VFIO GPUs. coralReef tarpc vanguard. |
@@ -155,7 +176,7 @@ Remaining 7 primals (songBird, bearDog, biomeOS, barraCuda, cellMembrane, skunkB
 | Step | Status | Next |
 |------|--------|------|
 | Provenance 7/7 | **DONE** | — |
-| westGate data federation | **3.21 TB / 452 GB CAS. GPS CONVERTED.** | Convoy completion |
+| westGate data federation | **3.21 TB / 452 GB CAS. GPS CONVERTED. CONVOY COMPLETE (10.99M events).** Multi-tier CAS LIVE. | Drain warm→cold |
 | tideGlass specs | **SHIPPED** (5 spec docs) | — |
 | **tideGlass Phase 0** | 220 tests. PetalTongueClient ACTIVATED. | **D1: cell boot on westGate** |
 | Phase 1: GPS reproduction | — | After Phase 0 |
@@ -167,10 +188,10 @@ Remaining 7 primals (songBird, bearDog, biomeOS, barraCuda, cellMembrane, skunkB
 | Step | Status | Next |
 |------|--------|------|
 | barraCuda DF64 | **DONE** (FP64 104T RTX 3090) | — |
-| hotSpring SU(N) | **GENERALIZED** (N=2→8, 652 tests) | — |
+| hotSpring SU(N) | **GENERALIZED** (N=2→8, +4,361 lines). GaugeGroup trait, GenericLattice, `tile_from()` DP, NPU phase classifier. | — |
 | 16⁴ dual-GPU | **CONFIRMED** (6 ppm cross-vendor) | — |
 | **arXiv Rung 1** | 42-item rubric. Murillo/Chuna/Bazavov panel. | **12 MUST-fix → LaTeX → send** |
-| SU(N) thermalization | 87-config grid RUNNING | ~2wk |
+| SU(N) thermalization | 87-config grid + NPU monitor + metalforge experiment | ~2wk |
 
 ---
 
@@ -181,7 +202,7 @@ Remaining 7 primals (songBird, bearDog, biomeOS, barraCuda, cellMembrane, skunkB
 | **sporePrint** | `sporeprint.primals.eco` | LIVE | — |
 | **footPrint** | `footprint.primals.eco` | LIVE (auto-loads) | squirrel UDS (E2) |
 | **nestgate.io** | `nestgate.io` | **10/12** sections | bearDog stub (E1), CAS browse |
-| **esotericWebb** | `webb.primals.eco` | GET 200 / HEAD 502 | HEAD fix (E3), WebGL (G19) |
+| **esotericWebb** | `webb.primals.eco` | GET 200 / HEAD 502 | **V31c** (bridge reconnect). HEAD fix (E3), WebGL (G19) |
 
 ---
 
@@ -217,4 +238,4 @@ Remaining 7 primals (songBird, bearDog, biomeOS, barraCuda, cellMembrane, skunkB
 
 ---
 
-*Wave 156h — **Cephalization Era.** Priority: primal mountain (G64 tarpc convergence) → sporeGate deploy → NUCLEUS springs + cross-gate → ironGate downstream surface. 3 goals graduated (G31, G55, G59). D10 fossilized (F14). ironGate = novel ferment transcript CAS depot. westGate = data braids depot. westGate convoy + strandGate SU(N) thermalization continue background. 12 COMPLETE / 25 ACTIVE / 23 GLACIAL. All 15 primals at HEAD, depot REBUILT, ~140K+ tests, 15/15 GREEN.*
+*Wave 156i — **Cephalization Era — Convoy Complete.** D3 convoy 100% done (10.99M events). Multi-tier CAS LIVE (ENOSPC→same-session fix). loamSpine first tarpc-CONVERGED primal (37 methods). toadStool C5 resolved (neuromorphic excluded). hotSpring +4,361 lines (SU(N) science push: GaugeGroup, tile_from, NPU). esotericWebb V31c (bridge reconnect). Priority: primal mountain → sporeGate deploy → NUCLEUS springs → ironGate surface. 12 COMPLETE / 25 ACTIVE / 23 GLACIAL. All 15 primals at HEAD, ~140K+ tests, 15/15 GREEN.*
