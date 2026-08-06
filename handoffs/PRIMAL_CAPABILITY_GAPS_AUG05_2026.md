@@ -67,20 +67,45 @@ These are data-specific or coordination tasks that don't belong in primals:
 
 ---
 
+### nestGate — Multi-Tier CAS (P0 — PROVEN CRITICAL)
+
+| Gap | Current Workaround | What It Would Do |
+|-----|-------------------|------------------|
+| `content.put` tier-aware writes | Symlink repoint (`~/.local/share/nestgate/storage`) | Write to warm tier (NVMe), dedup-check across ALL tiers. `SubstrateTiers` already exists in `nestgate-config` but is NOT wired to `nestgate-rpc` CAS handlers. |
+| `content.archive` / drain hook | Manual `rsync --remove-source-files warm → cold` | Post-`spine.commit` hook: migrate committed CAS objects from warm → cold. Hot tier is ephemeral working memory, not permanent storage. |
+| High-water mark backpressure | None (NVMe filled to 100%, crashed convoy + OS) | When warm tier reaches capacity threshold (e.g. 80%), pause ingestion or begin drain. Prevents filling the OS drive. |
+| Cross-tier dedup check | Dedup only checks current `storage_base_path` | `content.put` should check `object_path.exists()` on ALL tier paths before writing. When we repointed symlink from ZFS→NVMe, ~600 GB of already-CAS'd data was re-written because dedup only checked the new (empty) NVMe path. |
+| `NESTGATE_STORAGE_PATH` env var | Dead letter — nestGate uses XDG symlink instead | Either wire the env var into `get_storage_base_path()` properly (it reads but doesn't take effect) or deprecate it and document the XDG symlink as the control surface. |
+
+**What already exists in the codebase (unwired)**:
+- `nestgate-config/substrate_tiers.rs`: `SubstrateTiers` with `NESTGATE_WARM_PATHS` / `NESTGATE_COLD_PATHS` env discovery, rotational detection, capacity detection
+- `nestgate-zfs/automation/tier_migration.rs`: `TierMigrationPlan` with ZFS `send/receive` between tiers, dry-run support
+- `nestgate-cache/multi_tier.rs`: `MultiTierCache` with hot/warm/cold and promotion/demotion thresholds
+
+**What's missing**: `nestgate-rpc/content_handlers/cas.rs` uses `get_storage_base_path()` (single path) for all CAS operations. Zero references to `SubstrateTiers` or `StorageTier` in the RPC layer. The write path needs to be tier-aware.
+
+**Conceptual model**: Hot tier is rhizoCrypt's working memory. As sessions commit through loamSpine, committed data migrates to cold. The nest atomic owns all its pools and manages the transitions internally — no symlink hacks, no manual rsync.
+
+---
+
 ## Priority for Upstream
 
+**P0** (caused production outage — NVMe filled to 100%):
+1. `nestGate content.put` tier-aware writes — write to warm, dedup across all tiers
+2. `nestGate content.archive` — drain warm → cold on spine commit
+
 **P1** (would eliminate the most Python):
-1. `nestGate content.ingest` — eliminates revalidate + convergence check + manual CAS orchestration
-2. `sweetGrass convergence.check` — eliminates `convergence_check.py`, becomes the trust gate
+3. `nestGate content.ingest` — eliminates revalidate + convergence check + manual CAS orchestration
+4. `sweetGrass convergence.check` — eliminates `convergence_check.py`, becomes the trust gate
 
 **P2** (would simplify download pipelines):
-3. `nestGate content.fetch` — download URL → CAS in one RPC
-4. `rhizoCrypt dag.pipeline.ingest` — full pipeline in one call
+5. `nestGate content.fetch` — download URL → CAS in one RPC
+6. `rhizoCrypt dag.pipeline.ingest` — full pipeline in one call
 
 **P3** (observability):
-5. `sweetGrass braid.list` — enumerate braids for audit
-6. `rhizoCrypt dag.session.list` — enumerate sessions
-7. `nestGate dataset.list` — enumerate datasets with stats
+7. `sweetGrass braid.list` — enumerate braids for audit
+8. `rhizoCrypt dag.session.list` — enumerate sessions
+9. `nestGate dataset.list` — enumerate datasets with stats
 
 ---
 
@@ -99,7 +124,9 @@ These are data-specific or coordination tasks that don't belong in primals:
 
 *The primals were always fast. nestGate handles 16K RPCs/s, rhizoCrypt <1ms
 batch, bearDog signs in <5ms. Every performance issue we found was in the Python
-glue layer — subprocess spawning, double file reads, sequential processing.
-The upstream priority is to move the remaining orchestration (ingest, convergence,
-pipeline) into the primals themselves, so the Python layer can shrink to
-data-specific transformation scripts only.*
+glue layer — subprocess spawning, double file reads, sequential processing,
+and most critically, storage topology (symlink routing, single-tier CAS,
+no drain mechanism). The upstream priority is to wire nestGate's existing
+`SubstrateTiers` infrastructure into the CAS write path, so the nest atomic
+owns all its pools and manages hot→cold transitions internally. The Python
+layer should shrink to data-specific transformation scripts only.*
