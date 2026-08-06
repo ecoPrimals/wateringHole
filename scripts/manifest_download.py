@@ -36,7 +36,7 @@ except ImportError:
     import tomli as tomllib
 
 sys.path.insert(0, str(Path(__file__).parent))
-from prov_inline import InlineBraid
+from prov_inline import InlineBraid, convergence_gate, convergence_wait
 
 DEFAULT_MANIFEST_DIR = Path(__file__).parent.parent / "manifests"
 LOG_FILE = Path("/tmp/manifest_download.log")
@@ -214,8 +214,22 @@ def run_manifest(manifest_path):
     acquired = 0
     skipped = 0
     failed = 0
+    backpressure_check_interval = prov.get("backpressure_batch", 100)
+    convergence_lag_max_val = prov.get("convergence_lag_max", 10000)
+    warm_min_free = prov.get("warm_min_free_gb", 20.0)
 
     for i, entry in enumerate(entries):
+        if i % backpressure_check_interval == 0:
+            gate = convergence_wait(
+                dataset,
+                warm_min_free_gb=warm_min_free,
+                convergence_lag_max=convergence_lag_max_val,
+            )
+            if gate["verdict"] == "STOP":
+                log(f"  STOPPED by backpressure: {gate['reason']}")
+                break
+            if gate.get("waited_seconds"):
+                log(f"  Backpressure cleared after {gate['waited_seconds']}s")
         url = entry.get("url", "")
         entry_id = entry.get("id", f"entry_{i}")
 

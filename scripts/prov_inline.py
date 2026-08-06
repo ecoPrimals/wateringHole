@@ -31,8 +31,10 @@ Usage:
 
 import base64
 import json
+import os
 import socket
 import struct
+import time
 from pathlib import Path
 
 import blake3
@@ -294,3 +296,88 @@ class InlineBraid:
             "total_bytes": self.total_bytes,
             "errors": self.errors,
         }
+
+
+# ---------------------------------------------------------------------------
+# Convergence backpressure gate
+# ---------------------------------------------------------------------------
+
+WARM_TIER_PATH = Path(os.environ.get("NESTGATE_WARM_PATHS", "/mnt/cas-hot").split(":")[0])
+
+def convergence_gate(
+    dataset: str = "",
+    batch_size: int = 100,
+    warm_min_free_gb: float = 20.0,
+    convergence_lag_max: int = 10000,
+) -> dict:
+    """Check whether the pipeline should continue downloading/braiding.
+
+    Layers three pressure signals:
+      1. Warm tier free space (os.statvfs — always available)
+      2. sweetGrass convergence lag (RPC — graceful degradation if unavailable)
+      3. Future: topology.bandwidth.budget
+
+    Returns dict with verdict ("GO", "WAIT", "STOP"), reason, and metrics.
+    """
+    result = {
+        "verdict": "GO",
+        "reason": "clear",
+        "warm_free_gb": None,
+        "unconverged_count": None,
+        "wait_seconds": 0,
+    }
+
+    warm_path = WARM_TIER_PATH
+    if warm_path.exists():
+        try:
+            st = os.statvfs(warm_path)
+            free_gb = (st.f_bavail * st.f_frsize) / (1024 ** 3)
+            result["warm_free_gb"] = round(free_gb, 1)
+            if free_gb < 10:
+                result["verdict"] = "STOP"
+                result["reason"] = f"warm tier critically low ({free_gb:.1f} GB free)"
+                return result
+            if free_gb < warm_min_free_gb:
+                result["verdict"] = "WAIT"
+                result["wait_seconds"] = 30
+                result["reason"] = f"warm tier low ({free_gb:.1f} GB < {warm_min_free_gb} GB)"
+                return result
+        except OSError:
+            pass
+
+    if dataset:
+        try:
+            conv = _rpc_result("sweetgrass", "convergence.batch_check", {
+                "dataset": dataset,
+                "limit": convergence_lag_max + 1,
+            })
+            if isinstance(conv, dict):
+                unconverged = conv.get("unconverged_count", 0)
+                result["unconverged_count"] = unconverged
+                if unconverged > convergence_lag_max:
+                    result["verdict"] = "WAIT"
+                    result["wait_seconds"] = 60
+                    result["reason"] = (
+                        f"convergence lag ({unconverged} > {convergence_lag_max})"
+                    )
+        except Exception:
+            pass
+
+    return result
+
+
+def convergence_wait(dataset: str = "", **kwargs):
+    """Block until convergence_gate returns GO. Logs wait events."""
+    gate = convergence_gate(dataset, **kwargs)
+    if gate["verdict"] == "GO":
+        return gate
+    waited = 0
+    while gate["verdict"] == "WAIT":
+        wait_s = gate.get("wait_seconds", 30) or 30
+        print(f"  BACKPRESSURE: {gate['reason']} — waiting {wait_s}s", flush=True)
+        time.sleep(wait_s)
+        waited += wait_s
+        gate = convergence_gate(dataset, **kwargs)
+    if waited:
+        gate["waited_seconds"] = waited
+    return gate
