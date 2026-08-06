@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Cephalization Era
 
-**Date**: Aug 6, 2026 1PM | **Wave**: 156k | **From**: eastGate overwatch
-**Posture**: **C2 DUAL-SOCKET 13/15.** ZERO P0/P1/P2. 15/15 GREEN. tarpc version split ELIMINATED (C1a+C1b). C2 dual-socket shipped on 13 primals (only skunkBat + bingoCube remain). squirrel -48,672 lines (Waves 156q→156z deep cleanup). bearDog tarpc 7→30 methods + entropy evolution. cellMembrane G64 cephalization (tarpc-aware discovery). barraCuda GPU buffer alignment + 13 test promotions. ChunkedBraid pattern for bulk provenance (71/153 datasets braided). arXiv 40/42 (95%). **Primal mountain nearly clear — deploy + downstream next.**
+**Date**: Aug 6, 2026 1:30PM | **Wave**: 156l | **From**: eastGate overwatch
+**Posture**: **G65 PROTOCOL NEGOTIATION STANDARD PUBLISHED.** C2 13/15. 15/15 GREEN. ZERO P0/P1/P2. **NEW: G65 spec — single-socket protocol negotiation replaces dual-socket as Phase 3.** squirrel has reference impl (432 lines). All primals + cellMembrane evolve first, then downstream. strandGate + westGate subprojects continue in background.
 
 ---
 
@@ -26,31 +26,35 @@
 
 ---
 
-## PRIORITY 1 — PRIMAL MOUNTAIN
+## PRIORITY 1 — PRIMALS + CELLMEMBRANE FIRST
 
-Get all primals solid as a foundation for everything that follows.
+All 15 primals and cellMembrane evolve to completion before downstream projects. strandGate (hotSpring/QCD) and westGate (data braids) continue their own subproject work in background — they don't wait.
 
-### G64: Cephalization — tarpc Convergent Evolution
+### G64 + G65: Cephalization — Three-Phase Protocol Evolution
 
-All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. JSON-RPC bootstraps discovery; tarpc carries performance. Each primal evolves independently — convergent evolution, not directed.
+All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. Each primal evolves independently — convergent evolution, not directed.
 
-| Layer | Protocol | Scope | Speed | Status |
-|-------|----------|-------|-------|--------|
-| **Intra-gate** | tarpc UDS (binary) | Same NUCLEUS | sub-ms | Phase 1 — 5 primals ready |
-| **Cross-gate bootstrap** | JSON-RPC on songBird mesh | Gate-to-gate | ~1-5ms | LIVE |
-| **Cross-gate elevated** | tarpc on songBird relay | Gate-to-gate composition | sub-ms binary | Phase 2 (after version convergence) |
-| **Browser/diagnostic** | JSON-RPC / REST | Conjugation layer | ~10ms | Permanent |
+| Phase | Pattern | Sockets | Status |
+|-------|---------|---------|--------|
+| **Phase 1** | JSON-RPC only (`.sock`) | 1 | COMPLETE — all 15 |
+| **Phase 2 (C2)** | Dual-socket (`.sock` + `.tarpc.sock`) | 2 | **13/15** (skunkBat + bingoCube remain) |
+| **Phase 3 (G65)** | Protocol negotiation on single socket | 1 | **REFERENCE IMPL** in squirrel |
+
+**G65 — Protocol Negotiation** (`specs/PROTOCOL_NEGOTIATION_SPEC.md`):
+Client sends `PROTOCOLS: tarpc,jsonrpc\n`, server selects best match. No negotiation = JSON-RPC (backward-compatible). Eliminates socket proliferation (30→15). Protocol-transparent for songBird routing. Extensible to future protocols. squirrel has 432-line reference impl with full test coverage.
 
 | tarpc State | Primals | Count |
 |-------------|---------|-------|
+| **G65 protocol negotiation** (reference impl) | **squirrel** | 1 |
 | **tarpc-CONVERGED** (full domain parity) | **loamSpine** (37/53), **bearDog** (30 methods) | 2 |
-| **C2 dual-socket SHIPPED** | songBird, petalTongue, coralReef, barraCuda, toadStool, nestGate, squirrel, sweetGrass, rhizoCrypt, biomeOS, sourDough | 11 |
+| **C2 dual-socket SHIPPED** | songBird, petalTongue, coralReef, barraCuda, toadStool, nestGate, sweetGrass, rhizoCrypt, biomeOS, sourDough | 10 |
 | **C2 REMAINING** | **skunkBat**, **bingoCube** | 2 |
 
 **Convergence blockers**:
 1. ~~**tarpc 0.34 → 0.37**~~ — **RESOLVED.** All 15 primals on tarpc 0.37.
-2. ~~**UDS protocol fragmentation**~~ — **NEARLY RESOLVED.** C2 dual-socket shipped on **13/15 primals**. Only skunkBat + bingoCube remain.
-3. **Port-agnostic routing**: songBird moves from port assignments to capability routing. cellMembrane has tarpc-aware discovery.
+2. ~~**UDS protocol fragmentation**~~ — **NEARLY RESOLVED.** C2 shipped on 13/15.
+3. **G65 extraction**: squirrel's negotiation logic needs extraction to sourDough (reference primal) or cellMembrane for ecosystem-wide adoption.
+4. **Port-agnostic routing**: songBird moves from port assignments to capability routing. cellMembrane has tarpc-aware discovery.
 
 **Performance thesis**: convoy at 217/s is ~5ms/file JSON-RPC IPC. tarpc binary framing eliminates serde roundtrip — composition goes exponential for high-frequency patterns (provenance braiding, CAS ops, GPU dispatch).
 
@@ -65,6 +69,7 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. JSON-RP
 | **C4** | **Deploy restart** — `sudo systemctl restart membrane-toadstool` | toadStool | sporeGate (ops) | nestgate.io 13/13 |
 | ~~**C5**~~ | ~~rustChip → Forgejo~~ — **RESOLVED.** | toadStool | biomeGate | **DONE** |
 | ~~**C6**~~ | ~~sourDough cephalization~~ — **DONE.** C2 dual-socket shipped. | sourDough | eastGate | **DONE** |
+| **C7** | **G65 protocol negotiation extraction** — extract squirrel's `protocol_negotiation.rs` to sourDough (reference primal). Then all primals + cellMembrane adopt. Single socket replaces dual-socket. | sourDough → all 15 + cellMembrane | eastGate | Phase 3 destination |
 
 ---
 
@@ -265,10 +270,10 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 | Category | Count | IDs |
 |----------|-------|-----|
 | **COMPLETE** | 12 | G3, G4, G8, G10, G17, G21, G22, G29, G31, G55, G59 |
-| **ACTIVE** | 25 | G7, G9, G11, G14, G15, G18, G19, G20, G30, G32, G34, G35, G36–39, G43–45, G53–54, G56–58, G60–62, G64 |
+| **ACTIVE** | 26 | G7, G9, G11, G14, G15, G18, G19, G20, G30, G32, G34, G35, G36–39, G43–45, G53–54, G56–58, G60–62, G64, **G65** |
 | **GLACIAL** | 23 | Future phases |
-| **Total** | 60 | |
+| **Total** | 61 | |
 
 ---
 
-*Wave 156k — **C2 Dual-Socket 13/15.** Ecosystem-wide cephalization wave: barraCuda, coralReef, loamSpine, nestGate, rhizoCrypt, sweetGrass, toadStool all shipped C2 dual-socket this cascade (joining prior 6). squirrel -48,672 lines cleanup (156q→156z). bearDog tarpc 7→30 methods. barraCuda GPU alignment fix + 13 test promotions. cellMembrane G64 tarpc-aware discovery. ChunkedBraid for bulk provenance (71/153). Only skunkBat + bingoCube remain for C2. Primal mountain nearly clear — deploy rebuild + downstream springs next. 12 COMPLETE / 25 ACTIVE / 23 GLACIAL. ~140K+ tests, 15/15 GREEN.*
+*Wave 156l — **G65 Protocol Negotiation Standard.** Phase 3 of cephalization formalized: single-socket protocol negotiation replaces C2 dual-socket. squirrel reference impl (432 lines). Spec published at `specs/PROTOCOL_NEGOTIATION_SPEC.md`. C7 work item: extract to sourDough, then all 15 primals + cellMembrane adopt. Priority: primals + cellMembrane evolve first, strandGate + westGate subprojects in background. C2 at 13/15 (skunkBat + bingoCube remain). 12 COMPLETE / 26 ACTIVE / 23 GLACIAL. 61 goals. ~140K+ tests, 15/15 GREEN.*

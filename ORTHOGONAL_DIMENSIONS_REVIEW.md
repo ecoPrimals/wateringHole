@@ -540,7 +540,8 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G61 | Compute memoization via provenance trio | **ACTIVE** | strandGate thermalized lattice configs as CAS objects with provenance braids. 37 min CPU thermalization → instant on cache hit. Same BLAKE3→CAS→DAG→braid pattern as data acquisition. Cross-gate: biomeGate pulls configs for parity checks. Parallel pipeline: GPU produces while CPU thermalizes next β. NFT-style braids for both config and production results. |
 | G62 | Nanowire → Primal Builder (mesh-routed builds) | **ACTIVE** | Phase 2a DONE: manifest-driven sub-builders (no recompile to add gates). Phase 2b SPEC: songBird mesh-routed `harvest.request`/`harvest.complete`. Foreman pattern: symmetric — any gate can request, any gate can build. Capability advertisement on startup. Parallel dispatch. biomeGate as second sub-builder (NW-05 pending). |
 | G63 | BTSP local-trust (SO_PEERCRED for same-gate UDS) | **ACTIVE** | nestGate accepts same-gate callers without full BTSP X25519 handshake. Process-level auth via `SO_PEERCRED` — membrane group callers are trusted by filesystem perms. Unblocks footPrint CAS write, tideGlass CAS integration, all gardens/protists on same gate. Zero config, maximally primal-like. Proposed in footPrint Phase 2 deploy ready handoff. |
-| G64 | **Cephalization — tarpc convergent evolution** | **ACTIVE — C2 13/15** | **C2 dual-socket shipped on 13/15 primals** (skunkBat + bingoCube remain). tarpc version split ELIMINATED (all on 0.37). loamSpine + bearDog are tarpc-CONVERGED (37 and 30 domain methods respectively). cellMembrane has tarpc-aware discovery. sweetGrass has `convergence.pressure` backpressure. **Phase 1 (intra-gate)**: tarpc UDS (binary, zero-copy, sub-ms) — 87% complete. **Phase 2 (inter-gate)**: JSON-RPC → tarpc elevation via songBird — NEXT after C2 closes. **Thesis**: convoy 217/s at ~5ms JSON-RPC IPC → tarpc binary goes exponential. |
+| G64 | **Cephalization — tarpc convergent evolution** | **ACTIVE — C2 13/15** | **C2 dual-socket shipped on 13/15 primals** (skunkBat + bingoCube remain). tarpc version split ELIMINATED (all on 0.37). loamSpine + bearDog are tarpc-CONVERGED (37 and 30 domain methods respectively). cellMembrane has tarpc-aware discovery. sweetGrass has `convergence.pressure` backpressure. **Phase 1 (intra-gate)**: tarpc UDS (binary, zero-copy, sub-ms) — 87% complete. **Phase 2 (inter-gate)**: JSON-RPC → tarpc elevation via songBird — NEXT after C2 closes. **Phase 3 (G65)**: protocol negotiation replaces dual-socket. **Thesis**: convoy 217/s at ~5ms JSON-RPC IPC → tarpc binary goes exponential. |
+| G65 | **Protocol Negotiation — single-socket dual-protocol (Phase 3)** | **ACTIVE — REFERENCE IMPL** | **squirrel has the reference implementation** (432 lines, fully tested). Single UDS socket negotiates protocol at connection time: client sends `PROTOCOLS: tarpc,jsonrpc\n`, server selects best match. Backward-compatible (no negotiation = JSON-RPC). Eliminates C2 socket proliferation (30 sockets → 15). Protocol-transparent for callers and songBird routing. Extensible to future protocols without new socket files. **Spec**: `specs/PROTOCOL_NEGOTIATION_SPEC.md`. **Adoption path**: extract to sourDough (reference impl) or cellMembrane, then convergent adoption across all 15 primals + cellMembrane. **Prerequisite**: C2 complete (tarpc listeners deployed everywhere). |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -688,9 +689,9 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 - southGate: **VALIDATION.** Re-validated (13/13, Tower 0.15ms, 19 Gbps).
 
 **11 gates ONLINE** (6 NUCLEUS at v4.57+, 1 crankshaft + agentic, 4 other). **12 glacial goals COMPLETE** (G3, G4, G8, G10, G17, G21, G22, G29, G31, G55, G59).
-**25 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G32, G34, G35, G36, G37, G38, G39, G43, G44, G45, G53, G54, G56, G57, G58, G60, G61, G62, G64).
+**26 ACTIVE** (G7, G9, G11, G14, G15, G18, G19, G20, G30, G32, G34, G35, G36, G37, G38, G39, G43, G44, G45, G53, G54, G56, G57, G58, G60, G61, G62, G64, G65).
 **23 GLACIAL/CONCEPT** (future phases).
-**60 total glacial goals** tracked.
+**61 total glacial goals** tracked.
 
 **DEBT CLEARING + DEPOT READINESS** — current phase:
 - ~~S1: sweetGrass compile fix~~ — **RESOLVED** (LedgerClient clean, 1,655 tests)
@@ -749,7 +750,7 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 ---
 
-*Last used*: Wave 156k — C2 DUAL-SOCKET 13/15. Ecosystem-wide cephalization wave: 7 primals shipped C2 this cascade. squirrel -48,672 lines. bearDog tarpc 7→30. barraCuda GPU alignment fix. cellMembrane G64. ChunkedBraid 71/153. Only skunkBat + bingoCube remain for C2. Primal mountain nearly clear. 12 COMPLETE, 25 ACTIVE, 23 GLACIAL. ~140K tests, 15/15 GREEN. (Aug 6, 2026 1PM)
+*Last used*: Wave 156l — G65 PROTOCOL NEGOTIATION STANDARD. Phase 3 of cephalization formalized. squirrel reference impl. Spec at `specs/PROTOCOL_NEGOTIATION_SPEC.md`. C7: extract to sourDough then all primals+cellMembrane adopt. Priority: primals+cellMembrane first. 12 COMPLETE, 26 ACTIVE, 23 GLACIAL. 61 goals. ~140K tests, 15/15 GREEN. (Aug 6, 2026 1:30PM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 156h — D10 Jelly Strings J9-J19 fossilized as F14. G31+G55+G59 graduated to COMPLETE. (151 total across 11 checkpoints, 1,472 total records)
