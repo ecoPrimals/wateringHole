@@ -67,31 +67,33 @@ These are data-specific or coordination tasks that don't belong in primals:
 
 ---
 
-### nestGate — Multi-Tier CAS (P0 — PROVEN CRITICAL)
+### nestGate — Multi-Tier CAS (P0 — DEPLOYED Aug 6, 2026)
 
-| Gap | Current Workaround | What It Would Do |
-|-----|-------------------|------------------|
-| `content.put` tier-aware writes | Symlink repoint (`~/.local/share/nestgate/storage`) | Write to warm tier (NVMe), dedup-check across ALL tiers. `SubstrateTiers` already exists in `nestgate-config` but is NOT wired to `nestgate-rpc` CAS handlers. |
-| `content.archive` / drain hook | Manual `rsync --remove-source-files warm → cold` | Post-`spine.commit` hook: migrate committed CAS objects from warm → cold. Hot tier is ephemeral working memory, not permanent storage. |
-| High-water mark backpressure | None (NVMe filled to 100%, crashed convoy + OS) | When warm tier reaches capacity threshold (e.g. 80%), pause ingestion or begin drain. Prevents filling the OS drive. |
-| Cross-tier dedup check | Dedup only checks current `storage_base_path` | `content.put` should check `object_path.exists()` on ALL tier paths before writing. When we repointed symlink from ZFS→NVMe, ~600 GB of already-CAS'd data was re-written because dedup only checked the new (empty) NVMe path. |
-| `NESTGATE_STORAGE_PATH` env var | Dead letter — nestGate uses XDG symlink instead | Either wire the env var into `get_storage_base_path()` properly (it reads but doesn't take effect) or deprecate it and document the XDG symlink as the control surface. |
+| Gap | Status | Resolution |
+|-----|--------|-----------|
+| `content.put` tier-aware writes | **DEPLOYED** | `content_cas_write_path()` routes to first warm tier. `SubstrateTiers` wired via `OnceLock` in `storage_paths.rs`. Config: `NESTGATE_WARM_PATHS=/mnt/cas-hot`. |
+| Cross-tier dedup check | **DEPLOYED** | `content_cas_find_across_tiers()` walks all warm + cold `SubstrateMount` paths before writing. Eliminates the 600 GB re-write bug from symlink-era tier switches. |
+| High-water mark backpressure | **DEPLOYED** | `warm_tier_capacity()` via `statvfs`, rejects writes when free bytes < `NESTGATE_WARM_MIN_FREE_BYTES` (default 10 GB). |
+| `content.archive` / drain hook | **P1 — NEXT** | Post-`spine.commit` hook: migrate committed CAS objects from warm → cold. `TierMigrationPlan` (ZFS `send/receive`) exists, needs wiring to RPC. |
+| `NESTGATE_STORAGE_PATH` env var | **SUPERSEDED** | `NESTGATE_WARM_PATHS` / `NESTGATE_COLD_PATHS` now control tier routing, bypassing the XDG symlink. Old env var removed from `nestgate.env`. |
 
-**What already exists in the codebase (unwired)**:
-- `nestgate-config/substrate_tiers.rs`: `SubstrateTiers` with `NESTGATE_WARM_PATHS` / `NESTGATE_COLD_PATHS` env discovery, rotational detection, capacity detection
-- `nestgate-zfs/automation/tier_migration.rs`: `TierMigrationPlan` with ZFS `send/receive` between tiers, dry-run support
-- `nestgate-cache/multi_tier.rs`: `MultiTierCache` with hot/warm/cold and promotion/demotion thresholds
+**What was unwired (now wired)**:
+- `nestgate-config/substrate_tiers.rs`: `SubstrateTiers` — **now used by `content.put`** via `OnceLock` in `storage_paths.rs`
+- `nestgate-zfs/automation/tier_migration.rs`: `TierMigrationPlan` — still unwired (P1 drain hook)
+- `nestgate-cache/multi_tier.rs`: `MultiTierCache` — still unwired (future optimization)
 
-**What's missing**: `nestgate-rpc/content_handlers/cas.rs` uses `get_storage_base_path()` (single path) for all CAS operations. Zero references to `SubstrateTiers` or `StorageTier` in the RPC layer. The write path needs to be tier-aware.
-
-**Conceptual model**: Hot tier is rhizoCrypt's working memory. As sessions commit through loamSpine, committed data migrates to cold. The nest atomic owns all its pools and manages the transitions internally — no symlink hacks, no manual rsync.
+**Deployment verification** (live on westGate Aug 6 07:43 EDT):
+- New content → NVMe warm tier ✓
+- Duplicate content (same tier) → dedup hit ✓
+- Duplicate content (cross-tier, cold→warm) → dedup hit ✓
+- Response includes `"tier"` field with write path ✓
 
 ---
 
 ## Priority for Upstream
 
 **P0** (caused production outage — NVMe filled to 100%):
-1. `nestGate content.put` tier-aware writes — write to warm, dedup across all tiers
+1. ~~`nestGate content.put` tier-aware writes~~ — **DEPLOYED Aug 6** (warm writes, cross-tier dedup, backpressure)
 2. `nestGate content.archive` — drain warm → cold on spine commit
 
 **P1** (would eliminate the most Python):
@@ -126,7 +128,7 @@ These are data-specific or coordination tasks that don't belong in primals:
 batch, bearDog signs in <5ms. Every performance issue we found was in the Python
 glue layer — subprocess spawning, double file reads, sequential processing,
 and most critically, storage topology (symlink routing, single-tier CAS,
-no drain mechanism). The upstream priority is to wire nestGate's existing
-`SubstrateTiers` infrastructure into the CAS write path, so the nest atomic
-owns all its pools and manages hot→cold transitions internally. The Python
-layer should shrink to data-specific transformation scripts only.*
+no drain mechanism). P0 is now deployed: nestGate's `SubstrateTiers` is wired
+into the CAS write path — warm writes, cross-tier dedup, high-water backpressure.
+The nest atomic owns its pools. Remaining: P1 drain hook (`content.archive`
+on `spine.commit`) to close the ephemeral lifecycle.*
