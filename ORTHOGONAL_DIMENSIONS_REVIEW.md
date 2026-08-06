@@ -13,7 +13,7 @@ appears. This keeps the active review focused on evolving concerns.
 
 ## 1. Temporal / Coordination
 
-- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 156i)
+- [x] `wave.toml` reflects current wave ID, sub, and posture (Wave 156k)
 - [x] Gate heads published (`heads/*.toml`) — golgiBody auto-publishing active
 - [x] `freshness.toml` uses tree hashes (DAG, not cyclic graph)
 - [x] **ECOSYSTEM_BLURB.md** is the universal handoff (Tracks A+B converged)
@@ -25,7 +25,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **westGate ZFS rebuilt** — mirror → raidz1, 25.4 → 50.7 TB usable. AlphaFold DB fits.
 - [x] **Golgi post-receive hook FIXED** (3 bugs: dispatcher, case, category). Sovereign CI E2E verified.
 - [x] **cellMembrane 1,281+ tests** — MEMBRANE_*, crypto dedup, J16+J13+J19 killed, registry API hardened.
-- [x] **squirrel 7,140 tests** (Waves 156e→156j deep debt sweep — AIToolsError, PrimalType dedup, EcosystemPrimalType→String, port elimination). 0 unsafe, 0 clippy.
+- [x] **squirrel -48,672 lines** (Waves 156e→156z deep cleanup). 3 orphan crates excised, 157 functions de-asynced, PluginV2 dead code eliminated, PrimalType + EcosystemPrimalType fossils deleted, config crate removed. 313 files changed. 0 unsafe, 0 clippy.
 - [x] **Provenance 7/7 COMPLETE** — E2E validated on westGate (5th consecutive pass) + blueGate (Windows)
 - [x] **Sovereign CI LIVE** — push-to-deploy E2E verified for ALL 13 primals including biomeOS (coevolution).
 - [x] **Coevolution contract COMPLETE (G21)** — biomeOS `composition.test_swap` + cellMembrane `validate_with_deps`. Mode gap FIXED (`652cf8a7`).
@@ -51,7 +51,7 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] All primals compile — 5 Tier 1 genomeBin architectures
 - [x] ~~P0: glibc depot target~~ — **FIXED** (cellMembrane `8d9bb58`): `targets_for_primal()` auto-appends gnu for GPU primals
 - [x] 43/43 repos Forgejo-first
-- [x] **~140K+ primal tests validated this wave** (songBird 14,840, bearDog 14,019, nestGate 1,630+, toadStool 9,193+, biomeOS 8,570+, squirrel 7,140, petalTongue 6,606, barraCuda 4,959, coralReef 3,525, rhizoCrypt 1,791, loamSpine 1,752, sweetGrass 1,655, cellMembrane 1,281+, **tideGlass 220**, primalSpring 197, skunkBat 609, sourDough 502, **footPrint 708**, **esotericWebb V31b (484)**, bingoCube 31)
+- [x] **~140K+ primal tests validated this wave** (songBird 14,840, bearDog 14,019, nestGate 1,630+, toadStool 9,193+, biomeOS 8,570+, squirrel ~5K (post-cleanup), petalTongue 6,615, barraCuda 4,959, coralReef 3,580, rhizoCrypt 1,791, loamSpine 1,752, sweetGrass 1,655, cellMembrane 1,281+, **tideGlass 220**, primalSpring 197, skunkBat 609, sourDough 518, **footPrint 708**, **esotericWebb V31c (484)**, bingoCube 31)
 - [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean
 - [x] Production `.unwrap()` — 0 in critical-path primals
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
@@ -62,14 +62,14 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] toadStool: **9,193+** tests, **B1/B2: membrane socket perms FIXED** (dir 0o750, socket 0o660, cell boot unblocked on all gates) (**Wave 156e**)
 - [x] biomeOS: **8,570+** tests, **v4.56**: G22 convergence, spring deploy graph executor SHIPPED, deep debt audit CLEAN (zero debt all categories), 139.2 GiB recovered. (**Wave 155p**)
 - [x] petalTongue: **6,755** tests, CAS storage discovery refactor, canonical `get_family_id()`, hardcoded primal names removed (**Wave 156b**)
-- [x] barraCuda: **5,037** tests, RTX 3090 profiled, **P0 shader fixes SHIPPED**: subgroup entry point `main→sum_reduce_f64` FIXED, PRNG compose duplicate-definition FIXED, `diversity_f64.wgsl` self-recursion FIXED. (**Wave 155p**)
+- [x] barraCuda: **4,959** tests, RTX 3090 profiled, C2 dual-socket shipped, GPU buffer alignment panic FIXED, 13 ignored tests promoted to active, 214 clippy warnings eliminated. (**Wave 156k**)
 - [x] ~~**barraCuda YELLOW**~~ → **GREEN**: PRNG half-range fixed (xoshiro 52→53 bits). Statistical validation harness. -1,488 LOC (LazyLock→const, error helpers). `cpu_mom` remains production HMC path (Box-Muller transcendental polyfill, not PRNG).
-- [x] coralReef: **3,525** tests (3,519 pass, 6 HW-gated), VOP3 opcode split (929→523 LOC), WGSL double-parse eliminated, SM20 f64 legalize hardened, compile-path heap allocs eliminated (**Wave 156g**)
+- [x] coralReef: **3,580** tests, C2 dual-socket, SPIR-V extraction, binary ops + memory ops coverage. Deep debt clean. (**Wave 156k**)
 - [x] cellMembrane: **1,281+** tests, **P2 platform detection FIXED** (`d7026d7`), `TargetArch` deprecated → `Platform::detect()`, `validate_with_deps()`, J19+J16+J13 killed, registry API hardened. (**Wave 155n**)
 - [x] rhizoCrypt: 1,900 tests, BTSP→DAG bridge, cross-gate provenance
 - [x] loamSpine: **1,752** tests, `spine.status` SHIPPED (53 JSON-RPC + **37 tarpc** methods, S6 CLEARED), **G64 tarpc-CONVERGED** (first primal with full domain parity), zero unsafe/unwrap/TODO
 - [x] sweetGrass: **1,655** tests (47 methods + 11 aliases), `convergence.check` + `braid.list` SHIPPED (S1/S2/S3 CLEARED). LedgerClient refactor compiles clean. (**Wave 156f**)
-- [x] squirrel: **7,140 tests** (Waves 156e→156j: AIToolsError migration, PrimalType dedup, EcosystemPrimalType→String, port elimination, sync_manager cleanup -546 LOC). 0 unsafe, 0 clippy. **`signal.dispatch` WIRED (G18).** (**Wave 156j**)
+- [x] squirrel: **-48,672 lines** (Waves 156e→156z: 3 orphan crates excised, 157 de-asynced, PluginV2 dead code eliminated, PrimalType + EcosystemPrimalType fossils deleted). 313 files changed. 0 unsafe, 0 clippy. **`signal.dispatch` WIRED (G18).** (**Wave 156z**)
 - [x] primalSpring: 197 scenarios, all PASS
 - [x] skunkBat: 9 threat types, ConnectivityAnomaly, frame crypto, PUBLIC
 - [x] **BTSP 13/13** — all primals shipped ClientHello
@@ -540,7 +540,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G61 | Compute memoization via provenance trio | **ACTIVE** | strandGate thermalized lattice configs as CAS objects with provenance braids. 37 min CPU thermalization → instant on cache hit. Same BLAKE3→CAS→DAG→braid pattern as data acquisition. Cross-gate: biomeGate pulls configs for parity checks. Parallel pipeline: GPU produces while CPU thermalizes next β. NFT-style braids for both config and production results. |
 | G62 | Nanowire → Primal Builder (mesh-routed builds) | **ACTIVE** | Phase 2a DONE: manifest-driven sub-builders (no recompile to add gates). Phase 2b SPEC: songBird mesh-routed `harvest.request`/`harvest.complete`. Foreman pattern: symmetric — any gate can request, any gate can build. Capability advertisement on startup. Parallel dispatch. biomeGate as second sub-builder (NW-05 pending). |
 | G63 | BTSP local-trust (SO_PEERCRED for same-gate UDS) | **ACTIVE** | nestGate accepts same-gate callers without full BTSP X25519 handshake. Process-level auth via `SO_PEERCRED` — membrane group callers are trusted by filesystem perms. Unblocks footPrint CAS write, tideGlass CAS integration, all gardens/protists on same gate. Zero config, maximally primal-like. Proposed in footPrint Phase 2 deploy ready handoff. |
-| G64 | **Cephalization — tarpc convergent evolution** | **ACTIVE — FIRST CONVERGENCE** | **loamSpine is first tarpc-CONVERGED primal** (37 tarpc methods, full domain parity with 53 JSON-RPC methods). All 15 primals converge to dual-protocol on their own timeline — convergent evolution (bats/birds/insects). **Phase 1 (intra-gate)**: tarpc UDS (binary, zero-copy, sub-ms). **Phase 2 (inter-gate)**: JSON-RPC → tarpc elevation via songBird. **Version gap**: songBird + petalTongue on 0.34, rest 0.37 (bincode 1.3→2.x). **Current**: 1 CONVERGED (loamSpine), 5 tarpc-default (coralReef, barraCuda, toadStool, nestGate, squirrel), 5 tarpc-wired, 4 tarpc-dep. coralReef tarpc-first (vanguard). **Thesis**: convoy 217/s at ~5ms JSON-RPC IPC → tarpc binary goes exponential. |
+| G64 | **Cephalization — tarpc convergent evolution** | **ACTIVE — C2 13/15** | **C2 dual-socket shipped on 13/15 primals** (skunkBat + bingoCube remain). tarpc version split ELIMINATED (all on 0.37). loamSpine + bearDog are tarpc-CONVERGED (37 and 30 domain methods respectively). cellMembrane has tarpc-aware discovery. sweetGrass has `convergence.pressure` backpressure. **Phase 1 (intra-gate)**: tarpc UDS (binary, zero-copy, sub-ms) — 87% complete. **Phase 2 (inter-gate)**: JSON-RPC → tarpc elevation via songBird — NEXT after C2 closes. **Thesis**: convoy 217/s at ~5ms JSON-RPC IPC → tarpc binary goes exponential. |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -749,7 +749,7 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 ---
 
-*Last used*: Wave 156i — CEPHALIZATION ERA — CONVOY COMPLETE. D3 convoy 100% (10.99M events). Multi-tier CAS LIVE. loamSpine tarpc-CONVERGED (37 methods). toadStool C5 resolved. hotSpring +4,361 lines. esotericWebb V31c. 12 COMPLETE, 25 ACTIVE, 23 GLACIAL. ~140K tests, 15/15 GREEN. (Aug 6, 2026 AM)
+*Last used*: Wave 156k — C2 DUAL-SOCKET 13/15. Ecosystem-wide cephalization wave: 7 primals shipped C2 this cascade. squirrel -48,672 lines. bearDog tarpc 7→30. barraCuda GPU alignment fix. cellMembrane G64. ChunkedBraid 71/153. Only skunkBat + bingoCube remain for C2. Primal mountain nearly clear. 12 COMPLETE, 25 ACTIVE, 23 GLACIAL. ~140K tests, 15/15 GREEN. (Aug 6, 2026 1PM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
 *Latest fossilization*: Wave 156h — D10 Jelly Strings J9-J19 fossilized as F14. G31+G55+G59 graduated to COMPLETE. (151 total across 11 checkpoints, 1,472 total records)

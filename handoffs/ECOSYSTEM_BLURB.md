@@ -1,24 +1,28 @@
 # ecoPrimals Ecosystem Blurb — Cephalization Era
 
-**Date**: Aug 6, 2026 10AM | **Wave**: 156j | **From**: eastGate overwatch
-**Posture**: **CEPHALIZATION ADVANCING.** ZERO P0/P1/P2. 15/15 GREEN. **C1a DONE** (songBird tarpc 0.37 + dual-socket). **C1b DONE** (petalTongue tarpc 0.37 + dual-socket C2). **arXiv 40/42 rubric (95%)**. GPU benchmarks: 54× at 8³×4, 37× at 16⁴. bearDog grapheneGate validation + mobile HSM. squirrel Uuid→String + AIError deletion (-908 lines). coralReef SPIR-V extraction. sweetGrass convergence backpressure DESIGNED. westGate M2 NVMe + RAM upgrade specs. Priority: primal mountain → deploy → springs → ironGate.
+**Date**: Aug 6, 2026 1PM | **Wave**: 156k | **From**: eastGate overwatch
+**Posture**: **C2 DUAL-SOCKET 13/15.** ZERO P0/P1/P2. 15/15 GREEN. tarpc version split ELIMINATED (C1a+C1b). C2 dual-socket shipped on 13 primals (only skunkBat + bingoCube remain). squirrel -48,672 lines (Waves 156q→156z deep cleanup). bearDog tarpc 7→30 methods + entropy evolution. cellMembrane G64 cephalization (tarpc-aware discovery). barraCuda GPU buffer alignment + 13 test promotions. ChunkedBraid pattern for bulk provenance (71/153 datasets braided). arXiv 40/42 (95%). **Primal mountain nearly clear — deploy + downstream next.**
 
 ---
 
-## LATEST ARRIVALS (since 156i)
+## LATEST ARRIVALS (since 156j)
 
 | Event | Source | Impact |
 |-------|--------|--------|
-| **songBird C1a DONE** | eastGate (local push) | **tarpc 0.34→0.37 + dual-socket UDS pattern.** bincode 2.x migrated. +251/-82 lines. Cephalization version split ELIMINATED for songBird. |
-| **petalTongue C1b+C2 DONE** | eastGate (local push) | **tarpc 0.37 + dual-socket server.** `petal-tongue-ipc` tarpc server module (209 lines). `socket_path.rs` (94 lines). 133 tarpc tests. 6,615 total tests. |
-| **bearDog grapheneGate** | eastGate (local push) | grapheneGate validation + vendor-agnostic mobile HSM abstraction (`mobile_hsm.rs` 135 lines). iOS Secure Enclave `HsmKeyProvider`. +911 lines. |
-| **squirrel 156q→156r** | eastGate (local push) | PluginMetadata Uuid→String migration. AIError deletion. Deprecated blanket elimination. Port constants. -908 net lines. 5 stale handoffs archived. |
-| **coralReef 156j** | biomeGate | SPIR-V extraction, control flow tests, C2 dual-socket (`.tarpc.sock`), binary ops coverage (+23), memory ops coverage (+15), copy_src_ref removal. 3,580 tests. Full deep debt audit clean. |
-| **arXiv 40/42 (95%)** | strandGate | GPU benchmark data: **54× at 8³×4, 37× at 16⁴**. DF64 4-8× faster than native f64. Provenance overhead ~2%. 4 figures generated. Chuna email drafted. |
-| **Cross-gate provenance AAR** | strandGate | westGate × strandGate provenance convergence architecture. Data × compute braiding pattern. |
-| **sweetGrass backpressure** | westGate | Convergence lag as pressure signal DESIGNED. 5-stage convergence tracking. Backpressure gate for download pipelines. |
-| **westGate HW upgrade specs** | westGate | M2 NVMe (dedicated CAS tier, 1-4 TB). RAM upgrade (64→128 GB, ARC cache). $0 ecosystem repurposing path. |
-| **bulk_braid.py + prov_inline** | westGate | Post-convoy provenance scripts for remaining braiding work. |
+| **C2 DUAL-SOCKET 13/15** | ecosystem-wide | barraCuda, coralReef, loamSpine, nestGate, rhizoCrypt, sweetGrass, toadStool all shipped C2 this wave. Combined with prior: songBird, petalTongue, bearDog, biomeOS, sourDough, squirrel. **Only skunkBat + bingoCube remain.** |
+| **squirrel -48,672 lines** | eastGate | Waves 156q→156z: excise 3 orphan crates, de-async 157 functions, PluginV2 dead code elimination, PrimalType fossil, EcosystemPrimalType fossil, config crate. 313 files changed. |
+| **bearDog tarpc 7→30 methods** | eastGate | G64 cephalization convergence push + entropy evolution + parking_lot unification. grapheneGate validation + mobile HSM. |
+| **barraCuda C2 + bug fix** | biomeGate | C2 dual-socket. GPU buffer alignment panic FIXED. 13 ignored tests promoted to active. 214 clippy needless_borrow warnings eliminated. |
+| **coralReef +690 lines** | biomeGate | C2 dual-socket. SPIR-V extraction. Binary ops + memory ops test coverage. 3,580 tests. |
+| **nestGate C2 + deep debt** | overwatch | Session 138: C2 dual-socket cephalization + comprehensive debt sweep. |
+| **loamSpine C2** | sporeGate | C2 dual-socket tarpc UDS server alongside JSON-RPC UDS. Doc hygiene. |
+| **rhizoCrypt C2** | sporeGate | tarpc binary UDS dual-socket pattern + cargo update. |
+| **sweetGrass C2 + backpressure** | sporeGate | C2 dual-socket + `convergence.pressure` backpressure wired. |
+| **toadStool S352-S355** | biomeGate | C2 dual-socket naming. Deep debt: hardcoded primal names, fake data, dead code removed. -264 lines. |
+| **cellMembrane G64** | eastGate | Cephalization dual-socket registry + tarpc-aware discovery. Dispatch extraction + typed error constructors. |
+| **hotSpring +arXiv bins** | strandGate | `arxiv_reversibility_test`, `chuna_convert`, `ildg_roundtrip_b11` binaries. |
+| **ChunkedBraid AAR** | westGate | Bulk provenance braiding: 71/153 datasets braided. AlphaFold (1.3 TB) in progress. Crash-resume pattern. |
+| **whitePaper** | strandGate | Observable battery results. Topology concept-to-reality. +627 lines. |
 
 ---
 
@@ -39,16 +43,14 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. JSON-RP
 
 | tarpc State | Primals | Count |
 |-------------|---------|-------|
-| **tarpc-CONVERGED** (full domain parity) | **loamSpine** (37 tarpc / 53 JSON-RPC) | 1 |
-| **tarpc-default + dual-socket** | **songBird** (C1a DONE — 0.37 + dual-socket), **petalTongue** (C1b+C2 DONE — 0.37 + tarpc server), coralReef, barraCuda, toadStool, nestGate, squirrel | 7 |
-| **tarpc-wired** (service definitions, optional) | sweetGrass, rhizoCrypt, biomeOS | 3 |
-| **tarpc dep only** (not yet serving) | bearDog, skunkBat, bingoCube | 3 |
-| **NEXT to CONVERGE** (C6 — reference impl) | **sourDough** (standards holder, nascent spawning primal) | 1 |
+| **tarpc-CONVERGED** (full domain parity) | **loamSpine** (37/53), **bearDog** (30 methods) | 2 |
+| **C2 dual-socket SHIPPED** | songBird, petalTongue, coralReef, barraCuda, toadStool, nestGate, squirrel, sweetGrass, rhizoCrypt, biomeOS, sourDough | 11 |
+| **C2 REMAINING** | **skunkBat**, **bingoCube** | 2 |
 
 **Convergence blockers**:
-1. ~~**tarpc 0.34 → 0.37**~~ — **RESOLVED.** songBird C1a + petalTongue C1b DONE. All 15 primals on tarpc 0.37. Version split ELIMINATED.
-2. **UDS protocol fragmentation**: 6 divergences (DIV-1→6). songBird + petalTongue now have dual-socket (C2 pattern) — others follow.
-3. **Port-agnostic routing**: songBird moves from port assignments to capability routing.
+1. ~~**tarpc 0.34 → 0.37**~~ — **RESOLVED.** All 15 primals on tarpc 0.37.
+2. ~~**UDS protocol fragmentation**~~ — **NEARLY RESOLVED.** C2 dual-socket shipped on **13/15 primals**. Only skunkBat + bingoCube remain.
+3. **Port-agnostic routing**: songBird moves from port assignments to capability routing. cellMembrane has tarpc-aware discovery.
 
 **Performance thesis**: convoy at 217/s is ~5ms/file JSON-RPC IPC. tarpc binary framing eliminates serde roundtrip — composition goes exponential for high-frequency patterns (provenance braiding, CAS ops, GPU dispatch).
 
@@ -56,13 +58,13 @@ All 15 primals converge to dual-protocol (JSON-RPC + tarpc) composition. JSON-RP
 
 | # | Item | Primal | Owner | Impact |
 |---|------|--------|-------|--------|
-| ~~**C1a**~~ | ~~tarpc 0.34→0.37~~ — **DONE.** Dual-socket UDS pattern shipped. | songBird | eastGate | ~~Version alignment~~ **DONE** |
-| ~~**C1b**~~ | ~~tarpc 0.34→0.37~~ — **DONE.** tarpc server module + socket_path.rs + 133 tests. | petalTongue | eastGate | ~~Version alignment~~ **DONE** |
-| **C2** | **UDS dual-socket pattern** — JSON-RPC on `.sock`, tarpc on `.tarpc.sock` | sourDough (reference impl), then: bearDog, songBird, skunkBat, nestGate, rhizoCrypt, loamSpine, sweetGrass, toadStool, barraCuda, coralReef, petalTongue, biomeOS, squirrel, bingoCube | per-primal owner | Port-agnostic routing |
-| **C3** | **JSON-RPC health shim** alongside tarpc primary | coralReef | biomeGate | nestgate.io 13/13 alive |
-| **C4** | **Deploy restart** — running binary predates B1/B2 fix. `sudo systemctl restart membrane-toadstool`. | toadStool | sporeGate (ops) | nestgate.io 13/13 alive |
-| ~~**C5**~~ | ~~rustChip → Forgejo~~ — **RESOLVED.** Neuromorphic excluded from workspace. | toadStool | biomeGate | **DONE** |
-| **C6** | **sourDough cephalization** — reference primal gets dual-protocol first. tarpc service definitions for all standard methods. sourDough sets the pattern, others follow. | sourDough | eastGate | **Reference implementation** for G64 |
+| ~~**C1a**~~ | ~~tarpc 0.34→0.37~~ — **DONE.** | songBird | eastGate | **DONE** |
+| ~~**C1b**~~ | ~~tarpc 0.34→0.37~~ — **DONE.** | petalTongue | eastGate | **DONE** |
+| **C2** | **UDS dual-socket pattern** — **13/15 DONE.** Remaining: | **skunkBat** (eastGate), **bingoCube** (eastGate) | eastGate | 2 primals left |
+| **C3** | **JSON-RPC health shim** alongside tarpc primary | coralReef | biomeGate | nestgate.io 13/13 |
+| **C4** | **Deploy restart** — `sudo systemctl restart membrane-toadstool` | toadStool | sporeGate (ops) | nestgate.io 13/13 |
+| ~~**C5**~~ | ~~rustChip → Forgejo~~ — **RESOLVED.** | toadStool | biomeGate | **DONE** |
+| ~~**C6**~~ | ~~sourDough cephalization~~ — **DONE.** C2 dual-socket shipped. | sourDough | eastGate | **DONE** |
 
 ---
 
@@ -142,20 +144,23 @@ All 15 primals compile clean at HEAD. **Depot REBUILT** — 26 binaries on golgi
 
 | Primal | HEAD | Key Change (this wave) |
 |--------|------|------------|
-| **songBird** | `ab8d174` | **C1a DONE** — tarpc 0.37 + dual-socket UDS. bincode 2.x. +251/-82 |
-| **petalTongue** | `b44b5b5` | **C1b+C2 DONE** — tarpc 0.37 + tarpc server module. 6,615 tests. +534/-30 |
-| **bearDog** | `754297f` | grapheneGate validation. Mobile HSM abstraction (`mobile_hsm.rs`). +911 |
-| **squirrel** | `12d87df` | Uuid→String migration. AIError deletion. -908 net. Stale handoffs archived. |
-| **coralReef** | `442410d` | SPIR-V module extraction. Control flow tests (+521). +674/-122 |
-| nestGate | `ad3923e` | Multi-tier CAS (warm writes, cross-tier dedup, backpressure) |
-| loamSpine | `f7213cb` | G64 tarpc-CONVERGED (24→37 methods) |
-| toadStool | `22116a4` | C5 RESOLVED (neuromorphic excluded, -1,265) |
-| rhizoCrypt | `061acfa` | blake3 1.8.6 |
-| sweetGrass | `4a6ec48` | convergence.check + braid.list |
+| **barraCuda** | `7a11e4e` | C2 dual-socket + GPU buffer alignment fix + 13 test promotions + 214 clippy fixes |
+| **bearDog** | `68f5a8e` | tarpc 7→30 methods + entropy evolution + parking_lot unification. grapheneGate. |
+| **coralReef** | `9f0b32b` | C2 dual-socket + SPIR-V + binary/memory ops coverage. 3,580 tests. |
+| **loamSpine** | `ac52498` | C2 dual-socket + doc hygiene. FIRST tarpc-CONVERGED (37 methods). |
+| **nestGate** | `e295572` | C2 dual-socket + Session 138 deep debt sweep. Multi-tier CAS. |
+| **rhizoCrypt** | `0961875` | C2 dual-socket (`tarpc_uds.rs`) + cargo update. |
+| **sweetGrass** | `5e3ba35` | C2 dual-socket + `convergence.pressure` backpressure wired. |
+| **toadStool** | `50d6205` | C2 dual-socket + S352-S355 deep debt (hardcoded names, fake data, dead code). |
+| **squirrel** | `917a9c9` | Waves 156q→156z: -48,672 lines. 3 orphan crates excised. 157 de-asynced. |
+| songBird | `ab8d174` | C1a DONE — tarpc 0.37 + dual-socket UDS. |
+| petalTongue | `b44b5b5` | C1b+C2 DONE — tarpc 0.37 + tarpc server module. 6,615 tests. |
+| biomeOS | `5972f6e` | C2 dual-socket. Arc\<str\> hot paths. 3 flaky tests fixed. |
+| sourDough | `c91e2e6` | C2 shipped. Composition test for bingoCube. |
+| bingoCube | `c9f5410` | Pin egui/eframe 0.28. **C2 REMAINING.** |
+| skunkBat | `b0df971` | Cargo update. **C2 REMAINING.** |
 
-Remaining 5 primals (biomeOS, barraCuda, cellMembrane, skunkBat, sourDough, bingoCube) — depot-current, no changes.
-
-**Non-primal evolution**: hotSpring +4,361 lines (SU(N) science). esotericWebb V31c (bridge reconnect). arXiv preprint 40/42 (95%). GPU benchmarks (54× peak). Cross-gate provenance AAR. sweetGrass convergence backpressure DESIGNED. westGate M2 NVMe + RAM upgrade specs.
+**Non-primal evolution**: cellMembrane G64 cephalization (tarpc-aware discovery, typed dispatch). hotSpring arXiv measurement binaries. ChunkedBraid AAR (71/153 braided). whitePaper topology + measurement battery.
 
 ---
 
@@ -195,7 +200,7 @@ Remaining 5 primals (biomeOS, barraCuda, cellMembrane, skunkBat, sourDough, bing
 | **strandGate** | **arXiv rubric 40/42 (95%).** 16⁴ DUAL-GPU DATA COMPLETE (6 ppm, +0.01%). **GPU BENCHMARK**: 37× speedup at 16⁴, peak 54× at 8⁴. DF64 proven 4–8× faster than native f64 on consumer GPUs. Full cost-performance table with real ms/traj data. **SU(N) GENERALIZED** — GaugeGroup trait covers N=2,3,4,5,6,8. 87-config memo table RUNNING. | 2 external items → 42/42 → submit. SU(N) data tables populate as configs land. |
 | **hotSpring** | 8 arxiv binaries. GaugeGroup trait + GenericLattice\<G\>. **652 lib tests.** Config cache LIVE. `bench_gpu_hmc` COMPLETE (6 volumes, CPU+GPU). `arxiv_reversibility_test` COMPLETE (dt² scaling confirmed). `arxiv_jackknife_stats` COMPLETE (bin-size jackknife, thermalization history). | SU(2) thermalizing. SU(3)→SU(8) queued. ~17 days full coverage. |
 | **barraCuda** | MultiDevicePool. 4,959 tests. GREEN. | Cross-vendor GPU dispatch. SU(N≥4) shader generalization needed (B3). |
-| **esotericWebb** | V31b. CELL BOOT SUCCEEDED. Scene builder. 484 tests. | QCD viz via petalTongue. |
+| **esotericWebb** | V31c. CELL BOOT SUCCEEDED. Bridge reconnect. 484 tests. | QCD viz via petalTongue. |
 | **Provenance** | Compute CAS pattern validated. Cross-gate AAR written. Same BLAKE3/braid as westGate data CAS. **~2% overhead** (12 ms provenance / 639 ms trajectory). 0/87 configs fully braided (NFT wired, sweep pending). | Cross-frontier braid: strandGate compute → ironGate product CAS. |
 
 ---
@@ -239,14 +244,14 @@ Remaining 5 primals (biomeOS, barraCuda, cellMembrane, skunkBat, sourDough, bing
 | P0/P1/P2 | **ZERO** |
 | Debt items | **12/26 CLEARED** (S1–S7, B1–B2, O1, O3–O4, O8; S4–S5 verified pre-shipped) |
 | Gates online | **11** |
-| Depot | **v4.57+ SYNCED — ALL 6 NUCLEUS GATES. 15/15 primals compile clean at HEAD. REBUILD READY.** |
+| Depot | **v4.57+ SYNCED — ALL 6 NUCLEUS GATES. 15/15 GREEN at HEAD. REBUILD NEEDED (9 primals advanced since last build).** |
 | Data NAS | **westGate** (3.21 TB / 153 datasets / 17+ domains / **452 GB CAS**) |
 | ironGate storage | **12.7 TB CAS LIVE** — `/mnt/nestgate`, nestGate v0.5.0, 9 squirrel providers |
 | Primal tests | **~140,000+** |
 | Signal dispatch | **G18 LIVE** — ironGate, 9 providers, cross-primal routing validated |
 | Convoy provenance | **217/s on NVMe** (700× total). Inline braiding 265/s. 4-tier storage. Cross-gate AAR: strandGate compute CAS × westGate data CAS converged. |
 | arXiv | **40/42 RUBRIC (95%).** GPU benchmarked (37× at 16⁴, 54× at 8⁴). DF64 > native f64 (4–8× on consumer GPUs). SU(N) N=2–8. 87-config memo grid RUNNING. 2 external items remain (URL + upstream bug). |
-| Convergence | **convoy running** — 11M+ files, ~14h ETA at 217/s on NVMe |
+| Convergence | **ChunkedBraid LIVE** — 71/153 datasets braided, AlphaFold (1.3 TB) in progress |
 | K-derm | **3/3 FULLY OPERATIONAL** |
 | GPS data | **CONVERTED** — 11 JSON (103 MB) CAS-ingested with BLAKE3 |
 | nestGate IPC | **94 methods, 21 capability domains** (content.ingest, dataset.convergence, dual-path CAS) |
@@ -266,4 +271,4 @@ Remaining 5 primals (biomeOS, barraCuda, cellMembrane, skunkBat, sourDough, bing
 
 ---
 
-*Wave 156j — **Cephalization Advancing.** C1a+C1b DONE (songBird + petalTongue on tarpc 0.37 — version split ELIMINATED). petalTongue dual-socket C2 pattern shipped. bearDog grapheneGate validation + mobile HSM. squirrel Uuid→String + AIError deletion (-908 lines). coralReef SPIR-V extraction + control flow tests. arXiv 40/42 (95%) with GPU benchmarks (54× peak). sweetGrass convergence backpressure designed. 10 primals evolved this cascade. Remaining: C2 dual-socket on other primals, C3 coralReef health shim, C6 sourDough reference impl, then deploy + springs. 12 COMPLETE / 25 ACTIVE / 23 GLACIAL. ~140K+ tests, 15/15 GREEN.*
+*Wave 156k — **C2 Dual-Socket 13/15.** Ecosystem-wide cephalization wave: barraCuda, coralReef, loamSpine, nestGate, rhizoCrypt, sweetGrass, toadStool all shipped C2 dual-socket this cascade (joining prior 6). squirrel -48,672 lines cleanup (156q→156z). bearDog tarpc 7→30 methods. barraCuda GPU alignment fix + 13 test promotions. cellMembrane G64 tarpc-aware discovery. ChunkedBraid for bulk provenance (71/153). Only skunkBat + bingoCube remain for C2. Primal mountain nearly clear — deploy rebuild + downstream springs next. 12 COMPLETE / 25 ACTIVE / 23 GLACIAL. ~140K+ tests, 15/15 GREEN.*
