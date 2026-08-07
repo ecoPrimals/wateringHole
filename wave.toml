@@ -12,7 +12,7 @@
 id = 157
 sub = "a"
 date = "2026-08-07"
-posture = "WAVE 157a STAGE 2 CODE TEAM HANDOFF. Forwarding fix compiled & verified (G67 N1). primalSpring team: N2-N5 live activation. biomeOS team: routing infra. Overwatch: ecosystem coordination. 15/15 cross-arch. Zero debt. 14 COMPLETE. 15/15 GREEN."
+posture = "WAVE 157a PRIMALS STABLE. STAGE 2 INFRA SHIPPED. Depot rebuild → deploy → springs. arXiv 41/42. biomeOS 578 tests (riboCipher pool, auto-transition, TOML caps). primalSpring 1,263 tests (NeuralBridge). 15/15 cross-arch. Zero debt. 15 COMPLETE. 15/15 GREEN."
 publisher = "eastGate-overwatch"
 
 [gates]

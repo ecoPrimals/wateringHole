@@ -1,4 +1,4 @@
-# Team Startup Blurb — Wave 157a (Stage 2 Neural API Activation)
+# Team Startup Blurb — Wave 157a (Primals Stable → Springs Phase)
 
 **From**: eastGate overwatch
 **Purpose**: Paste this into any new IDE session on any gate. It bootstraps
@@ -772,9 +772,9 @@ You only need inner membrane for primal-to-primal IPC and mesh enrollment.
 | G64 | Cephalization — tarpc convergent evolution | **COMPLETE** (15/15) |
 | G65 | Protocol Negotiation — single-socket dual-protocol | **COMPLETE** (15/15) |
 | G66 | Transport Abstraction — silicon-agnostic IPC | **COMPLETE** (15/15 cross-arch) |
-| **G67** | **Neural API forwarding fix + Stage 2 transition** | **ACTIVE — N1 DONE, N2-N6 PENDING** |
-| G56 | Neural API activation (capability routing everywhere) | **ACTIVE — PRIORITY** |
-| G9 | arXiv publication (Murillo/Chuna QCD) | **ACTIVE** — Rung 1 science COMPLETE |
+| **G67** | **Neural API forwarding fix + Stage 2 transition** | **STAGE 2 INFRA SHIPPED** — N2-N5 verification, then depot |
+| G56 | Neural API activation (capability routing everywhere) | **STAGE 2 INFRA SHIPPED** — depot rebuild + deploy |
+| G9 | arXiv publication (Murillo/Chuna QCD) | **41/42** — NPU silicon continuum, MILC validated, reviewer send next |
 | G36 | tideGlass Phase 1 — NF GPS reproduction | **ACTIVE** |
 | G18 | squirrel → biomeOS agent orchestration | **LIVE on ironGate** |
 | G53 | petalTongue maturation via downstream consumers | **ACTIVELY WIRING** |
