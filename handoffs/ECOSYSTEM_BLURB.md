@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Deployment Wave
 
-**Date**: Aug 6, 2026 8:15PM | **Wave**: 156s | **From**: eastGate overwatch
-**Posture**: **MUSL DEPOT COMPLETE. DEPLOY GATES.** 17/17 musl on golgi (15 primals + membrane + launcher). sporeGate: 12/13 alive (toadStool B1/B2 perms). Windows: 8/15 fresh — 7 primals need `#[cfg(unix)]` guards for cross-arch. Gate teams: deploy musl now. Code teams: fix Windows after.
+**Date**: Aug 6, 2026 8:30PM | **Wave**: 156s | **From**: eastGate overwatch
+**Posture**: **DEPLOY + G66.** Musl depot 17/17 on golgi — gate teams deploy now. G66 (Transport Abstraction) formalized as next convergence: sourDough reference already complete. 7 primals evolve transport layer independently to eliminate silicon deism. G64+G65 GRADUATED to COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals.
 
 ---
 
@@ -49,21 +49,31 @@ Musl depot is complete. Gate teams deploy immediately.
 | **southGate** | Re-deploy cephalization baseline. | LOW |
 | **strandGate** | Deploy when thermalization completes. | DEFERRED |
 
-### Track 2: WINDOWS CROSS-ARCH (code teams)
+### Track 2: G66 TRANSPORT ABSTRACTION (code teams — next convergence)
 
-7 primals have unix-only IPC paths (UDS, `rustix`, `tokio::net::Unix*`) compiled unconditionally. G65 protocol negotiation modules are the primary cause.
+**The deeper issue**: 7/15 primals failed Windows because they import `UnixStream`/`rustix` unconditionally — **silicon deism**. The fix is NOT `#[cfg(unix)]` guards (that's arch-exclusion). The fix is **transport abstraction**: primals express *what* to connect to, not *how*.
 
-| Primal | Owner | Unix deps | Fix |
-|--------|-------|-----------|-----|
-| **bingoCube** | eastGate | G65 IPC module | `#[cfg(unix)]` guard IPC module |
-| **loamSpine** | sporeGate | `tarpc_server.rs`, tokio `UnixStream`, lifecycle tests | Guard tarpc UDS server + tests |
-| **nestGate** | overwatch | `rustix` (fs/net/process), protocol negotiation | Guard rustix-using modules |
-| **petalTongue** | overwatch | `rustix`, `unix_socket_server/`, audio socket | Guard IPC + rustix modules |
-| **rhizoCrypt** | sporeGate | `tarpc_uds.rs`, UDS client, shutdown | Guard tarpc UDS + client |
-| **skunkBat** | eastGate | `tarpc_uds.rs`, IPC transport, BTSP (11+ refs) | Guard IPC transport layer |
-| **squirrel** | eastGate | `rustix`, transport listener/types, security | Guard transport + auth modules |
+**sourDough already has the reference** (`crates/sourdough-core/src/transport/`):
+- `TransportEndpoint` — UDS / TCP / MeshRelay (platform-neutral destination)
+- `TransportStream` — `#[cfg(unix)]` confined to transport layer only
+- `connect_transport()` — TCP fallback on non-Unix (primals actually work on Windows)
+- `platform_default()` — UDS on Linux, TCP localhost on Windows
 
-**Pattern**: Wrap UDS/IPC modules with `#[cfg(unix)]`. Use `rustix` (not raw `libc`) for any syscall needs — barraCuda's `libc→rustix` migration (`525674f`) is the reference, restoring `#![forbid(unsafe_code)]`. Convergent — each team implements independently. The 8 primals that already build on Windows can serve as references.
+**Spec**: `specs/TRANSPORT_ABSTRACTION_SPEC.md`
+
+| Primal | Owner | What to evolve |
+|--------|-------|----------------|
+| **bingoCube** | eastGate | Add transport module, refactor G65 IPC |
+| **loamSpine** | sporeGate | Transport-abstract tarpc server + tests |
+| **nestGate** | overwatch | Confine `rustix` to transport, abstract protocol negotiation |
+| **petalTongue** | overwatch | Transport-abstract `unix_socket_server/`, confine `rustix` |
+| **rhizoCrypt** | sporeGate | Transport-abstract tarpc UDS + client |
+| **skunkBat** | eastGate | Transport-abstract IPC transport layer (11+ unix refs) |
+| **squirrel** | eastGate | Transport-abstract listener/types, confine `rustix` |
+
+**Already clear** (8/15 — can serve as secondary references): barraCuda, bearDog, biomeOS, coralReef, nestGate*, petalTongue*, songBird, sourDough, sweetGrass, toadStool. (*Some need transport confinement even if they build today.)
+
+**This unlocks**: Windows IPC (not just "compiles"), macOS dev, WASM/browser (WebSocket variant for petalTongue), QUIC WAN, port-aesthetic songBird routing.
 
 ---
 
@@ -102,9 +112,10 @@ Musl depot is complete. Gate teams deploy immediately.
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| Cephalization | **G65 15/15. C2 15/15. C8 DONE. COMPLETE.** |
+| Cephalization (G64+G65) | **COMPLETE.** G65 15/15. C2 15/15. C8 DONE. |
+| G66 Transport Abstraction | **sourDough reference DONE. 7/15 primals need adoption.** |
 | Musl depot | **17/17 on golgi** |
-| Windows depot | **8/15 fresh** — 7 need `#[cfg(unix)]` |
+| Windows depot | **8/15 fresh** — 7 blocked on G66 |
 | sporeGate health | **12/13 alive** (toadStool B1/B2) |
 | Gates online | **11** |
 | Primal tests | **~140,000+** |
@@ -113,4 +124,4 @@ Musl depot is complete. Gate teams deploy immediately.
 
 ---
 
-*Wave 156s — **MUSL DEPOT COMPLETE.** 17/17 on golgi. sporeGate deployed, 12/13 alive. Gate teams: deploy musl now. Code teams: 7 primals need `#[cfg(unix)]` for Windows cross-arch (bingoCube, loamSpine, nestGate, petalTongue, rhizoCrypt, skunkBat, squirrel). toadStool needs B1/B2 socket perms. Two parallel tracks: deploy gates (musl) + fix Windows cross-compilation. ~140K+ tests, 15/15 GREEN.*
+*Wave 156s — **DEPLOY + G66.** Musl 17/17 on golgi — gate teams deploy. G66 Transport Abstraction formalized: sourDough reference complete, 7 primals converge independently to eliminate silicon deism. Not `#[cfg(unix)]` guards — transport abstraction (TransportEndpoint/TransportStream/connect_transport). Spec: `specs/TRANSPORT_ABSTRACTION_SPEC.md`. G64+G65 GRADUATED COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. ~140K+ tests, 15/15 GREEN.*
