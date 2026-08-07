@@ -83,6 +83,34 @@ def dataset_size_bytes(ds_path):
     return total
 
 
+def probe_dir_size(path, file_cap=500_000, time_cap=30):
+    """Quick probe: count files and bytes, abort if over caps.
+
+    Returns (file_count, byte_count, capped) — capped=True means the
+    directory exceeds the cap and actual totals are higher.
+    """
+    count = 0
+    total = 0
+    t0 = time.time()
+    try:
+        for f in path.rglob("*"):
+            if not f.is_file() or should_skip_file(f):
+                continue
+            count += 1
+            try:
+                total += f.stat().st_size
+            except OSError:
+                pass
+            if count >= file_cap or (time.time() - t0) > time_cap:
+                return count, total, True
+    except Exception:
+        pass
+    return count, total, False
+
+
+MAX_STAGE_BYTES = 500 * 1024**3  # 500 GB — leave headroom on NVMe
+
+
 def stage_path(src, dst_name):
     """rsync a path from cold HDD to NVMe staging. Returns staging path."""
     dst = STAGE_ROOT / dst_name
@@ -90,7 +118,7 @@ def stage_path(src, dst_name):
 
     result = subprocess.run(
         ["rsync", "-a", "--exclude=.*", f"{src}/", f"{dst}/"],
-        capture_output=True, text=True, timeout=7200,
+        capture_output=True, text=True, timeout=86400,
     )
 
     if result.returncode != 0:
@@ -161,15 +189,23 @@ def braid_chunked(dataset_name, use_staging=True):
             if free < STAGE_MIN_FREE_GB:
                 print(f"{chunk_tag} NVMe {free:.0f} GB free — reading from HDD", flush=True)
             else:
-                print(f"{chunk_tag} Staging → NVMe...", flush=True)
-                t_stg = time.time()
-                try:
-                    braid_root = stage_path(subdir_src, f"{dataset_name}/{subdir_name}")
-                    staged = True
-                    print(f"{chunk_tag} Staged in {time.time() - t_stg:.0f}s", flush=True)
-                except Exception as e:
-                    print(f"{chunk_tag} Stage failed ({e}), HDD fallback", flush=True)
-                    braid_root = subdir_src
+                fcount, fbytes, capped = probe_dir_size(subdir_src)
+                est_gb = fbytes / (1024**3)
+                if capped or fbytes > MAX_STAGE_BYTES or fbytes > free * 0.8 * (1024**3):
+                    print(f"{chunk_tag} Oversized chunk (~{fcount:,} files, "
+                          f"~{est_gb:.0f} GB{'+' if capped else ''}), "
+                          f"braiding from HDD", flush=True)
+                else:
+                    print(f"{chunk_tag} Staging → NVMe "
+                          f"({fcount:,} files, {est_gb:.1f} GB)...", flush=True)
+                    t_stg = time.time()
+                    try:
+                        braid_root = stage_path(subdir_src, f"{dataset_name}/{subdir_name}")
+                        staged = True
+                        print(f"{chunk_tag} Staged in {time.time() - t_stg:.0f}s", flush=True)
+                    except Exception as e:
+                        print(f"{chunk_tag} Stage failed ({e}), HDD fallback", flush=True)
+                        braid_root = subdir_src
 
         files = sorted(
             f for f in braid_root.rglob("*")
@@ -348,7 +384,7 @@ def braid_dataset(dataset_name, dry_run=False, use_staging=True):
             rate = (i + 1) / elapsed if elapsed > 0 else 0
             pct = (i + 1) / len(files) * 100
             print(f"{tag} {i+1}/{len(files)} ({pct:.0f}%) rate={rate:.1f}/s "
-                  f"errors={braid.errors}", flush=True)
+                  f"errors={braid.total_errors}", flush=True)
             last_report = now
 
     if staged_path:
