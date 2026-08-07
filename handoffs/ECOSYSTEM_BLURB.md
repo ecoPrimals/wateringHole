@@ -71,7 +71,7 @@ Musl depot is complete. Gate teams deploy immediately.
 | ~~**skunkBat**~~ | ~~eastGate~~ | ~~DONE — G66 shipped: TransportStream + TransportListener + unified serve_listener~~ |
 | **squirrel** | eastGate | Transport-abstract listener/types, confine `rustix` |
 
-**Already clear** (8/15 — can serve as secondary references): barraCuda, bearDog, biomeOS, coralReef (`1753aac` — G66 SHIPPED + cross-arch clean: `TransportStream`/`TransportListener`, 3,702 tests), nestGate*, petalTongue*, songBird, sourDough, sweetGrass, toadStool. (*Some need transport confinement even if they build today.)
+**Already clear** (8/15 — can serve as secondary references): barraCuda, bearDog, biomeOS, coralReef (`bdc6dbb` — G66 FULL CONFINEMENT: zero cfg(unix) in production code, `SyncTransportStream`/`bind_transport`/`wait_for_shutdown`, 3,672 tests, -826 LOC), nestGate*, petalTongue*, songBird, sourDough, sweetGrass, toadStool. (*Some need transport confinement even if they build today.)
 
 **This unlocks**: Windows IPC (not just "compiles"), macOS dev, WASM/browser (WebSocket variant for petalTongue), QUIC WAN, port-aesthetic songBird routing.
 
