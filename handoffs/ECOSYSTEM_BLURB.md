@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Cross-Arch First
 
-**Date**: Aug 7, 2026 7:08AM | **Wave**: 156w | **From**: eastGate overwatch
-**Posture**: **WINDOWS FIRST. ALL PRIMAL DEBT CLEARED BEFORE DEPLOY.** 5 primals still fail Windows cross-arch. We fix all 15/15 clean across musl + Windows, rebuild depot once, deploy everywhere at once. No more chasing tails with partial deploys. strandGate + westGate atomic composition learnings feed back into patterns.
+**Date**: Aug 7, 2026 7:30AM | **Wave**: 156w | **From**: eastGate overwatch
+**Posture**: **WINDOWS FIRST. skunkBat CROSS-ARCH CLEAN.** 4 primals still fail Windows. We fix all 15/15 clean across musl + Windows, rebuild depot once, deploy everywhere at once. strandGate + westGate atomic composition learnings feed back into patterns.
 
 ---
 
@@ -36,13 +36,9 @@ strandGate and westGate have been actively using primal compositions in producti
 | `jsonrpc_integration_tests.rs` (test) | Direct `UnixListener`/`UnixStream` (6+ fns) | `#[cfg(unix)]` on entire test module |
 | `jsonrpc_provider/tests.rs` (test) | Direct `UnixListener`/`UnixStream` (6+ fns) | `#[cfg(unix)]` on test fns |
 
-### skunkBat (eastGate)
+### ~~skunkBat (eastGate)~~ — **FIXED W156w**
 
-| File | Violation | Fix |
-|------|-----------|-----|
-| `rpc.rs:401-403` | `UnixStream::connect` in prod | Use G66 `connect_transport()` |
-| `tarpc_uds.rs:210` | `tarpc::serde_transport::unix::listen` in prod | `#[cfg(unix)]` guard tarpc UDS listener |
-| `tarpc_uds_tests.rs` (7 tests) | `tarpc::serde_transport::unix::connect` | `#[cfg(unix)]` on test module |
+~~All violations resolved.~~ `TarpcUdsServer` + tests `#[cfg(unix)]` gated. `rpc.rs` was already clean. `cargo check --target x86_64-pc-windows-gnu` PASSES — zero warnings, zero errors. 648 tests.
 
 ### squirrel (eastGate)
 
@@ -91,8 +87,8 @@ These composition patterns are the reusable template for all gates. Once cross-a
 
 ## SEQUENCE — AFTER CROSS-ARCH CLEARS
 
-1. **Code teams fix 5 primals** — specific violations above
-2. **All 15 pass `cargo check --target x86_64-pc-windows-gnu`**
+1. **Code teams fix 4 remaining primals** — specific violations above (skunkBat DONE)
+2. **All 15 pass `cargo check --target x86_64-pc-windows-gnu`** (11/15 done)
 3. **Depot rebuild** — musl 16/16 + Windows 15/15
 4. **Single clean deploy** — all gates at once
 5. **Verify health** — 13/13 on sporeGate, other gates
@@ -116,7 +112,7 @@ These composition patterns are the reusable template for all gates. Once cross-a
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
 | G64 + G65 + G66 | **COMPLETE** (pattern 15/15) |
-| Cross-arch (Windows) | **10/15 pass** — 5 primals need migration |
+| Cross-arch (Windows) | **11/15 pass** — skunkBat fixed, 4 primals remain |
 | Musl depot | **16/16 on golgi** |
 | sporeGate health | **12/13 alive** |
 | Gates online | **11** |
@@ -124,4 +120,4 @@ These composition patterns are the reusable template for all gates. Once cross-a
 
 ---
 
-*Wave 156w — **WINDOWS FIRST.** No partial deploys. 5 primals (coralReef, petalTongue, skunkBat, squirrel, toadStool) have specific unix-only violations listed with line numbers and fixes. Code teams clear these, verify with `cargo check --target x86_64-pc-windows-gnu`, then single clean depot rebuild + deploy across all gates. strandGate + westGate atomic composition learnings reusable once cross-arch is clean. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. 15/15 GREEN.*
+*Wave 156w — **WINDOWS FIRST.** No partial deploys. skunkBat cross-arch CLEAN (648 tests). 4 primals remain (coralReef, petalTongue, squirrel, toadStool) with specific violations listed. Code teams clear these, verify with `cargo check --target x86_64-pc-windows-gnu`, then single clean depot rebuild + deploy. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. 15/15 GREEN.*
