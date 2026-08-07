@@ -10,9 +10,9 @@
 
 [wave]
 id = 156
-sub = "v"
+sub = "w"
 date = "2026-08-07"
-posture = "WAVE 156v CROSS-ARCH COMPLIANCE. G66 modules shipped 15/15 but 5 primals still fail Windows (migration incomplete). NEW STANDARD: cargo check --target x86_64-pc-windows-gnu before push. Musl 16/16 on golgi — deploy gates. 15/15 GREEN."
+posture = "WAVE 156w WINDOWS FIRST. No partial deploys. 5 primals need cross-arch migration (coralReef, petalTongue, skunkBat, squirrel, toadStool). Fix all, rebuild once, deploy everywhere. Pre-push standard: cargo check --target x86_64-pc-windows-gnu. 15/15 GREEN."
 publisher = "eastGate-overwatch"
 
 [gates]

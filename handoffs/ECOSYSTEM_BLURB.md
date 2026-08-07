@@ -1,141 +1,112 @@
-# ecoPrimals Ecosystem Blurb — Cross-Arch Compliance
+# ecoPrimals Ecosystem Blurb — Cross-Arch First
 
-**Date**: Aug 7, 2026 7:00AM | **Wave**: 156v | **From**: eastGate overwatch
-**Posture**: **CROSS-ARCH FAILURES REMAIN.** G66 transport modules shipped but 5 primals still fail Windows: existing code paths not migrated to use them. **NEW STANDARD: code teams MUST `cargo check --target x86_64-pc-windows-gnu` before push.** Musl depot 16/16 on golgi. Windows 10/15.
-
----
-
-## THE ISSUE
-
-G66 transport abstraction modules were *added* to all 15 primals — but in 5 primals the existing production and test code still imports `UnixStream`/`UnixListener`/`rustix`/`PermissionsExt` directly, bypassing the new transport layer. The pattern is there but the migration is incomplete.
-
-**New ecosystem standard**: Every primal push MUST pass `cargo check --target x86_64-pc-windows-gnu` before push. No exceptions. This is how we enforce silicon neutrality — the compiler catches deism at the gate.
+**Date**: Aug 7, 2026 7:08AM | **Wave**: 156w | **From**: eastGate overwatch
+**Posture**: **WINDOWS FIRST. ALL PRIMAL DEBT CLEARED BEFORE DEPLOY.** 5 primals still fail Windows cross-arch. We fix all 15/15 clean across musl + Windows, rebuild depot once, deploy everywhere at once. No more chasing tails with partial deploys. strandGate + westGate atomic composition learnings feed back into patterns.
 
 ---
 
-## 5 FAILING PRIMALS — SPECIFIC VIOLATIONS
+## WHY WINDOWS FIRST
+
+Deploying musl while Windows is broken means another rebuild after fixes land. Every partial deploy is a tail-chase. The composition patterns we're building (atomics, cross-gate systems, springs) need to work everywhere once — not "mostly everywhere, except."
+
+strandGate and westGate have been actively using primal compositions in production. Their atomic patterns (Tower, provenance trio, node atomic) are the template for all gates. If the primals those atomics compose from can't build cross-arch, the composition can't either.
+
+**Fix once. Build once. Deploy everywhere.**
+
+---
+
+## 5 PRIMALS — SPECIFIC VIOLATIONS
 
 ### coralReef (biomeGate)
 
-| File | Issue |
-|------|-------|
-| `local_transport.rs` | `connect_local_sync()` uses `std::os::unix::net::UnixStream` directly. `symlink()` uses `std::os::unix::fs::symlink`. |
-| `server_lifecycle.rs` | `tokio::signal::unix::SignalKind` unguarded |
-| `cmd_server_process.rs` (test) | Direct `UnixStream::connect` |
-| `tests_ecosystem.rs` (test) | Direct `UnixListener::bind` |
-| **Also**: musl compile issue — `ipc` module behind test cfg but `connect_local()` references it unconditionally |
+| File | Violation | Fix |
+|------|-----------|-----|
+| `local_transport.rs:46-47` | `std::os::unix::net::UnixStream::connect` in prod | Use G66 `connect_transport()` |
+| `local_transport.rs:92` | Direct `tokio::net::UnixListener::bind` | Use G66 `TransportListener` |
+| `local_transport.rs:138` | `std::os::unix::fs::symlink` | `#[cfg(unix)]` guard |
+| `server_lifecycle.rs:132` | `tokio::signal::unix::SignalKind` unguarded | `#[cfg(unix)]` + `#[cfg(windows)] ctrl_c()` |
+| `cmd_server_process.rs` (test) | Direct `UnixStream::connect` | `#[cfg(unix)]` on test |
+| `tests_ecosystem.rs` (test) | Direct `UnixListener::bind` | `#[cfg(unix)]` on tests |
+| **musl issue** | `ipc` module behind test cfg but `connect_local()` references it | Export `ipc::transport` types outside test cfg |
 
 ### petalTongue (overwatch)
 
-| File | Issue |
-|------|-------|
-| `jsonrpc_integration_tests.rs` (test) | Direct `UnixListener`/`UnixStream` |
-| `jsonrpc_provider/tests.rs` (test) | Direct `UnixListener`/`UnixStream` across 6+ test fns |
+| File | Violation | Fix |
+|------|-----------|-----|
+| `jsonrpc_integration_tests.rs` (test) | Direct `UnixListener`/`UnixStream` (6+ fns) | `#[cfg(unix)]` on entire test module |
+| `jsonrpc_provider/tests.rs` (test) | Direct `UnixListener`/`UnixStream` (6+ fns) | `#[cfg(unix)]` on test fns |
 
 ### skunkBat (eastGate)
 
-| File | Issue |
-|------|-------|
-| `rpc.rs` | `UnixStream::connect` in prod code |
-| `tarpc_uds.rs` | `tarpc::serde_transport::unix::listen` in prod |
-| `tarpc_uds_tests.rs` | 7 tests using `tarpc::serde_transport::unix::connect` |
+| File | Violation | Fix |
+|------|-----------|-----|
+| `rpc.rs:401-403` | `UnixStream::connect` in prod | Use G66 `connect_transport()` |
+| `tarpc_uds.rs:210` | `tarpc::serde_transport::unix::listen` in prod | `#[cfg(unix)]` guard tarpc UDS listener |
+| `tarpc_uds_tests.rs` (7 tests) | `tarpc::serde_transport::unix::connect` | `#[cfg(unix)]` on test module |
 
 ### squirrel (eastGate)
 
-| File | Issue |
-|------|-------|
-| `security.rs` / `security_tests.rs` | `std::os::unix::fs::PermissionsExt` unguarded |
-| `capability_jwt.rs` + tests | Direct `UnixListener`/`UnixStream` in prod + test |
-| `capability_jwt_integration_tests.rs` | Full UDS mock server unguarded |
+| File | Violation | Fix |
+|------|-----------|-----|
+| `security.rs:282` | `std::os::unix::fs::PermissionsExt` | `#[cfg(unix)]` guard |
+| `security_tests.rs:411` | `PermissionsExt` in test | `#[cfg(unix)]` guard |
+| `capability_jwt.rs:557,625` | `UnixListener::bind` in prod code | `#[cfg(unix)]` or use transport |
+| `capability_jwt_integration_tests.rs` | Full UDS mock server | `#[cfg(unix)]` on test module |
 
 ### toadStool (biomeGate)
 
-| File | Issue |
-|------|-------|
-| `unix_socket_provider.rs` | Direct `UnixStream::connect` in prod |
-| `tarpc_server/connection.rs` | `UnixStream` param in prod fn signature |
-| `tarpc_server/mod.rs` | Direct `UnixListener` |
-| `unibin/execution.rs` | `UnixListener` + `tokio::signal::unix` |
-| `akida-setup/` + `akida-driver/` | `PermissionsExt`, `AsFd` (neuromorphic crates) |
+| File | Violation | Fix |
+|------|-----------|-----|
+| `unix_socket_provider.rs:30,90` | `UnixStream::connect` in prod | Use G66 `TransportStream` |
+| `tarpc_server/connection.rs:73-75` | `UnixStream` in fn signature | Abstract to `TransportStream` |
+| `tarpc_server/mod.rs:139` | Direct `UnixListener` | Use `TransportListener` |
+| `unibin/execution.rs:313,526` | `UnixListener` + `tokio::signal::unix` | Transport + signal guards |
+| `akida-setup/` verification + permissions | `PermissionsExt` | `#[cfg(unix)]` (neuromorphic is unix-only hardware) |
+| `akida-driver/io.rs:25` | `std::os::unix::io::AsFd` | `#[cfg(unix)]` |
 
 ---
 
-## THE FIX — PER PRIMAL
-
-For each violation:
-
-1. **Production code**: Replace direct `UnixStream`/`UnixListener` with `TransportStream`/`TransportListener` from the primal's own G66 transport module. Use `connect_transport(&endpoint)` not `UnixStream::connect(path)`.
-
-2. **Test code**: Wrap unix-only test infrastructure with `#[cfg(unix)]`. Tests that need UDS can be unix-only — the transport abstraction in prod code is what matters for cross-arch builds.
-
-3. **Signal handling**: `tokio::signal::unix::SignalKind` → guard with `#[cfg(unix)]`, add `#[cfg(windows)] tokio::signal::ctrl_c()` alternative.
-
-4. **Permissions/fs**: `std::os::unix::fs::PermissionsExt`, `std::os::unix::io::AsFd` → guard with `#[cfg(unix)]`.
-
-5. **tarpc unix transport**: `tarpc::serde_transport::unix::*` → guard entire tarpc UDS modules with `#[cfg(unix)]`, use tarpc TCP transport on non-unix.
-
----
-
-## NEW STANDARD — PRE-PUSH CROSS-ARCH CHECK
-
-**Every code team adds this to their workflow before pushing:**
+## PRE-PUSH STANDARD — NON-NEGOTIABLE
 
 ```bash
 cargo check --target x86_64-pc-windows-gnu
 ```
 
-If the target isn't installed:
-```bash
-rustup target add x86_64-pc-windows-gnu
-```
+If the target isn't installed: `rustup target add x86_64-pc-windows-gnu`
 
-This catches silicon deism at dev time, not at depot rebuild. The compiler is the enforcer.
-
-**sourDough should add this as a reference practice** — a `scripts/check-cross-arch.sh` or similar, so other teams can converge on the same pre-push validation.
+**Every push must pass this.** The compiler enforces silicon neutrality. Code teams: run this locally before pushing. Depot team: reject bins that fail cross-arch.
 
 ---
 
-## DEPOT STATUS
+## LEARNINGS FROM STRANDGATE + WESTGATE
 
-| Target | Binaries | Status |
-|--------|----------|--------|
-| **x86_64-unknown-linux-musl** | **16/16** | On golgi. Deploy gates with these. |
-| **x86_64-pc-windows-gnu** | **10/15** | 5 primals failing (see above) |
+strandGate and westGate have been running full atomic compositions in production:
+- **Tower Atomic** (bearDog + songBird + skunkBat) — security mesh
+- **Provenance Trio** (rhizoCrypt + loamSpine + sweetGrass) — data braiding
+- **Node Atomic** (toadStool + barraCuda + coralReef) — compute/GPU
 
----
-
-## GATE DEPLOYMENT — PROCEED WITH MUSL
-
-Don't wait for Windows. Deploy musl bins now.
-
-| Gate | Action | Priority |
-|------|--------|----------|
-| **ironGate** | Pull musl from golgi. Deploy. | **NOW** |
-| **westGate** | Pull musl. Deploy. Enable nestGate TCP. | **NOW** |
-| **blueGate** | Deploy musl side. Windows after code fixes. | NORMAL |
-| **southGate** | Re-deploy. | LOW |
-| **strandGate** | Deploy when ready. | DEFERRED |
+These composition patterns are the reusable template for all gates. Once cross-arch is clean, the same atomic definitions work on any gate without platform-specific surprises. The learnings from strandGate (compute memoization, NPU) and westGate (data braiding, multi-tier CAS) feed back into the patterns that every gate inherits.
 
 ---
 
-## AFTER DEPLOY — SPRINGS + SCIENCE
+## SEQUENCE — AFTER CROSS-ARCH CLEARS
 
-| # | Item | Gate | Unblocks |
-|---|------|------|----------|
-| E2 | squirrel systemd on ironGate | ironGate | Agent panel |
-| D1 | tideGlass cell boot | westGate | NF GPS |
-| O5 | nestGate TCP on westGate | westGate | Inter-gate CAS |
-| O7 | Inter-gate `content.get` E2E | mesh | Data-remote springs |
+1. **Code teams fix 5 primals** — specific violations above
+2. **All 15 pass `cargo check --target x86_64-pc-windows-gnu`**
+3. **Depot rebuild** — musl 16/16 + Windows 15/15
+4. **Single clean deploy** — all gates at once
+5. **Verify health** — 13/13 on sporeGate, other gates
+6. **Springs + downstream** — compositions on clean foundation
 
 ---
 
-## BACKGROUND
+## BACKGROUND — CONTINUING
 
 | Gate | Project | Status |
 |------|---------|--------|
-| **westGate** | ChunkedBraid. AlphaFold. Multi-tier CAS. | Running |
-| **strandGate** | SU(N) grid. arXiv 40/42. Observable battery 69/69. | Running |
-| **whitePaper** | petalTongue-native figures replacing matplotlib. | Evolving |
+| **westGate** | ChunkedBraid. AlphaFold. Multi-tier CAS. Atomic compositions LIVE. | Running |
+| **strandGate** | SU(N) grid. arXiv 40/42. Observable battery 69/69. NPU + compute memo. | Running |
+| **whitePaper** | petalTongue-native figures replacing matplotlib pipeline. | Evolving |
 
 ---
 
@@ -144,8 +115,8 @@ Don't wait for Windows. Deploy musl bins now.
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| G64 + G65 + G66 | **COMPLETE** (pattern shipped 15/15) |
-| Cross-arch (Windows) | **10/15** — 5 primals need migration cleanup |
+| G64 + G65 + G66 | **COMPLETE** (pattern 15/15) |
+| Cross-arch (Windows) | **10/15 pass** — 5 primals need migration |
 | Musl depot | **16/16 on golgi** |
 | sporeGate health | **12/13 alive** |
 | Gates online | **11** |
@@ -153,4 +124,4 @@ Don't wait for Windows. Deploy musl bins now.
 
 ---
 
-*Wave 156v — **CROSS-ARCH COMPLIANCE.** G66 transport modules shipped 15/15 but 5 primals still fail Windows — existing code not migrated to use transport abstraction. Specific violations listed per primal. NEW STANDARD: `cargo check --target x86_64-pc-windows-gnu` before every push. Musl depot 16/16 — gate teams deploy musl now. Windows fixes are code team responsibility. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. 15/15 GREEN.*
+*Wave 156w — **WINDOWS FIRST.** No partial deploys. 5 primals (coralReef, petalTongue, skunkBat, squirrel, toadStool) have specific unix-only violations listed with line numbers and fixes. Code teams clear these, verify with `cargo check --target x86_64-pc-windows-gnu`, then single clean depot rebuild + deploy across all gates. strandGate + westGate atomic composition learnings reusable once cross-arch is clean. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. 15/15 GREEN.*
