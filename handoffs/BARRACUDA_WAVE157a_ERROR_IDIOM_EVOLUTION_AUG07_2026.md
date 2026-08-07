@@ -1,4 +1,4 @@
-# barraCuda — Wave 157a Error Idiom Evolution Phase 3 (strandGate)
+# barraCuda — Wave 157a Deep Debt + ComputeDispatch P0 (strandGate)
 
 **Date**: Aug 7, 2026
 **Gate**: strandGate
@@ -9,11 +9,14 @@
 
 ## Summary
 
-Error constructor helper migration Phase 3 + magic number centralization +
-protocol negotiation zero-alloc optimization + G68 Platform Substrate audit.
-20 files changed across `barracuda` and `barracuda-core` crates. All remaining
-verbose error constructor patterns migrated to helpers. 5,011 tests pass.
-Zero clippy warnings.
+Three commits this wave:
+1. Error constructor helper migration Phase 3 + magic number centralization +
+   protocol negotiation zero-alloc + G68 Platform Substrate audit (20 files).
+2. Deprecated batch unwiring + pool2d dedup + env var centralization (9 files).
+3. **ComputeDispatch P0 migration** — all 92 `*_wgsl.rs` ops migrated from manual
+   BGL→pipeline boilerplate to `ComputeDispatch` builder (92 files, −10,771 LOC).
+
+Total: 95 files changed. 4,990 tests pass. Zero clippy warnings.
 
 ## Changes
 
@@ -59,10 +62,28 @@ barraCuda confirmed **CLEAN** for G68:
 - No L1 symlinks outside transport, no L2 permissions, no L3 raw device APIs
 - Verdict: legitimate platform gating, not silicon deism
 
+### ComputeDispatch P0 Migration (Commit 3)
+
+All 92 `*_wgsl.rs` ops migrated from manual BGL→pipeline→encoder→submit
+boilerplate to `ComputeDispatch::new().shader().storage_read().storage_rw()
+.uniform().dispatch_1d().submit()` builder pattern:
+
+- 12 simple unary math (sin, cos, tan, exp, sqrt, log, abs, sign, trunc,
+  floor, ceil, round)
+- 34 activation/special ops (bessels, erf, gamma, trig inverses, etc.)
+- 16 parameterized ops (pow, clamp, pool1d, cumsum, norm, etc.)
+- 16 multi-constructor ops (pad variants, interpolate, PRNG, polynomials)
+- 14 complex multi-binding ops (gather, sparse_matvec, rnn_cell, trace)
+
+All ops now use `create_uniform_buffer()` for shader parameter structs
+(correct UNIFORM usage instead of STORAGE from `create_buffer_f32_init`).
+
+92 files changed, −10,771 LOC net.
+
 ## Quality Gates
 
 - `cargo clippy --workspace`: 0 warnings
-- `cargo test --workspace`: 5,011 passed, 0 failed, 191 ignored
+- `cargo test --workspace`: 4,990 passed, 0 failed, 191 ignored
 - Files >800L: 0 (max 783L, test file)
 - Production `unwrap()`: 0
 - Production `unsafe`: 0 (all crates `#![forbid(unsafe_code)]`)
@@ -71,23 +92,9 @@ barraCuda confirmed **CLEAN** for G68:
 - `Result<T, String>`: 0
 - `println!` in lib: 0
 
-## Upstream Context
-
-Absorbed 8 upstream commits since Wave 155u:
-- `8380e088` C2 dual-socket pattern
-- `dbfb5790` 214 needless_borrow clippy fixes
-- `7a11e4e4` GPU buffer alignment + 13 test promotions
-- `78696b5e` 182-file cargo fmt + G65 readiness
-- `7e823414` 68 dependency bumps
-- `d92f571a` G65 protocol negotiation
-- `525674ff` G65 peek libc→rustix
-- `5c01bab0` G66 transport abstraction
-
 ## Remaining Structural Debt
 
 | Item | Scope | Priority |
 |------|-------|----------|
-| ComputeDispatch migration | ~92 `*_wgsl.rs` ops using manual BGL→pipeline | P0 (−10K LOC) |
-| GPU dispatch match collapse | Unary table + pool2d helper in `gpu_executor/dispatch.rs` | P1 |
-| Deprecated batch activations | Wire IPC `activation.gelu` to shader dispatch | P1 |
+| Non-WGSL ComputeDispatch | ~225 ops in `ops/` still manual BGL (f64, linalg, MD) | P1 |
 | CPU executor `shader_unary/binary` | Migration scaffolding exists, not yet called | P2 |
