@@ -45,14 +45,13 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] **P2 RESOLVED: GPU PRNG polyfill bias** — Root cause: WGSL transcendental polyfills (`log_f64`, `sqrt_f64`, `cos_f64`) in Box-Muller momentum shader produced wrong variance. Three-path comparison proves GPU MD pipeline is correct (bit-exact 4e-17). `cpu_mom` workaround deployed — CPU generates momenta, GPU does all MD at full speed. Section 3.2 UNBLOCKED. Finding strengthens the paper (validation methodology).
 - [x] **SPRINGS-TO-NUCLEUS MESH (Aug 2)** — All 10 springs/gardens assigned to gates by hardware specialization. Cell graphs v2.0.0 (content.get + provenance trio + gate metadata). tideGlass Cargo workspace LIVE. biomeOS deploy graphs v2.0.0. Inter-gate CAS data access config created. ecosystem_manifest v3.3.0 with spring_mesh assignments.
 - [ ] **PLANNED SERVICE INTERRUPTION (Aug 2)** — ATT gateway + DS224+ moving to basement. steamGate + reefGate enrollment queued post-move.
-- [ ] **TRIAD ACTIVATION (qS/wF/rP — Wave 157a)** — Overwatch decouples from manual git-pull cascading. Phase A: sporeGate cascade timer (`specs/WATERFALL_CASCADE_TIMER_SPEC.md`). Phase B: overwatch reads impulses/freshness (`specs/OVERWATCH_IMPULSE_PROCESS.md`). Phase C: primalSpring sync graph materialization (`handoffs/PRIMALSPRING_SYNC_GRAPH_MATERIALIZATION.md`). Phase D/E: mesh freshness + machine-generated report (future). **Specs written. Handoffs assigned. Timer not yet active.**
 
 ## 2. Ecological (Primal Health)
 
 - [x] All primals compile — 5 Tier 1 genomeBin architectures
 - [x] ~~P0: glibc depot target~~ — **FIXED** (cellMembrane `8d9bb58`): `targets_for_primal()` auto-appends gnu for GPU primals
 - [x] 43/43 repos Forgejo-first
-- [x] **~140K+ primal tests validated this wave** (songBird 14,840, bearDog 14,019, nestGate 1,630+, toadStool 9,193+, biomeOS 8,570+, squirrel ~5K (post-cleanup), petalTongue 6,615, barraCuda 4,873, coralReef 3,580, rhizoCrypt 1,791, loamSpine 1,752, sweetGrass 1,655, cellMembrane 1,281+, **tideGlass 220**, primalSpring 197, skunkBat 609, sourDough 518, **footPrint 708**, **esotericWebb V31c (484)**, bingoCube 31)
+- [x] **~140K+ primal tests validated this wave** (songBird 14,840, bearDog 14,019, nestGate 1,630+, toadStool 9,193+, biomeOS 8,570+, squirrel ~5K (post-cleanup), petalTongue 6,615, barraCuda 4,959, coralReef 3,580, rhizoCrypt 1,791, loamSpine 1,752, sweetGrass 1,655, cellMembrane 1,281+, **tideGlass 220**, primalSpring 197, skunkBat 609, sourDough 518, **footPrint 708**, **esotericWebb V31c (484)**, bingoCube 31)
 - [x] Zero TODO/FIXME/HACK in project code — 15/15 primals clean
 - [x] Production `.unwrap()` — 0 in critical-path primals
 - [x] `unsafe` scoped to GPU primals, science FFI, and crypto
@@ -63,10 +62,10 @@ appears. This keeps the active review focused on evolving concerns.
 - [x] toadStool: **9,193+** tests, **B1/B2: membrane socket perms FIXED** (dir 0o750, socket 0o660, cell boot unblocked on all gates) (**Wave 156e**). `akida-chip` absorbed from rustChip (`3f75aa5e7`). `akida-driver` cross-arch: **BANDAID** `#[cfg(unix)]` gating (compiles on Windows as stub). Proper fix → G68 Platform Substrate: `NpuBackend` trait everywhere, backends gated, `DeviceManager::discover()` per-platform. (**Wave 157a**)
 - [x] biomeOS: **8,700+** tests (578 Neural API), **v4.57+**: G67 forwarding fix + Stage 2 routing infra. riboCipher dual-lane pool, Bootstrap→Coordinated watcher, TOML capability translations. 59.3 GiB cargo clean. Cross-arch PASS. (**Wave 157a**)
 - [x] petalTongue: **6,755** tests, CAS storage discovery refactor, canonical `get_family_id()`, hardcoded primal names removed (**Wave 156b**)
-- [x] barraCuda: **4,873** tests (3,914 core + 739 integration + 220 crate tests), RTX 3090 profiled, C2 dual-socket shipped, GPU buffer alignment panic FIXED, 13 ignored tests promoted to active, 214 clippy warnings eliminated. **ComputeDispatch P0 migration: 92 WGSL ops unified, −10,771 LOC.** Deprecated batch unwiring + pool2d dedup + env centralization. Error idiom Phase 3 + magic number centralization. G66 transport + G68 audit complete. (**Wave 157a**)
+- [x] barraCuda: **4,959** tests, RTX 3090 profiled, C2 dual-socket shipped, GPU buffer alignment panic FIXED, 13 ignored tests promoted to active, 214 clippy warnings eliminated. (**Wave 156k**)
 - [x] ~~**barraCuda YELLOW**~~ → **GREEN**: PRNG half-range fixed (xoshiro 52→53 bits). Statistical validation harness. -1,488 LOC (LazyLock→const, error helpers). `cpu_mom` remains production HMC path (Box-Muller transcendental polyfill, not PRNG).
 - [x] coralReef: **3,580** tests, C2 dual-socket, SPIR-V extraction, binary ops + memory ops coverage. Deep debt clean. (**Wave 156k**)
-- [x] cellMembrane: **1,281+** tests, **P2 platform detection FIXED** (`d7026d7`), `TargetArch` deprecated → `Platform::detect()`, `validate_with_deps()`, J19+J16+J13 killed, registry API hardened. **DIV-7 harvest exit code reliability** — 3 bugs resolved (cascade.rs, post_sync.rs, commands.rs). G65+G66 transport evolution shipped. (**Wave 157a**)
+- [x] cellMembrane: **1,281+** tests, **P2 platform detection FIXED** (`d7026d7`), `TargetArch` deprecated → `Platform::detect()`, `validate_with_deps()`, J19+J16+J13 killed, registry API hardened. (**Wave 155n**)
 - [x] rhizoCrypt: 1,900 tests, BTSP→DAG bridge, cross-gate provenance
 - [x] loamSpine: **1,752** tests, `spine.status` SHIPPED (53 JSON-RPC + **37 tarpc** methods, S6 CLEARED), **G64 tarpc-CONVERGED** (first primal with full domain parity), zero unsafe/unwrap/TODO
 - [x] sweetGrass: **1,655** tests (47 methods + 11 aliases), `convergence.check` + `braid.list` SHIPPED (S1/S2/S3 CLEARED). LedgerClient refactor compiles clean. (**Wave 156f**)
@@ -495,7 +494,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 
 **ACTIVE (26 goals — in progress or unblocked):**
 
-*G66 graduated to COMPLETE (Wave 157a). G67 added (Wave 156z). G68 added (Wave 157a). G56/G67 Stage 2 infra shipped. Triad activation specs written (Phase A/B/C).*
+*G66 graduated to COMPLETE (Wave 157a). G67 added (Wave 156z). G68 added (Wave 157a). G56/G67 Stage 2 infra shipped. Triad Phase A LIVE on sporeGate. sourDough G68 reference + validator shipped. 5/15 compliant.*
 
 | ID | Goal | Status | Next Step |
 |----|------|--------|-----------|
@@ -553,7 +552,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G61 | Compute memoization via provenance trio | **ACTIVE** | strandGate thermalized lattice configs as CAS objects with provenance braids. 37 min CPU thermalization → instant on cache hit. Same BLAKE3→CAS→DAG→braid pattern as data acquisition. Cross-gate: biomeGate pulls configs for parity checks. Parallel pipeline: GPU produces while CPU thermalizes next β. NFT-style braids for both config and production results. |
 | G62 | Nanowire → Primal Builder (mesh-routed builds) | **ACTIVE** | Phase 2a DONE: manifest-driven sub-builders (no recompile to add gates). Phase 2b SPEC: songBird mesh-routed `harvest.request`/`harvest.complete`. Foreman pattern: symmetric — any gate can request, any gate can build. Capability advertisement on startup. Parallel dispatch. biomeGate as second sub-builder (NW-05 pending). |
 | G63 | BTSP local-trust (SO_PEERCRED for same-gate UDS) | **ACTIVE** | nestGate accepts same-gate callers without full BTSP X25519 handshake. Process-level auth via `SO_PEERCRED` — membrane group callers are trusted by filesystem perms. Unblocks footPrint CAS write, tideGlass CAS integration, all gardens/protists on same gate. Zero config, maximally primal-like. Proposed in footPrint Phase 2 deploy ready handoff. |
-| **G68** | **Platform Substrate Abstraction — beyond cfg(unix)** | **ACTIVE — REFERENCE SHIPPED + VALIDATOR LIVE** | sourDough `platform_substrate` module + `sourdough validate platform-substrate` CLI (563 tests). Ecosystem audit: **3/15 compliant** (sourDough, squirrel, nestGate), **80 violations across 12 primals** (65 L2 permissions, 4 L1 links, 11 L3 device). Fix pattern: `PermissionsExt` → `PlatformAccess::apply()`, `symlink()` → `platform_link()`. Trivial fixes: barraCuda(1), sweetGrass(1), skunkBat(2), loamSpine(2). Heavy: biomeOS(14), bearDog(9), toadStool(18). Spec: `specs/PLATFORM_SUBSTRATE_SPEC.md`. |
+| **G68** | **Platform Substrate Abstraction — beyond cfg(unix)** | **ACTIVE — 5/15 COMPLIANT, VALIDATOR LIVE** | sourDough reference SHIPPED (`platform_substrate` module, 563 tests) + `sourdough validate platform-substrate` CLI. Fresh audit: **5/15 compliant** (sourDough, squirrel, nestGate, petalTongue, bingoCube). **205 violations across 10 primals** (91% L2 permissions). toadStool L3 backend traits shipped (S360). cellMembrane fully isomorphic. barraCuda trivial (4 L2). biomeOS heaviest (49 L2 + 1 L1). toadStool Windows cross-arch still failing (consumer crate gating). |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -686,9 +685,9 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 **Active**: 9 dimensions (1–5, 7–8, 11–12)
 **Fossilized**: 14 dimensions (F1–F14)
-**Summary**: Wave 157a — **TRIAD ACTIVATION. PRIMALS STABLE. SPRINGS PHASE.** G64+G65+G66 COMPLETE, G68 6/15 shipped (15 glacial goals COMPLETE, 26 ACTIVE, 64 total). Triad (qS/wF/rP) activating: Phase A spec to sporeGate (cascade timer), Phase B defined (impulse process), Phase C handoff to primalSpring (sync graphs). biomeOS Stage 2 routing infra shipped. arXiv 41/42. **Overwatch decouples from manual cascading. Primals sense and sync. Overwatch thinks.** ZERO P0/P1/P2. ~140K+ tests.
+**Summary**: Wave 157a — **G68 CONVERGING. TRIAD LIVE. LONG-TAIL DEBT.** G64+G65+G66 COMPLETE (15 glacial goals). G68: 5/15 compliant (sourDough scanner), 205 violations across 10 primals (91% L2 permissions). Phase A cascade timer LIVE on sporeGate. barraCuda long-tail debt: P0+P1 ComputeDispatch (−37,144 LOC). toadStool L3 backend traits shipped. cellMembrane fully isomorphic. **Primals converging on G68 while cleaning deep debt. Triad automation running.** ZERO P0/P1. ~140K+ tests.
 
-**Phase shift**: **"Manual cascade → Triad automation."** The qS/wF/rP nervous system is production code that wasn't running as the overwatch loop. Phase A: sporeGate enables the cascade timer (15m systemd). Phase B: overwatch reads impulses instead of pulling 15 repos. Phase C: primalSpring materializes sync composition graphs. Primals are stable. Springs phase continues in parallel. Focus shifts to: (1) triad activation across phases, (2) G68 convergence (6/15 shipped, sourDough reference next), (3) springs/downstream systems (hotSpring viz, tideGlass, esotericWebb), (4) reviewer-ready delivery (arXiv 41/42, MILC interop).
+**Phase shift**: **"G68 convergence + triad activation + long-tail debt."** sourDough shipped the G68 reference AND a validator CLI. 5/15 primals pass the scanner. Phase A cascade timer is LIVE on sporeGate (15m cycle). barraCuda is on massive long-tail debt cleanup (−37K LOC ComputeDispatch migration). Focus: (1) G68 L2 violations — trivial fix pattern across 10 primals, (2) depot rebuild after convergence, (3) gate deployment, (4) springs/downstream (hotSpring viz, tideGlass, esotericWebb), (5) arXiv reviewer send.
 
 **151 files fossilized** across 11 checkpoints (1,472 total records). Active handoffs: 7.
 - **ironGate: DOWNSTREAM SURFACE.** NF GPS + ABG + MILC targets. Novel ferment transcript CAS depot. G18 LIVE. 12.7 TB CAS. RTX 5070.
@@ -731,16 +730,17 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 - **N5**: squirrel agent routing
 - **N6**: Deploy Neural API on westGate + strandGate (post depot rebuild)
 
-**REMAINING — TRIAD ACTIVATION + SPRINGS PHASE:**
-- **Phase A**: sporeGate cascade timer — `membrane temporal.cascade` on 15m systemd timer. Spec: `specs/WATERFALL_CASCADE_TIMER_SPEC.md`.
-- **Phase B**: Overwatch reads impulses/freshness instead of pulling repos. Spec: `specs/OVERWATCH_IMPULSE_PROCESS.md`.
-- **Phase C**: primalSpring materializes sync graphs (`sync_diverge`, `sync_resolve`, `sync_resolve_crossgate`). Handoff: `handoffs/PRIMALSPRING_SYNC_GRAPH_MATERIALIZATION.md`.
-- **G68**: **3/15 compliant** (sourDough scanner). 80 violations across 12 primals. sourDough reference SHIPPED + validator CLI live. Fix pattern: `PermissionsExt` → `PlatformAccess::apply()`.
-- **Depot rebuild** with Stage 2 biomeOS → sporeGate golgi (DONE)
+**REMAINING — G68 CONVERGENCE + TRIAD + SPRINGS:**
+- **G68 convergence**: 5/15 compliant (sourDough scanner). 205 violations across 10 primals (91% L2). `sourdough validate platform-substrate`. Trivial first: barraCuda(4), sweetGrass(5), loamSpine(5).
+- **Phase A**: **DONE** — cascade timer LIVE on sporeGate (15m systemd).
+- **Phase B**: Overwatch reads impulses/freshness. Spec: `specs/OVERWATCH_IMPULSE_PROCESS.md`.
+- **Phase C**: primalSpring sync graph materialization. Handoff: `handoffs/PRIMALSPRING_SYNC_GRAPH_MATERIALIZATION.md`.
+- **Depot rebuild** post-G68 convergence → sporeGate golgi
 - **Deploy** across all 6 NUCLEUS gates from unified depot
+- **barraCuda long-tail debt**: P0+P1 ComputeDispatch (−37,144 LOC). Continuing independently.
 - **Springs**: tideGlass cell boot, hotSpring viz, esotericWebb browser surface
 - **arXiv**: wire live site + pseudoSpore + reviewer send
-- **TRIAD ACTIVATING. PRIMALS SENSE AND SYNC. OVERWATCH THINKS.**
+- **G68 CONVERGING. TRIAD LIVE. PRIMALS ON LONG-TAIL DEBT.**
 
 ### LIVE SITE ASSESSMENT (Aug 5 PM)
 
@@ -758,34 +758,31 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 
 **Gauge group resolved in code** (G9): SU(3) labels disambiguated in barraCuda/hotSpring. Paper/site relabel still needed (sporePrint scope). arXiv UNBLOCKED.
 
-**Open items — prioritized by remaining work:**
-- **G56: Neural API activation** — route footPrint, tideGlass, esotericWebb, all springs through `neural-api-default.sock`. biomeOS orchestrates the triad via composition graphs.
-- **G57: nestgate.io** — **PHASE 2 LIVE** (20 primals, 9/12 sections). Remaining: health liveness (NG-03), CAS content browse, branding.
+**Open items — prioritized by data pipeline + springs readiness:**
+- ~~**G55: Batch RPCs for provenance**~~ — **RESOLVED (460x)**. Convoy at 145/s. Primals never the bottleneck.
+- ~~**G59: Three-domain topology**~~ — **DNS SEPARATION COMPLETE.** All 3 layers separated. primal.eco SEALED (6 A records removed). nestgate.io LIVE on mesh. DNSSEC verified. Remaining: deploy dnsmasq, wire content backend, brand nestgate.io.
+- **G56: Neural API activation** — route footPrint, tideGlass, esotericWebb, all springs through `neural-api-default.sock`. Eliminate hardcoded socket paths. biomeOS signal graphs already wired for data federation.
+- **G57: nestgate.io** — **PHASE 1 LIVE** (petalTongue mesh). 4 DIVs: content backend, discovery service, port conflict, branding. Phase 2: depot+provenance browser. Phase 3: federated CAS API.
 - **G58: Mixed provenance convergence** — promote primordial → braided for all spring-critical data. `is_dataset_converged()` gate. Revalidation running.
-- **G68: Platform substrate** — 6/15 shipped, sourDough reference next. `specs/PLATFORM_SUBSTRATE_SPEC.md`.
-- **esotericWebb HEAD method (E3)** — GET 200 / HEAD 502. petalTongue WebGL pipeline still needed for live game surface.
-- **squirrel deploy on ironGate (E2)** — systemd service with `squirrel.sock` at canonical path.
+- ~~**nestGate canonical client crate (O8)**~~ — **RESOLVED.** Reframed as Neural API wiring — consumers use `capability.call("content", "get", ...)` through coordinator. No primal-specific crate needed. 5 domains, 6 federation methods, MeshRelay transport wired.
+- ~~**biomeOS cell attachment CLI**~~ — **SHIPPED** (`biomeos nucleus attach`, v4.57).
+- ~~**toadStool ExecStart fix + socket perms (B1+B2)**~~ — **FIXED.** Dir 0o750 (group-traversable), socket 0o660 (group-connectable). Cell boot unblocked on all gates.
+- ~~**footPrint CSP + auto-load**~~ — **RESOLVED.** `petal-bridge.ts` wired. `SKIP_CSP=1`. `autoLoadDefaultProject()`. Remaining: squirrel UDS socket on ironGate.
+- **esotericWebb HEAD method (E3)** — GET 200 / HEAD 502. HTTP handler missing HEAD support (NG-06). petalTongue WebGL pipeline still needed for live game surface.
+- ~~**nestgate.io mesh bridge + mesh.peers (S7)**~~ — **PHASE 2 LIVE.** Neural API bridge discovers 20 primals, **9/12 sections** functional. mesh.peers WIRED (songBird UDS). Remaining: health liveness per primal (S8/NG-03), bearDog routing stub (NG-04).
+- **squirrel deploy on ironGate (E2)** — petal-bridge routes `agent.*` → squirrel UDS but squirrel process needs to be running. Deploy as systemd service with `squirrel.sock` at canonical path.
+- ~~**nestGate dual-path CAS (O4)**~~ — **SHIPPED.** `NESTGATE_WARM_PATHS` + `NESTGATE_COLD_PATHS` for 2-tier. 7 CAS handlers updated. Backward-compatible.
+- ~~arXiv plaquette ×4 normalization~~ — **RESOLVED** (gauge group mismatch SU(2)→SU(3). 12⁴ data paper-ready. Rung 1 UNBLOCKED).
+- ~~squirrel → biomeOS G18 integration~~ — **LIVE on ironGate** (Session 10). 9 providers, cross-primal dispatch validated.
 - Inter-gate content.get live test (songBird probes + nestGate content.fetch ready)
-- petalTongue WebGPU/wgpu evolution (G53 maturation) — conjugation layer (RustScript) established, render pipeline is the remaining gap
-
-**Fossilized this wave (Wave 157a):**
-- ~~G55: Batch RPCs~~ — RESOLVED (460x convoy)
-- ~~G59: Three-domain topology~~ — DNS COMPLETE
-- ~~nestGate canonical client crate (O8)~~ — Neural API wiring replaces crate
-- ~~biomeOS cell attachment CLI~~ — SHIPPED (v4.57)
-- ~~toadStool B1+B2 socket perms~~ — FIXED
-- ~~footPrint CSP + auto-load~~ — RESOLVED
-- ~~nestgate.io mesh bridge (S7)~~ — PHASE 2 LIVE
-- ~~nestGate dual-path CAS (O4)~~ — SHIPPED
-- ~~arXiv plaquette normalization~~ — RESOLVED
-- ~~squirrel → biomeOS G18~~ — LIVE on ironGate
-- ~~barraCuda PRNG validation~~ — FIXED (YELLOW→GREEN)
-- ~~BTSP transport signal docs~~ — SHIPPED
+- petalTongue WebGPU/wgpu evolution (G53 maturation) — conjugation layer (RustScript) established, petalTongue render pipeline is the remaining gap
+- ~~barraCuda PRNG validation~~ — **FIXED** (YELLOW→GREEN, statistical validation harness)
+- ~~BTSP transport signal documentation~~ — SHIPPED
 
 ---
 
-*Last used*: Wave 157a — TRIAD ACTIVATION VIA NEURAL API. barraCuda ComputeDispatch P0 migration (92 WGSL ops, −10,771 LOC, 4,873 tests). cellMembrane DIV-7 harvest fix (3 bugs). hotSpring npu-hw feature wired. Triad specs written (Phase A/B/C). 15/15 cross-arch PASS. 15 COMPLETE, 26 ACTIVE, 23 GLACIAL. 64 goals. ~140K+ tests. (Aug 7, 2026 5:40PM)
+*Last used*: Wave 157a — G68 CONVERGING (5/15 compliant, 205 violations, sourDough validator LIVE). Phase A cascade timer LIVE on sporeGate. barraCuda long-tail debt (−37,144 LOC). toadStool L3 backend traits shipped. cellMembrane fully isomorphic. 15 COMPLETE, 26 ACTIVE, 23 GLACIAL. 64 goals. ~140K+ tests. (Aug 7, 2026 6:52PM)
 *Created*: Wave 139a
 *First fossilization*: Wave 150p
-*Latest fossilization*: Wave 157a — G66 graduated to COMPLETE (15th glacial goal). hotSpring 24K LOC fossilized. Stage 2 infra shipped (G56/G67). arXiv 41/42 (NPU silicon continuum). Triad activation specs written (Phase A/B/C). barraCuda ComputeDispatch P0 (−10,771 LOC). (151+ total across 12 checkpoints, 1,472+ total records)
+*Latest fossilization*: Wave 157a — G66 graduated to COMPLETE (15th glacial goal). hotSpring 24K LOC fossilized. Stage 2 infra shipped (G56/G67). arXiv 41/42 (NPU silicon continuum). (151+ total across 12 checkpoints, 1,472+ total records)
 *Latest reopen*: Wave 155k (D10 — Jelly Strings J9–J13, extended to J14–J19 in 155n)
