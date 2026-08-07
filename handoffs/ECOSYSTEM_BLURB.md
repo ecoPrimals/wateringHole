@@ -51,19 +51,19 @@ Musl depot is complete. Gate teams deploy immediately.
 
 ### Track 2: WINDOWS CROSS-ARCH (code teams)
 
-7 primals import `UnixStream`/`UnixListener`/`SO_PEERCRED` without `#[cfg(unix)]` guards. G65 protocol negotiation modules are the primary cause — all use unix UDS unconditionally.
+7 primals have unix-only IPC paths (UDS, `rustix`, `tokio::net::Unix*`) compiled unconditionally. G65 protocol negotiation modules are the primary cause.
 
-| Primal | Owner | Issue | Fix |
-|--------|-------|-------|-----|
-| **bingoCube** | eastGate | G65 IPC module, unconditional unix imports | `#[cfg(unix)]` guard IPC module |
-| **loamSpine** | sporeGate | `tarpc_server.rs` + lifecycle tests, 6 unix refs | Guard tarpc UDS server + tests |
-| **nestGate** | overwatch | Protocol negotiation, unconditional UDS | Guard protocol_negotiation module |
-| **petalTongue** | overwatch | `unix_socket_server/`, transport, audio socket | Guard IPC + transport modules |
-| **rhizoCrypt** | sporeGate | `tarpc_uds.rs`, client, UDS connection | Guard tarpc UDS + client modules |
-| **skunkBat** | eastGate | `tarpc_uds.rs`, IPC transport, BTSP tests, 11+ unix refs | Guard IPC transport layer |
-| **squirrel** | eastGate | Transport types/listener, security provider | Guard transport + auth modules |
+| Primal | Owner | Unix deps | Fix |
+|--------|-------|-----------|-----|
+| **bingoCube** | eastGate | G65 IPC module | `#[cfg(unix)]` guard IPC module |
+| **loamSpine** | sporeGate | `tarpc_server.rs`, tokio `UnixStream`, lifecycle tests | Guard tarpc UDS server + tests |
+| **nestGate** | overwatch | `rustix` (fs/net/process), protocol negotiation | Guard rustix-using modules |
+| **petalTongue** | overwatch | `rustix`, `unix_socket_server/`, audio socket | Guard IPC + rustix modules |
+| **rhizoCrypt** | sporeGate | `tarpc_uds.rs`, UDS client, shutdown | Guard tarpc UDS + client |
+| **skunkBat** | eastGate | `tarpc_uds.rs`, IPC transport, BTSP (11+ refs) | Guard IPC transport layer |
+| **squirrel** | eastGate | `rustix`, transport listener/types, security | Guard transport + auth modules |
 
-**Pattern**: Each primal wraps its UDS/IPC modules with `#[cfg(unix)]` and provides a stub or `compile_error!` for non-unix. This is convergent — each team implements independently. The 8 primals that already build on Windows can serve as references.
+**Pattern**: Wrap UDS/IPC modules with `#[cfg(unix)]`. Use `rustix` (not raw `libc`) for any syscall needs — barraCuda's `libc→rustix` migration (`525674f`) is the reference, restoring `#![forbid(unsafe_code)]`. Convergent — each team implements independently. The 8 primals that already build on Windows can serve as references.
 
 ---
 
