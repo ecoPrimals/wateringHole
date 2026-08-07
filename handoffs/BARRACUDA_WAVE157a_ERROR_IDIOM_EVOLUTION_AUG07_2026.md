@@ -1,4 +1,4 @@
-# barraCuda — Wave 157a Deep Debt + ComputeDispatch P0 (strandGate)
+# barraCuda — Wave 157a Deep Debt + ComputeDispatch + G68 (strandGate)
 
 **Date**: Aug 7, 2026
 **Gate**: strandGate
@@ -9,14 +9,20 @@
 
 ## Summary
 
-Three commits this wave:
+Six commits this wave:
 1. Error constructor helper migration Phase 3 + magic number centralization +
    protocol negotiation zero-alloc + G68 Platform Substrate audit (20 files).
 2. Deprecated batch unwiring + pool2d dedup + env var centralization (9 files).
 3. **ComputeDispatch P0 migration** — all 92 `*_wgsl.rs` ops migrated from manual
    BGL→pipeline boilerplate to `ComputeDispatch` builder (92 files, −10,771 LOC).
+4. **ComputeDispatch P1 migration** — all 225 remaining non-WGSL ops migrated
+   (301 files, −26,373 LOC). Combined P0+P1: 317 ops, −37,144 LOC.
+5. **G68 Platform Substrate compliance** — `platform_substrate` module added,
+   raw `std::os::unix::fs::symlink` → `platform_link()`. 0 L2 violations.
+6. Doc updates — WHATS_NEXT trimmed, test counts updated, handoff refreshed.
 
-Total: 95 files changed. 4,990 tests pass. Zero clippy warnings.
+Total: 301+ files changed. 4,994 tests pass. Zero clippy warnings.
+G68 compliant. 15/15 cross-arch. Zero files over 800 lines.
 
 ## Changes
 
@@ -83,7 +89,7 @@ All ops now use `create_uniform_buffer()` for shader parameter structs
 ## Quality Gates
 
 - `cargo clippy --workspace`: 0 warnings
-- `cargo test --workspace`: 4,990 passed, 0 failed, 191 ignored
+- `cargo test --workspace`: 4,994 passed, 0 failed, 191 ignored
 - Files >800L: 0 (max 783L, test file)
 - Production `unwrap()`: 0
 - Production `unsafe`: 0 (all crates `#![forbid(unsafe_code)]`)
@@ -91,10 +97,15 @@ All ops now use `create_uniform_buffer()` for shader parameter structs
 - Hardcoded primal names: 0
 - `Result<T, String>`: 0
 - `println!` in lib: 0
+- G68 platform substrate: **COMPLIANT** (0 L2 violations)
+- Cross-arch: **15/15 PASS** (Linux + Windows)
 
 ## Remaining Structural Debt
 
 | Item | Scope | Priority |
 |------|-------|----------|
-| Non-WGSL ComputeDispatch | ~225 ops in `ops/` still manual BGL (f64, linalg, MD) | P1 |
+| ~~Non-WGSL ComputeDispatch~~ | ~~225 ops~~ **DONE** — 317 total ops migrated, −37,144 LOC | ~~P1~~ COMPLETE |
+| 3 cached BGL ops | `snp.rs`, `fd_common.rs`, `gemm_f64.rs` — intentional for perf | N/A (by design) |
 | CPU executor `shader_unary/binary` | Migration scaffolding exists, not yet called | P2 |
+| 13 `#[deprecated]` items | 4 CPU batch fallbacks + 3 BEARDOG env aliases — migration period | P3 |
+| 5 `LazyLock<String>` | DF64 format! concatenation — irreducible (Pattern C) | N/A (by design) |
