@@ -10,9 +10,9 @@
 
 [wave]
 id = 156
-sub = "u"
-date = "2026-08-06"
-posture = "WAVE 156u G66 15/15 COMPLETE. Silicon deism eliminated. G64+G65+G66 all COMPLETE. Depot rebuild needed with G66 bins. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. 15/15 GREEN."
+sub = "v"
+date = "2026-08-07"
+posture = "WAVE 156v CROSS-ARCH COMPLIANCE. G66 modules shipped 15/15 but 5 primals still fail Windows (migration incomplete). NEW STANDARD: cargo check --target x86_64-pc-windows-gnu before push. Musl 16/16 on golgi — deploy gates. 15/15 GREEN."
 publisher = "eastGate-overwatch"
 
 [gates]
