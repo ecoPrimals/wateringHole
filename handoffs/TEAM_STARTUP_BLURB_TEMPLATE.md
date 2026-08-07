@@ -1,4 +1,4 @@
-# Team Startup Blurb — Post Wave 155n (Springs+Gardens Phase)
+# Team Startup Blurb — Wave 157a (Stage 2 Neural API Activation)
 
 **From**: eastGate overwatch
 **Purpose**: Paste this into any new IDE session on any gate. It bootstraps
@@ -6,13 +6,13 @@ the gate through four phases: connectivity → sync → enrollment → work.
 
 **Two audiences**:
 - **Gate teams**: Phases 0–2 (connectivity, sync, enrollment). Deploy NUCLEUS on hardware.
-- **Code teams**: Phases 0–1 (connectivity, sync), then Phase 3 (garden/spring work). Build ON the primals.
+- **Code teams**: Phases 0–1 (connectivity, sync), then Phase 3 (primal/spring/garden work). Build ON the primals.
 
 **Four-phase flow**:
 0. **Connectivity**: SSH config for Forgejo (NO WireGuard needed — Forgejo is public)
 1. **Sync**: Pull all repos from Forgejo, fix naming divergences, clone missing repos
 2. **Enrollment**: WireGuard mesh + Tower Atomic — **GATE TEAMS ONLY** (required for primal IPC, not for code)
-3. **Work**: Garden/spring-specific tasks — **CODE TEAMS ONLY**
+3. **Work**: Team-specific tasks — **CODE TEAMS** or **GATE TEAMS**
 
 ---
 
@@ -91,51 +91,58 @@ BTSP trust and riboCipher framing across atomic boundaries. All binaries
 (`https://depot.primals.eco`). Gates are physical machines running Tower
 Atomic or higher compositions.
 
-### Current State (Post Wave 155n — Aug 1, 2026)
+### Current State (Wave 157a — Aug 7, 2026)
 
-**Posture**: ZERO P0/P1/P2. Wave 155 POST-THRESHOLD. gen5 THESIS PROVEN ON LIVE DATA.
-7 glacial goals COMPLETE. NUCLEUS on 5 gates. Sovereign CI LIVE. 33.79 GB real data ingested.
-All 15 primals shipped. Springs+gardens phase: build workloads ON the primals.
+**Posture**: STAGE 2 CODE TEAM HANDOFF. G64+G65+G66 COMPLETE (cephalization trilogy).
+Forwarding fix shipped (G67 N1). Neural API is the routing substrate — Stage 1 (direct
+socket) is now primordial. Two parallel code teams on eastGate: primalSpring (N2-N5
+activation) + biomeOS (routing infrastructure). 15 glacial goals COMPLETE.
 
 | Fact | Value |
 |------|-------|
-| Wave | 155n (CLOSED) — springs+gardens phase |
-| Primals | 15 (13 active + 2 dormant). **All shipped. Substrate is stable.** |
-| Tests | **~101K+** across 15 primals |
-| biomeOS | **v4.56** — G22 COMPLETE: single-process, dual-protocol (riboCipher + JSON-RPC), 244 caps, 27 signal graphs |
-| BTSP | 13/13 — all primals ship bearDog ClientHello |
-| Depot | **46 binaries** (16 musl + 15 gnu + 15 windows). BLAKE3 verified. |
-| Gates | **5 NUCLEUS** (westGate, strandGate, blueGate, sporeGate, **southGate 22/22 PASS**). G17+G8 PROVEN. |
-| Jelly strings | **11/11 resolved** (J12 LIVE E2E SSH, J18 CODE SHIPPED) |
-| Sovereign CI | **LIVE** — push-to-deploy for ALL 13 primals. sporeGate build authority. blueGate sub-builder (J12). |
-| Provenance | **7/7 COMPLETE** — E2E on Linux + Windows, 8 consecutive passes |
+| Wave | **157a** — Stage 2 Neural API activation |
+| Primals | 15 (13 active + 2 dormant). **G64+G65+G66 COMPLETE.** All cephalized. |
+| Tests | **~140K+** across 15 primals |
+| biomeOS | **v4.57+** — G65 protocol negotiation, G67 forwarding fix (`ffed2c5b`). 456 Neural API tests. |
+| BTSP | 15/15 — all primals ship bearDog ClientHello |
+| Depot | **52 builds** (16 musl + 15 gnu + 15 windows + aarch64). BLAKE3 verified. blueGate primary builder. |
+| Gates | **6 NUCLEUS** (westGate, strandGate, blueGate, sporeGate, southGate, **ironGate**). G17+G8 PROVEN. |
+| Cephalization | **G64 COMPLETE** — tarpc convergent evolution 15/15 |
+| Protocol | **G65 COMPLETE** — single-socket dual-protocol 15/15 |
+| Transport | **G66 COMPLETE** — silicon-agnostic IPC 15/15, cross-arch 15/15 |
+| Neural API | **G67 ACTIVE** — N1 forwarding fix shipped, N2-N6 pending |
+| Sovereign CI | **LIVE** — push-to-deploy for ALL 13 primals. blueGate primary builder. |
+| Provenance | **7/7 COMPLETE** — E2E on Linux + Windows |
 | Forgejo | `ssh://git@git.primals.eco:2222/` — canonical remote (PUBLIC) |
 | P0/P1/P2 | **ZERO** |
-| Glacial goals | **31 tracked** (7 COMPLETE: G3+G4+G8+G10+G17+G21+G22) |
+| Glacial goals | **63 tracked** (15 COMPLETE / 25 ACTIVE / 23 GLACIAL) |
 
 ### Gate-Team Assignments
 
 | Gate | Role | Hardware | Status |
 |------|------|----------|--------|
-| **eastGate** | Overwatch, code hub | 10G SFP+ | ONLINE |
-| **westGate** | Nest Atomic workhorse | Ryzen 7 5700X, 64GB, ZFS raidz1 50.7TB | **NUCLEUS v4.56 G22.** Prov 7/7. AlphaFold ready. |
-| **strandGate** | Node Atomic workhorse | Dual EPYC 7452, RTX 3090 | **NUCLEUS v4.55.** Needs v4.56 redeploy. hotSpring target. |
-| **sporeGate** | Build authority, depot | Full NUCLEUS, Sovereign CI | **NUCLEUS v4.56 G22.** 46 depot bins. J12 dispatch. |
-| **blueGate** | Windows sub-builder | Windows, house2, 10G backbone | **NUCLEUS v4.56.** J12 LIVE E2E. membrane.exe. |
-| **ironGate** | GPU compute, esotericWebb host | 14TB HDD, GPU | ONLINE. esotericWebb migration target. |
-| **southGate** | **Validation gate — 22/22 PASS** | 5800X3D + RTX 4060 + 128GB + 5TB NVMe | **NUCLEUS PROVEN.** G17+G8. No WG. Own family. 20h stable. |
+| **eastGate** | Overwatch + code teams | i9-12900K, **64 GB DDR5**, Z790-P WIFI, 10G SFP+ | ONLINE. primalSpring + biomeOS code teams. |
+| **westGate** | Data NAS + Nest workhorse | Ryzen 7 5700X, 64GB, ZFS raidz1 50.7TB | **NUCLEUS v4.57.** 3.21 TB / 153 datasets / 452 GB CAS. |
+| **strandGate** | Node Atomic + QCD compute | Dual EPYC 7452, RTX 3090 + RX 6950 XT | **NUCLEUS v4.57+.** hotSpring SU(N). Config memoization. |
+| **sporeGate** | CI + membrane + depot | Full NUCLEUS, Sovereign CI | Depot 17/17 musl. nestgate.io. |
+| **blueGate** | Windows primary builder | Windows, house2, 10G backbone | **NUCLEUS v4.57+.** 15/15 Windows builds. Sub-builder. |
+| **ironGate** | Downstream host | i9-14900K, RTX 5070, 94 GB, 14TB HDD | **NUCLEUS 13/13.** G18 LIVE. esotericWebb + footPrint. |
+| **southGate** | Validation gate (G17+G8 PROVEN) | 5800X3D + RTX 4060 + 128GB + 5TB NVMe | **NUCLEUS 13/13.** No WG. Own family. Re-validated. |
+| **biomeGate** | GPU crankshaft + agentic | Threadripper 3970X, 128GB, 3 VFIO GPUs | GPU LAB. coralReef 3,553 tests. 44-experiment matrix. |
 | **golgiBody** | Depot, Forgejo, enrollment, relay | Sole depot (public VPS) | ONLINE |
 | **northGate** | AlphaFold data source (~1TB) | Windows, RTX 5090 | **DAILY DRIVER — DO NOT DEPLOY** |
-| **swiftGate** | Second Windows proof | Windows, house2 | After blueGate |
 
-### Active Gardens/Springs (what code teams work on)
+### Active Gardens/Springs/Teams (what code teams work on)
 
-| Garden/Spring | Type | What | Gate | Website |
-|---------------|------|------|------|---------|
-| **hotSpring** | Spring | QCD dynamical programming — GPU lattice simulations, continuous background compute | strandGate (RTX 3090) | primals.eco/hotspring/ |
-| **esotericWebb** | Garden | Game engine / creative sandbox on NUCLEUS | ironGate | primals.eco/webb/ |
-| **footPrint** | Garden | GIS data visualization, 478 TS tests | any NUCLEUS gate | **LIVE** at primals.eco/footprint/ |
-| **sporePrint** | Infra | Public website — triage 334→120 pages, demonstration era | golgi (Caddy) | primals.eco |
+| Team / Project | Type | What | Gate | Status |
+|----------------|------|------|------|--------|
+| **primalSpring** | Spring | Neural API N2-N5 activation testing | **eastGate** | **ACTIVE — code team spun up** |
+| **biomeOS** | Primal | Routing infrastructure (riboCipher pooling, bootstrap→coordinated) | **eastGate** | **ACTIVE — code team spun up** |
+| **hotSpring** | Spring | QCD SU(N). Rung 1 science COMPLETE. Compute trio. | strandGate | Running. 627+ tests. |
+| **tideGlass** | Spring | NF GPS rebuild (Gonzales/Bin Chen). Cell boot NEXT. | westGate | 214 tests. CAS wired. |
+| **esotericWebb** | Garden | Game engine on NUCLEUS. V31b, 484 tests. | ironGate | CELL BOOT SUCCEEDED. |
+| **footPrint** | Garden | GIS data visualization. 708 TS tests. | ironGate | **LIVE** at primals.eco/footprint/ |
+| **sporePrint** | Infra | Public website — demonstration era. | golgi | LIVE at primals.eco |
 
 ### Workspace Structure
 
@@ -382,7 +389,7 @@ After sync completes:
 
 1. Read `infra/wateringHole/handoffs/ECOSYSTEM_BLURB.md` — universal handoff
 2. Read `infra/wateringHole/wave.toml` — current wave and posture
-3. Read `infra/wateringHole/ORTHOGONAL_DIMENSIONS_REVIEW.md` — 10 active + 13 fossilized dimensions
+3. Read `infra/wateringHole/ORTHOGONAL_DIMENSIONS_REVIEW.md` — 9 active + 14 fossilized dimensions
 4. Check for remaining dirty repos:
 ```bash
 for d in primals/* gardens/* springs/* infra/*; do
@@ -573,12 +580,16 @@ is only needed when deploying primals to run as services.
 > - Lean dependencies, clean module graph, no circular deps
 >
 > **Architecture Compliance**
-> - JSON-RPC + tarpc: all IPC is JSON-RPC wire + tarpc service trait
+> - JSON-RPC + tarpc: all IPC is JSON-RPC wire + tarpc service trait (G64 cephalization)
+> - Protocol negotiation: single socket serves both JSON-RPC and tarpc (G65)
+> - Transport abstraction: `TransportEndpoint`/`TransportStream`/`connect_transport` (G66)
+> - Cross-arch: `cargo check --target x86_64-pc-windows-gnu` must PASS (pre-push standard)
 > - genomeBin compliant: single-binary per `ECOBIN_ARCHITECTURE_STANDARD.md`
 > - Semantic method naming per `SEMANTIC_METHOD_NAMING_STANDARD.md`
 > - Platform-native transport: songBird universal-ipc (UDS/named pipes/TCP)
-> - BTSP: must ship bearDog ClientHello for authenticated IPC
-> - biomeOS neuralAPI: capabilities discoverable via `capability.call`
+> - BTSP: must ship bearDog ClientHello for authenticated IPC (15/15)
+> - biomeOS neuralAPI: capabilities discoverable via `capability.call` (Stage 2)
+> - riboCipher transport signal: `[0xEC, protocol]` prefix on NUCLEUS sockets
 >
 > **Test Coverage**
 > - Target: 90% line coverage via `cargo llvm-cov` (report actual)
@@ -603,6 +614,9 @@ is only needed when deploying primals to run as services.
 |----------|------|
 | Architecture | `fossilRecord/wave150s_standards/ECOBIN_ARCHITECTURE_STANDARD.md` |
 | Method naming | `protocols/SEMANTIC_METHOD_NAMING_STANDARD.md` |
+| Protocol negotiation | `specs/PROTOCOL_NEGOTIATION_SPEC.md` (G65) |
+| Transport abstraction | `specs/TRANSPORT_ABSTRACTION_SPEC.md` (G66) |
+| Neural API activation | `specs/NEURAL_API_ACTIVATION_SPEC.md` (G67) |
 | Licensing | `foundations/LICENSING_AND_COPYLEFT.md` |
 | Expectations | `STANDARDS_AND_EXPECTATIONS.md` |
 | Pure Rust crypto | `fossilRecord/wave150s_standards/PURE_RUST_CRYPTO_PURITY_STANDARD.md` |
@@ -626,57 +640,94 @@ is only needed when deploying primals to run as services.
 
 ## Team-Specific Contexts (paste the relevant one)
 
-### CODE TEAM: hotSpring (QCD dynamical programming)
+### CODE TEAM: primalSpring — Neural API Activation (N2-N5)
 
-> **hotSpring** — springs/hotSpring. Target gate: **strandGate** (RTX 3090).
-> Tests: 627+ | Last evolution: Wave 113 (riboCipher REJECT)
+> **primalSpring** — springs/primalSpring. Target gate: **eastGate**.
+> Tests: 197 scenarios | Mission: **Verify Stage 2 Neural API routing works.**
 >
-> **Purpose**: GPU-resident lattice QCD — run all dynamical options over time
-> in background, serve custom computation requests as we understand the physics.
-> HMC, pseudofermion, metadynamics, free energy surfaces.
+> **Your job**: Build the fixed `neural-api-server` binary and verify that
+> `capability.call` routes through Neural API to live primals on eastGate.
 >
-> **Primals used**: barraCuda (tensor), toadStool (dispatch), coralReef (shaders),
-> sweetGrass (provenance DAG), biomeOS (orchestration), songBird (IPC).
+> **Setup**:
+> 1. Build: `cd primals/biomeOS && cargo build --release -p neural-api-server`
+> 2. The forwarding fix is in `crates/biomeos-atomic-deploy/src/neural_router/forwarding.rs` (commit `ffed2c5b`)
+> 3. Test script: `primals/biomeOS/scripts/neural-api-test.sh` automates N1-N5
+> 4. NUCLEUS is live on systemd: 13 primals running, sockets at `/run/user/1000/biomeos/`
 >
-> **Catch-up needed**: biomeOS evolved from v4.45 → v4.56 (G22 single-process,
-> unified namespace, dual-protocol). hotSpring's `primal_bridge.rs` and
-> `composition.rs` need updating for v4.56 capability changes. The
-> `by_domain()` migration (GAP-HS-002) is already done.
+> **Known**:
+> - Some primals (sweetGrass) require riboCipher prefix (`0xEC 0x01`) before JSON-RPC
+> - bearDog at `beardog-default.sock` accepts raw JSON-RPC
+> - Neural API at `biomeos-neural.sock` requires riboCipher prefix
+> - 8 primals have processes alive but sockets missing — may need restart
 >
-> **Website surface**: primals.eco/hotspring/ — live QCD visualizations
-> rendered by petalTongue from strandGate GPU output.
+> **Activation tasks**:
 >
-> **Open gaps**: GAP-HS-001 (squirrel round-trip), GAP-HS-005 (ionic GPU lease).
+> | # | Task | Status |
+> |---|------|--------|
+> | N1 | Fix forwarding path | **DONE** (`ffed2c5b`) |
+> | N2 | `capability.call` routes to bearDog | **YOUR FIRST TARGET** |
+> | N3 | Tower Atomic routing (bearDog+songBird+skunkBat) | PENDING |
+> | N4 | Provenance Trio routing (rhizoCrypt+loamSpine+sweetGrass) | PENDING |
+> | N5 | squirrel agent routing via Neural API | PENDING |
+>
+> **Spec**: `infra/wateringHole/specs/NEURAL_API_ACTIVATION_SPEC.md` (G67)
+>
+> **NUCLEUS option**: You can run your own NUCLEUS (second instance on eastGate,
+> or via beanchScale VM/image) to avoid disturbing the overwatch NUCLEUS.
+>
+> **Report**: File results as `infra/wateringHole/handoffs/PRIMALSPRING_N2_N5_AAR.md`
 
-### CODE TEAM: esotericWebb (game engine / creative)
+### CODE TEAM: biomeOS — Routing Infrastructure
 
-> **esotericWebb** — gardens/esotericWebb. Target gate: **ironGate** (migrated from flockGate DOWN).
-> Tests: 472 | Version: V22 | Last evolution: Wave 150o
+> **biomeOS** — primals/biomeOS. Target gate: **eastGate**.
+> Tests: 8,570+ (456 Neural API) | Version: v4.57+ | Commit: `ffed2c5b`
 >
-> **Purpose**: Interactive game engine / creative sandbox running on NUCLEUS.
-> Scene binding, NPC dialogue, WebGL rendering via petalTongue IPC.
+> **Your job**: Evolve the Neural API routing layer for Stage 2 readiness.
 >
-> **Primals used**: petalTongue (rendering), squirrel (NPC AI), songBird (IPC),
-> biomeOS (composition).
+> **Focus areas**:
+> 1. **riboCipher-aware connection pooling**: The pool currently sends raw JSON-RPC.
+>    NUCLEUS-deployed primals (sweetGrass, etc.) need `0xEC 0x01` prefix before
+>    JSON-RPC payloads. The pool's `send_jsonrpc` needs to prepend the signal.
+> 2. **Bootstrap → Coordinated mode transition**: Neural API starts in Bootstrap
+>    mode with 0 registered capabilities. It needs to discover running primals
+>    and transition to Coordinated mode for capability routing.
+> 3. **Graph execution through capability semantics**: `graph.execute` should
+>    resolve to `capability.call` chains, not direct socket connections.
 >
-> **Open gaps**: GAP-002 (petalTongue CRPG scene type — resolved on Webb side,
-> awaiting petalTongue v1.7+ deploy), GAP-003 (squirrel NPC dialogue constraint enforcement).
+> **Key files**:
+> - `crates/biomeos-atomic-deploy/src/neural_router/forwarding.rs` — forwarding fix
+> - `crates/biomeos-atomic-deploy/src/neural_router/` — all routing logic
+> - `config/signal_tools.toml` — 27 signal graphs
 >
-> **Website surface**: primals.eco/webb/ — interactive demo.
+> **Spec**: `infra/wateringHole/specs/NEURAL_API_ACTIVATION_SPEC.md` (G67)
+>
+> **Report**: File results as `infra/wateringHole/handoffs/BIOMEOS_STAGE2_AAR.md`
 
-### CODE TEAM: sporePrint (website triage)
+### CODE TEAM: hotSpring (QCD — Rung 1 science COMPLETE)
 
-> **sporePrint** — infra/sporePrint. Deploys to golgi via Forgejo auto-publish hook.
-> See `SPOREPRINT_BLURB.md` for full task breakdown.
+> **hotSpring** — springs/hotSpring. Target gate: **strandGate** (RTX 3090 + RX 6950 XT).
+> Tests: 627+ | Version: v0.6.32 | Status: **Rung 1 science COMPLETE.**
 >
-> **Purpose**: Transition from conceptual credibility surface to live demonstration.
-> 334 pages → ~120-150 in main nav. Move stale content to /foundation/ and /backstory/.
-> Add live evidence dashboards. New main nav: Lab | Science | Architecture | Products | Get Started.
+> **Purpose**: GPU-resident lattice QCD — SU(N) for N=2→8. All physics validated.
+> 3 remaining items are upstream (naga compiler bug, sporePrint URLs).
+>
+> **Current work**: Compute trio (toadStool+barraCuda+coralReef) memoization.
+> 24K LOC fossilized (deprecated low_level, fleet_client/fleet_ember → toadStool).
+>
+> **Primal deduplication**: barraCuda should absorb `HardwareCalibration::probe()`
+> and `PrecisionEval` from hotSpring (1,090 LOC). See
+> `handoffs/HOTSPRING_PRIMAL_DEDUPLICATION_HANDOFF_AUG07.md`.
+
+### CODE TEAM: esotericWebb (game engine)
+
+> **esotericWebb** — gardens/esotericWebb. Target gate: **ironGate**.
+> Tests: 484 | Version: V31b | Status: **CELL BOOT SUCCEEDED on ironGate.**
+> 28 caps, 8/9 primals. Needs petalTongue WebGL pipeline (G19) for browser surface.
 
 ### GATE TEAM: Any new gate (Tower → NUCLEUS deployment)
 
-> **All primals are in depot.** 46 binaries across 3 platforms.
-> biomeOS v4.56 (G22 COMPLETE). Tower Atomic LIVE on 6 gates.
+> **All primals are in depot.** 52 builds across 4+ platforms.
+> biomeOS v4.57+. Tower Atomic LIVE on 6+ gates. G64+G65+G66 COMPLETE.
 >
 > **Deployment sequence**:
 > 1. Phase 0+1: Connectivity + sync (this blurb)
@@ -688,34 +739,11 @@ is only needed when deploying primals to run as services.
 > 7. biomeOS: Full NUCLEUS — orchestrates all 13 primals
 >
 > **Validate**: `tower.health` → `{ "status": "healthy" }`.
-> `composition.status` → 13/13 services, socket count, capabilities.
 > **Windows**: Use `x86_64-pc-windows-gnu` binaries from depot.
+> **Cross-arch**: All 15 primals pass `cargo check --target x86_64-pc-windows-gnu`.
 >
 > **Report**: File sync report and validation as:
 > `infra/wateringHole/handoffs/[GATE_NAME]_DEPLOYMENT_AAR.md`
-
-### GATE TEAM: southGate (validation gate — special)
-
-> **southGate** — VALIDATION GATE. Deliberately **NO WireGuard**.
-> HW: 5800X3D + RTX 4060 + 128GB + 5TB NVMe.
->
-> **Purpose**: Prove that a gate on a different LAN can deploy NUCLEUS from the
-> public depot without inheriting /etc/environment or WireGuard configs.
-> Validates J18 portability, G8 bonding, G17 reconstitution.
->
-> **Deployment**: Use `https://depot.primals.eco` only. Own genetic lineage.
-> No mesh shortcuts. If NUCLEUS launches clean, the system is portable.
-
-### GATE TEAM: strandGate (v4.56 redeploy)
-
-> **strandGate** — NUCLEUS v4.55. Needs v4.56 redeploy (20-minute operation).
-> HW: Dual EPYC 7452, RTX 3090.
->
-> **Purpose**: Node Atomic workhorse. hotSpring's target gate for GPU compute.
-> After v4.56 redeploy, ready for continuous QCD lattice simulations.
->
-> **Steps**: Pull biomeOS v4.56 from depot. Restart membrane-biomeos.service.
-> Validate: 12/12 HEALTHY, G22 dual-protocol, socket stability.
 
 ---
 
@@ -728,7 +756,7 @@ INNER MEMBRANE — Primal IPC (WireGuard wg0 + songBird :7700 + BTSP)
 ```
 
 Peptidoglycan anchors: sporeGate (house1) + blueGate (house2).
-biomeOS v4.56 (G22 COMPLETE) handles orchestration + trust propagation across inner membrane.
+biomeOS v4.57+ (G67 Stage 2 activation) handles orchestration + trust propagation across inner membrane. Neural API is the routing substrate.
 
 Forgejo access is OUTSIDE the inner membrane — it's public internet → golgiBody.
 You only need inner membrane for primal-to-primal IPC and mesh enrollment.
@@ -737,22 +765,21 @@ You only need inner membrane for primal-to-primal IPC and mesh enrollment.
 
 ## Glacial Goals (what we're building toward)
 
+**15 COMPLETE** (G3, G4, G8, G10, G17, G21, G22, G29, G31, G55, G59, G64, G65, G66).
+
 | # | Goal | Status |
 |---|------|--------|
-| G3 | Provenance Trio 7/7 | **COMPLETE** |
-| G4 | NUCLEUS on multiple gates | **COMPLETE** (×4) |
-| G21 | biomeOS-cellMembrane coevolution | **COMPLETE** |
-| G22 | biomeOS API convergence (whitePaper milestone) | **COMPLETE** |
-| G18 | squirrel → biomeOS agent orchestration | **ACTIVE** |
-| G19 | petalTongue + Node Atomics live rendering | **ACTIVE** |
-| G20 | esotericWebb game engine on NUCLEUS | **ACTIVE** |
-| G8 | Plasmodium (multi-gate bonding) | VALIDATING (southGate) |
-| G17 | Portability — reconstitute from cold | VALIDATING (southGate) |
-| G11 | Any chip + drive = mesh gate | steamGate NEXT |
-| G24 | Sovereign Identity Garden | CONCEPT (gate-first, phone later) |
-| G23 | nestGate CAS-layer fractional replication | NEW |
+| G64 | Cephalization — tarpc convergent evolution | **COMPLETE** (15/15) |
+| G65 | Protocol Negotiation — single-socket dual-protocol | **COMPLETE** (15/15) |
+| G66 | Transport Abstraction — silicon-agnostic IPC | **COMPLETE** (15/15 cross-arch) |
+| **G67** | **Neural API forwarding fix + Stage 2 transition** | **ACTIVE — N1 DONE, N2-N6 PENDING** |
+| G56 | Neural API activation (capability routing everywhere) | **ACTIVE — PRIORITY** |
+| G9 | arXiv publication (Murillo/Chuna QCD) | **ACTIVE** — Rung 1 science COMPLETE |
+| G36 | tideGlass Phase 1 — NF GPS reproduction | **ACTIVE** |
+| G18 | squirrel → biomeOS agent orchestration | **LIVE on ironGate** |
+| G53 | petalTongue maturation via downstream consumers | **ACTIVELY WIRING** |
 
-28 glacial goals tracked total. See `ORTHOGONAL_DIMENSIONS_REVIEW.md` for full list.
+63 glacial goals tracked total. See `ORTHOGONAL_DIMENSIONS_REVIEW.md` for full list.
 
 ---
 
