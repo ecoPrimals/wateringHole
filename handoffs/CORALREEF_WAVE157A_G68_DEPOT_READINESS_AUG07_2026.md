@@ -84,7 +84,70 @@ platform gates belong per G66. Business logic never touches `#[cfg(unix)]`.
 
 ---
 
+## SCANNER FALSE POSITIVE REPORT — sourDough G68 Audit
+
+The `G68_CROSS_DEPLOYMENT_AUDIT_AUG07_2026.md` reports **56 L2 violations**
+for coralReef (`PermissionsExt` / `set_mode` / `from_mode`). **All 56 are
+false positives.** The scanner pattern-matched GPU texture instruction field
+names as permission APIs:
+
+| Scanner match | Actual code | Count |
+|---------------|-------------|------:|
+| `offset_mode` | `TexOffsetMode` (GPU tex instruction field) | 42 |
+| `set_su_ga_offset_mode` | Surface address mode setter (GPU encoder) | 8 |
+| `set_mode` | Never appears as `PermissionsExt::set_mode()` | 0 |
+| `from_mode` | `TexOffsetMode::from(...)` pattern (GPU) | 6 |
+
+**Verification**:
+```
+rg 'PermissionsExt' crates/ → 0 matches
+rg 'set_mode\(0o'  crates/ → 0 matches
+rg 'from_mode\(0o' crates/ → 0 matches
+rg 'set_permissions' crates/ → 0 matches
+```
+
+**Root cause**: Scanner uses substring/regex on `_mode` / `set_mode` without
+verifying the import is `std::os::unix::fs::PermissionsExt`. GPU compiler
+code has hundreds of `*_mode` fields (texture offset modes, addressing modes,
+comparison modes, etc.).
+
+**Recommendation for sourDough team**: L2 scanner should require
+`use std::os::unix::fs::PermissionsExt` import or `Permissions::from_mode`
+full path to avoid false positives from domain-specific field names.
+
+**Actual L2 status**: **ZERO violations**. coralReef is a pure compiler primal
+with no filesystem permission manipulation.
+
+## L1 STATUS
+
+The audit reports 1 L1 violation in `transport.rs`. This is our
+`create_local_symlink()` function which **already implements G68 L1**:
+- Unix: `std::os::unix::fs::symlink`
+- Windows: `std::os::windows::fs::symlink_file`
+- Other: `Unsupported`
+
+The scanner flags the raw `std::os::unix::fs::symlink` import inside the
+platform abstraction function itself. This is legitimate per G68 spec:
+"a `#[cfg(unix)]` on a backend implementation behind a trait is acceptable."
+
+## G66 RAW % STATUS
+
+Audit reports 8% raw (14 raw uses, 157 G66 adopted). Breakdown:
+
+| File | Raw uses | Type | Justified? |
+|------|---------|------|------------|
+| `transport.rs` | 10 | G66 substrate (the abstraction itself) | Yes — cannot be further abstracted |
+| `primal-rpc-client/transport.rs` | 3 | G66 substrate (LocalStream enum) | Yes — the abstraction |
+| 9 test files | ~25 | Test code (mock listeners, stream pairs) | Yes — per G68 spec |
+
+All production "raw" uses are inside the G66 substrate layer itself. They
+ARE the abstraction — business logic never touches `UnixStream` directly.
+The 8% ratio is irreducible for coralReef.
+
+---
+
 *coralReef Wave 157a. G68 deep evolution: 18 silicon deism sites evolved to
 TransportEndpoint-based transport-agnostic paths. Ecosystem registration,
 BTSP discovery, provenance signing all work on non-Unix via TCP when
-discovered. Zero L2/L3 exposure. Cross-arch PASS.*
+discovered. Zero L2/L3 exposure (56 scanner L2 reports are false positives —
+GPU texture field names, not PermissionsExt). Cross-arch PASS.*
