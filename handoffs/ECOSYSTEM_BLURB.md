@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Deployment Wave
 
 **Date**: Aug 6, 2026 9:00PM | **Wave**: 156t | **From**: eastGate overwatch
-**Posture**: **DEPLOY + G66.** Musl depot 17/17 on golgi — gate teams deploy now. **skunkBat G66 shipped** — `TransportStream` + `TransportListener` + unified accept loop. 6/7 primals remain for G66. G64+G65 GRADUATED to COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals.
+**Posture**: **DEPLOY + G66.** Musl depot 17/17 on golgi — gate teams deploy now. **nestGate G66 shipped** — TransportEndpoint G66 methods + G65 on TCP + silicon deism fixed. 5/7 primals remain for G66. G64+G65 GRADUATED to COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals.
 
 ---
 
@@ -10,7 +10,7 @@
 | Target | Binaries | Status |
 |--------|----------|--------|
 | **x86_64-unknown-linux-musl** | **17/17** | COMPLETE on golgi. All Aug 6. Deploy. |
-| **x86_64-pc-windows-gnu** | **8/15** | 7 primals have unix-only IPC code |
+| **x86_64-pc-windows-gnu** | **9/15** | 6 primals have unix-only IPC code (nestGate G66 shipped) |
 
 ---
 
@@ -65,7 +65,7 @@ Musl depot is complete. Gate teams deploy immediately.
 |--------|-------|----------------|
 | **bingoCube** | eastGate | Add transport module, refactor G65 IPC |
 | **loamSpine** | sporeGate | Transport-abstract tarpc server + tests |
-| **nestGate** | overwatch | Confine `rustix` to transport, abstract protocol negotiation |
+| ~~**nestGate**~~ | ~~overwatch~~ | ~~DONE — G66 shipped: TransportEndpoint (platform_default, from_env_or_default), G65 on TCP, cfg-guarded silicon deism~~ |
 | **petalTongue** | overwatch | Transport-abstract `unix_socket_server/`, confine `rustix` |
 | **rhizoCrypt** | sporeGate | Transport-abstract tarpc UDS + client |
 | ~~**skunkBat**~~ | ~~eastGate~~ | ~~DONE — G66 shipped: TransportStream + TransportListener + unified serve_listener~~ |
