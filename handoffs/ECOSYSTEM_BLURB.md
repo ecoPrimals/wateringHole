@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Deployment Wave
 
-**Date**: Aug 6, 2026 8:30PM | **Wave**: 156s | **From**: eastGate overwatch
-**Posture**: **DEPLOY + G66.** Musl depot 17/17 on golgi — gate teams deploy now. G66 (Transport Abstraction) formalized as next convergence: sourDough reference already complete. 7 primals evolve transport layer independently to eliminate silicon deism. G64+G65 GRADUATED to COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals.
+**Date**: Aug 6, 2026 9:00PM | **Wave**: 156t | **From**: eastGate overwatch
+**Posture**: **DEPLOY + G66.** Musl depot 17/17 on golgi — gate teams deploy now. **skunkBat G66 shipped** — `TransportStream` + `TransportListener` + unified accept loop. 6/7 primals remain for G66. G64+G65 GRADUATED to COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals.
 
 ---
 
@@ -68,7 +68,7 @@ Musl depot is complete. Gate teams deploy immediately.
 | **nestGate** | overwatch | Confine `rustix` to transport, abstract protocol negotiation |
 | **petalTongue** | overwatch | Transport-abstract `unix_socket_server/`, confine `rustix` |
 | **rhizoCrypt** | sporeGate | Transport-abstract tarpc UDS + client |
-| **skunkBat** | eastGate | Transport-abstract IPC transport layer (11+ unix refs) |
+| ~~**skunkBat**~~ | ~~eastGate~~ | ~~DONE — G66 shipped: TransportStream + TransportListener + unified serve_listener~~ |
 | **squirrel** | eastGate | Transport-abstract listener/types, confine `rustix` |
 
 **Already clear** (8/15 — can serve as secondary references): barraCuda, bearDog, biomeOS, coralReef, nestGate*, petalTongue*, songBird, sourDough, sweetGrass, toadStool. (*Some need transport confinement even if they build today.)
@@ -113,7 +113,7 @@ Musl depot is complete. Gate teams deploy immediately.
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
 | Cephalization (G64+G65) | **COMPLETE.** G65 15/15. C2 15/15. C8 DONE. |
-| G66 Transport Abstraction | **sourDough reference DONE. 7/15 primals need adoption.** |
+| G66 Transport Abstraction | **sourDough reference + skunkBat shipped. 6/15 primals remain.** |
 | Musl depot | **17/17 on golgi** |
 | Windows depot | **8/15 fresh** — 7 blocked on G66 |
 | sporeGate health | **12/13 alive** (toadStool B1/B2) |
@@ -124,4 +124,4 @@ Musl depot is complete. Gate teams deploy immediately.
 
 ---
 
-*Wave 156s — **DEPLOY + G66.** Musl 17/17 on golgi — gate teams deploy. G66 Transport Abstraction formalized: sourDough reference complete, 7 primals converge independently to eliminate silicon deism. Not `#[cfg(unix)]` guards — transport abstraction (TransportEndpoint/TransportStream/connect_transport). Spec: `specs/TRANSPORT_ABSTRACTION_SPEC.md`. G64+G65 GRADUATED COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. ~140K+ tests, 15/15 GREEN.*
+*Wave 156t — **DEPLOY + G66.** Musl 17/17 on golgi — gate teams deploy. skunkBat G66 shipped: TransportStream + TransportListener + unified serve_listener — `#[cfg(unix)]` confined to transport layer, silicon deism eliminated. 6 primals remain for G66. G64+G65 GRADUATED COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. ~140K+ tests, 15/15 GREEN.*
