@@ -83,4 +83,14 @@ Binary size: 16.2MB → 21.2MB (musl). Stage 2 routing infra is in the binary.
 
 ---
 
-*Wave 157a — Stage 2 depot rebuilt. biomeOS `680e83f` (riboCipher pool, auto-transition, TOML caps) compiled fresh: musl 21MB, Windows 20MB. Golgi depot: musl 17/17, Windows 14/15. sporeGate 12/13 ALIVE. N2-N5 verification next, then gate deployment, then springs activation.*
+## G68 PLATFORM SUBSTRATE STATUS
+
+| Primal | L1 (Links) | L2 (Perms) | L3 (Device) | Status |
+|--------|-----------|-----------|------------|--------|
+| sourDough | reference | reference | reference | SHIPPED |
+| **nestGate** | **DONE** | **DONE** | **DONE** | **SHIPPED** |
+| others | pending | pending | pending | — |
+
+---
+
+*Wave 157a — Stage 2 depot rebuilt. biomeOS `680e83f` (riboCipher pool, auto-transition, TOML caps) compiled fresh: musl 21MB, Windows 20MB. Golgi depot: musl 17/17, Windows 14/15. sporeGate 12/13 ALIVE. nestGate ships G68 platform substrate (L1/L2/L3). N2-N5 verification next, then gate deployment, then springs activation.*
