@@ -553,7 +553,7 @@ Visitor flow: see live science → notice it runs on commodity HW → grab pseud
 | G61 | Compute memoization via provenance trio | **ACTIVE** | strandGate thermalized lattice configs as CAS objects with provenance braids. 37 min CPU thermalization → instant on cache hit. Same BLAKE3→CAS→DAG→braid pattern as data acquisition. Cross-gate: biomeGate pulls configs for parity checks. Parallel pipeline: GPU produces while CPU thermalizes next β. NFT-style braids for both config and production results. |
 | G62 | Nanowire → Primal Builder (mesh-routed builds) | **ACTIVE** | Phase 2a DONE: manifest-driven sub-builders (no recompile to add gates). Phase 2b SPEC: songBird mesh-routed `harvest.request`/`harvest.complete`. Foreman pattern: symmetric — any gate can request, any gate can build. Capability advertisement on startup. Parallel dispatch. biomeGate as second sub-builder (NW-05 pending). |
 | G63 | BTSP local-trust (SO_PEERCRED for same-gate UDS) | **ACTIVE** | nestGate accepts same-gate callers without full BTSP X25519 handshake. Process-level auth via `SO_PEERCRED` — membrane group callers are trusted by filesystem perms. Unblocks footPrint CAS write, tideGlass CAS integration, all gardens/protists on same gate. Zero config, maximally primal-like. Proposed in footPrint Phase 2 deploy ready handoff. |
-| **G68** | **Platform Substrate Abstraction — beyond cfg(unix)** | **ACTIVE — SPEC WRITTEN** | G66 solved transport. G68 solves the rest: raw symlinks (17 files/10 primals), raw PermissionsExt (56+ files/13 primals), device backends (37 files/3 primals). `#[cfg(unix)]` hides code; platform abstraction makes it work everywhere. sourDough reference → convergent evolution. Spec: `specs/PLATFORM_SUBSTRATE_SPEC.md`. L1 (links) → L2 (perms) → L3 (devices). |
+| **G68** | **Platform Substrate Abstraction — beyond cfg(unix)** | **ACTIVE — REFERENCE SHIPPED + VALIDATOR LIVE** | sourDough `platform_substrate` module + `sourdough validate platform-substrate` CLI (563 tests). Ecosystem audit: **3/15 compliant** (sourDough, squirrel, nestGate), **80 violations across 12 primals** (65 L2 permissions, 4 L1 links, 11 L3 device). Fix pattern: `PermissionsExt` → `PlatformAccess::apply()`, `symlink()` → `platform_link()`. Trivial fixes: barraCuda(1), sweetGrass(1), skunkBat(2), loamSpine(2). Heavy: biomeOS(14), bearDog(9), toadStool(18). Spec: `specs/PLATFORM_SUBSTRATE_SPEC.md`. |
 | — | Chimera Phase 0 (shared library) | GLACIAL | Deferred |
 | — | Zola → sporePrint primal pipeline | GLACIAL | Replace static site gen |
 
@@ -735,7 +735,7 @@ evolution tracked under G62 (Nanowire → Primal Builder).
 - **Phase A**: sporeGate cascade timer — `membrane temporal.cascade` on 15m systemd timer. Spec: `specs/WATERFALL_CASCADE_TIMER_SPEC.md`.
 - **Phase B**: Overwatch reads impulses/freshness instead of pulling repos. Spec: `specs/OVERWATCH_IMPULSE_PROCESS.md`.
 - **Phase C**: primalSpring materializes sync graphs (`sync_diverge`, `sync_resolve`, `sync_resolve_crossgate`). Handoff: `handoffs/PRIMALSPRING_SYNC_GRAPH_MATERIALIZATION.md`.
-- **G68**: 6/15 shipped, **15/15 cross-arch PASS** (toadStool compiles with warnings). sourDough reference next.
+- **G68**: **3/15 compliant** (sourDough scanner). 80 violations across 12 primals. sourDough reference SHIPPED + validator CLI live. Fix pattern: `PermissionsExt` → `PlatformAccess::apply()`.
 - **Depot rebuild** with Stage 2 biomeOS → sporeGate golgi (DONE)
 - **Deploy** across all 6 NUCLEUS gates from unified depot
 - **Springs**: tideGlass cell boot, hotSpring viz, esotericWebb browser surface
