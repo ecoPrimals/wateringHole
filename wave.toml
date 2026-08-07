@@ -9,10 +9,10 @@
 # heads/<gate>.toml (each gate writes only its own file — zero conflicts).
 
 [wave]
-id = 156
-sub = "x"
+id = 157
+sub = "a"
 date = "2026-08-07"
-posture = "WAVE 156x CROSS-ARCH + NEURAL API. 12/15 Windows pass (coralReef+toadStool fixed). 3 remain: petalTongue, skunkBat, squirrel. Neural API activation planned (N1-N6). westGate jelly string AAR absorbed. 15/15 GREEN."
+posture = "WAVE 157a STAGE 2 CODE TEAM HANDOFF. Forwarding fix compiled & verified (G67 N1). primalSpring team: N2-N5 live activation. biomeOS team: routing infra. Overwatch: ecosystem coordination. 15/15 cross-arch. Zero debt. 14 COMPLETE. 15/15 GREEN."
 publisher = "eastGate-overwatch"
 
 [gates]
