@@ -1,108 +1,109 @@
-# ecoPrimals Ecosystem Blurb — Cross-Arch First
+# ecoPrimals Ecosystem Blurb — Deployment Wave
 
-**Date**: Aug 7, 2026 7:30AM | **Wave**: 156w | **From**: eastGate overwatch
-**Posture**: **WINDOWS FIRST. skunkBat CROSS-ARCH CLEAN.** 4 primals still fail Windows. We fix all 15/15 clean across musl + Windows, rebuild depot once, deploy everywhere at once. strandGate + westGate atomic composition learnings feed back into patterns.
-
----
-
-## WHY WINDOWS FIRST
-
-Deploying musl while Windows is broken means another rebuild after fixes land. Every partial deploy is a tail-chase. The composition patterns we're building (atomics, cross-gate systems, springs) need to work everywhere once — not "mostly everywhere, except."
-
-strandGate and westGate have been actively using primal compositions in production. Their atomic patterns (Tower, provenance trio, node atomic) are the template for all gates. If the primals those atomics compose from can't build cross-arch, the composition can't either.
-
-**Fix once. Build once. Deploy everywhere.**
+**Date**: Aug 6, 2026 9:00PM | **Wave**: 156t | **From**: eastGate overwatch
+**Posture**: **DEPLOY + G66.** Musl depot 17/17 on golgi — gate teams deploy now. **nestGate G66 shipped** — TransportEndpoint G66 methods + G65 on TCP + silicon deism fixed. 5/7 primals remain for G66. G64+G65 GRADUATED to COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals.
 
 ---
 
-## 5 PRIMALS — SPECIFIC VIOLATIONS
+## DEPOT STATUS
 
-### coralReef (biomeGate)
-
-| File | Violation | Fix |
-|------|-----------|-----|
-| `local_transport.rs:46-47` | `std::os::unix::net::UnixStream::connect` in prod | Use G66 `connect_transport()` |
-| `local_transport.rs:92` | Direct `tokio::net::UnixListener::bind` | Use G66 `TransportListener` |
-| `local_transport.rs:138` | `std::os::unix::fs::symlink` | `#[cfg(unix)]` guard |
-| `server_lifecycle.rs:132` | `tokio::signal::unix::SignalKind` unguarded | `#[cfg(unix)]` + `#[cfg(windows)] ctrl_c()` |
-| `cmd_server_process.rs` (test) | Direct `UnixStream::connect` | `#[cfg(unix)]` on test |
-| `tests_ecosystem.rs` (test) | Direct `UnixListener::bind` | `#[cfg(unix)]` on tests |
-| **musl issue** | `ipc` module behind test cfg but `connect_local()` references it | Export `ipc::transport` types outside test cfg |
-
-### petalTongue (overwatch)
-
-| File | Violation | Fix |
-|------|-----------|-----|
-| `jsonrpc_integration_tests.rs` (test) | Direct `UnixListener`/`UnixStream` (6+ fns) | `#[cfg(unix)]` on entire test module |
-| `jsonrpc_provider/tests.rs` (test) | Direct `UnixListener`/`UnixStream` (6+ fns) | `#[cfg(unix)]` on test fns |
-
-### ~~skunkBat (eastGate)~~ — **FIXED W156w**
-
-~~All violations resolved.~~ `TarpcUdsServer` + tests `#[cfg(unix)]` gated. `rpc.rs` was already clean. `cargo check --target x86_64-pc-windows-gnu` PASSES — zero warnings, zero errors. 648 tests.
-
-### squirrel (eastGate)
-
-| File | Violation | Fix |
-|------|-----------|-----|
-| `security.rs:282` | `std::os::unix::fs::PermissionsExt` | `#[cfg(unix)]` guard |
-| `security_tests.rs:411` | `PermissionsExt` in test | `#[cfg(unix)]` guard |
-| `capability_jwt.rs:557,625` | `UnixListener::bind` in prod code | `#[cfg(unix)]` or use transport |
-| `capability_jwt_integration_tests.rs` | Full UDS mock server | `#[cfg(unix)]` on test module |
-
-### toadStool (biomeGate)
-
-| File | Violation | Fix |
-|------|-----------|-----|
-| `unix_socket_provider.rs:30,90` | `UnixStream::connect` in prod | Use G66 `TransportStream` |
-| `tarpc_server/connection.rs:73-75` | `UnixStream` in fn signature | Abstract to `TransportStream` |
-| `tarpc_server/mod.rs:139` | Direct `UnixListener` | Use `TransportListener` |
-| `unibin/execution.rs:313,526` | `UnixListener` + `tokio::signal::unix` | Transport + signal guards |
-| `akida-setup/` verification + permissions | `PermissionsExt` | `#[cfg(unix)]` (neuromorphic is unix-only hardware) |
-| `akida-driver/io.rs:25` | `std::os::unix::io::AsFd` | `#[cfg(unix)]` |
+| Target | Binaries | Status |
+|--------|----------|--------|
+| **x86_64-unknown-linux-musl** | **17/17** | COMPLETE on golgi. All Aug 6. Deploy. |
+| **x86_64-pc-windows-gnu** | **9/15** | 6 primals have unix-only IPC code (nestGate G66 shipped) |
 
 ---
 
-## PRE-PUSH STANDARD — NON-NEGOTIABLE
+## sporeGate HEALTH — 12/13 ALIVE
 
-```bash
-cargo check --target x86_64-pc-windows-gnu
-```
-
-If the target isn't installed: `rustup target add x86_64-pc-windows-gnu`
-
-**Every push must pass this.** The compiler enforces silicon neutrality. Code teams: run this locally before pushing. Depot team: reject bins that fail cross-arch.
-
----
-
-## LEARNINGS FROM STRANDGATE + WESTGATE
-
-strandGate and westGate have been running full atomic compositions in production:
-- **Tower Atomic** (bearDog + songBird + skunkBat) — security mesh
-- **Provenance Trio** (rhizoCrypt + loamSpine + sweetGrass) — data braiding
-- **Node Atomic** (toadStool + barraCuda + coralReef) — compute/GPU
-
-These composition patterns are the reusable template for all gates. Once cross-arch is clean, the same atomic definitions work on any gate without platform-specific surprises. The learnings from strandGate (compute memoization, NPU) and westGate (data braiding, multi-tier CAS) feed back into the patterns that every gate inherits.
+| Primal | Status | Notes |
+|--------|--------|-------|
+| barracuda | ALIVE | Plain JSON-RPC |
+| beardog | ALIVE | beardog-default.sock |
+| biomeos | ALIVE (v4.56.0) | BTSP signal |
+| coralreef | ALIVE | G65 plain JSON-RPC |
+| loamspine | ALIVE | BTSP fallback |
+| nestgate | ALIVE | BTSP fallback |
+| petaltongue | ALIVE | G65 health fix `6c47ae0` |
+| rhizocrypt | ALIVE (v0.14.17) | BTSP fallback |
+| skunkbat | ALIVE | Family socket + BTSP |
+| songbird | ALIVE | BTSP fallback |
+| squirrel | ALIVE (v0.1.0) | BTSP fallback |
+| sweetgrass | ALIVE | BTSP enforced |
+| **toadstool** | **ERROR** | **B1/B2 socket perms — root-only** |
 
 ---
 
-## SEQUENCE — AFTER CROSS-ARCH CLEARS
+## TWO TRACKS — PARALLEL
 
-1. **Code teams fix 4 remaining primals** — specific violations above (skunkBat DONE)
-2. **All 15 pass `cargo check --target x86_64-pc-windows-gnu`** (11/15 done)
-3. **Depot rebuild** — musl 16/16 + Windows 15/15
-4. **Single clean deploy** — all gates at once
-5. **Verify health** — 13/13 on sporeGate, other gates
-6. **Springs + downstream** — compositions on clean foundation
+### Track 1: GATE DEPLOYMENT (musl — NOW)
+
+Musl depot is complete. Gate teams deploy immediately.
+
+| Gate | Action | Priority |
+|------|--------|----------|
+| **sporeGate** | DEPLOYED. 12/13. toadStool needs B1/B2 perm fix. | DONE (minus B1/B2) |
+| **ironGate** | Pull musl from golgi. Deploy. Activate downstream springs. | **NOW** |
+| **westGate** | Pull musl. Deploy. Enable nestGate TCP (O5). | **NOW** |
+| **blueGate** | Pull musl. Deploy musl side. Windows continues Track 2. | NORMAL |
+| **southGate** | Re-deploy cephalization baseline. | LOW |
+| **strandGate** | Deploy when thermalization completes. | DEFERRED |
+
+### Track 2: G66 TRANSPORT ABSTRACTION (code teams — next convergence)
+
+**The deeper issue**: 7/15 primals failed Windows because they import `UnixStream`/`rustix` unconditionally — **silicon deism**. The fix is NOT `#[cfg(unix)]` guards (that's arch-exclusion). The fix is **transport abstraction**: primals express *what* to connect to, not *how*.
+
+**sourDough already has the reference** (`crates/sourdough-core/src/transport/`):
+- `TransportEndpoint` — UDS / TCP / MeshRelay (platform-neutral destination)
+- `TransportStream` — `#[cfg(unix)]` confined to transport layer only
+- `connect_transport()` — TCP fallback on non-Unix (primals actually work on Windows)
+- `platform_default()` — UDS on Linux, TCP localhost on Windows
+
+**Spec**: `specs/TRANSPORT_ABSTRACTION_SPEC.md`
+
+| Primal | Owner | What to evolve |
+|--------|-------|----------------|
+| **bingoCube** | eastGate | Add transport module, refactor G65 IPC |
+| **loamSpine** | sporeGate | Transport-abstract tarpc server + tests |
+| ~~**nestGate**~~ | ~~overwatch~~ | ~~DONE — G66 shipped: TransportEndpoint (platform_default, from_env_or_default), G65 on TCP, cfg-guarded silicon deism~~ |
+| **petalTongue** | overwatch | Transport-abstract `unix_socket_server/`, confine `rustix` |
+| **rhizoCrypt** | sporeGate | Transport-abstract tarpc UDS + client |
+| ~~**skunkBat**~~ | ~~eastGate~~ | ~~DONE — G66 shipped: TransportStream + TransportListener + unified serve_listener~~ |
+| **squirrel** | eastGate | Transport-abstract listener/types, confine `rustix` |
+
+**Already clear** (8/15 — can serve as secondary references): barraCuda, bearDog, biomeOS, coralReef (`1753aac` — G66 SHIPPED + cross-arch clean: `TransportStream`/`TransportListener`, 3,702 tests), nestGate*, petalTongue*, songBird, sourDough, sweetGrass, toadStool. (*Some need transport confinement even if they build today.)
+
+**This unlocks**: Windows IPC (not just "compiles"), macOS dev, WASM/browser (WebSocket variant for petalTongue), QUIC WAN, port-aesthetic songBird routing.
 
 ---
 
-## BACKGROUND — CONTINUING
+## DIVERGENCES FROM DEPLOY (for reference)
+
+1. **BTSP signal enforcement**: sweetGrass, biomeOS, bearDog, skunkBat require riboCipher `0xEC 0x01` prefix. petalTongue health module updated with BTSP+plain fallback.
+2. **bearDog full BTSP**: Main socket requires `ClientHello`. Use `beardog-default.sock` for plain health.
+3. **skunkBat family socket**: Creates at `/run/user/0/biomeos/skunkbat-*.sock`. Volatile on root session expiry.
+4. **toadStool B1/B2**: Socket `srw-------` (root only). Needs biomeGate B1/B2 group-connectable fix.
+5. **DIV-7 harvest exit codes**: 9/15 false non-zero. `plasmid.harvest --verify` still needed.
+
+---
+
+## AFTER DEPLOY — SPRINGS + SCIENCE
+
+| # | Item | Gate | Unblocks |
+|---|------|------|----------|
+| E2 | squirrel systemd on ironGate | ironGate | Agent panel LIVE |
+| D1 | tideGlass cell boot | westGate | NF GPS science |
+| O5 | nestGate TCP on westGate | westGate | Inter-gate CAS |
+| O7 | Inter-gate `content.get` E2E | mesh | Data-remote springs |
+
+---
+
+## BACKGROUND
 
 | Gate | Project | Status |
 |------|---------|--------|
-| **westGate** | ChunkedBraid. AlphaFold. Multi-tier CAS. Atomic compositions LIVE. | Running |
-| **strandGate** | SU(N) grid. arXiv 40/42. Observable battery 69/69. NPU + compute memo. | Running |
-| **whitePaper** | petalTongue-native figures replacing matplotlib pipeline. | Evolving |
+| **westGate** | ChunkedBraid 71/153. AlphaFold 1.3 TB. Multi-tier CAS. | Running |
+| **strandGate** | SU(N) 87-config grid. arXiv 40/42. Observable battery 69/69. | Running |
 
 ---
 
@@ -111,13 +112,16 @@ These composition patterns are the reusable template for all gates. Once cross-a
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| G64 + G65 + G66 | **COMPLETE** (pattern 15/15) |
-| Cross-arch (Windows) | **11/15 pass** — skunkBat fixed, 4 primals remain |
-| Musl depot | **16/16 on golgi** |
-| sporeGate health | **12/13 alive** |
+| Cephalization (G64+G65) | **COMPLETE.** G65 15/15. C2 15/15. C8 DONE. |
+| G66 Transport Abstraction | **sourDough reference + skunkBat shipped. 6/15 primals remain.** |
+| Musl depot | **17/17 on golgi** |
+| Windows depot | **8/15 fresh** — 7 blocked on G66 |
+| sporeGate health | **12/13 alive** (toadStool B1/B2) |
 | Gates online | **11** |
 | Primal tests | **~140,000+** |
+| arXiv | **40/42 (95%)** |
+| Observable battery | **69/69 COMPLETE** |
 
 ---
 
-*Wave 156w — **WINDOWS FIRST.** No partial deploys. skunkBat cross-arch CLEAN (648 tests). 4 primals remain (coralReef, petalTongue, squirrel, toadStool) with specific violations listed. Code teams clear these, verify with `cargo check --target x86_64-pc-windows-gnu`, then single clean depot rebuild + deploy. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. 15/15 GREEN.*
+*Wave 156t — **DEPLOY + G66.** Musl 17/17 on golgi — gate teams deploy. skunkBat G66 shipped: TransportStream + TransportListener + unified serve_listener — `#[cfg(unix)]` confined to transport layer, silicon deism eliminated. 6 primals remain for G66. G64+G65 GRADUATED COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. ~140K+ tests, 15/15 GREEN.*
