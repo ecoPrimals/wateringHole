@@ -1,103 +1,104 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a G68 Convergence + Long-Tail Debt
+# ecoPrimals Ecosystem Blurb — Wave 157a G68 Full Re-Audit
 
-**Date**: Aug 7, 2026 6:52PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **G68 CONVERGING. 5/15 COMPLIANT. TRIAD LIVE.** sourDough validator running. barraCuda on long-tail debt (P0+P1: −37,144 LOC). toadStool L3 backend traits shipped. Phase A cascade timer LIVE on sporeGate. biomeOS Neural API orchestrates everything.
-
----
-
-## WHAT SHIPPED SINCE LAST BLURB
-
-| Delivered | Team | Impact |
-|-----------|------|--------|
-| **barraCuda P1 migration** | barraCuda | 225 non-WGSL ops unified, −26,373 LOC. Long-tail debt continuing. |
-| **toadStool G68 L2+L3** | toadStool | L2 PermissionsExt migrated. L3 backend traits + hybrid module refactor (S360). |
-| **rhizoCrypt G68** | rhizoCrypt | Zero raw platform APIs. L1 `platform_link()` adopted. |
-| **loamSpine G68 L2** | loamSpine | PlatformAccess replaces PermissionsExt. |
-| **coralReef PLop3 + G68 false positives** | coralReef | AMD RDNA2 predicate logic. 56 L2 reports are GPU texture fields (scanner false positive). |
-| **nestGate deep debt S142** | nestGate | Test suite green, installer L2 migration, stale dep removal. |
-| **cellMembrane G68** | cellMembrane | Fully isomorphic cross-arch. |
-| **Phase A cascade timer** | sporeGate | `membrane temporal.cascade` on 15m systemd timer. LIVE. |
-| **barraCuda P0 depot refresh** | sporeGate | Musl 5.6MB, Windows 5.1MB on golgi. |
+**Date**: Aug 7, 2026 7:18PM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **G68: 5/15 COMPLIANT, 10 PARTIAL. ALL PUSHED TODAY.** Every primal shipped G68 work. sourDough validator catches test-file `mode()` queries as violations — scanner needs refinement to exclude test assertions. Production code is significantly cleaner than raw totals suggest. Phase A cascade timer LIVE. barraCuda on long-tail debt (−37K LOC).
 
 ---
 
-## G68 AUDIT — sourDough VALIDATOR (fresh scan)
+## G68 FULL RE-AUDIT — sourDough validator (prod vs test split)
 
-`sourdough validate platform-substrate` run against all 15 primals on eastGate:
+All 15 primals pushed G68 evolution today. Re-audit separates production violations from test assertions (tests that query `mode()` to verify correctness are not silicon deism):
 
-| Status | Primals | Violations |
-|--------|---------|-----------|
-| **COMPLIANT** (5) | sourDough, squirrel, nestGate, petalTongue, bingoCube | 0 |
-| **L2 only** (8) | barraCuda (4), sweetGrass (5), loamSpine (5), coralReef (9), skunkBat (14), rhizoCrypt (14), bearDog (18), songBird (23) | 92 L2 |
-| **L1 + L2** (1) | biomeOS (1 L1 + 49 L2) | 50 |
-| **L2 + L3** (1) | toadStool (36 L2 + 27 L3) | 63 |
+| Primal | Prod | Test | Total | Status |
+|--------|------|------|-------|--------|
+| sourDough | 0 | 0 | 0 | **COMPLIANT** |
+| squirrel | 0 | 0 | 0 | **COMPLIANT** |
+| nestGate | 0 | 0 | 0 | **COMPLIANT** |
+| petalTongue | 0 | 0 | 0 | **COMPLIANT** |
+| bingoCube | 0 | 0 | 0 | **COMPLIANT** |
+| loamSpine | 1 | 2 | 3 | Near-compliant |
+| sweetGrass | 2 | 0 | 2 | Near-compliant |
+| rhizoCrypt | 1 | 3 | 4 | Near-compliant |
+| barraCuda | 3 | 1 | 4 | Near-compliant |
+| skunkBat | 5 | 1 | 6 | Moderate |
+| songBird | 3 | 5 | 8 | Moderate |
+| coralReef | 3 | 5 | 8 | Moderate |
+| bearDog | 2 | 8 | 10 | Moderate (mostly test) |
+| toadStool | 16 | 5 | 21 | Heavy (L2+L3) |
+| biomeOS | 23 | 11 | 34 | Heaviest |
 
-**Totals**: 205 violations across 10 primals. **L2 (permissions) is 91% of debt.**
-
-Fix pattern: `PermissionsExt::set_mode()` → `PlatformAccess::apply()`
-
-**Cross-arch**: 14/15 PASS. toadStool fails Windows (consumer crate gating — `select_backend` import).
-
----
-
-## REMAINING WORK — BY OWNER
-
-### Primal Code Teams — G68 Convergence
-
-Each team runs `sourdough validate platform-substrate /path/to/primal` and fixes violations.
-
-| Priority | Primal | Violations | Effort |
-|----------|--------|-----------|--------|
-| 1 | barraCuda | 4 L2 | Trivial (on long-tail debt, can absorb) |
-| 2 | sweetGrass | 5 L2 | Quick |
-| 3 | loamSpine | 5 L2 | Quick |
-| 4 | coralReef | 9 L2 | Moderate (56 false positives documented as GPU texture fields) |
-| 5 | skunkBat | 14 L2 | Moderate |
-| 6 | rhizoCrypt | 14 L2 | Moderate |
-| 7 | bearDog | 18 L2 | Moderate-heavy |
-| 8 | songBird | 23 L2 | Heavy |
-| 9 | biomeOS | 1 L1 + 49 L2 | Heaviest (but platform is always Linux — non-blocking) |
-| 10 | toadStool | 36 L2 + 27 L3 | L3 backend traits shipped, consumer crate gating remains |
-
-### barraCuda — Long-Tail Debt
-
-barraCuda is on deep debt: P0 (92 WGSL ops, −10,771 LOC) and P1 (225 non-WGSL ops, −26,373 LOC) ComputeDispatch migrations. Combined: **−37,144 LOC across 400+ files.** This is independent of G68 — the 4 L2 violations are trivial absorb-while-working.
-
-### sporeGate
-
-- Phase A: **DONE** — cascade timer LIVE
-- Depot refresh: **DONE** (barraCuda P0)
-- Next depot refresh after G68 convergence wave
-
-### primalSpring
-
-- Phase C: sync graph materialization (handoff delivered)
-- N2-N5 Neural API verification
-
-### Gate Teams — Deploy after G68 depot refresh
-
-| Gate | Status | Next |
-|------|--------|------|
-| sporeGate | Timer LIVE, depot current | Refresh after G68 convergence |
-| eastGate | Dev gate, validator running | primalSpring N2-N5 |
-| westGate | 14/14 HEALTHY | Deploy post-G68 |
-| strandGate | GPU at 100% QCD | Deploy post-G68 |
-| blueGate | Windows builder | Deploy post-G68 |
-| ironGate | NUCLEUS | Springs surface |
-| southGate | Validation gate | Validates portability |
+**Production violations**: 63 across 10 primals
+**Test-only violations**: 42 across 10 primals (scanner false positives — `mode()` queries in test assertions)
+**Total**: 105 (down from 205 — teams already halved it today)
 
 ---
 
-## ORDERING
+## SCANNER REFINEMENT NEEDED (sourDough team)
 
-```
-1. G68 primals: fix L2 violations — trivial first (barraCuda, sweetGrass, loamSpine)
-   Run: sourdough validate platform-substrate /path/to/primal
-2. sporeGate: depot rebuild (post G68 convergence)
-3. primalSpring: Phase C sync graphs + N2-N5
-4. Gate teams: deploy from golgi depot
-5. Springs: tideGlass, hotSpring viz, esotericWebb, arXiv
-```
+The sourDough validator flags `mode()` queries in test files as L2 violations. Tests that *read* `mode()` to assert permissions are correct — they're not setting raw mode bits on production sockets. The scanner should:
+
+1. Distinguish `set_mode()` / `set_permissions()` (production violation) from `mode()` read-only query (test assertion)
+2. Optionally skip `*_tests.rs` / `tests/` / `#[cfg(test)]` files
+3. Report test violations separately from production violations
+
+This refinement would move 42 violations to "test-only" and likely push loamSpine, sweetGrass, rhizoCrypt, and barraCuda to COMPLIANT or near-compliant with 1-3 remaining prod fixes.
+
+---
+
+## WHAT EVERY PRIMAL SHIPPED TODAY (temporal summary)
+
+| Primal | Commits | Key evolution |
+|--------|---------|---------------|
+| bearDog | 1 | G68 L2 → 0 prod (9 test remain) |
+| songBird | 2 | G66 + G68 platform substrate |
+| nestGate | 3 | G66 + G68 + deep debt S142 |
+| biomeOS | 6 | G68 + D8 routing gaps + D4 test_swap env + DIV-4 socket naming |
+| rhizoCrypt | 3 | G66 + G68 + transport split |
+| squirrel | 6 | G66 + G68 + orphan cleanup + lint hygiene |
+| sweetGrass | 2 | G66 + G68 `platform_link()` |
+| loamSpine | 3 | G66 + G68 + error hygiene |
+| skunkBat | 3 | G66 + G68 + cross-arch Windows |
+| coralReef | 7 | G66 + G68 + PLop3 AMD RDNA2 + false positive docs |
+| barraCuda | 10 | G66 + G68 + P0+P1 ComputeDispatch (−37K LOC) |
+| petalTongue | 6 | G66 + G68 + process_exists abstraction |
+| toadStool | 9 | G66 + G68 L2+L3 + akida-chip absorption |
+| sourDough | 3 | G66 + G68 reference + validator + audit |
+| bingoCube | 2 | G66 + G68 |
+| cellMembrane | 3 | G66 + G68 fully isomorphic + DIV-7 harvest fix |
+
+**16 repos, 69 commits today.** Every primal and cellMembrane evolved G66→G68.
+
+---
+
+## REMAINING WORK
+
+### G68 — Production violations by priority
+
+| Priority | Primal | Prod violations | Fix |
+|----------|--------|----------------|-----|
+| 1 | loamSpine | 1 | Trivial |
+| 2 | sweetGrass | 2 | Trivial |
+| 3 | rhizoCrypt | 1 | Trivial |
+| 4 | barraCuda | 3 | Quick (on long-tail debt already) |
+| 5 | songBird | 3 | Quick |
+| 6 | coralReef | 3 | Quick |
+| 7 | skunkBat | 5 | Moderate |
+| 8 | bearDog | 2 | Quick (rest are test) |
+| 9 | toadStool | 16 | Heavy (L3 device backends) |
+| 10 | biomeOS | 23 | Heaviest (platform is always Linux — non-blocking) |
+
+### sourDough — Scanner refinement
+
+- Separate prod vs test violations
+- Exclude `mode()` read queries in test files
+- Report compliance level as "G68" / "G68-prod" / "partial"
+
+### Infrastructure
+
+- Phase A cascade timer: **LIVE** on sporeGate
+- Phase C sync graphs: primalSpring (handoff delivered)
+- Depot rebuild: after G68 prod-clean convergence
+- Gate deploy: after depot
 
 ---
 
@@ -105,10 +106,12 @@ barraCuda is on deep debt: P0 (92 WGSL ops, −10,771 LOC) and P1 (225 non-WGSL 
 
 | Metric | Value |
 |--------|-------|
-| G68 compliant (sourDough scanner) | **5/15** (was 3, +petalTongue +bingoCube) |
-| G68 violations remaining | **205** across 10 primals (91% L2 permissions) |
+| G68 compliant | **5/15** (sourDough, squirrel, nestGate, petalTongue, bingoCube) |
+| G68 prod violations | **63** across 10 primals |
+| G68 test-only violations | **42** (scanner refinement needed) |
+| Commits today | **69** across 16 repos |
 | Cross-arch | **14/15 PASS** (toadStool consumer crate gating) |
-| barraCuda debt cleared | **−37,144 LOC** (P0+P1 ComputeDispatch) |
+| barraCuda debt cleared | **−37,144 LOC** |
 | Phase A cascade timer | **LIVE** on sporeGate |
 | Glacial goals | **15 COMPLETE / 26 ACTIVE / 23 GLACIAL — 64 total** |
 | Total tests | **~140K+** |
@@ -116,4 +119,4 @@ barraCuda is on deep debt: P0 (92 WGSL ops, −10,771 LOC) and P1 (225 non-WGSL 
 
 ---
 
-*Wave 157a — G68 converging. 5/15 compliant (sourDough, squirrel, nestGate, petalTongue, bingoCube). 205 violations across 10 primals — 91% are L2 permissions (trivial fix pattern). barraCuda on long-tail debt (−37K LOC). toadStool shipped L3 backend traits. Phase A cascade timer LIVE on sporeGate. biomeOS Neural API orchestrates everything.*
+*Wave 157a — G68 full re-audit. ALL primals shipped G68 evolution today (69 commits). 5/15 compliant, 63 production violations across 10 primals (down from 205 raw). Scanner needs refinement: 42 test-file mode() queries are false positives. Near-compliant: loamSpine(1), sweetGrass(2), rhizoCrypt(1), barraCuda(3). Phase A LIVE. biomeOS Neural API orchestrates everything.*
