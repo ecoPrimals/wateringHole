@@ -1,100 +1,92 @@
-# ecoPrimals Ecosystem Blurb — Deployment Wave
+# ecoPrimals Ecosystem Blurb — Cross-Arch + Neural API
 
-**Date**: Aug 6, 2026 9:00PM | **Wave**: 156t | **From**: eastGate overwatch
-**Posture**: **DEPLOY + G66.** Musl depot 17/17 on golgi — gate teams deploy now. **nestGate G66 shipped** — TransportEndpoint G66 methods + G65 on TCP + silicon deism fixed. 5/7 primals remain for G66. G64+G65 GRADUATED to COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals.
-
----
-
-## DEPOT STATUS
-
-| Target | Binaries | Status |
-|--------|----------|--------|
-| **x86_64-unknown-linux-musl** | **17/17** | COMPLETE on golgi. All Aug 6. Deploy. |
-| **x86_64-pc-windows-gnu** | **9/15** | 6 primals have unix-only IPC code (nestGate G66 shipped) |
+**Date**: Aug 7, 2026 7:49AM | **Wave**: 156x | **From**: eastGate overwatch
+**Posture**: **CROSS-ARCH FIRST, THEN NEURAL API LIVE.** coralReef + toadStool fixed cross-arch (3 remain: petalTongue, skunkBat, squirrel). biomeOS Neural API must go fully live for Tower atomics + composition tasks. westGate AAR absorbed: jelly string elimination + 343 GB data federation. strandGate + westGate atomic learnings feed composition patterns.
 
 ---
 
-## sporeGate HEALTH — 12/13 ALIVE
+## CROSS-ARCH — 3 PRIMALS REMAIN
 
-| Primal | Status | Notes |
-|--------|--------|-------|
-| barracuda | ALIVE | Plain JSON-RPC |
-| beardog | ALIVE | beardog-default.sock |
-| biomeos | ALIVE (v4.56.0) | BTSP signal |
-| coralreef | ALIVE | G65 plain JSON-RPC |
-| loamspine | ALIVE | BTSP fallback |
-| nestgate | ALIVE | BTSP fallback |
-| petaltongue | ALIVE | G65 health fix `6c47ae0` |
-| rhizocrypt | ALIVE (v0.14.17) | BTSP fallback |
-| skunkbat | ALIVE | Family socket + BTSP |
-| songbird | ALIVE | BTSP fallback |
-| squirrel | ALIVE (v0.1.0) | BTSP fallback |
-| sweetgrass | ALIVE | BTSP enforced |
-| **toadstool** | **ERROR** | **B1/B2 socket perms — root-only** |
+coralReef (`bdc6dbb`) and toadStool (`23d4f0a`) shipped cross-arch fixes. **12/15 now pass Windows.**
+
+| Primal | Owner | Status | Remaining violations |
+|--------|-------|--------|---------------------|
+| ~~coralReef~~ | ~~biomeGate~~ | **FIXED** (`bdc6dbb`) | Zero cfg(unix) in production code |
+| ~~toadStool~~ | ~~biomeGate~~ | **FIXED** (`23d4f0a`) | Transport-agnostic helpers to dispatch.rs, G65 modules gated |
+| **petalTongue** | overwatch | FAILING | Test modules: `jsonrpc_integration_tests.rs`, `jsonrpc_provider/tests.rs` — wrap with `#[cfg(unix)]` |
+| **skunkBat** | eastGate | FAILING | Prod: `rpc.rs` UnixStream, `tarpc_uds.rs` unix listen. Tests: 7 tarpc UDS tests |
+| **squirrel** | eastGate | FAILING | `security.rs` PermissionsExt, `capability_jwt.rs` UnixListener, JWT integration tests |
+
+**Pre-push standard**: `cargo check --target x86_64-pc-windows-gnu`
 
 ---
 
-## TWO TRACKS — PARALLEL
+## NEURAL API — ACTIVATE FOR TOWER ATOMICS
 
-### Track 1: GATE DEPLOYMENT (musl — NOW)
+biomeOS Neural API is fully built (456 tests) but not yet live as the primary routing layer. It needs to be the driver for all primal composition.
 
-Musl depot is complete. Gate teams deploy immediately.
+### What exists
 
-| Gate | Action | Priority |
-|------|--------|----------|
-| **sporeGate** | DEPLOYED. 12/13. toadStool needs B1/B2 perm fix. | DONE (minus B1/B2) |
-| **ironGate** | Pull musl from golgi. Deploy. Activate downstream springs. | **NOW** |
-| **westGate** | Pull musl. Deploy. Enable nestGate TCP (O5). | **NOW** |
-| **blueGate** | Pull musl. Deploy musl side. Windows continues Track 2. | NORMAL |
-| **southGate** | Re-deploy cephalization baseline. | LOW |
-| **strandGate** | Deploy when thermalization completes. | DEFERRED |
+| Component | Status | Lines | Tests |
+|-----------|--------|-------|-------|
+| `neural-api-server` binary | Built, not deployed as primary | 30+ | — |
+| `neural_router/` | Capability routing, discovery, forwarding, perceptron, weights | ~3K+ | 150+ |
+| `neural_api_server/` | Connection handling, BTSP negotiation, G65 protocol negotiation, route table, enrichment, agents | ~3K+ | 200+ |
+| `neural_executor/` | Graph execution, dispatch, rollback, node impls | ~2K+ | 100+ |
+| `neural_graph/` | TOML graph parsing, cross-gate support | ~1K+ | 30+ |
+| `neural-api-client` + sync | Client libraries for consumers | ~800 | 40+ |
 
-### Track 2: G66 TRANSPORT ABSTRACTION (code teams — next convergence)
+### What it does
 
-**The deeper issue**: 7/15 primals failed Windows because they import `UnixStream`/`rustix` unconditionally — **silicon deism**. The fix is NOT `#[cfg(unix)]` guards (that's arch-exclusion). The fix is **transport abstraction**: primals express *what* to connect to, not *how*.
+- **Capability discovery**: Scans primal sockets, calls `capabilities.list`, builds registry
+- **Routing**: `discover_capability("dag.session.create")` → resolves to rhizoCrypt socket
+- **Composite atomics**: Tower (bearDog + songBird + skunkBat), Node (toadStool + barraCuda + coralReef), provenance trio
+- **Forwarding**: Routes JSON-RPC calls to the right primal, with tarpc elevation
+- **Graph execution**: TOML deploy graphs define composition, Neural API orchestrates
 
-**sourDough already has the reference** (`crates/sourdough-core/src/transport/`):
-- `TransportEndpoint` — UDS / TCP / MeshRelay (platform-neutral destination)
-- `TransportStream` — `#[cfg(unix)]` confined to transport layer only
-- `connect_transport()` — TCP fallback on non-Unix (primals actually work on Windows)
-- `platform_default()` — UDS on Linux, TCP localhost on Windows
+### What needs to happen
 
-**Spec**: `specs/TRANSPORT_ABSTRACTION_SPEC.md`
+| # | Task | Owner | Impact |
+|---|------|-------|--------|
+| **N1** | Deploy `neural-api-server` as systemd service on sporeGate NUCLEUS | overwatch | Neural API LIVE on first gate |
+| **N2** | Wire Tower atomic composition through Neural API routing | overwatch | bearDog + songBird + skunkBat routed via capability, not hardcoded sockets |
+| **N3** | Wire Node atomic composition (toadStool + barraCuda + coralReef) | biomeGate | GPU/compute routed via capability |
+| **N4** | Wire provenance trio (rhizoCrypt + loamSpine + sweetGrass) | sporeGate | Data braiding routed via capability |
+| **N5** | squirrel agent routing through Neural API | eastGate | Agent panel uses capability discovery, not socket paths |
+| **N6** | Deploy Neural API on westGate + strandGate | per-gate | Composition patterns proven on production gates |
 
-| Primal | Owner | What to evolve |
-|--------|-------|----------------|
-| **bingoCube** | eastGate | Add transport module, refactor G65 IPC |
-| **loamSpine** | sporeGate | Transport-abstract tarpc server + tests |
-| ~~**nestGate**~~ | ~~overwatch~~ | ~~DONE — G66 shipped: TransportEndpoint (platform_default, from_env_or_default), G65 on TCP, cfg-guarded silicon deism~~ |
-| **petalTongue** | overwatch | Transport-abstract `unix_socket_server/`, confine `rustix` |
-| **rhizoCrypt** | sporeGate | Transport-abstract tarpc UDS + client |
-| ~~**skunkBat**~~ | ~~eastGate~~ | ~~DONE — G66 shipped: TransportStream + TransportListener + unified serve_listener~~ |
-| **squirrel** | eastGate | Transport-abstract listener/types, confine `rustix` |
+### Learnings from strandGate + westGate
 
-**Already clear** (8/15 — can serve as secondary references): barraCuda, bearDog, biomeOS, coralReef (`bdc6dbb` — G66 FULL CONFINEMENT: zero cfg(unix) in production code, `SyncTransportStream`/`bind_transport`/`wait_for_shutdown`, 3,672 tests, -826 LOC), nestGate*, petalTongue*, songBird, sourDough, sweetGrass, toadStool. (*Some need transport confinement even if they build today.)
+strandGate and westGate have been running atomic compositions directly (socket paths, manual wiring). Their learnings:
 
-**This unlocks**: Windows IPC (not just "compiles"), macOS dev, WASM/browser (WebSocket variant for petalTongue), QUIC WAN, port-aesthetic songBird routing.
+- **westGate jelly string elimination**: Python braiding pipeline was bypassing all primal-native RPCs. 4-30x slower, 3.8 GB RAM for sorted file lists, no cross-tier dedup. Replaced with `native_braid.py` calling `content.ingest` + `dag.pipeline.ingest` directly. **Neural API routing would have prevented this** — consumers call capabilities, not sockets, so the right Rust code path is always used.
 
----
+- **strandGate compute memoization**: hotSpring → coralReef → barraCuda composition for QCD. Currently wired manually per gate config. Neural API makes this portable — same graph definition works on any gate with the right primals.
 
-## DIVERGENCES FROM DEPLOY (for reference)
-
-1. **BTSP signal enforcement**: sweetGrass, biomeOS, bearDog, skunkBat require riboCipher `0xEC 0x01` prefix. petalTongue health module updated with BTSP+plain fallback.
-2. **bearDog full BTSP**: Main socket requires `ClientHello`. Use `beardog-default.sock` for plain health.
-3. **skunkBat family socket**: Creates at `/run/user/0/biomeos/skunkbat-*.sock`. Volatile on root session expiry.
-4. **toadStool B1/B2**: Socket `srw-------` (root only). Needs biomeGate B1/B2 group-connectable fix.
-5. **DIV-7 harvest exit codes**: 9/15 false non-zero. `plasmid.harvest --verify` still needed.
+- **westGate multi-tier CAS**: nestGate warm/cold/legacy tiering. Currently one-gate. Neural API + songBird enables cross-gate CAS federation (G60) through capability routing.
 
 ---
 
-## AFTER DEPLOY — SPRINGS + SCIENCE
+## SEQUENCE
 
-| # | Item | Gate | Unblocks |
-|---|------|------|----------|
-| E2 | squirrel systemd on ironGate | ironGate | Agent panel LIVE |
-| D1 | tideGlass cell boot | westGate | NF GPS science |
-| O5 | nestGate TCP on westGate | westGate | Inter-gate CAS |
-| O7 | Inter-gate `content.get` E2E | mesh | Data-remote springs |
+1. **3 code teams fix cross-arch** (petalTongue, skunkBat, squirrel)
+2. **All 15 pass `cargo check --target x86_64-pc-windows-gnu`**
+3. **Neural API activation** (N1-N6, parallel with depot rebuild)
+4. **Depot rebuild** — musl 16/16 + Windows 15/15
+5. **Single clean deploy** — all gates
+6. **Springs + downstream** on composition foundation
+
+---
+
+## ABSORBED THIS CASCADE
+
+| Source | What | Key detail |
+|--------|------|-----------|
+| coralReef `bdc6dbb` | G66 full confinement | Zero cfg(unix) in production. Cross-arch passes. |
+| toadStool `23d4f0a` | Cross-arch compliance | Transport-agnostic dispatch extracted. G65 modules gated. |
+| westGate AAR | Jelly string elimination | Python braiding → primal-native. 4-30x speedup. |
+| westGate AAR | Data federation at 343 GB | 22 datasets, 257K+ files, Batches 1+2 complete |
+| whitePaper | DF64 precision folding theory | MILC interop roadmap + β=5.9 anomaly resolved |
 
 ---
 
@@ -102,8 +94,9 @@ Musl depot is complete. Gate teams deploy immediately.
 
 | Gate | Project | Status |
 |------|---------|--------|
-| **westGate** | ChunkedBraid 71/153. AlphaFold 1.3 TB. Multi-tier CAS. | Running |
-| **strandGate** | SU(N) 87-config grid. arXiv 40/42. Observable battery 69/69. | Running |
+| **westGate** | 343 GB federation. AlphaFold tiering. native_braid deployed. | Running |
+| **strandGate** | SU(N) grid. arXiv 40/42. Observable battery 69/69. | Running |
+| **whitePaper** | petalTongue-native figures. DF64 theory. Reviewer critique response. | Evolving |
 
 ---
 
@@ -112,16 +105,15 @@ Musl depot is complete. Gate teams deploy immediately.
 | Metric | Value |
 |--------|-------|
 | P0/P1/P2 | **ZERO** |
-| Cephalization (G64+G65) | **COMPLETE.** G65 15/15. C2 15/15. C8 DONE. |
-| G66 Transport Abstraction | **sourDough reference + skunkBat shipped. 6/15 primals remain.** |
-| Musl depot | **17/17 on golgi** |
-| Windows depot | **8/15 fresh** — 7 blocked on G66 |
-| sporeGate health | **12/13 alive** (toadStool B1/B2) |
-| Gates online | **11** |
+| G64 + G65 + G66 | **COMPLETE** |
+| Cross-arch (Windows) | **12/15 pass** — 3 remain (petalTongue, skunkBat, squirrel) |
+| Neural API | **456 tests, not yet deployed as primary routing** |
+| Musl depot | **16/16 on golgi** |
+| sporeGate health | **12/13 alive** |
+| westGate data | **343 GB, 22 datasets, 257K+ files** |
 | Primal tests | **~140,000+** |
 | arXiv | **40/42 (95%)** |
-| Observable battery | **69/69 COMPLETE** |
 
 ---
 
-*Wave 156t — **DEPLOY + G66.** Musl 17/17 on golgi — gate teams deploy. skunkBat G66 shipped: TransportStream + TransportListener + unified serve_listener — `#[cfg(unix)]` confined to transport layer, silicon deism eliminated. 6 primals remain for G66. G64+G65 GRADUATED COMPLETE. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. ~140K+ tests, 15/15 GREEN.*
+*Wave 156x — **CROSS-ARCH + NEURAL API.** coralReef + toadStool fixed (12/15 Windows). 3 remain: petalTongue, skunkBat, squirrel. Neural API activation planned (N1-N6) — 456 tests, full capability routing, composite atomics, graph execution. westGate jelly string elimination absorbed. strandGate + westGate atomic learnings feed composition patterns. Fix cross-arch → activate Neural API → rebuild depot → deploy everywhere. 14 COMPLETE / 25 ACTIVE / 23 GLACIAL. 62 goals. 15/15 GREEN.*

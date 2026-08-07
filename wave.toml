@@ -10,9 +10,9 @@
 
 [wave]
 id = 156
-sub = "w"
+sub = "x"
 date = "2026-08-07"
-posture = "WAVE 156w WINDOWS FIRST. No partial deploys. 5 primals need cross-arch migration (coralReef, petalTongue, skunkBat, squirrel, toadStool). Fix all, rebuild once, deploy everywhere. Pre-push standard: cargo check --target x86_64-pc-windows-gnu. 15/15 GREEN."
+posture = "WAVE 156x CROSS-ARCH + NEURAL API. 12/15 Windows pass (coralReef+toadStool fixed). 3 remain: petalTongue, skunkBat, squirrel. Neural API activation planned (N1-N6). westGate jelly string AAR absorbed. 15/15 GREEN."
 publisher = "eastGate-overwatch"
 
 [gates]
