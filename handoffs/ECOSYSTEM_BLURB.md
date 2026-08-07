@@ -1,7 +1,7 @@
 # ecoPrimals Ecosystem Blurb — Wave 157a Phase A + Depot Refresh
 
-**Date**: Aug 7, 2026 5:56PM | **Wave**: 157a | **From**: eastGate overwatch → sporeGate depot ops
-**Posture**: **PHASE A CASCADE TIMER LIVE. DEPOT REFRESHED.** Autonomous temporal sync fires every 15min on sporeGate. barraCuda P0 (−10K LOC) rebuilt and on golgi. Musl: 17/17. Windows: 14/15. 12/13 ALIVE.
+**Date**: Aug 7, 2026 6:15PM | **Wave**: 157a | **From**: eastGate overwatch → sporeGate depot ops
+**Posture**: **PHASE A CASCADE TIMER LIVE. DEPOT REFRESHED. skunkBat G68 COMPLIANT.** Autonomous temporal sync fires every 15min on sporeGate. barraCuda P0 (−10K LOC) rebuilt and on golgi. skunkBat: `platform_substrate.rs` shipped, `platform_link()` replaces raw symlink, 656 tests. Musl: 17/17. Windows: 15/15. 12/13 ALIVE.
 
 ---
 
@@ -70,9 +70,9 @@ All binaries on golgi fresh (Aug 7). biomeOS Stage 2 at 21MB. barraCuda P0 at 5.
 3. **Phase C: sync graph materialization** — primalSpring team
 4. **N2-N5 verification** — primalSpring team
 5. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi
-6. **G68 convergence** — 6/15 shipped, 9 pending (independent, parallel)
+6. **G68 convergence** — 7/15 shipped (skunkBat → compliant), 8 pending (independent, parallel)
 7. **Activate springs** — hotSpring, tideGlass, esotericWebb
 
 ---
 
-*Wave 157a — Phase A cascade timer LIVE on sporeGate (15min autonomous sync). barraCuda P0 rebuilt: musl 5.6MB (halved from 11.9MB), Windows 5.1MB, pushed to golgi. Depot: musl 17/17, Windows 14/15. 12/13 ALIVE. Next: Phase C sync graphs, N2-N5 validation, gate deployment, springs.*
+*Wave 157a — Phase A cascade timer LIVE on sporeGate (15min autonomous sync). barraCuda P0 rebuilt: musl 5.6MB (halved from 11.9MB), Windows 5.1MB, pushed to golgi. skunkBat G68 compliant: `platform_substrate.rs` shipped, `platform_link()` replaces raw symlink, 656 tests. Depot: musl 17/17, Windows 15/15. G68: 7/15 compliant. 12/13 ALIVE. Next: Phase C sync graphs, N2-N5 validation, gate deployment, springs.*
