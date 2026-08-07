@@ -1,96 +1,108 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a Stage 2 Depot Rebuild
+# ecoPrimals Ecosystem Blurb — Wave 157a Remaining Work
 
-**Date**: Aug 7, 2026 PM | **Wave**: 157a | **From**: eastGate overwatch → sporeGate depot ops
-**Posture**: **STAGE 2 DEPOT REBUILT. GOLGI CURRENT.** biomeOS `680e83f` (riboCipher pool + auto-transition + TOML caps) compiled and deployed. Musl: 17/17. Windows: 14/15. 12/13 ALIVE.
-
----
-
-## WHAT CHANGED — biomeOS Stage 2 (`52f7f9e → 680e83f`)
-
-3 commits, 862 insertions:
-
-| Feature | Files | Impact |
-|---------|-------|--------|
-| **riboCipher dual-lane pooling** | `biomeos-core/src/ipc/pool.rs` (+105) | Pool handles raw JSON-RPC and `0xEC`-prefixed sockets |
-| **Bootstrap→Coordinated auto-transition** | `neural_api_server/server_lifecycle.rs` (+49) | Probes every 15s, auto-transitions when Tower comes online |
-| **TOML capability translations** | `capability_translation/toml_loader.rs` (+193) | Runtime capability evolution without recompiling biomeOS |
-| **N1 forwarding fix (G67)** | `neural_router/forwarding.rs` (+103) | Pool path for `capability.call`, outer timeout for escalation |
-
-Binary size: 16.2MB → 21.2MB (musl). Stage 2 routing infra is in the binary.
+**Date**: Aug 7, 2026 5:40PM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **15/15 CROSS-ARCH. TRIAD SPECS WRITTEN. REMAINING: activate timer, materialize graphs, deploy gates, wire springs.** biomeOS Neural API is the orchestration substrate — all triad coordination, primal composition, and downstream routing flows through capability calls.
 
 ---
 
-## BUILDER PATTERN — blueGate PRIMARY
+## WHAT SHIPPED THIS WAVE
 
-| Builder | Role | This Session |
-|---------|------|--------------|
-| **blueGate** | Primary Windows | All 15 Windows builds dispatched. 14/15 success. |
-| **sporeGate** | Lean musl | biomeOS only (clean rebuild: `cargo clean -p biomeos-unibin` → 2m 10s). All other G66 musl bins unchanged. |
-
----
-
-## DEPOT STATUS ON GOLGI
-
-### Musl — 17/17 ALL CURRENT
-
-| Binary | Size | Built |
-|--------|------|-------|
-| biomeOS | 21MB | Aug 7 16:50 (Stage 2 `680e83f`) |
-| petalTongue | 30MB | Aug 7 12:37 |
-| songBird | 19MB | Aug 7 01:37 |
-| membrane | 17MB | Aug 7 01:29 |
-| toadStool | 14MB | Aug 7 12:53 |
-| barracuda | 12MB | Aug 7 01:57 |
-| + 11 more | — | Aug 7 |
-
-### Windows — 14/15
-
-| Status | Primals |
-|--------|---------|
-| **STAGE 2 BUILT** | barraCuda, bearDog, bingoCube, biomeOS (19.8MB, 3m 22s fresh build), coralReef, loamSpine, nestGate, petalTongue, rhizoCrypt, skunkBat, songBird, sourDough, sweetGrass, toadStool |
-| **FAILED** | squirrel (cross-arch `typenum`/`futures` — eastGate team) |
+| Delivered | Evidence |
+|-----------|----------|
+| **G66 COMPLETE** (15th glacial goal) | 15/15 primals, 15/15 cross-arch, sourDough reference |
+| **G68 spec written** | `specs/PLATFORM_SUBSTRATE_SPEC.md` — 3 abstraction layers |
+| **G68 audit** | `handoffs/G68_CROSS_DEPLOYMENT_AUDIT_AUG07_2026.md` — 15 primals reviewed |
+| **Triad activation specs** | Phase A (timer), Phase B (impulse process), Phase C (sync graphs) |
+| **biomeOS Stage 2 infra** | riboCipher pool, Bootstrap→Coordinated, TOML caps (578 tests) |
+| **barraCuda ComputeDispatch P0** | 92 WGSL ops unified, −10,771 LOC, 4,873 tests |
+| **cellMembrane DIV-7** | Harvest exit code reliability — 3 bugs resolved |
+| **hotSpring npu-hw** | akida-driver wired via toadStool |
+| **Cross-arch** | **15/15 PASS** (toadStool compiles with warnings) |
 
 ---
 
-## HEALTH — 12/13
+## REMAINING WORK — BY OWNER
 
-12 ALIVE on sporeGate NUCLEUS. biomeOS running `4.56.0` — needs restart with `4.57.0` (Stage 2) binary.
+### sporeGate Gate Team
 
-| Issue | Root Cause | Resolution |
-|-------|-----------|------------|
-| toadStool `Permission denied` | B1/B2 socket permissions | Pending biomeGate deploy |
-| biomeOS version `4.56.0` | Running pre-Stage-2 binary | Restart `membrane-biomeos` with depot binary |
+| Task | Spec | Effort |
+|------|------|--------|
+| **Phase A: cascade timer** | `specs/WATERFALL_CASCADE_TIMER_SPEC.md` | 2 systemd units, `systemctl --user enable` |
+| **Depot rebuild** (if needed after barraCuda P0) | — | `cargo clean -p barracuda-unibin && cargo build --release` |
+
+### primalSpring Team (eastGate)
+
+| Task | Handoff | Effort |
+|------|---------|--------|
+| **Phase C: sync graph materialization** | `handoffs/PRIMALSPRING_SYNC_GRAPH_MATERIALIZATION.md` | 3 TOML files, follow `rootpulse_commit.toml` pattern |
+| **N2-N5 verification** | G67 spec | `capability.call` routes to bearDog, Tower, Provenance, squirrel |
+
+### biomeOS Code Team
+
+| Task | Notes |
+|------|-------|
+| **Neural API routing gaps (D8)** | Several primals unregistered via neural-api |
+| **Candidate self-test (D4)** | `composition.test_swap` probe needs env passthrough |
+
+### Primal Code Teams — G68 Convergence
+
+| Status | Primals | What they do |
+|--------|---------|-------------|
+| **SHIPPED** (6) | nestGate, rhizoCrypt, loamSpine, sweetGrass, coralReef, barraCuda | Done — G68 transport + platform substrate |
+| **PENDING** (9) | bearDog, songBird, skunkBat, petalTongue, squirrel, sourDough, bingoCube, biomeOS, toadStool | Evolve platform substrate per `specs/PLATFORM_SUBSTRATE_SPEC.md` |
+
+sourDough leads by example: `platform_link` + `PlatformAccess` traits.
+
+### Gate Teams — Deployment
+
+| Gate | Status | Next |
+|------|--------|------|
+| sporeGate | Depot current, 12/13 | Phase A timer + barraCuda depot refresh |
+| eastGate | NUCLEUS, dev gate | primalSpring N2-N5 validation |
+| westGate | 14/14 HEALTHY | Deploy after depot refresh |
+| strandGate | GPU at 100% QCD | Deploy after depot refresh |
+| blueGate | 14/14, primary Windows builder | Deploy after depot refresh |
+| ironGate | NUCLEUS | squirrel systemd deploy (E2), springs surface |
+| southGate | 13/13 validation | Passive — validates portability |
+
+### Downstream / Springs — After Triad + Deployment
+
+| Project | Depends On | Target |
+|---------|-----------|--------|
+| tideGlass cell boot (G36) | westGate deploy | GPS reproduction |
+| hotSpring QCD viz (G19) | petalTongue WebGL | Reviewer-ready viz |
+| esotericWebb browser surface (G20) | petalTongue WebGL | Game engine on NUCLEUS |
+| nestgate.io CAS browse (G57) | G60 federated CAS | Data identity surface |
+| arXiv reviewer send (G9) | 41/42 done, wire live site | Murillo/Chuna/Bazavov |
+| footPrint squirrel agent (E2) | squirrel deploy on ironGate | Agent panel live |
 
 ---
 
-## DEPLOYMENT SEQUENCE (from blurb)
+## ORDERING
 
-1. ~~Depot rebuild with Stage 2 biomeOS~~ — **DONE**
-2. **N2-N5 verification on eastGate** — primalSpring team (test script ready)
-3. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi depot
-4. **Activate springs** — hotSpring, tideGlass, esotericWebb on stable substrate
-
----
-
-## DIVERGENCES
-
-| ID | Issue | Owner | Severity |
-|----|-------|-------|----------|
-| DIV-1 | squirrel Windows compile (typenum/futures) | eastGate team | P3 — not blocking deployment |
-| DIV-2 | toadStool socket permissions (B1/B2) | biomeGate | P2 — health check blocked |
-| DIV-3 | biomeOS local version 4.56 vs depot 4.57 | sporeGate ops | P2 — restart needed |
-| DIV-7 | `plasmid.harvest` exit code unreliable | cellMembrane | P3 — known, verify manually |
+```
+1. sporeGate: Phase A timer (unblocks Phase B)
+2. primalSpring: Phase C sync graphs + N2-N5
+3. sporeGate: depot refresh (barraCuda P0 + any new biomeOS)
+4. Gate teams: deploy from golgi depot
+5. G68 primals: converge platform substrate (independent, parallel)
+6. Springs: tideGlass, hotSpring viz, esotericWebb, arXiv (after gates deployed)
+```
 
 ---
 
-## G68 PLATFORM SUBSTRATE STATUS
+## METRICS
 
-| Primal | L1 (Links) | L2 (Perms) | L3 (Device) | Status |
-|--------|-----------|-----------|------------|--------|
-| sourDough | reference | reference | reference | SHIPPED |
-| **nestGate** | **DONE** | **DONE** | **DONE** | **SHIPPED** |
-| others | pending | pending | pending | — |
+| Metric | Value |
+|--------|-------|
+| Cross-arch | **15/15 PASS** |
+| G68 shipped | **6/15** (9 pending) |
+| Glacial goals | **15 COMPLETE / 26 ACTIVE / 23 GLACIAL — 64 total** |
+| Total tests | **~140K+** |
+| P0/P1 | **ZERO** |
+| Active impulses | **7** |
+| Gates with freshness heads | **6** |
 
 ---
 
-*Wave 157a — Stage 2 depot rebuilt. biomeOS `680e83f` (riboCipher pool, auto-transition, TOML caps) compiled fresh: musl 21MB, Windows 20MB. Golgi depot: musl 17/17, Windows 14/15. sporeGate 12/13 ALIVE. nestGate ships G68 platform substrate (L1/L2/L3). N2-N5 verification next, then gate deployment, then springs activation.*
+*Wave 157a — remaining work. Triad specs are written, cross-arch is 15/15, primals are stable. Next: sporeGate activates the cascade timer (Phase A), primalSpring materializes sync graphs (Phase C), gate teams deploy from golgi. biomeOS Neural API orchestrates everything — the triad, the compositions, the downstream routing. Springs and science tracks follow deployment.*
