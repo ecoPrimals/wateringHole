@@ -1,108 +1,78 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a Remaining Work
+# ecoPrimals Ecosystem Blurb — Wave 157a Phase A + Depot Refresh
 
-**Date**: Aug 7, 2026 5:40PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **15/15 CROSS-ARCH. TRIAD SPECS WRITTEN. REMAINING: activate timer, materialize graphs, deploy gates, wire springs.** biomeOS Neural API is the orchestration substrate — all triad coordination, primal composition, and downstream routing flows through capability calls.
-
----
-
-## WHAT SHIPPED THIS WAVE
-
-| Delivered | Evidence |
-|-----------|----------|
-| **G66 COMPLETE** (15th glacial goal) | 15/15 primals, 15/15 cross-arch, sourDough reference |
-| **G68 spec written** | `specs/PLATFORM_SUBSTRATE_SPEC.md` — 3 abstraction layers |
-| **G68 audit** | `handoffs/G68_CROSS_DEPLOYMENT_AUDIT_AUG07_2026.md` — 15 primals reviewed |
-| **Triad activation specs** | Phase A (timer), Phase B (impulse process), Phase C (sync graphs) |
-| **biomeOS Stage 2 infra** | riboCipher pool, Bootstrap→Coordinated, TOML caps (578 tests) |
-| **barraCuda ComputeDispatch P0** | 92 WGSL ops unified, −10,771 LOC, 4,873 tests |
-| **cellMembrane DIV-7** | Harvest exit code reliability — 3 bugs resolved |
-| **hotSpring npu-hw** | akida-driver wired via toadStool |
-| **Cross-arch** | **15/15 PASS** (toadStool compiles with warnings) |
+**Date**: Aug 7, 2026 5:56PM | **Wave**: 157a | **From**: eastGate overwatch → sporeGate depot ops
+**Posture**: **PHASE A CASCADE TIMER LIVE. DEPOT REFRESHED.** Autonomous temporal sync fires every 15min on sporeGate. barraCuda P0 (−10K LOC) rebuilt and on golgi. Musl: 17/17. Windows: 14/15. 12/13 ALIVE.
 
 ---
 
-## REMAINING WORK — BY OWNER
+## PHASE A — CASCADE TIMER ACTIVATED
 
-### sporeGate Gate Team
+The WaterFall cascade timer is **live on sporeGate** as a systemd user timer.
 
-| Task | Spec | Effort |
-|------|------|--------|
-| **Phase A: cascade timer** | `specs/WATERFALL_CASCADE_TIMER_SPEC.md` | 2 systemd units, `systemctl --user enable` |
-| **Depot rebuild** (if needed after barraCuda P0) | — | `cargo clean -p barracuda-unibin && cargo build --release` |
+| Component | Path | Status |
+|-----------|------|--------|
+| Timer unit | `~/.config/systemd/user/membrane-temporal-cascade.timer` | **enabled, active (waiting)** |
+| Service unit | `~/.config/systemd/user/membrane-temporal-cascade.service` | oneshot, 300s timeout |
+| Binary | `infra/plasmidBin/primals/x86_64-unknown-linux-musl/membrane` | depot binary |
 
-### primalSpring Team (eastGate)
+**Schedule**: `OnBootSec=5min`, `OnUnitActiveSec=15min`, `RandomizedDelaySec=60`
 
-| Task | Handoff | Effort |
-|------|---------|--------|
-| **Phase C: sync graph materialization** | `handoffs/PRIMALSPRING_SYNC_GRAPH_MATERIALIZATION.md` | 3 TOML files, follow `rootpulse_commit.toml` pattern |
-| **N2-N5 verification** | G67 spec | `capability.call` routes to bearDog, Tower, Provenance, squirrel |
+**Manual trigger verified**: cascade ran, fetched repos (4 timeouts within 30s window), auto-published `heads/sporeGate.toml`, committed freshness. Push to golgi will retry next cycle.
 
-### biomeOS Code Team
-
-| Task | Notes |
-|------|-------|
-| **Neural API routing gaps (D8)** | Several primals unregistered via neural-api |
-| **Candidate self-test (D4)** | `composition.test_swap` probe needs env passthrough |
-
-### Primal Code Teams — G68 Convergence
-
-| Status | Primals | What they do |
-|--------|---------|-------------|
-| **SHIPPED** (6) | nestGate, rhizoCrypt, loamSpine, sweetGrass, coralReef, barraCuda | Done — G68 transport + platform substrate |
-| **PENDING** (9) | bearDog, songBird, skunkBat, petalTongue, squirrel, sourDough, bingoCube, biomeOS, toadStool | Evolve platform substrate per `specs/PLATFORM_SUBSTRATE_SPEC.md` |
-
-sourDough leads by example: `platform_link` + `PlatformAccess` traits.
-
-### Gate Teams — Deployment
-
-| Gate | Status | Next |
-|------|--------|------|
-| sporeGate | Depot current, 12/13 | Phase A timer + barraCuda depot refresh |
-| eastGate | NUCLEUS, dev gate | primalSpring N2-N5 validation |
-| westGate | 14/14 HEALTHY | Deploy after depot refresh |
-| strandGate | GPU at 100% QCD | Deploy after depot refresh |
-| blueGate | 14/14, primary Windows builder | Deploy after depot refresh |
-| ironGate | NUCLEUS | squirrel systemd deploy (E2), springs surface |
-| southGate | 13/13 validation | Passive — validates portability |
-
-### Downstream / Springs — After Triad + Deployment
-
-| Project | Depends On | Target |
-|---------|-----------|--------|
-| tideGlass cell boot (G36) | westGate deploy | GPS reproduction |
-| hotSpring QCD viz (G19) | petalTongue WebGL | Reviewer-ready viz |
-| esotericWebb browser surface (G20) | petalTongue WebGL | Game engine on NUCLEUS |
-| nestgate.io CAS browse (G57) | G60 federated CAS | Data identity surface |
-| arXiv reviewer send (G9) | 41/42 done, wire live site | Murillo/Chuna/Bazavov |
-| footPrint squirrel agent (E2) | squirrel deploy on ironGate | Agent panel live |
+**What it does every 15 minutes**:
+1. Fetches all remotes for all manifest repos (parallel 4)
+2. Classifies drift (converge/diverge/parity)
+3. Fast-forwards where possible (`merge-ff` policy)
+4. Fires SYNC impulses on divergence
+5. Publishes freshness to `heads/sporeGate.toml`
+6. Runs `potential.sense` for pending impulses
 
 ---
 
-## ORDERING
+## BARRACUDA P0 — DEPOT REFRESHED
 
-```
-1. sporeGate: Phase A timer (unblocks Phase B)
-2. primalSpring: Phase C sync graphs + N2-N5
-3. sporeGate: depot refresh (barraCuda P0 + any new biomeOS)
-4. Gate teams: deploy from golgi depot
-5. G68 primals: converge platform substrate (independent, parallel)
-6. Springs: tideGlass, hotSpring viz, esotericWebb, arXiv (after gates deployed)
-```
+barraCuda P0 (ComputeDispatch: 92 WGSL ops unified, −10,771 LOC, 4,873 tests) compiled and pushed to golgi.
+
+| Target | Commit | Size | Notes |
+|--------|--------|------|-------|
+| musl | `9bb8709` | **5.6MB** (was 11.9MB — halved by P0) | 2m 02s clean build |
+| Windows | `9bb8709` | **5.1MB** (was 5.2MB) | 1m 45s on blueGate |
 
 ---
 
-## METRICS
+## DEPOT STATUS ON GOLGI — ALL CURRENT
 
-| Metric | Value |
-|--------|-------|
-| Cross-arch | **15/15 PASS** |
-| G68 shipped | **6/15** (9 pending) |
-| Glacial goals | **15 COMPLETE / 26 ACTIVE / 23 GLACIAL — 64 total** |
-| Total tests | **~140K+** |
-| P0/P1 | **ZERO** |
-| Active impulses | **7** |
-| Gates with freshness heads | **6** |
+### Musl — 17/17
+
+All binaries on golgi fresh (Aug 7). biomeOS Stage 2 at 21MB. barraCuda P0 at 5.6MB.
+
+### Windows — 14/15
+
+14 core primal .exe files on golgi. squirrel sole failure (cross-arch `typenum`/`futures`).
 
 ---
 
-*Wave 157a — remaining work. Triad specs are written, cross-arch is 15/15, primals are stable. Next: sporeGate activates the cascade timer (Phase A), primalSpring materializes sync graphs (Phase C), gate teams deploy from golgi. biomeOS Neural API orchestrates everything — the triad, the compositions, the downstream routing. Springs and science tracks follow deployment.*
+## HEALTH — 12/13
+
+12 ALIVE on sporeGate NUCLEUS.
+
+| Issue | Owner | Severity |
+|-------|-------|----------|
+| toadStool `Permission denied` (B1/B2 socket) | biomeGate | P2 |
+| biomeOS running `4.56.0` (depot has `4.57.0`) | sporeGate ops | P2 — restart needed |
+
+---
+
+## REMAINING SEQUENCE (from Wave 157a blurb)
+
+1. ~~Phase A: cascade timer~~ — **DONE**
+2. ~~barraCuda P0 depot refresh~~ — **DONE**
+3. **Phase C: sync graph materialization** — primalSpring team
+4. **N2-N5 verification** — primalSpring team
+5. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi
+6. **G68 convergence** — 6/15 shipped, 9 pending (independent, parallel)
+7. **Activate springs** — hotSpring, tideGlass, esotericWebb
+
+---
+
+*Wave 157a — Phase A cascade timer LIVE on sporeGate (15min autonomous sync). barraCuda P0 rebuilt: musl 5.6MB (halved from 11.9MB), Windows 5.1MB, pushed to golgi. Depot: musl 17/17, Windows 14/15. 12/13 ALIVE. Next: Phase C sync graphs, N2-N5 validation, gate deployment, springs.*
