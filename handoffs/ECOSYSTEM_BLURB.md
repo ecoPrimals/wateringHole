@@ -1,84 +1,116 @@
 # ecoPrimals Ecosystem Blurb — Deployment Wave
 
-**Date**: Aug 6, 2026 NIGHT | **Wave**: 156r | **From**: eastGate overwatch → sporeGate depot rebuild
-**Posture**: **DEPOT REBUILT. GOLGI UPDATED. DEPLOY.** Musl: 17/17 (15 primals + membrane + launcher). Windows: 8/15 fresh G65 + 7 stale (code errors). sporeGate local: 12/13 ALIVE.
+**Date**: Aug 6, 2026 8:15PM | **Wave**: 156s | **From**: eastGate overwatch
+**Posture**: **MUSL DEPOT COMPLETE. DEPLOY GATES.** 17/17 musl on golgi (15 primals + membrane + launcher). sporeGate: 12/13 alive (toadStool B1/B2 perms). Windows: 8/15 fresh — 7 primals need `#[cfg(unix)]` guards for cross-arch. Gate teams: deploy musl now. Code teams: fix Windows after.
 
 ---
 
-## sporeGate EXECUTION COMPLETE
+## DEPOT STATUS
 
-| Step | Status |
-|------|--------|
-| Pull all 15 primals to G65 HEADs | **DONE** — all verified |
-| cellMembrane `f6f1e62` built + pushed | **DONE** (16.1MB) |
-| sporeGate musl harvest (15) | **DONE** — 15/15 |
-| Deploy to sporeGate NUCLEUS | **DONE** — 14/14 system + petalTongue user |
-| petalTongue G65 health evolution | **DONE** — 12/13 alive |
-| Push musl depot to golgi | **DONE** — 17/17 fresh Aug 6 |
-| blueGate Windows builds | **8/15 fresh** — 7 have code errors |
-| Push Windows depot to golgi | **DONE** — 8 fresh G65 pushed |
+| Target | Binaries | Status |
+|--------|----------|--------|
+| **x86_64-unknown-linux-musl** | **17/17** | COMPLETE on golgi. All Aug 6. Deploy. |
+| **x86_64-pc-windows-gnu** | **8/15** | 7 primals have unix-only IPC code |
 
 ---
 
-## GOLGI DEPOT — MUSL: COMPLETE, WINDOWS: PARTIAL
-
-### Musl (x86_64-unknown-linux-musl) — 17/17 ALL CURRENT
-
-All 15 primals + membrane + nucleus_launcher on golgi, all Aug 6 timestamps.
-
-### Windows (x86_64-pc-windows-gnu) — 8/15 G65 FRESH
-
-| Built Today | Failed (code errors) |
-|-------------|---------------------|
-| barraCuda, bearDog, biomeOS, coralReef, songBird, sourDough, sweetGrass, toadStool | bingoCube, loamSpine, nestGate, petalTongue, rhizoCrypt, skunkBat, squirrel |
-
-**Root cause**: `rust-toolchain.toml` files were resolving to MSVC toolchains on blueGate. Fixed with `RUSTUP_TOOLCHAIN=stable-x86_64-pc-windows-gnu` + installing GNU versions of pinned channels (1.93.0, 1.94.0, 1.94.1). The 7 remaining failures are **actual code compilation errors** on Windows (IPC/tarpc modules with unix-only code paths).
-
-**Action**: Code teams should add `#[cfg(unix)]` guards or Windows equivalents for the affected IPC modules.
-
----
-
-## HEALTH — 12/13 ALIVE
+## sporeGate HEALTH — 12/13 ALIVE
 
 | Primal | Status | Notes |
 |--------|--------|-------|
-| barracuda | ALIVE | |
+| barracuda | ALIVE | Plain JSON-RPC |
 | beardog | ALIVE | beardog-default.sock |
 | biomeos | ALIVE (v4.56.0) | BTSP signal |
 | coralreef | ALIVE | G65 plain JSON-RPC |
-| loamspine | ALIVE | |
-| nestgate | ALIVE | |
-| petaltongue | ALIVE | |
-| rhizocrypt | ALIVE (v0.14.17) | |
-| skunkbat | ALIVE | Family socket |
-| songbird | ALIVE | |
-| squirrel | ALIVE (v0.1.0) | |
+| loamspine | ALIVE | BTSP fallback |
+| nestgate | ALIVE | BTSP fallback |
+| petaltongue | ALIVE | G65 health fix `6c47ae0` |
+| rhizocrypt | ALIVE (v0.14.17) | BTSP fallback |
+| skunkbat | ALIVE | Family socket + BTSP |
+| songbird | ALIVE | BTSP fallback |
+| squirrel | ALIVE (v0.1.0) | BTSP fallback |
 | sweetgrass | ALIVE | BTSP enforced |
-| toadstool | ERROR | B1/B2 socket perms |
+| **toadstool** | **ERROR** | **B1/B2 socket perms — root-only** |
 
 ---
 
-## DIVERGENCES RESOLVED THIS SESSION
+## TWO TRACKS — PARALLEL
 
-1. **blueGate GNU toolchain**: `rust-toolchain.toml` → MSVC resolution. Fixed with `RUSTUP_TOOLCHAIN` override + GNU channel installs.
-2. **G65 transport signal**: BTSP 0xEC 0x01 required by some primals. petalTongue health module updated with BTSP+plain fallback.
-3. **cellMembrane stale**: Was Aug 3 on golgi. Rebuilt at `f6f1e62` and pushed.
-4. **skunkBat socket volatility**: Family socket at `/run/user/0/biomeos/` disappears on root session expiry. Restart recreates it.
+### Track 1: GATE DEPLOYMENT (musl — NOW)
+
+Musl depot is complete. Gate teams deploy immediately.
+
+| Gate | Action | Priority |
+|------|--------|----------|
+| **sporeGate** | DEPLOYED. 12/13. toadStool needs B1/B2 perm fix. | DONE (minus B1/B2) |
+| **ironGate** | Pull musl from golgi. Deploy. Activate downstream springs. | **NOW** |
+| **westGate** | Pull musl. Deploy. Enable nestGate TCP (O5). | **NOW** |
+| **blueGate** | Pull musl. Deploy musl side. Windows continues Track 2. | NORMAL |
+| **southGate** | Re-deploy cephalization baseline. | LOW |
+| **strandGate** | Deploy when thermalization completes. | DEFERRED |
+
+### Track 2: WINDOWS CROSS-ARCH (code teams)
+
+7 primals import `UnixStream`/`UnixListener`/`SO_PEERCRED` without `#[cfg(unix)]` guards. G65 protocol negotiation modules are the primary cause — all use unix UDS unconditionally.
+
+| Primal | Owner | Issue | Fix |
+|--------|-------|-------|-----|
+| **bingoCube** | eastGate | G65 IPC module, unconditional unix imports | `#[cfg(unix)]` guard IPC module |
+| **loamSpine** | sporeGate | `tarpc_server.rs` + lifecycle tests, 6 unix refs | Guard tarpc UDS server + tests |
+| **nestGate** | overwatch | Protocol negotiation, unconditional UDS | Guard protocol_negotiation module |
+| **petalTongue** | overwatch | `unix_socket_server/`, transport, audio socket | Guard IPC + transport modules |
+| **rhizoCrypt** | sporeGate | `tarpc_uds.rs`, client, UDS connection | Guard tarpc UDS + client modules |
+| **skunkBat** | eastGate | `tarpc_uds.rs`, IPC transport, BTSP tests, 11+ unix refs | Guard IPC transport layer |
+| **squirrel** | eastGate | Transport types/listener, security provider | Guard transport + auth modules |
+
+**Pattern**: Each primal wraps its UDS/IPC modules with `#[cfg(unix)]` and provides a stub or `compile_error!` for non-unix. This is convergent — each team implements independently. The 8 primals that already build on Windows can serve as references.
 
 ---
 
-## GATE DEPLOYMENT — READY (MUSL)
+## DIVERGENCES FROM DEPLOY (for reference)
 
-Gate teams: pull musl binaries from golgi and deploy.
-
-| Gate | Action |
-|------|--------|
-| **ironGate** | Deploy. Activate downstream springs. |
-| **westGate** | Deploy. Enable nestGate TCP (O5). |
-| **blueGate** | Deploy 8 fresh Windows + continue fixing 7 compile errors. |
-| **southGate** | Re-deploy cephalization baseline. |
-| **strandGate** | Deploy when thermalization batch completes. |
+1. **BTSP signal enforcement**: sweetGrass, biomeOS, bearDog, skunkBat require riboCipher `0xEC 0x01` prefix. petalTongue health module updated with BTSP+plain fallback.
+2. **bearDog full BTSP**: Main socket requires `ClientHello`. Use `beardog-default.sock` for plain health.
+3. **skunkBat family socket**: Creates at `/run/user/0/biomeos/skunkbat-*.sock`. Volatile on root session expiry.
+4. **toadStool B1/B2**: Socket `srw-------` (root only). Needs biomeGate B1/B2 group-connectable fix.
+5. **DIV-7 harvest exit codes**: 9/15 false non-zero. `plasmid.harvest --verify` still needed.
 
 ---
 
-*Wave 156r — DEPOT REBUILT. Musl 17/17 on golgi. Windows 8/15 fresh (7 code errors for code teams). 12/13 alive on sporeGate. Gate teams: deploy musl.*
+## AFTER DEPLOY — SPRINGS + SCIENCE
+
+| # | Item | Gate | Unblocks |
+|---|------|------|----------|
+| E2 | squirrel systemd on ironGate | ironGate | Agent panel LIVE |
+| D1 | tideGlass cell boot | westGate | NF GPS science |
+| O5 | nestGate TCP on westGate | westGate | Inter-gate CAS |
+| O7 | Inter-gate `content.get` E2E | mesh | Data-remote springs |
+
+---
+
+## BACKGROUND
+
+| Gate | Project | Status |
+|------|---------|--------|
+| **westGate** | ChunkedBraid 71/153. AlphaFold 1.3 TB. Multi-tier CAS. | Running |
+| **strandGate** | SU(N) 87-config grid. arXiv 40/42. Observable battery 69/69. | Running |
+
+---
+
+## METRICS
+
+| Metric | Value |
+|--------|-------|
+| P0/P1/P2 | **ZERO** |
+| Cephalization | **G65 15/15. C2 15/15. C8 DONE. COMPLETE.** |
+| Musl depot | **17/17 on golgi** |
+| Windows depot | **8/15 fresh** — 7 need `#[cfg(unix)]` |
+| sporeGate health | **12/13 alive** (toadStool B1/B2) |
+| Gates online | **11** |
+| Primal tests | **~140,000+** |
+| arXiv | **40/42 (95%)** |
+| Observable battery | **69/69 COMPLETE** |
+
+---
+
+*Wave 156s — **MUSL DEPOT COMPLETE.** 17/17 on golgi. sporeGate deployed, 12/13 alive. Gate teams: deploy musl now. Code teams: 7 primals need `#[cfg(unix)]` for Windows cross-arch (bingoCube, loamSpine, nestGate, petalTongue, rhizoCrypt, skunkBat, squirrel). toadStool needs B1/B2 socket perms. Two parallel tracks: deploy gates (musl) + fix Windows cross-compilation. ~140K+ tests, 15/15 GREEN.*
