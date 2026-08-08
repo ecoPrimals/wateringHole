@@ -68,29 +68,48 @@ Updated to use `health.check` (working method) instead of `sign_ed25519`
 (requires beardog-specific operation), and added `"primals"` field check
 in `capability.discover` response parsing.
 
-## Remaining Gap: riboCipher Auto-Detect
+## Remaining Gap: riboCipher Auto-Detect — LOADING PATH BUG **FIXED** (`d1f555e7`)
 
-**Status**: Pool exists (`send_ribocipher_jsonrpc()`), auto-detect NOT wired.
+**Status**: Loading path bug identified AND fixed. Commit `d1f555e7` pushed to
+golgiBody. Both the TOML loading path AND capability.call direct dispatch path
+now use riboCipher auto-detect.
 
-The biomeOS neural-api forwards ALL capability.call requests using **plain
-JSON-RPC**. This works for 9/11 primals. But sweetGrass (G68) enforces
-riboCipher and rejects plain connections with:
+### Root Cause (verified Aug 8 evening)
+
+The neural-api startup called `load_defaults_for_family()` which went directly
+to **compiled defaults** (118 hardcoded translations without `ribocipher` flag).
+The TOML-based loading path (`load_defaults_into()` → `load_from_registry_toml()`)
+which correctly reads `ribocipher = true` from `config/capability_registry.toml`
+was only triggered when NO explicit family_id was provided.
+
+Additionally, the `capability.call` direct dispatch path (for methods not in the
+translation registry) used plain forwarding unconditionally, without checking the
+domain-level ribocipher flag.
+
+### Fix Applied (`d1f555e7`)
+
+1. **translation_startup.rs**: Changed `load_defaults_for_family()` →
+   `load_defaults()` (tries TOML first: 430 entries with ribocipher flags)
+2. **mod.rs**: Added `domain_ribocipher` HashMap and `domain_requires_ribocipher()`
+   accessor to `CapabilityTranslationRegistry`
+3. **toml_loader.rs**: Persists domain-level ribocipher flags into the registry
+   during TOML loading (domain + per-capability aliases)
+4. **direct.rs**: Checks `domain_requires_ribocipher()` in the `capability.call`
+   fallback path and uses `forward_request_ribocipher()` when needed
+
+### Verification
 
 ```
-riboCipher signal required. Send [0xEC/0xED, protocol_type] prefix.
+capability.call(braid, health.check)      → sweetGrass PASS (riboCipher auto-detect)
+capability.call(attribution, health.check) → sweetGrass PASS
+capability.call(provenance, health.check)  → sweetGrass PASS
+provenance.create_braid (translated)       → sweetGrass PASS (TOML ribocipher flag)
+capability.call(crypto, health.check)      → beardog PASS (plain preserved)
 ```
 
-**Required fix** (biomeOS team): When forwarding `capability.call` to a primal,
-check the primal's `signal_tier` from the announce registration:
-- If `signal_tier` includes "nest" (sweetGrass, rhizoCrypt G68) → use `send_ribocipher_jsonrpc()`
-- Otherwise → use plain JSON-RPC forwarding (current behavior)
-
-The dual-lane pool already exists per `44c40191`. The missing piece is the
-conditional dispatch based on the target primal's tier.
-
-**Note**: rhizoCrypt currently accepts BOTH plain and riboCipher (dual-lane).
-Only sweetGrass strictly enforces riboCipher. This may change if rhizoCrypt
-is updated to enforce G68 riboCipher policy.
+**Note**: The depot rebuild now WILL enable auto-detect fleet-wide (the loading
+path is fixed). Only primal socket stability (Jul 15 binary age) remains as a
+blocker for full 11/11 forwarding.
 
 ### toadStool Protocol Mismatch
 
@@ -114,3 +133,7 @@ This is a longer-term architecture decision, not a P1.
 - Graph executor requires `~/graphs` symlink → primalSpring graphs dir
 - Primal sockets require services to be running (not just process alive)
 - songBird needs stale PID cleanup before restart
+- **sweetGrass socket instability**: socket file disappears within 30-60s of service restart
+  on the Jul 15 binary. `ss -xlp` shows the abstract socket still bound but filesystem
+  entry is gone. Depot rebuild with stable binaries will resolve this.
+- **Loading path bug** means depot rebuild alone won't enable auto-detect — code fix needed first
