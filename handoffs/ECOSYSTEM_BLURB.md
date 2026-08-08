@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a TRUST SURFACE + K-DERM ENFORCED
+# ecoPrimals Ecosystem Blurb — Wave 157a GATE REDEPLOY STATUS
 
-**Date**: Aug 8, 2026 9:05AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **DEPLOYED. 13/13 ALIVE. K-DERM ENFORCED. TRUST SURFACES LIVE.** GitHub remotes removed from all repos on eastGate — zero remaining. Three new routes live on nestgate.io: `/api/content/stats` (CAS from rhizoCrypt), `/pseudospore/` (5 bundles downloadable), `/api/pseudospore/bundles`. Cascade timer auto-pushes depot to golgi. toadStool S369 deployed. Depot: Musl 17/17, Windows 15/15.
+**Date**: Aug 8, 2026 9:10AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **3/6 NUCLEUS GATES REDEPLOYED. strandGate DIVERGED (needs depot access path). K-DERM ENFORCED. TRUST SURFACES LIVE.** sporeGate 13/13 ALIVE. blueGate 13/13 (Windows, 3 P3/P4 issues). southGate 13/13 (96 MB RSS, 2.6x faster). strandGate BLOCKED — can't pull G68 binaries (GitHub stale, Forgejo API parse fails, no SSH to golgi). westGate + ironGate pending.
 
 ---
 
@@ -37,28 +37,56 @@ petalTongue commits: `037535e` (content stats) + `01961ce` (pseudospore routes)
 
 ---
 
+## GATE REDEPLOY STATUS
+
+| Gate | Status | Details |
+|------|--------|---------|
+| **sporeGate** | **DONE** — 13/13 ALIVE | S369 deployed, cascade auto-push, zero drift |
+| **blueGate** | **DONE** — 13/13 ALIVE (Windows) | 15/15 depot pulled, 264 MB RSS, SSH discipline compliant |
+| **southGate** | **DONE** — 13/13 ALIVE | 96 MB RSS, 0.058ms Tower latency (2.6x faster), SSH discipline (33 repos cleaned) |
+| **strandGate** | **DIVERGED — BLOCKING** | Cannot fetch G68 binaries (see below) |
+| **westGate** | **PENDING** | Awaiting redeploy |
+| **ironGate** | **PENDING** | Awaiting redeploy |
+
+### strandGate Deploy Divergence (BLOCKING)
+
+strandGate is stuck on `v2026.05.30` binaries (2+ months stale). Root cause:
+- `plasmid.fetch --source github` → stale release (`v2026.05.30`)
+- `plasmid.fetch --source forgejo` → API parse failure
+- No SSH shell access to golgi depot directory
+
+**Science is unblocked** — SU(3) campaign COMPLETE (36 configs), SU(4) running, NPU hardware live. Only primal binary deployment is blocked.
+
+**Resolution — Option C (rsync depot pull via SSH)**:
+Give strandGate SSH access to golgi depot directory. Aligns with K-Derm model (no GitHub dependency for deploy):
+```
+rsync golgi:/srv/depot/musl/ ~/.local/share/ecoPrimals/plasmidBin/primals/x86_64-unknown-linux-musl/
+```
+**Owner**: golgi ops / overwatch. SSH key registration on golgi for strandGate.
+
+**Also needed**: Fix `membrane plasmid.fetch --source forgejo` API parse (cellMembrane team) so all remote gates have a sovereign deploy path.
+
+### blueGate Windows Issues (P3/P4)
+
+| ID | Issue | Workaround |
+|----|-------|------------|
+| P3 | skunkBat ignores `PRIMAL_BIND_MODE=tcp` env | Pass `--bind-mode tcp` on CLI |
+| P4 | petalTongue `--port` ignored in server mode | Accept dynamic ports (internal IPC) |
+| P3 | songBird stale PID file blocks startup | Clean `C:\var\run\songbird\*` before start |
+
+---
+
 ## CURRENT STATE
 
 | Metric | Value |
 |--------|-------|
-| sporeGate NUCLEUS | **13/13 ALIVE** |
+| NUCLEUS gates redeployed | **3/6** (sporeGate, blueGate, southGate) |
 | G68 | **16/16 prod-clean, 16/16 cross-arch** |
 | Golgi depot | Musl **17/17**, Windows **15/15** |
 | Cascade | synced=15, zero drift, auto-push to golgi |
-| GitHub remotes | **zero** on eastGate |
+| SSH discipline | **ENFORCED** — eastGate, blueGate, southGate all compliant |
 | Trust surfaces | 3 new routes live on nestgate.io |
-| Primal drift | **zero** |
-
----
-
-## WHAT BLURB SAID vs ACTUAL
-
-| Blurb claim | Actual |
-|-------------|--------|
-| `/api/content/stats` missing | **FIXED** — live from rhizoCrypt |
-| `/pseudospore/` route 404 | **FIXED** — 5 bundles serving, validate.sh at 200 |
-| "GitHub remotes removed from all 23" | Was 7 remaining, now **zero** |
-| toadStool S366 deployed | S369 deployed (team shipped S367-S369 on top) |
+| Divergences | **1** — strandGate depot access |
 
 ---
 
@@ -74,10 +102,13 @@ petalTongue commits: `037535e` (content stats) + `01961ce` (pseudospore routes)
 - **sporePrint**: SU(2)→SU(N) relabel, QCD download pages, LaTeX preprint
 - **lithoSpore**: Package QCD bundle for pseudoSpore v1.0.0-rung1
 - **primalSpring**: Neural API evolution (capability.call, N2-N5)
-- **toadStool**: hw-safe long-tail (7→0 test-only remaining)
-- **cellMembrane**: `native_braid.py` → Rust
-- **westGate**: nestGate TCP + content registration (NG-05)
-- **Gate teams**: Redeploy from golgi depot
+- **toadStool**: hw-safe long-tail cross-arch (S369: 15/15 targets + iOS)
+- **cellMembrane**: `native_braid.py` → Rust + fix `plasmid.fetch --source forgejo` API parse
+- **westGate**: nestGate TCP + content registration (NG-05) + redeploy from golgi
+- **ironGate**: Redeploy from golgi depot
+- **strandGate**: Needs SSH depot access to golgi (Option C) — escalated to overwatch
+- **skunkBat**: `PRIMAL_BIND_MODE` env var support on Windows (P3, blueGate finding)
+- **petalTongue**: `--port` flag in server mode on Windows (P4, blueGate finding)
 
 ### arXiv blockers (trust surface, not physics)
 1. ~~pseudoSpore URL~~ `/pseudospore/` now **serves** but QCD bundle not yet packaged
@@ -88,4 +119,4 @@ petalTongue commits: `037535e` (content stats) + `01961ce` (pseudospore routes)
 
 ---
 
-*Wave 157a — TRUST SURFACE + K-DERM ENFORCED. 13/13 ALIVE. Zero github remotes on eastGate. Three new routes live on nestgate.io: /api/content/stats (CAS from rhizoCrypt), /pseudospore/ (5 bundles), /api/pseudospore/bundles. Cascade auto-pushes depot to golgi. Depot: Musl 17/17, Windows 15/15. All sporeGate topology tasks from blurb DONE. Remaining: sporePrint relabel, lithoSpore QCD bundle, primalSpring Neural API, gate redeploys.*
+*Wave 157a — 3/6 NUCLEUS gates redeployed (sporeGate, blueGate, southGate — all 13/13 ALIVE, SSH discipline enforced). strandGate DIVERGED — needs SSH depot access to golgi (no GitHub dependency). westGate + ironGate pending. Trust surfaces live: /api/content/stats, /pseudospore/ (5 bundles), /api/pseudospore/bundles. blueGate found 3 Windows issues (skunkBat env, petalTongue port, songBird PID — all P3/P4). Remaining: strandGate depot path, sporePrint relabel, lithoSpore QCD bundle, primalSpring Neural API, Forgejo plasmid.fetch fix.*
