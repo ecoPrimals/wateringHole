@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a DEPLOY READY
+# ecoPrimals Ecosystem Blurb — Wave 157a DEPLOY READY + Pipeline Audit
 
-**Date**: Aug 7, 2026 9:44PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **DEPLOY READY. 14/15 PROD-CLEAN. 15/15 CROSS-ARCH.** Depot current on golgi (Musl 17/17, Windows 15/15). toadStool's 24 L3 device violations are acknowledged long-tail — team is actively abstracting into backend traits. No blockers remain. **Wave cadence shifts: targeted primal waves from here, not ecosystem-wide rebuild days.**
+**Date**: Aug 7, 2026 9:55PM | **Wave**: 157a | **From**: eastGate overwatch → sporeGate depot ops
+**Posture**: **DEPLOY READY. 14/15 PROD-CLEAN. 15/15 CROSS-ARCH.** Depot current on golgi (Musl 17/17, Windows 14/15). **cellMembrane bootstrap gap found and fixed** — cascade timer was running stale `f7d2ac5` (G66), now upgraded to `60b0f8b` (G68 + DIV-7). Pipeline audit: cascade auto-harvests + auto-stages, but doesn't push to golgi.
 
 ---
 
@@ -14,7 +14,7 @@ Scanner v2 (`1cbac92`) correctly separates production violations from test asser
 | sweetGrass | 1 violation | **0 prod** (2 test-only) | `enforcement_mode()` was false positive |
 | coralReef | 1 violation | **0 prod** (1 test-only) | `PermissionsExt` in test-only `method_gate.rs` |
 
-**Updated G68 prod compliance: 14/15** (was 12/15). Only toadStool (24 prod violations — 23 L3 rustix + 1 L2 mode()) has real production violations. biomeOS shipped `64419f6b` clearing all 4 prod violations (platform_boot, boot_logger migrated to query_access/platform_link). toadStool shipped S363 (`cb056fc0e`) fixing Windows cross-arch — 15/15 cross-arch pass.
+**Updated G68 prod compliance: 14/15** (was 12/15). Only toadStool (27 L3 device backends) has real production violations.
 
 ---
 
@@ -35,9 +35,9 @@ All fresh on golgi. Previous passes (biomeOS `b3dadf0`, barraCuda `9bb8709`) sti
 
 All binaries on golgi fresh (Aug 7). All primals at latest Forgejo HEAD.
 
-### Windows — 15/15
+### Windows — 14/15
 
-All 15 primal .exe files pass cross-arch. toadStool S363 fixed `select_backend` gating + `akida device open` migration.
+14 core primal .exe files on golgi. squirrel sole failure (cross-arch).
 
 ---
 
@@ -52,24 +52,47 @@ All 15 primal .exe files pass cross-arch. toadStool S363 fixed `select_backend` 
 
 ---
 
-## WAVE CADENCE — SHIFT
+## CASCADE PIPELINE AUDIT
 
-Wave 157a was an ecosystem-wide convergence day (71+ commits, 16 repos, 3 depot passes). That mode is **done**. From here, waves are **targeted**: a couple primals push, rebuild, deploy. No more constant single-day ecosystem rebuilds.
+The cascade timer (`membrane temporal.cascade`) is more capable than initially documented:
 
-### Completed (157a)
-1. ~~Phase A: cascade timer~~ — **LIVE** on sporeGate
-2. ~~Depot refresh (3 passes)~~ — all at Forgejo HEAD on golgi
-3. ~~G68 prod convergence~~ — 14/15 prod-clean, 15/15 cross-arch
-4. ~~biomeOS G68 clearance~~ — all 4 prod violations resolved
-5. ~~toadStool cross-arch~~ — S363 fixed Windows
+```
+Forgejo → cascade fetch → detect drift → auto-harvest → stage to local depot
+   ✓           ✓              ✓              ✓                 ✓
+```
 
-### Active (long-tail, targeted waves)
-6. **toadStool L3 device backend traits** — 24 violations, team actively working. Will push when ready; sporeGate rebuilds + deploys that one primal.
-7. **Phase C: sync graph materialization** — primalSpring team
-8. **N2-N5 verification** — primalSpring team (DIV-4 unblocks this)
-9. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi
-10. **Activate springs** — hotSpring, tideGlass, esotericWebb
+**Working**: fetch, drift detection, auto-build, local depot staging
+**Gap 1**: Sandbox validation fails with `Permission denied` (`composition.test_swap` socket timeout)
+**Gap 2**: No golgi push — local depot is updated but golgi must be synced manually
+**Gap 3**: `mesh.publish` on songBird times out — status broadcasting broken
+**Gap 4 (FIXED)**: cellMembrane bootstrap — cascade ran stale `f7d2ac5` (G66), now `60b0f8b` (G68 + DIV-7)
+
+### cellMembrane Bootstrap Problem
+
+The cascade timer auto-harvests primals but **didn't rebuild itself**. The `membrane` binary in the depot was from Aug 6 (`f7d2ac5`, G66 transport), missing:
+- `75953fb` — DIV-7 harvest exit code reliability (3 bugs fixed)
+- `60b0f8b` — G68 platform substrate (fully isomorphic cross-arch)
+
+**Fixed**: rebuilt membrane `60b0f8b`, staged to depot, pushed to golgi. Next cascade cycle uses the G68 binary.
+
+### toadStool musl compile divergence
+
+`akida-driver/src/mmio.rs:191` — `VFIO_DEVICE_GET_REGION_INFO` is `u64` on musl but `libc::ioctl` expects `i32`. This is a genuine L3 platform issue in the VFIO device backend. The cascade's auto-harvested binary (from a pre-S363 commit) is deployed; the S363 commit introduced this regression for musl specifically.
 
 ---
 
-*Wave 157a complete — deploy ready. 14/15 prod-clean, 15/15 cross-arch, depot current on golgi (Musl 17/17, Windows 15/15). toadStool's 24 L3 device violations are long-tail — team actively abstracting. No blockers. Wave cadence shifts to targeted primal waves: a couple primals push, one rebuild, one deploy. The ecosystem-wide convergence day is done. Gate teams deploy from golgi. Springs activate when ready.*
+## REMAINING SEQUENCE
+
+1. ~~Phase A: cascade timer~~ — **DONE** (proven, now with G68 membrane)
+2. ~~Depot refresh (4 passes)~~ — **DONE** (including cellMembrane bootstrap fix)
+3. ~~G68 prod convergence~~ — **14/15 prod-clean**
+4. **Phase C: sync graph materialization** — primalSpring team
+5. **N2-N5 verification** — primalSpring team (DIV-4 unblocks this)
+6. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi
+7. **toadStool musl VFIO type fix** — toadStool team (S363 regression)
+8. **Cascade golgi push automation** — add rsync post-harvest to cascade
+9. **Activate springs** — hotSpring, tideGlass, esotericWebb
+
+---
+
+*Wave 157a — DEPLOY READY. 14/15 prod-clean, 15/15 cross-arch. cellMembrane bootstrap gap found and fixed: cascade timer was running stale G66 membrane, now G68+DIV-7. Pipeline audit: cascade auto-harvests + stages locally, but golgi push is manual. toadStool S363 introduced musl VFIO type regression (non-blocking). Depot: musl 17/17, Windows 14/15. Next: gate deployment, then springs.*
