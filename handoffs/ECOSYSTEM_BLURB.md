@@ -100,7 +100,7 @@ rsync golgi:/srv/depot/musl/ ~/.local/share/ecoPrimals/plasmidBin/primals/x86_64
 
 ### Other teams own
 - **sporePrint**: SU(2)→SU(N) relabel, QCD download pages, LaTeX preprint
-- **lithoSpore**: Package QCD bundle for pseudoSpore v1.0.0-rung1
+- ~~**lithoSpore**: Package QCD bundle for pseudoSpore v1.0.0-rung1~~ **DONE** — `e586c9d` (3 modules, 15/15 checks, 6.8 KB tarball)
 - **primalSpring**: Neural API evolution (capability.call, N2-N5)
 - **toadStool**: hw-safe long-tail cross-arch (S369: 15/15 targets + iOS)
 - **cellMembrane**: `native_braid.py` → Rust + fix `plasmid.fetch --source forgejo` API parse
@@ -111,7 +111,7 @@ rsync golgi:/srv/depot/musl/ ~/.local/share/ecoPrimals/plasmidBin/primals/x86_64
 - **petalTongue**: `--port` flag in server mode on Windows (P4, blueGate finding)
 
 ### arXiv blockers (trust surface, not physics)
-1. ~~pseudoSpore URL~~ `/pseudospore/` now **serves** but QCD bundle not yet packaged
+1. ~~pseudoSpore URL~~ `/pseudospore/` now **serves** — QCD bundle **PACKAGED** (`hotSpring-QCD-Lattice_v1.0.0-rung1.tar.gz`, 6.8 KB) — needs deploy to nestgate.io
 2. `validate.sh` downloadable — but bundle-specific validation not wired
 3. sporePrint QCD page needs relabel (sporePrint team)
 4. Freeze/sign v1.0.0-rung1 (bearDog Ed25519)
