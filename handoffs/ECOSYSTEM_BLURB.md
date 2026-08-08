@@ -1,30 +1,31 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a ECOSYSTEM CHECKPOINT + SWARMVINE BUDDED
+# ecoPrimals Ecosystem Blurb — Wave 157a SWARMVINE PHASE 2 WIRED + SONGBIRD SEAM LIVE
 
-**Date**: Aug 8, 2026 12:00PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **DEPLOY SOLVED. PRIMAL #16 BORN. FRONTLOADING EVOLUTION.** swarmVine v0.1.0 budded — epidemic gossip engine for Tower + Data + Compute (vine spreads, bat validates). 17 COMPLETE / 22 ACTIVE / 25 GLACIAL (64 goals — G68 fossilized, 3 pairs merged, stale patterns cleared). Neural API becoming required system. Inner membrane Phase 2 active (riboCipher Tier 2 + swarmVine gossip). cellMembrane shipped registry-derived trust policy + service module decomposition. esotericWebb V32 on ironGate (13/13, Cell LIVE).
+**Date**: Aug 8, 2026 5:30PM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **DEPLOY SOLVED. SWARMVINE EPIDEMIC SPREAD WIRED. SONGBIRD SEAM LIVE.** swarmVine Phase 2: epidemic sweep loop (30s drain → peer spread), cross-gate TCP :7800, tiered peer discovery. songBird seam (`6b580cf0`): `ipc.register` → swarmVine `gossip.inject` fire-and-forget. 39/39 tests. Both teams local on eastGate. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL (64 goals — G34 reclassified GLACIAL). Neural API Phase 3 seam wired. Inner membrane evolution accelerating.
 
 ---
 
-## EXECUTION SUMMARY — sporeGate/eastGate overwatch (this session)
+## EXECUTION SUMMARY — eastGate overwatch (this session)
 
-### swarmVine v0.1.0 — Primal #16 BORN
-- **Scaffolded** via `sourdough scaffold new-primal` — budded with full DNA (G64/G65/G66/G68 compliant at birth)
-- **Core gossip engine** implemented with three domains:
-  - **Tower gossip**: capability advertisements, topology, reachability (absorbs songBird's `mesh.capabilities_announce`)
-  - **Data gossip**: CAS availability, braid HEADs, depot manifests, content freshness (NEW — no primal owned this)
-  - **Compute gossip**: resource capacity, build queues, inference bandwidth (NEW — enables distributed scheduling)
-- **Epidemic propagation**: nonce dedup, TTL, version-based conflict resolution, periodic eviction, forward queue
-- **Companion of skunkBat**: vine spreads, bat validates — challenge-verify integration point designed
-- **JSON-RPC methods**: `gossip.spread`, `gossip.inject`, `gossip.query`, `gossip.status`, `gossip.peers`
-- **33/33 tests passing** (12 core gossip engine + 21 server dispatch)
-- **sourDough validation**: primal PASS, transport PASS, riboCipher FULL, Neural API FULL
-- **Musl binary**: 2.4 MB, statically linked, staged to depot, pushed to golgi (18/18 binaries)
-- **Forgejo push**: blocked on SSH key registration — binary already on golgi via depot rsync
+### swarmVine Phase 2 — Epidemic Spread WIRED
+- **Epidemic sweep loop** (`spread.rs`): 30s interval drain of forward queue → batch `gossip.spread` to all mesh peers via TCP + riboCipher (`0xEC 0x01`)
+- **Cross-gate TCP listener**: `:7800` (configurable `--gossip-port`), reuses `server.rs` riboCipher connection handler
+- **Tiered peer discovery**: `SWARMVINE_PEERS` environment variable (direct) + songBird `mesh.peers` UDS query (dynamic, extracts IP + assumes default gossip port)
+- **CLI args**: `--spread-interval` (default 30s), `--gossip-port` (default 7800)
+- **39/39 tests passing** (12 core + 21 server + 6 spread)
+- **sourDough re-validated**: riboCipher FULL, Neural API FULL, G68
+
+### songBird Seam — `ipc.register` → swarmVine `gossip.inject`
+- **Commit `6b580cf0`**: When any primal registers capabilities via `ipc.register`, songBird now fires a `gossip.inject` to the local swarmVine instance
+- **Fire-and-forget**: both paths run in parallel (songBird announce + swarmVine gossip). If swarmVine not deployed, silently skipped
+- **Gate identity**: resolved from `GATE_ID` or `HOSTNAME` env (matches swarmVine's own pattern)
+- **Gossip key format**: `capability.advertise:{gate}:{primal}` under `tower` topic
+- **songBird tests**: 53 tests, zero regressions
 
 ### Prior this session
+- **swarmVine v0.1.0 budded** — sourDough scaffold, 3 gossip domains, 33/33 tests, depot + golgi
 - **6/6 gates redeployed** — all confirmed
 - **Inner Membrane Phase 1 DONE** — songBird mesh gap fixed
-- **INNER_MEMBRANE_PURE_PRIMALS_SPEC.md** filed — 3-phase evolution plan
 
 ---
 
@@ -45,7 +46,7 @@
 
 | Metric | Value |
 |--------|-------|
-| Primals | **16** (swarmVine budded) |
+| Primals | **16** (swarmVine Phase 2 wired + songBird seam) |
 | NUCLEUS gates | **6/6 redeployed** |
 | G68 | **16/16 prod-clean, 16/16 cross-arch** |
 | Golgi depot | Musl **18/18** (swarmVine added), Windows **15/15** |
@@ -71,6 +72,8 @@
 | QCD pseudoSpore bundle | **DONE** — lithoSpore v1.0.0-rung1 |
 | toadStool S370 depot | **DONE** — rebuilt + pushed |
 | swarmVine budded | **DONE** — v0.1.0 epidemic gossip engine, primal #16, depot + golgi |
+| swarmVine Phase 2 wired | **DONE** — epidemic sweep loop + cross-gate TCP :7800 + tiered peer discovery |
+| songBird seam | **DONE** — `ipc.register` → swarmVine `gossip.inject` (`6b580cf0`) |
 | Inner membrane Phase 1 | **DONE** — songBird mesh gap fixed, spec filed |
 
 ---
@@ -89,13 +92,13 @@
 - eastGate temporal cascade to all gates
 - NUCLEUS deployment lifecycle
 
-### swarmVine dissemination (all teams)
-- **songBird team**: Begin migrating `mesh.capabilities_announce` gossip logic to swarmVine composition
+### swarmVine integration (all teams — Phase 3)
+- ~~**songBird team**: Wire `ipc.register` → swarmVine `gossip.inject` seam~~ **DONE** (`6b580cf0`)
 - **skunkBat team**: Wire `metadata.analyze` as pre-accept validator for gossip entries (vine-bat loop)
-- **biomeOS team**: Add `gossip_propagation.toml` graph — swarmVine announce + skunkBat verify + bearDog lineage
+- **biomeOS team**: Wire `capability.resolve` → swarmVine gossip table (cross-gate capability discovery without broadcast)
 - **nestGate/loamSpine**: Inject data gossip entries (`cas.have`, `braid.head`) into swarmVine on content changes
 - **toadStool/coralReef**: Inject compute gossip entries (`compute.capacity`, `build.queue`) on resource changes
-- **All gates**: Deploy swarmVine to NUCLEUS once Forgejo repo created (binary already in depot)
+- **All gates**: Deploy swarmVine to NUCLEUS (binary in depot, epidemic spread + TCP listener ready)
 
 ### Other teams own
 - **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE**. QCD download pages, LaTeX preprint
@@ -116,4 +119,4 @@
 
 ---
 
-*Wave 157a Ecosystem Checkpoint + swarmVine budded. Deploy solved, primal evolution frontloaded. swarmVine v0.1.0 (primal #16) — epidemic gossip for Tower + Data + Compute. 33/33 tests, riboCipher FULL, 2.4 MB musl, depot 18/18. cellMembrane: registry-derived trust policy + service decomposition (capability.rs + ipc.rs). esotericWebb V32 on ironGate (Cell LIVE). lithoSpore doc sweep (14 modules). wetSpring: 14 workload specs from projectNUCLEUS. 17 COMPLETE / 22 ACTIVE / 25 GLACIAL. strandGate 13/13. arXiv 4/5 closed.*
+*Wave 157a swarmVine Phase 2 + songBird seam. Epidemic sweep wired (30s drain → peer spread via TCP :7800). songBird `ipc.register` → swarmVine `gossip.inject` (fire-and-forget). 39/39 swarmVine tests, 53 songBird tests. sourDough re-validated. G34 reclassified GLACIAL. Both teams local on eastGate. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
