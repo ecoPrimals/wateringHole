@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a GATE REDEPLOY
+# ecoPrimals Ecosystem Blurb — Wave 157a GATE REDEPLOY + SSH KEY CUT
 
-**Date**: Aug 8, 2026 8:15AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **G68 COMPLETE. ALL PRIMAL TEAMS CLEAR.** 16/16 prod-clean, 16/16 cross-arch. 205→0 production violations. Depot current on golgi (Musl 17/17, Windows 15/15). Gate redeploy to modern next. primalSpring continues biomeOS Neural API evolution.
+**Date**: Aug 8, 2026 8:50AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **G68 COMPLETE. ALL PRIMAL TEAMS CLEAR. SSH KEY DISCIPLINE ENFORCED.** 16/16 prod-clean, 16/16 cross-arch. 205→0 production violations. Depot current on golgi (Musl 17/17, Windows 15/15). Gate redeploy to modern next. GitHub direct access cut from eastGate — all routes through K-Derm relay chain.
 
 ---
 
@@ -23,7 +23,7 @@ Wave 157a G68 convergence is **DONE**. Every primal and cellMembrane has zero pr
 
 ### Health — 13/13 ALIVE on sporeGate
 
-biomeOS 4.57.0 (Stage 2). toadStool S366 deployed with permanent socket fix. Cascade timer: synced=15, zero drift.
+biomeOS 4.57.0 (Stage 2). toadStool S369 deployed (full cross-arch, 15/15 targets + iOS). Cascade timer: synced=15, zero drift.
 
 ---
 
@@ -31,25 +31,49 @@ biomeOS 4.57.0 (Stage 2). toadStool S366 deployed with permanent socket fix. Cas
 
 ### 1. Gate Redeploy to Modern
 All NUCLEUS gates pull G68-converged binaries from golgi depot. Targeted per-gate:
-- **sporeGate**: Already current (13/13 ALIVE)
+- **sporeGate**: Already current (13/13 ALIVE, S369 deployed, 3 cascade cycles validated)
 - **westGate, strandGate, blueGate, southGate, ironGate**: Pull from depot, restart services
 - Each gate team owns their redeploy
+- Deploy pattern documented in `aars/SPOREGATE_WAVE157A_GATE_REDEPLOY_AAR.md`
 
-### 2. primalSpring — Neural API Evolution
+### 2. SSH Key Discipline — K-Derm Relay Enforced
+
+**DONE on eastGate (Wave 157a):**
+- `github` remotes **removed** from all 23 repos on eastGate
+- GitHub SSH config **revoked** — eastGate no longer has direct GitHub access
+- eastGate pushes only to **Forgejo** (inner membrane) via SSH key `eastGate`
+
+**Access model from here on out:**
+
+| Entity | Forgejo SSH | GitHub SSH | Role |
+|--------|-------------|------------|------|
+| **golgi** (golgiBody) | YES — Forgejo host | NO | Sole sovereign Git store |
+| **golgi-ext** (outer membrane) | NO | **YES — sole GitHub writer** | K-Derm relay: Forgejo → GitHub push mirror |
+| **eastGate** (overwatch agent) | YES — key `eastGate` | **NO — REVOKED** | Overwatch, code teams, cascade |
+| **All other gates** | YES — per-gate key | **NO** | Route through pepti layer |
+
+**K-Derm relay chain** (already documented, now enforced):
+```
+gate → Forgejo (inner/covalent) → pepti (peptidoglycan/metallic) → golgi-ext (outer/ionic) → GitHub (weak)
+```
+
+**Action for gate teams**: If your gate has `github` remotes or GitHub SSH keys, remove them. Only golgi-ext pushes to GitHub. All source goes through Forgejo.
+
+### 3. primalSpring — Neural API Evolution
 primalSpring guides the compositional evolution of biomeOS Neural API. Owns `capability_registry.toml`. Focus:
 - **biomeOS** fixes `capability.call` dispatch timeout
 - **sweetGrass** shipped `capability.call` handler (gap closed)
 - **N2-N5 verification** — route `capability.call` to bearDog, Tower Atomic, Provenance Trio, squirrel
 - See `specs/NEURAL_API_ATOMIC_ROUTING_SPEC.md`
 
-### 3. Long-Tail (Active Teams)
+### 4. Long-Tail (Active Teams)
 
 | Team | Work | Status |
 |------|------|--------|
 | **toadStool** | Extending platform abstraction to all deployment types | Active — hw-safe owner of Node Atomic |
 | **cellMembrane** | Platform abstraction shipped (15 cfg→3, 1,327 tests). `native_braid.py` → Rust next | Active — last Python in pipeline |
 
-### 4. Live Trust Surfaces — sporePrint + nestgate.io + pseudoSpores
+### 5. Live Trust Surfaces — sporePrint + nestgate.io + pseudoSpores
 
 **Goal**: science and data are live, accessible, verifiable pseudoSpores at public URLs.
 
@@ -69,7 +93,7 @@ primalSpring guides the compositional evolution of biomeOS Neural API. Owns `cap
 - **QCD bundle NOT yet packaged, signed, or served.** URL resolves but serves homepage, not dedicated page.
 - **Critical path**: lithoSpore packages outputs → CAS on ironGate → nestgate.io `/pseudospore/` handler → write `validate.sh` → sporePrint `hotspring-qcd-sun` page → freeze/sign v1.0.0-rung1
 
-### 5. arXiv — Preprint 41/42
+### 6. arXiv — Preprint 41/42
 
 Paper is **science-complete**. SU(N) HMC (N=2→8), MILC Δ=3×10⁻⁹, 69 cached configs, NPU ESN demo.
 
@@ -80,7 +104,7 @@ Paper is **science-complete**. SU(N) HMC (N=2→8), MILC Δ=3×10⁻⁹, 69 cach
 4. Freeze/sign v1.0.0-rung1
 5. Send PDF + link to Murillo, Chuna, Bazavov → feedback → arXiv hep-lat
 
-### 6. Springs Activation (When Infrastructure Stable)
+### 7. Springs Activation (When Infrastructure Stable)
 - **tideGlass**: Cell boot on westGate → NF drug repurposing pipeline
 - **hotSpring**: QCD visualization via petalTongue
 - **esotericWebb**: WebGL game surface via petalTongue pipeline
@@ -111,4 +135,4 @@ Ecosystem-wide convergence days are DONE. Waves are now targeted:
 
 ---
 
-*Wave 157a — G68 COMPLETE. 16/16 prod-clean, 16/16 cross-arch. 205→0 production violations. All primal teams clear. Depot current. Gate redeploy next. Live trust surfaces: sporePrint team relabels QCD (SU(2)→SU(N)), sporeGate topology wires nestgate.io data braids + pseudoSpore routes. arXiv 41/42 — science done, trust surface blocks reviewer send. primalSpring evolves Neural API. toadStool cross-arch long-tail. cellMembrane native_braid.py → Rust. Springs activate when ready.*
+*Wave 157a — G68 COMPLETE. SSH KEY DISCIPLINE ENFORCED. 16/16 prod-clean, 16/16 cross-arch. 205→0 production violations. All primal teams clear. GitHub direct access cut — only golgi-ext pushes to GitHub, all gates route through pepti layer. Gate redeploy next. toadStool S369: 15/15 cross-arch + iOS target. Live trust surfaces: sporePrint relabels QCD, sporeGate topology wires data braids + pseudoSpore routes. arXiv 41/42 — trust surface blocks reviewer send. primalSpring evolves Neural API. Springs activate when ready.*
