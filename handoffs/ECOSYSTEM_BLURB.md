@@ -1,138 +1,91 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a GATE REDEPLOY + SSH KEY CUT
+# ecoPrimals Ecosystem Blurb — Wave 157a TRUST SURFACE + K-DERM ENFORCED
 
-**Date**: Aug 8, 2026 8:50AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **G68 COMPLETE. ALL PRIMAL TEAMS CLEAR. SSH KEY DISCIPLINE ENFORCED.** 16/16 prod-clean, 16/16 cross-arch. 205→0 production violations. Depot current on golgi (Musl 17/17, Windows 15/15). Gate redeploy to modern next. GitHub direct access cut from eastGate — all routes through K-Derm relay chain.
-
----
-
-## WHERE WE ARE
-
-Wave 157a G68 convergence is **DONE**. Every primal and cellMembrane has zero production G68 violations. The ecosystem is deploy-ready.
-
-### G68 Audit — 16/16 PROD-CLEAN (sourDough scanner v2)
-
-| Level | Primals |
-|-------|---------|
-| **G68** (zero violations) | sourDough, nestGate, petalTongue, bingoCube, loamSpine, barraCuda, cellMembrane, +1 |
-| **G68-prod** (test-only) | squirrel, bearDog, songBird, rhizoCrypt, skunkBat, sweetGrass, coralReef, biomeOS, toadStool |
-
-### Depot — ALL CURRENT ON GOLGI
-
-- **Musl**: 17/17 at Forgejo HEAD (including toadStool S366)
-- **Windows**: 15/15 (squirrel.exe added this wave)
-
-### Health — 13/13 ALIVE on sporeGate
-
-biomeOS 4.57.0 (Stage 2). toadStool S369 deployed (full cross-arch, 15/15 targets + iOS). Cascade timer: synced=15, zero drift.
+**Date**: Aug 8, 2026 9:05AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **DEPLOYED. 13/13 ALIVE. K-DERM ENFORCED. TRUST SURFACES LIVE.** GitHub remotes removed from all repos on eastGate — zero remaining. Three new routes live on nestgate.io: `/api/content/stats` (CAS from rhizoCrypt), `/pseudospore/` (5 bundles downloadable), `/api/pseudospore/bundles`. Cascade timer auto-pushes depot to golgi. toadStool S369 deployed. Depot: Musl 17/17, Windows 15/15.
 
 ---
 
-## WHAT'S NEXT
+## EXECUTION SUMMARY — sporeGate/eastGate overwatch (this session)
 
-### 1. Gate Redeploy to Modern
-All NUCLEUS gates pull G68-converged binaries from golgi depot. Targeted per-gate:
-- **sporeGate**: Already current (13/13 ALIVE, S369 deployed, 3 cascade cycles validated)
-- **westGate, strandGate, blueGate, southGate, ironGate**: Pull from depot, restart services
-- Each gate team owns their redeploy
-- Deploy pattern documented in `aars/SPOREGATE_WAVE157A_GATE_REDEPLOY_AAR.md`
+### SSH Key Discipline — K-Derm ENFORCED
+- Removed `github` remotes from 7 repos: bearDog, nestGate, songBird, cellMembrane, wateringHole
+- Rewired 2 gardens (loamSpine, metalForge) from GitHub origin → Forgejo origin
+- **Zero repos with github remotes remaining on eastGate**
+- All routes now go through pepti layer: gate → Forgejo → golgi-ext → GitHub
 
-### 2. SSH Key Discipline — K-Derm Relay Enforced
+### Trust Surfaces — 3 Routes LIVE on nestgate.io
 
-**DONE on eastGate (Wave 157a):**
-- `github` remotes **removed** from all 23 repos on eastGate
-- GitHub SSH config **revoked** — eastGate no longer has direct GitHub access
-- eastGate pushes only to **Forgejo** (inner membrane) via SSH key `eastGate`
+| Route | Status | What it does |
+|-------|--------|-------------|
+| `/api/content/stats` | **LIVE** | Queries rhizoCrypt CAS via UDS — live object counts, sizes, namespaces |
+| `/pseudospore/` | **LIVE** | Serves 5 pseudoSpore bundles as downloadable files |
+| `/api/pseudospore/bundles` | **LIVE** | Lists bundles with provenance metadata |
+| `/pseudospore/validate.sh` | **200 OK** | Downloadable verification script |
 
-**Access model from here on out:**
+petalTongue commits: `037535e` (content stats) + `01961ce` (pseudospore routes)
 
-| Entity | Forgejo SSH | GitHub SSH | Role |
-|--------|-------------|------------|------|
-| **golgi** (golgiBody) | YES — Forgejo host | NO | Sole sovereign Git store |
-| **golgi-ext** (outer membrane) | NO | **YES — sole GitHub writer** | K-Derm relay: Forgejo → GitHub push mirror |
-| **eastGate** (overwatch agent) | YES — key `eastGate` | **NO — REVOKED** | Overwatch, code teams, cascade |
-| **All other gates** | YES — per-gate key | **NO** | Route through pepti layer |
+### Cascade Pipeline — Auto-Push to Golgi
+- `ExecStartPost` added to cascade timer: rsync depot → golgi after each harvest
+- Pipeline: `Forgejo → fetch → drift detect → harvest → stage → golgi push`
+- Only manual step remaining: NUCLEUS deploy (stop → copy → restart)
 
-**K-Derm relay chain** (already documented, now enforced):
-```
-gate → Forgejo (inner/covalent) → pepti (peptidoglycan/metallic) → golgi-ext (outer/ionic) → GitHub (weak)
-```
-
-**Action for gate teams**: If your gate has `github` remotes or GitHub SSH keys, remove them. Only golgi-ext pushes to GitHub. All source goes through Forgejo.
-
-### 3. primalSpring — Neural API Evolution
-primalSpring guides the compositional evolution of biomeOS Neural API. Owns `capability_registry.toml`. Focus:
-- **biomeOS** fixes `capability.call` dispatch timeout
-- **sweetGrass** shipped `capability.call` handler (gap closed)
-- **N2-N5 verification** — route `capability.call` to bearDog, Tower Atomic, Provenance Trio, squirrel
-- See `specs/NEURAL_API_ATOMIC_ROUTING_SPEC.md`
-
-### 4. Long-Tail (Active Teams)
-
-| Team | Work | Status |
-|------|------|--------|
-| **toadStool** | Extending platform abstraction to all deployment types | Active — hw-safe owner of Node Atomic |
-| **cellMembrane** | Platform abstraction shipped (15 cfg→3, 1,327 tests). `native_braid.py` → Rust next | Active — last Python in pipeline |
-
-### 5. Live Trust Surfaces — sporePrint + nestgate.io + pseudoSpores
-
-**Goal**: science and data are live, accessible, verifiable pseudoSpores at public URLs.
-
-**sporePrint** (`sporeprint.primals.eco`) — the public face:
-- Live, 338 pages, demonstration era. Zola auto-publish working.
-- **Needs**: SU(2)→SU(N) relabel for QCD pages, real `.tar.gz` download links, LaTeX→web preprint page.
-- **Owner**: sporePrint team.
-
-**nestgate.io** — data identity / trust surface:
-- Live, 10/12 dashboard sections on sporeGate. 20 primals discovered, mesh.peers wired.
-- **Data Braids section exists in UI but is NOT live** — federation card is hardcoded static text, `/api/content/stats` backend route missing in petalTongue.
-- **Missing for westGate braids**: NG-05 (westGate CAS not federated to mesh — needs nestGate TCP + songBird content registration), `/pseudospore/` route (404 today), `content.locate` (spec only).
-- **Owner**: sporeGate topology team (Caddy routing, petalTongue dashboard) + westGate (TCP + content registration).
-
-**pseudoSpore — QCD Rung 1** (`hotspring-qcd-sun`):
-- pseudoSpore concept is mature in code (pseudospore-core, biomeos-pseudospore, 5-stage provenance chain)
-- **QCD bundle NOT yet packaged, signed, or served.** URL resolves but serves homepage, not dedicated page.
-- **Critical path**: lithoSpore packages outputs → CAS on ironGate → nestgate.io `/pseudospore/` handler → write `validate.sh` → sporePrint `hotspring-qcd-sun` page → freeze/sign v1.0.0-rung1
-
-### 6. arXiv — Preprint 41/42
-
-Paper is **science-complete**. SU(N) HMC (N=2→8), MILC Δ=3×10⁻⁹, 69 cached configs, NPU ESN demo.
-
-**What blocks reviewer send** (all trust surface, not physics):
-1. pseudoSpore at URL cited in paper (not yet served)
-2. `validate.sh` (BLAKE3 + DAG + Ed25519 — not written)
-3. sporePrint page: `hotspring-qcd-sun` replacing stale SU(2) content
-4. Freeze/sign v1.0.0-rung1
-5. Send PDF + link to Murillo, Chuna, Bazavov → feedback → arXiv hep-lat
-
-### 7. Springs Activation (When Infrastructure Stable)
-- **tideGlass**: Cell boot on westGate → NF drug repurposing pipeline
-- **hotSpring**: QCD visualization via petalTongue
-- **esotericWebb**: WebGL game surface via petalTongue pipeline
+### Depot — Revalidated (3 cascade cycles this session)
+- toadStool S366→S369 absorbed (ioctl fix, libc elimination, hw-safe cross-arch, 15/15 targets)
+- cellMembrane `c56d911` (cascade reliability), biomeOS `f49cc75b`, sourDough `edfa26e`
+- All rebuilt musl + Windows, pushed to golgi, deployed to NUCLEUS
+- toadStool socket fix permanent (ExecStartPost)
 
 ---
 
-## WAVE CADENCE — TARGETED
+## CURRENT STATE
 
-Ecosystem-wide convergence days are DONE. Waves are now targeted:
-- A couple primals push, rebuild, deploy
-- Gate teams own their redeploy from golgi depot
-- primalSpring evolves Neural API in parallel
-
----
-
-## BLURB RECIPIENTS
-
-| Recipient | Action |
-|-----------|--------|
-| **All primal teams** | Clear — absorb posture, no ecosystem-wide pushes |
-| **Gate teams** | Redeploy from golgi depot to modern G68-converged binaries |
-| **primalSpring** | Neural API evolution owner — capability registry, N2-N5 verification |
-| **sporePrint team** | SU(2)→SU(N) relabel, pseudoSpore download pages, LaTeX→web preprint |
-| **sporeGate topology team** | Wire 3 websites: nestgate.io data braids backend, `/pseudospore/` route, Caddy routing |
-| **toadStool** | Long-tail cross-arch abstraction for all deployment types |
-| **cellMembrane** | `native_braid.py` → Rust, NM hook unification |
-| **westGate** | nestGate TCP + songBird content registration (NG-05) — unblocks data braids on nestgate.io |
+| Metric | Value |
+|--------|-------|
+| sporeGate NUCLEUS | **13/13 ALIVE** |
+| G68 | **16/16 prod-clean, 16/16 cross-arch** |
+| Golgi depot | Musl **17/17**, Windows **15/15** |
+| Cascade | synced=15, zero drift, auto-push to golgi |
+| GitHub remotes | **zero** on eastGate |
+| Trust surfaces | 3 new routes live on nestgate.io |
+| Primal drift | **zero** |
 
 ---
 
-*Wave 157a — G68 COMPLETE. SSH KEY DISCIPLINE ENFORCED. 16/16 prod-clean, 16/16 cross-arch. 205→0 production violations. All primal teams clear. GitHub direct access cut — only golgi-ext pushes to GitHub, all gates route through pepti layer. Gate redeploy next. toadStool S369: 15/15 cross-arch + iOS target. Live trust surfaces: sporePrint relabels QCD, sporeGate topology wires data braids + pseudoSpore routes. arXiv 41/42 — trust surface blocks reviewer send. primalSpring evolves Neural API. Springs activate when ready.*
+## WHAT BLURB SAID vs ACTUAL
+
+| Blurb claim | Actual |
+|-------------|--------|
+| `/api/content/stats` missing | **FIXED** — live from rhizoCrypt |
+| `/pseudospore/` route 404 | **FIXED** — 5 bundles serving, validate.sh at 200 |
+| "GitHub remotes removed from all 23" | Was 7 remaining, now **zero** |
+| toadStool S366 deployed | S369 deployed (team shipped S367-S369 on top) |
+
+---
+
+## REMAINING (from blurb, updated)
+
+### sporeGate/eastGate owns
+- ~~nestgate.io data braids backend~~ **DONE** (`/api/content/stats`)
+- ~~`/pseudospore/` route~~ **DONE** (5 bundles + validate.sh)
+- ~~Cascade golgi push~~ **DONE** (ExecStartPost rsync)
+- ~~SSH key cleanup~~ **DONE** (zero github remotes)
+
+### Other teams own
+- **sporePrint**: SU(2)→SU(N) relabel, QCD download pages, LaTeX preprint
+- **lithoSpore**: Package QCD bundle for pseudoSpore v1.0.0-rung1
+- **primalSpring**: Neural API evolution (capability.call, N2-N5)
+- **toadStool**: hw-safe long-tail (7→0 test-only remaining)
+- **cellMembrane**: `native_braid.py` → Rust
+- **westGate**: nestGate TCP + content registration (NG-05)
+- **Gate teams**: Redeploy from golgi depot
+
+### arXiv blockers (trust surface, not physics)
+1. ~~pseudoSpore URL~~ `/pseudospore/` now **serves** but QCD bundle not yet packaged
+2. `validate.sh` downloadable — but bundle-specific validation not wired
+3. sporePrint QCD page needs relabel (sporePrint team)
+4. Freeze/sign v1.0.0-rung1 (bearDog Ed25519)
+5. Reviewer send (Murillo, Chuna, Bazavov)
+
+---
+
+*Wave 157a — TRUST SURFACE + K-DERM ENFORCED. 13/13 ALIVE. Zero github remotes on eastGate. Three new routes live on nestgate.io: /api/content/stats (CAS from rhizoCrypt), /pseudospore/ (5 bundles), /api/pseudospore/bundles. Cascade auto-pushes depot to golgi. Depot: Musl 17/17, Windows 15/15. All sporeGate topology tasks from blurb DONE. Remaining: sporePrint relabel, lithoSpore QCD bundle, primalSpring Neural API, gate redeploys.*
