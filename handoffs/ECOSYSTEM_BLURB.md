@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a DEPLOY READY + Pipeline Audit
+# ecoPrimals Ecosystem Blurb — Wave 157a DEPLOYED
 
-**Date**: Aug 7, 2026 9:55PM | **Wave**: 157a | **From**: eastGate overwatch → sporeGate depot ops
-**Posture**: **DEPLOY READY. 14/15 PROD-CLEAN. 15/15 CROSS-ARCH.** Depot current on golgi (Musl 17/17, Windows 14/15). **cellMembrane bootstrap gap found and fixed** — cascade timer was running stale `f7d2ac5` (G66), now upgraded to `60b0f8b` (G68 + DIV-7). Pipeline audit: cascade auto-harvests + auto-stages, but doesn't push to golgi.
+**Date**: Aug 8, 2026 6:26AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **DEPLOYED. 13/13 ALIVE. 14/15 PROD-CLEAN. 15/15 CROSS-ARCH.** sporeGate deployed all primals overnight — 13/13 ALIVE, toadStool socket fixed. toadStool shipped S364+S365 (L3 trait surface) — 24→7 prod violations, all in `hw-safe` containment zone. Cascade timer clean, zero drift. Wave cadence shifts to targeted primal waves.
 
 ---
 
@@ -14,7 +14,7 @@ Scanner v2 (`1cbac92`) correctly separates production violations from test asser
 | sweetGrass | 1 violation | **0 prod** (2 test-only) | `enforcement_mode()` was false positive |
 | coralReef | 1 violation | **0 prod** (1 test-only) | `PermissionsExt` in test-only `method_gate.rs` |
 
-**Updated G68 prod compliance: 14/15** (was 12/15). Only toadStool (27 L3 device backends) has real production violations.
+**G68 prod compliance: 14/15.** toadStool shipped S364 (6 new cross-platform traits) + S365 (G68 complete claim). Scanner shows **7 remaining prod violations** (was 24): 6 `rustix` in `hw-safe` + 1 `mode()` in `akida-driver/hybrid/selector.rs`. Down from 205 at wave start.
 
 ---
 
@@ -35,20 +35,15 @@ All fresh on golgi. Previous passes (biomeOS `b3dadf0`, barraCuda `9bb8709`) sti
 
 All binaries on golgi fresh (Aug 7). All primals at latest Forgejo HEAD.
 
-### Windows — 14/15
+### Windows — 15/15
 
-14 core primal .exe files on golgi. squirrel sole failure (cross-arch).
+All primal .exe files pass cross-arch. toadStool S363 fixed Windows, S365 confirmed.
 
 ---
 
-## HEALTH — 12/13
+## HEALTH — 13/13 ALIVE
 
-12 ALIVE on sporeGate NUCLEUS.
-
-| Issue | Owner | Severity |
-|-------|-------|----------|
-| toadStool `Permission denied` (B1/B2 socket) | biomeGate | P2 |
-| biomeOS local `4.56.0` (depot has `4.57.0` + DIV-4) | sporeGate ops | P2 — restart |
+All primals running on sporeGate NUCLEUS. toadStool socket permissions fixed. biomeOS upgraded to 4.57.0 (Stage 2). 7 stale impulses cleared. Cascade timer: synced=15, zero drift.
 
 ---
 
@@ -81,18 +76,25 @@ The cascade timer auto-harvests primals but **didn't rebuild itself**. The `memb
 
 ---
 
-## REMAINING SEQUENCE
+## WAVE CADENCE — SHIFT
 
-1. ~~Phase A: cascade timer~~ — **DONE** (proven, now with G68 membrane)
-2. ~~Depot refresh (4 passes)~~ — **DONE** (including cellMembrane bootstrap fix)
-3. ~~G68 prod convergence~~ — **14/15 prod-clean**
-4. **Phase C: sync graph materialization** — primalSpring team
-5. **N2-N5 verification** — primalSpring team (DIV-4 unblocks this)
-6. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi
-7. **toadStool musl VFIO type fix** — toadStool team (S363 regression)
-8. **Cascade golgi push automation** — add rsync post-harvest to cascade
-9. **Activate springs** — hotSpring, tideGlass, esotericWebb
+Wave 157a was an ecosystem-wide convergence day (71+ commits, 16 repos, 4 depot passes, full deployment). That mode is **done**. From here, waves are **targeted**: a couple primals push, one rebuild, one deploy.
+
+### Completed (157a)
+1. ~~Phase A: cascade timer~~ — **LIVE**, G68 membrane, zero drift
+2. ~~Depot refresh (4 passes)~~ — all at Forgejo HEAD on golgi
+3. ~~G68 prod convergence~~ — 14/15 prod-clean, 15/15 cross-arch
+4. ~~sporeGate deployment~~ — **13/13 ALIVE**
+5. ~~cellMembrane bootstrap fix~~ — cascade now runs G68+DIV-7 membrane
+
+### Active (long-tail, targeted waves)
+6. **toadStool `hw-safe` G68 convergence** — 7 violations (6 L3 rustix + 1 L2 mode), team actively working. Push when ready, sporeGate rebuilds that one primal.
+7. **Phase C: sync graph materialization** — primalSpring team
+8. **N2-N5 verification** — primalSpring team
+9. **Deploy across remaining NUCLEUS gates** — gate teams pull from golgi
+10. **Cascade golgi push automation** — rsync post-harvest
+11. **Activate springs** — hotSpring, tideGlass, esotericWebb
 
 ---
 
-*Wave 157a — DEPLOY READY. 14/15 prod-clean, 15/15 cross-arch. cellMembrane bootstrap gap found and fixed: cascade timer was running stale G66 membrane, now G68+DIV-7. Pipeline audit: cascade auto-harvests + stages locally, but golgi push is manual. toadStool S363 introduced musl VFIO type regression (non-blocking). Depot: musl 17/17, Windows 14/15. Next: gate deployment, then springs.*
+*Wave 157a — DEPLOYED. 13/13 ALIVE on sporeGate. 14/15 prod-clean, 15/15 cross-arch. toadStool shipped S364+S365 overnight: 24→7 prod violations (all in hw-safe containment). Depot: Musl 17/17, Windows 15/15. Cascade timer clean, zero drift. Wave cadence shifts to targeted primal waves — no more ecosystem-wide convergence days. toadStool converges hw-safe, then sporeGate rebuilds that one primal. Gate teams deploy from golgi. Springs activate when ready.*
