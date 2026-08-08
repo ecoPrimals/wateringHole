@@ -1,7 +1,7 @@
-# Overwatch Audit Handoff — Wave 157a G68 Convergence
+# Overwatch Audit Handoff — Wave 157a FINAL (6/6 Redeployed)
 
-**Date**: Aug 8, 2026 9:10AM | **Wave**: 157a | **From**: eastGate overwatch
-**Purpose**: G68 convergence confirmed. 3/6 gates redeployed. Trust surfaces LIVE. strandGate DIVERGED.
+**Date**: Aug 8, 2026 9:50AM | **Wave**: 157a | **From**: eastGate overwatch
+**Purpose**: All NUCLEUS gates redeployed. NG-05 closed. Most gaps resolved. arXiv at 41/42.
 
 ---
 
@@ -10,69 +10,72 @@
 | Metric | Value |
 |--------|-------|
 | **P0/P1/P2** | ZERO |
-| **G68** | **COMPLETE — 16/16 prod-clean**, 205→0 violations |
-| **NUCLEUS gates** | 11 online. **3/6 redeployed** (sporeGate, blueGate, southGate) |
+| **G68** | **COMPLETE — 16/16 prod-clean** |
+| **NUCLEUS gates** | **6/6 redeployed** to G68-converged binaries |
+| **NG-05** | **CLOSED** — 26 capabilities, 2.5 TB CAS, TCP on :8080 |
 | **Depot** | **ALL CURRENT** — Musl 17/17, Windows 15/15. Cascade auto-push. |
-| **SSH discipline** | **ENFORCED** — eastGate, blueGate, southGate compliant |
-| **Trust surfaces** | **LIVE** — `/api/content/stats`, `/pseudospore/` (5 bundles), `validate.sh` |
-| **Total tests** | ~135,000+ |
+| **SSH discipline** | **ENFORCED** — zero `github` remotes ecosystem-wide |
+| **QCD pseudoSpore** | **PACKAGED** — lithoSpore v1.0.0-rung1 |
+| **SU(N) relabel** | **DONE** — hotspring-qcd-sun live |
+| **Trust surfaces** | **LIVE** — `/api/content/stats`, `/pseudospore/`, `validate.sh` |
 | **Primal health** | **13/13 GREEN** |
-| **arXiv** | **41/42** — SU(3) COMPLETE, SU(4) running. Trust surface partially unblocked. |
-| **strandGate** | **DIVERGED** — 2+ months stale, needs SSH depot access |
-| **Data** | 3.21 TB / 153 datasets on westGate ZFS |
+| **Total tests** | ~135,000+ |
+| **arXiv** | **41/42** — validate.sh wiring + freeze/sign remain |
+| **Data** | 3.21 TB / 153 datasets. westGate CAS: 2.5 TB (1.1 TB NVMe + 1.4 TB ZFS) |
 | **sporePrint** | 338 pages, current at Wave 157a |
+| **cellMembrane** | `plasmid.fetch --source forgejo` FIXED — sovereign deploy path |
+| **toadStool** | S370: WASM compute (15 crates on wasm32), 16 deployment targets |
 
 ---
 
-## Gate Redeploy Assignments
+## GAPS CLOSED (cumulative Wave 157a)
 
-| Gate | Status | Details |
-|------|--------|---------|
-| **sporeGate** | **DONE** | 13/13 ALIVE. S369. Cascade auto-push. Zero drift. |
-| **blueGate** | **DONE** | 13/13 ALIVE. Windows 15/15. 264 MB RSS. 3 P3/P4 issues. |
-| **southGate** | **DONE** | 13/13 ALIVE. 96 MB RSS. 0.058ms Tower. SSH compliant. |
-| **strandGate** | **DIVERGED** | v2026.05.30 (2+ months stale). Needs SSH depot access to golgi. |
-| **westGate** | **PENDING** | Awaiting redeploy. |
-| **ironGate** | **PENDING** | Awaiting redeploy. |
+| Gap | Resolution |
+|-----|-----------|
+| Gate redeploy 6/6 | All running G68-converged from golgi depot |
+| NG-05 westGate CAS federation | 26 capabilities, TCP :8080, songbird-register.service |
+| strandGate depot access | SSH key on golgi + Forgejo |
+| plasmid.fetch --source forgejo | cellMembrane `55fdff3` |
+| pseudoSpore routes | LIVE on nestgate.io |
+| QCD pseudoSpore bundle | lithoSpore v1.0.0-rung1 PACKAGED |
+| SU(2)→SU(N) relabel | hotspring-qcd-sun across 10 files |
+| SSH discipline | Zero github remotes ecosystem-wide |
+| Cascade auto-push | ExecStartPost rsync to golgi |
 
-**strandGate resolution**: register SSH key on golgi for rsync depot pull (Option C).
-Also fix `membrane plasmid.fetch --source forgejo` API parse (cellMembrane team).
+## REMAINING GAPS
 
----
+### arXiv (trust surface, not physics — 41/42)
+1. `validate.sh` — bundle-specific BLAKE3 + DAG + Ed25519 verification
+2. Freeze/sign v1.0.0-rung1 (bearDog Ed25519)
+3. Reviewer send (Murillo, Chuna, Bazavov)
 
-## Trust Surface Gaps — arXiv Blockers
+### Ecosystem evolution
+- **primalSpring**: Owns eastGate cascade. Neural API evolution, capability registry.
+- **toadStool**: WASM compute long-tail (S370).
+- **cellMembrane**: `native_braid.py` → Rust.
+- **projectNUCLEUS**: Scope refined 5→3. Migrate workloads/ to spring repos.
+- **sporePrint**: LaTeX→web preprint page, real download links.
 
-| Gap | Owner | Detail |
-|-----|-------|--------|
-| ~~pseudoSpore at URL~~ | petalTongue | **PARTIALLY RESOLVED** — `/pseudospore/` LIVE (5 bundles) but QCD not packaged |
-| ~~`validate.sh`~~ | petalTongue | **PARTIALLY RESOLVED** — downloadable but bundle-specific validation not wired |
-| **SU(2)→SU(N) relabel** | sporePrint | `hotspring-qcd-su2` → `hotspring-qcd-sun` |
-| **Freeze/sign v1.0.0-rung1** | lithoSpore | pseudoSpore release |
-| **Reviewer send** | eastGate | PDF + link to Murillo, Chuna, Bazavov |
+### Windows P3/P4
+- skunkBat: `PRIMAL_BIND_MODE` env var
+- petalTongue: `--port` in server mode
+- songBird: stale PID file
 
-## Other Gaps
-
-| Gap | Owner | Detail |
-|-----|-------|--------|
-| **nestgate.io data braids** | sporeGate/petalTongue | NG-05: westGate CAS not federated, `/pseudospore/` 404 |
-| **westGate federation** | westGate/songBird | nestGate TCP + content capability registration |
-| **cellMembrane native\_braid.py** | cellMembrane | Last Python in pipeline → Rust |
-| **biomeOS capability.call timeout** | biomeOS | Dispatch timeout fix |
-| **N2-N5 Neural API verification** | primalSpring | Route capability.call to bearDog, Tower, Provenance, squirrel |
-
----
-
-## What sporePrint Just Shipped (Wave 157a)
-
-1. **Homepage**: G68 COMPLETE, SSH discipline, arXiv 41/42, depot current
-2. **Gate status**: full rewrite — G68 audit, depot table, SSH key discipline, fleet redeploy
-3. **hotSpring QCD**: arXiv 41/42, trust surface blockers, SU(N) relabel pending
-4. **llms.txt**: G68, SSH discipline, arXiv 41/42
-5. **EVOLUTION_QUEUE**: Wave 157a, G68 era
-6. **CONTEXT**: Wave 157a header
-7. **CHANGELOG**: [3.26.0] G68 Convergence
-8. **CONTENT_MAP**: reviewed at 157a
+### Ops
+- coralReef BLAKE3 checksum stale on golgi depot
 
 ---
 
-*Wave 157a clean. G68 COMPLETE. SSH discipline enforced. All primal teams clear. Gate redeploy next. Trust surface is the arXiv bottleneck. overwatch can hand off to gate teams.*
+## What sporePrint Shipped (Wave 157a cumulative)
+
+1. **SU(2)→SU(N) relabel** — 3 pages renamed, 10 files updated
+2. **Gate status** — 3 rewrites tracking 3/6 → 6/6 → NG-05 CLOSED
+3. **hotSpring QCD** — arXiv 41/42, trust surface blockers, pseudoSpore PACKAGED
+4. **Homepage** — 4 updates tracking wave progression
+5. **Trust surfaces** — nestgate.io routes documented
+6. **CHANGELOG** — [3.26.0], [3.26.1], [3.27.0]
+7. **All specs** — llms.txt, EVOLUTION_QUEUE, CONTEXT, CONTENT_MAP current
+
+---
+
+*Wave 157a FINAL. 6/6 deployed. NG-05 closed. QCD packaged. SU(N) relabel done. Zero P0/P1. arXiv at 41/42 — validate.sh + freeze/sign are the last blockers.*
