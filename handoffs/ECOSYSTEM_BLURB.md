@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a DEPLOYED + S366 Convergence
+# ecoPrimals Ecosystem Blurb — Wave 157a Revalidated
 
-**Date**: Aug 8, 2026 6:50AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **DEPLOYED. 13/13 ALIVE. 15/16 PROD-CLEAN. 16/16 CROSS-ARCH.** toadStool S366: musl ioctl regression fixed (`as _` cast, aligns with S363 pattern). Socket permissions now permanent (ExecStartPost). Depot: Musl 17/17, Windows **15/15** (squirrel.exe added). Cascade timer: synced=15, zero drift.
+**Date**: Aug 8, 2026 7:01AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **DEPLOYED + CONVERGING.** toadStool 7→4 prod violations (S366 libc elimination, S367 cross-arch abstraction, mode()→substrate_mode() rename). sweetGrass shipped `capability.call` handler for Neural API routing (gap #2 from AAR). cellMembrane fixed 3 cascade pipeline gaps. Neural API routing spec live. 15/16 prod-clean, 16/16 cross-arch.
 
 ---
 
@@ -51,7 +51,7 @@
 | sweetGrass | **G68-prod** | 0 | 1 | test assertion |
 | coralReef | **G68-prod** | 0 | 1 | test assertion |
 | biomeOS | **G68-prod** | 0 | 1 | test assertion |
-| toadStool | partial | **7** | 2 | 6 L3 `hw-safe` rustix + 1 L2 selector mode() |
+| toadStool | partial | **4** | 2 | 4 L3 `hw-safe` rustix (S366+S367 cleared 3) |
 
 **8/16 G68 compliant. 7/16 G68-prod. 1/16 partial. 15/16 zero production violations. 16/16 cross-arch.**
 
@@ -102,12 +102,14 @@ Wave 157a ecosystem-wide convergence is **DONE**. Waves are now targeted.
 8. ~~squirrel Windows~~ — **15/15 on golgi**
 
 ### Active (long-tail, targeted waves)
-9. **toadStool `hw-safe` G68 convergence** — 7 violations (6 L3 rustix + 1 L2 mode), team actively working
-10. **Phase C: sync graph materialization** — primalSpring team
-11. **Deploy across remaining NUCLEUS gates** — gate teams pull from golgi
-12. **Cascade golgi push automation** — rsync/plasmid.push post-harvest
-13. **Activate springs** — hotSpring, tideGlass, esotericWebb
+9. **toadStool `hw-safe` G68 convergence** — 4 violations remaining (`vfio_setup`, `vfio_dma`, `platform_backends`, `drm_ioctl`), team actively working
+10. **Neural API routing fixes** — sweetGrass shipped `capability.call` handler. biomeOS `capability.call` timeout still needs investigation. **Owner: biomeOS.** See `specs/NEURAL_API_ATOMIC_ROUTING_SPEC.md`.
+11. **primalSpring registry gaps** — `braid.list`, `braid.query`, `convergence.check`, etc. missing from `capability_registry.toml`. **Owner: primalSpring.**
+12. **Evolve native_braid.py → Rust** — last Python in active pipeline. **Owner: cellMembrane or sourDough.**
+13. **Phase C: sync graph materialization** — primalSpring team
+14. **Deploy across remaining NUCLEUS gates** — gate teams pull from golgi
+15. **Activate springs** — hotSpring, tideGlass, esotericWebb
 
 ---
 
-*Wave 157a — DEPLOYED + S366 CONVERGENCE. 13/13 ALIVE on sporeGate. toadStool musl ioctl regression fixed (S366), socket permissions permanent (ExecStartPost). Depot: Musl 17/17, Windows 15/15 (squirrel.exe added). 15/16 prod-clean, 16/16 cross-arch. Cascade timer: synced=15, zero drift. Wave cadence: targeted primal waves. toadStool hw-safe convergence is the long-tail.*
+*Wave 157a — REVALIDATED. toadStool 7→4 prod violations (S366 libc elimination + S367 cross-arch + mode() rename). sweetGrass shipped capability.call handler. cellMembrane fixed cascade gaps. Neural API routing spec live with wire format reference. 15/16 prod-clean, 16/16 cross-arch. 13/13 ALIVE. toadStool has 4 hw-safe VFIO/DRM violations remaining — converging. westGate absorbs and continues.*
