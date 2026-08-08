@@ -76,6 +76,26 @@
 6. **CHANGELOG** — [3.26.0], [3.26.1], [3.27.0]
 7. **All specs** — llms.txt, EVOLUTION_QUEUE, CONTEXT, CONTENT_MAP current
 
+## Root Doc Audit (Wave 157a)
+
+**README**: Updated Remaining section — 6 new items marked complete (G68, NG-05,
+QCD packaged, SU(N) relabel, SSH discipline, CAS route). 2 remain (G19 render, arXiv).
+
+**EVOLUTION_QUEUE audit**: 4 stale TODOs closed:
+- `gen3/primals/` — entity registry (79 entities) serves this role
+- `Post-DNS deploy.yml archive` — SSH discipline means GitHub via K-Derm relay
+- `guidePost` — subsumed by guideStone certification
+- `petalTongue jelly-string UI` — content rendering pipeline shipped, jelly strings eliminated
+
+**Debris scan**: Tree clean. No `target/`, `public/`, `.log`, `.tmp`, `.bak`, `__pycache__`.
+Scripts valid (`validate_a11y.sh`, `validate_agent_parity.sh`). Specs valid
+(PRE_CUTOVER already marked fossil). `config.toml measured_date` updated to 2026-08-08.
+
+**19 open TODOs remain** — all valid (accessibility, search, gallery automation,
+composition diagrams). No false positives found.
+
 ---
 
-*Wave 157a FINAL. 6/6 deployed. NG-05 closed. QCD packaged. SU(N) relabel done. Zero P0/P1. arXiv at 41/42 — validate.sh + freeze/sign are the last blockers.*
+*Wave 157a FINAL. 6/6 deployed. NG-05 closed. QCD packaged. SU(N) relabel done.
+Root docs audited. 4 stale TODOs closed. Zero debris. Zero P0/P1.
+arXiv at 41/42 — validate.sh + freeze/sign are the last blockers.*
