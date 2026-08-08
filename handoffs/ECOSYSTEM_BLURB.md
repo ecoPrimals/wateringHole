@@ -1,115 +1,74 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a G68 Refined Audit
+# ecoPrimals Ecosystem Blurb — Wave 157a Depot Ready
 
-**Date**: Aug 7, 2026 8:47PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **G68: 7/15 COMPLIANT, 5/15 PROD-CLEAN, 3 PARTIAL.** sourDough scanner refined (prod/test split, false positive exclusion). 38 production violations remain across 4 primals. 11/15 have zero production violations. Phase A cascade timer LIVE on sporeGate.
-
----
-
-## G68 REFINED AUDIT — sourDough scanner v2 (prod/test split)
-
-sourDough shipped scanner refinement (`531cf39`): separates production violations from test assertions, excludes contextual false positives (`tar::Header::set_mode`, etc.), three compliance levels.
-
-| Primal | Level | Prod | Test | Notes |
-|--------|-------|------|------|-------|
-| sourDough | **G68** | 0 | 0 | Reference implementation |
-| nestGate | **G68** | 0 | 0 | `nestgate-platform` owns L1/L2/L3 |
-| petalTongue | **G68** | 0 | 0 | `platform_substrate` module |
-| bingoCube | **G68** | 0 | 0 | Clean |
-| loamSpine | **G68** | 0 | 0 | PlatformAccess adopted |
-| barraCuda | **G68** | 0 | 0 | `platform_link()` adopted |
-| **cellMembrane** | **G68** | 0 | 0 | Fully isomorphic cross-arch |
-| squirrel | **G68-prod** | 0 | 1 | Prod clean, 1 test assertion |
-| bearDog | **G68-prod** | 0 | 1 | Prod clean, 1 test assertion |
-| songBird | **G68-prod** | 0 | 1 | Prod clean, 1 test assertion |
-| rhizoCrypt | **G68-prod** | 0 | 1 | Prod clean, 1 test assertion |
-| skunkBat | **G68-prod** | 0 | 1 | Prod clean, 1 test assertion |
-| sweetGrass | partial | **1** | 2 | 1 `mode()` read in lifecycle.rs |
-| coralReef | partial | **1** | 0 | 1 `mode()` read in newline_jsonrpc.rs |
-| biomeOS | partial | **9** | 1 | 4 L1 symlinks + 3 L2 + 2 L3 in boot/rootfs |
-| toadStool | partial | **27** | 0 | 15 L3 (VFIO/DRM/sandbox rustix), 1 L2 |
-
-**Totals**: 38 production violations across 4 primals. **11/15 have zero production violations.**
+**Date**: Aug 7, 2026 9:24PM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **13/15 PROD-CLEAN. DEPOT READY.** sweetGrass + coralReef fixed. toadStool shipped L3 migrations (−2 violations). biomeOS down to 4 (3 in test file + 1 boot rustix). 13/15 primals have zero production G68 violations. Depot rebuild unblocked.
 
 ---
 
-## REMAINING PRODUCTION VIOLATIONS
+## G68 FINAL AUDIT — sourDough scanner v2
 
-### sweetGrass (1 prod) — trivial
+| Primal | Level | Prod | Notes |
+|--------|-------|------|-------|
+| sourDough | **G68** | 0 | Reference + validator |
+| nestGate | **G68** | 0 | |
+| petalTongue | **G68** | 0 | |
+| bingoCube | **G68** | 0 | |
+| loamSpine | **G68** | 0 | |
+| barraCuda | **G68** | 0 | |
+| squirrel | **G68-prod** | 0 | 1 test assertion |
+| bearDog | **G68-prod** | 0 | 1 test assertion |
+| songBird | **G68-prod** | 0 | 1 test assertion |
+| rhizoCrypt | **G68-prod** | 0 | 1 test assertion |
+| skunkBat | **G68-prod** | 0 | 1 test assertion |
+| sweetGrass | **G68-prod** | 0 | 1 test — **FIXED this round** |
+| coralReef | **G68-prod** | 0 | — **FIXED this round** |
+| biomeOS | partial | **4** | 3 L2 in test file + 1 L3 boot rustix |
+| toadStool | partial | **25** | 24 L3 device rustix + 1 L2 |
 
-`lifecycle.rs`: `mode()` read query → `query_access()`. One-line fix.
+**13/15 zero production violations. Depot rebuild unblocked.**
 
-### coralReef (1 prod) — trivial
+biomeOS: 3 of 4 are in `vm_federation_manager_tests/mod.rs` (test file — scanner should flag as test-only). The 1 real violation is `rustix` in `boot_logger/device_mgr.rs` (always Linux, non-blocking).
 
-`newline_jsonrpc.rs`: `mode()` read query → `query_access()`. One-line fix.
-
-### biomeOS (9 prod) — boot/rootfs module
-
-- 4 L1: raw symlinks in `boot_logger/device_mgr.rs` + `rootfs/builder/install.rs` → `platform_link()`
-- 3 L2: `mode()` in observability + 2 boot modules → `query_access()` / `PlatformAccess`
-- 2 L3: raw `rustix` in `device_mgr.rs` + `init_filesystem.rs` → platform-gated backend
-
-All in the `biomeos-boot` crate — the baremetal OS bootstrap path. biomeOS always runs on Linux, so these are non-blocking for deployment.
-
-### toadStool (27 prod) — device backends
-
-- 15 L3: raw `rustix` in VFIO (`cylinder/vfio/`), DRM (`display/drm/`), V4L2 (`display/v4l2/`), sandbox (`security/sandbox/linux/`) → backend traits
-- 1 L2: `mode()` in `akida-driver/hybrid/selector.rs`
-- These are inherently platform-specific device drivers. G68 L3 backend trait pattern applies.
-
----
-
-## EVOLUTION SUMMARY — Aug 7, 2026
-
-| Metric | Start of day | End of day |
-|--------|-------------|------------|
-| G68 compliant (scanner v1) | 3/15 | — |
-| G68 compliant (scanner v2) | — | **7/15** |
-| G68 prod-clean | — | **12/15** (incl. cellMembrane) |
-| Production violations | ~205 (v1) | **38** (v2 refined) |
-| Commits today | — | **69+** across 16 repos |
-| barraCuda LOC removed | — | **−37,144** |
+toadStool: 24/25 are L3 `rustix` imports in VFIO/DRM/V4L2/sandbox/akida-driver — inherent Linux kernel device interfaces. These need the G68 L3 backend trait pattern and are a long-term convergence, not a depot blocker.
 
 ---
 
-## WHO GETS THIS BLURB
+## DEPOT STATUS
 
-| Team | What they action |
-|------|------------------|
-| **sweetGrass** | 1 prod fix (`lifecycle.rs` mode → query_access) |
-| **coralReef** | 1 prod fix (`newline_jsonrpc.rs` mode → query_access) |
-| **biomeOS** | 9 prod fixes in `biomeos-boot` (non-blocking for deployment) |
-| **toadStool** | 27 prod fixes — L3 backend traits for VFIO/DRM/V4L2/sandbox |
-| **All gate teams** | After sweetGrass + coralReef fix → depot rebuild → deploy |
+| Gate | Cross-arch | Depot ready? |
+|------|-----------|-------------|
+| 14/15 primals | **PASS** Windows | **YES** |
+| toadStool | **FAIL** Windows (consumer crate gating) | Excluded from Windows depot |
+| Phase A timer | **LIVE** on sporeGate | Cascade running autonomously |
 
----
-
-## ORDERING
-
-```
-1. sweetGrass + coralReef: 1 fix each (trivial, ~5 min)
-2. Depot rebuild on sporeGate (12/15 prod-clean)
-3. Gate teams: deploy from golgi depot
-4. biomeOS + toadStool: deep L3 work (non-blocking, independent)
-5. Springs: tideGlass, hotSpring viz, esotericWebb, arXiv
-```
+**Action**: sporeGate can rebuild depot now. 13/15 prod-clean. 14/15 cross-arch.
 
 ---
 
-## METRICS
+## REMAINING (non-blocking, independent)
 
-| Metric | Value |
-|--------|-------|
-| G68 compliant (zero violations) | **7/15** |
-| G68 prod-clean (zero prod) | **12/15** |
-| G68 partial | **3/15** (sweetGrass 1, coralReef 1, biomeOS 9) |
-| G68 heavy | **1/15** (toadStool 27 — L3 device backends) |
-| Production violations | **38** (was 205 before scanner refinement) |
-| Phase A cascade timer | **LIVE** on sporeGate |
-| Cross-arch | **14/15 PASS** (toadStool consumer crates) |
-| Glacial goals | **15 COMPLETE / 26 ACTIVE / 23 GLACIAL — 64 total** |
-| Total tests | **~140K+** |
-| P0/P1 | **ZERO** |
+| Team | What | Priority |
+|------|------|----------|
+| **biomeOS** | 1 real prod violation (boot `rustix`) + scanner false positive in test file | P3 — always Linux |
+| **toadStool** | 25 L3 device backends + Windows consumer crate gating | P3 — device drivers |
+| **sourDough** | Scanner refinement: `vm_federation_manager_tests` flagged as prod, should be test | Minor |
+| **primalSpring** | Phase C sync graph materialization | Handoff delivered |
 
 ---
 
-*Wave 157a — G68 refined audit. sourDough scanner v2 separates prod from test. 7/15 G68 compliant, 12/15 prod-clean (zero production violations). 38 prod violations remain across 4 primals: sweetGrass(1), coralReef(1), biomeOS(9), toadStool(27). Two trivial fixes unlock depot rebuild. Phase A LIVE. 69+ commits today across 16 repos. biomeOS Neural API orchestrates everything.*
+## WAVE 157a EVOLUTION SUMMARY
+
+| Metric | Start | End |
+|--------|-------|-----|
+| G68 compliant | 0/15 | **7/15** |
+| G68 prod-clean | 0/15 | **13/15** |
+| Production violations | ~205 | **29** (4 biomeOS + 25 toadStool) |
+| Scanner versions | v1 (no prod/test split) | v2 (3 compliance levels) |
+| Commits today | 0 | **69+** across 16 repos |
+| barraCuda LOC removed | 0 | **−37,144** |
+| Phase A timer | spec only | **LIVE** |
+| Cross-arch | 14/15 | **14/15** (toadStool consumer crates) |
+
+---
+
+*Wave 157a — depot ready. 13/15 prod-clean, 7/15 fully G68 compliant. 29 production violations remain (biomeOS 4, toadStool 25) — all non-blocking (Linux boot path + device drivers). sporeGate can rebuild depot. 14/15 cross-arch. Phase A LIVE. 69+ commits today. biomeOS Neural API orchestrates everything.*
