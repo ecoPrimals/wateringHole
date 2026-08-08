@@ -1,7 +1,34 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a Neural API Routing
+# ecoPrimals Ecosystem Blurb — Wave 157a DEPLOYED + S366 Convergence
 
-**Date**: Aug 8, 2026 6:46AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **DEPLOYED + NEURAL API ROUTING SPEC.** westGate pushed atomic ingress AAR: 2,085 lines of Python jelly archived, atomic ingress pattern established. Overwatch shipped routing spec with full atomic matrix and wire format reference. convergence_check.py archived to deprecated (jelly — no new Python). Two routing gaps identified for biomeOS + sweetGrass teams. 15/16 prod-clean, 16/16 cross-arch.
+**Date**: Aug 8, 2026 6:50AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **DEPLOYED. 13/13 ALIVE. 15/16 PROD-CLEAN. 16/16 CROSS-ARCH.** toadStool S366: musl ioctl regression fixed (`as _` cast, aligns with S363 pattern). Socket permissions now permanent (ExecStartPost). Depot: Musl 17/17, Windows **15/15** (squirrel.exe added). Cascade timer: synced=15, zero drift.
+
+---
+
+## EXECUTION SUMMARY — sporeGate/eastGate overwatch
+
+### toadStool S366 — Musl ioctl regression FIXED
+- `mmio.rs:191` — `VFIO_DEVICE_GET_REGION_INFO` passed as `c_ulong` to `libc::ioctl` (expects `c_int` on musl)
+- The `vfio/ioctls.rs` wrappers already used `as _` casts (S363), but this standalone call in `mmio.rs` was missed
+- Fix: single `as _` cast at call site — musl build now clean (1m 21s)
+- Committed as S366, pushed to Forgejo (`62643c5`)
+- Fresh binary staged to depot (13MB) and pushed to golgi
+
+### toadStool Socket Fix — PERMANENT
+- Previous fix: manual `chmod 660 && chgrp sporegate` after each restart — reverted on service restart
+- New: `ExecStartPost` in systemd unit applies `chmod 660 + chgrp sporegate` automatically
+- Verified: socket now `root:sporegate srw-rw----` after automated restart
+- toadStool ALIVE on health check immediately after deploy
+
+### squirrel Windows — 15/15 ACHIEVED
+- `squirrel.exe` was missing from golgi Windows depot (14/15 was actual, not 15/15)
+- Built on blueGate (`9ef3ca3`, 1m 16s, 3.7MB .exe)
+- Pushed to golgi — Windows depot now genuinely **15/15**
+
+### S366 Deployed to NUCLEUS
+- Stopped toadStool service, atomic unlink-then-copy from depot to install dir
+- Restarted with ExecStartPost socket fix
+- Health: **13/13 ALIVE** confirmed
 
 ---
 
@@ -28,89 +55,59 @@
 
 **8/16 G68 compliant. 7/16 G68-prod. 1/16 partial. 15/16 zero production violations. 16/16 cross-arch.**
 
-toadStool remaining 7: `hw-safe/huge_page.rs`, `vfio_setup.rs`, `vfio_dma.rs`, `platform_backends.rs`, `drm_ioctl.rs`, `locked_memory.rs` (all L3 `rustix`), + `akida-driver/hybrid/selector.rs` (L2 `mode()`). Team actively abstracting — long-tail, not a blocker.
-
----
-
-## DEPOT REFRESH — 3RD PASS
-
-| Primal | Commit | Change | Musl | Windows |
-|--------|--------|--------|------|---------|
-| **sourDough** | `1cbac92` | Scanner v2 (prod/test split, false positive exclusion) | 3.3MB | 3.0MB |
-| **bingoCube** | `87d236d` | Standard crate layout restructure | 11.0MB | 5.4MB |
-
-All fresh on golgi. Previous passes (biomeOS `b3dadf0`, barraCuda `9bb8709`) still current.
-
 ---
 
 ## DEPOT STATUS ON GOLGI — ALL CURRENT
 
 ### Musl — 17/17
-
-All binaries on golgi fresh (Aug 7). All primals at latest Forgejo HEAD.
+All binaries at Forgejo HEAD including S366 toadStool.
 
 ### Windows — 15/15
-
-All primal .exe files pass cross-arch. toadStool S363 fixed Windows, S365 confirmed.
+All 15 primal .exe files on golgi (squirrel.exe added this session).
 
 ---
 
 ## HEALTH — 13/13 ALIVE
 
-All primals running on sporeGate NUCLEUS. toadStool socket permissions fixed. biomeOS upgraded to 4.57.0 (Stage 2). 7 stale impulses cleared. Cascade timer: synced=15, zero drift.
+All primals running on sporeGate NUCLEUS. biomeOS 4.57.0 (Stage 2). toadStool S366 deployed, socket fix permanent. Cascade timer: synced=15, zero drift.
 
 ---
 
-## CASCADE PIPELINE AUDIT
-
-The cascade timer (`membrane temporal.cascade`) is more capable than initially documented:
+## CASCADE PIPELINE STATUS
 
 ```
 Forgejo → cascade fetch → detect drift → auto-harvest → stage to local depot
    ✓           ✓              ✓              ✓                 ✓
 ```
 
-**Working**: fetch, drift detection, auto-build, local depot staging
-**Gap 1**: Sandbox validation fails with `Permission denied` (`composition.test_swap` socket timeout)
-**Gap 2**: No golgi push — local depot is updated but golgi must be synced manually
-**Gap 3**: `mesh.publish` on songBird times out — status broadcasting broken
-**Gap 4 (FIXED)**: cellMembrane bootstrap — cascade ran stale `f7d2ac5` (G66), now `60b0f8b` (G68 + DIV-7)
-
-### cellMembrane Bootstrap Problem
-
-The cascade timer auto-harvests primals but **didn't rebuild itself**. The `membrane` binary in the depot was from Aug 6 (`f7d2ac5`, G66 transport), missing:
-- `75953fb` — DIV-7 harvest exit code reliability (3 bugs fixed)
-- `60b0f8b` — G68 platform substrate (fully isomorphic cross-arch)
-
-**Fixed**: rebuilt membrane `60b0f8b`, staged to depot, pushed to golgi. Next cascade cycle uses the G68 binary.
-
-### toadStool musl compile divergence
-
-`akida-driver/src/mmio.rs:191` — `VFIO_DEVICE_GET_REGION_INFO` is `u64` on musl but `libc::ioctl` expects `i32`. This is a genuine L3 platform issue in the VFIO device backend. The cascade's auto-harvested binary (from a pre-S363 commit) is deployed; the S363 commit introduced this regression for musl specifically.
+**Working**: fetch, drift detection, auto-build, local depot staging, G68 membrane
+**Gap 1**: Sandbox validation — `composition.test_swap` socket timeout (non-blocking)
+**Gap 2**: No golgi push — local depot updated, golgi synced manually
+**Gap 3**: `mesh.publish` on songBird — status broadcasting timeout
 
 ---
 
-## WAVE CADENCE — SHIFT
+## WAVE CADENCE — TARGETED
 
-Wave 157a was an ecosystem-wide convergence day (71+ commits, 16 repos, 4 depot passes, full deployment). That mode is **done**. From here, waves are **targeted**: a couple primals push, one rebuild, one deploy.
+Wave 157a ecosystem-wide convergence is **DONE**. Waves are now targeted.
 
-### Completed (157a)
+### Completed
 1. ~~Phase A: cascade timer~~ — **LIVE**, G68 membrane, zero drift
-2. ~~Depot refresh (4 passes)~~ — all at Forgejo HEAD on golgi
-3. ~~G68 prod convergence~~ — 15/16 prod-clean, 16/16 cross-arch (cellMembrane added)
+2. ~~Depot refresh (4 passes + S366)~~ — all at Forgejo HEAD on golgi
+3. ~~G68 prod convergence~~ — 15/16 prod-clean, 16/16 cross-arch
 4. ~~sporeGate deployment~~ — **13/13 ALIVE**
-5. ~~cellMembrane bootstrap fix~~ — cascade now runs G68+DIV-7 membrane
+5. ~~cellMembrane bootstrap fix~~ — cascade runs G68+DIV-7
+6. ~~toadStool musl ioctl regression~~ — **S366 FIXED** and deployed
+7. ~~toadStool socket permissions~~ — **ExecStartPost permanent**
+8. ~~squirrel Windows~~ — **15/15 on golgi**
 
 ### Active (long-tail, targeted waves)
-6. **toadStool `hw-safe` G68 convergence** — 7 violations (6 L3 rustix + 1 L2 mode), team actively working.
-7. **Neural API routing fixes** — sweetGrass needs `primal.announce` at startup (or TOML domain bridge entry). `capability.call` timeout for provenance queries needs investigation. **Owner: biomeOS + sweetGrass.** See `specs/NEURAL_API_ATOMIC_ROUTING_SPEC.md`.
-8. **primalSpring registry gaps** — `braid.list`, `braid.query`, `braid.get_by_hash`, `braid.batch_create`, `braid.batch_commit`, `braid.delete`, `convergence.check`, `convergence.batch_check` missing from `capability_registry.toml`. **Owner: primalSpring.**
-9. **Evolve native_braid.py → Rust** — last Python in active pipeline. Target: `membrane braid.*` CLI surface or `sourdough validate neural-api`. **Owner: cellMembrane or sourDough.**
+9. **toadStool `hw-safe` G68 convergence** — 7 violations (6 L3 rustix + 1 L2 mode), team actively working
 10. **Phase C: sync graph materialization** — primalSpring team
 11. **Deploy across remaining NUCLEUS gates** — gate teams pull from golgi
-12. **Cascade golgi push automation** — rsync post-harvest
+12. **Cascade golgi push automation** — rsync/plasmid.push post-harvest
 13. **Activate springs** — hotSpring, tideGlass, esotericWebb
 
 ---
 
-*Wave 157a — DEPLOYED + NEURAL API ROUTING SPEC. westGate atomic ingress AAR absorbed: 2,085 lines of Python jelly archived, "no data without provenance" established. Routing spec shipped: full atomic matrix (tower/provenance/nest/node), canonical wire formats, cross-gate patterns. convergence_check.py archived (jelly). Two routing gaps for biomeOS + sweetGrass teams. native_braid.py is the last Python — evolve to Rust (membrane CLI or sourDough). 15/16 prod-clean, 16/16 cross-arch. westGate absorbs and continues.*
+*Wave 157a — DEPLOYED + S366 CONVERGENCE. 13/13 ALIVE on sporeGate. toadStool musl ioctl regression fixed (S366), socket permissions permanent (ExecStartPost). Depot: Musl 17/17, Windows 15/15 (squirrel.exe added). 15/16 prod-clean, 16/16 cross-arch. Cascade timer: synced=15, zero drift. Wave cadence: targeted primal waves. toadStool hw-safe convergence is the long-tail.*
