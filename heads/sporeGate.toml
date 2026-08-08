@@ -1,10 +1,10 @@
 # Auto-published by membrane temporal.cascade --publish-freshness
 # This file is owned exclusively by this gate. No other gate writes here.
-# Gate: sporeGate | Updated: 2026-08-08T16:20:01Z
+# Gate: sporeGate | Updated: 2026-08-08T16:36:02Z
 
 [meta]
 gate = "sporeGate"
-updated = "2026-08-08T16:20:01Z"
+updated = "2026-08-08T16:36:02Z"
 
 [heads]
 barraCuda = "203c8cc58c5e5b3ebdd5f5bfefd57dc7fc03967a"
