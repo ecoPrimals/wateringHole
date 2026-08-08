@@ -294,32 +294,24 @@ Both are owned by sweetGrass and stable. Without these in the registry, CI drift
 
 westGate tested Neural API routing and documented the following gaps:
 
-1. **`capability.call` times out** for provenance queries routed through neural-api. The process is alive (responds to method-not-found) but the proxy to backend primals hangs. Likely a graph executor config issue or missing route in the dispatch table.
+1. **`capability.call` times out** for provenance queries routed through neural-api. The process is alive (responds to method-not-found) but the proxy to backend primals hangs. Likely a graph executor config issue or missing route in the dispatch table. **Owner: biomeOS team.**
 
-2. **sweetGrass not in capability registry**: biomeOS discovers 2,088 capabilities from 14+ primals but sweetGrass has not announced. It responds on its direct socket but `capability.call("braid.query", ...)` cannot route because the `braid` domain has no live endpoint. **Fix**: sweetGrass needs to call `primal.announce` at startup, or biomeOS needs its socket in the TOML domain bridge.
+2. **sweetGrass not in capability registry**: biomeOS discovers 2,088 capabilities from 14+ primals but sweetGrass has not announced. It responds on its direct socket but `capability.call("braid.query", ...)` cannot route because the `braid` domain has no live endpoint. **Fix**: sweetGrass needs to call `primal.announce` at startup, or biomeOS needs its socket in the TOML domain bridge. **Owner: sweetGrass + biomeOS teams.**
 
-3. **No `rpc.discover`**: No primal supports method introspection. Consumers must know signatures a priori.
+3. **No `rpc.discover`**: No primal supports method introspection. Consumers must know signatures a priori. This spec provides the canonical reference until introspection is implemented.
 
-4. **DAG sessions ephemeral**: `dag.session.list` returns 0 after dehydration. Sessions are discarded post-Merkle root. Spine commits persist the provenance chain, but session-level forensics require a `dag.session.history` RPC (future).
-
-Until gaps 1-2 are resolved, scripts should use the **fallback path**: call the Neural API socket with the semantic fallback (direct `braid.list` as method name) AND have a direct-socket fallback for sweetGrass if routing fails. The `neural_braid.py` client implements this pattern.
+4. **DAG sessions ephemeral**: `dag.session.list` returns 0 after dehydration. Sessions are discarded post-Merkle root. Spine commits persist the provenance chain, but session-level forensics require a `dag.session.history` RPC (future). **Owner: rhizoCrypt team.**
 
 ---
 
-## Migration: Direct Sockets → Neural API
+## Evolution Path: No Python
 
-Scripts on westGate (and all gates) should migrate from:
+All interaction with the Neural API must be through Rust primals and `membrane` CLI commands. Python scripts are jelly string — they reimplement primal capabilities in a non-primal language, creating wire-format drift, socket-path coupling, and untested surface area.
 
-```python
-# OLD: direct socket, wrong params, gate-specific socket names
-rpc_result("sweetgrass", "braid.list", {"dataset": "kegg"})
-```
+westGate archived 2,085 lines of Python jelly on Aug 8 2026 (prov_inline.py, bulk_braid.py, revalidate_data.py, alphafold_prov_convoy.py, alphafold_bulk_download.py, convergence_check.py). The remaining `native_braid.py` is the last Python in the active pipeline and should be evolved into either:
 
-To:
+1. A `membrane braid.*` CLI surface (cellMembrane) — for gate operators
+2. A `sourdough validate neural-api` subcommand (sourDough) — for N2-N5 verification
+3. Direct `capability.call` from Rust consumers (springs, gardens, protists)
 
-```python
-# NEW: Neural API, correct params, one socket for everything
-neural_api_call("braid.list", {"filter": {"tag": "kegg"}})
-```
-
-The `neural_braid.py` module provides the canonical client. See `infra/wateringHole/scripts/neural_braid.py`.
+The wire formats documented in this spec are the contract. Any new tooling implements against these formats in Rust, not Python.
