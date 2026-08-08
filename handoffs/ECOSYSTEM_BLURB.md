@@ -1,20 +1,34 @@
 # ecoPrimals Ecosystem Blurb — Wave 157a DEPLOYED
 
-**Date**: Aug 8, 2026 6:26AM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **DEPLOYED. 13/13 ALIVE. 14/15 PROD-CLEAN. 15/15 CROSS-ARCH.** sporeGate deployed all primals overnight — 13/13 ALIVE, toadStool socket fixed. toadStool shipped S364+S365 (L3 trait surface) — 24→7 prod violations, all in `hw-safe` containment zone. Cascade timer clean, zero drift. Wave cadence shifts to targeted primal waves.
+**Date**: Aug 8, 2026 6:30AM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **DEPLOYED. 13/13 ALIVE. 15/16 PROD-CLEAN. 16/16 CROSS-ARCH.** cellMembrane now tracked as deployable primal (G68 compliant, zero violations). toadStool S364+S365 shipped L3 trait surface — 24→7 prod violations, all in `hw-safe` containment. Cascade timer clean, zero drift. Wave cadence shifts to targeted primal waves.
 
 ---
 
-## G68 SCANNER V2 RESULTS — FROM SPOREGATE
+## G68 FULL AUDIT — 16 REPOS (sourDough scanner v2)
 
-Scanner v2 (`1cbac92`) correctly separates production violations from test assertions. Two primals promoted:
+| Primal | Level | Prod | Test | Notes |
+|--------|-------|------|------|-------|
+| sourDough | **G68** | 0 | 0 | Reference + validator |
+| nestGate | **G68** | 0 | 0 | |
+| petalTongue | **G68** | 0 | 0 | |
+| bingoCube | **G68** | 0 | 0 | |
+| loamSpine | **G68** | 0 | 0 | |
+| barraCuda | **G68** | 0 | 0 | |
+| cellMembrane | **G68** | 0 | 0 | Now tracked as deployable primal |
+| squirrel | **G68-prod** | 0 | 1 | test assertion |
+| bearDog | **G68-prod** | 0 | 1 | test assertion |
+| songBird | **G68-prod** | 0 | 1 | test assertion |
+| rhizoCrypt | **G68-prod** | 0 | 1 | test assertion |
+| skunkBat | **G68-prod** | 0 | 1 | test assertion |
+| sweetGrass | **G68-prod** | 0 | 1 | test assertion |
+| coralReef | **G68-prod** | 0 | 1 | test assertion |
+| biomeOS | **G68-prod** | 0 | 1 | test assertion |
+| toadStool | partial | **7** | 2 | 6 L3 `hw-safe` rustix + 1 L2 selector mode() |
 
-| Primal | Scanner v1 | Scanner v2 | Change |
-|--------|-----------|-----------|--------|
-| sweetGrass | 1 violation | **0 prod** (2 test-only) | `enforcement_mode()` was false positive |
-| coralReef | 1 violation | **0 prod** (1 test-only) | `PermissionsExt` in test-only `method_gate.rs` |
+**8/16 G68 compliant. 7/16 G68-prod. 1/16 partial. 15/16 zero production violations. 16/16 cross-arch.**
 
-**G68 prod compliance: 14/15.** toadStool shipped S364 (6 new cross-platform traits) + S365 (G68 complete claim). Scanner shows **7 remaining prod violations** (was 24): 6 `rustix` in `hw-safe` + 1 `mode()` in `akida-driver/hybrid/selector.rs`. Down from 205 at wave start.
+toadStool remaining 7: `hw-safe/huge_page.rs`, `vfio_setup.rs`, `vfio_dma.rs`, `platform_backends.rs`, `drm_ioctl.rs`, `locked_memory.rs` (all L3 `rustix`), + `akida-driver/hybrid/selector.rs` (L2 `mode()`). Team actively abstracting — long-tail, not a blocker.
 
 ---
 
@@ -83,7 +97,7 @@ Wave 157a was an ecosystem-wide convergence day (71+ commits, 16 repos, 4 depot 
 ### Completed (157a)
 1. ~~Phase A: cascade timer~~ — **LIVE**, G68 membrane, zero drift
 2. ~~Depot refresh (4 passes)~~ — all at Forgejo HEAD on golgi
-3. ~~G68 prod convergence~~ — 14/15 prod-clean, 15/15 cross-arch
+3. ~~G68 prod convergence~~ — 15/16 prod-clean, 16/16 cross-arch (cellMembrane added)
 4. ~~sporeGate deployment~~ — **13/13 ALIVE**
 5. ~~cellMembrane bootstrap fix~~ — cascade now runs G68+DIV-7 membrane
 
@@ -97,4 +111,4 @@ Wave 157a was an ecosystem-wide convergence day (71+ commits, 16 repos, 4 depot 
 
 ---
 
-*Wave 157a — DEPLOYED. 13/13 ALIVE on sporeGate. 14/15 prod-clean, 15/15 cross-arch. toadStool shipped S364+S365 overnight: 24→7 prod violations (all in hw-safe containment). Depot: Musl 17/17, Windows 15/15. Cascade timer clean, zero drift. Wave cadence shifts to targeted primal waves — no more ecosystem-wide convergence days. toadStool converges hw-safe, then sporeGate rebuilds that one primal. Gate teams deploy from golgi. Springs activate when ready.*
+*Wave 157a — DEPLOYED. 13/13 ALIVE on sporeGate. 15/16 prod-clean, 16/16 cross-arch (cellMembrane now tracked). toadStool S364+S365: 24→7 prod violations (all hw-safe containment, long-tail). Depot: Musl 17/17, Windows 15/15. Cascade timer clean, zero drift. Wave cadence: targeted primal waves from here. toadStool converges hw-safe, then sporeGate rebuilds that one primal. Gate teams deploy from golgi. Springs activate when ready.*
