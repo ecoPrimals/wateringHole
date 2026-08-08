@@ -1,7 +1,7 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a NEURAL API DISPATCH FIXED + PROVENANCE TRIO PROVEN
+# ecoPrimals Ecosystem Blurb — Wave 157a N2-N5 VERIFIED + DEPOT REBUILD IS THE GATE
 
-**Date**: Aug 8, 2026 5:50PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **NEURAL API DISPATCH REORDER SHIPPED. 990K FILES BRAIDED INLINE. SWARMVINE WIRED.** biomeOS dispatch reorder (`44c40191`): translation registry before Tower relay — 15s timeout eliminated. Routing gaps fixed (`6f60cccf`): braid.* direct routes, riboCipher pool shipped. westGate proves provenance trio: 990,500 files braided inline (rsync→BLAKE3→CAS→DAG→spine→braid), 2,464 persistent sweetGrass braids, all 26 caps resolve. swarmVine epidemic spread + songBird seam wired. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL (64 goals). N2-N5 verification next.
+**Date**: Aug 8, 2026 6:45PM | **Wave**: 157a | **From**: eastGate overwatch
+**Posture**: **N2-N5 VERIFIED (87/91). RIBOCIPHER AUTO-DETECT SHIPPED. DEPOT REBUILD IS THE GATE.** primalSpring verified dispatch fix: 1.3ms mean (was 15s), 9/11 primals forward. biomeOS riboCipher auto-detect shipped (`1ff5859c`): sweetGrass/rhizoCrypt auto-route through riboCipher pool. cellMembrane transport unification: `#[cfg(unix)]` 7→3. **Critical path**: depot rebuild (current binary is Jul 15 pre-fix) → gate redeploy → fleet-wide Neural API activation. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL (64 goals).
 
 ---
 
@@ -22,20 +22,27 @@
 - **Gossip key format**: `capability.advertise:{gate}:{primal}` under `tower` topic
 - **songBird tests**: 53 tests, zero regressions
 
-### biomeOS Neural API — Dispatch Reorder + Routing Gaps SHIPPED
-- **Dispatch reorder** (`44c40191`): translation registry checked before Tower relay. Eliminates 15s timeout for all registered capabilities. New order: signal graph → translation → Tower relay → direct.
-- **Routing gaps** (`6f60cccf`): braid.* direct routes to sweetGrass (6 methods). convergence.* to primalSpring. Router timeout: 30s→15s (was using eviction interval). composition.test_swap socket → membrane dir (fixes PrivateTmp Permission denied).
-- **riboCipher pool** shipped: dual lane (plain + riboCipher). `send_ribocipher_jsonrpc()` for G68 primals.
-- **Bootstrap→Coordinated auto-transition**: background probe loop, no manual intervention needed.
-- **TOML-driven capability translations**: `capability_registry.toml` loaded at runtime, compiled defaults are cold-start fallback only.
+### primalSpring N2-N5 Verification — DISPATCH FIX PROVEN
+- **exp118 (Graph Execution)**: **14/14** (was 6/12). graph.list, graph.execute, graph.status all work
+- **exp119 (PathwayLearner)**: **12/12**. 919 exec/s throughput
+- **exp120 (Self-Registration)**: **29/29**. 34 caps, 58 methods, 11/11 domains resolve
+- **exp121 (riboCipher Auto-Detect)**: **32/36**. 9/11 primals forward. sweetGrass FAIL (riboCipher-only), toadStool FAIL (TARPC mismatch)
+- **Dispatch latency**: 15,000ms → **1.3ms mean, 2.5ms max**
+- **Acceptance test**: exp121 goes 32/36→36/36 once depot binary includes riboCipher auto-detect fix
 
-### westGate Provenance Trio — 990,500 Files Braided Inline
-- **Inline braiding proven**: rsync phase → `native_braid.py --incremental` → BLAKE3 → CAS → DAG batch → spine commit → braid. No data lands without provenance.
-- **990,500 files** braided (324 AlphaFold + 989,423 structures + 753 SRA FASTQ), 240 Merkle roots, 24,336 dedup hits
-- **sweetGrass**: 2,464 braids in persistent store (survives restart — only persistent provenance anchor)
-- **riboCipher enforcement**: G68 sweetGrass + rhizoCrypt reject plain JSON-RPC. 2-byte `[0xEC 0x01]` prefix mandatory.
-- **songBird capability resolution**: all 26 capabilities across 5 provenance primals resolve correctly
-- **Gap identified**: biomeOS `capability.call` needs riboCipher-aware dispatch for sweetGrass/rhizoCrypt (pool exists but auto-detect not wired)
+### biomeOS riboCipher Auto-Detect — sweetGrass/rhizoCrypt Gap CLOSED
+- **Commit `1ff5859c`**: domain-level `ribocipher: bool` in `capability_registry.toml`
+- **TOML inheritance**: domain flag auto-propagates to all translations (entry-level override supported)
+- **Affected domains**: `attribution` (sweetGrass: provenance.*, braid.*) + `ephemeral_workspace` (rhizoCrypt: dag.*)
+- **Dispatch**: checks `trans.ribocipher` → auto-uses `forward_request_ribocipher()` for both initial + self-healing retry
+- **Impact**: westGate 990K inline braiding can now route through Neural API without bypass
+
+### cellMembrane Transport Unification
+- **Commit `f5033f2`**: G66 TransportStream graduation, jsonrpc.rs `#[cfg(unix)]` 7→3
+- **Shared helpers**: `rpc_over_stream()` + `notify_over_stream()` — UDS + TCP share one implementation
+- **Dead code cleanup**: `CommitPayload`, `PushEvent.commits` `#[allow(dead_code)]` removed
+- **Hardcode elimination**: `security.sock` → registry lookup, `webhook.sock` → `WEBHOOK_SOCKET_NAME` constant
+- **1,329 tests**, zero regressions
 
 ### Prior this session
 - **swarmVine v0.1.0 budded** — sourDough scaffold, 3 gossip domains, 33/33 tests, depot + golgi
@@ -61,7 +68,7 @@
 
 | Metric | Value |
 |--------|-------|
-| Primals | **16** (swarmVine Phase 2 wired + songBird seam) |
+| Primals | **16** (N2-N5 verified, dispatch 1.3ms) |
 | NUCLEUS gates | **6/6 redeployed** |
 | G68 | **16/16 prod-clean, 16/16 cross-arch** |
 | Golgi depot | Musl **18/18** (swarmVine added), Windows **15/15** |
@@ -89,9 +96,11 @@
 | swarmVine budded | **DONE** — v0.1.0 epidemic gossip engine, primal #16, depot + golgi |
 | swarmVine Phase 2 wired | **DONE** — epidemic sweep loop + cross-gate TCP :7800 + tiered peer discovery |
 | songBird seam | **DONE** — `ipc.register` → swarmVine `gossip.inject` (`6b580cf0`) |
-| biomeOS dispatch reorder | **DONE** — translation before Tower relay, 15s timeout eliminated (`44c40191`) |
+| biomeOS dispatch reorder | **DONE** — translation before Tower relay, 15s→1.3ms (`44c40191`) |
 | biomeOS routing gaps | **DONE** — braid.* routes + 30s→15s timeout + composition socket (`6f60cccf`) |
-| biomeOS riboCipher pool | **DONE** — dual lane dispatch, `send_ribocipher_jsonrpc()` |
+| biomeOS riboCipher auto-detect | **DONE** — domain-level TOML flag, sweetGrass/rhizoCrypt auto-route (`1ff5859c`) |
+| N2-N5 verification | **DONE** — 87/91 (exp118-121). 9/11 primals forward. sweetGrass needs redeploy, toadStool TARPC |
+| cellMembrane transport unification | **DONE** — `#[cfg(unix)]` 7→3, TransportStream, 1,329 tests (`f5033f2`) |
 | westGate inline braiding | **DONE** — 990,500 files braided, 2,464 sweetGrass braids persistent |
 | Inner membrane Phase 1 | **DONE** — songBird mesh gap fixed, spec filed |
 
@@ -121,7 +130,8 @@
 
 ### Other teams own
 - **sporePrint**: ~~SU(2)→SU(N) relabel~~ **DONE**. QCD download pages, LaTeX preprint
-- **primalSpring**: Neural API N2-N5 verification (dispatch reorder unblocks). riboCipher-aware dispatch auto-detect for sweetGrass/rhizoCrypt
+- ~~**primalSpring**: N2-N5 verification~~ **DONE** (87/91). Remaining: toadStool TARPC shim (architecture decision)
+- **sporeGate**: **DEPOT REBUILD** — current binary is Jul 15 pre-dispatch-fix. Must rebuild with `44c40191` + `6f60cccf` + `1ff5859c` for fleet-wide activation
 - **toadStool**: Long-tail cross-arch + WASM compute (S371: 24/48 crates, 50% kernel)
 - **cellMembrane**: `native_braid.py` → Rust
 - **projectNUCLEUS**: workloads/ → spring repos, specs → wateringHole
@@ -138,4 +148,4 @@
 
 ---
 
-*Wave 157a Neural API dispatch reorder + provenance trio proven. biomeOS: dispatch reorder (translation before Tower relay), routing gaps (braid.* routes, 30s→15s timeout), riboCipher pool (dual lane). westGate: 990,500 files braided inline, 2,464 sweetGrass braids persistent, 26 caps resolve. swarmVine Phase 2 wired + songBird seam LIVE. G34→GLACIAL. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
+*Wave 157a N2-N5 verified (87/91, 1.3ms dispatch). biomeOS riboCipher auto-detect shipped (`1ff5859c`). cellMembrane transport unification (7→3 cfg). Critical path: depot rebuild (Jul 15 binary) → gate redeploy → fleet-wide activation. swarmVine Phase 2 + songBird seam. 17 COMPLETE / 21 ACTIVE / 26 GLACIAL. 16 primals. arXiv 4/5 closed.*
