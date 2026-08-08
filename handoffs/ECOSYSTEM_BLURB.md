@@ -1,77 +1,68 @@
-# ecoPrimals Ecosystem Blurb — Wave 157a Depot Ready
+# ecoPrimals Ecosystem Blurb — Wave 157a G68 Refined + Depot Pass 3
 
-**Date**: Aug 7, 2026 9:24PM | **Wave**: 157a | **From**: eastGate overwatch
-**Posture**: **13/15 PROD-CLEAN. DEPOT READY.** sweetGrass + coralReef fixed. toadStool shipped L3 migrations (−2 violations). biomeOS down to 4 (3 in test file + 1 boot rustix). 13/15 primals have zero production G68 violations. Depot rebuild unblocked.
-
----
-
-## G68 FINAL AUDIT — sourDough scanner v2
-
-| Primal | Level | Prod | Notes |
-|--------|-------|------|-------|
-| sourDough | **G68** | 0 | Reference + validator |
-| nestGate | **G68** | 0 | |
-| petalTongue | **G68** | 0 | |
-| bingoCube | **G68** | 0 | |
-| loamSpine | **G68** | 0 | |
-| barraCuda | **G68** | 0 | |
-| squirrel | **G68-prod** | 0 | 1 test assertion |
-| bearDog | **G68-prod** | 0 | 1 test assertion |
-| songBird | **G68-prod** | 0 | 1 test assertion |
-| rhizoCrypt | **G68-prod** | 0 | 1 test assertion |
-| skunkBat | **G68-prod** | 0 | 1 test assertion |
-| sweetGrass | **G68-prod** | 0 | 1 test — **FIXED this round** |
-| coralReef | **G68-prod** | 0 | — **FIXED this round** |
-| biomeOS | partial | **4** | 3 L2 in test file + 1 L3 boot rustix |
-| toadStool | partial | **25** | 24 L3 device rustix + 1 L2 |
-
-**13/15 zero production violations. Depot rebuild unblocked.**
-
-biomeOS: 3 of 4 are in `vm_federation_manager_tests/mod.rs` (test file — scanner should flag as test-only). The 1 real violation is `rustix` in `boot_logger/device_mgr.rs` (always Linux, non-blocking).
-
-toadStool: 24/25 are L3 `rustix` imports in VFIO/DRM/V4L2/sandbox/akida-driver — inherent Linux kernel device interfaces. These need the G68 L3 backend trait pattern and are a long-term convergence, not a depot blocker.
+**Date**: Aug 7, 2026 9:30PM | **Wave**: 157a | **From**: eastGate overwatch → sporeGate depot ops
+**Posture**: **G68: 14/15 PROD-CLEAN. DEPOT CURRENT.** sourDough scanner v2 refined (prod/test split) — sweetGrass + coralReef promoted to G68-prod. sourDough v2 + bingoCube rebuilt on golgi. Phase A cascade timer LIVE.
 
 ---
 
-## DEPOT STATUS
+## G68 SCANNER V2 RESULTS — FROM SPOREGATE
 
-| Gate | Cross-arch | Depot ready? |
-|------|-----------|-------------|
-| 14/15 primals | **PASS** Windows | **YES** |
-| toadStool | **FAIL** Windows (consumer crate gating) | Excluded from Windows depot |
-| Phase A timer | **LIVE** on sporeGate | Cascade running autonomously |
+Scanner v2 (`1cbac92`) correctly separates production violations from test assertions. Two primals promoted:
 
-**Action**: sporeGate can rebuild depot now. 13/15 prod-clean. 14/15 cross-arch.
+| Primal | Scanner v1 | Scanner v2 | Change |
+|--------|-----------|-----------|--------|
+| sweetGrass | 1 violation | **0 prod** (2 test-only) | `enforcement_mode()` was false positive |
+| coralReef | 1 violation | **0 prod** (1 test-only) | `PermissionsExt` in test-only `method_gate.rs` |
 
----
-
-## REMAINING — CLEAR BEFORE MAC + RISC-V
-
-These 29 violations don't block depot but **must** be cleared. Every raw `rustix`/`PermissionsExt` left is a landmine for darwinGate (apple-darwin) and riscGate (RISC-V) — two glacial goals (G12, G42) that will fail immediately on unabstracted platform code. Clearing now avoids chasing the same debt later on unfamiliar architectures.
-
-| Team | Violations | What | Target |
-|------|-----------|------|--------|
-| **biomeOS** | 4 (3 L2 + 1 L3) | `vm_federation_manager_tests` set_mode + boot `rustix` | `PlatformAccess::apply()` + backend trait |
-| **toadStool** | 25 (24 L3 + 1 L2) | VFIO/DRM/V4L2/sandbox/akida `rustix` imports | L3 backend traits (DeviceFile pattern from S361/S362) |
-| **toadStool** | — | Windows consumer crate gating (`select_backend` import) | Gate imports behind `#[cfg(unix)]` or feature flag |
-| **sourDough** | minor | `vm_federation_manager_tests` flagged as prod, should be test | Scanner refinement |
-| **primalSpring** | — | Phase C sync graph materialization | Handoff delivered |
+**Updated G68 prod compliance: 14/15** (was 12/15). Only toadStool (27 L3 device backends) has real production violations.
 
 ---
 
-## WAVE 157a EVOLUTION SUMMARY
+## DEPOT REFRESH — 3RD PASS
 
-| Metric | Start | End |
-|--------|-------|-----|
-| G68 compliant | 0/15 | **7/15** |
-| G68 prod-clean | 0/15 | **13/15** |
-| Production violations | ~205 | **29** (4 biomeOS + 25 toadStool) |
-| Scanner versions | v1 (no prod/test split) | v2 (3 compliance levels) |
-| Commits today | 0 | **69+** across 16 repos |
-| barraCuda LOC removed | 0 | **−37,144** |
-| Phase A timer | spec only | **LIVE** |
-| Cross-arch | 14/15 | **14/15** (toadStool consumer crates) |
+| Primal | Commit | Change | Musl | Windows |
+|--------|--------|--------|------|---------|
+| **sourDough** | `1cbac92` | Scanner v2 (prod/test split, false positive exclusion) | 3.3MB | 3.0MB |
+| **bingoCube** | `87d236d` | Standard crate layout restructure | 11.0MB | 5.4MB |
+
+All fresh on golgi. Previous passes (biomeOS `b3dadf0`, barraCuda `9bb8709`) still current.
 
 ---
 
-*Wave 157a — depot ready, convergence continuing. 13/15 prod-clean, 7/15 fully G68 compliant. 29 production violations remain (biomeOS 4, toadStool 25) — not blocking depot but must be cleared before darwinGate (G12) and riscGate (G42) expansion. Every unabstracted rustix/PermissionsExt is a landmine on new architectures. sporeGate rebuilds depot now. biomeOS + toadStool continue converging.*
+## DEPOT STATUS ON GOLGI — ALL CURRENT
+
+### Musl — 17/17
+
+All binaries on golgi fresh (Aug 7). All primals at latest Forgejo HEAD.
+
+### Windows — 14/15
+
+14 core primal .exe files on golgi. squirrel sole failure (cross-arch).
+
+---
+
+## HEALTH — 12/13
+
+12 ALIVE on sporeGate NUCLEUS.
+
+| Issue | Owner | Severity |
+|-------|-------|----------|
+| toadStool `Permission denied` (B1/B2 socket) | biomeGate | P2 |
+| biomeOS local `4.56.0` (depot has `4.57.0` + DIV-4) | sporeGate ops | P2 — restart |
+
+---
+
+## REMAINING SEQUENCE
+
+1. ~~Phase A: cascade timer~~ — **DONE** (proven)
+2. ~~Depot refresh (3 passes)~~ — **DONE** (barraCuda P0, biomeOS DIV-4, sourDough v2, bingoCube)
+3. ~~sweetGrass + coralReef G68 prod fix~~ — **NOT NEEDED** (scanner v2 promoted to G68-prod)
+4. **Phase C: sync graph materialization** — primalSpring team
+5. **N2-N5 verification** — primalSpring team (DIV-4 unblocks this)
+6. **Deploy across all 6 NUCLEUS gates** — gate teams pull from golgi
+7. **toadStool L3 device backend traits** — toadStool team (non-blocking)
+8. **Activate springs** — hotSpring, tideGlass, esotericWebb
+
+---
+
+*Wave 157a — G68 refined: 14/15 prod-clean (scanner v2 promoted sweetGrass + coralReef). Depot: 3 passes complete, all at Forgejo HEAD. Musl 17/17, Windows 14/15. Phase A cascade timer LIVE. 12/13 ALIVE. Only toadStool has real prod violations (27 L3 device backends). Next: N2-N5 verification, gate deployment, springs.*
